@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<library>
+
+<class name="styleableinput" extends="inputtext" x="1" y="1" bgcolor="white" multiline="true"
+		width="${ parent.width-2 }" height="${ parent.height-2 }" >
+
+	<handler name="oninit">
+		LzFocus.setFocus(this);	
+	</handler>
+	<handler name="ontext">
+	<![CDATA[
+		var gh = this.getTextHeight();
+		if (gh>20) this.setHeight(gh+this.fontsize);
+	]]>
+	</handler>	
+	<handler name="onkeyup" args="key">
+       <![CDATA[
+       // 13 is return
+       if ((key==27) || (key==13)) {
+       		this.parent.parent.adjustHeight();
+       }
+       ]]>
+    </handler>	
+	<handler name="onheight">
+		this.parent.parent.adjustHeight();
+	</handler>
+</class>
+
+<class name="basedrawwords" extends="view" bgcolor="black" 
+	width="120" height="100">
+	
+	<attribute name="refObj" value="null" />
+
+	<method name="drawtoArray">
+		if (this._textview._textview.getText().length!=0){
+        	this.refObj.drawTextField(this._textview._textview.getText(),this._textview._textview.width,this.x-this.refObj.x-this.refObj.parent.x,this.y-this.refObj.y-this.refObj.parent.y);
+        } else {
+        	Debug.write("text smaller then 0",this._textview._textview.getText());
+        }
+        this.giveup();
+    </method>
+    
+	<method name="giveup">
+		this.refObj.letterObjectFree(this);
+		this.destroy();
+	</method>
+	    
+	<handler name="oninit">
+		//Why does the attribute height be ignored in the init arguments????
+		this.refObj.letterObjectClose(this);
+        new styleableinput(this._textview,{name:'_textview',text:'',fontstyle:this.refObj.currentlayerstyle,fontsize:this.refObj.currentlayersize,fgcolor:this.refObj.currentlayerletter});
+        this.setAttribute('height',40);
+	</handler>
+    
+    <handler name="newStyleEvent">
+        this.callNew(this._textview._textview.getText());
+    </handler>
+  
+	<method name="callNew" args="txxt">
+        var h = this._textview.getHeight();
+		this._textview._textview.destroy();
+		var t = new styleableinput(this._textview,{name:'_textview',text:txxt,fontstyle:this.refObj.currentlayerstyle,fontsize:this.refObj.currentlayersize,fgcolor:this.refObj.currentlayerletter});
+        this.setHeight(h);
+	</method>
+	<method name="adjustHeight">
+		this.setAttribute('height',this._textview._textview.height+2);
+	</method>
+    
+    <method name="_removeResizestateFromThis">
+    	this.rs.remove();
+    </method>
+    
+    <view name="_textview" width="${ parent.width }" height="${ parent.height }" />
+    
+    <resizestate name="rs" >
+    	<text x="2" y="2" text="${ 'w: '+parent.width+' h: '+parent.height }" bgcolor="white"/>
+    </resizestate>
+	<view resource="_boundingBoxPointerUR" x="${ parent.width-this.width }" y="${ parent.height-this.height }" 
+		onmousedown="parent.rs.apply()" onmouseup="parent._removeResizestateFromThis()" >
+		<tooltip text="Resize this Object" />
+	</view>    
+</class>
+
+</library>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<library>
+
+	<include href="basedraw.lzx" />
+	<include href="basedrawobject.lzx" />
+	<include href="basedrawletter.lzx" />
+	<include href="basedrawimage.lzx" />
+	<include href="basedrawsave.lzx" />
+	<include href="basedrawwords.lzx" />
+	
+
+</library>
