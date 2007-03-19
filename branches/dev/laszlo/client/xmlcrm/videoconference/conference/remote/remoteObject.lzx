@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<library>
+
+<script>
+<![CDATA[
+
+String.prototype.replaceIt =  function (string,suchen,ersetzen) {
+    ausgabe = "" + string;
+    while (ausgabe.indexOf(suchen)>-1) {
+        pos= ausgabe.indexOf(suchen);
+        ausgabe = "" + (ausgabe.substring(0, pos) + ersetzen +
+        ausgabe.substring((pos + suchen.length), ausgabe.length));
+    }
+    return ausgabe;
+}
+
+]]>
+</script>
+
+<class name="remoteObject" extends="node">
+    
+    <attribute name="paramlist" value="null" />
+    <attribute name="header" value="null" />
+    <attribute name="querystring" value="" type="string" />
+            
+    <method event="oninit">
+        this.paramlist = new Array();
+        this.header = new Array();
+        this.querystring="";
+    </method>
+
+    <method name="addHeader" args="className,method">
+        var t = new Object();
+        t["name"] = "class";
+        t["value"] = className;
+        this.header.push(t);  
+        var t = new Object();
+        t["name"] = "method";
+        t["value"] = method;
+        this.header.push(t);  
+    </method>
+    
+    <method name="addValue" args="arg,val">
+        <!-- This is necessary cause otherwise XML-Brackets will be missunderstood and the Header would be broken-->
+        val = String(val);
+        <![CDATA[
+            val = val.replaceIt(val,'<','##32##');
+            val = val.replaceIt(val,'>','##33##');
+            val = val.replaceIt(val,'&','##34##');
+        ]]>
+        var t = new Object();
+        t["name"] = arg;
+        t["value"] = val;
+        this.paramlist.push(t);
+    </method>
+    
+    <method name="serialize" >
+        //Debug.write("serialize");
+        <![CDATA[
+        this.querystring="<lzrequest>";
+        this.querystring+="<header>";
+        var tempB = false;
+        for (eg in this.header){
+           // Debug.write(eg,this.header[eg]['name']);
+            this.querystring+="<"+this.header[eg]['name']+">"+this.header[eg]['value']+"</"+this.header[eg]['name']+">";
+        }
+        this.querystring+="</header>";
+        
+        this.querystring+="<body>";
+        for (eg in this.paramlist){
+            this.querystring+="<param>"+this.paramlist[eg]['value']+"</param>";
+        }  
+        this.querystring+="</body>";
+        
+        
+        this.querystring+="</lzrequest>";
+        ]]>
+        //Debug.write(this.querystring);
+        
+        return "lzrequest="+this.querystring;
+    </method>
+    
+</class>
+
+</library>

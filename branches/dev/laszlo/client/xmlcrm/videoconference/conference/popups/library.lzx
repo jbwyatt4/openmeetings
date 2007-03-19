@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<library>
+    
+    <include href="rpcerrordialog.lzx" />
+    <include href="loginscreen.lzx" />
+    <include href="loginweb.lzx" />
+    <include href="errorpopup.lzx" />
+    <include href="createpollwin.lzx" />
+    <include href="answerpoll.lzx" />
+    <include href="resultpollwin.lzx" />
+    <include href="messagewin.lzx" />
+    <include href="changedevice.lzx" />
+    <include href="headermenu.lzx" />
+    <include href="confirmation.lzx" />
+    <include href="editwhiteboarddefault.lzx" />
+    
+</library>

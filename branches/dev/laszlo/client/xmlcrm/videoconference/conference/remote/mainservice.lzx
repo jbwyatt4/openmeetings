@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<library>
+
+<javarpc name="mainservices" scope="session" objectreturntype="javabean" loadoption="create"
+    autoload="true" classname="org.dokeos.servlets.DokeosRemote">
+        <handler name="onload">
+        	Debug.write("loaded");          
+        </handler>
+        <handler name="onerror" args="error">
+            Debug.write(' E_RROR:', error);
+            new rpcerrordialog(canvas.main_content._content,{errortext:error});
+        </handler>  
+		<remotecall funcname="getListOfFiles" >
+			<param><method name="getValue">return canvas.uploadmoduleimg;</method></param>
+			<param><method name="getValue">return canvas.uploadmoduleimgfolder;</method></param>
+			<param><method name="getValue">return canvas.currentcourse;</method></param>
+	        <handler name="ondata" args="value">	
+                _imageslistdraw.resetList();
+                <![CDATA[
+                if (value[0]!=null){
+	                for(var eg=0;eg<value[0].length;eg++){
+	                    _imageslistdraw.addFolder(value[0][eg][2]); 
+	                }
+                }
+                
+                if (value[1]!=null){
+	                for(var eg=0;eg<value[1].length;eg++){
+	                    if(value[1][eg][5]!='n'){
+							_imageslistdraw.addFile(value[1][eg][1],value[1][eg][2]);
+						} else {
+							_imageslistdraw.addPpt(value[1][eg][1],value[1][eg][2]);
+						} 
+	                }
+                }
+                ]]>	        	          				
+	        </handler> 
+	 	</remotecall>       	 	     
+</javarpc>
+
+</library>
