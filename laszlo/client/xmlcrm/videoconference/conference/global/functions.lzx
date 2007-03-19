@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<library>
+
+<script>
+<![CDATA[
+
+var _labelObject = new Array();
+
+//Set some value to get it running
+var labelRef = new Array();
+labelRef.push('1');
+labelRef.push('Camera');
+labelRef.push('tooltip');
+_labelObject.push(labelRef);
+
+
+function setLabelObject(lableObj){
+	_labelObject = lableObj;
+}
+
+function getLabelObjectById(labelid){
+	for (var i=0;i<_labelObject.length;i++){
+		if (Number(_labelObject[i]['labelid'])==labelid){
+			return _labelObject[i];
+		}
+	}
+}
+
+function getLabelNameGlob(labelid){
+	for (var i=0;i<_labelObject.length;i++){
+		if (Number(_labelObject[i]['labelid'])==labelid){
+			return _labelObject[i]['labelvalue'];
+		}
+	}
+}
+Debug.write("end init");
+]]>
+</script>
+
+
+
+
+<dataset type="http" name="languageData" request="false" 
+	src="${ canvas.currentlanguage+'.xml' }" proxied="false">
+	<handler name="ondata" args="value">
+		parent.parseLanugageObject(value);
+	</handler>
+</dataset>
+
+<method name="parseLanugageObject" args="obj">
+
+	//Debug.write('parseLanugageObject: ',obj);
+	//Debug.write('parseLanugageObject: ',obj.childNodes);
+	<![CDATA[
+	var t = new Array();
+	for (var i=0;i<obj.childNodes.length;i++){
+		for (var k=0;k<obj.childNodes[i].childNodes.length;k++){
+			//Debug.write(obj.childNodes[i].childNodes[k]);
+			var t2 = new Array();
+			t2[obj.childNodes[i].childNodes[k].childNodes[0].nodeName]=obj.childNodes[i].childNodes[k].childNodes[0].childNodes[0].data;
+			t2[obj.childNodes[i].childNodes[k].childNodes[1].nodeName]=obj.childNodes[i].childNodes[k].childNodes[1].childNodes[0].data;
+			t.push(t2);
+		}
+	}
+	setLabelObject(t);
+	canvas.initScreen();
+	Debug.write(t);
+	]]>
+</method>
+
+<!-- Data Source Definition -->
+<dataset name="getSessionVarsData" request="false" proxied="false"
+	querytype="POST" src="${ 'http://'+canvas.rmpthost+'/webrooms/checksession.php' }" 
+	type="http" >
+	<handler name="ondata" args="value">
+	
+		Debug.write(value);
+		canvas.setAttribute('currentcourse',value.childNodes[0].childNodes[0].childNodes[0].childNodes[0].data);
+		canvas.setAttribute('currentcourseName',canvas.currentcourse);
+		canvas.setAttribute('currentcourseNameLong',value.childNodes[0].childNodes[0].childNodes[1].childNodes[0].data);
+		canvas.setAttribute('currentlanguage',value.childNodes[0].childNodes[0].childNodes[8].childNodes[0].data);
+
+		canvas.setAttribute('currentusename',value.childNodes[0].childNodes[1].childNodes[2].childNodes[0].data+' '+value.childNodes[0].childNodes[1].childNodes[1].childNodes[0].data);
+		
+		canvas.setAttribute('user_id',value.childNodes[0].childNodes[1].childNodes[0].childNodes[0].data);
+		canvas.setAttribute('firstName',value.childNodes[0].childNodes[1].childNodes[1].childNodes[0].data);
+		canvas.setAttribute('lastName',value.childNodes[0].childNodes[1].childNodes[2].childNodes[0].data);
+		canvas.setAttribute('mail',value.childNodes[0].childNodes[1].childNodes[3].childNodes[0].data);
+		canvas.setAttribute('lastLogin','');
+		canvas.setAttribute('official_code',value.childNodes[0].childNodes[1].childNodes[5].childNodes[0].data);
+		canvas.setAttribute('picture_uri','');
+		canvas.setAttribute('language',value.childNodes[0].childNodes[1].childNodes[7].childNodes[0].data);
+
+		Debug.write(value.childNodes[0].childNodes[1].childNodes[0].childNodes[0].data);
+		Debug.write(value.childNodes[0].childNodes[1].childNodes[1].childNodes[0].data);
+		Debug.write(value.childNodes[0].childNodes[1].childNodes[2].childNodes[0].data);
+		Debug.write(value.childNodes[0].childNodes[1].childNodes[3].childNodes[0].data);
+		Debug.write(value.childNodes[0].childNodes[1].childNodes[4].childNodes[0].data);
+		Debug.write(value.childNodes[0].childNodes[1].childNodes[5].childNodes[0].data);
+		Debug.write(value.childNodes[0].childNodes[1].childNodes[6].childNodes[0].data);
+		Debug.write(value.childNodes[0].childNodes[1].childNodes[7].childNodes[0].data);
+		
+		switch (canvas.currentlanguage){
+			case 'english':
+			break;
+			case 'german':
+			break;
+			case 'french':
+			break;			
+			default:
+			canvas.setAttribute('currentlanguage','english');
+			break;
+		}
+		
+		var addIt='conf';
+		if (!canvas.isConference){
+			addIt='meet'
+		}
+		canvas.setAttribute('currentcourse',canvas.rmpthost+canvas.currentcourse+addIt);
+		canvas.setAttribute('currentuser',value.childNodes[0].childNodes[1].childNodes[5].childNodes[0].data);
+		
+		canvas.setAttribute('loadingmessage','loading language data');
+		canvas.languageData.doRequest();
+	</handler>
+</dataset>
+
+
+<method name="getSessionVars" args="">
+	canvas.setAttribute('loadingmessage','loading session data');
+	var d=getSessionVarsData;
+	d.doRequest();
+</method>
+
+
+<method name="addChatHistory" args="value,client">
+  	<![CDATA[
+  	Debug.write("addChatHistory: ",value,client);
+  	var newmessage = "<FONT COLOR='"+value[5]+"' size='11'>"+client.firstname+" "+client.lastname+":"+value[4]+"</FONT><br />";
+  	Debug.write("newmessage: ",newmessage);
+  	chartcontent.addChartItem(newmessage);
+  	chathistory.push(newmessage);
+  	]]>
+</method>
+<method name="getFormatedChatHistory">
+  	<![CDATA[
+  	if (this.chathistory==null) return '';
+  	var completeText = '';
+  	for (var i=0;i<chathistory.length;i++){
+  		completeText+=chathistory[i];
+  	}
+  	Debug.write("getFormatedChatHistory: ",completeText);
+  	return completeText;
+  	]]>
+</method>
+<method name="addBroswerTabHistory" args="value">
+  	<![CDATA[
+  	Debug.write("addBroswerTabHistory: ",value);
+  	_browserhistory.addItem(value);
+  	this.browserTabHistory.push(value);
+  	]]>
+</method>
+  
+
+
+<method name="setModeratorName" args="mod">
+	<![CDATA[
+	this.moderatorName = mod;
+	mymod.setText(canvas.getLabelName(98)+' '+this.moderatorName);
+	Debug.write("canvas.moderatorStreamID==canvas.streamid",canvas.moderatorStreamID==canvas.streamid);
+	if (canvas.moderatorStreamID==canvas.streamid){
+		this.setAttribute('ismoderator',true);
+		canvas.currentmainobjectisMod.setAttribute('visible',false);
+	} else {
+		canvas.currentmainobjectisMod.setAttribute('visible',true);
+		this.setAttribute('ismoderator',false);
+	}
+	]]>
+</method>
+
+<method name="addFolderSequence" args="foldername">
+	<![CDATA[
+	this.uploadmoduleimgfolder = '';
+	this.uploadmoduleimgfolder += foldername;
+	this.setAttribute('uploadmoduleimgfolder',this.uploadmoduleimgfolder);
+	]]>
+</method>
+  
+
+</library>

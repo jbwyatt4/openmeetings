@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<library>
+
+<resource name="applyformodicon" src="resources/kdmconfig.png" />
+    
+<class name="moderationpanel"  extends="view" width="260" >
+
+  	<text fontsize="12" id="mymod" resize="true" />
+  	
+	<view x="$once{ parent.width-20 }" y="2" name="infoview" resource="applyformodicon">
+		<handler name="onclick">
+			new applyformoderation(canvas.main_content._content);
+		</handler>
+		<labeltooltip inittwice="true" labelid="84" />
+	</view>	
+	
+</class>
+
+</library>
