@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<library>
+
+<!-- URL/IP to use for the Server 192.168.178.28 
+inno02.fh-pforzheim.de macbook
+192.168.2.102 bxlug.homelinux.org 213.219.160.72-->
+<attribute name="rmpthostlocal" value="macbook" type="string" />
+
+<attribute name="iswebrtmp" value="false" type="boolean" />
+
+<!-- Port to use for the Server -->
+<attribute name="rmptport" value="1935" type="string" />
+
+<!-- Port to use for the Server -->
+<attribute name="rmptTunnelport" value="80" type="string" />
+
+</library>
