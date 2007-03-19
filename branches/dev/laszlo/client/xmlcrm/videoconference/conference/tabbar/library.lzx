@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<library>
+
+	<!-- 
+		Icons for the TabbarIconButtons
+	 -->
+	<resource name="chat" src="resources/chat.png" />
+	<resource name="library" src="resources/library.png" />
+	<resource name="upload" src="resources/upload.png" />
+	<resource name="www" src="resources/www.png" />
+	<resource name="participants" src="resources/partcipants.png" />
+	
+	<!-- 
+		Resources for the tabbbarbuttons
+	 -->
+	<resource name="tabbutton_right_rsc">
+		<frame src="resources/tabbutton_dn_re.png" />
+		<frame src="resources/tabbutton_mo_re.png" />
+		<frame src="resources/tabbutton_up_re.png" />
+	</resource>
+	<resource name="tabbutton_mid_rsc">
+		<frame src="resources/tabbutton_dn_mid.png" />
+		<frame src="resources/tabbutton_mo_mid.png" />
+		<frame src="resources/tabbutton_up_mid.png" />
+	</resource>
+	<resource name="tabbutton_left_rsc">
+		<frame src="resources/tabbutton_dn_lf.png" />
+		<frame src="resources/tabbutton_mo_lf.png" />
+		<frame src="resources/tabbutton_up_lf.png" />
+	</resource>
+	
+	<include href="basedokeostabbutton.lzx" />
+    <include href="menubardokeos.lzx" />
+    
+</library>

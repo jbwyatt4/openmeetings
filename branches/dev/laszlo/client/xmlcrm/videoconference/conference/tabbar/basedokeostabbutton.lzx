@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<library>
+
+<!-- ###################
+	Class basedokeostabbutton
+	
+ -->
+
+<class name="basedokeostabbutton" extends="view" >
+	
+	<!-- holds the reference to the icon-resoruce-name -->
+	<attribute name="iconresourcename" value="" type="string" />
+	<attribute name="iconname" value="" type="string" />
+	
+	<attribute name="isselected" value="false" type="boolean" setter="this.setSelection(isselected)" />
+	
+	<method name="setSelection" args="bool">
+		this.isselected=bool;
+	</method>
+
+	<attribute name="sendClick" value="null" />
+	
+	<handler name="onmouseover">
+		if ( !this.isselected ) {
+			this._rscbtn._button_left.setResourceNumber(2);
+			this._rscbtn._button_mid.setResourceNumber(2);
+			this._rscbtn._button_right.setResourceNumber(2);
+		}
+	</handler>
+	
+	<handler name="onmouseout">
+		if ( !this.isselected ) {
+			this._rscbtn._button_left.setResourceNumber(1);
+			this._rscbtn._button_mid.setResourceNumber(1);
+			this._rscbtn._button_right.setResourceNumber(1);
+		}
+	</handler>
+	
+	<handler name="onmouseup">
+		if ( !this.isselected ) {
+			Debug.write("onmouseup on deselected tab");
+			if (this.sendClick) this.sendClick.sendEvent();
+			this.parent.setSelection(this);
+			this._rscbtn._button_left.setResourceNumber(3);
+			this._rscbtn._button_mid.setResourceNumber(3);
+			this._rscbtn._button_right.setResourceNumber(3);
+		}
+	</handler>
+	
+	<view name="_rscbtn" layout="axis:x" width="100%">
+		<view name="_button_left" resource="tabbutton_left_rsc" />
+		<view name="_button_mid" resource="tabbutton_mid_rsc" width="${ parent.width-32 }" stretches="width" />
+		<view name="_button_right" resource="tabbutton_right_rsc" />
+	</view>
+	
+	<view align="center" layout="axis:x;spacing:2;inset:2" >
+		<view name="_icon" resource="$once{ parent.parent.iconresourcename }" y="0" />
+		<text text="$once{ parent.parent.iconname }" resize="true" y="2"/>
+	</view>
+</class>
+    
+</library>
