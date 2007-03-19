@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<library>
+
+<class name="basedrawsave" extends="basedrawimage" >
+
+    
+    <attribute name="MCRef" value="null" />
+    
+    <attribute name="pixelArray" value="null" />
+    <attribute name="snap" value="null" />
+    <attribute name="MatrixValue" value="null" />
+    
+    <attribute name="w" value="0" type="number" />
+    <attribute name="h" value="0" type="number" />
+    
+    <attribute name="a" value="0" type="number" />
+    
+    <attribute name="pixel_del" value="$once{ new LzDelegate(this, 'buildPixelArray' )}" />
+    
+    <attribute name="sendpictureName" value="snapchot.jpg" type="string" />
+    
+    <attribute name="isSendPartArray" value="true" type="boolean" />
+    
+    <!-- Images will be send in packages 
+    	so timeout is workaround
+     -->
+    <attribute name="sendPartURL" value="http://www.webbase-design.de/dokeos/videoconference/createimagefrombitmap.php" type="string" />
+    
+    <!-- create Image from hole Array
+    	Large Images will not be rendered correctly here cause
+    	there can be a timeout -->
+    <attribute name="sendURL" value="http://www.webbase-design.de/dokeos/videoconference/createimagefrombitmap.php" type="string" />
+    
+    <handler name="onprogress" args="perc" />
+    
+    <method name="catchSnapshot">
+        <![CDATA[
+        this.MCRef = this.getMCRef();
+        Debug.write("this.MCRef: ",this.MCRef);
+        this.snap = new flash.display.BitmapData(this.width, this.height); 
+        //Matrix to scale the new image
+        this.MatrixValue = new flash.geom.Matrix();
+        this.MatrixValue.scale(1, 1);
+        //Copy video image
+        this.snap.draw(this.MCRef,  this.MatrixValue); 
+        
+        this.w = this.width;
+        this.h = this.height;
+        this.a = 0;
+        this.pixelArray = new Array();
+        
+        pixel_del.register(LzIdle,'onidle');
+        
+        ]]>
+    </method>
+    
+    <method name="buildPixelArray">
+        <![CDATA[
+        
+        for(var b=0; b<=this.h; b++){
+            var tmp = this.snap.getPixel(a, b);
+            this.pixelArray.push(tmp.toString(16));
+        }
+        var perc =  Math.round((this.a*100)/this.w);
+        if (this.onprogress) this.onprogress.sendEvent(perc);            
+        this.a++
+        if(this.a>this.w){ 
+            //Finish capturing
+            if (this.isSendPartArray){
+            	this.sendPHPData(this.pixelArray, this.h, this.w);
+            } else {
+	            this.sendPHPData(this.pixelArray, this.h, this.w);
+	        }
+            //free memory
+            this.snap.dispose();
+            pixel_del.unregisterAll();
+        }
+        
+        ]]>
+    </method>
+    
+    <method name="sendPHPData" args="pix,pixH,pixW">
+        Debug.write("### sendPHPData: ",pix,pixH,pixW);
+        <![CDATA[
+        //Create the LoadVars object and pass data to PHP script
+        var output = new LoadVars();
+        output.img = pix.toString();
+        output.height = pixH;
+        output.width = pixW;
+        //The page (and this movie itself) should be in a server to work
+        output.send(this.sendURL, "output", "POST");
+        ]]> 
+    </method>
+    
+    
+
+</class>
+
+</library>

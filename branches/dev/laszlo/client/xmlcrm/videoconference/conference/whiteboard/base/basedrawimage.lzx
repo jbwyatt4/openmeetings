@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<library>
+
+<class name="imagefordrawView" extends="image" stretches="both">
+	<attribute name="alterModus" value="true" type="boolean" />
+	<attribute name="refObj" value="null" />
+	<handler name="onload">
+		<![CDATA[
+		Debug.write("image loaded");
+		this.refObj.parent._loading.setAttribute('visible',false);
+		if (this.width>this.refObj.width){
+			var height = this.height/(this.width/this.refObj.width)
+			this.setAttribute('width',this.refObj.width);
+			this.setAttribute('height',height);
+			this.setAttribute('x',0);
+		}
+		if (this.height>this.refObj.height){
+			var width = this.width/(this.height/this.refObj.height)
+			this.setAttribute('height',this.refObj.height);
+			this.setAttribute('width',width);
+			this.setAttribute('y',0);
+		}	
+		if(this.y+this.height>this.refObj.height){
+			this.setAttribute('y',0);
+		}
+		if(this.x+this.width>this.refObj.width){
+			this.setAttribute('x',0);
+		}		
+		if (this.alterModus){
+			this.refObj.setAttribute('drawmodus','image');
+			this.refObj.layers.push(this);
+			this.refObj.registerNewImage(this.src,this.x,this.y,this.width,this.height);
+			this.refObj.setModus('hand');
+		}
+		this.oninit.sendEvent();
+		this.refObj.parent.isloadedImage.sendEvent(this);
+		]]>
+	</handler>
+</class>
+
+<class name="basedrawimage" extends="basedrawletter">
+  	
+  	<method name="addNewImage" args="urlname,posx,posy">
+  		this.addImageToLayer(this,'image'+this.getCounter(),urlname,posx,posy,0,0,true);
+  	</method>
+  	
+  	<method name="addImageToLayer" args="obj,nameing,urlname,posx,posy,width,height,alterModus">
+  		if (alterModus){
+			this.currentlayer = new imagefordrawView(obj,{refObj:this,name:nameing,x:posx,y:posy,src:urlname,alterModus:alterModus});
+		} else {
+			this.currentlayer = new imagefordrawView(obj,{refObj:this,name:nameing,x:posx,y:posy,src:urlname,width:width,height:height,alterModus:alterModus});
+		}
+		this.parent.isloadingImage.sendEvent(this.currentlayer);
+		this.parent._loading.setAttribute('visible',true);
+		//Add Layer to global Layer  	
+	    return this.currentlayer;
+  	</method>
+  	
+  	<method name="addImageToLayerHistory" args="actionObject,refObj">
+  		this.addImageToLayer(refObj,actionObject[actionObject.length-1],actionObject[1],actionObject[actionObject.length-5],actionObject[actionObject.length-4],actionObject[actionObject.length-3],actionObject[actionObject.length-2],false);
+  	</method>
+  	
+  	<method name="registerNewImage" args="urlname,posx,posy,width,height">
+		var actionObject = new Array();
+	    actionObject.push('image');
+	    actionObject.push(urlname);
+	    actionObject.push(posx);
+	    actionObject.push(posy);
+	    actionObject.push(width);
+	    actionObject.push(height);
+	    actionObject.push(this.currentlayer.name);
+	    this.baseactionobjectList.push(actionObject);	
+	    this.checkStepLayers();
+	    this.onsharedMessage('draw',actionObject);	
+  	</method>
+  	
+</class>
+
+</library>

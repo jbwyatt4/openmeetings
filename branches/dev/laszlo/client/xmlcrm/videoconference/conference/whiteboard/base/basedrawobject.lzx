@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<library>
+
+<class name="basedrawobject" extends="basedraw">
+  	
+  	<attribute name="startobjectx" value="0" type="number" />
+  	<attribute name="startobjecty" value="0" type="number" />
+  	<attribute name="endobjectx" value="0" type="number" />
+  	<attribute name="endobjecty" value="0" type="number" />
+
+</class>
+
+</library>

@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<library>
+    
+<!-- #######################
+	Class editrecordstream
+	
+	Description:
+	This Class shows a window where you can alter you Video-/Microphone- Input-Resources
+	and start to stream. The app could also use the default values for Cam/Mic but
+	must users don't know how to alter this (wether in System-Control-Panel or by Right Clicking
+	on the Flash-Screen and *>Prefernces>Camera* )
+	So I think it is better if Users are forced to choose something from this list
+	
+ -->
+ 
+<class name="editrecordstream"  extends="labelexplorerbox" labelid="51"
+	width="300" height="250" x="14" >
+
+    <attribute name="myvideocontainer" value="null" />
+    
+    <method name="storelocaldata">
+        <![CDATA[
+        if (this.holddatainSO.getValue()){
+            Debug.write("sharedobject store ");
+            var t = new sharedobject();
+            t.getLocal('userdata');
+            var g = t.getData('userdata');
+            if (g==null) g = new Array();
+            g["cam"]=availibleCams2.getValue();
+            g["mic"]=availibleMics2.getValue();
+            Debug.write("sharedobject store ",g["cam"],g["mic"]);
+            g["saveuserdata"] = true;
+            t.setData('userdata',g);
+            t.flush();  
+        } else {
+            var t = new sharedobject();
+            t.getLocal('userdata');
+            var g = t.getData('userdata');
+            if (g==null) g = new Array();
+            g["cam"]=availibleCams2.getValue();
+            g["mic"]=availibleMics2.getValue();
+            g["saveuserdata"]=false;
+            t.setData('userdata',g);
+            t.flush(); 
+        }        
+        ]]>
+    </method>   
+    
+    <handler name="oninit">
+        var t = new sharedobject();
+        t.getLocal('userdata');
+        var g = t.getData('userdata');
+        var save = g["saveuserdata"];
+        Debug.write("save: ",save,g["cam"],g["mic"]);
+        if(save) this.doninitalize(g["cam"],g["mic"]);
+    </handler> 
+    
+    <method name="doninitalize" args="valCam,valMic">
+    	Debug.write("this.myvideocontainer: ",this.myvideocontainer);
+    
+        this.myvideocontainer.cameraRef.setIndex(valCam);
+        this.myvideocontainer.microphoneRef.setIndex(valMic);
+
+		this.myvideocontainer.parent.parent.setAttribute('isremote',false);
+	    //v.record(v.url);
+	    
+	    canvas._ns = new NetStream(rtc._nc);
+	
+	    canvas._ns.publish(canvas.streamid,"live");
+	    Debug.write("*************************************************");
+	    Debug.write("*************************************************");
+	    Debug.write("this.myvideocontainer.cameraRef._cam: ",this.myvideocontainer.cameraRef._cam.bandwidth);
+	    Debug.write("this.myvideocontainer.cameraRef._cam: ",this.myvideocontainer.cameraRef._cam.quality);
+	    Debug.write("this.myvideocontainer.cameraRef._cam: ",this.myvideocontainer.cameraRef._cam.currentFps);
+	    Debug.write("this.myvideocontainer.cameraRef._cam: ",this.myvideocontainer.cameraRef._cam.quality);
+	    Debug.write("this.myvideocontainer.cameraRef._cam: ",this.myvideocontainer.cameraRef._cam.width);
+	    Debug.write("this.myvideocontainer.cameraRef._cam: ",this.myvideocontainer.cameraRef._cam.height);
+	    
+	    Debug.write("this.myvideocontainer. Microphone.rate ",this.myvideocontainer.microphoneRef._mic.rate);
+	    //this.myvideocontainer.microphoneRef._mic.setRate(4);
+	    //this.myvideocontainer.cameraRef._cam.setQuality(16384/4);
+	    this.myvideocontainer.microphoneRef._mic.setUseEchoSuppression(true);
+	    
+	    Debug.write("this.myvideocontainer.cameraRef._cam: ",this.myvideocontainer.cameraRef._cam.bandwidth);
+	    Debug.write("this.myvideocontainer.cameraRef._cam: ",this.myvideocontainer.cameraRef._cam.quality);
+	    Debug.write("this.myvideocontainer. Microphone.rate ",this.myvideocontainer.microphoneRef._mic.rate);
+	    Debug.write("*************************************************");
+	    Debug.write("*************************************************");
+	    canvas._ns.attachVideo(this.myvideocontainer.cameraRef._cam);
+	    canvas._ns.attachAudio(this.myvideocontainer.microphoneRef._mic);  
+	    //Attach Devices to Stream
+	    //Debug.write(cameraRef._cam);
+	    //Debug.write(microphoneRef._mic);
+	    //
+	    //      
+	    this.myvideocontainer.microphoneRef.setAttribute('mute',false);
+	    
+	    Debug.write("*************************************************");
+	    this.myvideocontainer.microphoneRef._initMic();
+        this.myvideocontainer.cameraRef.showCamera(true);
+        this.myvideocontainer.parent.parent.setIdentifier(canvas.streamid);
+        
+        this.myvideocontainer.parent.parent.setAttribute('chatpartnername',canvas.firstName+' '+canvas.lastName);
+        
+	    Debug.write("*************************************************");
+	    Debug.write("*************************************************");
+	    Debug.write("this.myvideocontainer.cameraRef._cam: ",this.myvideocontainer.cameraRef._cam.bandwidth);
+	    
+	    Debug.write("this.myvideocontainer.cameraRef._cam: ",this.myvideocontainer.cameraRef._cam.currentFps);
+	    Debug.write("this.myvideocontainer.cameraRef._cam: ",this.myvideocontainer.cameraRef._cam.quality);
+	    Debug.write("this.myvideocontainer.cameraRef._cam: ",this.myvideocontainer.cameraRef._cam.width);
+	    Debug.write("this.myvideocontainer.cameraRef._cam: ",this.myvideocontainer.cameraRef._cam.height);
+	    
+	    Debug.write("this.myvideocontainer. Microphone.rate ",this.myvideocontainer.microphoneRef._mic.rate);
+	    //this.myvideocontainer.microphoneRef._mic.setRate(4);
+	    //this.myvideocontainer.cameraRef._cam.setQuality(16384/4);
+	    //this.myvideocontainer.microphoneRef._mic.setUseEchoSuppression(true);
+	    
+	    Debug.write("this.myvideocontainer.cameraRef._cam: ",this.myvideocontainer.cameraRef._cam.bandwidth);
+	    Debug.write("this.myvideocontainer.cameraRef._cam: ",this.myvideocontainer.cameraRef._cam.quality);
+	    Debug.write("this.myvideocontainer. Microphone.rate ",this.myvideocontainer.microphoneRef._mic.rate);
+	    Debug.write("*************************************************");
+	    Debug.write("*************************************************");
+                
+        this.close();
+    </method>    
+
+    <!-- 
+    <iconview resource="close_btn_rsc" x="284" y="2">
+        <handler name="onclick">
+            this.parent.destroy();
+        </handler>
+    </iconview>
+     -->
+     
+    <labeltext labelid="52" fontsize="12" x="10" y="80" />
+
+    <combobox fontsize="12" id="availibleCams2" x="10" y="100" width="280" editable="false">
+        <handler name="oninit">
+            <![CDATA[
+            //Get all availible Cam's
+            this.parent.myvideocontainer = canvas._videocontainer.getNewVideoObject();
+            var tw = this.parent.myvideocontainer.cameraRef.getCameraNames();
+            var r = "";
+            for (var eg=0;eg<tw.length;eg++){
+                this.addItem(tw[eg],eg);
+                r=eg;
+            }
+            var t = new sharedobject();
+            t.getLocal('userdata');
+            var g = t.getData('userdata');
+            Debug.write("g: ",g);
+            if (g!=null){
+            	var cam = g["cam"];
+            } else {
+            	var cam = r;
+            }
+            Debug.write("++++ cam: ",cam);
+			if (cam=='undefined' || cam =='' || cam == null) cam=r;
+			this.selectItem(String(cam));    
+
+            ]]>
+        </handler>
+    </combobox>
+    
+     <labeltext labelid="53" fontsize="12" x="10" y="120" />
+
+    <combobox fontsize="12" id="availibleMics2"  x="10" y="140" width="280" editable="false">
+        <handler name="oninit">
+            <![CDATA[
+            //Get all availible Mic's
+            var tw = Microphone.names;
+            var r = "";
+            for (var eg=0;eg<tw.length;eg++){
+                r=eg;
+                this.addItem(tw[eg],eg);
+            }
+            
+            var t = new sharedobject();
+            t.getLocal('userdata');
+            var g = t.getData('userdata');
+            if (g!=null){
+            	var mic = g["mic"];
+            } else {
+            	var mic = r;
+            }
+			if (mic=='undefined' || mic =='' || mic ==null) mic=r;
+			this.selectItem(String(mic));  
+			
+            ]]>
+        </handler>
+    </combobox>
+    
+    <!-- Remember Me -->    
+    <checkbox name="holddatainSO" text="Do not ask again" x="10" y="210">
+        <handler name="oninit">
+            var t = new sharedobject();
+            t.getLocal('userdata');
+            var g = t.getData('userdata');
+            var save = g["saveuserdata"];
+            Debug.write("save: ",save);
+            if(save) this.setValue(true);
+        </handler>         
+    </checkbox>
+    
+    <simplelabelbutton fontsize="12" labelid="54" x="190" y="180" width="100">
+        <handler name="onclick">
+        	this.parent.storelocaldata();
+            this.parent.doninitalize(availibleCams2.getValue(),availibleMics2.getValue());
+        </handler>
+    </simplelabelbutton>
+    <animator attribute="y" to="20" duration="1000" start="true"/>
+</class>
+    
+</library>

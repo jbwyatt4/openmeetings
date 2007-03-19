@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<library>
+
+<class name="basedrawletter" extends="basedrawobject">
+
+	<attribute name="currentletterObj" value="null" />
+	
+	<attribute name="letterObjectIsActive" value="false" type="boolean" />
+	
+	<method name="letterObjectFree" args="obj">
+		this.setAttribute('letterObjectIsActive',false);
+	</method>
+	<method name="letterObjectClose" args="obj">
+		this.setAttribute('letterObjectIsActive',true);
+	</method>
+	
+    <!-- The Color of the letter Object  -->
+  	<attribute name="currentlayerletter" value="0x000000" setter="this.setNewLayerLetter(currentlayerletter)" />
+    
+    <!-- The Size of the Letter Object -->
+  	<attribute name="currentlayersize" value="12" type="number" setter="this.setNewLayerSize(currentlayersize)" />
+  	
+  	<!-- "plain", "bold" , "italic" or "bolditalic". -->
+  	<attribute name="currentlayerstyle" value="plain" type="string" setter="this.setNewLayerStyle(currentlayerstyle)" />
+    
+    <method name="setNewLayerLetter" args="cl">
+        this.currentlayerletter=cl;
+        this.sendNewStyle.sendEvent();
+    </method>
+    
+    <method name="setNewLayerSize" args="cs">
+        this.currentlayersize=cs;
+        this.sendNewStyle.sendEvent();
+    </method>
+    
+    <method name="setNewLayerStyle" args="cs">
+        this.currentlayerstyle=cs;
+        this.sendNewStyle.sendEvent();
+    </method>
+  	
+    <!-- Send Update Events to current Letter Object -->
+    <handler name="sendNewStyle">
+        if (this.letterObjectIsActive){
+            this.currentletterObj.newStyleEvent.sendEvent()
+        }
+    </handler>
+    
+  	<attribute name="italic" value="false" type="boolean" setter="this.setitalic(italic)" />
+  	<attribute name="bold" value="false" type="boolean" setter="this.setbold(bold)" />
+  	<method name="setitalic" args="b">
+  		this.italic = b;
+  		this.doalterStyle();
+  	</method>
+  	<method name="setbold" args="b">
+  		this.bold = b;
+  		this.doalterStyle();
+  	</method>
+  	<method name="doalterStyle">
+  		<![CDATA[
+  		if (this.isinited){
+	  		if (this.bold && this.italic){
+	  			this.setAttribute('currentlayerstyle','bolditalic');
+	  		} else if(!this.bold && this.italic){
+	  			this.setAttribute('currentlayerstyle','italic');
+	  		} else if(this.bold && !this.italic){
+	  			this.setAttribute('currentlayerstyle','bold');
+	  		} else if(!this.bold && !this.italic){
+	  			this.setAttribute('currentlayerstyle','plain');
+	  		}
+	  		Debug.write("d: ",this.getAttribute('currentlayerstyle'));
+  		}
+  		]]>
+  	</method>
+  	
+	<method name="drawTextField" args="textforfield,width,x,y" >
+		Debug.write("drawTextField: ",textforfield,width,x,y);
+		var tempO = this.newTextField(this,'letter'+this.getCounter(),textforfield,width,x,y,this.currentlayersize,this.currentlayerletter,this.currentlayerstyle);
+		this.layers.push(tempO);
+	    this.drawTextFieldregister(textforfield,width,x,y,this.currentlayersize,this.currentlayerletter,this.currentlayerstyle,tempO.height);
+	</method>
+	
+	<method name="drawactionHistory" args="actionObject,obj">
+		this.newTextField(obj,actionObject[actionObject.length-1],actionObject[1],actionObject[2],actionObject[3],actionObject[4],actionObject[6],actionObject[5],actionObject[7]);
+	</method>
+	
+	<method name="newTextField" args="obj,naming,textforfield,width,x,y,fontsize,fgcolor,fontstyle">
+		this.currentlayer = new LzText(obj,{name:naming,x:x,y:y,multiline:true,resize:true,width:width,text:textforfield,fontsize:fontsize,fgcolor:fgcolor,fontstyle:fontstyle});
+		//Add Layer to global Layer  	
+	    return this.currentlayer;
+	</method>
+	
+	<method name="drawTextFieldregister" args="textforfield,width,x,y,fontsize,fgcolor,fontstyle,height">
+		var actionObject = new Array();
+	    actionObject.push('letter');
+	    actionObject.push(textforfield);
+	    actionObject.push(width);
+	    actionObject.push(x);
+	    actionObject.push(y);
+	    actionObject.push(fgcolor);
+	    actionObject.push(fontsize);
+	    actionObject.push(fontstyle);
+	    actionObject.push(x);
+	    actionObject.push(y);
+	    actionObject.push(width);
+	    actionObject.push(height);
+	    actionObject.push(this.currentlayer.name);	    	    
+	    this.baseactionobjectList.push(actionObject);	
+	    this.checkStepLayers();
+	    this.onsharedMessage('draw',actionObject);	
+	</method>
+	
+</class>
+
+</library>
