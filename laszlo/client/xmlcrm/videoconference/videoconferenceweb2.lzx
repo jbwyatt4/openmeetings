@@ -1,0 +1,652 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<canvas debug="true" width="980" height="568">
+
+<splash>
+	<view center="true" ratio="1" resource="splashswf.swf"/>
+</splash>
+
+<security>
+	<allow>
+		<pattern>^org.dokeos.servlets.*</pattern>
+	</allow>
+</security>
+
+<include href="incubator/lzcombobox.lzx" /> 
+<include href="incubator/lzedittext.lzx" /> 
+<include href="incubator/shadowbox.lzx" /> 
+<include href="incubator/stylishbutton.lzx" /> 
+<include href="incubator/styledtext.lzx" /> 
+
+<resource name="loudness" src="resources/loudness.swf" />
+
+<include href="oslmon/" /> 
+<include href="dokeos/" /> 
+
+<include href="whiteboard/whiteboard.lzx" /> 
+<include href="iFrame.lzx" /> 
+
+<!-- main colors:
+264269
+ -->
+  
+<resource name="reg_back" src="resources/buttons/reg_bg.png" />
+<resource name="reg_back_s" src="resources/buttons/reg_bg_s.png" />
+<resource name="reg_back_opt" src="resources/buttons/reg_bg_opt.png" />
+
+<resource name="close_btn_rsc">
+    <frame src="resources/buttons/close_btn.swf" />
+    <frame src="resources/buttons/close_btn_over.swf" />
+    <frame src="resources/buttons/close_btn_dn.swf" />
+</resource>
+
+<resource name="record_btn_rsc">
+    <frame src="resources/buttons/record_up.swf" />
+    <frame src="resources/buttons/record_over.swf" />
+    <frame src="resources/buttons/record_dn.swf" />
+</resource>
+
+<attribute name="chathistory" value="null" />
+<attribute name="userHistory" value="null" />
+<attribute name="browserTabHistory" value="null" />
+
+<handler name="oninit2">
+
+	this.chathistory=new Array();
+	
+	var doubleSlash = _url.indexOf("//");
+	var server = _url.substr(doubleSlash+2, _url.indexOf("/", doubleSlash+2)-doubleSlash-2); 
+	Debug.write("this zielnr: ",this,server);
+	
+	this.setAttribute('rmpthost',server);
+	
+	Debug.write("getSessionVars: ");
+	this.getSessionVars();
+	
+</handler>
+
+<handler name="oninit">
+	this.chathistory=new Array();
+    var doubleSlash = _url.indexOf("//");
+    var server = _url.substr(doubleSlash+2, _url.indexOf("/", doubleSlash+2)-doubleSlash-2); 
+    Debug.write("this zielnr: ",this,server);
+    
+    this.setAttribute('rmpthost',server);
+    
+    Debug.write("getSessionVars: ");
+    
+    new loginweb(canvas.main_content._content,{x:(canvas.width/2-160),y:(canvas.height/2-200)});
+	
+</handler>
+
+<!-- Data Source Definition -->
+<dataset name="getSessionVarsData" request="false" proxied="false"
+	querytype="POST" src="${ 'http://'+canvas.rmpthost+'/webrooms/checksession.php' }" 
+	type="http" >
+	<handler name="ondata" args="value">
+	Debug.write("Incoming data",value);
+	Debug.write("Incoming data",value.childNodes[0].childNodes[0].childNodes[0].childNodes[0].data);
+	Debug.write("Incoming data",value.childNodes[0].childNodes[1].childNodes[0].childNodes[0].data);
+	canvas.setAttribute('currentcourse',value.childNodes[0].childNodes[0].childNodes[0].childNodes[0].data);
+	canvas.setAttribute('currentcourse',canvas.rmpthost+canvas.currentcourse);
+	canvas.setAttribute('currentuser',value.childNodes[0].childNodes[1].childNodes[1].childNodes[0].data+value.childNodes[0].childNodes[1].childNodes[2].childNodes[0].data);
+	
+	new loginscreen(canvas.main_content._content,{x:(canvas.width/2-160),y:(canvas.height/2-200)});
+	
+	rtc.connect();
+	</handler>
+</dataset>
+
+
+<method name="getSessionVars" args="">
+	var d=getSessionVarsData;
+	d.doRequest();
+</method>
+
+<class name="rpcerrordialog" extends="explorerbox" title="Dokeos VideoConference"
+    docking="true" resizeable="false" closable="true" width="224" x="300" y="300" height="230">
+    
+    <attribute name="errortext" value="" type="string" />
+	<method event="oninit">
+		LzModeManager.makeModal(this);
+	</method>
+    <method event="onclose">
+        LzModeManager.release(this);
+    </method>
+	<view y="24" width="200" height="200">
+		<text y="30" x="10" fontsize="10" fontstyle="bold" text="${ parent.parent.errortext }"
+			multiline="true" width="190" />
+		<vscrollbar />
+	</view>
+</class>
+
+
+<javarpc name="mainservices" scope="session" objectreturntype="javabean" loadoption="create"
+    autoload="true" classname="org.dokeos.servlets.DokeosRemote">
+        <handler name="onload">
+        	Debug.write("loaded");          
+        </handler>
+        <handler name="onerror" args="error">
+            Debug.write(' E_RROR:', error);
+            new rpcerrordialog(canvas,{errortext:error});
+        </handler>  
+		<remotecall funcname="getListOfFiles" >
+			<param><method name="getValue">return canvas.uploadmoduleimg;</method></param>
+			<param><method name="getValue">return canvas.uploadmoduleimgfolder;</method></param>
+			<param><method name="getValue">return canvas.currentcourse;</method></param>
+	        <handler name="ondata" args="value">	
+	        	Debug.write("  getListOfFiles: ",value[1]);     
+                Debug.write(" getListOfFolders: ",value[0]);
+                _imageslistdraw.resetList();
+                
+                <![CDATA[
+                if (value[0]!=null){
+	                for(var eg=0;eg<value[0].length;eg++){
+	                    Debug.write(value[0][eg]);   
+	                    _imageslistdraw.addFolder(value[0][eg][2]); 
+	                }
+                }
+                
+                if (value[1]!=null){
+	                for(var eg=0;eg<value[1].length;eg++){
+	                    if(value[1][eg][5]!='n'){
+							_imageslistdraw.addFile(value[1][eg][1],value[1][eg][2]);
+						} else {
+							_imageslistdraw.addPpt(value[1][eg][1],value[1][eg][2]);
+						} 
+	                }
+                }
+                
+                ]]>	        	          				
+	        </handler> 
+	 	</remotecall>    
+		<remotecall funcname="getListOfPptFiles" >
+			<param><method name="getValue">return canvas.uploadmoduleppt;</method></param>
+			<param><method name="getValue">return canvas.currentcourse;</method></param>
+	        <handler name="ondata" args="value">	
+	        	Debug.write("  getListOfFiles: ",value);     
+                Debug.write("getFiles: ",value);
+                _pptlist.resetList();
+                for(eg in value){
+                    Debug.write(value[eg]);   
+                    _pptlist.addFile(eg,value[eg][0],'admin',value[eg][1]); 
+                }	        	          				
+	        </handler> 
+	 	</remotecall>   	 	     
+</javarpc>
+
+<!-- URL/IP to use for the Server 192.168.178.28 192.168.2.101 bxlug.homelinux.org 213.219.160.72-->
+<attribute name="rmpthost" value="" type="string" />
+
+<attribute name="rmpthostlocal" value="ns6077.ovh.net" type="string" />
+
+<attribute name="iswebrtmp" value="false" type="boolean" />
+
+<!-- Port to use for the Server -->
+<attribute name="rmptport" value="5080" type="string" />
+
+<!-- Username/Nickname -->
+<attribute name="currentuser" value="" type="string" />
+
+<!-- Roomname/Coursename -->
+<attribute name="currentcourse" value="" type="string" />
+
+<!-- 
+    The Reference for a Streaming Object
+    This should be removed later when the OpenLaszlo API handles
+    the broadcast better
+    -swagner
+ -->
+<attribute name="_nc" value="null" />
+
+<attribute name="moderator" value="" type="string" />
+
+<!-- 
+	The state of the Application
+	At the beginning you should choose how many users are allowed to
+	login simultaniously
+ -->
+<attribute name="islogedin" value="false" type="boolean" />
+   
+<attribute name="htmlframeisloaded" value="false" type="boolean" />
+<attribute name="createIFrameDone_attr" value="false" type="boolean" />
+
+
+<attribute name="uploadmoduleppt" value="videoconf1ppt" type="string" />
+<attribute name="uploadmoduleimg" value="videoconf1" type="string" />
+<attribute name="foldersequence" value="null" />
+<attribute name="uploadmoduleimgfolder" value="/" type="string" />
+<method name="addFolderSequence" args="foldername">
+	<![CDATA[
+	this.uploadmoduleimgfolder = '/';
+	this.uploadmoduleimgfolder += foldername;
+	this.setAttribute('uploadmoduleimgfolder',this.uploadmoduleimgfolder);
+	]]>
+</method>
+<method name="setFolderSequence" args="folderStrings">
+	
+</method>
+<!-- 
+	Can be either 2 or 4
+	But theoretically there is no limit
+ -->
+<attribute name="numberofallowedpartners" value="0" type="number" />
+
+<!-- Number of currently connected Users -->
+<attribute name="numberofpartners" value="0" type="number" />
+
+<!-- unique ID of this Stream -->
+<attribute name="streamid" value="0" type="string" />
+
+<!-- id of the current Mod in this room -->
+<attribute name="currentmodid" value="0" type="string" />
+
+<method name="setNewCurrentmodid" args="value">
+	Debug.write("############ setNewCurrentmodid: ",value);
+	this.currentmodid = value;
+	<![CDATA[
+       var t = canvas._videocontainer.allUsers;
+       Debug.write("t : ",t.t.length);
+       for (eg in t){
+       	Debug.write("t[eg]: ",t[eg]);
+       	if(t[eg][2]==value){
+       		Debug.write("Found Mod Name: ",t[eg][1]);
+       		canvas.setAttribute('moderator',t[eg][1]);
+       	}
+       }
+	]]>
+</method>
+
+<attribute name="objWhiteboard" value="null" />
+<attribute name="objMessage" value="null" />
+<attribute name="VarsModeratorGeneral" value="null" />
+
+<!-- Username of current user -->
+<attribute name="currentusename" value="defaultname" type="string" />
+
+    <rtmpconnection id="rtc" src="${ 'rtmp://'+canvas.rmpthostlocal+'/dokeos/'+canvas.currentcourse }" debug="true" autoconnect="false">	  	
+	  	<!-- 
+	  		Some remotecalls
+	  	 -->
+	  	 <handler name="onconnect">
+	  	    Debug.write("conencted");
+	  	    this.getStreams.call();
+	  	    sharedObj.connect('DokeosChat',this._nc,false);
+	  	    this.setUsername.call(); 
+	  	 </handler>
+	  	<netremotecall name="setId" funcname="setId">
+			<method name="onResult" args="value">
+				//The onResult-Handler will be called be the rtmpconnection
+				Debug.write("setId: ",value);
+                canvas.streamid = value;   
+			</method>	
+	  	</netremotecall> 
+	  	<netremotecall name="setUsername" funcname="setUsername">
+        	<netparam name="vars">
+        		<method name="getValue">
+        			Debug.write("get currentuser: ",canvas.currentuser);
+        			return canvas.currentuser;
+        		</method>
+        	</netparam>	  	
+			<method name="onResult" args="value">
+				//The onResult-Handler will be called be the rtmpconnection
+				Debug.write("setUsername: ",value);
+				this.parent.getCurrentModerator.call();  
+			</method>	
+	  	</netremotecall>	
+	  	<netremotecall name="getCurrentModerator" funcname="getCurrentModerator">
+			<method name="onResult" args="value">
+				//The onResult-Handler will be called be the rtmpconnection
+				Debug.write("getCurrentModerator: ",value,value.username);
+				canvas.setAttribute('moderator',value.username);
+			</method>	
+	  	</netremotecall>	  	
+        <netremotecall name="newStream" funcname="newStream">
+            <method name="onResult" args="value">
+                //The onResult-Handler will be called be the rtmpconnection
+                Debug.write("newStream: ",value);
+                var myvideocontainer = canvas._videocontainer.getNewVideoObject();
+                Debug.write("myvideocontainer: ",myvideocontainer.v_output);
+                myvideocontainer.v_output._stream=null;
+                myvideocontainer.v_output.setUrl(value);
+                myvideocontainer.v_output.play(-1,false);
+                Debug.write(myvideocontainer.v_output._nc);
+                Debug.write(myvideocontainer.v_output._stream);   
+                myvideocontainer.parent.parent.setIdentifier(value);        
+                canvas.setAttribute('numberofpartners',canvas.getAttribute('numberofpartners')+1);
+                //Send notification to all streams about my name
+                canvas.sendinitialMessage();       
+                _videocontainer.updateNames();
+            </method>   
+        </netremotecall>    
+        <netremotecall name="closeStream" funcname="closeStream">
+            <method name="onResult" args="value">
+                //The onResult-Handler will be called be the rtmpconnection
+                Debug.write("closeStream: ",value);
+                //free the VideoContainer
+                canvas._videocontainer.disconnectclient(value); 
+                canvas.setAttribute('numberofpartners',canvas.getAttribute('numberofpartners')-1);      
+                //Send notification to all streams about my name
+                canvas.sendinitialMessage();   
+                _videocontainer.updateNames();      
+            </method>   
+        </netremotecall>              
+	  	<netremotecall name="getStreams" funcname="getStreams">
+			<method name="onResult" args="value">
+				//The onResult-Handler will be called be the rtmpconnection
+				Debug.write("getStreams: ",value);
+				canvas.setAttribute('numberofpartners',value.length);
+				canvas._videocontainer.streams = value;
+			</method>	
+	  	</netremotecall>  
+        <netremotecall name="getFiles" funcname="dokeosService.getListOfFiles">
+            <method name="onResult" args="value">
+            	<![CDATA[
+                //The onResult-Handler will be called be the rtmpconnection
+                Debug.write("getFiles: ",value);
+                _imageslistdraw.resetList();
+                for(eg in value){
+                    Debug.write(value[eg]);   
+                    var Teil = value[eg]['name'].substr(value[eg]['name'].length-3, value[eg]['name'].legnth);
+                    var teil = Teil.toLowerCase();
+                    Debug.write("Teil",teil);
+                    var isimage = false;
+                    if (teil=='jpg' || teil=='jpeg' || teil=='gif' || teil=='png') isimage=true;
+                    _imageslistdraw.addFile(eg,value[eg]['name'],'admin',value[eg]['lastModified'],isimage); 
+                }
+                ]]>
+            </method>   
+        </netremotecall>   
+        <netremotecall name="sendVars" funcname="sendVars">
+        	<netparam name="vars">
+        		<method name="getValue">
+        			Debug.write("getNetParam: ",canvas.objWhiteboard);
+        			return canvas.objWhiteboard;
+        		</method>
+        	</netparam>
+            <method name="onResult" args="value">
+            	<![CDATA[
+                //The onResult-Handler will be called be the rtmpconnection
+                Debug.write("getValue : ",value);
+                
+                ]]>
+            </method>   
+        </netremotecall>    
+        <netremotecall name="sendVarsToWhiteboard" funcname="sendVarsToWhiteboard">
+            <method name="onResult" args="value">
+            	<![CDATA[
+                //The onResult-Handler will be called be the rtmpconnection
+                Debug.write("sendVarsToWhiteboard : ",value);
+                _drawarea.sendWatchObject(value[2],value[3]);
+                ]]>
+            </method>   
+        </netremotecall>   
+        <netremotecall name="setModerator" funcname="setModerator">
+        	<netparam name="vars">
+        		<method name="getValue">
+        			Debug.write("getNetParam: ",canvas.streamid);
+        			return canvas.streamid;
+        		</method>
+        	</netparam>
+            <method name="onResult" args="value">
+            	<![CDATA[
+                //The onResult-Handler will be called be the rtmpconnection
+                Debug.write("setModerator : ",value);
+                
+                ]]>
+            </method>   
+        </netremotecall>    
+        <netremotecall name="setNewModerator" funcname="setNewModerator">
+        	<netparam name="vars">
+        		<method name="getValue">
+        			Debug.write("getNetParam: ",canvas.objWhiteboard);
+        			return canvas.streamid;
+        		</method>
+        	</netparam>
+            <method name="onResult" args="value">
+                //The onResult-Handler will be called be the rtmpconnection
+                Debug.write("setNewModerator : ",value);
+                canvas.setNewCurrentmodid(value);
+            </method>   
+        </netremotecall>       
+        <netremotecall name="sendMessage" funcname="sendMessage">
+        	<netparam name="vars">
+        		<method name="getValue">
+        			Debug.write("getNetParam: ",canvas.objMessage);
+        			return canvas.objMessage;
+        		</method>
+        	</netparam>
+            <method name="onResult" args="value">
+            	<![CDATA[
+                //The onResult-Handler will be called be the rtmpconnection
+                Debug.write("getValue : ",value);
+                
+                ]]>
+            </method>   
+        </netremotecall>    
+        <netremotecall name="sendVarsToMessage" funcname="sendVarsToMessage">
+            <method name="onResult" args="value">
+            	<![CDATA[
+                //The onResult-Handler will be called be the rtmpconnection
+                Debug.write("sendVarsToMessage : ",value);
+				if (value[0]=='chat'){
+					canvas.addChatHistory(value);
+				} else if(value[0]=='fileslist'){
+					canvas.mainservices.getListOfFiles.invoke();
+				}
+                ]]>
+            </method>   
+        </netremotecall>  
+        <netremotecall name="sendVarsModeratorGeneral" funcname="sendVarsModeratorGeneral">
+        	<netparam name="vars">
+        		<method name="getValue">
+        			Debug.write("getNetParam: ",canvas.VarsModeratorGeneral);
+        			return canvas.VarsModeratorGeneral;
+        		</method>
+        	</netparam>
+            <method name="onResult" args="value">
+            	<![CDATA[
+                //The onResult-Handler will be called be the rtmpconnection
+                Debug.write("sendVarsModeratorGeneral : ",value);
+                
+                ]]>
+            </method>   
+        </netremotecall>    
+        <netremotecall name="sendVarsToModeratorGeneral" funcname="sendVarsToModeratorGeneral">
+            <method name="onResult" args="value">
+            	<![CDATA[
+                //The onResult-Handler will be called be the rtmpconnection
+                Debug.write("sendVarsToWhiteboard : ",value);
+                if (value[0]=='sharewhiteinit'){
+					if (!canvas.htmlframeisloaded){			
+						canvas.ifrm.createIFrame();
+						canvas.setAttribute('htmlframeisloaded',true);
+					}
+                } else if (value[0]=='sharewhiteside'){
+					if (canvas.htmlframeisloaded){		
+						_htmlside.setText(value[2]);
+						canvas.ifrm.setAttribute('isrc','http://'+value[2]);
+					}
+                }
+                ]]>
+            </method>   
+        </netremotecall>                  
+    </rtmpconnection>
+
+
+	<method name="sendinitialMessage">
+		Debug.write("sendinitialMessage Username");
+ 			
+		var tempSendArray = new Array ();
+  		tempSendArray[0] = 'initobject';
+		tempSendArray[1] = canvas.currentusename;
+		tempSendArray[2] = canvas.streamid;
+		tempSendArray[3] = 'init me';
+		tempSendArray[4] = 'inituser';
+		tempSendArray[5] = new Date();
+				
+		Debug.write("send: ",tempSendArray);
+	  	sharedObj.setData('DokeosChat',tempSendArray);	
+	</method>
+	<!-- 
+		Shared Object 
+		The Shared Object has three functions
+		1) For the Text-Chat
+		2) For the Update of the number of Connected Video-Views (Video-Chat-Partners)
+		3) For the Whiteboard Application 
+	 -->
+	<sharedobject id="sharedObj" > 
+	  	<method event="onStatus" args="val">
+	  		Debug.write("onStatus: ",val);
+	  		var t = this.getData('DokeosChat');
+	  		Debug.write("t: ",t);
+	  		//First Check which Component has to be updated case (1)
+	  		if (t[0]=='chat'){
+	  			chartcontent.addChartItem(t);
+	  		// case (3)
+	  		} else if(t[0]=='whiteboard') {
+  				if(_drawarea.drawmodus=='watch'){
+  					_drawarea.sendWatchObject(t['action'],t['actionObject']);
+  				}
+	  		// case (2)
+	  		} else if(t[0]=='videochat') {
+	  			
+	  		} else if(t[0]=='initobject') {
+	  			Debug.write("This was unhandled ",t[0]);
+	  			if (t[4]=='inituser'){
+	  				Debug.write("init a new username: ",t[1]);
+	  				Debug.write("init a new streamid: ",t[2]);
+	  				//_videocontainer.setNameByStreamId(t[1],t[2]);
+	  				_videocontainer.addUser(t);
+	  				_videocontainer.updateNames();
+	  			}
+	  		} else {
+	  			Debug.write("This was unhandled i ",t[0]);
+	  		}
+	  		textOutput.setText( textOutput.getText() +"\n\r"+ t);
+	  	</method>
+	</sharedobject>
+
+    <!-- Background Layers -->
+    <view resource="videobg" />
+	<view x="262" resource="whiteboardBG" y="0" />
+
+    <!-- 
+        Videooutput-View
+        See yourself - In this View a User will see itself
+        The quality of this picture is always greater then in the other Boxes
+        And its width and height is bigger
+     -->
+   
+	<!-- 
+		Hold 4 VideoViews 
+		Call _videocontainer.getNewVideoObject()
+		to get a free one
+	 -->
+	<videocontainer name="_videocontainer" x="2" y="2" />
+
+
+
+  <view x="2" y="256" layout="axis:x;spacing:2">
+  	<button fontsize="12" text="Moderator" height="20">
+  		<handler name="onclick">
+  			rtc.setModerator.call();
+  		</handler>
+  	</button>
+  	<text fontsize="12" text="${ this.parent.parent.moderator }" resize="true" />
+  </view>
+  
+  
+  <method name="addChatHistory" args="value">
+  	<![CDATA[
+  	Debug.write("addChatHistory: ",value);
+  	var color="'#FF3300'";
+  	if (canvas.currentusename==value[3]){
+  		color="'#0000CC'";
+  	}
+  	var newmessage = "<FONT COLOR="+color+" size='12'>"+value[3]+" ("+value[1]+"):</FONT><FONT size='12'>"+value[4]+"</FONT><br />";
+  	chartcontent.addChartItem(newmessage);
+  	chathistory.push(newmessage);
+  	]]>
+  </method>
+  <method name="getFormatedChatHistory">
+  	<![CDATA[
+  	var completeText = '';
+  	for (var i=0;i<chathistory.length;i++){
+  		completeText+=chathistory[i];
+  	}
+  	Debug.write("getFormatedChatHistory: ",completeText);
+  	return completeText;
+  	]]>
+  </method>
+  <method name="addBroswerTabHistory" args="value">
+  	<![CDATA[
+  	Debug.write("addBroswerTabHistory: ",value);
+  	_browserhistory.addItem(value);
+  	this.browserTabHistory.push(value);
+  	]]>
+  </method>
+  <!--
+  
+  	This is the tab with all the different contents
+  	Chat/Online Users/Files/Library/WWW
+   -->
+  <menubardokeos y="279" name="_menubardokeos" />
+  
+    <!-- 
+        shared Whiteboard
+     -->
+    
+   <whiteboard name="_whiteboard" x="252" y="0" />
+
+	<htmlbg name="_htmlbg" />
+
+<!--
+	hide the rest if an error or login
+ -->
+<view clickable="true" name="_hideit"
+	width="${ canvas.width }" height="${ canvas.height }" bgcolor="0xFFFFFF" />
+	
+
+<!-- 
+	The status of the connection
+ -->
+    <rtmpstatus x="${ canvas.width-42 }" y="2" />
+    
+<!-- 
+    Into this view alle Windows will be loaded
+ -->
+<view name="main_content" width="${ canvas.width }" height="${ canvas.height }">
+    <view x="0" y="0" width="${ this.parent.width }" height="${ this.parent.height }" name="_content">
+        <method name="clearAll">
+            for (eg in this.subviews){
+                Debug.write("this.subviews: ",this.subviews[eg]);
+                if (this.subviews[eg].docking) {
+                    this.subviews[eg].close();
+                } else {
+                    this.subviews[eg].destroy();
+                }
+                //
+            }
+            Debug.write("this.parent._mainnavibar. ",this.parent._mainnavibar);
+            this.parent._mainnavibar.destroy();
+            canvas._logout.setAttribute('visible',false);
+        </method>
+    </view>
+
+</view>  
+
+    <iframe x="270" y="56" name="ifrm"
+      width = "530"
+      height= "580"
+      isrc  = "http://www.google.fr/"
+      iid   = "myIframeId"
+      iname = "myIfrName"
+    />  
+
+<view resource="close"  x="${ canvas.width-20 }" y="2" >
+	<handler name="onclick">
+		LzBrowser.loadJS('self.close();', '_parent');
+	</handler>
+	<tooltip text="Close Window" />
+</view>
+</canvas>

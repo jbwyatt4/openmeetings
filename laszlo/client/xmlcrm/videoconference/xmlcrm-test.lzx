@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<canvas debug="false" width="980" height="588">
+
+<include href="host.lzx" />
+
+<debug fontsize="14" oninit="Debug.showInternalProperties = true" />
+
+<silverstyle name="defaultstyle" isdefault="true" basecolor="$once{ canvas.basebgcolorizer }"
+	canvascolor="white" />
+	
+<splash>
+	<view center="true" ratio="1" resource="splashswf.swf"/>
+</splash>
+
+<security>
+	<allow>
+		<pattern>^org.dokeos.servlets.*</pattern>
+	</allow>
+</security>
+
+<script>
+	LzCanvas.prototype.__LZWebbaseMenuItemHandler = function (obj, item) {
+	    // load a url 
+	    Debug.write("http://www.webbase-design.de", "_blank");
+	    LzBrowser.loadURL("http://www.webbase-design.de", "_blank");
+	}
+</script>  
+
+<include href="host.lzx" />  
+
+<include href="incubator/lzcombobox.lzx" />  
+<include href="incubator/shadowbox.lzx" /> 
+
+<resource name="loudness" src="resources/loudness.swf" />
+
+<include href="oslmon/" /> 
+<include href="resources/" />
+<include href="conference/" /> 
+<include href="xmlcrm/" /> 
+<include href="conference/video/" />
+
+
+<!-- main colors:
+264269
+ -->
+  
+
+
+<attribute name="chathistory" value="null" />
+<attribute name="userHistory" value="null" />
+<attribute name="browserTabHistory" value="null" />
+
+<resource name="configure_vidrsc" src="resources/configure.png" />
+
+<resource name="mainbackroundmenu_rsc" src="resources/mainbackroundmenu.png" />
+
+
+<!-- URL/IP to use for the Server 192.168.178.28 
+macbook 192.168.2.102 
+192.168.254.84 inno02.fh-pforzheim.de bxlug.homelinux.org 213.219.160.72-->
+<attribute name="rmpthost" value="" type="string" />
+
+<!-- Username/Nickname -->
+<attribute name="currentuser" value="" type="string" />
+
+<!-- Roomname internaly Scope -->
+<attribute name="currentcourse" value="" type="string" />
+
+<!-- Roomname/Coursename -->
+<attribute name="currentcourseName" value="" type="string" />
+
+<!-- 
+    The Reference for a Streaming Object
+    This should be removed later when the OpenLaszlo API handles
+    the broadcast better
+    -swagner
+ -->
+<attribute name="_nc" value="null" />
+
+<attribute name="moderatorStreamID" value="" type="string" />
+<attribute name="moderatorationObject" value="" type="string" />
+<attribute name="moderatorName" type="string" setter="this.setModeratorName(moderatorName)" />
+
+<attribute name="ismoderator" value="false" type="boolean" />
+
+<attribute name="loadingmessage" value="" type="string" />
+<!-- 
+	The state of the Application
+	At the beginning you should choose how many users are allowed to
+	login simultaniously
+ -->
+<attribute name="islogedin" value="false" type="boolean" />
+   
+<attribute name="htmlframeisloaded" value="false" type="boolean" />
+<attribute name="createIFrameDone_attr" value="false" type="boolean" />
+
+
+<attribute name="uploadmoduleppt" value="videoconf1ppt" type="string" />
+<attribute name="uploadmoduleimg" value="videoconf1" type="string" />
+<attribute name="foldersequence" value="null" />
+<attribute name="uploadmoduleimgfolder" value="" type="string" />
+<!-- 
+	Can be either 2 or 4
+	But theoretically there is no limit
+ -->
+<attribute name="numberofallowedpartners" value="0" type="number" />
+
+<!-- Number of currently connected Users -->
+<attribute name="numberofpartners" value="0" type="number" />
+
+<!-- unique ID of this Stream -->
+<attribute name="streamid" value="0" type="string" />
+
+<!-- id of the current Mod in this room -->
+<attribute name="currentmodid" value="0" type="string" />
+
+<attribute name="currentlanguage" value="english" type="string" />
+
+<attribute name="objWhiteboard" value="null" />
+<attribute name="objMessage" value="null" />
+<attribute name="VarsModeratorGeneral" value="null" />
+
+<attribute name="isConference" value="false" type="boolean" />
+
+<!-- Username of current user -->
+<attribute name="currentusename" value="defaultname" type="string" />
+<attribute name="user_id" value="0" type="string" />
+<attribute name="firstName" value="" type="string" />
+<attribute name="lastName" value="" type="string" />
+<attribute name="mail" value="" type="string" />
+<attribute name="lastLogin" value="" type="string" />
+<attribute name="official_code" value="" type="string" />
+<attribute name="picture_uri" value="" type="string" />
+<attribute name="language" value="" type="string" />
+
+<!-- User porperties -->
+<attribute name="currentusercolor" value="0x000000" type="string" />
+<attribute name="currentuserpos" value="0" type="number" />
+	
+<attribute name="basebgcolorizer" value="0xFF6347" type="string" />	
+<attribute name="baseMousecolorizer" value="0xFFC3A7" type="string" />	
+<attribute name="baseMouseOvercolorizer" value="0xFFE3C7" type="string" />  
+	
+<attribute name="currentModApply" value="null" />	
+
+<attribute name="sessionObject" value="null" />
+<attribute name="sessionId" value="" type="string" />
+			
+<handler name="oninit">
+	var cproto = LzCanvas.prototype;
+    cproto.__LZDefaultCanvasMenu = new LzContextMenu();	
+	
+	var cm1 = new ContextMenu();
+	cm1.hideBuiltInItems();
+	cm1.addItem(this.__LZdefaultMenuItem);
+	this.setContextMenu(cm1);
+    cproto.__LZdefaultMenuItem = new LzContextMenuItem("webbase-design.de",
+                                                       new LzDelegate(cproto, '__LZWebbaseMenuItemHandler'));
+    
+	cproto.__LZDefaultCanvasMenu.hideBuiltInItems();
+	cproto.__LZDefaultCanvasMenu.addItem(cproto.__LZdefaultMenuItem);
+	MovieClip.prototype.menu = __LZDefaultCanvasMenu.__LZcontextMenu()
+	
+	this.chathistory=new Array();
+	
+	var doubleSlash = _url.indexOf("//");
+	var server = _url.substr(doubleSlash+2, _url.indexOf("/", doubleSlash+2)-doubleSlash-2); 
+	Debug.write("this zielnr: ",this,server);
+	
+	this.setAttribute('rmpthost',server);
+	
+	Debug.write("languageData.",canvas.languageData);
+
+</handler>
+
+<method name="getLabelName" args="id">
+	return getLabelNameXMLCRM(id);
+</method>
+<!-- 
+	Into this view all static items will be laoded like navigation and headers/footers
+ -->
+
+<view name="_mainbgcontent" y="20">
+
+</view>
+
+<view name="_mainbgcontentNavi" y="2" x="2">
+	<method name="clearNaviContent">
+		for (var eg in this.subviews){
+			this.subviews[eg].destroy();
+		}
+	</method>
+</view>
+    
+<!-- 
+    Into this view alle Windows will be loaded
+ -->
+<view name="main_content" width="$once{ canvas.width }" height="$once{ canvas.height }">
+    <view x="200" y="20" width="$once{ this.parent.width }" height="$once{ this.parent.height }" name="_content">
+        <method name="clearAll">
+            for (var eg in this.subviews){
+                Debug.write("this.subviews: ",this.subviews[eg]);
+                if (this.subviews[eg].docking) {
+                    this.subviews[eg].close();
+                } else {
+                    this.subviews[eg].destroy();
+                }
+                
+                //
+            }
+        </method>
+    </view>
+
+</view>  
+
+
+
+</canvas>
