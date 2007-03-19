@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<library>
+
+<class name="innerlistView" extends="view" layout="axis:y;spacing:1;inset:1" 
+	width="258" bgcolor="0x799FCE" />
+
+<class name="userTagView" extends="text" height="18" width="280" 
+    onmouseover="this.setBGColor(0x799FCE)" onmouseout="this.setBGColor(white)" 
+    bgcolor="white" text="$once{ this.firstname+' '+this.lastname }" fontsize="11" >
+	
+	<attribute name="connectedSince" value="" type="string" />
+	<attribute name="isMod" value="" type="string" />
+	<attribute name="streamid" value="" type="string" />
+	<attribute name="username" value="" type="string" />
+	<attribute name="userroom" value="" type="string" />
+	<attribute name="formatedDate" value="" type="string" />
+	<attribute name="firstname" value="" type="string" />
+	<attribute name="lastname" value="" type="string" />
+	<attribute name="refObj" value="null" />
+</class>
+
+<class name="listofUsers" extends="view" width="260" height="240" bgcolor="0x4171B5">
+	<view width="$once{ parent.width-2 }" height="$once{ parent.height-2 }" 
+		x="1" y="1" bgcolor="white" />
+
+	<method name="addItem" args="object">
+		Debug.write(object);
+		new userTagView(this._table.innerlist,{firstname:object.firstname,lastname:object.lastname,refObj:object,connectedSince:object.connectedSince,isMod:object.isMod,streamid:object.streamid,username:object.username,userroom:object.userroom,formatedDate:object.formatedDate});
+	</method>
+	
+	<method name="clearList">
+		this._table.destroy();
+		new usersTable(this,{name:'_table'});
+	</method>
+
+	<usersTable name="_table" />
+
+</class>
+
+<class extends="view" name="usersTable" height="$once{ parent.height-4 }" 
+	bgcolor="white" x="2" y="2" clip="true" width="$once{ parent.width-4 }" >
+		<innerlistView name="innerlist"	/>
+	<vscrollbar />
+</class>
+
+<!-- ###################
+	Class participants
+ -->
+<class name="participants" extends="basedokeoscharttab" >
+
+	<handler name="oninit">
+		if ( canvas.htmlframeisloaded){
+			//canvas.ifrm.hide();
+			//canvas.setAttribute('htmlframeisloaded',false);
+		}
+		this.getClientListScope.call();
+	</handler>
+	
+    <netremotecall name="getClientListScope" funcname="getClientListScope" remotecontext="$once{ canvas.thisrct }" >          
+        <handler name="ondata" args="value">
+        	<![CDATA[
+            //The onResult-Handler will be called be the rtmpconnection
+            Debug.write("getClientListScope Instance: ",value);
+
+            for (var i in value){
+            	Debug.write("getClientListScope value: ",value[i]);
+            	if (value[i].username!=null){
+            		parent._listofUsers.addItem(value[i]);
+            	}
+            }
+
+            ]]>
+        </handler>   
+    </netremotecall>
+	
+	<view id="_participants" />
+	
+	<simplelabelbutton labelid="24" width="140" x="2" y="2" enabled="${ canvas.ismoderator }">
+		<handler name="onclick">
+			new createpollwin(canvas.main_content._content);
+		</handler>
+	</simplelabelbutton>
+	
+	<simplelabelbutton labelid="37" width="140" x="2" y="22" enabled="${  canvas.ismoderator }">
+		<handler name="onclick">
+			rtc.getVotes.call();
+		</handler>
+	</simplelabelbutton>	
+
+	<simplelabelbutton labelid="42" width="100" x="144" y="2" >
+		<handler name="onclick">
+			rtc.checkHasVoted.call();
+		</handler>
+	</simplelabelbutton>
+	
+	<listofUsers x="4" y="44" height="$once{ parent.height-48 }"
+		width="250" name="_listofUsers" id="_listofUsers" />
+		
+</class>
+
+
+
+</library>
