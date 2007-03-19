@@ -1,0 +1,417 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<library>
+<!-- 
+<include href="xdrawview.lzx"/>
+
+<include href="colorpicker.lzx"/>
+<include href="brushpicker.lzx"/>
+ -->
+<class name="drawingtool"  clickable="true"
+        extends="drawview"
+        width="${canvas.width}"
+        height="${canvas.height}">
+
+  <attribute name="mousetracker_del"
+             value="$once{ new LzDelegate(this, 'trackmouse' )}" />
+
+
+  <attribute name="polygon" type="number" value="${s_polygon.value}"/>
+  <attribute name="mirrorx" type="boolean" value="${cb_mirrorx.value}"/>
+  <attribute name="mirrory" type="boolean" value="${cb_mirrory.value}"/>
+
+  <attribute name="erasing" type="boolean" value="false"/>
+
+  <attribute name="startx" type="number" value="$once{canvas.width/2}"/>
+  <attribute name="starty" type="number" value="$once{canvas.height/2}"/>
+
+  <attribute name="drawmode" type="string" value="marker"/>
+
+  <!-- list of drawviews, interesting to see how well this works -->
+  <attribute name="layers" value="[]"/>
+  <attribute name="undostack" value="[]"/>
+  <attribute name="currentlayer" value="null"/>
+
+  <attribute name="mx" type="number" value="0"/>
+  <attribute name="my" type="number" value="0"/>
+  <attribute name="prevx" type="number" value="0"/>
+  <attribute name="prevy" type="number" value="0"/>
+
+  <attribute name="currentcolor" value="0x000000" />
+
+  <method event="onmousedown" >
+    this.startPaint();
+    if (LzKeys.isKeyDown('control')) {
+        this.startx = currentlayer.getMouse('x');
+        this.starty = currentlayer.getMouse('y');
+    } else {
+       mousetracker_del.register(LzIdle,'onidle');
+    }
+  </method>
+
+  <method event="onmouseup" >
+    this.endPaint();
+    mousetracker_del.unregisterAll();
+  </method>
+
+  <attribute name="brushsize" type="number"
+value="${the_brushpicker.brushsize}"/>
+  <attribute name="brushopacity" type="number"
+value="${the_brushpicker.brushopacity}"/>
+
+  <method name="startPaint">
+      if (this.erasing) {
+         this.currentcolor = canvas.bgcolor;
+      } else {
+          this.currentcolor = the_colorpicker.selectedColor;
+      }
+    this.currentlayer = new LzDrawView(this, {width: this.width, height:
+this.height});
+    this.prevx = null;
+    this.prevy = null;
+    this.layers.push(this.currentlayer);
+    currentlayer.strokeStyle = this.currentcolor;
+    currentlayer.lineWidth = this.brushsize;
+    currentlayer.setAttribute('opacity', this.brushopacity);
+    currentlayer.fillstyle = this.rgradient;
+    //beginFill( the_colorpicker.selectedColor );
+  </method>
+
+  <method name="endPaint">
+  </method>
+
+  <method name="drawseg" args="x1,y1,x2,y2">
+   <![CDATA[
+    currentlayer.beginPath();
+
+    currentlayer.moveTo(x1,y1);
+    currentlayer.lineTo(x2,y2);
+
+
+    if (mirrorx && mirrory) {
+         currentlayer.moveTo(2*startx - x1, y1);
+         currentlayer.lineTo(2*startx - x2, y2);
+
+         currentlayer.moveTo(2*startx - x1, 2*starty - y1);
+         currentlayer.lineTo(2*startx - x2, 2*starty - y2);
+
+         currentlayer.moveTo(x1, 2*starty - y1);
+         currentlayer.lineTo(x2, 2*starty - y2);
+    } else if (mirrorx) {
+         currentlayer.moveTo(2*startx - x1, y1);
+         currentlayer.lineTo(2*startx - x2, y2);
+    } else if (mirrory) {
+         currentlayer.moveTo(x1, 2*starty - y1);
+         currentlayer.lineTo(x2, 2*starty - y2);
+    }
+    currentlayer.stroke();
+    ]]>
+  </method>
+
+
+  <method name="drawline" args="x1,y1,x2,y2">
+   <![CDATA[
+    currentlayer.beginPath();
+    currentlayer.moveTo(x1,y1);
+    currentlayer.lineTo(x2,y2);
+    currentlayer.stroke();
+    ]]>
+  </method>
+
+
+  <method name="drawellipse" args="x1,y1,x2,y2">
+   <![CDATA[
+    var rgb = the_colorpicker.selectedColor;
+    var rx = Math.abs(x2-x1);
+    var ry = Math.abs(y2-y1);
+    currentlayer.createEllipse(x1,y1,rx,ry,0,null,null,null,rgb,
+this.brushopacity);
+    currentlayer.stroke();
+    ]]>
+  </method>
+
+  <method name="drawrectangle" args="x1,y1,x2,y2">
+   <![CDATA[
+    var rgb = the_colorpicker.selectedColor;
+    currentlayer.strokeStyle = rgb;
+    currentlayer.beginPath();
+    currentlayer.moveTo(x1,y1);
+    currentlayer.lineTo(x1,y2);
+    currentlayer.lineTo(x2,y2);
+    currentlayer.lineTo(x2,y1);
+    currentlayer.lineTo(x1,y1);
+    currentlayer.stroke();
+    ]]>
+  </method>
+
+
+ <method name="drawPaint" args="x1,y1">
+   <![CDATA[
+    var rgb = the_colorpicker.selectedColor;
+    currentlayer.createEllipse(x1,y1,brushsize,brushsize,null,null,null,rgradient,
+1);
+   ]]>
+  </method>
+
+  <method name="trackmouse" >
+    <![CDATA[
+    this.mx = currentlayer.getMouse('x');
+    this.my = currentlayer.getMouse('y');
+    if (mx != prevx || my != prevy) {
+        if (prevx == null) {
+            prevx = mx;
+        }
+        if (prevy == null) {
+            prevy = my;
+        }
+
+        if (drawmode == 'ellipse' || drawmode == 'line' || drawmode ==
+'rectangle') {
+            currentlayer.clear();
+        }
+        for (var side = 0; side < this.polygon; side++) {
+            var dx = this.prevx - this.mx;
+            var dy = this.prevy - this.my;
+            var mmx = this.mx - startx;
+            var mmy = this.my - starty;
+            var px = this.prevx - startx;
+            var py = this.prevy - starty;
+
+            // rotate by theta
+            var theta = ((2 * Math.PI) / this.polygon) * side;
+            var cos = Math.cos(theta);
+            var sin = Math.sin(theta);
+            px = startx + (cos * px + sin * py);
+            py = starty + (cos * py - sin * (this.prevx -startx));
+
+            mmx = startx + ( cos * mmx + sin * mmy );
+            mmy = starty + (cos * mmy - sin * (this.mx - startx));
+
+            if (drawmode == 'paint') {
+                this.drawPaint(mmx, mmy);
+            } else if (drawmode == 'marker') {
+                this.drawseg(px, py, mmx, mmy);
+            } else if (drawmode == 'line') {
+                // stretchy line mode
+                this.drawline(px, py, mmx, mmy);
+            } else if (drawmode == 'ellipse') {
+                // stretchy circle mode
+                this.drawellipse(px, py, px - dx, py - dy);
+            } else if (drawmode == 'rectangle') {
+                // stretchy rect mode
+                this.drawrectangle(px, py, px - dx, py - dy);
+            }
+        }
+
+        if (drawmode == 'paint' || drawmode == 'marker') {
+            this.prevx  = this.mx;
+            this.prevy = this.my;
+        }
+
+    }
+       ]]>
+  </method>
+
+  <attribute name="drawing" type="boolean" value="false"/>
+
+  <method event="oninit">
+      this.rgradient = this.createRadialGradient(0,0,0, 20,20,0);
+      this.rgradient.addColorStop(0,0xcc8877);
+      this.rgradient.addColorStop(1, 0xbc98a0);
+  </method>
+
+   <method name="stamp" args="px,py">
+   </method>
+
+   <method name="undo">
+     <![CDATA[
+     if (layers.length > 0) {
+        var last = layers.pop();
+        last.setAttribute('visible', false);
+        undostack.push(last);
+        currentlayer = layers[layers.length-1];
+     }
+     ]]>
+   </method>
+
+   <method name="redo">
+     <![CDATA[
+     if (undostack.length > 0) {
+        var last = undostack.pop();
+        last.setAttribute('visible', true);
+        layers.push(last);
+        currentlayer = last;
+     }
+     ]]>
+   </method>
+
+   <method name="setEraser" args="val">
+      this.erasing = val;
+   </method>
+
+   <method name="clearLayers">
+     <![CDATA[
+       while (layers.length > 0) {
+        var layer = layers.pop();
+        layer.setAttribute('visible', false);
+     }
+     ]]>
+
+   </method>
+
+ </class>
+
+<drawingtool id="dv" x="100"/>
+<colorpicker id="the_colorpicker" y="$once{canvas.height - this.height}"/>
+<brushpicker id="the_brushpicker" y="$once{the_colorpicker.y - this.height}"
+/>
+<window id="the_options" title="options" width="140" y="${the_brushpicker.y
+- this.height}">
+  <view layout="axis:y">
+    <view layout="axis:x">
+      <checkbox id="cb_mirrorx"/><text>mirror x</text>
+    </view>
+    <view layout="axis:x">
+      <checkbox id="cb_mirrory"/><text>mirror y</text>
+    </view>
+
+
+  <text height="24" text="${ s_polygon.value + ' polygon sides' }" />
+  <slider id="s_polygon" minvalue="1" maxvalue="16"
+          width="100"
+          trackheight="4" value="1"
+          thumbheight="12" showvalue="false"
+          x="4" y="38" showrange="true"  >
+  </slider>
+
+  </view>
+
+</window>
+
+
+<goldstyle name="goldcolors"/>
+<purplestyle name="purplecolors"/>
+
+<!-- a toggle button -->
+<class name="tool" extends="button"
+       width="100" style="goldcolors"
+       fontsize="12" text="${name}">
+  <attribute name="selected" type="boolean" value="false"/>
+
+  <method event="oninit">
+    the_toolbar.addTool(this);
+  </method>
+
+  <method name="toggle">
+    setAttribute('selected', !selected);
+  </method>
+
+  <method name="select">
+    the_toolbar.unselectAll();
+    setAttribute('selected', true);
+  </method>
+
+  <method name="unselect">
+    setAttribute('selected', false);
+  </method>
+
+  <!-- unselect everyone, and set this value -->
+  <method event="onclick">
+    the_toolbar.unselectAll();
+    setAttribute('selected', true);
+  </method>
+
+  <method event="onselected">
+    if (selected) {
+        setAttribute('style',purplecolors);
+    } else {
+       setAttribute('style', goldcolors);
+    }
+
+  </method>
+</class>
+
+
+<class name="toolbar" extends="window" >
+   <attribute name="tools" value="[]"/>
+   <method name="addTool" args="tool">
+     tools.push(tool);
+   </method>
+
+   <method event="oninit">
+     marker_tool.select();
+   </method>
+
+   <method name="unselectAll">
+     for (var i in tools) {
+        tools[i].unselect();
+     }
+   </method>
+
+  <view layout="axis: y">
+    <view layout="axis: x">
+      <tool name="newpage" onclick="dv.clearLayers()"/>
+      <tool name="eraser">
+        <method event="onselected">
+           dv.setEraser(this.selected);
+        </method>
+      </tool>
+    </view>
+    <view layout="axis: x">
+      <tool name="ellipse"
+            onclick="dv.setAttribute('drawmode', 'ellipse')"/>
+      <tool name="rectangle"
+            onclick="dv.setAttribute('drawmode', 'rectangle')"/>
+    </view>
+    <view layout="axis: x">
+      <tool name="zoom"  enabled="false"/>
+      <tool name="fill"  enabled="false"/>
+    </view>
+    <view layout="axis: x">
+      <tool name="line" onclick="dv.setAttribute('drawmode',
+'line')"/>
+      <tool name="spray" enabled="false"/>
+    </view>
+    <view layout="axis: x">
+      <tool name="brush"
+            onclick="dv.setAttribute('drawmode', 'paint')"/>
+      <tool name="marker"  id="marker_tool"
+            onclick="dv.setAttribute('drawmode', 'marker')"/>
+    </view>
+    <view layout="axis: x">
+      <tool name="undo"
+            onclick="dv.undo()"/>
+      <tool name="redo"
+            onclick="dv.redo()"/>
+    </view>
+  </view>
+</class>
+
+<toolbar id="the_toolbar" x="0" y="0"/>
+
+<!--
+EDITOR
+
++ color picker
+
+8x3 palette with darkness control
+
++ controls
+new page        eraser
+oval            rectangle
+zoom            fill
+line            spray
+paintbrush      marker
+
+alt = color dropper
+
++ brushsize
+
++ n-way symmetry
+
+
+-->
+
+
+
+
+</library>

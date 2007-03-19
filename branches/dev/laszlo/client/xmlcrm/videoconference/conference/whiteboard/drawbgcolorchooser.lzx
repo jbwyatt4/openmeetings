@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<library>
+
+<class name="drawbgcolorchooser" extends="combobox" editable="false">
+	<textlistitem text="white" value="0xffffff" />
+	<textlistitem text="blue" value="0x0033FF" />
+	<textlistitem text="green" value="0x00CC66" />
+	<textlistitem text="yellow" value="0xFFFF00" />
+	<textlistitem text="black" value="0x000000" />
+	<textlistitem text="red" value="0xFF0000" />
+</class>
+
+</library>

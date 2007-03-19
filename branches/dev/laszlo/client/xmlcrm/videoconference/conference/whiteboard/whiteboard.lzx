@@ -1,0 +1,382 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<library>
+<!-- blöder hund -->
+<resource name="backgroundtools_rsc" src="resources/backgroundtools.png" />
+<resource name="menupointer_rsc" src="resources/menupointer.png" />
+<resource name="line_rsc" src="resources/line.png" />
+<resource name="uline_rsc" src="resources/uline.png" />
+<resource name="whiteboardback_rsc" src="resources/whiteboardback.png" />
+
+<resource name="drawarrow_rsc" src="resources/drawarrowgray.swf" />
+<resource name="drawarrowicon_rsc" src="resources/drawarrowicon.png" />
+
+<resource name="_boundingBoxPointerTR" src="resources/boundingBoxTR.png" />
+<resource name="_boundingBoxPointerTL" src="resources/boundingBoxTL.png" />
+<resource name="_boundingBoxPointerUR" src="resources/boundingBoxUR.png" />
+<resource name="_boundingBoxPointerUL" src="resources/boundingBoxUL.png" />
+<resource name="_boundingBoxPointer" src="resources/boundingBoxPointer.png" />
+
+<resource name="letter" src="resources/applixware.png" />
+<resource name="paint" src="resources/color_line.png" />
+<resource name="revert" src="resources/undo.png" />
+<resource name="next" src="resources/redo.png" />
+<resource name="pointer" src="resources/configure.png" />
+<resource name="plain" src="resources/filenew.png" />
+<resource name="point" src="resources/point.png" />
+<resource name="close" src="resources/cancel.png" />
+<resource name="bold" src="resources/bold.png" />
+<resource name="italic" src="resources/italic.png" />
+<resource name="combodown" src="resources/combodown.png" />
+<resource name="deleteIcon" src="resources/button_cancel.png" />
+<resource name="ellipse" src="resources/mix_record.png" />
+<resource name="rectangle" src="resources/tool_delay.png" />
+<resource name="imageIcon" src="resources/image.png" />
+<resource name="handIcon" src="resources/wizard.png" />
+<resource name="sharedIcon" src="resources/kuser.png" />
+<resource name="htmlbg" src="resources/htmlbg.png" />
+<resource name="whiteboardBG" src="resources/whiteboardBG.png" />
+<resource name="videobg" src="resources/videobg.png" />
+<resource name="viewmag" src="resources/viewmag.png" />
+<resource name="reload_rsc" src="resources/reload.png" />
+<resource name="reload_small_rsc" src="resources/reload_small.png" />
+<resource name="folder_yellow_rsc" src="resources/x-office-presentation.png" />
+<resource name="folder_top_rsc" src="resources/top.png" />
+
+<resource name="filedelete_rsc" src="resources/delete.png" />
+
+<resource name="menuseperator_rsc" src="resources/menuseperator.png" />
+
+<include href="incubator/lzcombobox.lzx"/> 
+<include href="base/" />
+<include href="comboboximagebrowser.lzx" />
+<include href="drawcolorpicker.lzx" />
+<include href="drawchoosemodir.lzx" />
+<include href="dragView.lzx" />
+<include href="drawareaobjectcombobox.lzx" />
+<include href="drawareaalterposition.lzx" />
+
+<include href="boundingBoxAll.lzx" />
+<include href="choosedrawareaobjectcombobox.lzx" />
+<include href="choosedrawareaobjectwindow.lzx" />
+<include href="drawchoosesizeradio.lzx" />
+
+
+
+<!-- 
+############################
+
+	Class whiteboard
+	
+ -->
+
+
+<class name="whiteboard" extends="view">
+
+	
+	<attribute name="downloadurl" value="" type="string" />
+	<attribute name="iamgex" value="" type="string" />
+	<attribute name="imagey" value="" type="string" />
+    
+    <handler name="onsharedMessage" args="obj" />
+	
+	<method name="sendConfirmation" args="yesno,askagain" >
+		
+		Debug.write("clear yesno,askagain: ",yesno,askagain);
+	
+         var t = new sharedobject();
+         t.getLocal('userdata');
+         var g = t.getData('userdata');
+         if (g==null) g = new Array();
+         if (g["image"]==null) g["image"]=new Array();
+         g["image"]["clearField"]=yesno;
+         g["image"]["askagainclear"]=!askagain;
+         t.setData('userdata',g);
+         t.flush(); 	
+
+         if (yesno){
+         	Debug.write("clear field!!");
+			_drawarea.setModus('plain');
+			_drawarea.addNewImage(this.downloadurl,this.x,this.y);
+         } else {
+         	Debug.write("don't clear field!!");
+         	_drawarea.addNewImage(this.downloadurl,this.x,this.y);
+         }
+	</method>
+	
+	<method name="getconfirmationscode">
+		var t = new sharedobject();
+         t.getLocal('userdata');
+         var g = t.getData('userdata');
+         if (g==null) g = new Array();
+         if (g["image"]==null) {
+         	g["image"]=new Array();
+         	g["image"]["clearField"]=false;
+         	g["image"]["askagainclear"]=true;
+	         t.setData('userdata',g);
+	         t.flush();          	
+         }
+         return g["image"];
+	</method>
+	
+	<method name="resetDefaultConfirmations">
+		var t = new sharedobject();
+         t.getLocal('userdata');
+         var g = t.getData('userdata');
+         if (g==null) g = new Array();
+         if (g["image"]==null) g["image"]=new Array();
+         g["image"]["clearField"]=false;
+         g["image"]["askagainclear"]=true;
+	     t.setData('userdata',g);
+	     t.flush();          	
+
+	</method>	
+	
+	<method name="clearAreaAndAddImage" args="downloadurlVal,xVal,yVal">
+		<![CDATA[
+		this.downloadurl=downloadurlVal;
+		this.iamgex=xVal;
+		this.imagey=yVal;	
+		var storedImageDate = this.getconfirmationscode();
+		Debug.write(" g[image] ",storedImageDate);
+		if (storedImageDate["clearField"] && !storedImageDate["askagainclear"]){
+			_drawarea.setModus('plain');
+			_drawarea.addNewImage(this.downloadurl,this.x,this.y);
+		} else if (!storedImageDate["askagainclear"] && !storedImageDate["clearField"]){
+			_drawarea.addNewImage(this.downloadurl,this.x,this.y);
+		} else if (storedImageDate["askagainclear"]){
+			new confirmation(canvas.main_content._content,{labelid:62,labeliderror:63,refObj:this});
+		} else {
+			new confirmation(canvas.main_content._content,{labelid:62,labeliderror:63,refObj:this});
+		}
+		]]>	
+	</method>
+	
+	<handler name="isloadingImage" args="val" />
+	<handler name="isloadedImage" args="val" />
+	   
+    <view resource="backgroundtools_rsc" width="652"/>
+	<!-- 
+		Menubar with tool-icons
+	 -->
+	<view name="_paintmenu" layout="axis:x;spacing:2" x="2" height="28" >
+		<attribute name="selectedButton" value="null" />
+		<method name="selectButton" args="obj,bool">		
+			if (this.selectedButton!=null){
+				this.selectedButton.setAttribute('isselected',false);
+				this.selectedButton.onmouseout.sendEvent();		
+			} 
+			if (bool){
+				this.selectedButton=obj;	
+				this.selectedButton.setAttribute('isselected',true);	
+				this.selectedButton.setResourceNumber(3);
+			}
+		</method>
+		<drawchoosemodir y="2" name="b3" modi="plain" resourceN="plain" labelid="69" />
+		<drawchooseseperator y="2" />
+		<drawdoandundo y="2" name="b4" doredo="false" resourceN="revert" enabled="${ parent.parent._drawarea.hasprevious }" labelid="70" />
+		<drawdoandundo y="2" name="b5" resourceN="next" enabled="${ parent.parent._drawarea.hasenext }" labelid="71" />
+		<drawchooseseperator y="2" />
+		<drawchoosemodir y="2" isselected="true" name="b1" modi="hand" resourceN="menupointer_rsc" isSelectablemodi="true" labelid="72" />		
+		<drawchoosemodir y="2" name="b6" modi="letter" resourceN="letter" isSelectablemodi="true" labelid="73" />
+		<drawchoosemodir y="2" name="b7" modi="paint" resourceN="paint" isSelectablemodi="true" labelid="74" />
+		<drawchoosemodir y="2" name="b8" modi="line" resourceN="line_rsc" isSelectablemodi="true" labelid="75" />
+		<drawchoosemodir y="2" name="b9" modi="uline" resourceN="uline_rsc" isSelectablemodi="true" labelid="76" />		
+		<!-- 
+        <drawchoosemodir y="2" name="b11" modi="rectangle" resourceN="rectangle" isSelectablemodi="true" labelid="77" />
+        <drawchoosemodir y="2" name="b12" modi="ellipse" resourceN="ellipse" isSelectablemodi="true" labelid="78" />
+		<drawchoosemodir y="2" name="b10" modi="drawarrow" resourceN="drawarrowicon_rsc" isSelectablemodi="true" labelid="79" />				
+		 -->
+		<drawchooseseperator y="2" />
+
+	</view>
+	
+	<!-- 
+		The Content Area
+	 -->
+	<basedrawsave width="642" height="488" y="28" clip="true"
+		name="_drawarea" id="_drawarea" >
+		<handler name="onprogress" args="perc">
+			Debug.write("onprogress: ",perc);
+			this.parent._progress.setProgress(perc);
+		</handler>
+		<method name="onsharedMessage" args="action,obj">
+			
+
+	  		var tempSendArray = new Array ();
+	  		tempSendArray[0] = 'whiteboard';
+	  		tempSendArray[1] = new Date();
+			Debug.write("Setting Message");
+			tempSendArray[2] = action;
+			tempSendArray[3] = obj;
+	 			
+	  		parent.onsharedMessage.sendEvent(tempSendArray);
+	  		
+		</method>
+	</basedrawsave>
+	
+	<!-- 
+		Container for the bounding Box (selection Box)
+	 -->
+	<view name="boundboxesView" width="640" height="490" y="28" clip="true" />
+
+	<!-- Context sensitive stuff -->
+	
+	<!-- Line -->
+	<drawcolorpicker x="320" y="2" defaultno="4"
+		visible="${ ( ( this.parent._drawarea.drawmodus=='line' ) ? true : false ) }">
+		<handler name="onnewcolor" args="c">
+			this.parent._drawarea.currentlinestroke = c;
+		</handler>
+	</drawcolorpicker>
+	<drawchoosesizeradio x="460" y="6" visible="${ ( ( this.parent._drawarea.drawmodus=='line' ) ? true : false ) }">
+		<handler name="onselect" args="val">
+			if (val.value=='1') this.parent._drawarea.currentlinelineWidth=1;
+			if (val.value=='2') this.parent._drawarea.currentlinelineWidth=5;
+			if (val.value=='3') this.parent._drawarea.currentlinelineWidth=10;
+		</handler>
+	</drawchoosesizeradio>
+	
+	<!-- Uline -->
+	<drawcolorpicker x="320" y="2" defaultno="6"
+		visible="${ ( ( this.parent._drawarea.drawmodus=='uline' ) ? true : false ) }">
+		<handler name="onnewcolor" args="c">
+			this.parent._drawarea.currentulinestroke = c;
+		</handler>
+	</drawcolorpicker>
+	<drawchoosesizeradioT x="460" y="6" visible="${ ( ( this.parent._drawarea.drawmodus=='uline' ) ? true : false ) }">
+		<handler name="onselect" args="val">
+			if (val.value=='1') this.parent._drawarea.currentulinelineWidth=5;
+			if (val.value=='2') this.parent._drawarea.currentulinelineWidth=10;
+			if (val.value=='3') this.parent._drawarea.currentulinelineWidth=20;
+		</handler>
+	</drawchoosesizeradioT>
+	
+	<!-- drawarrow -->
+	<drawcolorpicker x="320" y="2" defaultno="7"
+		visible="${ ( ( this.parent._drawarea.drawmodus=='drawarrow' ) ? true : false ) }">
+		<handler name="onnewcolor" args="c">
+			this.parent._drawarea.currentdrawarrowlinestroke = c;
+		</handler>
+	</drawcolorpicker>
+	
+	<!-- Paint -->
+	<drawcolorpicker x="320" y="2" defaultno="1"
+		visible="${ ( ( this.parent._drawarea.drawmodus=='paint' ) ? true : false ) }">
+		<handler name="onnewcolor" args="c">
+			this.parent._drawarea.currentlayerstroke = c;
+		</handler>
+	</drawcolorpicker>
+	<drawchoosesizeradio x="460" y="6" visible="${ ( ( this.parent._drawarea.drawmodus=='paint' ) ? true : false ) }">
+		<handler name="onselect" args="val">
+			if (val.value=='1') this.parent._drawarea.currentlayerlineWidth=1;
+			if (val.value=='2') this.parent._drawarea.currentlayerlineWidth=5;
+			if (val.value=='3') this.parent._drawarea.currentlayerlineWidth=10;
+		</handler>
+	</drawchoosesizeradio>
+	
+	<!-- letter -->
+	<drawcolorpicker  x="320" y="2" defaultno="1"
+		visible="${ ( ( this.parent._drawarea.drawmodus=='letter' ) ? true : false ) }">
+		<handler name="onnewcolor" args="c">
+			this.parent._drawarea.setAttribute('currentlayerletter',c);
+		</handler>
+	</drawcolorpicker>
+	<!-- 
+    <basedrawchoose resourceN="italic" x="400" y="2" visible="${ ( ( this.parent._drawarea.drawmodus=='letter' ) ? true : false ) }" labelid="86" >
+        <handler name="onclick">
+            this.parent._drawarea.setAttribute('italic',!this.parent._drawarea.getAttribute('italic'));
+        </handler>
+    </basedrawchoose>
+    <basedrawchoose resourceN="bold" x="426" y="2" visible="${ ( ( this.parent._drawarea.drawmodus=='letter' ) ? true : false ) }" labelid="87" >
+        <handler name="onclick">
+            this.parent._drawarea.setAttribute('bold',!this.parent._drawarea.getAttribute('bold'));
+        </handler>
+    </basedrawchoose>    
+     -->
+	<drawchoosesizeradio x="460" y="6" visible="${ ( ( this.parent._drawarea.drawmodus=='letter' ) ? true : false ) }">
+		<handler name="onselect" args="val">
+			if (val.value=='1') this.parent._drawarea.setAttribute('currentlayersize',10);
+			if (val.value=='2') this.parent._drawarea.setAttribute('currentlayersize',15);
+			if (val.value=='3') this.parent._drawarea.setAttribute('currentlayersize',20);
+		</handler>
+	</drawchoosesizeradio>	
+    
+    <!-- rectangle 
+	<drawcolorpicker  x="320" y="2" defaultno="1"
+		visible="${ ( ( this.parent._drawarea.drawmodus=='rectangle' ) ? true : false ) }">
+		<handler name="onnewcolor" args="c">
+			this.parent._drawarea.setAttribute('currentrectanglestroke',c);
+		</handler>
+	</drawcolorpicker>
+    <drawchoosesizeradio x="460" y="6" visible="${ ( ( this.parent._drawarea.drawmodus=='rectangle' ) ? true : false ) }">
+        <handler name="onselect" args="val">
+            if (val.value=='1') this.parent._drawarea.setAttribute('currentrectangleineWidth',1);
+            if (val.value=='2') this.parent._drawarea.setAttribute('currentrectangleineWidth',5);
+            if (val.value=='3') this.parent._drawarea.setAttribute('currentrectangleineWidth',10);
+        </handler>
+    </drawchoosesizeradio>  
+     -->
+    <!-- ellipse
+	<drawcolorpicker  x="320" y="2" defaultno="1"
+		visible="${ ( ( this.parent._drawarea.drawmodus=='ellipse' ) ? true : false ) }">
+		<handler name="onnewcolor" args="c">
+			this.parent._drawarea.setAttribute('currentellipsestroke',c);
+		</handler>
+	</drawcolorpicker>
+    <drawchoosesizeradio x="460" y="6" visible="${ ( ( this.parent._drawarea.drawmodus=='ellipse' ) ? true : false ) }">
+        <handler name="onselect" args="val">
+            if (val.value=='1') this.parent._drawarea.setAttribute('currentellipselineWidth',1);
+            if (val.value=='2') this.parent._drawarea.setAttribute('currentellipselineWidth',5);
+            if (val.value=='3') this.parent._drawarea.setAttribute('currentellipselineWidth',10);
+        </handler>
+    </drawchoosesizeradio>  
+      -->
+	<text name="_loading" text="Loading ... " fontsize="12" visible="false" x="${ parent.width-this.width }" y="24" bgcolor="white" />
+
+</class>
+
+	<!-- 
+	<drawchoosemodir name="b8" modi="image" resourceN="imageIcon" labeltext="Image" />
+
+	 -->
+	
+	<!-- Context sensitive Area top Stuff
+	<text x="40" y="10" text="Choose Element" resize="true" fontsize="10" />
+	visible="${ ( ( this.parent._drawarea.drawmodus=='pointer' ) ? true : false ) }"
+	
+	<drawareaobjectcombobox x="300" y="4" name="_drawareaobjectcombobox"  visible="${ ( ( this.parent._drawarea.drawmodus=='pointer' ) ? true : false ) }"/>
+	<drawareaalterposition x="140" y="540" name="_drawareaalterposition"  />
+	<basedrawchoose resourceN="deleteIcon" x="430" y="4" labeltext="delete choosen Item" width="22" height="22" visible="${ ( ( this.parent._drawarea.drawmodus=='pointer' ) ? true : false ) }">
+		<handler name="onclick">
+			Debug.write("this.parent._drawareaalterposition.objName: ",this.parent._drawareaalterposition.objName);
+			this.parent._drawarea.deleteItemByName(this.parent._drawareaalterposition.objName);
+		</handler>
+	</basedrawchoose>
+	-->
+	
+	<!-- 
+	
+
+	 -->
+	<!-- 
+	<button height="20" x="540" y="540" text="export as JPEG" width="160" >
+		<handler name="onclick">
+			//this.parent._drawarea.catchSnapshot();
+		</handler>
+	</button>
+	export -->
+	<!-- 
+	<view name="_progress" bgcolor="black" width="120" x="312" height="18" y="30">
+		<method name="setProgress" args="perc">
+			var percentWidth = ((this.width-2)/100)*perc;
+			this._i2.setWidth(percentWidth);
+		</method>
+		<view x="1" y="1" name="_i" bgcolor="white" width="${ parent.width-2 }" height="${ parent.height-2 }" />
+		<view x="1" y="1" name="_i2" bgcolor="gray" width="0" height="${ parent.height-2 }" />	
+	</view>
+	
+	 
+	<text x="14" y="540" text="${ 'Modus: '+this.parent._drawarea.drawmodus }" resize="true" fontsize="12" />
+	 -->
+
+</library>
