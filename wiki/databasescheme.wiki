@@ -1,4 +1,5 @@
 #summary Database Schemes of project.
+#labels Featured,Phase-Implementation
 
 == Navigation ==
 http://wagner-sebastian.com/downloads/navigation.png
