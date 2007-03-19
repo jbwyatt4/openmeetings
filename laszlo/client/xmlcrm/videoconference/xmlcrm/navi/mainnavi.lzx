@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<library>
+
+<class name="subsubtreeitem" extends="view" bgcolor="$once{ canvas.baseMousecolorizer }"
+    width="180"
+    onmouseover=" this.setBGColor(canvas.baseMouseOvercolorizer) "
+    onmouseout=" this.setBGColor(canvas.baseMousecolorizer) ">  
+    <attribute name="action" value="" type="string" />
+    <attribute name="open" value="false" type="boolean" />
+    <attribute name="isleaf" value="false" type="boolean" />    
+    <attribute name="depth" value="2" type="number" />
+    <attribute name="text" value="" type="string" />
+    <attribute name="list" value="null" />
+    <handler name="onclick"> 
+        <![CDATA[
+        if (this.isleaf && this.action){
+            Debug.write("action: ",this.action);
+            if (this.depth==1){
+                loadContent(this,null,null);
+            } else if (this.depth==2){
+                loadContent(this,this.parent,null);
+            } else if (this.depth==3){
+                loadContent(this,this.parent,this.parent.parent);
+            }
+        }
+        ]]>
+    </handler>  
+    <text x="8" y="2" height="20" resize="true" fontsize="11" name="_cbtext"
+        fontstyle="bold" text="$once{parent.text}" />
+        
+</class>
+
+
+<class name="subsubtreecontainer" extends="view" layout="axis:y;spacing:2" 
+    x="20" >
+    <attribute name="issubsub" value="true" type="boolean" />
+    <method name="clearList">
+        for (var eg in this.subviews){
+            this.subviews[eg].destroy();
+        }
+    </method>
+</class>
+
+<class name="subtreeitem" extends="subsubtreecontainer" bgcolor="$once{ canvas.baseMousecolorizer }"
+    width="200" issubsub="false" x="0"
+    onmouseover=" this.setBGColor(canvas.baseMouseOvercolorizer) "
+    onmouseout=" this.setBGColor(canvas.baseMousecolorizer) "> 
+	<attribute name="action" value="" type="string" />
+    <attribute name="open" value="false" type="boolean" />
+    <attribute name="isleaf" value="false" type="boolean" />    
+    <attribute name="depth" value="2" type="number" />
+    <attribute name="text" value="" type="string" />
+    <attribute name="list" value="null" />
+    <attribute name="subtreecontainerRef" value="null" />
+    <handler name="onclick"> 
+    	<![CDATA[
+        parent.parent.clearSubContainerItemList();
+    	if (this.isleaf && this.action){
+			Debug.write("action: ",this.action);
+            if (this.depth==1){
+                loadContent(this,null,null);
+            } else if (this.depth==2){
+                loadContent(this,this.parent,null);
+            } else if (this.depth==3){
+                loadContent(this,this.parent,this.parent.parent);
+            }
+		}
+		]]>
+	</handler>	
+    <text x="8" y="4" height="24" resize="true" fontsize="12" name="_cbtext"
+        fontstyle="bold" text="$once{parent.text}" />
+        
+</class>
+
+
+<class name="mainnavitree" extends="view" bgcolor="$once{ canvas.baseMousecolorizer }"
+    width="${ this._cbtext.width+20 }" 
+    onmouseover=" this.setBGColor(canvas.baseMouseOvercolorizer) "
+    onmouseout=" this.setBGColor(canvas.baseMousecolorizer) "> 
+    
+	<attribute name="action" value="" type="string" />
+    <attribute name="open" value="false" type="boolean" />
+    <attribute name="isleaf" value="false" type="boolean" />
+    <attribute name="depth" value="1" type="number" />
+    <attribute name="text" value="" type="string" />
+    <attribute name="list" value="null" />
+
+    <handler name="onclick"> 
+    	<![CDATA[
+    	
+    	if (this.isleaf && this.action){
+			Debug.write("action: ",this.action);
+            if (this.depth==1){
+                loadContent(this,null,null);
+            } else if (this.depth==2){
+                loadContent(this,this.parent,null);
+            } else if (this.    depth==3){
+                loadContent(this,this.parent,this.parent.parent);
+            }
+		}
+		this.parent.parent.clearSubItemList();
+        Debug.write("this.list: ",this.list,this.list.length);
+        if (this.list != null && this.list.length!=0) {
+            for (var i=0;i<this.list.length;i++){
+            	Debug.write("this.list[i]: ",this.list[i]);
+            	var t = new subtreeitem(this.parent.parent._subcontent,{list:this.list[i].subnavi,depth:2,text:this.list[i].label.value,open:this.list[i].isleaf,isleaf:this.list[i].isleaf,action:this.list[i].action});
+                t.subtreecontainerRef = new subsubtreecontainer(this.parent.parent._subcontent);
+            }
+        }	
+        Debug.write("this.parent.parent._subcontent: ",this.parent.parent._subcontent);
+		]]>
+	</handler>	
+    
+    <text x="10" y="6" height="30" resize="true" fontsize="14" name="_cbtext"
+        fontstyle="bold" text="$once{parent.text}" />
+</class>
+    
+<class name="mainnavi" extends="view" bgcolor="$once{ canvas.basebgcolorizer }"
+    width="200" height="300" >
+    <view bgcolor="0xFFFFFF" width="$once{ parent.width }" height="$once{ parent.height }"
+        x="0" y="0" name="_innerbg" />
+        
+    <attribute name="naviObject" value="null" />
+    
+    <handler name="oninit">
+    	<![CDATA[  
+    	var t = this._innercontent._content;
+    	var value = this.naviObject;
+    	for (var i=0;i<value.length;i++){
+    		var t1 = new mainnavitree(t,{list:value[i].mainnavi,depth:1,text:value[i].label.value,open:value[i].isleaf,isleaf:value[i].isleaf,action:value[i].action});
+			Debug.write("value[i].mainnavi.length: ",value[i].mainnavi.length);
+    		
+    	}
+    	]]>
+    </handler>
+    <!-- 
+    		for (var k=0;i<value[i].mainnavi.length;k++){
+    			Debug.write(value[i].mainnavi[k]);
+    			//var t2 = new mainnavitree(t1,{text:value[i].mainnavi[k].name,open:value[i].mainnavi[k].isopen,isleaf:value[i].mainnavi[k].isleaf,action:value[i].mainnavi[k].action});
+ 			
+    		}    
+	    		for (var l=0;i<value[i].mainnavi[k].subnavi.length;l++){
+	    			var t2 = new mainnavitree(t1,{text:value[i].mainnavi[k].subnavi[l].name,open:value[i].mainnavi[k].subnavi[l].isopen,isleaf:value[i].mainnavi[k].subnavi[l].isleaf,action:value[i].mainnavi[k].subnavi[l].action});
+	    		}       
+     -->
+    
+    <view x="0" y="0" name="_innercontent" layout="axis:y;spacing:2">
+        
+       	<method name="clearmainItemList">
+       		<![CDATA[
+       		for (var i in this._content.subviews){
+       			this._content.subviews[i].destroy();
+       		}
+       		]]>
+       	</method>
+       	
+       	<method name="clearSubItemList">
+       		<![CDATA[
+       		for (var i in this._subcontent.subviews){
+       			Debug.write("item deleted: ",this._subcontent.subviews[i]);
+       			this._subcontent.subviews[i].destroy();
+       		}
+       		]]>
+       	</method>
+       	
+       	<method name="clearSubContainerItemList">
+       		<![CDATA[
+       		for (var i in this._subcontent.subviews){
+       			Debug.write("item deleted: ",this._subcontent.subviews[i]);
+       			if (this._subcontent.subviews[i].issubsub) this._subcontent.subviews[i].clearList();
+       		}
+       		]]>
+       	</method>
+                
+        <view name="_content" layout="axis:x;spacing:2" />
+        
+        <view name="_subcontent" layout="axis:y;spacing:2" />
+            
+        <!-- 
+        <vscrollbar />
+         -->
+    </view>
+
+</class>
+
+</library>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<library>
+
+<script>
+<![CDATA[
+var labelObj;
+
+function loadContent(obj,parentobj,preparentobj){
+	
+	Debug.write("loadContent: ",obj,parentobj,preparentobj);
+	
+	if (obj.action=="conf1"){
+        new subsubtreeitem(obj.subtreecontainerRef,{list:null,depth:3,text:'room1',open:true,isleaf:true,action:'roomconf1'});
+    } else if (obj.action=="roomconf1"){
+        clearStageContent();
+        canvas.connectedroom = obj.name;
+        new conference(canvas.main_content._content);
+    }
+	
+}
+
+function clearStageContent(){
+    canvas.main_content._content.clearAll();
+}
+function setLabelObject(labelObjRef){
+	labelObj = labelObjRef;
+}
+
+function getLabelNameXMLCRM(labelid){
+	for (var i=0;i<labelObj.length;i++){
+		if (labelid==labelObj[i].fieldvalues_id){
+			return labelObj[i].value;
+		}
+	}
+	
+}
+]]>
+</script>
+
+</library>

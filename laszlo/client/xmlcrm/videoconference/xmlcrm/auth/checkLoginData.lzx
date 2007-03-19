@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<library>
+
+<class name="checkLoginData" extends="labelexplorerbox" title="Auth"
+    docking="true" resizeable="false" closable="false" width="400" x="100" y="40" height="240">
+    
+    <attribute name="refObj" value="null" />
+    
+    <attribute name="labeliderror" value="0" type="number" />
+    
+    <labeltext text="User: " width="400" y="42" resize="false" x="2"/>
+        <edittext name="username" y="42" x="120" width="280" text="swagner" />
+
+    <labeltext text="Pass: " width="400" y="72" resize="false" x="2"/>
+        <edittext name="userpass" y="72" password="true" x="120" width="280" text="67810" />
+
+    <labeltext text="Language: " width="400" y="102" resize="false" x="2"/>  
+        
+        <combobox name="languages" width="280" y="102" x="120" editable="false">
+            <netremotecall name="getLanguages" funcname="xmlcrm.getLanguages" remotecontext="$once{ canvas.thishib }" >      
+                <handler name="oninit">
+                    this.call();
+                </handler>
+                <handler name="ondata" args="value">
+                    //The onResult-Handler will be called be the rtmpconnection
+                    Debug.write("getLanguages: ",value);
+                    <![CDATA[
+                    for (var i=0;i<value.length;i++){
+                        this.parent.addItem(value[i].name,value[i].language_id);
+                    }
+                    this.parent.selectItem(value[0].language_id);
+                    ]]>
+                </handler>  
+            </netremotecall>
+        </combobox>
+        
+    <simplelabelbutton text="Login" width="100" x="290" y="196">
+    	<handler name="onclick">
+    		this.parent.loginUser.call();
+    	</handler>
+    </simplelabelbutton>   
+    
+     <text name="errormess" resize="true" y="84" />
+
+    <netremotecall name="loginUser" funcname="xmlcrm.loginUser" remotecontext="$once{ canvas.thishib }" >      
+        <netparam name="vars1"><method name="getValue"> return canvas.sessionId; </method></netparam>  
+        <netparam name="vars2"><method name="getValue"> return parent.parent.username.getText(); </method></netparam>  
+        <netparam name="vars3"><method name="getValue"> return parent.parent.userpass.getText(); </method></netparam>  
+        <handler name="ondata" args="value">
+            //The onResult-Handler will be called be the rtmpconnection
+            Debug.write("loginUser: ",value);
+            
+            if (value.userlevel.level_id!=-1){
+            
+				canvas.setAttribute('user_id',value.user_id);
+				canvas.setAttribute('firstName',value.firstname);
+				canvas.setAttribute('lastName',value.lastname);
+				canvas.setAttribute('mail','');
+				canvas.setAttribute('lastLogin','');
+				canvas.setAttribute('official_code','');
+				canvas.setAttribute('picture_uri','');
+				canvas.setAttribute('language','');
+            	
+                hib.userlang = Number(parent.languages.getValue());
+            	hib.userobject = value;
+            	hib.getLanguageById.call();
+                parent.close();
+            }  else {
+                parent.errormess.setText(value.firstname);
+            }
+            
+        </handler>  
+    </netremotecall>
+
+</class>
+
+</library>
