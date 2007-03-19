@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<library>
+
+<class name="errorpopup" extends="view" width="${ canvas.width }" height="20" bgcolor="red">
+
+	<attribute name="fadeDelegate" value="null" />
+
+	<handler name="oninit">
+		this.fadeDelegate = new LzDelegate( this, "fadeOut" );
+		LzTimer.addTimer( this.fadeDelegate, 3500 );
+	</handler>
+	
+	<method name="fadeOut">
+		this._fadeout.doStart();
+	</method>
+
+	<attribute name="error" value="" type="string" />
+
+	<text fontsize="12" resize="true" fontstyle="bold" text="${ parent.error }" />
+
+	<animator name="_fadeout" attribute="y" to="-30" duration="1500" onstop="this.parent.destroy()" start="false"/>
+</class>
+
+</library>

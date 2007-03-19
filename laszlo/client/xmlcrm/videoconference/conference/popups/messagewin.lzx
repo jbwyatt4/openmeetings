@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<library>
+
+<class name="messagewin" extends="labelexplorerbox" labelid="18"
+    docking="true" resizeable="false" closable="false" width="400" x="100" y="220" height="240">
+    
+    <attribute name="labeliderror" value="0" type="number" />
+    
+    <labeltext labelid="$once{ parent.labeliderror }" width="400"
+    	y="22" multiline="true" resize="false"/>
+    
+	
+    <simplelabelbutton labelid="25" width="200" x="80" y="218">
+    	<handler name="onclick">
+    		this.parent.close();
+    	</handler>
+    </simplelabelbutton>
+</class>
+
+</library>

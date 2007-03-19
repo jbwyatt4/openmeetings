@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<library>
+
+<class name="rpcerrordialog" extends="explorerbox" title="Dokeos VideoConference"
+    docking="true" resizeable="false" closable="true" width="224" x="300" y="300" height="230">
+    
+    <attribute name="errortext" value="" type="string" />
+	<method event="oninit">
+		LzModeManager.makeModal(this);
+	</method>
+    <method event="onclose">
+        LzModeManager.release(this);
+    </method>
+	<view y="24" width="200" height="200">
+		<text y="30" x="10" fontsize="10" fontstyle="bold" text="${ parent.parent.errortext }"
+			multiline="true" width="190" />
+		<vscrollbar />
+	</view>
+</class>
+   
+
+</library>

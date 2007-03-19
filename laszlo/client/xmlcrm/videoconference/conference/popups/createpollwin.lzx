@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<library>
+
+<class name="bigTextListItem" extends="textlistitem" fontsize="12" />
+
+ <class name="createpollwin" extends="labelexplorerbox" labelid="18"
+    docking="true" resizeable="false" closable="false" width="500" x="100" y="220" height="240">
+    
+    <labeltext fontstyle="bold" labelid="19" y="22" />
+    
+    <labeltext labelid="20" y="42" />
+    <edittext name="_question" multiline="true" width="390" x="100" y="42" height="60" />
+    
+    <labeltext labelid="21" y="122" />
+    <combobox name="_polltypes" width="160" x="100" y="122" editable="false" itemclassname="bigTextListItem" >
+    	<handler name="oninit">
+    		<![CDATA[
+    		rtc.getPollTypeList.setReferenceObj(this);
+    		rtc.getPollTypeList.call();
+    		]]>
+    	</handler>
+    </combobox>
+
+    <simplelabelbutton labelid="25" width="200" x="80" y="218">
+    	<handler name="onclick">
+    		this.parent.close();
+    	</handler>
+    </simplelabelbutton>
+    
+    <simplelabelbutton labelid="22" width="200" x="290" y="218">
+    	<handler name="onclick">
+    		rtc.createPoll.pollquestion = this.parent._question.getText();
+    		rtc.createPoll.polltypesid = this.parent._polltypes.getValue();
+    		Debug.write("rtc.createPoll: ",rtc.createPoll);
+    		rtc.createPoll.call();
+    		this.parent.close();
+    	</handler>
+    </simplelabelbutton>
+    
+    <labeltext fgcolor="red" labelid="23" y="170" width="480" multiline="true" resize="false"/>
+    
+</class>
+
+
+</library>
