@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping
+>
+    <class
+        name="org.xmlcrm.app.hibernate.beans.adresses.Phones"
+        table="phones"
+    >
+
+        <id
+            name="phone_id"
+            column="phone_id"
+            type="java.lang.Long"
+        >
+            <generator class="increment">
+              <!--  
+                  To add non XDoclet generator parameters, create a file named 
+                  hibernate-generator-params-Phones.xml 
+                  containing the additional parameters and place it in your merge dir. 
+              --> 
+            </generator>
+        </id>
+
+        <property
+            name="comment"
+            type="string"
+            update="true"
+            insert="true"
+            column="comment"
+        />
+
+        <property
+            name="phonevalue"
+            type="string"
+            update="true"
+            insert="true"
+            column="phonevalue"
+        />
+
+        <property
+            name="starttime"
+            type="java.util.Date"
+            update="true"
+            insert="true"
+            column="starttime"
+        />
+
+        <property
+            name="updatetime"
+            type="java.util.Date"
+            update="true"
+            insert="true"
+            column="updatetime"
+        />
+
+        <property
+            name="deleted"
+            type="boolean"
+            update="true"
+            insert="true"
+            column="deleted"
+        />
+
+        <!--
+            To add non XDoclet property mappings, create a file named
+                hibernate-properties-Phones.xml
+            containing the additional properties and place it in your merge dir.
+        -->
+
+    </class>
+
+</hibernate-mapping>

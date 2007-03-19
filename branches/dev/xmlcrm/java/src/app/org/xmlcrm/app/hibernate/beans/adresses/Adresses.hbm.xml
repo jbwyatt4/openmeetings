@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping
+>
+    <class
+        name="org.xmlcrm.app.hibernate.beans.adresses.Adresses"
+        table="adresses"
+    >
+
+        <id
+            name="adresses_id"
+            column="adresses_id"
+            type="java.lang.Long"
+        >
+            <generator class="increment">
+              <!--  
+                  To add non XDoclet generator parameters, create a file named 
+                  hibernate-generator-params-Adresses.xml 
+                  containing the additional parameters and place it in your merge dir. 
+              --> 
+            </generator>
+        </id>
+
+        <property
+            name="additionalname"
+            type="string"
+            update="true"
+            insert="true"
+            column="additionalname"
+        />
+
+        <property
+            name="comment"
+            type="string"
+            update="true"
+            insert="true"
+            column="comment"
+        />
+
+        <property
+            name="fax"
+            type="string"
+            update="true"
+            insert="true"
+            column="fax"
+        />
+
+        <property
+            name="starttime"
+            type="java.util.Date"
+            update="true"
+            insert="true"
+            column="starttime"
+        />
+
+        <many-to-one
+            name="states"
+            class="org.xmlcrm.app.hibernate.beans.adresses.States"
+            cascade="none"
+            outer-join="true"
+            update="true"
+            insert="true"
+            column="state_id"
+            not-null="false"
+        />
+
+        <property
+            name="street"
+            type="string"
+            update="true"
+            insert="true"
+            column="street"
+        />
+
+        <property
+            name="town"
+            type="string"
+            update="true"
+            insert="true"
+            column="town"
+        />
+
+        <property
+            name="updatetime"
+            type="java.util.Date"
+            update="true"
+            insert="true"
+            column="updatetime"
+        />
+
+        <property
+            name="zip"
+            type="string"
+            update="true"
+            insert="true"
+            column="zip"
+        />
+
+        <property
+            name="deleted"
+            type="boolean"
+            update="true"
+            insert="true"
+            column="deleted"
+        />
+
+        <!--
+            To add non XDoclet property mappings, create a file named
+                hibernate-properties-Adresses.xml
+            containing the additional properties and place it in your merge dir.
+        -->
+
+    </class>
+
+</hibernate-mapping>

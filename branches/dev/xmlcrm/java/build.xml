@@ -1,0 +1,176 @@
+<project name="xmlcrm" basedir="./" default="build project">
+
+	<!-- Sources and output dirs -->
+	<property name="main.src.dir" value="${basedir}/src/app"/>
+	<property name="main.out.dir" value="${basedir}/src/app"/>
+	<property name="test.src.dir" value="${basedir}/src/test"/>
+	<property name="test.out.dir" value="${basedir}/bin/test"/>
+	
+	<!-- Conf dirs -->
+	<property name="conf.dir" value="${basedir}/conf"/>
+	
+	<!-- Distribution properties -->
+	<property name="project.distname" value="xmlcrm"/>
+
+
+	<!-- Hibernate Properties -->
+	<property file="${conf.dir}/hibernate.properties" />
+
+	<!-- libraries -->
+	<property name="project.lib" value="./lib"/>
+
+	<!-- Hibernate -->
+	<property name="hibernate.lib" value="${project.lib}/hibernate3"/>
+	<!-- Log4j -->
+	<property name="log4j.lib" value="${project.lib}/log4j" />
+	<!-- xDoclet -->
+    <property name="xdoclet.lib" value="${project.lib}/xdoclet" />
+	<!-- Jakarta commons -->
+	<property name="jakarta.common.lib" value="${project.lib}/jakarta-commons" />
+	<!--JDBC Drivers-->
+	<property name="database.lib" value="${project.lib}/database" />
+
+	<!-- compile classpath -->
+	<path id="compile.classpath">
+		<fileset dir="${log4j.lib}" includes="*.jar"/>
+		<fileset dir="${hibernate.lib}" includes="*.jar"/>
+		<fileset dir="${project.lib}" includes="*.jar"/>
+		<fileset dir="${web.lib}" includes="*.jar"/>
+	</path>
+
+	<!-- xDoclet classpath -->
+	<path id="xdoclet.classpath">
+		<fileset dir="${xdoclet.lib}" includes="*.jar"/>
+		<fileset dir="${hibernate.lib}" includes="*.jar"/>
+		<fileset dir="${database.lib}" includes="*.jar" />
+		<fileset dir="${jakarta.common.lib}" includes="*.jar"/>
+		<fileset dir="${log4j.lib}" includes="*.jar"/>
+
+	</path>
+
+	<!-- Schema export classpath -->
+	<path id="schema.export.classpath">
+		<fileset dir="${log4j.lib}" includes="*.jar" />
+		<fileset dir="${hibernate.lib}" includes="*.jar" />
+		<fileset dir="${jakarta.common.lib}" includes="*.jar" />
+		<fileset dir="${database.lib}" includes="*.jar" />
+		<fileset dir="${project.lib}" includes="*.jar" />
+		
+		<pathelement path="${main.out.dir}"/>
+	</path>
+
+
+
+	<!-- Generate mapping files for hibernate -->
+	<target name="Generate hbm"
+		description="Generates Hibernate class descriptor files."
+		>
+
+		<!-- Define the hibernatedoclet task -->
+		<taskdef name="hibernatedoclet" classname="xdoclet.modules.hibernate.HibernateDocletTask">
+			<classpath refid="xdoclet.classpath"/>
+		</taskdef>
+
+		<!-- Execute the hibernatedoclet task -->
+		<hibernatedoclet
+			destdir="${main.out.dir}"
+			excludedtags="@version,@author,@todo, lazy"
+			force="true"
+			verbose="true">
+
+			<fileset dir="${main.src.dir}">
+				<include name="**/*.java"/>
+			</fileset>
+
+			<hibernate version="3.0"/>
+
+			<hibernatecfg
+				driver="${hibernate.connection.driver_class}"
+				jdbcUrl="${hibernate.connection.url}"
+				userName="${hibernate.connection.username}"
+				password="${hibernate.connection.password}"
+				dialect="${hibernate.dialect}"
+				showSql="true"
+				useOuterJoin="false"
+				destDir="${main.out.dir}">
+			
+				<otherProperty name="c3p0.max_size" value="20" />
+			    <otherProperty name="c3p0.min_size" value="2" />
+			    <otherProperty name="c3p0.max_statements" value="100" />
+			    <otherProperty name="c3p0.timeout" value="3600" />
+			</hibernatecfg>				
+		</hibernatedoclet>
+
+	</target>
+
+
+	<!-- Export SQL schema using mapping files and hibernate configuration -->
+<!--	<target name="Export SQL Schema" depends="Generate Mappings">
+	<target name="Export SQL Schema" depends="Generate Mappings">-->
+<!--
+		<taskdef name="schemaexport" classname="org.hibernate.tool.hbm2ddl.SchemaExportTask">
+			<classpath refid="schema.export.classpath" />
+		</taskdef>
+
+		<schemaexport
+			properties="${main.src.dir}/hibernate.properties"
+			quiet="false"
+			text="false"
+			drop="false"
+			delimiter=";"
+			output="${main.out.dir}/installation.sql">
+			<fileset dir="${main.out.dir}" includes="**/*.hbm.xml"/>
+		</schemaexport>
+
+	</target>
+-->
+
+	<!-- Check timestamp on files -->
+	<target name="prepare">
+		<tstamp/>
+	</target>
+
+
+	<!-- Copy any resource or configuration files -->
+	<target name="resources">
+		<copy todir="${main.out.dir}" includeEmptyDirs="no">
+			<fileset dir="${main.src.dir}">
+				<patternset>
+					<include name="**/*.conf"/>
+					<include name="**/*.properties"/>
+					<include name="**/*.xml"/>
+					<exclude name="hibernate.properties"/>
+				</patternset>
+			</fileset>
+		</copy>
+	</target>
+
+
+	<!-- Normal build of application -->
+	<target name="compile" depends="prepare, resources">
+		<javac srcdir="${main.src.dir}" destdir="${main.out.dir}" compiler="org.eclipse.jdt.core.JDTCompilerAdapter">
+			<classpath refid="compile.classpath"/>
+		</javac>
+	</target>
+
+	<!-- Build of junit tests -->
+	<target name="compileTest" depends="compile">
+		<javac srcdir="${test.src.dir}" destdir="${test.out.dir}" compiler="org.eclipse.jdt.core.JDTCompilerAdapter">
+			<classpath refid="compile.classpath"/>
+		</javac>
+	</target>
+
+	<!-- Remove classes directory for clean build -->
+	<target name="clean"
+		description="Prepare for clean build">
+		<delete file="${main.out.dir}/**/*.hbm.xml"/>
+		<!--mkdir dir="${main.out.dir}"/-->
+	</target>
+
+
+	<!-- Build entire project -->
+	<target name="build project" depends="clean, prepare, compile, Generate hbm"/>
+
+	
+
+</project>

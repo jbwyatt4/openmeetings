@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping
+>
+    <class
+        name="org.xmlcrm.app.hibernate.beans.termine.Termine"
+        table="termine"
+    >
+
+        <id
+            name="termin_id"
+            column="termin_id"
+            type="int"
+        >
+            <generator class="increment">
+              <!--  
+                  To add non XDoclet generator parameters, create a file named 
+                  hibernate-generator-params-Termine.xml 
+                  containing the additional parameters and place it in your merge dir. 
+              --> 
+            </generator>
+        </id>
+
+        <property
+            name="comment"
+            type="string"
+            update="true"
+            insert="true"
+            column="comment"
+        />
+
+        <property
+            name="description"
+            type="string"
+            update="true"
+            insert="true"
+            column="description"
+        />
+
+        <property
+            name="endtermin"
+            type="java.util.Date"
+            update="true"
+            insert="true"
+            column="endtermin"
+        />
+
+        <property
+            name="open"
+            type="int"
+            update="true"
+            insert="true"
+            column="open"
+        />
+
+        <property
+            name="owner_id"
+            type="long"
+            update="true"
+            insert="true"
+            column="owner_id"
+        />
+
+        <property
+            name="place"
+            type="string"
+            update="true"
+            insert="true"
+            column="place"
+        />
+
+        <property
+            name="starttermin"
+            type="java.util.Date"
+            update="true"
+            insert="true"
+            column="starttermin"
+        />
+
+        <property
+            name="starttime"
+            type="java.util.Date"
+            update="true"
+            insert="true"
+            column="starttime"
+        />
+
+        <property
+            name="updatetime"
+            type="java.util.Date"
+            update="true"
+            insert="true"
+            column="updatetime"
+        />
+
+        <property
+            name="deleted"
+            type="boolean"
+            update="true"
+            insert="true"
+            column="deleted"
+        />
+
+        <property
+            name="status_id"
+            type="long"
+            update="true"
+            insert="true"
+            column="status_id"
+        />
+
+        <!--
+            To add non XDoclet property mappings, create a file named
+                hibernate-properties-Termine.xml
+            containing the additional properties and place it in your merge dir.
+        -->
+
+    </class>
+
+</hibernate-mapping>

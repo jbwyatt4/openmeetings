@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping
+>
+    <class
+        name="org.xmlcrm.app.hibernate.beans.user.Users"
+        table="users"
+    >
+
+        <id
+            name="user_id"
+            column="user_id"
+            type="java.lang.Long"
+        >
+            <generator class="increment">
+              <!--  
+                  To add non XDoclet generator parameters, create a file named 
+                  hibernate-generator-params-Users.xml 
+                  containing the additional parameters and place it in your merge dir. 
+              --> 
+            </generator>
+        </id>
+
+        <property
+            name="adresses_id"
+            type="long"
+            update="true"
+            insert="true"
+            column="adresses_id"
+        />
+
+        <property
+            name="age"
+            type="java.util.Date"
+            update="true"
+            insert="true"
+            column="age"
+        />
+
+        <property
+            name="availible"
+            type="int"
+            update="true"
+            insert="true"
+            column="availible"
+        />
+
+        <property
+            name="firstname"
+            type="string"
+            update="true"
+            insert="true"
+            column="firstname"
+        />
+
+        <property
+            name="lastlogin"
+            type="java.util.Date"
+            update="true"
+            insert="true"
+            column="lastlogin"
+        />
+
+        <property
+            name="lastname"
+            type="string"
+            update="true"
+            insert="true"
+            column="lastname"
+        />
+
+        <property
+            name="lasttrans"
+            type="long"
+            update="true"
+            insert="true"
+            column="lasttrans"
+        />
+
+        <property
+            name="level_id"
+            type="long"
+            update="true"
+            insert="true"
+            column="level_id"
+        />
+
+        <property
+            name="login"
+            type="string"
+            update="true"
+            insert="true"
+            column="login"
+        />
+
+        <property
+            name="password"
+            type="string"
+            update="true"
+            insert="true"
+            column="password"
+        />
+
+        <property
+            name="regdate"
+            type="java.util.Date"
+            update="true"
+            insert="true"
+            column="regdate"
+        />
+
+        <property
+            name="status"
+            type="int"
+            update="true"
+            insert="true"
+            column="status"
+        />
+
+        <property
+            name="title_id"
+            type="int"
+            update="true"
+            insert="true"
+            column="title_id"
+        />
+
+        <property
+            name="starttime"
+            type="java.util.Date"
+            update="true"
+            insert="true"
+            column="starttime"
+        />
+
+        <property
+            name="updatetime"
+            type="java.util.Date"
+            update="true"
+            insert="true"
+            column="updatetime"
+        />
+
+        <property
+            name="deleted"
+            type="boolean"
+            update="true"
+            insert="true"
+            column="deleted"
+        />
+
+        <property
+            name="pictureuri"
+            type="string"
+            update="true"
+            insert="true"
+            column="pictureuri"
+        />
+
+        <property
+            name="language_id"
+            type="long"
+            update="true"
+            insert="true"
+            column="language_id"
+        />
+
+        <!--
+            To add non XDoclet property mappings, create a file named
+                hibernate-properties-Users.xml
+            containing the additional properties and place it in your merge dir.
+        -->
+
+    </class>
+
+</hibernate-mapping>
