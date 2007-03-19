@@ -19,6 +19,6 @@ http://wagner-sebastian.com/downloads/domain.png
 
 http://wagner-sebastian.com/downloads/labels.png 
 
-== Termine == 
+== Calendar == 
 
 http://wagner-sebastian.com/downloads/termine.png
