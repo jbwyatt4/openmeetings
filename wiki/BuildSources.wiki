@@ -1,0 +1,14 @@
+#summary How To Build From Sources
+#labels Phase-Implementation,Featured
+
+= Introduction =
+
+LaszloClient:
+http://openmeetings.googlecode.com/svn/branches/dev/laszlo/client/
+
+Java Persistance layer:
+http://openmeetings.googlecode.com/svn/branches/dev/xmlcrm/java/
+
+Java Red5-App
+http://openmeetings.googlecode.com/svn/branches/dev/red5app/red5java/
+
