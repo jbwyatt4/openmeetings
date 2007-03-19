@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<library>
+    
+<class name="conference" extends="basecontentview">
+
+    <view x="264" width="658" y="42" height="521" bgcolor="$once{ canvas.basebgcolorizer }">
+		<view name="bg" x="1" y="1" bgcolor="white"
+			width="$once{ parent.width-2 }" height="$once{ parent.height-2 }" />
+	</view>
+	
+	<view name="mainbackroundmenu" x="262" y="0" height="28" 
+		resource="mainbackroundmenu_rsc" width="652" />
+
+    <!-- 
+        Videooutput-View
+        See yourself - In this View a User will see itself
+        The quality of this picture is always greater then in the other Boxes
+        And its width and height is bigger
+     -->
+   
+	<!-- 
+		Hold 4 VideoViews 
+		Call _videocontainer.getNewVideoObject()
+		to get a free one
+	 -->
+	<view width="262" height="277" bgcolor="$once{ canvas.basebgcolorizer }">
+		<view name="bg" x="1" y="1" bgcolor="white"
+			width="$once{ parent.width-2 }" height="$once{ parent.height-2 }" />
+	</view>
+	<videocontainer name="_videocontainer" x="2" y="2" />
+
+
+
+  	<moderationpanel x="2" y="256" />
+
+  <!--
+  
+  	This is the tab with all the different contents
+  	Chat/Online Users/Files/Library/WWW
+   -->
+  <menubardokeos y="279" name="_menubardokeos" />
+  
+    <!-- 
+        shared Whiteboard
+     -->
+    
+   <whiteboard name="_whiteboard" x="268" y="46">
+        <handler name="onsharedMessage" args="obj">
+                
+            Debug.write("send: ",obj);
+            canvas.objWhiteboard = obj;
+            rtc.sendVars.call();
+            
+        </handler>   
+	
+		<handler name="isloadingImage" args="val" >
+			Debug.write("isloadingImage: ",val);
+		</handler>
+		<handler name="isloadedImage" args="val" >        
+			Debug.write("isloadedImage: ",val);
+		</handler>
+   </whiteboard>
+   
+	<view name="currentmainobjectisMod" x="266" y="46"
+		width="654"
+		height="504"
+		visible="true">
+		<handler name="onclick">
+			new errorpopup(canvas,{error:canvas.getLabelName(97)});
+		</handler>
+	</view>
+
+</class>
+
+</library>

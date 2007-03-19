@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<library>
+
+<resource name="reg_back" src="buttons/reg_bg.png" />
+<resource name="reg_back_s" src="buttons/reg_bg_s.png" />
+<resource name="reg_back_opt" src="buttons/reg_bg_opt.png" />
+
+<resource name="loudnessBig" src="loudnessBig.swf" />
+
+<resource name="filesave_rsc" src="filesave.png" />
+
+<resource name="kuser_rsc" src="kuser.png" />
+<resource name="ksirc_rsc" src="ksirc.png" />
+<resource name="xoffice_rsc" src="x-office-presentation.png" />
+<resource name="xoffice22_rsc" src="x-office-presentation22.png" />
+<resource name="refresh_file_rsc" src="kaboodleloop.png" />
+
+<resource name="close_btn_rsc">
+    <frame src="buttons/close_btn.swf" />
+    <frame src="buttons/close_btn_over.swf" />
+    <frame src="buttons/close_btn_dn.swf" />
+</resource>
+
+<resource name="record_btn_rsc">
+    <frame src="buttons/record_up.swf" />
+    <frame src="buttons/record_over.swf" />
+    <frame src="buttons/record_dn.swf" />
+</resource>
+
+</library>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<library>
+    
+<class name="conferencerooms" extends="basecontentview">
+
+    <text>ConferenceRooms</text>
+
+</class>
+
+</library>
