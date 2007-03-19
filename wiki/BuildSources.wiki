@@ -1,5 +1,5 @@
 #summary How To Build From Sources
-#labels Phase-Implementation,Featured
+#labels Featured,Phase-Implementation
 
 = Source Locations Developer Version =
 
