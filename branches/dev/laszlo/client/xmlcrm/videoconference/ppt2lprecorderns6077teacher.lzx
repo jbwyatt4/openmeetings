@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<canvas debug="false" width="322" height="48" bgcolor="0xFEFEFE">
+
+ 
+<splash>
+	<view center="true" ratio="1" resource="splashswf.swf"/>
+</splash>
+
+<!-- include some things from the incubator -->
+<include href="incubator/lzcombobox.lzx" />
+<include href="incubator/shadowbox.lzx" />  
+
+<!-- Include some global availible functions -->
+<include href="dokeos/global/functions.lzx" />
+<include href="oslmon/" />
+
+<resource name="loudness" src="resources/loudness.swf" />
+  
+<handler name="oninit">
+
+	this.splash.bringToFront();
+	this.doit.doStart();
+	Debug.write("document_id: ",document_id);
+	var tz = Boolean(studentview);
+	Debug.write("studentview: ",tz);
+	canvas.setAttribute('isstudent',tz);
+	Debug.write("dbName: ",dbName);
+	Debug.write("user_id: ",user_id);
+  	rtc.setAttribute('dbName',dbName);
+	rtc.setAttribute('document_id',document_id);	
+	rtc.setAttribute('user_id',user_id);
+
+	canvas.setAttribute('isstudent',false);
+  	rtc.setAttribute('dbName',"DB_01");
+	rtc.setAttribute('document_id',"1");	
+	rtc.setAttribute('user_id',"1");
+
+	rtc.connect();
+</handler>
+
+<!-- URL/IP to use for the Server 192.168.178.28 192.168.2.101 ns6077.ovh.net-->
+<attribute name="rmpthost" value="ns6077.ovh.net" type="string" />
+
+<attribute name="isstudent" value="false" type="boolean" />
+
+<!-- Port to use for the Server -->
+<attribute name="rmptport" value="5080" type="string" />
+
+<!-- Include core library -->
+<include href="oslmon/" />
+
+<method name="getLabelName" args="id">
+	
+	return getLabelNameGlob(id);
+</method>
+
+<resource name="play_btn_rsc">
+	<frame src="resources/playn_up.png" />
+	<frame src="resources/playn_over.png" />
+	<frame src="resources/playn_down.png" />
+</resource>
+
+<resource name="noplay_btn_rsc">
+	<frame src="resources/no_playn_over.png" />
+</resource>
+
+<resource name="stop_btn_rsc">
+	<frame src="resources/stopn_up.png" />
+	<frame src="resources/stopn_over.png" />
+	<frame src="resources/stopn_down.png" />
+</resource>
+
+<resource name="recorder_btn_rsc">
+	<frame src="resources/recordn_up.png" />
+	<frame src="resources/recordn_over.png" />
+	<frame src="resources/recordn_down.png" />
+	<frame src="resources/no_recordn_up.png" />
+</resource>
+
+<resource name="norecorder_btn_rsc">
+	<frame src="resources/no_recordn_up.png" />
+</resource>
+
+<resource name="close_btn_rsc" >
+	<frame src="dokeos/resources/icons/explorbar_close_no.png" />
+	<frame src="dokeos/resources/icons/explorbar_close_mo.png" />
+	<frame src="dokeos/resources/icons/explorbar_close_dn.png" />
+</resource>
+
+  
+  <class name="editrecordstream" extends="view" x="2" bgcolor="0xD9EBFF" width="322" height="48">
+    <iconview resource="close_btn_rsc" x="300" y="2">
+        <handler name="onclick">
+            this.parent.destroy();
+        </handler>
+    </iconview>
+    
+	<!-- Show the Microphone Input devices -->
+	<text fontsize="12" x="2" y="1" text="Microphone:" />
+	<combobox fontsize="12" id="availibleMics" x="100" y="0" width="180" editable="false">
+	    <handler name="oninit">
+	        //Get all availible Mic's
+	        Debug.write("microphoneRef: ",microphoneRef.index);
+	        var tw = Microphone.names;
+	        var t = "";
+	        for (eg in tw){
+	            t=eg;
+	            this.addItem(tw[eg],eg);
+	        }
+	        availibleMics.selectItem(microphoneRef.index);
+	    </handler>
+	</combobox>
+    <button text="start" height="20" x="100" y="26" width="180">
+        <handler name="onclick">
+        	microphoneRef.setIndex(availibleMics.getValue());
+        	cameraRef.setIndex(availibleCams.getValue());
+			Debug.write("name: ",this.parent._streamname.getText());
+
+				canvas.showrecord(true);
+				//The onResult-Handler will be called by the rtmpconnection
+				Debug.write("val: ",value);
+	
+	            //v._stream = false;
+				//
+	            v.url=value;
+	            //v._createStream();
+	
+	            Debug.write("record:",rtc.dbName+"_"+value,v.url,v._nc);
+	  		    //v.record(v.url);
+	  		    
+	  		    canvas._ns = new NetStream(rtc._nc);
+	  		
+	  		    canvas._ns.publish(rtc.dbName+"_"+rtc.document_id,"record");
+	  		    canvas._ns.attachAudio(microphoneRef._mic);  
+	  		    //canvas._ns.attachVideo(cameraRef._cam);  
+	  		    //Attach Devices to Stream
+	  		    //Debug.write(cameraRef._cam);
+	  		    //Debug.write(microphoneRef._mic);
+	  		    //
+	  		    // 
+	  		    microphoneRef.setAttribute('mute',false);        
+	  		    //cameraRef.showCamera(true);   
+	  		    
+            this.parent.destroy();
+        </handler>
+    </button>
+    <animator attribute="y" to="0" duration="1000" start="true"/>
+  </class>
+
+
+<!-- ##############
+	some Class definitions which are used only in this app
+
+ -->
+  
+<!-- #####################
+	remoteing stuff
+ -->
+<attribute name="_nc" value="null" />
+    <rtmpconnection id="rtc" src="${ 'rtmp://'+canvas.rmpthost+'/dokeosrecorder' }" debug="true" autoconnect="false">	  	
+	  	<!-- 
+	  		Some remotecalls
+	  	 -->
+	  	 <handler name="onconnect">
+	  	    Debug.write("dbName: ",this.dbName);
+	  	    Debug.write("document_id: ",this.document_id);	  	 
+			Debug.write("user_id: ",this.user_id);
+			
+
+	  	 </handler>
+	  	 <attribute name="dbName" value="" type="string" />
+	  	 <attribute name="document_id" value="0" type="number" />
+	  	 <attribute name="user_id" value="0" type="number" />
+	  	 	
+
+
+	    <!-- deletestream(String dbname,int streamid) -->  
+	  	<netremotecall name="deletestream" funcname="dokeosrecorderService.deletestream">
+	  		<netparam name="dbname"><method name="getValue"> return this.parent.parent.dbName;</method></netparam>
+	  		<netparam name="streamid" />
+			<method name="onResult" args="value">
+				//The onResult-Handler will be called be the rtmpconnection
+				Debug.write("val: ",value);
+				//parent.getDataRecords.call();
+			</method>	
+	  	</netremotecall>	    
+    </rtmpconnection>
+ 
+ 	<!-- status light -->
+ 	<rtmpstatus x="300" y="2" />   
+ 	
+<!-- ######################
+	Output Area
+ -->
+
+  <view bgcolor="green" width="100" height="18" x="2" y="2" >
+    <videoview id="vid" x="4" y="4"
+        width="${parent.width-8}" height="${parent.height-18}">   
+        <stream id="v" debug="true" type="rtmp" >
+            <handler name="onurl">
+                Debug.write("stream onurl");
+                this.parent.play();
+            </handler>
+        </stream>
+        <microphone id="microphoneRef" mute="true">
+          	<handler name="onlevel">
+          		this.parent.parent._loadness.setLevel(this.level);
+          	</handler>        
+        </microphone>
+    </videoview> 
+    <view bgcolor="white" x="4" width="${parent.width-8}"
+        y="${parent.height-14}" height="10">
+        <view id="progress" bgcolor="green" x="2" y="2" height="6" 
+            width="${v.playtime / v.totaltime * parent.width-4}"/>
+
+    </view>
+	<view name="_loadness" x="2" width="126" height="18" y="20" bgcolor="0xFFFFFF">
+		<method name="setLevel" args="ll">
+			this._loudness.setAttribute('frame',Math.round(ll/4));
+		</method>
+		<view x="2" y="2" name="_loudness" resource="loudness">
+			<handler name="oninit">
+				Debug.write("this: ",this);
+				this.setAttribute('frame',1);
+			</handler>
+		</view>
+	</view>
+  </view> 
+  
+  <attribute name="isshowrecord" value="false" type="boolean" />
+  <method name="showrecord" args="bool">
+  	if(bool){
+  		this.record_btn.blinkrecord.doStart();
+  	} else {
+  		this.record_btn.blinkrecord.stop();
+  		this.record_btn.setAttribute('opacity',1);
+  	}
+  	this.setAttribute('isshowrecord',bool);
+  </method>
+    
+<!-- ###################
+	Buttons to play/record/stop
+ -->
+<iconview x="130" y="4" name="play_tn" resource="play_btn_rsc" opacity="1">
+	<handler name="onclick">
+  		Debug.write(v);
+  		v._stream=null;
+  		v.setUrl(rtc.dbName+"_"+rtc.document_id);
+  		v.play();
+  		Debug.write(v._nc);
+  		Debug.write(v._stream);		
+
+	</handler>
+	<labeltooltip labelid="6" />
+</iconview>
+
+<iconview x="160" y="4" resource="stop_btn_rsc">
+	<handler name="onclick">
+		if(canvas.isshowrecord){
+			Debug.write("handle stop record set Mute true");
+	        microphoneRef.setAttribute('mute',true);
+			microphoneRef.setMute(true); 
+			microphoneRef._leveldel.unregisterAll();
+			canvas._nc.close();
+	        rtc._nc.close();
+	        rtc.connect();
+	        //rtc.getDataRecords.call();
+	        canvas.showrecord(false);
+        } else {
+        	Debug.write("handle stop stream");
+        	v.pause();
+        }
+	</handler>
+	<labeltooltip labelid="7" />
+</iconview>
+
+<iconview x="190" y="4" name="record_btn" resource="recorder_btn_rsc" visible="${ !canvas.isstudent }">
+	<handler name="onclick">
+		if (!this.parent.isshowrecord){
+				new editrecordstream(canvas,{y:-100});
+		}
+	</handler>
+    <animatorgroup name="blinkrecord" start="false" process="sequential" repeat="Infinity">
+      <animator attribute="opacity" to="0" duration="500"/>
+      <animator attribute="opacity" to="1" duration="500"/>
+    </animatorgroup>
+    <labeltooltip labelid="8" />	
+</iconview>
+
+<view x="190" y="4" name="record_btn2" resource="norecorder_btn_rsc" 
+	visible="${ canvas.isstudent }" clickable="true" />
+	
+</canvas>
