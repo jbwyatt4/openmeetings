@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<library>
+
+<class name="basedrawsave" extends="basedraw" clickable="true">
+
+	<attribute name="currentlayer" value="null" />
+	<attribute name="layers" value="null" />
+	
+	<attribute name="redolayers" value="null" />
+
+  	<attribute name="mx" type="number" value="0"/>
+  	<attribute name="my" type="number" value="0"/>
+  	<attribute name="prevx" type="number" value="0"/>
+  	<attribute name="prevy" type="number" value="0"/>
+  	
+  	<attribute name="currentlayerstroke" value="0x000000" />
+
+	<attribute name="mousetracker_del" value="$once{ new LzDelegate(this, 'trackmouse' )}" />
+	
+	<handler name="oninit">
+		this.layers = new Array();
+		this.redolayers = new Array();
+	</handler>
+	
+	<method name="drawTextField" args="textforfield,width,height" >
+		this.currentlayer = this;
+		var mc = this.currentlayer.getMCRef();
+		Debug.write(mc);
+		
+		mc.createTextField("test_txt", 10, 10, 10, 300, 100);
+		mc.embedFonts = true;
+		mc.test_txt.text = "Neue Textfelder mit der Methode MovieClip.createTextField erstellen.";
+			
+	</method>
+	
+	<method name="undo">
+		var lastelement = this.layers.pop();
+		Debug.write("lastelement: ",lastelement);
+		lastelement.destroy();
+	</method>
+             
+	<method event="onmousedown" >
+		this.startPaint();
+		mousetracker_del.register(LzIdle,'onidle');
+	</method>
+
+	<method event="onmouseup" >
+		this.endPaint();
+		mousetracker_del.unregisterAll();
+	</method>  
+	
+  	<method name="drawline" args="x1,y1,x2,y2">
+	    <![CDATA[
+	    currentlayer.beginPath();
+	    currentlayer.moveTo(x1,y1);
+	    currentlayer.lineTo(x2,y2);
+	    currentlayer.stroke();
+	    ]]>
+	</method>	 
+	
+  	<method name="startPaint">
+		Debug.write("startPaint");
+    	this.currentlayer = this;
+    	
+    	//Set previous to null
+    	this.prevx = null;
+    	this.prevy = null;  
+    	
+    	//Add Layer to global Layer  	
+	    this.layers.push(this.currentlayer);
+	    
+	    currentlayer.strokeStyle = this.currentlayerstroke;
+	    currentlayer.lineWidth = 3;
+	    currentlayer.fillstyle = 0x000000;
+	    //beginFill( the_colorpicker.selectedColor );
+  	</method>
+
+  	<method name="endPaint">
+  		Debug.write("endPaint");
+  	</method>        
+
+  	<method name="trackmouse" >
+    	<![CDATA[
+    	Debug.write("trackmouse");
+    	this.mx = currentlayer.getMouse('x');
+    	this.my = currentlayer.getMouse('y');   
+    	Debug.write("this.mx,this.my: ",this.mx,this.my); 
+    	
+	    if (mx != prevx || my != prevy) {
+	        if (prevx == null) {
+	            prevx = mx;
+	        }
+	        if (prevy == null) {
+	            prevy = my;
+	        }
+            var mmx = this.mx;
+            var mmy = this.my;
+            var px = this.prevx;
+            var py = this.prevy;
+            
+            Debug.write("drawline: ",px, py, mmx, mmy);
+            this.drawline(px, py, mmx, mmy);
+            
+            this.prevx  = this.mx;
+            this.prevy = this.my;            
+        }   		
+    	]]>
+    </method>
+
+    
+</class>
+
+</library>

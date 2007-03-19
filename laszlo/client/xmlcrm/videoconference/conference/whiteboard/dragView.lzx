@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<library>
+
+<resource name="_dragicon_rsc" src="resources/dragicon.png" />
+
+<class name="dragView" extends="view" resource="_dragicon_rsc" >
+    <dragstate name="dragger" />
+	<attribute name="startX" type="number" value="0" />
+	<attribute name="startY" type="number" value="0" />
+	
+	<attribute name="filesid" type="number" value="0" />
+	<attribute name="filename" type="number" value="0" />
+	
+	<attribute name="refObj" value="null" />
+	
+    <method event="oninit">
+        this.setAttribute('x',canvas.getMouse('x')-this.width/2 );
+        this.setAttribute('y',canvas.getMouse('y')-this.width/2 );
+        this.setAttribute('startX',canvas.getMouse('x') );
+        this.setAttribute('startY',canvas.getMouse('y') );
+
+        this.dragger.apply();
+    </method>   
+    <handler name="onmouseup" reference="LzGlobalMouse" args="who">
+    	<![CDATA[
+	        LzModeManager.globalUnlockMouseEvents();
+	        var x = _drawarea.getMouse('x');
+	        var y = _drawarea.getMouse('y');
+	        if (x>=0 && y>=0 && x<=_drawarea.width && y<=_drawarea.height){
+		        var downloadurl = 'http://localhost:8080/lps-latest/DownloadHandler?fileName='+this.filename+'&moduleName='+canvas.uploadmoduleimg+'&parentPath='+canvas.uploadmoduleimgfolder+'/'+'&roomName='+canvas.currentcourse;
+		        Debug.write(downloadurl);        
+		        Debug.write("x,y: ",x,y);
+		        _drawarea.parent.clearAreaAndAddImage(downloadurl,x,y);
+		        
+		        this.dragger.remove();     
+		        this.doStop();
+	        } else {
+	        	this.dragger.remove();   
+	        	this.goback.doStart();
+	        }
+        ]]>
+    </handler> 
+
+    <method name="doStop">
+       // this.refObj.setAttribute('opacity',1);
+       	Debug.write("doStop");
+        this.destroy();
+    </method>
+    <animatorgroup name="goback" process="simultaneous" relative="false" duration="1000" 
+        start="false" onstop="this.parent.doStop()" onstart="Debug.write('isstarted')">
+      <animator name="xval" attribute="x" to="${ parent.parent.startX }" />
+      <animator name="yval" attribute="y" to="${ parent.parent.startY }" motion="easeout" />
+    </animatorgroup>  
+</class>
+
+</library>
