@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<library>
+
+	<include href="videoconnection.lzx" />
+	<include href="whiteboard/whiteboard.lzx" /> 
+    <include href="remote/" />
+    <include href="tabbar/" />
+    <include href="tabcontent/" />
+    <include href="popups/" />
+    <include href="moderation/" />
+    <include href="global/functions.lzx" />
+    
+    <include href="remote/remoteObject.lzx" />
+    
+</library>
