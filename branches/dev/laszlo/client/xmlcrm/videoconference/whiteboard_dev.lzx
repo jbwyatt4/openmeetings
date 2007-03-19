@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<canvas debug="true" width="1000" height="640">
+  
+<resource name="reg_back" src="resources/buttons/reg_bg.png" />
+<resource name="reg_back_s" src="resources/buttons/reg_bg_s.png" />
+<resource name="reg_back_opt" src="resources/buttons/reg_bg_opt.png" />
+
+<resource name="close_btn_rsc">
+    <frame src="resources/buttons/close_btn.swf" />
+    <frame src="resources/buttons/close_btn_over.swf" />
+    <frame src="resources/buttons/close_btn_dn.swf" />
+</resource>
+
+    
+<include href="incubator/lzcombobox.lzx" /> 
+
+<include href="oslmon/" /> 
+
+<include href="whiteboard/whiteboard.lzx" />
+
+
+<whiteboard x="200" y="20" >
+    <handler name="onsharedMessage" args="objUpdate">
+        Debug.write("Object to send for shared Modus: ",objUpdate);
+    </handler>
+</whiteboard>
+
+</canvas>
