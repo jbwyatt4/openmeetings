@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping
+>
+    <class
+        name="org.xmlcrm.app.hibernate.beans.basic.Navimain"
+        table="navimain"
+    >
+
+        <id
+            name="main_id"
+            column="main_id"
+            type="java.lang.Long"
+        >
+            <generator class="increment">
+              <!--  
+                  To add non XDoclet generator parameters, create a file named 
+                  hibernate-generator-params-Navimain.xml 
+                  containing the additional parameters and place it in your merge dir. 
+              --> 
+            </generator>
+        </id>
+
+        <property
+            name="action"
+            type="string"
+            update="true"
+            insert="true"
+            column="action"
+        />
+
+        <property
+            name="level_id"
+            type="long"
+            update="true"
+            insert="true"
+            column="level_id"
+        />
+
+        <property
+            name="global_id"
+            type="long"
+            update="true"
+            insert="true"
+            column="global_id"
+        />
+
+        <property
+            name="comment"
+            type="string"
+            update="true"
+            insert="true"
+            column="comment"
+        />
+
+        <property
+            name="icon"
+            type="string"
+            update="true"
+            insert="true"
+            column="icon"
+        />
+
+        <property
+            name="isleaf"
+            type="boolean"
+            update="true"
+            insert="true"
+            column="isleaf"
+        />
+
+        <property
+            name="isopen"
+            type="boolean"
+            update="true"
+            insert="true"
+            column="isopen"
+        />
+
+        <property
+            name="starttime"
+            type="java.util.Date"
+            update="true"
+            insert="true"
+            column="starttime"
+        />
+
+        <property
+            name="updatetime"
+            type="java.util.Date"
+            update="true"
+            insert="true"
+            column="updatetime"
+        />
+
+        <property
+            name="deleted"
+            type="boolean"
+            update="true"
+            insert="true"
+            column="deleted"
+        />
+
+        <set
+            name="subnavi"
+            table="navisub"
+            lazy="false"
+            inverse="true"
+            cascade="all"
+            sort="unsorted"
+            order-by="naviorder"
+        >
+
+            <key
+                column="main_id"
+            >
+            </key>
+
+            <one-to-many
+                  class="org.xmlcrm.app.hibernate.beans.basic.Navisub"
+            />
+
+        </set>
+
+        <property
+            name="name"
+            type="string"
+            update="true"
+            insert="true"
+            column="name"
+        />
+
+        <property
+            name="naviorder"
+            type="int"
+            update="true"
+            insert="true"
+            column="naviorder"
+        />
+
+        <property
+            name="fieldvalues_id"
+            type="long"
+            update="true"
+            insert="true"
+            column="fieldvalues_id"
+        />
+
+        <!--
+            To add non XDoclet property mappings, create a file named
+                hibernate-properties-Navimain.xml
+            containing the additional properties and place it in your merge dir.
+        -->
+
+    </class>
+
+</hibernate-mapping>

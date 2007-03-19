@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping
+>
+    <class
+        name="org.xmlcrm.app.hibernate.beans.termine.Terminegroups"
+        table="terminegroups"
+    >
+
+        <id
+            name="terminegroup_id"
+            column="terminegroup_id"
+            type="java.lang.Long"
+        >
+            <generator class="increment">
+              <!--  
+                  To add non XDoclet generator parameters, create a file named 
+                  hibernate-generator-params-Terminegroups.xml 
+                  containing the additional parameters and place it in your merge dir. 
+              --> 
+            </generator>
+        </id>
+
+        <property
+            name="comment"
+            type="string"
+            update="true"
+            insert="true"
+            column="comment"
+        />
+
+        <property
+            name="endtermin"
+            type="java.util.Date"
+            update="true"
+            insert="true"
+            column="endtermin"
+        />
+
+        <property
+            name="invitor_id"
+            type="long"
+            update="true"
+            insert="true"
+            column="invitor_id"
+        />
+
+        <property
+            name="message"
+            type="string"
+            update="true"
+            insert="true"
+            column="message"
+        />
+
+        <property
+            name="starttermin"
+            type="java.util.Date"
+            update="true"
+            insert="true"
+            column="starttermin"
+        />
+
+        <property
+            name="status_id"
+            type="long"
+            update="true"
+            insert="true"
+            column="status_id"
+        />
+
+        <property
+            name="termin_id"
+            type="long"
+            update="true"
+            insert="true"
+            column="termin_id"
+        />
+
+        <property
+            name="uid"
+            type="long"
+            update="true"
+            insert="true"
+            column="uid"
+        />
+
+        <property
+            name="starttime"
+            type="java.util.Date"
+            update="true"
+            insert="true"
+            column="starttime"
+        />
+
+        <property
+            name="updatetime"
+            type="java.util.Date"
+            update="true"
+            insert="true"
+            column="updatetime"
+        />
+
+        <property
+            name="deleted"
+            type="boolean"
+            update="true"
+            insert="true"
+            column="deleted"
+        />
+
+        <!--
+            To add non XDoclet property mappings, create a file named
+                hibernate-properties-Terminegroups.xml
+            containing the additional properties and place it in your merge dir.
+        -->
+
+    </class>
+
+</hibernate-mapping>
