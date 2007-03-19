@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<library>
+
+<resource name="messagebox_info_rsc" src="resources/messagebox_info.png" />
+
+<!-- ###################
+	Class uploadtab
+ -->
+<class name="uploadtab" extends="basedokeoscharttab" >
+
+    <handler name="oninit">
+    	canvas.mainservices.getListOfFiles.invoke();
+    </handler>
+    
+	<view resource="refresh_file_rsc" y="4" x="$once{ parent.width -60 }" >
+		<handler name="onclick">
+			this.parent.oninit.sendEvent();
+		</handler>
+		<labeltooltip labelid="16" />
+	</view>
+	<view resource="folder_top_rsc" y="4" x="$once{ parent.width -42 }" >
+		<handler name="onclick">
+			canvas.setAttribute('uploadmoduleimgfolder','/');
+			this.parent.oninit.sendEvent();
+		</handler>
+		<labeltooltip labelid="17" />
+	</view>	
+	
+	<view resource="messagebox_info_rsc" y="4" x="$once{ parent.width -24 }" >
+		<handler name="onclick">
+			new editwhiteboarddefault(canvas.main_content._content);
+		</handler>
+		<labeltooltip labelid="66" />
+	</view>		
+
+	<view resource="folder_yellow_rsc" x="4" y="4" />
+	
+	<simplelabelbutton width="170" labelid="15" y="2" x="24" >
+	    <handler name="onclick">
+	        new uploadwindow(canvas.main_content._content,{x:60,y:60,uploadmodule:canvas.uploadmoduleimg,isOnlyImage:true});
+	    </handler>
+	</simplelabelbutton>
+
+	<imageslistdraw name="_imageslistdraw" x="4" y="24" height="$once{ parent.height-28 }" 
+		width="250" id="_imageslistdraw" uploadmodul="$once{ canvas.uploadmoduleimg }" />
+		
+<!--  -->
+	<view name="currentmainobjectisMod" visible="${ !canvas.ismoderator }"
+		x="4" y="24" height="$once{ parent.height-28 }" width="250" >
+		<handler name="onclick">
+			new errorpopup(canvas,{error:canvas.getLabelName(97)});
+		</handler>
+	</view>	
+	
+</class>
+
+</library>

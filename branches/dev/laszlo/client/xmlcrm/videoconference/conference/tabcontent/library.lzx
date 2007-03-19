@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<library>
+
+	<include href="basedokeoscharttab.lzx" />
+	<include href="charttab.lzx" />
+	<include href="participants.lzx" />
+	<include href="uploadtab.lzx" />
+	<include href="librarytab.lzx" />
+	<include href="wwwtab.lzx" />
+    
+    <include href="imageslistdraw.lzx" />
+    <include href="pptlist.lzx" />
+    
+</library>

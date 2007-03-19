@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<library>
+
+<!-- ###################
+	Class basedokeoscharttab
+ -->
+<class name="basedokeoscharttab" extends="view" width="262" height="264" bgcolor="$once{ canvas.basebgcolorizer }">
+	<view width="$once{ parent.width-2 }" height="$once{ parent.height-2 }" x="1" y="1" bgcolor="white" />
+</class>
+
+</library>
