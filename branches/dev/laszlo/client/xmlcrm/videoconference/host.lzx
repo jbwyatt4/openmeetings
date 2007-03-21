@@ -4,7 +4,7 @@
 <!-- URL/IP to use for the Server 192.168.178.28 
 inno02.fh-pforzheim.de macbook
 192.168.2.102 bxlug.homelinux.org 213.219.160.72-->
-<attribute name="rmpthostlocal" value="macbook" type="string" />
+<attribute name="rmpthostlocal" value="192.168.2.102" type="string" />
 
 <attribute name="iswebrtmp" value="false" type="boolean" />
 
