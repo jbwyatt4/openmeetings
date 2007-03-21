@@ -17,8 +17,10 @@
 	<attribute name="currentuserObject" value="null" />
 	
 	<handler name="oninit">
+		canvas._videocontainer=this;
 		this.allUsers = new Array();
 		this.streams = new Array();
+		this.initializeStreams();
 	</handler>
 	
 	<method name="addUser" args="objectR">
@@ -42,7 +44,7 @@
 		this.getClientListScope.call();
 	</method>
 	
-        <netremotecall name="getClientListScope" funcname="getClientListScope" remotecontext="$once{ canvas.thisrct }" >   
+        <netremotecall name="getClientListScope" funcname="getClientListScope" remotecontext="$once{ canvas.thishib }" >   
             <handler name="ondata" args="value">
             	<![CDATA[
                 //The onResult-Handler will be called be the rtmpconnection
@@ -56,12 +58,13 @@
                 Debug.write("canvas.currentuser: ",canvas.currentuser);
                 Debug.write("canvas.firstName: ",canvas.firstName);
                 Debug.write("canvas.lastName: ",canvas.lastName);
+                canvas.thishib.getCurrentModerator.call(); 
                 new editrecordstream(canvas,{y:-320});	
                 refObj=null;
                 ]]>
             </handler>   
         </netremotecall> 
-	  	<netremotecall name="setUsername" funcname="setUsername" remotecontext="$once{ canvas.thisrct }" >   
+	  	<netremotecall name="setUsername" funcname="setUsername" remotecontext="$once{ canvas.thishib }" >   
         	<netparam name="vars1"><method name="getValue">return canvas.user_id;</method></netparam>
             <netparam name="vars2"><method name="getValue">return canvas.currentuser;</method></netparam>
             <netparam name="vars3"><method name="getValue">return canvas.firstName;</method></netparam>
@@ -69,7 +72,7 @@
 			<handler name="ondata" args="value">
 				//The onResult-Handler will be called be the rtmpconnection
 				Debug.write("setUsername: ",value);
-				rtc.getCurrentModerator.call();  
+				 
  			 	new editrecordstream(canvas,{y:-320});						
 			</handler>	
 	  	</netremotecall>
@@ -153,7 +156,7 @@
 				this.subviews[i]._chatvideoinner.setResourceNumber(canvas.currentuserpos+1);
 				this.subviews[i]._chatvideoinner._videoview.setAttribute('visible',true);
 				Debug.write("canvas.currentusercolor : ",canvas.currentusercolor);
-				rtc.setUserObjectOne2Four.call();
+				canvas.thishib.setUserObjectOne2Four.call();
 				return this.subviews[i].getVideoReference();
 			}
 		}

@@ -137,14 +137,21 @@ macbook 192.168.2.102
 <attribute name="currentusercolor" value="0x000000" type="string" />
 <attribute name="currentuserpos" value="0" type="number" />
 	
-<attribute name="basebgcolorizer" value="0xFF6347" type="string" />	
-<attribute name="baseMousecolorizer" value="0xFFC3A7" type="string" />	
-<attribute name="baseMouseOvercolorizer" value="0xFFE3C7" type="string" />  
+<attribute name="basebgcolorizer" value="0xFC8558" type="string" />	
+<attribute name="baseMousecolorizer" value="0xFDC4A6" type="string" />	
+<attribute name="baseMouseOvercolorizer" value="0xFDC4A6" type="string" />  
 	
 <attribute name="currentModApply" value="null" />	
 
 <attribute name="sessionObject" value="null" />
 <attribute name="sessionId" value="" type="string" />
+
+
+<!-- 
+Holds a refernce to the current VideoCOntainer Object
+containing the VideoViews
+ -->
+<attribute name="_videocontainer" value="null" />
 			
 <handler name="oninit">
 	var cproto = LzCanvas.prototype;

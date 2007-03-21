@@ -181,11 +181,9 @@
 		<drawchoosemodir y="2" name="b7" modi="paint" resourceN="paint" isSelectablemodi="true" labelid="74" />
 		<drawchoosemodir y="2" name="b8" modi="line" resourceN="line_rsc" isSelectablemodi="true" labelid="75" />
 		<drawchoosemodir y="2" name="b9" modi="uline" resourceN="uline_rsc" isSelectablemodi="true" labelid="76" />		
-		<!-- 
         <drawchoosemodir y="2" name="b11" modi="rectangle" resourceN="rectangle" isSelectablemodi="true" labelid="77" />
         <drawchoosemodir y="2" name="b12" modi="ellipse" resourceN="ellipse" isSelectablemodi="true" labelid="78" />
 		<drawchoosemodir y="2" name="b10" modi="drawarrow" resourceN="drawarrowicon_rsc" isSelectablemodi="true" labelid="79" />				
-		 -->
 		<drawchooseseperator y="2" />
 
 	</view>
@@ -281,7 +279,7 @@
 			this.parent._drawarea.setAttribute('currentlayerletter',c);
 		</handler>
 	</drawcolorpicker>
-	<!-- 
+
     <basedrawchoose resourceN="italic" x="400" y="2" visible="${ ( ( this.parent._drawarea.drawmodus=='letter' ) ? true : false ) }" labelid="86" >
         <handler name="onclick">
             this.parent._drawarea.setAttribute('italic',!this.parent._drawarea.getAttribute('italic'));
@@ -292,7 +290,7 @@
             this.parent._drawarea.setAttribute('bold',!this.parent._drawarea.getAttribute('bold'));
         </handler>
     </basedrawchoose>    
-     -->
+
 	<drawchoosesizeradio x="460" y="6" visible="${ ( ( this.parent._drawarea.drawmodus=='letter' ) ? true : false ) }">
 		<handler name="onselect" args="val">
 			if (val.value=='1') this.parent._drawarea.setAttribute('currentlayersize',10);
@@ -301,7 +299,7 @@
 		</handler>
 	</drawchoosesizeradio>	
     
-    <!-- rectangle 
+
 	<drawcolorpicker  x="320" y="2" defaultno="1"
 		visible="${ ( ( this.parent._drawarea.drawmodus=='rectangle' ) ? true : false ) }">
 		<handler name="onnewcolor" args="c">
@@ -315,8 +313,7 @@
             if (val.value=='3') this.parent._drawarea.setAttribute('currentrectangleineWidth',10);
         </handler>
     </drawchoosesizeradio>  
-     -->
-    <!-- ellipse
+
 	<drawcolorpicker  x="320" y="2" defaultno="1"
 		visible="${ ( ( this.parent._drawarea.drawmodus=='ellipse' ) ? true : false ) }">
 		<handler name="onnewcolor" args="c">
@@ -330,7 +327,7 @@
             if (val.value=='3') this.parent._drawarea.setAttribute('currentellipselineWidth',10);
         </handler>
     </drawchoosesizeradio>  
-      -->
+
 	<text name="_loading" text="Loading ... " fontsize="12" visible="false" x="${ parent.width-this.width }" y="24" bgcolor="white" />
 
 </class>

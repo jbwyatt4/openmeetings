@@ -169,9 +169,9 @@ Debug.write("end init");
 	Debug.write("canvas.moderatorStreamID==canvas.streamid",canvas.moderatorStreamID==canvas.streamid);
 	if (canvas.moderatorStreamID==canvas.streamid){
 		this.setAttribute('ismoderator',true);
-		canvas.currentmainobjectisMod.setAttribute('visible',false);
+		canvas._videocontainer.parent.currentmainobjectisMod.setAttribute('visible',false);
 	} else {
-		canvas.currentmainobjectisMod.setAttribute('visible',true);
+		canvas._videocontainer.parent.currentmainobjectisMod.setAttribute('visible',true);
 		this.setAttribute('ismoderator',false);
 	}
 	]]>
