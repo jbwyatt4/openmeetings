@@ -12,11 +12,7 @@ public class AddDefaultfield extends TestCase {
 	
 	public void testaddDefaultField(){
 		
-		Fieldmanagment.getInstance().addField("conferencing");
-		Fieldmanagment.getInstance().addFieldValueByFieldAndLanguage(7, 1, "Konferenz");
-		Fieldmanagment.getInstance().addFieldValueByFieldAndLanguage(7, 2, "Confernce");
-		Fieldmanagment.getInstance().addFieldValueByFieldAndLanguage(7, 3, "Conférence");
-		Fieldmanagment.getInstance().addFieldValueByFieldAndLanguage(7, 4, "Conferencia");	
+
 		
 	}
 
