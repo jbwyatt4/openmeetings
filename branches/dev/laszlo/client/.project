@@ -5,7 +5,25 @@
 	<projects>
 	</projects>
 	<buildSpec>
+		<buildCommand>
+			<name>org.eclipse.laszlo.rct.builder.rctbuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
 	</buildSpec>
 	<natures>
+		<nature>org.eclipse.laszlo.rct.builder.RCTNature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>C__Program Files_OpenLaszlo Server 3.4.x_Server_lps-3.4.x_lps_components</name>
+			<type>2</type>
+			<location>C:/Program Files/OpenLaszlo Server 3.4.x/Server/lps-3.4.x/lps/components</location>
+		</link>
+		<link>
+			<name>g__wtp-all-in-one-sdk-1.0-win32_eclipse_plugins_org.eclipse.laszlo.rct.lzx.core_0.2.0_resources_lfc</name>
+			<type>2</type>
+			<location>g:/wtp-all-in-one-sdk-1.0-win32/eclipse/plugins/org.eclipse.laszlo.rct.lzx.core_0.2.0/resources/lfc</location>
+		</link>
+	</linkedResources>
 </projectDescription>
