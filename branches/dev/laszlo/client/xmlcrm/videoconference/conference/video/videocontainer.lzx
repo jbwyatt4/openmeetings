@@ -41,9 +41,27 @@
 		this.currentuserObject.push(canvas.language);
 		
 		
-		this.getClientListScope.call();
+		this.setUserroom.call();
 	</method>
-	
+
+	  	<netremotecall name="setUserroom" funcname="setUserroom" remotecontext="$once{ canvas.thishib }" >   
+        	<netparam name="vars1"><method name="getValue">return canvas.connectedroom;</method></netparam>	  	
+			<handler name="ondata" args="value">
+				//The onResult-Handler will be called be the rtmpconnection
+				Debug.write("setUserroom: ",value);
+				parent.logicalRoomEnter.call();						
+			</handler>	
+	  	</netremotecall>
+
+	  	<netremotecall name="logicalRoomEnter" funcname="logicalRoomEnter" remotecontext="$once{ canvas.thishib }" >   
+        	<handler name="ondata" args="value">
+				//The onResult-Handler will be called be the rtmpconnection
+				Debug.write("logicalRoomEnter: ",value);
+				 
+ 			 	parent.getClientListScope.call();					
+			</handler>	
+	  	</netremotecall>
+	  	
         <netremotecall name="getClientListScope" funcname="getClientListScope" remotecontext="$once{ canvas.thishib }" >   
             <handler name="ondata" args="value">
             	<![CDATA[
@@ -64,19 +82,7 @@
                 ]]>
             </handler>   
         </netremotecall> 
-	  	<netremotecall name="setUsername" funcname="setUsername" remotecontext="$once{ canvas.thishib }" >   
-        	<netparam name="vars1"><method name="getValue">return canvas.user_id;</method></netparam>
-            <netparam name="vars2"><method name="getValue">return canvas.currentuser;</method></netparam>
-            <netparam name="vars3"><method name="getValue">return canvas.firstName;</method></netparam>
-            <netparam name="vars4"><method name="getValue">return canvas.lastName;</method></netparam>	  	
-			<handler name="ondata" args="value">
-				//The onResult-Handler will be called be the rtmpconnection
-				Debug.write("setUsername: ",value);
-				 
- 			 	new editrecordstream(canvas,{y:-320});						
-			</handler>	
-	  	</netremotecall>
-	  	
+
 	<method name="addItem" args="connectedSince,isMod,streamid,username,userroom,formatedDate,position,color,object">
 		<![CDATA[
 		Debug.write("initializeStreams addItem: ",connectedSince,isMod,streamid,username,userroom,formatedDate);
