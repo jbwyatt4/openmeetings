@@ -2,7 +2,7 @@
 #labels Phase-Requirements,Featured
 
 ==MileStone 0.5==
-* Reworked Conference and Audience Application
+*Reworked Conference and Audience Application<br/>
 * Intital Support for users authentification and administration of users in their organisations
 * Installation guide for this resource to be deployed
 * Announcement of project to wider audience
