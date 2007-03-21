@@ -14,4 +14,4 @@
   * Installation Instructions
 
 ==MileStone 1.1==
-  * ModulLoader availible for custom Modules
+  * Modulloader availible for custom Modules
