@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<canvas debug="false" width="980" height="588">
+<canvas debug="false" width="980" height="610">
 
 <include href="host.lzx" />
 
@@ -184,19 +184,11 @@ macbook 192.168.2.102
 
 </view>
 
-<view name="_mainbgcontentNavi" y="2" x="2">
-	<method name="clearNaviContent">
-		for (var eg in this.subviews){
-			this.subviews[eg].destroy();
-		}
-	</method>
-</view>
-    
 <!-- 
     Into this view alle Windows will be loaded
  -->
 <view name="main_content" width="$once{ canvas.width }" height="$once{ canvas.height }">
-    <view x="200" y="20" width="$once{ this.parent.width }" height="$once{ this.parent.height }" name="_content">
+    <view x="0" y="40" width="$once{ this.parent.width }" height="$once{ this.parent.height }" name="_content">
         <method name="clearAll">
             for (var eg in this.subviews){
                 Debug.write("this.subviews: ",this.subviews[eg]);
@@ -213,6 +205,16 @@ macbook 192.168.2.102
 
 </view>  
 
+<!-- 
+	Navigation must be on top of everything
+ -->
 
-
+<view name="_mainbgcontentNavi" y="2" x="2">
+	<method name="clearNaviContent">
+		for (var eg in this.subviews){
+			this.subviews[eg].destroy();
+		}
+	</method>
+</view>
+    
 </canvas>

@@ -2,7 +2,7 @@
 <library>
 
 <class name="checkLoginData" extends="labelexplorerbox" title="Auth"
-    docking="true" resizeable="false" closable="false" width="400" x="100" y="40" height="240">
+    docking="true" resizeable="false" closable="false" width="400" x="300" y="40" height="240">
     
     <attribute name="refObj" value="null" />
     
