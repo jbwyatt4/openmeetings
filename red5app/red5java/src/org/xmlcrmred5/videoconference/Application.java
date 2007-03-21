@@ -86,65 +86,24 @@ public class Application extends ApplicationAdapter implements
 
 	@Override
 	public boolean roomConnect(IConnection conn, Object[] params) {
-		log.info("roomConnect    : " + conn.getHost() + " "+ conn.getClient() + " " + conn.getClient().getId());
+		log.error("roomConnect    : " + conn.getHost() + " "+ conn.getClient() + " " + conn.getClient().getId());
 		return true;
 	}
 
 	@Override
 	public void roomDisconnect(IConnection conn) {
 		log.debug("roomDisconnect: " + conn.getHost() + " "+ conn.getClient() + " " + conn.getClient().getId());
-		try {
-			IConnection current = Red5.getConnectionLocal();
-
-			String streamid = current.getClient().getId();
-			
-			log.info("##### roomDisconnect :.remove " + streamid); // just a unique number
-			log.info(ClientList);
-			log.info(ClientList.get(streamid));
-			RoomClient rc = ClientList.get(streamid);
-
-			log.debug("removing USername "+rc.getUsername()+" "+rc.getConnectedSince()+" streamid: "+rc.getStreamid());
-			ClientList.remove(streamid);
-			
-			//If this Room is empty clear the Room Poll List
-			HashMap<String,RoomClient> rcpList = this.getClientListScope();
-			log.debug("roomDisconnect rcpList size: "+rcpList.size());
-			if (rcpList.size()==0){
-				RemoteService.clearRoomPollList(current.getScope().getName());
-//				log.debug("clearRoomPollList cleared");
-			}
-			
-			//Notify all clients of the same scope (room)
-//			log.debug("scope to ... "+scope.getName()+" "+scope.getContextPath()+" "+scope.getType());
-			Iterator<IConnection> it = scope.getConnections();
-			
-//			log.debug("sending to ... ");
-			while (it.hasNext()) {
-				log.debug("hasNext == true");
-				IConnection cons = it.next();
-//				log.debug("cons Host: "+cons.getHost());
-				if (cons instanceof IServiceCapableConnection) {
-//					log.debug("sending roomDisconnect to " + cons);
-					((IServiceCapableConnection) cons).invoke("roomDisconnect",new Object[] { rc }, this);
-//					log.debug("sending roomDisconnect to " + cons);
-				}
-			}			
-			
-		} catch (Exception err){
-			log.error("roomDisconnect: "+err);
-			log.error(err);
-		}
 	}
 
 	@Override
 	public boolean roomStart(IScope room) {
-		log.debug("roomStart " + room + room.getClients().size() + " "+ room.getContextPath() + " " + room.getName());
+		log.error("roomStart " + room + room.getClients().size() + " "+ room.getContextPath() + " " + room.getName());
 		return true;
 	}
 
 	@Override
 	public void roomStop(IScope room) {
-		log.debug("roomStop " + room + room.getClients().size() + " "+ room.getContextPath() + " " + room.getName());
+		log.error("roomStop " + room + room.getClients().size() + " "+ room.getContextPath() + " " + room.getName());
 	}
 
 	@Override
@@ -169,7 +128,7 @@ public class Application extends ApplicationAdapter implements
 			rcm.setSwfurl(conn.getConnectParams().get("swfUrl").toString());
 //			IBandwidthConfigure bandwidthConfig = conn.getClient().getBandwidthConfigure();
 			
-			log.info("##### : " + rcm.getStreamid()); // just a unique number
+			log.error("##### : " + rcm.getStreamid()); // just a unique number
 			
 			//conn.ping();
 			//int getLastPing = conn.getLastPingTime();
@@ -188,13 +147,9 @@ public class Application extends ApplicationAdapter implements
 //			Set the moderation for the CLient on startup
 			log.error("Current clients in this room: "+conn.getScope().getClients().size());		
 			
-			if (conn.getScope().getClients().size()==0){
-				log.error("This client is the moderator"+rcm.getStreamid());
-				rcm.setIsMod(new Boolean(true));
-			} else {
-				log.error("This client is not the moderator"+rcm.getStreamid());
-				rcm.setIsMod(new Boolean(false));
-			}
+			log.error("This client is not the moderator"+rcm.getStreamid());
+			rcm.setIsMod(new Boolean(false));
+			
 			ClientList.put(rcm.getStreamid(),rcm);
 
 		} catch (Exception err){
@@ -203,10 +158,102 @@ public class Application extends ApplicationAdapter implements
 		}		
 		return true;
 	}
+	
+	public RoomClient logicalRoomEnter(){
+		try {
+			IConnection current = Red5.getConnectionLocal();
+			RoomClient currentClient = ClientList.get(current.getClient().getId());	
+			String roomname = currentClient.getUserroom();
+			String orgdomain = currentClient.getDomain();				
+			String streamid = currentClient.getStreamid();
+			
+			
+			//check if room has no Moderation yet
+			//get all Clients of room
+			Set<String> keys = ClientList.keySet();
+			Iterator<String> iter = keys.iterator();
+			int roomcount = 0;
+			while (iter.hasNext()) {
+				String key = (String) iter.next();
+				RoomClient rcl = ClientList.get(key);
+				
+				log.error("#+#+#+#+##+## logicalRoomEnter ClientList key: "+rcl.getStreamid());
+				log.error("#+#+#+#+##+## logicalRoomEnter ClientList key: "+rcl.getUserroom());
+				
+				//Check if the Client is in the same room and same domain 
+				//and is not the same like we have just declared to be moderating this room
+				if(roomname.equals(rcl.getUserroom()) && orgdomain.equals(rcl.getDomain()) && !streamid.equals(rcl.getStreamid())){
+					log.debug("set to ++ for client: "+rcl.getStreamid()+" "+roomcount);
+					roomcount++;
+				}				
+			}
+			
+			if (roomcount==0){
+				log.error("Room is empty so set this user to be moderation role");
+				currentClient.setIsMod(true);
+				ClientList.put(streamid, currentClient);
+				return currentClient;
+			} else {
+				log.error("Room is already somebody so set this user not to be moderation role");
+				currentClient.setIsMod(false);
+				ClientList.put(streamid, currentClient);
+				return currentClient;
+			}
+			
+		} catch (Exception err) {
+			log.error("[logicalRoomEnter] "+err);
+		}
+		return null;
+	}
 
 	@Override
 	public void roomLeave(IClient client, IScope room) {
-		log.debug("roomLeave " + client.getId() + " "+ room.getClients().size() + " " + room.getContextPath() + " "+ room.getName());
+		log.error("roomLeave " + client.getId() + " "+ room.getClients().size() + " " + room.getContextPath() + " "+ room.getName());
+		try {
+			IConnection current = Red5.getConnectionLocal();
+			RoomClient currentClient = ClientList.get(current.getClient().getId());
+			String roomname = currentClient.getUserroom();
+			String orgdomain = currentClient.getDomain();	
+			String streamid = currentClient.getStreamid();
+			
+			log.error("##### roomLeave :.remove " + currentClient.getStreamid()); // just a unique number
+
+
+			log.error("removing USername "+currentClient.getUsername()+" "+currentClient.getConnectedSince()+" streamid: "+currentClient.getStreamid());
+			ClientList.remove(currentClient.getStreamid());
+			
+			//If this Room is empty clear the Room Poll List
+			HashMap<String,RoomClient> rcpList = this.getClientListByRoomAndDomain(roomname, orgdomain);
+			log.error("roomLeave rcpList size: "+rcpList.size());
+			if (rcpList.size()==0){
+				RemoteService.clearRoomPollList(current.getScope().getName());
+//				log.debug("clearRoomPollList cleared");
+			}
+			
+			//Notify all clients of the same scope (room) with domain and room
+			//except the current disconnected cause it could throw an exception
+			
+			Iterator<IConnection> it = current.getScope().getConnections();
+			while (it.hasNext()) {
+				log.error("hasNext == true");
+				IConnection cons = it.next();
+				log.error("cons Host: "+cons);
+				if (cons instanceof IServiceCapableConnection) {
+					if (!cons.equals(current)){
+						log.error("sending roomDisconnect to " + cons);
+						RoomClient rcl = ClientList.get(cons.getClient().getId());
+						//Check if the Client is in the same room and same domain except its the current one
+						if(roomname.equals(rcl.getUserroom()) && orgdomain.equals(rcl.getDomain())){					
+							((IServiceCapableConnection) cons).invoke("roomDisconnect",new Object[] { currentClient }, this);
+							log.error("sending roomDisconnect to " + cons);
+						}
+					}
+				}
+			}			
+			
+		} catch (Exception err){
+			log.error("[roomDisconnect]"+err);
+		}		
 	}
 
 	/**
@@ -242,7 +289,7 @@ public class Application extends ApplicationAdapter implements
 	public void streamPublishStart(IBroadcastStream stream) {
 
 		// Notify all the clients that the stream had been started
-		log.debug("start streamPublishStart broadcast start: "+ stream.getPublishedName());
+		log.error("start streamPublishStart broadcast start: "+ stream.getPublishedName());
 		
 		sendClientBroadcastNotifications(stream,"newStream",ClientList.get(Red5.getConnectionLocal().getClient().getId()));
 	}
@@ -258,11 +305,11 @@ public class Application extends ApplicationAdapter implements
 	public void streamBroadcastClose(IBroadcastStream stream) {
 
 		// Notify all the clients that the stream had been started
-		log.debug("start streamBroadcastClose broadcast close: "+ stream.getPublishedName());
+		log.error("start streamBroadcastClose broadcast close: "+ stream.getPublishedName());
 		try {
 			sendClientBroadcastNotifications(stream,"closeStream",ClientList.get(Red5.getConnectionLocal().getClient().getId()));
 		} catch (Exception e){
-			log.error(e);
+			log.error("[streamBroadcastClose]"+e);
 		}
 	}
 	
@@ -277,69 +324,46 @@ public class Application extends ApplicationAdapter implements
 
 			// Store the local sothat we do not send notification to ourself back
 			IConnection current = Red5.getConnectionLocal();
+			RoomClient currentClient = ClientList.get(current.getClient().getId());
+			String roomname = currentClient.getUserroom();
+			String orgdomain = currentClient.getDomain();	
 			
 			// Notify all the clients that the stream had been started
-			log.debug("sendClientBroadcastNotifications: "+ stream.getPublishedName());
-
-			// First we have to get the scopeName of this stream
-			String thisScopesName = stream.getScope().getName();
-//			log.debug("stream thisScopesName: " + thisScopesName);
-//			log.debug("this scopeName another one "+scope.getName());
-
-			// Then we have to get the name of all Scopes to check which one is
-			// in the same room
-			// Sothat only people in the same room will get notifications
-			Iterator<String> scopeNames = scope.getScopeNames();
-
-			while (scopeNames.hasNext()) {
-				String scopeName = scopeNames.next();
-//				log.debug("stream scopeName: " + scopeName + " thisScopesName "+ thisScopesName);
-				
-				// Compare the two scopeNames 
-				// TODO: Why do we have to add a *:* in front of the scopeName to compare them?
-				if (scopeName.equals(":" + thisScopesName)) {
-					// Found the Scope
-//					log.debug("+** stream scopeName Found: " + scopeName);
-
-					// Get all Clients of this Scope
-					
-//					log.debug("this scopeName another one "+scope.getName());
-//					log.debug("this scopeName another type "+scope.getType());					
-					
-					IScope roomScope = scope.getScope(thisScopesName);
-//					log.debug("type of the found scope: "+ roomScope.getName());
-//					log.debug("type of the found scope: "+ roomScope.getType());
-
-					// Send them a notification of this stream
-					Iterator<IConnection> it = roomScope.getConnections();
-					while (it.hasNext()) {
-						IConnection conn = it.next();
-						if (conn.equals(current)){
-							//there is a Bug in the current implementation of the appDisconnect
-							if (clientFunction.equals("closeStream")){
-								// Don't notify current client
-								log.info("-----> current found : "+current.getRemoteAddress()+" "+current.getRemotePort());
-								current.ping();
-								log.info("-----> current ping time : "+current.getLastPingTime());
-								
-								log.info("-----> current closed: "+current.getSessionId());
-							}
-							continue;
-						} else {
-							if (conn instanceof IServiceCapableConnection) {
-								conn.ping();
-								IServiceCapableConnection iStream = (IServiceCapableConnection) conn;
+			log.error("sendClientBroadcastNotifications: "+ stream.getPublishedName());
+			log.error("sendClientBroadcastNotifications : "+ currentClient+ " " + currentClient.getStreamid());
+			
+//			Notify all clients of the same scope (room)
+			Iterator<IConnection> it = current.getScope().getConnections();
+			while (it.hasNext()) {
+				IConnection conn = it.next();
+				if (conn.equals(current)){
+					//there is a Bug in the current implementation of the appDisconnect
+					if (clientFunction.equals("closeStream")){
+						// Don't notify current client
+						log.info("-----> current found : "+current.getRemoteAddress()+" "+current.getRemotePort());
+						current.ping();
+						log.info("-----> current ping time : "+current.getLastPingTime());
+						
+						log.info("-----> current closed: "+current.getSessionId());
+					}
+					continue;
+				} else {
+					if (conn instanceof IServiceCapableConnection) {
+						RoomClient rcl = ClientList.get(conn.getClient().getId());
+						log.error("is this users still alive? :"+rcl);
+						//Check if the Client is in the same room and same domain 
+						if(roomname.equals(rcl.getUserroom()) && orgdomain.equals(rcl.getDomain())){
+							conn.ping();
+							IServiceCapableConnection iStream = (IServiceCapableConnection) conn;
 	//							log.info("IServiceCapableConnection ID " + iStream.getClient().getId());
-								iStream.invoke(clientFunction,new Object[] { rc }, this);
-								log.debug("sending notification to " + conn+" ID: ");
-							}
+							iStream.invoke(clientFunction,new Object[] { rc }, this);
+							log.debug("sending notification to " + conn+" ID: ");
 						}
 					}
-
 				}
 			}
 		} catch (Exception err) {
-			System.out.println("Exception err: " + err);
+			log.error("[sendClientBroadcastNotifications]" + err);
 		}
 	}
 	
@@ -364,15 +388,19 @@ public class Application extends ApplicationAdapter implements
 			
 			IConnection current = Red5.getConnectionLocal();
 			String streamid = current.getClient().getId();
-			String roomname = current.getScope().getName();
 			
 			log.debug("streamid: "+streamid);
-			log.debug("roomname: "+roomname);
+			
 			
 			RoomClient rlc = ClientList.get(id);
 			
 			log.debug("RooymClient rlc: "+rlc.getUserroom());
-			roomname = rlc.getUserroom();
+			String roomname = rlc.getUserroom();
+			String orgdomain = rlc.getDomain();
+			
+			log.debug("roomname: "+roomname);
+			log.debug("orgdomain: "+orgdomain);
+			
 			rlc.setIsMod(new Boolean(true));
 			//Put the mod-flag to true for this client
 			ClientList.put(id, rlc);
@@ -387,8 +415,9 @@ public class Application extends ApplicationAdapter implements
 				log.debug("#+#+#+#+##+## unsetModerator ClientList key: "+rcl.getStreamid());
 				log.debug("#+#+#+#+##+## unsetModerator ClientList key: "+rcl.getUserroom());
 				
-				//Check if the Client is in the same room
-				if(roomname.equals(rcl.getUserroom()) && !id.equals(rcl.getStreamid())){
+				//Check if the Client is in the same room and same domain 
+				//and is not the same like we have just declared to be moderating this room
+				if(roomname.equals(rcl.getUserroom()) && orgdomain.equals(rcl.getDomain()) && !id.equals(rcl.getStreamid())){
 					log.debug("set to false for client: "+rcl);
 					rcl.setIsMod(new Boolean(false));
 					ClientList.put(key, rcl);
@@ -399,20 +428,23 @@ public class Application extends ApplicationAdapter implements
 			Iterator<IConnection> it = current.getScope().getConnections();
 			while (it.hasNext()) {
 				IConnection conn = it.next();
-				if (conn instanceof IServiceCapableConnection) {
-					((IServiceCapableConnection) conn).invoke("setNewModerator",new Object[] { rlc }, this);
-					log.debug("sending setNewModerator to " + conn);
+				RoomClient rcl = ClientList.get(conn.getClient().getId());
+				//Check if the Client is in the same room and same domain 
+				if(roomname.equals(rcl.getUserroom()) && orgdomain.equals(rcl.getDomain())){
+					if (conn instanceof IServiceCapableConnection) {
+						((IServiceCapableConnection) conn).invoke("setNewModerator",new Object[] { rlc }, this);
+						log.debug("sending setNewModerator to " + conn);
+					}
 				}
 			}
 		} catch (Exception err){
-			log.error(err);
-			System.out.print(err);
+			log.error("[setModerator]"+err);
 			returnVal = err.toString();
 		}
 		return returnVal;
 	}
 	
-	public RoomClient setUsername(String userId, String username, String firstname, String lastname){
+	public RoomClient setUsername(String userId, String username, String firstname, String lastname, String orgdomain){
 		
 		RoomClient currentClient = null;
 		try {
@@ -428,17 +460,41 @@ public class Application extends ApplicationAdapter implements
 			currentClient = ClientList.get(streamid);
 			log.error("[setUsername] id: "+currentClient.getStreamid());
 			currentClient.setUsername(username);
+			currentClient.setDomain(orgdomain);
 
 			currentClient.setUserObject(userId, username, firstname, lastname);
 			ClientList.put(streamid, currentClient);
 			log.error("##### setUsername : " + currentClient.getUsername()+" "+currentClient.getStreamid()); // just a unique number		
 		} catch (Exception err){
-			log.error(err);
-			log.error("setUsername: "+err);
+			log.error("[setUsername]"+err);
 		}
 		return currentClient;
 	}
 	
+	public RoomClient setUserroom(String userroom){
+		
+		RoomClient currentClient = null;
+		try {
+
+			log.error("#*#*#*#*#*#*# setUserroom userroom: "+userroom);
+			
+			IConnection current = Red5.getConnectionLocal();
+			log.error("current: "+current.getScope().getName());
+			
+			log.error(current.getClient());
+			log.error(current.getClient().getId());
+			String streamid = current.getClient().getId();
+			currentClient = ClientList.get(streamid);
+			log.error("[setUsername] id: "+currentClient.getStreamid());
+			currentClient.setUserroom(userroom);
+
+			ClientList.put(streamid, currentClient);
+			log.error("##### setUserroom : " + currentClient.getUsername()+" "+currentClient.getStreamid()); // just a unique number		
+		} catch (Exception err){
+			log.error("[setUserroom]"+err);
+		}
+		return currentClient;
+	}	
 	public int setUserObjectOne2Four(String colorObj, int userPos){
 		try {
 			IConnection current = Red5.getConnectionLocal();
@@ -447,6 +503,8 @@ public class Application extends ApplicationAdapter implements
 			log.error("xmlcrm setUserObjectOne2Four: "+currentClient.getUsername());
 			currentClient.setUsercolor(colorObj);
 			currentClient.setUserpos(userPos);
+			String roomname = currentClient.getUserroom();
+			String orgdomain = currentClient.getDomain();			
 			//Notify all clients of the same scope (room)
 			Iterator<IConnection> it = current.getScope().getConnections();
 			while (it.hasNext()) {
@@ -454,38 +512,70 @@ public class Application extends ApplicationAdapter implements
 				if (conn.equals(current)){
 					continue;
 				} else {				
-					if (conn instanceof IServiceCapableConnection) {
-						((IServiceCapableConnection) conn).invoke("setUserObjectNewOne2Four",new Object[] { currentClient }, this);
-						log.debug("sending setNewModerator to " + conn);
+					RoomClient rcl = ClientList.get(conn.getClient().getId());
+					//Check if the Client is in the same room and same domain 
+					if(roomname.equals(rcl.getUserroom()) && orgdomain.equals(rcl.getDomain())){					
+						if (conn instanceof IServiceCapableConnection) {
+							((IServiceCapableConnection) conn).invoke("setUserObjectNewOne2Four",new Object[] { currentClient }, this);
+							log.error("sending setUserObjectNewOne2Four to " + conn);
+						}
 					}
 				}
 			}				
 		} catch (Exception err) {
-			log.error("xmlcrm [setUserObject]"+err);
+			log.error("[setUserObjectOne2Four]"+err);
 		}
 		return -1;		
 	}
 
 	/**
-	 * Get all ClientList Objects of that room
+	 * Get all ClientList Objects of that room and domain
 	 * @return
 	 */
 	public HashMap<String,RoomClient> getClientListScope(){
 		HashMap <String,RoomClient> roomClientList = new HashMap<String,RoomClient>();
 		try {
-			//Get ClientObjects of all Clients in this Room
-			String currentScopeName = Red5.getConnectionLocal().getScope().getName();
-			log.debug("getClientList currentScopeName: "+currentScopeName);
+			IConnection current = Red5.getConnectionLocal();
+			RoomClient currentClient = ClientList.get(current.getClient().getId());
+			log.error("xmlcrm setUserObjectOne2Four: "+currentClient.getUsername());			
+			String roomname = currentClient.getUserroom();
+			String orgdomain = currentClient.getDomain();				
 			Set<String> keys = ClientList.keySet();
 			Iterator<String> iter = keys.iterator();
 			while (iter.hasNext()) {
 				String key = (String) iter.next();
 				log.debug("getClientList key: "+key);
 				RoomClient rcl = ClientList.get(key);
-				if (rcl.getUserroom().equals(currentScopeName)) roomClientList.put(key, rcl);
+				//same room, same domain
+				if (rcl.getUserroom().equals(roomname) && rcl.getDomain().equals(orgdomain)) roomClientList.put(key, rcl);
 			}
 		} catch (Exception err) {
-			log.error(err);
+			log.error("[getClientListScope]"+err);
+		}
+		return roomClientList;
+	}
+	
+	/**
+	 * Get all ClientList Objects of that room and domain
+	 * This Function is needed cause it is invoked internally AFTER the current user has been already removed
+	 * from the ClientList to see if the Room is empty again and the PollList can be removed
+	 * 
+	 * @return
+	 */
+	public HashMap<String,RoomClient> getClientListByRoomAndDomain(String roomname, String orgdomain){
+		HashMap <String,RoomClient> roomClientList = new HashMap<String,RoomClient>();
+		try {			
+			Set<String> keys = ClientList.keySet();
+			Iterator<String> iter = keys.iterator();
+			while (iter.hasNext()) {
+				String key = (String) iter.next();
+				log.debug("getClientList key: "+key);
+				RoomClient rcl = ClientList.get(key);
+				//same room, same domain
+				if (rcl.getUserroom().equals(roomname) && rcl.getDomain().equals(orgdomain)) roomClientList.put(key, rcl);
+			}
+		} catch (Exception err) {
+			log.error("[getClientListBYRoomAndDomain]"+err);
 		}
 		return roomClientList;
 	}
@@ -513,18 +603,18 @@ public class Application extends ApplicationAdapter implements
 			log.debug("*..*getCurrentModerator id: ");
 			
 			IConnection current = Red5.getConnectionLocal();
-			String streamid = current.getClient().getId();
-			String roomname = current.getScope().getName();
+			RoomClient currentClient = ClientList.get(current.getClient().getId());
+			String roomname = currentClient.getUserroom();
+			String orgdomain = currentClient.getDomain();	
 			
-			log.debug("streamid: "+streamid);
+			log.debug("orgdomain: "+orgdomain);
 			log.debug("roomname: "+roomname);	
 			
-			currentMod = getCurrentModeratorByRoom(roomname);
+			currentMod = getCurrentModeratorByRoom(roomname,orgdomain);
 
 			log.debug("Who is this moderator"+currentMod);
 		} catch (Exception err){
-			log.error(err);
-			System.out.println("getCurrentModerator: "+err);
+			log.error("[getCurrentModerator]"+err);
 		}
 		return currentMod;
 	}
@@ -535,7 +625,7 @@ public class Application extends ApplicationAdapter implements
 	 * @param roomname
 	 * @return
 	 */
-	private RoomClient getCurrentModeratorByRoom(String roomname) throws Exception{
+	private RoomClient getCurrentModeratorByRoom(String roomname, String orgdomain) throws Exception{
 		RoomClient currentModStreamid = null;
 		Set<String> keys = ClientList.keySet();
 		Iterator<String> iter = keys.iterator();
@@ -547,7 +637,7 @@ public class Application extends ApplicationAdapter implements
 			log.debug("*..*unsetModerator ClientList key: "+rcl.getUserroom());
 //			
 			//Check if the Client is in the same room
-			if(roomname.equals(rcl.getUserroom()) && rcl.getIsMod()){
+			if(roomname.equals(rcl.getUserroom()) && orgdomain.equals(rcl.getDomain()) && rcl.getIsMod()){
 				log.debug("found client who is the Moderator: "+rcl);
 				currentModStreamid = rcl;
 			}				
@@ -557,83 +647,101 @@ public class Application extends ApplicationAdapter implements
 	
 	public int sendVars(Object vars) {
 		log.debug("*..*sendVars: " + vars);
-		boolean ismod = false;
-		// Check if this User is the Mod:
-		IConnection current = Red5.getConnectionLocal();
-		String id = current.getClient().getId();
-		log.debug("***** id: " + id);
-		
-		RoomClient hasMap = (RoomClient) ClientList.get(id);
-		ismod = hasMap.getIsMod();
-		
-		log.debug("*..*ismod: " + ismod);
-
-		if (ismod) {
-			Iterator<IConnection> it = current.getScope().getConnections();
-			while (it.hasNext()) {
-				IConnection conn = it.next();
-				if (conn instanceof IServiceCapableConnection) {
-					String idremote = conn.getClient().getId();
-					log.debug("*..*idremote: " + idremote);
-					log.debug("*..*my id: " + id);
-					if (!id.equals(idremote)) {
-						((IServiceCapableConnection) conn).invoke("sendVarsToWhiteboard", new Object[] { vars },this);
-						log.debug("sending sendVarsToWhiteboard to " + conn);
+		try {
+			// Check if this User is the Mod:
+			IConnection current = Red5.getConnectionLocal();
+			RoomClient currentClient = ClientList.get(current.getClient().getId());
+			String roomname = currentClient.getUserroom();
+			String orgdomain = currentClient.getDomain();	
+			log.debug("***** id: " + currentClient.getStreamid());
+			
+			boolean ismod = currentClient.getIsMod();
+			
+			log.debug("*..*ismod: " + ismod);
+	
+			if (ismod) {
+				Iterator<IConnection> it = current.getScope().getConnections();
+				while (it.hasNext()) {
+					IConnection conn = it.next();
+					if (conn instanceof IServiceCapableConnection) {
+						RoomClient rcl = ClientList.get(conn.getClient().getId());
+						log.debug("*..*idremote: " + rcl.getStreamid());
+						log.debug("*..*my idstreamid: " + currentClient.getStreamid());
+						if (!currentClient.getStreamid().equals(rcl.getStreamid()) && roomname.equals(rcl.getUserroom()) && orgdomain.equals(rcl.getDomain())) {
+							((IServiceCapableConnection) conn).invoke("sendVarsToWhiteboard", new Object[] { vars },this);
+							log.debug("sending sendVarsToWhiteboard to " + conn);
+						}
 					}
 				}
+				return 1;
+			} else {
+				// log.debug("*..*you are not allowed to send: "+ismod);
+				return -1;
 			}
-			return 1;
-		} else {
-			// log.debug("*..*you are not allowed to send: "+ismod);
-			return -1;
+		} catch (Exception err) {
+			log.error("[sendVars]"+err);
 		}
+		return -1;
 	}
 
 	public int sendVarsModeratorGeneral(Object vars) {
 		log.debug("*..*sendVars: " + vars);
-		boolean ismod = false;
-		// Check if this User is the Mod:
-		IConnection current = Red5.getConnectionLocal();
-		String id = current.getClient().getId();
-		log.debug("***** id: " + id);
+		try {
+			IConnection current = Red5.getConnectionLocal();
+			RoomClient currentClient = ClientList.get(current.getClient().getId());
+			String roomname = currentClient.getUserroom();
+			String orgdomain = currentClient.getDomain();	
+			log.debug("***** id: " + currentClient.getStreamid());
+			
+			boolean ismod = currentClient.getIsMod();
+	
+			if (ismod) {
+				log.debug("CurrentScope :"+current.getScope().getName());
+				Iterator<IConnection> it = current.getScope().getConnections();
+				while (it.hasNext()) {
+					IConnection conn = it.next();
+					if (conn instanceof IServiceCapableConnection) {
+						RoomClient rcl = ClientList.get(conn.getClient().getId());
+						log.debug("*..*idremote: " + rcl.getStreamid());
+						log.debug("*..*my idstreamid: " + currentClient.getStreamid());
+						if (!currentClient.getStreamid().equals(rcl.getStreamid()) && roomname.equals(rcl.getUserroom()) && orgdomain.equals(rcl.getDomain())) {
+							((IServiceCapableConnection) conn).invoke("sendVarsToModeratorGeneral",	new Object[] { vars }, this);
+							log.debug("sending sendVarsToWhiteboard to " + conn);
+						}
+					}
+				}
+				return 1;
+			} else {
+				// log.debug("*..*you are not allowed to send: "+ismod);
+				return -1;
+			}
+		} catch (Exception err) {
+			log.error("[sendVarsModeratorGeneral]"+err);
+		}
+		return -1;
+	}
 
-		RoomClient hasMap = (RoomClient) ClientList.get(id);
-		ismod = hasMap.getIsMod();
-
-		log.debug("*..*ismod: " + ismod);
-
-		if (ismod) {
-			log.debug("CurrentScope :"+current.getScope().getName());
+	public int sendMessage(Object newMessage) {
+		try {
+			IConnection current = Red5.getConnectionLocal();
+			RoomClient currentClient = ClientList.get(current.getClient().getId());
+			String roomname = currentClient.getUserroom();
+			String orgdomain = currentClient.getDomain();	
 			Iterator<IConnection> it = current.getScope().getConnections();
 			while (it.hasNext()) {
 				IConnection conn = it.next();
 				if (conn instanceof IServiceCapableConnection) {
-					String idremote = conn.getClient().getId();
-					log.debug("*..*idremote: " + idremote);
-					log.debug("*..*my id: " + id);
-					if (!id.equals(idremote)) {
-						((IServiceCapableConnection) conn).invoke("sendVarsToModeratorGeneral",	new Object[] { vars }, this);
-						log.debug("sending sendVarsToWhiteboard to " + conn);
+					RoomClient rcl = ClientList.get(conn.getClient().getId());
+					log.debug("*..*idremote: " + rcl.getStreamid());
+					log.debug("*..*my idstreamid: " + currentClient.getStreamid());
+					if (roomname.equals(rcl.getUserroom()) && orgdomain.equals(rcl.getDomain())) {
+						((IServiceCapableConnection) conn).invoke("sendVarsToMessage",new Object[] { newMessage }, this);
+						log.debug("sending sendVarsToMessage to " + conn);		
 					}
 				}
 			}
-			return 1;
-		} else {
-			// log.debug("*..*you are not allowed to send: "+ismod);
-			return -1;
-		}
-		
-	}
-
-	public int sendMessage(Object newMessage) {
-		IConnection current = Red5.getConnectionLocal();
-		Iterator<IConnection> it = current.getScope().getConnections();
-		while (it.hasNext()) {
-			IConnection conn = it.next();
-			if (conn instanceof IServiceCapableConnection) {
-				((IServiceCapableConnection) conn).invoke("sendVarsToMessage",new Object[] { newMessage }, this);
-				log.debug("sending sendVarsToMessage to " + conn);
-			}
+		} catch (Exception err) {
+			log.error("[sendMessage]"+err);
 		}
 		return 1;
 	}
@@ -642,17 +750,26 @@ public class Application extends ApplicationAdapter implements
 	public int sendMessageWithClient(Object newMessage) {
 		try {
 			IConnection current = Red5.getConnectionLocal();
-			Iterator<IConnection> it = current.getScope().getConnections();
-			log.debug("***** id: " + current.getClient().getId());
-			RoomClient rcm = (RoomClient) ClientList.get(current.getClient().getId());	
+			RoomClient currentClient = ClientList.get(current.getClient().getId());
+			String roomname = currentClient.getUserroom();
+			String orgdomain = currentClient.getDomain();	
+			
 			HashMap<String,Object> hsm = new HashMap<String,Object>();
-			hsm.put("client", rcm);
+			hsm.put("client", currentClient);
 			hsm.put("message", newMessage);
+			
+			//broadcast to everybody in the room/domain
+			Iterator<IConnection> it = current.getScope().getConnections();
 			while (it.hasNext()) {
 				IConnection conn = it.next();
 				if (conn instanceof IServiceCapableConnection) {
-					((IServiceCapableConnection) conn).invoke("sendVarsToMessageWithClient",new Object[] { hsm }, this);
-					log.debug("sending sendVarsToMessageWithClient to " + conn);
+					RoomClient rcl = ClientList.get(conn.getClient().getId());
+					log.debug("*..*idremote: " + rcl.getStreamid());
+					log.debug("*..*my idstreamid: " + currentClient.getStreamid());
+					if (roomname.equals(rcl.getUserroom()) && orgdomain.equals(rcl.getDomain())) {
+						((IServiceCapableConnection) conn).invoke("sendVarsToMessageWithClient",new Object[] { hsm }, this);
+						log.debug("sending sendVarsToMessageWithClient to " + conn);
+					}
 				}
 			}
 		} catch (Exception err) {
@@ -665,12 +782,14 @@ public class Application extends ApplicationAdapter implements
 	public int sendMessageWithClientById(Object newMessage, String clientId) {
 		try {
 			IConnection current = Red5.getConnectionLocal();
-			Iterator<IConnection> it = current.getScope().getConnections();
-			log.debug("***** id: " + current.getClient().getId());
-			RoomClient rcm = (RoomClient) ClientList.get(current.getClient().getId());	
+			RoomClient currentClient = ClientList.get(current.getClient().getId());
+			
 			HashMap<String,Object> hsm = new HashMap<String,Object>();
-			hsm.put("client", rcm);
+			hsm.put("client", currentClient);
 			hsm.put("message", newMessage);
+			
+			//broadcast Message to specific user with id
+			Iterator<IConnection> it = current.getScope().getConnections();
 			while (it.hasNext()) {
 				IConnection conn = it.next();
 				if (conn instanceof IServiceCapableConnection) {
@@ -721,7 +840,7 @@ public class Application extends ApplicationAdapter implements
 
 	/**
 	 * Get streams. called from client its based on the current scope so this will only return the streams of the
-	 * current room
+	 * current room and domain
 	 * 
 	 * @return iterator of broadcast stream names
 	 */
@@ -729,19 +848,23 @@ public class Application extends ApplicationAdapter implements
 		List <String> roomClientListScopeNames = new LinkedList<String>();
 		try {
 			//Get ClientObjects of all Clients in this Room
-			String currentScopeName = Red5.getConnectionLocal().getScope().getName();
-			String currentStreamid = Red5.getConnectionLocal().getClient().getId();
-			log.debug("getStreams currentScopeName: "+currentScopeName);
+			IConnection current = Red5.getConnectionLocal();
+			RoomClient currentClient = ClientList.get(current.getClient().getId());
+			String roomname = currentClient.getUserroom();
+			String orgdomain = currentClient.getDomain();
+			String streamid = currentClient.getStreamid();
+			
+			log.debug("getStreams roomname: "+roomname);
 			Set<String> keys = ClientList.keySet();
 			Iterator<String> iter = keys.iterator();
 			while (iter.hasNext()) {
 				String key = (String) iter.next();
 				log.debug("getStreams key: "+key);
 				RoomClient rcl = ClientList.get(key);
-				if (rcl.getUserroom().equals(currentScopeName) && !rcl.getStreamid().equals(currentStreamid)) roomClientListScopeNames.add(rcl.getStreamid());
+				if (rcl.getUserroom().equals(roomname) && rcl.getDomain().equals(orgdomain) && !rcl.getStreamid().equals(streamid)) roomClientListScopeNames.add(rcl.getStreamid());
 			}
 		} catch (Exception err) {
-			log.error(err);
+			log.error("[getStreams]"+err);
 		}
 		return roomClientListScopeNames;
 		//return getBroadcastStreamNames(conn.getScope());
@@ -749,7 +872,7 @@ public class Application extends ApplicationAdapter implements
 	
 	/**
 	 * This Method will return all streams of the parent stream (which should be all including
-	 * the child-scope streams
+	 * the child-scope streams independend from room/domain
 	 * 
 	 * @return
 	 */
@@ -762,7 +885,7 @@ public class Application extends ApplicationAdapter implements
 	 * Handle callback from service call.
 	 */
 	public void resultReceived(IPendingServiceCall call) {
-		log.info("Received result " + call.getResult() + " for "+ call.getServiceMethodName());
+		log.error("Received result " + call.getResult() + " for "+ call.getServiceMethodName());
 	}
 	
 	public int getYourPingTime(){
@@ -815,7 +938,7 @@ public class Application extends ApplicationAdapter implements
 			}
 		
 		} catch (Exception err) {
-			log.error("Exception "+err);
+			log.error("[detectedBandwidth]"+err);
 		}
 		
 		
