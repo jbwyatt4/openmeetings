@@ -1,13 +1,13 @@
 #summary Roadmap of openmeeting
 #labels Phase-Requirements,Featured
 
-== MileStone 0.5 ==
+==MileStone 0.5==
 - Reworked Conference and Audience Application
 - Intital Support for users authentification and administration of users in their organisations
 - Installation guide for this resource to be deployed
 - Announcement of project to wider audience
 
-== MileStone 1.0 == 
+==MileStone 1.0== 
 - Recording storing and fully for whiteboard
 - Wider range of document convertings, uploadings which can be used in whiteboard
 - Audience-Modus complete
