@@ -12,3 +12,6 @@
   * Wider range of document convertings, uploadings which can be used in whiteboard
   * Audience-Modus complete
   * Installation Instructions
+
+==MileStone 1.1==
+  * ModulLoader availible for custom Modules
