@@ -4,25 +4,26 @@ import java.util.Date;
 
 public class RoomClient {
 	
-	String username;
-	String streamid;
-	String userroom;
-	Boolean isMod;
+	String username = "";
+	String streamid = "";
+	String userroom = "";
+	Boolean isMod = false;
 	Date connectedSince;
 	String formatedDate;
 	String usercolor;
 	Integer userpos;
 	String userip;
+	String domain = "";
 	int userport;
 	
-	String user_id;
-	String firstname;
-	String lastname;
+	String user_id = "";
+	String firstname = "";
+	String lastname = "";
 	String mail;
 	String lastLogin;
 	String official_code;
 	String picture_uri;
-	String language;
+	String language = "";
 	
 	
 	String swfurl;
@@ -266,6 +267,14 @@ public class RoomClient {
 	 */
 	public void setUser_id(String user_id) {
 		this.user_id = user_id;
+	}
+
+	public String getDomain() {
+		return domain;
+	}
+
+	public void setDomain(String domain) {
+		this.domain = domain;
 	}
 	
 	
