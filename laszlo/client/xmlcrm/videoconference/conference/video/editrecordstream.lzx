@@ -56,7 +56,7 @@
     </handler> 
 
     <method name="doninitalize" args="valCam,valMic">
-    	Debug.write("this.myvideocontainer: ",this.myvideocontainer);
+    	//Debug.write("this.myvideocontainer: ",this.myvideocontainer);
     
         this.myvideocontainer.cameraRef.setIndex(valCam);
         this.myvideocontainer.microphoneRef.setIndex(valMic);
@@ -65,30 +65,13 @@
 		
 	    //v.record(v.url);
 	    
-	    canvas._ns = new NetStream(rtc._nc);
-	
-		Debug.write("publishing with the streamid: ",canvas.streamid);
-	
+	    canvas._ns = new NetStream(canvas.thishib._nc);
+		
 	    canvas._ns.publish(canvas.streamid,"live");
-	    Debug.write("*************************************************");
-	    Debug.write("*************************************************");
-	    Debug.write("this.myvideocontainer.cameraRef._cam: ",this.myvideocontainer.cameraRef._cam.bandwidth);
-	    Debug.write("this.myvideocontainer.cameraRef._cam: ",this.myvideocontainer.cameraRef._cam.quality);
-	    Debug.write("this.myvideocontainer.cameraRef._cam: ",this.myvideocontainer.cameraRef._cam.currentFps);
-	    Debug.write("this.myvideocontainer.cameraRef._cam: ",this.myvideocontainer.cameraRef._cam.quality);
-	    Debug.write("this.myvideocontainer.cameraRef._cam: ",this.myvideocontainer.cameraRef._cam.width);
-	    Debug.write("this.myvideocontainer.cameraRef._cam: ",this.myvideocontainer.cameraRef._cam.height);
-	    
-	    Debug.write("this.myvideocontainer. Microphone.rate ",this.myvideocontainer.microphoneRef._mic.rate);
 	    //this.myvideocontainer.microphoneRef._mic.setRate(4);
 	    //this.myvideocontainer.cameraRef._cam.setQuality(16384/4);
 	    this.myvideocontainer.microphoneRef._mic.setUseEchoSuppression(true);
 	    
-	    Debug.write("this.myvideocontainer.cameraRef._cam: ",this.myvideocontainer.cameraRef._cam.bandwidth);
-	    Debug.write("this.myvideocontainer.cameraRef._cam: ",this.myvideocontainer.cameraRef._cam.quality);
-	    Debug.write("this.myvideocontainer. Microphone.rate ",this.myvideocontainer.microphoneRef._mic.rate);
-	    Debug.write("*************************************************");
-	    Debug.write("*************************************************");
 	    canvas._ns.attachVideo(this.myvideocontainer.cameraRef._cam);
 	    canvas._ns.attachAudio(this.myvideocontainer.microphoneRef._mic);  
 	    //Attach Devices to Stream
@@ -98,34 +81,17 @@
 	    //      
 	    this.myvideocontainer.microphoneRef.setAttribute('mute',false);
 	    
-	    Debug.write("*************************************************");
 	    this.myvideocontainer.microphoneRef._initMic();
         this.myvideocontainer.cameraRef.showCamera(true);
         this.myvideocontainer.parent.parent.setIdentifier(canvas.streamid);
         
         this.myvideocontainer.parent.parent.setAttribute('chatpartnername',canvas.firstName+' '+canvas.lastName);
         
-        
-	    Debug.write("*************************************************");
-	    Debug.write("*************************************************");
-	    Debug.write("this.myvideocontainer.cameraRef._cam: ",this.myvideocontainer.cameraRef._cam.bandwidth);
-	    
-	    Debug.write("this.myvideocontainer.cameraRef._cam: ",this.myvideocontainer.cameraRef._cam.currentFps);
-	    Debug.write("this.myvideocontainer.cameraRef._cam: ",this.myvideocontainer.cameraRef._cam.quality);
-	    Debug.write("this.myvideocontainer.cameraRef._cam: ",this.myvideocontainer.cameraRef._cam.width);
-	    Debug.write("this.myvideocontainer.cameraRef._cam: ",this.myvideocontainer.cameraRef._cam.height);
-	    
-	    Debug.write("this.myvideocontainer. Microphone.rate ",this.myvideocontainer.microphoneRef._mic.rate);
-	    //this.myvideocontainer.microphoneRef._mic.setRate(4);
+        //this.myvideocontainer.microphoneRef._mic.setRate(4);
 	    //this.myvideocontainer.cameraRef._cam.setQuality(16384/4);
 	    this.myvideocontainer.microphoneRef._mic.setUseEchoSuppression(true);
 	    
-	    Debug.write("this.myvideocontainer.cameraRef._cam: ",this.myvideocontainer.cameraRef._cam.bandwidth);
-	    Debug.write("this.myvideocontainer.cameraRef._cam: ",this.myvideocontainer.cameraRef._cam.quality);
-	    Debug.write("this.myvideocontainer. Microphone.rate ",this.myvideocontainer.microphoneRef._mic.rate);
-	    Debug.write("*************************************************");
-	    Debug.write("*************************************************");
-                
+	        
         canvas.sendinitialMessage();
         this.close();
     </method>    
