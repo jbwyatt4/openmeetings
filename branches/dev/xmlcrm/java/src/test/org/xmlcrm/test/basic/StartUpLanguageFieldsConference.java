@@ -73,7 +73,40 @@ public class StartUpLanguageFieldsConference extends TestCase {
 		Fieldmanagment.getInstance().addFourFieldValues("no", 65, "nein", "nein", "nein", "nein");
 		Fieldmanagment.getInstance().addFourFieldValues("editsetup2", 66, "Einstellungen bearbeiten", "Einstellungen bearbeiten", "Einstellungen bearbeiten", "Einstellungen bearbeiten");
 		Fieldmanagment.getInstance().addFourFieldValues("needconfirmationwhiteboard", 67, "Bestätigung anfordern bevor das Zeichenbrett geleert wird.", "Bestätigung anfordern bevor das Zeichenbrett geleert wird.", "Bestätigung anfordern bevor das Zeichenbrett geleert wird.", "Bestätigung anfordern bevor das Zeichenbrett geleert wird.");
-	
+		Fieldmanagment.getInstance().addFourFieldValues("userinfo", 68, "User Info", "User Info", "User Info", "User Info");
+		Fieldmanagment.getInstance().addFourFieldValues("cleardrawarea", 69, "Clear DrawArea", "Clear DrawArea", "Clear DrawArea", "Clear DrawArea");
+		Fieldmanagment.getInstance().addFourFieldValues("undo", 70, "Undo", "Undo", "Undo", "Undo");
+		Fieldmanagment.getInstance().addFourFieldValues("redo", 71, "Redo", "Redo", "Redo", "Redo");
+		Fieldmanagment.getInstance().addFourFieldValues("selectobject", 72, "Select an Object", "Select an Object", "Select an Object", "Select an Object");
+		Fieldmanagment.getInstance().addFourFieldValues("text", 73, "Text", "Text", "Text", "Text");
+		Fieldmanagment.getInstance().addFourFieldValues("paint", 74, "Paint", "Paint", "Paint", "Paint");
+		Fieldmanagment.getInstance().addFourFieldValues("drawline", 75, "Draw line", "Draw line", "Draw line", "Draw line");
+		Fieldmanagment.getInstance().addFourFieldValues("drawu", 76, "Draw underline", "Draw underline", "Draw underline", "Draw underline");
+		Fieldmanagment.getInstance().addFourFieldValues("rect", 77, "Rectangle", "Rectangle", "Rectangle", "Rectangle");
+		Fieldmanagment.getInstance().addFourFieldValues("ellipse", 78, "Ellipse", "Ellipse", "Ellipse", "Ellipse");
+		Fieldmanagment.getInstance().addFourFieldValues("arrow", 79, "Arrow", "Arrow", "Arrow", "Arrow");
+		Fieldmanagment.getInstance().addFourFieldValues("deletechosen", 80, "delete chosen Item", "delete chosen Item", "delete chosen Item", "delete chosen Item");
+		Fieldmanagment.getInstance().addFourFieldValues("appliymod", 81, "Apply for moderation", "Apply for moderation", "Apply for moderation", "Apply for moderation");
+		Fieldmanagment.getInstance().addFourFieldValues("apply", 82, "apply", "apply", "apply", "apply");
+		Fieldmanagment.getInstance().addFourFieldValues("cancel", 83, "cancel", "cancel", "cancel", "cancel");
+		Fieldmanagment.getInstance().addFourFieldValues("mod", 84, "Become moderator", "Become moderator", "Become moderator", "Become moderator");
+		Fieldmanagment.getInstance().addFourFieldValues("close", 85, "close", "close", "close", "close");
+		Fieldmanagment.getInstance().addFourFieldValues("italic", 86, "italic", "italic", "italic", "italic");
+		Fieldmanagment.getInstance().addFourFieldValues("bold", 87, "bold", "bold", "bold", "bold");
+		Fieldmanagment.getInstance().addFourFieldValues("waiting", 88, "WAITING", "WAITING", "WAITING", "WAITING");
+		Fieldmanagment.getInstance().addFourFieldValues("applyMessage", 89, "A User wants to apply for moderation:", "A User wants to apply for moderation:", "A User wants to apply for moderation:", "A User wants to apply for moderation:");
+		Fieldmanagment.getInstance().addFourFieldValues("accept", 90, "accept", "accept", "accept", "accept");
+		Fieldmanagment.getInstance().addFourFieldValues("reject", 91, "reject", "reject", "reject", "reject");
+		Fieldmanagment.getInstance().addFourFieldValues("cancel", 92, "cancel", "cancel", "cancel", "cancel");
+		Fieldmanagment.getInstance().addFourFieldValues("sendmodrequestmessage", 93, "Sending request to following Users", "Sending request to following Users", "Sending request to following Users", "Sending request to following Users");
+		Fieldmanagment.getInstance().addFourFieldValues("accept", 94, "Accepted", "Accepted", "Accepted", "Accepted");
+		Fieldmanagment.getInstance().addFourFieldValues("reject", 95, "Rejected", "Rejected", "Rejected", "Rejected");
+		Fieldmanagment.getInstance().addFourFieldValues("changemod", 96, "Change Moderator", "Change Moderator", "Change Moderator", "Change Moderator");
+		Fieldmanagment.getInstance().addFourFieldValues("nonmoderrormessage", 97, "You are not moderating this course!", "You are not moderating this course!", "You are not moderating this course!", "You are not moderating this course!");
+		Fieldmanagment.getInstance().addFourFieldValues("moderator", 98, "Moderator:", "Moderator:", "Moderator:", "Moderator:");
+		Fieldmanagment.getInstance().addFourFieldValues("roomfullmessage", 99, "This Room is full. Sorry please try again later.", "This Room is full. Sorry please try again later.", "This Room is full. Sorry please try again later.", "This Room is full. Sorry please try again later.");
+		Fieldmanagment.getInstance().addFourFieldValues("elllipse", 100, "Ellipse", "Ellipse", "Ellipse", "Ellipse");
+		Fieldmanagment.getInstance().addFourFieldValues("close", 101, "close", "close", "close", "close");
 		
 	}
 	
