@@ -80,6 +80,7 @@
             <netparam name="vars2"><method name="getValue">return canvas.currentuser;</method></netparam>
             <netparam name="vars3"><method name="getValue">return canvas.firstName;</method></netparam>
             <netparam name="vars4"><method name="getValue">return canvas.lastName;</method></netparam>      
+            <netparam name="vars6"><method name="getValue">return 'domain1';</method></netparam>
             <handler name="ondata" args="value">
                 //The onResult-Handler will be called be the rtmpconnection
                 Debug.write("setUsername: ",value);

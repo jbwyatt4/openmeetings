@@ -67,6 +67,7 @@
 	    
 	    canvas._ns = new NetStream(canvas.thishib._nc);
 		
+		Debug.write("publishing streamid: ",canvas.streamid);
 	    canvas._ns.publish(canvas.streamid,"live");
 	    //this.myvideocontainer.microphoneRef._mic.setRate(4);
 	    //this.myvideocontainer.cameraRef._cam.setQuality(16384/4);
@@ -90,9 +91,7 @@
         //this.myvideocontainer.microphoneRef._mic.setRate(4);
 	    //this.myvideocontainer.cameraRef._cam.setQuality(16384/4);
 	    this.myvideocontainer.microphoneRef._mic.setUseEchoSuppression(true);
-	    
-	        
-        canvas.sendinitialMessage();
+
         this.close();
     </method>    
 

@@ -4,7 +4,7 @@
 * X_LZ_COPYRIGHT_END ****************************************************** -->
 <library>
 
-<class name="rtmpconnectionhib" extends="node">
+<class name="rtmpconnection" extends="node">
 
     <!--- Connect automatically during init. If false, you need to explicitly
           call connect(). Default is true. -->
@@ -37,7 +37,7 @@
         // if this is the first instance, define a default NetConnection
         // for the class (used by other real-time objects, like videoview
         if (this['_default'] == undefined) 
-            rtmpconnectionhib.prototype._default = this;
+            rtmpconnection.prototype._default = this;
 
         if (this.debug) {
 
@@ -71,7 +71,7 @@
         //Register all methods which are onstanceof netremotecall
         for (var i=0;i<this.subnodes.length;i++){
             //If it is of Type netremotecall then register it to the NetConnection
-            if (this.subnodes[i] instanceof netremotecallhib){
+            if (this.subnodes[i] instanceof netremotecall){
                 var t = this;
                 this._nc[this.subnodes[i].funcname] = function( args ){
                     return t.remoteCallMethod(arguments.callee,args);
@@ -128,12 +128,18 @@
         var ok = this._nc.connect(src == "null" ? null : src);
         this.setAttribute('status', "connecting");
         this.setAttribute('stage', 1);
+        <!--
+        This code does not work, if the connection has failed already and you try another one
+        for example if you fallback from rtmp to rtmpt which is a common szenario this will be always 
+        ok = false => i think it shows only the right value of the previous connection not the
+        current one
         if (!ok) {
             Debug.warn('connection failed bad url');
             this.setAttribute('status', "disconnected");
             this.setAttribute('stage', 0);
             return;
         }
+         -->
         var t = this;
         this._nc.onStatus = function(info) {
             t = this.t;
@@ -194,6 +200,8 @@
             }
             if (s == 2) {
                 if (t['onconnect']) t.onconnect.sendEvent();
+            } else {
+            	if (t['onerror']) t.onerror.sendEvent();
             }
         }
         // local reference to rtmpconnection
@@ -244,7 +252,7 @@
     </method>
 </class>
 
-<class name="netremotecallhib" extends="node">
+<class name="netremotecall" extends="node">
 
     <!-- name of remote Function -->
     <attribute name="funcname" value="$once{null}" type="string" />
@@ -289,12 +297,12 @@
         }
         ]]>    
         var rtmpObject = null;
-        if (this.parent instanceof rtmpconnectionhib){
-            rtmpObject = this.parent;
-        } else if(this.remotecontext  instanceof rtmpconnectionhib){
-            rtmpObject = this.remotecontext;
+        if (this.parent instanceof rtmpconnection){
+        	rtmpObject = this.parent;
+        } else if(this.remotecontext  instanceof rtmpconnection){
+        	rtmpObject = this.remotecontext;
         } else {
-            Debug.write("ERROR: no remotecontext availible abort call");
+        	Debug.write("ERROR: no remotecontext availible abort call");
         }
         
         if (rtmpObject.debug) Debug.write('call', this, rtmpObject, rtmpObject.status);
@@ -312,6 +320,11 @@
         this.ondata.sendEvent(value);
     </method>
 
+</class>
+
+<!-- Element to use inside netremotecall. -->
+<class name="netparam" extends="node">
+    <attribute name="value" value="null" type="expression" />
 </class>
 
 </library>
