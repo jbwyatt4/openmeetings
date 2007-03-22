@@ -75,7 +75,7 @@
             </handler>  
         </netremotecall> 
         
-        <netremotecall name="setUsername" funcname="setUsername" remotecontext="$once{ canvas.thisrct }" >   
+        <netremotecall name="setUsername" funcname="setUsername" remotecontext="$once{ canvas.thishib }" >   
             <netparam name="vars1"><method name="getValue">return canvas.user_id;</method></netparam>
             <netparam name="vars2"><method name="getValue">return canvas.currentuser;</method></netparam>
             <netparam name="vars3"><method name="getValue">return canvas.firstName;</method></netparam>
@@ -145,25 +145,15 @@
                 if (canvas.currentModApply!=null) canvas.currentModApply.rejectUser(value);
                 //parent.getClientListScope.call();  
             </handler>   
-        </netremotecall>          
-        <netremotecall name="getFiles" funcname="dokeosService.getListOfFiles">
-            <handler name="ondata" args="value">
-                <![CDATA[
-                //The onResult-Handler will be called be the rtmpconnection
-                Debug.write("getFiles: ",value);
-                _imageslistdraw.resetList();
-                for(eg in value){
-                    Debug.write(value[eg]);   
-                    var Teil = value[eg]['name'].substr(value[eg]['name'].length-3, value[eg]['name'].legnth);
-                    var teil = Teil.toLowerCase();
-                    Debug.write("Teil",teil);
-                    var isimage = false;
-                    if (teil=='jpg' || teil=='jpeg' || teil=='gif' || teil=='png') isimage=true;
-                    _imageslistdraw.addFile(eg,value[eg]['name'],'admin',value[eg]['lastModified'],isimage); 
-                }
-                ]]>
-            </handler>   
-        </netremotecall>   
+        </netremotecall>     
+		<netremotecall name="logicalRoomLeaveDis" funcname="logicalRoomLeaveDis" >      
+	    	<handler name="ondata" args="value">
+	    		Debug.write("logicalRoomLeaveDis: ",value);
+	    		canvas._videocontainer.disconnectclient(value.streamid,value.userpos); 
+	    		if (canvas.currentModApply!=null) canvas.currentModApply.rejectUser(value);
+	    	</handler>
+	    </netremotecall>             
+  
         <netremotecall name="sendVars" funcname="sendVars">
             <netparam name="vars"><method name="getValue">return canvas.objWhiteboard;</method></netparam>
             <handler name="ondata" args="value">
@@ -235,7 +225,7 @@
                 ]]>
             </handler>   
         </netremotecall>    
-        <netremotecall name="sendVarsToMessageWithClient" funcname="sendVarsToMessageWithClient" remotecontext="$once{ canvas.thisrct }" >  
+        <netremotecall name="sendVarsToMessageWithClient" funcname="sendVarsToMessageWithClient" remotecontext="$once{ canvas.thishib }" >  
             <netparam name="vars"><method name="getValue">return parent.parent.applymessage;</method></netparam>
             <handler name="ondata" args="value">
                 <![CDATA[
@@ -267,7 +257,7 @@
         <netremotecall name="newPoll" funcname="newPoll">
             <handler name="ondata" args="value">
                 <![CDATA[
-                //The onResult-Handler will be called be the rtmpconnection
+                //The onResult-Handler will be called by the rtmpconnection
                 Debug.write("newPoll : ",value);
                 if(canvas.streamid!=value.createdBy.streamid) new answerpoll(canvas.main_content._content,{createdBy:value.createdBy.username,pollDate:value.pollDate,pollQuestion:value.pollQuestion,pollTypeId:value.pollTypeId,roomPollAnswerList:value.roomPollAnswerList,roomPollId:value.roomPollId,roomScopeName:value.roomScopeName});
                 ]]>

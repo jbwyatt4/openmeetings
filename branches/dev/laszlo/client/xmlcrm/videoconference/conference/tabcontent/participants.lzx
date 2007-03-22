@@ -56,7 +56,7 @@
 		this.getClientListScope.call();
 	</handler>
 	
-    <netremotecall name="getClientListScope" funcname="getClientListScope" remotecontext="$once{ canvas.thisrct }" >          
+    <netremotecall name="getClientListScope" funcname="getClientListScope" remotecontext="$once{ canvas.thishib }" >          
         <handler name="ondata" args="value">
         	<![CDATA[
             //The onResult-Handler will be called be the rtmpconnection

@@ -42,7 +42,7 @@
 		this.getClientListScope.call();
 	</method>
 	
-        <netremotecall name="getClientListScope" funcname="getClientListScope" remotecontext="$once{ canvas.thisrct }" >   
+        <netremotecall name="getClientListScope" funcname="getClientListScope" remotecontext="$once{ canvas.thishib }" >   
             <handler name="ondata" args="value">
             	<![CDATA[
                 //The onResult-Handler will be called be the rtmpconnection
@@ -58,7 +58,7 @@
                 ]]>
             </handler>   
         </netremotecall> 
-	  	<netremotecall name="setUsername" funcname="setUsername" remotecontext="$once{ canvas.thisrct }" >   
+	  	<netremotecall name="setUsername" funcname="setUsername" remotecontext="$once{ canvas.thishib }" >   
         	<netparam name="vars"><method name="getValue"> return canvas.user_id; </method></netparam>	  	
 			<netparam name="vars"><method name="getValue"> return canvas.official_code; </method></netparam>	  	
 			<netparam name="vars"><method name="getValue"> return canvas.firstName; </method></netparam>	  	
@@ -71,7 +71,7 @@
 			</handler>	
 	  	</netremotecall>
 	  	
-	  	<netremotecall name="getCurrentModerator" funcname="getCurrentModerator" remotecontext="$once{ canvas.thisrct }" >   
+	  	<netremotecall name="getCurrentModerator" funcname="getCurrentModerator" remotecontext="$once{ canvas.thishib }" >   
 			<handler name="ondata" args="value">
 				//The onResult-Handler will be called be the rtmpconnection
 				Debug.write("getCurrentModerator: ",value,value.username);

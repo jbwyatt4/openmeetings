@@ -199,12 +199,7 @@ containing the VideoViews
         <method name="clearAll">
             for (var eg in this.subviews){
                 Debug.write("this.subviews: ",this.subviews[eg]);
-                if (this.subviews[eg].docking) {
-                    this.subviews[eg].close();
-                } else {
-                    this.subviews[eg].destroy();
-                }
-                
+                this.subviews[eg].close();                
                 //
             }
         </method>

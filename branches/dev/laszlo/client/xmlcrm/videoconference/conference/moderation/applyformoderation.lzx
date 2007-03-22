@@ -71,7 +71,7 @@
 		]]>
 	</method>
 	
-	<netremotecall name="getClientListScope" funcname="getClientListScope" remotecontext="$once{ canvas.thisrct }" >        
+	<netremotecall name="getClientListScope" funcname="getClientListScope" remotecontext="$once{ canvas.thishib }" >        
        	<handler name="ondata" args="value">
        		<![CDATA[
            	//The onResult-Handler will be called be the rtmpconnection
@@ -85,7 +85,7 @@
 		</handler>   
     </netremotecall> 
      
-    <netremotecall name="sendMessageWithClient" funcname="sendMessageWithClient" remotecontext="$once{ canvas.thisrct }" >  
+    <netremotecall name="sendMessageWithClient" funcname="sendMessageWithClient" remotecontext="$once{ canvas.thishib }" >  
     	<netparam name="vars"><method name="getValue">return parent.parent.applymessage;</method></netparam>
         <handler name="ondata" args="value">
         	<![CDATA[
