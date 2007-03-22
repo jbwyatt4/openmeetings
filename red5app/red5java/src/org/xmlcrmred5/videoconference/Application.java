@@ -206,6 +206,10 @@ public class Application extends ApplicationAdapter implements
 		return null;
 	}
 
+	/**
+	 * Logic must be before roomDisconnect cause otherwise you cannot throw a message to each one
+	 * 
+	 */
 	@Override
 	public void roomLeave(IClient client, IScope room) {
 		log.error("roomLeave " + client.getId() + " "+ room.getClients().size() + " " + room.getContextPath() + " "+ room.getName());
@@ -243,7 +247,7 @@ public class Application extends ApplicationAdapter implements
 						log.error("sending roomDisconnect to " + cons);
 						RoomClient rcl = ClientList.get(cons.getClient().getId());
 						//Check if the Client is in the same room and same domain except its the current one
-						if(roomname.equals(rcl.getUserroom()) && orgdomain.equals(rcl.getDomain())){					
+						if(orgdomain.equals(rcl.getDomain())){					
 							((IServiceCapableConnection) cons).invoke("roomDisconnect",new Object[] { currentClient }, this);
 							log.error("sending roomDisconnect to " + cons);
 						}
@@ -255,6 +259,59 @@ public class Application extends ApplicationAdapter implements
 			log.error("[roomDisconnect]"+err);
 		}		
 	}
+	
+	/**
+	 * this means a user has left a room but only logically, he didn't leave the app he jusst left the room
+	 * 
+	 *
+	 */
+	public void logicalRoomLeave() {
+		log.error("logicalRoomLeave ");
+		try {
+			IConnection current = Red5.getConnectionLocal();
+			RoomClient currentClient = ClientList.get(current.getClient().getId());
+			String roomname = currentClient.getUserroom();
+			String orgdomain = currentClient.getDomain();	
+			currentClient.setUserroom("");
+			
+			log.error("##### logicalRoomLeave :.remove " + currentClient.getStreamid()); // just a unique number
+
+
+			log.error("removing USername "+currentClient.getUsername()+" "+currentClient.getConnectedSince()+" streamid: "+currentClient.getStreamid());
+			ClientList.put(currentClient.getStreamid(),currentClient);
+			
+			//If this Room is empty clear the Room Poll List
+			HashMap<String,RoomClient> rcpList = this.getClientListByRoomAndDomain(roomname, orgdomain);
+			log.error("logicalRoomLeave rcpList size: "+rcpList.size());
+			if (rcpList.size()==0){
+				RemoteService.clearRoomPollList(current.getScope().getName());
+				log.error("logicalRoomLeave clearRoomPollList cleared");
+			}
+			
+			//Notify all clients of the same scope (room) with domain and room
+			
+			Iterator<IConnection> it = current.getScope().getConnections();
+			while (it.hasNext()) {
+				log.error("hasNext == true");
+				IConnection cons = it.next();
+				log.error("cons Host: "+cons);
+				if (cons instanceof IServiceCapableConnection) {
+					if (!cons.equals(current)){
+						log.error("sending roomDisconnect to " + cons);
+						RoomClient rcl = ClientList.get(cons.getClient().getId());
+						//Check if the Client is in the same room and same domain except its the current one
+						if(roomname.equals(rcl.getUserroom()) && orgdomain.equals(rcl.getDomain())){					
+							((IServiceCapableConnection) cons).invoke("logicalRoomLeaveDis",new Object[] { currentClient }, this);
+							log.error("sending roomDisconnect to " + cons);
+						}
+					}
+				}
+			}			
+			
+		} catch (Exception err){
+			log.error("[roomDisconnect]"+err);
+		}		
+	}	
 
 	/**
 	 * This Method will be called every time a Client connects
