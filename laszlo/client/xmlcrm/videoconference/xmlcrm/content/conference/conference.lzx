@@ -3,6 +3,17 @@
     
 <class name="conference" extends="basecontentview">
 
+	<method name="close">
+		this.logicalRoomLeave.call();
+	</method>
+	
+	<netremotecall name="logicalRoomLeave" funcname="logicalRoomLeave" remotecontext="$once{ canvas.thishib }" >      
+    	<handler name="ondata" args="value">
+    		Debug.write("logicalRoomLeave: ",value);
+    		this.parent.destroy();
+    	</handler>
+    </netremotecall>
+
     <view x="264" width="658" y="42" height="521" bgcolor="$once{ canvas.basebgcolorizer }">
 		<view name="bg" x="1" y="1" bgcolor="white"
 			width="$once{ parent.width-2 }" height="$once{ parent.height-2 }" />

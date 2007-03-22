@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library>
 
-    <rtmpconnection name="thisrct" id="rtc" debug="true" autoconnect="false"	
+    <rtmpconnection name="thishib" id="rtc" debug="true" autoconnect="false"	
     	src="$once{ this.protocollName+'://'+canvas.rmpthostlocal+':'+this.protocollPort+'/xmlcrm/'+canvas.currentcourse }" >	
 	  	<!-- 
 	  		Some remotecalls
@@ -216,7 +216,7 @@
                 ]]>
             </handler>   
         </netremotecall>    
-	    <netremotecall name="sendVarsToMessageWithClient" funcname="sendVarsToMessageWithClient" remotecontext="$once{ canvas.thisrct }" >  
+	    <netremotecall name="sendVarsToMessageWithClient" funcname="sendVarsToMessageWithClient" remotecontext="$once{ canvas.thishib }" >  
 	    	<netparam name="vars"><method name="getValue">return parent.parent.applymessage;</method></netparam>
 	        <handler name="ondata" args="value">
 	        	<![CDATA[
