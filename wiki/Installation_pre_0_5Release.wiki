@@ -1,0 +1,35 @@
+#summary How to install pre-0.5 Release, Please: this is for developers not end users!
+#labels Featured,Installation,Phase-Implementation
+
+= Requirements =
+
+  * JDK 1.5
+  * JAVA_HOME set to point to your JDK installation dir (NOT to the JRE)
+  * ooservice up und running in headless mode on port 2002
+
+= Database =
+
+  # It is precofnigured to use Postgres SQL. You will need to forward the database scheme to your SQL-Database and configure hibernate to use the right driver
+  # Forward the database skeleton to the database
+  # Add the initial values to the database  
+
+= OpenLaszlo =
+
+  # Install OpenLaszlo 3.4.x
+  # Rename lps-3.4.x to lps-latest
+  # add ooservice
+  # add servlets for up and download
+  # add openmeetings application
+  # alter host.lzx to fit your installation
+
+  
+= Red5-webapp installation =
+  
+  # Checkout Red5 from svn, build and install it
+  # copy the webapp to the destianation dir
+  # copy all needed JARs to the destination dir
+  # configure webapp and red5.properties to fit your installation
+
+start all services and test it.
+
+
