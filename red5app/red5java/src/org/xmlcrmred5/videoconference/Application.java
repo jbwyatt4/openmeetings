@@ -230,7 +230,7 @@ public class Application extends ApplicationAdapter implements
 			HashMap<String,RoomClient> rcpList = this.getClientListByRoomAndDomain(roomname, orgdomain);
 			log.error("roomLeave rcpList size: "+rcpList.size());
 			if (rcpList.size()==0){
-				RemoteService.clearRoomPollList(current.getScope().getName());
+				RemoteService.clearRoomPollList(roomname,orgdomain);
 //				log.debug("clearRoomPollList cleared");
 			}
 			
@@ -284,7 +284,7 @@ public class Application extends ApplicationAdapter implements
 			HashMap<String,RoomClient> rcpList = this.getClientListByRoomAndDomain(roomname, orgdomain);
 			log.error("logicalRoomLeave rcpList size: "+rcpList.size());
 			if (rcpList.size()==0){
-				RemoteService.clearRoomPollList(current.getScope().getName());
+				RemoteService.clearRoomPollList(roomname,orgdomain);
 				log.error("logicalRoomLeave clearRoomPollList cleared");
 			}
 			

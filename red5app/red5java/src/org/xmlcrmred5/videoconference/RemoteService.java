@@ -101,10 +101,12 @@ public class RemoteService {
 			log.debug("createPoll: "+pollQuestion);
 			
 			IConnection currentcon = Red5.getConnectionLocal();
-			String scopeName = currentcon.getScope().getName();
+
 			
 			HashMap<String,RoomClient> ClientList = Application.getClientList();
 			RoomClient rc = ClientList.get(currentcon.getClient().getId());
+			
+			String uniqueRoomPollName = rc.getUserroom()+rc.getDomain();
 			
 			log.debug("rc: "+rc.getStreamid()+" "+rc.getUsername()+" "+rc.getIsMod());
 			
@@ -115,11 +117,12 @@ public class RemoteService {
 				roomP.setPollDate(new Date());
 				roomP.setPollQuestion(pollQuestion);
 				roomP.setPollTypeId(pollTypeId);
-				roomP.setRoomScopeName(scopeName);
+				roomP.setRoomScopeName(rc.getUserroom());
+				roomP.setClientdomain(rc.getDomain());
 				List<RoomPollAnswers> rpA = new LinkedList<RoomPollAnswers>();
 				roomP.setRoomPollAnswerList(rpA);
 				
-				pollList.put(scopeName, roomP);
+				pollList.put(uniqueRoomPollName, roomP);
 				
 				sendNotification(currentcon,"newPoll",new Object[] { roomP });
 				returnValue="200";
@@ -135,11 +138,11 @@ public class RemoteService {
 		return returnValue;
 	}	
 
-	public static void clearRoomPollList(String scopeName){
+	public static void clearRoomPollList(String roomname, String domainName){
 		try {
-			log.debug("clearRoomPollList: "+scopeName);
-			if(pollList.get(scopeName)!=null){
-				pollList.remove(scopeName);
+			log.debug("clearRoomPollList: "+roomname+domainName);
+			if(pollList.get(roomname+domainName)!=null){
+				pollList.remove(roomname+domainName);
 			}
 		} catch (Exception err){
 			log.error(err);
@@ -148,12 +151,16 @@ public class RemoteService {
 	
 	public void sendNotification(IConnection current,String clientFunction, Object[]obj) throws Exception{
 		//Notify all clients of the same scope (room)
+		RoomClient rc = Application.getClientList().get(current.getClient().getId());
 		Iterator<IConnection> it = current.getScope().getConnections();
 		while (it.hasNext()) {
 			IConnection conn = it.next();
 			if (conn instanceof IServiceCapableConnection) {
-				((IServiceCapableConnection) conn).invoke(clientFunction,obj,Application.getInstance());
-				log.debug("sending "+clientFunction+" to " + conn+" "+conn.getClient().getId());
+				RoomClient rcl = Application.getClientList().get(conn.getClient().getId());
+				if (rcl.getUserroom().equals(rc.getUserroom()) && rcl.getDomain().equals(rc.getDomain())){
+					((IServiceCapableConnection) conn).invoke(clientFunction,obj,Application.getInstance());
+					log.debug("sending "+clientFunction+" to " + conn+" "+conn.getClient().getId());
+				}
 			}
 		}
 	}
@@ -183,17 +190,16 @@ public class RemoteService {
 	public int vote(int pollvalue,int pollTypeId){
 		int returnVal=0;
 		try {
-			
-			IConnection currentcon = Red5.getConnectionLocal();
-			String scopeName = currentcon.getScope().getName();
+			IConnection current = Red5.getConnectionLocal();
+			RoomClient rc = Application.getClientList().get(current.getClient().getId());
 			
 			//get Poll
-			RoomPoll roomP = pollList.get(scopeName);
+			RoomPoll roomP = pollList.get(rc.getUserroom()+rc.getDomain());
 			
 			log.debug("vote: "+pollvalue+" "+pollTypeId+" "+roomP.getPollQuestion());
 			
 			//Check if this user has already voted
-			if(this.hasVoted(roomP,currentcon.getClient().getId())){
+			if(this.hasVoted(roomP,rc.getStreamid())){
 				log.debug("hasVoted: true");
 				return -1;
 			} else {
@@ -211,7 +217,7 @@ public class RemoteService {
 					log.debug("numeric");
 					rpA.setPointList(pollvalue);
 				}
-				rpA.setVotedClients(Application.getClientList().get(currentcon.getClient().getId()));
+				rpA.setVotedClients(rc);
 				rpA.setVoteDate(new Date());
 				roomP.getRoomPollAnswerList().add(rpA);
 				return 1;
@@ -238,33 +244,34 @@ public class RemoteService {
 	}
 	
 	public RoomPoll getVotes(){
-		IConnection currentcon = Red5.getConnectionLocal();
-		String scopeName = currentcon.getScope().getName();
+		IConnection current = Red5.getConnectionLocal();
+		RoomClient rc = Application.getClientList().get(current.getClient().getId());
 		
 		//get Poll
-		return pollList.get(scopeName);
+		return pollList.get(rc.getUserroom()+rc.getDomain());
+
 	}
 	
 	public RoomPoll getPoll(){
-		IConnection currentcon = Red5.getConnectionLocal();
-		String scopeName = currentcon.getScope().getName();
+		IConnection current = Red5.getConnectionLocal();
+		RoomClient rc = Application.getClientList().get(current.getClient().getId());
 		
 		//get Poll
-		return pollList.get(scopeName);
+		return pollList.get(rc.getUserroom()+rc.getDomain());
 	}
 	
 	public int checkHasVoted(){
 		try {
-			IConnection currentcon = Red5.getConnectionLocal();
-			String scopeName = currentcon.getScope().getName();
+			IConnection current = Red5.getConnectionLocal();
+			RoomClient rc = Application.getClientList().get(current.getClient().getId());
 			
 			//get Poll
-			RoomPoll roomP = pollList.get(scopeName);
+			RoomPoll roomP = pollList.get(rc.getUserroom()+rc.getDomain());
 			
 			if (roomP!=null){
 				log.debug("checkHasVoted: "+roomP.getPollQuestion());
 				//Check if this user has already voted
-				if(this.hasVoted(roomP,currentcon.getClient().getId())){
+				if(this.hasVoted(roomP,rc.getStreamid())){
 					return -1;
 				} else {
 					return 1;
