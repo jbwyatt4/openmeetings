@@ -10,6 +10,7 @@ public class RoomPoll {
 	String roomScopeName;
 	RoomClient createdBy;
 	String pollQuestion;
+	String clientdomain;
 	List<RoomPollAnswers> roomPollAnswerList;
 	Date pollDate;
 	Integer pollTypeId;
@@ -96,6 +97,12 @@ public class RoomPoll {
 	 */
 	public void setPollTypeId(Integer pollTypeId) {
 		this.pollTypeId = pollTypeId;
+	}
+	public String getClientdomain() {
+		return clientdomain;
+	}
+	public void setClientdomain(String clientdomain) {
+		this.clientdomain = clientdomain;
 	}
 		
 
