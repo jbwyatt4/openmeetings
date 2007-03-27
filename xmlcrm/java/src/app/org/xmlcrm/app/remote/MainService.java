@@ -96,10 +96,22 @@ public class MainService {
     	}
     	return ret;
     }    
-	public String registerUser(String SID, String Username, String Userpass, String lastname, String firstname, String email, int age, String adresse, String Zip, String state, String town, long langid){
+	public Long registerUser(String SID, String Username, String Userpass, String lastname, 
+				String firstname, String email, int age, String street, String additionalname, 
+				String fax, String zip, long states_id, String town, long language_id){
+    	return Usermanagement.getInstance().registerUser(Username, Userpass, lastname, firstname, email, 
+    			age, street, additionalname, fax, zip, states_id, town, language_id);
+	}
+	
+	public Long addUserAdmin(String SID, long level_id, int availible, int status, 
+			String login, String Userpass, String lastname, String firstname, 
+			String email, int age, String street, String additionalname, String fax, 
+			String zip, long states_id, String town, long language_id){
     	int User_ID = Sessionmanagement.getInstance().checkSession(SID);
     	long User_LEVEL = Usermanagement.getInstance().getUserLevelByID(User_ID);	
-    	return Usermanagement.getInstance().registerUser(User_LEVEL,Username,Userpass,lastname,firstname,email,age,adresse,Zip, state, town, langid);
+    	return Usermanagement.getInstance().registerUserInit(User_LEVEL,level_id, availible, status, 
+				login, Userpass, lastname, firstname, email, age, street, additionalname, fax, 
+				zip, states_id, town, language_id);
 	}
     public String updateUser(String SID, String login, String password, String lastname, String firstname, int age, String adresse, String Zip, String state, String town, int EMailID, String email, int rechnungsaddr, String raddresse, int lieferaddr, String laddresse,int availible, String telefon, String fax, String mobil){
         int User_ID = Sessionmanagement.getInstance().checkSession(SID);

@@ -46,7 +46,7 @@
             type="java.util.Date"
             update="true"
             insert="true"
-            column="starttime"
+            column="startdate"
         />
 
         <property
@@ -54,7 +54,7 @@
             type="java.util.Date"
             update="true"
             insert="true"
-            column="updatetime"
+            column="updatedate"
         />
 
         <property

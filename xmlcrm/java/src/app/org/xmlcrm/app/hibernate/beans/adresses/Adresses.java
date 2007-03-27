@@ -1,6 +1,7 @@
 package org.xmlcrm.app.hibernate.beans.adresses;
 
 import java.util.Date;
+import java.util.Set;
 
 /**
  * 
@@ -21,8 +22,8 @@ public class Adresses {
     private String zip;
     private Boolean deleted;
     
-    private Emails emails[];
-    private Phones phones[];
+    private Set emails;
+    private Set phones;
     
     public Adresses() {
         // TODO Auto-generated constructor stub
@@ -164,20 +165,29 @@ public class Adresses {
 		this.deleted = deleted;
 	}
 	
-	public Emails[] getEmails() {
+    /**
+     * @hibernate.set 
+     * table = "adresses_emails" 
+     * inverse = "false" 
+     * cascade = "none"
+     * @hibernate.collection-one-to-many 
+     * class = "org.xmlcrm.app.hibernate.beans.adresses.Adresses_Emails"
+     * @hibernate.collection-key 
+     * column = "adresses_id"
+     */		
+	public Set getEmails() {
 		return emails;
 	}
-
-	public void setEmails(Emails[] emails) {
+	public void setEmails(Set emails) {
 		this.emails = emails;
 	}
 
-	public Phones[] getPhones() {
+	public Set getPhones() {
 		return phones;
 	}
-
-	public void setPhones(Phones[] phones) {
+	public void setPhones(Set phones) {
 		this.phones = phones;
 	}
-    
+
+
 }

@@ -32,12 +32,11 @@ public class RegisterUser extends TestCase{
 
 		
 		//registerUser(String SID, String Username, String Userpass, String lastname, String firstname, String email, int age, String adresse, String Zip, String state, String town)
-		String answer = mService.registerUser(sessionData.getSession_id(),"swagner6", "678101", "Wagner", "Sebastian", "seba.wagner@gmail.com", 25, "Bleichstraﬂe 92", "75173", "Germany", "Pforzheim", 1);
-		
-		System.out.println("++++ answer: "+answer);
+		Long user_id = mService.registerUser(sessionData.getSession_id(),"username3", "userpass", "lastname", 
+				"firstname", "email", 25, "street", "No 14", 
+				"faxno", "zip", 1, "town", 1);
+		System.out.println("++++ user_id: "+user_id);
 		
 	}
-/*
- * registerUser(long USER_LEVEL,String Username, String Userpass, String lastname, String firstname, String email, int age, String adresse, String Zip, String state, String town)
- */
+
 }

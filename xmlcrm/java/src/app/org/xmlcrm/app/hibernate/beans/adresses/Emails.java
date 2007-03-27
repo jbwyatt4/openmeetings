@@ -60,7 +60,7 @@ public class Emails {
     
     /**
      * @hibernate.property
-     *  column="starttime"
+     *  column="startdate"
      *  type="java.util.Date"
      */  	
 	public Date getStarttime() {
@@ -72,7 +72,7 @@ public class Emails {
     
     /**
      * @hibernate.property
-     *  column="updatetime"
+     *  column="updatedate"
      *  type="java.util.Date"
      */ 	
 	public Date getUpdatetime() {
