@@ -1,7 +1,9 @@
 package org.xmlcrm.app.hibernate.beans.user;
 
 import java.util.Date;
-import org.xmlcrm.app.hibernate.beans.adresses.Emails;
+import java.util.List;
+
+import org.xmlcrm.app.hibernate.beans.adresses.Adresses;
 
 /**
  * 
@@ -11,7 +13,6 @@ import org.xmlcrm.app.hibernate.beans.adresses.Emails;
 public class Users {
 	
 	private Long user_id;
-	private Long adresses_id;
 	private Date age;
 	private Integer availible;
 	private String firstname;
@@ -29,12 +30,15 @@ public class Users {
 	private String pictureuri;
 	private Boolean deleted;
 	private Long language_id;
+	private Adresses adresses;
 	
 	private Userlevel userlevel;
     private Userdata userdata[];
 	private Userdata rechnungsaddressen;
 	private Userdata lieferadressen;
     private Usergroups[] usergroups; 
+    
+    private List Organisations;
     
     
     //TODO: Fehlende adressids fŸr rechnung und lieferadresse
@@ -44,17 +48,23 @@ public class Users {
 		// TODO Auto-generated constructor stub
 	}
     
+
     /**
-     * @hibernate.property
-     *  column="adresses_id"
-     *  type="long"
-     */  
-	public Long getAdresses_id() {
-		return adresses_id;
+	 * @hibernate.many-to-one
+	 * column = "adresses_id"
+	 * class = "org.xmlcrm.app.hibernate.beans.adresses.Adresses"
+	 * insert="false"
+	 * update="false"
+	 * outer-join="true"
+	 * lazy="false"
+     */		
+	public Adresses getAdresses() {
+		return adresses;
 	}
-	public void setAdresses_id(Long adresses_id) {
-		this.adresses_id = adresses_id;
+	public void setAdresses(Adresses adresses) {
+		this.adresses = adresses;
 	}
+
     
     /**
      * @hibernate.property
@@ -305,6 +315,17 @@ public class Users {
 	}
 	public void setLanguage_id(Long language_id) {
 		this.language_id = language_id;
+	}
+
+
+
+	public List getOrganisations() {
+		return Organisations;
+	}
+
+
+	public void setOrganisations(List organisations) {
+		Organisations = organisations;
 	}
 	
 	

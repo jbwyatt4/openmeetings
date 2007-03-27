@@ -108,6 +108,26 @@
             column="deleted"
         />
 
+        <set
+            name="emails"
+            table="adresses_emails"
+            lazy="false"
+            inverse="false"
+            cascade="none"
+            sort="unsorted"
+        >
+
+            <key
+                column="adresses_id"
+            >
+            </key>
+
+            <one-to-many
+                  class="org.xmlcrm.app.hibernate.beans.adresses.Adresses_Emails"
+            />
+
+        </set>
+
         <!--
             To add non XDoclet property mappings, create a file named
                 hibernate-properties-Adresses.xml

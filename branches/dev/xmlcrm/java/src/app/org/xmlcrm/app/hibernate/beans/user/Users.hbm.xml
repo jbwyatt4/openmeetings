@@ -25,11 +25,13 @@
             </generator>
         </id>
 
-        <property
-            name="adresses_id"
-            type="long"
-            update="true"
-            insert="true"
+        <many-to-one
+            name="adresses"
+            class="org.xmlcrm.app.hibernate.beans.adresses.Adresses"
+            cascade="none"
+            outer-join="true"
+            update="false"
+            insert="false"
             column="adresses_id"
         />
 

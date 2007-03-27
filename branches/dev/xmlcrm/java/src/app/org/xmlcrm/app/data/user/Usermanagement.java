@@ -14,13 +14,9 @@ import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
 import org.xmlcrm.app.hibernate.beans.basic.Configuration;
-import org.xmlcrm.app.hibernate.beans.contact.Contacts;
-import org.xmlcrm.app.hibernate.beans.adresses.Emails;
 import org.xmlcrm.app.hibernate.beans.user.*;
 import org.xmlcrm.app.hibernate.utils.HibernateUtil;
-import org.xmlcrm.app.remote.ResHandler;
 import org.xmlcrm.app.data.basic.Configurationmanagement;
-import org.xmlcrm.utils.mail.*;
 import org.xmlcrm.utils.math.*;
 
 import org.xmlcrm.app.data.basic.*;
@@ -441,6 +437,8 @@ public class Usermanagement {
         }
         return res;
     } 
+    
+    
     public String deleteUserdataByUserAndKey(int User_ID, String DATA_KEY){
         String res = "Fehler beim deleteUserdataByUserAndKey";
         try {
@@ -461,9 +459,10 @@ public class Usermanagement {
         }
         return res;
     }     
+    
+    
     public String addUserdata(long USER_ID,String DATA_KEY,String DATA,String Comment){
         String ret = "Fehler beim speichern der Userdata";
-        long thistime = Calender.getInstance().getTimeStampMili();
         Userdata userdata = new Userdata();
         userdata.setData_key(DATA_KEY);
         userdata.setData(DATA);
@@ -488,6 +487,8 @@ public class Usermanagement {
         }
         return ret;
     }
+    
+    
 	public String deleteUserID(long USER_ID){
 		String result = "Fehler im deleteUserID";
 	    try {
@@ -515,6 +516,8 @@ public class Usermanagement {
         }
 		return result;
 	}
+	
+	
 	private Userlevel getUserLevel(Long level_id){
 		Userlevel userlevel = new Userlevel();
 	    try {
@@ -534,6 +537,8 @@ public class Usermanagement {
         }
 		return userlevel;
 	}
+	
+	
 	public long getUserLevelByID(long user_id){
 		long UserLevel = 1;
 		try {
@@ -560,141 +565,148 @@ public class Usermanagement {
         }
 		return UserLevel;
 	}
-	public String registerUser(long USER_LEVEL,String login, String Userpass, String lastname, String firstname, String email, int age, String adresse, String Zip, String state, String town, long language_id){
-		String result = "Invalid";
-		System.out.println("registerUser: "+result);
-		if (Configurationmanagement.getInstance().getConfKey(3,"allow_frontend_register").getConf_value().equals("1") || checkConfLevel(USER_LEVEL)){
-			if (!login.equals("") && !Userpass.equals("") && !email.equals("")){
-				boolean checkName = checkUserData("lastname",login);
-				boolean checkEmail = Emailmanagement.getInstance().checkUserEMail("email",email);
-
-				if (checkName && checkEmail){
-					Users users = new Users();
-					users.setFirstname(firstname);
-					users.setLogin(login);
-	                users.setLastname(lastname);
-					users.setAge(new Date());
-					//TODO: Adressdaen gehšren in die Adressdatentabellen
-					//users.set(state);
-					users.setAvailible(new Integer(1));
-					users.setLastlogin(new Date());
-					users.setLasttrans(new Long(0));
-					users.setLevel_id(new Long(1));
-					users.setStatus(1);
-					users.setTitle_id(new Integer(1));
-					users.setStarttime(new Date());
-					users.setLanguage_id(new Long(language_id));
-					users.setUpdatetime(new Date());
-//					users.setTown(town);
-//					users.setAdress(adresse);
-//					users.setZip(Zip);
-//					users.setUserlevel(2);
-					//TODO: fehlende adress_id's fŸr die rechnungs und lieferadresse in users
-//					users.setLieferadresse(0);
-//					users.setRechnungsaddresse(0);
-//					users.setFax("");
-//					users.setTelefon("");
-//					users.setMobil("");
-					MD5Calc md5 = new MD5Calc("MD5");
-					users.setPassword(md5.do_checksum(Userpass));
-					users.setRegdate(new Date());
-			        try {   
-			            Session session = HibernateUtil.currentSession();
-			            Transaction tx = session.beginTransaction();
-			            session.save(users);
-			            session.flush();   
-			            session.clear();
-			            session.refresh(users);
-			            tx.commit();
-			            HibernateUtil.closeSession();
-			            Long UserID = users.getUser_id();
-			            
-			            result = "ok";
-			            //result = ResHandler.getEmailmanagement().registerEmail(email,UserID,Username,Userpass);  
-			            Configuration configuration = Configurationmanagement.getInstance().getConfKey(3,"default_group_id");
-			            //result = Groupmanagement.getInstance().addUserToGroup(new Long(3),new Long(Long.parseLong(configuration.getConf_value())),UserID,"new");
-			           // configuration = Configurationmanagement.getInstance().getConfKey(3,"default_freigabe_folder_name");
-			           // result = ResHandler.getContactmanagement().addContactGroup(3,UserID,configuration.getConf_value(),1,"Meine Freigaben - Benutzer in diesem Ordner sind im System vorläufig freigegeben","newUser");
-			           // configuration = Configurationmanagement.getInstance().getConfKey(3,"default_folder_name");
-			            //result = ResHandler.getContactmanagement().addContactGroup(3,UserID,configuration.getConf_value(),1,"Einfacher Ordner - Benutzer in diesem Ordner sind vorläufig nicht freigegeben","newUser");		            
-			        } catch( HibernateException ex ) {
-			        	log.error("[registerUser]"+ex);
-			        } catch ( Exception ex2 ){
-			        	log.error("[registerUser]"+ex2);
-			        }
-				} else {
-					if (!checkName){
-						result = "Dieser Name ist schon vergeben";
-					}else if(!checkEmail){
-						result = "Diese EMail ist schon registriert"; 
-					}
-				}
-			} else {
-				result = "Sie müssen mindestens einen Namen, ein Passwort und eine EMail-Adresse angeben"; 
-			}
-		} else {
-			result = "Die Systemeinstellungen erlauben keinen Benutzerregistrierung";
+	
+	/**
+	 * Method to register a new User, User will automatically be added to the default USER_LEVEL(1)
+	 * @param USER_LEVEL
+	 * @param level_id
+	 * @param availible
+	 * @param status
+	 * @param login
+	 * @param Userpass
+	 * @param lastname
+	 * @param firstname
+	 * @param email
+	 * @param age
+	 * @param street
+	 * @param additionalname
+	 * @param fax
+	 * @param zip
+	 * @param states_id
+	 * @param town
+	 * @param language_id
+	 * @return
+	 */
+	public Long registerUser(String login, String Userpass, String lastname, String firstname, String email, 
+			int age, String street, String additionalname, String fax, String zip, 
+			long states_id, String town, long language_id){
+		//Checks if FrontEndUsers can register
+		if (Configurationmanagement.getInstance().getConfKey(3,"allow_frontend_register").getConf_value().equals("1") ){
+			//TODO: add availible params sothat users have to verify their login-data
+			//TODO: add status from Configuration items
+			return this.registerUserInit(3, 1, 0, 1, login, Userpass, lastname, firstname, email, 
+						age, street, additionalname, fax, zip, states_id, town, language_id);
 		}
-		return result;
+		return null;
 	}
 
-	public String registerUserInit(long USER_LEVEL,String login, String Userpass, String lastname, String firstname, String email, int age, String adresse, String Zip, String state, String town, long language_id){
-		String result = "Invalid";
-		System.out.println("registerUser: "+result);
+	/**
+	 * Adds a user including his adress-data,auth-date,mail-data
+	 * @param USER_LEVEL
+	 * @param level_id
+	 * @param availible
+	 * @param status
+	 * @param login
+	 * @param Userpass
+	 * @param lastname
+	 * @param firstname
+	 * @param email
+	 * @param age
+	 * @param street
+	 * @param additionalname
+	 * @param fax
+	 * @param zip
+	 * @param states_id
+	 * @param town
+	 * @param language_id
+	 * @return new users_id OR null if an exception, -1 if an error, -4 if mail already taken, -5 if username already taken, -3 if login or pass or mail is empty 
+	 */
+	public Long registerUserInit(long USER_LEVEL,long level_id, int availible, int status, 
+				String login, String Userpass, String lastname, String firstname, 
+				String email, int age, String street, String additionalname, String fax, 
+				String zip, long states_id, String town, long language_id){
+		//User Level must be at least Admin
+		//Moderators will get a temp update of there UserLevel to add Users to their Group
+		if (checkConfLevel(USER_LEVEL)){
+			//Check for required data
 			if (!login.equals("") && !Userpass.equals("") && !email.equals("")){
+				
+				//Check for duplicates
 				boolean checkName = checkUserData("lastname",login);
-				boolean checkEmail = Emailmanagement.getInstance().checkUserEMail("email",email);
+				boolean checkEmail = Emailmanagement.getInstance().checkUserEMail(email);
 
 				if (checkName && checkEmail){
-					Users users = new Users();
-					users.setFirstname(firstname);
-					users.setLogin(login);
-	                users.setLastname(lastname);
-					users.setAge(new Date());
-					//TODO: Adressdaen gehšren in die Adressdatentabellen
-					//users.set(state);
-					users.setAvailible(new Integer(1));
-					users.setLastlogin(new Date());
-					users.setLasttrans(new Long(0));
-					users.setLevel_id(new Long(1));
-					users.setStatus(1);
-					users.setTitle_id(new Integer(1));
-					users.setStarttime(new Date());
-					users.setUpdatetime(new Date());
-					users.setLanguage_id(new Long(language_id));
-					MD5Calc md5 = new MD5Calc("MD5");
-					users.setPassword(md5.do_checksum(Userpass));
-					users.setRegdate(new Date());
-			        try {   
-			            Session session = HibernateUtil.currentSession();
-			            Transaction tx = session.beginTransaction();
-			            session.save(users);
-			            session.flush();   
-			            session.clear();
-			            session.refresh(users);
-			            tx.commit();
-			            HibernateUtil.closeSession();
-			            Long UserID = users.getUser_id();
-			            
-			            result = "ok";
-			            //result = ResHandler.getEmailmanagement().registerEmail(email,UserID,Username,Userpass);  
-			        } catch( HibernateException ex ) {
-			        	log.error("[registerUser]"+ex);
-			        } catch ( Exception ex2 ){
-			        	log.error("[registerUser]"+ex2);
-			        }
+					long adress_id = Adressmanagement.getInstance().saveAdress(street, zip, town, states_id, additionalname, "", fax);
+					long user_id = this.addUser(level_id, availible, status, firstname, login, lastname, language_id, Userpass, adress_id);
+					long adress_emails_id = Emailmanagement.getInstance().registerEmail(email, adress_id, login, Userpass,"");
+					if (adress_id>0 && user_id>0 && adress_emails_id>0){
+						return user_id;
+					} else {
+						return new Long(-1);
+					}
 				} else {
 					if (!checkName){
-						result = "Dieser Name ist schon vergeben";
+						return new Long(-5);
 					}else if(!checkEmail){
-						result = "Diese EMail ist schon registriert"; 
+						return new Long(-4); 
 					}
 				}
 			} else {
-				result = "Sie müssen mindestens einen Namen, ein Passwort und eine EMail-Adresse angeben"; 
+				return new Long(-3); 
 			}
+		}
+		return null;
+	}
+	
+	/**
+	 * @author swagner
+	 * This Methdo adds a User to the User-Table
+	 * @param level_id The User Level, 1=User, 2=GroupAdmin/Moderator, 3=SystemAdmin/Admin
+	 * @param availible The user is activated
+	 * @param status The user is not blocked by System admins
+	 * @param firstname 
+	 * @param login Username for login
+	 * @param lastname
+	 * @param language_id
+	 * @param Userpass is MD5-crypted
+	 * @param adress_id
+	 * @return user_id or error null
+	 */
+	public Long addUser(long level_id,int availible, int status, String firstname, String login, String lastname, long language_id, String Userpass, long adress_id) {
+		try {
+			Users users = new Users();
+			users.setFirstname(firstname);
+			users.setLogin(login);
+	        users.setLastname(lastname);
+			users.setAge(new Date());
+			users.setAdresses(Adressmanagement.getInstance().getAdressbyId(adress_id));
+			users.setAvailible(availible);
+			users.setLastlogin(new Date());
+			users.setLasttrans(new Long(0));
+			users.setLevel_id(level_id);
+			users.setStatus(status);
+			users.setTitle_id(new Integer(1));
+			users.setStarttime(new Date());
+			users.setUpdatetime(new Date());
+			users.setLanguage_id(new Long(language_id));
+			MD5Calc md5 = new MD5Calc("MD5");
+			users.setPassword(md5.do_checksum(Userpass));
+			users.setRegdate(new Date());  
+			
+            Session session = HibernateUtil.currentSession();
+            Transaction tx = session.beginTransaction();
+            long user_id = (Long) session.save(users);
+            tx.commit();
+            HibernateUtil.closeSession();
 
-		return result;
+            return user_id;
+        
+		} catch( HibernateException ex ) {
+        	log.error("[registerUser]"+ex);
+        } catch ( Exception ex2 ){
+        	log.error("[registerUser]"+ex2);
+        }	
+        return null;
 	}
 	
 	private boolean checkUserData(String DataName, String DataValue){
@@ -876,8 +888,8 @@ public class Usermanagement {
         	log.error("[getUserForGroup]"+ex);
         } catch ( Exception ex2 ){
         	log.error("[getUserForGroup]"+ex2);
+        	
         }
 	}
 	
 }
-
