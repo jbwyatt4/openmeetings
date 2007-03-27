@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<canvas >
+<!-- 
+FC8558
+FDC4A6
+ -->
+	<include href="scrollbars/" />
+	
+	<class name="splitbox" extends="view" bgcolor="red" width="40" height="40" />
+	
+	<class name="contbox" extends="view" layout="axis:x;spacing:2">
+		<handler name="oninit">
+			<![CDATA[
+			for (var i=0;i<10;i++) new splitbox(this);
+			]]>
+		</handler>
+	</class>
+	
+	<view width="200" height="300" clip="true">
+		<view layout="axis:y;spacing:2" >
+		<handler name="oninit">
+			<![CDATA[
+			for (var i=0;i<10;i++) new contbox(this);
+			]]>
+		</handler>
+		</view>
+		<newvscrollbar />
+		<newhscrollbar />
+	</view>
+
+</canvas>
