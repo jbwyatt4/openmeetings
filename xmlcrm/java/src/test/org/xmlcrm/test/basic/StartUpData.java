@@ -75,7 +75,10 @@ public class StartUpData extends TestCase {
 		Usermanagement.getInstance().addUserTitels("Herr");
 		Usermanagement.getInstance().addUserTitels("Frau");
 		
-		//Usermanagement.getInstance().registerUserInit(new Long(3), "swagner", "67810", "Wagner", "Sebastian", "seba.wagner@gmail.com", 23, "adress", "zip", "state", "town", 1);
+		Usermanagement.getInstance().registerUserInit(new Long(3),3, 1, 1, 
+				"swagner", "test", "lastname", "firstname", 
+				"seba.wagner@gmail.com", 0, "street", "no", "fax", 
+				"zip", 1, "", 0);
 		
 		Configurationmanagement.getInstance().addConfByKey(3, "allow_frontend_register", "1", 1, "");
 		

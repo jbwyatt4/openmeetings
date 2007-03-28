@@ -107,6 +107,29 @@ public class StartUpLanguageFieldsConference extends TestCase {
 		Fieldmanagment.getInstance().addFourFieldValues("roomfullmessage", 99, "This Room is full. Sorry please try again later.", "This Room is full. Sorry please try again later.", "This Room is full. Sorry please try again later.", "This Room is full. Sorry please try again later.");
 		Fieldmanagment.getInstance().addFourFieldValues("elllipse", 100, "Ellipse", "Ellipse", "Ellipse", "Ellipse");
 		Fieldmanagment.getInstance().addFourFieldValues("close", 101, "close", "close", "close", "close");
+		Fieldmanagment.getInstance().addFourFieldValues("AuthError", 102, "Eingabefehler", "input data error", "input data error", "input data error");
+		Fieldmanagment.getInstance().addFourFieldValues("min4username", 103, "Der Benutzername muss mindestens 4 Zeichen lang sein", "username must be 4 characters at least", "username must be 4 characters at least", "username must be 4 characters at least");
+		Fieldmanagment.getInstance().addFourFieldValues("min4pass", 104, "Das Passwort muss mindestens 4 Zeichen lang sein", "userpass must be 4 characters at least", "userpass must be 4 characters at least", "userpass must be 4 characters at least");
+		Fieldmanagment.getInstance().addFourFieldValues("usernametaken", 105, "Der Benutzername ist bereits vergeben", "The username is already taken", "The username is already taken", "The username is already taken");
+		Fieldmanagment.getInstance().addFourFieldValues("emailtaken", 106, "Die EMail ist bereits registriert", "The email is already registered", "The email is already registered", "The email is already registered");
+		Fieldmanagment.getInstance().addFourFieldValues("emailtaken", 107, "Ein Fehler wurde geworfen bitte kontaktieren Sie das Admin Team", "System error please contact System-Admins", "System error please contact System-Admins", "System error please contact System-Admins");
+		Fieldmanagment.getInstance().addFourFieldValues("Authlogin", 108, "Login", "Login", "Login", "Login");
+		Fieldmanagment.getInstance().addFourFieldValues("Authuser", 109, "Benutzer:", "User:", "User:", "User:");
+		Fieldmanagment.getInstance().addFourFieldValues("Authpass", 110, "Pass:", "Pass:", "Pass:", "Pass:");
+		Fieldmanagment.getInstance().addFourFieldValues("Authlang", 111, "Language", "Language", "Language", "Language");
+		Fieldmanagment.getInstance().addFourFieldValues("Authreg", 112, "Login", "Login", "Login", "Login");
+		Fieldmanagment.getInstance().addFourFieldValues("regformhead", 113, "Sign Up", "Sign Up", "Sign Up", "Sign Up");
+		Fieldmanagment.getInstance().addFourFieldValues("regformuser", 114, "Benutzer:", "User:", "User:", "User:");
+		Fieldmanagment.getInstance().addFourFieldValues("regformpass", 115, "Pass:", "Pass:", "Pass:", "Pass:");
+		Fieldmanagment.getInstance().addFourFieldValues("regformretype", 116, "Wiederhole:", "ReType:", "ReType:", "ReType:");
+		Fieldmanagment.getInstance().addFourFieldValues("regformfirstname", 117, "Vorname:", "Firstname:", "Firstname:", "Firstname:");
+		Fieldmanagment.getInstance().addFourFieldValues("regformlastname", 118, "Nachname:", "Lastname:", "Lastname:", "Lastname:");
+		Fieldmanagment.getInstance().addFourFieldValues("regformmail", 119, "EMail:", "Mail:", "Mail:", "Mail:");
+		Fieldmanagment.getInstance().addFourFieldValues("regformstate", 120, "Land:", "Country:", "Country:", "Country:");
+		Fieldmanagment.getInstance().addFourFieldValues("regformbtn1", 121, "Registrieren", "Register", "Register", "Register");
+		Fieldmanagment.getInstance().addFourFieldValues("regformbtn2", 122, "Abbrechen", "Cancel", "Cancel", "Cancel");
+		Fieldmanagment.getInstance().addFourFieldValues("Authbtn2", 123, "Register", "Register", "Register", "Register");
+		
 		
 	}
 	

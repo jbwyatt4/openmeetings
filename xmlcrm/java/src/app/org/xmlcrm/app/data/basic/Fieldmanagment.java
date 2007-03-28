@@ -95,6 +95,7 @@ public class Fieldmanagment {
 	    	flv.setValue(fieldvalue);
 	    	flv.setLanguage_id(language_id);
 	    	flv.setFieldvalues_id(field_id);
+	    	flv.setDeleted(false);
 
 	    	session.save(flv);
 	    	
@@ -115,6 +116,7 @@ public class Fieldmanagment {
 	    	Fieldvalues fl = new Fieldvalues();
 	    	fl.setStarttime(new Date());
 	    	fl.setName(fieldName);
+	    	fl.setDeleted(false);
 
 	    	session.save(fl);
 	    	

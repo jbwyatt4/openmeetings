@@ -12,7 +12,9 @@ public class AddDefaultfield extends TestCase {
 	
 	public void testaddDefaultField(){
 		
-
+		Fieldmanagment.getInstance().addFourFieldValues("Authbtn2", 123, "Register", "Register", "Register", "Register");
+	
+		
 		
 	}
 
