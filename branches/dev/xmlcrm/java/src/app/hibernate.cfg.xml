@@ -12,6 +12,13 @@
 		<property name="dialect">org.hibernate.dialect.PostgreSQLDialect</property>
 		<property name="show_sql">true</property>
 		<property name="use_outer_join">false</property>
+		<property name="hibernate.query.factory_class">org.hibernate.hql.classic.ClassicQueryTranslatorFactory</property>
+        <property name="connection.provider_class ">org.hibernate.connection.C3P0ConnectionProvider</property>
+        <property name="cache.provider_class">org.hibernate.cache.NoCacheProvider </property>
+        <property name="cache.use_query_cache">false </property>
+        <property name="cache.use_second_level_cache">false </property>
+        <property name="generate_statistics">false</property>
+        <property name="cache.use_structured_entries">false</property>		
 			<property name="connection.username">postgres</property>
 			<property name="connection.password">*****</property>
 			<property name="connection.driver_class">org.postgresql.Driver</property>

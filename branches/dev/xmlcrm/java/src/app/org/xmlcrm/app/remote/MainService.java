@@ -60,18 +60,108 @@ public class MainService {
 		return users;
 	}
 	
+	/**
+	 * load this session id before doing anything else
+	 * @return a unique session identifier
+	 */
     public Sessiondata getsessiondata(){
         return Sessionmanagement.getInstance().startsession();
     }   
+    
+    /**
+     * auth function, use the SID you get by getsessiondata
+     * @param SID
+     * @param Username
+     * @param Userpass
+     * @return a valid user account or an empty user with an error message and level -1
+     */
     public Users loginUser(String SID, String Username, String Userpass){
     	System.out.println("loginUser 1: "+SID+" "+Username+" "+Userpass);
     	log.error("loginUser 2: "+SID+" "+Username+" "+Userpass);
         return Usermanagement.getInstance().loginUser(SID,Username,Userpass);
     } 
+    
+    /**
+     * clear this session id
+     * @param SID
+     * @return string value if completed
+     */
     public String logoutUser(String SID){
     	int User_ID = Sessionmanagement.getInstance().checkSession(SID);
     	return Usermanagement.getInstance().logout(SID,User_ID);
     }
+
+    /**
+     * Load if the users can register itself by using the form without logging in
+     * @param SID
+     * @return
+     */
+    public Configuration allowFrontendRegister(String SID){
+    	return Configurationmanagement.getInstance().getConfKey(3, "allow_frontend_register");
+    }
+    
+    /**
+     * Register a new User
+     * To allow the registering the config_key *allow_frontend_register* has to be the value 1
+     * otherwise the user will get an error code
+     * @param SID
+     * @param Username
+     * @param Userpass
+     * @param lastname
+     * @param firstname
+     * @param email
+     * @param age
+     * @param street
+     * @param additionalname
+     * @param fax
+     * @param zip
+     * @param states_id
+     * @param town
+     * @param language_id
+     * @return new users_id OR null if an exception, -1 if an error, -4 if mail already taken, -5 if username already taken, -3 if login or pass or mail is empty 
+     */
+	public Long registerUser(String SID, String Username, String Userpass, String lastname, 
+				String firstname, String email, int age, String street, String additionalname, 
+				String fax, String zip, long states_id, String town, long language_id){
+    	return Usermanagement.getInstance().registerUser(Username, Userpass, lastname, firstname, email, 
+    			age, street, additionalname, fax, zip, states_id, town, language_id);
+	}
+	
+	/**
+	 * add a new user, only administrators can do this
+	 * TODO: moderators should be able to add new users too
+	 * @param SID
+	 * @param level_id
+	 * @param availible
+	 * @param status
+	 * @param login
+	 * @param Userpass
+	 * @param lastname
+	 * @param firstname
+	 * @param email
+	 * @param age
+	 * @param street
+	 * @param additionalname
+	 * @param fax
+	 * @param zip
+	 * @param states_id
+	 * @param town
+	 * @param language_id
+	 * @return new users_id OR null if an exception, -1 if an error, -4 if mail already taken, -5 if username already taken, -3 if login or pass or mail is empty 
+	 */
+	public Long addUserAdmin(String SID, long level_id, int availible, int status, 
+			String login, String Userpass, String lastname, String firstname, 
+			String email, int age, String street, String additionalname, String fax, 
+			String zip, long states_id, String town, long language_id){
+    	int User_ID = Sessionmanagement.getInstance().checkSession(SID);
+    	long User_LEVEL = Usermanagement.getInstance().getUserLevelByID(User_ID);	
+    	return Usermanagement.getInstance().registerUserInit(User_LEVEL,level_id, availible, status, 
+				login, Userpass, lastname, firstname, email, age, street, additionalname, fax, 
+				zip, states_id, town, language_id);
+	}
+	
+	
+	
     public String deleteUserIDSelf(String SID){
     	String ret = "Deleting User Self";
     	int User_ID = Sessionmanagement.getInstance().checkSession(SID);
@@ -95,24 +185,7 @@ public class MainService {
     		ret = "Nur als admin";
     	}
     	return ret;
-    }    
-	public Long registerUser(String SID, String Username, String Userpass, String lastname, 
-				String firstname, String email, int age, String street, String additionalname, 
-				String fax, String zip, long states_id, String town, long language_id){
-    	return Usermanagement.getInstance().registerUser(Username, Userpass, lastname, firstname, email, 
-    			age, street, additionalname, fax, zip, states_id, town, language_id);
-	}
-	
-	public Long addUserAdmin(String SID, long level_id, int availible, int status, 
-			String login, String Userpass, String lastname, String firstname, 
-			String email, int age, String street, String additionalname, String fax, 
-			String zip, long states_id, String town, long language_id){
-    	int User_ID = Sessionmanagement.getInstance().checkSession(SID);
-    	long User_LEVEL = Usermanagement.getInstance().getUserLevelByID(User_ID);	
-    	return Usermanagement.getInstance().registerUserInit(User_LEVEL,level_id, availible, status, 
-				login, Userpass, lastname, firstname, email, age, street, additionalname, fax, 
-				zip, states_id, town, language_id);
-	}
+    }  
     public String updateUser(String SID, String login, String password, String lastname, String firstname, int age, String adresse, String Zip, String state, String town, int EMailID, String email, int rechnungsaddr, String raddresse, int lieferaddr, String laddresse,int availible, String telefon, String fax, String mobil){
         int User_ID = Sessionmanagement.getInstance().checkSession(SID);
         //User updates hisself, always allowed
