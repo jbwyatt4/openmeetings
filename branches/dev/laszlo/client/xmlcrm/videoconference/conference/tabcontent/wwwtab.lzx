@@ -55,7 +55,7 @@
 				tempSendArray[2] = this.parent._htmlside.getText();
 		  		Debug.write("send: ",tempSendArray);
 		  		canvas.VarsModeratorGeneral = tempSendArray;
-		  		rtc.sendVarsModeratorGeneral.call();	
+		  		rtc.sendVarsModeratorGeneral.doCall();	
 		  		]]>		
 			</method>
 		</button>
@@ -89,7 +89,7 @@
 
 		  		Debug.write("send: ",tempSendArray);
 		  		canvas.VarsModeratorGeneral = tempSendArray;
-		  		rtc.sendVarsModeratorGeneral.call();
+		  		rtc.sendVarsModeratorGeneral.doCall();
 			
 				canvas.ifrm.createIFrame();
 				canvas.setAttribute('htmlframeisloaded',true);

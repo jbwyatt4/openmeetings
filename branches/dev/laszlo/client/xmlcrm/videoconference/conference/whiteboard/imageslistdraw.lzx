@@ -64,7 +64,7 @@
 	  			tempSendArray[3] = canvas.currentusename;
 		  		Debug.write("send: ",tempSendArray);
 		  		canvas.objMessage = tempSendArray;
-		  		rtc.sendMessage.call();        				
+		  		rtc.sendMessage.doCall();        				
 	        </handler> 
 	 	</remotecall> 
     </view>

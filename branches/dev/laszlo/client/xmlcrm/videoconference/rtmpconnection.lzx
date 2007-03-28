@@ -60,7 +60,7 @@
     <!-- 
         With this function all methods are registered to the NetConnection
         A server can invoke this Method with a call for it from the Client
-        Only subnodes of rtmpconnections which are a instance of netremotecall
+        Only subnodes of rtmpconnections which are a instance of netremotecallhib
         are registered, to add dynamically methods to the remotefunction you will
         have to invoke this method once again
         -swagner
@@ -68,10 +68,10 @@
     <method name="registerMethods">
         <![CDATA[
         
-        //Register all methods which are onstanceof netremotecall
+        //Register all methods which are onstanceof netremotecallhib
         for (var i=0;i<this.subnodes.length;i++){
-            //If it is of Type netremotecall then register it to the NetConnection
-            if (this.subnodes[i] instanceof netremotecall){
+            //If it is of Type netremotecallhib then register it to the NetConnection
+            if (this.subnodes[i] instanceof netremotecallhib){
                 var t = this;
                 this._nc[this.subnodes[i].funcname] = function( args ){
                     return t.remoteCallMethod(arguments.callee,args);
@@ -99,7 +99,7 @@
     </method>
     
     <!-- 
-        Map the Function to a netremotecall
+        Map the Function to a netremotecallhib
         -swagner
      -->
     <method name="callFuntion" args="funcname,args">
@@ -245,6 +245,22 @@
 			    this._nc.call(func, obj,params[0],params[1],params[2],params[3],params[4],params[5],params[6],params[7],params[8],params[9],params[10]);
 			} else if (params.length==12){
 			    this._nc.call(func, obj,params[0],params[1],params[2],params[3],params[4],params[5],params[6],params[7],params[8],params[9],params[10],params[11]);
+			} else if (params.length==13){
+			    this._nc.call(func, obj,params[0],params[1],params[2],params[3],params[4],params[5],params[6],params[7],params[8],params[9],params[10],params[11],params[12]);
+			} else if (params.length==14){
+			    this._nc.call(func, obj,params[0],params[1],params[2],params[3],params[4],params[5],params[6],params[7],params[8],params[9],params[10],params[11],params[12],params[13]);
+			} else if (params.length==15){
+			    this._nc.call(func, obj,params[0],params[1],params[2],params[3],params[4],params[5],params[6],params[7],params[8],params[9],params[10],params[11],params[12],params[13],params[14]);
+			} else if (params.length==16){
+			    this._nc.call(func, obj,params[0],params[1],params[2],params[3],params[4],params[5],params[6],params[7],params[8],params[9],params[10],params[11],params[12],params[13],params[14],params[15]);
+			} else if (params.length==17){
+			    this._nc.call(func, obj,params[0],params[1],params[2],params[3],params[4],params[5],params[6],params[7],params[8],params[9],params[10],params[11],params[12],params[13],params[14],params[15],params[16]);
+			} else if (params.length==18){
+			    this._nc.call(func, obj,params[0],params[1],params[2],params[3],params[4],params[5],params[6],params[7],params[8],params[9],params[10],params[11],params[12],params[13],params[14],params[15],params[16],params[17]);
+			} else if (params.length==19){
+			    this._nc.call(func, obj,params[0],params[1],params[2],params[3],params[4],params[5],params[6],params[7],params[8],params[9],params[10],params[11],params[12],params[13],params[14],params[15],params[16],params[17],params[18]);
+			} else if (params.length==20){
+			    this._nc.call(func, obj,params[0],params[1],params[2],params[3],params[4],params[5],params[6],params[7],params[8],params[9],params[10],params[11],params[12],params[13],params[14],params[15],params[16],params[17],params[18],params[19]);
 			}	    	 
         } else {
             this._nc.call(func, obj);
@@ -322,7 +338,7 @@
 
 </class>
 
-<!-- Element to use inside netremotecall. -->
+<!-- Element to use inside netremotecallhib. -->
 <class name="netparam" extends="node">
     <attribute name="value" value="null" type="expression" />
 </class>

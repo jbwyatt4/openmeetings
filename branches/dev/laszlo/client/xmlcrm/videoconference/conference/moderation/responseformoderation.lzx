@@ -29,7 +29,7 @@
 			parent.applymessage = new Array();
 			parent.applymessage[0] = 'applyModAnswer';
 			parent.applymessage[1] = 'ok';   
-			parent.sendMessageWithClientById.call();		
+			parent.sendMessageWithClientById.doCall();		
     	</handler>
     </simplelabelbutton>
     
@@ -38,11 +38,11 @@
 			parent.applymessage = new Array();
 			parent.applymessage[0] = 'applyModAnswer';
 			parent.applymessage[1] = 'no'; 
-			parent.sendMessageWithClientById.call();	
+			parent.sendMessageWithClientById.doCall();	
     	</handler>
     </simplelabelbutton>
      
-    <netremotecall name="sendMessageWithClientById" funcname="sendMessageWithClientById" remotecontext="$once{ canvas.thishib }" >  
+    <netremotecallhib name="sendMessageWithClientById" funcname="sendMessageWithClientById" remotecontext="$once{ canvas.thishib }" >  
     	<netparam name="vars1"><method name="getValue">return parent.parent.applymessage;</method></netparam>
         <netparam name="vars2"><method name="getValue">return parent.parent.clientId;</method></netparam>
         <handler name="ondata" args="value">
@@ -52,7 +52,7 @@
 			this.parent.close();
             ]]>
         </handler>   
-    </netremotecall> 
+    </netremotecallhib> 
     
     <animator attribute="y" to="20" duration="1000" start="true"/>
     

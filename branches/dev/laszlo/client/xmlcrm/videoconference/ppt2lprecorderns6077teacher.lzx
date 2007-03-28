@@ -175,7 +175,7 @@
 
 
 	    <!-- deletestream(String dbname,int streamid) -->  
-	  	<netremotecall name="deletestream" funcname="dokeosrecorderService.deletestream">
+	  	<netremotecallhib name="deletestream" funcname="dokeosrecorderService.deletestream">
 	  		<netparam name="dbname"><method name="getValue"> return this.parent.parent.dbName;</method></netparam>
 	  		<netparam name="streamid" />
 			<method name="onResult" args="value">
@@ -183,7 +183,7 @@
 				Debug.write("val: ",value);
 				//parent.getDataRecords.call();
 			</method>	
-	  	</netremotecall>	    
+	  	</netremotecallhib>	    
     </rtmpconnection>
  
  	<!-- status light -->

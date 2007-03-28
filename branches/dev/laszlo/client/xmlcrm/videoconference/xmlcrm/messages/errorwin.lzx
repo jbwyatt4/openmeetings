@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<library>
+
+<class name="errorwin" extends="labelexplorerbox" width="260" height="220" 
+	docking="true" resizeable="false" closable="true" 
+	x="350" y="-420" >
+
+	<attribute name="fadeDelegate" value="null" />
+
+	<handler name="oninit">
+		this.fadeDelegate = new LzDelegate( this, "fadeOut" );
+		LzTimer.addTimer( this.fadeDelegate, 3500 );
+	</handler>
+	
+	<method name="fadeOut">
+		this._fadeout.doStart();
+	</method>
+
+	<attribute name="errorlabelid" value="0" type="number" />
+
+	<view width="$once{parent.width-4 }" x="2" height="$once{ parent.height-24 }" y="22" clip="true">
+		<labeltext fontsize="12" multiline="true" fontstyle="bold" 
+			labelid="${ parent.parent.errorlabelid }" width="$once{parent.parent.width-20 }"/>
+	</view>
+	
+    <animator attribute="y" to="0" duration="1000" start="true" />
+    
+</class>
+
+</library>

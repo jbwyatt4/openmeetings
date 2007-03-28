@@ -25,10 +25,10 @@
 
 	<handler name="oninit">
 		canvas.currentModApply = this;
-		this.getClientListScope.call();
+		this.getClientListScope.doCall();
 		this.applymessage = new Array();
 		this.applymessage[0] = 'applyforMod';
-		this.sendMessageWithClient.call();
+		this.sendMessageWithClient.doCall();
 	</handler>
 	
 	<method name="setUserAnswer" args="value">
@@ -71,7 +71,7 @@
 		]]>
 	</method>
 	
-	<netremotecall name="getClientListScope" funcname="getClientListScope" remotecontext="$once{ canvas.thishib }" >        
+	<netremotecallhib name="getClientListScope" funcname="getClientListScope" remotecontext="$once{ canvas.thishib }" >        
        	<handler name="ondata" args="value">
        		<![CDATA[
            	//The onResult-Handler will be called be the rtmpconnection
@@ -83,9 +83,9 @@
 			}
            ]]>
 		</handler>   
-    </netremotecall> 
+    </netremotecallhib> 
      
-    <netremotecall name="sendMessageWithClient" funcname="sendMessageWithClient" remotecontext="$once{ canvas.thishib }" >  
+    <netremotecallhib name="sendMessageWithClient" funcname="sendMessageWithClient" remotecontext="$once{ canvas.thishib }" >  
     	<netparam name="vars"><method name="getValue">return parent.parent.applymessage;</method></netparam>
         <handler name="ondata" args="value">
         	<![CDATA[
@@ -94,7 +94,7 @@
 
             ]]>
         </handler>   
-    </netremotecall>      
+    </netremotecallhib>      
 	
 	<view name="userslist" y="60" x="4" height="140" clip="true" width="492" bgcolor="$once{ canvas.basebgcolorizer }" >
 		<view name="userslist" y="1" x="1" height="138" clip="true" width="490" bgcolor="0xFFFFFF" >
@@ -105,7 +105,7 @@
 	
     <simplelabelbutton name="applyButton" labelid="88" width="200" x="80" y="218" enabled="false">
     	<handler name="onclick">
-    		rtc.setModerator.call();
+    		rtc.setModerator.doCall();
     		this.parent.close();
     	</handler>
     </simplelabelbutton>

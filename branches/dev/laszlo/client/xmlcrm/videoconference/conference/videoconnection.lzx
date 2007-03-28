@@ -45,13 +45,13 @@
             canvas.languageData.doRequest();
 
  -->
-	  	<netremotecall name="getUserDateBySessionId" funcname="xmlcrm.getUserDateBySessionId">
+	  	<netremotecallhib name="getUserDateBySessionId" funcname="xmlcrm.getUserDateBySessionId">
 			<handler name="ondata" args="value">
 				//The onResult-Handler will be called be the rtmpconnection
 				Debug.write("################ setId: ",value);
                 canvas.setAttribute('streamid',value);   
 			</handler>	
-	  	</netremotecall> 
+	  	</netremotecallhib> 
 	  	 <handler name="onerror" >
 	  	 	Debug.write("error ",this.status);
 	  	 	this.setAttribute('protocollName','rtmpt');
@@ -62,30 +62,30 @@
 	  	 	this.init();
 	  	 	this.connect();
 	  	 </handler>
-	  	<netremotecall name="setId" funcname="setId">
+	  	<netremotecallhib name="setId" funcname="setId">
 			<handler name="ondata" args="value">
 				//The onResult-Handler will be called be the rtmpconnection
 				Debug.write("################ setId: ",value);
                 canvas.setAttribute('streamid',value);   
 			</handler>	
-	  	</netremotecall> 
-	  	<netremotecall name="setUserObjectOne2Four" funcname="setUserObjectOne2Four">
+	  	</netremotecallhib> 
+	  	<netremotecallhib name="setUserObjectOne2Four" funcname="setUserObjectOne2Four">
         	<netparam name="vars1"><method name="getValue"> return canvas.currentusercolor; </method></netparam>	  	
 			<netparam name="vars2"><method name="getValue"> return canvas.currentuserpos; </method></netparam>	  	
 			<handler name="ondata" args="value">
 				//The onResult-Handler will be called be the rtmpconnection
 				Debug.write("setUserObjectOne2Four: ",value);					
 			</handler>	
-	  	</netremotecall>
-	  	<netremotecall name="setUserObjectNewOne2Four" funcname="setUserObjectNewOne2Four">
+	  	</netremotecallhib>
+	  	<netremotecallhib name="setUserObjectNewOne2Four" funcname="setUserObjectNewOne2Four">
         	<handler name="ondata" args="value">
 				//The onResult-Handler will be called be the rtmpconnection
 				Debug.write("setUserObjectNewOne2Four: ",value);	
                 canvas._videocontainer.addClientItem(value.connectedSince,value.isMod,value.streamid,value.username,value.userroom,value.formatedDate,value.userpos,value.usercolor,value); 
                 canvas.setAttribute('numberofpartners',canvas.getAttribute('numberofpartners')+1);								
 			</handler>	
-	  	</netremotecall>	  	
-	  	<netremotecall name="getCurrentModerator" funcname="getCurrentModerator">
+	  	</netremotecallhib>	  	
+	  	<netremotecallhib name="getCurrentModerator" funcname="getCurrentModerator">
 			<handler name="ondata" args="value">
 				//The onResult-Handler will be called be the rtmpconnection
 				Debug.write("getCurrentModerator: ",value,value.username);
@@ -93,15 +93,15 @@
 				canvas.setAttribute('moderatorStreamID',value.streamid);
 				canvas.setAttribute('moderatorName',value.firstname+' '+value.lastname);
 			</handler>	
-	  	</netremotecall>	  	
-        <netremotecall name="newStream" funcname="newStream">
+	  	</netremotecallhib>	  	
+        <netremotecallhib name="newStream" funcname="newStream">
             <handler name="ondata" args="value">
                 //The onResult-Handler will be called be the rtmpconnection
                 Debug.write("newStream: ",value);
                 canvas._videocontainer.startStream(value.streamid,value.userpos); 
             </handler>   
-        </netremotecall>    
-        <netremotecall name="closeStream" funcname="closeStream">
+        </netremotecallhib>    
+        <netremotecallhib name="closeStream" funcname="closeStream">
             <handler name="ondata" args="value">
                 //The onResult-Handler will be called be the rtmpconnection
                 Debug.write("closeStream: ",value);
@@ -110,15 +110,15 @@
                 canvas.setAttribute('numberofpartners',canvas.getAttribute('numberofpartners')-1);       
                 //TODO:check first current tab
             </handler>   
-        </netremotecall>       
-        <netremotecall name="clientregisterRoom" funcname="clientregisterRoom">
+        </netremotecallhib>       
+        <netremotecallhib name="clientregisterRoom" funcname="clientregisterRoom">
             <handler name="ondata" args="value">
                 //The onResult-Handler will be called be the rtmpconnection
                 Debug.write("clientregisterRoom: ",value);
                 //parent.getClientListScope.call();  
             </handler>   
-        </netremotecall>                 
-        <netremotecall name="roomDisconnect" funcname="roomDisconnect">
+        </netremotecallhib>                 
+        <netremotecallhib name="roomDisconnect" funcname="roomDisconnect">
             <handler name="ondata" args="value">
                 //The onResult-Handler will be called be the rtmpconnection
                 Debug.write("roomDisconnect: ",value);
@@ -126,8 +126,8 @@
                 if (canvas.currentModApply!=null) canvas.currentModApply.rejectUser(value);
                 //parent.getClientListScope.call();  
             </handler>   
-        </netremotecall>          
-        <netremotecall name="getFiles" funcname="dokeosService.getListOfFiles">
+        </netremotecallhib>          
+        <netremotecallhib name="getFiles" funcname="dokeosService.getListOfFiles">
             <handler name="ondata" args="value">
             	<![CDATA[
                 //The onResult-Handler will be called be the rtmpconnection
@@ -144,8 +144,8 @@
                 }
                 ]]>
             </handler>   
-        </netremotecall>   
-        <netremotecall name="sendVars" funcname="sendVars">
+        </netremotecallhib>   
+        <netremotecallhib name="sendVars" funcname="sendVars">
         	<netparam name="vars"><method name="getValue">return canvas.objWhiteboard;</method></netparam>
             <handler name="ondata" args="value">
             	<![CDATA[
@@ -154,8 +154,8 @@
                 
                 ]]>
             </handler>   
-        </netremotecall>    
-        <netremotecall name="sendVarsToWhiteboard" funcname="sendVarsToWhiteboard">
+        </netremotecallhib>    
+        <netremotecallhib name="sendVarsToWhiteboard" funcname="sendVarsToWhiteboard">
             <handler name="ondata" args="value">
             	<![CDATA[
                 //The onResult-Handler will be called be the rtmpconnection
@@ -163,8 +163,8 @@
                 _drawarea.sendWatchObject(value[2],value[3]);
                 ]]>
             </handler>   
-        </netremotecall>   
-        <netremotecall name="setModerator" funcname="setModerator">
+        </netremotecallhib>   
+        <netremotecallhib name="setModerator" funcname="setModerator">
         	<netparam name="vars"><method name="getValue">return canvas.streamid;</method></netparam>
             <handler name="ondata" args="value">
             	<![CDATA[
@@ -172,8 +172,8 @@
                 Debug.write(" onResult setModerator : ",value);
                 ]]>
             </handler>   
-        </netremotecall>    
-        <netremotecall name="setNewModerator" funcname="setNewModerator">
+        </netremotecallhib>    
+        <netremotecallhib name="setNewModerator" funcname="setNewModerator">
         	<netparam name="vars"><method name="getValue">return canvas.streamid;</method></netparam>
             <handler name="ondata" args="value">
                 //The onResult-Handler will be called be the rtmpconnection
@@ -182,8 +182,8 @@
 				canvas.setAttribute('moderatorStreamID',value.streamid);
 				canvas.setAttribute('moderatorName',value.firstname+' '+value.lastname);
             </handler>   
-        </netremotecall>       
-        <netremotecall name="sendMessage" funcname="sendMessage">
+        </netremotecallhib>       
+        <netremotecallhib name="sendMessage" funcname="sendMessage">
         	<netparam name="vars"><method name="getValue">return canvas.objMessage;</method></netparam>
             <handler name="ondata" args="value">
             	<![CDATA[
@@ -192,8 +192,8 @@
                 
                 ]]>
             </handler>   
-        </netremotecall>    
-        <netremotecall name="sendVarsToMessage" funcname="sendVarsToMessage">
+        </netremotecallhib>    
+        <netremotecallhib name="sendVarsToMessage" funcname="sendVarsToMessage">
             <handler name="ondata" args="value">
             	<![CDATA[
                 //The onResult-Handler will be called be the rtmpconnection
@@ -205,8 +205,8 @@
 				}
                 ]]>
             </handler>   
-        </netremotecall>  
-        <netremotecall name="sendVarsModeratorGeneral" funcname="sendVarsModeratorGeneral">
+        </netremotecallhib>  
+        <netremotecallhib name="sendVarsModeratorGeneral" funcname="sendVarsModeratorGeneral">
         	<netparam name="vars"><method name="getValue">return canvas.VarsModeratorGeneral;</method></netparam>
             <handler name="ondata" args="value">
             	<![CDATA[
@@ -215,8 +215,8 @@
                 
                 ]]>
             </handler>   
-        </netremotecall>    
-	    <netremotecall name="sendVarsToMessageWithClient" funcname="sendVarsToMessageWithClient" remotecontext="$once{ canvas.thishib }" >  
+        </netremotecallhib>    
+	    <netremotecallhib name="sendVarsToMessageWithClient" funcname="sendVarsToMessageWithClient" remotecontext="$once{ canvas.thishib }" >  
 	    	<netparam name="vars"><method name="getValue">return parent.parent.applymessage;</method></netparam>
 	        <handler name="ondata" args="value">
 	        	<![CDATA[
@@ -232,8 +232,8 @@
 				}
 	            ]]>
 	        </handler>   
-	    </netremotecall>            
-        <netremotecall name="createPoll" funcname="dokeosService.createPoll">
+	    </netremotecallhib>            
+        <netremotecallhib name="createPoll" funcname="dokeosService.createPoll">
         	<attribute name="pollquestion" value="" type="string" />
         	<attribute name="polltypesid" value="0" type="number" />
         	<netparam><method name="getValue">return parent.pollquestion;</method></netparam>
@@ -244,8 +244,8 @@
                 Debug.write("createPoll : ",value);
                 ]]>
             </handler>   
-        </netremotecall>         
-        <netremotecall name="newPoll" funcname="newPoll">
+        </netremotecallhib>         
+        <netremotecallhib name="newPoll" funcname="newPoll">
             <handler name="ondata" args="value">
             	<![CDATA[
                 //The onResult-Handler will be called be the rtmpconnection
@@ -253,8 +253,8 @@
                 if(canvas.streamid!=value.createdBy.streamid) new answerpoll(canvas.main_content._content,{createdBy:value.createdBy.username,pollDate:value.pollDate,pollQuestion:value.pollQuestion,pollTypeId:value.pollTypeId,roomPollAnswerList:value.roomPollAnswerList,roomPollId:value.roomPollId,roomScopeName:value.roomScopeName});
                 ]]>
             </handler>   
-        </netremotecall>
-        <netremotecall name="vote" funcname="dokeosService.vote">
+        </netremotecallhib>
+        <netremotecallhib name="vote" funcname="dokeosService.vote">
         	<attribute name="pollvalue" type="number" value="0" />
         	<attribute name="pollTypesId" type="number" value="0" />
         	<netparam><method name="getValue">return parent.pollvalue;</method></netparam>
@@ -265,8 +265,8 @@
                 Debug.write("vote : ",value);
                 ]]>
             </handler>   
-        </netremotecall>      
-        <netremotecall name="getVotes" funcname="dokeosService.getVotes">
+        </netremotecallhib>      
+        <netremotecallhib name="getVotes" funcname="dokeosService.getVotes">
             <handler name="ondata" args="value">
             	<![CDATA[
                 //The onResult-Handler will be called be the rtmpconnection
@@ -278,8 +278,8 @@
                 }
                 ]]>
             </handler>   
-        </netremotecall>     
-        <netremotecall name="checkHasVoted" funcname="dokeosService.checkHasVoted">
+        </netremotecallhib>     
+        <netremotecallhib name="checkHasVoted" funcname="dokeosService.checkHasVoted">
             <handler name="ondata" args="value">
             	<![CDATA[
                 //The onResult-Handler will be called be the rtmpconnection
@@ -293,8 +293,8 @@
                 }
                 ]]>
             </handler>   
-        </netremotecall>  
-        <netremotecall name="getPoll" funcname="dokeosService.getPoll">
+        </netremotecallhib>  
+        <netremotecallhib name="getPoll" funcname="dokeosService.getPoll">
             <handler name="ondata" args="value">
             	<![CDATA[
                 //The onResult-Handler will be called be the rtmpconnection
@@ -304,8 +304,8 @@
                 }
                 ]]>
             </handler>   
-        </netremotecall>                      
-        <netremotecall name="getPollTypeList" funcname="dokeosService.getPollTypeList">
+        </netremotecallhib>                      
+        <netremotecallhib name="getPollTypeList" funcname="dokeosService.getPollTypeList">
         	<attribute name="refObj" value="null" />
         	<method name="setReferenceObj" args="obj">
         		this.refObj = obj;
@@ -320,8 +320,8 @@
                 this.refObj.selectItem(value[0].pollTypesId);
                 ]]>
             </handler>   
-        </netremotecall>                                   
-        <netremotecall name="sendVarsToModeratorGeneral" funcname="sendVarsToModeratorGeneral">
+        </netremotecallhib>                                   
+        <netremotecallhib name="sendVarsToModeratorGeneral" funcname="sendVarsToModeratorGeneral">
             <handler name="ondata" args="value">
             	<![CDATA[
                 //The onResult-Handler will be called be the rtmpconnection
@@ -339,7 +339,7 @@
                 }
                 ]]>
             </handler>   
-        </netremotecall>                  
+        </netremotecallhib>                  
     </rtmpconnection>
 
 

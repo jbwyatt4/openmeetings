@@ -10,7 +10,7 @@
 	  	<!-- 
 	  		Some remotecalls
 	  	 -->
-	  	<netremotecall name="getList" funcname="demoService.getListOfAvailableFLVs">
+	  	<netremotecallhib name="getList" funcname="demoService.getListOfAvailableFLVs">
 			<method name="onResult" args="value">
 				//The onResult-Handler will be called be the rtmpconnection
 				Debug.write("val: ",value);
@@ -22,7 +22,7 @@
 					videolist.addItem(value[eg]["name"],value[eg]["lastModified"],value[eg]["size"],value[eg]["name"]);
 				}
 			</method>	
-	  	</netremotecall>    
+	  	</netremotecallhib>    
     </rtmpconnection>
 
   
@@ -57,7 +57,7 @@
 	  	<!-- 
 	  		Some remotecalls
 	  	 -->
-	  	<netremotecall name="getList" funcname="demoService.getListOfAvailableFLVs">
+	  	<netremotecallhib name="getList" funcname="demoService.getListOfAvailableFLVs">
 			<method name="onResult" args="value">
 				//The onResult-Handler will be called be the rtmpconnection
 				Debug.write("val: ",value);
@@ -69,7 +69,7 @@
 					videolist.addItem(value[eg]["name"],value[eg]["lastModified"],value[eg]["size"],value[eg]["name"]);
 				}
 			</method>	
-	  	</netremotecall>    
+	  	</netremotecallhib>    
     </rtmpconnection>
     
   <sharedobject id="sharedObj" > 

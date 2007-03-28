@@ -85,13 +85,13 @@
 	  			parent.objMessage[6] = canvas.currentuserpos;
 	  			if (this.parent.message.getText().length!=0){
 			  		Debug.write("send: ",this.parent.objMessage);
-			  		parent.sendMessageWithClient.call();
+			  		parent.sendMessageWithClient.doCall();
 			  		this.parent.message.setText('');
 		  		}
 		  	</handler>
 		</button>
 		
-        <netremotecall name="sendMessageWithClient" funcname="sendMessageWithClient" remotecontext="$once{ canvas.thishib }" >   
+        <netremotecallhib name="sendMessageWithClient" funcname="sendMessageWithClient" remotecontext="$once{ canvas.thishib }" >   
         	<netparam name="vars"><method name="getValue">return parent.parent.objMessage;</method></netparam>
             <handler name="ondata" args="value">
             	<![CDATA[
@@ -100,7 +100,7 @@
                 
                 ]]>
             </handler>   
-        </netremotecall>  		
+        </netremotecallhib>  		
 	</view>
 </class>
 

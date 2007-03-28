@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<library>
+
+<class name="registerNewUser" extends="labelexplorerbox" labelid="113"
+    docking="true" resizeable="false" closable="false" width="400" x="1000" y="0" height="360">
+    
+    <attribute name="refObj" value="null" />
+    <attribute name="regObject" value="null" />
+    
+    <handler name="onclose">
+    	this.refObj._register.setAttribute('visible',true);
+    	this.refObj.doreset.doStart();
+    </handler>
+    
+    <labeltext labelid="114" text="User: " width="200" y="42" resize="false" x="2"/>
+        <edittext name="username" y="42" x="120" width="270" text="" />
+
+    <labeltext labelid="115" width="200" y="72" resize="false" x="2"/>
+        <edittext name="userpass1" y="72" password="true" x="120" width="270" text="" />
+        
+    <labeltext labelid="116" width="200" y="102" resize="false" x="2"/>
+        <edittext name="userpass2" y="102" password="true" x="120" width="270" text="" />
+        
+    
+    <labeltext labelid="117" width="200" y="132" resize="false" x="2"/>
+        <edittext name="firstname" y="132" x="120" width="270" text="" />
+        
+    <labeltext labelid="118" width="200" y="162" resize="false" x="2"/>
+        <edittext name="lastname" y="162" x="120" width="270" text="" />                
+
+    <labeltext labelid="119" width="200" y="192" resize="false" x="2"/>
+        <edittext name="email" y="192" x="120" width="270" text="" />
+         
+    <labeltext labelid="120" width="200" y="222" resize="false" x="2"/>  
+        
+        <combobox name="state" width="270" y="222" x="120" editable="false">
+            <netremotecallhib name="getStates" funcname="xmlcrm.getStates" remotecontext="$once{ canvas.thishib }" >      
+                <handler name="oninit">
+                    this.doCall();
+                </handler>
+                <handler name="ondata" args="value">
+                    //The onResult-Handler will be called be the rtmpconnection
+                    Debug.write("getLanguages: ",value);
+                    <![CDATA[
+                    for (var i=0;i<value.length;i++){
+                        this.parent.addItem(value[i].name,value[i].state_id);
+                    }
+                    this.parent.selectItem(value[0].state_id);
+                    ]]>
+                </handler>  
+            </netremotecallhib>
+        </combobox>  
+<!--
+    <labeltext text="Language: " width="200" y="252" resize="false" x="2"/>  
+        
+        <combobox name="languages" width="270" y="252" x="120" editable="false">
+            <netremotecallhib name="getLanguages" funcname="xmlcrm.getLanguages" remotecontext="$once{ canvas.thishib }" >      
+                <handler name="oninit">
+                    this.doCall();
+                </handler>
+                <handler name="ondata" args="value">
+                    //The onResult-Handler will be called be the rtmpconnection
+                    Debug.write("getLanguages: ",value);
+                    <![CDATA[
+                    for (var i=0;i<value.length;i++){
+                        this.parent.addItem(value[i].name,value[i].language_id);
+                    }
+                    this.parent.selectItem(value[0].language_id);
+                    ]]>
+                </handler>  
+            </netremotecallhib>
+        </combobox>       
+         -->   
+    <simplelabelbutton labelid="121" width="120" x="140" y="332">
+    	<handler name="onclick">
+    		this.parent.regObject = new Array();
+    		this.parent.regObject["SID"]=canvas.sessionId;
+    		this.parent.regObject["Username"]=this.parent.username.getText();
+    		this.parent.regObject["Userpass"]=this.parent.userpass1.getText();
+    		this.parent.regObject["lastname"]=this.parent.lastname.getText();
+    		this.parent.regObject["firstname"]=this.parent.firstname.getText();
+    		this.parent.regObject["email"]=this.parent.email.getText();
+    		this.parent.regObject["age"]=0;
+    		this.parent.regObject["street"]='';
+    		this.parent.regObject["additionalname"]='';
+    		this.parent.regObject["fax"]='';
+    		this.parent.regObject["zip"]='';
+    		this.parent.regObject["states_id"]=Number(this.parent.state.getValue());
+    		this.parent.regObject["town"]='';
+    		this.parent.regObject["language_id"]=0;   
+    		this.parent.registerUserByObject.doCall();
+    	</handler>
+    </simplelabelbutton>   
+    
+    <simplelabelbutton labelid="122" width="120" x="270" y="332">
+    	<handler name="onclick">
+    		this.parent.close();
+    	</handler>
+    </simplelabelbutton>   
+    
+    
+    <!-- 
+    Long registerUser
+    String SID, String Username, String Userpass, String lastname, 
+	String firstname, String email, int age, String street, String additionalname, 
+	String fax, String zip, long states_id, String town, long language_id
+     -->
+
+	<animator attribute="x" to="340" duration="1000" start="true" />
+	
+     <netremotecallhib name="registerUserByObject" funcname="xmlcrm.registerUserByObject" 
+     	remotecontext="$once{ canvas.thishib }" >      
+        <netparam name="vars1">
+        	<method name="getValue"> 
+        		return this.parent.parent.regObject; 
+        	</method>
+        </netparam>           
+         <handler name="ondata" args="value">
+         	<![CDATA[
+            //The onResult-Handler will be called be the rtmpconnection
+            Debug.write("getLanguages: ",value);
+			if (value==-3){
+				new errorwin(canvas.main_content._content,{refObj:this.parent,labelid:102,errorlabelid:103}); 
+			} else if (value==-4){
+				new errorwin(canvas.main_content._content,{refObj:this.parent,labelid:102,errorlabelid:106}); 
+			} else if (value==-5){
+				new errorwin(canvas.main_content._content,{refObj:this.parent,labelid:102,errorlabelid:105}); 
+			} else if (value==-1){
+				new errorwin(canvas.main_content._content,{refObj:this.parent,labelid:102,errorlabelid:107}); 
+			} else if (value>0){
+				Debug.write("successfully registered");
+			}
+			]]>
+         </handler>  
+     </netremotecallhib>	
+	
+</class>
+
+</library>
