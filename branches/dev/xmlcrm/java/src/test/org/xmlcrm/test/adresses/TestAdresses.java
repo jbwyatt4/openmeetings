@@ -4,6 +4,7 @@ import junit.framework.TestCase;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.xmlcrm.app.data.user.Statemanagement;
 import org.xmlcrm.app.data.user.Adressmanagement;
 
 public class TestAdresses extends TestCase {
@@ -16,7 +17,7 @@ public class TestAdresses extends TestCase {
 	
 	public void testAddAdress(){
 		
-		Long states_id = Adressmanagement.getInstance().addState("Deutschland");
+		Long states_id = Statemanagement.getInstance().addState("Deutschland");
 		
 		System.out.println("states_id "+states_id);
 		log.error("states_id: "+states_id);

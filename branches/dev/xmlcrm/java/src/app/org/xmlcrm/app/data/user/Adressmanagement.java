@@ -25,50 +25,7 @@ public class Adressmanagement {
 		}
 		return instance;
 	}
-	
-	public Long addState(String statename){
-	    try {
-	    	Session session = HibernateUtil.currentSession();
-	    	Transaction tx = session.beginTransaction();
-	    	
-	    	States st = new States();
-	    	st.setName(statename);
-	    	st.setStarttime(new Date());
-	    	
-	    	Long id = (Long) session.save(st);
-			
-	    	tx.commit();
-	    	HibernateUtil.closeSession();
-	    	
-	    	log.debug("added id "+id);
-	    	
-	    	return id;
-        } catch( HibernateException ex ) {
-        	log.error(ex);
-        } catch ( Exception ex2 ){
-        	log.error(ex2);
-        }
-        return null;
-	}
-	
-	public States getStateById(long state_id){
-	    try {
-	    	Session session = HibernateUtil.currentSession();
-	    	Transaction tx = session.beginTransaction();
-			Query query = session.createQuery("select c from States as c where c.state_id = :state_id");
-			query.setLong("state_id", state_id);	
-			if (query.list().size()>0){
-				return (States) query.list().get(0);
-			}			
-	    	tx.commit();
-	    	HibernateUtil.closeSession();
-        } catch( HibernateException ex ) {
-        	log.error(ex);
-        } catch ( Exception ex2 ){
-        	log.error(ex2);
-        }
-		return null;
-	}
+
 	
 	public Long saveAdress(String street, String zip, String town, long states_id, String additionalname,String comment, String fax){
 	    try {
@@ -83,7 +40,7 @@ public class Adressmanagement {
 	    	adr.setStreet(street);
 	    	adr.setTown(town);
 	    	adr.setZip(zip);
-	    	adr.setStates(getStateById(states_id));
+	    	adr.setStates(Statemanagement.getInstance().getStateById(states_id));
 	    	
 	    	Long id = (Long) session.save(adr);
 			
