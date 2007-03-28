@@ -223,7 +223,7 @@ String.prototype.replace = function(search, replace) {
 	  	 <attribute name="document_id" value="0" type="number" />
 	  	 <attribute name="user_id" value="0" type="number" />
          
-	  	<netremotecall name="checkFileExist" funcname="checkFileExist">
+	  	<netremotecallhib name="checkFileExist" funcname="checkFileExist">
 	  		<netparam name="dbname"><method name="getValue"> return canvas.audiofileName+".flv";</method></netparam>
 			<method name="onResult" args="value">
 				//The onResult-Handler will be called be the rtmpconnection
@@ -239,10 +239,10 @@ String.prototype.replace = function(search, replace) {
                     canvas.setAttribute('hasflvFile',false);
                 }
 			</method>	
-	  	</netremotecall>
+	  	</netremotecallhib>
         	
 	    <!-- deletestream(String dbname,int streamid) -->  
-	  	<netremotecall name="deletestream" funcname="dokeosrecorderService.deletestream">
+	  	<netremotecallhib name="deletestream" funcname="dokeosrecorderService.deletestream">
 	  		<netparam name="dbname"><method name="getValue"> return rtc.dbName+"_"+rtc.document_id;</method></netparam>
 	  		<netparam name="streamid" />
 			<method name="onResult" args="value">
@@ -250,7 +250,7 @@ String.prototype.replace = function(search, replace) {
 				Debug.write("val: ",value);
 				parent.checkFileExist.call();
 			</method>	
-	  	</netremotecall>	    
+	  	</netremotecallhib>	    
     </rtmpconnection>
  
  	<!-- status light -->

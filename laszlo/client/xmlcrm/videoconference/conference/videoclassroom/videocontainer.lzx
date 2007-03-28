@@ -39,10 +39,10 @@
 		this.currentuserObject.push(canvas.language);
 		
 		Debug.write("this.currentuserObject: ",this.currentuserObject);
-		this.getClientListScope.call();
+		this.getClientListScope.doCall();
 	</method>
 	
-        <netremotecall name="getClientListScope" funcname="getClientListScope" remotecontext="$once{ canvas.thishib }" >   
+        <netremotecallhib name="getClientListScope" funcname="getClientListScope" remotecontext="$once{ canvas.thishib }" >   
             <handler name="ondata" args="value">
             	<![CDATA[
                 //The onResult-Handler will be called be the rtmpconnection
@@ -53,12 +53,12 @@
                 		this.parent.addItem(value[i].connectedSince,value[i].isMod,value[i].streamid,value[i].username,value[i].userroom,value[i].formatedDate,value[i].userpos,value[i].usercolor,value[i]);
                 	}
                 }
-                parent.setUsername.call(); 
+                parent.setUsername.doCall(); 
                 refObj=null;
                 ]]>
             </handler>   
-        </netremotecall> 
-	  	<netremotecall name="setUsername" funcname="setUsername" remotecontext="$once{ canvas.thishib }" >   
+        </netremotecallhib> 
+	  	<netremotecallhib name="setUsername" funcname="setUsername" remotecontext="$once{ canvas.thishib }" >   
         	<netparam name="vars"><method name="getValue"> return canvas.user_id; </method></netparam>	  	
 			<netparam name="vars"><method name="getValue"> return canvas.official_code; </method></netparam>	  	
 			<netparam name="vars"><method name="getValue"> return canvas.firstName; </method></netparam>	  	
@@ -66,12 +66,12 @@
 			<handler name="ondata" args="value">
 				//The onResult-Handler will be called be the rtmpconnection
 				Debug.write("setUsername: ",value);
-				parent.getCurrentModerator.call();  
+				parent.getCurrentModerator.doCall();  
  
 			</handler>	
-	  	</netremotecall>
+	  	</netremotecallhib>
 	  	
-	  	<netremotecall name="getCurrentModerator" funcname="getCurrentModerator" remotecontext="$once{ canvas.thishib }" >   
+	  	<netremotecallhib name="getCurrentModerator" funcname="getCurrentModerator" remotecontext="$once{ canvas.thishib }" >   
 			<handler name="ondata" args="value">
 				//The onResult-Handler will be called be the rtmpconnection
 				Debug.write("getCurrentModerator: ",value,value.username);
@@ -82,7 +82,7 @@
  			 		new editrecordstream(canvas,{y:-320});						
  			 	}				
 			</handler>	
-	  	</netremotecall>		  	
+	  	</netremotecallhib>		  	
 	  	
 	<method name="addItem" args="connectedSince,isMod,streamid,username,userroom,formatedDate,position,color,object">
 		<![CDATA[
@@ -165,7 +165,7 @@
 			this._video1._chatvideoinner.setResourceNumber(1);
 			this._video1._chatvideoinner._videoview.setAttribute('visible',true);
 			Debug.write("canvas.currentusercolor : ",canvas.currentusercolor);
-			canvas.thishib.setUserObjectOne2Four.call();
+			canvas.thishib.setUserObjectOne2Four.doCall();
 			return this._video1.getVideoReference();
 		}
 

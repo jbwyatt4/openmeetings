@@ -60,7 +60,7 @@
     <!-- 
         With this function all methods are registered to the NetConnection
         A server can invoke this Method with a call for it from the Client
-        Only subnodes of rtmpconnections which are a instance of netremotecall
+        Only subnodes of rtmpconnections which are a instance of netremotecallhib
         are registered, to add dynamically methods to the remotefunction you will
         have to invoke this method once again
         -swagner
@@ -68,10 +68,10 @@
     <method name="registerMethods">
         <![CDATA[
         
-        //Register all methods which are onstanceof netremotecall
+        //Register all methods which are onstanceof netremotecallhib
         for (var i=0;i<this.subnodes.length;i++){
-            //If it is of Type netremotecall then register it to the NetConnection
-            if (this.subnodes[i] instanceof netremotecall){
+            //If it is of Type netremotecallhib then register it to the NetConnection
+            if (this.subnodes[i] instanceof netremotecallhib){
                 var t = this;
                 this._nc[this.subnodes[i].funcname] = function( args ){
                     return t.remoteCallMethod(arguments.callee,args);
@@ -99,7 +99,7 @@
     </method>
     
     <!-- 
-        Map the Function to a netremotecall
+        Map the Function to a netremotecallhib
         -swagner
      -->
     <method name="callFuntion" args="funcname,args">
@@ -322,7 +322,7 @@
 
 </class>
 
-<!-- Element to use inside netremotecall. -->
+<!-- Element to use inside netremotecallhib. -->
 <class name="netparam" extends="node">
     <attribute name="value" value="null" type="expression" />
 </class>

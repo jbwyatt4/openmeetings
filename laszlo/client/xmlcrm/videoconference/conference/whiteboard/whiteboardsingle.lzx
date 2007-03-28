@@ -24,17 +24,17 @@
 	  	 -->
 	  	 <handler name="onconnect">
 	  	    Debug.write("conencted");
-	  	    this.getFiles.call();
+	  	    this.getFiles.doCall();
 	  	 </handler>
 	  	 
-	  	<netremotecall name="setId" funcname="setId">
+	  	<netremotecallhib name="setId" funcname="setId">
 			<method name="onResult" args="value">
 				//The onResult-Handler will be called be the rtmpconnection
 				Debug.write("setId: ",value);
                 canvas.streamid = value;                 
 			</method>	
-	  	</netremotecall> 
-        <netremotecall name="getFiles" funcname="dokeosService.getListOfFiles">
+	  	</netremotecallhib> 
+        <netremotecallhib name="getFiles" funcname="dokeosService.getListOfFiles">
             <method name="onResult" args="value">
             	<![CDATA[
                 //The onResult-Handler will be called be the rtmpconnection
@@ -51,7 +51,7 @@
                 }
                 ]]>
             </method>   
-        </netremotecall>           
+        </netremotecallhib>           
     </rtmpconnection>
     
 <include href="incubator/lzcombobox.lzx" /> 

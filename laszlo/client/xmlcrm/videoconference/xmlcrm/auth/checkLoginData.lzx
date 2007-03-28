@@ -1,25 +1,30 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library>
 
-<class name="checkLoginData" extends="labelexplorerbox" title="Auth"
-    docking="true" resizeable="false" closable="false" width="400" x="300" y="40" height="240">
+<class name="checkLoginData" extends="labelexplorerbox" labelid="108"
+    docking="true" resizeable="false" closable="false" width="300" x="350" y="-420" height="240">
+    
+    <handler name="onclose">
+    	if (this.childObj!=null) this.childObj.close();
+    </handler>
     
     <attribute name="refObj" value="null" />
+    <attribute name="childObj" value="null" />
     
     <attribute name="labeliderror" value="0" type="number" />
     
-    <labeltext text="User: " width="400" y="42" resize="false" x="2"/>
-        <edittext name="username" y="42" x="120" width="280" text="swagner" />
+    <labeltext labelid="109" width="200" y="42" resize="false" x="2"/>
+        <edittext name="username" y="42" x="120" width="170" text="swagner" />
 
-    <labeltext text="Pass: " width="400" y="72" resize="false" x="2"/>
-        <edittext name="userpass" y="72" password="true" x="120" width="280" text="67810" />
+    <labeltext labelid="110" width="200" y="72" resize="false" x="2"/>
+        <edittext name="userpass" y="72" password="true" x="120" width="170" text="67810" />
 
-    <labeltext text="Language: " width="400" y="102" resize="false" x="2"/>  
+    <labeltext labelid="111" text="Language: " width="200" y="102" resize="false" x="2"/>  
         
-        <combobox name="languages" width="280" y="102" x="120" editable="false">
-            <netremotecall name="getLanguages" funcname="xmlcrm.getLanguages" remotecontext="$once{ canvas.thishib }" >      
+        <combobox name="languages" width="170" y="102" x="120" editable="false">
+            <netremotecallhib name="getLanguages" funcname="xmlcrm.getLanguages" remotecontext="$once{ canvas.thishib }" >      
                 <handler name="oninit">
-                    this.call();
+                    this.doCall();
                 </handler>
                 <handler name="ondata" args="value">
                     //The onResult-Handler will be called be the rtmpconnection
@@ -31,18 +36,26 @@
                     this.parent.selectItem(value[0].language_id);
                     ]]>
                 </handler>  
-            </netremotecall>
+            </netremotecallhib>
         </combobox>
         
-    <simplelabelbutton text="Login" width="100" x="290" y="196">
+    <simplelabelbutton labelid="123" name="_register" width="120" x="40" y="196" visible="false">
     	<handler name="onclick">
-    		this.parent.loginUser.call();
+	    	this.parent._register.setAttribute('visible',false);
+	    	this.parent.childObj = new registerNewUser(canvas.main_content._content,{refObj:this.parent});    	
+    		parent.showRegForm.doStart();
+    	</handler>
+    </simplelabelbutton>          
+        
+    <simplelabelbutton labelid="112" width="120" x="170" y="196">
+    	<handler name="onclick">
+    		this.parent.loginUser.doCall();
     	</handler>
     </simplelabelbutton>   
     
      <text name="errormess" resize="true" y="84" />
 
-    <netremotecall name="loginUser" funcname="xmlcrm.loginUser" remotecontext="$once{ canvas.thishib }" >      
+    <netremotecallhib name="loginUser" funcname="xmlcrm.loginUser" remotecontext="$once{ canvas.thishib }" >      
         <netparam name="vars1"><method name="getValue"> return canvas.sessionId; </method></netparam>  
         <netparam name="vars2"><method name="getValue"> return parent.parent.username.getText(); </method></netparam>  
         <netparam name="vars3"><method name="getValue"> return parent.parent.userpass.getText(); </method></netparam>  
@@ -63,14 +76,55 @@
             	
                 hib.userlang = Number(parent.languages.getValue());
             	hib.userobject = value;
-            	hib.getLanguageById.call();
+            	hib.getLanguageById.doCall();
                 parent.close();
             }  else {
                 parent.errormess.setText(value.firstname);
             }
             
         </handler>  
-    </netremotecall>
+    </netremotecallhib>
+    
+    <netremotecallhib name="allowFrontendRegister" funcname="xmlcrm.allowFrontendRegister" remotecontext="$once{ canvas.thishib }" >      
+        <handler name="oninit">
+            this.doCall();
+        </handler> 
+        <handler name="ondata" args="value">
+            //The onResult-Handler will be called be the rtmpconnection
+            Debug.write("allowFrontendRegister: ",value);
+            if (value.conf_value==1){
+            	parent._register.setAttribute('visible',true);
+            }
+        </handler>  
+    </netremotecallhib>    
+    
+    <!-- 
+    This method is just a test for returning Object Variables from Client to Server
+     -->
+    <netremotecallhib name="testObject" funcname="xmlcrm.testObject" remotecontext="$once{ canvas.thishib }" >      
+        <handler name="oninit">
+            this.doCall();
+        </handler>
+        <netparam name="vars1">
+        	<method name="getValue"> 
+        		var t = new Array();
+        		t.push("as");
+        		t.push("ab");
+        		t["stringObj"]="myString1";
+        		return t; 
+        	</method>
+        </netparam>         
+        <handler name="ondata" args="value">
+            //The onResult-Handler will be called be the rtmpconnection
+            Debug.write("testObject: ",value);
+        </handler>  
+    </netremotecallhib>              
+    
+    <animator attribute="y" to="0" duration="1000" start="true" />
+    
+    <animator name="showRegForm" attribute="x" to="20" duration="1000" start="false" />
+    <animator name="doreset" attribute="x" to="350" duration="1000" start="false" />
+
 
 </class>
 

@@ -4,15 +4,15 @@
 <class name="conference" extends="basecontentview">
 
 	<method name="close">
-		this.logicalRoomLeave.call();
+		this.logicalRoomLeave.doCall();
 	</method>
 	
-	<netremotecall name="logicalRoomLeave" funcname="logicalRoomLeave" remotecontext="$once{ canvas.thishib }" >      
+	<netremotecallhib name="logicalRoomLeave" funcname="logicalRoomLeave" remotecontext="$once{ canvas.thishib }" >      
     	<handler name="ondata" args="value">
     		Debug.write("logicalRoomLeave: ",value);
     		this.parent.destroy();
     	</handler>
-    </netremotecall>
+    </netremotecallhib>
 
     <view x="264" width="658" y="42" height="521" bgcolor="$once{ canvas.basebgcolorizer }">
 		<view name="bg" x="1" y="1" bgcolor="white"
@@ -60,7 +60,7 @@
                 
             Debug.write("send: ",obj);
             canvas.objWhiteboard = obj;
-            rtc.sendVars.call();
+            rtc.sendVars.doCall();
             
         </handler>   
 	

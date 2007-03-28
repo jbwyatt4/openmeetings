@@ -16,7 +16,7 @@
     	<handler name="oninit">
     		<![CDATA[
     		rtc.getPollTypeList.setReferenceObj(this);
-    		rtc.getPollTypeList.call();
+    		rtc.getPollTypeList.doCall();
     		]]>
     	</handler>
     </combobox>
@@ -32,7 +32,7 @@
     		rtc.createPoll.pollquestion = this.parent._question.getText();
     		rtc.createPoll.polltypesid = this.parent._polltypes.getValue();
     		Debug.write("rtc.createPoll: ",rtc.createPoll);
-    		rtc.createPoll.call();
+    		rtc.createPoll.doCall();
     		this.parent.close();
     	</handler>
     </simplelabelbutton>

@@ -59,7 +59,7 @@
     			rtc.vote.pollvalue = Number(parent.pollnumeric.getValue());
     		}
     		rtc.vote.pollTypesId = parent.pollTypeId;
-    		rtc.vote.call();
+    		rtc.vote.doCall();
     		this.parent.close();
     	</handler>
     </simplelabelbutton>

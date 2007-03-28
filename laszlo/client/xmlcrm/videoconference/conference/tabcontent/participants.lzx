@@ -53,10 +53,10 @@
 			//canvas.ifrm.hide();
 			//canvas.setAttribute('htmlframeisloaded',false);
 		}
-		this.getClientListScope.call();
+		this.getClientListScope.doCall();
 	</handler>
 	
-    <netremotecall name="getClientListScope" funcname="getClientListScope" remotecontext="$once{ canvas.thishib }" >          
+    <netremotecallhib name="getClientListScope" funcname="getClientListScope" remotecontext="$once{ canvas.thishib }" >          
         <handler name="ondata" args="value">
         	<![CDATA[
             //The onResult-Handler will be called be the rtmpconnection
@@ -71,7 +71,7 @@
 
             ]]>
         </handler>   
-    </netremotecall>
+    </netremotecallhib>
 	
 	<view id="_participants" />
 	
@@ -83,13 +83,13 @@
 	
 	<simplelabelbutton labelid="37" width="140" x="2" y="22" enabled="${  canvas.ismoderator }">
 		<handler name="onclick">
-			rtc.getVotes.call();
+			rtc.getVotes.doCall();
 		</handler>
 	</simplelabelbutton>	
 
 	<simplelabelbutton labelid="42" width="100" x="144" y="2" >
 		<handler name="onclick">
-			rtc.checkHasVoted.call();
+			rtc.checkHasVoted.doCall();
 		</handler>
 	</simplelabelbutton>
 	
