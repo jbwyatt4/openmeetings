@@ -706,7 +706,12 @@ public class Usermanagement {
 			users.setTitle_id(new Integer(1));
 			users.setStarttime(new Date());
 			users.setUpdatetime(new Date());
-			users.setLanguage_id(new Long(language_id));
+			//this is needed cause the language is not a needed data at registering
+			if (language_id!=0){
+				users.setLanguage_id(new Long(language_id));
+			} else {
+				users.setLanguage_id(null);
+			}
 			MD5Calc md5 = new MD5Calc("MD5");
 			users.setPassword(md5.do_checksum(Userpass));
 			users.setRegdate(new Date());  
