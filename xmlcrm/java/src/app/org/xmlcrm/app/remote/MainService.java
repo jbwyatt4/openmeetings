@@ -1,22 +1,19 @@
 package org.xmlcrm.app.remote;
 
 import java.util.List;
+import java.util.HashSet;
+import java.util.LinkedHashMap;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.xmlcrm.app.hibernate.beans.basic.Naviglobal;
+
 import org.xmlcrm.app.hibernate.beans.basic.Configuration;
 import org.xmlcrm.app.hibernate.beans.basic.Sessiondata;
-import org.xmlcrm.app.hibernate.beans.contact.congroups;
-import org.xmlcrm.app.hibernate.beans.contact.contactfreigabe;
-import org.xmlcrm.app.hibernate.beans.contact.Contacts;
+
 import org.xmlcrm.app.hibernate.beans.shop.lieferarten;
 import org.xmlcrm.app.hibernate.beans.shop.products;
 import org.xmlcrm.app.hibernate.beans.shop.zahlungsarten;
-import org.xmlcrm.app.hibernate.beans.termine.Terminegroups;
-import org.xmlcrm.app.hibernate.beans.termine.Termine_User;
-import org.xmlcrm.app.hibernate.beans.termine.Terminevisual;
-import org.xmlcrm.app.hibernate.beans.termine.Terminevisualmonth;
+
 import org.xmlcrm.app.hibernate.beans.user.Users_Usergroups;
 import org.xmlcrm.app.hibernate.beans.user.Users;
 import org.xmlcrm.app.hibernate.beans.user.Userwaren;
@@ -24,6 +21,7 @@ import org.xmlcrm.app.hibernate.beans.user.Usergroups;
 
 import org.xmlcrm.app.data.basic.*;
 import org.xmlcrm.app.data.user.Usermanagement;
+import org.xmlcrm.app.data.user.Statemanagement;
 
 public class MainService {
 	
@@ -61,6 +59,28 @@ public class MainService {
 	}
 	
 	/**
+	 * This Method is jsut for testing
+	 * you can find the corresponding
+	 * CLietn Function in
+	 * xmlcrm/auth/checkLoginData.lzx
+	 * @param myObject2
+	 * @return
+	 */
+	public int testObject(Object myObject2){
+		try {
+			LinkedHashMap myObject = (LinkedHashMap) myObject2;
+			log.error("testObject "+myObject.size());
+			log.error("testObject "+myObject.get(1));
+			log.error("testObject "+myObject.get("stringObj"));
+			return myObject.size();
+		} catch (Exception e){
+			log.error("ex: "+e);
+		}
+		return -1;
+	}
+
+	
+	/**
 	 * load this session id before doing anything else
 	 * @return a unique session identifier
 	 */
@@ -90,9 +110,18 @@ public class MainService {
     	int User_ID = Sessionmanagement.getInstance().checkSession(SID);
     	return Usermanagement.getInstance().logout(SID,User_ID);
     }
+    
+    /**
+     * get a list of all states, needs no authentification to load
+     * @return List of State-Objects or null
+     */
+    public List getStates(){
+    	return Statemanagement.getInstance().getStates();
+    }
 
     /**
-     * Load if the users can register itself by using the form without logging in
+     * Load if the users can register itself by using the form without logging in, 
+     * needs no authentification to load
      * @param SID
      * @return
      */
@@ -101,9 +130,31 @@ public class MainService {
     }
     
     /**
+     * Add a user register by an Object
+     * see [registerUser] for the index of the Object
+     * @param regObject
+     * @return new users_id OR null if an exception, -1 if an error, -4 if mail already taken, -5 if username already taken, -3 if login or pass or mail is empty 
+     */
+    public Long registerUserByObject(Object regObjectObj){
+    	try {
+    		LinkedHashMap regObject = (LinkedHashMap) regObjectObj;
+        	return Usermanagement.getInstance().registerUser(regObject.get("Username").toString(), regObject.get("Userpass").toString(), 
+        			regObject.get("lastname").toString(), regObject.get("firstname").toString(), regObject.get("email").toString(), 
+        			Integer.valueOf(regObject.get("age").toString()).intValue(), regObject.get("street").toString(), regObject.get("additionalname").toString(), 
+        			regObject.get("fax").toString(), regObject.get("zip").toString(), 
+        			Long.valueOf(regObject.get("states_id").toString()).longValue(), regObject.get("town").toString(), 
+        			Long.valueOf(regObject.get("language_id").toString()).longValue());
+    	} catch (Exception ex) {
+    		log.error(ex);
+    	}
+    	return null;
+    }
+    
+    /**
      * Register a new User
      * To allow the registering the config_key *allow_frontend_register* has to be the value 1
      * otherwise the user will get an error code
+     * @deprecated use registerUserByObject instead
      * @param SID
      * @param Username
      * @param Userpass
