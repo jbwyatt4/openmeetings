@@ -1,0 +1,13 @@
+#summary This Page should documentate the progress of documentation
+#labels Phase-Implementation
+
+= Introduction =
+
+Currently all default values should be go into xml-Files
+
+Current progress of Labels in XML-Files:
+German:         0%
+English:        0%
+French:         0%
+Spanish:        0%
+Portuguese:     0%
