@@ -5,6 +5,7 @@ import java.util.Date;
 /**
  * 
  * @hibernate.class table="userlevel"
+ * lazy="false"
  *
  */
 public class Userlevel {

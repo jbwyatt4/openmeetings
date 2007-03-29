@@ -9,6 +9,7 @@
     <class
         name="org.xmlcrm.app.hibernate.beans.adresses.Adresses"
         table="adresses"
+        lazy="false"
     >
 
         <id

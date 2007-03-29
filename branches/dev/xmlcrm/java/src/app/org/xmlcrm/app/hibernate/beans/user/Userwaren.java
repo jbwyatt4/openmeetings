@@ -9,6 +9,7 @@ import org.xmlcrm.app.hibernate.beans.shop.zahlungsarten;
 /**
  * 
  * @hibernate.class table="userwaren"
+ * lazy="false"
  *
  */
 public class Userwaren {

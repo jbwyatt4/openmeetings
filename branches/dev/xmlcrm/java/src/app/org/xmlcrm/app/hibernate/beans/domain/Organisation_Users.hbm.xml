@@ -9,6 +9,7 @@
     <class
         name="org.xmlcrm.app.hibernate.beans.domain.Organisation_Users"
         table="organisation_users"
+        lazy="false"
     >
 
         <id

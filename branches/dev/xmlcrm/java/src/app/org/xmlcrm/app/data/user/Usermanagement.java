@@ -67,10 +67,10 @@ public class Usermanagement {
 				}
 				tx.commit();
 				HibernateUtil.closeSession(idf);
-				users.setUserlevel(getUserLevel(users.getLevel_id()));
+				//users.setUserlevel(getUserLevel(users.getLevel_id()));
 				// TODO: Adresses Einbinden
 				// users.setEmails(ResHandler.getEmailmanagement().getemails(users.getUser_id()));
-				users.setUserdata(getUserdata(users.getUser_id()));
+				//users.setUserdata(getUserdata(users.getUser_id()));
 				// TODO: Einbinden der Benutzergruppen
 				// users.setUsergroups(ResHandler.getGroupmanagement().getUserGroups(user_id));
 			} catch (HibernateException ex) {
@@ -148,7 +148,7 @@ public class Usermanagement {
 					usersA.setUser_id(UID);
 				}
 			}
-			session.flush();
+
 			tx.commit();
 			HibernateUtil.closeSession(idf);
 			Sessionmanagement.getInstance().updateUser(SID, UID.longValue());
@@ -182,12 +182,13 @@ public class Usermanagement {
 
 	private void updateLastLogin(Users us) {
 		try {
-//			Object idf = HibernateUtil.createSession();
-//			Session session = HibernateUtil.getSession();
-//			Transaction tx = session.beginTransaction();
-//			session.update(us);
-//			tx.commit();
-//			HibernateUtil.closeSession(idf);
+			us.setLastlogin(new Date());
+			Object idf = HibernateUtil.createSession();
+			Session session = HibernateUtil.getSession();
+			Transaction tx = session.beginTransaction();
+			session.update(us);
+			tx.commit();
+			HibernateUtil.closeSession(idf);
 		} catch (HibernateException ex) {
 			log.error(ex);
 		} catch (Exception ex2) {

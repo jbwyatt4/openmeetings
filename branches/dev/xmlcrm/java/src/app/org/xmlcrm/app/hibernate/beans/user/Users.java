@@ -9,6 +9,7 @@ import org.xmlcrm.app.hibernate.beans.adresses.Adresses;
 /**
  * 
  * @hibernate.class table="users"
+ * lazy="false"
  *
  */
 public class Users {

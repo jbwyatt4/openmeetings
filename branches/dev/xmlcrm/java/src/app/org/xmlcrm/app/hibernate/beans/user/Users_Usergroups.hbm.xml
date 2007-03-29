@@ -9,6 +9,7 @@
     <class
         name="org.xmlcrm.app.hibernate.beans.user.Users_Usergroups"
         table="users_usergroups"
+        lazy="false"
     >
 
         <id
