@@ -1,4 +1,4 @@
-#summary This Page should documentate the progress of documentation
+#summary This Page should documentate the progress of internationalisation
 #labels Phase-Implementation
 
 = Introduction =
