@@ -5,9 +5,14 @@
 
 Currently all default values should be go into xml-Files
 
-Current progress of Labels in XML-Files:<br />
-German:         0%<BR/>
-English:        0%<BR/>
-French:         0%<BR/>
-Spanish:        0%<BR/>
-Portuguese:     0%<BR/>
+Current progress of Labels in XML-Files:
+
+German:         0%
+
+English:        0%
+
+French:         0%
+
+Spanish:        0%
+
+Portuguese:     0%
