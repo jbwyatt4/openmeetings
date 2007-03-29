@@ -16,7 +16,10 @@
 = OpenLaszlo =
 
   # Install OpenLaszlo 3.4.x
-  # Rename lps-3.4.x to lps-latest
+      * Download OpenLaszlo : http://www.openlaszlo.org/download for your system
+      * Unzip in your system
+  # Rename *lps-3.4.x* sub-folder to *lps-latest* into the root of your OpenLaszlo.
+  # Replace *lps-3.4.x* string to *lps-latest* into Server/tomcat-5.0.24/conf/LPS/localhost/lps.xml file.
   # add ooservice
   # add servlets for up and download
   # add openmeetings application
@@ -32,3 +35,5 @@ URL of svn trunk : https://svn1.cvsdude.com/osflash/red5/build/trunk/
   # configure webapp and red5.properties to fit your installation
 
 start all services and test it.
+
+
