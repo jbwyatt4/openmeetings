@@ -10,7 +10,6 @@ import junit.framework.TestCase;
 
 public class TestLogin extends TestCase {
 	
-	Session session = HibernateUtil.currentSession();
 	
 	public TestLogin(String testname){
 		super(testname);
@@ -21,11 +20,11 @@ public class TestLogin extends TestCase {
 		MainService mService = new MainService();
 		Sessiondata sessionData = mService.getsessiondata();
 		
-		Users us = mService.loginUser(sessionData.getSession_id(), "swagner", "67810");
+		Users us = mService.loginUser(sessionData.getSession_id(), "swagner", "test");
 		
 		System.out.println("us: "+us.getFirstname());
 		
-		
+		mService.getLanguageById(1);
 		
 	}
 

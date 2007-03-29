@@ -14,7 +14,7 @@ public class Userlevel {
 	private Integer statuscode;
 	private Date starttime;
 	private Date updatetime;
-	private Boolean deleted;
+	private String deleted;
 	
 	public Userlevel() {
 		super();
@@ -74,12 +74,12 @@ public class Userlevel {
     /**
      * @hibernate.property
      *  column="deleted"
-     *  type="boolean"
+     *  type="string"
      */	
-	public Boolean getDeleted() {
+	public String getDeleted() {
 		return deleted;
 	}
-	public void setDeleted(Boolean deleted) {
+	public void setDeleted(String deleted) {
 		this.deleted = deleted;
 	}
     

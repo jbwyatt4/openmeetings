@@ -4,18 +4,18 @@ import java.util.Date;
 
 /**
  * 
- * @hibernate.class table="titles"
+ * @hibernate.class table="salutations"
  *
  */
-public class Titles {
+public class Salutations {
 	
-	private Long title_id;
+	private Long salutations_id;
 	private String name;
 	private Date starttime;
 	private Date updatetime;
-	private Boolean deleted;
+	private String deleted;
 	
-	public Titles() {
+	public Salutations() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -35,14 +35,14 @@ public class Titles {
     /**
      * 
      * @hibernate.id
-     *  column="title_id"
+     *  column="salutations_id"
      *  generator-class="increment"
      */  
-	public Long getTitle_id() {
-		return title_id;
+	public Long getSalutations_id() {
+		return salutations_id;
 	}
-	public void setTitle_id(Long title_id) {
-		this.title_id = title_id;
+	public void setSalutations_id(Long salutations_id) {
+		this.salutations_id = salutations_id;
 	}
 
     
@@ -73,13 +73,15 @@ public class Titles {
     /**
      * @hibernate.property
      *  column="deleted"
-     *  type="boolean"
+     *  type="string"
      */	
-	public Boolean getDeleted() {
+	public String getDeleted() {
 		return deleted;
 	}
-	public void setDeleted(Boolean deleted) {
+	public void setDeleted(String deleted) {
 		this.deleted = deleted;
 	}
+
+
 	
 }

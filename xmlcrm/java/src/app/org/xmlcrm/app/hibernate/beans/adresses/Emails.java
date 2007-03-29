@@ -14,7 +14,7 @@ public class Emails {
 	private String comment;
 	private Date starttime;
 	private Date updatetime;
-	private Boolean deleted;
+	private String deleted;
 	
 	public Emails() {
 		super();
@@ -85,12 +85,12 @@ public class Emails {
     /**
      * @hibernate.property
      *  column="deleted"
-     *  type="boolean"
+     *  type="string"
      */	
-	public Boolean getDeleted() {
+	public String getDeleted() {
 		return deleted;
 	}
-	public void setDeleted(Boolean deleted) {
+	public void setDeleted(String deleted) {
 		this.deleted = deleted;
 	}
 	

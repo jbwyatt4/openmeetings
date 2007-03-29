@@ -2,7 +2,7 @@ package org.xmlcrm.test.init;
 
 import junit.framework.TestCase;
 
-import org.xmlcrm.app.data.user.Usermanagement;
+import org.xmlcrm.app.data.user.Salutationmanagement;
 
 public class AddTitles extends TestCase {
 	
@@ -12,8 +12,8 @@ public class AddTitles extends TestCase {
 	
 	public void testaddTestTitles(){
 		
-		Usermanagement.getInstance().addUserTitels("Herr");
-		Usermanagement.getInstance().addUserTitels("Frau");
+		Salutationmanagement.getInstance().addUserSalutation("Herr");
+		Salutationmanagement.getInstance().addUserSalutation("Frau");
 		
 	}
 

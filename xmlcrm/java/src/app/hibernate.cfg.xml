@@ -32,7 +32,6 @@
 		<!-- mapping files -->
 		<mapping resource="org/xmlcrm/app/hibernate/beans/adresses/Adresses_Phones.hbm.xml"/>
 		<mapping resource="org/xmlcrm/app/hibernate/beans/lang/Fieldlanguagesvalues.hbm.xml"/>
-		<mapping resource="org/xmlcrm/app/hibernate/beans/user/Titles.hbm.xml"/>
 		<mapping resource="org/xmlcrm/app/hibernate/beans/adresses/Emails.hbm.xml"/>
 		<mapping resource="org/xmlcrm/app/hibernate/beans/termine/Termine_Todolist.hbm.xml"/>
 		<mapping resource="org/xmlcrm/app/hibernate/beans/lang/Fieldvalues.hbm.xml"/>
@@ -52,6 +51,7 @@
 		<mapping resource="org/xmlcrm/app/hibernate/beans/domain/Organisation.hbm.xml"/>
 		<mapping resource="org/xmlcrm/app/hibernate/beans/user/Userwaren.hbm.xml"/>
 		<mapping resource="org/xmlcrm/app/hibernate/beans/basic/Naviglobal.hbm.xml"/>
+		<mapping resource="org/xmlcrm/app/hibernate/beans/user/Salutations.hbm.xml"/>
 		<mapping resource="org/xmlcrm/app/hibernate/beans/contact/Contactgroups.hbm.xml"/>
 		<mapping resource="org/xmlcrm/app/hibernate/beans/user/Usergroups.hbm.xml"/>
 		<mapping resource="org/xmlcrm/app/hibernate/beans/basic/Sessiondata.hbm.xml"/>

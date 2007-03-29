@@ -11,7 +11,7 @@ import org.xmlcrm.app.remote.MainService;
 import org.xmlcrm.utils.math.MD5Calc;
 
 public class TestAuth extends TestCase{
-	Session session = HibernateUtil.currentSession();
+
 
 	public TestAuth(String testname) {
 		super(testname);
@@ -19,7 +19,6 @@ public class TestAuth extends TestCase{
 	}
 	
 	public void testTestAuth() {
-		Transaction transaction = session.beginTransaction();
 		
 		MainService mService = new MainService();
 		Sessiondata sessionData = mService.getsessiondata();
@@ -32,8 +31,7 @@ public class TestAuth extends TestCase{
 		
 		System.out.println("tTemp: "+tTemp);
 		
-		transaction.commit();
-		session.clear();
+
 	}	
 
 }

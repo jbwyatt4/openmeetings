@@ -22,7 +22,7 @@ public class Naviglobal {
 	private String comment;
 	private Integer naviorder;
 	private Long level_id;
-	private Boolean deleted;  
+	private String deleted;  
 	private Long fieldvalues_id;
     private Set mainnavi;
     private Fieldlanguagesvalues label;
@@ -133,12 +133,12 @@ public class Naviglobal {
     /**
      * @hibernate.property
      *  column="deleted"
-     *  type="boolean"
+     *  type="string"
      */	
-	public Boolean getDeleted() {
+	public String getDeleted() {
 		return deleted;
 	}
-	public void setDeleted(Boolean deleted) {
+	public void setDeleted(String deleted) {
 		this.deleted = deleted;
 	}
     

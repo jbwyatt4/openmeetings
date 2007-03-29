@@ -2,6 +2,7 @@ package org.xmlcrm.app.hibernate.beans.user;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import org.xmlcrm.app.hibernate.beans.adresses.Adresses;
 
@@ -28,7 +29,7 @@ public class Users {
 	private Date starttime;
 	private Date updatetime;
 	private String pictureuri;
-	private Boolean deleted;
+	private String deleted;
 	private Long language_id;
 	private Adresses adresses;
 	
@@ -38,7 +39,7 @@ public class Users {
 	private Userdata lieferadressen;
     private Usergroups[] usergroups; 
     
-    private List Organisations;
+    private Set organisation_users;
     
     
     //TODO: Fehlende adressids für rechnung und lieferadresse
@@ -53,8 +54,8 @@ public class Users {
 	 * @hibernate.many-to-one
 	 * column = "adresses_id"
 	 * class = "org.xmlcrm.app.hibernate.beans.adresses.Adresses"
-	 * insert="false"
-	 * update="false"
+	 * insert="true"
+	 * update="true"
 	 * outer-join="true"
 	 * lazy="false"
      */		
@@ -284,12 +285,12 @@ public class Users {
     /**
      * @hibernate.property
      *  column="deleted"
-     *  type="boolean"
+     *  type="string"
      */	
-	public Boolean getDeleted() {
+	public String getDeleted() {
 		return deleted;
 	}
-	public void setDeleted(Boolean deleted) {
+	public void setDeleted(String deleted) {
 		this.deleted = deleted;
 	}
 
@@ -316,19 +317,25 @@ public class Users {
 	public void setLanguage_id(Long language_id) {
 		this.language_id = language_id;
 	}
+		
 
-
-
-	public List getOrganisations() {
-		return Organisations;
+    /**
+     * @hibernate.set 
+     * table = "organisation_users" 
+     * inverse = "true" 
+     * where ="deleted = 'false'"
+     * lazy = "false"
+     * cascade = "none"
+     * @hibernate.collection-one-to-many 
+     * class = "org.xmlcrm.app.hibernate.beans.domain.Organisation_Users"
+     * @hibernate.collection-key 
+     * column = "user_id"
+     */	
+	public Set getOrganisation_users() {
+		return organisation_users;
 	}
-
-
-	public void setOrganisations(List organisations) {
-		Organisations = organisations;
+	public void setOrganisation_users(Set organisation_users) {
+		this.organisation_users = organisation_users;
 	}
-	
-	
-    
 	
 }

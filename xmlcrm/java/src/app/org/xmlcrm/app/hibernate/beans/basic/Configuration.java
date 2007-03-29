@@ -17,7 +17,7 @@ public class Configuration {
 	private Date updatetime;
 	private String comment;
 	private Long user_id;	
-	private Boolean deleted;
+	private String deleted;
 	
 	private Users users;
 	
@@ -102,12 +102,12 @@ public class Configuration {
     /**
      * @hibernate.property
      *  column="deleted"
-     *  type="boolean"
+     *  type="string"
      */	
-	public Boolean getDeleted() {
+	public String getDeleted() {
 		return deleted;
 	}
-	public void setDeleted(Boolean deleted) {
+	public void setDeleted(String deleted) {
 		this.deleted = deleted;
 	}
     

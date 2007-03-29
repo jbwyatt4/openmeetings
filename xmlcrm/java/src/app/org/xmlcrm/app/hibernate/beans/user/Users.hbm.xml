@@ -30,8 +30,8 @@
             class="org.xmlcrm.app.hibernate.beans.adresses.Adresses"
             cascade="none"
             outer-join="true"
-            update="false"
-            insert="false"
+            update="true"
+            insert="true"
             column="adresses_id"
         />
 
@@ -149,7 +149,7 @@
 
         <property
             name="deleted"
-            type="boolean"
+            type="string"
             update="true"
             insert="true"
             column="deleted"
@@ -170,6 +170,27 @@
             insert="true"
             column="language_id"
         />
+
+        <set
+            name="organisation_users"
+            table="organisation_users"
+            lazy="false"
+            inverse="true"
+            cascade="none"
+            sort="unsorted"
+            where="deleted = 'false'"
+        >
+
+            <key
+                column="user_id"
+            >
+            </key>
+
+            <one-to-many
+                  class="org.xmlcrm.app.hibernate.beans.domain.Organisation_Users"
+            />
+
+        </set>
 
         <!--
             To add non XDoclet property mappings, create a file named

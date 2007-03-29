@@ -33,9 +33,11 @@
             column="adresses_id"
         />
 
-        <property
-            name="mail_id"
-            type="long"
+        <many-to-one
+            name="mail"
+            class="org.xmlcrm.app.hibernate.beans.adresses.Emails"
+            cascade="none"
+            outer-join="true"
             update="true"
             insert="true"
             column="mail_id"
@@ -59,7 +61,7 @@
 
         <property
             name="deleted"
-            type="boolean"
+            type="string"
             update="true"
             insert="true"
             column="deleted"

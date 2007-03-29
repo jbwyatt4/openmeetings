@@ -25,7 +25,7 @@ public class Navimain {
     private Integer naviorder;
 	private Long level_id;
 	private Long fieldvalues_id;
-	private Boolean deleted;
+	private String deleted;
 	private Fieldlanguagesvalues label;
 	private Set subnavi;
 
@@ -162,12 +162,12 @@ public class Navimain {
     /**
      * @hibernate.property
      *  column="deleted"
-     *  type="boolean"
+     *  type="string"
      */	
-	public Boolean getDeleted() {
+	public String getDeleted() {
 		return deleted;
 	}
-	public void setDeleted(Boolean deleted) {
+	public void setDeleted(String deleted) {
 		this.deleted = deleted;
 	}
     

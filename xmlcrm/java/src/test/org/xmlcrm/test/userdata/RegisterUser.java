@@ -14,8 +14,6 @@ import org.xmlcrm.app.data.user.Usermanagement;
 
 public class RegisterUser extends TestCase{
 	
-	Session session = HibernateUtil.currentSession();
-
 	public RegisterUser(String testname) {
 		super(testname);
 		// TODO Auto-generated constructor stub

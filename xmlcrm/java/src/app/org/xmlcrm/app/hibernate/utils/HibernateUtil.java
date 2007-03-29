@@ -7,37 +7,74 @@ import org.apache.commons.logging.LogFactory;
 
 public class HibernateUtil {
 
-    private static Log log = LogFactory.getLog(HibernateUtil.class);
-
-    private static final SessionFactory sessionFactory;
-
-    static {
-        try {
-            // Create the SessionFactory
-            sessionFactory = new Configuration().configure().buildSessionFactory();
-        } catch (Throwable ex) {
-            // Make sure you log the exception, as it might be swallowed
-            log.error("Initial SessionFactory creation failed.", ex);
-            throw new ExceptionInInitializerError(ex);
-        }
-    }
-
-    public static final ThreadLocal session = new ThreadLocal();
-
-    public static Session currentSession() {
-        Session s = (Session) session.get();
-        // Open a new Session, if this Thread has none yet
-        if (s == null) {
-            s = sessionFactory.openSession();
-            session.set(s);
-        }
-        return s;
-    }
-
-    public static void closeSession() {
-        Session s = (Session) session.get();
-        if (s != null)
-            s.close();
-        session.set(null);
-    }
+	/** Read the configuration, will share across threads**/
+	  private static SessionFactory sessionFactory;
+	  /** the per thread session **/
+	  private static final ThreadLocal currentSession = new ThreadLocal();
+	  /** The constants for describing the ownerships **/
+	  private static final Owner trueOwner = new Owner(true);
+	  private static final Owner fakeOwner = new Owner(false); 
+	  /**
+	   * get the hibernate session and set it on the thread local. Returns trueOwner if 
+	   * it actually opens a session
+	   */
+	  public static Object createSession() throws Exception{
+	    Session session = (Session)currentSession.get();  
+	    System.out.println(session);
+	    if(session == null){
+	      System.out.println("No Session Found - Create and give the identity");
+	      session = getSessionFactory().openSession(); 
+	      currentSession.set(session);
+	      return trueOwner;
+	    }
+	    System.out.println("Session Found - Give a Fake identity");
+	    return fakeOwner;
+	  }
+	  /**
+	   * The method for closing a session. The close  and flush 
+	   * will be executed only if the session is actually created
+	   * by this owner.  
+	   */
+	  public static void closeSession(Object ownership) throws Exception{
+	    if(((Owner)ownership).identity){
+	      System.out.println("Identity is accepted. Now closing the session");
+	      Session session = (Session)currentSession.get();
+	      session.flush();
+	      session.close();
+	      currentSession.set(null);
+	    }else {
+	       System.out.println("Identity is rejected. Ignoring the request");
+	    }
+	  }  
+	  /**
+	   * returns the current session
+	   */
+	  public static Session getSession() throws HibernateException{
+	    return (Session)currentSession.get();
+	  } 
+	  /** 
+	   * Creating a session factory , if not already loaded
+	   */
+	  private static SessionFactory getSessionFactory() 
+	                          throws HibernateException {
+	    try {
+	      if(sessionFactory == null){
+	         sessionFactory = new Configuration().configure().buildSessionFactory(); 
+	      } 
+	       return sessionFactory;
+	    }catch (Exception e){
+	      throw new HibernateException("Error getting Factory");
+	    }
+	  }  
+	 
+	  /**
+	   * Internal class , for handling the identity. Hidden for the 
+	   * developers
+	   */
+	  private static class Owner {
+	     public Owner(boolean identity){
+	      this.identity = identity;
+	     }
+	     boolean identity = false;        
+	  }  
 }

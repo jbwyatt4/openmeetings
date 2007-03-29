@@ -35,7 +35,7 @@ public class Termine {
     private String durationhour;
     private String durationminutes;
     private int duration; 
-    private Boolean deleted;
+    private String deleted;
 	
     private Users owner_user;
     private int visualrowlength;
@@ -249,12 +249,12 @@ public class Termine {
     /**
      * @hibernate.property
      *  column="deleted"
-     *  type="boolean"
+     *  type="string"
      */	
-	public Boolean getDeleted() {
+	public String getDeleted() {
 		return deleted;
 	}
-	public void setDeleted(Boolean deleted) {
+	public void setDeleted(String deleted) {
 		this.deleted = deleted;
 	}
     

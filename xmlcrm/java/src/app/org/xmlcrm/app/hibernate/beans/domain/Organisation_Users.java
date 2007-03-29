@@ -10,27 +10,31 @@ import java.util.Date;
 public class Organisation_Users {
 
 	private Long organisation_users_id;
-	private Long organisation_id;
+	private Organisation organisation;
 	private Long user_id;
 	private Date starttime;
 	private Date updatetime;
-	private Boolean deleted;
+	private String deleted;
+	private String comment;
 
-    
-    public Organisation_Users() {
+	public Organisation_Users() {
 		super();
 	}
 
     /**
-     * @hibernate.property
-     *  column="organisation_id"
-     *  type="long"
-     */ 
-	public Long getOrganisation_id() {
-		return organisation_id;
+	 * @hibernate.many-to-one
+	 * column = "organisation_id"
+	 * class = "org.xmlcrm.app.hibernate.beans.domain.Organisation"
+	 * insert="true"
+	 * update="true"
+	 * outer-join="true"
+	 * lazy="false"
+     */	    
+	public Organisation getOrganisation() {
+		return organisation;
 	}
-	public void setOrganisation_id(Long organisation_id) {
-		this.organisation_id = organisation_id;
+	public void setOrganisation(Organisation organisation) {
+		this.organisation = organisation;
 	}
 	   
     /**
@@ -86,12 +90,25 @@ public class Organisation_Users {
     /**
      * @hibernate.property
      *  column="deleted"
-     *  type="boolean"
+     *  type="string"
      */	
-	public Boolean getDeleted() {
+	public String getDeleted() {
 		return deleted;
 	}
-	public void setDeleted(Boolean deleted) {
+	public void setDeleted(String deleted) {
 		this.deleted = deleted;
 	}
+	
+
+    /**
+     * @hibernate.property
+     *  column="comment"
+     *  type="string"
+     */ 	
+    public String getComment() {
+		return comment;
+	}
+	public void setComment(String comment) {
+		this.comment = comment;
+	}	
 }

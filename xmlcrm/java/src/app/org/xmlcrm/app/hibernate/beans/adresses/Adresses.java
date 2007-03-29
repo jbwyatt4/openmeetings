@@ -20,7 +20,7 @@ public class Adresses {
     private String town;     
     private Date updatetime;
     private String zip;
-    private Boolean deleted;
+    private String deleted;
     
     private Set emails;
     private Set phones;
@@ -156,12 +156,12 @@ public class Adresses {
     /**
      * @hibernate.property
      *  column="deleted"
-     *  type="boolean"
+     *  type="string"
      */	
-	public Boolean getDeleted() {
+	public String getDeleted() {
 		return deleted;
 	}
-	public void setDeleted(Boolean deleted) {
+	public void setDeleted(String deleted) {
 		this.deleted = deleted;
 	}
 	
