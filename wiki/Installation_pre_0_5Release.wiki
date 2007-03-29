@@ -28,12 +28,12 @@
   
 = Red5-webapp installation =
   
-  # Checkout Red5 from svn, build and install it
-URL of svn trunk : https://svn1.cvsdude.com/osflash/red5/build/trunk/
+  # Checkout Red5 from svn, build and install it (URL of svn trunk : https://svn1.cvsdude.com/osflash/red5/java )
+       * On linux type in the command line : svn co https://svn1.cvsdude.com/osflash/red5/java
+       * make
   # copy the webapp to the destination dir
   # copy all needed JARs to the destination dir
   # configure webapp and red5.properties to fit your installation
 
 start all services and test it.
-
 
