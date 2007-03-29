@@ -5,6 +5,7 @@ import java.util.Date;
 /**
  * 
  * @hibernate.class table="organisation"
+ * lazy="false"
  *
  */
 public class Organisation {

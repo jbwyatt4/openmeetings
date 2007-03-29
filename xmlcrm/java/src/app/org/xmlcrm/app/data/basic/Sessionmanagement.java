@@ -8,16 +8,24 @@ import org.xmlcrm.app.hibernate.beans.basic.Sessiondata;
 import org.xmlcrm.app.hibernate.utils.HibernateUtil;
 import org.xmlcrm.utils.math.Calender;
 import org.xmlcrm.utils.math.MD5Calc;
-
+import org.hibernate.Criteria;
+import org.hibernate.criterion.Restrictions;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.hibernate.criterion.Restrictions;
 
+
+/**
+ * 
+ * @author swagner
+ * This Class handles all session management
+ * 
+ * TODO: Delete all inactive session by a scheduler
+ *
+ */
 public class Sessionmanagement {
 
 	private static final Log log = LogFactory.getLog(Sessionmanagement.class);
@@ -34,6 +42,10 @@ public class Sessionmanagement {
 		return instance;
 	}
 
+	/**
+	 * creates a new session-object in the database
+	 * @return
+	 */
 	public Sessiondata startsession() {
 		MD5Calc md5 = new MD5Calc("MD5");
 
@@ -62,6 +74,11 @@ public class Sessionmanagement {
 		return sessiondata;
 	}
 
+	/**
+	 * check if a given sessionID is loged in
+	 * @param SID
+	 * @return
+	 */
 	public int checkSession(String SID) {
 		int ret = 0;
 		try {
@@ -94,26 +111,32 @@ public class Sessionmanagement {
 		return ret;
 	}
 
+	/**
+	 * update the session of a user with a new user id
+	 * this is needed to see if the session is loggedin
+	 * @param SID
+	 * @param USER_ID
+	 */
 	public void updateUser(String SID, long USER_ID) {
 		try {
-//			Object idf = HibernateUtil.createSession();
-//			Session session = HibernateUtil.getSession();
-//			Transaction tx = session.beginTransaction();
-//
-//			Criteria crit = session.createCriteria(Sessiondata.class);
-//			crit.add(Restrictions.eq("session_id", SID));
-//
-//			List fullList = crit.list();
-//			if (fullList.size() == 0)
-//				return;
-//			Sessiondata sd = (Sessiondata) fullList.get(0);
-//			sd.setRefresh_time(new Date());
-//			sd.setUser_id(USER_ID);
-//
-//			session.update(sd);
-//
-//			tx.commit();
-//			HibernateUtil.closeSession(idf);
+			Object idf = HibernateUtil.createSession();
+			Session session = HibernateUtil.getSession();
+			Transaction tx = session.beginTransaction();
+
+			Criteria crit = session.createCriteria(Sessiondata.class);
+			crit.add(Restrictions.eq("session_id", SID));
+
+			List fullList = crit.list();
+			if (fullList.size() == 0)
+				return;
+			Sessiondata sd = (Sessiondata) fullList.get(0);
+			sd.setRefresh_time(new Date());
+			sd.setUser_id(USER_ID);
+
+			session.update(sd);
+
+			tx.commit();
+			HibernateUtil.closeSession(idf);
 
 		} catch (HibernateException ex) {
 			log.error("[updateUser]: " + ex);
@@ -122,21 +145,25 @@ public class Sessionmanagement {
 		}
 	}
 
+	/**
+	 * update the session every time a user makes a request
+	 * @param SID
+	 */
 	private void updatesession(String SID) {
 		try {
-//			Object idf = HibernateUtil.createSession();
-//			Session session = HibernateUtil.getSession();
-//			Transaction tx = session.beginTransaction();
-//			Criteria crit = session.createCriteria(Sessiondata.class);
-//			crit.add(Restrictions.eq("session_id", SID));
-//			List fullList = crit.list();
-//			if (fullList.size() == 0)
-//				return;
-//			Sessiondata sd = (Sessiondata) fullList.iterator().next();
-//			sd.setRefresh_time(new Date());
-//			session.update(sd);
-//			tx.commit();
-//			HibernateUtil.closeSession(idf);
+			Object idf = HibernateUtil.createSession();
+			Session session = HibernateUtil.getSession();
+			Transaction tx = session.beginTransaction();
+			Criteria crit = session.createCriteria(Sessiondata.class);
+			crit.add(Restrictions.eq("session_id", SID));
+			List fullList = crit.list();
+			if (fullList.size() == 0)
+				return;
+			Sessiondata sd = (Sessiondata) fullList.iterator().next();
+			sd.setRefresh_time(new Date());
+			session.update(sd);
+			tx.commit();
+			HibernateUtil.closeSession(idf);
 		} catch (HibernateException ex) {
 			log.error("[updatesession]: " + ex);
 		} catch (Exception ex2) {

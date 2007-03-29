@@ -5,6 +5,7 @@ import java.util.Date;
 /**
  * 
  * @hibernate.class table="users_usergroups"
+ * lazy="false"
  *
  */
 public class Users_Usergroups {

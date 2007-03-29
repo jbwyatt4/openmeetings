@@ -6,6 +6,7 @@ import java.util.Set;
 /**
  * 
  * @hibernate.class table="adresses"
+ * lazy="false"
  *
  */
 public class Adresses {
@@ -94,6 +95,7 @@ public class Adresses {
      * @hibernate.many-to-one
      *  cascade="none"
      *  column="state_id"
+     *  lazy="false"
      *  class="org.xmlcrm.app.hibernate.beans.adresses.States"
      *  not-null="false"
      *  outer-join="true"
@@ -170,6 +172,7 @@ public class Adresses {
      * table = "adresses_emails" 
      * inverse = "false" 
      * cascade = "none"
+     * lazy="false"
      * @hibernate.collection-one-to-many 
      * class = "org.xmlcrm.app.hibernate.beans.adresses.Adresses_Emails"
      * @hibernate.collection-key 
