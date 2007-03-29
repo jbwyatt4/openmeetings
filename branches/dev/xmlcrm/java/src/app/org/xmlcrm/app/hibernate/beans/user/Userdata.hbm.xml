@@ -67,7 +67,7 @@
 
         <property
             name="deleted"
-            type="boolean"
+            type="string"
             update="true"
             insert="true"
             column="deleted"

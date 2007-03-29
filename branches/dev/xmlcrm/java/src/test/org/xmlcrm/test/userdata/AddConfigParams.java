@@ -10,8 +10,7 @@ import org.xmlcrm.app.remote.MainService;
 import junit.framework.TestCase;
 
 public class AddConfigParams extends TestCase {
-	
-	Session session = HibernateUtil.currentSession();
+
 	
 	public AddConfigParams(String testname){
 		super(testname);

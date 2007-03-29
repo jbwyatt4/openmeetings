@@ -16,7 +16,7 @@ public class Userdata {
     private Date starttime;
     private Date updatetime;
     private String comment;
-    private Boolean deleted;
+    private String deleted;
 
 	public Userdata() {
 		super();
@@ -100,12 +100,12 @@ public class Userdata {
     /**
      * @hibernate.property
      *  column="deleted"
-     *  type="boolean"
+     *  type="string"
      */	
-	public Boolean getDeleted() {
+	public String getDeleted() {
 		return deleted;
 	}
-	public void setDeleted(Boolean deleted) {
+	public void setDeleted(String deleted) {
 		this.deleted = deleted;
 	}
 

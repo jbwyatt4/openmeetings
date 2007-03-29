@@ -14,94 +14,99 @@ import org.xmlcrm.app.hibernate.beans.adresses.States;
 import org.xmlcrm.app.hibernate.utils.HibernateUtil;
 
 public class Statemanagement {
-	private static final Log log = LogFactory.getLog(Adressmanagement.class);	
-	
+	private static final Log log = LogFactory.getLog(Statemanagement.class);
+
 	private static Statemanagement instance = null;
-	public static synchronized Statemanagement getInstance(){
+
+	public static synchronized Statemanagement getInstance() {
 		if (instance == null) {
 			instance = new Statemanagement();
 		}
 		return instance;
 	}
-	
+
 	/**
 	 * adds a new State to the states table
 	 * @param statename
 	 * @return the id of the new state or null if an error occurred
 	 */
-	public Long addState(String statename){
-	    try {
-	    	Session session = HibernateUtil.currentSession();
-	    	Transaction tx = session.beginTransaction();
-	    	
-	    	States st = new States();
-	    	st.setName(statename);
-	    	st.setStarttime(new Date());
-	    	st.setDeleted(false);
-	    	
-	    	Long id = (Long) session.save(st);
-			
-	    	tx.commit();
-	    	HibernateUtil.closeSession();
-	    	
-	    	log.debug("added id "+id);
-	    	
-	    	return id;
-        } catch( HibernateException ex ) {
-        	log.error(ex);
-        } catch ( Exception ex2 ){
-        	log.error(ex2);
-        }
-        return null;
+	public Long addState(String statename) {
+		try {
+			Object idf = HibernateUtil.createSession();
+			Session session = HibernateUtil.getSession();
+			Transaction tx = session.beginTransaction();
+
+			States st = new States();
+			st.setName(statename);
+			st.setStarttime(new Date());
+			st.setDeleted("false");
+
+			Long id = (Long) session.save(st);
+
+			tx.commit();
+			HibernateUtil.closeSession(idf);
+
+			log.debug("added id " + id);
+
+			return id;
+		} catch (HibernateException ex) {
+			log.error(ex);
+		} catch (Exception ex2) {
+			log.error(ex2);
+		}
+		return null;
 	}
-	
+
 	/**
 	 * selects a state by its id
 	 * @param state_id
 	 * @return the state-object or null
 	 */
-	public States getStateById(long state_id){
-	    try {
-	    	Session session = HibernateUtil.currentSession();
-	    	Transaction tx = session.beginTransaction();
-			Query query = session.createQuery("select c from States as c where c.state_id = :state_id AND deleted != :deleted");
-			query.setLong("state_id", state_id);	
-			query.setBoolean("deleted", true);
-			List ll = query.list();		
-	    	tx.commit();
-	    	HibernateUtil.closeSession();
-			if (ll.size()>0){
-				return (States) query.list().get(0);
-			}		    	
-        } catch( HibernateException ex ) {
-        	log.error(ex);
-        } catch ( Exception ex2 ){
-        	log.error(ex2);
-        }
+	public States getStateById(long state_id) {
+		try {
+			Object idf = HibernateUtil.createSession();
+			Session session = HibernateUtil.getSession();
+			Transaction tx = session.beginTransaction();
+			Query query = session
+					.createQuery("select c from States as c where c.state_id = :state_id AND deleted != :deleted");
+			query.setLong("state_id", state_id);
+			query.setString("deleted", "true");
+			List ll = query.list();
+			tx.commit();
+			HibernateUtil.closeSession(idf);
+			if (ll.size() > 0) {
+				return (States) ll.get(0);
+			}
+		} catch (HibernateException ex) {
+			log.error(ex);
+		} catch (Exception ex2) {
+			log.error(ex2);
+		}
 		return null;
 	}
-	
+
 	/**
 	 * Get all state-Object
 	 * @return List of State Objects or null
 	 */
-	public List getStates(){
-	    try {
-	    	Session session = HibernateUtil.currentSession();
-	    	Transaction tx = session.beginTransaction();
-			Query query = session.createQuery("select c from States as c where deleted != :deleted");
-			query.setBoolean("deleted", true);
-			List ll = query.list();		
-	    	tx.commit();
-	    	HibernateUtil.closeSession();
-	    	return ll;
-        } catch( HibernateException ex ) {
-        	log.error(ex);
-        } catch ( Exception ex2 ){
-        	log.error(ex2);
-        }
+	public List getStates() {
+		try {
+			Object idf = HibernateUtil.createSession();
+			Session session = HibernateUtil.getSession();
+			Transaction tx = session.beginTransaction();
+			Query query = session
+					.createQuery("select c from States as c where deleted != :deleted");
+			query.setString("deleted", "true");
+			List ll = query.list();
+			tx.commit();
+			HibernateUtil.closeSession(idf);
+			return ll;
+		} catch (HibernateException ex) {
+			log.error(ex);
+		} catch (Exception ex2) {
+			log.error(ex2);
+		}
 		return null;
 	}
-	
-	
+
 }

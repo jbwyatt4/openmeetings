@@ -15,7 +15,7 @@ public class Users_Usergroups {
 	private Date updatetime;
 	private Long user_id;
 	private Long usergroup_id;
-	private Boolean deleted;
+	private String deleted;
 
 	//Todo: Auto many-to-one
 	private Usergroups usergroups;
@@ -78,12 +78,12 @@ public class Users_Usergroups {
     /**
      * @hibernate.property
      *  column="deleted"
-     *  type="boolean"
+     *  type="string"
      */	
-	public Boolean getDeleted() {
+	public String getDeleted() {
 		return deleted;
 	}
-	public void setDeleted(Boolean deleted) {
+	public void setDeleted(String deleted) {
 		this.deleted = deleted;
 	}
     

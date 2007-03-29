@@ -25,9 +25,11 @@
             </generator>
         </id>
 
-        <property
-            name="organisation_id"
-            type="long"
+        <many-to-one
+            name="organisation"
+            class="org.xmlcrm.app.hibernate.beans.domain.Organisation"
+            cascade="none"
+            outer-join="true"
             update="true"
             insert="true"
             column="organisation_id"
@@ -59,10 +61,18 @@
 
         <property
             name="deleted"
-            type="boolean"
+            type="string"
             update="true"
             insert="true"
             column="deleted"
+        />
+
+        <property
+            name="comment"
+            type="string"
+            update="true"
+            insert="true"
+            column="comment"
         />
 
         <!--

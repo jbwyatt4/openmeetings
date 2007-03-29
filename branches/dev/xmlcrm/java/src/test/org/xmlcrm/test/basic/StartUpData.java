@@ -4,6 +4,9 @@ import org.xmlcrm.app.data.basic.Configurationmanagement;
 import org.xmlcrm.app.data.basic.Fieldmanagment;
 import org.xmlcrm.app.data.basic.Languagemanagement;
 import org.xmlcrm.app.data.basic.Navimanagement;
+import org.xmlcrm.app.data.user.Organisationmanagement;
+import org.xmlcrm.app.data.user.Statemanagement;
+import org.xmlcrm.app.data.user.Salutationmanagement;
 import org.xmlcrm.app.data.user.Usermanagement;
 
 import junit.framework.TestCase;
@@ -72,18 +75,39 @@ public class StartUpData extends TestCase {
 		
 		Navimanagement.getInstance().addGlobalStructure("admin", 3, 6, false, true, 1, "admin");
 
-		Usermanagement.getInstance().addUserTitels("Herr");
-		Usermanagement.getInstance().addUserTitels("Frau");
+		Salutationmanagement.getInstance().addUserSalutation("Herr");
+		Salutationmanagement.getInstance().addUserSalutation("Frau");
 		
-		Usermanagement.getInstance().registerUserInit(new Long(3),3, 1, 1, 
+		//TODO: Load States from seperate XML-File
+		Statemanagement.getInstance().addState("Deutschland");
+		Statemanagement.getInstance().addState("France");
+		Statemanagement.getInstance().addState("Italy");
+		Statemanagement.getInstance().addState("Spain");
+		Statemanagement.getInstance().addState("USA");
+		Statemanagement.getInstance().addState("United Kingdom");
+		Statemanagement.getInstance().addState("Ireland");
+		Statemanagement.getInstance().addState("Danemark");
+		
+		//Add user
+		long user_id = Usermanagement.getInstance().registerUserInit(new Long(3),3, 1, 1, 
 				"swagner", "test", "lastname", "firstname", 
 				"seba.wagner@gmail.com", 0, "street", "no", "fax", 
-				"zip", 1, "", 0);
+				"zip", 1, "town", 0);
+		
+		//Add default group
+		long organisation_id = Organisationmanagement.getInstance().addOrganisation("default", user_id);
+		
+		//Add user to default group
+		long organisation_usersid = Organisationmanagement.getInstance().addUserToOrganisation(1, organisation_id, 1,"");
 		
 		Configurationmanagement.getInstance().addConfByKey(3, "allow_frontend_register", "1", 1, "");
 		
 		Configurationmanagement.getInstance().addConfByKey(3, "default_group_id", "1", 1, "");
-				
+		
+		//this domain_id is the Organisation of users who register through the frontend
+		Configurationmanagement.getInstance().addConfByKey(3, "default_domain_id", "1", 1, "");
+		
+		//Todo: Load default language ID from Database
 		
 	}
 }

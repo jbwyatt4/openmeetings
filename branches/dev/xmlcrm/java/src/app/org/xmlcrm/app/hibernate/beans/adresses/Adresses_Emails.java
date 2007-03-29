@@ -10,11 +10,11 @@ import java.util.Date;
 public class Adresses_Emails {
 
 	private Long adresses_emails_id;
-	private Long mail_id;
+	private Emails mail;
 	private Long adresses_id;
 	private Date starttime;
 	private Date updatetime;
-	private Boolean deleted;
+	private String deleted;
 	
 	public Adresses_Emails() {
 		super();
@@ -45,17 +45,21 @@ public class Adresses_Emails {
 	public void setAdresses_id(Long adresses_id) {
 		this.adresses_id = adresses_id;
 	}
-	
+
     /**
-     * @hibernate.property
-     *  column="mail_id"
-     *  type="long"
-     */  	
-	public Long getMail_id() {
-		return mail_id;
+	 * @hibernate.many-to-one
+	 * column = "mail_id"
+	 * class = "org.xmlcrm.app.hibernate.beans.adresses.Emails"
+	 * insert="true"
+	 * update="true"
+	 * outer-join="true"
+	 * lazy="false"
+     */			
+	public Emails getMail() {
+		return mail;
 	}
-	public void setMail_id(Long mail_id) {
-		this.mail_id = mail_id;
+	public void setMail(Emails mail) {
+		this.mail = mail;
 	}
 	
     /**
@@ -85,12 +89,12 @@ public class Adresses_Emails {
     /**
      * @hibernate.property
      *  column="deleted"
-     *  type="boolean"
+     *  type="string"
      */	
-	public Boolean getDeleted() {
+	public String getDeleted() {
 		return deleted;
 	}
-	public void setDeleted(Boolean deleted) {
+	public void setDeleted(String deleted) {
 		this.deleted = deleted;
 	}
 	

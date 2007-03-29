@@ -17,499 +17,540 @@ import org.xmlcrm.app.remote.ResHandler;
 import org.xmlcrm.utils.math.Calender;
 
 public class Groupmanagement {
-	
+
 	private static final Log log = LogFactory.getLog(Groupmanagement.class);
-	
+
 	private static Groupmanagement instance;
 
-    private Groupmanagement(){}
-    
-    public static synchronized Groupmanagement getInstance(){
-    	if (instance!=null){
-    		instance = new Groupmanagement();
-    	}
-    	return instance;
-    }
-    
-    private boolean checkUserLevel(Long USER_LEVEL){
-        if (USER_LEVEL.longValue()>1){
-            return true;
-        } else {
-            return false;
-        }
-    }   
-    private boolean checkConfLevel(Long USER_LEVEL){
-        if (USER_LEVEL.longValue()>2){
-            return true;
-        } else {
-            return false;
-        }
-    }
-    public Users_Usergroups[] getUserGroups(Long USER_ID){
-    	Users_Usergroups[] usersusergroups = new Users_Usergroups[1];
-        try {
-            Session session = HibernateUtil.currentSession();
-            Transaction tx = session.beginTransaction();
-            Query query = session.createQuery("select c from Users_Usergroups as c where c.user_id = :user_id");
-            query.setLong("user_id", USER_ID.longValue());       
-            int count = query.list().size();
-            usersusergroups = new Users_Usergroups[count];
-            int k = 0;
-            for (Iterator it2 = query.iterate(); it2.hasNext();) {
-            	usersusergroups[k] = (Users_Usergroups) it2.next();
-                k++;
-            }
-            tx.commit();
-            HibernateUtil.closeSession();
-        } catch( HibernateException ex ) {
-        	log.error(ex);
-        } catch ( Exception ex2 ){
-        	log.error(ex2);
-        }
-        return usersusergroups;
-    }
-    public Users_Usergroups getUserGroupsSingle(long USER_ID){
-    	Users_Usergroups usersusergroups = new Users_Usergroups();
-        try {
-            Session session = HibernateUtil.currentSession();
-            Transaction tx = session.beginTransaction();
-            Query query = session.createQuery("select c from Users_Usergroups as c where c.user_id = :user_id");
-            query.setLong("user_id", USER_ID);       
-            for (Iterator it2 = query.iterate(); it2.hasNext();) {
-            	usersusergroups = (Users_Usergroups) it2.next();
-            }
-            tx.commit();
-            HibernateUtil.closeSession();
-        } catch( HibernateException ex ) {
-        	log.error(ex);
-        } catch ( Exception ex2 ){
-        	log.error(ex2);
-        }
-        return usersusergroups;
-    }
-    public String addUserToGroup(Long USER_LEVEL,Long GROUP_ID,Long USER_ID,String comment){
-    	String res = "addUserToGroup";
-    	if (checkUserLevel(USER_LEVEL)){
-    		Users_Usergroups usersusergroups = new Users_Usergroups();
-    		usersusergroups.setUsergroup_id(GROUP_ID);
-    		usersusergroups.setUser_id(USER_ID);
-    		usersusergroups.setComment(comment);
-    		usersusergroups.setStarttime(new Date());
-    		usersusergroups.setUpdatetime(null);
-		    try {   
-		        Session session = HibernateUtil.currentSession();
-		        Transaction tx = session.beginTransaction();
-		        session.save(usersusergroups);
-		        session.flush();   
-		        session.clear();
-		        session.refresh(usersusergroups);
-		        tx.commit();
-		        HibernateUtil.closeSession();
-		    } catch( HibernateException ex ) {
-		    	log.error(ex);
-		    } catch ( Exception ex2 ){
-		    	log.error(ex2);
-		    }
-    	} else {
-    		res = "Error: Permission denied";
-    	}
-	    return res;
-    }
-    public String updateUserGroup(Long USER_LEVEL,Long users_usergroups_id, Long usergroup_id,Long user_id,String comment){
-    	String res = "updateUserGroup";
-    	if (checkUserLevel(USER_LEVEL)){
-	        try {
-	            Session session = HibernateUtil.currentSession();
-	            Transaction tx = session.beginTransaction();        
-	            String hqlUpdate =  " UPDATE Users_Usergroups set " +
-				            		" usergroup_id = :usergroup_id, user_id = :user_id, " +
-				            		" updatetime = :updatetime, comment = :comment " +
-				            		" where users_usergroups_id= :users_usergroups_id";
-	            int updatedEntities = session.createQuery( hqlUpdate )
-	                                .setLong("usergroup_id",usergroup_id.longValue())
-	                                .setLong("user_id",user_id.longValue())
-	                                .setLong( "updatetime", Calender.getInstance().getTimeStampMili() )
-	                                .setString( "comment",comment)
-	                                .setLong( "users_usergroups_id", users_usergroups_id.longValue() )
-	                                .executeUpdate();
-	            res = "Success: "+updatedEntities;
-	            tx.commit();
-	            HibernateUtil.closeSession();
-	        } catch( HibernateException ex ) {
-	            log.error(ex);
-	        } catch ( Exception ex2 ){
-	            log.error(ex2);
-	        }
-    	} else {
-    		res = "Error: Permission denied";
-    	}        
-    	return res;
-    }
-    public String deleteUserGroupByID(Long USER_LEVEL,Long users_usergroups_id){
-    	String res = "deleteUserGroupByID";
-    	if (checkUserLevel(USER_LEVEL)){
-	        try {
-	            Session session = HibernateUtil.currentSession();
-	            Transaction tx = session.beginTransaction();        
-	            String hqlUpdate = "delete users_usergroups where users_usergroups_id= :users_usergroups_id";
-	            int updatedEntities = session.createQuery( hqlUpdate )
-	                                .setLong( "UID", users_usergroups_id.longValue() )
-	                                .executeUpdate();
-	            res = "Success"+updatedEntities;
-	            tx.commit();
-	            HibernateUtil.closeSession();
-	            
-	        } catch( HibernateException ex ) {
-	            log.error(ex);
-	        } catch ( Exception ex2 ){
-	            log.error(ex2);
-	        }
-    	} else {
-    		res = "Error: Permission denied";
-    	}         
-    	return res;
-    }
-    public String deleteUserFromAllGroups(Long user_id){
-    	String res = "deleteUserFromAllGroups";
-        try {
-            Session session = HibernateUtil.currentSession();
-            Transaction tx = session.beginTransaction();        
-            String hqlUpdate = "delete users_usergroups where user_id= :user_id";
-            int updatedEntities = session.createQuery( hqlUpdate )
-                                .setLong( "user_id", user_id.longValue() )
-                                .executeUpdate();
-            res = "Success"+updatedEntities;
-            tx.commit();
-            HibernateUtil.closeSession();
-        } catch( HibernateException ex ) {
-        	log.error(ex);
-        } catch ( Exception ex2 ){
-        	log.error(ex2);
-        }
-    	return res;
-    } 
-    public String deleteAllGroupUsers(Long usergroup_id){
-    	String res = "deleteAllGroupUsers";
-        try {
-            Session session = HibernateUtil.currentSession();
-            Transaction tx = session.beginTransaction();        
-            String hqlUpdate = "delete users_usergroups where usergroup_id= :usergroup_id";
-            int updatedEntities = session.createQuery( hqlUpdate )
-                                .setLong( "usergroup_id", usergroup_id.longValue() )
-                                .executeUpdate();
-            res = "Success"+updatedEntities;
-            tx.commit();
-            HibernateUtil.closeSession();
-            
-        } catch( HibernateException ex ) {
-        	log.error(ex);
-        } catch ( Exception ex2 ){
-        	log.error(ex2);
-        }
-    	return res;
-    }    
-    public Users_Usergroups getGroupUsers(Long USER_LEVEL,Long usergroup_id){
-        Users_Usergroups groups = new Users_Usergroups();
-        if (checkUserLevel(USER_LEVEL)){
-	        try {
-	            Session session = HibernateUtil.currentSession();
-	            Transaction tx = session.beginTransaction();
-	            Query query = session.createQuery("select c from Usergroups as c where c.usergroup_id = :usergroup_id");
-	            query.setLong("usergroup_id", usergroup_id.longValue() );       
-	            for (Iterator it2 = query.iterate(); it2.hasNext();) {
-	            	groups = (Users_Usergroups) it2.next();
-	            }
-	            tx.commit();
-	            HibernateUtil.closeSession();
-	            	//TODO: setzen der Usergroups einer Gruppe
-	            	//groups.setUsergroups(getUsergroupsUsers(GROUP_ID));
-	        } catch( HibernateException ex ) {
-	        	log.error(ex);
-	        } catch ( Exception ex2 ){
-	        	log.error(ex2);
-	        }
-        } else {
-        	groups.setComment("Error: Permission denied");
-        }
-        return groups;
-    } 
-    public Usergroups[] getUsergroupsUsers(Long usergroup_id){
-        Usergroups[] usergroups = new Usergroups[1];
-        try {
-            Session session = HibernateUtil.currentSession();
-            Transaction tx = session.beginTransaction();
-            Query query = session.createQuery("select c from Usergroups as c where c.usergroup_id = :usergroup_id");
-            query.setLong("usergroup_id", usergroup_id.longValue() );       
-            int count = query.list().size();
-            usergroups = new Usergroups[count];
-            int k = 0;
-            for (Iterator it2 = query.iterate(); it2.hasNext();) {
-                usergroups[k] = (Usergroups) it2.next();
-                k++;
-            }
-            tx.commit();
-            HibernateUtil.closeSession();
-            for  (int vars=0;vars<usergroups.length;vars++){
-                //Todo:setzend er Passenden Benutzergruppen
-                //usergroups[vars].setUsers(ResHandler.getUsermanagement().getUserForGroup(usergroups[vars].getUSER_ID()));
-            }
-        } catch( HibernateException ex ) {
-        	log.error(ex);
-        } catch ( Exception ex2 ){
-        	log.error(ex2);
-        }
-        return usergroups;
-    }
-    
-    public Usergroups[] getAllGroupUsers(Long USER_LEVEL){
-    	Usergroups[] usergroups = new Usergroups[1];
-    	if (checkConfLevel(USER_LEVEL)){
-	        try {
-	            Session session = HibernateUtil.currentSession();
-	            Transaction tx = session.beginTransaction();
-	            Query query = session.createQuery("from Usergroups");    
-	            int count = query.list().size();
-	            usergroups = new Usergroups[count];
-	            int k = 0;
-	            for (Iterator it2 = query.iterate(); it2.hasNext();) {
-	            	usergroups[k] = (Usergroups) it2.next();
-	                k++;
-	            }
-	            tx.commit();
-	            HibernateUtil.closeSession();
-	            for  (int vars=0;vars<usergroups.length;vars++){
-	            	//Todo:setzen der Benutzer dieser Gruppe
-	            	//groups[vars].setUsergroups(getUsergroupsUsers(groups[vars].getGROUP_ID()));
-	            }
-	        } catch( HibernateException ex ) {
-	        	log.error(ex);
-	        } catch ( Exception ex2 ){
-	        	log.error(ex2);
-	        }
-    	} else {
-    		usergroups[0] = new Usergroups();
-    		usergroups[0].setName("Error: Permission denied");
-    	}
-        return usergroups;
-    }    
-
-    public Usergroups getGroup(Long usergroup_id){
-    	Usergroups usergroups = new Usergroups();
-        try {
-            Session session = HibernateUtil.currentSession();
-            Transaction tx = session.beginTransaction();
-            Query query = session.createQuery("select c from Usergroups as c where c.usergroup_id = :usergroup_id");
-            query.setLong("usergroup_id", usergroup_id.longValue() );       
-            for (Iterator it2 = query.iterate(); it2.hasNext();) {
-            	usergroups = (Usergroups) it2.next();
-            }
-            tx.commit();
-            HibernateUtil.closeSession();
-        } catch( HibernateException ex ) {
-        	log.error(ex);
-        } catch ( Exception ex2 ){
-        	log.error(ex2);
-        }
-        return usergroups;
-    }
-    public Usergroups[] getAllGroup(Long USER_LEVEL){
-    	Usergroups[] usergroups = new Usergroups[1];
-        if (checkConfLevel(USER_LEVEL)){
-	        try {
-	            Session session = HibernateUtil.currentSession();
-	            Transaction tx = session.beginTransaction();
-	            Query query = session.createQuery("from Usergroups");
-	            int count = query.list().size();
-	            usergroups = new Usergroups[count];
-	            int k = 0;  
-	            for (Iterator it2 = query.iterate(); it2.hasNext();) {
-	            	usergroups[k] = (Usergroups) it2.next();
-	                k++;
-	            }
-	            tx.commit();
-	            HibernateUtil.closeSession();
-	            for  (int vars=0;vars<usergroups.length;vars++){
-	            	//groups[vars].setUsers(ResHandler.getUsermanagement().getUser(groups[vars].getUSER_ID()));
-	            }
-	        } catch( HibernateException ex ) {
-	        	log.error(ex);
-	        } catch ( Exception ex2 ){
-	        	log.error(ex2);
-	        }
-        } else {
-        	usergroups[0] = new Usergroups();
-        	usergroups[0].setName("Error: Permission denied");
-        }
-        return usergroups;
-    } 
-    public Users_Usergroups getSingleGroup(Long USER_LEVEL,Long usergroup_id){
-        Users_Usergroups groups = new Users_Usergroups();
-        if (checkConfLevel(USER_LEVEL)){
-	        try {
-	            Session session = HibernateUtil.currentSession();
-	            Transaction tx = session.beginTransaction();
-	            Query query = session.createQuery("select c from Usergroups as c where c.usergroup_id = :usergroup_id");
-	            query.setLong("usergroup_id",usergroup_id.longValue() );
-	            for (Iterator it2 = query.iterate(); it2.hasNext();) {
-	                groups = (Users_Usergroups) it2.next();
-	            }
-	            tx.commit();
-	            HibernateUtil.closeSession();
-                //TODO: Benutzer einer gruppe setzten
-                //groups.setUsers(ResHandler.getUsermanagement().getUser(groups()));
-
-	        } catch( HibernateException ex ) {
-	        	log.error(ex);
-	        } catch ( Exception ex2 ){
-	        	log.error(ex2);
-	        }
-        } else {
-        	groups.setComment("Error: Permission denied");
-        }
-        return groups;
-    }     
-    
-    public String addGroup(Long USER_LEVEL,Long USER_ID, Long level_id ,String name,String description,String comment){
-    	String res = "Addgroup";
-    	if (checkUserLevel(USER_LEVEL)){
-    		Usergroups usergroups = new Usergroups();
-    		//Todo: Add business logic for users-history
-    		//usergroups.setUSER_ID(USER_ID);
-    		usergroups.setLevel_id(level_id);
-    		usergroups.setName(name);
-//    		usergroups.setDescription(description);
-//    		usergroups.setComment(comment);
-    		usergroups.setStarttime(new Date());
-    		usergroups.setUpdatetime(null);
-		    try {   
-		        Session session = HibernateUtil.currentSession();
-		        Transaction tx = session.beginTransaction();
-		        session.save(usergroups);
-		        session.flush();   
-		        session.clear();
-		        session.refresh(usergroups);
-		        tx.commit();
-		        HibernateUtil.closeSession();
-	        } catch( HibernateException ex ) {
-	        	log.error(ex);
-	        } catch ( Exception ex2 ){
-	        	log.error(ex2);
-	        }
-    	} else {
-    		res = "Error: Permission denied";
-    	}		    
-	    return res;
+	private Groupmanagement() {
 	}
-    public String updateGroup (Long USER_LEVEL,Long USER_ID, Long level_id,Long usergroup_id, String name, String description, String comment){
-    	String res = "UpdateGroup";
-    	if (checkUserLevel(USER_LEVEL)){
-	        try {
-	            Session session = HibernateUtil.currentSession();
-	            Transaction tx = session.beginTransaction();        
-	            String hqlUpdate = "update Usergroups set user_id = :user_id,level_id = :level_id, name = :name, description = :description, updatetime = :updatetime, comment = :comment where usergroup_id= :usergroup_id";
-	            int updatedEntities = session.createQuery( hqlUpdate )
-	            					.setLong( "user_id", USER_ID.longValue() )
-	            					.setLong( "level_id", level_id.longValue() )
-	                                .setString( "name",name )
-	                                .setString( "description",description )
-	                                .setLong( "updatetime", Calender.getInstance().getTimeStampMili() )
-	                                .setString( "comment",comment )
-	                                .setLong( "usergroup_id", usergroup_id.longValue() )
-	                                .executeUpdate();
-	            res = "Success"+updatedEntities;
-	            tx.commit();
-	            HibernateUtil.closeSession();
-	        } catch( HibernateException ex ) {
-	        	log.error(ex);
-	        } catch ( Exception ex2 ){
-	        	log.error(ex2);
-	        }
-    	} else {
-    		res = "Error: Permission denied";
-    	}	        
-    	return res;
-    }
-    public String deleteGroup (Long USER_LEVEL,Long usergroup_id){
-    	String res = "UpdateGroup";
-    	if (checkUserLevel(USER_LEVEL)){
-	        try {
-	            Session session = HibernateUtil.currentSession();
-	            Transaction tx = session.beginTransaction();        
-	            String hqlUpdate = "delete Usergroups where usergroup_id= :usergroup_id";
-	            int updatedEntities = session.createQuery( hqlUpdate )
-	                                .setLong( "usergroup_id", usergroup_id.longValue() )
-	                                .executeUpdate();
-	            res = "Success"+updatedEntities;
-	            tx.commit();
-	            HibernateUtil.closeSession();
-	            deleteAllGroupUsers(usergroup_id);
-	        } catch( HibernateException ex ) {
-	        	log.error(ex);
-	        } catch ( Exception ex2 ){
-	        	log.error(ex2);
-	        }
-       	} else {
-    		res = "Error: Permission denied";
-    	}
-    	return res;
-    }    
-    
-    public Usergroups[] getAllGroupFree(Long USER_LEVEL){
-    	Usergroups[] groups = new Usergroups[1];
-        if (checkConfLevel(USER_LEVEL)){
-	        try {
-	            Session session = HibernateUtil.currentSession();
-	            Transaction tx = session.beginTransaction();
-	            Query query = session.createQuery("select c from usergroup_id as c where c.level_id = :level_id");
-	            query.setLong("level_id",1); 
-	            int count = query.list().size();
-	            groups = new Usergroups[count];
-	            int k = 0;  
-	            for (Iterator it2 = query.iterate(); it2.hasNext();) {
-	                groups[k] = (Usergroups) it2.next();
-	                k++;
-	            }
-	            tx.commit();
-	            HibernateUtil.closeSession();
-	            for  (int vars=0;vars<groups.length;vars++){
-	                //groups[vars].setUsers(ResHandler.getUsermanagement().getUser(groups[vars].getUSER_ID()));
-	            }
-	        } catch( HibernateException ex ) {
-	        	log.error(ex);
-	        } catch ( Exception ex2 ){
-	        	log.error(ex2);
-	        }
-        } else {
-        	groups[0] = new Usergroups();
-        	groups[0].setComment("Error: Permission denied");
-        }
-        return groups;
-    } 
-    public Usergroups getSingleGroupFree(Long USER_LEVEL,Long usergroup_id){
-    	Usergroups groups = new Usergroups();
-        if (checkConfLevel(USER_LEVEL)){
-	        try {
-	            Session session = HibernateUtil.currentSession();
-	            Transaction tx = session.beginTransaction();
-	            Query query = session.createQuery("select c from Usergroups as c where c.usergroup_id = :usergroup_id AND c.level_id = :level_id");
-	            query.setLong("usergroup_id",usergroup_id.longValue());
-	            query.setLong("level_id",1); 
-	            for (Iterator it2 = query.iterate(); it2.hasNext();) {
-	                groups = (Usergroups) it2.next();
-	            }
-	            tx.commit();
-	            HibernateUtil.closeSession();
-                //Todo: Set user
-                //groups.setUsers(ResHandler.getUsermanagement().getUser(groups.getUSER_ID()));
-	
-	        } catch( HibernateException ex ) {
-	        	log.error(ex);
-	        } catch ( Exception ex2 ){
-	        	log.error(ex2);
-	        }
-        } else {
-        	groups.setComment("Error: Permission denied");
-        }
-        return groups;
-    }     
+
+	public static synchronized Groupmanagement getInstance() {
+		if (instance != null) {
+			instance = new Groupmanagement();
+		}
+		return instance;
+	}
+
+	private boolean checkUserLevel(Long USER_LEVEL) {
+		if (USER_LEVEL.longValue() > 1) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	private boolean checkConfLevel(Long USER_LEVEL) {
+		if (USER_LEVEL.longValue() > 2) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public Users_Usergroups[] getUserGroups(Long USER_ID) {
+		Users_Usergroups[] usersusergroups = new Users_Usergroups[1];
+		try {
+			Object idf = HibernateUtil.createSession();
+			Session session = HibernateUtil.getSession();
+			Transaction tx = session.beginTransaction();
+			Query query = session
+					.createQuery("select c from Users_Usergroups as c where c.user_id = :user_id");
+			query.setLong("user_id", USER_ID.longValue());
+			int count = query.list().size();
+			usersusergroups = new Users_Usergroups[count];
+			int k = 0;
+			for (Iterator it2 = query.iterate(); it2.hasNext();) {
+				usersusergroups[k] = (Users_Usergroups) it2.next();
+				k++;
+			}
+			tx.commit();
+			HibernateUtil.closeSession(idf);
+		} catch (HibernateException ex) {
+			log.error(ex);
+		} catch (Exception ex2) {
+			log.error(ex2);
+		}
+		return usersusergroups;
+	}
+
+	public Users_Usergroups getUserGroupsSingle(long USER_ID) {
+		Users_Usergroups usersusergroups = new Users_Usergroups();
+		try {
+			Object idf = HibernateUtil.createSession();
+			Session session = HibernateUtil.getSession();
+			Transaction tx = session.beginTransaction();
+			Query query = session
+					.createQuery("select c from Users_Usergroups as c where c.user_id = :user_id");
+			query.setLong("user_id", USER_ID);
+			for (Iterator it2 = query.iterate(); it2.hasNext();) {
+				usersusergroups = (Users_Usergroups) it2.next();
+			}
+			tx.commit();
+			HibernateUtil.closeSession(idf);
+		} catch (HibernateException ex) {
+			log.error(ex);
+		} catch (Exception ex2) {
+			log.error(ex2);
+		}
+		return usersusergroups;
+	}
+
+	public String addUserToGroup(Long USER_LEVEL, Long GROUP_ID, Long USER_ID,
+			String comment) {
+		String res = "addUserToGroup";
+		if (checkUserLevel(USER_LEVEL)) {
+			Users_Usergroups usersusergroups = new Users_Usergroups();
+			usersusergroups.setUsergroup_id(GROUP_ID);
+			usersusergroups.setUser_id(USER_ID);
+			usersusergroups.setComment(comment);
+			usersusergroups.setStarttime(new Date());
+			usersusergroups.setUpdatetime(null);
+			try {
+				Object idf = HibernateUtil.createSession();
+				Session session = HibernateUtil.getSession();
+				Transaction tx = session.beginTransaction();
+				session.save(usersusergroups);
+				session.flush();
+				session.clear();
+				session.refresh(usersusergroups);
+				tx.commit();
+				HibernateUtil.closeSession(idf);
+			} catch (HibernateException ex) {
+				log.error(ex);
+			} catch (Exception ex2) {
+				log.error(ex2);
+			}
+		} else {
+			res = "Error: Permission denied";
+		}
+		return res;
+	}
+
+	public String updateUserGroup(Long USER_LEVEL, Long users_usergroups_id,
+			Long usergroup_id, Long user_id, String comment) {
+		String res = "updateUserGroup";
+		if (checkUserLevel(USER_LEVEL)) {
+			try {
+				Object idf = HibernateUtil.createSession();
+				Session session = HibernateUtil.getSession();
+				Transaction tx = session.beginTransaction();
+				String hqlUpdate = " UPDATE Users_Usergroups set "
+						+ " usergroup_id = :usergroup_id, user_id = :user_id, "
+						+ " updatetime = :updatetime, comment = :comment "
+						+ " where users_usergroups_id= :users_usergroups_id";
+				int updatedEntities = session.createQuery(hqlUpdate).setLong(
+						"usergroup_id", usergroup_id.longValue()).setLong(
+						"user_id", user_id.longValue()).setLong("updatetime",
+						Calender.getInstance().getTimeStampMili()).setString(
+						"comment", comment).setLong("users_usergroups_id",
+						users_usergroups_id.longValue()).executeUpdate();
+				res = "Success: " + updatedEntities;
+				tx.commit();
+				HibernateUtil.closeSession(idf);
+			} catch (HibernateException ex) {
+				log.error(ex);
+			} catch (Exception ex2) {
+				log.error(ex2);
+			}
+		} else {
+			res = "Error: Permission denied";
+		}
+		return res;
+	}
+
+	public String deleteUserGroupByID(Long USER_LEVEL, Long users_usergroups_id) {
+		String res = "deleteUserGroupByID";
+		if (checkUserLevel(USER_LEVEL)) {
+			try {
+				Object idf = HibernateUtil.createSession();
+				Session session = HibernateUtil.getSession();
+				Transaction tx = session.beginTransaction();
+				String hqlUpdate = "delete users_usergroups where users_usergroups_id= :users_usergroups_id";
+				int updatedEntities = session.createQuery(hqlUpdate).setLong(
+						"UID", users_usergroups_id.longValue()).executeUpdate();
+				res = "Success" + updatedEntities;
+				tx.commit();
+				HibernateUtil.closeSession(idf);
+
+			} catch (HibernateException ex) {
+				log.error(ex);
+			} catch (Exception ex2) {
+				log.error(ex2);
+			}
+		} else {
+			res = "Error: Permission denied";
+		}
+		return res;
+	}
+
+	public String deleteUserFromAllGroups(Long user_id) {
+		String res = "deleteUserFromAllGroups";
+		try {
+			Object idf = HibernateUtil.createSession();
+			Session session = HibernateUtil.getSession();
+			Transaction tx = session.beginTransaction();
+			String hqlUpdate = "delete users_usergroups where user_id= :user_id";
+			int updatedEntities = session.createQuery(hqlUpdate).setLong(
+					"user_id", user_id.longValue()).executeUpdate();
+			res = "Success" + updatedEntities;
+			tx.commit();
+			HibernateUtil.closeSession(idf);
+		} catch (HibernateException ex) {
+			log.error(ex);
+		} catch (Exception ex2) {
+			log.error(ex2);
+		}
+		return res;
+	}
+
+	public String deleteAllGroupUsers(Long usergroup_id) {
+		String res = "deleteAllGroupUsers";
+		try {
+			Object idf = HibernateUtil.createSession();
+			Session session = HibernateUtil.getSession();
+			Transaction tx = session.beginTransaction();
+			String hqlUpdate = "delete users_usergroups where usergroup_id= :usergroup_id";
+			int updatedEntities = session.createQuery(hqlUpdate).setLong(
+					"usergroup_id", usergroup_id.longValue()).executeUpdate();
+			res = "Success" + updatedEntities;
+			tx.commit();
+			HibernateUtil.closeSession(idf);
+
+		} catch (HibernateException ex) {
+			log.error(ex);
+		} catch (Exception ex2) {
+			log.error(ex2);
+		}
+		return res;
+	}
+
+	public Users_Usergroups getGroupUsers(Long USER_LEVEL, Long usergroup_id) {
+		Users_Usergroups groups = new Users_Usergroups();
+		if (checkUserLevel(USER_LEVEL)) {
+			try {
+				Object idf = HibernateUtil.createSession();
+				Session session = HibernateUtil.getSession();
+				Transaction tx = session.beginTransaction();
+				Query query = session
+						.createQuery("select c from Usergroups as c where c.usergroup_id = :usergroup_id");
+				query.setLong("usergroup_id", usergroup_id.longValue());
+				for (Iterator it2 = query.iterate(); it2.hasNext();) {
+					groups = (Users_Usergroups) it2.next();
+				}
+				tx.commit();
+				HibernateUtil.closeSession(idf);
+				//TODO: setzen der Usergroups einer Gruppe
+				//groups.setUsergroups(getUsergroupsUsers(GROUP_ID));
+			} catch (HibernateException ex) {
+				log.error(ex);
+			} catch (Exception ex2) {
+				log.error(ex2);
+			}
+		} else {
+			groups.setComment("Error: Permission denied");
+		}
+		return groups;
+	}
+
+	public Usergroups[] getUsergroupsUsers(Long usergroup_id) {
+		Usergroups[] usergroups = new Usergroups[1];
+		try {
+			Object idf = HibernateUtil.createSession();
+			Session session = HibernateUtil.getSession();
+			Transaction tx = session.beginTransaction();
+			Query query = session
+					.createQuery("select c from Usergroups as c where c.usergroup_id = :usergroup_id");
+			query.setLong("usergroup_id", usergroup_id.longValue());
+			int count = query.list().size();
+			usergroups = new Usergroups[count];
+			int k = 0;
+			for (Iterator it2 = query.iterate(); it2.hasNext();) {
+				usergroups[k] = (Usergroups) it2.next();
+				k++;
+			}
+			tx.commit();
+			HibernateUtil.closeSession(idf);
+			for (int vars = 0; vars < usergroups.length; vars++) {
+				//Todo:setzend er Passenden Benutzergruppen
+				//usergroups[vars].setUsers(ResHandler.getUsermanagement().getUserForGroup(usergroups[vars].getUSER_ID()));
+			}
+		} catch (HibernateException ex) {
+			log.error(ex);
+		} catch (Exception ex2) {
+			log.error(ex2);
+		}
+		return usergroups;
+	}
+
+	public Usergroups[] getAllGroupUsers(Long USER_LEVEL) {
+		Usergroups[] usergroups = new Usergroups[1];
+		if (checkConfLevel(USER_LEVEL)) {
+			try {
+				Object idf = HibernateUtil.createSession();
+				Session session = HibernateUtil.getSession();
+				Transaction tx = session.beginTransaction();
+				Query query = session.createQuery("from Usergroups");
+				int count = query.list().size();
+				usergroups = new Usergroups[count];
+				int k = 0;
+				for (Iterator it2 = query.iterate(); it2.hasNext();) {
+					usergroups[k] = (Usergroups) it2.next();
+					k++;
+				}
+				tx.commit();
+				HibernateUtil.closeSession(idf);
+				for (int vars = 0; vars < usergroups.length; vars++) {
+					//Todo:setzen der Benutzer dieser Gruppe
+					//groups[vars].setUsergroups(getUsergroupsUsers(groups[vars].getGROUP_ID()));
+				}
+			} catch (HibernateException ex) {
+				log.error(ex);
+			} catch (Exception ex2) {
+				log.error(ex2);
+			}
+		} else {
+			usergroups[0] = new Usergroups();
+			usergroups[0].setName("Error: Permission denied");
+		}
+		return usergroups;
+	}
+
+	public Usergroups getGroup(Long usergroup_id) {
+		Usergroups usergroups = new Usergroups();
+		try {
+			Object idf = HibernateUtil.createSession();
+			Session session = HibernateUtil.getSession();
+			Transaction tx = session.beginTransaction();
+			Query query = session
+					.createQuery("select c from Usergroups as c where c.usergroup_id = :usergroup_id");
+			query.setLong("usergroup_id", usergroup_id.longValue());
+			for (Iterator it2 = query.iterate(); it2.hasNext();) {
+				usergroups = (Usergroups) it2.next();
+			}
+			tx.commit();
+			HibernateUtil.closeSession(idf);
+		} catch (HibernateException ex) {
+			log.error(ex);
+		} catch (Exception ex2) {
+			log.error(ex2);
+		}
+		return usergroups;
+	}
+
+	public Usergroups[] getAllGroup(Long USER_LEVEL) {
+		Usergroups[] usergroups = new Usergroups[1];
+		if (checkConfLevel(USER_LEVEL)) {
+			try {
+				Object idf = HibernateUtil.createSession();
+				Session session = HibernateUtil.getSession();
+				Transaction tx = session.beginTransaction();
+				Query query = session.createQuery("from Usergroups");
+				int count = query.list().size();
+				usergroups = new Usergroups[count];
+				int k = 0;
+				for (Iterator it2 = query.iterate(); it2.hasNext();) {
+					usergroups[k] = (Usergroups) it2.next();
+					k++;
+				}
+				tx.commit();
+				HibernateUtil.closeSession(idf);
+				for (int vars = 0; vars < usergroups.length; vars++) {
+					//groups[vars].setUsers(ResHandler.getUsermanagement().getUser(groups[vars].getUSER_ID()));
+				}
+			} catch (HibernateException ex) {
+				log.error(ex);
+			} catch (Exception ex2) {
+				log.error(ex2);
+			}
+		} else {
+			usergroups[0] = new Usergroups();
+			usergroups[0].setName("Error: Permission denied");
+		}
+		return usergroups;
+	}
+
+	public Users_Usergroups getSingleGroup(Long USER_LEVEL, Long usergroup_id) {
+		Users_Usergroups groups = new Users_Usergroups();
+		if (checkConfLevel(USER_LEVEL)) {
+			try {
+				Object idf = HibernateUtil.createSession();
+				Session session = HibernateUtil.getSession();
+				Transaction tx = session.beginTransaction();
+				Query query = session
+						.createQuery("select c from Usergroups as c where c.usergroup_id = :usergroup_id");
+				query.setLong("usergroup_id", usergroup_id.longValue());
+				for (Iterator it2 = query.iterate(); it2.hasNext();) {
+					groups = (Users_Usergroups) it2.next();
+				}
+				tx.commit();
+				HibernateUtil.closeSession(idf);
+				//TODO: Benutzer einer gruppe setzten
+				//groups.setUsers(ResHandler.getUsermanagement().getUser(groups()));
+
+			} catch (HibernateException ex) {
+				log.error(ex);
+			} catch (Exception ex2) {
+				log.error(ex2);
+			}
+		} else {
+			groups.setComment("Error: Permission denied");
+		}
+		return groups;
+	}
+
+	public String addGroup(Long USER_LEVEL, Long USER_ID, Long level_id,
+			String name, String description, String comment) {
+		String res = "Addgroup";
+		if (checkUserLevel(USER_LEVEL)) {
+			Usergroups usergroups = new Usergroups();
+			//Todo: Add business logic for users-history
+			//usergroups.setUSER_ID(USER_ID);
+			usergroups.setLevel_id(level_id);
+			usergroups.setName(name);
+			//    		usergroups.setDescription(description);
+			//    		usergroups.setComment(comment);
+			usergroups.setStarttime(new Date());
+			usergroups.setUpdatetime(null);
+			try {
+				Object idf = HibernateUtil.createSession();
+				Session session = HibernateUtil.getSession();
+				Transaction tx = session.beginTransaction();
+				session.save(usergroups);
+				session.flush();
+				session.clear();
+				session.refresh(usergroups);
+				tx.commit();
+				HibernateUtil.closeSession(idf);
+			} catch (HibernateException ex) {
+				log.error(ex);
+			} catch (Exception ex2) {
+				log.error(ex2);
+			}
+		} else {
+			res = "Error: Permission denied";
+		}
+		return res;
+	}
+
+	public String updateGroup(Long USER_LEVEL, Long USER_ID, Long level_id,
+			Long usergroup_id, String name, String description, String comment) {
+		String res = "UpdateGroup";
+		if (checkUserLevel(USER_LEVEL)) {
+			try {
+				Object idf = HibernateUtil.createSession();
+				Session session = HibernateUtil.getSession();
+				Transaction tx = session.beginTransaction();
+				String hqlUpdate = "update Usergroups set user_id = :user_id,level_id = :level_id, name = :name, description = :description, updatetime = :updatetime, comment = :comment where usergroup_id= :usergroup_id";
+				int updatedEntities = session.createQuery(hqlUpdate).setLong(
+						"user_id", USER_ID.longValue()).setLong("level_id",
+						level_id.longValue()).setString("name", name)
+						.setString("description", description).setLong(
+								"updatetime",
+								Calender.getInstance().getTimeStampMili())
+						.setString("comment", comment).setLong("usergroup_id",
+								usergroup_id.longValue()).executeUpdate();
+				res = "Success" + updatedEntities;
+				tx.commit();
+				HibernateUtil.closeSession(idf);
+			} catch (HibernateException ex) {
+				log.error(ex);
+			} catch (Exception ex2) {
+				log.error(ex2);
+			}
+		} else {
+			res = "Error: Permission denied";
+		}
+		return res;
+	}
+
+	public String deleteGroup(Long USER_LEVEL, Long usergroup_id) {
+		String res = "UpdateGroup";
+		if (checkUserLevel(USER_LEVEL)) {
+			try {
+				Object idf = HibernateUtil.createSession();
+				Session session = HibernateUtil.getSession();
+				Transaction tx = session.beginTransaction();
+				String hqlUpdate = "delete Usergroups where usergroup_id= :usergroup_id";
+				int updatedEntities = session.createQuery(hqlUpdate).setLong(
+						"usergroup_id", usergroup_id.longValue())
+						.executeUpdate();
+				res = "Success" + updatedEntities;
+				tx.commit();
+				HibernateUtil.closeSession(idf);
+				deleteAllGroupUsers(usergroup_id);
+			} catch (HibernateException ex) {
+				log.error(ex);
+			} catch (Exception ex2) {
+				log.error(ex2);
+			}
+		} else {
+			res = "Error: Permission denied";
+		}
+		return res;
+	}
+
+	public Usergroups[] getAllGroupFree(Long USER_LEVEL) {
+		Usergroups[] groups = new Usergroups[1];
+		if (checkConfLevel(USER_LEVEL)) {
+			try {
+				Object idf = HibernateUtil.createSession();
+				Session session = HibernateUtil.getSession();
+				Transaction tx = session.beginTransaction();
+				Query query = session
+						.createQuery("select c from usergroup_id as c where c.level_id = :level_id");
+				query.setLong("level_id", 1);
+				int count = query.list().size();
+				groups = new Usergroups[count];
+				int k = 0;
+				for (Iterator it2 = query.iterate(); it2.hasNext();) {
+					groups[k] = (Usergroups) it2.next();
+					k++;
+				}
+				tx.commit();
+				HibernateUtil.closeSession(idf);
+				for (int vars = 0; vars < groups.length; vars++) {
+					//groups[vars].setUsers(ResHandler.getUsermanagement().getUser(groups[vars].getUSER_ID()));
+				}
+			} catch (HibernateException ex) {
+				log.error(ex);
+			} catch (Exception ex2) {
+				log.error(ex2);
+			}
+		} else {
+			groups[0] = new Usergroups();
+			groups[0].setComment("Error: Permission denied");
+		}
+		return groups;
+	}
+
+	public Usergroups getSingleGroupFree(Long USER_LEVEL, Long usergroup_id) {
+		Usergroups groups = new Usergroups();
+		if (checkConfLevel(USER_LEVEL)) {
+			try {
+				Object idf = HibernateUtil.createSession();
+				Session session = HibernateUtil.getSession();
+				Transaction tx = session.beginTransaction();
+				Query query = session
+						.createQuery("select c from Usergroups as c where c.usergroup_id = :usergroup_id AND c.level_id = :level_id");
+				query.setLong("usergroup_id", usergroup_id.longValue());
+				query.setLong("level_id", 1);
+				for (Iterator it2 = query.iterate(); it2.hasNext();) {
+					groups = (Usergroups) it2.next();
+				}
+				tx.commit();
+				HibernateUtil.closeSession(idf);
+				//Todo: Set user
+				//groups.setUsers(ResHandler.getUsermanagement().getUser(groups.getUSER_ID()));
+
+			} catch (HibernateException ex) {
+				log.error(ex);
+			} catch (Exception ex2) {
+				log.error(ex2);
+			}
+		} else {
+			groups.setComment("Error: Permission denied");
+		}
+		return groups;
+	}
 }

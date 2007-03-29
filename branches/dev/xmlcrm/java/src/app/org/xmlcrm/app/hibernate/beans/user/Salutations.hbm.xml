@@ -7,30 +7,30 @@
 <hibernate-mapping
 >
     <class
-        name="org.xmlcrm.app.hibernate.beans.termine.Termine_Participant"
-        table="termine_participant"
+        name="org.xmlcrm.app.hibernate.beans.user.Salutations"
+        table="salutations"
     >
 
         <id
-            name="termine_participant_id"
-            column="termine_participant_id"
+            name="salutations_id"
+            column="salutations_id"
             type="java.lang.Long"
         >
             <generator class="increment">
               <!--  
                   To add non XDoclet generator parameters, create a file named 
-                  hibernate-generator-params-Termine_Participant.xml 
+                  hibernate-generator-params-Salutations.xml 
                   containing the additional parameters and place it in your merge dir. 
               --> 
             </generator>
         </id>
 
         <property
-            name="termin_id"
-            type="long"
+            name="name"
+            type="string"
             update="true"
             insert="true"
-            column="termin_id"
+            column="name"
         />
 
         <property
@@ -57,17 +57,9 @@
             column="deleted"
         />
 
-        <property
-            name="user_id"
-            type="long"
-            update="true"
-            insert="true"
-            column="user_id"
-        />
-
         <!--
             To add non XDoclet property mappings, create a file named
-                hibernate-properties-Termine_Participant.xml
+                hibernate-properties-Salutations.xml
             containing the additional properties and place it in your merge dir.
         -->
 

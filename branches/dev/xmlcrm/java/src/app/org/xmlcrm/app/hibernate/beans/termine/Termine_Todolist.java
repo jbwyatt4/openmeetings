@@ -17,7 +17,7 @@ public class Termine_Todolist {
 	private Long status_id;
 	private String teilnehmer;
 	private Date  updatetime;	
-	private Boolean deleted;
+	private String deleted;
     
 
 	public Termine_Todolist() {
@@ -125,12 +125,12 @@ public class Termine_Todolist {
     /**
      * @hibernate.property
      *  column="deleted"
-     *  type="boolean"
+     *  type="string"
      */	
-	public Boolean getDeleted() {
+	public String getDeleted() {
 		return deleted;
 	}
-	public void setDeleted(Boolean deleted) {
+	public void setDeleted(String deleted) {
 		this.deleted = deleted;
 	}
 }

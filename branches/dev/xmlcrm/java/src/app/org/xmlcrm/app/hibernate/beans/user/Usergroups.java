@@ -17,7 +17,7 @@ public class Usergroups {
 	private Long user_id;
 	private String description;
 	private String comment;
-	private Boolean deleted;
+	private String deleted;
 
 	public Usergroups() {
 		super();
@@ -77,12 +77,12 @@ public class Usergroups {
     /**
      * @hibernate.property
      *  column="deleted"
-     *  type="boolean"
+     *  type="string"
      */	
-	public Boolean getDeleted() {
+	public String getDeleted() {
 		return deleted;
 	}
-	public void setDeleted(Boolean deleted) {
+	public void setDeleted(String deleted) {
 		this.deleted = deleted;
 	}
 	

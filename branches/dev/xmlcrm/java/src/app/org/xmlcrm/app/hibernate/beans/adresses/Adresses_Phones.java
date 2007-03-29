@@ -14,7 +14,7 @@ public class Adresses_Phones {
 	private Long adresses_id;
 	private Date starttime;
 	private Date updatetime;
-	private Boolean deleted;
+	private String deleted;
 	
 	public Adresses_Phones() {
 		super();
@@ -85,12 +85,12 @@ public class Adresses_Phones {
     /**
      * @hibernate.property
      *  column="deleted"
-     *  type="boolean"
+     *  type="string"
      */	
-	public Boolean getDeleted() {
+	public String getDeleted() {
 		return deleted;
 	}
-	public void setDeleted(Boolean deleted) {
+	public void setDeleted(String deleted) {
 		this.deleted = deleted;
 	}
 }

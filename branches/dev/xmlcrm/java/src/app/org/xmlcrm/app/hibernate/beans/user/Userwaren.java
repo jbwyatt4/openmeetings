@@ -24,7 +24,7 @@ public class Userwaren {
 	private Integer zahlungs_id;
 	private Integer liefer_id;	
 	private String comment;
-	private Boolean deleted;
+	private String deleted;
 
 	private zahlungsarten zahlungsarten;
 	private lieferarten lieferarten;	
@@ -144,12 +144,12 @@ public class Userwaren {
     /**
      * @hibernate.property
      *  column="deleted"
-     *  type="boolean"
+     *  type="string"
      */	
-	public Boolean getDeleted() {
+	public String getDeleted() {
 		return deleted;
 	}
-	public void setDeleted(Boolean deleted) {
+	public void setDeleted(String deleted) {
 		this.deleted = deleted;
 	}
 
