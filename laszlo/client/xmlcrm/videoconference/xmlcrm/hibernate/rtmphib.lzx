@@ -51,6 +51,9 @@
      <!-- The default Language will be laoded on init  -->
      <attribute name="initlanguageLoaded" value="false" type="boolean" />
      
+     <!-- This is the current domain the user has logged-in -->
+     <attribute name="currentdomain" value="domain1" type="string" />
+     
     <netremotecallhib name="getsessiondata" funcname="xmlcrm.getsessiondata" >      
         <handler name="ondata" args="value">
             //The onResult-Handler will be called be the rtmpconnection
@@ -99,7 +102,7 @@
             <netparam name="vars2"><method name="getValue">return canvas.currentuser;</method></netparam>
             <netparam name="vars3"><method name="getValue">return canvas.firstName;</method></netparam>
             <netparam name="vars4"><method name="getValue">return canvas.lastName;</method></netparam>      
-            <netparam name="vars6"><method name="getValue">return 'domain1';</method></netparam>
+            <netparam name="vars6"><method name="getValue">return parent.parent.currentdomain;</method></netparam>
             <handler name="ondata" args="value">
                 //The onResult-Handler will be called be the rtmpconnection
                 Debug.write("setUsername: ",value);
