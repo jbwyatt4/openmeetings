@@ -63,7 +63,7 @@
             //The onResult-Handler will be called be the rtmpconnection
             Debug.write("loginUser: ",value);
             
-            if (value.userlevel.level_id!=-1){
+            if (value.level_id!=-1){
             
 				canvas.setAttribute('user_id',value.user_id);
 				canvas.setAttribute('firstName',value.firstname);
