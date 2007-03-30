@@ -2,6 +2,5 @@
 <library>
 
     <include href="sharedobject.lzx" />
-    <include href="mainservice.lzx" />
     
 </library>
