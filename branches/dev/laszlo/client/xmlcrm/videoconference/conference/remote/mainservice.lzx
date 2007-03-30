@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library>
 
+<!-- 
+deprecated
+
+ -->
+
 <javarpc name="mainservices" scope="session" objectreturntype="javabean" loadoption="create"
     autoload="true" classname="org.dokeos.servlets.DokeosRemote">
         <handler name="onload">
