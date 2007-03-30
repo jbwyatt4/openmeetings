@@ -60,12 +60,15 @@ public class UploadHandler extends HttpServlet {
 				}
 
 				//Get the current User-Directory
+				String current_dir1 = getServletContext().getRealPath("/");
+				log.error("current_dir1: "+current_dir1);
+				
 				String current_dir = getServletContext().getRealPath("/../../../");
-				log.debug("Current_dir: "+current_dir);
+				log.error("Current_dir: "+current_dir);
 				
 				String working_dir = "";
 				String working_dirppt = "";
-				log.debug(MultipartRequest.MAX_READ_BYTES);
+				log.error(MultipartRequest.MAX_READ_BYTES);
 				
 
 				if (moduleName.equals("videoconf1")){
@@ -85,7 +88,7 @@ public class UploadHandler extends HttpServlet {
 
 				System.out.println("#### UploadHandler working_dir: "+working_dir);
 				
-				if (!moduleName.equals("nomodule")){
+				if (!moduleName.equals("nomodule") && false){
 					//Check variable to see if this file is a presentation
 
 					ServletMultipartRequest upload = new ServletMultipartRequest(httpServletRequest, 104857600); // max 100 mb

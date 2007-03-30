@@ -56,5 +56,8 @@
 	<classpathentry kind="lib" path="lib/hibernate3.jar"/>
 	<classpathentry kind="lib" path="lib/jakarta-commons/commons-logging-1.0.4.jar"/>
 	<classpathentry kind="lib" path="lib/jakarta-commons/commons-collections-2.1.1.jar"/>
+	<classpathentry kind="lib" path="lib/upload/multipartrequest.jar"/>
+	<classpathentry kind="lib" path="lib/upload/commons-transaction-1.1.jar"/>
+	<classpathentry kind="lib" path="lib/upload/commons-lang-2.2.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

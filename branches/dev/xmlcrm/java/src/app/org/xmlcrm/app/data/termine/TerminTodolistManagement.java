@@ -17,7 +17,7 @@ import org.xmlcrm.app.hibernate.beans.termine.Termine_Todolist;
 import org.xmlcrm.app.hibernate.utils.HibernateUtil;
 import org.xmlcrm.app.outpuhandlers.pdf.pdfobjects.pdfobject;
 import org.xmlcrm.utils.math.Calender;
-import org.xmlcrm.utils.stringhandlers.flashencoder;
+//import org.xmlcrm.utils.stringhandlers.Flashencoder;
 
 public class TerminTodolistManagement {
 	private Calender CalenderI;
@@ -350,7 +350,7 @@ public class TerminTodolistManagement {
 	}
 
 	public ArrayList generateSinglePDFDoc(int USER_ID, int UID) {
-		flashencoder flashencoder = new flashencoder();
+
 		ArrayList ListI = new ArrayList();
 		Termine_Todo_User termine_todo_user = new Termine_Todo_User();
 		try {
@@ -402,7 +402,6 @@ public class TerminTodolistManagement {
 	}
 
 	public ArrayList generatePDFDoc(int USER_ID) {
-		flashencoder flashencoder = new flashencoder();
 		ArrayList ListI = new ArrayList();
 		Termine_Todo_User[] termine_todo_user = new Termine_Todo_User[1];
 		try {
