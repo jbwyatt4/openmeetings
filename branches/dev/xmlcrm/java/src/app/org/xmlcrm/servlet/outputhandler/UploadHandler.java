@@ -19,6 +19,8 @@ import org.apache.commons.logging.LogFactory;
 
 import org.apache.commons.transaction.util.FileHelper;
 import org.apache.commons.lang.StringUtils;
+import org.xmlcrm.app.data.basic.Sessionmanagement;
+import org.xmlcrm.app.data.user.Usermanagement;
 import org.xmlcrm.utils.stringhandlers.StringComparer;
 
 public class UploadHandler extends HttpServlet {
@@ -40,140 +42,147 @@ public class UploadHandler extends HttpServlet {
 	protected void service(HttpServletRequest httpServletRequest, 
 			HttpServletResponse httpServletResponse) throws ServletException, IOException {
 		try {
-						
-    		/* 
-    		 * TODO: Adding authentification stuff 
-    		 */
     		
 			if (httpServletRequest.getContentLength() > 0) {
 				
-				String roomName = httpServletRequest.getParameter("roomName");
-				if(roomName == null){
-					roomName = "default";
+				String sid = httpServletRequest.getParameter("sid");
+				if(sid == null){
+					sid = "default";
 				}
-				//trim whitespaces cause it is a directory name
-				roomName = StringUtils.deleteWhitespace(roomName);
+				System.out.println("sid: "+sid);
 				
-				String moduleName = httpServletRequest.getParameter("moduleName");
-				if (moduleName == null) {
-					moduleName = "nomodule";
-				}
-
-				//Get the current User-Directory
-				String current_dir1 = getServletContext().getRealPath("/");
-				log.error("current_dir1: "+current_dir1);
-				
-				String current_dir = getServletContext().getRealPath("/../../../");
-				log.error("Current_dir: "+current_dir);
-				
-				String working_dir = "";
-				String working_dirppt = "";
-				log.error(MultipartRequest.MAX_READ_BYTES);
-				
-
-				if (moduleName.equals("videoconf1")){
-					working_dir = current_dir+File.separatorChar+"lps-latest"+File.separatorChar+"upload1"+File.separatorChar+roomName+File.separatorChar;
-					working_dirppt = current_dir+File.separatorChar+"lps-latest"+File.separatorChar+"upload1ppt"+File.separatorChar+roomName+File.separatorChar;
-				}
-				
-				//Add the Folder for the Room if it does not exist yet
-				File localFolder = new File(working_dir);
-				if (!localFolder.exists()){
-					localFolder.mkdir();
-				}
-				File localFolderppt= new File(working_dirppt);
-				if (!localFolderppt.exists()){
-					localFolderppt.mkdir();
-				}
-
-				System.out.println("#### UploadHandler working_dir: "+working_dir);
-				
-				if (!moduleName.equals("nomodule") && false){
-					//Check variable to see if this file is a presentation
-
-					ServletMultipartRequest upload = new ServletMultipartRequest(httpServletRequest, 104857600); // max 100 mb
-
-					InputStream is = upload.getFileContents("Filedata");
-
-					//trim whitespace
-					String fileSystemName= StringUtils.deleteWhitespace(upload.getFileSystemName("Filedata"));
-					
-
-					String newFileSystemName = StringComparer.getInstance().compareForRealPaths(fileSystemName.substring(0, fileSystemName.length()-4));
-					String newFileSystemExtName = fileSystemName.substring(fileSystemName.length()-4,fileSystemName.length());
-					
-					//trim long names cause cannot output that
-					if(newFileSystemName.length()>=17){
-						newFileSystemName=newFileSystemName.substring(0,16);
+		        int User_ID = Sessionmanagement.getInstance().checkSession(sid);
+		        long User_LEVEL = Usermanagement.getInstance().getUserLevelByID(User_ID);
+		        
+		        if (User_LEVEL>0){
+					String room = httpServletRequest.getParameter("room");
+					if(room == null){
+						room = "default";
 					}
-
-					//check if this is a presentation
-					boolean isPresentation = checkForPresention(newFileSystemExtName);
+					String domain = httpServletRequest.getParameter("domain");
+					if(domain == null){
+						domain = "default";
+					}				
 					
-					String completeName = "";
-					//if it is a presenation it will be copied to another place
-					if (isPresentation){
-						completeName = working_dirppt + newFileSystemName;
-					} else {
-						completeName = working_dir + newFileSystemName;
+					String moduleName = httpServletRequest.getParameter("moduleName");
+					if (moduleName == null) {
+						moduleName = "nomodule";
 					}
-
-					log.debug("******** completeName: "+completeName+isPresentation);
+					//make a complete name out of domain(organisation) + roomname
+					String roomName = domain+"_"+room;
+					//trim whitespaces cause it is a directory name
+					roomName = StringUtils.deleteWhitespace(roomName);
+	
+					//Get the current User-Directory
 					
-					File f = new File(completeName+newFileSystemExtName);
-					if (f.exists()){
-						System.out.println("File exisitert bereits");
-						int recursiveNumber=0;
-						String tempd = completeName+ "_"+recursiveNumber;
-						while (f.exists()){
-							recursiveNumber++;
-							tempd = completeName + "_"+recursiveNumber;
-							f = new File(tempd+newFileSystemExtName);
+					String current_dir = getServletContext().getRealPath("/");
+					System.out.println("Current_dir: "+current_dir);
+					
+					String working_dir = "";
+					String working_dirppt = "";
+					System.out.println(MultipartRequest.MAX_READ_BYTES);
+	
+					working_dir = current_dir+File.separatorChar+"upload"+File.separatorChar+roomName+File.separatorChar;
+					working_dirppt = current_dir+File.separatorChar+"uploadtemp"+File.separatorChar+roomName+File.separatorChar;
+					
+					//Add the Folder for the Room if it does not exist yet
+					File localFolder = new File(working_dir);
+					if (!localFolder.exists()){
+						localFolder.mkdir();
+					}
+					File localFolderppt= new File(working_dirppt);
+					if (!localFolderppt.exists()){
+						localFolderppt.mkdir();
+					}
+	
+					System.out.println("#### UploadHandler working_dir: "+working_dir);
+					
+					if (!moduleName.equals("nomodule")){
+						//Check variable to see if this file is a presentation
+	
+						ServletMultipartRequest upload = new ServletMultipartRequest(httpServletRequest, 104857600); // max 100 mb
+	
+						InputStream is = upload.getFileContents("Filedata");
+	
+						//trim whitespace
+						String fileSystemName= StringUtils.deleteWhitespace(upload.getFileSystemName("Filedata"));
+						
+	
+						String newFileSystemName = StringComparer.getInstance().compareForRealPaths(fileSystemName.substring(0, fileSystemName.length()-4));
+						String newFileSystemExtName = fileSystemName.substring(fileSystemName.length()-4,fileSystemName.length());
+						
+						//trim long names cause cannot output that
+						if(newFileSystemName.length()>=17){
+							newFileSystemName=newFileSystemName.substring(0,16);
+						}
+	
+						//check if this is a presentation
+						boolean isPresentation = checkForPresention(newFileSystemExtName);
+						
+						String completeName = "";
+						//if it is a presenation it will be copied to another place
+						if (isPresentation){
+							completeName = working_dirppt + newFileSystemName;
+						} else {
+							completeName = working_dir + newFileSystemName;
+						}
+	
+						log.debug("******** completeName: "+completeName+isPresentation);
+						
+						File f = new File(completeName+newFileSystemExtName);
+						if (f.exists()){
+							System.out.println("File exisitert bereits");
+							int recursiveNumber=0;
+							String tempd = completeName+ "_"+recursiveNumber;
+							while (f.exists()){
+								recursiveNumber++;
+								tempd = completeName + "_"+recursiveNumber;
+								f = new File(tempd+newFileSystemExtName);
+								
+							}
+							completeName = tempd;
+							System.out.println("Neuer Folder name "+completeName);
+						}
+	
+						System.out.println("*****2 ***** completeName: "+completeName+newFileSystemExtName);
+						log.debug("*****2 ******* completeName: "+completeName+newFileSystemExtName);
+						FileOutputStream fos = new FileOutputStream(completeName+newFileSystemExtName);
+						
+						byte[] buffer = new byte[1024];
+						int len = 0;
+						
+						while (len != (-1)) {
+							len = is.read(buffer, 0, 1024);
+							if (len != (-1)) fos.write(buffer, 0, len);
+						}
+						
+						fos.close();
+						is.close();
+						
+						if (isPresentation){
+							//automatically convert to slides
+							System.out.println("isPresentation Neuer Folder name "+completeName);
+	
+							HashMap<String,String> ll = createPptToPng(newFileSystemName+newFileSystemExtName, roomName);
+							
+							String outputfolder = ll.get("outputfolder");
+							//now it should be completed so copy that file to the expected location
+							System.out.println("Upload destinationFolder "+outputfolder);
+							
+							//FileHelper fileHelper = new FileHelper();
+							
+							File pptToBeMoved = new File(completeName+newFileSystemExtName);
+							
+							System.out.println("outputfolder "+outputfolder);
+							System.out.println("newFileSystemName "+newFileSystemName);
+							System.out.println("newFileSystemExtName "+newFileSystemExtName);
+							
+							File pptWhereToMove = new File(outputfolder+newFileSystemName+newFileSystemExtName);
+							pptWhereToMove.createNewFile();
+							
+							FileHelper.moveRec(pptToBeMoved, pptWhereToMove);
 							
 						}
-						completeName = tempd;
-						System.out.println("Neuer Folder name "+completeName);
-					}
-
-					System.out.println("*****2 ***** completeName: "+completeName+newFileSystemExtName);
-					log.debug("*****2 ******* completeName: "+completeName+newFileSystemExtName);
-					FileOutputStream fos = new FileOutputStream(completeName+newFileSystemExtName);
-					
-					byte[] buffer = new byte[1024];
-					int len = 0;
-					
-					while (len != (-1)) {
-						len = is.read(buffer, 0, 1024);
-						if (len != (-1)) fos.write(buffer, 0, len);
-					}
-					
-					fos.close();
-					is.close();
-					
-					if (isPresentation){
-						//TODO automatically convert to slides
-						System.out.println("isPresentation Neuer Folder name "+completeName);
-						log.debug("isPresentation Neuer Folder name "+completeName);
-
-						HashMap<String,String> ll = createPptToPng(newFileSystemName+newFileSystemExtName, moduleName, roomName);
-						
-						String outputfolder = ll.get("outputfolder");
-						//now it should be completed so copy that file to the expected location
-						System.out.println("Upload destinationFolder "+outputfolder);
-						
-						//FileHelper fileHelper = new FileHelper();
-						
-						File pptToBeMoved = new File(completeName+newFileSystemExtName);
-						
-						System.out.println("outputfolder "+outputfolder);
-						System.out.println("newFileSystemName "+newFileSystemName);
-						System.out.println("newFileSystemExtName "+newFileSystemExtName);
-						
-						File pptWhereToMove = new File(outputfolder+newFileSystemName+newFileSystemExtName);
-						pptWhereToMove.createNewFile();
-						
-						FileHelper.moveRec(pptToBeMoved, pptWhereToMove);
-						
 					}
 				}
 			}
@@ -204,13 +213,11 @@ public class UploadHandler extends HttpServlet {
 	}
 	
 	
-	private HashMap<String,String> createPptToPng(String fileName,String moduleName,String roomName) throws Exception{
+	private HashMap<String,String> createPptToPng(String fileName, String roomName) throws Exception{
 		//DocumentLocalConverter documentLocalConverter = new DocumentLocalConverter();
-		//trim whitespaces cause it is a directory name
-		roomName = StringUtils.deleteWhitespace(roomName);
 		
 		//Get the current Directory
-		String current_dir = getServletContext().getRealPath("/../../../");
+		String current_dir = getServletContext().getRealPath("/");
 		System.out.println("Current_dir: "+current_dir);
 		
 		String prefix = "file://";
@@ -219,13 +226,9 @@ public class UploadHandler extends HttpServlet {
 		String working_pptdir = "";
 		System.out.println(MultipartRequest.MAX_READ_BYTES);
 		
-		System.out.println("#### moduleName: "+moduleName);
+		working_imgdir = current_dir+File.separatorChar+"upload"+File.separatorChar+roomName+File.separatorChar;
+		working_pptdir = current_dir+File.separatorChar+"uploadtemp"+File.separatorChar+roomName+File.separatorChar;
 		
-		if (moduleName.equals("videoconf1")){
-			working_imgdir = current_dir+File.separatorChar+"lps-latest"+File.separatorChar+"upload1"+File.separatorChar+roomName+File.separatorChar;
-			working_pptdir = current_dir+File.separatorChar+"lps-latest"+File.separatorChar+"upload1ppt"+File.separatorChar+roomName+File.separatorChar;
-		}	
-
 		String pptFullPath = working_pptdir+fileName;
 		
 		String newFolderName = fileName.substring(0, fileName.length()-4);
@@ -278,14 +281,14 @@ public class UploadHandler extends HttpServlet {
     {
         try
         {      
-        	String current_dir = getServletContext().getRealPath("/../../../");
+        	String current_dir = getServletContext().getRealPath("/");
         	String runtimeFile = "testoo.bat";
         	if (System.getProperty("os.name").toUpperCase().indexOf("WINDOWS") == -1) {
         		runtimeFile = "testoo.sh";
         	}
             Runtime rt = Runtime.getRuntime();
             
-            String command2 = current_dir+File.separatorChar+"lps-latest"+File.separatorChar+"ooservice"+File.separatorChar+runtimeFile+" java "+pptFullPath+" "+destinationFolder+" "+current_dir+File.separatorChar+"lps-latest"+File.separatorChar+"ooservice"+File.separatorChar;
+            String command2 = current_dir+File.separatorChar+"ooservice"+File.separatorChar+runtimeFile+" java "+pptFullPath+" "+destinationFolder+" "+current_dir+File.separatorChar+"lps-latest"+File.separatorChar+"ooservice"+File.separatorChar;
            // String command2 = "java -cp .:"+pre+"ridl.jar:"+pre+"js.jar:"+pre+"juh.jar:"+pre+"jurt.jar:"+pre+"jut.jar:"+pre+"java_uno.jar:"+pre+"java_uno_accessbridge.jar:"+pre+"edtftpj-1.5.2.jar:"+pre+"unoil.jar:"+pre+"dokeosupload.jar org.dokeos.ooconverter.DocumentLocalConverterMain "+pptFullPath+" "+destinationFolder;
             System.out.println("command2: "+command2);
             Process proc = rt.exec(command2);
