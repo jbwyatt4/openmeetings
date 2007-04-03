@@ -33,12 +33,11 @@
   
   # Checkout Red5 from svn, build and install it (URL of svn trunk : https://svn1.cvsdude.com/osflash/red5/java )
        * On linux type in the command line : svn co https://svn1.cvsdude.com/osflash/red5/java
-       * make
+       * you need apache ant to build from source, if you are not familiar with this process you have to download one of the precompiled red5-binary releases.
   # copy the zip *xmlcrm.zip* from the package *pre05.zip* into your Red5 webapp folder. Unzip it. Alter the red5-configuration to fit your port values ($RED5_HOME/conf/red5.properties) see host.lzx for port values.
   # copy the file *crossdomain.xml* to $RED5/webapps/root/crossdomain.xml (you need this file otherwise you are not able to upload any file to the server)
   # restart of red5 (run red5.sh/red5.bat) is needed. Browse to $RED%_HOST:5080 (start page should come up)
   # browse to your openlaszlo Application to see
-
 
 
 
