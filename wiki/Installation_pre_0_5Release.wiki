@@ -22,9 +22,13 @@
   # copy the folder *videoconference* into your lps-installation (for example /home/myuser/lps-3.4.x/Server/lps-3.4.x/videoconference/ )
   # alter host.lzx to fit your installation, the variables:
      rmpthostlocal should point to the hostname of your red5 server
+
      rmptport should point to the port of rtmp (default red5-rtmp port is 1935)
+
      rmptTunnelport should point to the port of rtmpT (default red5-rtmp port is 8088)
+
      red5httpport should point to the port of http red5 (default red5-rtmp port is 5080)
+
   # Needs no restart, just browse to your $LPS_HOST:8080/lps-3.4.x/videoconference/xmlcrm-text.lzx?lzt=swf8
   
 = Red5-webapp installation =
