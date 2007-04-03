@@ -60,7 +60,7 @@
                 
             Debug.write("send: ",obj);
             canvas.objWhiteboard = obj;
-            rtc.sendVars.doCall();
+            hib.sendVars.doCall();
             
         </handler>   
 	

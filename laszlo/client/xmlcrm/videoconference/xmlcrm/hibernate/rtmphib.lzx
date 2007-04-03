@@ -232,7 +232,7 @@
                 if (value[0]=='chat'){
                     canvas.addChatHistory(value);
                 } else if(value[0]=='fileslist'){
-                    canvas.mainservices.getListOfFiles.invoke();
+                    _imageslistdraw.parent.oninit.sendEvent();
                 }
                 ]]>
             </handler>   
