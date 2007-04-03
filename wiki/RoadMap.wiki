@@ -1,6 +1,11 @@
 #summary Roadmap of openmeeting
 #labels Phase-Requirements,Featured
 
+=MileStone pre 0.5=
+_released at 03.04.2007_
+  * initial package, basic functionality, one webapp only
+  + developer release
+
 =MileStone 0.5=
   * Reworked Conference and Audience Application
   * Initial Support for users authentification and administration of users in their organisations
