@@ -7,10 +7,6 @@ LaszloClient:
 
 http://openmeetings.googlecode.com/svn/branches/dev/laszlo/client/
 
-Java Persistance layer:
+Java Layer:
 
 http://openmeetings.googlecode.com/svn/branches/dev/xmlcrm/java/
-
-Java Red5-App:
-
-http://openmeetings.googlecode.com/svn/branches/dev/red5app/red5java/
