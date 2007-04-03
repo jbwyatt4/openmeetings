@@ -21,8 +21,7 @@
   # You need to replace the default videoComponents with some older/patched ones to make it running. Copy the content of the folder *streaming* from the zip-package to $LPS_HOME/Server/lps-3.4.x/lps/components/extensions/av/ (Note: Some other OpenLaszlo Apps based on newer version of teh video-components might not work with this ones)
   # copy the folder *videoconference* into your lps-installation (for example /home/myuser/lps-3.4.x/Server/lps-3.4.x/videoconference/ )
   # alter host.lzx to fit your installation, the variables:
-     rmpthostlocal should point to the hostname of your red5 server
-
+     rmpthostlocal should point to the hostname of your red5 server<BR/>
      rmptport should point to the port of rtmp (default red5-rtmp port is 1935)
 
      rmptTunnelport should point to the port of rtmpT (default red5-rtmp port is 8088)
