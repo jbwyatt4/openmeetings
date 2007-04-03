@@ -5,7 +5,7 @@
 
   * JDK 1.5
   * JAVA_HOME set to point to your JDK installation dir (NOT to the JRE)
-  * ooservice up und running in headless mode on port 2002
+  * [ooservice] up und running in headless mode on port 2002
 
 = Database =
 
@@ -38,6 +38,9 @@
   # copy the file *crossdomain.xml* to $RED5/webapps/root/crossdomain.xml (you need this file otherwise you are not able to upload any file to the server)
   # restart of red5 (run red5.sh/red5.bat) is needed. Browse to $RED%_HOST:5080 (start page should come up)
   # browse to your openlaszlo Application to see
+
+
+
 
 
 
