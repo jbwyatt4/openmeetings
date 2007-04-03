@@ -10,30 +10,29 @@
 = Database =
 
   # It is preconfigured to use Postgres SQL. You will need to forward the database scheme to your SQL-Database and configure hibernate to use the right driver
-  # Forward the database skeleton to the database
-  # Add the initial values to the database  
+  # alter the user postgres to use the password 67810 (or alter it in the webapp later)
+  # Forward the database skeleton with the init values to the database (database_init.sql)
 
 = OpenLaszlo =
 
   # Install OpenLaszlo 3.4.x
       * Download OpenLaszlo : http://www.openlaszlo.org/download for your system
       * Unzip in your system
-  # Rename *lps-3.4.x* sub-folder to *lps-latest* into the root of your OpenLaszlo.
-  # Replace *lps-3.4.x* string to *lps-latest* into Server/tomcat-5.0.24/conf/LPS/localhost/lps.xml file.
-  # add ooservice
-  # add servlets for up and download
-  # add openmeetings application
-  # alter host.lzx to fit your installation
-
+  # You need to replace the default videoComponents with some older/patched ones to make it running. Copy the content of the folder *streaming* from the zip-package to $LPS_HOME/Server/lps-3.4.x/lps/components/extensions/av/ (Note: Some other OpenLaszlo Apps based on newer version of teh video-components might not work with this ones)
+  # copy the folder *videoconference* into your lps-installation (for example /home/myuser/lps-3.4.x/Server/lps-3.4.x/videoconference/ )
+  # alter host.lzx to fit your installation, the variables:
+     rmpthostlocal should point to the hostname of your red5 server
+     rmptport should point to the port of rtmp (default red5-rtmp port is 1935)
+     rmptTunnelport should point to the port of rtmpT (default red5-rtmp port is 8088)
+     red5httpport should point to the port of http red5 (default red5-rtmp port is 5080)
+  # Needs no restart, just browse to your $LPS_HOST:8080/lps-3.4.x/videoconference/xmlcrm-text.lzx?lzt=swf8
   
 = Red5-webapp installation =
   
   # Checkout Red5 from svn, build and install it (URL of svn trunk : https://svn1.cvsdude.com/osflash/red5/java )
        * On linux type in the command line : svn co https://svn1.cvsdude.com/osflash/red5/java
        * make
-  # copy the webapp to the destination dir
-  # copy all needed JARs to the destination dir
-  # configure webapp and red5.properties to fit your installation
-
-start all services and test it.
-
+  # copy the zip *xmlcrm.zip* into your Red5 webapp folder. Unzip it. Alter the red5-configuration to fit your port values ($RED5_HOME/conf/red5.properties) see host.lzx for port values.
+  # copy the file *crossdomain.xml* to $RED5/webapps/root/crossdomain.xml (you need this file otherwise you are not able to upload any file to the server)
+  # restart of red5 (run red5.sh/red5.bat) is needed. Browse to $RED%_HOST:5080 (start page should come up)
+  # browse to your openlaszlo Application to see
