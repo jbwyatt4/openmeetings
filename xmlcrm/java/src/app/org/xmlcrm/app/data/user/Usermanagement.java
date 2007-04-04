@@ -17,6 +17,7 @@ import org.xmlcrm.app.hibernate.beans.user.*;
 import org.xmlcrm.app.hibernate.utils.HibernateUtil;
 import org.xmlcrm.app.data.basic.Configurationmanagement;
 import org.xmlcrm.utils.math.*;
+import org.xmlcrm.utils.mail.*;
 
 import org.xmlcrm.app.data.basic.*;
 
@@ -651,20 +652,16 @@ public class Usermanagement {
 			String additionalname, String fax, String zip, long states_id,
 			String town, long language_id) {
 		// Checks if FrontEndUsers can register
-		if (Configurationmanagement.getInstance().getConfKey(3,
-				"allow_frontend_register").getConf_value().equals("1")) {
+		if (Configurationmanagement.getInstance().getConfKey(3,"allow_frontend_register").getConf_value().equals("1")) {
 			// TODO: add availible params sothat users have to verify their
 			// login-data
 			// TODO: add status from Configuration items
-			Long user_id = this.registerUserInit(3, 1, 0, 1, login, Userpass,
-					lastname, firstname, email, age, street, additionalname,
-					fax, zip, states_id, town, language_id);
+			Long user_id = this.registerUserInit(3, 1, 0, 1, login, Userpass,lastname, firstname, email, age, street, additionalname,fax, zip, states_id, town, language_id);
 			// Get the default organisation_id of registered users
-			long organisation_id = Long.valueOf(
-					Configurationmanagement.getInstance().getConfKey(3,
-							"default_domain_id").getConf_value()).longValue();
-			Organisationmanagement.getInstance().addUserToOrganisation(user_id,
-					organisation_id, user_id, "");
+			if (user_id>0){
+				long organisation_id = Long.valueOf(Configurationmanagement.getInstance().getConfKey(3,"default_domain_id").getConf_value()).longValue();
+				Organisationmanagement.getInstance().addUserToOrganisation(user_id,organisation_id, user_id, "");
+			}
 			return user_id;
 		}
 		return null;
@@ -711,16 +708,11 @@ public class Usermanagement {
 				boolean checkEmail = Emailmanagement.getInstance()
 						.checkUserEMail(email);
 				if (checkName && checkEmail) {
-					long adress_id = Adressmanagement.getInstance().saveAdress(
-							street, zip, town, states_id, additionalname, "",
-							fax);
-					long user_id = this.addUser(level_id, availible, status,
-							firstname, login, lastname, language_id, Userpass,
-							adress_id);
-
-					long adress_emails_id = Emailmanagement.getInstance()
-							.registerEmail(email, adress_id, login, Userpass,
-									"");
+					
+					long adress_id = Adressmanagement.getInstance().saveAdress(street, zip, town, states_id, additionalname, "",fax);
+					long user_id = this.addUser(level_id, availible, status,firstname, login, lastname, language_id, Userpass,adress_id);
+					long adress_emails_id = Emailmanagement.getInstance().registerEmail(email, adress_id, login, Userpass,"");
+					
 					if (adress_id > 0 && user_id > 0 && adress_emails_id > 0) {
 						return user_id;
 					} else {

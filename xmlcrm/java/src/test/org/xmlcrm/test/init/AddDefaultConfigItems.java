@@ -12,10 +12,10 @@ public class AddDefaultConfigItems extends TestCase {
 	
 	public void testaddDefaultConfiItems(){
 		
-		Configurationmanagement.getInstance().addConfByKey(3, "allow_frontend_register", "1", 1, "");
-		
-		Configurationmanagement.getInstance().addConfByKey(3, "default_group_id", "1", 1, "");
-		
+		Configurationmanagement.getInstance().addConfByKey(3, "smtp_server", "smtp.xmlcrm.org", 1, "this is the smtp server to send messages");
+		Configurationmanagement.getInstance().addConfByKey(3, "system_email_addr", "openmeetings@xmlcrm.org", 1, "all send EMails by the system will have this address");
+		Configurationmanagement.getInstance().addConfByKey(3, "email_username", "openmeetings@xmlcrm.org", 1, "System auth email username");
+		Configurationmanagement.getInstance().addConfByKey(3, "email_userpass", "tony123", 1, "System auth email password");		
 		
 	}
 
