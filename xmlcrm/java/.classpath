@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src/app"/>
+	<classpathentry kind="src" path="src/templates"/>
 	<classpathentry kind="src" path="src/test"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="lib/hibernate3/xml-apis.jar"/>
@@ -125,5 +126,6 @@
 	<classpathentry kind="lib" path="lib/red5/ant-1.7.0.jar"/>
 	<classpathentry kind="lib" path="lib/red5/activation-1.1.jar"/>
 	<classpathentry kind="lib" path="lib/mail.jar"/>
+	<classpathentry kind="lib" path="lib/velocity-1.6-dev.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
