@@ -136,7 +136,8 @@ public class Emailmanagement {
 				tx.commit();
 				HibernateUtil.closeSession(idf);
 				log.error("registerEmail addr_emails: " + addr_emails_id);
-
+				
+				this.sendMail(Username, Userpass, EMail);
 				return mail_id;
 			} catch (HibernateException ex) {
 				log.error("Error: " + ex);
@@ -196,7 +197,6 @@ public class Emailmanagement {
 			throws Exception {
 		String succ = "valid email";
 
-		MailHandler MailHandler = new MailHandler();
 		String data = "";
 		data += "<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>";
 		data += "<html xmlns='http://www.w3.org/1999/xhtml' xml:lang='de' lang='de'>";
@@ -208,7 +208,7 @@ public class Emailmanagement {
 		data += "<br />Username: " + Username;
 		data += "<br />Passwort: " + Userpass;
 		data += "<br />EMail: " + EMail + "<br /><br />";
-		data += "Viel Spa&szlig</html>";
+		data += "ihr Sys-team</html>";
 		succ = MailHandler.sendMail(EMail, "Welcome", data);
 
 		return succ;
