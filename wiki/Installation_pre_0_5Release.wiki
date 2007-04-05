@@ -6,11 +6,10 @@
   * JDK 1.5
   * JAVA_HOME set to point to your JDK installation dir (NOT to the JRE)
   * [ooservice] up und running in headless mode on port 2002
+  * Database server (tested with PostgreSQL only)
 
 = Database =
 
-  # It is preconfigured to use Postgres SQL. You will need to forward the database scheme to your SQL-Database and configure hibernate to use the right driver
-  # alter the user postgres to use the password 67810 (or alter it in the webapp later)
   # Forward the database skeleton with the init values to the database (database_init.sql)
 
 = OpenLaszlo =
@@ -35,6 +34,14 @@
        * On linux type in the command line : svn co https://svn1.cvsdude.com/osflash/red5/java
        * you need apache ant to build from source, if you are not familiar with this process you have to download one of the precompiled red5-binary releases.
   # copy the zip *xmlcrm.zip* from the package *pre05.zip* into your Red5 webapp folder. Unzip it. Alter the red5-configuration to fit your port values ($RED5_HOME/conf/red5.properties) see host.lzx for port values.
+  # Open hibernate.cfg.xml file into xmlcrm/WEB-INF/lib/xmlcrm.jar zip archive.
+  # Edit theses lines into hibernate.cfg.xml to configure login/password for database :
+{{{
+			<property name="connection.username">postgres</property>
+			<property name="connection.password">*******</property>
+			<property name="connection.driver_class">org.postgresql.Driver</property>
+			<property name="connection.url">jdbc:postgresql://localhost/openmeetings</property>
+}}}
   # copy the file *crossdomain.xml* to $RED5/webapps/root/crossdomain.xml (you need this file otherwise you are not able to upload any file to the server)
   # restart of red5 (run red5.sh/red5.bat) is needed. Browse to $RED%_HOST:5080 (start page should come up)
   # browse to your openlaszlo Application to see
