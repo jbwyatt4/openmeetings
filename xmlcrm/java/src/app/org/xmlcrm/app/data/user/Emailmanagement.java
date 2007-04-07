@@ -11,11 +11,13 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import org.xmlcrm.app.data.basic.Configurationmanagement;
 import org.xmlcrm.app.hibernate.beans.adresses.Emails;
 import org.xmlcrm.app.hibernate.utils.HibernateUtil;
 import org.xmlcrm.utils.mail.MailHandler;
 import org.xmlcrm.app.hibernate.beans.adresses.Adresses_Emails;
 import org.xmlcrm.app.hibernate.beans.domain.Organisation;
+import org.xmlcrm.app.templates.RegisterUserTemplate;
 
 public class Emailmanagement {
 
@@ -196,20 +198,8 @@ public class Emailmanagement {
 	private String sendMail(String Username, String Userpass, String EMail)
 			throws Exception {
 		String succ = "valid email";
-
-		String data = "";
-		data += "<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>";
-		data += "<html xmlns='http://www.w3.org/1999/xhtml' xml:lang='de' lang='de'>";
-		data += "<head>";
-		data += "<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1' /></head><body";
-		data += "<b>Herzlich Willkommen</b><br />";
-		data += "blabla<br />";
-		data += "<br /><b>Ihre Zugansdaten:</b>";
-		data += "<br />Username: " + Username;
-		data += "<br />Passwort: " + Userpass;
-		data += "<br />EMail: " + EMail + "<br /><br />";
-		data += "ihr Sys-team</html>";
-		succ = MailHandler.sendMail(EMail, "Welcome", data);
+		String template = RegisterUserTemplate.getInstance().getRegisterUserTemplate(Username,Userpass,EMail);
+		succ = MailHandler.sendMail(EMail, Configurationmanagement.getInstance().getConfKey(3,"register_mail_subject").getConf_value(), template);
 
 		return succ;
 	}

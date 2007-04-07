@@ -112,7 +112,9 @@ public class StartUpData extends TestCase {
 		Configurationmanagement.getInstance().addConfByKey(3, "email_username", "openmeetings@xmlcrm.org", 1, "System auth email username");
 		Configurationmanagement.getInstance().addConfByKey(3, "email_userpass", "tony123", 1, "System auth email password");		
 			
-		
+		Configurationmanagement.getInstance().addConfByKey(3, "default_lang", "EN", 1, "Default System Language for tamplates");
+		Configurationmanagement.getInstance().addConfByKey(3, "register_mail_subject", "SignUp", 1, "The Subject for Mails sended at registration");
+				
 		//Todo: Load default language ID from Database
 		
 	}
