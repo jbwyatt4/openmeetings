@@ -166,11 +166,7 @@ public class Usermanagement {
 			}
 			if (UID.longValue() != 0) {
 				updateLastLogin(usersA);
-			}
-			
-			String template = RegisterUserTemplate.getInstance().getRegisterUserTemplate();
-			log.error("########################");
-			log.error(template);
+			}			
 		} catch (HibernateException ex) {
 			log.error(ex);
 		} catch (Exception ex2) {
