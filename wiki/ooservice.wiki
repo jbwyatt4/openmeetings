@@ -17,5 +17,3 @@ sudo apt-get install xvfb openoffice.org
 {{{
 xvfb-run --server-args='-screen 0 800x600x16' -a /usr/lib/openoffice/program/soffice -headless -nologo -norestore
 }}}
-
-test
