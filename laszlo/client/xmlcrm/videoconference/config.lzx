@@ -4,7 +4,7 @@
 <!-- URL/IP to use for the Server 192.168.178.28 
 inno02.fh-pforzheim.de macbook 192.168.2.103
 192.168.2.102 bxlug.homelinux.org 213.219.160.72-->
-<attribute name="rmpthostlocal" value="192.168.2.103" type="string" />
+<attribute name="rmpthostlocal" value="192.168.0.1" type="string" />
 
 <attribute name="iswebrtmp" value="false" type="boolean" />
 
@@ -21,7 +21,7 @@ Port to use for the Server
 To this port the fallback is done once the default rtmport failed
 this should workaround 99% of all firewalls
  -->
-<attribute name="rmptTunnelport" value="80" type="string" />
+<attribute name="rmptTunnelport" value="8088" type="string" />
 
 <!-- 
 Port to use for the Server
