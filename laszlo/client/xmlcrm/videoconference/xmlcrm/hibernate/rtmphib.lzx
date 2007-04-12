@@ -53,6 +53,7 @@
      
      <!-- This is the current domain the user has logged-in -->
      <attribute name="currentdomain" value="domain1" type="string" />
+     <attribute name="currentdomainObj" value="domain1" type="string" />
      
     <netremotecallhib name="getsessiondata" funcname="xmlcrm.getsessiondata" >      
         <handler name="ondata" args="value">

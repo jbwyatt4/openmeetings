@@ -8,6 +8,7 @@
     
     <attribute name="pixelArray" value="null" />
     <attribute name="snap" value="null" />
+    <attribute name="bpData" value="null" />
     <attribute name="MatrixValue" value="null" />
     
     <attribute name="w" value="0" type="number" />
@@ -37,22 +38,32 @@
         <![CDATA[
         this.MCRef = this.getMCRef();
         Debug.write("this.MCRef: ",this.MCRef);
-        this.snap = new flash.display.BitmapData(this.width, this.height); 
+        this.snap = new flash.display.BitmapData(this.width, this.height, false, 0 );
+        
         //Matrix to scale the new image
         this.MatrixValue = new flash.geom.Matrix();
         this.MatrixValue.scale(1, 1);
         //Copy video image
         this.snap.draw(this.MCRef,  this.MatrixValue); 
         
+        this.bpData = this.snap.getPixels(this.snap.rectangle);
+        
         this.w = this.width;
         this.h = this.height;
         this.a = 0;
         this.pixelArray = new Array();
         
-        pixel_del.register(LzIdle,'onidle');
-        
+        //pixel_del.register(LzIdle,'onidle');
+        this.saveAsImage.doCall();
         ]]>
     </method>
+    
+	  	<netremotecallhib name="saveAsImage" funcname="fileservice.saveAsImage" remotecontext="$once{ canvas.thishib }" >   
+	  		<netparam><method name="getValue">return parent.parent.bpData;</method></netparam>
+	        <handler name="ondata" args="value">	
+	        	Debug.write("  saveAsImage: ",value);              	          				
+	        </handler>	
+	  	</netremotecallhib>     
     
     <method name="buildPixelArray">
         <![CDATA[

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library>
     
+    <include href="conferenceboard.lzx" />
     <include href="conference.lzx" />
     <include href="conferencerooms.lzx" />
 
