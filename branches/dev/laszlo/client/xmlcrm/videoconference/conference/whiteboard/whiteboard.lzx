@@ -185,6 +185,11 @@
         <drawchoosemodir y="2" name="b12" modi="ellipse" resourceN="ellipse" isSelectablemodi="true" labelid="78" />
 		<drawchoosemodir y="2" name="b10" modi="drawarrow" resourceN="drawarrowicon_rsc" isSelectablemodi="true" labelid="79" />				
 		<drawchooseseperator y="2" />
+		<button height="20" y="2" text="JPEG" width="40" >
+			<handler name="onclick">
+				this.parent.parent._drawarea.catchSnapshot();
+			</handler>
+		</button>		
 
 	</view>
 	
@@ -356,11 +361,7 @@
 
 	 -->
 	<!-- 
-	<button height="20" x="540" y="540" text="export as JPEG" width="160" >
-		<handler name="onclick">
-			//this.parent._drawarea.catchSnapshot();
-		</handler>
-	</button>
+
 	export -->
 	<!-- 
 	<view name="_progress" bgcolor="black" width="120" x="312" height="18" y="30">

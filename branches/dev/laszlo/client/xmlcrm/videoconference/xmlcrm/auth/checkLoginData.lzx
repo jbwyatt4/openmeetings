@@ -76,8 +76,16 @@
             	
                 hib.userlang = Number(parent.languages.getValue());
             	hib.userobject = value;
-            	hib.getLanguageById.doCall();
-                parent.close();
+            	if (value.organisation_users.length==0){
+            		Debug.write("this user has no Organisation Maybe a Bug add Ticket to http://code.google.com/p/openmeetings/issues/ ");
+                } else if (value.organisation_users.length==1){
+            		hib.currentdomain = value.organisation_users[0].organisation.name;
+            		hib.currentdomainObj = value.organisation_users[0].organisation;
+	            	hib.getLanguageById.doCall();
+	                parent.close();
+                } else {
+                	Debug.write("multiple organisations Issue 31 http://code.google.com/p/openmeetings/issues/detail?id=31");
+                }
             }  else {
                 parent.errormess.setText(value.firstname);
             }

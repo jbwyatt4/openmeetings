@@ -5,6 +5,8 @@
 <resource name="reg_back_s" src="buttons/reg_bg_s.png" />
 <resource name="reg_back_opt" src="buttons/reg_bg_opt.png" />
 
+<resource name="dashboard_placeholder" src="dashboard.png" />
+
 <resource name="loudnessBig" src="loudnessBig.swf" />
 
 <resource name="filesave_rsc" src="filesave.png" />
