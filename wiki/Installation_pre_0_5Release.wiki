@@ -26,7 +26,7 @@
    rmptTunnelport should point to the port of rtmpT (default red5-rtmp port is 8088)
    red5httpport should point to the port of http red5 (default red5-rtmp port is 5080)
 }}}
-  # Start OpenLaszlo, browse to $LPS_HOST:8080/lps-3.4.x/videoconference/xmlcrm-text.lzx?lzt=swf8 for test
+  # Start OpenLaszlo
   
 = Red5-webapp installation =
   
@@ -44,8 +44,7 @@
 }}}
   # copy the file *crossdomain.xml* to $RED5/webapps/root/crossdomain.xml (you need this file otherwise you are not able to upload any file to the server)
   # restart of red5 (run red5.sh/red5.bat) is needed. Browse to $RED%_HOST:5080 (start page should come up)
-  # browse to your openlaszlo Application to see
-
+  # browse to : $LPS_HOST:8080/lps-3.4.x/videoconference/main.lzx?lzt=swf8 for test
 
 
 
