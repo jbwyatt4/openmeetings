@@ -13,6 +13,11 @@ import org.xmlcrm.app.hibernate.beans.domain.Organisation;
 import org.xmlcrm.app.hibernate.beans.domain.Organisation_Users;
 import org.xmlcrm.app.hibernate.utils.HibernateUtil;
 
+/**
+ * 
+ * @author swagner
+ *
+ */
 public class Organisationmanagement {
 	private static final Log log = LogFactory
 			.getLog(Organisationmanagement.class);

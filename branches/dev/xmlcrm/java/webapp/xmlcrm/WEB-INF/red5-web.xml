@@ -31,6 +31,16 @@
 		singleton="true" />
 		
 	<!-- Class for Methods which can be invoked be the client -->
+    <bean id="conferenceservice.service" 
+	    class="org.xmlcrm.app.remote.ConferenceService" 
+		singleton="true" />		
+		
+	<!-- Class for Methods which can be invoked be the client -->
+    <bean id="configservice.service" 
+	    class="org.xmlcrm.app.remote.ConfigurationService" 
+		singleton="true" />	
+				
+	<!-- Class for Methods which can be invoked be the client -->
     <bean id="dokeosService.service" 
 	    class="org.xmlcrm.app.remote.RemoteService" 
 		singleton="true" />		

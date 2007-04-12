@@ -1,6 +1,7 @@
 package org.xmlcrm.test.basic;
 
 import org.xmlcrm.app.data.basic.Fieldmanagment;
+import org.xmlcrm.app.data.basic.Languagemanagement;
 
 import junit.framework.TestCase;
 
@@ -12,6 +13,17 @@ public class StartUpLanguageFieldsConference extends TestCase {
 	
 	public void testStartUpLanguageFieldsConference(){
 		
+		Languagemanagement.getInstance().addLanguage("deutsch");
+		Languagemanagement.getInstance().addLanguage("english");
+		Languagemanagement.getInstance().addLanguage("french");		
+		Languagemanagement.getInstance().addLanguage("spanish");		
+		
+		Fieldmanagment.getInstance().addFourFieldValues("conference", 1, "Konferenz", "Confernce", "Conférence", "Conferencia");
+		Fieldmanagment.getInstance().addFourFieldValues("meeting", 2, "Meeting", "Meeting", "Meeting", "Encuentro");
+		Fieldmanagment.getInstance().addFourFieldValues("classroom", 3, "Auditorium", "Auditorium", "Auditorium", "Auditorio");
+		Fieldmanagment.getInstance().addFourFieldValues("settings", 4, "Einstellungen", "Settings", "Paramètres", "Calibración");
+		Fieldmanagment.getInstance().addFourFieldValues("benutzer", 5, "Benutzer", "User", "Client", "Usuario");
+		Fieldmanagment.getInstance().addFourFieldValues("admin", 6, "Administration", "Administration", "Administration", "Administration");
 		Fieldmanagment.getInstance().addFourFieldValues("stop", 7, "Stop", "Stop", "Stop", "Stop");
 		Fieldmanagment.getInstance().addFourFieldValues("record", 8, "Record", "Record", "Record", "Record");
 		Fieldmanagment.getInstance().addFourFieldValues("nofile", 9, "Keine Datei vorhanden", "Keine Datei vorhanden", "Keine Datei vorhanden", "Keine Datei vorhanden");
@@ -129,6 +141,10 @@ public class StartUpLanguageFieldsConference extends TestCase {
 		Fieldmanagment.getInstance().addFourFieldValues("regformbtn1", 121, "Registrieren", "Register", "Register", "Register");
 		Fieldmanagment.getInstance().addFourFieldValues("regformbtn2", 122, "Abbrechen", "Cancel", "Cancel", "Cancel");
 		Fieldmanagment.getInstance().addFourFieldValues("Authbtn2", 123, "Register", "Register", "Register", "Register");
+		Fieldmanagment.getInstance().addFourFieldValues("dashboard", 124, "Home", "home", "home", "home");
+		Fieldmanagment.getInstance().addFourFieldValues("useradmin", 125, "Benutzer", "Users", "Users", "Users");
+		Fieldmanagment.getInstance().addFourFieldValues("groupadmin", 126, "Gruppen", "Groups", "Groups", "groups");
+		Fieldmanagment.getInstance().addFourFieldValues("orgadmin", 127, "Organisationen", "Organisations", "Organisations", "Organisations");
 		
 		
 	}

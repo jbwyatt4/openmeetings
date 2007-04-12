@@ -15,6 +15,7 @@ import org.hibernate.criterion.Restrictions;
 
 import org.xmlcrm.app.hibernate.beans.user.*;
 import org.xmlcrm.app.hibernate.utils.HibernateUtil;
+import org.xmlcrm.app.data.basic.AuthLevelmanagement;
 import org.xmlcrm.app.data.basic.Configurationmanagement;
 import org.xmlcrm.utils.math.*;
 import org.xmlcrm.utils.mail.*;
@@ -22,6 +23,11 @@ import org.xmlcrm.app.templates.RegisterUserTemplate;
 
 import org.xmlcrm.app.data.basic.*;
 
+/**
+ * 
+ * @author swagner
+ *
+ */
 public class Usermanagement {
 
 	private static final Log log = LogFactory.getLog(Usermanagement.class);
@@ -36,22 +42,6 @@ public class Usermanagement {
 			instance = new Usermanagement();
 		}
 		return instance;
-	}
-
-	private boolean checkUserLevel(long USER_LEVEL) {
-		if (USER_LEVEL > 1) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-
-	private boolean checkConfLevel(long USER_LEVEL) {
-		if (USER_LEVEL > 2) {
-			return true;
-		} else {
-			return false;
-		}
 	}
 
 	public Users getUser(long user_id) {
@@ -93,8 +83,7 @@ public class Usermanagement {
 			Object idf = HibernateUtil.createSession();
 			Session session = HibernateUtil.getSession();
 			Criteria crit = session.createCriteria(Users.class);
-			crit.add(Restrictions.ilike(searchcriteria, "%" + searchstring
-					+ "%"));
+			crit.add(Restrictions.ilike(searchcriteria, "%" + searchstring + "%"));
 			crit.setMaxResults(searchMax);
 			crit.add(Restrictions.eq("user_id", user_id));
 			crit.setFirstResult(start);
@@ -205,9 +194,7 @@ public class Usermanagement {
 				Object idf = HibernateUtil.createSession();
 				Session session = HibernateUtil.getSession();
 				Criteria crit = session.createCriteria(Users.class);
-				crit.add(Restrictions.ilike("lastname", "%" + searchstring
-						+ "%"));
-
+				crit.add(Restrictions.ilike("lastname", "%" + searchstring + "%"));
 				crit.setMaxResults(10);
 				List contactsZ = crit.list();
 				int count = contactsZ.size();
@@ -240,8 +227,7 @@ public class Usermanagement {
 				Object idf = HibernateUtil.createSession();
 				Session session = HibernateUtil.getSession();
 				Transaction tx = session.beginTransaction();
-				Query query = session
-						.createQuery("select c from Userdata as c where c.user_id = :user_id AND deleted != :deleted");
+				Query query = session.createQuery("select c from Userdata as c where c.user_id = :user_id AND deleted != :deleted");
 				query.setLong("user_id", user_id.longValue());
 				query.setString("deleted", "true");
 				int count = query.list().size();
@@ -272,8 +258,7 @@ public class Usermanagement {
 				Object idf = HibernateUtil.createSession();
 				Session session = HibernateUtil.getSession();
 				Transaction tx = session.beginTransaction();
-				Query query = session
-						.createQuery("select c from Userdata as c where c.user_id = :user_id AND c.data_key = :data_key AND deleted != :deleted");
+				Query query = session.createQuery("select c from Userdata as c where c.user_id = :user_id AND c.data_key = :data_key AND deleted != :deleted");
 				query.setLong("user_id", USER_ID.longValue());
 				query.setString("data_key", DATA_KEY);
 				query.setString("deleted", "true");
@@ -298,8 +283,7 @@ public class Usermanagement {
 				Object idf = HibernateUtil.createSession();
 				Session session = HibernateUtil.getSession();
 				Transaction tx = session.beginTransaction();
-				Query query = session
-						.createQuery("select c from Userdata as c where c.user_id = :user_id AND c.data_key = :data_key AND deleted != :deleted");
+				Query query = session.createQuery("select c from Userdata as c where c.user_id = :user_id AND c.data_key = :data_key AND deleted != :deleted");
 				query.setLong("user_id", user_id.longValue());
 				query.setString("data_key", DATA_KEY);
 				query.setString("deleted", "true");
@@ -326,11 +310,10 @@ public class Usermanagement {
 			String laddresse, int availible, String telefon, String fax,
 			String mobil, int EMailID, String email) {
 		String res = "Fehler beim Update";
-		if (checkUserLevel(USER_LEVEL) && user_id != 0) {
+		if (AuthLevelmanagement.getInstance().checkUserLevel(USER_LEVEL) && user_id != 0) {
 			try {
 				Users us = this.getUser(user_id);
-				if (this.checkUserData("login", login)
-						|| us.getLogin().equals(login)) {
+				if (this.checkUserData("login", login) || us.getLogin().equals(login)) {
 					log.info("user_id " + user_id);
 
 					log.info("USER " + us.getLastname());
@@ -700,7 +683,7 @@ public class Usermanagement {
 		// User Level must be at least Admin
 		// Moderators will get a temp update of there UserLevel to add Users to
 		// their Group
-		if (checkConfLevel(USER_LEVEL)) {
+		if (AuthLevelmanagement.getInstance().checkModLevel(USER_LEVEL)) {
 			// Check for required data
 			if (!login.equals("") && !Userpass.equals("") && !email.equals("")) {
 
@@ -761,8 +744,7 @@ public class Usermanagement {
 			users.setLogin(login);
 			users.setLastname(lastname);
 			users.setAge(new Date());
-			users.setAdresses(Adressmanagement.getInstance().getAdressbyId(
-					adress_id));
+			users.setAdresses(Adressmanagement.getInstance().getAdressbyId(adress_id));
 			users.setAvailible(availible);
 			users.setLastlogin(new Date());
 			users.setLasttrans(new Long(0));
@@ -806,8 +788,7 @@ public class Usermanagement {
 			Object idf = HibernateUtil.createSession();
 			Session session = HibernateUtil.getSession();
 			Transaction tx = session.beginTransaction();
-			Query query = session
-					.createQuery("select c from Users as c where c.login = :DataValue AND deleted != :deleted");
+			Query query = session.createQuery("select c from Users as c where c.login = :DataValue AND deleted != :deleted");
 			query.setString("DataValue", DataValue);
 			query.setString("deleted", "true");
 			int count = query.list().size();
@@ -816,6 +797,7 @@ public class Usermanagement {
 			}
 			tx.commit();
 			HibernateUtil.closeSession(idf);
+			return UserLevel;
 		} catch (HibernateException ex) {
 			log.error("[checkUserData]" + ex);
 		} catch (Exception ex2) {
@@ -831,8 +813,7 @@ public class Usermanagement {
 				Object idf = HibernateUtil.createSession();
 				Session session = HibernateUtil.getSession();
 				Transaction tx = session.beginTransaction();
-				Query query = session
-						.createQuery("select c from Users as c where c.availible = :availible AND c.user_id != :user_id AND deleted != :deleted");
+				Query query = session.createQuery("select c from Users as c where c.availible = :availible AND c.user_id != :user_id AND deleted != :deleted");
 				query.setInteger("availible", 0);
 				query.setLong("user_id", user_id);
 				query.setString("deleted", "true");
@@ -847,12 +828,10 @@ public class Usermanagement {
 				tx.commit();
 				HibernateUtil.closeSession(idf);
 				for (int vars = 0; vars < users.length; vars++) {
-					users[vars].setUserlevel(getUserLevel(users[vars]
-							.getLevel_id()));
+					users[vars].setUserlevel(getUserLevel(users[vars].getLevel_id()));
 					// EMail management ist Adressen
 					// users[vars].setEmails(ResHandler.getEmailmanagement().getemails(users[vars].get()));
-					users[vars].setUserdata(getUserdata(users[vars]
-							.getLevel_id()));
+					users[vars].setUserdata(getUserdata(users[vars].getLevel_id()));
 					users[vars].setPassword("empty");
 				}
 			} catch (HibernateException ex) {
@@ -874,8 +853,7 @@ public class Usermanagement {
 				Object idf = HibernateUtil.createSession();
 				Session session = HibernateUtil.getSession();
 				Transaction tx = session.beginTransaction();
-				Query query = session
-						.createQuery("select c from Users as c where c.user_id = :user_id AND c.availible = :availible AND c.user_id != :myUser_ID AND deleted != :deleted");
+				Query query = session.createQuery("select c from Users as c where c.user_id = :user_id AND c.availible = :availible AND c.user_id != :myUser_ID AND deleted != :deleted");
 				query.setInteger("availible", 0);
 				query.setLong("user_id", USER_ID);
 				query.setLong("myUser_ID", myUser_ID);
@@ -904,13 +882,12 @@ public class Usermanagement {
 
 	public List getusersAdmin(long USER_LEVEL, int start, int maxRes) {
 		List users = null;
-		if (checkConfLevel(USER_LEVEL)) {
+		if (AuthLevelmanagement.getInstance().checkModLevel(USER_LEVEL)) {
 			try {
 				Object idf = HibernateUtil.createSession();
 				Session session = HibernateUtil.getSession();
 				Transaction tx = session.beginTransaction();
-				Query query = session
-						.createQuery("from Users WHERE deleted != :deleted");
+				Query query = session.createQuery("from Users WHERE deleted != :deleted");
 				query.setString("deleted", "true");
 				query.setMaxResults(maxRes);
 				query.setFirstResult(start);
@@ -937,8 +914,7 @@ public class Usermanagement {
 				Object idf = HibernateUtil.createSession();
 				Session session = HibernateUtil.getSession();
 				Transaction tx = session.beginTransaction();
-				Query query = session
-						.createQuery("select c from users as c where c.USER_ID = :USER_ID AND c.availible = :availible AND deleted != :deleted");
+				Query query = session.createQuery("select c from users as c where c.USER_ID = :USER_ID AND c.availible = :availible AND deleted != :deleted");
 				query.setInteger("availible", 0);
 				query.setInteger("USER_ID", USER_ID);
 				query.setString("deleted", "true");

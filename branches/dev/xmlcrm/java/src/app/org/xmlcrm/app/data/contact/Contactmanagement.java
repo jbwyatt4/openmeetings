@@ -28,7 +28,7 @@ import org.xmlcrm.app.data.user.Emailmanagement;
 
 public class Contactmanagement {
 
-	private static final Log log = LogFactory.getLog(Groupmanagement.class);
+	private static final Log log = LogFactory.getLog(Contactmanagement.class);
 
 	private static Contactmanagement instance;
 

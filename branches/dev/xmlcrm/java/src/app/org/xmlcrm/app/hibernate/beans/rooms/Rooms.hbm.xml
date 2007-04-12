@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping
+>
+    <class
+        name="org.xmlcrm.app.hibernate.beans.rooms.Rooms"
+        table="rooms"
+        lazy="false"
+    >
+
+        <id
+            name="rooms_id"
+            column="rooms_id"
+            type="java.lang.Long"
+        >
+            <generator class="increment">
+              <!--  
+                  To add non XDoclet generator parameters, create a file named 
+                  hibernate-generator-params-Rooms.xml 
+                  containing the additional parameters and place it in your merge dir. 
+              --> 
+            </generator>
+        </id>
+
+        <property
+            name="comment"
+            type="string"
+            update="true"
+            insert="true"
+            column="comment"
+        />
+
+        <property
+            name="name"
+            type="string"
+            update="true"
+            insert="true"
+            column="name"
+        />
+
+        <many-to-one
+            name="roomtype"
+            class="org.xmlcrm.app.hibernate.beans.rooms.RoomTypes"
+            cascade="none"
+            outer-join="true"
+            update="true"
+            insert="true"
+            column="roomtypes_id"
+            not-null="false"
+        />
+
+        <property
+            name="starttime"
+            type="java.util.Date"
+            update="true"
+            insert="true"
+            column="starttime"
+        />
+
+        <property
+            name="updatetime"
+            type="java.util.Date"
+            update="true"
+            insert="true"
+            column="updatetime"
+        />
+
+        <property
+            name="deleted"
+            type="string"
+            update="true"
+            insert="true"
+            column="deleted"
+        />
+
+        <property
+            name="ispublic"
+            type="boolean"
+            update="true"
+            insert="true"
+            column="ispublic"
+        />
+
+        <!--
+            To add non XDoclet property mappings, create a file named
+                hibernate-properties-Rooms.xml
+            containing the additional properties and place it in your merge dir.
+        -->
+
+    </class>
+
+</hibernate-mapping>

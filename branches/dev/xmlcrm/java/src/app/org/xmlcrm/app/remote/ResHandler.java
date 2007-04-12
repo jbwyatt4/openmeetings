@@ -258,35 +258,6 @@ public class ResHandler {
     
     
     /**
-     * Definition of Administrator Configuration
-     */
-    public Configuration[] getAllConf(String SID){
-        int User_ID = Sessionmanagement.getInstance().checkSession(SID);
-        long User_Level = Usermanagement.getInstance().getUserLevelByID(User_ID); 
-        return Configurationmanagement.getInstance().getAllConf(User_Level);
-    }
-    public Configuration getConfKey(String SID,String CONF_KEY){
-        int User_ID = Sessionmanagement.getInstance().checkSession(SID);
-        long User_Level = Usermanagement.getInstance().getUserLevelByID(User_ID); 
-        return Configurationmanagement.getInstance().getConfKey(User_Level,CONF_KEY);
-    }
-    public String addConfByKey(String SID,String CONF_KEY,String CONF_VALUE,String comment){
-        int User_ID = Sessionmanagement.getInstance().checkSession(SID);
-        long User_Level = Usermanagement.getInstance().getUserLevelByID(User_ID); 
-        return Configurationmanagement.getInstance().addConfByKey( User_Level,CONF_KEY,CONF_VALUE,User_ID,comment);
-    }
-    public String updateConfByUID(String SID,int UID,String CONF_KEY,String CONF_VALUE,String comment){
-        int User_ID = Sessionmanagement.getInstance().checkSession(SID);
-        long User_Level = Usermanagement.getInstance().getUserLevelByID(User_ID); 
-        return Configurationmanagement.getInstance().updateConfByUID( User_Level,UID,CONF_KEY,CONF_VALUE,User_ID,comment);
-    }
-    public String deleteConfByUID(String SID,int UID){
-        int User_ID = Sessionmanagement.getInstance().checkSession(SID);
-        long User_Level = Usermanagement.getInstance().getUserLevelByID(User_ID); 
-        return Configurationmanagement.getInstance().deleteConfByUID(User_Level,UID);
-    }
-    
-    /**
      * Definition of Usergroupmanagement
      */
     public Usergroups[] getAllGroups(String SID){

@@ -16,6 +16,11 @@ import org.xmlcrm.app.hibernate.utils.HibernateUtil;
 import org.xmlcrm.app.remote.ResHandler;
 import org.xmlcrm.utils.math.Calender;
 
+/**
+ * 
+ * @author swagner
+ *
+ */
 public class Groupmanagement {
 
 	private static final Log log = LogFactory.getLog(Groupmanagement.class);

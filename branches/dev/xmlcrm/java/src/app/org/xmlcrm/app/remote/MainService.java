@@ -32,20 +32,41 @@ public class MainService {
 		ResHandler = new ResHandler();
 	}
 	
+	/**
+	 * get a List of all availible Languages
+	 * @return
+	 */
 	public List getLanguages(){
 		return Languagemanagement.getInstance().getLanguages();
 	}
 	
+	/**
+	 * get all fileds of a given Language_id
+	 * @param language_id
+	 * @return
+	 */
 	public List getLanguageById(int language_id){
 		return Fieldmanagment.getInstance().getAllFieldsByLanguage(language_id);
 	}
    
+	/**
+	 * get Navigation
+	 * @param SID
+	 * @param language_id
+	 * @return
+	 */
 	public List getNavi(String SID, long language_id){
         int User_ID = Sessionmanagement.getInstance().checkSession(SID);
         long User_LEVEL = Usermanagement.getInstance().getUserLevelByID(User_ID);
 		return Navimanagement.getInstance().getMainMenu(User_LEVEL,User_ID, language_id);
 	}
   
+	/**
+	 * gets a user by its SID
+	 * @param SID
+	 * @param USER_ID
+	 * @return
+	 */
 	public Users getUser(String SID,int USER_ID){
 		Users users = new Users();
 		int User_ID = Sessionmanagement.getInstance().checkSession(SID);
@@ -326,24 +347,7 @@ public class MainService {
     	return ResHandler.deleteWarenkorb(SID,WAREN_ID);
     }
     
-/*
- * Configuration Handlers
- */    
-    public Configuration[] getAllConf(String SID){
-        return ResHandler.getAllConf(SID);
-    }
-    public Configuration getConfKey(String SID,String CONF_KEY){
-        return ResHandler.getConfKey(SID,CONF_KEY);
-    }
-    public String addConfByKey(String SID,String CONF_KEY,String CONF_VALUE,String comment){
-        return ResHandler.addConfByKey(SID,CONF_KEY,CONF_VALUE,comment);
-    }
-    public String updateConfByUID(String SID,int UID,String CONF_KEY,String CONF_VALUE,String comment){
-        return ResHandler.updateConfByUID(SID,UID,CONF_KEY,CONF_VALUE,comment);
-    }    
-    public String deleteConfByUID(String SID,int UID){ 
-        return ResHandler.deleteConfByUID(SID,UID);
-    }
+
     
 /*
  * UserGroup Management Handlers
