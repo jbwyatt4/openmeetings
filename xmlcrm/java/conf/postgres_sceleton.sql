@@ -16,7 +16,7 @@ CREATE TABLE adresses
 	town VARCHAR(255) NOT NULL,
 	updatetime TIMESTAMP NULL,
 	zip VARCHAR(255) NOT NULL,
-	deleted BOOL NULL DEFAULT 'false'
+	deleted VARCHAR(255) NULL DEFAULT 'false'
 ) WITH OIDS;
 
 /* Table Items: adresses */
@@ -34,7 +34,7 @@ CREATE TABLE adresses_emails
 	mail_id BIGINT NOT NULL,
 	starttime TIMESTAMP NOT NULL DEFAULT NOW(),
 	updatetime TIMESTAMP NULL,
-	deleted BOOL NULL DEFAULT 'false'
+	deleted VARCHAR(255) NULL DEFAULT 'false'
 ) WITH OIDS;
 
 /* Table Items: adresses_emails */
@@ -52,7 +52,7 @@ CREATE TABLE adresses_phones
 	phone_id BIGINT NOT NULL,
 	starttime TIMESTAMP NOT NULL DEFAULT NOW(),
 	updatetime TIMESTAMP NULL,
-	deleted BOOL NULL DEFAULT 'false'
+	deleted VARCHAR(255) NULL DEFAULT 'false'
 ) WITH OIDS;
 
 /* Table Items: adresses_phones */
@@ -69,7 +69,7 @@ CREATE TABLE articlegroups
 	name VARCHAR(255) NULL,
 	starttime TIMESTAMP NOT NULL DEFAULT NOW(),
 	updatetime TIMESTAMP NULL,
-	deleted BOOL NULL DEFAULT 'false'
+	deleted VARCHAR(255) NULL DEFAULT 'false'
 ) WITH OIDS;
 
 /* Table Items: articlegroups */
@@ -94,7 +94,7 @@ CREATE TABLE articles
 	starttime TIMESTAMP NOT NULL DEFAULT NOW(),
 	supplier_id BIGINT NULL,
 	updatetime TIMESTAMP NULL,
-	deleted BOOL NULL DEFAULT 'false'
+	deleted VARCHAR(255) NULL DEFAULT 'false'
 ) WITH OIDS;
 
 /* Table Items: articles */
@@ -115,7 +115,7 @@ CREATE TABLE articles_articlegroups
 	articles_articlesgroups_id BIGINT NOT NULL DEFAULT nextval('articles_articlegroups_ARTICLES_ARTICLESGROUPS_ID_seq'::text),
 	starttime TIMESTAMP NOT NULL DEFAULT NOW(),
 	updatetime TIMESTAMP NULL,
-	deleted BOOL NULL DEFAULT 'false'
+	deleted VARCHAR(255) NULL DEFAULT 'false'
 ) WITH OIDS;
 
 /* Table Items: articles_articlegroups */
@@ -136,7 +136,7 @@ CREATE TABLE articles_lieferarten
 	liefer_id BIGINT NOT NULL,
 	starttime TIMESTAMP NOT NULL DEFAULT NOW(),
 	updatetime TIMESTAMP NULL,
-	deleted BOOL NULL DEFAULT 'false'
+	deleted VARCHAR(255) NULL DEFAULT 'false'
 ) WITH OIDS;
 
 /* Table Items: articles_lieferarten */
@@ -156,7 +156,7 @@ CREATE TABLE configuration
 	starttime TIMESTAMP NOT NULL DEFAULT NOW(),
 	updatetime TIMESTAMP NULL,
 	user_id BIGINT NOT NULL DEFAULT 0,
-	deleted BOOL NULL DEFAULT 'false'
+	deleted VARCHAR(255) NULL DEFAULT 'false'
 ) WITH OIDS;
 
 /* Table Items: configuration */
@@ -177,7 +177,7 @@ CREATE TABLE contactfreigabe
 	freigabe_id BIGINT NOT NULL DEFAULT nextval('contactfreigabe_FREIGABE_ID_seq'::text),
 	starttime TIMESTAMP NOT NULL DEFAULT NOW(),
 	updatetime TIMESTAMP NULL,
-	deleted BOOL NULL DEFAULT 'false'
+	deleted VARCHAR(255) NULL DEFAULT 'false'
 ) WITH OIDS;
 
 /* Table Items: contactfreigabe */
@@ -196,7 +196,7 @@ CREATE TABLE contactgroups
 	name TEXT NULL,
 	starttime TIMESTAMP NOT NULL DEFAULT NOW(),
 	updatetime TIMESTAMP NULL,
-	deleted BOOL NULL DEFAULT 'false'
+	deleted VARCHAR(255) NULL DEFAULT 'false'
 ) WITH OIDS;
 
 /* Table Items: contactgroups */
@@ -214,7 +214,7 @@ CREATE TABLE contactgroups_contacts
 	contactgroups_contact_id BIGINT NOT NULL DEFAULT nextval('contactgroups_contacts_CONTACTGROUPS_CONTACT_ID_seq'::text),
 	starttime TIMESTAMP NOT NULL DEFAULT NOW(),
 	updatetime TIMESTAMP NULL,
-	deleted BOOL NULL DEFAULT 'false'
+	deleted VARCHAR(255) NULL DEFAULT 'false'
 ) WITH OIDS;
 
 /* Table Items: contactgroups_contacts */
@@ -232,7 +232,7 @@ CREATE TABLE contactgroups_conuser
 	conuser_id BIGINT NOT NULL,
 	starttime TIMESTAMP NOT NULL DEFAULT NOW(),
 	updatetime TIMESTAMP NULL,
-	deleted BOOL NULL DEFAULT 'false'
+	deleted VARCHAR(255) NULL DEFAULT 'false'
 ) WITH OIDS;
 
 /* Table Items: contactgroups_conuser */
@@ -256,7 +256,7 @@ CREATE TABLE contacts
 	titel_id BIGINT NOT NULL,
 	updatetime TIMESTAMP NULL,
 	user_id BIGINT NOT NULL DEFAULT 0,
-	deleted BOOL NULL DEFAULT 'false'
+	deleted VARCHAR(255) NULL DEFAULT 'false'
 ) WITH OIDS;
 
 /* Table Items: contacts */
@@ -274,7 +274,7 @@ CREATE TABLE conuser
 	starttime TIMESTAMP NOT NULL DEFAULT NOW(),
 	updatetime TIMESTAMP NULL,
 	user_id BIGINT NOT NULL,
-	deleted BOOL NULL DEFAULT 'false'
+	deleted VARCHAR(255) NULL DEFAULT 'false'
 ) WITH OIDS;
 
 /* Table Items: conuser */
@@ -292,7 +292,7 @@ CREATE TABLE emails
 	mail_id BIGINT NOT NULL DEFAULT nextval('emails_MAIL_ID_seq'::text),
 	startdate TIMESTAMP NOT NULL DEFAULT NOW(),
 	updatedate TIMESTAMP NULL,
-	deleted BOOL NULL DEFAULT 'false'
+	deleted VARCHAR(255) NULL DEFAULT 'false'
 ) WITH OIDS;
 
 /* Table Items: emails */
@@ -310,7 +310,7 @@ CREATE TABLE employeegroups
 	name TEXT NOT NULL,
 	starttime TIMESTAMP NOT NULL DEFAULT NOW(),
 	updatetime TIMESTAMP NULL,
-	deleted BOOL NULL DEFAULT 'false'
+	deleted VARCHAR(255) NULL DEFAULT 'false'
 ) WITH OIDS;
 
 /* Table Items: employeegroups */
@@ -328,7 +328,7 @@ CREATE TABLE employees
 	starttime TIMESTAMP NOT NULL DEFAULT NOW(),
 	updatetime TIMESTAMP NULL,
 	user_id BIGINT NOT NULL,
-	deleted BOOL NULL
+	deleted VARCHAR(255) NULL
 ) WITH OIDS;
 
 /* Table Items: employees */
@@ -346,7 +346,7 @@ CREATE TABLE employees_articlegroups
 	employees_articlegroups_id BIGINT NOT NULL DEFAULT nextval('employees_articlegroups_EMPLOYEES_ARTICLEGROUPS_ID_seq'::text),
 	starttime TIMESTAMP NOT NULL DEFAULT NOW(),
 	updatetime TIMESTAMP NULL,
-	deleted BOOL NULL DEFAULT 'false'
+	deleted VARCHAR(255) NULL DEFAULT 'false'
 ) WITH OIDS;
 
 /* Table Items: employees_articlegroups */
@@ -364,7 +364,7 @@ CREATE TABLE employees_articles
 	employees_articles_id BIGINT NOT NULL DEFAULT nextval('employees_articles_EMPLOYEES_ARTICLES_ID_seq'::text),
 	starttime TIMESTAMP NOT NULL DEFAULT NOW(),
 	updatetime TIMESTAMP NULL,
-	deleted BOOL NULL DEFAULT 'false'
+	deleted VARCHAR(255) NULL DEFAULT 'false'
 ) WITH OIDS;
 
 /* Table Items: employees_articles */
@@ -382,7 +382,7 @@ CREATE TABLE employees_employeegroups
 	employeegroup_id BIGINT NOT NULL,
 	starttime TIMESTAMP NOT NULL DEFAULT NOW(),
 	updatetime TIMESTAMP NULL,
-	deleted BOOL NULL DEFAULT 'false'
+	deleted VARCHAR(255) NULL DEFAULT 'false'
 ) WITH OIDS;
 
 /* Table Items: employees_employeegroups */
@@ -395,7 +395,7 @@ CREATE SEQUENCE employees_suppliergroups_employees_suppliergroups_id_seq INCREME
 /* Build Table Structure */
 CREATE TABLE employees_suppliergroups
 (
-	deleted BOOL NULL DEFAULT 'false',
+	deleted VARCHAR(255) NULL DEFAULT 'false',
 	employee_id BIGINT NOT NULL,
 	employees_suppliergroups_id BIGINT NOT NULL DEFAULT nextval('employees_suppliergroups_employees_suppliergroups_id_seq'),
 	starttime TIMESTAMP NOT NULL DEFAULT NOW(),
@@ -418,7 +418,7 @@ CREATE TABLE employees_suppliers
 	starttime TIMESTAMP NOT NULL DEFAULT NOW(),
 	supplier_id BIGINT NOT NULL,
 	updatetime TIMESTAMP NULL,
-	deleted BOOL NULL DEFAULT 'false'
+	deleted VARCHAR(255) NULL DEFAULT 'false'
 ) WITH OIDS;
 
 /* Table Items: employees_suppliers */
@@ -431,7 +431,7 @@ CREATE SEQUENCE fieldlanguage_language_id_seq INCREMENT 1;
 /* Build Table Structure */
 CREATE TABLE fieldlanguage
 (
-	deleted BOOL NULL DEFAULT 'false',
+	deleted VARCHAR(255) NULL DEFAULT 'false',
 	language_id INTEGER NOT NULL DEFAULT nextval('fieldlanguage_language_id_seq'),
 	name VARCHAR(255) NOT NULL,
 	starttime TIMESTAMP NOT NULL DEFAULT NOW(),
@@ -448,7 +448,7 @@ CREATE SEQUENCE fieldlanguagesvalues_fieldlanguagesvalues_id_seq INCREMENT 1;
 /* Build Table Structure */
 CREATE TABLE fieldlanguagesvalues
 (
-	deleted BOOL NULL DEFAULT 'false',
+	deleted VARCHAR(255) NULL DEFAULT 'false',
 	fieldlanguagesvalues_id INTEGER NOT NULL DEFAULT nextval('fieldlanguagesvalues_fieldlanguagesvalues_id_seq'),
 	fieldvalues_id INTEGER NOT NULL,
 	language_id INTEGER NOT NULL,
@@ -467,7 +467,7 @@ CREATE SEQUENCE fieldvalues_fieldvalues_id_seq INCREMENT 1;
 /* Build Table Structure */
 CREATE TABLE fieldvalues
 (
-	deleted BOOL NULL DEFAULT 'false',
+	deleted VARCHAR(255) NULL DEFAULT 'false',
 	fieldvalues_id INTEGER NOT NULL DEFAULT nextval('fieldvalues_fieldvalues_id_seq'),
 	name VARCHAR(255) NOT NULL,
 	starttime TIMESTAMP NOT NULL DEFAULT NOW(),
@@ -490,7 +490,7 @@ CREATE TABLE lieferarten
 	liefer_id BIGINT NOT NULL DEFAULT nextval('lieferarten_LIEFER_ID_seq'::text),
 	starttime TIMESTAMP NOT NULL DEFAULT NOW(),
 	updatetime TIMESTAMP NULL,
-	deleted BOOL NULL DEFAULT 'false'
+	deleted VARCHAR(255) NULL DEFAULT 'false'
 ) WITH OIDS;
 
 /* Table Items: lieferarten */
@@ -515,7 +515,7 @@ CREATE TABLE naviglobal
 	name VARCHAR(64) NOT NULL,
 	starttime TIMESTAMP NOT NULL DEFAULT NOW(),
 	fieldvalues_id INTEGER NOT NULL,
-	deleted BOOL NULL DEFAULT 'false'
+	deleted VARCHAR(255) NULL DEFAULT 'false'
 ) WITH OIDS;
 
 /* Table Items: naviglobal */
@@ -541,7 +541,7 @@ CREATE TABLE navimain
 	name VARCHAR(64) NOT NULL,
 	starttime TIMESTAMP NOT NULL DEFAULT NOW(),
 	fieldvalues_id INTEGER NOT NULL,
-	deleted BOOL NULL DEFAULT 'false'
+	deleted VARCHAR(255) NULL DEFAULT 'false'
 ) WITH OIDS;
 
 /* Table Items: navimain */
@@ -567,7 +567,7 @@ CREATE TABLE navisub
 	starttime TIMESTAMP NOT NULL DEFAULT NOW(),
 	sub_id BIGINT NOT NULL DEFAULT nextval('navisub_SUB_ID_seq'::text),
 	fieldvalues_id INTEGER NOT NULL,
-	deleted BOOL NULL DEFAULT 'false'
+	deleted VARCHAR(255) NULL DEFAULT 'false'
 ) WITH OIDS;
 
 /* Table Items: navisub */
@@ -580,7 +580,7 @@ CREATE SEQUENCE organisation_organisation_id_seq INCREMENT 1;
 /* Build Table Structure */
 CREATE TABLE organisation
 (
-	deleted BOOL NULL,
+	deleted VARCHAR(255) NULL,
 	insertedby BIGINT NULL,
 	name VARCHAR(255) NOT NULL,
 	organisation_id INTEGER NOT NULL DEFAULT nextval('organisation_organisation_id_seq'),
@@ -599,13 +599,13 @@ CREATE SEQUENCE organisation_users_organisation_users_id_seq INCREMENT 1;
 /* Build Table Structure */
 CREATE TABLE organisation_users
 (
-	deleted BOOL NULL DEFAULT 'false',
+	comment VARCHAR(255) NULL,
+	deleted VARCHAR(255) NULL DEFAULT 'false',
 	organisation_id INTEGER NOT NULL,
 	organisation_users_id INTEGER NOT NULL DEFAULT nextval('organisation_users_organisation_users_id_seq'),
 	starttime TIMESTAMP NOT NULL DEFAULT NOW(),
 	updatetime TIMESTAMP NULL,
-	user_id BIGINT NOT NULL,
-	value VARCHAR(255) NOT NULL
+	user_id BIGINT NOT NULL
 );
 
 /* Table Items: organisation_users */
@@ -623,12 +623,84 @@ CREATE TABLE phones
 	phonevalue VARCHAR(255) NOT NULL,
 	starttime TIMESTAMP NOT NULL DEFAULT NOW(),
 	updatetime TIMESTAMP NULL,
-	deleted BOOL NULL DEFAULT 'false'
+	deleted VARCHAR(255) NULL DEFAULT 'false'
 ) WITH OIDS;
 
 /* Table Items: phones */
 ALTER TABLE phones ADD CONSTRAINT pkphones
 	PRIMARY KEY (phone_id);
+
+/******************** Add Table: rooms ************************/
+CREATE SEQUENCE rooms_rooms_id_seq INCREMENT 1;
+
+/* Build Table Structure */
+CREATE TABLE rooms
+(
+	comment TEXT NULL,
+	deleted VARCHAR(255) NULL,
+	ispublic BOOL NULL DEFAULT 'true',
+	name VARCHAR(255) NOT NULL,
+	rooms_id BIGINT NOT NULL DEFAULT nextval('rooms_rooms_id_seq'),
+	roomtypes_id BIGINT NOT NULL,
+	starttime TIMESTAMP NOT NULL DEFAULT NOW(),
+	updatetime TIMESTAMP NULL
+);
+
+/* Table Items: rooms */
+ALTER TABLE rooms ADD CONSTRAINT pkrooms
+	PRIMARY KEY (rooms_id);
+
+/******************** Add Table: rooms_organisation ************************/
+CREATE SEQUENCE rooms_organisation_rooms_organisation_id_seq INCREMENT 1;
+
+/* Build Table Structure */
+CREATE TABLE rooms_organisation
+(
+	deleted VARCHAR(255) NULL,
+	organisation_id BIGINT NOT NULL,
+	rooms_id BIGINT NOT NULL,
+	rooms_organisation_id BIGINT NOT NULL DEFAULT nextval('rooms_organisation_rooms_organisation_id_seq'),
+	starttime TIMESTAMP NOT NULL DEFAULT NOW(),
+	updatetime TIMESTAMP NULL
+);
+
+/* Table Items: rooms_organisation */
+ALTER TABLE rooms_organisation ADD CONSTRAINT pkrooms_organisation
+	PRIMARY KEY (rooms_organisation_id);
+
+/******************** Add Table: roomtypes ************************/
+CREATE SEQUENCE roomtypes_roomtypes_id_seq INCREMENT 1;
+
+/* Build Table Structure */
+CREATE TABLE roomtypes
+(
+	deleted VARCHAR(255) NULL,
+	name VARCHAR(255) NOT NULL,
+	roomtypes_id BIGINT NOT NULL DEFAULT nextval('roomtypes_roomtypes_id_seq'),
+	starttime TIMESTAMP NOT NULL DEFAULT NOW(),
+	updatetime TIMESTAMP NULL
+);
+
+/* Table Items: roomtypes */
+ALTER TABLE roomtypes ADD CONSTRAINT pkroomtypes
+	PRIMARY KEY (roomtypes_id);
+
+/******************** Add Table: salutations ************************/
+CREATE SEQUENCE salutations_salutations_id_seq INCREMENT 1;
+
+/* Build Table Structure */
+CREATE TABLE salutations
+(
+	name VARCHAR(255) NOT NULL,
+	starttime TIMESTAMP NOT NULL DEFAULT NOW(),
+	salutations_id BIGINT NOT NULL DEFAULT nextval('salutations_salutations_id_seq'::text),
+	updatetime TIMESTAMP NULL,
+	deleted VARCHAR(255) NULL DEFAULT 'false'
+) WITH OIDS;
+
+/* Table Items: salutations */
+ALTER TABLE salutations ADD CONSTRAINT pksalutations
+	PRIMARY KEY (salutations_id);
 
 /******************** Add Table: sessiondata ************************/
 CREATE SEQUENCE sessiondata_id_seq INCREMENT 1;
@@ -657,7 +729,7 @@ CREATE TABLE states
 	starttime TIMESTAMP NOT NULL DEFAULT NOW(),
 	state_id BIGINT NOT NULL DEFAULT nextval('states_STATE_ID_seq'::text),
 	updatetime TIMESTAMP NULL,
-	deleted BOOL NULL DEFAULT 'false'
+	deleted VARCHAR(255) NULL DEFAULT 'false'
 ) WITH OIDS;
 
 /* Table Items: states */
@@ -675,7 +747,7 @@ CREATE TABLE suppliergroups
 	starttime TIMESTAMP NOT NULL DEFAULT NOW(),
 	suppliergroup_id BIGINT NOT NULL DEFAULT nextval('suppliergroups_SUPPLIERGROUP_ID_seq'::text),
 	updatetime TIMESTAMP NULL,
-	deleted BOOL NULL DEFAULT 'false'
+	deleted VARCHAR(255) NULL DEFAULT 'false'
 ) WITH OIDS;
 
 /* Table Items: suppliergroups */
@@ -693,7 +765,7 @@ CREATE TABLE suppliers
 	starttime TIMESTAMP NOT NULL DEFAULT NOW(),
 	supplier_id BIGINT NOT NULL DEFAULT nextval('suppliers_SUPPLIER_ID_seq'::text),
 	updatetime TIMESTAMP NULL,
-	deleted BOOL NULL DEFAULT 'false'
+	deleted VARCHAR(255) NULL DEFAULT 'false'
 ) WITH OIDS;
 
 /* Table Items: suppliers */
@@ -711,7 +783,7 @@ CREATE TABLE suppliers_suppliergroups
 	supplier_suppliergroup_id BIGINT NOT NULL DEFAULT nextval('suppliers_suppliergroups_SUPPLIER_SUPPLIERGROUP_ID_seq'::text),
 	suppliergroup_id BIGINT NOT NULL,
 	updatetime TIMESTAMP NULL,
-	deleted BOOL NULL DEFAULT 'false'
+	deleted VARCHAR(255) NULL DEFAULT 'false'
 ) WITH OIDS;
 
 /* Table Items: suppliers_suppliergroups */
@@ -735,7 +807,7 @@ CREATE TABLE termine
 	status_id BIGINT NULL DEFAULT 0,
 	termin_id BIGINT NOT NULL DEFAULT nextval('termine_TERMIN_ID_seq'::text),
 	updatetime TIMESTAMP NULL,
-	deleted BOOL NULL DEFAULT 'false'
+	deleted VARCHAR(255) NULL DEFAULT 'false'
 ) WITH OIDS;
 
 /* Table Items: termine */
@@ -753,7 +825,7 @@ CREATE TABLE termine_participant
 	termine_participant_id BIGINT NOT NULL DEFAULT nextval('termine_participant_TERMINE_PARTICIPANT_ID_seq'::text),
 	updatetime TIMESTAMP NULL,
 	user_id BIGINT NOT NULL,
-	deleted BOOL NULL DEFAULT 'false'
+	deleted VARCHAR(255) NULL DEFAULT 'false'
 ) WITH OIDS;
 
 /* Table Items: termine_participant */
@@ -774,7 +846,7 @@ CREATE TABLE termine_todo_user
 	termine_todo_user_id BIGINT NOT NULL DEFAULT nextval('termine_todo_user_UID_seq'::text),
 	updatetime TIMESTAMP NULL,
 	user_id BIGINT NULL DEFAULT 0,
-	deleted BOOL NULL DEFAULT 'false'
+	deleted VARCHAR(255) NULL DEFAULT 'false'
 ) WITH OIDS;
 
 /* Table Items: termine_todo_user */
@@ -795,7 +867,7 @@ CREATE TABLE termine_todolist
 	teilnehmer TEXT NOT NULL,
 	termine_todolist_id BIGINT NOT NULL DEFAULT nextval('termine_todolist_TODO_ID_seq'::text),
 	updatetime TIMESTAMP NULL,
-	deleted BOOL NULL DEFAULT 'false'
+	deleted VARCHAR(255) NULL DEFAULT 'false'
 ) WITH OIDS;
 
 /* Table Items: termine_todolist */
@@ -819,7 +891,7 @@ CREATE TABLE termine_user
 	termine_user_id BIGINT NOT NULL DEFAULT nextval('termine_user_UID_seq'::text),
 	updatetime TIMESTAMP NULL,
 	user_id BIGINT NOT NULL DEFAULT 0,
-	deleted BOOL NULL DEFAULT 'false'
+	deleted VARCHAR(255) NULL DEFAULT 'false'
 ) WITH OIDS;
 
 /* Table Items: termine_user */
@@ -842,7 +914,7 @@ CREATE TABLE terminegroups
 	terminegroup_id BIGINT NOT NULL DEFAULT nextval('terminegroups_terminegroup_id_seq'),
 	status_id BIGINT NULL DEFAULT 0,
 	updatetime TIMESTAMP NULL,
-	deleted BOOL NULL DEFAULT 'false'
+	deleted VARCHAR(255) NULL DEFAULT 'false'
 ) WITH OIDS;
 
 /* Table Items: terminegroups */
@@ -861,29 +933,12 @@ CREATE TABLE terminestatus
 	status_id BIGINT NOT NULL DEFAULT nextval('terminestatus_STATUS_ID_seq'::text),
 	updatetime TIMESTAMP NULL,
 	user_id BIGINT NOT NULL DEFAULT 0,
-	deleted BOOL NULL DEFAULT 'false'
+	deleted VARCHAR(255) NULL DEFAULT 'false'
 ) WITH OIDS;
 
 /* Table Items: terminestatus */
 ALTER TABLE terminestatus ADD CONSTRAINT pkterminestatus
 	PRIMARY KEY (status_id);
-
-/******************** Add Table: titles ************************/
-CREATE SEQUENCE titles_title_id_seq INCREMENT 1;
-
-/* Build Table Structure */
-CREATE TABLE titles
-(
-	name VARCHAR(255) NOT NULL,
-	starttime TIMESTAMP NOT NULL DEFAULT NOW(),
-	title_id BIGINT NOT NULL DEFAULT nextval('titles_TITLE_ID_seq'::text),
-	updatetime TIMESTAMP NULL,
-	deleted BOOL NULL DEFAULT 'false'
-) WITH OIDS;
-
-/* Table Items: titles */
-ALTER TABLE titles ADD CONSTRAINT pktitles
-	PRIMARY KEY (title_id);
 
 /******************** Add Table: transstatus ************************/
 CREATE SEQUENCE transstatus_status_id_seq INCREMENT 1;
@@ -896,7 +951,7 @@ CREATE TABLE transstatus
 	starttime TIMESTAMP NOT NULL DEFAULT NOW(),
 	status_id BIGINT NOT NULL DEFAULT nextval('transstatus_STATUS_ID_seq'::text),
 	updatetime TIMESTAMP NULL,
-	deleted BOOL NULL DEFAULT 'false'
+	deleted VARCHAR(255) NULL DEFAULT 'false'
 ) WITH OIDS;
 
 /* Table Items: transstatus */
@@ -916,7 +971,7 @@ CREATE TABLE userdata
 	starttime TIMESTAMP NOT NULL DEFAULT NOW(),
 	updatetime TIMESTAMP NULL,
 	user_id BIGINT NOT NULL DEFAULT 0,
-	deleted BOOL NULL DEFAULT 'false'
+	deleted VARCHAR(255) NULL DEFAULT 'false'
 ) WITH OIDS;
 
 /* Table Items: userdata */
@@ -937,7 +992,7 @@ CREATE TABLE usergroups
 	user_id BIGINT NULL,
 	description CHAR(255) NULL,
 	comment CHAR(255) NULL,
-	deleted BOOL NULL DEFAULT 'false'
+	deleted VARCHAR(255) NULL DEFAULT 'false'
 ) WITH OIDS;
 
 /* Table Items: usergroups */
@@ -955,7 +1010,7 @@ CREATE TABLE userlevel
 	starttime TIMESTAMP NOT NULL DEFAULT NOW(),
 	statuscode INTEGER NOT NULL DEFAULT 0,
 	updatetime TIMESTAMP NULL,
-	deleted BOOL NULL DEFAULT 'false'
+	deleted VARCHAR(255) NULL DEFAULT 'false'
 ) WITH OIDS;
 
 /* Table Items: userlevel */
@@ -968,7 +1023,7 @@ CREATE SEQUENCE users_user_id_seq INCREMENT 1;
 /* Build Table Structure */
 CREATE TABLE users
 (
-	adresses_id BIGINT NULL,
+	adresses_id BIGINT NOT NULL,
 	age TIMESTAMP NULL,
 	availible INTEGER NOT NULL DEFAULT 0,
 	firstname VARCHAR(32) NOT NULL,
@@ -988,7 +1043,7 @@ CREATE TABLE users
 	updatetime TIMESTAMP NULL,
 	language_id INTEGER NULL,
 	pictureuri VARCHAR(255) NULL,
-	deleted BOOL NULL DEFAULT 'false'
+	deleted VARCHAR(255) NULL DEFAULT 'false'
 ) WITH OIDS;
 
 /* Table Items: users */
@@ -1007,7 +1062,7 @@ CREATE TABLE users_usergroups
 	updatetime TIMESTAMP NULL,
 	user_id BIGINT NOT NULL DEFAULT 0,
 	usergroup_id BIGINT NOT NULL DEFAULT 0,
-	deleted BOOL NULL DEFAULT 'false'
+	deleted VARCHAR(255) NULL DEFAULT 'false'
 ) WITH OIDS;
 
 /* Table Items: users_usergroups */
@@ -1031,7 +1086,7 @@ CREATE TABLE userwaren
 	user_id BIGINT NOT NULL DEFAULT 0,
 	userwaren_id BIGINT NOT NULL DEFAULT nextval('userwaren_USERWAREN_ID_seq'::text),
 	zahlungs_id BIGINT NULL DEFAULT 0,
-	deleted BOOL NULL DEFAULT 'false'
+	deleted VARCHAR(255) NULL DEFAULT 'false'
 ) WITH OIDS;
 
 /* Table Items: userwaren */
@@ -1050,7 +1105,7 @@ CREATE TABLE zahlungsarten
 	starttime TIMESTAMP NOT NULL DEFAULT NOW(),
 	updatetime TIMESTAMP NULL,
 	zahlungs_id BIGINT NOT NULL DEFAULT nextval('zahlungsarten_ZAHLUNGS_ID_seq'::text),
-	deleted BOOL NULL DEFAULT 'false'
+	deleted VARCHAR(255) NULL DEFAULT 'false'
 ) WITH OIDS;
 
 /* Table Items: zahlungsarten */
@@ -1134,7 +1189,7 @@ ALTER TABLE contacts ADD CONSTRAINT fk_contacts_contactfreigabe
 
 /************ Foreign Key: fk_contacts_titles ***************/
 ALTER TABLE contacts ADD CONSTRAINT fk_contacts_titles
-	FOREIGN KEY (titel_id) REFERENCES titles (title_id) ON DELETE NO ACTION;
+	FOREIGN KEY (titel_id) REFERENCES salutations (salutations_id) ON DELETE NO ACTION;
 
 /************ Foreign Key: fk_contacts_users ***************/
 ALTER TABLE contacts ADD CONSTRAINT fk_contacts_users
@@ -1240,6 +1295,18 @@ ALTER TABLE organisation_users ADD CONSTRAINT fk_organisation_users_organisation
 ALTER TABLE organisation_users ADD CONSTRAINT fk_organisation_users_users
 	FOREIGN KEY (user_id) REFERENCES users (user_id) ON DELETE NO ACTION;
 
+/************ Foreign Key: fk_rooms_roomtypes ***************/
+ALTER TABLE rooms ADD CONSTRAINT fk_rooms_roomtypes
+	FOREIGN KEY (roomtypes_id) REFERENCES roomtypes (roomtypes_id) ON DELETE NO ACTION;
+
+/************ Foreign Key: fk_rooms_organisation_organisation ***************/
+ALTER TABLE rooms_organisation ADD CONSTRAINT fk_rooms_organisation_organisation
+	FOREIGN KEY (organisation_id) REFERENCES organisation (organisation_id) ON DELETE NO ACTION;
+
+/************ Foreign Key: fk_rooms_organisation_rooms ***************/
+ALTER TABLE rooms_organisation ADD CONSTRAINT fk_rooms_organisation_rooms
+	FOREIGN KEY (rooms_id) REFERENCES rooms (rooms_id) ON DELETE NO ACTION;
+
 /************ Foreign Key: fk_suppliers_adresses ***************/
 ALTER TABLE suppliers ADD CONSTRAINT fk_suppliers_adresses
 	FOREIGN KEY (adresses_id) REFERENCES adresses (adresses_id) ON DELETE NO ACTION;
@@ -1322,7 +1389,7 @@ ALTER TABLE users ADD CONSTRAINT fk_users_fieldlanguage
 
 /************ Foreign Key: fk_users_titles ***************/
 ALTER TABLE users ADD CONSTRAINT fk_users_titles
-	FOREIGN KEY (title_id) REFERENCES titles (title_id) ON DELETE NO ACTION;
+	FOREIGN KEY (title_id) REFERENCES salutations (salutations_id) ON DELETE NO ACTION;
 
 /************ Foreign Key: fk_users_userlevel ***************/
 ALTER TABLE users ADD CONSTRAINT fk_users_userlevel
