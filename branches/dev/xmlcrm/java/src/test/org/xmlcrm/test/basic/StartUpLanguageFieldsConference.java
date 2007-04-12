@@ -145,6 +145,9 @@ public class StartUpLanguageFieldsConference extends TestCase {
 		Fieldmanagment.getInstance().addFourFieldValues("useradmin", 125, "Benutzer", "Users", "Users", "Users");
 		Fieldmanagment.getInstance().addFourFieldValues("groupadmin", 126, "Gruppen", "Groups", "Groups", "groups");
 		Fieldmanagment.getInstance().addFourFieldValues("orgadmin", 127, "Organisationen", "Organisations", "Organisations", "Organisations");
+		Fieldmanagment.getInstance().addFourFieldValues("headconf", 128, "Konferenzräume", "Conference-Rooms", "Conference-Rooms", "Conference-Rooms");
+		Fieldmanagment.getInstance().addFourFieldValues("conf_pub", 129, "öffentlich", "public", "public", "public");
+		Fieldmanagment.getInstance().addFourFieldValues("head_org", 130, "Organisation", "organisation", "organisation", "organisation");
 		
 		
 	}

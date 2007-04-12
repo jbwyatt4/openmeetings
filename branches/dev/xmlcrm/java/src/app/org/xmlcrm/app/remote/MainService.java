@@ -246,66 +246,8 @@ public class MainService {
     	}
     	return ret;
     }
-    public String deleteUserAdmin(String SID, int user_idClient){
-    	String ret = "Deleting User Self";
-    	int User_ID = Sessionmanagement.getInstance().checkSession(SID);
-    	long User_LEVEL = Usermanagement.getInstance().getUserLevelByID(User_ID);
-    	if(User_LEVEL>=3){
-    		ret = Usermanagement.getInstance().logout(SID,user_idClient);
-    		ret = Usermanagement.getInstance().deleteUserID(user_idClient);
-    	} else {
-    		ret = "Nur als admin";
-    	}
-    	return ret;
-    }  
-    public String updateUser(String SID, String login, String password, String lastname, String firstname, int age, String adresse, String Zip, String state, String town, int EMailID, String email, int rechnungsaddr, String raddresse, int lieferaddr, String laddresse,int availible, String telefon, String fax, String mobil){
-        int User_ID = Sessionmanagement.getInstance().checkSession(SID);
-        //User updates hisself, always allowed
-        Long User_LEVEL = new Long(3);
-        return Usermanagement.getInstance().updateUser(User_LEVEL,new Long(User_ID), new Long(0), login, password, lastname, firstname, age, adresse, Zip, state, town, rechnungsaddr, raddresse, lieferaddr,laddresse,availible,telefon,fax,mobil,EMailID,email);
-    }
-    public String updateUserAdmin(String SID, int user_idClient, int level_id, String login, String password, String lastname, String firstname, int age, String adresse, String Zip, String state, String town, int EMailID, String email, int rechnungsaddr, String raddresse, int lieferaddr, String laddresse,int availible, String telefon, String fax, String mobil){
-        int User_ID = Sessionmanagement.getInstance().checkSession(SID);
-        long User_LEVEL = Usermanagement.getInstance().getUserLevelByID(User_ID);	
-        return Usermanagement.getInstance().updateUser(User_LEVEL,new Long(user_idClient), new Long(level_id), login, password, lastname, firstname, age, adresse, Zip, state, town, rechnungsaddr, raddresse, lieferaddr,laddresse,availible,telefon,fax,mobil,EMailID,email);
-    }    
-    public Users addUserdata(String SID,String DATA_KEY,String DATA,String Comment){
-        int User_ID = Sessionmanagement.getInstance().checkSession(SID);
-        long User_LEVEL = Usermanagement.getInstance().getUserLevelByID(User_ID);
-        Users users = new Users();
-        String ret = "Add Userdata Self";
-        if(User_LEVEL>1){
-            ret = Usermanagement.getInstance().addUserdata(User_ID,DATA_KEY,DATA,Comment);
-            if (ret.equals("success")){
-                users = Usermanagement.getInstance().getUser(new Long(User_ID));
-            } else {
-                users.setFirstname(ret);
-            }
-        } else {
-            ret = "Nur als registrierter Benutzer kann man seinen Account lšschen";
-            users.setFirstname(ret);
-        }
-        return users;
-    }
-    public Users[] searchUser(String SID,String searchstring){   	
-        int User_ID = Sessionmanagement.getInstance().checkSession(SID);
-        long User_LEVEL = Usermanagement.getInstance().getUserLevelByID(User_ID);    	
-    	return Usermanagement.getInstance().searchUser(User_LEVEL,searchstring);
-    }    
-    public Users updateUserdata(String SID, int DATA_ID, String DATA_KEY, String DATA, String Comment){
-        int User_ID = Sessionmanagement.getInstance().checkSession(SID);
-        long User_LEVEL = Usermanagement.getInstance().getUserLevelByID(User_ID);
-        Users users = new Users();
-        String ret = "Update Userdata Self";
-        if(User_LEVEL>1){
-            ret = Usermanagement.getInstance().updateUserdata(DATA_ID,User_ID,DATA_KEY,DATA,Comment);
-            users = Usermanagement.getInstance().getUser(new Long(User_ID));
-        } else {
-            ret = "Nur als registrierter Benutzer kann man seinen Account löschen";
-            users.setFirstname(ret);
-        }
-        return users;
-    }
+
+
     
     /*
      * Shopsystem

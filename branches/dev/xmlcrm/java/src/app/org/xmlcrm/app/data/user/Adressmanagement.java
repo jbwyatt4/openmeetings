@@ -26,6 +26,17 @@ public class Adressmanagement {
 		return instance;
 	}
 
+	/**
+	 * adds a new record to the adress table
+	 * @param street
+	 * @param zip
+	 * @param town
+	 * @param states_id
+	 * @param additionalname
+	 * @param comment
+	 * @param fax
+	 * @return id of generated Adress-Object or NULL
+	 */
 	public Long saveAdress(String street, String zip, String town,
 			long states_id, String additionalname, String comment, String fax) {
 		try {
@@ -61,6 +72,11 @@ public class Adressmanagement {
 		return null;
 	}
 
+	/**
+	 * gets an adress by its id
+	 * @param adresses_id
+	 * @return Adress-Object or NULL
+	 */
 	public Adresses getAdressbyId(long adresses_id) {
 		try {
 			Object idf = HibernateUtil.createSession();
@@ -75,6 +91,52 @@ public class Adressmanagement {
 			if (ll.size() > 0) {
 				return (Adresses) ll.get(0);
 			}
+		} catch (HibernateException ex) {
+			log.error(ex);
+		} catch (Exception ex2) {
+			log.error(ex2);
+		}
+		return null;
+	}
+	
+	/**
+	 * updates an Adress-Record by its given Id
+	 * @param adresses_id
+	 * @param street
+	 * @param zip
+	 * @param town
+	 * @param states_id
+	 * @param additionalname
+	 * @param comment
+	 * @param fax
+	 * @return the updated Adress-Object or null
+	 */
+	public Adresses updateAdress(long adresses_id, String street, String zip, String town,
+			long states_id, String additionalname, String comment, String fax) {
+		try {
+			States st = Statemanagement.getInstance().getStateById(states_id);
+			
+			Adresses adr = this.getAdressbyId(adresses_id);
+
+			Object idf = HibernateUtil.createSession();
+			Session session = HibernateUtil.getSession();
+			Transaction tx = session.beginTransaction();
+
+			adr.setAdditionalname(additionalname);
+			adr.setComment(comment);
+			adr.setUpdatetime(new Date());
+			adr.setFax(fax);
+			adr.setStreet(street);
+			adr.setTown(town);
+			adr.setZip(zip);
+			adr.setStates(st);
+
+			session.update(adr);
+
+			tx.commit();
+			HibernateUtil.closeSession(idf);
+
+			return adr;
 		} catch (HibernateException ex) {
 			log.error(ex);
 		} catch (Exception ex2) {

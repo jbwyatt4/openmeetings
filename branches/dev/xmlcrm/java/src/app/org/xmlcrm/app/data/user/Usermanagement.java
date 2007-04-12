@@ -112,8 +112,7 @@ public class Usermanagement {
 			Session session = HibernateUtil.getSession();
 			Transaction tx = session.beginTransaction();
 			MD5Calc md5 = new MD5Calc("MD5");
-			Query query = session
-					.createQuery("select c from Users as c where c.login = :login AND deleted != :deleted");
+			Query query = session.createQuery("select c from Users as c where c.login = :login AND deleted != :deleted");
 			query.setString("login", Username);
 			query.setString("deleted", "true");
 			int count = query.list().size();
@@ -145,14 +144,6 @@ public class Usermanagement {
 			Sessionmanagement.getInstance().updateUser(SID, UID.longValue());
 			usersA.setUserlevel(getUserLevel(LEVEL_ID));
 			
-			usersA.setUserdata(getUserdata(usersA.getUser_id()));
-			if (usersA.getLieferadressen() != null) {
-				usersA.setLieferadressen(getUserdataByKey(UID, "lieferaddr"));
-			}
-			if (usersA.getRechnungsaddressen() != null) {
-				usersA.setRechnungsaddressen(getUserdataByKey(UID,
-						"rechnungsaddr"));
-			}
 			if (UID.longValue() != 0) {
 				updateLastLogin(usersA);
 			}			
@@ -303,19 +294,24 @@ public class Usermanagement {
 		return userdata;
 	}
 
-	public String updateUser(long USER_LEVEL, Long user_id, Long level_id,
+	public Long updateUser(long USER_LEVEL, Long user_id, Long level_id,
 			String login, String password, String lastname, String firstname,
-			int age, String adresse, String Zip, String state, String town,
-			int rechnungsaddr, String raddresse, int lieferaddr,
-			String laddresse, int availible, String telefon, String fax,
-			String mobil, int EMailID, String email) {
-		String res = "Fehler beim Update";
+			int age, String street, String additionalname, String zip, long states_id, String town,
+			int availible, String telefon, String fax,
+			String mobil, long EMailID, String email, String comment) {
+
 		if (AuthLevelmanagement.getInstance().checkUserLevel(USER_LEVEL) && user_id != 0) {
 			try {
 				Users us = this.getUser(user_id);
-				if (this.checkUserData("login", login) || us.getLogin().equals(login)) {
+				// Check for duplicates
+				boolean checkName = this.checkUserLogin(login);
+				boolean checkEmail = Emailmanagement.getInstance().checkUserEMail(email);
+				if (checkName && checkEmail) {
 					log.info("user_id " + user_id);
-
+					//Todo implement Phone
+					Adressmanagement.getInstance().updateAdress(us.getAdresses().getAdresses_id(), street, zip, town, states_id, additionalname, comment, fax);
+					Emailmanagement.getInstance().updateUserEmail(EMailID,user_id, email);
+					
 					log.info("USER " + us.getLastname());
 					Object idf = HibernateUtil.createSession();
 					Session session = HibernateUtil.getSession();
@@ -336,31 +332,18 @@ public class Usermanagement {
 					}
 
 					session.update(us);
-					res = "Success";
+					
 					tx.commit();
 					HibernateUtil.closeSession(idf);
-					if (lieferaddr != 0) {
-						if (getUserdataNoByKey(user_id, "lieferaddr") == 0) {
-							addUserdata(user_id.longValue(), "lieferaddr",
-									laddresse, "");
-						} else {
-							updateUserdataByKey(user_id, "lieferaddr",
-									laddresse, "");
-						}
-					}
-					if (rechnungsaddr != 0) {
-						if (getUserdataNoByKey(user_id, "rechnungsaddr") == 0) {
-							addUserdata(user_id.longValue(), "rechnungsaddr",
-									raddresse, "");
-						} else {
-							updateUserdataByKey(user_id, "rechnungsaddr",
-									raddresse, "");
-						}
-					}
-					Emailmanagement.getInstance().updateUserEmail(EMailID,
-							user_id, email);
+					
+					return us.getUser_id();
+					
 				} else {
-					res = "Error: Username not availible";
+					if (!checkName) {
+						return new Long(-5);
+					} else if (!checkEmail) {
+						return new Long(-4);
+					}
 				}
 			} catch (HibernateException ex) {
 				log.error(ex);
@@ -368,9 +351,10 @@ public class Usermanagement {
 				log.error(ex2);
 			}
 		} else {
-			res = "Error: Permission denied";
+			log.error("Error: Permission denied");
+			return null;
 		}
-		return res;
+		return null;
 	}
 
 	public String resetPassword(int USER_ID) {
@@ -680,6 +664,7 @@ public class Usermanagement {
 			String firstname, String email, int age, String street,
 			String additionalname, String fax, String zip, long states_id,
 			String town, long language_id) {
+		//TODO: make phoen number persistent
 		// User Level must be at least Admin
 		// Moderators will get a temp update of there UserLevel to add Users to
 		// their Group
@@ -688,9 +673,8 @@ public class Usermanagement {
 			if (!login.equals("") && !Userpass.equals("") && !email.equals("")) {
 
 				// Check for duplicates
-				boolean checkName = checkUserData("lastname", login);
-				boolean checkEmail = Emailmanagement.getInstance()
-						.checkUserEMail(email);
+				boolean checkName = this.checkUserLogin(login);
+				boolean checkEmail = Emailmanagement.getInstance().checkUserEMail(email);
 				if (checkName && checkEmail) {
 					
 					long adress_id = Adressmanagement.getInstance().saveAdress(street, zip, town, states_id, additionalname, "",fax);
@@ -782,7 +766,7 @@ public class Usermanagement {
 		return null;
 	}
 
-	private boolean checkUserData(String DataName, String DataValue) {
+	private boolean checkUserLogin(String DataValue) {
 		boolean UserLevel = true;
 		try {
 			Object idf = HibernateUtil.createSession();
