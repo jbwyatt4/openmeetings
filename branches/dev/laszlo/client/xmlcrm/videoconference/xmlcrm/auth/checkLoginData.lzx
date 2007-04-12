@@ -17,7 +17,7 @@
         <edittext name="username" y="42" x="120" width="170" text="swagner" />
 
     <labeltext labelid="110" width="200" y="72" resize="false" x="2"/>
-        <edittext name="userpass" y="72" password="true" x="120" width="170" text="67810" />
+        <edittext name="userpass" y="72" password="true" x="120" width="170" text="test" />
 
     <labeltext labelid="111" text="Language: " width="200" y="102" resize="false" x="2"/>  
         

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <canvas debug="false" width="980" height="610">
 
-<include href="host.lzx" />
+<include href="config.lzx" />
 
 <debug fontsize="14" oninit="Debug.showInternalProperties = true" />
 
@@ -12,23 +12,15 @@
 	<view center="true" ratio="1" resource="splashswf.swf"/>
 </splash>
 
-<security>
-	<allow>
-		<pattern>^org.dokeos.servlets.*</pattern>
-	</allow>
-</security>
-
 <script>
 	LzCanvas.prototype.__LZWebbaseMenuItemHandler = function (obj, item) {
 	    // load a url 
-	    Debug.write("http://www.webbase-design.de", "_blank");
-	    LzBrowser.loadURL("http://www.webbase-design.de", "_blank");
+	    Debug.write("http://www.openmeetings.net", "_blank");
+	    LzBrowser.loadURL("http://www.openmeetings.net", "_blank");
 	}
 </script>  
 
-<include href="host.lzx" />  
-
-<include href="incubator/lzcombobox.lzx" />  
+<include href="incubator/lzcombobox.lzx" />
 <include href="incubator/shadowbox.lzx" /> 
 
 <resource name="loudness" src="resources/loudness.swf" />
