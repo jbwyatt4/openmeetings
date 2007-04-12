@@ -13,6 +13,11 @@ import org.hibernate.Transaction;
 import org.xmlcrm.app.hibernate.beans.adresses.States;
 import org.xmlcrm.app.hibernate.utils.HibernateUtil;
 
+/**
+ * 
+ * @author swagner
+ *
+ */
 public class Statemanagement {
 	private static final Log log = LogFactory.getLog(Statemanagement.class);
 

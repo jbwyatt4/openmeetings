@@ -10,6 +10,11 @@ import org.hibernate.Transaction;
 import org.xmlcrm.app.hibernate.beans.user.Salutations;
 import org.xmlcrm.app.hibernate.utils.HibernateUtil;
 
+/**
+ * 
+ * @author swagner
+ *
+ */
 public class Salutationmanagement {
 
 	private static final Log log = LogFactory

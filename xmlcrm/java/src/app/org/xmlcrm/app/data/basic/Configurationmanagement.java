@@ -10,14 +10,10 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import org.xmlcrm.app.data.user.Emailmanagement;
-import org.xmlcrm.app.data.user.Usermanagement;
+import org.xmlcrm.app.data.basic.AuthLevelmanagement;
 import org.xmlcrm.app.hibernate.beans.basic.Configuration;
-import org.xmlcrm.app.hibernate.beans.user.Users;
 import org.xmlcrm.app.hibernate.utils.HibernateUtil;
-import org.xmlcrm.app.remote.ResHandler;
 import org.xmlcrm.utils.math.Calender;
-import org.xmlcrm.utils.math.MD5Calc;
 
 public class Configurationmanagement {
 
@@ -37,18 +33,10 @@ public class Configurationmanagement {
 		return instance;
 	}
 
-	private boolean checkConfLevel(long USER_LEVEL) {
-		if (USER_LEVEL > 2) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-
 	public Configuration getConfKey(long USER_LEVEL, String CONF_KEY) {
 		Configuration configuration = new Configuration();
 		System.out.println("getConfKey: " + USER_LEVEL + " " + CONF_KEY);
-		if (checkConfLevel(USER_LEVEL)) {
+		if (AuthLevelmanagement.getInstance().checkAdminLevel(USER_LEVEL)) {
 			try {
 				Object idf = HibernateUtil.createSession();
 				Session session = HibernateUtil.getSession();
@@ -79,7 +67,7 @@ public class Configurationmanagement {
 
 	public Configuration[] getAllConf(long USER_LEVEL) {
 		Configuration[] configuration = new Configuration[1];
-		if (checkConfLevel(USER_LEVEL)) {
+		if (AuthLevelmanagement.getInstance().checkAdminLevel(USER_LEVEL)) {
 			try {
 				Object idf = HibernateUtil.createSession();
 				Session session = HibernateUtil.getSession();
@@ -109,7 +97,7 @@ public class Configurationmanagement {
 	public String addConfByKey(long USER_LEVEL, String CONF_KEY,
 			String CONF_VALUE, int USER_ID, String comment) {
 		String ret = "Add Configuration";
-		if (checkConfLevel(USER_LEVEL)) {
+		if (AuthLevelmanagement.getInstance().checkAdminLevel(USER_LEVEL)) {
 			Configuration configuration = new Configuration();
 			configuration.setConf_key(CONF_KEY);
 			configuration.setConf_value(CONF_VALUE);
@@ -143,7 +131,7 @@ public class Configurationmanagement {
 	public String updateConfByUID(long USER_LEVEL, int UID, String CONF_KEY,
 			String CONF_VALUE, int USER_ID, String comment) {
 		String res = "Update Configuration";
-		if (checkConfLevel(USER_LEVEL)) {
+		if (AuthLevelmanagement.getInstance().checkAdminLevel(USER_LEVEL)) {
 			try {
 				Object idf = HibernateUtil.createSession();
 				Session session = HibernateUtil.getSession();
@@ -172,7 +160,7 @@ public class Configurationmanagement {
 
 	public String deleteConfByUID(long USER_LEVEL, int UID) {
 		String res = "Delete Configuration";
-		if (checkConfLevel(USER_LEVEL)) {
+		if (AuthLevelmanagement.getInstance().checkAdminLevel(USER_LEVEL)) {
 			try {
 				Object idf = HibernateUtil.createSession();
 				Session session = HibernateUtil.getSession();

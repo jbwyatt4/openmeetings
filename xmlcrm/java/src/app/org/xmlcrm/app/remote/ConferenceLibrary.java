@@ -11,6 +11,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
+import java.util.BitSet;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -21,6 +22,8 @@ import org.mortbay.jetty.webapp.WebAppContext;
 import org.apache.commons.lang.StringUtils;
 
 public class ConferenceLibrary {
+
+	private static final Log log = LogFactory.getLog(ConferenceLibrary.class);
 
 	private int recursiveNumber = 0;
 	
@@ -220,5 +223,15 @@ public class ConferenceLibrary {
 		}
 		return false;
 	}	
+	
+	public String saveAsImage(Object t){
+		try {
+			BitSet tBitSet = (BitSet)t;
+			log.error(tBitSet.size());
+		} catch (Exception err){
+			log.error("[saveAsImage] "+err);
+		}
+		return null;
+	}
 	
 }
