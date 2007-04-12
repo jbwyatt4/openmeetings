@@ -53,8 +53,7 @@ public class Emailmanagement {
 			Object idf = HibernateUtil.createSession();
 			Session session = HibernateUtil.getSession();
 			Transaction tx = session.beginTransaction();
-			Query query = session
-					.createQuery("select c from Emails as c where c.mail_id = :mail_id AND deleted != :deleted");
+			Query query = session.createQuery("select c from Emails as c where c.mail_id = :mail_id AND deleted != :deleted");
 			query.setLong("mail_id", mail_id);
 			query.setString("deleted", "true");
 			List ll = query.list();
@@ -230,28 +229,27 @@ public class Emailmanagement {
 		return succ;
 	}
 
-	public String deleteEMailByID(int EMAIL_ID) {
-		String result = "Fehler im Bestellvorgang";
+	/**
+	 * delete a Email-Object by a given Id
+	 * @param mail_id
+	 */
+	public void deleteEMailByID(long mail_id) {
 		try {
+			Emails mail = this.getEmailById(mail_id);
 			Object idf = HibernateUtil.createSession();
 			Session session = HibernateUtil.getSession();
 			Transaction tx = session.beginTransaction();
-			String hqlDelete = "delete emails where EMAIL_ID = :EMAIL_ID";
-			int deletedEntities = session.createQuery(hqlDelete).setInteger(
-					"EMAIL_ID", EMAIL_ID).executeUpdate();
-			//session.flush(); 
-
+			session.delete(mail);			
 			tx.commit();
 			HibernateUtil.closeSession(idf);
-			result = "Erfolgreich" + deletedEntities;
 		} catch (HibernateException ex) {
 			log.error(ex);
 		} catch (Exception ex2) {
 			log.error(ex2);
 		}
-		return result;
 	}
 
+	//TODO: Change code sothat it doesn't usw HQL
 	public String deleteEMailByUserID(int USER_ID) {
 		String result = "Fehler im Bestellvorgang";
 		try {
@@ -285,8 +283,7 @@ public class Emailmanagement {
 			Object idf = HibernateUtil.createSession();
 			Session session = HibernateUtil.getSession();
 			Transaction tx = session.beginTransaction();
-			Query query = session
-					.createQuery("select c from Emails as c where c.email = :email AND c.deleted != :deleted");
+			Query query = session.createQuery("select c from Emails as c where c.email = :email AND c.deleted != :deleted");
 			query.setString("email", email);
 			query.setString("deleted", "true");
 			int count = query.list().size();
@@ -304,27 +301,31 @@ public class Emailmanagement {
 		return true;
 	}
 
-	public String updateUserEmail(int MAIL_ID, Long USER_ID, String email) {
-		String res = "Fehler beim Update";
+	/**
+	 * update a Email-Object by a given id
+	 * @param mail_id
+	 * @param user_id
+	 * @param email
+	 * @return
+	 */
+	public Emails updateUserEmail(long mail_id, Long user_id, String email) {
 		try {
-			//            Object idf = HibernateUtil.createSession(); 			Session session = HibernateUtil.getSession();
-			//            Transaction tx = session.beginTransaction();        
-			//            String hqlUpdate = "update Emails set email= :email, USER_ID = :USER_ID, updatedate = :updatedate where MAIL_ID= :MAIL_ID";
-			//            int updatedEntities = session.createQuery( hqlUpdate )
-			//                                .setString("email",email)
-			//                                .setInteger( "USER_ID", USER_ID )
-			//                                .setLong( "updatedate", CalenderI.getTimeStampMili() )
-			//                                .setInteger( "MAIL_ID", MAIL_ID )
-			//                                .executeUpdate();
-			//            res = "Success"+updatedEntities;
-			//            tx.commit();
-			//            HibernateUtil.closeSession(idf);
+			Emails mail = this.getEmailById(mail_id);
+			mail.setEmail(email);
+			mail.setUpdatetime(new Date());
+            Object idf = HibernateUtil.createSession(); 			
+            Session session = HibernateUtil.getSession();
+            Transaction tx = session.beginTransaction();        
+            session.update(mail);
+            tx.commit();
+            HibernateUtil.closeSession(idf);
+            return mail;
 		} catch (HibernateException ex) {
-			log.error(ex);
+			log.error("[updateUserEmail] "+ex);
 		} catch (Exception ex2) {
-			log.error(ex2);
+			log.error("[updateUserEmail] "+ex2);
 		}
-		return res;
+		return null;
 	}
 
 	public String updateContactEmail(int MAIL_ID, int Contact_ID, String email) {

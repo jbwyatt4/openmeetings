@@ -5,6 +5,7 @@ import org.apache.commons.logging.LogFactory;
 import org.xmlcrm.app.hibernate.beans.basic.Sessiondata;
 import org.xmlcrm.app.hibernate.beans.user.Users;
 import org.xmlcrm.app.remote.MainService;
+import org.xmlcrm.app.remote.UserService;
 
 import junit.framework.TestCase;
 
@@ -19,13 +20,14 @@ public class UpdateUserSelf extends TestCase {
 	public void testUserUpdate(){
 		
 		MainService mService = new MainService();
+		UserService uService = new UserService();
 		Sessiondata sessionData = mService.getsessiondata();
 		
 		Users us = mService.loginUser(sessionData.getSession_id(), "swagner3", "test");
 		
 		System.out.println("us: "+us.getFirstname());
 		
-		String updateRes = mService.updateUser(sessionData.getSession_id(),"swagner3", "", "WagnerUp", "SebUp", 22, "StreetUp", "75UP", "StateUP", "PfUp", 1, "seba.up", 0, "rechnungsUP", 0, "lieferUp",1, "07Up", "07faxUP", "015UP");
+		Long updateRes = uService.updateUser(sessionData.getSession_id(),"swagner3", "", "WagnerUp", "SebUp", 22, "StreetUp", "92a", "75UP", 1, "PfUp", 1, "seba.up", 0, "07Up", "07faxUP", "015UP","comment");
 
 		System.out.println("updateRes: "+updateRes);
 		
@@ -38,13 +40,14 @@ public class UpdateUserSelf extends TestCase {
 	public void testUserUpdateAdmin(){
 		
 		MainService mService = new MainService();
+		UserService uService = new UserService();
 		Sessiondata sessionData = mService.getsessiondata();
 		
 		Users us = mService.loginUser(sessionData.getSession_id(), "swagner", "67810");
 		
 		System.out.println("us: "+us.getFirstname());
 		
-		String updateRes = mService.updateUserAdmin(sessionData.getSession_id(), 3 , 3, "swagner3", "", "WagnerUpAdmin", "SebAdminUp", 22, "StreetUp", "75UP", "StateUP", "PfUp", 1, "seba.up", 0, "rechnungsUP", 0, "lieferUp",1, "07Up", "07faxUP", "015UP");
+		Long updateRes = uService.updateUserAdmin(sessionData.getSession_id(), 3 , 3, "swagner3", "", "WagnerUpAdmin", "SebAdminUp", 22, "StreetUp", "92a", "75UP", 1, "PfUp", 1, "seba.up", 0, "07Up", "07faxUP", "015UP", "comment");
 
 		System.out.println("updateRes: "+updateRes);
 		
