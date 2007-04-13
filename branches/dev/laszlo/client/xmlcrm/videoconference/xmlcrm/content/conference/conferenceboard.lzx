@@ -110,7 +110,10 @@
 	
 </class>
 
-<class name="
+<class name="conferencedetailsarea" extends="view">
+
+
+</class>
 
 
 </library>
