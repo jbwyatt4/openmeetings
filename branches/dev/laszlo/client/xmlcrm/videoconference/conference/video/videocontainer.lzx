@@ -86,7 +86,7 @@
                 Debug.write("canvas.firstName: ",canvas.firstName);
                 Debug.write("canvas.lastName: ",canvas.lastName);
                 canvas.thishib.getCurrentModerator.doCall(); 
-                new editrecordstream(canvas.main_content._content,{y:-320});	
+                new editrecordstream(canvas.main_content._content.inner,{y:-320});	
                 refObj=null;
                 ]]>
             </handler>   

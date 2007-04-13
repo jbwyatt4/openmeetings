@@ -3,7 +3,7 @@
 
 <class name="conferenceboard" extends="basecontentview">	
 	
-	<labeltext fontstyle="bold" y="20" labelid="128" />
+	<labeltext fontstyle="bold" y="10" labelid="128" />
 	
 	<labeltext y="40" labelid="129" />
 	
@@ -120,7 +120,7 @@
             Debug.write("hib.conferencedomain: ",hib.conferencedomain);
             clearStageContent();
             canvas._mainbgcontentNavi.navi._innercontent.clearAllSubItemLists();  
-            new conference(canvas.main_content._content);          
+            new conference(canvas.main_content._content.inner);          
         </handler>
 	</simplelabelbutton>
 	

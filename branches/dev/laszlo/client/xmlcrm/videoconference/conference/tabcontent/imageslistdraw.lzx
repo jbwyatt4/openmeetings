@@ -2,8 +2,6 @@
 <library>
 <!--  -->
 
-<resource name="_downIconRSC" src="resources/filesave.png" />
-
 <class name="imageslistdraw" extends="view" width="280" height="270" bgcolor="0x4171B5">
 	<view width="${ parent.width-2 }" height="${ parent.height-2 }" x="1" y="1" bgcolor="white" />
 
@@ -169,7 +167,7 @@
 
 	<view resource="folder_yellow_rsc" x="1" onclick="parent.__LZFileDownload()" y="1" />
 
-	<view resource="_downIconRSC" x="$once{ parent.parent.parent.width -54 }" 
+	<view resource="filesave_rsc" x="$once{ parent.parent.parent.width -54 }" 
 		y="1" onclick="parent.__LZFileDownload()" />
 	<view resource="filedelete_rsc" x="$once{ parent.parent.parent.width -34 }" 
 		y="1" onclick="parent.__LZFileDelete()" />

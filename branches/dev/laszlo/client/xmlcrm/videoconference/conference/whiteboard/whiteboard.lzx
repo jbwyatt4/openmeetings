@@ -44,7 +44,6 @@
 
 <resource name="filedelete_rsc" src="resources/delete.png" />
 
-<resource name="menuseperator_rsc" src="resources/menuseperator.png" />
 
 <include href="incubator/lzcombobox.lzx"/> 
 <include href="base/" />
@@ -144,9 +143,9 @@
 		} else if (!storedImageDate["askagainclear"] && !storedImageDate["clearField"]){
 			_drawarea.addNewImage(this.downloadurl,this.x,this.y);
 		} else if (storedImageDate["askagainclear"]){
-			new confirmation(canvas.main_content._content,{labelid:62,labeliderror:63,refObj:this});
+			new confirmation(canvas.main_content._content.inner,{labelid:62,labeliderror:63,refObj:this});
 		} else {
-			new confirmation(canvas.main_content._content,{labelid:62,labeliderror:63,refObj:this});
+			new confirmation(canvas.main_content._content.inner,{labelid:62,labeliderror:63,refObj:this});
 		}
 		]]>	
 	</method>

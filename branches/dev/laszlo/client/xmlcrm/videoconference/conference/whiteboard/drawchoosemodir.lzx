@@ -1,50 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library>
 
-<resource name="background_drawchoose_rsc">
-	<frame src="resources/menudraw_up.png" />
-	<frame src="resources/menudraw_over.png" />
-	<frame src="resources/menudraw_down.png" />
-</resource>
+<class name="drawchooseseperator" extends="basemenuseperator" />
 
-<class name="drawchooseseperator" resource="menuseperator_rsc" extends="view" />
 
-<class name="basedrawchoose" extends="view" width="24" height="24" resource="background_drawchoose_rsc">
-	<attribute name="resourceN" value="" type="string" />
-	<view resource="${ parent.resourceN }" x="${ parent.width/2-this.width/2 }" y="${ parent.height/2-this.height/2 }"  />
-	<attribute name="isselected" value="false" type="boolean" />
-	<attribute name="enabled" value="true" type="boolean" />
-	<attribute name="labelid" value="0" type="number" />
-	<handler name="onmouseover">
-		<![CDATA[
-		if (!this.isselected && this.enabled) this.setResourceNumber(2);
-		]]>
-	</handler>
-	<handler name="onmouseout">
-		<![CDATA[
-		if (!this.isselected) this.setResourceNumber(1);
-		]]>
-	</handler>
-	<handler name="onmousedown">
-		<![CDATA[
-		if (!this.isselected) this.setResourceNumber(3);
-		]]>
-	</handler>	
-	<handler name="onmouseup">
-		<![CDATA[
-		if (!this.isselected) this.setResourceNumber(1);
-		]]>
-	</handler>	
-	<handler name="oninit">
-		if (this.isselected){
-			this.onclick.sendEvent();
-			this.setResourceNumber(3);
-		}
-	</handler>			
-	<labeltooltip labelid="$once{ parent.labelid }" inittwice="true" />
-</class>
-
-<class name="drawchoosemodir" extends="basedrawchoose" width="24" height="24">
+<class name="drawchoosemodir" extends="basechooseseicon" width="24" height="24">
 	<attribute name="modi" value="" type="string" />
 	<attribute name="isSelectablemodi" value="false" type="boolean" />
 	<handler name="onclick">
@@ -53,7 +13,7 @@
 	</handler>
 </class>
 
-<class name="drawdoandundo" extends="basedrawchoose" width="24" height="24">
+<class name="drawdoandundo" extends="basechooseseicon" width="24" height="24">
 	<attribute name="doredo" value="true" type="boolean" />
 	<handler name="onclick">
 		if(this.doredo){

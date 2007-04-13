@@ -5,5 +5,6 @@
 	<include href="bluebutton.lzx" />
 	<include href="labelbluebutton.lzx" />
 	<include href="simplelabelbutton.lzx" />
+    <include href="basechooseseicon.lzx" />
 
 </library>

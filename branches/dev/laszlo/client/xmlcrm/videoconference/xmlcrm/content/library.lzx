@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library>
     
-    <include href="basecontentview.lzx" />
+    <include href="contentviews" />
     <include href="conference/" />
+    <include href="settings/" />
 
 </library>

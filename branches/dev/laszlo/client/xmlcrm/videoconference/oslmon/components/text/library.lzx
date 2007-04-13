@@ -4,5 +4,6 @@
 	<include href="borderedinputtext.lzx" />
 	<include href="labeltext.lzx" />
 	<include href="labeltooltip.lzx" />
+    <include href="customedittext.lzx" />
 
 </library>

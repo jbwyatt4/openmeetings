@@ -55,7 +55,7 @@
 	
 	<view resource="messagebox_info_rsc" y="4" x="$once{ parent.width -24 }" >
 		<handler name="onclick">
-			new editwhiteboarddefault(canvas.main_content._content);
+			new editwhiteboarddefault(canvas.main_content._content.inner);
 		</handler>
 		<labeltooltip labelid="66" />
 	</view>		
@@ -64,7 +64,7 @@
 	
 	<simplelabelbutton width="170" labelid="15" y="2" x="24" >
 	    <handler name="onclick">
-	        new uploadwindow(canvas.main_content._content,{x:60,y:60,uploadmodule:canvas.uploadmoduleimg,isOnlyImage:true});
+	        new uploadwindow(canvas.main_content._content.inner,{x:60,y:60,uploadmodule:canvas.uploadmoduleimg,isOnlyImage:true});
 	    </handler>
 	</simplelabelbutton>
 

@@ -16,7 +16,7 @@
     	<text fontsize="11" text="Add files to the list:" />
         <button fontsize="11" text="upload" width="140" height="18">
             <handler name="onclick">
-                new uploadwindow(canvas.main_content._content,{x:60,y:60,uploadmodule:canvas.uploadmoduleppt,isOnlyPpt:true});
+                new uploadwindow(canvas.main_content._content.inner,{x:60,y:60,uploadmodule:canvas.uploadmoduleppt,isOnlyPpt:true});
             </handler>
         </button>
         <text fontsize="11" text="Availible PPT's:" />
