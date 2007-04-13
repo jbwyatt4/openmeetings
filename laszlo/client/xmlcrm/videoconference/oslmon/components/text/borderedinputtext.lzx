@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library>
 
-<class name="borderedinputtext" extends="view">
+<class name="borderedinputtext" extends="view" bgcolor="$once{ canvas.basebgcolorizer }" >
 	<attribute name="width" value="200" type="size" />
 	<attribute name="height" value="18" type="size" />
     <attribute name="tvalue" type="string" value="default"/>
@@ -24,7 +24,6 @@
     	this.field.setEnabled(value);
     </method>    
     <attribute name="maxlength" value="null" type="number"/>         	
-	<attribute name="bgcolor" value="canvas.basebgcolorizer" type="color" />
 	<attribute name="text" type="string" value="" />
 		<!-- -->
   <inputtext name="field" fontsize="10" text="${ this.parent.text }" x="1" y="1" bgcolor="0xFFFFFF" 
