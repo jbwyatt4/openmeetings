@@ -262,7 +262,7 @@
                 Debug.write("sendVarsToMessageWithClient : ",value,value.message,value.message[0],value.client);
                 if (value.message[0]=='applyforMod'){
                     //canvas.currentModApply
-                    if (canvas.streamid!=value.client.streamid) new responseformoderation(canvas.main_content._content,{userobject:value.client,clientId:value.client.streamid});
+                    if (canvas.streamid!=value.client.streamid) new responseformoderation(canvas.main_content._content.inner,{userobject:value.client,clientId:value.client.streamid});
                 } else if (value.message[0]=='applyModAnswer'){
                     canvas.currentModApply.setUserAnswer(value);
                 } else if (value.message[0]=='chat'){
@@ -288,7 +288,7 @@
                 <![CDATA[
                 //The onResult-Handler will be called by the rtmpconnection
                 Debug.write("newPoll : ",value);
-                if(canvas.streamid!=value.createdBy.streamid) new answerpoll(canvas.main_content._content,{createdBy:value.createdBy.username,pollDate:value.pollDate,pollQuestion:value.pollQuestion,pollTypeId:value.pollTypeId,roomPollAnswerList:value.roomPollAnswerList,roomPollId:value.roomPollId,roomScopeName:value.roomScopeName});
+                if(canvas.streamid!=value.createdBy.streamid) new answerpoll(canvas.main_content._content.inner,{createdBy:value.createdBy.username,pollDate:value.pollDate,pollQuestion:value.pollQuestion,pollTypeId:value.pollTypeId,roomPollAnswerList:value.roomPollAnswerList,roomPollId:value.roomPollId,roomScopeName:value.roomScopeName});
                 ]]>
             </handler>   
         </netremotecallhib>
@@ -310,9 +310,9 @@
                 //The onResult-Handler will be called be the rtmpconnection
                 Debug.write("getVotes : ",value);
                 if (value!=null){
-                    new resultpollwin(canvas.main_content._content,{createdBy:value.createdBy.username,pollDate:value.pollDate,pollQuestion:value.pollQuestion,pollTypeId:value.pollTypeId,roomPollAnswerList:value.roomPollAnswerList,roomPollId:value.roomPollId,roomScopeName:value.roomScopeName});
+                    new resultpollwin(canvas.main_content._content.inner,{createdBy:value.createdBy.username,pollDate:value.pollDate,pollQuestion:value.pollQuestion,pollTypeId:value.pollTypeId,roomPollAnswerList:value.roomPollAnswerList,roomPollId:value.roomPollId,roomScopeName:value.roomScopeName});
                 } else {
-                    new messagewin(canvas.main_content._content,{labeliderror:41});
+                    new messagewin(canvas.main_content._content.inner,{labeliderror:41});
                 }
                 ]]>
             </handler>   
@@ -325,9 +325,9 @@
                 if (value==1){
                     parent.getPoll.doCall();
                 } else if (value==-1){
-                    new messagewin(canvas.main_content._content,{labeliderror:31});
+                    new messagewin(canvas.main_content._content.inner,{labeliderror:31});
                 } else if (value==-2){
-                    new messagewin(canvas.main_content._content,{labeliderror:41});
+                    new messagewin(canvas.main_content._content.inner,{labeliderror:41});
                 }
                 ]]>
             </handler>   
@@ -338,7 +338,7 @@
                 //The onResult-Handler will be called be the rtmpconnection
                 Debug.write("checkHasVoted : ",value);
                 if (value!=null){
-                    new answerpoll(canvas.main_content._content,{createdBy:value.createdBy.username,pollDate:value.pollDate,pollQuestion:value.pollQuestion,pollTypeId:value.pollTypeId,roomPollAnswerList:value.roomPollAnswerList,roomPollId:value.roomPollId,roomScopeName:value.roomScopeName});
+                    new answerpoll(canvas.main_content._content.inner,{createdBy:value.createdBy.username,pollDate:value.pollDate,pollQuestion:value.pollQuestion,pollTypeId:value.pollTypeId,roomPollAnswerList:value.roomPollAnswerList,roomPollId:value.roomPollId,roomScopeName:value.roomScopeName});
                 }
                 ]]>
             </handler>   

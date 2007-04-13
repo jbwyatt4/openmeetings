@@ -13,7 +13,7 @@ deprecated
         </handler>
         <handler name="onerror" args="error">
             Debug.write(' E_RROR:', error);
-            new rpcerrordialog(canvas.main_content._content,{errortext:error});
+            new rpcerrordialog(canvas.main_content._content.inner,{errortext:error});
         </handler>  
 		<remotecall funcname="getListOfFiles" >
 			<param><method name="getValue">return canvas.uploadmoduleimg;</method></param>

@@ -12,7 +12,7 @@
     	this.refObj.doreset.doStart();
     </handler>
     
-    <labeltext labelid="114" text="User: " width="200" y="42" resize="false" x="2"/>
+    <labeltext labelid="114" width="200" y="42" resize="false" x="2"/>
         <edittext name="username" y="42" x="120" width="270" text="" />
 
     <labeltext labelid="115" width="200" y="72" resize="false" x="2"/>
@@ -120,13 +120,13 @@
             //The onResult-Handler will be called be the rtmpconnection
             Debug.write("getLanguages: ",value);
 			if (value==-3){
-				new errorwin(canvas.main_content._content,{refObj:this.parent,labelid:102,errorlabelid:103}); 
+				new errorwin(canvas.main_content._content.inner,{refObj:this.parent,labelid:102,errorlabelid:103}); 
 			} else if (value==-4){
-				new errorwin(canvas.main_content._content,{refObj:this.parent,labelid:102,errorlabelid:106}); 
+				new errorwin(canvas.main_content._content.inner,{refObj:this.parent,labelid:102,errorlabelid:106}); 
 			} else if (value==-5){
-				new errorwin(canvas.main_content._content,{refObj:this.parent,labelid:102,errorlabelid:105}); 
+				new errorwin(canvas.main_content._content.inner,{refObj:this.parent,labelid:102,errorlabelid:105}); 
 			} else if (value==-1){
-				new errorwin(canvas.main_content._content,{refObj:this.parent,labelid:102,errorlabelid:107}); 
+				new errorwin(canvas.main_content._content.inner,{refObj:this.parent,labelid:102,errorlabelid:107}); 
 			} else if (value>0){
 				Debug.write("successfully registered");
 			}

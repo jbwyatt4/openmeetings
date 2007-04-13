@@ -104,7 +104,7 @@
 	<view x="$once{ parent.width-20 }" y="2" resource="messagebox_info_rsc" 
 		onmouseover="" onmouseup="" visible="${ ( (!parent.isremote) ? true : false ) }">
 		<handler name="onclick">
-			new changedevice(canvas.main_content._content);
+			new changedevice(canvas.main_content._content.inner);
 		</handler>
 		<labeltooltip inittwice="true" labelid="57" />
 	</view>

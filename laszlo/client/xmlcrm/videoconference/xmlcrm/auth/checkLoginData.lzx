@@ -42,7 +42,7 @@
     <simplelabelbutton labelid="123" name="_register" width="120" x="40" y="196" visible="false">
     	<handler name="onclick">
 	    	this.parent._register.setAttribute('visible',false);
-	    	this.parent.childObj = new registerNewUser(canvas.main_content._content,{refObj:this.parent});    	
+	    	this.parent.childObj = new registerNewUser(canvas.main_content._content.inner,{refObj:this.parent});    	
     		parent.showRegForm.doStart();
     	</handler>
     </simplelabelbutton>          

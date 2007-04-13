@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<library>
+    
+<class name="basecontentsaveview" extends="basecontentview">
+
+    <attribute name="registeredSaveViews" value="null" />
+    
+    <handler name="oninit">
+        this.registeredSaveViews = new Array();
+    </handler>
+
+    <view name="_savecontentbar" layout="axis:x;spacing:2;inset:2" x="2" height="28" width="$once{ parent.width }"
+        bgcolor="$once{ canvas.baseMousecolorizer }">
+        <basechooseseicon resourceN="filesave_rsc" labelid="144" y="2" >
+            <handler name="onclick">
+                this.parent.doSaveEvent();
+            </handler>
+        </basechooseseicon>
+    </view>
+    
+    <method name="registersaveObject" args="obj">
+        this.registeredSaveViews.push(obj);
+    </method>
+    
+    <method name="doSaveEvent">
+        
+    </method>
+
+    <handler name="ontabcontentleave" />
+    
+    <method name="close">
+        this.ontabcontentleave.sendEvent();
+        this.destroy();
+    </method>
+
+</class>
+
+</library>

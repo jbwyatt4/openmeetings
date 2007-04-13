@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<library>
+
+
+<class name="usersettings" extends="basecontentsaveview">
+
+
+    <method name="initValueFields">
+        Debug.write("hib: ",hib.userobject);
+    </method>
+    
+    <labeltext labelid="143" width="200" y="40" resize="false" fontstyle="bold" />
+    
+    <labeltext labelid="132" width="200" y="70" resize="false" x="2"/>
+        <edittext name="username" y="70" x="120" width="270" text="$once{ hib.userobject.login}" />
+
+    <labeltext labelid="133" width="200" y="100" resize="false" x="2"/>
+        <edittext name="userpass1" y="100" password="true" x="120" width="270" text="" />
+        
+    <labeltext labelid="134" width="200" y="130" resize="false" x="2"/>
+        <edittext name="userpass2" y="130" password="true" x="120" width="270" text="" />   
+    
+    <labeltext labelid="135" width="200" y="160" resize="false" x="2"/>
+        <edittext name="firstname" y="160" x="120" width="270" text="$once{ hib.userobject.firstname}" />
+        
+    <labeltext labelid="136" width="200" y="190" resize="false" x="2"/>
+        <edittext name="lastname" y="190" x="120" width="270" text="$once{ hib.userobject.lastname }" />                
+
+    <labeltext labelid="137" width="200" y="220" resize="false" x="2"/>
+        <edittext name="email" y="220" x="120" width="270" text="$once{ hib.userobject.adresses.emails[0].mail.email }" />
+        
+    <labeltext labelid="138" width="200" y="250" resize="false" x="2"/>
+        <edittext name="age" y="250" x="120" width="270" text="$once{ hib.userobject.age }" />
+        
+    <labeltext labelid="139" width="200" y="280" resize="false" x="2"/>
+        <edittext name="street" y="280" x="120" width="220" text="$once{ hib.userobject.adresses.street }" />
+        <edittext name="house" y="280" x="350" width="40" text="$once{ hib.userobject.adresses.additionalname }" />
+        
+    <labeltext labelid="140" width="280" y="310" resize="false" x="2"/>
+        <edittext name="zip" y="310" x="120" width="70" text="$once{ hib.userobject.adresses.zip }" />   
+        <edittext name="town" y="310" x="200" width="190" text="$once{ hib.userobject.adresses.town }" />                        
+         
+    <labeltext labelid="141" width="200" y="340" resize="false" x="2"/>  
+        <combobox name="state" width="270" y="340" x="120" editable="false" fontsize="12">
+            <netremotecallhib name="getStates" funcname="xmlcrm.getStates" remotecontext="$once{ canvas.thishib }" >      
+                <handler name="oninit">
+                    this.doCall();
+                </handler>
+                <handler name="ondata" args="value">
+                    //The onResult-Handler will be called be the rtmpconnection
+                    Debug.write("getLanguages: ",value);
+                    <![CDATA[
+                    for (var i=0;i<value.length;i++){
+                        this.parent.addItem(value[i].name,value[i].state_id);
+                    }
+                    this.parent.selectItem(String(hib.userobject.adresses.states.state_id));
+                    parent.parent.initValueFields();
+                    ]]>
+                </handler>  
+            </netremotecallhib>
+        </combobox> 
+        
+    <labeltext labelid="142" width="200" y="370" resize="false" x="2"/>
+        <edittext name="adress_comment" y="370" x="120" width="270" 
+            height="120" text="$once{ hib.userobject.adresses.comment }" multiline="true"/>
+     
+
+  	<netremotecallhib name="updateUserSmall" funcname="setUserroom" remotecontext="$once{ canvas.thishib }" >   
+    	<netparam name="vars1"><method name="getValue">return hib.connectedroom;</method></netparam>	  	
+		<handler name="ondata" args="value">
+			//The onResult-Handler will be called be the rtmpconnection
+			Debug.write("setUserroom: ",value);
+							
+		</handler>	
+  	</netremotecallhib>
+        
+</class>
+
+</library>

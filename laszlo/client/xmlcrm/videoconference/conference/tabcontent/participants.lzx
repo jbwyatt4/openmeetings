@@ -77,7 +77,7 @@
 	
 	<simplelabelbutton labelid="24" width="140" x="2" y="2" enabled="${ canvas.ismoderator }">
 		<handler name="onclick">
-			new createpollwin(canvas.main_content._content);
+			new createpollwin(canvas.main_content._content.inner);
 		</handler>
 	</simplelabelbutton>
 	

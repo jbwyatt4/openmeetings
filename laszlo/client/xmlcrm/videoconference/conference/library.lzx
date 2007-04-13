@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library>
 
-<!-- 
-	<include href="videoconnection.lzx" />
- -->
+
 	<include href="whiteboard/whiteboard.lzx" /> 
     <include href="remote/" />
     <include href="tabbar/" />

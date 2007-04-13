@@ -24,7 +24,7 @@
     	this.field.setEnabled(value);
     </method>    
     <attribute name="maxlength" value="null" type="number"/>         	
-	<attribute name="bgcolor" value="0xA3B2CC" type="color" />
+	<attribute name="bgcolor" value="canvas.basebgcolorizer" type="color" />
 	<attribute name="text" type="string" value="" />
 		<!-- -->
   <inputtext name="field" fontsize="10" text="${ this.parent.text }" x="1" y="1" bgcolor="0xFFFFFF" 
