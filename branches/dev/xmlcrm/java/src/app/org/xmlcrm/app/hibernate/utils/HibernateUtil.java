@@ -20,14 +20,14 @@ public class HibernateUtil {
 	   */
 	  public static Object createSession() throws Exception{
 	    Session session = (Session)currentSession.get();  
-	    System.out.println(session);
+	    //System.out.println(session);
 	    if(session == null){
-	      System.out.println("No Session Found - Create and give the identity");
+	      //System.out.println("No Session Found - Create and give the identity");
 	      session = getSessionFactory().openSession(); 
 	      currentSession.set(session);
 	      return trueOwner;
 	    }
-	    System.out.println("Session Found - Give a Fake identity");
+	    //System.out.println("Session Found - Give a Fake identity");
 	    return fakeOwner;
 	  }
 	  /**
@@ -37,13 +37,13 @@ public class HibernateUtil {
 	   */
 	  public static void closeSession(Object ownership) throws Exception{
 	    if(((Owner)ownership).identity){
-	      System.out.println("Identity is accepted. Now closing the session");
+	      //System.out.println("Identity is accepted. Now closing the session");
 	      Session session = (Session)currentSession.get();
 	      session.flush();
 	      session.close();
 	      currentSession.set(null);
 	    }else {
-	       System.out.println("Identity is rejected. Ignoring the request");
+	       //System.out.println("Identity is rejected. Ignoring the request");
 	    }
 	  }  
 	  /**

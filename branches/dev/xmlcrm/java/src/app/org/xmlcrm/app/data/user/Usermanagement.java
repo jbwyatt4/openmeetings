@@ -438,8 +438,7 @@ public class Usermanagement {
 			Session session = HibernateUtil.getSession();
 			Transaction tx = session.beginTransaction();
 			String hqlUpdate = "delete userdata where DATA_ID= :DATA_ID";
-			int updatedEntities = session.createQuery(hqlUpdate).setInteger(
-					"DATA_ID", DATA_ID).executeUpdate();
+			int updatedEntities = session.createQuery(hqlUpdate).setInteger("DATA_ID", DATA_ID).executeUpdate();
 			res = "Success" + updatedEntities;
 			tx.commit();
 			HibernateUtil.closeSession(idf);
@@ -543,8 +542,7 @@ public class Usermanagement {
 			Object idf = HibernateUtil.createSession();
 			Session session = HibernateUtil.getSession();
 			Transaction tx = session.beginTransaction();
-			Query query = session
-					.createQuery("select c from Userlevel as c where c.level_id = :level_id AND deleted != :deleted");
+			Query query = session.createQuery("select c from Userlevel as c where c.level_id = :level_id AND deleted != :deleted");
 			query.setLong("level_id", level_id.longValue());
 			query.setString("deleted", "true");
 			for (Iterator it2 = query.iterate(); it2.hasNext();) {
