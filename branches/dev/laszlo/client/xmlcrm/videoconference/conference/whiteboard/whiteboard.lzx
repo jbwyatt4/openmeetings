@@ -284,16 +284,16 @@
 		</handler>
 	</drawcolorpicker>
 
-    <basedrawchoose resourceN="italic" x="400" y="2" visible="${ ( ( this.parent._drawarea.drawmodus=='letter' ) ? true : false ) }" labelid="86" >
+    <basechooseseicon resourceN="italic" x="400" y="2" visible="${ ( ( this.parent._drawarea.drawmodus=='letter' ) ? true : false ) }" labelid="86" >
         <handler name="onclick">
             this.parent._drawarea.setAttribute('italic',!this.parent._drawarea.getAttribute('italic'));
         </handler>
-    </basedrawchoose>
-    <basedrawchoose resourceN="bold" x="426" y="2" visible="${ ( ( this.parent._drawarea.drawmodus=='letter' ) ? true : false ) }" labelid="87" >
+    </basechooseseicon>
+    <basechooseseicon resourceN="bold" x="426" y="2" visible="${ ( ( this.parent._drawarea.drawmodus=='letter' ) ? true : false ) }" labelid="87" >
         <handler name="onclick">
             this.parent._drawarea.setAttribute('bold',!this.parent._drawarea.getAttribute('bold'));
         </handler>
-    </basedrawchoose>    
+    </basechooseseicon>    
 
 	<drawchoosesizeradio x="460" y="6" visible="${ ( ( this.parent._drawarea.drawmodus=='letter' ) ? true : false ) }">
 		<handler name="onselect" args="val">

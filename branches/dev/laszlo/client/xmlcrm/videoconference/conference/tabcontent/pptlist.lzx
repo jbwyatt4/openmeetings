@@ -51,7 +51,7 @@
 		<tooltip text="Add to whiteboard" />
 	</view>
 	
-	<view resource="_downIconRSC" x="$once{ parent.parent.parent.width -54 }" onclick="parent.__LZFileDownload()" >
+	<view resource="filesave_rsc" x="$once{ parent.parent.parent.width -54 }" onclick="parent.__LZFileDownload()" >
 		<tooltip text="Download file" />
 	</view>
 	<view resource="close" x="$once{ parent.parent.parent.width -34 }" onclick="parent.__LZFileDelete()" >

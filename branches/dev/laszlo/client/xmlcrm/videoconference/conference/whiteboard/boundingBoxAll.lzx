@@ -118,12 +118,12 @@
     	//this.whiteboardRef.parent._drawareaalterposition.updateVal(this.objRef.name);
     </method>
 	
-	<basedrawchoose resourceN="deleteIcon" x="${ parent.width-this.width }" y="0" labelid="80" width="22" height="22">
+	<basechooseseicon resourceN="deleteIcon" x="${ parent.width-this.width }" y="0" labelid="80" width="22" height="22">
 		<handler name="onclick">
 			Debug.write("this.parent.objRef.name: ",this.parent.objRef.name);
 			this.parent.whiteboardRef.deleteItemByName(this.parent.objRef.name);
 		</handler>
-	</basedrawchoose>	    
+	</basechooseseicon>	    
     
     <!--- Minimum width for the windowy, default: 60.
           @keywords final -->

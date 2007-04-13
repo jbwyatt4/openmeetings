@@ -59,7 +59,7 @@
 		  		]]>		
 			</method>
 		</button>
-		<basedrawchoose resourceN="close" width="18" height="18"
+		<basechooseseicon resourceN="close" width="18" height="18"
 			x="520" y="2">
 			<handler name="onclick">
 				if ( canvas.htmlframeisloaded){
@@ -67,7 +67,7 @@
 					canvas.setAttribute('htmlframeisloaded',false);
 				}
 			</handler>
-		</basedrawchoose>		
+		</basechooseseicon>		
 		<view y="24" resource="htmlbg" x="2">
 		</view>
 	</view>
