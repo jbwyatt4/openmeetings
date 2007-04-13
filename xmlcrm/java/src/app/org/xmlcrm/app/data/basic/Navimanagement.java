@@ -37,21 +37,14 @@ public class Navimanagement {
 		List ll = this.getMainMenu(User_LEVEL, USER_ID);
 		for (Iterator it2 = ll.iterator(); it2.hasNext();) {
 			Naviglobal navigl = (Naviglobal) it2.next();
-			navigl.setLabel(Fieldmanagment.getInstance()
-					.getFieldByIdAndLanguage(navigl.getFieldvalues_id(),
-							language_id));
+			navigl.setLabel(Fieldmanagment.getInstance().getFieldByIdAndLanguage(navigl.getFieldvalues_id(),language_id));
 			Set s = navigl.getMainnavi();
 			for (Iterator it3 = s.iterator(); it3.hasNext();) {
 				Navimain navim = (Navimain) it3.next();
-				navim.setLabel(Fieldmanagment.getInstance()
-						.getFieldByIdAndLanguage(navim.getFieldvalues_id(),
-								language_id));
-				for (Iterator it4 = navim.getSubnavi().iterator(); it4
-						.hasNext();) {
+				navim.setLabel(Fieldmanagment.getInstance().getFieldByIdAndLanguage(navim.getFieldvalues_id(),language_id));
+				for (Iterator it4 = navim.getSubnavi().iterator(); it4.hasNext();) {
 					Navisub navis = (Navisub) it4.next();
-					navis.setLabel(Fieldmanagment.getInstance()
-							.getFieldByIdAndLanguage(navis.getFieldvalues_id(),
-									language_id));
+					navis.setLabel(Fieldmanagment.getInstance().getFieldByIdAndLanguage(navis.getFieldvalues_id(),language_id));
 				}
 
 			}
@@ -60,27 +53,28 @@ public class Navimanagement {
 	}
 
 	public List getMainMenu(long User_LEVEL, long USER_ID) {
-		List navi = null;
 		try {
-
+			
 			Object idf = HibernateUtil.createSession();
 			Session session = HibernateUtil.getSession();
 			Transaction tx = session.beginTransaction();
 			// Criteria crit = session.createCriteria();
-			Query query = session
-					.createQuery("select c from Naviglobal as c where c.level_id <= :level_id order by c.naviorder");
+			Query query = session.createQuery("select c from Naviglobal as c where c.level_id <= :level_id order by c.naviorder");
 			query.setLong("level_id", User_LEVEL);
-			navi = query.list();
+			List navi = query.list();
 
 			tx.commit();
 			HibernateUtil.closeSession(idf);
-
+			
+			log.error("getMainMenu "+navi.size());
+			
+			return navi;
 		} catch (HibernateException ex) {
 			log.error(ex);
 		} catch (Exception ex2) {
 			log.error(ex2);
 		}
-		return navi;
+		return null;
 	}
 
 	public void addGlobalStructure(String action, int naviorder,

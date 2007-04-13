@@ -12,7 +12,7 @@ public class AddDefaultfield extends TestCase {
 	
 	public void testaddDefaultField(){
 		
-		Fieldmanagment.getInstance().addFourFieldValues("btn_enterroom", 131, "betreten", "enter", "enter", "enter");
+		Fieldmanagment.getInstance().addFourFieldValues("savemenubar_savelabel", 145, "Speichervorgang", "Save", "Save", "Save");
 		
 	}
 

@@ -58,6 +58,7 @@ public class MainService {
 	public List getNavi(String SID, long language_id){
         int User_ID = Sessionmanagement.getInstance().checkSession(SID);
         long User_LEVEL = Usermanagement.getInstance().getUserLevelByID(User_ID);
+        log.error("getNavi: "+User_LEVEL);
 		return Navimanagement.getInstance().getMainMenu(User_LEVEL,User_ID, language_id);
 	}
   

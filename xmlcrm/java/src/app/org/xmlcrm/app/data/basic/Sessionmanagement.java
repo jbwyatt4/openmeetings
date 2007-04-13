@@ -119,6 +119,8 @@ public class Sessionmanagement {
 	 */
 	public void updateUser(String SID, long USER_ID) {
 		try {
+			//log.error("updateUser User: "+USER_ID);
+			
 			Object idf = HibernateUtil.createSession();
 			Session session = HibernateUtil.getSession();
 			Transaction tx = session.beginTransaction();
@@ -137,6 +139,8 @@ public class Sessionmanagement {
 
 			tx.commit();
 			HibernateUtil.closeSession(idf);
+			
+			//log.error("session updated User: "+USER_ID);
 
 		} catch (HibernateException ex) {
 			log.error("[updateUser]: " + ex);

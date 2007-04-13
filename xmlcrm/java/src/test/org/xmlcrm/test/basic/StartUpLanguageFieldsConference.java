@@ -148,6 +148,21 @@ public class StartUpLanguageFieldsConference extends TestCase {
 		Fieldmanagment.getInstance().addFourFieldValues("headconf", 128, "Konferenzräume", "Conference-Rooms", "Conference-Rooms", "Conference-Rooms");
 		Fieldmanagment.getInstance().addFourFieldValues("conf_pub", 129, "öffentlich", "public", "public", "public");
 		Fieldmanagment.getInstance().addFourFieldValues("head_org", 130, "Organisation", "organisation", "organisation", "organisation");
+		Fieldmanagment.getInstance().addFourFieldValues("btn_enterroom", 131, "betreten", "enter", "enter", "enter");
+		Fieldmanagment.getInstance().addFourFieldValues("useralterself_login", 132, "Benutzer", "Login", "Login", "Login");
+		Fieldmanagment.getInstance().addFourFieldValues("useralterself_pass", 133, "Passwort", "Password", "Password", "Password");
+		Fieldmanagment.getInstance().addFourFieldValues("useralterself_passretype", 134, "Widerhole", "Retype", "Retype", "Retype");
+		Fieldmanagment.getInstance().addFourFieldValues("useralterself_firstname", 135, "Vorname", "Firstname", "Firstname", "Firstname");
+		Fieldmanagment.getInstance().addFourFieldValues("useralterself_lastname", 136, "Nachname", "Lastname", "Lastname", "Lastname");
+		Fieldmanagment.getInstance().addFourFieldValues("useralterself_email", 137, "EMail", "Mail", "Mail", "Mail");
+		Fieldmanagment.getInstance().addFourFieldValues("useralterself_birth", 138, "Geburtstag", "Birthday", "Birthday", "Brithday");
+		Fieldmanagment.getInstance().addFourFieldValues("useralterself_streetno", 139, "Straße/Nr.", "Street/No", "Street/No", "Street/No");
+		Fieldmanagment.getInstance().addFourFieldValues("useralterself_town", 140, "PLZ/Stadt", "ZIP/Town", "ZIP/Town", "ZIP/Town");
+		Fieldmanagment.getInstance().addFourFieldValues("useralterself_state", 141, "Land", "Country", "Country", "Country");
+		Fieldmanagment.getInstance().addFourFieldValues("useralterself_adresscomment", 142, "Adressinfo", "Adress-Info", "Adress-Info", "Adress-Info");
+		Fieldmanagment.getInstance().addFourFieldValues("useralterself_header", 143, "Benutzerdaten", "Userdata", "Userdata", "Userdata");
+		Fieldmanagment.getInstance().addFourFieldValues("savemenubar_savelabel", 144, "speichern", "save", "save", "save");
+		Fieldmanagment.getInstance().addFourFieldValues("savemenubar_savelabel", 145, "Speichervorgang", "Save", "Save", "Save");
 		
 		
 	}
