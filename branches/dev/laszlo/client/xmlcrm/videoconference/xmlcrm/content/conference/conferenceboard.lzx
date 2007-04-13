@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library>
 
-<class name="conferenceboard" extends="basecontentview">
-
-	<method name="close">
-	
-	</method>
-	
+<class name="conferenceboard" extends="basecontentview">	
 	
 	<labeltext fontstyle="bold" y="20" labelid="128" />
 	
@@ -33,22 +28,26 @@
 		        </handler>	
 		  	</netremotecallhib>   
 		  	
-		  	<view clip="true" width="480" height="200" name="inn"
+		  	<view width="480" height="200" name="inn"
 		  		bgcolor="$once{ canvas.basebgcolorizer }" >
-		  		<view x="1" y="1" width="478" height="198" name="inn" bgcolor="0xFFFFFF" >
+		  		<view x="1" y="1" width="478" height="198" name="inn" bgcolor="0xFFFFFF" clip="true" >
 		  			<view layout="axis:y;spacing:2" name="inn" />
 		  			<vscrollbar />
 		  		</view>
 		  	</view>
 		</view>
 		
-		<view x="520" y="60" >
-		  	<view clip="true" width="340" height="430" name="inn"
+		<view x="520" y="60" name="detailsarea" >
+            <method name="opendetails">
+                this.inn.animate('height',430, 1000, false);
+            </method>
+		  	<view clip="true" width="340" height="0" name="inn"
 		  		bgcolor="$once{ canvas.basebgcolorizer }" >
 		  		<view x="1" y="1" width="338" height="428" name="inn" bgcolor="0xFFFFFF" >
 		  			<view layout="axis:y;spacing:2" name="inn" />
 		  			<vscrollbar />
 		  		</view>
+                
 		  	</view>
 		</view>
 		
@@ -77,9 +76,9 @@
 		        </handler>	
 		  	</netremotecallhib>   
 		  	
-		  	<view clip="true" width="480" height="200" name="inn"
+		  	<view width="480" height="200" name="inn"
 		  		bgcolor="$once{ canvas.basebgcolorizer }" >
-		  		<view x="1" y="1" width="478" height="198" name="inn" bgcolor="0xFFFFFF" >
+		  		<view x="1" y="1" width="478" height="198" name="inn" bgcolor="0xFFFFFF" clip="true" >
 		  			<view layout="axis:y;spacing:2" name="inn" />
 		  			<vscrollbar />
 		  		</view>
@@ -89,7 +88,9 @@
 		
 </class>
 
-<class name="roomlistItemPublic" extends="view">
+<class name="roomlistItemPublic" extends="view" bgcolor="0xFFFFFF"
+    onmouseover="this.setBGColor(canvas.baseMouseOvercolorizer)"
+    onmouseout="this.setBGColor(0xFFFFFF)" >
 
 	<attribute name="ispublic" value="false" type="boolean" />
 	<attribute name="obj" value="null" />
@@ -101,11 +102,26 @@
 	<labeltext x="120" resize="false" text="$once{ parent.starttime }" width="180" />
 	
 	<handler name="onclick">
-		Debug.write("this. ",this.obj);
+		Debug.write("this. ",this.obj,this.parent.parent.parent.parent.parent);
+        parent.parent.parent.parent.parent.detailsarea.opendetails();
 	</handler>
 	
 	<simplelabelbutton labelid="131" x="300" width="160">
-		
+		<handler name="onclick">
+            if (this.parent.ispublic){
+                hib.connectedroom=parent.obj.name+parent.obj.rooms_id;
+                hib.conferencedomain="public";
+                Debug.write("ispublic");
+            } else {
+                hib.connectedroom=parent.obj.room.name+parent.obj.room.rooms_id;
+                hib.conferencedomain = parent.obj.organisation.name;
+                Debug.write("non ispublic");
+            }
+            Debug.write("hib.conferencedomain: ",hib.conferencedomain);
+            clearStageContent();
+            canvas._mainbgcontentNavi.navi._innercontent.clearAllSubItemLists();  
+            new conference(canvas.main_content._content);          
+        </handler>
 	</simplelabelbutton>
 	
 </class>

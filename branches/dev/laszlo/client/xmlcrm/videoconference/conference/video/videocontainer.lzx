@@ -41,11 +41,20 @@
 		this.currentuserObject.push(canvas.language);
 		
 		
-		this.setUserroom.doCall();
+		this.setUserDomain.doCall();
 	</method>
+    
+        <netremotecallhib name="setUserDomain" funcname="setUserDomain" remotecontext="$once{ canvas.thishib }" >   
+            <netparam name="vars1"><method name="getValue">return hib.conferencedomain;</method></netparam>     
+            <handler name="ondata" args="value">
+                //The onResult-Handler will be called be the rtmpconnection
+                Debug.write("setUserDomain: ",value);
+                parent.setUserroom.doCall();                       
+            </handler>  
+        </netremotecallhib>    
 
 	  	<netremotecallhib name="setUserroom" funcname="setUserroom" remotecontext="$once{ canvas.thishib }" >   
-        	<netparam name="vars1"><method name="getValue">return canvas.connectedroom;</method></netparam>	  	
+        	<netparam name="vars1"><method name="getValue">return hib.connectedroom;</method></netparam>	  	
 			<handler name="ondata" args="value">
 				//The onResult-Handler will be called be the rtmpconnection
 				Debug.write("setUserroom: ",value);

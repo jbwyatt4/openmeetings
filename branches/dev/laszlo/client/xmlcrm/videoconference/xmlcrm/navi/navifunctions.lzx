@@ -10,22 +10,32 @@ function loadContent(obj,parentobj,preparentobj){
 	Debug.write("loadContent: ",obj.action,obj,parentobj,preparentobj);
 	
 	if (obj.action=="conf1"){
+        clearStageContent();
+        obj.parent.parent.clearAllSubItemLists();  
 		new conferenceboard(canvas.main_content._content);
+         
         //new subsubtreeitem(obj.parent.parent._subsubcontent,{name:'room1conf',list:null,depth:3,text:'room1',open:true,isleaf:true,action:'roomconf1'});
         //new subsubtreeitem(obj.parent.parent._subsubcontent,{name:'room2conf',list:null,depth:3,text:'room2',open:true,isleaf:true,action:'roomconf1'});
     } else if (obj.action=="conf2"){
         //new subsubtreeitem(obj.parent.parent._subsubcontent,{name:'room1meet',list:null,depth:3,text:'room1',open:true,isleaf:true,action:'meetconf1'});
         //new subsubtreeitem(obj.parent.parent._subsubcontent,{name:'room1meet',list:null,depth:3,text:'room2',open:true,isleaf:true,action:'meetconf1'});
-    } else if (obj.action=="roomconf1"){
+        clearStageContent();
+        obj.parent.parent.clearAllSubItemLists();        
+    } else if (obj.action=="home"){
         clearStageContent();
         obj.parent.parent.clearAllSubItemLists();
-        canvas.connectedroom = obj.name;
-        new conference(canvas.main_content._content);
-    } else if (obj.action=="meetconf1"){
+    } else if (obj.action=="userself"){
         clearStageContent();
         obj.parent.parent.clearAllSubItemLists();
-        canvas.connectedroom = obj.name;
-        new conference(canvas.main_content._content);
+    } else if (obj.action=="useradmin"){
+        clearStageContent();
+        obj.parent.parent.clearAllSubItemLists();
+    } else if (obj.action=="groupadmin"){
+        clearStageContent();
+        obj.parent.parent.clearAllSubItemLists();
+    } else if (obj.action=="orgadmin"){
+        clearStageContent();
+        obj.parent.parent.clearAllSubItemLists();
     }
 	
 }
