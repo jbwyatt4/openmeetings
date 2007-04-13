@@ -497,9 +497,50 @@ public class Application extends ApplicationAdapter implements
 		return returnVal;
 	}
 	
+	/**
+	 * this is necessary to switch the Domain while connected <b>before</b> entering a room 
+	 * cause users can access public rooms or rooms of their domain
+	 * public rooms have always the domain "public" while private/organisation rooms have 
+	 * their own ones
+	 * @param orgdomain
+	 * @return
+	 */
+	public RoomClient setUserDomain(String orgdomain){
+		try {
+
+			log.error("#*#*#*#*#*#*# setUserDomain orgdomain: "+orgdomain);
+			
+			IConnection current = Red5.getConnectionLocal();
+			log.error("current: "+current.getScope().getName());
+			
+			log.error(current.getClient());
+			log.error(current.getClient().getId());
+			String streamid = current.getClient().getId();
+			RoomClient currentClient = ClientList.get(streamid);
+			log.error("[setUsername] id: "+currentClient.getStreamid());
+			currentClient.setDomain(orgdomain);
+
+			ClientList.put(streamid, currentClient);
+			log.error("##### setUserDomain : " + currentClient.getUsername()+" "+currentClient.getStreamid()); // just a unique number
+			
+			return currentClient;
+		} catch (Exception err){
+			log.error("[setUserDomain]"+err);
+		}
+		return null;
+	}
+	
+	/**
+	 * this is set initial directly after login/loading language
+	 * it will set the domain which is essential for entering a conference-room
+	 * @param userId
+	 * @param username
+	 * @param firstname
+	 * @param lastname
+	 * @param orgdomain
+	 * @return
+	 */
 	public RoomClient setUsername(String userId, String username, String firstname, String lastname, String orgdomain){
-		
-		RoomClient currentClient = null;
 		try {
 
 			log.error("#*#*#*#*#*#*# setUsername userId: "+userId+" username: "+username+" firstname: "+firstname+" lastname: "+lastname);
@@ -510,20 +551,28 @@ public class Application extends ApplicationAdapter implements
 			log.error(current.getClient());
 			log.error(current.getClient().getId());
 			String streamid = current.getClient().getId();
-			currentClient = ClientList.get(streamid);
+			RoomClient currentClient = ClientList.get(streamid);
 			log.error("[setUsername] id: "+currentClient.getStreamid());
 			currentClient.setUsername(username);
 			currentClient.setDomain(orgdomain);
 
 			currentClient.setUserObject(userId, username, firstname, lastname);
 			ClientList.put(streamid, currentClient);
-			log.error("##### setUsername : " + currentClient.getUsername()+" "+currentClient.getStreamid()); // just a unique number		
+			log.error("##### setUsername : " + currentClient.getUsername()+" "+currentClient.getStreamid()); // just a unique number
+			
+			return currentClient;
 		} catch (Exception err){
 			log.error("[setUsername]"+err);
 		}
-		return currentClient;
+		return null;
 	}
 	
+	/**
+	 * this method will be called right at the start of each conference
+	 * it will add the user to the list of users of a room
+	 * @param userroom
+	 * @return
+	 */
 	public RoomClient setUserroom(String userroom){
 		
 		RoomClient currentClient = null;
