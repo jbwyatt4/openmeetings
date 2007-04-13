@@ -190,7 +190,7 @@ containing the VideoViews
     <view x="0" y="40" width="$once{ this.parent.width }" height="$once{ this.parent.height }" name="_content">
         <method name="clearAll">
             for (var eg in this.subviews){
-                Debug.write("this.subviews: ",this.subviews[eg]);
+                Debug.write("clearAll this.subviews: ",this.subviews[eg]);
                 this.subviews[eg].close();                
                 //
             }

@@ -52,8 +52,8 @@
 	  		<netparam><method name="getValue">return parent.String1;</method></netparam>
         	<netparam><method name="getValue">return canvas.uploadmoduleimg;</method></netparam>
 			<netparam><method name="getValue">return parent.String2;</method></netparam>
-			<netparam><method name="getValue">return canvas.connectedroom;</method></netparam>        	
-			<netparam><method name="getValue">return hib.currentdomain;</method></netparam>  
+			<netparam><method name="getValue">return hib.connectedroom;</method></netparam>        	
+			<netparam><method name="getValue">return hib.conferencedomain;</method></netparam>  
 	        <handler name="ondata" args="value">	
 	        	Debug.write("  deleteFile: ",value);     
 		  		var tempSendArray = new Array ();
@@ -104,7 +104,7 @@
 		<![CDATA[
 		Debug.write("Download File ",this);
 
-		var downloadurl = 'http://'+canvas.rmpthostlocal+':'+canvas.red5httpport+'/xmlcrm/DownloadHandler?fileName='+this.filename+'&moduleName='+this.uploadmodul+'&parentPath='+canvas.uploadmoduleimgfolder+'/'+'&room='+canvas.connectedroom+'&domain='+hib.currentdomain+'&sid='+canvas.sessionId
+		var downloadurl = 'http://'+canvas.rmpthostlocal+':'+canvas.red5httpport+'/xmlcrm/DownloadHandler?fileName='+this.filename+'&moduleName='+this.uploadmodul+'&parentPath='+canvas.uploadmoduleimgfolder+'/'+'&room='+hib.connectedroom+'&domain='+hib.conferencedomain+'&sid='+canvas.sessionId
 
         Debug.write(downloadurl);	
 		LzBrowser.loadURL(downloadurl,'_parent');	
@@ -118,7 +118,7 @@
   
 	<method name="__LZFileAddDirect">
 		<![CDATA[
-        var downloadurl = 'http://'+canvas.rmpthostlocal+':'+canvas.red5httpport+'/xmlcrm/DownloadHandler?fileName='+this.filename+'&moduleName='+this.uploadmodul+'&parentPath='+canvas.uploadmoduleimgfolder+'/'+'&room='+canvas.connectedroom+'&domain='+hib.currentdomain+'&sid='+canvas.sessionId
+        var downloadurl = 'http://'+canvas.rmpthostlocal+':'+canvas.red5httpport+'/xmlcrm/DownloadHandler?fileName='+this.filename+'&moduleName='+this.uploadmodul+'&parentPath='+canvas.uploadmoduleimgfolder+'/'+'&room='+hib.connectedroom+'&domain='+hib.conferencedomain+'&sid='+canvas.sessionId
 		Debug.write(downloadurl);        
         Debug.write("x,y: ",x,y);
         _drawarea.parent.clearAreaAndAddImage(downloadurl,0,0);

@@ -3,14 +3,14 @@
     
 <class name="conference" extends="basecontentview">
 
-	<method name="close">
+	<handler name="ontabcontentleave">
 		this.logicalRoomLeave.doCall();
-	</method>
+	</handler>
 	
 	<netremotecallhib name="logicalRoomLeave" funcname="logicalRoomLeave" remotecontext="$once{ canvas.thishib }" >      
     	<handler name="ondata" args="value">
     		Debug.write("logicalRoomLeave: ",value);
-    		this.parent.destroy();
+    		//this.parent.destroy();
     	</handler>
     </netremotecallhib>
 

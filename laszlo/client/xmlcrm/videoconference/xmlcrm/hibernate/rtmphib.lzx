@@ -51,6 +51,12 @@
      <!-- The default Language will be laoded on init  -->
      <attribute name="initlanguageLoaded" value="false" type="boolean" />
      
+     <!-- This domain is the orgdomain used in the video-conference -->
+     <attribute name="conferencedomain" value="public" type="string" />
+     
+     <!-- the room of the current conference -->
+     <attribute name="connectedroom" value="" type="string" />
+     
      <!-- This is the current domain the user has logged-in -->
      <attribute name="currentdomain" value="domain1" type="string" />
      <attribute name="currentdomainObj" value="domain1" type="string" />
@@ -86,7 +92,7 @@
         <handler name="ondata" args="value">
             //The onResult-Handler will be called be the rtmpconnection
             Debug.write("getNavi: ",value);
-            new mainnavi(canvas._mainbgcontentNavi,{naviObject:value});
+            new mainnavi(canvas._mainbgcontentNavi,{name:'navi',naviObject:value});
         </handler>  
     </netremotecallhib>
     

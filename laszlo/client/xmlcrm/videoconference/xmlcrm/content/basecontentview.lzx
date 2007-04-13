@@ -4,6 +4,11 @@
 <class name="basecontentview" extends="view">
 
     <handler name="ontabcontentleave" />
+    
+    <method name="close">
+        this.ontabcontentleave.sendEvent();
+        this.destroy();
+    </method>
 
 </class>
 
