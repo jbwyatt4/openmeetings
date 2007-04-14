@@ -3,27 +3,26 @@
     
 <class name="basecontentsaveview" extends="basecontentview">
 
-    <attribute name="registeredSaveViews" value="null" />
-    
-    <handler name="oninit">
-        this.registeredSaveViews = new Array();
-    </handler>
+    <attribute name="observerViews" value="null" />
 
     <view name="_savecontentbar" layout="axis:x;spacing:2;inset:2" x="2" height="28" width="$once{ parent.width }"
         bgcolor="$once{ canvas.baseMousecolorizer }">
         <basechooseseicon resourceN="filesave_rsc" labelid="144" y="2" >
             <handler name="onclick">
-                this.parent.doSaveEvent();
+                this.parent.parent.doSaveEvent();
             </handler>
         </basechooseseicon>
     </view>
     
-    <method name="registersaveObject" args="obj">
-        this.registeredSaveViews.push(obj);
+    <method name="addViewToObserver" args="obj">
+    	if (this.observerViews==null) this.observerViews = new Array();
+        this.observerViews.push(obj);
     </method>
     
     <method name="doSaveEvent">
-        
+    	if (this.observerViews.length!=0){
+        	new contentsavewindow(canvas.main_content._content.inner,{saveObj:this.observerViews});
+        }
     </method>
 
     <handler name="ontabcontentleave" />

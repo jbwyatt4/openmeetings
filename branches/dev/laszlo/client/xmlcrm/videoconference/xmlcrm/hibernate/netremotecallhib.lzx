@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<library>
+
+<class name="netremotecallhib" extends="netremotecall">
+
+	<!-- this should be the contentsavewindow -->
+	<attribute name="returnObj" value="null" />
+	
+	<!-- if true this object will register at the update-observer -->
+	<attribute name="registerObject" value="false" type="boolean" />
+	
+	<handler name="oninit">
+		if (this.registerObject) this.parent.addViewToObserver(this);
+	</handler>	
+	<method name="doCall">
+		this.call();
+	</method>
+	<handler name="onResult" args="value">
+		<![CDATA[
+		Debug.write("onResult: ",this);
+		if (this.returnObj!=null && Number(value)>0) this.returnObj.processNext();
+		
+		]]>
+	</handler>	
+</class>
+
+</library>

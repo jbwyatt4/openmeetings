@@ -1,15 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library>
 
-<class name="netremotecallhib" extends="netremotecall">
-	<method name="doCall">
-		this.call();
-	</method>
-	<handler name="onResult" args="value">
-		Debug.write("onResult: ",this);
-	</handler>	
-</class>
-
 <rtmpconnection name="thishib" id="hib" debug="true" autoconnect="true"
     src="$once{ this.protocollName+'://'+canvas.rmpthostlocal+':'+this.protocollPort+'/xmlcrm/hibernate' }" >
 
