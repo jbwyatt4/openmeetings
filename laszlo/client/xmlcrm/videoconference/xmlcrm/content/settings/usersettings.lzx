@@ -65,13 +65,29 @@
             height="120" text="$once{ hib.userobject.adresses.comment }" multiline="true"/>
      
 
-  	<netremotecallhib name="updateUserSmall" funcname="setUserroom" remotecontext="$once{ canvas.thishib }" >   
-    	<netparam name="vars1"><method name="getValue">return hib.connectedroom;</method></netparam>	  	
-		<handler name="ondata" args="value">
-			//The onResult-Handler will be called be the rtmpconnection
-			Debug.write("setUserroom: ",value);
-							
-		</handler>	
+  	<netremotecallhib name="updateUserSelfSmall" funcname="userservice.updateUserSelfSmall" 
+  		remotecontext="$once{ canvas.thishib }" registerObject="true" >   
+		<attribute name="sendObject" value="null" />
+		<!-- gets called by Observer -->
+  		<method name="prepareCall">
+  			this.sendObject=new Array();
+  			this.sendObject["login"] = this.parent.username.getText();
+  			this.sendObject["password"] = this.parent.userpass1.getText();
+  			this.sendObject["firstname"] = this.parent.firstname.getText();
+  			this.sendObject["lastname"] = this.parent.lastname.getText();
+  			this.sendObject["email"] = this.parent.email.getText();
+  			this.sendObject["street"] = this.parent.street.getText();
+  			this.sendObject["additionalname"] = this.parent.house.getText();
+  			this.sendObject["zip"] = this.parent.zip.getText();
+  			this.sendObject["town"] = this.parent.town.getText();
+  			this.sendObject["states_id"] = this.parent.state.getValue();
+  			this.sendObject["comment"] = this.parent.adress_comment.getText();
+  			this.sendObject["telefon"] = '';
+  			this.sendObject["fax"] = '';
+  			this.sendObject["mobil"] = '';
+  		</method>
+  		<netparam name="vars1"><method name="getValue"> return canvas.sessionId; </method></netparam>
+    	<netparam name="vars1"><method name="getValue">return parent.sendObject;</method></netparam>	  		
   	</netremotecallhib>
         
 </class>
