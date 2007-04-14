@@ -2,6 +2,7 @@ package org.xmlcrm.app.data.user;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.LinkedList;
 import java.util.Date;
 
 import org.apache.commons.logging.Log;
@@ -14,12 +15,12 @@ import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
 import org.xmlcrm.app.hibernate.beans.user.*;
+import org.xmlcrm.app.hibernate.beans.adresses.Emails;
 import org.xmlcrm.app.hibernate.utils.HibernateUtil;
 import org.xmlcrm.app.data.basic.AuthLevelmanagement;
 import org.xmlcrm.app.data.basic.Configurationmanagement;
 import org.xmlcrm.utils.math.*;
-import org.xmlcrm.utils.mail.*;
-import org.xmlcrm.app.templates.RegisterUserTemplate;
+
 
 import org.xmlcrm.app.data.basic.*;
 
@@ -298,20 +299,31 @@ public class Usermanagement {
 			String login, String password, String lastname, String firstname,
 			int age, String street, String additionalname, String zip, long states_id, String town,
 			int availible, String telefon, String fax,
-			String mobil, long EMailID, String email, String comment) {
+			String mobil, String email, String comment) {
 
 		if (AuthLevelmanagement.getInstance().checkUserLevel(USER_LEVEL) && user_id != 0) {
 			try {
 				Users us = this.getUser(user_id);
 				// Check for duplicates
-				boolean checkName = this.checkUserLogin(login);
-				boolean checkEmail = Emailmanagement.getInstance().checkUserEMail(email);
+				boolean checkName = true;
+				if (!login.equals(us.getLogin())){
+					checkName = this.checkUserLogin(login);
+				}
+				boolean checkEmail = true;
+				Emails mail = null;
+				Iterator it = us.getAdresses().getEmails().iterator();
+				if (it.hasNext()){
+					mail = (Emails) it.next();
+				}				
+				if (!email.equals(mail.getEmail())){
+					checkEmail = Emailmanagement.getInstance().checkUserEMail(email);
+				}
 				if (checkName && checkEmail) {
 					log.info("user_id " + user_id);
 					//Todo implement Phone
 					Adressmanagement.getInstance().updateAdress(us.getAdresses().getAdresses_id(), street, zip, town, states_id, additionalname, comment, fax);
-					Emailmanagement.getInstance().updateUserEmail(EMailID,user_id, email);
-					
+					Emailmanagement.getInstance().updateUserEmail(mail.getMail_id(),user_id, email);
+						
 					log.info("USER " + us.getLastname());
 					Object idf = HibernateUtil.createSession();
 					Session session = HibernateUtil.getSession();
@@ -764,8 +776,12 @@ public class Usermanagement {
 		return null;
 	}
 
+	/**
+	 * check for duplicates
+	 * @param DataValue
+	 * @return
+	 */
 	private boolean checkUserLogin(String DataValue) {
-		boolean UserLevel = true;
 		try {
 			Object idf = HibernateUtil.createSession();
 			Session session = HibernateUtil.getSession();
@@ -774,18 +790,18 @@ public class Usermanagement {
 			query.setString("DataValue", DataValue);
 			query.setString("deleted", "true");
 			int count = query.list().size();
-			if (count != 0) {
-				UserLevel = false;
-			}
+
 			tx.commit();
 			HibernateUtil.closeSession(idf);
-			return UserLevel;
+			if (count != 0) {
+				return false;
+			}			
 		} catch (HibernateException ex) {
 			log.error("[checkUserData]" + ex);
 		} catch (Exception ex2) {
 			log.error("[checkUserData]" + ex2);
 		}
-		return UserLevel;
+		return true;
 	}
 
 	public Users[] getAllFreeUser(long User_LEVEL, int maxRes, long user_id) {

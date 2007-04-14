@@ -70,6 +70,37 @@ public class UserService {
             return null;
         }
     }	
+    
+    /**
+     * updates the user profile, every user can update his own profile
+     * @param SID
+     * @param argObject
+     * @return user_id or NULL or negativ value (error_id)
+     */
+    public Long updateUserSelfSmall(String SID, Object argObject){
+    	try {
+	        int User_ID = Sessionmanagement.getInstance().checkSession(SID);
+	        long User_LEVEL = Usermanagement.getInstance().getUserLevelByID(User_ID);
+	        if(User_LEVEL>1){
+	        	LinkedHashMap argObjectMap = (LinkedHashMap) argObject;
+	            return Usermanagement.getInstance().updateUser(3,new Long(User_ID), new Long(0), 
+	            		argObjectMap.get("login").toString(), argObjectMap.get("password").toString(), 
+	            		argObjectMap.get("lastname").toString(), argObjectMap.get("firstname").toString(), 
+	            		0, argObjectMap.get("street").toString(), 
+	            		argObjectMap.get("additionalname").toString(),
+	            		argObjectMap.get("zip").toString(), Long.valueOf(argObjectMap.get("states_id").toString()).longValue(), 
+	            		argObjectMap.get("town").toString(), 1,
+	            		argObjectMap.get("telefon").toString(),argObjectMap.get("fax").toString(),
+	            		argObjectMap.get("mobil").toString(),argObjectMap.get("email").toString(),
+	            		argObjectMap.get("comment").toString());
+	        } else {
+	            return new Long(-2);
+	        }
+    	} catch (Exception err){
+    		log.error("[updateUserSelfSmall] "+err);
+    		return new Long(-1);
+    	}
+    }
 
     /**
      * @deprecated
@@ -93,10 +124,10 @@ public class UserService {
      * @param comment
      * @return
      */
-    public Long updateUser(String SID, String login, String password, String lastname, String firstname, int age, String street, String additionalname, String Zip, long states_id, String town, int EMailID, String email, int availible, String telefon, String fax, String mobil, String comment){
+    public Long updateUser(String SID, String login, String password, String lastname, String firstname, int age, String street, String additionalname, String Zip, long states_id, String town, String email, int availible, String telefon, String fax, String mobil, String comment){
         int User_ID = Sessionmanagement.getInstance().checkSession(SID);
         //User updates hisself, always allowed
-        return Usermanagement.getInstance().updateUser(3,new Long(User_ID), new Long(0), login, password, lastname, firstname, age, street, additionalname, Zip, states_id, town, availible,telefon,fax,mobil,EMailID,email,comment);
+        return Usermanagement.getInstance().updateUser(3,new Long(User_ID), new Long(0), login, password, lastname, firstname, age, street, additionalname, Zip, states_id, town, availible,telefon,fax,mobil,email,comment);
     }
     
     public Long updateUserByObject(String SID, Object argObject){
@@ -112,8 +143,7 @@ public class UserService {
         		argObjectMap.get("Zip").toString(), Long.valueOf(argObjectMap.get("states_id").toString()).longValue(), 
         		argObjectMap.get("town").toString(), Integer.valueOf(argObjectMap.get("availible").toString()).intValue(),
         		argObjectMap.get("telefon").toString(),argObjectMap.get("fax").toString(),
-        		argObjectMap.get("mobil").toString(),
-        		Long.valueOf(argObjectMap.get("maiL_id").toString()).longValue(),argObjectMap.get("email").toString(),
+        		argObjectMap.get("mobil").toString(),argObjectMap.get("email").toString(),
         		argObjectMap.get("comment").toString());
     	} catch (Exception er){
     		log.error("[updateUserByObject]"+er);
@@ -147,11 +177,11 @@ public class UserService {
      */
     public Long updateUserAdmin(String SID, int user_idClient, int level_id, String login, String password, 
     		String lastname, String firstname, int age, String street, String additionalname, 
-    		String Zip, long states_id, String town, int EMailID, String email, int availible, 
+    		String Zip, long states_id, String town, String email, int availible, 
     		String telefon, String fax, String mobil, String comment){
         int User_ID = Sessionmanagement.getInstance().checkSession(SID);
         long User_LEVEL = Usermanagement.getInstance().getUserLevelByID(User_ID);	
-        return Usermanagement.getInstance().updateUser(User_LEVEL,new Long(user_idClient), new Long(level_id), login, password, lastname, firstname, age, street, additionalname, Zip, states_id, town, availible,telefon,fax,mobil,EMailID,email,comment);
+        return Usermanagement.getInstance().updateUser(User_LEVEL,new Long(user_idClient), new Long(level_id), login, password, lastname, firstname, age, street, additionalname, Zip, states_id, town, availible,telefon,fax,mobil,email,comment);
     } 
     
     
@@ -168,7 +198,7 @@ public class UserService {
 	        		argObjectMap.get("zip").toString(), Long.valueOf(argObjectMap.get("states_id").toString()).longValue(), 
 	        		argObjectMap.get("town").toString(), Integer.valueOf(argObjectMap.get("availible").toString()).intValue(),
 	        		argObjectMap.get("telefon").toString(),argObjectMap.get("fax").toString(),
-	        		argObjectMap.get("mobil").toString(),Long.valueOf(argObjectMap.get("mail_id").toString()).longValue(),
+	        		argObjectMap.get("mobil").toString(),
 	        		argObjectMap.get("email").toString(),argObjectMap.get("comment").toString());
     	} catch (Exception err){
     		log.error("[updateUserObjectAdmin]"+err);
