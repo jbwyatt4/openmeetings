@@ -151,7 +151,7 @@ public class StartUpLanguageFieldsConference extends TestCase {
 		Fieldmanagment.getInstance().addFourFieldValues("btn_enterroom", 131, "betreten", "enter", "enter", "enter");
 		Fieldmanagment.getInstance().addFourFieldValues("useralterself_login", 132, "Benutzer", "Login", "Login", "Login");
 		Fieldmanagment.getInstance().addFourFieldValues("useralterself_pass", 133, "Passwort", "Password", "Password", "Password");
-		Fieldmanagment.getInstance().addFourFieldValues("useralterself_passretype", 134, "Widerhole", "Retype", "Retype", "Retype");
+		Fieldmanagment.getInstance().addFourFieldValues("useralterself_passretype", 134, "Wiederhole", "Retype", "Retype", "Retype");
 		Fieldmanagment.getInstance().addFourFieldValues("useralterself_firstname", 135, "Vorname", "Firstname", "Firstname", "Firstname");
 		Fieldmanagment.getInstance().addFourFieldValues("useralterself_lastname", 136, "Nachname", "Lastname", "Lastname", "Lastname");
 		Fieldmanagment.getInstance().addFourFieldValues("useralterself_email", 137, "EMail", "Mail", "Mail", "Mail");

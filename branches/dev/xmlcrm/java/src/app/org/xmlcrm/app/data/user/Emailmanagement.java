@@ -288,11 +288,12 @@ public class Emailmanagement {
 			query.setString("deleted", "true");
 			int count = query.list().size();
 			log.error("size: " + count);
-			if (count > 0) {
-				return false;
-			}
 			tx.commit();
 			HibernateUtil.closeSession(idf);
+			
+			if (count > 0) {
+				return false;
+			}			
 		} catch (HibernateException ex) {
 			log.error("Error: " + ex);
 		} catch (Exception ex2) {
