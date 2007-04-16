@@ -352,14 +352,14 @@ public class Emailmanagement {
 		return res;
 	}
 
-	public String sendNewPass(long User_ID, String Userpass) {
+	public String sendNewPass(long users_id, String Userpass) {
 		String succ = "invalid email";
 		String mail = "";
 		try {
 			//            Object idf = HibernateUtil.createSession(); 			Session session = HibernateUtil.getSession();
 			//            Transaction tx = session.beginTransaction();
 			//            Query query = session.createQuery("select c from emails as c where c.USER_ID = :USER_ID");
-			//            query.setInteger("USER_ID", User_ID);   
+			//            query.setInteger("USER_ID", users_id);   
 			//            int count = query.list().size();
 			//            Emails[] emails = new Emails[count];
 			//            int k = 0;

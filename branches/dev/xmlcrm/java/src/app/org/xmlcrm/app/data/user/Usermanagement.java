@@ -2,7 +2,6 @@ package org.xmlcrm.app.data.user;
 
 import java.util.Iterator;
 import java.util.List;
-import java.util.LinkedList;
 import java.util.Date;
 
 import org.apache.commons.logging.Log;
@@ -13,12 +12,14 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.criterion.Order;
 
 import org.xmlcrm.app.hibernate.beans.user.*;
 import org.xmlcrm.app.hibernate.beans.adresses.Emails;
 import org.xmlcrm.app.hibernate.utils.HibernateUtil;
 import org.xmlcrm.app.data.basic.AuthLevelmanagement;
 import org.xmlcrm.app.data.basic.Configurationmanagement;
+import org.xmlcrm.app.data.beans.basic.SearchResult;
 import org.xmlcrm.utils.math.*;
 
 
@@ -44,7 +45,73 @@ public class Usermanagement {
 		}
 		return instance;
 	}
+	
+	/**
+	 * query for a list of users
+	 * @param users_id
+	 * @param USER_LEVEL
+	 * @param start
+	 * @param max
+	 * @param orderby
+	 * @return
+	 */
+	public SearchResult getUsersList(long USER_LEVEL, int start, int max, String orderby){
+		try {
+			if (AuthLevelmanagement.getInstance().checkAdminLevel(USER_LEVEL)){
+				SearchResult sresult = new SearchResult();
+				sresult.setObjectName(Users.class.getName());
+				sresult.setRecords(this.selectMaxFromUsers());
+				//get all users
+				Object idf = HibernateUtil.createSession();
+				Session session = HibernateUtil.getSession();
+				Transaction tx = session.beginTransaction();
+				Criteria crit = session.createCriteria(Users.class);
+				crit.add(Restrictions.eq("deleted", "false"));
+				crit.addOrder(Order.asc(orderby));
+				crit.setMaxResults(max);
+				crit.setFirstResult(start);
+				sresult.setResult(crit.list());
+				tx.commit();
+				HibernateUtil.closeSession(idf);
+				return sresult;				
+			}
+		} catch (HibernateException ex) {
+			log.error("[getUsersList] "+ex);
+		} catch (Exception ex2) {
+			log.error("[getUsersList] "+ex2);
+		}
+		return null;
+	}
+	
+	/**
+	 * returns the maximum
+	 * @return
+	 */
+	public Long selectMaxFromUsers(){
+		try {
+			//get all users
+			Object idf = HibernateUtil.createSession();
+			Session session = HibernateUtil.getSession();
+			Transaction tx = session.beginTransaction();
+			Query query = session.createQuery("select max(c.user_id) from Users c where c.deleted = 'false'"); 
+			List ll = query.list();
+			tx.commit();
+			HibernateUtil.closeSession(idf);
+			log.error((Long)ll.get(0));
+			return (Long)ll.get(0);				
+		} catch (HibernateException ex) {
+			log.error("[selectMaxFromUsers] "+ex);
+		} catch (Exception ex2) {
+			log.error("[selectMaxFromUsers] "+ex2);
+		}
+		return null;
+	}
 
+	/**
+	 * 
+	 * @param user_id
+	 * @return
+	 */
 	public Users getUser(long user_id) {
 		Users users = new Users();
 		if (user_id > 0) {
@@ -52,18 +119,13 @@ public class Usermanagement {
 				Object idf = HibernateUtil.createSession();
 				Session session = HibernateUtil.getSession();
 				Transaction tx = session.beginTransaction();
-				Query query = session
-						.createQuery("select c from Users as c where c.user_id = :user_id");
+				Query query = session.createQuery("select c from Users as c where c.user_id = :user_id");
 				query.setLong("user_id", user_id);
 				for (Iterator it2 = query.iterate(); it2.hasNext();) {
 					users = (Users) it2.next();
 				}
 				tx.commit();
 				HibernateUtil.closeSession(idf);
-				//users.setUserlevel(getUserLevel(users.getLevel_id()));
-				// TODO: Adresses Einbinden
-				// users.setEmails(ResHandler.getEmailmanagement().getemails(users.getUser_id()));
-				//users.setUserdata(getUserdata(users.getUser_id()));
 				// TODO: Einbinden der Benutzergruppen
 				// users.setUsergroups(ResHandler.getGroupmanagement().getUserGroups(user_id));
 			} catch (HibernateException ex) {
@@ -77,33 +139,13 @@ public class Usermanagement {
 		return users;
 	}
 
-	public Users searchUserByID(Long user_id, String searchstring,
-			String searchcriteria, int searchMax, int start) {
-		Users users = new Users();
-		try {
-			Object idf = HibernateUtil.createSession();
-			Session session = HibernateUtil.getSession();
-			Criteria crit = session.createCriteria(Users.class);
-			crit.add(Restrictions.ilike(searchcriteria, "%" + searchstring + "%"));
-			crit.setMaxResults(searchMax);
-			crit.add(Restrictions.eq("user_id", user_id));
-			crit.setFirstResult(start);
-			List contactsZ = crit.list();
-			int k = 0;
-			for (Iterator it = contactsZ.iterator(); it.hasNext();) {
-				users = (Users) it.next();
-				k++;
-			}
-			HibernateUtil.closeSession(idf);
-			users.setPassword("empty");
-		} catch (HibernateException ex) {
-			log.error(ex);
-		} catch (Exception ex2) {
-			log.error(ex2);
-		}
-		return users;
-	}
-
+	/**
+	 * login logic
+	 * @param SID
+	 * @param Username
+	 * @param Userpass
+	 * @return
+	 */
 	public Users loginUser(String SID, String Username, String Userpass) {
 		Users usersA = new Users();
 		Long UID = new Long(0);
@@ -179,41 +221,38 @@ public class Usermanagement {
 		}
 	}
 
-	public Users[] searchUser(long USER_LEVEL, String searchstring) {
-		Users users[] = new Users[1];
-		if (USER_LEVEL > 1) {
+	/**
+	 * suche eines Bentzers
+	 * @param USER_LEVEL
+	 * @param searchstring
+	 * @param max
+	 * @param start
+	 * @return
+	 */
+	public List searchUser(long USER_LEVEL, String searchstring, int max, int start) {
+		if (AuthLevelmanagement.getInstance().checkAdminLevel(USER_LEVEL)) {
 			try {
 				Object idf = HibernateUtil.createSession();
 				Session session = HibernateUtil.getSession();
+				Transaction tx = session.beginTransaction();
 				Criteria crit = session.createCriteria(Users.class);
 				crit.add(Restrictions.ilike("lastname", "%" + searchstring + "%"));
-				crit.setMaxResults(10);
+				crit.setMaxResults(max);
+				crit.setFirstResult(start);
 				List contactsZ = crit.list();
-				int count = contactsZ.size();
-				users = new Users[count];
-				int k = 0;
-				for (Iterator it = contactsZ.iterator(); it.hasNext();) {
-					users[k] = (Users) it.next();
-					k++;
-				}
+				tx.commit();
 				HibernateUtil.closeSession(idf);
-				for (int vars = 0; vars < users.length; vars++) {
-					users[vars].setPassword("empty");
-				}
+				return contactsZ;
 			} catch (HibernateException ex) {
 				log.error(ex);
 			} catch (Exception ex2) {
 				log.error(ex2);
 			}
-		} else {
-			users[0] = new Users();
-			users[0].setFirstname("Error: No USER_ID given");
 		}
-		return users;
+		return null;
 	}
 
-	public Userdata[] getUserdata(Long user_id) {
-		Userdata userdata[] = new Userdata[1];
+	public List getUserdata(Long user_id) {
 		if (user_id.longValue() > 0) {
 			try {
 				Object idf = HibernateUtil.createSession();
@@ -222,25 +261,17 @@ public class Usermanagement {
 				Query query = session.createQuery("select c from Userdata as c where c.user_id = :user_id AND deleted != :deleted");
 				query.setLong("user_id", user_id.longValue());
 				query.setString("deleted", "true");
-				int count = query.list().size();
-				userdata = new Userdata[count];
-				int k = 0;
-				for (Iterator it2 = query.iterate(); it2.hasNext();) {
-					userdata[k] = (Userdata) it2.next();
-					k++;
-				}
+				List ll = query.list();
 				tx.commit();
 				HibernateUtil.closeSession(idf);
+				return ll;
 			} catch (HibernateException ex) {
 				log.error(ex);
 			} catch (Exception ex2) {
 				log.error(ex2);
 			}
-		} else {
-			userdata[0] = new Userdata();
-			userdata[0].setComment("Error: No USER_ID given");
 		}
-		return userdata;
+		return null;
 	}
 
 	private int getUserdataNoByKey(Long USER_ID, String DATA_KEY) {
@@ -462,15 +493,15 @@ public class Usermanagement {
 		return res;
 	}
 
-	public String deleteUserdataByUserAndKey(int User_ID, String DATA_KEY) {
+	public String deleteUserdataByUserAndKey(int users_id, String DATA_KEY) {
 		String res = "Fehler beim deleteUserdataByUserAndKey";
 		try {
 			Object idf = HibernateUtil.createSession();
 			Session session = HibernateUtil.getSession();
 			Transaction tx = session.beginTransaction();
-			String hqlUpdate = "delete userdata where User_ID= :User_ID AND DATA_KEY = :DATA_KEY";
+			String hqlUpdate = "delete userdata where users_id= :users_id AND DATA_KEY = :DATA_KEY";
 			int updatedEntities = session.createQuery(hqlUpdate).setInteger(
-					"User_ID", User_ID).setString("DATA_KEY", DATA_KEY)
+					"users_id", users_id).setString("DATA_KEY", DATA_KEY)
 					.executeUpdate();
 			res = "Success" + updatedEntities;
 			tx.commit();
@@ -519,6 +550,7 @@ public class Usermanagement {
 			if (USER_ID != 0) {
 				Users us = this.getUser(USER_ID);
 				us.setDeleted("true");
+				us.setUpdatetime(new Date());
 				// result +=
 				// Groupmanagement.getInstance().deleteUserFromAllGroups(new
 				// Long(USER_ID));
@@ -804,138 +836,6 @@ public class Usermanagement {
 		return true;
 	}
 
-	public Users[] getAllFreeUser(long User_LEVEL, int maxRes, long user_id) {
-		Users users[] = new Users[1];
-		if (User_LEVEL > 0) {
-			try {
-				Object idf = HibernateUtil.createSession();
-				Session session = HibernateUtil.getSession();
-				Transaction tx = session.beginTransaction();
-				Query query = session.createQuery("select c from Users as c where c.availible = :availible AND c.user_id != :user_id AND deleted != :deleted");
-				query.setInteger("availible", 0);
-				query.setLong("user_id", user_id);
-				query.setString("deleted", "true");
-				query.setMaxResults(maxRes);
-				int count = query.list().size();
-				users = new Users[count];
-				int k = 0;
-				for (Iterator it2 = query.iterate(); it2.hasNext();) {
-					users[k] = (Users) it2.next();
-					k++;
-				}
-				tx.commit();
-				HibernateUtil.closeSession(idf);
-				for (int vars = 0; vars < users.length; vars++) {
-					users[vars].setUserlevel(getUserLevel(users[vars].getLevel_id()));
-					// EMail management ist Adressen
-					// users[vars].setEmails(ResHandler.getEmailmanagement().getemails(users[vars].get()));
-					users[vars].setUserdata(getUserdata(users[vars].getLevel_id()));
-					users[vars].setPassword("empty");
-				}
-			} catch (HibernateException ex) {
-				log.error("[getAllFreeUser]" + ex);
-			} catch (Exception ex2) {
-				log.error("[getAllFreeUser]" + ex2);
-			}
-		} else {
-			users[0] = new Users();
-			users[0].setFirstname("Error: No USER_ID given");
-		}
-		return users;
-	}
-
-	public Users getFreeUserByID(long User_LEVEL, long USER_ID, int myUser_ID) {
-		Users users = new Users();
-		if (User_LEVEL > 0) {
-			try {
-				Object idf = HibernateUtil.createSession();
-				Session session = HibernateUtil.getSession();
-				Transaction tx = session.beginTransaction();
-				Query query = session.createQuery("select c from Users as c where c.user_id = :user_id AND c.availible = :availible AND c.user_id != :myUser_ID AND deleted != :deleted");
-				query.setInteger("availible", 0);
-				query.setLong("user_id", USER_ID);
-				query.setLong("myUser_ID", myUser_ID);
-				query.setString("deleted", "true");
-
-				for (Iterator it2 = query.iterate(); it2.hasNext();) {
-					users = (Users) it2.next();
-				}
-				tx.commit();
-				HibernateUtil.closeSession(idf);
-				users.setUserlevel(getUserLevel(users.getLevel_id()));
-				// TODOD: EMailmanagement in Adressen
-				// users.setEmails(ResHandler.getEmailmanagement().getemails(users.getUSER_ID()));
-				users.setUserdata(getUserdata(users.getUser_id()));
-				users.setPassword("empty");
-			} catch (HibernateException ex) {
-				log.error("[getFreeUserByID]" + ex);
-			} catch (Exception ex2) {
-				log.error("[getFreeUserByID]" + ex2);
-			}
-		} else {
-			users.setFirstname("Error: No USER_ID given");
-		}
-		return users;
-	}
-
-	public List getusersAdmin(long USER_LEVEL, int start, int maxRes) {
-		List users = null;
-		if (AuthLevelmanagement.getInstance().checkModLevel(USER_LEVEL)) {
-			try {
-				Object idf = HibernateUtil.createSession();
-				Session session = HibernateUtil.getSession();
-				Transaction tx = session.beginTransaction();
-				Query query = session.createQuery("from Users WHERE deleted != :deleted");
-				query.setString("deleted", "true");
-				query.setMaxResults(maxRes);
-				query.setFirstResult(start);
-				users = query.list();
-
-				tx.commit();
-				HibernateUtil.closeSession(idf);
-
-			} catch (HibernateException ex) {
-				log.error("[getusersAdmin]" + ex);
-			} catch (Exception ex2) {
-				log.error("[getusersAdmin]" + ex2);
-			}
-		} else {
-			log.debug("Error: Permission denied in getusersAdmin");
-		}
-		return users;
-	}
-
-	public Users getUserForGroup(int USER_ID) {
-		Users users = new Users();
-		if (USER_ID > 0) {
-			try {
-				Object idf = HibernateUtil.createSession();
-				Session session = HibernateUtil.getSession();
-				Transaction tx = session.beginTransaction();
-				Query query = session.createQuery("select c from users as c where c.USER_ID = :USER_ID AND c.availible = :availible AND deleted != :deleted");
-				query.setInteger("availible", 0);
-				query.setInteger("USER_ID", USER_ID);
-				query.setString("deleted", "true");
-				for (Iterator it2 = query.iterate(); it2.hasNext();) {
-					users = (Users) it2.next();
-				}
-				tx.commit();
-				HibernateUtil.closeSession(idf);
-				users.setUserlevel(getUserLevel(users.getLevel_id()));
-				// TODO: EMAILmanagment in Adressen
-				// users.setEmails(ResHandler.getEmailmanagement().getemails(users.getUSER_ID()));
-				users.setUserdata(getUserdata(users.getUser_id()));
-			} catch (HibernateException ex) {
-				log.error("[getUserForGroup]" + ex);
-			} catch (Exception ex2) {
-				log.error("[getUserForGroup]" + ex2);
-			}
-		} else {
-			users.setFirstname("Error: No USER_ID given");
-		}
-		return users;
-	}
-
 	public void addUserLevel(String description, int myStatus) {
 		try {
 			Object idf = HibernateUtil.createSession();
@@ -950,9 +850,9 @@ public class Usermanagement {
 			tx.commit();
 			HibernateUtil.closeSession(idf);
 		} catch (HibernateException ex) {
-			log.error("[getUserForGroup]" + ex);
+			log.error("[addUserLevel]" + ex);
 		} catch (Exception ex2) {
-			log.error("[getUserForGroup]" + ex2);
+			log.error("[addUserLevel]" + ex2);
 		}
 	}
 

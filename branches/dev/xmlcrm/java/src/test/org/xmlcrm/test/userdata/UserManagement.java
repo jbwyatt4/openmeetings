@@ -2,13 +2,19 @@ package org.xmlcrm.test.userdata;
 
 import java.util.List;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.xmlcrm.app.hibernate.beans.basic.Sessiondata;
+import org.xmlcrm.app.data.beans.basic.SearchResult;
 import org.xmlcrm.app.hibernate.beans.user.Users;
 import org.xmlcrm.app.remote.MainService;
+import org.xmlcrm.app.remote.UserService;
 
 import junit.framework.TestCase;
 
 public class UserManagement extends TestCase {
+	
+	private static final Log log = LogFactory.getLog(UserManagement.class);	
 
 	public UserManagement(String testname){
 		super(testname);
@@ -17,15 +23,17 @@ public class UserManagement extends TestCase {
 	public void testUsers(){
 		
 		MainService mService = new MainService();
+		UserService uService = new UserService();
 		Sessiondata sessionData = mService.getsessiondata();
 		
-		Users us = mService.loginUser(sessionData.getSession_id(), "swagner", "67810");
+		Users us = mService.loginUser(sessionData.getSession_id(), "swagner", "test");
 		
-		List users = mService.getAllUsers(sessionData.getSession_id(), 0, 100);
+		SearchResult users = uService.getUserList(sessionData.getSession_id(), 0, 100, "firstname");
 		
-		System.out.println("Number of Users: "+users.size());
+		log.error("Number of Users 1: "+users.getResult().size());
+		log.error("Number of Users 2: "+users.getRecords());
 		
-		Users users2 = (Users) users.get(5);
+		Users users2 = (Users) users.getResult().get(5);
 		
 		System.out.println("User 2: "+users2.getLogin());
 		

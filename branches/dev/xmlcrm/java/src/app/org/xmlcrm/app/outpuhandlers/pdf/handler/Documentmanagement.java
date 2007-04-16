@@ -29,7 +29,6 @@ import com.lowagie.text.pdf.BaseFont;
 
 import org.xmlcrm.app.outpuhandlers.pdf.pdfobjects.pdfobject;
 import org.xmlcrm.app.outpuhandlers.utils.HtmlHandler;
-import org.xmlcrm.app.remote.ResHandler;
 import org.xmlcrm.utils.math.Calender;
 
 import com.lowagie.text.Chunk;
@@ -37,12 +36,12 @@ import com.lowagie.text.Chunk;
 public class Documentmanagement {
     XMLReader xmlReader = null;
     private Calender CalenderI;
-    private ResHandler ResHandler;   
+ 
     private HtmlHandler HtmlHandler;
-    public Documentmanagement(ResHandler handler) {
+    public Documentmanagement() {
         super();
         // TODO Auto-generated constructor stub
-        ResHandler = handler;
+
         CalenderI = new Calender();
         HtmlHandler = new HtmlHandler(this);
         try {

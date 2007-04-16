@@ -9,24 +9,16 @@ import org.hibernate.Transaction;
 
 import org.xmlcrm.app.hibernate.beans.contact.contactfreigabe;
 import org.xmlcrm.app.hibernate.utils.HibernateUtil;
-import org.xmlcrm.app.remote.ResHandler;
 import org.xmlcrm.utils.math.Calender;
 
 public class Freigabemanagement {
-
-	private ResHandler ResHandler;
-
-	private Calender CalenderI;
-
 	/**
 	 * 
 	 * @param handler
 	 */
-	public Freigabemanagement(ResHandler handler) {
+	public Freigabemanagement() {
 		super();
 		// TODO Auto-generated constructor stub
-		ResHandler = handler;
-		CalenderI = new Calender();
 	}
 
 	public contactfreigabe[] getFreigabeDecr(long USER_LEVEL) {
