@@ -9,19 +9,15 @@ import org.hibernate.Transaction;
 
 import org.xmlcrm.app.hibernate.beans.shop.zahlungsarten;
 import org.xmlcrm.app.hibernate.utils.HibernateUtil;
-import org.xmlcrm.app.remote.ResHandler;
 import org.xmlcrm.utils.math.Calender;
 
 public class Zahlungsmanagement {
-	private ResHandler ResHandler;
 
 	private Calender CalenderI;
 
-	public Zahlungsmanagement(ResHandler handler) {
+	public Zahlungsmanagement() {
 		super();
 		// TODO Auto-generated constructor stub
-		ResHandler = handler;
-		CalenderI = new Calender();
 	}
 
 	public zahlungsarten getZahlungsartenByID(int ZAHLUNGS_ID) {

@@ -27,11 +27,6 @@ public class MainService {
 	
 	private static final Log log = LogFactory.getLog(MainService.class);
 	
-	private ResHandler ResHandler;
-	public MainService(){
-		ResHandler = new ResHandler();
-	}
-	
 	/**
 	 * get a List of all availible Languages
 	 * @return
@@ -56,10 +51,10 @@ public class MainService {
 	 * @return
 	 */
 	public List getNavi(String SID, long language_id){
-        int User_ID = Sessionmanagement.getInstance().checkSession(SID);
-        long User_LEVEL = Usermanagement.getInstance().getUserLevelByID(User_ID);
+        int users_id = Sessionmanagement.getInstance().checkSession(SID);
+        long User_LEVEL = Usermanagement.getInstance().getUserLevelByID(users_id);
         log.error("getNavi: "+User_LEVEL);
-		return Navimanagement.getInstance().getMainMenu(User_LEVEL,User_ID, language_id);
+		return Navimanagement.getInstance().getMainMenu(User_LEVEL,users_id, language_id);
 	}
   
 	/**
@@ -70,8 +65,8 @@ public class MainService {
 	 */
 	public Users getUser(String SID,int USER_ID){
 		Users users = new Users();
-		int User_ID = Sessionmanagement.getInstance().checkSession(SID);
-		long User_LEVEL = Usermanagement.getInstance().getUserLevelByID(User_ID);
+		int users_id = Sessionmanagement.getInstance().checkSession(SID);
+		long User_LEVEL = Usermanagement.getInstance().getUserLevelByID(users_id);
     	if(User_LEVEL>2){
     		users = Usermanagement.getInstance().getUser(new Long(USER_ID));
     	} else {
@@ -129,8 +124,8 @@ public class MainService {
      * @return string value if completed
      */
     public String logoutUser(String SID){
-    	int User_ID = Sessionmanagement.getInstance().checkSession(SID);
-    	return Usermanagement.getInstance().logout(SID,User_ID);
+    	int users_id = Sessionmanagement.getInstance().checkSession(SID);
+    	return Usermanagement.getInstance().logout(SID,users_id);
     }
     
     /**
@@ -226,8 +221,8 @@ public class MainService {
 			String login, String Userpass, String lastname, String firstname, 
 			String email, int age, String street, String additionalname, String fax, 
 			String zip, long states_id, String town, long language_id){
-    	int User_ID = Sessionmanagement.getInstance().checkSession(SID);
-    	long User_LEVEL = Usermanagement.getInstance().getUserLevelByID(User_ID);	
+    	int users_id = Sessionmanagement.getInstance().checkSession(SID);
+    	long User_LEVEL = Usermanagement.getInstance().getUserLevelByID(users_id);	
     	return Usermanagement.getInstance().registerUserInit(User_LEVEL,level_id, availible, status, 
 				login, Userpass, lastname, firstname, email, age, street, additionalname, fax, 
 				zip, states_id, town, language_id);
@@ -237,11 +232,11 @@ public class MainService {
 	
     public String deleteUserIDSelf(String SID){
     	String ret = "Deleting User Self";
-    	int User_ID = Sessionmanagement.getInstance().checkSession(SID);
-    	long User_LEVEL = Usermanagement.getInstance().getUserLevelByID(User_ID);
+    	int users_id = Sessionmanagement.getInstance().checkSession(SID);
+    	long User_LEVEL = Usermanagement.getInstance().getUserLevelByID(users_id);
     	if(User_LEVEL>=1){
-    		ret = Usermanagement.getInstance().logout(SID,User_ID);
-    		ret = Usermanagement.getInstance().deleteUserID(User_ID);
+    		ret = Usermanagement.getInstance().logout(SID,users_id);
+    		ret = Usermanagement.getInstance().deleteUserID(users_id);
     	} else {
     		ret = "Nur als registrierter Benutzer kann man seinen Account lšschen";
     	}
@@ -252,7 +247,7 @@ public class MainService {
     
     /*
      * Shopsystem
-     */
+     
     public zahlungsarten[] getZahlungsarten(String SID){
     	return ResHandler.getZahlungsarten(SID);
     }
@@ -289,18 +284,18 @@ public class MainService {
     public String deleteWarenkorb(String SID, int WAREN_ID){
     	return ResHandler.deleteWarenkorb(SID,WAREN_ID);
     }
-    
+    */
 
     
 /*
  * UserGroup Management Handlers
- */    
+  
     public Usergroups[] getAllGroups(String SID){
         return ResHandler.getAllGroups(SID);
     }
     public List getAllUsers(String SID,int start, int max){
-        int User_ID = Sessionmanagement.getInstance().checkSession(SID);
-        long User_Level = Usermanagement.getInstance().getUserLevelByID(User_ID); 
+        int users_id = Sessionmanagement.getInstance().checkSession(SID);
+        long User_Level = Usermanagement.getInstance().getUserLevelByID(users_id); 
         return Usermanagement.getInstance().getusersAdmin(User_Level,start,max);
     }    
     public Users_Usergroups getSingleGroup(String SID,int GROUP_ID){
@@ -327,6 +322,6 @@ public class MainService {
     public String deleteGroup(String SID,int GROUP_ID){
         return ResHandler.deleteGroup(SID,GROUP_ID);
     } 
-    
+ */    
     
 }

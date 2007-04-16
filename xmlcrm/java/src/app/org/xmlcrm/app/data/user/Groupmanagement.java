@@ -13,7 +13,6 @@ import org.hibernate.Transaction;
 import org.xmlcrm.app.hibernate.beans.user.Users_Usergroups;
 import org.xmlcrm.app.hibernate.beans.user.Usergroups;
 import org.xmlcrm.app.hibernate.utils.HibernateUtil;
-import org.xmlcrm.app.remote.ResHandler;
 import org.xmlcrm.utils.math.Calender;
 
 /**

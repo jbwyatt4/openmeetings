@@ -443,7 +443,7 @@ public class Roommanagement {
 	 * @param comment
 	 * @return
 	 */
-	public Rooms updateRoom(long USER_LEVEL, long rooms_id, long roomtypes_id, String name, boolean ispublic, String comment){
+	public Long updateRoom(long USER_LEVEL, long rooms_id, long roomtypes_id, String name, boolean ispublic, String comment){
 		try {
 			if (AuthLevelmanagement.getInstance().checkAdminLevel(USER_LEVEL)){
 				Rooms r = this.getRoomById(rooms_id);
@@ -458,6 +458,7 @@ public class Roommanagement {
 				session.update(r);
 				tx.commit();
 				HibernateUtil.closeSession(idf);
+				return r.getRooms_id();
 			}
 		} catch (HibernateException ex) {
 			log.error("[updateRoom] "+ex);

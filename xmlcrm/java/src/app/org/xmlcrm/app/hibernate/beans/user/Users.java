@@ -35,7 +35,7 @@ public class Users {
 	private Adresses adresses;
 	
 	private Userlevel userlevel;
-    private Userdata userdata[];
+
 	private Userdata rechnungsaddressen;
 	private Userdata lieferadressen;
     private Usergroups[] usergroups; 
@@ -103,7 +103,7 @@ public class Users {
 	public void setFirstname(String firstname) {
 		this.firstname = firstname;
 	}
-    
+
     /**
      * @hibernate.property
      *  column="lastlogin"
@@ -238,12 +238,8 @@ public class Users {
 	public void setUser_id(Long user_id) {
 		this.user_id = user_id;
 	}
-	public Userdata[] getUserdata() {
-		return userdata;
-	}
-	public void setUserdata(Userdata[] userdata) {
-		this.userdata = userdata;
-	}
+
+	
 	public Usergroups[] getUsergroups() {
 		return usergroups;
 	}
@@ -338,5 +334,6 @@ public class Users {
 	public void setOrganisation_users(Set organisation_users) {
 		this.organisation_users = organisation_users;
 	}
+	
 	
 }

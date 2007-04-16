@@ -21,7 +21,6 @@ import org.xmlcrm.app.hibernate.beans.contact.Contactgroups;
 import org.xmlcrm.app.hibernate.beans.contact.Contacts;
 import org.xmlcrm.app.hibernate.beans.user.Users;
 import org.xmlcrm.app.hibernate.utils.HibernateUtil;
-import org.xmlcrm.app.remote.ResHandler;
 import org.xmlcrm.utils.math.Calender;
 
 import org.xmlcrm.app.data.user.Emailmanagement;

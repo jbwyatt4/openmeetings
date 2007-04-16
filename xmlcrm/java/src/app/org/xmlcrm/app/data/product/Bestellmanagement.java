@@ -10,19 +10,13 @@ import org.hibernate.Transaction;
 import org.xmlcrm.app.hibernate.beans.shop.transstatus;
 import org.xmlcrm.app.hibernate.beans.user.Userwaren;
 import org.xmlcrm.app.hibernate.utils.HibernateUtil;
-import org.xmlcrm.app.remote.ResHandler;
 import org.xmlcrm.utils.math.Calender;
 
 public class Bestellmanagement {
-	private ResHandler ResHandler;
 
-	private Calender CalenderI;
-
-	public Bestellmanagement(ResHandler handler) {
+	public Bestellmanagement() {
 		super();
 		// TODO Auto-generated constructor stub
-		ResHandler = handler;
-		CalenderI = new Calender();
 	}
 
 	public boolean checkUserLevel(long USER_LEVEL) {
@@ -73,21 +67,21 @@ public class Bestellmanagement {
 			int LIEFER_ID, int amount, String comment) {
 		String result = "Fehler im Bestellvorgang";
 		try {
-			Object idf = HibernateUtil.createSession();
-			Session session = HibernateUtil.getSession();
-			Transaction tx = session.beginTransaction();
-			String hqlUpdate = "update userwaren set updatetime= :updatetime, status= :status, ZAHLUNGS_ID= :ZAHLUNGS_ID, LIEFER_ID= :LIEFER_ID, comment= :comment, menge= :menge where WAREN_ID = :WAREN_ID";
-			int updatedEntities = session.createQuery(hqlUpdate).setLong(
-					"updatetime", CalenderI.getTimeStampMili()).setInteger(
-					"status", status).setInteger("ZAHLUNGS_ID", ZAHLUNGS_ID)
-					.setInteger("LIEFER_ID", LIEFER_ID).setString("comment",
-							comment).setInteger("menge", amount).setInteger(
-							"WAREN_ID", WAREN_ID).executeUpdate();
-			//session.flush();
-
-			tx.commit();
-			HibernateUtil.closeSession(idf);
-			result = "Erfolgreich" + updatedEntities;
+//			Object idf = HibernateUtil.createSession();
+//			Session session = HibernateUtil.getSession();
+//			Transaction tx = session.beginTransaction();
+//			String hqlUpdate = "update userwaren set updatetime= :updatetime, status= :status, ZAHLUNGS_ID= :ZAHLUNGS_ID, LIEFER_ID= :LIEFER_ID, comment= :comment, menge= :menge where WAREN_ID = :WAREN_ID";
+//			int updatedEntities = session.createQuery(hqlUpdate).setLong(
+//					"updatetime", CalenderI.getTimeStampMili()).setInteger(
+//					"status", status).setInteger("ZAHLUNGS_ID", ZAHLUNGS_ID)
+//					.setInteger("LIEFER_ID", LIEFER_ID).setString("comment",
+//							comment).setInteger("menge", amount).setInteger(
+//							"WAREN_ID", WAREN_ID).executeUpdate();
+//			//session.flush();
+//
+//			tx.commit();
+//			HibernateUtil.closeSession(idf);
+//			result = "Erfolgreich" + updatedEntities;
 		} catch (HibernateException ex) {
 			result = "Error: " + ex;
 		} catch (Exception ex2) {

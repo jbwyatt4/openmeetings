@@ -11,34 +11,23 @@ import org.hibernate.Transaction;
 import org.xmlcrm.app.hibernate.beans.termine.*;
 import org.xmlcrm.app.hibernate.utils.HibernateUtil;
 import org.xmlcrm.app.outpuhandlers.pdf.pdfobjects.pdfobject;
-import org.xmlcrm.app.remote.ResHandler;
 import org.xmlcrm.utils.math.Calender;
 
 import org.hibernate.type.*;
 import org.hibernate.*;
 
 public class Terminmanagement {
-	private ResHandler ResHandler;
 
 	private TerminVisualManagement TerminVisualManagement;
 
 	//private TerminVisualManagement TerminVisualManagement;
 	private Calender CalenderI;
 
-	public Terminmanagement(ResHandler handler) {
+	public Terminmanagement() {
 		super();
 		// TODO Auto-generated constructor stub
-		ResHandler = handler;
 		CalenderI = new Calender();
 		TerminVisualManagement = new TerminVisualManagement(this);
-	}
-
-	public ResHandler getResHandler() {
-		return ResHandler;
-	}
-
-	public void setResHandler(ResHandler resHandler) {
-		ResHandler = resHandler;
 	}
 
 	public TerminVisualManagement getTerminVisualManagement() {

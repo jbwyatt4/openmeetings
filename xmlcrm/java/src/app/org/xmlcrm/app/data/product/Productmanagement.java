@@ -15,15 +15,13 @@ import org.xmlcrm.app.hibernate.beans.contact.Contacts;
 import org.xmlcrm.app.hibernate.beans.shop.products;
 import org.xmlcrm.app.hibernate.beans.user.Users;
 import org.xmlcrm.app.hibernate.utils.HibernateUtil;
-import org.xmlcrm.app.remote.ResHandler;
 
 public class Productmanagement {
-	private ResHandler ResHandler;
 
-	public Productmanagement(ResHandler handler) {
+
+	public Productmanagement() {
 		super();
 		// TODO Auto-generated constructor stub
-		ResHandler = handler;
 	}
 
 	public products[] getProductsByCat() {

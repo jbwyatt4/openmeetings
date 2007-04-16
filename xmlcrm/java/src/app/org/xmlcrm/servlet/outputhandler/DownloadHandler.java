@@ -41,8 +41,8 @@ public class DownloadHandler extends HttpServlet {
 			}
 			System.out.println("sid: " + sid);
 
-			int User_ID = Sessionmanagement.getInstance().checkSession(sid);
-			long User_LEVEL = Usermanagement.getInstance().getUserLevelByID(User_ID);
+			int users_id = Sessionmanagement.getInstance().checkSession(sid);
+			long User_LEVEL = Usermanagement.getInstance().getUserLevelByID(users_id);
 
 			if (User_LEVEL > 0) {
 				String room = httpServletRequest.getParameter("room");

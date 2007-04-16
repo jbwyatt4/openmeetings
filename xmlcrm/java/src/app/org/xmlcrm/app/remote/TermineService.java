@@ -7,13 +7,10 @@ import org.xmlcrm.app.hibernate.beans.termine.Terminevisual;
 import org.xmlcrm.app.hibernate.beans.termine.Terminevisualmonth;
 
 public class TermineService {
-	private ResHandler ResHandler;
-	public TermineService(){
-		ResHandler = new ResHandler();
-	}	
+
     /**
      * Terminmanagement
-     */
+     
     public Terminevisual getUserTermineDay(String SID,int syear,int smonth,int sday){
     	return ResHandler.getUserTermineDay(SID,syear,smonth,sday);
     }
@@ -80,5 +77,5 @@ public class TermineService {
     public String deleteUserItem(String SID,int UID){
         return ResHandler.deleteUserItem(SID,UID);
     }  
-    
+    */
 }

@@ -1,20 +1,18 @@
 package org.xmlcrm.app.remote;
 
+import org.xmlcrm.app.data.contact.Contactmanagement;
 import org.xmlcrm.app.hibernate.beans.contact.congroups;
 import org.xmlcrm.app.hibernate.beans.contact.contactfreigabe;
 import org.xmlcrm.app.hibernate.beans.contact.Contacts;
 import org.xmlcrm.app.hibernate.beans.user.Users;
 
 public class ContactService {
-	private ResHandler ResHandler;
-	public ContactService(){
-		ResHandler = new ResHandler();
-	}	
+	
 	/**
 	 * Contact-Handlers
-	 */
+	 
 	    public Contacts[] getUsercontacts(String SID,int maxRes){
-	    	return ResHandler.getUsercontacts( SID,maxRes);
+	    	return Contactmanagement.getInstance().getUsercontacts( SID,maxRes);
 	    }
 	    public Users[] getAllFreeUser(String SID,int maxRes){
 	    	return ResHandler.getAllFreeUser(SID,maxRes);
@@ -76,5 +74,6 @@ public class ContactService {
 	    
 	    public contactfreigabe[] getFreigabeDecr(String SID){
 	        return ResHandler.getFreigabeDecr(SID);
-	    } 
+	    }
+	*/ 
 }
