@@ -21,24 +21,10 @@ public class Termine {
 	private Long status_id;
 	private Date starttime;
 	private Date  updatetime;
-	
-    private String starthour;
-    private String startmin;
-    private String startday;
-    private String startmonth;
-    private String startyear;
-    private String endhour;
-    private String endmin;
-    private String endday;
-    private String endmonth;
-    private String endyear;   
-    private String durationhour;
-    private String durationminutes;
-    private int duration; 
     private String deleted;
 	
     private Users owner_user;
-    private int visualrowlength;
+
     private Terminestatus termine_status;
 
 	public Termine() {
@@ -69,55 +55,6 @@ public class Termine {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
-	public int getDuration() {
-		return duration;
-	}
-	public void setDuration(int duration) {
-		this.duration = duration;
-	}
-	
-	public String getDurationhour() {
-		return durationhour;
-	}
-	public void setDurationhour(String durationhour) {
-		this.durationhour = durationhour;
-	}
-	
-	public String getDurationminutes() {
-		return durationminutes;
-	}
-	public void setDurationminutes(String durationminutes) {
-		this.durationminutes = durationminutes;
-	}
-	
-	public String getEndday() {
-		return endday;
-	}
-	public void setEndday(String endday) {
-		this.endday = endday;
-	}
-	
-	public String getEndhour() {
-		return endhour;
-	}
-	public void setEndhour(String endhour) {
-		this.endhour = endhour;
-	}
-	
-	public String getEndmin() {
-		return endmin;
-	}
-	public void setEndmin(String endmin) {
-		this.endmin = endmin;
-	}
-	
-	public String getEndmonth() {
-		return endmonth;
-	}
-	public void setEndmonth(String endmonth) {
-		this.endmonth = endmonth;
-	}
     
     /**
      * @hibernate.property
@@ -129,13 +66,6 @@ public class Termine {
 	}
 	public void setEndtermin(Date endtermin) {
 		this.endtermin = endtermin;
-	}
-	
-	public String getEndyear() {
-		return endyear;
-	}
-	public void setEndyear(String endyear) {
-		this.endyear = endyear;
 	}
     
     /**
@@ -179,34 +109,6 @@ public class Termine {
 	}
 	public void setPlace(String place) {
 		this.place = place;
-	}
-	
-	public String getStartday() {
-		return startday;
-	}
-	public void setStartday(String startday) {
-		this.startday = startday;
-	}
-	
-	public String getStarthour() {
-		return starthour;
-	}
-	public void setStarthour(String starthour) {
-		this.starthour = starthour;
-	}
-	
-	public String getStartmin() {
-		return startmin;
-	}
-	public void setStartmin(String startmin) {
-		this.startmin = startmin;
-	}
-	
-	public String getStartmonth() {
-		return startmonth;
-	}
-	public void setStartmonth(String startmonth) {
-		this.startmonth = startmonth;
 	}
     
     /**
@@ -288,14 +190,6 @@ public class Termine {
 	}
 	public void setTermine_status(Terminestatus termine_status) {
 		this.termine_status = termine_status;
-	}
-
-	
-	public int getVisualrowlength() {
-		return visualrowlength;
-	}
-	public void setVisualrowlength(int visualrowlength) {
-		this.visualrowlength = visualrowlength;
 	}
 
 }

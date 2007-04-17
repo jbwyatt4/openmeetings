@@ -106,25 +106,25 @@ public class TerminVisualManagement {
 //                    }
                 }
             } 
-            //Add the last row anyway
-            VisualList.add(TempList);
-            
-            //Generate the Array-Objects from the ArrayList
-            terminestruktur = new Terminestruktur[VisualList.size()];
-            int k=0;
-            for (Iterator it = VisualList.iterator(); it.hasNext();) {
-                ArrayList ListMy = (ArrayList) it.next();
-                Termine_User[] termine_user = new Termine_User[ListMy.size()];
-                terminestruktur[k] = new Terminestruktur(); 
-                int l=0;
-                for (Iterator it2 = ListMy.iterator(); it2.hasNext();) {
-                    termine_user[l] = (Termine_User) it2.next();
-                    termine_user[l].getTermine().setVisualrowlength(VisualList.size());
-                    l++;
-                }
-                terminestruktur[k].setTermine_user(termine_user);
-                k++;
-            }
+//            //Add the last row anyway
+//            VisualList.add(TempList);
+//            
+//            //Generate the Array-Objects from the ArrayList
+//            terminestruktur = new Terminestruktur[VisualList.size()];
+//            int k=0;
+//            for (Iterator it = VisualList.iterator(); it.hasNext();) {
+//                ArrayList ListMy = (ArrayList) it.next();
+//                Termine_User[] termine_user = new Termine_User[ListMy.size()];
+//                terminestruktur[k] = new Terminestruktur(); 
+//                int l=0;
+//                for (Iterator it2 = ListMy.iterator(); it2.hasNext();) {
+//                    termine_user[l] = (Termine_User) it2.next();
+//                    termine_user[l].getTermine().setVisualrowlength(VisualList.size());
+//                    l++;
+//                }
+//                terminestruktur[k].setTermine_user(termine_user);
+//                k++;
+//            }
         } catch (Exception err){
             System.out.println("generateViualSystem *** Error: "+err);
         }
@@ -339,24 +339,24 @@ public class TerminVisualManagement {
                 }
             } 
             //Add the last row anyway
-            VisualList.add(TempList);
-            
-            //Generate the Array-Objects from the ArrayList
-            terminestruktur = new Terminestruktur[VisualList.size()];
-            int k=0;
-            for (Iterator it = VisualList.iterator(); it.hasNext();) {
-                ArrayList ListMy = (ArrayList) it.next();
-                Terminegroups[] termine_groups = new Terminegroups[ListMy.size()];
-                terminestruktur[k] = new Terminestruktur(); 
-                int l=0;
-                for (Iterator it2 = ListMy.iterator(); it2.hasNext();) {
-                	termine_groups[l] = (Terminegroups) it2.next();
-                	termine_groups[l].getTermine().setVisualrowlength(VisualList.size());
-                    l++;
-                }
-                terminestruktur[k].setTermine_groups(termine_groups);
-                k++;
-            }
+//            VisualList.add(TempList);
+//            
+//            //Generate the Array-Objects from the ArrayList
+//            terminestruktur = new Terminestruktur[VisualList.size()];
+//            int k=0;
+//            for (Iterator it = VisualList.iterator(); it.hasNext();) {
+//                ArrayList ListMy = (ArrayList) it.next();
+//                Terminegroups[] termine_groups = new Terminegroups[ListMy.size()];
+//                terminestruktur[k] = new Terminestruktur(); 
+//                int l=0;
+//                for (Iterator it2 = ListMy.iterator(); it2.hasNext();) {
+//                	termine_groups[l] = (Terminegroups) it2.next();
+//                	termine_groups[l].getTermine().setVisualrowlength(VisualList.size());
+//                    l++;
+//                }
+//                terminestruktur[k].setTermine_groups(termine_groups);
+//                k++;
+//            }
         } catch (Exception err){
             System.out.println("generateViualSystem *** Error: "+err);
         }

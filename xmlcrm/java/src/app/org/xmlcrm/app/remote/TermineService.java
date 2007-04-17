@@ -1,12 +1,27 @@
 package org.xmlcrm.app.remote;
 
-import org.xmlcrm.app.hibernate.beans.termine.Terminegroups;
-import org.xmlcrm.app.hibernate.beans.termine.Termine_Todo_User;
-import org.xmlcrm.app.hibernate.beans.termine.Termine_User;
-import org.xmlcrm.app.hibernate.beans.termine.Terminevisual;
-import org.xmlcrm.app.hibernate.beans.termine.Terminevisualmonth;
+import java.util.Date;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.xmlcrm.app.data.basic.Sessionmanagement;
+import org.xmlcrm.app.data.user.Usermanagement;
+import org.xmlcrm.app.data.termine.Terminmanagement;;
 
 public class TermineService {
+	
+	private static final Log log = LogFactory.getLog(TermineService.class);
+	
+	public Long addTermin(String SID, Date starttime, Date endtime,int terminstatus,String Comment,String description,String pubcomment,int open,String place, String message){ 
+		try {
+			int users_id = Sessionmanagement.getInstance().checkSession(SID);
+			long USER_LEVEL = Usermanagement.getInstance().getUserLevelByID(users_id);
+			return Terminmanagement.getInstance().addTerminUser(USER_LEVEL, users_id, starttime, endtime, terminstatus, Comment, description, pubcomment, open, place, message);
+		} catch (Exception err){
+			log.error("[getNavi] "+err);
+		}
+		return null;
+	}
 
     /**
      * Terminmanagement
@@ -47,7 +62,7 @@ public class TermineService {
     public Terminegroups getGroupTermineByID(String SID,int UID){ 
     	return ResHandler.getGroupTermineByID(SID,UID);
     }   
-    //							1			2			3			4		5		6		7			8			9		10		11			12				13				14				15					16		17				18
+    //	done						1			2			3			4		5		6		7			8			9		10		11			12				13				14				15					16		17				18
     public String addTerminUser(String SID,int syear,int smonth,int sday,int shour,int smin,int eyear,int emonth,int eday,int ehour,int emin,int terminstatus,String Comment,String description,String pubcomment,int open,String place, String message){    
         return ResHandler.addTerminUser(SID,syear,smonth,sday,shour,smin,eyear,emonth,eday,ehour,emin,terminstatus,Comment,description,pubcomment,open,place,message);
     }

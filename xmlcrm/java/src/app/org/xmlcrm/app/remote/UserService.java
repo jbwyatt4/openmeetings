@@ -8,12 +8,24 @@ import org.apache.commons.logging.LogFactory;
 import org.xmlcrm.app.data.basic.Sessionmanagement;
 import org.xmlcrm.app.data.beans.basic.SearchResult;
 import org.xmlcrm.app.data.user.Usermanagement;
+import org.xmlcrm.app.data.user.Salutationmanagement;
 import org.xmlcrm.app.data.user.Organisationmanagement;
 import org.xmlcrm.app.hibernate.beans.user.Users;
 
 public class UserService {
 	
 	private static final Log log = LogFactory.getLog(UserService.class);	
+	
+	/**
+	 * get all availible Salutations
+	 * @param SID
+	 * @return
+	 */
+	public List getUserSalutations(String SID){
+        int users_id = Sessionmanagement.getInstance().checkSession(SID);
+        long User_LEVEL = Usermanagement.getInstance().getUserLevelByID(users_id);
+        return Salutationmanagement.getInstance().getUserSalutations(User_LEVEL);
+	}
 	
 	/**
 	 * search a user by a string
@@ -125,7 +137,8 @@ public class UserService {
 	            		argObjectMap.get("town").toString(), 1,
 	            		argObjectMap.get("telefon").toString(),argObjectMap.get("fax").toString(),
 	            		argObjectMap.get("mobil").toString(),argObjectMap.get("email").toString(),
-	            		argObjectMap.get("comment").toString());
+	            		argObjectMap.get("comment").toString(),
+	            		Integer.valueOf(argObjectMap.get("status").toString()).intValue());
 	        } else {
 	            return new Long(-2);
 	        }
@@ -157,10 +170,10 @@ public class UserService {
      * @param comment
      * @return
      */
-    public Long updateUser(String SID, String login, String password, String lastname, String firstname, int age, String street, String additionalname, String Zip, long states_id, String town, String email, int availible, String telefon, String fax, String mobil, String comment){
+    public Long updateUser(String SID, String login, String password, String lastname, String firstname, int age, String street, String additionalname, String Zip, long states_id, String town, String email, int availible, String telefon, String fax, String mobil, String comment, int status){
         int users_id = Sessionmanagement.getInstance().checkSession(SID);
         //User updates hisself, always allowed
-        return Usermanagement.getInstance().updateUser(3,new Long(users_id), new Long(0), login, password, lastname, firstname, age, street, additionalname, Zip, states_id, town, availible,telefon,fax,mobil,email,comment);
+        return Usermanagement.getInstance().updateUser(3,new Long(users_id), new Long(0), login, password, lastname, firstname, age, street, additionalname, Zip, states_id, town, availible,telefon,fax,mobil,email,comment,status);
     }
     
     public Long updateUserByObject(String SID, Object argObject){
@@ -177,7 +190,8 @@ public class UserService {
         		argObjectMap.get("town").toString(), Integer.valueOf(argObjectMap.get("availible").toString()).intValue(),
         		argObjectMap.get("telefon").toString(),argObjectMap.get("fax").toString(),
         		argObjectMap.get("mobil").toString(),argObjectMap.get("email").toString(),
-        		argObjectMap.get("comment").toString());
+        		argObjectMap.get("comment").toString(),
+        		Integer.valueOf(argObjectMap.get("status").toString()).intValue());
     	} catch (Exception er){
     		log.error("[updateUserByObject]"+er);
     	}
@@ -211,10 +225,10 @@ public class UserService {
     public Long updateUserAdmin(String SID, int user_idClient, int level_id, String login, String password, 
     		String lastname, String firstname, int age, String street, String additionalname, 
     		String Zip, long states_id, String town, String email, int availible, 
-    		String telefon, String fax, String mobil, String comment){
+    		String telefon, String fax, String mobil, String comment, int status){
         int users_id = Sessionmanagement.getInstance().checkSession(SID);
         long User_LEVEL = Usermanagement.getInstance().getUserLevelByID(users_id);	
-        return Usermanagement.getInstance().updateUser(User_LEVEL,new Long(user_idClient), new Long(level_id), login, password, lastname, firstname, age, street, additionalname, Zip, states_id, town, availible,telefon,fax,mobil,email,comment);
+        return Usermanagement.getInstance().updateUser(User_LEVEL,new Long(user_idClient), new Long(level_id), login, password, lastname, firstname, age, street, additionalname, Zip, states_id, town, availible,telefon,fax,mobil,email,comment,status);
     } 
     
     
@@ -232,13 +246,28 @@ public class UserService {
 	        		argObjectMap.get("town").toString(), Integer.valueOf(argObjectMap.get("availible").toString()).intValue(),
 	        		argObjectMap.get("telefon").toString(),argObjectMap.get("fax").toString(),
 	        		argObjectMap.get("mobil").toString(),
-	        		argObjectMap.get("email").toString(),argObjectMap.get("comment").toString());
+	        		argObjectMap.get("email").toString(),argObjectMap.get("comment").toString(),
+	        		Integer.valueOf(argObjectMap.get("status").toString()).intValue());
     	} catch (Exception err){
     		log.error("[updateUserObjectAdmin]"+err);
     	}
     	return null;
     } 
     
+    public Long addUserByObject(Object regObjectObj){
+    	try {
+    		LinkedHashMap regObject = (LinkedHashMap) regObjectObj;
+        	return Usermanagement.getInstance().registerUser(regObject.get("Username").toString(), regObject.get("Userpass").toString(), 
+        			regObject.get("lastname").toString(), regObject.get("firstname").toString(), regObject.get("email").toString(), 
+        			Integer.valueOf(regObject.get("age").toString()).intValue(), regObject.get("street").toString(), regObject.get("additionalname").toString(), 
+        			regObject.get("fax").toString(), regObject.get("zip").toString(), 
+        			Long.valueOf(regObject.get("states_id").toString()).longValue(), regObject.get("town").toString(), 
+        			Long.valueOf(regObject.get("language_id").toString()).longValue());
+    	} catch (Exception ex) {
+    		log.error(ex);
+    	}
+    	return null;
+    }    
     
     public String deleteUserAdmin(String SID, int user_idClient){
     	String ret = "";
@@ -251,5 +280,7 @@ public class UserService {
     		ret = "Nur als admin";
     	}
     	return ret;
-    }      
+    } 
+    
+    
 }
