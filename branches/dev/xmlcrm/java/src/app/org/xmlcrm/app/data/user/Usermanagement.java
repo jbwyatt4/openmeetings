@@ -330,7 +330,7 @@ public class Usermanagement {
 			String login, String password, String lastname, String firstname,
 			int age, String street, String additionalname, String zip, long states_id, String town,
 			int availible, String telefon, String fax,
-			String mobil, String email, String comment) {
+			String mobil, String email, String comment, int status) {
 
 		if (AuthLevelmanagement.getInstance().checkUserLevel(USER_LEVEL) && user_id != 0) {
 			try {
@@ -366,6 +366,7 @@ public class Usermanagement {
 					us.setLogin(login);
 					us.setUpdatetime(new Date());
 					us.setAvailible(availible);
+					us.setStatus(status);
 
 					if (level_id != 0)
 						us.setLevel_id(new Long(level_id));
@@ -602,34 +603,37 @@ public class Usermanagement {
 		return userlevel;
 	}
 
-	public long getUserLevelByID(long user_id) {
-		long UserLevel = 1;
+	/**
+	 * get user-role
+	 * 1 - user
+	 * 2 - moderator
+	 * 3 - admin
+	 * @param user_id
+	 * @return
+	 */
+	public Long getUserLevelByID(long user_id) {
 		try {
 			Object idf = HibernateUtil.createSession();
 			Session session = HibernateUtil.getSession();
 			Transaction tx = session.beginTransaction();
-			Query query = session
-					.createQuery("select c from Users as c where c.user_id = :user_id AND deleted != :deleted");
+			
+			Query query = session.createQuery("select c from Users as c where c.user_id = :user_id AND deleted <> 'true'");
 			query.setLong("user_id", user_id);
-			query.setString("deleted", "true");
-			int count = query.list().size();
-			if (count != 1) {
-				UserLevel = 1;
-			} else {
-				Users users = new Users();
-				for (Iterator it2 = query.iterate(); it2.hasNext();) {
-					users = (Users) it2.next();
-				}
-				UserLevel = users.getLevel_id().longValue();
-			}
+			List ll = query.list();
+			
 			tx.commit();
 			HibernateUtil.closeSession(idf);
+			
+			if (ll.size()>0){
+				Users users  = (Users) ll.get(0);
+				return users.getLevel_id();
+			}
 		} catch (HibernateException ex) {
 			log.error("[getUserLevelByID]" + ex);
 		} catch (Exception ex2) {
 			log.error("[getUserLevelByID]" + ex2);
 		}
-		return UserLevel;
+		return null;
 	}
 
 	/**

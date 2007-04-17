@@ -14,7 +14,7 @@
         <id
             name="status_id"
             column="status_id"
-            type="java.lang.Integer"
+            type="java.lang.Long"
         >
             <generator class="increment">
               <!--  
@@ -43,7 +43,7 @@
 
         <property
             name="starttime"
-            type="long"
+            type="java.util.Date"
             update="true"
             insert="true"
             column="starttime"
@@ -51,7 +51,7 @@
 
         <property
             name="updatetime"
-            type="long"
+            type="java.util.Date"
             update="true"
             insert="true"
             column="updatetime"
@@ -63,6 +63,14 @@
             update="true"
             insert="true"
             column="user_id"
+        />
+
+        <property
+            name="deleted"
+            type="string"
+            update="true"
+            insert="true"
+            column="deleted"
         />
 
         <!--

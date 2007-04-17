@@ -1,5 +1,7 @@
 package org.xmlcrm.app.hibernate.beans.termine;
 
+import java.util.Date;
+
 /**
  * 
  * @hibernate.class table="terminestatus"
@@ -7,16 +9,14 @@ package org.xmlcrm.app.hibernate.beans.termine;
  */
 public class Terminestatus {
 	
-	private Integer status_id;
+	private Long status_id;
 	private String comment;
 	private String description;
 	
-	private Long starttime;
-	private Long  updatetime;
+	private Date starttime;
+	private Date updatetime;
 	private Long user_id;
-	
-    private String starttimeDE;
-    private String  updatetimeDE;
+	private String deleted;
     
 	public Terminestatus() {
 		super();
@@ -46,57 +46,43 @@ public class Terminestatus {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-
-    /**
-     * @hibernate.property
-     *  column="starttime"
-     *  type="long"
-     */ 
-	public Long getStarttime() {
-		return starttime;
-	}
-	public void setStarttime(Long starttime) {
-		this.starttime = starttime;
-	}
 	
-	public String getStarttimeDE() {
-		return starttimeDE;
-	}
-	public void setStarttimeDE(String starttimeDE) {
-		this.starttimeDE = starttimeDE;
-	}
-    
     /**
      * 
      * @hibernate.id
      *  column="status_id"
      *  generator-class="increment"
      */  
-	public Integer getStatus_id() {
+	public Long getStatus_id() {
 		return status_id;
 	}
-	public void setStatus_id(Integer status_id) {
+	public void setStatus_id(Long status_id) {
 		this.status_id = status_id;
 	}
-
+    
+    /**
+     * @hibernate.property
+     *  column="starttime"
+     *  type="java.util.Date"
+     */  	
+	public Date getStarttime() {
+		return starttime;
+	}
+	public void setStarttime(Date starttime) {
+		this.starttime = starttime;
+	}
+    
     /**
      * @hibernate.property
      *  column="updatetime"
-     *  type="long"
-     */
-	public Long getUpdatetime() {
+     *  type="java.util.Date"
+     */  	
+	public Date getUpdatetime() {
 		return updatetime;
 	}
-	public void setUpdatetime(Long updatetime) {
+	public void setUpdatetime(Date updatetime) {
 		this.updatetime = updatetime;
-	}
-	
-	public String getUpdatetimeDE() {
-		return updatetimeDE;
-	}
-	public void setUpdatetimeDE(String updatetimeDE) {
-		this.updatetimeDE = updatetimeDE;
-	}
+	}	
 
     /**
      * @hibernate.property
@@ -110,6 +96,16 @@ public class Terminestatus {
 		this.user_id = user_id;
 	}      
 	
-
+    /**
+     * @hibernate.property
+     *  column="deleted"
+     *  type="string"
+     */	
+	public String getDeleted() {
+		return deleted;
+	}
+	public void setDeleted(String deleted) {
+		this.deleted = deleted;
+	}
     
 }

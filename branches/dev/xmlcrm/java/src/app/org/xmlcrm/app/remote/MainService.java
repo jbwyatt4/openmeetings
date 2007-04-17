@@ -51,10 +51,17 @@ public class MainService {
 	 * @return
 	 */
 	public List getNavi(String SID, long language_id){
-        int users_id = Sessionmanagement.getInstance().checkSession(SID);
-        long User_LEVEL = Usermanagement.getInstance().getUserLevelByID(users_id);
-        log.error("getNavi: "+User_LEVEL);
-		return Navimanagement.getInstance().getMainMenu(User_LEVEL,users_id, language_id);
+		try {
+	        int users_id = Sessionmanagement.getInstance().checkSession(SID);
+	        log.error("getNavi 1: "+users_id);
+	        Long User_LEVEL = Usermanagement.getInstance().getUserLevelByID(users_id);
+	        log.error("getNavi 2: "+User_LEVEL);
+	        
+			return Navimanagement.getInstance().getMainMenu(User_LEVEL,users_id, language_id);
+		} catch (Exception err){
+			log.error("[getNavi] "+err);
+		}
+		return null;
 	}
   
 	/**
