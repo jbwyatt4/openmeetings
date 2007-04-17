@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<library>
+
+<resource name="width_gripper_rsc" src="resources/width_gripper.swf" />
+
+<class name="turnoverlistheaderitem" extends="simplelabelbutton" clip="true">
+
+	<attribute name="subviewsid" value="0" type="number" />
+
+	<view height="$once{ parent.height-2 }" width="3" align="right" bgcolor="black"
+		cursor="width_gripper_rsc" 
+		onmousedown="parent.rs.apply()" onmouseup="parent.rs.remove()" />
+
+	<handler name="onwidth" args="w">
+		this.parent.parent.parent.sendWidthUpdate(w,this.subviewsid);
+	</handler>
+	<resizestate name="rs" height="20" />
+</class>
+
+
+</library>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<library>
+
+<class name="turnovertextitem" extends="text" fontsize="11">
+	<view height="${ parent.parent.parent.parent.height-2 }" width="3" align="right" bgcolor="black" />
+</class>
+
+</library>

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<library>
+
+<resource name="step_back" src="resources/step_back.png" />
+<resource name="step_fwd" src="resources/step_fwd.png" />
+
+<class name="innerlist" layout="axis:y;spacing:2" />
+	
+<class name="turnoverlist" extends="view">
+
+	<attribute name="start" value="0" type="number" />
+	<attribute name="step" value="100" type="number" />
+	<attribute name="orderby" value="firstname" type="string" />
+	<attribute name="records" value="0" type="number" />
+	
+	<handler name="oncallnext" />
+	<handler name="oncallpre" />
+	<handler name="onclickedItem" args="obj" />
+	
+	<method name="callnext">
+		this._next.setAttribute('enabled',false);
+		this._pre.setAttribute('enabled',false);
+		if (this.records>(this.start+this.step)){
+			this.start+=this.step;
+		}
+		this.oncallnext.sendEvent();
+	</method>
+	
+	<method name="callpre">
+		this._next.setAttribute('enabled',false);
+		this._pre.setAttribute('enabled',false);
+		if (this.start>0){
+			this.start-=this.step;
+		}
+		this.oncallpre.sendEvent();
+	</method>
+	
+	<method name="initValues" args="rec">
+		<![CDATA[
+		this.records = rec;
+		if (this.records>(this.start+this.step)){
+			this._next.setAttribute('enabled',true);
+		} else {
+			this._next.setAttribute('enabled',false);
+		}
+		if (this.start>0){
+			this._pre.setAttribute('enabled',true);
+		} else {
+			this._pre.setAttribute('enabled',false);
+		}
+		]]>
+	</method>
+	
+	<method name="addHeaderItem" args="labelid,width" >
+		new turnoverlistheaderitem(this._innerlisthead._inn,{labelid:labelid,width:width,subviewsid:this._innerlisthead._inn.subviews.length});
+	</method>
+	
+	<method name="sendWidthUpdate" args="w,subviewsid" >
+		<![CDATA[
+		//Debug.write(w,subviewsid,this._innerlist._inn);
+		for (var i=0;i<this._innerlist._inn._inn.subviews.length;i++){
+			this._innerlist._inn._inn.subviews[i].subviews[subviewsid].setAttribute('width',w);
+		}
+		]]>
+	</method>
+	
+	<method name="clearList">
+		this._innerlist._inn._inn.destroy();
+		new innerlist(this._innerlist._inn,{name:'_inn'});
+	</method>
+	
+	
+	<simplelabelbutton name="_pre" x="$once{ parent.width-48 }" width="22" height="20" 
+		enabled="false" onclick="parent.callpre()" >
+		<view resource="step_back" />
+	</simplelabelbutton>
+	<simplelabelbutton name="_next" x="$once{ parent.width-24 }" width="22" height="20" 
+		enabled="false" onclick="parent.callnext()">
+		<view resource="step_fwd" />
+	</simplelabelbutton>
+	
+	<view name="_innerlisthead" height="20" width="$once{ parent.width }" 
+		x="${ parent._innerlist.x }" y="20" clip="true">
+		<view name="_inn" layout="axis:x;spacing:0" />
+	</view>	
+	
+	<view name="_innerlist" height="$once{ parent.height-20 }" width="$once{ parent.width }"
+		y="40" clip="true">
+		<view name="_inn" >
+			<innerlist name="_inn" />
+		</view>
+		<vscrollbar />
+		<hscrollbar />
+	</view>
+
+</class>
+
+</library>
