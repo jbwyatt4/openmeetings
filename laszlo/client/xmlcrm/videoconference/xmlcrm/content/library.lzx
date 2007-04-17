@@ -4,5 +4,6 @@
     <include href="contentviews/" />
     <include href="conference/" />
     <include href="settings/" />
+    <include href="admin/" />
 
 </library>

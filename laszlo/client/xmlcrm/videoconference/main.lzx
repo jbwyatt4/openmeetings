@@ -114,6 +114,8 @@ macbook 192.168.2.102
 
 <attribute name="isConference" value="false" type="boolean" />
 
+<attribute name="statesInitValues" value="null" />
+
 <!-- Username of current user -->
 <attribute name="currentusename" value="defaultname" type="string" />
 <attribute name="user_id" value="0" type="string" />

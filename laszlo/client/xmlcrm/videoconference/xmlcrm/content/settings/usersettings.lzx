@@ -85,9 +85,10 @@
   			this.sendObject["telefon"] = '';
   			this.sendObject["fax"] = '';
   			this.sendObject["mobil"] = '';
+  			this.sendObject["status"] = hib.userobject.status;
   		</method>
   		<netparam name="vars1"><method name="getValue"> return canvas.sessionId; </method></netparam>
-    	<netparam name="vars1"><method name="getValue">return parent.sendObject;</method></netparam>	  		
+    	<netparam name="vars2"><method name="getValue">return parent.sendObject;</method></netparam>	  		
   	</netremotecallhib>
         
 </class>

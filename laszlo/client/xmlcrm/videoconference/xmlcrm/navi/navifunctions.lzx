@@ -31,6 +31,7 @@ function loadContent(obj,parentobj,preparentobj){
     } else if (obj.action=="useradmin"){
         clearStageContent();
         obj.parent.parent.clearAllSubItemLists();
+        new configureusers(canvas.main_content._content.inner);
     } else if (obj.action=="groupadmin"){
         clearStageContent();
         obj.parent.parent.clearAllSubItemLists();

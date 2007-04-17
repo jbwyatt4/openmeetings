@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<library>
+
+<class name="uservalueform" extends="basecontentsaveview">
+
+	<attribute name="user_id" value="0" />
+
+    <method name="initValueFieldsByObject" args="obj">
+    	this.user_id = obj.user_id;
+    	this.level_id = obj.level_id;
+        this.username.setText(obj.login);
+        this.firstname.setText(obj.firstname);
+        this.lastname.setText(obj.lastname);
+        this.email.setText(obj.adresses.emails[0].mail.email);
+        this.age.setText(obj.age);
+        this.street.setText(obj.adresses.street);
+        this.house.setText(obj.adresses.additionalname);
+        this.zip.setText(obj.adresses.zip);
+        this.town.setText(obj.adresses.town);
+        this.state.selectItem(String(obj.adresses.states.state_id));
+        this.adress_comment.setText(obj.adresses.comment);
+    </method>
+    
+    <labeltext labelid="143" width="200" y="40" resize="false" fontstyle="bold" />
+    
+    <labeltext labelid="132" width="200" y="70" resize="false" x="2"/>
+        <edittext name="username" y="70" x="120" width="270" text="" />
+
+    <labeltext labelid="133" width="200" y="100" resize="false" x="2"/>
+        <edittext name="userpass1" y="100" password="true" x="120" width="270" text="" />
+        
+    <labeltext labelid="134" width="200" y="130" resize="false" x="2"/>
+        <edittext name="userpass2" y="130" password="true" x="120" width="270" text="" />   
+    
+    <labeltext labelid="135" width="200" y="160" resize="false" x="2"/>
+        <edittext name="firstname" y="160" x="120" width="270" text="" />
+        
+    <labeltext labelid="136" width="200" y="190" resize="false" x="2"/>
+        <edittext name="lastname" y="190" x="120" width="270" text="" />                
+
+    <labeltext labelid="137" width="200" y="220" resize="false" x="2"/>
+        <edittext name="email" y="220" x="120" width="270" text="" />
+        
+    <labeltext labelid="138" width="200" y="250" resize="false" x="2"/>
+        <edittext name="age" y="250" x="120" width="270" text="" />
+        
+    <labeltext labelid="139" width="200" y="280" resize="false" x="2"/>
+        <edittext name="street" y="280" x="120" width="220" text="" />
+        <edittext name="house" y="280" x="350" width="40" text="" />
+        
+    <labeltext labelid="140" width="280" y="310" resize="false" x="2"/>
+        <edittext name="zip" y="310" x="120" width="70" text="" />   
+        <edittext name="town" y="310" x="200" width="190" text="" />                        
+         
+    <labeltext labelid="141" width="200" y="340" resize="false" x="2"/>  
+        <combobox name="state" width="270" y="340" x="120" editable="false" fontsize="12">
+	        <handler name="oninit" >
+	            <![CDATA[
+	            for (var i=0;i<canvas.statesInitValues.length;i++){
+	                this.addItem(canvas.statesInitValues[i].name,canvas.statesInitValues[i].state_id);
+	            }
+	            this.selectItem(String(canvas.statesInitValues[0].state_id));
+	            ]]>
+	        </handler> 
+        </combobox> 
+        
+    <labeltext labelid="142" width="200" y="370" resize="false" x="2"/>
+        <edittext name="adress_comment" y="370" x="120" width="270" 
+            height="120" text="" multiline="true"/>
+     
+
+  	<netremotecallhib name="saveOrupdateUserObject" funcname="userservice.saveOrupdateUserObject" 
+  		remotecontext="$once{ canvas.thishib }" registerObject="true" >   
+		<attribute name="sendObject" value="null" />
+		<!-- gets called by Observer -->
+  		<method name="prepareCall">
+  			this.sendObject=new Array();
+  			this.sendObject["user_idClient"] = this.parent.user_id;
+  			this.sendObject["login"] = this.parent.username.getText();
+  			this.sendObject["password"] = this.parent.userpass1.getText();
+  			this.sendObject["firstname"] = this.parent.firstname.getText();
+  			this.sendObject["lastname"] = this.parent.lastname.getText();
+  			this.sendObject["email"] = this.parent.email.getText();
+  			this.sendObject["street"] = this.parent.street.getText();
+  			this.sendObject["additionalname"] = this.parent.house.getText();
+  			this.sendObject["zip"] = this.parent.zip.getText();
+  			this.sendObject["town"] = this.parent.town.getText();
+  			this.sendObject["states_id"] = this.parent.state.getValue();
+  			this.sendObject["comment"] = this.parent.adress_comment.getText();
+  			this.sendObject["telefon"] = '';
+  			this.sendObject["fax"] = '';
+  			this.sendObject["mobil"] = '';
+  			this.sendObject["availible"] = 1;
+  			this.sendObject["level_id"] = this.parent.level_id;
+  			Debug.write("prepareCall: ",this.sendObject);
+  		</method>
+  		<netparam name="vars1"><method name="getValue"> return canvas.sessionId; </method></netparam>
+    	<netparam name="vars2"><method name="getValue">return parent.sendObject;</method></netparam>	  		
+  	</netremotecallhib>
+        
+</class>
+
+</library>

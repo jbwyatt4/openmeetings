@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<library>
+
+<class name="configureusers" extends="basecontentview">
+
+	<turnoverlist width="440" height="600" x="2" y="0" 
+		orderby="login" step="10" >
+
+		<handler name="oninit">
+			this.addHeaderItem(146,60);
+			this.addHeaderItem(147,100);
+			this.addHeaderItem(148,140);
+			this.addHeaderItem(149,140);
+			this.getUserList.doCall();
+		</handler>
+		
+		<handler name="oncallnext" >
+			this.getUserList.doCall();
+		</handler>
+		
+		<handler name="oncallpre" >		
+			this.getUserList.doCall();
+		</handler>
+		
+		<handler name="onclickedItem" args="obj">
+			Debug.write("onclickedItem",obj,obj.obj);
+			parent._uservalueform.initValueFieldsByObject(obj.obj);
+		</handler>
+		
+		<netremotecallhib name="getUserList" funcname="userservice.getUserList" remotecontext="$once{ canvas.thishib }" >      
+			<netparam name="vars1"><method name="getValue"> return canvas.sessionId; </method></netparam>
+			<netparam name="vars2"><method name="getValue"> return parent.parent.start; </method></netparam>
+			<netparam name="vars3"><method name="getValue"> return parent.parent.step; </method></netparam>
+			<netparam name="vars4"><method name="getValue"> return parent.parent.orderby; </method></netparam>
+	    	<handler name="ondata" args="value">
+	    		Debug.write("getUserList: ",value);
+	    		//this.parent.destroy();
+	    		this.parent.initValues(value.records);
+	    		this.parent.renderContent(value.result);
+	    	</handler>
+	    </netremotecallhib>	
+	    
+	    <method name="renderContent" args="records">
+	    	<![CDATA[
+	    	this.clearList();
+	    	for (var i=0;i<records.length;i++){
+	    		new configureusersListItem(this._innerlist._inn._inn,{obj:records[i],user_id:records[i].user_id,login:records[i].login,firstname:records[i].firstname,lastname:records[i].lastname});
+	    	}
+	    	]]>
+	    </method>
+
+	</turnoverlist>
+	
+	<uservalueform name="_uservalueform" x="460" />
+
+</class>
+
+</library>

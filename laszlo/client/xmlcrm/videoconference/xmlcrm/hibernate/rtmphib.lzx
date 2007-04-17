@@ -69,13 +69,22 @@
             Debug.write("getLanguageById: ",value);
             setLabelObject(value);
             if (parent.initlanguageLoaded){
-            	parent.setUsername.doCall();
+            	parent.getStates.doCall();
             } else {
             	parent.initlanguageLoaded=true;
             	new checkLoginData(canvas.main_content._content);
             }
         </handler>  
     </netremotecallhib>
+    
+    <netremotecallhib name="getStates" funcname="xmlcrm.getStates" >
+        <handler name="ondata" args="value">
+            //The onResult-Handler will be called be the rtmpconnection
+            Debug.write("getStates: ",value);
+            canvas.statesInitValues = value;
+            parent.setUsername.doCall();
+        </handler>  
+    </netremotecallhib>    
     
     <netremotecallhib name="getNavi" funcname="xmlcrm.getNavi" >      
         <netparam name="vars1"><method name="getValue"> return canvas.sessionId; </method></netparam> 
