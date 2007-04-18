@@ -37,7 +37,6 @@
 <resource name="whiteboardBG" src="resources/whiteboardBG.png" />
 <resource name="videobg" src="resources/videobg.png" />
 <resource name="viewmag" src="resources/viewmag.png" />
-<resource name="reload_rsc" src="resources/reload.png" />
 <resource name="reload_small_rsc" src="resources/reload_small.png" />
 <resource name="folder_yellow_rsc" src="resources/x-office-presentation.png" />
 <resource name="folder_top_rsc" src="resources/top.png" />

@@ -13,5 +13,6 @@
     <include href="explorer/" />     
     <include href="list/" />
     <include href="turnoverlist/" />
+    <include href="calendar/" />
 
 </library>

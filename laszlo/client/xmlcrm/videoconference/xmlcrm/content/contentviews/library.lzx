@@ -4,5 +4,6 @@
     <include href="basecontentview.lzx" />
     <include href="basecontentsaveview.lzx" />
     <include href="contentsavewindow.lzx" />
+    <include href="confirmdeletewindow.lzx" />
 
 </library>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<library>
+
+<class name="calendarwindow" extends="view" bgcolor="$once{ canvas.basebgcolorizer }">
+
+	<attribute name="fieldRef" value="null" />
+
+	<dateselector y="20" name="_dateselector">
+		<handler name="oninit">
+			<![CDATA[
+			var t = parent.fieldRef.getText();
+			this.showingdate = parseStringToDate(t);
+			Debug.write("n1:",this.showingdate);
+			this.init();
+			]]>
+		</handler>
+	</dateselector>	
+
+</class>
+
+</library>

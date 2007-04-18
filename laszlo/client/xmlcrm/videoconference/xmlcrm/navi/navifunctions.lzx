@@ -57,6 +57,22 @@ function getLabelNameXMLCRM(labelid){
 	}
 	
 }
+
+function parseDateToString(dateObj){
+	return dateObj.getDate()+'.'+(dateObj.getMonth()+1)+'.'+dateObj.getFullYear();
+}
+function parseStringToDate(t){
+	if (t.length==10){
+		var d = Number(datumsStr.substring(0, 2));
+		var m = Number(datumsStr.substring(3, 5));
+		var y = Number(datumsStr.substring(6, 10));
+		if (!isNaN(d) && !isNaN(m) && !isNaN(y)){
+			return new Date(y, m, d);
+		} else {
+			return new Date();
+		}
+	}
+}
 ]]>
 </script>
 

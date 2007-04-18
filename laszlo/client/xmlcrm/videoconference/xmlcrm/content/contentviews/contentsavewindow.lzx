@@ -5,6 +5,7 @@
     docking="true" width="264" x="200" y="0" height="200">
     
     <attribute name="saveObj" value="null" />
+    <attribute name="refObj" value="null" />
     <attribute name="processNextIndex" value="0" type="number" />
     
     <handler name="oninit">
@@ -29,10 +30,12 @@
     	<![CDATA[
     	Debug.write("processNext: ",this.saveObj.length,this.processNextIndex);
     	if (this.saveObj.length>this.processNextIndex){
+    		this.saveObj[this.processNextIndex].returnObj=this;
     		this.saveObj[this.processNextIndex].doCall();
     		this.processNextIndex++;
     	} else {
     		Debug.write("update process complete");
+    		this.refObj.onsavecompleted.sendEvent();
     		this.close();
     	}
     	]]>

@@ -10,6 +10,9 @@
 <resource name="loudnessBig" src="loudnessBig.swf" />
 
 <resource name="filesave_rsc" src="filesave.png" />
+<resource name="button_cancel_rsc" src="button_cancel.png" />
+<resource name="edit_add_rsc" src="edit_add.png" />
+<resource name="reload_rsc" src="reload.png" />
 
 <resource name="kuser_rsc" src="kuser.png" />
 <resource name="ksirc_rsc" src="ksirc.png" />
