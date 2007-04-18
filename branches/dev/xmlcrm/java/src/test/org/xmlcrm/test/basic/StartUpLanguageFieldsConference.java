@@ -169,6 +169,17 @@ public class StartUpLanguageFieldsConference extends TestCase {
 		Fieldmanagment.getInstance().addFourFieldValues("admin_userlist_lastname", 149, "Nachname", "lastname", "lastname", "lastname");
 		Fieldmanagment.getInstance().addFourFieldValues("turnoverlist_next", 150, "vorwärts", "show next", "show next", "show next");
 		Fieldmanagment.getInstance().addFourFieldValues("turnoverlist_pre", 151, "zurück", "show pre", "show pre", "show pre");
+		Fieldmanagment.getInstance().addFourFieldValues("savecontent_confirm", 152, "Datensatz entfernen", "delete record", "delete record", "delete record");
+		Fieldmanagment.getInstance().addFourFieldValues("savecontent_confirm_cancel_btn", 153, "abbrechen", "cancel", "cancel", "cancel");
+		Fieldmanagment.getInstance().addFourFieldValues("savecontent_confirm_confirm_btn", 154, "enfernen", "delete", "delete", "delete");
+		Fieldmanagment.getInstance().addFourFieldValues("savemenubar_addlabel", 155, "Datensatz anlegen", "new record", "new record", "new record");
+		Fieldmanagment.getInstance().addFourFieldValues("savemenubar_reloadlabel", 156, "Datensatz neu laden", "refresh record", "refresh record", "refresh record");
+		Fieldmanagment.getInstance().addFourFieldValues("savemenubar_deletelabel", 157, "Datensatz entfernen", "delete record", "delete record", "delete record");
+		Fieldmanagment.getInstance().addFourFieldValues("useralter_admin_status", 158, "Status", "status", "status", "status");
+		Fieldmanagment.getInstance().addFourFieldValues("useralter_admin_statusItem", 159, "gesperrt", "disabled", "disabled", "disabled");
+		Fieldmanagment.getInstance().addFourFieldValues("useralter_admin_statusItem", 160, "aktiv", "enabled", "enabled", "enabled");
+		Fieldmanagment.getInstance().addFourFieldValues("useralter_admin_organisation", 161, "Organisationen", "organisations", "organisations", "organisations");
+		Fieldmanagment.getInstance().addFourFieldValues("calendar_iconlabel", 162, "Kalender", "calendar", "calendar", "calendar");
 		
 		
 	}

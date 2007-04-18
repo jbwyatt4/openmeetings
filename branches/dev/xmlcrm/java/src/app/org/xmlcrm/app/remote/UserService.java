@@ -17,6 +17,29 @@ public class UserService {
 	private static final Log log = LogFactory.getLog(UserService.class);	
 	
 	/**
+	 * get your own user-object
+	 * @param SID
+	 * @param user_id
+	 * @return
+	 */
+	public Users getUserSelf(String SID, long user_id){
+        int users_id = Sessionmanagement.getInstance().checkSession(SID);
+        return Usermanagement.getInstance().getUser(users_id);
+	}
+	
+	/**
+	 * get user by id, admin only
+	 * @param SID
+	 * @param user_id
+	 * @return
+	 */
+	public Users getUserById(String SID, long user_id){
+        int users_id = Sessionmanagement.getInstance().checkSession(SID);
+        long USER_LEVEL = Usermanagement.getInstance().getUserLevelByID(users_id);
+        return Usermanagement.getInstance().checkAdmingetUserById(USER_LEVEL,user_id);
+	}
+	
+	/**
 	 * get all availible Salutations
 	 * @param SID
 	 * @return
@@ -176,6 +199,12 @@ public class UserService {
         return Usermanagement.getInstance().updateUser(3,new Long(users_id), new Long(0), login, password, lastname, firstname, age, street, additionalname, Zip, states_id, town, availible,telefon,fax,mobil,email,comment,status);
     }
     
+    /**
+     * @deprecated
+     * @param SID
+     * @param argObject
+     * @return
+     */
     public Long updateUserByObject(String SID, Object argObject){
     	try{
         int users_id = Sessionmanagement.getInstance().checkSession(SID);
@@ -231,7 +260,12 @@ public class UserService {
         return Usermanagement.getInstance().updateUser(User_LEVEL,new Long(user_idClient), new Long(level_id), login, password, lastname, firstname, age, street, additionalname, Zip, states_id, town, availible,telefon,fax,mobil,email,comment,status);
     } 
     
-    
+    /**
+     * @deprecated
+     * @param SID
+     * @param argObject
+     * @return
+     */
     public Long updateUserObjectAdmin(String SID, Object argObject){
     	try{
 	    	LinkedHashMap argObjectMap = (LinkedHashMap) argObject;
@@ -254,17 +288,51 @@ public class UserService {
     	return null;
     } 
     
-    public Long addUserByObject(Object regObjectObj){
+    /**
+     * 
+     * @param SID
+     * @param regObjectObj
+     * @return
+     */
+    public Long saveOrUpdateUser(String SID, Object regObjectObj){
     	try {
-    		LinkedHashMap regObject = (LinkedHashMap) regObjectObj;
-        	return Usermanagement.getInstance().registerUser(regObject.get("Username").toString(), regObject.get("Userpass").toString(), 
-        			regObject.get("lastname").toString(), regObject.get("firstname").toString(), regObject.get("email").toString(), 
-        			Integer.valueOf(regObject.get("age").toString()).intValue(), regObject.get("street").toString(), regObject.get("additionalname").toString(), 
-        			regObject.get("fax").toString(), regObject.get("zip").toString(), 
-        			Long.valueOf(regObject.get("states_id").toString()).longValue(), regObject.get("town").toString(), 
-        			Long.valueOf(regObject.get("language_id").toString()).longValue());
+    		LinkedHashMap argObjectMap = (LinkedHashMap) regObjectObj;
+    		Long user_idClient = Long.valueOf(argObjectMap.get("user_idClient").toString()).longValue();
+	        int users_id = Sessionmanagement.getInstance().checkSession(SID);
+	        long User_LEVEL = Usermanagement.getInstance().getUserLevelByID(users_id);	
+	        
+	        log.error("saveOrUpdateUser1: "+argObjectMap.get("organisations"));
+	        log.error("saveOrUpdateUser2: "+argObjectMap.get("organisations").getClass());
+	        log.error("saveOrUpdateUser3: "+argObjectMap.get("user_idClient"));
+	        log.error("saveOrUpdateUser4: "+argObjectMap.get("userage"));
+	        log.error("saveOrUpdateUser5: "+argObjectMap.get("userage").getClass());
+	        
+    		if (user_idClient==null || user_idClient==0){
+	        	return Usermanagement.getInstance().registerUserInit(User_LEVEL, 
+	        			Long.valueOf(argObjectMap.get("level_id").toString()).longValue(), 
+	        			Integer.valueOf(argObjectMap.get("availible").toString()).intValue(),Integer.valueOf(argObjectMap.get("status").toString()).intValue(),
+	        			argObjectMap.get("login").toString(), argObjectMap.get("password").toString(), 
+	        			argObjectMap.get("lastname").toString(), argObjectMap.get("firstname").toString(), 
+	        			argObjectMap.get("email").toString(), Integer.valueOf(argObjectMap.get("age").toString()).intValue(), 
+	        			argObjectMap.get("street").toString(), argObjectMap.get("additionalname").toString(), 
+	        			argObjectMap.get("fax").toString(), argObjectMap.get("zip").toString(), 
+	        			Long.valueOf(argObjectMap.get("states_id").toString()).longValue(), argObjectMap.get("town").toString(), 
+	        			Long.valueOf(argObjectMap.get("language_id").toString()).longValue(),false); 	
+    		} else {
+		        return Usermanagement.getInstance().updateUser(User_LEVEL,user_idClient, 
+		        		Long.valueOf(argObjectMap.get("level_id").toString()).longValue(), argObjectMap.get("login").toString(), 
+		        		argObjectMap.get("password").toString(), argObjectMap.get("lastname").toString(), 
+		        		argObjectMap.get("firstname").toString(), Integer.valueOf(argObjectMap.get("age").toString()).intValue(), 
+		        		argObjectMap.get("street").toString(), argObjectMap.get("additionalname").toString(), 
+		        		argObjectMap.get("zip").toString(), Long.valueOf(argObjectMap.get("states_id").toString()).longValue(), 
+		        		argObjectMap.get("town").toString(), Integer.valueOf(argObjectMap.get("availible").toString()).intValue(),
+		        		argObjectMap.get("telefon").toString(),argObjectMap.get("fax").toString(),
+		        		argObjectMap.get("mobil").toString(),
+		        		argObjectMap.get("email").toString(),argObjectMap.get("comment").toString(),
+		        		Integer.valueOf(argObjectMap.get("status").toString()).intValue()); 
+    		}
     	} catch (Exception ex) {
-    		log.error(ex);
+    		log.error("[saveOrUpdateUser]: ",ex);
     	}
     	return null;
     }    

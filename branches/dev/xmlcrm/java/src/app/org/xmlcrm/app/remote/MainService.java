@@ -156,6 +156,8 @@ public class MainService {
     /**
      * Add a user register by an Object
      * see [registerUser] for the index of the Object
+     * To allow the registering the config_key *allow_frontend_register* has to be the value 1
+     * otherwise the user will get an error code
      * @param regObject
      * @return new users_id OR null if an exception, -1 if an error, -4 if mail already taken, -5 if username already taken, -3 if login or pass or mail is empty 
      */
@@ -200,41 +202,7 @@ public class MainService {
 				String fax, String zip, long states_id, String town, long language_id){
     	return Usermanagement.getInstance().registerUser(Username, Userpass, lastname, firstname, email, 
     			age, street, additionalname, fax, zip, states_id, town, language_id);
-	}
-	
-	/**
-	 * add a new user, only administrators can do this
-	 * TODO: moderators should be able to add new users too
-	 * @param SID
-	 * @param level_id
-	 * @param availible
-	 * @param status
-	 * @param login
-	 * @param Userpass
-	 * @param lastname
-	 * @param firstname
-	 * @param email
-	 * @param age
-	 * @param street
-	 * @param additionalname
-	 * @param fax
-	 * @param zip
-	 * @param states_id
-	 * @param town
-	 * @param language_id
-	 * @return new users_id OR null if an exception, -1 if an error, -4 if mail already taken, -5 if username already taken, -3 if login or pass or mail is empty 
-	 */
-	public Long addUserAdmin(String SID, long level_id, int availible, int status, 
-			String login, String Userpass, String lastname, String firstname, 
-			String email, int age, String street, String additionalname, String fax, 
-			String zip, long states_id, String town, long language_id){
-    	int users_id = Sessionmanagement.getInstance().checkSession(SID);
-    	long User_LEVEL = Usermanagement.getInstance().getUserLevelByID(users_id);	
-    	return Usermanagement.getInstance().registerUserInit(User_LEVEL,level_id, availible, status, 
-				login, Userpass, lastname, firstname, email, age, street, additionalname, fax, 
-				zip, states_id, town, language_id);
-	}
-	
+	}	
 	
 	
     public String deleteUserIDSelf(String SID){

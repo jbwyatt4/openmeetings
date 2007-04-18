@@ -117,10 +117,11 @@ public class Emailmanagement {
 	 * @param Username
 	 * @param Userpass
 	 * @param comment
+	 * @param sendWelcomeMail
 	 * @return the new mail_id or -1
 	 */
 	public Long registerEmail(String EMail, long adresses_id, String Username,
-			String Userpass, String comment) {
+			String Userpass, String comment, boolean sendWelcomeMail) {
 		long mail_id = this.registerEmail(EMail, Username, Userpass, comment);
 		if (mail_id != -1) {
 			try {
@@ -138,7 +139,7 @@ public class Emailmanagement {
 				HibernateUtil.closeSession(idf);
 				log.error("registerEmail addr_emails: " + addr_emails_id);
 				
-				this.sendMail(Username, Userpass, EMail);
+				if (sendWelcomeMail) this.sendMail(Username, Userpass, EMail);
 				return mail_id;
 			} catch (HibernateException ex) {
 				log.error("Error: " + ex);
