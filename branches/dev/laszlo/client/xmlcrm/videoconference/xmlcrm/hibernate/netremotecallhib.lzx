@@ -15,10 +15,13 @@
 	<method name="doCall">
 		this.call();
 	</method>
-	<handler name="onResult" args="value">
+	<handler name="ondata" args="value">
 		<![CDATA[
-		Debug.write("onResult: ",this);
-		if (this.returnObj!=null && Number(value)>0) this.returnObj.processNext();
+		Debug.write("ondata: ",this,Number(value),this.returnObj);
+		if (this.returnObj!=null && Number(value)>0) {
+			Debug.write("this.returnObj.processNext");
+			this.returnObj.processNext();
+		}
 		
 		]]>
 	</handler>	

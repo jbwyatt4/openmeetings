@@ -4,14 +4,20 @@
 <class name="basecontentsaveview" extends="basecontentview">
 
     <attribute name="observerViews" value="null" />
+    
+    <handler name="ondelete" />
+    <handler name="onsavecompleted" />
 
     <view name="_savecontentbar" layout="axis:x;spacing:2;inset:2" x="2" height="28" width="$once{ parent.width }"
         bgcolor="$once{ canvas.baseMousecolorizer }">
-        <basechooseseicon resourceN="filesave_rsc" labelid="144" y="2" >
-            <handler name="onclick">
-                this.parent.parent.doSaveEvent();
-            </handler>
-        </basechooseseicon>
+        <basechooseseicon resourceN="filesave_rsc" labelid="144" y="2" 
+        	onclick="this.parent.parent.doSaveEvent()" />
+        <basechooseseicon resourceN="edit_add_rsc" labelid="155" y="2" 
+        	onclick="this.parent.parent.doAddEvent()" />  
+        <basechooseseicon resourceN="reload_rsc" labelid="156" y="2" 
+        	onclick="this.parent.parent.doReloadEvent()" />        
+        <basechooseseicon resourceN="button_cancel_rsc" labelid="157" y="2" 
+        	onclick="this.parent.parent.doDeleteEvent()" />         	 	      	
     </view>
     
     <method name="addViewToObserver" args="obj">
@@ -21,9 +27,18 @@
     
     <method name="doSaveEvent">
     	if (this.observerViews.length!=0){
-        	new contentsavewindow(canvas.main_content._content.inner,{saveObj:this.observerViews});
+        	new contentsavewindow(canvas.main_content._content.inner,{refObj:this,saveObj:this.observerViews});
         }
     </method>
+    
+    <method name="doDeleteEvent">
+    	new confirmdeletewindow(canvas.main_content._content.inner,{refObj:this});
+    </method> 
+    
+    <method name="confirmDelete">
+    	this.ondelete.sendEvent();
+    </method>
+    
 
     <handler name="ontabcontentleave" />
     
