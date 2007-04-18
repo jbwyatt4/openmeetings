@@ -15,6 +15,7 @@ import org.hibernate.criterion.Restrictions;
 import org.hibernate.criterion.Order;
 
 import org.xmlcrm.app.hibernate.beans.user.*;
+import org.xmlcrm.app.hibernate.beans.adresses.Adresses_Emails;
 import org.xmlcrm.app.hibernate.beans.adresses.Emails;
 import org.xmlcrm.app.hibernate.utils.HibernateUtil;
 import org.xmlcrm.app.data.basic.AuthLevelmanagement;
@@ -106,6 +107,13 @@ public class Usermanagement {
 		}
 		return null;
 	}
+	
+	public Users checkAdmingetUserById(long USER_LEVEL, long user_id){
+		if (AuthLevelmanagement.getInstance().checkAdminLevel(USER_LEVEL)) {
+			return this.getUser(user_id);
+		}
+		return null;
+	}
 
 	/**
 	 * 
@@ -147,55 +155,47 @@ public class Usermanagement {
 	 * @return
 	 */
 	public Users loginUser(String SID, String Username, String Userpass) {
-		Users usersA = new Users();
-		Long UID = new Long(0);
-		Long LEVEL_ID = new Long(1);
 		try {
 			Object idf = HibernateUtil.createSession();
 			Session session = HibernateUtil.getSession();
 			Transaction tx = session.beginTransaction();
 			MD5Calc md5 = new MD5Calc("MD5");
-			Query query = session.createQuery("select c from Users as c where c.login = :login AND deleted != :deleted");
-			query.setString("login", Username);
-			query.setString("deleted", "true");
-			int count = query.list().size();
+			Criteria crit = session.createCriteria(Users.class);
+			crit.add(Restrictions.eq("login", Username));
+			crit.add(Restrictions.eq("deleted", "false"));
+			crit.add(Restrictions.eq("status", 1));
+			List ll = crit.list();
 			log.debug("debug loginUser: " + Username);
-			if (count != 1) {
-				usersA.setLevel_id(new Long(-1));
-				usersA.setFirstname("Wrong - " + Username + " not Found");
-				usersA.setUser_id(UID);
-			} else {
-				Users users = new Users();
-				for (Iterator it2 = query.iterate(); it2.hasNext();) {
-					users = (Users) it2.next();
-				}
-				String chsum = md5.do_checksum(Userpass);
-				if (chsum.equals(users.getPassword())) {
-					UID = users.getUser_id();
-					LEVEL_ID = users.getLevel_id();
-					usersA = users;
-				} else {
-					usersA.setLevel_id(new Long(-1));
-					usersA.setFirstname("Wrong -Invalid Password for"
-							+ Username);
-					usersA.setUser_id(UID);
-				}
-			}
-
 			tx.commit();
 			HibernateUtil.closeSession(idf);
-			Sessionmanagement.getInstance().updateUser(SID, UID.longValue());
-			usersA.setUserlevel(getUserLevel(LEVEL_ID));
-			
-			if (UID.longValue() != 0) {
-				updateLastLogin(usersA);
-			}			
+
+			if (ll.size()==0) {
+				Users usersA = new Users();
+				usersA.setLevel_id(new Long(-1));
+				usersA.setFirstname("Wrong - " + Username + " not Found");
+				return usersA;
+			} else {
+				Users users = (Users) ll.get(0);
+				String chsum = md5.do_checksum(Userpass);
+				if (chsum.equals(users.getPassword())) {
+					Sessionmanagement.getInstance().updateUser(SID, users.getUser_id());
+					users.setUserlevel(getUserLevel(users.getLevel_id()));		
+					updateLastLogin(users);
+					return users;
+				} else {
+					Users usersA = new Users();
+					usersA.setLevel_id(new Long(-1));
+					usersA.setFirstname("Wrong -Invalid Password for" + Username);
+					return usersA;
+				}
+			}
+		
 		} catch (HibernateException ex) {
-			log.error(ex);
+			log.error("[loginUser]: ",ex);
 		} catch (Exception ex2) {
-			log.error(ex2);
+			log.error("[loginUser]: ",ex2);
 		}
-		return usersA;
+		return null;
 	}
 
 	public String logout(String SID, int USER_ID) {
@@ -341,25 +341,24 @@ public class Usermanagement {
 					checkName = this.checkUserLogin(login);
 				}
 				boolean checkEmail = true;
-				Emails mail = null;
+				Adresses_Emails mail = null;
+				log.error("mail 1 update User: "+us.getAdresses().getAdresses_id());
+				log.error("mail 2 update User: "+us.getAdresses().getEmails().size());
 				Iterator it = us.getAdresses().getEmails().iterator();
+				log.error("mail 3 update User: "+it);
 				if (it.hasNext()){
-					mail = (Emails) it.next();
+					log.error("mail 4 update User: has next");
+					mail = (Adresses_Emails) it.next();
+					log.error("mail 5 update User naxt"+mail);
 				}				
-				if (!email.equals(mail.getEmail())){
+				log.error("updateUser mail: "+mail);
+				log.error("updateUser email: "+email);
+				if (!email.equals(mail.getMail().getEmail())){
 					checkEmail = Emailmanagement.getInstance().checkUserEMail(email);
 				}
 				if (checkName && checkEmail) {
 					log.info("user_id " + user_id);
-					//Todo implement Phone
-					Adressmanagement.getInstance().updateAdress(us.getAdresses().getAdresses_id(), street, zip, town, states_id, additionalname, comment, fax);
-					Emailmanagement.getInstance().updateUserEmail(mail.getMail_id(),user_id, email);
-						
-					log.info("USER " + us.getLastname());
-					Object idf = HibernateUtil.createSession();
-					Session session = HibernateUtil.getSession();
-					Transaction tx = session.beginTransaction();
-
+					
 					us.setLastname(lastname);
 					us.setFirstname(firstname);
 					us.setAge(new Date());
@@ -371,9 +370,22 @@ public class Usermanagement {
 					if (level_id != 0)
 						us.setLevel_id(new Long(level_id));
 					if (password.length() != 0) {
-						MD5Calc md5 = new MD5Calc("MD5");
-						us.setPassword(md5.do_checksum(password));
-					}
+						if (password.length()>=4){
+							MD5Calc md5 = new MD5Calc("MD5");
+							us.setPassword(md5.do_checksum(password));
+						} else {
+							return new Long(-6);
+						}
+					}					
+					
+					//Todo implement Phone
+					Adressmanagement.getInstance().updateAdress(us.getAdresses().getAdresses_id(), street, zip, town, states_id, additionalname, comment, fax);
+					Emailmanagement.getInstance().updateUserEmail(mail.getMail().getMail_id(),user_id, email);
+					
+					log.info("USER " + us.getLastname());
+					Object idf = HibernateUtil.createSession();
+					Session session = HibernateUtil.getSession();
+					Transaction tx = session.beginTransaction();
 
 					session.update(us);
 					
@@ -390,9 +402,9 @@ public class Usermanagement {
 					}
 				}
 			} catch (HibernateException ex) {
-				log.error(ex);
+				log.error("[updateUser]",ex);
 			} catch (Exception ex2) {
-				log.error(ex2);
+				log.error("[updateUser]",ex2);
 			}
 		} else {
 			log.error("Error: Permission denied");
@@ -670,7 +682,7 @@ public class Usermanagement {
 			// TODO: add availible params sothat users have to verify their
 			// login-data
 			// TODO: add status from Configuration items
-			Long user_id = this.registerUserInit(3, 1, 0, 1, login, Userpass,lastname, firstname, email, age, street, additionalname,fax, zip, states_id, town, language_id);
+			Long user_id = this.registerUserInit(3, 1, 0, 1, login, Userpass,lastname, firstname, email, age, street, additionalname,fax, zip, states_id, town, language_id, true);
 			// Get the default organisation_id of registered users
 			if (user_id>0){
 				long organisation_id = Long.valueOf(Configurationmanagement.getInstance().getConfKey(3,"default_domain_id").getConf_value()).longValue();
@@ -709,7 +721,7 @@ public class Usermanagement {
 			int status, String login, String Userpass, String lastname,
 			String firstname, String email, int age, String street,
 			String additionalname, String fax, String zip, long states_id,
-			String town, long language_id) {
+			String town, long language_id, boolean sendWelcomeMessage) {
 		//TODO: make phoen number persistent
 		// User Level must be at least Admin
 		// Moderators will get a temp update of there UserLevel to add Users to
@@ -725,7 +737,7 @@ public class Usermanagement {
 					
 					long adress_id = Adressmanagement.getInstance().saveAdress(street, zip, town, states_id, additionalname, "",fax);
 					long user_id = this.addUser(level_id, availible, status,firstname, login, lastname, language_id, Userpass,adress_id);
-					long adress_emails_id = Emailmanagement.getInstance().registerEmail(email, adress_id, login, Userpass,"");
+					long adress_emails_id = Emailmanagement.getInstance().registerEmail(email, adress_id, login, Userpass,"", sendWelcomeMessage);
 					
 					if (adress_id > 0 && user_id > 0 && adress_emails_id > 0) {
 						return user_id;

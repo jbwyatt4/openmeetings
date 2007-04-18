@@ -10,6 +10,7 @@ import java.util.Collections;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.Criteria;
+import org.hibernate.criterion.Restrictions;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -65,6 +66,32 @@ public class Organisationmanagement {
 		}
 		return null;
 	}
+	
+	/**
+	 * 
+	 * @param USER_LEVEL
+	 * @return
+	 */
+	public List getOrganisations(long USER_LEVEL) {
+		try {
+			if (AuthLevelmanagement.getInstance().checkAdminLevel(USER_LEVEL)){
+				Object idf = HibernateUtil.createSession();
+				Session session = HibernateUtil.getSession();
+				Transaction tx = session.beginTransaction();
+				Criteria crit = session.createCriteria(Organisation.class);
+				crit.add(Restrictions.eq("deleted", "false"));
+				List ll = crit.list();
+				tx.commit();
+				HibernateUtil.closeSession(idf);
+				return ll;
+			}
+		} catch (HibernateException ex) {
+			log.error("[getOrganisationById]" + ex);
+		} catch (Exception ex2) {
+			log.error("[getOrganisationById]" + ex2);
+		}
+		return null;
+	}	
 
 	/**
 	 * Gets an organisation by its id

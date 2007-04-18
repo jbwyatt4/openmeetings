@@ -39,6 +39,11 @@
     <bean id="userservice.service" 
 	    class="org.xmlcrm.app.remote.UserService" 
 		singleton="true" />		
+
+	<!-- Class for Methods which can be invoked be the client -->
+    <bean id="organisationservice.service" 
+	    class="org.xmlcrm.app.remote.OrganisationService" 
+		singleton="true" />		
 		
 	<!-- Class for Methods which can be invoked be the client -->
     <bean id="configservice.service" 
