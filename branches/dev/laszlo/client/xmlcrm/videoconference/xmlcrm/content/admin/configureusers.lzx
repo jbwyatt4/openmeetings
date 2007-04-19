@@ -9,8 +9,8 @@
 		<handler name="oninit">
 			this.addHeaderItem(146,60);
 			this.addHeaderItem(147,100);
-			this.addHeaderItem(148,140);
-			this.addHeaderItem(149,140);
+			this.addHeaderItem(148,132);
+			this.addHeaderItem(149,132);
 			this.getUserList.doCall();
 		</handler>
 		

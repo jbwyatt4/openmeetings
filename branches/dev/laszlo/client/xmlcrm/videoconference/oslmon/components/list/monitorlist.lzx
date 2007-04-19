@@ -3,7 +3,7 @@
 
 <class name="monitorlist" extends="view" width="400" height="76" bgcolor="0xC6CEDF">
     <attribute name="selected" value="null" />
-    <attribute name="onselect" value="null" />
+    <handler name="onselect" />
     <attribute name="doubleclickEvent" value="null" />
         <method name="clearList">
         	Debug.write("clearList");
