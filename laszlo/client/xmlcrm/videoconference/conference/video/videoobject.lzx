@@ -72,14 +72,14 @@
 		
 		<!-- This is the videoview -->
 		<videoview name="_videoview" visible="false" x="3" y="2" width="120" height="80" >
-	        <stream name="v_output" debug="true" type="rtmp" >
+	        <mediastream name="v_output" debug="true" type="rtmp" >
 	            <handler name="onurl">
 	                Debug.write("stream onurl");
 	                //this.parent.play(-1,false);
 	            </handler>
-	        </stream>
-            <camera name="cameraRef" show="false"/>
-            <microphone name="microphoneRef" mute="true">            
+	        </mediastream>
+            <camera name="cameraRef" show="false" />
+            <microphone name="microphoneRef" capturing="false">            
             	<handler name="onlevel">
             		this.parent.parent.parent._loadness.setLevel(this.level);
             		this._mic.setUseEchoSuppression(true);

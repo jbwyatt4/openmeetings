@@ -58,8 +58,8 @@
     <method name="doninitalize" args="valCam,valMic">
     	//Debug.write("this.myvideocontainer: ",this.myvideocontainer);
     
-        this.myvideocontainer.cameraRef.setIndex(valCam);
-        this.myvideocontainer.microphoneRef.setIndex(valMic);
+        this.myvideocontainer.cameraRef.setAttribute('deviceindex',valCam);
+        this.myvideocontainer.microphoneRef.setAttribute('deviceindex',valMic);
 
 		this.myvideocontainer.parent.parent.setAttribute('isremote',false);
 		

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<canvas debug="false" width="100%" height="100%">
+<canvas debug="false" width="1000" height="700">
 
 <include href="config.lzx" />
 
@@ -183,6 +183,9 @@ containing the VideoViews
     Into this view alle Windows will be loaded
  -->
 <view name="main_content" y="40" width="${canvas.width}" height="${canvas.height-40}" >
+    <handler name="onwidth" args="w">
+		Debug.write("onwidht: ",w);
+	</handler>
     <view x="0" name="_content" layout="axis:y;spacing:2">
         <view name="inner" />
         
