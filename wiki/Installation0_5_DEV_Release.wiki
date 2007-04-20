@@ -46,7 +46,7 @@
   # copy all jars from the hibernate-lib folder, your database-driver, xmlcrm.jar, xmlcrm-tamplates.jar + multipartrequest.jar, + commons-lang-2.2.jar, + velocity-1.6.jar
   to your WEB-INF/lib folder
   # copy the file *crossdomain.xml* to $RED5/webapps/root/crossdomain.xml (you need this file otherwise you are not able to upload any file to the server)
-  # restart of red5 (run red5.sh/red5.bat) is needed. Browse to $RED%_HOST:5080 (start page should come up)
+  # restart of red5 (run red5.sh/red5.bat) is needed. Browse to $RED5_HOST:5080 (start page should come up)
   # browse to : $LPS_HOST:8080/lps-3.4.x/videoconference/main.lzx?lzt=swf8 for test
 
 
@@ -65,5 +65,5 @@
 			<property name="connection.url">jdbc:postgresql://localhost/openmeetings</property>
 }}}
   # copy the file *crossdomain.xml* to $RED5/webapps/root/crossdomain.xml (you need this file otherwise you are not able to upload any file to the server)
-  # restart of red5 (run red5.sh/red5.bat) is needed. Browse to $RED%_HOST:5080 (start page should come up)
+  # restart of red5 (run red5.sh/red5.bat) is needed. Browse to $RED5_HOST:5080 (start page should come up)
   # browse to : $LPS_HOST:8080/lps-3.4.x/videoconference/main.lzx?lzt=swf8 for test
