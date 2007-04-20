@@ -1,5 +1,6 @@
 package org.xmlcrm.app.remote;
 
+import java.util.Date;
 import java.util.List;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
@@ -166,7 +167,7 @@ public class MainService {
     		LinkedHashMap regObject = (LinkedHashMap) regObjectObj;
         	return Usermanagement.getInstance().registerUser(regObject.get("Username").toString(), regObject.get("Userpass").toString(), 
         			regObject.get("lastname").toString(), regObject.get("firstname").toString(), regObject.get("email").toString(), 
-        			Integer.valueOf(regObject.get("age").toString()).intValue(), regObject.get("street").toString(), regObject.get("additionalname").toString(), 
+        			new Date(), regObject.get("street").toString(), regObject.get("additionalname").toString(), 
         			regObject.get("fax").toString(), regObject.get("zip").toString(), 
         			Long.valueOf(regObject.get("states_id").toString()).longValue(), regObject.get("town").toString(), 
         			Long.valueOf(regObject.get("language_id").toString()).longValue());
@@ -198,24 +199,26 @@ public class MainService {
      * @return new users_id OR null if an exception, -1 if an error, -4 if mail already taken, -5 if username already taken, -3 if login or pass or mail is empty 
      */
 	public Long registerUser(String SID, String Username, String Userpass, String lastname, 
-				String firstname, String email, int age, String street, String additionalname, 
+				String firstname, String email, Date age, String street, String additionalname, 
 				String fax, String zip, long states_id, String town, long language_id){
     	return Usermanagement.getInstance().registerUser(Username, Userpass, lastname, firstname, email, 
     			age, street, additionalname, fax, zip, states_id, town, language_id);
 	}	
 	
-	
-    public String deleteUserIDSelf(String SID){
-    	String ret = "Deleting User Self";
+	/**
+	 * logs a user out and deletes his account
+	 * @param SID
+	 * @return
+	 */
+    public Long deleteUserIDSelf(String SID){
     	int users_id = Sessionmanagement.getInstance().checkSession(SID);
     	long User_LEVEL = Usermanagement.getInstance().getUserLevelByID(users_id);
     	if(User_LEVEL>=1){
-    		ret = Usermanagement.getInstance().logout(SID,users_id);
-    		ret = Usermanagement.getInstance().deleteUserID(users_id);
+    		Usermanagement.getInstance().logout(SID,users_id);
+    		return Usermanagement.getInstance().deleteUserID(users_id);
     	} else {
-    		ret = "Nur als registrierter Benutzer kann man seinen Account lšschen";
+    		return new Long(-10);
     	}
-    	return ret;
     }
 
 

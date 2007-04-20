@@ -63,9 +63,9 @@ public class Emailmanagement {
 				return (Emails) ll.get(0);
 			}
 		} catch (HibernateException ex) {
-			log.error("[getEmailById]" + ex);
+			log.error("[getEmailById]" ,ex);
 		} catch (Exception ex2) {
-			log.error("[getEmailById]" + ex2);
+			log.error("[getEmailById]" ,ex2);
 		}
 		return null;
 	}
@@ -142,9 +142,9 @@ public class Emailmanagement {
 				if (sendWelcomeMail) this.sendMail(Username, Userpass, EMail);
 				return mail_id;
 			} catch (HibernateException ex) {
-				log.error("Error: " + ex);
+				log.error("Error: " ,ex);
 			} catch (Exception ex2) {
-				log.error("Error: " + ex2);
+				log.error("Error: " ,ex2);
 			}
 		}
 		return new Long(-1);
@@ -178,9 +178,9 @@ public class Emailmanagement {
 			return email_id;
 
 		} catch (HibernateException ex) {
-			log.error("Error: " + ex);
+			log.error("Error: " ,ex);
 		} catch (Exception ex2) {
-			log.error("Error: " + ex2);
+			log.error("Error: " ,ex2);
 		}
 
 		return new Long(-1);
@@ -296,9 +296,9 @@ public class Emailmanagement {
 				return false;
 			}			
 		} catch (HibernateException ex) {
-			log.error("Error: " + ex);
+			log.error("Error: " ,ex);
 		} catch (Exception ex2) {
-			log.error("Error: " + ex2);
+			log.error("Error: " ,ex2);
 		}
 		return true;
 	}

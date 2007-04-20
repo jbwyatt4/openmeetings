@@ -70,9 +70,9 @@ public class Terminmanagement {
 //				//                }
 //				//                terminevisual.setTerminestruktur(TerminVisualManagement.generateVisualSystem(termine_user));
 //			} catch (HibernateException ex) {
-//				terminevisual.setComment("Error: " + ex);
+//				terminevisual.setComment("Error: " ,ex);
 //			} catch (Exception ex2) {
-//				terminevisual.setComment("Error: " + ex2);
+//				terminevisual.setComment("Error: " ,ex2);
 //			}
 //		} else {
 //			terminevisual.setComment("Error: No Permission");
@@ -448,11 +448,9 @@ public class Terminmanagement {
 			HibernateUtil.closeSession(idf);
 
 		} catch (HibernateException ex) {
-			termine_user[0] = new Termine_User();
-			termine_user[0].setComment("Error: " + ex);
+			log.error("getUserTermineByTermin",ex);
 		} catch (Exception ex2) {
-			termine_user[0] = new Termine_User();
-			termine_user[0].setComment("Error: " + ex2);
+			log.error("getUserTermineByTermin",ex2);
 		}
 		return termine_user;
 	}
@@ -657,11 +655,9 @@ public class Terminmanagement {
 			HibernateUtil.closeSession(idf);
 
 		} catch (HibernateException ex) {
-			termine_groups[0] = new Terminegroups();
-			termine_groups[0].setComment("Error: " + ex);
+			log.error("getGroupTermineByTermin",ex);
 		} catch (Exception ex2) {
-			termine_groups[0] = new Terminegroups();
-			termine_groups[0].setComment("Error: " + ex2);
+			log.error("getGroupTermineByTermin",ex2);
 		}
 		return termine_groups;
 	}
@@ -718,9 +714,9 @@ public class Terminmanagement {
 			//                termine.setStartUhrDE(CalenderI.getUhrzeitMili(termine.getStart()));
 			//            }
 		} catch (HibernateException ex) {
-			termine.setComment("Error: " + ex);
+			log.error("getTerminById",ex);
 		} catch (Exception ex2) {
-			termine.setComment("Error: " + ex2);
+			log.error("getTerminById",ex2);
 		}
 		return termine;
 	}
@@ -1211,9 +1207,9 @@ public class Terminmanagement {
 //				//                }
 //				//            
 //			} catch (HibernateException ex) {
-//				terminevisual.setComment("Error: " + ex);
+//				terminevisual.setComment("Error: " ,ex);
 //			} catch (Exception ex2) {
-//				terminevisual.setComment("Error: " + ex2);
+//				terminevisual.setComment("Error: " ,ex2);
 //			}
 //		} else {
 //			terminevisual.setComment("Error: No Permission");
@@ -1260,9 +1256,9 @@ public class Terminmanagement {
 //				//                }
 //				//            
 //			} catch (HibernateException ex) {
-//				terminevisual.setComment("Error: " + ex);
+//				terminevisual.setComment("Error: " ,ex);
 //			} catch (Exception ex2) {
-//				terminevisual.setComment("Error: " + ex2);
+//				terminevisual.setComment("Error: " ,ex2);
 //			}
 //		} else {
 //			terminevisual.setComment("Error: No Permission");

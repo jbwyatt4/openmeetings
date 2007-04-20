@@ -39,9 +39,9 @@ public class Zahlungsmanagement {
 			zahlungsarten.setUpdatetimeDE(CalenderI.getDatumMili(zahlungsarten
 					.getUpdatetime()));
 		} catch (HibernateException ex) {
-			zahlungsarten.setComment("Error: " + ex);
+			zahlungsarten.setComment("Error: "+ex);
 		} catch (Exception ex2) {
-			zahlungsarten.setComment("Error: " + ex2);
+			zahlungsarten.setComment("Error: " +ex2);
 		}
 		return zahlungsarten;
 	}
@@ -73,10 +73,10 @@ public class Zahlungsmanagement {
 				}
 			} catch (HibernateException ex) {
 				zahlungsarten[0] = new zahlungsarten();
-				zahlungsarten[0].setComment("Error: " + ex);
+				zahlungsarten[0].setComment("Error: "+ex);
 			} catch (Exception ex2) {
 				zahlungsarten[0] = new zahlungsarten();
-				zahlungsarten[0].setComment("Error: " + ex2);
+				zahlungsarten[0].setComment("Error: " +ex2);
 			}
 		} else {
 			zahlungsarten[0] = new zahlungsarten();

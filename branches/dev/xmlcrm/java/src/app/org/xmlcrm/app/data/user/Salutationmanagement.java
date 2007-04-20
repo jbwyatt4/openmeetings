@@ -54,9 +54,9 @@ public class Salutationmanagement {
 			HibernateUtil.closeSession(idf);
 			return salutations_id;
 		} catch (HibernateException ex) {
-			log.error("[addUserSalutation]" + ex);
+			log.error("[addUserSalutation]" ,ex);
 		} catch (Exception ex2) {
-			log.error("[addUserSalutation]" + ex2);
+			log.error("[addUserSalutation]" ,ex2);
 		}
 		return null;
 	}
@@ -79,9 +79,9 @@ public class Salutationmanagement {
 				return ll;
 			}
 		} catch (HibernateException ex) {
-			log.error("[addUserSalutation]" + ex);
+			log.error("[addUserSalutation]" ,ex);
 		} catch (Exception ex2) {
-			log.error("[addUserSalutation]" + ex2);
+			log.error("[addUserSalutation]" ,ex2);
 		}
 		return null;
 	}

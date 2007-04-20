@@ -12,7 +12,7 @@ public class AddDefaultfield extends TestCase {
 	
 	public void testaddDefaultField(){
 		
-		Fieldmanagment.getInstance().addFourFieldValues("calendar_iconlabel", 162, "Kalender", "calendar", "calendar", "calendar");
+		Fieldmanagment.getInstance().addFourFieldValues("savewindow_btn", 163, "schlie§en", "close", "close", "close");
 		
 	}
 

@@ -40,10 +40,10 @@ public class Freigabemanagement {
 				HibernateUtil.closeSession(idf);
 			} catch (HibernateException ex) {
 				contactfreigabe[0] = new contactfreigabe();
-				contactfreigabe[0].setComment("Error: " + ex);
+				contactfreigabe[0].setComment("Error: "+ex);
 			} catch (Exception ex2) {
 				contactfreigabe[0] = new contactfreigabe();
-				contactfreigabe[0].setComment("Error: " + ex2);
+				contactfreigabe[0].setComment("Error: " +ex2);
 			}
 		} else {
 			contactfreigabe[0] = new contactfreigabe();
@@ -67,9 +67,9 @@ public class Freigabemanagement {
 			tx.commit();
 			HibernateUtil.closeSession(idf);
 		} catch (HibernateException ex) {
-			contactfreigabe.setComment("Error: " + ex);
+			contactfreigabe.setComment("Error: "+ex);
 		} catch (Exception ex2) {
-			contactfreigabe.setComment("Error: " + ex2);
+			contactfreigabe.setComment("Error: " +ex2);
 		}
 		return contactfreigabe;
 	}

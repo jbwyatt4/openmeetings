@@ -43,10 +43,10 @@ public class Productmanagement {
 			HibernateUtil.closeSession(idf);
 		} catch (HibernateException ex) {
 			products[0] = new products();
-			products[0].setCategory("Error: " + ex);
+			products[0].setCategory("Error: "+ex);
 		} catch (Exception ex2) {
 			products[0] = new products();
-			products[0].setCategory("Error: " + ex2);
+			products[0].setCategory("Error: " +ex2);
 		}
 		return products;
 	}
@@ -73,10 +73,10 @@ public class Productmanagement {
 			HibernateUtil.closeSession(idf);
 		} catch (HibernateException ex) {
 			products[0] = new products();
-			products[0].setCategory("Error: " + ex);
+			products[0].setCategory("Error: "+ex);
 		} catch (Exception ex2) {
 			products[0] = new products();
-			products[0].setCategory("Error: " + ex2);
+			products[0].setCategory("Error: " +ex2);
 		}
 		return products;
 	}
@@ -103,10 +103,10 @@ public class Productmanagement {
 			HibernateUtil.closeSession(idf);
 		} catch (HibernateException ex) {
 			products[0] = new products();
-			products[0].setCategory("Error: " + ex);
+			products[0].setCategory("Error: "+ex);
 		} catch (Exception ex2) {
 			products[0] = new products();
-			products[0].setCategory("Error: " + ex2);
+			products[0].setCategory("Error: " +ex2);
 		}
 		return products;
 	}
@@ -131,10 +131,10 @@ public class Productmanagement {
 			HibernateUtil.closeSession(idf);
 		} catch (HibernateException ex) {
 			products[0] = new products();
-			products[0].setCategory("Error: " + ex);
+			products[0].setCategory("Error: "+ex);
 		} catch (Exception ex2) {
 			products[0] = new products();
-			products[0].setCategory("Error: " + ex2);
+			products[0].setCategory("Error: " +ex2);
 		}
 		return products;
 	}
@@ -154,9 +154,9 @@ public class Productmanagement {
 			tx.commit();
 			HibernateUtil.closeSession(idf);
 		} catch (HibernateException ex) {
-			products.setCategory("Error: " + ex);
+			products.setCategory("Error: "+ex);
 		} catch (Exception ex2) {
-			products.setCategory("Error: " + ex2);
+			products.setCategory("Error: " +ex2);
 		}
 		return products;
 	}

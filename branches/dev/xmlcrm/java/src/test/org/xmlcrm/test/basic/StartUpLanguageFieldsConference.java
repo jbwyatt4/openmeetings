@@ -180,6 +180,7 @@ public class StartUpLanguageFieldsConference extends TestCase {
 		Fieldmanagment.getInstance().addFourFieldValues("useralter_admin_statusItem", 160, "aktiv", "enabled", "enabled", "enabled");
 		Fieldmanagment.getInstance().addFourFieldValues("useralter_admin_organisation", 161, "Organisationen", "organisations", "organisations", "organisations");
 		Fieldmanagment.getInstance().addFourFieldValues("calendar_iconlabel", 162, "Kalender", "calendar", "calendar", "calendar");
+		Fieldmanagment.getInstance().addFourFieldValues("savewindow_btn", 163, "schlie§en", "close", "close", "close");
 		
 		
 	}

@@ -21,7 +21,7 @@ public class DeleteUser extends TestCase {
 		
 		System.out.println("us: "+us.getFirstname());
 		
-		String delete = mService.deleteUserIDSelf(sessionData.getSession_id());
+		Long delete = mService.deleteUserIDSelf(sessionData.getSession_id());
 		
 		System.out.println("deleteSelf "+delete);
 	}

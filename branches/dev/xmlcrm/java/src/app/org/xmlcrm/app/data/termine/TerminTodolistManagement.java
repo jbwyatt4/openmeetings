@@ -3,6 +3,8 @@ package org.xmlcrm.app.data.termine;
 import java.util.Iterator;
 import java.util.ArrayList;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -20,6 +22,8 @@ import org.xmlcrm.utils.math.Calender;
 //import org.xmlcrm.utils.stringhandlers.Flashencoder;
 
 public class TerminTodolistManagement {
+	
+	private static final Log log = LogFactory.getLog(Terminmanagement.class);
 	private Calender CalenderI;
 
 	private Terminmanagement TerminmanagementI;
@@ -140,9 +144,9 @@ public class TerminTodolistManagement {
 			//            termine_todolist.setStarttimeDE(CalenderI.getDatumMili(termine_todolist.getStarttime()));
 			//            termine_todolist.setUpdatetimeDE(CalenderI.getDatumMili(termine_todolist.getUpdatetime()));                    
 		} catch (HibernateException ex) {
-			termine_todolist.setComment("Error: " + ex);
+			termine_todolist.setComment("Error: "+ex);
 		} catch (Exception ex2) {
-			termine_todolist.setComment("Error: " + ex2);
+			termine_todolist.setComment("Error: " +ex2);
 		}
 		return termine_todolist;
 	}
@@ -394,9 +398,9 @@ public class TerminTodolistManagement {
 			//            ListI.add(ListInner);            
 
 		} catch (HibernateException ex) {
-			termine_todo_user.setComment("Error: " + ex);
+			log.error("generateSinglePDFDoc",ex);
 		} catch (Exception ex2) {
-			termine_todo_user.setComment("Error: " + ex2);
+			log.error("generateSinglePDFDoc",ex2);
 		}
 		return ListI;
 	}
@@ -447,10 +451,10 @@ public class TerminTodolistManagement {
 			//            }
 		} catch (HibernateException ex) {
 			termine_todo_user[0] = new Termine_Todo_User();
-			termine_todo_user[0].setComment("Error: " + ex);
+			termine_todo_user[0].setComment("Error: "+ex);
 		} catch (Exception ex2) {
 			termine_todo_user[0] = new Termine_Todo_User();
-			termine_todo_user[0].setComment("Error: " + ex2);
+			termine_todo_user[0].setComment("Error: " +ex2);
 		}
 		return ListI;
 	}

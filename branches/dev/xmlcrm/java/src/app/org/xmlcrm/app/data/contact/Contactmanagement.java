@@ -725,10 +725,10 @@ public class Contactmanagement {
 			//	    	}
 		} catch (HibernateException ex) {
 			contactgroups[0] = new Contactgroups();
-			contactgroups[0].setComment("Error: " + ex);
+			contactgroups[0].setComment("Error: "+ex);
 		} catch (Exception ex2) {
 			contactgroups[0] = new Contactgroups();
-			contactgroups[0].setComment("Error: " + ex2);
+			contactgroups[0].setComment("Error: " +ex2);
 		}
 		return contactgroups;
 	}
@@ -754,10 +754,10 @@ public class Contactmanagement {
 			//	    	}
 		} catch (HibernateException ex) {
 			contactgroups[0] = new Contactgroups();
-			contactgroups[0].setComment("Error: " + ex);
+			contactgroups[0].setComment("Error: "+ex);
 		} catch (Exception ex2) {
 			contactgroups[0] = new Contactgroups();
-			contactgroups[0].setComment("Error: " + ex2);
+			contactgroups[0].setComment("Error: " +ex2);
 		}
 		return contactgroups;
 	}
@@ -788,9 +788,9 @@ public class Contactmanagement {
 			//	    	}
 
 		} catch (HibernateException ex) {
-			System.out.println("Error: " + ex);
+			System.out.println("Error: "+ex);
 		} catch (Exception ex2) {
-			System.out.println("Error: " + ex2);
+			System.out.println("Error: " +ex2);
 		}
 		return ret;
 	}
@@ -850,9 +850,9 @@ public class Contactmanagement {
 			tx.commit();
 			HibernateUtil.closeSession(idf);
 		} catch (HibernateException ex) {
-			System.out.println("Error: " + ex);
+			System.out.println("Error: "+ex);
 		} catch (Exception ex2) {
-			System.out.println("Error: " + ex2);
+			System.out.println("Error: " +ex2);
 		}
 		return contactgroups;
 	}
@@ -866,9 +866,9 @@ public class Contactmanagement {
 			//			ret = getCheckDuplicate(CONTACT_ID, CONUSER_ID,CONGROUP_ID);
 			//			
 		} catch (HibernateException ex) {
-			System.out.println("Error: " + ex);
+			System.out.println("Error: "+ex);
 		} catch (Exception ex2) {
-			System.out.println("Error: " + ex2);
+			System.out.println("Error: " +ex2);
 		}
 		return ret;
 	}
@@ -901,9 +901,9 @@ public class Contactmanagement {
 				result = "Permission denied";
 			}
 		} catch (HibernateException ex) {
-			log.error("[getUserForGroup]" + ex);
+			log.error("[getUserForGroup]",ex);
 		} catch (Exception ex2) {
-			log.error("[getUserForGroup]" + ex2);
+			log.error("[getUserForGroup]",ex2);
 		}
 		return result;
 	}
