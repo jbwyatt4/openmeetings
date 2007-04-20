@@ -71,10 +71,10 @@
 	    canvas._ns.publish(canvas.streamid,"live");
 	    //this.myvideocontainer.microphoneRef._mic.setRate(4);
 	    //this.myvideocontainer.cameraRef._cam.setQuality(16384/4);
-	    this.myvideocontainer.microphoneRef._mic.setUseEchoSuppression(true);
+	    this.myvideocontainer.microphoneRef._dev.setUseEchoSuppression(true);
 	    
-	    canvas._ns.attachVideo(this.myvideocontainer.cameraRef._cam);
-	    canvas._ns.attachAudio(this.myvideocontainer.microphoneRef._mic);  
+	    canvas._ns.attachVideo(this.myvideocontainer.cameraRef._dev);
+	    canvas._ns.attachAudio(this.myvideocontainer.microphoneRef._dev);  
 	    //Attach Devices to Stream
 	    //Debug.write(cameraRef._cam);
 	    //Debug.write(microphoneRef._mic);
@@ -82,15 +82,15 @@
 	    //      
 	    this.myvideocontainer.microphoneRef.setAttribute('mute',false);
 	    
-	    this.myvideocontainer.microphoneRef._initMic();
-        this.myvideocontainer.cameraRef.showCamera(true);
+	    this.myvideocontainer.microphoneRef.setAttribute('capturing',true);
+        this.myvideocontainer.cameraRef.setAttribute('show',true);
         this.myvideocontainer.parent.parent.setIdentifier(canvas.streamid);
         
         this.myvideocontainer.parent.parent.setAttribute('chatpartnername',canvas.firstName+' '+canvas.lastName);
         
         //this.myvideocontainer.microphoneRef._mic.setRate(4);
 	    //this.myvideocontainer.cameraRef._cam.setQuality(16384/4);
-	    this.myvideocontainer.microphoneRef._mic.setUseEchoSuppression(true);
+	    this.myvideocontainer.microphoneRef._dev.setUseEchoSuppression(true);
 
         this.close();
     </method>    
