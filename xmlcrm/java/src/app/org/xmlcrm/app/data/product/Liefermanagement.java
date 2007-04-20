@@ -38,9 +38,9 @@ public class Liefermanagement {
 //			lieferarten.setUpdatetimeDE(CalenderI.getDatumMili(lieferarten
 //					.getUpdatetime()));
 		} catch (HibernateException ex) {
-			lieferarten.setComment("Error: " + ex);
+			lieferarten.setComment("Error: "+ex);
 		} catch (Exception ex2) {
-			lieferarten.setComment("Error: " + ex2);
+			lieferarten.setComment("Error: " +ex2);
 		}
 		return lieferarten;
 	}
@@ -72,10 +72,10 @@ public class Liefermanagement {
 //				}
 			} catch (HibernateException ex) {
 				lieferarten[0] = new lieferarten();
-				lieferarten[0].setComment("Error: " + ex);
+				lieferarten[0].setComment("Error: "+ex);
 			} catch (Exception ex2) {
 				lieferarten[0] = new lieferarten();
-				lieferarten[0].setComment("Error: " + ex2);
+				lieferarten[0].setComment("Error: " +ex2);
 			}
 		} else {
 			lieferarten[0] = new lieferarten();

@@ -66,9 +66,9 @@ public class Sessionmanagement {
 			tx.commit();
 			HibernateUtil.closeSession(idf);
 		} catch (HibernateException ex) {
-			log.error("[startsession]: " + ex);
+			log.error("[startsession]: " ,ex);
 		} catch (Exception ex2) {
-			log.error("[startsession]: " + ex2);
+			log.error("[startsession]: " ,ex2);
 		}
 
 		return sessiondata;
@@ -104,9 +104,9 @@ public class Sessionmanagement {
 			HibernateUtil.closeSession(idf);
 			updatesession(SID);
 		} catch (HibernateException ex) {
-			log.error("[checkSession]: " + ex);
+			log.error("[checkSession]: " ,ex);
 		} catch (Exception ex2) {
-			log.error("[checkSession]: " + ex2);
+			log.error("[checkSession]: " ,ex2);
 		}
 		return ret;
 	}
@@ -143,9 +143,9 @@ public class Sessionmanagement {
 			//log.error("session updated User: "+USER_ID);
 
 		} catch (HibernateException ex) {
-			log.error("[updateUser]: " + ex);
+			log.error("[updateUser]: " ,ex);
 		} catch (Exception ex2) {
-			log.error("[updateUser]: " + ex2);
+			log.error("[updateUser]: " ,ex2);
 		}
 	}
 
@@ -169,9 +169,9 @@ public class Sessionmanagement {
 			tx.commit();
 			HibernateUtil.closeSession(idf);
 		} catch (HibernateException ex) {
-			log.error("[updatesession]: " + ex);
+			log.error("[updatesession]: " ,ex);
 		} catch (Exception ex2) {
-			log.error("[updatesession]: " + ex2);
+			log.error("[updatesession]: " ,ex2);
 		}
 	}
 }

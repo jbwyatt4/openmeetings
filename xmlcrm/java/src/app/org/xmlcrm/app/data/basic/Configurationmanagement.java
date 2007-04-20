@@ -53,9 +53,9 @@ public class Configurationmanagement {
 				HibernateUtil.closeSession(idf);
 				//     	configuration.setUsers(ResHandler.getUsermanagement().getUser(configuration.getUser_id().intValue()));
 			} catch (HibernateException ex) {
-				log.error("[getConfKey]: " + ex);
+				log.error("[getConfKey]: " ,ex);
 			} catch (Exception ex2) {
-				log.error("[getConfKey]: " + ex2);
+				log.error("[getConfKey]: " ,ex2);
 			}
 		} else {
 			configuration.setComment("Error: Permission denied");
@@ -83,9 +83,9 @@ public class Configurationmanagement {
 				tx.commit();
 				HibernateUtil.closeSession(idf);
 			} catch (HibernateException ex) {
-				log.error("[getAllConf]: " + ex);
+				log.error("[getAllConf]: " ,ex);
 			} catch (Exception ex2) {
-				log.error("[getAllConf]: " + ex2);
+				log.error("[getAllConf]: " ,ex2);
 			}
 		} else {
 			configuration[0] = new Configuration();
@@ -118,9 +118,9 @@ public class Configurationmanagement {
 				HibernateUtil.closeSession(idf);
 				ret = "Erfolgreich";
 			} catch (HibernateException ex) {
-				log.error("[addConfByKey]: " + ex);
+				log.error("[addConfByKey]: " ,ex);
 			} catch (Exception ex2) {
-				log.error("[addConfByKey]: " + ex2);
+				log.error("[addConfByKey]: " ,ex2);
 			}
 		} else {
 			ret = "Error: Permission denied";
@@ -148,9 +148,9 @@ public class Configurationmanagement {
 				tx.commit();
 				HibernateUtil.closeSession(idf);
 			} catch (HibernateException ex) {
-				log.error("[updateConfByUID]: " + ex);
+				log.error("[updateConfByUID]: " ,ex);
 			} catch (Exception ex2) {
-				log.error("[updateConfByUID]: " + ex2);
+				log.error("[updateConfByUID]: " ,ex2);
 			}
 		} else {
 			res = "Error: Permission denied";
@@ -172,9 +172,9 @@ public class Configurationmanagement {
 				tx.commit();
 				HibernateUtil.closeSession(idf);
 			} catch (HibernateException ex) {
-				log.error("[deleteConfByUID]: " + ex);
+				log.error("[deleteConfByUID]: " ,ex);
 			} catch (Exception ex2) {
-				log.error("[deleteConfByUID]: " + ex2);
+				log.error("[deleteConfByUID]: " ,ex2);
 			}
 		} else {
 			res = "Error: Permission denied";

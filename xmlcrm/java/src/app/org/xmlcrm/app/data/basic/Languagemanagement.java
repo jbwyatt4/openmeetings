@@ -45,9 +45,9 @@ public class Languagemanagement {
 			tx.commit();
 			HibernateUtil.closeSession(idf);
 		} catch (HibernateException ex) {
-			log.error("[getConfKey]: " + ex);
+			log.error("[getConfKey]: " ,ex);
 		} catch (Exception ex2) {
-			log.error("[getConfKey]: " + ex2);
+			log.error("[getConfKey]: " ,ex2);
 		}
 	}
 
@@ -64,9 +64,9 @@ public class Languagemanagement {
 
 			return ll;
 		} catch (HibernateException ex) {
-			log.error("[getConfKey]: " + ex);
+			log.error("[getConfKey]: " ,ex);
 		} catch (Exception ex2) {
-			log.error("[getConfKey]: " + ex2);
+			log.error("[getConfKey]: " ,ex2);
 		}
 		return null;
 	}

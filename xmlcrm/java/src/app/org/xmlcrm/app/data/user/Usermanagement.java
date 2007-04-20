@@ -1,6 +1,7 @@
 package org.xmlcrm.app.data.user;
 
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Date;
 
@@ -21,6 +22,7 @@ import org.xmlcrm.app.hibernate.utils.HibernateUtil;
 import org.xmlcrm.app.data.basic.AuthLevelmanagement;
 import org.xmlcrm.app.data.basic.Configurationmanagement;
 import org.xmlcrm.app.data.beans.basic.SearchResult;
+import org.xmlcrm.app.data.user.Organisationmanagement;
 import org.xmlcrm.utils.math.*;
 
 
@@ -328,9 +330,9 @@ public class Usermanagement {
 
 	public Long updateUser(long USER_LEVEL, Long user_id, Long level_id,
 			String login, String password, String lastname, String firstname,
-			int age, String street, String additionalname, String zip, long states_id, String town,
+			Date age, String street, String additionalname, String zip, long states_id, String town,
 			int availible, String telefon, String fax,
-			String mobil, String email, String comment, int status) {
+			String mobil, String email, String comment, int status, LinkedHashMap organisations) {
 
 		if (AuthLevelmanagement.getInstance().checkUserLevel(USER_LEVEL) && user_id != 0) {
 			try {
@@ -361,12 +363,12 @@ public class Usermanagement {
 					
 					us.setLastname(lastname);
 					us.setFirstname(firstname);
-					us.setAge(new Date());
+					us.setAge(age);
 					us.setLogin(login);
 					us.setUpdatetime(new Date());
 					us.setAvailible(availible);
 					us.setStatus(status);
-
+					
 					if (level_id != 0)
 						us.setLevel_id(new Long(level_id));
 					if (password.length() != 0) {
@@ -381,6 +383,10 @@ public class Usermanagement {
 					//Todo implement Phone
 					Adressmanagement.getInstance().updateAdress(us.getAdresses().getAdresses_id(), street, zip, town, states_id, additionalname, comment, fax);
 					Emailmanagement.getInstance().updateUserEmail(mail.getMail().getMail_id(),user_id, email);
+					
+					if (organisations!=null){
+						Organisationmanagement.getInstance().updateUserOrganisationsByUser(us, organisations);
+					}
 					
 					log.info("USER " + us.getLastname());
 					Object idf = HibernateUtil.createSession();
@@ -557,8 +563,7 @@ public class Usermanagement {
 		return ret;
 	}
 
-	public String deleteUserID(long USER_ID) {
-		String result = "Fehler im deleteUserID";
+	public Long deleteUserID(long USER_ID) {
 		try {
 			if (USER_ID != 0) {
 				Users us = this.getUser(USER_ID);
@@ -574,7 +579,7 @@ public class Usermanagement {
 				session.update(us);
 				tx.commit();
 				HibernateUtil.closeSession(idf);
-				result = "Erfolgreich";
+				return us.getUser_id();
 				// result +=
 				// ResHandler.getBestellmanagement().deleteWarenkorbByUserID(USER_ID);
 				// result +=
@@ -586,11 +591,11 @@ public class Usermanagement {
 
 			}
 		} catch (HibernateException ex) {
-			log.error("[deleteUserID]" + ex);
+			log.error("[deleteUserID]" ,ex);
 		} catch (Exception ex2) {
-			log.error("[deleteUserID]" + ex2);
+			log.error("[deleteUserID]" ,ex2);
 		}
-		return result;
+		return null;
 	}
 
 	private Userlevel getUserLevel(Long level_id) {
@@ -608,9 +613,9 @@ public class Usermanagement {
 			tx.commit();
 			HibernateUtil.closeSession(idf);
 		} catch (HibernateException ex) {
-			log.error("[getUserLevel]" + ex);
+			log.error("[getUserLevel]" ,ex);
 		} catch (Exception ex2) {
-			log.error("[getUserLevel]" + ex2);
+			log.error("[getUserLevel]" ,ex2);
 		}
 		return userlevel;
 	}
@@ -641,9 +646,9 @@ public class Usermanagement {
 				return users.getLevel_id();
 			}
 		} catch (HibernateException ex) {
-			log.error("[getUserLevelByID]" + ex);
+			log.error("[getUserLevelByID]" ,ex);
 		} catch (Exception ex2) {
-			log.error("[getUserLevelByID]" + ex2);
+			log.error("[getUserLevelByID]" ,ex2);
 		}
 		return null;
 	}
@@ -674,7 +679,7 @@ public class Usermanagement {
 	 * @return
 	 */
 	public Long registerUser(String login, String Userpass, String lastname,
-			String firstname, String email, int age, String street,
+			String firstname, String email, Date age, String street,
 			String additionalname, String fax, String zip, long states_id,
 			String town, long language_id) {
 		// Checks if FrontEndUsers can register
@@ -682,7 +687,7 @@ public class Usermanagement {
 			// TODO: add availible params sothat users have to verify their
 			// login-data
 			// TODO: add status from Configuration items
-			Long user_id = this.registerUserInit(3, 1, 0, 1, login, Userpass,lastname, firstname, email, age, street, additionalname,fax, zip, states_id, town, language_id, true);
+			Long user_id = this.registerUserInit(3, 1, 0, 1, login, Userpass,lastname, firstname, email, age, street, additionalname,fax, zip, states_id, town, language_id, true, new LinkedHashMap());
 			// Get the default organisation_id of registered users
 			if (user_id>0){
 				long organisation_id = Long.valueOf(Configurationmanagement.getInstance().getConfKey(3,"default_domain_id").getConf_value()).longValue();
@@ -719,9 +724,9 @@ public class Usermanagement {
 	 */
 	public Long registerUserInit(long USER_LEVEL, long level_id, int availible,
 			int status, String login, String Userpass, String lastname,
-			String firstname, String email, int age, String street,
+			String firstname, String email, Date age, String street,
 			String additionalname, String fax, String zip, long states_id,
-			String town, long language_id, boolean sendWelcomeMessage) {
+			String town, long language_id, boolean sendWelcomeMessage, LinkedHashMap organisations) {
 		//TODO: make phoen number persistent
 		// User Level must be at least Admin
 		// Moderators will get a temp update of there UserLevel to add Users to
@@ -736,8 +741,10 @@ public class Usermanagement {
 				if (checkName && checkEmail) {
 					
 					long adress_id = Adressmanagement.getInstance().saveAdress(street, zip, town, states_id, additionalname, "",fax);
-					long user_id = this.addUser(level_id, availible, status,firstname, login, lastname, language_id, Userpass,adress_id);
+					long user_id = this.addUser(level_id, availible, status,firstname, login, lastname, language_id, Userpass,adress_id, age);
 					long adress_emails_id = Emailmanagement.getInstance().registerEmail(email, adress_id, login, Userpass,"", sendWelcomeMessage);
+					
+					Organisationmanagement.getInstance().addUserOrganisationsByHashMap(user_id, organisations);
 					
 					if (adress_id > 0 && user_id > 0 && adress_emails_id > 0) {
 						return user_id;
@@ -779,13 +786,13 @@ public class Usermanagement {
 	 */
 	public Long addUser(long level_id, int availible, int status,
 			String firstname, String login, String lastname, long language_id,
-			String Userpass, long adress_id) {
+			String Userpass, long adress_id, Date age) {
 		try {
 			Users users = new Users();
 			users.setFirstname(firstname);
 			users.setLogin(login);
 			users.setLastname(lastname);
-			users.setAge(new Date());
+			users.setAge(age);
 			users.setAdresses(Adressmanagement.getInstance().getAdressbyId(adress_id));
 			users.setAvailible(availible);
 			users.setLastlogin(new Date());
@@ -817,9 +824,9 @@ public class Usermanagement {
 			return user_id;
 
 		} catch (HibernateException ex) {
-			log.error("[registerUser]" + ex);
+			log.error("[registerUser]" ,ex);
 		} catch (Exception ex2) {
-			log.error("[registerUser]" + ex2);
+			log.error("[registerUser]" ,ex2);
 		}
 		return null;
 	}
@@ -845,9 +852,9 @@ public class Usermanagement {
 				return false;
 			}			
 		} catch (HibernateException ex) {
-			log.error("[checkUserData]" + ex);
+			log.error("[checkUserData]" ,ex);
 		} catch (Exception ex2) {
-			log.error("[checkUserData]" + ex2);
+			log.error("[checkUserData]" ,ex2);
 		}
 		return true;
 	}
@@ -866,9 +873,9 @@ public class Usermanagement {
 			tx.commit();
 			HibernateUtil.closeSession(idf);
 		} catch (HibernateException ex) {
-			log.error("[addUserLevel]" + ex);
+			log.error("[addUserLevel]" ,ex);
 		} catch (Exception ex2) {
-			log.error("[addUserLevel]" + ex2);
+			log.error("[addUserLevel]" ,ex2);
 		}
 	}
 

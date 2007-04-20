@@ -17,45 +17,4 @@ public class UpdateUserSelf extends TestCase {
 		super(testname);
 	}
 	
-	public void testUserUpdate(){
-		
-		MainService mService = new MainService();
-		UserService uService = new UserService();
-		Sessiondata sessionData = mService.getsessiondata();
-		
-		Users us = mService.loginUser(sessionData.getSession_id(), "swagner3", "test");
-		
-		System.out.println("us: "+us.getFirstname());
-		
-		Long updateRes = uService.updateUser(sessionData.getSession_id(),"swagner3", "", "WagnerUp", "SebUp", 22, "StreetUp", "92a", "75UP", 1, "PfUp", "seba.up", 0, "07Up", "07faxUP", "015UP","comment",1);
-
-		System.out.println("updateRes: "+updateRes);
-		
-		String logout = mService.logoutUser(sessionData.getSession_id());
-		
-		System.out.println("logout: "+logout);		
-		
-	}
-	
-	public void testUserUpdateAdmin(){
-		
-		MainService mService = new MainService();
-		UserService uService = new UserService();
-		Sessiondata sessionData = mService.getsessiondata();
-		
-		Users us = mService.loginUser(sessionData.getSession_id(), "swagner", "67810");
-		
-		System.out.println("us: "+us.getFirstname());
-		
-		Long updateRes = uService.updateUserAdmin(sessionData.getSession_id(), 3 , 3, "swagner3", "", "WagnerUpAdmin", "SebAdminUp", 22, "StreetUp", "92a", "75UP", 1, "PfUp", "seba.up", 0, "07Up", "07faxUP", "015UP", "comment",1);
-
-		System.out.println("updateRes: "+updateRes);
-		
-		String logout = mService.logoutUser(sessionData.getSession_id());
-		
-		System.out.println("logout: "+logout);		
-		
-	}
-	
-	
 }

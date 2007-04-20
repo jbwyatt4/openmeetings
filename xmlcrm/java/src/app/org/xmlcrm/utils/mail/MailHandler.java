@@ -44,7 +44,7 @@ public class MailHandler {
 
 			return send(smtpServer, to, from, subject, body);
 		} catch (Exception ex) {
-			log.error("[sendMail] " + ex);
+			log.error("[sendMail] " ,ex);
 			return "Error: " + ex;
 		}
 	}
@@ -103,7 +103,7 @@ public class MailHandler {
 
 			return "success";
 		} catch (Exception ex) {
-			log.error("[mail send] " + ex);
+			log.error("[mail send] " ,ex);
 			return "Error" + ex;
 		}
 	}

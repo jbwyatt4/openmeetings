@@ -2,10 +2,12 @@ package org.xmlcrm.app.data.user;
 
 import java.util.Comparator;
 import java.util.Date;
+import java.util.Set;
 import java.util.List;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Collections;
+import java.util.LinkedHashMap;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -60,9 +62,9 @@ public class Organisationmanagement {
 			HibernateUtil.closeSession(idf);
 			return id;
 		} catch (HibernateException ex) {
-			log.error("[addOrganisation]" + ex);
+			log.error("[addOrganisation]" ,ex);
 		} catch (Exception ex2) {
-			log.error("[addOrganisation]" + ex2);
+			log.error("[addOrganisation]" ,ex2);
 		}
 		return null;
 	}
@@ -86,9 +88,9 @@ public class Organisationmanagement {
 				return ll;
 			}
 		} catch (HibernateException ex) {
-			log.error("[getOrganisationById]" + ex);
+			log.error("[getOrganisationById]" ,ex);
 		} catch (Exception ex2) {
-			log.error("[getOrganisationById]" + ex2);
+			log.error("[getOrganisationById]" ,ex2);
 		}
 		return null;
 	}	
@@ -113,9 +115,9 @@ public class Organisationmanagement {
 				return (Organisation) ll.get(0);
 			}
 		} catch (HibernateException ex) {
-			log.error("[getOrganisationById]" + ex);
+			log.error("[getOrganisationById]",ex);
 		} catch (Exception ex2) {
-			log.error("[getOrganisationById]" + ex2);
+			log.error("[getOrganisationById]",ex2);
 		}
 		return null;
 	}
@@ -147,9 +149,9 @@ public class Organisationmanagement {
 			HibernateUtil.closeSession(idf);
 			return id;
 		} catch (HibernateException ex) {
-			log.error("[addUserToOrganisation]" + ex);
+			log.error("[addUserToOrganisation]",ex);
 		} catch (Exception ex2) {
-			log.error("[addUserToOrganisation]" + ex2);
+			log.error("[addUserToOrganisation]",ex2);
 		}
 		return null;
 	}
@@ -164,9 +166,9 @@ public class Organisationmanagement {
 					return true;
 			}
 		} catch (HibernateException ex) {
-			log.error("[checkUserContainsOrganisation]" + ex);
+			log.error("[checkUserContainsOrganisation]",ex);
 		} catch (Exception ex2) {
-			log.error("[checkUserContainsOrganisation]" + ex2);
+			log.error("[checkUserContainsOrganisation]",ex2);
 		}
 		return false;
 	}
@@ -208,9 +210,100 @@ public class Organisationmanagement {
 				}
 			}
 		} catch (HibernateException ex) {
-			log.error("[getOrganisationUsers]" + ex);
+			log.error("[getOrganisationUsers]",ex);
 		} catch (Exception ex2) {
-			log.error("[getOrganisationUsers]" + ex2);
+			log.error("[getOrganisationUsers]",ex2);
+		}
+		return null;
+	}
+	
+	/**
+	 * checks if the orgId is in the list of orgIds which have been send as organisations
+	 * @param orgId
+	 * @param org
+	 * @return
+	 * @throws Exception
+	 */
+	private boolean checkOrgInList(Long orgId, LinkedHashMap org) throws Exception{
+		for (Iterator it = org.keySet().iterator();it.hasNext();){
+			Integer key = (Integer) it.next();
+			Long newOrgId = Long.valueOf(org.get(key).toString()).longValue();
+			log.error("[checkOrgInList]: newOrgId"+newOrgId);
+			log.error("[checkOrgInList]: org"+org);
+			if (newOrgId==orgId) return true;
+		}
+		return false;
+	}
+	
+	/**
+	 * checks if an orgId is already stored in the Users Organisations Object
+	 * @param orgId
+	 * @param org
+	 * @return
+	 * @throws Exception
+	 */
+	private boolean checkOrgInStoredList(long orgId, Set org) throws Exception {
+		for (Iterator it = org.iterator();it.hasNext();){
+			Organisation_Users orgUsers = (Organisation_Users) it.next();
+			if (orgUsers.getOrganisation().getOrganisation_id()==orgId) return true;
+		}
+		return false;
+	}
+	
+	/**
+	 * updates users-organisations by a given params
+	 * @param us
+	 * @param organisations
+	 * @return
+	 */
+	public Long updateUserOrganisationsByUser(Users us, LinkedHashMap organisations){
+		try {
+			LinkedList<Long> orgIdsToAdd = new LinkedList<Long>();
+			LinkedList<Long> orgIdsToDelete = new LinkedList<Long>();
+			
+			if (us.getOrganisation_users()!=null){
+				
+				for (Iterator it = organisations.keySet().iterator();it.hasNext();){
+					Integer key = (Integer) it.next();
+					Long orgIdToAdd = Long.valueOf(organisations.get(key).toString()).longValue();
+					boolean isAlreadyStored = this.checkOrgInStoredList(orgIdToAdd, us.getOrganisation_users());
+					if (!isAlreadyStored) orgIdsToAdd.add(orgIdToAdd);
+				}
+				
+				for (Iterator it = us.getOrganisation_users().iterator();it.hasNext();){
+					Organisation_Users orgUsers = (Organisation_Users) it.next();
+					Long orgIdStored = orgUsers.getOrganisation().getOrganisation_id();
+					log.error("updateUserOrganisationsByUser check1 : "+orgIdStored);
+					boolean shouldBeStored = this.checkOrgInList(orgIdStored,organisations);
+					if (!shouldBeStored) orgIdsToDelete.add(orgIdStored);
+				}
+
+				log.error("updateUserOrganisationsByUser size ADD: "+orgIdsToAdd.size());
+				log.error("updateUserOrganisationsByUser size DELETE: "+orgIdsToDelete.size());
+			}
+		} catch (Exception err){
+			log.error("[updateUserOrganisationsByUser] ",err);
+		}
+		return null;
+	}
+	
+	/**
+	 * adds all send organisations to this User-Object (for newly registered/created Users)
+	 * @param us
+	 * @param org
+	 * @return
+	 */
+	public Long addUserOrganisationsByHashMap(long us, LinkedHashMap org){
+		try {
+			if (org!=null){
+				for (Iterator it = org.keySet().iterator();it.hasNext();){
+					Integer key = (Integer) it.next();
+					Long newOrgId = Long.valueOf(org.get(key).toString()).longValue();
+					this.addUserToOrganisation(us, newOrgId, 1, "");
+				}
+			}
+		} catch (Exception ex) {
+			log.error("addUserOrganisationsByHashMap",ex);
 		}
 		return null;
 	}

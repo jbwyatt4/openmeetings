@@ -49,6 +49,11 @@
     <bean id="configservice.service" 
 	    class="org.xmlcrm.app.remote.ConfigurationService" 
 		singleton="true" />	
+		
+	<!-- Class for Methods which can be invoked be the client -->
+    <bean id="errorservice.service" 
+	    class="org.xmlcrm.app.remote.ErrorService" 
+		singleton="true" />			
 				
 	<!-- Class for Methods which can be invoked be the client -->
     <bean id="dokeosService.service" 
