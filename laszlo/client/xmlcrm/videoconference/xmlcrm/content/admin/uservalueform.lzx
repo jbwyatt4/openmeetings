@@ -39,7 +39,7 @@
         this.firstname.setText(obj.firstname);
         this.lastname.setText(obj.lastname);
         this.email.setText(obj.adresses.emails[0].mail.email);
-        this.age.setText(obj.age);
+        this.age.setText(parseDateToString(obj.age));
         this.street.setText(obj.adresses.street);
         this.house.setText(obj.adresses.additionalname);
         this.zip.setText(obj.adresses.zip);
