@@ -49,6 +49,7 @@
   # restart of red5 (run red5.sh/red5.bat) is needed. Browse to $RED%_HOST:5080 (start page should come up)
   # browse to : $LPS_HOST:8080/lps-3.4.x/videoconference/main.lzx?lzt=swf8 for test
 
+
 = Red5-webapp installation (from zip)=
   
   # Checkout Red5 from svn, build and install it (URL of svn trunk : https://svn1.cvsdude.com/osflash/red5/java )
