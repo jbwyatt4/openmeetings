@@ -24,7 +24,7 @@
 
 	<view resource="date_icon_rsc" align="right" onmouseover="" onmouseout="">
 		<handler name="onclick">
-			new calendarwindow(this.parent.parent,{fieldRef:this.parent._text,x:this.parent.x+(this.parent.width-180),y:this.parent.y});
+			new calendarwindow(this.parent.parent,{fieldRef:this.parent._text,x:this.parent.x+(this.parent.width-200),y:this.parent.y});
 		</handler>
 		<labeltooltip labelid="162" />
 	</view>

@@ -59,18 +59,26 @@ function getLabelNameXMLCRM(labelid){
 }
 
 function parseDateToString(dateObj){
-	return dateObj.getDate()+'.'+(dateObj.getMonth()+1)+'.'+dateObj.getFullYear();
+	var d = dateObj.getDate();
+	if (d<10) d = "0"+d;
+	var m = dateObj.getMonth()+1;
+	if (m<10) m = "0"+m;
+	var y = dateObj.getFullYear();
+	if (y<10) y = "0"+y;
+	return d+'.'+m+'.'+y;
 }
 function parseStringToDate(t){
 	if (t.length==10){
-		var d = Number(datumsStr.substring(0, 2));
-		var m = Number(datumsStr.substring(3, 5));
-		var y = Number(datumsStr.substring(6, 10));
+		var d = Number(t.substring(0, 2));
+		var m = Number(t.substring(3, 5));
+		var y = Number(t.substring(6, 10));
 		if (!isNaN(d) && !isNaN(m) && !isNaN(y)){
 			return new Date(y, m, d);
 		} else {
 			return new Date();
 		}
+	} else {
+		return new Date();
 	}
 }
 ]]>

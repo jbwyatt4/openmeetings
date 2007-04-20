@@ -149,8 +149,8 @@
 	<attribute name="selecteddate" value="null" />
 	<attribute name="selected" value="null" />
 	
-	<handler name="onselect" />
-	<handler name="ondoubleselect" />
+	<handler name="onselect" args="d" />
+	<handler name="ondoubleselect" args="d" />
 	
 	<handler name="onmonthSel" args="month" />
 	<handler name="onyearSel" args="year" />
