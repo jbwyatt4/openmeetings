@@ -106,7 +106,7 @@
 	  		myvideocontainer.parent.parent.setAttribute('chatpartnername',object.firstname+' '+object.lastname);
 	  		myvideocontainer.parent.parent.setAttribute('uniqueid',streamid);
 	  		myvideocontainer.parent.parent.setAttribute('isremote',true);
-	  		myvideocontainer.v_output.setUrl(streamid);
+	  		myvideocontainer.v_output.setAttribute('url',streamid);
 	  		myvideocontainer.v_output.play(-1,false);
 	  		Debug.write(myvideocontainer.v_output._nc);
 	  		Debug.write(myvideocontainer.v_output._stream);		
@@ -144,7 +144,7 @@
 			//VideoView with Partner has been found
             //remove Stream from view
             Debug.write("Found client to startStream");
-	  		this.subviews[userpos]._chatvideoinner._videoview.v_output.setUrl(searchid);
+	  		this.subviews[userpos]._chatvideoinner._videoview.v_output.setAttribute('url',searchid);
 	  		this.subviews[userpos]._chatvideoinner._videoview.v_output.play(-1,false);	
 			return this.subviews[userpos].getVideoReference();
 		}
