@@ -48,3 +48,21 @@
   # copy the file *crossdomain.xml* to $RED5/webapps/root/crossdomain.xml (you need this file otherwise you are not able to upload any file to the server)
   # restart of red5 (run red5.sh/red5.bat) is needed. Browse to $RED%_HOST:5080 (start page should come up)
   # browse to : $LPS_HOST:8080/lps-3.4.x/videoconference/main.lzx?lzt=swf8 for test
+
+= Red5-webapp installation (from zip)=
+  
+  # Checkout Red5 from svn, build and install it (URL of svn trunk : https://svn1.cvsdude.com/osflash/red5/java )
+       * On linux type in the command line : svn co https://svn1.cvsdude.com/osflash/red5/java
+       * you need apache ant to build from source, if you are not familiar with this process you have to download one of the precompiled red5-binary releases.
+  # download zip *xmlcrm_webapp.zip* (current xmlcrm_webapp_r154.zip) from the downloads section into your Red5 webapp folder. Unzip it. Alter the red5-configuration to fit your port values ($RED5_HOME/conf/red5.properties) see host.lzx for port values.
+  # Open hibernate.cfg.xml file into xmlcrm/WEB-INF/lib/xmlcrm.jar zip archive.
+  # Edit theses lines into hibernate.cfg.xml to configure login/password for database :
+{{{
+			<property name="connection.username">postgres</property>
+			<property name="connection.password">*******</property>
+			<property name="connection.driver_class">org.postgresql.Driver</property>
+			<property name="connection.url">jdbc:postgresql://localhost/openmeetings</property>
+}}}
+  # copy the file *crossdomain.xml* to $RED5/webapps/root/crossdomain.xml (you need this file otherwise you are not able to upload any file to the server)
+  # restart of red5 (run red5.sh/red5.bat) is needed. Browse to $RED%_HOST:5080 (start page should come up)
+  # browse to : $LPS_HOST:8080/lps-3.4.x/videoconference/main.lzx?lzt=swf8 for test
