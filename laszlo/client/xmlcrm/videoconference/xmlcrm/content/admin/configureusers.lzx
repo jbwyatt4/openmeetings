@@ -3,7 +3,7 @@
 
 <class name="configureusers" extends="basecontentview">
 
-	<turnoverlist width="440" height="600" x="2" y="0" 
+	<turnoverlist name="_turnoverlist" width="440" height="600" x="2" y="0" 
 		orderby="login" step="10" >
 
 		<handler name="oninit">
