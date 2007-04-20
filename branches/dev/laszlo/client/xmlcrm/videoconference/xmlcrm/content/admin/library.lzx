@@ -4,5 +4,6 @@
 	<include href="configureusers.lzx" />
 	<include href="configureusersListItem.lzx" />
 	<include href="uservalueform.lzx" />
+	<include href="chooseorganisationwindow.lzx" />
 
 </library>

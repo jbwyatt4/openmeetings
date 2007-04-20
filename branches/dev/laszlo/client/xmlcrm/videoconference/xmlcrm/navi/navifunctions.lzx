@@ -73,7 +73,7 @@ function parseStringToDate(t){
 		var m = Number(t.substring(3, 5));
 		var y = Number(t.substring(6, 10));
 		if (!isNaN(d) && !isNaN(m) && !isNaN(y)){
-			return new Date(y, m, d);
+			return new Date(y, m-1, d);
 		} else {
 			return new Date();
 		}

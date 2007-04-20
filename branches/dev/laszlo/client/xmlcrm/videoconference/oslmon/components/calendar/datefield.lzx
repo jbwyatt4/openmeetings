@@ -17,6 +17,9 @@
 	<method name="setText" args="txt">
 		this.setAttribute('text',txt);
 	</method>
+	<method name="getText" >
+		return this._text.getText();
+	</method>	
 
 	<attribute name="text" value="" type="string" />
 

@@ -16,7 +16,8 @@
 		this.getUserById.doCall();
 	</handler>
 
-	<attribute name="user_id" value="0" />
+	<attribute name="user_id" value="0" type="number" />
+	<attribute name="level_id" value="1" type="number" />
 	
   	<netremotecallhib name="getUserById" funcname="userservice.getUserById" 
   		remotecontext="$once{ canvas.thishib }" > 
@@ -28,8 +29,10 @@
   	</netremotecallhib>
 
     <method name="initValueFieldsByObject" args="obj">
-    	this.user_id = obj.user_id;
-    	this.getUserById.doCall();
+		this.user_id = obj.user_id;
+		if (this.user_id!=0){
+			this.getUserById.doCall();
+		}
     </method>
     
     <method name="initFields" args="obj">
@@ -54,11 +57,41 @@
         ]]>
     </method>
 
-    
+	<handler name="onnew">
+		this.user_id=0;
+        this.username.setText('');
+        this.firstname.setText('');
+        this.lastname.setText('');
+        this.email.setText('');
+        this.age.setText(parseDateToString(new Date()));
+        this.street.setText('');
+        this.house.setText('');
+        this.zip.setText('');
+        this.town.setText('');
+        this.state.selectItem(String(1));
+        this.adress_comment.setText('');
+        this.status.selectItem(String('0'));
+        this._organisationslist.clearList();
+	</handler>
+	
     <handler name="ondelete" >
-    
-    
+		if (this.user_id!=0){
+			this.deleteUserAdmin.doCall();
+		}
     </handler>
+
+	<netremotecallhib name="deleteUserAdmin" funcname="userservice.deleteUserAdmin" remotecontext="$once{ canvas.thishib }" >      
+		<netparam name="vars1"><method name="getValue"> return canvas.sessionId; </method></netparam>
+		<netparam name="vars2"><method name="getValue"> return parent.parent.user_id; </method></netparam>
+		<handler name="ondata" args="value">
+			Debug.write("deleteUserAdmin ",value);
+			//this.parent.destroy();
+			if (value>0){
+				this.parent.parent._turnoverlist.oncallnext.sendEvent();
+				this.parent.onnew.sendEvent();
+			}
+		</handler>
+	</netremotecallhib>		
     
     <labeltext labelid="143" width="200" y="40" resize="false" fontstyle="bold" />
     
@@ -129,7 +162,7 @@
     		var a = new Array();
     		for (var i=0;i<this.content.content.inn.subviews.length;i++){
     			Debug.write("t: ",this.content.content.inn.subviews[i].value);
-    			a.push(this.content.content.inn.subviews[i].value);
+    			a.push(Number(this.content.content.inn.subviews[i].value));
     		}
     		return a;
     		]]>
@@ -169,8 +202,7 @@
   			this.sendObject["comment"] = this.parent.adress_comment.getText();
   			this.sendObject["telefon"] = '';
   			this.sendObject["fax"] = '';
-  			this.sendObject["age"] = 0;
-  			this.sendObject["userage"] = new Date();
+  			this.sendObject["userage"] = parseStringToDate(this.parent.age.getText());
   			this.sendObject["mobil"] = '';
   			this.sendObject["availible"] = 0;
   			this.sendObject["status"] = Number(this.parent.status.getValue());
@@ -182,7 +214,16 @@
   		<netparam name="vars1"><method name="getValue"> return canvas.sessionId; </method></netparam>
     	<netparam name="vars2"><method name="getValue">return parent.sendObject;</method></netparam>	  		
     	<handler name="ondata" args="val">
+			<![CDATA[
     		Debug.write("saveOrUpdateUser: ",val);
+			if (val>0 && this.parent.user_id==0){
+				Debug.write("saveOrUpdateUser val greater 0: ",val);
+				this.parent.parent._turnoverlist.oncallnext.sendEvent();
+				var obj = new Array();
+				obj["user_id"] = val;
+				this.parent.initValueFieldsByObject(obj);
+			}
+			]]>
     	</handler>
   	</netremotecallhib>
         

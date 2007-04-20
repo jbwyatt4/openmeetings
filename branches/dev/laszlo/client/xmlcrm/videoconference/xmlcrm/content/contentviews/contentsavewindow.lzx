@@ -7,6 +7,7 @@
     <attribute name="saveObj" value="null" />
     <attribute name="refObj" value="null" />
     <attribute name="processNextIndex" value="0" type="number" />
+	<attribute name="errorid" value="0" type="number" />
     
     <handler name="oninit">
         LzModeManager.makeModal(this);
@@ -25,6 +26,11 @@
     	this.processNext();
     	]]>
     </method>
+	
+	<method name="errorByCode" args="eCode">
+		this.errorid = eCode;
+		this.getErrorByCode.doCall();
+	</method>
     
     <method name="processNext">
     	<![CDATA[
@@ -40,6 +46,25 @@
     	}
     	]]>
     </method>
+	
+	<netremotecallhib name="getErrorByCode" funcname="errorservice.getErrorByCode" remotecontext="$once{ canvas.thishib }" >      
+		<netparam name="vars1"><method name="getValue"> return canvas.sessionId; </method></netparam>
+		<netparam name="vars2"><method name="getValue"> return parent.parent.errorid; </method></netparam>
+		<handler name="ondata" args="value">
+			Debug.write("getErrorByCode ",value);
+			//this.parent.destroy();
+			this.parent._errortext.setText(value.errmessage);
+		</handler>
+	</netremotecallhib>		
+	
+	<text name="_errortext" multiline="true" width="$once{ parent.width }" 
+		height="$once{ parent.height-50 }" y="22" />
+	
+	<simplelabelbutton labelid="163" x="90" width="150" y="176" >
+		<handler name="onclick">
+			this.parent.close();
+		</handler>
+	</simplelabelbutton>
     
 </class>
 

@@ -5,6 +5,7 @@
 
     <attribute name="observerViews" value="null" />
     
+	<handler name="onnew" />
     <handler name="ondelete" />
     <handler name="onsavecompleted" />
 
@@ -24,6 +25,10 @@
     	if (this.observerViews==null) this.observerViews = new Array();
         this.observerViews.push(obj);
     </method>
+	
+	<method name="doAddEvent">
+		this.onnew.sendEvent();
+	</method>
     
     <method name="doSaveEvent">
     	if (this.observerViews.length!=0){
