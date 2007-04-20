@@ -1,0 +1,50 @@
+#summary How to install dev-0.5 Release from source, Please: this is for developers not end users!
+
+= Requirements =
+
+  * JDK 1.5
+  * JAVA_HOME set to point to your JDK installation dir (NOT to the JRE)
+  * [ooservice] up und running in headless mode on port 2002
+  * Database server (tested with PostgreSQL only)
+
+= Database =
+
+  # Forward the database skeleton with the init values to the database (database_init.sql)
+
+= OpenLaszlo =
+
+  # Install OpenLaszlo 4.0.x (latest trunk tested with r4759 legals 
+      * Download OpenLaszlo : http://download.openlaszlo.org/nightly/legals/ for your system
+      * Install in your system
+  # You need to replace the default rtmpconnection.lzx with patched ones to make it running. Copy the file *rtmpconnection.lzx* from the here (http://openmeetings.googlecode.com/svn/branches/dev/laszlo/client/xmlcrm/streaming/rtmpconnection.lzx)  to $LPS_HOME/Server/lps-4.0.x/lps/components/extensions/av/
+  # copy the folder *videoconference* into your lps-installation (for example /home/myuser/lps-4.0.x/Server/lps-4.0.x/videoconference/ )
+  # alter config.lzx to fit your installation, the variables:
+{{{
+   rmpthostlocal should point to the hostname of your red5 server
+   rmptport should point to the port of rtmp (default red5-rtmp port is 1935)
+   rmptTunnelport should point to the port of rtmpT (default red5-rtmp port is 8088)
+   red5httpport should point to the port of http red5 (default red5-rtmp port is 5080)
+}}}
+  # Start OpenLaszlo
+  
+= Red5-webapp installation (installation from source) =
+  
+  # Checkout Red5 from svn, build and install it (URL of svn trunk : https://svn1.cvsdude.com/osflash/red5/java )
+       * On linux type in the command line : svn co https://svn1.cvsdude.com/osflash/red5/java
+       * you need apache ant to build from source, if you are not familiar with this process you have to download one of the precompiled red5-binary releases.
+  # checkout the openmeetings-webapp:
+  http://openmeetings.googlecode.com/svn/branches/dev/xmlcrm/java/
+  # edit the file hibernate.cfg in the folder *src/app* of your checkout eclipse project 
+{{{
+			<property name="connection.username">postgres</property>
+			<property name="connection.password">*******</property>
+			<property name="connection.driver_class">org.postgresql.Driver</property>
+			<property name="connection.url">jdbc:postgresql://localhost/openmeetings</property>
+}}}
+  # compile the content of the folder *src/app* to a compressed jar named xmlcrm.jar into folder *outputjar*
+  # copy the webapp skeleton of (content of the folder webapp of your checkedout project) into your red5-webapp folder
+  # copy all jars from the hibernate-lib folder, your database-driver, xmlcrm.jar, xmlcrm-tamplates.jar + multipartrequest.jar, + commons-lang-2.2.jar, + velocity-1.6.jar
+  to your WEB-INF/lib folder
+  # copy the file *crossdomain.xml* to $RED5/webapps/root/crossdomain.xml (you need this file otherwise you are not able to upload any file to the server)
+  # restart of red5 (run red5.sh/red5.bat) is needed. Browse to $RED%_HOST:5080 (start page should come up)
+  # browse to : $LPS_HOST:8080/lps-3.4.x/videoconference/main.lzx?lzt=swf8 for test
