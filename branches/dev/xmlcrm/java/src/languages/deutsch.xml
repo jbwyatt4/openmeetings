@@ -1,0 +1,492 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<language>
+<string id="1" name="conference">
+<value>Konferenz</value>
+</string>
+<string id="2" name="meeting">
+<value>Meeting</value>
+</string>
+<string id="3" name="classroom">
+<value>Auditorium</value>
+</string>
+<string id="4" name="settings">
+<value>Einstellungen</value>
+</string>
+<string id="5" name="benutzer">
+<value>Benutzer</value>
+</string>
+<string id="6" name="admin">
+<value>Administration</value>
+</string>
+<string id="7" name="stop">
+<value>Stop</value>
+</string>
+<string id="8" name="record">
+<value>Record</value>
+</string>
+<string id="9" name="nofile">
+<value>Keine Datei vorhanden</value>
+</string>
+<string id="10" name="recordbyteacher">
+<value>Aufnahme nur f�r Lehrer verf�gbar</value>
+</string>
+<string id="11" name="connectedusers">
+<value>verbunden Benutzer:</value>
+</string>
+<string id="12" name="startconf">
+<value>Konferenz starten</value>
+</string>
+<string id="13" name="myname">
+<value>Mein Name</value>
+</string>
+<string id="14" name="videoconference">
+<value>VideoConference</value>
+</string>
+<string id="15" name="import">
+<value>Pr�sentation importieren</value>
+</string>
+<string id="16" name="refreshfiles">
+<value>Liste neu laden</value>
+</string>
+<string id="17" name="tomainfile">
+<value>Zum Hauptverzeichnis</value>
+</string>
+<string id="18" name="newpoll">
+<value>neue Umfrage</value>
+</string>
+<string id="19" name="newpollheader">
+<value>Eine neue Umfrage f�r die Konferenz.</value>
+</string>
+<string id="20" name="question">
+<value>Frage:</value>
+</string>
+<string id="21" name="polltype">
+<value>Umfragenart:</value>
+</string>
+<string id="22" name="create">
+<value>anlegen</value>
+</string>
+<string id="23" name="infomessage">
+<value>Info: Jeder verbundene Benutzer erh�lt eine Nachricht mit der neuen Umfrage.</value>
+</string>
+<string id="24" name="creatpoll">
+<value>Umfrage anlegen</value>
+</string>
+<string id="25" name="cancel">
+<value>abbrechen</value>
+</string>
+<string id="26" name="yesno">
+<value>Ja/Nein</value>
+</string>
+<string id="27" name="numeric">
+<value>Numerisch 1-10</value>
+</string>
+<string id="28" name="poll">
+<value>Umfrage</value>
+</string>
+<string id="29" name="moderation">
+<value>Sie m�ssen Moderator/Lehrer in diesem Raum sein um eine Umfrage anzulegen.</value>
+</string>
+<string id="30" name="vote">
+<value>Ihr Stimme wurde abgegeben.</value>
+</string>
+<string id="31" name="alreadyvoted">
+<value>Sie haben f�r diese Umfrage bereits ihr Votum abgegeben.</value>
+</string>
+<string id="32" name="voting">
+<value>abstimmen!</value>
+</string>
+<string id="33" name="answer">
+<value>Ihre Antwort:</value>
+</string>
+<string id="34" name="yes">
+<value>Ja</value>
+</string>
+<string id="35" name="no">
+<value>Nein</value>
+</string>
+<string id="36" name="questionwant">
+<value>will wissen:</value>
+</string>
+<string id="37" name="pollresults">
+<value>Umfrageergebnisse</value>
+</string>
+<string id="38" name="question">
+<value>Frage:</value>
+</string>
+<string id="39" name="results">
+<value>Antworten:</value>
+</string>
+<string id="40" name="answers">
+<value>Ergebnis:</value>
+</string>
+<string id="41" name="nopoll">
+<value>Es gibt zur Zeit keine Umfage.</value>
+</string>
+<string id="42" name="votings">
+<value>abstimmen!</value>
+</string>
+<string id="43" name="meeting">
+<value>Meeting (max 4 Pl�tze)</value>
+</string>
+<string id="44" name="conference">
+<value>Conference (max 50 Pl�tze)</value>
+</string>
+<string id="45" name="type">
+<value>Modus</value>
+</string>
+<string id="46" name="remainingseats">
+<value>verbleibende Pl�tze</value>
+</string>
+<string id="47" name="alreadychosen">
+<value>Bereits vergeben</value>
+</string>
+<string id="48" name="enter">
+<value>Eintreten</value>
+</string>
+<string id="49" name="modleave">
+<value>Der Moderator/Lehrer dieses Raums hat den Raum verlassen.</value>
+</string>
+<string id="50" name="systemmessage">
+<value>Systemnachricht</value>
+</string>
+<string id="51" name="chossedevice">
+<value>Ger�teauswahl</value>
+</string>
+<string id="52" name="choosecam">
+<value>Kamera w�hlen:</value>
+</string>
+<string id="53" name="choosemic">
+<value>Mikrophon w�hlen:</value>
+</string>
+<string id="54" name="ok">
+<value>ok</value>
+</string>
+<string id="55" name="cancel2">
+<value>abbrechen</value>
+</string>
+<string id="56" name="reconeectneeded">
+<value>Sie m�ssen sich erneut verbinden damit die �nderungen wirksam werden.</value>
+</string>
+<string id="57" name="editsetup">
+<value>Einstellungen �ndern.</value>
+</string>
+<string id="58" name="course">
+<value>Kurs:</value>
+</string>
+<string id="59" name="language">
+<value>Kurssprache:</value>
+</string>
+<string id="60" name="ok2">
+<value>ok</value>
+</string>
+<string id="61" name="cancel3">
+<value>abbrechen</value>
+</string>
+<string id="62" name="clearwhiteboard">
+<value>Zeichenbrett leeren</value>
+</string>
+<string id="63" name="clearwhiteboardquestion">
+<value>Soll dass Zeichenbrett geleert werden bevor ein neues Bild hinzugef�gt wird?</value>
+</string>
+<string id="64" name="dontaskagain">
+<value>Nicht nochmal fragen</value>
+</string>
+<string id="65" name="no">
+<value>nein</value>
+</string>
+<string id="66" name="editsetup2">
+<value>Einstellungen bearbeiten</value>
+</string>
+<string id="67" name="needconfirmationwhiteboard">
+<value>Best�tigung anfordern bevor das Zeichenbrett geleert wird.</value>
+</string>
+<string id="68" name="userinfo">
+<value>User Info</value>
+</string>
+<string id="69" name="cleardrawarea">
+<value>Clear DrawArea</value>
+</string>
+<string id="70" name="undo">
+<value>Undo</value>
+</string>
+<string id="71" name="redo">
+<value>Redo</value>
+</string>
+<string id="72" name="selectobject">
+<value>Select an Object</value>
+</string>
+<string id="73" name="text">
+<value>Text</value>
+</string>
+<string id="74" name="paint">
+<value>Paint</value>
+</string>
+<string id="75" name="drawline">
+<value>Draw line</value>
+</string>
+<string id="76" name="drawu">
+<value>Draw underline</value>
+</string>
+<string id="77" name="rect">
+<value>Rectangle</value>
+</string>
+<string id="78" name="ellipse">
+<value>Ellipse</value>
+</string>
+<string id="79" name="arrow">
+<value>Arrow</value>
+</string>
+<string id="80" name="deletechosen">
+<value>delete chosen Item</value>
+</string>
+<string id="81" name="appliymod">
+<value>Apply for moderation</value>
+</string>
+<string id="82" name="apply">
+<value>apply</value>
+</string>
+<string id="83" name="cancel">
+<value>cancel</value>
+</string>
+<string id="84" name="mod">
+<value>Become moderator</value>
+</string>
+<string id="85" name="close">
+<value>close</value>
+</string>
+<string id="86" name="italic">
+<value>italic</value>
+</string>
+<string id="87" name="bold">
+<value>bold</value>
+</string>
+<string id="88" name="waiting">
+<value>WAITING</value>
+</string>
+<string id="89" name="applyMessage">
+<value>A User wants to apply for moderation:</value>
+</string>
+<string id="90" name="accept">
+<value>accept</value>
+</string>
+<string id="91" name="reject">
+<value>reject</value>
+</string>
+<string id="92" name="cancel">
+<value>cancel</value>
+</string>
+<string id="93" name="sendmodrequestmessage">
+<value>Sending request to following Users</value>
+</string>
+<string id="94" name="accept">
+<value>Accepted</value>
+</string>
+<string id="95" name="reject">
+<value>Rejected</value>
+</string>
+<string id="96" name="changemod">
+<value>Change Moderator</value>
+</string>
+<string id="97" name="nonmoderrormessage">
+<value>You are not moderating this course!</value>
+</string>
+<string id="98" name="moderator">
+<value>Moderator:</value>
+</string>
+<string id="99" name="roomfullmessage">
+<value>This Room is full. Sorry please try again later.</value>
+</string>
+<string id="100" name="elllipse">
+<value>Ellipse</value>
+</string>
+<string id="101" name="close">
+<value>close</value>
+</string>
+<string id="102" name="AuthError">
+<value>Eingabefehler</value>
+</string>
+<string id="103" name="min4username">
+<value>Der Benutzername muss mindestens 4 Zeichen lang sein</value>
+</string>
+<string id="104" name="min4pass">
+<value>Das Passwort muss mindestens 4 Zeichen lang sein</value>
+</string>
+<string id="105" name="usernametaken">
+<value>Der Benutzername ist bereits vergeben</value>
+</string>
+<string id="106" name="emailtaken">
+<value>Die EMail ist bereits registriert</value>
+</string>
+<string id="107" name="emailtaken">
+<value>Ein Fehler wurde geworfen bitte kontaktieren Sie das Admin Team</value>
+</string>
+<string id="108" name="Authlogin">
+<value>Login</value>
+</string>
+<string id="109" name="Authuser">
+<value>Benutzer:</value>
+</string>
+<string id="110" name="Authpass">
+<value>Pass:</value>
+</string>
+<string id="111" name="Authlang">
+<value>Language</value>
+</string>
+<string id="112" name="Authreg">
+<value>Login</value>
+</string>
+<string id="113" name="regformhead">
+<value>Sign Up</value>
+</string>
+<string id="114" name="regformuser">
+<value>Benutzer:</value>
+</string>
+<string id="115" name="regformpass">
+<value>Pass:</value>
+</string>
+<string id="116" name="regformretype">
+<value>Wiederhole:</value>
+</string>
+<string id="117" name="regformfirstname">
+<value>Vorname:</value>
+</string>
+<string id="118" name="regformlastname">
+<value>Nachname:</value>
+</string>
+<string id="119" name="regformmail">
+<value>EMail:</value>
+</string>
+<string id="120" name="regformstate">
+<value>Land:</value>
+</string>
+<string id="121" name="regformbtn1">
+<value>Registrieren</value>
+</string>
+<string id="122" name="regformbtn2">
+<value>Abbrechen</value>
+</string>
+<string id="123" name="Authbtn2">
+<value>Register</value>
+</string>
+<string id="124" name="dashboard">
+<value>Home</value>
+</string>
+<string id="125" name="useradmin">
+<value>Benutzer</value>
+</string>
+<string id="126" name="groupadmin">
+<value>Gruppen</value>
+</string>
+<string id="127" name="orgadmin">
+<value>Organisationen</value>
+</string>
+<string id="128" name="headconf">
+<value>Konferenzr�ume</value>
+</string>
+<string id="129" name="conf_pub">
+<value>�ffentlich</value>
+</string>
+<string id="130" name="head_org">
+<value>Organisation</value>
+</string>
+<string id="131" name="btn_enterroom">
+<value>betreten</value>
+</string>
+<string id="132" name="useralterself_login">
+<value>Benutzer</value>
+</string>
+<string id="133" name="useralterself_pass">
+<value>Passwort</value>
+</string>
+<string id="134" name="useralterself_passretype">
+<value>Wiederhole</value>
+</string>
+<string id="135" name="useralterself_firstname">
+<value>Vorname</value>
+</string>
+<string id="136" name="useralterself_lastname">
+<value>Nachname</value>
+</string>
+<string id="137" name="useralterself_email">
+<value>EMail</value>
+</string>
+<string id="138" name="useralterself_birth">
+<value>Geburtstag</value>
+</string>
+<string id="139" name="useralterself_streetno">
+<value>Stra�e/Nr.</value>
+</string>
+<string id="140" name="useralterself_town">
+<value>PLZ/Stadt</value>
+</string>
+<string id="141" name="useralterself_state">
+<value>Land</value>
+</string>
+<string id="142" name="useralterself_adresscomment">
+<value>Adressinfo</value>
+</string>
+<string id="143" name="useralterself_header">
+<value>Benutzerdaten</value>
+</string>
+<string id="144" name="savemenubar_savelabel">
+<value>speichern</value>
+</string>
+<string id="145" name="savemenubar_savelabel">
+<value>Speichervorgang</value>
+</string>
+<string id="146" name="admin_userlist_user_id">
+<value>User-ID</value>
+</string>
+<string id="147" name="admin_userlist_login">
+<value>Login</value>
+</string>
+<string id="148" name="admin_userlist_firstnam">
+<value>Vorname</value>
+</string>
+<string id="149" name="admin_userlist_lastname">
+<value>Nachname</value>
+</string>
+<string id="150" name="turnoverlist_next">
+<value>vorw�rts</value>
+</string>
+<string id="151" name="turnoverlist_pre">
+<value>zur�ck</value>
+</string>
+<string id="152" name="savecontent_confirm">
+<value>Datensatz entfernen</value>
+</string>
+<string id="153" name="savecontent_confirm_cancel_btn">
+<value>abbrechen</value>
+</string>
+<string id="154" name="savecontent_confirm_confirm_btn">
+<value>enfernen</value>
+</string>
+<string id="155" name="savemenubar_addlabel">
+<value>Datensatz anlegen</value>
+</string>
+<string id="156" name="savemenubar_reloadlabel">
+<value>Datensatz neu laden</value>
+</string>
+<string id="157" name="savemenubar_deletelabel">
+<value>Datensatz entfernen</value>
+</string>
+<string id="158" name="useralter_admin_status">
+<value>Status</value>
+</string>
+<string id="159" name="useralter_admin_statusItem">
+<value>gesperrt</value>
+</string>
+<string id="160" name="useralter_admin_statusItem">
+<value>aktiv</value>
+</string>
+<string id="161" name="useralter_admin_organisation">
+<value>Organisationen</value>
+</string>
+<string id="162" name="calendar_iconlabel">
+<value>Kalender</value>
+</string>
+<string id="163" name="savewindow_btn">
+<value>schlie�en</value>
+</string>
+</language>
