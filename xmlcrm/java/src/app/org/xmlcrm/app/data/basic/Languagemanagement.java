@@ -45,12 +45,31 @@ public class Languagemanagement {
 			tx.commit();
 			HibernateUtil.closeSession(idf);
 		} catch (HibernateException ex) {
-			log.error("[getConfKey]: " ,ex);
+			log.error("[getConfKey]: " + ex);
 		} catch (Exception ex2) {
-			log.error("[getConfKey]: " ,ex2);
+			log.error("[getConfKey]: " + ex2);
 		}
 	}
 
+ 
+	public void emptyFieldLanguage() {
+		try {
+			Object idf = HibernateUtil.createSession();
+			Session session = HibernateUtil.getSession();
+			Transaction tx = session.beginTransaction();
+			
+//			 TODO delete hql query doesn't work, must be repared
+			session.createQuery("delete from FieldLanguage");
+			tx.commit();
+			HibernateUtil.closeSession(idf);
+		} catch (HibernateException ex) {
+			log.error("[getConfKey]: " + ex);
+		} catch (Exception ex2) {
+			log.error("[getConfKey]: " + ex2);
+		}
+	}
+
+	
 	public List getLanguages() {
 		try {
 			Object idf = HibernateUtil.createSession();
@@ -64,9 +83,9 @@ public class Languagemanagement {
 
 			return ll;
 		} catch (HibernateException ex) {
-			log.error("[getConfKey]: " ,ex);
+			log.error("[getConfKey]: " + ex);
 		} catch (Exception ex2) {
-			log.error("[getConfKey]: " ,ex2);
+			log.error("[getConfKey]: " + ex2);
 		}
 		return null;
 	}

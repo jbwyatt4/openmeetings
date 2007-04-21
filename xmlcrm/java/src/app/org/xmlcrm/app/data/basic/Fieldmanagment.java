@@ -56,9 +56,9 @@ public class Fieldmanagment {
 			HibernateUtil.closeSession(idf);
 
 		} catch (HibernateException ex) {
-			log.error("[getFieldByIdAndLanguage]: " ,ex);
+			log.error("[getFieldByIdAndLanguage]: " + ex);
 		} catch (Exception ex2) {
-			log.error("[getFieldByIdAndLanguage]: " ,ex2);
+			log.error("[getFieldByIdAndLanguage]: " + ex2);
 		}
 		return null;
 	}
@@ -78,13 +78,22 @@ public class Fieldmanagment {
 
 			return returnList;
 		} catch (HibernateException ex) {
-			log.error("[getConfKey]: " ,ex);
+			log.error("[getConfKey]: " + ex);
 		} catch (Exception ex2) {
-			log.error("[getConfKey]: " ,ex2);
+			log.error("[getConfKey]: " + ex2);
 		}
 		return null;
 	}
 
+	/**
+	 * @deprecated
+	 * @param name
+	 * @param field_id
+	 * @param german
+	 * @param english
+	 * @param french
+	 * @param spanish
+	 */
 	public void addFourFieldValues(String name, long field_id, String german,
 			String english, String french, String spanish) {
 		this.addField(name);
@@ -113,9 +122,9 @@ public class Fieldmanagment {
 			tx.commit();
 			HibernateUtil.closeSession(idf);
 		} catch (HibernateException ex) {
-			log.error("[getConfKey]: " ,ex);
+			log.error("[getConfKey]: " + ex);
 		} catch (Exception ex2) {
-			log.error("[getConfKey]: " ,ex2);
+			log.error("[getConfKey]: " + ex2);
 		}
 	}
 
@@ -135,9 +144,9 @@ public class Fieldmanagment {
 			tx.commit();
 			HibernateUtil.closeSession(idf);
 		} catch (HibernateException ex) {
-			log.error("[getConfKey]: " ,ex);
+			log.error("[getConfKey]: " + ex);
 		} catch (Exception ex2) {
-			log.error("[getConfKey]: " ,ex2);
+			log.error("[getConfKey]: " + ex2);
 		}
 	}
 
@@ -157,9 +166,9 @@ public class Fieldmanagment {
 
 			return returnList;
 		} catch (HibernateException ex) {
-			log.error("[getConfKey]: " ,ex);
+			log.error("[getConfKey]: " + ex);
 		} catch (Exception ex2) {
-			log.error("[getConfKey]: " ,ex2);
+			log.error("[getConfKey]: " + ex2);
 		}
 		return null;
 	}

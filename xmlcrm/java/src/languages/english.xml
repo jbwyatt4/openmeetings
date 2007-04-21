@@ -1,0 +1,492 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<language>
+<string id="1" name="conference">
+<value>Conference</value>
+</string>
+<string id="2" name="meeting">
+<value>Meeting</value>
+</string>
+<string id="3" name="classroom">
+<value>Auditorium</value>
+</string>
+<string id="4" name="settings">
+<value>Settings</value>
+</string>
+<string id="5" name="benutzer">
+<value>User</value>
+</string>
+<string id="6" name="admin">
+<value>Administration</value>
+</string>
+<string id="7" name="stop">
+<value>Stop</value>
+</string>
+<string id="8" name="record">
+<value>Record</value>
+</string>
+<string id="9" name="nofile">
+<value>No file available</value>
+</string>
+<string id="10" name="recordbyteacher">
+<value>Aufnahme nur f�r Lehrer verf�gbar</value>
+</string>
+<string id="11" name="connectedusers">
+<value>Connected users:</value>
+</string>
+<string id="12" name="startconf">
+<value>Start a conference</value>
+</string>
+<string id="13" name="myname">
+<value>My Name</value>
+</string>
+<string id="14" name="videoconference">
+<value>VideoConference</value>
+</string>
+<string id="15" name="import">
+<value>Import Presentation</value>
+</string>
+<string id="16" name="refreshfiles">
+<value>Refresh list</value>
+</string>
+<string id="17" name="tomainfile">
+<value>Zum Hauptverzeichnis</value>
+</string>
+<string id="18" name="newpoll">
+<value>new poll</value>
+</string>
+<string id="19" name="newpollheader">
+<value>A new poll for the conference.</value>
+</string>
+<string id="20" name="question">
+<value>Question:</value>
+</string>
+<string id="21" name="polltype">
+<value>Type of poll:</value>
+</string>
+<string id="22" name="create">
+<value>Create</value>
+</string>
+<string id="23" name="infomessage">
+<value>Info: Each connected user receives a message with the new poll.</value>
+</string>
+<string id="24" name="creatpoll">
+<value>Create a poll</value>
+</string>
+<string id="25" name="cancel">
+<value>Cancel</value>
+</string>
+<string id="26" name="yesno">
+<value>Yes/No</value>
+</string>
+<string id="27" name="numeric">
+<value>Numeric 1-10</value>
+</string>
+<string id="28" name="poll">
+<value>Poll</value>
+</string>
+<string id="29" name="moderation">
+<value>Sie m�ssen Moderator/Lehrer in diesem Raum sein um eine Umfrage anzulegen.</value>
+</string>
+<string id="30" name="vote">
+<value>Your vote is registered.</value>
+</string>
+<string id="31" name="alreadyvoted">
+<value>Your have already delivered your vote for this poll.</value>
+</string>
+<string id="32" name="voting">
+<value>Vote !</value>
+</string>
+<string id="33" name="answer">
+<value>Your response:</value>
+</string>
+<string id="34" name="yes">
+<value>Yes</value>
+</string>
+<string id="35" name="no">
+<value>No</value>
+</string>
+<string id="36" name="questionwant">
+<value>will wissen:</value>
+</string>
+<string id="37" name="pollresults">
+<value>Poll results</value>
+</string>
+<string id="38" name="question">
+<value>Question:</value>
+</string>
+<string id="39" name="results">
+<value>Results:</value>
+</string>
+<string id="40" name="answers">
+<value>Answers:</value>
+</string>
+<string id="41" name="nopoll">
+<value>No polls are been started.</value>
+</string>
+<string id="42" name="votings">
+<value>Vote!</value>
+</string>
+<string id="43" name="meeting">
+<value>Meeting (max 4 seats)</value>
+</string>
+<string id="44" name="conference">
+<value>Conference (max 50 seats)</value>
+</string>
+<string id="45" name="type">
+<value>Type</value>
+</string>
+<string id="46" name="remainingseats">
+<value>Other seats</value>
+</string>
+<string id="47" name="alreadychosen">
+<value>Already chosen</value>
+</string>
+<string id="48" name="enter">
+<value>enter</value>
+</string>
+<string id="49" name="modleave">
+<value>The moderator has leave the meeting.</value>
+</string>
+<string id="50" name="systemmessage">
+<value>System information</value>
+</string>
+<string id="51" name="chossedevice">
+<value>Choose device</value>
+</string>
+<string id="52" name="choosecam">
+<value>Choose webcam:</value>
+</string>
+<string id="53" name="choosemic">
+<value>Choose micro:</value>
+</string>
+<string id="54" name="ok">
+<value>ok</value>
+</string>
+<string id="55" name="cancel2">
+<value>cancel</value>
+</string>
+<string id="56" name="reconeectneeded">
+<value>You need to reconnect.</value>
+</string>
+<string id="57" name="editsetup">
+<value>Edit setup.</value>
+</string>
+<string id="58" name="course">
+<value>Course:</value>
+</string>
+<string id="59" name="language">
+<value>Language:</value>
+</string>
+<string id="60" name="ok2">
+<value>ok</value>
+</string>
+<string id="61" name="cancel3">
+<value>cancel</value>
+</string>
+<string id="62" name="clearwhiteboard">
+<value>Clear whiteboard</value>
+</string>
+<string id="63" name="clearwhiteboardquestion">
+<value>Do you want that the whiteboard are emptied before a new picture is added?</value>
+</string>
+<string id="64" name="dontaskagain">
+<value>Don't ask again</value>
+</string>
+<string id="65" name="no">
+<value>no</value>
+</string>
+<string id="66" name="editsetup2">
+<value>Edit setup</value>
+</string>
+<string id="67" name="needconfirmationwhiteboard">
+<value>Confirmation request before empty the whiteboard.</value>
+</string>
+<string id="68" name="userinfo">
+<value>User Info</value>
+</string>
+<string id="69" name="cleardrawarea">
+<value>Clear DrawArea</value>
+</string>
+<string id="70" name="undo">
+<value>Undo</value>
+</string>
+<string id="71" name="redo">
+<value>Redo</value>
+</string>
+<string id="72" name="selectobject">
+<value>Select an Object</value>
+</string>
+<string id="73" name="text">
+<value>Text</value>
+</string>
+<string id="74" name="paint">
+<value>Paint</value>
+</string>
+<string id="75" name="drawline">
+<value>Draw line</value>
+</string>
+<string id="76" name="drawu">
+<value>Draw underline</value>
+</string>
+<string id="77" name="rect">
+<value>Rectangle</value>
+</string>
+<string id="78" name="ellipse">
+<value>Ellipse</value>
+</string>
+<string id="79" name="arrow">
+<value>Arrow</value>
+</string>
+<string id="80" name="deletechosen">
+<value>delete chosen Item</value>
+</string>
+<string id="81" name="appliymod">
+<value>Apply for moderation</value>
+</string>
+<string id="82" name="apply">
+<value>apply</value>
+</string>
+<string id="83" name="cancel">
+<value>cancel</value>
+</string>
+<string id="84" name="mod">
+<value>Become moderator</value>
+</string>
+<string id="85" name="close">
+<value>close</value>
+</string>
+<string id="86" name="italic">
+<value>italic</value>
+</string>
+<string id="87" name="bold">
+<value>bold</value>
+</string>
+<string id="88" name="waiting">
+<value>WAITING</value>
+</string>
+<string id="89" name="applyMessage">
+<value>A User wants to apply for moderation:</value>
+</string>
+<string id="90" name="accept">
+<value>accept</value>
+</string>
+<string id="91" name="reject">
+<value>reject</value>
+</string>
+<string id="92" name="cancel">
+<value>cancel</value>
+</string>
+<string id="93" name="sendmodrequestmessage">
+<value>Sending request to following Users</value>
+</string>
+<string id="94" name="accept">
+<value>Accepted</value>
+</string>
+<string id="95" name="reject">
+<value>Rejected</value>
+</string>
+<string id="96" name="changemod">
+<value>Change Moderator</value>
+</string>
+<string id="97" name="nonmoderrormessage">
+<value>You are not moderating this course!</value>
+</string>
+<string id="98" name="moderator">
+<value>Moderator:</value>
+</string>
+<string id="99" name="roomfullmessage">
+<value>This Room is full. Sorry please try again later.</value>
+</string>
+<string id="100" name="elllipse">
+<value>Ellipse</value>
+</string>
+<string id="101" name="close">
+<value>close</value>
+</string>
+<string id="102" name="AuthError">
+<value>input data error</value>
+</string>
+<string id="103" name="min4username">
+<value>username must be 4 characters at least</value>
+</string>
+<string id="104" name="min4pass">
+<value>userpass must be 4 characters at least</value>
+</string>
+<string id="105" name="usernametaken">
+<value>The username is already taken</value>
+</string>
+<string id="106" name="emailtaken">
+<value>The email is already registered</value>
+</string>
+<string id="107" name="emailtaken">
+<value>System error please contact System-Admins</value>
+</string>
+<string id="108" name="Authlogin">
+<value>Login</value>
+</string>
+<string id="109" name="Authuser">
+<value>User:</value>
+</string>
+<string id="110" name="Authpass">
+<value>Pass:</value>
+</string>
+<string id="111" name="Authlang">
+<value>Language</value>
+</string>
+<string id="112" name="Authreg">
+<value>Login</value>
+</string>
+<string id="113" name="regformhead">
+<value>Sign Up</value>
+</string>
+<string id="114" name="regformuser">
+<value>User:</value>
+</string>
+<string id="115" name="regformpass">
+<value>Pass:</value>
+</string>
+<string id="116" name="regformretype">
+<value>ReType:</value>
+</string>
+<string id="117" name="regformfirstname">
+<value>Firstname:</value>
+</string>
+<string id="118" name="regformlastname">
+<value>Lastname:</value>
+</string>
+<string id="119" name="regformmail">
+<value>Mail:</value>
+</string>
+<string id="120" name="regformstate">
+<value>Country:</value>
+</string>
+<string id="121" name="regformbtn1">
+<value>Register</value>
+</string>
+<string id="122" name="regformbtn2">
+<value>Cancel</value>
+</string>
+<string id="123" name="Authbtn2">
+<value>Register</value>
+</string>
+<string id="124" name="dashboard">
+<value>home</value>
+</string>
+<string id="125" name="useradmin">
+<value>Users</value>
+</string>
+<string id="126" name="groupadmin">
+<value>Groups</value>
+</string>
+<string id="127" name="orgadmin">
+<value>Organisations</value>
+</string>
+<string id="128" name="headconf">
+<value>Conference-Rooms</value>
+</string>
+<string id="129" name="conf_pub">
+<value>public</value>
+</string>
+<string id="130" name="head_org">
+<value>organisation</value>
+</string>
+<string id="131" name="btn_enterroom">
+<value>enter</value>
+</string>
+<string id="132" name="useralterself_login">
+<value>Login</value>
+</string>
+<string id="133" name="useralterself_pass">
+<value>Password</value>
+</string>
+<string id="134" name="useralterself_passretype">
+<value>Retype</value>
+</string>
+<string id="135" name="useralterself_firstname">
+<value>Firstname</value>
+</string>
+<string id="136" name="useralterself_lastname">
+<value>Lastname</value>
+</string>
+<string id="137" name="useralterself_email">
+<value>Mail</value>
+</string>
+<string id="138" name="useralterself_birth">
+<value>Birthday</value>
+</string>
+<string id="139" name="useralterself_streetno">
+<value>Street/No</value>
+</string>
+<string id="140" name="useralterself_town">
+<value>ZIP/Town</value>
+</string>
+<string id="141" name="useralterself_state">
+<value>Country</value>
+</string>
+<string id="142" name="useralterself_adresscomment">
+<value>Adress-Info</value>
+</string>
+<string id="143" name="useralterself_header">
+<value>Userdata</value>
+</string>
+<string id="144" name="savemenubar_savelabel">
+<value>save</value>
+</string>
+<string id="145" name="savemenubar_savelabel">
+<value>Save</value>
+</string>
+<string id="146" name="admin_userlist_user_id">
+<value>USER-ID</value>
+</string>
+<string id="147" name="admin_userlist_login">
+<value>login</value>
+</string>
+<string id="148" name="admin_userlist_firstnam">
+<value>firstname</value>
+</string>
+<string id="149" name="admin_userlist_lastname">
+<value>lastname</value>
+</string>
+<string id="150" name="turnoverlist_next">
+<value>show next</value>
+</string>
+<string id="151" name="turnoverlist_pre">
+<value>show pre</value>
+</string>
+<string id="152" name="savecontent_confirm">
+<value>delete record</value>
+</string>
+<string id="153" name="savecontent_confirm_cancel_btn">
+<value>cancel</value>
+</string>
+<string id="154" name="savecontent_confirm_confirm_btn">
+<value>delete</value>
+</string>
+<string id="155" name="savemenubar_addlabel">
+<value>new record</value>
+</string>
+<string id="156" name="savemenubar_reloadlabel">
+<value>refresh record</value>
+</string>
+<string id="157" name="savemenubar_deletelabel">
+<value>delete record</value>
+</string>
+<string id="158" name="useralter_admin_status">
+<value>status</value>
+</string>
+<string id="159" name="useralter_admin_statusItem">
+<value>disabled</value>
+</string>
+<string id="160" name="useralter_admin_statusItem">
+<value>enabled</value>
+</string>
+<string id="161" name="useralter_admin_organisation">
+<value>organisations</value>
+</string>
+<string id="162" name="calendar_iconlabel">
+<value>calendar</value>
+</string>
+<string id="163" name="savewindow_btn">
+<value>close</value>
+</string>
+</language>
