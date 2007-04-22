@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<library>
+
+<class name="orgadmin" extends="view">
+	
+	<turnoverlist name="_turnoverlist" width="260" height="600" x="2" y="0" 
+		orderby="organisation_id" step="10" >
+
+		<handler name="oninit">
+			this.addHeaderItem(164,120);
+			this.addHeaderItem(165,126);
+			this.getOrganisations.doCall();
+		</handler>
+		
+		<handler name="oncallnext" >
+			this.getOrganisations.doCall();
+		</handler>
+		
+		<handler name="oncallpre" >		
+			this.getOrganisations.doCall();
+		</handler>
+		
+		<handler name="onclickedItem" args="obj">
+			Debug.write("onclickedItem",obj,obj.obj);
+			parent._orgadminvalueform.initValueFieldsByObject(obj.obj);
+		</handler>
+		
+		<netremotecallhib name="getOrganisations" funcname="organisationservice.getOrganisations" remotecontext="$once{ canvas.thishib }" >      
+			<netparam name="vars1"><method name="getValue"> return canvas.sessionId; </method></netparam>
+			<netparam name="vars2"><method name="getValue"> return parent.parent.start; </method></netparam>
+			<netparam name="vars3"><method name="getValue"> return parent.parent.step; </method></netparam>
+			<netparam name="vars4"><method name="getValue"> return parent.parent.orderby; </method></netparam>
+	    	<handler name="ondata" args="value">
+	    		Debug.write("getOrganisations ",value);
+	    		//this.parent.destroy();
+	    		this.parent.initValues(value.records);
+	    		this.parent.renderContent(value.result);
+	    	</handler>
+	    </netremotecallhib>	
+	    
+	    <method name="renderContent" args="records">
+	    	<![CDATA[
+	    	this.clearList();
+	    	for (var i=0;i<records.length;i++){
+	    		new orgadminListItem(this._innerlist._inn._inn,{obj:records[i],organisation_id:records[i].organisation_id,orgname:records[i].name});
+	    	}
+	    	]]>
+	    </method>
+
+	</turnoverlist>
+	
+	<orgadminvalueform name="_orgadminvalueform" x="260" />
+	
+</class>
+
+</library>
