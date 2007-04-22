@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<library>
+
+<class name="orgadminListItem" extends="view" layout="axis:x;spacing:0" 
+	bgcolor="0xFFFFFF" 
+	onmouseover="this.setBGColor(canvas.baseMouseOvercolorizer)" 
+	onmouseout="this.setBGColor(0xFFFFFF)" >
+	
+	<handler name="onclick">
+		this.parent.parent.parent.parent.onclickedItem.sendEvent(this);
+	</handler>
+	
+	<attribute name="obj" value="null" />
+	<attribute name="organisation_id" value="0" type="number" />
+	<attribute name="orgname" value="" type="string" />
+	
+	<turnovertextitem text="$once{ parent.organisation_id }" width="120" />
+	<turnovertextitem text="$once{ parent.orgname }" width="126" />
+	
+</class>
+
+</library>

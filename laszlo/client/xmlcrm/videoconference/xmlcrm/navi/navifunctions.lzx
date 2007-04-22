@@ -38,6 +38,7 @@ function loadContent(obj,parentobj,preparentobj){
     } else if (obj.action=="orgadmin"){
         clearStageContent();
         obj.parent.parent.clearAllSubItemLists();
+		new orgadmin(canvas.main_content._content.inner);
     }
 	
 }

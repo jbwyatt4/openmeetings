@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<library>
+
+<class name="orgadminvalueform" extends="basecontentsaveview">
+	
+	<attribute name="organisation_id" value="0" type="number" />	
+
+	<handler name="onsavecompleted" >
+		this.getUserById.doCall();
+	</handler>
+	
+    <method name="initValueFieldsByObject" args="obj">
+		this.organisation_id = obj.organisation_id;
+		if (this.organisation_id!=0){
+			this.getOrganisationById.doCall();
+		}
+    </method>	
+
+</class>
+	
+</library>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<library>
+
+	<include href="orgadmin.lzx" />
+	<include href="orgadminListItem.lzx" />
+	<include href="orgadminvalueform.lzx" />
+
+</library>
