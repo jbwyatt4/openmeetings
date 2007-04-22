@@ -12,7 +12,8 @@ public class AddDefaultfield extends TestCase {
 	
 	public void testaddDefaultField(){
 		
-		Fieldmanagment.getInstance().addFourFieldValues("savewindow_btn", 163, "schlie§en", "close", "close", "close");
+		Fieldmanagment.getInstance().addFourFieldValues("organisationtablelist_idrow", 164, "Organisations-ID", "Organisation-ID", "Organisation-ID", "Organisation-ID");
+		Fieldmanagment.getInstance().addFourFieldValues("organisationtablelist_namerow", 165, "Name", "name", "name", "name");
 		
 	}
 

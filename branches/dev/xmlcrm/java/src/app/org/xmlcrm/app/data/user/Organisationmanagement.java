@@ -18,6 +18,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Order;
+import org.xmlcrm.app.data.beans.basic.SearchResult;
 import org.xmlcrm.app.data.basic.AuthLevelmanagement;
 import org.xmlcrm.app.hibernate.beans.domain.Organisation;
 import org.xmlcrm.app.hibernate.beans.domain.Organisation_Users;
@@ -40,6 +41,24 @@ public class Organisationmanagement {
 			instance = new Organisationmanagement();
 		}
 		return instance;
+	}
+	
+	/**
+	 * adds a new organisation if userlevel is admin
+	 * @param USER_LEVEL
+	 * @param orgname
+	 * @param user_id
+	 * @return
+	 */
+	public Long addOrganisation(Long USER_LEVEL, String orgname, long user_id){
+		try {
+			if (AuthLevelmanagement.getInstance().checkAdminLevel(USER_LEVEL)){
+				return this.addOrganisation(orgname, user_id);
+			}
+		} catch (Exception err){
+			log.error("addOrganisation",err);
+		}
+		return null;
 	}
 
 	/**
@@ -72,28 +91,107 @@ public class Organisationmanagement {
 	/**
 	 * 
 	 * @param USER_LEVEL
+	 * @param start
+	 * @param max
+	 * @param orderby
 	 * @return
 	 */
-	public List getOrganisations(long USER_LEVEL) {
+	public SearchResult getOrganisations(long USER_LEVEL, int start ,int max, String orderby) {
 		try {
 			if (AuthLevelmanagement.getInstance().checkAdminLevel(USER_LEVEL)){
-				Object idf = HibernateUtil.createSession();
-				Session session = HibernateUtil.getSession();
-				Transaction tx = session.beginTransaction();
-				Criteria crit = session.createCriteria(Organisation.class);
-				crit.add(Restrictions.eq("deleted", "false"));
-				List ll = crit.list();
-				tx.commit();
-				HibernateUtil.closeSession(idf);
-				return ll;
+				SearchResult sresult = new SearchResult();
+				sresult.setObjectName(Organisation.class.getName());
+				sresult.setRecords(this.selectMaxFromOrganisations());
+				sresult.setResult(this.getOrganisations(start, max, orderby));
+				return sresult;
 			}
 		} catch (HibernateException ex) {
-			log.error("[getOrganisationById]" ,ex);
+			log.error("[getOrganisations]" ,ex);
 		} catch (Exception ex2) {
-			log.error("[getOrganisationById]" ,ex2);
+			log.error("[getOrganisations]" ,ex2);
+		}
+		return null;
+	}
+	
+	/**
+	 * 
+	 * @param USER_LEVEL
+	 * @return
+	 */
+	public List getOrganisations(int start ,int max, String orderby) {
+		try {
+			Object idf = HibernateUtil.createSession();
+			Session session = HibernateUtil.getSession();
+			Transaction tx = session.beginTransaction();
+			Criteria crit = session.createCriteria(Organisation.class);
+			crit.add(Restrictions.eq("deleted", "false"));
+			crit.setFirstResult(start);
+			crit.setMaxResults(max);
+			crit.addOrder(Order.asc(orderby));
+			List ll = crit.list();
+			tx.commit();
+			HibernateUtil.closeSession(idf);
+			return ll;
+		} catch (HibernateException ex) {
+			log.error("[getOrganisations]" ,ex);
+		} catch (Exception ex2) {
+			log.error("[getOrganisations]" ,ex2);
 		}
 		return null;
 	}	
+	
+	/**
+	 * 
+	 * @return
+	 */
+	private Long selectMaxFromOrganisations(){
+		try {
+			//get all users
+			Object idf = HibernateUtil.createSession();
+			Session session = HibernateUtil.getSession();
+			Transaction tx = session.beginTransaction();
+			Query query = session.createQuery("select max(c.organisation_id) from Organisation c where c.deleted = 'false'"); 
+			List ll = query.list();
+			tx.commit();
+			HibernateUtil.closeSession(idf);
+			log.error((Long)ll.get(0));
+			return (Long)ll.get(0);				
+		} catch (HibernateException ex) {
+			log.error("[selectMaxFromUsers] "+ex);
+		} catch (Exception ex2) {
+			log.error("[selectMaxFromUsers] "+ex2);
+		}
+		return null;
+	}	
+	
+	/**
+	 * updates an organisation if USER_LEVEL is admin
+	 * @param USER_LEVEL
+	 * @param organisation_id
+	 * @param orgname
+	 * @param users_id
+	 * @return
+	 */
+	public Long updateOrganisation(Long USER_LEVEL, long organisation_id, String orgname, long users_id){
+		try {
+			Organisation org = this.getOrganisationById(organisation_id);
+			org.setName(orgname);
+			org.setUpdatedby(users_id);
+			org.setUpdatetime(new Date());
+			Object idf = HibernateUtil.createSession();
+			Session session = HibernateUtil.getSession();
+			Transaction tx = session.beginTransaction();
+			session.update(org);
+			tx.commit();
+			HibernateUtil.closeSession(idf);
+			return org.getOrganisation_id();
+		} catch (HibernateException hex){
+			log.error("updateOrganisation",hex);
+		} catch (Exception err){
+			log.error("updateOrganisation",err);
+		}
+		return null;
+	}
 
 	/**
 	 * Gets an organisation by its id
