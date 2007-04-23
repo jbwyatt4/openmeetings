@@ -11,6 +11,7 @@
 	<attribute name="start" value="0" type="number" />
 	<attribute name="step" value="100" type="number" />
 	<attribute name="orderby" value="firstname" type="string" />
+	<attribute name="asc" value="true" type="boolean" />
 	<attribute name="records" value="0" type="number" />
 	
 	<handler name="oncallnext" />

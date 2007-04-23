@@ -8,6 +8,7 @@
 	<handler name="onnew" />
     <handler name="ondelete" />
     <handler name="onsavecompleted" />
+	<handler name="onreload" />
 
     <view name="_savecontentbar" layout="axis:x;spacing:2;inset:2" x="2" height="28" width="$once{ parent.width }"
         bgcolor="$once{ canvas.baseMousecolorizer }">
@@ -35,6 +36,10 @@
         	new contentsavewindow(canvas.main_content._content.inner,{refObj:this,saveObj:this.observerViews});
         }
     </method>
+	
+	<method name="doReloadEvent">
+		this.onreload.sendEvent();
+	</method>
     
     <method name="doDeleteEvent">
     	new confirmdeletewindow(canvas.main_content._content.inner,{refObj:this});
