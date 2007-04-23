@@ -333,7 +333,8 @@ public class Usermanagement {
 			String login, String password, String lastname, String firstname,
 			Date age, String street, String additionalname, String zip, long states_id, String town,
 			int availible, String telefon, String fax,
-			String mobil, String email, String comment, int status, LinkedHashMap organisations) {
+			String mobil, String email, String comment, int status, LinkedHashMap organisations,
+			int title_id) {
 
 		if (AuthLevelmanagement.getInstance().checkUserLevel(USER_LEVEL) && user_id != 0) {
 			try {
@@ -369,6 +370,7 @@ public class Usermanagement {
 					us.setUpdatetime(new Date());
 					us.setAvailible(availible);
 					us.setStatus(status);
+					us.setTitle_id(title_id);
 					
 					if (level_id != 0)
 						us.setLevel_id(new Long(level_id));

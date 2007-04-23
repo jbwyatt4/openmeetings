@@ -196,7 +196,8 @@ public class UserService {
 	            		argObjectMap.get("mobil").toString(),argObjectMap.get("email").toString(),
 	            		argObjectMap.get("comment").toString(),
 	            		Integer.valueOf(argObjectMap.get("status").toString()).intValue(),
-	            		null);
+	            		null,
+	            		Integer.valueOf(argObjectMap.get("title_id").toString()).intValue());
 	        } else {
 	            return new Long(-2);
 	        }
@@ -257,7 +258,8 @@ public class UserService {
 		        		argObjectMap.get("mobil").toString(),
 		        		argObjectMap.get("email").toString(),argObjectMap.get("comment").toString(),
 		        		Integer.valueOf(argObjectMap.get("status").toString()).intValue(),
-		        		organisations); 
+		        		organisations,
+		        		Integer.valueOf(argObjectMap.get("title_id").toString()).intValue()); 
     		}
     	} catch (Exception ex) {
     		log.error("[saveOrUpdateUser]: ",ex);
