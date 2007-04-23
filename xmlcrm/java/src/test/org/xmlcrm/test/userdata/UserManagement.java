@@ -28,7 +28,7 @@ public class UserManagement extends TestCase {
 		
 		Users us = mService.loginUser(sessionData.getSession_id(), "swagner", "test");
 		
-		SearchResult users = uService.getUserList(sessionData.getSession_id(), 0, 100, "firstname");
+		SearchResult users = uService.getUserList(sessionData.getSession_id(), 0, 100, "firstname", false);
 		
 		log.error("Number of Users 1: "+users.getResult().size());
 		log.error("Number of Users 2: "+users.getRecords());
