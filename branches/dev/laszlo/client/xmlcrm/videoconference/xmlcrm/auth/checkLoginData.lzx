@@ -77,7 +77,7 @@
                 hib.userlang = Number(parent.languages.getValue());
             	hib.userobject = value;
             	if (value.organisation_users.length==0){
-            		Debug.write("this user has no Organisation Maybe a Bug add Ticket to http://code.google.com/p/openmeetings/issues/ ");
+            		Debug.write("this user has no Organisation ");
                 } else if (value.organisation_users.length==1){
             		hib.currentdomain = value.organisation_users[0].organisation.name;
             		hib.currentdomainObj = value.organisation_users[0].organisation;

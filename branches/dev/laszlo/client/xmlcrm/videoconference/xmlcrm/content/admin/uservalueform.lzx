@@ -50,23 +50,24 @@
     
     <method name="initFields" args="obj">
     	<![CDATA[
-    	this.level.selectItem(String(obj.level_id));
-        this.username.setText(obj.login);
-        this.firstname.setText(obj.firstname);
-        this.lastname.setText(obj.lastname);
-        this.email.setText(obj.adresses.emails[0].mail.email);
-        this.age.setText(parseDateToString(obj.age));
-        this.street.setText(obj.adresses.street);
-        this.house.setText(obj.adresses.additionalname);
-        this.zip.setText(obj.adresses.zip);
-        this.town.setText(obj.adresses.town);
-        this.state.selectItem(String(obj.adresses.states.state_id));
-        this.adress_comment.setText(obj.adresses.comment);
-        this.status.selectItem(String(obj.status));
-        this._organisationslist.clearList();
-        for (var i=0;i<obj.organisation_users.length;i++){
-        	this._organisationslist.addItem(obj.organisation_users[i].organisation.name,obj.organisation_users[i].organisation.organisation_id);
-        }
+			this.level.selectItem(String(obj.level_id));
+			this.username.setText(obj.login);
+			this.firstname.setText(obj.firstname);
+			this.lastname.setText(obj.lastname);
+			this.email.setText(obj.adresses.emails[0].mail.email);
+			this.age.setText(parseDateToString(obj.age));
+			this.street.setText(obj.adresses.street);
+			this.house.setText(obj.adresses.additionalname);
+			this.zip.setText(obj.adresses.zip);
+			this.town.setText(obj.adresses.town);
+			this.state.selectItem(String(obj.adresses.states.state_id));
+			this.adress_comment.setText(obj.adresses.comment);
+			this.status.selectItem(String(obj.status));
+			this.salutation.selectItem(String(obj.title_id));
+			this._organisationslist.clearList();
+			for (var i=0;i<obj.organisation_users.length;i++){
+				this._organisationslist.addItem(obj.organisation_users[i].organisation.name,obj.organisation_users[i].organisation.organisation_id);
+			}
         ]]>
     </method>
 	
@@ -119,6 +120,7 @@
   			this.sendObject["availible"] = 0;
   			this.sendObject["status"] = Number(this.parent.status.getValue());
   			this.sendObject["level_id"] = Number(this.parent.level.getValue());
+			this.sendObject["title_id"] = Number(this.parent.salutation.getValue());
   			this.sendObject["organisations"] = this.parent._organisationslist.getAllItems();
 
   			Debug.write("prepareCall: ",this.sendObject);
@@ -153,7 +155,17 @@
         <edittext name="userpass2" y="130" password="true" x="120" width="270" text="" />   
     
     <labeltext labelid="135" width="200" y="160" resize="false" x="2"/>
-        <edittext name="firstname" y="160" x="120" width="270" text="" />
+        <combobox name="salutation" width="100" y="160" x="120" editable="false" fontsize="12">
+	        <handler name="oninit" >
+	            <![CDATA[
+	            for (var i=0;i<canvas.salutationsInitValues.length;i++){
+	                this.addItem(canvas.salutationsInitValues[i].name,canvas.salutationsInitValues[i].salutations_id);
+	            }
+	            this.selectItem(String(canvas.salutationsInitValues[0].salutations_id));
+	            ]]>
+	        </handler> 
+        </combobox> 
+        <edittext name="firstname" y="160" x="230" width="160" text="" />
         
     <labeltext labelid="136" width="200" y="190" resize="false" x="2"/>
         <edittext name="lastname" y="190" x="120" width="270" text="" />                

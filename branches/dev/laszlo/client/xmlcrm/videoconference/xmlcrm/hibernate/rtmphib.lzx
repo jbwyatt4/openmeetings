@@ -82,6 +82,16 @@
             //The onResult-Handler will be called be the rtmpconnection
             Debug.write("getStates: ",value);
             canvas.statesInitValues = value;
+            parent.getUserSalutations.doCall();
+        </handler>  
+    </netremotecallhib>    
+    
+    <netremotecallhib name="getUserSalutations" funcname="userservice.getUserSalutations" >
+		<netparam name="vars1"><method name="getValue">return canvas.sessionId;</method></netparam>
+        <handler name="ondata" args="value">
+            //The onResult-Handler will be called be the rtmpconnection
+            Debug.write("getUserSalutations ",value);
+            canvas.salutationsInitValues = value;
             parent.setUsername.doCall();
         </handler>  
     </netremotecallhib>    
