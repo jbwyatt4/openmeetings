@@ -1,5 +1,6 @@
 package org.xmlcrm.app.remote;
 
+import java.util.LinkedHashMap;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -8,6 +9,7 @@ import org.xmlcrm.app.data.basic.Sessionmanagement;
 import org.xmlcrm.app.data.beans.basic.SearchResult;
 import org.xmlcrm.app.data.user.Usermanagement;
 import org.xmlcrm.app.data.user.Organisationmanagement;
+import org.xmlcrm.app.hibernate.beans.domain.Organisation;
 
 public class OrganisationService {
 	
@@ -18,24 +20,39 @@ public class OrganisationService {
 	 * @param SID
 	 * @return
 	 */
-	public SearchResult getOrganisations(String SID, int start ,int max, String orderby){
-        int users_id = Sessionmanagement.getInstance().checkSession(SID);
-        long USER_LEVEL = Usermanagement.getInstance().getUserLevelByID(users_id);
-        return Organisationmanagement.getInstance().getOrganisations(USER_LEVEL,start,max,orderby);
+	public SearchResult getOrganisations(String SID, int start ,int max, String orderby, boolean asc){
+		try {
+	        int users_id = Sessionmanagement.getInstance().checkSession(SID);
+	        long USER_LEVEL = Usermanagement.getInstance().getUserLevelByID(users_id);
+	        return Organisationmanagement.getInstance().getOrganisations(USER_LEVEL,start,max,orderby,asc);
+		} catch (Exception e){
+			log.error("getOrganisations",e);
+		}
+		return null;
 	}
 	
-	
-	
 	/**
-	 * @deprecated
+	 * get an organisation by a given id
 	 * @param SID
-	 * @param orgname
+	 * @param organisation_id
 	 * @return
 	 */
-	public Long addOrganisation(String SID, String orgname){
+	public Organisation getOrganisationById(String SID, long organisation_id){
         int users_id = Sessionmanagement.getInstance().checkSession(SID);
         long USER_LEVEL = Usermanagement.getInstance().getUserLevelByID(users_id);
-        return Organisationmanagement.getInstance().addOrganisation(USER_LEVEL, orgname, users_id);
+        return Organisationmanagement.getInstance().getOrganisationById(USER_LEVEL, organisation_id);
+	}
+	
+	/**
+	 * deletes a organisation by a given id
+	 * @param SID
+	 * @param organisation_id
+	 * @return
+	 */
+	public Long deleteOrganisation(String SID, long organisation_id){
+        int users_id = Sessionmanagement.getInstance().checkSession(SID);
+        long USER_LEVEL = Usermanagement.getInstance().getUserLevelByID(users_id);
+        return Organisationmanagement.getInstance().deleteOrganisation(USER_LEVEL, organisation_id, users_id);
 	}
 	
 	/**
@@ -45,14 +62,21 @@ public class OrganisationService {
 	 * @param orgname
 	 * @return
 	 */
-	public Long saveOrUpdateorganisation(String SID, long organisation_id, String orgname){
-        int users_id = Sessionmanagement.getInstance().checkSession(SID);
-        long USER_LEVEL = Usermanagement.getInstance().getUserLevelByID(users_id);
-        if (organisation_id==0){
-        	return Organisationmanagement.getInstance().addOrganisation(USER_LEVEL, orgname, users_id);
-        } else {
-        	return Organisationmanagement.getInstance().updateOrganisation(USER_LEVEL, organisation_id, orgname, users_id);
-        }
+	public Long saveOrUpdateOrganisation(String SID, Object regObjectObj){
+		try {
+	        int users_id = Sessionmanagement.getInstance().checkSession(SID);
+	        long USER_LEVEL = Usermanagement.getInstance().getUserLevelByID(users_id);
+	        LinkedHashMap argObjectMap = (LinkedHashMap) regObjectObj;
+	        long organisation_id = Long.valueOf(argObjectMap.get("organisation_id").toString()).longValue();
+	        if (organisation_id==0){
+	        	return Organisationmanagement.getInstance().addOrganisation(USER_LEVEL, argObjectMap.get("orgname").toString(), users_id);
+	        } else {
+	        	return Organisationmanagement.getInstance().updateOrganisation(USER_LEVEL, organisation_id, argObjectMap.get("orgname").toString(), users_id);
+	        }
+		} catch (Exception err) {
+			log.error("saveOrUpdateOrganisation",err);
+		}
+		return null;
         
 	}
 

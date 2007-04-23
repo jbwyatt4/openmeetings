@@ -58,7 +58,7 @@ public class Usermanagement {
 	 * @param orderby
 	 * @return
 	 */
-	public SearchResult getUsersList(long USER_LEVEL, int start, int max, String orderby){
+	public SearchResult getUsersList(long USER_LEVEL, int start, int max, String orderby, boolean asc){
 		try {
 			if (AuthLevelmanagement.getInstance().checkAdminLevel(USER_LEVEL)){
 				SearchResult sresult = new SearchResult();
@@ -70,7 +70,8 @@ public class Usermanagement {
 				Transaction tx = session.beginTransaction();
 				Criteria crit = session.createCriteria(Users.class);
 				crit.add(Restrictions.eq("deleted", "false"));
-				crit.addOrder(Order.asc(orderby));
+				if (asc) crit.addOrder(Order.asc(orderby));
+				else crit.addOrder(Order.desc(orderby));
 				crit.setMaxResults(max);
 				crit.setFirstResult(start);
 				sresult.setResult(crit.list());

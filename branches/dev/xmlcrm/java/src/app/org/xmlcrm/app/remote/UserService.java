@@ -111,20 +111,53 @@ public class UserService {
     }	
     
     /**
-     * gets a List of users of an organisation
-     * the user who calls this method must be an moderator at least
+     * get a lsit of all users of an organisation
      * @param SID
      * @param organisation_id
      * @param start
      * @param max
      * @param orderby
+     * @param asc
      * @return
      */
-    public List getorgUserList(String SID, long organisation_id, int start, int max, String orderby){
+    public List getOrgUserList(String SID, long organisation_id, int start, int max, String orderby, boolean asc){
         int users_id = Sessionmanagement.getInstance().checkSession(SID);
         long USER_LEVEL = Usermanagement.getInstance().getUserLevelByID(users_id);
-        return Organisationmanagement.getInstance().getOrganisationUsers(USER_LEVEL, users_id, organisation_id, start, max, orderby);
+        return Organisationmanagement.getInstance().getUsersByOrganisationId(USER_LEVEL, organisation_id, start, max, orderby, asc);
     }
+    
+    /**
+     * gat a list of all organisations of an user
+     * @param SID
+     * @param client_user
+     * @param start
+     * @param max
+     * @param orderby
+     * @param asc
+     * @return
+     */
+    public List getOrganisationListByUser(String SID, long client_user, int start, int max, String orderby, boolean asc){
+        int users_id = Sessionmanagement.getInstance().checkSession(SID);
+        long USER_LEVEL = Usermanagement.getInstance().getUserLevelByID(users_id);
+        return Organisationmanagement.getInstance().getOrganisationsByUserId(USER_LEVEL, client_user, start, max, orderby, asc);
+    }    
+    
+    /**
+     * gets a list of all not assigned organisations of a user
+     * @param SID
+     * @param client_user
+     * @param start
+     * @param max
+     * @param orderby
+     * @param asc
+     * @return
+     */
+    public List getRestOrganisationListByUser(String SID, long client_user, int start, int max, String orderby, boolean asc){
+        int users_id = Sessionmanagement.getInstance().checkSession(SID);
+        long USER_LEVEL = Usermanagement.getInstance().getUserLevelByID(users_id);
+        return Organisationmanagement.getInstance().getRestOrganisationsByUserId(USER_LEVEL, client_user, start, max, orderby, asc);
+    }
+    
     
     /**
      * gets a hole user-list(admin-role only)
@@ -134,10 +167,10 @@ public class UserService {
      * @param orderby
      * @return
      */
-    public SearchResult getUserList(String SID, int start, int max, String orderby){
+    public SearchResult getUserList(String SID, int start, int max, String orderby, boolean asc){
         int users_id = Sessionmanagement.getInstance().checkSession(SID);
         long USER_LEVEL = Usermanagement.getInstance().getUserLevelByID(users_id);
-        return Usermanagement.getInstance().getUsersList(USER_LEVEL, start, max, orderby);
+        return Usermanagement.getInstance().getUsersList(USER_LEVEL, start, max, orderby, asc);
     }
     
     /**
@@ -232,6 +265,12 @@ public class UserService {
     	return null;
     }    
     
+    /**
+     * deletes a user
+     * @param SID
+     * @param user_idClient
+     * @return
+     */
     public Long deleteUserAdmin(String SID, int user_idClient){
     	int users_id = Sessionmanagement.getInstance().checkSession(SID);
     	long User_LEVEL = Usermanagement.getInstance().getUserLevelByID(users_id);
@@ -245,6 +284,8 @@ public class UserService {
     		return new Long(-11);
     	}
     } 
+    
+   
     
     
 }
