@@ -214,41 +214,19 @@
        
     <labeltext labelid="161" width="200" y="510" resize="false" x="2"/>     
     <simplevaluelist name="_organisationslist" y="510" x="120" width="270" height="100" 
-		multiselect="true" >
-		<method name="checkValue" args="value">
-			<![CDATA[
-				Debug.write("checkValue ", value);
-				var t = this.getAllObjects();
-				if (t!=null){
-					Debug.write("t.length ", t.length);
-					for (var i=0;i<t.length;i++){
-						Debug.write("checkValue. ",t[i],value);
-						if (t[i].value==value) return true;
-					}
-				}
-				return false;
-			]]>
-		</method>
-	</simplevaluelist>
+		multiselect="true" />
 	
 	<basechooseseicon resourceN="edit_add_rsc" labelid="172" y="512" x="400"
 		onclick="this.parent.addOrganisationToUser()" />		
 	<method name="addOrganisationToUser">
-		if (this.user_id!=0){
+		if (this.user_id!=0)
 			new chooseorganisationwindow(canvas.main_content._content.inner,{refObj:this,user_id:this.user_id});
-		}
 	</method>	
-	<basechooseseicon resourceN="button_cancel_rsc" labelid="172" y="512" x="430"
+	<basechooseseicon resourceN="button_cancel_rsc" labelid="176" y="512" x="430"
 		onclick="new confirmdeletewindow(canvas.main_content._content.inner,{refObj:this});" >		
 		<method name="confirmDelete">
-			<![CDATA[
-				if (this.parent._organisationslist._selected!=null){
-					var t = this.parent._organisationslist._selected;
-					for (var i=0;i<t.length;i++){
-						this.parent._organisationslist.removeItem(t[i].value);
-					}
-				}
-			]]>
+			if (this.parent._organisationslist._selected!=null)
+				for (var i in this.parent._organisationslist._selected)	this.parent._organisationslist.removeItem(this.parent._organisationslist._selected[i].value);
 		</method>
 	</basechooseseicon>
 

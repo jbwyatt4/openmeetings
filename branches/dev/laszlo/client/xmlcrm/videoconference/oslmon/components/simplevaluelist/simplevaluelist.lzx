@@ -111,6 +111,17 @@
 			}
 		]]>
     </method>
+	<method name="checkValue" args="value">
+		<![CDATA[
+			var t = this.getAllObjects();
+			if (t!=null){
+				for (var i=0;i<t.length;i++){
+					if (t[i].value==value) return true;
+				}
+			}
+			return false;
+		]]>
+	</method>		
 		
     <method name="getAllItems">
     	<![CDATA[
