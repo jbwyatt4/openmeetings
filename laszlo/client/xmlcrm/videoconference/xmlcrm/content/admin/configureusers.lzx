@@ -4,7 +4,7 @@
 <class name="configureusers" extends="basecontentview">
 
 	<turnoverlist name="_turnoverlist" width="440" height="600" x="2" y="0" 
-		orderby="login" step="10" >
+		orderby="user_id" step="10" asc="true">
 
 		<handler name="oninit">
 			this.addHeaderItem(146,60);
@@ -32,6 +32,7 @@
 			<netparam name="vars2"><method name="getValue"> return parent.parent.start; </method></netparam>
 			<netparam name="vars3"><method name="getValue"> return parent.parent.step; </method></netparam>
 			<netparam name="vars4"><method name="getValue"> return parent.parent.orderby; </method></netparam>
+			<netparam name="vars5"><method name="getValue"> return parent.parent.asc; </method></netparam>
 	    	<handler name="ondata" args="value">
 	    		Debug.write("getUserList: ",value);
 	    		//this.parent.destroy();

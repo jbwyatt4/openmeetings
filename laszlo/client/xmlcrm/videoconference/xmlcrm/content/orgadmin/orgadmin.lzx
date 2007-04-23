@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library>
 
-<class name="orgadmin" extends="view">
+<class name="orgadmin" extends="basecontentview">
 	
 	<turnoverlist name="_turnoverlist" width="260" height="600" x="2" y="0" 
-		orderby="organisation_id" step="10" >
+		orderby="organisation_id" step="10" asc="true">
 
 		<handler name="oninit">
 			this.addHeaderItem(164,120);
@@ -30,6 +30,7 @@
 			<netparam name="vars2"><method name="getValue"> return parent.parent.start; </method></netparam>
 			<netparam name="vars3"><method name="getValue"> return parent.parent.step; </method></netparam>
 			<netparam name="vars4"><method name="getValue"> return parent.parent.orderby; </method></netparam>
+			<netparam name="vars5"><method name="getValue"> return parent.parent.asc; </method></netparam>
 	    	<handler name="ondata" args="value">
 	    		Debug.write("getOrganisations ",value);
 	    		//this.parent.destroy();
@@ -49,7 +50,7 @@
 
 	</turnoverlist>
 	
-	<orgadminvalueform name="_orgadminvalueform" x="260" />
+	<orgadminvalueform name="_orgadminvalueform" x="290" />
 	
 </class>
 

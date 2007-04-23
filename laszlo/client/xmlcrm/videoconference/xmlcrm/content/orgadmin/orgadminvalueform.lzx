@@ -3,11 +3,31 @@
 
 <class name="orgadminvalueform" extends="basecontentsaveview">
 	
+	<!-- record id -->
 	<attribute name="organisation_id" value="0" type="number" />	
 
+	<!-- handler -->
+	
 	<handler name="onsavecompleted" >
-		this.getUserById.doCall();
+		this.getOrganisationById.doCall();
 	</handler>
+	
+	<handler name="onreload" >
+		if (this.organisation_id!=0) this.getOrganisationById.doCall();
+	</handler>	
+
+	<handler name="onnew">
+		this.organisation_id=0;
+        this.orgname.setText('');
+	</handler>
+	
+    <handler name="ondelete" >
+		if (this.organisation_id!=0){
+			this.deleteOrganisation.doCall();
+		}
+    </handler>	
+	
+	<!-- methods -->
 	
     <method name="initValueFieldsByObject" args="obj">
 		this.organisation_id = obj.organisation_id;
@@ -15,6 +35,71 @@
 			this.getOrganisationById.doCall();
 		}
     </method>	
+	
+  	<netremotecallhib name="getOrganisationById" funcname="organisationservice.getOrganisationById" 
+  		remotecontext="$once{ canvas.thishib }" > 
+  		<netparam name="vars1"><method name="getValue"> return canvas.sessionId; </method></netparam>
+    	<netparam name="vars2"><method name="getValue">return parent.parent.organisation_id;</method></netparam>
+    	<handler name="ondata" args="value">
+    		parent.initFields(value);
+    	</handler>
+  	</netremotecallhib>	
+    
+    <method name="initFields" args="obj">
+    	<![CDATA[
+    	this.organisation_id = obj.organisation_id;
+        this.orgname.setText(obj.name);
+        ]]>
+    </method>
+	
+	<!-- remotecalls -->
+
+	<netremotecallhib name="deleteOrganisation" funcname="organisationservice.deleteUserAdmin" remotecontext="$once{ canvas.thishib }" >      
+		<netparam name="vars1"><method name="getValue"> return canvas.sessionId; </method></netparam>
+		<netparam name="vars2"><method name="getValue"> return parent.parent.user_id; </method></netparam>
+		<handler name="ondata" args="value">
+			Debug.write("deleteUserAdmin ",value);
+			//this.parent.destroy();
+			if (value>0){
+				this.parent.parent._turnoverlist.oncallnext.sendEvent();
+				this.parent.onnew.sendEvent();
+			}
+		</handler>
+	</netremotecallhib>	
+	
+  	<netremotecallhib name="saveOrUpdateOrganisation" funcname="organisationservice.saveOrUpdateOrganisation" 
+  		remotecontext="$once{ canvas.thishib }" registerObject="true" >   
+		<attribute name="sendObject" value="null" />
+		<!-- gets called by Observer -->
+  		<method name="prepareCall">
+  			this.sendObject=new Array();
+  			this.sendObject["organisation_id"] = this.parent.organisation_id;
+  			this.sendObject["orgname"] = this.parent.orgname.getText();
+
+  			Debug.write("prepareCall: ",this.sendObject);
+  		</method>
+  		<netparam name="vars1"><method name="getValue"> return canvas.sessionId; </method></netparam>
+    	<netparam name="vars2"><method name="getValue">return parent.sendObject;</method></netparam>	  		
+    	<handler name="ondata" args="val">
+			<![CDATA[
+    		Debug.write("saveOrUpdateOrganisation: ",val);
+			if (val>0){
+				Debug.write("saveOrUpdateUser val greater 0: ",val);
+				this.parent.parent._turnoverlist.oncallnext.sendEvent();
+				var obj = new Array();
+				obj["organisation_id"] = val;
+				this.parent.initValueFieldsByObject(obj);
+			}
+			]]>
+    	</handler>
+  	</netremotecallhib>		
+	
+	<!-- content -->	
+    
+    <labeltext labelid="170" width="200" y="40" resize="false" fontstyle="bold" />	
+	
+    <labeltext labelid="171" width="200" y="70" resize="false" x="2"/>
+        <edittext name="orgname" y="70" x="120" width="270" text="" />	
 
 </class>
 	
