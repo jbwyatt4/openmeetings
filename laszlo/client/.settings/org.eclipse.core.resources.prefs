@@ -1,4 +1,4 @@
-#Mon Apr 23 17:27:37 CEST 2007
+#Mon Apr 23 19:57:54 CEST 2007
 eclipse.preferences.version=1
 encoding//xmlcrm/streaming/rtmpconnection.lzx=UTF-8
 encoding//xmlcrm/videoconference/config.lzx=UTF-8
@@ -7,6 +7,7 @@ encoding//xmlcrm/videoconference/oslmon/components/library.lzx=UTF-8
 encoding//xmlcrm/videoconference/oslmon/components/simplevaluelist/library.lzx=UTF-8
 encoding//xmlcrm/videoconference/oslmon/components/simplevaluelist/simplevaluelist.lzx=UTF-8
 encoding//xmlcrm/videoconference/oslmon/components/turnoverlist/turnoverlist.lzx=UTF-8
+encoding//xmlcrm/videoconference/xmlcrm/auth/checkLoginData.lzx=UTF-8
 encoding//xmlcrm/videoconference/xmlcrm/content/admin/chooseorganisationwindow.lzx=UTF-8
 encoding//xmlcrm/videoconference/xmlcrm/content/admin/configureusers.lzx=UTF-8
 encoding//xmlcrm/videoconference/xmlcrm/content/admin/configureusersListItem.lzx=UTF-8
@@ -17,4 +18,7 @@ encoding//xmlcrm/videoconference/xmlcrm/content/orgadmin/library.lzx=UTF-8
 encoding//xmlcrm/videoconference/xmlcrm/content/orgadmin/orgadmin.lzx=UTF-8
 encoding//xmlcrm/videoconference/xmlcrm/content/orgadmin/orgadminListItem.lzx=UTF-8
 encoding//xmlcrm/videoconference/xmlcrm/content/orgadmin/orgadminvalueform.lzx=UTF-8
+encoding//xmlcrm/videoconference/xmlcrm/content/settings/usersettings.lzx=UTF-8
+encoding//xmlcrm/videoconference/xmlcrm/hibernate/netremotecallhib.lzx=UTF-8
+encoding//xmlcrm/videoconference/xmlcrm/hibernate/rtmphib.lzx=UTF-8
 encoding//xmlcrm/videoconference/xmlcrm/navi/navifunctions.lzx=UTF-8
