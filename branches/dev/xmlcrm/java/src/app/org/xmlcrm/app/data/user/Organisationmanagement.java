@@ -404,6 +404,7 @@ public class Organisationmanagement {
 					Criteria crit = session.createCriteria(Organisation_Users.class);
 					Criteria subcrit = crit.createCriteria("organisation");
 					subcrit.add(Restrictions.eq("organisation_id", organisation_id));
+					crit.add(Restrictions.ne("deleted", "true"));
 					crit.setMaxResults(max);
 					crit.setFirstResult(start);
 					List userOrg = crit.list();
@@ -451,6 +452,7 @@ public class Organisationmanagement {
 					crit.add(Restrictions.eq("user_id", user_id));
 					crit.setMaxResults(max);
 					crit.setFirstResult(start);
+					crit.add(Restrictions.ne("deleted", "true"));
 			        
 					List userOrgIds = crit.list();
 					tx.commit();
@@ -528,12 +530,16 @@ public class Organisationmanagement {
 	 * @throws Exception
 	 */
 	private boolean checkOrgInList(Long orgId, LinkedHashMap org) throws Exception{
+//		log.error("checkOrgInList "+orgId);
 		for (Iterator it = org.keySet().iterator();it.hasNext();){
 			Integer key = (Integer) it.next();
 			Long newOrgId = Long.valueOf(org.get(key).toString()).longValue();
-			log.error("[checkOrgInList]: newOrgId"+newOrgId);
-			log.error("[checkOrgInList]: org"+org);
-			if (newOrgId==orgId) return true;
+//			log.error("[checkOrgInList 1]: newOrgId "+newOrgId);
+//			log.error("[checkOrgInList 2]: org "+orgId);
+			if (newOrgId.equals(orgId)) {
+//				log.error("checkOrgInList 3 found");
+				return true;
+			}
 		}
 		return false;
 	}
@@ -546,9 +552,14 @@ public class Organisationmanagement {
 	 * @throws Exception
 	 */
 	private boolean checkOrgInStoredList(long orgId, Set org) throws Exception {
+//		log.error("checkOrgInStoredList "+orgId);
 		for (Iterator it = org.iterator();it.hasNext();){
 			Organisation_Users orgUsers = (Organisation_Users) it.next();
-			if (orgUsers.getOrganisation().getOrganisation_id()==orgId) return true;
+//			log.error("checkOrgInStoredList 2 "+orgUsers.getOrganisation().getOrganisation_id());
+			if (orgUsers.getOrganisation().getOrganisation_id().equals(orgId)) {
+//				log.error("checkOrgInStoredList 3 found");
+				return true;
+			}
 		}
 		return false;
 	}
@@ -576,18 +587,18 @@ public class Organisationmanagement {
 				for (Iterator it = us.getOrganisation_users().iterator();it.hasNext();){
 					Organisation_Users orgUsers = (Organisation_Users) it.next();
 					Long orgIdStored = orgUsers.getOrganisation().getOrganisation_id();
-					log.error("updateUserOrganisationsByUser check1 : "+orgIdStored);
+//					log.error("updateUserOrganisationsByUser check1 : "+orgIdStored);
 					boolean shouldBeStored = this.checkOrgInList(orgIdStored,organisations);
 					if (!shouldBeStored) orgIdsToDelete.add(orgIdStored);
 				}
 
-				log.error("updateUserOrganisationsByUser size ADD: "+orgIdsToAdd.size());
+//				log.error("updateUserOrganisationsByUser size ADD: "+orgIdsToAdd.size());
 				for (Iterator it = orgIdsToAdd.iterator();it.hasNext();){
 					Long orgToAdd = (Long) it.next();
 					this.addUserToOrganisation(us.getUser_id(), orgToAdd, us.getUser_id(), "");
 				}
 
-				log.error("updateUserOrganisationsByUser size DELETE: "+orgIdsToDelete.size());
+//				log.error("updateUserOrganisationsByUser size DELETE: "+orgIdsToDelete.size());
 				for (Iterator it = orgIdsToDelete.iterator();it.hasNext();){
 					Long orgToDel = (Long) it.next();
 					this.deleteUserFromOrganisation(us.getUser_id(), orgToDel);

@@ -22,8 +22,12 @@ public class AddDefaultfield extends TestCase {
 //		Fieldmanagment.getInstance().addFourFieldValues("orgvalue_orgname", 171, "Name", "name", "name", "name");
 //		Fieldmanagment.getInstance().addFourFieldValues("orgvalue_orgname", 172, "Organisation hinzufügen", "add organisation", "add organisation", "add organisation");
 //		Fieldmanagment.getInstance().addFourFieldValues("orgvalue_orgname", 173, "Organisation hinzufügen", "add organisation", "add organisation", "add organisation");
-		Fieldmanagment.getInstance().addFourFieldValues("orgvalue_userwin", 174, "abbrechen", "cancel", "cancel", "cancel");
-		Fieldmanagment.getInstance().addFourFieldValues("orgvalue_userwin", 175, "hinzufügen", "add", "add", "add");
+//		Fieldmanagment.getInstance().addFourFieldValues("orgvalue_userwin", 174, "abbrechen", "cancel", "cancel", "cancel");
+//		Fieldmanagment.getInstance().addFourFieldValues("orgvalue_userwin", 175, "hinzufügen", "add", "add", "add");
+//		Fieldmanagment.getInstance().addFourFieldValues("orgvalue_userwin", 176, "Organisation entfernen", "remove organisation", "remove organisation", "remove organisation");
+//		Fieldmanagment.getInstance().addFourFieldValues("orgvalue_userlist", 177, "Benutzer", "user", "user", "user");
+//		Fieldmanagment.getInstance().addFourFieldValues("orgvalue_userlistadd", 178, "Benutzer hinzufügen", "add user", "add user", "add user");
+//		Fieldmanagment.getInstance().addFourFieldValues("orgvalue_userlistdelete", 179, "Benutzer entfernen", "delete user", "delete user", "delete user");
 
 	}
 
