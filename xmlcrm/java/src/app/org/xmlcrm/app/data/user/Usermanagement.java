@@ -345,22 +345,22 @@ public class Usermanagement {
 				}
 				boolean checkEmail = true;
 				Adresses_Emails mail = null;
-				log.error("mail 1 update User: "+us.getAdresses().getAdresses_id());
-				log.error("mail 2 update User: "+us.getAdresses().getEmails().size());
+//				log.error("mail 1 update User: "+us.getAdresses().getAdresses_id());
+//				log.error("mail 2 update User: "+us.getAdresses().getEmails().size());
 				Iterator it = us.getAdresses().getEmails().iterator();
-				log.error("mail 3 update User: "+it);
+//				log.error("mail 3 update User: "+it);
 				if (it.hasNext()){
-					log.error("mail 4 update User: has next");
+//					log.error("mail 4 update User: has next");
 					mail = (Adresses_Emails) it.next();
-					log.error("mail 5 update User naxt"+mail);
+//					log.error("mail 5 update User naxt"+mail);
 				}				
-				log.error("updateUser mail: "+mail);
-				log.error("updateUser email: "+email);
+//				log.error("updateUser mail: "+mail);
+//				log.error("updateUser email: "+email);
 				if (!email.equals(mail.getMail().getEmail())){
 					checkEmail = Emailmanagement.getInstance().checkUserEMail(email);
 				}
 				if (checkName && checkEmail) {
-					log.info("user_id " + user_id);
+//					log.info("user_id " + user_id);
 					
 					us.setLastname(lastname);
 					us.setFirstname(firstname);
@@ -389,7 +389,7 @@ public class Usermanagement {
 						Organisationmanagement.getInstance().updateUserOrganisationsByUser(us, organisations);
 					}
 					
-					log.info("USER " + us.getLastname());
+//					log.info("USER " + us.getLastname());
 					Object idf = HibernateUtil.createSession();
 					Session session = HibernateUtil.getSession();
 					Transaction tx = session.beginTransaction();

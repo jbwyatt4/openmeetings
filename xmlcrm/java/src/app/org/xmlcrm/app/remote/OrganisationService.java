@@ -79,6 +79,27 @@ public class OrganisationService {
 		return null;
         
 	}
+	
+	/**
+	 * gets all users of a given organisation
+	 * @param SID
+	 * @param organisation_id
+	 * @param start
+	 * @param max
+	 * @param orderby
+	 * @param asc
+	 * @return
+	 */
+	public List getUsersByOrganisation(String SID, long organisation_id, int start, int max, String orderby, boolean asc){
+		try {   
+	        int users_id = Sessionmanagement.getInstance().checkSession(SID);
+	        long USER_LEVEL = Usermanagement.getInstance().getUserLevelByID(users_id);
+	        return Organisationmanagement.getInstance().getUsersByOrganisationId(USER_LEVEL, organisation_id, start, max, orderby, asc);
+		} catch (Exception err) {
+			log.error("getUsersByOrganisation",err);
+		}
+		return null;
+	}
 
 
 }

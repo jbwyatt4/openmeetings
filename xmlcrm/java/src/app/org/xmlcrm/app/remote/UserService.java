@@ -219,9 +219,9 @@ public class UserService {
 	        int users_id = Sessionmanagement.getInstance().checkSession(SID);
 	        long User_LEVEL = Usermanagement.getInstance().getUserLevelByID(users_id);	
 	        
-	        log.error("saveOrUpdateUser1: "+argObjectMap.get("organisations"));
-	        log.error("saveOrUpdateUser2: "+argObjectMap.get("organisations").getClass());
-	        log.error("saveOrUpdateUser3: "+argObjectMap.get("user_idClient"));
+//	        log.error("saveOrUpdateUser1: "+argObjectMap.get("organisations"));
+//	        log.error("saveOrUpdateUser2: "+argObjectMap.get("organisations").getClass());
+//	        log.error("saveOrUpdateUser3: "+argObjectMap.get("user_idClient"));
 	        //TODO: there is a BUG here: value send is Time as GMT but here it gets CEST which is wrong	  
 	        //but maybe a OS-related-issue
 	        log.error("saveOrUpdateUser4: "+argObjectMap.get("userage"));
