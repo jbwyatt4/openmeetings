@@ -68,10 +68,11 @@ public class OrganisationService {
 	        long USER_LEVEL = Usermanagement.getInstance().getUserLevelByID(users_id);
 	        LinkedHashMap argObjectMap = (LinkedHashMap) regObjectObj;
 	        long organisation_id = Long.valueOf(argObjectMap.get("organisation_id").toString()).longValue();
+	        LinkedHashMap users = (LinkedHashMap) argObjectMap.get("users");
 	        if (organisation_id==0){
-	        	return Organisationmanagement.getInstance().addOrganisation(USER_LEVEL, argObjectMap.get("orgname").toString(), users_id);
+	        	return Organisationmanagement.getInstance().addOrganisation(USER_LEVEL, argObjectMap.get("orgname").toString(), users_id, users);
 	        } else {
-	        	return Organisationmanagement.getInstance().updateOrganisation(USER_LEVEL, organisation_id, argObjectMap.get("orgname").toString(), users_id);
+	        	return Organisationmanagement.getInstance().updateOrganisation(USER_LEVEL, organisation_id, argObjectMap.get("orgname").toString(), users_id, users);
 	        }
 		} catch (Exception err) {
 			log.error("saveOrUpdateOrganisation",err);
