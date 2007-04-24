@@ -58,10 +58,10 @@
     	<handler name="ondata" args="value">
     		Debug.write("getUsersByorganisation ",value);
 			<![CDATA[
-				parent._userslist.clearList();
+				parent._userlist.clearList();
 				for (var i=0;i<value.length;i++){
 					var v = value[i].login+' ['+value[i].lastname+', '+value[i].firstname+']';
-					parent._userslist.addItem(v,value[i].user_id);
+					parent._userlist.addItem(v,value[i].user_id);
 				}
 			]]>
     	</handler>
@@ -97,7 +97,8 @@
   			this.sendObject=new Array();
   			this.sendObject["organisation_id"] = this.parent.organisation_id;
   			this.sendObject["orgname"] = this.parent.orgname.getText();
-
+			this.sendObject["users"] = this.parent._userlist.getAllItems();
+			  
   			Debug.write("prepareCall: ",this.sendObject);
   		</method>
   		<netparam name="vars1"><method name="getValue"> return canvas.sessionId; </method></netparam>
@@ -124,20 +125,20 @@
         <edittext name="orgname" y="70" x="120" width="270" text="" />	
 	
     <labeltext labelid="177" width="200" y="100" resize="false" x="2"/>     
-    <simplevaluelist name="_userslist" y="100" x="120" width="270" height="200" 
+    <simplevaluelist name="_userlist" y="100" x="120" width="270" height="200" 
 		multiselect="true" />
 
-	<basechooseseicon resourceN="edit_add_rsc" labelid="172" y="100" x="400"
+	<basechooseseicon resourceN="edit_add_rsc" labelid="178" y="100" x="400"
 		onclick="this.parent.addOrganisationToUser()" />		
 	<method name="addOrganisationToUser">
 		if (this.user_id!=0)
 			new chooseuserwindow(canvas.main_content._content.inner,{refObj:this,organisation_id:this.organisation_id});
 	</method>	
-	<basechooseseicon resourceN="button_cancel_rsc" labelid="176" y="100" x="430"
+	<basechooseseicon resourceN="button_cancel_rsc" labelid="179" y="100" x="430"
 		onclick="new confirmdeletewindow(canvas.main_content._content.inner,{refObj:this});" >		
 		<method name="confirmDelete">
-			if (this.parent._userslist._selected!=null)
-				for (var i in this.parent._userslist._selected) this.parent._userslist.removeItem(this.parent._userslist._selected[i].value);
+			if (this.parent._userlist._selected!=null)
+				for (var i in this.parent._userlist._selected) this.parent._userlist.removeItem(this.parent._userlist._selected[i].value);
 		</method>
 	</basechooseseicon>	
 	

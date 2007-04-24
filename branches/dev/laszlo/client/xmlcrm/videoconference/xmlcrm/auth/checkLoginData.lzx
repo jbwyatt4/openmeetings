@@ -13,13 +13,13 @@
     
     <attribute name="labeliderror" value="0" type="number" />
     
-    <labeltext labelid="109" width="200" y="42" resize="false" x="2"/>
+    <labeltext name="n1" labelid="109" width="200" y="42" resize="false" x="2"/>
         <edittext name="username" y="42" x="120" width="170" text="swagner" />
 
-    <labeltext labelid="110" width="200" y="72" resize="false" x="2"/>
+    <labeltext name="n2" labelid="110" width="200" y="72" resize="false" x="2"/>
         <edittext name="userpass" y="72" password="true" x="120" width="170" text="test" />
 
-    <labeltext labelid="111" text="Language: " width="200" y="102" resize="false" x="2"/>  
+    <labeltext name="n3" labelid="111" width="200" y="102" resize="false" x="2"/>  
         
         <combobox name="languages" width="170" y="102" x="120" editable="false">
             <netremotecallhib name="getLanguages" funcname="xmlcrm.getLanguages" remotecontext="$once{ canvas.thishib }" >      
@@ -38,6 +38,10 @@
                 </handler>  
             </netremotecallhib>
         </combobox>
+	
+
+    <labeltext name="n4" labelid="184" width="200" y="102" resize="false" x="2" visible="false" />     
+        <combobox name="organisation" width="170" y="102" x="120" editable="false" visible="false" />
         
     <simplelabelbutton labelid="123" name="_register" width="120" x="40" y="196" visible="false">
     	<handler name="onclick">
@@ -47,11 +51,21 @@
     	</handler>
     </simplelabelbutton>          
         
-    <simplelabelbutton labelid="112" width="120" x="170" y="196">
+    <simplelabelbutton name="b2" labelid="112" width="120" x="170" y="196">
     	<handler name="onclick">
     		this.parent.loginUser.doCall();
     	</handler>
     </simplelabelbutton>   
+        
+    <simplelabelbutton name="b3" labelid="185" width="120" x="170" y="196" visible="false">
+    	<handler name="onclick">
+			var orgIndexId = Number(parent.organisation.getValue());
+			hib.currentdomain = hib.userobject.organisation_users[orgIndexId].organisation.name;
+			hib.currentdomainObj = hib.userobject.organisation_users[orgIndexId].organisation;
+			hib.getLanguageById.doCall();
+			parent.close();
+    	</handler>
+    </simplelabelbutton> 	
     
      <text name="errormess" resize="true" y="84" />
 
@@ -60,6 +74,7 @@
         <netparam name="vars2"><method name="getValue"> return parent.parent.username.getText(); </method></netparam>  
         <netparam name="vars3"><method name="getValue"> return parent.parent.userpass.getText(); </method></netparam>  
         <handler name="ondata" args="value">
+			<![CDATA[
             //The onResult-Handler will be called be the rtmpconnection
             Debug.write("loginUser: ",value);
             
@@ -84,12 +99,29 @@
 	            	hib.getLanguageById.doCall();
 	                parent.close();
                 } else {
+					
+					parent.n1.setAttribute('visible',false);
+					parent.username.setAttribute('visible',false);
+					parent.n2.setAttribute('visible',false);
+			        parent.userpass.setAttribute('visible',false);
+					parent.n3.setAttribute('visible',false);
+			        parent.languages.setAttribute('visible',false);
+	 				parent._register.setAttribute('visible',false);
+					parent.b2.setAttribute('visible',false);
+					parent.n4.setAttribute('visible',true);
+					parent.organisation.setAttribute('visible',true);
+					parent.b3.setAttribute('visible',true);
+			
+					for (var i=0;i<value.organisation_users.length;i++){
+						parent.organisation.addItem(value.organisation_users[i].organisation.name,String(i));
+					}
+					parent.organisation.selectItem(String(i-1));
                 	Debug.write("multiple organisations Issue 31 http://code.google.com/p/openmeetings/issues/detail?id=31");
                 }
             }  else {
                 parent.errormess.setText(value.firstname);
             }
-            
+            ]]>
         </handler>  
     </netremotecallhib>
     

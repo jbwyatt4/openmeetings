@@ -4,6 +4,11 @@
 <class name="basecontentsaveview" extends="basecontentview">
 
     <attribute name="observerViews" value="null" />
+	
+	<attribute name="saveIsVisible" value="true" type="boolean" />
+	<attribute name="addIsVisible" value="true" type="boolean" />
+	<attribute name="refreshIsVisible" value="true" type="boolean" />
+	<attribute name="deleteIsVisible" value="true" type="boolean" />
     
 	<handler name="onnew" />
     <handler name="ondelete" />
@@ -13,13 +18,13 @@
     <view name="_savecontentbar" layout="axis:x;spacing:2;inset:2" x="2" height="28" width="$once{ parent.width }"
         bgcolor="$once{ canvas.baseMousecolorizer }">
         <basechooseseicon resourceN="filesave_rsc" labelid="144" y="2" 
-        	onclick="this.parent.parent.doSaveEvent()" />
+        	onclick="this.parent.parent.doSaveEvent()" visible="$once{ parent.parent.saveIsVisible }" />
         <basechooseseicon resourceN="edit_add_rsc" labelid="155" y="2" 
-        	onclick="this.parent.parent.doAddEvent()" />  
+        	onclick="this.parent.parent.doAddEvent()" visible="$once{ parent.parent.addIsVisible }" />  
         <basechooseseicon resourceN="reload_rsc" labelid="156" y="2" 
-        	onclick="this.parent.parent.doReloadEvent()" />        
+        	onclick="this.parent.parent.doReloadEvent()" visible="$once{ parent.parent.refreshIsVisible }" />        
         <basechooseseicon resourceN="button_cancel_rsc" labelid="157" y="2" 
-        	onclick="this.parent.parent.doDeleteEvent()" />         	 	      	
+        	onclick="this.parent.parent.doDeleteEvent()" visible="$once{ parent.parent.deleteIsVisible }" />         	 	      	
     </view>
     
     <method name="addViewToObserver" args="obj">

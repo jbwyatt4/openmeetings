@@ -1,4 +1,4 @@
-#Mon Apr 23 19:57:54 CEST 2007
+#Tue Apr 24 10:32:49 CEST 2007
 eclipse.preferences.version=1
 encoding//xmlcrm/streaming/rtmpconnection.lzx=UTF-8
 encoding//xmlcrm/videoconference/config.lzx=UTF-8
@@ -13,7 +13,10 @@ encoding//xmlcrm/videoconference/xmlcrm/content/admin/configureusers.lzx=UTF-8
 encoding//xmlcrm/videoconference/xmlcrm/content/admin/configureusersListItem.lzx=UTF-8
 encoding//xmlcrm/videoconference/xmlcrm/content/admin/uservalueform.lzx=UTF-8
 encoding//xmlcrm/videoconference/xmlcrm/content/contentviews/basecontentsaveview.lzx=UTF-8
+encoding//xmlcrm/videoconference/xmlcrm/content/contentviews/basecontentview.lzx=UTF-8
+encoding//xmlcrm/videoconference/xmlcrm/content/contentviews/contentsavewindow.lzx=UTF-8
 encoding//xmlcrm/videoconference/xmlcrm/content/library.lzx=UTF-8
+encoding//xmlcrm/videoconference/xmlcrm/content/orgadmin/chooseuserwindow.lzx=UTF-8
 encoding//xmlcrm/videoconference/xmlcrm/content/orgadmin/library.lzx=UTF-8
 encoding//xmlcrm/videoconference/xmlcrm/content/orgadmin/orgadmin.lzx=UTF-8
 encoding//xmlcrm/videoconference/xmlcrm/content/orgadmin/orgadminListItem.lzx=UTF-8
