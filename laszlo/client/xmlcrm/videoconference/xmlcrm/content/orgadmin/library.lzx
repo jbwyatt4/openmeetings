@@ -4,5 +4,6 @@
 	<include href="orgadmin.lzx" />
 	<include href="orgadminListItem.lzx" />
 	<include href="orgadminvalueform.lzx" />
+	<include href="chooseuserwindow.lzx" />
 
 </library>

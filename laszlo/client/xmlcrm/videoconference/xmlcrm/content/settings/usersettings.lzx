@@ -2,78 +2,60 @@
 <library>
 
 
-<class name="usersettings" extends="basecontentsaveview">
+<class name="usersettings" extends="basecontentsaveview"
+		addIsVisible="false" deleteIsVisible="false" >
 
+	<!-- record-id -->
+	<attribute name="user_id" value="0" type="number" />
+	
+	<!--handlers -->
 
-    <method name="initValueFields">
-        Debug.write("hib: ",hib.userobject);
+	<handler name="onsavecompleted" >
+		this.getUserSelf.doCall();
+	</handler>
+	
+	<handler name="onreload" >
+		this.getUserSelf.doCall();
+	</handler>	
+
+    <handler name="oninit">
+		this.getUserSelf.doCall();
+    </handler>
+	
+	<!-- methods -->
+    
+    <method name="initFields" args="obj">
+    	<![CDATA[
+			this.user_id = obj.user_id;
+			this.username.setText(obj.login);
+			this.firstname.setText(obj.firstname);
+			this.lastname.setText(obj.lastname);
+			this.email.setText(obj.adresses.emails[0].mail.email);
+			this.age.setText(parseDateToString(obj.age));
+			this.street.setText(obj.adresses.street);
+			this.house.setText(obj.adresses.additionalname);
+			this.zip.setText(obj.adresses.zip);
+			this.town.setText(obj.adresses.town);
+			this.state.selectItem(String(obj.adresses.states.state_id));
+			this.adress_comment.setText(obj.adresses.comment);
+			this.salutation.selectItem(String(obj.title_id));
+			this._organisationslist.clearList();
+			for (var i=0;i<obj.organisation_users.length;i++){
+				this._organisationslist.addItem(obj.organisation_users[i].organisation.name,obj.organisation_users[i].organisation.organisation_id);
+			}
+        ]]>
     </method>
-    
-    <labeltext labelid="143" width="200" y="40" resize="false" fontstyle="bold" />
-    
-    <labeltext labelid="132" width="200" y="70" resize="false" x="2"/>
-        <edittext name="username" y="70" x="120" width="270" text="$once{ hib.userobject.login}" />
-
-    <labeltext labelid="133" width="200" y="100" resize="false" x="2"/>
-        <edittext name="userpass1" y="100" password="true" x="120" width="270" text="" />
-        
-    <labeltext labelid="134" width="200" y="130" resize="false" x="2"/>
-        <edittext name="userpass2" y="130" password="true" x="120" width="270" text="" />   
-    
-    <labeltext labelid="135" width="200" y="160" resize="false" x="2"/>
-        <combobox name="salutation" width="100" y="160" x="120" editable="false" fontsize="12">
-	        <handler name="oninit" >
-	            <![CDATA[
-	            for (var i=0;i<canvas.salutationsInitValues.length;i++){
-	                this.addItem(canvas.salutationsInitValues[i].name,canvas.salutationsInitValues[i].salutations_id);
-	            }
-	            this.selectItem(String(canvas.salutationsInitValues[0].salutations_id));
-	            ]]>
-	        </handler> 
-        </combobox> 	
-        <edittext name="firstname" y="160" x="230" width="160" text="$once{ hib.userobject.firstname}" />
-        
-    <labeltext labelid="136" width="200" y="190" resize="false" x="2"/>
-        <edittext name="lastname" y="190" x="120" width="270" text="$once{ hib.userobject.lastname }" />                
-
-    <labeltext labelid="137" width="200" y="220" resize="false" x="2"/>
-        <edittext name="email" y="220" x="120" width="270" text="$once{ hib.userobject.adresses.emails[0].mail.email }" />
-        
-    <labeltext labelid="138" width="200" y="250" resize="false" x="2"/>
-        <edittext name="age" y="250" x="120" width="270" text="$once{ hib.userobject.age }" />
-        
-    <labeltext labelid="139" width="200" y="280" resize="false" x="2"/>
-        <edittext name="street" y="280" x="120" width="220" text="$once{ hib.userobject.adresses.street }" />
-        <edittext name="house" y="280" x="350" width="40" text="$once{ hib.userobject.adresses.additionalname }" />
-        
-    <labeltext labelid="140" width="280" y="310" resize="false" x="2"/>
-        <edittext name="zip" y="310" x="120" width="70" text="$once{ hib.userobject.adresses.zip }" />   
-        <edittext name="town" y="310" x="200" width="190" text="$once{ hib.userobject.adresses.town }" />                        
-         
-    <labeltext labelid="141" width="200" y="340" resize="false" x="2"/>  
-        <combobox name="state" width="270" y="340" x="120" editable="false" fontsize="12">
-            <netremotecallhib name="getStates" funcname="xmlcrm.getStates" remotecontext="$once{ canvas.thishib }" >      
-                <handler name="oninit">
-                    this.doCall();
-                </handler>
-                <handler name="ondata" args="value">
-                    //The onResult-Handler will be called be the rtmpconnection
-                    Debug.write("getLanguages: ",value);
-                    <![CDATA[
-                    for (var i=0;i<value.length;i++){
-                        this.parent.addItem(value[i].name,value[i].state_id);
-                    }
-                    this.parent.selectItem(String(hib.userobject.adresses.states.state_id));
-                    parent.parent.initValueFields();
-                    ]]>
-                </handler>  
-            </netremotecallhib>
-        </combobox> 
-        
-    <labeltext labelid="142" width="200" y="370" resize="false" x="2"/>
-        <edittext name="adress_comment" y="370" x="120" width="270" 
-            height="120" text="$once{ hib.userobject.adresses.comment }" multiline="true"/>
-     
+	
+	<!-- remotecalls -->
+	
+  	<netremotecallhib name="getUserSelf" funcname="userservice.getUserSelf" 
+  		remotecontext="$once{ canvas.thishib }" > 
+  		<netparam name="vars1"><method name="getValue"> return canvas.sessionId; </method></netparam>
+    	<handler name="ondata" args="value">
+    		parent.initFields(value);
+    	</handler>
+  	</netremotecallhib>	
+	
 
   	<netremotecallhib name="updateUserSelfSmall" funcname="userservice.updateUserSelfSmall" 
   		remotecontext="$once{ canvas.thishib }" registerObject="true" >   
@@ -101,6 +83,71 @@
   		<netparam name="vars1"><method name="getValue"> return canvas.sessionId; </method></netparam>
     	<netparam name="vars2"><method name="getValue">return parent.sendObject;</method></netparam>	  		
   	</netremotecallhib>
+	
+	<!-- content -->	
+    
+    <labeltext labelid="143" width="200" y="40" resize="false" fontstyle="bold" />
+    
+    <labeltext labelid="132" width="200" y="70" resize="false" x="2"/>
+        <edittext name="username" y="70" x="120" width="270" text="" />
+
+    <labeltext labelid="133" width="200" y="100" resize="false" x="2"/>
+        <edittext name="userpass1" y="100" password="true" x="120" width="270" text="" />
+        
+    <labeltext labelid="134" width="200" y="130" resize="false" x="2"/>
+        <edittext name="userpass2" y="130" password="true" x="120" width="270" text="" />   
+    
+    <labeltext labelid="135" width="200" y="160" resize="false" x="2"/>
+        <combobox name="salutation" width="100" y="160" x="120" editable="false" fontsize="12">
+	        <handler name="oninit" >
+	            <![CDATA[
+	            for (var i=0;i<canvas.salutationsInitValues.length;i++){
+	                this.addItem(canvas.salutationsInitValues[i].name,canvas.salutationsInitValues[i].salutations_id);
+	            }
+	            this.selectItem(String(canvas.salutationsInitValues[0].salutations_id));
+	            ]]>
+	        </handler> 
+        </combobox> 	
+        <edittext name="firstname" y="160" x="230" width="160" text="" />
+        
+    <labeltext labelid="136" width="200" y="190" resize="false" x="2"/>
+        <edittext name="lastname" y="190" x="120" width="270" text="" />                
+
+    <labeltext labelid="137" width="200" y="220" resize="false" x="2"/>
+        <edittext name="email" y="220" x="120" width="270" text="" />
+        
+    <labeltext labelid="138" width="200" y="250" resize="false" x="2"/>
+        <datefield name="age" y="250" x="120" width="270" text="" />
+        
+    <labeltext labelid="139" width="200" y="280" resize="false" x="2"/>
+        <edittext name="street" y="280" x="120" width="220" text="" />
+        <edittext name="house" y="280" x="350" width="40" text="" />
+        
+    <labeltext labelid="140" width="280" y="310" resize="false" x="2"/>
+        <edittext name="zip" y="310" x="120" width="70" text="" />   
+        <edittext name="town" y="310" x="200" width="190" text="" />                        
+         
+    <labeltext labelid="141" width="200" y="340" resize="false" x="2"/>  
+        <combobox name="state" width="270" y="340" x="120" editable="false" fontsize="12">
+	        <handler name="oninit" >
+	            <![CDATA[
+	            for (var i=0;i<canvas.statesInitValues.length;i++){
+	                this.addItem(canvas.statesInitValues[i].name,canvas.statesInitValues[i].state_id);
+	            }
+	            this.selectItem(String(canvas.statesInitValues[0].state_id));
+	            ]]>
+	        </handler> 
+        </combobox> 
+        
+    <labeltext labelid="142" width="200" y="370" resize="false" x="2"/>
+        <edittext name="adress_comment" y="370" x="120" width="270" 
+            height="100" text="" multiline="true"/>
+       
+    <labeltext labelid="161" width="200" y="510" resize="false" x="2"/>     
+    <simplevaluelist name="_organisationslist" y="510" x="120" width="270" height="100" 
+		multiselect="true" />
+     
+
         
 </class>
 
