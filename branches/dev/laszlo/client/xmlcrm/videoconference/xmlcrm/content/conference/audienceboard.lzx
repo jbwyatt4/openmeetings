@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library>
 
-<class name="conferenceboard" extends="basecontentview">	
+<class name="audienceboard" extends="basecontentview">	
 	
 	<labeltext fontstyle="bold" y="10" labelid="128" />
 	
@@ -14,14 +14,14 @@
     		
 		  	<netremotecallhib name="getRoomsPublic" funcname="conferenceservice.getRoomsPublic" remotecontext="$once{ canvas.thishib }" >   
 		  		<netparam name="vars1"><method name="getValue">return canvas.sessionId;</method></netparam>  
-		  		<netparam name="vars2"><method name="getValue">return 1;</method></netparam>  
+		  		<netparam name="vars2"><method name="getValue">return 2;</method></netparam>  
 		        <handler name="ondata" args="value">	
 	                <![CDATA[
 	                if (value!=null){
 		                for(var eg=0;eg<value.length;eg++){
 		                    Debug.write(value[eg]);
 		                    var time = value[eg].starttime.getHours()+':'+value[eg].starttime.getMinutes()+' '+value[eg].starttime.getDate()+'.'+(value[eg].starttime.getMonth()+1)+'.'+value[eg].starttime.getFullYear();
-		                    new roomlistItem(parent.inn.inn.inn,{obj:value[eg],ispublic:true,roomid:value[eg].rooms_id,starttime:time,roomname:value[eg].name});
+		                    new roomlistItem(parent.inn.inn.inn,{roomClassName:'audience',isaudience:true,obj:value[eg],ispublic:true,roomid:value[eg].rooms_id,starttime:time,roomname:value[eg].name});
 		                }
 	                }
 	                ]]>	        	          				
@@ -62,14 +62,14 @@
 		  	<netremotecallhib name="getRoomsByOrganisationAndType" funcname="conferenceservice.getRoomsByOrganisationAndType" remotecontext="$once{ canvas.thishib }" >   
 		  		<netparam name="vars1"><method name="getValue">return canvas.sessionId;</method></netparam>  
 		  		<netparam name="vars2"><method name="getValue">return hib.currentdomainObj.organisation_id;</method></netparam>  
-		  		<netparam name="vars3"><method name="getValue">return 1;</method></netparam>  
+		  		<netparam name="vars3"><method name="getValue">return 2;</method></netparam>  
 		        <handler name="ondata" args="value">	
 	                <![CDATA[
 	                if (value!=null){
 		                for(var eg=0;eg<value.length;eg++){
 		                    Debug.write("2: ",value[eg]);
 		                    var time = value[eg].room.starttime.getHours()+':'+value[eg].room.starttime.getMinutes()+' '+value[eg].room.starttime.getDate()+'.'+(value[eg].room.starttime.getMonth()+1)+'.'+value[eg].room.starttime.getFullYear();
-		                    new roomlistItem(parent.inn.inn.inn,{obj:value[eg],ispublic:false,roomid:value[eg].room.rooms_id,starttime:time,roomname:value[eg].room.name});
+		                    new roomlistItem(parent.inn.inn.inn,{roomClassName:'audience',isaudience:true,obj:value[eg],ispublic:false,roomid:value[eg].room.rooms_id,starttime:time,roomname:value[eg].room.name});
 		                }
 	                }
 	                ]]>	        	          				
@@ -87,7 +87,5 @@
 		
 		
 </class>
-
-
 
 </library>

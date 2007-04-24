@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<library>
+
+<class name="roomlistItem" extends="view" bgcolor="0xFFFFFF"
+    onmouseover="this.setBGColor(canvas.baseMouseOvercolorizer)"
+    onmouseout="this.setBGColor(0xFFFFFF)" >
+
+	<attribute name="ispublic" value="false" type="boolean" />
+	<attribute name="isaudience" value="false" type="boolean" />
+	<attribute name="obj" value="null" />
+	<attribute name="roomid" value="0" type="number" />
+	<attribute name="starttime" value="" type="string" />
+	<attribute name="roomname" value="" type="string" />
+	
+	<attribute name="roomClassName" value="conference" type="string" />
+	
+	<labeltext resize="false" text="$once{ parent.roomname }" width="120" />
+	<labeltext x="120" resize="false" text="$once{ parent.starttime }" width="180" />
+	
+	<handler name="onclick">
+		Debug.write("this. ",this.obj,this.parent.parent.parent.parent.parent);
+        parent.parent.parent.parent.parent.detailsarea.opendetails();
+	</handler>
+	
+	<simplelabelbutton labelid="131" x="300" width="160">
+		<handler name="onclick">
+			var connectedIsAudience = '';
+			if (parent.isaudience) connectedIsAudience = '_'+'audi';
+            if (this.parent.ispublic){
+                hib.connectedroom=parent.obj.name+parent.obj.rooms_id+connectedIsAudience;
+                hib.conferencedomain="public";
+                Debug.write("ispublic");
+            } else {
+                hib.connectedroom=parent.obj.room.name+parent.obj.room.rooms_id+connectedIsAudience;
+                hib.conferencedomain = parent.obj.organisation.name;
+                Debug.write("non ispublic");
+            }
+            Debug.write("hib.conferencedomain: ",hib.conferencedomain);
+            clearStageContent();
+            canvas._mainbgcontentNavi.navi._innercontent.clearAllSubItemLists();  
+            new global[parent.roomClassName](canvas.main_content._content.inner);          
+        </handler>
+	</simplelabelbutton>
+	
+</class>
+
+</library>

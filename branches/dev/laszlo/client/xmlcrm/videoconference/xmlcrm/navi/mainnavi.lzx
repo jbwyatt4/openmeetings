@@ -87,7 +87,7 @@ bgcolor="$once{ canvas.baseMousecolorizer }"
 </class>
 
 
-<class name="mainnavitree" extends="linemenuitems" width="${ this._cbtext.width+20 }" > 
+<class name="mainnavitree" extends="linemenuitems" width="${ this._cbtext.width+20 }" y="2" > 
 
     <handler name="onclick"> 
     	<![CDATA[
@@ -172,11 +172,11 @@ bgcolor="$once{ canvas.baseMousecolorizer }"
         	this.clearSubSubItemList();
         </method>       	   
         
-        <mainselectHandlerBar name="_content" />
+        <mainselectHandlerBar name="_content" bgcolor="$once{canvas.baseMousecolorizer}" height="32" width="${ canvas.width }" />
         
-        <mainselectHandlerBar name="_subcontent" />
+        <mainselectHandlerBar name="_subcontent" bgcolor="$once{canvas.baseMousecolorizer}" />
         
-        <mainselectHandlerBar name="_subsubcontent" />
+        <mainselectHandlerBar name="_subsubcontent" bgcolor="$once{canvas.baseMousecolorizer}" />
             
     </view>
 
