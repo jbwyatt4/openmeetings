@@ -74,7 +74,8 @@
 		<videoview name="_videoview" visible="false" x="3" y="2" width="120" height="80" >
 	        <mediastream name="v_output" debug="true" type="rtmp" >
 	            <handler name="onurl">
-	                Debug.write("stream onurl");
+	                Debug.write("stream onurl ",this);
+					Debug.write("stream onurl 2 ",this.url);
 	                //this.parent.play(-1,false);
 	            </handler>
 	        </mediastream>
@@ -82,7 +83,6 @@
             <microphone name="microphoneRef" capturing="false">            
             	<handler name="onlevel">
             		this.parent.parent.parent._loadness.setLevel(this.level);
-            		this._mic.setUseEchoSuppression(true);
             	</handler>
             </microphone>
 		</videoview>
