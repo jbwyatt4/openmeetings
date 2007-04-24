@@ -23,7 +23,7 @@ public class UserService {
 	 * @param user_id
 	 * @return
 	 */
-	public Users getUserSelf(String SID, long user_id){
+	public Users getUserSelf(String SID){
         int users_id = Sessionmanagement.getInstance().checkSession(SID);
         return Usermanagement.getInstance().getUser(users_id);
 	}
@@ -52,15 +52,20 @@ public class UserService {
 	}
 	
 	/**
-	 * search a user by a string
+	 * 
 	 * @param SID
+	 * @param searchcriteria login,lastname,firstname,user_id
 	 * @param searchstring
+	 * @param max
+	 * @param start
+	 * @param orderby login,lastname,firstname,user_id
+	 * @param asc
 	 * @return
 	 */
-    public List searchUser(String SID,String searchstring, int max, int start){   	
+    public List searchUser(String SID, String searchcriteria ,String searchstring, int max, int start, String orderby, boolean asc){   	
         int users_id = Sessionmanagement.getInstance().checkSession(SID);
         long User_LEVEL = Usermanagement.getInstance().getUserLevelByID(users_id);    	
-    	return Usermanagement.getInstance().searchUser(User_LEVEL,searchstring,max,start);
+    	return Usermanagement.getInstance().searchUser(User_LEVEL,searchcriteria,searchstring,max,start,orderby,asc);
     }    
     
     /**

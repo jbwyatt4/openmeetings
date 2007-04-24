@@ -232,14 +232,17 @@ public class Usermanagement {
 	 * @param start
 	 * @return
 	 */
-	public List searchUser(long USER_LEVEL, String searchstring, int max, int start) {
+	public List searchUser(long USER_LEVEL, String searchcriteria, String searchstring, int max, int start, String orderby, boolean asc) {
 		if (AuthLevelmanagement.getInstance().checkAdminLevel(USER_LEVEL)) {
 			try {
 				Object idf = HibernateUtil.createSession();
 				Session session = HibernateUtil.getSession();
 				Transaction tx = session.beginTransaction();
 				Criteria crit = session.createCriteria(Users.class);
-				crit.add(Restrictions.ilike("lastname", "%" + searchstring + "%"));
+				crit.add(Restrictions.ilike(searchcriteria, "%" + searchstring + "%"));
+				if (asc) crit.addOrder(Order.asc(orderby));
+				else crit.addOrder(Order.desc(orderby));
+				crit.add(Restrictions.ne("deleted", "true"));
 				crit.setMaxResults(max);
 				crit.setFirstResult(start);
 				List contactsZ = crit.list();

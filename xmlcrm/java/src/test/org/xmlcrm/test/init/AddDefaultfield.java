@@ -28,7 +28,14 @@ public class AddDefaultfield extends TestCase {
 //		Fieldmanagment.getInstance().addFourFieldValues("orgvalue_userlist", 177, "Benutzer", "user", "user", "user");
 //		Fieldmanagment.getInstance().addFourFieldValues("orgvalue_userlistadd", 178, "Benutzer hinzufügen", "add user", "add user", "add user");
 //		Fieldmanagment.getInstance().addFourFieldValues("orgvalue_userlistdelete", 179, "Benutzer entfernen", "delete user", "delete user", "delete user");
+//		Fieldmanagment.getInstance().addFourFieldValues("orgvalue_userwinheader", 180, "Benutzer hinzufügen", "add user", "add user", "add user");
+//		Fieldmanagment.getInstance().addFourFieldValues("orgvalue_userwinsearchfield", 181, "Benutzer suchen", "search user", "search user", "search user");
+//		Fieldmanagment.getInstance().addFourFieldValues("orgvalue_userwinsearchbtn", 182, "suchen", "search", "search", "search");
+//		Fieldmanagment.getInstance().addFourFieldValues("orgvalue_userwinsearchresult", 183, "Benutzer", "user", "user", "user");
+//		Fieldmanagment.getInstance().addFourFieldValues("loginwin_chooseorganisation", 184, "Organisation", "organisation", "organisation", "organisation");
+//		Fieldmanagment.getInstance().addFourFieldValues("loginwin_chooseorganisationbtn", 185, "auswählen", "enter", "enter", "enter");
 
+		
 	}
 
 }

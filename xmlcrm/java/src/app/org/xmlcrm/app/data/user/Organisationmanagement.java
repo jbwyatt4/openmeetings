@@ -52,10 +52,16 @@ public class Organisationmanagement {
 	 * @param user_id
 	 * @return
 	 */
-	public Long addOrganisation(Long USER_LEVEL, String orgname, long user_id){
+	public Long addOrganisation(Long USER_LEVEL, String orgname, long user_id, LinkedHashMap users){
 		try {
 			if (AuthLevelmanagement.getInstance().checkAdminLevel(USER_LEVEL)){
-				return this.addOrganisation(orgname, user_id);
+				Long orgId = this.addOrganisation(orgname, user_id);
+				for (Iterator it = users.keySet().iterator();it.hasNext();){
+					Integer key = (Integer) it.next();
+					Long user_idToAdd = Long.valueOf(users.get(key).toString()).longValue();
+					this.addUserToOrganisation(user_idToAdd, orgId, user_id, "");
+				}		
+				return orgId;
 			}
 		} catch (Exception err){
 			log.error("addOrganisation",err);
@@ -173,11 +179,13 @@ public class Organisationmanagement {
 	 * @param organisation_id
 	 * @param orgname
 	 * @param users_id
+	 * @param users
 	 * @return
 	 */
-	public Long updateOrganisation(Long USER_LEVEL, long organisation_id, String orgname, long users_id){
-		try {
-			Organisation org = this.getOrganisationById(organisation_id);
+	public Long updateOrganisation(Long USER_LEVEL, long organisation_id, String orgname, 
+			long users_id, LinkedHashMap users){
+		try {			
+			Organisation org = this.getOrganisationById(organisation_id);			
 			org.setName(orgname);
 			org.setUpdatedby(users_id);
 			org.setUpdatetime(new Date());
@@ -187,11 +195,98 @@ public class Organisationmanagement {
 			session.update(org);
 			tx.commit();
 			HibernateUtil.closeSession(idf);
+			
+			if (users!=null) this.updateOrganisationUsersByHashMap(org, users, users_id);
+			
 			return org.getOrganisation_id();
 		} catch (HibernateException hex){
 			log.error("updateOrganisation",hex);
 		} catch (Exception err){
 			log.error("updateOrganisation",err);
+		}
+		return null;
+	}
+	
+	/**
+	 * checks if a user is already stored
+	 * @param userIdToAdd
+	 * @param usersStored
+	 * @return
+	 * @throws Exception
+	 */
+	private boolean checkUserAlreadyStored(Long userIdToAdd, List usersStored) throws Exception{
+		for (Iterator it2 = usersStored.iterator();it2.hasNext();){
+			Users us = (Users) it2.next();
+			if (us.getUser_id().equals(userIdToAdd)){
+				log.error("userIdToAdd found: "+userIdToAdd);
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	/**
+	 * 
+	 * @param user_id
+	 * @param usersToStore
+	 * @return
+	 * @throws Exception
+	 */
+	private boolean checkUserShouldBeStored(Long user_id, LinkedHashMap usersToStore) throws Exception {
+		for (Iterator it2 = usersToStore.keySet().iterator();it2.hasNext();){
+			Integer key = (Integer) it2.next();
+			Long usersIdToCheck = Long.valueOf(usersToStore.get(key).toString()).longValue();
+			log.error("usersIdToCheck: "+usersIdToCheck);
+			if (user_id.equals(usersIdToCheck)){
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	/**
+	 * TODO
+	 * @param org
+	 * @param users
+	 * @return
+	 */
+	private Long updateOrganisationUsersByHashMap(Organisation org , LinkedHashMap users, long insertedby){
+		try {
+			LinkedList<Long> usersToAdd = new LinkedList<Long>();
+			LinkedList<Long> usersToDel = new LinkedList<Long>();
+			
+			List usersStored = this.getUsersByOrganisationId(org.getOrganisation_id());
+			
+			for (Iterator it = users.keySet().iterator();it.hasNext();){
+				Integer key = (Integer) it.next();
+				Long userIdToAdd = Long.valueOf(users.get(key).toString()).longValue();
+				log.error("userIdToAdd: "+userIdToAdd);
+				if (!this.checkUserAlreadyStored(userIdToAdd, usersStored)) usersToAdd.add(userIdToAdd);
+			}
+			
+			for (Iterator it = usersStored.iterator();it.hasNext();){
+				Users us = (Users) it.next();
+				Long userIdStored = us.getUser_id();
+				log.error("userIdStored: "+userIdStored);
+				if (!this.checkUserShouldBeStored(userIdStored, users)) usersToDel.add(userIdStored);
+			}
+			
+			log.error("usersToAdd.size "+usersToAdd.size());
+			log.error("usersToDel.size "+usersToDel.size());
+			
+			for (Iterator<Long> it = usersToAdd.iterator();it.hasNext();){
+				Long user_id = it.next();
+				this.addUserToOrganisation(user_id, org.getOrganisation_id(), insertedby, "");
+			}
+			
+			for (Iterator<Long> it = usersToDel.iterator();it.hasNext();){
+				Long user_id = it.next();
+				this.deleteUserFromOrganisation(user_id, org.getOrganisation_id());
+			}
+			
+			
+		} catch (Exception err){
+			log.error("updateOrganisationUsersByHashMap",err);
 		}
 		return null;
 	}
@@ -425,6 +520,41 @@ public class Organisationmanagement {
 		}
 		return null;
 	}
+	
+	/**
+	 * 
+	 * @param organisation_id
+	 * @return
+	 */
+	public List getUsersByOrganisationId(long organisation_id){
+		try {
+
+			//get all users
+			Object idf = HibernateUtil.createSession();
+			Session session = HibernateUtil.getSession();
+			Transaction tx = session.beginTransaction();
+			Criteria crit = session.createCriteria(Organisation_Users.class);
+			Criteria subcrit = crit.createCriteria("organisation");
+			subcrit.add(Restrictions.eq("organisation_id", organisation_id));
+			crit.add(Restrictions.ne("deleted", "true"));
+			List userOrg = crit.list();
+			tx.commit();
+			HibernateUtil.closeSession(idf);
+			List<Users> userL = new LinkedList<Users>();
+			for (Iterator it = userOrg.iterator();it.hasNext();){
+				Organisation_Users us = (Organisation_Users) it.next();
+				userL.add(Usermanagement.getInstance().getUser(us.getUser_id()));
+			}
+			//Collections.sort(userL,new UsersFirstnameComperator());
+			return userL;
+			
+		} catch (HibernateException ex) {
+			log.error("[getUsersByOrganisationId]",ex);
+		} catch (Exception ex2) {
+			log.error("[getUsersByOrganisationId]",ex2);
+		}
+		return null;
+	}	
 	
 	
 	/**
