@@ -2,7 +2,7 @@
 <library>
 
 <!-- #################
-	Class videocontainer
+	Class videocontainer lol
  -->
  
 <class name="videocontainer" extends="view" >
