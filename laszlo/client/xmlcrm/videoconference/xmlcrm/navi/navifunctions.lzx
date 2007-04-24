@@ -17,10 +17,9 @@ function loadContent(obj,parentobj,preparentobj){
         //new subsubtreeitem(obj.parent.parent._subsubcontent,{name:'room1conf',list:null,depth:3,text:'room1',open:true,isleaf:true,action:'roomconf1'});
         //new subsubtreeitem(obj.parent.parent._subsubcontent,{name:'room2conf',list:null,depth:3,text:'room2',open:true,isleaf:true,action:'roomconf1'});
     } else if (obj.action=="conf2"){
-        //new subsubtreeitem(obj.parent.parent._subsubcontent,{name:'room1meet',list:null,depth:3,text:'room1',open:true,isleaf:true,action:'meetconf1'});
-        //new subsubtreeitem(obj.parent.parent._subsubcontent,{name:'room1meet',list:null,depth:3,text:'room2',open:true,isleaf:true,action:'meetconf1'});
         clearStageContent();
-        obj.parent.parent.clearAllSubItemLists();        
+        obj.parent.parent.clearAllSubItemLists();    
+		new audienceboard(canvas.main_content._content.inner); 
     } else if (obj.action=="home"){
         clearStageContent();
         obj.parent.parent.clearAllSubItemLists();

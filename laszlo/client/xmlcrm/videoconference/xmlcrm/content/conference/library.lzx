@@ -4,5 +4,9 @@
     <include href="conferenceboard.lzx" />
     <include href="conference.lzx" />
     <include href="conferencerooms.lzx" />
+	<include href="audienceboard.lzx" />
+	<include href="conferencedetailsarea.lzx" />
+	<include href="roomlistItem.lzx" />
+	<include href="audience.lzx" />
 
 </library>

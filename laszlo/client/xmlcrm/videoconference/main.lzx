@@ -29,7 +29,6 @@
 <include href="resources/" />
 <include href="conference/" /> 
 <include href="xmlcrm/" /> 
-<include href="conference/video/" />
 
 
 <!-- main colors:

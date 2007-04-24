@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library>
+	
 
-<resource name="chatbgitem" src="resources/bgitemvideochat.swf" />
+<resource name="chatbgitemau" src="resources/bgitemvideochat.swf" />
 
-<resource name="showusercontextclose" src="resources/error.png" />
-<resource name="showusercontext" src="resources/1downarrow.png" />
+<resource name="showusercontextcloseau" src="resources/error.png" />
+<resource name="showusercontextau" src="resources/1downarrow.png" />
+	
 
 <!-- #################
 	Class videoobject
@@ -16,7 +18,7 @@
 	int chatpartnername
  -->
     
-<class name="videoobject" extends="view" bgcolor="0x000000" width="252" height="270" visible="true">
+<class name="videoobjectaudience" extends="view" bgcolor="0x000000" width="252" height="270" visible="true">
 		
 	<!-- Set the Name of the partner -->
 	<attribute name="chatpartnername" value="" type="string" />
@@ -65,24 +67,23 @@
 	</view>
 
 	
-	<view name="_chatvideoinner" x="1" y="20" width="126" resource="chatbgitem" height="180" >
+	<view name="_chatvideoinner" x="1" y="20" width="126" resource="chatbgitemau" height="180" >
 		<handler name="oninit">
 			this.setResourceNumber(5);
 		</handler>
 		
 		<!-- This is the videoview -->
 		<videoview name="_videoview" visible="false" x="5" y="2" width="240" height="180" >
-	        <stream name="v_output" debug="true" type="rtmp" >
+	        <mediastream name="v_output" debug="true" type="rtmp" >
 	            <handler name="onurl">
 	                Debug.write("stream onurl");
 	                //this.parent.play(-1,false);
 	            </handler>
-	        </stream>
-            <camera name="cameraRef" show="false"/>
-            <microphone name="microphoneRef" mute="true">            
+	        </mediastream>
+            <camera name="cameraRef" show="false" />
+            <microphone name="microphoneRef" capturing="false">         
             	<handler name="onlevel">
             		this.parent.parent.parent._loadness.setLevel(this.level);
-            		this._mic.setUseEchoSuppression(true);
             	</handler>
             </microphone>
 		</videoview>
@@ -109,7 +110,7 @@
 		<labeltooltip inittwice="true" labelid="57" />
 	</view>
 	
-	<view x="$once{ parent.width-20 }" y="2" name="infoview" resource="showusercontext"
+	<view x="$once{ parent.width-20 }" y="2" name="infoview" resource="showusercontextau"
 		onmouseover="" onmouseup="" visible="${ ( (!parent.isremote) ? false : true ) }">
 		<handler name="onclick">
 			parent.infostuff.initUserObject();
@@ -137,7 +138,7 @@
 			this.inner._usertext.setText(tString);
 			]]>
 		</method>
-		<view x="$once{ parent.width-20 }" y="2" name="infoview" resource="showusercontextclose">
+		<view x="$once{ parent.width-20 }" y="2" name="infoview" resource="showusercontextcloseau">
 			<handler name="onclick">
 				parent.setAttribute('visible',false);
 			</handler>
