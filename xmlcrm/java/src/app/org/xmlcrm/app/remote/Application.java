@@ -149,8 +149,7 @@ public class Application extends ApplicationAdapter implements
 			ClientList.put(rcm.getStreamid(),rcm);
 
 		} catch (Exception err){
-			log.error(err);
-			System.out.print(err);
+			log.error("roomJoin",err);
 		}		
 		return true;
 	}
@@ -197,7 +196,7 @@ public class Application extends ApplicationAdapter implements
 			}
 			
 		} catch (Exception err) {
-			log.error("[logicalRoomEnter] "+err);
+			log.error("[logicalRoomEnter] ",err);
 		}
 		return null;
 	}
@@ -252,7 +251,7 @@ public class Application extends ApplicationAdapter implements
 			}			
 			
 		} catch (Exception err){
-			log.error("[roomDisconnect]"+err);
+			log.error("[roomDisconnect]",err);
 		}		
 	}
 	
@@ -305,7 +304,7 @@ public class Application extends ApplicationAdapter implements
 			}			
 			
 		} catch (Exception err){
-			log.error("[roomDisconnect]"+err);
+			log.error("[roomDisconnect]",err);
 		}		
 	}	
 
@@ -362,7 +361,7 @@ public class Application extends ApplicationAdapter implements
 		try {
 			sendClientBroadcastNotifications(stream,"closeStream",ClientList.get(Red5.getConnectionLocal().getClient().getId()));
 		} catch (Exception e){
-			log.error("[streamBroadcastClose]"+e);
+			log.error("[streamBroadcastClose]",e);
 		}
 	}
 	
@@ -416,7 +415,7 @@ public class Application extends ApplicationAdapter implements
 				}
 			}
 		} catch (Exception err) {
-			log.error("[sendClientBroadcastNotifications]" + err);
+			log.error("[sendClientBroadcastNotifications]" , err);
 		}
 	}
 	
@@ -491,7 +490,7 @@ public class Application extends ApplicationAdapter implements
 				}
 			}
 		} catch (Exception err){
-			log.error("[setModerator]"+err);
+			log.error("[setModerator]",err);
 			returnVal = err.toString();
 		}
 		return returnVal;
@@ -525,7 +524,7 @@ public class Application extends ApplicationAdapter implements
 			
 			return currentClient;
 		} catch (Exception err){
-			log.error("[setUserDomain]"+err);
+			log.error("[setUserDomain]",err);
 		}
 		return null;
 	}
@@ -562,7 +561,7 @@ public class Application extends ApplicationAdapter implements
 			
 			return currentClient;
 		} catch (Exception err){
-			log.error("[setUsername]"+err);
+			log.error("[setUsername]",err);
 		}
 		return null;
 	}
@@ -593,7 +592,7 @@ public class Application extends ApplicationAdapter implements
 			ClientList.put(streamid, currentClient);
 			log.error("##### setUserroom : " + currentClient.getUsername()+" "+currentClient.getStreamid()); // just a unique number		
 		} catch (Exception err){
-			log.error("[setUserroom]"+err);
+			log.error("[setUserroom]",err);
 		}
 		return currentClient;
 	}	
@@ -625,7 +624,7 @@ public class Application extends ApplicationAdapter implements
 				}
 			}				
 		} catch (Exception err) {
-			log.error("[setUserObjectOne2Four]"+err);
+			log.error("[setUserObjectOne2Four]",err);
 		}
 		return -1;		
 	}
@@ -652,7 +651,7 @@ public class Application extends ApplicationAdapter implements
 				if (rcl.getUserroom().equals(roomname) && rcl.getDomain().equals(orgdomain)) roomClientList.put(key, rcl);
 			}
 		} catch (Exception err) {
-			log.error("[getClientListScope]"+err);
+			log.error("[getClientListScope]",err);
 		}
 		return roomClientList;
 	}
@@ -677,7 +676,7 @@ public class Application extends ApplicationAdapter implements
 				if (rcl.getUserroom().equals(roomname) && rcl.getDomain().equals(orgdomain)) roomClientList.put(key, rcl);
 			}
 		} catch (Exception err) {
-			log.error("[getClientListBYRoomAndDomain]"+err);
+			log.error("[getClientListBYRoomAndDomain]",err);
 		}
 		return roomClientList;
 	}
@@ -716,7 +715,7 @@ public class Application extends ApplicationAdapter implements
 
 			log.debug("Who is this moderator"+currentMod);
 		} catch (Exception err){
-			log.error("[getCurrentModerator]"+err);
+			log.error("[getCurrentModerator]",err);
 		}
 		return currentMod;
 	}
@@ -781,7 +780,7 @@ public class Application extends ApplicationAdapter implements
 				return -1;
 			}
 		} catch (Exception err) {
-			log.error("[sendVars]"+err);
+			log.error("[sendVars]",err);
 		}
 		return -1;
 	}
@@ -818,7 +817,7 @@ public class Application extends ApplicationAdapter implements
 				return -1;
 			}
 		} catch (Exception err) {
-			log.error("[sendVarsModeratorGeneral]"+err);
+			log.error("[sendVarsModeratorGeneral]",err);
 		}
 		return -1;
 	}
@@ -843,7 +842,7 @@ public class Application extends ApplicationAdapter implements
 				}
 			}
 		} catch (Exception err) {
-			log.error("[sendMessage]"+err);
+			log.error("[sendMessage]",err);
 		}
 		return 1;
 	}
@@ -875,7 +874,7 @@ public class Application extends ApplicationAdapter implements
 				}
 			}
 		} catch (Exception err) {
-			log.error("[sendMessageWithClient] "+err);
+			log.error("[sendMessageWithClient] ",err);
 			return -1;
 		}
 		return 1;
@@ -902,7 +901,7 @@ public class Application extends ApplicationAdapter implements
 				}
 			}
 		} catch (Exception err) {
-			log.error("[sendMessageWithClient] "+err);
+			log.error("[sendMessageWithClient] ",err);
 			return -1;
 		}		
 		return 1;
@@ -956,17 +955,17 @@ public class Application extends ApplicationAdapter implements
 			String orgdomain = currentClient.getDomain();
 			String streamid = currentClient.getStreamid();
 			
-			log.debug("getStreams roomname: "+roomname);
+			log.error("getStreams roomname: "+roomname);
 			Set<String> keys = ClientList.keySet();
 			Iterator<String> iter = keys.iterator();
 			while (iter.hasNext()) {
 				String key = (String) iter.next();
-				log.debug("getStreams key: "+key);
+				log.error("getStreams key: "+key);
 				RoomClient rcl = ClientList.get(key);
 				if (rcl.getUserroom().equals(roomname) && rcl.getDomain().equals(orgdomain) && !rcl.getStreamid().equals(streamid)) roomClientListScopeNames.add(rcl.getStreamid());
 			}
 		} catch (Exception err) {
-			log.error("[getStreams]"+err);
+			log.error("[getStreams]",err);
 		}
 		return roomClientListScopeNames;
 		//return getBroadcastStreamNames(conn.getScope());
@@ -1018,31 +1017,10 @@ public class Application extends ApplicationAdapter implements
 			IBandwidthConfigure bandwidthConfig = conn.getClient().getBandwidthConfigure();
 			
 			log.debug("bandwidthConfig: "+bandwidthConfig);			
-
-			if (bandwidthConfig!=null){
-//				long burst = bandwidthConfig.getChannelBandwidth()
-//				long maxburst = bandwidthConfig.getMaxBurst();
-//				long upstreamBandWidth = bandwidthConfig.getUpstreamBandwidth();
-//				long audiobandwidth = bandwidthConfig.getAudioBandwidth();
-//				long videobandwidth = bandwidthConfig.getVideoBandwidth();
-//				long overallBandwidth = bandwidthConfig.getOverallBandwidth();
-//				long downstreamBandwidth = bandwidthConfig.getDownstreamBandwidth();
-//			
-//				log.debug("burst: "+burst);
-//				log.debug("maxburst: "+maxburst);
-//				log.debug("upstreamBandWidth: "+upstreamBandWidth);
-//				log.debug("audiobandwidth: "+audiobandwidth);
-//				log.debug("videobandwidth: "+videobandwidth);
-//				log.debug("overallBandwidth: "+overallBandwidth);
-//				log.debug("downstreamBandwidth: "+downstreamBandwidth);
-			} else {
-				log.debug("bandwidthConfig is null!");
-			}
 		
 		} catch (Exception err) {
 			log.error("[detectedBandwidth]"+err);
 		}
-		
 		
 	}
 

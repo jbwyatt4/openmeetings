@@ -390,6 +390,7 @@ public class Usermanagement {
 					Adressmanagement.getInstance().updateAdress(us.getAdresses().getAdresses_id(), street, zip, town, states_id, additionalname, comment, fax);
 					Emailmanagement.getInstance().updateUserEmail(mail.getMail().getMail_id(),user_id, email);
 					
+					//add or delete organisations from this user
 					if (organisations!=null){
 						Organisationmanagement.getInstance().updateUserOrganisationsByUser(us, organisations);
 					}

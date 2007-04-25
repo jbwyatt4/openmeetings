@@ -2,6 +2,9 @@ package org.xmlcrm.app.data.conference;
 
 import java.util.Date;
 import java.util.Iterator;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Set;
 
@@ -13,11 +16,13 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.criterion.Order;
 
 import org.xmlcrm.app.hibernate.beans.rooms.*;
 import org.xmlcrm.app.hibernate.beans.user.*;
 import org.xmlcrm.app.hibernate.utils.HibernateUtil;
 import org.xmlcrm.app.data.basic.AuthLevelmanagement;
+import org.xmlcrm.app.data.beans.basic.SearchResult;
 import org.xmlcrm.app.data.user.Organisationmanagement;
 import org.xmlcrm.app.data.user.Usermanagement;
 import org.xmlcrm.app.hibernate.beans.domain.Organisation_Users;
@@ -121,6 +126,23 @@ public class Roommanagement {
 	}	
 	
 	/**
+	 * get a room object if admin level
+	 * @param USER_LEVEL
+	 * @param rooms_id
+	 * @return
+	 */
+	public Rooms getRoomById(long USER_LEVEL, long rooms_id){
+		try {
+			if (AuthLevelmanagement.getInstance().checkAdminLevel(USER_LEVEL)){
+				return this.getRoomById(rooms_id);
+			}
+		} catch (Exception ex2) {
+			log.error("[getRoomById] "+ex2);
+		}
+		return null;
+	}
+	
+	/**
 	 * Get a Rooms-Object or NULL
 	 * @param rooms_id
 	 * @return Rooms-Object or NULL
@@ -147,6 +169,98 @@ public class Roommanagement {
 		return null;
 	}	
 	
+	public SearchResult getRooms(long USER_LEVEL, int start, int max, String orderby, boolean asc){
+		try {
+			if (AuthLevelmanagement.getInstance().checkAdminLevel(USER_LEVEL)){
+				SearchResult sResult = new SearchResult();
+				sResult.setRecords(this.selectMaxFromRooms());
+				sResult.setObjectName(Rooms.class.getName());
+				sResult.setResult(this.getRoomsInternatl(start, max, orderby, asc));
+				return sResult;
+			}
+		} catch (HibernateException ex) {
+			log.error("[getRooms] "+ex);
+		} catch (Exception ex2) {
+			log.error("[getRooms] "+ex2);
+		}
+		return null;
+	}
+	
+	public Long selectMaxFromRooms(){
+		try {
+			//get all users
+			Object idf = HibernateUtil.createSession();
+			Session session = HibernateUtil.getSession();
+			Transaction tx = session.beginTransaction();
+			Query query = session.createQuery("select max(c.rooms_id) from Rooms c where c.deleted <> 'true'"); 
+			List ll = query.list();
+			tx.commit();
+			HibernateUtil.closeSession(idf);
+			log.error((Long)ll.get(0));
+			return (Long)ll.get(0);				
+		} catch (HibernateException ex) {
+			log.error("[selectMaxFromRooms] "+ex);
+		} catch (Exception ex2) {
+			log.error("[selectMaxFromRooms] "+ex2);
+		}
+		return null;
+	}	
+	
+	/**
+	 * gets a list of all availible rooms
+	 * @param USER_LEVEL
+	 * @param start
+	 * @param max
+	 * @param orderby
+	 * @param asc
+	 * @return
+	 */
+	public List getRoomsInternatl(int start, int max, String orderby, boolean asc){
+		try {
+			Object idf = HibernateUtil.createSession();
+			Session session = HibernateUtil.getSession();
+			Transaction tx = session.beginTransaction();
+			Criteria crit = session.createCriteria(Rooms.class);
+			crit.setFirstResult(start);
+			crit.setMaxResults(max);
+			crit.add(Restrictions.ne("deleted", "true"));
+			if (asc) crit.addOrder(Order.asc(orderby));
+			else crit.addOrder(Order.desc(orderby));
+			List ll = crit.list();
+			tx.commit();
+			HibernateUtil.closeSession(idf);
+			return ll;
+		} catch (HibernateException ex) {
+			log.error("[getRooms ] "+ex);
+		} catch (Exception ex2) {
+			log.error("[getRooms ] "+ex2);
+		}
+		return null;
+	}
+	
+	public List getOrganisationsByRoom(long USER_LEVEL, long rooms_id){
+		try {
+			if (AuthLevelmanagement.getInstance().checkAdminLevel(USER_LEVEL)){
+				Object idf = HibernateUtil.createSession();
+				Session session = HibernateUtil.getSession();
+				Transaction tx = session.beginTransaction();
+				Criteria crit = session.createCriteria(Rooms_Organisation.class);
+				crit.add(Restrictions.ne("deleted", "true"));
+				Criteria subcrit = crit.createCriteria("room");
+				subcrit.add(Restrictions.eq("rooms_id", rooms_id));
+				List ll = crit.list();
+				tx.commit();
+				HibernateUtil.closeSession(idf);
+				return ll;
+			}
+		} catch (HibernateException ex) {
+			log.error("[getOrganisationsByRoom] "+ex);
+		} catch (Exception ex2) {
+			log.error("[getOrganisationsByRoom] "+ex2);
+		}
+		return null;
+	}
+	
 	/**
 	 * get all rooms which are availible for public
 	 * @param USER_LEVEL
@@ -163,7 +277,7 @@ public class Roommanagement {
 				Criteria subcriteriaRoomType = crit.createCriteria("roomtype");
 				subcriteriaRoomType.add(Restrictions.eq("roomtypes_id", roomtypes_id));
 				crit.add(Restrictions.eq("ispublic", true));
-				crit.add(Restrictions.eq("deleted", "false"));
+				crit.add(Restrictions.ne("deleted", "true"));
 				List ll = crit.list();
 				tx.commit();
 				HibernateUtil.closeSession(idf);
@@ -320,7 +434,7 @@ public class Roommanagement {
 				Criteria crit = session.createCriteria(Rooms_Organisation.class);
 				Criteria subcrit = crit.createCriteria("organisation");
 				subcrit.add(Restrictions.eq("organisation_id", organisation_id));
-				crit.add(Restrictions.eq("deleted", "false"));
+				crit.add(Restrictions.ne("deleted", "true"));
 				List ll = crit.list();
 				
 				tx.commit();
@@ -336,6 +450,109 @@ public class Roommanagement {
 		return null;
 	}
 	
+	public SearchResult getRoomsOrganisationByOrganisationId(long USER_LEVEL,long organisation_id, int start, int max, String orderby, boolean asc){
+		try {
+			if (AuthLevelmanagement.getInstance().checkModLevel(USER_LEVEL)){
+				
+				SearchResult sResult = new SearchResult();
+				sResult.setObjectName(Rooms_Organisation.class.getName());
+				sResult.setRecords(this.selectMaxFromRoomsByOrganisation(organisation_id).longValue());
+				sResult.setResult(this.getRoomsOrganisationByOrganisationId(organisation_id, start, max, orderby, asc));
+				return sResult;
+			}
+		} catch (HibernateException ex) {
+			log.error("[getRoomsByOrganisation] "+ex);
+		} catch (Exception ex2) {
+			log.error("[getRoomsByOrganisation] "+ex2);
+		}
+		return null;
+	}	
+	
+	public Integer selectMaxFromRoomsByOrganisation(long organisation_id){
+		try {
+			//get all users
+			Object idf = HibernateUtil.createSession();
+			Session session = HibernateUtil.getSession();
+			Transaction tx = session.beginTransaction();
+			Criteria crit = session.createCriteria(Rooms_Organisation.class);
+			Criteria subcrit = crit.createCriteria("organisation");
+			subcrit.add(Restrictions.eq("organisation_id", organisation_id));
+			crit.add(Restrictions.ne("deleted", "true"));
+			List ll = crit.list();
+			tx.commit();
+			HibernateUtil.closeSession(idf);
+
+			return ll.size();			
+		} catch (HibernateException ex) {
+			log.error("[selectMaxFromRooms] "+ex);
+		} catch (Exception ex2) {
+			log.error("[selectMaxFromRooms] "+ex2);
+		}
+		return null;
+	}		
+	
+	/**
+	 * TODO: add sortings
+	 * @param organisation_id
+	 * @param start
+	 * @param max
+	 * @param orderby
+	 * @param asc
+	 * @return
+	 */
+	private List getRoomsOrganisationByOrganisationId(long organisation_id, int start, int max, String orderby, boolean asc){
+		try {
+			Object idf = HibernateUtil.createSession();
+			Session session = HibernateUtil.getSession();
+			Transaction tx = session.beginTransaction();
+			
+			Criteria crit = session.createCriteria(Rooms_Organisation.class);
+			Criteria subcrit = crit.createCriteria("organisation");
+			subcrit.add(Restrictions.eq("organisation_id", organisation_id));
+			crit.add(Restrictions.ne("deleted", "true"));
+			crit.setFirstResult(start);
+			crit.setMaxResults(max);
+			List ll = crit.list();
+			
+			tx.commit();
+			HibernateUtil.closeSession(idf);
+			
+			return ll;
+		} catch (HibernateException ex) {
+			log.error("[getRoomsByOrganisation] "+ex);
+		} catch (Exception ex2) {
+			log.error("[getRoomsByOrganisation] "+ex2);
+		}
+		return null;
+	}	
+	
+	private Rooms_Organisation getRoomsOrganisationByOrganisationIdAndRoomId(long organisation_id, long rooms_id){
+		try {
+			Object idf = HibernateUtil.createSession();
+			Session session = HibernateUtil.getSession();
+			Transaction tx = session.beginTransaction();
+			
+			Criteria crit = session.createCriteria(Rooms_Organisation.class);
+			Criteria subcrit = crit.createCriteria("organisation");
+			subcrit.add(Restrictions.eq("organisation_id", organisation_id));
+			Criteria subcrit2 = crit.createCriteria("room");
+			subcrit2.add(Restrictions.eq("rooms_id", rooms_id));				
+			crit.add(Restrictions.ne("deleted", "true"));
+			List ll = crit.list();
+			
+			tx.commit();
+			HibernateUtil.closeSession(idf);
+			if (ll.size()>0){
+				return (Rooms_Organisation)ll.get(0);
+			}
+		} catch (HibernateException ex) {
+			log.error("[getRoomsOrganisationByOrganisationIdAndRoomId] "+ex);
+		} catch (Exception ex2) {
+			log.error("[getRoomsOrganisationByOrganisationIdAndRoomId] "+ex2);
+		}
+		return null;
+	}	
+	
 	/**
 	 * 
 	 * @param organisation_id
@@ -349,7 +566,7 @@ public class Roommanagement {
 			Criteria crit = session.createCriteria(Rooms_Organisation.class);
 			Criteria subcrit = crit.createCriteria("room");
 			subcrit.add(Restrictions.eq("rooms_id", rooms_id));
-			crit.add(Restrictions.eq("deleted", "false"));
+			crit.add(Restrictions.ne("deleted", "true"));
 			List ll = crit.list();
 			tx.commit();
 			HibernateUtil.closeSession(idf);
@@ -443,7 +660,7 @@ public class Roommanagement {
 	 * @param comment
 	 * @return
 	 */
-	public Long updateRoom(long USER_LEVEL, long rooms_id, long roomtypes_id, String name, boolean ispublic, String comment){
+	public Long updateRoom(long USER_LEVEL, long rooms_id, long roomtypes_id, String name, boolean ispublic, String comment, LinkedHashMap organisations){
 		try {
 			if (AuthLevelmanagement.getInstance().checkAdminLevel(USER_LEVEL)){
 				Rooms r = this.getRoomById(rooms_id);
@@ -458,6 +675,12 @@ public class Roommanagement {
 				session.update(r);
 				tx.commit();
 				HibernateUtil.closeSession(idf);
+				
+				if (organisations!=null){
+					Long t = this.updateRoomOrganisations(organisations, r);
+					if (t==null) return null;
+				}
+				
 				return r.getRooms_id();
 			}
 		} catch (HibernateException ex) {
@@ -468,28 +691,79 @@ public class Roommanagement {
 		return null;
 	}
 	
+	private boolean checkRoomAlreadyInOrg(Long orgid, List organisations) throws Exception{
+		for (Iterator it = organisations.iterator();it.hasNext();){
+			Rooms_Organisation rOrganisation = (Rooms_Organisation) it.next();
+			if (rOrganisation.getOrganisation().getOrganisation_id().equals(orgid)) return true;
+		}
+		return false;
+	}
+	
+	private boolean checkRoomShouldByDeleted(long orgId, LinkedHashMap organisations) throws Exception{
+		for (Iterator it = organisations.keySet().iterator();it.hasNext();){
+			Integer key = (Integer) it.next();
+			Long storedOrgId = Long.valueOf(organisations.get(key).toString()).longValue();
+			if (storedOrgId.equals(orgId)) return true;
+		}
+		return false;
+	}
+	
+	private Long updateRoomOrganisations(LinkedHashMap organisations, Rooms room) throws Exception{
+		List roomOrganisations = this.getOrganisationsByRoom(3, room.getRooms_id());
+		
+		List<Long> roomsToAdd = new LinkedList<Long>();
+		List<Long> roomsToDel = new LinkedList<Long>();
+		
+		for (Iterator it = organisations.keySet().iterator();it.hasNext();){
+			Integer key = (Integer) it.next();
+			Long orgIdToAdd = Long.valueOf(organisations.get(key).toString()).longValue();
+			if (!this.checkRoomAlreadyInOrg(orgIdToAdd, roomOrganisations)) roomsToAdd.add(orgIdToAdd);
+		}
+		
+		for (Iterator it = roomOrganisations.iterator();it.hasNext();){
+			Rooms_Organisation rOrganisation = (Rooms_Organisation) it.next();
+			Long orgIdToDel = rOrganisation.getOrganisation().getOrganisation_id();
+			if (!this.checkRoomShouldByDeleted(orgIdToDel, organisations)) roomsToDel.add(orgIdToDel);
+		}
+		
+//		log.error("updateRoomOrganisations roomsToAdd: "+roomsToAdd.size());
+//		log.error("updateRoomOrganisations roomsToDel: "+roomsToDel.size());
+		
+		for (Iterator<Long> it = roomsToAdd.iterator();it.hasNext();){
+			Long orgIdToAdd = it.next();
+			this.addRoomToOrganisation(3, room.getRooms_id(), orgIdToAdd);
+		}
+		for (Iterator<Long> it = roomsToDel.iterator();it.hasNext();){
+			Long orgToDel = it.next();
+			this.deleteRoomFromOrganisationByRoomAndOrganisation(room.getRooms_id(), orgToDel);
+		}
+		
+		return new Long(1);
+	}
+	
 	/**
 	 * delete all Rooms_Organisations and Room by a given room_id
 	 * @param rooms_id
 	 */
-	public void deleteRoomById(long USER_LEVEL, long rooms_id){
+	public Long deleteRoomById(long USER_LEVEL, long rooms_id){
 		try {
 			if (AuthLevelmanagement.getInstance().checkAdminLevel(USER_LEVEL)){
 				this.deleteAllRoomsOrganisationOfRoom(rooms_id);
-				this.deleteRoom(this.getRoomById(rooms_id));
+				return this.deleteRoom(this.getRoomById(rooms_id));
 			}
 		} catch (HibernateException ex) {
 			log.error("[deleteRoomById] "+ex);
 		} catch (Exception ex2) {
 			log.error("[deleteRoomById] "+ex2);
 		}
+		return null;
 	}
 	
 	/**
 	 * deletes a Room by given Room-Object
 	 * @param r
 	 */
-	public void deleteRoom(Rooms r){
+	public Long deleteRoom(Rooms r){
 		try {			
 			r.setDeleted("true");
 			r.setUpdatetime(new Date());
@@ -499,11 +773,13 @@ public class Roommanagement {
 			session.update(r);
 			tx.commit();
 			HibernateUtil.closeSession(idf);
+			return r.getRooms_id();
 		} catch (HibernateException ex) {
 			log.error("[deleteRoomsOrganisation] "+ex);
 		} catch (Exception ex2) {
 			log.error("[deleteRoomsOrganisation] "+ex2);
 		}
+		return null;
 	}
 	
 	/**
@@ -546,22 +822,35 @@ public class Roommanagement {
 	 * Delete a Rooms_Organisation by its id
 	 * @param rooms_organisation_id
 	 */
-	public void deleteRoomsOrganisationByID(long rooms_organisation_id){
+	public Long deleteRoomsOrganisationByID(long rooms_organisation_id){
 		try {
 			Rooms_Organisation rOrg = this.getRoomsOrganisationById(rooms_organisation_id);
-			this.deleteRoomsOrganisation(rOrg);
+			return this.deleteRoomsOrganisation(rOrg);
 		} catch (HibernateException ex) {
 			log.error("[deleteRoomsOrganisationByID] "+ex);
 		} catch (Exception ex2) {
 			log.error("[deleteRoomsOrganisationByID] "+ex2);
 		}
+		return null;
+	}
+	
+	private Long deleteRoomFromOrganisationByRoomAndOrganisation(long rooms_id, long organisation_id){
+		try {
+			Rooms_Organisation rOrganisation = this.getRoomsOrganisationByOrganisationIdAndRoomId(organisation_id, rooms_id);
+			return this.deleteRoomsOrganisation(rOrganisation);
+		} catch (HibernateException ex) {
+			log.error("[deleteRoomFromOrganisationByRoomAndOrganisation] "+ex);
+		} catch (Exception ex2) {
+			log.error("[deleteRoomFromOrganisationByRoomAndOrganisation] "+ex2);
+		}
+		return null;
 	}
 	
 	/**
 	 * delete a Rooms_Organisation-Object
 	 * @param rOrg
 	 */
-	public void deleteRoomsOrganisation(Rooms_Organisation rOrg){
+	public Long deleteRoomsOrganisation(Rooms_Organisation rOrg){
 		try {			
 			rOrg.setDeleted("true");
 			rOrg.setUpdatetime(new Date());
@@ -571,11 +860,13 @@ public class Roommanagement {
 			session.update(rOrg);
 			tx.commit();
 			HibernateUtil.closeSession(idf);
+			return rOrg.getRooms_organisation_id();
 		} catch (HibernateException ex) {
 			log.error("[deleteRoomsOrganisation] "+ex);
 		} catch (Exception ex2) {
 			log.error("[deleteRoomsOrganisation] "+ex2);
 		}
+		return null;
 	}
 	
 }

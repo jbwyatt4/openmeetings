@@ -3,6 +3,7 @@ package org.xmlcrm.test.init;
 import junit.framework.TestCase;
 
 import org.xmlcrm.app.data.basic.Fieldmanagment;
+import org.xmlcrm.app.data.basic.Navimanagement;
 
 public class AddDefaultfield extends TestCase {
 	
@@ -34,7 +35,18 @@ public class AddDefaultfield extends TestCase {
 //		Fieldmanagment.getInstance().addFourFieldValues("orgvalue_userwinsearchresult", 183, "Benutzer", "user", "user", "user");
 //		Fieldmanagment.getInstance().addFourFieldValues("loginwin_chooseorganisation", 184, "Organisation", "organisation", "organisation", "organisation");
 //		Fieldmanagment.getInstance().addFourFieldValues("loginwin_chooseorganisationbtn", 185, "auswählen", "enter", "enter", "enter");
-
+//		Fieldmanagment.getInstance().addFourFieldValues("navi_roomadmin", 186, "Konferenzräume", "conferencerooms", "conferencerooms", "conferencerooms");
+//		Fieldmanagment.getInstance().addFourFieldValues("roomadmin_header", 187, "Konferenzräume", "Conferencerooms", "Conferencerooms", "Conferencerooms");
+//		Fieldmanagment.getInstance().addFourFieldValues("roomadmin_header", 188, "ID", "id", "id", "id");
+//		Fieldmanagment.getInstance().addFourFieldValues("roomadmin_header", 189, "Name", "Name", "Name", "Name");
+//		Fieldmanagment.getInstance().addFourFieldValues("roomadmin_header", 190, "öffentlich", "public", "public", "public");
+//		Fieldmanagment.getInstance().addFourFieldValues("roomadmin_header", 191, "Organisationen", "organisations", "organisations", "organisations");
+		
+//		Fieldmanagment.getInstance().addFourFieldValues("roomadmin_header", 192, "Konferenzräume", "Conferencerooms", "Conferencerooms", "Conferencerooms");
+//		Fieldmanagment.getInstance().addFourFieldValues("roomvalue_name", 193, "Name", "name", "name", "name");
+//		Fieldmanagment.getInstance().addFourFieldValues("roomvalue_type", 194, "Typ", "type", "type", "type");
+//		Fieldmanagment.getInstance().addFourFieldValues("roomvalue_ispublic", 195, "öffentlich", "public", "public", "public");
+//		Fieldmanagment.getInstance().addFourFieldValues("roomvalue_comment", 196, "Kommentar", "comment", "comment", "comment");
 		
 	}
 

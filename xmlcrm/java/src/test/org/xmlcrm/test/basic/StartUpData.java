@@ -31,11 +31,13 @@ public class StartUpData extends TestCase {
 		
 		Navimanagement.getInstance().addGlobalStructure("settings", 3, 4, false, true, 1, "setings");
 		Navimanagement.getInstance().addMainStructure("userself", 1, 5, true, false, 1, "userself",3);
+		Navimanagement.getInstance().addMainStructure("roomconfiguremod", 2, 192, true, false, 1, "roomconfiguremod",3);
 		
 		Navimanagement.getInstance().addGlobalStructure("admin", 4, 6, false, true, 2, "admin");
 		Navimanagement.getInstance().addMainStructure("useradmin", 1, 125, true, false, 2, "useradmin",4);
 		Navimanagement.getInstance().addMainStructure("groupadmin", 1, 126, true, false, 2, "groupadmin",4);
 		Navimanagement.getInstance().addMainStructure("orgadmin", 1, 127, true, false, 3, "orgadmin",4);
+		Navimanagement.getInstance().addMainStructure("roomadmin", 1, 186, true, false, 3, "roomadmin",4);
 		
 		Salutationmanagement.getInstance().addUserSalutation("Herr");
 		Salutationmanagement.getInstance().addUserSalutation("Frau");
