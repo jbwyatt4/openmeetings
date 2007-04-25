@@ -83,9 +83,9 @@
                 		this.parent.addItem(value[i].connectedSince,value[i].isMod,value[i].streamid,value[i].username,value[i].userroom,value[i].formatedDate,value[i].userpos,value[i].usercolor,value[i]);
                 	}
                 }
-                Debug.write("canvas.currentuser: ",canvas.currentuser);
-                Debug.write("canvas.firstName: ",canvas.firstName);
-                Debug.write("canvas.lastName: ",canvas.lastName);
+                //Debug.write("canvas.currentuser: ",canvas.currentuser);
+                //Debug.write("canvas.firstName: ",canvas.firstName);
+                //Debug.write("canvas.lastName: ",canvas.lastName);
 					
                 parent.getCurrentModerator.doCall(); 
                 ]]>
@@ -112,19 +112,24 @@
 		Debug.write("initializeStreams addItem: object ",object);
 		if (streamid!=canvas.streamid){
             var myvideocontainer = this.getNewVideoObjectByPos();
+			Debug.write("#####3###### : set play",myvideocontainer.v_output);
             Debug.write("myvideocontainer: ",myvideocontainer.v_output);
-	  		myvideocontainer.v_output._stream=null;
-	  		myvideocontainer.parent.parent.clientVars = object;
-	  		myvideocontainer.parent.parent.setAttribute('chatpartnername',object.firstname+' '+object.lastname);
-	  		myvideocontainer.parent.parent.setAttribute('uniqueid',streamid);
-	  		myvideocontainer.parent.parent.setAttribute('isremote',true);
+	  		//myvideocontainer.v_output._stream=null;
+	  		//myvideocontainer.parent.parent.clientVars = object;
+	  		//myvideocontainer.parent.parent.setAttribute('chatpartnername',object.firstname+' '+object.lastname);
+	  		//myvideocontainer.parent.parent.setAttribute('uniqueid',streamid);
+	  		//myvideocontainer.parent.parent.setAttribute('isremote',true);
+			Debug.write("#####1###### set : set stream",streamid);
 	  		myvideocontainer.v_output.setAttribute('url',streamid);
-	  		myvideocontainer.v_output.play(-1,false);
-	  		Debug.write(myvideocontainer.v_output._nc);
-	  		Debug.write(myvideocontainer.v_output._stream);		
+			Debug.write("#####2###### : set play",myvideocontainer.v_output);
+	  		myvideocontainer.v_output.play();
+			
+			Debug.write("#####3###### : set play",myvideocontainer.v_output);
+
 		}
 		]]>
 	</method>
+	<!-- -1,false -->
 	
 	
 	<method name="addClientItem" args="connectedSince,isMod,streamid,username,userroom,formatedDate,position,color,object">
@@ -200,7 +205,7 @@
 			//A free Slot has been found
 			//return the Reference to the VideoView it and mark it as used
 			this._video1._chatvideoinner.setResourceNumber(1);
-			
+			this._video1._chatvideoinner._videoview.setAttribute('visible',true);
 			this._video1.setAttribute('isassigned',true);
 			return this._video1.getVideoReference();
 		}

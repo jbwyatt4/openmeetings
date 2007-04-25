@@ -1,7 +1,11 @@
-#Tue Apr 24 19:49:50 CEST 2007
+#Wed Apr 25 10:12:03 CEST 2007
 eclipse.preferences.version=1
+encoding//xmlcrm/newstreaming/camera.lzx=UTF-8
+encoding//xmlcrm/newstreaming/mediadevice.lzx=UTF-8
+encoding//xmlcrm/newstreaming/mediastream.lzx=UTF-8
 encoding//xmlcrm/streaming/rtmpconnection.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/library.lzx=UTF-8
+encoding//xmlcrm/videoconference/conference/video/editrecordstream.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/video/library.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/video/videocontainer.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/video/videoobject.lzx=UTF-8
@@ -14,6 +18,7 @@ encoding//xmlcrm/videoconference/oslmon/components/library.lzx=UTF-8
 encoding//xmlcrm/videoconference/oslmon/components/simplevaluelist/library.lzx=UTF-8
 encoding//xmlcrm/videoconference/oslmon/components/simplevaluelist/simplevaluelist.lzx=UTF-8
 encoding//xmlcrm/videoconference/oslmon/components/turnoverlist/turnoverlist.lzx=UTF-8
+encoding//xmlcrm/videoconference/test/simplebroadcast.lzx=UTF-8
 encoding//xmlcrm/videoconference/xmlcrm/auth/checkLoginData.lzx=UTF-8
 encoding//xmlcrm/videoconference/xmlcrm/content/admin/chooseorganisationwindow.lzx=UTF-8
 encoding//xmlcrm/videoconference/xmlcrm/content/admin/configureusers.lzx=UTF-8

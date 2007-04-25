@@ -53,7 +53,7 @@
 
         <!--- Event sent when show flag changes. 
               @keywords private -->
-        <event name="onshow"/>
+        <handler name="onshow"/>
 
 
         <method name="destroy"><![CDATA[
@@ -76,6 +76,7 @@
             }
             
             this._dev = dev;
+		    Debug.write("bandwidth set");
             this.setQuality(bandwidth,picturequality);
 
             return dev;
@@ -126,7 +127,9 @@
             // Update the camera show state, since the camera is 
             // only shown when both show and allow are true.
             // This will attach and detatch the camera view as appropriate. 
-            this.setAttribute("show", this.show);
+		
+		//swagner .. this is not needed as the client calls it by itself 25.04.2007
+            //this.setAttribute("show", this.show);
           ]]>
         </method>
 
@@ -140,7 +143,7 @@
               @access private -->
         <method name="_setShow" args="show"><![CDATA[
 
-            //Debug.write("camera _setShow", this, show);
+            Debug.write("camera _setShow", this, show);
 
             this.show = show;
 
@@ -162,7 +165,7 @@
                     ? immediateparent._getflashvideo()
                     : null;
 
-            //Debug.write("vid", vid, "show", show, "allowed", this.allowed);
+            Debug.write("vid", vid, "show", show, "allowed", this.allowed);
 
             if (vid != null) {
 
@@ -187,7 +190,7 @@
                     // which sets the new allowed value to
                     // all mediadevices. 
                     var dev = this._dev;
-                    //Debug.write("attaching", this, vid, dev);
+                    Debug.write("attaching", this, vid, dev);
                     vid.attachVideo(dev);
 
                     // If this is the first device we've ever seen, 
@@ -208,7 +211,11 @@
             if (this.onshow) {
                 this.onshow.sendEvent(show);
             }
-
+		
+		//swagner .. calls the setMode method
+		    if (this.width != null && this.height != null && this.fps != null){
+		        this.setMode(this.width,this.height,this.fps,this.favorsize);
+		    }
           ]]>
         </method>
 
@@ -251,6 +258,7 @@
             this.setAttribute("favorsize", favorsize);
 
             if (this._dev) {
+		        Debug.write("setMode invoked");
                 this._dev.setMode(width, height, fps, favorsize); 
             }
           ]]>
