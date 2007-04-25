@@ -6,5 +6,6 @@
     <include href="settings/" />
     <include href="admin/" />
 	<include href="orgadmin/" />
+	<include href="roomadmin/" />
 
 </library>

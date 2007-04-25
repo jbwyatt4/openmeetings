@@ -82,7 +82,7 @@
 	                //this.parent.play(-1,false);
 	            </handler>
 	        </mediastream>
-            <camera name="cameraRef" show="false" />
+            <camera name="cameraRef" show="false" width="240" height="180" fps="30" />
             <microphone name="microphoneRef" capturing="false">         
             	<handler name="onlevel">
             		this.parent.parent.parent._loadness.setLevel(this.level);
