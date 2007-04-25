@@ -65,32 +65,38 @@
 		
 	    //v.record(v.url);
 	    
-	    canvas._ns = new NetStream(canvas.thishib._nc);
+	    //canvas._ns = new NetStream(canvas.thishib._nc);
 		
 		Debug.write("publishing streamid: ",canvas.streamid);
-	    canvas._ns.publish(canvas.streamid,"live");
+	    //canvas._ns.publish(canvas.streamid,"live");
 	    //this.myvideocontainer.microphoneRef._mic.setRate(4);
 	    //this.myvideocontainer.cameraRef._cam.setQuality(16384/4);
-	    this.myvideocontainer.microphoneRef._dev.setUseEchoSuppression(true);
+	    //this.myvideocontainer.microphoneRef._dev.setUseEchoSuppression(true);
 	    
-	    canvas._ns.attachVideo(this.myvideocontainer.cameraRef._dev);
-	    canvas._ns.attachAudio(this.myvideocontainer.microphoneRef._dev);  
+	    //canvas._ns.attachVideo(this.myvideocontainer.cameraRef._dev);
+	    //canvas._ns.attachAudio(this.myvideocontainer.microphoneRef._dev);  
 	    //Attach Devices to Stream
 	    //Debug.write(cameraRef._cam);
 	    //Debug.write(microphoneRef._mic);
 	    //
 	    //      
-	    this.myvideocontainer.microphoneRef.setAttribute('mute',false);
+		
 	    
 	    this.myvideocontainer.microphoneRef.setAttribute('capturing',true);
         this.myvideocontainer.cameraRef.setAttribute('show',true);
         this.myvideocontainer.parent.parent.setIdentifier(canvas.streamid);
+		
+		Debug.write(this.myvideocontainer);
+		Debug.write(this.myvideocontainer.stream);
+		Debug.write(this.myvideocontainer.v_output);
+		this.myvideocontainer.v_output.setAttribute('url', canvas.streamid);
+		this.myvideocontainer.v_output.broadcast();
         
-        this.myvideocontainer.parent.parent.setAttribute('chatpartnername',canvas.firstName+' '+canvas.lastName);
+        //this.myvideocontainer.parent.parent.setAttribute('chatpartnername',canvas.firstName+' '+canvas.lastName);
         
         //this.myvideocontainer.microphoneRef._mic.setRate(4);
 	    //this.myvideocontainer.cameraRef._cam.setQuality(16384/4);
-	    this.myvideocontainer.microphoneRef._dev.setUseEchoSuppression(true);
+	    //this.myvideocontainer.microphoneRef._dev.setUseEchoSuppression(true);
 
         this.close();
     </method>    
