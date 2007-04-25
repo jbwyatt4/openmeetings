@@ -6,3 +6,10 @@
 Here the Screens should follow
 
 We need something to discuss
+
+= Main window =
+
+!!! WARNING !!! Work in progress, the main UI mockup isn't finished.
+Moreover, some user stories will be published to explain the ergonomic.
+
+http://www.openmeetings.net/images/mockups/mockup_mainwindow.jpg
