@@ -232,7 +232,7 @@
 		onclick="this.parent.addOrganisationToUser()" />		
 	<method name="addOrganisationToUser">
 		if (this.user_id!=0)
-			new chooseorganisationwindow(canvas.main_content._content.inner,{refObj:this,user_id:this.user_id});
+			new chooseorganisationwindow(canvas.main_content._content.inner,{refObj:this,item_id:this.user_id});
 	</method>	
 	<basechooseseicon resourceN="button_cancel_rsc" labelid="176" y="512" x="430"
 		onclick="new confirmdeletewindow(canvas.main_content._content.inner,{refObj:this});" >		

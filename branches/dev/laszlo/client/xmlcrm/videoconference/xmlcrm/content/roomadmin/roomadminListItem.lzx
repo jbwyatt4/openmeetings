@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<library>
+
+<class name="roomadminListItem" extends="view" layout="axis:x;spacing:0" 
+	bgcolor="0xFFFFFF" 
+	onmouseover="this.setBGColor(canvas.baseMouseOvercolorizer)" 
+	onmouseout="this.setBGColor(0xFFFFFF)" >
+	
+	<handler name="onclick">
+		this.parent.parent.parent.parent.onclickedItem.sendEvent(this);
+	</handler>
+	
+	<attribute name="obj" value="null" />
+	<attribute name="rooms_id" value="0" type="number" />
+	<attribute name="roomname" value="" type="string" />
+	<attribute name="ispublic" value="" type="string" />
+	
+	<turnovertextitem text="$once{ parent.rooms_id }" width="60" />
+	<turnovertextitem text="$once{ parent.roomname }" width="186" />
+	<turnovertextitem text="$once{ parent.ispublic }" width="140" />
+	
+</class>
+
+</library>

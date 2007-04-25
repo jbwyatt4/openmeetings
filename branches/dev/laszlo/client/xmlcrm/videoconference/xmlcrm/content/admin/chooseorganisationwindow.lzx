@@ -4,7 +4,7 @@
 <class name="chooseorganisationwindow" extends="labelexplorerbox" labelid="173"
     docking="true" width="400" x="200" y="0" height="230">
     
-    <attribute name="user_id" value="0" type="number" />
+    <attribute name="item_id" value="0" type="number" />
     <attribute name="refObj" value="null" />
     
     <handler name="oninit">

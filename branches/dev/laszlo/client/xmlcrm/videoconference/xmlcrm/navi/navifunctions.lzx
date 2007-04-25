@@ -38,6 +38,14 @@ function loadContent(obj,parentobj,preparentobj){
         clearStageContent();
         obj.parent.parent.clearAllSubItemLists();
 		new orgadmin(canvas.main_content._content.inner);
+    } else if (obj.action=="roomadmin"){
+        clearStageContent();
+        obj.parent.parent.clearAllSubItemLists();
+		new roomadmin(canvas.main_content._content.inner);
+    } else if (obj.action=="roomconfiguremod"){
+        clearStageContent();
+        obj.parent.parent.clearAllSubItemLists();
+		new roomconfiguremod(canvas.main_content._content.inner);
     }
 	
 }
