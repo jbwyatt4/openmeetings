@@ -2,14 +2,22 @@
 #labels Phase-Design
 
 = Introduction =
-
-Here the Screens should follow
-
-We need something to discuss
+There are some mockups of screens into openmeetings tool.
+The goal of this page is to define a good look'n'feel for the openmeetings tool.
+If you have some comments, please to add at end of this page.
 
 = Main window =
-
-!!! WARNING !!! Work in progress, the main UI mockup isn't finished.
-Moreover, some user stories will be published to explain the ergonomic.
-
+Latest idea :
 http://www.openmeetings.net/images/mockups/mockup_mainwindow.jpg
+Some explanations of behavior of this interface :
+http://www.openmeetings.net/images/mockups/mockup_mainwindow_explanations.jpg
+When the user becomes moderator, his webcam is on the top of the window. This permits for the user to see concretely the changes, same as in a meeting room, when a user go to the whiteboard.
+
+== Potential problems ==
+ # difficult to understand first time that the user on the top of the window is moderator => add a frame with a different color around the moderator webcam and toolbar to understand this ?
+ # the term "moderator" is more difficult to understand that "the user who can write on the whiteboard", but it's too long to write this in the button. An idea to explain this with one or two words ?
+
+== Forgets ==
+ # The voice meter works only for the local user. It would be into mixer tab. If it will be possible to add voice meter for each user, it will be more better under each webcam user.
+
+== Comments ==
