@@ -42,7 +42,7 @@
   			tempSendArray[3] = canvas.currentusename;
 	  		Debug.write("send: ",tempSendArray);
 	  		canvas.objMessage = tempSendArray;
-	  		rtc.sendMessage.doCall();
+	  		canvas.thishib.sendMessage.doCall();
 
 		
 			this.parent.close();

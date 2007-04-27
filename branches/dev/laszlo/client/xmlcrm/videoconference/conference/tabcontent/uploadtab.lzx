@@ -47,7 +47,7 @@
 	</view>
 	<view resource="folder_top_rsc" y="4" x="$once{ parent.width -42 }" >
 		<handler name="onclick">
-			canvas.setAttribute('uploadmoduleimgfolder','/');
+			canvas.setAttribute('uploadmoduleimgfolder','');
 			this.parent.oninit.sendEvent();
 		</handler>
 		<labeltooltip labelid="17" />

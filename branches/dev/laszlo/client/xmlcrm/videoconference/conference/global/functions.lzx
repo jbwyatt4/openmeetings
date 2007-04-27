@@ -179,7 +179,7 @@ Debug.write("end init");
 
 <method name="addFolderSequence" args="foldername">
 	<![CDATA[
-	this.uploadmoduleimgfolder = '';
+	this.uploadmoduleimgfolder = '/';
 	this.uploadmoduleimgfolder += foldername;
 	this.setAttribute('uploadmoduleimgfolder',this.uploadmoduleimgfolder);
 	]]>
