@@ -21,3 +21,5 @@ When the user becomes moderator, his webcam is on the top of the window. This pe
  # The voice meter works only for the local user. It would be into mixer tab. If it will be possible to add voice meter for each user, it will be more better under each webcam user.
 
 == Comments ==
+there is a discussion about that:
+http://groups.google.com/group/openmeetings-dev/browse_thread/thread/346f9af5a0921c7c
