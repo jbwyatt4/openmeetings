@@ -1,5 +1,5 @@
 #labels Phase-Support
-#how to install OpenOffice as a service
+#how to install Open-Office as a service
 
 = Linux (Debian,Ubuntu) =
 
