@@ -226,8 +226,8 @@ public class UploadHandler extends HttpServlet {
 		String working_pptdir = "";
 		System.out.println(MultipartRequest.MAX_READ_BYTES);
 		
-		working_imgdir = current_dir+File.separatorChar+"upload"+File.separatorChar+roomName+File.separatorChar;
-		working_pptdir = current_dir+File.separatorChar+"uploadtemp"+File.separatorChar+roomName+File.separatorChar;
+		working_imgdir = current_dir+"upload"+File.separatorChar+roomName+File.separatorChar;
+		working_pptdir = current_dir+"uploadtemp"+File.separatorChar+roomName+File.separatorChar;
 		
 		String pptFullPath = working_pptdir+fileName;
 		
@@ -282,13 +282,13 @@ public class UploadHandler extends HttpServlet {
         try
         {      
         	String current_dir = getServletContext().getRealPath("/");
-        	String runtimeFile = "testoo.bat";
+        	String runtimeFile = "convertpresentation.bat";
         	if (System.getProperty("os.name").toUpperCase().indexOf("WINDOWS") == -1) {
-        		runtimeFile = "testoo.sh";
+        		runtimeFile = "convertpresentation.sh";
         	}
             Runtime rt = Runtime.getRuntime();
             
-            String command2 = current_dir+File.separatorChar+"ooservice"+File.separatorChar+runtimeFile+" java "+pptFullPath+" "+destinationFolder+" "+current_dir+File.separatorChar+"lps-latest"+File.separatorChar+"ooservice"+File.separatorChar;
+            String command2 = current_dir+"ooservice"+File.separatorChar+runtimeFile+" java "+pptFullPath+" "+destinationFolder+" "+current_dir+"ooservice"+File.separatorChar;
            // String command2 = "java -cp .:"+pre+"ridl.jar:"+pre+"js.jar:"+pre+"juh.jar:"+pre+"jurt.jar:"+pre+"jut.jar:"+pre+"java_uno.jar:"+pre+"java_uno_accessbridge.jar:"+pre+"edtftpj-1.5.2.jar:"+pre+"unoil.jar:"+pre+"dokeosupload.jar org.dokeos.ooconverter.DocumentLocalConverterMain "+pptFullPath+" "+destinationFolder;
             System.out.println("command2: "+command2);
             Process proc = rt.exec(command2);

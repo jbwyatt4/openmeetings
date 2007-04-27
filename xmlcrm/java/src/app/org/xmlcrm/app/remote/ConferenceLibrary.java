@@ -184,19 +184,19 @@ public class ConferenceLibrary {
 
 			working_dir = current_dir+File.separatorChar+roomName+parentFolder;
 			
-			System.out.println("working_dir+fileName: "+working_dir+fileName);
-			File dir = new File(working_dir+fileName);
+			System.out.println("working_dir+fileName: "+working_dir+File.separatorChar+fileName);
+			File dir = new File(working_dir+File.separatorChar+fileName);
 			
 			returnVal = dir.delete();
 			
-			System.out.println("delete file: "+working_dir+fileName);
+			System.out.println("delete file: "+working_dir+File.separatorChar+fileName);
 		
 			if (!returnVal && dir.isDirectory()){
 				String[] listOfFiles = dir.list();
 				
 				for (int i=0;i<listOfFiles.length;i++){
-					System.out.println("Deleting recursive: "+working_dir+fileName+File.separatorChar+listOfFiles[i]);
-					File d2 = new File(working_dir+fileName+File.separatorChar+listOfFiles[i]);
+					System.out.println("Deleting recursive: "+working_dir+File.separatorChar+fileName+File.separatorChar+listOfFiles[i]);
+					File d2 = new File(working_dir+File.separatorChar+fileName+File.separatorChar+listOfFiles[i]);
 					d2.delete();
 				}
 				dir.delete();
