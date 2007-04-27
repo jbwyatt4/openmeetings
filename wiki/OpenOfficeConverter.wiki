@@ -6,7 +6,24 @@
 This e
 
 = Mac =
+Install OpenOffice from the OpenOffice side
+Normally it is installed into your Application folder.
+Goto file:
+/Applications/OpenOffice.org\ 2.0.app/Contents/MacOS/share/registry/data/org/openoffice/Setup.xpu
 
+add the following after the node *<node oor:name="Office">                                                                                                                                                   *:
+{{{
+                <prop oor:name="ooSetupConnectionURL">                                                                                                                               
+                        <value>                                                                                                                                                      
+                            socket,host=localhost,port=2002;urp;StarOffice.ServiceManager                                                                                            
+                        </value>                                                                                                                                                     
+                </prop>  
+}}}
+
+start x11/x-server (you can just start openoffice the normal way, close the openoffice app again but do NOT close the x-server/x-terminal, it will open a display for x11 on display :0)
+
+open a new terminal and type:
+sudo /Applications/OpenOffice.org\ 2.0.app/Contents/MacOS/program/soffice -display :0 -headless -nologo -norestore
 
 
 = Details =
