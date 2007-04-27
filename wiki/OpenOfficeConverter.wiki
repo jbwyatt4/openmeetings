@@ -6,7 +6,7 @@
 see: http://www.dokeos.com/wiki/index.php/MakeOOOListening for details
 
 = Mac OSx =
-Install OpenOffice from the OpenOffice side
+Install Open-Office from the Open-Office webside
 Normally it is installed into your Application folder.
 Goto file:
 /Applications/OpenOffice.org\ 2.0.app/Contents/MacOS/share/registry/data/org/openoffice/Setup.xpu
