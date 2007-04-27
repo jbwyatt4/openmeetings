@@ -3,7 +3,7 @@
 
 = Linux (Debian,Ubuntu) =
 
-This e
+see: http://www.dokeos.com/wiki/index.php/MakeOOOListening for details
 
 = Mac =
 Install OpenOffice from the OpenOffice side
@@ -25,9 +25,10 @@ start x11/x-server (you can just start openoffice the normal way, close the open
 open a new terminal and type:
 sudo /Applications/OpenOffice.org\ 2.0.app/Contents/MacOS/program/soffice -display :0 -headless -nologo -norestore
 
+= Windows =
 
-= Details =
+see: http://www.dokeos.com/wiki/index.php/MakeOOOListening for details
 
 = Links =
-Dokeos Installation:
+Dokeos Installation Instructions:
 http://www.dokeos.com/wiki/index.php/MakeOOOListening
