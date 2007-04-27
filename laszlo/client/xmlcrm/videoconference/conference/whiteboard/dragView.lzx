@@ -10,6 +10,7 @@
 	
 	<attribute name="filesid" type="number" value="0" />
 	<attribute name="filename" type="number" value="0" />
+	<attribute name="uploadmodul" value="" type="string" />
 	
 	<attribute name="refObj" value="null" />
 	
@@ -27,7 +28,8 @@
 	        var x = _drawarea.getMouse('x');
 	        var y = _drawarea.getMouse('y');
 	        if (x>=0 && y>=0 && x<=_drawarea.width && y<=_drawarea.height){
-		        var downloadurl = 'http://localhost:8080/lps-latest/DownloadHandler?fileName='+this.filename+'&moduleName='+canvas.uploadmoduleimg+'&parentPath='+canvas.uploadmoduleimgfolder+'/'+'&roomName='+canvas.currentcourse;
+		        var downloadurl = 'http://'+canvas.rmpthostlocal+':'+canvas.red5httpport+'/xmlcrm/DownloadHandler?fileName='+this.filename+'&moduleName='+this.uploadmodul+'&parentPath='+canvas.uploadmoduleimgfolder+'/'+'&room='+hib.connectedroom+'&domain='+hib.conferencedomain+'&sid='+canvas.sessionId
+
 		        Debug.write(downloadurl);        
 		        Debug.write("x,y: ",x,y);
 		        _drawarea.parent.clearAreaAndAddImage(downloadurl,x,y);

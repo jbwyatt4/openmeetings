@@ -1,10 +1,15 @@
-#Wed Apr 25 17:07:24 CEST 2007
+#Fri Apr 27 12:03:08 CEST 2007
 eclipse.preferences.version=1
 encoding//xmlcrm/newstreaming/camera.lzx=UTF-8
 encoding//xmlcrm/newstreaming/mediadevice.lzx=UTF-8
 encoding//xmlcrm/newstreaming/mediastream.lzx=UTF-8
+encoding//xmlcrm/newstreaming/videoview.lzx=UTF-8
 encoding//xmlcrm/streaming/rtmpconnection.lzx=UTF-8
+encoding//xmlcrm/videoconference/conference/global/functions.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/library.lzx=UTF-8
+encoding//xmlcrm/videoconference/conference/tabcontent/imageslistdraw.lzx=UTF-8
+encoding//xmlcrm/videoconference/conference/tabcontent/pptlist.lzx=UTF-8
+encoding//xmlcrm/videoconference/conference/tabcontent/uploadtab.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/video/editrecordstream.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/video/library.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/video/videocontainer.lzx=UTF-8
@@ -12,12 +17,15 @@ encoding//xmlcrm/videoconference/conference/video/videoobject.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/videoclassroom/library.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/videoclassroom/videocontaineraudience.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/videoclassroom/videoobjectaudience.lzx=UTF-8
+encoding//xmlcrm/videoconference/conference/whiteboard/comboboximagebrowser.lzx=UTF-8
+encoding//xmlcrm/videoconference/conference/whiteboard/dragView.lzx=UTF-8
 encoding//xmlcrm/videoconference/config.lzx=UTF-8
 encoding//xmlcrm/videoconference/main.lzx=UTF-8
 encoding//xmlcrm/videoconference/oslmon/components/library.lzx=UTF-8
 encoding//xmlcrm/videoconference/oslmon/components/simplevaluelist/library.lzx=UTF-8
 encoding//xmlcrm/videoconference/oslmon/components/simplevaluelist/simplevaluelist.lzx=UTF-8
 encoding//xmlcrm/videoconference/oslmon/components/turnoverlist/turnoverlist.lzx=UTF-8
+encoding//xmlcrm/videoconference/oslmon/upload/uploadwindow.lzx=UTF-8
 encoding//xmlcrm/videoconference/test/simplebroadcast.lzx=UTF-8
 encoding//xmlcrm/videoconference/xmlcrm/auth/checkLoginData.lzx=UTF-8
 encoding//xmlcrm/videoconference/xmlcrm/content/admin/chooseorganisationwindow.lzx=UTF-8
