@@ -23,6 +23,7 @@ add the following after the node *<node oor:name="Office">                      
 start x11/x-server (you can just start openoffice the normal way, close the openoffice app again but do NOT close the x-server/x-terminal, it will open a display for x11 on display :0)
 
 open a new terminal and type:
+
 sudo /Applications/OpenOffice.org\ 2.0.app/Contents/MacOS/program/soffice -display :0 -headless -nologo -norestore
 
 OR
@@ -38,7 +39,6 @@ see: http://www.dokeos.com/wiki/index.php/MakeOOOListening for details
 = Links =
 Dokeos Installation Instructions:
 http://www.dokeos.com/wiki/index.php/MakeOOOListening
-
 
 
 
