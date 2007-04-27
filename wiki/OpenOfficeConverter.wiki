@@ -1,5 +1,5 @@
 #labels Phase-Support
-#how to install Open-Office as a service
+#.
 
 = Linux (Debian,Ubuntu) =
 
@@ -25,6 +25,12 @@ start x11/x-server (you can just start openoffice the normal way, close the open
 open a new terminal and type:
 sudo /Applications/OpenOffice.org\ 2.0.app/Contents/MacOS/program/soffice -display :0 -headless -nologo -norestore
 
+OR
+
+/Applications/OpenOffice.org\ 2.0.app/Contents/MacOS/program/soffice -display :0 -headless -nologo -norestore
+
+sudo depends of your Red5 service .. if red5 is started as sudo (which must be started as sudo if the server is listening on port 80 (or smaller 1200) then ooservice also has to run as sudo cause it writes/reads from directories which red5 creates.
+
 = Windows =
 
 see: http://www.dokeos.com/wiki/index.php/MakeOOOListening for details
@@ -32,3 +38,8 @@ see: http://www.dokeos.com/wiki/index.php/MakeOOOListening for details
 = Links =
 Dokeos Installation Instructions:
 http://www.dokeos.com/wiki/index.php/MakeOOOListening
+
+
+
+
+
