@@ -5,7 +5,7 @@
 
 see: http://www.dokeos.com/wiki/index.php/MakeOOOListening for details
 
-= Mac =
+= Mac OSx =
 Install OpenOffice from the OpenOffice side
 Normally it is installed into your Application folder.
 Goto file:
