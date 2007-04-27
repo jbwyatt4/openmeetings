@@ -1,0 +1,16 @@
+#labels Phase-Support
+#how to install OpenOffice as a service
+
+= Linux (Debian,Ubuntu) =
+
+This e
+
+= Mac =
+
+
+
+= Details =
+
+= Links =
+Dokeos Installation:
+http://www.dokeos.com/wiki/index.php/MakeOOOListening
