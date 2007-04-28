@@ -32,6 +32,17 @@ public class ConferenceLibrary {
 	public ConferenceLibrary(){
 		fileExtensions.put("ext1", ".ppt");
 		fileExtensions.put("ext2", ".odp");
+		fileExtensions.put("ext3", ".odt");
+		fileExtensions.put("ext4", ".sxw");
+		fileExtensions.put("ext5", ".wpd");
+		fileExtensions.put("ext6", ".doc");
+		fileExtensions.put("ext7", ".rtf");
+		fileExtensions.put("ext8", ".txt");
+		fileExtensions.put("ext9", ".ods");
+		fileExtensions.put("ext10", ".sxc");
+		fileExtensions.put("ext11", ".xls");
+		fileExtensions.put("ext12", ".sxi");
+		fileExtensions.put("ext13", ".pdf");
 	}
 	
 	public List getListOfFiles(String moduleName,String parentFolder,String room, String domain ) {
