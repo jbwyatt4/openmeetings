@@ -1,7 +1,5 @@
 package org.xmlcrm.app.remote;
 
-import http.utils.multipartrequest.MultipartRequest;
-
 import java.io.File;
 import java.io.FilenameFilter;
 import java.text.SimpleDateFormat;
@@ -11,21 +9,19 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
-import java.util.BitSet;
+import java.util.LinkedHashMap;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.red5.server.api.IScope;
 import org.red5.server.api.Red5;
-import org.mortbay.jetty.webapp.WebAppContext;
 
 import org.apache.commons.lang.StringUtils;
+import org.xmlcrm.app.documents.LibraryDocumentConverter;
 
 public class ConferenceLibrary {
 
 	private static final Log log = LogFactory.getLog(ConferenceLibrary.class);
-
-	private int recursiveNumber = 0;
 	
 	protected HashMap<String,String> fileExtensions = new HashMap<String,String>();
 	
@@ -64,7 +60,6 @@ public class ConferenceLibrary {
 
 			
 			String working_dir = "";
-			System.out.println(MultipartRequest.MAX_READ_BYTES);
 			
 			System.out.println("#### moduleName: "+moduleName);
 			
@@ -189,7 +184,6 @@ public class ConferenceLibrary {
 			roomName = StringUtils.deleteWhitespace(roomName);
 			
 			String working_dir = "";
-			System.out.println(MultipartRequest.MAX_READ_BYTES);
 			
 			System.out.println("#### moduleName: "+moduleName);
 
@@ -237,8 +231,18 @@ public class ConferenceLibrary {
 	
 	public String saveAsImage(Object t){
 		try {
-			BitSet tBitSet = (BitSet)t;
-			log.error(tBitSet.size());
+			log.error(t);
+		} catch (Exception err){
+			log.error("[saveAsImage] "+err);
+		}
+		return null;
+	}	
+	
+	public String saveAsObject(String SID, String fileName, Object t){
+		try {
+			LinkedHashMap tObject = (LinkedHashMap)t;
+			log.error(tObject.size());
+			LibraryDocumentConverter.getInstance().writeToLocalFolder(fileName, tObject);
 		} catch (Exception err){
 			log.error("[saveAsImage] "+err);
 		}
