@@ -1,5 +1,8 @@
 package org.xmlcrm.app.documents;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.BufferedWriter;
 import java.io.StringWriter;
 import java.util.LinkedHashMap;
 import java.util.Iterator;
@@ -18,6 +21,10 @@ import org.w3c.dom.Text;
 public class LibraryDocumentConverter {
 	
 	private static final Log log = LogFactory.getLog(LibraryDocumentConverter.class);
+	
+	private static final String fileExt = ".wml";
+	
+	private static final String wmlFolderName = "stored/";
 
 	private static LibraryDocumentConverter instance;
 
@@ -30,8 +37,27 @@ public class LibraryDocumentConverter {
 		return instance;
 	}
 	
-	public String writeToLocalFolder(String fileName, LinkedHashMap objList) {
+	public Long writeToLocalFolder(String filePath, String fileName, LinkedHashMap objList) {
 		try {
+			
+		log.error("filePath: "+filePath);
+		
+		String filepathComplete = filePath+wmlFolderName+fileName+fileExt;
+		
+		//Add the Folder for the Room if it does not exist yet
+		File localFolder = new File(filePath);
+		if (!localFolder.exists()){
+			localFolder.mkdir();
+		}		
+		//Add the Folder for the wmlFiles if it does not exist yet
+		File localFolder2 = new File(filePath+wmlFolderName);
+		if (!localFolder2.exists()){
+			localFolder2.mkdir();
+		}
+		
+		if (this.checkFileExist(filepathComplete)){
+			return new Long(-20);
+		}		
 		
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		
@@ -89,12 +115,43 @@ public class LibraryDocumentConverter {
 		
 		log.error("docString "+docString);
 		
+		return this.writeFileToLocation(filepathComplete, docString);
+		
 		} catch (Exception err){
 			log.error("writeToLocalFolder",err);
 		}
 		
 		return null;
 		
+	}
+	
+	private Long writeFileToLocation(String filepathComplete, String wmlData){
+		try {
+
+			FileWriter fileWriter = new FileWriter(filepathComplete);
+
+			BufferedWriter buffWriter = new BufferedWriter(fileWriter);
+			
+			buffWriter.write(wmlData);
+			
+			buffWriter.flush();
+			buffWriter.close();
+			
+			return new Long(1);
+		} catch (Exception err){
+			log.error("writeFileToLocation",err);
+		}
+		return null;
+	}
+	
+	private boolean checkFileExist(String filepathComplete){
+		try {
+			File f = new File(filepathComplete);
+			return f.exists();
+		} catch (Exception err){
+			log.error("checkFileExist",err);
+		}
+		return true;
 	}
 	
 	private void createNodesByPaint(Document document, Element baseElement, LinkedHashMap paint){
