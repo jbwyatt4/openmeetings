@@ -47,6 +47,8 @@ public class AddDefaultfield extends TestCase {
 //		Fieldmanagment.getInstance().addFourFieldValues("roomvalue_type", 194, "Typ", "type", "type", "type");
 //		Fieldmanagment.getInstance().addFourFieldValues("roomvalue_ispublic", 195, "šffentlich", "public", "public", "public");
 //		Fieldmanagment.getInstance().addFourFieldValues("roomvalue_comment", 196, "Kommentar", "comment", "comment", "comment");
+//		Fieldmanagment.getInstance().addFourFieldValues("whiteboard_saveicon", 197, "Speichern", "save", "save", "save");
+		Fieldmanagment.getInstance().addFourFieldValues("whiteboard_openicon", 198, "…ffnen", "load", "load", "load");
 		
 	}
 
