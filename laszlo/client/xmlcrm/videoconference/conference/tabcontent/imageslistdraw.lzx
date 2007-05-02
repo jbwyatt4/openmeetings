@@ -47,6 +47,7 @@
         <simplelayout name="_layout" axis="y" spacing="1" inset="1" />
         
 	  	<netremotecallhib name="deleteFile" funcname="fileservice.deleteFile" remotecontext="$once{ canvas.thishib }" >   
+			<netparam name="vars1"><method name="getValue"> return canvas.sessionId; </method></netparam>
 	  		<netparam><method name="getValue">return parent.String1;</method></netparam>
         	<netparam><method name="getValue">return canvas.uploadmoduleimg;</method></netparam>
 			<netparam><method name="getValue">return parent.String2;</method></netparam>

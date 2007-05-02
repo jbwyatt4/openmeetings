@@ -74,33 +74,12 @@
 	<method name="__LZFileDelete">
 		this.deleteFile.invoke();
 	</method>
-	<!-- 
-		<remotecall funcname="deleteFile" remotecontext="$once{ canvas.mainservices }">
-			<param><method name="getValue"> return parent.parent.filename </method></param>
-			<param><method name="getValue">return canvas.uploadmoduleppt;</method></param>
-			<param><method name="getValue">return canvas.uploadmoduleimgfolder;</method></param>
-	        <handler name="ondata" args="value">	
-	        	Debug.write("  deleteFile: ",value);     
-                canvas.mainservices.getListOfFiles.invoke();  	          				
-	        </handler> 
-	 	</remotecall>   
-	  -->
     <tooltip text="Drag this image to the stag / right click to download" />
     <method name="__LZFileAddConvert">
     	this.pptconversionmodalRef = new pptconversionmodal(canvas);
     	this.createPptToPng.invoke();
     </method>
-    	<!-- 
-		<remotecall funcname="createPptToPng" remotecontext="$once{ canvas.mainservices }">
-			<param><method name="getValue"> return parent.parent.filename </method></param>
-			<param><method name="getValue">return canvas.uploadmoduleimg;</method></param>
-	        <handler name="ondata" args="value">	
-	        	Debug.write("  deleteFile: ",value);     
-	        	this.parent.pptconversionmodalRef.close();
-                canvas.mainservices.getListOfPptFiles.invoke();	          				
-	        </handler> 
-	 	</remotecall>       
-	 	 -->
+	
 </class>
 
 <class name="pptconversionmodal" extends="explorerbox" title="Dokeos VideoConference"

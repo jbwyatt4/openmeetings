@@ -113,6 +113,8 @@
     
 	  	<netremotecallhib name="saveAsObject" funcname="fileservice.saveAsObject" remotecontext="$once{ canvas.thishib }" >   
 	  		<netparam name="vars1"><method name="getValue"> return canvas.sessionId; </method></netparam>
+			<netparam><method name="getValue">return hib.connectedroom;</method></netparam>        	
+			<netparam><method name="getValue">return hib.conferencedomain;</method></netparam> 			  
 			<netparam name="vars2"><method name="getValue"> return parent.parent.savefileName; </method></netparam>
 			<netparam name="vars3"><method name="getValue"> return parent.parent.fileData;</method></netparam>
 	        <handler name="ondata" args="value">	
