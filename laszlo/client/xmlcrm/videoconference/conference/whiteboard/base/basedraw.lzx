@@ -147,10 +147,10 @@
 	
 	<method name="clearAll">
 		if (this.boundingref!=null) this.boundingref.removeIt();
-		for (eg in this.subviews){
+		for (var eg in this.subviews){
 			this.subviews[eg].destroy();
 		}
-		for (eg in this.basdrawredoView.subviews){
+		for (var eg in this.basdrawredoView.subviews){
 			this.basdrawredoView.subviews[eg].destroy();
 		}
 		this.layers = new Array();
@@ -159,6 +159,14 @@
 		this.baseredoactionobjectList = new Array();	
 		this.checkStepLayers();	
 		this.onsharedMessage('clear',null);	
+	</method>
+	
+	<method name="doAction" args="modi">
+		if (modi=='saveobj'){
+			if (this.sendObject) this.sendObject.sendEvent();
+		} else if (modi=='loadobj'){
+		
+		}
 	</method>
 	
 	<method name="setModus" args="modi">

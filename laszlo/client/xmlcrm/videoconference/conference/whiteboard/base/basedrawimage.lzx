@@ -2,7 +2,18 @@
 <library>
 
 <class name="imagefordrawView" extends="image" stretches="both">
+	
+	<attribute name="downloadurl" value="" type="string" />
+		
 	<attribute name="alterModus" value="true" type="boolean" />
+	
+	<attribute name="baseurl" value="" type="string" />
+	<attribute name="fileName" value="" type="string" />
+	<attribute name="moduleName" value="" type="string" />
+	<attribute name="parentPath" value="" type="string" />
+	<attribute name="room" value="" type="string" />
+	<attribute name="domain" value="" type="string" />
+		
 	<attribute name="refObj" value="null" />
 	<handler name="onload">
 		<![CDATA[
@@ -29,7 +40,7 @@
 		if (this.alterModus){
 			this.refObj.setAttribute('drawmodus','image');
 			this.refObj.layers.push(this);
-			this.refObj.registerNewImage(this.src,this.x,this.y,this.width,this.height);
+			this.refObj.registerNewImage(this.src,this.x,this.y,this.width,this.height,this.baseurl,this.fileName,this.moduleName,this.parentPath,this.room,this.domain);
 			this.refObj.setModus('hand');
 		}
 		this.oninit.sendEvent();
@@ -40,30 +51,39 @@
 
 <class name="basedrawimage" extends="basedrawletter">
   	
-  	<method name="addNewImage" args="urlname,posx,posy">
-  		this.addImageToLayer(this,'image'+this.getCounter(),urlname,posx,posy,0,0,true);
+  	<method name="addNewImage" args="urlname,posx,posy,baseurl,fileName,moduleName,parentPath,room,domain">
+  		this.addImageToLayer(this,'image'+this.getCounter(),urlname,posx,posy,0,0,true,baseurl,fileName,moduleName,parentPath,room,domain);
   	</method>
   	
-  	<method name="addImageToLayer" args="obj,nameing,urlname,posx,posy,width,height,alterModus">
+  	<method name="addImageToLayer" args="obj,nameing,urlname,posx,posy,width,height,alterModus,baseurl,fileName,moduleName,parentPath,room,domain">
+        <![CDATA[
+		var src = baseurl+'?fileName='+fileName+'&moduleName='+moduleName+'&parentPath='+parentPath+'&room='+room+'&domain='+domain+'&sid='+canvas.sessionId;
   		if (alterModus){
-			this.currentlayer = new imagefordrawView(obj,{refObj:this,name:nameing,x:posx,y:posy,src:urlname,alterModus:alterModus});
+			this.currentlayer = new imagefordrawView(obj,{src:src,refObj:this,name:nameing,x:posx,y:posy,downloadurl:urlname,alterModus:alterModus,baseurl:baseurl,fileName:fileName,moduleName:moduleName,parentPath:parentPath,room:room,domain:domain});
 		} else {
-			this.currentlayer = new imagefordrawView(obj,{refObj:this,name:nameing,x:posx,y:posy,src:urlname,width:width,height:height,alterModus:alterModus});
+			this.currentlayer = new imagefordrawView(obj,{src:src,refObj:this,name:nameing,x:posx,y:posy,downloadurl:urlname,width:width,height:height,alterModus:alterModus,baseurl:baseurl,fileName:fileName,moduleName:moduleName,parentPath:parentPath,room:room,domain:domain});
 		}
 		this.parent.isloadingImage.sendEvent(this.currentlayer);
 		this.parent._loading.setAttribute('visible',true);
 		//Add Layer to global Layer  	
 	    return this.currentlayer;
+		]]>
   	</method>
   	
   	<method name="addImageToLayerHistory" args="actionObject,refObj">
-  		this.addImageToLayer(refObj,actionObject[actionObject.length-1],actionObject[1],actionObject[actionObject.length-5],actionObject[actionObject.length-4],actionObject[actionObject.length-3],actionObject[actionObject.length-2],false);
+  		this.addImageToLayer(refObj,actionObject[actionObject.length-1],actionObject[1],actionObject[actionObject.length-5],actionObject[actionObject.length-4],actionObject[actionObject.length-3],actionObject[actionObject.length-2],false,actionObject[2],actionObject[3],actionObject[4],actionObject[5],actionObject[6],actionObject[7]);
   	</method>
   	
-  	<method name="registerNewImage" args="urlname,posx,posy,width,height">
+  	<method name="registerNewImage" args="urlname,posx,posy,width,height,baseurl,fileName,moduleName,parentPath,room,domain">
 		var actionObject = new Array();
 	    actionObject.push('image');
 	    actionObject.push(urlname);
+		actionObject.push(baseurl);
+		actionObject.push(fileName);
+		actionObject.push(moduleName);
+		actionObject.push(parentPath);
+		actionObject.push(room);
+		actionObject.push(domain);
 	    actionObject.push(posx);
 	    actionObject.push(posy);
 	    actionObject.push(width);

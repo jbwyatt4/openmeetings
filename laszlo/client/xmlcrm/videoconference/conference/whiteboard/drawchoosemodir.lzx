@@ -24,5 +24,11 @@
 	</handler>
 </class>
 
-
+<class name="drawsimpleclick" extends="basechooseseicon" width="24" height="24">
+	<attribute name="modi" value="" type="string" />
+	<handler name="onclick">
+		this.parent.parent._drawarea.doAction(this.modi);
+	</handler>
+</class>
+	
 </library>

@@ -9,10 +9,10 @@
 	</method>
  -->	
 	<method name="removeIt">
-		Debug.write("removeIt +**********");
+		Debug.write("removeIt +**********",this.rs,this.dragger);
 		this.whiteboardRef.setAttribute('boundingIsActive',false);
-		this.rs.remove();
-		this.dragger.remove();
+		if (this.rs) this.rs.remove();
+		if (this.dragger) this.dragger.remove();
 		this.destroy();
 	</method>
 

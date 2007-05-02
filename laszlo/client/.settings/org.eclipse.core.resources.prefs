@@ -1,4 +1,4 @@
-#Sat Apr 28 11:59:12 CEST 2007
+#Tue May 01 15:07:55 CEST 2007
 eclipse.preferences.version=1
 encoding//xmlcrm/newstreaming/camera.lzx=UTF-8
 encoding//xmlcrm/newstreaming/mediadevice.lzx=UTF-8
@@ -7,6 +7,8 @@ encoding//xmlcrm/newstreaming/videoview.lzx=UTF-8
 encoding//xmlcrm/streaming/rtmpconnection.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/global/functions.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/library.lzx=UTF-8
+encoding//xmlcrm/videoconference/conference/moderation/library.lzx=UTF-8
+encoding//xmlcrm/videoconference/conference/moderation/moderationpanel.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/tabcontent/imageslistdraw.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/tabcontent/pptlist.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/tabcontent/uploadtab.lzx=UTF-8
@@ -17,8 +19,16 @@ encoding//xmlcrm/videoconference/conference/video/videoobject.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/videoclassroom/library.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/videoclassroom/videocontaineraudience.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/videoclassroom/videoobjectaudience.lzx=UTF-8
+encoding//xmlcrm/videoconference/conference/whiteboard/base/basedraw.lzx=UTF-8
+encoding//xmlcrm/videoconference/conference/whiteboard/base/basedrawimage.lzx=UTF-8
+encoding//xmlcrm/videoconference/conference/whiteboard/base/basedrawletter.lzx=UTF-8
+encoding//xmlcrm/videoconference/conference/whiteboard/base/basedrawobject.lzx=UTF-8
+encoding//xmlcrm/videoconference/conference/whiteboard/base/basedrawsave.lzx=UTF-8
+encoding//xmlcrm/videoconference/conference/whiteboard/boundingBoxAll.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/whiteboard/comboboximagebrowser.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/whiteboard/dragView.lzx=UTF-8
+encoding//xmlcrm/videoconference/conference/whiteboard/drawchoosemodir.lzx=UTF-8
+encoding//xmlcrm/videoconference/conference/whiteboard/whiteboard.lzx=UTF-8
 encoding//xmlcrm/videoconference/config.lzx=UTF-8
 encoding//xmlcrm/videoconference/main.lzx=UTF-8
 encoding//xmlcrm/videoconference/oslmon/components/library.lzx=UTF-8

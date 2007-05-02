@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library>
-
-<resource name="applyformodicon" src="resources/kdmconfig.png" />
     
 <class name="moderationpanel"  extends="view" width="260" >
 
