@@ -14,6 +14,7 @@ public class ErrorService {
 	/**
 	 * Gets an Error-Object by its id
 	 * TODO: add error-code-handlers
+	 * -20 duplicate FileName
 	 * and make the persistent in the DataBase
 	 * @param SID
 	 * @param errorid
