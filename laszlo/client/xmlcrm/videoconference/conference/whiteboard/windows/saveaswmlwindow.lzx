@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<library>
+
+<class name="choosedrawareaobjectwindow" extends="labelexplorerbox" labelid=""
+    docking="true" resizeable="true" closable="true" width="264" x="200" y="0" height="200">
+    
+    <attribute name="refObj" value="null" />
+    
+    <handler name="oninit">
+    	LzModeManager.makeModal(this);
+    </handler>
+    
+    <handler name="onclose">
+    	LzModeManager.release(this);
+    </handler>
+    
+    <labeltext y="22" labelid="" />
+    <customedittext y="42" width="240" />
+    
+    <choosedrawareaobjectcombobox x="100" refObj="${ parent.refObj }" y="42" />
+	
+	<simplelabelbutton name="_cancel" x="90" y="170" 
+			labelid="" width="160" height="20">
+		<handler name="onclick">
+			this.parent.close();
+		</handler>
+	</simplelabelbutton>
+	
+	<simplelabelbutton name="_confirm" x="90" y="170" 
+			labelid="" width="160" height="20">
+		<handler name="onclick">
+			this.parent.close();
+		</handler>
+	</simplelabelbutton>	
+</class>
+
+</library>

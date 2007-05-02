@@ -48,17 +48,9 @@
 
 <include href="incubator/lzcombobox.lzx"/> 
 <include href="base/" />
-<include href="comboboximagebrowser.lzx" />
-<include href="drawcolorpicker.lzx" />
-<include href="drawchoosemodir.lzx" />
-<include href="dragView.lzx" />
-<include href="drawareaobjectcombobox.lzx" />
-<include href="drawareaalterposition.lzx" />
-
-<include href="boundingBoxAll.lzx" />
-<include href="choosedrawareaobjectcombobox.lzx" />
-<include href="choosedrawareaobjectwindow.lzx" />
-<include href="drawchoosesizeradio.lzx" />
+<include href="menu/" />
+<include href="windows/" />
+<include href="helper/" />
 
 
 
@@ -188,7 +180,6 @@
 		</method>
 		<drawchoosemodir y="2" name="b3" modi="plain" resourceN="plain" labelid="69" />
 		<drawsimpleclick y="2" name="b13" modi="saveobj" resourceN="saveobj" labelid="197" />
-		<drawsimpleclick y="2" name="b14" modi="loadobj" resourceN="loadobj" labelid="198" />
 		<drawchooseseperator y="2" />
 		<drawdoandundo y="2" name="b4" doredo="false" resourceN="revert" enabled="${ parent.parent._drawarea.hasprevious }" labelid="70" />
 		<drawdoandundo y="2" name="b5" resourceN="next" enabled="${ parent.parent._drawarea.hasenext }" labelid="71" />
