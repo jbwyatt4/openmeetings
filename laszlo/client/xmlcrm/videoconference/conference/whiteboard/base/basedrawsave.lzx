@@ -2,7 +2,9 @@
 <library>
 
 <class name="basedrawsave" extends="basedrawimage" >
-
+	
+	<attribute name="savefileName" value="savefileName1" type="string" />
+	<attribute name="fileData" value="null" />
     
     <attribute name="MCRef" value="null" />
     
@@ -105,10 +107,14 @@
 	
 	<handler name="sendObject">
 		Debug.write("sendObject: ",this.baseactionobjectList);
+		this.fileData = this.baseactionobjectList;
+		this.saveAsObject.doCall();
 	</handler>
     
 	  	<netremotecallhib name="saveAsObject" funcname="fileservice.saveAsObject" remotecontext="$once{ canvas.thishib }" >   
-	  		<netparam><method name="getValue">return parent.parent.fileData;</method></netparam>
+	  		<netparam name="vars1"><method name="getValue"> return canvas.sessionId; </method></netparam>
+			<netparam name="vars2"><method name="getValue"> return parent.parent.savefileName; </method></netparam>
+			<netparam name="vars3"><method name="getValue"> return parent.parent.fileData;</method></netparam>
 	        <handler name="ondata" args="value">	
 	        	Debug.write("  saveAsImage: ",value);              	          				
 	        </handler>	
