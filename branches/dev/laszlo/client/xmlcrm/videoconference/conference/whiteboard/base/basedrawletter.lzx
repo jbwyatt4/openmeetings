@@ -80,7 +80,7 @@
 	</method>
 	
 	<method name="drawactionHistory" args="actionObject,obj">
-		this.newTextField(obj,actionObject[actionObject.length-1],actionObject[1],actionObject[2],actionObject[3],actionObject[4],actionObject[6],actionObject[5],actionObject[7]);
+		this.newTextField(obj,actionObject[actionObject.length-1],actionObject[1],actionObject[actionObject.length-3],actionObject[actionObject.length-5],actionObject[actionObject.length-4],actionObject[3],actionObject[2],actionObject[4]);
 	</method>
 	
 	<method name="newTextField" args="obj,naming,textforfield,width,x,y,fontsize,fgcolor,fontstyle">
@@ -93,9 +93,6 @@
 		var actionObject = new Array();
 	    actionObject.push('letter');
 	    actionObject.push(textforfield);
-	    actionObject.push(width);
-	    actionObject.push(x);
-	    actionObject.push(y);
 	    actionObject.push(fgcolor);
 	    actionObject.push(fontsize);
 	    actionObject.push(fontstyle);
