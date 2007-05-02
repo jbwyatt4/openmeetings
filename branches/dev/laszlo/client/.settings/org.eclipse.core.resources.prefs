@@ -1,4 +1,4 @@
-#Wed May 02 10:28:23 CEST 2007
+#Wed May 02 18:04:47 CEST 2007
 eclipse.preferences.version=1
 encoding//xmlcrm/newstreaming/camera.lzx=UTF-8
 encoding//xmlcrm/newstreaming/mediadevice.lzx=UTF-8
@@ -9,7 +9,12 @@ encoding//xmlcrm/videoconference/conference/global/functions.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/library.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/moderation/library.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/moderation/moderationpanel.lzx=UTF-8
+encoding//xmlcrm/videoconference/conference/remote/mainservice.lzx=UTF-8
+encoding//xmlcrm/videoconference/conference/tabbar/menubardokeos.lzx=UTF-8
+encoding//xmlcrm/videoconference/conference/tabcontent/basedokeoscharttab.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/tabcontent/imageslistdraw.lzx=UTF-8
+encoding//xmlcrm/videoconference/conference/tabcontent/library.lzx=UTF-8
+encoding//xmlcrm/videoconference/conference/tabcontent/librarytab.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/tabcontent/pptlist.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/tabcontent/uploadtab.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/video/editrecordstream.lzx=UTF-8
@@ -30,6 +35,7 @@ encoding//xmlcrm/videoconference/conference/whiteboard/comboboximagebrowser.lzx=
 encoding//xmlcrm/videoconference/conference/whiteboard/dragView.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/whiteboard/drawchoosemodir.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/whiteboard/whiteboard.lzx=UTF-8
+encoding//xmlcrm/videoconference/conference/whiteboard/whiteboardsingle.lzx=UTF-8
 encoding//xmlcrm/videoconference/config.lzx=UTF-8
 encoding//xmlcrm/videoconference/main.lzx=UTF-8
 encoding//xmlcrm/videoconference/oslmon/components/library.lzx=UTF-8
