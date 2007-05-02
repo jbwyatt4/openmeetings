@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library>
-<!-- blöder hund -->
+<!--  -->
 <resource name="backgroundtools_rsc" src="resources/backgroundtools.png" />
 <resource name="menupointer_rsc" src="resources/menupointer.png" />
 <resource name="line_rsc" src="resources/line.png" />
@@ -18,6 +18,8 @@
 
 <resource name="letter" src="resources/applixware.png" />
 <resource name="paint" src="resources/color_line.png" />
+<resource name="saveobj" src="resources/filesave.png" />
+<resource name="loadobj" src="resources/fileopen.png" />
 <resource name="revert" src="resources/undo.png" />
 <resource name="next" src="resources/redo.png" />
 <resource name="pointer" src="resources/configure.png" />
@@ -71,6 +73,14 @@
 <class name="whiteboard" extends="view">
 
 	
+	
+	<attribute name="baseurl" value="" type="string" />
+	<attribute name="fileName" value="" type="string" />
+	<attribute name="moduleName" value="" type="string" />
+	<attribute name="parentPath" value="" type="string" />
+	<attribute name="room" value="" type="string" />
+	<attribute name="domain" value="" type="string" />
+	
 	<attribute name="downloadurl" value="" type="string" />
 	<attribute name="iamgex" value="" type="string" />
 	<attribute name="imagey" value="" type="string" />
@@ -94,10 +104,10 @@
          if (yesno){
          	Debug.write("clear field!!");
 			_drawarea.setModus('plain');
-			_drawarea.addNewImage(this.downloadurl,this.x,this.y);
+			_drawarea.addNewImage(this.downloadurl,this.x,this.y,this.baseurl,this.fileName,this.moduleName,this.parentPath,this.room,this.domain);
          } else {
          	Debug.write("don't clear field!!");
-         	_drawarea.addNewImage(this.downloadurl,this.x,this.y);
+         	_drawarea.addNewImage(this.downloadurl,this.x,this.y,this.baseurl,this.fileName,this.moduleName,this.parentPath,this.room,this.domain);
          }
 	</method>
 	
@@ -129,11 +139,18 @@
 
 	</method>	
 	
-	<method name="clearAreaAndAddImage" args="downloadurlVal,xVal,yVal">
+	<method name="clearAreaAndAddImage" args="downloadurlVal,xVal,yVal,baseurl,fileName,moduleName,parentPath,room,domain">
 		<![CDATA[
+		Debug.write("clearAreaAndAddImage: ",downloadurlVal,xVal,yVal,baseurl,fileName,moduleName,parentPath,room,domain);
 		this.downloadurl=downloadurlVal;
 		this.iamgex=xVal;
 		this.imagey=yVal;	
+		this.baseurl=baseurl;
+		this.fileName=fileName;
+		this.moduleName=moduleName;
+		this.parentPath=parentPath;
+		this.room=room;
+		this.domain=domain;
 		var storedImageDate = this.getconfirmationscode();
 		Debug.write(" g[image] ",storedImageDate);
 		if (storedImageDate["clearField"] && !storedImageDate["askagainclear"]){
@@ -170,6 +187,8 @@
 			}
 		</method>
 		<drawchoosemodir y="2" name="b3" modi="plain" resourceN="plain" labelid="69" />
+		<drawsimpleclick y="2" name="b13" modi="saveobj" resourceN="saveobj" labelid="197" />
+		<drawsimpleclick y="2" name="b14" modi="loadobj" resourceN="loadobj" labelid="198" />
 		<drawchooseseperator y="2" />
 		<drawdoandundo y="2" name="b4" doredo="false" resourceN="revert" enabled="${ parent.parent._drawarea.hasprevious }" labelid="70" />
 		<drawdoandundo y="2" name="b5" resourceN="next" enabled="${ parent.parent._drawarea.hasenext }" labelid="71" />
@@ -183,11 +202,13 @@
         <drawchoosemodir y="2" name="b12" modi="ellipse" resourceN="ellipse" isSelectablemodi="true" labelid="78" />
 		<drawchoosemodir y="2" name="b10" modi="drawarrow" resourceN="drawarrowicon_rsc" isSelectablemodi="true" labelid="79" />				
 		<drawchooseseperator y="2" />
+		<!--
 		<button height="20" y="2" text="JPEG" width="40" >
 			<handler name="onclick">
 				this.parent.parent._drawarea.catchSnapshot();
 			</handler>
 		</button>		
+		-->
 
 	</view>
 	

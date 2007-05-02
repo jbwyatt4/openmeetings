@@ -78,7 +78,7 @@
     bgcolor="white" text="$once{ this.filenamePure }" fontsize="10" >
     <handler name="onmousedown">
         //this.oninit.sendEvent();
-       	new dragView(canvas,{filename:this.filename,filesid:1,refObj:this,uploadmodul:this.uploadmodul });
+       	new dragView(canvas,{filename:this.filename,filesid:1,refObj:this,uploadmodul:this.uploadmodul,baseurl:'http://'+canvas.rmpthostlocal+':'+canvas.red5httpport+'/xmlcrm/DownloadHandler',fileName:this.filename,moduleName:this.uploadmodul,parentPath:canvas.uploadmoduleimgfolder+'/',room:hib.connectedroom,domain:hib.conferencedomain});
         LzModeManager.globalLockMouseEvents();
         this.onmouseout.sendEvent();     
         this.parent.parent.parent.highlightItem(this);
@@ -104,7 +104,7 @@
 		<![CDATA[
 		Debug.write("Download File ",this);
 
-		var downloadurl = 'http://'+canvas.rmpthostlocal+':'+canvas.red5httpport+'/xmlcrm/DownloadHandler?fileName='+this.filename+'&moduleName='+this.uploadmodul+'&parentPath='+canvas.uploadmoduleimgfolder+'/'+'&room='+hib.connectedroom+'&domain='+hib.conferencedomain+'&sid='+canvas.sessionId
+		var downloadurl = 'http://'+canvas.rmpthostlocal+':'+canvas.red5httpport+'/xmlcrm/DownloadHandler?fileName='+this.filename+'&moduleName='+this.uploadmodul+'&parentPath='+canvas.uploadmoduleimgfolder+'/'+'&room='+hib.connectedroom+'&domain='+hib.conferencedomain+'&sid='+canvas.sessionId;
 
         Debug.write(downloadurl);	
 		LzBrowser.loadURL(downloadurl,'_parent');	
@@ -120,10 +120,12 @@
   
 	<method name="__LZFileAddDirect">
 		<![CDATA[
-        var downloadurl = 'http://'+canvas.rmpthostlocal+':'+canvas.red5httpport+'/xmlcrm/DownloadHandler?fileName='+this.filename+'&moduleName='+this.uploadmodul+'&parentPath='+canvas.uploadmoduleimgfolder+'/'+'&room='+hib.connectedroom+'&domain='+hib.conferencedomain+'&sid='+canvas.sessionId
-		Debug.write(downloadurl);        
-        Debug.write("x,y: ",x,y);
-        _drawarea.parent.clearAreaAndAddImage(downloadurl,0,0);
+        var downloadurl = 'http://'+canvas.rmpthostlocal+':'+canvas.red5httpport+'/xmlcrm/DownloadHandler?fileName='+this.filename+'&moduleName='+this.uploadmodul+'&parentPath='+canvas.uploadmoduleimgfolder+'/'+'&room='+hib.connectedroom+'&domain='+hib.conferencedomain+'&sid='+canvas.sessionId;
+		Debug.write(downloadurl);  
+		Debug.write("__LZFileAddDirect");   
+		Debug.write(downloadurl,0,0,'http://'+canvas.rmpthostlocal+':'+canvas.red5httpport+'/xmlcrm/DownloadHandler',this.filename,this.uploadmodul,canvas.uploadmoduleimgfolder+'/',hib.connectedroom,hib.conferencedomain);
+        
+        _drawarea.parent.clearAreaAndAddImage(downloadurl,0,0,'http://'+canvas.rmpthostlocal+':'+canvas.red5httpport+'/xmlcrm/DownloadHandler',this.filename,this.uploadmodul,canvas.uploadmoduleimgfolder+'/',hib.connectedroom,hib.conferencedomain);
         this.parent.parent.parent.highlightItem(this);
         ]]>
 	</method>
@@ -181,7 +183,7 @@
 	<method name="__LZFileDownload">
 		<![CDATA[
 		Debug.write("Download File ",this);
-		//var downloadurl = 'http://'+canvas.rmpthostlocal+':'+canvas.red5httpport+'/xmlcrm/DownloadHandler?fileName='+this.filename+'&moduleName='+this.uploadmodul+'&parentPath='+canvas.uploadmoduleimgfolder+'/'+'&roomName='+canvas.currentcourse;
+		
 		var downloadurl = 'http://'+canvas.rmpthostlocal+':'+canvas.red5httpport+'/xmlcrm/DownloadHandler?fileName='+this.filename+'&moduleName='+this.uploadmodul+'&parentPath='+canvas.uploadmoduleimgfolder+'/'+'&room='+hib.connectedroom+'&domain='+hib.conferencedomain+'&sid='+canvas.sessionId
 			
         Debug.write(downloadurl);	

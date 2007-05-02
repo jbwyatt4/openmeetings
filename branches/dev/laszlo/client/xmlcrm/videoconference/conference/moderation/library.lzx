@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library>
     
+    <resource name="applyformodicon" src="resources/kdmconfig.png" />
+	
     <include href="applyformoderation.lzx" />
     <include href="moderationpanel.lzx" />
     <include href="responseformoderation.lzx" />
-    <include href="moderationpanelclass.lzx" />
 
 </library>
