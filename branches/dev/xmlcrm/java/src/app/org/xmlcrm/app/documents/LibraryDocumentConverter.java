@@ -17,6 +17,7 @@ import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Text;
+import org.xmlcrm.utils.stringhandlers.StringComparer;
 
 public class LibraryDocumentConverter {
 	
@@ -41,6 +42,17 @@ public class LibraryDocumentConverter {
 		try {
 			
 		log.error("filePath: "+filePath);
+		
+		String fileNameExtName = fileName.substring(fileName.length()-4,fileName.length());
+		if (fileNameExtName.equals(fileExt)){
+			fileName = StringComparer.getInstance().compareForRealPaths(fileName.substring(0, fileName.length()-4));
+		} else {
+			fileName = StringComparer.getInstance().compareForRealPaths(fileName.substring(0, fileName.length()));
+		}
+		
+		if (fileName.length()<=0){
+			return new Long(-21);
+		}
 		
 		String filepathComplete = filePath+wmlFolderName+fileName+fileExt;
 		

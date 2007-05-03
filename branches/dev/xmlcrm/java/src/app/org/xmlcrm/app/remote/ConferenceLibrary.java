@@ -21,6 +21,7 @@ import org.xmlcrm.app.data.basic.AuthLevelmanagement;
 import org.xmlcrm.app.data.basic.Sessionmanagement;
 import org.xmlcrm.app.data.user.Usermanagement;
 import org.xmlcrm.app.documents.LibraryDocumentConverter;
+import org.xmlcrm.app.documents.LibraryWmlLoader;
 
 public class ConferenceLibrary {
 
@@ -258,6 +259,28 @@ public class ConferenceLibrary {
 				log.error("### this is my working directory: "+current_dir);
 				
 				return LibraryDocumentConverter.getInstance().writeToLocalFolder(current_dir, fileName, tObject);
+			} catch (Exception err){
+				log.error("[saveAsImage] "+err);
+			}
+        }
+		return null;
+	}
+	
+	public LinkedHashMap loadWmlObject(String SID, String room, String domain, String fileName){
+        int users_id = Sessionmanagement.getInstance().checkSession(SID);
+        long USER_LEVEL = Usermanagement.getInstance().getUserLevelByID(users_id);  
+        if (AuthLevelmanagement.getInstance().checkUserLevel(USER_LEVEL)){		
+			try {
+				
+				String roomName = domain+"_"+room;
+				
+				IScope scope = Red5.getConnectionLocal().getScope().getParent();
+				
+				String current_dir = scope.getResource("upload/").getFile().getAbsolutePath()+File.separatorChar+roomName+File.separatorChar;
+
+				log.error("### this is my working directory: "+current_dir);
+				
+				return LibraryWmlLoader.getInstance().loadWmlFile(current_dir, fileName);
 			} catch (Exception err){
 				log.error("[saveAsImage] "+err);
 			}
