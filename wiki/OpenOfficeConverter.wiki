@@ -3,7 +3,7 @@
 
 = Linux (Debian,Ubuntu) =
 
-see: http://www.dokeos.com/wiki/index.php/MakeOOOListening for details
+see: [ooservice] for details
 
 = Mac OSx =
 Install Open-Office from the Open-Office webside
@@ -34,11 +34,10 @@ sudo depends of your Red5 service .. if red5 is started as sudo (which must be s
 
 = Windows =
 
-see: http://www.dokeos.com/wiki/index.php/MakeOOOListening for details
+
 
 = Links =
 Dokeos Installation Instructions:
 http://www.dokeos.com/wiki/index.php/MakeOOOListening
-
 
 
