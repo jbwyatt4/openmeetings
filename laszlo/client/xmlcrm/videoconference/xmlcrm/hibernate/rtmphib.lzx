@@ -218,7 +218,7 @@
                 <![CDATA[
                 //The onResult-Handler will be called be the rtmpconnection
                 Debug.write("sendVarsToWhiteboard : ",value);
-                _drawarea.sendWatchObject(value[2],value[3]);
+                _drawarea.sendWatchObject(value[2],value[3],false);
                 ]]>
             </handler>   
         </netremotecallhib>   

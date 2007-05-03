@@ -3,9 +3,15 @@
 
 <class name="basedrawsave" extends="basedrawimage" >
 	
+	<!-- saveing a file to a wml Object -->
 	<attribute name="savefileName" value="savefileName1" type="string" />
 	<attribute name="fileData" value="null" />
 	<attribute name="savefileDataWinRef" value="null" />
+	
+	<!-- loading a file from a wml Object -->
+	<attribute name="loadfileData" value="null" />
+	<attribute name="loadfileDataIndex" value="0" type="number" />
+	<attribute name="loadfileDataWinRef" value="null" />
     
     <attribute name="MCRef" value="null" />
     
@@ -24,6 +30,10 @@
     <attribute name="sendpictureName" value="snapchot.jpg" type="string" />
     
     <attribute name="isSendPartArray" value="true" type="boolean" />
+	
+	<!-- Start and Stop Event will be thrown by the loading process -->
+	<handler name="onwmlloadStart" />
+	<handler name="onwmlloadStop" />
     
     <!-- Images will be send in packages 
     	so timeout is workaround
@@ -135,7 +145,34 @@
 	        </handler>	
 	  	</netremotecallhib>  	
     
-    
+	<!-- Loading the wml Object from the library -->
+	
+    <method name="loadwmlObject" args="loadObject">
+		if (loadObject!=null && loadObject.length>0){
+			this.loadfileData = loadObject;
+			this.loadfileDataIndex = 0;
+			if (this.onwmlloadStart) this.onwmlloadStart.sendEvent();
+			Debug.write("  loadObject[this.loadfileDataIndex] ",this.loadfileData[this.loadfileDataIndex]);
+			this.sendWatchObject('draw',this.loadfileData[this.loadfileDataIndex],true);
+		}
+	</method>
+	
+	<!-- gets triggered once one object of the wml-file has been added completely to the
+		whiteborad -->
+	
+	<handler name="onwmlLoaderSend" args="type">
+		Debug.write("onwmlLoaderSend: ",type,this.loadfileData.length);
+		<![CDATA[
+			this.loadfileDataIndex++;
+			if (this.loadfileDataIndex<this.loadfileData.length){
+				Debug.write("  loadObject[this.loadfileDataIndex] ",this.loadfileData[this.loadfileDataIndex]);
+				this.sendWatchObject('draw',this.loadfileData[this.loadfileDataIndex],true);
+			} else {
+				Debug.write("this.loadfileDataIndex complete",this.loadfileDataIndex);
+				if (this.onwmlloadStop) this.onwmlloadStop.sendEvent();
+			}
+		]]>
+	</handler>
 
 </class>
 

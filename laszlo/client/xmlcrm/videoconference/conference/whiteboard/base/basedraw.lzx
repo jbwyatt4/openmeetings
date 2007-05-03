@@ -280,7 +280,7 @@
 			} else if(lastActionObject[0]=='letter'){
 				this.drawactionHistory(lastActionObject,this);
 			} else if(lastActionObject[0]=='image'){
-				this.addImageToLayerHistory(lastActionObject,this);
+				this.addImageToLayerHistory(lastActionObject,this,false);
 			} else if(lastActionObject[0]=='rectangle'){
 				this.drawrectangleToHistory(lastActionObject,this);
 			} else if(lastActionObject[0]=='ellipse'){
@@ -317,7 +317,7 @@
 			} else if(lastActionObject[0]=='letter'){
 				this.drawactionHistory(lastActionObject,this.basdrawredoView);
 			} else if(lastActionObject[0]=='image'){
-				this.addImageToLayerHistory(lastActionObject,this.basdrawredoView);
+				this.addImageToLayerHistory(lastActionObject,this.basdrawredoView,false);
 			} else if(lastActionObject[0]=='rectangle'){
 				this.drawrectangleToHistory(lastActionObject,this.basdrawredoView);
 			} else if(lastActionObject[0]=='ellipse'){
@@ -541,7 +541,7 @@
 	<!-- ##################
 		SharedModus
 	 -->
-	<method name="sendWatchObject" args="action,actionObject">
+	<method name="sendWatchObject" args="action,actionObject,isWmlLoader">
 		Debug.write("sendWatchObject: ",action,actionObject);
 		<![CDATA[
 		if (action=='draw' || action=='redo'){
@@ -583,7 +583,9 @@
 			} else if(action,actionObject[0]=='letter'){
 				this.drawactionHistory(lastactionObject,this);
 			} else if(actionObject[0]=='image'){
-				this.addImageToLayerHistory(lastactionObject,this);
+				//Image will send the onwmlLoaderSend later cause it has to be send
+				//once the image has been loaded completely
+				this.addImageToLayerHistory(lastactionObject,this,isWmlLoader);
 			} else if(actionObject[0]=='rectangle'){
 				this.drawrectangleToHistory(lastactionObject,this);
 			} else if(actionObject[0]=='ellipse'){
@@ -591,6 +593,14 @@
 			}
 			
 			this.baseactionobjectList.push(lastactionObject);
+			
+			//Send a notifcation for the library loader sothat it can show progress
+			//and Browser does not hangUp and images can be proceed
+			//only send if type ain#t image cause image will send its own one after 
+			// it has been loaded completely
+			if (isWmlLoader && actionObject[0]!='image') {
+				if (this.onwmlLoaderSend) this.onwmlLoaderSend.sendEvent(actionObject[0]);
+			}
 			
 		} else if(action=='clear'){
 			this.clearAll();
