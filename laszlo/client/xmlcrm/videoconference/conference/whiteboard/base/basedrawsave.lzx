@@ -5,6 +5,7 @@
 	
 	<attribute name="savefileName" value="savefileName1" type="string" />
 	<attribute name="fileData" value="null" />
+	<attribute name="savefileDataWinRef" value="null" />
     
     <attribute name="MCRef" value="null" />
     
@@ -108,8 +109,13 @@
 	<handler name="sendObject">
 		Debug.write("sendObject: ",this.baseactionobjectList);
 		this.fileData = this.baseactionobjectList;
-		this.saveAsObject.doCall();
+		this.savefileDataWinRef = new saveaswmlwindow(canvas.main_content._content.inner,{refObj:this});
 	</handler>
+	
+	<method name="confirmSaveAsObject" args="fileName" >
+		this.savefileName = fileName;
+		this.saveAsObject.doCall();
+	</method>
     
 	  	<netremotecallhib name="saveAsObject" funcname="fileservice.saveAsObject" remotecontext="$once{ canvas.thishib }" >   
 	  		<netparam name="vars1"><method name="getValue"> return canvas.sessionId; </method></netparam>
@@ -118,7 +124,14 @@
 			<netparam name="vars2"><method name="getValue"> return parent.parent.savefileName; </method></netparam>
 			<netparam name="vars3"><method name="getValue"> return parent.parent.fileData;</method></netparam>
 	        <handler name="ondata" args="value">	
-	        	Debug.write("  saveAsImage: ",value);              	          				
+				<![CDATA[
+					Debug.write("  saveAsImage: ",value);   
+				    if (value>0){
+						parent.savefileDataWinRef.close();
+					} else {
+						new rpcerrordialog(canvas.main_content._content.inner,{errorid:value});
+					}
+				]]>  	          				
 	        </handler>	
 	  	</netremotecallhib>  	
     

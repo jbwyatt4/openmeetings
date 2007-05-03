@@ -589,6 +589,9 @@
 			} else if(actionObject[0]=='ellipse'){
 				this.drawellipseToHistory(lastactionObject,this);
 			}
+			
+			this.baseactionobjectList.push(lastactionObject);
+			
 		} else if(action=='clear'){
 			this.clearAll();
 		} else if(action=='delete' || action=='undo'){
@@ -724,7 +727,7 @@
    		
    		this.registerFinal();
   	</method>    
-  	
+
   	<method name="registerFinal">
 		var actionObject = new Array();
 	    actionObject.push('paint');
@@ -741,6 +744,7 @@
 	    this.onsharedMessage('draw',actionObject);
   	</method>      
 	
+	
 	<method name="paintactionHistory" args="lastActionObject,parentView">
 		<![CDATA[
 		Debug.write("## paintactionHistory",parentView," 2 ## NEW lastActionObject[5],lastActionObject[6] ",lastActionObject[5],lastActionObject[6]," width,height: ",lastActionObject[7],lastActionObject[8]);
@@ -753,7 +757,7 @@
    		
    		for (var eg=0;eg<lastActionObject[1].length;eg++) 
    			this.drawline(lastActionObject[1][eg][1]-this.currentlayer.x,lastActionObject[1][eg][2]-this.currentlayer.y,lastActionObject[1][eg][3]-this.currentlayer.x,lastActionObject[1][eg][4]-this.currentlayer.y);
-   			
+   		
    		//this.currentlayer.setAttribute('stretches','both');
    		]]>
 	</method>
