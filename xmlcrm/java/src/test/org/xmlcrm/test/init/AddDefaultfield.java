@@ -48,7 +48,13 @@ public class AddDefaultfield extends TestCase {
 //		Fieldmanagment.getInstance().addFourFieldValues("roomvalue_ispublic", 195, "šffentlich", "public", "public", "public");
 //		Fieldmanagment.getInstance().addFourFieldValues("roomvalue_comment", 196, "Kommentar", "comment", "comment", "comment");
 //		Fieldmanagment.getInstance().addFourFieldValues("whiteboard_saveicon", 197, "Speichern", "save", "save", "save");
-		Fieldmanagment.getInstance().addFourFieldValues("whiteboard_openicon", 198, "…ffnen", "load", "load", "load");
+//		Fieldmanagment.getInstance().addFourFieldValues("whiteboard_openicon", 198, "…ffnen", "load", "load", "load");
+//		Fieldmanagment.getInstance().addFourFieldValues("whiteboard_saveaswinheader", 199, "Speichern unter", "save as", "save as", "save as");
+//		Fieldmanagment.getInstance().addFourFieldValues("whiteboard_saveaswintext", 200, "Dateiname", "filename", "filename", "filename");
+//		Fieldmanagment.getInstance().addFourFieldValues("whiteboard_saveaswintext", 201, "Dateiname", "filename", "filename", "filename");
+//		Fieldmanagment.getInstance().addFourFieldValues("whiteboard_saveaswinbtn1", 202, "Abbrechen", "cancel", "cancel", "cancel");
+//		Fieldmanagment.getInstance().addFourFieldValues("whiteboard_saveaswinbtn2", 203, "Speichern", "save", "save", "save");
+//		Fieldmanagment.getInstance().addFourFieldValues("rpcerrorwin_header", 204, "Fehler", "error", "error", "error");
 		
 	}
 
