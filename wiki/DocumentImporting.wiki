@@ -3,7 +3,7 @@
 
 = File-Types = 
 
-One of these File Tpye is acceptable:
+One of these File Type is acceptable:
 *.jpg, *.jpeg, *.gif, *.png, *.ppt, *.odp, *.odt, *.sxw, *.wpd, *.doc, *.rtf, *.txt, *.ods, *.sxc, *.xls, *.sxi, *.pdf
 
 = Results = 
