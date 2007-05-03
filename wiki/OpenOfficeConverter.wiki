@@ -1,5 +1,5 @@
+#summary OpenOffice Converter Installation instructions
 #labels Phase-Support
-#.
 
 = Linux (Debian,Ubuntu) =
 
@@ -39,7 +39,6 @@ see: http://www.dokeos.com/wiki/index.php/MakeOOOListening for details
 = Links =
 Dokeos Installation Instructions:
 http://www.dokeos.com/wiki/index.php/MakeOOOListening
-
 
 
 
