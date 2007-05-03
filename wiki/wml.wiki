@@ -5,6 +5,8 @@
 
 You can store and load files in the whiteboard. These files will be stored with the extennsion *.wml* on the file-system (owned by the owner of the Java-Process)
 
+wml is not the same like Wiki-Markup-Language. But it would be nice if in future release wml pages could be used into the app. For the moment it is jsut a  customized xml format. And could be called: WhiteBoard-Markup-Language
+
 
 = Details =
 
