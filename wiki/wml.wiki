@@ -1,0 +1,12 @@
+#labels Phase-Design
+#about wml file format
+
+= Summary =
+
+You can store and load files in the whiteboard. These files will be stored with the extennsion *.wml* on the file-system (owned by the owner of the Java-Process)
+
+
+= Details =
+
+You can see an example here:
+http://openmeetings.googlecode.com/svn/branches/dev/xmlcrm/java/src/stored/filename1.wml
