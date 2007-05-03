@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<library>
+	
+<class name="listwml" extends="text" height="18" width="280" resize="false"
+    onmouseover="this.setBGColor(0x799FCE)" onmouseout="this.setBGColor(white)" 
+    bgcolor="white" text="$once{ this.filenamePure }" fontsize="10" >
+    <handler name="onmousedown">
+        //this.oninit.sendEvent(); 
+        this.parent.parent.parent.highlightItem(this);
+    </handler>
+    <handler name="onmouseup">
+    	<![CDATA[
+    	if (this.getMouse('x')>=this.x && this.getMouse('x')<=(this.x+this.width) && this.getMouse('y')>=0 && this.getMouse('y')<=(0+this.height)){
+    		Debug.write("okay inside");
+  			this.__LZFileAddDirect();
+  		}
+  		]]>
+    </handler>
+
+    <attribute name="filename" value="" type="string" />
+    <attribute name="filenamePure" value="" type="string" />
+    <attribute name="ext" value="" type="string" />
+    <attribute name="isPpt" value="false" type="boolean" />
+    <attribute name="uploadmodul" value="" type="string" />
+	
+	<view resource="filesave_rsc" x="$once{ parent.parent.parent.width -54 }" 
+		y="1" onclick="parent.__LZFileDownload()" />
+	<view resource="filedelete_rsc" x="$once{ parent.parent.parent.width -34 }" y="1" 
+		onclick="parent.__LZFileDelete()" />
+	
+	<method name="__LZFileDownload">
+		<![CDATA[
+		Debug.write("Download File ",this);
+
+		var downloadurl = 'http://'+canvas.rmpthostlocal+':'+canvas.red5httpport+'/xmlcrm/DownloadHandler?fileName='+this.filename+'&moduleName='+this.uploadmodul+'&parentPath='+canvas.uploadmoduleimgfolder+'/'+'&room='+hib.connectedroom+'&domain='+hib.conferencedomain+'&sid='+canvas.sessionId;
+
+        Debug.write(downloadurl);	
+		LzBrowser.loadURL(downloadurl,'_parent');	
+		]]>
+	</method>
+	<method name="__LZFileDelete">
+		Debug.write("__LZFileDelete 3");
+		this.parent.deleteFile.String2 = canvas.uploadmoduleimgfolder;
+		Debug.write("this.parent.deleteFile.String2 3",this.parent.deleteFile.String2);
+		this.parent.deleteFile.String1 = this.filename;
+		this.parent.deleteFile.doCall();
+	</method>
+  
+	<method name="__LZFileAddDirect">
+		<![CDATA[
+		Debug.write("__LZFileAddDirect wml");
+		this.parent.loadWmlObject.String1 = this.filenamePure;
+		this.parent.loadWmlObject.doCall();
+        ]]>
+	</method>
+</class>
+	
+</library>
+	

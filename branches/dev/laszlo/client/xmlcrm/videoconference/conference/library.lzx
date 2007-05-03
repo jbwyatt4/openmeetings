@@ -12,6 +12,4 @@
 	<include href="videoclassroom/" />
     <include href="global/functions.lzx" />
     
-    <include href="remote/remoteObject.lzx" />
-    
 </library>

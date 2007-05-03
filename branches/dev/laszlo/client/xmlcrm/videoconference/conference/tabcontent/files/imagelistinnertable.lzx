@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<library>
+	
+<class name="imagelistinnertable" extends="view" width="$once{ parent.width-4 }" height="$once{ parent.height-4 }" 
+	bgcolor="white" x="2" y="2" clip="true">
+    <view name="_listcontent" bgcolor="0x799FCE">
+        <simplelayout name="_layout" axis="y" spacing="1" inset="1" />
+        
+	  	<netremotecallhib name="deleteFile" funcname="fileservice.deleteFile" remotecontext="$once{ canvas.thishib }" >   
+			<netparam name="vars1"><method name="getValue"> return canvas.sessionId; </method></netparam>
+	  		<netparam><method name="getValue">return parent.String1;</method></netparam>
+        	<netparam><method name="getValue">return canvas.uploadmoduleimg;</method></netparam>
+			<netparam><method name="getValue">return parent.String2;</method></netparam>
+			<netparam><method name="getValue">return hib.connectedroom;</method></netparam>        	
+			<netparam><method name="getValue">return hib.conferencedomain;</method></netparam>  
+	        <handler name="ondata" args="value">	
+	        	Debug.write("  deleteFile: ",value);  
+				Debug.write("  deleteFile: ",this.String1);    
+				Debug.write("  deleteFile: ",this.String2);   
+		  		var tempSendArray = new Array ();
+		  		tempSendArray[0] = 'fileslist';
+		  		var nowTime = new Date();
+		  		var datumsString = nowTime.getHours()+':'+nowTime.getMinutes();
+		  		tempSendArray[1] = datumsString;
+	  			Debug.write("Setting Message");
+	  			tempSendArray[2] = 'newfile';
+	  			tempSendArray[3] = canvas.currentusename;
+		  		Debug.write("send: ",tempSendArray);
+		  		canvas.objMessage = tempSendArray;
+		  		hib.sendMessage.doCall();         	          				
+	        </handler>	
+	  	</netremotecallhib> 	
+		
+	  	<netremotecallhib name="loadWmlObject" funcname="fileservice.loadWmlObject" remotecontext="$once{ canvas.thishib }" >   
+			<netparam name="vars1"><method name="getValue"> return canvas.sessionId; </method></netparam>
+			<netparam><method name="getValue">return hib.connectedroom;</method></netparam>        	
+			<netparam><method name="getValue">return hib.conferencedomain;</method></netparam>  
+			  <netparam><method name="getValue">return parent.String1;</method></netparam>
+	        <handler name="ondata" args="value">	
+				<![CDATA[
+					Debug.write("  loadWmlObject ",value); 
+					if (value!=null){
+						for (var i=0;i<value.length;i++){
+							Debug.write("  value[i] ",value[i]);
+							_drawarea.sendWatchObject('draw',value[i]);
+						}				
+					}
+				]]>       	     				
+	        </handler>	
+	  	</netremotecallhib> 
+		 	 
+    </view>
+    <vscrollbar />
+</class>
+
+</library>

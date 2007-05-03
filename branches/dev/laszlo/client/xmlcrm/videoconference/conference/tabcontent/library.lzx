@@ -4,9 +4,9 @@
 	<include href="basedokeoscharttab.lzx" />
 	<include href="charttab.lzx" />
 	<include href="participants.lzx" />
-	<include href="uploadtab.lzx" />
+	
 	<include href="wwwtab.lzx" />
-    
-    <include href="imageslistdraw.lzx" />
+	<include href="files/" />
+
     
 </library>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<library>
+<!--  -->
+
+<class name="imageslistdraw" extends="view" width="280" height="270" bgcolor="0x4171B5">
+	<view width="${ parent.width-2 }" height="${ parent.height-2 }" x="1" y="1" bgcolor="white" />
+
+	<attribute name="uploadmodul" value="" type="string" />
+
+    <method name="addFolder" args="foldername">
+        //new listfolderdrag(this._table._listcontent,{uploadmodul:this.uploadmodul,foldername:foldername});
+        new listfolderdrag(this._table._listcontent,{uploadmodul:this.uploadmodul,foldername:foldername});
+    </method>
+    
+    <method name="addFile" args="filename,ext">
+        //new listimagedrag(this._table._listcontent,{uploadmodul:this.uploadmodul,size:size,filename:filename,inserted:inserted,isimage:isimage});
+        new listimagedrag(this._table._listcontent,{uploadmodul:this.uploadmodul,filename:filename+ext,filenamePure:filename,ext:ext});
+    </method>
+    
+    <method name="addWML" args="filename,ext">
+        //new listimagedrag(this._table._listcontent,{uploadmodul:this.uploadmodul,size:size,filename:filename,inserted:inserted,isimage:isimage});
+        new listwml(this._table._listcontent,{uploadmodul:this.uploadmodul,filename:filename+ext,filenamePure:filename,ext:ext});
+    </method>
+	
+    <method name="addPpt" args="filename,ext">
+        //new listimagedrag(this._table._listcontent,{uploadmodul:this.uploadmodul,size:size,filename:filename,inserted:inserted,isimage:isimage});
+        new listppt(this._table._listcontent,{uploadmodul:this.uploadmodul,filename:filename+ext,filenamePure:filename,ext:ext});
+    </method>
+    
+    <method name="resetList">
+    	this._table.destroy();
+    	new imagelistinnertable(this,{name:'_table'});
+    </method>
+    
+    <method name="highlightItem" args="obj">
+    	<![CDATA[
+    		for (var i=0;i<this._table._listcontent.subviews.length;i++){
+    			if (!this._table._listcontent.subviews[i].isPpt)
+    				this._table._listcontent.subviews[i].setText('<font>'+this._table._listcontent.subviews[i].filenamePure+'</font>');
+    		}
+    		obj.setText('<font><b>'+obj.filenamePure+'</b></font>');
+    	]]>
+    </method>
+    
+	<imagelistinnertable name="_table" />
+
+</class>
+
+</library>
