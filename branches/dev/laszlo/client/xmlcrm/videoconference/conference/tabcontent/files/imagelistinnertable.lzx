@@ -39,12 +39,7 @@
 	        <handler name="ondata" args="value">	
 				<![CDATA[
 					Debug.write("  loadWmlObject ",value); 
-					if (value!=null){
-						for (var i=0;i<value.length;i++){
-							Debug.write("  value[i] ",value[i]);
-							_drawarea.sendWatchObject('draw',value[i]);
-						}				
-					}
+					_drawarea.loadwmlObject(value);
 				]]>       	     				
 	        </handler>	
 	  	</netremotecallhib> 
