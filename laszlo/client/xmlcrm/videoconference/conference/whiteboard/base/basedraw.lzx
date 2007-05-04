@@ -540,6 +540,11 @@
 	
 	<!-- ##################
 		SharedModus
+		action => type of action
+		actionObject => necessary information to reproduce the event
+		isWmlLoader => true means this object is loaded through a stored wml-file
+		so do not spread any update-notifications to connected clients for each 
+		object cause the file loading will make a seperate notification
 	 -->
 	<method name="sendWatchObject" args="action,actionObject,isWmlLoader">
 		Debug.write("sendWatchObject: ",action,actionObject);
@@ -591,7 +596,8 @@
 			} else if(actionObject[0]=='ellipse'){
 				this.drawellipseToHistory(lastactionObject,this);
 			}
-			
+			//add counter otherwise trouble in naming conventions
+			this.getCounter();
 			this.baseactionobjectList.push(lastactionObject);
 			
 			//Send a notifcation for the library loader sothat it can show progress
@@ -631,6 +637,9 @@
 			obj.setAttribute('y',lastactionObject[lastactionObject.length-4]);
 			obj.setAttribute('width',lastactionObject[lastactionObject.length-3]);
 			obj.setAttribute('height',lastactionObject[lastactionObject.length-2]);
+		} else if (action=="loadwml"){
+			Debug.write(actionObject,actionObject["wmlfileName"],actionObject["wmlroom"],actionObject["wmldomain"]);
+			this.remoteWmlLoader(actionObject["wmlfileName"],actionObject["wmlroom"],actionObject["wmldomain"]);
 		}
 		]]>
 	</method>

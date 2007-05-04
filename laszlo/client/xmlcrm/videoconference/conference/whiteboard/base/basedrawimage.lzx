@@ -47,7 +47,7 @@
 			this.refObj.parent.isloadedImage.sendEvent(this);
 			if (this.refObj.isWmlLoaderImage){
 				this.refObj.isWmlLoaderImage=false;
-				if (this.refObj.onwmlLoaderSend) this.onwmlLoaderSend.sendEvent('image');
+				if (this.refObj.onwmlLoaderSend) this.refObj.onwmlLoaderSend.sendEvent('image');
 			}
 		]]>
 	</handler>

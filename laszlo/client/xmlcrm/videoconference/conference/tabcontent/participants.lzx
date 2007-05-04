@@ -59,7 +59,7 @@
     <netremotecallhib name="getClientListScope" funcname="getClientListScope" remotecontext="$once{ canvas.thishib }" >          
         <handler name="ondata" args="value">
         	<![CDATA[
-            //The onResult-Handler will be called be the rtmpconnection
+            //The onResult-Handler will be called by the rtmpconnection
             Debug.write("getClientListScope Instance: ",value);
 
             for (var i in value){
