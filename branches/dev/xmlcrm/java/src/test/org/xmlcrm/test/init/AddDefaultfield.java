@@ -58,6 +58,8 @@ public class AddDefaultfield extends TestCase {
 //		Fieldmanagment.getInstance().addFourFieldValues("loadwml_header", 205, "Laden", "loading", "loading", "loading");
 //		Fieldmanagment.getInstance().addFourFieldValues("loadwml_messsload", 206, "Objekte geladen", "objects loaded", "objects loaded", "objects loaded");
 //		Fieldmanagment.getInstance().addFourFieldValues("loadwml_messsync", 207, "Synchronisiere Clients. Restliche Clients: ", "snychronizing clients, clients to wait:", "snychronizing clients, clients to wait:", "snychronizing clients, clients to wait:");
+//		Fieldmanagment.getInstance().addFourFieldValues("loadimage_messload", 208, "Lade Bilddaten", "Loading Imagedata", "Loading Imagedata", "Loading Imagedata");
+//		Fieldmanagment.getInstance().addFourFieldValues("loadimage_messsync", 209, "Synchronisiere Clients. Restliche Clients: ", "snychronizing clients, clients to wait:", "snychronizing clients, clients to wait:", "snychronizing clients, clients to wait:");
 		
 	}
 
