@@ -3,6 +3,7 @@
 
 	<include href="choosedrawareaobjectwindow.lzx" />
 	<include href="saveaswmlwindow.lzx" />
+	<include href="loadwmlwindow.lzx" />
 	
 
 </library>

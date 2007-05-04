@@ -226,6 +226,7 @@
 			this.subviews[userpos].setAttribute('isassigned',false);
 			this.subviews[userpos]._chatvideoinner.setResourceNumber(5);
 			this.subviews[userpos].resetValues();
+			this.subviews[userpos]._chatvideoinner._videoview.setAttribute('visible',false);
 			return this.subviews[userpos].getVideoReference();
 		}
 		return null;

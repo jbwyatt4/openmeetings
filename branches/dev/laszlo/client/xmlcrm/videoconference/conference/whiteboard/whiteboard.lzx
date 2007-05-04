@@ -63,8 +63,6 @@
 
 
 <class name="whiteboard" extends="view">
-
-	
 	
 	<attribute name="baseurl" value="" type="string" />
 	<attribute name="fileName" value="" type="string" />
@@ -212,8 +210,8 @@
 			Debug.write("onprogress: ",perc);
 			this.parent._progress.setProgress(perc);
 		</handler>
+		<!-- @overwrite -->
 		<method name="onsharedMessage" args="action,obj">
-			
 
 	  		var tempSendArray = new Array ();
 	  		tempSendArray[0] = 'whiteboard';
