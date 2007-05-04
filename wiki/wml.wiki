@@ -12,3 +12,6 @@ wml is not the same like Wiki-Markup-Language. But it would be nice if in future
 
 You can see an example here:
 http://openmeetings.googlecode.com/svn/branches/dev/xmlcrm/java/src/stored/filename1.wml
+
+= Todo =
+ * wml to svg and save file's alternative svg (Issue 61)
