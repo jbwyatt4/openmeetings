@@ -25,6 +25,9 @@
 	<attribute name="wmlLoadingCompleteMessage" value="null" />
 	<attribute name="synccheckTime" value="1000" type="number" />
     
+	<!-- Vars for storing screenshot
+		removed cause of performance and 
+		no php backend availible anymore -->		
     <attribute name="MCRef" value="null" />
     
     <attribute name="pixelArray" value="null" />
@@ -128,6 +131,8 @@
         ]]> 
     </method>
 	
+	<!-- saving all object on whiteboard as wml-file -->
+	
 	<handler name="sendObject">
 		Debug.write("sendObject: ",this.baseactionobjectList);
 		this.fileData = this.baseactionobjectList;
@@ -174,7 +179,7 @@
 			this.loadfileDataIndex = -1;
 			if (this.onwmlloadStart) this.onwmlloadStart.sendEvent();
 			this._loadmessageTxt = canvas.getLabelName(this.loadmessageId);
-			this.loadfileDataWinRef = new loadwmlwindow(canvas.main_content._content.inner,{refObj:this});
+			this.loadfileDataWinRef = new loadwhiteboardwindow(canvas.main_content._content.inner,{refObj:this});
 			
 			if (this.wmlspreadNews){
 				//get remotely connected users sothat we can trigger event when everyBody has synchronized loading

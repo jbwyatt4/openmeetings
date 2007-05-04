@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library>
 
-<class name="loadwmlwindow" extends="labelexplorerbox" labelid="205"
+<class name="loadwhiteboardwindow" extends="labelexplorerbox" labelid="205"
     docking="true" width="260" x="300" y="200" height="100">
     
     <attribute name="refObj" value="null" />
