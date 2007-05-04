@@ -55,6 +55,9 @@ public class AddDefaultfield extends TestCase {
 //		Fieldmanagment.getInstance().addFourFieldValues("whiteboard_saveaswinbtn1", 202, "Abbrechen", "cancel", "cancel", "cancel");
 //		Fieldmanagment.getInstance().addFourFieldValues("whiteboard_saveaswinbtn2", 203, "Speichern", "save", "save", "save");
 //		Fieldmanagment.getInstance().addFourFieldValues("rpcerrorwin_header", 204, "Fehler", "error", "error", "error");
+//		Fieldmanagment.getInstance().addFourFieldValues("loadwml_header", 205, "Laden", "loading", "loading", "loading");
+//		Fieldmanagment.getInstance().addFourFieldValues("loadwml_messsload", 206, "Objekte geladen", "objects loaded", "objects loaded", "objects loaded");
+//		Fieldmanagment.getInstance().addFourFieldValues("loadwml_messsync", 207, "Synchronisiere Clients. Restliche Clients: ", "snychronizing clients, clients to wait:", "snychronizing clients, clients to wait:", "snychronizing clients, clients to wait:");
 		
 	}
 
