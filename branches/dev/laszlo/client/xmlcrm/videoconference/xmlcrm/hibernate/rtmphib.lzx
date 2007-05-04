@@ -191,8 +191,9 @@
                 //The onResult-Handler will be called be the rtmpconnection
                 Debug.write("roomDisconnect: ",value);
                 canvas._videocontainer.disconnectclient(value.streamid,value.userpos); 
-				//remove that client from sync list of wmlFileLoader if present
+				//remove that client from sync list of wmlFileLoader/image if present
 				_drawarea.sendCompleteWmlLoadedRClient(value);
+				_drawarea.sendCompleteImageLoadedRClient(value);
                 if (canvas.currentModApply!=null) canvas.currentModApply.rejectUser(value);
                 //parent.getClientListScope.doCall();  
             </handler>   
@@ -201,8 +202,9 @@
 	    	<handler name="ondata" args="value">
 	    		Debug.write("logicalRoomLeaveDis: ",value);
 	    		canvas._videocontainer.disconnectclient(value.streamid,value.userpos); 
-				//remove that client from sync list of wmlFileLoader if present
+				//remove that client from sync list of wmlFileLoader/image if present
 				_drawarea.sendCompleteWmlLoadedRClient(value);
+				_drawarea.sendCompleteImageLoadedRClient(value);
 	    		if (canvas.currentModApply!=null) canvas.currentModApply.rejectUser(value);
 	    	</handler>
 	    </netremotecallhib>             
@@ -296,6 +298,10 @@
 						_drawarea.sendCompleteWmlLoadedRClient(value.client);
 					} else if (value.message[1]=='wmlsynccomplete'){
 						_drawarea.sendCompleteWmlSync(value.client);
+					} else if (value.message[1]=='imageloadcomplete'){
+						_drawarea.sendCompleteImageLoadedRClient(value.client);
+					} else if (value.message[1]=='imagesynccomplete'){
+						_drawarea.sendCompleteImageSync(value.client);
 					}
                 }
                 ]]>
