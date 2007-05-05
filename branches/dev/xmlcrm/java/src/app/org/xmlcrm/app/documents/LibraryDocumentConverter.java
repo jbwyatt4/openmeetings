@@ -19,6 +19,8 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Text;
 import org.xmlcrm.utils.stringhandlers.StringComparer;
 
+
+
 public class LibraryDocumentConverter {
 	
 	private static final Log log = LogFactory.getLog(LibraryDocumentConverter.class);
@@ -198,29 +200,34 @@ public class LibraryDocumentConverter {
 			Text strokestyleT = document.createTextNode(paint.get(4).toString());
 			strokestyle.appendChild(strokestyleT);
 			
+			Element counter = document.createElement("counter");
+			baseElement.appendChild(counter);
+			Text counterT = document.createTextNode(paint.get(5).toString());
+			counter.appendChild(counterT);			
+			
 			Element x = document.createElement("x");
 			baseElement.appendChild(x);
-			Text xT = document.createTextNode(paint.get(5).toString());
+			Text xT = document.createTextNode(paint.get(6).toString());
 			x.appendChild(xT);
 			
 			Element y = document.createElement("y");
 			baseElement.appendChild(y);
-			Text yT = document.createTextNode(paint.get(6).toString());
+			Text yT = document.createTextNode(paint.get(7).toString());
 			y.appendChild(yT);
 			
 			Element width = document.createElement("width");
 			baseElement.appendChild(width);
-			Text widthT = document.createTextNode(paint.get(7).toString());
+			Text widthT = document.createTextNode(paint.get(8).toString());
 			width.appendChild(widthT);
 			
 			Element height = document.createElement("height");
 			baseElement.appendChild(height);
-			Text heightT = document.createTextNode(paint.get(8).toString());
+			Text heightT = document.createTextNode(paint.get(9).toString());
 			height.appendChild(heightT);
 			
 			Element layername = document.createElement("layername");
 			baseElement.appendChild(layername);
-			Text layernameT = document.createTextNode(paint.get(9).toString());
+			Text layernameT = document.createTextNode(paint.get(10).toString());
 			layername.appendChild(layernameT);
 			
 		} catch (Exception err){
@@ -251,29 +258,34 @@ public class LibraryDocumentConverter {
 			Text fontstyleT = document.createTextNode(letter.get(4).toString());
 			fontstyle.appendChild(fontstyleT);	
 			
+			Element counter = document.createElement("counter");
+			baseElement.appendChild(counter);
+			Text counterT = document.createTextNode(letter.get(6).toString());
+			counter.appendChild(counterT);			
+			
 			Element x = document.createElement("x");
 			baseElement.appendChild(x);
-			Text xT = document.createTextNode(letter.get(5).toString());
+			Text xT = document.createTextNode(letter.get(6).toString());
 			x.appendChild(xT);
 			
 			Element y = document.createElement("y");
 			baseElement.appendChild(y);
-			Text yT = document.createTextNode(letter.get(6).toString());
+			Text yT = document.createTextNode(letter.get(7).toString());
 			y.appendChild(yT);
 			
 			Element width = document.createElement("width");
 			baseElement.appendChild(width);
-			Text widthT = document.createTextNode(letter.get(7).toString());
+			Text widthT = document.createTextNode(letter.get(8).toString());
 			width.appendChild(widthT);
 			
 			Element height = document.createElement("height");
 			baseElement.appendChild(height);
-			Text heightT = document.createTextNode(letter.get(8).toString());
+			Text heightT = document.createTextNode(letter.get(9).toString());
 			height.appendChild(heightT);
 			
 			Element layername = document.createElement("layername");
 			baseElement.appendChild(layername);
-			Text layernameT = document.createTextNode(letter.get(9).toString());
+			Text layernameT = document.createTextNode(letter.get(10).toString());
 			layername.appendChild(layernameT);
 			
 		} catch (Exception err){
@@ -319,29 +331,34 @@ public class LibraryDocumentConverter {
 			Text domainT = document.createTextNode(image.get(7).toString());
 			domain.appendChild(domainT);
 			
+			Element counter = document.createElement("counter");
+			baseElement.appendChild(counter);
+			Text counterT = document.createTextNode(image.get(8).toString());
+			counter.appendChild(counterT);				
+			
 			Element x = document.createElement("x");
 			baseElement.appendChild(x);
-			Text xT = document.createTextNode(image.get(8).toString());
+			Text xT = document.createTextNode(image.get(9).toString());
 			x.appendChild(xT);
 			
 			Element y = document.createElement("y");
 			baseElement.appendChild(y);
-			Text yT = document.createTextNode(image.get(9).toString());
+			Text yT = document.createTextNode(image.get(10).toString());
 			y.appendChild(yT);
 			
 			Element width = document.createElement("width");
 			baseElement.appendChild(width);
-			Text widthT = document.createTextNode(image.get(10).toString());
+			Text widthT = document.createTextNode(image.get(11).toString());
 			width.appendChild(widthT);
 			
 			Element height = document.createElement("height");
 			baseElement.appendChild(height);
-			Text heightT = document.createTextNode(image.get(11).toString());
+			Text heightT = document.createTextNode(image.get(12).toString());
 			height.appendChild(heightT);
 			
 			Element layername = document.createElement("layername");
 			baseElement.appendChild(layername);
-			Text layernameT = document.createTextNode(image.get(12).toString());
+			Text layernameT = document.createTextNode(image.get(13).toString());
 			layername.appendChild(layernameT);
 			
 		} catch (Exception err){
@@ -388,29 +405,34 @@ public class LibraryDocumentConverter {
 			Text endyT = document.createTextNode(paintObject.get(7).toString());
 			endy.appendChild(endyT);
 			
+			Element counter = document.createElement("counter");
+			baseElement.appendChild(counter);
+			Text counterT = document.createTextNode(paintObject.get(8).toString());
+			counter.appendChild(counterT);					
+			
 			Element x = document.createElement("x");
 			baseElement.appendChild(x);
-			Text xT = document.createTextNode(paintObject.get(8).toString());
+			Text xT = document.createTextNode(paintObject.get(9).toString());
 			x.appendChild(xT);
 			
 			Element y = document.createElement("y");
 			baseElement.appendChild(y);
-			Text yT = document.createTextNode(paintObject.get(9).toString());
+			Text yT = document.createTextNode(paintObject.get(10).toString());
 			y.appendChild(yT);
 			
 			Element width = document.createElement("width");
 			baseElement.appendChild(width);
-			Text widthT = document.createTextNode(paintObject.get(10).toString());
+			Text widthT = document.createTextNode(paintObject.get(11).toString());
 			width.appendChild(widthT);
 			
 			Element height = document.createElement("height");
 			baseElement.appendChild(height);
-			Text heightT = document.createTextNode(paintObject.get(11).toString());
+			Text heightT = document.createTextNode(paintObject.get(12).toString());
 			height.appendChild(heightT);
 			
 			Element layername = document.createElement("layername");
 			baseElement.appendChild(layername);
-			Text layernameT = document.createTextNode(paintObject.get(12).toString());
+			Text layernameT = document.createTextNode(paintObject.get(13).toString());
 			layername.appendChild(layernameT);
 			
 		} catch (Exception err){
@@ -431,30 +453,35 @@ public class LibraryDocumentConverter {
 			baseElement.appendChild(line);
 			Text lineT = document.createTextNode(paintObject.get(2).toString());
 			line.appendChild(lineT);
+			
+			Element counter = document.createElement("counter");
+			baseElement.appendChild(counter);
+			Text counterT = document.createTextNode(paintObject.get(3).toString());
+			counter.appendChild(counterT);			
 
 			Element x = document.createElement("x");
 			baseElement.appendChild(x);
-			Text xT = document.createTextNode(paintObject.get(3).toString());
+			Text xT = document.createTextNode(paintObject.get(4).toString());
 			x.appendChild(xT);
 			
 			Element y = document.createElement("y");
 			baseElement.appendChild(y);
-			Text yT = document.createTextNode(paintObject.get(4).toString());
+			Text yT = document.createTextNode(paintObject.get(5).toString());
 			y.appendChild(yT);
 			
 			Element width = document.createElement("width");
 			baseElement.appendChild(width);
-			Text widthT = document.createTextNode(paintObject.get(5).toString());
+			Text widthT = document.createTextNode(paintObject.get(6).toString());
 			width.appendChild(widthT);
 			
 			Element height = document.createElement("height");
 			baseElement.appendChild(height);
-			Text heightT = document.createTextNode(paintObject.get(6).toString());
+			Text heightT = document.createTextNode(paintObject.get(7).toString());
 			height.appendChild(heightT);
 			
 			Element layername = document.createElement("layername");
 			baseElement.appendChild(layername);
-			Text layernameT = document.createTextNode(paintObject.get(7).toString());
+			Text layernameT = document.createTextNode(paintObject.get(8).toString());
 			layername.appendChild(layernameT);
 			
 		} catch (Exception err){

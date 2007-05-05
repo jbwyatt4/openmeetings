@@ -60,6 +60,9 @@ public class AddDefaultfield extends TestCase {
 //		Fieldmanagment.getInstance().addFourFieldValues("loadwml_messsync", 207, "Synchronisiere Clients. Restliche Clients: ", "snychronizing clients, clients to wait:", "snychronizing clients, clients to wait:", "snychronizing clients, clients to wait:");
 //		Fieldmanagment.getInstance().addFourFieldValues("loadimage_messload", 208, "Lade Bilddaten", "Loading Imagedata", "Loading Imagedata", "Loading Imagedata");
 //		Fieldmanagment.getInstance().addFourFieldValues("loadimage_messsync", 209, "Synchronisiere Clients. Restliche Clients: ", "snychronizing clients, clients to wait:", "snychronizing clients, clients to wait:", "snychronizing clients, clients to wait:");
+//		Fieldmanagment.getInstance().addFourFieldValues("loadwml_confirmheader", 210, "Zeichenbrett leeren", "clear drawarea", "clear drawarea", "clear drawarea");
+//		Fieldmanagment.getInstance().addFourFieldValues("loadwml_confirmmess", 211, "Zeichnbrett leeren, alle bisherigen Änderungen gehen damit verloren!", "clear drawarea, all data on whiteboard will be lost", "clear drawarea, all data on whiteboard will be lost", "clear drawarea, all data on whiteboard will be lost");
+//		Fieldmanagment.getInstance().addFourFieldValues("loadwml_confirmmess2", 212, "Bestätigung anfordern vor dem Laden einer Datei", "Confirm before loading a file", "Confirm before loading a file", "Confirm before loading a file");
 		
 	}
 

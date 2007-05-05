@@ -108,11 +108,12 @@ public class LibraryWmlLoader {
 			subMap.put(2, paintElement.element("fillstyle").getText());
 			subMap.put(3, Integer.valueOf(paintElement.element("linewidth").getText()).intValue());
 			subMap.put(4, Integer.valueOf(paintElement.element("strokestyle").getText()).intValue());
-			subMap.put(5, Float.valueOf(paintElement.element("x").getText()).floatValue());
-			subMap.put(6, Float.valueOf(paintElement.element("y").getText()).floatValue());
-			subMap.put(7, Float.valueOf(paintElement.element("width").getText()).floatValue());
-			subMap.put(8, Float.valueOf(paintElement.element("height").getText()).floatValue());
-			subMap.put(9, paintElement.element("layername").getText());		
+			subMap.put(5, Integer.valueOf(paintElement.element("counter").getText()).intValue());
+			subMap.put(6, Float.valueOf(paintElement.element("x").getText()).floatValue());
+			subMap.put(7, Float.valueOf(paintElement.element("y").getText()).floatValue());
+			subMap.put(8, Float.valueOf(paintElement.element("width").getText()).floatValue());
+			subMap.put(9, Float.valueOf(paintElement.element("height").getText()).floatValue());
+			subMap.put(10, paintElement.element("layername").getText());		
 			
 		} catch (Exception err) {
 			log.error("createListObjectPaintByNode",err);
@@ -126,11 +127,12 @@ public class LibraryWmlLoader {
 			subMap.put(2, Integer.valueOf(paintElement.element("fgcolor").getText()).intValue());
 			subMap.put(3, Integer.valueOf(paintElement.element("fontsize").getText()).intValue());
 			subMap.put(4, paintElement.element("fontstyle").getText());
-			subMap.put(5, Float.valueOf(paintElement.element("x").getText()).floatValue());
-			subMap.put(6, Float.valueOf(paintElement.element("y").getText()).floatValue());			
-			subMap.put(7, Float.valueOf(paintElement.element("width").getText()).floatValue());		
-			subMap.put(8, Float.valueOf(paintElement.element("height").getText()).floatValue());		
-			subMap.put(9, paintElement.element("layername").getText());
+			subMap.put(5, Integer.valueOf(paintElement.element("counter").getText()).intValue());
+			subMap.put(6, Float.valueOf(paintElement.element("x").getText()).floatValue());
+			subMap.put(7, Float.valueOf(paintElement.element("y").getText()).floatValue());			
+			subMap.put(8, Float.valueOf(paintElement.element("width").getText()).floatValue());		
+			subMap.put(9, Float.valueOf(paintElement.element("height").getText()).floatValue());		
+			subMap.put(10, paintElement.element("layername").getText());
 			
 		} catch (Exception err) {
 			log.error("createListObjectLetterByNode",err);
@@ -147,11 +149,12 @@ public class LibraryWmlLoader {
 			subMap.put(5, paintElement.element("parentpath").getText());
 			subMap.put(6, paintElement.element("room").getText());
 			subMap.put(7, paintElement.element("domain").getText());
-			subMap.put(8, Float.valueOf(paintElement.element("x").getText()).floatValue());
-			subMap.put(9, Float.valueOf(paintElement.element("y").getText()).floatValue());
-			subMap.put(10, Float.valueOf(paintElement.element("width").getText()).floatValue());
-			subMap.put(11, Float.valueOf(paintElement.element("height").getText()).floatValue());
-			subMap.put(12, paintElement.element("layername").getText());		
+			subMap.put(8, Integer.valueOf(paintElement.element("counter").getText()).intValue());
+			subMap.put(9, Float.valueOf(paintElement.element("x").getText()).floatValue());
+			subMap.put(10, Float.valueOf(paintElement.element("y").getText()).floatValue());
+			subMap.put(11, Float.valueOf(paintElement.element("width").getText()).floatValue());
+			subMap.put(12, Float.valueOf(paintElement.element("height").getText()).floatValue());
+			subMap.put(13, paintElement.element("layername").getText());		
 			
 		} catch (Exception err) {
 			log.error("createListObjectImageByNode",err);
@@ -168,11 +171,12 @@ public class LibraryWmlLoader {
 			subMap.put(5, Float.valueOf(paintElement.element("starty").getText()).floatValue());
 			subMap.put(6, Float.valueOf(paintElement.element("endx").getText()).floatValue());
 			subMap.put(7, Float.valueOf(paintElement.element("endy").getText()).floatValue());
-			subMap.put(8, Float.valueOf(paintElement.element("x").getText()).floatValue());
-			subMap.put(9, Float.valueOf(paintElement.element("y").getText()).floatValue());
-			subMap.put(10, Float.valueOf(paintElement.element("width").getText()).floatValue());
-			subMap.put(11, Float.valueOf(paintElement.element("height").getText()).floatValue());
-			subMap.put(12, paintElement.element("layername").getText());
+			subMap.put(8, Integer.valueOf(paintElement.element("counter").getText()).intValue());
+			subMap.put(9, Float.valueOf(paintElement.element("x").getText()).floatValue());
+			subMap.put(10, Float.valueOf(paintElement.element("y").getText()).floatValue());
+			subMap.put(11, Float.valueOf(paintElement.element("width").getText()).floatValue());
+			subMap.put(12, Float.valueOf(paintElement.element("height").getText()).floatValue());
+			subMap.put(13, paintElement.element("layername").getText());
 			
 		} catch (Exception err) {
 			log.error("createListObjectObjecByNode",err);
@@ -184,11 +188,12 @@ public class LibraryWmlLoader {
 			
 			subMap.put(1, Integer.valueOf(paintElement.element("stroke").getText()).intValue());
 			subMap.put(2, paintElement.element("line").getText());
-			subMap.put(3, Float.valueOf(paintElement.element("x").getText()).floatValue());		
-			subMap.put(4, Float.valueOf(paintElement.element("y").getText()).floatValue());
-			subMap.put(5, Float.valueOf(paintElement.element("width").getText()).floatValue());
-			subMap.put(6, Float.valueOf(paintElement.element("height").getText()).floatValue());
-			subMap.put(7, paintElement.element("layername").getText());
+			subMap.put(3, Integer.valueOf(paintElement.element("counter").getText()).intValue());
+			subMap.put(4, Float.valueOf(paintElement.element("x").getText()).floatValue());		
+			subMap.put(5, Float.valueOf(paintElement.element("y").getText()).floatValue());
+			subMap.put(6, Float.valueOf(paintElement.element("width").getText()).floatValue());
+			subMap.put(7, Float.valueOf(paintElement.element("height").getText()).floatValue());
+			subMap.put(8, paintElement.element("layername").getText());
 
 		} catch (Exception err) {
 			log.error("createListObjectObjecByNode",err);
