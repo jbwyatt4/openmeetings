@@ -7,6 +7,7 @@
 <include href="lang/en.lzx"/>
 
 <include href="lib/"/>
+<include href="content/"/>
 
             <tabs name="mainTabs">
                <tabpane selected="true" text="${mess.home}">
@@ -16,47 +17,11 @@
                 </tabpane>
 
                 <tabpane text="${mess.sound}" name="soundTab" onselect="Debug.write('focus'); audioplayer.play();">
-					    <view id="audioplayer" play="false" y="40" resource="http:resources/Star_in_the_east_solfege.mp3" oninit="this.stop();">
-					        <attribute name="vol" value="100"/>
-					        <view>
-					            <simplelayout axis="x" spacing="-1"/>
-					           <button width="40" onclick="audioplayer.stop()">
-					                <view resource="resources/stop.png" y="6" align="center"/>
-					            </button>
-					            <button width="40" onclick="audioplayer.play()">
-					                <view resource="resources/play.png" y="5" align="center"/>
-					            </button>
-					        </view>
-					        
-					        <view>
-					            <simplelayout axis="x" spacing="-1"/>
-					            <button width="40" onclick="audioplayer.setVolume( audioplayer.getVolume() -10)">
-					                    -<view resource="resources/mix_volume.png" y="5" align="right"/>
-					                </button>
-					            <button width="40" onclick="audioplayer.setVolume( audioplayer.getVolume() +10)">
-					                    +<view resource="resources/mix_volume.png" y="5" align="right"/>
-					                </button>
-					        </view>
-					        
-					        <simplelayout axis="x" spacing="10"/>
-					        <view name="background" bgcolor="black" width="202" height="15" y="50" options="ignorelayout;">
-					            <view name="loadbar" resource="resources/audio_scrubtrack.png" width="${audioplayer.loadperc * 200}">
-					            <view name="playbar" resource="resources/audio_scrubber.png" y="1" x="${Math.round(180 * audioplayer.frame/audioplayer.totalframes)}"/>
-					            </view>
-					        </view>
-					    </view>
-					<simplelayout axis="y" spacing="5"/>
-                    <text text="${mess.listen_sound}" multiline="true" width="${this.parent.width - 20}" />
-
-					<view>
-					        <simplelayout axis="x" spacing="10"/>
-					           <button text="${mess.no}">					                
-					            </button>
-					           <button text="${mess.yes}">					                
-					            </button>
-					</view>
-                    <nextButton nextTabpane="${this.parent.parent.microTab}" text="${mess.next}" />
-                    
+					
+					<!-- define content areas which are 
+						kind of component in classes -->
+					 <audiotest name="_audiotest" />
+					
                 </tabpane>                
                 
                 <tabpane text="${mess.micro}" name="microTab">
@@ -117,7 +82,7 @@
             </tabs>
 
 	
-	<rtmpconnection src="rtmp://192.168.0.1/xmlcrm/hibernate" autoconnect="true"/>
+	<rtmpconnection src="rtmp://192.168.0.1/xmlcrm/test" autoconnect="true"/>
 	<mediastream name="s1" type="rtmp"/>
 	<mediastream name="s2" type="rtmp"/>
 	<simplelayout/>
