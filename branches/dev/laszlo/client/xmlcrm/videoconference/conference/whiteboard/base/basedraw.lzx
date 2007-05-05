@@ -569,7 +569,7 @@
 						
 						if(typeof(v)=='object'){
 							var v1 = new Array();
-							for (eg3 in v){
+							for (var eg3 in v){
 								var z = v[eg3];
 								v1[eg3] = z;
 							}

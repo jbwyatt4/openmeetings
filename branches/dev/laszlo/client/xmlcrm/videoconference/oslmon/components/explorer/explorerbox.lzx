@@ -77,7 +77,7 @@
 		this.setAttribute('isopen',!this.isopen);
 		if (this.isopen){
 			_calcdockingList();
-			for (eg in this.dockinglist){
+			for (var eg in this.dockinglist){
 				if(this.dockinglist[eg].docking){
 					//Debug.write("this.dockinglist[eg]: ",this.dockinglist[eg].title);
 					//Debug.write("open new y",this.y+this.initheight);
@@ -89,7 +89,7 @@
 			this.setAttribute('height',this.initheight);
 		} else {
 			_calcdockingList();
-			for (eg in this.dockinglist){
+			for (var eg in this.dockinglist){
 				if(this.dockinglist[eg].docking){
 					//Debug.write("this.dockinglist[eg]: ",this.dockinglist[eg].title);
 					this.dockinglist[eg].toggleOpenByParent(-(this.initheight-22));
@@ -105,7 +105,7 @@
 		var tempList=new Array();
 		<![CDATA[
 		//check for dockable stuff which is connected to this Box
-		for (eg in this.parent.subviews){
+		for (var eg in this.parent.subviews){
 			//check that you do not calc with yourself
 			if (this.parent.subviews[eg]!=this && this.parent.subviews[eg].docking){
 				// there are 4 cases which have to be proofed to check every possible situation
@@ -122,7 +122,7 @@
 		]]>
 		//Debug.write("tempList.length: ",tempList.length);
 		if (tempList.length!=0){
-			for (eg in tempList){
+			for (var eg in tempList){
 				if(tempList[eg].docking){
 					//Debug.write("toggleOpenByParent 1 [eg],changeY: ",tempList[eg].title,changeY);
 					tempList[eg].toggleOpenByParent(changeY);
@@ -144,7 +144,7 @@
 		}
 			
 		//check for connected Boxes
-		for (eg in this.dockinglist){
+		for (var eg in this.dockinglist){
 			if(this.dockinglist[eg].docking){
 				this.dockinglist[eg]._removeDragState(this);
 			}
@@ -159,7 +159,7 @@
 	<method name="_startDragState" args="obj">
 		this.bringToFront();
 		_calcdockingList();
-		for (eg in this.dockinglist){
+		for (var eg in this.dockinglist){
 			if(this.dockinglist[eg].docking){
 				this.dockinglist[eg]._startDragState(this);
 			}
@@ -178,7 +178,7 @@
 		this.dockinglist=new Array();
 		<![CDATA[
 		//check for dockable stuff which is connected to this Box
-		for (eg in this.parent.subviews){
+		for (var eg in this.parent.subviews){
 			//check that you do not calc with yourself
 			if (this.parent.subviews[eg]!=this && this.parent.subviews[eg].docking){
 				// there are 4 cases which have to be proofed to check every possible situation
@@ -206,7 +206,7 @@
 	  
 		<![CDATA[
 				
-		for (eg in this.parent.subviews){
+		for (var eg in this.parent.subviews){
 			//check that you do not calc with yourself
 			if (this.parent.subviews[eg]!=this && this.parent.subviews[eg].docking){
 				// there are 4 cases which have to be proofed to check every possible situation
