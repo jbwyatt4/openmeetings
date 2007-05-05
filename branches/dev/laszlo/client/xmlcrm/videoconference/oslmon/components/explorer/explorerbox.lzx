@@ -330,8 +330,8 @@
 		 -->
 	</view>
     <handler name="onaddsubview" args="v">
-       // Debug.write("onaddsubview",v);
-        this._resizeview.bringToFront();
+		Debug.write("onaddsubview",v);
+		if (v.parent.subviews.length>2) this._resizeview.bringToFront();
     </handler>
     <view visible="${ this.parent.resizeable }" name="_resizeview" x="${ this.parent.width - 17 }" y="${ this.parent.height - 17 }" 
         resource="explorer_resize_rsc" cursor="explorer_resizemouse_rsc" 

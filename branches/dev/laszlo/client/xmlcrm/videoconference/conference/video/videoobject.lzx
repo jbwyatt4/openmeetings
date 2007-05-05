@@ -45,7 +45,7 @@
     
     <method name="setIdentifier" args="id">
     	//for development replace this by the real name later after authentification
-    	this.setAttribute('chatpartnername',('StreamID: '+id));
+    	//this.setAttribute('chatpartnername',('StreamID: '+id));
         this.uniqueid = id;
     </method>
     
@@ -61,7 +61,7 @@
 		
 	<view name="_innertop" width="126" height="18" x="1" y="1" bgcolor="$once{ canvas.basebgcolorizer }">
   		<text text="${ parent.parent.chatpartnername }" width="166" fgcolor="white"
-  			fontsize="10" fontstyle="bold" />
+  			fontsize="9" />
 	</view>
 
 	

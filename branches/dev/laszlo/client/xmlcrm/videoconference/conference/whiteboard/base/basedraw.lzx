@@ -98,9 +98,16 @@
   	<attribute name="counter" value="0" type="number" />
 
   	<method name="getCounter">
+		Debug.write("### getCounter :",this.counter);
   		this.counter++;
   		return this.counter;
   	</method>
+	
+	<method name="compareAndSetCounter" args="c">
+		<![CDATA[
+			if (c>this.counter) this.counter = c;
+		]]>
+	</method>
   	
 	<attribute name="mousetracker_del" value="$once{ new LzDelegate(this, 'trackmouse' )}" />
 	
@@ -547,13 +554,13 @@
 		object cause the file loading will make a seperate notification
 	 -->
 	<method name="sendWatchObject" args="action,actionObject,isWmlLoader">
-		Debug.write("sendWatchObject: ",action,actionObject);
+		//Debug.write("sendWatchObject: ",action,actionObject);
 		<![CDATA[
 		if (action=='draw' || action=='redo'){
 			var lastactionObject = new Array();
 			for (var eg in actionObject){
 				var t = actionObject[eg];
-				Debug.write(t);
+				//Debug.write(t);
 				
 				if (typeof(t)=='object'){
 					var t1 = new Array();
@@ -596,8 +603,10 @@
 			} else if(actionObject[0]=='ellipse'){
 				this.drawellipseToHistory(lastactionObject,this);
 			}
-			//add counter otherwise trouble in naming conventions
-			this.getCounter();
+			//set counter to maximum otherwise trouble in naming conventions
+			//the 6th array index count from the end of each object is always the counter of the
+			//object
+			this.compareAndSetCounter(lastactionObject[lastactionObject.length-6]);
 			this.baseactionobjectList.push(lastactionObject);
 			
 			//Send a notifcation for the library loader sothat it can show progress
@@ -754,6 +763,7 @@
 	    actionObject.push(currentlayer.fillstyle);
 	    actionObject.push(currentlayer.lineWidth);
 	    actionObject.push(currentlayer.strokeStyle);
+		actionObject.push(this.counter);
 	    actionObject.push(currentlayer.x);
 	    actionObject.push(currentlayer.y);
 	    actionObject.push(currentlayer.width);
@@ -768,7 +778,7 @@
 		<![CDATA[
 		Debug.write("## paintactionHistory",parentView," 2 ## NEW lastActionObject[5],lastActionObject[6] ",lastActionObject[5],lastActionObject[6]," width,height: ",lastActionObject[7],lastActionObject[8]);
 		
-		this.currentlayer = new drawviewnew(parentView,{name:lastActionObject[lastActionObject.length-1],x:lastActionObject[5],y:lastActionObject[6],width:lastActionObject[7],height:lastActionObject[8]});
+		this.currentlayer = new drawviewnew(parentView,{name:lastActionObject[lastActionObject.length-1],x:lastActionObject[lastActionObject.length-5],y:lastActionObject[lastActionObject.length-4],width:lastActionObject[lastActionObject.length-3],height:lastActionObject[lastActionObject.length-2]});
 		
     	this.currentlayer.fillstyle = lastActionObject[2];
     	this.currentlayer.lineWidth = lastActionObject[3];
@@ -851,7 +861,8 @@
 	    actionObject.push(this.startx);	
 	    actionObject.push(this.starty);	
 	    actionObject.push(this.endx);	
-	    actionObject.push(this.endy);	    
+	    actionObject.push(this.endy);	
+		actionObject.push(this.counter);    
 	    actionObject.push(currentlayer.x);
 	    actionObject.push(currentlayer.y);
 	    actionObject.push(currentlayer.width);
@@ -949,7 +960,8 @@
 	    actionObject.push(this.startx);	
 	    actionObject.push(this.starty);	
 	    actionObject.push(this.endx);	
-	    actionObject.push(this.endy);	    
+	    actionObject.push(this.endy);	
+		actionObject.push(this.counter);    
 	    actionObject.push(currentlayer.x);
 	    actionObject.push(currentlayer.y);
 	    actionObject.push(currentlayer.width);
@@ -1125,7 +1137,8 @@
 	    actionObject.push(this.startx);	
 	    actionObject.push(this.starty);	
 	    actionObject.push(this.endx);	
-	    actionObject.push(this.endy);	    
+	    actionObject.push(this.endy);	 
+		actionObject.push(this.counter);   
 	    actionObject.push(currentlayer.x);
 	    actionObject.push(currentlayer.y);
 	    actionObject.push(currentlayer.width);
@@ -1244,7 +1257,7 @@
   	
   	<method name="drawrectangleToHistory" args="lastActionObject,parentView">
 
-		this.currentlayer = new drawviewnew(parentView,{name:lastActionObject[lastActionObject.length-1],x:lastActionObject[3],y:lastActionObject[4],width:lastActionObject[5],height:lastActionObject[6]});
+		this.currentlayer = new drawviewnew(parentView,{name:lastActionObject[lastActionObject.length-1],x:lastActionObject[lastActionObject.length-5],y:lastActionObject[lastActionObject.length-4],width:lastActionObject[lastActionObject.length-3],height:lastActionObject[lastActionObject.length-2]});
    		
    		this.drawrectangleHistory(this.currentlayer,0,0,lastActionObject[5],lastActionObject[6],lastActionObject[1],lastActionObject[2]);
 
@@ -1269,6 +1282,7 @@
 	    actionObject.push('rectangle');
 	    actionObject.push(stroke);
 	    actionObject.push(line);
+		actionObject.push(this.counter);
 	    actionObject.push(x);
 	    actionObject.push(y);
 	    actionObject.push(width);
@@ -1323,7 +1337,7 @@
   	
   	<method name="drawellipseToHistory"  args="lastActionObject,parentView">
 
-		this.currentlayer = new drawviewnew(parentView,{name:lastActionObject[lastActionObject.length-1],x:lastActionObject[3],y:lastActionObject[4],width:lastActionObject[5],height:lastActionObject[6]});
+		this.currentlayer = new drawviewnew(parentView,{name:lastActionObject[lastActionObject.length-1],x:lastActionObject[lastActionObject.length-5],y:lastActionObject[lastActionObject.length-4],width:lastActionObject[lastActionObject.length-3],height:lastActionObject[lastActionObject.length-2]});
    		Debug.write("lastActionObject[1],lastActionObject[2]: ",lastActionObject[1],lastActionObject[2]);
    		this.drawellipseHistory(this.currentlayer,0,0,lastActionObject[5],lastActionObject[6],lastActionObject[1],lastActionObject[2]);
 
@@ -1362,6 +1376,7 @@
 	    actionObject.push('ellipse');
 	    actionObject.push(stroke);
 	    actionObject.push(line);
+		actionObject.push(this.counter);
 	    actionObject.push(x);
 	    actionObject.push(y);
 	    actionObject.push(width);

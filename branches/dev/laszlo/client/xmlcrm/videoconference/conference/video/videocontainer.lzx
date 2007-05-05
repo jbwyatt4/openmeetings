@@ -172,6 +172,7 @@
 				this.subviews[i]._chatvideoinner._videoview.setAttribute('visible',true);
 				Debug.write("canvas.currentusercolor : ",canvas.currentusercolor);
 				canvas.thishib.setUserObjectOne2Four.doCall();
+			    this.subviews[i].setAttribute('chatpartnername',hib.userobject.firstname+' '+hib.userobject.lastname);
 				return this.subviews[i].getVideoReference();
 			}
 		}

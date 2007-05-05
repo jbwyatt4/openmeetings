@@ -199,11 +199,11 @@
         <handler name="ondata" args="value">
         	<![CDATA[
 				//The onResult-Handler will be called by the rtmpconnection
-				Debug.write("getClientListScope Instance: ",value);
+				//Debug.write("getClientListScope Instance: ",value);
 				parent._loadingUsers = new Array();
 				for (var eg in value){
 					if (canvas.streamid != value[eg].streamid){
-						Debug.write("parent._loadingUsers value eg ",eg,value[eg]);
+						//Debug.write("parent._loadingUsers value eg ",eg,value[eg]);
 						parent._loadingUsers.push(value[eg]);
 					}
 				}
@@ -228,7 +228,7 @@
 		var tempSendArray = new Array ();
 		tempSendArray[0] = 'whiteboard';
 		tempSendArray[1] = new Date();
-		Debug.write("Setting Message");
+		//Debug.write("Setting Message");
 		tempSendArray[2] = "loadwml";
 		tempSendArray[3] = obj;
 		
@@ -252,7 +252,7 @@
 			  <netparam><method name="getValue">return parent.String1;</method></netparam>
 	        <handler name="ondata" args="value">	
 				<![CDATA[
-					Debug.write("  loadWmlObject ",value); 
+					//Debug.write("  loadWmlObject ",value); 
 					parent.loadwmlObjectToStage(value,this.String1,hib.connectedroom,hib.conferencedomain,false);
 				]]>       	     				
 	        </handler>	
@@ -262,7 +262,7 @@
 		whiteborad -->
 	
 	<handler name="onwmlLoaderSend" args="type">
-		Debug.write("onwmlLoaderSend: ",type,this.loadfileData.length);
+		//Debug.write("onwmlLoaderSend: ",type,this.loadfileData.length);
 		this.loadObjectTimer = new LzDelegate( this, "loadNextObjectFromList" );
 		LzTimer.addTimer( this.loadObjectTimer, 50 );
 	</handler>
@@ -280,10 +280,10 @@
 			if (this.loadfileDataIndex<this.loadfileData.length){
 				var txt = (this.loadfileDataIndex+1)+'/'+this.loadfileData.length+' '+this._loadmessageTxt;
 				this.loadfileDataWinRef.setMessage(txt);
-				Debug.write("  loadObject[this.loadfileDataIndex] ",this.loadfileData[this.loadfileDataIndex]);
+				//Debug.write("  loadObject[this.loadfileDataIndex] ",this.loadfileData[this.loadfileDataIndex]);
 				this.sendWatchObject('draw',this.loadfileData[this.loadfileDataIndex],true);
 			} else {
-				Debug.write("this.loadfileDataIndex complete",this.loadfileDataIndex);
+				//Debug.write("this.loadfileDataIndex complete",this.loadfileDataIndex);
 				this._loadmessageTxt = canvas.getLabelName(this.syncmessageId);
 			    this.loadfileDataWinRef.setMessage(this._loadmessageTxt);
 				if (this.onwmlloadStop) this.onwmlloadStop.sendEvent();
@@ -312,7 +312,7 @@
 		<handler name="ondata" args="value">
 			<![CDATA[
 			//The onResult-Handler will be called be the rtmpconnection
-			Debug.write("getValue : ",value);
+			//Debug.write("getValue : ",value);
 			
 			]]>
 		</handler>   
@@ -353,7 +353,7 @@
 				//remove client from sync list
 				for (var i=0;i<this._loadingUsers.length;i++){
 					if (this._loadingUsers[i].streamid==client.streamid){
-						Debug.write("deleteing client from list: ",this._loadingUsers[i].streamid);
+						//Debug.write("deleteing client from list: ",this._loadingUsers[i].streamid);
 						this._loadingUsers.splice(i,1);
 					}
 				}
@@ -369,7 +369,7 @@
 		gets its own *sync* complete nofification
 		 -->
 	<method name="sendCompleteWmlSync" args="client">
-		Debug.write("sendCompleteWmlSync: ",client);
+		//Debug.write("sendCompleteWmlSync: ",client);
 		this.loadfileDataWinRef.close();
 	</method>
 </class>

@@ -125,18 +125,13 @@
             var t = new sharedobject();
             t.getLocal('userdata');
             var g = t.getData('userdata');
-            Debug.write("g: ",g);
             if (g!=null){
-            	Debug.write("g!=null !!!!!!!!!!!!!!!!",g);
             	var cam = g["cam"];
             } else {
-            	Debug.write("g==null $$$$$$$$$$$$ ",g,t);
             	var cam = r;
             }
-            Debug.write("++++ cam: ",cam);
 			if (cam=='undefined' || cam =='' || cam == null) cam=r;
-			Debug.write("++++ cam: ",cam);
-			availibleCams.selectItem(String(cam));    
+			this.selectItem(String(cam));    
 
             ]]>
         </handler>
@@ -164,7 +159,7 @@
             	var mic = r;
             }
 			if (mic=='undefined' || mic =='' || mic ==null) mic=r;
-			availibleMics.selectItem(String(mic));  
+			this.selectItem(String(mic));  
 			
             ]]>
         </handler>

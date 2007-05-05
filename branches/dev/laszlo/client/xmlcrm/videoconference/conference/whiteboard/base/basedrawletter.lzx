@@ -96,6 +96,7 @@
 	    actionObject.push(fgcolor);
 	    actionObject.push(fontsize);
 	    actionObject.push(fontstyle);
+		actionObject.push(this.counter);
 	    actionObject.push(x);
 	    actionObject.push(y);
 	    actionObject.push(width);

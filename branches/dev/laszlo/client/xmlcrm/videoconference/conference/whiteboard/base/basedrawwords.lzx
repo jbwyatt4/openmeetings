@@ -32,8 +32,12 @@
 	<attribute name="refObj" value="null" />
 
 	<method name="drawtoArray">
+		Debug.write("drawtoArray");
 		if (this._textview._textview.getText().length!=0){
-        	this.refObj.drawTextField(this._textview._textview.getText(),this._textview._textview.width,this.x-this.refObj.x-this.refObj.parent.x,this.y-this.refObj.y-this.refObj.parent.y);
+		    var y = this.getAttributeRelative('y',this.refObj)-this.refObj.y+1;
+			Debug.write("this.x-this.refObj.x-this.refObj.parent.x ",y);
+			var x = this.getAttributeRelative('x',this.refObj)-this.refObj.x+1;
+        	this.refObj.drawTextField(this._textview._textview.getText(),this._textview._textview.width,x,y);
         } else {
         	Debug.write("text smaller then 0",this._textview._textview.getText());
         }
