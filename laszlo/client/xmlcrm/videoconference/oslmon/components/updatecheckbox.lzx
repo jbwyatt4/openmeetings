@@ -10,7 +10,7 @@
 </class>
 
 <class name="labelcheckbox" extends="checkbox" >
-	<attribute name="labelid" value="0" type="number" setter="setLabelId(labelid)" />
+	<attribute name="labelid" type="number" setter="setLabelId(labelid)" />
 	<method name="setLabelId" args="_labelid" >
 		this.labelid = _labelid;
 		this.setAttribute('text',canvas.getLabelName(this.labelid));

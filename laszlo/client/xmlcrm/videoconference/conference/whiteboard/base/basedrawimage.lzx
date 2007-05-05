@@ -135,6 +135,7 @@
 		actionObject.push(parentPath);
 		actionObject.push(room);
 		actionObject.push(domain);
+		actionObject.push(this.counter);
 	    actionObject.push(posx);
 	    actionObject.push(posy);
 	    actionObject.push(width);

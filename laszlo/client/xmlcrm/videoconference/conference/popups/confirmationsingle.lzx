@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library>
-	
-<class name="confirmation" extends="labelexplorerbox" labelid="18"
+
+<class name="confirmationsingle" extends="labelexplorerbox" labelid="18"
     docking="true" resizeable="false" closable="true" width="400" x="100" y="220" height="240">
     
     <attribute name="refObj" value="null" />
@@ -13,18 +13,11 @@
     
     <labelcheckbox name="holddatainSO" labelid="64" x="10" y="220" />
     
-    <simplelabelbutton labelid="61" width="100" x="70" y="196">
+    <simplelabelbutton labelid="61" width="100" x="180" y="196">
     	<handler name="onclick">
     		this.parent.close();
     	</handler>
     </simplelabelbutton>    
-    <simplelabelbutton labelid="65" width="100" x="180" y="196">
-    	<handler name="onclick">
-    		var t = parent.holddatainSO.getValue();
-    		this.parent.close();
-    		this.parent.refObj.sendConfirmation(false,t);
-    	</handler>
-    </simplelabelbutton>
     <simplelabelbutton labelid="60" width="100" x="290" y="196">
     	<handler name="onclick">
     		var t = parent.holddatainSO.getValue();
@@ -33,5 +26,5 @@
     	</handler>
     </simplelabelbutton>    
 </class>
-
+	
 </library>

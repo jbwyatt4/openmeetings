@@ -50,7 +50,7 @@
 		<![CDATA[
 		Debug.write("__LZFileAddDirect wml");
 		this.parent.loadWmlObject.String1 = this.filenamePure;
-		this.parent.loadWmlObject.doCall();
+		this.parent.loadWmlObjectConfirm();		
         ]]>
 	</method>
 </class>
