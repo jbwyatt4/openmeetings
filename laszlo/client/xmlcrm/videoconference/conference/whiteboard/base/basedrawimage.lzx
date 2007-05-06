@@ -190,6 +190,7 @@
 				//now send notifications to connected clients
 				this.parent.setAttribute('drawmodus','image');
 				this.parent.registerNewImage(this.parent.syncImageRefObj.src,this.parent.syncImageRefObj.x,this.parent.syncImageRefObj.y,this.parent.syncImageRefObj.width,this.parent.syncImageRefObj.height,this.parent.syncImageRefObj.baseurl,this.parent.syncImageRefObj.fileName,this.parent.syncImageRefObj.moduleName,this.parent.syncImageRefObj.parentPath,this.parent.syncImageRefObj.room,this.parent.syncImageRefObj.domain);
+				//set modus to hand so users can directly select that image
 				this.parent.setModus('hand');	
 				this.parent.startImgaesyncCheck();			
             ]]>

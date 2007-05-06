@@ -19,6 +19,8 @@
 </class>
 
 <class name="drawviewnew" extends="drawview" x="-1" y="-1" >
+	
+	<attribute name="typeOfObject" value="paint" type="string" />
 
     <attribute name="initwidth" value="0" type="number" />
     <attribute name="initheight" value="0" type="number" />
@@ -243,11 +245,11 @@
 		<![CDATA[
 		Debug.write("UpdateByObject : ",objRef,objRef.name);
 		var objName = objRef.name;
-		for (var eg=0;eg<this.layers.length;eg++){
-			if (this.layers[eg]['name']==objName) {
-				Debug.write("Found Object in Layer: ",this.layers[eg]);
-			}
-		}
+		//for (var eg=0;eg<this.layers.length;eg++){
+		//	if (this.layers[eg]['name']==objName) {
+		//		Debug.write("Found Object in Layer: ",this.layers[eg]);
+		//	}
+		//}
 		for (var eg=0;eg<this.baseactionobjectList.length;eg++){
 			if (this.baseactionobjectList[eg][this.baseactionobjectList[eg].length-1]==objName) {
 				Debug.write("Found Object: ",this.baseactionobjectList[eg]);
@@ -258,6 +260,7 @@
 				var newA = this.baseactionobjectList[eg];
 				if (newA[0]=='paint') newA[1] = new Array();				
 				this.onsharedMessage('size',newA);	
+			    break;
 			}
 		}	
 			
@@ -357,6 +360,7 @@
 	</method>
              
 	<method event="onmousedown" >
+		Debug.write("onmousedown this.drawmodus: ",this.drawmodus);
 		if(this.drawmodus=="hand"){
 			this.doSetHandBodus();
 		} else if(this.drawmodus=="paint"){
@@ -499,12 +503,12 @@
 		//Debug.write("doSetHandBodus: ");
 		var objList = this.getObjectInBounds(this.getMouse('x'),this.getMouse('y'));
 		if(objList.length==1){
-			this.parent._drawareaobjectcombobox.preselectedName=objList[0][objList[0].length-1];
+			//this.parent._drawareaobjectcombobox.preselectedName=objList[0][objList[0].length-1];
 			this.setAttribute('drawmodus','pointer');
 			//Debug.write(objList[0][objList[0].length-1]);
 			this.doShowObjectBounds(objList[0][objList[0].length-1]);
 		} else if (objList.length>1){
-			this.parent._drawareaobjectcombobox.preselectedName=objList[objList.length-1][objList[objList.length-1].length-1];
+			//this.parent._drawareaobjectcombobox.preselectedName=objList[objList.length-1][objList[objList.length-1].length-1];
 			this.setAttribute('drawmodus','pointer');
 			//Debug.write(objList[objList.length-1][objList[objList.length-1].length-1]);
 			this.doShowObjectBounds(objList[objList.length-1][objList[objList.length-1].length-1]);
@@ -527,6 +531,10 @@
     	}
     ]]>
     </method>   
+	
+	<method name="updateObjectBounds">
+		if (this.boundingref!=null) this.boundingref.resetValues();
+	</method>
     
 	<method name="getObjectInBounds" args="x,y">
 		<![CDATA[
@@ -649,6 +657,8 @@
 		} else if (action=="loadwml"){
 			Debug.write(actionObject,actionObject["wmlfileName"],actionObject["wmlroom"],actionObject["wmldomain"]);
 			this.remoteWmlLoader(actionObject["wmlfileName"],actionObject["wmlroom"],actionObject["wmldomain"]);
+		} else if (action=="editText"){
+			this.editTextByHistory(actionObject,this);
 		}
 		]]>
 	</method>
@@ -1259,7 +1269,7 @@
 
 		this.currentlayer = new drawviewnew(parentView,{name:lastActionObject[lastActionObject.length-1],x:lastActionObject[lastActionObject.length-5],y:lastActionObject[lastActionObject.length-4],width:lastActionObject[lastActionObject.length-3],height:lastActionObject[lastActionObject.length-2]});
    		
-   		this.drawrectangleHistory(this.currentlayer,0,0,lastActionObject[5],lastActionObject[6],lastActionObject[1],lastActionObject[2]);
+   		this.drawrectangleHistory(this.currentlayer,0,0,lastActionObject[lastActionObject.length-3],lastActionObject[lastActionObject.length-2],lastActionObject[1],lastActionObject[2]);
 
   	</method>
     
@@ -1339,7 +1349,7 @@
 
 		this.currentlayer = new drawviewnew(parentView,{name:lastActionObject[lastActionObject.length-1],x:lastActionObject[lastActionObject.length-5],y:lastActionObject[lastActionObject.length-4],width:lastActionObject[lastActionObject.length-3],height:lastActionObject[lastActionObject.length-2]});
    		Debug.write("lastActionObject[1],lastActionObject[2]: ",lastActionObject[1],lastActionObject[2]);
-   		this.drawellipseHistory(this.currentlayer,0,0,lastActionObject[5],lastActionObject[6],lastActionObject[1],lastActionObject[2]);
+   		this.drawellipseHistory(this.currentlayer,0,0,lastActionObject[lastActionObject.length-3],lastActionObject[lastActionObject.length-2],lastActionObject[1],lastActionObject[2]);
 
   	</method>
     

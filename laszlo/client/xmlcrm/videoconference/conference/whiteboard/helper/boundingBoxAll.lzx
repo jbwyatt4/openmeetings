@@ -9,7 +9,7 @@
 	</method>
  -->	
 	<method name="removeIt">
-		Debug.write("removeIt +**********",this.rs,this.dragger);
+		Debug.write("removeIt +**********",this.isinited);
 		this.whiteboardRef.setAttribute('boundingIsActive',false);
 		if (this.rs) this.rs.remove();
 		if (this.dragger) this.dragger.remove();
@@ -20,6 +20,11 @@
 	<attribute name="ey" value="0" type="number" />
 	<attribute name="ewidth" value="0" type="number" />
 	<attribute name="eheight" value="0" type="number" />
+	
+	<attribute name="startdragX" value="0" type="number" />
+	<attribute name="startdragY" value="0" type="number" />
+	<attribute name="startdragWidth" value="0" type="number" />
+	<attribute name="startdragHeight" value="0" type="number" />
 	
 	<attribute name="objRef" value="null" />
 	<attribute name="whiteboardRef" value="null" />
@@ -34,19 +39,28 @@
 	        newMenu.addItem(item1);
 	        this.setContextMenu(newMenu);		
 		</handler>	
+		<handler name="ondblclick">
+			Debug.write("ondblclick: ",this.parent.objRef.typeOfObject);
+			if (this.parent.objRef.typeOfObject=="text"){
+				var x = this.parent.objRef.getAttributeRelative('x',canvas);
+				var y = this.parent.objRef.getAttributeRelative('y',canvas);
+				Debug.write("x,y ",x,y);
+				this.parent.whiteboardRef.editTextByValues(this.parent.objRef,this.parent.objRef.name,this.parent.objRef.text,x,y,this.parent.objRef.width,this.parent.objRef.height);
+			}
+		</handler>		
 		<tooltip text="Drag this Object" />
 	</view>
 		
 	<view resource="_boundingBoxPointerTL" x="0" y="0" />
 	<view resource="_boundingBoxPointerTR" x="${ parent.width-this.width }" y="0" />
 	<view resource="_boundingBoxPointerUR" x="${ parent.width-this.width }" y="${ parent.height-this.height }" 
-		onmousedown="parent.rs.apply()" onmouseup="parent._removeResizestateFromThis()" >
+		onmousedown="parent._applyResizestateFromThis()" onmouseup="parent._removeResizestateFromThis()" >
 		<tooltip text="Resize this Object" />
 	</view>
 	<view resource="_boundingBoxPointerUL" x="0" y="${ parent.height-this.height }" />
 	
 	<view resource="_boundingBoxPointer" x="${ parent.width/2-this.width/2 }" y="${ parent.height/2-this.height/2 }"
-		onmousedown="parent.dragger.apply()" onmouseup="parent._removeDragstateFromThis()">		
+		onmousedown="parent._applyDragstateFromThis()" onmouseup="parent._removeDragstateFromThis()">		
         <handler name="oninit">
             var newMenu = new LzContextMenu();
             newMenu.hideBuiltInItems();
@@ -65,9 +79,23 @@
 		this.setAttribute('x',this.ex);
 		this.setAttribute('y',this.ey);
 		this.setAttribute('width',this.ewidth);
-		this.setAttribute('height',this.eheight);					
+		this.setAttribute('height',this.eheight);	
+		this.setStartValues();				
 		this.doUpdateAction();
 	</handler>
+	
+	<method name="resetValues">
+		this.ex = this.objRef.x;
+		this.ey = this.objRef.y;
+		this.ewidth = this.objRef.width;
+		this.eheight = this.objRef.height;			
+			this.setAttribute('x',this.objRef.x);
+		this.setAttribute('y',this.objRef.y);
+		this.setAttribute('width',this.objRef.width);
+		this.setAttribute('height',this.objRef.height);	
+		this.setStartValues();	
+	</method>
+
 	<!-- 
     <animatorgroup start="false" process="simultaneous" duration="100" onstop="parent.doUpdateAction()">
       <animator attribute="x" to="${ parent.parent.ex }" />
@@ -104,18 +132,51 @@
     		this.objRef.setAttribute('y',this.getAttributeRelative('y',objRef));
     	}
     </handler>
+	
+	<method name="setStartValues">
+		this.startdragX = this.x;
+		this.startdragY = this.y;
+		this.startdragWidth = this.width;
+		this.startdragHeight = this.height;			
+	</method>
+
+    <method name="_applyResizestateFromThis">
+		this.setStartValues();		
+		this.rs.apply()
+	</method>
     
     <method name="_removeResizestateFromThis">
+		<![CDATA[
     	this.rs.remove();
-    	this.objRef.parent.UpdateByObject(this.objRef);
-    	//this.whiteboardRef.parent._drawareaalterposition.updateVal(this.objRef.name);
+		
+		if (this.startdragX != this.x || this.startdragY != this.y || this.startdragWidth != this.width || this.startdragHeight != this.height){
+			Debug.write("value changed 1");
+			this.objRef.parent.UpdateByObject(this.objRef);
+			//this.whiteboardRef.parent._drawareaalterposition.updateVal(this.objRef.name);
+			this.setStartValues();
+		}
+			
+		]]>
     </method>
+	
+	<method name="_applyDragstateFromThis">
+		this.setStartValues();
+		this.dragger.apply()
+	</method>	
     
     <method name="_removeDragstateFromThis">
-    	Debug.write("onmouseup invoke");
+		<![CDATA[
+    	//Debug.write("onmouseup invoke");
     	this.dragger.remove();
-    	this.objRef.parent.UpdateByObject(this.objRef);
-    	//this.whiteboardRef.parent._drawareaalterposition.updateVal(this.objRef.name);
+		
+    	if (this.startdragX != this.x || this.startdragY != this.y || this.startdragWidth != this.width || this.startdragHeight != this.height){
+			Debug.write("value changed 2");
+			this.objRef.parent.UpdateByObject(this.objRef);
+			//this.whiteboardRef.parent._drawareaalterposition.updateVal(this.objRef.name);
+			this.setStartValues();
+		}
+		
+		]]>			
     </method>
 	
 	<basechooseseicon resourceN="deleteIcon" x="${ parent.width-this.width }" y="0" labelid="80" width="22" height="22">

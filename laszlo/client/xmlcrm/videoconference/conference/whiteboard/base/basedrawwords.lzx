@@ -4,6 +4,8 @@
 <class name="styleableinput" extends="inputtext" x="1" y="1" bgcolor="white" multiline="true"
 		width="${ parent.width-2 }" height="${ parent.height-2 }" >
 
+	<attribute name="startAdjustHight" value="false" type="boolean" />
+	
 	<handler name="oninit">
 		LzFocus.setFocus(this);	
 	</handler>
@@ -22,26 +24,37 @@
        ]]>
     </handler>	
 	<handler name="onheight">
-		this.parent.parent.adjustHeight();
+		if (this.startAdjustHight) this.parent.parent.adjustHeight();
 	</handler>
 </class>
 
 <class name="basedrawwords" extends="view" bgcolor="black" 
-	width="120" height="100">
+	width="120" height="40">
 	
 	<attribute name="refObj" value="null" />
+	
+	<attribute name="inittext" value="" type="string" />
+	<attribute name="initTextName" value="" type="string" />
 
 	<method name="drawtoArray">
+		<![CDATA[
 		Debug.write("drawtoArray");
-		if (this._textview._textview.getText().length!=0){
+		if (this._textview._textview.getText().length!=0 && this.inittext.length==0){
 		    var y = this.getAttributeRelative('y',this.refObj)-this.refObj.y+1;
 			Debug.write("this.x-this.refObj.x-this.refObj.parent.x ",y);
 			var x = this.getAttributeRelative('x',this.refObj)-this.refObj.x+1;
-        	this.refObj.drawTextField(this._textview._textview.getText(),this._textview._textview.width,x,y);
+        	this.refObj.drawTextField(this._textview._textview.getText(),this._textview._textview.width,this._textview._textview.height,x,y);
+        } else if (this._textview._textview.getText().length!=0 && this.inittext.length!=0){
+        	Debug.write("edit modi ",this.initTextName);
+		    var y = this.getAttributeRelative('y',this.refObj)-this.refObj.y+1;
+			Debug.write("this.x-this.refObj.x-this.refObj.parent.x ",y);
+			var x = this.getAttributeRelative('x',this.refObj)-this.refObj.x+1;
+        	this.refObj.setTextFieldByName(this.initTextName,this._textview._textview.getText(),this._textview._textview.width,x,y,this._textview._textview.height);
         } else {
-        	Debug.write("text smaller then 0",this._textview._textview.getText());
-        }
+			Debug.write("text smaller then 0",this._textview._textview.getText());
+		}
         this.giveup();
+		]]>
     </method>
     
 	<method name="giveup">
@@ -50,10 +63,17 @@
 	</method>
 	    
 	<handler name="oninit">
-		//Why does the attribute height be ignored in the init arguments????
+		//startAdjustHight is set to true later, cause otherwise update 
+		//Events would set the height to 
+		//text field default height
 		this.refObj.letterObjectClose(this);
-        new styleableinput(this._textview,{name:'_textview',text:'',fontstyle:this.refObj.currentlayerstyle,fontsize:this.refObj.currentlayersize,fgcolor:this.refObj.currentlayerletter});
-        this.setAttribute('height',40);
+        var t = new styleableinput(this._textview,{name:'_textview',text:this.inittext,fontstyle:this.refObj.currentlayerstyle,fontsize:this.refObj.currentlayersize,fgcolor:this.refObj.currentlayerletter});
+        //if ( this.inittext.length==0 ) this.setAttribute('height',40);
+		if ( this.inittext.length!=0 ) {
+		    this.refObj.edittextLetterObject.setAttribute('visible',false);
+		    this.refObj.setModus('letter');
+	    }
+		t.startAdjustHight = true;
 	</handler>
     
     <handler name="newStyleEvent">
@@ -61,12 +81,14 @@
     </handler>
   
 	<method name="callNew" args="txxt">
-        var h = this._textview.getHeight();
+		Debug.write("callNew height-2");
+        var h = this.getHeight();
 		this._textview._textview.destroy();
 		var t = new styleableinput(this._textview,{name:'_textview',text:txxt,fontstyle:this.refObj.currentlayerstyle,fontsize:this.refObj.currentlayersize,fgcolor:this.refObj.currentlayerletter});
         this.setHeight(h);
 	</method>
 	<method name="adjustHeight">
+		//Debug.write("+++ adjustHeight +++");
 		this.setAttribute('height',this._textview._textview.height+2);
 	</method>
     
