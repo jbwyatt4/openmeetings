@@ -216,7 +216,7 @@
 	  		var tempSendArray = new Array ();
 	  		tempSendArray[0] = 'whiteboard';
 	  		tempSendArray[1] = new Date();
-			Debug.write("Setting Message");
+			Debug.write("Setting Message: ",action);
 			tempSendArray[2] = action;
 			tempSendArray[3] = obj;
 	 			

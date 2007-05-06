@@ -336,6 +336,8 @@
 	<!-- the sync process is complete, 
 		remove all loading windows from connected clients -->
 	<method name="wmlsyncComplete">
+		//set modus to hand so users can directly interact with object's
+		this.setModus('hand');	
 		this.wmlLoadingCompleteMessage = new Array();
 		this.wmlLoadingCompleteMessage[0] = "whiteboard";
 		this.wmlLoadingCompleteMessage[1] = "wmlsynccomplete";
