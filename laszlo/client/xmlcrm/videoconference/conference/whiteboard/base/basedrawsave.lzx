@@ -24,6 +24,9 @@
 	<attribute name="wmlspreadNews" value="false" type="boolean" />
 	<attribute name="wmlLoadingCompleteMessage" value="null" />
 	<attribute name="synccheckTime" value="1000" type="number" />
+	
+	<!-- loading all stage objects on init -->
+	<attribute name="isInitLoader" value="false" type="boolean" />
     
 	<!-- Vars for storing screenshot
 		removed cause of performance and 
@@ -166,7 +169,7 @@
 		invoked wether directly (spreadNews=true) from the library
 		or by remoteClient (Moderator spreadNews=false)-->
 	
-    <method name="loadwmlObjectToStage" args="loadObject,fileName,room,domain,spreadNews">
+    <method name="loadwmlObjectToStage" args="loadObject,fileName,room,domain,spreadNews,isInitLoader">
 		<![CDATA[
 		if (loadObject!=null && loadObject.length>0){
 			
@@ -174,6 +177,7 @@
 			this.wmlroom = room;
 			this.wmldomain = domain;
 			this.wmlspreadNews = spreadNews;
+			this.isInitLoader = isInitLoader;
 			
 			this.loadfileData = loadObject;
 			this.loadfileDataIndex = -1;
@@ -188,6 +192,8 @@
 				this.loadObjectTimer = new LzDelegate( this, "loadNextObjectFromList" );
 				LzTimer.addTimer( this.loadObjectTimer, 50 );
 			}
+		} else if (isInitLoader){
+			new editrecordstream(canvas.main_content._content.inner,{y:-320});	
 		}
 		]]>	
 	</method>
@@ -199,7 +205,7 @@
         <handler name="ondata" args="value">
         	<![CDATA[
 				//The onResult-Handler will be called by the rtmpconnection
-				//Debug.write("getClientListScope Instance: ",value);
+				Debug.write("getClientListScope wml and sync Instance: ",value);
 				parent._loadingUsers = new Array();
 				for (var eg in value){
 					if (canvas.streamid != value[eg].streamid){
@@ -207,11 +213,15 @@
 						parent._loadingUsers.push(value[eg]);
 					}
 				}
-				parent.notifyClient();
+				if (!parent.isInitLoader) {
+				    parent.notifyClient();			
+				} else {
+				    parent.notifyClientInitSyncing();
+				}
 				//it is necessary to use LzTimer cause i want to make status updates
 				//after each loaded object
 				this.parent.loadObjectTimer = new LzDelegate( this.parent, "loadNextObjectFromList" );
-				LzTimer.addTimer( this.parent.loadObjectTimer, 50 );
+				LzTimer.addTimer( this.parent.loadObjectTimer, 50 );	
             ]]>
         </handler>   
     </netremotecallhib>
@@ -236,6 +246,14 @@
         hib.sendVars.doCall();
 	</method>
 	
+	<method name="notifyClientInitSyncing">
+		this.wmlLoadingCompleteMessage = new Array();
+		this.wmlLoadingCompleteMessage[0] = "whiteboard";
+		this.wmlLoadingCompleteMessage[1] = "syncinitLoader";
+		this.wmlLoadingCompleteMessage[2] = this.wmlfileName;
+		this.sendMessageWithClient.doCall();
+	</method>
+	
 	<!-- invoked the loading of a wml-file by the moderator -->
 	<method name="remoteWmlLoader" args="fileName,room,domain">
 		this.loadWmlObject.String3 = room;
@@ -257,6 +275,16 @@
 				]]>       	     				
 	        </handler>	
 	  	</netremotecallhib> 
+	
+	<!-- this event gets triggered when a new user arrives and
+		start loading the init-objects
+		-->
+	<method name="remoteSyncLoader">
+		this.loadfileDataWinRef = new loadwhiteboardwindow(canvas.main_content._content.inner,{refObj:this});
+		this._loadmessageTxt = canvas.getLabelName(this.syncmessageId);
+	    this.loadfileDataWinRef.setMessage(this._loadmessageTxt);
+	</method>
+			
 	
 	<!-- gets triggered once one object of the wml-file has been added completely to the
 		whiteborad -->
@@ -322,7 +350,7 @@
 		have loaded the file completely, check it every 1 seconds -->
 	<method name="startWmlsyncCheck">
 		<![CDATA[
-			if (this._loadingUsers.length==0){
+			if (this._loadingUsers.length==0 || this.isInitLoader){
 				this.wmlsyncComplete();
 			} else {
 				var txt = this._loadmessageTxt+' '+this._loadingUsers.length;
@@ -373,6 +401,10 @@
 	<method name="sendCompleteWmlSync" args="client">
 		//Debug.write("sendCompleteWmlSync: ",client);
 		this.loadfileDataWinRef.close();
+		Debug.write("this.loadfileDataWinRef closed: ",this.loadfileDataWinRef);
+		if (this.isInitLoader){
+			new editrecordstream(canvas.main_content._content.inner,{y:-320});	
+		}
 	</method>
 </class>
 

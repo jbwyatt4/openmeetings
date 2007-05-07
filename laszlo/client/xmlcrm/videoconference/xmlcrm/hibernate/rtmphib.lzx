@@ -155,17 +155,30 @@
         </netremotecallhib>        
         <netremotecallhib name="getCurrentModerator" funcname="getCurrentModerator">
             <handler name="ondata" args="value">
+				<![CDATA[
                 //The onResult-Handler will be called be the rtmpconnection
-                Debug.write("getCurrentModerator: ",value,value.username);
-                canvas.setAttribute('moderatorationObject',value);
-                canvas.setAttribute('moderatorStreamID',value.streamid);
-                canvas.setAttribute('moderatorName',value.firstname+' '+value.lastname);
+                //Debug.write("getCurrentModerator: ",value,value.username,value.streamid);
+				if (value!=null){
+					canvas.setAttribute('moderatorationObject',value);
+					canvas.setAttribute('moderatorStreamID',value.streamid);
+					canvas.setAttribute('moderatorName',value.firstname+' '+value.lastname);
+				} else {
+					
+				}
+				//Debug.write("throw event to drawarea: ",canvas.moderatorStreamID);
+				if (canvas.ismoderator || value==null){
+					new editrecordstream(canvas.main_content._content.inner,{y:-320});
+				} else {
+					_drawarea.onopenWhiteBoard.sendEvent();
+					
+				}
+				]]>
             </handler>  
         </netremotecallhib>        
         <netremotecallhib name="newStream" funcname="newStream">
             <handler name="ondata" args="value">
                 //The onResult-Handler will be called be the rtmpconnection
-                Debug.write("newStream: ",value);
+                //Debug.write("newStream: ",value);
                 canvas._videocontainer.startStream(value.streamid,value.userpos); 
             </handler>   
         </netremotecallhib>    
@@ -182,7 +195,7 @@
         <netremotecallhib name="clientregisterRoom" funcname="clientregisterRoom">
             <handler name="ondata" args="value">
                 //The onResult-Handler will be called be the rtmpconnection
-                Debug.write("clientregisterRoom: ",value);
+                //Debug.write("clientregisterRoom: ",value);
                 //parent.getClientListScope.doCall();  
             </handler>   
         </netremotecallhib>                 
@@ -214,7 +227,7 @@
             <handler name="ondata" args="value">
                 <![CDATA[
                 //The onResult-Handler will be called be the rtmpconnection
-                Debug.write("getValue : ",value);
+                //Debug.write("getValue : ",value);
                 
                 ]]>
             </handler>   
@@ -245,6 +258,7 @@
                 canvas.setAttribute('moderatorationObject',value);
                 canvas.setAttribute('moderatorStreamID',value.streamid);
                 canvas.setAttribute('moderatorName',value.firstname+' '+value.lastname);
+				
             </handler>   
         </netremotecallhib>       
         <netremotecallhib name="sendMessage" funcname="sendMessage">
@@ -302,6 +316,18 @@
 						_drawarea.sendCompleteImageLoadedRClient(value.client);
 					} else if (value.message[1]=='imagesynccomplete'){
 						_drawarea.sendCompleteImageSync(value.client);
+					} else if (value.message[1]=='inituser'){
+						//_drawarea.sendCompleteImageSync(value.client);
+					    Debug.write("inituser sendVarsToMessageWithClient: ",value.message[2]);
+					    if (!canvas.ismoderator) _drawarea.loadwmlObjectToStage(value.message[2],"","","",true,true);
+					} else if (value.message[1]=='initgetVars'){
+						//_drawarea.sendCompleteImageSync(value.client);
+					    Debug.write("initgetVars sendVarsToMessageWithClient: ",value.message[2]);
+					    _drawarea.sendWatchObject(value.message[1],value.message[2],false);
+					} else if (value.message[1]=='syncinitLoader'){
+						//_drawarea.sendCompleteImageSync(value.client);
+					    Debug.write("syncinitLoader sendVarsToMessageWithClient: ",value.message[2]);
+						if (value.client.streamid!=canvas.streamid) _drawarea.remoteSyncLoader();
 					}
                 }
                 ]]>

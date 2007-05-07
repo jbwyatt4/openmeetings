@@ -1,14 +1,17 @@
-#Sun May 06 17:31:20 CEST 2007
+#Mon May 07 18:17:00 CEST 2007
 eclipse.preferences.version=1
 encoding//xmlcrm/newstreaming/camera.lzx=UTF-8
 encoding//xmlcrm/newstreaming/mediadevice.lzx=UTF-8
 encoding//xmlcrm/newstreaming/mediastream.lzx=UTF-8
+encoding//xmlcrm/newstreaming/microphone.lzx=UTF-8
 encoding//xmlcrm/newstreaming/videoview.lzx=UTF-8
 encoding//xmlcrm/streaming/rtmpconnection.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/global/functions.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/library.lzx=UTF-8
+encoding//xmlcrm/videoconference/conference/moderation/applyformoderation.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/moderation/library.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/moderation/moderationpanel.lzx=UTF-8
+encoding//xmlcrm/videoconference/conference/moderation/responseformoderation.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/popups/confirmation.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/popups/confirmationsingle.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/popups/editwhiteboarddefault.lzx=UTF-8
@@ -52,8 +55,10 @@ encoding//xmlcrm/videoconference/oslmon/components/button/simplelabelbutton.lzx=
 encoding//xmlcrm/videoconference/oslmon/components/clickbox/clickbox.lzx=UTF-8
 encoding//xmlcrm/videoconference/oslmon/components/explorer/explorerbox.lzx=UTF-8
 encoding//xmlcrm/videoconference/oslmon/components/library.lzx=UTF-8
+encoding//xmlcrm/videoconference/oslmon/components/list/monitorlist.lzx=UTF-8
 encoding//xmlcrm/videoconference/oslmon/components/simplevaluelist/library.lzx=UTF-8
 encoding//xmlcrm/videoconference/oslmon/components/simplevaluelist/simplevaluelist.lzx=UTF-8
+encoding//xmlcrm/videoconference/oslmon/components/tablelistItem.lzx=UTF-8
 encoding//xmlcrm/videoconference/oslmon/components/text/labeltext.lzx=UTF-8
 encoding//xmlcrm/videoconference/oslmon/components/turnoverlist/turnoverlist.lzx=UTF-8
 encoding//xmlcrm/videoconference/oslmon/components/updatecheckbox.lzx=UTF-8

@@ -97,7 +97,7 @@
         //this.myvideocontainer.microphoneRef._mic.setRate(4);
 	    //this.myvideocontainer.cameraRef._cam.setQuality(16384/4);
 	    //this.myvideocontainer.microphoneRef._dev.setUseEchoSuppression(true);
-
+        
         this.close();
     </method>    
 

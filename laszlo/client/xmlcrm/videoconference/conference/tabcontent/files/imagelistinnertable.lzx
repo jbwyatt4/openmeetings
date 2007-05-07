@@ -107,7 +107,7 @@
 	        <handler name="ondata" args="value">	
 				<![CDATA[
 					Debug.write("  loadWmlObject ",value); 
-					_drawarea.loadwmlObjectToStage(value,this.String1,hib.connectedroom,hib.conferencedomain,true);
+					_drawarea.loadwmlObjectToStage(value,this.String1,hib.connectedroom,hib.conferencedomain,true,false);
 				]]>       	     				
 	        </handler>	
 	  	</netremotecallhib> 

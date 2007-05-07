@@ -14,7 +14,7 @@
 			new monitorsublistItem(this._listItemViewBorder._listItemView,{textitem:txt,itemid:id,lableid:labelid});
 		</method>
 		<method name="selectItem" args="id">
-			for (eg in this._listItemViewBorder._listItemView.subviews){
+			for (var eg in this._listItemViewBorder._listItemView.subviews){
 				if (this._listItemViewBorder._listItemView.subviews[eg].itemid==String(id)){
 					this._listItemViewBorder._listItemView.subviews[eg]._sublistItem.onclick.sendEvent();
 					break;
@@ -23,7 +23,7 @@
 		</method>    
     <view name="_listItemViewBorder" x="2" y="2" width="397" height="73" bgcolor="0xFFFFFF" clip="true">
         <method name="clearselection">
-            for (eg in this._listItemView.subviews){
+            for (var eg in this._listItemView.subviews){
                 this._listItemView.subviews[eg]._sublistItem._selected=false;
                 this._listItemView.subviews[eg]._sublistItem.setBGColor(0xFFFFFF);
             }
