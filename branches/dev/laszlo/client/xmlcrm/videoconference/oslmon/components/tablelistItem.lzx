@@ -16,7 +16,7 @@
     <method name="sendchange" args="obj,oldv,newv">
         //Debug.write("check Update");
         var t = false;
-        for (eg in this.changeholder){
+        for (var eg in this.changeholder){
             if (this.changeholder[eg][0]==obj){
                 t = true;
                 this.changeholder[eg][1]=oldv;
@@ -27,7 +27,7 @@
         if (!t) this.changeholder.push(new Array(obj,oldv,newv));
         
         t = false;
-        for (eg in this.changeholder){
+        for (var eg in this.changeholder){
             if (this.changeholder[eg][1]!=this.changeholder[eg][2]){
                 t = true;
                 break;

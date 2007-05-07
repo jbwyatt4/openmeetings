@@ -86,11 +86,15 @@
                 Debug.write("canvas.firstName: ",canvas.firstName);
                 Debug.write("canvas.lastName: ",canvas.lastName);
                 canvas.thishib.getCurrentModerator.doCall(); 
-                new editrecordstream(canvas.main_content._content.inner,{y:-320});	
-                refObj=null;
+				refObj=null;
+				
                 ]]>
             </handler>   
         </netremotecallhib> 
+	
+	<!--
+		new editrecordstream(canvas.main_content._content.inner,{y:-320});	
+	 -->
 
 	<method name="addItem" args="connectedSince,isMod,streamid,username,userroom,formatedDate,position,color,object">
 		<![CDATA[

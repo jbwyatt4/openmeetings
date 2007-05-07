@@ -77,6 +77,9 @@
     
     <handler name="onsharedMessage" args="obj" />
 	
+	<attribute name="sendObject" value="null" />
+	<attribute name="sendObjectToClientID" value="0" type="number"  />
+	
 	<method name="sendConfirmation" args="yesno,askagain" >
 		
 		Debug.write("clear yesno,askagain: ",yesno,askagain);
@@ -223,7 +226,39 @@
 	  		parent.onsharedMessage.sendEvent(tempSendArray);
 	  		
 		</method>
+		<handler name="onopenWhiteBoard" >
+			var obj = new Array();
+			obj[0] = 'whiteboard';
+			obj[1] = 'initgetVars';
+			obj[2] = canvas.streamid;
+			
+			Debug.write("Setting Message onopenWhiteBoard: ",canvas.moderatorStreamID,obj);
+			
+			this.parent.sendObjectToClientID = canvas.moderatorStreamID;
+			this.parent.sendObject = obj;
+	 			
+	  		this.parent.sendMessageWithClientById.doCall();
+		</handler>
+		<!-- clientid  = streamid of the user -->
+		<method name="oninitUser" args="clientid,objectList">
+			this.parent.sendObjectToClientID = clientid;
+			this.parent.sendObject = objectList;
+			this.parent.sendMessageWithClientById.doCall();
+		</method>
 	</basedrawsave>
+	
+        <netremotecallhib name="sendMessageWithClientById" funcname="sendMessageWithClientById"
+			remotecontext="$once{ canvas.thishib }" >
+            <netparam name="vars1"><method name="getValue">return parent.parent.sendObject;</method></netparam>
+            <netparam name="vars2"><method name="getValue">return parent.parent.sendObjectToClientID;</method></netparam>
+            <handler name="ondata" args="value">
+                <![CDATA[
+                //The onResult-Handler will be called be the rtmpconnection
+                Debug.write("sendMessageWithClientById : ",value);
+                
+                ]]>
+            </handler>   
+        </netremotecallhib>  	
 	
 	<!-- 
 		Container for the bounding Box (selection Box)

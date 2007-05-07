@@ -143,6 +143,11 @@
 	<!-- For sending messages in shared modus -->
 	<method name="onsharedMessage" args="action,obj" />
 	
+	<!-- this event must be triggered AFTER
+		the nesseccary room + domain for this conference is set
+		-->
+	<handler name="onopenWhiteBoard" />
+	
 	<!-- ############
 		init
 	 -->
@@ -562,35 +567,11 @@
 		object cause the file loading will make a seperate notification
 	 -->
 	<method name="sendWatchObject" args="action,actionObject,isWmlLoader">
-		//Debug.write("sendWatchObject: ",action,actionObject);
+		Debug.write("sendWatchObject: ",action,actionObject);
 		<![CDATA[
 		if (action=='draw' || action=='redo'){
-			var lastactionObject = new Array();
-			for (var eg in actionObject){
-				var t = actionObject[eg];
-				//Debug.write(t);
-				
-				if (typeof(t)=='object'){
-					var t1 = new Array();
-					for (var eg2 in t){
-						var v = t[eg2];
-						
-						if(typeof(v)=='object'){
-							var v1 = new Array();
-							for (var eg3 in v){
-								var z = v[eg3];
-								v1[eg3] = z;
-							}
-							v = v1;
-						}
-
-						t1[eg2] = v;
-					}
-					
-					t = t1;
-				} 
-				lastactionObject[eg] = t;
-			}
+			var lastactionObject = actionObject;
+			
 			//Redraw the View on the paintarea
 			if (actionObject[0]=='paint'){
 				this.paintactionHistory(lastactionObject,this);
@@ -628,27 +609,11 @@
 		} else if(action=='clear'){
 			this.clearAll();
 		} else if(action=='delete' || action=='undo'){
-			var lastactionObject = new  Array();
-			for (var eg in actionObject){
-				var t = actionObject[eg];
-				if (typeof(t)=='object'){
-					var t1 = new Array();
-					t = t1;
-				} 
-				lastactionObject[eg] = t;
-			}		
+			var lastactionObject = actionObject;	
 			var obj = this.getObjectByName(lastactionObject[lastactionObject.length-1]);
 			obj.destroy();
 		} else if(action=='size'){
-			var lastactionObject = new  Array();
-			for (var eg in actionObject){
-				var t = actionObject[eg];
-				if (typeof(t)=='object'){
-					var t1 = new Array();
-					t = t1;
-				} 
-				lastactionObject[eg] = t;
-			}		
+			var lastactionObject = actionObject;	
 			var obj = this.getObjectByName(lastactionObject[lastactionObject.length-1]);
 			obj.setAttribute('x',lastactionObject[lastactionObject.length-5]);
 			obj.setAttribute('y',lastactionObject[lastactionObject.length-4]);
@@ -659,6 +624,16 @@
 			this.remoteWmlLoader(actionObject["wmlfileName"],actionObject["wmlroom"],actionObject["wmldomain"]);
 		} else if (action=="editText"){
 			this.editTextByHistory(actionObject,this);
+		} else if (action=="initgetVars"){
+			Debug.write("initUser isMod ",canvas.ismoderator,actionObject);
+			if (canvas.ismoderator){
+				Debug.write("send all whiteboard objects to new user");
+				var obj = new Array();
+			    obj[0] = 'whiteboard';
+			    obj[1] = 'inituser';
+			    obj[2] = this.baseactionobjectList;
+				this.oninitUser(actionObject,obj);
+			}
 		}
 		]]>
 	</method>
