@@ -7,6 +7,10 @@ The goal of this page is to define a good look'n'feel for the openmeetings tool.
 If you have some comments, please to add at end of this page.
 
 = Main window =
+
+Added at 08.05.2007
+http://openmeetings.googlecode.com/svn/branches/dev/laszlo/client/xmlcrm/resources/conference.png
+
 Latest idea :
 http://www.openmeetings.net/images/mockups/mockup_mainwindow.jpg
 Some explanations of behavior of this interface :
