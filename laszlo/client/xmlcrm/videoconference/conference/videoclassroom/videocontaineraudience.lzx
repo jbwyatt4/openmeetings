@@ -17,6 +17,7 @@
 	<attribute name="currentuserObject" value="null" />
 	
 	<handler name="oninit">
+		canvas.thishib.modus = "audience";
 		canvas._videocontainer=this;
 		this.allUsers = new Array();
 		this.streams = new Array();
@@ -87,38 +88,26 @@
                 //Debug.write("canvas.firstName: ",canvas.firstName);
                 //Debug.write("canvas.lastName: ",canvas.lastName);
 					
-                parent.getCurrentModerator.doCall(); 
+                canvas.thishib.getCurrentModerator.doCall(); 
                 ]]>
             </handler>   
-        </netremotecallhib> 
-	
-        <netremotecallhib name="getCurrentModerator" funcname="getCurrentModerator" remotecontext="$once{ canvas.thishib }" >
-            <handler name="ondata" args="value">
-                //The onResult-Handler will be called be the rtmpconnection
-                Debug.write("getCurrentModerator: ",value,value.username);
-                canvas.setAttribute('moderatorationObject',value);
-                canvas.setAttribute('moderatorStreamID',value.streamid);
-                canvas.setAttribute('moderatorName',value.firstname+' '+value.lastname);
-				if (canvas.streamid==value.streamid)
-					new editrecordstream(canvas.main_content._content.inner,{y:-320});
-            </handler>  
         </netremotecallhib>  		  	
 	  	
 	<method name="addItem" args="connectedSince,isMod,streamid,username,userroom,formatedDate,position,color,object">
-		<![CDATA[
+		<![CDATA[	
 		Debug.write("initializeStreams addItem: ",connectedSince,isMod,streamid,username,userroom,formatedDate);
 		Debug.write("initializeStreams addItem: username ",username);
-		Debug.write("initializeStreams addItem: streamid ",streamid);
+		Debug.write("initializeStreams addItem: isMod ",object.isMod);
 		Debug.write("initializeStreams addItem: object ",object);
-		if (streamid!=canvas.streamid){
+		if (streamid!=canvas.streamid && object.isMod){
             var myvideocontainer = this.getNewVideoObjectByPos();
 			Debug.write("#####3###### : set play",myvideocontainer.v_output);
             Debug.write("myvideocontainer: ",myvideocontainer.v_output);
-	  		//myvideocontainer.v_output._stream=null;
-	  		//myvideocontainer.parent.parent.clientVars = object;
-	  		//myvideocontainer.parent.parent.setAttribute('chatpartnername',object.firstname+' '+object.lastname);
-	  		//myvideocontainer.parent.parent.setAttribute('uniqueid',streamid);
-	  		//myvideocontainer.parent.parent.setAttribute('isremote',true);
+	  		myvideocontainer.v_output._stream=null;
+	  		myvideocontainer.parent.parent.clientVars = object;
+	  		myvideocontainer.parent.parent.setAttribute('chatpartnername',object.firstname+' '+object.lastname);
+	  		myvideocontainer.parent.parent.setAttribute('uniqueid',streamid);
+	  		myvideocontainer.parent.parent.setAttribute('isremote',true);
 			Debug.write("#####1###### set : set stream",streamid);
 	  		myvideocontainer.v_output.setAttribute('url',streamid);
 			Debug.write("#####2###### : set play",myvideocontainer.v_output);

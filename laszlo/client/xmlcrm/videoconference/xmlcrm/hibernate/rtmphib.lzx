@@ -51,6 +51,10 @@
      <!-- This is the current domain the user has logged-in -->
      <attribute name="currentdomain" value="domain1" type="string" />
      <attribute name="currentdomainObj" value="domain1" type="string" />
+	
+	<!-- shows what kind of conference it is at the moment
+		wether its conference or audience -->
+	<attribute name="modus" value="" type="string" />
      
     <netremotecallhib name="getsessiondata" funcname="xmlcrm.getsessiondata" >      
         <handler name="ondata" args="value">
@@ -166,11 +170,21 @@
 					
 				}
 				//Debug.write("throw event to drawarea: ",canvas.moderatorStreamID);
-				if (canvas.ismoderator || value==null){
+				if (canvas.ismoderator){
 					new editrecordstream(canvas.main_content._content.inner,{y:-320});
+				} else if (value==null){
+					//no moderator availible
+					//check if this is conferncemodus
+					if (this.parent.modus == "confernce"){
+						new editrecordstream(canvas.main_content._content.inner,{y:-320});
+					} else {
+						// in audience modus you get no notification
+						// cause you are not able to register your stream
+						// as non moderator
+					
+					}					
 				} else {
 					_drawarea.onopenWhiteBoard.sendEvent();
-					
 				}
 				]]>
             </handler>  
