@@ -6,6 +6,14 @@ There are some mockups of screens into openmeetings tool.
 The goal of this page is to define a good look'n'feel for the openmeetings tool.
 If you have some comments, please to add at end of this page.
 
+= invitation system =
+http://openmeetings.googlecode.com/svn/branches/dev/laszlo/client/xmlcrm/videoconference/resources/ui_drafts/invite%20system/who.jpg
+http://openmeetings.googlecode.com/svn/branches/dev/laszlo/client/xmlcrm/videoconference/resources/ui_drafts/invite%20system/when.jpg
+http://openmeetings.googlecode.com/svn/branches/dev/laszlo/client/xmlcrm/videoconference/resources/ui_drafts/invite%20system/why.jpg
+http://openmeetings.googlecode.com/svn/branches/dev/laszlo/client/xmlcrm/videoconference/resources/ui_drafts/invite%20system/summary.jpg
+
+= First screen =
+http://openmeetings.googlecode.com/svn/branches/dev/laszlo/client/xmlcrm/videoconference/resources/ui_drafts/summary%20layout.jpg
 = Main window =
 
 Added at 08.05.2007 (seba.wagner)
@@ -29,3 +37,7 @@ When the user becomes moderator, his webcam is on the top of the window. This pe
 == Comments ==
 there is a discussion about that:
 http://groups.google.com/group/openmeetings-dev/browse_thread/thread/346f9af5a0921c7c
+
+
+
+
