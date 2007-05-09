@@ -197,6 +197,7 @@
 		} else if (isInitLoader){
 			//check if this is conference or audience modus
 			if (canvas.thishib.modus == "confernce"){
+				Debug.write("############## editrecordstream 1");
 				new editrecordstream(canvas.main_content._content.inner,{y:-320});	
 			} else if(canvas.thishib.modus == "audience"){
 				//check in audince modus if this user is the current moderator
@@ -417,6 +418,7 @@
 		if (this.isInitLoader){
 			//check if this is conference or audience modus
 			if (canvas.thishib.modus == "confernce"){
+				Debug.write("############## editrecordstream 2");
 				new editrecordstream(canvas.main_content._content.inner,{y:-320});	
 			} else if(canvas.thishib.modus == "audience"){
 				//check in audince modus if this user is the current moderator

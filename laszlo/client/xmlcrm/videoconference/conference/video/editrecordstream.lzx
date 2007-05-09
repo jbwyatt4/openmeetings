@@ -15,6 +15,10 @@
  
 <class name="editrecordstream"  extends="labelexplorerbox" labelid="51"
 	width="300" height="250" x="14" >
+	
+	<handler name="oninit">
+		Debug.write("############################### ");
+	</handler>
 
     <attribute name="myvideocontainer" value="null" />
     
@@ -92,7 +96,7 @@
 		this.myvideocontainer.v_output.setAttribute('url', canvas.streamid);
 		this.myvideocontainer.v_output.broadcast();
         
-        //this.myvideocontainer.parent.parent.setAttribute('chatpartnername',canvas.firstName+' '+canvas.lastName);
+        this.myvideocontainer.parent.parent.setAttribute('chatpartnername',canvas.firstName+' '+canvas.lastName);
         
         //this.myvideocontainer.microphoneRef._mic.setRate(4);
 	    //this.myvideocontainer.cameraRef._cam.setQuality(16384/4);

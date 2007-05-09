@@ -171,11 +171,13 @@
 				}
 				//Debug.write("throw event to drawarea: ",canvas.moderatorStreamID);
 				if (canvas.ismoderator){
+					Debug.write("############## editrecordstream 3");
 					new editrecordstream(canvas.main_content._content.inner,{y:-320});
 				} else if (value==null){
 					//no moderator availible
 					//check if this is conferncemodus
 					if (this.parent.modus == "confernce"){
+						Debug.write("############## editrecordstream 4");
 						new editrecordstream(canvas.main_content._content.inner,{y:-320});
 					} else {
 						// in audience modus you get no notification
@@ -260,19 +262,31 @@
             <handler name="ondata" args="value">
                 <![CDATA[
                 //The onResult-Handler will be called be the rtmpconnection
-                Debug.write(" onResult setModerator : ",value);
+                Debug.write(" onResult setModerator : ",value);					
                 ]]>
             </handler>   
         </netremotecallhib>    
         <netremotecallhib name="setNewModerator" funcname="setNewModerator">
             <netparam name="vars"><method name="getValue">return canvas.streamid;</method></netparam>
             <handler name="ondata" args="value">
+				<![CDATA[
                 //The onResult-Handler will be called be the rtmpconnection
-                Debug.write("setNewModerator : ",value);
+                Debug.write("setNewModerator : ",value,value.firstname+' '+value.lastname);
                 canvas.setAttribute('moderatorationObject',value);
                 canvas.setAttribute('moderatorStreamID',value.streamid);
                 canvas.setAttribute('moderatorName',value.firstname+' '+value.lastname);
-				
+				//in audience Modus this requires that the new user will be
+				//streamed
+				if (parent.modus == "audience"){
+					canvas._videocontainer.clearAllVideoRefernces();
+					if (canvas.ismoderator){
+						Debug.write("############## editrecordstream 5");
+						new editrecordstream(canvas.main_content._content.inner,{y:-320});
+					} else {
+						canvas._videocontainer.getClientListScope.doCall();
+					}
+				}
+				]]>
             </handler>   
         </netremotecallhib>       
         <netremotecallhib name="sendMessage" funcname="sendMessage">

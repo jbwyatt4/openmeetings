@@ -109,6 +109,7 @@
 	  		myvideocontainer.parent.parent.setAttribute('uniqueid',streamid);
 	  		myvideocontainer.parent.parent.setAttribute('isremote',true);
 			Debug.write("#####1###### set : set stream",streamid);
+			myvideocontainer.setAttribute('visible',true);
 	  		myvideocontainer.v_output.setAttribute('url',streamid);
 			Debug.write("#####2###### : set play",myvideocontainer.v_output);
 	  		myvideocontainer.v_output.play();
@@ -150,6 +151,7 @@
 			//VideoView with Partner has been found
             //remove Stream from view
             Debug.write("Found client to startStream");
+			this._video1._chatvideoinner._videoview.setAttribute('visible',true);
 	  		this.subviews[userpos]._chatvideoinner._videoview.v_output.setAttribute('url',searchid);
 	  		this.subviews[userpos]._chatvideoinner._videoview.v_output.play(-1,false);	
 			return this.subviews[userpos].getVideoReference();
@@ -194,12 +196,25 @@
 			//A free Slot has been found
 			//return the Reference to the VideoView it and mark it as used
 			this._video1._chatvideoinner.setResourceNumber(1);
-			this._video1._chatvideoinner._videoview.setAttribute('visible',true);
+			//this._video1._chatvideoinner._videoview.setAttribute('visible',true);
 			this._video1.setAttribute('isassigned',true);
 			return this._video1.getVideoReference();
 		}
 		return null;
 		]]>
+	</method>
+	
+	<!-- 
+		Remove the current VideoReference, cause the moderator has been changed
+	 -->
+	<method name="clearAllVideoRefernces">
+		Debug.write("clearAllVideoRefernces");
+	    this._video1._chatvideoinner._videoview.microphoneRef.setAttribute('capturing',false);
+        this._video1._chatvideoinner._videoview.cameraRef.setAttribute('show',false);		
+		this._video1._chatvideoinner._videoview.setAttribute('visible',false);
+		this._video1.setAttribute('isassigned',false);
+		this._video1._chatvideoinner.setResourceNumber(5);
+		this._video1.resetValues();
 	</method>
 	
 	<!-- 
@@ -233,6 +248,7 @@
             Debug.write("Found client to disconnect");
 			this._video1.setAttribute('isassigned',false);
 			this._video1._chatvideoinner.setResourceNumber(5);
+			this._video1._chatvideoinner._videoview.setAttribute('visible',false);
 			this._video1.resetValues();
 			return this._video1.getVideoReference();
 		}
