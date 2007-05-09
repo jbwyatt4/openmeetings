@@ -17,6 +17,7 @@
 	<attribute name="currentuserObject" value="null" />
 	
 	<handler name="oninit">
+		canvas.thishib.modus = "confernce";
 		canvas._videocontainer=this;
 		this.allUsers = new Array();
 		this.streams = new Array();
@@ -86,7 +87,8 @@
                 Debug.write("canvas.firstName: ",canvas.firstName);
                 Debug.write("canvas.lastName: ",canvas.lastName);
                 canvas.thishib.getCurrentModerator.doCall(); 
-				refObj=null;
+				//whats this for?
+				//refObj=null;
 				
                 ]]>
             </handler>   

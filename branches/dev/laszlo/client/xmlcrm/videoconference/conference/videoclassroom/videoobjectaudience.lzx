@@ -47,7 +47,7 @@
     
     <method name="setIdentifier" args="id">
     	//for development replace this by the real name later after authentification
-    	this.setAttribute('chatpartnername',('StreamID: '+id));
+    	//this.setAttribute('chatpartnername',('StreamID: '+id));
         this.uniqueid = id;
     </method>
     
@@ -66,7 +66,6 @@
   			fontsize="10" fontstyle="bold" />
 	</view>
 
-	
 	<view name="_chatvideoinner" x="1" y="20" width="126" resource="chatbgitemau" height="180" >
 		
 		<handler name="oninit">
@@ -74,7 +73,7 @@
 		</handler>
 		
 		<!-- This is the videoview  -->
-		<videoview name="_videoview" visible="false" x="5" width="240" height="180" y="2" >
+		<videoview name="_videoview" visible="false" x="5" width="240" height="180" y="0" >
 	        <mediastream name="v_output" debug="true" type="rtmp" >
 	            <handler name="onurl">
 	                Debug.write("stream onurl ",this);
@@ -121,7 +120,7 @@
 	</view>
 	
 	<view visible="false" name="infostuff" width="$once{ parent.width-2 }" 
-		height="$once{ parent.height-21 }" y="20" x="1" bgcolor="white">
+		height="$once{ parent.height-41 }" y="20" x="1" bgcolor="white">
 		<method name="initUserObject">
 			<![CDATA[
 			this.setAttribute('visible',true);
