@@ -93,10 +93,6 @@
                 ]]>
             </handler>   
         </netremotecallhib> 
-	
-	<!--
-		new editrecordstream(canvas.main_content._content.inner,{y:-320});	
-	 -->
 
 	<method name="addItem" args="connectedSince,isMod,streamid,username,userroom,formatedDate,position,color,object">
 		<![CDATA[

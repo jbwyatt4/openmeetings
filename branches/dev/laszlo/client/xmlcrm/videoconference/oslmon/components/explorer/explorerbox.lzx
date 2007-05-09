@@ -13,8 +13,8 @@
         <![CDATA[
         if (this.isinited){
             this.normalMC = this.getMCRef();
-            Debug.write("this.normalMC: ",this.normalMC);
-            Debug.write("this: ",this);
+            //Debug.write("this.normalMC: ",this.normalMC);
+            //Debug.write("this: ",this);
            	this.displacementMap = new flash.filters.DropShadowFilter();
             this.normalMC.filters = [this.displacementMap];
         }
