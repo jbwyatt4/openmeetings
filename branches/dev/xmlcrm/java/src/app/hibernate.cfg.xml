@@ -20,7 +20,7 @@
         <property name="generate_statistics">false</property>
         <property name="cache.use_structured_entries">false</property>
 			<property name="connection.username">postgres</property>
-			<property name="connection.password">*****</property>
+			<property name="connection.password">67810</property>
 			<property name="connection.driver_class">org.postgresql.Driver</property>
 			<property name="connection.url">jdbc:postgresql://localhost/xmlcrm</property>
 

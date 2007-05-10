@@ -29,6 +29,7 @@ import org.red5.server.api.stream.ISubscriberStream;
 import org.xmlcrm.app.conference.configutils.BandwidthConfigFactory;
 import org.xmlcrm.app.conference.configutils.CustomBandwidth;
 import org.xmlcrm.app.conference.configutils.UserConfigFactory;
+import org.xmlcrm.app.quartz.scheduler.QuartzSessionClear;
 //import org.red5.server.api.stream.support.SimpleBandwidthConfigure;
 
 
@@ -76,7 +77,10 @@ public class Application extends ApplicationAdapter implements
 	public boolean appStart(IScope scope) {
 		// init your handler here
 		initBandWidthConfigs();
-		System.out.println("appStart    ");
+		//System.out.println("################## appStart    ");
+		QuartzSessionClear bwHelp = new QuartzSessionClear();
+		String jobName = addScheduledJob(300000,bwHelp);
+		log.error("jobName: "+jobName);
 		return true;
 	}
 
@@ -758,7 +762,7 @@ public class Application extends ApplicationAdapter implements
 			
 			boolean ismod = currentClient.getIsMod();
 			
-			log.debug("*..*ismod: " + ismod);
+			log.error("*..*ismod: " + ismod);
 	
 			if (ismod) {
 				Iterator<IConnection> it = current.getScope().getConnections();
@@ -885,6 +889,8 @@ public class Application extends ApplicationAdapter implements
 			IConnection current = Red5.getConnectionLocal();
 			RoomClient currentClient = ClientList.get(current.getClient().getId());
 			
+			log.error("### sendMessageWithClientById ###"+clientId);
+			
 			HashMap<String,Object> hsm = new HashMap<String,Object>();
 			hsm.put("client", currentClient);
 			hsm.put("message", newMessage);
@@ -894,9 +900,11 @@ public class Application extends ApplicationAdapter implements
 			while (it.hasNext()) {
 				IConnection conn = it.next();
 				if (conn instanceof IServiceCapableConnection) {
+					log.error("### sendMessageWithClientById 1 ###"+clientId);
+					log.error("### sendMessageWithClientById 2 ###"+conn.getClient().getId());
 					if (conn.getClient().getId().equals(clientId)){
 						((IServiceCapableConnection) conn).invoke("sendVarsToMessageWithClient",new Object[] { hsm }, this);
-						log.debug("sendingsendVarsToMessageWithClient ByID to " + conn);
+						log.error("sendingsendVarsToMessageWithClient ByID to " + conn);
 					}
 				}
 			}
