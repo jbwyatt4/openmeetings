@@ -46,9 +46,7 @@
 <resource name="mainbackroundmenu_rsc" src="resources/mainbackroundmenu.png" />
 
 
-<!-- URL/IP to use for the Server 192.168.178.28 
-macbook 192.168.2.102 
-192.168.254.84 inno02.fh-pforzheim.de bxlug.homelinux.org 213.219.160.72-->
+<!-- URL/IP to use for the Server -->
 <attribute name="rmpthost" value="" type="string" />
 
 <!-- Username/Nickname -->
@@ -156,7 +154,7 @@ containing the VideoViews
 	cm1.hideBuiltInItems();
 	cm1.addItem(this.__LZdefaultMenuItem);
 	this.setContextMenu(cm1);
-    cproto.__LZdefaultMenuItem = new LzContextMenuItem("webbase-design.de",
+    cproto.__LZdefaultMenuItem = new LzContextMenuItem("openmeetings.net",
                                                        new LzDelegate(cproto, '__LZWebbaseMenuItemHandler'));
     
 	cproto.__LZDefaultCanvasMenu.hideBuiltInItems();
@@ -185,7 +183,7 @@ containing the VideoViews
  -->
 <view name="main_content" y="40" width="${canvas.width}" height="${canvas.height-40}" >
     <handler name="onwidth" args="w">
-		Debug.write("onwidht: ",w);
+		Debug.write("onwidth: ",w);
 	</handler>
     <view x="0" name="_content" layout="axis:y;spacing:2">
         <view name="inner" />

@@ -7,5 +7,7 @@
     <include href="admin/" />
 	<include href="orgadmin/" />
 	<include href="roomadmin/" />
+	<include href="invitation/" />
+	<include href="wizard/" />
 
 </library>
