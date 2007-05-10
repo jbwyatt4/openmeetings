@@ -127,5 +127,6 @@
 	<classpathentry kind="lib" path="lib/red5/activation-1.1.jar"/>
 	<classpathentry kind="lib" path="lib/mail.jar"/>
 	<classpathentry kind="lib" path="lib/velocity-1.6-dev.jar"/>
+	<classpathentry kind="lib" path="lib/quartz/quartz-all-1.6.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

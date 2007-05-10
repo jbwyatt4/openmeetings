@@ -3,6 +3,7 @@ package org.xmlcrm.app.data.basic;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Date;
+import java.util.Calendar;
 
 import org.xmlcrm.app.hibernate.beans.basic.Sessiondata;
 import org.xmlcrm.app.hibernate.utils.HibernateUtil;
@@ -172,6 +173,58 @@ public class Sessionmanagement {
 			log.error("[updatesession]: " ,ex);
 		} catch (Exception ex2) {
 			log.error("[updatesession]: " ,ex2);
+		}
+	}
+	
+	/**
+	 * 
+	 * @param date
+	 * @return
+	 */
+	private List getSessionToDelete(Date date){
+		try {
+			log.error("sessionToDelete: "+date);
+			Object idf = HibernateUtil.createSession();
+			Session session = HibernateUtil.getSession();
+			Transaction tx = session.beginTransaction();
+			Criteria crit = session.createCriteria(Sessiondata.class);
+			crit.add(Restrictions.lt("refresh_time", date));
+			List fullList = crit.list();
+			tx.commit();
+			HibernateUtil.closeSession(idf);
+			return fullList;
+		} catch (HibernateException ex) {
+			log.error("[getSessionToDelete]: " ,ex);
+		} catch (Exception ex2) {
+			log.error("[getSessionToDelete]: " ,ex2);
+		}
+		return null;
+	}
+	
+	/**
+	 * 
+	 *
+	 */
+	public void clearSessionTable(){
+		try {
+			Calendar rightNow = Calendar.getInstance();
+			rightNow.setTimeInMillis(rightNow.getTimeInMillis()-1800000);
+		    List l = this.getSessionToDelete(rightNow.getTime());
+		    log.error("clearSessionTable: "+l.size());
+		    for (Iterator it = l.iterator();it.hasNext();){
+				Object idf = HibernateUtil.createSession();
+				Session session = HibernateUtil.getSession();
+				Transaction tx = session.beginTransaction();
+				Sessiondata sData = (Sessiondata) it.next();
+				session.delete(sData);
+				tx.commit();
+				HibernateUtil.closeSession(idf);
+		    }
+		    
+		} catch (HibernateException ex) {
+			log.error("clearSessionTable",ex);
+		} catch (Exception err) {
+			log.error("clearSessionTable",err);
 		}
 	}
 }
