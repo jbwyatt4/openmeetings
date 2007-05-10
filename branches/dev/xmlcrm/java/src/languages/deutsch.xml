@@ -489,4 +489,16 @@
 <string id="163" name="savewindow_btn">
 <value>schlie�en</value>
 </string>
+<string id="164" name="planmeeting_btn">
+<value>Plan a meeting</value>
+</string>
+<string id="165" name="addsearch_btn">
+<value>Add / Search</value>
+</string>
+<string id="166" name="hour">
+<value>Hour</value>
+</string>
+<string id="167" name="name_meeting">
+<value>Name of meeting :</value>
+</string>
 </language>

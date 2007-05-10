@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<library>
+ 
+<class name="wholayout">
+	
+	<view>
+		<simplelayout axis="x" spacing="10"/>
+		<edittext width="200" text="Enter the e-mail address of your gest"/>
+	
+		<labeltext labelid="165" />
+	</view>
+<!--                  <grid datapath="weatherdata:/weather" contentdatapath="forecast/day" shownitems="3" height="${this.immediateparent.height}">
+                    <gridcolumn width="80" resizable="false">Day
+                      <text datapath="@label"/>
+                    </gridcolumn>
+                    <gridcolumn width="100" resizable="false">Forecast
+                      <text datapath="@desc"/>
+                    </gridcolumn>
+                    <gridcolumn width="60" resizable="false">Temp
+                      <text datapath="@temp"/>
+                    </gridcolumn>
+                  </grid>-->
+
+</class>
+
+</library>

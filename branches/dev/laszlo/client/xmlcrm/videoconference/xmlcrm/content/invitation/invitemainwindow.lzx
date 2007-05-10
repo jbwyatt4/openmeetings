@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<library>
+ 
+<class name="invitemainwindow" title="Plan a new meeting" extends="window" width="400" x="200" y="0" height="290" closeable="true">
+
+	<tabs name="mainTabs">
+		<tabpane text="Who ?" selected="true">
+			<wholayout />
+		</tabpane>
+		<tabpane text="When ?">
+			<whenlayout />
+		</tabpane>
+		<tabpane text="Why ?">
+			<whylayout />
+		</tabpane>
+		<tabpane text="Summary">
+			<summarylayout />
+		</tabpane>
+
+	</tabs>
+</class>
+
+</library>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<library>
+ 
+<class name="whenlayout">
+		<simplelayout axis="y" spacing="10"/>
+	
+	<view>
+		<simplelayout axis="x" spacing="10"/>
+		<labeltext labelid="166" />
+		<edittext width="50" text="00:00"/>
+	</view>
+	<calendarwindow />
+
+</class>
+
+</library>

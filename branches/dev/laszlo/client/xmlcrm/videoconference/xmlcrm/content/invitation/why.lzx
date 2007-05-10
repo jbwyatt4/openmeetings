@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<library>
+ 
+<class name="whylayout">
+	
+	<view>
+		<simplelayout axis="x" spacing="10"/>
+		<labeltext labelid="167" />
+		<richinputtext width="200" x="20" y="20">Description</richinputtext>
+	</view>
+
+
+</class>
+
+</library>
