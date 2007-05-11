@@ -126,7 +126,9 @@
 	<classpathentry kind="lib" path="lib/red5/ant-1.7.0.jar"/>
 	<classpathentry kind="lib" path="lib/red5/activation-1.1.jar"/>
 	<classpathentry kind="lib" path="lib/mail.jar"/>
-	<classpathentry kind="lib" path="lib/velocity-1.6-dev.jar"/>
 	<classpathentry kind="lib" path="lib/quartz/quartz-all-1.6.0.jar"/>
+	<classpathentry kind="lib" path="lib/velocity-1.6-dev.jar"/>
+	<classpathentry kind="lib" path="lib/velocity-tools-view-1.3.jar"/>
+	<classpathentry kind="lib" path="lib/commons-digester-1.8.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -95,7 +95,7 @@ public class Configurationmanagement {
 	}
 
 	public String addConfByKey(long USER_LEVEL, String CONF_KEY,
-			String CONF_VALUE, int USER_ID, String comment) {
+			String CONF_VALUE, Integer USER_ID, String comment) {
 		String ret = "Add Configuration";
 		if (AuthLevelmanagement.getInstance().checkAdminLevel(USER_LEVEL)) {
 			Configuration configuration = new Configuration();

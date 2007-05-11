@@ -62,8 +62,17 @@
     	<servlet-name>DownloadHandler</servlet-name>
     	<url-pattern>/DownloadHandler</url-pattern>
     </servlet-mapping>
-    
 
+    <servlet>
+    	<servlet-name>Install</servlet-name>
+    	<servlet-class>org.xmlcrm.servlet.outputhandler.Install</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+    	<servlet-name>Install</servlet-name>
+    	<url-pattern>/Install</url-pattern>
+    </servlet-mapping>
+    
     <servlet>
     	<servlet-name>UploadHandler</servlet-name>
     	<servlet-class>org.xmlcrm.servlet.outputhandler.UploadHandler</servlet-class>

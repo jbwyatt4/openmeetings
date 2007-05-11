@@ -1,0 +1,27 @@
+## OpenMeetings
+## author swagner
+## 10.04.2007
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml' xml:lang='de' lang='de'>
+<head>
+<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1' />
+</head>
+<body>
+<b>OpenMeetings - Installation</b><br />
+<h>Would you like to install openmeetings</h><br/>
+- Necessary steps which should have already been done:<br/>
+1.)Install and configure a database<br/>
+2.)Edit hibernate.cfg.xml to fit your database authentification values<br/>
+3.)Inport the SQL-skeleton<BR/>
+3.)Install openoffice-service running on port 8100 in headless modus (<A HREF="http://code.google.com/p/openmeetings/wiki/OpenOfficeConverter">OpenOfficeConverter</A>)<BR/>
+4.)Install imagemagick and make it availible in your Classpath <BR/>
+<UL>
+<LI>Linux distros: Imagemagick can be installed with your package system (apt-get,yast,..)</LI>
+<LI>MacOSX: Imagemagick can be installed from the <A HREF="http://www.imagemagick.org" TARGET="_BLANK">imagemagick projectpage<A> or using fink + apt-get</LI>
+<LI>Windows: Follow the instructions on the <A HREF="http://www.imagemagick.org" TARGET="_BLANK">imagemagick projectpage<A> </LI>
+</UL>
+<BR/>
+If this steps have been done you can follow with step 1 of installation:<BR/><BR/>
+<A HREF="?command=step1">continue with STEP 1</A>
+</body>
+</html>
