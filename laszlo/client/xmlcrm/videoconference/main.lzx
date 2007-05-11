@@ -12,14 +12,6 @@
 	<view center="true" ratio="1" resource="splashswf.swf"/>
 </splash>
 
-<script>
-	LzCanvas.prototype.__LZWebbaseMenuItemHandler = function (obj, item) {
-	    // load a url 
-	    Debug.write("http://www.openmeetings.net", "_blank");
-	    LzBrowser.loadURL("http://www.openmeetings.net", "_blank");
-	}
-</script>  
-
 <include href="incubator/lzcombobox.lzx" />
 <include href="incubator/shadowbox.lzx" /> 
 
@@ -147,19 +139,6 @@ containing the VideoViews
 <attribute name="_videocontainer" value="null" />
 			
 <handler name="oninit">
-	var cproto = LzCanvas.prototype;
-    cproto.__LZDefaultCanvasMenu = new LzContextMenu();	
-	
-	var cm1 = new ContextMenu();
-	cm1.hideBuiltInItems();
-	cm1.addItem(this.__LZdefaultMenuItem);
-	this.setContextMenu(cm1);
-    cproto.__LZdefaultMenuItem = new LzContextMenuItem("openmeetings.net",
-                                                       new LzDelegate(cproto, '__LZWebbaseMenuItemHandler'));
-    
-	cproto.__LZDefaultCanvasMenu.hideBuiltInItems();
-	cproto.__LZDefaultCanvasMenu.addItem(cproto.__LZdefaultMenuItem);
-	MovieClip.prototype.menu = __LZDefaultCanvasMenu.__LZcontextMenu()
 	
 	this.chathistory=new Array();
 	
