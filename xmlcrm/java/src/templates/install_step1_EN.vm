@@ -1,0 +1,78 @@
+## OpenMeetings
+## author swagner
+## 11.05.2007
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml' xml:lang='de' lang='de'>
+<head>
+<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1' />
+</head>
+<body>
+<b>OpenMeetings - Installation</b><br />
+
+<form name="form1" id="form1" method="post" action="?command=step2">
+
+    <fieldset>
+    
+		<legend>Userdata</legend>    
+    
+        <label for="username">Username</label>
+    	<input name="username" id="username" size="27" title="Enter a username" type="text" />
+
+        <label for="userpass">Userpass</label>
+    	<input name="userpass" id="userpass" size="27" title="Enter a password" type="text" />
+
+        <label for="useremail">EMail</label>
+    	<input name="useremail" id="useremail" size="27" title="Enter a EMail" type="text" />    	
+    	    	
+    </fieldset>
+    
+    <fieldset>
+    
+		<legend>Organisation(Domains)</legend>    
+    
+        <label for="orgname">Name</label>
+    	<input name="orgname" id="orgname" size="27" title="Enter a default Organisation" type="text" />   	
+    	    	
+    </fieldset>    
+    
+    <fieldset>
+    
+		<legend>Configuration</legend>    
+    
+        <label for="configdefault">Allow self-registering</label>
+    	<select name="configdefault" id="configdefault" size="1">
+	      	<option value="1" selected>Yes</option>
+	        <option value="0">No</option>
+	    </select>
+	    
+	    <label for="configreferer">Mail-Referer</label>
+    	<input name="configreferer" id="configreferer" size="27" title="Enter a Referer" type="text" />    	
+    	
+        <label for="configsmtp">SMTP-Server</label>
+    	<input name="configsmtp" id="configsmtp" size="27" title="Enter a SMTP-Server" type="text" />    	
+    	
+    	<label for="configmailuser">SMTP-Username</label>
+    	<input name="configmailuser" id="configmailuser" size="27" title="Enter the mail-username" type="text" />    	
+    	
+    	<label for="configmailpass">SMTP-Userpass</label>
+    	<input name="configmailpass" id="configmailuser" size="27" title="Enter the mail-userpass" type="text" />    	
+    	 
+    	<label for="configdefaultLang">Default Language</label>
+    	<select name="configdefaultLang" id="configdefaultLang" size="1">
+	      	<option value="EN" selected>english</option>
+	        <option value="DE">deutsch</option>
+	        <option value="FR">francais</option>
+	        <option value="ES">espanol</option>
+	    </select>
+	    	       	
+    </fieldset>   
+        	
+    <fieldset>
+        <legend>Absenden</legend>  
+        <input name="Submit" value="Senden" title="Formular absenden" type="submit" />
+    </fieldset>	
+	
+</form>
+
+</body>
+</html>
