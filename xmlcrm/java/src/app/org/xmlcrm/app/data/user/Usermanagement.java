@@ -636,7 +636,14 @@ public class Usermanagement {
 	 * @return
 	 */
 	public Long getUserLevelByID(long user_id) {
+		
 		try {
+			
+			//For direct access of linked users
+			if (user_id==-1){
+				return new Long(1);
+			}
+			
 			Object idf = HibernateUtil.createSession();
 			Session session = HibernateUtil.getSession();
 			Transaction tx = session.beginTransaction();
