@@ -103,7 +103,7 @@ public class Fieldmanagment {
 		this.addFieldValueByFieldAndLanguage(field_id, 4, spanish);
 	}
 
-	public void addFieldValueByFieldAndLanguage(long field_id,
+	public Long addFieldValueByFieldAndLanguage(long field_id,
 			long language_id, String fieldvalue) {
 		try {
 			Object idf = HibernateUtil.createSession();
@@ -117,18 +117,21 @@ public class Fieldmanagment {
 			flv.setFieldvalues_id(field_id);
 			flv.setDeleted("false");
 
-			session.save(flv);
+			Long fieldlanguagesvaluesId = (Long) session.save(flv);
 
 			tx.commit();
 			HibernateUtil.closeSession(idf);
+			
+			return fieldlanguagesvaluesId;
 		} catch (HibernateException ex) {
-			log.error("[getConfKey]: " + ex);
+			log.error("[getConfKey]: ",ex);
 		} catch (Exception ex2) {
-			log.error("[getConfKey]: " + ex2);
+			log.error("[getConfKey]: ",ex2);
 		}
+		return null;
 	}
 
-	public void addField(String fieldName) {
+	public Long addField(String fieldName) {
 		try {
 			Object idf = HibernateUtil.createSession();
 			Session session = HibernateUtil.getSession();
@@ -139,15 +142,18 @@ public class Fieldmanagment {
 			fl.setName(fieldName);
 			fl.setDeleted("false");
 
-			session.save(fl);
+			Long fieldId = (Long)session.save(fl);
 
 			tx.commit();
 			HibernateUtil.closeSession(idf);
+			
+			return fieldId;
 		} catch (HibernateException ex) {
-			log.error("[getConfKey]: " + ex);
+			log.error("[getConfKey]: ",ex);
 		} catch (Exception ex2) {
-			log.error("[getConfKey]: " + ex2);
+			log.error("[getConfKey]: ",ex2);
 		}
+		return null;
 	}
 
 	public List getFields(long language_id) {
@@ -166,9 +172,9 @@ public class Fieldmanagment {
 
 			return returnList;
 		} catch (HibernateException ex) {
-			log.error("[getConfKey]: " + ex);
+			log.error("[getConfKey]: ",ex);
 		} catch (Exception ex2) {
-			log.error("[getConfKey]: " + ex2);
+			log.error("[getConfKey]: ",ex2);
 		}
 		return null;
 	}

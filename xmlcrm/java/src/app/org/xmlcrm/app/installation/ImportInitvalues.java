@@ -1,12 +1,31 @@
 package org.xmlcrm.app.installation;
 
+import java.io.File;
+import java.util.Iterator;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.dom4j.io.SAXReader;
+import org.dom4j.Element;
+import org.dom4j.Document;
+import org.dom4j.DocumentException;
 import org.xmlcrm.app.data.basic.Configurationmanagement;
+import org.xmlcrm.app.data.basic.Fieldmanagment;
+import org.xmlcrm.app.data.basic.Languagemanagement;
 import org.xmlcrm.app.data.basic.Navimanagement;
 import org.xmlcrm.app.data.user.Organisationmanagement;
 import org.xmlcrm.app.data.user.Salutationmanagement;
+import org.xmlcrm.app.data.user.Statemanagement;
 import org.xmlcrm.app.data.user.Usermanagement;
 
 public class ImportInitvalues {
+	
+	private static final Log log = LogFactory.getLog(ImportInitvalues.class);
+	
+	public static final String languageFolderName = "languages/";
 	
 	private static ImportInitvalues instance;
 
@@ -71,7 +90,7 @@ public class ImportInitvalues {
 		//"EN"
 		Configurationmanagement.getInstance().addConfByKey(3, "default_lang", default_lang, null, "Default System Language for tamplates");
 		
-		Configurationmanagement.getInstance().addConfByKey(3, "register_mail_subject", "SignUp", 1, "The Subject for Mails sended at registration");
+		Configurationmanagement.getInstance().addConfByKey(3, "register_mail_subject", "SignUp", null, "The Subject for Mails sended at registration");
 					
 		
 	}
@@ -88,6 +107,67 @@ public class ImportInitvalues {
 		
 		//Add user to default group
 		Organisationmanagement.getInstance().addUserToOrganisation(1, organisation_id, 1,"");		
+	}
+	
+	public void loadInitLangauges(String filePath) throws Exception{
+		
+		Statemanagement.getInstance().addState("Deutschland");
+		Statemanagement.getInstance().addState("France");
+		Statemanagement.getInstance().addState("Italy");
+		Statemanagement.getInstance().addState("Spain");
+		Statemanagement.getInstance().addState("USA");
+		Statemanagement.getInstance().addState("United Kingdom");
+		Statemanagement.getInstance().addState("Ireland");
+		Statemanagement.getInstance().addState("Danemark");		
+		
+		String listLanguages[] = {"deutsch", "english", "french", "spanish"};
+		
+		// TODO empty tables before launch
+		//Languagemanagement.getInstance().emptyFieldLanguage();
+		
+		/** Read all languages files */
+		for (int i = 0; i < listLanguages.length ; i ++)
+		{
+			Long languages_id = Languagemanagement.getInstance().addLanguage(listLanguages[i]);
+			
+	        SAXReader reader = new SAXReader();
+	        Document document = reader.read(filePath+listLanguages[i]+".xml");
+	        
+	        Element root = document.getRootElement();
+	        
+	        for ( Iterator it = root.elementIterator( "string" ); it.hasNext(); ) {
+	            Element item = (Element) it.next();
+	            log.error(item.getName());
+	            
+	            Long id = Long.valueOf(item.attributeValue("id")).longValue();
+	            String name = item.attributeValue("name");
+	            String value = "";
+	        	
+	        	for ( Iterator t2 = item.elementIterator( "value" ); t2.hasNext(); ) {
+	        		Element val = (Element) t2.next();
+	        		value = val.getText();
+	        	}
+	        	
+	        	log.error("result: "+i+" "+id+" "+name+" "+value);
+	        	
+	        	//Only do that for the first field-set
+	        	if (i==0) Fieldmanagment.getInstance().addField(name);
+	        	
+	        	Fieldmanagment.getInstance().addFieldValueByFieldAndLanguage(id,languages_id,value);
+	        	
+	        }
+		}	
+		
+		/** Insert all languages strings into database */
+//		for (int item_id = 0; item_id < nodeListLanguages[0].getLength(); item_id++)
+//		{
+//			Fieldmanagment.getInstance().addField(nodeListLanguages[0].item(item_id).getAttributes().getNamedItem("name").getNodeValue());
+//		
+//			for (int language_id = 0; language_id < listLanguages.length; language_id ++)
+//			{
+//				Fieldmanagment.getInstance().addFieldValueByFieldAndLanguage(Long.valueOf(nodeListLanguages[language_id].item(item_id).getAttributes().getNamedItem("id").getNodeValue()), (long) (language_id + 1), nodeListLanguages[language_id].item(item_id).getTextContent());
+//			}	
+//		}
 	}
 	
 }

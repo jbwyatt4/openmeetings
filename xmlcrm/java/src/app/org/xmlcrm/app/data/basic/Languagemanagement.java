@@ -30,7 +30,7 @@ public class Languagemanagement {
 		return instance;
 	}
 
-	public void addLanguage(String langName) {
+	public Long addLanguage(String langName) {
 		try {
 			Object idf = HibernateUtil.createSession();
 			Session session = HibernateUtil.getSession();
@@ -40,15 +40,18 @@ public class Languagemanagement {
 			fl.setStarttime(new Date());
 			fl.setName(langName);
 
-			session.save(fl);
+			Long languages_id = (Long)session.save(fl);
 
 			tx.commit();
 			HibernateUtil.closeSession(idf);
+			
+			return languages_id;
 		} catch (HibernateException ex) {
-			log.error("[getConfKey]: " + ex);
+			log.error("[getConfKey]: ",ex);
 		} catch (Exception ex2) {
-			log.error("[getConfKey]: " + ex2);
+			log.error("[getConfKey]: ",ex2);
 		}
+		return null;
 	}
 
  
@@ -63,9 +66,9 @@ public class Languagemanagement {
 			tx.commit();
 			HibernateUtil.closeSession(idf);
 		} catch (HibernateException ex) {
-			log.error("[getConfKey]: " + ex);
+			log.error("[getConfKey]: ",ex);
 		} catch (Exception ex2) {
-			log.error("[getConfKey]: " + ex2);
+			log.error("[getConfKey]: ",ex2);
 		}
 	}
 
@@ -83,9 +86,9 @@ public class Languagemanagement {
 
 			return ll;
 		} catch (HibernateException ex) {
-			log.error("[getConfKey]: " + ex);
+			log.error("[getConfKey]: ",ex);
 		} catch (Exception ex2) {
-			log.error("[getConfKey]: " + ex2);
+			log.error("[getConfKey]: ",ex2);
 		}
 		return null;
 	}
