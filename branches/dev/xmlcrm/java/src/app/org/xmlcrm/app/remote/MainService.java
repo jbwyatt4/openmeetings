@@ -2,7 +2,6 @@ package org.xmlcrm.app.remote;
 
 import java.util.Date;
 import java.util.List;
-import java.util.HashSet;
 import java.util.LinkedHashMap;
 
 import org.apache.commons.logging.Log;
@@ -11,14 +10,7 @@ import org.apache.commons.logging.LogFactory;
 import org.xmlcrm.app.hibernate.beans.basic.Configuration;
 import org.xmlcrm.app.hibernate.beans.basic.Sessiondata;
 
-import org.xmlcrm.app.hibernate.beans.shop.lieferarten;
-import org.xmlcrm.app.hibernate.beans.shop.products;
-import org.xmlcrm.app.hibernate.beans.shop.zahlungsarten;
-
-import org.xmlcrm.app.hibernate.beans.user.Users_Usergroups;
 import org.xmlcrm.app.hibernate.beans.user.Users;
-import org.xmlcrm.app.hibernate.beans.user.Userwaren;
-import org.xmlcrm.app.hibernate.beans.user.Usergroups;
 
 import org.xmlcrm.app.data.basic.*;
 import org.xmlcrm.app.data.user.Usermanagement;
@@ -125,6 +117,14 @@ public class MainService {
     	log.error("loginUser 2: "+SID+" "+Username+" "+Userpass);
         return Usermanagement.getInstance().loginUser(SID,Username,Userpass);
     } 
+    
+    /**
+     * this function logs a user into if he enteres the app directly into a room
+     * @param SID
+     */
+    public void markSessionAsLogedIn(String SID){
+    	Sessionmanagement.getInstance().updateUser(SID, -1);
+    }
     
     /**
      * clear this session id
