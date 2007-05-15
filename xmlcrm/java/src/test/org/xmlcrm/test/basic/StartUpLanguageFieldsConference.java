@@ -50,16 +50,19 @@ public class StartUpLanguageFieldsConference extends TestCase {
 			nodeListLanguages[i] = getLanguageXmlFile(listLanguages[i]);
 		}	
 		
-		/** Insert all languages strings into database */
-		for (int item_id = 0; item_id < nodeListLanguages[0].getLength(); item_id++)
-		{
-			Fieldmanagment.getInstance().addField(nodeListLanguages[0].item(item_id).getAttributes().getNamedItem("name").getNodeValue());
-		
-			for (int language_id = 0; language_id < listLanguages.length; language_id ++)
-			{
-				Fieldmanagment.getInstance().addFieldValueByFieldAndLanguage(Long.valueOf(nodeListLanguages[language_id].item(item_id).getAttributes().getNamedItem("id").getNodeValue()), (long) (language_id + 1), nodeListLanguages[language_id].item(item_id).getTextContent());
-			}	
-		}
+		/** Insert all languages strings into database 
+		 * 
+		 * This code can-not work 
+		 * swagner 15.05.2007*/
+//		for (int item_id = 0; item_id < nodeListLanguages[0].getLength(); item_id++)
+//		{
+//			Fieldmanagment.getInstance().addField(nodeListLanguages[0].item(item_id).getAttributes().getNamedItem("name").getNodeValue());
+//		
+//			for (int language_id = 0; language_id < listLanguages.length; language_id ++)
+//			{
+//				Fieldmanagment.getInstance().addFieldValueByFieldAndLanguage(Long.valueOf(nodeListLanguages[language_id].item(item_id).getAttributes().getNamedItem("id").getNodeValue()), (long) (language_id + 1), nodeListLanguages[language_id].item(item_id).getTextContent());
+//			}	
+//		}
 	}
 	
 
