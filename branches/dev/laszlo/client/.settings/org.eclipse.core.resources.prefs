@@ -1,4 +1,4 @@
-#Wed May 09 11:32:51 CEST 2007
+#Tue May 15 17:13:58 CEST 2007
 eclipse.preferences.version=1
 encoding//xmlcrm/newstreaming/camera.lzx=UTF-8
 encoding//xmlcrm/newstreaming/mediadevice.lzx=UTF-8
@@ -82,11 +82,14 @@ encoding//xmlcrm/videoconference/xmlcrm/content/conference/audienceboard.lzx=UTF
 encoding//xmlcrm/videoconference/xmlcrm/content/conference/conference.lzx=UTF-8
 encoding//xmlcrm/videoconference/xmlcrm/content/conference/conferenceboard.lzx=UTF-8
 encoding//xmlcrm/videoconference/xmlcrm/content/conference/conferencedetailsarea.lzx=UTF-8
+encoding//xmlcrm/videoconference/xmlcrm/content/conference/conferencerooms.lzx=UTF-8
 encoding//xmlcrm/videoconference/xmlcrm/content/conference/library.lzx=UTF-8
 encoding//xmlcrm/videoconference/xmlcrm/content/conference/roomlistItem.lzx=UTF-8
 encoding//xmlcrm/videoconference/xmlcrm/content/contentviews/basecontentsaveview.lzx=UTF-8
 encoding//xmlcrm/videoconference/xmlcrm/content/contentviews/basecontentview.lzx=UTF-8
 encoding//xmlcrm/videoconference/xmlcrm/content/contentviews/contentsavewindow.lzx=UTF-8
+encoding//xmlcrm/videoconference/xmlcrm/content/invitation/invitemainwindow.lzx=UTF-8
+encoding//xmlcrm/videoconference/xmlcrm/content/invitation/library.lzx=UTF-8
 encoding//xmlcrm/videoconference/xmlcrm/content/library.lzx=UTF-8
 encoding//xmlcrm/videoconference/xmlcrm/content/orgadmin/chooseuserwindow.lzx=UTF-8
 encoding//xmlcrm/videoconference/xmlcrm/content/orgadmin/library.lzx=UTF-8
