@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library>
-
-	<include href="who.lzx" />
-	<include href="when.lzx" />
-	<include href="why.lzx" />
-	<include href="summary.lzx" />
+	
 	<include href="invitemainwindow.lzx" />
 
 </library>
