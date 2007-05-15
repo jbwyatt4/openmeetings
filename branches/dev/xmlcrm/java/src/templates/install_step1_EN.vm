@@ -16,13 +16,13 @@
 		<legend>Userdata</legend>    
     
         <label for="username">Username</label>
-    	<input name="username" id="username" size="27" title="Enter a username" type="text" />
+    	<input name="username" id="username" size="27" title="Enter a username" type="text" /><br />
 
         <label for="userpass">Userpass</label>
-    	<input name="userpass" id="userpass" size="27" title="Enter a password" type="text" />
+    	<input name="userpass" id="userpass" size="27" title="Enter a password" type="text" /><br />
 
         <label for="useremail">EMail</label>
-    	<input name="useremail" id="useremail" size="27" title="Enter a EMail" type="text" />    	
+    	<input name="useremail" id="useremail" size="27" title="Enter a EMail" type="text" /><br/>
     	    	
     </fieldset>
     
@@ -43,19 +43,19 @@
     	<select name="configdefault" id="configdefault" size="1">
 	      	<option value="1" selected>Yes</option>
 	        <option value="0">No</option>
-	    </select>
+	    </select><br />
 	    
 	    <label for="configreferer">Mail-Referer</label>
-    	<input name="configreferer" id="configreferer" size="27" title="Enter a Referer" type="text" />    	
+    	<input name="configreferer" id="configreferer" size="27" title="Enter a Referer" type="text" /><br />
     	
         <label for="configsmtp">SMTP-Server</label>
-    	<input name="configsmtp" id="configsmtp" size="27" title="Enter a SMTP-Server" type="text" />    	
+    	<input name="configsmtp" id="configsmtp" size="27" title="Enter a SMTP-Server" type="text" /><br/>
     	
     	<label for="configmailuser">SMTP-Username</label>
-    	<input name="configmailuser" id="configmailuser" size="27" title="Enter the mail-username" type="text" />    	
+    	<input name="configmailuser" id="configmailuser" size="27" title="Enter the mail-username" type="text" /><br />
     	
     	<label for="configmailpass">SMTP-Userpass</label>
-    	<input name="configmailpass" id="configmailuser" size="27" title="Enter the mail-userpass" type="text" />    	
+    	<input name="configmailpass" id="configmailpass" size="27" title="Enter the mail-userpass" type="text" /><br/>
     	 
     	<label for="configdefaultLang">Default Language</label>
     	<select name="configdefaultLang" id="configdefaultLang" size="1">
@@ -63,12 +63,12 @@
 	        <option value="DE">deutsch</option>
 	        <option value="FR">francais</option>
 	        <option value="ES">espanol</option>
-	    </select>
+	    </select><br/>
 	    	       	
     </fieldset>   
         	
     <fieldset>
-        <legend>Absenden</legend>  
+        <legend>Absenden</legend> 
         <input name="Submit" value="Senden" title="Formular absenden" type="submit" />
     </fieldset>	
 	
