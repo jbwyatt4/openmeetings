@@ -130,7 +130,13 @@
 
 <attribute name="sessionObject" value="null" />
 <attribute name="sessionId" value="" type="string" />
-
+	
+<!-- attributes for direct room access -->
+<attribute name="initroomid" value="" type="string" />
+<attribute name="initdomainid" value="" type="string" />
+<attribute name="initlangid" value="1" type="number" />
+<attribute name="isinitRoomDirect" value="false" type="boolean" />
+	
 
 <!-- 
 Holds a refernce to the current VideoCOntainer Object
@@ -139,7 +145,7 @@ containing the VideoViews
 <attribute name="_videocontainer" value="null" />
 			
 <handler name="oninit">
-	
+	<![CDATA[
 	this.chathistory=new Array();
 	
 	var doubleSlash = _url.indexOf("//");
@@ -148,8 +154,18 @@ containing the VideoViews
 	
 	this.setAttribute('rmpthost',server);
 	
-	Debug.write("languageData.",canvas.languageData);
+	var domain = LzBrowser.getInitArg('domain');
+	var room = LzBrowser.getInitArg('room');
 
+	if (domain.length!=0 && room.length !=0){
+		canvas.initroomid = room;
+		canvas.initdomainid = domain;
+		canvas.isinitRoomDirect = true;
+	}
+	
+	Debug.write("rmpthost: ",canvas.rmpthost);	
+	Debug.write("domain: ",domain);
+	]]>
 </handler>
 
 <method name="getLabelName" args="id">

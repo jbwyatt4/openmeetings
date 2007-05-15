@@ -6,7 +6,7 @@
 	<labeltext fontstyle="bold" y="10" labelid="128" />
 	
 	<labeltext y="40" labelid="129" />
-    		<labeltext x="200" onclick="new invitemainwindow(parent.parent)" labelid="164" />
+    		<labeltext x="200" labelid="164" />
 	
 		<view y="60" x="20">
 			<handler name="oninit">
