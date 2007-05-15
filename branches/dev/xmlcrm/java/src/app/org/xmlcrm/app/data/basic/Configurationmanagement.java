@@ -104,7 +104,7 @@ public class Configurationmanagement {
 			configuration.setStarttime(new Date());
 			configuration.setUpdatetime(new Date());
 			configuration.setComment(comment);
-			configuration.setUser_id(new Long(USER_ID));
+			if (USER_ID!=null) configuration.setUser_id(new Long(USER_ID));
 
 			try {
 				Object idf = HibernateUtil.createSession();

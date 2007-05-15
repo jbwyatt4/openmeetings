@@ -14,7 +14,7 @@ import org.apache.velocity.tools.view.servlet.VelocityViewServlet;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.xmlcrm.app.documents.InstallationDocumentHandler;
-
+import org.xmlcrm.app.installation.ImportInitvalues;
 
 public class Install extends VelocityViewServlet {
 
@@ -68,12 +68,10 @@ public class Install extends VelocityViewServlet {
 				} else {
 					int i = InstallationDocumentHandler.getInstance().getCurrentStepNumber(working_dir);
 					if (i == 0){
-						return getVelocityEngine().getTemplate("install_welcome_"+lang+".vm");
+						return getVelocityEngine().getTemplate("install_step1_"+lang+".vm");
+					} else {
+						return getVelocityEngine().getTemplate("install_step2_"+lang+".vm");
 					}
-//					ctx.put("error", "Already exist File, Permission set? ");
-//					ctx.put("path", working_dir);
-//				
-//					return getVelocityEngine().getTemplate("install_error_"+lang+".vm");
 				}
 				
 			} else if (command.equals("step1")) {
@@ -84,10 +82,50 @@ public class Install extends VelocityViewServlet {
 					log.error("do init installation");
 					
 					//update to next step
-					InstallationDocumentHandler.getInstance().createDocument(working_dir+InstallationDocumentHandler.installFileName,1);
+					//InstallationDocumentHandler.getInstance().createDocument(working_dir+InstallationDocumentHandler.installFileName,1);
 					
 					//return getVelocityEngine().getTemplate("install_complete_"+lang+".vm");
 					return getVelocityEngine().getTemplate("install_step1_"+lang+".vm");
+				} else {
+					ctx.put("error", "This Step of the installation has already been done. continue with step 2 <A HREF='?command=step2'>continue with step 2</A>");
+					return getVelocityEngine().getTemplate("install_exception_"+lang+".vm");
+				}
+				
+			} else if (command.equals("step2")) {
+				
+				int i = InstallationDocumentHandler.getInstance().getCurrentStepNumber(working_dir);
+				if (i == 0){
+					
+					log.error("do init installation");
+					
+					String username = httpServletRequest.getParameter("username");
+					String userpass = httpServletRequest.getParameter("userpass");
+					String useremail = httpServletRequest.getParameter("useremail");
+					String orgname = httpServletRequest.getParameter("orgname");
+					String configdefault = httpServletRequest.getParameter("configdefault");
+					String configreferer = httpServletRequest.getParameter("configreferer");
+					String configsmtp = httpServletRequest.getParameter("configsmtp");
+					String configmailuser = httpServletRequest.getParameter("configmailuser");
+					String configmailpass = httpServletRequest.getParameter("configmailpass");
+					String configdefaultLang = httpServletRequest.getParameter("configdefaultLang");
+					
+					log.error("step 0+ start init with values. "+username+" "+userpass+" "+useremail+" "+orgname+" "+configdefault+" "+configreferer+" "+
+						configsmtp+" "+configmailuser+" "+configmailpass+" "+configdefaultLang);
+					
+					String filePath = getServletContext().getRealPath("/")+ImportInitvalues.languageFolderName;
+					
+					ImportInitvalues.getInstance().loadInitLangauges(filePath);
+					ImportInitvalues.getInstance().loadMainMenu();
+					ImportInitvalues.getInstance().loadSalutations();
+					ImportInitvalues.getInstance().loadConfiguration(configdefault, configsmtp, configreferer, configmailuser, configmailpass, configdefaultLang);
+					ImportInitvalues.getInstance().loadInitUserAndOrganisation(username, userpass, useremail, orgname);
+					
+					//update to next step
+					log.error("add level to install file");
+					InstallationDocumentHandler.getInstance().createDocument(working_dir+InstallationDocumentHandler.installFileName,1);
+					
+					//return getVelocityEngine().getTemplate("install_complete_"+lang+".vm");
+					return getVelocityEngine().getTemplate("install_step2_"+lang+".vm");
 				} else {
 					ctx.put("error", "This Step of the installation has already been done. continue with step 2 <A HREF='?command=step2'>continue with step 2</A>");
 					return getVelocityEngine().getTemplate("install_exception_"+lang+".vm");
