@@ -1,11 +1,17 @@
 package org.xmlcrm.app.hibernate.utils;
 
-import org.hibernate.*;
-import org.hibernate.cfg.*;
+import java.io.File;
+
+import java.util.Iterator;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.hibernate.*;
+import org.hibernate.cfg.*;
 
 public class HibernateUtil {
+	
+	private static final Log log = LogFactory.getLog(HibernateUtil.class);
 
 	/** Read the configuration, will share across threads**/
 	  private static SessionFactory sessionFactory;
@@ -14,6 +20,9 @@ public class HibernateUtil {
 	  /** The constants for describing the ownerships **/
 	  private static final Owner trueOwner = new Owner(true);
 	  private static final Owner fakeOwner = new Owner(false); 
+	  
+	  /** set this to false to test with JUnit **/
+	  private static final boolean isLife = true;
 	  /**
 	   * get the hibernate session and set it on the thread local. Returns trueOwner if 
 	   * it actually opens a session
@@ -52,25 +61,33 @@ public class HibernateUtil {
 	  public static Session getSession() throws HibernateException{
 	    return (Session)currentSession.get();
 	  } 
+	  
 	  /** 
 	   * Creating a session factory , if not already loaded
 	   */
-	  private static SessionFactory getSessionFactory() 
-	                          throws HibernateException {
-	    try {
-	      if(sessionFactory == null){
-	         sessionFactory = new Configuration().configure().buildSessionFactory(); 
-	      } 
-	       return sessionFactory;
-	    }catch (Exception e){
-	      throw new HibernateException("Error getting Factory");
-	    }
-	  }  
+	  private static SessionFactory getSessionFactory() {
+		try {
+			if (sessionFactory == null) {
+				if (isLife){
+					String current_dir = System.getProperty("/xmlcrm")+"install/"+"hibernate.cfg.xml";
+					//log.error("SessionFactory Path: "+current_dir);
+					sessionFactory = new Configuration().configure(new File(current_dir)).buildSessionFactory();
+				} else {
+					sessionFactory = new Configuration().configure().buildSessionFactory();
+				}
+			}
+			return sessionFactory;
+		} catch (HibernateException e) {
+			log.error("getSessionFactory",e);
+		} catch (Exception err) {
+			log.error("getSessionFactory",err);
+		}
+		return null;
+	}  
 	 
 	  /**
-	   * Internal class , for handling the identity. Hidden for the 
-	   * developers
-	   */
+		 * Internal class , for handling the identity. Hidden for the developers
+		 */
 	  private static class Owner {
 	     public Owner(boolean identity){
 	      this.identity = identity;
