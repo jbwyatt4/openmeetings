@@ -67,7 +67,7 @@
     	</handler>
     </simplelabelbutton> 	
     
-     <text name="errormess" resize="true" y="84" />
+     <text name="errormess" resize="true" y="144" />
 
     <netremotecallhib name="loginUser" funcname="xmlcrm.loginUser" remotecontext="$once{ canvas.thishib }" >      
         <netparam name="vars1"><method name="getValue"> return canvas.sessionId; </method></netparam>  
@@ -141,7 +141,8 @@
     <!-- 
     This method is just a test for returning Object Variables from Client to Server
      -->
-    <netremotecallhib name="testObject" funcname="xmlcrm.testObject" remotecontext="$once{ canvas.thishib }" >      
+    <netremotecallhib name="testObject" funcname="xmlcrm.testObject" 
+		remotecontext="$once{ canvas.thishib }" >      
         <handler name="oninit">
             this.doCall();
         </handler>

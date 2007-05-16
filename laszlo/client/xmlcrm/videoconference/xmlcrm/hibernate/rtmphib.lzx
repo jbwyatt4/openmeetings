@@ -76,10 +76,27 @@
             	parent.getStates.doCall();
             } else {
             	parent.initlanguageLoaded=true;
-            	new checkLoginData(canvas.main_content._content);
+			    if(!canvas.isinitRoomDirect){
+            	    new checkLoginData(canvas.main_content._content);
+			    } else {
+			        Debug.write("canvas.isinitRoomDirect is true");
+			        parent.markSessionAsLogedIn.doCall();
+			    }
             }
         </handler>  
     </netremotecallhib>
+	
+    <netremotecallhib name="markSessionAsLogedIn" funcname="xmlcrm.markSessionAsLogedIn" >
+		<netparam name="vars1"><method name="getValue">return canvas.sessionId;</method></netparam>
+        <handler name="ondata" args="value">
+            //The onResult-Handler will be called be the rtmpconnection
+            Debug.write("markSessionAsLogedIn ",value);
+			
+			new invitationuserwin(canvas.main_content._content.inner); 
+			
+            
+        </handler>  
+    </netremotecallhib>    
     
     <netremotecallhib name="getStates" funcname="xmlcrm.getStates" >
         <handler name="ondata" args="value">

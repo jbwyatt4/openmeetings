@@ -25,6 +25,7 @@
 	<simplelabelbutton labelid="131" x="300" width="160">
 		<handler name="onclick">
 			var connectedIsAudience = '';
+			canvas.isConference = !parent.isaudience;
 			if (parent.isaudience) connectedIsAudience = '_'+'audi';
             if (this.parent.ispublic){
                 hib.connectedroom=parent.obj.name+parent.obj.rooms_id+connectedIsAudience;

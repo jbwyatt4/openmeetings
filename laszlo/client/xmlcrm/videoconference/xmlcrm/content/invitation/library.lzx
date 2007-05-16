@@ -2,5 +2,6 @@
 <library>
 	
 	<include href="invitemainwindow.lzx" />
+	<include href="invitationuserwin.lzx" />
 
 </library>

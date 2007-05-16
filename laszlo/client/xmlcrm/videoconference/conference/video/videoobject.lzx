@@ -41,6 +41,7 @@
 	<!-- Get the reference to the videoview-Object -->
 	<method name="getVideoReference">
 		return this._chatvideoinner._videoview;
+		this._chatvideoinner._sendInvitation.setAttribute('visible',false);
 	</method>
     
     <method name="setIdentifier" args="id">
@@ -53,6 +54,7 @@
     	this.uniqueid = '0';
     	this.setAttribute('chatpartnername','');
     	this.clientVars=null;
+		this._chatvideoinner._sendInvitation.setAttribute('visible',true);
     </method>
     
 	<!-- Attribute shows if an Video-Stream has been assigned to this videoview 
@@ -85,8 +87,14 @@
             		this.parent.parent.parent._loadness.setLevel(this.level);
             	</handler>
             </microphone>
-		</videoview>
-
+		</videoview>		
+		<view name="_sendInvitation" visible="true" x="3" y="2" width="120" height="80" >
+			<handler name="onclick">
+				new invitemainwindow(canvas.main_content._content.inner);
+			</handler>
+			<labeltext multiline="true" width="100" y="20" x="24" labelid="213" 
+				fgcolor="white" fontstyle="bold" />
+		</view>
 	</view>
 	
 	<view name="_loadness" x="1" width="126" height="18" y="105" bgcolor="0xFFFFFF">
@@ -149,6 +157,7 @@
 			<vscrollbar />
 		</view>
 	</view>
+	
 </class>
 
 </library>

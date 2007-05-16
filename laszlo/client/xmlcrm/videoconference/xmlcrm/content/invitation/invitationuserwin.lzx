@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<library>
+ 
+ <class name="invitationuserwin" extends="labelexplorerbox" labelid="221"
+    docking="true" resizeable="false" closable="false" width="324" x="200" y="0" height="400">
+	 
+	 <attribute name="userlang" value="1" type="number" />
+
+	<labeltext y="30" x="10" fontstyle="bold" labelid="222" />
+
+	<labeltext y="80" x="10" labelid="223" />
+		<edittext name="_login" y="80" x="120" width="200" text="myusername" />
+
+	<labeltext y="110" x="10" labelid="224" />
+		<edittext name="firstName" y="110" x="120" width="200" text="firstName" />
+	<labeltext y="140" x="10" labelid="225" />
+		<edittext name="lastName" y="140" x="120" width="200" text="lastName" />
+	<labeltext y="170" x="10" labelid="226" />
+		<edittext name="mail" y="170" x="120" width="200" text="mail" />
+	 
+    <labeltext name="n3" labelid="227" width="200" y="200" resize="false" x="10" />     
+        <combobox name="languages" width="170" y="200" x="120" editable="false">
+            <netremotecallhib name="getLanguages" funcname="xmlcrm.getLanguages" remotecontext="$once{ canvas.thishib }" >      
+                <handler name="oninit">
+                    this.doCall();
+                </handler>
+                <handler name="ondata" args="value">
+                    //The onResult-Handler will be called be the rtmpconnection
+                    Debug.write("getLanguages: ",value);
+                    <![CDATA[
+                    for (var i=0;i<value.length;i++){
+                        this.parent.addItem(value[i].name,value[i].language_id);
+                    }
+                    this.parent.selectItem(value[0].language_id);
+                    ]]>
+                </handler>  
+            </netremotecallhib>
+        </combobox>	 
+		
+	<simplelabelbutton name="connect" x="170" y="370" text="connect" 
+		labelid="228" width="120" height="20">
+		<handler name="onclick">
+			Debug.write("this.parent: ",this.parent);
+			
+			parent.userlang = Number(parent.languages.getValue());
+			
+			var userObject = new Array();
+			
+			canvas.setAttribute('user_id',-1);
+			canvas.setAttribute('firstName',parent.firstName.getText());
+			canvas.setAttribute('lastName',parent.lastName.getText());	
+			canvas.setAttribute('mail','');
+			canvas.setAttribute('lastLogin','');
+			canvas.setAttribute('official_code','');
+			canvas.setAttribute('picture_uri','');
+			canvas.setAttribute('language','');					
+		
+			userObject["login"] = parent._login.getText();
+			userObject["firstname"] = parent.firstName.getText();
+			userObject["lastname"] = parent.lastName.getText();
+			userObject["adresses"] = new Array();
+			userObject["adresses"]["emails"] = new Array();
+			userObject["adresses"]["emails"][0] = new Array();
+			userObject["adresses"]["emails"][0]["mail"] = new Array();
+			userObject["adresses"]["emails"][0]["mail"]["email"] = parent.mail.getText();
+			
+			hib.userobject = userObject;
+			
+			hib.userlang = Number(parent.languages.getValue());
+ 
+            parent.getLanguageById.doCall();
+                   
+		</handler>
+	</simplelabelbutton>
+	 
+    <netremotecallhib name="getLanguageById" funcname="xmlcrm.getLanguageById" 
+		remotecontext="$once{ canvas.thishib }" >      
+        <netparam name="vars1"><method name="getValue"> return parent.parent.userlang; </method></netparam> 
+        <handler name="ondata" args="value">
+            //The onResult-Handler will be called be the rtmpconnection
+            Debug.write("getLanguageById: ",value);
+            setLabelObject(value);
+	        hib.connectedroom=canvas.initroomid;
+            hib.conferencedomain = canvas.initdomainid;
+
+            Debug.write("hib.conferencedomain: ",hib.conferencedomain);
+            clearStageContent();
+            canvas._mainbgcontentNavi.navi._innercontent.clearAllSubItemLists(); 			
+			if (canvas.initroomtype=="conference"){
+				new conference(canvas.main_content._content.inner); 
+			} else {
+				new audience(canvas.main_content._content.inner); 
+			}
+			this.parent.close();
+        </handler>  
+    </netremotecallhib>	 
+		
+</class>
+	
+<!--
+
+  -->
+
+</library>
