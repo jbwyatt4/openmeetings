@@ -60,9 +60,6 @@
     	<label for="configdefaultLang">Default Language</label>
     	<select name="configdefaultLang" id="configdefaultLang" size="1">
 	      	<option value="EN" selected>english</option>
-	        <option value="DE">deutsch</option>
-	        <option value="FR">francais</option>
-	        <option value="ES">espanol</option>
 	    </select><br/>
 	    	       	
     </fieldset>   

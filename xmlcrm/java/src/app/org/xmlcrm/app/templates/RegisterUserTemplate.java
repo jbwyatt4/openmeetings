@@ -50,15 +50,15 @@ public class RegisterUserTemplate extends VelocityLoader{
 	        
 	        String template = tamplateName+Configurationmanagement.getInstance().getConfKey(3,"default_lang").getConf_value()+".vm";
 	        
-            Velocity.mergeTemplate(template, "ISO-8859-1", context, w );
+            Velocity.mergeTemplate(template, "UTF-8", context, w );
             
-            System.out.println(" template : " + w );
+//            System.out.println(" template : " + w );
             
             return w.toString();         
             
         } catch (Exception e ) {
-        	log.error("Problem merging template : " + e );
-            System.out.println("Problem merging template : " + e );
+        	log.error("Problem merging template : " , e );
+//            System.out.println("Problem merging template : " + e );
         }
         return null;
 	}

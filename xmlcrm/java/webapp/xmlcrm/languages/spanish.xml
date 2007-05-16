@@ -636,4 +636,28 @@
 <string id="212" name="loadwml_confirmmess2">
 <value>Confirm before loading a file</value>
 </string>
+<string id="213" name="send_invitation_btn">
+<value>Send invitation</value>
+</string>
+<string id="214" name="send_invitationwin_header">
+<value>Send invitation</value>
+</string>
+<string id="215" name="send_invitationwin_subject">
+<value>Subject</value>
+</string>
+<string id="216" name="send_invitationwin_recipient">
+<value>Recipient</value>
+</string>
+<string id="217" name="send_invitationwin_message">
+<value>Message</value>
+</string>
+<string id="218" name="send_invitationwin_btn_confirm">
+<value>Send</value>
+</string>
+<string id="219" name="send_invitationwin_btn_cancel">
+<value>cancel</value>
+</string>
+<string id="220" name="send_chat_text_btn">
+<value>emitir</value>
+</string>		
 </language>

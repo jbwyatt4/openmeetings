@@ -63,6 +63,22 @@ public class AddDefaultfield extends TestCase {
 //		Fieldmanagment.getInstance().addFourFieldValues("loadwml_confirmheader", 210, "Zeichenbrett leeren", "clear drawarea", "clear drawarea", "clear drawarea");
 //		Fieldmanagment.getInstance().addFourFieldValues("loadwml_confirmmess", 211, "Zeichnbrett leeren, alle bisherigen Änderungen gehen damit verloren!", "clear drawarea, all data on whiteboard will be lost", "clear drawarea, all data on whiteboard will be lost", "clear drawarea, all data on whiteboard will be lost");
 //		Fieldmanagment.getInstance().addFourFieldValues("loadwml_confirmmess2", 212, "Bestätigung anfordern vor dem Laden einer Datei", "Confirm before loading a file", "Confirm before loading a file", "Confirm before loading a file");
+//		Fieldmanagment.getInstance().addFourFieldValues("send_invitation_btn", 213, "Einladung versenden", "Send invitation", "Send invitation", "Send invitation");
+//		Fieldmanagment.getInstance().addFourFieldValues("send_invitationwin_header", 214, "Einladung versenden", "Send invitation", "Send invitation", "Send invitation");
+//		Fieldmanagment.getInstance().addFourFieldValues("send_invitationwin_subject", 215, "Betreff", "Subject", "Subject", "Subject");
+//		Fieldmanagment.getInstance().addFourFieldValues("send_invitationwin_recipient", 216, "Empfänger", "Recipient", "Recipient", "Recipient");
+//		Fieldmanagment.getInstance().addFourFieldValues("send_invitationwin_message", 217, "Nachricht", "Message", "Message", "Message");
+//		Fieldmanagment.getInstance().addFourFieldValues("send_invitationwin_btn_confirm", 218, "abschicken", "Send", "Send", "Send");
+//		Fieldmanagment.getInstance().addFourFieldValues("send_invitationwin_btn_cancel", 219, "abbrechen", "cancel", "cancel", "cancel");
+//		Fieldmanagment.getInstance().addFourFieldValues("send_chat_text_btn", 220, "senden", "send", "appeler", "emitir");
+		Fieldmanagment.getInstance().addFourFieldValues("invited_userwin_header", 221, "Benutzerdaten", "Userdata", "userdata", "userdata");
+		Fieldmanagment.getInstance().addFourFieldValues("invited_userwin_subject", 222, "Nickname für diese Konference", "Your nickname for this conference", "Your nickname for this conference", "Your nickname for this conference");
+		Fieldmanagment.getInstance().addFourFieldValues("invited_userwin_login", 223, "Spitzname/Alias", "nick", "nick", "nick");
+		Fieldmanagment.getInstance().addFourFieldValues("invited_userwin_firstname", 224, "Vorname", "firstname", "firstname", "firstname");
+		Fieldmanagment.getInstance().addFourFieldValues("invited_userwin_lastname", 225, "Nachname", "lastname", "lastname", "lastname");
+		Fieldmanagment.getInstance().addFourFieldValues("invited_userwin_mail", 226, "EMail", "email", "email", "email");
+		Fieldmanagment.getInstance().addFourFieldValues("invited_userwin_lang", 227, "Sprache", "language", "language", "language");
+		Fieldmanagment.getInstance().addFourFieldValues("invited_userwin_enter", 228, "Absenden", "enter", "enter", "enter");
 		
 	}
 

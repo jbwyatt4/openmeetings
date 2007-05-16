@@ -119,6 +119,7 @@ public class Install extends VelocityViewServlet {
 					ImportInitvalues.getInstance().loadSalutations();
 					ImportInitvalues.getInstance().loadConfiguration(configdefault, configsmtp, configreferer, configmailuser, configmailpass, configdefaultLang);
 					ImportInitvalues.getInstance().loadInitUserAndOrganisation(username, userpass, useremail, orgname);
+					ImportInitvalues.getInstance().loadDefaultRooms();
 					
 					//update to next step
 					log.error("add level to install file");
