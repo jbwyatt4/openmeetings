@@ -70,6 +70,7 @@ public class MailHandler {
 			// -- Attaching to default Session, or we could start a new one --
 
 			props.put("mail.smtp.host", smtpServer);
+			props.put("mail.smtp.port", "587");
 			props.put("mail.smtp.auth", "true");
 
 			Session session = Session.getDefaultInstance(props,
@@ -95,7 +96,7 @@ public class MailHandler {
 			// msg.setContent(body, "text/html");
 
 			// -- Set some other header information --
-			msg.setHeader("X-Mailer", "XMLShop Service-Mail");
+			msg.setHeader("X-Mailer", "XML-Mail");
 			msg.setSentDate(new Date());
 
 			// -- Send the message --

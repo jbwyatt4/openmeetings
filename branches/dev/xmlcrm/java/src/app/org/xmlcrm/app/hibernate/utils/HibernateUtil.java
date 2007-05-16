@@ -2,8 +2,6 @@ package org.xmlcrm.app.hibernate.utils;
 
 import java.io.File;
 
-import java.util.Iterator;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.*;
@@ -16,7 +14,7 @@ public class HibernateUtil {
 	/** Read the configuration, will share across threads**/
 	  private static SessionFactory sessionFactory;
 	  /** the per thread session **/
-	  private static final ThreadLocal currentSession = new ThreadLocal();
+	  private static final ThreadLocal<Session> currentSession = new ThreadLocal<Session>();
 	  /** The constants for describing the ownerships **/
 	  private static final Owner trueOwner = new Owner(true);
 	  private static final Owner fakeOwner = new Owner(false); 

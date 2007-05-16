@@ -16,6 +16,8 @@ import org.xmlcrm.app.data.basic.*;
 import org.xmlcrm.app.data.user.Usermanagement;
 import org.xmlcrm.app.data.user.Statemanagement;
 
+import org.xmlcrm.app.data.conference.Invitationmanagement;
+
 public class MainService {
 	
 	private static final Log log = LogFactory.getLog(MainService.class);
@@ -221,6 +223,15 @@ public class MainService {
     	}
     }
 
+    /*
+     * send an invitation to another user
+     * 
+     */
+    public String sendInvitation(String SID, String username, String message, String domain, String room, String roomtype, String baseurl, String email, String subject){
+    	int users_id = Sessionmanagement.getInstance().checkSession(SID);
+    	long User_LEVEL = Usermanagement.getInstance().getUserLevelByID(users_id);
+    	return Invitationmanagement.getInstance().sendInvitionLink(User_LEVEL, username, message, domain, room, roomtype, baseurl, email, subject);
+    }
 
     
     /*

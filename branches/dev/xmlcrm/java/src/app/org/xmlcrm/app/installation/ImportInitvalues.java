@@ -1,21 +1,17 @@
 package org.xmlcrm.app.installation;
 
-import java.io.File;
 import java.util.Iterator;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.dom4j.io.SAXReader;
 import org.dom4j.Element;
 import org.dom4j.Document;
-import org.dom4j.DocumentException;
 import org.xmlcrm.app.data.basic.Configurationmanagement;
 import org.xmlcrm.app.data.basic.Fieldmanagment;
 import org.xmlcrm.app.data.basic.Languagemanagement;
 import org.xmlcrm.app.data.basic.Navimanagement;
+import org.xmlcrm.app.data.conference.Roommanagement;
 import org.xmlcrm.app.data.user.Organisationmanagement;
 import org.xmlcrm.app.data.user.Salutationmanagement;
 import org.xmlcrm.app.data.user.Statemanagement;
@@ -92,6 +88,27 @@ public class ImportInitvalues {
 		
 		Configurationmanagement.getInstance().addConfByKey(3, "register_mail_subject", "SignUp", null, "The Subject for Mails sended at registration");
 					
+		
+	}
+	
+	public void loadDefaultRooms(){
+		
+		long conference_Id = Roommanagement.getInstance().addRoomType("conference");
+		log.error("conference_Id: "+conference_Id);
+		long audience_Id = Roommanagement.getInstance().addRoomType("audience");
+		log.error("audience_Id: "+audience_Id);
+		
+		long room = Roommanagement.getInstance().addRoom(3,"public Conference Room", 1, false);
+		Roommanagement.getInstance().addRoomToOrganisation(3,room, 1);
+		
+		long room2 = Roommanagement.getInstance().addRoom(3,"private Conference Room", 1, true);
+		Roommanagement.getInstance().addRoomToOrganisation(3,room2, 1);
+		
+		long room3 = Roommanagement.getInstance().addRoom(3,"public Audience Room", 2, false);
+		Roommanagement.getInstance().addRoomToOrganisation(3,room3, 1);
+		
+		long room4 = Roommanagement.getInstance().addRoom(3,"private Audience Room", 2, true);
+		Roommanagement.getInstance().addRoomToOrganisation(3,room4, 1);
 		
 	}
 	
