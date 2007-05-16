@@ -70,7 +70,7 @@
 		</view>
 
 	  	<attribute name="objMessage" value="null" />
-	  	<button align="right" y="0" text="Send" height="20" name="_button"> 
+	  	<simplelabelbutton align="right" y="0" labelid="220" name="_button"> 
 		  	<handler name="onclick">
 		  		parent.objMessage = new Array ();
 		  		parent.objMessage[0] = 'chat';
@@ -79,7 +79,7 @@
 		  		parent.objMessage[1] = datumsString;
 	  			Debug.write("Setting Message");
 	  			parent.objMessage[2] = 'newtextmessage';
-	  			parent.objMessage[3] = canvas.currentusename;
+	  			parent.objMessage[3] = hib.userobject.login;
 	  			parent.objMessage[4] = this.parent.message.getText();
 	  			parent.objMessage[5] = canvas.currentusercolor;
 	  			parent.objMessage[6] = canvas.currentuserpos;
@@ -89,10 +89,12 @@
 			  		this.parent.message.setText('');
 		  		}
 		  	</handler>
-		</button>
+		</simplelabelbutton>
 		
-        <netremotecallhib name="sendMessageWithClient" funcname="sendMessageWithClient" remotecontext="$once{ canvas.thishib }" >   
-        	<netparam name="vars"><method name="getValue">return parent.parent.objMessage;</method></netparam>
+        <netremotecallhib name="sendMessageWithClient" funcname="sendMessageWithClient" 
+			remotecontext="$once{ canvas.thishib }" > 
+        	<netparam name="vars1"><method name="getValue"> return canvas.sessionId; </method></netparam>
+			
             <handler name="ondata" args="value">
             	<![CDATA[
                 //The onResult-Handler will be called be the rtmpconnection
