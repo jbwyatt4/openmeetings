@@ -12,9 +12,7 @@ public class AddDefaultConfigItems extends TestCase {
 	
 	public void testaddDefaultConfiItems(){
 		
-		Configurationmanagement.getInstance().addConfByKey(3, "default_lang", "DE", 1, "Default System Language for tamplates");
-		Configurationmanagement.getInstance().addConfByKey(3, "register_mail_subject", "SignUp", 1, "The Subject for Mails sended at registration");
-		
+		Configurationmanagement.getInstance().addConfByKey(3, "smtp_port", "587", null, "this is the smtp server port normally 25");
 	}
 
 }

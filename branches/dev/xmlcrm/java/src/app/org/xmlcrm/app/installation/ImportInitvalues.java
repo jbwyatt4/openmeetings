@@ -64,7 +64,7 @@ public class ImportInitvalues {
 		
 	}
 	
-	public void loadConfiguration(String allowfrontendRegister, String smtpServer, String referer, String mailauthname, 
+	public void loadConfiguration(String allowfrontendRegister, String smtpServer, String smtpPort, String referer, String mailauthname, 
 			String mailauthpass, String default_lang){
 		
 		//"1"
@@ -77,11 +77,13 @@ public class ImportInitvalues {
 		
 		//"smtp.xmlcrm.org"
 		Configurationmanagement.getInstance().addConfByKey(3, "smtp_server", smtpServer, null, "this is the smtp server to send messages");
+		//25
+		Configurationmanagement.getInstance().addConfByKey(3, "smtp_port", smtpPort, null, "this is the smtp server port normally 25");
 		//"openmeetings@xmlcrm.org"
 		Configurationmanagement.getInstance().addConfByKey(3, "system_email_addr", referer, null, "all send EMails by the system will have this address");
 		//"openmeetings@xmlcrm.org"
 		Configurationmanagement.getInstance().addConfByKey(3, "email_username", mailauthname, null, "System auth email username");
-		//"tony123"
+		//
 		Configurationmanagement.getInstance().addConfByKey(3, "email_userpass", mailauthpass, null, "System auth email password");		
 		//"EN"
 		Configurationmanagement.getInstance().addConfByKey(3, "default_lang", default_lang, null, "Default System Language for tamplates");

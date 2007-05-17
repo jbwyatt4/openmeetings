@@ -36,13 +36,14 @@ public class MailHandler {
 
 			// String smtpServer="smtp.xmlcrm.org";
 			String smtpServer = Configurationmanagement.getInstance().getConfKey(3, "smtp_server").getConf_value();
+			String smtpPort = Configurationmanagement.getInstance().getConfKey(3, "smtp_port").getConf_value();
 			String to = toEmail;
 			// String from = "openmeetings@xmlcrm.org";
 			String from = Configurationmanagement.getInstance().getConfKey(3,"system_email_addr").getConf_value();
 			String subject = subj;
 			String body = message;
 
-			return send(smtpServer, to, from, subject, body);
+			return send(smtpServer, smtpPort, to, from, subject, body);
 		} catch (Exception ex) {
 			log.error("[sendMail] " ,ex);
 			return "Error: " + ex;
@@ -59,7 +60,7 @@ public class MailHandler {
 	 * @param body
 	 * @return
 	 */
-	public static String send(String smtpServer, String to, String from,
+	public static String send(String smtpServer, String smtpPort, String to, String from,
 			String subject, String body) {
 		try {
 
@@ -68,9 +69,9 @@ public class MailHandler {
 			Properties props = System.getProperties();
 
 			// -- Attaching to default Session, or we could start a new one --
-
+			//smtpPort 25 or 587
 			props.put("mail.smtp.host", smtpServer);
-			props.put("mail.smtp.port", "587");
+			props.put("mail.smtp.port", smtpPort);
 			props.put("mail.smtp.auth", "true");
 
 			Session session = Session.getDefaultInstance(props,

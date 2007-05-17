@@ -51,6 +51,9 @@
         <label for="configsmtp">SMTP-Server</label>
     	<input name="configsmtp" id="configsmtp" size="27" title="Enter a SMTP-Server" type="text" /><br/>
     	
+    	<label for="configsmtp">SMTP-Server Port(default Smtp-Server Port is 25)</label>
+    	<input name="configsmtpport" id="configsmtpport" size="27" title="Enter a SMTP-Server.Port normally 25" type="text" /><br/>
+    	
     	<label for="configmailuser">SMTP-Username</label>
     	<input name="configmailuser" id="configmailuser" size="27" title="Enter the mail-username" type="text" /><br />
     	
