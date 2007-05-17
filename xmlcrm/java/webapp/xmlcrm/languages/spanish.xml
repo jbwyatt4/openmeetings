@@ -659,5 +659,29 @@
 </string>
 <string id="220" name="send_chat_text_btn">
 <value>emitir</value>
+</string>	
+<string id="221" name="invited_userwin_header">
+<value>Userdata</value>
+</string>
+<string id="222" name="invited_userwin_subject">
+<value>Your nickname for this conference</value>
+</string>
+<string id="223" name="invited_userwin_login">
+<value>nick</value>
+</string>
+<string id="224" name="invited_userwin_firstname">
+<value>firstname</value>
+</string>
+<string id="225" name="invited_userwin_lastname">
+<value>lastname</value>
+</string>
+<string id="226" name="invited_userwin_mail">
+<value>email</value>
+</string>
+<string id="227" name="invited_userwin_lang">
+<value>language</value>
+</string>
+<string id="228" name="invited_userwin_enter">
+<value>enter</value>
 </string>		
 </language>

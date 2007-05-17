@@ -660,4 +660,28 @@
 <string id="220" name="send_chat_text_btn">
 <value>senden</value>
 </string>
+<string id="221" name="invited_userwin_header">
+<value>Benutzerdaten</value>
+</string>
+<string id="222" name="invited_userwin_subject">
+<value>Nickname für diese Konference</value>
+</string>
+<string id="223" name="invited_userwin_login">
+<value>Spitzname/Alias</value>
+</string>
+<string id="224" name="invited_userwin_firstname">
+<value>Vorname</value>
+</string>
+<string id="225" name="invited_userwin_lastname">
+<value>Nachname</value>
+</string>
+<string id="226" name="invited_userwin_mail">
+<value>EMail</value>
+</string>
+<string id="227" name="invited_userwin_lang">
+<value>Sprache</value>
+</string>
+<string id="228" name="invited_userwin_enter">
+<value>Absenden</value>
+</string>		
 </language>

@@ -105,6 +105,7 @@ public class Install extends VelocityViewServlet {
 					String configdefault = httpServletRequest.getParameter("configdefault");
 					String configreferer = httpServletRequest.getParameter("configreferer");
 					String configsmtp = httpServletRequest.getParameter("configsmtp");
+					String configsmtpport = httpServletRequest.getParameter("configsmtpport");
 					String configmailuser = httpServletRequest.getParameter("configmailuser");
 					String configmailpass = httpServletRequest.getParameter("configmailpass");
 					String configdefaultLang = httpServletRequest.getParameter("configdefaultLang");
@@ -117,7 +118,7 @@ public class Install extends VelocityViewServlet {
 					ImportInitvalues.getInstance().loadInitLangauges(filePath);
 					ImportInitvalues.getInstance().loadMainMenu();
 					ImportInitvalues.getInstance().loadSalutations();
-					ImportInitvalues.getInstance().loadConfiguration(configdefault, configsmtp, configreferer, configmailuser, configmailpass, configdefaultLang);
+					ImportInitvalues.getInstance().loadConfiguration(configdefault, configsmtp, configsmtpport, configreferer, configmailuser, configmailpass, configdefaultLang);
 					ImportInitvalues.getInstance().loadInitUserAndOrganisation(username, userpass, useremail, orgname);
 					ImportInitvalues.getInstance().loadDefaultRooms();
 					

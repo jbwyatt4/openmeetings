@@ -78,7 +78,7 @@ public class ConferenceLibrary {
 				System.out.println("### this is my working directory: "+working_dir);
 				
 				File dir = new File(working_dir);
-				
+
 				//First get all Directories of this Folder
 				
 				FilenameFilter ff = new FilenameFilter() {
@@ -252,6 +252,9 @@ public class ConferenceLibrary {
 				
 				String roomName = domain+"_"+room;
 				
+//				trim whitespaces cause it is a directory name
+				roomName = StringUtils.deleteWhitespace(roomName);
+				
 				IScope scope = Red5.getConnectionLocal().getScope().getParent();
 				
 				String current_dir = scope.getResource("upload/").getFile().getAbsolutePath()+File.separatorChar+roomName+File.separatorChar;
@@ -273,6 +276,9 @@ public class ConferenceLibrary {
 			try {
 				
 				String roomName = domain+"_"+room;
+				
+//				trim whitespaces cause it is a directory name
+				roomName = StringUtils.deleteWhitespace(roomName);
 				
 				IScope scope = Red5.getConnectionLocal().getScope().getParent();
 				

@@ -1,15 +1,9 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Hello Spring</title>
+        <title>Openmeetings Webapp</title>
     </head>
     <body>
-
-    <form action="uploadhandler.html" method="POST">
-        What is your name?
-        <input type="text" name="yourName" value="" />
-
-    </form>
-    
+        <p>See <a href="http://code.google.com/p/openmeetings/">http://code.google.com/p/openmeetings/</a> for more information</p>
     </body>
 </html>
