@@ -1,24 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library>
 
-<class name="errorpopup" extends="view" width="${ canvas.width }" height="20" bgcolor="red">
-
-	<attribute name="fadeDelegate" value="null" />
-
-	<handler name="oninit">
-		this.fadeDelegate = new LzDelegate( this, "fadeOut" );
-		LzTimer.addTimer( this.fadeDelegate, 3500 );
-	</handler>
-	
-	<method name="fadeOut">
-		this._fadeout.doStart();
-	</method>
+<class name="errorpopup" extends="labelexplorerbox" labelid="204"
+	docking="true" resizeable="false" closable="true" width="224" x="300" y="300" height="230">
 
 	<attribute name="error" value="" type="string" />
 
-	<text fontsize="12" resize="true" fontstyle="bold" text="${ parent.error }" />
 
-	<animator name="_fadeout" attribute="y" to="-30" duration="1500" onstop="this.parent.destroy()" start="false"/>
+	<view y="24" width="200" height="200">
+		<text y="30" x="10" fontsize="10" fontstyle="bold" text="${ parent.parent.error }"
+			multiline="true" width="190" />
+		<vscrollbar />
+	</view>
+
 </class>
 
 </library>

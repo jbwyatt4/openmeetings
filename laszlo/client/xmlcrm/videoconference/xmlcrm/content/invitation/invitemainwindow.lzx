@@ -59,8 +59,11 @@
             	<![CDATA[
                 //The onResult-Handler will be called be the rtmpconnection
 					Debug.write("getValue : ",value);
-					
-					parent.close();
+					if (value=="success"){
+						parent.close();
+					} else {
+						new errorpopup(canvas.main_content._content.inner,{error:value});
+					}
                 ]]>
             </handler>   
         </netremotecallhib>  	
