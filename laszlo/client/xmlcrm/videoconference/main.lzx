@@ -5,7 +5,7 @@
 
 <debug fontsize="14" oninit="Debug.showInternalProperties = true" />
 
-<silverstyle name="defaultstyle" isdefault="true" basecolor="$once{ canvas.basebgcolorizer }"
+<silverstyle name="defaultstyle" isdefault="true" basecolor="${ canvas.basebgcolorizer }"
 	canvascolor="white" />
 	
 <splash>
@@ -122,9 +122,9 @@
 <attribute name="currentusercolor" value="0x000000" type="string" />
 <attribute name="currentuserpos" value="0" type="number" />
 	
-<attribute name="basebgcolorizer" value="0xFC8558" type="string" />	
-<attribute name="baseMousecolorizer" value="0xFDC4A6" type="string" />	
-<attribute name="baseMouseOvercolorizer" value="0xFDC4A6" type="string" />  
+<attribute name="basebgcolorizer" value="0xB0C4DE" type="string" />	
+<attribute name="baseMousecolorizer" value="0xC4D5E6" type="string" />	
+<attribute name="baseMouseOvercolorizer" value="0xC4D5E6" type="string" />  
 	
 <attribute name="currentModApply" value="null" />	
 

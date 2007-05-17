@@ -39,6 +39,50 @@
             </netremotecallhib>
         </combobox>
 	
+    <labeltext name="n5" text="Color-Style" width="200" y="132" resize="false" x="2"/>  
+        
+        <combobox name="colors" width="170" y="132" x="120" editable="false">
+			<attribute name="initselect" value="true" type="boolean" />
+            <handler name="oninit">
+				this.addItem('redorange','redorange');
+				this.addItem('mediumseagreen','mediumseagreen');
+				this.addItem('steelblue','steelblue');
+				this.addItem('lightsteelblue','lightsteelblue');
+				this.addItem('goldenrod','goldenrod');
+				this.selectItem('lightsteelblue');
+			</handler>
+			<handler name="onselect" args="v">
+				Debug.write("onselect: ",v.value);
+				if (this.initselect){
+					this.initselect=false;
+				} else {
+					if (v.value=="mediumseagreen"){
+						canvas.setAttribute('basebgcolorizer',"0x3CB371");
+						canvas.setAttribute('baseMousecolorizer',"0x66CC8E");
+						canvas.setAttribute('baseMouseOvercolorizer',"0x66CC8E");
+					} else if (v.value=="steelblue"){
+						canvas.setAttribute('basebgcolorizer',"0x4682B4");
+						canvas.setAttribute('baseMousecolorizer',"0x80AECC");
+						canvas.setAttribute('baseMouseOvercolorizer',"0x80AECC");
+					} else if (v.value=="redorange"){
+						canvas.setAttribute('basebgcolorizer',"0xFC8558");
+						canvas.setAttribute('baseMousecolorizer',"0xFDC4A6");
+						canvas.setAttribute('baseMouseOvercolorizer',"0xFDC4A6");
+					} else if (v.value=="lightsteelblue"){
+						canvas.setAttribute('basebgcolorizer',"0xB0C4DE");
+						canvas.setAttribute('baseMousecolorizer',"0xC4D5E6");
+						canvas.setAttribute('baseMouseOvercolorizer',"0xC4D5E6");
+					} else if (v.value=="goldenrod"){
+						canvas.setAttribute('basebgcolorizer',"0xDAA520");
+						canvas.setAttribute('baseMousecolorizer',"0xE8C064");
+						canvas.setAttribute('baseMouseOvercolorizer',"0xE8C064");
+					}
+					this.parent.close();
+					new checkLoginData(canvas.main_content._content);
+				}
+			</handler>
+        </combobox>	
+	
 
     <labeltext name="n4" labelid="184" width="200" y="102" resize="false" x="2" visible="false" />     
         <combobox name="organisation" width="170" y="102" x="120" editable="false" visible="false" />

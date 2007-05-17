@@ -8,7 +8,8 @@ bgcolor="$once{ canvas.baseMousecolorizer }"
 	onmouseover=" this.setBGColor(canvas.baseMouseOvercolorizer) "
     onmouseout=" this.setBGColor(canvas.baseMousecolorizer) " 
 -->
-<class name="linemenuitems" extends="view" >
+<class name="linemenuitems" extends="button"
+	onclick="parent.selectItem(this)" fontstyle="bold">
 
 	<attribute name="rscleft" value="mainmenu_left_rsc" type="string" />
 	<attribute name="rscmid" value="mainmenu_mid_rsc" type="string" />
@@ -20,17 +21,17 @@ bgcolor="$once{ canvas.baseMousecolorizer }"
     <attribute name="isleaf" value="false" type="boolean" />    
     <attribute name="depth" value="2" type="number" />
     <attribute name="text" value="" type="string" />
-    
-    <handler name="onclick">
-    	parent.selectItem(this);
-    </handler>
-    <view layout="axis:x;spacing:0" width="${ parent.width }" >
+
+	<!--
+    <view name="n" layout="axis:x;spacing:0" width="${ parent.width }" >
+		
 	    <view name="_left" resource="$once{ parent.parent.rscleft }" />
 	    <view name="_mid" resource="$once{ parent.parent.rscmid }" stretches="width" 
 	    	width="${ parent.width-40 }" />
 	    <view name="_right" resource="$once{ parent.parent.rscright }" />
+		
     </view>
-    
+    -->
 </class>
 
 <class name="mainselectHandlerBar" layout="axis:x;spacing:0" >
@@ -42,7 +43,7 @@ bgcolor="$once{ canvas.baseMousecolorizer }"
 	</method>
 </class>
 
-<class name="subsubtreeitem" extends="linemenuitems" width="${ this._cbtext.width+12 }" 
+<class name="subsubtreeitem" extends="linemenuitems"  
 	rscleft="subsubmenu_left_rsc" rscmid="subsubmenu_mid_rsc" rscright="subsubmenu_right_rsc">  
     <attribute name="list" value="null" />
     <handler name="onclick"> 
@@ -59,12 +60,13 @@ bgcolor="$once{ canvas.baseMousecolorizer }"
         }
         ]]>
     </handler>  
+	<!--
     <text x="8" y="2" height="20" resize="true" fontsize="11" name="_cbtext"
         fontstyle="bold" text="$once{parent.text}" />
-        
+     -->   
 </class>
 
-<class name="subtreeitem" extends="linemenuitems" width="${ this._cbtext.width+16 }" 
+<class name="subtreeitem" extends="linemenuitems"  
 	rscleft="submenu_left_rsc" rscmid="submenu_mid_rsc" rscright="submenu_right_rsc"> 
     <handler name="onclick"> 
     	<![CDATA[
@@ -81,13 +83,14 @@ bgcolor="$once{ canvas.baseMousecolorizer }"
 		}
 		]]>
 	</handler>	
+	<!--
     <text x="8" y="4" height="24" resize="true" fontsize="12" name="_cbtext"
         fontstyle="bold" text="$once{parent.text}" />
-        
+     -->
 </class>
 
 
-<class name="mainnavitree" extends="linemenuitems" width="${ this._cbtext.width+20 }" y="2" > 
+<class name="mainnavitree" extends="linemenuitems" y="2" > 
 
     <handler name="onclick"> 
     	<![CDATA[
@@ -113,9 +116,10 @@ bgcolor="$once{ canvas.baseMousecolorizer }"
         Debug.write("this.parent.parent._subcontent: ",this.parent.parent._subcontent);
 		]]>
 	</handler>	
-    
+    <!--
     <text x="10" y="4" resize="true" fontsize="14" name="_cbtext"
         fontstyle="bold" text="$once{parent.text}" />
+	 -->
 </class>
     
 <class name="mainnavi" extends="view" >
@@ -172,11 +176,11 @@ bgcolor="$once{ canvas.baseMousecolorizer }"
         	this.clearSubSubItemList();
         </method>       	   
         
-        <mainselectHandlerBar name="_content" bgcolor="$once{canvas.baseMousecolorizer}" height="32" width="${ canvas.width }" />
+        <mainselectHandlerBar name="_content" bgcolor="$once{ canvas.basebgcolorizer }" height="32" width="${ canvas.width }" />
         
-        <mainselectHandlerBar name="_subcontent" bgcolor="$once{canvas.baseMousecolorizer}" />
+        <mainselectHandlerBar name="_subcontent" bgcolor="$once{ canvas.basebgcolorizer }" />
         
-        <mainselectHandlerBar name="_subsubcontent" bgcolor="$once{canvas.baseMousecolorizer}" />
+        <mainselectHandlerBar name="_subsubcontent" bgcolor="$once{ canvas.basebgcolorizer }" />
             
     </view>
 
