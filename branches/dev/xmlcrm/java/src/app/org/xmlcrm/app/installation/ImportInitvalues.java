@@ -100,16 +100,14 @@ public class ImportInitvalues {
 		long audience_Id = Roommanagement.getInstance().addRoomType("audience");
 		log.error("audience_Id: "+audience_Id);
 		
-		long room = Roommanagement.getInstance().addRoom(3,"public Conference Room", 1, false);
-		Roommanagement.getInstance().addRoomToOrganisation(3,room, 1);
+		long room = Roommanagement.getInstance().addRoom(3,"public Conference Room", 1, true);
 		
-		long room2 = Roommanagement.getInstance().addRoom(3,"private Conference Room", 1, true);
+		long room2 = Roommanagement.getInstance().addRoom(3,"private Conference Room", 1, false);
 		Roommanagement.getInstance().addRoomToOrganisation(3,room2, 1);
 		
-		long room3 = Roommanagement.getInstance().addRoom(3,"public Audience Room", 2, false);
-		Roommanagement.getInstance().addRoomToOrganisation(3,room3, 1);
+		long room3 = Roommanagement.getInstance().addRoom(3,"public Audience Room", 2, true);
 		
-		long room4 = Roommanagement.getInstance().addRoom(3,"private Audience Room", 2, true);
+		long room4 = Roommanagement.getInstance().addRoom(3,"private Audience Room", 2, false);
 		Roommanagement.getInstance().addRoomToOrganisation(3,room4, 1);
 		
 	}
