@@ -279,7 +279,7 @@
 	<view width="${ this.parent.width-2 }" height="${ this.parent.height-2 }" x="1" y="1" bgcolor="0xFFFFFF" />
 	<view x="1" y="1" width="${ this.parent.width-2 }" height="20" >
 		<view width="${ this.parent.parent.width-2 }" y="0" bgcolor="$once{ canvas.basebgcolorizer }" resource="explorer_thumb_rsc" stretches="width" />
-		<text fontsize="12" height="17" x="10" y="1" text="${ this.parent.parent.title }" bgcolor="0xFFFFFF" resize="true" />
+		<text fontsize="11" height="17" x="10" y="1" text="${ this.parent.parent.title }" bgcolor="0xFFFFFF" resize="true" />
 		<view visible="${ this.parent.parent.closable }" x="${ this.parent.parent.width-19 }" y="1" resource="explorer_button_rsc">
 			<handler name="onmouseover">
 				this.setResourceNumber(2);
