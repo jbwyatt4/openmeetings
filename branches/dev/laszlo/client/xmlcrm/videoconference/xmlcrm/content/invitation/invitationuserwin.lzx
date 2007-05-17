@@ -2,7 +2,7 @@
 <library>
  
  <class name="invitationuserwin" extends="labelexplorerbox" labelid="221"
-    docking="true" resizeable="false" closable="false" width="324" x="200" y="0" height="400">
+    docking="true" resizeable="false" closable="false" width="324" x="300" y="0" height="400">
 	 
 	 <attribute name="userlang" value="1" type="number" />
 
@@ -46,6 +46,7 @@
 			
 			var userObject = new Array();
 			
+			canvas.setAttribute('currentuser',parent._login.getText());
 			canvas.setAttribute('user_id',-1);
 			canvas.setAttribute('firstName',parent.firstName.getText());
 			canvas.setAttribute('lastName',parent.lastName.getText());	
@@ -80,6 +81,53 @@
             //The onResult-Handler will be called be the rtmpconnection
             Debug.write("getLanguageById: ",value);
             setLabelObject(value);
+			parent.getStates.doCall();
+        </handler>  
+    </netremotecallhib>	 
+	 
+    
+    <netremotecallhib name="getStates" funcname="xmlcrm.getStates" 
+		remotecontext="$once{ canvas.thishib }" >  
+        <handler name="ondata" args="value">
+            //The onResult-Handler will be called be the rtmpconnection
+            Debug.write("getStates: ",value);
+            canvas.statesInitValues = value;
+            parent.getUserSalutations.doCall();
+        </handler>  
+    </netremotecallhib>    
+    
+    <netremotecallhib name="getUserSalutations" funcname="userservice.getUserSalutations" 
+		remotecontext="$once{ canvas.thishib }" >  
+		<netparam name="vars1"><method name="getValue">return canvas.sessionId;</method></netparam>
+        <handler name="ondata" args="value">
+            //The onResult-Handler will be called be the rtmpconnection
+            Debug.write("getUserSalutations ",value);
+            canvas.salutationsInitValues = value;
+            parent.getRoomTypes.doCall();
+        </handler>  
+    </netremotecallhib>   
+    
+    <netremotecallhib name="getRoomTypes" funcname="conferenceservice.getRoomTypes" 
+		remotecontext="$once{ canvas.thishib }" >  
+		<netparam name="vars1"><method name="getValue">return canvas.sessionId;</method></netparam>
+        <handler name="ondata" args="value">
+            //The onResult-Handler will be called be the rtmpconnection
+            Debug.write("getRoomTypes ",value);
+            canvas.roomTypesInitValues = value;
+            parent.setUsername.doCall();
+        </handler>  
+    </netremotecallhib>    	 
+
+	 
+    <netremotecallhib name="setUsername" funcname="setUsername" remotecontext="$once{ canvas.thishib }" >   
+        <netparam name="vars1"><method name="getValue">return canvas.user_id;</method></netparam>
+        <netparam name="vars2"><method name="getValue">return canvas.currentuser;</method></netparam>
+        <netparam name="vars3"><method name="getValue">return canvas.firstName;</method></netparam>
+        <netparam name="vars4"><method name="getValue">return canvas.lastName;</method></netparam>      
+        <netparam name="vars6"><method name="getValue">return parent.parent.currentdomain;</method></netparam>
+        <handler name="ondata" args="value">
+            //The onResult-Handler will be called be the rtmpconnection
+            Debug.write("setUsername: ",value);
 	        hib.connectedroom=canvas.initroomid;
             hib.conferencedomain = canvas.initdomainid;
 
@@ -91,10 +139,10 @@
 			} else {
 				new audience(canvas.main_content._content.inner); 
 			}
-			this.parent.close();
+			this.parent.close();	                 
         </handler>  
-    </netremotecallhib>	 
-		
+    </netremotecallhib>  
+	  	 	
 </class>
 	
 <!--

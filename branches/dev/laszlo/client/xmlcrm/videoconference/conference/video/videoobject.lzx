@@ -40,14 +40,21 @@
 	
 	<!-- Get the reference to the videoview-Object -->
 	<method name="getVideoReference">
-		return this._chatvideoinner._videoview;
 		this._chatvideoinner._sendInvitation.setAttribute('visible',false);
+		return this._chatvideoinner._videoview;
 	</method>
-    
+	
+	<!-- called by disconnected status -->
+	<method name="getVideoReferenceDis">
+		this._chatvideoinner._sendInvitation.setAttribute('visible',true);
+		return this._chatvideoinner._videoview;
+	</method>
+	
     <method name="setIdentifier" args="id">
     	//for development replace this by the real name later after authentification
     	//this.setAttribute('chatpartnername',('StreamID: '+id));
         this.uniqueid = id;
+		this._chatvideoinner._sendInvitation.setAttribute('visible',false);
     </method>
     
     <method name="resetValues">

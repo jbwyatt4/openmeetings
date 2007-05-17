@@ -151,6 +151,12 @@
 			<vscrollbar />
 		</view>
 	</view>
+	
+	<simplelabelbutton name="_sendInvitation" x="2" y="236" width="200" labelid="213" >
+		<handler name="onclick">
+			new invitemainwindow(canvas.main_content._content.inner);
+		</handler>
+	</simplelabelbutton>
 </class>
 
 </library>
