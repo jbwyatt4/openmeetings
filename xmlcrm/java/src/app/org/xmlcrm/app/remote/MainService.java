@@ -17,6 +17,7 @@ import org.xmlcrm.app.data.user.Usermanagement;
 import org.xmlcrm.app.data.user.Statemanagement;
 
 import org.xmlcrm.app.data.conference.Invitationmanagement;
+import org.xmlcrm.app.data.conference.Feedbackmanagement;
 
 public class MainService {
 	
@@ -231,6 +232,18 @@ public class MainService {
     	int users_id = Sessionmanagement.getInstance().checkSession(SID);
     	long User_LEVEL = Usermanagement.getInstance().getUserLevelByID(users_id);
     	return Invitationmanagement.getInstance().sendInvitionLink(User_LEVEL, username, message, domain, room, roomtype, baseurl, email, subject);
+    }
+    
+    /**
+     * send some feedback, this will only work for the online demo-version
+     * @param SID
+     * @param username
+     * @param message
+     * @param email
+     * @return
+     */
+    public String sendFeedback(String SID, String username, String message, String email){
+    	return Feedbackmanagement.getInstance().sendFeedback(username, email, message);
     }
 
     
