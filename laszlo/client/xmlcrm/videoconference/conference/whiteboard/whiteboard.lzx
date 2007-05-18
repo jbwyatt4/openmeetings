@@ -162,11 +162,11 @@
 	<handler name="isloadingImage" args="val" />
 	<handler name="isloadedImage" args="val" />
 	   
-    <view resource="backgroundtools_rsc" width="652"/>
+    <view width="652" bgcolor="$once{canvas.baseMousecolorizer}" y="40" height="28" />
 	<!-- 
 		Menubar with tool-icons
 	 -->
-	<view name="_paintmenu" layout="axis:x;spacing:2" x="2" height="28" >
+	<view name="_paintmenu" layout="axis:x;spacing:2" x="2" y="40" height="28" >
 		<attribute name="selectedButton" value="null" />
 		<method name="selectButton" args="obj,bool">		
 			if (this.selectedButton!=null){
@@ -207,7 +207,7 @@
 	<!-- 
 		The Content Area
 	 -->
-	<basedrawsave width="642" height="488" y="28" clip="true"
+	<basedrawsave width="642" height="488" y="68" clip="true"
 		name="_drawarea" id="_drawarea" >
 		<handler name="onprogress" args="perc">
 			Debug.write("onprogress: ",perc);
@@ -263,18 +263,18 @@
 	<!-- 
 		Container for the bounding Box (selection Box)
 	 -->
-	<view name="boundboxesView" width="640" height="490" y="28" clip="true" />
+	<view name="boundboxesView" width="640" height="490" y="68" clip="true" />
 
 	<!-- Context sensitive stuff -->
 	
 	<!-- Line -->
-	<drawcolorpicker x="340" y="2" defaultno="4"
+	<drawcolorpicker x="340" y="2" defaultno="44"
 		visible="${ ( ( this.parent._drawarea.drawmodus=='line' ) ? true : false ) }">
 		<handler name="onnewcolor" args="c">
 			this.parent._drawarea.currentlinestroke = c;
 		</handler>
 	</drawcolorpicker>
-	<drawchoosesizeradio x="480" y="6" visible="${ ( ( this.parent._drawarea.drawmodus=='line' ) ? true : false ) }">
+	<drawchoosesizeradio x="480" y="46" visible="${ ( ( this.parent._drawarea.drawmodus=='line' ) ? true : false ) }">
 		<handler name="onselect" args="val">
 			if (val.value=='1') this.parent._drawarea.currentlinelineWidth=1;
 			if (val.value=='2') this.parent._drawarea.currentlinelineWidth=5;
@@ -283,13 +283,13 @@
 	</drawchoosesizeradio>
 	
 	<!-- Uline -->
-	<drawcolorpicker x="340" y="2" defaultno="6"
+	<drawcolorpicker x="340" y="2" defaultno="46"
 		visible="${ ( ( this.parent._drawarea.drawmodus=='uline' ) ? true : false ) }">
 		<handler name="onnewcolor" args="c">
 			this.parent._drawarea.currentulinestroke = c;
 		</handler>
 	</drawcolorpicker>
-	<drawchoosesizeradioT x="480" y="6" visible="${ ( ( this.parent._drawarea.drawmodus=='uline' ) ? true : false ) }">
+	<drawchoosesizeradioT x="480" y="46" visible="${ ( ( this.parent._drawarea.drawmodus=='uline' ) ? true : false ) }">
 		<handler name="onselect" args="val">
 			if (val.value=='1') this.parent._drawarea.currentulinelineWidth=5;
 			if (val.value=='2') this.parent._drawarea.currentulinelineWidth=10;
@@ -298,7 +298,7 @@
 	</drawchoosesizeradioT>
 	
 	<!-- drawarrow -->
-	<drawcolorpicker x="340" y="2" defaultno="7"
+	<drawcolorpicker x="340" y="42" defaultno="7"
 		visible="${ ( ( this.parent._drawarea.drawmodus=='drawarrow' ) ? true : false ) }">
 		<handler name="onnewcolor" args="c">
 			this.parent._drawarea.currentdrawarrowlinestroke = c;
@@ -306,13 +306,13 @@
 	</drawcolorpicker>
 	
 	<!-- Paint -->
-	<drawcolorpicker x="340" y="2" defaultno="1"
+	<drawcolorpicker x="340" y="42" defaultno="1"
 		visible="${ ( ( this.parent._drawarea.drawmodus=='paint' ) ? true : false ) }">
 		<handler name="onnewcolor" args="c">
 			this.parent._drawarea.currentlayerstroke = c;
 		</handler>
 	</drawcolorpicker>
-	<drawchoosesizeradio x="480" y="6" visible="${ ( ( this.parent._drawarea.drawmodus=='paint' ) ? true : false ) }">
+	<drawchoosesizeradio x="480" y="46" visible="${ ( ( this.parent._drawarea.drawmodus=='paint' ) ? true : false ) }">
 		<handler name="onselect" args="val">
 			if (val.value=='1') this.parent._drawarea.currentlayerlineWidth=1;
 			if (val.value=='2') this.parent._drawarea.currentlayerlineWidth=5;
@@ -321,25 +321,25 @@
 	</drawchoosesizeradio>
 	
 	<!-- letter -->
-	<drawcolorpicker  x="340" y="2" defaultno="1"
+	<drawcolorpicker  x="340" y="42" defaultno="1"
 		visible="${ ( ( this.parent._drawarea.drawmodus=='letter' ) ? true : false ) }">
 		<handler name="onnewcolor" args="c">
 			this.parent._drawarea.setAttribute('currentlayerletter',c);
 		</handler>
 	</drawcolorpicker>
 
-    <basechooseseicon resourceN="italic" x="420" y="2" visible="${ ( ( this.parent._drawarea.drawmodus=='letter' ) ? true : false ) }" labelid="86" >
+    <basechooseseicon resourceN="italic" x="420" y="42" visible="${ ( ( this.parent._drawarea.drawmodus=='letter' ) ? true : false ) }" labelid="86" >
         <handler name="onclick">
             this.parent._drawarea.setAttribute('italic',!this.parent._drawarea.getAttribute('italic'));
         </handler>
     </basechooseseicon>
-    <basechooseseicon resourceN="bold" x="446" y="2" visible="${ ( ( this.parent._drawarea.drawmodus=='letter' ) ? true : false ) }" labelid="87" >
+    <basechooseseicon resourceN="bold" x="446" y="42" visible="${ ( ( this.parent._drawarea.drawmodus=='letter' ) ? true : false ) }" labelid="87" >
         <handler name="onclick">
             this.parent._drawarea.setAttribute('bold',!this.parent._drawarea.getAttribute('bold'));
         </handler>
     </basechooseseicon>    
 
-	<drawchoosesizeradio x="480" y="6" visible="${ ( ( this.parent._drawarea.drawmodus=='letter' ) ? true : false ) }">
+	<drawchoosesizeradio x="480" y="46" visible="${ ( ( this.parent._drawarea.drawmodus=='letter' ) ? true : false ) }">
 		<handler name="onselect" args="val">
 			if (val.value=='1') this.parent._drawarea.setAttribute('currentlayersize',10);
 			if (val.value=='2') this.parent._drawarea.setAttribute('currentlayersize',15);
@@ -348,13 +348,13 @@
 	</drawchoosesizeradio>	
     
 
-	<drawcolorpicker x="340" y="2" defaultno="1"
+	<drawcolorpicker x="340" y="42" defaultno="1"
 		visible="${ ( ( this.parent._drawarea.drawmodus=='rectangle' ) ? true : false ) }">
 		<handler name="onnewcolor" args="c">
 			this.parent._drawarea.setAttribute('currentrectanglestroke',c);
 		</handler>
 	</drawcolorpicker>
-    <drawchoosesizeradio x="480" y="6" visible="${ ( ( this.parent._drawarea.drawmodus=='rectangle' ) ? true : false ) }">
+    <drawchoosesizeradio x="480" y="46" visible="${ ( ( this.parent._drawarea.drawmodus=='rectangle' ) ? true : false ) }">
         <handler name="onselect" args="val">
             if (val.value=='1') this.parent._drawarea.setAttribute('currentrectangleineWidth',1);
             if (val.value=='2') this.parent._drawarea.setAttribute('currentrectangleineWidth',5);
@@ -362,22 +362,22 @@
         </handler>
     </drawchoosesizeradio>  
 
-	<drawcolorpicker  x="340" y="2" defaultno="1"
+	<drawcolorpicker  x="340" y="42" defaultno="1"
 		visible="${ ( ( this.parent._drawarea.drawmodus=='ellipse' ) ? true : false ) }">
 		<handler name="onnewcolor" args="c">
 			this.parent._drawarea.setAttribute('currentellipsestroke',c);
 		</handler>
 	</drawcolorpicker>
-    <drawchoosesizeradio x="480" y="6" visible="${ ( ( this.parent._drawarea.drawmodus=='ellipse' ) ? true : false ) }">
+    <drawchoosesizeradio x="480" y="46" visible="${ ( ( this.parent._drawarea.drawmodus=='ellipse' ) ? true : false ) }">
         <handler name="onselect" args="val">
             if (val.value=='1') this.parent._drawarea.setAttribute('currentellipselineWidth',1);
             if (val.value=='2') this.parent._drawarea.setAttribute('currentellipselineWidth',5);
             if (val.value=='3') this.parent._drawarea.setAttribute('currentellipselineWidth',10);
         </handler>
     </drawchoosesizeradio>  
-
+<!--
 	<text name="_loading" text="Loading ... " fontsize="12" visible="false" x="${ parent.width-this.width }" y="24" bgcolor="white" />
-
+ -->
 </class>
 
 	<!-- 

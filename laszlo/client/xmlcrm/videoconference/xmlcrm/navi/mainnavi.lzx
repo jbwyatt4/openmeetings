@@ -178,7 +178,7 @@ bgcolor="$once{ canvas.baseMousecolorizer }"
         
         <mainselectHandlerBar name="_content" bgcolor="$once{ canvas.basebgcolorizer }" height="32" width="${ canvas.width }" />
         
-        <mainselectHandlerBar name="_subcontent" bgcolor="$once{ canvas.basebgcolorizer }" />
+        <mainselectHandlerBar name="_subcontent" bgcolor="$once{ canvas.basebgcolorizer }" height="30" />
         
         <mainselectHandlerBar name="_subsubcontent" bgcolor="$once{ canvas.basebgcolorizer }" />
             

@@ -2,7 +2,8 @@
 <library>
 
 <!-- Buttons -->
-<class name="charttabutton" extends="basedokeostabbutton" width="84" iconresourcename="ksirc_rsc" iconname="Chat" >
+<class name="charttabutton" extends="basedokeostabbutton" width="84" iconresourcename="ksirc_rsc" 
+	iconname="Chat" >
 	<handler name="sendClick">
 		Debug.write("onclick handler chat" );
 		this.parent.parent._tabscontent.clearContent();
