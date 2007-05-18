@@ -544,7 +544,7 @@
 	<method name="getObjectInBounds" args="x,y">
 		<![CDATA[
 		var tempList = new Array();
-		//Debug.write("this.baseactionobjectList1: ",this.baseactionobjectList);
+		//Debug.write("getObjectInBounds this.baseactionobjectList1: ",x,y,this.baseactionobjectList);
 		for (var eg=0;eg<this.baseactionobjectList.length;eg++){
 			if ( ( this.baseactionobjectList[eg][this.baseactionobjectList[eg].length-5]<x && ( (this.baseactionobjectList[eg][this.baseactionobjectList[eg].length-5]+this.baseactionobjectList[eg][this.baseactionobjectList[eg].length-3]) >=x ) ) && ( this.baseactionobjectList[eg][this.baseactionobjectList[eg].length-4]<y && ( this.baseactionobjectList[eg][this.baseactionobjectList[eg].length-4]+this.baseactionobjectList[eg][this.baseactionobjectList[eg].length-2] )>y  ) ) {
 				tempList.push(this.baseactionobjectList[eg]);

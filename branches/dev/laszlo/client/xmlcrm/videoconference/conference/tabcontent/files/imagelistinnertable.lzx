@@ -3,7 +3,7 @@
 	
 <class name="imagelistinnertable" extends="view" width="$once{ parent.width-4 }" height="$once{ parent.height-4 }" 
 	bgcolor="white" x="2" y="2" clip="true">
-    <view name="_listcontent" bgcolor="0x799FCE">
+    <view name="_listcontent" bgcolor="$once{ canvas.basebgcolorizer }">
         <simplelayout name="_layout" axis="y" spacing="1" inset="1" />
         
 	  	<netremotecallhib name="deleteFile" funcname="fileservice.deleteFile" remotecontext="$once{ canvas.thishib }" >   

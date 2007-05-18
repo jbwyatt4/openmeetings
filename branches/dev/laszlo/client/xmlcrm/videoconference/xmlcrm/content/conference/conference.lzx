@@ -14,13 +14,10 @@
     	</handler>
     </netremotecallhib>
 
-    <view x="264" width="658" y="42" height="521" bgcolor="$once{ canvas.basebgcolorizer }">
+    <view x="264" width="658" y="2" height="561" bgcolor="$once{ canvas.basebgcolorizer }">
 		<view name="bg" x="1" y="1" bgcolor="white"
 			width="$once{ parent.width-2 }" height="$once{ parent.height-2 }" />
 	</view>
-	
-	<view name="mainbackroundmenu" x="262" y="0" height="28" 
-		resource="mainbackroundmenu_rsc" width="652" />
 
     <!-- 
         Videooutput-View
@@ -34,10 +31,6 @@
 		Call _videocontainer.getNewVideoObject()
 		to get a free one
 	 -->
-	<view width="262" height="277" bgcolor="$once{ canvas.basebgcolorizer }">
-		<view name="bg" x="1" y="1" bgcolor="white"
-			width="$once{ parent.width-2 }" height="$once{ parent.height-2 }" />
-	</view>
 	<videocontainer name="_videocontainer" x="2" y="2" />
 
 
@@ -55,7 +48,7 @@
         shared Whiteboard
      -->
     
-   <whiteboard name="_whiteboard" x="268" y="46">
+   <whiteboard name="_whiteboard" x="268" y="2">
         <handler name="onsharedMessage" args="obj">
                 
             Debug.write("send: ",obj);

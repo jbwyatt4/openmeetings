@@ -18,7 +18,7 @@
 	<handler name="onload">
 		<![CDATA[
 			Debug.write("image loaded");
-			this.refObj.parent._loading.setAttribute('visible',false);
+			//this.refObj.parent._loading.setAttribute('visible',false);
 			if (this.width>this.refObj.width){
 				var height = this.height/(this.width/this.refObj.width)
 				this.setAttribute('width',this.refObj.width);
@@ -108,7 +108,7 @@
 			this.currentlayer = new imagefordrawView(obj,{src:src,refObj:this,name:nameing,x:posx,y:posy,downloadurl:urlname,width:width,height:height,alterModus:alterModus,baseurl:baseurl,fileName:fileName,moduleName:moduleName,parentPath:parentPath,room:room,domain:domain});
 		}
 		this.parent.isloadingImage.sendEvent(this.currentlayer);
-		this.parent._loading.setAttribute('visible',true);
+		//this.parent._loading.setAttribute('visible',true);
 		//Add Layer to global Layer  	
 	    return this.currentlayer;
 		]]>

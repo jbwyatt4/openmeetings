@@ -57,7 +57,7 @@
 		<labeltooltip labelid="17" />
 	</view>	
 	
-	<view resource="messagebox_info_rsc" y="4" x="$once{ parent.width -24 }" >
+	<view y="4" x="$once{ parent.width -24 }" >
 		<handler name="onclick">
 			new editwhiteboarddefault(canvas.main_content._content.inner);
 		</handler>

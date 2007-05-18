@@ -2,11 +2,11 @@
 <library>
 
 <class name="innerlistView" extends="view" layout="axis:y;spacing:1;inset:1" 
-	width="258" bgcolor="0x799FCE" />
+	width="258" bgcolor="$once{ canvas.basebgcolorizer }" />
 
 <class name="userTagView" extends="text" height="18" width="280" 
-    onmouseover="this.setBGColor(0x799FCE)" onmouseout="this.setBGColor(white)" 
-    bgcolor="white" text="$once{ this.firstname+' '+this.lastname }" fontsize="11" >
+    onmouseover="this.setBGColor(canvas.baseMousecolorizer)" onmouseout="this.setBGColor(white)" 
+    bgcolor="white" text="$once{ this.firstname+' '+this.lastname }" fontsize="11" resize="false">
 	
 	<attribute name="connectedSince" value="" type="string" />
 	<attribute name="isMod" value="" type="string" />
@@ -19,7 +19,7 @@
 	<attribute name="refObj" value="null" />
 </class>
 
-<class name="listofUsers" extends="view" width="260" height="240" bgcolor="0x4171B5">
+<class name="listofUsers" extends="view" width="260" height="240" bgcolor="$once{ canvas.basebgcolorizer }">
 	<view width="$once{ parent.width-2 }" height="$once{ parent.height-2 }" 
 		x="1" y="1" bgcolor="white" />
 
