@@ -9,5 +9,6 @@
 	<include href="roomadmin/" />
 	<include href="invitation/" />
 	<include href="wizard/" />
+	<include href="dashboard/" />
 
 </library>

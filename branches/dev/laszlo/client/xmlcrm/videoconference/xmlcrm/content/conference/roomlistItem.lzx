@@ -28,12 +28,12 @@
 			canvas.isConference = !parent.isaudience;
 			if (parent.isaudience) connectedIsAudience = '_'+'audi';
             if (this.parent.ispublic){
-                hib.connectedroom=parent.obj.name+parent.obj.rooms_id+connectedIsAudience;
+                hib.connectedroom=parent.obj.rooms_id+connectedIsAudience;
                 hib.conferencedomain="public";
                 Debug.write("ispublic");
             } else {
-                hib.connectedroom=parent.obj.room.name+parent.obj.room.rooms_id+connectedIsAudience;
-                hib.conferencedomain = parent.obj.organisation.name;
+                hib.connectedroom=parent.obj.room.rooms_id+connectedIsAudience;
+                hib.conferencedomain = parent.obj.organisation.organisation_id;
                 Debug.write("non ispublic");
             }
             Debug.write("hib.conferencedomain: ",hib.conferencedomain);

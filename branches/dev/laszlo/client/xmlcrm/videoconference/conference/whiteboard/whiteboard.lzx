@@ -268,7 +268,7 @@
 	<!-- Context sensitive stuff -->
 	
 	<!-- Line -->
-	<drawcolorpicker x="340" y="2" defaultno="44"
+	<drawcolorpicker x="340" y="42" defaultno="44"
 		visible="${ ( ( this.parent._drawarea.drawmodus=='line' ) ? true : false ) }">
 		<handler name="onnewcolor" args="c">
 			this.parent._drawarea.currentlinestroke = c;
@@ -283,7 +283,7 @@
 	</drawchoosesizeradio>
 	
 	<!-- Uline -->
-	<drawcolorpicker x="340" y="2" defaultno="46"
+	<drawcolorpicker x="340" y="42" defaultno="46"
 		visible="${ ( ( this.parent._drawarea.drawmodus=='uline' ) ? true : false ) }">
 		<handler name="onnewcolor" args="c">
 			this.parent._drawarea.currentulinestroke = c;

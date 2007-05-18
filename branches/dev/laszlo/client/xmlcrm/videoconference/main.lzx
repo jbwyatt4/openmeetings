@@ -122,10 +122,6 @@
 <attribute name="currentusercolor" value="0x000000" type="string" />
 <attribute name="currentuserpos" value="0" type="number" />
 	
-<attribute name="basebgcolorizer" value="0xB0C4DE" type="string" />	
-<attribute name="baseMousecolorizer" value="0xC4D5E6" type="string" />	
-<attribute name="baseMouseOvercolorizer" value="0xC4D5E6" type="string" />  
-	
 <attribute name="currentModApply" value="null" />	
 
 <attribute name="sessionObject" value="null" />

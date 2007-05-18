@@ -29,5 +29,17 @@ This port is used to connec to the http-servlet
 of the red5-servlet
  -->
 <attribute name="red5httpport" value="5080" type="string" />
+	
+<!--
+	These colors are the main colors and style the hole application
+ -->
+<attribute name="basebgcolorizer" value="0xB0C4DE" type="string" />	
+<attribute name="baseMousecolorizer" value="0xC4D5E6" type="string" />	
+<attribute name="baseMouseOvercolorizer" value="0xC4D5E6" type="string" />  	
+	
+<!-- 
+	Version number of this distro
+ -->
+<attribute name="currentappversion" value="Version 0.5 Beta1" type="string" />
 
 </library>

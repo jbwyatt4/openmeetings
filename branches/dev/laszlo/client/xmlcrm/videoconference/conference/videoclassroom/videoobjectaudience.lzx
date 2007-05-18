@@ -18,7 +18,7 @@
 	int chatpartnername
  -->
     
-<class name="videoobjectaudience" extends="view" bgcolor="0x000000" width="252" height="270" visible="true">
+<class name="videoobjectaudience" extends="view" width="252" height="270" visible="true">
 		
 	<!-- Set the Name of the partner -->
 	<attribute name="chatpartnername" value="" type="string" />
