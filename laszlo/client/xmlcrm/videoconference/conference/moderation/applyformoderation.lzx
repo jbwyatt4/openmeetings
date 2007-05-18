@@ -78,9 +78,13 @@
            	Debug.write("INSTANCE getClientListScope : ",value);
 			for (var eg in value){
 				Debug.write("value: ",eg,value,parent.userslist.userslist.userslist);
-				if (canvas.streamid!=value[eg].streamid)	new useritem(parent.userslist.userslist.userslist,{name:value[eg].streamid,username:value[eg].username,streamid:value[eg].streamid});
+				if (canvas.streamid!=value[eg].streamid) {
+				    new useritem(parent.userslist.userslist.userslist,{name:value[eg].streamid,username:value[eg].username,streamid:value[eg].streamid});
+				}
 				Debug.write("value: ",eg,value,parent.userslist.userslist.userslist);
 			}
+		    if (parent.userslist.userslist.userslist.subviews.length==0)
+				   parent.applyButton.setAttribute('enabled',true);
            ]]>
 		</handler>   
     </netremotecallhib> 
