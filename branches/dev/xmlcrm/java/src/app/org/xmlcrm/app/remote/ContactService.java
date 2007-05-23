@@ -6,6 +6,11 @@ import org.xmlcrm.app.hibernate.beans.contact.contactfreigabe;
 import org.xmlcrm.app.hibernate.beans.contact.Contacts;
 import org.xmlcrm.app.hibernate.beans.user.Users;
 
+/**
+ * 
+ * @author swagner
+ *
+ */
 public class ContactService {
 	
 	/**

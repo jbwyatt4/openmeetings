@@ -13,6 +13,11 @@ import org.xmlcrm.app.data.user.Salutationmanagement;
 import org.xmlcrm.app.data.user.Organisationmanagement;
 import org.xmlcrm.app.hibernate.beans.user.Users;
 
+/**
+ * 
+ * @author swagner
+ *
+ */
 public class UserService {
 	
 	private static final Log log = LogFactory.getLog(UserService.class);	

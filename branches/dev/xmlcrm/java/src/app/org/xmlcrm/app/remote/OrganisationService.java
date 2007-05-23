@@ -11,6 +11,11 @@ import org.xmlcrm.app.data.user.Usermanagement;
 import org.xmlcrm.app.data.user.Organisationmanagement;
 import org.xmlcrm.app.hibernate.beans.domain.Organisation;
 
+/**
+ * 
+ * @author swagner
+ *
+ */
 public class OrganisationService {
 	
 	private static final Log log = LogFactory.getLog(OrganisationService.class);

@@ -23,6 +23,11 @@ import org.xmlcrm.app.data.user.Usermanagement;
 import org.xmlcrm.app.documents.LibraryDocumentConverter;
 import org.xmlcrm.app.documents.LibraryWmlLoader;
 
+/**
+ * 
+ * @author swagner
+ *
+ */
 public class ConferenceLibrary {
 
 	private static final Log log = LogFactory.getLog(ConferenceLibrary.class);

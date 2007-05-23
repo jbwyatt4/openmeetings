@@ -8,6 +8,11 @@ import org.xmlcrm.app.data.basic.Sessionmanagement;
 import org.xmlcrm.app.data.user.Usermanagement;
 import org.xmlcrm.app.data.termine.Terminmanagement;;
 
+/**
+ * 
+ * @author swagner
+ *
+ */
 public class TermineService {
 	
 	private static final Log log = LogFactory.getLog(TermineService.class);

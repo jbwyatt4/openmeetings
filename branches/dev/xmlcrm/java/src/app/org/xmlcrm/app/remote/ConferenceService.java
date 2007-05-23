@@ -11,6 +11,11 @@ import org.xmlcrm.app.data.user.Usermanagement;
 import org.xmlcrm.app.data.conference.Roommanagement;
 import org.xmlcrm.app.hibernate.beans.rooms.Rooms;
 
+/**
+ * 
+ * @author swagner
+ *
+ */
 public class ConferenceService {
 	
 	private static final Log log = LogFactory.getLog(ConferenceService.class);
