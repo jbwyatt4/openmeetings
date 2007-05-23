@@ -103,16 +103,29 @@ public class IssueService {
 	// Set Content of Issue by Id
 	public void setIssueContent(int projectid,int issueId, String title, String content)
 	{
-		Issue issue = projektDBTable.get(new Integer( projectid)).getIssuesDBTable().get(new Integer(issueId));
-		issue.setTitle(title);
-		issue.setContent(content);
+		try {
+			log.error("setIssueContent projectid "+projectid);
+			log.error("setIssueContent issueId "+issueId);
+			Issue issue = projektDBTable.get(new Integer( projectid)).getIssuesDBTable().get(new Integer(issueId));
+			
+			log.error("found issues id: "+issue.getId());
+			issue.setTitle(title);
+			issue.setContent(content);
+		} catch (Exception err){
+			log.error("setIssueContent",err);
+		}
 	}
 	
 	// Create new Issue in a given Node of the IssueTree , with Parrent Objekt
 	public int createIssueForParent(int projectid,int parentIssueId, String title, String content)
 	{
+		log.error("createIssueForParent projectid "+projectid);
+		log.error("createIssueForParent parentIssueId "+parentIssueId);
+		
 		Random rand = new Random();
 		Issue parentIssue = projektDBTable.get(new Integer( projectid)).getIssuesDBTable().get(new Integer(parentIssueId));
+		
+		log.error("found parentIssue id: "+parentIssue.getId());
 		Issue issue = new Issue();
 		issue.setId(rand.nextInt());
 		issue.setTitle(title);
