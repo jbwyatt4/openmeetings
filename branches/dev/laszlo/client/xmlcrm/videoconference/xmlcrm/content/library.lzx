@@ -10,5 +10,6 @@
 	<include href="invitation/" />
 	<include href="wizard/" />
 	<include href="dashboard/" />
+	<include href="issuetracker/" />
 
 </library>

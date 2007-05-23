@@ -23,6 +23,7 @@ function loadContent(obj,parentobj,preparentobj){
     } else if (obj.action=="home"){
         clearStageContent();
         obj.parent.parent.clearAllSubItemLists();
+		new maindashboard(canvas.main_content._content.inner);
     } else if (obj.action=="userself"){
         clearStageContent();
         obj.parent.parent.clearAllSubItemLists();
@@ -46,6 +47,10 @@ function loadContent(obj,parentobj,preparentobj){
         clearStageContent();
         obj.parent.parent.clearAllSubItemLists();
 		new roomconfiguremod(canvas.main_content._content.inner);
+    } else if (obj.action=="issuetracker"){
+        clearStageContent();
+        obj.parent.parent.clearAllSubItemLists();
+		new issuetracker(canvas.main_content._content.inner);
     }
 	
 }

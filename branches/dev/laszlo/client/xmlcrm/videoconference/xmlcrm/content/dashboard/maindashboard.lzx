@@ -4,6 +4,14 @@
 <class name="maindashboard" extends="basecontentview">	
 	
 	<labeltext fontstyle="bold" y="10" labelid="128" />
+	
+	<simplelabelbutton text="Issue Tracker Dev Test" x="0" y="40">
+		<handler name="onclick">
+			var obj = new Array();
+			obj["action"] = "issuetracker";
+			loadContent(obj,null,null);
+		</handler>
+	</simplelabelbutton>
 		
 		
 </class>
