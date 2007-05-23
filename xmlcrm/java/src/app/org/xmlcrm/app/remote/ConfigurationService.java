@@ -7,6 +7,11 @@ import org.xmlcrm.app.data.basic.Sessionmanagement;
 import org.xmlcrm.app.data.user.Usermanagement;
 import org.xmlcrm.app.hibernate.beans.basic.Configuration;
 
+/**
+ * 
+ * @author swagner
+ *
+ */
 public class ConfigurationService {
 	
 	private static final Log log = LogFactory.getLog(ConfigurationService.class);

@@ -21,6 +21,11 @@ import org.xmlcrm.app.conference.videobeans.RoomPoll;
 import org.xmlcrm.app.conference.videobeans.RoomPollAnswers;
 import org.xmlcrm.app.conference.videobeans.PollType;
 
+/**
+ * 
+ * @author swagner
+ *
+ */
 public class RemoteService {
 	
 	private static final Log log = LogFactory.getLog(RemoteService.class);

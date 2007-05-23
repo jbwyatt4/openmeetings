@@ -7,6 +7,11 @@ import org.xmlcrm.app.data.basic.Sessionmanagement;
 import org.xmlcrm.app.data.beans.basic.ErrorResult;
 import org.xmlcrm.app.data.user.Usermanagement;
 
+/**
+ * 
+ * @author swagner
+ *
+ */
 public class ErrorService {
 	
 	private static final Log log = LogFactory.getLog(MainService.class);

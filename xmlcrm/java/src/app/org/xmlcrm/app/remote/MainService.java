@@ -19,6 +19,11 @@ import org.xmlcrm.app.data.user.Statemanagement;
 import org.xmlcrm.app.data.conference.Invitationmanagement;
 import org.xmlcrm.app.data.conference.Feedbackmanagement;
 
+/**
+ * 
+ * @author swagner
+ *
+ */
 public class MainService {
 	
 	private static final Log log = LogFactory.getLog(MainService.class);
