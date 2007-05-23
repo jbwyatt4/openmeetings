@@ -19,12 +19,14 @@
 	
 	<handler name="onclick">
 		Debug.write("projectid: ",this.projectid);
+		issuecontentareaRoot.currentprojectId = this.projectid;
+		issuecontentareaRoot.currentissuesId = 0;
 		this.getIssuesForProject.doCall();
 	</handler>
 	
 	<netremotecallhib name="getIssuesForProject" funcname="issueservice.getIssuesForProject" 
 		remotecontext="$once{ canvas.thishib }" >   
-		<netparam name="vars2"><method name="getValue">return this.parent.parent.projectid;</method></netparam>  
+		<netparam name="vars1"><method name="getValue">return this.parent.parent.projectid;</method></netparam>  
 		<handler name="ondata" args="value">	
 			Debug.write("getIssuesForProject: ",value);
 			<![CDATA[
@@ -44,7 +46,30 @@
 	<attribute name="issuesid" value="0" type="number" />
 	<attribute name="objRef" value="null" />
 	
-	
+	<handler name="onclick">
+		Debug.write("issuesid: ",this.issuesid);
+		issuecontentareaRoot.isnewitem = false;
+		issuecontentareaRoot.currentissuesId = this.issuesid;
+		issuecontentareaRoot.title_t.setText(this.objRef.title);
+		issuecontentareaRoot.content_t.setText(this.objRef.content);
+		this.getIssueById.doCall();
+	</handler>
+		
+	<netremotecallhib name="getIssueById" funcname="issueservice.getIssueById" 
+		remotecontext="$once{ canvas.thishib }" >   
+		<netparam name="vars1"><method name="getValue">return issuecontentareaRoot.currentprojectId;</method></netparam>  
+		<netparam name="vars2"><method name="getValue">return this.parent.parent.issuesid;</method></netparam>  
+		<handler name="ondata" args="value">	
+			Debug.write("getIssueById: ",value);
+			<![CDATA[
+				Debug.write("this: ",this);
+				this.parent.clearSubs();
+				for (var i=0;i<value.subIssues.length;i++){
+					new issuestreeissue(this.parent,{text:value.subIssues[i].title,isissue:true,issuesid:value.subIssues[i].id,objRef:value.subIssues[i]});
+				}
+			]]>	        	          				
+		</handler>	
+	</netremotecallhib>  
 </class>
 
 <class name="issuetracker" extends="basecontentview">	
@@ -77,11 +102,16 @@
 		<vscrollbar />
 	</view>
 	
-	<view name="_content" id="issuecontentareaRoot" x="302" y="40">
+	<view name="_content" id="issuecontentareaRoot" x="302" y="40" width="400">
 		
 		<attribute name="currentNode" value="null" />
 		<attribute name="path" type="string" value="" />
 		<attribute name="parrentNodes" value="null" />
+		
+		<attribute name="currentprojectId" type="number" value="0" />
+		<attribute name="currentissuesId" type="number" value="0" />
+		
+		<attribute name="isnewitem" type="number" value="0" />
 		
 		<method name="setCurrentPath" args="obj">
 			this.currentNode = obj;
@@ -110,6 +140,99 @@
 		</method>
 		
 		<labeltext name="currentPath" y="10" text="/" />
+		
+		<view name="_savecontentbar" layout="axis:x;spacing:2;inset:2" x="2" height="28" width="$once{ parent.width }"
+			bgcolor="$once{ canvas.baseMousecolorizer }" y="40">
+			<basechooseseicon resourceN="filesave_rsc" labelid="144" y="2" 
+				onclick="this.parent.parent.doSaveEvent()" />
+			<basechooseseicon resourceN="edit_add_rsc" labelid="155" y="2" 
+				onclick="this.parent.parent.doAddEvent()" />     
+       		 <basechooseseicon resourceN="button_cancel_rsc" labelid="157" y="2" 
+				onclick="this.parent.parent.doDeleteEvent()" /> 			 	 	      	
+		</view>		
+		
+		
+		
+		<method name="doAddEvent">
+			this.title_t.setText('');
+			this.content_t.setText('');
+			this.isnewitem = true;
+		</method>		
+		
+	
+		
+		<method name="doSaveEvent">
+			if (this.currentprojectId==0) {
+				return new errorpopup(canvas.main_content._content.inner,{error:'no projectId given'});
+			}
+			if (this.title_t.getText().length==0){
+				return new errorpopup(canvas.main_content._content.inner,{error:'no title given'});
+			}
+			if (this.isnewitem){
+				this.createIssueForParent.doCall();
+			} else {
+				if (this.currentissuesId==0) {
+					return new errorpopup(canvas.main_content._content.inner,{error:'no issuesId given, select an Issue first to update it, to enter a new issue hit the add button'});
+				}				
+				this.setIssueContent.doCall();
+			}
+		</method>
+		
+			<netremotecallhib name="createIssueForParent" funcname="issueservice.createIssueForParent" 
+				remotecontext="$once{ canvas.thishib }" >   
+				<netparam name="vars1"><method name="getValue">return this.parent.parent.currentprojectId;</method></netparam>  
+				<netparam name="vars2"><method name="getValue">return this.parent.parent.currentissuesId;</method></netparam>  
+				<netparam name="vars3"><method name="getValue">return this.parent.parent.title_t.getText();</method></netparam>  
+				<netparam name="vars4"><method name="getValue">return this.parent.parent.content_t.getText();</method></netparam>  
+				<handler name="ondata" args="value">	
+					Debug.write("createIssueForParent ",value);
+					<![CDATA[
+	
+					]]>	        	          				
+				</handler>	
+			</netremotecallhib>  
+		
+			<netremotecallhib name="setIssueContent" funcname="issueservice.setIssueContent" 
+				remotecontext="$once{ canvas.thishib }" >   
+				<netparam name="vars1"><method name="getValue">return this.parent.parent.currentprojectId;</method></netparam>  
+				<netparam name="vars2"><method name="getValue">return this.parent.parent.currentissuesId;</method></netparam>  
+				<netparam name="vars3"><method name="getValue">return this.parent.parent.title_t.getText();</method></netparam>  
+				<netparam name="vars4"><method name="getValue">return this.parent.parent.content_t.getText();</method></netparam>  
+				<handler name="ondata" args="value">	
+					Debug.write("setIssueContent ",value);
+					<![CDATA[
+	
+					]]>	        	          				
+				</handler>	
+			</netremotecallhib>  					
+		
+		<method name="doDeleteEvent">
+			if (this.currentprojectId==0) {
+				return new errorpopup(canvas.main_content._content.inner,{error:'no projectId given'});
+			}
+			if (this.currentissuesId==0) {
+				return new errorpopup(canvas.main_content._content.inner,{error:'no issuesId given'});
+			}	
+			this.deleteIssue.doCall();		
+		</method>
+			<netremotecallhib name="deleteIssue" funcname="issueservice.deleteIssue" 
+				remotecontext="$once{ canvas.thishib }" >   
+				<netparam name="vars1"><method name="getValue">return this.parent.parent.currentprojectId;</method></netparam>  
+				<netparam name="vars2"><method name="getValue">return this.parent.parent.currentissuesId;</method></netparam>  
+				<handler name="ondata" args="value">	
+					Debug.write("createIssueForParent ",value);
+					<![CDATA[
+	
+					]]>	        	          				
+				</handler>	
+			</netremotecallhib> 
+		
+		<labeltext name="title" y="80" text="Titel" />
+			<edittext name="title_t" y="80" x="120" width="270" text="" /> 
+		
+		<labeltext name="content" y="110" text="Content" />
+			<edittext name="content_t" y="110" x="120" width="270" text="" 
+				height="290" multiline="true" /> 
 		
 	</view>
 		
