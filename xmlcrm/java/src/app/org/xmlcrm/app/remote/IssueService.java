@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -25,6 +24,8 @@ public class IssueService {
 	// Set Global Saver Maps for Objects
 	private static Map<Integer, Project> projektDBTable = new HashMap<Integer, Project>();
 	
+	private int issuesCounter = 1;
+	
 	
 	// Create initial Data
 	private void initData()	{
@@ -39,9 +40,8 @@ public class IssueService {
 
 		Issue rootIssue = new Issue();
 
-		Random rand = new Random();
 		Issue issue = new Issue();
-		issue.setId(rand.nextInt());
+		issue.setId(issuesCounter++);
 		issue.setTitle("VideoConf Issue 1");
 		issue.setContent("Main Content Issue 1");
 		issue.setParentIssue(null);
@@ -56,7 +56,7 @@ public class IssueService {
 
 		// Add Issue
 		issue = new Issue();
-		issue.setId(rand.nextInt());
+		issue.setId(issuesCounter++);
 		issue.setTitle("erstes Issue");
 		issue.setContent("Content 1");
 		issue.setParentIssue(null);
@@ -106,11 +106,18 @@ public class IssueService {
 		try {
 			log.error("setIssueContent projectid "+projectid);
 			log.error("setIssueContent issueId "+issueId);
-			Issue issue = projektDBTable.get(new Integer( projectid)).getIssuesDBTable().get(new Integer(issueId));
+			Project project = projektDBTable.get(new Integer( projectid));
+			Map<Integer, Issue> projectIssuesMap = project.getIssuesDBTable();
+			Issue issue = projectIssuesMap.get(new Integer(issueId));
 			
 			log.error("found issues id: "+issue.getId());
 			issue.setTitle(title);
 			issue.setContent(content);
+			
+			projectIssuesMap.put(new Integer(issueId), issue);
+			project.setIssuesDBTable(projectIssuesMap);
+			projektDBTable.put(new Integer( projectid), project);
+			
 		} catch (Exception err){
 			log.error("setIssueContent",err);
 		}
@@ -119,22 +126,32 @@ public class IssueService {
 	// Create new Issue in a given Node of the IssueTree , with Parrent Objekt
 	public int createIssueForParent(int projectid,int parentIssueId, String title, String content)
 	{
-		log.error("createIssueForParent projectid "+projectid);
-		log.error("createIssueForParent parentIssueId "+parentIssueId);
-		
-		Random rand = new Random();
-		Issue parentIssue = projektDBTable.get(new Integer( projectid)).getIssuesDBTable().get(new Integer(parentIssueId));
-		
-		log.error("found parentIssue id: "+parentIssue.getId());
-		Issue issue = new Issue();
-		issue.setId(rand.nextInt());
-		issue.setTitle(title);
-		issue.setContent(content);
-		issue.setParentIssue(parentIssue);
-		
-		parentIssue.getSubIssues().add(issue);
-		
-		return issue.getId();
+		try {
+			log.error("createIssueForParent projectid "+projectid);
+			log.error("createIssueForParent parentIssueId "+parentIssueId);
+			
+			Project project = projektDBTable.get(new Integer( projectid));
+			Map<Integer, Issue> projectIssuesMap = project.getIssuesDBTable();
+			Issue parentissue = projectIssuesMap.get(new Integer(parentIssueId));
+			
+			log.error("found parentIssue id: "+parentissue.getId());
+			Issue issue = new Issue();
+			issue.setId(issuesCounter++);
+			issue.setTitle(title);
+			issue.setContent(content);
+			issue.setParentIssue(parentissue);
+			
+			parentissue.getSubIssues().add(issue);
+			
+			projectIssuesMap.put(new Integer(parentIssueId), parentissue);
+			project.setIssuesDBTable(projectIssuesMap);
+			projektDBTable.put(new Integer( projectid), project);			
+			
+			return issue.getId();
+		} catch (Exception err){
+			log.error("createIssueForParent",err);
+		}
+		return -1;
 	}
 	
 	// Delete Issue by Id
