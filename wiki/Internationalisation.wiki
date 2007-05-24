@@ -1,18 +1,17 @@
 #summary This Page should documentate the progress of internationalisation
-#labels Phase-Implementation
+#labels Phase-Design
 
-= Introduction =
+= Where to find language files =
+You can find all current language files here:
 
-Currently all default values should be go into xml-Files
+http://openmeetings.googlecode.com/svn/branches/dev/xmlcrm/java/webapp/xmlcrm/languages/
 
-Current progress of Labels in XML-Files:
+Just take one file and translate it to your language.
 
-German:         0%
+= How to add it as installation option =
 
-English:        0%
+At the moment you would have to recompile and alter the file:
+http://openmeetings.googlecode.com/svn/branches/dev/xmlcrm/java/src/app/org/xmlcrm/app/installation/ImportInitvalues.java
 
-French:         0%
+Issue 75 will solve that. 
 
-Spanish:        0%
-
-Portuguese:     0%
