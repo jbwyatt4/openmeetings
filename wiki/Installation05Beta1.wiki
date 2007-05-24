@@ -4,7 +4,7 @@
 = Requirements =
 
   * Postgres installed
-  * OpenOffice-Service started and listening on port 8100 (see OpenOfficeConverter, this is not necessary for installation but for running later on)
+  * Open-Office-Service started and listening on port 8100 (see OpenOfficeConverter, this is not necessary for installation but for running later on)
   * Installed imagemagick (this is not necessary for installation but for running later on), you can get more information on http://www.imagemagick.org regarding installation. The instructions for installation can be found there http://www.imagemagick.org/script/binary-releases.php, however on most linux systems you can get it via your favorite package managers (apt-get it)
   
 = Install lated Red5 Server =
