@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library>
 	
+<include href="incubator/rich-text/richtexteditor.lzx"/>	
+
 <class name="issuetree" extends="tree" >
 	<attribute name="isrootItem" value="false" type="boolean" />
 	<handler name="onclick">
@@ -51,7 +53,8 @@
 		issuecontentareaRoot.isnewitem = false;
 		issuecontentareaRoot.currentissuesId = this.issuesid;
 		issuecontentareaRoot.title_t.setText(this.objRef.title);
-		issuecontentareaRoot.content_t.setText(this.objRef.content);
+		issuecontentareaRoot.content_t.messagebody.content.txt.setText(this.objRef.content);
+		Debug.write("issuecontentareaRoot.content_t: ",issuecontentareaRoot.content_t.messagebody.content.txt);
 		this.getIssueById.doCall();
 	</handler>
 		
@@ -102,7 +105,7 @@
 		<vscrollbar />
 	</view>
 	
-	<view name="_content" id="issuecontentareaRoot" x="302" y="40" width="400">
+	<view name="_content" id="issuecontentareaRoot" x="302" y="40" width="500">
 		
 		<attribute name="currentNode" value="null" />
 		<attribute name="path" type="string" value="" />
@@ -183,7 +186,7 @@
 				<netparam name="vars1"><method name="getValue">return this.parent.parent.currentprojectId;</method></netparam>  
 				<netparam name="vars2"><method name="getValue">return this.parent.parent.currentissuesId;</method></netparam>  
 				<netparam name="vars3"><method name="getValue">return this.parent.parent.title_t.getText();</method></netparam>  
-				<netparam name="vars4"><method name="getValue">return this.parent.parent.content_t.getText();</method></netparam>  
+				<netparam name="vars4"><method name="getValue">return this.parent.parent.content_t.messagebody.content.txt.getHTMLText();</method></netparam>  
 				<handler name="ondata" args="value">	
 					Debug.write("createIssueForParent ",value);
 					<![CDATA[
@@ -197,7 +200,7 @@
 				<netparam name="vars1"><method name="getValue">return this.parent.parent.currentprojectId;</method></netparam>  
 				<netparam name="vars2"><method name="getValue">return this.parent.parent.currentissuesId;</method></netparam>  
 				<netparam name="vars3"><method name="getValue">return this.parent.parent.title_t.getText();</method></netparam>  
-				<netparam name="vars4"><method name="getValue">return this.parent.parent.content_t.getText();</method></netparam>  
+				<netparam name="vars4"><method name="getValue">return this.parent.parent.content_t.messagebody.content.txt.getHTMLText();</method></netparam>  
 				<handler name="ondata" args="value">	
 					Debug.write("setIssueContent ",value);
 					<![CDATA[
@@ -228,11 +231,11 @@
 			</netremotecallhib> 
 		
 		<labeltext name="title" y="80" text="Titel" />
-			<edittext name="title_t" y="80" x="120" width="270" text="" /> 
+			<edittext name="title_t" y="80" x="120" width="370" text="" /> 
 		
 		<labeltext name="content" y="110" text="Content" />
-			<edittext name="content_t" y="110" x="120" width="270" text="" 
-				height="290" multiline="true" /> 
+			<richtexteditor name="content_t" y="110" x="120" width="370"  
+				height="290" /> 
 		
 	</view>
 		
