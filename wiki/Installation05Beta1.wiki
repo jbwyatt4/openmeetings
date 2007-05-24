@@ -54,7 +54,7 @@ to fit your Red5-server-IP. (Port settings by default are red5 defaults, however
 = Get Started =
 
   * Install the default value's of the Openmeetings Application
-  * go to the Installer by accessing it via browser: http://rmpthostlocal/xmlcrm/Install it looks like that:
+  * go to the Installer by accessing it via browser: http://$rmpthostlocal/xmlcrm/Install it looks like that:
 
   # Step 1 - install welcome and reminding
 http://openmeetings.googlecode.com/svn/branches/dev/laszlo/client/xmlcrm/resources/screens/install_step1.png
