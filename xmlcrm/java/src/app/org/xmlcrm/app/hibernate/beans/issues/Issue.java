@@ -60,5 +60,28 @@ public class Issue implements Comparable<Issue> {
 		this.parentIssue = parentIssue;
 	}
 	
+	public boolean removeSubIssue(Issue issue) {
+		boolean removed = false;
+		if(issue!=null && this.getSubIssues()!=null)
+		{
+			if(this.getSubIssues().remove(issue))
+			{
+				removed = true;
+			}else
+			{
+				for( Issue subIssue : this.getSubIssues() )
+				{
+					removed = subIssue.removeSubIssue(issue);
+					if(removed)
+					{
+						break;
+					}
+					
+				}
+			}
+			
+		}
+		return removed;
+	}
 	
 }
