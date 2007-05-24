@@ -68,4 +68,4 @@ http://openmeetings.googlecode.com/svn/branches/dev/laszlo/client/xmlcrm/resourc
   # Step 4 - enter Application
 http://openmeetings.googlecode.com/svn/branches/dev/laszlo/client/xmlcrm/resources/screens/install_step4.png
 
-If you have it that far and openoffice+imagmagick runs correctly your installation is complete started
+If you have it that far and openoffice+imagmagick runs correctly your installation is complete
