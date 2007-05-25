@@ -10,8 +10,7 @@ Just take one file and translate it to your language.
 
 = How to add it as installation option =
 
-At the moment you would have to recompile and alter the file:
-http://openmeetings.googlecode.com/svn/branches/dev/xmlcrm/java/src/app/org/xmlcrm/app/installation/ImportInitvalues.java
+Once you have finished the translation you can add a new node to:
+http://openmeetings.googlecode.com/svn/branches/dev/xmlcrm/java/webapp/xmlcrm/languages/languages.xml
 
-Issue 75 will solve that. 
-
+the name of the language should match the name of the file. Once this is done the Language file will automatically be imported during installation and will be an option at login.
