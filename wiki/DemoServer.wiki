@@ -1,0 +1,23 @@
+#summary about the demo Server
+#labels Phase-Support
+
+= Hardware =
+
+2.4 GHz Celeron 
+1 GB RAM
+
+= Software =
+
+Debian 3.1
+Apache 2
+Java JDK 1.5
+xvfb (virtual frame buffer)
+xlibs
+openoffice 2 in headless Modus
+imagemagick
+Tomcat (included in OpenLaszlo)
+Jetty (include in Red5)
+
+= Network =
+
+partly connected through local Gateway and University of Applied Science Pforzheim
