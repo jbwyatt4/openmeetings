@@ -3,6 +3,10 @@
 
 <script>
 <![CDATA[
+	
+String.prototype.startsWith = function(prefix) {
+    return (this.indexOf(prefix) === 0);
+};	
 
 var _labelObject = new Array();
 
@@ -183,6 +187,22 @@ Debug.write("end init");
 	this.uploadmoduleimgfolder += foldername;
 	this.setAttribute('uploadmoduleimgfolder',this.uploadmoduleimgfolder);
 	]]>
+</method>
+	
+	
+<!-- country validation -->
+<method name="validateCountry" args="str">
+	
+	<![CDATA[
+		if (str.length!=0){
+			var a = new Array();
+			for (var i=0;i<canvas.statesInitValues.length;i++){
+				if (canvas.statesInitValues[i].name.startsWith(str))a.push(canvas.statesInitValues[i]);
+				//this.addItem(canvas.statesInitValues[i].name,canvas.statesInitValues[i].state_id);
+			}
+			return a;
+		}
+	]]>	
 </method>
   
 
