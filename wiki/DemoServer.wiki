@@ -1,4 +1,4 @@
-#summary about the demo Server
+#summary about the Live Demo Server
 #labels Phase-Support
 
 = Hardware =
