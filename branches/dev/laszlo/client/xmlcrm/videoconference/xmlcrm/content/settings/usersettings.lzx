@@ -128,6 +128,59 @@
         <edittext name="town" y="310" x="200" width="190" text="" />                        
          
     <labeltext labelid="141" width="200" y="340" resize="false" x="2"/>  
+		<edittext name="state" width="270" y="340" x="120" editable="true" fontsize="12">
+			
+			<attribute name="timerDelegate" value="null" />
+			<attribute name="typetime" type="number" value="300" />
+			<attribute name="timerIsInited" value="false" type="boolean" />
+			
+			<attribute name="formervalue" value="" type="string" />
+				
+			<handler name="oninit">
+				
+			</handler>
+
+			<method name="getValue">
+				return this.id;
+			</method>
+			<method name="setValue" args="txt,id">
+				this.id = id;
+				this.setText(txt);
+			</method>
+			
+			<handler name="onfocus">
+				this.formervalue = this.getText();
+			</handler>
+			<handler name="ontext" args="txt">
+				if (!this.timerIsInited){
+					this.timerIsInited = true;
+					this.timerDelegate = new LzDelegate( this, "validateText" );
+					LzTimer.addTimer( this.timerDelegate, this.typetime );
+				} else {
+					LzTimer.resetTimer( this.timerDelegate, this.typetime );
+				}
+			</handler>
+			<method name="validateText">
+				<![CDATA[
+					Debug.write("validateText: ",this.getText());
+					this.timerIsInited= false;
+					this.reset();
+					var t = canvas.validateCountry(this.getText());
+					for (var i=0;i<t.length;i++){
+						this.additem(t[i].name,t[i].state_id);
+					}
+				]]>
+			</method>
+			<handler name="onblur">
+				<![CDATA[
+					var t = canvas.validateCountry(this.getText());
+					for (var i=0;i<t.length;i++){
+					
+					}
+				]]>
+			</handler>
+		</edittext>
+	<!--
         <combobox name="state" width="270" y="340" x="120" editable="false" fontsize="12">
 	        <handler name="oninit" >
 	            <![CDATA[
@@ -138,7 +191,8 @@
 	            ]]>
 	        </handler> 
         </combobox> 
-        
+     -->
+	 
     <labeltext labelid="142" width="200" y="370" resize="false" x="2"/>
         <edittext name="adress_comment" y="370" x="120" width="270" 
             height="100" text="" multiline="true"/>
@@ -150,5 +204,7 @@
 
         
 </class>
+
+<class name="
 
 </library>
