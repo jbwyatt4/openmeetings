@@ -1,5 +1,7 @@
 package org.xmlcrm.app.installation;
 
+import java.util.List;
+import java.util.LinkedList;
 import java.util.Iterator;
 
 import org.apache.commons.logging.Log;
@@ -22,6 +24,10 @@ public class ImportInitvalues {
 	private static final Log log = LogFactory.getLog(ImportInitvalues.class);
 	
 	public static final String languageFolderName = "languages/";
+	
+	private static final String nameOfLanguageFile = "languages.xml";
+	
+	private static final String nameOfCountriesFile = "countries.xml";
 	
 	private static ImportInitvalues instance;
 
@@ -100,12 +106,12 @@ public class ImportInitvalues {
 		long audience_Id = Roommanagement.getInstance().addRoomType("audience");
 		log.error("audience_Id: "+audience_Id);
 		
-		long room = Roommanagement.getInstance().addRoom(3,"public Conference Room", 1, true);
+		Roommanagement.getInstance().addRoom(3,"public Conference Room", 1, true);
 		
 		long room2 = Roommanagement.getInstance().addRoom(3,"private Conference Room", 1, false);
 		Roommanagement.getInstance().addRoomToOrganisation(3,room2, 1);
 		
-		long room3 = Roommanagement.getInstance().addRoom(3,"public Audience Room", 2, true);
+		Roommanagement.getInstance().addRoom(3,"public Audience Room", 2, true);
 		
 		long room4 = Roommanagement.getInstance().addRoom(3,"private Audience Room", 2, false);
 		Roommanagement.getInstance().addRoomToOrganisation(3,room4, 1);
@@ -126,29 +132,83 @@ public class ImportInitvalues {
 		Organisationmanagement.getInstance().addUserToOrganisation(1, organisation_id, 1,"");		
 	}
 	
-	public void loadInitLangauges(String filePath) throws Exception{
+	/**
+	 * import all language Names from the xml file
+	 * @param filePath
+	 * @throws Exception
+	 */
+	private void loadCountriesFiles(String filePath) throws Exception{
 		
-		Statemanagement.getInstance().addState("Deutschland");
-		Statemanagement.getInstance().addState("France");
-		Statemanagement.getInstance().addState("Italy");
-		Statemanagement.getInstance().addState("Spain");
-		Statemanagement.getInstance().addState("USA");
-		Statemanagement.getInstance().addState("United Kingdom");
-		Statemanagement.getInstance().addState("Ireland");
-		Statemanagement.getInstance().addState("Danemark");		
+        SAXReader reader = new SAXReader();
+        Document document = reader.read(filePath+ImportInitvalues.nameOfCountriesFile);
+        
+        Element root = document.getRootElement();
+        
+        for ( Iterator it = root.elementIterator( "country" ); it.hasNext(); ) {
+        	
+        	Element item = (Element) it.next();
+        	String country = item.getText();
+        	
+        	Statemanagement.getInstance().addState(country);
+        	
+        }
+        
 		
-		String listLanguages[] = {"deutsch", "english", "french", "spanish"};
+	}	
+	
+	/**
+	 * load all availible languages File names and language name's from the config file
+	 * @param filePath
+	 * @return
+	 * @throws Exception
+	 */
+	private List<String> getLanguageFiles(String filePath) throws Exception{
+		
+		List<String> languages = new LinkedList<String>();
+		
+        SAXReader reader = new SAXReader();
+        Document document = reader.read(filePath+ImportInitvalues.nameOfLanguageFile);
+        
+        Element root = document.getRootElement();
+        
+        for ( Iterator it = root.elementIterator( "lang" ); it.hasNext(); ) {
+        	
+        	Element item = (Element) it.next();
+        	String country = item.getText();
+        	
+        	//log.error("getLanguageFiles "+country);
+        	languages.add(country);
+        	
+        }
+		
+        return languages;
+		
+	}
+	
+	public void loadInitLanguages(String filePath) throws Exception{
+		
+		this.loadCountriesFiles(filePath);	
+		
+		//String listLanguages[] = {"deutsch", "english", "french", "spanish"};
+		
+		List<String> listlanguages = this.getLanguageFiles(filePath);
 		
 		// TODO empty tables before launch
 		//Languagemanagement.getInstance().emptyFieldLanguage();
 		
+		boolean langFieldIdIsInited = false;
+		
 		/** Read all languages files */
-		for (int i = 0; i < listLanguages.length ; i ++)
+		for (Iterator<String> itLang = listlanguages.iterator();itLang.hasNext();)
 		{
-			Long languages_id = Languagemanagement.getInstance().addLanguage(listLanguages[i]);
+			String lang = itLang.next();
+			
+			//log.error("loadInitLanguages lang: "+lang);
+			
+			Long languages_id = Languagemanagement.getInstance().addLanguage(lang);
 			
 	        SAXReader reader = new SAXReader();
-	        Document document = reader.read(filePath+listLanguages[i]+".xml");
+	        Document document = reader.read(filePath+lang+".xml");
 	        
 	        Element root = document.getRootElement();
 	        
@@ -165,26 +225,18 @@ public class ImportInitvalues {
 	        		value = val.getText();
 	        	}
 	        	
-	        	log.error("result: "+i+" "+id+" "+name+" "+value);
+	        	//log.error("result: "+langFieldIdIsInited+" "+id+" "+name+" "+value);
 	        	
 	        	//Only do that for the first field-set
-	        	if (i==0) Fieldmanagment.getInstance().addField(name);
+	        	if (!langFieldIdIsInited) Fieldmanagment.getInstance().addField(name);
 	        	
 	        	Fieldmanagment.getInstance().addFieldValueByFieldAndLanguage(id,languages_id,value);
 	        	
 	        }
+	        
+	        if(!langFieldIdIsInited) langFieldIdIsInited=true;
 		}	
 		
-		/** Insert all languages strings into database */
-//		for (int item_id = 0; item_id < nodeListLanguages[0].getLength(); item_id++)
-//		{
-//			Fieldmanagment.getInstance().addField(nodeListLanguages[0].item(item_id).getAttributes().getNamedItem("name").getNodeValue());
-//		
-//			for (int language_id = 0; language_id < listLanguages.length; language_id ++)
-//			{
-//				Fieldmanagment.getInstance().addFieldValueByFieldAndLanguage(Long.valueOf(nodeListLanguages[language_id].item(item_id).getAttributes().getNamedItem("id").getNodeValue()), (long) (language_id + 1), nodeListLanguages[language_id].item(item_id).getTextContent());
-//			}	
-//		}
 	}
 	
 }

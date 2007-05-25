@@ -1,687 +1,687 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <language>
 <string id="1" name="conference">
-<value>Conference</value>
+<value>Conferenza</value>
 </string>
 <string id="2" name="meeting">
-<value>Meeting</value>
+<value>Incontro</value>
 </string>
 <string id="3" name="classroom">
 <value>Auditorium</value>
 </string>
 <string id="4" name="settings">
-<value>Settings</value>
+<value>Impostazioni</value>
 </string>
 <string id="5" name="benutzer">
-<value>User</value>
+<value>Utente</value>
 </string>
 <string id="6" name="admin">
-<value>Administration</value>
+<value>Administrazione</value>
 </string>
 <string id="7" name="stop">
 <value>Stop</value>
 </string>
 <string id="8" name="record">
-<value>Record</value>
+<value>Registra</value>
 </string>
 <string id="9" name="nofile">
-<value>No file available</value>
+<value>Nessun file disponibile</value>
 </string>
 <string id="10" name="recordbyteacher">
-<value>Record by Teacher</value>
+<value>Solo il docente</value>
 </string>
 <string id="11" name="connectedusers">
-<value>Connected users:</value>
+<value>Utenti connessi:</value>
 </string>
 <string id="12" name="startconf">
-<value>Start a conference</value>
+<value>Inizia una conferenza</value>
 </string>
 <string id="13" name="myname">
-<value>My Name</value>
+<value>Il mio nome</value>
 </string>
 <string id="14" name="videoconference">
-<value>VideoConference</value>
+<value>Video Conferenza</value>
 </string>
 <string id="15" name="import">
-<value>Import Presentation</value>
+<value>Carica presentazione</value>
 </string>
 <string id="16" name="refreshfiles">
-<value>Refresh list</value>
+<value>Aggiorna la lista</value>
 </string>
 <string id="17" name="tomainfile">
-<value>To Main File</value>
+<value>All'archivio principale</value>
 </string>
 <string id="18" name="newpoll">
-<value>new poll</value>
+<value>Nuovo sondaggio</value>
 </string>
 <string id="19" name="newpollheader">
-<value>A new poll for the conference.</value>
+<value>Un nuovo sondaggio per l conferenza.</value>
 </string>
 <string id="20" name="question">
-<value>Question:</value>
+<value>Domanda:</value>
 </string>
 <string id="21" name="polltype">
-<value>Type of poll:</value>
+<value>Tipo di sondaggio:</value>
 </string>
 <string id="22" name="create">
-<value>Create</value>
+<value>Crea</value>
 </string>
 <string id="23" name="infomessage">
-<value>Info: Each connected user receives a message with the new poll.</value>
+<value>Informazione: Ogni utente connesso riceve un messaggio con il nuovo sondaggio.</value>
 </string>
 <string id="24" name="creatpoll">
-<value>Create a poll</value>
+<value>Crea un sondaggio</value>
 </string>
 <string id="25" name="cancel">
-<value>Cancel</value>
+<value>Cancella</value>
 </string>
 <string id="26" name="yesno">
-<value>Yes/No</value>
+<value>Si/No</value>
 </string>
 <string id="27" name="numeric">
-<value>Numeric 1-10</value>
+<value>Numerico 1-10</value>
 </string>
 <string id="28" name="poll">
-<value>Poll</value>
+<value>Sondaggio</value>
 </string>
 <string id="29" name="moderation">
-<value>Must be Moderator to create an question</value>
+<value>caveat Sie müssen Moderator/Lehrer in diesem Raum sein um eine Umfrage anzulegen.</value>
 </string>
 <string id="30" name="vote">
-<value>Your vote is registered.</value>
+<value>Il tuo voto è stato registrato.</value>
 </string>
 <string id="31" name="alreadyvoted">
-<value>Your have already voted in this poll.</value>
+<value>Hai già votato per questo sondaggio.</value>
 </string>
 <string id="32" name="voting">
-<value>Vote !</value>
+<value>Vota !</value>
 </string>
 <string id="33" name="answer">
-<value>Your response:</value>
+<value>La tua risposta:</value>
 </string>
 <string id="34" name="yes">
-<value>Yes</value>
+<value>Si</value>
 </string>
 <string id="35" name="no">
 <value>No</value>
 </string>
 <string id="36" name="questionwant">
-<value>will wissen:</value>
+<value>Rispondi alle domande:</value>
 </string>
 <string id="37" name="pollresults">
-<value>Poll results</value>
+<value>Risultati del sondaggio</value>
 </string>
 <string id="38" name="question">
-<value>Question:</value>
+<value>Domanda:</value>
 </string>
 <string id="39" name="results">
-<value>Results:</value>
+<value>risultati:</value>
 </string>
 <string id="40" name="answers">
-<value>Answers:</value>
+<value>Risposte:</value>
 </string>
 <string id="41" name="nopoll">
-<value>No polls have been started.</value>
+<value>Nessun sondaggio è stato avviato.</value>
 </string>
 <string id="42" name="votings">
-<value>Vote!</value>
+<value>Vota!</value>
 </string>
 <string id="43" name="meeting">
-<value>Meeting (max 4 seats)</value>
+<value>Incontro (massimo 4 partecipanti)</value>
 </string>
 <string id="44" name="conference">
-<value>Conference (max 50 seats)</value>
+<value>Conferenza (massimo 50 partecipanti)</value>
 </string>
 <string id="45" name="type">
-<value>Type</value>
+<value>Tipo</value>
 </string>
 <string id="46" name="remainingseats">
-<value>Other seats</value>
+<value>Altri partecipanti</value>
 </string>
 <string id="47" name="alreadychosen">
-<value>Already chosen</value>
+<value>Già schelto</value>
 </string>
 <string id="48" name="enter">
-<value>enter</value>
+<value>entra</value>
 </string>
 <string id="49" name="modleave">
-<value>The moderator has left the meeting.</value>
+<value>Il moderatore ha lasciato l'incontro.</value>
 </string>
 <string id="50" name="systemmessage">
 <value>System information</value>
 </string>
 <string id="51" name="chossedevice">
-<value>Choose device</value>
+<value>Scegli il dispositivo</value>
 </string>
 <string id="52" name="choosecam">
-<value>Choose webcam:</value>
+<value>Scegli la webcam:</value>
 </string>
 <string id="53" name="choosemic">
-<value>Choose micro:</value>
+<value>Scegli il microfono:</value>
 </string>
 <string id="54" name="ok">
 <value>ok</value>
 </string>
 <string id="55" name="cancel2">
-<value>cancel</value>
+<value>annulla</value>
 </string>
 <string id="56" name="reconeectneeded">
-<value>You need to reconnect.</value>
+<value>Devi riconnetterti.</value>
 </string>
 <string id="57" name="editsetup">
-<value>Edit setup.</value>
+<value>Modifica le impostazioni.</value>
 </string>
 <string id="58" name="course">
-<value>Course:</value>
+<value>Corso:</value>
 </string>
 <string id="59" name="language">
-<value>Language:</value>
+<value>Lingua:</value>
 </string>
 <string id="60" name="ok2">
 <value>ok</value>
 </string>
 <string id="61" name="cancel3">
-<value>cancel</value>
+<value>annulla</value>
 </string>
 <string id="62" name="clearwhiteboard">
-<value>Clear whiteboard</value>
+<value>Cancella la lavagna</value>
 </string>
 <string id="63" name="clearwhiteboardquestion">
-<value>Do you want that the whiteboard to be emptied before a new picture is added?</value>
+<value>Vuoi che la lavagnia sia pulita prima di aggiungere una nuova immagine?</value>
 </string>
 <string id="64" name="dontaskagain">
-<value>Don't ask again</value>
+<value>Non chiedere ancora</value>
 </string>
 <string id="65" name="no">
 <value>no</value>
 </string>
 <string id="66" name="editsetup2">
-<value>Edit setup</value>
+<value>Modifica impostazioni</value>
 </string>
 <string id="67" name="needconfirmationwhiteboard">
-<value>Confirmation request before emptying the whiteboard.</value>
+<value>Richiesta di conferma prima di pulire la lavagna.</value>
 </string>
 <string id="68" name="userinfo">
-<value>User Info</value>
+<value>Informazioni sull'utente</value>
 </string>
 <string id="69" name="cleardrawarea">
-<value>Clear DrawArea</value>
+<value>Pulisci la lavagna</value>
 </string>
 <string id="70" name="undo">
-<value>Undo</value>
+<value>Annulla le modifiche</value>
 </string>
 <string id="71" name="redo">
-<value>Redo</value>
+<value>Ripristina le modifiche</value>
 </string>
 <string id="72" name="selectobject">
-<value>Select an Object</value>
+<value>Seleziona un'oggetto</value>
 </string>
 <string id="73" name="text">
-<value>Text</value>
+<value>Testo</value>
 </string>
 <string id="74" name="paint">
-<value>Paint</value>
+<value>Disegna</value>
 </string>
 <string id="75" name="drawline">
-<value>Draw line</value>
+<value>Disegna una linea</value>
 </string>
 <string id="76" name="drawu">
-<value>Draw underline</value>
+<value>Evidenziatore</value>
 </string>
 <string id="77" name="rect">
-<value>Rectangle</value>
+<value>Rettangolo</value>
 </string>
 <string id="78" name="ellipse">
-<value>Ellipse</value>
+<value>Ellisse</value>
 </string>
 <string id="79" name="arrow">
-<value>Arrow</value>
+<value>Freccia</value>
 </string>
 <string id="80" name="deletechosen">
-<value>delete chosen Item</value>
+<value>Cancella l'oggetto selezionato</value>
 </string>
 <string id="81" name="appliymod">
-<value>Apply for moderation</value>
+<value>Sottoponi al moderatore</value>
 </string>
 <string id="82" name="apply">
-<value>apply</value>
+<value>applica</value>
 </string>
 <string id="83" name="cancel">
-<value>cancel</value>
+<value>cancella</value>
 </string>
 <string id="84" name="mod">
-<value>Become moderator</value>
+<value>Diventa moderatore</value>
 </string>
 <string id="85" name="close">
-<value>close</value>
+<value>chiudi</value>
 </string>
 <string id="86" name="italic">
-<value>italic</value>
+<value>corsivo</value>
 </string>
 <string id="87" name="bold">
-<value>bold</value>
+<value>grassetto</value>
 </string>
 <string id="88" name="waiting">
-<value>WAITING</value>
+<value>ATTENDERE</value>
 </string>
 <string id="89" name="applyMessage">
-<value>A User wants to apply for moderation:</value>
+<value>Un utente vuole sottoporre al moderatore:</value>
 </string>
 <string id="90" name="accept">
-<value>accept</value>
+<value>accetta</value>
 </string>
 <string id="91" name="reject">
-<value>reject</value>
+<value>rifiuta</value>
 </string>
 <string id="92" name="cancel">
-<value>cancel</value>
+<value>cancella</value>
 </string>
 <string id="93" name="sendmodrequestmessage">
-<value>Sending request to following Users</value>
+<value>Invia la richiesta agli utenti seguenti</value>
 </string>
 <string id="94" name="accept">
-<value>Accepted</value>
+<value>Accettata</value>
 </string>
 <string id="95" name="reject">
-<value>Rejected</value>
+<value>Rifiutata</value>
 </string>
 <string id="96" name="changemod">
-<value>Change Moderator</value>
+<value>Cambia moderatore</value>
 </string>
 <string id="97" name="nonmoderrormessage">
-<value>You are not moderating this course!</value>
+<value>Non sei il moderatoreper questo corso!</value>
 </string>
 <string id="98" name="moderator">
-<value>Moderator:</value>
+<value>Moderatore:</value>
 </string>
 <string id="99" name="roomfullmessage">
-<value>This Room is full. Sorry please try again later.</value>
+<value>La stanza è piena. Spiacenti riprovare più tardi.</value>
 </string>
 <string id="100" name="elllipse">
-<value>Ellipse</value>
+<value>Ellisse</value>
 </string>
 <string id="101" name="close">
-<value>close</value>
+<value>chiudi</value>
 </string>
 <string id="102" name="AuthError">
-<value>input data error</value>
+<value>errori nei dati inseriti</value>
 </string>
 <string id="103" name="min4username">
-<value>username must be at least 4 characters</value>
+<value>Il nome utente deve essere di almeno 4 caratteri</value>
 </string>
 <string id="104" name="min4pass">
-<value>userpass must be  at least 4 characters</value>
+<value>la password deve essere di almeno 4 caratteri</value>
 </string>
 <string id="105" name="usernametaken">
-<value>The username is already taken</value>
+<value>Il nome utente è già in uso</value>
 </string>
 <string id="106" name="emailtaken">
-<value>The email is already registered</value>
+<value>L'indirizzo email è già stato usato</value>
 </string>
 <string id="107" name="emailtaken">
-<value>System error please contact System-Admins</value>
+<value>Errore di sistema, contattare l'amministratore</value>
 </string>
 <string id="108" name="Authlogin">
-<value>Login</value>
+<value>Autenticati</value>
 </string>
 <string id="109" name="Authuser">
-<value>User:</value>
+<value>Nome utente:</value>
 </string>
 <string id="110" name="Authpass">
-<value>Pass:</value>
+<value>Password:</value>
 </string>
 <string id="111" name="Authlang">
-<value>Language</value>
+<value>Lingua</value>
 </string>
 <string id="112" name="Authreg">
-<value>Login</value>
+<value>Autenticazione</value>
 </string>
 <string id="113" name="regformhead">
-<value>Sign Up</value>
+<value>Iscriviti</value>
 </string>
 <string id="114" name="regformuser">
-<value>User:</value>
+<value>Nome utente:</value>
 </string>
 <string id="115" name="regformpass">
-<value>Pass:</value>
+<value>Password:</value>
 </string>
 <string id="116" name="regformretype">
-<value>ReType:</value>
+<value>Riscrivere:</value>
 </string>
 <string id="117" name="regformfirstname">
-<value>Firstname:</value>
+<value>Nome:</value>
 </string>
 <string id="118" name="regformlastname">
-<value>Lastname:</value>
+<value>Cognome:</value>
 </string>
 <string id="119" name="regformmail">
-<value>Mail:</value>
+<value>Email:</value>
 </string>
 <string id="120" name="regformstate">
-<value>Country:</value>
+<value>Stato:</value>
 </string>
 <string id="121" name="regformbtn1">
-<value>Register</value>
+<value>Registrati</value>
 </string>
 <string id="122" name="regformbtn2">
-<value>Cancel</value>
+<value>Annulla</value>
 </string>
 <string id="123" name="Authbtn2">
-<value>Register</value>
+<value>Registrati</value>
 </string>
 <string id="124" name="dashboard">
 <value>home</value>
 </string>
 <string id="125" name="useradmin">
-<value>Users</value>
+<value>Utenti</value>
 </string>
 <string id="126" name="groupadmin">
-<value>Groups</value>
+<value>Gruppi</value>
 </string>
 <string id="127" name="orgadmin">
-<value>Organisations</value>
+<value>Organizzazioni</value>
 </string>
 <string id="128" name="headconf">
-<value>Conference-Rooms</value>
+<value>Stanze delle conferenze</value>
 </string>
 <string id="129" name="conf_pub">
-<value>public</value>
+<value>pubblico</value>
 </string>
 <string id="130" name="head_org">
-<value>organisation</value>
+<value>organizzazione</value>
 </string>
 <string id="131" name="btn_enterroom">
-<value>enter</value>
+<value>entra</value>
 </string>
 <string id="132" name="useralterself_login">
-<value>Login</value>
+<value>Autenticati</value>
 </string>
 <string id="133" name="useralterself_pass">
 <value>Password</value>
 </string>
 <string id="134" name="useralterself_passretype">
-<value>Retype</value>
+<value>Riscrivere</value>
 </string>
 <string id="135" name="useralterself_firstname">
-<value>Firstname</value>
+<value>Nome</value>
 </string>
 <string id="136" name="useralterself_lastname">
-<value>Lastname</value>
+<value>Cognome</value>
 </string>
 <string id="137" name="useralterself_email">
-<value>Mail</value>
+<value>Email</value>
 </string>
 <string id="138" name="useralterself_birth">
-<value>Birthday</value>
+<value>Data di nascita</value>
 </string>
 <string id="139" name="useralterself_streetno">
-<value>Street/No</value>
+<value>Indirizzo/civico</value>
 </string>
 <string id="140" name="useralterself_town">
-<value>ZIP/Town</value>
+<value>C.A.P/Città</value>
 </string>
 <string id="141" name="useralterself_state">
-<value>Country</value>
+<value>Stato</value>
 </string>
 <string id="142" name="useralterself_adresscomment">
-<value>Adress-Info</value>
+<value>Informazioni sull'indirizzo</value>
 </string>
 <string id="143" name="useralterself_header">
-<value>Userdata</value>
+<value>Dati utente</value>
 </string>
 <string id="144" name="savemenubar_savelabel">
-<value>save</value>
+<value>salva</value>
 </string>
 <string id="145" name="savemenubar_savelabel">
-<value>Save</value>
+<value>salva</value>
 </string>
 <string id="146" name="admin_userlist_user_id">
-<value>USER-ID</value>
+<value>ID-Utente</value>
 </string>
 <string id="147" name="admin_userlist_login">
-<value>login</value>
+<value>Autenticati</value>
 </string>
 <string id="148" name="admin_userlist_firstnam">
-<value>firstname</value>
+<value>nome</value>
 </string>
 <string id="149" name="admin_userlist_lastname">
-<value>lastname</value>
+<value>cognome</value>
 </string>
 <string id="150" name="turnoverlist_next">
-<value>show next</value>
+<value>mostra prossimo</value>
 </string>
 <string id="151" name="turnoverlist_pre">
-<value>show pre</value>
+<value>mostra precedente</value>
 </string>
 <string id="152" name="savecontent_confirm">
-<value>delete record</value>
+<value>Elimina il record</value>
 </string>
 <string id="153" name="savecontent_confirm_cancel_btn">
-<value>cancel</value>
+<value>annulla</value>
 </string>
 <string id="154" name="savecontent_confirm_confirm_btn">
-<value>delete</value>
+<value>elimina</value>
 </string>
 <string id="155" name="savemenubar_addlabel">
-<value>new record</value>
+<value>nuovo record</value>
 </string>
 <string id="156" name="savemenubar_reloadlabel">
-<value>refresh record</value>
+<value>aggiorna record</value>
 </string>
 <string id="157" name="savemenubar_deletelabel">
-<value>delete record</value>
+<value>elimina record</value>
 </string>
 <string id="158" name="useralter_admin_status">
-<value>status</value>
+<value>stato</value>
 </string>
 <string id="159" name="useralter_admin_statusItem">
-<value>disabled</value>
+<value>disabilitato</value>
 </string>
 <string id="160" name="useralter_admin_statusItem">
-<value>enabled</value>
+<value>abilitato</value>
 </string>
 <string id="161" name="useralter_admin_organisation">
-<value>organisations</value>
+<value>organizzazioni</value>
 </string>
 <string id="162" name="calendar_iconlabel">
-<value>calendar</value>
+<value>calendario</value>
 </string>
 <string id="163" name="savewindow_btn">
-<value>close</value>
+<value>chiudi</value>
 </string>
 <string id="164" name="organisationtablelist_idrow">
-<value>Organisation-ID</value>
+<value>ID-organizzazione</value>
 </string>
 <string id="165" name="organisationtablelist_namerow">
-<value>name</value>
+<value>nome</value>
 </string>
 <string id="166" name="uservalue_levelid1">
-<value>user</value>
+<value>utente</value>
 </string>
 <string id="167" name="uservalue_levelid2">
 <value>mod</value>
 </string>
 <string id="168" name="uservalue_levelid3">
-<value>admin</value>
+<value>amministratore</value>
 </string>
 <string id="169" name="uservalue_levellabel">
-<value>userlevel</value>
+<value>livello utente</value>
 </string>
 <string id="170" name="orgvalue_header">
-<value>organisation</value>
+<value>organizzazione</value>
 </string>
 <string id="171" name="orgvalue_orgname">
-<value>name</value>
+<value>nome</value>
 </string>
 <string id="172" name="orgvalue_orgname">
-<value>add organisation</value>
+<value>aggiungi un'organizzazione</value>
 </string>
 <string id="173" name="orgvalue_orgname">
-<value>add organisation</value>
+<value>aggiungi un'organizzazione</value>
 </string>
 <string id="174" name="orgvalue_userwin">
-<value>cancel</value>
+<value>annulla</value>
 </string>
 <string id="175" name="orgvalue_userwin">
-<value>add</value>
+<value>aggiungi</value>
 </string>
 <string id="176" name="orgvalue_userwin">
-<value>remove organisation</value>
+<value>rimuovi l'organizzazione</value>
 </string>
 <string id="177" name="orgvalue_userlist">
-<value>user</value>
+<value>utente</value>
 </string>
 <string id="178" name="orgvalue_userlistadd">
-<value>add user</value>
+<value>aggiungi un'utente</value>
 </string>
 <string id="179" name="orgvalue_userlistdelete">
-<value>delete user</value>
+<value>elimina l'utente</value>
 </string>
 <string id="180" name="orgvalue_userwinheader">
-<value>add user</value>
+<value>aggiungi l'utente</value>
 </string>
 <string id="181" name="orgvalue_userwinsearchfield">
-<value>search user</value>
+<value>cerca un utente</value>
 </string>
 <string id="182" name="orgvalue_userwinsearchbtn">
-<value>search</value>
+<value>cerca</value>
 </string>
 <string id="183" name="orgvalue_userwinsearchresult">
-<value>user</value>
+<value>utente</value>
 </string>
 <string id="184" name="loginwin_chooseorganisation">
-<value>organisation</value>
+<value>organizzazione</value>
 </string>
 <string id="185" name="loginwin_chooseorganisationbtn">
-<value>enter</value>
+<value>entra</value>
 </string>
 <string id="186" name="navi_roomadmin">
-<value>conferencerooms</value>
+<value>stanze delle conferenze</value>
 </string>
 <string id="187" name="roomadmin_header">
-<value>Conferencerooms</value>
+<value>stanze delle conferenze</value>
 </string>
 <string id="188" name="roomadmin_header">
 <value>id</value>
 </string>
 <string id="189" name="roomadmin_header">
-<value>Name</value>
+<value>Nome</value>
 </string>
 <string id="190" name="roomadmin_header">
-<value>public</value>
+<value>pubblico</value>
 </string>
 <string id="191" name="roomadmin_header">
-<value>organisations</value>
+<value>organizzazioni</value>
 </string>
 <string id="192" name="roomadmin_header">
-<value>Conferencerooms</value>
+<value>stanze delle conferenze</value>
 </string>
 <string id="193" name="roomvalue_name">
-<value>name</value>
+<value>nome</value>
 </string>
 <string id="194" name="roomvalue_type">
-<value>type</value>
+<value>tipo</value>
 </string>
 <string id="195" name="roomvalue_ispublic">
-<value>public</value>
+<value>pubblico</value>
 </string>
 <string id="196" name="roomvalue_comment">
-<value>comment</value>
+<value>commento</value>
 </string>
 <string id="197" name="whiteboard_saveicon">
-<value>save</value>
+<value>salva</value>
 </string>
 <string id="198" name="whiteboard_openicon">
-<value>load</value>
+<value>carica</value>
 </string>
 <string id="199" name="whiteboard_saveaswinheader">
-<value>save as</value>
+<value>salva con nome</value>
 </string>
 <string id="200" name="whiteboard_saveaswintext">
-<value>filename</value>
+<value>nome del file</value>
 </string>
 <string id="201" name="whiteboard_saveaswintext">
-<value>filename</value>
+<value>nome del file</value>
 </string>
 <string id="202" name="whiteboard_saveaswinbtn1">
-<value>cancel</value>
+<value>annulla</value>
 </string>
 <string id="203" name="whiteboard_saveaswinbtn2">
-<value>save</value>
+<value>salva</value>
 </string>
 <string id="204" name="rpcerrorwin_header">
-<value>error</value>
+<value>errore</value>
 </string>
 <string id="205" name="loadwml_header">
-<value>loading</value>
+<value>caricamento</value>
 </string>
 <string id="206" name="loadwml_messsload">
-<value>objects loaded</value>
+<value>oggetto caricato</value>
 </string>
 <string id="207" name="loadwml_messsync">
-<value>snychronizing clients, clients to wait:</value>
+<value>sincronizzazione con i client, attendere:</value>
 </string>
 <string id="208" name="loadimage_messload">
-<value>Loading Imagedata</value>
+<value>Caricamento delle immagini</value>
 </string>
 <string id="209" name="loadimage_messsync">
-<value>snychronizing clients, clients to wait:</value>
+<value>sincronizzazione con i client, attendere:</value>
 </string>
 <string id="210" name="loadwml_confirmheader">
-<value>clear drawarea</value>
+<value>pulisci la lavagna</value>
 </string>
 <string id="211" name="loadwml_confirmmess">
-<value>clear drawarea, all data on whiteboard will be lost</value>
+<value>pulisci la lavagna, tutte le informazioni su di essa saranno perse</value>
 </string>
 <string id="212" name="loadwml_confirmmess2">
-<value>Confirm before loading a file</value>
+<value>Conferma prima di caricare il file</value>
 </string>
 <string id="213" name="send_invitation_btn">
-<value>Send invitation</value>
+<value>Invia un invito</value>
 </string>
 <string id="214" name="send_invitationwin_header">
-<value>Send invitation</value>
+<value>Invia un invito</value>
 </string>
 <string id="215" name="send_invitationwin_subject">
-<value>Subject</value>
+<value>Soggetto</value>
 </string>
 <string id="216" name="send_invitationwin_recipient">
-<value>Recipient</value>
+<value>Destinatario</value>
 </string>
 <string id="217" name="send_invitationwin_message">
-<value>Message</value>
+<value>Messaggio</value>
 </string>
 <string id="218" name="send_invitationwin_btn_confirm">
-<value>Send</value>
+<value>Invia</value>
 </string>
 <string id="219" name="send_invitationwin_btn_cancel">
-<value>cancel</value>
+<value>annulla</value>
 </string>
 <string id="220" name="send_chat_text_btn">
-<value>send</value>
+<value>invia</value>
 </string>	
 <string id="221" name="invited_userwin_header">
-<value>Userdata</value>
+<value>dati utente</value>
 </string>
 <string id="222" name="invited_userwin_subject">
-<value>Your nickname for this conference</value>
+<value>Il tuo appellativo per la conferenza</value>
 </string>
 <string id="223" name="invited_userwin_login">
-<value>nick</value>
+<value>appellativo</value>
 </string>
 <string id="224" name="invited_userwin_firstname">
-<value>firstname</value>
+<value>nome</value>
 </string>
 <string id="225" name="invited_userwin_lastname">
-<value>lastname</value>
+<value>cognome</value>
 </string>
 <string id="226" name="invited_userwin_mail">
-<value>email</value>
+<value>Email</value>
 </string>
 <string id="227" name="invited_userwin_lang">
-<value>language</value>
+<value>lingua</value>
 </string>
 <string id="228" name="invited_userwin_enter">
-<value>enter</value>
+<value>entra</value>
 </string>
 </language>

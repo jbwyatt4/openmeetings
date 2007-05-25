@@ -115,7 +115,7 @@ public class Install extends VelocityViewServlet {
 					
 					String filePath = getServletContext().getRealPath("/")+ImportInitvalues.languageFolderName;
 					
-					ImportInitvalues.getInstance().loadInitLangauges(filePath);
+					ImportInitvalues.getInstance().loadInitLanguages(filePath);
 					ImportInitvalues.getInstance().loadMainMenu();
 					ImportInitvalues.getInstance().loadSalutations();
 					ImportInitvalues.getInstance().loadConfiguration(configdefault, configsmtp, configsmtpport, configreferer, configmailuser, configmailpass, configdefaultLang);
