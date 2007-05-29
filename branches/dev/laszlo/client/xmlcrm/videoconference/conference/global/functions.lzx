@@ -192,7 +192,7 @@ Debug.write("end init");
 	
 <!-- country validation -->
 <method name="validateCountry" args="str">
-	
+	Debug.write("validateCountry: ",str);
 	<![CDATA[
 		if (str.length!=0){
 			var a = new Array();
@@ -205,5 +205,8 @@ Debug.write("end init");
 	]]>	
 </method>
   
+<!--
 
+ -->
+		
 </library>

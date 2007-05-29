@@ -36,7 +36,7 @@
 			this.house.setText(obj.adresses.additionalname);
 			this.zip.setText(obj.adresses.zip);
 			this.town.setText(obj.adresses.town);
-			this.state.selectItem(String(obj.adresses.states.state_id));
+			this.state.setValued(obj.adresses.states.name,String(obj.adresses.states.state_id));
 			this.adress_comment.setText(obj.adresses.comment);
 			this.salutation.selectItem(String(obj.title_id));
 			this._organisationslist.clearList();
@@ -52,6 +52,7 @@
   		remotecontext="$once{ canvas.thishib }" > 
   		<netparam name="vars1"><method name="getValue"> return canvas.sessionId; </method></netparam>
     	<handler name="ondata" args="value">
+			Debug.write("getUserSelf: ",value);
     		parent.initFields(value);
     	</handler>
   	</netremotecallhib>	
@@ -128,13 +129,14 @@
         <edittext name="town" y="310" x="200" width="190" text="" />                        
          
     <labeltext labelid="141" width="200" y="340" resize="false" x="2"/>  
-		<edittext name="state" width="270" y="340" x="120" editable="true" fontsize="12">
+		<edittext name="state" width="270" y="340" x="120" fontsize="12">
 			
 			<attribute name="timerDelegate" value="null" />
-			<attribute name="typetime" type="number" value="300" />
+			<attribute name="typetime" type="number" value="500" />
 			<attribute name="timerIsInited" value="false" type="boolean" />
 			
 			<attribute name="formervalue" value="" type="string" />
+			<attribute name="startValidate" value="false" type="boolean" />
 				
 			<handler name="oninit">
 				
@@ -143,44 +145,90 @@
 			<method name="getValue">
 				return this.id;
 			</method>
-			<method name="setValue" args="txt,id">
+			<method name="setValued" args="txt,id">
+				Debug.write("setValue: ",txt,id);
 				this.id = id;
 				this.setText(txt);
 			</method>
 			
 			<handler name="onfocus">
+				Debug.write("onfocus ",this.getText());
+				this.startValidate = true;
 				this.formervalue = this.getText();
 			</handler>
-			<handler name="ontext" args="txt">
-				if (!this.timerIsInited){
+			<handler name="onvalue" args="txt">
+				<![CDATA[
+				Debug.write("onvalue: ",txt,this.startValidate);
+				if (!this.timerIsInited && this.startValidate){
 					this.timerIsInited = true;
-					this.timerDelegate = new LzDelegate( this, "validateText" );
+					this.timerDelegate = new LzDelegate( this, "validatedText" );
+				    Debug.write("############### addTimer");
 					LzTimer.addTimer( this.timerDelegate, this.typetime );
 				} else {
 					LzTimer.resetTimer( this.timerDelegate, this.typetime );
 				}
+				]]>
 			</handler>
-			<method name="validateText">
+			<method name="validatedText">
 				<![CDATA[
-					Debug.write("validateText: ",this.getText());
-					this.timerIsInited= false;
-					this.reset();
+					Debug.write("validatedText: ",this.getText());
+					//this.reset();
 					var t = canvas.validateCountry(this.getText());
+					Debug.write('t: ',t);
+					this._cblist.setAttribute('visible',true);
+					this._cblist.removeAllItems();
 					for (var i=0;i<t.length;i++){
-						this.additem(t[i].name,t[i].state_id);
+						this._cblist.addItem(t[i].name,t[i].state_id);
 					}
+					LzTimer.removeTimer(this.timerDelegate);
+					this.timerIsInited = false;
+					Debug.write("validateText: ",this.getText());
+
 				]]>
 			</method>
-			<handler name="onblur">
+			<handler name="onblur" args="b">
+				Debug.write("onblur: ",b);
 				<![CDATA[
-					var t = canvas.validateCountry(this.getText());
-					for (var i=0;i<t.length;i++){
-					
+					if (b!=this._cblist){
+						var t = canvas.validateCountry(this.getText());
+						Debug.write('t: ',t);
+						this._cblist.removeAllItems();
+						for (var i=0;i<t.length;i++){
+							this._cblist.addItem(t[i].name,t[i].state_id);
+						}
+						this.startValidate = false;
+						this._cblist.setAttribute('visible',false);
+					} else {
+						Debug.write("is this._cblist");
 					}
 				]]>
 			</handler>
+			
+			<floatinglist width="${ this.owner.width }" attach="bottom" 
+				name="_cblist" visible="false" autoscrollbar="true" shownitems="7" >
+				<method name="removeAllItems" args="index" >
+					for (var eg in _contentview.subviews){
+						_removeitem(_contentview.subviews[eg]);
+					}
+				</method>
+				<handler name="onselect" args="item">
+					Debug.write("onselect: ",item);
+					//this.owner.
+					this.setAttribute('visible',false);
+					LzFocus.setFocus(this.owner);
+				</handler>				
+			</floatinglist>
+			
 		</edittext>
 	<!--
+		
+					//this.reset();
+					var t = canvas.validateCountry(this.getText());
+					Debug.write('t: ',t);
+					//for (var i=0;i<t.length;i++){
+						//this.additem(t[i].name,t[i].state_id);
+					//}
+				
         <combobox name="state" width="270" y="340" x="120" editable="false" fontsize="12">
 	        <handler name="oninit" >
 	            <![CDATA[
