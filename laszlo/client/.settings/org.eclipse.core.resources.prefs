@@ -1,4 +1,4 @@
-#Tue May 29 12:23:50 CEST 2007
+#Wed May 30 13:38:25 CEST 2007
 eclipse.preferences.version=1
 encoding//xmlcrm/newstreaming/camera.lzx=UTF-8
 encoding//xmlcrm/newstreaming/mediadevice.lzx=UTF-8
@@ -74,6 +74,8 @@ encoding//xmlcrm/videoconference/oslmon/components/text/customedittext.lzx=UTF-8
 encoding//xmlcrm/videoconference/oslmon/components/text/labeltext.lzx=UTF-8
 encoding//xmlcrm/videoconference/oslmon/components/turnoverlist/turnoverlist.lzx=UTF-8
 encoding//xmlcrm/videoconference/oslmon/components/updatecheckbox.lzx=UTF-8
+encoding//xmlcrm/videoconference/oslmon/components/validbox/library.lzx=UTF-8
+encoding//xmlcrm/videoconference/oslmon/components/validbox/validtext.lzx=UTF-8
 encoding//xmlcrm/videoconference/oslmon/upload/fileupload.lzx=UTF-8
 encoding//xmlcrm/videoconference/oslmon/upload/uploadwindow.lzx=UTF-8
 encoding//xmlcrm/videoconference/test/content/audiotest.lzx=UTF-8
@@ -85,6 +87,8 @@ encoding//xmlcrm/videoconference/test/main.lzx=UTF-8
 encoding//xmlcrm/videoconference/test/simplebroadcast.lzx=UTF-8
 encoding//xmlcrm/videoconference/test/simpletestedittext.lzx=UTF-8
 encoding//xmlcrm/videoconference/test/simpletestvalidbox.lzx=UTF-8
+encoding//xmlcrm/videoconference/test/simpletestvalidtext.lzx=UTF-8
+encoding//xmlcrm/videoconference/test/simpletimertest.lzx=UTF-8
 encoding//xmlcrm/videoconference/xmlcrm/auth/checkLoginData.lzx=UTF-8
 encoding//xmlcrm/videoconference/xmlcrm/content/admin/chooseorganisationwindow.lzx=UTF-8
 encoding//xmlcrm/videoconference/xmlcrm/content/admin/configureusers.lzx=UTF-8

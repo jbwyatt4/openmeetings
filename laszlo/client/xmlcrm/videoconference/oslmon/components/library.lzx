@@ -15,5 +15,6 @@
     <include href="turnoverlist/" />
     <include href="calendar/" />
 	<include href="simplevaluelist/" />
+    <include href="validbox/" />
 
 </library>
