@@ -134,6 +134,9 @@ String.prototype.startsWith = function(prefix) {
               Defaults to 50 pixels.
               @keywords defaultsetter -->
         <attribute name="min_width" value="50" type="number" />
+        
+        <!--- The method to be called for validating -->
+        <attribute name="validate_method" value="null" />
 
         <!--- Since we are not focusable, defer to the inputtext's next selection,
               so that when floatinglist is tabbed out of, we can provide a next
@@ -193,83 +196,100 @@ String.prototype.startsWith = function(prefix) {
                     <attribute name="text" type="string" />
 					
 					<attribute name="initSelect" value="false" type="boolean" />
+					
+                    <attribute name="timerDelegate" value="null"/>
+                    <attribute name="typetime" type="number" value="4000"/>
+					<attribute name="timerIsInited" value="false" type="boolean"/>
 
                     <!-- arrow down and up both popup floatinglist, and pass the key event to it -->
                     <handler name="onkeydown" args="key">
                         <![CDATA[
+						Debug.write("onkeydown: ",key);
                         // 38 is up-arrow
                         // 40 is down-arrow
                         // 32 is space
                         // 13 is return
-                        if ((key==38) || (key==40)) {
-                            if (!classroot.isopen) {
-                                classroot.setOpen(true, true); // open, withKey
+                            if ((key==38) || (key==40)) {
+                                if (!classroot.isopen) {
+                                    classroot.setOpen(true, true); // open, withKey
+                                }
+    
+                                // pass the key event on to the floatinglist
+                                classroot.cblist.onkeydown.sendEvent(key);
+                            } else {
+                                Debug.write("onkeydown txt: ",this.getText());
+                                if (!this.initSelect){
+                                    //Debug.write("onvalue: ",txt,this);
+                                    if (!this.timerIsInited){
+                                        this.timerIsInited = true;
+                                        this.timerDelegate = new LzDelegate( this, "validatedText" );
+                                        Debug.write("+++++++++++++++++ addTimer");
+                                        Debug.write("+++++++++++++++++ removeTimer ",LzTimer.countTimers());
+                                        LzTimer.addTimer( this.timerDelegate, this.typetime );
+                                    } else {
+                                        Debug.write("############### resetTimer NO ADDING ");
+                                        Debug.write("############### removeTimer ",LzTimer.countTimers());
+                                        //LzTimer.removeTimer( this.timerDelegate );
+                                    }
+                                } else {
+                                    this.initSelect = false;
+                                }
                             }
-
-                            // pass the key event on to the floatinglist
-                            classroot.cblist.onkeydown.sendEvent(key);
-                        } else if (key > 31 &&  key != 8) {
-                            // user is entering a value manually - so clear selection
-                            // don't clear selection for non-printing keys like shift/ctrl/etc.
-                            classroot.cblist.clearSelection();
-                        }
                         ]]>
                     </handler>
 
                     <!-- pass up to component level so focus rect will be visible, and subclassers can catch -->
                     <handler name="onfocus" args="v">
-                         if ( classroot['onfocus'] ) classroot.onfocus.sendEvent(v);
+                        if ( classroot['onfocus'] ) classroot.onfocus.sendEvent(v);
                     </handler>
                     <!-- pass up to component level so subclassers can catch -->
                     <handler name="onblur" args="v">
-                         classroot.setText( this.getText() );
-                         if ( classroot['onblur'] ) classroot.onblur.sendEvent(v);
+                        this.initSelect=true;
+                        classroot.setText( this.getText() );
+                        if ( classroot['onblur'] ) classroot.onblur.sendEvent(v);
                     </handler>
                     <!-- pass up to component level so subclassers can catch -->
                     <handler name="onkeyup" args="kc">
-                         if ( classroot['onkeyup'] ) classroot.onkeyup.sendEvent(kc);
+                        if ( classroot['onkeyup'] ) classroot.onkeyup.sendEvent(kc);
                     </handler>
                     <!-- pass up to component level so subclassers can catch -->
                     <handler name="onkeydown" args="kc">
-                         if ( classroot['onkeydown'] ) classroot.onkeydown.sendEvent(kc);
+                        if ( classroot['onkeydown'] ) classroot.onkeydown.sendEvent(kc);
                     </handler>
 
                     <method name="getFocusRect"  >
-                       return classroot.getFocusRect();
+                        return classroot.getFocusRect();
                     </method>
-					
-					<handler name="ontext" args="txt">
-						Debug.write("txt: ",txt);
-						if (!this.initSelect){
-							Debug.write("onvalue: ",txt,this.startValidate);
-							if (!this.timerIsInited){
-								this.timerIsInited = true;
-								this.timerDelegate = new LzDelegate( this, "validatedText" );
-								Debug.write("############### addTimer");
-								LzTimer.addTimer( this.timerDelegate, this.typetime );
-							} else {
-								LzTimer.resetTimer( this.timerDelegate, this.typetime );
-							}
-						} else {
-							this.initSelect = false;
-						}
-					</handler>
 
 					<method name="validatedText">
 						<![CDATA[
-							Debug.write("validatedText: ",this.getText());
-							//this.reset();
-							var t = canvas.validateCountry(this.getText());
-							Debug.write('t: ',t.length);
-//							this.parent._cblist.setAttribute('visible',true);
-							this.parent._cblist.removeAllItems();
-							for (var i=0;i<t.length;i++){
-								this.parent._cblist.addItem(t[i].name,t[i].state_id);
-							}
-							LzTimer.removeTimer(this.timerDelegate);
-							this.timerIsInited = false;
-							Debug.write("validateText: ",this.getText());
-		
+                            Debug.write("validatedText: ",this.getText());
+                            //this.reset();
+                            if (!this.initSelect){
+                                var t = classroot.validate_method(this.getText());
+                                Debug.write('t: ',t.length);
+                                //this.parent._cblist.setAttribute('visible',true);
+                                classroot.cblist.removeAllItems();
+                                for (var i=0;i<t.length;i++){
+                                    classroot.cblist.addItem(t[i].name,t[i].state_id);
+                                }
+                                Debug.write("############### removeTimer ",LzTimer.countTimers());
+                                for (var eg in LzTimer){
+                                    Debug.write("############### LzTimer ",eg,LzTimer[eg]);
+                                }
+                                for (var eg in LzTimer.timerList){
+                                    Debug.write("############### LzTimer.timerList ",eg,LzTimer.timerList[eg]);
+                                }
+
+                                //Debug.write("validateText: ",this.getText());
+                                //if (!classroot.isopen) {
+                                //    classroot.setOpen(true, true); // open, withKey
+                                //}
+                                this.timerIsInited = false;
+                            } else {
+                                this.initSelect=false;
+                                this.timerIsInited = false;
+                            }
 						]]>
 					</method>					
 
@@ -305,6 +325,11 @@ String.prototype.startsWith = function(prefix) {
                     this.owner.setOpen(false);
                 }
             </method>
+            <method name="removeAllItems" args="index"> 
+                for (var eg in _contentview.subviews){
+                    _removeitem(_contentview.subviews[eg]); 
+                } 
+            </method>			
         </floatinglist>
 
 
@@ -401,23 +426,25 @@ String.prototype.startsWith = function(prefix) {
               and then resends the onselect event to itself so that developers can easily
               reference that without knowing the internals of combobox
               @keywords private -->
-        <handler name="onselect" reference="this.cblist"  args="v" > <![CDATA[
-            this.setOpen(false);
-
-            // anItem has been selected so update the input text field
-            this.selected = v;
-            if (v) this.setText(v.text);
-            if (LzFocus.getFocus() == this.interior.cbtext) {
-                _fixseldel.start = 0;
-                _fixseldel.end = v.text.length;
-                LzIdle.callOnIdle( _fixseldel );
-
-            }
-
-            // resend the event so that developers can write thier own
-            // onselect methods without having to know the internals of
-            // this class.
-            if ( this.onselect ) this.onselect.sendEvent(v);
+        <handler name="onselect" reference="this.cblist"  args="v" > 
+			<![CDATA[
+				this.interior.cbtext.initSelect=true;
+				this.setOpen(false);
+	
+				// anItem has been selected so update the input text field
+				this.selected = v;
+				if (v) this.setText(v.text);
+				if (LzFocus.getFocus() == this.interior.cbtext) {
+					_fixseldel.start = 0;
+					_fixseldel.end = v.text.length;
+					LzIdle.callOnIdle( _fixseldel );
+	
+				}
+	
+				// resend the event so that developers can write thier own
+				// onselect methods without having to know the internals of
+				// this class.
+				if ( this.onselect ) this.onselect.sendEvent(v);
             ]]>
         </handler>
 
@@ -758,7 +785,7 @@ String.prototype.startsWith = function(prefix) {
 		</edittext>
   -->
 	
-	<validbox y="20" width="270" name="_validbox" >
-		
-	</validbox>
+	<validbox y="20" width="270" name="_validbox" 
+        shownitems="7" validate_method="$once{ canvas.validateCountry }" />
+    
  </canvas>
