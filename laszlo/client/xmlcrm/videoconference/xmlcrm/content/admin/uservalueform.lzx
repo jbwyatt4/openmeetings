@@ -60,7 +60,7 @@
 			this.house.setText(obj.adresses.additionalname);
 			this.zip.setText(obj.adresses.zip);
 			this.town.setText(obj.adresses.town);
-			this.state.selectItem(String(obj.adresses.states.state_id));
+            this.state.addAndSelectItem(obj.adresses.states.name,String(obj.adresses.states.state_id));
 			this.adress_comment.setText(obj.adresses.comment);
 			this.status.selectItem(String(obj.status));
 			this.salutation.selectItem(String(obj.title_id));
@@ -185,16 +185,9 @@
         <edittext name="town" y="310" x="200" width="190" text="" />                        
          
     <labeltext labelid="141" width="200" y="340" resize="false" x="2"/>  
-        <combobox name="state" width="270" y="340" x="120" editable="false" fontsize="12">
-	        <handler name="oninit" >
-	            <![CDATA[
-	            for (var i=0;i<canvas.statesInitValues.length;i++){
-	                this.addItem(canvas.statesInitValues[i].name,canvas.statesInitValues[i].state_id);
-	            }
-	            this.selectItem(String(canvas.statesInitValues[0].state_id));
-	            ]]>
-	        </handler> 
-        </combobox> 
+		<validtext name="state" width="270" y="340" x="120" fontsize="12" 
+            shownitems="7" validate_method="$once{ canvas.validateCountry }" 
+            resultId="state_id" resultName="name" />    
 
     <labeltext labelid="158" width="200" y="370" resize="false" x="2"/>  
         <combobox name="status" width="270" y="370" x="120" editable="false" fontsize="12">
