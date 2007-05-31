@@ -147,7 +147,7 @@ public class ImportInitvalues {
         for ( Iterator it = root.elementIterator( "country" ); it.hasNext(); ) {
         	
         	Element item = (Element) it.next();
-        	String country = item.getText();
+        	String country = item.attributeValue("name");
         	
         	Statemanagement.getInstance().addState(country);
         	
