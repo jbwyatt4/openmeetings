@@ -1,0 +1,687 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<language>
+<string id="1" name="conference">
+<value>Конференция</value>
+</string>
+<string id="2" name="meeting">
+<value>Митинг</value>
+</string>
+<string id="3" name="classroom">
+<value>Аудитория</value>
+</string>
+<string id="4" name="settings">
+<value>Установки</value>
+</string>
+<string id="5" name="benutzer">
+<value>Пользователь</value>
+</string>
+<string id="6" name="admin">
+<value>Администрация</value>
+</string>
+<string id="7" name="stop">
+<value>Пауза</value>
+</string>
+<string id="8" name="record">
+<value>Запись</value>
+</string>
+<string id="9" name="nofile">
+<value>Нет данных</value>
+</string>
+<string id="10" name="recordbyteacher">
+<value>Функция записи только для преподавателей</value>
+</string>
+<string id="11" name="connectedusers">
+<value>Связанный пользователь:</value>
+</string>
+<string id="12" name="startconf">
+<value>Начало конференции</value>
+</string>
+<string id="13" name="myname">
+<value>Мое имя</value>
+</string>
+<string id="14" name="videoconference">
+<value>Видеоконференция</value>
+</string>
+<string id="15" name="import">
+<value>Импортировать презентацию</value>
+</string>
+<string id="16" name="refreshfiles">
+<value>Заново загрузить список</value>
+</string>
+<string id="17" name="tomainfile">
+<value>К главному директорию</value>
+</string>
+<string id="18" name="newpoll">
+<value>Новый опрос</value>
+</string>
+<string id="19" name="newpollheader">
+<value>Новый опрос для конференции.</value>
+</string>
+<string id="20" name="question">
+<value>Вопрос:</value>
+</string>
+<string id="21" name="polltype">
+<value>Вид опроса:</value>
+</string>
+<string id="22" name="create">
+<value>создать</value>
+</string>
+<string id="23" name="infomessage">
+<value>Информация: каждый связанный пользователь получает сообщение с новым опросом.</value>
+</string>
+<string id="24" name="creatpoll">
+<value>Создать опрос</value>
+</string>
+<string id="25" name="cancel">
+<value>прервать</value>
+</string>
+<string id="26" name="yesno">
+<value>Да/Нет</value>
+</string>
+<string id="27" name="numeric">
+<value>В числовом порядке 1-10</value>
+</string>
+<string id="28" name="poll">
+<value>Опрос</value>
+</string>
+<string id="29" name="moderation">
+<value>Для создания опроса Вы должны быть модератором/преподавателем в этой комнате.</value>
+</string>
+<string id="30" name="vote">
+<value>Вы проголосовали.</value>
+</string>
+<string id="31" name="alreadyvoted">
+<value>Вы уже проголосовали в данном опросе.</value>
+</string>
+<string id="32" name="voting">
+<value>Проголосовать!</value>
+</string>
+<string id="33" name="answer">
+<value>Ваш ответ:</value>
+</string>
+<string id="34" name="yes">
+<value>Да</value>
+</string>
+<string id="35" name="no">
+<value>Нет</value>
+</string>
+<string id="36" name="questionwant">
+<value>хочу знать:</value>
+</string>
+<string id="37" name="pollresults">
+<value>Результаты опроса</value>
+</string>
+<string id="38" name="question">
+<value>Вопрос:</value>
+</string>
+<string id="39" name="results">
+<value>Ответы:</value>
+</string>
+<string id="40" name="answers">
+<value>Результат:</value>
+</string>
+<string id="41" name="nopoll">
+<value>В настоящее время опроса не существует.</value>
+</string>
+<string id="42" name="votings">
+<value>Проголосовать!</value>
+</string>
+<string id="43" name="meeting">
+<value>Митинг (макс. 4 места)</value>
+</string>
+<string id="44" name="conference">
+<value>Конференция (макс. 50 мест)</value>
+</string>
+<string id="45" name="type">
+<value>Модус</value>
+</string>
+<string id="46" name="remainingseats">
+<value>Оставшиеся места</value>
+</string>
+<string id="47" name="alreadychosen">
+<value>Уже присвоено</value>
+</string>
+<string id="48" name="enter">
+<value>Вхождения</value>
+</string>
+<string id="49" name="modleave">
+<value>Модератор/преподаватель этой комнаты покинул комнату.</value>
+</string>
+<string id="50" name="systemmessage">
+<value>Системное сообщение</value>
+</string>
+<string id="51" name="chossedevice">
+<value>Выбор устройства</value>
+</string>
+<string id="52" name="choosecam">
+<value>Выбрать камеру:</value>
+</string>
+<string id="53" name="choosemic">
+<value>Выбрать микрофон:</value>
+</string>
+<string id="54" name="ok">
+<value>OK</value>
+</string>
+<string id="55" name="cancel2">
+<value>прервать</value>
+</string>
+<string id="56" name="reconeectneeded">
+<value>Вы должны соединиться вновь, чтобы активировать изменения.</value>
+</string>
+<string id="57" name="editsetup">
+<value>Изменить установки.</value>
+</string>
+<string id="58" name="course">
+<value>Курс:</value>
+</string>
+<string id="59" name="language">
+<value>Язык курса:</value>
+</string>
+<string id="60" name="ok2">
+<value>OK</value>
+</string>
+<string id="61" name="cancel3">
+<value>прервать</value>
+</string>
+<string id="62" name="clearwhiteboard">
+<value>Очистить планшет</value>
+</string>
+<string id="63" name="clearwhiteboardquestion">
+<value>Очистить планшет перед добавлением нового изображения?</value>
+</string>
+<string id="64" name="dontaskagain">
+<value>Больше не спрашивать</value>
+</string>
+<string id="65" name="no">
+<value>нет</value>
+</string>
+<string id="66" name="editsetup2">
+<value>Обработать установки</value>
+</string>
+<string id="67" name="needconfirmationwhiteboard">
+<value>Запросить подтверждение перед очисткой планшета.</value>
+</string>
+<string id="68" name="userinfo">
+<value>Наша информация</value>
+</string>
+<string id="69" name="cleardrawarea">
+<value>Очистить Планшет</value>
+</string>
+<string id="70" name="undo">
+<value>Отмена</value>
+</string>
+<string id="71" name="redo">
+<value>Восстановление</value>
+</string>
+<string id="72" name="selectobject">
+<value>Выбрать объект</value>
+</string>
+<string id="73" name="text">
+<value>Текст</value>
+</string>
+<string id="74" name="paint">
+<value>Рисование</value>
+</string>
+<string id="75" name="drawline">
+<value>Провести линию</value>
+</string>
+<string id="76" name="drawu">
+<value>Подчеркнуть</value>
+</string>
+<string id="77" name="rect">
+<value>Прямоугольник</value>
+</string>
+<string id="78" name="ellipse">
+<value>Эллипс</value>
+</string>
+<string id="79" name="arrow">
+<value>Стрелка</value>
+</string>
+<string id="80" name="deletechosen">
+<value>Удалить выбранный элемент</value>
+</string>
+<string id="81" name="appliymod">
+<value>Запрос функции модератора</value>
+</string>
+<string id="82" name="apply">
+<value>Запрос</value>
+</string>
+<string id="83" name="cancel">
+<value>Отменить</value>
+</string>
+<string id="84" name="mod">
+<value>Получить функцию модератора</value>
+</string>
+<string id="85" name="close">
+<value>Закрыть</value>
+</string>
+<string id="86" name="italic">
+<value>Курсив</value>
+</string>
+<string id="87" name="bold">
+<value>Жирный шрифт</value>
+</string>
+<string id="88" name="waiting">
+<value>ОЖИДАНИЕ</value>
+</string>
+<string id="89" name="applyMessage">
+<value>Пользователь желает запросить функцию модератора:</value>
+</string>
+<string id="90" name="accept">
+<value>Согласие</value>
+</string>
+<string id="91" name="reject">
+<value>Отклонение</value>
+</string>
+<string id="92" name="cancel">
+<value>Отменить</value>
+</string>
+<string id="93" name="sendmodrequestmessage">
+<value>Отсылка запроса следующему пользователю</value>
+</string>
+<string id="94" name="accept">
+<value>Выдано согласие</value>
+</string>
+<string id="95" name="reject">
+<value>Отклонено</value>
+</string>
+<string id="96" name="changemod">
+<value>Замена модератора</value>
+</string>
+<string id="97" name="nonmoderrormessage">
+<value>Вы не являетесь модератором данного курса!</value>
+</string>
+<string id="98" name="moderator">
+<value>Модератор:</value>
+</string>
+<string id="99" name="roomfullmessage">
+<value>В этой комнате нет мест. Извините, попробуйте еще раз через некоторое время.</value>
+</string>
+<string id="100" name="elllipse">
+<value>Эллипс</value>
+</string>
+<string id="101" name="close">
+<value>Закрыть</value>
+</string>
+<string id="102" name="AuthError">
+<value>Ошибка при вводе</value>
+</string>
+<string id="103" name="min4username">
+<value>Имя пользователя должно состоять минимум из 4 знаков</value>
+</string>
+<string id="104" name="min4pass">
+<value>Пароль должен состоять минимум из 4 знаков</value>
+</string>
+<string id="105" name="usernametaken">
+<value>Это имя пользователя уже присвоено</value>
+</string>
+<string id="106" name="emailtaken">
+<value>Электронный адрес уже зарегистрирован</value>
+</string>
+<string id="107" name="emailtaken">
+<value>Выдается ошибка, просьба связаться с административной группой</value>
+</string>
+<string id="108" name="Authlogin">
+<value>Логин</value>
+</string>
+<string id="109" name="Authuser">
+<value>Пользователь:</value>
+</string>
+<string id="110" name="Authpass">
+<value>Пароль:</value>
+</string>
+<string id="111" name="Authlang">
+<value>Язык</value>
+</string>
+<string id="112" name="Authreg">
+<value>Логин</value>
+</string>
+<string id="113" name="regformhead">
+<value>Подписка</value>
+</string>
+<string id="114" name="regformuser">
+<value>Пользователь:</value>
+</string>
+<string id="115" name="regformpass">
+<value>Пароль:</value>
+</string>
+<string id="116" name="regformretype">
+<value>Повторить:</value>
+</string>
+<string id="117" name="regformfirstname">
+<value>Имя:</value>
+</string>
+<string id="118" name="regformlastname">
+<value>Фамилия:</value>
+</string>
+<string id="119" name="regformmail">
+<value>E-Mail:</value>
+</string>
+<string id="120" name="regformstate">
+<value>Страна:</value>
+</string>
+<string id="121" name="regformbtn1">
+<value>Зарегистрироваться</value>
+</string>
+<string id="122" name="regformbtn2">
+<value>Прервать</value>
+</string>
+<string id="123" name="Authbtn2">
+<value>Регистр</value>
+</string>
+<string id="124" name="dashboard">
+<value>На главную</value>
+</string>
+<string id="125" name="useradmin">
+<value>Пользователь</value>
+</string>
+<string id="126" name="groupadmin">
+<value>Группы</value>
+</string>
+<string id="127" name="orgadmin">
+<value>Организации</value>
+</string>
+<string id="128" name="headconf">
+<value>Комнаты для конференций</value>
+</string>
+<string id="129" name="conf_pub">
+<value>Публично</value>
+</string>
+<string id="130" name="head_org">
+<value>Организация</value>
+</string>
+<string id="131" name="btn_enterroom">
+<value>Войти</value>
+</string>
+<string id="132" name="useralterself_login">
+<value>Пользователь</value>
+</string>
+<string id="133" name="useralterself_pass">
+<value>Пароль</value>
+</string>
+<string id="134" name="useralterself_passretype">
+<value>Повторить</value>
+</string>
+<string id="135" name="useralterself_firstname">
+<value>Имя</value>
+</string>
+<string id="136" name="useralterself_lastname">
+<value>Фамилия</value>
+</string>
+<string id="137" name="useralterself_email">
+<value>E-Mail</value>
+</string>
+<string id="138" name="useralterself_birth">
+<value>Дата рождения</value>
+</string>
+<string id="139" name="useralterself_streetno">
+<value>Улица/№ дома</value>
+</string>
+<string id="140" name="useralterself_town">
+<value>Индекс/населенный пункт</value>
+</string>
+<string id="141" name="useralterself_state">
+<value>Страна</value>
+</string>
+<string id="142" name="useralterself_adresscomment">
+<value>Адресная информация</value>
+</string>
+<string id="143" name="useralterself_header">
+<value>Данные пользователя</value>
+</string>
+<string id="144" name="savemenubar_savelabel">
+<value>Сохранить</value>
+</string>
+<string id="145" name="savemenubar_savelabel">
+<value>Процесс сохранения</value>
+</string>
+<string id="146" name="admin_userlist_user_id">
+<value>Идент. № пользователя</value>
+</string>
+<string id="147" name="admin_userlist_login">
+<value>Логин</value>
+</string>
+<string id="148" name="admin_userlist_firstnam">
+<value>Имя</value>
+</string>
+<string id="149" name="admin_userlist_lastname">
+<value>Фамилия</value>
+</string>
+<string id="150" name="turnoverlist_next">
+<value>вперед</value>
+</string>
+<string id="151" name="turnoverlist_pre">
+<value>назад</value>
+</string>
+<string id="152" name="savecontent_confirm">
+<value>Удалить запись</value>
+</string>
+<string id="153" name="savecontent_confirm_cancel_btn">
+<value>Прервать</value>
+</string>
+<string id="154" name="savecontent_confirm_confirm_btn">
+<value>Удалить</value>
+</string>
+<string id="155" name="savemenubar_addlabel">
+<value>Создать запись</value>
+</string>
+<string id="156" name="savemenubar_reloadlabel">
+<value>Заново загрузить запись</value>
+</string>
+<string id="157" name="savemenubar_deletelabel">
+<value>Удалить запись</value>
+</string>
+<string id="158" name="useralter_admin_status">
+<value>Статус</value>
+</string>
+<string id="159" name="useralter_admin_statusItem">
+<value>заблокировано</value>
+</string>
+<string id="160" name="useralter_admin_statusItem">
+<value>активно</value>
+</string>
+<string id="161" name="useralter_admin_organisation">
+<value>Организации</value>
+</string>
+<string id="162" name="calendar_iconlabel">
+<value>Календарь</value>
+</string>
+<string id="163" name="savewindow_btn">
+<value>Закрыть</value>
+</string>
+<string id="164" name="organisationtablelist_idrow">
+<value>Идент. № организации</value>
+</string>
+<string id="165" name="organisationtablelist_namerow">
+<value>Имя</value>
+</string>
+<string id="166" name="uservalue_levelid1">
+<value>Пользователь</value>
+</string>
+<string id="167" name="uservalue_levelid2">
+<value>Модератор</value>
+</string>
+<string id="168" name="uservalue_levelid3">
+<value>Администратор</value>
+</string>
+<string id="169" name="uservalue_levellabel">
+<value>Роль пользователя</value>
+</string>
+<string id="170" name="orgvalue_header">
+<value>Организация</value>
+</string>
+<string id="171" name="orgvalue_orgname">
+<value>Имя</value>
+</string>
+<string id="172" name="orgvalue_orgname">
+<value>Добавить организацию</value>
+</string>
+<string id="173" name="orgvalue_orgname">
+<value>Добавить организацию</value>
+</string>
+<string id="174" name="orgvalue_userwin">
+<value>Прервать</value>
+</string>
+<string id="175" name="orgvalue_userwin">
+<value>Добавить</value>
+</string>
+<string id="176" name="orgvalue_userwin">
+<value>Удалить организацию</value>
+</string>
+<string id="177" name="orgvalue_userlist">
+<value>Пользователь</value>
+</string>
+<string id="178" name="orgvalue_userlistadd">
+<value>Добавить пользователя</value>
+</string>
+<string id="179" name="orgvalue_userlistdelete">
+<value>Удалить пользователя</value>
+</string>
+<string id="180" name="orgvalue_userwinheader">
+<value>Добавить пользователя</value>
+</string>
+<string id="181" name="orgvalue_userwinsearchfield">
+<value>Поиск пользователя</value>
+</string>
+<string id="182" name="orgvalue_userwinsearchbtn">
+<value>Искать</value>
+</string>
+<string id="183" name="orgvalue_userwinsearchresult">
+<value>Пользователь</value>
+</string>
+<string id="184" name="loginwin_chooseorganisation">
+<value>Организация</value>
+</string>
+<string id="185" name="loginwin_chooseorganisationbtn">
+<value>Выбрать</value>
+</string>
+<string id="186" name="navi_roomadmin">
+<value>Комнаты для конференций</value>
+</string>
+<string id="187" name="roomadmin_header">
+<value>Комнаты для конференций</value>
+</string>
+<string id="188" name="roomadmin_header">
+<value>Идент. №</value>
+</string>
+<string id="189" name="roomadmin_header">
+<value>Имя</value>
+</string>
+<string id="190" name="roomadmin_header">
+<value>публично</value>
+</string>
+<string id="191" name="roomadmin_header">
+<value>Организации</value>
+</string>
+<string id="192" name="roomadmin_header">
+<value>Комнаты для конференций</value>
+</string>
+<string id="193" name="roomvalue_name">
+<value>Имя</value>
+</string>
+<string id="194" name="roomvalue_type">
+<value>Тип</value>
+</string>
+<string id="195" name="roomvalue_ispublic">
+<value>публично</value>
+</string>
+<string id="196" name="roomvalue_comment">
+<value>Комментарий</value>
+</string>
+<string id="197" name="whiteboard_saveicon">
+<value>Сохранить</value>
+</string>
+<string id="198" name="whiteboard_openicon">
+<value>Открыть</value>
+</string>
+<string id="199" name="whiteboard_saveaswinheader">
+<value>Сохранить как</value>
+</string>
+<string id="200" name="whiteboard_saveaswintext">
+<value>Имя файла</value>
+</string>
+<string id="201" name="whiteboard_saveaswintext">
+<value>Имя файла</value>
+</string>
+<string id="202" name="whiteboard_saveaswinbtn1">
+<value>Прервать</value>
+</string>
+<string id="203" name="whiteboard_saveaswinbtn2">
+<value>Сохранить</value>
+</string>
+<string id="204" name="rpcerrorwin_header">
+<value>Ошибка</value>
+</string>
+<string id="205" name="loadwml_header">
+<value>Загрузить</value>
+</string>
+<string id="206" name="loadwml_messsload">
+<value>Объект загружен</value>
+</string>
+<string id="207" name="loadwml_messsync">
+<value>Синхронизация клиентов. Оставшиеся клиенты: </value>
+</string>
+<string id="208" name="loadimage_messload">
+<value>Загрузка графических данных</value>
+</string>
+<string id="209" name="loadimage_messsync">
+<value>Синхронизация клиентов. Оставшиеся клиенты: </value>
+</string>
+<string id="210" name="loadwml_confirmheader">
+<value>Очистить планшет</value>
+</string>
+<string id="211" name="loadwml_confirmmess">
+<value>Очистить планшет, при этом все изменения будут утеряны!</value>
+</string>
+<string id="212" name="loadwml_confirmmess2">
+<value>Перед загрузкой файла запросить подтверждение</value>
+</string>
+<string id="213" name="send_invitation_btn">
+<value>Отослать приглашение</value>
+</string>
+<string id="214" name="send_invitationwin_header">
+<value>Отправить приглашение</value>
+</string>
+<string id="215" name="send_invitationwin_subject">
+<value>Тема</value>
+</string>
+<string id="216" name="send_invitationwin_recipient">
+<value>Адрес получателя</value>
+</string>
+<string id="217" name="send_invitationwin_message">
+<value>Сообщение</value>
+</string>
+<string id="218" name="send_invitationwin_btn_confirm">
+<value>Отправить</value>
+</string>
+<string id="219" name="send_invitationwin_btn_cancel">
+<value>Прервать</value>
+</string>
+<string id="220" name="send_chat_text_btn">
+<value>Отправить</value>
+</string>
+<string id="221" name="invited_userwin_header">
+<value>Данные пользователя</value>
+</string>
+<string id="222" name="invited_userwin_subject">
+<value>Ник для данной конференции</value>
+</string>
+<string id="223" name="invited_userwin_login">
+<value>Прозвище/псевдоним</value>
+</string>
+<string id="224" name="invited_userwin_firstname">
+<value>Имя</value>
+</string>
+<string id="225" name="invited_userwin_lastname">
+<value>Фамилия</value>
+</string>
+<string id="226" name="invited_userwin_mail">
+<value>E-Mail</value>
+</string>
+<string id="227" name="invited_userwin_lang">
+<value>Язык</value>
+</string>
+<string id="228" name="invited_userwin_enter">
+<value>Отправить</value>
+</string>		
+</language>
