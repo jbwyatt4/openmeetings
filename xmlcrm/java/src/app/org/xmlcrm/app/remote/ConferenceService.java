@@ -54,6 +54,7 @@ public class ConferenceService {
 	public List getRoomsPublic(String SID, long roomtypes_id){
         int users_id = Sessionmanagement.getInstance().checkSession(SID);
         long User_level = Usermanagement.getInstance().getUserLevelByID(users_id);
+        log.error("getRoomsPublic User_Level: "+User_level);
         return Roommanagement.getInstance().getPublicRooms(User_level, roomtypes_id);
 	}
 	

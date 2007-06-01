@@ -19,7 +19,7 @@ public class AuthLevelmanagement {
 	}
 
 	public boolean checkUserLevel(long USER_LEVEL) {
-		if (USER_LEVEL > 2) {
+		if (USER_LEVEL > 0) {
 			return true;
 		} else {
 			return false;
@@ -27,7 +27,7 @@ public class AuthLevelmanagement {
 	}
 	
 	public boolean checkModLevel(long USER_LEVEL) {
-		if (USER_LEVEL > 2) {
+		if (USER_LEVEL > 1) {
 			return true;
 		} else {
 			return false;
