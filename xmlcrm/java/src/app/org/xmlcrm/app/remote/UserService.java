@@ -51,9 +51,7 @@ public class UserService {
 	 * @return
 	 */
 	public List getUserSalutations(String SID){
-        int users_id = Sessionmanagement.getInstance().checkSession(SID);
-        long User_LEVEL = Usermanagement.getInstance().getUserLevelByID(users_id);
-        return Salutationmanagement.getInstance().getUserSalutations(User_LEVEL);
+        return Salutationmanagement.getInstance().getUserSalutations();
 	}
 	
 	/**
@@ -254,7 +252,7 @@ public class UserService {
 	        			argObjectMap.get("street").toString(), argObjectMap.get("additionalname").toString(), 
 	        			argObjectMap.get("fax").toString(), argObjectMap.get("zip").toString(), 
 	        			Long.valueOf(argObjectMap.get("states_id").toString()).longValue(), argObjectMap.get("town").toString(), 
-	        			Long.valueOf(argObjectMap.get("states_id").toString()).longValue(),
+	        			0,
 	        			false,organisations); 	
     		} else {
 		        return Usermanagement.getInstance().updateUser(User_LEVEL,user_idClient, 

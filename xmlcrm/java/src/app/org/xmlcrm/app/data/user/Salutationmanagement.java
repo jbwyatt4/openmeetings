@@ -66,18 +66,16 @@ public class Salutationmanagement {
 	 * @param USER_LEVEL
 	 * @return
 	 */
-	public List getUserSalutations(long USER_LEVEL){
+	public List getUserSalutations(){
 		try {
-			if (AuthLevelmanagement.getInstance().checkUserLevel(USER_LEVEL)){
-				Object idf = HibernateUtil.createSession();
-				Session session = HibernateUtil.getSession();
-				Transaction tx = session.beginTransaction();
-				Criteria crit = session.createCriteria(Salutations.class);
-				List ll = crit.list();
-				tx.commit();
-				HibernateUtil.closeSession(idf);
-				return ll;
-			}
+			Object idf = HibernateUtil.createSession();
+			Session session = HibernateUtil.getSession();
+			Transaction tx = session.beginTransaction();
+			Criteria crit = session.createCriteria(Salutations.class);
+			List ll = crit.list();
+			tx.commit();
+			HibernateUtil.closeSession(idf);
+			return ll;
 		} catch (HibernateException ex) {
 			log.error("[addUserSalutation]" ,ex);
 		} catch (Exception ex2) {
