@@ -1,4 +1,4 @@
-#Wed May 30 13:38:25 CEST 2007
+#Fri Jun 01 13:47:06 CEST 2007
 eclipse.preferences.version=1
 encoding//xmlcrm/newstreaming/camera.lzx=UTF-8
 encoding//xmlcrm/newstreaming/mediadevice.lzx=UTF-8
@@ -90,6 +90,7 @@ encoding//xmlcrm/videoconference/test/simpletestvalidbox.lzx=UTF-8
 encoding//xmlcrm/videoconference/test/simpletestvalidtext.lzx=UTF-8
 encoding//xmlcrm/videoconference/test/simpletimertest.lzx=UTF-8
 encoding//xmlcrm/videoconference/xmlcrm/auth/checkLoginData.lzx=UTF-8
+encoding//xmlcrm/videoconference/xmlcrm/auth/registerNewUser.lzx=UTF-8
 encoding//xmlcrm/videoconference/xmlcrm/content/admin/chooseorganisationwindow.lzx=UTF-8
 encoding//xmlcrm/videoconference/xmlcrm/content/admin/configureusers.lzx=UTF-8
 encoding//xmlcrm/videoconference/xmlcrm/content/admin/configureusersListItem.lzx=UTF-8

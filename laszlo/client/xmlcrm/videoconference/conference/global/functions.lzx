@@ -204,6 +204,10 @@ Debug.write("end init");
 		}
 	]]>	
 </method>
+    
+<method name="getCountryRecord" args="id">
+    return canvas.statesInitValues[id];
+</method>
   
 <!--
 
