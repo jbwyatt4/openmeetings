@@ -73,11 +73,11 @@
             Debug.write("getLanguageById: ",value);
             setLabelObject(value);
             if (parent.initlanguageLoaded){
-            	parent.getStates.doCall();
+            	parent.getRoomTypes.doCall();
             } else {
             	parent.initlanguageLoaded=true;
 			    if(!canvas.isinitRoomDirect){
-            	    new checkLoginData(canvas.main_content._content);
+            	    parent.getStates.doCall();
 			    } else {
 			        Debug.write("canvas.isinitRoomDirect is true");
 			        parent.markSessionAsLogedIn.doCall();
@@ -113,7 +113,7 @@
             //The onResult-Handler will be called be the rtmpconnection
             Debug.write("getUserSalutations ",value);
             canvas.salutationsInitValues = value;
-            parent.getRoomTypes.doCall();
+            new checkLoginData(canvas.main_content._content);
         </handler>  
     </netremotecallhib>   
     

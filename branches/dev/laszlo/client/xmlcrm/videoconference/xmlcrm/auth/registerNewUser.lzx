@@ -32,24 +32,10 @@
         <edittext name="email" y="192" x="120" width="270" text="" />
          
     <labeltext labelid="120" width="200" y="222" resize="false" x="2"/>  
-        
-        <combobox name="state" width="270" y="222" x="120" editable="false">
-            <netremotecallhib name="getStates" funcname="xmlcrm.getStates" remotecontext="$once{ canvas.thishib }" >      
-                <handler name="oninit">
-                    this.doCall();
-                </handler>
-                <handler name="ondata" args="value">
-                    //The onResult-Handler will be called be the rtmpconnection
-                    Debug.write("getLanguages: ",value);
-                    <![CDATA[
-                    for (var i=0;i<value.length;i++){
-                        this.parent.addItem(value[i].name,value[i].state_id);
-                    }
-                    this.parent.selectItem(value[0].state_id);
-                    ]]>
-                </handler>  
-            </netremotecallhib>
-        </combobox>  
+
+		<validtext name="state" width="270" y="222" x="120" fontsize="12" 
+            shownitems="7" validate_method="$once{ canvas.validateCountry }" 
+            resultId="state_id" resultName="name" />        
 <!--
     <labeltext text="Language: " width="200" y="252" resize="false" x="2"/>  
         
