@@ -94,6 +94,10 @@
         </web-resource-collection>
         <web-resource-collection>
             <web-resource-name>Forbidden</web-resource-name>
+            <url-pattern>/install/*</url-pattern>
+        </web-resource-collection>		
+        <web-resource-collection>
+            <web-resource-name>Forbidden</web-resource-name>
             <url-pattern>/ooservice/*</url-pattern>
         </web-resource-collection>        
         <web-resource-collection>
