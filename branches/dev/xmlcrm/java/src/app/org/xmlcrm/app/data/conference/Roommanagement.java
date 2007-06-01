@@ -269,7 +269,9 @@ public class Roommanagement {
 	 */
 	public List getPublicRooms(long USER_LEVEL, long roomtypes_id){
 		try {
+			log.error("getPublicRooms: roomtypes_id "+roomtypes_id);
 			if (AuthLevelmanagement.getInstance().checkUserLevel(USER_LEVEL)){
+				log.error("getPublicRooms: create Query "+roomtypes_id);
 				Object idf = HibernateUtil.createSession();
 				Session session = HibernateUtil.getSession();
 				Transaction tx = session.beginTransaction();
@@ -281,6 +283,7 @@ public class Roommanagement {
 				List ll = crit.list();
 				tx.commit();
 				HibernateUtil.closeSession(idf);
+				log.error("getPublicRooms: size Room List "+ll.size());
 				return ll;
 			}
 		} catch (HibernateException ex) {
