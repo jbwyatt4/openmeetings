@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Web Start Deployment Template -->
+<jnlp spec="1.0+" codebase="http://macbook:5080/xmlcrm/screencast" 
+	href="screencast.jnlp"> 
+	<information> 
+		<title>JNLP RAF Demo Application</title> 
+		<vendor>Sun Microsystems, Inc.</vendor> 
+		<description>randomFile Application</description> 
+		<description kind="short">A demo of Random Access Write/Read </description> 
+		<offline-allowed/> 
+	</information> 
+	<resources> 
+		<j2se version="1.4+"/> 
+        <jar href="screencast.jar"/> 
+    </resources> 
+    <application-desc main-class="org.xmlcrm.webstart.app.StartScreen"/> 
+</jnlp> 
