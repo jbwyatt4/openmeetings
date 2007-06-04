@@ -8,7 +8,10 @@
 		<description>randomFile Application</description> 
 		<description kind="short">A demo of Random Access Write/Read </description> 
 		<offline-allowed/> 
-	</information> 
+	</information>
+	<security>
+	    <all-permissions/>
+	</security>	
 	<resources> 
 		<j2se version="1.4+"/> 
         <jar href="screencast.jar"/> 
