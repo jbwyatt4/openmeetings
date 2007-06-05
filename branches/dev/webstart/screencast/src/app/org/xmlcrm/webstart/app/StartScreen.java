@@ -2,13 +2,9 @@ package org.xmlcrm.webstart.app;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.awt.image.BufferedImage;
-import java.io.*;
-import java.lang.*;
-import java.applet.*;
 import javax.swing.*;
-import javax.imageio.ImageIO;
-import javax.jnlp.*;
+
+import org.xmlcrm.webstart.jmf.*;
 
 public class StartScreen {
 
@@ -54,17 +50,8 @@ public class StartScreen {
 	
 	void captureScreen(){
 		try {
-			// capture the whole screen
-			BufferedImage screencapture = new Robot().createScreenCapture( new Rectangle(Toolkit.getDefaultToolkit().getScreenSize()) );
-			
-			// Save as JPEG
-			File file = new File("screencapture.jpg");
-			ImageIO.write(screencapture, "jpg", file);
-			
-			String filePath = file.getAbsolutePath();
-			
-			textArea.setText("PATH: "+filePath);
-			
+			JMFManager.main(new String[0]);
+			JMFPlayer.main(new String[0]);
 			// Save as PNG
 			// File file = new File("screencapture.png");
 			// ImageIO.write(screencapture, "png", file);	
@@ -81,7 +68,7 @@ public class StartScreen {
 
 	public static void main(String args[]) {
 
-		StartScreen startScreen = new StartScreen();
+		StartScreen startScreen = new StartScreen();	
 
 	}
 }

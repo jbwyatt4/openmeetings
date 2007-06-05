@@ -15,6 +15,10 @@
 	<resources> 
 		<j2se version="1.4+"/> 
         <jar href="screencast.jar"/> 
+        <jar href="jmf.jar"/> 
+        <jar href="mediaplayer.jar"/> 
+        <jar href="multiplayer.jar"/> 
+        <jar href="customizer.jar"/> 
     </resources> 
     <application-desc main-class="org.xmlcrm.webstart.app.StartScreen"/> 
 </jnlp> 
