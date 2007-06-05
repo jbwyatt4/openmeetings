@@ -50,8 +50,7 @@ public class StartScreen {
 	
 	void captureScreen(){
 		try {
-			JMFManager.main(new String[0]);
-			JMFPlayer.main(new String[0]);
+
 			// Save as PNG
 			// File file = new File("screencapture.png");
 			// ImageIO.write(screencapture, "png", file);	
