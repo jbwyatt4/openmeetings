@@ -161,11 +161,13 @@
 	
 	<handler name="isloadingImage" args="val" />
 	<handler name="isloadedImage" args="val" />
-	   
+	   <!--
     <view width="652" bgcolor="$once{canvas.baseMousecolorizer}" y="40" height="28" />
+           -->
 	<!-- 
 		Menubar with tool-icons
 	 -->
+
 	<view name="_paintmenu" layout="axis:x;spacing:2" x="2" y="40" height="28" >
 		<attribute name="selectedButton" value="null" />
 		<method name="selectButton" args="obj,bool">		
@@ -194,6 +196,10 @@
         <drawchoosemodir y="2" name="b12" modi="ellipse" resourceN="ellipse" isSelectablemodi="true" labelid="78" />
 		<drawchoosemodir y="2" name="b10" modi="drawarrow" resourceN="drawarrowicon_rsc" isSelectablemodi="true" labelid="79" />				
 		<drawchooseseperator y="2" />
+
+
+	</view>
+
 		<!--
 		<button height="20" y="2" text="JPEG" width="40" >
 			<handler name="onclick">
@@ -201,9 +207,6 @@
 			</handler>
 		</button>		
 		-->
-
-	</view>
-	
 	<!-- 
 		The Content Area
 	 -->
