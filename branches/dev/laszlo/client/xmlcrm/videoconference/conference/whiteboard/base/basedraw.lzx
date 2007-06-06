@@ -152,6 +152,7 @@
 		init
 	 -->
 	<handler name="oninit">
+        Debug.write("********** this oninit: ",this);
 		this.basdrawredoView = new LzView(canvas,{visible:false,y:440});
 		this.layers = new Array();
 		this.redolayers = new Array();
@@ -364,7 +365,7 @@
 		//this.setAttribute('drawmodus',this.getAttribute('drawmodus'));				
 	</method>
              
-	<method event="onmousedown" >
+	<handler name="onmousedown" >
 		Debug.write("onmousedown this.drawmodus: ",this.drawmodus);
 		if(this.drawmodus=="hand"){
 			this.doSetHandBodus();
@@ -397,9 +398,10 @@
 			this.starty = currentlayer.getMouse('y'); 				
             mousetracker_del.register(LzIdle,'onidle');
         }
-	</method>
+	</handler>
 
-	<method event="onmouseup" >
+	<handler name="onmouseup" >
+        Debug.write("onmouseup this.drawmodus: ",this.drawmodus);
 		<![CDATA[	
 		var bool = false;
 		if (this.letterObjectIsActive){
@@ -437,7 +439,11 @@
         //Debug.write("onmouseup: ",this.letterObjectIsActive,this.currentletterObj);	        
 		this.checkStepLayers();
 		]]>
-	</method>  
+	</handler>  
+    
+    <handler name="onclick" args="obj">
+        Debug.write("click on whiteboard ",obj);
+    </handler>
 
   	<method name="trackmouse" >
     	<![CDATA[

@@ -1,18 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<library>
-     
-<class name="conference" extends="basecontentview">
+<canvas width="1000" height="700">
 
-	<handler name="ontabcontentleave">
-		this.logicalRoomLeave.doCall();
-	</handler>
-	
-	<netremotecallhib name="logicalRoomLeave" funcname="logicalRoomLeave" remotecontext="$once{ canvas.thishib }" >      
-    	<handler name="ondata" args="value">
-    		Debug.write("logicalRoomLeave: ",value);
-    		//this.parent.destroy();
-    	</handler>
-    </netremotecallhib>
+   
+    <include href="../../../oslmon/" />
+    <include href="../../../conference/" />
+
 
     <view x="264" width="658" y="2" height="561" bgcolor="$once{ canvas.basebgcolorizer }">
 		<view name="bg" x="1" y="1" bgcolor="white"
@@ -43,12 +35,12 @@
   	Chat/Online Users/Files/Library/WWW
    -->
   <menubardokeos y="279" name="_menubardokeos" />
-
+  
     <!-- 
         shared Whiteboard
      -->
     
-   <whiteboard name="_whiteboard" x="268" y="2" >
+   <whiteboard name="_whiteboard" x="268" y="2" bgcolor="red">
         <handler name="onsharedMessage" args="obj">
                 
             Debug.write("send: ",obj);
@@ -68,12 +60,11 @@
 	<view name="currentmainobjectisMod" x="266" y="46"
 		width="654"
 		height="504"
-		visible="true">
+		visible="false">
 		<handler name="onclick">
 			new errorpopup(canvas,{error:canvas.getLabelName(97)});
 		</handler>
 	</view>
 
-</class>
-
-</library>
+    
+</canvas>

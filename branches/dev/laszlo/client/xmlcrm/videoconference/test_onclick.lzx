@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<canvas debug="false" width="1000" height="700">
+
+    <class name="myview" extends="drawview" bgcolor="red" clip="true" 
+        width="200" height="200">
+        <handler name="onclick">
+            Debug.write("asdjasjld",this);
+        </handler>
+	    <handler name="onmouseup" >
+            Debug.write("onmouseup this.drawmodus: ");        
+        </handler>
+    </class>
+    
+    <class name="myview2" extends="myview" >
+    </class>
+    
+    <handler name="oninit">
+        new myview2(canvas);
+    </handler>
+    
+  
+    
+</canvas>
