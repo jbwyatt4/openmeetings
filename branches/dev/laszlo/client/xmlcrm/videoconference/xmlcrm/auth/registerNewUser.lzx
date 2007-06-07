@@ -115,6 +115,9 @@
 				new errorwin(canvas.main_content._content.inner,{refObj:this.parent,labelid:102,errorlabelid:107}); 
 			} else if (value>0){
 				Debug.write("successfully registered");
+                 this.refObj.username.setText(this.parent.username.getText());
+                 this.refObj.userpass.setText(this.parent.userpass1.getText());
+                 this.parent.close();
 			}
 			]]>
          </handler>  
