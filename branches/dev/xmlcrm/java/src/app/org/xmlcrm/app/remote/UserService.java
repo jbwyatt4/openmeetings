@@ -29,7 +29,7 @@ public class UserService {
 	 * @return
 	 */
 	public Users getUserSelf(String SID){
-        int users_id = Sessionmanagement.getInstance().checkSession(SID);
+        Long users_id = Sessionmanagement.getInstance().checkSession(SID);
         return Usermanagement.getInstance().getUser(users_id);
 	}
 	
@@ -40,7 +40,7 @@ public class UserService {
 	 * @return
 	 */
 	public Users getUserById(String SID, long user_id){
-        int users_id = Sessionmanagement.getInstance().checkSession(SID);
+        Long users_id = Sessionmanagement.getInstance().checkSession(SID);
         long USER_LEVEL = Usermanagement.getInstance().getUserLevelByID(users_id);
         return Usermanagement.getInstance().checkAdmingetUserById(USER_LEVEL,user_id);
 	}
@@ -66,7 +66,7 @@ public class UserService {
 	 * @return
 	 */
     public List searchUser(String SID, String searchcriteria ,String searchstring, int max, int start, String orderby, boolean asc){   	
-        int users_id = Sessionmanagement.getInstance().checkSession(SID);
+        Long users_id = Sessionmanagement.getInstance().checkSession(SID);
         long User_LEVEL = Usermanagement.getInstance().getUserLevelByID(users_id);    	
     	return Usermanagement.getInstance().searchUser(User_LEVEL,searchcriteria,searchstring,max,start,orderby,asc);
     }    
@@ -80,7 +80,7 @@ public class UserService {
      * @return
      */
     public Users addUserdata(String SID,String DATA_KEY,String DATA,String Comment){
-        int users_id = Sessionmanagement.getInstance().checkSession(SID);
+        Long users_id = Sessionmanagement.getInstance().checkSession(SID);
         long User_LEVEL = Usermanagement.getInstance().getUserLevelByID(users_id);
         Users users = new Users();
         String ret = "Add Userdata Self";
@@ -108,7 +108,7 @@ public class UserService {
      * @return
      */
     public Users updateUserdata(String SID, int DATA_ID, String DATA_KEY, String DATA, String Comment){
-        int users_id = Sessionmanagement.getInstance().checkSession(SID);
+        Long users_id = Sessionmanagement.getInstance().checkSession(SID);
         long User_LEVEL = Usermanagement.getInstance().getUserLevelByID(users_id);
         if(User_LEVEL>1){
             Usermanagement.getInstance().updateUserdata(DATA_ID,users_id,DATA_KEY,DATA,Comment);
@@ -119,7 +119,7 @@ public class UserService {
     }	
     
     /**
-     * get a lsit of all users of an organisation
+     * get a list of all users of an organisation
      * @param SID
      * @param organisation_id
      * @param start
@@ -129,9 +129,15 @@ public class UserService {
      * @return
      */
     public List getOrgUserList(String SID, long organisation_id, int start, int max, String orderby, boolean asc){
-        int users_id = Sessionmanagement.getInstance().checkSession(SID);
+        Long users_id = Sessionmanagement.getInstance().checkSession(SID);
         long USER_LEVEL = Usermanagement.getInstance().getUserLevelByID(users_id);
         return Organisationmanagement.getInstance().getUsersByOrganisationId(USER_LEVEL, organisation_id, start, max, orderby, asc);
+    }
+    
+    public List getUserListByModForm(String SID){
+        Long users_id = Sessionmanagement.getInstance().checkSession(SID);
+        long USER_LEVEL = Usermanagement.getInstance().getUserLevelByID(users_id);
+        return Usermanagement.getInstance().getUserByMod(USER_LEVEL, users_id);
     }
     
     /**
@@ -145,7 +151,7 @@ public class UserService {
      * @return
      */
     public List getOrganisationListByUser(String SID, long client_user, int start, int max, String orderby, boolean asc){
-        int users_id = Sessionmanagement.getInstance().checkSession(SID);
+        Long users_id = Sessionmanagement.getInstance().checkSession(SID);
         long USER_LEVEL = Usermanagement.getInstance().getUserLevelByID(users_id);
         return Organisationmanagement.getInstance().getOrganisationsByUserId(USER_LEVEL, client_user, start, max, orderby, asc);
     }    
@@ -161,7 +167,7 @@ public class UserService {
      * @return
      */
     public List getRestOrganisationListByUser(String SID, long client_user, int start, int max, String orderby, boolean asc){
-        int users_id = Sessionmanagement.getInstance().checkSession(SID);
+        Long users_id = Sessionmanagement.getInstance().checkSession(SID);
         long USER_LEVEL = Usermanagement.getInstance().getUserLevelByID(users_id);
         return Organisationmanagement.getInstance().getRestOrganisationsByUserId(USER_LEVEL, client_user, start, max, orderby, asc);
     }
@@ -176,7 +182,7 @@ public class UserService {
      * @return
      */
     public SearchResult getUserList(String SID, int start, int max, String orderby, boolean asc){
-        int users_id = Sessionmanagement.getInstance().checkSession(SID);
+        Long users_id = Sessionmanagement.getInstance().checkSession(SID);
         long USER_LEVEL = Usermanagement.getInstance().getUserLevelByID(users_id);
         return Usermanagement.getInstance().getUsersList(USER_LEVEL, start, max, orderby, asc);
     }
@@ -189,7 +195,7 @@ public class UserService {
      */
     public Long updateUserSelfSmall(String SID, Object argObject){
     	try {
-	        int users_id = Sessionmanagement.getInstance().checkSession(SID);
+	        Long users_id = Sessionmanagement.getInstance().checkSession(SID);
 	        long User_LEVEL = Usermanagement.getInstance().getUserLevelByID(users_id);
 	        if(User_LEVEL>1){
 	        	LinkedHashMap argObjectMap = (LinkedHashMap) argObject;
@@ -225,7 +231,7 @@ public class UserService {
     	try {
     		LinkedHashMap argObjectMap = (LinkedHashMap) regObjectObj;
     		Long user_idClient = Long.valueOf(argObjectMap.get("user_idClient").toString()).longValue();
-	        int users_id = Sessionmanagement.getInstance().checkSession(SID);
+	        Long users_id = Sessionmanagement.getInstance().checkSession(SID);
 	        long User_LEVEL = Usermanagement.getInstance().getUserLevelByID(users_id);	
 	        
 //	        log.error("saveOrUpdateUser1: "+argObjectMap.get("organisations"));
@@ -282,7 +288,7 @@ public class UserService {
      * @return
      */
     public Long deleteUserAdmin(String SID, int user_idClient){
-    	int users_id = Sessionmanagement.getInstance().checkSession(SID);
+    	Long users_id = Sessionmanagement.getInstance().checkSession(SID);
     	long User_LEVEL = Usermanagement.getInstance().getUserLevelByID(users_id);
     	if(User_LEVEL>=3){
     		if (users_id!=user_idClient){

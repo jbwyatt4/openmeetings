@@ -80,8 +80,7 @@ public class Sessionmanagement {
 	 * @param SID
 	 * @return
 	 */
-	public int checkSession(String SID) {
-		int ret = 0;
+	public Long checkSession(String SID) {
 		try {
 			Object idf = HibernateUtil.createSession();
 			Session session = HibernateUtil.getSession();
@@ -94,22 +93,20 @@ public class Sessionmanagement {
 			for (Iterator it2 = query.iterate(); it2.hasNext();) {
 				sessiondata = (Sessiondata) it2.next();
 			}
-
-			if (count == 0 || sessiondata.getUser_id() == new Long(0)) {
-				ret = 0;
-			} else {
-				ret = sessiondata.getUser_id().intValue();
-			}
-
 			tx.commit();
 			HibernateUtil.closeSession(idf);
 			updatesession(SID);
+			if (count == 0 || sessiondata.getUser_id() == new Long(0)) {
+				return new Long(0);
+			} else {
+				return sessiondata.getUser_id();
+			}			
 		} catch (HibernateException ex) {
 			log.error("[checkSession]: " ,ex);
 		} catch (Exception ex2) {
 			log.error("[checkSession]: " ,ex2);
 		}
-		return ret;
+		return null;
 	}
 
 	/**

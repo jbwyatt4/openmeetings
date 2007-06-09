@@ -95,7 +95,7 @@ public class Configurationmanagement {
 	}
 
 	public String addConfByKey(long USER_LEVEL, String CONF_KEY,
-			String CONF_VALUE, Integer USER_ID, String comment) {
+			String CONF_VALUE, Long USER_ID, String comment) {
 		String ret = "Add Configuration";
 		if (AuthLevelmanagement.getInstance().checkAdminLevel(USER_LEVEL)) {
 			Configuration configuration = new Configuration();
@@ -129,7 +129,7 @@ public class Configurationmanagement {
 	}
 
 	public String updateConfByUID(long USER_LEVEL, int UID, String CONF_KEY,
-			String CONF_VALUE, int USER_ID, String comment) {
+			String CONF_VALUE, long USER_ID, String comment) {
 		String res = "Update Configuration";
 		if (AuthLevelmanagement.getInstance().checkAdminLevel(USER_LEVEL)) {
 			try {
@@ -139,7 +139,7 @@ public class Configurationmanagement {
 				String hqlUpdate = "update configuration set CONF_KEY= :CONF_KEY, CONF_VALUE = :CONF_VALUE, USER_ID = :USER_ID, updatetime = :updatetime, comment = :comment where UID= :UID";
 				int updatedEntities = session.createQuery(hqlUpdate).setString(
 						"CONF_KEY", CONF_KEY).setString("CONF_VALUE",
-						CONF_VALUE).setInteger("USER_ID", USER_ID)
+						CONF_VALUE).setLong("USER_ID", USER_ID)
 						.setLong("updatetime",
 								Calender.getInstance().getTimeStampMili())
 						.setString("comment", comment).setInteger("UID", UID)

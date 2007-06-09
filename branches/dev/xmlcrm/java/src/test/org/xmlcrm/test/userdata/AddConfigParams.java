@@ -29,7 +29,7 @@ public class AddConfigParams extends TestCase {
 		
 		System.out.println("ret: "+ret);
 		
-		ret = Configurationmanagement.getInstance().addConfByKey(3, "default_group_id", "1", us.getUser_id().intValue(), "coment");
+		ret = Configurationmanagement.getInstance().addConfByKey(3, "default_group_id", "1", us.getUser_id(), "coment");
 		
 		
 		

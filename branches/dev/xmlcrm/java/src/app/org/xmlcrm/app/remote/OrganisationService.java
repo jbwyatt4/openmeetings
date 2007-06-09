@@ -27,7 +27,7 @@ public class OrganisationService {
 	 */
 	public SearchResult getOrganisations(String SID, int start ,int max, String orderby, boolean asc){
 		try {
-	        int users_id = Sessionmanagement.getInstance().checkSession(SID);
+	        Long users_id = Sessionmanagement.getInstance().checkSession(SID);
 	        long USER_LEVEL = Usermanagement.getInstance().getUserLevelByID(users_id);
 	        return Organisationmanagement.getInstance().getOrganisations(USER_LEVEL,start,max,orderby,asc);
 		} catch (Exception e){
@@ -43,7 +43,7 @@ public class OrganisationService {
 	 * @return
 	 */
 	public Organisation getOrganisationById(String SID, long organisation_id){
-        int users_id = Sessionmanagement.getInstance().checkSession(SID);
+        Long users_id = Sessionmanagement.getInstance().checkSession(SID);
         long USER_LEVEL = Usermanagement.getInstance().getUserLevelByID(users_id);
         return Organisationmanagement.getInstance().getOrganisationById(USER_LEVEL, organisation_id);
 	}
@@ -55,7 +55,7 @@ public class OrganisationService {
 	 * @return
 	 */
 	public Long deleteOrganisation(String SID, long organisation_id){
-        int users_id = Sessionmanagement.getInstance().checkSession(SID);
+        Long users_id = Sessionmanagement.getInstance().checkSession(SID);
         long USER_LEVEL = Usermanagement.getInstance().getUserLevelByID(users_id);
         return Organisationmanagement.getInstance().deleteOrganisation(USER_LEVEL, organisation_id, users_id);
 	}
@@ -69,7 +69,7 @@ public class OrganisationService {
 	 */
 	public Long saveOrUpdateOrganisation(String SID, Object regObjectObj){
 		try {
-	        int users_id = Sessionmanagement.getInstance().checkSession(SID);
+	        Long users_id = Sessionmanagement.getInstance().checkSession(SID);
 	        long USER_LEVEL = Usermanagement.getInstance().getUserLevelByID(users_id);
 	        LinkedHashMap argObjectMap = (LinkedHashMap) regObjectObj;
 	        long organisation_id = Long.valueOf(argObjectMap.get("organisation_id").toString()).longValue();
@@ -98,7 +98,7 @@ public class OrganisationService {
 	 */
 	public List getUsersByOrganisation(String SID, long organisation_id, int start, int max, String orderby, boolean asc){
 		try {   
-	        int users_id = Sessionmanagement.getInstance().checkSession(SID);
+	        Long users_id = Sessionmanagement.getInstance().checkSession(SID);
 	        long USER_LEVEL = Usermanagement.getInstance().getUserLevelByID(users_id);
 	        return Organisationmanagement.getInstance().getUsersByOrganisationId(USER_LEVEL, organisation_id, start, max, orderby, asc);
 		} catch (Exception err) {

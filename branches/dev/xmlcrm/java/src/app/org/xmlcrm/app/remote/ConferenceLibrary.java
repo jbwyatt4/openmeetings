@@ -54,7 +54,7 @@ public class ConferenceLibrary {
 		LinkedList<LinkedList> filesMap = new LinkedList<LinkedList>();
 		LinkedList<LinkedList> foldersMap = new LinkedList<LinkedList>();
 		LinkedList<LinkedList> returnMap = new LinkedList<LinkedList>();
-        int users_id = Sessionmanagement.getInstance().checkSession(SID);
+        Long users_id = Sessionmanagement.getInstance().checkSession(SID);
         long USER_LEVEL = Usermanagement.getInstance().getUserLevelByID(users_id);  
         if (AuthLevelmanagement.getInstance().checkUserLevel(USER_LEVEL)){
 			try {
@@ -176,7 +176,7 @@ public class ConferenceLibrary {
 	
 	public boolean deleteFile(String SID, String fileName, String moduleName, String parentFolder, String room, String domain){
 		boolean returnVal = false;
-        int users_id = Sessionmanagement.getInstance().checkSession(SID);
+        Long users_id = Sessionmanagement.getInstance().checkSession(SID);
         long USER_LEVEL = Usermanagement.getInstance().getUserLevelByID(users_id);  
         if (AuthLevelmanagement.getInstance().checkUserLevel(USER_LEVEL)){		
 			try {
@@ -248,7 +248,7 @@ public class ConferenceLibrary {
 	}	
 	
 	public Long saveAsObject(String SID, String room, String domain, String fileName, Object t){
-        int users_id = Sessionmanagement.getInstance().checkSession(SID);
+        Long users_id = Sessionmanagement.getInstance().checkSession(SID);
         long USER_LEVEL = Usermanagement.getInstance().getUserLevelByID(users_id);  
         if (AuthLevelmanagement.getInstance().checkUserLevel(USER_LEVEL)){		
 			try {
@@ -275,7 +275,7 @@ public class ConferenceLibrary {
 	}
 	
 	public LinkedHashMap loadWmlObject(String SID, String room, String domain, String fileName){
-        int users_id = Sessionmanagement.getInstance().checkSession(SID);
+        Long users_id = Sessionmanagement.getInstance().checkSession(SID);
         long USER_LEVEL = Usermanagement.getInstance().getUserLevelByID(users_id);  
         if (AuthLevelmanagement.getInstance().checkUserLevel(USER_LEVEL)){		
 			try {
