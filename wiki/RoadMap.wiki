@@ -7,12 +7,16 @@ _released at 03.04.2007_
   + developer release
 
 =MileStone 0.5=
-_planned: release at 21.05.2007_
+_Beta1 release at 21.05.2007_
+
   * Reworked Conference and Audience Application
   * Initial Support for users authentification and administration of users in their organisations
   * System invitation
   * Installation guide for this resource to be deployed
   * Announcement of project to wider audience
+  * Rework Images and Document Converter
+  * Offline Installation
+  * Rework Forms feedback
 
 =MileStone 1.0=
   * Recording storing and fully for whiteboard
