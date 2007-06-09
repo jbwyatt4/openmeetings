@@ -4,7 +4,9 @@
 = File-Types = 
 
 One of these File Type is acceptable:
-*.jpg, *.jpeg, *.gif, *.png, *.ppt, *.odp, *.odt, *.sxw, *.wpd, *.doc, *.rtf, *.txt, *.ods, *.sxc, *.xls, *.sxi, *.pdf
+
+
+.tga, .xcf, .wpg, .txt, .ico, .ttf, .pcd, .pcds, .ps, .psd, .tiff, .bmp, .svg, .dpx, .exr, .jpg, .jpeg, .gif, .png, .ppt, .odp, .odt, .sxw, .wpd, .doc, .rtf, .txt, .ods, .sxc, .xls, .sxi, .pdf
 
 = Results = 
 All documents will be converted to a pdf file and a bunch of png's which can be used in the conference (drag n drop to the whiteboard)
