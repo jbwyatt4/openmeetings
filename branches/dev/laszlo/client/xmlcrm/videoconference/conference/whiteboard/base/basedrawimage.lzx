@@ -58,6 +58,54 @@
 			}
 		]]>
 	</handler>
+	<handler name="onerror" args="error">
+		<![CDATA[
+		Debug.write("onerror "+error);
+			//only send syncCommand if alterModus is true (meaning that this is the Moderator)
+			//otherwise just send a notification to moderator that this iamge has been loaded
+			if (this.alterModus){
+				this.refObj.storeTempValsAndLoadSyncList(this);
+			} else {
+				this.refObj.sendLoadNotificationImage();
+			}
+			this.refObj.layers.push(this);			
+			
+			this.oninit.sendEvent();
+			this.refObj.parent.isloadedImage.sendEvent(this);
+			
+			//send notification to wml-loader
+			//this is send later then in normal objects cause it needs to be send after the image
+			//has been loaded completely
+			if (this.refObj.isWmlLoaderImage){
+				this.refObj.isWmlLoaderImage=false;
+				if (this.refObj.onwmlLoaderSend) this.refObj.onwmlLoaderSend.sendEvent('image');
+			}
+		]]>
+	</handler>
+	<handler name="ontimeout" args="error">
+		<![CDATA[
+		Debug.write("ontimeout "+error);
+			//only send syncCommand if alterModus is true (meaning that this is the Moderator)
+			//otherwise just send a notification to moderator that this iamge has been loaded
+			if (this.alterModus){
+				this.refObj.storeTempValsAndLoadSyncList(this);
+			} else {
+				this.refObj.sendLoadNotificationImage();
+			}
+			this.refObj.layers.push(this);			
+			
+			this.oninit.sendEvent();
+			this.refObj.parent.isloadedImage.sendEvent(this);
+			
+			//send notification to wml-loader
+			//this is send later then in normal objects cause it needs to be send after the image
+			//has been loaded completely
+			if (this.refObj.isWmlLoaderImage){
+				this.refObj.isWmlLoaderImage=false;
+				if (this.refObj.onwmlLoaderSend) this.refObj.onwmlLoaderSend.sendEvent('image');
+			}
+		]]>
+	</handler>	
 </class>
 
 <class name="basedrawimage" extends="basedrawletter">
@@ -100,7 +148,6 @@
 			this.loadimageDataWinRef = new loadwhiteboardwindow(canvas.main_content._content.inner,{refObj:this});
 			this.loadimageDataWinRef.setMessage(canvas.getLabelName(this.imageLoadMessageId));
 		}
-			
 		var src = baseurl+'?fileName='+fileName+'&moduleName='+moduleName+'&parentPath='+parentPath+'&room='+room+'&domain='+domain+'&sid='+canvas.sessionId;
   		if (alterModus){
 			this.currentlayer = new imagefordrawView(obj,{src:src,refObj:this,name:nameing,x:posx,y:posy,downloadurl:urlname,alterModus:alterModus,baseurl:baseurl,fileName:fileName,moduleName:moduleName,parentPath:parentPath,room:room,domain:domain});
