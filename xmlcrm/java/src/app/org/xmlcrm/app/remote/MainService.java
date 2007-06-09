@@ -53,7 +53,7 @@ public class MainService {
 	 */
 	public List getNavi(String SID, long language_id){
 		try {
-	        int users_id = Sessionmanagement.getInstance().checkSession(SID);
+	        Long users_id = Sessionmanagement.getInstance().checkSession(SID);
 	        log.error("getNavi 1: "+users_id);
 	        Long User_LEVEL = Usermanagement.getInstance().getUserLevelByID(users_id);
 	        log.error("getNavi 2: "+User_LEVEL);
@@ -73,7 +73,7 @@ public class MainService {
 	 */
 	public Users getUser(String SID,int USER_ID){
 		Users users = new Users();
-		int users_id = Sessionmanagement.getInstance().checkSession(SID);
+		Long users_id = Sessionmanagement.getInstance().checkSession(SID);
 		long User_LEVEL = Usermanagement.getInstance().getUserLevelByID(users_id);
     	if(User_LEVEL>2){
     		users = Usermanagement.getInstance().getUser(new Long(USER_ID));
@@ -140,7 +140,7 @@ public class MainService {
      * @return string value if completed
      */
     public String logoutUser(String SID){
-    	int users_id = Sessionmanagement.getInstance().checkSession(SID);
+    	Long users_id = Sessionmanagement.getInstance().checkSession(SID);
     	return Usermanagement.getInstance().logout(SID,users_id);
     }
     
@@ -219,7 +219,7 @@ public class MainService {
 	 * @return
 	 */
     public Long deleteUserIDSelf(String SID){
-    	int users_id = Sessionmanagement.getInstance().checkSession(SID);
+    	Long users_id = Sessionmanagement.getInstance().checkSession(SID);
     	long User_LEVEL = Usermanagement.getInstance().getUserLevelByID(users_id);
     	if(User_LEVEL>=1){
     		Usermanagement.getInstance().logout(SID,users_id);
@@ -234,7 +234,7 @@ public class MainService {
      * 
      */
     public String sendInvitation(String SID, String username, String message, String domain, String room, String roomtype, String baseurl, String email, String subject){
-    	int users_id = Sessionmanagement.getInstance().checkSession(SID);
+    	Long users_id = Sessionmanagement.getInstance().checkSession(SID);
     	long User_LEVEL = Usermanagement.getInstance().getUserLevelByID(users_id);
     	return Invitationmanagement.getInstance().sendInvitionLink(User_LEVEL, username, message, domain, room, roomtype, baseurl, email, subject);
     }
@@ -301,7 +301,7 @@ public class MainService {
         return ResHandler.getAllGroups(SID);
     }
     public List getAllUsers(String SID,int start, int max){
-        int users_id = Sessionmanagement.getInstance().checkSession(SID);
+        Long users_id = Sessionmanagement.getInstance().checkSession(SID);
         long User_Level = Usermanagement.getInstance().getUserLevelByID(users_id); 
         return Usermanagement.getInstance().getusersAdmin(User_Level,start,max);
     }    

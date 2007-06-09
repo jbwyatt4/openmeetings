@@ -24,6 +24,7 @@ import org.xmlcrm.app.data.beans.basic.SearchResult;
 import org.xmlcrm.app.data.basic.AuthLevelmanagement;
 import org.xmlcrm.app.hibernate.beans.domain.Organisation;
 import org.xmlcrm.app.hibernate.beans.domain.Organisation_Users;
+import org.xmlcrm.app.hibernate.beans.issues.Project;
 import org.xmlcrm.app.hibernate.beans.user.Users;
 import org.xmlcrm.app.hibernate.utils.HibernateUtil;
 
@@ -545,7 +546,7 @@ public class Organisationmanagement {
 				Organisation_Users us = (Organisation_Users) it.next();
 				userL.add(Usermanagement.getInstance().getUser(us.getUser_id()));
 			}
-			//Collections.sort(userL,new UsersFirstnameComperator());
+			Collections.sort(userL,new UsersLoginComperator());
 			return userL;
 			
 		} catch (HibernateException ex) {
@@ -555,6 +556,15 @@ public class Organisationmanagement {
 		}
 		return null;
 	}	
+	
+	class UsersLoginComperator implements Comparator<Users> {
+		public int compare(Users o1, Users o2) {
+			if(o1!=null || o2!=null)
+			return 0;
+			
+			return o1.getLogin().compareTo(o2.getLogin()) ;
+		}
+	}
 	
 	
 	/**

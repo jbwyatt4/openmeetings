@@ -111,10 +111,20 @@ public class Usermanagement {
 		return null;
 	}
 	
+	/**
+	 * 
+	 * @param USER_LEVEL
+	 * @param user_id
+	 * @return
+	 */
 	public Users checkAdmingetUserById(long USER_LEVEL, long user_id){
 		if (AuthLevelmanagement.getInstance().checkAdminLevel(USER_LEVEL)) {
 			return this.getUser(user_id);
 		}
+		return null;
+	}
+	
+	public List getUserByMod(Long USER_LEVEL, long user_id){
 		return null;
 	}
 
@@ -201,7 +211,7 @@ public class Usermanagement {
 		return null;
 	}
 
-	public String logout(String SID, int USER_ID) {
+	public String logout(String SID, long USER_ID) {
 		String result = "Fehler im logout";
 		Sessionmanagement.getInstance().updateUser(SID, 0);
 		result = "Erfolgreich";
@@ -450,7 +460,7 @@ public class Usermanagement {
 		return res;
 	}
 
-	public String updateUserdata(int DATA_ID, int USER_ID, String DATA_KEY,
+	public String updateUserdata(int DATA_ID, long USER_ID, String DATA_KEY,
 			String DATA, String Comment) {
 		String res = "Fehler beim Update";
 		try {
@@ -459,7 +469,7 @@ public class Usermanagement {
 			Transaction tx = session.beginTransaction();
 			String hqlUpdate = "update userdata set DATA_KEY= :DATA_KEY, USER_ID = :USER_ID, DATA = :DATA, updatetime = :updatetime, comment = :Comment where DATA_ID= :DATA_ID";
 			int updatedEntities = session.createQuery(hqlUpdate).setString(
-					"DATA_KEY", DATA_KEY).setInteger("USER_ID", USER_ID)
+					"DATA_KEY", DATA_KEY).setLong("USER_ID", USER_ID)
 					.setString("DATA", DATA).setLong("updatetime",
 							Calender.getInstance().getTimeStampMili())
 					.setString("Comment", Comment).setInteger("DATA_ID",

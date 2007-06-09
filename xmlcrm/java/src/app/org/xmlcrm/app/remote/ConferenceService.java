@@ -27,7 +27,7 @@ public class ConferenceService {
 	 * @return
 	 */
 	public List getRoomsByOrganisationAndType(String SID, long organisation_id, long roomtypes_id){
-        int users_id = Sessionmanagement.getInstance().checkSession(SID);
+        Long users_id = Sessionmanagement.getInstance().checkSession(SID);
         long User_level = Usermanagement.getInstance().getUserLevelByID(users_id);
         return Roommanagement.getInstance().getRoomsOrganisationByOrganisationIdAndRoomType(User_level, organisation_id, roomtypes_id);
 	}
@@ -40,7 +40,7 @@ public class ConferenceService {
 	 * @return
 	 */
 	public SearchResult getRoomsByOrganisation(String SID, long organisation_id, int start, int max, String orderby, boolean asc){
-        int users_id = Sessionmanagement.getInstance().checkSession(SID);
+        Long users_id = Sessionmanagement.getInstance().checkSession(SID);
         long User_level = Usermanagement.getInstance().getUserLevelByID(users_id);
         return Roommanagement.getInstance().getRoomsOrganisationByOrganisationId(User_level, organisation_id, start, max, orderby, asc);
 	}	
@@ -52,7 +52,7 @@ public class ConferenceService {
 	 * @return
 	 */
 	public List getRoomsPublic(String SID, long roomtypes_id){
-        int users_id = Sessionmanagement.getInstance().checkSession(SID);
+        Long users_id = Sessionmanagement.getInstance().checkSession(SID);
         long User_level = Usermanagement.getInstance().getUserLevelByID(users_id);
         log.error("getRoomsPublic User_Level: "+User_level);
         return Roommanagement.getInstance().getPublicRooms(User_level, roomtypes_id);
@@ -64,7 +64,7 @@ public class ConferenceService {
 	 * @return
 	 */
 	public List getRoomTypes(String SID){
-        int users_id = Sessionmanagement.getInstance().checkSession(SID);
+        Long users_id = Sessionmanagement.getInstance().checkSession(SID);
         long USER_LEVEL = Usermanagement.getInstance().getUserLevelByID(users_id);
         return Roommanagement.getInstance().getAllRoomTypes(USER_LEVEL);
 	}
@@ -76,7 +76,7 @@ public class ConferenceService {
 	 * @return
 	 */
 	public Rooms getRoomById(String SID, long rooms_id){
-        int users_id = Sessionmanagement.getInstance().checkSession(SID);
+        Long users_id = Sessionmanagement.getInstance().checkSession(SID);
         long USER_LEVEL = Usermanagement.getInstance().getUserLevelByID(users_id);
         return Roommanagement.getInstance().getRoomById(USER_LEVEL,rooms_id);
 	}
@@ -91,7 +91,7 @@ public class ConferenceService {
 	 * @return
 	 */
 	public SearchResult getRooms(String SID, int start, int max, String orderby, boolean asc){
-        int users_id = Sessionmanagement.getInstance().checkSession(SID);
+        Long users_id = Sessionmanagement.getInstance().checkSession(SID);
         long USER_LEVEL = Usermanagement.getInstance().getUserLevelByID(users_id);
         return Roommanagement.getInstance().getRooms(USER_LEVEL, start, max, orderby, asc);
 	}
@@ -103,7 +103,7 @@ public class ConferenceService {
 	 * @return
 	 */
 	public List getOrganisationByRoom(String SID,long rooms_id){
-        int users_id = Sessionmanagement.getInstance().checkSession(SID);
+        Long users_id = Sessionmanagement.getInstance().checkSession(SID);
         long USER_LEVEL = Usermanagement.getInstance().getUserLevelByID(users_id);
         return Roommanagement.getInstance().getOrganisationsByRoom(USER_LEVEL, rooms_id);
 	}
@@ -117,7 +117,7 @@ public class ConferenceService {
 	 * @return
 	 */
 	public Long addRoomPublic(String SID, String name, long roomtypes_id){
-        int users_id = Sessionmanagement.getInstance().checkSession(SID);
+        Long users_id = Sessionmanagement.getInstance().checkSession(SID);
         long User_level = Usermanagement.getInstance().getUserLevelByID(users_id);
         return Roommanagement.getInstance().addRoom(User_level, name, roomtypes_id, true);
 	}
@@ -132,7 +132,7 @@ public class ConferenceService {
 	 * @return
 	 */
 	public Long addRoomOrganisation(String SID, long organisation_id, String name, long roomtypes_id, boolean ispublic){
-        int users_id = Sessionmanagement.getInstance().checkSession(SID);
+        Long users_id = Sessionmanagement.getInstance().checkSession(SID);
         long User_level = Usermanagement.getInstance().getUserLevelByID(users_id);
         Long rooms_id = Roommanagement.getInstance().addRoom(User_level, name, roomtypes_id, ispublic);
         return Roommanagement.getInstance().addRoomToOrganisation(User_level, rooms_id, organisation_id);
@@ -146,7 +146,7 @@ public class ConferenceService {
 	 */
 	public Long saveOrUpdateRoom(String SID, Object argObject){
 		try {
-	        int users_id = Sessionmanagement.getInstance().checkSession(SID);
+	        Long users_id = Sessionmanagement.getInstance().checkSession(SID);
 	        long User_level = Usermanagement.getInstance().getUserLevelByID(users_id);
 	        LinkedHashMap argObjectMap = (LinkedHashMap) argObject;
 	        LinkedHashMap organisations = (LinkedHashMap) argObjectMap.get("organisations");
@@ -174,7 +174,7 @@ public class ConferenceService {
 	 * @return
 	 */
 	public Long deleteRoom(String SID, long rooms_id){
-        int users_id = Sessionmanagement.getInstance().checkSession(SID);
+        Long users_id = Sessionmanagement.getInstance().checkSession(SID);
         long USER_LEVEL = Usermanagement.getInstance().getUserLevelByID(users_id);
         return Roommanagement.getInstance().deleteRoomById(USER_LEVEL, rooms_id);
 	}

@@ -41,7 +41,7 @@ public class DownloadHandler extends HttpServlet {
 			}
 			System.out.println("sid: " + sid);
 
-			int users_id = Sessionmanagement.getInstance().checkSession(sid);
+			Long users_id = Sessionmanagement.getInstance().checkSession(sid);
 			long User_LEVEL = Usermanagement.getInstance().getUserLevelByID(users_id);
 
 			if (User_LEVEL > 0) {

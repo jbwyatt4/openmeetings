@@ -759,7 +759,7 @@ public class Terminmanagement {
 	 * @param message
 	 * @return
 	 */
-	public Long addTerminUser(long USER_LEVEL, int USER_ID, Date starttime, Date endtime, int terminstatus, String Comment,
+	public Long addTerminUser(long USER_LEVEL, long USER_ID, Date starttime, Date endtime, int terminstatus, String Comment,
 			String description, String pubcomment, int open, String place, String message) {
 		
 //		String ret = "";
@@ -863,7 +863,7 @@ public class Terminmanagement {
 	 * @return
 	 */
 	private Long addTermin(String Comment, String description, Date start,
-			Date end, int open, int owner_id, String place, int terminestatus) {
+			Date end, int open, long owner_id, String place, int terminestatus) {
 
 //		    	Termine termine = new Termine();
 //		    	termine.setComment(Comment);

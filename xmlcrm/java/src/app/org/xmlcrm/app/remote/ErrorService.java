@@ -27,7 +27,7 @@ public class ErrorService {
 	 * @return
 	 */
 	public ErrorResult getErrorByCode(String SID, long errorid){
-        int users_id = Sessionmanagement.getInstance().checkSession(SID);
+        Long users_id = Sessionmanagement.getInstance().checkSession(SID);
         long USER_LEVEL = Usermanagement.getInstance().getUserLevelByID(users_id);
         ErrorResult eResult = new ErrorResult();
         if (errorid==-20) {
