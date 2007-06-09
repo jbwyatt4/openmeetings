@@ -29,8 +29,8 @@
 			if (this.isOnlyImage){
 				var allTypes = new Array();
 				var imageTypes = new Object();
-				imageTypes.description = "Allowed Files (*.jpg, *.jpeg, *.gif, *.png, *.ppt, *.odp, *.odt, *.sxw, *.wpd, *.doc, *.rtf, *.txt, *.ods, *.sxc, *.xls, *.sxi, *.pdf)";
-				imageTypes.extension = "*.jpg; *.jpeg; *.gif; *.png; *.ppt; *.odp; *.odt; *.wpd; *.doc; *.rtf; *.txt; *.ods; *.sxc; *.xls; *.sxi; *.pdf";
+				imageTypes.description = "Allowed Files (*.tga, *.xcf, *.wpg, *.txt, *.ico, *.ttf, *.pcd, *.pcds, *.ps, *.psd, *.tiff, *.bmp, *.svg, *.dpx, *.exr, *.jpg, *.jpeg, *.gif, *.png, *.ppt, *.odp, *.odt, *.sxw, *.wpd, *.doc, *.rtf, *.txt, *.ods, *.sxc, *.xls, *.sxi, *.pdf)";
+				imageTypes.extension = "*.tga; *.xcf; *.wpg; *.txt; *.ico; *.ttf; *.pcd; *.pcds; *.ps; *.psd; *.tiff; *.bmp; *.svg; *.dpx; *.exr; *.jpg; *.jpeg; *.gif; *.png; *.ppt; *.odp; *.odt; *.wpd; *.doc; *.rtf; *.txt; *.ods; *.sxc; *.xls; *.sxi; *.pdf";
 				allTypes.push(imageTypes); 				
 				fr.browse(allTypes);	
 			} else if(this.isOnlyPpt){	
