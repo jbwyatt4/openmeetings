@@ -155,6 +155,7 @@ containing the VideoViews
 	var domain = LzBrowser.getInitArg('domain');
 	var room = LzBrowser.getInitArg('room');
 	var roomtype = LzBrowser.getInitArg('roomtype');
+	var emailGuest = LzBrowser.getInitArg('email');
 		
 	Debug.write("domain: ",domain);
 
@@ -163,6 +164,12 @@ containing the VideoViews
 		canvas.initroomtype = roomtype;
 		canvas.initdomainid = domain;
 		canvas.isinitRoomDirect = true;
+		
+		if (emailGuest != undefined)
+		{
+			canvas.firstName = emailGuest;
+			canvas.mail = emailGuest;
+		}
 	}
 	
 	Debug.write("rmpthost: ",canvas.rmpthost);	

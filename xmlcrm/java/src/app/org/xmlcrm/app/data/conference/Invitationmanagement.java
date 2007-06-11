@@ -30,7 +30,7 @@ public class Invitationmanagement {
 		try {
 			if (AuthLevelmanagement.getInstance().checkUserLevel(USER_LEVEL)){
 				
-				String invitation_link = baseurl+"?lzr=swf8&lzt=swf&domain="+domain+"&room="+room+"&roomtype="+roomtype;
+				String invitation_link = baseurl+"?lzr=swf8&lzt=swf&domain="+domain+"&room="+room+"&roomtype="+roomtype+"&email="+email;
 				
 				String template = InvitationTemplate.getInstance().getRegisterInvitationTemplate(username, message, invitation_link);
 			
