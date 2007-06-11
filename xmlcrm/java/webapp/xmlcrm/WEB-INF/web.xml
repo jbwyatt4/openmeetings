@@ -6,7 +6,7 @@
    version="2.4"> 
 
 	
-	<display-name>Dokeos Video Applications</display-name>
+	<display-name>Openmeetings</display-name>
 
 	<context-param>
 	    <param-name>globalScope</param-name>
