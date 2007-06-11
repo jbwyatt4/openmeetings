@@ -9,9 +9,7 @@
      <attribute name="counterror" type="number" value="0" />
          
      <handler name="onconnect">
-        Debug.write("conencted");
-        //
-        //sharedObj.connect('DokeosChat',this._nc,false);
+        Debug.write("connected");
         this.getsessiondata.call();
      </handler>
   	 <handler name="onerror" >
@@ -92,9 +90,21 @@
             //The onResult-Handler will be called be the rtmpconnection
             Debug.write("markSessionAsLogedIn ",value);
 			
-			new invitationuserwin(canvas.main_content._content.inner); 
-			
-            
+			if (canvas.mail == undefined)
+			{
+			    new invitationuserwin(canvas.main_content._content.inner);
+			}
+			else
+			{		
+                        clearStageContent();
+                        canvas._mainbgcontentNavi.navi._innercontent.clearAllSubItemLists(); 			
+			            if (canvas.initroomtype=="conference"){
+				            new conference(canvas.main_content._content.inner); 
+			            } else {
+				             new audience(canvas.main_content._content.inner); 
+			            }
+			}                 
+
         </handler>  
     </netremotecallhib>    
     
