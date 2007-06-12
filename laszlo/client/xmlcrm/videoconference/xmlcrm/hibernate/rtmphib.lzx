@@ -371,6 +371,10 @@
 						_drawarea.sendCompleteImageLoadedRClient(value.client);
 					} else if (value.message[1]=='imagesynccomplete'){
 						_drawarea.sendCompleteImageSync(value.client);
+					} else if (value.message[1]=='imageloaderror'){
+						_drawarea.sendCompleteImageSync(value.client);
+					} else if (value.message[1]=='imageloadtimeout'){
+						_drawarea.sendCompleteImageSync(value.client);
 					} else if (value.message[1]=='inituser'){
 						//_drawarea.sendCompleteImageSync(value.client);
 					    Debug.write("inituser sendVarsToMessageWithClient: ",value.message[2]);
