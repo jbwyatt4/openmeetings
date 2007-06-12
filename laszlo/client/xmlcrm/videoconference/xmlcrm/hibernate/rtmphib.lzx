@@ -89,22 +89,17 @@
         <handler name="ondata" args="value">
             //The onResult-Handler will be called be the rtmpconnection
             Debug.write("markSessionAsLogedIn ",value);
-			
-			if (canvas.mail == undefined)
-			{
+			//if (canvas.mail == undefined) {
 			    new invitationuserwin(canvas.main_content._content.inner);
-			}
-			else
-			{		
-                        clearStageContent();
-                        canvas._mainbgcontentNavi.navi._innercontent.clearAllSubItemLists(); 			
-			            if (canvas.initroomtype=="conference"){
-				            new conference(canvas.main_content._content.inner); 
-			            } else {
-				             new audience(canvas.main_content._content.inner); 
-			            }
-			}                 
-
+			//} else {		
+            //    clearStageContent();
+            //    canvas._mainbgcontentNavi.navi._innercontent.clearAllSubItemLists(); 			
+            //    if (canvas.initroomtype=="conference"){
+            //        new conference(canvas.main_content._content.inner); 
+            //    } else {
+            //         new audience(canvas.main_content._content.inner); 
+            //    }
+			//}                 
         </handler>  
     </netremotecallhib>    
     
