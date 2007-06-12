@@ -42,7 +42,7 @@
 			if (this.alterModus){
 				this.refObj.storeTempValsAndLoadSyncList(this);
 			} else {
-				this.refObj.sendLoadNotificationImage();
+				this.refObj.sendLoadNotificationImage("imageloadcomplete");
 			}
 			this.refObj.layers.push(this);			
 			
@@ -66,7 +66,7 @@
 			if (this.alterModus){
 				this.refObj.storeTempValsAndLoadSyncList(this);
 			} else {
-				this.refObj.sendLoadNotificationImage();
+				this.refObj.sendLoadNotificationImage("imageloaderror");
 			}
 			this.refObj.layers.push(this);			
 			
@@ -90,7 +90,7 @@
 			if (this.alterModus){
 				this.refObj.storeTempValsAndLoadSyncList(this);
 			} else {
-				this.refObj.sendLoadNotificationImage();
+				this.refObj.sendLoadNotificationImage("imageloadtimeout");
 			}
 			this.refObj.layers.push(this);			
 			
@@ -199,10 +199,10 @@
 		this.getImageClientListScope.doCall();
 	</method>
 	
-	<method name="sendLoadNotificationImage">
+	<method name="sendLoadNotificationImage" args="message" >
 		this.imageLoadingCompleteMessage = new Array();
 		this.imageLoadingCompleteMessage[0] = "whiteboard";
-		this.imageLoadingCompleteMessage[1] = "imageloadcomplete";
+		this.imageLoadingCompleteMessage[1] = message; //"imageloadcomplete"
 		this.sendMessageWithClientImage.doCall();
 	</method>
 	
