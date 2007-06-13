@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library>
-	
-<include href="incubator/baseedittext.lzx" />
 
-<class name="customedittext" extends="baseedittext" fontsize="12" >
+<class name="customedittext" extends="edittext" fontsize="12" >
 
     <attribute name="labelid" type="number" setter="setLabelId(labelid)" />
     <method name="setLabelId" args="_labelid" >
