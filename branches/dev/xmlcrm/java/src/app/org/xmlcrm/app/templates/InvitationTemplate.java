@@ -36,6 +36,7 @@ public class InvitationTemplate extends VelocityLoader{
 	        context.put("user", user);
 	        context.put("message", message);
 	        context.put("invitation_link", invitation_link);
+	        context.put("invitation_link2", invitation_link);
 	
 	        /* lets render a template */
 	

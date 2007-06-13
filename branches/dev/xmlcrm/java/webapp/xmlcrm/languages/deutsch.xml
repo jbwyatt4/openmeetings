@@ -683,5 +683,11 @@
 </string>
 <string id="228" name="invited_userwin_enter">
 <value>Absenden</value>
-</string>		
+</string>	
+<string id="229" name="invited_userwin_enter">
+<value>Laden</value>
+</string>
+<string id="230" name="invited_userwin_enter">
+<value>Daten werden geladen, bitte warten!</value>
+</string>					
 </language>

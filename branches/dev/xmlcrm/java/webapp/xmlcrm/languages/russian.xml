@@ -684,4 +684,10 @@
 <string id="228" name="invited_userwin_enter">
 <value>Отправить</value>
 </string>		
+<string id="229" name="invited_userwin_enter">
+<value>Loading</value>
+</string>
+<string id="230" name="invited_userwin_enter">
+<value>Data loading, please wait!</value>
+</string>	
 </language>
