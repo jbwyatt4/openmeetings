@@ -1,0 +1,1 @@
+convert -thumbnail 30 $1 $2

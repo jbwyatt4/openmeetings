@@ -135,25 +135,28 @@ public class ConferenceLibrary {
 						File file = new File(working_dir+File.separatorChar+allfiles[i]);
 						
 						System.out.println("working_dir+File.separatorChar+allfiles[i]: "+working_dir+File.separatorChar+allfiles[i]);
-	
-						Date lastModifiedDate = new Date(file.lastModified());
-						String lastModified = formatDate(lastModifiedDate);
-						String fileName = allfiles[i];
-						String fileBytes = new Long(file.length()).toString();
-						
-						LinkedList<String> fileInfo = new LinkedList<String>();
-						
-						String fileNamePure = fileName.substring(0, fileName.length()-4);
-						String fileNameExt = fileName.substring(fileName.length()-4,fileName.length());
-						String isimage = "y";
-						if(checkForPresention(fileNameExt.toLowerCase())) isimage = "n";
-						fileInfo.add(fileName);
-						fileInfo.add(fileNamePure);
-						fileInfo.add(fileNameExt);
-						fileInfo.add(lastModified);
-						fileInfo.add(fileBytes);
-						fileInfo.add(isimage);
-						filesMap.add(fileInfo);
+						if (allfiles[i].startsWith("_thumb_")){
+							log.error("FFound Thumbs: "+allfiles[i]);
+						} else {
+							Date lastModifiedDate = new Date(file.lastModified());
+							String lastModified = formatDate(lastModifiedDate);
+							String fileName = allfiles[i];
+							String fileBytes = new Long(file.length()).toString();
+							
+							LinkedList<String> fileInfo = new LinkedList<String>();
+							
+							String fileNamePure = fileName.substring(0, fileName.length()-4);
+							String fileNameExt = fileName.substring(fileName.length()-4,fileName.length());
+							String isimage = "y";
+							if(checkForPresention(fileNameExt.toLowerCase())) isimage = "n";
+							fileInfo.add(fileName);
+							fileInfo.add(fileNamePure);
+							fileInfo.add(fileNameExt);
+							fileInfo.add(lastModified);
+							fileInfo.add(fileBytes);
+							fileInfo.add(isimage);
+							filesMap.add(fileInfo);
+						}
 					}
 				}
 				
@@ -200,6 +203,9 @@ public class ConferenceLibrary {
 				System.out.println("working_dir+fileName: "+working_dir+File.separatorChar+fileName);
 				File dir = new File(working_dir+File.separatorChar+fileName);
 				
+				File thumb = new File(working_dir+File.separatorChar+"_thumb_"+fileName);
+				if (thumb.exists()) thumb.delete();
+				
 				returnVal = dir.delete();
 				
 				System.out.println("delete file: "+working_dir+File.separatorChar+fileName);
@@ -211,6 +217,8 @@ public class ConferenceLibrary {
 						System.out.println("Deleting recursive: "+working_dir+File.separatorChar+fileName+File.separatorChar+listOfFiles[i]);
 						File d2 = new File(working_dir+File.separatorChar+fileName+File.separatorChar+listOfFiles[i]);
 						d2.delete();
+						File thumb2 = new File(working_dir+File.separatorChar+fileName+File.separatorChar+"_thumb_"+listOfFiles[i]);
+						if (thumb2.exists()) thumb2.delete();
 					}
 					dir.delete();
 					
