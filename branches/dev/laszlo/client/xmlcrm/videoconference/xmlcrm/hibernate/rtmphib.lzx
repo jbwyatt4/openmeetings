@@ -35,7 +35,7 @@
      <attribute name="userobject" value="null" />
      
      <!-- default will be loaded on startup -->
-     <attribute name="userlang" value="2" type="number" />
+     <attribute name="userlang" value="1" type="number" />
      
      <!-- The default Language will be laoded on init  -->
      <attribute name="initlanguageLoaded" value="false" type="boolean" />
@@ -89,17 +89,11 @@
         <handler name="ondata" args="value">
             //The onResult-Handler will be called be the rtmpconnection
             Debug.write("markSessionAsLogedIn ",value);
-			//if (canvas.mail == undefined) {
+			if (canvas.mail == undefined) {
 			    new invitationuserwin(canvas.main_content._content.inner);
-			//} else {		
-            //    clearStageContent();
-            //    canvas._mainbgcontentNavi.navi._innercontent.clearAllSubItemLists(); 			
-            //    if (canvas.initroomtype=="conference"){
-            //        new conference(canvas.main_content._content.inner); 
-            //    } else {
-            //         new audience(canvas.main_content._content.inner); 
-            //    }
-			//}                 
+			} else {		
+                new invitationquickloader(canvas.main_content._content.inner);
+			}                 
         </handler>  
     </netremotecallhib>    
     

@@ -161,9 +161,9 @@
 	
 	<handler name="isloadingImage" args="val" />
 	<handler name="isloadedImage" args="val" />
-	   <!--
+
     <view width="652" bgcolor="$once{canvas.baseMousecolorizer}" y="40" height="28" />
-           -->
+
 	<!-- 
 		Menubar with tool-icons
 	 -->

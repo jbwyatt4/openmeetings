@@ -52,7 +52,7 @@
 		</method>
 
 		<method name="upload" args="url"><![CDATA[
-			Debug.write("url: ",url);
+			Debug.write("url: ",url,fr);
 			fr.upload(url);
 		]]>
 		</method>

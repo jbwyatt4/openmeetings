@@ -149,6 +149,9 @@
 			this.loadimageDataWinRef.setMessage(canvas.getLabelName(this.imageLoadMessageId));
 		}
 		var src = baseurl+'?fileName='+fileName+'&moduleName='+moduleName+'&parentPath='+parentPath+'&room='+room+'&domain='+domain+'&sid='+canvas.sessionId;
+        Debug.write("src: ");    
+        Debug.write(src); 
+        Debug.write("src: "); 
   		if (alterModus){
 			this.currentlayer = new imagefordrawView(obj,{src:src,refObj:this,name:nameing,x:posx,y:posy,downloadurl:urlname,alterModus:alterModus,baseurl:baseurl,fileName:fileName,moduleName:moduleName,parentPath:parentPath,room:room,domain:domain});
 		} else {

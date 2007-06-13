@@ -16,6 +16,7 @@
 	
 	<method name="setSelection" args="bool">
 		this.isselected=bool;
+        this.setAttribute('enabled',!this.isselected);
 	</method>
 
 	<attribute name="sendClick" value="null" />
