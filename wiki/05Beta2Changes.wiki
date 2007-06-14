@@ -4,6 +4,8 @@
 
   * Laszlo Application in solo modus, only one webapp
   * Easier Installation
+  * Language Files added
+  * More Document-Types for importing
 
 
 = Details =
