@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<library>
+	
+<class name="confirmation" extends="view" width="300" height="200" layout="axis:y;spacing:2">
+
+    
+    <text>Autoconnect</text>
+    <text text="${ 'Red5 Host (rmpthostlocal): '+canvas.rmpthostlocal }">
+        
+</class>
+
+</library>
