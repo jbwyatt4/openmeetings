@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library>
 
-<rtmpconnection name="thishib" id="hib" debug="true" autoconnect="true"
+<rtmpconnection name="thishib" id="hib" debug="true" autoconnect="false"
     src="$once{ this.protocollName+'://'+canvas.rmpthostlocal+':'+this.protocollPort+'/xmlcrm/hibernate' }" >
 
   	 <attribute name="protocollName" type="string" value="rtmp" />

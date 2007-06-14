@@ -1,7 +1,49 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <canvas debug="false" width="100%" height="100%" >
+    
+<!-- these properties will be overwritten by config.xml -->  
+    
+<!-- URL/IP to use for the Server 192.168.178.28 
+inno02.fh-pforzheim.de macbook 192.168.2.103
+192.168.2.102 bxlug.homelinux.org 213.219.160.72
+    if this value is empty it will try to connect to the 
+    domain-name it has been loading from
+    -->
+<attribute name="rmpthostlocal" value="" type="string" />
 
-<include href="config.lzx" />
+<!--  
+Port to use for the Server
+To this port the default server lookup is done
+
+You can find all this configuraiton in your red5-Config in: $RED5_HOME/conf/red5.properties
+ -->
+<attribute name="rmptport" value="1935" type="string" />
+
+<!-- 
+Port to use for the Server
+To this port the fallback is done once the default rtmport failed
+this should workaround 99% of all firewalls
+ -->
+<attribute name="rmptTunnelport" value="8088" type="string" />
+
+<!-- 
+Port to use for the Server
+This port is used to connec to the http-servlet
+of the red5-servlet
+ -->
+<attribute name="red5httpport" value="5080" type="string" />
+	
+<!--
+	These colors are the main colors and style the hole application
+ -->
+<attribute name="basebgcolorizer" value="0xB0C4DE" type="string" />	
+<attribute name="baseMousecolorizer" value="0xC4D5E6" type="string" />	
+<attribute name="baseMouseOvercolorizer" value="0xC4D5E6" type="string" />  	
+	
+<!-- 
+	Version number of this distro
+ -->
+<attribute name="currentappversion" value="Version 0.5 Beta1" type="string" />
 
 <debug fontsize="14" oninit="Debug.showInternalProperties = true" />
 
@@ -140,17 +182,45 @@ Holds a refernce to the current VideoCOntainer Object
 containing the VideoViews
  -->
 <attribute name="_videocontainer" value="null" />
+    
+
+    
+    
+<dataset type="http" autorequest="true" name="myConfigSet" src="config.xml" request="true"
+    ondata="canvas.myinit()" />
 			
-<handler name="oninit">
+<method name="myinit">
 	<![CDATA[
+        
+    this.setAttribute('rmpthostlocal',canvas.myConfigSet.getPointer().xpathQuery('config/rmpthostlocal/text()'));   
+    this.setAttribute('rmptport',Number(canvas.myConfigSet.getPointer().xpathQuery('config/rmptport/text()')));  
+    this.setAttribute('rmptTunnelport',Number(canvas.myConfigSet.getPointer().xpathQuery('config/rmptTunnelport/text()')));  
+    this.setAttribute('red5httpport',Number(canvas.myConfigSet.getPointer().xpathQuery('config/red5httpport/text()')));  
+    this.setAttribute('basebgcolorizer',canvas.myConfigSet.getPointer().xpathQuery('config/basebgcolorizer/text()'));  
+    this.setAttribute('baseMousecolorizer',canvas.myConfigSet.getPointer().xpathQuery('config/baseMousecolorizer/text()'));  
+    this.setAttribute('baseMouseOvercolorizer',canvas.myConfigSet.getPointer().xpathQuery('config/baseMouseOvercolorizer/text()'));  
+    this.setAttribute('currentappversion',canvas.myConfigSet.getPointer().xpathQuery('config/currentappversion/text()'));  
+    
 
 	this.chathistory=new Array();
 	
 	var doubleSlash = _url.indexOf("//");
-	var server = _url.substr(doubleSlash+2, _url.indexOf("/", doubleSlash+2)-doubleSlash-2); 
+    var isNotPort80 = _url.indexOf(":", doubleSlash+2);
+    Debug.write("isNotPort80: ",isNotPort80);
+    if (isNotPort80!=-1){
+        Debug.write("isNotPort80: ",doubleSlash+2, _url.indexOf(":", doubleSlash+2)-doubleSlash-2);
+        var server = _url.substr(doubleSlash+2, _url.indexOf(":", doubleSlash+2)-doubleSlash-2); 
+    } else {
+        var server = _url.substr(doubleSlash+2, _url.indexOf("/", doubleSlash+2)-doubleSlash-2); 
+    }
+	
 	Debug.write("this zielnr: ",this,server);
 	
 	this.setAttribute('rmpthost',server);
+        
+    if (this.rmpthostlocal.length==0){
+        this.setAttribute('rmpthostlocal',server);
+    }
 	
 	var domain = LzBrowser.getInitArg('domain');
 	var room = LzBrowser.getInitArg('room');
@@ -159,23 +229,23 @@ containing the VideoViews
 		
 	Debug.write("domain: ",domain);
 
-	if (domain!=undefined && room!=undefined && roomtype!=undefined){
+	if (domain!=undefined && room!=undefined && roomtype!=undefined && emailGuest != undefined){
 		canvas.initroomid = room;
 		canvas.initroomtype = roomtype;
 		canvas.initdomainid = domain;
 		canvas.isinitRoomDirect = true;
-		
-		if (emailGuest != undefined)
-		{
-			canvas.firstName = emailGuest;
-			canvas.mail = emailGuest;
-		}
+		canvas.firstName = emailGuest;
+		canvas.mail = emailGuest;
+
 	}
 	
-	Debug.write("rmpthost: ",canvas.rmpthost);	
-	Debug.write("domain: ",domain);
+	Debug.write("rmpthostlocal,rmpthost: ",canvas.rmpthostlocal,canvas.rmpthost);	
+
+    var src = 'rtmp://'+canvas.rmpthostlocal+':'+canvas.rmptport+'/xmlcrm/hibernate';
+    canvas.thishib.setAttribute('src',src);
+    canvas.thishib.connect();
 	]]>
-</handler>
+</method>
 
 <method name="getLabelName" args="id">
 	return getLabelNameXMLCRM(id);
