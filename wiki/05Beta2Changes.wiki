@@ -1,0 +1,14 @@
+#summary 0.5 Beta2 Changes
+
+= Main Changes =
+
+  * Laszlo Application in solo modus, only one webapp
+  * Easier Installation
+
+
+= Details =
+
+  * all images loaded as JPG's
+  * error and tiemout handlers
+  * rewritten invitation system
+  * 
