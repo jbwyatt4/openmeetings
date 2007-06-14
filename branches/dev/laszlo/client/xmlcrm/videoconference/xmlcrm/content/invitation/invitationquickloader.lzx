@@ -17,8 +17,8 @@
            
         canvas.setAttribute('currentuser',canvas.mail);
         canvas.setAttribute('user_id',-1);
-        canvas.setAttribute('firstName',"guest");
-        canvas.setAttribute('lastName',"guest");	
+        canvas.setAttribute('firstName',"");
+        canvas.setAttribute('lastName',canvas.mail);	
         canvas.setAttribute('mail',canvas.mail);
         canvas.setAttribute('lastLogin','');
         canvas.setAttribute('official_code','');
@@ -26,8 +26,8 @@
         canvas.setAttribute('language','');					
        
         userObject["login"] = canvas.mail;
-        userObject["firstname"] = "guest";
-        userObject["lastname"] = "guest";
+        userObject["firstname"] = "";
+        userObject["lastname"] = canvas.mail;
         userObject["adresses"] = new Array();
         userObject["adresses"]["emails"] = new Array();
         userObject["adresses"]["emails"][0] = new Array();

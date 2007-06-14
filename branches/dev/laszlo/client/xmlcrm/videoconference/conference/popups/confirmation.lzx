@@ -19,19 +19,20 @@
     	</handler>
     </simplelabelbutton>    
     <simplelabelbutton labelid="65" width="100" x="180" y="196">
-    	<handler name="onclick">
+    	<handler name="onclick">         
     		var t = parent.holddatainSO.getValue();
-    		this.parent.close();
-    		this.parent.refObj.sendConfirmation(false,t);
+            this.parent.refObj.sendConfirmation(false,t);
+            this.parent.close();
     	</handler>
     </simplelabelbutton>
     <simplelabelbutton labelid="60" width="100" x="290" y="196">
     	<handler name="onclick">
     		var t = parent.holddatainSO.getValue();
-    		this.parent.close();
-    		this.parent.refObj.sendConfirmation(true,t);
+            this.parent.refObj.sendConfirmation(true,t);
+            this.parent.close();
     	</handler>
-    </simplelabelbutton>    
+    </simplelabelbutton>  
+    
 </class>
 
 </library>

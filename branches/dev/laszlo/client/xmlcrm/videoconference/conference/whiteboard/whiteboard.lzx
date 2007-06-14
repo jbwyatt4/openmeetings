@@ -79,10 +79,12 @@
 	
 	<attribute name="sendObject" value="null" />
 	<attribute name="sendObjectToClientID" value="0" type="number"  />
+    
+    <attribute name="confirmdialog" value="null" />
 	
 	<method name="sendConfirmation" args="yesno,askagain" >
 		
-		Debug.write("clear yesno,askagain: ",yesno,askagain);
+		//Debug.write("clear yesno,askagain: ",yesno,askagain);
 	
          var t = new sharedobject();
          t.getLocal('userdata');
@@ -95,46 +97,46 @@
          t.flush(); 	
 
          if (yesno){
-         	Debug.write("clear field!!");
+         	//Debug.write("clear field!!");
 			_drawarea.setModus('plain');
 			_drawarea.addNewImage(this.downloadurl,this.x,this.y,this.baseurl,this.fileName,this.moduleName,this.parentPath,this.room,this.domain);
          } else {
-         	Debug.write("don't clear field!!");
+         	//Debug.write("don't clear field!!");
          	_drawarea.addNewImage(this.downloadurl,this.x,this.y,this.baseurl,this.fileName,this.moduleName,this.parentPath,this.room,this.domain);
          }
+         this.confirmdialog.close();
 	</method>
 	
 	<method name="getconfirmationscode">
-		var t = new sharedobject();
-         t.getLocal('userdata');
-         var g = t.getData('userdata');
-         if (g==null) g = new Array();
-         if (g["image"]==null) {
+        var t = new sharedobject();
+        t.getLocal('userdata');
+        var g = t.getData('userdata');
+        if (g==null) g = new Array();
+        if (g["image"]==null) {
          	g["image"]=new Array();
          	g["image"]["clearField"]=false;
          	g["image"]["askagainclear"]=true;
-	         t.setData('userdata',g);
-	         t.flush();          	
-         }
-         return g["image"];
-	</method>
+            t.setData('userdata',g);
+            t.flush();          	
+        }
+        return g["image"];
+    </method>
 	
 	<method name="resetDefaultConfirmations">
 		var t = new sharedobject();
-         t.getLocal('userdata');
-         var g = t.getData('userdata');
-         if (g==null) g = new Array();
-         if (g["image"]==null) g["image"]=new Array();
-         g["image"]["clearField"]=false;
-         g["image"]["askagainclear"]=true;
-	     t.setData('userdata',g);
-	     t.flush();          	
-
+        t.getLocal('userdata');
+        var g = t.getData('userdata');
+        if (g==null) g = new Array();
+        if (g["image"]==null) g["image"]=new Array();
+        g["image"]["clearField"]=false;
+        g["image"]["askagainclear"]=true;
+        t.setData('userdata',g);
+        t.flush();          	
 	</method>	
 	
 	<method name="clearAreaAndAddImage" args="downloadurlVal,xVal,yVal,baseurl,fileName,moduleName,parentPath,room,domain">
 		<![CDATA[
-		Debug.write("clearAreaAndAddImage: ",downloadurlVal,xVal,yVal,baseurl,fileName,moduleName,parentPath,room,domain);
+		//Debug.write("clearAreaAndAddImage: ",downloadurlVal,xVal,yVal,baseurl,fileName,moduleName,parentPath,room,domain);
 		this.downloadurl=downloadurlVal;
 		this.iamgex=xVal;
 		this.imagey=yVal;	
@@ -145,16 +147,16 @@
 		this.room=room;
 		this.domain=domain;
 		var storedImageDate = this.getconfirmationscode();
-		Debug.write(" g[image] ",storedImageDate);
+		//Debug.write(" g[image] ",storedImageDate);
 		if (storedImageDate["clearField"] && !storedImageDate["askagainclear"]){
 			_drawarea.setModus('plain');
 			_drawarea.addNewImage(this.downloadurl,this.x,this.y);
 		} else if (!storedImageDate["askagainclear"] && !storedImageDate["clearField"]){
 			_drawarea.addNewImage(this.downloadurl,this.x,this.y);
 		} else if (storedImageDate["askagainclear"]){
-			new confirmation(canvas.main_content._content.inner,{labelid:62,labeliderror:63,refObj:this});
+			this.confirmdialog = new confirmation(canvas.main_content._content.inner,{labelid:62,labeliderror:63,refObj:this});
 		} else {
-			new confirmation(canvas.main_content._content.inner,{labelid:62,labeliderror:63,refObj:this});
+			this.confirmdialog = new confirmation(canvas.main_content._content.inner,{labelid:62,labeliderror:63,refObj:this});
 		}
 		]]>	
 	</method>
