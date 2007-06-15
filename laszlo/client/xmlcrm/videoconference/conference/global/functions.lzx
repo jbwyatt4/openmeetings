@@ -192,12 +192,14 @@ Debug.write("end init");
 	
 <!-- country validation -->
 <method name="validateCountry" args="str">
-	Debug.write("validateCountry: ",str);
+	//Debug.write("validateCountry: ",str);
+    str = str.toLowerCase();
 	<![CDATA[
 		if (str.length!=0){
 			var a = new Array();
 			for (var i=0;i<canvas.statesInitValues.length;i++){
-				if (canvas.statesInitValues[i].name.startsWith(str))a.push(canvas.statesInitValues[i]);
+                var st = canvas.statesInitValues[i].name.toLowerCase();
+				if (st.startsWith(str))a.push(canvas.statesInitValues[i]);
 				//this.addItem(canvas.statesInitValues[i].name,canvas.statesInitValues[i].state_id);
 			}
 			return a;

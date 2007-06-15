@@ -2,7 +2,7 @@
 <library>
 
 <class name="checkLoginData" extends="labelexplorerbox" labelid="108"
-    docking="true" resizeable="false" closable="false" width="300" x="350" y="-420" height="240">
+    docking="true" resizeable="false" closable="false" width="300" x="350" y="0" height="240">
     
     <handler name="onclose">
     	if (this.childObj!=null) this.childObj.close();
@@ -78,7 +78,7 @@
 						canvas.setAttribute('baseMouseOvercolorizer',"0xE8C064");
 					}
 					this.parent.close();
-					new checkLoginData(canvas.main_content._content);
+					new checkLoginData(canvas.main_content._content.inner);
 				}
 			</handler>
         </combobox>	
@@ -97,6 +97,7 @@
         
     <simplelabelbutton name="b2" labelid="112" width="120" x="170" y="196">
     	<handler name="onclick">
+            this.parent.errormess.setText('');
     		this.parent.loginUser.doCall();
     	</handler>
     </simplelabelbutton>   
@@ -111,7 +112,7 @@
     	</handler>
     </simplelabelbutton> 	
     
-     <text name="errormess" resize="true" y="144" />
+     <text name="errormess" resize="true" y="154" />
 
     <netremotecallhib name="loginUser" funcname="xmlcrm.loginUser" remotecontext="$once{ canvas.thishib }" >      
         <netparam name="vars1"><method name="getValue"> return canvas.sessionId; </method></netparam>  
@@ -150,6 +151,8 @@
 			        parent.userpass.setAttribute('visible',false);
 					parent.n3.setAttribute('visible',false);
 			        parent.languages.setAttribute('visible',false);
+                    parent.n5.setAttribute('visible',false);
+                    parent.colors.setAttribute('visible',false);
 	 				parent._register.setAttribute('visible',false);
 					parent.b2.setAttribute('visible',false);
 					parent.n4.setAttribute('visible',true);
@@ -204,8 +207,6 @@
             Debug.write("testObject: ",value);
         </handler>  
     </netremotecallhib>              
-    
-    <animator attribute="y" to="0" duration="1000" start="true" />
     
     <animator name="showRegForm" attribute="x" to="20" duration="1000" start="false" />
     <animator name="doreset" attribute="x" to="350" duration="1000" start="false" />

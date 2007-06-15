@@ -13,11 +13,13 @@
 		if (this.registerObject) this.parent.addViewToObserver(this);
 	</handler>	
 	<method name="doCall">
+        canvas._loadingAll.setAttribute('visible',true);
 		this.call();
 	</method>
 	<handler name="ondata" args="value">
 		<![CDATA[
 		Debug.write("ondata: ",this,Number(value),this.returnObj);
+        canvas._loadingAll.setAttribute('visible',false);
 		if (this.returnObj!=null && Number(value)>0) {
 			Debug.write("this.returnObj.processNext");
 			this.returnObj.processNext();
