@@ -1,4 +1,4 @@
-#Thu Jun 14 17:02:07 CEST 2007
+#Fri Jun 15 11:48:30 CEST 2007
 eclipse.preferences.version=1
 encoding//xmlcrm/newstreaming/camera.lzx=UTF-8
 encoding//xmlcrm/newstreaming/mediadevice.lzx=UTF-8
@@ -62,6 +62,7 @@ encoding//xmlcrm/videoconference/conference/whiteboard/windows/loadwhiteboardwin
 encoding//xmlcrm/videoconference/conference/whiteboard/windows/saveaswmlwindow.lzx=UTF-8
 encoding//xmlcrm/videoconference/config.xml=UTF-8
 encoding//xmlcrm/videoconference/main.lzx=UTF-8
+encoding//xmlcrm/videoconference/maindebug.lzx=UTF-8
 encoding//xmlcrm/videoconference/oslmon/components/button/basechooseseicon.lzx=UTF-8
 encoding//xmlcrm/videoconference/oslmon/components/button/simplelabelbutton.lzx=UTF-8
 encoding//xmlcrm/videoconference/oslmon/components/clickbox/clickbox.lzx=UTF-8

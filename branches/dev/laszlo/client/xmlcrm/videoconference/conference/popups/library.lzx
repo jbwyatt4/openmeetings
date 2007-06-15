@@ -14,5 +14,6 @@
     <include href="confirmation.lzx" />
     <include href="editwhiteboarddefault.lzx" />
 	<include href="confirmationsingle.lzx" />
+    <include href="autoloader.lzx" />
     
 </library>

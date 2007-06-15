@@ -7,6 +7,11 @@
     <attribute name="refObj" value="null" />
     <attribute name="regObject" value="null" />
     
+    <handler name="oninit">
+        var defaultstate = canvas.getCountryRecord(1);
+        this.state.addAndSelectItem(defaultstate.name,defaultstate.state_id);        
+    </handler>
+    
     <handler name="onclose">
     	this.refObj._register.setAttribute('visible',true);
     	this.refObj.doreset.doStart();
@@ -59,22 +64,30 @@
          -->   
     <simplelabelbutton labelid="121" width="120" x="140" y="332">
     	<handler name="onclick">
-    		this.parent.regObject = new Array();
-    		this.parent.regObject["SID"]=canvas.sessionId;
-    		this.parent.regObject["Username"]=this.parent.username.getText();
-    		this.parent.regObject["Userpass"]=this.parent.userpass1.getText();
-    		this.parent.regObject["lastname"]=this.parent.lastname.getText();
-    		this.parent.regObject["firstname"]=this.parent.firstname.getText();
-    		this.parent.regObject["email"]=this.parent.email.getText();
-    		this.parent.regObject["age"]=0;
-    		this.parent.regObject["street"]='';
-    		this.parent.regObject["additionalname"]='';
-    		this.parent.regObject["fax"]='';
-    		this.parent.regObject["zip"]='';
-    		this.parent.regObject["states_id"]=Number(this.parent.state.getValue());
-    		this.parent.regObject["town"]='';
-    		this.parent.regObject["language_id"]=0;   
-    		this.parent.registerUserByObject.doCall();
+            <![CDATA[
+                var pwd1 = this.parent.userpass1.getText();
+                var pwd2 = this.parent.userpass2.getText();            
+                if (pwd1!=pwd2 || pwd1.length<4){
+                    new errorwin(canvas.main_content._content.inner,{refObj:this.parent,labelid:231,errorlabelid:232}); 
+                } else {
+                    this.parent.regObject = new Array();
+                    this.parent.regObject["SID"]=canvas.sessionId;
+                    this.parent.regObject["Username"]=this.parent.username.getText();
+                    this.parent.regObject["Userpass"]=this.parent.userpass1.getText();
+                    this.parent.regObject["lastname"]=this.parent.lastname.getText();
+                    this.parent.regObject["firstname"]=this.parent.firstname.getText();
+                    this.parent.regObject["email"]=this.parent.email.getText();
+                    this.parent.regObject["age"]=0;
+                    this.parent.regObject["street"]='';
+                    this.parent.regObject["additionalname"]='';
+                    this.parent.regObject["fax"]='';
+                    this.parent.regObject["zip"]='';
+                    this.parent.regObject["states_id"]=Number(this.parent.state.getValue());
+                    this.parent.regObject["town"]='';
+                    this.parent.regObject["language_id"]=0;   
+                    this.parent.registerUserByObject.doCall();
+                }
+            ]]>
     	</handler>
     </simplelabelbutton>   
     
@@ -104,19 +117,22 @@
          <handler name="ondata" args="value">
          	<![CDATA[
             //The onResult-Handler will be called be the rtmpconnection
-            Debug.write("getLanguages: ",value);
+            Debug.write("registerUserByObject: ",value);
 			if (value==-3){
 				new errorwin(canvas.main_content._content.inner,{refObj:this.parent,labelid:102,errorlabelid:103}); 
 			} else if (value==-4){
 				new errorwin(canvas.main_content._content.inner,{refObj:this.parent,labelid:102,errorlabelid:106}); 
+			} else if (value==-6){
+				new errorwin(canvas.main_content._content.inner,{refObj:this.parent,labelid:233,errorlabelid:234}); 
 			} else if (value==-5){
 				new errorwin(canvas.main_content._content.inner,{refObj:this.parent,labelid:102,errorlabelid:105}); 
 			} else if (value==-1){
 				new errorwin(canvas.main_content._content.inner,{refObj:this.parent,labelid:102,errorlabelid:107}); 
 			} else if (value>0){
 				Debug.write("successfully registered");
-                 this.refObj.username.setText(this.parent.username.getText());
-                 this.refObj.userpass.setText(this.parent.userpass1.getText());
+                 new errorwin(canvas.main_content._content.inner,{refObj:this.parent,labelid:235,errorlabelid:236});
+                 this.parent.refObj.username.setText(this.parent.username.getText());
+                 this.parent.refObj.userpass.setText(this.parent.userpass1.getText());
                  this.parent.close();
 			}
 			]]>

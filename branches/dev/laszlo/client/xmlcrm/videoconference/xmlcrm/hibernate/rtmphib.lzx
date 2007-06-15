@@ -7,10 +7,13 @@
   	 <attribute name="protocollName" type="string" value="rtmp" />
   	 <attribute name="protocollPort" type="string" value="$once{ canvas.rmptport }" />
      <attribute name="counterror" type="number" value="0" />
+    
+     <attribute name="loaderVar" value="null" />
          
      <handler name="onconnect">
         Debug.write("connected");
-        this.getsessiondata.call();
+        canvas.thishib.loaderVar.destroy();
+        this.getsessiondata.call();        
      </handler>
   	 <handler name="onerror" >
         <![CDATA[
@@ -24,11 +27,14 @@
             this.counterror++;
 	  	 	this.init();
 	  	 	Debug.write("try ",this.counterror,"one");
+            canvas.thishib.loaderVar.error.setText("try "+this.counterror);
 	  	 	this.connect();
         } else {
             Debug.write("connection failed");
+            canvas.thishib.loaderVar.error.setText(this.status);
             canvas.setAttribute('loadingmessage','connection failed');
         }
+        canvas.thishib.loaderVar.src.setText(src);
         ]]>
   	 </handler>
          
@@ -112,7 +118,7 @@
             //The onResult-Handler will be called be the rtmpconnection
             Debug.write("getUserSalutations ",value);
             canvas.salutationsInitValues = value;
-            new checkLoginData(canvas.main_content._content);
+            new checkLoginData(canvas.main_content._content.inner);
         </handler>  
     </netremotecallhib>   
     
