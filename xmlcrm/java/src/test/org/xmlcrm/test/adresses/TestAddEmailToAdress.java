@@ -17,7 +17,7 @@ public class TestAddEmailToAdress extends TestCase {
 	
 	public void testGetAdress(){
 		
-		long adresses_id = Emailmanagement.getInstance().registerEmail("seba.wagner@gmail.com", 1, "swagner", "67810","", true);
+		long adresses_id = Emailmanagement.getInstance().registerEmail("seba.wagner@gmail.com", 1, "swagner", "67810","");
 		
 		log.error("new adress: "+adresses_id);
 

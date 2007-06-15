@@ -121,10 +121,11 @@ public class Emailmanagement {
 	 * @return the new mail_id or -1
 	 */
 	public Long registerEmail(String EMail, long adresses_id, String Username,
-			String Userpass, String comment, boolean sendWelcomeMail) {
+			String Userpass, String comment) {
 		long mail_id = this.registerEmail(EMail, Username, Userpass, comment);
 		if (mail_id != -1) {
-			try {
+			try {			
+				
 				Adresses_Emails addr_emails = new Adresses_Emails();
 				addr_emails.setAdresses_id(adresses_id);
 				addr_emails.setMail(this.getEmailById(mail_id));
@@ -139,7 +140,7 @@ public class Emailmanagement {
 				HibernateUtil.closeSession(idf);
 				log.error("registerEmail addr_emails: " + addr_emails_id);
 				
-				if (sendWelcomeMail) this.sendMail(Username, Userpass, EMail);
+
 				return mail_id;
 			} catch (HibernateException ex) {
 				log.error("Error: " ,ex);
@@ -195,8 +196,7 @@ public class Emailmanagement {
 	 * @return
 	 * @throws Exception
 	 */
-	private String sendMail(String Username, String Userpass, String EMail)
-			throws Exception {
+	public String sendMail(String Username, String Userpass, String EMail) {
 		String succ = "valid email";
 		String template = RegisterUserTemplate.getInstance().getRegisterUserTemplate(Username,Userpass,EMail);
 		succ = MailHandler.sendMail(EMail, Configurationmanagement.getInstance().getConfKey(3,"register_mail_subject").getConf_value(), template);

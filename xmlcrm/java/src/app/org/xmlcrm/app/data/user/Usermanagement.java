@@ -757,16 +757,21 @@ public class Usermanagement {
 		// their Group
 		if (AuthLevelmanagement.getInstance().checkModLevel(USER_LEVEL)) {
 			// Check for required data
-			if (!login.equals("") && !Userpass.equals("") && !email.equals("")) {
+			if (!login.equals("") && !Userpass.equals("")) {
 
 				// Check for duplicates
 				boolean checkName = this.checkUserLogin(login);
 				boolean checkEmail = Emailmanagement.getInstance().checkUserEMail(email);
 				if (checkName && checkEmail) {
 					
+					if (sendWelcomeMessage) {
+						String sendMail = Emailmanagement.getInstance().sendMail(login, Userpass, email);
+						if (!sendMail.equals("success")) return new Long(-6);
+					}						
+					
 					long adress_id = Adressmanagement.getInstance().saveAdress(street, zip, town, states_id, additionalname, "",fax);
 					long user_id = this.addUser(level_id, availible, status,firstname, login, lastname, language_id, Userpass,adress_id, age);
-					long adress_emails_id = Emailmanagement.getInstance().registerEmail(email, adress_id, login, Userpass,"", sendWelcomeMessage);
+					long adress_emails_id = Emailmanagement.getInstance().registerEmail(email, adress_id, login, Userpass,"");
 					
 					Organisationmanagement.getInstance().addUserOrganisationsByHashMap(user_id, organisations);
 					

@@ -690,4 +690,22 @@
 <string id="230" name="invited_userwin_enter">
 <value>Data loading, please wait!</value>
 </string>	
+<string id="231" name="user_registerFalsePWD">
+<value>Wrong Password</value>
+</string>
+<string id="232" name="user_registerFalsePWDHeader">
+<value>Please enter two identical passwords with at least 4 characters</value>
+</string>
+<string id="233" name="user_registerMailError">
+<value>Wrong Mail</value>
+</string>
+<string id="234" name="user_registerMailErrorHeader">
+<value>You have entered an invalid Mail-Adress</value>
+</string>
+<string id="235" name="user_registerSuccess">
+<value>Registration Complete</value>
+</string>
+<string id="236" name="user_registerSuccessHeader">
+<value>Your account has been created. You an login now.</value>
+</string>	
 </language>
