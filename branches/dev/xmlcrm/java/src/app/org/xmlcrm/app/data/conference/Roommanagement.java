@@ -395,7 +395,7 @@ public class Roommanagement {
 	 */
 	public List getRoomsOrganisationByOrganisationIdAndRoomType(long USER_LEVEL,long organisation_id, long roomtypes_id){
 		try {
-			if (AuthLevelmanagement.getInstance().checkModLevel(USER_LEVEL)){
+			if (AuthLevelmanagement.getInstance().checkUserLevel(USER_LEVEL)){
 				Object idf = HibernateUtil.createSession();
 				Session session = HibernateUtil.getSession();
 				Transaction tx = session.beginTransaction();
