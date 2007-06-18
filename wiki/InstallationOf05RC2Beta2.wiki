@@ -37,12 +37,13 @@
 
   * Get the Client from [http://code.google.com/p/openmeetings/downloads/list]
   * download and unpack it into $LASZLO_HOME/Server/lps-4.0.x /or/any/subdirectory/of/this/
-  * go to $LASZLO_HOME/Server/lps-4.0.x[/any/subdirectory]/videoconference/config.lzx
+  _this is only interesting if you changed Red5 Port settings_
+  * go to $RED5_HOME/webapps/xmlcrm/config.xml
   and alter: 
 {{{
-<attribute name="rmpthostlocal" value="macbook" type="string" /> 
+<rmpthostlocal></rmpthostlocal> 
 }}} 
-to fit your Red5-server-IP. (Port settings by default are red5 defaults, however to change the rtmp or rtmpT port you have to change Red5PortSettings like described in _Install lated Red5 Server_ AND ClientPortSettings)
+to fit your Red5-server-IP/Port Settings. (Port settings by default are red5 defaults, however to change the rtmp or rtmpT port you have to change Red5PortSettings like described in _Install lated Red5 Server_ AND ClientPortSettings)
 
 = Get Started =
 
@@ -62,5 +63,4 @@ http://openmeetings.googlecode.com/svn/branches/dev/laszlo/client/xmlcrm/resourc
 http://openmeetings.googlecode.com/svn/branches/dev/laszlo/client/xmlcrm/resources/screens/install_step4.png
 
 If you have it that far and openoffice+imagmagick runs correctly your installation is complete
-
 
