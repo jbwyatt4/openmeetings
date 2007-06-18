@@ -186,7 +186,7 @@ containing the VideoViews
 
     
     
-<dataset type="http" autorequest="true" name="myConfigSet" src="config.xml" request="true"
+<dataset type="http" name="myConfigSet" src="config.xml" request="true"
     ondata="canvas.myinit()" />
 			
 <method name="myinit">
