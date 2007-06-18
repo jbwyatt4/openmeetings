@@ -1,5 +1,4 @@
 #summary installation Instruction for the 0.5Beta1 release
-#labels Featured
 
 = Requirements =
 
