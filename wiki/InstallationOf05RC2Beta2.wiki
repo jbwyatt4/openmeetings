@@ -32,11 +32,6 @@
 }}}
 
   * go to $RED5_HOME and start red5 (wether mit red5.sh or with red5.bat) by default you will have to start red5 as root if you have configured red5 to run on ports lower 1200 on unix systems. However by default it can be started as any user who has read and write access to the red5 directory BUT the openoffice task MUST be started as the same user running red5 (otherwise converted documents will not be readable by the red5-server)
-
-= Install OpenMeetings Client =
-
-  * Get the Client from [http://code.google.com/p/openmeetings/downloads/list]
-  * download and unpack it into $LASZLO_HOME/Server/lps-4.0.x /or/any/subdirectory/of/this/
   _this is only interesting if you changed Red5 Port settings_
   * go to $RED5_HOME/webapps/xmlcrm/config.xml
   and alter: 
