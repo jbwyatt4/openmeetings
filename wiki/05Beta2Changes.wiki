@@ -6,6 +6,7 @@
   * Easier Installation (no openlaszlo seperated installation needed)
   * Language Files added
   * More Document-Types for importing
+  * better performance (non proxied)
 
 
 = Details =
