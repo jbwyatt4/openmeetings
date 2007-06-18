@@ -11,6 +11,7 @@
 = Details =
 
   * all images loaded as JPG's
+  * Thumbnails in library
   * error and timeout handlers for images (no more blockings if image could not be loaded)
   * less cpu and server stress (cause no images proxing, no second openlaszlo server)
   * rewritten invitation system
