@@ -17,9 +17,6 @@
   * The app uses a database so you have to install the empty skelton of its structure:
   * create a new database *xmlcrm* in your postgres database (default scheme public) (note: you can nuse any name for the database but by default its name is xmlcrm, if you use any other you have to alter the value _connection.url_ in the hibernate.cfg.xml)
   Get the sql from http://openmeetings.googlecode.com/svn/branches/dev/xmlcrm/java/conf/postgres_skeleton.sql and import it into your postgres database (meaning into the database xmlcrm, or whatever name you have chosen) (for example using pgadmin http://www.pgadmin.org/)
-
-= Install OpenMeetings Red5 Webapp = 
-
   * get the 0.5 RC2 (Beta2) release from http://code.google.com/p/openmeetings/downloads/list
   * copy it to $Red5_Home/webapps
   * untar/pack it there
@@ -38,7 +35,7 @@
 {{{
 <rmpthostlocal></rmpthostlocal> 
 }}} 
-to fit your Red5-server-IP/Port Settings. (Port settings by default are red5 defaults, however to change the rtmp or rtmpT port you have to change Red5PortSettings like described in _Install lated Red5 Server_ AND ClientPortSettings)
+to fit your Red5-server-IP/Port Settings. (Port settings by default are red5 defaults, however to change the rtmp or rtmpT port you have to change Red5PortSettings like described in Install latest Red5 Server and ClientPortSettings)
 
 = Get Started =
 
