@@ -12,7 +12,7 @@
   * you can get the latest Version of Red5 from: [http://www.osflash.org]
   * configure Red5, the default ports Red5 is listening are also the default ports the openmeetings application will try to connect. However you will find the exact port settings in $Red5_Home/conf/red5.properties (or follow the installation howto's of red5)
 
-= Import database skeleton =
+= Install Openmeetings =
 
   * The app uses a database so you have to install the empty skelton of its structure:
   * create a new database *xmlcrm* in your postgres database (default scheme public) (note: you can nuse any name for the database but by default its name is xmlcrm, if you use any other you have to alter the value _connection.url_ in the hibernate.cfg.xml)
