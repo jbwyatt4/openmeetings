@@ -32,7 +32,6 @@
 }}}
 
   * go to $RED5_HOME and start red5 (wether mit red5.sh or with red5.bat) by default you will have to start red5 as root if you have configured red5 to run on ports lower 1200 on unix systems. However by default it can be started as any user who has read and write access to the red5 directory BUT the openoffice task MUST be started as the same user running red5 (otherwise converted documents will not be readable by the red5-server)
-  * copy crossdomain.xml from $RED5_HOME/webapps/xmlcrm/crossdomain.xml to RED5_HOME/webapps/root (otherwise you could not upload / download files, however to change the security see http://www.adobe.com/cfusion/knowledgebase/index.cfm?id=tn_14213
 
 = Install OpenMeetings Client =
 
@@ -63,6 +62,5 @@ http://openmeetings.googlecode.com/svn/branches/dev/laszlo/client/xmlcrm/resourc
 http://openmeetings.googlecode.com/svn/branches/dev/laszlo/client/xmlcrm/resources/screens/install_step4.png
 
 If you have it that far and openoffice+imagmagick runs correctly your installation is complete
-
 
 
