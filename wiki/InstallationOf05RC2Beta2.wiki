@@ -49,7 +49,7 @@ http://openmeetings.googlecode.com/svn/branches/dev/laszlo/client/xmlcrm/resourc
 http://openmeetings.googlecode.com/svn/branches/dev/laszlo/client/xmlcrm/resources/screens/install_step2.png
 
   # Step 3 - installation complete
-http://openmeetings.googlecode.com/svn/branches/dev/laszlo/client/xmlcrm/resources/screens/install_step3.png
+http://openmeetings.googlecode.com/svn/branches/dev/laszlo/client/xmlcrm/resources/screens/install_step3a.png
 
   # Step 4 - enter Application (http://$rmpthostlocal/xmlcrm/) 
 http://openmeetings.googlecode.com/svn/branches/dev/laszlo/client/xmlcrm/resources/screens/install_step4.png
