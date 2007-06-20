@@ -17,6 +17,7 @@ _Beta1 release at 21.05.2007_
   * Rework Images and Document Converter
   * Offline Installation
   * Rework Forms feedback
+  * initial support for a desktop viewer
 
 =MileStone 1.0=
   * Recording storing and fully for whiteboard
