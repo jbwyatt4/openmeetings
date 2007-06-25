@@ -53,23 +53,20 @@ public class CaptureScreen {
 			int thumbWidth = 600;
 			int div = width / thumbWidth;
 			height = height / div;
+			
+			Image img = imageScreen.getScaledInstance(thumbWidth, height ,Image.SCALE_SMOOTH);
 
 			BufferedImage image = new BufferedImage(thumbWidth, height,BufferedImage.TYPE_INT_RGB);
 			Graphics2D biContext = image.createGraphics();
-			biContext.drawImage(imageScreen, 0, 0, null);
+			biContext.drawImage(img, 0, 0, null);
 
 			JPEGImageEncoder encoder = JPEGCodec.createJPEGEncoder(out);
 			JPEGEncodeParam encpar = encoder.getDefaultJPEGEncodeParam(image);
-			encpar.setQuality(1, false);
+			encpar.setQuality(new Float(0.6), false);
 			encoder.setJPEGEncodeParam(encpar);
 			encoder.encode(image);
-			
-			ByteArrayOutputStream baos = new ByteArrayOutputStream();
-			ImageIO.write(imageScreen, "jpg", baos);
-			ImageIO.write(imageScreen, "jpg", new File("hanso2.jpg"));
-			byte[] bytesOut = baos.toByteArray();
 
-			return bytesOut;
+			return out.toByteArray();
 
 		} catch (FileNotFoundException e) {
 			System.out.println(e);
