@@ -90,10 +90,8 @@ public class UploadHandler extends HttpServlet {
 				}
 				System.out.println("sid: " + sid);
 
-				Long users_id = Sessionmanagement.getInstance().checkSession(
-						sid);
-				long User_LEVEL = Usermanagement.getInstance()
-						.getUserLevelByID(users_id);
+				Long users_id = Sessionmanagement.getInstance().checkSession(sid);
+				long User_LEVEL = Usermanagement.getInstance().getUserLevelByID(users_id);
 
 				if (User_LEVEL > 0) {
 					String room = httpServletRequest.getParameter("room");
@@ -105,8 +103,7 @@ public class UploadHandler extends HttpServlet {
 						domain = "default";
 					}
 
-					String moduleName = httpServletRequest
-							.getParameter("moduleName");
+					String moduleName = httpServletRequest.getParameter("moduleName");
 					if (moduleName == null) {
 						moduleName = "nomodule";
 					}
@@ -141,8 +138,7 @@ public class UploadHandler extends HttpServlet {
 						localFolderppt.mkdir();
 					}
 
-					System.out.println("#### UploadHandler working_dir: "
-							+ working_dir);
+					System.out.println("#### UploadHandler working_dir: "+ working_dir);
 
 					if (!moduleName.equals("nomodule")) {
 						//Check variable to see if this file is a presentation
@@ -152,8 +148,7 @@ public class UploadHandler extends HttpServlet {
 						InputStream is = upload.getFileContents("Filedata");
 
 						//trim whitespace
-						String fileSystemName = StringUtils
-								.deleteWhitespace(upload.getFileSystemName("Filedata"));
+						String fileSystemName = StringUtils.deleteWhitespace(upload.getFileSystemName("Filedata"));
 
 						String newFileSystemName = StringComparer.getInstance()
 								.compareForRealPaths(
@@ -165,8 +160,7 @@ public class UploadHandler extends HttpServlet {
 
 						//trim long names cause cannot output that
 						if (newFileSystemName.length() >= 17) {
-							newFileSystemName = newFileSystemName.substring(0,
-									16);
+							newFileSystemName = newFileSystemName.substring(0,16);
 						}
 
 						//check if this is a a file that can be converted by openoffice-service
@@ -188,8 +182,7 @@ public class UploadHandler extends HttpServlet {
 							return;
 						}
 
-						log.debug("******** completeName: " + completeName
-								+ canBeConverted);
+						log.debug("******** completeName: " + completeName + canBeConverted);
 
 						File f = new File(completeName + newFileSystemExtName);
 						if (f.exists()) {
@@ -203,16 +196,12 @@ public class UploadHandler extends HttpServlet {
 
 							}
 							completeName = tempd;
-							System.out.println("Neuer Folder name "
-									+ completeName);
+							System.out.println("Neuer Folder name "+ completeName);
 						}
 
-						System.out.println("*****2 ***** completeName: "
-								+ completeName + newFileSystemExtName);
-						log.debug("*****2 ******* completeName: "
-								+ completeName + newFileSystemExtName);
-						FileOutputStream fos = new FileOutputStream(
-								completeName + newFileSystemExtName);
+						System.out.println("*****2 ***** completeName: "+ completeName + newFileSystemExtName);
+						log.debug("*****2 ******* completeName: "+ completeName + newFileSystemExtName);
+						FileOutputStream fos = new FileOutputStream(completeName + newFileSystemExtName);
 
 						byte[] buffer = new byte[1024];
 						int len = 0;
@@ -228,8 +217,7 @@ public class UploadHandler extends HttpServlet {
 
 						if (canBeConverted) {
 							//automatically convert to slides
-							System.out
-									.println("canBeConverted New Folder name "
+							System.out.println("canBeConverted New Folder name "
 											+ completeName);
 
 							HashMap<String, String> ll = convertPDF(
@@ -238,8 +226,7 @@ public class UploadHandler extends HttpServlet {
 
 							String outputfolder = ll.get("outputfolder");
 							//now it should be completed so copy that file to the expected location
-							System.out.println("Upload destinationFolder "
-									+ outputfolder);
+							System.out.println("Upload destinationFolder " + outputfolder);
 
 							//FileHelper fileHelper = new FileHelper();
 
@@ -268,29 +255,24 @@ public class UploadHandler extends HttpServlet {
 
 							//FileHelper fileHelper = new FileHelper();
 
-							File pptToBeMoved = new File(completeName
-									+ newFileSystemExtName);
+							File pptToBeMoved = new File(completeName+ newFileSystemExtName);
 
 							System.out.println("outputfolder " + outputfolder);
-							System.out.println("newFileSystemName "
-									+ newFileSystemName);
-							System.out.println("newFileSystemExtName "
-									+ newFileSystemExtName);
+							System.out.println("newFileSystemName "+ newFileSystemName);
+							System.out.println("newFileSystemExtName "+ newFileSystemExtName);
 
-							File pptWhereToMove = new File(outputfolder
-									+ newFileSystemName + newFileSystemExtName);
+							File pptWhereToMove = new File(outputfolder + newFileSystemName + newFileSystemExtName);
 							pptWhereToMove.createNewFile();
 
 							FileHelper.moveRec(pptToBeMoved, pptWhereToMove);
 
 						} else if (isImage) {
 							//convert it to JPG
-							System.out.println("isImage New Folder name "
-									+ completeName);
-							convertImage(newFileSystemName
-									+ newFileSystemExtName, roomName,
-									newFileSystemName, false);
+							System.out.println("isImage New Folder name "+ completeName);
+							convertImage(newFileSystemName+ newFileSystemExtName, roomName,newFileSystemName, false);
 
+						} else if (isJpg) {
+							this.generateThumb(completeName);
 						}
 					}
 				}

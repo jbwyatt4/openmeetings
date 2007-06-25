@@ -685,6 +685,35 @@ public class Application extends ApplicationAdapter implements
 		return roomClientList;
 	}
 	
+	public HashMap<String,RoomClient> sendMessageByRoomAndDomain(String roomname, String orgdomain, Object message){
+		HashMap <String,RoomClient> roomClientList = new HashMap<String,RoomClient>();
+		try {			
+			
+			String sc = scope.getScope("hibernate").getName();
+			
+			System.out.println("sendMessageByRoomAndDomain sc: "+sc);
+			
+			//Notify all clients of the same scope (room)
+			Iterator<IConnection> it = scope.getScope("hibernate").getConnections();
+			
+			
+			while (it.hasNext()) {
+				IConnection conn = it.next();				
+				RoomClient rcl = ClientList.get(conn.getClient().getId());
+				//Check if the Client is in the same room and same domain 
+				if(roomname.equals(rcl.getUserroom()) && orgdomain.equals(rcl.getDomain())){					
+					if (conn instanceof IServiceCapableConnection) {
+						((IServiceCapableConnection) conn).invoke("newMessageByRoomAndDomain",new Object[] { message }, this);
+						log.error("sending newMessageByRoomAndDomain to " + conn);
+					}
+				}
+			}
+		} catch (Exception err) {
+			log.error("[getClientListBYRoomAndDomain]",err);
+		}
+		return roomClientList;
+	}	
+	
 	/**
 	 * Get all connected Clients
 	 * @return
