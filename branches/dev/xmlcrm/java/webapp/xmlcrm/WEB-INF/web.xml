@@ -81,7 +81,17 @@
     <servlet-mapping>
     	<servlet-name>UploadHandler</servlet-name>
     	<url-pattern>/UploadHandler</url-pattern>
-    </servlet-mapping>   
+    </servlet-mapping>  
+
+    <servlet>
+    	<servlet-name>ScreenServlet</servlet-name>
+    	<servlet-class>org.xmlcrm.servlet.outputhandler.ScreenServlet</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+    	<servlet-name>ScreenServlet</servlet-name>
+    	<url-pattern>/ScreenServlet</url-pattern>
+    </servlet-mapping> 	 
     
     <security-constraint>
         <web-resource-collection>
@@ -99,7 +109,11 @@
         <web-resource-collection>
             <web-resource-name>Forbidden</web-resource-name>
             <url-pattern>/ooservice/*</url-pattern>
-        </web-resource-collection>        
+        </web-resource-collection>    
+        <web-resource-collection>
+            <web-resource-name>Forbidden</web-resource-name>
+            <url-pattern>/desktop/*</url-pattern>
+        </web-resource-collection> 		    
         <web-resource-collection>
             <web-resource-name>Forbidden</web-resource-name>
             <url-pattern>/uploadtemp/*</url-pattern>
