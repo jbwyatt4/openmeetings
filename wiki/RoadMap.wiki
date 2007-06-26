@@ -7,7 +7,8 @@ _released at 03.04.2007_
   + developer release
 
 =MileStone 0.5=
-_Beta1 release at 21.05.2007_
+_Beta1 released at 24.05.2007_
+_Beta2 released at 18.06.2007_[05Beta2Changes]
 
   * Reworked Conference and Audience Application
   * Initial Support for users authentification and administration of users in their organisations
@@ -18,6 +19,7 @@ _Beta1 release at 21.05.2007_
   * Offline Installation
   * Rework Forms feedback
   * initial support for a desktop viewer
+  * Calender for planing a meeting and notifications
 
 =MileStone 1.0=
   * Recording storing and fully for whiteboard
