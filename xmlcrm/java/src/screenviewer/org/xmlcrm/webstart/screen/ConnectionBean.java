@@ -4,7 +4,7 @@ public class ConnectionBean {
 	
 	/**Connection Settings**/
 	
-	public static String connectionURL = "http://192.168.2.103:5080/xmlcrm/ScreenServlet";
+	public static String connectionURL = "http://macbook:5080/xmlcrm/ScreenServlet";
 	
 	public static String SID = "1010";
 	

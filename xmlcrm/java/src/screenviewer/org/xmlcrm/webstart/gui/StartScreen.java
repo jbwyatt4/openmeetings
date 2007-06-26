@@ -78,6 +78,8 @@ public class StartScreen {
 			t.pack();
 			t.setSize(400, 200);
 			t.setVisible(true);
+			
+			System.err.println("initialized");
 		} catch (Exception err) {
 			System.out.println("randomFile Exception: ");
 			System.err.println(err);
@@ -86,6 +88,8 @@ public class StartScreen {
 	
 	void captureScreenStart(){
 		try {
+			
+			System.err.println("captureScreenStart");
 			
 			JobDetail jobDetail = new JobDetail(ConnectionBean.quartzScreenJobName, sched.DEFAULT_GROUP, ScreenJob.class); 
 			
