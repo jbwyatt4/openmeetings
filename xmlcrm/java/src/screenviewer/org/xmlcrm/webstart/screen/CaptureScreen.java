@@ -62,7 +62,7 @@ public class CaptureScreen {
 
 			JPEGImageEncoder encoder = JPEGCodec.createJPEGEncoder(out);
 			JPEGEncodeParam encpar = encoder.getDefaultJPEGEncodeParam(image);
-			encpar.setQuality(new Float(0.6), false);
+			encpar.setQuality(ConnectionBean.imgQuality, false);
 			encoder.setJPEGEncodeParam(encpar);
 			encoder.encode(image);
 
