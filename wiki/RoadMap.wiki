@@ -8,7 +8,8 @@ _released at 03.04.2007_
 
 =MileStone 0.5=
 _Beta1 released at 24.05.2007_
-_Beta2 released at 18.06.2007_[05Beta2Changes]
+
+_Beta2 released at 18.06.2007_ [05Beta2Changes]
 
   * Reworked Conference and Audience Application
   * Initial Support for users authentification and administration of users in their organisations
