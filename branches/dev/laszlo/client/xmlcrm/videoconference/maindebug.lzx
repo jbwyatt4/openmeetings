@@ -9,7 +9,7 @@ inno02.fh-pforzheim.de macbook 192.168.2.103
     if this value is empty it will try to connect to the 
     domain-name it has been loading from
     -->
-<attribute name="rmpthostlocal" value="" type="string" />
+<attribute name="rtmphostlocal" value="" type="string" />
 
 <!--  
 Port to use for the Server
@@ -192,7 +192,7 @@ containing the VideoViews
 <method name="myinit">
 	<![CDATA[
         
-    this.setAttribute('rmpthostlocal',canvas.myConfigSet.getPointer().xpathQuery('config/rmpthostlocal/text()'));   
+    this.setAttribute('rtmphostlocal',canvas.myConfigSet.getPointer().xpathQuery('config/rtmphostlocal/text()'));   
     this.setAttribute('rmptport',Number(canvas.myConfigSet.getPointer().xpathQuery('config/rmptport/text()')));  
     this.setAttribute('rmptTunnelport',Number(canvas.myConfigSet.getPointer().xpathQuery('config/rmptTunnelport/text()')));  
     this.setAttribute('red5httpport',Number(canvas.myConfigSet.getPointer().xpathQuery('config/red5httpport/text()')));  
@@ -218,8 +218,8 @@ containing the VideoViews
 	
 	this.setAttribute('rmpthost',server);
         
-    if (this.rmpthostlocal.length==0){
-        this.setAttribute('rmpthostlocal',server);
+    if (this.rtmphostlocal.length==0){
+        this.setAttribute('rtmphostlocal',server);
     }
 	
 	var domain = LzBrowser.getInitArg('domain');
@@ -239,9 +239,9 @@ containing the VideoViews
 
 	}
 	
-	Debug.write("rmpthostlocal,rmpthost: ",canvas.rmpthostlocal,canvas.rmpthost);	
+	Debug.write("rtmphostlocal,rmpthost: ",canvas.rtmphostlocal,canvas.rmpthost);	
 
-    var src = 'rtmp://'+canvas.rmpthostlocal+':'+canvas.rmptport+'/xmlcrm/hibernate';
+    var src = 'rtmp://'+canvas.rtmphostlocal+':'+canvas.rmptport+'/xmlcrm/hibernate';
     canvas.thishib.setAttribute('src',src);
     canvas.thishib.loaderVar = new autoloader(canvas);
     canvas.thishib.loaderVar.src.setText(src);

@@ -83,14 +83,57 @@
 	
 	<simplelabelbutton labelid="37" width="140" x="2" y="22" enabled="${  canvas.ismoderator }">
 		<handler name="onclick">
-			rtc.getVotes.doCall();
+			this.getVotes.doCall();
 		</handler>
+        <netremotecallhib name="getVotes" funcname="dokeosService.getVotes" remotecontext="$once{ canvas.thishib }" >
+            <handler name="ondata" args="value">
+                <![CDATA[
+                //The onResult-Handler will be called be the rtmpconnection
+                Debug.write("getVotes : ",value);
+                if (value!=null){
+                    new resultpollwin(canvas.main_content._content.inner,{createdBy:value.createdBy.username,pollDate:value.pollDate,pollQuestion:value.pollQuestion,pollTypeId:value.pollTypeId,roomPollAnswerList:value.roomPollAnswerList,roomPollId:value.roomPollId,roomScopeName:value.roomScopeName});
+                } else {
+                    new messagewin(canvas.main_content._content.inner,{labeliderror:41});
+                }
+                ]]>
+            </handler>   
+        </netremotecallhib>         
 	</simplelabelbutton>	
+    
 
 	<simplelabelbutton labelid="42" width="100" x="144" y="2" >
 		<handler name="onclick">
-			rtc.checkHasVoted.doCall();
+			this.checkHasVoted.doCall();
 		</handler>
+        <netremotecallhib name="checkHasVoted" funcname="dokeosService.checkHasVoted" 
+            remotecontext="$once{ canvas.thishib }" >
+            <handler name="ondata" args="value">
+                <![CDATA[
+                //The onResult-Handler will be called be the rtmpconnection
+                Debug.write("checkHasVoted : ",value);
+                if (value==1){
+                    parent.getPoll.doCall();
+                } else if (value==-1){
+                    new messagewin(canvas.main_content._content.inner,{labeliderror:31});
+                } else if (value==-2){
+                    new messagewin(canvas.main_content._content.inner,{labeliderror:41});
+                }
+                ]]>
+            </handler>   
+        </netremotecallhib> 
+
+        <netremotecallhib name="getPoll" funcname="dokeosService.getPoll"
+            remotecontext="$once{ canvas.thishib }" >
+            <handler name="ondata" args="value">
+                <![CDATA[
+                //The onResult-Handler will be called be the rtmpconnection
+                Debug.write("checkHasVoted : ",value);
+                if (value!=null){
+                    new answerpoll(canvas.main_content._content.inner,{createdBy:value.createdBy.username,pollDate:value.pollDate,pollQuestion:value.pollQuestion,pollTypeId:value.pollTypeId,roomPollAnswerList:value.roomPollAnswerList,roomPollId:value.roomPollId,roomScopeName:value.roomScopeName});
+                }
+                ]]>
+            </handler>   
+        </netremotecallhib>                  
 	</simplelabelbutton>
 	
 	<listofUsers x="4" y="44" height="$once{ parent.height-48 }"

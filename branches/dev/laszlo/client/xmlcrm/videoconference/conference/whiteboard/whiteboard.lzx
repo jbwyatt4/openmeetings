@@ -44,6 +44,8 @@
 <resource name="folder_top_rsc" src="resources/top.png" />
 
 <resource name="filedelete_rsc" src="resources/delete.png" />
+    
+<resource name="background_screenview_rsc" src="resources/background.png" />
 
 
 <include href="incubator/lzcombobox.lzx"/> 
@@ -163,14 +165,32 @@
 	
 	<handler name="isloadingImage" args="val" />
 	<handler name="isloadedImage" args="val" />
+    
+    <simplelabelbutton labelid="239" height="24" name="_doShare" width="200" x="450" y="2" enabled="${  canvas.ismoderator }">
+    	<handler name="onclick">
+            <![CDATA[
+                var downloadurl = 'http://'+canvas.rtmphostlocal+':'+canvas.red5httpport
+                    +'/xmlcrm/ScreenRequestHandler?'
+                    +'rtmphostlocal='+canvas.rtmphostlocal
+                    +'&room='+hib.connectedroom
+                    +'&domain='+hib.conferencedomain
+                    +'&sid='+canvas.sessionId
+                    +'&red5httpport='+canvas.red5httpport;
 
-    <view width="652" bgcolor="$once{canvas.baseMousecolorizer}" y="40" height="28" />
-
+                Debug.write(downloadurl);	
+                LzBrowser.loadURL(downloadurl,'_blank');	
+            ]]>
+    	</handler>
+        <view y="1" x="2" resource="background_screenview_rsc" />
+        
+    </simplelabelbutton>   
+    
 	<!-- 
 		Menubar with tool-icons
 	 -->
 
-	<view name="_paintmenu" layout="axis:x;spacing:2" x="2" y="40" height="28" >
+	<view name="_paintmenu" layout="axis:x;spacing:2;inset:2" x="0" y="38" height="30" width="652"
+        bgcolor="$once{canvas.baseMousecolorizer}"  >
 		<attribute name="selectedButton" value="null" />
 		<method name="selectButton" args="obj,bool">		
 			if (this.selectedButton!=null){
@@ -183,21 +203,21 @@
 				this.selectedButton.setResourceNumber(3);
 			}
 		</method>
-		<drawchoosemodir y="2" name="b3" modi="plain" resourceN="plain" labelid="69" />
-		<drawsimpleclick y="2" name="b13" modi="saveobj" resourceN="saveobj" labelid="197" />
-		<drawchooseseperator y="2" />
-		<drawdoandundo y="2" name="b4" doredo="false" resourceN="revert" enabled="${ parent.parent._drawarea.hasprevious }" labelid="70" />
-		<drawdoandundo y="2" name="b5" resourceN="next" enabled="${ parent.parent._drawarea.hasenext }" labelid="71" />
-		<drawchooseseperator y="2" />
-		<drawchoosemodir y="2" isselected="true" name="b1" modi="hand" resourceN="menupointer_rsc" isSelectablemodi="true" labelid="72" />		
-		<drawchoosemodir y="2" name="b6" modi="letter" resourceN="letter" isSelectablemodi="true" labelid="73" />
-		<drawchoosemodir y="2" name="b7" modi="paint" resourceN="paint" isSelectablemodi="true" labelid="74" />
-		<drawchoosemodir y="2" name="b8" modi="line" resourceN="line_rsc" isSelectablemodi="true" labelid="75" />
-		<drawchoosemodir y="2" name="b9" modi="uline" resourceN="uline_rsc" isSelectablemodi="true" labelid="76" />		
-        <drawchoosemodir y="2" name="b11" modi="rectangle" resourceN="rectangle" isSelectablemodi="true" labelid="77" />
-        <drawchoosemodir y="2" name="b12" modi="ellipse" resourceN="ellipse" isSelectablemodi="true" labelid="78" />
-		<drawchoosemodir y="2" name="b10" modi="drawarrow" resourceN="drawarrowicon_rsc" isSelectablemodi="true" labelid="79" />				
-		<drawchooseseperator y="2" />
+		<drawchoosemodir y="4" name="b3" modi="plain" resourceN="plain" labelid="69" />
+		<drawsimpleclick y="4" name="b13" modi="saveobj" resourceN="saveobj" labelid="197" />
+		<drawchooseseperator y="4" />
+		<drawdoandundo y="4" name="b4" doredo="false" resourceN="revert" enabled="${ parent.parent._drawarea.hasprevious }" labelid="70" />
+		<drawdoandundo y="4" name="b5" resourceN="next" enabled="${ parent.parent._drawarea.hasenext }" labelid="71" />
+		<drawchooseseperator y="4" />
+		<drawchoosemodir y="4" isselected="true" name="b1" modi="hand" resourceN="menupointer_rsc" isSelectablemodi="true" labelid="72" />		
+		<drawchoosemodir y="4" name="b6" modi="letter" resourceN="letter" isSelectablemodi="true" labelid="73" />
+		<drawchoosemodir y="4" name="b7" modi="paint" resourceN="paint" isSelectablemodi="true" labelid="74" />
+		<drawchoosemodir y="4" name="b8" modi="line" resourceN="line_rsc" isSelectablemodi="true" labelid="75" />
+		<drawchoosemodir y="4" name="b9" modi="uline" resourceN="uline_rsc" isSelectablemodi="true" labelid="76" />		
+        <drawchoosemodir y="4" name="b11" modi="rectangle" resourceN="rectangle" isSelectablemodi="true" labelid="77" />
+        <drawchoosemodir y="4" name="b12" modi="ellipse" resourceN="ellipse" isSelectablemodi="true" labelid="78" />
+		<drawchoosemodir y="4" name="b10" modi="drawarrow" resourceN="drawarrowicon_rsc" isSelectablemodi="true" labelid="79" />				
+		<drawchooseseperator y="4" />
 
 
 	</view>
@@ -344,13 +364,26 @@
         </handler>
     </basechooseseicon>    
 
-	<drawchoosesizeradio x="480" y="46" visible="${ ( ( this.parent._drawarea.drawmodus=='letter' ) ? true : false ) }">
+	<combobox x="480" width="60" y="42" editable="false"
+        visible="${ ( ( this.parent._drawarea.drawmodus=='letter' ) ? true : false ) }">
+        <handler name="oninit">
+            this.addItem('4','4');
+            this.addItem('6','6');
+            this.addItem('8','8');
+            this.addItem('10','10');
+            this.addItem('15','15');
+            this.addItem('20','20');
+            this.addItem('25','25');
+            this.addItem('30','30');
+            this.addItem('40','40');
+            this.addItem('60','60');
+            this.addItem('80','80');
+            this.selectItem('10');
+        </handler>
 		<handler name="onselect" args="val">
-			if (val.value=='1') this.parent._drawarea.setAttribute('currentlayersize',10);
-			if (val.value=='2') this.parent._drawarea.setAttribute('currentlayersize',15);
-			if (val.value=='3') this.parent._drawarea.setAttribute('currentlayersize',20);
+			this.parent._drawarea.setAttribute('currentlayersize',Number(this.getValue()));
 		</handler>
-	</drawchoosesizeradio>	
+	</combobox>	
     
 
 	<drawcolorpicker x="340" y="42" defaultno="1"

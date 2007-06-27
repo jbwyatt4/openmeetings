@@ -54,15 +54,29 @@
     <simplelabelbutton labelid="32" width="200" x="290" y="218">
     	<handler name="onclick">
     		if (parent.pollTypeId==1){
-    			rtc.vote.pollvalue = Number(parent.pollboolean.getValue());
+    			this.parent.vote.pollvalue = Number(parent.pollboolean.getValue());
     		} else if (parent.pollTypeId==2){
-    			rtc.vote.pollvalue = Number(parent.pollnumeric.getValue());
+    			this.parent.vote.pollvalue = Number(parent.pollnumeric.getValue());
     		}
-    		rtc.vote.pollTypesId = parent.pollTypeId;
-    		rtc.vote.doCall();
-    		this.parent.close();
+    		this.parent.vote.pollTypesId = parent.pollTypeId;
+    		this.parent.vote.doCall();
+    		
     	</handler>
     </simplelabelbutton>
+    
+        <netremotecallhib name="vote" funcname="dokeosService.vote" remotecontext="$once{ canvas.thishib }" >
+            <attribute name="pollvalue" type="number" value="0" />
+            <attribute name="pollTypesId" type="number" value="0" />
+            <netparam><method name="getValue">return parent.pollvalue;</method></netparam>
+            <netparam><method name="getValue">return parent.pollTypesId;</method></netparam>
+            <handler name="ondata" args="value">
+                <![CDATA[
+                    //The onResult-Handler will be called be the rtmpconnection
+                    Debug.write("vote : ",value);
+                    this.parent.close();
+                ]]>
+            </handler>   
+        </netremotecallhib>      
     
     
 </class>
