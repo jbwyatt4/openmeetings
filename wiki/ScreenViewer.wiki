@@ -1,0 +1,6 @@
+#summary Description about the ScreenViewer Function
+#labels Phase-Implementation
+
+A first screen from the Desktop Sharing Modus:
+
+http://openmeetings.googlecode.com/svn/branches/dev/laszlo/client/xmlcrm/resources/screens/screensharing_1.png
