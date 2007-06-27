@@ -3,7 +3,7 @@
 
 = Requirements = 
 
-all Platforms and Combinations (Mac,Windows,Linux) all you need is Java version greater 1.4.2 (1.4.2 was release June 26, 2003 ... current version is 1.6.0) or you will need to [http://java.sun.com/products/javawebstart/download.jsp download] Java WebStart from Sun based on [http://java.sun.com/products/javawebstart/ JavaWebStart]
+all Platforms and Combinations (Mac,Windows,Linux) all you need is Java version greater 1.4.2 (1.4.2 was release June 26, 2003 ... current version is 1.6.0) or you will need to [http://java.sun.com/products/javawebstart/download.jsp download] Java Web Start from Sun based on [http://java.sun.com/products/javawebstart/ JavaWebStart]
 
 = Description =
 
