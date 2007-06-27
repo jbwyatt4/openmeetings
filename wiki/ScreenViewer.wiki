@@ -1,6 +1,18 @@
 #summary Description about the ScreenViewer Function
 #labels Phase-Implementation
 
+= Requirements = 
+
+all Platforms and Combinations (Mac,Windows,Linux) all you need is Java version greater 1.4.2 (1.4.2 was release June 26, 2003 ... current version is 1.6.0) or you will need to [http://java.sun.com/products/javawebstart/download.jsp download] Java WebStart from Sun based on [http://java.sun.com/products/javawebstart/ JavaWebStart]
+
+= Description =
+
+  * Its a simple Viewer which will work on 99% of all systems. 
+  * You can alter the Quality while running. 
+  * it is integrated into whiteboard sothat you or others (the moderater of the conference)  can draw over the shared screen while sharing is running
+  * Sharing Client and Viewing Client will get notifications of bad bandwidth
+
+= Screens =
 A first screen from the Desktop Sharing Modus:
 
 http://openmeetings.googlecode.com/svn/branches/dev/laszlo/client/xmlcrm/resources/screens/screensharing_1.png
