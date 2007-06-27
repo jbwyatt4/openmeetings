@@ -7,7 +7,7 @@ inno02.fh-pforzheim.de macbook 192.168.2.103
     if this value is empty it will try to connect to the 
     domain-name it has been loading from    
     -->
-<rmpthostlocal>macbook</rmpthostlocal>
+<rtmphostlocal>macbook</rtmphostlocal>
 
 <!--  
 Port to use for the Server

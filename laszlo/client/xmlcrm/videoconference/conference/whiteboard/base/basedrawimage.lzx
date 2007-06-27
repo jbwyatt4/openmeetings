@@ -107,6 +107,62 @@
 		]]>
 	</handler>	
 </class>
+    
+<class name="imageforScreenViewer" extends="image" stretches="both">
+	
+	<attribute name="downloadurl" value="" type="string" />
+		
+	<attribute name="alterModus" value="true" type="boolean" />
+	
+	<attribute name="baseurl" value="" type="string" />
+	<attribute name="fileName" value="" type="string" />
+	<attribute name="moduleName" value="" type="string" />
+	<attribute name="parentPath" value="" type="string" />
+	<attribute name="room" value="" type="string" />
+	<attribute name="domain" value="" type="string" />
+		
+	<attribute name="refObj" value="null" />
+	<handler name="onload">
+		<![CDATA[
+			Debug.write("image loaded");
+			if (this.width>this.refObj.width){
+				var height = this.height/(this.width/this.refObj.width)
+				this.setAttribute('width',this.refObj.width);
+				this.setAttribute('height',height);
+				this.setAttribute('x',0);
+			}
+			if (this.height>this.refObj.height){
+				var width = this.width/(this.height/this.refObj.height)
+				this.setAttribute('height',this.refObj.height);
+				this.setAttribute('width',width);
+				this.setAttribute('y',0);
+			}	
+			if(this.y+this.height>this.refObj.height){
+				this.setAttribute('y',0);
+			}
+			if(this.x+this.width>this.refObj.width){
+				this.setAttribute('x',0);
+			}		
+            
+            this.refObj.layers.push(this);	
+            this.refObj.isScreenImageLoading=false;
+            
+		]]>
+	</handler>
+	<handler name="onerror" args="error">
+		<![CDATA[
+		Debug.write("onerror "+error);
+		this.refObj.isScreenImageLoading=false;
+		]]>
+	</handler>
+	<handler name="ontimeout" args="error">
+		<![CDATA[
+		Debug.write("ontimeout "+error);
+		this.refObj.isScreenImageLoading=false;
+		]]>
+	</handler>	
+</class>
+    
 
 <class name="basedrawimage" extends="basedrawletter">
 	
@@ -115,6 +171,9 @@
 		if false it will show a loading abr for that image
 	-->
 	<attribute name="isWmlLoaderImage" value="false" type="boolean" />
+    
+    <!-- indicates if this client is still loading an old image for the screenViwer -->
+    <attribute name="isScreenImageLoading" value="false" type="boolean" />
 	
 	<!-- reference to the current loading bar -->
 	<attribute name="loadimageDataWinRef" value="null" />
@@ -163,6 +222,25 @@
 	    return this.currentlayer;
 		]]>
   	</method>
+    
+  	<method name="incomingScreenSharing" args="value">
+        <![CDATA[
+		//only do if last image has been loading successfully
+            if (!this.isScreenImageLoading){
+
+            var downloadurl = 'http://'+canvas.rtmphostlocal+':'+canvas.red5httpport+'/xmlcrm/ScreenViewHandler?'
+                +'fileName='+value.fileName
+                +'&room='+hib.connectedroom
+                +'&domain='+hib.conferencedomain
+                +'&sid='+canvas.sessionId;
+            
+                Debug.write("incomingScreenSharing URL: ",downloadurl);
+			
+                new imageforScreenViewer(this,{src:downloadurl,refObj:this,name:'screen'+this.getCounter(),x:0,y:0,downloadurl:downloadurl});
+
+            }
+		]]>
+  	</method>    
 	
 	<!--
 		actionObject => attributes neccessary for loading image

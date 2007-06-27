@@ -1,4 +1,4 @@
-#Fri Jun 15 11:48:30 CEST 2007
+#Wed Jun 27 16:55:20 CEST 2007
 eclipse.preferences.version=1
 encoding//xmlcrm/newstreaming/camera.lzx=UTF-8
 encoding//xmlcrm/newstreaming/mediadevice.lzx=UTF-8
@@ -14,15 +14,18 @@ encoding//xmlcrm/videoconference/conference/moderation/applyformoderation.lzx=UT
 encoding//xmlcrm/videoconference/conference/moderation/library.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/moderation/moderationpanel.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/moderation/responseformoderation.lzx=UTF-8
+encoding//xmlcrm/videoconference/conference/popups/answerpoll.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/popups/autoloader.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/popups/confirmation.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/popups/confirmationsingle.lzx=UTF-8
+encoding//xmlcrm/videoconference/conference/popups/createpollwin.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/popups/editwhiteboarddefault.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/popups/errorpopup.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/popups/library.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/popups/loginscreen.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/popups/loginweb.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/popups/messagewin.lzx=UTF-8
+encoding//xmlcrm/videoconference/conference/popups/resultpollwin.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/popups/rpcerrordialog.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/remote/library.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/tabbar/basedokeostabbutton.lzx=UTF-8
