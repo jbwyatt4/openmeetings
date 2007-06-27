@@ -5,3 +5,4 @@ jarsigner -keystore screeencast.keystore commons-logging.jar screencastAlias
 jarsigner -keystore screeencast.keystore quartz-all-1.6.0.jar screencastAlias 
 jarsigner -keystore screeencast.keystore jta.jar screencastAlias 
 jarsigner -keystore screeencast.keystore screenviewer.jar screencastAlias 
+jarsigner -keystore screeencast.keystore kunststoff.jar screencastAlias 

@@ -61,8 +61,7 @@ public class ScreenServlet extends HttpServlet {
 				Long users_id = Sessionmanagement.getInstance().checkSession(sid);
 				Long User_LEVEL = Usermanagement.getInstance().getUserLevelByID(users_id);
 	
-				User_LEVEL = new Long(1);
-	
+				
 				if (User_LEVEL > 0) {
 
 					//make a complete name out of domain(organisation) + roomname
@@ -113,16 +112,18 @@ public class ScreenServlet extends HttpServlet {
 
 					File f = new File(completeName + newFileSystemExtName);
 					if (f.exists()) {
-						System.out.println("File exisitert bereits");
-						int recursiveNumber = 0;
-						String tempd = completeName + "_" + recursiveNumber;
-						while (f.exists()) {
-							recursiveNumber++;
-							tempd = completeName + "_" + recursiveNumber;
-							f = new File(tempd + newFileSystemExtName);
-						}
-						completeName = tempd;
-						System.out.println("Neuer Folder name "+ completeName);
+						//could be replaced by an external app which makes a flash movie out of the jpg's
+//						System.out.println("File exisitert bereits");
+//						int recursiveNumber = 0;
+//						String tempd = completeName + "_" + recursiveNumber;
+//						while (f.exists()) {
+//							recursiveNumber++;
+//							tempd = completeName + "_" + recursiveNumber;
+//							f = new File(tempd + newFileSystemExtName);
+//						}
+//						completeName = tempd;
+//						System.out.println("Neuer Folder name "+ completeName);
+						f.delete();
 					}
 
 					System.out.println("*****2 ***** completeName: "+ completeName + newFileSystemExtName);
@@ -139,12 +140,15 @@ public class ScreenServlet extends HttpServlet {
 					is.close();	
 					
 					LinkedHashMap<String,Object> hs = new LinkedHashMap<String,Object>();
-					hs.put("user", Usermanagement.getInstance().getUser(new Long(1)));
+					hs.put("user", Usermanagement.getInstance().getUser(users_id));
 					hs.put("message", "desktop");
 					hs.put("action", "newSlide");
+					hs.put("fileName", completeName + newFileSystemExtName);
 					
 					Application.getInstance().sendMessageByRoomAndDomain(room,domain,hs);
 	
+				} else {
+					System.out.println("user not logged in");
 				}
 
 			}

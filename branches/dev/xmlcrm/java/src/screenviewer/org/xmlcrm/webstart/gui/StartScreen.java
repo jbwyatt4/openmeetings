@@ -5,6 +5,8 @@ import java.util.Date;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 import org.quartz.impl.StdSchedulerFactory;
 import org.quartz.SchedulerFactory;
@@ -18,7 +20,7 @@ import org.xmlcrm.webstart.screen.ConnectionBean;
 
 public class StartScreen {
 
-	JTextArea textArea;
+	
 
 	java.awt.Container contentPane;
 	
@@ -27,11 +29,23 @@ public class StartScreen {
 	Scheduler sched;
 
 	JFrame t;
+	JTextArea textArea;
+	JTextArea textAreaQualy;
 	JButton startButton;
 	JButton stopButton;
+	JButton exitButton;
+	JSpinner jSpin;
 
-	public void randomFile() {
+	public void initMainFrame() {
 		try {
+
+			UIManager.setLookAndFeel(new com.incors.plaf.kunststoff.KunststoffLookAndFeel());
+
+
+//			 make Web Start happy
+//			 see http://developer.java.sun.com/developer/bugParade/bugs/4155617.html
+			UIManager.getLookAndFeelDefaults().put( "ClassLoader", getClass().getClassLoader()  );
+			
 			
 			schedFact = new StdSchedulerFactory();
 			sched = schedFact.getScheduler();	
@@ -39,12 +53,14 @@ public class StartScreen {
 			
 			t = new JFrame("Desktop Publisher");
 			contentPane = t.getContentPane();
-			contentPane.setBackground(Color.white);
+			contentPane.setBackground(Color.LIGHT_GRAY);
 			textArea = new JTextArea();
+			textArea.setBackground(Color.LIGHT_GRAY);
 			contentPane.setLayout(null);
 			contentPane.add(textArea);
 			textArea.setText("This application will publish your screen");
-			textArea.setBounds(10, 0, 400, 50);
+			textArea.setBounds(10, 0, 400,24);
+			
 			
 			startButton = new JButton( "start Sharing" );
 			startButton.addActionListener( new ActionListener(){
@@ -68,6 +84,33 @@ public class StartScreen {
 			stopButton.setEnabled(false);
 			t.add(stopButton);	
 			
+			jSpin = new JSpinner(new SpinnerNumberModel(60, 30, 100, 5));
+			jSpin.setBounds(140, 110, 50, 24);
+			jSpin.addChangeListener( new ChangeListener(){
+				public void stateChanged(ChangeEvent arg0) {
+					// TODO Auto-generated method stub
+					setNewStepperValues();
+				}	
+			});
+			t.add(jSpin);	
+			
+			textAreaQualy = new JTextArea();
+			contentPane.add(textAreaQualy);
+			textAreaQualy.setText("Quality (%)");
+			textAreaQualy.setBackground(Color.LIGHT_GRAY);
+			textAreaQualy.setBounds(10, 110, 400, 24);	
+			
+			exitButton = new JButton( "exit" );
+			exitButton.addActionListener( new ActionListener(){
+				public void actionPerformed(ActionEvent arg0) {
+					// TODO Auto-generated method stub
+					t.setVisible(false);
+					System.exit(0);
+				}
+			});
+			exitButton.setBounds(190, 170, 200, 24);
+			t.add(exitButton);				
+			
 			t.addWindowListener(new WindowAdapter() {
 				public void windowClosing(WindowEvent e) {
 					t.setVisible(false);
@@ -76,7 +119,7 @@ public class StartScreen {
 	
 			});
 			t.pack();
-			t.setSize(400, 200);
+			t.setSize(400, 240);
 			t.setVisible(true);
 			
 			System.err.println("initialized");
@@ -84,6 +127,11 @@ public class StartScreen {
 			System.out.println("randomFile Exception: ");
 			System.err.println(err);
 		}
+	}
+	
+	void setNewStepperValues(){
+		//System.out.println(jSpin.getValue());
+		ConnectionBean.imgQuality=new Float(Double.valueOf(jSpin.getValue().toString())/100);
 	}
 	
 	void captureScreenStart(){
@@ -121,14 +169,22 @@ public class StartScreen {
 		}
 	}
 	
-	public StartScreen(){
-		this.randomFile();
+	public StartScreen(String url, String SID, String room, String domain){
+		System.out.println("captureScreenStop Exception: ");
+		System.err.println("captureScreenStop Exception: ");
+		ConnectionBean.connectionURL = url;
+		ConnectionBean.SID = SID;
+		ConnectionBean.room = room;
+		ConnectionBean.domain = domain;		
+		this.initMainFrame();
+	}
+	
+	public static void main(String[] args){
+		String url = args[0];
+		String SID = args[1]; 
+		String room = args[2];
+		String domain = args[3];
+		new StartScreen(url,SID,room,domain);
 	}
 
-
-	public static void main(String args[]) {
-
-		StartScreen startScreen = new StartScreen();	
-
-	}
 }
