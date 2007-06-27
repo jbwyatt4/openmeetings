@@ -645,10 +645,10 @@ public class Usermanagement {
 	 * @param user_id
 	 * @return
 	 */
-	public Long getUserLevelByID(long user_id) {
+	public Long getUserLevelByID(Long user_id) {
 		
 		try {
-			
+			if (user_id==null) return new Long(0);
 			//For direct access of linked users
 			if (user_id==-1){
 				return new Long(1);

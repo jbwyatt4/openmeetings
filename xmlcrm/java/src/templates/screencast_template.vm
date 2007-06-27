@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Web Start Deployment Template -->
-<jnlp spec="1.0+" codebase="http://macbook:5080/xmlcrm/screen" href="screencast.jnlp"> 
+<jnlp spec="1.0+" codebase="http://$rtmphostlocal:$red5httpport/xmlcrm/screen" href="screencast.jnlp"> 
 	<information> 
 		<title>ScreenViewer Client Application</title> 
 		<vendor>Openmeetings</vendor> 
@@ -25,9 +25,9 @@
         <jar href="jta.jar"/> 
     </resources> 
     <application-desc main-class="org.xmlcrm.webstart.gui.StartScreen">
-    	<argument>http://macbook:5080/xmlcrm/ScreenServlet</argument> 
-    	<argument>1010</argument> 
-    	<argument>1</argument> 
-    	<argument>public</argument> 
+    	<argument>http://$rtmphostlocal:$red5httpport/xmlcrm/ScreenServlet</argument> 
+    	<argument>$SID</argument> 
+    	<argument>$ROOM</argument> 
+    	<argument>$DOMAIN</argument> 
     </application-desc> 
 </jnlp> 

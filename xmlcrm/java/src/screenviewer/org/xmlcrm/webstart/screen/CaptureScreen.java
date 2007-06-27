@@ -21,7 +21,7 @@ public class CaptureScreen {
 	public CaptureScreen(String url, String SID, String room, String domain) {
 		try {
 			System.err.println("captureScreenStart");
-			this.captureScreen(url+"?SID="+SID+"&room="+room+"&domain="+domain,"myscreenRemote.jpg");
+			this.captureScreen(url+"?sid="+SID+"&room="+room+"&domain="+domain,"myscreenRemote.jpg");
 		} catch (Exception io) {
 			System.err.println(io);
 			System.out.println(io);

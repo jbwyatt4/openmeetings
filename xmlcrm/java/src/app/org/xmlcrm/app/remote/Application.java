@@ -696,17 +696,20 @@ public class Application extends ApplicationAdapter implements
 			//Notify all clients of the same scope (room)
 			Iterator<IConnection> it = scope.getScope("hibernate").getConnections();
 			
-			
-			while (it.hasNext()) {
-				IConnection conn = it.next();				
-				RoomClient rcl = ClientList.get(conn.getClient().getId());
-				//Check if the Client is in the same room and same domain 
-				if(roomname.equals(rcl.getUserroom()) && orgdomain.equals(rcl.getDomain())){					
-					if (conn instanceof IServiceCapableConnection) {
-						((IServiceCapableConnection) conn).invoke("newMessageByRoomAndDomain",new Object[] { message }, this);
-						log.error("sending newMessageByRoomAndDomain to " + conn);
+			if (it!=null) {
+				while (it.hasNext()) {
+					IConnection conn = it.next();				
+					RoomClient rcl = ClientList.get(conn.getClient().getId());
+					//Check if the Client is in the same room and same domain 
+					if(roomname.equals(rcl.getUserroom()) && orgdomain.equals(rcl.getDomain())){					
+						if (conn instanceof IServiceCapableConnection) {
+							((IServiceCapableConnection) conn).invoke("newMessageByRoomAndDomain",new Object[] { message }, this);
+							log.error("sending newMessageByRoomAndDomain to " + conn);
+						}
 					}
 				}
+			} else {
+				System.out.println("sendMessageByRoomAndDomain connections is empty ");
 			}
 		} catch (Exception err) {
 			log.error("[getClientListBYRoomAndDomain]",err);
