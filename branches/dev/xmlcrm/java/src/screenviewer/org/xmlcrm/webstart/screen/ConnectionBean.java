@@ -26,8 +26,15 @@ public class ConnectionBean {
 	
 	public static Float imgQuality = new Float(0.60);
 	
-	
+	/**
+	 * current loading to server
+	 */
 	public static boolean isloading = false;
 	
-
+	
+	/**
+	 * image recalcing value's from the virtual Screen drawer
+	 */
+	public static int vScreenWidth = 200;
+	
 }
