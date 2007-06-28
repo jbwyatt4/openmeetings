@@ -26,5 +26,8 @@ public class ConnectionBean {
 	
 	public static Float imgQuality = new Float(0.60);
 	
+	
+	public static boolean isloading = false;
+	
 
 }
