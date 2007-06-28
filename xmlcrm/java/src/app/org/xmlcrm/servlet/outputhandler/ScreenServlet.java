@@ -108,7 +108,7 @@ public class ScreenServlet extends HttpServlet {
 						newFileSystemName = newFileSystemName.substring(0,16);
 					}
 					
-					String completeName = working_dir + newFileSystemName;
+					String completeName = working_dir + newFileSystemName+"_"+sid;
 
 					File f = new File(completeName + newFileSystemExtName);
 					if (f.exists()) {

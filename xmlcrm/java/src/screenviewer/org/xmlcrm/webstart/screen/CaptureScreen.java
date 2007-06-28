@@ -21,6 +21,7 @@ public class CaptureScreen {
 	public CaptureScreen(String url, String SID, String room, String domain) {
 		try {
 			System.err.println("captureScreenStart");
+			ConnectionBean.isloading = true;
 			this.captureScreen(url+"?sid="+SID+"&room="+room+"&domain="+domain,"myscreenRemote.jpg");
 		} catch (Exception io) {
 			System.err.println(io);
@@ -115,21 +116,21 @@ public class CaptureScreen {
 			System.out.println("sendJpegToUrl complete ");
 			
 		    // read the output from the URL
-		    try{
-		      DataInputStream in =
-		        new DataInputStream(
-		      new BufferedInputStream(c.getInputStream()));
-		      String sIn = in.readLine();
-		      while(sIn!=null){
-		        if(sIn!=null){
-		          System.out.println(sIn);
-		        }
-		        sIn = in.readLine();
-		      }
-		    }
-		    catch(Exception e){
-		      e.printStackTrace();
-		    }			
+			try {
+				DataInputStream in = new DataInputStream(
+						new BufferedInputStream(c.getInputStream()));
+				String sIn = in.readLine();
+				while (sIn != null) {
+					if (sIn != null) {
+						System.out.println(sIn);
+					}
+					sIn = in.readLine();
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}	
+			
+			ConnectionBean.isloading = false;
 
 		} catch (Exception e) {
 			e.printStackTrace();

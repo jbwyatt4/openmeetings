@@ -47,10 +47,10 @@ public class ScreenViewHandler extends HttpServlet {
 					room = "default";
 				}
 				String domain = httpServletRequest.getParameter("domain");
-				if(domain == null){
-					domain = "default";
-				}		
-				
+				if(domain == null) domain = "default";
+		
+				String filename = httpServletRequest.getParameter("fileName");
+				if(filename == null) filename="default";
 
 				//make a complete name out of domain(organisation) + roomname
 				String roomName = domain+"_"+room;
