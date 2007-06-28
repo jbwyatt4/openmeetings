@@ -4,6 +4,8 @@ import java.util.Date;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.image.BufferedImage;
+
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -37,7 +39,7 @@ public class StartScreen {
 	JButton exitButton;
 	JSpinner jSpin;
 	JLabel tFieldScreenZoom;
-	BlankArea blankArea;
+	JLabel blankArea;
 	BlankArea virtualScreen;
 	JLabel vscreenXLabel;
 	JLabel vscreenYLabel;
@@ -140,7 +142,7 @@ public class StartScreen {
 			System.err.println("initialized");
 		} catch (Exception err) {
 			System.out.println("randomFile Exception: ");
-			System.err.println(err);
+			err.printStackTrace();
 		}
 	}
 	
@@ -153,7 +155,7 @@ public class StartScreen {
 		JOptionPane.showMessageDialog(t, "Your Bandwidth is bad. Frames have been droped. You can alter the Quality settings to reduce Bandwidth usage.");
 	}
 	
-	void addVirtualScreen(){
+	void addVirtualScreen() throws Exception{
 		tFieldScreenZoom = new JLabel();
 		tFieldScreenZoom.setBounds(10, 140, 200, 20);
 		tFieldScreenZoom.setText("Select your screen Area:");
@@ -162,10 +164,10 @@ public class StartScreen {
 		Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
 		double ratio = screenSize.getHeight()/screenSize.getWidth();
 
-		int width_2 = 200;
+		int width_2 = ConnectionBean.vScreenWidth;
 		int height_2 = Long.valueOf(Math.round(width_2*ratio)).intValue();
 		
-		int width = 200;
+		int width = ConnectionBean.vScreenWidth;
 		int height = Long.valueOf(Math.round(width*ratio)).intValue();
 
 		virtualScreen = new BlankArea(new Color(255,255,255,100));
@@ -174,9 +176,18 @@ public class StartScreen {
 		virtualScreen.setBounds(30, 170, width_2, height_2);
 		t.add(virtualScreen);			
 		
-		blankArea = new BlankArea(Color.BLUE);
+		Rectangle screenRectangle = new Rectangle(screenSize);
+		Robot robot = new Robot();
+		BufferedImage imageScreen = robot.createScreenCapture(screenRectangle);		
+		
+		Image img = imageScreen.getScaledInstance(width, height ,Image.SCALE_SMOOTH);
+		//imageScreen.
+		System.out.println("img"+img);
+		ImageIcon image = new ImageIcon(img);
+		
+		blankArea = new JLabel(image);
 		blankArea.setBounds(30, 170, width, height);
-		t.add(blankArea);	
+		t.add(blankArea);
 		
 		vscreenXLabel = new JLabel();
 		vscreenXLabel.setText("SharingScreen X:");
@@ -188,7 +199,7 @@ public class StartScreen {
 		jVScreenXSpin.addChangeListener( new ChangeListener(){
 			public void stateChanged(ChangeEvent arg0) {
 				// TODO Auto-generated method stub
-				//setNewStepperValues();
+				calcNewValueXSpin();
 			}	
 		});	
 		t.add(jVScreenXSpin);
@@ -203,7 +214,7 @@ public class StartScreen {
 		jVScreenYSpin.addChangeListener( new ChangeListener(){
 			public void stateChanged(ChangeEvent arg0) {
 				// TODO Auto-generated method stub
-				//setNewStepperValues();
+				calcNewValueYSpin();
 			}	
 		});	
 		t.add(jVScreenYSpin);
@@ -237,6 +248,14 @@ public class StartScreen {
 			}	
 		});	
 		t.add(jVScreenHeightSpin);	
+		
+	}
+	
+	void calcNewValueXSpin(){
+		
+	}	
+	
+	void calcNewValueYSpin(){
 		
 	}
 	
