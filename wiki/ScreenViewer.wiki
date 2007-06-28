@@ -8,9 +8,11 @@ all Platforms and Combinations (Mac,Windows,Linux) all you need is Java version 
 = Description =
 
   * Its a simple Viewer which will work on 99% of all systems. 
+  * Up to 4 People (in a conference every User) will be able to share its screen 
   * You can alter the Quality while running. 
+  * You will be able to zoom to a area on your desktop
   * it is integrated into whiteboard sothat you or others (the moderater of the conference)  can draw over the shared screen while sharing is running
-  * Sharing Client and Viewing Client will get notifications of bad bandwidth
+  * Sharing Client and Viewing Client get notifications of bad bandwidth
 
 = Screens =
 A first screen from the Desktop Sharing Modus:
