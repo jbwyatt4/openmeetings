@@ -174,6 +174,8 @@
     
     <!-- indicates if this client is still loading an old image for the screenViwer -->
     <attribute name="isScreenImageLoading" value="false" type="boolean" />
+    <attribute name="screenImageIsLoaded" value="false" type="boolean" />
+    <attribute name="screenImageRef" value="null" />
 	
 	<!-- reference to the current loading bar -->
 	<attribute name="loadimageDataWinRef" value="null" />
@@ -228,16 +230,22 @@
 		//only do if last image has been loading successfully
             if (!this.isScreenImageLoading){
 
-            var downloadurl = 'http://'+canvas.rtmphostlocal+':'+canvas.red5httpport+'/xmlcrm/ScreenViewHandler?'
-                +'fileName='+value.fileName
-                +'&room='+hib.connectedroom
-                +'&domain='+hib.conferencedomain
-                +'&sid='+canvas.sessionId;
+                var downloadurl = 'http://'+canvas.rtmphostlocal+':'+canvas.red5httpport+'/xmlcrm/ScreenViewHandler?'
+                    +'fileName='+value.fileName
+                    +'&room='+hib.connectedroom
+                    +'&domain='+hib.conferencedomain
+                    +'&sid='+canvas.sessionId;
             
                 Debug.write("incomingScreenSharing URL: ",downloadurl);
-			
-                new imageforScreenViewer(this,{src:downloadurl,refObj:this,name:'screen'+this.getCounter(),x:0,y:0,downloadurl:downloadurl});
+                if (!this.screenImageIsLoaded){
+                    this.screenImageRef = new imageforScreenViewer(this,{src:downloadurl,refObj:this,name:'screen',x:0,y:0,downloadurl:downloadurl});
+                    this.screenImageIsLoaded = true;
+                } else {
+                    this.screenImageRef.setSource(downloadurl);
+                }
 
+            } else {
+                Debug.write("frame dropped");
             }
 		]]>
   	</method>    
