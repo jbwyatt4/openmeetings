@@ -4,6 +4,9 @@ import java.awt.*;
 import java.io.*;
 
 import javax.imageio.ImageIO;
+
+import org.xmlcrm.webstart.beans.ConnectionBean;
+
 import java.net.URLConnection;
 import java.net.URL;
 import java.awt.image.BufferedImage;

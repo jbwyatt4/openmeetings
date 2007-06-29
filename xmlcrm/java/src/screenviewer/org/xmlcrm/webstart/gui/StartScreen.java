@@ -17,8 +17,8 @@ import org.quartz.Trigger;
 import org.quartz.TriggerUtils;
 import org.quartz.JobDetail;
 
+import org.xmlcrm.webstart.beans.ConnectionBean;
 import org.xmlcrm.webstart.screen.ScreenJob;
-import org.xmlcrm.webstart.screen.ConnectionBean;
 import org.xmlcrm.webstart.screen.BlankArea;
 
 public class StartScreen {
@@ -114,7 +114,8 @@ public class StartScreen {
 			textAreaQualy.setBackground(Color.LIGHT_GRAY);
 			textAreaQualy.setBounds(10, 80, 100, 24);	
 			
-			addVirtualScreen();
+			//add the small screen thumb to the JFrame
+			new VirtualScreen();
 			
 			exitButton = new JButton( "exit" );
 			exitButton.addActionListener( new ActionListener(){
@@ -151,112 +152,8 @@ public class StartScreen {
 		ConnectionBean.imgQuality=new Float(Double.valueOf(jSpin.getValue().toString())/100);
 	}
 	
-	public void showBandwidthWarning(){
-		JOptionPane.showMessageDialog(t, "Your Bandwidth is bad. Frames have been droped. You can alter the Quality settings to reduce Bandwidth usage.");
-	}
-	
-	void addVirtualScreen() throws Exception{
-		tFieldScreenZoom = new JLabel();
-		tFieldScreenZoom.setBounds(10, 140, 200, 20);
-		tFieldScreenZoom.setText("Select your screen Area:");
-		t.add(tFieldScreenZoom);
-		
-		Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-		double ratio = screenSize.getHeight()/screenSize.getWidth();
-
-		int width_2 = ConnectionBean.vScreenWidth;
-		int height_2 = Long.valueOf(Math.round(width_2*ratio)).intValue();
-		
-		int width = ConnectionBean.vScreenWidth;
-		int height = Long.valueOf(Math.round(width*ratio)).intValue();
-
-		virtualScreen = new BlankArea(new Color(255,255,255,100));
-		virtualScreen.setOpaque(true);
-		virtualScreen.setText("Screen: "+Double.valueOf(screenSize.getWidth()).intValue()+":"+Double.valueOf(screenSize.getHeight()).intValue());
-		virtualScreen.setBounds(30, 170, width_2, height_2);
-		t.add(virtualScreen);			
-		
-		Rectangle screenRectangle = new Rectangle(screenSize);
-		Robot robot = new Robot();
-		BufferedImage imageScreen = robot.createScreenCapture(screenRectangle);		
-		
-		Image img = imageScreen.getScaledInstance(width, height ,Image.SCALE_SMOOTH);
-		//imageScreen.
-		System.out.println("img"+img);
-		ImageIcon image = new ImageIcon(img);
-		
-		blankArea = new JLabel(image);
-		blankArea.setBounds(30, 170, width, height);
-		t.add(blankArea);
-		
-		vscreenXLabel = new JLabel();
-		vscreenXLabel.setText("SharingScreen X:");
-		vscreenXLabel.setBounds(250, 170, 150, 24);
-		t.add(vscreenXLabel);
-		
-		jVScreenXSpin = new JSpinner(new SpinnerNumberModel(0, 0, Double.valueOf(screenSize.getWidth()).intValue(), 1));
-		jVScreenXSpin.setBounds(400, 170, 60, 24);
-		jVScreenXSpin.addChangeListener( new ChangeListener(){
-			public void stateChanged(ChangeEvent arg0) {
-				// TODO Auto-generated method stub
-				calcNewValueXSpin();
-			}	
-		});	
-		t.add(jVScreenXSpin);
-		
-		vscreenYLabel = new JLabel();
-		vscreenYLabel.setText("SharingScreen Y:");
-		vscreenYLabel.setBounds(250, 200, 150, 24);
-		t.add(vscreenYLabel);
-		
-		jVScreenYSpin = new JSpinner(new SpinnerNumberModel(0, 0, Double.valueOf(screenSize.getHeight()).intValue(), 1));
-		jVScreenYSpin.setBounds(400, 200, 60, 24);
-		jVScreenYSpin.addChangeListener( new ChangeListener(){
-			public void stateChanged(ChangeEvent arg0) {
-				// TODO Auto-generated method stub
-				calcNewValueYSpin();
-			}	
-		});	
-		t.add(jVScreenYSpin);
-		
-		vscreenWidthLabel = new JLabel();
-		vscreenWidthLabel.setText("SharingScreen Width:");
-		vscreenWidthLabel.setBounds(250, 240, 150, 24);
-		t.add(vscreenWidthLabel);
-		
-		jVScreenWidthSpin = new JSpinner(new SpinnerNumberModel(Double.valueOf(screenSize.getWidth()).intValue(), 0, Double.valueOf(screenSize.getWidth()).intValue(), 1));
-		jVScreenWidthSpin.setBounds(400, 240, 60, 24);
-		jVScreenWidthSpin.addChangeListener( new ChangeListener(){
-			public void stateChanged(ChangeEvent arg0) {
-				// TODO Auto-generated method stub
-				//setNewStepperValues();
-			}	
-		});	
-		t.add(jVScreenWidthSpin);		
-		
-		vscreenHeightLabel = new JLabel();
-		vscreenHeightLabel.setText("SharingScreen Height:");
-		vscreenHeightLabel.setBounds(250, 270, 150, 24);
-		t.add(vscreenHeightLabel);
-		
-		jVScreenHeightSpin = new JSpinner(new SpinnerNumberModel(Double.valueOf(screenSize.getHeight()).intValue(), 0, Double.valueOf(screenSize.getHeight()).intValue(), 1));
-		jVScreenHeightSpin.setBounds(400, 270, 60, 24);
-		jVScreenHeightSpin.addChangeListener( new ChangeListener(){
-			public void stateChanged(ChangeEvent arg0) {
-				// TODO Auto-generated method stub
-				//setNewStepperValues();
-			}	
-		});	
-		t.add(jVScreenHeightSpin);	
-		
-	}
-	
-	void calcNewValueXSpin(){
-		
-	}	
-	
-	void calcNewValueYSpin(){
-		
+	public void showBandwidthWarning(String warning){
+		JOptionPane.showMessageDialog(t, warning);
 	}
 	
 	void captureScreenStart(){
@@ -300,7 +197,8 @@ public class StartScreen {
 		ConnectionBean.connectionURL = url;
 		ConnectionBean.SID = SID;
 		ConnectionBean.room = room;
-		ConnectionBean.domain = domain;		
+		ConnectionBean.domain = domain;	
+		instance=this;
 		this.initMainFrame();
 	}
 	
@@ -309,7 +207,7 @@ public class StartScreen {
 		String SID = args[1]; 
 		String room = args[2];
 		String domain = args[3];
-		instance = new StartScreen(url,SID,room,domain);
+		new StartScreen(url,SID,room,domain);
 	}
 
 }
