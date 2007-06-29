@@ -6,6 +6,7 @@ import java.io.*;
 import javax.imageio.ImageIO;
 
 import org.xmlcrm.webstart.beans.ConnectionBean;
+import org.xmlcrm.webstart.beans.VirtualScreenBean;
 
 import java.net.URLConnection;
 import java.net.URL;
@@ -43,8 +44,11 @@ public class CaptureScreen {
 		try {
 
 			ByteArrayOutputStream out = new ByteArrayOutputStream();
-			Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-			Rectangle screenRectangle = new Rectangle(screenSize);
+			
+			Rectangle screenRectangle = new Rectangle(
+					VirtualScreenBean.vScreenSpinnerX,VirtualScreenBean.vScreenSpinnerY,
+					VirtualScreenBean.vScreenSpinnerWidth,VirtualScreenBean.vScreenSpinnerHeight);
+			
 			Robot robot = new Robot();
 			BufferedImage imageScreen = robot.createScreenCapture(screenRectangle);
 			
