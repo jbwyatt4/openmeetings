@@ -1,4 +1,4 @@
-package org.xmlcrm.webstart.screen;
+package org.xmlcrm.webstart.beans;
 
 public class ConnectionBean {
 	
@@ -30,11 +30,5 @@ public class ConnectionBean {
 	 * current loading to server
 	 */
 	public static boolean isloading = false;
-	
-	
-	/**
-	 * image recalcing value's from the virtual Screen drawer
-	 */
-	public static int vScreenWidth = 200;
-	
+
 }
