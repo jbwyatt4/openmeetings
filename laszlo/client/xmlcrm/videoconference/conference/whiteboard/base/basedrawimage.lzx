@@ -124,9 +124,8 @@
 	<attribute name="refObj" value="null" />
 	<handler name="onload">
 		<![CDATA[
-			Debug.write("image loaded");
 			if (this.width>this.refObj.width){
-				var height = this.height/(this.width/this.refObj.width)
+				var height = this.height/(this.width/this.refObj.width);
 				this.setAttribute('width',this.refObj.width);
 				this.setAttribute('height',height);
 				this.setAttribute('x',0);
@@ -146,19 +145,22 @@
             
             this.refObj.layers.push(this);	
             this.refObj.isScreenImageLoading=false;
+            this.refObj.toggleVisibleScreenSharing();
             
 		]]>
 	</handler>
 	<handler name="onerror" args="error">
 		<![CDATA[
-		Debug.write("onerror "+error);
-		this.refObj.isScreenImageLoading=false;
+            Debug.write("onerror "+error);
+            this.refObj.isScreenImageLoading=false;
+            this.refObj.toggleVisibleScreenSharing();
 		]]>
 	</handler>
 	<handler name="ontimeout" args="error">
 		<![CDATA[
-		Debug.write("ontimeout "+error);
-		this.refObj.isScreenImageLoading=false;
+		    Debug.write("ontimeout "+error);
+            this.refObj.isScreenImageLoading=false;
+            this.refObj.toggleVisibleScreenSharing();
 		]]>
 	</handler>	
 </class>
@@ -174,8 +176,9 @@
     
     <!-- indicates if this client is still loading an old image for the screenViwer -->
     <attribute name="isScreenImageLoading" value="false" type="boolean" />
-    <attribute name="screenImageIsLoaded" value="false" type="boolean" />
-    <attribute name="screenImageRef" value="null" />
+    <attribute name="screenImageRefNumber" value="1" type="number" />
+    <attribute name="screenImageRef1" value="null" />
+    <attribute name="screenImageRef2" value="null" />
 	
 	<!-- reference to the current loading bar -->
 	<attribute name="loadimageDataWinRef" value="null" />
@@ -237,18 +240,29 @@
                     +'&sid='+canvas.sessionId;
             
                 Debug.write("incomingScreenSharing URL: ",downloadurl);
-                if (!this.screenImageIsLoaded){
-                    this.screenImageRef = new imageforScreenViewer(this,{src:downloadurl,refObj:this,name:'screen',x:0,y:0,downloadurl:downloadurl});
-                    this.screenImageIsLoaded = true;
-                } else {
-                    this.screenImageRef.setSource(downloadurl);
+                if (this.screenImageRefNumber==1){
+                    this.screenImageRef1 = new imageforScreenViewer(this,{visible:false,src:downloadurl,refObj:this,name:'screen1',x:0,y:0,downloadurl:downloadurl});
+                    this.screenImageRefNumber = 2;
+                } else if (this.screenImageRefNumber==2){
+                    this.screenImageRef2 = new imageforScreenViewer(this,{visible:false,src:downloadurl,refObj:this,name:'screen2',x:0,y:0,downloadurl:downloadurl});
+                    this.screenImageRefNumber = 1;
                 }
 
             } else {
                 Debug.write("frame dropped");
             }
 		]]>
-  	</method>    
+  	</method>   
+    
+    <method name="toggleVisibleScreenSharing">
+        if (this.screenImageRefNumber==1){
+            if (this.screenImageRef1) this.screenImageRef1.destroy();
+            this.screenImageRef2.setAttribute('visible',true);
+        } else if (this.screenImageRefNumber==2){
+            this.screenImageRef1.setAttribute('visible',true);
+            if (this.screenImageRef2) this.screenImageRef2.destroy();
+        }
+    </method> 
 	
 	<!--
 		actionObject => attributes neccessary for loading image
