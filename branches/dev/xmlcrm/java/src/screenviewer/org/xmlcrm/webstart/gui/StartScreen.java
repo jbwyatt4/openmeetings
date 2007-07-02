@@ -48,7 +48,14 @@ public class StartScreen {
 	JLabel vscreenWidthLabel;
 	JLabel vscreenHeightLabel;
 	JSpinner jVScreenWidthSpin;
-	JSpinner jVScreenHeightSpin;	
+	JSpinner jVScreenHeightSpin;
+	
+	JLabel vScreenIconLeft;
+	JLabel vScreenIconRight;
+	JLabel vScreenIconUp;
+	JLabel vScreenIconDown;	
+	
+	JLabel myBandWidhtTestLabel;
 
 	public void initMainFrame() {
 		try {

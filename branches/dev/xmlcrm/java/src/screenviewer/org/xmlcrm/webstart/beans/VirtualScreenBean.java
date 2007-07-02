@@ -1,5 +1,7 @@
 package org.xmlcrm.webstart.beans;
 
+import java.awt.Robot;
+
 public class VirtualScreenBean {
 	
 	
@@ -26,4 +28,6 @@ public class VirtualScreenBean {
 	public static int vScreenSpinnerHeight = 0;
 	public static int vScreenSpinnerX = 0;
 	public static int vScreenSpinnerY = 0;
+	
+	public static Robot robot = null;
 }

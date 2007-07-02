@@ -66,9 +66,9 @@ public class Roommanagement {
 			HibernateUtil.closeSession(idf);
 			return returnId;
 		} catch (HibernateException ex) {
-			log.error("[addRoomType] "+ex);
+			log.error("[addRoomType] ",ex);
 		} catch (Exception ex2) {
-			log.error("[addRoomType] "+ex2);
+			log.error("[addRoomType] ",ex2);
 		}
 		return null;
 	}
@@ -91,9 +91,9 @@ public class Roommanagement {
 				return ll;
 			}
 		} catch (HibernateException ex) {
-			log.error("[getAllRoomTypes] "+ex);
+			log.error("[getAllRoomTypes] ", ex);
 		} catch (Exception ex2) {
-			log.error("[getAllRoomTypes] "+ex2);
+			log.error("[getAllRoomTypes] ", ex2);
 		}
 		return null;
 	}
@@ -118,9 +118,9 @@ public class Roommanagement {
 				return (RoomTypes) ll.get(0);
 			}
 		} catch (HibernateException ex) {
-			log.error("[getRoomTypesById] "+ex);
+			log.error("[getRoomTypesById] ", ex);
 		} catch (Exception ex2) {
-			log.error("[getRoomTypesById] "+ex2);
+			log.error("[getRoomTypesById] ", ex2);
 		}
 		return null;
 	}	
@@ -137,7 +137,7 @@ public class Roommanagement {
 				return this.getRoomById(rooms_id);
 			}
 		} catch (Exception ex2) {
-			log.error("[getRoomById] "+ex2);
+			log.error("[getRoomById] ", ex2);
 		}
 		return null;
 	}
@@ -162,9 +162,9 @@ public class Roommanagement {
 				return (Rooms) ll.get(0);
 			}
 		} catch (HibernateException ex) {
-			log.error("[getRoomById] "+ex);
+			log.error("[getRoomById] ", ex);
 		} catch (Exception ex2) {
-			log.error("[getRoomById] "+ex2);
+			log.error("[getRoomById] ", ex2);
 		}
 		return null;
 	}	
@@ -179,9 +179,9 @@ public class Roommanagement {
 				return sResult;
 			}
 		} catch (HibernateException ex) {
-			log.error("[getRooms] "+ex);
+			log.error("[getRooms] ", ex);
 		} catch (Exception ex2) {
-			log.error("[getRooms] "+ex2);
+			log.error("[getRooms] ", ex2);
 		}
 		return null;
 	}
@@ -199,9 +199,9 @@ public class Roommanagement {
 			log.error((Long)ll.get(0));
 			return (Long)ll.get(0);				
 		} catch (HibernateException ex) {
-			log.error("[selectMaxFromRooms] "+ex);
+			log.error("[selectMaxFromRooms] ", ex);
 		} catch (Exception ex2) {
-			log.error("[selectMaxFromRooms] "+ex2);
+			log.error("[selectMaxFromRooms] ", ex2);
 		}
 		return null;
 	}	
@@ -231,9 +231,9 @@ public class Roommanagement {
 			HibernateUtil.closeSession(idf);
 			return ll;
 		} catch (HibernateException ex) {
-			log.error("[getRooms ] "+ex);
+			log.error("[getRooms ] ", ex);
 		} catch (Exception ex2) {
-			log.error("[getRooms ] "+ex2);
+			log.error("[getRooms ] ", ex2);
 		}
 		return null;
 	}
@@ -254,9 +254,9 @@ public class Roommanagement {
 				return ll;
 			}
 		} catch (HibernateException ex) {
-			log.error("[getOrganisationsByRoom] "+ex);
+			log.error("[getOrganisationsByRoom] ", ex);
 		} catch (Exception ex2) {
-			log.error("[getOrganisationsByRoom] "+ex2);
+			log.error("[getOrganisationsByRoom] ", ex2);
 		}
 		return null;
 	}
@@ -287,9 +287,9 @@ public class Roommanagement {
 				return ll;
 			}
 		} catch (HibernateException ex) {
-			log.error("[getRoomsByOrganisation] "+ex);
+			log.error("[getRoomsByOrganisation] ", ex);
 		} catch (Exception ex2) {
-			log.error("[getRoomsByOrganisation] "+ex2);
+			log.error("[getRoomsByOrganisation] ", ex2);
 		}
 		return null;
 	}	
@@ -301,11 +301,13 @@ public class Roommanagement {
 	 * @param ispublic
 	 * @return id of the newly created room or NULL
 	 */
-	public Long addRoom(long USER_LEVEL,String name, long roomtypes_id, boolean ispublic){
+	public Long addRoom(long USER_LEVEL,String name, long roomtypes_id, String comment,
+			boolean ispublic, LinkedHashMap organisations){
 		try {
 			if (AuthLevelmanagement.getInstance().checkAdminLevel(USER_LEVEL)){
 				Rooms r = new Rooms();
 				r.setName(name);
+				r.setComment(comment);
 				r.setStarttime(new Date());
 				r.setRoomtype(this.getRoomTypesById(roomtypes_id));
 				r.setIspublic(ispublic);
@@ -316,12 +318,18 @@ public class Roommanagement {
 				long returnId = (Long) session.save(r);
 				tx.commit();
 				HibernateUtil.closeSession(idf);
+				
+				if (organisations!=null){
+					Long t = this.updateRoomOrganisations(organisations, r);
+					if (t==null) return null;
+				}
+				
 				return returnId;
 			}
 		} catch (HibernateException ex) {
-			log.error("[addRoom] "+ex);
+			log.error("[addRoom] ", ex);
 		} catch (Exception ex2) {
-			log.error("[addRoom] "+ex2);
+			log.error("[addRoom] ", ex2);
 		}
 		return null;
 	}
@@ -351,9 +359,9 @@ public class Roommanagement {
 				return returnId;
 			}
 		} catch (HibernateException ex) {
-			log.error("[addRoomToOrganisation] "+ex);
+			log.error("[addRoomToOrganisation] ", ex);
 		} catch (Exception ex2) {
-			log.error("[addRoomToOrganisation] "+ex2);
+			log.error("[addRoomToOrganisation] ", ex2);
 		}
 		return null;
 	}
@@ -379,9 +387,9 @@ public class Roommanagement {
 				return (Rooms_Organisation)ll.get(0);
 			}
 		} catch (HibernateException ex) {
-			log.error("[getRoomsByOrganisation] "+ex);
+			log.error("[getRoomsByOrganisation] ", ex);
 		} catch (Exception ex2) {
-			log.error("[getRoomsByOrganisation] "+ex2);
+			log.error("[getRoomsByOrganisation] ", ex2);
 		}
 		return null;
 	}	
@@ -415,9 +423,9 @@ public class Roommanagement {
 				return ll;
 			}
 		} catch (HibernateException ex) {
-			log.error("[getRoomsByOrganisation] "+ex);
+			log.error("[getRoomsByOrganisation] ", ex);
 		} catch (Exception ex2) {
-			log.error("[getRoomsByOrganisation] "+ex2);
+			log.error("[getRoomsByOrganisation] ", ex2);
 		}
 		return null;
 	}
@@ -446,9 +454,9 @@ public class Roommanagement {
 				return ll;
 			}
 		} catch (HibernateException ex) {
-			log.error("[getRoomsByOrganisation] "+ex);
+			log.error("[getRoomsByOrganisation] ", ex);
 		} catch (Exception ex2) {
-			log.error("[getRoomsByOrganisation] "+ex2);
+			log.error("[getRoomsByOrganisation] ", ex2);
 		}
 		return null;
 	}
@@ -464,9 +472,9 @@ public class Roommanagement {
 				return sResult;
 			}
 		} catch (HibernateException ex) {
-			log.error("[getRoomsByOrganisation] "+ex);
+			log.error("[getRoomsByOrganisation] ", ex);
 		} catch (Exception ex2) {
-			log.error("[getRoomsByOrganisation] "+ex2);
+			log.error("[getRoomsByOrganisation] ", ex2);
 		}
 		return null;
 	}	
@@ -487,9 +495,9 @@ public class Roommanagement {
 
 			return ll.size();			
 		} catch (HibernateException ex) {
-			log.error("[selectMaxFromRooms] "+ex);
+			log.error("[selectMaxFromRooms] ", ex);
 		} catch (Exception ex2) {
-			log.error("[selectMaxFromRooms] "+ex2);
+			log.error("[selectMaxFromRooms] ", ex2);
 		}
 		return null;
 	}		
@@ -522,9 +530,9 @@ public class Roommanagement {
 			
 			return ll;
 		} catch (HibernateException ex) {
-			log.error("[getRoomsByOrganisation] "+ex);
+			log.error("[getRoomsByOrganisation] ", ex);
 		} catch (Exception ex2) {
-			log.error("[getRoomsByOrganisation] "+ex2);
+			log.error("[getRoomsByOrganisation] ", ex2);
 		}
 		return null;
 	}	
@@ -549,9 +557,9 @@ public class Roommanagement {
 				return (Rooms_Organisation)ll.get(0);
 			}
 		} catch (HibernateException ex) {
-			log.error("[getRoomsOrganisationByOrganisationIdAndRoomId] "+ex);
+			log.error("[getRoomsOrganisationByOrganisationIdAndRoomId] ", ex);
 		} catch (Exception ex2) {
-			log.error("[getRoomsOrganisationByOrganisationIdAndRoomId] "+ex2);
+			log.error("[getRoomsOrganisationByOrganisationIdAndRoomId] ", ex2);
 		}
 		return null;
 	}	
@@ -575,9 +583,9 @@ public class Roommanagement {
 			HibernateUtil.closeSession(idf);
 			return ll;
 		} catch (HibernateException ex) {
-			log.error("[getRoomsByOrganisation] "+ex);
+			log.error("[getRoomsByOrganisation] ", ex);
 		} catch (Exception ex2) {
-			log.error("[getRoomsByOrganisation] "+ex2);
+			log.error("[getRoomsByOrganisation] ", ex2);
 		}
 		return null;
 	}
@@ -607,9 +615,9 @@ public class Roommanagement {
 			}
 			
 		} catch (HibernateException ex) {
-			log.error("[checkUserOrgRoom] "+ex);
+			log.error("[checkUserOrgRoom] ", ex);
 		} catch (Exception ex2) {
-			log.error("[checkUserOrgRoom] "+ex2);
+			log.error("[checkUserOrgRoom] ", ex2);
 		}
 		return false;
 	}
@@ -647,9 +655,9 @@ public class Roommanagement {
 				}
 			}
 		} catch (HibernateException ex) {
-			log.error("[updateRoom] "+ex);
+			log.error("[updateRoom] ", ex);
 		} catch (Exception ex2) {
-			log.error("[updateRoom] "+ex2);
+			log.error("[updateRoom] ", ex2);
 		}
 		return null;
 	}
@@ -663,7 +671,8 @@ public class Roommanagement {
 	 * @param comment
 	 * @return
 	 */
-	public Long updateRoom(long USER_LEVEL, long rooms_id, long roomtypes_id, String name, boolean ispublic, String comment, LinkedHashMap organisations){
+	public Long updateRoom(long USER_LEVEL, long rooms_id, long roomtypes_id, String name,
+			boolean ispublic, String comment, LinkedHashMap organisations){
 		try {
 			if (AuthLevelmanagement.getInstance().checkAdminLevel(USER_LEVEL)){
 				Rooms r = this.getRoomById(rooms_id);
@@ -687,9 +696,9 @@ public class Roommanagement {
 				return r.getRooms_id();
 			}
 		} catch (HibernateException ex) {
-			log.error("[updateRoom] "+ex);
+			log.error("[updateRoom] ", ex);
 		} catch (Exception ex2) {
-			log.error("[updateRoom] "+ex2);
+			log.error("[updateRoom] ", ex2);
 		}
 		return null;
 	}
@@ -755,9 +764,9 @@ public class Roommanagement {
 				return this.deleteRoom(this.getRoomById(rooms_id));
 			}
 		} catch (HibernateException ex) {
-			log.error("[deleteRoomById] "+ex);
+			log.error("[deleteRoomById] ", ex);
 		} catch (Exception ex2) {
-			log.error("[deleteRoomById] "+ex2);
+			log.error("[deleteRoomById] ", ex2);
 		}
 		return null;
 	}
@@ -778,9 +787,9 @@ public class Roommanagement {
 			HibernateUtil.closeSession(idf);
 			return r.getRooms_id();
 		} catch (HibernateException ex) {
-			log.error("[deleteRoomsOrganisation] "+ex);
+			log.error("[deleteRoomsOrganisation] ", ex);
 		} catch (Exception ex2) {
-			log.error("[deleteRoomsOrganisation] "+ex2);
+			log.error("[deleteRoomsOrganisation] ", ex2);
 		}
 		return null;
 	}
@@ -797,9 +806,9 @@ public class Roommanagement {
 				this.deleteRoomsOrganisation(rOrg);
 			}
 		} catch (HibernateException ex) {
-			log.error("[deleteAllRoomsOrganisationOfRoom] "+ex);
+			log.error("[deleteAllRoomsOrganisationOfRoom] ", ex);
 		} catch (Exception ex2) {
-			log.error("[deleteAllRoomsOrganisationOfRoom] "+ex2);
+			log.error("[deleteAllRoomsOrganisationOfRoom] ", ex2);
 		}
 	}	
 	
@@ -815,9 +824,9 @@ public class Roommanagement {
 				this.deleteRoomsOrganisation(rOrg);
 			}
 		} catch (HibernateException ex) {
-			log.error("[deleteAllRoomsOfOrganisation] "+ex);
+			log.error("[deleteAllRoomsOfOrganisation] ", ex);
 		} catch (Exception ex2) {
-			log.error("[deleteAllRoomsOfOrganisation] "+ex2);
+			log.error("[deleteAllRoomsOfOrganisation] ", ex2);
 		}
 	}
 	
@@ -830,9 +839,9 @@ public class Roommanagement {
 			Rooms_Organisation rOrg = this.getRoomsOrganisationById(rooms_organisation_id);
 			return this.deleteRoomsOrganisation(rOrg);
 		} catch (HibernateException ex) {
-			log.error("[deleteRoomsOrganisationByID] "+ex);
+			log.error("[deleteRoomsOrganisationByID] ", ex);
 		} catch (Exception ex2) {
-			log.error("[deleteRoomsOrganisationByID] "+ex2);
+			log.error("[deleteRoomsOrganisationByID] ", ex2);
 		}
 		return null;
 	}
@@ -842,9 +851,9 @@ public class Roommanagement {
 			Rooms_Organisation rOrganisation = this.getRoomsOrganisationByOrganisationIdAndRoomId(organisation_id, rooms_id);
 			return this.deleteRoomsOrganisation(rOrganisation);
 		} catch (HibernateException ex) {
-			log.error("[deleteRoomFromOrganisationByRoomAndOrganisation] "+ex);
+			log.error("[deleteRoomFromOrganisationByRoomAndOrganisation] ", ex);
 		} catch (Exception ex2) {
-			log.error("[deleteRoomFromOrganisationByRoomAndOrganisation] "+ex2);
+			log.error("[deleteRoomFromOrganisationByRoomAndOrganisation] ", ex2);
 		}
 		return null;
 	}
@@ -865,9 +874,9 @@ public class Roommanagement {
 			HibernateUtil.closeSession(idf);
 			return rOrg.getRooms_organisation_id();
 		} catch (HibernateException ex) {
-			log.error("[deleteRoomsOrganisation] "+ex);
+			log.error("[deleteRoomsOrganisation] ", ex);
 		} catch (Exception ex2) {
-			log.error("[deleteRoomsOrganisation] "+ex2);
+			log.error("[deleteRoomsOrganisation] ", ex2);
 		}
 		return null;
 	}
