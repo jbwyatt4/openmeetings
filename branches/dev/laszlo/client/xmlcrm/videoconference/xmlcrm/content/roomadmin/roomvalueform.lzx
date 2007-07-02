@@ -157,7 +157,6 @@
 	<basechooseseicon resourceN="edit_add_rsc" labelid="172" y="270" x="400"
 		onclick="this.parent.addOrganisationToUser()" />		
 	<method name="addOrganisationToUser">
-		if (this.rooms_id!=0)
 			new chooseorganisationwindow(canvas.main_content._content.inner,{refObj:this,item_id:this.rooms_id});
 	</method>	
 	<basechooseseicon resourceN="button_cancel_rsc" labelid="176" y="270" x="430"
