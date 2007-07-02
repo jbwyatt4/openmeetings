@@ -17,9 +17,9 @@ public class RoomTest extends TestCase {
 	
 	public void testRoomTest(){
 		//Public Rooms
-		long room1 = Roommanagement.getInstance().addRoom(3, "room1", 1, true);
+		long room1 = Roommanagement.getInstance().addRoom(3, "room1", 1, "", true, null);
 		log.error("room1: "+room1);
-		long room2 = Roommanagement.getInstance().addRoom(3, "room1", 2, true);
+		long room2 = Roommanagement.getInstance().addRoom(3, "room1", 2, "", true, null);
 		log.error("room2: "+room2);
 		
 	}

@@ -1,5 +1,6 @@
 package org.xmlcrm.webstart.gui;
 
+import javax.imageio.ImageIO;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Image;
@@ -7,6 +8,7 @@ import java.awt.Rectangle;
 import java.awt.Robot;
 import java.awt.image.BufferedImage;
 
+import javax.swing.SwingConstants;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JSpinner;
@@ -40,9 +42,69 @@ public class VirtualScreen {
 		
 		int width = VirtualScreenBean.vScreenWidth;
 		int height = Long.valueOf(Math.round(width*VirtualScreenBean.screenratio )).intValue();
+		
+		StartScreen.instance.vScreenIconLeft = new JLabel();		
+		StartScreen.instance.vScreenIconLeft.setBounds(14, 162+(height/2), 32, 16);
+		
+		StartScreen.instance.vScreenIconRight = new JLabel();
+		StartScreen.instance.vScreenIconRight.setBounds(30+width-16, 162+(height/2), 32, 16);
+		
+		StartScreen.instance.vScreenIconUp = new JLabel();
+		StartScreen.instance.vScreenIconUp.setBounds(30+(width/2)-8, 162-8, 16, 32);
+
+		StartScreen.instance.vScreenIconDown = new JLabel();
+		StartScreen.instance.vScreenIconDown.setBounds(30+(width/2)-8, 162+height-8, 16, 32);	
+		
+		Image im_left = ImageIO.read(StartScreen.class.getResource("/1leftarrow.png"));	
+		ImageIcon iIcon1 = new ImageIcon(im_left);
+		Image im_right = ImageIO.read(StartScreen.class.getResource("/1rightarrow.png"));
+		ImageIcon iIcon2 = new ImageIcon(im_right);
+		Image im_up = ImageIO.read(StartScreen.class.getResource("/1uparrow.png"));	
+		ImageIcon iIcon3 = new ImageIcon(im_up);
+		Image im_down = ImageIO.read(StartScreen.class.getResource("/1downarrow.png"));		
+		ImageIcon iIcon4 = new ImageIcon(im_down);
+		
+		JLabel jLab1 = new JLabel(iIcon1);
+		jLab1.setBounds(0, 0, 16, 16);		
+		JLabel jLab2 = new JLabel(iIcon2);
+		jLab2.setBounds(16, 0, 16, 16);	
+		StartScreen.instance.vScreenIconLeft.add(jLab1);	
+		StartScreen.instance.vScreenIconLeft.add(jLab2);
+		StartScreen.instance.vScreenIconLeft.setToolTipText("Change width");
+		StartScreen.instance.t.add(StartScreen.instance.vScreenIconLeft);
+		
+		JLabel jLab3 = new JLabel(iIcon1);
+		jLab3.setBounds(0, 0, 16, 16);		
+		JLabel jLab4 = new JLabel(iIcon2);
+		jLab4.setBounds(16, 0, 16, 16);			
+		StartScreen.instance.vScreenIconRight.add(jLab3);
+		StartScreen.instance.vScreenIconRight.add(jLab4);
+		StartScreen.instance.vScreenIconRight.setToolTipText("Change width");
+		StartScreen.instance.t.add(StartScreen.instance.vScreenIconRight);
+		
+		JLabel jLab5 = new JLabel(iIcon3);
+		jLab5.setBounds(0, 0, 16, 16);		
+		JLabel jLab6 = new JLabel(iIcon4);
+		jLab6.setBounds(0, 16, 16, 16);			
+		StartScreen.instance.vScreenIconUp.add(jLab5);
+		StartScreen.instance.vScreenIconUp.add(jLab6);
+		StartScreen.instance.vScreenIconUp.setToolTipText("Change height");
+		StartScreen.instance.t.add(StartScreen.instance.vScreenIconUp);
+		
+		JLabel jLab7 = new JLabel(iIcon3);
+		jLab7.setBounds(0, 0, 16, 16);		
+		JLabel jLab8 = new JLabel(iIcon4);
+		jLab8.setBounds(0, 16, 16, 16);			
+		StartScreen.instance.vScreenIconDown.add(jLab7);
+		StartScreen.instance.vScreenIconDown.add(jLab8);
+		StartScreen.instance.vScreenIconDown.setToolTipText("Change height");
+		StartScreen.instance.t.add(StartScreen.instance.vScreenIconDown);
+		
 
 		StartScreen.instance.virtualScreen = new BlankArea(new Color(255,255,255,100));
 		StartScreen.instance.virtualScreen.setOpaque(true);
+		StartScreen.instance.virtualScreen.setHorizontalAlignment(SwingConstants.LEFT);
+		StartScreen.instance.virtualScreen.setVerticalAlignment(SwingConstants.TOP);
 		StartScreen.instance.virtualScreen.setText("Screen: "+VirtualScreenBean.screenWidthMax+":"+VirtualScreenBean.screenHeightMax);
 		StartScreen.instance.virtualScreen.setBounds(30, 170, VirtualScreenBean.vScreenWidth, VirtualScreenBean.vScreenHeight);
 		VirtualScreenMouseListener vListener = new VirtualScreenMouseListener();
@@ -150,9 +212,10 @@ public class VirtualScreen {
 			newX=VirtualScreenBean.screenWidthMax-VirtualScreenBean.vScreenSpinnerWidth;
 			StartScreen.instance.jVScreenXSpin.setValue(newX);
 			if (this.showWarning) StartScreen.instance.showBandwidthWarning("Reduce the width of the SharingScreen before you try to move it left");
+		} else {
+			VirtualScreenBean.vScreenSpinnerX = newX;
+			updateVScreenBounds();
 		}
-		VirtualScreenBean.vScreenSpinnerX = newX;
-		updateVScreenBounds();
 	}	
 	
 	void calcNewValueYSpin(){
@@ -161,9 +224,10 @@ public class VirtualScreen {
 			newY=VirtualScreenBean.screenHeightMax-VirtualScreenBean.vScreenSpinnerHeight;
 			StartScreen.instance.jVScreenYSpin.setValue(newY);
 			if (this.showWarning) StartScreen.instance.showBandwidthWarning("Reduce the height of the SharingScreen before you try to move it bottom");
+		} else {
+			VirtualScreenBean.vScreenSpinnerY = newY;
+			updateVScreenBounds();
 		}
-		VirtualScreenBean.vScreenSpinnerY = newY;
-		updateVScreenBounds();
 	}	
 	
 	void calcNewValueWidthSpin(){
@@ -172,9 +236,10 @@ public class VirtualScreen {
 			newWidth=VirtualScreenBean.screenWidthMax-VirtualScreenBean.vScreenSpinnerX;
 			StartScreen.instance.jVScreenWidthSpin.setValue(newWidth);
 			if (this.showWarning)StartScreen.instance.showBandwidthWarning("Reduce the x of the SharingScreen before you try to make it wider");
-		}	
-		VirtualScreenBean.vScreenSpinnerWidth = newWidth;
-		updateVScreenBounds();	
+		} else {
+			VirtualScreenBean.vScreenSpinnerWidth = newWidth;
+			updateVScreenBounds();	
+		}
 		//System.out.println("calcNewValueWidthSpin "+VirtualScreenBean.vScreenSpinnerWidth);
 	}	
 	
@@ -184,9 +249,10 @@ public class VirtualScreen {
 			newHeight=VirtualScreenBean.screenHeightMax-VirtualScreenBean.vScreenSpinnerY;
 			StartScreen.instance.jVScreenHeightSpin.setValue(newHeight);
 			if (this.showWarning)StartScreen.instance.showBandwidthWarning("Reduce the y of the SharingScreen before you try to make it higher");
-		}	
-		VirtualScreenBean.vScreenSpinnerHeight = newHeight;
-		updateVScreenBounds();			
+		} else {
+			VirtualScreenBean.vScreenSpinnerHeight = newHeight;
+			updateVScreenBounds();	
+		}
 		//System.out.println("calcNewValueHeightSpin "+VirtualScreenBean.vScreenSpinnerHeight);
 	}	
 	
@@ -201,6 +267,24 @@ public class VirtualScreen {
 		
 		double newvScreenHeight = VirtualScreenBean.vScreenSpinnerHeight * (new Double(VirtualScreenBean.vScreenHeight) / new Double(VirtualScreenBean.screenHeightMax));
 		double newvScreenY = VirtualScreenBean.vScreenSpinnerY * (new Double(VirtualScreenBean.vScreenHeight) / new Double(VirtualScreenBean.screenHeightMax));
+		
+		//System.out.println("updateVScreenBounds"+newvScreenX+"|"+newvScreenY+"|"+newvScreenWidth+"|"+newvScreenHeight);
+		
+		StartScreen.instance.vScreenIconLeft.setLocation(
+				Double.valueOf(newvScreenX).intValue()+30-16, 
+				Double.valueOf(newvScreenY).intValue()+162+(Double.valueOf(newvScreenHeight).intValue()/2));
+		StartScreen.instance.vScreenIconRight.setLocation(
+				Double.valueOf(newvScreenX).intValue()+30+Double.valueOf(newvScreenWidth).intValue()-16, 
+				Double.valueOf(newvScreenY).intValue()+162+((Double.valueOf(newvScreenHeight).intValue())/2));
+		
+		StartScreen.instance.vScreenIconUp.setLocation(
+				Double.valueOf(newvScreenX).intValue()+30+(Double.valueOf(newvScreenWidth).intValue()/2)-8,
+				Double.valueOf(newvScreenY).intValue()+162-8);
+
+		StartScreen.instance.vScreenIconDown.setLocation(
+				Double.valueOf(newvScreenX).intValue()+30+(Double.valueOf(newvScreenWidth).intValue()/2)-8,
+				Double.valueOf(newvScreenY).intValue()+162-8+(Double.valueOf(newvScreenHeight).intValue()));
+
 		
 		StartScreen.instance.virtualScreen.setBounds(30+Double.valueOf(newvScreenX).intValue(), 170+Double.valueOf(newvScreenY).intValue() ,  Double.valueOf(newvScreenWidth).intValue(), Double.valueOf(newvScreenHeight).intValue() );
 	}

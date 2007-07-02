@@ -3,8 +3,6 @@ package org.xmlcrm.webstart.screen;
 import java.awt.*;
 import java.io.*;
 
-import javax.imageio.ImageIO;
-
 import org.xmlcrm.webstart.beans.ConnectionBean;
 import org.xmlcrm.webstart.beans.VirtualScreenBean;
 
@@ -48,11 +46,10 @@ public class CaptureScreen {
 			Rectangle screenRectangle = new Rectangle(
 					VirtualScreenBean.vScreenSpinnerX,VirtualScreenBean.vScreenSpinnerY,
 					VirtualScreenBean.vScreenSpinnerWidth,VirtualScreenBean.vScreenSpinnerHeight);
+			Robot robot = VirtualScreenBean.robot;
+			if (robot==null) robot = new Robot();
 			
-			Robot robot = new Robot();
 			BufferedImage imageScreen = robot.createScreenCapture(screenRectangle);
-			
-			
 
 			//Scale the image ro reduce size
 
@@ -74,7 +71,10 @@ public class CaptureScreen {
 			encpar.setQuality(ConnectionBean.imgQuality, false);
 			encoder.setJPEGEncodeParam(encpar);
 			encoder.encode(image);
-
+			
+			imageScreen.flush();
+			img.flush();
+			
 			return out.toByteArray();
 
 		} catch (FileNotFoundException e) {
