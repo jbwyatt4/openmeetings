@@ -7,7 +7,7 @@ import javax.swing.event.MouseInputAdapter;
 
 import org.xmlcrm.webstart.beans.VirtualScreenBean;
 
-public class VirtualScreenXMouseListener extends MouseInputAdapter  {
+public class VirtualScreenWidthMouseListener extends MouseInputAdapter  {
 	
 	private double x = 0;
 	
@@ -25,6 +25,7 @@ public class VirtualScreenXMouseListener extends MouseInputAdapter  {
 		// TODO Auto-generated method stub
 		VirtualScreen.instance.showWarning=false;
 		this.x = e.getX();
+//		System.out.println(this.x+" "+this.y);
 	}
 
 	public void mouseReleased(MouseEvent e) {
@@ -34,14 +35,13 @@ public class VirtualScreenXMouseListener extends MouseInputAdapter  {
 	
 	public void mouseDragged(MouseEvent e) {
 		double newX = e.getX();
-		int delta = Long.valueOf(Math.round(this.x-newX)).intValue();
-		int newXPosition = VirtualScreenBean.vScreenSpinnerX-delta;
-		int newWidth = VirtualScreenBean.vScreenSpinnerWidth+delta;
+
+		int newWidth = VirtualScreenBean.vScreenSpinnerWidth-Long.valueOf(Math.round(this.x-newX)).intValue();
+
 		
-		//System.out.println(newX+" "+newXPosition+" "+newWidth);
-		if (newXPosition>=0 && newWidth>=0) {
+		//System.out.println(newX+"  "+newWidth);
+		if ((VirtualScreenBean.vScreenSpinnerX+newWidth)<=VirtualScreenBean.screenWidthMax) {
 			VirtualScreen.instance.doUpdateBounds=false;
-			StartScreen.instance.jVScreenXSpin.setValue(newXPosition);
 			StartScreen.instance.jVScreenWidthSpin.setValue(newWidth);
 			VirtualScreen.instance.doUpdateBounds=true;
 			VirtualScreen.instance.updateVScreenBounds();

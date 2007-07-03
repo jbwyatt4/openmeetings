@@ -6,6 +6,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -74,9 +75,9 @@ public class StartScreen {
 			
 			t = new JFrame("Desktop Publisher");
 			contentPane = t.getContentPane();
-			contentPane.setBackground(Color.LIGHT_GRAY);
+			contentPane.setBackground(Color.WHITE);
 			textArea = new JLabel();
-			textArea.setBackground(Color.LIGHT_GRAY);
+			textArea.setBackground(Color.WHITE);
 			contentPane.setLayout(null);
 			contentPane.add(textArea);
 			textArea.setText("This application will publish your screen");
@@ -134,6 +135,13 @@ public class StartScreen {
 			});
 			exitButton.setBounds(190, 370, 200, 24);
 			t.add(exitButton);
+			
+			Image im_left = ImageIO.read(StartScreen.class.getResource("/background.png"));	
+			ImageIcon iIconBack = new ImageIcon(im_left);
+			
+			JLabel jLab = new JLabel(iIconBack);
+			jLab.setBounds(0, 0, 500, 440);
+			t.add(jLab);
 			
 			t.addWindowListener(new WindowAdapter() {
 				public void windowClosing(WindowEvent e) {

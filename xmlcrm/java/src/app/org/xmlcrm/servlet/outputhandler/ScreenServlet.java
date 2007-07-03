@@ -77,8 +77,7 @@ public class ScreenServlet extends HttpServlet {
 					String working_dir = "";
 					System.out.println(MultipartRequest.MAX_READ_BYTES);
 
-					working_dir = current_dir + File.separatorChar + "desktop" 
-						+ File.separatorChar + roomName + File.separatorChar;
+					working_dir = current_dir + "desktop" + File.separatorChar + roomName + File.separatorChar;
 
 					//Add the Folder for the Room if it does not exist yet
 					File localFolder = new File(working_dir);
@@ -112,17 +111,6 @@ public class ScreenServlet extends HttpServlet {
 
 					File f = new File(completeName + newFileSystemExtName);
 					if (f.exists()) {
-						//could be replaced by an external app which makes a flash movie out of the jpg's
-//						System.out.println("File exisitert bereits");
-//						int recursiveNumber = 0;
-//						String tempd = completeName + "_" + recursiveNumber;
-//						while (f.exists()) {
-//							recursiveNumber++;
-//							tempd = completeName + "_" + recursiveNumber;
-//							f = new File(tempd + newFileSystemExtName);
-//						}
-//						completeName = tempd;
-//						System.out.println("Neuer Folder name "+ completeName);
 						f.delete();
 					}
 
@@ -139,11 +127,13 @@ public class ScreenServlet extends HttpServlet {
 					fos.close();
 					is.close();	
 					
+					
+					
 					LinkedHashMap<String,Object> hs = new LinkedHashMap<String,Object>();
 					hs.put("user", Usermanagement.getInstance().getUser(users_id));
 					hs.put("message", "desktop");
 					hs.put("action", "newSlide");
-					hs.put("fileName", completeName + newFileSystemExtName);
+					hs.put("fileName", newFileSystemName+"_"+sid+newFileSystemExtName);
 					
 					Application.getInstance().sendMessageByRoomAndDomain(room,domain,hs);
 	
