@@ -31,7 +31,7 @@ public class VirtualScreen {
 		instance = this;
 		
 		StartScreen.instance.tFieldScreenZoom = new JLabel();
-		StartScreen.instance.tFieldScreenZoom.setBounds(10, 140, 200, 20);
+		StartScreen.instance.tFieldScreenZoom.setBounds(10, 120, 200, 20);
 		StartScreen.instance.tFieldScreenZoom.setText("Select your screen Area:");
 		StartScreen.instance.t.add(StartScreen.instance.tFieldScreenZoom);
 		
@@ -73,9 +73,9 @@ public class VirtualScreen {
 		StartScreen.instance.vScreenIconLeft.add(jLab1);	
 		StartScreen.instance.vScreenIconLeft.add(jLab2);
 		StartScreen.instance.vScreenIconLeft.setToolTipText("Change width");
-		VirtualScreenXMouseListener widthLeftMaouseListener = new VirtualScreenXMouseListener();
-		StartScreen.instance.vScreenIconLeft.addMouseListener(widthLeftMaouseListener);
-		StartScreen.instance.vScreenIconLeft.addMouseMotionListener(widthLeftMaouseListener);
+		VirtualScreenXMouseListener xLeftMouseListener = new VirtualScreenXMouseListener();
+		StartScreen.instance.vScreenIconLeft.addMouseListener(xLeftMouseListener);
+		StartScreen.instance.vScreenIconLeft.addMouseMotionListener(xLeftMouseListener);
 		StartScreen.instance.t.add(StartScreen.instance.vScreenIconLeft);
 		
 		JLabel jLab3 = new JLabel(iIcon1);
@@ -85,6 +85,9 @@ public class VirtualScreen {
 		StartScreen.instance.vScreenIconRight.add(jLab3);
 		StartScreen.instance.vScreenIconRight.add(jLab4);
 		StartScreen.instance.vScreenIconRight.setToolTipText("Change width");
+		VirtualScreenWidthMouseListener widthMouseListener = new VirtualScreenWidthMouseListener();
+		StartScreen.instance.vScreenIconRight.addMouseListener(widthMouseListener);
+		StartScreen.instance.vScreenIconRight.addMouseMotionListener(widthMouseListener);
 		StartScreen.instance.t.add(StartScreen.instance.vScreenIconRight);
 		
 		JLabel jLab5 = new JLabel(iIcon3);
@@ -94,6 +97,9 @@ public class VirtualScreen {
 		StartScreen.instance.vScreenIconUp.add(jLab5);
 		StartScreen.instance.vScreenIconUp.add(jLab6);
 		StartScreen.instance.vScreenIconUp.setToolTipText("Change height");
+		VirtualScreenYMouseListener yMouseListener = new VirtualScreenYMouseListener();
+		StartScreen.instance.vScreenIconUp.addMouseListener(yMouseListener);
+		StartScreen.instance.vScreenIconUp.addMouseMotionListener(yMouseListener);
 		StartScreen.instance.t.add(StartScreen.instance.vScreenIconUp);
 		
 		JLabel jLab7 = new JLabel(iIcon3);
@@ -103,6 +109,9 @@ public class VirtualScreen {
 		StartScreen.instance.vScreenIconDown.add(jLab7);
 		StartScreen.instance.vScreenIconDown.add(jLab8);
 		StartScreen.instance.vScreenIconDown.setToolTipText("Change height");
+		VirtualScreenHeightMouseListener heightMouseListener = new VirtualScreenHeightMouseListener();
+		StartScreen.instance.vScreenIconDown.addMouseListener(heightMouseListener);
+		StartScreen.instance.vScreenIconDown.addMouseMotionListener(heightMouseListener);
 		StartScreen.instance.t.add(StartScreen.instance.vScreenIconDown);
 		
 
@@ -110,7 +119,7 @@ public class VirtualScreen {
 		StartScreen.instance.virtualScreen.setOpaque(true);
 		StartScreen.instance.virtualScreen.setHorizontalAlignment(SwingConstants.LEFT);
 		StartScreen.instance.virtualScreen.setVerticalAlignment(SwingConstants.TOP);
-		StartScreen.instance.virtualScreen.setText("Screen: "+VirtualScreenBean.screenWidthMax+":"+VirtualScreenBean.screenHeightMax);
+		StartScreen.instance.virtualScreen.setText(VirtualScreenBean.screenWidthMax+":"+VirtualScreenBean.screenHeightMax);
 		StartScreen.instance.virtualScreen.setBounds(30, 170, VirtualScreenBean.vScreenWidth, VirtualScreenBean.vScreenHeight);
 		VirtualScreenMouseListener vListener = new VirtualScreenMouseListener();
 		StartScreen.instance.virtualScreen.addMouseListener(vListener);
@@ -315,6 +324,8 @@ public class VirtualScreen {
 							170+Long.valueOf(Math.round(newvScreenY)).intValue() ,  
 									Long.valueOf(Math.round(newvScreenWidth)).intValue(), 
 											Long.valueOf(Math.round(newvScreenHeight)).intValue() );
+			
+			StartScreen.instance.virtualScreen.setText(VirtualScreenBean.vScreenSpinnerWidth+":"+VirtualScreenBean.vScreenSpinnerHeight);
 			
 			//System.out.println(30+Long.valueOf(Math.round(newvScreenX)).intValue()+"|||"+  Long.valueOf(Math.round(newvScreenWidth)).intValue());
 			

@@ -7,13 +7,13 @@ import javax.swing.event.MouseInputAdapter;
 
 import org.xmlcrm.webstart.beans.VirtualScreenBean;
 
-public class VirtualScreenXMouseListener extends MouseInputAdapter  {
-	
-	private double x = 0;
+public class VirtualScreenHeightMouseListener extends MouseInputAdapter  {
+
+	private double y = 0;
 	
 	public void mouseEntered(MouseEvent e) {
 		// TODO Auto-generated method stub
-		StartScreen.instance.t.setCursor( Cursor.getPredefinedCursor(Cursor.W_RESIZE_CURSOR) ) ;
+		StartScreen.instance.t.setCursor( Cursor.getPredefinedCursor(Cursor.N_RESIZE_CURSOR) ) ;
 	}
 
 	public void mouseExited(MouseEvent e) {
@@ -24,7 +24,8 @@ public class VirtualScreenXMouseListener extends MouseInputAdapter  {
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
 		VirtualScreen.instance.showWarning=false;
-		this.x = e.getX();
+		this.y = e.getY();
+//		System.out.println(this.x+" "+this.y);
 	}
 
 	public void mouseReleased(MouseEvent e) {
@@ -33,16 +34,15 @@ public class VirtualScreenXMouseListener extends MouseInputAdapter  {
 	}
 	
 	public void mouseDragged(MouseEvent e) {
-		double newX = e.getX();
-		int delta = Long.valueOf(Math.round(this.x-newX)).intValue();
-		int newXPosition = VirtualScreenBean.vScreenSpinnerX-delta;
-		int newWidth = VirtualScreenBean.vScreenSpinnerWidth+delta;
+		double newY = e.getY();
 		
-		//System.out.println(newX+" "+newXPosition+" "+newWidth);
-		if (newXPosition>=0 && newWidth>=0) {
+		int delta = Long.valueOf(Math.round(this.y-newY)).intValue();
+		int newHeight = VirtualScreenBean.vScreenSpinnerHeight-delta;
+		
+		//System.out.println(delta+" "+newHeight);
+		if ((VirtualScreenBean.vScreenSpinnerY+newHeight)<=VirtualScreenBean.screenHeightMax) {
 			VirtualScreen.instance.doUpdateBounds=false;
-			StartScreen.instance.jVScreenXSpin.setValue(newXPosition);
-			StartScreen.instance.jVScreenWidthSpin.setValue(newWidth);
+			StartScreen.instance.jVScreenHeightSpin.setValue(newHeight);
 			VirtualScreen.instance.doUpdateBounds=true;
 			VirtualScreen.instance.updateVScreenBounds();
 			

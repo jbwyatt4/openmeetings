@@ -3,9 +3,6 @@ package org.xmlcrm.webstart.screen;
 import java.awt.*;
 import java.io.*;
 
-import org.xmlcrm.webstart.beans.ConnectionBean;
-import org.xmlcrm.webstart.beans.VirtualScreenBean;
-
 import java.net.URLConnection;
 import java.net.URL;
 import java.awt.image.BufferedImage;
@@ -13,6 +10,10 @@ import java.awt.image.BufferedImage;
 import com.sun.image.codec.jpeg.JPEGEncodeParam;
 import com.sun.image.codec.jpeg.JPEGImageEncoder;
 import com.sun.image.codec.jpeg.JPEGCodec;
+
+import org.xmlcrm.webstart.beans.ConnectionBean;
+import org.xmlcrm.webstart.beans.VirtualScreenBean;
+import org.xmlcrm.webstart.gui.StartScreen;
 
 public class CaptureScreen {
 
@@ -23,6 +24,7 @@ public class CaptureScreen {
 	public CaptureScreen(String url, String SID, String room, String domain) {
 		try {
 			System.err.println("captureScreenStart");
+//			StartScreen.instance.showBandwidthWarning("capture Start: "+url+(new java.util.Date()));
 			ConnectionBean.isloading = true;
 			this.captureScreen(url+"?sid="+SID+"&room="+room+"&domain="+domain,"myscreenRemote.jpg");
 		} catch (Exception io) {
@@ -48,23 +50,28 @@ public class CaptureScreen {
 					VirtualScreenBean.vScreenSpinnerWidth,VirtualScreenBean.vScreenSpinnerHeight);
 			Robot robot = VirtualScreenBean.robot;
 			if (robot==null) robot = new Robot();
+			//StartScreen.instance.showBandwidthWarning("capture  "+(new java.util.Date())+" and "+screenRectangle);
 			
 			BufferedImage imageScreen = robot.createScreenCapture(screenRectangle);
 
 			//Scale the image ro reduce size
-
+			
 			int width = imageScreen.getWidth();
 			int height = imageScreen.getHeight();
 
 			int thumbWidth = 600;
-			int div = width / thumbWidth;
-			height = height / div;
-			
-			Image img = imageScreen.getScaledInstance(thumbWidth, height ,Image.SCALE_SMOOTH);
-
-			BufferedImage image = new BufferedImage(thumbWidth, height,BufferedImage.TYPE_INT_RGB);
-			Graphics2D biContext = image.createGraphics();
-			biContext.drawImage(img, 0, 0, null);
+			BufferedImage image = null;
+			Image img = null;
+			if (width>thumbWidth){
+				int div = width / thumbWidth;
+				height = height / div;
+				img = imageScreen.getScaledInstance(thumbWidth, height ,Image.SCALE_SMOOTH);
+				image = new BufferedImage(thumbWidth, height,BufferedImage.TYPE_INT_RGB);
+				Graphics2D biContext = image.createGraphics();
+				biContext.drawImage(img, 0, 0, null);
+			} else {
+				image = imageScreen;
+			}
 
 			JPEGImageEncoder encoder = JPEGCodec.createJPEGEncoder(out);
 			JPEGEncodeParam encpar = encoder.getDefaultJPEGEncodeParam(image);
@@ -73,7 +80,10 @@ public class CaptureScreen {
 			encoder.encode(image);
 			
 			imageScreen.flush();
-			img.flush();
+			image.flush();
+			if (img!=null)img.flush();
+			
+			//StartScreen.instance.showBandwidthWarning("capture Date and Size: "+(new java.util.Date())+" and "+out.size());
 			
 			return out.toByteArray();
 
@@ -136,6 +146,7 @@ public class CaptureScreen {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}	
+			StartScreen.instance.showBandwidthWarning("capture complete URL "+url);
 			
 			ConnectionBean.isloading = false;
 

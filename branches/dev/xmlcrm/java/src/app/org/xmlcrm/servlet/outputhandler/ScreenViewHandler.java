@@ -62,21 +62,20 @@ public class ScreenViewHandler extends HttpServlet {
 				String current_dir = getServletContext().getRealPath("/");
 				System.out.println("Current_dir: "+current_dir);
 
-				String working_dir = current_dir+File.separatorChar+"desktop"+File.separatorChar + roomName + File.separatorChar;
+				String working_dir = current_dir+"desktop"+File.separatorChar + roomName + File.separatorChar;
 				
 				// Add the Folder for the Room
 
-				String requestedFile = "myscreenRemote.jpg";
-				System.out.println("requestedFile: " + requestedFile);
-
-				String full_path = working_dir + requestedFile;
+				String full_path = working_dir + filename;
+				System.out.println("full_path: "+full_path);
+				
 				RandomAccessFile rf = new RandomAccessFile(full_path, "r");
 
 				httpServletResponse.reset();
 				httpServletResponse.resetBuffer();
 				OutputStream out = httpServletResponse.getOutputStream();
 				httpServletResponse.setContentType("APPLICATION/OCTET-STREAM");
-				httpServletResponse.setHeader("Content-Disposition","attachment; filename=\"" + requestedFile + "\"");
+				httpServletResponse.setHeader("Content-Disposition","attachment; filename=\"" + filename + "\"");
 				httpServletResponse.setHeader("Content-Length", ""+ rf.length());
 				httpServletResponse.setHeader("Cache-Control", "no-cache");
 				httpServletResponse.setHeader("Pragma", "no-cache" );
