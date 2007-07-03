@@ -4,38 +4,6 @@
 <class name="audienceboard" extends="basecontentview">	
 	
 	<labeltext fontstyle="bold" y="10" labelid="128" />
-	
-	<labeltext y="40" labelid="129" />
-	
-		<view y="60" x="20">
-			<handler name="oninit">
-    			this.getRoomsPublic.doCall();
-    		</handler>
-    		
-		  	<netremotecallhib name="getRoomsPublic" funcname="conferenceservice.getRoomsPublic" remotecontext="$once{ canvas.thishib }" >   
-		  		<netparam name="vars1"><method name="getValue">return canvas.sessionId;</method></netparam>  
-		  		<netparam name="vars2"><method name="getValue">return 2;</method></netparam>  
-		        <handler name="ondata" args="value">	
-	                <![CDATA[
-	                if (value!=null){
-		                for(var eg=0;eg<value.length;eg++){
-		                    Debug.write(value[eg]);
-		                    var time = value[eg].starttime.getHours()+':'+value[eg].starttime.getMinutes()+' '+value[eg].starttime.getDate()+'.'+(value[eg].starttime.getMonth()+1)+'.'+value[eg].starttime.getFullYear();
-		                    new roomlistItem(parent.inn.inn.inn,{roomClassName:'audience',isaudience:true,obj:value[eg],ispublic:true,roomid:value[eg].rooms_id,starttime:time,roomname:value[eg].name});
-		                }
-	                }
-	                ]]>	        	          				
-		        </handler>	
-		  	</netremotecallhib>   
-		  	
-		  	<view width="480" height="200" name="inn"
-		  		bgcolor="$once{ canvas.basebgcolorizer }" >
-		  		<view x="1" y="1" width="478" height="198" name="inn" bgcolor="0xFFFFFF" clip="true" >
-		  			<view layout="axis:y;spacing:2" name="inn" />
-		  			<vscrollbar />
-		  		</view>
-		  	</view>
-		</view>
 		
 		<view x="520" y="60" name="detailsarea" >
             <method name="opendetails">
@@ -51,8 +19,8 @@
 		  	</view>
 		</view>
 		
-	<labeltext y="270" labelid="130" />
-		<view y="290" x="20">
+	<labeltext y="40" labelid="130" />
+		<view y="60" x="20">
 			<handler name="oninit">
 				Debug.write(hib.currentdomain);
 				Debug.write(hib.currentdomainObj);
@@ -85,7 +53,36 @@
 		  	</view>
 		</view>
 		
-		
+	<labeltext y="270" labelid="129" />
+		<view y="290" x="20">
+			<handler name="oninit">
+    			this.getRoomsPublic.doCall();
+    		</handler>
+		  	<netremotecallhib name="getRoomsPublic" funcname="conferenceservice.getRoomsPublic" remotecontext="$once{ canvas.thishib }" >   
+		  		<netparam name="vars1"><method name="getValue">return canvas.sessionId;</method></netparam>  
+		  		<netparam name="vars2"><method name="getValue">return 2;</method></netparam>  
+		        <handler name="ondata" args="value">	
+	                <![CDATA[
+	                if (value!=null){
+		                for(var eg=0;eg<value.length;eg++){
+		                    Debug.write(value[eg]);
+		                    var time = value[eg].starttime.getHours()+':'+value[eg].starttime.getMinutes()+' '+value[eg].starttime.getDate()+'.'+(value[eg].starttime.getMonth()+1)+'.'+value[eg].starttime.getFullYear();
+		                    new roomlistItem(parent.inn.inn.inn,{roomClassName:'audience',isaudience:true,obj:value[eg],ispublic:true,roomid:value[eg].rooms_id,starttime:time,roomname:value[eg].name});
+		                }
+	                }
+	                ]]>	        	          				
+		        </handler>	
+		  	</netremotecallhib>   
+		  	
+		  	<view width="480" height="200" name="inn"
+		  		bgcolor="$once{ canvas.basebgcolorizer }" >
+		  		<view x="1" y="1" width="478" height="198" name="inn" bgcolor="0xFFFFFF" clip="true" >
+		  			<view layout="axis:y;spacing:2" name="inn" />
+		  			<vscrollbar />
+		  		</view>
+		  	</view>
+		</view>
+    
 </class>
 
 </library>
