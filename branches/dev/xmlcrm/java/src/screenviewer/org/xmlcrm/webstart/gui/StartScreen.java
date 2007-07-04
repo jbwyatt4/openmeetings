@@ -106,7 +106,7 @@ public class StartScreen {
 			stopButton.setEnabled(false);
 			t.add(stopButton);	
 			
-			jSpin = new JSpinner(new SpinnerNumberModel(60, 30, 100, 5));
+			jSpin = new JSpinner(new SpinnerNumberModel(40, 10, 100, 5));
 			jSpin.setBounds(140, 80, 50, 24);
 			jSpin.addChangeListener( new ChangeListener(){
 				public void stateChanged(ChangeEvent arg0) {

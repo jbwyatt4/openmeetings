@@ -708,4 +708,19 @@
 <string id="236" name="user_registerSuccessHeader">
 <value>Your account has been created. You an login now.</value>
 </string>	
+<string id="237" name="user_sharing_message">
+<value>You cannot share your screen at the moment. Somebody else already share's its screen.</value>
+</string>		
+<string id="238" name="user_sharing_messageHeader">
+<value>Sharing forbidden</value>
+</string>	
+<string id="239" name="user_doStartScreenViewer">
+<value>Share your Screen</value>
+</string>	
+<string id="240" name="screen_warnBandwidth">
+<value>Bad Bandwidth: You have not been able to syncronize the Screen. Frames will be dropped. If this Warning is shown often you could ask the moderator to reduce the Quality.</value>
+</string>	
+<string id="241" name="screen_userlabel">
+<value>Screen of:</value>
+</string>			
 </language>

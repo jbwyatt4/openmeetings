@@ -80,7 +80,7 @@ public class CaptureScreen {
 				height = height / div;
 				System.out.println("div: "+div+" newheight:"+height);
 				
-				if (height>600){
+				if (height>thumbHeight){
 					double divHeight = height / thumbHeight;
 					thumbWidth = thumbWidth/divHeight;
 					height = thumbHeight;
