@@ -2,6 +2,7 @@ package org.xmlcrm.webstart.screen;
 
 import java.awt.*;
 import java.io.*;
+import java.util.Date;
 
 import java.net.URLConnection;
 import java.net.URL;
@@ -16,6 +17,8 @@ import org.xmlcrm.webstart.beans.VirtualScreenBean;
 import org.xmlcrm.webstart.gui.StartScreen;
 
 public class CaptureScreen {
+	
+	private Date startDate;
 
 	public static void main(String[] args) {
 		new CaptureScreen("http://192.168.2.103:5080/xmlcrm/ScreenServlet","1010","1","public");
@@ -24,6 +27,7 @@ public class CaptureScreen {
 	public CaptureScreen(String url, String SID, String room, String domain) {
 		try {
 			System.err.println("captureScreenStart");
+			this.startDate = new Date();
 //			StartScreen.instance.showBandwidthWarning("capture Start: "+url+(new java.util.Date()));
 			ConnectionBean.isloading = true;
 			this.captureScreen(url+"?sid="+SID+"&room="+room+"&domain="+domain,"myscreenRemote.jpg");
@@ -56,23 +60,40 @@ public class CaptureScreen {
 
 			//Scale the image ro reduce size
 			
-			int width = imageScreen.getWidth();
-			int height = imageScreen.getHeight();
+			double width = imageScreen.getWidth();
+			double height = imageScreen.getHeight();
+			
+			Date endTime = new Date();
+			long timeInSeconds = (endTime.getTime()-this.startDate.getTime())/1000;
+			
+			System.out.println("1 buffer start , end , delta "+this.startDate+" "+endTime+" :timeInSeconds: "+timeInSeconds);
+				
 
-			int thumbWidth = 600;
+			double thumbWidth = 600;
+			double thumbHeight = 600;
 			BufferedImage image = null;
 			Image img = null;
-			if (width>thumbWidth){
-				int div = width / thumbWidth;
+
+				double div = width / thumbWidth;
+				
+				System.out.println(" height:"+height+" width: "+width);
 				height = height / div;
-				img = imageScreen.getScaledInstance(thumbWidth, height ,Image.SCALE_SMOOTH);
-				image = new BufferedImage(thumbWidth, height,BufferedImage.TYPE_INT_RGB);
+				System.out.println("div: "+div+" newheight:"+height);
+				
+				if (height>600){
+					double divHeight = height / thumbHeight;
+					thumbWidth = thumbWidth/divHeight;
+					height = thumbHeight;
+				}
+				
+				System.out.println("final height:"+height+" width: "+thumbWidth);
+				
+				img = imageScreen.getScaledInstance(Double.valueOf(thumbWidth).intValue(), Double.valueOf(height).intValue() ,Image.SCALE_SMOOTH);
+				image = new BufferedImage(Double.valueOf(thumbWidth).intValue(), Double.valueOf(height).intValue(),BufferedImage.TYPE_INT_RGB);
 				Graphics2D biContext = image.createGraphics();
 				biContext.drawImage(img, 0, 0, null);
-			} else {
-				image = imageScreen;
-			}
 
+				
 			JPEGImageEncoder encoder = JPEGCodec.createJPEGEncoder(out);
 			JPEGEncodeParam encpar = encoder.getDefaultJPEGEncodeParam(image);
 			encpar.setQuality(ConnectionBean.imgQuality, false);
@@ -82,7 +103,7 @@ public class CaptureScreen {
 			imageScreen.flush();
 			image.flush();
 			if (img!=null)img.flush();
-			
+						
 			//StartScreen.instance.showBandwidthWarning("capture Date and Size: "+(new java.util.Date())+" and "+out.size());
 			
 			return out.toByteArray();
@@ -103,7 +124,13 @@ public class CaptureScreen {
 	public void sendJpegToUrl(byte[] imageAsBytes, String url, String fileName) {
 		try {
 			
-			System.out.println("sendJpegToUrl url  ");
+			System.out.println("sendJpegToUrl url  "+url);
+			Date endTime = new Date();
+			long timeInSeconds = (endTime.getTime()-this.startDate.getTime())/1000;
+			
+			System.out.println("2  scaled , end , delta "+this.startDate+" "+endTime+" :timeInSeconds: "+timeInSeconds);
+			
+			
 			URL u = new URL(url);
 			URLConnection c = u.openConnection();
 
@@ -146,7 +173,10 @@ public class CaptureScreen {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}	
-			StartScreen.instance.showBandwidthWarning("capture complete URL "+url);
+			Date endTime2 = new Date();
+			long timeInSeconds2 = (endTime2.getTime()-this.startDate.getTime())/1000;
+			
+			System.out.println("3 send start , end , delta "+this.startDate+" "+endTime2+" :timeInSeconds: "+timeInSeconds2);
 			
 			ConnectionBean.isloading = false;
 

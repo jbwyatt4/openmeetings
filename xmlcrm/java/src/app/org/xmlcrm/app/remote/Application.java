@@ -689,7 +689,10 @@ public class Application extends ApplicationAdapter implements
 		HashMap <String,RoomClient> roomClientList = new HashMap<String,RoomClient>();
 		try {			
 			
-			String sc = scope.getScope("hibernate").getName();
+			IScope scopeHibernate = scope.getScope("hibernate");
+			
+			if (scopeHibernate!=null){
+			String sc = scopeHibernate.getName();
 			
 			System.out.println("sendMessageByRoomAndDomain sc: "+sc);
 			
@@ -709,8 +712,12 @@ public class Application extends ApplicationAdapter implements
 					}
 				}
 			} else {
-				System.out.println("sendMessageByRoomAndDomain connections is empty ");
+				log.error("sendMessageByRoomAndDomain connections is empty ");
 			}
+			} else {
+				log.error("sendMessageByRoomAndDomain servlet not yet started ");
+			}
+			
 		} catch (Exception err) {
 			log.error("[getClientListBYRoomAndDomain]",err);
 		}

@@ -60,7 +60,6 @@ public class ScreenServlet extends HttpServlet {
 	
 				Long users_id = Sessionmanagement.getInstance().checkSession(sid);
 				Long User_LEVEL = Usermanagement.getInstance().getUserLevelByID(users_id);
-	
 				
 				if (User_LEVEL > 0) {
 
