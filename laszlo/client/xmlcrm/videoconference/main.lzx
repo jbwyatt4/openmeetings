@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <canvas debug="false" width="100%" height="100%" >
     
-<!-- these properties will be overwritten by config.xml -->  
+<!-- these properties will be overwritten by config.xml
+    <debug fontsize="14" oninit="Debug.showInternalProperties = true" />
+     -->  
     
 <!-- URL/IP to use for the Server 192.168.178.28 
 inno02.fh-pforzheim.de macbook 192.168.2.103
@@ -44,8 +46,6 @@ of the red5-servlet
 	Version number of this distro
  -->
 <attribute name="currentappversion" value="Version 0.5 Beta1" type="string" />
-
-<debug fontsize="14" oninit="Debug.showInternalProperties = true" />
 
 <silverstyle name="defaultstyle" isdefault="true" basecolor="${ canvas.basebgcolorizer }"
 	canvascolor="white" />
