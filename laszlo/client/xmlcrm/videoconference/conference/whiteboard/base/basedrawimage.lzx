@@ -108,7 +108,7 @@
 	</handler>	
 </class>
     
-<class name="imageforScreenViewer" extends="image" stretches="both">
+<class name="imageforScreenViewer" extends="image" stretches="both" x="0" y="0">
 	
 	<attribute name="downloadurl" value="" type="string" />
 		
@@ -120,49 +120,22 @@
 	<attribute name="parentPath" value="" type="string" />
 	<attribute name="room" value="" type="string" />
 	<attribute name="domain" value="" type="string" />
+    
+    <attribute name="username" value="" type="string" />
 		
 	<attribute name="refObj" value="null" />
 	<handler name="onload">
-		<![CDATA[
-			if (this.width>this.refObj.width){
-				var height = this.height/(this.width/this.refObj.width);
-				this.setAttribute('width',this.refObj.width);
-				this.setAttribute('height',height);
-				this.setAttribute('x',0);
-			}
-			if (this.height>this.refObj.height){
-				var width = this.width/(this.height/this.refObj.height)
-				this.setAttribute('height',this.refObj.height);
-				this.setAttribute('width',width);
-				this.setAttribute('y',0);
-			}	
-			if(this.y+this.height>this.refObj.height){
-				this.setAttribute('y',0);
-			}
-			if(this.x+this.width>this.refObj.width){
-				this.setAttribute('x',0);
-			}		
-            
-            this.refObj.layers.push(this);	
-            this.refObj.isScreenImageLoading=false;
-            this.refObj.toggleVisibleScreenSharing();
-            
-		]]>
+        this.refObj.layers.push(this);	
+        this.refObj.isScreenImageLoading=false;
+        this.refObj.toggleVisibleScreenSharing();
 	</handler>
 	<handler name="onerror" args="error">
-		<![CDATA[
-            Debug.write("onerror "+error);
-            this.refObj.isScreenImageLoading=false;
-            this.refObj.toggleVisibleScreenSharing();
-		]]>
+        this.refObj.toggleVisibleScreenSharing();
 	</handler>
 	<handler name="ontimeout" args="error">
-		<![CDATA[
-		    Debug.write("ontimeout "+error);
-            this.refObj.isScreenImageLoading=false;
-            this.refObj.toggleVisibleScreenSharing();
-		]]>
+        this.refObj.toggleVisibleScreenSharing();
 	</handler>	
+    
 </class>
     
 
@@ -197,6 +170,8 @@
 	<attribute name="syncImageRefObj" value="null" />
 	<attribute name="imageLoadingCompleteMessage" value="null" />
 	<attribute name="loadImageObjectTimer" value="null" />
+    
+    <handler name="setNewScreenUserName" args="val" />
   	
   	<method name="addNewImage" args="urlname,posx,posy,baseurl,fileName,moduleName,parentPath,room,domain">
   		this.addImageToLayer(this,'image'+this.getCounter(),urlname,posx,posy,0,0,true,baseurl,fileName,moduleName,parentPath,room,domain);
@@ -232,7 +207,7 @@
         <![CDATA[
 		//only do if last image has been loading successfully
             if (!this.isScreenImageLoading){
-
+                this.isScreenImageLoading = true;
                 var downloadurl = 'http://'+canvas.rtmphostlocal+':'+canvas.red5httpport+'/xmlcrm/ScreenViewHandler?'
                     +'fileName='+value.fileName
                     +'&room='+hib.connectedroom
@@ -247,9 +222,11 @@
                     this.screenImageRef2 = new imageforScreenViewer(this,{visible:false,src:downloadurl,refObj:this,name:'screen2',x:0,y:0,downloadurl:downloadurl});
                     this.screenImageRefNumber = 1;
                 }
-
+                this.setNewScreenUserName.sendEvent('Screen of User: '+value.user.firstname+','+value.user.lastname);
             } else {
-                Debug.write("frame dropped");
+                Debug.write("frame dropped!");
+                Debug.warn("frame dropped!");
+                new errorpopup(canvas,{error:canvas.getLabelName(240)});
             }
 		]]>
   	</method>   
@@ -262,6 +239,7 @@
             this.screenImageRef1.setAttribute('visible',true);
             if (this.screenImageRef2) this.screenImageRef2.destroy();
         }
+        this.isScreenImageLoading = false;
     </method> 
 	
 	<!--

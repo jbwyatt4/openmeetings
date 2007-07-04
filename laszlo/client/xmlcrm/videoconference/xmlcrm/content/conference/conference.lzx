@@ -65,9 +65,9 @@
 		</handler>
    </whiteboard>
 
-	<view name="currentmainobjectisMod" x="266" y="46"
+	<view name="currentmainobjectisMod" x="266" y="26"
 		width="654"
-		height="504"
+		height="524"
 		visible="true">
 		<handler name="onclick">
 			new errorpopup(canvas,{error:canvas.getLabelName(97)});
