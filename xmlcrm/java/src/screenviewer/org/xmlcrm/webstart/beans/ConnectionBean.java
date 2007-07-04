@@ -24,7 +24,7 @@ public class ConnectionBean {
      *           		0.25 low quality
 	 * **/
 	
-	public static Float imgQuality = new Float(0.60);
+	public static Float imgQuality = new Float(0.40);
 	
 	/**
 	 * current loading to server

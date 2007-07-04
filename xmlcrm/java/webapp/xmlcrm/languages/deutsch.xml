@@ -691,21 +691,36 @@
 <value>Daten werden geladen, bitte warten!</value>
 </string>
 <string id="231" name="user_registerFalsePWD">
-<value>Wrong Password</value>
+<value>Falsches Passwort</value>
 </string>
 <string id="232" name="user_registerFalsePWDHeader">
-<value>Please enter two identical passwords with at least 4 characters</value>
+<value>Bitte geben Sie zwei identische Passwörter mit mindestens 4 Buchstaben ein.</value>
 </string>
 <string id="233" name="user_registerMailError">
-<value>Wrong Mail</value>
+<value>Ungültige Mail</value>
 </string>
 <string id="234" name="user_registerMailErrorHeader">
-<value>You have entered an invalid Mail-Adress</value>
+<value>Die angegebene Mail-Adresse ist ungültig</value>
 </string>
 <string id="235" name="user_registerSuccess">
-<value>Registration Complete</value>
+<value>Registration Abgeschlossen</value>
 </string>
 <string id="236" name="user_registerSuccessHeader">
-<value>Your account has been created. You an login now.</value>
-</string>						
+<value>Ihr Benutzer wurde angelegt. Sie können sich nun einloggen.</value>
+</string>	
+<string id="237" name="user_sharing_message">
+<value>Sie können ihren Bildschirm im Moment nicht veröffentlichen da bereits ein anderer Benutzer in diesem Conferenzraum es tut.</value>
+</string>		
+<string id="238" name="user_sharing_messageHeader">
+<value>Veröffentlichung abgelehnt</value>
+</string>	
+<string id="239" name="user_doStartScreenViewer">
+<value>Desktop veröffentlichen</value>
+</string>	
+<string id="240" name="screen_warnBandwidth">
+<value>Schlechte Bandbreite. Es war nicht möglich alle Bilder des Bildschirms zu laden. Tritt dieser Fehler häufiger auf können Sie den Moderator darum bitten die Qualität zur verringern.</value>
+</string>	
+<string id="241" name="screen_userlabel">
+<value>Bildschirm von:</value>
+</string>							
 </language>
