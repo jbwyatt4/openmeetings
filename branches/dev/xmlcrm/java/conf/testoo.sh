@@ -1,1 +1,0 @@
-$1 -cp .:$4ridl.jar:$4js.jar:$4juh.jar:$4jurt.jar:$4jut.jar:$4java_uno.jar:$4java_uno_accessbridge.jar:$4edtftpj-1.5.2.jar:$4unoil.jar:$4dokeosupload.jar org.dokeos.ooconverter.DocumentLocalConverterMain $2 $3

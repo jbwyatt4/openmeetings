@@ -9,13 +9,13 @@
 	<session-factory>
 		
 		<!-- User  / Password -->
-		<property name="connection.username">postgres</property>
-		<property name="connection.password">67810</property>
+		<property name="connection.username">root</property>
+		<property name="connection.password"></property>
 		
 		<!-- Database Settings -->
-		<property name="connection.driver_class">org.postgresql.Driver</property>
-		<property name="dialect">org.hibernate.dialect.PostgreSQLDialect</property>
-		<property name="connection.url">jdbc:postgresql://localhost/xmlcrm</property>	
+		<property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+		<property name="dialect">org.hibernate.dialect.MySQLInnoDBDialect</property>
+		<property name="connection.url">jdbc:mysql://inno02.fh-pforzheim.de/xmlcrm</property>	
 		
 		<!-- Database Scheme Auto Update -->
 		<property name="hbm2ddl.auto">update</property>			
