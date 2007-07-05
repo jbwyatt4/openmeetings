@@ -1,0 +1,12 @@
+#summary 0.5 Beta3 Changes
+
+= Main Changes =
+
+  * Screen Viewer Application
+  * 
+
+
+= Minor Changes =
+
+  * Removed unnecessary jboss-*.jars (crashes Application with Red5 JMX-Console)
+  * 
