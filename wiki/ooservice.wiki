@@ -10,7 +10,7 @@ sudo apt-get install xvfb openoffice.org
   # After <node oor:name="Office"> insert the following lines:
 {{{
 <prop oor:name="ooSetupConnectionURL" oor:type="xs:string">
-   <value>socket,host=localhost,port=2002;urp</value>
+   <value>socket,host=localhost,port=8100;urp</value>
 </prop>
 }}}
   # Launch :
