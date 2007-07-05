@@ -3,10 +3,10 @@
 = Main Changes =
 
   * Screen Viewer Application
-  * 
+  * Installation for MySQL and any database supported by hibernate
 
 
 = Minor Changes =
 
-  * Removed unnecessary jboss-*.jars (crashes Application with Red5 JMX-Console)
+  * Removed unnecessary jboss-%.jars (crashes Application with Red5 JMX-Console)
   * 
