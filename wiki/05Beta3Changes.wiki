@@ -2,7 +2,7 @@
 
 = Main Changes =
 
-  * Screen Viewer Application
+  * Screen Viewer Application see ScreenViewer
   * Installation for MySQL and any database supported by hibernate
 
 
