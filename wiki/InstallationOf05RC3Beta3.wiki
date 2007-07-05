@@ -1,0 +1,80 @@
+#summary Installation of 05 Release Candidate 3
+
+= Requirements =
+
+  * Database availible (MySQL,Postgres,... MSSQL,Oracle,DB2 see [http://www.hibernate.org/hib_docs/reference/en/html/session-configuration.html#configuration-optional-dialects   full-list]
+  * Open-Office-Service started and listening on port 8100 (see OpenOfficeConverter, this is not necessary for installation but for running later on)
+  * Installed imagemagick (this is not necessary for installation but for running later on), you can get more information on http://www.imagemagick.org regarding installation. The instructions for installation can be found there http://www.imagemagick.org/script/binary-releases.php, however on most linux systems you can get it via your favorite package managers (apt-get it)
+
+= Install latest Red5 Server =
+
+  * you can get the latest Version of Red5 from: http://www.osflash.org
+  * configure Red5, the default ports Red5 is listening are also the default ports openmeetings application will try to connect. However you will find the exact port settings in _$RED5-HOME/conf/red5.properties_ (or follow the installation of red5)
+
+= Install Openmeetings =
+  # Download Openmeetings 0.5 Rc3 (beta3) from [ http://code.google.com/p/openmeetings/downloads/list Openmeetings-Download-Page]
+  # Unpack it to _$RED5-HOME/webapps/_ your new folder structure will be _$RED5-HOME/webapps/xmlcrm/_ this is the base directory of Openmeetings (following $OPENMEETINGS-HOME)
+  # Prepare Database Settings:
+    * goto $OPENMEETINGS-HOME/install there are two preconfigured files for MySQL and Postgres: mysql_hibernate.cfg.xml and postgres_hibernate.cfg.xml. Following explains it for MySQL-Database-Users, Postgres-Database-Users and Any-Database-Users. Choose Your One!! 
+    * MySQL-Database-User: Rename mysql_hibernate.cfg.xml to hibernate.cfg.xml and alter following config values in (mysql_)hibernate.cfg.xml
+     {{{
+		<property name="connection.username">root</property>
+		<property name="connection.password"></property>
+
+		<property name="connection.url">jdbc:mysql://YOUR_HOSTNAME/YOUR_DATABASE</property>	
+     }}}
+    Of course you must alter YOUR_HOSTNAME/YOUR_DATABASE to fit your needs for example to:localhost/xmlcrm
+    * Postgres-Database-Users: Rename postgres_hibernate.cfg.xml to hibernate.cfg.xml and alter fllowing config values in (postgres_)hibernate.cfg.xml
+    {{{
+		<!-- User  / Password -->
+		<property name="connection.username">postgres</property>
+		<property name="connection.password"></property>
+		
+		<property name="connection.url">jdbc:postgresql://YOUR_HOSTNAME/YOUR_DATABASE</property>	
+    }}}
+    Of course you must alter YOUR_HOSTNAME/YOUR_DATABASE to fit your needs for example to:localhost/xmlcrm
+    * Any-Database-Users: Rename any_hibernate.cfg.xml to hibernate.cfg.xml. 
+    Alter the following config values to fit your needs:
+    {{{
+		<!-- User  / Password -->
+		<property name="connection.username">user</property>
+		<property name="connection.password">*****</property>
+		
+		<!-- Database Settings -->
+		<property name="connection.driver_class">org.postgresql.Driver</property>
+		<property name="dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+		<property name="connection.url">jdbc:postgresql://localhost/xmlcrm</property>	
+		
+    }}}
+    You can see a list of available _dialect_'s here [http://www.hibernate.org/hib_docs/reference/en/html/session-configuration.html#configuration-optional-dialects hibernate-SQL-dialects]. You must download the driver for your database and copy it to _$OPENMEETINGS-HOME/WEB-INF/lib_
+  # (Re)start Red5 (The table's and default database scheme will be automatically created by hibernate if there is something wrong with your database values you will see errors in Red5 logfile, you can reduce Error log output by switching _$RED5_HOME/conf/log4j.properties from DEBUG to ERROR to see only relevant value's)
+  # go to the Installer by accessing it via browser: http://$rmpthostlocal/xmlcrm/Install it looks like that (If you unpack your stuff on localhost and do not alter the red5 port settings it will be http://localhost:5080/xmlcrm/Install): 
+
+  # Step 1 - install welcome and reminding
+http://openmeetings.googlecode.com/svn/branches/dev/laszlo/client/xmlcrm/resources/screens/install_step1.png
+
+  # Step 2 - adding data
+http://openmeetings.googlecode.com/svn/branches/dev/laszlo/client/xmlcrm/resources/screens/install_step2.png
+
+  # Step 3 - installation complete
+http://openmeetings.googlecode.com/svn/branches/dev/laszlo/client/xmlcrm/resources/screens/install_step3a.png
+
+  # Step 4 - enter Application (http://$rmpthostlocal/xmlcrm/) 
+http://openmeetings.googlecode.com/svn/branches/dev/laszlo/client/xmlcrm/resources/screens/install_step4.png
+
+If you have it that far and openoffice+imagmagick runs correctly your installation is complete
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
