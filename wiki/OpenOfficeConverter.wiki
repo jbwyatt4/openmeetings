@@ -49,10 +49,8 @@ OR
 sudo depends of your Red5 service .. if red5 is started as sudo (which must be started as sudo if the server is listening on port 80 (or smaller 1200) then ooservice also has to run as sudo cause it writes/reads from directories which red5 creates.
 
 = Windows =
-
+http://www.artofsolving.com/node/11
 
 
 = Links =
-Dokeos Installation Instructions:
-http://www.dokeos.com/wiki/index.php/MakeOOOListening
-
+http://www.artofsolving.com/node/10
