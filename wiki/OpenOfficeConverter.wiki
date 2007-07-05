@@ -49,11 +49,11 @@ OR
 sudo depends of your Red5 service .. if red5 is started as sudo (which must be started as sudo if the server is listening on port 80 (or smaller 1200) then ooservice also has to run as sudo cause it writes/reads from directories which red5 creates.
 
 = Windows =
-  * Install OpenOffice
-  * Launch it one time (sothat you have filled the registrering form of OpenOffice which does only popup one time)
-  * Open a Command-Prompt (CMD) and goto your OpenOffice Executable directory (for example C:\Programme\OpenOffice.org 2.0\program)
+  * Install Open Office
+  * Launch it one time (sothat you have filled the registrering form of Open Office which does only popup one time)
+  * Open a Command-Prompt (CMD) and goto your Open Office Executable directory (for example C:\Programme\OpenOffice.org 2.0\program)
   * Run OpenOffice in headless Modus:
-  soffice.exe -headless -nologo -norestore -accept=socket,host=localhost,port=8100;urp;StarOffice.ServiceManager
+  ,,soffice.exe -headless -nologo -norestore -accept=socket,host=localhost,port=8100;urp;StarOffice.ServiceManager,,
   * check if its running by typing: netstat -anp tcp
   you should find a line: 
     TCP    127.0.0.1:8100         0.0.0.0:0              ABHÖREN
