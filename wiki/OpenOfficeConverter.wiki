@@ -3,7 +3,23 @@
 
 = Linux (Debian,Ubuntu) =
 
-see: [ooservice] for details
+= Install Open Office Service on Debian/(K)Ubuntu =
+  # Install OpenOffice
+{{{
+sudo apt-get install xvfb openoffice.org
+}}}
+  # Edit /usr/lib/openoffice/share/registry/data/org/openoffice/Setup.xcu
+  # After <node oor:name="Office"> insert the following lines:
+{{{
+<prop oor:name="ooSetupConnectionURL" oor:type="xs:string">
+   <value>socket,host=localhost,port=8100;urp</value>
+</prop>
+}}}
+  # Launch :
+{{{
+xvfb-run --server-args='-screen 0 800x600x16' -a /usr/lib/openoffice/program/soffice -headless -nologo -norestore
+}}}
+
 
 = Mac OSx =
 Install Open-Office from the Open-Office webside
@@ -39,5 +55,4 @@ sudo depends of your Red5 service .. if red5 is started as sudo (which must be s
 = Links =
 Dokeos Installation Instructions:
 http://www.dokeos.com/wiki/index.php/MakeOOOListening
-
 
