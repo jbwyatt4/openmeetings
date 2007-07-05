@@ -56,7 +56,7 @@ sudo depends of your Red5 service .. if red5 is started as sudo (which must be s
   ,,soffice.exe -headless -nologo -norestore -accept=socket,host=localhost,port=8100;urp;StarOffice.ServiceManager,,
   * check if its running by typing: ,,netstat -anp tcp,,
   you should find a line: 
-    TCP    127.0.0.1:8100         0.0.0.0:0              ABHÖREN
+    ,,TCP    127.0.0.1:8100         0.0.0.0:0              ABHÖREN,,
 
 For more info see:
 http://www.artofsolving.com/node/11
