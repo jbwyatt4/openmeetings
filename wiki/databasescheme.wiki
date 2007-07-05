@@ -2,11 +2,11 @@
 #labels Phase-Design,Phase-Implementation
 
 == Files ==
-See:
-http://openmeetings.googlecode.com/svn/branches/dev/xmlcrm/java/conf/
-for mysql_skeleton.sql (MYSQL)
-for mssql_skeleton.sql (MS-SQL)
-for postgres_skeleton.sql (Postgres)
+Availible files see: http://openmeetings.googlecode.com/svn/branches/dev/xmlcrm/java/conf/
+  * mysql_skeleton.sql (MYSQL)
+  * mssql_skeleton.sql (MS-SQL)
+  * postgres_skeleton.sql (Postgres)
+
 
 == Navigation ==
 http://wagner-sebastian.com/downloads/navigation.png
