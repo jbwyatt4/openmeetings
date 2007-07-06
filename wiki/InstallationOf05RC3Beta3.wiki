@@ -15,7 +15,7 @@
   # Download Openmeetings 0.5 Rc3 (beta3) from [ http://code.google.com/p/openmeetings/downloads/list Openmeetings-Download-Page]
   # Unpack it to _$RED5-HOME/webapps/_ your new folder structure will be _$RED5-HOME/webapps/xmlcrm/_ this is the base directory of Openmeetings (following $OPENMEETINGS-HOME)
   # Prepare Database Settings - goto $OPENMEETINGS-HOME/install there are two preconfigured files for MySQL and Postgres: mysql_hibernate.cfg.xml and postgres_hibernate.cfg.xml. Following explains it for MySQL-Database-Users, Postgres-Database-Users and Any-Database-Users. Choose Your One!! 
-    * MySQL-Database-User: Rename mysql_hibernate.cfg.xml to hibernate.cfg.xml and alter following config values in (mysql_)hibernate.cfg.xml
+    * MySQL-Database-User: Rename mysql_hibernate.cfg.xml to hibernate.cfg.xml and alter following config values in (`mysql_`)hibernate.cfg.xml
      {{{
 		<property name="connection.username">root</property>
 		<property name="connection.password"></property>
@@ -23,7 +23,7 @@
 		<property name="connection.url">jdbc:mysql://YOUR_HOSTNAME/YOUR_DATABASE</property>	
      }}}
     Of course you must alter YOUR_HOSTNAME/YOUR_DATABASE to fit your needs for example to:localhost/xmlcrm
-    * Postgres-Database-Users: Rename postgres_hibernate.cfg.xml to hibernate.cfg.xml and alter fllowing config values in (postgres_)hibernate.cfg.xml
+    * Postgres-Database-Users: Rename postgres_hibernate.cfg.xml to hibernate.cfg.xml and alter fllowing config values in (`postgres_`)hibernate.cfg.xml
     {{{
 		<!-- User  / Password -->
 		<property name="connection.username">postgres</property>
@@ -31,8 +31,8 @@
 		
 		<property name="connection.url">jdbc:postgresql://YOUR_HOSTNAME/YOUR_DATABASE</property>	
     }}}
-    Of course you must alter YOUR_HOSTNAME/YOUR_DATABASE to fit your needs for example to:localhost/xmlcrm
-    * Any-Database-Users: Rename any_hibernate.cfg.xml to hibernate.cfg.xml. 
+    Of course you must alter `YOUR_HOSTNAME/YOUR_DATABASE` to fit your needs for example to:localhost/xmlcrm
+    * Any-Database-Users: Rename `any_hibernate.cfg.xml` to hibernate.cfg.xml. 
     Alter the following config values to fit your needs:
     {{{
 		<!-- User  / Password -->
@@ -62,7 +62,6 @@ http://openmeetings.googlecode.com/svn/branches/dev/laszlo/client/xmlcrm/resourc
 http://openmeetings.googlecode.com/svn/branches/dev/laszlo/client/xmlcrm/resources/screens/install_step4.png
 
 If you have it that far and openoffice+imagmagick runs correctly your installation is complete
-
 
 
 
