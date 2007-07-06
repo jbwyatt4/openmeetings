@@ -1,4 +1,5 @@
 #summary Installation of 05 Release Candidate 3
+#labels Featured
 
 = Requirements =
 
@@ -47,7 +48,7 @@
 		
     }}}
     You can see a list of available _dialect_'s here [http://www.hibernate.org/hib_docs/reference/en/html/session-configuration.html#configuration-optional-dialects hibernate-SQL-dialects]. You must download the driver for your database and copy it to _$OPENMEETINGS-HOME/WEB-INF/lib_
-  # (Re)start Red5 (The table's and default database scheme will be automatically created by hibernate if there is something wrong with your database values you will see errors in Red5 logfile, you can reduce Error log output by switching _$RED5_HOME/conf/log4j.properties from DEBUG to ERROR to see only relevant value's)
+  # (Re)start Red5 (The table's and default database scheme will be automatically created by hibernate if there is something wrong with your database values you will see errors in Red5 logfile, you can reduce Error log output by switching _$RED5-HOME/conf/log4j.properties_ from DEBUG to ERROR to see only relevant value's)
   # go to the Installer by accessing it via browser: http://$rmpthostlocal/xmlcrm/Install it looks like that (If you unpack your stuff on localhost and do not alter the red5 port settings it will be http://localhost:5080/xmlcrm/Install): 
 
   # Step 1 - install welcome and reminding
@@ -65,8 +66,14 @@ http://openmeetings.googlecode.com/svn/branches/dev/laszlo/client/xmlcrm/resourc
 If you have it that far and openoffice+imagmagick runs correctly your installation is complete
 
 
+= Tips and Tricks =
 
-
+  * Increase Performace by changing log-Level: Goto _$RED5-HOME/conf/log4j.properties_ and  change the first line to:
+  {{{
+    log4j.rootCategory=ERROR, CONSOLE 
+  }}}
+  * Use the Debug-Application: Enter in your browser http://$RED-HOST:$RED5-PORT/xmlcrm/maindebug.lzx.lzr=swf8.swf for example http://localhost:5080/xmlcrm/maindebug.lzx.lzr=swf8.swf
+  * If you have Problems with convertion-jops check your Red5-Log output. There will be error Messages which help you. You must install OpenOffice and ImageMagick and GhostSCript to run all Convertion-Jobs correctly.
 
 
 
