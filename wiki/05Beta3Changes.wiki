@@ -16,4 +16,5 @@
   * Improved config.xml to use right syntax
   * Repaired Bug with JPG's (did not generate Thumbs)
   * Added batch files for Windows convertion jobs
+  * Repaired Organisation Handling (Could not store new Organisation / or add Users to Organisations)
   * Debug Version of the Application added
