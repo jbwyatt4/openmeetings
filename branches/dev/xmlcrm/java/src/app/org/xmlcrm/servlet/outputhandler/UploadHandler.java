@@ -474,15 +474,20 @@ public class UploadHandler extends HttpServlet {
 		try {
 			String current_dir = getServletContext().getRealPath("/");
 			String runtimeFile = "jodconverter.bat";
+			String command = "cmd.exe /c start "+current_dir + "jod" + File.separatorChar
+				+ runtimeFile + " java " + fileFullPath + " "
+				+ destinationFolder + outputfile + ".pdf " + current_dir
+				+ "jod" + File.separatorChar;
+			
 			if (System.getProperty("os.name").toUpperCase().indexOf("WINDOWS") == -1) {
 				runtimeFile = "jodconverter.sh";
+				command = current_dir + "jod" + File.separatorChar
+					+ runtimeFile + " java " + fileFullPath + " "
+					+ destinationFolder + outputfile + ".pdf " + current_dir
+					+ "jod" + File.separatorChar;				
 			}
 			Runtime rt = Runtime.getRuntime();
 
-			String command = current_dir + "jod" + File.separatorChar
-					+ runtimeFile + " java " + fileFullPath + " "
-					+ destinationFolder + outputfile + ".pdf " + current_dir
-					+ "jod" + File.separatorChar;
 			// String command2 = "java -cp .:"+pre+"ridl.jar:"+pre+"js.jar:"+pre+"juh.jar:"+pre+"jurt.jar:"+pre+"jut.jar:"+pre+"java_uno.jar:"+pre+"java_uno_accessbridge.jar:"+pre+"edtftpj-1.5.2.jar:"+pre+"unoil.jar:"+pre+"dokeosupload.jar org.dokeos.ooconverter.DocumentLocalConverterMain "+pptFullPath+" "+destinationFolder;
 			System.out.println("command2: " + command);
 			Process proc = rt.exec(command);
