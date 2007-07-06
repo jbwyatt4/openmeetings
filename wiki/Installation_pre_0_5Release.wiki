@@ -1,5 +1,4 @@
 #summary How to install pre-0.5 Release, Please: this is for developers not end users!
-#labels Featured,Installation,Phase-Implementation
 
 = Requirements =
 
@@ -45,6 +44,5 @@
   # copy the file *crossdomain.xml* to $RED5/webapps/root/crossdomain.xml (you need this file otherwise you are not able to upload any file to the server)
   # restart of red5 (run red5.sh/red5.bat) is needed. Browse to $RED%_HOST:5080 (start page should come up)
   # browse to : $LPS_HOST:8080/lps-3.4.x/videoconference/main.lzx?lzt=swf8 for test
-
 
 
