@@ -1,5 +1,4 @@
 #summary How to install dev-0.5 Release from source, Please: this is for developers not end users!
-#labels Featured
 
 = Requirements =
 
