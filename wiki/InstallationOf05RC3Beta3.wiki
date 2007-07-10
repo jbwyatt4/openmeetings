@@ -16,7 +16,7 @@
 = Install Openmeetings =
   # Download Openmeetings 0.5 Rc3 (beta3) from [ http://code.google.com/p/openmeetings/downloads/list Openmeetings-Download-Page]
   # Unpack it to _$RED5-HOME/webapps/_ your new folder structure will be _$RED5-HOME/webapps/xmlcrm/_ this is the base directory of Openmeetings (following $OPENMEETINGS-HOME)
-  # Prepare Database Settings - goto $OPENMEETINGS-HOME/install there are two preconfigured files for MySQL and Postgres: mysql_hibernate.cfg.xml and postgres_hibernate.cfg.xml. Following explains it for MySQL-Database-Users, Postgres-Database-Users and Any-Database-Users. Choose Your One!! Of course the database must already exist! Meaning if you want to use  `jdbc:mysql://localhost/xmlcrm` `xmlcrm` must be already an existing empty database.
+  # Prepare Database Settings - goto $OPENMEETINGS-HOME/install there are two preconfigured files for MySQL and Postgres: mysql_hibernate.cfg.xml and postgres_hibernate.cfg.xml. Following explains it for MySQL-Database-Users, Postgres-Database-Users and Any-Database-Users. Choose Your One!! Of course the database must already exist! Meaning if you want to use  `jdbc:mysql://localhost/xmlcrm` then the database `xmlcrm` must be already an existing empty database!!
     * MySQL-Database-User: Rename `mysql_hibernate.cfg.xml` to `hibernate.cfg.xml` and alter following config values in (`mysql_`)`hibernate.cfg.xml`
      {{{
 		<property name="connection.username">root</property>
@@ -74,7 +74,6 @@ If you have it that far and openoffice+imagmagick runs correctly your installati
   }}}
   * Use the Debug-Application: Enter in your browser http://$RED-HOST:$RED5-PORT/xmlcrm/maindebug.lzx.lzr=swf8.swf for example http://localhost:5080/xmlcrm/maindebug.lzx.lzr=swf8.swf
   * If you have Problems with convertion-jops check your Red5-Log output. There will be error Messages which help you. You must install Open-Office and `ImageMagick` and `GhostScript` to run all Convertion-Jobs correctly.
-
 
 
 
