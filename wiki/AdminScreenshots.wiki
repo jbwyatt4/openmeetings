@@ -1,6 +1,11 @@
 #summary The screenshots of the admin console
+#labels Configuration
+
+The rooms are linked with one or more organisations.
+Each user must be in an organisation to participate on a specific room.
 
 = Manage users =
+You can add the users with this interface :
 http://openmeetings.googlecode.com/svn/branches/dev/laszlo/client/xmlcrm/resources/screens/manageusers.png
 
 = Manage organisations =
