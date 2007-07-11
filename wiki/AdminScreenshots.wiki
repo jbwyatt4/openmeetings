@@ -1,0 +1,10 @@
+#summary The screenshots of the admin console
+
+= Manage users =
+http://openmeetings.googlecode.com/svn/branches/dev/laszlo/client/xmlcrm/resources/screens/manageusers.png
+
+= Manage organisations =
+http://openmeetings.googlecode.com/svn/branches/dev/laszlo/client/xmlcrm/resources/screens/manageorganisation.png
+
+= Manage rooms =
+http://openmeetings.googlecode.com/svn/branches/dev/laszlo/client/xmlcrm/resources/screens/managerooms.png
