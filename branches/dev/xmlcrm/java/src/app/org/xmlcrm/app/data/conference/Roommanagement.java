@@ -2,7 +2,6 @@ package org.xmlcrm.app.data.conference;
 
 import java.util.Date;
 import java.util.Iterator;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -271,19 +270,30 @@ public class Roommanagement {
 		try {
 			log.error("getPublicRooms: roomtypes_id "+roomtypes_id);
 			if (AuthLevelmanagement.getInstance().checkUserLevel(USER_LEVEL)){
-				log.error("getPublicRooms: create Query "+roomtypes_id);
+				log.error("### getPublicRooms: create Query "+roomtypes_id);
 				Object idf = HibernateUtil.createSession();
 				Session session = HibernateUtil.getSession();
 				Transaction tx = session.beginTransaction();
-				Criteria crit = session.createCriteria(Rooms.class);
-				Criteria subcriteriaRoomType = crit.createCriteria("roomtype");
-				subcriteriaRoomType.add(Restrictions.eq("roomtypes_id", roomtypes_id));
-				crit.add(Restrictions.eq("ispublic", true));
-				crit.add(Restrictions.ne("deleted", "true"));
-				List ll = crit.list();
+//				Criteria crit = session.createCriteria(Rooms.class);
+//				Criteria subcriteriaRoomType = crit.createCriteria("roomtype");
+//				subcriteriaRoomType.add(Restrictions.eq("roomtypes_id", roomtypes_id));
+//				crit.add(Restrictions.eq("ispublic", true));
+//				crit.add(Restrictions.ne("deleted", "true"));			
+//				List ll = crit.list();
+				String queryString = "SELECT r from Rooms r " +
+						"JOIN r.roomtype as rt " +
+						"WHERE " +
+						"r.ispublic=:ispublic and r.deleted=:deleted and rt.roomtypes_id=:roomtypes_id";
+				Query q = session.createQuery(queryString);
+				//
+				q.setBoolean("ispublic", true);
+				q.setString("deleted", "false");
+				q.setLong("roomtypes_id", new Long(roomtypes_id));
+				
+				List ll = q.list();
 				tx.commit();
 				HibernateUtil.closeSession(idf);
-				log.error("getPublicRooms: size Room List "+ll.size());
+				log.error("### getPublicRooms: size Room List "+ll.size());
 				return ll;
 			}
 		} catch (HibernateException ex) {
