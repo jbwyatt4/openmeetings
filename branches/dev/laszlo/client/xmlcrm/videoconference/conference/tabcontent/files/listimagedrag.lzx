@@ -34,7 +34,8 @@
     <attribute name="uploadmodul" value="" type="string" />
     
     <image name="_thumb" x="1" y="1" width="48" height="48" clip="true" />
-    <text x="50" text="$once{ this.parent.filenamePure }" fontsize="10" width="240" multiline="true" />
+    <text name="_thumbText" 
+        x="50" text="$once{ this.parent.filenamePure }" fontsize="10" width="240" multiline="true" />
 
 	<view resource="filedelete_rsc" x="$once{ parent.parent.parent.width -34 }" y="1" 
 		onclick="parent.__LZFileDelete()" />
@@ -63,7 +64,7 @@
 		Debug.write("__LZFileAddDirect");   
 		Debug.write(downloadurl,0,0,'http://'+canvas.rtmphostlocal+':'+canvas.red5httpport+'/xmlcrm/DownloadHandler',this.filename,this.uploadmodul,canvas.uploadmoduleimgfolder+'/',hib.connectedroom,hib.conferencedomain);
         
-        _drawarea.parent.clearAreaAndAddImage(downloadurl,0,0,'http://'+canvas.rtmphostlocal+':'+canvas.red5httpport+'/xmlcrm/DownloadHandler',this.filename,this.uploadmodul,canvas.uploadmoduleimgfolder+'/',hib.connectedroom,hib.conferencedomain);
+        _drawarea.parent.parent.clearAreaAndAddImage(downloadurl,0,0,'http://'+canvas.rtmphostlocal+':'+canvas.red5httpport+'/xmlcrm/DownloadHandler',this.filename,this.uploadmodul,canvas.uploadmoduleimgfolder+'/',hib.connectedroom,hib.conferencedomain);
         this.parent.parent.parent.highlightItem(this);
         ]]>
 	</method>

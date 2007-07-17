@@ -35,10 +35,12 @@
     <method name="highlightItem" args="obj">
     	<![CDATA[
     		for (var i=0;i<this._table._listcontent.subviews.length;i++){
-    			if (!this._table._listcontent.subviews[i].isPpt)
-    				this._table._listcontent.subviews[i].setText('<font>'+this._table._listcontent.subviews[i].filenamePure+'</font>');
+    			if (!this._table._listcontent.subviews[i].isPpt){
+                    Debug.write("this._table._listcontent.subviews[i]: ",this._table._listcontent.subviews[i]);
+    				this._table._listcontent.subviews[i]._thumbText.setText('<font>'+this._table._listcontent.subviews[i].filenamePure+'</font>');
+                }
     		}
-    		obj.setText('<font><b>'+obj.filenamePure+'</b></font>');
+    		obj._thumbText.setText('<font><b>'+obj.filenamePure+'</b></font>');
     	]]>
     </method>
     
