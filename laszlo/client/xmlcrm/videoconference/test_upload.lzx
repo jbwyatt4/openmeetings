@@ -6,5 +6,5 @@
     <handler name="oninit">
         new uploadwindow(canvas);
     </handler>
-    
+
 </canvas>

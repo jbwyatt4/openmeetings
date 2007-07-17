@@ -240,50 +240,52 @@
 	<!-- 
 		The Content Area
 	 -->
-	<basedrawsave width="642" height="488" y="68" clip="true"
-		name="_drawarea" id="_drawarea" >
-		<handler name="onprogress" args="perc">
-			Debug.write("onprogress: ",perc);
-			this.parent._progress.setProgress(perc);
-		</handler>
-        
-        <handler name="setNewScreenUserName" args="value">
-            this.parent._sharingClientName.setText(value);
-        </handler>
-		<!-- @overwrite -->
-		<method name="onsharedMessage" args="action,obj">
-
-	  		var tempSendArray = new Array ();
-	  		tempSendArray[0] = 'whiteboard';
-	  		tempSendArray[1] = new Date();
-			Debug.write("Setting Message: ",action);
-			tempSendArray[2] = action;
-			tempSendArray[3] = obj;
-	 			
-	  		parent.onsharedMessage.sendEvent(tempSendArray);
-	  		
-		</method>
-		<handler name="onopenWhiteBoard" >
-			var obj = new Array();
-			obj[0] = 'whiteboard';
-			obj[1] = 'initgetVars';
-			obj[2] = canvas.streamid;
-			
-			Debug.write("Setting Message onopenWhiteBoard: ",canvas.moderatorStreamID,obj);
-			
-			this.parent.sendObjectToClientID = canvas.moderatorStreamID;
-			this.parent.sendObject = obj;
-	 			
-	  		this.parent.sendMessageWithClientById.doCall();
-		</handler>
-		<!-- clientid  = streamid of the user -->
-		<method name="oninitUser" args="clientid,objectList">
-			this.parent.sendObjectToClientID = clientid;
-			this.parent.sendObject = objectList;
-			this.parent.sendMessageWithClientById.doCall();
-		</method>
-	</basedrawsave>
-	
+    <view clip="true" width="654" height="492" y="68" name="_drawareaMask">
+	    <basedrawsave y="0" name="_drawarea" id="_drawarea" >
+            <handler name="onprogress" args="perc">
+                Debug.write("onprogress: ",perc);
+                this.parent.parent._progress.setProgress(perc);
+            </handler>
+            
+            <handler name="setNewScreenUserName" args="value">
+                this.parent.parent._sharingClientName.setText(value);
+            </handler>
+            <!-- @overwrite -->
+            <method name="onsharedMessage" args="action,obj">
+    
+                var tempSendArray = new Array ();
+                tempSendArray[0] = 'whiteboard';
+                tempSendArray[1] = new Date();
+                Debug.write("Setting Message: ",action);
+                tempSendArray[2] = action;
+                tempSendArray[3] = obj;
+                     
+                parent.parent.onsharedMessage.sendEvent(tempSendArray);
+            </method>
+            <handler name="onopenWhiteBoard" >
+                var obj = new Array();
+                obj[0] = 'whiteboard';
+                obj[1] = 'initgetVars';
+                obj[2] = canvas.streamid;
+                
+                Debug.write("Setting Message onopenWhiteBoard: ",canvas.moderatorStreamID,obj);
+                
+                this.parent.parent.sendObjectToClientID = canvas.moderatorStreamID;
+                this.parent.parent.sendObject = obj;
+                     
+                this.parent.parent.sendMessageWithClientById.doCall();
+            </handler>
+            <!-- clientid  = streamid of the user -->
+            <method name="oninitUser" args="clientid,objectList">
+                this.parent.parent.sendObjectToClientID = clientid;
+                this.parent.parent.sendObject = objectList;
+                this.parent.parent.sendMessageWithClientById.doCall();
+            </method>
+        </basedrawsave>
+        <vscrollbar />
+        <hscrollbar />
+	</view>
+    
         <netremotecallhib name="sendMessageWithClientById" funcname="sendMessageWithClientById"
 			remotecontext="$once{ canvas.thishib }" >
             <netparam name="vars1"><method name="getValue">return parent.parent.sendObject;</method></netparam>
