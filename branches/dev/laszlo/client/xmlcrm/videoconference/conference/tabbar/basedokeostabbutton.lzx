@@ -18,6 +18,12 @@
 		this.isselected=bool;
         this.setAttribute('enabled',!this.isselected);
 	</method>
+    
+	<attribute name="labelid" type="number" setter="setLabelId(labelid)" />
+	<method name="setLabelId" args="_labelid" >
+		this.labelid = _labelid;
+		this.setAttribute('iconname',canvas.getLabelName(this.labelid));
+	</method>    
 
 	<attribute name="sendClick" value="null" />
 	<!--

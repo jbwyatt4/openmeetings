@@ -534,10 +534,11 @@
 	    	this.ObjectByName = this.getObjectByName(val);
 	    	var x = this.ObjectByName.getAttribute('x');
 	    	var y = this.ObjectByName.getAttribute('y');
+            Debug.write("doShowObjectBounds: ",x,y);
 	    	var width = this.ObjectByName.width;
 	    	var height = this.ObjectByName.height;
 	    	if (this.boundingref!=null)this.boundingref.removeIt();
-	    	this.boundingref = new boundingBoxAll(this.parent.boundboxesView,{whiteboardRef:this,objRef:this.ObjectByName,x:x-200,y:y-200,width:width+400,height:height+400,ex:x,ey:y,ewidth:width,eheight:height});
+	    	this.boundingref = new boundingBoxAll(this.parent.parent.boundboxesView,{whiteboardRef:this,objRef:this.ObjectByName,x:x-200,y:y-200,width:width+400,height:height+400,ex:x,ey:y,ewidth:width,eheight:height});
 	    	this.setAttribute('boundingIsActive',true);
     	}
     ]]>
