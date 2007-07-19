@@ -53,7 +53,7 @@
 <include href="menu/" />
 <include href="windows/" />
 <include href="helper/" />
-
+<include href="toolbar/" />
 
 
 <!-- 
@@ -64,7 +64,7 @@
  -->
 
 
-<class name="whiteboard" extends="view">
+<class name="whiteboard" extends="view" >
 	
 	<attribute name="baseurl" value="" type="string" />
 	<attribute name="fileName" value="" type="string" />
@@ -193,60 +193,71 @@
             ]]>        
     </method> 
     
+    <view x="2" layout="axis:x; spacing:2" y="18">
+        <!-- Holds a reference to the currently selected TabButton -->
+        <attribute name="selected" value="null" />
+        
+        <method name="setSelection" args="selected">
+            this.selected = selected;
+            this.selected.setAttribute('isselected',true);
+            <![CDATA[
+            for (var i=0;i<this.subviews.length;i++){
+                if(this.subviews[i]!=selected){
+                    this.subviews[i].setAttribute('isselected',false);
+                    this.subviews[i].onmouseout.sendEvent();
+                }
+            }
+            ]]>
+        </method>        
+        <basedokeostabbutton iconresourcename="ksirc_rsc" width="100" labelid="242"
+            oninit="this.onmouseup.sendEvent()">
+            <handler name="sendClick">
+                Debug.write("onclick handler paint" );
+                this.parent.parent.changeMenu(1);
+            </handler>        
+        </basedokeostabbutton>
+        <basedokeostabbutton iconresourcename="ksirc_rsc" width="120" labelid="243">
+            <handler name="sendClick">
+                Debug.write("onclick handler paint" );
+                this.parent.parent.changeMenu(2);
+            </handler>
+        </basedokeostabbutton>        
+    </view>
+    
+    <method name="changeMenu" args="menuId">
+        if (menuId==1){
+            this._paintmenu.setAttribute('visible',true);
+            this._painttoolsPalette.setAttribute('visible',true);
+            this._documentmenu.setAttribute('visible',false);
+            this._documenttoolsPalette.setAttribute('visible',false);
+        } else if (menuId==2){
+            this._paintmenu.setAttribute('visible',false);
+            this._painttoolsPalette.setAttribute('visible',false);
+            this._documentmenu.setAttribute('visible',true);
+            this._documenttoolsPalette.setAttribute('visible',true);
+        }
+    </method>
+    
 	<!-- 
 		Menubar with tool-icons
 	 -->
 
-	<view name="_paintmenu" layout="axis:x;spacing:2;inset:2" x="0" y="38" height="30" width="652"
-        bgcolor="$once{canvas.baseMousecolorizer}"  >
-		<attribute name="selectedButton" value="null" />
-		<method name="selectButton" args="obj,bool">		
-			if (this.selectedButton!=null){
-				this.selectedButton.setAttribute('isselected',false);
-				this.selectedButton.onmouseout.sendEvent();		
-			} 
-			if (bool){
-				this.selectedButton=obj;	
-				this.selectedButton.setAttribute('isselected',true);	
-				this.selectedButton.setResourceNumber(3);
-			}
-		</method>
-		<drawchoosemodir y="4" name="b3" modi="plain" resourceN="plain" labelid="69" />
-		<drawsimpleclick y="4" name="b13" modi="saveobj" resourceN="saveobj" labelid="197" />
-		<drawchooseseperator y="4" />
-		<drawdoandundo y="4" name="b4" doredo="false" resourceN="revert" enabled="${ parent.parent._drawarea.hasprevious }" labelid="70" />
-		<drawdoandundo y="4" name="b5" resourceN="next" enabled="${ parent.parent._drawarea.hasenext }" labelid="71" />
-		<drawchooseseperator y="4" />
-		<drawchoosemodir y="4" isselected="true" name="b1" modi="hand" resourceN="menupointer_rsc" isSelectablemodi="true" labelid="72" />		
-		<drawchoosemodir y="4" name="b6" modi="letter" resourceN="letter" isSelectablemodi="true" labelid="73" />
-		<drawchoosemodir y="4" name="b7" modi="paint" resourceN="paint" isSelectablemodi="true" labelid="74" />
-		<drawchoosemodir y="4" name="b8" modi="line" resourceN="line_rsc" isSelectablemodi="true" labelid="75" />
-		<drawchoosemodir y="4" name="b9" modi="uline" resourceN="uline_rsc" isSelectablemodi="true" labelid="76" />		
-        <drawchoosemodir y="4" name="b11" modi="rectangle" resourceN="rectangle" isSelectablemodi="true" labelid="77" />
-        <drawchoosemodir y="4" name="b12" modi="ellipse" resourceN="ellipse" isSelectablemodi="true" labelid="78" />
-		<drawchoosemodir y="4" name="b10" modi="drawarrow" resourceN="drawarrowicon_rsc" isSelectablemodi="true" labelid="79" />				
-		<drawchooseseperator y="4" />
-
-
-	</view>
-
-		<!--
-		<button height="20" y="2" text="JPEG" width="40" >
-			<handler name="onclick">
-				this.parent.parent._drawarea.catchSnapshot();
-			</handler>
-		</button>		
-		-->
+	<paintmenu name="_paintmenu" x="0" y="38" visible="true" />
+    
+    <documentmenu name="_documentmenu" x="0" y="38" visible="false" />
+    
 	<!-- 
-		The Content Area
+		The Content Area    
 	 -->
-    <view clip="true" width="654" height="492" y="68" name="_drawareaMask">
-	    <basedrawsave y="0" name="_drawarea" id="_drawarea" >
+    <view width="654" height="492" y="68" name="_drawareaMask" clip="true" >
+	    <basedrawsave y="0" name="_drawarea" id="_drawarea" width="654" height="492" >
             <handler name="onprogress" args="perc">
                 Debug.write("onprogress: ",perc);
                 this.parent.parent._progress.setProgress(perc);
             </handler>
-            
+            <handler name="onmousedown" >
+                
+            </handler>
             <handler name="setNewScreenUserName" args="value">
                 this.parent.parent._sharingClientName.setText(value);
             </handler>
@@ -281,9 +292,7 @@
                 this.parent.parent.sendObject = objectList;
                 this.parent.parent.sendMessageWithClientById.doCall();
             </method>
-        </basedrawsave>
-        <vscrollbar />
-        <hscrollbar />
+        </basedrawsave>  
 	</view>
     
         <netremotecallhib name="sendMessageWithClientById" funcname="sendMessageWithClientById"
@@ -302,137 +311,28 @@
 	<!-- 
 		Container for the bounding Box (selection Box)
 	 -->
-	<view name="boundboxesView" width="640" height="490" y="68" clip="true" />
+	<view name="boundboxesView" width="654" height="492" y="68" />
 
 	<!-- Context sensitive stuff -->
-	
-	<!-- Line -->
-	<drawcolorpicker x="340" y="42" defaultno="44"
-		visible="${ ( ( this.parent._drawarea.drawmodus=='line' ) ? true : false ) }">
-		<handler name="onnewcolor" args="c">
-			this.parent._drawarea.currentlinestroke = c;
-		</handler>
-	</drawcolorpicker>
-	<drawchoosesizeradio x="480" y="46" visible="${ ( ( this.parent._drawarea.drawmodus=='line' ) ? true : false ) }">
-		<handler name="onselect" args="val">
-			if (val.value=='1') this.parent._drawarea.currentlinelineWidth=1;
-			if (val.value=='2') this.parent._drawarea.currentlinelineWidth=5;
-			if (val.value=='3') this.parent._drawarea.currentlinelineWidth=10;
-		</handler>
-	</drawchoosesizeradio>
-	
-	<!-- Uline -->
-	<drawcolorpicker x="340" y="42" defaultno="46"
-		visible="${ ( ( this.parent._drawarea.drawmodus=='uline' ) ? true : false ) }">
-		<handler name="onnewcolor" args="c">
-			this.parent._drawarea.currentulinestroke = c;
-		</handler>
-	</drawcolorpicker>
-	<drawchoosesizeradioT x="480" y="46" visible="${ ( ( this.parent._drawarea.drawmodus=='uline' ) ? true : false ) }">
-		<handler name="onselect" args="val">
-			if (val.value=='1') this.parent._drawarea.currentulinelineWidth=5;
-			if (val.value=='2') this.parent._drawarea.currentulinelineWidth=10;
-			if (val.value=='3') this.parent._drawarea.currentulinelineWidth=20;
-		</handler>
-	</drawchoosesizeradioT>
-	
-	<!-- drawarrow -->
-	<drawcolorpicker x="340" y="42" defaultno="7"
-		visible="${ ( ( this.parent._drawarea.drawmodus=='drawarrow' ) ? true : false ) }">
-		<handler name="onnewcolor" args="c">
-			this.parent._drawarea.currentdrawarrowlinestroke = c;
-		</handler>
-	</drawcolorpicker>
-	
-	<!-- Paint -->
-	<drawcolorpicker x="340" y="42" defaultno="1"
-		visible="${ ( ( this.parent._drawarea.drawmodus=='paint' ) ? true : false ) }">
-		<handler name="onnewcolor" args="c">
-			this.parent._drawarea.currentlayerstroke = c;
-		</handler>
-	</drawcolorpicker>
-	<drawchoosesizeradio x="480" y="46" visible="${ ( ( this.parent._drawarea.drawmodus=='paint' ) ? true : false ) }">
-		<handler name="onselect" args="val">
-			if (val.value=='1') this.parent._drawarea.currentlayerlineWidth=1;
-			if (val.value=='2') this.parent._drawarea.currentlayerlineWidth=5;
-			if (val.value=='3') this.parent._drawarea.currentlayerlineWidth=10;
-		</handler>
-	</drawchoosesizeradio>
-	
-	<!-- letter -->
-	<drawcolorpicker  x="340" y="42" defaultno="1"
-		visible="${ ( ( this.parent._drawarea.drawmodus=='letter' ) ? true : false ) }">
-		<handler name="onnewcolor" args="c">
-			this.parent._drawarea.setAttribute('currentlayerletter',c);
-		</handler>
-	</drawcolorpicker>
-
-    <basechooseseicon resourceN="italic" x="420" y="42" visible="${ ( ( this.parent._drawarea.drawmodus=='letter' ) ? true : false ) }" labelid="86" >
-        <handler name="onclick">
-            this.parent._drawarea.setAttribute('italic',!this.parent._drawarea.getAttribute('italic'));
-        </handler>
-    </basechooseseicon>
-    <basechooseseicon resourceN="bold" x="446" y="42" visible="${ ( ( this.parent._drawarea.drawmodus=='letter' ) ? true : false ) }" labelid="87" >
-        <handler name="onclick">
-            this.parent._drawarea.setAttribute('bold',!this.parent._drawarea.getAttribute('bold'));
-        </handler>
-    </basechooseseicon>    
-
-	<combobox x="480" width="60" y="42" editable="false"
-        visible="${ ( ( this.parent._drawarea.drawmodus=='letter' ) ? true : false ) }">
-        <handler name="oninit">
-            this.addItem('4','4');
-            this.addItem('6','6');
-            this.addItem('8','8');
-            this.addItem('10','10');
-            this.addItem('15','15');
-            this.addItem('20','20');
-            this.addItem('25','25');
-            this.addItem('30','30');
-            this.addItem('40','40');
-            this.addItem('60','60');
-            this.addItem('80','80');
-            this.selectItem('10');
-        </handler>
-		<handler name="onselect" args="val">
-			this.parent._drawarea.setAttribute('currentlayersize',Number(this.getValue()));
-		</handler>
-	</combobox>	
+	<painttoolsPalette name="_painttoolsPalette" />
+    
+    
+	<!-- Context sensitive stuff -->
+	<documenttoolsPalette name="_documenttoolsPalette" />
+    
+</class>
+    
+    
     
 
-	<drawcolorpicker x="340" y="42" defaultno="1"
-		visible="${ ( ( this.parent._drawarea.drawmodus=='rectangle' ) ? true : false ) }">
-		<handler name="onnewcolor" args="c">
-			this.parent._drawarea.setAttribute('currentrectanglestroke',c);
-		</handler>
-	</drawcolorpicker>
-    <drawchoosesizeradio x="480" y="46" visible="${ ( ( this.parent._drawarea.drawmodus=='rectangle' ) ? true : false ) }">
-        <handler name="onselect" args="val">
-            if (val.value=='1') this.parent._drawarea.setAttribute('currentrectangleineWidth',1);
-            if (val.value=='2') this.parent._drawarea.setAttribute('currentrectangleineWidth',5);
-            if (val.value=='3') this.parent._drawarea.setAttribute('currentrectangleineWidth',10);
-        </handler>
-    </drawchoosesizeradio>  
-
-	<drawcolorpicker  x="340" y="42" defaultno="1"
-		visible="${ ( ( this.parent._drawarea.drawmodus=='ellipse' ) ? true : false ) }">
-		<handler name="onnewcolor" args="c">
-			this.parent._drawarea.setAttribute('currentellipsestroke',c);
-		</handler>
-	</drawcolorpicker>
-    <drawchoosesizeradio x="480" y="46" visible="${ ( ( this.parent._drawarea.drawmodus=='ellipse' ) ? true : false ) }">
-        <handler name="onselect" args="val">
-            if (val.value=='1') this.parent._drawarea.setAttribute('currentellipselineWidth',1);
-            if (val.value=='2') this.parent._drawarea.setAttribute('currentellipselineWidth',5);
-            if (val.value=='3') this.parent._drawarea.setAttribute('currentellipselineWidth',10);
-        </handler>
-    </drawchoosesizeradio>  
-<!--
-	<text name="_loading" text="Loading ... " fontsize="12" visible="false" x="${ parent.width-this.width }" y="24" bgcolor="white" />
- -->
-</class>
-
 	<!-- 
+
+		<button height="20" y="2" text="JPEG" width="40" >
+			<handler name="onclick">
+				this.parent.parent._drawarea.catchSnapshot();
+			</handler>
+		</button>		      
+        
 	<drawchoosemodir name="b8" modi="image" resourceN="imageIcon" labeltext="Image" />
 
 	 -->

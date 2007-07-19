@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<library>
+    
+<class name="basetoolbarmenu" extends="view" layout="axis:x;spacing:2;inset:2" 
+    height="30" width="652" bgcolor="$once{canvas.baseMousecolorizer}"  >
+    <attribute name="selectedButton" value="null" />
+    <method name="selectButton" args="obj,bool">		
+        if (this.selectedButton!=null){
+            this.selectedButton.setAttribute('isselected',false);
+            this.selectedButton.onmouseout.sendEvent();		
+        } 
+        if (bool){
+            this.selectedButton=obj;	
+            this.selectedButton.setAttribute('isselected',true);	
+            this.selectedButton.setResourceNumber(3);
+        }
+    </method>
+</class>  
+    
+</library>

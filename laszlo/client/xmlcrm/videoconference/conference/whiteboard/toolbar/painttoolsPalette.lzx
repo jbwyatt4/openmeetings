@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<library>
+    
+<class name="painttoolsPalette" extends="view" >
+        <!-- Line -->
+        <drawcolorpicker x="340" y="42" defaultno="44"
+            visible="${ ( ( this.parent.parent._drawareaMask._drawarea.drawmodus=='line' ) ? true : false ) }">
+            <handler name="onnewcolor" args="c">
+                this.parent.parent._drawareaMask._drawarea.currentlinestroke = c;
+            </handler>
+        </drawcolorpicker>
+        <drawchoosesizeradio x="480" y="46" visible="${ ( ( this.parent.parent._drawareaMask._drawarea.drawmodus=='line' ) ? true : false ) }">
+            <handler name="onselect" args="val">
+                if (val.value=='1') this.parent.parent._drawareaMask._drawarea.currentlinelineWidth=1;
+                if (val.value=='2') this.parent.parent._drawareaMask._drawarea.currentlinelineWidth=5;
+                if (val.value=='3') this.parent.parent._drawareaMask._drawarea.currentlinelineWidth=10;
+            </handler>
+        </drawchoosesizeradio>
+        
+        <!-- Uline -->
+        <drawcolorpicker x="340" y="42" defaultno="46"
+            visible="${ ( ( this.parent.parent._drawareaMask._drawarea.drawmodus=='uline' ) ? true : false ) }">
+            <handler name="onnewcolor" args="c">
+                this.parent.parent._drawareaMask._drawarea.currentulinestroke = c;
+            </handler>
+        </drawcolorpicker>
+        <drawchoosesizeradioT x="480" y="46" visible="${ ( ( this.parent.parent._drawareaMask._drawarea.drawmodus=='uline' ) ? true : false ) }">
+            <handler name="onselect" args="val">
+                if (val.value=='1') this.parent.parent._drawareaMask._drawarea.currentulinelineWidth=5;
+                if (val.value=='2') this.parent.parent._drawareaMask._drawarea.currentulinelineWidth=10;
+                if (val.value=='3') this.parent.parent._drawareaMask._drawarea.currentulinelineWidth=20;
+            </handler>
+        </drawchoosesizeradioT>
+        
+        <!-- drawarrow -->
+        <drawcolorpicker x="340" y="42" defaultno="7"
+            visible="${ ( ( this.parent.parent._drawareaMask._drawarea.drawmodus=='drawarrow' ) ? true : false ) }">
+            <handler name="onnewcolor" args="c">
+                this.parent.parent._drawareaMask._drawarea.currentdrawarrowlinestroke = c;
+            </handler>
+        </drawcolorpicker>
+        
+        <!-- Paint -->
+        <drawcolorpicker x="340" y="42" defaultno="1"
+            visible="${ ( ( this.parent.parent._drawareaMask._drawarea.drawmodus=='paint' ) ? true : false ) }">
+            <handler name="onnewcolor" args="c">
+                this.parent.parent._drawareaMask._drawarea.currentlayerstroke = c;
+            </handler>
+        </drawcolorpicker>
+        <drawchoosesizeradio x="480" y="46" visible="${ ( ( this.parent.parent._drawareaMask._drawarea.drawmodus=='paint' ) ? true : false ) }">
+            <handler name="onselect" args="val">
+                if (val.value=='1') this.parent.parent._drawareaMask._drawarea.currentlayerlineWidth=1;
+                if (val.value=='2') this.parent.parent._drawareaMask._drawarea.currentlayerlineWidth=5;
+                if (val.value=='3') this.parent.parent._drawareaMask._drawarea.currentlayerlineWidth=10;
+            </handler>
+        </drawchoosesizeradio>
+        
+        <!-- letter -->
+        <drawcolorpicker  x="340" y="42" defaultno="1"
+            visible="${ ( ( this.parent.parent._drawareaMask._drawarea.drawmodus=='letter' ) ? true : false ) }">
+            <handler name="onnewcolor" args="c">
+                this.parent.parent._drawareaMask._drawarea.setAttribute('currentlayerletter',c);
+            </handler>
+        </drawcolorpicker>
+    
+        <basechooseseicon resourceN="italic" x="420" y="42" visible="${ ( ( this.parent.parent._drawareaMask._drawarea.drawmodus=='letter' ) ? true : false ) }" labelid="86" >
+            <handler name="onclick">
+                this.parent.parent._drawareaMask._drawarea.setAttribute('italic',!this.parent.parent._drawareaMask._drawarea.getAttribute('italic'));
+            </handler>
+        </basechooseseicon>
+        <basechooseseicon resourceN="bold" x="446" y="42" visible="${ ( ( this.parent.parent._drawareaMask._drawarea.drawmodus=='letter' ) ? true : false ) }" labelid="87" >
+            <handler name="onclick">
+                this.parent.parent._drawareaMask._drawarea.setAttribute('bold',!this.parent.parent._drawareaMask._drawarea.getAttribute('bold'));
+            </handler>
+        </basechooseseicon>    
+    
+        <combobox x="480" width="60" y="42" editable="false"
+            visible="${ ( ( this.parent.parent._drawareaMask._drawarea.drawmodus=='letter' ) ? true : false ) }">
+            <handler name="oninit">
+                this.addItem('4','4');
+                this.addItem('6','6');
+                this.addItem('8','8');
+                this.addItem('10','10');
+                this.addItem('15','15');
+                this.addItem('20','20');
+                this.addItem('25','25');
+                this.addItem('30','30');
+                this.addItem('40','40');
+                this.addItem('60','60');
+                this.addItem('80','80');
+                this.selectItem('10');
+            </handler>
+            <handler name="onselect" args="val">
+                this.parent.parent._drawareaMask._drawarea.setAttribute('currentlayersize',Number(this.getValue()));
+            </handler>
+        </combobox>	
+        
+    
+        <drawcolorpicker x="340" y="42" defaultno="1"
+            visible="${ ( ( this.parent.parent._drawareaMask._drawarea.drawmodus=='rectangle' ) ? true : false ) }">
+            <handler name="onnewcolor" args="c">
+                this.parent.parent._drawareaMask._drawarea.setAttribute('currentrectanglestroke',c);
+            </handler>
+        </drawcolorpicker>
+        <drawchoosesizeradio x="480" y="46" visible="${ ( ( this.parent.parent._drawareaMask._drawarea.drawmodus=='rectangle' ) ? true : false ) }">
+            <handler name="onselect" args="val">
+                if (val.value=='1') this.parent.parent._drawareaMask._drawarea.setAttribute('currentrectangleineWidth',1);
+                if (val.value=='2') this.parent.parent._drawareaMask._drawarea.setAttribute('currentrectangleineWidth',5);
+                if (val.value=='3') this.parent.parent._drawareaMask._drawarea.setAttribute('currentrectangleineWidth',10);
+            </handler>
+        </drawchoosesizeradio>  
+    
+        <drawcolorpicker  x="340" y="42" defaultno="1"
+            visible="${ ( ( this.parent.parent._drawareaMask._drawarea.drawmodus=='ellipse' ) ? true : false ) }">
+            <handler name="onnewcolor" args="c">
+                this.parent.parent._drawareaMask._drawarea.setAttribute('currentellipsestroke',c);
+            </handler>
+        </drawcolorpicker>
+        <drawchoosesizeradio x="480" y="46" visible="${ ( ( this.parent.parent._drawareaMask._drawarea.drawmodus=='ellipse' ) ? true : false ) }">
+            <handler name="onselect" args="val">
+                if (val.value=='1') this.parent.parent._drawareaMask._drawarea.setAttribute('currentellipselineWidth',1);
+                if (val.value=='2') this.parent.parent._drawareaMask._drawarea.setAttribute('currentellipselineWidth',5);
+                if (val.value=='3') this.parent.parent._drawareaMask._drawarea.setAttribute('currentellipselineWidth',10);
+            </handler>
+        </drawchoosesizeradio>  
+</class>
+    
+</library>

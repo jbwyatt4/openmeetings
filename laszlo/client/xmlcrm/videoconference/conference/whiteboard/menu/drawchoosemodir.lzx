@@ -8,7 +8,7 @@
 	<attribute name="modi" value="" type="string" />
 	<attribute name="isSelectablemodi" value="false" type="boolean" />
 	<handler name="onclick">
-		this.parent.parent._drawarea.setModus(modi);
+		this.parent.parent._drawareaMask._drawarea.setModus(modi);
 		parent.selectButton(this,this.isSelectablemodi);
 	</handler>
 </class>
@@ -17,9 +17,9 @@
 	<attribute name="doredo" value="true" type="boolean" />
 	<handler name="onclick">
 		if(this.doredo){
-			this.parent.parent._drawarea.doredo();
+			this.parent.parent._drawareaMask._drawarea.doredo();
 		} else {
-			this.parent.parent._drawarea.undoredo();
+			this.parent.parent._drawareaMask._drawarea.undoredo();
 		}
 	</handler>
 </class>
@@ -27,7 +27,7 @@
 <class name="drawsimpleclick" extends="basechooseseicon" width="24" height="24">
 	<attribute name="modi" value="" type="string" />
 	<handler name="onclick">
-		this.parent.parent._drawarea.doAction(this.modi);
+		this.parent.parent._drawareaMask._drawarea.doAction(this.modi);
 	</handler>
 </class>
 	

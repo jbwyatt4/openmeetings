@@ -3,7 +3,7 @@
 
 <!-- Buttons -->
 <class name="charttabutton" extends="basedokeostabbutton" width="84" iconresourcename="ksirc_rsc" 
-	iconname="Chat" >
+	labelid="244" >
 	<handler name="sendClick">
 		Debug.write("onclick handler chat" );
 		this.parent.parent._tabscontent.clearContent();
@@ -17,7 +17,8 @@
 </class>
 
 <!-- Buttons -->
-<class name="participantstabutton" extends="basedokeostabbutton" width="84" iconresourcename="kuser_rsc" iconname="Members">
+<class name="participantstabutton" extends="basedokeostabbutton" width="84" 
+    iconresourcename="kuser_rsc" labelid="246" >
 	<handler name="sendClick">
 		Debug.write("onclick handler participants" );
 		this.parent.parent._tabscontent.clearContent();
@@ -27,7 +28,8 @@
 </class>
 
 <!-- Buttons -->
-<class name="librarytabutton" extends="basedokeostabbutton" width="84" iconresourcename="xoffice22_rsc" iconname="Slides">
+<class name="librarytabutton" extends="basedokeostabbutton" width="84" 
+    iconresourcename="xoffice22_rsc" labelid="245" >
 	<handler name="sendClick">
 		Debug.write("onclick handler library" );
 		this.parent.parent._tabscontent.clearContent();
@@ -37,7 +39,8 @@
 </class>
 
 <!-- Buttons -->
-<class name="uploadtabutton" extends="basedokeostabbutton" width="84" iconresourcename="xoffice22_rsc" iconname="Slides">
+<class name="uploadtabutton" extends="basedokeostabbutton" width="84" 
+    iconresourcename="xoffice22_rsc" labelid="245" >
 	<handler name="sendClick">
 		Debug.write("onclick handler uploadtab" );
 		this.parent.parent._tabscontent.clearContent();
@@ -47,7 +50,8 @@
 </class>
 
 <!-- Buttons -->
-<class name="wwwtabutton" extends="basedokeostabbutton" width="84" iconresourcename="www" iconname="Browser">
+<class name="wwwtabutton" extends="basedokeostabbutton" width="84" 
+    iconresourcename="www" iconname="Browser">
 	<handler name="sendClick">
 		Debug.write("onclick handler wwwtab" );
 		this.parent.parent._tabscontent.clearContent();

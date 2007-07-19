@@ -1,4 +1,4 @@
-#Wed Jun 27 16:55:20 CEST 2007
+#Thu Jul 19 12:05:24 CEST 2007
 eclipse.preferences.version=1
 encoding//xmlcrm/newstreaming/camera.lzx=UTF-8
 encoding//xmlcrm/newstreaming/mediadevice.lzx=UTF-8
@@ -57,8 +57,19 @@ encoding//xmlcrm/videoconference/conference/whiteboard/base/basedrawsave.lzx=UTF
 encoding//xmlcrm/videoconference/conference/whiteboard/base/basedrawwords.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/whiteboard/base/library.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/whiteboard/helper/boundingBoxAll.lzx=UTF-8
+encoding//xmlcrm/videoconference/conference/whiteboard/menu/choosedrawareaobjectcombobox.lzx=UTF-8
+encoding//xmlcrm/videoconference/conference/whiteboard/menu/drawareaalterposition.lzx=UTF-8
+encoding//xmlcrm/videoconference/conference/whiteboard/menu/drawareaobjectcombobox.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/whiteboard/menu/drawchoosemodir.lzx=UTF-8
+encoding//xmlcrm/videoconference/conference/whiteboard/menu/drawchoosesizeradio.lzx=UTF-8
+encoding//xmlcrm/videoconference/conference/whiteboard/menu/drawcolorpicker.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/whiteboard/test_whiteboard.lzx=UTF-8
+encoding//xmlcrm/videoconference/conference/whiteboard/toolbar/basetoolbarmenu.lzx=UTF-8
+encoding//xmlcrm/videoconference/conference/whiteboard/toolbar/documentmenu.lzx=UTF-8
+encoding//xmlcrm/videoconference/conference/whiteboard/toolbar/documenttoolsPalette.lzx=UTF-8
+encoding//xmlcrm/videoconference/conference/whiteboard/toolbar/library.lzx=UTF-8
+encoding//xmlcrm/videoconference/conference/whiteboard/toolbar/paintmenu.lzx=UTF-8
+encoding//xmlcrm/videoconference/conference/whiteboard/toolbar/painttoolsPalette.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/whiteboard/whiteboard.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/whiteboard/windows/library.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/whiteboard/windows/loadwhiteboardwindow.lzx=UTF-8
