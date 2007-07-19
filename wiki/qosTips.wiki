@@ -1,0 +1,30 @@
+#summary QoS tips to improve the network performances for OpenMeetings
+#labels Configuration,Featured
+
+
+= Introduction =
+The Quality of Service (QoS) is important for the online meetings, especially for the voice : http://en.wikipedia.org/wiki/Quality_of_service
+This page contains several tips to improve the network performances.
+
+= On the computer of each user =
+/!\ This works only if you are alone on your internet connexion. If you are several users on the same connexion, read the next section.
+
+ * Install a QoS software (For example [http://bandwidthcontroller.com/trafficShaperXp.html Traffic shapper] for Windows or use qos4openmeentings.sh script for linux)
+
+If you don't wish to install a QoS software, some tips to improve network performances :
+ # Close P2P softwares (Emule, bittorrent...) ([http://en.wikipedia.org/wiki/Comparison_of_file_sharing_applications A list of P2P softwares])
+ # Stop downloads
+ # Close Skype (Skype uses your bandwidth for the other users)
+ # Close the web browser window (some websites launches the download of some videos)
+
+= On the internet gateway =
+Active the QoS feature of your internet gateway.
+Some explanations for each system :
+== Debian/Ubuntu systems ==
+ # Copy the file [http://openmeetings.googlecode.com/svn/branches/dev/xmlcrm/java/QoS/qos4openmeetings.sh  qos4openmeetings.sh] in /etc/network/if-pre-up.d/
+ # modify theses variables in the qos4openmeetings.sh file :
+  * DEV: the name of the network interface connected on the Internet
+  * RATEUP: the maximum upload rate (in kbit/s)
+  *VOIPIPS: the IP address of your openmeetings server
+ # type in a console: sudo chmod +x /etc/network/if-pre-up.d/qos4openmeetings.sh
+ # type: /etc/network/if-pre-up.d/qos4openmeetings.sh
