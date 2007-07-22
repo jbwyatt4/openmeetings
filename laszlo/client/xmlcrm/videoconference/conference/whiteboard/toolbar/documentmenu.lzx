@@ -3,18 +3,20 @@
     
 <class name="documentmenu" extends="basetoolbarmenu" >
     
-    <drawchoosemodir y="4" name="b3" modi="plain" resourceN="plain" labelid="69" />
-    <drawsimpleclick y="4" name="b13" modi="saveobj" resourceN="saveobj" labelid="197" />
-    
+    <drawchoosemodir y="4" name="b1" modi="plain" resourceN="plain" labelid="69" />
+    <drawsimpleclick y="4" name="b2" modi="saveobj" resourceN="saveobj" labelid="197" />
+
     <drawchooseseperator y="4" />
-    
-    <drawdoandundo y="4" name="b4" doredo="false" resourceN="revert" 
-        enabled="${ parent.parent._drawareaMask._drawarea.hasprevious }" labelid="70" />
-    <drawdoandundo y="4" name="b5" resourceN="next" 
-        enabled="${ parent.parent._drawareaMask._drawarea.hasenext }" labelid="71" />
-    
-    <drawchooseseperator y="4" />
-    
+	
+    <drawchoosemodir y="4" name="b3" modi="doc_first" resourceN="doc_first" 
+        labelid="72" />		
+    <drawchoosemodir y="4" name="b4" modi="doc_pre" resourceN="doc_pre" 
+        labelid="72" />			
+    <drawchoosemodir y="4" name="b5" modi="doc_next" resourceN="doc_next" 
+        labelid="72" />		
+    <drawchoosemodir y="4" name="b6" modi="doc_last" resourceN="doc_last" 
+        labelid="72" />		
+		
 </class>
     
 </library>

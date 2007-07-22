@@ -26,7 +26,12 @@
         //new listimagedrag(this._table._listcontent,{uploadmodul:this.uploadmodul,size:size,filename:filename,inserted:inserted,isimage:isimage});
         new listppt(this._table._listcontent,{uploadmodul:this.uploadmodul,filename:filename+ext,filenamePure:filename,ext:ext});
     </method>
-    
+	
+    <method name="addSWFFile" args="filename,ext">
+        //new listimagedrag(this._table._listcontent,{uploadmodul:this.uploadmodul,size:size,filename:filename,inserted:inserted,isimage:isimage});
+        new listppt(this._table._listcontent,{uploadmodul:this.uploadmodul,filename:filename+ext,filenamePure:filename,ext:ext});
+    </method>
+	    
     <method name="resetList">
     	this._table.destroy();
     	new imagelistinnertable(this,{name:'_table'});

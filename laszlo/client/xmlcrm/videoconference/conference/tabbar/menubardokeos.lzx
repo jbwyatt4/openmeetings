@@ -28,17 +28,6 @@
 </class>
 
 <!-- Buttons -->
-<class name="librarytabutton" extends="basedokeostabbutton" width="84" 
-    iconresourcename="xoffice22_rsc" labelid="245" >
-	<handler name="sendClick">
-		Debug.write("onclick handler library" );
-		this.parent.parent._tabscontent.clearContent();
-		new librarytab(this.parent.parent._tabscontent,{name:'_contenttab'});
-		canvas.tabisInited=3;
-	</handler>
-</class>
-
-<!-- Buttons -->
 <class name="uploadtabutton" extends="basedokeostabbutton" width="84" 
     iconresourcename="xoffice22_rsc" labelid="245" >
 	<handler name="sendClick">
@@ -46,17 +35,6 @@
 		this.parent.parent._tabscontent.clearContent();
 		new uploadtab(this.parent.parent._tabscontent,{name:'_contenttab'});
 		canvas.tabisInited=4;
-	</handler>
-</class>
-
-<!-- Buttons -->
-<class name="wwwtabutton" extends="basedokeostabbutton" width="84" 
-    iconresourcename="www" iconname="Browser">
-	<handler name="sendClick">
-		Debug.write("onclick handler wwwtab" );
-		this.parent.parent._tabscontent.clearContent();
-		new wwwtab(this.parent.parent._tabscontent,{name:'_contenttab'});
-		canvas.tabisInited=5;
 	</handler>
 </class>
 
@@ -107,14 +85,8 @@
 	</method>
 	
 	<charttabutton />
-	<!-- 
-	<librarytabutton />
-	 -->
 	<uploadtabutton />
 	<participantstabutton />
-	<!-- 
-	<wwwtabutton />
-	 -->
 
 </class>
 

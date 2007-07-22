@@ -42,6 +42,11 @@
 <resource name="reload_small_rsc" src="resources/reload_small.png" />
 <resource name="folder_yellow_rsc" src="resources/x-office-presentation.png" />
 <resource name="folder_top_rsc" src="resources/top.png" />
+	
+<resource name="doc_next" src="resources/go-next.png" />
+<resource name="doc_pre" src="resources/go-previous.png" />
+<resource name="doc_first" src="resources/go-first.png" />
+<resource name="doc_last" src="resources/go-last.png" />				
 
 <resource name="filedelete_rsc" src="resources/delete.png" />
     

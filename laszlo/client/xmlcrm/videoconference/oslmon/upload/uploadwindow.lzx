@@ -25,7 +25,7 @@
  	<fileupload name="myFileUpload" isOnlyImage="${ this.parent.isOnlyImage }" 
  		 isOnlyPpt="${ this.parent.isOnlyPpt }">
 		<method name="onComplete" args="fr">
-			Debug.write("oncomplete");
+			Debug.write("oncomplete ",fr);
 			this.parent.progressBar.setValue(100);
 			this.parent.upload.setAttribute('enabled', false);
 			this.parent.upload.setAttribute("visible",false);
