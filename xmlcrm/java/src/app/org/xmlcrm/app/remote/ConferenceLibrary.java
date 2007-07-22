@@ -48,6 +48,7 @@ public class ConferenceLibrary {
 		fileExtensions.put("ext11", ".xls");
 		fileExtensions.put("ext12", ".sxi");
 		fileExtensions.put("ext13", ".pdf");
+		fileExtensions.put("ext14", ".swf");
 	}
 	
 	public List getListOfFiles(String SID, String moduleName,String parentFolder,String room, String domain ) {
