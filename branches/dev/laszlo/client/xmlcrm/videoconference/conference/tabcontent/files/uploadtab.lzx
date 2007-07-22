@@ -30,10 +30,13 @@
                 
                 if (value[1]!=null){
 	                for(var eg=0;eg<value[1].length;eg++){
+					    Debug.write("value[1][eg]: ",value[1][eg]);
 					    if(value[1][eg][2]=='.wml'){
 					    	_imageslistdraw.addWML(value[1][eg][1],value[1][eg][2]);
 					    } else if(value[1][eg][5]!='n'){
 							_imageslistdraw.addFile(value[1][eg][1],value[1][eg][2]);
+						} else if(value[1][2]=='.swf'){
+							_imageslistdraw.addSWFFile(value[1][eg][1],value[1][eg][2]);
 						} else {
 							_imageslistdraw.addPpt(value[1][eg][1],value[1][eg][2]);
 						} 

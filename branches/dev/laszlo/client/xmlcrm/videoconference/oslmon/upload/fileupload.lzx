@@ -20,7 +20,10 @@
 			fr.onIOError = function(fr){
 				_root.Debug.write('onIOError invoked');
 			}
-			fr.addListener(invoker);
+			function callbackFunction ( e ) {
+				_root.Debug.write( e.data );
+			}			
+			fr.addListener(invoker, callbackFunction);
 		]]>
 		</method>
 
@@ -86,7 +89,7 @@
     
     <method name="onOpen" args="fr">
         <![CDATA[
-            Debug.write('onOpen invoked');
+            Debug.write('onOpen invoked',fr);
         ]]>
     </method>
     
