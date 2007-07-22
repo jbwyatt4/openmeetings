@@ -21,12 +21,13 @@ import org.apache.commons.lang.StringUtils;
 import org.xmlcrm.app.data.basic.Sessionmanagement;
 import org.xmlcrm.app.data.user.Usermanagement;
 import org.xmlcrm.utils.stringhandlers.StringComparer;
+import org.xmlcrm.app.documents.GenerateThumbs;
+import org.xmlcrm.app.documents.GeneratePDF;
+import org.xmlcrm.app.documents.GenerateImage;
 
 public class UploadHandler extends HttpServlet {
 
 	private static final Log log = LogFactory.getLog(UploadHandler.class);
-
-	private int recursiveNumber = 0;
 
 	protected HashMap<String, String> fileExtensions = new HashMap<String, String>();
 
@@ -83,12 +84,13 @@ public class UploadHandler extends HttpServlet {
 		try {
 
 			if (httpServletRequest.getContentLength() > 0) {
+				
+				String returnError = "<?xml version='1.0' encoding='UTF-8' ?>";
 
 				String sid = httpServletRequest.getParameter("sid");
 				if (sid == null) {
 					sid = "default";
 				}
-				System.out.println("sid: " + sid);
 
 				Long users_id = Sessionmanagement.getInstance().checkSession(sid);
 				long User_LEVEL = Usermanagement.getInstance().getUserLevelByID(users_id);
@@ -115,16 +117,10 @@ public class UploadHandler extends HttpServlet {
 					//Get the current User-Directory
 
 					String current_dir = getServletContext().getRealPath("/");
-					System.out.println("Current_dir: " + current_dir);
-
-					String working_dir = "";
-					String working_dirppt = "";
-					System.out.println(MultipartRequest.MAX_READ_BYTES);
-
-					working_dir = current_dir + File.separatorChar + "upload"
+					String working_dir = current_dir + File.separatorChar + "upload"
 							+ File.separatorChar + roomName
 							+ File.separatorChar;
-					working_dirppt = current_dir + File.separatorChar
+					String working_dirppt = current_dir + File.separatorChar
 							+ "uploadtemp" + File.separatorChar + roomName
 							+ File.separatorChar;
 
@@ -165,11 +161,8 @@ public class UploadHandler extends HttpServlet {
 
 						//check if this is a a file that can be converted by openoffice-service
 						boolean canBeConverted = checkForConvertion(newFileSystemExtName);
-
 						boolean isPDF = checkForPDF(newFileSystemExtName);
-
 						boolean isImage = checkForImage(newFileSystemExtName);
-
 						boolean isJpg = checkForJpg(newFileSystemExtName);
 
 						String completeName = "";
@@ -182,11 +175,8 @@ public class UploadHandler extends HttpServlet {
 							return;
 						}
 
-						log.debug("******** completeName: " + completeName + canBeConverted);
-
 						File f = new File(completeName + newFileSystemExtName);
 						if (f.exists()) {
-							System.out.println("File exisitert bereits");
 							int recursiveNumber = 0;
 							String tempd = completeName + "_" + recursiveNumber;
 							while (f.exists()) {
@@ -196,13 +186,9 @@ public class UploadHandler extends HttpServlet {
 
 							}
 							completeName = tempd;
-							System.out.println("Neuer Folder name "+ completeName);
 						}
 
-						System.out.println("*****2 ***** completeName: "+ completeName + newFileSystemExtName);
-						log.debug("*****2 ******* completeName: "+ completeName + newFileSystemExtName);
 						FileOutputStream fos = new FileOutputStream(completeName + newFileSystemExtName);
-
 						byte[] buffer = new byte[1024];
 						int len = 0;
 
@@ -216,64 +202,25 @@ public class UploadHandler extends HttpServlet {
 						is.close();
 
 						if (canBeConverted) {
-							//automatically convert to slides
-							System.out.println("canBeConverted New Folder name "
-											+ completeName);
-
-							HashMap<String, String> ll = convertPDF(
-									newFileSystemName + newFileSystemExtName,
-									roomName, newFileSystemName, true);
-
-							String outputfolder = ll.get("outputfolder");
-							//now it should be completed so copy that file to the expected location
-							System.out.println("Upload destinationFolder " + outputfolder);
-
-							//FileHelper fileHelper = new FileHelper();
-
-							File pptToBeMoved = new File(completeName
-									+ newFileSystemExtName);
-
-//							System.out.println("outputfolder " + outputfolder);
-//							System.out.println("newFileSystemName "+ newFileSystemName);
-//							System.out.println("newFileSystemExtName "+ newFileSystemExtName);
-
-							File pptWhereToMove = new File(outputfolder+ newFileSystemName + newFileSystemExtName);
-							pptWhereToMove.createNewFile();
-
-							FileHelper.moveRec(pptToBeMoved, pptWhereToMove);
-
+							//convert to pdf, thumbs, swf and xml-description
+							returnError += GeneratePDF.getInstance().convertPDF(current_dir,
+									newFileSystemName + newFileSystemExtName, roomName, 
+									newFileSystemName, true, completeName, newFileSystemExtName);
 						} else if (isPDF) {
-							//automatically convert to slides
-//							System.out.println("isPDF New Folder name "+ completeName);
-
-							HashMap<String, String> ll = convertPDF(newFileSystemName + newFileSystemExtName,
-									roomName, newFileSystemName, false);
-
-							String outputfolder = ll.get("outputfolder");
-							//now it should be completed so copy that file to the expected location
-							System.out.println("Upload destinationFolder "+ outputfolder);
-
-							//FileHelper fileHelper = new FileHelper();
-
-							File pptToBeMoved = new File(completeName+ newFileSystemExtName);
-
-							System.out.println("outputfolder " + outputfolder);
-							System.out.println("newFileSystemName "+ newFileSystemName);
-							System.out.println("newFileSystemExtName "+ newFileSystemExtName);
-
-							File pptWhereToMove = new File(outputfolder + newFileSystemName + newFileSystemExtName);
-							pptWhereToMove.createNewFile();
-
-							FileHelper.moveRec(pptToBeMoved, pptWhereToMove);
-
+							//convert to thumbs, swf and xml-description
+							returnError += GeneratePDF.getInstance().convertPDF(current_dir, 
+									newFileSystemName + newFileSystemExtName, roomName, 
+									newFileSystemName, false, completeName, newFileSystemExtName);						
 						} else if (isImage) {
 							//convert it to JPG
-							System.out.println("isImage New Folder name "+ completeName);
-							convertImage(newFileSystemName+ newFileSystemExtName, roomName,newFileSystemName, false);
-
+							returnError += GenerateImage.getInstance().convertImage(current_dir, 
+									newFileSystemName+ newFileSystemExtName, 
+									roomName,newFileSystemName, false);
 						} else if (isJpg) {
-							this.generateThumb(completeName);
+							returnError += GenerateThumbs.getInstance().generateThumb(current_dir, completeName);
 						}
+						
+						httpServletResponse.getWriter().print(returnError);
 					}
 				}
 			}
@@ -329,319 +276,6 @@ public class UploadHandler extends HttpServlet {
 		return false;
 	}
 
-	private HashMap<String, String> convertPDF(String fileNameExt,
-			String roomName, String fileNameShort, boolean fullProcessing)
-			throws Exception {
-		//DocumentLocalConverter documentLocalConverter = new DocumentLocalConverter();
 
-		//Get the current Directory
-		String current_dir = getServletContext().getRealPath("/");
-		//System.out.println("Current_dir: "+current_dir);
-
-		String working_imgdir = "";
-		String working_pptdir = "";
-		//System.out.println(MultipartRequest.MAX_READ_BYTES);
-
-		working_imgdir = current_dir + "upload" + File.separatorChar + roomName
-				+ File.separatorChar;
-		working_pptdir = current_dir + "uploadtemp" + File.separatorChar
-				+ roomName + File.separatorChar;
-
-		String fileFullPath = working_pptdir + fileNameExt;
-
-		String newFolderName = fileNameExt.substring(0,
-				fileNameExt.length() - 4);
-		//System.out.println(newFolderName);
-		String destinationFolder = working_imgdir + newFolderName;
-
-		//System.out.println(destinationFolder);
-		File f = new File(destinationFolder + File.separatorChar);
-		if (f.exists()) {
-			//System.out.println("Folder exisitert bereits");
-			recursiveNumber = 0;
-			String tempd = destinationFolder + "_" + recursiveNumber;
-			while (f.exists()) {
-				recursiveNumber++;
-				tempd = destinationFolder + "_" + recursiveNumber;
-				f = new File(tempd);
-
-			}
-			destinationFolder = tempd;
-			//System.out.println("Neuer Folder name "+destinationFolder);
-		}
-		//System.out.println(destinationFolder+File.separatorChar+" ++++ "+f.exists());
-		boolean b = f.mkdir();
-		if (b) {
-			//System.out.println("Folder wurde angelegt");
-		} else {
-			System.out.println("ERROR: Folder konnte nicht angelegt werden "
-					+ f.getAbsolutePath());
-		}
-		String outputfolder = destinationFolder + File.separatorChar;
-		destinationFolder = destinationFolder + File.separatorChar;
-
-		HashMap<String, String> ll = new HashMap<String, String>();
-		ll.put("destinationFolder", destinationFolder);
-		ll.put("pptFullPath", fileFullPath);
-		ll.put("outputfolder", outputfolder);
-
-		//System.out.println("destinationFolder: "+destinationFolder+"/"+"   ### pptFullPath "+fileFullPath);
-		//System.out.println("########### invoke NEW Converting");	
-
-		String newPDF = null;
-		if (fullProcessing) {
-			newPDF = this.doConvertExec(fileFullPath, destinationFolder,
-					fileNameShort);
-		} else {
-			newPDF = this.convertJpg(fileFullPath, destinationFolder);
-		}
-		if (!newPDF.equals(null)) {
-			System.out.println("<ERROR2>");
-			System.out.println(newPDF);
-			System.out.println("<ERROR2>");
-		}
-		//documentLocalConverter.startConverting(pptFullPath, destinationFolder);
-
-		return ll;
-	}
-
-	private String convertImage(String fileNameExt, String roomName,
-			String fileNameShort, boolean fullProcessing) throws Exception {
-		//DocumentLocalConverter documentLocalConverter = new DocumentLocalConverter();
-
-		//Get the current Directory
-		String current_dir = getServletContext().getRealPath("/");
-		//System.out.println("Current_dir: "+current_dir);
-
-		String working_imgdir = "";
-		String working_pptdir = "";
-		//System.out.println(MultipartRequest.MAX_READ_BYTES);
-
-		working_imgdir = current_dir + "upload" + File.separatorChar + roomName
-				+ File.separatorChar;
-		working_pptdir = current_dir + "uploadtemp" + File.separatorChar
-				+ roomName + File.separatorChar;
-
-		String fileFullPath = working_pptdir + fileNameExt;
-
-		String newFileName = fileNameExt.substring(0, fileNameExt.length() - 4);
-		String newFileNameExtensionOnly = fileNameExt.substring(fileNameExt
-				.length() - 4, fileNameExt.length());
-
-		System.out.println("File to Check: " + working_imgdir + newFileName
-				+ newFileNameExtensionOnly);
-
-		File f = new File(working_imgdir + newFileName
-				+ newFileNameExtensionOnly);
-		if (f.exists()) {
-			System.out.println("File exisitert bereits");
-			int recursiveNumber = 0;
-			String tempd = newFileName + "_" + recursiveNumber;
-			while (f.exists()) {
-				recursiveNumber++;
-				tempd = newFileName + "_" + recursiveNumber;
-				f = new File(working_imgdir + tempd + newFileNameExtensionOnly);
-
-			}
-			newFileName = tempd;
-			System.out.println("Neuer File name " + newFileName);
-		}
-
-		String destinationFile = working_imgdir + newFileName;
-
-		//System.out.println("destinationFolder: "+destinationFolder+"/"+"   ### pptFullPath "+fileFullPath);
-		//System.out.println("########### invoke NEW Converting");	
-
-		String newImage = null;
-		newImage = this.convertSingleJpg(fileFullPath, destinationFile);
-
-		if (!newImage.equals(null)) {
-			System.out.println("<ERROR2>");
-			System.out.println(newImage);
-			System.out.println("<ERROR2>");
-		}
-
-		//Delete old one
-		File fToDelete = new File(fileFullPath);
-		fToDelete.delete();
-
-		return newImage;
-	}
-
-	//Start oo-service external cause it makes no sense here
-	private String doConvertExec(String fileFullPath, String destinationFolder,
-			String outputfile) {
-		try {
-			String current_dir = getServletContext().getRealPath("/");
-			String runtimeFile = "jodconverter.bat";
-			String command = "cmd.exe /c start "+current_dir + "jod" + File.separatorChar
-				+ runtimeFile + " java " + fileFullPath + " "
-				+ destinationFolder + outputfile + ".pdf " + current_dir
-				+ "jod" + File.separatorChar;
-			
-			if (System.getProperty("os.name").toUpperCase().indexOf("WINDOWS") == -1) {
-				runtimeFile = "jodconverter.sh";
-				command = current_dir + "jod" + File.separatorChar
-					+ runtimeFile + " java " + fileFullPath + " "
-					+ destinationFolder + outputfile + ".pdf " + current_dir
-					+ "jod" + File.separatorChar;				
-			}
-			Runtime rt = Runtime.getRuntime();
-
-			// String command2 = "java -cp .:"+pre+"ridl.jar:"+pre+"js.jar:"+pre+"juh.jar:"+pre+"jurt.jar:"+pre+"jut.jar:"+pre+"java_uno.jar:"+pre+"java_uno_accessbridge.jar:"+pre+"edtftpj-1.5.2.jar:"+pre+"unoil.jar:"+pre+"dokeosupload.jar org.dokeos.ooconverter.DocumentLocalConverterMain "+pptFullPath+" "+destinationFolder;
-			System.out.println("command2: " + command);
-			Process proc = rt.exec(command);
-			InputStream stderr = proc.getErrorStream();
-			InputStreamReader isr = new InputStreamReader(stderr);
-			BufferedReader br = new BufferedReader(isr);
-			String line = null;
-			System.out.println("<ERROR>");
-			while ((line = br.readLine()) != null)
-				System.out.println(line);
-			System.out.println("</ERROR>");
-			int exitVal = proc.waitFor();
-			System.out.println("Process exitValue: " + exitVal);
-
-			this.convertJpg(destinationFolder + outputfile + ".pdf",
-					destinationFolder);
-
-			return destinationFolder + outputfile + ".pdf";
-		} catch (Throwable t) {
-			t.printStackTrace();
-		}
-		return null;
-	}
-
-	private String convertJpg(String inputFile, String outputpath) {
-		try {
-			String current_dir = getServletContext().getRealPath("/");
-			String runtimeFile = "pngconverter.bat";
-			if (System.getProperty("os.name").toUpperCase().indexOf("WINDOWS") == -1) {
-				runtimeFile = "pngconverter.sh";
-			}
-			Runtime rt = Runtime.getRuntime();
-
-			String command = current_dir + "jod" + File.separatorChar
-					+ runtimeFile + " " + inputFile + " " + outputpath
-					+ "pages-%03d.jpg";
-			// String command2 = "java -cp .:"+pre+"ridl.jar:"+pre+"js.jar:"+pre+"juh.jar:"+pre+"jurt.jar:"+pre+"jut.jar:"+pre+"java_uno.jar:"+pre+"java_uno_accessbridge.jar:"+pre+"edtftpj-1.5.2.jar:"+pre+"unoil.jar:"+pre+"dokeosupload.jar org.dokeos.ooconverter.DocumentLocalConverterMain "+pptFullPath+" "+destinationFolder;
-			System.out.println("command3: " + command);
-			Process proc = rt.exec(command);
-			InputStream stderr = proc.getErrorStream();
-			InputStreamReader isr = new InputStreamReader(stderr);
-			BufferedReader br = new BufferedReader(isr);
-			String line = null;
-			System.out.println("<ERROR3>");
-			while ((line = br.readLine()) != null)
-				System.out.println(line);
-			System.out.println("</ERROR3>");
-			int exitVal = proc.waitFor();
-			System.out.println("Process exitValue: " + exitVal);
-			
-			this.generateBatchThumb(inputFile,outputpath);
-			
-			return inputFile;
-		} catch (Throwable t) {
-			t.printStackTrace();
-		}
-		return null;
-	}
-
-	private String convertSingleJpg(String inputFile, String outputfile) {
-		try {
-			String current_dir = getServletContext().getRealPath("/");
-			String runtimeFile = "pngconverter.bat";
-
-			if (System.getProperty("os.name").toUpperCase().indexOf("WINDOWS") == -1) {
-				runtimeFile = "pngconverter.sh";
-			}
-			Runtime rt = Runtime.getRuntime();
-
-			String command = current_dir + "jod" + File.separatorChar
-					+ runtimeFile + " " + inputFile + " " + outputfile + ".jpg";
-			// String command2 = "java -cp .:"+pre+"ridl.jar:"+pre+"js.jar:"+pre+"juh.jar:"+pre+"jurt.jar:"+pre+"jut.jar:"+pre+"java_uno.jar:"+pre+"java_uno_accessbridge.jar:"+pre+"edtftpj-1.5.2.jar:"+pre+"unoil.jar:"+pre+"dokeosupload.jar org.dokeos.ooconverter.DocumentLocalConverterMain "+pptFullPath+" "+destinationFolder;
-			System.out.println("command3: " + command);
-			Process proc = rt.exec(command);
-			InputStream stderr = proc.getErrorStream();
-			InputStreamReader isr = new InputStreamReader(stderr);
-			BufferedReader br = new BufferedReader(isr);
-			String line = null;
-			System.out.println("<ERROR3>");
-			while ((line = br.readLine()) != null)
-				System.out.println(line);
-			System.out.println("</ERROR3>");
-			int exitVal = proc.waitFor();
-			System.out.println("Process exitValue: " + exitVal);
-			this.generateThumb(outputfile);
-			return inputFile;
-		} catch (Throwable t) {
-			t.printStackTrace();
-		}
-		return null;
-	}
-
-	private void generateThumb(String filepath) {
-		try {
-			String current_dir = getServletContext().getRealPath("/");
-			String runtimeFile = "thumbnail.bat";
-
-			if (System.getProperty("os.name").toUpperCase().indexOf("WINDOWS") == -1) {
-				runtimeFile = "thumbnail.sh";
-			}
-			Runtime rt = Runtime.getRuntime();
-			
-			File f = new File(filepath);
-			String name = f.getName();
-			String folder = f.getParentFile().getAbsolutePath()+File.separatorChar;
-			
-			String command = current_dir + "jod" + File.separatorChar
-					+ runtimeFile + " " + filepath + ".jpg " + folder
-					+ "_thumb_"+name+".jpg";
-			System.out.println("command thumbSingle " + command);
-			Process proc = rt.exec(command);
-			InputStream stderr = proc.getErrorStream();
-			InputStreamReader isr = new InputStreamReader(stderr);
-			BufferedReader br = new BufferedReader(isr);
-			String line = null;
-			System.out.println("<ERROR4>");
-			while ((line = br.readLine()) != null)
-				System.out.println(line);
-			System.out.println("</ERROR4>");
-			int exitVal = proc.waitFor();
-			System.out.println("Process exitValue: " + exitVal);
-		} catch (Throwable t) {
-			t.printStackTrace();
-		}
-	}
-	
-	private void generateBatchThumb(String inputfile, String outputpath) {
-		try {
-			String current_dir = getServletContext().getRealPath("/");
-			String runtimeFile = "thumbnail.bat";
-
-			if (System.getProperty("os.name").toUpperCase().indexOf("WINDOWS") == -1) {
-				runtimeFile = "thumbnail.sh";
-			}
-			Runtime rt = Runtime.getRuntime();
-
-			String command = current_dir + "jod" + File.separatorChar
-					+ runtimeFile + " " + inputfile + " " + outputpath
-					+ "_thumb_pages-%03d.jpg";
-			System.out.println("command3: " + command);
-			Process proc = rt.exec(command);
-			InputStream stderr = proc.getErrorStream();
-			InputStreamReader isr = new InputStreamReader(stderr);
-			BufferedReader br = new BufferedReader(isr);
-			String line = null;
-			System.out.println("<ERROR4>");
-			while ((line = br.readLine()) != null)
-				System.out.println(line);
-			System.out.println("</ERROR4>");
-			int exitVal = proc.waitFor();
-			System.out.println("Process exitValue: " + exitVal);
-		} catch (Throwable t) {
-			t.printStackTrace();
-		}
-	}	
 
 }
