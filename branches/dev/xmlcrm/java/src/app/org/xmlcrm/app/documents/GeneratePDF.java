@@ -21,12 +21,15 @@ public class GeneratePDF {
 		return instance;
 	}
 	
-	public String convertPDF(String current_dir, String fileNameExt,
+	public HashMap<String,HashMap> convertPDF(String current_dir, String fileNameExt,
 			String roomName, String fileNameShort, boolean fullProcessing,
 			String completeName, String newFileSystemExtName)
 			throws Exception {
 		
-		String returnError = "";
+		HashMap<String,HashMap> returnError = new HashMap<String,HashMap>();
+		
+		HashMap<String,Object> processPDF = new HashMap<String,Object>();
+		processPDF.put("process","processPDF");
 		
 		String working_imgdir = current_dir + "upload" + File.separatorChar + roomName
 				+ File.separatorChar;
@@ -52,18 +55,26 @@ public class GeneratePDF {
 
 		boolean b = f.mkdir();
 		if (!b) {
-			returnError += "convertPDF + ERROR: Folder konnte nicht angelegt werden " + f.getAbsolutePath()+"\r\n";
-			return null;
+			processPDF.put("error", "convertPDF + ERROR: Folder could not create " + f.getAbsolutePath());
+			processPDF.put("exitValue",-1);
+		} else {
+			processPDF.put("exitValue",0);
 		}
+		returnError.put("processPDF", processPDF);
+		
 		String outputfolder = destinationFolder + File.separatorChar;
 		destinationFolder = destinationFolder + File.separatorChar;
 
 		if (fullProcessing) {
-			returnError += this.doConvertExec(current_dir, fileFullPath, destinationFolder,fileNameShort);
+			HashMap<String,Object> processOpenOffice = this.doConvertExec(current_dir, fileFullPath, destinationFolder,fileNameShort);
+			returnError.put("processOpenOffice", processOpenOffice);
+			HashMap<String,Object> processThumb = GenerateThumbs.getInstance().generateBatchThumb(current_dir, destinationFolder + fileNameShort + ".pdf", destinationFolder, 80);
+			returnError.put("processThumb", processThumb);
 		} else {
-			returnError += GenerateThumbs.getInstance().generateBatchThumb(current_dir, fileFullPath, destinationFolder);
+			HashMap<String,Object> processThumb = GenerateThumbs.getInstance().generateBatchThumb(current_dir, fileFullPath, destinationFolder, 80);
+			returnError.put("processThumb", processThumb);
 		}
-		
+				
 		//now it should be completed so copy that file to the expected location
 		File fileToBeMoved = new File(completeName + newFileSystemExtName);
 		File fileWhereToMove = new File(outputfolder+ fileNameShort + newFileSystemExtName);
@@ -81,8 +92,10 @@ public class GeneratePDF {
 	 * @param outputfile
 	 * @return
 	 */
-	public String doConvertExec(String current_dir , String fileFullPath, 
+	public HashMap<String,Object> doConvertExec(String current_dir , String fileFullPath, 
 			String destinationFolder, String outputfile) {
+		HashMap<String,Object> returnMap = new HashMap<String,Object>();
+		returnMap.put("process", "doConvertExec");				
 		try {
 			
 			String runtimeFile = "jodconverter.bat";
@@ -99,25 +112,24 @@ public class GeneratePDF {
 					+ "jod" + File.separatorChar;				
 			}
 			Runtime rt = Runtime.getRuntime();
-			String error = "doConvertExec command "+ command +"\r\n";
+			returnMap.put("command",command);
 			Process proc = rt.exec(command);
 			InputStream stderr = proc.getErrorStream();
 			InputStreamReader isr = new InputStreamReader(stderr);
 			BufferedReader br = new BufferedReader(isr);
 			String line = null;
-			error += "<error type='doConvertExec'>";
+			String error = "";
 			while ((line = br.readLine()) != null)
 				error += line;
-			error += "</error>";
+			returnMap.put("error", error);
 			int exitVal = proc.waitFor();
-			error += "<exitvalue type='doConvertExec'>"+ exitVal +"</exitvalue>";
-
-			error += GenerateThumbs.getInstance().generateBatchThumb(current_dir, destinationFolder + outputfile + ".pdf", destinationFolder);
-
-			return error;
+			returnMap.put("exitValue", exitVal);
+			return returnMap;
 		} catch (Throwable t) {
 			t.printStackTrace();
-			return "<error type='doConvertExec'>"+t.getMessage()+"</ERROR>";
+			returnMap.put("error", t.getMessage());
+			returnMap.put("exitValue", -1);
+			return returnMap;
 		}
 	}	
 	

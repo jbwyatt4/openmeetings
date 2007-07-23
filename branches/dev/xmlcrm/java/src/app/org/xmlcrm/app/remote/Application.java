@@ -692,28 +692,25 @@ public class Application extends ApplicationAdapter implements
 			IScope scopeHibernate = scope.getScope("hibernate");
 			
 			if (scopeHibernate!=null){
-			String sc = scopeHibernate.getName();
-			
-			System.out.println("sendMessageByRoomAndDomain sc: "+sc);
-			
-			//Notify all clients of the same scope (room)
-			Iterator<IConnection> it = scope.getScope("hibernate").getConnections();
-			
-			if (it!=null) {
-				while (it.hasNext()) {
-					IConnection conn = it.next();				
-					RoomClient rcl = ClientList.get(conn.getClient().getId());
-					//Check if the Client is in the same room and same domain 
-					if(roomname.equals(rcl.getUserroom()) && orgdomain.equals(rcl.getDomain())){					
-						if (conn instanceof IServiceCapableConnection) {
-							((IServiceCapableConnection) conn).invoke("newMessageByRoomAndDomain",new Object[] { message }, this);
-							log.error("sending newMessageByRoomAndDomain to " + conn);
+
+				//Notify all clients of the same scope (room)
+				Iterator<IConnection> it = scope.getScope("hibernate").getConnections();
+				
+				if (it!=null) {
+					while (it.hasNext()) {
+						IConnection conn = it.next();				
+						RoomClient rcl = ClientList.get(conn.getClient().getId());
+						//Check if the Client is in the same room and same domain 
+						if(roomname.equals(rcl.getUserroom()) && orgdomain.equals(rcl.getDomain())){					
+							if (conn instanceof IServiceCapableConnection) {
+								((IServiceCapableConnection) conn).invoke("newMessageByRoomAndDomain",new Object[] { message }, this);
+								log.error("sending newMessageByRoomAndDomain to " + conn);
+							}
 						}
 					}
+				} else {
+					log.error("sendMessageByRoomAndDomain connections is empty ");
 				}
-			} else {
-				log.error("sendMessageByRoomAndDomain connections is empty ");
-			}
 			} else {
 				log.error("sendMessageByRoomAndDomain servlet not yet started ");
 			}
@@ -953,6 +950,33 @@ public class Application extends ApplicationAdapter implements
 		}		
 		return 1;
 	}
+	
+
+	public void sendMessageWithClientByUserId(Object message, String userId) {
+		try {
+			
+			IScope scopeHibernate = scope.getScope("hibernate");
+			
+			if (scopeHibernate!=null){
+				//Notify the clients of the same scope (room) with user_id
+				Iterator<IConnection> it = scope.getScope("hibernate").getConnections();
+				if (it!=null) {
+					while (it.hasNext()) {
+						IConnection conn = it.next();				
+						RoomClient rcl = ClientList.get(conn.getClient().getId());
+						if (rcl.getUser_id().equals(userId)){
+							((IServiceCapableConnection) conn).invoke("newMessageByRoomAndDomain",new Object[] { message }, this);
+						}
+					}
+				}
+			} else {
+				//Scope not yet started
+			}
+		} catch (Exception err) {
+			log.error("[sendMessageWithClient] ",err);
+			err.printStackTrace();
+		}		
+	}	
 	
 	
 	public void streamBroadcastStart(IBroadcastStream stream) {

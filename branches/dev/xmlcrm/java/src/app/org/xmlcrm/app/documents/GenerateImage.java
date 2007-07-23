@@ -1,5 +1,7 @@
 package org.xmlcrm.app.documents;
 
+import java.util.HashMap;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.InputStream;
@@ -19,8 +21,10 @@ public class GenerateImage {
 	}
 
 
-	public String convertImage(String current_dir, String fileNameExt, String roomName,
+	public HashMap<String,HashMap> convertImage(String current_dir, String fileNameExt, String roomName,
 			String fileNameShort, boolean fullProcessing) throws Exception {
+		
+		HashMap<String,HashMap> returnMap = new HashMap<String,HashMap>();
 
 		String working_imgdir = current_dir + "upload" + File.separatorChar + roomName + File.separatorChar;
 		String working_pptdir = current_dir + "uploadtemp" + File.separatorChar + roomName + File.separatorChar;
@@ -43,13 +47,17 @@ public class GenerateImage {
 		}
 
 		String destinationFile = working_imgdir + newFileName;
-		String error = this.convertSingleJpg(current_dir, fileFullPath, destinationFile);
-
+		HashMap processJPG = this.convertSingleJpg(current_dir, fileFullPath, destinationFile);
+		HashMap processThumb = GenerateThumbs.getInstance().generateThumb(current_dir, destinationFile, 50);
+		
+		returnMap.put("processJPG", processJPG);
+		returnMap.put("processThumb", processThumb);
+		
 		//Delete old one
 		File fToDelete = new File(fileFullPath);
 		fToDelete.delete();
 
-		return error;
+		return returnMap;
 	}
 	
 	/**
@@ -57,8 +65,11 @@ public class GenerateImage {
 	 * 
 	 */
 
-	private String convertSingleJpg(String current_dir, String inputFile, String outputfile) {
+	private HashMap<String,Object> convertSingleJpg(String current_dir, String inputFile, String outputfile) {
+		HashMap<String,Object> returnMap = new HashMap<String,Object>();
+		returnMap.put("process", "convertSingleJpg");
 		try {
+
 			String runtimeFile = "pngconverter.bat";
 			if (System.getProperty("os.name").toUpperCase().indexOf("WINDOWS") == -1) {
 				runtimeFile = "pngconverter.sh";
@@ -67,23 +78,26 @@ public class GenerateImage {
 
 			String command = current_dir + "jod" + File.separatorChar
 					+ runtimeFile + " " + inputFile + " " + outputfile + ".jpg";
-			String error = "<command type='generateThumb'>"+ command +"</command>";
+			returnMap.put("command", command);
 			Process proc = rt.exec(command);
 			InputStream stderr = proc.getErrorStream();
 			InputStreamReader isr = new InputStreamReader(stderr);
 			BufferedReader br = new BufferedReader(isr);
 			String line = null;
-			error += "<error type='generateThumb'>";
+			String error = "";
 			while ((line = br.readLine()) != null)
 				error += line;
-			error += "</error>";
+			returnMap.put("error", error);
 			int exitVal = proc.waitFor();
-			error += "<exitvalue type='generateThumb'>"+ exitVal +"</exitvalue>";
-			return error;
+			returnMap.put("exitValue", exitVal);
+
+			return returnMap;
 		} catch (Throwable t) {
 			t.printStackTrace();
+			returnMap.put("error",t.getMessage());
+			returnMap.put("exitValue", -1);
+			return returnMap;
 		}
-		return null;
 	}
 
 	

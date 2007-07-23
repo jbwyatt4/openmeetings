@@ -14,4 +14,9 @@ public class CreateLibraryPresentation {
 	}
 	
 	
+	public HashMap<String,Object> generateXMLDocument(String targetDirectory, String ){
+		
+	}
+	
+	
 }
