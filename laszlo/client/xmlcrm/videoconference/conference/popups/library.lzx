@@ -15,5 +15,6 @@
     <include href="editwhiteboarddefault.lzx" />
 	<include href="confirmationsingle.lzx" />
     <include href="autoloader.lzx" />
+    <include href="converterpopup.lzx" />
     
 </library>

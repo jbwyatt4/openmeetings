@@ -8,7 +8,7 @@
 	<attribute name="error" value="" type="string" />
 
 
-	<view y="24" width="202" height="200" x="2" clip="true">
+	<view y="24" width="218" height="200" x="2" clip="true">
 		<text y="30" fontsize="10" fontstyle="bold" text="${ parent.parent.error }"
 			multiline="true" width="190" />
 		<vscrollbar />

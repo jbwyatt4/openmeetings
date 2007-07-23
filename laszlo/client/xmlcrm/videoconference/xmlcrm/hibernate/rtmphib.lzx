@@ -395,6 +395,18 @@
                 <![CDATA[
                     if (value.message=='desktop'){
                         _drawarea.incomingScreenSharing(value);
+                    } else if (value.message=='library'){
+                        var error = false;
+                        for (var eg in value.error){
+                            Debug.write("eg ",eg," value ",value.error[eg]);
+                            Debug.write("eg ",eg," value ",value.error[eg].exitValue);
+                            if (value.error[eg].exitValue!=0){
+                                error = true;
+                            }
+                        }
+                        if (error) {
+                            new converterpopup(canvas.main_content._content.inner,{error:value.error});
+                        }
                     }
                 ]]>    
             </handler>  
