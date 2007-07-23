@@ -1,5 +1,7 @@
 package org.xmlcrm.app.documents;
 
+import java.util.HashMap;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.InputStream;
@@ -18,8 +20,11 @@ public class GenerateThumbs {
 		return instance;
 	}
 	
-	public String generateThumb(String current_dir, String filepath) {
+	public HashMap<String,Object> generateThumb(String current_dir, String filepath, int thumbSize) {
+		HashMap<String,Object> returnMap = new HashMap<String,Object>();
+		returnMap.put("process", "generateThumb");		
 		try {
+			
 			String runtimeFile = "thumbnail.bat";
 			if (System.getProperty("os.name").toUpperCase().indexOf("WINDOWS") == -1) {
 				runtimeFile = "thumbnail.sh";
@@ -32,27 +37,32 @@ public class GenerateThumbs {
 			
 			String command = current_dir + "jod" + File.separatorChar
 					+ runtimeFile + " " + filepath + ".jpg " + folder
-					+ "_thumb_"+name+".jpg";
-			String error = "<command type='generateThumb'>"+ command +"</command>";
+					+ "_thumb_"+name+".jpg "+thumbSize;
+			returnMap.put("command", command);
 			Process proc = rt.exec(command);
 			InputStream stderr = proc.getErrorStream();
 			InputStreamReader isr = new InputStreamReader(stderr);
 			BufferedReader br = new BufferedReader(isr);
 			String line = null;
-			error += "<error type='generateThumb'>";
+			String error = "";
 			while ((line = br.readLine()) != null)
 				error += line;
-			error += "</error>";
+			returnMap.put("error", error);
 			int exitVal = proc.waitFor();
-			error += "<exitvalue type='generateThumb'>"+ exitVal +"</exitvalue>";
-			return error;
+			returnMap.put("exitValue", exitVal);
+			return returnMap;
 		} catch (Throwable t) {
 			t.printStackTrace();
-			return "<error type='generateThumb'>"+t.getMessage()+"</ERROR>";
+			returnMap.put("error", t.getMessage());
+			returnMap.put("exitValue", -1);
+			return returnMap;
 		}
 	}
 	
-	public String generateBatchThumb(String current_dir, String inputfile, String outputpath) {
+	public HashMap<String,Object> generateBatchThumb(String current_dir, String inputfile, 
+			String outputpath, int thumbSize) {
+		HashMap<String,Object> returnMap = new HashMap<String,Object>();
+		returnMap.put("process", "generateBatchThumb");			
 		try {
 			String runtimeFile = "thumbnail.bat";
 			if (System.getProperty("os.name").toUpperCase().indexOf("WINDOWS") == -1) {
@@ -62,23 +72,25 @@ public class GenerateThumbs {
 
 			String command = current_dir + "jod" + File.separatorChar
 					+ runtimeFile + " " + inputfile + " " + outputpath
-					+ "_thumb_pages-%03d.jpg";
-			String error = "<command type='generateBatchThumb'>"+ command +"</command>";
+					+ "_thumb_pages-%03d.jpg "+thumbSize;
+			returnMap.put("command",command);
 			Process proc = rt.exec(command);
 			InputStream stderr = proc.getErrorStream();
 			InputStreamReader isr = new InputStreamReader(stderr);
 			BufferedReader br = new BufferedReader(isr);
 			String line = null;
-			error += "<error type='generateBatchThumb'>";
+			String error = "";
 			while ((line = br.readLine()) != null)
 				error += line;
-			error += "</error>";
+			returnMap.put("error", error);
 			int exitVal = proc.waitFor();
-			error += "<exitvalue type='generateBatchThumb'>"+ exitVal +"</exitvalue>";
-			return error;
+			returnMap.put("exitValue", exitVal);
+			return returnMap;
 		} catch (Throwable t) {
 			t.printStackTrace();
-			return "<error type='generateBatchThumb'>"+t.getMessage()+"</ERROR>";
+			returnMap.put("error", t.getMessage());
+			returnMap.put("exitValue", -1);
+			return returnMap;
 		}
 	}	
 }

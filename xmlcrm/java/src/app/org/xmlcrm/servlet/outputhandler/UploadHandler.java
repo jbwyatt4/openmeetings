@@ -7,6 +7,7 @@ import java.io.*;
 
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -24,6 +25,7 @@ import org.xmlcrm.utils.stringhandlers.StringComparer;
 import org.xmlcrm.app.documents.GenerateThumbs;
 import org.xmlcrm.app.documents.GeneratePDF;
 import org.xmlcrm.app.documents.GenerateImage;
+import org.xmlcrm.app.remote.Application;
 
 public class UploadHandler extends HttpServlet {
 
@@ -85,7 +87,7 @@ public class UploadHandler extends HttpServlet {
 
 			if (httpServletRequest.getContentLength() > 0) {
 				
-				String returnError = "<?xml version='1.0' encoding='UTF-8' ?>";
+				HashMap<String,HashMap> returnError = new HashMap<String,HashMap>();
 
 				String sid = httpServletRequest.getParameter("sid");
 				if (sid == null) {
@@ -203,24 +205,35 @@ public class UploadHandler extends HttpServlet {
 
 						if (canBeConverted) {
 							//convert to pdf, thumbs, swf and xml-description
-							returnError += GeneratePDF.getInstance().convertPDF(current_dir,
+							returnError = GeneratePDF.getInstance().convertPDF(current_dir,
 									newFileSystemName + newFileSystemExtName, roomName, 
 									newFileSystemName, true, completeName, newFileSystemExtName);
 						} else if (isPDF) {
 							//convert to thumbs, swf and xml-description
-							returnError += GeneratePDF.getInstance().convertPDF(current_dir, 
+							returnError = GeneratePDF.getInstance().convertPDF(current_dir, 
 									newFileSystemName + newFileSystemExtName, roomName, 
 									newFileSystemName, false, completeName, newFileSystemExtName);						
 						} else if (isImage) {
 							//convert it to JPG
-							returnError += GenerateImage.getInstance().convertImage(current_dir, 
+							returnError = GenerateImage.getInstance().convertImage(current_dir, 
 									newFileSystemName+ newFileSystemExtName, 
 									roomName,newFileSystemName, false);
 						} else if (isJpg) {
-							returnError += GenerateThumbs.getInstance().generateThumb(current_dir, completeName);
+							HashMap<String,Object> processThumb = GenerateThumbs.getInstance().generateThumb(current_dir, completeName, 50);
+							returnError.put("processThumb", processThumb);
 						}
 						
-						httpServletResponse.getWriter().print(returnError);
+						//Flash cannot read the response of an upload
+						//httpServletResponse.getWriter().print(returnError);
+						LinkedHashMap<String,Object> hs = new LinkedHashMap<String,Object>();
+						hs.put("user", Usermanagement.getInstance().getUser(users_id));
+						hs.put("message", "library");
+						hs.put("action", "newFile");
+						hs.put("error", returnError);
+						hs.put("fileName", completeName);		
+						
+						Application.getInstance().sendMessageWithClientByUserId(hs,users_id.toString());
+						
 					}
 				}
 			}
