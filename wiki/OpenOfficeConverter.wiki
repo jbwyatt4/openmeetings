@@ -63,4 +63,5 @@ http://www.artofsolving.com/node/11
 
 
 = Links =
-http://www.artofsolving.com/node/10
+  * http://www.artofsolving.com/node/10
+  * http://wiki.conzul.de/index.php/OpenOffice2.x
