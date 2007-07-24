@@ -4,6 +4,12 @@
 <class name="listimagedrag" extends="view" height="50" width="280"
     onmouseover="this.setBGColor(0x799FCE)" onmouseout="this.setBGColor(white)" 
     bgcolor="white" >
+
+    <attribute name="filename" value="" type="string" />
+    <attribute name="filenamePure" value="" type="string" />
+    <attribute name="ext" value="" type="string" />
+    <attribute name="isPpt" value="false" type="boolean" />
+    <attribute name="uploadmodul" value="" type="string" />
     
     <handler name="oninit">
         <![CDATA[
@@ -27,18 +33,7 @@
   		]]>
     </handler>
 
-    <attribute name="filename" value="" type="string" />
-    <attribute name="filenamePure" value="" type="string" />
-    <attribute name="ext" value="" type="string" />
-    <attribute name="isPpt" value="false" type="boolean" />
-    <attribute name="uploadmodul" value="" type="string" />
-    
-    <image name="_thumb" x="1" y="1" width="48" height="48" clip="true" />
-    <text name="_thumbText" 
-        x="50" text="$once{ this.parent.filenamePure }" fontsize="10" width="240" multiline="true" />
 
-	<view resource="filedelete_rsc" x="$once{ parent.parent.parent.width -34 }" y="1" 
-		onclick="parent.__LZFileDelete()" />
 	<method name="__LZFileDownload">
 		<![CDATA[
 		Debug.write("Download File ",this);
@@ -68,6 +63,14 @@
         this.parent.parent.parent.highlightItem(this);
         ]]>
 	</method>
+    
+    
+    <image name="_thumb" x="1" y="1" width="48" height="48" clip="true" />
+    <text name="_thumbText" 
+        x="50" text="$once{ this.parent.filenamePure }" fontsize="10" width="240" multiline="true" />
+    <view resource="filedelete_rsc" x="$once{ parent.parent.parent.width -34 }" y="1" 
+		onclick="parent.__LZFileDelete()" />
+    
 </class>
 
 </library>

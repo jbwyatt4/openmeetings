@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<library>
+	
+<class name="listpresentationThumb" extends="view" height="100" width="$once{ parent.width }"
+    bgcolor="white" focusable="true">
+    
+    <attribute name="thumbname" value="" type="string"/>
+    <attribute name="uploadmodul" value="" type="string"/>
+    <attribute name="no" value="" type="string"/>
+    
+    <handler name="oninit">
+        <![CDATA[
+        var downloadurl = 'http://' + canvas.rtmphostlocal + ':' + canvas.red5httpport + '/xmlcrm/DownloadHandler?' +
+            'fileName=' + this.thumbname +
+            '&moduleName=' + this.uploadmodul + 
+            '&parentPath=' + canvas.uploadmoduleimgfolder + '/' +
+            '&room='+hib.connectedroom + 
+            '&domain='+hib.conferencedomain + 
+            '&sid='+canvas.sessionId;
+        this._thumb.setAttribute('src',downloadurl);
+        ]]>
+    </handler>
+    
+    <handler name="onmousedown">
+        
+    </handler>
+    <handler name="onmouseup">
+        
+    </handler>
+    <handler name="onfocus">
+        this.selectItem();
+    </handler>
+    <handler name="onblur">
+        this.disselectItem();
+    </handler>
+
+    <handler name="onkeyup" args="k"> 
+        Debug.write("key " + k + " up");
+    </handler>
+    <handler name="onmousewheeldelta">
+        
+    </handler>
+    
+    <method name="selectItem">
+        this.setBGColor(canvas.basebgcolorizer);
+    </method>
+    <method name="disselectItem">
+        this.setBGColor(white);
+    </method>
+    
+    <image name="_thumb" x="10" y="1"/>
+    <text name="_thumbText" x="120" text="$once{ this.parent.no }" fontsize="10"
+        width="240" multiline="true"/>
+    
+</class>
+
+</library>
