@@ -69,7 +69,7 @@ public class GeneratePDF {
 			HashMap<String,Object> processOpenOffice = this.doConvertExec(current_dir, fileFullPath, destinationFolder,fileNameShort);
 			returnError.put("processOpenOffice", processOpenOffice);
 			HashMap<String,Object> processThumb = GenerateThumbs.getInstance().generateBatchThumb(current_dir, destinationFolder + fileNameShort + ".pdf", destinationFolder, 80);
-			returnError.put("processThumb", processThumb);
+			returnError.put("processThumb", processThumb);		
 		} else {
 			HashMap<String,Object> processThumb = GenerateThumbs.getInstance().generateBatchThumb(current_dir, fileFullPath, destinationFolder, 80);
 			returnError.put("processThumb", processThumb);
@@ -80,7 +80,15 @@ public class GeneratePDF {
 		File fileWhereToMove = new File(outputfolder+ fileNameShort + newFileSystemExtName);
 		fileWhereToMove.createNewFile();
 		FileHelper.moveRec(fileToBeMoved, fileWhereToMove);
-
+		
+		if (fullProcessing) {
+			HashMap<String,Object> processXML = CreateLibraryPresentation.getInstance().generateXMLDocument(outputfolder, fileNameShort + newFileSystemExtName, fileNameShort + ".pdf", fileNameShort + ".swf");
+			returnError.put("processXML", processXML);	
+		} else {
+			HashMap<String,Object> processXML = CreateLibraryPresentation.getInstance().generateXMLDocument(outputfolder, fileNameShort + newFileSystemExtName, null, fileNameShort + ".swf");
+			returnError.put("processXML", processXML);
+		}
+		
 		return returnError;
 	}	
 	
