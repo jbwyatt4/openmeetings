@@ -21,15 +21,9 @@
         //new listimagedrag(this._table._listcontent,{uploadmodul:this.uploadmodul,size:size,filename:filename,inserted:inserted,isimage:isimage});
         new listwml(this._table._listcontent,{uploadmodul:this.uploadmodul,filename:filename+ext,filenamePure:filename,ext:ext});
     </method>
-	
-    <method name="addPpt" args="filename,ext">
-        //new listimagedrag(this._table._listcontent,{uploadmodul:this.uploadmodul,size:size,filename:filename,inserted:inserted,isimage:isimage});
-        new listppt(this._table._listcontent,{uploadmodul:this.uploadmodul,filename:filename+ext,filenamePure:filename,ext:ext});
-    </method>
-	
-    <method name="addSWFFile" args="filename,ext">
-        //new listimagedrag(this._table._listcontent,{uploadmodul:this.uploadmodul,size:size,filename:filename,inserted:inserted,isimage:isimage});
-        new listppt(this._table._listcontent,{uploadmodul:this.uploadmodul,filename:filename+ext,filenamePure:filename,ext:ext});
+    
+    <method name="addPresentationThumb" args="thumbName,no">
+        new listpresentationThumb(this._table._listcontent,{uploadmodul:this.uploadmodul,thumbname:thumbName,no:no});
     </method>
 	    
     <method name="resetList">

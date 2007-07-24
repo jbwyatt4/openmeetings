@@ -110,7 +110,9 @@
 					_drawarea.loadwmlObjectToStage(value,this.String1,hib.connectedroom,hib.conferencedomain,true,false);
 				]]>       	     				
 	        </handler>	
-	  	</netremotecallhib> 
+	  	</netremotecallhib>
+        
+
 		 	 
     </view>
     <vscrollbar />

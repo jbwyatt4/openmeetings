@@ -22,26 +22,35 @@
 	        <handler name="ondata" args="value">	
                 _imageslistdraw.resetList();
                 <![CDATA[
-                if (value[0]!=null){
-	                for(var eg=0;eg<value[0].length;eg++){
-	                    _imageslistdraw.addFolder(value[0][eg][2]); 
-	                }
-                }
-                
-                if (value[1]!=null){
-	                for(var eg=0;eg<value[1].length;eg++){
-					    Debug.write("value[1][eg]: ",value[1][eg]);
-					    if(value[1][eg][2]=='.wml'){
-					    	_imageslistdraw.addWML(value[1][eg][1],value[1][eg][2]);
-					    } else if(value[1][eg][5]!='n'){
-							_imageslistdraw.addFile(value[1][eg][1],value[1][eg][2]);
-						} else if(value[1][2]=='.swf'){
-							_imageslistdraw.addSWFFile(value[1][eg][1],value[1][eg][2]);
-						} else {
-							_imageslistdraw.addPpt(value[1][eg][1],value[1][eg][2]);
-						} 
-	                }
-                }
+                    if (value['presentationObject']==null){
+                    
+                        if (value.folders!=null){
+                            for(var eg in value.folders){
+                                _imageslistdraw.addFolder(value.folders[eg][2]); 
+                            }
+                        }
+                        
+                        if (value['files']!=null){
+                            for(var eg in value.files){
+                                Debug.write("value[1][eg]: ",value.files[eg]);
+                                if(value.files[eg][2]=='.wml'){
+                                    _imageslistdraw.addWML(value.files[eg][1],value.files[eg][2]);
+                                } else if(value.files[eg][5]!='n'){
+                                    _imageslistdraw.addFile(value.files[eg][1],value.files[eg][2]);
+                                }
+                            }
+                        }
+                    
+                    } else {
+                    
+                        Debug.write("value.presentationObject: ",value.presentationObject);
+                    
+                        for (var eg=0;eg<value.presentationObject.thumbs.thumbs.length;eg++){
+                            Debug.write(value.presentationObject.thumbs.thumbs[eg].filename);
+                            _imageslistdraw.addPresentationThumb(value.presentationObject.thumbs.thumbs[eg].filename,eg);
+                        }
+                    
+                    }
                 ]]>	        	          				
 	        </handler>	
 	  	</netremotecallhib>    

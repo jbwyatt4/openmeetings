@@ -8,5 +8,6 @@
 	<include href="listwml.lzx" />
 	<include href="listfolderdrag.lzx" />
 	<include href="listppt.lzx" />
+    <include href="listpresentationThumb.lzx" />
     
 </library>
