@@ -7,7 +7,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Locale;
 import java.util.LinkedHashMap;
 
@@ -22,6 +21,8 @@ import org.xmlcrm.app.data.basic.Sessionmanagement;
 import org.xmlcrm.app.data.user.Usermanagement;
 import org.xmlcrm.app.documents.LibraryDocumentConverter;
 import org.xmlcrm.app.documents.LibraryWmlLoader;
+import org.xmlcrm.app.documents.LoadLibraryPresentation;
+import org.xmlcrm.app.documents.CreateLibraryPresentation;
 
 /**
  * 
@@ -51,42 +52,38 @@ public class ConferenceLibrary {
 		fileExtensions.put("ext14", ".swf");
 	}
 	
-	public List getListOfFiles(String SID, String moduleName,String parentFolder,String room, String domain ) {
-		LinkedList<LinkedList> filesMap = new LinkedList<LinkedList>();
-		LinkedList<LinkedList> foldersMap = new LinkedList<LinkedList>();
-		LinkedList<LinkedList> returnMap = new LinkedList<LinkedList>();
-        Long users_id = Sessionmanagement.getInstance().checkSession(SID);
-        long USER_LEVEL = Usermanagement.getInstance().getUserLevelByID(users_id);  
-        if (AuthLevelmanagement.getInstance().checkUserLevel(USER_LEVEL)){
-			try {
-				String roomName = domain+"_"+room;
+	public LinkedHashMap<String,Object> getListOfFiles(String SID, String moduleName,
+			String parentFolder, String room, String domain ) {
+		
+		LinkedHashMap<String,Object> returnMap = new LinkedHashMap<String,Object>();
+		
+		try {
+			
+			LinkedList<LinkedList> filesMap = new LinkedList<LinkedList>();
+			LinkedList<LinkedList> foldersMap = new LinkedList<LinkedList>();
+			LinkedHashMap<String,LinkedHashMap> presentationObject = null;
+						
+	        Long users_id = Sessionmanagement.getInstance().checkSession(SID);
+	        long USER_LEVEL = Usermanagement.getInstance().getUserLevelByID(users_id);  
+	        
+	        if (AuthLevelmanagement.getInstance().checkUserLevel(USER_LEVEL)){
 				
+				String roomName = domain+"_"+room;
 				//trim whitespaces cause it is a directory name
 				roomName = StringUtils.deleteWhitespace(roomName);
-				
-				System.out.println("roomname parentFolder"+roomName+" "+parentFolder);
+				//System.out.println("roomname parentFolder"+roomName+" "+parentFolder);
 				
 				//Servlet.getServletRequest().getRealPath("/");
 				IScope scope = Red5.getConnectionLocal().getScope().getParent();
-				
 				String current_dir = scope.getResource("upload/").getFile().getAbsolutePath();
-	
 				
-				String working_dir = "";
-				
-				System.out.println("#### moduleName: "+moduleName);
-				
-				
-				working_dir = current_dir+File.separatorChar+roomName+File.separatorChar;
-				
-				working_dir+=parentFolder;
-				
-				System.out.println("### this is my working directory: "+working_dir);
-				
+				String working_dir = current_dir + File.separatorChar + roomName + parentFolder;
+				log.error(working_dir);
 				File dir = new File(working_dir);
-
-				//First get all Directories of this Folder
 				
+				
+	
+				//First get all Directories of this Folder
 				FilenameFilter ff = new FilenameFilter() {
 				     public boolean accept(File b, String name) {
 				    	  String absPath = b.getAbsolutePath()+File.separatorChar+name;
@@ -94,21 +91,15 @@ public class ConferenceLibrary {
 				          return f.isDirectory();
 				     }
 				};			
+				
 				String[] allfolders = dir.list(ff);
-				
-				//Sortierung
-				
 				if(allfolders!=null){
 					for(int i=0; i<allfolders.length; i++){
 						File file = new File(working_dir+File.separatorChar+allfolders[i]);
-	
+						
 						Date lastModifiedDate = new Date(file.lastModified());
 						String lastModified = formatDate(lastModifiedDate);
 						String fileName = allfolders[i];
-						
-						//String fileNamePure = fileName.substring(0, fileName.length()-4);
-						//String fileNameExt = fileName.substring(fileName.length()-4,fileName.length());					
-						
 						LinkedList<String> fileInfo = new LinkedList<String>();
 						fileInfo.add("");
 						fileInfo.add("");
@@ -118,10 +109,8 @@ public class ConferenceLibrary {
 					}
 				}
 				
-				returnMap.add(foldersMap);
 				
 				//Secoond get all Files of this Folder
-				
 				FilenameFilter ff2 = new FilenameFilter() {
 				     public boolean accept(File b, String name) {
 				    	  String absPath = b.getAbsolutePath()+File.separatorChar+name;
@@ -137,10 +126,9 @@ public class ConferenceLibrary {
 						
 						System.out.println("working_dir+File.separatorChar+allfiles[i]: "+working_dir+File.separatorChar+allfiles[i]);
 						if (allfiles[i].startsWith("_thumb_")){
-							log.error("FFound Thumbs: "+allfiles[i]);
+							//log.error("Found Thumbs: "+allfiles[i]);
 						} else {
-							Date lastModifiedDate = new Date(file.lastModified());
-							String lastModified = formatDate(lastModifiedDate);
+							String lastModified = formatDate(new Date(file.lastModified()));
 							String fileName = allfiles[i];
 							String fileBytes = new Long(file.length()).toString();
 							
@@ -157,17 +145,32 @@ public class ConferenceLibrary {
 							fileInfo.add(fileBytes);
 							fileInfo.add(isimage);
 							filesMap.add(fileInfo);
+							
+							if (fileName.equals(CreateLibraryPresentation.libraryFileName)){
+								presentationObject = LoadLibraryPresentation.getInstance().parseLibraryFileToObject(file.getAbsolutePath());
+							}
+								
 						}
 					}
-				}
+				}				
 				
-				returnMap.add(filesMap);
+				returnMap.put("presentationObject",presentationObject);
+				returnMap.put("folders",foldersMap);
+				returnMap.put("files",filesMap);
+				returnMap.put("error", "");
 				
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-        }		
-		return returnMap;
+				return returnMap;
+	        } else {
+	        	returnMap.put("error", "not authenificated");
+	        	return returnMap; 
+	        }
+	         
+		} catch (Exception e) {
+			e.printStackTrace();
+			returnMap.put("error", e.getMessage());
+			return returnMap; 
+		}        
+
 	}
 	
 	private String formatDate(Date date) {

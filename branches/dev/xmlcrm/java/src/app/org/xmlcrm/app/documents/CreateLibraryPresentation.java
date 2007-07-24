@@ -13,7 +13,7 @@ import org.dom4j.io.XMLWriter;
 
 public class CreateLibraryPresentation {
 	
-	private static final String libraryFileName = "library.xml";
+	public static final String libraryFileName = "library.xml";
 	
 	private static CreateLibraryPresentation instance;
 
