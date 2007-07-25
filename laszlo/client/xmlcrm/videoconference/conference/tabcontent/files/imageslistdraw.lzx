@@ -25,6 +25,14 @@
     <method name="addPresentationThumb" args="thumbName,no">
         new listpresentationThumb(this._table._listcontent,{uploadmodul:this.uploadmodul,thumbname:thumbName,no:no});
     </method>
+    
+    <method name="addListpresentationFileOrig" args="originalName,pdfname,swfName">
+        new listpresentationFileOrig(this._table._listcontent,{uploadmodul:this.uploadmodul,originalName:originalName,pdfname:pdfname,swfName:swfName});
+    </method>
+    
+    <method name="addListpresentationFilePDF" args="pdfname,swfName">
+        new listpresentationFilePDF(this._table._listcontent,{uploadmodul:this.uploadmodul,pdfname:pdfname,swfName:swfName});
+    </method>
 	    
     <method name="resetList">
     	this._table.destroy();

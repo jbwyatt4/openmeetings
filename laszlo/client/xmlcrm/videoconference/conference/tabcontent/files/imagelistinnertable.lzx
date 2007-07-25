@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <library>
 	
-<class name="imagelistinnertable" extends="view" width="$once{ parent.width-4 }" height="$once{ parent.height-4 }" 
+<class name="imagelistinnertable" extends="view" width="$once{ parent.width-4 }" 
+    height="$once{ parent.height-4 }" 
 	bgcolor="white" x="2" y="2" clip="true">
-    <view name="_listcontent" bgcolor="$once{ canvas.basebgcolorizer }">
-        <simplelayout name="_layout" axis="y" spacing="1" inset="1" />
+    
+    <attribute name="iscurrentscrollactive" value="false" type="boolean" />
+    
+    <view name="_listcontent" bgcolor="$once{ canvas.basebgcolorizer }" width="$once{ parent.width }" >
+        <simplelayout name="_layout" axis="y" spacing="2" inset="1" />
         
 	  	<netremotecallhib name="deleteFile" funcname="fileservice.deleteFile" remotecontext="$once{ canvas.thishib }" >   
 			<netparam name="vars1"><method name="getValue"> return canvas.sessionId; </method></netparam>
@@ -112,10 +116,25 @@
 	        </handler>	
 	  	</netremotecallhib>
         
+        
+        <method name="loadSWFPresentation" args="url,fileName,moduleName,parentPath,room,domain,slideNumber">
+            _drawarea.loadSWFPresentation(url,fileName,moduleName,parentPath,room,domain,slideNumber);
+        </method>
+        
 
 		 	 
     </view>
-    <vscrollbar />
+
+    <vscrollbar usemousewheel="true">
+        <method event="onmousewheeldelta" reference="LzKeys" args="d">
+            //Debug.write("onmousewheeldelta 12: ",d);
+            <![CDATA[
+                if (this.parent.iscurrentscrollactive) {
+                    this.step(-d);
+                }
+            ]]>
+        </method>  
+    </vscrollbar>
 </class>
 
 </library>
