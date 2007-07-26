@@ -48,7 +48,7 @@
                         if (typeof(value.presentationObject.pdfDocument)=="undefined"){
                             //Is PDF only
                             Debug.write("Is PDF only");
-                            _imageslistdraw.addListpresentationFilePDF(value.presentationObject.originalDocument,value.presentationObject.pdfDocument,value.presentationObject.swfDocument);
+                            _imageslistdraw.addListpresentationFilePDF(value.presentationObject.originalDocument,value.presentationObject.swfDocument);
                         } else {
                             //Is original Document + PDF-Document
                             Debug.write("Is original Document + PDF-Document");
