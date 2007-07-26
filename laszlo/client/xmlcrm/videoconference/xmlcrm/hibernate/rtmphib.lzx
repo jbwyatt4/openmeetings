@@ -367,9 +367,17 @@
 					} else if (value.message[1]=='imagesynccomplete'){
 						_drawarea.sendCompleteImageSync(value.client);
 					} else if (value.message[1]=='imageloaderror'){
-						_drawarea.sendCompleteImageSync(value.client);
+						_drawarea.sendCompleteImageLoadedRClient(value.client);
 					} else if (value.message[1]=='imageloadtimeout'){
-						_drawarea.sendCompleteImageSync(value.client);
+						_drawarea.sendCompleteImageLoadedRClient(value.client);
+					} else if (value.message[1]=='swfloadcomplete'){
+						_drawarea.sendCompleteSWFLoadedRClient(value.client);
+					} else if (value.message[1]=='swfsynccomplete'){
+						_drawarea.sendCompleteSWFSync(value.client);
+					} else if (value.message[1]=='swfloaderror'){
+						_drawarea.sendCompleteSWFLoadedRClient(value.client);
+					} else if (value.message[1]=='swfloadtimeout'){
+						_drawarea.sendCompleteSWFLoadedRClient(value.client);
 					} else if (value.message[1]=='inituser'){
 						//_drawarea.sendCompleteImageSync(value.client);
 					    Debug.write("inituser sendVarsToMessageWithClient: ",value.message[2]);
