@@ -46,7 +46,10 @@
 <resource name="doc_next" src="resources/go-next.png" />
 <resource name="doc_pre" src="resources/go-previous.png" />
 <resource name="doc_first" src="resources/go-first.png" />
-<resource name="doc_last" src="resources/go-last.png" />				
+<resource name="doc_last" src="resources/go-last.png" />	
+    
+<resource name="doc_zoom_plus" src="resources/xmag_plus2.png" />	 
+<resource name="doc_zoom_minus" src="resources/xmag_plus.png" />	       			
 
 <resource name="filedelete_rsc" src="resources/delete.png" />
     
@@ -198,7 +201,7 @@
             ]]>        
     </method> 
     
-    <view x="2" layout="axis:x; spacing:2" y="18">
+    <view name="_toolbarTabList" x="2" layout="axis:x; spacing:2" y="18">
         <!-- Holds a reference to the currently selected TabButton -->
         <attribute name="selected" value="null" />
         
@@ -214,32 +217,34 @@
             }
             ]]>
         </method>        
-        <basedokeostabbutton iconresourcename="ksirc_rsc" width="100" labelid="242"
+        <basedokeostabbutton name="b_paint" iconresourcename="ksirc_rsc" width="100" labelid="242"
             oninit="this.onmouseup.sendEvent()">
             <handler name="sendClick">
                 Debug.write("onclick handler paint" );
-                this.parent.parent.changeMenu(1);
+                this.parent.parent.changeMenu(1,false);
             </handler>        
         </basedokeostabbutton>
-        <basedokeostabbutton iconresourcename="ksirc_rsc" width="120" labelid="243">
+        <basedokeostabbutton name="b_doc" iconresourcename="ksirc_rsc" width="120" labelid="243">
             <handler name="sendClick">
                 Debug.write("onclick handler paint" );
-                this.parent.parent.changeMenu(2);
+                this.parent.parent.changeMenu(2,false);
             </handler>
         </basedokeostabbutton>        
     </view>
     
-    <method name="changeMenu" args="menuId">
+    <method name="changeMenu" args="menuId,bool">
         if (menuId==1){
             this._paintmenu.setAttribute('visible',true);
             this._painttoolsPalette.setAttribute('visible',true);
             this._documentmenu.setAttribute('visible',false);
             this._documenttoolsPalette.setAttribute('visible',false);
+            if (bool) this._toolbarTabList.setSelection(this._toolbarTabList.b_paint);
         } else if (menuId==2){
             this._paintmenu.setAttribute('visible',false);
             this._painttoolsPalette.setAttribute('visible',false);
             this._documentmenu.setAttribute('visible',true);
             this._documenttoolsPalette.setAttribute('visible',true);
+            if (bool) this._toolbarTabList.setSelection(this._toolbarTabList.b_doc);
         }
     </method>
     

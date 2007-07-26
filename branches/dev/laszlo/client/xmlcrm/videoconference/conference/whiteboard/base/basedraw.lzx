@@ -191,6 +191,11 @@
 		} else if (modi=='hand'){
 			if (this.boundingref!=null) this.boundingref.removeIt();
 		}
+        if (modi=='swf'){
+            parent.parent.changeMenu(2,true);
+        } else {
+            parent.parent.changeMenu(1,true);
+        }
 	</method>
 	
 	<method name="getModusItems" args="modi">
