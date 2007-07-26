@@ -16,7 +16,13 @@
         labelid="72" />		
     <drawchoosemodir y="4" name="b6" modi="doc_last" resourceN="doc_last" 
         labelid="72" />		
-		
+
+    <drawchooseseperator y="4" />
+        
+    <drawchoosemodir y="4" name="b7" modi="doc_zoom_minus" resourceN="doc_zoom_minus" 
+        labelid="72" />		
+    <drawchoosemodir y="4" name="b8" modi="doc_zoom_plus" resourceN="doc_zoom_plus" 
+        labelid="72" />		    
 </class>
     
 </library>
