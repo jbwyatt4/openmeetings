@@ -60,7 +60,7 @@ public class MainService {
 	        
 			return Navimanagement.getInstance().getMainMenu(User_LEVEL,users_id, language_id);
 		} catch (Exception err){
-			log.error("[getNavi] "+err);
+			log.error("[getNavi] ", err);
 		}
 		return null;
 	}
@@ -99,7 +99,7 @@ public class MainService {
 			log.error("testObject "+myObject.get("stringObj"));
 			return myObject.size();
 		} catch (Exception e){
-			log.error("ex: "+e);
+			log.error("ex: ", e);
 		}
 		return -1;
 	}
@@ -180,7 +180,7 @@ public class MainService {
         			Long.valueOf(regObject.get("states_id").toString()).longValue(), regObject.get("town").toString(), 
         			Long.valueOf(regObject.get("language_id").toString()).longValue());
     	} catch (Exception ex) {
-    		log.error(ex);
+    		log.error("registerUserByObject",ex);
     	}
     	return null;
     }

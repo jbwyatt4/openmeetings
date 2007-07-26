@@ -70,9 +70,13 @@ public class GeneratePDF {
 			returnError.put("processOpenOffice", processOpenOffice);
 			HashMap<String,Object> processThumb = GenerateThumbs.getInstance().generateBatchThumb(current_dir, destinationFolder + fileNameShort + ".pdf", destinationFolder, 80);
 			returnError.put("processThumb", processThumb);		
+			HashMap<String,Object> processSWF = GenerateSWF.getInstance().generateSWF(current_dir, destinationFolder, destinationFolder, fileNameShort);
+			returnError.put("processSWF", processSWF);	
 		} else {
 			HashMap<String,Object> processThumb = GenerateThumbs.getInstance().generateBatchThumb(current_dir, fileFullPath, destinationFolder, 80);
 			returnError.put("processThumb", processThumb);
+			HashMap<String,Object> processSWF = GenerateSWF.getInstance().generateSWF(current_dir, (new File(fileFullPath)).getParentFile().getAbsolutePath()+File.separatorChar , destinationFolder, fileNameShort);
+			returnError.put("processSWF", processSWF);				
 		}
 				
 		//now it should be completed so copy that file to the expected location

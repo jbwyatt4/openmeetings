@@ -431,6 +431,8 @@ public class Roommanagement {
 				HibernateUtil.closeSession(idf);
 				
 				return ll;
+			} else {
+				log.error("[notauthentificated] "+ USER_LEVEL);
 			}
 		} catch (HibernateException ex) {
 			log.error("[getRoomsByOrganisation] ", ex);
@@ -462,6 +464,8 @@ public class Roommanagement {
 				HibernateUtil.closeSession(idf);
 				
 				return ll;
+			} else {
+				log.error("[notauthentificated] "+ USER_LEVEL);
 			}
 		} catch (HibernateException ex) {
 			log.error("[getRoomsByOrganisation] ", ex);
