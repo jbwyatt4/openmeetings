@@ -1,14 +1,20 @@
 #summary Roadmap of openmeeting
 #labels Phase-Requirements,Featured
 
+see calender for future date:
+[http://www.google.com/calendar/embed?src=6cgnvpn4qt9tp9rmjer98otd30%40group.calendar.google.com HTML] [http://www.google.com/calendar/ical/6cgnvpn4qt9tp9rmjer98otd30%40group.calendar.google.com/public/basic.ics ICAL]
+
+
 =MileStone pre 0.5=
 _released at 03.04.2007_
   * initial package, basic functionality, one webapp only
   + developer release
 
 =MileStone 0.5=
- _Beta1 released at 24.05.2007_ 
- _Beta2 released at 18.06.2007_ [05Beta2Changes]
+
+  # _Beta1 released at 24.05.2007_ 
+  # _Beta2 released at 18.06.2007_ [05Beta2Changes] 
+  # _Beta3 released at 06.07.2007_ [05Beta3Changes] 
 
   * Reworked Conference and Audience Application
   * Initial Support for users authentification and administration of users in their organisations
@@ -18,8 +24,14 @@ _released at 03.04.2007_
   * Rework Images and Document Converter
   * Offline Installation
   * Rework Forms feedback
-  * initial support for a desktop viewer
   * Calender for planing a meeting and notifications
+  * include [ScreenViewer]
+  * include [SWFPresentationViewer]
+
+=MileStone 0.6=
+
+  * reworked file-browser
+  * contact management
 
 =MileStone 1.0=
   * Recording storing and fully for whiteboard
@@ -30,3 +42,7 @@ _released at 03.04.2007_
 
 =MileStone 1.1=
   * Module loader available for custom Modules
+
+
+
+
