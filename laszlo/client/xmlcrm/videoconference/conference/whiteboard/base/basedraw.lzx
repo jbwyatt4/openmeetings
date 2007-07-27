@@ -191,11 +191,6 @@
 		} else if (modi=='hand'){
 			if (this.boundingref!=null) this.boundingref.removeIt();
 		}
-        if (modi=='swf'){
-            parent.parent.changeMenu(2,true);
-        } else {
-            parent.parent.changeMenu(1,true);
-        }
 	</method>
 	
 	<method name="getModusItems" args="modi">
@@ -541,14 +536,35 @@
     <![CDATA[
     	if (val !=null && val!=''){
 	    	this.ObjectByName = this.getObjectByName(val);
+               
+            var boundingDoUpdateOnInit = true;
+            if (this.ObjectByName instanceof SWFResourceView){
+                Debug.write("is swf Presentation");
+                boundingDoUpdateOnInit=false;
+            }
+                
 	    	var x = this.ObjectByName.getAttribute('x');
 	    	var y = this.ObjectByName.getAttribute('y');
             Debug.write("doShowObjectBounds: ",x,y);
 	    	var width = this.ObjectByName.width;
 	    	var height = this.ObjectByName.height;
 	    	if (this.boundingref!=null)this.boundingref.removeIt();
-	    	this.boundingref = new boundingBoxAll(this.parent.parent.boundboxesView,{whiteboardRef:this,objRef:this.ObjectByName,x:x-200,y:y-200,width:width+400,height:height+400,ex:x,ey:y,ewidth:width,eheight:height});
+	    	this.boundingref = new boundingBoxAll(this.parent.parent.boundboxesView,{whiteboardRef:this,
+                    objRef:this.ObjectByName,x:x-200,y:y-200,width:width+400,height:height+400,
+                    ex:x,ey:y,ewidth:width,eheight:height,boundingDoUpdateOnInit:boundingDoUpdateOnInit});
 	    	this.setAttribute('boundingIsActive',true);
+        
+            if (!boundingDoUpdateOnInit) {
+                this.boundingref._inner._inner.setAttribute('width',this.ObjectByName._swfView.width);
+                this.boundingref._inner._inner.setAttribute('height',this.ObjectByName._swfView.height);
+                Debug.write(this.ObjectByName._swfView.width,this.ObjectByName._swfView.height);
+                this.boundingref._inner.setAttribute('visible',true);
+                parent.parent.changeMenu(2,true);
+                this.doUpdateDocumentToolBar();
+            } else {
+                parent.parent.changeMenu(1,true);
+            }
+             
     	}
     ]]>
     </method>   

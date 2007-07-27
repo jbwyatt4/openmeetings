@@ -2,7 +2,12 @@
 <library>
 <include href="utils/states/resizestatemin.lzx"/>
 
-<class name="boundingBoxAll" >
+<!--
+    The order of views is important in this class
+    otherwise the scrollbar of the swfPresentation would be not visible or partly overlayed
+ -->
+    
+<class name="boundingBoxAll" extends="view">
 <!-- 
 	<method name="removeIt">
 		_drawarea.setAttribute('boundingIsActive',true);
@@ -29,47 +34,15 @@
 	<attribute name="objRef" value="null" />
 	<attribute name="whiteboardRef" value="null" />
 	<attribute name="doHandlerUpdates" value="false" type="boolean" />	
-	
-	<view name="_innerDrag" width="${ parent.width }" height="${ parent.height }"
-	onmousedown="parent.dragger.apply()" onmouseup="parent._removeDragstateFromThis()">
-		<handler name="oninit">
-	        var newMenu = new LzContextMenu();
-	        newMenu.hideBuiltInItems();
-	        var item1 = newMenu.makeMenuItem('remove Item', new LzDelegate(this.parent, "__LZRemoveItem"));
-	        newMenu.addItem(item1);
-	        this.setContextMenu(newMenu);		
-		</handler>	
-		<handler name="ondblclick">
-			Debug.write("ondblclick: ",this.parent.objRef.typeOfObject);
-			if (this.parent.objRef.typeOfObject=="text"){
-				var x = this.parent.objRef.getAttributeRelative('x',canvas);
-				var y = this.parent.objRef.getAttributeRelative('y',canvas);
-				Debug.write("x,y ",x,y);
-				this.parent.whiteboardRef.editTextByValues(this.parent.objRef,this.parent.objRef.name,this.parent.objRef.text,x,y,this.parent.objRef.width,this.parent.objRef.height);
-			}
-		</handler>		
-		<tooltip text="Drag this Object" />
-	</view>
-		
-	<view resource="_boundingBoxPointerTL" x="0" y="0" />
-	<view resource="_boundingBoxPointerTR" x="${ parent.width-this.width }" y="0" />
-	<view resource="_boundingBoxPointerUR" x="${ parent.width-this.width }" y="${ parent.height-this.height }" 
-		onmousedown="parent._applyResizestateFromThis()" onmouseup="parent._removeResizestateFromThis()" >
-		<tooltip text="Resize this Object" />
-	</view>
-	<view resource="_boundingBoxPointerUL" x="0" y="${ parent.height-this.height }" />
-	
-	<view resource="_boundingBoxPointer" x="${ parent.width/2-this.width/2 }" y="${ parent.height/2-this.height/2 }"
-		onmousedown="parent._applyDragstateFromThis()" onmouseup="parent._removeDragstateFromThis()">		
-        <handler name="oninit">
-            var newMenu = new LzContextMenu();
-            newMenu.hideBuiltInItems();
-            var item1 = newMenu.makeMenuItem('remove Item', new LzDelegate(this.parent, "__LZRemoveItem"));
-            newMenu.addItem(item1);
-            this.setContextMenu(newMenu);       
-        </handler>          	
-		<tooltip text="Drag this Object" />
-	</view> 
+    <attribute name="boundingDoUpdateOnInit" value="true" type="boolean" />	 
+
+    <!--- Minimum width for the windowy, default: 60.
+          @keywords final -->
+    <attribute name="minwidth" value="2"/>
+
+    <!--- Minimum height for the window, default: 50.
+          @keywords final -->
+    <attribute name="minheight" value="2"/>    
 	
 	<method name="__LZRemoveItem">
 		Debug.write("__LZRemoveItem");
@@ -89,7 +62,7 @@
 		this.ey = this.objRef.y;
 		this.ewidth = this.objRef.width;
 		this.eheight = this.objRef.height;			
-			this.setAttribute('x',this.objRef.x);
+		this.setAttribute('x',this.objRef.x);
 		this.setAttribute('y',this.objRef.y);
 		this.setAttribute('width',this.objRef.width);
 		this.setAttribute('height',this.objRef.height);	
@@ -106,7 +79,7 @@
      -->
     <method name="doUpdateAction" >
     	this.setAttribute('doHandlerUpdates',true);
-    	this._innerDrag.onmousedown.sendEvent();
+    	if (this.boundingDoUpdateOnInit) this._innerDrag.onmousedown.sendEvent();
     </method>
     
     <handler name="onheight">
@@ -178,21 +151,11 @@
 		
 		]]>			
     </method>
-	
-	<basechooseseicon resourceN="deleteIcon" x="${ parent.width-this.width }" y="0" labelid="80" width="22" height="22">
-		<handler name="onclick">
-			Debug.write("this.parent.objRef.name: ",this.parent.objRef.name);
-			this.parent.whiteboardRef.deleteItemByName(this.parent.objRef.name);
-		</handler>
-	</basechooseseicon>	    
-    
-    <!--- Minimum width for the windowy, default: 60.
-          @keywords final -->
-    <attribute name="minwidth" value="2"/>
 
-    <!--- Minimum height for the window, default: 50.
-          @keywords final -->
-    <attribute name="minheight" value="2"/>
+    <method name="doSetInnerObjectsBounds" args="w,h">
+        this._inner._inner.setAttribute('width',w);
+        this._inner._inner.setAttribute('height',h);
+    </method>
         
     <resizestatemin name="rs">
     	<text x="2" y="2" text="${ 'w: '+parent.width+' h: '+parent.height }" bgcolor="white"/>
@@ -201,6 +164,69 @@
    	<dragstate name="dragger">    
 		<text x="2" y="2" text="${ 'x: '+parent.getAttributeRelative('x',parent.objRef)+' y: '+parent.getAttributeRelative('y',parent.objRef) }" bgcolor="white"/>   	
    	</dragstate>
+	
+	<view name="_innerDrag" width="${ parent.width }" height="${ parent.height }"
+	onmousedown="parent.dragger.apply()" onmouseup="parent._removeDragstateFromThis()">
+		<handler name="oninit">
+	        var newMenu = new LzContextMenu();
+	        newMenu.hideBuiltInItems();
+	        var item1 = newMenu.makeMenuItem('remove Item', new LzDelegate(this.parent, "__LZRemoveItem"));
+	        newMenu.addItem(item1);
+	        this.setContextMenu(newMenu);		
+		</handler>	
+		<handler name="ondblclick">
+			Debug.write("ondblclick: ",this.parent.objRef.typeOfObject);
+			if (this.parent.objRef.typeOfObject=="text"){
+				var x = this.parent.objRef.getAttributeRelative('x',canvas);
+				var y = this.parent.objRef.getAttributeRelative('y',canvas);
+				Debug.write("x,y ",x,y);
+				this.parent.whiteboardRef.editTextByValues(this.parent.objRef,this.parent.objRef.name,this.parent.objRef.text,x,y,this.parent.objRef.width,this.parent.objRef.height);
+			}
+		</handler>		
+		<tooltip text="Drag this Object" />
+	</view>
+	
+	<view resource="_boundingBoxPointer" x="${ parent.width/2-this.width/2 }" y="${ parent.height/2-this.height/2 }"
+		onmousedown="parent._applyDragstateFromThis()" onmouseup="parent._removeDragstateFromThis()">		
+        <handler name="oninit">
+            var newMenu = new LzContextMenu();
+            newMenu.hideBuiltInItems();
+            var item1 = newMenu.makeMenuItem('remove Item', new LzDelegate(this.parent, "__LZRemoveItem"));
+            newMenu.addItem(item1);
+            this.setContextMenu(newMenu);       
+        </handler>          	
+		<labeltooltip labelid="251" />
+	</view>     
+    
+	<basechooseseicon resourceN="deleteIcon" x="${ parent.width-this.width }" y="0" labelid="80" width="22" height="22">
+		<handler name="onclick">
+			Debug.write("this.parent.objRef.name: ",this.parent.objRef.name);
+			this.parent.whiteboardRef.deleteItemByName(this.parent.objRef.name);
+		</handler>
+	</basechooseseicon>	    
+    
+    <view name="_inner" y="22" width="${ parent.width }"
+        height="${ parent.height-22 }" visible="false">    
+        <view name="_inner">
+            <handler name="onx" args="x">
+                this.parent.parent.objRef._swfView.setAttribute('x',x);
+            </handler>
+            <handler name="ony" args="y">
+                this.parent.parent.objRef._swfView.setAttribute('y',y);
+            </handler>            
+        </view>
+        <vscrollbar name="_scrollstv" /> 
+        <hscrollbar name="_scrollsth" />     
+    </view>
+    
+	<view resource="_boundingBoxPointerTL" x="0" y="0" />
+	<view resource="_boundingBoxPointerTR" x="${ parent.width-this.width }" y="0" />
+	<view resource="_boundingBoxPointerUR" x="${ parent.width-this.width }" y="${ parent.height-this.height }" 
+		onmousedown="parent._applyResizestateFromThis()" onmouseup="parent._removeResizestateFromThis()" >
+		<labeltooltip labelid="252" />
+	</view>
+	<view resource="_boundingBoxPointerUL" x="0" y="${ parent.height-this.height }" />
+    
 </class>
 
 
