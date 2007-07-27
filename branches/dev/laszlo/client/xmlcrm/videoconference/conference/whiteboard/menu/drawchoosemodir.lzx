@@ -30,5 +30,12 @@
 		this.parent.parent._drawareaMask._drawarea.doAction(this.modi);
 	</handler>
 </class>
+    
+<class name="drawdocumentitem" extends="basechooseseicon" width="24" height="24">
+	<attribute name="modi" value="" type="string" />
+	<handler name="onclick">
+		this.parent.parent._drawareaMask._drawarea.doDocumentAction(this.modi);
+	</handler>
+</class>    
 	
 </library>
