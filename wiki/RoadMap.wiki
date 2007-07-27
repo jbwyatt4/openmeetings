@@ -5,12 +5,12 @@ see calender for future date:
 [http://www.google.com/calendar/embed?src=6cgnvpn4qt9tp9rmjer98otd30%40group.calendar.google.com HTML] [http://www.google.com/calendar/ical/6cgnvpn4qt9tp9rmjer98otd30%40group.calendar.google.com/public/basic.ics ICAL]
 
 
-=MileStone pre 0.5=
+=Milestone pre 0.5=
 _released at 03.04.2007_
   * initial package, basic functionality, one webapp only
   + developer release
 
-=MileStone 0.5=
+=Milestone 0.5=
 
   # _Beta1 released at 24.05.2007_ 
   # _Beta2 released at 18.06.2007_ [05Beta2Changes] 
@@ -28,21 +28,20 @@ _released at 03.04.2007_
   * include [ScreenViewer]
   * include [SWFPresentationViewer]
 
-=MileStone 0.6=
+=Milestone 0.6=
 
   * reworked file-browser
   * contact management
 
-=MileStone 1.0=
+=Milestone 1.0=
   * Recording storing and fully for whiteboard
   * More beautiful UI
   * Wider range of document convertings, uploadings which can be used in whiteboard
   * Audience-Modus complete
   * Installation Instructions
 
-=MileStone 1.1=
+=Milestone 1.1=
   * Module loader available for custom Modules
-
 
 
 
