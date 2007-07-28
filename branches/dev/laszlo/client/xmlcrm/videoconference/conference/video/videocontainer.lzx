@@ -184,7 +184,7 @@
 	<method name="getNewVideoObjectByPos" args="pos">
 		<![CDATA[
 		//Get a Free VideoView Slot by Position
-		Debug.write("this.subviews[pos]: ",this.subviews[pos],pos);
+		Debug.write("this.subviews[pos]: ",this.subviews,this.subviews[pos],pos);
 		if (!this.subviews[pos].isassigned){
 			//A free Slot has been found
 			//return the Reference to the VideoView it and mark it as used
