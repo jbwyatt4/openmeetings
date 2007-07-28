@@ -114,6 +114,7 @@
     
     <netremotecallhib name="getUserSalutations" funcname="userservice.getUserSalutations" >
 		<netparam name="vars1"><method name="getValue">return canvas.sessionId;</method></netparam>
+		<netparam name="vars2"><method name="getValue"> return parent.parent.userlang; </method></netparam> 
         <handler name="ondata" args="value">
             //The onResult-Handler will be called be the rtmpconnection
             Debug.write("getUserSalutations ",value);
