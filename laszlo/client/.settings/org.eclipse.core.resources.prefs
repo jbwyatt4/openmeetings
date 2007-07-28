@@ -1,4 +1,4 @@
-#Thu Jul 26 17:15:11 CEST 2007
+#Sat Jul 28 13:44:35 CEST 2007
 eclipse.preferences.version=1
 encoding//xmlcrm/newstreaming/camera.lzx=UTF-8
 encoding//xmlcrm/newstreaming/mediadevice.lzx=UTF-8
@@ -6,6 +6,7 @@ encoding//xmlcrm/newstreaming/mediastream.lzx=UTF-8
 encoding//xmlcrm/newstreaming/microphone.lzx=UTF-8
 encoding//xmlcrm/newstreaming/videoview.lzx=UTF-8
 encoding//xmlcrm/patches/lpp2554/rtmpconnection.lzx=UTF-8
+encoding//xmlcrm/patches/lps403/rtmpconnection.lzx=UTF-8
 encoding//xmlcrm/streaming/rtmpconnection.lzx=UTF-8
 encoding//xmlcrm/streamingAV/_camera.lzx=UTF-8
 encoding//xmlcrm/streamingAV/camera.lzx=UTF-8

@@ -9,24 +9,24 @@
     <drawchooseseperator y="4" />
 	
     <drawdocumentitem y="4" name="b3" modi="doc_first" resourceN="doc_first" 
-        labelid="72" />		
+        labelid="254" />		
     <drawdocumentitem y="4" name="b4" modi="doc_pre" resourceN="doc_pre" 
-        labelid="72" />			
+        labelid="255" />			
     <drawdocumentitem y="4" name="b5" modi="doc_next" resourceN="doc_next" 
-        labelid="72" />		
+        labelid="256" />		
     <drawdocumentitem y="4" name="b6" modi="doc_last" resourceN="doc_last" 
-        labelid="72" />		
+        labelid="257" />		
     <view width="4" />
     <customedittext name="_currentSlideNo" y="4" width="40" />	 
     <labeltext y="6" labelid="254" />	  
-    <customedittext name="_totalSlideNo" y="4" width="40" />	 
+    <labeltext name="_totalSlideNo" y="6" width="40" />	 
     
     <drawchooseseperator y="4" />
         
     <drawdocumentitem y="4" name="b7" modi="doc_zoom_minus" resourceN="doc_zoom_minus" 
-        labelid="72" />		
+        labelid="259" />		
     <drawdocumentitem y="4" name="b8" modi="doc_zoom_plus" resourceN="doc_zoom_plus" 
-        labelid="72" />	
+        labelid="260" />	
     
     <customedittext y="4" name="_zoom" width="60" />
     <labeltext y="6" labelid="253" />	
