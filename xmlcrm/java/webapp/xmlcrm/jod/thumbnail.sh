@@ -1,1 +1,1 @@
-convert -thumbnail $3 $1 $2
+$4convert -thumbnail $3 $1 $2

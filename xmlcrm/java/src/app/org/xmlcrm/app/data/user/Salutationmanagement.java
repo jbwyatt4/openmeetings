@@ -1,6 +1,7 @@
 package org.xmlcrm.app.data.user;
 
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -13,6 +14,7 @@ import org.xmlcrm.app.hibernate.beans.user.Salutations;
 import org.xmlcrm.app.hibernate.utils.HibernateUtil;
 
 import org.xmlcrm.app.data.basic.AuthLevelmanagement;
+import org.xmlcrm.app.data.basic.Fieldmanagment;
 
 /**
  * 
@@ -40,7 +42,7 @@ public class Salutationmanagement {
 	 * Adds a new Salutation to the table Titles
 	 * @param titelname
 	 */
-	public Long addUserSalutation(String titelname) {
+	public Long addUserSalutation(String titelname, long fieldvalues_id) {
 		try {
 			Object idf = HibernateUtil.createSession();
 			Session session = HibernateUtil.getSession();
@@ -48,6 +50,7 @@ public class Salutationmanagement {
 			Salutations ti = new Salutations();
 			ti.setName(titelname);
 			ti.setDeleted("false");
+			ti.setFieldvalues_id(fieldvalues_id);
 			ti.setStarttime(new Date());
 			Long salutations_id = (Long)session.save(ti);
 			tx.commit();
@@ -66,7 +69,7 @@ public class Salutationmanagement {
 	 * @param USER_LEVEL
 	 * @return
 	 */
-	public List getUserSalutations(){
+	public List getUserSalutations(long language_id){
 		try {
 			Object idf = HibernateUtil.createSession();
 			Session session = HibernateUtil.getSession();
@@ -75,6 +78,12 @@ public class Salutationmanagement {
 			List ll = crit.list();
 			tx.commit();
 			HibernateUtil.closeSession(idf);
+			for (Iterator it4 = ll.iterator(); it4.hasNext();) {
+				Salutations ti = (Salutations) it4.next();
+				ti.setLabel(Fieldmanagment.getInstance().getFieldByIdAndLanguage(ti.getFieldvalues_id(),language_id));
+			}
+			
+			
 			return ll;
 		} catch (HibernateException ex) {
 			log.error("[addUserSalutation]" ,ex);

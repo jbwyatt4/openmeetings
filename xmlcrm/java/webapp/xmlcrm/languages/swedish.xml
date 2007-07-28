@@ -1,778 +1,778 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <language>
 <string id="1" name="conference">
-<value>Konferenz</value>
+<value>Konferens</value>
 </string>
 <string id="2" name="meeting">
-<value>Meeting</value>
+<value>Möte</value>
 </string>
 <string id="3" name="classroom">
-<value>Auditorium</value>
+<value>Klassrum</value>
 </string>
 <string id="4" name="settings">
-<value>Einstellungen</value>
+<value>Inställningar</value>
 </string>
 <string id="5" name="benutzer">
-<value>Benutzer</value>
+<value>Användare</value>
 </string>
 <string id="6" name="admin">
 <value>Administration</value>
 </string>
 <string id="7" name="stop">
-<value>Stop</value>
+<value>Stopp</value>
 </string>
 <string id="8" name="record">
-<value>Record</value>
+<value>Spela in</value>
 </string>
 <string id="9" name="nofile">
-<value>Keine Datei vorhanden</value>
+<value>Ingen fil tillgänglig</value>
 </string>
 <string id="10" name="recordbyteacher">
-<value>Aufnahme nur für Lehrer verfügbar</value>
+<value>Inspelad av lärare</value>
 </string>
 <string id="11" name="connectedusers">
-<value>verbunden Benutzer:</value>
+<value>Anslutna användare:</value>
 </string>
 <string id="12" name="startconf">
-<value>Konferenz starten</value>
+<value>Starta en konferens</value>
 </string>
 <string id="13" name="myname">
-<value>Mein Name</value>
+<value>Mitt namn</value>
 </string>
 <string id="14" name="videoconference">
-<value>VideoConference</value>
+<value>Videokonferens</value>
 </string>
 <string id="15" name="import">
-<value>Präsentation importieren</value>
+<value>Importera Presentation</value>
 </string>
 <string id="16" name="refreshfiles">
-<value>Liste neu laden</value>
+<value>Uppdatera lista</value>
 </string>
 <string id="17" name="tomainfile">
-<value>Zum Hauptverzeichnis</value>
+<value>Till huvudfil</value>
 </string>
 <string id="18" name="newpoll">
-<value>neue Umfrage</value>
+<value>ny röstning</value>
 </string>
 <string id="19" name="newpollheader">
-<value>Eine neue Umfrage für die Konferenz.</value>
+<value>En ny röstning för konferensen.</value>
 </string>
 <string id="20" name="question">
-<value>Frage:</value>
+<value>Fråga:</value>
 </string>
 <string id="21" name="polltype">
-<value>Umfragenart:</value>
+<value>Typ av röstning:</value>
 </string>
 <string id="22" name="create">
-<value>anlegen</value>
+<value>Skapa</value>
 </string>
 <string id="23" name="infomessage">
-<value>Info: Jeder verbundene Benutzer erhält eine Nachricht mit der neuen Umfrage.</value>
+<value>Info: Varje ansluten användare får ett meddelande med den nya röstningen.</value>
 </string>
 <string id="24" name="creatpoll">
-<value>Umfrage anlegen</value>
+<value>Skapa en röstning</value>
 </string>
 <string id="25" name="cancel">
-<value>abbrechen</value>
+<value>Avbryt</value>
 </string>
 <string id="26" name="yesno">
-<value>Ja/Nein</value>
+<value>Ja/Nej</value>
 </string>
 <string id="27" name="numeric">
-<value>Numerisch 1-10</value>
+<value>Numerisk 1-10</value>
 </string>
 <string id="28" name="poll">
-<value>Umfrage</value>
+<value>Röst</value>
 </string>
 <string id="29" name="moderation">
-<value>Sie müssen Moderator/Lehrer in diesem Raum sein um eine Umfrage anzulegen.</value>
+<value>Måste vara Moderator för att skapa en fråga</value>
 </string>
 <string id="30" name="vote">
-<value>Ihr Stimme wurde abgegeben.</value>
+<value>Din röst är mottagen.</value>
 </string>
 <string id="31" name="alreadyvoted">
-<value>Sie haben für diese Umfrage bereits ihr Votum abgegeben.</value>
+<value>Du har redan röstat i denna röstning.</value>
 </string>
 <string id="32" name="voting">
-<value>abstimmen!</value>
+<value>Rösta !</value>
 </string>
 <string id="33" name="answer">
-<value>Ihre Antwort:</value>
+<value>Din respons:</value>
 </string>
 <string id="34" name="yes">
 <value>Ja</value>
 </string>
 <string id="35" name="no">
-<value>Nein</value>
+<value>Nej</value>
 </string>
 <string id="36" name="questionwant">
-<value>will wissen:</value>
+<value>vill veta:</value>
 </string>
 <string id="37" name="pollresults">
-<value>Umfrageergebnisse</value>
+<value>Röstnings resultat</value>
 </string>
 <string id="38" name="question">
-<value>Frage:</value>
+<value>Fråga:</value>
 </string>
 <string id="39" name="results">
-<value>Antworten:</value>
+<value>Resultat:</value>
 </string>
 <string id="40" name="answers">
-<value>Ergebnis:</value>
+<value>Svar:</value>
 </string>
 <string id="41" name="nopoll">
-<value>Es gibt zur Zeit keine Umfage.</value>
+<value>Inga nya röstningar har startat.</value>
 </string>
 <string id="42" name="votings">
-<value>abstimmen!</value>
+<value>Rösta!</value>
 </string>
 <string id="43" name="meeting">
-<value>Meeting (max 4 Plätze)</value>
+<value>Möte (max 4 platser)</value>
 </string>
 <string id="44" name="conference">
-<value>Conference (max 50 Plätze)</value>
+<value>Konferens (max 50 platser)</value>
 </string>
 <string id="45" name="type">
-<value>Modus</value>
+<value>Typ</value>
 </string>
 <string id="46" name="remainingseats">
-<value>verbleibende Plätze</value>
+<value>Andra platser</value>
 </string>
 <string id="47" name="alreadychosen">
-<value>Bereits vergeben</value>
+<value>Redan valt</value>
 </string>
 <string id="48" name="enter">
-<value>Eintreten</value>
+<value>Stig in</value>
 </string>
 <string id="49" name="modleave">
-<value>Der Moderator/Lehrer dieses Raums hat den Raum verlassen.</value>
+<value>Moderatorn har lämnat mötet.</value>
 </string>
 <string id="50" name="systemmessage">
-<value>Systemnachricht</value>
+<value>Systeminformation</value>
 </string>
 <string id="51" name="chossedevice">
-<value>Geräteauswahl</value>
+<value>Välj utrustning</value>
 </string>
 <string id="52" name="choosecam">
-<value>Kamera wählen:</value>
+<value>Välj webcam:</value>
 </string>
 <string id="53" name="choosemic">
-<value>Mikrophon wählen:</value>
+<value>Välj mikrofon:</value>
 </string>
 <string id="54" name="ok">
 <value>ok</value>
 </string>
 <string id="55" name="cancel2">
-<value>abbrechen</value>
+<value>Avbryt</value>
 </string>
 <string id="56" name="reconeectneeded">
-<value>Sie müssen sich erneut verbinden damit die Änderungen wirksam werden.</value>
+<value>Återanslut.</value>
 </string>
 <string id="57" name="editsetup">
-<value>Einstellungen ändern.</value>
+<value>Ändra setup.</value>
 </string>
 <string id="58" name="course">
 <value>Kurs:</value>
 </string>
 <string id="59" name="language">
-<value>Kurssprache:</value>
+<value>Språk:</value>
 </string>
 <string id="60" name="ok2">
-<value>ok</value>
+<value>Ok</value>
 </string>
 <string id="61" name="cancel3">
-<value>abbrechen</value>
+<value>Avbryt</value>
 </string>
 <string id="62" name="clearwhiteboard">
-<value>Zeichenbrett leeren</value>
+<value>Rensa skrivbordet</value>
 </string>
 <string id="63" name="clearwhiteboardquestion">
-<value>Soll dass Zeichenbrett geleert werden bevor ein neues Bild hinzugefügt wird?</value>
+<value>Vill du att skrivbordet skall rensas innan du lägger till en ny bild?</value>
 </string>
 <string id="64" name="dontaskagain">
-<value>Nicht nochmal fragen</value>
+<value>Fråga inte igen</value>
 </string>
 <string id="65" name="no">
-<value>nein</value>
+<value>Nej</value>
 </string>
 <string id="66" name="editsetup2">
-<value>Einstellungen bearbeiten</value>
+<value>Ändra setup</value>
 </string>
 <string id="67" name="needconfirmationwhiteboard">
-<value>Bestätigung anfordern bevor das Zeichenbrett geleert wird.</value>
+<value>Fråga innan skrivbordet töms?.</value>
 </string>
 <string id="68" name="userinfo">
-<value>User Info</value>
+<value>Användar Info</value>
 </string>
 <string id="69" name="cleardrawarea">
-<value>Clear DrawArea</value>
+<value>Rensa ritområdet</value>
 </string>
 <string id="70" name="undo">
-<value>Undo</value>
+<value>Ångra</value>
 </string>
 <string id="71" name="redo">
 <value>Redo</value>
 </string>
 <string id="72" name="selectobject">
-<value>Select an Object</value>
+<value>Välj ett objekt</value>
 </string>
 <string id="73" name="text">
 <value>Text</value>
 </string>
 <string id="74" name="paint">
-<value>Paint</value>
+<value>Måla</value>
 </string>
 <string id="75" name="drawline">
-<value>Draw line</value>
+<value>Rita linje</value>
 </string>
 <string id="76" name="drawu">
-<value>Draw underline</value>
+<value>Rita understrykning</value>
 </string>
 <string id="77" name="rect">
-<value>Rectangle</value>
+<value>Rektangel</value>
 </string>
 <string id="78" name="ellipse">
-<value>Ellipse</value>
+<value>Ellips</value>
 </string>
 <string id="79" name="arrow">
-<value>Arrow</value>
+<value>Pil</value>
 </string>
 <string id="80" name="deletechosen">
-<value>delete chosen Item</value>
+<value>radera valt objekt</value>
 </string>
 <string id="81" name="appliymod">
-<value>Apply for moderation</value>
+<value>Lägg till för moderation</value>
 </string>
 <string id="82" name="apply">
-<value>apply</value>
+<value>Lägg till</value>
 </string>
 <string id="83" name="cancel">
-<value>cancel</value>
+<value>Avbryt</value>
 </string>
 <string id="84" name="mod">
-<value>Become moderator</value>
+<value>Bli moderator</value>
 </string>
 <string id="85" name="close">
-<value>close</value>
+<value>Stäng</value>
 </string>
 <string id="86" name="italic">
 <value>italic</value>
 </string>
 <string id="87" name="bold">
-<value>bold</value>
+<value>fet</value>
 </string>
 <string id="88" name="waiting">
-<value>WAITING</value>
+<value>VÄNTAR</value>
 </string>
 <string id="89" name="applyMessage">
-<value>A User wants to apply for moderation:</value>
+<value>En användare väntar för att bli moderator:</value>
 </string>
 <string id="90" name="accept">
-<value>accept</value>
+<value>Acceptera</value>
 </string>
 <string id="91" name="reject">
-<value>reject</value>
+<value>Neka</value>
 </string>
 <string id="92" name="cancel">
-<value>cancel</value>
+<value>Avbryt</value>
 </string>
 <string id="93" name="sendmodrequestmessage">
-<value>Sending request to following Users</value>
+<value>Skicka fråga till följande användare</value>
 </string>
 <string id="94" name="accept">
-<value>Accepted</value>
+<value>Accepterad</value>
 </string>
 <string id="95" name="reject">
-<value>Rejected</value>
+<value>Nekad</value>
 </string>
 <string id="96" name="changemod">
-<value>Change Moderator</value>
+<value>Ändra moderator</value>
 </string>
 <string id="97" name="nonmoderrormessage">
-<value>You are not moderating this course!</value>
+<value>Du är inte moderator i denna kurs!</value>
 </string>
 <string id="98" name="moderator">
 <value>Moderator:</value>
 </string>
 <string id="99" name="roomfullmessage">
-<value>This Room is full. Sorry please try again later.</value>
+<value>Rummet är fullt. Försök igen senare.</value>
 </string>
 <string id="100" name="elllipse">
-<value>Ellipse</value>
+<value>Ellips</value>
 </string>
 <string id="101" name="close">
-<value>close</value>
+<value>Stäng</value>
 </string>
 <string id="102" name="AuthError">
-<value>Eingabefehler</value>
+<value>Fel data angivet</value>
 </string>
 <string id="103" name="min4username">
-<value>Der Benutzername muss mindestens 4 Zeichen lang sein</value>
+<value>Användarnamnet måste innehålla minst 4 tecken</value>
 </string>
 <string id="104" name="min4pass">
-<value>Das Passwort muss mindestens 4 Zeichen lang sein</value>
+<value>Lösenordet måste innehålla minst 4 tecken</value>
 </string>
 <string id="105" name="usernametaken">
-<value>Der Benutzername ist bereits vergeben</value>
+<value>Användarnamnet är redan använt</value>
 </string>
 <string id="106" name="emailtaken">
-<value>Die EMail ist bereits registriert</value>
+<value>Denna epost är redan använd</value>
 </string>
 <string id="107" name="emailtaken">
-<value>Ein Fehler wurde geworfen bitte kontaktieren Sie das Admin Team</value>
+<value>Systemfel kontakta systemadmin</value>
 </string>
 <string id="108" name="Authlogin">
-<value>Login</value>
+<value>Logga in</value>
 </string>
 <string id="109" name="Authuser">
-<value>Benutzer:</value>
+<value>Användare:</value>
 </string>
 <string id="110" name="Authpass">
-<value>Pass:</value>
+<value>Lösen:</value>
 </string>
 <string id="111" name="Authlang">
-<value>Language</value>
+<value>Språk</value>
 </string>
 <string id="112" name="Authreg">
 <value>Login</value>
 </string>
 <string id="113" name="regformhead">
-<value>Sign Up</value>
+<value>Registrera</value>
 </string>
 <string id="114" name="regformuser">
-<value>Benutzer:</value>
+<value>Användare:</value>
 </string>
 <string id="115" name="regformpass">
-<value>Pass:</value>
+<value>Lösen:</value>
 </string>
 <string id="116" name="regformretype">
-<value>Wiederhole:</value>
+<value>Lösen igen:</value>
 </string>
 <string id="117" name="regformfirstname">
-<value>Vorname:</value>
+<value>Förnamn:</value>
 </string>
 <string id="118" name="regformlastname">
-<value>Nachname:</value>
+<value>Efternamn:</value>
 </string>
 <string id="119" name="regformmail">
-<value>EMail:</value>
+<value>Epost:</value>
 </string>
 <string id="120" name="regformstate">
 <value>Land:</value>
 </string>
 <string id="121" name="regformbtn1">
-<value>Registrieren</value>
+<value>Registrera</value>
 </string>
 <string id="122" name="regformbtn2">
-<value>Abbrechen</value>
+<value>Avbryt</value>
 </string>
 <string id="123" name="Authbtn2">
-<value>Register</value>
+<value>Registrera</value>
 </string>
 <string id="124" name="dashboard">
-<value>Home</value>
+<value>Hem</value>
 </string>
 <string id="125" name="useradmin">
-<value>Benutzer</value>
+<value>Användare</value>
 </string>
 <string id="126" name="groupadmin">
-<value>Gruppen</value>
+<value>Grupper</value>
 </string>
 <string id="127" name="orgadmin">
-<value>Organisationen</value>
+<value>Organisationer</value>
 </string>
 <string id="128" name="headconf">
-<value>Konferenzräume</value>
+<value>Konferensrum</value>
 </string>
 <string id="129" name="conf_pub">
-<value>Öffentlich</value>
+<value>Publik</value>
 </string>
 <string id="130" name="head_org">
 <value>Organisation</value>
 </string>
 <string id="131" name="btn_enterroom">
-<value>betreten</value>
+<value>Stig in</value>
 </string>
 <string id="132" name="useralterself_login">
-<value>Benutzer</value>
+<value>Logga in</value>
 </string>
 <string id="133" name="useralterself_pass">
-<value>Passwort</value>
+<value>Lösenord</value>
 </string>
 <string id="134" name="useralterself_passretype">
-<value>Wiederhole</value>
+<value>Lösenord igen</value>
 </string>
 <string id="135" name="useralterself_firstname">
-<value>Vorname</value>
+<value>Förnamn</value>
 </string>
 <string id="136" name="useralterself_lastname">
-<value>Nachname</value>
+<value>Efternamn</value>
 </string>
 <string id="137" name="useralterself_email">
-<value>EMail</value>
+<value>Epost</value>
 </string>
 <string id="138" name="useralterself_birth">
-<value>Geburtstag</value>
+<value>Personnummer</value>
 </string>
 <string id="139" name="useralterself_streetno">
-<value>Straße/Nr.</value>
+<value>Gata/nr</value>
 </string>
 <string id="140" name="useralterself_town">
-<value>PLZ/Stadt</value>
+<value>Pnr/Stad</value>
 </string>
 <string id="141" name="useralterself_state">
 <value>Land</value>
 </string>
 <string id="142" name="useralterself_adresscomment">
-<value>Adressinfo</value>
+<value>Adress-Info</value>
 </string>
 <string id="143" name="useralterself_header">
-<value>Benutzerdaten</value>
+<value>Användardata</value>
 </string>
 <string id="144" name="savemenubar_savelabel">
-<value>speichern</value>
+<value>Spara</value>
 </string>
 <string id="145" name="savemenubar_savelabel">
-<value>Speichervorgang</value>
+<value>Spara</value>
 </string>
 <string id="146" name="admin_userlist_user_id">
-<value>User-ID</value>
+<value>Användar-ID</value>
 </string>
 <string id="147" name="admin_userlist_login">
-<value>Login</value>
+<value>Logga in</value>
 </string>
 <string id="148" name="admin_userlist_firstnam">
-<value>Vorname</value>
+<value>Förnamn</value>
 </string>
 <string id="149" name="admin_userlist_lastname">
-<value>Nachname</value>
+<value>Efternamn</value>
 </string>
 <string id="150" name="turnoverlist_next">
-<value>vorwärts</value>
+<value>Visa nästa</value>
 </string>
 <string id="151" name="turnoverlist_pre">
-<value>zurück</value>
+<value>Visa före</value>
 </string>
 <string id="152" name="savecontent_confirm">
-<value>Datensatz entfernen</value>
+<value>Radera innehåll</value>
 </string>
 <string id="153" name="savecontent_confirm_cancel_btn">
-<value>abbrechen</value>
+<value>Avbryt</value>
 </string>
 <string id="154" name="savecontent_confirm_confirm_btn">
-<value>enfernen</value>
+<value>Radera</value>
 </string>
 <string id="155" name="savemenubar_addlabel">
-<value>Datensatz anlegen</value>
+<value>Nytt innehåll</value>
 </string>
 <string id="156" name="savemenubar_reloadlabel">
-<value>Datensatz neu laden</value>
+<value>Uppdatera innehåll</value>
 </string>
 <string id="157" name="savemenubar_deletelabel">
-<value>Datensatz entfernen</value>
+<value>Radera innehåll</value>
 </string>
 <string id="158" name="useralter_admin_status">
 <value>Status</value>
 </string>
 <string id="159" name="useralter_admin_statusItem">
-<value>gesperrt</value>
+<value>Ej tillgänglig</value>
 </string>
 <string id="160" name="useralter_admin_statusItem">
-<value>aktiv</value>
+<value>Tillgänglig</value>
 </string>
 <string id="161" name="useralter_admin_organisation">
-<value>Organisationen</value>
+<value>Organisation</value>
 </string>
 <string id="162" name="calendar_iconlabel">
 <value>Kalender</value>
 </string>
 <string id="163" name="savewindow_btn">
-<value>schließen</value>
+<value>Stäng</value>
 </string>
 <string id="164" name="organisationtablelist_idrow">
-<value>Organisations-ID</value>
+<value>Organisation-ID</value>
 </string>
 <string id="165" name="organisationtablelist_namerow">
-<value>Name</value>
+<value>Namn</value>
 </string>
 <string id="166" name="uservalue_levelid1">
-<value>Benutzer</value>
+<value>användare</value>
 </string>
 <string id="167" name="uservalue_levelid2">
-<value>Moderator</value>
+<value>mod</value>
 </string>
 <string id="168" name="uservalue_levelid3">
 <value>Admin</value>
 </string>
 <string id="169" name="uservalue_levellabel">
-<value>Benuterrolle</value>
+<value>Användarnivå</value>
 </string>
 <string id="170" name="orgvalue_header">
 <value>Organisation</value>
 </string>
 <string id="171" name="orgvalue_orgname">
-<value>Name</value>
+<value>Namn</value>
 </string>
 <string id="172" name="orgvalue_orgname">
-<value>Organisation hinzufügen</value>
+<value>Lägg till organisation</value>
 </string>
 <string id="173" name="orgvalue_orgname">
-<value>Organisation hinzufügen</value>
+<value>Lägg till organisation</value>
 </string>
 <string id="174" name="orgvalue_userwin">
-<value>abbrechen</value>
+<value>Avbryt</value>
 </string>
 <string id="175" name="orgvalue_userwin">
-<value>hinzufügen</value>
+<value>Lägg till</value>
 </string>
 <string id="176" name="orgvalue_userwin">
-<value>Organisation entfernen</value>
+<value>Ta bort organisation</value>
 </string>
 <string id="177" name="orgvalue_userlist">
-<value>Benutzer</value>
+<value>Användare</value>
 </string>
 <string id="178" name="orgvalue_userlistadd">
-<value>Benutzer hinzufügen</value>
+<value>Lägg till användare</value>
 </string>
 <string id="179" name="orgvalue_userlistdelete">
-<value>Benutzer entfernen</value>
+<value>Radera användare </value>
 </string>
 <string id="180" name="orgvalue_userwinheader">
-<value>Benutzer hinzufügen</value>
+<value>Lägg till användare</value>
 </string>
 <string id="181" name="orgvalue_userwinsearchfield">
-<value>Benutzer suchen</value>
+<value>Sök användare</value>
 </string>
 <string id="182" name="orgvalue_userwinsearchbtn">
-<value>suchen</value>
+<value>sök</value>
 </string>
 <string id="183" name="orgvalue_userwinsearchresult">
-<value>Benutzer</value>
+<value>Användare</value>
 </string>
 <string id="184" name="loginwin_chooseorganisation">
 <value>Organisation</value>
 </string>
 <string id="185" name="loginwin_chooseorganisationbtn">
-<value>auswählen</value>
+<value>Stig in</value>
 </string>
 <string id="186" name="navi_roomadmin">
-<value>Konferenzräume</value>
+<value>Konferensrum</value>
 </string>
 <string id="187" name="roomadmin_header">
-<value>Konferenzräume</value>
+<value>Konferensrum</value>
 </string>
 <string id="188" name="roomadmin_header">
-<value>ID</value>
+<value>Id</value>
 </string>
 <string id="189" name="roomadmin_header">
-<value>Name</value>
+<value>Namn</value>
 </string>
 <string id="190" name="roomadmin_header">
-<value>öffentlich</value>
+<value>Publik</value>
 </string>
 <string id="191" name="roomadmin_header">
-<value>Organisationen</value>
+<value>Organisationer</value>
 </string>
 <string id="192" name="roomadmin_header">
-<value>Konferenzräume</value>
+<value>Konferensrum</value>
 </string>
 <string id="193" name="roomvalue_name">
-<value>Name</value>
+<value>Namn</value>
 </string>
 <string id="194" name="roomvalue_type">
 <value>Typ</value>
 </string>
 <string id="195" name="roomvalue_ispublic">
-<value>öffentlich</value>
+<value>Publik</value>
 </string>
 <string id="196" name="roomvalue_comment">
 <value>Kommentar</value>
 </string>
 <string id="197" name="whiteboard_saveicon">
-<value>Speichern</value>
+<value>Spara</value>
 </string>
 <string id="198" name="whiteboard_openicon">
-<value>Öffnen</value>
+<value>Ladda</value>
 </string>
 <string id="199" name="whiteboard_saveaswinheader">
-<value>Speichern unter</value>
+<value>Spara som</value>
 </string>
 <string id="200" name="whiteboard_saveaswintext">
-<value>Dateiname</value>
+<value>Filnamn</value>
 </string>
 <string id="201" name="whiteboard_saveaswintext">
-<value>Dateiname</value>
+<value>Filnamn</value>
 </string>
 <string id="202" name="whiteboard_saveaswinbtn1">
-<value>Abbrechen</value>
+<value>Avbryt</value>
 </string>
 <string id="203" name="whiteboard_saveaswinbtn2">
-<value>Speichern</value>
+<value>Spara</value>
 </string>
 <string id="204" name="rpcerrorwin_header">
-<value>Fehler</value>
+<value>Fel</value>
 </string>
 <string id="205" name="loadwml_header">
-<value>Laden</value>
+<value>Laddar</value>
 </string>
 <string id="206" name="loadwml_messsload">
-<value>Objekte geladen</value>
+<value>Objekt laddade</value>
 </string>
 <string id="207" name="loadwml_messsync">
-<value>Synchronisiere Clients. Restliche Clients: </value>
+<value>Synkroniserar, vänta:</value>
 </string>
 <string id="208" name="loadimage_messload">
-<value>Lade Bilddaten</value>
+<value>Laddar bilddata</value>
 </string>
 <string id="209" name="loadimage_messsync">
-<value>Synchronisiere Clients. Restliche Clients: </value>
+<value>Synkroniserar, vänta:</value>
 </string>
 <string id="210" name="loadwml_confirmheader">
-<value>Zeichenbrett leeren</value>
+<value>Rensa ritutrymmet</value>
 </string>
 <string id="211" name="loadwml_confirmmess">
-<value>Zeichnbrett leeren, alle bisherigen Änderungen gehen damit verloren!</value>
+<value>Rensa ritutrymmet, all data kommer att förloras</value>
 </string>
 <string id="212" name="loadwml_confirmmess2">
-<value>Bestätigung anfordern vor dem Laden einer Datei</value>
+<value>Fråga innan inladdning av fil</value>
 </string>
 <string id="213" name="send_invitation_btn">
-<value>Einladung versenden</value>
+<value>Skicka inbjudan</value>
 </string>
 <string id="214" name="send_invitationwin_header">
-<value>Einladung versenden</value>
+<value>Skicka inbjudan</value>
 </string>
 <string id="215" name="send_invitationwin_subject">
-<value>Betreff</value>
+<value>Ämne</value>
 </string>
 <string id="216" name="send_invitationwin_recipient">
-<value>Empfänger</value>
+<value>Mottagare</value>
 </string>
 <string id="217" name="send_invitationwin_message">
-<value>Nachricht</value>
+<value>Meddelande</value>
 </string>
 <string id="218" name="send_invitationwin_btn_confirm">
-<value>abschicken</value>
+<value>Skicka</value>
 </string>
 <string id="219" name="send_invitationwin_btn_cancel">
-<value>abbrechen</value>
+<value>Avbryt</value>
 </string>
 <string id="220" name="send_chat_text_btn">
-<value>senden</value>
-</string>
+<value>Skicka</value>
+</string>	
 <string id="221" name="invited_userwin_header">
-<value>Benutzerdaten</value>
+<value>Användardata</value>
 </string>
 <string id="222" name="invited_userwin_subject">
-<value>Nickname für diese Konference</value>
+<value>Ditt alias i denna konferens</value>
 </string>
 <string id="223" name="invited_userwin_login">
-<value>Spitzname/Alias</value>
+<value>Alias</value>
 </string>
 <string id="224" name="invited_userwin_firstname">
-<value>Vorname</value>
+<value>Förnamn</value>
 </string>
 <string id="225" name="invited_userwin_lastname">
-<value>Nachname</value>
+<value>Efternamn</value>
 </string>
 <string id="226" name="invited_userwin_mail">
-<value>EMail</value>
+<value>Epost</value>
 </string>
 <string id="227" name="invited_userwin_lang">
-<value>Sprache</value>
+<value>Språk</value>
 </string>
 <string id="228" name="invited_userwin_enter">
-<value>Absenden</value>
-</string>	
+<value>Stig in</value>
+</string>
 <string id="229" name="invited_userwin_enter">
-<value>Laden</value>
+<value>Laddar</value>
 </string>
 <string id="230" name="invited_userwin_enter">
-<value>Daten werden geladen, bitte warten!</value>
-</string>
+<value>Laddar data, vänta!</value>
+</string>	
 <string id="231" name="user_registerFalsePWD">
-<value>Falsches Passwort</value>
+<value>Fel lösenord</value>
 </string>
 <string id="232" name="user_registerFalsePWDHeader">
-<value>Bitte geben Sie zwei identische Passwörter mit mindestens 4 Buchstaben ein.</value>
+<value>2 identiska lösenord med minst 4 tecken tack</value>
 </string>
 <string id="233" name="user_registerMailError">
-<value>Ungültige Mail</value>
+<value>Fel epostadress</value>
 </string>
 <string id="234" name="user_registerMailErrorHeader">
-<value>Die angegebene Mail-Adresse ist ungültig</value>
+<value>Du har angett en ogiltig epostadress</value>
 </string>
 <string id="235" name="user_registerSuccess">
-<value>Registration Abgeschlossen</value>
+<value>Registrering klar</value>
 </string>
 <string id="236" name="user_registerSuccessHeader">
-<value>Ihr Benutzer wurde angelegt. Sie können sich nun einloggen.</value>
+<value>Ditt konto är skapat. Du kan logga in.</value>
 </string>	
 <string id="237" name="user_sharing_message">
-<value>Sie können ihren Bildschirm im Moment nicht veröffentlichen da bereits ein anderer Benutzer in diesem Conferenzraum es tut.</value>
+<value>Du kan inte dela din skärm just nu. En annan delar sin skärm.</value>
 </string>		
 <string id="238" name="user_sharing_messageHeader">
-<value>Veröffentlichung abgelehnt</value>
+<value>Delning förbjuden</value>
 </string>	
 <string id="239" name="user_doStartScreenViewer">
-<value>Desktop veröffentlichen</value>
+<value>Dela skärm</value>
 </string>	
 <string id="240" name="screen_warnBandwidth">
-<value>Schlechte Bandbreite. Es war nicht möglich alle Bilder des Bildschirms zu laden. Tritt dieser Fehler häufiger auf können Sie den Moderator darum bitten die Qualität zur verringern.</value>
+<value>Dålig bandbredd: Du kan inte synkronisera skärmen. Du kommer att tappa frames. Om denna varning visas ofta kan du be din moderator att sänka kvaliteten.</value>
 </string>	
 <string id="241" name="screen_userlabel">
-<value>Bildschirm von:</value>
-</string>		
+<value>Skärm av:</value>
+</string>			
 <string id="242" name="whiteboard_tab_paint">
-<value>Zeichnen</value>
+<value>Paint</value>
 </string>	
 <string id="243" name="whiteboard_tab_document">
-<value>Dokumente</value>
+<value>Document</value>
 </string>		
 <string id="244" name="tabbar_chaticon">
 <value>Chat</value>
 </string>	
 <string id="245" name="tabbar_filesicon">
-<value>Dateien</value>
+<value>Files</value>
 </string>	
 <string id="246" name="tabbar_participantsicon">
-<value>Benutzer</value>
+<value>Members</value>
 </string>	
 <string id="247" name="swfpresentation_listsaveorig">
-<value>Orginaldatei herunterladen</value>
+<value>Download original document</value>
 </string>	
 <string id="248" name="swfpresentation_listsavepdf">
-<value>PDF Doukment herunterladen</value>
+<value>Download pdf document</value>
 </string>	
 <string id="249" name="swfpresentation_listloadswf">
-<value>Presentation in Zeichenbrett laden</value>
+<value>Load Presentation to whiteboard</value>
 </string>	
 <string id="250" name="navimain_config">
-<value>Konfiguration</value>
+<value>Configuration</value>
 </string>	
 <string id="251" name="whiteboard_boundingbox_drag">
-<value>Objekt verschieben</value>
+<value>Drag this Object</value>
 </string>		
 <string id="252" name="whiteboard_boundingbox_resize">
-<value>Objekt vergrößern/verkleinern</value>
+<value>Resize this Object</value>
 </string>
 <string id="253" name="whiteboard_documenttoolbar_zoom">
 <value>%</value>
 </string>	
 <string id="254" name="whiteboard_documenttoolbar_slide">
-<value>von</value>
+<value>of</value>
 </string>		
 <string id="255" name="whiteboard_documenttoolbar_firstslide">
-<value>zur ersten Seite springen</value>
+<value>Go to first Page</value>
 </string>		
 <string id="256" name="whiteboard_documenttoolbar_preslide">
-<value>zur vorhergehenden Seite springen</value>
+<value>Go to previous Page</value>
 </string>	
 <string id="257" name="whiteboard_documenttoolbar_nextslide">
-<value>zur nächsten Seite springen</value>
+<value>Go to next Page</value>
 </string>		
 <string id="258" name="whiteboard_documenttoolbar_lastslide">
-<value>zur letzten Seite springen</value>
+<value>Go to last Page</value>
 </string>	
 <string id="259" name="whiteboard_documenttoolbar_zoomminus">
 <value>Zoom --</value>
@@ -781,9 +781,9 @@
 <value>Zoom ++</value>
 </string>	
 <string id="261" name="salutation_mr">
-<value>Herr</value>
+<value>Mr.</value>
 </string>
 <string id="262" name="salutation_miss">
-<value>Frau</value>
-</string>						
+<value>Ms.</value>
+</string>	
 </language>

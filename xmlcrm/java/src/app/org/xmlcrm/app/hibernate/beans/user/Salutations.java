@@ -2,6 +2,8 @@ package org.xmlcrm.app.hibernate.beans.user;
 
 import java.util.Date;
 
+import org.xmlcrm.app.hibernate.beans.lang.Fieldlanguagesvalues;
+
 /**
  * 
  * @hibernate.class table="salutations"
@@ -15,6 +17,8 @@ public class Salutations {
 	private Date starttime;
 	private Date updatetime;
 	private String deleted;
+	private Long fieldvalues_id;
+	private Fieldlanguagesvalues label;
 	
 	public Salutations() {
 		super();
@@ -83,6 +87,24 @@ public class Salutations {
 		this.deleted = deleted;
 	}
 
+    /**
+     * @hibernate.property
+     *  column="fieldvalues_id"
+     *  type="long"
+     */
+	public Long getFieldvalues_id() {
+		return fieldvalues_id;
+	}
+	public void setFieldvalues_id(Long fieldvalues_id) {
+		this.fieldvalues_id = fieldvalues_id;
+	}
 
+	public Fieldlanguagesvalues getLabel() {
+		return label;
+	}
+
+	public void setLabel(Fieldlanguagesvalues label) {
+		this.label = label;
+	}	
 	
 }

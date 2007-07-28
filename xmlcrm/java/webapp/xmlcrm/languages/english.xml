@@ -722,5 +722,68 @@
 </string>	
 <string id="241" name="screen_userlabel">
 <value>Screen of:</value>
-</string>			
+</string>	
+<string id="242" name="whiteboard_tab_paint">
+<value>Paint</value>
+</string>	
+<string id="243" name="whiteboard_tab_document">
+<value>Document</value>
+</string>		
+<string id="244" name="tabbar_chaticon">
+<value>Chat</value>
+</string>	
+<string id="245" name="tabbar_filesicon">
+<value>Files</value>
+</string>	
+<string id="246" name="tabbar_participantsicon">
+<value>Members</value>
+</string>	
+<string id="247" name="swfpresentation_listsaveorig">
+<value>Download original document</value>
+</string>	
+<string id="248" name="swfpresentation_listsavepdf">
+<value>Download pdf document</value>
+</string>	
+<string id="249" name="swfpresentation_listloadswf">
+<value>Load Presentation to whiteboard</value>
+</string>	
+<string id="250" name="navimain_config">
+<value>Configuration</value>
+</string>	
+<string id="251" name="whiteboard_boundingbox_drag">
+<value>Drag this Object</value>
+</string>		
+<string id="252" name="whiteboard_boundingbox_resize">
+<value>Resize this Object</value>
+</string>
+<string id="253" name="whiteboard_documenttoolbar_zoom">
+<value>%</value>
+</string>	
+<string id="254" name="whiteboard_documenttoolbar_slide">
+<value>of</value>
+</string>		
+<string id="255" name="whiteboard_documenttoolbar_firstslide">
+<value>Go to first Page</value>
+</string>		
+<string id="256" name="whiteboard_documenttoolbar_preslide">
+<value>Go to previous Page</value>
+</string>	
+<string id="257" name="whiteboard_documenttoolbar_nextslide">
+<value>Go to next Page</value>
+</string>		
+<string id="258" name="whiteboard_documenttoolbar_lastslide">
+<value>Go to last Page</value>
+</string>	
+<string id="259" name="whiteboard_documenttoolbar_zoomminus">
+<value>Zoom --</value>
+</string>
+<string id="260" name="whiteboard_documenttoolbar_zoomplus">
+<value>Zoom ++</value>
+</string>	
+<string id="261" name="salutation_mr">
+<value>Mr.</value>
+</string>
+<string id="262" name="salutation_miss">
+<value>Ms.</value>
+</string>								
 </language>

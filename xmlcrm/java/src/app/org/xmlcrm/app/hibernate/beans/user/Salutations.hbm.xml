@@ -58,6 +58,14 @@
             column="deleted"
         />
 
+        <property
+            name="fieldvalues_id"
+            type="long"
+            update="true"
+            insert="true"
+            column="fieldvalues_id"
+        />
+
         <!--
             To add non XDoclet property mappings, create a file named
                 hibernate-properties-Salutations.xml

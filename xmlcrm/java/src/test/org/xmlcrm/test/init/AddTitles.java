@@ -12,8 +12,8 @@ public class AddTitles extends TestCase {
 	
 	public void testaddTestTitles(){
 		
-		Salutationmanagement.getInstance().addUserSalutation("Herr");
-		Salutationmanagement.getInstance().addUserSalutation("Frau");
+		Salutationmanagement.getInstance().addUserSalutation("Herr",261);
+		Salutationmanagement.getInstance().addUserSalutation("Frau",262);
 		
 	}
 

@@ -4,6 +4,8 @@
 	from United Nations
 	United Nations Statistics Division- Standard Country and Area Codes Classifications (M49)
 	http://unstats.un.org/unsd/methods/m49/m49alpha.htm
+	
+	28.07.2007 add Taiwan, Republic of China country code 157, short ROC
 	 -->
 <countries>
 	<country code="004" name="Afghanistan" short="AFG" />
@@ -211,6 +213,7 @@
 	<country code="752" short="SWE" name="Sweden"/>
 	<country code="756" short="CHE" name="Switzerland"/>
 	<country code="760" short="SYR" name="Syrian Arab Republic"/>
+	<country code="157" short="ROC" name="Taiwan, Republic of China"/>
 	<country code="762" short="TJK" name="Tajikistan"/>
 	<country code="764" short="THA" name="Thailand"/>
 	<country code="807" short="MKD" name="The former Yugoslav Republic of Macedonia"/>
