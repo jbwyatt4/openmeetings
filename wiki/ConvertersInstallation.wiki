@@ -20,7 +20,7 @@
 
 ==checkinstallation==
 
-  * open a shell/cm-prompt and type pdf2swf, if a list of options is shown it is successfully installed and added to the system path. On windows/mac you have to change the directory where you have installed swftools. By Default on windows this is C:\swftools on mac it will be /usr/local/bin. This path must be added during Installation or in the Admin-Configuration.
+  * open a shell/cmd-prompt and type pdf2swf, if a list of options is shown it is successfully installed and added to the system path. On windows/mac you have to change the directory where you have installed swftools. By Default on windows this is C:\swftools on mac it will be /usr/local/bin. This path must be added during Installation or in the Admin-Configuration.
 
 
 = Imagemagick =
@@ -37,6 +37,5 @@
 
 ==checkinstallation==
 
-  * open a shell/cm-prompt and type convert, if a list of options is shown it is successfully installed and added to the system path. If you have several installations you must specify the path to your convert command.  This path must be added during Installation or in the Admin-Configuration.
-
+  * open a shell/cmd-prompt and type convert, if a list of options is shown it is successfully installed and added to the system path. If you have several installations you must specify the path to your convert command.  This path must be added during Installation or in the Admin-Configuration.
 
