@@ -50,8 +50,8 @@ public class UserService {
 	 * @param SID
 	 * @return
 	 */
-	public List getUserSalutations(String SID){
-        return Salutationmanagement.getInstance().getUserSalutations();
+	public List getUserSalutations(String SID, long language_id){
+        return Salutationmanagement.getInstance().getUserSalutations(language_id);
 	}
 	
 	/**

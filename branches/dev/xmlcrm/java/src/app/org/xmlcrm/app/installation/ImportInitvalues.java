@@ -65,13 +65,14 @@ public class ImportInitvalues {
 	
 	public void loadSalutations(){
 		
-		Salutationmanagement.getInstance().addUserSalutation("Herr");
-		Salutationmanagement.getInstance().addUserSalutation("Frau");
+		Salutationmanagement.getInstance().addUserSalutation("Mister",261);
+		Salutationmanagement.getInstance().addUserSalutation("Miss",262);
 		
 	}
 	
-	public void loadConfiguration(String allowfrontendRegister, String smtpServer, String smtpPort, String referer, String mailauthname, 
-			String mailauthpass, String default_lang){
+	public void loadConfiguration(String allowfrontendRegister, String smtpServer, String smtpPort, 
+			String referer, String mailauthname, String mailauthpass, String default_lang, 
+			String swf_path, String im_path){
 		
 		//"1"
 		Configurationmanagement.getInstance().addConfByKey(3, "allow_frontend_register", allowfrontendRegister, null, "");
@@ -96,6 +97,9 @@ public class ImportInitvalues {
 		
 		Configurationmanagement.getInstance().addConfByKey(3, "register_mail_subject", "SignUp", null, "The Subject for Mails sended at registration");
 					
+		Configurationmanagement.getInstance().addConfByKey(3, "swftools_path", swf_path, null, "Path To SWF-Tools");
+		
+		Configurationmanagement.getInstance().addConfByKey(3, "imagemagick_path", im_path, null, "Path to ImageMagick tools");
 		
 	}
 	

@@ -7,6 +7,8 @@ import java.io.File;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
+import org.xmlcrm.app.data.basic.Configurationmanagement;
+
 public class GenerateThumbs {
 
 	private static GenerateThumbs instance;
@@ -70,9 +72,12 @@ public class GenerateThumbs {
 			}
 			Runtime rt = Runtime.getRuntime();
 
+			String pathToIMagick = Configurationmanagement.getInstance().getConfKey(3,"imagemagick_path").getConf_value();
+			
 			String command = current_dir + "jod" + File.separatorChar
 					+ runtimeFile + " " + inputfile + " " + outputpath
-					+ "_thumb_pages-%03d.jpg "+thumbSize;
+					+ "_thumb_pages-%03d.jpg "+thumbSize + " "
+					+ pathToIMagick;
 			returnMap.put("command",command);
 			Process proc = rt.exec(command);
 			InputStream stderr = proc.getErrorStream();

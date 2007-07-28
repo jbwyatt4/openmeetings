@@ -109,16 +109,20 @@ public class Install extends VelocityViewServlet {
 					String configmailuser = httpServletRequest.getParameter("configmailuser");
 					String configmailpass = httpServletRequest.getParameter("configmailpass");
 					String configdefaultLang = httpServletRequest.getParameter("configdefaultLang");
+					String swf_path = httpServletRequest.getParameter("swftools_path");
+					String im_path = httpServletRequest.getParameter("imagemagick_path");
 					
 					log.error("step 0+ start init with values. "+username+" "+userpass+" "+useremail+" "+orgname+" "+configdefault+" "+configreferer+" "+
-						configsmtp+" "+configmailuser+" "+configmailpass+" "+configdefaultLang);
+						configsmtp+" "+configmailuser+" "+configmailpass+" "+configdefaultLang + " " +
+						swf_path+" "+im_path);
 					
 					String filePath = getServletContext().getRealPath("/")+ImportInitvalues.languageFolderName;
 					
 					ImportInitvalues.getInstance().loadInitLanguages(filePath);
 					ImportInitvalues.getInstance().loadMainMenu();
 					ImportInitvalues.getInstance().loadSalutations();
-					ImportInitvalues.getInstance().loadConfiguration(configdefault, configsmtp, configsmtpport, configreferer, configmailuser, configmailpass, configdefaultLang);
+					ImportInitvalues.getInstance().loadConfiguration(configdefault, configsmtp, configsmtpport, 
+									configreferer, configmailuser, configmailpass, configdefaultLang, swf_path, im_path);
 					ImportInitvalues.getInstance().loadInitUserAndOrganisation(username, userpass, useremail, orgname);
 					ImportInitvalues.getInstance().loadDefaultRooms();
 					

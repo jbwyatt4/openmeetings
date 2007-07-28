@@ -39,8 +39,8 @@ public class StartUpData extends TestCase {
 		Navimanagement.getInstance().addMainStructure("orgadmin", 1, 127, true, false, 3, "orgadmin",4);
 		Navimanagement.getInstance().addMainStructure("roomadmin", 1, 186, true, false, 3, "roomadmin",4);
 		
-		Salutationmanagement.getInstance().addUserSalutation("Herr");
-		Salutationmanagement.getInstance().addUserSalutation("Frau");
+		Salutationmanagement.getInstance().addUserSalutation("Herr",261);
+		Salutationmanagement.getInstance().addUserSalutation("Frau",262);
 		
 		//TODO: Load States from seperate XML-File
 		Statemanagement.getInstance().addState("Deutschland");

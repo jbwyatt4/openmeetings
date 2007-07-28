@@ -7,6 +7,8 @@ import java.io.File;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
+import org.xmlcrm.app.data.basic.Configurationmanagement;
+
 public class GenerateImage {
 
 	private static GenerateImage instance;
@@ -76,8 +78,12 @@ public class GenerateImage {
 			}
 			Runtime rt = Runtime.getRuntime();
 
+			String pathToIMagick = Configurationmanagement.getInstance().getConfKey(3,"imagemagick_path").getConf_value();
+			
 			String command = current_dir + "jod" + File.separatorChar
-					+ runtimeFile + " " + inputFile + " " + outputfile + ".jpg";
+					+ runtimeFile + " " + inputFile + " " 
+					+ outputfile + ".jpg" + " "
+					+ pathToIMagick;
 			returnMap.put("command", command);
 			Process proc = rt.exec(command);
 			InputStream stderr = proc.getErrorStream();

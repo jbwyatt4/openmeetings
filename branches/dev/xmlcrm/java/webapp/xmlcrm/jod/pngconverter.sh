@@ -1,1 +1,1 @@
-convert $1 $2
+$3convert $1 $2
