@@ -15,7 +15,7 @@
   * Packages for Windows/Mac: http://www.swftools.org/download.html
   * Packages for Debian: http://packages.debian.org/unstable/utils/swftools
   * Packages for Ubuntu: http://packages.ubuntu.com/gutsy/utils/swftools
-  * RPM's for RedHat/Fedora: http://dag.wieers.com/rpm/packages/swftools/
+  * RPM's for Red-Hat/Fedora: http://dag.wieers.com/rpm/packages/swftools/
   * RPM's Suse: http://packman.links2linux.de/package/swftools
 
 ==checkinstallation==
@@ -38,6 +38,5 @@
 ==checkinstallation==
 
   * open a shell/cm-prompt and type convert, if a list of options is shown it is successfully installed and added to the system path. If you have several installations you must specify the path to your convert command.  This path must be added during Installation or in the Admin-Configuration.
-
 
 
