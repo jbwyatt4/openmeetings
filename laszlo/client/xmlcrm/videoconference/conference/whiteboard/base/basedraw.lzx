@@ -18,7 +18,7 @@
 	</method>
 </class>
 
-<class name="drawviewnew" extends="drawview" x="-1" y="-1" >
+<class name="drawviewnew" extends="drawview" cachebitmap="false" x="-1" y="-1" >
 	
 	<attribute name="typeOfObject" value="paint" type="string" />
 
@@ -53,7 +53,7 @@
      -->
 </class>
 
-<class name="basedraw" extends="drawview" clickable="true" >
+<class name="basedraw" extends="drawview" cachebitmap="false" clickable="true" >
 
 	<attribute name="currentlayer" value="null" />
 	<attribute name="layers" value="null" />

@@ -90,7 +90,9 @@
             if (this.autoconnect) {
                 this.connect();
             }
-
+		
+			//Register Methods
+			this.registerMethods();
           ]]>
         </method>
 
@@ -218,9 +220,6 @@
                     Debug.write("connection failed to", this.src, ":", msg);
                 }
             }
-		
-			//Register Methods
-			this.registerMethods();
 
             if (s == 2) {
                 if (this.onconnect) this.onconnect.sendEvent();
