@@ -1,7 +1,7 @@
 #summary About the installation of the converters
 #labels Phase-Documentation
 
-*this instructions are target of Beta4 release and have no effect to Beta3*
+*these instructions apply for 0.5 Beta4 release and have no effect to 0.5 Beta3*
 
 = SWFTools =
 
@@ -38,4 +38,3 @@
 ==checkinstallation==
 
   * open a shell/cmd-prompt and type convert, if a list of options is shown it is successfully installed and added to the system path. If you have several installations you must specify the path to your convert command.  This path must be added during Installation or in the Admin-Configuration.
-
