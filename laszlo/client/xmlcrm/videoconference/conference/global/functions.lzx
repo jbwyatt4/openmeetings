@@ -38,6 +38,19 @@ function getLabelNameGlob(labelid){
 	}
 }
 Debug.write("end init");
+    
+var currentMouseWheelObject = null;
+    
+function setCurrentMouseWheelObject(obj) {
+    currentMouseWheelObject=obj;
+}    
+function getCurrentMouseWheelObject(obj) {
+    return currentMouseWheelObject;
+}  
+function disableCurrentMouseWheelObject() {
+    currentMouseWheelObject=null;
+}   
+          
 ]]>
 </script>
 
@@ -210,6 +223,16 @@ Debug.write("end init");
 <method name="getCountryRecord" args="id">
     return canvas.statesInitValues[id];
 </method>
+    
+<method event="onmousewheeldelta" reference="LzKeys" args="d">
+    var obj = getCurrentMouseWheelObject();
+    //Debug.write("onmousewheeldelta 12: ",d,obj);
+    <![CDATA[
+        if (obj!=null) {
+            obj.step(-d);
+        }
+    ]]>
+</method>      
   
 <!--
 

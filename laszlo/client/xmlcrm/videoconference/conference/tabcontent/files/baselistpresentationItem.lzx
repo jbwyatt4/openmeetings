@@ -24,13 +24,13 @@
 
     <handler name="onmouseover">
         Debug.write("onmouseover: ",onmouseover);
-        this.parent.parent.iscurrentscrollactive=true;
+        setCurrentMouseWheelObject(this.parent.parent._scrollbar);
         if (!this.isselected){
             this.setBGColor(canvas.baseMouseOvercolorizer);
         }
     </handler> 
     <handler name="onmouseout">
-        this.parent.parent.iscurrentscrollactive=false;
+        disableCurrentMouseWheelObject();
         if (!this.isselected){
             this.setBGColor(white);
         }
