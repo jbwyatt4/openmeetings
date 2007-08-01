@@ -401,7 +401,7 @@
 			obj._swfView.setAttribute('width',lastactionObject[11]);
             obj._swfView.setAttribute('height',lastactionObject[12]);
             obj._swfView.zoomlevel = lastactionObject[13];
-            obj.            
+            //obj.            
         ]]>
     </method>
 
