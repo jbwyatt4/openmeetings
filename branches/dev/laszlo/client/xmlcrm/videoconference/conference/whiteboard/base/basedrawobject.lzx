@@ -16,6 +16,9 @@
     <attribute name="slideNumber" value="0" type="number" /> 
     
     <attribute name="currentzoomFactor" value="100" type="number" />
+    <attribute name="zoomlevel" value="0" type="number" />
+    <attribute name="initwidth" value="0" type="number" />
+    <attribute name="initheight" value="0" type="number" />
     
     <attribute name="typeOfObject" value="swf" type="string" />
     
@@ -168,17 +171,24 @@
   		this.addPresentationToLayer(refObj,actionObject[actionObject.length-1],actionObject[1],actionObject[actionObject.length-5],actionObject[actionObject.length-4],actionObject[actionObject.length-3],actionObject[actionObject.length-2],false,actionObject[2],actionObject[3],actionObject[4],actionObject[5],actionObject[6],actionObject[7],actionObject[8]);
   	</method>
   	
-  	<method name="registerNewSWF" args="urlname,posx,posy,width,height,baseurl,fileName,moduleName,parentPath,room,domain,slideNumber">
+  	<method name="registerNewSWF" args="urlname,posx,posy,width,height,baseurl,fileName,moduleName,parentPath,room,domain,slideNumber,innerx,innery,innerwidth,innerheight,zoomlevel,initwidth,initheight">
 		var actionObject = new Array();
-	    actionObject.push('swf');
-	    actionObject.push(urlname);
-		actionObject.push(baseurl);
-		actionObject.push(fileName);
-		actionObject.push(moduleName);
-		actionObject.push(parentPath);
-		actionObject.push(room);
-		actionObject.push(domain);
-        actionObject.push(slideNumber);
+	    actionObject.push('swf');//0
+	    actionObject.push(urlname);//1
+		actionObject.push(baseurl);//2
+		actionObject.push(fileName);//3
+		actionObject.push(moduleName);//4
+		actionObject.push(parentPath);//5
+		actionObject.push(room);//6
+		actionObject.push(domain);//7
+        actionObject.push(slideNumber);//8
+        actionObject.push(innerx);//9
+        actionObject.push(innery);//10
+        actionObject.push(innerwidth);//11
+        actionObject.push(innerheight);//12
+        actionObject.push(zoomlevel);//13
+        actionObject.push(initwidth);//14
+        actionObject.push(initheight);//15
 		actionObject.push(this.counter);
 	    actionObject.push(posx);
 	    actionObject.push(posy);
@@ -234,12 +244,18 @@
 				//now send notifications to connected clients
 				this.parent.setAttribute('drawmodus','hand');
                 
+                this.parent.syncImageRefObj.initwidth = this.parent.syncImageRefObj._swfView.width;
+                this.parent.syncImageRefObj.initheight = this.parent.syncImageRefObj._swfView.height;
+                
 				this.parent.registerNewSWF(this.parent.syncImageRefObj.baseurl,this.parent.syncImageRefObj.x,
                         this.parent.syncImageRefObj.y,this.parent.syncImageRefObj._swfView.width,
                         this.parent.syncImageRefObj._swfView.height,this.parent.syncImageRefObj.baseurl,
                         this.parent.syncImageRefObj.fileName,this.parent.syncImageRefObj.moduleName,
                         this.parent.syncImageRefObj.parentPath,this.parent.syncImageRefObj.room,
-                        this.parent.syncImageRefObj.domain,this.parent.syncImageRefObj.slideNumber);
+                        this.parent.syncImageRefObj.domain,this.parent.syncImageRefObj.slideNumber,
+                        this.parent.syncImageRefObj._swfView.x,this.parent.syncImageRefObj._swfView.y,
+                        this.parent.syncImageRefObj._swfView.width,this.parent.syncImageRefObj._swfView.height,
+                        this.parent.syncImageRefObj._swfView.zoomlevel);
                 
 				//set modus to hand so users can directly select that image
 				this.parent.setModus('swf');	
@@ -321,21 +337,28 @@
                 } else if (action=="doc_next"){
                     this.ObjectByName._swfView.setAttribute('frame',(this.ObjectByName._swfView.totalframes));
                 } else if (action=="doc_zoom_minus"){
-                    var newwidth = (this.ObjectByName._swfView.width/this.zoomfactor);
-                    var newheight = (this.ObjectByName._swfView.height/this.zoomfactor);
+                    this.ObjectByName.zoomlevel--;
+                    var zoom = this.zoomfactor*this.ObjectByName.zoomlevel;            
+                    var newwidth = (this.ObjectByName._swfView.width*zoom);
+                    var newheight = (this.ObjectByName._swfView.height*zoom);
                     this.ObjectByName._swfView.setAttribute('width',newwidth);
                     this.ObjectByName._swfView.setAttribute('height',newheight);
                     this.boundingref.doSetInnerObjectsBounds(newwidth,newheight);
                     this.ObjectByName.currentzoomFactor=this.ObjectByName.currentzoomFactor/this.zoomfactor;
                 } else if (action=="doc_zoom_plus"){
-                    var newwidth = (this.ObjectByName._swfView.width*this.zoomfactor);
-                    var newheight = (this.ObjectByName._swfView.height*this.zoomfactor);            
+                    this.ObjectByName.zoomlevel++;
+                    var zoom = this.zoomfactor*this.ObjectByName.zoomlevel;
+                    var newwidth = (this.ObjectByName.initwidth*zoom);
+                    var newheight = (this.ObjectByName.initheight*zoom);            
                     this.ObjectByName._swfView.setAttribute('width',newwidth);
                     this.ObjectByName._swfView.setAttribute('height',newheight);
                     this.boundingref.doSetInnerObjectsBounds(newwidth,newheight);
                     this.ObjectByName.currentzoomFactor=this.ObjectByName.currentzoomFactor*this.zoomfactor;
+                    
                 }
+                this.ObjectByName.slideNumber =  this.ObjectByName._swfView.frame;
                 this.doUpdateDocumentToolBar();
+                this.sendCurrentSWFObject(this.ObjectByName);
             }
         ]]>
     </method>
@@ -344,7 +367,43 @@
         this.parent.parent._documentmenu._currentSlideNo.setText(this.ObjectByName._swfView.frame);
         this.parent.parent._documentmenu._totalSlideNo.setText(this.ObjectByName._swfView.totalframes);
         this.parent.parent._documentmenu._zoom.setText(this.ObjectByName.currentzoomFactor);
-    </method>   
+    </method>
+    
+    <method name="sendCurrentSWFObject" args="objRef">
+		<![CDATA[
+		Debug.write("UpdateByObject : ",objRef,objRef.name);
+		var objName = objRef.name;
+		for (var eg=0;eg<this.baseactionobjectList.length;eg++){
+			if (this.baseactionobjectList[eg][this.baseactionobjectList[eg].length-1]==objName) {
+				Debug.write("Found Object: ",this.baseactionobjectList[eg]);
+				this.baseactionobjectList[eg][8] = objRef.slideNumber;
+				this.baseactionobjectList[eg][9] = objRef._swfView.x;
+				this.baseactionobjectList[eg][10] = objRef._swfView.y;
+				this.baseactionobjectList[eg][11] = objRef._swfView.width;
+                this.baseactionobjectList[eg][12] = objRef._swfView.height;
+                this.baseactionobjectList[eg][13] = objRef._swfView.zoomlevel;
+				var newA = this.baseactionobjectList[eg];
+				if (newA[0]=='paint') newA[1] = new Array();				
+				this.onsharedMessage('swf',newA);	
+			    break;
+			}
+		}	
+			
+		]]>
+	</method>
+    
+    <method name="remoteObjectUpdate" args="lastactionObject">
+        <![CDATA[
+            var obj = this.getObjectByName(lastactionObject[lastactionObject.length-1]);
+			obj.slideNumber = lastactionObject[8];
+			obj._swfView.setAttribute('x',lastactionObject[9]);
+			obj._swfView.setAttribute('y',lastactionObject[10]);
+			obj._swfView.setAttribute('width',lastactionObject[11]);
+            obj._swfView.setAttribute('height',lastactionObject[12]);
+            obj._swfView.zoomlevel = lastactionObject[13];
+            obj.            
+        ]]>
+    </method>
 
 </class>
 

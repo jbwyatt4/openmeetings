@@ -156,6 +156,18 @@
         this._inner._inner.setAttribute('width',w);
         this._inner._inner.setAttribute('height',h);
     </method>
+    
+    <method name="applyScrollbarToObject">
+        if (this.objRef.typeOfObject == 'swf'){
+            setCurrentMouseWheelObject(this._inner._scrollstv);
+        }
+    </method>
+    
+    <method name="removeScrollbarToObject">
+        if (this.objRef.typeOfObject == 'swf'){
+            disableCurrentMouseWheelObject();
+        }
+    </method>
         
     <resizestatemin name="rs">
     	<text x="2" y="2" text="${ 'w: '+parent.width+' h: '+parent.height }" bgcolor="white"/>
@@ -166,7 +178,8 @@
    	</dragstate>
 	
 	<view name="_innerDrag" width="${ parent.width }" height="${ parent.height }"
-	onmousedown="parent.dragger.apply()" onmouseup="parent._removeDragstateFromThis()">
+	onmousedown="parent.dragger.apply()" onmouseup="parent._removeDragstateFromThis()"
+    onmouseover="this.parent.applyScrollbarToObject()" onmouseout="this.parent.removeScrollbarToObject()">
 		<handler name="oninit">
 	        var newMenu = new LzContextMenu();
 	        newMenu.hideBuiltInItems();
@@ -183,18 +196,19 @@
 				this.parent.whiteboardRef.editTextByValues(this.parent.objRef,this.parent.objRef.name,this.parent.objRef.text,x,y,this.parent.objRef.width,this.parent.objRef.height);
 			}
 		</handler>		
-		<tooltip text="Drag this Object" />
+		<labeltooltip labelid="252" />
 	</view>
 	
 	<view resource="_boundingBoxPointer" x="${ parent.width/2-this.width/2 }" y="${ parent.height/2-this.height/2 }"
-		onmousedown="parent._applyDragstateFromThis()" onmouseup="parent._removeDragstateFromThis()">		
+		onmousedown="parent._applyDragstateFromThis()" onmouseup="parent._removeDragstateFromThis()"
+        onmouseover="this.parent.applyScrollbarToObject()" onmouseout="this.parent.removeScrollbarToObject()">		
         <handler name="oninit">
             var newMenu = new LzContextMenu();
             newMenu.hideBuiltInItems();
             var item1 = newMenu.makeMenuItem('remove Item', new LzDelegate(this.parent, "__LZRemoveItem"));
             newMenu.addItem(item1);
             this.setContextMenu(newMenu);       
-        </handler>          	
+        </handler>               	
 		<labeltooltip labelid="251" />
 	</view>     
     
@@ -208,12 +222,38 @@
     <view name="_inner" y="22" width="${ parent.width }"
         height="${ parent.height-22 }" visible="false">    
         <view name="_inner">
+            
+            <attribute name="timeisInited" value="false" type="boolean" />
+            <attribute name="sendObjectDel" value="null" />
+            
+            <handler name="oninit">
+                this.sendObjectDel = new LzDelegate( this, "sendObject" );
+            </handler>
             <handler name="onx" args="x">
                 this.parent.parent.objRef._swfView.setAttribute('x',x);
+                if (!this.timeisInited){
+                    this.timeisInited=true;
+                    LzTimer.addTimer( this.sendObjectDel, 250 );
+                } else {
+                    LzTimer.resetTimer( this.sendObjectDel, 250 );
+                }
             </handler>
             <handler name="ony" args="y">
                 this.parent.parent.objRef._swfView.setAttribute('y',y);
-            </handler>            
+                if (!this.timeisInited){
+                    this.timeisInited=true;
+                    LzTimer.addTimer( this.sendObjectDel, 250 );
+                } else {
+                    LzTimer.resetTimer( this.sendObjectDel, 250 );
+                }
+            </handler>        
+            
+            <method name="sendObject">
+                Debug.write("sendObject");
+                this.parent.parent.whiteboardRef.sendCurrentSWFObject(this.parent.parent.objRef);
+                this.timeisInited=false;
+            </method>    
+            
         </view>
         <vscrollbar name="_scrollstv" /> 
         <hscrollbar name="_scrollsth" />     

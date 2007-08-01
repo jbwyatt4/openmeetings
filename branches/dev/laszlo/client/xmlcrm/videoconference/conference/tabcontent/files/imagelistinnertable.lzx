@@ -5,8 +5,6 @@
     height="$once{ parent.height-4 }" 
 	bgcolor="white" x="2" y="2" clip="true">
     
-    <attribute name="iscurrentscrollactive" value="false" type="boolean" />
-    
     <view name="_listcontent" bgcolor="$once{ canvas.basebgcolorizer }" width="$once{ parent.width }" >
         <simplelayout name="_layout" axis="y" spacing="2" inset="1" />
         
@@ -125,16 +123,7 @@
 		 	 
     </view>
 
-    <vscrollbar usemousewheel="true">
-        <method event="onmousewheeldelta" reference="LzKeys" args="d">
-            //Debug.write("onmousewheeldelta 12: ",d);
-            <![CDATA[
-                if (this.parent.iscurrentscrollactive) {
-                    this.step(-d);
-                }
-            ]]>
-        </method>  
-    </vscrollbar>
+    <vscrollbar name="_scrollbar" />
 </class>
 
 </library>

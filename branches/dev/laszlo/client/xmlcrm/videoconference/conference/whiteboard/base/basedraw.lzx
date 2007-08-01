@@ -259,7 +259,7 @@
 		for (var eg=0;eg<this.baseactionobjectList.length;eg++){
 			if (this.baseactionobjectList[eg][this.baseactionobjectList[eg].length-1]==objName) {
 				Debug.write("Found Object: ",this.baseactionobjectList[eg]);
-				this.baseactionobjectList[eg][this.baseactionobjectList[eg].length-5] = objRef.x
+				this.baseactionobjectList[eg][this.baseactionobjectList[eg].length-5] = objRef.x;
 				this.baseactionobjectList[eg][this.baseactionobjectList[eg].length-4] = objRef.y;
 				this.baseactionobjectList[eg][this.baseactionobjectList[eg].length-3] = objRef.width;
 				this.baseactionobjectList[eg][this.baseactionobjectList[eg].length-2] = objRef.height;
@@ -672,6 +672,8 @@
 			    obj[2] = this.baseactionobjectList;
 				this.oninitUser(actionObject,obj);
 			}
+		} else if (action=="swf"){
+			this.remoteObjectUpdate(actionObject);	
 		}
 		]]>
 	</method>
