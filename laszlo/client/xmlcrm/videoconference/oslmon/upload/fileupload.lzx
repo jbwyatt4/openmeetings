@@ -14,14 +14,14 @@
 			fr = new flash.net.FileReference();	
 			//Debug.write(fr);
     		fr.onHTTPError = function(fr, httpError){
-            	_root.//Debug.write('onHTTPError invoked: ' + httpError);
+            	_root.Debug.write('onHTTPError invoked: ' + httpError);
             	new errorpopup(canvas,{error:'Err2: '+httpError});
 			}
 			fr.onIOError = function(fr){
-				_root.//Debug.write('onIOError invoked');
+				_root.Debug.write.write('onIOError invoked');
 			}
 			function callbackFunction ( e ) {
-				_root.//Debug.write( e.data );
+				_root.Debug.write( e.data );
 			}			
 			fr.addListener(invoker, callbackFunction);
 		]]>

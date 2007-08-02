@@ -740,7 +740,7 @@
             // call function in server-side main.asc
             var t = this;  // Fake a closure.
             this.onResult = function(streamLength) {
-                //_root.//Debug.write("onresult=", streamLength);
+                ////_root.Debug.write.write("onresult=", streamLength);
                 t.setAttribute("totaltime", streamLength);
             };
             rtc._nc.call("getLength", this, name);
@@ -1060,7 +1060,7 @@
                 // call function in server-side main.asc
                 var t = this; // for use in closure
                 this.onResult = function(streamLength) {
-                    //_root.//Debug.write("onresult=", streamLength);
+                    ////_root.Debug.write.write("onresult=", streamLength);
                     t.setAttribute("totaltime", streamLength || 0);
                 };
                 this._nc.call("getLength", this, sname);

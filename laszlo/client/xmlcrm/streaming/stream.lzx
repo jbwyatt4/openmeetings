@@ -176,12 +176,12 @@
         this._stream.t = this;  
         this._stream.onStatus = function(info) {
                 var t = this.t;
-                if (t.debug) _root.//Debug.write('ns status', info);
+                if (t.debug) //_root.Debug.write.write('ns status', info);
                 switch (info.code) {
                     case "NetStream.Buffer.Empty":
                         var newbuftime = t._stream.bufferTime + 1;
                         t._stream.setBufferTime(newbuftime);
-                         //_root.//Debug.write('newbuffertime =',newbuftime);
+                         ////_root.Debug.write.write('newbuffertime =',newbuftime);
                          if (t.onstart) t.onend.sendEvent();
                         break;
                     case "NetStream.Buffer.Full":
@@ -203,18 +203,18 @@
 
         this._stream.onPlayStatus = function(info) {
                 var t = this.t;
-                 //_root.//Debug.write('onPlayStatus ', info);
+                 ////_root.Debug.write.write('onPlayStatus ', info);
                  if (info.code == "NetStream.Play.Complete") {
                     //correct for valid Buffer.Empty
                     var newbuftime = t._stream.bufferTime - 1;
                     t._stream.setBufferTime(newbuftime);
-                     //_root.//Debug.write('newbuffertime =',newbuftime);
+                     ////_root.Debug.write.write('newbuffertime =',newbuftime);
                  }
         }
         this._stream.onMetaData = function(info) {
             var t = this.t;
             for (var propName in info) {
-                //_root.//Debug.write(propName + " = " + info[propName]);
+                ////_root.Debug.write.write(propName + " = " + info[propName]);
                 if (propName == "duration") {
                     t.setAttribute('totaltime', info[propName]);
                 }
@@ -260,7 +260,7 @@
             // call function in server-side main.asc
             var t = this;  // for use in closure
             this.onResult = function(streamLength) {
-                //_root.//Debug.write('onresult = ', streamLength);
+                ////_root.Debug.write.write('onresult = ', streamLength);
                 t.setAttribute('totaltime',streamLength);
             };
             rtc._nc.call("getLength", this, name);
@@ -348,7 +348,7 @@
             // call function in server-side main.asc
             var t = this;  // for use in closure
             this.onResult = function(streamLength) {
-                //_root.//Debug.write('onresult = ', streamLength);
+                ////_root.Debug.write.write('onresult = ', streamLength);
                 t.setAttribute('totaltime',streamLength);
             };
             this._nc.call("getLength", this, sname);
