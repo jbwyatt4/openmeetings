@@ -57,12 +57,14 @@
             if (this["_default"] == undefined) {
                 rtmpconnection.prototype._default = this;
             }
-
+        
+            this._nc.onStatus = function(info){
+                this.t._onStatus(info);
+            }
+        
             if (this.debug) {
 
-                this._nc.onStatus = function(info){
-                    this.t._onStatus(info);
-                }
+
 
                 // This is the way a function is called by the remote Interface has
                 // to be implemented ...

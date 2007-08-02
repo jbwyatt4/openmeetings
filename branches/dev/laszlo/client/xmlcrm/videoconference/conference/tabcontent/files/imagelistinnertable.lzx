@@ -108,7 +108,7 @@
 			  <netparam><method name="getValue">return parent.String1;</method></netparam>
 	        <handler name="ondata" args="value">	
 				<![CDATA[
-					//Debug.write("  loadWmlObject ",value); 
+					Debug.write("  loadwmlObjectToStage ",value); 
 					_drawarea.loadwmlObjectToStage(value,this.String1,hib.connectedroom,hib.conferencedomain,true,false);
 				]]>       	     				
 	        </handler>	
