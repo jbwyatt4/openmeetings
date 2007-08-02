@@ -178,10 +178,12 @@ public class Usermanagement {
 			crit.add(Restrictions.eq("deleted", "false"));
 			crit.add(Restrictions.eq("status", 1));
 			List ll = crit.list();
-			log.debug("debug loginUser: " + Username);
+			log.error("debug loginUser: " + Username);
 			tx.commit();
 			HibernateUtil.closeSession(idf);
 
+			log.error("debug SIZE: " + ll.size());
+			
 			if (ll.size()==0) {
 				Users usersA = new Users();
 				usersA.setLevel_id(new Long(-1));
@@ -191,6 +193,7 @@ public class Usermanagement {
 				Users users = (Users) ll.get(0);
 				String chsum = md5.do_checksum(Userpass);
 				if (chsum.equals(users.getPassword())) {
+					log.error("chsum OK: "+ users.getUser_id());
 					Sessionmanagement.getInstance().updateUser(SID, users.getUser_id());
 					users.setUserlevel(getUserLevel(users.getLevel_id()));		
 					updateLastLogin(users);

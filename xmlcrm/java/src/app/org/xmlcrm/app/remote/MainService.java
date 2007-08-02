@@ -121,8 +121,7 @@ public class MainService {
      * @return a valid user account or an empty user with an error message and level -1
      */
     public Users loginUser(String SID, String Username, String Userpass){
-    	System.out.println("loginUser 1: "+SID+" "+Username+" "+Userpass);
-    	log.error("loginUser 2: "+SID+" "+Username+" "+Userpass);
+    	log.error("loginUser 111: "+SID+" "+Username+" "+Userpass);
         return Usermanagement.getInstance().loginUser(SID,Username,Userpass);
     } 
     
