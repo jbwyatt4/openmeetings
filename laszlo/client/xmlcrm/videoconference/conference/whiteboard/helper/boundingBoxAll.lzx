@@ -227,24 +227,30 @@
             <attribute name="sendObjectDel" value="null" />
             
             <handler name="oninit">
-                this.sendObjectDel = new LzDelegate( this, "sendObject" );
+                if (this.parent.parent.objRef.typeOfObject=='swf') {
+                    this.sendObjectDel = new LzDelegate( this, "sendObject" );
+                }
             </handler>
             <handler name="onx" args="x">
-                this.parent.parent.objRef._swfView.setAttribute('x',x);
-                if (!this.timeisInited){
-                    this.timeisInited=true;
-                    LzTimer.addTimer( this.sendObjectDel, 250 );
-                } else {
-                    LzTimer.resetTimer( this.sendObjectDel, 250 );
+                if (this.parent.parent.objRef.typeOfObject=='swf'){
+                    this.parent.parent.objRef._swfView.setAttribute('x',x);
+                    if (!this.timeisInited){
+                        this.timeisInited=true;
+                        LzTimer.addTimer( this.sendObjectDel, 250 );
+                    } else {
+                        LzTimer.resetTimer( this.sendObjectDel, 250 );
+                    }
                 }
             </handler>
             <handler name="ony" args="y">
-                this.parent.parent.objRef._swfView.setAttribute('y',y);
-                if (!this.timeisInited){
-                    this.timeisInited=true;
-                    LzTimer.addTimer( this.sendObjectDel, 250 );
-                } else {
-                    LzTimer.resetTimer( this.sendObjectDel, 250 );
+                if (this.parent.parent.objRef.typeOfObject=='swf'){
+                    this.parent.parent.objRef._swfView.setAttribute('y',y);
+                    if (!this.timeisInited){
+                        this.timeisInited=true;
+                        LzTimer.addTimer( this.sendObjectDel, 250 );
+                    } else {
+                        LzTimer.resetTimer( this.sendObjectDel, 250 );
+                    }
                 }
             </handler>        
             
