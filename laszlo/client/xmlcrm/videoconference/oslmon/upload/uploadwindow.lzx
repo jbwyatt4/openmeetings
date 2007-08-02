@@ -25,7 +25,7 @@
  	<fileupload name="myFileUpload" isOnlyImage="${ this.parent.isOnlyImage }" 
  		 isOnlyPpt="${ this.parent.isOnlyPpt }">
 		<method name="onComplete" args="fr">
-			Debug.write("oncomplete ",fr);
+			//Debug.write("oncomplete ",fr);
 			this.parent.progressBar.setValue(100);
 			this.parent.upload.setAttribute('enabled', false);
 			this.parent.upload.setAttribute("visible",false);
@@ -37,10 +37,10 @@
 	  		var nowTime = new Date();
 	  		var datumsString = nowTime.getHours()+':'+nowTime.getMinutes();
 	  		tempSendArray[1] = datumsString;
-  			Debug.write("Setting Message");
+  			//Debug.write("Setting Message");
   			tempSendArray[2] = 'newfile';
   			tempSendArray[3] = canvas.currentusename;
-	  		Debug.write("send: ",tempSendArray);
+	  		//Debug.write("send: ",tempSendArray);
 	  		canvas.objMessage = tempSendArray;
 	  		canvas.thishib.sendMessage.doCall();
 
@@ -59,7 +59,7 @@
     
 	    <method name="onHTTPError" args="fr, httpError">
 	        <![CDATA[
-	            Debug.write('onHTTPError invoked: ' + httpError);
+	            //Debug.write('onHTTPError invoked: ' + httpError);
 	            new errorpopup(canvas,{error:'HTTP-ERROR: '+httpError});
 	            this.parent.close();
 		  		var tempSendArray = new Array ();
@@ -67,17 +67,17 @@
 		  		var nowTime = new Date();
 		  		var datumsString = nowTime.getHours()+':'+nowTime.getMinutes();
 		  		tempSendArray[1] = datumsString;
-	  			Debug.write("Setting Message");
+	  			//Debug.write("Setting Message");
 	  			tempSendArray[2] = 'newfile';
 	  			tempSendArray[3] = canvas.currentusename;
-		  		Debug.write("send: ",tempSendArray);
+		  		//Debug.write("send: ",tempSendArray);
 		  		canvas.objMessage = tempSendArray;
 		  		hib.sendMessage.doCall();	            
 	        ]]>
 	    </method>
     
 		<method name="onSelect" args="fr">
-			Debug.write("onSelect: ",getName());
+			//Debug.write("onSelect: ",getName());
 			this.parent.txtFile.setText(getName());
 			this.parent.upload.setAttribute('enabled', true);
 		</method>
@@ -97,7 +97,7 @@
 			<![CDATA[
 			var uploadurl = 'http://'+canvas.rtmphostlocal+':'+canvas.red5httpport+'/xmlcrm/UploadHandler?moduleName='+this.parent.uploadmodule+'&room='+hib.connectedroom+'&domain='+hib.conferencedomain+'&sid='+canvas.sessionId;
 
-            Debug.write("uploadurl: ",uploadurl);
+            //Debug.write("uploadurl: ",uploadurl);
 			parent.myFileUpload.upload(uploadurl);
 			]]>
 		</handler>
@@ -118,7 +118,7 @@
 	
 	<button name="_close" x="90" y="170" text="cancel" width="160" height="20">
 		<handler name="onclick">
-			Debug.write("this.parent: ",this.parent);
+			//Debug.write("this.parent: ",this.parent);
 			this.parent.close();
 		</handler>
 	</button>

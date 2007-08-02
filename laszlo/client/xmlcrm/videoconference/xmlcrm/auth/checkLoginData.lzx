@@ -28,7 +28,7 @@
                 </handler>
                 <handler name="ondata" args="value">
                     //The onResult-Handler will be called be the rtmpconnection
-                    Debug.write("getLanguages: ",value);
+                    //Debug.write("getLanguages: ",value);
                     <![CDATA[
                     for (var i=0;i<value.length;i++){
                         this.parent.addItem(value[i].name,value[i].language_id);
@@ -52,7 +52,7 @@
 				this.selectItem('lightsteelblue');
 			</handler>
 			<handler name="onselect" args="v">
-				Debug.write("onselect: ",v.value);
+				//Debug.write("onselect: ",v.value);
 				if (this.initselect){
 					this.initselect=false;
 				} else {
@@ -121,7 +121,7 @@
         <handler name="ondata" args="value">
 			<![CDATA[
             //The onResult-Handler will be called be the rtmpconnection
-            Debug.write("loginUser: ",value);
+            //Debug.write("loginUser: ",value);
             
             if (value.level_id!=-1){
             
@@ -137,7 +137,7 @@
                 hib.userlang = Number(parent.languages.getValue());
             	hib.userobject = value;
             	if (value.organisation_users.length==0){
-            		Debug.write("this user has no Organisation ");
+            		//Debug.write("this user has no Organisation ");
                 } else if (value.organisation_users.length==1){
             		hib.currentdomain = value.organisation_users[0].organisation.name;
             		hib.currentdomainObj = value.organisation_users[0].organisation;
@@ -163,7 +163,7 @@
 						parent.organisation.addItem(value.organisation_users[i].organisation.name,String(i));
 					}
 					parent.organisation.selectItem(String(i-1));
-                	Debug.write("multiple organisations Issue 31 http://code.google.com/p/openmeetings/issues/detail?id=31");
+                	//Debug.write("multiple organisations Issue 31 http://code.google.com/p/openmeetings/issues/detail?id=31");
                 }
             }  else {
                 parent.errormess.setText(value.firstname);
@@ -178,7 +178,7 @@
         </handler> 
         <handler name="ondata" args="value">
             //The onResult-Handler will be called be the rtmpconnection
-            Debug.write("allowFrontendRegister: ",value);
+            //Debug.write("allowFrontendRegister: ",value);
             if (value.conf_value==1){
             	parent._register.setAttribute('visible',true);
             }
@@ -204,7 +204,7 @@
         </netparam>         
         <handler name="ondata" args="value">
             //The onResult-Handler will be called be the rtmpconnection
-            Debug.write("testObject: ",value);
+            //Debug.write("testObject: ",value);
         </handler>  
     </netremotecallhib>              
     

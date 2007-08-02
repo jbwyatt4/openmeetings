@@ -36,7 +36,7 @@
 	<attribute name="refObj" value="null" />
 	<handler name="onload">
 		<![CDATA[
-			Debug.write("image loaded");
+			//Debug.write("image loaded");
 			//this.refObj.parent._loading.setAttribute('visible',false);
             
 			if (this.width>this.refObj.width){
@@ -81,7 +81,7 @@
 	</handler>
 	<handler name="onerror" args="error">
 		<![CDATA[
-		Debug.write("onerror "+error);
+		//Debug.write("onerror "+error);
 			//only send syncCommand if alterModus is true (meaning that this is the Moderator)
 			//otherwise just send a notification to moderator that this iamge has been loaded
 			if (this.alterModus){
@@ -105,7 +105,7 @@
 	</handler>
 	<handler name="ontimeout" args="error">
 		<![CDATA[
-		Debug.write("ontimeout "+error);
+		//Debug.write("ontimeout "+error);
 			//only send syncCommand if alterModus is true (meaning that this is the Moderator)
 			//otherwise just send a notification to moderator that this iamge has been loaded
 			if (this.alterModus){
@@ -233,7 +233,7 @@
                     +'&domain='+hib.conferencedomain
                     +'&sid='+canvas.sessionId;
             
-                Debug.write("incomingScreenSharing URL: ",downloadurl);
+                //Debug.write("incomingScreenSharing URL: ",downloadurl);
                 if (this.screenImageRefNumber==1){
                     this.screenImageRef1 = new imageforScreenViewer(this,{visible:false,src:downloadurl,refObj:this,name:'screen1',x:0,y:0,downloadurl:downloadurl});
                     this.screenImageRefNumber = 2;
@@ -243,7 +243,7 @@
                 }
                 this.setNewScreenUserName.sendEvent('Screen of User: '+value.user.firstname+','+value.user.lastname);
             } else {
-                Debug.write("frame dropped!");
+                //Debug.write("frame dropped!");
                 Debug.warn("frame dropped!");
                 new errorpopup(canvas,{error:canvas.getLabelName(240)});
             }
@@ -312,7 +312,7 @@
 		<handler name="ondata" args="value">
 			<![CDATA[
 			//The onResult-Handler will be called be the rtmpconnection
-			Debug.write("getValue : ",value);
+			//Debug.write("getValue : ",value);
 			
 			]]>
 		</handler>   
@@ -325,11 +325,11 @@
         <handler name="ondata" args="value">
         	<![CDATA[
 				//The onResult-Handler will be called by the rtmpconnection
-				Debug.write("getClientListScope Instance: ",value);
+				//Debug.write("getClientListScope Instance: ",value);
 				parent._loadingUsersImageList = new Array();
 				for (var eg in value){
 					if (canvas.streamid != value[eg].streamid){
-						Debug.write("parent._loadingUsersImageList value eg ",eg,value[eg]);
+						//Debug.write("parent._loadingUsersImageList value eg ",eg,value[eg]);
 						parent._loadingUsersImageList.push(value[eg]);
 					}
 				}
@@ -376,7 +376,7 @@
 				//remove client from sync list
 				for (var i=0;i<this._loadingUsersImageList.length;i++){
 					if (this._loadingUsersImageList[i].streamid==client.streamid){
-						Debug.write("deleteing client from list: ",this._loadingUsersImageList[i].streamid);
+						//Debug.write("deleteing client from list: ",this._loadingUsersImageList[i].streamid);
 						this._loadingUsersImageList.splice(i,1);
 					}
 				}
@@ -392,7 +392,7 @@
 		gets its own *sync* complete nofification
 		 -->	
 	<method name="sendCompleteImageSync" args="client">
-		Debug.write("sendCompleteImageSync ",client);
+		//Debug.write("sendCompleteImageSync ",client);
 		this.loadimageDataWinRef.close();
 	</method>
 	

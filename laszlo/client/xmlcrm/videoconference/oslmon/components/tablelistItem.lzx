@@ -14,7 +14,7 @@
     <attribute name="isaltered" value="false" type="boolean" />
 
     <method name="sendchange" args="obj,oldv,newv">
-        //Debug.write("check Update");
+        ////Debug.write("check Update");
         var t = false;
         for (var eg in this.changeholder){
             if (this.changeholder[eg][0]==obj){

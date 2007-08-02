@@ -76,8 +76,8 @@
 		<videoview name="_videoview" visible="false" x="5" width="240" height="180" y="0" >
 	        <mediastream name="v_output" debug="true" type="rtmp" >
 	            <handler name="onurl">
-	                Debug.write("stream onurl ",this);
-					Debug.write("stream onurl 2 ",this.url);
+	                //Debug.write("stream onurl ",this);
+					//Debug.write("stream onurl 2 ",this.url);
 	                //this.parent.play(-1,false);
 	            </handler>
 	        </mediastream>
@@ -97,7 +97,7 @@
 		</method>
 		<view x="2" y="2" name="_loudness" resource="loudnessBig" bgcolor="0xFFFFFF">
 			<handler name="oninit">
-				Debug.write("this: ",this);
+				//Debug.write("this: ",this);
 				this.setAttribute('frame',1);
 			</handler>
 		</view>
@@ -125,7 +125,7 @@
 			<![CDATA[
 			this.setAttribute('visible',true);
 			var tString = '';
-			Debug.write("clientVars: ",parent.clientVars);
+			//Debug.write("clientVars: ",parent.clientVars);
 			for (var eg in parent.clientVars){
 				if (eg!='userip'){
 					tString += eg+': <BR/>'+parent.clientVars[eg]+'<BR />';
@@ -135,7 +135,7 @@
 					tString += '<A HREF="http://www.networksolutions.com/whois/results.jsp?whoistoken='+parent.clientVars[eg]+'" TARGET="_BLANK">'+parent.clientVars[eg]+'</A><BR/><BR/>';
 				}
 			}
-			Debug.write("tString: ",tString);
+			//Debug.write("tString: ",tString);
 			this.inner._usertext.setText(tString);
 			]]>
 		</method>

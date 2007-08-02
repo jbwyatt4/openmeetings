@@ -118,7 +118,7 @@
         <!--- Called when the allowed flag changes.
               @keywords private -->
         <method name="_updateAllowed"><![CDATA[
-            //Debug.write("camera _updateAllowed", this, this.allowed, "show", this.show);
+            ////Debug.write("camera _updateAllowed", this, this.allowed, "show", this.show);
 
             // Call super to send the onallowed event.
             super._updateAllowed(allowed);
@@ -140,7 +140,7 @@
               @access private -->
         <method name="_setShow" args="show"><![CDATA[
 
-            //Debug.write("camera _setShow", this, show);
+            ////Debug.write("camera _setShow", this, show);
 
             this.show = show;
 
@@ -162,7 +162,7 @@
                     ? immediateparent._getflashvideo()
                     : null;
 
-            //Debug.write("vid", vid, "show", show, "allowed", this.allowed);
+            ////Debug.write("vid", vid, "show", show, "allowed", this.allowed);
 
             if (vid != null) {
 
@@ -177,7 +177,7 @@
                     // this if it's the first time (_allowedknown is
                     // false).
 
-                    //Debug.write("detaching", this, vid);
+                    ////Debug.write("detaching", this, vid);
                     vid.attachVideo(null);
                     //vid.clear(); // FIXME: this clears the video but makes subsequent attachvideo's not work.
                 } else {
@@ -187,7 +187,7 @@
                     // which sets the new allowed value to
                     // all mediadevices. 
                     var dev = this._dev;
-                    //Debug.write("attaching", this, vid, dev);
+                    ////Debug.write("attaching", this, vid, dev);
                     vid.attachVideo(dev);
 
                     // If this is the first device we've ever seen, 

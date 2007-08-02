@@ -32,7 +32,7 @@
                         
                         if (value['files']!=null){
                             for(var eg in value.files){
-                                Debug.write("value[1][eg]: ",value.files[eg]);
+                                //Debug.write("value[1][eg]: ",value.files[eg]);
                                 if(value.files[eg][2]=='.wml'){
                                     _imageslistdraw.addWML(value.files[eg][1],value.files[eg][2]);
                                 } else if(value.files[eg][5]!='n'){
@@ -43,20 +43,20 @@
                     
                     } else {
                     
-                        Debug.write("value.presentationObject: ",value.presentationObject);
+                        //Debug.write("value.presentationObject: ",value.presentationObject);
                     
                         if (typeof(value.presentationObject.pdfDocument)=="undefined"){
                             //Is PDF only
-                            Debug.write("Is PDF only");
+                            //Debug.write("Is PDF only");
                             _imageslistdraw.addListpresentationFilePDF(value.presentationObject.originalDocument,value.presentationObject.swfDocument);
                         } else {
                             //Is original Document + PDF-Document
-                            Debug.write("Is original Document + PDF-Document");
+                            //Debug.write("Is original Document + PDF-Document");
                             _imageslistdraw.addListpresentationFileOrig(value.presentationObject.originalDocument,value.presentationObject.pdfDocument,value.presentationObject.swfDocument);
                         }
                     
                         for (var eg=0;eg<value.presentationObject.thumbs.thumbs.length;eg++){
-                            //Debug.write(value.presentationObject.thumbs.thumbs[eg].filename);
+                            ////Debug.write(value.presentationObject.thumbs.thumbs[eg].filename);
                             _imageslistdraw.addPresentationThumb(value.presentationObject.thumbs.thumbs[eg].filename,eg);
                         }
                     

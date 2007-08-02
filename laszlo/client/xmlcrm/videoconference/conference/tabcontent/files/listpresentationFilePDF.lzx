@@ -19,8 +19,8 @@
     
     <view name="_filesave_icon_pdf" x="150" y="6" resource="_filesave_icon_pdf_rsc">
         <handler name="onclick">
-            Debug.write("this.parent.pdfname: ",this.parent.pdfname.filename);
-            Debug.write("this.parent: ",this.parent);
+            //Debug.write("this.parent.pdfname: ",this.parent.pdfname.filename);
+            //Debug.write("this.parent: ",this.parent);
             this.parent.loadFileByName(this.parent.pdfname.filename);
         </handler>
         <labeltooltip labelid="248" />

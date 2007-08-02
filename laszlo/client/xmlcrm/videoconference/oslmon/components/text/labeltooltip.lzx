@@ -16,7 +16,7 @@
     	}
         var xVal = canvas.getMouse('x');
         var yVal = canvas.getMouse('y');
-		//Debug.write("mytext: ",this.mytext);
+		////Debug.write("mytext: ",this.mytext);
         this.holder = new xmlcrmtooltip(canvas,{text:this.text,holder:this});
         <![CDATA[
         if (xVal<canvas.width/2){

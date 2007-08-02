@@ -15,7 +15,7 @@
     <!--- @keywords private -->
     <event name="onurl"/>
 
-    <!--- if true Debug.write extra stuff (this may go away) -->
+    <!--- if true //Debug.write extra stuff (this may go away) -->
     <attribute name="debug" value="false"/>
 
     <!--- protocol "rtmp" or "http" (default: http)-->
@@ -43,8 +43,8 @@
        // no other subviews should be allowed (todo: schema)
         var mc = immediateparent.attachResourceToChildView ("__LZvideo", this);
         this.setMovieClip(mc);
-        //Debug.write('setMovieClip', mc);
-        //Debug.write('this.__LZmovieClipRef', this.__LZmovieClipRef);
+        ////Debug.write('setMovieClip', mc);
+        ////Debug.write('this.__LZmovieClipRef', this.__LZmovieClipRef);
         this.__LZmovieClipRef.__lzvideo._x=0;
         this.__LZmovieClipRef.__lzvideo._y=0;
         this.__LZmovieClipRef.__lzvideo._width = this.width;

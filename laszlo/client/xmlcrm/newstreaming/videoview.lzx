@@ -31,7 +31,7 @@
               Default: false. -->
         <attribute name="autoplay" value="false" setter="this._setAutoplay(autoplay)"/>
 
-        <!--- If true, Debug.write extra stuff (this may go away). -->
+        <!--- If true, //Debug.write extra stuff (this may go away). -->
         <attribute name="debug" value="false"/>
 
         <!--- Flag to track if the clip initialization is done. 
@@ -73,7 +73,7 @@
         <!--- Initialize the videoview. 
               @keywords private -->
         <method name="init"><![CDATA[
-            //Debug.write("videoview init BEGIN", this);
+            ////Debug.write("videoview init BEGIN", this);
 
             super.init();
 
@@ -87,11 +87,11 @@
                 new Sound(
                     this.__LZmovieClipRef);
 
-            //Debug.write("init set play volume", this, this.playvolume);
+            ////Debug.write("init set play volume", this, this.playvolume);
             this._sound.setVolume(this.playvolume * 100.0);
 
-            //Debug.write("videoview setMovieClip", mc);
-            //Debug.write("videoview __LZmovieClipRef", this.__LZmovieClipRef, "__lzvideo", this._getflashvideo());
+            ////Debug.write("videoview setMovieClip", mc);
+            ////Debug.write("videoview __LZmovieClipRef", this.__LZmovieClipRef, "__lzvideo", this._getflashvideo());
 
             var vid =
                 this._getflashvideo();
@@ -102,12 +102,12 @@
             vid._height = this.height;
             this._clipinitdone = true;
 
-            //Debug.write("videoview stream", this.stream);
+            ////Debug.write("videoview stream", this.stream);
 
             var stream = 
                 this.stream;
 
-            //Debug.write("videoview init found stream", this, stream);
+            ////Debug.write("videoview init found stream", this, stream);
             if (!stream) {
                stream = 
                     new global.mediastream(
@@ -116,14 +116,14 @@
                         null, 
                         true);
                 this.stream = stream;
-                //Debug.write("videoview init made stream", this.stream);
+                ////Debug.write("videoview init made stream", this.stream);
 
                 // only use this.url if we auto-created the mediastream
                 stream.setAttribute("type", this.type);
                 stream.setAttribute("url", this.url);
             }
 
-            //Debug.write("videoview setting _urldel", this, "stream", stream);
+            ////Debug.write("videoview setting _urldel", this, "stream", stream);
             this._urldel = 
                 new LzDelegate(
                     this, "_setPlayStream",
@@ -137,7 +137,7 @@
                 stream._setMic(this.mic);
             }
 
-            //Debug.write("videoview handleAutoplay", this, "autoplay", stream.autoplay, "url", this.stream.url, "stream", this.stream);
+            ////Debug.write("videoview handleAutoplay", this, "autoplay", stream.autoplay, "url", this.stream.url, "stream", this.stream);
             stream._handleAutoplay();
 
             this._initcomplete = true;
@@ -150,7 +150,7 @@
                 this.cam.setAttribute("show", true);
             }
 
-            //Debug.write("videoview init END", this);
+            ////Debug.write("videoview init END", this);
           ]]>
         </method>
 
@@ -158,10 +158,10 @@
         <!--- Set the play stream. 
               @keywords private -->
         <method name="_setPlayStream"><![CDATA[
-            //Debug.write("_setPlayStream", this.stream._flashstream, this.stream.playing);
+            ////Debug.write("_setPlayStream", this.stream._flashstream, this.stream.playing);
             if (this.stream.playing) {
                 var vid = this._getflashvideo();
-                //Debug.write("videoview _setPlayStream", this, "s", this.stream, "fs", this.stream._flashstream, "vid", vid);
+                ////Debug.write("videoview _setPlayStream", this, "s", this.stream, "fs", this.stream._flashstream, "vid", vid);
                 vid.attachVideo(this.stream._flashstream);
                 this.__LZmovieClipRef.attachAudio(this.stream._flashstream); // Doing this so we can control volume.
                 this.setAttribute("width", this.width);
@@ -217,7 +217,7 @@
               Sets the video playback volume. 
               @keywords private -->
         <method name="_setPlayVolume" args="newplayvolume"><![CDATA[
-            //Debug.write("_setPlayVolume", this, newplayvolume, this._sound);
+            ////Debug.write("_setPlayVolume", this, newplayvolume, this._sound);
             this.playvolume = newplayvolume;
             if (this.isinited && 
                 (this._sound != null)) {
@@ -230,7 +230,7 @@
         <!--- Setter for the "url" attribute. 
               @keywords private -->
         <method name="_setUrl" args="newurl"><![CDATA[
-            //Debug.write("videoview setUrl", newurl, "old", this['url'], "isinited", this.isinited, "stream", this['stream']);
+            ////Debug.write("videoview setUrl", newurl, "old", this['url'], "isinited", this.isinited, "stream", this['stream']);
 
             this.url = newurl;
 
@@ -245,7 +245,7 @@
         <!--- Setter for the "type" attribute. 
               @keywords private -->
         <method name="_setType" args="newtype"><![CDATA[
-            //Debug.write("videoview setType", newtype, "old", this['type'], "isinited", this.isinited, "stream", this['stream']);
+            ////Debug.write("videoview setType", newtype, "old", this['type'], "isinited", this.isinited, "stream", this['stream']);
 
             this.type = newtype;
 
@@ -260,7 +260,7 @@
         <!--- Setter for the "autoplay" attribute. 
               @keywords private -->
         <method name="_setAutoplay" args="newautoplay"><![CDATA[
-            //Debug.write("videoview _setAutoplay", newautoplay, "old", this['autoplay'], "isinited", this.isinited, "stream", this['stream']);
+            ////Debug.write("videoview _setAutoplay", newautoplay, "old", this['autoplay'], "isinited", this.isinited, "stream", this['stream']);
 
             this.autoplay = newautoplay;
 
@@ -275,7 +275,7 @@
         <!--- Called by the stream to tell the videoview about the stream. 
               @keywords private -->
         <method name="_setStream" args="stream"><![CDATA[
-            //Debug.write("videoview _setStream", this, stream, "autoplay", this['autoplay'], "isinited", this.isinited);
+            ////Debug.write("videoview _setStream", this, stream, "autoplay", this['autoplay'], "isinited", this.isinited);
             this.stream = stream;
             if (stream != null) {
                 this.stream.setAttribute("autoplay", this.autoplay);

@@ -56,7 +56,7 @@
 		<netparam name="vars4"><method name="getValue"> return "user_id"; </method></netparam>
 		<netparam name="vars5"><method name="getValue"> return true; </method></netparam>		  
     	<handler name="ondata" args="value">
-    		Debug.write("getUsersByorganisation ",value);
+    		//Debug.write("getUsersByorganisation ",value);
 			<![CDATA[
 				parent._userlist.clearList();
 				for (var i=0;i<value.length;i++){
@@ -80,7 +80,7 @@
 		<netparam name="vars1"><method name="getValue"> return canvas.sessionId; </method></netparam>
 		<netparam name="vars2"><method name="getValue"> return parent.parent.user_id; </method></netparam>
 		<handler name="ondata" args="value">
-			Debug.write("deleteOrganisation ",value);
+			//Debug.write("deleteOrganisation ",value);
 			//this.parent.destroy();
 			if (value>0){
 				this.parent.parent._turnoverlist.oncallnext.sendEvent();
@@ -99,15 +99,15 @@
   			this.sendObject["orgname"] = this.parent.orgname.getText();
 			this.sendObject["users"] = this.parent._userlist.getAllItems();
 			  
-  			Debug.write("prepareCall: ",this.sendObject);
+  			//Debug.write("prepareCall: ",this.sendObject);
   		</method>
   		<netparam name="vars1"><method name="getValue"> return canvas.sessionId; </method></netparam>
     	<netparam name="vars2"><method name="getValue">return parent.sendObject;</method></netparam>	  		
     	<handler name="ondata" args="val">
 			<![CDATA[
-    		Debug.write("saveOrUpdateOrganisation: ",val);
+    		//Debug.write("saveOrUpdateOrganisation: ",val);
 			if (val>0){
-				Debug.write("saveOrUpdateUser val greater 0: ",val);
+				//Debug.write("saveOrUpdateUser val greater 0: ",val);
 				this.parent.parent._turnoverlist.oncallnext.sendEvent();
 				var obj = new Array();
 				obj["organisation_id"] = val;

@@ -17,13 +17,12 @@
                 '&room='+hib.connectedroom + 
                 '&domain='+hib.conferencedomain + 
                 '&sid='+canvas.sessionId;
-            //Debug.write("downloadurl: ",downloadurl);
+            ////Debug.write("downloadurl: ",downloadurl);
             return downloadurl;
         ]]>
     </method>    
 
     <handler name="onmouseover">
-        Debug.write("onmouseover: ",onmouseover);
         setCurrentMouseWheelObject(this.parent.parent._scrollbar);
         if (!this.isselected){
             this.setBGColor(canvas.baseMouseOvercolorizer);
@@ -44,10 +43,10 @@
     </handler>
 
     <handler name="onkeyup" args="k"> 
-        Debug.write("key " + k + " up");
+        //Debug.write("key " + k + " up");
     </handler>
     <handler name="onmousewheeldelta" args="k">
-        Debug.write("onmousewheeldelta " + k );
+        //Debug.write("onmousewheeldelta " + k );
     </handler>
     
     <method name="selectItem">

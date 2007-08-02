@@ -13,9 +13,9 @@
         <![CDATA[
         if (this.isinited){
             this.normalMC = this.getMCRef();
-            Debug.write(this.normalMC);
-            //Debug.write("this.normalMC: ",this.normalMC);
-            //Debug.write("this: ",this);
+            //Debug.write(this.normalMC);
+            ////Debug.write("this.normalMC: ",this.normalMC);
+            ////Debug.write("this: ",this);
            	this.displacementMap = new flash.filters.DropShadowFilter();
             this.normalMC.filters = [this.displacementMap];
         }
@@ -64,7 +64,7 @@
 	<!--- @keywords private store initial height so toggleopen can reset height  -->
 	<method event="oninit">
 		this.initheight=this.height;
-		//Debug.write("this.isopen: ",this.isopen);
+		////Debug.write("this.isopen: ",this.isopen);
 		if (!this.open) toggleopen();
 	</method>
 	
@@ -74,14 +74,14 @@
 	</method>
 	
 	<method name="toggleopen">
-		//Debug.write("this.isopen",this.isopen);
+		////Debug.write("this.isopen",this.isopen);
 		this.setAttribute('isopen',!this.isopen);
 		if (this.isopen){
 			_calcdockingList();
 			for (var eg in this.dockinglist){
 				if(this.dockinglist[eg].docking){
-					//Debug.write("this.dockinglist[eg]: ",this.dockinglist[eg].title);
-					//Debug.write("open new y",this.y+this.initheight);
+					////Debug.write("this.dockinglist[eg]: ",this.dockinglist[eg].title);
+					////Debug.write("open new y",this.y+this.initheight);
 					this.dockinglist[eg].toggleOpenByParent(this.initheight-22);
 					this.dockinglist[eg].setAttribute('y',this.y+this.initheight);
 					
@@ -92,7 +92,7 @@
 			_calcdockingList();
 			for (var eg in this.dockinglist){
 				if(this.dockinglist[eg].docking){
-					//Debug.write("this.dockinglist[eg]: ",this.dockinglist[eg].title);
+					////Debug.write("this.dockinglist[eg]: ",this.dockinglist[eg].title);
 					this.dockinglist[eg].toggleOpenByParent(-(this.initheight-22));
 					this.dockinglist[eg].setAttribute('y',this.y+22);
 				}
@@ -102,7 +102,7 @@
 	</method>
 	
 	<method name="toggleOpenByParent" args="changeY">
-		//Debug.write("+++++ toggleOpenByParent +++++ changeY: ",this.title,changeY);
+		////Debug.write("+++++ toggleOpenByParent +++++ changeY: ",this.title,changeY);
 		var tempList=new Array();
 		<![CDATA[
 		//check for dockable stuff which is connected to this Box
@@ -111,7 +111,7 @@
 			if (this.parent.subviews[eg]!=this && this.parent.subviews[eg].docking){
 				// there are 4 cases which have to be proofed to check every possible situation
 				var proof=false;
-				//Debug.write("found some: ",this.parent.subviews[eg].title);
+				////Debug.write("found some: ",this.parent.subviews[eg].title);
 				//top box-border
 				if  ( ( ((this.y+this.height)-this.parent.subviews[eg].y) < 1 ) && ( ((this.y+this.height)-this.parent.subviews[eg].y) > -1 ) && ( (this.x+this.width) > this.parent.subviews[eg].x )  && ( this.x < (this.parent.subviews[eg].x+this.parent.subviews[eg].width) ) ){
 					proof=true;
@@ -121,11 +121,11 @@
 			}
 		}
 		]]>
-		//Debug.write("tempList.length: ",tempList.length);
+		////Debug.write("tempList.length: ",tempList.length);
 		if (tempList.length!=0){
 			for (var eg in tempList){
 				if(tempList[eg].docking){
-					//Debug.write("toggleOpenByParent 1 [eg],changeY: ",tempList[eg].title,changeY);
+					////Debug.write("toggleOpenByParent 1 [eg],changeY: ",tempList[eg].title,changeY);
 					tempList[eg].toggleOpenByParent(changeY);
 					tempList[eg].setAttribute('y',tempList[eg].y+changeY);
 				}
@@ -194,7 +194,7 @@
 			}
 		}
 		]]>
-		//Debug.write("this.dockinglist.length:",this.dockinglist.length);
+		////Debug.write("this.dockinglist.length:",this.dockinglist.length);
 	</method>
 	
 	<!--- @keywords private  -->
@@ -322,7 +322,7 @@
 		 -->
 	</view>
     <handler name="onaddsubview" args="v">
-		//Debug.write("onaddsubview",v);
+		////Debug.write("onaddsubview",v);
 		if (v.parent.subviews.length>2) this._resizeview.bringToFront();
     </handler>
     <view visible="${ this.parent.resizeable }" name="_resizeview" x="${ this.parent.width - 17 }" y="${ this.parent.height - 17 }" 

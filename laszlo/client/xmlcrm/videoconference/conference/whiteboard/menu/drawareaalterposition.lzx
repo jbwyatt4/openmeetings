@@ -17,7 +17,7 @@
 	<method name="updateVal" args="objName">
 		<![CDATA[
 		this.objName = objName;
-		Debug.write("drawareaalterposition updateVal: ",objName);
+		//Debug.write("drawareaalterposition updateVal: ",objName);
 		if (objName==null || objName==''){
 			this.xval.setText('');
 			this.yval.setText('');
@@ -26,7 +26,7 @@
 			this.obj=null;
 		} else {
 			this.obj = _drawarea.getObjectByName(objName);
-			Debug.write("this.obj: ",this.obj);
+			//Debug.write("this.obj: ",this.obj);
 			this.xval.setText(this.obj.x);
 			this.yval.setText(this.obj.y);
 			this.heigthval.setText(this.obj.height);
@@ -36,9 +36,9 @@
 	</method>
 	
 	<method name="alterPos" args="posName,newPos">
-		//Debug.write("alterPos",posName,newPos,this.obj,this.obj[posName]);
+		////Debug.write("alterPos",posName,newPos,this.obj,this.obj[posName]);
 		this.obj.setAttribute(posName,newPos);
-		//Debug.write("alterPos",posName,newPos,this.obj,this.obj[posName]);
+		////Debug.write("alterPos",posName,newPos,this.obj,this.obj[posName]);
 		this.obj.parent.UpdateByObject(this.obj);
 		if (this.obj.parent.boundingref!=null) this.obj.parent.boundingref.removeIt();		
 	</method>

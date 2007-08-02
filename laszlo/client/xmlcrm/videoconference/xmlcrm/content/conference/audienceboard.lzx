@@ -22,8 +22,8 @@
 	<labeltext y="40" labelid="130" />
 		<view y="60" x="20">
 			<handler name="oninit">
-				Debug.write(hib.currentdomain);
-				Debug.write(hib.currentdomainObj);
+				//Debug.write(hib.currentdomain);
+				//Debug.write(hib.currentdomainObj);
     			this.getRoomsByOrganisationAndType.doCall();
     		</handler>
     		
@@ -35,7 +35,7 @@
 	                <![CDATA[
 	                if (value!=null){
 		                for(var eg=0;eg<value.length;eg++){
-		                    Debug.write("2: ",value[eg]);
+		                    //Debug.write("2: ",value[eg]);
 		                    var time = value[eg].room.starttime.getHours()+':'+value[eg].room.starttime.getMinutes()+' '+value[eg].room.starttime.getDate()+'.'+(value[eg].room.starttime.getMonth()+1)+'.'+value[eg].room.starttime.getFullYear();
 		                    new roomlistItem(parent.inn.inn.inn,{roomClassName:'audience',isaudience:true,obj:value[eg],ispublic:false,roomid:value[eg].room.rooms_id,starttime:time,roomname:value[eg].room.name});
 		                }
@@ -65,7 +65,7 @@
 	                <![CDATA[
 	                if (value!=null){
 		                for(var eg=0;eg<value.length;eg++){
-		                    Debug.write(value[eg]);
+		                    //Debug.write(value[eg]);
 		                    var time = value[eg].starttime.getHours()+':'+value[eg].starttime.getMinutes()+' '+value[eg].starttime.getDate()+'.'+(value[eg].starttime.getMonth()+1)+'.'+value[eg].starttime.getFullYear();
 		                    new roomlistItem(parent.inn.inn.inn,{roomClassName:'audience',isaudience:true,obj:value[eg],ispublic:true,roomid:value[eg].rooms_id,starttime:time,roomname:value[eg].name});
 		                }

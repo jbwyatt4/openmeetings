@@ -18,10 +18,10 @@
 	</method>
 	<handler name="ondata" args="value">
 		<![CDATA[
-		Debug.write("ondata: ",this,Number(value),this.returnObj);
+		////Debug.write("ondata: ",this,Number(value),this.returnObj);
         canvas._loadingAll.setAttribute('visible',false);
 		if (this.returnObj!=null && Number(value)>0) {
-			Debug.write("this.returnObj.processNext");
+			//Debug.write("this.returnObj.processNext");
 			this.returnObj.processNext();
 		} else if (this.returnObj!=null && Number(value)<0) {
 		    this.returnObj.errorByCode(Number(value));

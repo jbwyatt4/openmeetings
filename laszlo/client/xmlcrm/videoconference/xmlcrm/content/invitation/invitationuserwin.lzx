@@ -26,7 +26,7 @@
                 </handler>
                 <handler name="ondata" args="value">
                     //The onResult-Handler will be called be the rtmpconnection
-                    Debug.write("getLanguages: ",value);
+                    //Debug.write("getLanguages: ",value);
                     <![CDATA[
                     for (var i=0;i<value.length;i++){
                         this.parent.addItem(value[i].name,value[i].language_id);
@@ -50,7 +50,7 @@
 				this.selectItem('lightsteelblue');
 			</handler>
 			<handler name="onselect" args="v">
-				Debug.write("onselect: ",v.value);
+				//Debug.write("onselect: ",v.value);
 				if (this.initselect){
 					this.initselect=false;
 				} else {
@@ -84,7 +84,7 @@
 	<simplelabelbutton name="connect" x="170" y="370" text="connect" 
 		labelid="228" width="120" height="20">
 		<handler name="onclick">
-			Debug.write("this.parent: ",this.parent);
+			//Debug.write("this.parent: ",this.parent);
 			
 			parent.userlang = Number(parent.languages.getValue());
 			
@@ -123,7 +123,7 @@
         <netparam name="vars1"><method name="getValue"> return parent.parent.userlang; </method></netparam> 
         <handler name="ondata" args="value">
             //The onResult-Handler will be called be the rtmpconnection
-            Debug.write("getLanguageById: ",value);
+            //Debug.write("getLanguageById: ",value);
             setLabelObject(value);
 			parent.getStates.doCall();
         </handler>  
@@ -134,7 +134,7 @@
 		remotecontext="$once{ canvas.thishib }" >  
         <handler name="ondata" args="value">
             //The onResult-Handler will be called be the rtmpconnection
-            Debug.write("getStates: ",value);
+            //Debug.write("getStates: ",value);
             canvas.statesInitValues = value;
             parent.getUserSalutations.doCall();
         </handler>  
@@ -145,7 +145,7 @@
 		<netparam name="vars1"><method name="getValue">return canvas.sessionId;</method></netparam>
         <handler name="ondata" args="value">
             //The onResult-Handler will be called be the rtmpconnection
-            Debug.write("getUserSalutations ",value);
+            //Debug.write("getUserSalutations ",value);
             canvas.salutationsInitValues = value;
             parent.getRoomTypes.doCall();
         </handler>  
@@ -156,7 +156,7 @@
 		<netparam name="vars1"><method name="getValue">return canvas.sessionId;</method></netparam>
         <handler name="ondata" args="value">
             //The onResult-Handler will be called be the rtmpconnection
-            Debug.write("getRoomTypes ",value);
+            //Debug.write("getRoomTypes ",value);
             canvas.roomTypesInitValues = value;
             parent.setUsername.doCall();
         </handler>  
@@ -171,11 +171,11 @@
         <netparam name="vars6"><method name="getValue">return parent.parent.currentdomain;</method></netparam>
         <handler name="ondata" args="value">
             //The onResult-Handler will be called be the rtmpconnection
-            Debug.write("setUsername: ",value);
+            //Debug.write("setUsername: ",value);
 	        hib.connectedroom=canvas.initroomid;
             hib.conferencedomain = canvas.initdomainid;
 
-            Debug.write("hib.conferencedomain: ",hib.conferencedomain);
+            //Debug.write("hib.conferencedomain: ",hib.conferencedomain);
             clearStageContent();
             canvas._mainbgcontentNavi.navi._innercontent.clearAllSubItemLists(); 			
 			if (canvas.initroomtype=="conference"){

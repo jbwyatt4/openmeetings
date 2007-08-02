@@ -47,7 +47,7 @@
     <method name="showCamera" args="show">
         if (! (parent instanceof videoview) ) {
             if ($debug) {
-                Debug.write('camera, %w, expects to be child of videoview', this);
+                //Debug.write('camera, %w, expects to be child of videoview', this);
             }
             return;
         }

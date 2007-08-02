@@ -12,16 +12,16 @@
 		<method event="oninit" args="invoker">
 		<![CDATA[
 			fr = new flash.net.FileReference();	
-			Debug.write(fr);
+			//Debug.write(fr);
     		fr.onHTTPError = function(fr, httpError){
-            	_root.Debug.write('onHTTPError invoked: ' + httpError);
+            	_root.//Debug.write('onHTTPError invoked: ' + httpError);
             	new errorpopup(canvas,{error:'Err2: '+httpError});
 			}
 			fr.onIOError = function(fr){
-				_root.Debug.write('onIOError invoked');
+				_root.//Debug.write('onIOError invoked');
 			}
 			function callbackFunction ( e ) {
-				_root.Debug.write( e.data );
+				_root.//Debug.write( e.data );
 			}			
 			fr.addListener(invoker, callbackFunction);
 		]]>
@@ -55,20 +55,20 @@
 		</method>
 
 		<method name="upload" args="url"><![CDATA[
-			Debug.write("url: ",url,fr);
+			//Debug.write("url: ",url,fr);
 			fr.upload(url);
 		]]>
 		</method>
 		
     <method name="onCancel" args="fr">
         <![CDATA[
-            Debug.write('onCancel invoked');
+            //Debug.write('onCancel invoked');
         ]]>
     </method>
     
     <method name="onComplete" args="fr">
         <![CDATA[
-            Debug.write('onComplete invoked');
+            //Debug.write('onComplete invoked');
             canvas.filedialogRef.progressBar.setValue(100);
             //canvas.filedialogRef.upload.setAttribute('enabled', false);
             if (canvas.filedialogRef.sendCompleted)canvas.filedialogRef.sendCompleted.sendEvent();
@@ -77,25 +77,25 @@
     
     <method name="onHTTPError" args="fr, httpError">
         <![CDATA[
-            Debug.write('onHTTPError invoked: ' + httpError);
+            //Debug.write('onHTTPError invoked: ' + httpError);
         ]]>
     </method>
     
     <method name="onIOError" args="fr">
         <![CDATA[
-        Debug.write('onIOError invoked',fr);
+        //Debug.write('onIOError invoked',fr);
         ]]>
     </method>
     
     <method name="onOpen" args="fr">
         <![CDATA[
-            Debug.write('onOpen invoked',fr);
+            //Debug.write('onOpen invoked',fr);
         ]]>
     </method>
     
     <method name="onSecurityError" args="fr, errorString">
         <![CDATA[
-            Debug.write('onSecurityError invoked: ' + errorString);
+            //Debug.write('onSecurityError invoked: ' + errorString);
         ]]>
     </method>
 		

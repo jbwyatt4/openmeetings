@@ -33,13 +33,13 @@
 	
 	<method name="setUserAnswer" args="value">
 		<![CDATA[
-		Debug.write("*** setUserAnswer: ",value);
+		//Debug.write("*** setUserAnswer: ",value);
 
 		var t = this.userslist.userslist.userslist[value.client.streamid];
-		Debug.write(" t: ",t);
+		//Debug.write(" t: ",t);
 		t.hasAnswered = true;
 		var answer = value.message[1];
-		Debug.write("answer: ",answer);
+		//Debug.write("answer: ",answer);
 		if (answer=='ok'){
 			t.inner.answer.setText(canvas.getLabelName(94));
 			t.answer = true;
@@ -60,7 +60,7 @@
 		<![CDATA[
 		var b = true;
 		for (var i=0;i<this.userslist.userslist.userslist.subviews.length;i++){
-			Debug.write("itemID : ",this.userslist.userslist.userslist.subviews[i]);
+			//Debug.write("itemID : ",this.userslist.userslist.userslist.subviews[i]);
 			if (!this.userslist.userslist.userslist.subviews[i].answer){
 				b=false;
 				break;
@@ -75,13 +75,13 @@
        	<handler name="ondata" args="value">
        		<![CDATA[
            	//The onResult-Handler will be called be the rtmpconnection
-           	Debug.write("INSTANCE getClientListScope : ",value);
+           	//Debug.write("INSTANCE getClientListScope : ",value);
 			for (var eg in value){
-				Debug.write("value: ",eg,value,parent.userslist.userslist.userslist);
+				//Debug.write("value: ",eg,value,parent.userslist.userslist.userslist);
 				if (canvas.streamid!=value[eg].streamid) {
 				    new useritem(parent.userslist.userslist.userslist,{name:value[eg].streamid,username:value[eg].username,streamid:value[eg].streamid});
 				}
-				Debug.write("value: ",eg,value,parent.userslist.userslist.userslist);
+				//Debug.write("value: ",eg,value,parent.userslist.userslist.userslist);
 			}
 		    if (parent.userslist.userslist.userslist.subviews.length==0)
 				   parent.applyButton.setAttribute('enabled',true);
@@ -94,7 +94,7 @@
         <handler name="ondata" args="value">
         	<![CDATA[
             //The onResult-Handler will be called be the rtmpconnection
-            Debug.write("sendMessageWithClient : ",value);
+            //Debug.write("sendMessageWithClient : ",value);
 
             ]]>
         </handler>   

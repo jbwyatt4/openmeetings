@@ -40,9 +40,9 @@
 		
 	<button name="connect" x="170" y="370" text="connect" width="120" height="20">
 		<handler name="onclick">
-			Debug.write("this.parent: ",this.parent);
-            Debug.write(this.parent._comobox.getText());
-            Debug.write(this.parent._login.getText());
+			//Debug.write("this.parent: ",this.parent);
+            //Debug.write(this.parent._comobox.getText());
+            //Debug.write(this.parent._login.getText());
             canvas.setAttribute('currentcourse',this.parent._comobox.getText());
             canvas.setAttribute('currentuser',this.parent._login.getText());
             canvas.setAttribute('currentusename',this.parent._login.getText());
@@ -59,7 +59,7 @@
             canvas.setAttribute('currentcourseName',this.parent._comobox.getText());
             canvas.setAttribute('currentcourseNameLong',this.parent._comobox.getText());
             canvas.setAttribute('loadingmessage','loading language data');
-            Debug.write("canvas.languageData doRequest: ",canvas.languageData);
+            //Debug.write("canvas.languageData doRequest: ",canvas.languageData);
             canvas.languageData.doRequest();
         
             this.parent.close();

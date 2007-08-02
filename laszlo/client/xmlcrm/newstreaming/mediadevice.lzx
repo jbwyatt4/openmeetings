@@ -96,7 +96,7 @@
 
             this._instances.push(this);
 
-            //Debug.write("mediadevice init", this, "allowed", this["allowed"], "starting device");
+            ////Debug.write("mediadevice init", this, "allowed", this["allowed"], "starting device");
 
             this.startDevice();
 
@@ -226,7 +226,7 @@
                 // than we think it is. If so, notify all mediadevices.
                 var devallowed = 
                     !dev.muted;
-                //Debug.write("mediadevice", this, "allowed", this.allowed, "startDevice devallowed", devallowed);
+                ////Debug.write("mediadevice", this, "allowed", this.allowed, "startDevice devallowed", devallowed);
                 if (this.allowed != devallowed) {
                     mediadevice.prototype._updateAllAllowedStatic(devallowed);
                 }
@@ -321,7 +321,7 @@
               TODO: Move this to subclasses.
               @keywords private -->
         <method name="_setCapturing" args="capturing"><![CDATA[
-            //Debug.write("mediadevice _setCapturing", this, capturing, arguments.caller);
+            ////Debug.write("mediadevice _setCapturing", this, capturing, arguments.caller);
 
             this.capturing = capturing;
 
@@ -345,7 +345,7 @@
             var deviceName = tokens[0];
             var actionName = tokens[1];
 
-            //Debug.write("mediadevice _onStatusStatic", this, deviceName, actionName, "allowed", this.allowed);
+            ////Debug.write("mediadevice _onStatusStatic", this, deviceName, actionName, "allowed", this.allowed);
 
             var allowedNow = null;
             var update = false;
@@ -371,7 +371,7 @@
             }
 
             if (update) {
-                //Debug.write("mediadevice", this, "_onStatusStatic allowed", allowedNow);
+                ////Debug.write("mediadevice", this, "_onStatusStatic allowed", allowedNow);
                 this._updateAllAllowedStatic(allowedNow);
             }
 
@@ -386,7 +386,7 @@
               @keywords private -->
         <method name="_updateAllAllowedStatic" args="allowedNow"><![CDATA[
             // This is a static method, so "this" is mediadevice.prototype.
-            //Debug.write("_updateAllAllowedStatic", allowedNow, arguments.caller);
+            ////Debug.write("_updateAllAllowedStatic", allowedNow, arguments.caller);
             this.allowed = 
                 allowedNow;
             var instances = 
@@ -395,7 +395,7 @@
             var n = instances.length;
             for (i = 0; i < n; i++) {
                 var dev = instances[i];
-                //Debug.write("_updateAllAllowedStatic", dev, this.allowed);
+                ////Debug.write("_updateAllAllowedStatic", dev, this.allowed);
                 dev._updateAllowed();
             } 
             this._allowedknown = true;
@@ -407,7 +407,7 @@
               mediadevice.prototype.allowed value changes.
               @keywords private -->
         <method name="_updateAllowed"><![CDATA[
-            //Debug.write("mediadevice _updateAllowed", this, this['allowed'])
+            ////Debug.write("mediadevice _updateAllowed", this, this['allowed'])
 
             if (this.onallowed) {
                 this.onallowed.sendEvent(this.allowed);
@@ -419,7 +419,7 @@
         <!--- Handler for the Flash device onActivity callback. 
               @keywords private -->
         <method name="_onActivity" args="active"><![CDATA[
-            //Debug.write("mediadevice _onActivity", this, active);
+            ////Debug.write("mediadevice _onActivity", this, active);
             this.setAttribute("active", active);
           ]]>
         </method>

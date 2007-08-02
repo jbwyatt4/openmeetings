@@ -6,7 +6,7 @@
     <handler name="onselect" />
     <attribute name="doubleclickEvent" value="null" />
         <method name="clearList">
-        	Debug.write("clearList");
+        	//Debug.write("clearList");
         	//this._listItemViewBorder._listItemView.destroy();
         	//new monitorlistItemView(this._listItemViewBorder,{name:'_listItemView'});
         </method>

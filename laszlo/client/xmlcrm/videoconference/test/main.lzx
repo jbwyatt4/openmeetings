@@ -16,7 +16,7 @@
                     <nextButton nextTabpane="${this.parent.parent.soundTab}" text="${mess.next}" />
                 </tabpane>
 
-                <tabpane text="${mess.sound}" name="soundTab" onselect="Debug.write('focus'); audioplayer.play();">
+                <tabpane text="${mess.sound}" name="soundTab" onselect="//Debug.write('focus'); audioplayer.play();">
 					
 					<!-- define content areas which are 
 						kind of component in classes -->

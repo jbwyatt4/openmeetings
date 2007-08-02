@@ -38,20 +38,20 @@
 
 	<method name="drawtoArray">
 		<![CDATA[
-		Debug.write("drawtoArray");
+		//Debug.write("drawtoArray");
 		if (this._textview._textview.getText().length!=0 && this.inittext.length==0){
 		    var y = this.getAttributeRelative('y',this.refObj)-this.refObj.y+1;
-			Debug.write("this.x-this.refObj.x-this.refObj.parent.x ",y);
+			//Debug.write("this.x-this.refObj.x-this.refObj.parent.x ",y);
 			var x = this.getAttributeRelative('x',this.refObj)-this.refObj.x+1;
         	this.refObj.drawTextField(this._textview._textview.getText(),this._textview._textview.width,this._textview._textview.height,x,y);
         } else if (this._textview._textview.getText().length!=0 && this.inittext.length!=0){
-        	Debug.write("edit modi ",this.initTextName);
+        	//Debug.write("edit modi ",this.initTextName);
 		    var y = this.getAttributeRelative('y',this.refObj)-this.refObj.y+1;
-			Debug.write("this.x-this.refObj.x-this.refObj.parent.x ",y);
+			//Debug.write("this.x-this.refObj.x-this.refObj.parent.x ",y);
 			var x = this.getAttributeRelative('x',this.refObj)-this.refObj.x+1;
         	this.refObj.setTextFieldByName(this.initTextName,this._textview._textview.getText(),this._textview._textview.width,x,y,this._textview._textview.height);
         } else {
-			Debug.write("text smaller then 0",this._textview._textview.getText());
+			//Debug.write("text smaller then 0",this._textview._textview.getText());
 		}
         this.giveup();
 		]]>
@@ -81,14 +81,14 @@
     </handler>
   
 	<method name="callNew" args="txxt">
-		Debug.write("callNew height-2");
+		//Debug.write("callNew height-2");
         var h = this.getHeight();
 		this._textview._textview.destroy();
 		var t = new styleableinput(this._textview,{name:'_textview',text:txxt,fontstyle:this.refObj.currentlayerstyle,fontsize:this.refObj.currentlayersize,fgcolor:this.refObj.currentlayerletter});
         this.setHeight(h);
 	</method>
 	<method name="adjustHeight">
-		//Debug.write("+++ adjustHeight +++");
+		////Debug.write("+++ adjustHeight +++");
 		this.setAttribute('height',this._textview._textview.height+2);
 	</method>
     

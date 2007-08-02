@@ -124,7 +124,7 @@
         or deny use of the Microphone
     -->
     <method name="setMute" args="isMuted"> <![CDATA[
-        //Debug.write('setMute', isMuted);
+        ////Debug.write('setMute', isMuted);
         this.mute = isMuted;
         if (!this.isinited) return;
         if (!isMuted && !this._micinited) this._initMic();

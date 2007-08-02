@@ -10,7 +10,7 @@
 	<attribute name="listV" type="string" value="${ this.parent.listV }" />
 	<handler name="onlistV">
 		var list = this.listV;
-		Debug.write("list: ",list);
+		//Debug.write("list: ",list);
 		<![CDATA[
 		var itemName = '';
 		for (var eg=0;eg<list.length;eg++){
@@ -29,16 +29,16 @@
     <![CDATA[
     	if (val !=null && val!=''){
 	    	this.ObjectByName = this.refObj.getObjectByName(val);
-	    	Debug.write("this.ObjectByName",this.ObjectByName);
+	    	//Debug.write("this.ObjectByName",this.ObjectByName);
 	    	this.refObj.setAttribute('boundingIsActive',true);
-	    	Debug.write("this.ObjectByName.getAttribute('x'): ",this.ObjectByName.getAttribute('x'));
+	    	//Debug.write("this.ObjectByName.getAttribute('x'): ",this.ObjectByName.getAttribute('x'));
 	    	
 	    	var x = this.ObjectByName.getAttribute('x');
 	    	var y = this.ObjectByName.getAttribute('y');
 	    	var width = this.ObjectByName.width;
 	    	var height = this.ObjectByName.height;
 	    	if (this.refObj.boundingref!=null)this.refObj.boundingref.removeIt();
-	    	Debug.write("inital bounding box");
+	    	//Debug.write("inital bounding box");
 	    	this.refObj.boundingref = new boundingBoxAll(this.refObj.parent.boundboxesView,{objRef:this.ObjectByName,x:x-200,y:y-200,width:width+400,height:height+400,ex:x,ey:y,ewidth:width,eheight:height});
 	    	this.refObj.parent._drawareaobjectcombobox.preselectedName=val;
 	    	//this.refObj.boundingref.sendToBack();

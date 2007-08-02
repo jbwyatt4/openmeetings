@@ -37,8 +37,8 @@
 	        if (x>=0 && y>=0 && x<=_drawarea.width && y<=_drawarea.height){
 		        var downloadurl = 'http://'+canvas.rtmphostlocal+':'+canvas.red5httpport+'/xmlcrm/DownloadHandler?fileName='+this.filename+'&moduleName='+this.uploadmodul+'&parentPath='+canvas.uploadmoduleimgfolder+'/'+'&room='+hib.connectedroom+'&domain='+hib.conferencedomain+'&sid='+canvas.sessionId;
 
-		        Debug.write(downloadurl);        
-		        Debug.write(downloadurl,x,y,this.baseurl,this.fileName,this.moduleName,this.parentPath,this.room,this.domain);
+		        //Debug.write(downloadurl);        
+		        //Debug.write(downloadurl,x,y,this.baseurl,this.fileName,this.moduleName,this.parentPath,this.room,this.domain);
 			
 		        _drawarea.parent.clearAreaAndAddImage(downloadurl,x,y,this.baseurl,this.fileName,this.moduleName,this.parentPath,this.room,this.domain);
 		        
@@ -53,11 +53,11 @@
 
     <method name="doStop">
        // this.refObj.setAttribute('opacity',1);
-       	Debug.write("doStop");
+       	//Debug.write("doStop");
         this.destroy();
     </method>
     <animatorgroup name="goback" process="simultaneous" relative="false" duration="1000" 
-        start="false" onstop="this.parent.doStop()" onstart="Debug.write('isstarted')">
+        start="false" onstop="this.parent.doStop()" onstart="//Debug.write('isstarted')">
       <animator name="xval" attribute="x" to="${ parent.parent.startX }" />
       <animator name="yval" attribute="y" to="${ parent.parent.startY }" motion="easeout" />
     </animatorgroup>  

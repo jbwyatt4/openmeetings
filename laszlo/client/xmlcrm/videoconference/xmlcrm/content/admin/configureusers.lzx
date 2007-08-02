@@ -23,7 +23,7 @@
 		</handler>
 		
 		<handler name="onclickedItem" args="obj">
-			Debug.write("onclickedItem",obj,obj.obj);
+			//Debug.write("onclickedItem",obj,obj.obj);
 			parent._uservalueform.initValueFieldsByObject(obj.obj);
 		</handler>
 		
@@ -34,7 +34,7 @@
 			<netparam name="vars4"><method name="getValue"> return parent.parent.orderby; </method></netparam>
 			<netparam name="vars5"><method name="getValue"> return parent.parent.asc; </method></netparam>
 	    	<handler name="ondata" args="value">
-	    		Debug.write("getUserList: ",value);
+	    		//Debug.write("getUserList: ",value);
 	    		//this.parent.destroy();
 	    		this.parent.initValues(value.records);
 	    		this.parent.renderContent(value.result);

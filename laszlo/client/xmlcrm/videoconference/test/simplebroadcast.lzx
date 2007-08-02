@@ -58,10 +58,10 @@
 				Video</checkbox>
 			<button text="checkValues">
 				<handler name="onclick">
-					Debug.write("this: ",live);
-					Debug.write("this: ",cam);
-					Debug.write("this: ",cam._dev);
-					Debug.write("this: ",mic._dev);
+					//Debug.write("this: ",live);
+					//Debug.write("this: ",cam);
+					//Debug.write("this: ",cam._dev);
+					//Debug.write("this: ",mic._dev);
 				</handler>
 			</button>
 		</view>

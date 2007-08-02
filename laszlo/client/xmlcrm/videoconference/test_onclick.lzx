@@ -3,8 +3,8 @@
 
     <class name="myview" extends="drawview" bgcolor="red" clip="true" 
         width="200" height="200" 
-        onclick="Debug.write('onclick',this)" 
-        onmouseup="Debug.write('onmouseup',this)" />
+        onclick="//Debug.write('onclick',this)" 
+        onmouseup="//Debug.write('onmouseup',this)" />
     
 <myview />
     

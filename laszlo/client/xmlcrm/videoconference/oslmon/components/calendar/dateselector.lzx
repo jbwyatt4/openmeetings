@@ -176,7 +176,7 @@
 		<![CDATA[
 		var tDate = new Date();
         if (this.showingdate.getMonth()== tDate.getMonth() && this.showingdate.getFullYear() == tDate.getFullYear()){
-        	Debug.write("+++++++ Found Today");
+        	//Debug.write("+++++++ Found Today");
         	var ref = this.getDateRefByDateNumber(tDate.getDate(),tDate.getMonth());
         	ref.setAttribute('bgcolor',0xCECECE);
         }
@@ -225,13 +225,13 @@
 		<![CDATA[
 		//First calc the date by the given first day in week
 		var newDateTemp = new Date(this.showingdate.getFullYear(), this.showingdate.getMonth(), 1);
-		//Debug.write(newDateTemp);
+		////Debug.write(newDateTemp);
 		var factor = 0;
 		if (newDateTemp.getDay()>this.firstdayinweek)	
 			factor = -((newDateTemp.getDay()-this.firstdayinweek));
 		else if (newDateTemp.getDay()<this.firstdayinweek)
 			factor = (this.firstdayinweek-newDateTemp.getDay());
-		//Debug.write("factor: ",factor);
+		////Debug.write("factor: ",factor);
 		
 		//calc first day
 		var newDate = new Date( (newDateTemp.getTime()+(86400000*factor)) );
@@ -240,7 +240,7 @@
 		if (newDate.getDate()>1 && newDate.getMonth()==newDateTemp.getMonth()){
 			newDate = new Date( (newDate.getTime()-(86400000*7)) );
 		}
-		//Debug.write("getDateFirstDayInMonth ",newDate);
+		////Debug.write("getDateFirstDayInMonth ",newDate);
 		return newDate;
 		]]>
 	</method>
@@ -335,17 +335,17 @@
 	
 	<method name="getDateRefByDateNumber" args="dayNumber,month">
 		<![CDATA[
-		//Debug.write(this.content.content.content);
+		////Debug.write(this.content.content.content);
 		for (var i=0;i<this.content.content.content.subviews.length;i++){
-			//Debug.write("this.content.content.content.subviews: ",i,this.content.content.content.subviews[i]);
+			////Debug.write("this.content.content.content.subviews: ",i,this.content.content.content.subviews[i]);
 			for (var k=0;k<this.content.content.content.subviews[i].content.subviews.length;k++){
-				//Debug.write("this.content.content.content.subviews[i].content.subviews[k].daydate.getDate(): ",this.content.content.content.subviews[i].content.subviews[k].daydate.getDate(),dayNumber);
-				//Debug.write("this.content.content.content.subviews[i].content.subviews[k].daydate.getMonth(): ",this.content.content.content.subviews[i].content.subviews[k].daydate.getMonth(),month);
+				////Debug.write("this.content.content.content.subviews[i].content.subviews[k].daydate.getDate(): ",this.content.content.content.subviews[i].content.subviews[k].daydate.getDate(),dayNumber);
+				////Debug.write("this.content.content.content.subviews[i].content.subviews[k].daydate.getMonth(): ",this.content.content.content.subviews[i].content.subviews[k].daydate.getMonth(),month);
 				if(this.content.content.content.subviews[i].content.subviews[k].daydate.getDate()==dayNumber && this.content.content.content.subviews[i].content.subviews[k].daydate.getMonth()==month){
 					return this.content.content.content.subviews[i].content.subviews[k];
 				}
-				//Debug.write("k: ",k,this.content.content.content.subviews[i].content.subviews[k]);
-				//Debug.write(this.content.content.content.subviews[i].content.subviews[k].daydate);
+				////Debug.write("k: ",k,this.content.content.content.subviews[i].content.subviews[k]);
+				////Debug.write(this.content.content.content.subviews[i].content.subviews[k].daydate);
 			}
 		}
 		return null;

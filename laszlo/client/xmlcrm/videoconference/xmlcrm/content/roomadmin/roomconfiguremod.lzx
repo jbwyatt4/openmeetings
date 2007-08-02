@@ -10,8 +10,8 @@
 			this.addHeaderItem(188,60);
 			this.addHeaderItem(189,186);
 			this.addHeaderItem(190,140);
-			Debug.write(hib.currentdomainObj.organisation_id);
-			Debug.write(hib.currentdomainObj);
+			//Debug.write(hib.currentdomainObj.organisation_id);
+			//Debug.write(hib.currentdomainObj);
 			this.getRoomsByOrganisation.doCall();
 		</handler>
 		
@@ -24,7 +24,7 @@
 		</handler>
 		
 		<handler name="onclickedItem" args="obj">
-			Debug.write("onclickedItem",obj,obj.obj);
+			//Debug.write("onclickedItem",obj,obj.obj);
 			parent._roomvalueform.initValueFieldsByObject(obj.obj);
 		</handler>
 		
@@ -36,7 +36,7 @@
 			<netparam name="vars5"><method name="getValue"> return parent.parent.orderby; </method></netparam>
 			<netparam name="vars6"><method name="getValue"> return parent.parent.asc; </method></netparam>
 	    	<handler name="ondata" args="value">
-	    		Debug.write("getRooms: ",value);
+	    		//Debug.write("getRooms: ",value);
 	    		//this.parent.destroy();
 	    		this.parent.initValues(value.records);
 	    		this.parent.renderContent(value.result);

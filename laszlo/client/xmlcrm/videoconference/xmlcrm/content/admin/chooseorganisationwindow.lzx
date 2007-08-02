@@ -24,7 +24,7 @@
 		<netparam name="vars5"><method name="getValue"> return true; </method></netparam>
 		<handler name="ondata" args="value">
 			<![CDATA[
-			Debug.write("getOrganisations ",value);
+			//Debug.write("getOrganisations ",value);
 			if (value!=null){
 				for (var i=0;i<value.result.length;i++){
 					if (!this.parent.refObj._organisationslist.checkValue(value.result[i].organisation_id)){
@@ -49,7 +49,7 @@
 		<handler name="onclick">
 			<![CDATA[
 				for (var i=0;i<this.parent._organisationslist._selected.length;i++){
-					Debug.write("this.parent.refObj._organisationslist.addItem ",this.parent._organisationslist._selected[i].text,this.parent._organisationslist._selected[i].value);
+					//Debug.write("this.parent.refObj._organisationslist.addItem ",this.parent._organisationslist._selected[i].text,this.parent._organisationslist._selected[i].value);
 					this.parent.refObj._organisationslist.addItem(this.parent._organisationslist._selected[i].text,this.parent._organisationslist._selected[i].value);
 				}
 				this.parent.close();

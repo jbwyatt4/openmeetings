@@ -18,7 +18,7 @@
 	<labeltext x="120" resize="false" text="$once{ parent.starttime }" width="180" />
 	
 	<handler name="onclick">
-		Debug.write("this. ",this.obj,this.parent.parent.parent.parent.parent);
+		//Debug.write("this. ",this.obj,this.parent.parent.parent.parent.parent);
         parent.parent.parent.parent.parent.detailsarea.opendetails();
 	</handler>
 	
@@ -30,13 +30,13 @@
             if (this.parent.ispublic){
                 hib.connectedroom=parent.obj.rooms_id+connectedIsAudience;
                 hib.conferencedomain="public";
-                Debug.write("ispublic");
+                //Debug.write("ispublic");
             } else {
                 hib.connectedroom=parent.obj.room.rooms_id+connectedIsAudience;
                 hib.conferencedomain = parent.obj.organisation.organisation_id;
-                Debug.write("non ispublic");
+                //Debug.write("non ispublic");
             }
-            Debug.write("hib.conferencedomain: ",hib.conferencedomain);
+            //Debug.write("hib.conferencedomain: ",hib.conferencedomain);
             clearStageContent();
             canvas._mainbgcontentNavi.navi._innercontent.clearAllSubItemLists();  
             new global[parent.roomClassName](canvas.main_content._content.inner);          

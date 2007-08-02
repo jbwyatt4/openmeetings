@@ -12,11 +12,11 @@
 
 		
 			<handler name="oninit">
-				Debug.write("oninit");
+				//Debug.write("oninit");
 				<![CDATA[
 				var completeText = canvas.getFormatedChatHistory();
 				this._cbtext.setText(completeText);
-				Debug.write(completeText);
+				//Debug.write(completeText);
 				this.setScrollToMax();
 				]]>
 			</handler>
@@ -24,11 +24,11 @@
 				Method expects an Array which is predefinied to certain Format
 			 -->
 			<method name="addChartItem" args="newMessage">
-				Debug.write("addChartItem: ",newMessage);
+				//Debug.write("addChartItem: ",newMessage);
 		  		this._cbtext.setText(this._cbtext.text+newMessage);
-		  		Debug.write(myscrollbar.scrolltarget.getAttribute(myscrollbar.scrollattr));
-		  		Debug.write(_cbtext.height);
-		  		Debug.write(this.height);
+		  		//Debug.write(myscrollbar.scrolltarget.getAttribute(myscrollbar.scrollattr));
+		  		//Debug.write(_cbtext.height);
+		  		//Debug.write(this.height);
 		  		this.setScrollToMax();
 			</method>
 			
@@ -77,14 +77,14 @@
 		  		var nowTime = new Date();
 		  		var datumsString = nowTime.getHours()+':'+nowTime.getMinutes();
 		  		parent.objMessage[1] = datumsString;
-	  			Debug.write("Setting Message");
+	  			//Debug.write("Setting Message");
 	  			parent.objMessage[2] = 'newtextmessage';
 	  			parent.objMessage[3] = hib.userobject.login;
 	  			parent.objMessage[4] = this.parent.message.getText();
 	  			parent.objMessage[5] = canvas.currentusercolor;
 	  			parent.objMessage[6] = canvas.currentuserpos;
 	  			if (this.parent.message.getText().length!=0){
-			  		Debug.write("send: ",this.parent.objMessage);
+			  		//Debug.write("send: ",this.parent.objMessage);
 			  		parent.sendMessageWithClient.doCall();
 			  		this.parent.message.setText('');
 		  		}
@@ -98,7 +98,7 @@
             <handler name="ondata" args="value">
             	<![CDATA[
                 //The onResult-Handler will be called be the rtmpconnection
-                Debug.write("getValue : ",value);
+                //Debug.write("getValue : ",value);
                 
                 ]]>
             </handler>   
