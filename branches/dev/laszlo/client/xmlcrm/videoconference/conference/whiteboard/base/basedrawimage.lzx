@@ -75,7 +75,7 @@
 			//has been loaded completely
 			if (this.refObj.isWmlLoaderImage){
 				this.refObj.isWmlLoaderImage=false;
-                Debug.write("1 onwmlLoaderSend.sendEvent( image )");
+                //Debug.write("1 onwmlLoaderSend.sendEvent( image )");
 				if (this.refObj.onwmlLoaderSend) this.refObj.onwmlLoaderSend.sendEvent('image');
 			}
 		]]>
@@ -100,7 +100,6 @@
 			//has been loaded completely
 			if (this.refObj.isWmlLoaderImage){
 				this.refObj.isWmlLoaderImage=false;
-                Debug.write("2 onwmlLoaderSend.sendEvent( image )");
 				if (this.refObj.onwmlLoaderSend) this.refObj.onwmlLoaderSend.sendEvent('image');
 			}
 		]]>
@@ -125,7 +124,6 @@
 			//has been loaded completely
 			if (this.refObj.isWmlLoaderImage){
 				this.refObj.isWmlLoaderImage=false;
-                Debug.write("3 onwmlLoaderSend.sendEvent( image )");
 				if (this.refObj.onwmlLoaderSend) this.refObj.onwmlLoaderSend.sendEvent('image');
 			}
 		]]>

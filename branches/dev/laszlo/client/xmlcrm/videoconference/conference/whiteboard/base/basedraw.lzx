@@ -188,7 +188,7 @@
 		this.setAttribute('drawmodus',modi);
 		if (modi=='plain'){
 			this.clearAll();
-		} else if (modi=='hand'){
+		} else if (modi=='hand' || modi=='letter' || modi=='paint' || modi=='line' || modi=='uline' || modi=='rectangle' || modi=='ellipse' || modi=='drawarrow'){
 			if (this.boundingref!=null) this.boundingref.removeIt();
 		}
 	</method>
