@@ -23,13 +23,13 @@
 	                ]]>
 	            </method>
 	            <handler name="onfocus">
-	            	Debug.write("onfocus");
+	            	//Debug.write("onfocus");
 	            	this.setSelection(0,this.getText().length);
 	            	LzFocus.setFocus(this);	
 	            	this.setSelection(0,this.getText().length);
 	            </handler>
 	            <handler name="onclick">
-	            	Debug.write("onclick");
+	            	//Debug.write("onclick");
 	            	this.setSelection(0,this.getText().length);
 	            	LzFocus.setFocus(this);	
 	            	this.setSelection(0,this.getText().length);
@@ -53,7 +53,7 @@
 		  		tempSendArray[0] = 'sharewhiteside';
 		  		tempSendArray[1] = datumsString;
 				tempSendArray[2] = this.parent._htmlside.getText();
-		  		Debug.write("send: ",tempSendArray);
+		  		//Debug.write("send: ",tempSendArray);
 		  		canvas.VarsModeratorGeneral = tempSendArray;
 		  		rtc.sendVarsModeratorGeneral.doCall();	
 		  		]]>		
@@ -87,7 +87,7 @@
 		  		tempSendArray[0] = 'sharewhiteinit';
 		  		tempSendArray[1] = datumsString;
 
-		  		Debug.write("send: ",tempSendArray);
+		  		//Debug.write("send: ",tempSendArray);
 		  		canvas.VarsModeratorGeneral = tempSendArray;
 		  		rtc.sendVarsModeratorGeneral.doCall();
 			

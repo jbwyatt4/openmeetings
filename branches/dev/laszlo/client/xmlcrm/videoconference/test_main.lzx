@@ -11,19 +11,19 @@
 		init
 	 -->
 	<handler name="oninit">
-        Debug.write("********** this oninit: ",this);
+        //Debug.write("********** this oninit: ",this);
 	</handler>
              
 	<handler name="onmousedown" >
-		Debug.write("onmousedown this.drawmodus: ",this.drawmodus);
+		//Debug.write("onmousedown this.drawmodus: ",this.drawmodus);
 	</handler>
 
 	<handler name="onmouseup" >
-        Debug.write("onmouseup this.drawmodus: ",this.drawmodus);
+        //Debug.write("onmouseup this.drawmodus: ",this.drawmodus);
 	</handler>  
     
     <handler name="onclick" args="obj">
-        Debug.write("click on whiteboard ",obj);
+        //Debug.write("click on whiteboard ",obj);
     </handler>
 
 

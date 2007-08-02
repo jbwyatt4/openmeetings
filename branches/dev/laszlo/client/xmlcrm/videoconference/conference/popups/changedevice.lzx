@@ -7,14 +7,14 @@
     <method name="storelocaldata">
         <![CDATA[
         if (this.holddatainSO.getValue()){
-            Debug.write("sharedobject store ");
+            //Debug.write("sharedobject store ");
             var t = new sharedobject();
             t.getLocal('userdata');
             var g = t.getData('userdata');
             if (g==null) g = new Array();
             g["cam"]=availibleCams3.getValue();
             g["mic"]=availibleMics3.getValue();
-            Debug.write("sharedobject store ",g["cam"],g["mic"]);
+            //Debug.write("sharedobject store ",g["cam"],g["mic"]);
             g["saveuserdata"] = true;
             t.setData('userdata',g);
             t.flush();  
@@ -53,7 +53,7 @@
             t.getLocal('userdata');
             var g = t.getData('userdata');
             var cam = g["cam"];
-            Debug.write("cam: ",cam);
+            //Debug.write("cam: ",cam);
 
             if (cam!=null || cam!=''){
             	this.selectItem(String(cam));    
@@ -80,7 +80,7 @@
             t.getLocal('userdata');
             var g = t.getData('userdata');
             var mic = g["mic"];
-            Debug.write("mic: ",mic);
+            //Debug.write("mic: ",mic);
 
             if (mic!=null || mic!=''){
             	this.selectItem(String(mic));    
@@ -98,7 +98,7 @@
             t.getLocal('userdata');
             var g = t.getData('userdata');
             var save = g["saveuserdata"];
-            Debug.write("save: ",save);
+            //Debug.write("save: ",save);
             if(save) this.setValue(true);
         </handler>         
     </checkbox>

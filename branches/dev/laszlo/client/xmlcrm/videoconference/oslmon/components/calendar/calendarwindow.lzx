@@ -18,11 +18,11 @@
 	<dateselector y="20" name="_dateselector">
 		<handler name="oninit">
 			<![CDATA[
-			Debug.write("dateselector oninit. ",this);
+			//Debug.write("dateselector oninit. ",this);
 			var t = parent.fieldRef.getText();
 			var newDate = parseStringToDate(t);
 			this.showingdate = newDate;
-			Debug.write("n1:",this.showingdate);
+			//Debug.write("n1:",this.showingdate);
 			this.init();
 			]]>
 		</handler>

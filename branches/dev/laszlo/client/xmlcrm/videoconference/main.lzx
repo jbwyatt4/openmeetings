@@ -206,15 +206,15 @@ containing the VideoViews
 	
 	var doubleSlash = _url.indexOf("//");
     var isNotPort80 = _url.indexOf(":", doubleSlash+2);
-    Debug.write("isNotPort80: ",isNotPort80);
+    //Debug.write("isNotPort80: ",isNotPort80);
     if (isNotPort80!=-1){
-        Debug.write("isNotPort80: ",doubleSlash+2, _url.indexOf(":", doubleSlash+2)-doubleSlash-2);
+        //Debug.write("isNotPort80: ",doubleSlash+2, _url.indexOf(":", doubleSlash+2)-doubleSlash-2);
         var server = _url.substr(doubleSlash+2, _url.indexOf(":", doubleSlash+2)-doubleSlash-2); 
     } else {
         var server = _url.substr(doubleSlash+2, _url.indexOf("/", doubleSlash+2)-doubleSlash-2); 
     }
 	
-	Debug.write("this zielnr: ",this,server);
+	//Debug.write("this zielnr: ",this,server);
 	
 	this.setAttribute('rmpthost',server);
         
@@ -227,7 +227,7 @@ containing the VideoViews
 	var roomtype = LzBrowser.getInitArg('roomtype');
 	var emailGuest = LzBrowser.getInitArg('email');
 		
-	Debug.write("domain: ",domain);
+	//Debug.write("domain: ",domain);
 
 	if (domain!=undefined && room!=undefined && roomtype!=undefined && emailGuest != undefined){
 		canvas.initroomid = room;
@@ -239,7 +239,7 @@ containing the VideoViews
 
 	}
 	
-	Debug.write("rtmphostlocal,rmpthost: ",canvas.rtmphostlocal,canvas.rmpthost);	
+	//Debug.write("rtmphostlocal,rmpthost: ",canvas.rtmphostlocal,canvas.rmpthost);	
 
     var src = 'rtmp://'+canvas.rtmphostlocal+':'+canvas.rmptport+'/xmlcrm/hibernate';
     canvas.thishib.setAttribute('src',src);
@@ -262,9 +262,9 @@ containing the VideoViews
         <view name="inner" />
         
         <method name="clearAll">
-            Debug.write("clearAll this.inner: ",this.inner,this.inner.subviews.length);
+            //Debug.write("clearAll this.inner: ",this.inner,this.inner.subviews.length);
             for (var eg in this.inner.subviews){
-                Debug.write("clearAll this.inner.subviews: ",this.inner.subviews[eg]);
+                //Debug.write("clearAll this.inner.subviews: ",this.inner.subviews[eg]);
                 this.inner.subviews[eg].close();                
                 //
             }

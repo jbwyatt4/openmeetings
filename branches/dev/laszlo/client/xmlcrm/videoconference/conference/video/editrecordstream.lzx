@@ -17,7 +17,7 @@
 	width="300" height="250" x="14" >
 	
 	<handler name="oninit">
-		Debug.write("############################### ");
+		//Debug.write("############################### ");
 	</handler>
 
     <attribute name="myvideocontainer" value="null" />
@@ -25,14 +25,14 @@
     <method name="storelocaldata">
         <![CDATA[
         if (this.holddatainSO.getValue()){
-            Debug.write("sharedobject store ");
+            //Debug.write("sharedobject store ");
             var t = new sharedobject();
             t.getLocal('userdata');
             var g = t.getData('userdata');
             if (g==null) g = new Array();
             g["cam"]=availibleCams.getValue();
             g["mic"]=availibleMics.getValue();
-            Debug.write("sharedobject store ",g["cam"],g["mic"]);
+            //Debug.write("sharedobject store ",g["cam"],g["mic"]);
             g["saveuserdata"] = true;
             t.setData('userdata',g);
             t.flush();  
@@ -55,12 +55,12 @@
         t.getLocal('userdata');
         var g = t.getData('userdata');
         var save = g["saveuserdata"];
-        Debug.write("save: ",save,g["cam"],g["mic"]);
+        //Debug.write("save: ",save,g["cam"],g["mic"]);
         if(save) this.doninitalize(g["cam"],g["mic"]);
     </handler> 
 
     <method name="doninitalize" args="valCam,valMic">
-    	//Debug.write("this.myvideocontainer: ",this.myvideocontainer);
+    	////Debug.write("this.myvideocontainer: ",this.myvideocontainer);
     
         this.myvideocontainer.cameraRef.setAttribute('deviceindex',valCam);
         this.myvideocontainer.microphoneRef.setAttribute('deviceindex',valMic);
@@ -71,7 +71,7 @@
 	    
 	    //canvas._ns = new NetStream(canvas.thishib._nc);
 		
-		Debug.write("publishing streamid: ",canvas.streamid);
+		//Debug.write("publishing streamid: ",canvas.streamid);
 	    //canvas._ns.publish(canvas.streamid,"live");
 	    //this.myvideocontainer.microphoneRef._mic.setRate(4);
 	    //this.myvideocontainer.cameraRef._cam.setQuality(16384/4);
@@ -80,8 +80,8 @@
 	    //canvas._ns.attachVideo(this.myvideocontainer.cameraRef._dev);
 	    //canvas._ns.attachAudio(this.myvideocontainer.microphoneRef._dev);  
 	    //Attach Devices to Stream
-	    //Debug.write(cameraRef._cam);
-	    //Debug.write(microphoneRef._mic);
+	    ////Debug.write(cameraRef._cam);
+	    ////Debug.write(microphoneRef._mic);
 	    //
 	    //      
 		
@@ -90,9 +90,9 @@
         this.myvideocontainer.cameraRef.setAttribute('show',true);
         this.myvideocontainer.parent.parent.setIdentifier(canvas.streamid);
 		
-		Debug.write(this.myvideocontainer);
-		Debug.write(this.myvideocontainer.stream);
-		Debug.write(this.myvideocontainer.v_output);
+		//Debug.write(this.myvideocontainer);
+		//Debug.write(this.myvideocontainer.stream);
+		//Debug.write(this.myvideocontainer.v_output);
 		this.myvideocontainer.v_output.setAttribute('url', canvas.streamid);
 		this.myvideocontainer.v_output.broadcast();
         
@@ -176,7 +176,7 @@
             t.getLocal('userdata');
             var g = t.getData('userdata');
             var save = g["saveuserdata"];
-            Debug.write("save: ",save);
+            //Debug.write("save: ",save);
             if(save) this.setValue(true);
         </handler>         
     </checkbox>

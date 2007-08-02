@@ -37,7 +37,7 @@ function getLabelNameGlob(labelid){
 		}
 	}
 }
-Debug.write("end init");
+//Debug.write("end init");
     
 var currentMouseWheelObject = null;
     
@@ -66,13 +66,13 @@ function disableCurrentMouseWheelObject() {
 
 <method name="parseLanugageObject" args="obj">
 
-	//Debug.write('parseLanugageObject: ',obj);
-	//Debug.write('parseLanugageObject: ',obj.childNodes);
+	////Debug.write('parseLanugageObject: ',obj);
+	////Debug.write('parseLanugageObject: ',obj.childNodes);
 	<![CDATA[
 	var t = new Array();
 	for (var i=0;i<obj.childNodes.length;i++){
 		for (var k=0;k<obj.childNodes[i].childNodes.length;k++){
-			//Debug.write(obj.childNodes[i].childNodes[k]);
+			////Debug.write(obj.childNodes[i].childNodes[k]);
 			var t2 = new Array();
 			t2[obj.childNodes[i].childNodes[k].childNodes[0].nodeName]=obj.childNodes[i].childNodes[k].childNodes[0].childNodes[0].data;
 			t2[obj.childNodes[i].childNodes[k].childNodes[1].nodeName]=obj.childNodes[i].childNodes[k].childNodes[1].childNodes[0].data;
@@ -81,7 +81,7 @@ function disableCurrentMouseWheelObject() {
 	}
 	setLabelObject(t);
 	canvas.initScreen();
-	Debug.write(t);
+	//Debug.write(t);
 	]]>
 </method>
 
@@ -91,7 +91,7 @@ function disableCurrentMouseWheelObject() {
 	type="http" >
 	<handler name="ondata" args="value">
 	
-		Debug.write(value);
+		//Debug.write(value);
 		canvas.setAttribute('currentcourse',value.childNodes[0].childNodes[0].childNodes[0].childNodes[0].data);
 		canvas.setAttribute('currentcourseName',canvas.currentcourse);
 		canvas.setAttribute('currentcourseNameLong',value.childNodes[0].childNodes[0].childNodes[1].childNodes[0].data);
@@ -108,14 +108,14 @@ function disableCurrentMouseWheelObject() {
 		canvas.setAttribute('picture_uri','');
 		canvas.setAttribute('language',value.childNodes[0].childNodes[1].childNodes[7].childNodes[0].data);
 
-		Debug.write(value.childNodes[0].childNodes[1].childNodes[0].childNodes[0].data);
-		Debug.write(value.childNodes[0].childNodes[1].childNodes[1].childNodes[0].data);
-		Debug.write(value.childNodes[0].childNodes[1].childNodes[2].childNodes[0].data);
-		Debug.write(value.childNodes[0].childNodes[1].childNodes[3].childNodes[0].data);
-		Debug.write(value.childNodes[0].childNodes[1].childNodes[4].childNodes[0].data);
-		Debug.write(value.childNodes[0].childNodes[1].childNodes[5].childNodes[0].data);
-		Debug.write(value.childNodes[0].childNodes[1].childNodes[6].childNodes[0].data);
-		Debug.write(value.childNodes[0].childNodes[1].childNodes[7].childNodes[0].data);
+		//Debug.write(value.childNodes[0].childNodes[1].childNodes[0].childNodes[0].data);
+		//Debug.write(value.childNodes[0].childNodes[1].childNodes[1].childNodes[0].data);
+		//Debug.write(value.childNodes[0].childNodes[1].childNodes[2].childNodes[0].data);
+		//Debug.write(value.childNodes[0].childNodes[1].childNodes[3].childNodes[0].data);
+		//Debug.write(value.childNodes[0].childNodes[1].childNodes[4].childNodes[0].data);
+		//Debug.write(value.childNodes[0].childNodes[1].childNodes[5].childNodes[0].data);
+		//Debug.write(value.childNodes[0].childNodes[1].childNodes[6].childNodes[0].data);
+		//Debug.write(value.childNodes[0].childNodes[1].childNodes[7].childNodes[0].data);
 		
 		switch (canvas.currentlanguage){
 			case 'english':
@@ -151,9 +151,9 @@ function disableCurrentMouseWheelObject() {
 
 <method name="addChatHistory" args="value,client">
   	<![CDATA[
-  	Debug.write("addChatHistory: ",value,client);
+  	//Debug.write("addChatHistory: ",value,client);
   	var newmessage = "<FONT COLOR='"+value[5]+"' size='11'>"+client.firstname+" "+client.lastname+":"+value[4]+"</FONT><br />";
-  	Debug.write("newmessage: ",newmessage);
+  	//Debug.write("newmessage: ",newmessage);
   	chartcontent.addChartItem(newmessage);
   	chathistory.push(newmessage);
   	]]>
@@ -165,13 +165,13 @@ function disableCurrentMouseWheelObject() {
   	for (var i=0;i<chathistory.length;i++){
   		completeText+=chathistory[i];
   	}
-  	Debug.write("getFormatedChatHistory: ",completeText);
+  	//Debug.write("getFormatedChatHistory: ",completeText);
   	return completeText;
   	]]>
 </method>
 <method name="addBroswerTabHistory" args="value">
   	<![CDATA[
-  	Debug.write("addBroswerTabHistory: ",value);
+  	//Debug.write("addBroswerTabHistory: ",value);
   	_browserhistory.addItem(value);
   	this.browserTabHistory.push(value);
   	]]>
@@ -183,7 +183,7 @@ function disableCurrentMouseWheelObject() {
 	<![CDATA[
 	this.moderatorName = mod;
 	mymod.setText(canvas.getLabelName(98)+' '+this.moderatorName);
-	Debug.write("canvas.moderatorStreamID==canvas.streamid",canvas.moderatorStreamID==canvas.streamid);
+	//Debug.write("canvas.moderatorStreamID==canvas.streamid",canvas.moderatorStreamID==canvas.streamid);
 	if (canvas.moderatorStreamID==canvas.streamid){
 		this.setAttribute('ismoderator',true);
 		canvas._videocontainer.parent.currentmainobjectisMod.setAttribute('visible',false);
@@ -205,7 +205,7 @@ function disableCurrentMouseWheelObject() {
 	
 <!-- country validation -->
 <method name="validateCountry" args="str">
-	//Debug.write("validateCountry: ",str);
+	////Debug.write("validateCountry: ",str);
     str = str.toLowerCase();
 	<![CDATA[
 		if (str.length!=0){
@@ -226,7 +226,7 @@ function disableCurrentMouseWheelObject() {
     
 <method event="onmousewheeldelta" reference="LzKeys" args="d">
     var obj = getCurrentMouseWheelObject();
-    //Debug.write("onmousewheeldelta 12: ",d,obj);
+    ////Debug.write("onmousewheeldelta 12: ",d,obj);
     <![CDATA[
         if (obj!=null) {
             obj.step(-d);

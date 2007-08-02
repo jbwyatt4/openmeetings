@@ -24,7 +24,7 @@
 		x="1" y="1" bgcolor="white" />
 
 	<method name="addItem" args="object">
-		Debug.write(object);
+		//Debug.write(object);
 		new userTagView(this._table.innerlist,{firstname:object.firstname,lastname:object.lastname,refObj:object,connectedSince:object.connectedSince,isMod:object.isMod,streamid:object.streamid,username:object.username,userroom:object.userroom,formatedDate:object.formatedDate});
 	</method>
 	
@@ -60,10 +60,10 @@
         <handler name="ondata" args="value">
         	<![CDATA[
             //The onResult-Handler will be called by the rtmpconnection
-            Debug.write("getClientListScope Instance: ",value);
+            //Debug.write("getClientListScope Instance: ",value);
 
             for (var i in value){
-            	Debug.write("getClientListScope value: ",value[i]);
+            	//Debug.write("getClientListScope value: ",value[i]);
             	if (value[i].username!=null){
             		parent._listofUsers.addItem(value[i]);
             	}
@@ -89,7 +89,7 @@
             <handler name="ondata" args="value">
                 <![CDATA[
                 //The onResult-Handler will be called be the rtmpconnection
-                Debug.write("getVotes : ",value);
+                //Debug.write("getVotes : ",value);
                 if (value!=null){
                     new resultpollwin(canvas.main_content._content.inner,{createdBy:value.createdBy.username,pollDate:value.pollDate,pollQuestion:value.pollQuestion,pollTypeId:value.pollTypeId,roomPollAnswerList:value.roomPollAnswerList,roomPollId:value.roomPollId,roomScopeName:value.roomScopeName});
                 } else {
@@ -110,7 +110,7 @@
             <handler name="ondata" args="value">
                 <![CDATA[
                 //The onResult-Handler will be called be the rtmpconnection
-                Debug.write("checkHasVoted : ",value);
+                //Debug.write("checkHasVoted : ",value);
                 if (value==1){
                     parent.getPoll.doCall();
                 } else if (value==-1){
@@ -127,7 +127,7 @@
             <handler name="ondata" args="value">
                 <![CDATA[
                 //The onResult-Handler will be called be the rtmpconnection
-                Debug.write("checkHasVoted : ",value);
+                //Debug.write("checkHasVoted : ",value);
                 if (value!=null){
                     new answerpoll(canvas.main_content._content.inner,{createdBy:value.createdBy.username,pollDate:value.pollDate,pollQuestion:value.pollQuestion,pollTypeId:value.pollTypeId,roomPollAnswerList:value.roomPollAnswerList,roomPollId:value.roomPollId,roomScopeName:value.roomScopeName});
                 }

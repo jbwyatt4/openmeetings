@@ -19,7 +19,7 @@
             <handler name="ondata" args="value">
                 <![CDATA[
                     //The onResult-Handler will be called be the rtmpconnection
-                    Debug.write("getPollTypeList : ",value)
+                    //Debug.write("getPollTypeList : ",value)
                     for (var i=0;i<value.length;i++){
                         this.parent._polltypes.addItem(canvas.getLabelName(value[i].pollTypeLabelid),value[i].pollTypesId);
                     }
@@ -50,7 +50,7 @@
     	<handler name="onclick">
     		this.parent.createPoll.pollquestion = this.parent._question.getText();
     		this.parent.createPoll.polltypesid = this.parent._polltypes.getValue();
-    		Debug.write("this.parent.createPoll.createPoll: ",this.parent.createPoll.createPoll);
+    		//Debug.write("this.parent.createPoll.createPoll: ",this.parent.createPoll.createPoll);
     		this.parent.createPoll.doCall();
     		
     	</handler>
@@ -67,7 +67,7 @@
             <handler name="ondata" args="value">
                 <![CDATA[
                     //The onResult-Handler will be called be the rtmpconnection
-                    Debug.write("createPoll : ",value);
+                    //Debug.write("createPoll : ",value);
                     this.parent.close();
                 ]]>
             </handler>   

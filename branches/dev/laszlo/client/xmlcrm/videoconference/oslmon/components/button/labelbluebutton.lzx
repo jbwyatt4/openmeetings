@@ -6,7 +6,7 @@
 	<attribute name="labelid" value="0" type="number" setter="setLabelId(labelid)" />
 	<method name="setLabelId" args="_labelid" >
 		this.labelid = _labelid;
-		Debug.write(this.labelid);
+		//Debug.write(this.labelid);
 		this.setText(canvas.getLabelName(this.labelid));
 	</method>
 	

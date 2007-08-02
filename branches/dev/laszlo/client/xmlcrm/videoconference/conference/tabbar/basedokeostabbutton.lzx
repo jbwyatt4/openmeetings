@@ -45,7 +45,7 @@
 	
 	<handler name="onmouseup">
 		if ( !this.isselected ) {
-			Debug.write("onmouseup on deselected tab");
+			//Debug.write("onmouseup on deselected tab");
 			if (this.sendClick) this.sendClick.sendEvent();
 			this.parent.setSelection(this);
 			this._rscbtn._button_left.setResourceNumber(3);
@@ -63,7 +63,7 @@
 	
 	<handler name="onmouseup">
 		if ( !this.isselected ) {
-			Debug.write("onmouseup on deselected tab");
+			//Debug.write("onmouseup on deselected tab");
 			if (this.sendClick) this.sendClick.sendEvent();
 			this.parent.setSelection(this);
 		}

@@ -68,7 +68,7 @@
     <method name="catchSnapshot">
         <![CDATA[
         this.MCRef = this.getMCRef();
-        Debug.write("this.MCRef: ",this.MCRef);
+        //Debug.write("this.MCRef: ",this.MCRef);
         this.snap = new flash.display.BitmapData(this.width, this.height, false, 0 );
         
         //Matrix to scale the new image
@@ -92,7 +92,7 @@
 	  	<netremotecallhib name="saveAsImage" funcname="fileservice.saveAsImage" remotecontext="$once{ canvas.thishib }" >   
 	  		<netparam><method name="getValue">return parent.parent.bpData;</method></netparam>
 	        <handler name="ondata" args="value">	
-	        	Debug.write("  saveAsImage: ",value);              	          				
+	        	//Debug.write("  saveAsImage: ",value);              	          				
 	        </handler>	
 	  	</netremotecallhib>     
     
@@ -122,7 +122,7 @@
     </method>
     
     <method name="sendPHPData" args="pix,pixH,pixW">
-        Debug.write("### sendPHPData: ",pix,pixH,pixW);
+        //Debug.write("### sendPHPData: ",pix,pixH,pixW);
         <![CDATA[
         //Create the LoadVars object and pass data to PHP script
         var output = new LoadVars();
@@ -137,7 +137,7 @@
 	<!-- saving all object on whiteboard as wml-file -->
 	
 	<handler name="sendObject">
-		Debug.write("sendObject: ",this.baseactionobjectList);
+		//Debug.write("sendObject: ",this.baseactionobjectList);
 		this.fileData = this.baseactionobjectList;
 		this.savefileDataWinRef = new saveaswmlwindow(canvas.main_content._content.inner,{refObj:this});
 	</handler>
@@ -155,7 +155,7 @@
 			<netparam name="vars3"><method name="getValue"> return parent.parent.fileData;</method></netparam>
 	        <handler name="ondata" args="value">	
 				<![CDATA[
-					Debug.write("  saveAsImage: ",value);   
+					//Debug.write("  saveAsImage: ",value);   
 				    if (value>0){
 						parent.savefileDataWinRef.close();
 					} else {
@@ -170,6 +170,8 @@
 		or by remoteClient (Moderator spreadNews=false)-->
 	
     <method name="loadwmlObjectToStage" args="loadObject,fileName,room,domain,spreadNews,isInitLoader">
+        
+        //Debug.write("loadwmlObjectToStage: ",loadObject,fileName,room,domain,spreadNews,isInitLoader);
 		<![CDATA[
 		if (loadObject!=null && loadObject.length>0){
 			
@@ -197,7 +199,7 @@
 		} else if (isInitLoader){
 			//check if this is conference or audience modus
 			if (canvas.thishib.modus == "confernce"){
-				Debug.write("############## editrecordstream 1");
+				//Debug.write("############## editrecordstream 1");
 				new editrecordstream(canvas.main_content._content.inner,{y:-320});	
 			} else if(canvas.thishib.modus == "audience"){
 				//check in audince modus if this user is the current moderator
@@ -217,11 +219,11 @@
         <handler name="ondata" args="value">
         	<![CDATA[
 				//The onResult-Handler will be called by the rtmpconnection
-				Debug.write("getClientListScope wml and sync Instance: ",value);
+				//Debug.write("getClientListScope wml and sync Instance: ",value);
 				parent._loadingUsers = new Array();
 				for (var eg in value){
 					if (canvas.streamid != value[eg].streamid){
-						//Debug.write("parent._loadingUsers value eg ",eg,value[eg]);
+						////Debug.write("parent._loadingUsers value eg ",eg,value[eg]);
 						parent._loadingUsers.push(value[eg]);
 					}
 				}
@@ -250,7 +252,7 @@
 		var tempSendArray = new Array ();
 		tempSendArray[0] = 'whiteboard';
 		tempSendArray[1] = new Date();
-		//Debug.write("Setting Message");
+		////Debug.write("Setting Message");
 		tempSendArray[2] = "loadwml";
 		tempSendArray[3] = obj;
 		
@@ -282,7 +284,7 @@
 			  <netparam><method name="getValue">return parent.String1;</method></netparam>
 	        <handler name="ondata" args="value">	
 				<![CDATA[
-					//Debug.write("  loadWmlObject ",value); 
+					////Debug.write("  loadWmlObject ",value); 
 					parent.loadwmlObjectToStage(value,this.String1,hib.connectedroom,hib.conferencedomain,false);
 				]]>       	     				
 	        </handler>	
@@ -302,7 +304,7 @@
 		whiteborad -->
 	
 	<handler name="onwmlLoaderSend" args="type">
-		//Debug.write("onwmlLoaderSend: ",type,this.loadfileData.length);
+		////Debug.write("onwmlLoaderSend: ",type,this.loadfileData.length);
 		this.loadObjectTimer = new LzDelegate( this, "loadNextObjectFromList" );
 		LzTimer.addTimer( this.loadObjectTimer, 50 );
 	</handler>
@@ -320,10 +322,10 @@
 			if (this.loadfileDataIndex<this.loadfileData.length){
 				var txt = (this.loadfileDataIndex+1)+'/'+this.loadfileData.length+' '+this._loadmessageTxt;
 				this.loadfileDataWinRef.setMessage(txt);
-				//Debug.write("  loadObject[this.loadfileDataIndex] ",this.loadfileData[this.loadfileDataIndex]);
+				////Debug.write("  loadObject[this.loadfileDataIndex] ",this.loadfileData[this.loadfileDataIndex]);
 				this.sendWatchObject('draw',this.loadfileData[this.loadfileDataIndex],true);
 			} else {
-				//Debug.write("this.loadfileDataIndex complete",this.loadfileDataIndex);
+				////Debug.write("this.loadfileDataIndex complete",this.loadfileDataIndex);
 				this._loadmessageTxt = canvas.getLabelName(this.syncmessageId);
 			    this.loadfileDataWinRef.setMessage(this._loadmessageTxt);
 				if (this.onwmlloadStop) this.onwmlloadStop.sendEvent();
@@ -352,7 +354,7 @@
 		<handler name="ondata" args="value">
 			<![CDATA[
 			//The onResult-Handler will be called be the rtmpconnection
-			//Debug.write("getValue : ",value);
+			////Debug.write("getValue : ",value);
 			
 			]]>
 		</handler>   
@@ -395,7 +397,7 @@
 				//remove client from sync list
 				for (var i=0;i<this._loadingUsers.length;i++){
 					if (this._loadingUsers[i].streamid==client.streamid){
-						//Debug.write("deleteing client from list: ",this._loadingUsers[i].streamid);
+						////Debug.write("deleteing client from list: ",this._loadingUsers[i].streamid);
 						this._loadingUsers.splice(i,1);
 					}
 				}
@@ -411,14 +413,14 @@
 		gets its own *sync* complete nofification
 		 -->
 	<method name="sendCompleteWmlSync" args="client">
-		//Debug.write("sendCompleteWmlSync: ",client);
+		////Debug.write("sendCompleteWmlSync: ",client);
 		this.loadfileDataWinRef.close();
-		Debug.write("this.loadfileDataWinRef closed: ",this.loadfileDataWinRef);
+		//Debug.write("this.loadfileDataWinRef closed: ",this.loadfileDataWinRef);
 		//check if this is syncing cause if init of new user
 		if (this.isInitLoader){
 			//check if this is conference or audience modus
 			if (canvas.thishib.modus == "confernce"){
-				Debug.write("############## editrecordstream 2");
+				//Debug.write("############## editrecordstream 2");
 				new editrecordstream(canvas.main_content._content.inner,{y:-320});	
 			} else if(canvas.thishib.modus == "audience"){
 				//check in audince modus if this user is the current moderator

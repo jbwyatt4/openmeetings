@@ -14,7 +14,7 @@
 	</method>
  -->	
 	<method name="removeIt">
-		Debug.write("removeIt +**********",this.isinited);
+		//Debug.write("removeIt +**********",this.isinited);
 		this.whiteboardRef.setAttribute('boundingIsActive',false);
 		if (this.rs) this.rs.remove();
 		if (this.dragger) this.dragger.remove();
@@ -45,7 +45,7 @@
     <attribute name="minheight" value="2"/>    
 	
 	<method name="__LZRemoveItem">
-		Debug.write("__LZRemoveItem");
+		//Debug.write("__LZRemoveItem");
 	</method>
 	
 	<handler name="oninit">
@@ -123,7 +123,7 @@
     	this.rs.remove();
 		
 		if (this.startdragX != this.x || this.startdragY != this.y || this.startdragWidth != this.width || this.startdragHeight != this.height){
-			Debug.write("value changed 1");
+			//Debug.write("value changed 1");
 			this.objRef.parent.UpdateByObject(this.objRef);
 			//this.whiteboardRef.parent._drawareaalterposition.updateVal(this.objRef.name);
 			this.setStartValues();
@@ -139,11 +139,11 @@
     
     <method name="_removeDragstateFromThis">
 		<![CDATA[
-    	//Debug.write("onmouseup invoke");
+    	////Debug.write("onmouseup invoke");
     	this.dragger.remove();
 		
     	if (this.startdragX != this.x || this.startdragY != this.y || this.startdragWidth != this.width || this.startdragHeight != this.height){
-			Debug.write("value changed 2");
+			//Debug.write("value changed 2");
 			this.objRef.parent.UpdateByObject(this.objRef);
 			//this.whiteboardRef.parent._drawareaalterposition.updateVal(this.objRef.name);
 			this.setStartValues();
@@ -188,11 +188,11 @@
 	        this.setContextMenu(newMenu);		
 		</handler>	
 		<handler name="ondblclick">
-			Debug.write("ondblclick: ",this.parent.objRef.typeOfObject);
+			//Debug.write("ondblclick: ",this.parent.objRef.typeOfObject);
 			if (this.parent.objRef.typeOfObject=="text"){
 				var x = this.parent.objRef.getAttributeRelative('x',canvas);
 				var y = this.parent.objRef.getAttributeRelative('y',canvas);
-				Debug.write("x,y ",x,y);
+				//Debug.write("x,y ",x,y);
 				this.parent.whiteboardRef.editTextByValues(this.parent.objRef,this.parent.objRef.name,this.parent.objRef.text,x,y,this.parent.objRef.width,this.parent.objRef.height);
 			}
 		</handler>		
@@ -214,7 +214,7 @@
     
 	<basechooseseicon resourceN="deleteIcon" x="${ parent.width-this.width }" y="0" labelid="80" width="22" height="22">
 		<handler name="onclick">
-			Debug.write("this.parent.objRef.name: ",this.parent.objRef.name);
+			//Debug.write("this.parent.objRef.name: ",this.parent.objRef.name);
 			this.parent.whiteboardRef.deleteItemByName(this.parent.objRef.name);
 		</handler>
 	</basechooseseicon>	    
@@ -249,7 +249,7 @@
             </handler>        
             
             <method name="sendObject">
-                Debug.write("sendObject");
+                //Debug.write("sendObject");
                 this.parent.parent.whiteboardRef.sendCurrentSWFObject(this.parent.parent.objRef);
                 this.timeisInited=false;
             </method>    

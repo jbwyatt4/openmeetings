@@ -58,7 +58,7 @@
 	
 	<method name="sendWidthUpdate" args="w,subviewsid" >
 		<![CDATA[
-		//Debug.write(w,subviewsid,this._innerlist._inn);
+		////Debug.write(w,subviewsid,this._innerlist._inn);
 		for (var i=0;i<this._innerlist._inn._inn.subviews.length;i++){
 			this._innerlist._inn._inn.subviews[i].subviews[subviewsid].setAttribute('width',w);
 		}

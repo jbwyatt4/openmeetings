@@ -5,7 +5,7 @@
 <class name="charttabutton" extends="basedokeostabbutton" width="84" iconresourcename="ksirc_rsc" 
 	labelid="244" >
 	<handler name="sendClick">
-		Debug.write("onclick handler chat" );
+		//Debug.write("onclick handler chat" );
 		this.parent.parent._tabscontent.clearContent();
 		new charttab(this.parent.parent._tabscontent,{name:'_contenttab'});
 		canvas.tabisInited=1;
@@ -20,7 +20,7 @@
 <class name="participantstabutton" extends="basedokeostabbutton" width="84" 
     iconresourcename="kuser_rsc" labelid="246" >
 	<handler name="sendClick">
-		Debug.write("onclick handler participants" );
+		//Debug.write("onclick handler participants" );
 		this.parent.parent._tabscontent.clearContent();
 		new participants(this.parent.parent._tabscontent,{name:'_contenttab'});
 		canvas.tabisInited=2;
@@ -31,7 +31,7 @@
 <class name="uploadtabutton" extends="basedokeostabbutton" width="84" 
     iconresourcename="xoffice22_rsc" labelid="245" >
 	<handler name="sendClick">
-		Debug.write("onclick handler uploadtab" );
+		//Debug.write("onclick handler uploadtab" );
 		this.parent.parent._tabscontent.clearContent();
 		new uploadtab(this.parent.parent._tabscontent,{name:'_contenttab'});
 		canvas.tabisInited=4;
@@ -55,9 +55,9 @@
 		<method name="clearContent">
 			<![CDATA[
 				if (this.subviews.length>0){
-					Debug.write("this.subviews.length: ",this.subviews.length,this.subviews);
+					//Debug.write("this.subviews.length: ",this.subviews.length,this.subviews);
 					this._contenttab.destroy();
-					Debug.write("this.subviews.length: ",this.subviews.length,this.subviews);
+					//Debug.write("this.subviews.length: ",this.subviews.length,this.subviews);
 				}
 			]]>
 		</method>

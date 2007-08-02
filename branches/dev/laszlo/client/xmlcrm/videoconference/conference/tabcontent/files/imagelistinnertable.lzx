@@ -16,18 +16,18 @@
 			<netparam><method name="getValue">return hib.connectedroom;</method></netparam>        	
 			<netparam><method name="getValue">return hib.conferencedomain;</method></netparam>  
 	        <handler name="ondata" args="value">	
-	        	Debug.write("  deleteFile: ",value);  
-				Debug.write("  deleteFile: ",this.String1);    
-				Debug.write("  deleteFile: ",this.String2);   
+	        	//Debug.write("  deleteFile: ",value);  
+				//Debug.write("  deleteFile: ",this.String1);    
+				//Debug.write("  deleteFile: ",this.String2);   
 		  		var tempSendArray = new Array ();
 		  		tempSendArray[0] = 'fileslist';
 		  		var nowTime = new Date();
 		  		var datumsString = nowTime.getHours()+':'+nowTime.getMinutes();
 		  		tempSendArray[1] = datumsString;
-	  			Debug.write("Setting Message");
+	  			//Debug.write("Setting Message");
 	  			tempSendArray[2] = 'newfile';
 	  			tempSendArray[3] = canvas.currentusename;
-		  		Debug.write("send: ",tempSendArray);
+		  		//Debug.write("send: ",tempSendArray);
 		  		canvas.objMessage = tempSendArray;
 		  		hib.sendMessage.doCall();         	          				
 	        </handler>	
@@ -63,7 +63,7 @@
 		
 		<method name="sendConfirmation" args="yesno,askagain" >
 			
-			Debug.write("clear yesno,askagain: ",yesno,askagain);
+			//Debug.write("clear yesno,askagain: ",yesno,askagain);
 			//can only be true in this case
 		
 			 var t = new sharedobject();
@@ -77,7 +77,7 @@
 			 t.flush(); 	
 	
 			 if (yesno){
-				 Debug.write("clear field!!");
+				 //Debug.write("clear field!!");
 				_drawarea.setModus('plain');
 				this.loadWmlObject.doCall();
 			 }
@@ -86,7 +86,7 @@
 		<method name="loadWmlObjectConfirm">
 			<![CDATA[
 			var storedImageDate = this.getconfirmationscode();
-			Debug.write(" g[wmlfile] ",storedImageDate);
+			//Debug.write(" g[wmlfile] ",storedImageDate);
 			if (storedImageDate["clearField"] && !storedImageDate["askagainclear"]){
 				_drawarea.setModus('plain');
 				this.loadWmlObject.doCall();
@@ -108,7 +108,7 @@
 			  <netparam><method name="getValue">return parent.String1;</method></netparam>
 	        <handler name="ondata" args="value">	
 				<![CDATA[
-					Debug.write("  loadWmlObject ",value); 
+					//Debug.write("  loadWmlObject ",value); 
 					_drawarea.loadwmlObjectToStage(value,this.String1,hib.connectedroom,hib.conferencedomain,true,false);
 				]]>       	     				
 	        </handler>	

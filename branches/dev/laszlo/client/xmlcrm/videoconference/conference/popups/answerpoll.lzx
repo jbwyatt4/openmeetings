@@ -16,12 +16,12 @@
 	<labeltext text="$once{ parent.pollQuestion }" y="42" x="0" height="60" width="380" multiline="true" resize="false"/>
 	
 	<handler name="oninit">
-		Debug.write("this.pollTypeId: ",this.pollTypeId);
+		//Debug.write("this.pollTypeId: ",this.pollTypeId);
 		if (this.pollTypeId==1){
-			Debug.write("Yes/No Question");
+			//Debug.write("Yes/No Question");
 			this.pollboolean.setAttribute('visible',true);
 		} else  if(this.pollTypeId==2) {
-			Debug.write("Numeric Question");
+			//Debug.write("Numeric Question");
 			this.pollnumeric.setAttribute('visible',true);
 		}
 		this.head.setText(this.createdBy+" "+canvas.getLabelName(36));
@@ -72,7 +72,7 @@
             <handler name="ondata" args="value">
                 <![CDATA[
                     //The onResult-Handler will be called be the rtmpconnection
-                    Debug.write("vote : ",value);
+                    //Debug.write("vote : ",value);
                     this.parent.close();
                 ]]>
             </handler>   

@@ -51,7 +51,7 @@
                 </handler>
                 <handler name="ondata" args="value">
                     //The onResult-Handler will be called be the rtmpconnection
-                    Debug.write("getLanguages: ",value);
+                    //Debug.write("getLanguages: ",value);
                     <![CDATA[
                     for (var i=0;i<value.length;i++){
                         this.parent.addItem(value[i].name,value[i].language_id);
@@ -117,7 +117,7 @@
          <handler name="ondata" args="value">
          	<![CDATA[
             //The onResult-Handler will be called be the rtmpconnection
-            Debug.write("registerUserByObject: ",value);
+            //Debug.write("registerUserByObject: ",value);
 			if (value==-3){
 				new errorwin(canvas.main_content._content.inner,{refObj:this.parent,labelid:102,errorlabelid:103}); 
 			} else if (value==-4){
@@ -129,7 +129,7 @@
 			} else if (value==-1){
 				new errorwin(canvas.main_content._content.inner,{refObj:this.parent,labelid:102,errorlabelid:107}); 
 			} else if (value>0){
-				Debug.write("successfully registered");
+				//Debug.write("successfully registered");
                  new errorwin(canvas.main_content._content.inner,{refObj:this.parent,labelid:235,errorlabelid:236});
                  this.parent.refObj.username.setText(this.parent.username.getText());
                  this.parent.refObj.userpass.setText(this.parent.userpass1.getText());

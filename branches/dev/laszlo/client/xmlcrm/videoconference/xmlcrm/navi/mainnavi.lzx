@@ -49,7 +49,7 @@ bgcolor="$once{ canvas.baseMousecolorizer }"
     <handler name="onclick"> 
         <![CDATA[
         if (this.isleaf && this.action){
-            Debug.write("action: ",this.action);
+            //Debug.write("action: ",this.action);
             if (this.depth==1){
                 loadContent(this,null,null);
             } else if (this.depth==2){
@@ -72,7 +72,7 @@ bgcolor="$once{ canvas.baseMousecolorizer }"
     	<![CDATA[
         parent.parent.clearSubSubItemList();
     	if (this.isleaf && this.action){
-			Debug.write("action: ",this.action);
+			//Debug.write("action: ",this.action);
             if (this.depth==1){
                 loadContent(this,null,null);
             } else if (this.depth==2){
@@ -96,7 +96,7 @@ bgcolor="$once{ canvas.baseMousecolorizer }"
     	<![CDATA[
     	this.parent.parent.clearAllSubItemLists();
     	if (this.isleaf && this.action){
-			Debug.write("action: ",this.action);
+			//Debug.write("action: ",this.action);
             if (this.depth==1){
                 loadContent(this,null,null);
             } else if (this.depth==2){
@@ -106,14 +106,14 @@ bgcolor="$once{ canvas.baseMousecolorizer }"
             }
 		}
 		
-        Debug.write("this.list: ",this.list,this.list.length);
+        //Debug.write("this.list: ",this.list,this.list.length);
         if (this.list != null && this.list.length!=0) {
             for (var i=0;i<this.list.length;i++){
-            	Debug.write("this.list[i]: ",this.list[i]);
+            	//Debug.write("this.list[i]: ",this.list[i]);
             	var t = new subtreeitem(this.parent.parent._subcontent,{list:this.list[i].subnavi,depth:2,text:this.list[i].label.value,open:this.list[i].isleaf,isleaf:this.list[i].isleaf,action:this.list[i].action});
             }
         }	
-        Debug.write("this.parent.parent._subcontent: ",this.parent.parent._subcontent);
+        //Debug.write("this.parent.parent._subcontent: ",this.parent.parent._subcontent);
 		]]>
 	</handler>	
     <!--
@@ -135,7 +135,7 @@ bgcolor="$once{ canvas.baseMousecolorizer }"
     	var value = this.naviObject;
     	for (var i=0;i<value.length;i++){
     		var t1 = new mainnavitree(t,{list:value[i].mainnavi,depth:1,text:value[i].label.value,open:value[i].isleaf,isleaf:value[i].isleaf,action:value[i].action});
-			Debug.write("value[i].mainnavi.length: ",value[i].mainnavi.length);
+			//Debug.write("value[i].mainnavi.length: ",value[i].mainnavi.length);
     		
     	}
     	]]>
@@ -153,9 +153,9 @@ bgcolor="$once{ canvas.baseMousecolorizer }"
        	
        	<method name="clearSubItemList">
        		<![CDATA[
-       		Debug.write("clearSubItemList");
+       		//Debug.write("clearSubItemList");
        		for (var i in this._subcontent.subviews){
-       			Debug.write("item deleted: ",this._subcontent.subviews[i]);
+       			//Debug.write("item deleted: ",this._subcontent.subviews[i]);
        			this._subcontent.subviews[i].destroy();
        		}
        		]]>
@@ -163,9 +163,9 @@ bgcolor="$once{ canvas.baseMousecolorizer }"
        	
        	<method name="clearSubSubItemList">
        		<![CDATA[
-       		Debug.write("clearSubSubItemList");
+       		//Debug.write("clearSubSubItemList");
        		for (var i in this._subsubcontent.subviews){
-       			Debug.write("item deleted: ",this._subsubcontent.subviews[i]);
+       			//Debug.write("item deleted: ",this._subsubcontent.subviews[i]);
        			this._subsubcontent.subviews[i].destroy();
        		}
        		]]>

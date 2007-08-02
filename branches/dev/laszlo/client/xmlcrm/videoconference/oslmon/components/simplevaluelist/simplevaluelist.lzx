@@ -127,7 +127,7 @@
     	<![CDATA[
     	var a = new Array();
     	for (var i=0;i<this.content.content.inn.subviews.length;i++){
-    		Debug.write("t: ",this.content.content.inn.subviews[i].value);
+    		//Debug.write("t: ",this.content.content.inn.subviews[i].value);
     		a.push(Number(this.content.content.inn.subviews[i].value));
     	}
     	return a;

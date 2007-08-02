@@ -21,18 +21,18 @@
 		
 	<method name="__LZFileDownload">
 		<![CDATA[
-		Debug.write("Download File ",this);
+		//Debug.write("Download File ",this);
 		
 		var downloadurl = 'http://'+canvas.rtmphostlocal+':'+canvas.red5httpport+'/xmlcrm/DownloadHandler?fileName='+this.filename+'&moduleName='+this.uploadmodul+'&parentPath='+canvas.uploadmoduleimgfolder+'/'+'&room='+hib.connectedroom+'&domain='+hib.conferencedomain+'&sid='+canvas.sessionId
 			
-        Debug.write(downloadurl);	
+        //Debug.write(downloadurl);	
 		LzBrowser.loadURL(downloadurl,'_parent');	
 		]]>
 	</method>
 	<method name="__LZFileDelete">
-		Debug.write("__LZFileDelete");
+		//Debug.write("__LZFileDelete");
 		this.parent.deleteFile.String2 = canvas.uploadmoduleimgfolder;
-		Debug.write("this.parent.deleteFile.String2 ",this.parent.deleteFile.String2);
+		//Debug.write("this.parent.deleteFile.String2 ",this.parent.deleteFile.String2);
 		this.parent.deleteFile.String1 = this.filename;
 		this.parent.deleteFile.doCall();
 	</method>

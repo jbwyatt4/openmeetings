@@ -20,16 +20,16 @@
     <whiteboard name="_whiteboard" x="268" y="2" bgcolor="red">
         <handler name="onsharedMessage" args="obj">
                 
-            Debug.write("send: ",obj);
+            //Debug.write("send: ",obj);
 
             
         </handler>   
 	
 		<handler name="isloadingImage" args="val" >
-			Debug.write("isloadingImage: ",val);
+			//Debug.write("isloadingImage: ",val);
 		</handler>
 		<handler name="isloadedImage" args="val" >        
-			Debug.write("isloadedImage: ",val);
+			//Debug.write("isloadedImage: ",val);
 		</handler>
    </whiteboard>
     

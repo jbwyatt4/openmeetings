@@ -13,21 +13,21 @@
 	<attribute name="isupdateCheck" value="false" type="boolean" />
 	<method name="setValue" args="val">
         if (this._value!=val){
-    		//Debug.write("val: ",val);
+    		////Debug.write("val: ",val);
     		this._value=val;
-    		//Debug.write("this._value: ",this._value);
+    		////Debug.write("this._value: ",this._value);
     		_togglestate();
         }
 	</method>
 	<method name="setInitValue" args="val">
-		//Debug.write("val: ",val);
+		////Debug.write("val: ",val);
 		this.initval=val;
 	</method>
 	<method name="getValue">
 		return this._value;
 	</method>
 	<method event="onclick">
-		//Debug.write("this.getAttribute('_value')",this,this._value,this.getAttribute('_value'));
+		////Debug.write("this.getAttribute('_value')",this,this._value,this.getAttribute('_value'));
 		this.setAttribute('_value',!this.getAttribute('_value'));
 	</method>	
 	<method name="_togglestate">

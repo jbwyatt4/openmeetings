@@ -31,13 +31,13 @@
     
 	<handler name="oninit">
 		<![CDATA[
-		Debug.write("this.pollTypeId: ",this.pollTypeId);
+		//Debug.write("this.pollTypeId: ",this.pollTypeId);
 		this.head.setText("You "+canvas.getLabelName(36));
 		this.totalVotes = this.roomPollAnswerList.length;
 		if (this.pollTypeId==1){
-			Debug.write("yes/no");
+			//Debug.write("yes/no");
 			for (var eg=0;eg<this.totalVotes;eg++){
-				Debug.write("this.totalVotes: ",this.roomPollAnswerList[eg].answer,typeof (this.roomPollAnswerList[eg].answer));
+				//Debug.write("this.totalVotes: ",this.roomPollAnswerList[eg].answer,typeof (this.roomPollAnswerList[eg].answer));
 				if (this.roomPollAnswerList[eg].answer){
 					this.positives++;
 				} else {
@@ -45,14 +45,14 @@
 				}
 			}
 		} else if (this.pollTypeId==2){
-			Debug.write("numeric");
+			//Debug.write("numeric");
 			for (var eg=0;eg<this.totalVotes;eg++){
-				Debug.write("this.totalVotes: ",this.roomPollAnswerList[eg].pointList);
+				//Debug.write("this.totalVotes: ",this.roomPollAnswerList[eg].pointList);
 				this['vote'+this.roomPollAnswerList[eg].pointList]++;
 			}
 		}
 		
-		Debug.write("this.votes: ",this);
+		//Debug.write("this.votes: ",this);
 		this.voteResultNum.setText(this.totalVotes);
 		
 		if (this.pollTypeId==1){

@@ -30,7 +30,7 @@
 		<handler name="onclick">
 			var urlObject =  LzBrowser.getBaseURL();
 			parent.baseUrl = urlObject.protocol+"://"+urlObject.host+":"+urlObject.port+urlObject.path+urlObject.file;
-			Debug.write("parent.baseUrl: ",parent.baseUrl);
+			//Debug.write("parent.baseUrl: ",parent.baseUrl);
 			if (!canvas.isConference){
 				parent.roomType = "audience";
 			}
@@ -58,7 +58,7 @@
             <handler name="ondata" args="value">
             	<![CDATA[
                 //The onResult-Handler will be called be the rtmpconnection
-					Debug.write("getValue : ",value);
+					//Debug.write("getValue : ",value);
 					if (value=="success"){
 						parent.close();
 					} else {

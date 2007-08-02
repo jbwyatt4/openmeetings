@@ -7,26 +7,26 @@
 <class name="SWFResourceView" extends="view" play="false" y="40">
         
         <handler name="onload">
-            Debug.write("Resource loaded: ",this);
+            //Debug.write("Resource loaded: ",this);
             this.stop();
             this.setAttribute('play',false);
         </handler>
         
         <handler name="onclick">
-            Debug.write("onclick: ",this.sprite);
-            Debug.write("onclick: ",this.sprite.getMCRef());
+            //Debug.write("onclick: ",this.sprite);
+            //Debug.write("onclick: ",this.sprite.getMCRef());
         </handler>        
         
         <handler name="onframe" args="i">
-            //Debug.write("onframe",i);
+            ////Debug.write("onframe",i);
         </handler>
         
         <handler name="onplay" args="i">
-            Debug.write("onplay",i);
+            //Debug.write("onplay",i);
         </handler>
         
         <handler name="onstop" args="i">
-            Debug.write("onstop",i);
+            //Debug.write("onstop",i);
         </handler>        
         
 </class>    

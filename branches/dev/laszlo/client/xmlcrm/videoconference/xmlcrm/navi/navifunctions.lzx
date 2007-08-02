@@ -7,7 +7,7 @@ var labelObj;
 
 function loadContent(obj,parentobj,preparentobj){
 	
-	Debug.write("loadContent: ",obj.action,obj,parentobj,preparentobj);
+	//Debug.write("loadContent: ",obj.action,obj,parentobj,preparentobj);
 	
 	if (obj.action=="conf1"){
         clearStageContent();

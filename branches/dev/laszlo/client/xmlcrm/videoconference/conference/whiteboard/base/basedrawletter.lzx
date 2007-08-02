@@ -73,7 +73,7 @@
 	  		} else if(!this.bold && !this.italic){
 	  			this.setAttribute('currentlayerstyle','plain');
 	  		}
-	  		Debug.write("d: ",this.getAttribute('currentlayerstyle'));
+	  		//Debug.write("d: ",this.getAttribute('currentlayerstyle'));
   		}
   		]]>
   	</method>
@@ -81,7 +81,7 @@
 	<method name="editTextByValues" args="obj,txtName,txt,x,y,width,height">
 		<![CDATA[
 			if (!this.letterObjectIsActive){
-			    Debug.write("editTextByValues",height);
+			    //Debug.write("editTextByValues",height);
 			    this.edittextLetterObject = obj;
 				this.currentletterObj = new basedrawwords(canvas,{refObj:this,x:x,y:y,initTextName:txtName,inittext:txt,width:width,height:height});
 			}	
@@ -89,7 +89,7 @@
 	</method>
   	
 	<method name="drawTextField" args="textforfield,width,height,x,y" >
-		Debug.write("drawTextField: ",textforfield,width,x,y);
+		//Debug.write("drawTextField: ",textforfield,width,x,y);
 		var tempO = this.newTextField(this,'letter'+this.getCounter(),textforfield,width,height,x,y,this.currentlayersize,this.currentlayerletter,this.currentlayerstyle);
 		this.layers.push(tempO);
 	    this.drawTextFieldregister(textforfield,width,x,y,this.currentlayersize,this.currentlayerletter,this.currentlayerstyle,tempO.height);
@@ -97,7 +97,7 @@
 	
 	<!-- editModus -->
 	<method name="setTextFieldByName" args="txtName,textforfield,width,x,y,height" >
-		Debug.write("drawTextFieldByName ",txtName,textforfield,width,x,y);
+		//Debug.write("drawTextFieldByName ",txtName,textforfield,width,x,y);
 		this.checkForChanges(txtName,textforfield,width,x,y,height);
 		this.edittextLetterObject.setText(textforfield);
 		this.edittextLetterObject.setAttribute('width',width);
@@ -114,12 +114,12 @@
 	
 	<method name="updateByEditLetterObject" >
 		<![CDATA[
-		Debug.write("UpdateByObject : ",this.edittextLetterObject,this.edittextLetterObject.name);
+		//Debug.write("UpdateByObject : ",this.edittextLetterObject,this.edittextLetterObject.name);
 		var objName = this.edittextLetterObject.name;
 
 		for (var eg=0;eg<this.baseactionobjectList.length;eg++){
 			if (this.baseactionobjectList[eg][this.baseactionobjectList[eg].length-1]==objName) {
-				Debug.write("Found Object: ",this.baseactionobjectList[eg]);
+				//Debug.write("Found Object: ",this.baseactionobjectList[eg]);
 			    this.baseactionobjectList[eg][1] = this.edittextLetterObject.text;
 			    this.baseactionobjectList[eg][2] = this.edittextLetterObject.fgcolor;
 			    this.baseactionobjectList[eg][3] = this.edittextLetterObject.fontsize;
@@ -140,7 +140,7 @@
 	
 	<method name="editTextByHistory" args="actionObject,obj">
 		var editObj = this.getObjectByName(actionObject[actionObject.length-1]);
-		Debug.write("editTextByHistory: ",editObj,actionObject,actionObject.length);
+		//Debug.write("editTextByHistory: ",editObj,actionObject,actionObject.length);
 		editObj.setText(actionObject[1]);
 		editObj.setAttribute('width',actionObject[actionObject.length-3]);
 		editObj.setAttribute('height',actionObject[actionObject.length-2]);
@@ -151,8 +151,8 @@
 	
 	<method name="checkForChanges" args="txtName,textforfield,width,x,y,height">
 		<![CDATA[
-			Debug.write("checkForChanges: 1 ",txtName,textforfield,width,x,y,height);
-			Debug.write("checkForChanges: 2 ",this.edittextLetterObject.name,this.edittextLetterObject.text,this.edittextLetterObject.width,this.edittextLetterObject.x,this.edittextLetterObject.y,this.edittextLetterObject.height);
+			//Debug.write("checkForChanges: 1 ",txtName,textforfield,width,x,y,height);
+			//Debug.write("checkForChanges: 2 ",this.edittextLetterObject.name,this.edittextLetterObject.text,this.edittextLetterObject.width,this.edittextLetterObject.x,this.edittextLetterObject.y,this.edittextLetterObject.height);
 			//there is always a change
 			
 		]]>

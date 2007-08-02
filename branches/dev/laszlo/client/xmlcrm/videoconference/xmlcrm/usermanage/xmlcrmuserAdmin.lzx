@@ -9,7 +9,7 @@
         if (this.isselected) this.onclick.sendEvent();
     </handler>
     <handler name="onclick">
-        Debug.write("clientmaskname: ",this.clientmaskname);
+        //Debug.write("clientmaskname: ",this.clientmaskname);
         new global[this.clientmaskname](clientobjectArea);
     </handler>
 </class>
@@ -52,7 +52,7 @@
         <handler name="ondata" args="value">
             <![CDATA[
             //The onResult-Handler will be called be the rtmpconnection
-            Debug.write("getAllUsers: ",value,value.length);
+            //Debug.write("getAllUsers: ",value,value.length);
             for (var i=0;i<value.length;i++){
                 new userlistitem(parent.mylist,{login:value[i].login,firstname:value[i].firstname,lastname:value[i].lastname});
             }

@@ -22,7 +22,7 @@
 	
 	<button name="_close" x="90" y="170" text="ok" width="160" height="20">
 		<handler name="onclick">
-			Debug.write("this.parent: ",this.parent);
+			//Debug.write("this.parent: ",this.parent);
 			this.parent.refObj.setModus('pointer');
 			this.parent.close();
 		</handler>

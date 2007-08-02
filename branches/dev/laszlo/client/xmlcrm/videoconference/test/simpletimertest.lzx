@@ -14,22 +14,22 @@
         <attribute name="timerIsInited" value="false" type="boolean"/>
      
         <handler name="onvalue">
-            Debug.write("onvalue");
+            //Debug.write("onvalue");
             if (!this.timerIsInited){
                 this.timerIsInited = true;
                 canvas.myText.setAttribute( "opacity", 1.0 );
                 this.timerDelegate = new LzDelegate( this, "fadeText" );
-                Debug.write("+++++++++++++++++ addTimer");
+                //Debug.write("+++++++++++++++++ addTimer");
                 LzTimer.addTimer( this.timerDelegate, this.typetime );
             } else {
-                Debug.write("############### resetTimer NO ADDING ");
+                //Debug.write("############### resetTimer NO ADDING ");
                 LzTimer.resetTimer( this.timerDelegate, this.typetime );
             }
         </handler>
      
         <method name="fadeText">
             this.timerIsInited = false;
-            Debug.write("fadeText ");
+            //Debug.write("fadeText ");
             canvas.myText.animate( "opacity", 0.0, 1000 );
         </method>
     </edittext>

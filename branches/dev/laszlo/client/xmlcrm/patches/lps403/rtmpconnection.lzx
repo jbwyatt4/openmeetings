@@ -68,8 +68,8 @@
                 // to be implemented ...
                 /**
                 this._nc.setId = function(id) {
-                    _root.Debug.write("########## Method called by rtmp Server");
-                    _root.Debug.write("---------------> id: ", id);
+                    _root.//Debug.write("########## Method called by rtmp Server");
+                    _root.//Debug.write("---------------> id: ", id);
                 }
                 **/
 
@@ -78,8 +78,8 @@
             /** the following code should work now, but it hasn't
                 been tested, so I'll leave it commented out -sa
             this._nc.__resolve = function(name) {
-                //_root.Debug.write("__resolve " , name, typeof(this[name]));
-                //_root.Debug.write("  arguments.callee.name " , 
+                //_root.//Debug.write("__resolve " , name, typeof(this[name]));
+                //_root.//Debug.write("  arguments.callee.name " , 
                 //                     arguments.callee.name);
                 if (typeof(this.t[name]) == "function") {
                     this.t[name].apply(arguments);
@@ -106,16 +106,16 @@
 
             if (this.debug) {
                 if (this.src == "") {
-                    Debug.write("no src url defined for", this);
+                    //Debug.write("no src url defined for", this);
                     return;
                 }
                 if (typeof(src) != "string") {
-                    Debug.write("src", this.src, "must be a string in", this);
+                    //Debug.write("src", this.src, "must be a string in", this);
                     return;
                 }
             }
 
-            //Debug.write("connect", src);
+            ////Debug.write("connect", src);
 
             var ok = 
                 this._nc.connect(src == "null" ? null : src);
@@ -153,7 +153,7 @@
               @keywords private -->
         <method name="_onStatus" args="info"><![CDATA[
             if (this.debug) {
-                Debug.write("rtmpconnection", this, "_onStatus", info.code);
+                //Debug.write("rtmpconnection", this, "_onStatus", info.code);
             }
 
             var msg = "";
@@ -215,9 +215,9 @@
 
             if (this.debug) {
                 if (s == 2) {
-                    Debug.write("connected to " + this.src);
+                    //Debug.write("connected to " + this.src);
                 } else {
-                    Debug.write("connection failed to", this.src, ":", msg);
+                    //Debug.write("connection failed to", this.src, ":", msg);
                 }
             }
 
@@ -263,7 +263,7 @@
             for (eg in this._nc){
                 if (this._nc[eg]==callee){
                     if (this.debug) {
-                        _root.Debug.write("DEBUG invoked a function remotely: ",eg,args);
+                        _root.//Debug.write("DEBUG invoked a function remotely: ",eg,args);
                     }                
                     return this.callFuntion(eg,args);
                 }
@@ -289,11 +289,11 @@
     <!--- make a remote call to the rtmp server 
         todo: we probably don't want to expost the Flash callback object-->
     <method name="call" args="func, obj, params">
-    	if (this.debug) Debug.write("*** call: func, obj, params",func,obj, typeof (params) ,params.length);
+    	if (this.debug) //Debug.write("*** call: func, obj, params",func,obj, typeof (params) ,params.length);
     	if (params.length != 0){
 	    	//does this really work?
 	    	ASSetPropFlags(_global, null, 8, 1);
-	    	Debug.write("does it work?",arguments);
+	    	//Debug.write("does it work?",arguments);
 	    	<!--
 	    	this._nc.call.apply(this._nc,arguments);
 	    	 -->
@@ -355,7 +355,7 @@
         <!--- Call the remote method, passing the array of params. -->
         <method name="call" args="params"><![CDATA[
             if (this.funcname == null) {
-                Debug.write("No funcname given");
+                //Debug.write("No funcname given");
                 if (this.onerror) this.onerror.sendEvent("No funcname given");
                 return;
             }
@@ -381,21 +381,21 @@
                 }
 
             } else if (params.__proto__ != Array.prototype) {
-                Debug.write(this.name, "error: first argument (params) is not an array");
+                //Debug.write(this.name, "error: first argument (params) is not an array");
                 return -1;
             }
 
-            //Debug.write("call", this, this.parent, this.parent.status);
+            ////Debug.write("call", this, this.parent, this.parent.status);
             var rtmpObject = null;
             if (this.parent instanceof rtmpconnection){
         	    rtmpObject = this.parent;
             } else if(this.remotecontext  instanceof rtmpconnection){
         	    rtmpObject = this.remotecontext;
             } else {
-        	    Debug.write("ERROR: no remotecontext availible abort call");
+        	    //Debug.write("ERROR: no remotecontext availible abort call");
             }
         
-            if (rtmpObject.debug) Debug.write('call', this, rtmpObject, rtmpObject.status);
+            if (rtmpObject.debug) //Debug.write('call', this, rtmpObject, rtmpObject.status);
             if (rtmpObject.status=="connected"){
                 rtmpObject.call(this.funcname, this, params);
             }
@@ -409,8 +409,8 @@
             // Can be overriden.
             // Would be great if it can be used with dataobject,
             // but I don't know how to convert Array/primitive to LzDataset/LzDataPointer.
-            //Debug.write("netremotecall", this, "onResult", value);
-            Debug.write("onResult: ",this,value,dataobject);
+            ////Debug.write("netremotecall", this, "onResult", value);
+            ////Debug.write("onResult: ",this,value,dataobject);
             if (this.dataobject!=null) this.dataobject.valueToElement(value);
             this.ondata.sendEvent(value);		
           ]]>

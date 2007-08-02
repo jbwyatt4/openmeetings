@@ -4,7 +4,7 @@
 <class name="iconview" extends="view">
     <attribute name="enabled" value="true" type="boolean" />
     <handler name="onenabled" args="ena">
-        Debug.write("onenabled: ",ena);
+        //Debug.write("onenabled: ",ena);
         ( this.enabled ) ? this.setResourceNumber(1) : this.setResourceNumber(4);
     </handler>
     <handler name="onmouseover">

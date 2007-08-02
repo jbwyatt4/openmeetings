@@ -87,7 +87,7 @@
 		<netparam name="vars1"><method name="getValue"> return canvas.sessionId; </method></netparam>
 		<netparam name="vars2"><method name="getValue"> return parent.parent.user_id; </method></netparam>
 		<handler name="ondata" args="value">
-			Debug.write("deleteUserAdmin ",value);
+			//Debug.write("deleteUserAdmin ",value);
 			//this.parent.destroy();
 			if (value>0){
 				this.parent.parent._turnoverlist.oncallnext.sendEvent();
@@ -124,15 +124,15 @@
 			this.sendObject["title_id"] = Number(this.parent.salutation.getValue());
   			this.sendObject["organisations"] = this.parent._organisationslist.getAllItems();
 
-  			Debug.write("prepareCall: ",this.sendObject);
+  			//Debug.write("prepareCall: ",this.sendObject);
   		</method>
   		<netparam name="vars1"><method name="getValue"> return canvas.sessionId; </method></netparam>
     	<netparam name="vars2"><method name="getValue">return parent.sendObject;</method></netparam>	  		
     	<handler name="ondata" args="val">
 			<![CDATA[
-    		Debug.write("saveOrUpdateUser: ",val);
+    		//Debug.write("saveOrUpdateUser: ",val);
 			if (val>0){
-				Debug.write("saveOrUpdateUser val greater 0: ",val);
+				//Debug.write("saveOrUpdateUser val greater 0: ",val);
 				this.parent.parent._turnoverlist.oncallnext.sendEvent();
 				var obj = new Array();
 				obj["user_id"] = val;

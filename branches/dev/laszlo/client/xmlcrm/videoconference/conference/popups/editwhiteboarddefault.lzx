@@ -40,9 +40,9 @@
          	g["image"]["askagainclear"]=false;
          }
          var t = new questioncheckbox(this._settings.inner,{name:"clearField",labelid:63,valBool:g["image"]["clearField"]});
-         Debug.write("t: ",t);
+         //Debug.write("t: ",t);
          t = new questioncheckbox(this._settings.inner,{name:"askagainclear",labelid:67,valBool:g["image"]["askagainclear"]});
-		 Debug.write("t: ",t);
+		 //Debug.write("t: ",t);
 		
          if (g["wmlfile"]==null) {
          	g["wmlfile"]=new Array();
@@ -50,7 +50,7 @@
          	g["wmlfile"]["askagainclear"]=false;
          }
          t = new questioncheckbox(this._settings.inner,{name:"askagainclearwml",labelid:212,valBool:g["wmlfile"]["askagainclear"]});
-		 Debug.write("t: ",t);
+		 //Debug.write("t: ",t);
     </handler>    
     
     <method name="storesettings" >

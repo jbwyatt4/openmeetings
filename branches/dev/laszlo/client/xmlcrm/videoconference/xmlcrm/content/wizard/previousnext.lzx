@@ -25,7 +25,7 @@
 		<netparam name="vars7"><method name="getValue"> return true; </method></netparam>
 		<handler name="ondata" args="value">
 			<![CDATA[
-			Debug.write("searchUser ",value);
+			//Debug.write("searchUser ",value);
 			if (value!=null){
 				for (var i=0;i<value.length;i++){
 					if (!this.parent.refObj._userlist.checkValue(value[i].user_id)){
@@ -60,7 +60,7 @@
 		<handler name="onclick">
 			<![CDATA[
 				for (var i=0;i<this.parent._userlist._selected.length;i++){
-					Debug.write("this.parent.refObj._userlist.addItem ",this.parent._userlist._selected[i].text,this.parent._userlist._selected[i].value);
+					//Debug.write("this.parent.refObj._userlist.addItem ",this.parent._userlist._selected[i].text,this.parent._userlist._selected[i].value);
 					this.parent.refObj._userlist.addItem(this.parent._userlist._selected[i].text,this.parent._userlist._selected[i].value);
 				}
 				this.parent.close();

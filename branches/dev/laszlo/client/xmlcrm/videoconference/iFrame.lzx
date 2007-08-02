@@ -90,7 +90,7 @@ Exemple :
       var s = "javascript:document.getElementById('"
                         + iid 
                         + "').style.visibility='hidden'";
-      Debug.write("on hide l'iframe",iid," :",s);
+      //Debug.write("on hide l'iframe",iid," :",s);
       LzBrowser.loadJS(s);
     </method>    
     
@@ -115,7 +115,7 @@ Exemple :
     </method>
 
     <method name="createIFrame" >
-    	Debug.write("create IFRAME !!!!!!!!!!!!!!");
+    	//Debug.write("create IFRAME !!!!!!!!!!!!!!");
       var s = "javascript:createIFrame('"
                         + iname  + "','"
                         + iid + "','"
@@ -130,7 +130,7 @@ Exemple :
                         + iid 
                         + "').style.visibility='visible'";
       s = s + ";lzSetCanvasAttribute('" + createIFrameDone_attr + "', true)";
-      //Debug.write("Calling createIFrame ; loadJS : " + s);//
+      ////Debug.write("Calling createIFrame ; loadJS : " + s);//
       LzBrowser.loadJS(s);
       // initializing the scheduled check of this iFrame's load state
       if(typeof this.createIFrame_callbackDelegate == 'undefined') {
@@ -148,8 +148,8 @@ Exemple :
       this.createIFrameDone_attr = 'iFrame.createIFrameDone_' + this.iid;
       // initializing this iframe's own load state on the canvas :
       canvas.setAttribute(createIFrameDone_attr, false);
-      //Debug.write('createIFrameDone_attr='+this.createIFrameDone_attr);//
-      //Debug.write('createIFrameDone='+this.createIFrameDone+canvas.getAttribute(createIFrameDone_attr));//
+      ////Debug.write('createIFrameDone_attr='+this.createIFrameDone_attr);//
+      ////Debug.write('createIFrameDone='+this.createIFrameDone+canvas.getAttribute(createIFrameDone_attr));//
 	</method>
 	
     <!-- IFrame load state scheduled check -->
@@ -157,7 +157,7 @@ Exemple :
     <attribute name="createIFrame_callbackCounter" type="number" value="0" />
     <attribute name="createIFrame_callbackMax" type="number" value="1000" />
     <method name="createIFrame_callback">
-      //Debug.write("createIFrame_callback : createIFrame_done=" + canvas.getAttribute(createIFrameDone_attr));//
+      ////Debug.write("createIFrame_callback : createIFrame_done=" + canvas.getAttribute(createIFrameDone_attr));//
       if(!canvas.getAttribute(createIFrameDone_attr)) {
          if (this.createIFrame_callbackCounter * callbackTimerDelay &lt; createIFrame_callbackMax) {
             this.createIFrame_callbackCounter = this.createIFrame_callbackCounter + 1;
@@ -165,15 +165,15 @@ Exemple :
          }
       } else {
          // creating iframe moves listeners :
-         Debug.write('createListeners');//
+         //Debug.write('createListeners');//
          createListeners();
          // now let's make sure the iframe has been toggled by moving it
          if (this.iFrameJsStack == 'javascript:') {
-            //Debug.write('createListeners.move');//
+            ////Debug.write('createListeners.move');//
             // there's no javascript stack yet, so let's simply move the iframe :
             centerIframe();
          } else {
-            //Debug.write('createListeners.stacked '+this.iFrameJsStack);//
+            ////Debug.write('createListeners.stacked '+this.iFrameJsStack);//
             // some javascript has been scheduled to be loaded, so let's do it :
             LzBrowser.loadJS(this.iFrameJsStack);
          }
@@ -183,12 +183,12 @@ Exemple :
     <!-- Stackable javascript execution mechanisme -->
     <attribute name="iFrameJsStack" type="string" value="javascript:" />
     <method name="executeJs" args="s">
-      //Debug.write("executeJs", s);//
+      ////Debug.write("executeJs", s);//
       if (canvas.getAttribute(createIFrameDone_attr)) {
-         //Debug.write("executeJs.direct", s);//
+         ////Debug.write("executeJs.direct", s);//
          LzBrowser.loadJS(s); // iframe is loaded, so direct execution
       } else {
-         //Debug.write("executeJs.stacked", s);//
+         ////Debug.write("executeJs.stacked", s);//
          // else the iframe has not yet been loaded, so let's stack it :
          this.iFrameJsStack = this.iFrameJsStack + ';' + s ;
       }
@@ -203,7 +203,7 @@ Exemple :
     
     <method  name="centerIframe">
       // we use a timer in order to avoid too many js call (slow)
-      Debug.write("centerIframe request");
+      //Debug.write("centerIframe request");
       if(typeof this.centerIframe_Delegate == 'undefined') {
          this.centerIframe_Delegate = new LzDelegate( this, "centerIframe_jsCall" );
       }

@@ -20,7 +20,7 @@
 	<attribute name="projectid" value="0" type="number" />
 	
 	<handler name="onclick">
-		Debug.write("projectid: ",this.projectid);
+		//Debug.write("projectid: ",this.projectid);
 		issuecontentareaRoot.currentprojectId = this.projectid;
 		issuecontentareaRoot.currentissuesId = 0;
 		this.getIssuesForProject.doCall();
@@ -30,9 +30,9 @@
 		remotecontext="$once{ canvas.thishib }" >   
 		<netparam name="vars1"><method name="getValue">return this.parent.parent.projectid;</method></netparam>  
 		<handler name="ondata" args="value">	
-			Debug.write("getIssuesForProject: ",value);
+			//Debug.write("getIssuesForProject: ",value);
 			<![CDATA[
-				Debug.write("this: ",this);
+				//Debug.write("this: ",this);
 				this.parent.clearSubs();
 				for (var i=0;i<value.length;i++){
 					new issuestreeissue(this.parent,{text:value[i].title,isissue:true,issuesid:value[i].id,objRef:value[i]});
@@ -49,12 +49,12 @@
 	<attribute name="objRef" value="null" />
 	
 	<handler name="onclick">
-		Debug.write("issuesid: ",this.issuesid);
+		//Debug.write("issuesid: ",this.issuesid);
 		issuecontentareaRoot.isnewitem = false;
 		issuecontentareaRoot.currentissuesId = this.issuesid;
 		issuecontentareaRoot.title_t.setText(this.objRef.title);
 		issuecontentareaRoot.content_t.messagebody.content.txt.setText(this.objRef.content);
-		Debug.write("issuecontentareaRoot.content_t: ",issuecontentareaRoot.content_t.messagebody.content.txt);
+		//Debug.write("issuecontentareaRoot.content_t: ",issuecontentareaRoot.content_t.messagebody.content.txt);
 		this.getIssueById.doCall();
 	</handler>
 		
@@ -63,9 +63,9 @@
 		<netparam name="vars1"><method name="getValue">return issuecontentareaRoot.currentprojectId;</method></netparam>  
 		<netparam name="vars2"><method name="getValue">return this.parent.parent.issuesid;</method></netparam>  
 		<handler name="ondata" args="value">	
-			Debug.write("getIssueById: ",value);
+			//Debug.write("getIssueById: ",value);
 			<![CDATA[
-				Debug.write("this: ",this);
+				//Debug.write("this: ",this);
 				this.parent.clearSubs();
 				for (var i=0;i<value.subIssues.length;i++){
 					new issuestreeissue(this.parent,{text:value.subIssues[i].title,isissue:true,issuesid:value.subIssues[i].id,objRef:value.subIssues[i]});
@@ -87,7 +87,7 @@
 		  	<netremotecallhib name="getProjects" funcname="issueservice.getProjects" 
 				  remotecontext="$once{ canvas.thishib }" >   
 		        <handler name="ondata" args="value">	
-					Debug.write("getProjects: ",value);
+					//Debug.write("getProjects: ",value);
 	                <![CDATA[
 	                for (var i=0;i<value.length;i++){
 						new issuetreeproject(parent._contenttree.inner.rootProjekt,{isproject:true,projectid:value[i].id,text:value[i].title});
@@ -188,7 +188,7 @@
 				<netparam name="vars3"><method name="getValue">return this.parent.parent.title_t.getText();</method></netparam>  
 				<netparam name="vars4"><method name="getValue">return this.parent.parent.content_t.messagebody.content.txt.getHTMLText();</method></netparam>  
 				<handler name="ondata" args="value">	
-					Debug.write("createIssueForParent ",value);
+					//Debug.write("createIssueForParent ",value);
 					<![CDATA[
 	
 					]]>	        	          				
@@ -202,7 +202,7 @@
 				<netparam name="vars3"><method name="getValue">return this.parent.parent.title_t.getText();</method></netparam>  
 				<netparam name="vars4"><method name="getValue">return this.parent.parent.content_t.messagebody.content.txt.getHTMLText();</method></netparam>  
 				<handler name="ondata" args="value">	
-					Debug.write("setIssueContent ",value);
+					//Debug.write("setIssueContent ",value);
 					<![CDATA[
 	
 					]]>	        	          				
@@ -223,7 +223,7 @@
 				<netparam name="vars1"><method name="getValue">return this.parent.parent.currentprojectId;</method></netparam>  
 				<netparam name="vars2"><method name="getValue">return this.parent.parent.currentissuesId;</method></netparam>  
 				<handler name="ondata" args="value">	
-					Debug.write("createIssueForParent ",value);
+					//Debug.write("createIssueForParent ",value);
 					<![CDATA[
 	
 					]]>	        	          				

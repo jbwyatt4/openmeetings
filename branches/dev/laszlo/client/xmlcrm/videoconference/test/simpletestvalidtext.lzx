@@ -35,14 +35,14 @@ String.prototype.startsWith = function(prefix) {
 			}
 			m++;
 		}
-		Debug.write(this.statesInitValues);
+		//Debug.write(this.statesInitValues);
 		
 		this._validbox.addAndSelectItem("Da","1");
 	]]>
 </handler>
 	
 <method name="validateCountry" args="str">
-	Debug.write("validateCountry: ",str);
+	//Debug.write("validateCountry: ",str);
 	<![CDATA[
 		if (str.length!=0){
 			var a = new Array();
@@ -113,7 +113,7 @@ String.prototype.startsWith = function(prefix) {
                     <!-- arrow down and up both popup floatinglist, and pass the key event to it -->
         <handler name="onkeydown" args="key">
             <![CDATA[
-                Debug.write("onkeydown: ",key);
+                //Debug.write("onkeydown: ",key);
                 // 38 is up-arrow
                 // 40 is down-arrow
                 // 32 is space
@@ -135,18 +135,18 @@ String.prototype.startsWith = function(prefix) {
                     this.cblist.onkeydown.sendEvent(key);
                 } else if (key!=13 && key!=9){
                     //Don't handle Enter and Tab Events cause it will open the listItems
-                    //Debug.write("onkeydown txt: ",this.getText());
+                    ////Debug.write("onkeydown txt: ",this.getText());
                     if (!this.initSelect){
-                        //Debug.write("onvalue: ",txt,this);
+                        ////Debug.write("onvalue: ",txt,this);
                         if (!this.timerIsInited){
                             this.timerIsInited = true;
                             this.timerDelegate = new LzDelegate( this, "validatedText" );
-                            //Debug.write("+++++++++++++++++ addTimer");
-                            Debug.write("+++++++++++++++++ removeTimer ",LzTimer.countTimers());
+                            ////Debug.write("+++++++++++++++++ addTimer");
+                            //Debug.write("+++++++++++++++++ removeTimer ",LzTimer.countTimers());
                             LzTimer.addTimer( this.timerDelegate, this.typetime );
                         } else {
-                            //Debug.write("############### resetTimer NO ADDING ");
-                            Debug.write("############### resetTimer ",LzTimer.countTimers());
+                            ////Debug.write("############### resetTimer NO ADDING ");
+                            //Debug.write("############### resetTimer ",LzTimer.countTimers());
                             LzTimer.resetTimer( this.timerDelegate, this.typetime );
                         }
                     } else {
@@ -158,19 +158,19 @@ String.prototype.startsWith = function(prefix) {
         
         <method name="validatedText">
             <![CDATA[
-                //Debug.write("validatedText: ",this.getText());
+                ////Debug.write("validatedText: ",this.getText());
                 //this.reset();
                 if (!this.initSelect){
                     var t = this.validate_method(this.getText());
-                    //Debug.write('t: ',t.length);
+                    ////Debug.write('t: ',t.length);
                     //this.parent._cblist.setAttribute('visible',true);
                     this.cblist.removeAllItems();
                     for (var i=0;i<t.length;i++){
-                        //Debug.write(t[i][this.resultName],t[i][this.resultId]);
+                        ////Debug.write(t[i][this.resultName],t[i][this.resultId]);
                         this.cblist.addItem(t[i][this.resultName],t[i][this.resultId]);
                     }                
 
-                    //Debug.write("validateText: ",this.getText());
+                    ////Debug.write("validateText: ",this.getText());
                     if (!this.isopen) {
                         this.setOpen(true, true); // open, withKey
                     }
@@ -234,7 +234,7 @@ String.prototype.startsWith = function(prefix) {
                 } 
             </method>	
             <handler name="onselect" args="obj">
-                //Debug.write("obj: ",obj);
+                ////Debug.write("obj: ",obj);
                 this.owner.setSelection(obj);
             </handler>	            	
         </floatinglist>        
@@ -245,7 +245,7 @@ String.prototype.startsWith = function(prefix) {
                //checked. NB that LzGlobalMouse sends its events before the view
                //receives the events, so we can just unlock it here, and the
                //checkbox can do its normal onclick handling.
-               Debug.write("onclick LzGlobalMouse",LzGlobalMouse,who);
+               //Debug.write("onclick LzGlobalMouse",LzGlobalMouse,who);
                //if (who != this.cblist && who.childOf(this.cblist)){
                //    this.setOpen(false,false);
                //} 
@@ -262,9 +262,9 @@ String.prototype.startsWith = function(prefix) {
     
     <button x="300" y="20" text="getValues">
         <handler name="onclick">
-            Debug.write(parent._validbox.getValue());
-            Debug.write(parent._validbox.getText());
-            Debug.write(parent._validbox._selected);
+            //Debug.write(parent._validbox.getValue());
+            //Debug.write(parent._validbox.getText());
+            //Debug.write(parent._validbox._selected);
         </handler>
     </button>
     

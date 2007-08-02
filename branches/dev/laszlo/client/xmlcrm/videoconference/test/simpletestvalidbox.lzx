@@ -33,7 +33,7 @@ String.prototype.startsWith = function(prefix) {
 			}
 			m++;
 		}
-		Debug.write(this.statesInitValues);
+		//Debug.write(this.statesInitValues);
 		
 		this._validbox.addItem("Da","1");
 		this._validbox.selectItem("1",true);
@@ -41,7 +41,7 @@ String.prototype.startsWith = function(prefix) {
 </handler>
 	
 <method name="validateCountry" args="str">
-	Debug.write("validateCountry: ",str);
+	//Debug.write("validateCountry: ",str);
 	<![CDATA[
 		if (str.length!=0){
 			var a = new Array();
@@ -204,7 +204,7 @@ String.prototype.startsWith = function(prefix) {
                     <!-- arrow down and up both popup floatinglist, and pass the key event to it -->
                     <handler name="onkeydown" args="key">
                         <![CDATA[
-						Debug.write("onkeydown: ",key);
+						//Debug.write("onkeydown: ",key);
                         // 38 is up-arrow
                         // 40 is down-arrow
                         // 32 is space
@@ -217,18 +217,18 @@ String.prototype.startsWith = function(prefix) {
                                 // pass the key event on to the floatinglist
                                 classroot.cblist.onkeydown.sendEvent(key);
                             } else {
-                                Debug.write("onkeydown txt: ",this.getText());
+                                //Debug.write("onkeydown txt: ",this.getText());
                                 if (!this.initSelect){
-                                    //Debug.write("onvalue: ",txt,this);
+                                    ////Debug.write("onvalue: ",txt,this);
                                     if (!this.timerIsInited){
                                         this.timerIsInited = true;
                                         this.timerDelegate = new LzDelegate( this, "validatedText" );
-                                        Debug.write("+++++++++++++++++ addTimer");
-                                        Debug.write("+++++++++++++++++ removeTimer ",LzTimer.countTimers());
+                                        //Debug.write("+++++++++++++++++ addTimer");
+                                        //Debug.write("+++++++++++++++++ removeTimer ",LzTimer.countTimers());
                                         LzTimer.addTimer( this.timerDelegate, this.typetime );
                                     } else {
-                                        Debug.write("############### resetTimer NO ADDING ");
-                                        Debug.write("############### removeTimer ",LzTimer.countTimers());
+                                        //Debug.write("############### resetTimer NO ADDING ");
+                                        //Debug.write("############### removeTimer ",LzTimer.countTimers());
                                         //LzTimer.removeTimer( this.timerDelegate );
                                     }
                                 } else {
@@ -263,25 +263,25 @@ String.prototype.startsWith = function(prefix) {
 
 					<method name="validatedText">
 						<![CDATA[
-                            Debug.write("validatedText: ",this.getText());
+                            //Debug.write("validatedText: ",this.getText());
                             //this.reset();
                             if (!this.initSelect){
                                 var t = classroot.validate_method(this.getText());
-                                Debug.write('t: ',t.length);
+                                //Debug.write('t: ',t.length);
                                 //this.parent._cblist.setAttribute('visible',true);
                                 classroot.cblist.removeAllItems();
                                 for (var i=0;i<t.length;i++){
                                     classroot.cblist.addItem(t[i].name,t[i].state_id);
                                 }
-                                Debug.write("############### removeTimer ",LzTimer.countTimers());
+                                //Debug.write("############### removeTimer ",LzTimer.countTimers());
                                 for (var eg in LzTimer){
-                                    Debug.write("############### LzTimer ",eg,LzTimer[eg]);
+                                    //Debug.write("############### LzTimer ",eg,LzTimer[eg]);
                                 }
                                 for (var eg in LzTimer.timerList){
-                                    Debug.write("############### LzTimer.timerList ",eg,LzTimer.timerList[eg]);
+                                    //Debug.write("############### LzTimer.timerList ",eg,LzTimer.timerList[eg]);
                                 }
 
-                                //Debug.write("validateText: ",this.getText());
+                                ////Debug.write("validateText: ",this.getText());
                                 //if (!classroot.isopen) {
                                 //    classroot.setOpen(true, true); // open, withKey
                                 //}
@@ -341,7 +341,7 @@ String.prototype.startsWith = function(prefix) {
             if ( ds == null ) return;
             if ( defaulttext != "" ) {
                 this.defaulttext = "";
-                Debug.write("defaultselection overrides defaulttext",this);
+                //Debug.write("defaultselection overrides defaulttext",this);
             }
             if ( this.ondefaultselection ) this.ondefaultselection.sendEvent();
         </method>
@@ -712,20 +712,20 @@ String.prototype.startsWith = function(prefix) {
 			
 			<method name="getValue"> return this.id; </method>
 			<method name="setValued" args="txt,id"> 
-				Debug.write("setValue:",txt,id); 
+				//Debug.write("setValue:",txt,id); 
 				this.id = id; this.setText(txt); 
 			</method>
 			
-			<handler name="onfocus"> Debug.write("onfocus ",this.getText());
+			<handler name="onfocus"> //Debug.write("onfocus ",this.getText());
 				this.startValidate = true; this.formervalue = this.getText();
 				</handler>
 			<handler name="onvalue" args="txt">
 				<![CDATA[
-				Debug.write("onvalue: ",txt,this.startValidate);
+				//Debug.write("onvalue: ",txt,this.startValidate);
 				if (!this.timerIsInited && this.startValidate){
 					this.timerIsInited = true;
 					this.timerDelegate = new LzDelegate( this, "validatedText" );
-					Debug.write("############### addTimer");
+					//Debug.write("############### addTimer");
 					LzTimer.addTimer( this.timerDelegate, this.typetime );
 				} else {
 					LzTimer.resetTimer( this.timerDelegate, this.typetime );
@@ -734,10 +734,10 @@ String.prototype.startsWith = function(prefix) {
 			</handler>
 			<method name="validatedText">
 				<![CDATA[
-					Debug.write("validatedText: ",this.getText());
+					//Debug.write("validatedText: ",this.getText());
 					//this.reset();
 					var t = canvas.validateCountry(this.getText());
-					Debug.write('t: ',t.length);
+					//Debug.write('t: ',t.length);
 					this._cblist.setAttribute('visible',true);
 					this._cblist.removeAllItems();
 					for (var i=0;i<t.length;i++){
@@ -745,15 +745,15 @@ String.prototype.startsWith = function(prefix) {
 					}
 					LzTimer.removeTimer(this.timerDelegate);
 					this.timerIsInited = false;
-					Debug.write("validateText: ",this.getText());
+					//Debug.write("validateText: ",this.getText());
 
 				]]>
 			</method>
-			<handler name="onblur" args="b"> Debug.write("onblur: ",b);
+			<handler name="onblur" args="b"> //Debug.write("onblur: ",b);
 				<![CDATA[
 					if (b!=this._cblist){
 						var t = canvas.validateCountry(this.getText());
-						Debug.write('t: ',t.length);
+						//Debug.write('t: ',t.length);
 						this._cblist.removeAllItems();
 						for (var i=0;i<t.length;i++){
 							this._cblist.addItem(t[i].name,t[i].state_id);
@@ -761,7 +761,7 @@ String.prototype.startsWith = function(prefix) {
 						this.startValidate = false;
 						//this._cblist.setAttribute('visible',false);
 					} else {
-						Debug.write("is this._cblist");
+						//Debug.write("is this._cblist");
 					}
 				]]>
 				</handler>
@@ -775,7 +775,7 @@ String.prototype.startsWith = function(prefix) {
 					} 
 				</method>
 				<handler name="onselect" args="item"> 
-					Debug.write("onselect:",item); 
+					//Debug.write("onselect:",item); 
 					//this.owner. 
 					this.setAttribute('visible',false);
 					LzFocus.setFocus(this.owner); 

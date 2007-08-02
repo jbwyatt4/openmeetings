@@ -14,7 +14,7 @@
      </method>
  
      <method name="fadeText">
-		 Debug.write("fadeText: ",LzTimer.countTimers(this.fadeDelegate));
+		 //Debug.write("fadeText: ",LzTimer.countTimers(this.fadeDelegate));
          this.myText.animate( "opacity", 0.0, 1000 );
      </method>
  

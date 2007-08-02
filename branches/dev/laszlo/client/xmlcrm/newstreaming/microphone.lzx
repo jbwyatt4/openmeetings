@@ -90,7 +90,7 @@
 
         <!--- Start the microphone. -->
         <method name="startDevice"><![CDATA[
-            //Debug.write("microphone startdevice", this);
+            ////Debug.write("microphone startdevice", this);
             this._mc = 
                 _root.createEmptyMovieClip("__LZmicMovieClip", 10000);
 
@@ -109,7 +109,7 @@
                 immediateparent._setMic(this);
             }
 
-            //Debug.write("microphone startDevice setting capturing", this.capturing);
+            ////Debug.write("microphone startDevice setting capturing", this.capturing);
             this.setAttribute("capturing", this.capturing);
           ]]>
         </method>
@@ -118,7 +118,7 @@
         <!--- Handler for the Flash Microphone onActivity callback. 
               @keywords private -->
         <handler name="onactive"><![CDATA[
-            //Debug.write("microphone onactive", this, "onlevel", this.onlevel, "active", this.active);
+            ////Debug.write("microphone onactive", this, "onlevel", this.onlevel, "active", this.active);
             if (this.onlevel) {
                 if (this.active && this.capturing) {
                     this._leveldel.register(LzIdle, "onidle");
@@ -134,7 +134,7 @@
         <!--- Called when the allowed flag changes.
               @keywords private -->
         <method name="_updateAllowed"><![CDATA[
-            //Debug.write("microphone _updateAllowed", this, this.allowed, "capturing", this.capturing);
+            ////Debug.write("microphone _updateAllowed", this, this.allowed, "capturing", this.capturing);
             super._updateAllowed();
 
             this.setAttribute("capturing", this.capturing);
@@ -145,7 +145,7 @@
         <!--- Setter for capturing attribute. 
               @keywords private -->
         <method name="_setCapturing" args="capturing"> <![CDATA[
-            //Debug.write("microphone _setCapturing", this, capturing, this.isinited, this._dev, this._mc);
+            ////Debug.write("microphone _setCapturing", this, capturing, this.isinited, this._dev, this._mc);
 
             super._setCapturing(capturing);
 
@@ -186,10 +186,10 @@
           for audio only recording.
               @keywords private -->
         <method name="_setStream" args="stream"><![CDATA[
-        //Debug.write("microphone _setStream", stream);
+        ////Debug.write("microphone _setStream", stream);
             this.stream = stream;
             if (stream) {
-                //Debug.write("microphone", this, "_setStream", stream);
+                ////Debug.write("microphone", this, "_setStream", stream);
                 stream._setMic(this);
             }
           ]]>

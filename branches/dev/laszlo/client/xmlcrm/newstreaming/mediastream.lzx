@@ -167,7 +167,7 @@
         <!--- Set up to publish a mediastream.
               @keywords private -->
         <method name="_publishSetup"><![CDATA[     
-            //Debug.write("_publishSetup", this, this.streamname);
+            ////Debug.write("_publishSetup", this, this.streamname);
 
             if ($debug && (this.type != "rtmp")) {
                  Debug.warn("type must be rtmp %w", this);
@@ -199,7 +199,7 @@
         <!--- start sending a live mediastream to the server. -->
         <method name="broadcast"><![CDATA[
             this._publishSetup();
-            //Debug.write("publish", this.streamname);
+            ////Debug.write("publish", this.streamname);
             this._flashstream.publish(this.streamname);
             setAttribute("mode", "broadcasting");
           ]]>
@@ -208,14 +208,14 @@
 
         <!--- Start recording. -->
         <method name="record"><![CDATA[
-            //Debug.write("mediastream record", this, "_flashstream", this._flashstream, "streamname", this.streamname, "url", this.url);
+            ////Debug.write("mediastream record", this, "_flashstream", this._flashstream, "streamname", this.streamname, "url", this.url);
             this._publishSetup();
-            //Debug.write("mediastream record", this, "done with setup, streamname", this.streamname);
+            ////Debug.write("mediastream record", this, "done with setup, streamname", this.streamname);
             this._flashstream.publish(this.streamname, "record");
-            //Debug.write("publish", this.streamname);
+            ////Debug.write("publish", this.streamname);
 
             this._basetime = (new Date).getTime();
-            //Debug.write("basetime = ", this._basetime);
+            ////Debug.write("basetime = ", this._basetime);
             this.setAttribute("time", 0);
             this.setAttribute("progress", 0.0);
             this.setAttribute("mode", "recording");
@@ -226,7 +226,7 @@
 
         <!--- Works for playback and mimics animator pause() semantics. -->
         <method name="pause" args="p"><![CDATA[
-            //Debug.write("pause", this, "p", p, "p == null", p == null, "this['paused']", this['paused']);
+            ////Debug.write("pause", this, "p", p, "p == null", p == null, "this['paused']", this['paused']);
             this.setAttribute("paused",  (p == null) ? !this['paused'] : p)
           ]]>
         </method>
@@ -274,7 +274,7 @@
 
         <!--- Close the stream. -->
         <method name="close"><![CDATA[
-            //Debug.write("FLASHSTREAM CLOSE", this, this._flashstream);
+            ////Debug.write("FLASHSTREAM CLOSE", this, this._flashstream);
             if (this._flashstream == null) {
                 return;
             }
@@ -291,13 +291,13 @@
         <!--- Find or create the Flash NetConnection object.
               @keywords private -->
         <method name="_findnc"><![CDATA[
-            //Debug.write("_findnc", this, this._nc, this.type, this.url, "isinited", this.isinited);
+            ////Debug.write("_findnc", this, this._nc, this.type, this.url, "isinited", this.isinited);
 
             if (this._nc) {
                 return;
             }
 
-            //Debug.write('_findnc', this.type);
+            ////Debug.write('_findnc', this.type);
 
             switch (this.type) {
 
@@ -308,7 +308,7 @@
                         // null NetConnection)
                         mediastream.prototype._nullnc = new NetConnection();
                         this._nullnc.connect(null);
-                        //Debug.write("_findnc made new _nullnc", this._nullnc);
+                        ////Debug.write("_findnc made new _nullnc", this._nullnc);
                     }
                     this._nc = this._nullnc;
                     break;
@@ -321,7 +321,7 @@
 
                     // If we don't define our own connection, then use
                     // the default one (the first rtmpconnection created).
-                    //Debug.write("_findnc type rtmp, rtmpconnection", this.rtmpconnection, "_nc", global.rtmpconnection.prototype._default._nc);
+                    ////Debug.write("_findnc type rtmp, rtmpconnection", this.rtmpconnection, "_nc", global.rtmpconnection.prototype._default._nc);
                     this._nc = 
                         this.rtmp ||
                         global.rtmpconnection.prototype._default._nc;
@@ -351,7 +351,7 @@
                 return;
             }
 
-            //Debug.write('_flushnc', this, this.type, this._nc);
+            ////Debug.write('_flushnc', this, this.type, this._nc);
 
             this._nc = null;
           ]]>
@@ -362,7 +362,7 @@
               @keywords private -->
         <method name="_createStream"><![CDATA[
 
-            //Debug.write("mediastream _createStream", this, "_nc", this._nc, "_flashstream", this._flashstream, "type", this.type, "url", this.url);
+            ////Debug.write("mediastream _createStream", this, "_nc", this._nc, "_flashstream", this._flashstream, "type", this.type, "url", this.url);
 
             if (!this.url) {
                 if (this.debug) {
@@ -379,9 +379,9 @@
                 return;
             }
 
-            //Debug.write("MAKING _FLASHSTREAM", this._nc);
+            ////Debug.write("MAKING _FLASHSTREAM", this._nc);
             this.setAttribute("_flashstream", new NetStream(this._nc));
-            //Debug.write("MADE _FLASHSTREAM", this._flashstream);
+            ////Debug.write("MADE _FLASHSTREAM", this._flashstream);
 
             this._flashstream.t = this;  
 
@@ -410,7 +410,7 @@
               @keywords private -->
         <method name="_onStatus" args="info"><![CDATA[
             if (this.debug) {
-                Debug.write("mediastream _onStatus", this, info.code, info);
+                //Debug.write("mediastream _onStatus", this, info.code, info);
             }
 
             switch (info.code) {
@@ -418,14 +418,14 @@
                 case "NetStream.Buffer.Empty": {
                     //var newbuftime = this._flashstream.bufferTime + 1;
                     //this._flashstream.setBufferTime(newbuftime);
-                    //Debug.write("newbuffertime", newbuftime);
+                    ////Debug.write("newbuffertime", newbuftime);
                     break;
                 }
 
                 case "NetStream.Buffer.Full": {
                     if (this._pendingstreamname != "") {
                         this.setAttribute("streamname", this._pendingstreamname);
-                        //Debug.write("streamname", this.streamname);
+                        ////Debug.write("streamname", this.streamname);
                         this._pendingstreamname = "";
                     }
                     break;
@@ -517,7 +517,7 @@
         <!--- Handle the onCuePoint callback from the Flash NetStream object. 
               @keywords private -->
         <method name="_onCuePoint" args="info"><![CDATA[
-            //Debug.write("ms onCuePoint", this, info);
+            ////Debug.write("ms onCuePoint", this, info);
 
             if (this.oncuepoint) {
                 this.oncuepoint.sendEvent(info);
@@ -561,7 +561,7 @@
               @keywords private -->
         <method name="_onPlayStatus" args="info"><![CDATA[
             if (this.debug) {
-                Debug.write("mediastream onPlayStatus", this, info.code, info);
+                //Debug.write("mediastream onPlayStatus", this, info.code, info);
             }
 
             switch (info.code) {
@@ -572,7 +572,7 @@
                     //var newbuftime = 
                     //    this._flashstream.bufferTime - 1;
                     //this._flashstream.setBufferTime(newbuftime);
-                    //Debug.write("newbuffertime=",newbuftime);
+                    ////Debug.write("newbuffertime=",newbuftime);
                     break;
                 }
 
@@ -597,7 +597,7 @@
             var propName;
             for (propName in info) {
                 if (this.debug) {
-                    Debug.write("MetaData: " + propName + " = " + info[propName]);
+                    //Debug.write("MetaData: " + propName + " = " + info[propName]);
                 }
                 if (propName == "duration") {
                     this.setAttribute("totaltime", info[propName]);
@@ -702,10 +702,10 @@
                     break;
             }
 
-            //Debug.write("PLAY", this, start, pause, length, reset);
+            ////Debug.write("PLAY", this, start, pause, length, reset);
 
             if (this.debug) {
-                Debug.write("mediastream play", this, "_flashstream", this._flashstream, "type", this.type, "url", this.url);
+                //Debug.write("mediastream play", this, "_flashstream", this._flashstream, "type", this.type, "url", this.url);
             }
 
             if (this._flashstream) {
@@ -722,9 +722,9 @@
             var isnew = false;
             if (!this._flashstream) {
                 isnew = true;
-                //Debug.write("mediastream creating stream");
+                ////Debug.write("mediastream creating stream");
                 this._createStream();
-                //Debug.write("mediastream created stream", this._flashstream);
+                ////Debug.write("mediastream created stream", this._flashstream);
                 if (!this._flashstream) {
                     return;
                }
@@ -733,28 +733,28 @@
             // set up delegate to update the time, progress and fps attributes.
             this._activateTimeDel();
 
-            //Debug.write("_flashstream=", this._flashstream);
+            ////Debug.write("_flashstream=", this._flashstream);
 
             /** TODO: when to do this? 
 
             // call function in server-side main.asc
             var t = this;  // Fake a closure.
             this.onResult = function(streamLength) {
-                //_root.Debug.write("onresult=", streamLength);
+                //_root.//Debug.write("onresult=", streamLength);
                 t.setAttribute("totaltime", streamLength);
             };
             rtc._nc.call("getLength", this, name);
-            //Debug.write("call getLength", name, "nc", rtc._nc);
+            ////Debug.write("call getLength", name, "nc", rtc._nc);
 
             **/
 
             //var sname = this._namefromurl(this.url);
             var sname = this.url;
 
-            //Debug.write("start=", start);
+            ////Debug.write("start=", start);
 
             if (pause) {
-                //Debug.write("mediastream play PAUSE",  this, "start", start, "pause", pause, "length", length, "reset", reset);
+                ////Debug.write("mediastream play PAUSE",  this, "start", start, "pause", pause, "length", length, "reset", reset);
                 this._flashstream.play(sname, start, length, reset);
 
                 //if (this.type == "http") {
@@ -764,14 +764,14 @@
                 setAttribute("paused", true);
 
             } else {
-                //Debug.write("mediastream play PLAY", this, "start", start);
+                ////Debug.write("mediastream play PLAY", this, "start", start);
 
                 //this._flashstream.play(sname);
                 this._flashstream.play(sname, start, length, reset);
 
                 setAttribute("paused", false);
 
-                //Debug.write("mediastream setting playing", this);
+                ////Debug.write("mediastream setting playing", this);
             }
 
             if (this.type == "rtmp") {
@@ -781,7 +781,7 @@
             setAttribute("mode", "playing");
 
             if (this.debug) {
-                //Debug.write("mediastream play", this, sname, typeof(sname), start);
+                ////Debug.write("mediastream play", this, sname, typeof(sname), start);
             }
 
           ]]>
@@ -808,7 +808,7 @@
         <!--- Activate the idle _updateTime handler. 
               @keywords private -->
         <method name="_activateTimeDel"><![CDATA[
-            //Debug.write("_activeTimeDel", this);
+            ////Debug.write("_activeTimeDel", this);
             if (!this._timedel) {
                 this._timedel = new LzDelegate(this, "_updateTime");
             }
@@ -822,7 +822,7 @@
         <!--- Deactivate the idle _updateTime handler. 
               @keywords private -->
         <method name="_deactivateTimeDel"><![CDATA[
-            //Debug.write("_deactiveTimeDel", this);
+            ////Debug.write("_deactiveTimeDel", this);
             if (this._timedel) {
                 this._timedel.unregisterAll();
             }
@@ -876,7 +876,7 @@
                 this.setAttribute("progress", progress);
             }
 
-            //Debug.write("_updateTime", this, "_flashstream", this._flashstream, "_pendingstreamname", _pendingstreamname);
+            ////Debug.write("_updateTime", this, "_flashstream", this._flashstream, "_pendingstreamname", _pendingstreamname);
             // Only update in playback mode.
             if (fps != this.fps) {
                 this.setAttribute("fps", fps);
@@ -908,7 +908,7 @@
               This does nothing when you record. 
               @access private -->
         <method name="_setPaused" args="paused"><![CDATA[
-            //Debug.write("_setPaused", this, "paused", paused, "mode", this.mode, "progress", this.progress);
+            ////Debug.write("_setPaused", this, "paused", paused, "mode", this.mode, "progress", this.progress);
             if ((this.mode != "playing")  || !this._flashstream) {
                 if (paused) {
                     Debug.warn("mediastream %w: trying to pause a stream that is not playing", this);
@@ -932,7 +932,7 @@
                 this._activateTimeDel();
             }
 
-            //Debug.write("PAUSE", "after playing", this.playing);
+            ////Debug.write("PAUSE", "after playing", this.playing);
           ]]>
         </method>
 
@@ -954,14 +954,14 @@
         <!--- Initialize the mediastream. 
               @keywords private -->
         <method name="init"><![CDATA[
-            //Debug.write("mediastream init", this, "immediateparent", immediateparent);
+            ////Debug.write("mediastream init", this, "immediateparent", immediateparent);
             super.init();
             // Use duck typing to check for the existence of the
             // _setStream method, instead of checking if the
             // immediateparent is an instance of videoview, to avoid
             // loading the videoview class if it's not needed.
             if (immediateparent['_setStream']) {
-                //Debug.write("mediastream init with immediateparent supporting _setStream", this, immediateparent);
+                ////Debug.write("mediastream init with immediateparent supporting _setStream", this, immediateparent);
                 immediateparent._setStream(this);
             }
             if (this.url != "") {
@@ -977,7 +977,7 @@
         <method name="_namefromurl" args="fromurl"><![CDATA[
             var sname = fromurl;
 
-            //Debug.write("sname=", sname, "suffix=", sname.substr(-4));
+            ////Debug.write("sname=", sname, "suffix=", sname.substr(-4));
 
             // FIXME: Compare file name suffix ignoring case.
             if ((this.type == "rtmp") && 
@@ -995,14 +995,14 @@
               @keywords private -->
         <method name="_setUrl" args="newurl"><![CDATA[
             var old = this["url"];
-            //Debug.write("mediastream _setUrl", this, "old", old, "new", newurl, "_nc", this['_nc'], "isinited", this.isinited);
+            ////Debug.write("mediastream _setUrl", this, "old", old, "new", newurl, "_nc", this['_nc'], "isinited", this.isinited);
             this.url = newurl;
 
             this.setAttribute("streamname", "");
 
             if ((!this.isinited) || 
                 (old == newurl)) {
-                //Debug.write("_setUrl returning because !isinited or same url", this, newurl);
+                ////Debug.write("_setUrl returning because !isinited or same url", this, newurl);
                 return;
             }
 
@@ -1025,11 +1025,11 @@
         <method name="_setType" args="newtype"><![CDATA[
             var old = this["type"];
             this.type = newtype;
-            //Debug.write("mediastream _setType", this, "old", old, "new", newtype, "_nc", this['_nc'], "isinited", this.isinited);
+            ////Debug.write("mediastream _setType", this, "old", old, "new", newtype, "_nc", this['_nc'], "isinited", this.isinited);
 
             if ((!this.isinited) || 
                 (old == newtype)) {
-                //Debug.write("_setType returning because !isinited or same url", this, newtype);
+                ////Debug.write("_setType returning because !isinited or same url", this, newtype);
                 return;
             }
 
@@ -1049,7 +1049,7 @@
               based on the value of this.url.
               @keywords private -->
         <method name="_updateUrl"><![CDATA[
-            //Debug.write("_updateUrl", this, this.type, this.url, "isinited", this.isinited);
+            ////Debug.write("_updateUrl", this, this.type, this.url, "isinited", this.isinited);
             this._findnc();
 
             if ((this.type == "rtmp") &&
@@ -1060,7 +1060,7 @@
                 // call function in server-side main.asc
                 var t = this; // for use in closure
                 this.onResult = function(streamLength) {
-                    //_root.Debug.write("onresult=", streamLength);
+                    //_root.//Debug.write("onresult=", streamLength);
                     t.setAttribute("totaltime", streamLength || 0);
                 };
                 this._nc.call("getLength", this, sname);

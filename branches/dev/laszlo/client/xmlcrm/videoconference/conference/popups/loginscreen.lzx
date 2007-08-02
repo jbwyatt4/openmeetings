@@ -65,7 +65,7 @@ There is no login any more
 		<labeltext y="82" x="10" labelid="11" />
 			<text fontsize="12" name="_current" y="82" x="150" width="200" text="${ canvas.numberofpartners }" >
 				<handler name="ontext">
-					Debug.write("canvas.numberofpartners: ",canvas.numberofpartners);
+					//Debug.write("canvas.numberofpartners: ",canvas.numberofpartners);
 					<![CDATA[
 					if(canvas.numberofpartners<canvas.numberofallowedpartners){
 						this.parent.next.setAttribute('enabled',true);
@@ -78,7 +78,7 @@ There is no login any more
 		
 		<simplelabelbutton name="next" x="140" y="270" labelid="12" width="160" >
 			<handler name="onclick">
-				Debug.write("this.parent: ",this.parent);
+				//Debug.write("this.parent: ",this.parent);
 				canvas.setAttribute('currentusename',this.parent._login.getText());
 				this.parent.parent.close();
 				canvas._hideit.setAttribute('visible',false);
