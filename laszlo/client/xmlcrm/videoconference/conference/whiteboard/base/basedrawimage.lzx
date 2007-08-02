@@ -59,7 +59,7 @@
 			}	
 	
 			//only send syncCommand if alterModus is true (meaning that this is the Moderator)
-			//otherwise just send a notification to moderator that this iamge has been loaded
+			//otherwise just send a notification to moderator that this image has been loaded
 			if (this.alterModus){
 				this.refObj.storeTempValsAndLoadSyncList(this);
 			} else {
@@ -75,6 +75,7 @@
 			//has been loaded completely
 			if (this.refObj.isWmlLoaderImage){
 				this.refObj.isWmlLoaderImage=false;
+                Debug.write("1 onwmlLoaderSend.sendEvent( image )");
 				if (this.refObj.onwmlLoaderSend) this.refObj.onwmlLoaderSend.sendEvent('image');
 			}
 		]]>
@@ -99,6 +100,7 @@
 			//has been loaded completely
 			if (this.refObj.isWmlLoaderImage){
 				this.refObj.isWmlLoaderImage=false;
+                Debug.write("2 onwmlLoaderSend.sendEvent( image )");
 				if (this.refObj.onwmlLoaderSend) this.refObj.onwmlLoaderSend.sendEvent('image');
 			}
 		]]>
@@ -123,6 +125,7 @@
 			//has been loaded completely
 			if (this.refObj.isWmlLoaderImage){
 				this.refObj.isWmlLoaderImage=false;
+                Debug.write("3 onwmlLoaderSend.sendEvent( image )");
 				if (this.refObj.onwmlLoaderSend) this.refObj.onwmlLoaderSend.sendEvent('image');
 			}
 		]]>

@@ -638,12 +638,10 @@
 			//and Browser does not hangUp and images can be proceed
 			//only send if type ain#t image cause image will send its own one after 
 			// it has been loaded completely
-			if (isWmlLoader && actionObject[0]!='image') {
-				if (this.onwmlLoaderSend) this.onwmlLoaderSend.sendEvent(actionObject[0]);
-			} else if (isWmlLoader && actionObject[0]!='swf') {
+			if (isWmlLoader && actionObject[0]!='image' && isWmlLoader && actionObject[0]!='swf') {
 				if (this.onwmlLoaderSend) this.onwmlLoaderSend.sendEvent(actionObject[0]);
 			}
-			
+            
 		} else if(action=='clear'){
 			this.clearAll();
 		} else if(action=='delete' || action=='undo'){

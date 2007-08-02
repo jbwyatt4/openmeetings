@@ -171,7 +171,7 @@
 	
     <method name="loadwmlObjectToStage" args="loadObject,fileName,room,domain,spreadNews,isInitLoader">
         
-        //Debug.write("loadwmlObjectToStage: ",loadObject,fileName,room,domain,spreadNews,isInitLoader);
+        Debug.write("loadwmlObjectToStage: ",loadObject,fileName,room,domain,spreadNews,isInitLoader);
 		<![CDATA[
 		if (loadObject!=null && loadObject.length>0){
 			
@@ -191,6 +191,7 @@
 				//get remotely connected users sothat we can trigger event when everyBody has synchronized loading
 				this.getClientListScope.doCall();
 			} else {
+                Debug.write("loadNextObjectFromList 1 this.loadObjectTimer");
 				this.loadObjectTimer = new LzDelegate( this, "loadNextObjectFromList" );
 				LzTimer.addTimer( this.loadObjectTimer, 50 );
 			}
@@ -199,7 +200,7 @@
 		} else if (isInitLoader){
 			//check if this is conference or audience modus
 			if (canvas.thishib.modus == "confernce"){
-				//Debug.write("############## editrecordstream 1");
+				Debug.write("############## editrecordstream 1");
 				new editrecordstream(canvas.main_content._content.inner,{y:-320});	
 			} else if(canvas.thishib.modus == "audience"){
 				//check in audince modus if this user is the current moderator
@@ -234,6 +235,7 @@
 				}
 				//it is necessary to use LzTimer cause i want to make status updates
 				//after each loaded object
+                Debug.write("loadNextObjectFromList 2 this.loadObjectTimer");
 				this.parent.loadObjectTimer = new LzDelegate( this.parent, "loadNextObjectFromList" );
 				LzTimer.addTimer( this.parent.loadObjectTimer, 50 );	
             ]]>
@@ -304,7 +306,7 @@
 		whiteborad -->
 	
 	<handler name="onwmlLoaderSend" args="type">
-		////Debug.write("onwmlLoaderSend: ",type,this.loadfileData.length);
+		Debug.write("loadNextObjectFromList 3 this.loadObjectTimer ",type);
 		this.loadObjectTimer = new LzDelegate( this, "loadNextObjectFromList" );
 		LzTimer.addTimer( this.loadObjectTimer, 50 );
 	</handler>
@@ -313,7 +315,7 @@
 		checks if object is loaded completely once it is completely loaded it checks wether
 		the process was invoked by moderator, so this is a remoteClient or this client is 
 		really the moderator (this.wmlspreadNews=true)
-		if it ain't the mod it jsut throws a message to moderator and waits untill the moderator
+		if it ain't the mod it just throws a message to moderator and waits untill the moderator
 		spreads a message that all clients did succeed in loading the wml-file-objects
 		-->
 	<method name="loadNextObjectFromList">
@@ -332,6 +334,7 @@
 				if (!this.wmlspreadNews){
 					this.wmlloadingComplete();
 				} else {
+                    Debug.write("loadNextObjectFromList this.startWmlsyncCheck");
 					this.startWmlsyncCheck();
 				}
 			}
@@ -364,7 +367,9 @@
 		have loaded the file completely, check it every 1 seconds -->
 	<method name="startWmlsyncCheck">
 		<![CDATA[
+            Debug.write("startWmlsyncCheck: ");
 			if (this._loadingUsers.length==0 || this.isInitLoader){
+                Debug.write("wmlsyncComplete ");
 				this.wmlsyncComplete();
 			} else {
 				var txt = this._loadmessageTxt+' '+this._loadingUsers.length;
@@ -420,7 +425,7 @@
 		if (this.isInitLoader){
 			//check if this is conference or audience modus
 			if (canvas.thishib.modus == "confernce"){
-				//Debug.write("############## editrecordstream 2");
+				Debug.write("############## editrecordstream 2");
 				new editrecordstream(canvas.main_content._content.inner,{y:-320});	
 			} else if(canvas.thishib.modus == "audience"){
 				//check in audince modus if this user is the current moderator
