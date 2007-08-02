@@ -68,8 +68,8 @@
                 // to be implemented ...
                 /**
                 this._nc.setId = function(id) {
-                    _root.//Debug.write("########## Method called by rtmp Server");
-                    _root.//Debug.write("---------------> id: ", id);
+                    //_root.Debug.write.write("########## Method called by rtmp Server");
+                    //_root.Debug.write.write("---------------> id: ", id);
                 }
                 **/
 
@@ -78,8 +78,8 @@
             /** the following code should work now, but it hasn't
                 been tested, so I'll leave it commented out -sa
             this._nc.__resolve = function(name) {
-                //_root.//Debug.write("__resolve " , name, typeof(this[name]));
-                //_root.//Debug.write("  arguments.callee.name " , 
+                ////_root.Debug.write.write("__resolve " , name, typeof(this[name]));
+                ////_root.Debug.write.write("  arguments.callee.name " , 
                 //                     arguments.callee.name);
                 if (typeof(this.t[name]) == "function") {
                     this.t[name].apply(arguments);

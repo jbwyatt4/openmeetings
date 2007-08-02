@@ -43,7 +43,7 @@
 
             this._nc.onStatus = function(info){
                 t = this.t;
-                _root.//Debug.write("######### nc.onStatus ",info);
+                //_root.Debug.write.write("######### nc.onStatus ",info);
                 t.onStatus(info);
             }
             // local reference to rtmpconnection
@@ -90,7 +90,7 @@
             for (eg in this._nc){
                 if (this._nc[eg]==callee){
                     if (this.debug) {
-                        _root.//Debug.write("DEBUG invoked a function remotely: ",eg,args);
+                        //_root.Debug.write.write("DEBUG invoked a function remotely: ",eg,args);
                     }                
                     return this.callFuntion(eg,args);
                 }
@@ -144,8 +144,8 @@
         this._nc.onStatus = function(info) {
             t = this.t;
             //if (t.debug) {
-                _root.//Debug.write('onStatus ', info.code);
-                _root.//Debug.write('this (t) ', t, this);
+                //_root.Debug.write.write('onStatus ', info.code);
+                //_root.Debug.write.write('this (t) ', t, this);
             //}
             var msg = ""
             var s = t.stage;
@@ -195,8 +195,8 @@
             t.setAttribute('status', msg);
             t.setAttribute('stage', s);
             if (t.debug) {
-                if (s == 2) _root.//Debug.write('connected to '+t.src);
-                else _root.//Debug.write('connection failed to ',t.src,', ', msg);
+                if (s == 2) //_root.Debug.write.write('connected to '+t.src);
+                else //_root.Debug.write.write('connection failed to ',t.src,', ', msg);
             }
             if (s == 2) {
                 if (t['onconnect']) t.onconnect.sendEvent();

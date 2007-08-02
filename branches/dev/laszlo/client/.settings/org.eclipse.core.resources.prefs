@@ -1,9 +1,14 @@
-#Sat Jul 28 13:44:35 CEST 2007
+#Thu Aug 02 15:37:23 CEST 2007
+=\=\=\=\=\=\=
+<<<<<<<=.mine
+>>>>>>>=.r486
 eclipse.preferences.version=1
+encoding//xmlcrm/newstreaming/_rtmpconnection.lzx=UTF-8
 encoding//xmlcrm/newstreaming/camera.lzx=UTF-8
 encoding//xmlcrm/newstreaming/mediadevice.lzx=UTF-8
 encoding//xmlcrm/newstreaming/mediastream.lzx=UTF-8
 encoding//xmlcrm/newstreaming/microphone.lzx=UTF-8
+encoding//xmlcrm/newstreaming/rtmpconnection.lzx=UTF-8
 encoding//xmlcrm/newstreaming/videoview.lzx=UTF-8
 encoding//xmlcrm/patches/lpp2554/rtmpconnection.lzx=UTF-8
 encoding//xmlcrm/patches/lps403/rtmpconnection.lzx=UTF-8

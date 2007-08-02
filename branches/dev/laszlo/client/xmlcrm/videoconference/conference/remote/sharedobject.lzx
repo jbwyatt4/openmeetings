@@ -15,7 +15,7 @@
 		var t = this;
 		this.so.onSync = function (evtObj){
 			if (t.onStatus)t.onStatus.sendEvent(evtObj);
-			_root.//Debug.write("Shared Object onSync",evtObj,arguments);
+			//_root.Debug.write.write("Shared Object onSync",evtObj,arguments);
 		}
 		
 		this.so.connect(nc);
@@ -31,7 +31,7 @@
         var t = this;
         this.so.onSync = function (evtObj){
             if (t.onStatus)t.onStatus.sendEvent(evtObj);
-            _root.//Debug.write("Shared Object onSync",evtObj,arguments);
+            //_root.Debug.write.write("Shared Object onSync",evtObj,arguments);
         }
     </method>
     
@@ -43,7 +43,7 @@
         var t = this;
         this.so.onSync = function (evtObj){
             if (t.onStatus)t.onStatus.sendEvent(evtObj);
-            _root.//Debug.write("Shared Object onSync",evtObj,arguments);
+            //_root.Debug.write.write("Shared Object onSync",evtObj,arguments);
         }
         
     </method>
@@ -59,7 +59,7 @@
     <method name="getData" args="key">
         if (this.so.data["key"] == undefined){
             return null;
-           _root.//Debug.write("key undefined",key);
+           //_root.Debug.write.write("key undefined",key);
         } else {
             return this.so.data["key"];
         }
