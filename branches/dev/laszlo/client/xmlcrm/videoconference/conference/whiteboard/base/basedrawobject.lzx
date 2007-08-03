@@ -364,7 +364,7 @@
                     if (this.ObjectByName._swfView.frame<this.ObjectByName._swfView.totalframes){
                         this.ObjectByName._swfView.setAttribute('frame',(this.ObjectByName._swfView.frame+1));
                     }
-                } else if (action=="doc_next"){
+                } else if (action=="doc_last"){
                     this.ObjectByName._swfView.setAttribute('frame',(this.ObjectByName._swfView.totalframes));
                 } else if (action=="doc_zoom_minus"){
                     this.ObjectByName.currentzoomFactor-=this.ObjectByName.zoomlevel;       
