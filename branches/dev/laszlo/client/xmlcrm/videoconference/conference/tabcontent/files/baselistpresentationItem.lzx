@@ -7,6 +7,7 @@
     <attribute name="uploadmodul" value="" type="string"/>
     <attribute name="selectable" value="true" type="boolean" />
     <attribute name="isselected" value="false" type="boolean" />
+    <attribute name="isoriginal" value="false" type="boolean" />
     
     <method name="formatURL" args="filename">
         <![CDATA[
@@ -45,15 +46,12 @@
     <handler name="onkeyup" args="k"> 
         //Debug.write("key " + k + " up");
     </handler>
-    <handler name="onmousewheeldelta" args="k">
-        //Debug.write("onmousewheeldelta " + k );
-    </handler>
     
     <method name="selectItem">
-        this.parent.selectItem(this);
+        //this.parent.selectItem(this);
     </method>
     <method name="disselectItem">
-        this.parent.selectItem(this);
+        //this.parent.selectItem(this);
     </method>
     
 </class>

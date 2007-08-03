@@ -57,7 +57,7 @@
                     
                         for (var eg=0;eg<value.presentationObject.thumbs.thumbs.length;eg++){
                             ////Debug.write(value.presentationObject.thumbs.thumbs[eg].filename);
-                            _imageslistdraw.addPresentationThumb(value.presentationObject.thumbs.thumbs[eg].filename,eg);
+                            _imageslistdraw.addPresentationThumb(value.presentationObject.thumbs.thumbs[eg].filename,(eg+1));
                         }
                     
                     }
