@@ -27,11 +27,11 @@
     </method>
     
     <method name="addListpresentationFileOrig" args="originalName,pdfname,swfName">
-        new listpresentationFileOrig(this._table._listcontent,{uploadmodul:this.uploadmodul,originalName:originalName,pdfname:pdfname,swfName:swfName});
+        new listpresentationFileOrig(this._table._listcontent,{isoriginal:true,uploadmodul:this.uploadmodul,originalName:originalName,pdfname:pdfname,swfName:swfName});
     </method>
     
     <method name="addListpresentationFilePDF" args="pdfname,swfName">
-        new listpresentationFilePDF(this._table._listcontent,{uploadmodul:this.uploadmodul,pdfname:pdfname,swfName:swfName});
+        new listpresentationFilePDF(this._table._listcontent,{isoriginal:true,uploadmodul:this.uploadmodul,pdfname:pdfname,swfName:swfName});
     </method>
 	    
     <method name="resetList">

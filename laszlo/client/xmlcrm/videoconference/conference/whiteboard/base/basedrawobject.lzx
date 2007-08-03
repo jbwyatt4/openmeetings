@@ -13,7 +13,7 @@
 	<attribute name="parentPath" value="" type="string" />
 	<attribute name="room" value="" type="string" />
 	<attribute name="domain" value="" type="string" />    
-    <attribute name="slideNumber" value="0" type="number" /> 
+    <attribute name="slideNumber" value="1" type="number" /> 
     
     <attribute name="currentzoomFactor" value="100" type="number" />
     <attribute name="zoomlevel" value="20" type="number" />
@@ -45,6 +45,8 @@
                 
                 this.parent.initwidth = this.width;
                 this.parent.initheight = this.height;
+                
+                this.setAttribute('frame',parent.slideNumber);
                 
                 //only send syncCommand if alterModus is true (meaning that this is the Moderator)
                 //otherwise just send a notification to moderator that this iamge has been loaded
@@ -131,10 +133,29 @@
 <class name="basedrawobject" extends="basedraw">
     
     <!-- it uses some of the attribute's defined in basedrawimage -->
+    <attribute name="newSlideNumber" value="1" type="number" />
 
     <!-- Loads a SWFPresenation to the whiteboard -->
     <method name="loadSWFPresentation" args="url,fileName,moduleName,parentPath,room,domain,slideNumber">
         this.addPresentationToLayer(this,url,'swfpresentationobject'+this.getCounter(),0,0,0,0,true,url,fileName,moduleName,parentPath,room,domain,slideNumber);
+    </method>
+    
+    <method name="checkSWFPresentation" args="url,fileName,moduleName,parentPath,room,domain,slideNumber">
+        //this.addPresentationToLayer(this,url,'swfpresentationobject'+this.getCounter(),0,0,0,0,true,url,fileName,moduleName,parentPath,room,domain,slideNumber);
+        <![CDATA[
+            for (var i=0;i<this.baseactionobjectList.length;i++){
+                if (fileName==this.baseactionobjectList[i][3]){
+                    var whiteBoardName = this.baseactionobjectList[i][this.baseactionobjectList[i].length-1];
+                    //Debug.write("Found File: ",whiteBoardName,this.baseactionobjectList[i]);
+                    //this.baseactionobjectList[i].bringToFront();
+                    this.doShowObjectBounds(whiteBoardName);
+                    this.newSlideNumber = slideNumber;
+                    this.doDocumentAction('setSlideNumber');
+                    return true;
+                }
+            } 
+            return false;
+        ]]>
     </method>
     
 	<!--
@@ -362,6 +383,12 @@
                     this.ObjectByName._swfView.setAttribute('width',newwidth);
                     this.ObjectByName._swfView.setAttribute('height',newheight);
                     this.boundingref.doSetInnerObjectsBounds(newwidth,newheight);
+                } else if (action=="setSlideNumber"){
+                    if (this.newSlideNumber>0 && this.newSlideNumber<=this.ObjectByName._swfView.totalframes){
+                        this.ObjectByName._swfView.setAttribute('frame',this.newSlideNumber);
+                    } else {
+                        Debug.warn("Slide Number out of range of that document TotalFrames: ",this.ObjectByName._swfView.totalframes);
+                    }
                 }
                 this.ObjectByName.slideNumber =  this.ObjectByName._swfView.frame;
                 this.doUpdateDocumentToolBar();

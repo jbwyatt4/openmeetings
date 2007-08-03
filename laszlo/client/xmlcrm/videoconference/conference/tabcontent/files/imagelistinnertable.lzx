@@ -119,7 +119,24 @@
             _drawarea.loadSWFPresentation(url,fileName,moduleName,parentPath,room,domain,slideNumber);
         </method>
         
-
+        <method name="checkSWFPresentation" args="url,fileName,moduleName,parentPath,room,domain,slideNumber">
+            return _drawarea.checkSWFPresentation(url,fileName,moduleName,parentPath,room,domain,slideNumber);
+        </method>
+        
+        <method name="checkForOriginal" args="slideNumber">
+            <![CDATA[
+                var tWhiteBoard = false;
+                for (var i=0;i<this.subviews.length;i++){
+                    if (this.subviews[i].isoriginal){
+                        tWhiteBoard = this.subviews[i].checkSWFPresentation(slideNumber);
+                        if (!tWhiteBoard) {
+                            this.subviews[i].addSWFPresentation(slideNumber);
+                        }
+                    }
+                }
+                Debug.write("tWhiteBoard: ",tWhiteBoard);
+            ]]>
+        </method>
 		 	 
     </view>
 

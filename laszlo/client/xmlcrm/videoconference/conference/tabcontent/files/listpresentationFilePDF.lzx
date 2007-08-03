@@ -14,8 +14,16 @@
     </method>
 
     <handler name="onclick">
-        this.parent.loadSWFPresentation(this.formatURL(this.swfName.filename),this.swfName.filename,this.uploadmodul,canvas.uploadmoduleimgfolder,hib.connectedroom,hib.conferencedomain,0);
+        this.parent.loadSWFPresentation(this.formatURL(this.swfName.filename),this.swfName.filename,this.uploadmodul,canvas.uploadmoduleimgfolder,hib.connectedroom,hib.conferencedomain,1);
     </handler>
+    
+    <method name="checkSWFPresentation" args="slideNumber">
+        return this.parent.checkSWFPresentation(this.formatURL(this.swfName.filename),this.swfName.filename,this.uploadmodul,canvas.uploadmoduleimgfolder,hib.connectedroom,hib.conferencedomain,slideNumber);
+    </method>    
+    
+    <method name="addSWFPresentation" args="slideNumber">
+        this.parent.loadSWFPresentation(this.formatURL(this.swfName.filename),this.swfName.filename,this.uploadmodul,canvas.uploadmoduleimgfolder,hib.connectedroom,hib.conferencedomain,slideNumber);
+    </method>    
     
     <view name="_filesave_icon_pdf" x="150" y="6" resource="_filesave_icon_pdf_rsc">
         <handler name="onclick">

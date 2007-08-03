@@ -10,6 +10,10 @@
         this._thumb.setAttribute('src',this.formatURL(this.thumbname));
     </handler>
     
+    <handler name="onclick">
+        this.parent.checkForOriginal(Number(no));
+    </handler>    
+    
     <image name="_thumb" x="10" y="1"/>
     <text name="_thumbText" x="120" text="$once{ this.parent.no }" fontsize="10"
         width="240" multiline="true"/>
