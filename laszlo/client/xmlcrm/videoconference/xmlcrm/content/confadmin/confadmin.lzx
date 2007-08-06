@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<library>
+
+<class name="confadmin" extends="basecontentview">
+
+    <turnoverlist name="_turnoverlist" width="260" height="600" x="2" y="0" 
+		orderby="configuration_id" step="50" asc="true">
+
+		<handler name="oninit">
+			this.addHeaderItem(264,80);
+			this.addHeaderItem(265,166);
+			this.getAllConf.doCall();
+		</handler>
+		
+		<handler name="oncallnext" >
+			this.getAllConf.doCall();
+		</handler>
+		
+		<handler name="oncallpre" >		
+			this.getAllConf.doCall();
+		</handler>
+		
+		<handler name="onclickedItem" args="obj">
+			Debug.write("onclickedItem",obj,obj.obj);
+			parent._confvalueform.initValueFieldsByObject(obj.obj);
+		</handler>
+		
+		<netremotecallhib name="getAllConf" funcname="configservice.getAllConf" remotecontext="$once{ canvas.thishib }" >      
+			<netparam name="vars1"><method name="getValue"> return canvas.sessionId; </method></netparam>
+			<netparam name="vars2"><method name="getValue"> return parent.parent.start; </method></netparam>
+			<netparam name="vars3"><method name="getValue"> return parent.parent.step; </method></netparam>
+			<netparam name="vars4"><method name="getValue"> return parent.parent.orderby; </method></netparam>
+			<netparam name="vars5"><method name="getValue"> return parent.parent.asc; </method></netparam>
+	    	<handler name="ondata" args="value">
+	    		Debug.write("getAllConf ",value);
+	    		//this.parent.destroy();
+	    		this.parent.initValues(value.records);
+	    		this.parent.renderContent(value.result);
+	    	</handler>
+	    </netremotecallhib>	
+	    
+	    <method name="renderContent" args="records">
+	    	<![CDATA[
+	    	this.clearList();
+	    	for (var i=0;i<records.length;i++){
+	    		new confadminlistitem(this._innerlist._inn._inn,{obj:records[i],configuration_id:records[i].configuration_id,conf_key:records[i].conf_key});
+	    	}
+	    	]]>
+	    </method>
+
+	</turnoverlist>
+    
+    <confvalueform name="_confvalueform" x="280" />
+
+        
+</class>
+
+</library>

@@ -11,5 +11,6 @@
 	<include href="wizard/" />
 	<include href="dashboard/" />
 	<include href="issuetracker/" />
+    <include href="confadmin/" />
 
 </library>
