@@ -113,6 +113,8 @@ public class Organisationmanagement {
 				sresult.setRecords(this.selectMaxFromOrganisations());
 				sresult.setResult(this.getOrganisations(start, max, orderby,asc));
 				return sresult;
+			} else {
+				log.error("[getOrganisations] noPremission");
 			}
 		} catch (HibernateException ex) {
 			log.error("[getOrganisations]" ,ex);
@@ -167,9 +169,9 @@ public class Organisationmanagement {
 			log.error((Long)ll.get(0));
 			return (Long)ll.get(0);				
 		} catch (HibernateException ex) {
-			log.error("[selectMaxFromUsers] "+ex);
+			log.error("[selectMaxFromUsers] ",ex);
 		} catch (Exception ex2) {
-			log.error("[selectMaxFromUsers] "+ex2);
+			log.error("[selectMaxFromUsers] ",ex2);
 		}
 		return null;
 	}	
