@@ -57,9 +57,10 @@ public class ImportInitvalues {
 		
 		Navimanagement.getInstance().addGlobalStructure("admin", 4, 6, false, true, 2, "admin");
 		Navimanagement.getInstance().addMainStructure("useradmin", 1, 125, true, false, 2, "useradmin",4);
-		Navimanagement.getInstance().addMainStructure("groupadmin", 1, 126, true, false, 2, "groupadmin",4);
-		Navimanagement.getInstance().addMainStructure("orgadmin", 1, 127, true, false, 3, "orgadmin",4);
-		Navimanagement.getInstance().addMainStructure("roomadmin", 1, 186, true, false, 3, "roomadmin",4);
+		Navimanagement.getInstance().addMainStructure("groupadmin", 2, 126, true, false, 2, "groupadmin",4);
+		Navimanagement.getInstance().addMainStructure("orgadmin", 3, 127, true, false, 3, "orgadmin",4);
+		Navimanagement.getInstance().addMainStructure("roomadmin", 4, 186, true, false, 3, "roomadmin",4);
+		Navimanagement.getInstance().addMainStructure("confadmin", 5, 263, true, false, 3, "confadmin",4);
 			
 	}
 	
