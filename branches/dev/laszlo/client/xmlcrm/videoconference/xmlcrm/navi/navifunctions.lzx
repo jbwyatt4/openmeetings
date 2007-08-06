@@ -51,6 +51,10 @@ function loadContent(obj,parentobj,preparentobj){
         clearStageContent();
         obj.parent.parent.clearAllSubItemLists();
 		new issuetracker(canvas.main_content._content.inner);
+    } else if (obj.action=="confadmin"){
+        clearStageContent();
+        obj.parent.parent.clearAllSubItemLists();
+		new confadmin(canvas.main_content._content.inner);
     }
 	
 }

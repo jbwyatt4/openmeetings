@@ -1,4 +1,4 @@
-#Thu Aug 02 15:37:23 CEST 2007
+#Mon Aug 06 13:58:33 CEST 2007
 =\=\=\=\=\=\=
 <<<<<<<=.mine
 >>>>>>>=.r486
@@ -131,6 +131,10 @@ encoding//xmlcrm/videoconference/xmlcrm/content/admin/chooseorganisationwindow.l
 encoding//xmlcrm/videoconference/xmlcrm/content/admin/configureusers.lzx=UTF-8
 encoding//xmlcrm/videoconference/xmlcrm/content/admin/configureusersListItem.lzx=UTF-8
 encoding//xmlcrm/videoconference/xmlcrm/content/admin/uservalueform.lzx=UTF-8
+encoding//xmlcrm/videoconference/xmlcrm/content/confadmin/confadmin.lzx=UTF-8
+encoding//xmlcrm/videoconference/xmlcrm/content/confadmin/confadminlistitem.lzx=UTF-8
+encoding//xmlcrm/videoconference/xmlcrm/content/confadmin/confvalueform.lzx=UTF-8
+encoding//xmlcrm/videoconference/xmlcrm/content/confadmin/library.lzx=UTF-8
 encoding//xmlcrm/videoconference/xmlcrm/content/conference/audience.lzx=UTF-8
 encoding//xmlcrm/videoconference/xmlcrm/content/conference/audienceboard.lzx=UTF-8
 encoding//xmlcrm/videoconference/xmlcrm/content/conference/conference.lzx=UTF-8
@@ -140,9 +144,11 @@ encoding//xmlcrm/videoconference/xmlcrm/content/conference/conferencerooms.lzx=U
 encoding//xmlcrm/videoconference/xmlcrm/content/conference/library.lzx=UTF-8
 encoding//xmlcrm/videoconference/xmlcrm/content/conference/roomlistItem.lzx=UTF-8
 encoding//xmlcrm/videoconference/xmlcrm/content/conference/test_whiteboard.lzx=UTF-8
+encoding//xmlcrm/videoconference/xmlcrm/content/contentviews/basecontentlistitem.lzx=UTF-8
 encoding//xmlcrm/videoconference/xmlcrm/content/contentviews/basecontentsaveview.lzx=UTF-8
 encoding//xmlcrm/videoconference/xmlcrm/content/contentviews/basecontentview.lzx=UTF-8
 encoding//xmlcrm/videoconference/xmlcrm/content/contentviews/contentsavewindow.lzx=UTF-8
+encoding//xmlcrm/videoconference/xmlcrm/content/contentviews/library.lzx=UTF-8
 encoding//xmlcrm/videoconference/xmlcrm/content/dashboard/maindashboard.lzx=UTF-8
 encoding//xmlcrm/videoconference/xmlcrm/content/invitation/invitationquickloader.lzx=UTF-8
 encoding//xmlcrm/videoconference/xmlcrm/content/invitation/invitationuserwin.lzx=UTF-8

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<library>
+
+<class name="confadminlistitem" extends="basecontentlistitem">
+	
+	<attribute name="configuration_id" value="0" type="number" />
+	<attribute name="conf_key" value="" type="string" />
+	
+	<turnovertextitem text="$once{ parent.configuration_id }" width="120" />
+	<turnovertextitem text="$once{ parent.conf_key }" width="126" />
+	
+</class>
+
+</library>
