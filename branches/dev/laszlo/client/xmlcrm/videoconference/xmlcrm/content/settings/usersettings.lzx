@@ -90,13 +90,13 @@
     <labeltext labelid="143" width="200" y="40" resize="false" fontstyle="bold" />
     
     <labeltext labelid="132" width="200" y="70" resize="false" x="2"/>
-        <edittext name="username" y="70" x="120" width="270" text="" />
+        <customedittext name="username" y="70" x="120" width="270" text="" />
 
     <labeltext labelid="133" width="200" y="100" resize="false" x="2"/>
-        <edittext name="userpass1" y="100" password="true" x="120" width="270" text="" />
+        <customedittext name="userpass1" y="100" password="true" x="120" width="270" text="" />
         
     <labeltext labelid="134" width="200" y="130" resize="false" x="2"/>
-        <edittext name="userpass2" y="130" password="true" x="120" width="270" text="" />   
+        <customedittext name="userpass2" y="130" password="true" x="120" width="270" text="" />   
     
     <labeltext labelid="135" width="200" y="160" resize="false" x="2"/>
         <combobox name="salutation" width="100" y="160" x="120" editable="false" fontsize="12">
@@ -109,24 +109,24 @@
 	            ]]>
 	        </handler> 
         </combobox> 	
-        <edittext name="firstname" y="160" x="230" width="160" text="" />
+        <customedittext name="firstname" y="160" x="230" width="160" text="" />
         
     <labeltext labelid="136" width="200" y="190" resize="false" x="2"/>
-        <edittext name="lastname" y="190" x="120" width="270" text="" />                
+        <customedittext name="lastname" y="190" x="120" width="270" text="" />                
 
     <labeltext labelid="137" width="200" y="220" resize="false" x="2"/>
-        <edittext name="email" y="220" x="120" width="270" text="" />
+        <customedittext name="email" y="220" x="120" width="270" text="" />
         
     <labeltext labelid="138" width="200" y="250" resize="false" x="2"/>
         <datefield name="age" y="250" x="120" width="270" text="" />
         
     <labeltext labelid="139" width="200" y="280" resize="false" x="2"/>
-        <edittext name="street" y="280" x="120" width="220" text="" />
-        <edittext name="house" y="280" x="350" width="40" text="" />
+        <customedittext name="street" y="280" x="120" width="220" text="" />
+        <customedittext name="house" y="280" x="350" width="40" text="" />
         
     <labeltext labelid="140" width="280" y="310" resize="false" x="2"/>
-        <edittext name="zip" y="310" x="120" width="70" text="" />   
-        <edittext name="town" y="310" x="200" width="190" text="" />                        
+        <customedittext name="zip" y="310" x="120" width="70" text="" />   
+        <customedittext name="town" y="310" x="200" width="190" text="" />                        
          
     <labeltext labelid="141" width="200" y="340" resize="false" x="2"/>  
 		<validtext name="state" width="270" y="340" x="120" fontsize="12" 
@@ -135,7 +135,7 @@
 			
 	 
     <labeltext labelid="142" width="200" y="370" resize="false" x="2"/>
-        <edittext name="adress_comment" y="370" x="120" width="270" 
+        <customedittext name="adress_comment" y="370" x="120" width="270" 
             height="100" text="" multiline="true"/>
        
     <labeltext labelid="161" width="200" y="510" resize="false" x="2"/>     

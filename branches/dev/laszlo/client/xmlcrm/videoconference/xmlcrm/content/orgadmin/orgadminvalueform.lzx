@@ -122,7 +122,7 @@
     <labeltext labelid="170" width="200" y="40" resize="false" fontstyle="bold" />	
 	
     <labeltext labelid="171" width="200" y="70" resize="false" x="2"/>
-        <edittext name="orgname" y="70" x="120" width="270" text="" />	
+        <customedittext name="orgname" y="70" x="120" width="270" text="" />	
 	
     <labeltext labelid="177" width="200" y="100" resize="false" x="2"/>     
     <simplevaluelist name="_userlist" y="100" x="120" width="270" height="200" 

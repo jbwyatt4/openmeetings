@@ -9,7 +9,7 @@
     <labeltext fontstyle="bold" labelid="19" y="22" />
     
     <labeltext labelid="20" y="42" />
-    <edittext name="_question" multiline="true" width="390" x="100" y="42" height="60" />
+    <customedittext name="_question" multiline="true" width="390" x="100" y="42" height="60" />
      
         <netremotecallhib name="getPollTypeList" funcname="dokeosService.getPollTypeList"
             remotecontext="$once{ canvas.thishib }" > 

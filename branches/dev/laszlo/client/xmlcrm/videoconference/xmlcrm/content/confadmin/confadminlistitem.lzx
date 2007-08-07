@@ -6,8 +6,8 @@
 	<attribute name="configuration_id" value="0" type="number" />
 	<attribute name="conf_key" value="" type="string" />
 	
-	<turnovertextitem text="$once{ parent.configuration_id }" width="120" />
-	<turnovertextitem text="$once{ parent.conf_key }" width="126" />
+	<turnovertextitem text="$once{ parent.configuration_id }" width="80" />
+	<turnovertextitem text="$once{ parent.conf_key }" width="166" />
 	
 </class>
 

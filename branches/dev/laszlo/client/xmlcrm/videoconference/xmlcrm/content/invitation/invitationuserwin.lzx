@@ -9,14 +9,14 @@
 	<labeltext y="30" x="10" fontstyle="bold" labelid="222" />
 
 	<labeltext y="80" x="10" labelid="223" />
-		<edittext name="_login" y="80" x="120" width="200" text="myusername" />
+		<customedittext name="_login" y="80" x="120" width="200" text="myusername" />
 
 	<labeltext y="110" x="10" labelid="224" />
-		<edittext name="firstName" y="110" x="120" width="200" text="firstName" />
+		<customedittext name="firstName" y="110" x="120" width="200" text="firstName" />
 	<labeltext y="140" x="10" labelid="225" />
-		<edittext name="lastName" y="140" x="120" width="200" text="lastName" />
+		<customedittext name="lastName" y="140" x="120" width="200" text="lastName" />
 	<labeltext y="170" x="10" labelid="226" />
-		<edittext name="mail" y="170" x="120" width="200" text="mail" />
+		<customedittext name="mail" y="170" x="120" width="200" text="mail" />
 	 
     <labeltext name="n3" labelid="227" width="200" y="200" resize="false" x="10" />     
         <combobox name="languages" width="170" y="200" x="120" editable="false">

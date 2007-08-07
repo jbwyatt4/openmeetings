@@ -5,5 +5,6 @@
 	<include href="labeltext.lzx" />
 	<include href="labeltooltip.lzx" />
     <include href="customedittext.lzx" />
+    <include href="customscrolledittext.lzx" />
 
 </library>
