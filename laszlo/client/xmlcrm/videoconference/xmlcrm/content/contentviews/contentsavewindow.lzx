@@ -11,6 +11,7 @@
     
     <handler name="oninit">
         LzModeManager.makeModal(this);
+        Debug.write("contentsavewindow: ",errorid);
         this.startSave();
     </handler>
     

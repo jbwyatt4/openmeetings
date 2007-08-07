@@ -14,10 +14,10 @@
     <attribute name="labeliderror" value="0" type="number" />
     
     <labeltext name="n1" labelid="109" width="200" y="42" resize="false" x="2"/>
-        <edittext name="username" y="42" x="120" width="170" text="" />
+        <customedittext name="username" y="42" x="120" width="170" text="" />
 
     <labeltext name="n2" labelid="110" width="200" y="72" resize="false" x="2"/>
-        <edittext name="userpass" y="72" password="true" x="120" width="170" text="" />
+        <customedittext name="userpass" y="72" password="true" x="120" width="170" text="" />
 
     <labeltext name="n3" labelid="111" width="200" y="102" resize="false" x="2"/>  
         

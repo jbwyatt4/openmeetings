@@ -38,17 +38,18 @@
 	
 	<method name="initValues" args="rec">
 		<![CDATA[
-		this.records = rec;
-		if (this.records>(this.start+this.step)){
-			this._next.setAttribute('enabled',true);
-		} else {
-			this._next.setAttribute('enabled',false);
-		}
-		if (this.start>0){
-			this._pre.setAttribute('enabled',true);
-		} else {
-			this._pre.setAttribute('enabled',false);
-		}
+            this.records = rec;
+            if (this.records>(this.start+this.step)){
+                this._next.setAttribute('enabled',true);
+            } else {
+                this._next.setAttribute('enabled',false);
+            }
+            if (this.start>0){
+                this._pre.setAttribute('enabled',true);
+            } else {
+                this._pre.setAttribute('enabled',false);
+            }
+            this._records.setText(this.start + ' - ' +(this.start+this.step) + ' ' + canvas.getLabelName(272) + ' ' + this.records);
 		]]>
 	</method>
 	
@@ -69,6 +70,8 @@
 		this._innerlist._inn._inn.destroy();
 		new innerlist(this._innerlist._inn,{name:'_inn'});
 	</method>
+    
+    <labeltext name="_records" x="2" resize="true" />
 	
 	
 	<simplelabelbutton name="_pre" x="$once{ parent.width-48 }" width="22" height="20" 

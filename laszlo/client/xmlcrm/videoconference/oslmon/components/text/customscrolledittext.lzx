@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<library>
+   
+    <!-- removed as the multiline edit-text does not work in lps4 
+<include href="incubator/scrolledittext.lzx" />
+<include href="lz/vscrollbar.lzx"/>
+<include href="incubator/newvscrollbar.lzx"/>
+<include href="incubator/newvscrollbar_resources.lzx"/>
+        -->
+    
+<class name="customscrolledittext" extends="edittext" fontsize="12"
+    multiline="true">
+
+    <attribute name="labelid" type="number" setter="setLabelId(labelid)" />
+    <method name="setLabelId" args="_labelid" >
+        this.labelid = _labelid;
+        this.setText(canvas.getLabelName(this.labelid));
+    </method>
+    
+</class>
+
+</library>

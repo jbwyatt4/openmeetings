@@ -1,4 +1,4 @@
-#Mon Aug 06 13:58:33 CEST 2007
+#Tue Aug 07 11:30:49 CEST 2007
 =\=\=\=\=\=\=
 <<<<<<<=.mine
 >>>>>>>=.r486
@@ -92,6 +92,7 @@ encoding//xmlcrm/videoconference/main.lzx=UTF-8
 encoding//xmlcrm/videoconference/maindebug.lzx=UTF-8
 encoding//xmlcrm/videoconference/oslmon/components/button/basechooseseicon.lzx=UTF-8
 encoding//xmlcrm/videoconference/oslmon/components/button/simplelabelbutton.lzx=UTF-8
+encoding//xmlcrm/videoconference/oslmon/components/calendar/datefield.lzx=UTF-8
 encoding//xmlcrm/videoconference/oslmon/components/clickbox/clickbox.lzx=UTF-8
 encoding//xmlcrm/videoconference/oslmon/components/explorer/explorerbox.lzx=UTF-8
 encoding//xmlcrm/videoconference/oslmon/components/explorer/library.lzx=UTF-8
@@ -101,6 +102,7 @@ encoding//xmlcrm/videoconference/oslmon/components/simplevaluelist/library.lzx=U
 encoding//xmlcrm/videoconference/oslmon/components/simplevaluelist/simplevaluelist.lzx=UTF-8
 encoding//xmlcrm/videoconference/oslmon/components/tablelistItem.lzx=UTF-8
 encoding//xmlcrm/videoconference/oslmon/components/text/customedittext.lzx=UTF-8
+encoding//xmlcrm/videoconference/oslmon/components/text/customscrolledittext.lzx=UTF-8
 encoding//xmlcrm/videoconference/oslmon/components/text/labeltext.lzx=UTF-8
 encoding//xmlcrm/videoconference/oslmon/components/text/labeltooltip.lzx=UTF-8
 encoding//xmlcrm/videoconference/oslmon/components/text/library.lzx=UTF-8
@@ -169,6 +171,7 @@ encoding//xmlcrm/videoconference/xmlcrm/content/roomadmin/roomconfiguremod.lzx=U
 encoding//xmlcrm/videoconference/xmlcrm/content/roomadmin/roomvalueform.lzx=UTF-8
 encoding//xmlcrm/videoconference/xmlcrm/content/roomadmin/roomvalueformmod.lzx=UTF-8
 encoding//xmlcrm/videoconference/xmlcrm/content/settings/usersettings.lzx=UTF-8
+encoding//xmlcrm/videoconference/xmlcrm/content/wizard/previousnext.lzx=UTF-8
 encoding//xmlcrm/videoconference/xmlcrm/hibernate/netremotecallhib.lzx=UTF-8
 encoding//xmlcrm/videoconference/xmlcrm/hibernate/rtmphib.lzx=UTF-8
 encoding//xmlcrm/videoconference/xmlcrm/navi/mainnavi.lzx=UTF-8

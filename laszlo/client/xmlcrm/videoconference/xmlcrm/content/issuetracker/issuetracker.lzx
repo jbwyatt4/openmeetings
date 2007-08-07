@@ -231,7 +231,7 @@
 			</netremotecallhib> 
 		
 		<labeltext name="title" y="80" text="Titel" />
-			<edittext name="title_t" y="80" x="120" width="370" text="" /> 
+			<customedittext name="title_t" y="80" x="120" width="370" text="" /> 
 		
 		<labeltext name="content" y="110" text="Content" />
 			<richtexteditor name="content_t" y="110" x="120" width="370"  

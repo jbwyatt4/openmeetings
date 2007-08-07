@@ -23,7 +23,7 @@
 
 	<attribute name="text" value="" type="string" />
 
-	<edittext name="_text" width="$once{ parent.width-20 }" align="left" text="${ parent.text }" />
+	<customedittext name="_text" width="$once{ parent.width-20 }" align="left" text="${ parent.text }" />
 
 	<view resource="date_icon_rsc" align="right" onmouseover="" onmouseout="">
 		<handler name="onclick">

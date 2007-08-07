@@ -7,24 +7,24 @@
 	<text y="30" x="10" fontsize="10" fontstyle="bold" text="Choose login" />
 
 	<text y="80" x="10" fontsize="10" text="name" />
-		<edittext name="_login" y="80" x="120" width="200" text="myusername" />
+		<customedittext name="_login" y="80" x="120" width="200" text="myusername" />
     
 	<text y="100" x="10" fontsize="10" text="user_id" />
-		<edittext name="user_id" y="100" x="120" width="200" text="0" />
+		<customedittext name="user_id" y="100" x="120" width="200" text="0" />
 	<text y="120" x="10" fontsize="10" text="firstName" />
-		<edittext name="firstName" y="120" x="120" width="200" text="firstName" />
+		<customedittext name="firstName" y="120" x="120" width="200" text="firstName" />
 	<text y="140" x="10" fontsize="10" text="lastName" />
-		<edittext name="lastName" y="140" x="120" width="200" text="lastName" />
+		<customedittext name="lastName" y="140" x="120" width="200" text="lastName" />
 	<text y="160" x="10" fontsize="10" text="mail" />
-		<edittext name="mail" y="160" x="120" width="200" text="mail" />
+		<customedittext name="mail" y="160" x="120" width="200" text="mail" />
 	<text y="180" x="10" fontsize="10" text="lastLogin" />
-		<edittext name="lastLogin" y="180" x="120" width="200" text="lastLogin" />
+		<customedittext name="lastLogin" y="180" x="120" width="200" text="lastLogin" />
 	<text y="200" x="10" fontsize="10" text="official_code" />
-		<edittext name="official_code" y="200" x="120" width="200" text="official_code" />
+		<customedittext name="official_code" y="200" x="120" width="200" text="official_code" />
 	<text y="220" x="10" fontsize="10" text="picture_uri" />
-		<edittext name="picture_uri" y="220" x="120" width="200" text="picture_uri" />
+		<customedittext name="picture_uri" y="220" x="120" width="200" text="picture_uri" />
 	<text y="240" x="10" fontsize="10" text="language" />
-		<edittext name="language" y="240" x="120" width="200" text="language" />
+		<customedittext name="language" y="240" x="120" width="200" text="language" />
 
 	<text y="314" x="10" fontsize="10" text="roomname" />
 		<combobox name="_comobox" fontsize="10" x="120" width="200" y="314" editable="false" >

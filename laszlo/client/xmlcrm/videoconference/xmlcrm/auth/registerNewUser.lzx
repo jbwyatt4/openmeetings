@@ -18,23 +18,23 @@
     </handler>
     
     <labeltext labelid="114" width="200" y="42" resize="false" x="2"/>
-        <edittext name="username" y="42" x="120" width="270" text="" />
+        <customedittext name="username" y="42" x="120" width="270" text="" />
 
     <labeltext labelid="115" width="200" y="72" resize="false" x="2"/>
-        <edittext name="userpass1" y="72" password="true" x="120" width="270" text="" />
+        <customedittext name="userpass1" y="72" password="true" x="120" width="270" text="" />
         
     <labeltext labelid="116" width="200" y="102" resize="false" x="2"/>
-        <edittext name="userpass2" y="102" password="true" x="120" width="270" text="" />
+        <customedittext name="userpass2" y="102" password="true" x="120" width="270" text="" />
         
     
     <labeltext labelid="117" width="200" y="132" resize="false" x="2"/>
-        <edittext name="firstname" y="132" x="120" width="270" text="" />
+        <customedittext name="firstname" y="132" x="120" width="270" text="" />
         
     <labeltext labelid="118" width="200" y="162" resize="false" x="2"/>
-        <edittext name="lastname" y="162" x="120" width="270" text="" />                
+        <customedittext name="lastname" y="162" x="120" width="270" text="" />                
 
     <labeltext labelid="119" width="200" y="192" resize="false" x="2"/>
-        <edittext name="email" y="192" x="120" width="270" text="" />
+        <customedittext name="email" y="192" x="120" width="270" text="" />
          
     <labeltext labelid="120" width="200" y="222" resize="false" x="2"/>  
 

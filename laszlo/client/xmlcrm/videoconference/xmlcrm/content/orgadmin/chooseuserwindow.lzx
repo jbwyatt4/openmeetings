@@ -39,7 +39,7 @@
 	</netremotecallhib>	
 	
 	<labeltext labelid="181" width="200" y="24" resize="false" x="2"/>    	
-		<edittext name="searchstring" y="24" x="120" width="270" text="" />	
+		<customedittext name="searchstring" y="24" x="120" width="270" text="" />	
 	
 	<simplelabelbutton labelid="182" x="290" y="54" width="100">
 		<handler name="onclick">
