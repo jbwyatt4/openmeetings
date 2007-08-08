@@ -9,6 +9,29 @@ import java.lang.reflect.Modifier;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+/**
+ * Class to cast any LinkedHashMap to its JavaBean repraesentant
+ * the idiom is that the attribute name in the LinkedHashMap is the same as in the JavaBean/Pojo
+ * 
+ * if the attribute's of the Bean are private (meaning it IS a Bean) then it will use the getters and setters
+ * if the attribute's are public it will assign directly
+ * if the attribute is final it will show an error in log
+ * 
+ * if the HashMap contains an null for a primitive attribute it will not assign that value
+ * 
+ * if the HashMap contains subelments nested as LinkedHashMap's it will add these Sub-Elements to the Main-Object
+ * for an exmaple see:
+ * http://openmeetings.googlecode.com/svn/branches/dev/xmlcrm/java/src/test/org/xmlcrm/utils/TestReflectionApi.java
+ * 
+ * TODO:
+ * If the Sub Item is not an Object but a Set (meaning a List of Object) this List must be 
+ * cast to Objects of the Bean too
+ * 
+ * @author swagner
+ * 
+ *
+ */
+
 public class CastHashMapToObject {
 	
 	private static final Log log = LogFactory.getLog(CastHashMapToObject.class);
@@ -27,10 +50,10 @@ public class CastHashMapToObject {
 	public Object castByGivenObject(LinkedHashMap values, Class targetClass){
 		try {
 			Object returnObject = targetClass.newInstance();
-			log.error("returnObject");
-			log.error(returnObject);
-			log.error( "class " + targetClass.getName() ); 
-			log.error (" number of declared fields: " + targetClass.getDeclaredFields().length );
+//			log.error("returnObject");
+//			log.error(returnObject);
+//			log.error( "class " + targetClass.getName() ); 
+//			log.error (" number of declared fields: " + targetClass.getDeclaredFields().length );
 			LinkedHashMap<String,LinkedHashMap<String,Object>> structuredMethodMap = StructureMethodList.getInstance().parseClassToMethodList(targetClass);
 			
 			for ( Field anyField : targetClass.getDeclaredFields() )  { 
@@ -86,19 +109,20 @@ public class CastHashMapToObject {
 					}
 					
 				} else {
+					
+					//This will cast nested Object to the current Object
+					//it does not matter how deep it is nested
 					Object valueOfHashMap = values.get(fieldName);
 					String valueTypeOfHashMap = valueOfHashMap.getClass().getName();
 					if (this.compareTypeNameToAllowedListTypes(valueTypeOfHashMap)) {
-					
-						log.error("is allowed List Type "+ fieldType.getName());
-	
+						
 						//Get value from  set 
 						Object t = this.castByGivenObject((LinkedHashMap)valueOfHashMap, fieldType);
 						int mod = anyField.getModifiers();
 						
 						if (Modifier.isPrivate(mod) && !Modifier.isFinal(mod)){
 							
-							log.info("is private so get setter method "+fieldName);
+							//log.info("is private so get setter method "+fieldName);
 							LinkedHashMap<String,Object> methodSummery = structuredMethodMap.get(fieldName);
 							
 							if (methodSummery!=null) {
@@ -109,7 +133,7 @@ public class CastHashMapToObject {
 									Method m = targetClass.getMethod(methodSetterName, paramTypes);
 									
 									Class paramType = paramTypes[0];
-									log.error("paramType: "+paramType.getName());
+									//log.error("paramType: "+paramType.getName());
 									if (paramType.isPrimitive() && t==null){
 										//cannot cast null to primitve
 									} else {
@@ -133,6 +157,7 @@ public class CastHashMapToObject {
 						} else {
 							log.error("Unhandled Modifier Type: " + mod);
 						}
+						
 					}
 				}
 			} 
@@ -160,7 +185,7 @@ public class CastHashMapToObject {
 	
 	private boolean compareTypeNameToAllowedListTypes(String fieldTypeName) {
 		try {
-			log.error("compareTypeNameToAllowedListTypes"+ fieldTypeName);
+			//log.error("compareTypeNameToAllowedListTypes"+ fieldTypeName);
 			for (Iterator it = CastBasicTypes.getAllowedListTypes().iterator();it.hasNext();) {
 				if (fieldTypeName.equals(it.next())) return true;
 			}
