@@ -17,6 +17,7 @@ import org.hibernate.criterion.Restrictions;
 
 import org.xmlcrm.app.data.basic.AuthLevelmanagement;
 import org.xmlcrm.app.data.beans.basic.SearchResult;
+import org.xmlcrm.app.data.user.Usermanagement;
 import org.xmlcrm.app.hibernate.beans.basic.Configuration;
 import org.xmlcrm.app.hibernate.utils.HibernateUtil;
 import org.xmlcrm.utils.math.Calender;
@@ -166,10 +167,9 @@ public class Configurationmanagement {
 			configuration.setConf_key(CONF_KEY);
 			configuration.setConf_value(CONF_VALUE);
 			configuration.setStarttime(new Date());
-			configuration.setUpdatetime(new Date());
 			configuration.setDeleted("false");
 			configuration.setComment(comment);
-			if (USER_ID!=null) configuration.setUser_id(new Long(USER_ID));
+			if (USER_ID!=null) configuration.setUsers(Usermanagement.getInstance().getUser(new Long(USER_ID)));
 
 			try {
 				Object idf = HibernateUtil.createSession();
@@ -197,7 +197,7 @@ public class Configurationmanagement {
 		String res = "Update Configuration";
 		if (AuthLevelmanagement.getInstance().checkAdminLevel(USER_LEVEL)) {
 			try {
-				
+
 				CastHashMapToObject.getInstance().castByGivenObject(values, Configuration.class);
 				
 //				Object idf = HibernateUtil.createSession();

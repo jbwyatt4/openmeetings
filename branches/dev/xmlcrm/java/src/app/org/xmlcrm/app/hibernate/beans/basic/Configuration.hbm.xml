@@ -73,12 +73,15 @@
             column="deleted"
         />
 
-        <property
-            name="user_id"
-            type="long"
+        <many-to-one
+            name="users"
+            class="org.xmlcrm.app.hibernate.beans.user.Users"
+            cascade="none"
+            outer-join="true"
             update="true"
             insert="true"
             column="user_id"
+            not-null="false"
         />
 
         <!--
