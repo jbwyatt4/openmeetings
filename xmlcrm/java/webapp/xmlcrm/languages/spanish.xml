@@ -724,96 +724,96 @@
 <value>Escritorio de:</value>
 </string>	
 <string id="242" name="whiteboard_tab_paint">
-<value>Paint</value>
+<value>Dibujar</value>
 </string>	
 <string id="243" name="whiteboard_tab_document">
-<value>Document</value>
+<value>Documento</value>
 </string>		
 <string id="244" name="tabbar_chaticon">
 <value>Chat</value>
 </string>	
 <string id="245" name="tabbar_filesicon">
-<value>Files</value>
+<value>Archivos</value>
 </string>	
 <string id="246" name="tabbar_participantsicon">
-<value>Members</value>
+<value>Miembros</value>
 </string>	
 <string id="247" name="swfpresentation_listsaveorig">
-<value>Download original document</value>
+<value>Descargar el documento original</value>
 </string>	
 <string id="248" name="swfpresentation_listsavepdf">
-<value>Download pdf document</value>
+<value>Descargar el documento en pdf</value>
 </string>	
 <string id="249" name="swfpresentation_listloadswf">
-<value>Load Presentation to whiteboard</value>
+<value>Subir una presentación al tablero</value>
 </string>	
 <string id="250" name="navimain_config">
-<value>Configuration</value>
+<value>Configuración</value>
 </string>	
 <string id="251" name="whiteboard_boundingbox_drag">
-<value>Drag this Object</value>
+<value>Arrastrar este objeto</value>
 </string>		
 <string id="252" name="whiteboard_boundingbox_resize">
-<value>Resize this Object</value>
+<value>Ajustar el tamaño del objeto</value>
 </string>
 <string id="253" name="whiteboard_documenttoolbar_zoom">
 <value>%</value>
 </string>	
 <string id="254" name="whiteboard_documenttoolbar_slide">
-<value>of</value>
+<value>de</value>
 </string>		
 <string id="255" name="whiteboard_documenttoolbar_firstslide">
-<value>Go to first Page</value>
+<value>Ir a la primera página</value>
 </string>		
 <string id="256" name="whiteboard_documenttoolbar_preslide">
-<value>Go to previous Page</value>
+<value>Ir a la página previa</value>
 </string>	
 <string id="257" name="whiteboard_documenttoolbar_nextslide">
-<value>Go to next Page</value>
+<value>Ir a la página siguiente</value>
 </string>		
 <string id="258" name="whiteboard_documenttoolbar_lastslide">
-<value>Go to last Page</value>
+<value>Ir a la última página</value>
 </string>	
 <string id="259" name="whiteboard_documenttoolbar_zoomminus">
-<value>Zoom --</value>
+<value>Disminuir Zoom</value>
 </string>
 <string id="260" name="whiteboard_documenttoolbar_zoomplus">
-<value>Zoom ++</value>
+<value>Aumentar Zoom</value>
 </string>	
 <string id="261" name="salutation_mr">
-<value>Mr.</value>
+<value>Sr.</value>
 </string>
 <string id="262" name="salutation_miss">
-<value>Ms.</value>
+<value>Sra.</value>
 </string>		
 <string id="263" name="navimain_confadmin">
-<value>Configuration</value>
+<value>Configuración</value>
 </string>
 <string id="264" name="conftable_headerId">
 <value>ID</value>
 </string>
 <string id="265" name="conftable_headerkey">
-<value>Key</value>
+<value>Llave</value>
 </string>	
 <string id="266" name="confadminform_header">
-<value>Configuration</value>
+<value>Configuración</value>
 </string>
 <string id="267" name="confadminform_labelkey">
-<value>Key</value>
+<value>Llave</value>
 </string>	
 <string id="268" name="confadminform_labelupdated">
-<value>last update</value>
+<value>última actualización</value>
 </string>
 <string id="269" name="confadminform_labelupdatedby">
-<value>updatedby</value>
+<value>actualizado por</value>
 </string>
 <string id="270" name="confadminform_labelcomment">
-<value>comment</value>
+<value>comentar</value>
 </string>	
 <string id="271" name="confadminform_labelkey">
-<value>key</value>
+<value>llave</value>
 </string>
 <string id="272" name="turnoverlist_maxresults">
-<value>of</value>
+<value>de</value>
 </string>		
 </language>
