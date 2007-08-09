@@ -1,0 +1,819 @@
+<?xml version="1.0" encoding="utf-8"?>
+<language>
+  <string id="1" name="conference">
+    <value>회의</value>
+  </string>
+  <string id="2" name="meeting">
+    <value>모임</value>
+  </string>
+  <string id="3" name="classroom">
+    <value>교실</value>
+  </string>
+  <string id="4" name="settings">
+    <value>세딩</value>
+  </string>
+  <string id="5" name="benutzer">
+    <value>유저</value>
+  </string>
+  <string id="6" name="admin">
+    <value>관리</value>
+  </string>
+  <string id="7" name="stop">
+    <value>정지</value>
+  </string>
+  <string id="8" name="record">
+    <value>기록</value>
+  </string>
+  <string id="9" name="nofile">
+    <value>유효한 파일 없음</value>
+  </string>
+  <string id="10" name="recordbyteacher">
+    <value>교사 기록</value>
+  </string>
+  <string id="11" name="connectedusers">
+    <value>연결된 유저:</value>
+  </string>
+  <string id="12" name="startconf">
+    <value>회의 시작</value>
+  </string>
+  <string id="13" name="myname">
+    <value>본인 이름</value>
+  </string>
+  <string id="14" name="videoconference">
+    <value>비데오 회의</value>
+  </string>
+  <string id="15" name="import">
+    <value>가지고온 기획안 </value>
+  </string>
+  <string id="16" name="refreshfiles">
+    <value>새로운 목록</value>
+  </string>
+  <string id="17" name="tomainfile">
+    <value>메인파일에</value>
+  </string>
+  <string id="18" name="newpoll">
+    <value>새 선거</value>
+  </string>
+  <string id="19" name="newpollheader">
+    <value>새 선거의장</value>
+  </string>
+  <string id="20" name="question">
+    <value>질문:</value>
+  </string>
+  <string id="21" name="polltype">
+    <value>선거 종류:</value>
+  </string>
+  <string id="22" name="create">
+    <value>창안하다</value>
+  </string>
+  <string id="23" name="infomessage">
+    <value>Info: Each connected user receives a message with the new poll.</value>
+  </string>
+  <string id="24" name="creatpoll">
+    <value>선거를 만드셨습니다.</value>
+  </string>
+  <string id="25" name="cancel">
+    <value>무효</value>
+  </string>
+  <string id="26" name="yesno">
+    <value>네/아니오</value>
+  </string>
+  <string id="27" name="numeric">
+    <value>숫자 1-10</value>
+  </string>
+  <string id="28" name="poll">
+    <value>투표</value>
+  </string>
+  <string id="29" name="moderation">
+    <value>질문을 만들기 위해서 의장이 되어야합니다.</value>
+  </string>
+  <string id="30" name="vote">
+    <value>당신의 투표가 등록 되었습니다.</value>
+  </string>
+  <string id="31" name="alreadyvoted">
+    <value>이번 선거에 벌써 투표하셨습니다.</value>
+  </string>
+  <string id="32" name="voting">
+    <value>투표 !</value>
+  </string>
+  <string id="33" name="answer">
+    <value>당신의 응답:</value>
+  </string>
+  <string id="34" name="yes">
+    <value>네</value>
+  </string>
+  <string id="35" name="no">
+    <value>아니오</value>
+  </string>
+  <string id="36" name="questionwant">
+    <value>will wissen:</value>
+  </string>
+  <string id="37" name="pollresults">
+    <value>선거 결과:</value>
+  </string>
+  <string id="38" name="question">
+    <value>질문:</value>
+  </string>
+  <string id="39" name="results">
+    <value>결과:</value>
+  </string>
+  <string id="40" name="answers">
+    <value>대답:</value>
+  </string>
+  <string id="41" name="nopoll">
+    <value>시작된 선거가 없습니다.</value>
+  </string>
+  <string id="42" name="votings">
+    <value>선거!</value>
+  </string>
+  <string id="43" name="meeting">
+    <value>미딩 (최고 4 자리까지)</value>
+  </string>
+  <string id="44" name="conference">
+    <value>회의 (최고 50 자리까지)</value>
+  </string>
+  <string id="45" name="type">
+    <value>종류</value>
+  </string>
+  <string id="46" name="remainingseats">
+    <value>다른 자리</value>
+  </string>
+  <string id="47" name="alreadychosen">
+    <value>이미 선택 하셨습니다.</value>
+  </string>
+  <string id="48" name="enter">
+    <value>들어가다.</value>
+  </string>
+  <string id="49" name="modleave">
+    <value>의장이 미딩에서 나가셨습니다</value>
+  </string>
+  <string id="50" name="systemmessage">
+    <value>시스템 설명</value>
+  </string>
+  <string id="51" name="chossedevice">
+    <value>디바이스를 선택하십시요.</value>
+  </string>
+  <string id="52" name="choosecam">
+    <value>웹카메라를 선택해 주십시요:</value>
+  </string>
+  <string id="53" name="choosemic">
+    <value>마이크를 선택해 주십시요:</value>
+  </string>
+  <string id="54" name="ok">
+    <value>네</value>
+  </string>
+  <string id="55" name="cancel2">
+    <value>무효</value>
+  </string>
+  <string id="56" name="reconeectneeded">
+    <value>다시 연결이 필요했습니다.</value>
+  </string>
+  <string id="57" name="editsetup">
+    <value>셋업 편집</value>
+  </string>
+  <string id="58" name="course">
+    <value>진행:</value>
+  </string>
+  <string id="59" name="language">
+    <value>언어:</value>
+  </string>
+  <string id="60" name="ok2">
+    <value>네</value>
+  </string>
+  <string id="61" name="cancel3">
+    <value>무효</value>
+  </string>
+  <string id="62" name="clearwhiteboard">
+    <value>칠판 지우기</value>
+  </string>
+  <string id="63" name="clearwhiteboardquestion">
+    <value>새로운 그림을 넣기전에 칠판을 지우길 원하십니까?</value>
+  </string>
+  <string id="64" name="dontaskagain">
+    <value>다시 질문을 해주시마십시요</value>
+  </string>
+  <string id="65" name="no">
+    <value>아니오</value>
+  </string>
+  <string id="66" name="editsetup2">
+    <value>셋업 편집2</value>
+  </string>
+  <string id="67" name="needconfirmationwhiteboard">
+    <value>칠판지우시전 확인 요청.</value>
+  </string>
+  <string id="68" name="userinfo">
+    <value>유저 정보 </value>
+  </string>
+  <string id="69" name="cleardrawarea">
+    <value>그리는 자리 지움</value>
+  </string>
+  <string id="70" name="undo">
+    <value>원래대로 돌려놓다.</value>
+  </string>
+  <string id="71" name="redo">
+    <value>다시하다</value>
+  </string>
+  <string id="72" name="selectobject">
+    <value>물건을 선택해주십시요.</value>
+  </string>
+  <string id="73" name="text">
+    <value>원문</value>
+  </string>
+  <string id="74" name="paint">
+    <value>페인트</value>
+  </string>
+  <string id="75" name="drawline">
+    <value>선 긋기</value>
+  </string>
+  <string id="76" name="drawu">
+    <value>밑줄 긋기</value>
+  </string>
+  <string id="77" name="rect">
+    <value>직사각형</value>
+  </string>
+  <string id="78" name="ellipse">
+    <value>타원형</value>
+  </string>
+  <string id="79" name="arrow">
+    <value>화살표</value>
+  </string>
+  <string id="80" name="deletechosen">
+    <value>선택한 항목 삭제</value>
+  </string>
+  <string id="81" name="appliymod">
+    <value>알맞게 신청하십시요.</value>
+  </string>
+  <string id="82" name="apply">
+    <value>신청하다.</value>
+  </string>
+  <string id="83" name="cancel">
+    <value>삭제</value>
+  </string>
+  <string id="84" name="mod">
+    <value>사회자가 돼다</value>
+  </string>
+  <string id="85" name="close">
+    <value>닫다</value>
+  </string>
+  <string id="86" name="italic">
+    <value>italic</value>
+  </string>
+  <string id="87" name="bold">
+    <value>굵은 체</value>
+  </string>
+  <string id="88" name="waiting">
+    <value>기다림</value>
+  </string>
+  <string id="89" name="applyMessage">
+    <value>유저가 사회자 신청을 원합니다:</value>
+  </string>
+  <string id="90" name="accept">
+    <value>받아들이다.</value>
+  </string>
+  <string id="91" name="reject">
+    <value>거부하다.</value>
+  </string>
+  <string id="92" name="cancel">
+    <value>삭제</value>
+  </string>
+  <string id="93" name="sendmodrequestmessage">
+    <value>밑의 유져들에가 요청을 보냄</value>
+  </string>
+  <string id="94" name="accept">
+    <value>확임이 됩습니다.</value>
+  </string>
+  <string id="95" name="reject">
+    <value>거부가됩습니다.</value>
+  </string>
+  <string id="96" name="changemod">
+    <value>사회자로 바끰 </value>
+  </string>
+  <string id="97" name="nonmoderrormessage">
+    <value>You are not moderating this course!</value>
+  </string>
+  <string id="98" name="moderator">
+    <value>사회자:</value>
+  </string>
+  <string id="99" name="roomfullmessage">
+    <value>이방 정원은 꽉 찾습니다. 죄송합니다.  다음에 오십시요.</value>
+  </string>
+  <string id="100" name="elllipse">
+    <value>타원</value>
+  </string>
+  <string id="101" name="close">
+    <value>닫다</value>
+  </string>
+  <string id="102" name="AuthError">
+    <value>데이다 오류 입력</value>
+  </string>
+  <string id="103" name="min4username">
+    <value>유저 이름은 최소 4 문자가 돼어야합니다.</value>
+  </string>
+  <string id="104" name="min4pass">
+    <value>유저 비밀번호는 최소 4 문자가 돼여야합니다.</value>
+  </string>
+  <string id="105" name="usernametaken">
+    <value>똑같은 유저이름이 존재합니다.</value>
+  </string>
+  <string id="106" name="emailtaken">
+    <value>똑같은 이메일 주소가 이미 등록돼어 있습니다.</value>
+  </string>
+  <string id="107" name="emailtaken">
+    <value>시스템 오류가 생겼습니다.  시스템 관리자에 연락주십시요.</value>
+  </string>
+  <string id="108" name="Authlogin">
+    <value>로긴</value>
+  </string>
+  <string id="109" name="Authuser">
+    <value>유저:</value>
+  </string>
+  <string id="110" name="Authpass">
+    <value>패스:</value>
+  </string>
+  <string id="111" name="Authlang">
+    <value>언어</value>
+  </string>
+  <string id="112" name="Authreg">
+    <value>로긴</value>
+  </string>
+  <string id="113" name="regformhead">
+    <value>등록</value>
+  </string>
+  <string id="114" name="regformuser">
+    <value>유저:</value>
+  </string>
+  <string id="115" name="regformpass">
+    <value>패스:</value>
+  </string>
+  <string id="116" name="regformretype">
+    <value>다시타임:</value>
+  </string>
+  <string id="117" name="regformfirstname">
+    <value>이름:</value>
+  </string>
+  <string id="118" name="regformlastname">
+    <value>성:</value>
+  </string>
+  <string id="119" name="regformmail">
+    <value>주소:</value>
+  </string>
+  <string id="120" name="regformstate">
+    <value>나라:</value>
+  </string>
+  <string id="121" name="regformbtn1">
+    <value>등록</value>
+  </string>
+  <string id="122" name="regformbtn2">
+    <value>취소</value>
+  </string>
+  <string id="123" name="Authbtn2">
+    <value>등록</value>
+  </string>
+  <string id="124" name="dashboard">
+    <value>집</value>
+  </string>
+  <string id="125" name="useradmin">
+    <value>유저</value>
+  </string>
+  <string id="126" name="groupadmin">
+    <value>다체</value>
+  </string>
+  <string id="127" name="orgadmin">
+    <value>조직</value>
+  </string>
+  <string id="128" name="headconf">
+    <value>회의실</value>
+  </string>
+  <string id="129" name="conf_pub">
+    <value>공공장소</value>
+  </string>
+  <string id="130" name="head_org">
+    <value>조직</value>
+  </string>
+  <string id="131" name="btn_enterroom">
+    <value>들어가다</value>
+  </string>
+  <string id="132" name="useralterself_login">
+    <value>로긴</value>
+  </string>
+  <string id="133" name="useralterself_pass">
+    <value>비밀번호</value>
+  </string>
+  <string id="134" name="useralterself_passretype">
+    <value>다시 타이프 치다.</value>
+  </string>
+  <string id="135" name="useralterself_firstname">
+    <value>이름</value>
+  </string>
+  <string id="136" name="useralterself_lastname">
+    <value>성</value>
+  </string>
+  <string id="137" name="useralterself_email">
+    <value>주소</value>
+  </string>
+  <string id="138" name="useralterself_birth">
+    <value>생일</value>
+  </string>
+  <string id="139" name="useralterself_streetno">
+    <value>길이름/번호</value>
+  </string>
+  <string id="140" name="useralterself_town">
+    <value>우편번호/동네</value>
+  </string>
+  <string id="141" name="useralterself_state">
+    <value>나라</value>
+  </string>
+  <string id="142" name="useralterself_adresscomment">
+    <value>주소 인호</value>
+  </string>
+  <string id="143" name="useralterself_header">
+    <value>유져데이다</value>
+  </string>
+  <string id="144" name="savemenubar_savelabel">
+    <value>저장</value>
+  </string>
+  <string id="145" name="savemenubar_savelabel">
+    <value>저장</value>
+  </string>
+  <string id="146" name="admin_userlist_user_id">
+    <value>USER-ID</value>
+  </string>
+  <string id="147" name="admin_userlist_login">
+    <value>로긴</value>
+  </string>
+  <string id="148" name="admin_userlist_firstnam">
+    <value>이름</value>
+  </string>
+  <string id="149" name="admin_userlist_lastname">
+    <value>성</value>
+  </string>
+  <string id="150" name="turnoverlist_next">
+    <value>다음으로 보여주다</value>
+  </string>
+  <string id="151" name="turnoverlist_pre">
+    <value>먼저 보여줌.</value>
+  </string>
+  <string id="152" name="savecontent_confirm">
+    <value>기록을 지우다.</value>
+  </string>
+  <string id="153" name="savecontent_confirm_cancel_btn">
+    <value>삭제</value>
+  </string>
+  <string id="154" name="savecontent_confirm_confirm_btn">
+    <value>삭제</value>
+  </string>
+  <string id="155" name="savemenubar_addlabel">
+    <value>새로운 기록</value>
+  </string>
+  <string id="156" name="savemenubar_reloadlabel">
+    <value>기록을 다시 재생하다</value>
+  </string>
+  <string id="157" name="savemenubar_deletelabel">
+    <value>기록을 지우다</value>
+  </string>
+  <string id="158" name="useralter_admin_status">
+    <value>상태</value>
+  </string>
+  <string id="159" name="useralter_admin_statusItem">
+    <value>무력하게 하다</value>
+  </string>
+  <string id="160" name="useralter_admin_statusItem">
+    <value>권한을 주다</value>
+  </string>
+  <string id="161" name="useralter_admin_organisation">
+    <value>조직</value>
+  </string>
+  <string id="162" name="calendar_iconlabel">
+    <value>달력</value>
+  </string>
+  <string id="163" name="savewindow_btn">
+    <value>닫다</value>
+  </string>
+  <string id="164" name="organisationtablelist_idrow">
+    <value>조직 번호</value>
+  </string>
+  <string id="165" name="organisationtablelist_namerow">
+    <value>이름</value>
+  </string>
+  <string id="166" name="uservalue_levelid1">
+    <value>유저</value>
+  </string>
+  <string id="167" name="uservalue_levelid2">
+    <value>바끰</value>
+  </string>
+  <string id="168" name="uservalue_levelid3">
+    <value>관리자</value>
+  </string>
+  <string id="169" name="uservalue_levellabel">
+    <value>유저높이</value>
+  </string>
+  <string id="170" name="orgvalue_header">
+    <value>조직</value>
+  </string>
+  <string id="171" name="orgvalue_orgname">
+    <value>이름</value>
+  </string>
+  <string id="172" name="orgvalue_orgname">
+    <value>조직 추가</value>
+  </string>
+  <string id="173" name="orgvalue_orgname">
+    <value>조직 추가</value>
+  </string>
+  <string id="174" name="orgvalue_userwin">
+    <value>삭제</value>
+  </string>
+  <string id="175" name="orgvalue_userwin">
+    <value>추가하다</value>
+  </string>
+  <string id="176" name="orgvalue_userwin">
+    <value>조직 추가</value>
+  </string>
+  <string id="177" name="orgvalue_userlist">
+    <value>유저</value>
+  </string>
+  <string id="178" name="orgvalue_userlistadd">
+    <value>유저추가</value>
+  </string>
+  <string id="179" name="orgvalue_userlistdelete">
+    <value>유저 지우기 </value>
+  </string>
+  <string id="180" name="orgvalue_userwinheader">
+    <value>유저 추가</value>
+  </string>
+  <string id="181" name="orgvalue_userwinsearchfield">
+    <value>유저 찾기</value>
+  </string>
+  <string id="182" name="orgvalue_userwinsearchbtn">
+    <value>찾기</value>
+  </string>
+  <string id="183" name="orgvalue_userwinsearchresult">
+    <value>유저</value>
+  </string>
+  <string id="184" name="loginwin_chooseorganisation">
+    <value>조직</value>
+  </string>
+  <string id="185" name="loginwin_chooseorganisationbtn">
+    <value>입력</value>
+  </string>
+  <string id="186" name="navi_roomadmin">
+    <value>회의실</value>
+  </string>
+  <string id="187" name="roomadmin_header">
+    <value>회의실</value>
+  </string>
+  <string id="188" name="roomadmin_header">
+    <value>아이디</value>
+  </string>
+  <string id="189" name="roomadmin_header">
+    <value>이름</value>
+  </string>
+  <string id="190" name="roomadmin_header">
+    <value>공공장소</value>
+  </string>
+  <string id="191" name="roomadmin_header">
+    <value>조직</value>
+  </string>
+  <string id="192" name="roomadmin_header">
+    <value>회의실</value>
+  </string>
+  <string id="193" name="roomvalue_name">
+    <value>이름</value>
+  </string>
+  <string id="194" name="roomvalue_type">
+    <value>종류</value>
+  </string>
+  <string id="195" name="roomvalue_ispublic">
+    <value>공공장소</value>
+  </string>
+  <string id="196" name="roomvalue_comment">
+    <value>의견</value>
+  </string>
+  <string id="197" name="whiteboard_saveicon">
+    <value>저장</value>
+  </string>
+  <string id="198" name="whiteboard_openicon">
+    <value>입력</value>
+  </string>
+  <string id="199" name="whiteboard_saveaswinheader">
+    <value>..와 같이 저장 하다</value>
+  </string>
+  <string id="200" name="whiteboard_saveaswintext">
+    <value>파일이름</value>
+  </string>
+  <string id="201" name="whiteboard_saveaswintext">
+    <value>파일이름</value>
+  </string>
+  <string id="202" name="whiteboard_saveaswinbtn1">
+    <value>삭제</value>
+  </string>
+  <string id="203" name="whiteboard_saveaswinbtn2">
+    <value>저장</value>
+  </string>
+  <string id="204" name="rpcerrorwin_header">
+    <value>오류</value>
+  </string>
+  <string id="205" name="loadwml_header">
+    <value>장전</value>
+  </string>
+  <string id="206" name="loadwml_messsload">
+    <value>물체 장전</value>
+  </string>
+  <string id="207" name="loadwml_messsync">
+    <value>snychronizing clients, clients to wait:</value>
+  </string>
+  <string id="208" name="loadimage_messload">
+    <value>이미지데이다 로딩</value>
+  </string>
+  <string id="209" name="loadimage_messsync">
+    <value>snychronizing clients, clients to wait:</value>
+  </string>
+  <string id="210" name="loadwml_confirmheader">
+    <value>그리는 곳 지우기</value>
+  </string>
+  <string id="211" name="loadwml_confirmmess">
+    <value>그리는 곳 지우기 칠판위에 모든 데이다가 없어집니다.</value>
+  </string>
+  <string id="212" name="loadwml_confirmmess2">
+    <value>파일이 로딩돼기전에 확인해주십시요.</value>
+  </string>
+  <string id="213" name="send_invitation_btn">
+    <value>초대장을 보내다.</value>
+  </string>
+  <string id="214" name="send_invitationwin_header">
+    <value>초대장을 보내다.</value>
+  </string>
+  <string id="215" name="send_invitationwin_subject">
+    <value>주제</value>
+  </string>
+  <string id="216" name="send_invitationwin_recipient">
+    <value>수령인</value>
+  </string>
+  <string id="217" name="send_invitationwin_message">
+    <value>메세지</value>
+  </string>
+  <string id="218" name="send_invitationwin_btn_confirm">
+    <value>보내기</value>
+  </string>
+  <string id="219" name="send_invitationwin_btn_cancel">
+    <value>삭제</value>
+  </string>
+  <string id="220" name="send_chat_text_btn">
+    <value>보내기</value>
+  </string>
+  <string id="221" name="invited_userwin_header">
+    <value>유저데이다</value>
+  </string>
+  <string id="222" name="invited_userwin_subject">
+    <value>이번 회의의 니크네임</value>
+  </string>
+  <string id="223" name="invited_userwin_login">
+    <value>nick</value>
+  </string>
+  <string id="224" name="invited_userwin_firstname">
+    <value>이름</value>
+  </string>
+  <string id="225" name="invited_userwin_lastname">
+    <value>성</value>
+  </string>
+  <string id="226" name="invited_userwin_mail">
+    <value>이메일</value>
+  </string>
+  <string id="227" name="invited_userwin_lang">
+    <value>언어</value>
+  </string>
+  <string id="228" name="invited_userwin_enter">
+    <value>입력</value>
+  </string>
+  <string id="229" name="invited_userwin_enter">
+    <value>로딩</value>
+  </string>
+  <string id="230" name="invited_userwin_enter">
+    <value>데이다로딩, 기다려주십시요!</value>
+  </string>
+  <string id="231" name="user_registerFalsePWD">
+    <value>잘못된 패스워드</value>
+  </string>
+  <string id="232" name="user_registerFalsePWDHeader">
+    <value>최소 4 개 문자로된 두개의 똑같은 패스워드를 입력시켜주십시요</value>
+  </string>
+  <string id="233" name="user_registerMailError">
+    <value>다른 메일</value>
+  </string>
+  <string id="234" name="user_registerMailErrorHeader">
+    <value>잘못된 이멜주소를 입력하였습니다.</value>
+  </string>
+  <string id="235" name="user_registerSuccess">
+    <value>등록이 됬습니다.</value>
+  </string>
+  <string id="236" name="user_registerSuccessHeader">
+    <value>당신의 어카운트가 생겼습니다.  지금 로긴이돼어 있습니다.</value>
+  </string>
+  <string id="237" name="user_sharing_message">
+    <value>당신의 스크린을 지금 공유할수 없습니다. 다른사람이 이미 스크린을 공유하고 있습니다.</value>
+  </string>
+  <string id="238" name="user_sharing_messageHeader">
+    <value>공유금지</value>
+  </string>
+  <string id="239" name="user_doStartScreenViewer">
+    <value>당신의 스크린을 공유하다.</value>
+  </string>
+  <string id="240" name="screen_warnBandwidth">
+    <value>Bad Bandwidth: You have not been able to syncronize the Screen. Frames will be dropped. If this Warning is shown often you could ask the moderator to reduce the Quality.</value>
+  </string>
+  <string id="241" name="screen_userlabel">
+    <value>Screen of:</value>
+  </string>
+<string id="242" name="whiteboard_tab_paint">
+<value>Paint</value>
+</string>	
+<string id="243" name="whiteboard_tab_document">
+<value>Document</value>
+</string>		
+<string id="244" name="tabbar_chaticon">
+<value>Chat</value>
+</string>	
+<string id="245" name="tabbar_filesicon">
+<value>Files</value>
+</string>	
+<string id="246" name="tabbar_participantsicon">
+<value>Members</value>
+</string>	
+<string id="247" name="swfpresentation_listsaveorig">
+<value>Download original document</value>
+</string>	
+<string id="248" name="swfpresentation_listsavepdf">
+<value>Download pdf document</value>
+</string>	
+<string id="249" name="swfpresentation_listloadswf">
+<value>Load Presentation to whiteboard</value>
+</string>	
+<string id="250" name="navimain_config">
+<value>Configuration</value>
+</string>	
+<string id="251" name="whiteboard_boundingbox_drag">
+<value>Drag this Object</value>
+</string>		
+<string id="252" name="whiteboard_boundingbox_resize">
+<value>Resize this Object</value>
+</string>
+<string id="253" name="whiteboard_documenttoolbar_zoom">
+<value>%</value>
+</string>	
+<string id="254" name="whiteboard_documenttoolbar_slide">
+<value>of</value>
+</string>		
+<string id="255" name="whiteboard_documenttoolbar_firstslide">
+<value>Go to first Page</value>
+</string>		
+<string id="256" name="whiteboard_documenttoolbar_preslide">
+<value>Go to previous Page</value>
+</string>	
+<string id="257" name="whiteboard_documenttoolbar_nextslide">
+<value>Go to next Page</value>
+</string>		
+<string id="258" name="whiteboard_documenttoolbar_lastslide">
+<value>Go to last Page</value>
+</string>	
+<string id="259" name="whiteboard_documenttoolbar_zoomminus">
+<value>Zoom --</value>
+</string>
+<string id="260" name="whiteboard_documenttoolbar_zoomplus">
+<value>Zoom ++</value>
+</string>	
+<string id="261" name="salutation_mr">
+<value>Mr.</value>
+</string>
+<string id="262" name="salutation_miss">
+<value>Ms.</value>
+</string>
+<string id="263" name="navimain_confadmin">
+<value>Configuration</value>
+</string>
+<string id="264" name="conftable_headerId">
+<value>ID</value>
+</string>
+<string id="265" name="conftable_headerkey">
+<value>Key</value>
+</string>	
+<string id="266" name="confadminform_header">
+<value>Configuration</value>
+</string>
+<string id="267" name="confadminform_labelkey">
+<value>Key</value>
+</string>	
+<string id="268" name="confadminform_labelupdated">
+<value>last update</value>
+</string>
+<string id="269" name="confadminform_labelupdatedby">
+<value>updatedby</value>
+</string>
+<string id="270" name="confadminform_labelcomment">
+<value>comment</value>
+</string>	
+<string id="271" name="confadminform_labelkey">
+<value>key</value>
+</string>
+<string id="272" name="turnoverlist_maxresults">
+<value>of</value>
+</string>		
+</language>
