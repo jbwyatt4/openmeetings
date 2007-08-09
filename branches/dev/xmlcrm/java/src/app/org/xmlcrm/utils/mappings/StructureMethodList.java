@@ -25,8 +25,6 @@ public class StructureMethodList {
 	
 	/*
 	 * 
-	 * http://fisheye5.cenqua.com/browse/~raw,r=1.29/sbfb/sbfb-src/src/main/java/swingbeanformbuilder/core/services/FormBuilder.java
-	 * 
 	 */
 
 	public LinkedHashMap<String,LinkedHashMap<String,Object>> parseClassToMethodList(Class targetClass){
