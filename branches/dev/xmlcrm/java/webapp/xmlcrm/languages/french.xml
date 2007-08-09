@@ -205,28 +205,28 @@
 <value>User Info</value>
 </string>
 <string id="69" name="cleardrawarea">
-<value>Clear DrawArea</value>
+<value>Effacer tableau blanc</value>
 </string>
 <string id="70" name="undo">
-<value>Undo</value>
+<value>Annuler</value>
 </string>
 <string id="71" name="redo">
-<value>Redo</value>
+<value>Refaire</value>
 </string>
 <string id="72" name="selectobject">
-<value>Select an Object</value>
+<value>Sélectionner un objet</value>
 </string>
 <string id="73" name="text">
-<value>Text</value>
+<value>Texte</value>
 </string>
 <string id="74" name="paint">
-<value>Paint</value>
+<value>Peindre</value>
 </string>
 <string id="75" name="drawline">
-<value>Draw line</value>
+<value>Tracer une ligne</value>
 </string>
 <string id="76" name="drawu">
-<value>Draw underline</value>
+<value>Surligner</value>
 </string>
 <string id="77" name="rect">
 <value>Rectangle</value>
@@ -235,148 +235,148 @@
 <value>Ellipse</value>
 </string>
 <string id="79" name="arrow">
-<value>Arrow</value>
+<value>Flèche</value>
 </string>
 <string id="80" name="deletechosen">
-<value>delete chosen Item</value>
+<value>Supprimer l'élément sélectionné</value>
 </string>
 <string id="81" name="appliymod">
-<value>Apply for moderation</value>
+<value>Appliquer pour modération</value>
 </string>
 <string id="82" name="apply">
-<value>apply</value>
+<value>Appliquer</value>
 </string>
 <string id="83" name="cancel">
-<value>cancel</value>
+<value>Annuler</value>
 </string>
 <string id="84" name="mod">
-<value>Become moderator</value>
+<value>devenir modérateur</value>
 </string>
 <string id="85" name="close">
-<value>close</value>
+<value>fermer</value>
 </string>
 <string id="86" name="italic">
-<value>italic</value>
+<value>italique</value>
 </string>
 <string id="87" name="bold">
-<value>bold</value>
+<value>gras</value>
 </string>
 <string id="88" name="waiting">
-<value>WAITING</value>
+<value>ATTENDRE</value>
 </string>
 <string id="89" name="applyMessage">
-<value>A User wants to apply for moderation:</value>
+<value>Un utilisateur souhaite devenir modérateur:</value>
 </string>
 <string id="90" name="accept">
-<value>accept</value>
+<value>accepter</value>
 </string>
 <string id="91" name="reject">
-<value>reject</value>
+<value>rejeter</value>
 </string>
 <string id="92" name="cancel">
-<value>cancel</value>
+<value>annuler</value>
 </string>
 <string id="93" name="sendmodrequestmessage">
-<value>Sending request to following Users</value>
+<value>Envoi aux autres utilisateurs</value>
 </string>
 <string id="94" name="accept">
-<value>Accepted</value>
+<value>Accepté</value>
 </string>
 <string id="95" name="reject">
-<value>Rejected</value>
+<value>Rejecté</value>
 </string>
 <string id="96" name="changemod">
-<value>Change Moderator</value>
+<value>Changer de Moderateur</value>
 </string>
 <string id="97" name="nonmoderrormessage">
-<value>You are not moderating this course!</value>
+<value>Vous n'êtes pas le modérateur de ce cours.</value>
 </string>
 <string id="98" name="moderator">
-<value>Moderator:</value>
+<value>Moderateur:</value>
 </string>
 <string id="99" name="roomfullmessage">
-<value>This Room is full. Sorry please try again later.</value>
+<value>Cette salle est pleine. Merci de revenir plus tard.</value>
 </string>
 <string id="100" name="elllipse">
 <value>Ellipse</value>
 </string>
 <string id="101" name="close">
-<value>close</value>
+<value>fermer</value>
 </string>
 <string id="102" name="AuthError">
-<value>input data error</value>
+<value>erreur de formulaire</value>
 </string>
 <string id="103" name="min4username">
-<value>username must be 4 characters at least</value>
+<value>Le nom d'utilisateur doit contenir 4 caractères au moins.</value>
 </string>
 <string id="104" name="min4pass">
-<value>userpass must be 4 characters at least</value>
+<value>Le mot de passe doit contenir 4 caractères au moins.</value>
 </string>
 <string id="105" name="usernametaken">
-<value>The username is already taken</value>
+<value>Le nom d'utilisateur existe déjà.</value>
 </string>
 <string id="106" name="emailtaken">
-<value>The email is already registered</value>
+<value>Cette adresse e-mail est déjà utlisé.</value>
 </string>
 <string id="107" name="emailtaken">
-<value>System error please contact System-Admins</value>
+<value>Erreur système, merci de contacter l'administrateur.</value>
 </string>
 <string id="108" name="Authlogin">
 <value>Login</value>
 </string>
 <string id="109" name="Authuser">
-<value>User:</value>
+<value>Utilisateur:</value>
 </string>
 <string id="110" name="Authpass">
-<value>Pass:</value>
+<value>Mot de passe:</value>
 </string>
 <string id="111" name="Authlang">
-<value>Language</value>
+<value>Langue</value>
 </string>
 <string id="112" name="Authreg">
 <value>Login</value>
 </string>
 <string id="113" name="regformhead">
-<value>Sign Up</value>
+<value>S'enregistrer</value>
 </string>
 <string id="114" name="regformuser">
-<value>User:</value>
+<value>Utilisateur:</value>
 </string>
 <string id="115" name="regformpass">
-<value>Pass:</value>
+<value>Mot de passe:</value>
 </string>
 <string id="116" name="regformretype">
-<value>ReType:</value>
+<value>ReTapez:</value>
 </string>
 <string id="117" name="regformfirstname">
-<value>Firstname:</value>
+<value>Prénom:</value>
 </string>
 <string id="118" name="regformlastname">
-<value>Lastname:</value>
+<value>Nom:</value>
 </string>
 <string id="119" name="regformmail">
-<value>Mail:</value>
+<value>E-Mail:</value>
 </string>
 <string id="120" name="regformstate">
-<value>Country:</value>
+<value>Pays:</value>
 </string>
 <string id="121" name="regformbtn1">
-<value>Register</value>
+<value>Enregistrer</value>
 </string>
 <string id="122" name="regformbtn2">
-<value>Cancel</value>
+<value>Annuler</value>
 </string>
 <string id="123" name="Authbtn2">
-<value>Register</value>
+<value>Enregistrer</value>
 </string>
 <string id="124" name="dashboard">
-<value>home</value>
+<value>accueil</value>
 </string>
 <string id="125" name="useradmin">
-<value>Users</value>
+<value>Utilisateurs</value>
 </string>
 <string id="126" name="groupadmin">
-<value>Groups</value>
+<value>Groupes</value>
 </string>
 <string id="127" name="orgadmin">
 <value>Organisations</value>
@@ -637,94 +637,94 @@
 <value>Confirm before loading a file</value>
 </string>
 <string id="213" name="send_invitation_btn">
-<value>Send invitation</value>
+<value>Envoyer invitation</value>
 </string>
 <string id="214" name="send_invitationwin_header">
-<value>Send invitation</value>
+<value>Envoyer invitation</value>
 </string>
 <string id="215" name="send_invitationwin_subject">
-<value>Subject</value>
+<value>Sujet</value>
 </string>
 <string id="216" name="send_invitationwin_recipient">
-<value>Recipient</value>
+<value>Destinataire</value>
 </string>
 <string id="217" name="send_invitationwin_message">
 <value>Message</value>
 </string>
 <string id="218" name="send_invitationwin_btn_confirm">
-<value>Send</value>
+<value>Envoyer</value>
 </string>
 <string id="219" name="send_invitationwin_btn_cancel">
-<value>cancel</value>
+<value>annuler</value>
 </string>	
 <string id="220" name="send_chat_text_btn">
 <value>appeler</value>
 </string>
 <string id="221" name="invited_userwin_header">
-<value>Userdata</value>
+<value>détails sur l'utilisateur</value>
 </string>
 <string id="222" name="invited_userwin_subject">
-<value>Your nickname for this conference</value>
+<value>Votre pseudonyme pour cette conférence</value>
 </string>
 <string id="223" name="invited_userwin_login">
-<value>nick</value>
+<value>pseudo</value>
 </string>
 <string id="224" name="invited_userwin_firstname">
-<value>firstname</value>
+<value>prénom</value>
 </string>
 <string id="225" name="invited_userwin_lastname">
-<value>lastname</value>
+<value>nom</value>
 </string>
 <string id="226" name="invited_userwin_mail">
 <value>email</value>
 </string>
 <string id="227" name="invited_userwin_lang">
-<value>language</value>
+<value>langue</value>
 </string>
 <string id="228" name="invited_userwin_enter">
-<value>enter</value>
+<value>entrée</value>
 </string>
 <string id="229" name="invited_userwin_enter">
-<value>Loading</value>
+<value>Chargement</value>
 </string>
 <string id="230" name="invited_userwin_enter">
-<value>Data loading, please wait!</value>
+<value>Données en cours de chargement, merci de patienter.</value>
 </string>	
 <string id="231" name="user_registerFalsePWD">
-<value>Wrong Password</value>
+<value>Mauvais mot de passe</value>
 </string>
 <string id="232" name="user_registerFalsePWDHeader">
-<value>Please enter two identical passwords with at least 4 characters</value>
+<value>Merci de mettre deux mots de passes identiques avec 4 caractères minimum.</value>
 </string>
 <string id="233" name="user_registerMailError">
-<value>Wrong Mail</value>
+<value>Mauvaise adresse e-mail.</value>
 </string>
 <string id="234" name="user_registerMailErrorHeader">
-<value>You have entered an invalid Mail-Adress</value>
+<value>Vous avez utilisé une adresse E-mail invalide.</value>
 </string>
 <string id="235" name="user_registerSuccess">
-<value>Registration Complete</value>
+<value>Enregistrement effectué.</value>
 </string>
 <string id="236" name="user_registerSuccessHeader">
-<value>Your account has been created. You an login now.</value>
+<value>Votre compte a été créé. Vous pouvez vous connecter maintenant.</value>
 </string>	
 <string id="237" name="user_sharing_message">
-<value>You cannot share your screen at the moment. Somebody else already share's its screen.</value>
+<value>Vous ne pouvez pas partager votre écran. Un autre utilisateur partage déjà son écran.</value>
 </string>		
 <string id="238" name="user_sharing_messageHeader">
-<value>Sharing forbidden</value>
+<value>Partage annulé</value>
 </string>	
 <string id="239" name="user_doStartScreenViewer">
-<value>Share your Screen</value>
+<value>Partager votre écran</value>
 </string>	
 <string id="240" name="screen_warnBandwidth">
-<value>Bad Bandwidth: You have not been able to syncronize the Screen. Frames will be dropped. If this Warning is shown often you could ask the moderator to reduce the Quality.</value>
+<value>Mauvaise bande passante: Vous ne pouvez pas synchroniser votre écran. Des images seront supprimés.</value>
 </string>	
 <string id="241" name="screen_userlabel">
-<value>Screen of:</value>
+<value>Écran de:</value>
 </string>	
 <string id="242" name="whiteboard_tab_paint">
-<value>Paint</value>
+<value>Peindre</value>
 </string>	
 <string id="243" name="whiteboard_tab_document">
 <value>Document</value>
@@ -733,46 +733,46 @@
 <value>Chat</value>
 </string>	
 <string id="245" name="tabbar_filesicon">
-<value>Files</value>
+<value>Fichiers</value>
 </string>	
 <string id="246" name="tabbar_participantsicon">
-<value>Members</value>
+<value>Membres</value>
 </string>	
 <string id="247" name="swfpresentation_listsaveorig">
-<value>Download original document</value>
+<value>Télécharger le document original</value>
 </string>	
 <string id="248" name="swfpresentation_listsavepdf">
-<value>Download pdf document</value>
+<value>Télécharger le document PDF</value>
 </string>	
 <string id="249" name="swfpresentation_listloadswf">
-<value>Load Presentation to whiteboard</value>
+<value>Chargement de la présentation sur le tableau blanc</value>
 </string>	
 <string id="250" name="navimain_config">
 <value>Configuration</value>
 </string>	
 <string id="251" name="whiteboard_boundingbox_drag">
-<value>Drag this Object</value>
+<value>Déplacer cet objet</value>
 </string>		
 <string id="252" name="whiteboard_boundingbox_resize">
-<value>Resize this Object</value>
+<value>Redimensionner cet objet</value>
 </string>
 <string id="253" name="whiteboard_documenttoolbar_zoom">
 <value>%</value>
 </string>	
 <string id="254" name="whiteboard_documenttoolbar_slide">
-<value>of</value>
+<value>de</value>
 </string>		
 <string id="255" name="whiteboard_documenttoolbar_firstslide">
-<value>Go to first Page</value>
+<value>Aller à la première page</value>
 </string>		
 <string id="256" name="whiteboard_documenttoolbar_preslide">
-<value>Go to previous Page</value>
+<value>Aller à la page précédente</value>
 </string>	
 <string id="257" name="whiteboard_documenttoolbar_nextslide">
-<value>Go to next Page</value>
+<value>Aller à la page suivante</value>
 </string>		
 <string id="258" name="whiteboard_documenttoolbar_lastslide">
-<value>Go to last Page</value>
+<value>Aller à la dernière page</value>
 </string>	
 <string id="259" name="whiteboard_documenttoolbar_zoomminus">
 <value>Zoom --</value>
@@ -781,10 +781,10 @@
 <value>Zoom ++</value>
 </string>	
 <string id="261" name="salutation_mr">
-<value>Mr.</value>
+<value>M.</value>
 </string>
 <string id="262" name="salutation_miss">
-<value>Ms.</value>
+<value>Mme.</value>
 </string>	
 <string id="263" name="navimain_confadmin">
 <value>Configuration</value>
@@ -793,27 +793,27 @@
 <value>ID</value>
 </string>
 <string id="265" name="conftable_headerkey">
-<value>Key</value>
+<value>Clé</value>
 </string>	
 <string id="266" name="confadminform_header">
 <value>Configuration</value>
 </string>
 <string id="267" name="confadminform_labelkey">
-<value>Key</value>
+<value>Clé</value>
 </string>	
 <string id="268" name="confadminform_labelupdated">
-<value>last update</value>
+<value>dernière mise à jour</value>
 </string>
 <string id="269" name="confadminform_labelupdatedby">
-<value>updatedby</value>
+<value>Mis à jour par</value>
 </string>
 <string id="270" name="confadminform_labelcomment">
-<value>comment</value>
+<value>commentaire</value>
 </string>	
 <string id="271" name="confadminform_labelkey">
-<value>key</value>
+<value>clé</value>
 </string>
 <string id="272" name="turnoverlist_maxresults">
-<value>of</value>
+<value>de</value>
 </string>	
 </language>
