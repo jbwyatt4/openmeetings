@@ -17,7 +17,7 @@
      </handler>
   	 <handler name="onerror" >
         <![CDATA[
-  	 	//Debug.write("error ",this.status);
+  	 	Debug.write("error ",this.status);
   	 	this.setAttribute('protocollName','rtmpt');
   	 	this.setAttribute('protocollPort',canvas.rmptTunnelport);
   	 	var src = 'rtmpt://'+canvas.rtmphostlocal+':'+canvas.rmptTunnelport+'/xmlcrm/hibernate';

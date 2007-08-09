@@ -10,7 +10,7 @@
 	<!--handlers -->
 
 	<handler name="onsavecompleted" >
-		this.getUserById.doCall();
+		this.getConfByConfigurationId.doCall();
 	</handler>
 	
 	<handler name="onreload" >
@@ -28,7 +28,8 @@
 	
     <handler name="ondelete" >
 		if (this.configuration_id!=0){
-			this.deleteConfByConfigurationId.doCall();
+            this.deleteConfiguration.prepareCall();
+			this.deleteConfiguration.doCall();
 		}
     </handler>
 	
@@ -43,7 +44,7 @@
     
     <method name="initFields" args="obj">
     	<![CDATA[
-            Debug.write("initFields: ",obj);
+            //Debug.write("initFields: ",obj);
             this.confobj = obj;
 			this.comment.setText(obj.comment);
 			this.conf_key.setText(obj.conf_key);
@@ -68,12 +69,20 @@
     	</handler>
   	</netremotecallhib>
 	
-	<netremotecallhib name="deleteConfByConfigurationId" funcname="configservice.deleteConfByConfigurationId" remotecontext="$once{ canvas.thishib }" >      
-		<netparam name="vars1"><method name="getValue"> return canvas.sessionId; </method></netparam>
-		<netparam name="vars2"><method name="getValue"> return parent.parent.user_id; </method></netparam>
-		<handler name="ondata" args="value">
-			//Debug.write("deleteUserAdmin ",value);
-			//this.parent.destroy();
+	<netremotecallhib name="deleteConfiguration" funcname="configservice.deleteConfiguration" remotecontext="$once{ canvas.thishib }" >      
+        <attribute name="sendObject" value="null" />
+		<method name="prepareCall">
+  			this.sendObject=new Array();
+            this.sendObject["configuration_id"] = this.parent.configuration_id;
+            this.sendObject["comment"] = this.parent.comment.getText();
+            this.sendObject["conf_key"] = this.parent.conf_key.getText();
+            this.sendObject["conf_value"] = this.parent.conf_value.getText();
+  			//Debug.write("prepareCall: ",this.sendObject);
+  		</method>
+  		<netparam name="vars1"><method name="getValue">return canvas.sessionId; </method></netparam>
+    	<netparam name="vars2"><method name="getValue">return parent.sendObject;</method></netparam>	
+        <handler name="ondata" args="value">
+			//Debug.write("deleteConfiguration ",value);
 			if (value>0){
 				this.parent.parent._turnoverlist.oncallnext.sendEvent();
 				this.parent.onnew.sendEvent();
@@ -81,25 +90,28 @@
 		</handler>
 	</netremotecallhib>		
 
-  	<netremotecallhib name="updateConfByConfigurationId" funcname="configservice.updateConfByConfigurationId" 
+  	<netremotecallhib name="saveOrUpdateConfiguration" funcname="configservice.saveOrUpdateConfiguration" 
   		remotecontext="$once{ canvas.thishib }" registerObject="true" >   
 		<attribute name="sendObject" value="null" />
 		<!-- gets called by Observer -->
   		<method name="prepareCall">
   			this.sendObject=new Array();
-
-  			Debug.write("prepareCall: ",this.sendObject);
+            this.sendObject["configuration_id"] = this.parent.configuration_id;
+            this.sendObject["comment"] = this.parent.comment.getText();
+            this.sendObject["conf_key"] = this.parent.conf_key.getText();
+            this.sendObject["conf_value"] = this.parent.conf_value.getText();
+            //Debug.write("prepareCall: ",this.sendObject);
   		</method>
   		<netparam name="vars1"><method name="getValue">return canvas.sessionId; </method></netparam>
     	<netparam name="vars2"><method name="getValue">return parent.sendObject;</method></netparam>	  		
     	<handler name="ondata" args="val">
 			<![CDATA[
-    		//Debug.write("saveOrUpdateUser: ",val);
+    		//Debug.write("saveOrUpdateConfiguration ",val);
 			if (val>0){
-				Debug.write("updateConfByConfigurationId val greater 0: ",val);
+				//Debug.write("updateConfByConfigurationId val greater 0: ",val);
 				this.parent.parent._turnoverlist.oncallnext.sendEvent();
 				var obj = new Array();
-				obj["user_id"] = val;
+				obj["configuration_id"] = val;
 				this.parent.initValueFieldsByObject(obj);
 			}
 			]]>

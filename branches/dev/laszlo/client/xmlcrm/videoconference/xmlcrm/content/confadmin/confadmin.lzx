@@ -32,7 +32,7 @@
 			<netparam name="vars4"><method name="getValue"> return parent.parent.orderby; </method></netparam>
 			<netparam name="vars5"><method name="getValue"> return parent.parent.asc; </method></netparam>
 	    	<handler name="ondata" args="value">
-	    		Debug.write("getAllConf ",value);
+	    		//Debug.write("getAllConf ",value);
 	    		//this.parent.destroy();
 	    		this.parent.initValues(value.records);
 	    		this.parent.renderContent(value.result);
