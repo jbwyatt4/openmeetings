@@ -20,6 +20,10 @@ public class TestBeanForReflection {
 	public String mypublic1;
 	private boolean mypublic2;
 	private Boolean mypublic3;	
+	public double mypublic4;
+	public Double mypublic5;
+	public float mypublic6;
+	public Float mypublic7;	
 	private TestSubBeanForReflection subBeanForReflection;
 	public TestBeanForReflection() {
 		super();
@@ -126,6 +130,30 @@ public class TestBeanForReflection {
 	public void setSubBeanForReflection(
 			TestSubBeanForReflection subBeanForReflection) {
 		this.subBeanForReflection = subBeanForReflection;
+	}
+	public double getMypublic4() {
+		return mypublic4;
+	}
+	public void setMypublic4(double mypublic4) {
+		this.mypublic4 = mypublic4;
+	}
+	public Double getMypublic5() {
+		return mypublic5;
+	}
+	public void setMypublic5(Double mypublic5) {
+		this.mypublic5 = mypublic5;
+	}
+	public float getMypublic6() {
+		return mypublic6;
+	}
+	public void setMypublic6(float mypublic6) {
+		this.mypublic6 = mypublic6;
+	}
+	public Float getMypublic7() {
+		return mypublic7;
+	}
+	public void setMypublic7(Float mypublic7) {
+		this.mypublic7 = mypublic7;
 	}
 	
 	

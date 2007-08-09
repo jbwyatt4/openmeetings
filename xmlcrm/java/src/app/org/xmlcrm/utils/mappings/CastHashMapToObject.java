@@ -2,6 +2,7 @@ package org.xmlcrm.utils.mappings;
 
 import java.util.LinkedHashMap;
 import java.util.Iterator;
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
@@ -82,7 +83,15 @@ public class CastHashMapToObject {
 								Method m = targetClass.getMethod(methodSetterName, paramTypes);
 								
 								Class paramType = paramTypes[0];
-								//log.error("paramType: "+paramType.getName());
+								
+								//try to cast the Given Object to the necessary Object
+								if (t!=null && !paramType.getName().equals(t.getClass().getName())){
+									for (Constructor crt : paramType.getConstructors()) {
+										if (crt.getParameterTypes()[0].getName().equals("java.lang.String")){
+											t = crt.newInstance(t.toString());	
+										}
+									}
+								}
 								if (paramType.isPrimitive() && t==null){
 									//cannot cast null to primitve
 								} else {
@@ -98,9 +107,16 @@ public class CastHashMapToObject {
 						}
 						
 					} else if (Modifier.isPublic(mod) && !Modifier.isFinal(mod)){
-						
-						//Is public attribute so set it directly
-						anyField.set(returnObject, t);
+						if (t!=null && !anyField.getType().getName().equals(t.getClass().getName())){
+							for (Constructor crt : anyField.getType().getConstructors()) {
+								if (crt.getParameterTypes()[0].getName().equals("java.lang.String")){
+									t = crt.newInstance(t.toString());
+								}
+							}
+
+							//Is public attribute so set it directly
+							anyField.set(returnObject, t);
+						}
 						
 					} else if (Modifier.isFinal(mod)) {
 						log.error("Final attributes cannot be changed ");
@@ -113,51 +129,56 @@ public class CastHashMapToObject {
 					//This will cast nested Object to the current Object
 					//it does not matter how deep it is nested
 					Object valueOfHashMap = values.get(fieldName);
-					String valueTypeOfHashMap = valueOfHashMap.getClass().getName();
-					if (this.compareTypeNameToAllowedListTypes(valueTypeOfHashMap)) {
-						
-						//Get value from  set 
-						Object t = this.castByGivenObject((LinkedHashMap)valueOfHashMap, fieldType);
-						int mod = anyField.getModifiers();
-						
-						if (Modifier.isPrivate(mod) && !Modifier.isFinal(mod)){
+					if (valueOfHashMap!=null){
+						String valueTypeOfHashMap = valueOfHashMap.getClass().getName();
+						if (this.compareTypeNameToAllowedListTypes(valueTypeOfHashMap)) {
 							
-							//log.info("is private so get setter method "+fieldName);
-							LinkedHashMap<String,Object> methodSummery = structuredMethodMap.get(fieldName);
+							//Get value from  set 
+							Object t = this.castByGivenObject((LinkedHashMap)valueOfHashMap, fieldType);
+							int mod = anyField.getModifiers();
 							
-							if (methodSummery!=null) {
-								if (methodSummery.get("setter")!=null) {
-		
-									String methodSetterName = methodSummery.get("setter").toString();
-									Class[] paramTypes = (Class[]) methodSummery.get("setterParamTypes");
-									Method m = targetClass.getMethod(methodSetterName, paramTypes);
-									
-									Class paramType = paramTypes[0];
-									//log.error("paramType: "+paramType.getName());
-									if (paramType.isPrimitive() && t==null){
-										//cannot cast null to primitve
-									} else {
-										Object[] arguments = new Object[]{ t }; 
-										m.invoke(returnObject,arguments);
-									}
+							if (Modifier.isPrivate(mod) && !Modifier.isFinal(mod)){
 								
+								//log.info("is private so get setter method "+fieldName);
+								LinkedHashMap<String,Object> methodSummery = structuredMethodMap.get(fieldName);
+								
+								if (methodSummery!=null) {
+									if (methodSummery.get("setter")!=null) {
+			
+										String methodSetterName = methodSummery.get("setter").toString();
+										Class[] paramTypes = (Class[]) methodSummery.get("setterParamTypes");
+										Method m = targetClass.getMethod(methodSetterName, paramTypes);
+										
+										Class paramType = paramTypes[0];
+										//log.error("paramType: "+paramType.getName());
+										if (paramType.isPrimitive() && t==null){
+											//cannot cast null to primitve
+										} else {
+											Object[] arguments = new Object[]{ t }; 
+											m.invoke(returnObject,arguments);
+										}
+									
+									} else {
+										log.error("could not find a setter-method from Structured table. Is there a setter-method for " + fieldName + " in Class " + targetClass.getName());
+									}
 								} else {
-									log.error("could not find a setter-method from Structured table. Is there a setter-method for " + fieldName + " in Class " + targetClass.getName());
+									log.error("could not find a method from Structured table. Is there a method for " + fieldName + " in Class " + targetClass.getName());
 								}
+							} else if (Modifier.isPublic(mod) && !Modifier.isFinal(mod)){
+								
+								//Is public attribute so set it directly
+								anyField.set(returnObject, t);
+								
+							} else if (Modifier.isFinal(mod)) {
+								log.error("Final attributes cannot be changed ");
 							} else {
-								log.error("could not find a method from Structured table. Is there a method for " + fieldName + " in Class " + targetClass.getName());
+								log.error("Unhandled Modifier Type: " + mod);
 							}
-						} else if (Modifier.isPublic(mod) && !Modifier.isFinal(mod)){
 							
-							//Is public attribute so set it directly
-							anyField.set(returnObject, t);
-							
-						} else if (Modifier.isFinal(mod)) {
-							log.error("Final attributes cannot be changed ");
-						} else {
-							log.error("Unhandled Modifier Type: " + mod);
 						}
-						
+					} else {
+						//There is no nested Object for that given
+						log.error("There is no nested Object for that given: Attribute: " + fieldName + " Class " + targetClass.getName());
 					}
 				}
 			} 

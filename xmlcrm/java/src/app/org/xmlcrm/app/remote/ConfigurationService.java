@@ -28,20 +28,15 @@ public class ConfigurationService {
         Long User_Level = Usermanagement.getInstance().getUserLevelByID(users_id);     	
         return Configurationmanagement.getInstance().getConfByConfigurationId(User_Level,configuration_id);
     }
-    public String addConfByKey(String SID,String CONF_KEY,String CONF_VALUE,String comment){
+    public Long saveOrUpdateConfiguration(String SID,LinkedHashMap values){
         Long users_id = Sessionmanagement.getInstance().checkSession(SID);
         Long User_Level = Usermanagement.getInstance().getUserLevelByID(users_id);     	
-        return Configurationmanagement.getInstance().addConfByKey(User_Level,CONF_KEY,CONF_VALUE, users_id,comment);
-    }
-    public String updateConfByConfigurationId(String SID,LinkedHashMap values){
-        Long users_id = Sessionmanagement.getInstance().checkSession(SID);
-        Long User_Level = Usermanagement.getInstance().getUserLevelByID(users_id);     	
-        return Configurationmanagement.getInstance().updateConfByConfigurationId(User_Level,values);
+        return Configurationmanagement.getInstance().saveOrUpdateConfiguration(User_Level,values, users_id);
     }    
-    public String deleteConfByConfigurationId(String SID,long configuration_id){ 
+    public Long deleteConfiguration(String SID,LinkedHashMap values){
         Long users_id = Sessionmanagement.getInstance().checkSession(SID);
         Long User_Level = Usermanagement.getInstance().getUserLevelByID(users_id);     	
-        return Configurationmanagement.getInstance().deleteConfByConfigurationId(User_Level,configuration_id);
+        return Configurationmanagement.getInstance().deleteConfByConfiguration(User_Level, values, users_id);
     }
 	    
 }

@@ -16,6 +16,7 @@ import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
 import org.xmlcrm.app.data.basic.AuthLevelmanagement;
+import org.xmlcrm.app.data.user.Usermanagement;
 import org.xmlcrm.app.data.beans.basic.SearchResult;
 import org.xmlcrm.app.data.user.Usermanagement;
 import org.xmlcrm.app.hibernate.beans.basic.Configuration;
@@ -192,61 +193,87 @@ public class Configurationmanagement {
 		}
 		return ret;
 	}
-
-	public String updateConfByConfigurationId(long USER_LEVEL, LinkedHashMap values) {
-		String res = "Update Configuration";
-		if (AuthLevelmanagement.getInstance().checkAdminLevel(USER_LEVEL)) {
-			try {
-
-				CastHashMapToObject.getInstance().castByGivenObject(values, Configuration.class);
-				
-//				Object idf = HibernateUtil.createSession();
-//				Session session = HibernateUtil.getSession();
-//				Transaction tx = session.beginTransaction();
-//				String hqlUpdate = "update configuration set CONF_KEY= :CONF_KEY, CONF_VALUE = :CONF_VALUE, USER_ID = :USER_ID, updatetime = :updatetime, comment = :comment where UID= :UID";
-//				int updatedEntities = session.createQuery(hqlUpdate).setString(
-//						"CONF_KEY", CONF_KEY).setString("CONF_VALUE",
-//						CONF_VALUE).setLong("USER_ID", USER_ID)
-//						.setLong("updatetime",
-//								Calender.getInstance().getTimeStampMili())
-//						.setString("comment", comment).setInteger("UID", UID)
-//						.executeUpdate();
-//				res = "Success" + updatedEntities;
-//				tx.commit();
-//				HibernateUtil.closeSession(idf);
-			} catch (HibernateException ex) {
-				log.error("[updateConfByUID]: " ,ex);
-			} catch (Exception ex2) {
-				log.error("[updateConfByUID]: " ,ex2);
-			}
-		} else {
-			res = "Error: Permission denied";
+	
+	public Long saveOrUpdateConfiguration(long USER_LEVEL, LinkedHashMap values, Long users_id) {
+		try {
+			if (AuthLevelmanagement.getInstance().checkAdminLevel(USER_LEVEL)) {
+				Configuration conf = (Configuration) CastHashMapToObject.getInstance().castByGivenObject(values, Configuration.class);
+				if (conf.getConfiguration_id().equals(null) || conf.getConfiguration_id() == 0 ){
+					log.info("add new Configuration");
+					conf.setStarttime(new Date());
+					conf.setDeleted("false");
+					return this.addConfig(conf);
+				} else {
+					log.info("update Configuration ID: "+conf.getConfiguration_id());
+					conf.setUsers(Usermanagement.getInstance().getUser(users_id));
+					conf.setDeleted("false");
+					conf.setUpdatetime(new Date());
+					return this.updateConfig(conf);
+				}
+			} else {
+				log.error("[saveOrUpdateConfByConfigurationId] Error: Permission denied");
+				return new Long(-100);
+			}				
+		} catch (HibernateException ex) {
+			log.error("[updateConfByUID]: " ,ex);
+		} catch (Exception ex2) {
+			log.error("[updateConfByUID]: " ,ex2);
 		}
-		return res;
+		return new Long(-1);
 	}
 
-	public String deleteConfByConfigurationId(long USER_LEVEL, long configuration_id) {
+	public Long addConfig(Configuration conf){
+		try {
+			Object idf = HibernateUtil.createSession();
+			Session session = HibernateUtil.getSession();
+			Transaction tx = session.beginTransaction();
+			Long configuration_id = (Long) session.save(conf);
+			tx.commit();
+			HibernateUtil.closeSession(idf);
+			return configuration_id;
+		} catch (HibernateException ex) {
+			log.error("[updateConfByUID]: " ,ex);
+		} catch (Exception ex2) {
+			log.error("[updateConfByUID]: " ,ex2);
+		}
+		return new Long(-1);		
+	}
+	
+	public Long updateConfig(Configuration conf){
+		try {
+			Object idf = HibernateUtil.createSession();
+			Session session = HibernateUtil.getSession();
+			Transaction tx = session.beginTransaction();
+			session.update(conf);
+			tx.commit();
+			HibernateUtil.closeSession(idf);
+			return conf.getConfiguration_id();
+		} catch (HibernateException ex) {
+			log.error("[updateConfByUID]: " ,ex);
+		} catch (Exception ex2) {
+			log.error("[updateConfByUID]: " ,ex2);
+		}
+		return new Long(-1);		
+	}	
+
+	public Long deleteConfByConfiguration(long USER_LEVEL, LinkedHashMap values, Long users_id) {
 		try {	
 			if (AuthLevelmanagement.getInstance().checkAdminLevel(USER_LEVEL)) {
-				Object idf = HibernateUtil.createSession();
-				Session session = HibernateUtil.getSession();
-				Transaction tx = session.beginTransaction();
-				String hqlUpdate = "update configuration " +
-						"set deleted = 'true' " +
-						"where configuration_id= :configuration_id";
-				session.createQuery(hqlUpdate)
-						.setLong("configuration_id", configuration_id).executeUpdate();
-				tx.commit();
-				HibernateUtil.closeSession(idf);
-				return "ok";
+				Configuration conf = (Configuration) CastHashMapToObject.getInstance().castByGivenObject(values, Configuration.class);
+				conf.setUsers(Usermanagement.getInstance().getUser(users_id));
+				conf.setUpdatetime(new Date());
+				conf.setDeleted("true");
+				this.updateConfig(conf);
+				return new Long(1);
 			} else {
 				log.error("Error: Permission denied");
+				return new Long(-100);
 			}
 		} catch (HibernateException ex) {
 			log.error("[deleteConfByUID]: " ,ex);
 		} catch (Exception ex2) {
 			log.error("[deleteConfByUID]: " ,ex2);
 		}		
-		return null;
+		return new Long(-1);
 	}
 }
