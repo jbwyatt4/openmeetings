@@ -685,49 +685,55 @@
 <value>entra</value>
 </string>
 <string id="229" name="invited_userwin_enter">
-<value>Loading</value>
+<value>Caricamento</value>
 </string>
 <string id="230" name="invited_userwin_enter">
-<value>Data loading, please wait!</value>
+<value>
+Caricamento dati, attendere prego!</value>
 </string>	
 <string id="231" name="user_registerFalsePWD">
-<value>Wrong Password</value>
+<value>Password sbagliata</value>
 </string>
 <string id="232" name="user_registerFalsePWDHeader">
-<value>Please enter two identical passwords with at least 4 characters</value>
+<value>
+Inserisci due password identiche di minimo quattro caratteri
+</value>
 </string>
 <string id="233" name="user_registerMailError">
-<value>Wrong Mail</value>
+<value>Mails sbagliata</value>
 </string>
 <string id="234" name="user_registerMailErrorHeader">
-<value>You have entered an invalid Mail-Adress</value>
+<value>Hai inserito una mail non valida</value>
 </string>
 <string id="235" name="user_registerSuccess">
-<value>Registration Complete</value>
+<value>Registrazione completata</value>
 </string>
 <string id="236" name="user_registerSuccessHeader">
-<value>Your account has been created. You an login now.</value>
+<value>
+Il tuo profilo è stato creato correttamente. Puoi effettuare il login.
+</value>
 </string>	
 <string id="237" name="user_sharing_message">
-<value>You cannot share your screen at the moment. Somebody else already share's its screen.</value>
+<value>Non è possibile condividere il tuo desktop in questo momento. Potrebbe essere in condivisione con qualcun'altro
+</value>
 </string>		
 <string id="238" name="user_sharing_messageHeader">
-<value>Sharing forbidden</value>
+<value>Condivisione non permessa</value>
 </string>	
 <string id="239" name="user_doStartScreenViewer">
-<value>Share your Screen</value>
+<value>Scarica l'immagine</value>
 </string>	
 <string id="240" name="screen_warnBandwidth">
-<value>Bad Bandwidth: You have not been able to syncronize the Screen. Frames will be dropped. If this Warning is shown often you could ask the moderator to reduce the Quality.</value>
+<value>larghezza di banda insufficiente: Non sei abilitato a sincronizzare le immagini. i Frames saranno lasciati. Se visualizzi questo messaggio chiedi al moderatore di abbassare la qualità.</value>
 </string>	
 <string id="241" name="screen_userlabel">
-<value>Screen of:</value>
+<value>immagine di:</value>
 </string>	
 <string id="242" name="whiteboard_tab_paint">
-<value>Paint</value>
+<value>Disegna</value>
 </string>	
 <string id="243" name="whiteboard_tab_document">
-<value>Document</value>
+<value>Documento</value>
 </string>		
 <string id="244" name="tabbar_chaticon">
 <value>Chat</value>
@@ -736,43 +742,43 @@
 <value>Files</value>
 </string>	
 <string id="246" name="tabbar_participantsicon">
-<value>Members</value>
+<value>Membri</value>
 </string>	
 <string id="247" name="swfpresentation_listsaveorig">
-<value>Download original document</value>
+<value>Scarica il documento originale</value>
 </string>	
 <string id="248" name="swfpresentation_listsavepdf">
-<value>Download pdf document</value>
+<value>Scarica il documento PDF</value>
 </string>	
 <string id="249" name="swfpresentation_listloadswf">
-<value>Load Presentation to whiteboard</value>
+<value>Carica la presentazione sulla lavagna</value>
 </string>	
 <string id="250" name="navimain_config">
-<value>Configuration</value>
+<value>Configurazione</value>
 </string>	
 <string id="251" name="whiteboard_boundingbox_drag">
-<value>Drag this Object</value>
+<value>Muovi quest'oggetto</value>
 </string>		
 <string id="252" name="whiteboard_boundingbox_resize">
-<value>Resize this Object</value>
+<value>Ripristina quest'oggetto</value>
 </string>
 <string id="253" name="whiteboard_documenttoolbar_zoom">
 <value>%</value>
 </string>	
 <string id="254" name="whiteboard_documenttoolbar_slide">
-<value>of</value>
+<value>di</value>
 </string>		
 <string id="255" name="whiteboard_documenttoolbar_firstslide">
-<value>Go to first Page</value>
+<value>Vai alla prima pagina</value>
 </string>		
 <string id="256" name="whiteboard_documenttoolbar_preslide">
-<value>Go to previous Page</value>
+<value>Vai alla pagina precedente</value>
 </string>	
 <string id="257" name="whiteboard_documenttoolbar_nextslide">
-<value>Go to next Page</value>
+<value>Vai alla prossima pagina</value>
 </string>		
 <string id="258" name="whiteboard_documenttoolbar_lastslide">
-<value>Go to last Page</value>
+<value>Vai all'ultima pagina</value>
 </string>	
 <string id="259" name="whiteboard_documenttoolbar_zoomminus">
 <value>Zoom --</value>
@@ -781,39 +787,39 @@
 <value>Zoom ++</value>
 </string>	
 <string id="261" name="salutation_mr">
-<value>Mr.</value>
+<value>sig.</value>
 </string>
 <string id="262" name="salutation_miss">
-<value>Ms.</value>
+<value>Sig.ra</value>
 </string>	
 <string id="263" name="navimain_confadmin">
-<value>Configuration</value>
+<value>Configurazione</value>
 </string>
 <string id="264" name="conftable_headerId">
 <value>ID</value>
 </string>
 <string id="265" name="conftable_headerkey">
-<value>Key</value>
+<value>Chiave</value>
 </string>	
 <string id="266" name="confadminform_header">
-<value>Configuration</value>
+<value>Configurazione</value>
 </string>
 <string id="267" name="confadminform_labelkey">
-<value>Key</value>
+<value>Chiave</value>
 </string>	
 <string id="268" name="confadminform_labelupdated">
-<value>last update</value>
+<value>Ultimo aggiornamento</value>
 </string>
 <string id="269" name="confadminform_labelupdatedby">
 <value>updatedby</value>
 </string>
 <string id="270" name="confadminform_labelcomment">
-<value>comment</value>
+<value>commenti</value>
 </string>	
 <string id="271" name="confadminform_labelkey">
-<value>key</value>
+<value>chiave</value>
 </string>
 <string id="272" name="turnoverlist_maxresults">
-<value>of</value>
+<value>di</value>
 </string>	
 </language>
