@@ -1,0 +1,825 @@
+<?xml version="1.0" encoding="utf-8"?>
+<language>
+  <string id="1" name="conference">
+    <value>视訊會議</value>
+  </string>
+  <string id="2" name="meeting">
+    <value>會議</value>
+  </string>
+  <string id="3" name="classroom">
+    <value>會議廳</value>
+  </string>
+  <string id="4" name="settings">
+    <value>設定
+</value>
+  </string>
+  <string id="5" name="benutzer">
+    <value>用戶
+</value>
+  </string>
+  <string id="6" name="admin">
+    <value>管理
+</value>
+  </string>
+  <string id="7" name="stop">
+    <value>停止</value>
+  </string>
+  <string id="8" name="record">
+    <value>記錄</value>
+  </string>
+  <string id="9" name="nofile">
+    <value>沒有資料</value>
+  </string>
+  <string id="10" name="recordbyteacher">
+    <value>老師記錄</value>
+  </string>
+  <string id="11" name="connectedusers">
+    <value>連接用戶 :</value>
+  </string>
+  <string id="12" name="startconf">
+    <value>啟動會議 </value>
+  </string>
+  <string id="13" name="myname">
+    <value>我的名字 </value>
+  </string>
+  <string id="14" name="videoconference">
+    <value>视訊會議</value>
+  </string>
+  <string id="15" name="import">
+    <value>輸入演示
+</value>
+  </string>
+  <string id="16" name="refreshfiles">
+    <value>刷新列表</value>
+  </string>
+  <string id="17" name="tomainfile">
+    <value>回到主要檔案</value>
+  </string>
+  <string id="18" name="newpoll">
+    <value>新的民意</value>
+  </string>
+  <string id="19" name="newpollheader">
+    <value>一項新的民意測驗給這會議</value>
+  </string>
+  <string id="20" name="question">
+    <value>問題:</value>
+  </string>
+  <string id="21" name="polltype">
+    <value>民調類型 :</value>
+  </string>
+  <string id="22" name="create">
+    <value>建立
+</value>
+  </string>
+  <string id="23" name="infomessage">
+    <value>信息:每個接入用戶收到新的民意信息</value>
+  </string>
+  <string id="24" name="creatpoll">
+    <value>創造一個新的民調</value>
+  </string>
+  <string id="25" name="cancel">
+    <value>取诮</value>
+  </string>
+  <string id="26" name="yesno">
+    <value>是/否</value>
+  </string>
+  <string id="27" name="numeric">
+    <value>數字的 1-10</value>
+  </string>
+  <string id="28" name="poll">
+    <value>民調</value>
+  </string>
+  <string id="29" name="moderation">
+    <value>必須是主持人能提出問題</value>
+  </string>
+  <string id="30" name="vote">
+    <value>你的投票己登記</value>
+  </string>
+  <string id="31" name="alreadyvoted">
+    <value>你已經投票在本次民調中</value>
+  </string>
+  <string id="32" name="voting">
+    <value>投票!</value>
+  </string>
+  <string id="33" name="answer">
+    <value>你的回應 : </value>
+  </string>
+  <string id="34" name="yes">
+    <value>是</value>
+  </string>
+  <string id="35" name="no">
+    <value>否</value>
+  </string>
+  <string id="36" name="questionwant">
+    <value>知道事情的立場: </value>
+  </string>
+  <string id="37" name="pollresults">
+    <value>投票結果</value>
+  </string>
+  <string id="38" name="question">
+    <value>問題:</value>
+  </string>
+  <string id="39" name="results">
+    <value>結果:</value>
+  </string>
+  <string id="40" name="answers">
+    <value>答案:</value>
+  </string>
+  <string id="41" name="nopoll">
+    <value>民調還沒開始</value>
+  </string>
+  <string id="42" name="votings">
+    <value>投票!</value>
+  </string>
+  <string id="43" name="meeting">
+    <value>會議 (最多4席)</value>
+  </string>
+  <string id="44" name="conference">
+    <value>會議 (最多50席)</value>
+  </string>
+  <string id="45" name="type">
+    <value>類型 </value>
+  </string>
+  <string id="46" name="remainingseats">
+    <value>其他席位 </value>
+  </string>
+  <string id="47" name="alreadychosen">
+    <value>已選定 </value>
+  </string>
+  <string id="48" name="enter">
+    <value>進入</value>
+  </string>
+  <string id="49" name="modleave">
+    <value>主持人已經離開了會議 . </value>
+  </string>
+  <string id="50" name="systemmessage">
+    <value>系統信息 </value>
+  </string>
+  <string id="51" name="chossedevice">
+    <value>選擇裝置 </value>
+  </string>
+  <string id="52" name="choosecam">
+    <value>選擇攝像机  :</value>
+  </string>
+  <string id="53" name="choosemic">
+    <value>選擇麥克風 :</value>
+  </string>
+  <string id="54" name="ok">
+    <value>设定好了</value>
+  </string>
+  <string id="55" name="cancel2">
+    <value>取消</value>
+  </string>
+  <string id="56" name="reconeectneeded">
+    <value>你需要重新連接 .</value>
+  </string>
+  <string id="57" name="editsetup">
+    <value>編輯設定 .</value>
+  </string>
+  <string id="58" name="course">
+    <value>課程 :</value>
+  </string>
+  <string id="59" name="language">
+    <value>語言 : </value>
+  </string>
+  <string id="60" name="ok2">
+    <value>设定好了</value>
+  </string>
+  <string id="61" name="cancel3">
+    <value>取消</value>
+  </string>
+  <string id="62" name="clearwhiteboard">
+    <value>清掉電子白板</value>
+  </string>
+  <string id="63" name="clearwhiteboardquestion">
+    <value>你想要在加圖片之前先清掉白板嗎?</value>
+  </string>
+  <string id="64" name="dontaskagain">
+    <value>不要再問 </value>
+  </string>
+  <string id="65" name="no">
+    <value>否</value>
+  </string>
+  <string id="66" name="editsetup2">
+    <value>編輯設定</value>
+  </string>
+  <string id="67" name="needconfirmationwhiteboard">
+    <value>請求確認清掉白板</value>
+  </string>
+  <string id="68" name="userinfo">
+    <value>用户資料</value>
+  </string>
+  <string id="69" name="cleardrawarea">
+    <value>清掉畫圖</value>
+  </string>
+  <string id="70" name="undo">
+    <value>撤消</value>
+  </string>
+  <string id="71" name="redo">
+    <value>重做 </value>
+  </string>
+  <string id="72" name="selectobject">
+    <value>選擇對象</value>
+  </string>
+  <string id="73" name="text">
+    <value>全文 </value>
+  </string>
+  <string id="74" name="paint">
+    <value>繪畫</value>
+  </string>
+  <string id="75" name="drawline">
+    <value>畫線</value>
+  </string>
+  <string id="76" name="drawu">
+    <value>畫強洞底線</value>
+  </string>
+  <string id="77" name="rect">
+    <value>長方形</value>
+  </string>
+  <string id="78" name="ellipse">
+    <value>橢圓形</value>
+  </string>
+  <string id="79" name="arrow">
+    <value>箭頭</value>
+  </string>
+  <string id="80" name="deletechosen">
+    <value>刪除選定項目</value>
+  </string>
+  <string id="81" name="appliymod">
+    <value>申請成為主持人</value>
+  </string>
+  <string id="82" name="apply">
+    <value>應用</value>
+  </string>
+  <string id="83" name="cancel">
+    <value>取消</value>
+  </string>
+  <string id="84" name="mod">
+    <value>成為主持人</value>
+  </string>
+  <string id="85" name="close">
+    <value>關閉</value>
+  </string>
+  <string id="86" name="italic">
+    <value>斜體字</value>
+  </string>
+  <string id="87" name="bold">
+    <value>粗體字</value>
+  </string>
+  <string id="88" name="waiting">
+    <value>等待
+</value>
+  </string>
+  <string id="89" name="applyMessage">
+    <value>有用户想申請成為主持人</value>
+  </string>
+  <string id="90" name="accept">
+    <value>接受</value>
+  </string>
+  <string id="91" name="reject">
+    <value>拒绝</value>
+  </string>
+  <string id="92" name="cancel">
+    <value>取诮</value>
+  </string>
+  <string id="93" name="sendmodrequestmessage">
+    <value>送出請求到以下的用戶 </value>
+  </string>
+  <string id="94" name="accept">
+    <value>接受</value>
+  </string>
+  <string id="95" name="reject">
+    <value>拒绝</value>
+  </string>
+  <string id="96" name="changemod">
+    <value>改變主持人</value>
+  </string>
+  <string id="97" name="nonmoderrormessage">
+    <value>你不是這課程的主持人!</value>
+  </string>
+  <string id="98" name="moderator">
+    <value>主持人:</value>
+  </string>
+  <string id="99" name="roomfullmessage">
+    <value>這個房間已滿 . 對不起 ,請捎後再試</value>
+  </string>
+  <string id="100" name="elllipse">
+    <value>橢圓形</value>
+  </string>
+  <string id="101" name="close">
+    <value>關閉</value>
+  </string>
+  <string id="102" name="AuthError">
+    <value>輸入資料有誤</value>
+  </string>
+  <string id="103" name="min4username">
+    <value>用戶名必須至少4個字符 </value>
+  </string>
+  <string id="104" name="min4pass">
+    <value>用戶密碼必須至少4個字符 </value>
+  </string>
+  <string id="105" name="usernametaken">
+    <value>用戶台已被姶用</value>
+  </string>
+  <string id="106" name="emailtaken">
+    <value>這電子郵件已註冊过了</value>
+  </string>
+  <string id="107" name="emailtaken">
+    <value>系統錯誤 ,請聯繫系統管理員</value>
+  </string>
+  <string id="108" name="Authlogin">
+    <value>登錄 </value>
+  </string>
+  <string id="109" name="Authuser">
+    <value>用戶 : </value>
+  </string>
+  <string id="110" name="Authpass">
+    <value>密碼 :</value>
+  </string>
+  <string id="111" name="Authlang">
+    <value>語言</value>
+  </string>
+  <string id="112" name="Authreg">
+    <value>註冊登錄 </value>
+  </string>
+  <string id="113" name="regformhead">
+    <value>報名 </value>
+  </string>
+  <string id="114" name="regformuser">
+    <value>用戶 : </value>
+  </string>
+  <string id="115" name="regformpass">
+    <value>密碼 :</value>
+  </string>
+  <string id="116" name="regformretype">
+    <value>重打:</value>
+  </string>
+  <string id="117" name="regformfirstname">
+    <value>名稱:</value>
+  </string>
+  <string id="118" name="regformlastname">
+    <value>姓氏:</value>
+  </string>
+  <string id="119" name="regformmail">
+    <value>郵件 : </value>
+  </string>
+  <string id="120" name="regformstate">
+    <value>國家 : </value>
+  </string>
+  <string id="121" name="regformbtn1">
+    <value>登記</value>
+  </string>
+  <string id="122" name="regformbtn2">
+    <value>取消</value>
+  </string>
+  <string id="123" name="Authbtn2">
+    <value>登記</value>
+  </string>
+  <string id="124" name="dashboard">
+    <value>首頁 </value>
+  </string>
+  <string id="125" name="useradmin">
+    <value>用戶管理</value>
+  </string>
+  <string id="126" name="groupadmin">
+    <value>團體管理</value>
+  </string>
+  <string id="127" name="orgadmin">
+    <value>組織管理</value>
+  </string>
+  <string id="128" name="headconf">
+    <value>會議室</value>
+  </string>
+  <string id="129" name="conf_pub">
+    <value>公開會議</value>
+  </string>
+  <string id="130" name="head_org">
+    <value>組織</value>
+  </string>
+  <string id="131" name="btn_enterroom">
+    <value>進入</value>
+  </string>
+  <string id="132" name="useralterself_login">
+    <value>登錄 </value>
+  </string>
+  <string id="133" name="useralterself_pass">
+    <value>密碼</value>
+  </string>
+  <string id="134" name="useralterself_passretype">
+    <value>重打</value>
+  </string>
+  <string id="135" name="useralterself_firstname">
+    <value>名稱</value>
+  </string>
+  <string id="136" name="useralterself_lastname">
+    <value>姓氏</value>
+  </string>
+  <string id="137" name="useralterself_email">
+    <value>郵件</value>
+  </string>
+  <string id="138" name="useralterself_birth">
+    <value>生日</value>
+  </string>
+  <string id="139" name="useralterself_streetno">
+    <value>街名/號碼</value>
+  </string>
+  <string id="140" name="useralterself_town">
+    <value>郵編 /城市 </value>
+  </string>
+  <string id="141" name="useralterself_state">
+    <value>國家</value>
+  </string>
+  <string id="142" name="useralterself_adresscomment">
+    <value>地址-信息 </value>
+  </string>
+  <string id="143" name="useralterself_header">
+    <value>用户资料</value>
+  </string>
+  <string id="144" name="savemenubar_savelabel">
+    <value>保存</value>
+  </string>
+  <string id="145" name="savemenubar_savelabel">
+    <value>保存</value>
+  </string>
+  <string id="146" name="admin_userlist_user_id">
+    <value>用户-ID</value>
+  </string>
+  <string id="147" name="admin_userlist_login">
+    <value>登錄</value>
+  </string>
+  <string id="148" name="admin_userlist_firstnam">
+    <value>名稱</value>
+  </string>
+  <string id="149" name="admin_userlist_lastname">
+    <value>姓氏</value>
+  </string>
+  <string id="150" name="turnoverlist_next">
+    <value>顯示下一個</value>
+  </string>
+  <string id="151" name="turnoverlist_pre">
+    <value>顯示前一個</value>
+  </string>
+  <string id="152" name="savecontent_confirm">
+    <value>刪除紀錄 </value>
+  </string>
+  <string id="153" name="savecontent_confirm_cancel_btn">
+    <value>取消</value>
+  </string>
+  <string id="154" name="savecontent_confirm_confirm_btn">
+    <value>刪除</value>
+  </string>
+  <string id="155" name="savemenubar_addlabel">
+    <value>新紀錄</value>
+  </string>
+  <string id="156" name="savemenubar_reloadlabel">
+    <value>刷新紀錄 </value>
+  </string>
+  <string id="157" name="savemenubar_deletelabel">
+    <value>刪除紀錄 </value>
+  </string>
+  <string id="158" name="useralter_admin_status">
+    <value>狀態</value>
+  </string>
+  <string id="159" name="useralter_admin_statusItem">
+    <value>關閉</value>
+  </string>
+  <string id="160" name="useralter_admin_statusItem">
+    <value>啟動</value>
+  </string>
+  <string id="161" name="useralter_admin_organisation">
+    <value>組織 </value>
+  </string>
+  <string id="162" name="calendar_iconlabel">
+    <value>日曆</value>
+  </string>
+  <string id="163" name="savewindow_btn">
+    <value>關閉</value>
+  </string>
+  <string id="164" name="organisationtablelist_idrow">
+    <value>組織 -ID</value>
+  </string>
+  <string id="165" name="organisationtablelist_namerow">
+    <value>名稱</value>
+  </string>
+  <string id="166" name="uservalue_levelid1">
+    <value>用戶</value>
+  </string>
+  <string id="167" name="uservalue_levelid2">
+    <value>主持</value>
+  </string>
+  <string id="168" name="uservalue_levelid3">
+    <value>管理</value>
+  </string>
+  <string id="169" name="uservalue_levellabel">
+    <value>用戶級別</value>
+  </string>
+  <string id="170" name="orgvalue_header">
+    <value>組織</value>
+  </string>
+  <string id="171" name="orgvalue_orgname">
+    <value>名稱</value>
+  </string>
+  <string id="172" name="orgvalue_orgname">
+    <value>增加組織</value>
+  </string>
+  <string id="173" name="orgvalue_orgname">
+    <value>增加組織</value>
+  </string>
+  <string id="174" name="orgvalue_userwin">
+    <value>取消</value>
+  </string>
+  <string id="175" name="orgvalue_userwin">
+    <value>增加</value>
+  </string>
+  <string id="176" name="orgvalue_userwin">
+    <value>移除組織</value>
+  </string>
+  <string id="177" name="orgvalue_userlist">
+    <value>用戶</value>
+  </string>
+  <string id="178" name="orgvalue_userlistadd">
+    <value>增加用戶</value>
+  </string>
+  <string id="179" name="orgvalue_userlistdelete">
+    <value>移除用戶</value>
+  </string>
+  <string id="180" name="orgvalue_userwinheader">
+    <value>增加用戶</value>
+  </string>
+  <string id="181" name="orgvalue_userwinsearchfield">
+    <value>尋找用戶 </value>
+  </string>
+  <string id="182" name="orgvalue_userwinsearchbtn">
+    <value>尋找</value>
+  </string>
+  <string id="183" name="orgvalue_userwinsearchresult">
+    <value>用戶</value>
+  </string>
+  <string id="184" name="loginwin_chooseorganisation">
+    <value>組織</value>
+  </string>
+  <string id="185" name="loginwin_chooseorganisationbtn">
+    <value>進入 </value>
+  </string>
+  <string id="186" name="navi_roomadmin">
+    <value>會議室 </value>
+  </string>
+  <string id="187" name="roomadmin_header">
+    <value>會議室 </value>
+  </string>
+  <string id="188" name="roomadmin_header">
+    <value>身份證</value>
+  </string>
+  <string id="189" name="roomadmin_header">
+    <value>名字</value>
+  </string>
+  <string id="190" name="roomadmin_header">
+    <value>公開</value>
+  </string>
+  <string id="191" name="roomadmin_header">
+    <value>組織</value>
+  </string>
+  <string id="192" name="roomadmin_header">
+    <value>會議室 </value>
+  </string>
+  <string id="193" name="roomvalue_name">
+    <value>名字</value>
+  </string>
+  <string id="194" name="roomvalue_type">
+    <value>類型</value>
+  </string>
+  <string id="195" name="roomvalue_ispublic">
+    <value>公開</value>
+  </string>
+  <string id="196" name="roomvalue_comment">
+    <value>評論</value>
+  </string>
+  <string id="197" name="whiteboard_saveicon">
+    <value>保存</value>
+  </string>
+  <string id="198" name="whiteboard_openicon">
+    <value>輸入</value>
+  </string>
+  <string id="199" name="whiteboard_saveaswinheader">
+    <value>另存為</value>
+  </string>
+  <string id="200" name="whiteboard_saveaswintext">
+    <value>文件名稱</value>
+  </string>
+  <string id="201" name="whiteboard_saveaswintext">
+    <value>文件名稱</value>
+  </string>
+  <string id="202" name="whiteboard_saveaswinbtn1">
+    <value>取消</value>
+  </string>
+  <string id="203" name="whiteboard_saveaswinbtn2">
+    <value>保存</value>
+  </string>
+  <string id="204" name="rpcerrorwin_header">
+    <value>錯誤</value>
+  </string>
+  <string id="205" name="loadwml_header">
+    <value>輸入中</value>
+  </string>
+  <string id="206" name="loadwml_messsload">
+    <value>主題輸入</value>
+  </string>
+  <string id="207" name="loadwml_messsync">
+    <value>正在同步客戶 ,客戶請诮等</value>
+  </string>
+  <string id="208" name="loadimage_messload">
+    <value>載入圖檔</value>
+  </string>
+  <string id="209" name="loadimage_messsync">
+    <value>正在同步客戶 ,客戶請诮等</value>
+  </string>
+  <string id="210" name="loadwml_confirmheader">
+    <value>清除畫圖區</value>
+  </string>
+  <string id="211" name="loadwml_confirmmess">
+    <value>清除畫圖區，所有资料會不見！</value>
+  </string>
+  <string id="212" name="loadwml_confirmmess2">
+    <value>確認後再載入檔案</value>
+  </string>
+  <string id="213" name="send_invitation_btn">
+    <value>發送邀請</value>
+  </string>
+  <string id="214" name="send_invitationwin_header">
+    <value>發送邀請</value>
+  </string>
+  <string id="215" name="send_invitationwin_subject">
+    <value>主題</value>
+  </string>
+  <string id="216" name="send_invitationwin_recipient">
+    <value>受邀者</value>
+  </string>
+  <string id="217" name="send_invitationwin_message">
+    <value>信息</value>
+  </string>
+  <string id="218" name="send_invitationwin_btn_confirm">
+    <value>送出</value>
+  </string>
+  <string id="219" name="send_invitationwin_btn_cancel">
+    <value>取消</value>
+  </string>
+  <string id="220" name="send_chat_text_btn">
+    <value>送出</value>
+  </string>
+  <string id="221" name="invited_userwin_header">
+    <value>用戶資料</value>
+  </string>
+  <string id="222" name="invited_userwin_subject">
+    <value>你這次會議的別名</value>
+  </string>
+  <string id="223" name="invited_userwin_login">
+    <value>別名</value>
+  </string>
+  <string id="224" name="invited_userwin_firstname">
+    <value>名稱</value>
+  </string>
+  <string id="225" name="invited_userwin_lastname">
+    <value>姓名</value>
+  </string>
+  <string id="226" name="invited_userwin_mail">
+    <value>電子郵件</value>
+  </string>
+  <string id="227" name="invited_userwin_lang">
+    <value>語言 </value>
+  </string>
+  <string id="228" name="invited_userwin_enter">
+    <value>進入</value>
+  </string>
+  <string id="229" name="invited_userwin_enter">
+    <value>載入</value>
+  </string>
+  <string id="230" name="invited_userwin_enter">
+    <value>资料正在載入, 請诮等!</value>
+  </string>
+  <string id="231" name="user_registerFalsePWD">
+    <value>密碼錯誤 </value>
+  </string>
+  <string id="232" name="user_registerFalsePWDHeader">
+    <value>請輸入兩個相同的密碼最少4個字符</value>
+  </string>
+  <string id="233" name="user_registerMailError">
+    <value>錯的郵件 </value>
+  </string>
+  <string id="234" name="user_registerMailErrorHeader">
+    <value>你輸入了一個無效的郵件地址</value>
+  </string>
+  <string id="235" name="user_registerSuccess">
+    <value>註冊完成</value>
+  </string>
+  <string id="236" name="user_registerSuccessHeader">
+    <value>你的賬戶已經建立. 你現在以可登錄</value>
+  </string>
+  <string id="237" name="user_sharing_message">
+    <value>己有別人在共用這电子白板, 你现在暫時無法再分享。</value>
+  </string>
+  <string id="238" name="user_sharing_messageHeader">
+    <value>嚴禁共享</value>
+  </string>
+  <string id="239" name="user_doStartScreenViewer">
+    <value>分享你的屏幕</value>
+  </string>
+  <string id="240" name="screen_warnBandwidth">
+    <value>如果看到這項警告，顯示你的频寬不夠造成無法同步屏幕. 您可以問主持人降低寬頻標準 . </value>
+  </string>
+  <string id="241" name="screen_userlabel">
+    <value>畫面用户: </value>
+  </string>
+<string id="242" name="whiteboard_tab_paint">
+<value>Paint</value>
+</string>	
+<string id="243" name="whiteboard_tab_document">
+<value>Document</value>
+</string>		
+<string id="244" name="tabbar_chaticon">
+<value>Chat</value>
+</string>	
+<string id="245" name="tabbar_filesicon">
+<value>Files</value>
+</string>	
+<string id="246" name="tabbar_participantsicon">
+<value>Members</value>
+</string>	
+<string id="247" name="swfpresentation_listsaveorig">
+<value>Download original document</value>
+</string>	
+<string id="248" name="swfpresentation_listsavepdf">
+<value>Download pdf document</value>
+</string>	
+<string id="249" name="swfpresentation_listloadswf">
+<value>Load Presentation to whiteboard</value>
+</string>	
+<string id="250" name="navimain_config">
+<value>Configuration</value>
+</string>	
+<string id="251" name="whiteboard_boundingbox_drag">
+<value>Drag this Object</value>
+</string>		
+<string id="252" name="whiteboard_boundingbox_resize">
+<value>Resize this Object</value>
+</string>
+<string id="253" name="whiteboard_documenttoolbar_zoom">
+<value>%</value>
+</string>	
+<string id="254" name="whiteboard_documenttoolbar_slide">
+<value>of</value>
+</string>		
+<string id="255" name="whiteboard_documenttoolbar_firstslide">
+<value>Go to first Page</value>
+</string>		
+<string id="256" name="whiteboard_documenttoolbar_preslide">
+<value>Go to previous Page</value>
+</string>	
+<string id="257" name="whiteboard_documenttoolbar_nextslide">
+<value>Go to next Page</value>
+</string>		
+<string id="258" name="whiteboard_documenttoolbar_lastslide">
+<value>Go to last Page</value>
+</string>	
+<string id="259" name="whiteboard_documenttoolbar_zoomminus">
+<value>Zoom --</value>
+</string>
+<string id="260" name="whiteboard_documenttoolbar_zoomplus">
+<value>Zoom ++</value>
+</string>	
+<string id="261" name="salutation_mr">
+<value>Mr.</value>
+</string>
+<string id="262" name="salutation_miss">
+<value>Ms.</value>
+</string>	
+<string id="263" name="navimain_confadmin">
+<value>Configuration</value>
+</string>
+<string id="264" name="conftable_headerId">
+<value>ID</value>
+</string>
+<string id="265" name="conftable_headerkey">
+<value>Key</value>
+</string>	
+<string id="266" name="confadminform_header">
+<value>Configuration</value>
+</string>
+<string id="267" name="confadminform_labelkey">
+<value>Key</value>
+</string>	
+<string id="268" name="confadminform_labelupdated">
+<value>last update</value>
+</string>
+<string id="269" name="confadminform_labelupdatedby">
+<value>updatedby</value>
+</string>
+<string id="270" name="confadminform_labelcomment">
+<value>comment</value>
+</string>	
+<string id="271" name="confadminform_labelkey">
+<value>key</value>
+</string>
+<string id="272" name="turnoverlist_maxresults">
+<value>of</value>
+</string>	
+</language>

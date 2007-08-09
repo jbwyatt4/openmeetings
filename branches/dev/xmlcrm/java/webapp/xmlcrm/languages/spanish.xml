@@ -785,5 +785,35 @@
 </string>
 <string id="262" name="salutation_miss">
 <value>Ms.</value>
-</string>			
+</string>		
+<string id="263" name="navimain_confadmin">
+<value>Configuration</value>
+</string>
+<string id="264" name="conftable_headerId">
+<value>ID</value>
+</string>
+<string id="265" name="conftable_headerkey">
+<value>Key</value>
+</string>	
+<string id="266" name="confadminform_header">
+<value>Configuration</value>
+</string>
+<string id="267" name="confadminform_labelkey">
+<value>Key</value>
+</string>	
+<string id="268" name="confadminform_labelupdated">
+<value>last update</value>
+</string>
+<string id="269" name="confadminform_labelupdatedby">
+<value>updatedby</value>
+</string>
+<string id="270" name="confadminform_labelcomment">
+<value>comment</value>
+</string>	
+<string id="271" name="confadminform_labelkey">
+<value>key</value>
+</string>
+<string id="272" name="turnoverlist_maxresults">
+<value>of</value>
+</string>		
 </language>
