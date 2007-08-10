@@ -62,8 +62,10 @@ public class LibraryWmlLoader {
 					this.createListObjectObjecByNode(item, subMap);
 				} else if (nodeVal.equals("rectangle") || nodeVal.equals("ellipse")){
 					this.createListObjectRectAndEllipseByNode(item, subMap);
-				}
-	            
+				} else if (nodeVal.equals("swf")){
+					this.createListObjectSWFByNode(item, subMap);
+				} 
+				
 				log.error(subMap);
 	            lMap.put(k, subMap);
 	            
@@ -199,5 +201,37 @@ public class LibraryWmlLoader {
 			log.error("createListObjectObjecByNode",err);
 		}
 	}
+	
+	
+	public void createListObjectSWFByNode(Element paintElement, LinkedHashMap<Integer,Object> subMap){
+		try {
+
+			subMap.put(1, paintElement.element("urlname").getText());
+			subMap.put(2, paintElement.element("baseurl").getText());
+			subMap.put(3, paintElement.element("filename").getText());
+			subMap.put(4, paintElement.element("modulename").getText());
+			subMap.put(5, paintElement.element("parentpath").getText());
+			subMap.put(6, paintElement.element("room").getText());
+			subMap.put(7, paintElement.element("domain").getText());
+			subMap.put(8, Integer.valueOf(paintElement.element("slideNumber").getText()).intValue());
+			subMap.put(9, Float.valueOf(paintElement.element("innerx").getText()).floatValue());
+			subMap.put(10, Float.valueOf(paintElement.element("innery").getText()).floatValue());
+			subMap.put(11, Float.valueOf(paintElement.element("innerwidth").getText()).floatValue());
+			subMap.put(12, Float.valueOf(paintElement.element("innerheight").getText()).floatValue());
+			subMap.put(13, Integer.valueOf(paintElement.element("zoomlevel").getText()).intValue());
+			subMap.put(14, Float.valueOf(paintElement.element("initwidth").getText()).floatValue());
+			subMap.put(15, Float.valueOf(paintElement.element("initheight").getText()).floatValue());
+			subMap.put(16, Integer.valueOf(paintElement.element("currentzoom").getText()).intValue());
+			subMap.put(17, Integer.valueOf(paintElement.element("counter").getText()).intValue());
+			subMap.put(18, Float.valueOf(paintElement.element("x").getText()).floatValue());
+			subMap.put(19, Float.valueOf(paintElement.element("y").getText()).floatValue());
+			subMap.put(20, Float.valueOf(paintElement.element("width").getText()).floatValue());
+			subMap.put(21, Float.valueOf(paintElement.element("height").getText()).floatValue());
+			subMap.put(22, paintElement.element("layername").getText());		
+			
+		} catch (Exception err) {
+			log.error("createListObjectImageByNode",err);
+		}
+	}		
 	
 }
