@@ -349,7 +349,7 @@
 			//Remove this View
 			lastelement.destroy();
 			this.checkStepLayers();		
-			this.onsharedMessage('undo',newA);
+			this.onsharedMessage('undo',lastActionObject);
 		}
 		]]>
 	</method>
