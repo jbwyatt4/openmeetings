@@ -20,6 +20,15 @@
     <attribute name="initwidth" value="0" type="number" />
     <attribute name="initheight" value="0" type="number" />
     
+    <!-- for wml-loaded SWF's
+        attribute only set on init
+     -->
+    <attribute name="innerwidth" value="0" type="number" />
+    <attribute name="innerheight" value="0" type="number" />
+    <attribute name="innerx" value="0" type="number" />
+    <attribute name="innery" value="0" type="number" />
+    <attribute name="currentzoom" value="0" type="number" />
+    
     <attribute name="typeOfObject" value="swf" type="string" />
     
     <view name="_swfView" play="false" stretches="both">
@@ -56,6 +65,15 @@
                 } else {
                     this.parent.refObj.sendLoadNotificationSWF("swfloadcomplete");
                 }
+                
+                if (this.parent.refObj.isWmlLoaderImage){
+                    this.setAttribute('width',this.parent.innerwidth);
+                    this.setAttribute('height',this.parent.innerheight);
+                    this.setAttribute('x',this.parent.innerx);
+                    this.setAttribute('y',this.parent.innery);
+                    this.parent.currentzoomFactor = this.parent.currentzoom;
+                }
+
                 this.parent.refObj.layers.push(this.parent);			
                 
                 this.oninit.sendEvent();
@@ -161,7 +179,7 @@
 	<!--
 		alterModus => this is added by the mod not remotely
 	 -->
-  	<method name="addPresentationToLayer" args="obj,urlName,nameing,posx,posy,width,height,alterModus,baseurl,fileName,moduleName,parentPath,room,domain,slideNumber">
+  	<method name="addPresentationToLayer" args="obj,urlName,nameing,posx,posy,width,height,alterModus,baseurl,fileName,moduleName,parentPath,room,domain,slideNumber,currentzoom,innerwidth,innerheight,innerx,innery">
         <![CDATA[
             //Debug.write("addPresentationToLayer",obj,nameing,posx,posy,width,height,alterModus,baseurl,fileName,moduleName,parentPath,room,domain,slideNumber);
             //only show if it is not part of wml-file-object
@@ -180,9 +198,9 @@
             var height = this.height;
             ////Debug.write("width:height: ",width,height);
             if (alterModus){
-                this.currentlayer = new SWFResourceView(obj,{refObj:this,name:nameing,x:posx,y:posy,alterModus:alterModus,baseurl:baseurl,fileName:fileName,moduleName:moduleName,parentPath:parentPath,room:room,domain:domain,slideNumber:slideNumber,width:width,height:height});
+                this.currentlayer = new SWFResourceView(obj,{refObj:this,name:nameing,x:posx,y:posy,alterModus:alterModus,baseurl:baseurl,fileName:fileName,moduleName:moduleName,parentPath:parentPath,room:room,domain:domain,slideNumber:slideNumber,width:width,height:height,currentzoom:currentzoom,innerwidth:innerwidth,innerheight:innerheight,innerx:innerx,innery:innery});
             } else {
-                this.currentlayer = new SWFResourceView(obj,{refObj:this,name:nameing,x:posx,y:posy,alterModus:alterModus,baseurl:baseurl,fileName:fileName,moduleName:moduleName,parentPath:parentPath,room:room,domain:domain,slideNumber:slideNumber,width:width,height:height});
+                this.currentlayer = new SWFResourceView(obj,{refObj:this,name:nameing,x:posx,y:posy,alterModus:alterModus,baseurl:baseurl,fileName:fileName,moduleName:moduleName,parentPath:parentPath,room:room,domain:domain,slideNumber:slideNumber,width:width,height:height,currentzoom:currentzoom,innerwidth:innerwidth,innerheight:innerheight,innerx:innerx,innery:innery});
             }
             this.parent.parent.isloadingImage.sendEvent(this.currentlayer);
             ////Debug.write("downloadurl. ",downloadurl);
@@ -199,7 +217,7 @@
   	<method name="addSWFToLayerHistory" args="actionObject,refObj,isWmlLoader">
 		this.isWmlLoaderImage = isWmlLoader;
         this.baseactionobjectList.push(actionObject);	
-  		this.addPresentationToLayer(refObj,actionObject[1],actionObject[actionObject.length-1],actionObject[actionObject.length-5],actionObject[actionObject.length-4],actionObject[actionObject.length-3],actionObject[actionObject.length-2],false,actionObject[2],actionObject[3],actionObject[4],actionObject[5],actionObject[6],actionObject[7],actionObject[8]);
+  		this.addPresentationToLayer(refObj,actionObject[1],actionObject[actionObject.length-1],actionObject[actionObject.length-5],actionObject[actionObject.length-4],actionObject[actionObject.length-3],actionObject[actionObject.length-2],false,actionObject[2],actionObject[3],actionObject[4],actionObject[5],actionObject[6],actionObject[7],actionObject[8],actionObject[16],actionObject[11],actionObject[12],actionObject[9],actionObject[10]);
   	</method>
   	
   	<method name="registerNewSWF" args="urlname,posx,posy,width,height,baseurl,fileName,moduleName,parentPath,room,domain,slideNumber,innerx,innery,innerwidth,innerheight,zoomlevel,currentzoom,initwidth,initheight">
