@@ -9,34 +9,10 @@
      <attribute name="counterror" type="number" value="0" />
     
      <attribute name="loaderVar" value="null" />
-         
-     <handler name="onconnect">
-        //Debug.write("connected");
-        canvas.thishib.loaderVar.destroy();
-        this.getsessiondata.call();        
-     </handler>
-  	 <handler name="onerror" >
-        <![CDATA[
-  	 	Debug.write("error ",this.status);
-  	 	this.setAttribute('protocollName','rtmpt');
-  	 	this.setAttribute('protocollPort',canvas.rmptTunnelport);
-  	 	var src = 'rtmpt://'+canvas.rtmphostlocal+':'+canvas.rmptTunnelport+'/xmlcrm/hibernate';
-  	 	this.setAttribute('src',src);
-  	 	//Debug.write("new src ",this.src);
-        if (this.counterror<3){
-            this.counterror++;
-	  	 	this.init();
-	  	 	//Debug.write("try ",this.counterror,"one");
-            canvas.thishib.loaderVar.error.setText("try "+this.counterror);
-	  	 	this.connect();
-        } else {
-            //Debug.write("connection failed");
-            canvas.thishib.loaderVar.error.setText(this.status);
-            canvas.setAttribute('loadingmessage','connection failed');
-        }
-        canvas.thishib.loaderVar.src.setText(src);
-        ]]>
-  	 </handler>
+    
+    <!-- reconnect after each conference -->
+    <attribute name="reconnectAfterRoomleft" type="boolean" value="false" />
+    <attribute name="reconnectedRoomInstance" value="null" />
          
      <attribute name="userobject" value="null" />
      
@@ -59,6 +35,48 @@
 	<!-- shows what kind of conference it is at the moment
 		wether its conference or audience -->
 	<attribute name="modus" value="" type="string" />
+        
+         
+     <handler name="onconnect">
+        //Debug.write("connected");
+        if (this.reconnectAfterRoomleft) {
+            //Return to content after reconnect
+            canvas.thishib.reconnectedRoomInstance.destroy();
+            loadContentByTempActionForNavi();
+        } else {
+            canvas.thishib.loaderVar.destroy();
+            this.getsessiondata.call();    
+        }    
+    </handler>
+    <handler name="onerror" >
+        <![CDATA[
+  	 	    Debug.write("error ",this.status);
+            if (this.reconnectAfterRoomleft) {
+                Debug.write("this.reconnectAfterRoomleft: ",this.reconnectAfterRoomleft);
+                this.counterror=0;
+                this.init();
+                this.connect();
+            } else {
+  	 	        this.setAttribute('protocollName','rtmpt');
+                this.setAttribute('protocollPort',canvas.rmptTunnelport);
+  	 	        var src = 'rtmpt://'+canvas.rtmphostlocal+':'+canvas.rmptTunnelport+'/xmlcrm/hibernate';
+  	 	        this.setAttribute('src',src);
+  	 	        //Debug.write("new src ",this.src);
+                if (this.counterror<3){
+                    this.counterror++;
+	  	 	        this.init();
+	  	 	        //Debug.write("try ",this.counterror,"one");
+                    canvas.thishib.loaderVar.error.setText("try "+this.counterror);
+	  	 	        this.connect();
+                } else {
+                    //Debug.write("connection failed");
+                    canvas.thishib.loaderVar.error.setText(this.status);
+                    canvas.setAttribute('loadingmessage','connection failed');
+                }
+                canvas.thishib.loaderVar.src.setText(src);
+            }
+        ]]>
+    </handler>        
      
     <netremotecallhib name="getsessiondata" funcname="xmlcrm.getsessiondata" >      
         <handler name="ondata" args="value">

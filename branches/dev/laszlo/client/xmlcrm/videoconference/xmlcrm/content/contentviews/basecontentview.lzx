@@ -3,11 +3,15 @@
     
 <class name="basecontentview" extends="view">
 
+    <attribute name="destroyByMethod" value="false" type="boolean" />
+    
     <handler name="ontabcontentleave" />
     
     <method name="close">
+        Debug.write("close: ",this,this.destroyByMethod);
         this.ontabcontentleave.sendEvent();
-        this.destroy();
+        if (!this.destroyByMethod) this.destroy();
+        return this.destroyByMethod;
     </method>
 
 </class>

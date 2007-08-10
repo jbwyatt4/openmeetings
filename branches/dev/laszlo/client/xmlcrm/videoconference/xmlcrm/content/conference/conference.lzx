@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library>
      
-<class name="conference" extends="basecontentview">
+<class name="conference" extends="basecontentview" destroyByMethod="true" >
 
 	<handler name="ontabcontentleave">
 		this.logicalRoomLeave.doCall();
 	</handler>
-	
+	    
 	<netremotecallhib name="logicalRoomLeave" funcname="logicalRoomLeave" remotecontext="$once{ canvas.thishib }" >      
     	<handler name="ondata" args="value">
-    		//Debug.write("logicalRoomLeave: ",value);
+    		Debug.write("logicalRoomLeave: ",value);
     		//this.parent.destroy();
+            canvas.thishib.reconnectAfterRoomleft = true;
+            canvas.thishib.reconnectedRoomInstance = this.parent;
+            canvas.thishib.disconnect();
     	</handler>
     </netremotecallhib>
 

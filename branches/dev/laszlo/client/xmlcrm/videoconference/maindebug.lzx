@@ -264,10 +264,10 @@ containing the VideoViews
         <view name="inner" />
         
         <method name="clearAll">
-            //Debug.write("clearAll this.inner: ",this.inner,this.inner.subviews.length);
+            Debug.write("clearAll this.inner: ",this.inner,this.inner.subviews.length);
             for (var eg in this.inner.subviews){
-                //Debug.write("clearAll this.inner.subviews: ",this.inner.subviews[eg]);
-                this.inner.subviews[eg].close();                
+                Debug.write("clearAll this.inner.subviews: ",this.inner.subviews[eg]);
+                return this.inner.subviews[eg].close();                
                 //
             }
         </method>
