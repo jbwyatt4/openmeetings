@@ -18,24 +18,24 @@ public class AuthLevelmanagement {
 		return instance;
 	}
 
-	public boolean checkUserLevel(Long USER_LEVEL) {
-		if (USER_LEVEL > 0) {
+	public boolean checkUserLevel(Long user_level) {
+		if (user_level > 0) {
 			return true;
 		} else {
 			return false;
 		}
 	}
 	
-	public boolean checkModLevel(Long USER_LEVEL) {
-		if (USER_LEVEL > 1) {
+	public boolean checkModLevel(Long user_level) {
+		if (user_level > 1) {
 			return true;
 		} else {
 			return false;
 		}
 	}
 	
-	public boolean checkAdminLevel(Long USER_LEVEL) {
-		if (USER_LEVEL > 2) {
+	public boolean checkAdminLevel(Long user_level) {
+		if (user_level > 2) {
 			return true;
 		} else {
 			return false;

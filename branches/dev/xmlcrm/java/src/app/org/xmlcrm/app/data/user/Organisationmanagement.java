@@ -48,14 +48,14 @@ public class Organisationmanagement {
 	
 	/**
 	 * adds a new organisation if userlevel is admin
-	 * @param USER_LEVEL
+	 * @param user_level
 	 * @param orgname
 	 * @param user_id
 	 * @return
 	 */
-	public Long addOrganisation(Long USER_LEVEL, String orgname, long user_id, LinkedHashMap users){
+	public Long addOrganisation(Long user_level, String orgname, long user_id, LinkedHashMap users){
 		try {
-			if (AuthLevelmanagement.getInstance().checkAdminLevel(USER_LEVEL)){
+			if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)){
 				Long orgId = this.addOrganisation(orgname, user_id);
 				for (Iterator it = users.keySet().iterator();it.hasNext();){
 					Integer key = (Integer) it.next();
@@ -99,15 +99,15 @@ public class Organisationmanagement {
 	
 	/**
 	 * 
-	 * @param USER_LEVEL
+	 * @param user_level
 	 * @param start
 	 * @param max
 	 * @param orderby
 	 * @return
 	 */
-	public SearchResult getOrganisations(long USER_LEVEL, int start ,int max, String orderby, boolean asc) {
+	public SearchResult getOrganisations(long user_level, int start ,int max, String orderby, boolean asc) {
 		try {
-			if (AuthLevelmanagement.getInstance().checkAdminLevel(USER_LEVEL)){
+			if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)){
 				SearchResult sresult = new SearchResult();
 				sresult.setObjectName(Organisation.class.getName());
 				sresult.setRecords(this.selectMaxFromOrganisations());
@@ -126,7 +126,7 @@ public class Organisationmanagement {
 	
 	/**
 	 * 
-	 * @param USER_LEVEL
+	 * @param user_level
 	 * @return
 	 */
 	public List getOrganisations(int start ,int max, String orderby, boolean asc) {
@@ -177,15 +177,15 @@ public class Organisationmanagement {
 	}	
 	
 	/**
-	 * updates an organisation if USER_LEVEL is admin
-	 * @param USER_LEVEL
+	 * updates an organisation if user_level is admin
+	 * @param user_level
 	 * @param organisation_id
 	 * @param orgname
 	 * @param users_id
 	 * @param users
 	 * @return
 	 */
-	public Long updateOrganisation(Long USER_LEVEL, long organisation_id, String orgname, 
+	public Long updateOrganisation(Long user_level, long organisation_id, String orgname, 
 			long users_id, LinkedHashMap users){
 		try {			
 			Organisation org = this.getOrganisationById(organisation_id);			
@@ -296,13 +296,13 @@ public class Organisationmanagement {
 	
 	/**
 	 * get an organisation by id and only as admin
-	 * @param USER_LEVEL
+	 * @param user_level
 	 * @param organisation_id
 	 * @return
 	 */
-	public Organisation getOrganisationById(long USER_LEVEL, long organisation_id) {
+	public Organisation getOrganisationById(long user_level, long organisation_id) {
 		try {
-			if (AuthLevelmanagement.getInstance().checkAdminLevel(USER_LEVEL)){
+			if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)){
 				return this.getOrganisationById(organisation_id);
 			}
 		} catch (HibernateException ex) {
@@ -340,9 +340,9 @@ public class Organisationmanagement {
 		return null;
 	}
 	
-	public Long deleteOrganisation(long USER_LEVEL,long organisation_id, long updatedby){
+	public Long deleteOrganisation(long user_level,long organisation_id, long updatedby){
 		try {
-			if (AuthLevelmanagement.getInstance().checkAdminLevel(USER_LEVEL)){
+			if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)){
 				return this.deleteOrganisation(organisation_id, updatedby);
 			}
 		} catch (HibernateException ex) {
@@ -484,7 +484,7 @@ public class Organisationmanagement {
 	
 	/**
 	 * get a list of all users of an organisation
-	 * @param USER_LEVEL
+	 * @param user_level
 	 * @param organisation_id
 	 * @param start
 	 * @param max
@@ -492,9 +492,9 @@ public class Organisationmanagement {
 	 * @param asc
 	 * @return
 	 */
-	public List getUsersByOrganisationId(long USER_LEVEL, long organisation_id, int start, int max, String orderby, boolean asc){
+	public List getUsersByOrganisationId(long user_level, long organisation_id, int start, int max, String orderby, boolean asc){
 		try {
-			if (AuthLevelmanagement.getInstance().checkAdminLevel(USER_LEVEL)){
+			if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)){
 					//get all users
 					Object idf = HibernateUtil.createSession();
 					Session session = HibernateUtil.getSession();
@@ -572,16 +572,16 @@ public class Organisationmanagement {
 	/**
 	 * Filter all Organisations by user
 	 * TODO: Add sorting
-	 * @param USER_LEVEL
+	 * @param user_level
 	 * @param users_id
 	 * @param start
 	 * @param max
 	 * @param orderby
 	 * @return
 	 */
-	public List getOrganisationsByUserId(long USER_LEVEL, long user_id, int start, int max, String orderby, boolean asc){
+	public List getOrganisationsByUserId(long user_level, long user_id, int start, int max, String orderby, boolean asc){
 		try {
-			if (AuthLevelmanagement.getInstance().checkAdminLevel(USER_LEVEL)){
+			if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)){
 					Object idf = HibernateUtil.createSession();
 					Session session = HibernateUtil.getSession();
 					Transaction tx = session.beginTransaction();
@@ -619,7 +619,7 @@ public class Organisationmanagement {
 	
 	/**
 	 * 
-	 * @param USER_LEVEL
+	 * @param user_level
 	 * @param user_id
 	 * @param start
 	 * @param max
@@ -627,12 +627,12 @@ public class Organisationmanagement {
 	 * @param asc
 	 * @return
 	 */
-	public List getRestOrganisationsByUserId(long USER_LEVEL, long user_id, int start, int max, String orderby, boolean asc){
+	public List getRestOrganisationsByUserId(long user_level, long user_id, int start, int max, String orderby, boolean asc){
 		try {
-			if (AuthLevelmanagement.getInstance().checkAdminLevel(USER_LEVEL)){
+			if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)){
 				//get all organisations
 				List allOrgs = this.getOrganisations(0, 1000000, orderby, asc);
-				List orgUser = this.getOrganisationsByUserId(USER_LEVEL, user_id, start, max, orderby, asc);
+				List orgUser = this.getOrganisationsByUserId(user_level, user_id, start, max, orderby, asc);
 				
 				List<Organisation> returnList = new LinkedList<Organisation>();
 				boolean notInList = true;

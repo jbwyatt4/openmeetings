@@ -66,7 +66,7 @@ public class Salutationmanagement {
 	
 	/**
 	 * get a list of all availible Salutations
-	 * @param USER_LEVEL
+	 * @param user_level
 	 * @return
 	 */
 	public List getUserSalutations(long language_id){

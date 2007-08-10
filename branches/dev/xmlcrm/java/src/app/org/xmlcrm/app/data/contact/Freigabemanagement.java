@@ -21,9 +21,9 @@ public class Freigabemanagement {
 		// TODO Auto-generated constructor stub
 	}
 
-	public contactfreigabe[] getFreigabeDecr(long USER_LEVEL) {
+	public contactfreigabe[] getFreigabeDecr(long user_level) {
 		contactfreigabe contactfreigabe[] = new contactfreigabe[1];
-		if (USER_LEVEL > 1) {
+		if (user_level > 1) {
 			try {
 				Object idf = HibernateUtil.createSession();
 				Session session = HibernateUtil.getSession();

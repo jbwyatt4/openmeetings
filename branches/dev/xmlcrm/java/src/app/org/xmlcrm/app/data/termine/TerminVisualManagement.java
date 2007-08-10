@@ -23,8 +23,8 @@ public class TerminVisualManagement {
         Terminmanagement = Terminmanagement;
         CalenderI = new Calender();
     }
-    private boolean checkUserLevel(int USER_LEVEL){
-        if (USER_LEVEL>1){
+    private boolean checkUserLevel(int user_level){
+        if (user_level>1){
             return true;
         } else {
             return false;

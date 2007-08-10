@@ -20,8 +20,8 @@ public class TermineService {
 	public Long addTermin(String SID, Date starttime, Date endtime,int terminstatus,String Comment,String description,String pubcomment,int open,String place, String message){ 
 		try {
 			Long users_id = Sessionmanagement.getInstance().checkSession(SID);
-			long USER_LEVEL = Usermanagement.getInstance().getUserLevelByID(users_id);
-			return Terminmanagement.getInstance().addTerminUser(USER_LEVEL, users_id, starttime, endtime, terminstatus, Comment, description, pubcomment, open, place, message);
+			long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
+			return Terminmanagement.getInstance().addTerminUser(user_level, users_id, starttime, endtime, terminstatus, Comment, description, pubcomment, open, place, message);
 		} catch (Exception err){
 			log.error("[getNavi] "+err);
 		}

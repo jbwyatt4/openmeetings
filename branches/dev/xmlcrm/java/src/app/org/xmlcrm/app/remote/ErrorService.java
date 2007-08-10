@@ -28,7 +28,7 @@ public class ErrorService {
 	 */
 	public ErrorResult getErrorByCode(String SID, long errorid){
         Long users_id = Sessionmanagement.getInstance().checkSession(SID);
-        long USER_LEVEL = Usermanagement.getInstance().getUserLevelByID(users_id);
+        long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
         ErrorResult eResult = new ErrorResult();
         if (errorid==-20) {
         	eResult.setErrmessage("duplicate filename, please choose another filename");
