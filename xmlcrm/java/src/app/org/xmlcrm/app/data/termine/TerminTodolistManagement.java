@@ -35,17 +35,17 @@ public class TerminTodolistManagement {
 		CalenderI = new Calender();
 	}
 
-	private boolean checkUserLevel(long USER_LEVEL) {
-		if (USER_LEVEL > 1) {
+	private boolean checkUserLevel(long user_level) {
+		if (user_level > 1) {
 			return true;
 		} else {
 			return false;
 		}
 	}
 
-	public Termine_Todo_User[] getUserTodoList(long USER_LEVEL, int USER_ID) {
+	public Termine_Todo_User[] getUserTodoList(long user_level, int USER_ID) {
 		Termine_Todo_User[] termine_todo_user = new Termine_Todo_User[1];
-		if (checkUserLevel(USER_LEVEL)) {
+		if (checkUserLevel(user_level)) {
 			//            try {
 			//                Object idf = HibernateUtil.createSession(); 			Session session = HibernateUtil.getSession();
 			//                Transaction tx = session.beginTransaction();
@@ -80,10 +80,10 @@ public class TerminTodolistManagement {
 		return termine_todo_user;
 	}
 
-	public Termine_Todo_User getUserTodoItem(long USER_LEVEL, int USER_ID,
+	public Termine_Todo_User getUserTodoItem(long user_level, int USER_ID,
 			int UID) {
 		Termine_Todo_User termine_todo_user = new Termine_Todo_User();
-		if (checkUserLevel(USER_LEVEL)) {
+		if (checkUserLevel(user_level)) {
 			//            try {
 			//                Object idf = HibernateUtil.createSession(); 			Session session = HibernateUtil.getSession();
 			//                Transaction tx = session.beginTransaction();
@@ -151,11 +151,11 @@ public class TerminTodolistManagement {
 		return termine_todolist;
 	}
 
-	public Termine_Todo_User saveTodoListItem(long USER_LEVEL, int USER_ID,
+	public Termine_Todo_User saveTodoListItem(long user_level, int USER_ID,
 			String description, String name, String Comment, int STATUS_ID,
 			int priority, String teilnehmer) {
 		Termine_Todo_User termine_todo_user = new Termine_Todo_User();
-		//    	if (checkUserLevel(USER_LEVEL)){
+		//    	if (checkUserLevel(user_level)){
 		//    		Termine_Todolist termine_todolist = saveListItem(name,Comment,description,teilnehmer,STATUS_ID);
 		//    		termine_todo_user = saveUserItem(Comment,USER_ID,termine_todolist.getTODO_ID(),USER_ID,priority);
 		//    	} else {
@@ -218,11 +218,11 @@ public class TerminTodolistManagement {
 		return termine_todolist;
 	}
 
-	public Termine_Todo_User updateTodoListItem(long USER_LEVEL, int USER_ID,
+	public Termine_Todo_User updateTodoListItem(long user_level, int USER_ID,
 			int UID, String name, String Comment, int priority,
 			String description, String teilnehmer, int STATUS_ID) {
 		Termine_Todo_User termine_todo_user = new Termine_Todo_User();
-		if (checkUserLevel(USER_LEVEL)) {
+		if (checkUserLevel(user_level)) {
 			termine_todo_user = getUserListItemByID(UID);
 			System.out.println("UserListItemByID UID: " + UID);
 			//            System.out.println("UserListItemByID UID2: "+termine_todo_user.getUID());
@@ -300,9 +300,9 @@ public class TerminTodolistManagement {
 		return termine_todolist;
 	}
 
-	public String deleteUserItem(long USER_LEVEL, int USER_ID, int UID) {
+	public String deleteUserItem(long user_level, int USER_ID, int UID) {
 		String ret = "";
-		if (checkUserLevel(USER_LEVEL)) {
+		if (checkUserLevel(user_level)) {
 			//            Termine_Todo_User termine_todo_user = getUserListItemByID(UID);
 			//            if (termine_todo_user.getUID()>0 && termine_todo_user.getUSER_ID()==USER_ID){
 			//                if (termine_todo_user.getUSER_ID()==termine_todo_user.getOWNER_ID()){

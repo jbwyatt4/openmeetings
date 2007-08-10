@@ -19,9 +19,9 @@ public class Bestellmanagement {
 		// TODO Auto-generated constructor stub
 	}
 
-	public boolean checkUserLevel(long USER_LEVEL) {
+	public boolean checkUserLevel(long user_level) {
 		boolean ret = false;
-		if (USER_LEVEL < 2) {
+		if (user_level < 2) {
 			ret = false;
 		} else {
 			ret = true;
@@ -134,9 +134,9 @@ public class Bestellmanagement {
 		return result;
 	}
 
-	public Userwaren[] getUserwaren(int USER_ID, long USER_LEVEL) {
+	public Userwaren[] getUserwaren(int USER_ID, long user_level) {
 		Userwaren userwaren[] = new Userwaren[1];
-		if (USER_LEVEL > 1) {
+		if (user_level > 1) {
 			//			try {
 			//		    	Object idf = HibernateUtil.createSession(); 			Session session = HibernateUtil.getSession();
 			//		    	Transaction tx = session.beginTransaction();    
@@ -173,9 +173,9 @@ public class Bestellmanagement {
 		return userwaren;
 	}
 
-	public Userwaren getUserwareByID(int WAREN_ID, long USER_LEVEL) {
+	public Userwaren getUserwareByID(int WAREN_ID, long user_level) {
 		Userwaren userwaren = new Userwaren();
-		if (USER_LEVEL > 1) {
+		if (user_level > 1) {
 			//			try {
 			//		    	Object idf = HibernateUtil.createSession(); 			Session session = HibernateUtil.getSession();
 			//		    	Transaction tx = session.beginTransaction();    

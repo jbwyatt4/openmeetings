@@ -4,7 +4,7 @@ import java.util.LinkedHashMap;
 
 import junit.framework.TestCase;
 
-import org.xmlcrm.utils.mappings.CastHashMapToObject;
+import org.xmlcrm.utils.mappings.CastMapToObject;
 
 
 public class TestReflectionApi extends TestCase {
@@ -34,7 +34,7 @@ public class TestReflectionApi extends TestCase {
 			subBeanForReflection.put("attribute12", "subBeanForReflection String");
 			
 			values.put("subBeanForReflection", subBeanForReflection);
-			TestBeanForReflection myObject = (TestBeanForReflection) CastHashMapToObject.getInstance().castByGivenObject(values, TestBeanForReflection.class);
+			TestBeanForReflection myObject = (TestBeanForReflection) CastMapToObject.getInstance().castByGivenObject(values, TestBeanForReflection.class);
 			
 			System.out.println("testReflectionApi "+myObject);
 			

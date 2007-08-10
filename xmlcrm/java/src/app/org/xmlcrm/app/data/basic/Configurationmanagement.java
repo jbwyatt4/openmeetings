@@ -22,7 +22,7 @@ import org.xmlcrm.app.data.user.Usermanagement;
 import org.xmlcrm.app.hibernate.beans.basic.Configuration;
 import org.xmlcrm.app.hibernate.utils.HibernateUtil;
 import org.xmlcrm.utils.math.Calender;
-import org.xmlcrm.utils.mappings.CastHashMapToObject;
+import org.xmlcrm.utils.mappings.CastMapToObject;
 
 public class Configurationmanagement {
 
@@ -41,9 +41,9 @@ public class Configurationmanagement {
 		return instance;
 	}
 
-	public Configuration getConfKey(long USER_LEVEL, String CONF_KEY) {
+	public Configuration getConfKey(long user_level, String CONF_KEY) {
 		try {
-			if (AuthLevelmanagement.getInstance().checkAdminLevel(USER_LEVEL)) {
+			if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)) {
 				Configuration configuration = null;
 				Object idf = HibernateUtil.createSession();
 				Session session = HibernateUtil.getSession();
@@ -57,7 +57,7 @@ public class Configurationmanagement {
 				HibernateUtil.closeSession(idf);
 				return configuration;
 			} else {
-				log.error("[getAllConf] Permission denied "+USER_LEVEL);
+				log.error("[getAllConf] Permission denied "+user_level);
 			}
 		} catch (HibernateException ex) {
 			log.error("[getConfKey]: " ,ex);
@@ -67,9 +67,9 @@ public class Configurationmanagement {
 		return null;
 	}
 	
-	public Configuration getConfByConfigurationId(long USER_LEVEL, long configuration_id) {
+	public Configuration getConfByConfigurationId(long user_level, long configuration_id) {
 		try {
-			if (AuthLevelmanagement.getInstance().checkAdminLevel(USER_LEVEL)) {
+			if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)) {
 				Configuration configuration = null;
 				Object idf = HibernateUtil.createSession();
 				Session session = HibernateUtil.getSession();
@@ -83,7 +83,7 @@ public class Configurationmanagement {
 				HibernateUtil.closeSession(idf);
 				return configuration;
 			} else {
-				log.error("[getConfByConfigurationId] Permission denied "+USER_LEVEL);
+				log.error("[getConfByConfigurationId] Permission denied "+user_level);
 			}
 		} catch (HibernateException ex) {
 			log.error("[getConfByConfigurationId]: " ,ex);
@@ -93,16 +93,16 @@ public class Configurationmanagement {
 		return null;
 	}
 
-	public SearchResult getAllConf(long USER_LEVEL, int start ,int max, String orderby, boolean asc) {
+	public SearchResult getAllConf(long user_level, int start ,int max, String orderby, boolean asc) {
 		try {
-			if (AuthLevelmanagement.getInstance().checkAdminLevel(USER_LEVEL)) {
+			if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)) {
 				SearchResult sresult = new SearchResult();
 				sresult.setRecords(this.selectMaxFromConfigurations());
 				sresult.setResult(this.getConfigurations(start, max, orderby, asc));
 				sresult.setObjectName(Configuration.class.getName());
 				return sresult;
 			} else {
-				log.error("[getAllConf] Permission denied "+USER_LEVEL);
+				log.error("[getAllConf] Permission denied "+user_level);
 			}
 		} catch (HibernateException ex) {
 			log.error("[getAllConf]: " ,ex);
@@ -160,10 +160,10 @@ public class Configurationmanagement {
 		return null;
 	}		
 
-	public String addConfByKey(long USER_LEVEL, String CONF_KEY,
+	public String addConfByKey(long user_level, String CONF_KEY,
 			String CONF_VALUE, Long USER_ID, String comment) {
 		String ret = "Add Configuration";
-		if (AuthLevelmanagement.getInstance().checkAdminLevel(USER_LEVEL)) {
+		if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)) {
 			Configuration configuration = new Configuration();
 			configuration.setConf_key(CONF_KEY);
 			configuration.setConf_value(CONF_VALUE);
@@ -194,10 +194,10 @@ public class Configurationmanagement {
 		return ret;
 	}
 	
-	public Long saveOrUpdateConfiguration(long USER_LEVEL, LinkedHashMap values, Long users_id) {
+	public Long saveOrUpdateConfiguration(long user_level, LinkedHashMap values, Long users_id) {
 		try {
-			if (AuthLevelmanagement.getInstance().checkAdminLevel(USER_LEVEL)) {
-				Configuration conf = (Configuration) CastHashMapToObject.getInstance().castByGivenObject(values, Configuration.class);
+			if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)) {
+				Configuration conf = (Configuration) CastMapToObject.getInstance().castByGivenObject(values, Configuration.class);
 				if (conf.getConfiguration_id().equals(null) || conf.getConfiguration_id() == 0 ){
 					log.info("add new Configuration");
 					conf.setStarttime(new Date());
@@ -256,10 +256,10 @@ public class Configurationmanagement {
 		return new Long(-1);		
 	}	
 
-	public Long deleteConfByConfiguration(long USER_LEVEL, LinkedHashMap values, Long users_id) {
+	public Long deleteConfByConfiguration(long user_level, LinkedHashMap values, Long users_id) {
 		try {	
-			if (AuthLevelmanagement.getInstance().checkAdminLevel(USER_LEVEL)) {
-				Configuration conf = (Configuration) CastHashMapToObject.getInstance().castByGivenObject(values, Configuration.class);
+			if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)) {
+				Configuration conf = (Configuration) CastMapToObject.getInstance().castByGivenObject(values, Configuration.class);
 				conf.setUsers(Usermanagement.getInstance().getUser(users_id));
 				conf.setUpdatetime(new Date());
 				conf.setDeleted("true");

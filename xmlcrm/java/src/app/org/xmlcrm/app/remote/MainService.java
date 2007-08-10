@@ -301,8 +301,8 @@ public class MainService {
     }
     public List getAllUsers(String SID,int start, int max){
         Long users_id = Sessionmanagement.getInstance().checkSession(SID);
-        long User_Level = Usermanagement.getInstance().getUserLevelByID(users_id); 
-        return Usermanagement.getInstance().getusersAdmin(User_Level,start,max);
+        long user_level = Usermanagement.getInstance().getUserLevelByID(users_id); 
+        return Usermanagement.getInstance().getusersAdmin(user_level,start,max);
     }    
     public Users_Usergroups getSingleGroup(String SID,int GROUP_ID){
         return ResHandler.getSingleGroup(SID, GROUP_ID);

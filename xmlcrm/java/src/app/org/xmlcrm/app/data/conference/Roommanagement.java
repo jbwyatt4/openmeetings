@@ -76,9 +76,9 @@ public class Roommanagement {
 	 * get all availible RoomTypes
 	 * @return List of RoomTypes
 	 */
-	public List getAllRoomTypes(long USER_LEVEL){
+	public List getAllRoomTypes(long user_level){
 		try {
-			if (AuthLevelmanagement.getInstance().checkAdminLevel(USER_LEVEL)){
+			if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)){
 				Object idf = HibernateUtil.createSession();
 				Session session = HibernateUtil.getSession();
 				Transaction tx = session.beginTransaction();
@@ -126,13 +126,13 @@ public class Roommanagement {
 	
 	/**
 	 * get a room object if admin level
-	 * @param USER_LEVEL
+	 * @param user_level
 	 * @param rooms_id
 	 * @return
 	 */
-	public Rooms getRoomById(long USER_LEVEL, long rooms_id){
+	public Rooms getRoomById(long user_level, long rooms_id){
 		try {
-			if (AuthLevelmanagement.getInstance().checkAdminLevel(USER_LEVEL)){
+			if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)){
 				return this.getRoomById(rooms_id);
 			}
 		} catch (Exception ex2) {
@@ -168,9 +168,9 @@ public class Roommanagement {
 		return null;
 	}	
 	
-	public SearchResult getRooms(long USER_LEVEL, int start, int max, String orderby, boolean asc){
+	public SearchResult getRooms(long user_level, int start, int max, String orderby, boolean asc){
 		try {
-			if (AuthLevelmanagement.getInstance().checkAdminLevel(USER_LEVEL)){
+			if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)){
 				SearchResult sResult = new SearchResult();
 				sResult.setRecords(this.selectMaxFromRooms());
 				sResult.setObjectName(Rooms.class.getName());
@@ -207,7 +207,7 @@ public class Roommanagement {
 	
 	/**
 	 * gets a list of all availible rooms
-	 * @param USER_LEVEL
+	 * @param user_level
 	 * @param start
 	 * @param max
 	 * @param orderby
@@ -237,9 +237,9 @@ public class Roommanagement {
 		return null;
 	}
 	
-	public List getOrganisationsByRoom(long USER_LEVEL, long rooms_id){
+	public List getOrganisationsByRoom(long user_level, long rooms_id){
 		try {
-			if (AuthLevelmanagement.getInstance().checkAdminLevel(USER_LEVEL)){
+			if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)){
 				Object idf = HibernateUtil.createSession();
 				Session session = HibernateUtil.getSession();
 				Transaction tx = session.beginTransaction();
@@ -262,14 +262,14 @@ public class Roommanagement {
 	
 	/**
 	 * get all rooms which are availible for public
-	 * @param USER_LEVEL
+	 * @param user_level
 	 * @param roomtypes_id
 	 * @return
 	 */
-	public List getPublicRooms(long USER_LEVEL, long roomtypes_id){
+	public List getPublicRooms(long user_level, long roomtypes_id){
 		try {
 			log.error("getPublicRooms: roomtypes_id "+roomtypes_id);
-			if (AuthLevelmanagement.getInstance().checkUserLevel(USER_LEVEL)){
+			if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)){
 				log.error("### getPublicRooms: create Query "+roomtypes_id);
 				Object idf = HibernateUtil.createSession();
 				Session session = HibernateUtil.getSession();
@@ -311,10 +311,10 @@ public class Roommanagement {
 	 * @param ispublic
 	 * @return id of the newly created room or NULL
 	 */
-	public Long addRoom(long USER_LEVEL,String name, long roomtypes_id, String comment,
+	public Long addRoom(long user_level,String name, long roomtypes_id, String comment,
 			boolean ispublic, LinkedHashMap organisations){
 		try {
-			if (AuthLevelmanagement.getInstance().checkAdminLevel(USER_LEVEL)){
+			if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)){
 				Rooms r = new Rooms();
 				r.setName(name);
 				r.setComment(comment);
@@ -350,9 +350,9 @@ public class Roommanagement {
 	 * @param organisation_id
 	 * @return the id of the newly created Rooms_Organisation or NULL
 	 */
-	public Long addRoomToOrganisation(long USER_LEVEL, long rooms_id, long organisation_id){
+	public Long addRoomToOrganisation(long user_level, long rooms_id, long organisation_id){
 		try {
-			if (AuthLevelmanagement.getInstance().checkAdminLevel(USER_LEVEL)){
+			if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)){
 				Rooms_Organisation rOrganisation = new Rooms_Organisation();
 				rOrganisation.setRoom(this.getRoomById(rooms_id));
 				log.error("addRoomToOrganisation rooms "+rOrganisation.getRoom().getName());
@@ -406,14 +406,14 @@ public class Roommanagement {
 	
 	/**
 	 * get List of Rooms_Organisation by organisation and roomtype
-	 * @param USER_LEVEL
+	 * @param user_level
 	 * @param organisation_id
 	 * @param roomtypes_id
 	 * @return
 	 */
-	public List getRoomsOrganisationByOrganisationIdAndRoomType(long USER_LEVEL,long organisation_id, long roomtypes_id){
+	public List getRoomsOrganisationByOrganisationIdAndRoomType(long user_level,long organisation_id, long roomtypes_id){
 		try {
-			if (AuthLevelmanagement.getInstance().checkUserLevel(USER_LEVEL)){
+			if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)){
 				Object idf = HibernateUtil.createSession();
 				Session session = HibernateUtil.getSession();
 				Transaction tx = session.beginTransaction();
@@ -432,7 +432,7 @@ public class Roommanagement {
 				
 				return ll;
 			} else {
-				log.error("[notauthentificated] "+ USER_LEVEL);
+				log.error("[notauthentificated] "+ user_level);
 			}
 		} catch (HibernateException ex) {
 			log.error("[getRoomsByOrganisation] ", ex);
@@ -447,9 +447,9 @@ public class Roommanagement {
 	 * @param organisation_id
 	 * @return list of Rooms_Organisation with Rooms as Sub-Objects or null
 	 */
-	public List getRoomsOrganisationByOrganisationId(long USER_LEVEL,long organisation_id){
+	public List getRoomsOrganisationByOrganisationId(long user_level,long organisation_id){
 		try {
-			if (AuthLevelmanagement.getInstance().checkModLevel(USER_LEVEL)){
+			if (AuthLevelmanagement.getInstance().checkModLevel(user_level)){
 				Object idf = HibernateUtil.createSession();
 				Session session = HibernateUtil.getSession();
 				Transaction tx = session.beginTransaction();
@@ -465,7 +465,7 @@ public class Roommanagement {
 				
 				return ll;
 			} else {
-				log.error("[notauthentificated] "+ USER_LEVEL);
+				log.error("[notauthentificated] "+ user_level);
 			}
 		} catch (HibernateException ex) {
 			log.error("[getRoomsByOrganisation] ", ex);
@@ -475,9 +475,9 @@ public class Roommanagement {
 		return null;
 	}
 	
-	public SearchResult getRoomsOrganisationByOrganisationId(long USER_LEVEL,long organisation_id, int start, int max, String orderby, boolean asc){
+	public SearchResult getRoomsOrganisationByOrganisationId(long user_level,long organisation_id, int start, int max, String orderby, boolean asc){
 		try {
-			if (AuthLevelmanagement.getInstance().checkModLevel(USER_LEVEL)){
+			if (AuthLevelmanagement.getInstance().checkModLevel(user_level)){
 				
 				SearchResult sResult = new SearchResult();
 				sResult.setObjectName(Rooms_Organisation.class.getName());
@@ -639,7 +639,7 @@ public class Roommanagement {
 	/**
 	 * 
 	 * @param user_id
-	 * @param USER_LEVEL
+	 * @param user_level
 	 * @param rooms_id
 	 * @param roomtypes_id
 	 * @param name
@@ -647,9 +647,9 @@ public class Roommanagement {
 	 * @param comment
 	 * @return
 	 */
-	public Rooms updateRoomsSelf(long user_id, long USER_LEVEL, long rooms_id, long roomtypes_id, String name, boolean ispublic, String comment){
+	public Rooms updateRoomsSelf(long user_id, long user_level, long rooms_id, long roomtypes_id, String name, boolean ispublic, String comment){
 		try {
-			if (AuthLevelmanagement.getInstance().checkModLevel(USER_LEVEL)){
+			if (AuthLevelmanagement.getInstance().checkModLevel(user_level)){
 				
 				//TODO: testen
 				if (this.checkUserOrgRoom(user_id, rooms_id)){
@@ -685,10 +685,10 @@ public class Roommanagement {
 	 * @param comment
 	 * @return
 	 */
-	public Long updateRoom(long USER_LEVEL, long rooms_id, long roomtypes_id, String name,
+	public Long updateRoom(long user_level, long rooms_id, long roomtypes_id, String name,
 			boolean ispublic, String comment, LinkedHashMap organisations){
 		try {
-			if (AuthLevelmanagement.getInstance().checkAdminLevel(USER_LEVEL)){
+			if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)){
 				Rooms r = this.getRoomById(rooms_id);
 				r.setComment(comment);
 				r.setIspublic(ispublic);
@@ -771,9 +771,9 @@ public class Roommanagement {
 	 * delete all Rooms_Organisations and Room by a given room_id
 	 * @param rooms_id
 	 */
-	public Long deleteRoomById(long USER_LEVEL, long rooms_id){
+	public Long deleteRoomById(long user_level, long rooms_id){
 		try {
-			if (AuthLevelmanagement.getInstance().checkAdminLevel(USER_LEVEL)){
+			if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)){
 				this.deleteAllRoomsOrganisationOfRoom(rooms_id);
 				return this.deleteRoom(this.getRoomById(rooms_id));
 			}

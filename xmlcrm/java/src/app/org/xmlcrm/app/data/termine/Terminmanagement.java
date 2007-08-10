@@ -35,13 +35,13 @@ public class Terminmanagement {
 		return instance;
 	}
 
-	public Terminevisual getUserTermineLatest(long USER_LEVEL, int USER_ID) {
+	public Terminevisual getUserTermineLatest(long user_level, int USER_ID) {
 //		Terminevisual terminevisual = new Terminevisual();
 //		long start = Calender.getInstance().ParseDatum(CalenderI.getYear(), CalenderI
 //				.getMonth(), CalenderI.getDay(), 0, 0);
 //		long end = CalenderI.ParseDatum(CalenderI.getYear(), CalenderI
 //				.getMonth(), CalenderI.getNextDay(), 0, 0);
-//		if (checkUserLevel(USER_LEVEL)) {
+//		if (checkUserLevel(user_level)) {
 //			try {
 //				//                Object idf = HibernateUtil.createSession(); 			Session session = HibernateUtil.getSession();
 //				//                Transaction tx = session.beginTransaction();
@@ -80,14 +80,14 @@ public class Terminmanagement {
 		return null;
 	}
 
-	public Terminevisualmonth getUserTermineLatestWeek(long USER_LEVEL,
+	public Terminevisualmonth getUserTermineLatestWeek(long user_level,
 			int USER_ID) {
-//		return getUserTermineWeek(USER_LEVEL, USER_ID, CalenderI.getYear(),
+//		return getUserTermineWeek(user_level, USER_ID, CalenderI.getYear(),
 //				CalenderI.getMonth(), CalenderI.getDay());
 		return null;
 	}
 
-	public Terminevisualmonth getUserTermineWeek(long USER_LEVEL, int USER_ID,
+	public Terminevisualmonth getUserTermineWeek(long user_level, int USER_ID,
 			int SelectYear, int SelectMonth, int SelectDay) {
 		Terminevisualmonth terminevisualmonth = new Terminevisualmonth();
 		//        Terminevisual[] terminevisual = new Terminevisual[7];
@@ -133,21 +133,21 @@ public class Terminmanagement {
 		//                }
 		//            }
 		//            //System.out.println("Index: "+i+" - tempday: "+tempday);
-		//            terminevisual[i] = getUserTermineDayMiddlet(USER_LEVEL,USER_ID,tempYear,tempMonth,tempday,1);
+		//            terminevisual[i] = getUserTermineDayMiddlet(user_level,USER_ID,tempYear,tempMonth,tempday,1);
 		//            terminevisual[i].setVisualdata(terminevisual[i].getVisualdata()+";"+CalenderI.getWeekdayDELong(i));
 		//        }
 		//        terminevisualmonth.setTerminevisual(terminevisual);
 		return terminevisualmonth;
 	}
 
-	public Terminevisualmonth getUserTermineLatestMonth(long USER_LEVEL,
+	public Terminevisualmonth getUserTermineLatestMonth(long user_level,
 			int USER_ID) {
-//		return getUserTermineMonth(USER_LEVEL, USER_ID, CalenderI.getYear(),
+//		return getUserTermineMonth(user_level, USER_ID, CalenderI.getYear(),
 //				CalenderI.getMonth());
 		return null;
 	}
 
-	public Terminevisualmonth getUserTermineMonth(long USER_LEVEL, int USER_ID,
+	public Terminevisualmonth getUserTermineMonth(long user_level, int USER_ID,
 			int SelectYear, int SelectMonth) {
 		//One month with weekly rows maximum 6 rows of 7 days = 42 days
 		Terminevisualmonth terminevisualmonth = new Terminevisualmonth();
@@ -175,7 +175,7 @@ public class Terminmanagement {
 		//        for (int v=restofoldmonth;v>0;v--){
 		//            int dd = (daysofmonthOld-v)+1;
 		//            //System.out.println("former YEAR|MONAT|TAG -- "+year+"|"+oldmonat+"|"+dd);
-		//            terminevisual[index] = getUserTermineDayFast(USER_LEVEL,USER_ID,year,oldmonat,dd,3);
+		//            terminevisual[index] = getUserTermineDayFast(user_level,USER_ID,year,oldmonat,dd,3);
 		//            index++;
 		//        }
 		//        //Clear index of month and year, Get Objects of current month
@@ -185,7 +185,7 @@ public class Terminmanagement {
 		//        //System.out.println("daysofmonth: "+daysofmonth);
 		//        for (int v=0;v<daysofmonth;v++){
 		//            //System.out.println("current YEAR|MONAT|TAG -- "+year+"|"+thismonat+"|"+(v+1));
-		//            terminevisual[index] = getUserTermineDayFast(USER_LEVEL,USER_ID,year,thismonat,(v+1),3);
+		//            terminevisual[index] = getUserTermineDayFast(user_level,USER_ID,year,thismonat,(v+1),3);
 		//            index++;
 		//        }
 		//        //Clear index of month and year, calc amount and Get Objects of next month
@@ -201,7 +201,7 @@ public class Terminmanagement {
 		//        //System.out.println("left: "+left+"index: "+index);
 		//        for (int i=0;i<left;i++){
 		//            //System.out.println("nextmonth YEAR|MONAT|TAG -- "+year+"|"+thismonat+"|"+(i+1));
-		//            terminevisual[index] = getUserTermineDayFast(USER_LEVEL,USER_ID,year,thismonat,(i+1),3);
+		//            terminevisual[index] = getUserTermineDayFast(user_level,USER_ID,year,thismonat,(i+1),3);
 		//            index++;
 		//        }
 		//        //System.out.println("index: "+index);
@@ -209,13 +209,13 @@ public class Terminmanagement {
 		return terminevisualmonth;
 	}
 
-	public Terminevisual getUserTermineDay(long USER_LEVEL, int USER_ID,
+	public Terminevisual getUserTermineDay(long user_level, int USER_ID,
 			int syear, int smonth, int sday, int info) {
 //		Terminevisual terminevisual = new Terminevisual();
 //		terminevisual.setVisualdata(sday + ";" + smonth + ";" + syear);
 //		long start = CalenderI.ParseDatum(syear, smonth, sday, 0, 0);
 //		long end = start + 86400000;
-//		if (checkUserLevel(USER_LEVEL)) {
+//		if (checkUserLevel(user_level)) {
 //			//            try {
 //			//                Object idf = HibernateUtil.createSession(); 			Session session = HibernateUtil.getSession();
 //			//                Transaction tx = session.beginTransaction();
@@ -252,13 +252,13 @@ public class Terminmanagement {
 		return null;
 	}
 
-	public Terminevisual getUserTermineDayFast(int USER_LEVEL, int USER_ID,
+	public Terminevisual getUserTermineDayFast(int user_level, int USER_ID,
 			int syear, int smonth, int sday, int info) {
 //		Terminevisual terminevisual = new Terminevisual();
 //		terminevisual.setVisualdata(sday + ";" + smonth + ";" + syear);
 //		long start = CalenderI.ParseDatum(syear, smonth, sday, 0, 0);
 //		long end = start + 86400000;
-//		if (checkUserLevel(USER_LEVEL)) {
+//		if (checkUserLevel(user_level)) {
 //			//            try {
 //			//                Object idf = HibernateUtil.createSession(); 			Session session = HibernateUtil.getSession();
 //			//                Transaction tx = session.beginTransaction();
@@ -290,13 +290,13 @@ public class Terminmanagement {
 		return null;
 	}
 
-	public Terminevisual getUserTermineDayMiddlet(int USER_LEVEL, int USER_ID,
+	public Terminevisual getUserTermineDayMiddlet(int user_level, int USER_ID,
 			int syear, int smonth, int sday, int info) {
 //		Terminevisual terminevisual = new Terminevisual();
 //		terminevisual.setVisualdata(sday + ";" + smonth + ";" + syear);
 //		long start = CalenderI.ParseDatum(syear, smonth, sday, 0, 0);
 //		long end = start + 86400000;
-//		if (checkUserLevel(USER_LEVEL)) {
+//		if (checkUserLevel(user_level)) {
 //			//            try {
 //			//                Object idf = HibernateUtil.createSession(); 			Session session = HibernateUtil.getSession();
 //			//                Transaction tx = session.beginTransaction();
@@ -328,13 +328,13 @@ public class Terminmanagement {
 		return null;
 	}
 
-	public Terminevisual getUserTerminePeriod(long USER_LEVEL, int USER_ID,
+	public Terminevisual getUserTerminePeriod(long user_level, int USER_ID,
 			int syear, int smonth, int sday, int eyear, int emonth, int eday) {
 //		Terminevisual terminevisual = new Terminevisual();
 //		terminevisual.setVisualdata(sday + ";" + smonth + ";" + syear);
 //		long start = CalenderI.ParseDatum(syear, smonth, sday, 0, 0);
 //		long end = CalenderI.ParseDatum(eyear, emonth, eday, 0, 0);
-//		if (checkUserLevel(USER_LEVEL)) {
+//		if (checkUserLevel(user_level)) {
 //			//            try {
 //			//                Object idf = HibernateUtil.createSession(); 			Session session = HibernateUtil.getSession();
 //			//                Transaction tx = session.beginTransaction();
@@ -371,10 +371,10 @@ public class Terminmanagement {
 		return null;
 	}
 
-	public Termine_User getUserTermineByUID(long USER_LEVEL, int USER_ID,
+	public Termine_User getUserTermineByUID(long user_level, int USER_ID,
 			int UID) {
 //		Termine_User termine_user = new Termine_User();
-//		if (checkUserLevel(USER_LEVEL)) {
+//		if (checkUserLevel(user_level)) {
 //			//	        try {
 //			//	            Object idf = HibernateUtil.createSession(); 			Session session = HibernateUtil.getSession();
 //			//	            Transaction tx = session.beginTransaction();
@@ -455,13 +455,13 @@ public class Terminmanagement {
 		return termine_user;
 	}
 
-	public Terminevisual getGroupTermineLatest(long USER_LEVEL, Long GROUP_ID) {
+	public Terminevisual getGroupTermineLatest(long user_level, Long GROUP_ID) {
 //		Terminevisual terminevisual = new Terminevisual();
 //		long start = CalenderI.ParseDatum(CalenderI.getYear(), CalenderI
 //				.getMonth(), CalenderI.getDay(), 0, 0);
 //		long end = CalenderI.ParseDatum(CalenderI.getYear(), CalenderI
 //				.getMonth(), CalenderI.getNextDay(), 0, 0);
-//		if (checkUserLevel(USER_LEVEL)) {
+//		if (checkUserLevel(user_level)) {
 //			//	        try {
 //			//	            Object idf = HibernateUtil.createSession(); 			Session session = HibernateUtil.getSession();
 //			//	            Transaction tx = session.beginTransaction();
@@ -498,12 +498,12 @@ public class Terminmanagement {
 		return null;
 	}
 
-	public Terminevisual getGroupTermineDay(long USER_LEVEL, Long GROUP_ID,
+	public Terminevisual getGroupTermineDay(long user_level, Long GROUP_ID,
 			int syear, int smonth, int sday) {
 //		Terminevisual terminevisual = new Terminevisual();
 //		long start = CalenderI.ParseDatum(syear, smonth, sday, 0, 0);
 //		long end = start + 86400000;
-//		if (checkUserLevel(USER_LEVEL)) {
+//		if (checkUserLevel(user_level)) {
 //			//	        try {
 //			//	            Object idf = HibernateUtil.createSession(); 			Session session = HibernateUtil.getSession();
 //			//	            Transaction tx = session.beginTransaction();
@@ -540,12 +540,12 @@ public class Terminmanagement {
 		return null;
 	}
 
-	public Terminevisual getGroupTerminePeriod(long USER_LEVEL, Long GROUP_ID,
+	public Terminevisual getGroupTerminePeriod(long user_level, Long GROUP_ID,
 			int syear, int smonth, int sday, int eyear, int emonth, int eday) {
 //		Terminevisual terminevisual = new Terminevisual();
 //		long start = CalenderI.ParseDatum(syear, smonth, sday, 0, 0);
 //		long end = CalenderI.ParseDatum(eyear, emonth, eday, 0, 0);
-//		if (checkUserLevel(USER_LEVEL)) {
+//		if (checkUserLevel(user_level)) {
 //			//	        try {
 //			//	            Object idf = HibernateUtil.createSession(); 			Session session = HibernateUtil.getSession();
 //			//	            Transaction tx = session.beginTransaction();
@@ -582,10 +582,10 @@ public class Terminmanagement {
 		return null;
 	}
 
-	public Terminegroups getGroupTermineByUID(long USER_LEVEL, Long GROUP_ID,
+	public Terminegroups getGroupTermineByUID(long user_level, Long GROUP_ID,
 			int UID) {
 //		Terminegroups termine_groups = new Terminegroups();
-//		if (checkUserLevel(USER_LEVEL)) {
+//		if (checkUserLevel(user_level)) {
 //			//	        try {
 //			//	            Object idf = HibernateUtil.createSession(); 			Session session = HibernateUtil.getSession();
 //			//	            Transaction tx = session.beginTransaction();
@@ -746,7 +746,7 @@ public class Terminmanagement {
 	
 	/**
 	 * TODO: make persistent
-	 * @param USER_LEVEL
+	 * @param user_level
 	 * @param USER_ID
 	 * @param starttime
 	 * @param endtime
@@ -759,7 +759,7 @@ public class Terminmanagement {
 	 * @param message
 	 * @return
 	 */
-	public Long addTerminUser(long USER_LEVEL, long USER_ID, Date starttime, Date endtime, int terminstatus, String Comment,
+	public Long addTerminUser(long user_level, long USER_ID, Date starttime, Date endtime, int terminstatus, String Comment,
 			String description, String pubcomment, int open, String place, String message) {
 		
 //		String ret = "";
@@ -771,7 +771,7 @@ public class Terminmanagement {
 		return termin_id;
 	}
 
-	public String addTerminGroup(long USER_LEVEL, int USER_ID, Long GROUP_ID,
+	public String addTerminGroup(long user_level, int USER_ID, Long GROUP_ID,
 			int syear, int smonth, int sday, int shour, int smin, int eyear,
 			int emonth, int eday, int ehour, int emin, int terminstatus,
 			String Comment, String description, String pubcomment, int open,
@@ -895,13 +895,13 @@ public class Terminmanagement {
 		return null;
 	}
 
-	public String updateTermin(long USER_LEVEL, int USER_ID, Long GROUP_ID,
+	public String updateTermin(long user_level, int USER_ID, Long GROUP_ID,
 			int TERMIN_ID, int syear, int smonth, int sday, int shour,
 			int smin, int eyear, int emonth, int eday, int ehour, int emin,
 			int terminstatus, String Comment, String description,
 			String pubcomment, int open, String place, String message) {
 		String ret = "";
-		//    	if (checkUserLevel(USER_LEVEL)){
+		//    	if (checkUserLevel(user_level)){
 		//	    	long start = CalenderI.ParseDatum(syear,smonth,sday,shour,smin);
 		//	        long end = CalenderI.ParseDatum(eyear,emonth,eday,ehour,emin); 
 		//            Termine termine = getTerminById(TERMIN_ID,2);
@@ -1031,10 +1031,10 @@ public class Terminmanagement {
 		return ret;
 	}
 
-	public String deleteTermine(long USER_LEVEL, int USER_ID, Long GROUP_ID,
+	public String deleteTermine(long user_level, int USER_ID, Long GROUP_ID,
 			int TERMIN_ID) {
 		String ret = "";
-		//    	if (checkUserLevel(USER_LEVEL)){
+		//    	if (checkUserLevel(user_level)){
 		//            Termine termine = getTerminById(TERMIN_ID,2);
 		//            if (USER_ID == termine.getOwneruser()){
 		//	        	ret = deleteGlobalTermin(termine);
@@ -1129,10 +1129,10 @@ public class Terminmanagement {
 		return ret;
 	}
 
-	public ArrayList PrintUserTermineByUID(int USER_LEVEL, int USER_ID, int UID) {
+	public ArrayList PrintUserTermineByUID(int user_level, int USER_ID, int UID) {
 		Termine_User termine_user = new Termine_User();
 //		ArrayList ListI = new ArrayList();
-//		if (checkUserLevel(USER_LEVEL)) {
+//		if (checkUserLevel(user_level)) {
 //			//            try {
 //			//                Object idf = HibernateUtil.createSession(); 			Session session = HibernateUtil.getSession();
 //			//                Transaction tx = session.beginTransaction();
@@ -1167,14 +1167,14 @@ public class Terminmanagement {
 		return null;
 	}
 
-	public ArrayList PrintUserTermineDay(int USER_LEVEL, int USER_ID,
+	public ArrayList PrintUserTermineDay(int user_level, int USER_ID,
 			int syear, int smonth, int sday) {
 //		Terminevisual terminevisual = new Terminevisual();
 //		terminevisual.setVisualdata(sday + ";" + smonth + ";" + syear);
 //		ArrayList ListI = new ArrayList();
 //		long start = CalenderI.ParseDatum(syear, smonth, sday, 0, 0);
 //		long end = start + 86400000;
-//		if (checkUserLevel(USER_LEVEL)) {
+//		if (checkUserLevel(user_level)) {
 //			try {
 //				//                Object idf = HibernateUtil.createSession(); 			Session session = HibernateUtil.getSession();
 //				//                Transaction tx = session.beginTransaction();
@@ -1217,13 +1217,13 @@ public class Terminmanagement {
 		return null;
 	}
 
-	public ArrayList PrintUserTermineDay(int USER_LEVEL, int USER_ID,
+	public ArrayList PrintUserTermineDay(int user_level, int USER_ID,
 			int syear, int smonth, int sday, ArrayList ListI) {
 //		Terminevisual terminevisual = new Terminevisual();
 //		terminevisual.setVisualdata(sday + ";" + smonth + ";" + syear);
 //		long start = CalenderI.ParseDatum(syear, smonth, sday, 0, 0);
 //		long end = start + 86400000;
-//		if (checkUserLevel(USER_LEVEL)) {
+//		if (checkUserLevel(user_level)) {
 //			try {
 //				//                Object idf = HibernateUtil.createSession(); 			Session session = HibernateUtil.getSession();
 //				//                Transaction tx = session.beginTransaction();
@@ -1266,7 +1266,7 @@ public class Terminmanagement {
 		return null;
 	}
 
-	public ArrayList PrintUserTermineWeek(int USER_LEVEL, int USER_ID,
+	public ArrayList PrintUserTermineWeek(int user_level, int USER_ID,
 			int SelectYear, int SelectMonth, int SelectDay) {
 //		ArrayList ListI = new ArrayList();
 //		Terminevisualmonth terminevisualmonth = new Terminevisualmonth();
@@ -1314,14 +1314,14 @@ public class Terminmanagement {
 //				}
 //			}
 //			//System.out.println("Index: "+i+" - tempday: "+tempday);
-//			ListI = PrintUserTermineDay(USER_LEVEL, USER_ID, tempYear,
+//			ListI = PrintUserTermineDay(user_level, USER_ID, tempYear,
 //					tempMonth, tempday, ListI);
 //		}
 //		terminevisualmonth.setTerminevisual(terminevisual);
 		return null;
 	}
 
-	public ArrayList PrintUserTermineMonth(int USER_LEVEL, int USER_ID,
+	public ArrayList PrintUserTermineMonth(int user_level, int USER_ID,
 			int SelectYear, int SelectMonth) {
 //		ArrayList ListI = new ArrayList();
 //		//One month with weekly rows maximum 6 rows of 7 days = 42 days
@@ -1351,7 +1351,7 @@ public class Terminmanagement {
 //		for (int v = restofoldmonth; v > 0; v--) {
 //			int dd = (daysofmonthOld - v) + 1;
 //			//System.out.println("former YEAR|MONAT|TAG -- "+year+"|"+oldmonat+"|"+dd);
-//			ListI = PrintUserTermineDay(USER_LEVEL, USER_ID, year, oldmonat, dd);
+//			ListI = PrintUserTermineDay(user_level, USER_ID, year, oldmonat, dd);
 //			index++;
 //		}
 //		//Clear index of month and year, Get Objects of current month
@@ -1361,7 +1361,7 @@ public class Terminmanagement {
 //		//System.out.println("daysofmonth: "+daysofmonth);
 //		for (int v = 0; v < daysofmonth; v++) {
 //			//System.out.println("current YEAR|MONAT|TAG -- "+year+"|"+thismonat+"|"+(v+1));
-//			ListI = PrintUserTermineDay(USER_LEVEL, USER_ID, year, thismonat,
+//			ListI = PrintUserTermineDay(user_level, USER_ID, year, thismonat,
 //					(v + 1), ListI);
 //			index++;
 //		}
@@ -1378,7 +1378,7 @@ public class Terminmanagement {
 //		//System.out.println("left: "+left+"index: "+index);
 //		for (int i = 0; i < left; i++) {
 //			//System.out.println("nextmonth YEAR|MONAT|TAG -- "+year+"|"+thismonat+"|"+(i+1));
-//			ListI = PrintUserTermineDay(USER_LEVEL, USER_ID, year, thismonat,
+//			ListI = PrintUserTermineDay(user_level, USER_ID, year, thismonat,
 //					(i + 1), ListI);
 //			index++;
 //		}

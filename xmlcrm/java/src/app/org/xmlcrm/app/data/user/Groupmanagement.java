@@ -36,16 +36,16 @@ public class Groupmanagement {
 		return instance;
 	}
 
-	private boolean checkUserLevel(Long USER_LEVEL) {
-		if (USER_LEVEL.longValue() > 1) {
+	private boolean checkUserLevel(Long user_level) {
+		if (user_level.longValue() > 1) {
 			return true;
 		} else {
 			return false;
 		}
 	}
 
-	private boolean checkConfLevel(Long USER_LEVEL) {
-		if (USER_LEVEL.longValue() > 2) {
+	private boolean checkConfLevel(Long user_level) {
+		if (user_level.longValue() > 2) {
 			return true;
 		} else {
 			return false;
@@ -100,10 +100,10 @@ public class Groupmanagement {
 		return usersusergroups;
 	}
 
-	public String addUserToGroup(Long USER_LEVEL, Long GROUP_ID, Long USER_ID,
+	public String addUserToGroup(Long user_level, Long GROUP_ID, Long USER_ID,
 			String comment) {
 		String res = "addUserToGroup";
-		if (checkUserLevel(USER_LEVEL)) {
+		if (checkUserLevel(user_level)) {
 			Users_Usergroups usersusergroups = new Users_Usergroups();
 			usersusergroups.setUsergroup_id(GROUP_ID);
 			usersusergroups.setUser_id(USER_ID);
@@ -131,10 +131,10 @@ public class Groupmanagement {
 		return res;
 	}
 
-	public String updateUserGroup(Long USER_LEVEL, Long users_usergroups_id,
+	public String updateUserGroup(Long user_level, Long users_usergroups_id,
 			Long usergroup_id, Long user_id, String comment) {
 		String res = "updateUserGroup";
-		if (checkUserLevel(USER_LEVEL)) {
+		if (checkUserLevel(user_level)) {
 			try {
 				Object idf = HibernateUtil.createSession();
 				Session session = HibernateUtil.getSession();
@@ -163,9 +163,9 @@ public class Groupmanagement {
 		return res;
 	}
 
-	public String deleteUserGroupByID(Long USER_LEVEL, Long users_usergroups_id) {
+	public String deleteUserGroupByID(Long user_level, Long users_usergroups_id) {
 		String res = "deleteUserGroupByID";
-		if (checkUserLevel(USER_LEVEL)) {
+		if (checkUserLevel(user_level)) {
 			try {
 				Object idf = HibernateUtil.createSession();
 				Session session = HibernateUtil.getSession();
@@ -229,9 +229,9 @@ public class Groupmanagement {
 		return res;
 	}
 
-	public Users_Usergroups getGroupUsers(Long USER_LEVEL, Long usergroup_id) {
+	public Users_Usergroups getGroupUsers(Long user_level, Long usergroup_id) {
 		Users_Usergroups groups = new Users_Usergroups();
-		if (checkUserLevel(USER_LEVEL)) {
+		if (checkUserLevel(user_level)) {
 			try {
 				Object idf = HibernateUtil.createSession();
 				Session session = HibernateUtil.getSession();
@@ -287,9 +287,9 @@ public class Groupmanagement {
 		return usergroups;
 	}
 
-	public Usergroups[] getAllGroupUsers(Long USER_LEVEL) {
+	public Usergroups[] getAllGroupUsers(Long user_level) {
 		Usergroups[] usergroups = new Usergroups[1];
-		if (checkConfLevel(USER_LEVEL)) {
+		if (checkConfLevel(user_level)) {
 			try {
 				Object idf = HibernateUtil.createSession();
 				Session session = HibernateUtil.getSession();
@@ -342,9 +342,9 @@ public class Groupmanagement {
 		return usergroups;
 	}
 
-	public Usergroups[] getAllGroup(Long USER_LEVEL) {
+	public Usergroups[] getAllGroup(Long user_level) {
 		Usergroups[] usergroups = new Usergroups[1];
-		if (checkConfLevel(USER_LEVEL)) {
+		if (checkConfLevel(user_level)) {
 			try {
 				Object idf = HibernateUtil.createSession();
 				Session session = HibernateUtil.getSession();
@@ -374,9 +374,9 @@ public class Groupmanagement {
 		return usergroups;
 	}
 
-	public Users_Usergroups getSingleGroup(Long USER_LEVEL, Long usergroup_id) {
+	public Users_Usergroups getSingleGroup(Long user_level, Long usergroup_id) {
 		Users_Usergroups groups = new Users_Usergroups();
-		if (checkConfLevel(USER_LEVEL)) {
+		if (checkConfLevel(user_level)) {
 			try {
 				Object idf = HibernateUtil.createSession();
 				Session session = HibernateUtil.getSession();
@@ -403,10 +403,10 @@ public class Groupmanagement {
 		return groups;
 	}
 
-	public String addGroup(Long USER_LEVEL, Long USER_ID, Long level_id,
+	public String addGroup(Long user_level, Long USER_ID, Long level_id,
 			String name, String description, String comment) {
 		String res = "Addgroup";
-		if (checkUserLevel(USER_LEVEL)) {
+		if (checkUserLevel(user_level)) {
 			Usergroups usergroups = new Usergroups();
 			//Todo: Add business logic for users-history
 			//usergroups.setUSER_ID(USER_ID);
@@ -437,10 +437,10 @@ public class Groupmanagement {
 		return res;
 	}
 
-	public String updateGroup(Long USER_LEVEL, Long USER_ID, Long level_id,
+	public String updateGroup(Long user_level, Long USER_ID, Long level_id,
 			Long usergroup_id, String name, String description, String comment) {
 		String res = "UpdateGroup";
-		if (checkUserLevel(USER_LEVEL)) {
+		if (checkUserLevel(user_level)) {
 			try {
 				Object idf = HibernateUtil.createSession();
 				Session session = HibernateUtil.getSession();
@@ -468,9 +468,9 @@ public class Groupmanagement {
 		return res;
 	}
 
-	public String deleteGroup(Long USER_LEVEL, Long usergroup_id) {
+	public String deleteGroup(Long user_level, Long usergroup_id) {
 		String res = "UpdateGroup";
-		if (checkUserLevel(USER_LEVEL)) {
+		if (checkUserLevel(user_level)) {
 			try {
 				Object idf = HibernateUtil.createSession();
 				Session session = HibernateUtil.getSession();
@@ -494,9 +494,9 @@ public class Groupmanagement {
 		return res;
 	}
 
-	public Usergroups[] getAllGroupFree(Long USER_LEVEL) {
+	public Usergroups[] getAllGroupFree(Long user_level) {
 		Usergroups[] groups = new Usergroups[1];
-		if (checkConfLevel(USER_LEVEL)) {
+		if (checkConfLevel(user_level)) {
 			try {
 				Object idf = HibernateUtil.createSession();
 				Session session = HibernateUtil.getSession();
@@ -528,9 +528,9 @@ public class Groupmanagement {
 		return groups;
 	}
 
-	public Usergroups getSingleGroupFree(Long USER_LEVEL, Long usergroup_id) {
+	public Usergroups getSingleGroupFree(Long user_level, Long usergroup_id) {
 		Usergroups groups = new Usergroups();
-		if (checkConfLevel(USER_LEVEL)) {
+		if (checkConfLevel(user_level)) {
 			try {
 				Object idf = HibernateUtil.createSession();
 				Session session = HibernateUtil.getSession();

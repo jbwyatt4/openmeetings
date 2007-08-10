@@ -23,8 +23,10 @@ import org.xmlcrm.app.data.basic.AuthLevelmanagement;
 import org.xmlcrm.app.data.basic.Configurationmanagement;
 import org.xmlcrm.app.data.beans.basic.SearchResult;
 import org.xmlcrm.app.data.user.Organisationmanagement;
+import org.xmlcrm.utils.mappings.CastMapToObject;
 import org.xmlcrm.utils.math.*;
 
+import org.red5.io.utils.ObjectMap;
 
 import org.xmlcrm.app.data.basic.*;
 
@@ -52,15 +54,15 @@ public class Usermanagement {
 	/**
 	 * query for a list of users
 	 * @param users_id
-	 * @param USER_LEVEL
+	 * @param user_level
 	 * @param start
 	 * @param max
 	 * @param orderby
 	 * @return
 	 */
-	public SearchResult getUsersList(long USER_LEVEL, int start, int max, String orderby, boolean asc){
+	public SearchResult getUsersList(long user_level, int start, int max, String orderby, boolean asc){
 		try {
-			if (AuthLevelmanagement.getInstance().checkAdminLevel(USER_LEVEL)){
+			if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)){
 				SearchResult sresult = new SearchResult();
 				sresult.setObjectName(Users.class.getName());
 				sresult.setRecords(this.selectMaxFromUsers());
@@ -113,18 +115,18 @@ public class Usermanagement {
 	
 	/**
 	 * 
-	 * @param USER_LEVEL
+	 * @param user_level
 	 * @param user_id
 	 * @return
 	 */
-	public Users checkAdmingetUserById(long USER_LEVEL, long user_id){
-		if (AuthLevelmanagement.getInstance().checkAdminLevel(USER_LEVEL)) {
+	public Users checkAdmingetUserById(long user_level, long user_id){
+		if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)) {
 			return this.getUser(user_id);
 		}
 		return null;
 	}
 	
-	public List getUserByMod(Long USER_LEVEL, long user_id){
+	public List getUserByMod(Long user_level, long user_id){
 		return null;
 	}
 
@@ -239,14 +241,14 @@ public class Usermanagement {
 
 	/**
 	 * suche eines Bentzers
-	 * @param USER_LEVEL
+	 * @param user_level
 	 * @param searchstring
 	 * @param max
 	 * @param start
 	 * @return
 	 */
-	public List searchUser(long USER_LEVEL, String searchcriteria, String searchstring, int max, int start, String orderby, boolean asc) {
-		if (AuthLevelmanagement.getInstance().checkAdminLevel(USER_LEVEL)) {
+	public List searchUser(long user_level, String searchcriteria, String searchstring, int max, int start, String orderby, boolean asc) {
+		if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)) {
 			try {
 				Object idf = HibernateUtil.createSession();
 				Session session = HibernateUtil.getSession();
@@ -345,14 +347,14 @@ public class Usermanagement {
 		return userdata;
 	}
 
-	public Long updateUser(long USER_LEVEL, Long user_id, Long level_id,
+	public Long updateUser(long user_level, Long user_id, Long level_id,
 			String login, String password, String lastname, String firstname,
 			Date age, String street, String additionalname, String zip, long states_id, String town,
 			int availible, String telefon, String fax,
 			String mobil, String email, String comment, int status, LinkedHashMap organisations,
 			int title_id) {
 
-		if (AuthLevelmanagement.getInstance().checkUserLevel(USER_LEVEL) && user_id != 0) {
+		if (AuthLevelmanagement.getInstance().checkUserLevel(user_level) && user_id != 0) {
 			try {
 				Users us = this.getUser(user_id);
 				// Check for duplicates
@@ -682,11 +684,11 @@ public class Usermanagement {
 
 	/**
 	 * Method to register a new User, User will automatically be added to the
-	 * default USER_LEVEL(1) new users will be automatically added to the
+	 * default user_level(1) new users will be automatically added to the
 	 * Organisation with the id specified in the configuration value
 	 * default_domain_id
 	 * 
-	 * @param USER_LEVEL
+	 * @param user_level
 	 * @param level_id
 	 * @param availible
 	 * @param status
@@ -728,7 +730,7 @@ public class Usermanagement {
 	/**
 	 * Adds a user including his adress-data,auth-date,mail-data
 	 * 
-	 * @param USER_LEVEL
+	 * @param user_level
 	 * @param level_id
 	 * @param availible
 	 * @param status
@@ -749,7 +751,7 @@ public class Usermanagement {
 	 *         already taken, -5 if username already taken, -3 if login or pass
 	 *         or mail is empty
 	 */
-	public Long registerUserInit(long USER_LEVEL, long level_id, int availible,
+	public Long registerUserInit(long user_level, long level_id, int availible,
 			int status, String login, String Userpass, String lastname,
 			String firstname, String email, Date age, String street,
 			String additionalname, String fax, String zip, long states_id,
@@ -758,7 +760,7 @@ public class Usermanagement {
 		// User Level must be at least Admin
 		// Moderators will get a temp update of there UserLevel to add Users to
 		// their Group
-		if (AuthLevelmanagement.getInstance().checkModLevel(USER_LEVEL)) {
+		if (AuthLevelmanagement.getInstance().checkModLevel(user_level)) {
 			// Check for required data
 			if (!login.equals("") && !Userpass.equals("")) {
 
@@ -909,6 +911,36 @@ public class Usermanagement {
 		} catch (Exception ex2) {
 			log.error("[addUserLevel]" ,ex2);
 		}
+	}
+	
+	
+	
+	/**
+	 * Update User by Object
+	 * @param user_level
+	 * @param values
+	 * @param users_id
+	 * @return
+	 */
+	
+	
+	public Long saveOrUpdateUser(Long user_level,ObjectMap values, Long users_id){
+		try {
+			if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)) {
+				Users user = (Users) CastMapToObject.getInstance().castByGivenObject(values, Users.class);
+				
+				log.error("users userId: "+user.getUser_id());
+				log.error("users userId: "+user.getLogin());
+				
+				
+			} else {
+				log.error("[saveOrUpdateUser] invalid auth "+users_id+ " "+new Date());
+			}
+		} catch (Exception ex) {
+			log.error("[saveOrUpdateUser]",ex);
+		}
+		
+		return null;
 	}
 
 }

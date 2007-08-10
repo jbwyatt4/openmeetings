@@ -44,12 +44,12 @@ public class Contactmanagement {
 	/**
 	 * 
 	 * @param USER_ID
-	 * @param USER_LEVEL
+	 * @param user_level
 	 * @return
 	 */
-	public Contacts[] getContactsByUser(int USER_ID, long USER_LEVEL, int maxRes) {
+	public Contacts[] getContactsByUser(int USER_ID, long user_level, int maxRes) {
 		Contacts contacts[] = new Contacts[1];
-		if (USER_LEVEL > 1) {
+		if (user_level > 1) {
 			try {
 				Object idf = HibernateUtil.createSession();
 				Session session = HibernateUtil.getSession();
@@ -79,10 +79,10 @@ public class Contactmanagement {
 		return contacts;
 	}
 
-	public Contacts[] searchContactsByUser(int USER_ID, long USER_LEVEL,
+	public Contacts[] searchContactsByUser(int USER_ID, long user_level,
 			String searchstring, String searchcriteria, int searchMax, int start) {
 		Contacts contacts[] = new Contacts[1];
-		if (USER_LEVEL > 1) {
+		if (user_level > 1) {
 			try {
 				Object idf = HibernateUtil.createSession();
 				Session session = HibernateUtil.getSession();
@@ -112,10 +112,10 @@ public class Contactmanagement {
 		return contacts;
 	}
 
-	public Contacts[] searchContact(long USER_LEVEL, String searchstring,
+	public Contacts[] searchContact(long user_level, String searchstring,
 			String searchcriteria, int searchMax, int start) {
 		Contacts contacts[] = new Contacts[1];
-		if (USER_LEVEL > 2) {
+		if (user_level > 2) {
 			try {
 				Object idf = HibernateUtil.createSession();
 				Session session = HibernateUtil.getSession();
@@ -172,12 +172,12 @@ public class Contactmanagement {
 	/**
 	 * 
 	 * @param CONTACT_ID
-	 * @param USER_LEVEL
+	 * @param user_level
 	 * @return
 	 */
-	public Contacts getContactsByID(int CONTACT_ID, long USER_LEVEL) {
+	public Contacts getContactsByID(int CONTACT_ID, long user_level) {
 		Contacts contacts = new Contacts();
-		if (USER_LEVEL > 1) {
+		if (user_level > 1) {
 			try {
 				//		    	Object idf = HibernateUtil.createSession(); 			Session session = HibernateUtil.getSession();
 				//		    	Transaction tx = session.beginTransaction();    
@@ -205,13 +205,13 @@ public class Contactmanagement {
 		return contacts;
 	}
 
-	public String updateContact(long USER_LEVEL, int USER_ID, int CONTACT_ID,
+	public String updateContact(long user_level, int USER_ID, int CONTACT_ID,
 			String firstname, String lastname, String adress, String zip,
 			String town, String state, String comment, String telefon,
 			String fax, String mobil, String title, int EMailID, String email,
 			int FREIGABE_ID) {
 		String res = "Updating Contact";
-		if (USER_LEVEL > 1) {
+		if (user_level > 1) {
 			try {
 				Object idf = HibernateUtil.createSession();
 				Session session = HibernateUtil.getSession();
@@ -249,12 +249,12 @@ public class Contactmanagement {
 		return res;
 	}
 
-	public String addContact(long USER_LEVEL, int USER_ID, String firstname,
+	public String addContact(long user_level, int USER_ID, String firstname,
 			String lastname, String adress, String zip, String town,
 			String state, String comment, String telefon, String fax,
 			String mobil, String title, String email, int FREIGABE_ID) {
 		String res = "Add Contact";
-		if (USER_LEVEL > 1) {
+		if (user_level > 1) {
 			//			Contacts contacts = new Contacts();
 			//			contacts.setFirstname(firstname);
 			//			contacts.setLastname(lastname);
@@ -363,9 +363,9 @@ public class Contactmanagement {
 	 * GROUP-MANAGEMENT
 	 */
 
-	public congroups[] getContactGroups(long USER_ID, long USER_LEVEL) {
+	public congroups[] getContactGroups(long USER_ID, long user_level) {
 		congroups congroups[] = new congroups[1];
-		if (USER_LEVEL > 1) {
+		if (user_level > 1) {
 			try {
 				//		    	Object idf = HibernateUtil.createSession(); 			Session session = HibernateUtil.getSession();
 				//		    	Transaction tx = session.beginTransaction();    
@@ -396,9 +396,9 @@ public class Contactmanagement {
 		return congroups;
 	}
 
-	public congroups[] getContactGroupsFull(int USER_ID, int USER_LEVEL) {
+	public congroups[] getContactGroupsFull(int USER_ID, int user_level) {
 		congroups congroups[] = new congroups[1];
-		if (USER_LEVEL > 1) {
+		if (user_level > 1) {
 			try {
 				//		    	Object idf = HibernateUtil.createSession(); 			Session session = HibernateUtil.getSession();
 				//		    	Transaction tx = session.beginTransaction();    
@@ -431,11 +431,11 @@ public class Contactmanagement {
 		return congroups;
 	}
 
-	public congroups searchContactGroupsByID(long USER_LEVEL, int USER_ID,
+	public congroups searchContactGroupsByID(long user_level, int USER_ID,
 			int CONGROUP_ID, String searchstring, String searchcriteria,
 			int searchMax, int start) {
 		congroups congroups = new congroups();
-		if (USER_LEVEL > 1) {
+		if (user_level > 1) {
 			try {
 				//		    	Object idf = HibernateUtil.createSession(); 			Session session = HibernateUtil.getSession();
 				//		    	Transaction tx = session.beginTransaction();    
@@ -518,11 +518,11 @@ public class Contactmanagement {
 		return contactgroups;
 	}
 
-	public congroups getContactGroupsByID(long USER_LEVEL, int CONGROUP_ID,
+	public congroups getContactGroupsByID(long user_level, int CONGROUP_ID,
 			int USER_ID, int val) {
 		congroups congroups = new congroups();
-		System.out.println("USER_LEVEL: " + USER_LEVEL);
-		if (USER_LEVEL > 1) {
+		System.out.println("user_level: " + user_level);
+		if (user_level > 1) {
 			try {
 				//		    	Object idf = HibernateUtil.createSession(); 			Session session = HibernateUtil.getSession();
 				//		    	Transaction tx = session.beginTransaction();    
@@ -575,10 +575,10 @@ public class Contactmanagement {
 		return congroups;
 	}
 
-	public String addContactGroup(long USER_LEVEL, long USER_ID, String name,
+	public String addContactGroup(long user_level, long USER_ID, String name,
 			int freigabe, String description, String comment) {
 		String result = "Fehler im Contactmanagement Add";
-		if (USER_LEVEL > 1) {
+		if (user_level > 1) {
 			congroups congroups = new congroups();
 			congroups.setName(name);
 			//			congroups.setUSER_ID(USER_ID);
@@ -609,10 +609,10 @@ public class Contactmanagement {
 		return result;
 	}
 
-	public String updateConGroup(long USER_LEVEL, int USER_ID, int CONGROUP_ID,
+	public String updateConGroup(long user_level, int USER_ID, int CONGROUP_ID,
 			String name, int freigabe, String description, String comment) {
 		String result = "Fehler im Contactmanagement Update";
-		if (USER_LEVEL > 1) {
+		if (user_level > 1) {
 			try {
 				Object idf = HibernateUtil.createSession();
 				Session session = HibernateUtil.getSession();
@@ -642,10 +642,10 @@ public class Contactmanagement {
 		return result;
 	}
 
-	public String deleteContactgroup(int CONGROUP_ID, long USER_LEVEL,
+	public String deleteContactgroup(int CONGROUP_ID, long user_level,
 			int USER_ID) {
 		String result = "Fehler im Contactmanagement Delete";
-		if (USER_LEVEL > 1) {
+		if (user_level > 1) {
 			try {
 				Object idf = HibernateUtil.createSession();
 				Session session = HibernateUtil.getSession();
@@ -795,10 +795,10 @@ public class Contactmanagement {
 		return ret;
 	}
 
-	public String addContactToGroup(long User_Level, int CONTACT_ID,
+	public String addContactToGroup(long user_level, int CONTACT_ID,
 			int CONUSER_ID, int CONGROUP_ID, String comment) {
 		String result = "Fehler im Contactmanagement addContactToGroup";
-		if (User_Level > 1) {
+		if (user_level > 1) {
 
 			boolean NewFlag = getCheckDuplicate(CONTACT_ID, CONUSER_ID,
 					CONGROUP_ID);
@@ -873,11 +873,11 @@ public class Contactmanagement {
 		return ret;
 	}
 
-	public String updateContactGroup(long User_Level, int UID, int CONGROUP_ID,
+	public String updateContactGroup(long user_level, int UID, int CONGROUP_ID,
 			String comment) {
 		String result = "Fehler im Contactmanagement addContactToGroup";
 		try {
-			if (User_Level > 1) {
+			if (user_level > 1) {
 				boolean NewFlag = checkupdate(UID, CONGROUP_ID);
 
 				if (NewFlag) {
@@ -908,10 +908,10 @@ public class Contactmanagement {
 		return result;
 	}
 
-	public String deleteContactFromGroup(int USER_ID, long USER_LEVEL,
+	public String deleteContactFromGroup(int USER_ID, long user_level,
 			int CONTACT_ID, int CONUSER_ID, int CONGROUP_ID) {
 		String result = "Fehler im Contactmanagement deleteContactFromGroup";
-		if (USER_LEVEL > 1) {
+		if (user_level > 1) {
 			congroups congroups = getGroupsByContact(CONGROUP_ID);
 			if (USER_ID == congroups.getUSER_ID()) {
 				try {

@@ -1,5 +1,6 @@
 package org.xmlcrm.utils.mappings;
 
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Iterator;
 import java.lang.reflect.Constructor;
@@ -9,6 +10,8 @@ import java.lang.reflect.Modifier;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+
+import org.red5.io.utils.ObjectMap;
 
 /**
  * Class to cast any LinkedHashMap to its JavaBean repraesentant
@@ -33,23 +36,28 @@ import org.apache.commons.logging.LogFactory;
  *
  */
 
-public class CastHashMapToObject {
+public class CastMapToObject {
 	
-	private static final Log log = LogFactory.getLog(CastHashMapToObject.class);
+	private static final Log log = LogFactory.getLog(CastMapToObject.class);
 	
-	private CastHashMapToObject() {}
+	private CastMapToObject() {}
 
-	private static CastHashMapToObject instance = null;
+	private static CastMapToObject instance = null;
 
-	public static synchronized CastHashMapToObject getInstance() {
+	public static synchronized CastMapToObject getInstance() {
 		if (instance == null) {
-			instance = new CastHashMapToObject();
+			instance = new CastMapToObject();
 		}
 		return instance;
 	}	
 	
-	public Object castByGivenObject(LinkedHashMap values, Class targetClass){
+	public Object castByGivenObject(HashMap values, Class targetClass){
 		try {
+//			if (valuesObj.getClass().getClass().getName().equals(ObjectMap.class.getName())){
+//				ObjectMap values = (ObjectMap) valuesObj;
+//			} else if (valuesObj.getClass().getClass().getName().equals(LinkedHashMap.class.getName())){
+//				LinkedHashMap values = (LinkedHashMap) valuesObj;
+//			}
 			Object returnObject = targetClass.newInstance();
 //			log.error("returnObject");
 //			log.error(returnObject);
@@ -131,10 +139,13 @@ public class CastHashMapToObject {
 					Object valueOfHashMap = values.get(fieldName);
 					if (valueOfHashMap!=null){
 						String valueTypeOfHashMap = valueOfHashMap.getClass().getName();
+						
 						if (this.compareTypeNameToAllowedListTypes(valueTypeOfHashMap)) {
 							
+							log.error(valueTypeOfHashMap);
+							
 							//Get value from  set 
-							Object t = this.castByGivenObject((LinkedHashMap)valueOfHashMap, fieldType);
+							Object t = this.castByGivenObject((HashMap)valueOfHashMap, fieldType);
 							int mod = anyField.getModifiers();
 							
 							if (Modifier.isPrivate(mod) && !Modifier.isFinal(mod)){
@@ -214,6 +225,20 @@ public class CastHashMapToObject {
 			return false;
 		} catch (Exception ex) {
 			log.error("[compareTypeNameToBasicTypes]",ex);
+			return false;
+		}
+	}
+	
+	private boolean compareBeanTypeToAllowedListTypes(String fieldType){
+		try {
+			//log.error("compareTypeNameToAllowedListTypes"+ fieldTypeName);
+			for (Iterator it = CastBasicTypes.getAllowedBeanListTypes().iterator();it.hasNext();) {
+				if (fieldType.equals(it.next())) return true;
+			}
+			
+			return false;
+		} catch (Exception ex) {
+			log.error("[compareBeanTypeToAllowedListTypes]",ex);
 			return false;
 		}
 	}

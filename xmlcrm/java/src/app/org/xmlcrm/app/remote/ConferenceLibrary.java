@@ -64,9 +64,9 @@ public class ConferenceLibrary {
 			LinkedHashMap<String,LinkedHashMap> presentationObject = null;
 						
 	        Long users_id = Sessionmanagement.getInstance().checkSession(SID);
-	        long USER_LEVEL = Usermanagement.getInstance().getUserLevelByID(users_id);  
+	        long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);  
 	        
-	        if (AuthLevelmanagement.getInstance().checkUserLevel(USER_LEVEL)){
+	        if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)){
 				
 				String roomName = domain+"_"+room;
 				//trim whitespaces cause it is a directory name
@@ -184,8 +184,8 @@ public class ConferenceLibrary {
 	public boolean deleteFile(String SID, String fileName, String moduleName, String parentFolder, String room, String domain){
 		boolean returnVal = false;
         Long users_id = Sessionmanagement.getInstance().checkSession(SID);
-        long USER_LEVEL = Usermanagement.getInstance().getUserLevelByID(users_id);  
-        if (AuthLevelmanagement.getInstance().checkUserLevel(USER_LEVEL)){		
+        long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);  
+        if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)){		
 			try {
 				
 				//Servlet.getServletRequest().getRealPath("/");
@@ -261,8 +261,8 @@ public class ConferenceLibrary {
 	
 	public Long saveAsObject(String SID, String room, String domain, String fileName, Object t){
         Long users_id = Sessionmanagement.getInstance().checkSession(SID);
-        long USER_LEVEL = Usermanagement.getInstance().getUserLevelByID(users_id);  
-        if (AuthLevelmanagement.getInstance().checkUserLevel(USER_LEVEL)){		
+        long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);  
+        if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)){		
 			try {
 				LinkedHashMap tObject = (LinkedHashMap)t;
 				log.error(tObject.size());
@@ -288,8 +288,8 @@ public class ConferenceLibrary {
 	
 	public LinkedHashMap loadWmlObject(String SID, String room, String domain, String fileName){
         Long users_id = Sessionmanagement.getInstance().checkSession(SID);
-        long USER_LEVEL = Usermanagement.getInstance().getUserLevelByID(users_id);  
-        if (AuthLevelmanagement.getInstance().checkUserLevel(USER_LEVEL)){		
+        long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);  
+        if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)){		
 			try {
 				
 				String roomName = domain+"_"+room;

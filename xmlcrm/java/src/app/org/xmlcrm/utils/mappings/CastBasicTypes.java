@@ -59,4 +59,13 @@ public class CastBasicTypes {
 		return typeList;
 	}	
 	
+	
+	public static synchronized LinkedList<String> getAllowedBeanListTypes(){
+		LinkedList<String> typeList = new LinkedList<String>();
+		typeList.add("java.util.LinkedHashSet");
+		typeList.add("java.util.Set");
+		return typeList;
+	}	
+		
+	
 }
