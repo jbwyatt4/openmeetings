@@ -149,13 +149,17 @@
 
           ]]>
         </method>
+        
+        <method name="disconnect">
+            this._nc.close();
+        </method>
 
 
         <!--- Handle the onStatus callback from the Flash NetConnection object. 
               @keywords private -->
         <method name="_onStatus" args="info"><![CDATA[
             if (this.debug) {
-                //Debug.write("rtmpconnection", this, "_onStatus", info.code);
+                Debug.write("rtmpconnection", this, "_onStatus", info.code);
             }
 
             var msg = "";
@@ -328,6 +332,8 @@
             this._nc.call(func, obj);
         }
     </method>
+        
+    
 
 
     </class>

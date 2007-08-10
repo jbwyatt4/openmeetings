@@ -4,63 +4,98 @@
 <script>
 <![CDATA[
 var labelObj;
+    
+var tempActionForNavi = '';
 
 function loadContent(obj,parentobj,preparentobj){
 	
-	//Debug.write("loadContent: ",obj.action,obj,parentobj,preparentobj);
-	
+	Debug.write("loadContent: ",obj.action,obj,parentobj,preparentobj);
+    
+	tempActionForNavi = obj.action;
+    
 	if (obj.action=="conf1"){
-        clearStageContent();
-        obj.parent.parent.clearAllSubItemLists();  
-		new conferenceboard(canvas.main_content._content.inner);
-         
-        //new subsubtreeitem(obj.parent.parent._subsubcontent,{name:'room1conf',list:null,depth:3,text:'room1',open:true,isleaf:true,action:'roomconf1'});
-        //new subsubtreeitem(obj.parent.parent._subsubcontent,{name:'room2conf',list:null,depth:3,text:'room2',open:true,isleaf:true,action:'roomconf1'});
+        if (!clearStageContent(obj)) {
+            loadContentByTempActionForNavi();
+        }
     } else if (obj.action=="conf2"){
-        clearStageContent();
-        obj.parent.parent.clearAllSubItemLists();    
-		new audienceboard(canvas.main_content._content.inner); 
+        if (!clearStageContent(obj)) {
+            loadContentByTempActionForNavi();
+        }
     } else if (obj.action=="home"){
-        clearStageContent();
-        obj.parent.parent.clearAllSubItemLists();
-		new maindashboard(canvas.main_content._content.inner);
+        if (!clearStageContent(obj)) {
+            loadContentByTempActionForNavi();
+        }
     } else if (obj.action=="userself"){
-        clearStageContent();
-        obj.parent.parent.clearAllSubItemLists();
-        new usersettings(canvas.main_content._content.inner);
+        if (!clearStageContent(obj)) {
+            loadContentByTempActionForNavi();
+        }
     } else if (obj.action=="useradmin"){
-        clearStageContent();
-        obj.parent.parent.clearAllSubItemLists();
-        new configureusers(canvas.main_content._content.inner);
+        if (!clearStageContent(obj)) {
+            loadContentByTempActionForNavi();
+        }
     } else if (obj.action=="groupadmin"){
-        clearStageContent();
-        obj.parent.parent.clearAllSubItemLists();
+        if (!clearStageContent(obj)) {
+            loadContentByTempActionForNavi();
+        }
     } else if (obj.action=="orgadmin"){
-        clearStageContent();
-        obj.parent.parent.clearAllSubItemLists();
-		new orgadmin(canvas.main_content._content.inner);
+        if (!clearStageContent(obj)) {
+            loadContentByTempActionForNavi();
+        }
     } else if (obj.action=="roomadmin"){
-        clearStageContent();
-        obj.parent.parent.clearAllSubItemLists();
-		new roomadmin(canvas.main_content._content.inner);
+        if (!clearStageContent(obj)) {
+            loadContentByTempActionForNavi();
+        }
     } else if (obj.action=="roomconfiguremod"){
-        clearStageContent();
-        obj.parent.parent.clearAllSubItemLists();
-		new roomconfiguremod(canvas.main_content._content.inner);
+        if (!clearStageContent(obj)) {
+            loadContentByTempActionForNavi();
+        }
     } else if (obj.action=="issuetracker"){
-        clearStageContent();
-        obj.parent.parent.clearAllSubItemLists();
-		new issuetracker(canvas.main_content._content.inner);
+        if (!clearStageContent(obj)) {
+            loadContentByTempActionForNavi();
+        }
     } else if (obj.action=="confadmin"){
-        clearStageContent();
-        obj.parent.parent.clearAllSubItemLists();
-		new confadmin(canvas.main_content._content.inner);
+        if (!clearStageContent(obj)) {
+            loadContentByTempActionForNavi();
+        }
     }
 	
 }
+    
+function loadContentByTempActionForNavi(){
+	
+	//Debug.write("loadContentByString ",action);
+	
+	if (tempActionForNavi=="conf1"){
+		new conferenceboard(canvas.main_content._content.inner);
+    } else if (tempActionForNavi=="conf2"){
+		new audienceboard(canvas.main_content._content.inner); 
+    } else if (tempActionForNavi=="home"){
+		new maindashboard(canvas.main_content._content.inner);
+    } else if (tempActionForNavi=="userself"){
+        new usersettings(canvas.main_content._content.inner);
+    } else if (tempActionForNavi=="useradmin"){
+        new configureusers(canvas.main_content._content.inner);
+    } else if (tempActionForNavi=="groupadmin"){
+    } else if (tempActionForNavi=="orgadmin"){
+		new orgadmin(canvas.main_content._content.inner);
+    } else if (tempActionForNavi=="roomadmin"){
+		new roomadmin(canvas.main_content._content.inner);
+    } else if (tempActionForNavi=="roomconfiguremod"){
+		new roomconfiguremod(canvas.main_content._content.inner);
+    } else if (tempActionForNavi=="issuetracker"){
+		new issuetracker(canvas.main_content._content.inner);
+    } else if (tempActionForNavi=="confadmin"){
+		new confadmin(canvas.main_content._content.inner);
+    }
+	
+}    
 
-function clearStageContent(){
-    canvas.main_content._content.clearAll();
+function clearStageContent(obj){
+    Debug.write("clearStageContent: ",obj);
+    //can be called with zero arguments
+    if (arguments.length!=0) obj.parent.parent.clearAllSubItemLists();  
+    
+    return canvas.main_content._content.clearAll();
 }
 function setLabelObject(labelObjRef){
 	labelObj = labelObjRef;
