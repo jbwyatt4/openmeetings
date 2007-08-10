@@ -107,7 +107,9 @@ public class LibraryDocumentConverter {
 				this.createNodesByObject(document, baseElement, innerlMap);
 			} else if (baseItem.equals("rectangle") || baseItem.equals("ellipse")){
 				this.createNodesByRectAndEllipse(document, baseElement, innerlMap);
-			}
+			} else if (baseItem.equals("swf")){
+				this.createNodesBySWF(document, baseElement, innerlMap);
+			} 
 			
 		}
 		
@@ -486,6 +488,124 @@ public class LibraryDocumentConverter {
 			
 		} catch (Exception err){
 			log.error("createNodesByRect",err);
+		}
+	}
+	
+	private void createNodesBySWF(Document document, Element baseElement, LinkedHashMap image){
+		try {
+			
+			Element urlname = document.createElement("urlname");
+			baseElement.appendChild(urlname);
+			Text urlnameT = document.createTextNode(image.get(1).toString());
+			urlname.appendChild(urlnameT);
+			
+			Element baseurl = document.createElement("baseurl");
+			baseElement.appendChild(baseurl);
+			Text baseurlT = document.createTextNode(image.get(2).toString());
+			baseurl.appendChild(baseurlT);
+			
+			Element filename = document.createElement("filename");
+			baseElement.appendChild(filename);
+			Text filenameT = document.createTextNode(image.get(3).toString());
+			filename.appendChild(filenameT);
+			
+			Element modulename = document.createElement("modulename");
+			baseElement.appendChild(modulename);
+			Text modulenameT = document.createTextNode(image.get(4).toString());
+			modulename.appendChild(modulenameT);
+			
+			Element parentpath = document.createElement("parentpath");
+			baseElement.appendChild(parentpath);
+			Text parentpathT = document.createTextNode(image.get(5).toString());
+			parentpath.appendChild(parentpathT);
+			
+			Element room = document.createElement("room");
+			baseElement.appendChild(room);
+			Text roomT = document.createTextNode(image.get(6).toString());
+			room.appendChild(roomT);
+			
+			Element domain = document.createElement("domain");
+			baseElement.appendChild(domain);
+			Text domainT = document.createTextNode(image.get(7).toString());
+			domain.appendChild(domainT);
+			
+			Element slideNumber = document.createElement("slideNumber");
+			baseElement.appendChild(slideNumber);
+			Text slideNumberT = document.createTextNode(image.get(8).toString());
+			slideNumber.appendChild(slideNumberT);			
+			
+			Element innerx = document.createElement("innerx");
+			baseElement.appendChild(innerx);
+			Text innerxT = document.createTextNode(image.get(9).toString());
+			innerx.appendChild(innerxT);	
+			
+			Element innery = document.createElement("innery");
+			baseElement.appendChild(innery);
+			Text inneryT = document.createTextNode(image.get(10).toString());
+			innery.appendChild(inneryT);	
+			
+			Element innerwidth = document.createElement("innerwidth");
+			baseElement.appendChild(innerwidth);
+			Text innerwidthT = document.createTextNode(image.get(11).toString());
+			innerwidth.appendChild(innerwidthT);	
+			
+			Element innerheight = document.createElement("innerheight");
+			baseElement.appendChild(innerheight);
+			Text innerheightT = document.createTextNode(image.get(12).toString());
+			innerheight.appendChild(innerheightT);
+			
+			Element zoomlevel = document.createElement("zoomlevel");
+			baseElement.appendChild(zoomlevel);
+			Text zoomlevelT = document.createTextNode(image.get(13).toString());
+			zoomlevel.appendChild(zoomlevelT);
+			
+			Element initwidth = document.createElement("initwidth");
+			baseElement.appendChild(initwidth);
+			Text initwidthT = document.createTextNode(image.get(14).toString());
+			initwidth.appendChild(initwidthT);
+			
+			Element initheight = document.createElement("initheight");
+			baseElement.appendChild(initheight);
+			Text initheightT = document.createTextNode(image.get(15).toString());
+			initheight.appendChild(initheightT);
+			
+			Element currentzoom = document.createElement("currentzoom");
+			baseElement.appendChild(currentzoom);
+			Text currentzoomT = document.createTextNode(image.get(16).toString());
+			currentzoom.appendChild(currentzoomT);
+			
+			Element counter = document.createElement("counter");
+			baseElement.appendChild(counter);
+			Text counterT = document.createTextNode(image.get(17).toString());
+			counter.appendChild(counterT);				
+			
+			Element x = document.createElement("x");
+			baseElement.appendChild(x);
+			Text xT = document.createTextNode(image.get(18).toString());
+			x.appendChild(xT);
+			
+			Element y = document.createElement("y");
+			baseElement.appendChild(y);
+			Text yT = document.createTextNode(image.get(19).toString());
+			y.appendChild(yT);
+			
+			Element width = document.createElement("width");
+			baseElement.appendChild(width);
+			Text widthT = document.createTextNode(image.get(20).toString());
+			width.appendChild(widthT);
+			
+			Element height = document.createElement("height");
+			baseElement.appendChild(height);
+			Text heightT = document.createTextNode(image.get(21).toString());
+			height.appendChild(heightT);
+			
+			Element layername = document.createElement("layername");
+			baseElement.appendChild(layername);
+			Text layernameT = document.createTextNode(image.get(22).toString());
+			layername.appendChild(layernameT);
+			
+		} catch (Exception err){
+			log.error("createNodesByImage",err);
 		}
 	}
 	

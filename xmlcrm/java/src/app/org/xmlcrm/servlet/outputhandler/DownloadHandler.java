@@ -1,17 +1,15 @@
 package org.xmlcrm.servlet.outputhandler;
 
-import http.utils.multipartrequest.MultipartRequest;
-
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.RandomAccessFile;
+import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
@@ -22,6 +20,10 @@ import org.xmlcrm.app.data.user.Usermanagement;
 public class DownloadHandler extends HttpServlet {
 
 	private static final Log log = LogFactory.getLog(DownloadHandler.class);
+	
+	private static final String defaultImageName = "deleted.jpg";
+	private static final String defaultSWFName = "deleted.swf";
+	private static final String defaultPDFName = "deleted.pdf";
 
 	/*
 	 * (non-Javadoc)
@@ -42,9 +44,9 @@ public class DownloadHandler extends HttpServlet {
 			System.out.println("sid: " + sid);
 
 			Long users_id = Sessionmanagement.getInstance().checkSession(sid);
-			long User_LEVEL = Usermanagement.getInstance().getUserLevelByID(users_id);
+			Long User_LEVEL = Usermanagement.getInstance().getUserLevelByID(users_id);
 
-			if (User_LEVEL > 0) {
+			if (User_LEVEL!=null && User_LEVEL > 0) {
 				String room = httpServletRequest.getParameter("room");
 				if(room == null){
 					room = "default";
@@ -71,11 +73,11 @@ public class DownloadHandler extends HttpServlet {
 				//Get the current User-Directory
 				
 				String current_dir = getServletContext().getRealPath("/");
-				System.out.println("Current_dir: "+current_dir);
+//				System.out.println("Current_dir: "+current_dir);
 
 				String working_dir = "";
-
-				System.out.println("#### moduleName: " + moduleName);
+//
+//				System.out.println("#### moduleName: " + moduleName);
 
 				working_dir = current_dir+File.separatorChar+"upload"+File.separatorChar;
 				
@@ -99,9 +101,49 @@ public class DownloadHandler extends HttpServlet {
 				if (!moduleName.equals("nomodule")) {
 
 					String requestedFile = httpServletRequest.getParameter("fileName");
-					System.out.println("requestedFile: " + requestedFile);
+					System.out.println("requestedFile: " + requestedFile + " current_dir: "+working_dir);
 
 					String full_path = working_dir + requestedFile;
+					
+					File f = new File(full_path);
+					if (!f.exists() || !f.canRead()) {
+						if (!f.canRead()){
+							log.error("ERROR DownloadHandler: The request file does not exist / has already been deleted");
+							System.out.println("ERROR DownloadHandler: The request file does not exist / has already been deleted");
+						} else {
+							log.error("ERROR DownloadHandler: The request file does not exist / has already been deleted");
+							System.out.println("ERROR DownloadHandler: The request file does not exist / has already been deleted");
+						}
+						//replace the path with the default picture/document
+						if (requestedFile.endsWith(".jpg")){
+							//request for an image
+							full_path = current_dir + File.separatorChar + "default" + 
+									File.separatorChar + DownloadHandler.defaultImageName;
+						} else if (requestedFile.endsWith(".swf")){
+							//request for a SWFPresentation
+							full_path = current_dir + File.separatorChar + "default" + 
+									File.separatorChar + DownloadHandler.defaultSWFName;
+						} else {
+							//Any document, must be a download request
+							full_path = current_dir + File.separatorChar + "default" + 
+								File.separatorChar + DownloadHandler.defaultPDFName;
+						}
+					}
+					
+					File f2 = new File(full_path);
+					if (!f2.exists() || !f2.canRead()) {
+						if (!f2.canRead()){
+							log.error("ERROR DownloadHandler: The request DEFAULT-file does not exist / has already been deleted");
+							System.out.println("ERROR DownloadHandler: The request  DEFAULT-file does not exist / has already been deleted");
+						} else {
+							log.error("ERROR DownloadHandler: The request DEFAULT-file does not exist / has already been deleted");
+							System.out.println("ERROR DownloadHandler: The request DEFAULT-file does not exist / has already been deleted");
+						}
+						//no file to handle abort processing
+						return;
+					}
+					
+					//Get file and handle download
 					RandomAccessFile rf = new RandomAccessFile(full_path, "r");
 
 					httpServletResponse.reset();
@@ -124,6 +166,8 @@ public class DownloadHandler extends HttpServlet {
 					out.close();
 
 				}
+			} else {
+				System.out.println("ERROR DownloadHandler: not authorized FileDownload "+(new Date()));
 			}
 
 		} catch (Exception er) {
