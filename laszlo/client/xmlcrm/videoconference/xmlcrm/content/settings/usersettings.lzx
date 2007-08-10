@@ -7,6 +7,7 @@
 
 	<!-- record-id -->
 	<attribute name="user_id" value="0" type="number" />
+    <attribute name="userObj" value="null" />
 	
 	<!--handlers -->
 
@@ -26,6 +27,7 @@
     
     <method name="initFields" args="obj">
     	<![CDATA[
+            this.userObj = obj;
 			this.user_id = obj.user_id;
 			this.username.setText(obj.login);
 			this.firstname.setText(obj.firstname);
@@ -63,26 +65,25 @@
 		<attribute name="sendObject" value="null" />
 		<!-- gets called by Observer -->
   		<method name="prepareCall">
-  			this.sendObject=new Array();
-  			this.sendObject["login"] = this.parent.username.getText();
-  			this.sendObject["password"] = this.parent.userpass1.getText();
-  			this.sendObject["firstname"] = this.parent.firstname.getText();
-  			this.sendObject["lastname"] = this.parent.lastname.getText();
-  			this.sendObject["email"] = this.parent.email.getText();
-  			this.sendObject["street"] = this.parent.street.getText();
-  			this.sendObject["additionalname"] = this.parent.house.getText();
-  			this.sendObject["zip"] = this.parent.zip.getText();
-  			this.sendObject["town"] = this.parent.town.getText();
-  			this.sendObject["states_id"] = this.parent.state.getValue();
-  			this.sendObject["comment"] = this.parent.adress_comment.getText();
-  			this.sendObject["telefon"] = '';
-  			this.sendObject["fax"] = '';
-  			this.sendObject["mobil"] = '';
-			this.sendObject["title_id"] = Number(this.parent.salutation.getValue());
-  			this.sendObject["status"] = hib.userobject.status;
+  			this.parent.userObj.login = this.parent.username.getText();
+  			this.parent.userObj.password = this.parent.userpass1.getText();
+  			this.parent.userObj.firstname = this.parent.firstname.getText();
+  			this.parent.userObj.lastname = this.parent.lastname.getText();
+  			this.parent.userObj.email = this.parent.email.getText();
+  			this.parent.userObj.street = this.parent.street.getText();
+  			this.parent.userObj.additionalname = this.parent.house.getText();
+  			this.parent.userObj.zip = this.parent.zip.getText();
+  			this.parent.userObj.town = this.parent.town.getText();
+  			this.parent.userObj.states_id = this.parent.state.getValue();
+  			this.parent.userObj.comment = this.parent.adress_comment.getText();
+  			this.parent.userObj.telefon = '';
+  			this.parent.userObj.fax = '';
+  			this.parent.userObj.mobil = '';
+			this.parent.userObj.title_id = Number(this.parent.salutation.getValue());
+  			this.parent.userObj.status = hib.userobject.status;
   		</method>
   		<netparam name="vars1"><method name="getValue"> return canvas.sessionId; </method></netparam>
-    	<netparam name="vars2"><method name="getValue">return parent.sendObject;</method></netparam>	  		
+    	<netparam name="vars2"><method name="getValue">return this.parent.parent.userObj;</method></netparam>	  		
   	</netremotecallhib>
 	
 	<!-- content -->	
