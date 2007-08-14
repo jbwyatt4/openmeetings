@@ -1,6 +1,8 @@
 package org.xmlcrm.utils.mappings;
 
-import java.util.HashMap;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.Map;
 import java.util.LinkedHashMap;
 import java.util.Iterator;
 import java.lang.reflect.Constructor;
@@ -10,8 +12,6 @@ import java.lang.reflect.Modifier;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
-import org.red5.io.utils.ObjectMap;
 
 /**
  * Class to cast any LinkedHashMap to its JavaBean repraesentant
@@ -51,7 +51,7 @@ public class CastMapToObject {
 		return instance;
 	}	
 	
-	public Object castByGivenObject(HashMap values, Class targetClass){
+	public Object castByGivenObject(Map values, Class targetClass){
 		try {
 //			if (valuesObj.getClass().getClass().getName().equals(ObjectMap.class.getName())){
 //				ObjectMap values = (ObjectMap) valuesObj;
@@ -136,62 +136,104 @@ public class CastMapToObject {
 					
 					//This will cast nested Object to the current Object
 					//it does not matter how deep it is nested
-					Object valueOfHashMap = values.get(fieldName);
-					if (valueOfHashMap!=null){
-						String valueTypeOfHashMap = valueOfHashMap.getClass().getName();
+					
+//					log.error("fieldType "+fieldType.getName());
+					
+					//Check if the Attribute in the bean is a List
+					if (fieldType.getName().equals("java.util.Set")) {
 						
-						if (this.compareTypeNameToAllowedListTypes(valueTypeOfHashMap)) {
+						//Todo: Cast Set to Object
+						
+//						log.error("compareBeanTypeToAllowedListTypes true " + fieldType.getName());
+//						log.error("compareBeanTypeToAllowedListTypes true " + fieldName);
+						
+						Object valueOfHashMap = values.get(fieldName);
+						
+						if (valueOfHashMap!=null){
+//							log.error("compareBeanTypeToAllowedListTypes true " + valueOfHashMap.getClass().getName());
+							String valueTypeOfHashMap = valueOfHashMap.getClass().getName();
+							HashSet s = new HashSet();
 							
-							log.error(valueTypeOfHashMap);
-							
-							//Get value from  set 
-							Object t = this.castByGivenObject((HashMap)valueOfHashMap, fieldType);
-							int mod = anyField.getModifiers();
-							
-							if (Modifier.isPrivate(mod) && !Modifier.isFinal(mod)){
-								
-								//log.info("is private so get setter method "+fieldName);
-								LinkedHashMap<String,Object> methodSummery = structuredMethodMap.get(fieldName);
-								
-								if (methodSummery!=null) {
-									if (methodSummery.get("setter")!=null) {
-			
-										String methodSetterName = methodSummery.get("setter").toString();
-										Class[] paramTypes = (Class[]) methodSummery.get("setterParamTypes");
-										Method m = targetClass.getMethod(methodSetterName, paramTypes);
-										
-										Class paramType = paramTypes[0];
-										//log.error("paramType: "+paramType.getName());
-										if (paramType.isPrimitive() && t==null){
-											//cannot cast null to primitve
-										} else {
-											Object[] arguments = new Object[]{ t }; 
-											m.invoke(returnObject,arguments);
-										}
+							if (this.compareTypeNameToAllowedListTypes(valueTypeOfHashMap)) {
+								Map m = (Map) valueOfHashMap;
+								for (Iterator it = m.keySet().iterator();it.hasNext();) {
+									String key = it.next().toString();
+//									log.error("key: "+key);
+									Object listObject = m.get(key);
+//									log.error("listObject: "+listObject);
+//									log.error("listObject: "+listObject.getClass().getName());
 									
-									} else {
-										log.error("could not find a setter-method from Structured table. Is there a setter-method for " + fieldName + " in Class " + targetClass.getName());
-									}
-								} else {
-									log.error("could not find a method from Structured table. Is there a method for " + fieldName + " in Class " + targetClass.getName());
 								}
-							} else if (Modifier.isPublic(mod) && !Modifier.isFinal(mod)){
 								
-								//Is public attribute so set it directly
-								anyField.set(returnObject, t);
-								
-							} else if (Modifier.isFinal(mod)) {
-								log.error("Final attributes cannot be changed ");
-							} else {
-								log.error("Unhandled Modifier Type: " + mod);
 							}
-							
 						}
+						
+					//otherwise do it as Object
 					} else {
-						//There is no nested Object for that given
-						log.error("There is no nested Object for that given: Attribute: " + fieldName + " Class " + targetClass.getName());
+						
+//						log.error("otherwise do it as Object "+fieldType.getName());
+					
+						Object valueOfHashMap = values.get(fieldName);
+						if (valueOfHashMap!=null){
+							String valueTypeOfHashMap = valueOfHashMap.getClass().getName();
+							
+							if (this.compareTypeNameToAllowedListTypes(valueTypeOfHashMap)) {
+								
+								log.error(valueTypeOfHashMap);
+								log.error(fieldType.getName());
+								
+								//Get value from  set 
+								Object t = this.castByGivenObject((Map)valueOfHashMap, fieldType);
+								int mod = anyField.getModifiers();
+								
+								if (Modifier.isPrivate(mod) && !Modifier.isFinal(mod)){
+									
+									//log.info("is private so get setter method "+fieldName);
+									LinkedHashMap<String,Object> methodSummery = structuredMethodMap.get(fieldName);
+									
+									if (methodSummery!=null) {
+										if (methodSummery.get("setter")!=null) {
+				
+											String methodSetterName = methodSummery.get("setter").toString();
+											Class[] paramTypes = (Class[]) methodSummery.get("setterParamTypes");
+											Method m = targetClass.getMethod(methodSetterName, paramTypes);
+											
+											Class paramType = paramTypes[0];
+											//log.error("paramType: "+paramType.getName());
+											if (paramType.isPrimitive() && t==null){
+												//cannot cast null to primitve
+											} else {
+												Object[] arguments = new Object[]{ t }; 
+												m.invoke(returnObject,arguments);
+											}
+										
+										} else {
+											log.error("could not find a setter-method from Structured table. Is there a setter-method for " + fieldName + " in Class " + targetClass.getName());
+										}
+									} else {
+										log.error("could not find a method from Structured table. Is there a method for " + fieldName + " in Class " + targetClass.getName());
+									}
+								} else if (Modifier.isPublic(mod) && !Modifier.isFinal(mod)){
+									
+									//Is public attribute so set it directly
+									anyField.set(returnObject, t);
+									
+								} else if (Modifier.isFinal(mod)) {
+									log.error("Final attributes cannot be changed ");
+								} else {
+									log.error("Unhandled Modifier Type: " + mod);
+								}
+								
+							}
+						} else {
+							//There is no nested Object for that given
+							log.error("There is no nested Object for that given: Attribute: " + fieldName + " Class " + targetClass.getName());
+						}
 					}
-				}
+					
+				} 
+				
+				
 			} 
 
 			return returnObject;
@@ -228,19 +270,5 @@ public class CastMapToObject {
 			return false;
 		}
 	}
-	
-	private boolean compareBeanTypeToAllowedListTypes(String fieldType){
-		try {
-			//log.error("compareTypeNameToAllowedListTypes"+ fieldTypeName);
-			for (Iterator it = CastBasicTypes.getAllowedBeanListTypes().iterator();it.hasNext();) {
-				if (fieldType.equals(it.next())) return true;
-			}
-			
-			return false;
-		} catch (Exception ex) {
-			log.error("[compareBeanTypeToAllowedListTypes]",ex);
-			return false;
-		}
-	}
-	
+
 }

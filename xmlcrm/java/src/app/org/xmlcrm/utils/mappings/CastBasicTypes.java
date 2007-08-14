@@ -43,6 +43,9 @@ public class CastBasicTypes {
 	public static synchronized LinkedList<String> getAllowedListTypes(){
 		LinkedList<String> typeList = new LinkedList<String>();
 		typeList.add("java.util.LinkedHashMap");
+		typeList.add("java.util.HashMap");
+		typeList.add("java.util.Map");
+		typeList.add("org.red5.io.utils.ObjectMap");
 		return typeList;
 	}
 	
@@ -58,14 +61,5 @@ public class CastBasicTypes {
 		typeList.add("java.util.LinkedHashSet");
 		return typeList;
 	}	
-	
-	
-	public static synchronized LinkedList<String> getAllowedBeanListTypes(){
-		LinkedList<String> typeList = new LinkedList<String>();
-		typeList.add("java.util.LinkedHashSet");
-		typeList.add("java.util.Set");
-		return typeList;
-	}	
-		
 	
 }

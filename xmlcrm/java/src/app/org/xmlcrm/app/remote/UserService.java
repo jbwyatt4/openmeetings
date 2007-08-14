@@ -153,20 +153,6 @@ public class UserService {
 	        Long users_id = Sessionmanagement.getInstance().checkSession(SID);
 	        Long User_LEVEL = Usermanagement.getInstance().getUserLevelByID(users_id);
 	        if(User_LEVEL!=null && User_LEVEL>1){
-	        	log.error(values.getClass().getName());
-//	            return Usermanagement.getInstance().updateUser(3,new Long(users_id), new Long(0), 
-//	            		argObjectMap.get("login").toString(), argObjectMap.get("password").toString(), 
-//	            		argObjectMap.get("lastname").toString(), argObjectMap.get("firstname").toString(), 
-//	            		new Date(), argObjectMap.get("street").toString(), 
-//	            		argObjectMap.get("additionalname").toString(),
-//	            		argObjectMap.get("zip").toString(), Long.valueOf(argObjectMap.get("states_id").toString()).longValue(), 
-//	            		argObjectMap.get("town").toString(), 1,
-//	            		argObjectMap.get("telefon").toString(),argObjectMap.get("fax").toString(),
-//	            		argObjectMap.get("mobil").toString(),argObjectMap.get("email").toString(),
-//	            		argObjectMap.get("comment").toString(),
-//	            		Integer.valueOf(argObjectMap.get("status").toString()).intValue(),
-//	            		null,
-//	            		Integer.valueOf(argObjectMap.get("title_id").toString()).intValue());
 	        	return Usermanagement.getInstance().saveOrUpdateUser(new Long(3),values, users_id);
 	        } else {
 	            return new Long(-2);
