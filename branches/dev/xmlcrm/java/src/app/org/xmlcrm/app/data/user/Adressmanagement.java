@@ -144,5 +144,35 @@ public class Adressmanagement {
 		}
 		return null;
 	}
+	
+	/**
+	 * 
+	 * @param addr
+	 * @return
+	 */
+	public Adresses updateAdress(Adresses addr) {
+		try {
+			Adresses addrRemote = this.getAdressbyId(addr.getAdresses_id());
+			addr.setEmails(addrRemote.getEmails());
+			addr.setPhones(addrRemote.getPhones());
+			
+			Object idf = HibernateUtil.createSession();
+			Session session = HibernateUtil.getSession();
+			Transaction tx = session.beginTransaction();
+
+			session.update(addr);
+			session.flush();
+
+			tx.commit();
+			HibernateUtil.closeSession(idf);
+
+			return addr;
+		} catch (HibernateException ex) {
+			log.error(ex);
+		} catch (Exception ex2) {
+			log.error(ex2);
+		}
+		return null;
+	}	
 
 }

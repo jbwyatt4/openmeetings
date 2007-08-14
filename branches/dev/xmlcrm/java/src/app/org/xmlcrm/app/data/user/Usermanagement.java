@@ -927,11 +927,55 @@ public class Usermanagement {
 	public Long saveOrUpdateUser(Long user_level,ObjectMap values, Long users_id){
 		try {
 			if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)) {
+				Long returnLong = null;
 				Users user = (Users) CastMapToObject.getInstance().castByGivenObject(values, Users.class);
-				
-				log.error("users userId: "+user.getUser_id());
-				log.error("users userId: "+user.getLogin());
-				
+	
+				if (user.getUser_id() != null && user.getUser_id()>0) {					
+					
+					returnLong = user.getUser_id();
+					Users savedUser = this.getUser(user.getUser_id());
+					savedUser.setAge(user.getAge());
+					savedUser.setFirstname(user.getFirstname());
+					savedUser.setLastname(user.getLastname());
+					savedUser.setTitle_id(user.getTitle_id());
+					if (user.getPassword().length()>3){
+						MD5Calc md5 = new MD5Calc("MD5");
+						savedUser.setPassword(md5.do_checksum(user.getPassword()));
+					}
+					
+					
+					String email = values.get("email").toString();
+					
+					Adresses_Emails mail = null;
+					Iterator it = savedUser.getAdresses().getEmails().iterator();
+					if (it.hasNext()){
+						mail = (Adresses_Emails) it.next();
+					}	
+					
+					if (!email.equals(mail.getMail().getEmail())){
+						boolean checkEmail = Emailmanagement.getInstance().checkUserEMail(email);
+						if (checkEmail) {
+							Emailmanagement.getInstance().updateUserEmail(mail.getMail().getMail_id(),savedUser.getUser_id(), email);
+						} else {
+							returnLong = new Long(-11);
+						}
+					}					
+					
+					Adressmanagement.getInstance().updateAdress(user.getAdresses());
+					savedUser.setAdresses(Adressmanagement.getInstance().getAdressbyId(user.getAdresses().getAdresses_id()));
+					
+					Object idf = HibernateUtil.createSession();
+					Session session = HibernateUtil.getSession();
+					Transaction tx = session.beginTransaction();
+
+					session.update(savedUser);
+					session.flush();
+					
+					tx.commit();
+					HibernateUtil.closeSession(idf);
+					
+					return returnLong;
+				}
 				
 			} else {
 				log.error("[saveOrUpdateUser] invalid auth "+users_id+ " "+new Date());
