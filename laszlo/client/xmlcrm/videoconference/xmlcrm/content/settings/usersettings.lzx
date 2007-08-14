@@ -29,7 +29,7 @@
     	<![CDATA[
             this.userObj = obj;
 			this.user_id = obj.user_id;
-			this.username.setText(obj.login);
+			//this.username.setText(obj.login);
 			this.firstname.setText(obj.firstname);
 			this.lastname.setText(obj.lastname);
 			this.email.setText(obj.adresses.emails[0].mail.email);
@@ -65,42 +65,45 @@
 		<attribute name="sendObject" value="null" />
 		<!-- gets called by Observer -->
   		<method name="prepareCall">
-  			this.parent.userObj.login = this.parent.username.getText();
-  			this.parent.userObj.password = this.parent.userpass1.getText();
+            if (this.parent.userpass1.getText()==this.parent.userpass2.getText()){
+                this.parent.userObj.password = this.parent.userpass1.getText();
+            } else {
+                this.parent.userObj.password = '';
+            }
   			this.parent.userObj.firstname = this.parent.firstname.getText();
   			this.parent.userObj.lastname = this.parent.lastname.getText();
   			this.parent.userObj.email = this.parent.email.getText();
-  			this.parent.userObj.street = this.parent.street.getText();
-  			this.parent.userObj.additionalname = this.parent.house.getText();
-  			this.parent.userObj.zip = this.parent.zip.getText();
-  			this.parent.userObj.town = this.parent.town.getText();
-  			this.parent.userObj.states_id = this.parent.state.getValue();
-  			this.parent.userObj.comment = this.parent.adress_comment.getText();
-  			this.parent.userObj.telefon = '';
-  			this.parent.userObj.fax = '';
-  			this.parent.userObj.mobil = '';
+  			this.parent.userObj.adresses.street = this.parent.street.getText();
+  			this.parent.userObj.adresses.additionalname = this.parent.house.getText();
+  			this.parent.userObj.adresses.zip = this.parent.zip.getText();
+  			this.parent.userObj.adresses.town = this.parent.town.getText();
+  			this.parent.userObj.adresses.states.state_id = this.parent.state.getValue();
+  			this.parent.userObj.adresses.comment = this.parent.adress_comment.getText();
+            this.parent.userObj.age = this.parent.age.getDate();
 			this.parent.userObj.title_id = Number(this.parent.salutation.getValue());
-  			this.parent.userObj.status = hib.userobject.status;
+            
+            Debug.write("this.parent.userObj: ",this.parent.userObj);
+            Debug.write("this.parent.userObj.adresses.states ",this.parent.userObj.adresses.states);
   		</method>
   		<netparam name="vars1"><method name="getValue"> return canvas.sessionId; </method></netparam>
     	<netparam name="vars2"><method name="getValue">return this.parent.parent.userObj;</method></netparam>	  		
+        <handler name="ondata" args="value"> 
+            Debug.write("updateUserSelfSmall: ",value);
+        </handler>
   	</netremotecallhib>
 	
 	<!-- content -->	
     
     <labeltext labelid="143" width="200" y="40" resize="false" fontstyle="bold" />
-    
-    <labeltext labelid="132" width="200" y="70" resize="false" x="2"/>
-        <customedittext name="username" y="70" x="120" width="270" text="" />
 
-    <labeltext labelid="133" width="200" y="100" resize="false" x="2"/>
-        <customedittext name="userpass1" y="100" password="true" x="120" width="270" text="" />
+    <labeltext labelid="133" width="200" y="70" resize="false" x="2"/>
+        <customedittext name="userpass1" y="70" password="true" x="120" width="270" text="" />
         
-    <labeltext labelid="134" width="200" y="130" resize="false" x="2"/>
-        <customedittext name="userpass2" y="130" password="true" x="120" width="270" text="" />   
+    <labeltext labelid="134" width="200" y="100" resize="false" x="2"/>
+        <customedittext name="userpass2" y="100" password="true" x="120" width="270" text="" />   
     
-    <labeltext labelid="135" width="200" y="160" resize="false" x="2"/>
-        <combobox name="salutation" width="100" y="160" x="120" editable="false" fontsize="12">
+    <labeltext labelid="135" width="200" y="130" resize="false" x="2"/>
+        <combobox name="salutation" width="100" y="130" x="120" editable="false" fontsize="12">
 	        <handler name="oninit" >
 	            <![CDATA[
 	            for (var i=0;i<canvas.salutationsInitValues.length;i++){
@@ -110,37 +113,37 @@
 	            ]]>
 	        </handler> 
         </combobox> 	
-        <customedittext name="firstname" y="160" x="230" width="160" text="" />
+        <customedittext name="firstname" y="130" x="230" width="160" text="" />
         
-    <labeltext labelid="136" width="200" y="190" resize="false" x="2"/>
-        <customedittext name="lastname" y="190" x="120" width="270" text="" />                
+    <labeltext labelid="136" width="200" y="160" resize="false" x="2"/>
+        <customedittext name="lastname" y="160" x="120" width="270" text="" />                
 
-    <labeltext labelid="137" width="200" y="220" resize="false" x="2"/>
-        <customedittext name="email" y="220" x="120" width="270" text="" />
+    <labeltext labelid="137" width="200" y="190" resize="false" x="2"/>
+        <customedittext name="email" y="190" x="120" width="270" text="" />
         
-    <labeltext labelid="138" width="200" y="250" resize="false" x="2"/>
-        <datefield name="age" y="250" x="120" width="270" text="" />
+    <labeltext labelid="138" width="200" y="220" resize="false" x="2"/>
+        <datefield name="age" y="220" x="120" width="270" text="" />
         
-    <labeltext labelid="139" width="200" y="280" resize="false" x="2"/>
-        <customedittext name="street" y="280" x="120" width="220" text="" />
-        <customedittext name="house" y="280" x="350" width="40" text="" />
+    <labeltext labelid="139" width="200" y="250" resize="false" x="2"/>
+        <customedittext name="street" y="250" x="120" width="220" text="" />
+        <customedittext name="house" y="250" x="350" width="40" text="" />
         
-    <labeltext labelid="140" width="280" y="310" resize="false" x="2"/>
-        <customedittext name="zip" y="310" x="120" width="70" text="" />   
-        <customedittext name="town" y="310" x="200" width="190" text="" />                        
+    <labeltext labelid="140" width="280" y="280" resize="false" x="2"/>
+        <customedittext name="zip" y="280" x="120" width="70" text="" />   
+        <customedittext name="town" y="280" x="200" width="190" text="" />                        
          
-    <labeltext labelid="141" width="200" y="340" resize="false" x="2"/>  
-		<validtext name="state" width="270" y="340" x="120" fontsize="12" 
+    <labeltext labelid="141" width="200" y="310" resize="false" x="2"/>  
+		<validtext name="state" width="270" y="310" x="120" fontsize="12" 
             shownitems="7" validate_method="$once{ canvas.validateCountry }" 
             resultId="state_id" resultName="name" />
 			
 	 
-    <labeltext labelid="142" width="200" y="370" resize="false" x="2"/>
-        <customedittext name="adress_comment" y="370" x="120" width="270" 
+    <labeltext labelid="142" width="200" y="340" resize="false" x="2"/>
+        <customedittext name="adress_comment" y="340" x="120" width="270" 
             height="100" text="" multiline="true"/>
        
-    <labeltext labelid="161" width="200" y="510" resize="false" x="2"/>     
-    <simplevaluelist name="_organisationslist" y="510" x="120" width="270" height="100" 
+    <labeltext labelid="161" width="200" y="480" resize="false" x="2"/>     
+    <simplevaluelist name="_organisationslist" y="480" x="120" width="270" height="100" 
 		multiselect="true" />
      
 
