@@ -1,5 +1,28 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library>
+    
+<dataset name="myresultnavi" />
+    
+    
+<dataset name="myresultnavi2" >
+    <element>
+        <item>
+            <label>
+                <value>hans1</value>
+            </label>    
+        </item>
+        <item>
+            <label>
+                <value>hans2</value>
+            </label>  
+        </item>
+        <item>
+            <label>
+                <value>hans3</value>
+            </label>  
+        </item>                
+    </element>
+</dataset>
 
 <rtmpconnection name="thishib" id="hib" debug="true" autoconnect="false"
     src="$once{ this.protocollName+'://'+canvas.rtmphostlocal+':'+this.protocollPort+'/xmlcrm/hibernate' }" >
@@ -151,7 +174,7 @@
         </handler>  
     </netremotecallhib>    	 
     
-    <netremotecallhib name="getNavi" funcname="xmlcrm.getNavi" >      
+    <netremotecallhib name="getNavi" funcname="xmlcrm.getNavi" dataobject="myresultnavi">      
         <netparam name="vars1"><method name="getValue"> return canvas.sessionId; </method></netparam> 
         <netparam name="vars2"><method name="getValue"> return parent.parent.userlang; </method></netparam> 
         <handler name="ondata" args="value">
