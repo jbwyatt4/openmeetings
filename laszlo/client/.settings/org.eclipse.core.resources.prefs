@@ -1,4 +1,4 @@
-#Tue Aug 07 11:30:49 CEST 2007
+#Wed Aug 15 16:12:01 CEST 2007
 =\=\=\=\=\=\=
 <<<<<<<=.mine
 >>>>>>>=.r486
@@ -11,6 +11,7 @@ encoding//xmlcrm/newstreaming/microphone.lzx=UTF-8
 encoding//xmlcrm/newstreaming/rtmpconnection.lzx=UTF-8
 encoding//xmlcrm/newstreaming/videoview.lzx=UTF-8
 encoding//xmlcrm/patches/lpp2554/rtmpconnection.lzx=UTF-8
+encoding//xmlcrm/patches/lps403/menudataset_test.lzx=UTF-8
 encoding//xmlcrm/patches/lps403/rtmpconnection.lzx=UTF-8
 encoding//xmlcrm/streaming/rtmpconnection.lzx=UTF-8
 encoding//xmlcrm/streamingAV/_camera.lzx=UTF-8
@@ -29,6 +30,7 @@ encoding//xmlcrm/videoconference/conference/popups/converterpopup.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/popups/createpollwin.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/popups/editwhiteboarddefault.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/popups/errorpopup.lzx=UTF-8
+encoding//xmlcrm/videoconference/conference/popups/headermenu.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/popups/library.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/popups/loginscreen.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/popups/loginweb.lzx=UTF-8
@@ -37,6 +39,7 @@ encoding//xmlcrm/videoconference/conference/popups/resultpollwin.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/popups/rpcerrordialog.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/remote/library.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/tabbar/basedokeostabbutton.lzx=UTF-8
+encoding//xmlcrm/videoconference/conference/tabbar/library.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/tabbar/menubardokeos.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/tabcontent/basedokeoscharttab.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/tabcontent/charttab.lzx=UTF-8
@@ -175,4 +178,6 @@ encoding//xmlcrm/videoconference/xmlcrm/content/wizard/previousnext.lzx=UTF-8
 encoding//xmlcrm/videoconference/xmlcrm/hibernate/netremotecallhib.lzx=UTF-8
 encoding//xmlcrm/videoconference/xmlcrm/hibernate/rtmphib.lzx=UTF-8
 encoding//xmlcrm/videoconference/xmlcrm/navi/mainnavi.lzx=UTF-8
+encoding//xmlcrm/videoconference/xmlcrm/navi/menu.lzx=UTF-8
+encoding//xmlcrm/videoconference/xmlcrm/navi/menuassets.lzx=UTF-8
 encoding//xmlcrm/videoconference/xmlcrm/navi/navifunctions.lzx=UTF-8

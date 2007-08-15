@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library>
 
+    <!-- lz.menubutton -->
+    
 <include href="menuassets.lzx" />
-
+<include href="lz/menu.lzx" />
 <!--
 bgcolor="$once{ canvas.baseMousecolorizer }"
 	onmouseover=" this.setBGColor(canvas.baseMouseOvercolorizer) "
@@ -121,26 +123,71 @@ bgcolor="$once{ canvas.baseMousecolorizer }"
         fontstyle="bold" text="$once{parent.text}" />
 	 -->
 </class>
+    <!-- width="${ parent.width }" height="26" -->
+ 
     
-<class name="mainnavi" extends="view" >
+<class name="menumeetings" extends="floatinglist">
+    <method name="open">
+        this.setAttribute('visible',true);
+        LzModeManager.makeModal( this );
+    </method>
+    <method name="close">
+        this.setAttribute('visible',false);
+        LzModeManager.release( this );
+    </method>    
+   
+</class>   
+    
+<class name="mainmenumeetingsitem" extends="button" height="$once{ parent.height }" >
+        
+    <attribute name="action" value="" type="string" />
+    
+    <attribute name="_menuRef" value="null" />
+    <attribute name="isopen" value="false" type="boolean" />
+    
+    <handler name="oninit">
+        this._menuRef = new floatinglist(this,{name:'menu1',visible:false,atach:'bottom'});
+        var s = new textlistitem(this._menuRef,{text:'LOLOL'});
+    </handler>
+    
+    <handler name="onmousedown">
+        this.parent.sendOpenMenu(this._menuRef,true);
+        Debug.write(myresultnavi,canvas.myresultnavi);
+    </handler>
+    
+    
+</class>    
+    
+    
+<class name="mainnavi" extends="view" height="26" width="${ canvas.width }"
+    layout="axis:x;spacing:0">
         
     <attribute name="naviObject" value="null" />
+    
+    <method name="sendOpenMenu" args="menuref,open">
+        if (open){
+            menuref.setAttribute('visible',true);
+        }
+    </method>
     
     <!---
     	Initialize Menu
    	-->
     <handler name="oninit">
     	<![CDATA[  
-    	var t = this._innercontent._content;
     	var value = this.naviObject;
     	for (var i=0;i<value.length;i++){
-    		var t1 = new mainnavitree(t,{list:value[i].mainnavi,depth:1,text:value[i].label.value,open:value[i].isleaf,isleaf:value[i].isleaf,action:value[i].action});
+    		//var t1 = new mainnavitree(t,{list:value[i].mainnavi,depth:1,text:value[i].label.value,open:value[i].isleaf,isleaf:value[i].isleaf,action:value[i].action});
 			//Debug.write("value[i].mainnavi.length: ",value[i].mainnavi.length);
-    		
+    		var t1 = new mainmenumeetingsitem(this,{text:value[i].label.value,action:value[i].action});
     	}
+        Debug.write("this: ",this);
     	]]>
     </handler>
+
+</class>
     
+    <!--
     <view x="0" y="0" name="_innercontent" layout="axis:y;spacing:0">
 
        	<method name="clearmainItemList">
@@ -183,7 +230,6 @@ bgcolor="$once{ canvas.baseMousecolorizer }"
         <mainselectHandlerBar name="_subsubcontent" bgcolor="$once{ canvas.basebgcolorizer }" />
             
     </view>
-
-</class>
+    -->    
 
 </library>
