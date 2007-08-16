@@ -13,7 +13,10 @@
 	</handler>
 	
 	<handler name="onreload" >
-		if (this.organisation_id!=0) this.getOrganisationById.doCall();
+		if (this.organisation_id!=0) {
+            this.getOrganisationById.doCall();
+            this._userlist.getUsersByOrganisation.doCall();
+        }
 	</handler>	
 
 	<handler name="onnew">
@@ -33,7 +36,7 @@
 		this.organisation_id = obj.organisation_id;
 		if (this.organisation_id!=0){
 			this.getOrganisationById.doCall();
-			this.getUsersByOrganisation.doCall();
+			this._userlist.getUsersByOrganisation.doCall();
 		}
     </method>	
 	
@@ -47,25 +50,6 @@
   	</netremotecallhib>	
 	
 	
-  	<netremotecallhib name="getUsersByOrganisation" funcname="organisationservice.getUsersByOrganisation" 
-  		remotecontext="$once{ canvas.thishib }" > 
-  		<netparam name="vars1"><method name="getValue"> return canvas.sessionId; </method></netparam>
-    	<netparam name="vars6"><method name="getValue">return parent.parent.organisation_id;</method></netparam>
-		<netparam name="vars2"><method name="getValue"> return 0; </method></netparam>
-		<netparam name="vars3"><method name="getValue"> return 200; </method></netparam>
-		<netparam name="vars4"><method name="getValue"> return "user_id"; </method></netparam>
-		<netparam name="vars5"><method name="getValue"> return true; </method></netparam>		  
-    	<handler name="ondata" args="value">
-    		//Debug.write("getUsersByorganisation ",value);
-			<![CDATA[
-				parent._userlist.clearList();
-				for (var i=0;i<value.length;i++){
-					var v = value[i].login+' ['+value[i].lastname+', '+value[i].firstname+']';
-					parent._userlist.addItem(v,value[i].user_id);
-				}
-			]]>
-    	</handler>
-  	</netremotecallhib>		
     
     <method name="initFields" args="obj">
     	<![CDATA[
@@ -97,8 +81,7 @@
   			this.sendObject=new Array();
   			this.sendObject["organisation_id"] = this.parent.organisation_id;
   			this.sendObject["orgname"] = this.parent.orgname.getText();
-			this.sendObject["users"] = this.parent._userlist.getAllItems();
-			  
+
   			//Debug.write("prepareCall: ",this.sendObject);
   		</method>
   		<netparam name="vars1"><method name="getValue"> return canvas.sessionId; </method></netparam>
@@ -124,16 +107,76 @@
     <labeltext labelid="171" width="200" y="70" resize="false" x="2"/>
         <customedittext name="orgname" y="70" x="120" width="270" text="" />	
 	
-    <labeltext labelid="177" width="200" y="100" resize="false" x="2"/>     
-    <simplevaluelist name="_userlist" y="100" x="120" width="270" height="200" 
-		multiselect="true" />
+    <labeltext labelid="273" width="200" y="100" resize="false" x="2" fontstyle="bold" />   
+    
+    <labeltext labelid="177" width="200" y="130" resize="false" x="2"/>
+         
+    <recordvaluelist name="_userlist" y="130" x="120" width="300" height="200" >
+        
+        <attribute name="usersId" value="0" type="number" />
+        
+		<handler name="oninit">
+			this.addHeaderItem(177,226);    
+            this.addHeaderItem(275,60);   
+        </handler>
+            
+        <handler name="deleteItem" args="obj">
+            Debug.write("deleteItem: ",obj.value);
+            this.usersId = Number(obj.value);
+            this.deleteUserFromOrganisation.doCall();
+        </handler>  
+	
+        <netremotecallhib name="getUsersByOrganisation" funcname="organisationservice.getUsersByOrganisation" 
+              remotecontext="$once{ canvas.thishib }" > 
+              <netparam name="vars1"><method name="getValue"> return canvas.sessionId; </method></netparam>
+            <netparam name="vars6"><method name="getValue">return parent.parent.parent.organisation_id;</method></netparam>
+            <netparam name="vars2"><method name="getValue"> return 0; </method></netparam>
+            <netparam name="vars3"><method name="getValue"> return 200; </method></netparam>
+            <netparam name="vars4"><method name="getValue"> return "user_id"; </method></netparam>
+            <netparam name="vars5"><method name="getValue"> return true; </method></netparam>		  
+            <handler name="ondata" args="value">
+                Debug.write("getUsersByorganisation ",value);
+	    		this.parent.initValues(value.records);
+	    		this.parent.renderContent(value.result);
+	    	</handler>
+	    </netremotecallhib>	
+	    
+	    <method name="renderContent" args="records">
+	    	<![CDATA[
+	    	this.clearList();
+	    	for (var i=0;i<records.length;i++){
+                var v = records[i].login+' ['+records[i].lastname+', '+records[i].firstname+']';
+	    		new recordlistItem(this._innerlist._inn._inn,{valueName:v,value:records[i].user_id});
+	    	}
+	    	]]>
+	    </method>
+                
+        <netremotecallhib name="deleteUserFromOrganisation" remotecontext="$once{ canvas.thishib }" 
+            funcname="organisationservice.deleteUserFromOrganisation" >      
+            <netparam name="vars1"><method name="getValue"> return canvas.sessionId; </method></netparam>
+            <netparam name="vars3"><method name="getValue"> return parent.parent.parent.organisation_id; </method></netparam>
+            <netparam name="vars2"><method name="getValue"> return parent.parent.usersId; </method></netparam>
+            <netparam name="vars4"><method name="getValue"> return ''; </method></netparam>
+            <handler name="ondata" args="value">
+                Debug.write("deleteUserFromOrganisation ",value);
+                //this.parent.destroy();
+                if (value>0){
+                    this.parent.parent.onreload.sendEvent();
+                } else {
+                    new rpcerrordialog(canvas.main_content._content.inner,{errorid:value});
+                }
+            </handler>
+        </netremotecallhib>	        
+    </recordvaluelist>    
 
 	<basechooseseicon resourceN="edit_add_rsc" labelid="178" y="100" x="400"
 		onclick="this.parent.addOrganisationToUser()" />		
 	<method name="addOrganisationToUser">
-		if (this.user_id!=0)
+		if (this.organisation_id!=0)
 			new chooseuserwindow(canvas.main_content._content.inner,{refObj:this,organisation_id:this.organisation_id});
 	</method>	
+    
+    <!--
 	<basechooseseicon resourceN="button_cancel_rsc" labelid="179" y="100" x="430"
 		onclick="new confirmdeletewindow(canvas.main_content._content.inner,{refObj:this});" >		
 		<method name="confirmDelete">
@@ -141,7 +184,8 @@
 				for (var i in this.parent._userlist._selected) this.parent._userlist.removeItem(this.parent._userlist._selected[i].value);
 		</method>
 	</basechooseseicon>	
-	
+	-->
+    
 </class>
 	
 </library>

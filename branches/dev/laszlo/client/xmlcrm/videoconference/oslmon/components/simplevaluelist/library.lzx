@@ -2,5 +2,6 @@
 <library>
 
 	<include href="simplevaluelist.lzx" />
+    <include href="recordvaluelist.lzx" />
 
 </library>

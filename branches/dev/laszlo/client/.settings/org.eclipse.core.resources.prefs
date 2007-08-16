@@ -1,4 +1,4 @@
-#Thu Aug 16 14:06:15 CEST 2007
+#Thu Aug 16 16:19:05 CEST 2007
 =\=\=\=\=\=\=
 <<<<<<<=.mine
 >>>>>>>=.r486
@@ -102,6 +102,7 @@ encoding//xmlcrm/videoconference/oslmon/components/explorer/library.lzx=UTF-8
 encoding//xmlcrm/videoconference/oslmon/components/library.lzx=UTF-8
 encoding//xmlcrm/videoconference/oslmon/components/list/monitorlist.lzx=UTF-8
 encoding//xmlcrm/videoconference/oslmon/components/simplevaluelist/library.lzx=UTF-8
+encoding//xmlcrm/videoconference/oslmon/components/simplevaluelist/recordvaluelist.lzx=UTF-8
 encoding//xmlcrm/videoconference/oslmon/components/simplevaluelist/simplevaluelist.lzx=UTF-8
 encoding//xmlcrm/videoconference/oslmon/components/tablelistItem.lzx=UTF-8
 encoding//xmlcrm/videoconference/oslmon/components/text/customedittext.lzx=UTF-8
@@ -109,7 +110,10 @@ encoding//xmlcrm/videoconference/oslmon/components/text/customscrolledittext.lzx
 encoding//xmlcrm/videoconference/oslmon/components/text/labeltext.lzx=UTF-8
 encoding//xmlcrm/videoconference/oslmon/components/text/labeltooltip.lzx=UTF-8
 encoding//xmlcrm/videoconference/oslmon/components/text/library.lzx=UTF-8
+encoding//xmlcrm/videoconference/oslmon/components/turnoverlist/basecontentlistitem.lzx=UTF-8
+encoding//xmlcrm/videoconference/oslmon/components/turnoverlist/library.lzx=UTF-8
 encoding//xmlcrm/videoconference/oslmon/components/turnoverlist/turnoverlist.lzx=UTF-8
+encoding//xmlcrm/videoconference/oslmon/components/turnoverlist/turnovertextitem.lzx=UTF-8
 encoding//xmlcrm/videoconference/oslmon/components/updatecheckbox.lzx=UTF-8
 encoding//xmlcrm/videoconference/oslmon/components/validbox/library.lzx=UTF-8
 encoding//xmlcrm/videoconference/oslmon/components/validbox/validtext.lzx=UTF-8
@@ -149,7 +153,6 @@ encoding//xmlcrm/videoconference/xmlcrm/content/conference/conferencerooms.lzx=U
 encoding//xmlcrm/videoconference/xmlcrm/content/conference/library.lzx=UTF-8
 encoding//xmlcrm/videoconference/xmlcrm/content/conference/roomlistItem.lzx=UTF-8
 encoding//xmlcrm/videoconference/xmlcrm/content/conference/test_whiteboard.lzx=UTF-8
-encoding//xmlcrm/videoconference/xmlcrm/content/contentviews/basecontentlistitem.lzx=UTF-8
 encoding//xmlcrm/videoconference/xmlcrm/content/contentviews/basecontentsaveview.lzx=UTF-8
 encoding//xmlcrm/videoconference/xmlcrm/content/contentviews/basecontentview.lzx=UTF-8
 encoding//xmlcrm/videoconference/xmlcrm/content/contentviews/contentsavewindow.lzx=UTF-8

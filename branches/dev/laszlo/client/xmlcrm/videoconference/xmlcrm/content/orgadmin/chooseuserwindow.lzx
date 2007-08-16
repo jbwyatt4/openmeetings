@@ -6,6 +6,7 @@
     
     <attribute name="organisation_id" value="0" type="number" />
     <attribute name="refObj" value="null" />
+    <attribute name="usersId" value="0" type="number" />
     
     <handler name="oninit">
         LzModeManager.makeModal(this);
@@ -28,10 +29,8 @@
 			//Debug.write("searchUser ",value);
 			if (value!=null){
 				for (var i=0;i<value.length;i++){
-					if (!this.parent.refObj._userlist.checkValue(value[i].user_id)){
-						var v = value[i].login+' ['+value[i].lastname+', '+value[i].firstname+']';
-						this.parent._userlist.addItem(v,value[i].user_id);
-					}
+                    var v = value[i].login+' ['+value[i].lastname+', '+value[i].firstname+']';
+					this.parent._userlist.addItem(v,value[i].user_id);
 				}
 			}
 			]]>			
@@ -49,7 +48,7 @@
 	
     <labeltext labelid="183" width="200" y="84" resize="false" x="2"/>     
     <simplevaluelist name="_userlist" y="84" x="120" width="270" height="100" 
-		multiselect="true" />
+		multiselect="false" />
 	
 	<simplelabelbutton labelid="174" x="180" y="260" width="100">
 		<handler name="onclick">
@@ -59,14 +58,31 @@
 	<simplelabelbutton labelid="175" x="290" y="260" width="100">
 		<handler name="onclick">
 			<![CDATA[
-				for (var i=0;i<this.parent._userlist._selected.length;i++){
-					//Debug.write("this.parent.refObj._userlist.addItem ",this.parent._userlist._selected[i].text,this.parent._userlist._selected[i].value);
-					this.parent.refObj._userlist.addItem(this.parent._userlist._selected[i].text,this.parent._userlist._selected[i].value);
-				}
-				this.parent.close();
+                this.parent.usersId = this.parent._userlist._selected.value;
+                Debug.write(this.parent.usersId);
+                Debug.write(this.parent._userlist._selected.value);
+				this.parent.addUserToOrganisation.doCall();
+				//
 			]]>
 		</handler>
 	</simplelabelbutton>	
+    
+        <netremotecallhib name="addUserToOrganisation" remotecontext="$once{ canvas.thishib }" 
+            funcname="organisationservice.addUserToOrganisation" >      
+            <netparam name="vars1"><method name="getValue"> return canvas.sessionId; </method></netparam>
+            <netparam name="vars3"><method name="getValue"> return parent.parent.organisation_id; </method></netparam>
+            <netparam name="vars2"><method name="getValue"> return parent.parent.usersId; </method></netparam>
+            <netparam name="vars4"><method name="getValue"> return ''; </method></netparam>
+            <handler name="ondata" args="value">
+                Debug.write("addUserToOrganisation ",value);
+                if (value>0){
+                    this.parent.refObj.onreload.sendEvent();
+                    this.parent.close();
+                } else {
+                    new rpcerrordialog(canvas.main_content._content.inner,{errorid:value});
+                }
+            </handler>
+        </netremotecallhib>	      
     
 </class>
 
