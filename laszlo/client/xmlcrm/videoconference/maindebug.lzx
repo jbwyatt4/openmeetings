@@ -279,7 +279,7 @@ containing the VideoViews
 	Navigation must be on top of everything
  -->
 
-<view name="_mainbgcontentNavi" y="2" x="2" >
+<view name="_mainbgcontentNavi" y="0" x="2" >
 	<method name="clearNaviContent">
 		for (var eg in this.subviews){
 			this.subviews[eg].destroy();
