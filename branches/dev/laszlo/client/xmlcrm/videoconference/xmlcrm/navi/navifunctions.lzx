@@ -93,7 +93,7 @@ function loadContentByTempActionForNavi(){
 function clearStageContent(obj){
     Debug.write("clearStageContent: ",obj);
     //can be called with zero arguments
-    if (arguments.length!=0) obj.parent.parent.clearAllSubItemLists();  
+    //if (arguments.length!=0) obj.parent.parent.clearAllSubItemLists();  
     
     return canvas.main_content._content.clearAll();
 }

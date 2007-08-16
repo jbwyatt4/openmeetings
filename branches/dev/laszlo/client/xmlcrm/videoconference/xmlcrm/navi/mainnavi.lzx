@@ -2,9 +2,12 @@
 <library>
 
     <!-- lz.menubutton -->
-    
+<include href="lz/floatinglist.lzx" />
+<include href="lz/textlistitem.lzx" />
+        
 <include href="menuassets.lzx" />
-<include href="lz/menu.lzx" />
+
+        
 <!--
 bgcolor="$once{ canvas.baseMousecolorizer }"
 	onmouseover=" this.setBGColor(canvas.baseMouseOvercolorizer) "
@@ -126,47 +129,109 @@ bgcolor="$once{ canvas.baseMousecolorizer }"
     <!-- width="${ parent.width }" height="26" -->
  
     
-<class name="menumeetings" extends="floatinglist">
+<class name="meetingsmenulistitem" extends="textlistitem">
+    <attribute name="action" value="" type="string" />
+    <attribute name="list" value="null" />
+    <attribute name="isopen" value="false" type="boolean" />
+    <attribute name="isleaf" value="false" type="boolean" />   
+</class>     
+    
+    
+<class name="menumeetingsfloatinglist" extends="floatinglist" width="140" >
+    
+    <handler name="onselect" args="obj">
+        Debug.write(this,obj);
+        this.owner.parent.sendOpenMenu(this.owner._menuRef,false);
+        loadContent(obj,null,null);
+    </handler>    
+     
     <method name="open">
         this.setAttribute('visible',true);
         LzModeManager.makeModal( this );
     </method>
+    
     <method name="close">
         this.setAttribute('visible',false);
         LzModeManager.release( this );
-    </method>    
+    </method>   
+    
+    <!--- @keywords private -->
+    <method name="passModeEvent" args="event,view" > 
+        <![CDATA[
+            Debug.write("tt : ",event,view);
+            // Once a view has been made modal, this method
+            // gets called by the system ONLY when a user clicks on
+            // a view 'outside' the contents of this view.  
+            if ( event == 'onmousedown' ) {
+                if ( view != null ) { // view is a clickable view
+                    // view is not LITERALLY part of the class hierarchy but
+                    // it maybe part of the floatingview of this menu, or part
+                    // of the parent view that contains this menu 
+                    Debug.write("tt : ",view);
+                    
+                } else { // view is not a clickable view so close the menu
+                    //this.open(false);
+                    this.owner.parent.sendOpenMenu(this.owner._menuRef,false);
+                }
+            }
+            // since a menu is not strictly modal ( 'fragile' ), always return
+            // true to pass the event to the object that was clicked on
+            return true; 
+        ]]> 
+    </method>     
    
 </class>   
-    
-<class name="mainmenumeetingsitem" extends="button" height="$once{ parent.height }" >
+
+<class name="mainmenumeetingsitem" extends="button" height="$once{ parent.height-2 }" >
         
     <attribute name="action" value="" type="string" />
     
     <attribute name="_menuRef" value="null" />
     <attribute name="isopen" value="false" type="boolean" />
+    <attribute name="isleaf" value="false" type="boolean" />
+    <attribute name="list" value="null" />
     
     <handler name="oninit">
-        this._menuRef = new floatinglist(this,{name:'menu1',visible:false,atach:'bottom'});
-        var s = new textlistitem(this._menuRef,{text:'LOLOL'});
+        <![CDATA[
+            if (list!=null && list.length!=0){
+                this._menuRef = new menumeetingsfloatinglist(this,{name:'menu1',visible:false,atach:'bottom'});
+                for (var i=0;i<this.list.length;i++) {
+                    new meetingsmenulistitem(this._menuRef,{list:this.list[i].subnavi,text:this.list[i].label.value,open:this.list[i].isleaf,isleaf:this.list[i].isleaf,action:this.list[i].action});
+                }
+            }
+        ]]>
     </handler>
     
     <handler name="onmousedown">
         this.parent.sendOpenMenu(this._menuRef,true);
         Debug.write(myresultnavi,canvas.myresultnavi);
+        if (this.isleaf) {
+            loadContent(this,null,null);
+        }
     </handler>
     
     
 </class>    
     
     
-<class name="mainnavi" extends="view" height="26" width="${ canvas.width }"
-    layout="axis:x;spacing:0">
+<class name="mainnavi" extends="view" height="30" width="${ canvas.width }"
+    layout="axis:x;spacing:0" bgcolor="$once{canvas.basebgcolorizer}">
         
     <attribute name="naviObject" value="null" />
+    <attribute name="currentmenu" value="null" />
     
     <method name="sendOpenMenu" args="menuref,open">
-        if (open){
-            menuref.setAttribute('visible',true);
+        if (this.currentmenu==menuref) open=false;
+        if (this.currentmenu!=null) this.currentmenu.close();
+        this.currentmenu = menuref;
+        if (menuref!=null) {
+            menuref.clearSelection();
+            if (open){
+                menuref.open();
+            } else {
+                this.currentmenu=null;
+                menuref.close();
+            }
         }
     </method>
     
@@ -178,10 +243,10 @@ bgcolor="$once{ canvas.baseMousecolorizer }"
     	var value = this.naviObject;
     	for (var i=0;i<value.length;i++){
     		//var t1 = new mainnavitree(t,{list:value[i].mainnavi,depth:1,text:value[i].label.value,open:value[i].isleaf,isleaf:value[i].isleaf,action:value[i].action});
-			//Debug.write("value[i].mainnavi.length: ",value[i].mainnavi.length);
-    		var t1 = new mainmenumeetingsitem(this,{text:value[i].label.value,action:value[i].action});
+			//Debug.write("value[i]: ",value[i]);
+    		var t1 = new mainmenumeetingsitem(this,{list:value[i].mainnavi,isleaf:value[i].isleaf,text:value[i].label.value,action:value[i].action});
     	}
-        Debug.write("this: ",this);
+        //Debug.write("this: ",this);
     	]]>
     </handler>
 
