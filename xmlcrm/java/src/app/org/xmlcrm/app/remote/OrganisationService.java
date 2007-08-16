@@ -73,11 +73,10 @@ public class OrganisationService {
 	        long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
 	        LinkedHashMap argObjectMap = (LinkedHashMap) regObjectObj;
 	        long organisation_id = Long.valueOf(argObjectMap.get("organisation_id").toString()).longValue();
-	        LinkedHashMap users = (LinkedHashMap) argObjectMap.get("users");
 	        if (organisation_id==0){
-	        	return Organisationmanagement.getInstance().addOrganisation(user_level, argObjectMap.get("orgname").toString(), users_id, users);
+	        	return Organisationmanagement.getInstance().addOrganisation(user_level, argObjectMap.get("orgname").toString(), users_id);
 	        } else {
-	        	return Organisationmanagement.getInstance().updateOrganisation(user_level, organisation_id, argObjectMap.get("orgname").toString(), users_id, users);
+	        	return Organisationmanagement.getInstance().updateOrganisation(user_level, organisation_id, argObjectMap.get("orgname").toString(), users_id);
 	        }
 		} catch (Exception err) {
 			log.error("saveOrUpdateOrganisation",err);
@@ -96,16 +95,37 @@ public class OrganisationService {
 	 * @param asc
 	 * @return
 	 */
-	public List getUsersByOrganisation(String SID, long organisation_id, int start, int max, String orderby, boolean asc){
+	public SearchResult getUsersByOrganisation(String SID, long organisation_id, int start, int max, String orderby, boolean asc){
 		try {   
 	        Long users_id = Sessionmanagement.getInstance().checkSession(SID);
-	        long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
+	        Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
 	        return Organisationmanagement.getInstance().getUsersByOrganisationId(user_level, organisation_id, start, max, orderby, asc);
 		} catch (Exception err) {
 			log.error("getUsersByOrganisation",err);
 		}
 		return null;
 	}
-
+	
+	public Long addUserToOrganisation(String SID, Long organisation_id, Long user_id, String comment) {
+		try {
+	        Long users_id = Sessionmanagement.getInstance().checkSession(SID);
+	        Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
+	        return Organisationmanagement.getInstance().addUserToOrganisation(user_level, user_id, organisation_id, users_id, comment);
+		} catch (Exception err) {
+			log.error("getUsersByOrganisation",err);
+		}
+		return null;
+	}
+	
+	public Long deleteUserFromOrganisation(String SID, Long organisation_id, Long user_id, String comment) {
+		try {
+	        Long users_id = Sessionmanagement.getInstance().checkSession(SID);
+	        Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
+	        return Organisationmanagement.getInstance().deleteUserFromOrganisation(user_level, user_id, organisation_id);
+		} catch (Exception err) {
+			log.error("getUsersByOrganisation",err);
+		}
+		return null;
+	}
 
 }

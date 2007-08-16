@@ -1,9 +1,6 @@
 package org.xmlcrm.app.data.basic;
 
 import java.util.Date;
-import java.util.Iterator;
-import java.util.Set;
-import java.util.HashSet;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -14,7 +11,6 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.xmlcrm.app.hibernate.beans.lang.Fieldlanguagesvalues;
 import org.xmlcrm.app.hibernate.beans.lang.Fieldvalues;
-import org.xmlcrm.app.hibernate.beans.user.Users;
 import org.xmlcrm.app.hibernate.utils.HibernateUtil;
 
 public class Fieldmanagment {
@@ -46,14 +42,15 @@ public class Fieldmanagment {
 			query.setLong("fieldvalues_id", fieldvalues_id);
 			query.setLong("language_id", language_id);
 
-			if (query.list().size() > 0) {
-				return (Fieldlanguagesvalues) query.list().get(0);
-			} else {
-				log.error("nothing found :" + fieldvalues_id + " "
-						+ language_id);
-			}
+			List ll = query.list();
 			tx.commit();
 			HibernateUtil.closeSession(idf);
+			
+			if (ll.size() > 0) {
+				return (Fieldlanguagesvalues) ll.get(0);
+			} else {
+				log.error("nothing found :" + fieldvalues_id + " " + language_id);
+			}			
 
 		} catch (HibernateException ex) {
 			log.error("[getFieldByIdAndLanguage]: " + ex);

@@ -62,7 +62,7 @@ public class StartUpData extends TestCase {
 		long organisation_id = Organisationmanagement.getInstance().addOrganisation("default", user_id);
 		
 		//Add user to default group
-		long organisation_usersid = Organisationmanagement.getInstance().addUserToOrganisation(1, organisation_id, 1,"");
+		long organisation_usersid = Organisationmanagement.getInstance().addUserToOrganisation(new Long(3), 1, organisation_id, 1,"");
 		
 //		Configurationmanagement.getInstance().addConfByKey(3, "allow_frontend_register", "1", 1, "");
 //		
