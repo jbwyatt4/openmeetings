@@ -134,7 +134,7 @@ public class ImportInitvalues {
 		long organisation_id = Organisationmanagement.getInstance().addOrganisation(defaultOrganisationName, user_id);
 		
 		//Add user to default group
-		Organisationmanagement.getInstance().addUserToOrganisation(1, organisation_id, 1,"");		
+		Organisationmanagement.getInstance().addUserToOrganisation(new Long(3), 1, organisation_id, 1,"");		
 	}
 	
 	/**

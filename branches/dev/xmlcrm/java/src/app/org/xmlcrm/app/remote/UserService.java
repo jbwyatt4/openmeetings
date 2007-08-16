@@ -86,7 +86,7 @@ public class UserService {
     public List getOrgUserList(String SID, long organisation_id, int start, int max, String orderby, boolean asc){
         Long users_id = Sessionmanagement.getInstance().checkSession(SID);
         long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
-        return Organisationmanagement.getInstance().getUsersByOrganisationId(user_level, organisation_id, start, max, orderby, asc);
+        return Organisationmanagement.getInstance().getUsersByOrganisationId(organisation_id, start, max, orderby, asc);
     }
     
     public List getUserListByModForm(String SID){

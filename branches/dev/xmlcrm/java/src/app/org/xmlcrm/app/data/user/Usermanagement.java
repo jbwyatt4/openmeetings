@@ -720,7 +720,7 @@ public class Usermanagement {
 			// Get the default organisation_id of registered users
 			if (user_id>0){
 				long organisation_id = Long.valueOf(Configurationmanagement.getInstance().getConfKey(3,"default_domain_id").getConf_value()).longValue();
-				Organisationmanagement.getInstance().addUserToOrganisation(user_id,organisation_id, user_id, "");
+				Organisationmanagement.getInstance().addUserToOrganisation(new Long(3), user_id,organisation_id, user_id, "");
 			}
 			return user_id;
 		}

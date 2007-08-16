@@ -816,4 +816,16 @@
 <string id="272" name="turnoverlist_maxresults">
 <value>of</value>
 </string>	
+<string id="273" name="organisation_usersheader">
+<value>Users</value>
+</string>
+<string id="274" name="organisation_usersicondelete">
+<value>delete user from organisation</value>
+</string>	
+<string id="275" name="organisation_usersdeletedhead">
+<value>delete</value>
+</string>
+<string id="276" name="organisation_usersalreadadded">
+<value>This user is already member of this organisation.</value>
+</string>		
 </language>
