@@ -27,6 +27,8 @@
 	<attribute name="_selected" value="null" />
 	
 	<attribute name="multiselect" value="false" type="boolean" />
+    
+    <attribute name="itemclassname" type="string" value="simplelistItem" />
 	
 	<handler name="onselect" args="obj" />
 	
@@ -88,7 +90,7 @@
 	</method>
 	
     <method name="addItem" args="txt,value">
-    	new simplelistItem(this.content.content.inn,{text:txt,value:value,width:this.width});
+    	new global[this.itemclassname](this.content.content.inn,{text:txt,value:value,width:this.width});
     </method>
 	
     <method name="removeItem" args="value">

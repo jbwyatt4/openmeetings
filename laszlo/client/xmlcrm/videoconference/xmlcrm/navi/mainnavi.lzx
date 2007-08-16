@@ -6,128 +6,6 @@
 <include href="lz/textlistitem.lzx" />
         
 <include href="menuassets.lzx" />
-
-        
-<!--
-bgcolor="$once{ canvas.baseMousecolorizer }"
-	onmouseover=" this.setBGColor(canvas.baseMouseOvercolorizer) "
-    onmouseout=" this.setBGColor(canvas.baseMousecolorizer) " 
--->
-<class name="linemenuitems" extends="button"
-	onclick="parent.selectItem(this)" fontstyle="bold">
-
-	<attribute name="rscleft" value="mainmenu_left_rsc" type="string" />
-	<attribute name="rscmid" value="mainmenu_mid_rsc" type="string" />
-	<attribute name="rscright" value="mainmenu_right_rsc" type="string" />
-    
-    <attribute name="selected" value="false" type="boolean" />
-    <attribute name="action" value="" type="string" />
-    <attribute name="open" value="false" type="boolean" />
-    <attribute name="isleaf" value="false" type="boolean" />    
-    <attribute name="depth" value="2" type="number" />
-    <attribute name="text" value="" type="string" />
-
-	<!--
-    <view name="n" layout="axis:x;spacing:0" width="${ parent.width }" >
-		
-	    <view name="_left" resource="$once{ parent.parent.rscleft }" />
-	    <view name="_mid" resource="$once{ parent.parent.rscmid }" stretches="width" 
-	    	width="${ parent.width-40 }" />
-	    <view name="_right" resource="$once{ parent.parent.rscright }" />
-		
-    </view>
-    -->
-</class>
-
-<class name="mainselectHandlerBar" layout="axis:x;spacing:0" >
-	<attribute name="_selected" value="null" />
-	<method name="selectItem" args="obj">
-		if (this._selected!=null) this._selected.setAttribute('selected',false);
-		this._selected = obj;
-		this._selected.setAttribute('selected',true);
-	</method>
-</class>
-
-<class name="subsubtreeitem" extends="linemenuitems"  
-	rscleft="subsubmenu_left_rsc" rscmid="subsubmenu_mid_rsc" rscright="subsubmenu_right_rsc">  
-    <attribute name="list" value="null" />
-    <handler name="onclick"> 
-        <![CDATA[
-        if (this.isleaf && this.action){
-            //Debug.write("action: ",this.action);
-            if (this.depth==1){
-                loadContent(this,null,null);
-            } else if (this.depth==2){
-                loadContent(this,this.parent,null);
-            } else if (this.depth==3){
-                loadContent(this,this.parent,this.parent.parent);
-            }
-        }
-        ]]>
-    </handler>  
-	<!--
-    <text x="8" y="2" height="20" resize="true" fontsize="11" name="_cbtext"
-        fontstyle="bold" text="$once{parent.text}" />
-     -->   
-</class>
-
-<class name="subtreeitem" extends="linemenuitems"  
-	rscleft="submenu_left_rsc" rscmid="submenu_mid_rsc" rscright="submenu_right_rsc"> 
-    <handler name="onclick"> 
-    	<![CDATA[
-        parent.parent.clearSubSubItemList();
-    	if (this.isleaf && this.action){
-			//Debug.write("action: ",this.action);
-            if (this.depth==1){
-                loadContent(this,null,null);
-            } else if (this.depth==2){
-                loadContent(this,this.parent,null);
-            } else if (this.depth==3){
-                loadContent(this,this.parent,this.parent.parent);
-            }
-		}
-		]]>
-	</handler>	
-	<!--
-    <text x="8" y="4" height="24" resize="true" fontsize="12" name="_cbtext"
-        fontstyle="bold" text="$once{parent.text}" />
-     -->
-</class>
-
-
-<class name="mainnavitree" extends="linemenuitems" y="2" > 
-
-    <handler name="onclick"> 
-    	<![CDATA[
-    	this.parent.parent.clearAllSubItemLists();
-    	if (this.isleaf && this.action){
-			//Debug.write("action: ",this.action);
-            if (this.depth==1){
-                loadContent(this,null,null);
-            } else if (this.depth==2){
-                loadContent(this,this.parent,null);
-            } else if (this.    depth==3){
-                loadContent(this,this.parent,this.parent.parent);
-            }
-		}
-		
-        //Debug.write("this.list: ",this.list,this.list.length);
-        if (this.list != null && this.list.length!=0) {
-            for (var i=0;i<this.list.length;i++){
-            	//Debug.write("this.list[i]: ",this.list[i]);
-            	var t = new subtreeitem(this.parent.parent._subcontent,{list:this.list[i].subnavi,depth:2,text:this.list[i].label.value,open:this.list[i].isleaf,isleaf:this.list[i].isleaf,action:this.list[i].action});
-            }
-        }	
-        //Debug.write("this.parent.parent._subcontent: ",this.parent.parent._subcontent);
-		]]>
-	</handler>	
-    <!--
-    <text x="10" y="4" resize="true" fontsize="14" name="_cbtext"
-        fontstyle="bold" text="$once{parent.text}" />
-	 -->
-</class>
-    <!-- width="${ parent.width }" height="26" -->
- 
     
 <class name="meetingsmenulistitem" extends="textlistitem">
     <attribute name="action" value="" type="string" />
@@ -192,6 +70,7 @@ bgcolor="$once{ canvas.baseMousecolorizer }"
    
 </class>   
 
+    
 <class name="mainmenumeetingsitem" extends="button" fontstyle="bold"
     height="$once{ parent.height-2 }" >
         
@@ -220,10 +99,9 @@ bgcolor="$once{ canvas.baseMousecolorizer }"
             loadContent(this,null,null);
         }
     </handler>
-    
-    
+
 </class>    
-    
+
     
 <class name="mainnavi" extends="view" height="30" width="${ canvas.width }"
     layout="axis:x;spacing:0" bgcolor="$once{canvas.basebgcolorizer}">
@@ -256,56 +134,12 @@ bgcolor="$once{ canvas.baseMousecolorizer }"
     		//var t1 = new mainnavitree(t,{list:value[i].mainnavi,depth:1,text:value[i].label.value,open:value[i].isleaf,isleaf:value[i].isleaf,action:value[i].action});
 			//Debug.write("value[i]: ",value[i]);
     		var t1 = new mainmenumeetingsitem(this,{list:value[i].mainnavi,isleaf:value[i].isleaf,text:value[i].label.value,action:value[i].action});
+            if (i==0) loadContent(t1,null,null);
     	}
         //Debug.write("this: ",this);
     	]]>
     </handler>
 
 </class>
-    
-    <!--
-    <view x="0" y="0" name="_innercontent" layout="axis:y;spacing:0">
-
-       	<method name="clearmainItemList">
-       		<![CDATA[
-       		for (var i in this._content.subviews){
-       			this._content.subviews[i].destroy();
-       		}
-       		]]>
-       	</method>
-       	
-       	<method name="clearSubItemList">
-       		<![CDATA[
-       		//Debug.write("clearSubItemList");
-       		for (var i in this._subcontent.subviews){
-       			//Debug.write("item deleted: ",this._subcontent.subviews[i]);
-       			this._subcontent.subviews[i].destroy();
-       		}
-       		]]>
-       	</method>
-       	
-       	<method name="clearSubSubItemList">
-       		<![CDATA[
-       		//Debug.write("clearSubSubItemList");
-       		for (var i in this._subsubcontent.subviews){
-       			//Debug.write("item deleted: ",this._subsubcontent.subviews[i]);
-       			this._subsubcontent.subviews[i].destroy();
-       		}
-       		]]>
-       	</method>   
-        
-        <method name="clearAllSubItemLists">
-        	this.clearSubItemList();
-        	this.clearSubSubItemList();
-        </method>       	   
-        
-        <mainselectHandlerBar name="_content" bgcolor="$once{ canvas.basebgcolorizer }" height="32" width="${ canvas.width }" />
-        
-        <mainselectHandlerBar name="_subcontent" bgcolor="$once{ canvas.basebgcolorizer }" height="30" />
-        
-        <mainselectHandlerBar name="_subsubcontent" bgcolor="$once{ canvas.basebgcolorizer }" />
-            
-    </view>
-    -->    
 
 </library>

@@ -2,7 +2,8 @@
 <library>
 
 <class name="turnovertextitem" extends="text" fontsize="11" resize="false">
-	<view height="${ parent.parent.parent.parent.height-2 }" width="3" align="right" bgcolor="black" />
+	<view height="${ parent.parent.height }" width="3" 
+        align="right" bgcolor="black" />
 </class>
-
+        
 </library>

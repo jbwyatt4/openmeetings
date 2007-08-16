@@ -2,7 +2,7 @@
 <library>
 
 <class name="rpcerrordialog" extends="labelexplorerbox" labelid="204"
-    docking="true" resizeable="false" closable="true" width="224" x="300" y="300" height="230">
+    docking="true" resizeable="false" closable="true" width="300" x="200" y="100" height="230">
 	
     <attribute name="errortext" value="" type="string" />
 	<attribute name="errorid" value="0" type="number" />
@@ -18,16 +18,17 @@
 	<netremotecallhib name="getErrorByCode" funcname="errorservice.getErrorByCode" remotecontext="$once{ canvas.thishib }" >      
 		<netparam name="vars1"><method name="getValue"> return canvas.sessionId; </method></netparam>
 		<netparam name="vars2"><method name="getValue"> return parent.parent.errorid; </method></netparam>
+        <netparam name="vars3"><method name="getValue"> return canvas.thishib.userlang; </method></netparam>
 		<handler name="ondata" args="value">
-			//Debug.write("getErrorByCode ",value);
+			Debug.write("getErrorByCode ",value);
 			//this.parent.destroy();
 			this.parent.setAttribute('errortext',value.errmessage);
 		</handler>
 	</netremotecallhib>		
 
-	<view y="24" width="200" height="200">
+	<view y="24" width="298" height="200">
 		<text y="30" x="10" fontsize="10" fontstyle="bold" text="${ parent.parent.errortext }"
-			multiline="true" width="190" />
+			multiline="true" width="286" />
 		<vscrollbar />
 	</view>
 </class>
