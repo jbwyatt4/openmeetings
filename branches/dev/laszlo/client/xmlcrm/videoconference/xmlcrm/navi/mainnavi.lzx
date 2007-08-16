@@ -158,7 +158,7 @@ bgcolor="$once{ canvas.baseMousecolorizer }"
     <!--- @keywords private -->
     <method name="passModeEvent" args="event,view" > 
         <![CDATA[
-            Debug.write("tt : ",event,view);
+            //Debug.write("tt : ",event,view);
             // Once a view has been made modal, this method
             // gets called by the system ONLY when a user clicks on
             // a view 'outside' the contents of this view.  
@@ -168,7 +168,8 @@ bgcolor="$once{ canvas.baseMousecolorizer }"
                     // it maybe part of the floatingview of this menu, or part
                     // of the parent view that contains this menu 
                     Debug.write("tt : ",view);
-                    
+                    if (!this.checkForSubChild(view)) 
+                        this.owner.parent.sendOpenMenu(this.owner._menuRef,false);
                 } else { // view is not a clickable view so close the menu
                     //this.open(false);
                     this.owner.parent.sendOpenMenu(this.owner._menuRef,false);
@@ -179,10 +180,20 @@ bgcolor="$once{ canvas.baseMousecolorizer }"
             return true; 
         ]]> 
     </method>     
+    
+    <method name="checkForSubChild" args="v">
+        <![CDATA[
+            for (var eg=0;eg<this.subviews.length;eg++){
+                if (this.subviews[eg]==v) return true;
+            } 
+            return false;
+        ]]>
+    </method>
    
 </class>   
 
-<class name="mainmenumeetingsitem" extends="button" height="$once{ parent.height-2 }" >
+<class name="mainmenumeetingsitem" extends="button" fontstyle="bold"
+    height="$once{ parent.height-2 }" >
         
     <attribute name="action" value="" type="string" />
     
