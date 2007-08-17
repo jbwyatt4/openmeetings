@@ -141,5 +141,14 @@
     </handler>
 
 </class>
+    
+<class name="helpandbugs" extends="view" x="${ parent.width-120 }" bgcolor="0xFFFFFF" >
+    <labeltext labelid="284" fgcolor="red" fontsize="10" >  
+        <handler name="onclick">
+            LzBrowser.loadURL("http://code.google.com/p/openmeetings/issues/list","_blank");
+        </handler>
+        
+    </labeltext>
+</class>    
 
 </library>

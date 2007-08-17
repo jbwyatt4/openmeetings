@@ -6,6 +6,12 @@
 var labelObj;
     
 var tempActionForNavi = '';
+    
+function quicklink(action){
+    var t = new Array();
+    t["action"]=action;
+    loadContent(t,null,null);
+}        
 
 function loadContent(obj,parentobj,preparentobj){
 	
