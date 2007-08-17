@@ -46,9 +46,9 @@ public class Zahlungsmanagement {
 		return zahlungsarten;
 	}
 
-	public zahlungsarten[] getAllZahlungsarten(long User_LEVEL) {
+	public zahlungsarten[] getAllZahlungsarten(long user_level) {
 		zahlungsarten zahlungsarten[] = new zahlungsarten[1];
-		if (User_LEVEL > 1) {
+		if (user_level > 1) {
 			try {
 				Object idf = HibernateUtil.createSession();
 				Session session = HibernateUtil.getSession();

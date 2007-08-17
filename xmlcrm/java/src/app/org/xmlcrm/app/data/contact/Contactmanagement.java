@@ -332,9 +332,9 @@ public class Contactmanagement {
 	 * @param CONTACT_ID
 	 * @return
 	 */
-	public String deleteContact(long User_LEVEL, int CONTACT_ID, int USER_ID) {
+	public String deleteContact(long user_level, int CONTACT_ID, int USER_ID) {
 		String result = "Fehler im Contactmanagement deleteContact";
-		if (User_LEVEL > 1) {
+		if (user_level > 1) {
 			//    		try {
 			//    	    	Object idf = HibernateUtil.createSession(); 			Session session = HibernateUtil.getSession();
 			//    	    	Transaction tx = session.beginTransaction();    

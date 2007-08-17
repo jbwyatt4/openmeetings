@@ -59,9 +59,9 @@ public class ScreenServlet extends HttpServlet {
 				}
 	
 				Long users_id = Sessionmanagement.getInstance().checkSession(sid);
-				Long User_LEVEL = Usermanagement.getInstance().getUserLevelByID(users_id);
+				Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
 				
-				if (User_LEVEL > 0) {
+				if (user_level > 0) {
 
 					//make a complete name out of domain(organisation) + roomname
 					String roomName = domain + "_" + room;

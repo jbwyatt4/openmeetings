@@ -101,12 +101,13 @@ public class Sessionmanagement {
 			}
 			
 			session.refresh(sessiondata);
+			session.flush();
 			tx.commit();
 			HibernateUtil.closeSession(idf);
 			log.error("checkSession USER_ID: "+sessiondata.getUser_id());
 				
 			updatesession(SID);
-			if (count == 0 || sessiondata.getUser_id().equals(null) || sessiondata.getUser_id().equals(new Long(0)) ) {
+			if (count == 0 || sessiondata.equals(null) || sessiondata.getUser_id().equals(null) || sessiondata.getUser_id().equals(new Long(0)) ) {
 				return new Long(0);
 			} else {
 				return sessiondata.getUser_id();

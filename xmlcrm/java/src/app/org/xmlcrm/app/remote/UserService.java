@@ -69,8 +69,8 @@ public class UserService {
 	 */
     public List searchUser(String SID, String searchcriteria ,String searchstring, int max, int start, String orderby, boolean asc){   	
         Long users_id = Sessionmanagement.getInstance().checkSession(SID);
-        long User_LEVEL = Usermanagement.getInstance().getUserLevelByID(users_id);    	
-    	return Usermanagement.getInstance().searchUser(User_LEVEL,searchcriteria,searchstring,max,start,orderby,asc);
+        long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);    	
+    	return Usermanagement.getInstance().searchUser(user_level,searchcriteria,searchstring,max,start,orderby,asc);
     }    
     
     /**
@@ -151,8 +151,8 @@ public class UserService {
     public Long updateUserSelfSmall(String SID, ObjectMap values ){
     	try {
 	        Long users_id = Sessionmanagement.getInstance().checkSession(SID);
-	        Long User_LEVEL = Usermanagement.getInstance().getUserLevelByID(users_id);
-	        if(User_LEVEL!=null && User_LEVEL>1){
+	        Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
+	        if(user_level!=null && user_level>1){
 	        	return Usermanagement.getInstance().saveOrUpdateUser(new Long(3),values, users_id);
 	        } else {
 	            return new Long(-2);
@@ -174,7 +174,7 @@ public class UserService {
     		LinkedHashMap argObjectMap = (LinkedHashMap) regObjectObj;
     		Long user_idClient = Long.valueOf(argObjectMap.get("user_idClient").toString()).longValue();
 	        Long users_id = Sessionmanagement.getInstance().checkSession(SID);
-	        long User_LEVEL = Usermanagement.getInstance().getUserLevelByID(users_id);	
+	        long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);	
 	        
 //	        log.error("saveOrUpdateUser1: "+argObjectMap.get("organisations"));
 //	        log.error("saveOrUpdateUser2: "+argObjectMap.get("organisations").getClass());
@@ -191,7 +191,7 @@ public class UserService {
 	        log.error("saveOrUpdateUser7: "+age.getTimezoneOffset());
 	        
     		if (user_idClient==null || user_idClient==0){
-	        	return Usermanagement.getInstance().registerUserInit(User_LEVEL, 
+	        	return Usermanagement.getInstance().registerUserInit(user_level, 
 	        			Long.valueOf(argObjectMap.get("level_id").toString()).longValue(), 
 	        			Integer.valueOf(argObjectMap.get("availible").toString()).intValue(),Integer.valueOf(argObjectMap.get("status").toString()).intValue(),
 	        			argObjectMap.get("login").toString(), argObjectMap.get("password").toString(), 
@@ -203,7 +203,7 @@ public class UserService {
 	        			0,
 	        			false,organisations); 	
     		} else {
-		        return Usermanagement.getInstance().updateUser(User_LEVEL,user_idClient, 
+		        return Usermanagement.getInstance().updateUser(user_level,user_idClient, 
 		        		Long.valueOf(argObjectMap.get("level_id").toString()).longValue(), argObjectMap.get("login").toString(), 
 		        		argObjectMap.get("password").toString(), argObjectMap.get("lastname").toString(), 
 		        		argObjectMap.get("firstname").toString(), age, 
@@ -231,8 +231,8 @@ public class UserService {
      */
     public Long deleteUserAdmin(String SID, int user_idClient){
     	Long users_id = Sessionmanagement.getInstance().checkSession(SID);
-    	long User_LEVEL = Usermanagement.getInstance().getUserLevelByID(users_id);
-    	if(User_LEVEL>=3){
+    	long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
+    	if(user_level>=3){
     		if (users_id!=user_idClient){
     		return Usermanagement.getInstance().deleteUserID(user_idClient);
     		} else {

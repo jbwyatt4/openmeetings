@@ -18,6 +18,7 @@ import org.xmlcrm.app.data.user.Statemanagement;
 
 import org.xmlcrm.app.data.conference.Invitationmanagement;
 import org.xmlcrm.app.data.conference.Feedbackmanagement;
+import org.xmlcrm.app.rss.LoadAtomRssFeed;
 
 /**
  * 
@@ -55,10 +56,10 @@ public class MainService {
 		try {
 	        Long users_id = Sessionmanagement.getInstance().checkSession(SID);
 	        log.error("getNavi 1: "+users_id);
-	        Long User_LEVEL = Usermanagement.getInstance().getUserLevelByID(users_id);
-	        log.error("getNavi 2: "+User_LEVEL);
+	        Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
+	        log.error("getNavi 2: "+user_level);
 	        
-			return Navimanagement.getInstance().getMainMenu(User_LEVEL,users_id, language_id);
+			return Navimanagement.getInstance().getMainMenu(user_level,users_id, language_id);
 		} catch (Exception err){
 			log.error("[getNavi] ", err);
 		}
@@ -74,8 +75,8 @@ public class MainService {
 	public Users getUser(String SID,int USER_ID){
 		Users users = new Users();
 		Long users_id = Sessionmanagement.getInstance().checkSession(SID);
-		long User_LEVEL = Usermanagement.getInstance().getUserLevelByID(users_id);
-    	if(User_LEVEL>2){
+		long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
+    	if(user_level>2){
     		users = Usermanagement.getInstance().getUser(new Long(USER_ID));
     	} else {
     		users.setFirstname("No rights to do this");
@@ -219,8 +220,8 @@ public class MainService {
 	 */
     public Long deleteUserIDSelf(String SID){
     	Long users_id = Sessionmanagement.getInstance().checkSession(SID);
-    	long User_LEVEL = Usermanagement.getInstance().getUserLevelByID(users_id);
-    	if(User_LEVEL>=1){
+    	long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
+    	if(user_level>=1){
     		Usermanagement.getInstance().logout(SID,users_id);
     		return Usermanagement.getInstance().deleteUserID(users_id);
     	} else {
@@ -234,8 +235,8 @@ public class MainService {
      */
     public String sendInvitation(String SID, String username, String message, String domain, String room, String roomtype, String baseurl, String email, String subject){
     	Long users_id = Sessionmanagement.getInstance().checkSession(SID);
-    	long User_LEVEL = Usermanagement.getInstance().getUserLevelByID(users_id);
-    	return Invitationmanagement.getInstance().sendInvitionLink(User_LEVEL, username, message, domain, room, roomtype, baseurl, email, subject);
+    	Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
+    	return Invitationmanagement.getInstance().sendInvitionLink(user_level, username, message, domain, room, roomtype, baseurl, email, subject);
     }
     
     /**
@@ -248,6 +249,12 @@ public class MainService {
      */
     public String sendFeedback(String SID, String username, String message, String email){
     	return Feedbackmanagement.getInstance().sendFeedback(username, email, message);
+    }
+    
+    public LinkedHashMap<String,LinkedHashMap<String,LinkedHashMap<String,LinkedHashMap<String,Object>>>> getRssFeeds(String SID) {
+    	Long users_id = Sessionmanagement.getInstance().checkSession(SID);
+    	Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
+    	return LoadAtomRssFeed.getInstance().getRssFeeds(user_level);
     }
 
     

@@ -112,7 +112,6 @@
             inverse="true"
             cascade="all"
             sort="unsorted"
-            order-by="naviorder"
         >
 
             <key
