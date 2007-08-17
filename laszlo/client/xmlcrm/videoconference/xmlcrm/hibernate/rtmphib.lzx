@@ -181,6 +181,7 @@
             //The onResult-Handler will be called be the rtmpconnection
             //Debug.write("getNavi: ",value);
             new mainnavi(canvas._mainbgcontentNavi,{name:'navi',naviObject:value});
+            new helpandbugs(canvas._mainbgcontentNavi);
         </handler>  
     </netremotecallhib>
     

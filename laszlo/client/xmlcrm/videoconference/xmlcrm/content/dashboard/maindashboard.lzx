@@ -1,17 +1,105 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library>
+    
+<class name="rssfeedlistitem" extends="view" layout="axis:y;spacing:0" >
+    <handler name="onmouseover">
+        setCurrentMouseWheelObject(this.parent.parent._scrollbar);
+    </handler>
+    <handler name="onmouseover">
+        disableCurrentMouseWheelObject();
+    </handler>
+    
+    <attribute name="titel" type="string" value="" />
+    <attribute name="summary" type="string" value="" />
+    <attribute name="link" type="string" value="" />
+    
+    <handler name="oninit">
+        <![CDATA[
+            this.urlv.setText("<u><A HREF='"+this.link+"' TARGET='_BLANK'><FONT color='#0000CC'>"+canvas.getLabelName(285)+"</FONT></A></u>");
+        ]]>
+    </handler>
+    
+    <labeltext text="$once{ parent.titel }" fontstyle="bold" />
+    <labeltext name="summaryv" text="$once{ parent.summary }"  multiline="true" width="400" />
+    <labeltext name="urlv" />
+    <view width="400" height="2" bgcolor="#0000CC" />
+</class>    
 
 <class name="maindashboard" extends="basecontentview">	
 	
-	<labeltext fontstyle="bold" y="10" labelid="128" />
+    <!--
+	<labeltext fontstyle="bold" y="10" labelid="128" x="10" />
 	
-	<simplelabelbutton text="Issue Tracker Dev Test" x="0" y="40">
+	<simplelabelbutton text="Issue Tracker Dev Test" x="10" y="40">
 		<handler name="onclick">
 			var obj = new Array();
 			obj["action"] = "issuetracker";
 			loadContent(obj,null,null);
 		</handler>
 	</simplelabelbutton>
+    -->
+    
+    <handler name="oninit">
+        <![CDATA[
+            this.homepage.setText("<u><A HREF='"+canvas.getLabelName(282)+"' TARGET='_BLANK'><FONT color='#0000CC'>"+canvas.getLabelName(286)+"</FONT></A></u>");
+            this.mailing.setText("<u><A HREF='"+canvas.getLabelName(283)+"' TARGET='_BLANK'><FONT color='#0000CC'>"+canvas.getLabelName(287)+"</FONT></A></u>");
+        ]]>
+    </handler>
+    
+    <labeltext fontstyle="bold" y="10" labelid="278" x="10" />
+    
+        <simplelabelbutton y="40" labelid="279" x="30"
+            onclick="quicklink('conf1')" />
+        <simplelabelbutton y="70" labelid="280" x="30" 
+            onclick="quicklink('conf2')" />    
+            
+    <labeltext fontstyle="bold" x="10" y="110" labelid="281" />
+    
+        <labeltext name="homepage" x="30" y="140" />
+    
+        <labeltext name="mailing" x="30" y="170" />
+    
+    
+    <labeltext fontstyle="bold" x="500" y="10" labelid="277" />
+    
+    <view y="40" width="400" x="500" height="400" clip="true">
+        
+        <handler name="oninit">
+            this.getRssFeeds.doCall();
+        </handler>
+        
+        <netremotecallhib name="getRssFeeds" funcname="xmlcrm.getRssFeeds" 
+			remotecontext="$once{ canvas.thishib }" > 
+        	<netparam name="vars1"><method name="getValue"> return canvas.sessionId; </method></netparam>
+            <handler name="ondata" args="value">
+            	<![CDATA[
+                    Debug.write("getRssFeeds: ",value);
+                    parent.outputRSS(value);
+                ]]>
+            </handler>   
+        </netremotecallhib>  	
+        
+        <method name="outputRSS" args="value">
+            <![CDATA[
+                var t = new Array();
+                for(var eg in value.feed1){
+                    //Debug.write("eg: ",eg,"val",value.feed1[eg]);
+                    t.push(value.feed1[eg]);
+                }
+                
+                for (var i=t.length-1;i>-1;i--){
+                    //Debug.write("i ",i,"val",t[i],t[i].title.text,t[i].link.attributes.href,t[i].summary.text);
+                    new rssfeedlistitem(this.content,{titel:t[i].title.text,link:t[i].link.attributes.href,summary:t[i].summary.text});
+                }
+            ]]>
+        </method>
+        
+        <view name="content" layout="axis:y;spacing:0" >
+            
+        </view>
+        
+        <vscrollbar name="_scrollbar" />
+    </view>
 		
 		
 </class>
