@@ -706,7 +706,7 @@
 <value>Registration Complete</value>
 </string>
 <string id="236" name="user_registerSuccessHeader">
-<value>Your account has been created. You an login now.</value>
+<value>Your account has been created. You can login now.</value>
 </string>	
 <string id="237" name="user_sharing_message">
 <value>You cannot share your screen at the moment. Somebody else already share's its screen.</value>

@@ -724,67 +724,67 @@
 <value>屏幕:</value>
 </string>	
 <string id="242" name="whiteboard_tab_paint">
-<value>Paint</value>
+<value>绘画</value>
 </string>	
 <string id="243" name="whiteboard_tab_document">
-<value>Document</value>
+<value>文档</value>
 </string>		
 <string id="244" name="tabbar_chaticon">
-<value>Chat</value>
+<value>聊天</value>
 </string>	
 <string id="245" name="tabbar_filesicon">
-<value>Files</value>
+<value>文件</value>
 </string>	
 <string id="246" name="tabbar_participantsicon">
-<value>Members</value>
+<value>成员</value>
 </string>	
 <string id="247" name="swfpresentation_listsaveorig">
-<value>Download original document</value>
+<value>下载原始文档</value>
 </string>	
 <string id="248" name="swfpresentation_listsavepdf">
-<value>Download pdf document</value>
+<value>下载PDF文档</value>
 </string>	
 <string id="249" name="swfpresentation_listloadswf">
-<value>Load Presentation to whiteboard</value>
+<value>载入演示到白板</value>
 </string>	
 <string id="250" name="navimain_config">
-<value>Configuration</value>
+<value>设置</value>
 </string>	
 <string id="251" name="whiteboard_boundingbox_drag">
-<value>Drag this Object</value>
+<value>拖动这个对象</value>
 </string>		
 <string id="252" name="whiteboard_boundingbox_resize">
-<value>Resize this Object</value>
+<value>缩放这个对象</value>
 </string>
 <string id="253" name="whiteboard_documenttoolbar_zoom">
 <value>%</value>
 </string>	
 <string id="254" name="whiteboard_documenttoolbar_slide">
-<value>of</value>
+<value>之</value>
 </string>		
 <string id="255" name="whiteboard_documenttoolbar_firstslide">
-<value>Go to first Page</value>
+<value>转到第一页</value>
 </string>		
 <string id="256" name="whiteboard_documenttoolbar_preslide">
-<value>Go to previous Page</value>
+<value>转到前一页</value>
 </string>	
 <string id="257" name="whiteboard_documenttoolbar_nextslide">
-<value>Go to next Page</value>
+<value>转到后一页</value>
 </string>		
 <string id="258" name="whiteboard_documenttoolbar_lastslide">
-<value>Go to last Page</value>
+<value>转到最后一页</value>
 </string>	
 <string id="259" name="whiteboard_documenttoolbar_zoomminus">
-<value>Zoom --</value>
+<value>缩小</value>
 </string>
 <string id="260" name="whiteboard_documenttoolbar_zoomplus">
-<value>Zoom ++</value>
+<value>放大</value>
 </string>	
 <string id="261" name="salutation_mr">
-<value>Mr.</value>
+<value>先生.</value>
 </string>
 <string id="262" name="salutation_miss">
-<value>Ms.</value>
+<value>女士.</value>
 </string>
 <string id="263" name="navimain_confadmin">
 <value>Configuration</value>
