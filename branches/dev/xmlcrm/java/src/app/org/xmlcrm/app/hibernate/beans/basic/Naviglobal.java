@@ -183,6 +183,7 @@ public class Naviglobal {
      * table = "navimain" 
      * inverse = "true" 
      * cascade = "all"
+     * where = "deleted='false'"
      * order-by = "naviorder"
      * @hibernate.collection-one-to-many 
      * class = "org.xmlcrm.app.hibernate.beans.basic.Navimain"

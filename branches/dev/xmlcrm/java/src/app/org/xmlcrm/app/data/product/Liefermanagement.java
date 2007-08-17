@@ -45,9 +45,9 @@ public class Liefermanagement {
 		return lieferarten;
 	}
 
-	public lieferarten[] getAllLieferarten(long User_LEVEL) {
+	public lieferarten[] getAllLieferarten(long user_level) {
 		lieferarten lieferarten[] = new lieferarten[1];
-		if (User_LEVEL > 1) {
+		if (user_level > 1) {
 			try {
 //				Object idf = HibernateUtil.createSession();
 //				Session session = HibernateUtil.getSession();

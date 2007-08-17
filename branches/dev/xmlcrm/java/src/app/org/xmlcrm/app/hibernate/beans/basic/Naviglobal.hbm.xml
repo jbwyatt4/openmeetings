@@ -121,6 +121,7 @@
             cascade="all"
             sort="unsorted"
             order-by="naviorder"
+            where="deleted='false'"
         >
 
             <key

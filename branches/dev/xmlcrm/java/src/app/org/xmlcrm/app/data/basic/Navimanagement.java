@@ -33,8 +33,8 @@ public class Navimanagement {
 		return instance;
 	}
 
-	public List getMainMenu(long User_LEVEL, long USER_ID, long language_id) {
-		List ll = this.getMainMenu(User_LEVEL, USER_ID);
+	public List getMainMenu(long user_level, long USER_ID, long language_id) {
+		List ll = this.getMainMenu(user_level, USER_ID);
 		for (Iterator it2 = ll.iterator(); it2.hasNext();) {
 			Naviglobal navigl = (Naviglobal) it2.next();
 			navigl.setLabel(Fieldmanagment.getInstance().getFieldByIdAndLanguage(navigl.getFieldvalues_id(),language_id));
@@ -52,15 +52,18 @@ public class Navimanagement {
 		return ll;
 	}
 
-	public List getMainMenu(long User_LEVEL, long USER_ID) {
+	public List getMainMenu(long user_level, long USER_ID) {
 		try {
 			
 			Object idf = HibernateUtil.createSession();
 			Session session = HibernateUtil.getSession();
 			Transaction tx = session.beginTransaction();
 			// Criteria crit = session.createCriteria();
-			Query query = session.createQuery("select c from Naviglobal as c where c.level_id <= :level_id order by c.naviorder");
-			query.setLong("level_id", User_LEVEL);
+			Query query = session.createQuery("select c from Naviglobal as c " +
+					"where c.level_id <= :level_id AND " +
+					"c.deleted='false' " +
+					"order by c.naviorder");
+			query.setLong("level_id", user_level);
 			List navi = query.list();
 
 			tx.commit();
@@ -89,6 +92,7 @@ public class Navimanagement {
 			ng.setFieldvalues_id(fieldvalues_id);
 			ng.setIsleaf(isleaf);
 			ng.setIsopen(isopen);
+			ng.setDeleted("false");
 			ng.setLevel_id(level_id);
 			ng.setName(name);
 			ng.setStarttime(new Date());
@@ -124,6 +128,7 @@ public class Navimanagement {
 			ng.setIsopen(isopen);
 			ng.setLevel_id(level_id);
 			ng.setName(name);
+			ng.setDeleted("false");
 			ng.setGlobal_id(global_id);
 			ng.setStarttime(new Date());
 
@@ -158,6 +163,7 @@ public class Navimanagement {
 			ng.setIsopen(isopen);
 			ng.setLevel_id(level_id);
 			ng.setName(name);
+			ng.setDeleted("false");
 			ng.setMain_id(main_id);
 			ng.setStarttime(new Date());
 

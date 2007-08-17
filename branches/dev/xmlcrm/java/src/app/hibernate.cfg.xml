@@ -13,9 +13,9 @@
 		<property name="show_sql">true</property>
 		<property name="use_outer_join">false</property>
 			<property name="connection.username">postgres</property>
-			<property name="connection.password">*****</property>
+			<property name="connection.password"></property>
 			<property name="connection.driver_class">org.postgresql.Driver</property>
-			<property name="connection.url">jdbc:postgresql://localhost/xmlcrm</property>
+			<property name="connection.url">jdbc:postgresql://localhost/xmlcrm5</property>
 
 		<property name="c3p0.max_size">20</property>
 		<property name="c3p0.min_size">2</property>

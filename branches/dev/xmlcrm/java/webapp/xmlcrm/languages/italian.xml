@@ -834,4 +834,37 @@ Il tuo profilo è stato creato correttamente. Puoi effettuare il login.
 <string id="276" name="organisation_usersalreadadded">
 <value>This user is already member of this organisation.</value>
 </string>		
+<string id="277" name="dashboard_newsheader">
+<value>Dev-Channel</value>
+</string>
+<string id="278" name="dashboard_quicklinksheader">
+<value>Quicklinks</value>
+</string>	
+<string id="279" name="dashboard_quicklinkConf">
+<value>Goto Conference</value>
+</string>	
+<string id="280" name="dashboard_quicklinkAudit">
+<value>Goto Auditorium</value>
+</string>	
+<string id="281" name="dashboard_quicklinksupport">
+<value>Help and Support</value>
+</string>	
+<string id="282" name="dashboard_quickhomepageurl">
+<value>http://code.google.com/p/openmeetings/</value>
+</string>
+<string id="283" name="dashboard_quickmailinglisturl">
+<value>http://groups.google.com/group/openmeetings-user</value>
+</string>	
+<string id="284" name="dashboard_reportbugs">
+<value>Report a bug!</value>
+</string>	
+<string id="285" name="dashboard_rsslistitemlinktext">
+<value>more</value>
+</string>
+<string id="286" name="dashboard_quicklinkhomepagelabel">
+<value>Project Webside (code.google.com/p/openmeetings/)</value>
+</string>		
+<string id="287" name="dashboard_quicklinkmailinglistlabel">
+<value>USer Mailing List (groups.google.com/group/openmeetings-user)</value>
+</string>		
 </language>

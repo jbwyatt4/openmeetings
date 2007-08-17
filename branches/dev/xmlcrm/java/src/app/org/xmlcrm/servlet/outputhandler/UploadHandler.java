@@ -95,9 +95,9 @@ public class UploadHandler extends HttpServlet {
 				}
 
 				Long users_id = Sessionmanagement.getInstance().checkSession(sid);
-				long User_LEVEL = Usermanagement.getInstance().getUserLevelByID(users_id);
+				long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
 
-				if (User_LEVEL > 0) {
+				if (user_level > 0) {
 					String room = httpServletRequest.getParameter("room");
 					if (room == null) {
 						room = "default";

@@ -176,6 +176,7 @@ public class Navimain {
      * table = "navisub" 
      * inverse = "true" 
      * cascade = "all"
+     * where = "deleted='false'";
      * order-by = "naviorder"
      * @hibernate.collection-one-to-many 
      * class = "org.xmlcrm.app.hibernate.beans.basic.Navisub"
