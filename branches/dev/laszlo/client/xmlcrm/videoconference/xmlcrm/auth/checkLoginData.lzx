@@ -2,7 +2,7 @@
 <library>
 
 <class name="checkLoginData" extends="labelexplorerbox" labelid="108"
-    docking="true" resizeable="false" closable="false" width="300" x="350" y="0" height="240">
+    docking="true" resizeable="false" closable="false" width="360" x="350" y="0" height="260">
     
     <handler name="onclose">
     	if (this.childObj!=null) this.childObj.close();
@@ -14,11 +14,26 @@
     <attribute name="labeliderror" value="0" type="number" />
     
     <labeltext name="n1" labelid="109" width="200" y="42" resize="false" x="2"/>
-        <customedittext name="username" y="42" x="120" width="170" text="" />
+        <customedittext name="username" y="42" x="120" width="170" >
+            <handler name="oninit">
+                var t = new sharedobject();
+                t.getLocal('userdata');
+                var g = t.getData('userdata');
+                Debug.write("g: ",g);
+                if(g!=null) if (g["username"]!=null) this.setText(g["username"]);
+            </handler>             
+        </customedittext>    
 
     <labeltext name="n2" labelid="110" width="200" y="72" resize="false" x="2"/>
-        <customedittext name="userpass" y="72" password="true" x="120" width="170" text="" />
-
+        <customedittext name="userpass" y="72" password="true" x="120" width="170" >
+            <method event="oninit">
+                var t = new sharedobject();
+                t.getLocal('userdata');
+                var g = t.getData('userdata');
+                if(g!=null) if (g["userpass"]!=null) this.setText(g["userpass"]);
+            </method>                
+        </customedittext>
+    
     <labeltext name="n3" labelid="111" width="200" y="102" resize="false" x="2"/>  
         
         <combobox name="languages" width="170" y="102" x="120" editable="false">
@@ -87,7 +102,7 @@
     <labeltext name="n4" labelid="184" width="200" y="102" resize="false" x="2" visible="false" />     
         <combobox name="organisation" width="170" y="102" x="120" editable="false" visible="false" />
         
-    <simplelabelbutton labelid="123" name="_register" width="120" x="40" y="196" visible="false">
+    <simplelabelbutton labelid="123" name="_register" width="120" x="100" y="196" visible="false">
     	<handler name="onclick">
 	    	this.parent._register.setAttribute('visible',false);
 	    	this.parent.childObj = new registerNewUser(canvas.main_content._content.inner,{refObj:this.parent});    	
@@ -95,14 +110,14 @@
     	</handler>
     </simplelabelbutton>          
         
-    <simplelabelbutton name="b2" labelid="112" width="120" x="170" y="196">
+    <simplelabelbutton name="b2" labelid="112" width="120" x="230" y="196">
     	<handler name="onclick">
             this.parent.errormess.setText('');
     		this.parent.loginUser.doCall();
     	</handler>
     </simplelabelbutton>   
         
-    <simplelabelbutton name="b3" labelid="185" width="120" x="170" y="196" visible="false">
+    <simplelabelbutton name="b3" labelid="185" width="120" x="230" y="196" visible="false">
     	<handler name="onclick">
 			var orgIndexId = Number(parent.organisation.getValue());
 			hib.currentdomain = hib.userobject.organisation_users[orgIndexId].organisation.name;
@@ -112,7 +127,7 @@
     	</handler>
     </simplelabelbutton> 	
     
-     <text name="errormess" resize="true" y="154" />
+     <text name="errormess" resize="true" y="158" />
 
     <netremotecallhib name="loginUser" funcname="xmlcrm.loginUser" remotecontext="$once{ canvas.thishib }" >      
         <netparam name="vars1"><method name="getValue"> return canvas.sessionId; </method></netparam>  
@@ -124,6 +139,28 @@
             //Debug.write("loginUser: ",value);
             
             if (value.level_id!=-1){
+                
+                if (this.parent._savelogindata.getValue()) {
+                    var t = new sharedobject();
+                    t.getLocal('userdata');
+                    var g = t.getData('userdata');
+                    if (g==null) g = new Array();
+                    g["username"] = parent.username.getText();
+                    g["userpass"] = parent.userpass.getText();
+                    g["saveuserdata"]=true;
+                    t.setData('userdata',g);
+                    t.flush(); 
+                } else {
+                    var t = new sharedobject();
+                    t.getLocal('userdata');
+                    var g = t.getData('userdata');
+                    if (g==null) g = new Array();
+                    g["username"] = '';
+                    g["userpass"] = '';
+                    g["saveuserdata"]=false;
+                    t.setData('userdata',g);
+                    t.flush();                 
+                }
             
 				canvas.setAttribute('user_id',value.user_id);
 				canvas.setAttribute('firstName',value.firstname);
@@ -210,7 +247,26 @@
     
     <animator name="showRegForm" attribute="x" to="20" duration="1000" start="false" />
     <animator name="doreset" attribute="x" to="350" duration="1000" start="false" />
-
+    
+    <labelcheckbox align="right" y="$once{ parent.height-36 }" fontsize="12"
+        name="_savelogindata" labelid="288" >
+        <handler name="oninit">
+            var t = new sharedobject();
+            t.getLocal('userdata');
+            var g = t.getData('userdata');
+            var save = g["saveuserdata"];
+            if(save) this.setValue(true);
+        </handler>
+    </labelcheckbox>        
+    
+    <labeltext align="right" resize="true" valign="bottom">
+        <handler name="oninit">
+            <![CDATA[
+                this.setText("<u><A HREF='http://code.google.com/p/openmeetings' TARGET='_BLANK'><FONT color='#0000CC'>visit code.google.com/p/openmeetings</FONT></A></u>");
+            ]]>
+        </handler>
+    </labeltext>
+    
 
 </class>
 

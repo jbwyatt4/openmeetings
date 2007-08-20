@@ -1,4 +1,4 @@
-#Thu Aug 16 16:19:05 CEST 2007
+#Mon Aug 20 15:25:10 CEST 2007
 =\=\=\=\=\=\=
 <<<<<<<=.mine
 >>>>>>>=.r486
@@ -38,6 +38,7 @@ encoding//xmlcrm/videoconference/conference/popups/messagewin.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/popups/resultpollwin.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/popups/rpcerrordialog.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/remote/library.lzx=UTF-8
+encoding//xmlcrm/videoconference/conference/remote/sharedobject.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/tabbar/basedokeostabbutton.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/tabbar/library.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/tabbar/menubardokeos.lzx=UTF-8
