@@ -105,7 +105,7 @@
 	String fax, String zip, long states_id, String town, long language_id
      -->
 
-	<animator attribute="x" to="340" duration="1000" start="true" />
+	<animator attribute="x" to="400" duration="1000" start="true" />
 	
      <netremotecallhib name="registerUserByObject" funcname="xmlcrm.registerUserByObject" 
      	remotecontext="$once{ canvas.thishib }" >      

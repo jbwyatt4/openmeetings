@@ -183,7 +183,22 @@ containing the VideoViews
  -->
 <attribute name="_videocontainer" value="null" />
     
+<handler name="oninit">
+    var cmenu = new LzContextMenu();
+    canvas.setDefaultContextMenu(cmenu);
+    cmenu.hideBuiltInItems();
 
+    // Add Custom Items:
+
+    var item1 = cmenu.makeMenuItem('About OpenMeetings Project', new LzDelegate(this,"openMeetingsMenuItemHandler"));
+    cmenu.addItem(item1);
+
+    Debug.write("oninit: ",this);
+</handler>
+    
+<method name="openMeetingsMenuItemHandler">
+    LzBrowser.loadURL("http://code.google.com/p/openmeetings/", "Openmeetings Homepage");  
+</method>    
     
     
 <dataset type="http" name="myConfigSet" src="config.xml" request="true"

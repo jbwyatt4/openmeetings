@@ -5,7 +5,7 @@
     <handler name="onmouseover">
         setCurrentMouseWheelObject(this.parent.parent._scrollbar);
     </handler>
-    <handler name="onmouseover">
+    <handler name="onmouseout">
         disableCurrentMouseWheelObject();
     </handler>
     
