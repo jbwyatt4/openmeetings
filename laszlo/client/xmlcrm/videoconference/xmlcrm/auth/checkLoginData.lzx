@@ -102,7 +102,8 @@
     <labeltext name="n4" labelid="184" width="200" y="102" resize="false" x="2" visible="false" />     
         <combobox name="organisation" width="170" y="102" x="120" editable="false" visible="false" />
         
-    <simplelabelbutton labelid="123" name="_register" width="120" x="100" y="196" visible="false">
+    <simplelabelbutton labelid="123" name="_register" width="120" y="$once{ parent.height-40 }" 
+        visible="false" x="100">
     	<handler name="onclick">
 	    	this.parent._register.setAttribute('visible',false);
 	    	this.parent.childObj = new registerNewUser(canvas.main_content._content.inner,{refObj:this.parent});    	
@@ -110,14 +111,15 @@
     	</handler>
     </simplelabelbutton>          
         
-    <simplelabelbutton name="b2" labelid="112" width="120" x="230" y="196">
+    <simplelabelbutton name="b2" labelid="112" width="120" x="230" y="$once{ parent.height-40 }">
     	<handler name="onclick">
             this.parent.errormess.setText('');
     		this.parent.loginUser.doCall();
     	</handler>
     </simplelabelbutton>   
         
-    <simplelabelbutton name="b3" labelid="185" width="120" x="230" y="196" visible="false">
+    <simplelabelbutton name="b3" labelid="185" width="120" x="230" y="$once{ parent.height-40 }"
+        visible="false">
     	<handler name="onclick">
 			var orgIndexId = Number(parent.organisation.getValue());
 			hib.currentdomain = hib.userobject.organisation_users[orgIndexId].organisation.name;
@@ -248,7 +250,7 @@
     <animator name="showRegForm" attribute="x" to="20" duration="1000" start="false" />
     <animator name="doreset" attribute="x" to="350" duration="1000" start="false" />
     
-    <labelcheckbox align="right" y="$once{ parent.height-36 }" fontsize="12"
+    <labelcheckbox x="100" y="$once{ parent.height-66 }" fontsize="12"
         name="_savelogindata" labelid="288" >
         <handler name="oninit">
             var t = new sharedobject();
