@@ -53,7 +53,7 @@ of the red5-servlet
 	canvascolor="white" />
 	
 <splash>
-	<view center="true" ratio="1" resource="splashswf.swf"/>
+	<view center="true" ratio="1" resource="splash.swf"/>
 </splash>
 
 <include href="incubator/lzcombobox.lzx" />
