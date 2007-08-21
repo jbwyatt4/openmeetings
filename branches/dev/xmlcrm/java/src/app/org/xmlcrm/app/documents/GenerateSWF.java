@@ -27,18 +27,24 @@ public class GenerateSWF {
 		returnMap.put("process", "generateSWF");		
 		try {
 			
-			String runtimeFile = "swfconverter.bat";
-			if (System.getProperty("os.name").toUpperCase().indexOf("WINDOWS") == -1) {
-				runtimeFile = "swfconverter.sh";
-			}
-			Runtime rt = Runtime.getRuntime();
-			
 			String pathToSWFTools = Configurationmanagement.getInstance().getConfKey(3,"swftools_path").getConf_value();
 			
-			String command = current_dir + "jod" + File.separatorChar + runtimeFile + " " 
+			String runtimeFile = "swfconverter.bat";
+			String command = "cmd.exe /c start "+current_dir + "jod" + File.separatorChar + runtimeFile + " " 
+				+ originalFolder + fileNamePure + ".pdf "
+				+ destinationFolder + fileNamePure+".swf" + " "
+				+ pathToSWFTools;
+			
+			if (System.getProperty("os.name").toUpperCase().indexOf("WINDOWS") == -1) {
+				runtimeFile = "swfconverter.sh";
+				command = current_dir + "jod" + File.separatorChar + runtimeFile + " " 
 					+ originalFolder + fileNamePure + ".pdf "
 					+ destinationFolder + fileNamePure+".swf" + " "
 					+ pathToSWFTools;
+			}
+			System.out.println("generateSWF command: "+command);
+			
+			Runtime rt = Runtime.getRuntime();			
 			
 			returnMap.put("command", command);
 			Process proc = rt.exec(command);

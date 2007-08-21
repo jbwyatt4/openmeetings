@@ -829,7 +829,7 @@
 <value>This user is already member of this organisation.</value>
 </string>		
 <string id="277" name="dashboard_newsheader">
-<value>Dev-Channel</value>
+<value>News</value>
 </string>
 <string id="278" name="dashboard_quicklinksheader">
 <value>Quicklinks</value>

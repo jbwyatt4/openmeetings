@@ -73,7 +73,7 @@ public class ImportInitvalues {
 	
 	public void loadConfiguration(String allowfrontendRegister, String smtpServer, String smtpPort, 
 			String referer, String mailauthname, String mailauthpass, String default_lang, 
-			String swf_path, String im_path, String url_feed){
+			String swf_path, String im_path, String url_feed, String url_feed2){
 		
 		//"1"
 		Configurationmanagement.getInstance().addConfByKey(3, "allow_frontend_register", allowfrontendRegister, null, "");
@@ -103,6 +103,8 @@ public class ImportInitvalues {
 		Configurationmanagement.getInstance().addConfByKey(3, "imagemagick_path", im_path, null, "Path to ImageMagick tools");
 		
 		Configurationmanagement.getInstance().addConfByKey(3, "rss_feed1", url_feed, null, "Feed URL");
+		
+		Configurationmanagement.getInstance().addConfByKey(3, "rss_feed2", url_feed2, null, "Feed URL 2");
 		
 	}
 	

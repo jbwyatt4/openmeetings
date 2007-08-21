@@ -119,12 +119,13 @@ public class Install extends VelocityViewServlet {
 					String filePath = getServletContext().getRealPath("/")+ImportInitvalues.languageFolderName;
 					
 					String url_feed =  "http://groups.google.com/group/openmeetings-dev/feed/atom_v1_0_msgs.xml";
+					String url_feed2 =  "http://groups.google.com/group/openmeetings-user/feed/atom_v1_0_msgs.xml";
 						
 					ImportInitvalues.getInstance().loadInitLanguages(filePath);
 					ImportInitvalues.getInstance().loadMainMenu();
 					ImportInitvalues.getInstance().loadSalutations();
 					ImportInitvalues.getInstance().loadConfiguration(configdefault, configsmtp, configsmtpport, 
-									configreferer, configmailuser, configmailpass, configdefaultLang, swf_path, im_path, url_feed);
+									configreferer, configmailuser, configmailpass, configdefaultLang, swf_path, im_path, url_feed, url_feed2);
 					ImportInitvalues.getInstance().loadInitUserAndOrganisation(username, userpass, useremail, orgname);
 					ImportInitvalues.getInstance().loadDefaultRooms();
 					

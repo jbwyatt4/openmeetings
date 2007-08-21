@@ -37,6 +37,9 @@ public class LoadAtomRssFeed {
 				String url1 = Configurationmanagement.getInstance().getConfKey(3,"rss_feed1").getConf_value();
 				returnMap.put("feed1", this.parseRssFeed(url1));
 				
+				String url2 = Configurationmanagement.getInstance().getConfKey(3,"rss_feed2").getConf_value();
+				returnMap.put("feed2", this.parseRssFeed(url2));
+				
 				return returnMap;
 			} else {
 				log.error("[getRssFeeds] authorization required");
