@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library>
     
-<class name="audience" extends="basecontentview">
+<class name="audience" extends="basecontentview" destroyByMethod="true" >
 
 	<handler name="ontabcontentleave">
 		this.logicalRoomLeave.doCall();
@@ -11,6 +11,9 @@
     	<handler name="ondata" args="value">
     		//Debug.write("logicalRoomLeave: ",value);
     		//this.parent.destroy();
+            canvas.thishib.reconnectAfterRoomleft = true;
+            canvas.thishib.reconnectedRoomInstance = this.parent;
+            canvas.thishib.disconnect();            
     	</handler>
     </netremotecallhib>
 

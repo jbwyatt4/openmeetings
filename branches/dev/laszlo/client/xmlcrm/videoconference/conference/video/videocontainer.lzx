@@ -41,7 +41,6 @@
 		this.currentuserObject.push(canvas.picture_uri);
 		this.currentuserObject.push(canvas.language);
 		
-		
 		this.setUserDomain.doCall();
 	</method>
     
