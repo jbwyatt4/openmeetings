@@ -2,7 +2,7 @@
 
 = Main Changes =
 
-  * SWF Presentation Viewer for Documents see SWFPresentationViewer
+  * SWF Presentation Viewer for Documents see [SWFPresentationViewer]
   * Auto Cast for Objects (backend)
   * Improved Configuration / Administration
   * Solved Session-Problems
