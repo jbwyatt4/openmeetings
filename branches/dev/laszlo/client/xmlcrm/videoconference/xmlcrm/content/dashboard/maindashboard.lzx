@@ -12,6 +12,7 @@
     <attribute name="titel" type="string" value="" />
     <attribute name="summary" type="string" value="" />
     <attribute name="link" type="string" value="" />
+    <attribute name="updated" type="string" value="" />
     
     <handler name="oninit">
         <![CDATA[
@@ -20,6 +21,7 @@
     </handler>
     
     <labeltext text="$once{ parent.titel }" fontstyle="bold" />
+    <labeltext text="$once{ parent.updated }" fontstyle="italic" />
     <labeltext name="summaryv" text="$once{ parent.summary }"  multiline="true" width="400" />
     <labeltext name="urlv" />
     <view width="400" height="2" bgcolor="#0000CC" />
@@ -37,7 +39,7 @@
             
             for (var i=t.length-1;i>-1;i--){
                 //Debug.write("i ",i,"val",t[i],t[i].title.text,t[i].link.attributes.href,t[i].summary.text);
-                new rssfeedlistitem(this.content,{titel:t[i].title.text,link:t[i].link.attributes.href,summary:t[i].summary.text});
+                new rssfeedlistitem(this.content,{updated:t[i].updated.text,titel:t[i].title.text,link:t[i].link.attributes.href,summary:t[i].summary.text});
             }
         ]]>
     </method>
