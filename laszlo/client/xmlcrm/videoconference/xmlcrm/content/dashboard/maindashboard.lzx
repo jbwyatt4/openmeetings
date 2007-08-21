@@ -24,6 +24,31 @@
     <labeltext name="urlv" />
     <view width="400" height="2" bgcolor="#0000CC" />
 </class>    
+    
+<class name="rssbox" extends="view" width="400" height="380" clip="true"> 	
+        
+    <method name="outputRSS" args="value">
+        <![CDATA[
+            var t = new Array();
+            for(var eg in value){
+                //Debug.write("eg: ",eg,"val",value[eg]);
+                t.push(value[eg]);
+            }
+            
+            for (var i=t.length-1;i>-1;i--){
+                //Debug.write("i ",i,"val",t[i],t[i].title.text,t[i].link.attributes.href,t[i].summary.text);
+                new rssfeedlistitem(this.content,{titel:t[i].title.text,link:t[i].link.attributes.href,summary:t[i].summary.text});
+            }
+        ]]>
+    </method>
+    
+    <view name="content" layout="axis:y;spacing:0" >
+        
+    </view>
+    
+    <vscrollbar name="_scrollbar" />
+    
+</class>   
 
 <class name="maindashboard" extends="basecontentview">	
 	
@@ -60,10 +85,8 @@
         <labeltext name="mailing" x="30" y="170" />
     
     
-    <labeltext fontstyle="bold" x="500" y="10" labelid="277" />
     
-    <view y="40" width="400" x="500" height="400" clip="true">
-        
+    
         <handler name="oninit">
             this.getRssFeeds.doCall();
         </handler>
@@ -74,32 +97,17 @@
             <handler name="ondata" args="value">
             	<![CDATA[
                     Debug.write("getRssFeeds: ",value);
-                    parent.outputRSS(value);
+                    parent.feed1.outputRSS(value.feed1);
+                    parent.feed2.outputRSS(value.feed2);
                 ]]>
             </handler>   
-        </netremotecallhib>  	
-        
-        <method name="outputRSS" args="value">
-            <![CDATA[
-                var t = new Array();
-                for(var eg in value.feed1){
-                    //Debug.write("eg: ",eg,"val",value.feed1[eg]);
-                    t.push(value.feed1[eg]);
-                }
-                
-                for (var i=t.length-1;i>-1;i--){
-                    //Debug.write("i ",i,"val",t[i],t[i].title.text,t[i].link.attributes.href,t[i].summary.text);
-                    new rssfeedlistitem(this.content,{titel:t[i].title.text,link:t[i].link.attributes.href,summary:t[i].summary.text});
-                }
-            ]]>
-        </method>
-        
-        <view name="content" layout="axis:y;spacing:0" >
-            
-        </view>
-        
-        <vscrollbar name="_scrollbar" />
-    </view>
+        </netremotecallhib>     
+    
+    <labeltext fontstyle="bold" x="10" y="200" labelid="277" />
+    
+    <rssbox name="feed1" x="10" y="220" />
+
+    <rssbox name="feed2" x="420" y="220" />
 		
 		
 </class>
