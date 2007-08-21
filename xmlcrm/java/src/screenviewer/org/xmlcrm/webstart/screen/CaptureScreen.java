@@ -21,7 +21,7 @@ public class CaptureScreen {
 	private Date startDate;
 
 	public static void main(String[] args) {
-		new CaptureScreen("http://192.168.2.103:5080/xmlcrm/ScreenServlet","1010","1","public");
+		new CaptureScreen("http://192.168.2.103:5080/xmlcrm/ScreenServlet","2010","1","public");
 	}
 
 	public CaptureScreen(String url, String SID, String room, String domain) {

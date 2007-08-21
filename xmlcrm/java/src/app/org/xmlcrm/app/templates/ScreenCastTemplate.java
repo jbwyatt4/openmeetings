@@ -43,8 +43,8 @@ public class ScreenCastTemplate extends VelocityLoader{
 	
 	        VelocityContext context = new VelocityContext();
 	
-	        context.put("rtmphostlocal", rtmphostlocal);
-	        context.put("red5httpport", red5httpport);
+	        context.put("rtmphostlocal", rtmphostlocal); //rtmphostlocal
+	        context.put("red5httpport", red5httpport); //red5httpport
 	        context.put("SID", SID);
 	        context.put("ROOM", ROOM);
 	        context.put("DOMAIN", DOMAIN);

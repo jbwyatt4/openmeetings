@@ -51,12 +51,13 @@ public class ScreenServlet extends HttpServlet {
 				if (room == null) {
 					room = "default";
 				}
-				System.out.println("sid: " + sid);	
+				System.out.println("room: " + room);	
 
 				String domain = httpServletRequest.getParameter("domain");
 				if (domain == null) {
 					domain = "default";
 				}
+				System.out.println("domain: " + domain);
 	
 				Long users_id = Sessionmanagement.getInstance().checkSession(sid);
 				Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
