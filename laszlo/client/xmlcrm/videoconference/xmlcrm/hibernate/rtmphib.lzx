@@ -65,6 +65,7 @@
         if (this.reconnectAfterRoomleft) {
             //Return to content after reconnect
             canvas.thishib.reconnectedRoomInstance.destroy();
+            this.setUsernameReconnect.doCall();
             loadContentByTempActionForNavi();
         } else {
             canvas.thishib.loaderVar.destroy();
@@ -110,6 +111,18 @@
             parent.getLanguageById.doCall();
         </handler>  
     </netremotecallhib>
+    
+        <netremotecallhib name="setUsernameReconnect" funcname="setUsername" remotecontext="$once{ canvas.thishib }" >   
+            <netparam name="vars1"><method name="getValue">return canvas.user_id;</method></netparam>
+            <netparam name="vars2"><method name="getValue">return canvas.currentuser;</method></netparam>
+            <netparam name="vars3"><method name="getValue">return canvas.firstName;</method></netparam>
+            <netparam name="vars4"><method name="getValue">return canvas.lastName;</method></netparam>      
+            <netparam name="vars6"><method name="getValue">return parent.parent.currentdomain;</method></netparam>
+            <handler name="ondata" args="value">
+                //The onResult-Handler will be called be the rtmpconnection
+                //Debug.write("setUsername: ",value);                    
+            </handler>  
+        </netremotecallhib>    
     
     <netremotecallhib name="getLanguageById" funcname="xmlcrm.getLanguageById" >      
         <netparam name="vars1"><method name="getValue"> return parent.parent.userlang; </method></netparam> 
