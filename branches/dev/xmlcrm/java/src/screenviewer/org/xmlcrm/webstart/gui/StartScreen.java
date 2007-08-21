@@ -214,6 +214,7 @@ public class StartScreen {
 		ConnectionBean.room = room;
 		ConnectionBean.domain = domain;	
 		instance=this;
+		//instance.showBandwidthWarning("StartScreen: "+SID+" "+room+" "+domain+" "+url);
 		this.initMainFrame();
 	}
 	

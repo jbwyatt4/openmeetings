@@ -95,18 +95,18 @@ public class Sessionmanagement {
 			crit.add(Restrictions.eq("session_id", SID));
 
 			int count = crit.list().size();
-			Sessiondata sessiondata = new Sessiondata();
+			Sessiondata sessiondata = null;
 			for (Iterator it2 = crit.list().iterator(); it2.hasNext();) {
 				sessiondata = (Sessiondata) it2.next();
 			}
 			
-			session.refresh(sessiondata);
+			if (sessiondata!=null) session.refresh(sessiondata);
 			session.flush();
 			tx.commit();
 			HibernateUtil.closeSession(idf);
-			log.error("checkSession USER_ID: "+sessiondata.getUser_id());
+			if (sessiondata!=null) log.error("checkSession USER_ID: "+sessiondata.getUser_id());
 				
-			updatesession(SID);
+			if (sessiondata!=null) updatesession(SID);
 			if (count == 0 || sessiondata.equals(null) || sessiondata.getUser_id().equals(null) || sessiondata.getUser_id().equals(new Long(0)) ) {
 				return new Long(0);
 			} else {
@@ -184,17 +184,26 @@ public class Sessionmanagement {
 			Criteria crit = session.createCriteria(Sessiondata.class);
 			crit.add(Restrictions.eq("session_id", SID));
 			List fullList = crit.list();
+			tx.commit();
+			HibernateUtil.closeSession(idf);			
 			if (fullList.size() == 0) {
-				return;
+				log.error("Found NO session to updateSession: ");
+
 			} else {
 				log.error("Found session to updateSession: ");
+				Sessiondata sd = (Sessiondata) fullList.iterator().next();
+				log.error("Found session to updateSession sd "+sd.getUser_id()+" "+sd.getSession_id());
+				sd.setRefresh_time(new Date());
+				
+				Object idf2 = HibernateUtil.createSession();
+				Session session2 = HibernateUtil.getSession();
+				Transaction tx2 = session2.beginTransaction();				
+				session2.update(sd);
+				session2.flush();
+				tx2.commit();
+				HibernateUtil.closeSession(idf2);	
 			}
-			Sessiondata sd = (Sessiondata) fullList.iterator().next();
-			log.error("Found session to updateSession sd "+sd.getUser_id()+" "+sd.getSession_id());
-			sd.setRefresh_time(new Date());
-			session.update(sd);
-			tx.commit();
-			HibernateUtil.closeSession(idf);
+			
 		} catch (HibernateException ex) {
 			log.error("[updatesession]: " ,ex);
 		} catch (Exception ex2) {

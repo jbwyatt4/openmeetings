@@ -6,7 +6,7 @@ public class ConnectionBean {
 	
 	public static String connectionURL = "http://macbook:5080/xmlcrm/ScreenServlet";
 	
-	public static String SID = "1010";
+	public static String SID = "3010";
 	
 	public static String room = "1";
 	

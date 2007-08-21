@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Web Start Deployment Template -->
-<jnlp spec="1.0+" codebase="http://$rtmphostlocal:$red5httpport/xmlcrm/screen" href="screencast.jnlp"> 
+<jnlp spec="1.0+" codebase="http://$rtmphostlocal:$red5httpport/xmlcrm/screen"> 
 	<information> 
 		<title>ScreenViewer Client Application</title> 
 		<vendor>Openmeetings</vendor> 
