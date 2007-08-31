@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library>
     
-<class name="rssfeedlistitem" extends="view" layout="axis:y;spacing:0" >
+<class name="rssfeedlistitem" extends="view" layout="axis:y" bgcolor="0xFFFFFF" width="$once{ parent.width }" >
     <handler name="onmouseover">
         setCurrentMouseWheelObject(this.parent.parent._scrollbar);
     </handler>
@@ -20,36 +20,37 @@
         ]]>
     </handler>
     
-    <labeltext text="$once{ parent.titel }" fontstyle="bold" />
-    <labeltext text="$once{ parent.updated }" fontstyle="italic" />
-    <labeltext name="summaryv" text="$once{ parent.summary }"  multiline="true" width="400" />
-    <labeltext name="urlv" />
-    <view width="400" height="2" bgcolor="#0000CC" />
+    <labeltext fontsize="10" text="$once{ parent.titel }" fontstyle="bold" multiline="true" width="$once{ parent.width }" />
+    <labeltext fontsize="10" text="$once{ parent.updated }" fontstyle="italic" />
+    <labeltext fontsize="10" name="summaryv" text="$once{ parent.summary }"  multiline="true" width="$once{ parent.width }" />
+    <labeltext fontsize="10" name="urlv" />
+    <view height="1" width="$once{ parent.width }" bgcolor="$once{ canvas.basebgcolorizer }" />
 </class>    
     
-<class name="rssbox" extends="view" width="400" height="380" clip="true"> 	
-        
+<class name="rssbox" extends="view" width="400" height="380" 
+    bgcolor="$once{ canvas.basebgcolorizer }" > 	
     <method name="outputRSS" args="value">
-        <![CDATA[
-            var t = new Array();
-            for(var eg in value){
-                //Debug.write("eg: ",eg,"val",value[eg]);
-                t.push(value[eg]);
-            }
-            
-            for (var i=t.length-1;i>-1;i--){
-                //Debug.write("i ",i,"val",t[i],t[i].title.text,t[i].link.attributes.href,t[i].summary.text);
-                new rssfeedlistitem(this.content,{updated:t[i].updated.text,titel:t[i].title.text,link:t[i].link.attributes.href,summary:t[i].summary.text});
-            }
-        ]]>
+        this.inner.outputRSS(value);
     </method>
-    
-    <view name="content" layout="axis:y;spacing:0" >
-        
+    <view name="inner" clip="true" bgcolor="0xFFFFFF" 
+        x="1" y="1" width="$once{ parent.width-2 }" height="$once{ parent.height-2 }">
+        <method name="outputRSS" args="value">
+            <![CDATA[
+                var t = new Array();
+                for(var eg in value){
+                    //Debug.write("eg: ",eg,"val",value[eg]);
+                    t.push(value[eg]);
+                }
+                
+                for (var i=t.length-1;i>-1;i--){
+                    //Debug.write("i ",i,"val",t[i],t[i].title.text,t[i].link.attributes.href,t[i].summary.text);
+                    new rssfeedlistitem(this.content,{updated:t[i].updated.text,titel:t[i].title.text,link:t[i].link.attributes.href,summary:t[i].summary.text});
+                }
+            ]]>
+        </method>
+        <view name="content" layout="axis:y" bgcolor="$once{ canvas.basebgcolorizer }" width="$once{ parent.width-14 }" />        
+        <vscrollbar name="_scrollbar" />
     </view>
-    
-    <vscrollbar name="_scrollbar" />
-    
 </class>   
 
 <class name="maindashboard" extends="basecontentview">	
@@ -83,11 +84,7 @@
     <labeltext fontstyle="bold" x="10" y="110" labelid="281" />
     
         <labeltext name="homepage" x="30" y="140" />
-    
         <labeltext name="mailing" x="30" y="170" />
-    
-    
-    
     
         <handler name="oninit">
             this.getRssFeeds.doCall();

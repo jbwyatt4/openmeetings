@@ -73,7 +73,7 @@
 		height="524"
 		visible="true">
 		<handler name="onclick">
-			new errorpopup(canvas,{error:canvas.getLabelName(97)});
+			new errormoderatorpopup(canvas,{error:canvas.getLabelName(97)});
 		</handler>
 	</view>
 
