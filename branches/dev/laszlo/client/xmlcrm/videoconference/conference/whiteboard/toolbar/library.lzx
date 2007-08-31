@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library>
 
+    <include href="toolbarTabList.lzx" />
     <include href="basetoolbarmenu.lzx" />
 	<include href="paintmenu.lzx" />
     <include href="documentmenu.lzx" />

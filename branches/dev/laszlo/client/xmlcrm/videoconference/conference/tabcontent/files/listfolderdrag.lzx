@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library>
+    
+<resource name="folder_yellow_rsc" src="resources/folder.png" />
 	
 <class name="listfolderdrag" extends="text" height="18" width="280" resize="false"
     onmouseover="this.setBGColor(0x799FCE)" text="$once{ '     '+this.foldername }" 

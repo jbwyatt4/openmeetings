@@ -1,4 +1,4 @@
-#Fri Aug 31 15:01:29 CEST 2007
+#Fri Aug 31 16:52:13 CEST 2007
 =\=\=\=\=\=\=
 <<<<<<<=.mine
 >>>>>>>=.r486
@@ -40,10 +40,8 @@ encoding//xmlcrm/videoconference/conference/popups/resultpollwin.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/popups/rpcerrordialog.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/remote/library.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/remote/sharedobject.lzx=UTF-8
-encoding//xmlcrm/videoconference/conference/tabbar/basedokeostabbutton.lzx=UTF-8
+encoding//xmlcrm/videoconference/conference/tabbar/conferencecontainertab.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/tabbar/library.lzx=UTF-8
-encoding//xmlcrm/videoconference/conference/tabbar/menubardokeos.lzx=UTF-8
-encoding//xmlcrm/videoconference/conference/tabcontent/basedokeoscharttab.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/tabcontent/charttab.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/tabcontent/files/baselistpresentationItem.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/tabcontent/files/imagelistinnertable.lzx=UTF-8
@@ -59,7 +57,6 @@ encoding//xmlcrm/videoconference/conference/tabcontent/files/listwml.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/tabcontent/files/uploadtab.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/tabcontent/library.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/tabcontent/participants.lzx=UTF-8
-encoding//xmlcrm/videoconference/conference/tabcontent/wwwtab.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/video/editrecordstream.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/video/library.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/video/videocontainer.lzx=UTF-8
@@ -88,6 +85,7 @@ encoding//xmlcrm/videoconference/conference/whiteboard/toolbar/documenttoolsPale
 encoding//xmlcrm/videoconference/conference/whiteboard/toolbar/library.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/whiteboard/toolbar/paintmenu.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/whiteboard/toolbar/painttoolsPalette.lzx=UTF-8
+encoding//xmlcrm/videoconference/conference/whiteboard/toolbar/toolbarTabList.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/whiteboard/whiteboard.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/whiteboard/windows/library.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/whiteboard/windows/loadwhiteboardwindow.lzx=UTF-8
@@ -122,6 +120,7 @@ encoding//xmlcrm/videoconference/oslmon/components/validbox/library.lzx=UTF-8
 encoding//xmlcrm/videoconference/oslmon/components/validbox/validtext.lzx=UTF-8
 encoding//xmlcrm/videoconference/oslmon/upload/fileupload.lzx=UTF-8
 encoding//xmlcrm/videoconference/oslmon/upload/uploadwindow.lzx=UTF-8
+encoding//xmlcrm/videoconference/resources/library.lzx=UTF-8
 encoding//xmlcrm/videoconference/test/content/audiotest.lzx=UTF-8
 encoding//xmlcrm/videoconference/test/content/library.lzx=UTF-8
 encoding//xmlcrm/videoconference/test/lang/en.lzx=UTF-8

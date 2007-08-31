@@ -40,7 +40,7 @@
 <resource name="videobg" src="resources/videobg.png" />
 <resource name="viewmag" src="resources/viewmag.png" />
 <resource name="reload_small_rsc" src="resources/reload_small.png" />
-<resource name="folder_yellow_rsc" src="resources/x-office-presentation.png" />
+
 <resource name="folder_top_rsc" src="resources/top.png" />
 	
 <resource name="doc_next" src="resources/go-next.png" />
@@ -201,36 +201,7 @@
             ]]>        
     </method> 
     
-    <view name="_toolbarTabList" x="2" layout="axis:x; spacing:2" y="18">
-        <!-- Holds a reference to the currently selected TabButton -->
-        <attribute name="selected" value="null" />
-        
-        <method name="setSelection" args="selected">
-            this.selected = selected;
-            this.selected.setAttribute('isselected',true);
-            <![CDATA[
-            for (var i=0;i<this.subviews.length;i++){
-                if(this.subviews[i]!=selected){
-                    this.subviews[i].setAttribute('isselected',false);
-                    this.subviews[i].onmouseout.sendEvent();
-                }
-            }
-            ]]>
-        </method>        
-        <basedokeostabbutton name="b_paint" iconresourcename="ksirc_rsc" width="100" labelid="242"
-            oninit="this.onmouseup.sendEvent()">
-            <handler name="sendClick">
-                //Debug.write("onclick handler paint" );
-                this.parent.parent.changeMenu(1,false);
-            </handler>        
-        </basedokeostabbutton>
-        <basedokeostabbutton name="b_doc" iconresourcename="ksirc_rsc" width="120" labelid="243">
-            <handler name="sendClick">
-                //Debug.write("onclick handler paint" );
-                this.parent.parent.changeMenu(2,false);
-            </handler>
-        </basedokeostabbutton>        
-    </view>
+    <toolbarTabList name="_toolbarTabList" x="2" y="16" />
     
     <method name="changeMenu" args="menuId,bool">
         if (menuId==1){
