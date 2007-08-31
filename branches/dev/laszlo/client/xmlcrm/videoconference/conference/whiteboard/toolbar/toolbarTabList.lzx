@@ -9,8 +9,9 @@
     <attribute name="selected" value="null" />
     
     <method name="setSelection" args="selected">
+        if (this.selected!=null) this.selected.setAttribute('enabled',true);
         this.selected = selected;
-        this.selected.setAttribute('isselected',true);
+        this.selected.setAttribute('enabled',false);
         <![CDATA[
         for (var i=0;i<this.subviews.length;i++){
             if(this.subviews[i]!=selected){
@@ -20,21 +21,22 @@
         }
         ]]>
     </method>        
-    <basedokeostabbutton name="b_paint" iconresourcename="paint_whiteboardtab_rsc" 
-        width="100" labelid="242"
-        oninit="this.onmouseup.sendEvent()">
-        <handler name="sendClick">
-            //Debug.write("onclick handler paint" );
+    <simplelabelbutton name="b_paint" width="100" labelid="242" height="26"
+        oninit="this.onclick.sendEvent()">
+        <handler name="onclick">
+            this.parent.setSelection(this);
             this.parent.parent.changeMenu(1,false);
-        </handler>        
-    </basedokeostabbutton>
-    <basedokeostabbutton name="b_doc" iconresourcename="document_whiteboardtab_rsc" 
-        width="120" labelid="243">
-        <handler name="sendClick">
-            //Debug.write("onclick handler paint" );
+        </handler>      
+        <view name="_icon" x="2" resource="paint_whiteboardtab_rsc" />   
+    </simplelabelbutton>
+    <simplelabelbutton name="b_doc" width="120" labelid="243" height="26"
+        oninit="this.onmouseup.sendEvent()">      
+        <handler name="onclick">
+            this.parent.setSelection(this);
             this.parent.parent.changeMenu(2,false);
         </handler>
-    </basedokeostabbutton>        
+        <view name="_icon" x="2" resource="document_whiteboardtab_rsc" />          
+    </simplelabelbutton>        
 </class>
     
 </library>
