@@ -9,7 +9,7 @@
  -->
 <class name="uploadtab" extends="simplebasetabpane" >
 
-    <handler name="oninit">
+    <handler name="onvisible">
     	this.getListOfFiles.doCall();
     </handler>
 
