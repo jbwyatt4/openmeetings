@@ -45,7 +45,7 @@
   	This is the tab with all the different contents
   	Chat/Online Users/Files/Library/WWW
    -->
-  <menubardokeos y="279" name="_menubardokeos" />
+  <conferencecontainertab y="279" name="_menubar" />
 
     <!-- 
         shared Whiteboard

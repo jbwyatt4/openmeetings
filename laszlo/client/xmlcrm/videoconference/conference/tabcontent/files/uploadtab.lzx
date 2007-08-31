@@ -2,11 +2,12 @@
 <library>
 
 <resource name="messagebox_info_rsc" src="resources/messagebox_info.png" />
+<resource name="add_file_icon_rsc" src="resources/edit_add.png" />
 
 <!-- ###################
 	Class uploadtab
  -->
-<class name="uploadtab" extends="basedokeoscharttab" >
+<class name="uploadtab" extends="simplebasetabpane" >
 
     <handler name="oninit">
     	this.getListOfFiles.doCall();
@@ -65,13 +66,13 @@
 	        </handler>	
 	  	</netremotecallhib>    
     
-	<view resource="refresh_file_rsc" y="4" x="$once{ parent.width -60 }" >
+	<view resource="refresh_file_rsc" y="0" x="$once{ parent.width -64 }" >
 		<handler name="onclick">
 			this.parent.oninit.sendEvent();
 		</handler>
 		<labeltooltip labelid="16" />
 	</view>
-	<view resource="folder_top_rsc" y="4" x="$once{ parent.width -42 }" >
+	<view resource="folder_top_rsc" y="0" x="$once{ parent.width -46 }" >
 		<handler name="onclick">
 			canvas.setAttribute('uploadmoduleimgfolder','');
 			this.parent.oninit.sendEvent();
@@ -79,27 +80,26 @@
 		<labeltooltip labelid="17" />
 	</view>	
 	
-	<view y="4" x="$once{ parent.width -24 }" >
+	<view y="0" x="$once{ parent.width -28 }" >
 		<handler name="onclick">
 			new editwhiteboarddefault(canvas.main_content._content.inner);
 		</handler>
 		<labeltooltip labelid="66" />
 	</view>		
-
-	<view resource="folder_yellow_rsc" x="4" y="4" />
 	
-	<simplelabelbutton width="170" labelid="15" y="2" x="24" >
+	<simplelabelbutton width="190" labelid="15" y="0" x="0" >
+        <view resource="add_file_icon_rsc" y="2" x="4" />
 	    <handler name="onclick">
 	        new uploadwindow(canvas.main_content._content.inner,{x:60,y:60,uploadmodule:canvas.uploadmoduleimg,isOnlyImage:true});
 	    </handler>
 	</simplelabelbutton>
 
-	<imageslistdraw name="_imageslistdraw" x="4" y="24" height="$once{ parent.height-28 }" 
+	<imageslistdraw name="_imageslistdraw" x="0" y="20" height="$once{ parent.height-28 }" 
 		width="250" id="_imageslistdraw" uploadmodul="$once{ canvas.uploadmoduleimg }" />
 		
 <!--  -->
 	<view name="currentmainobjectisMod" visible="${ !canvas.ismoderator }"
-		x="4" y="24" height="$once{ parent.height-28 }" width="250" >
+		x="0" y="20" height="$once{ parent.height-28 }" width="250" >
 		<handler name="onclick">
 			new errorpopup(canvas,{error:canvas.getLabelName(97)});
 		</handler>

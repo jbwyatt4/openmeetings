@@ -4,9 +4,10 @@
 <!-- ###################
 	Class charttab
  -->
-<class name="charttab" extends="basedokeoscharttab" >
+<class name="charttab" extends="simplebasetabpane" >
 
-	<view x="4" y="4" name="_chartoutputborder" height="${ parent.height-30 }" bgcolor="$once{ canvas.basebgcolorizer }" width="244">
+	<view name="_chartoutputborder" height="${ parent.height-30 }"
+        bgcolor="$once{ canvas.basebgcolorizer }" width="244">
 		<view name="_chartoutput" x="1" y="1" height="${ parent.height-2 }" id="chartcontent" 
 			clip="true" bgcolor="0xFFFFFF" width="${ parent.width-2 }" >
 
@@ -48,7 +49,7 @@
 		</view>
 	</view>
 	
-	<view y="${ parent.height-24 }" x="4" width="244">
+	<view y="${ parent.height-28 }" x="0" width="244">
 		<view x="2" y="0" height="20" width="168" name="message" bgcolor="$once{ canvas.basebgcolorizer }">
 			<method name="getText">
 				return this._ctext.getText();

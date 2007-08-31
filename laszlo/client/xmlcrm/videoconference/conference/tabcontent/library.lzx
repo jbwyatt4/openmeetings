@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library>
- 
-	<include href="basedokeoscharttab.lzx" />
+
 	<include href="charttab.lzx" />
 	<include href="participants.lzx" />
-	
-	<include href="wwwtab.lzx" />
+
 	<include href="files/" />
 
     

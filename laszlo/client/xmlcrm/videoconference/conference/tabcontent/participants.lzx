@@ -46,7 +46,7 @@
 <!-- ###################
 	Class participants
  -->
-<class name="participants" extends="basedokeoscharttab" >
+<class name="participants" extends="simplebasetabpane" >
 
 	<handler name="oninit">
 		if ( canvas.htmlframeisloaded){
@@ -75,13 +75,13 @@
 	
 	<view id="_participants" />
 	
-	<simplelabelbutton labelid="24" width="140" x="2" y="2" enabled="${ canvas.ismoderator }">
+	<simplelabelbutton labelid="24" width="140" x="0" y="0" enabled="${ canvas.ismoderator }">
 		<handler name="onclick">
 			new createpollwin(canvas.main_content._content.inner);
 		</handler>
 	</simplelabelbutton>
 	
-	<simplelabelbutton labelid="37" width="140" x="2" y="22" enabled="${  canvas.ismoderator }">
+	<simplelabelbutton labelid="37" width="140" x="0" y="20" enabled="${  canvas.ismoderator }">
 		<handler name="onclick">
 			this.getVotes.doCall();
 		</handler>
@@ -101,7 +101,7 @@
 	</simplelabelbutton>	
     
 
-	<simplelabelbutton labelid="42" width="100" x="144" y="2" >
+	<simplelabelbutton labelid="42" width="100" x="142" y="0" >
 		<handler name="onclick">
 			this.checkHasVoted.doCall();
 		</handler>
@@ -136,7 +136,7 @@
         </netremotecallhib>                  
 	</simplelabelbutton>
 	
-	<listofUsers x="4" y="44" height="$once{ parent.height-48 }"
+	<listofUsers y="40" height="$once{ parent.height-48 }"
 		width="250" name="_listofUsers" id="_listofUsers" />
 		
 </class>
