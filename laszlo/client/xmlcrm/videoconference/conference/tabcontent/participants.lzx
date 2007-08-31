@@ -48,7 +48,7 @@
  -->
 <class name="participants" extends="simplebasetabpane" >
 
-	<handler name="oninit">
+	<handler name="onvisible">
 		if ( canvas.htmlframeisloaded){
 			//canvas.ifrm.hide();
 			//canvas.setAttribute('htmlframeisloaded',false);
