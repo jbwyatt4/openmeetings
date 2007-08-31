@@ -12,7 +12,7 @@
 			clip="true" bgcolor="0xFFFFFF" width="${ parent.width-2 }" >
 
 		
-			<handler name="oninit">
+			<handler name="onvisible">
 				//Debug.write("oninit");
 				<![CDATA[
 				var completeText = canvas.getFormatedChatHistory();
