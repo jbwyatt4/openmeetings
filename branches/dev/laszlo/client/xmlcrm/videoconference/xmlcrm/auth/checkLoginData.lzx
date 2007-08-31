@@ -8,6 +8,20 @@
     	if (this.childObj!=null) this.childObj.close();
     </handler>
     
+    <handler name="oninit">
+        var pressEnter = new LzDelegate(this, "login");
+        LzKeys.callOnKeyCombo(pressEnter, ["enter"]);
+        LzFocus.setFocus(this.username);
+	</handler>  
+    
+    <method name="login">
+        if (this.b2.visible) {
+            this.b2.onclick.sendEvent();
+        } else {
+            this.b3.onclick.sendEvent();
+        }
+    </method>    
+    
     <attribute name="refObj" value="null" />
     <attribute name="childObj" value="null" />
     

@@ -274,7 +274,7 @@ containing the VideoViews
 <!-- 
     Into this view alle Windows will be loaded
  -->
-<view name="main_content" y="40" width="${canvas.width}" height="${canvas.height-40}" >
+<view name="main_content" y="30" width="${canvas.width}" height="${canvas.height-40}" >
     <view x="0" name="_content" layout="axis:y;spacing:2">
         <view name="inner" />
         

@@ -1,4 +1,4 @@
-#Mon Aug 20 15:25:10 CEST 2007
+#Fri Aug 31 15:01:29 CEST 2007
 =\=\=\=\=\=\=
 <<<<<<<=.mine
 >>>>>>>=.r486
@@ -29,6 +29,7 @@ encoding//xmlcrm/videoconference/conference/popups/confirmationsingle.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/popups/converterpopup.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/popups/createpollwin.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/popups/editwhiteboarddefault.lzx=UTF-8
+encoding//xmlcrm/videoconference/conference/popups/errormoderatorpopup.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/popups/errorpopup.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/popups/headermenu.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/popups/library.lzx=UTF-8
@@ -106,6 +107,7 @@ encoding//xmlcrm/videoconference/oslmon/components/simplevaluelist/library.lzx=U
 encoding//xmlcrm/videoconference/oslmon/components/simplevaluelist/recordvaluelist.lzx=UTF-8
 encoding//xmlcrm/videoconference/oslmon/components/simplevaluelist/simplevaluelist.lzx=UTF-8
 encoding//xmlcrm/videoconference/oslmon/components/tablelistItem.lzx=UTF-8
+encoding//xmlcrm/videoconference/oslmon/components/text/borderedinputtext.lzx=UTF-8
 encoding//xmlcrm/videoconference/oslmon/components/text/customedittext.lzx=UTF-8
 encoding//xmlcrm/videoconference/oslmon/components/text/customscrolledittext.lzx=UTF-8
 encoding//xmlcrm/videoconference/oslmon/components/text/labeltext.lzx=UTF-8
