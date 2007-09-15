@@ -7,6 +7,37 @@ LaszloClient:
 
 http://openmeetings.googlecode.com/svn/branches/dev/laszlo/client/
 
+for compiling the client you need to install the Open-Laszlo-Server:
+http://www.openlaszlo.org
+
+please the content of 
+http://openmeetings.googlecode.com/svn/branches/dev/laszlo/client/xmlcrm/videoconference/
+
+and you need to replace the rtmpconnection.lzx from your OpenLaszlo Installation with this one:
+http://openmeetings.googlecode.com/svn/branches/dev/laszlo/client/xmlcrm/patches/lps403/
+
+
 Java Layer:
 
 http://openmeetings.googlecode.com/svn/branches/dev/xmlcrm/java/
+
+There is a empty skeleton of the webapp inside the directory:
+http://openmeetings.googlecode.com/svn/branches/dev/xmlcrm/java/webapp/
+
+you need to build a jar file (xmlcrm.jar) based on the content of:
+http://openmeetings.googlecode.com/svn/branches/dev/xmlcrm/java/src/app/
+but without the hibernate.cfg.xml inside of it (cause this file is loaded from the file system _not_ from the jar file.
+
+To edit the template's (for example for mailings, installation) you need to compile a jar file (xmlcrm-templates.jar) based on the content of:
+http://openmeetings.googlecode.com/svn/branches/dev/xmlcrm/java/src/templates/
+
+both jar files should be inside of the WEB-INF/lib/-directory of the webapp:
+http://openmeetings.googlecode.com/svn/branches/dev/xmlcrm/java/webapp/xmlcrm/WEB-INF/lib/
+
+you can download the latest Beta-release and replace the jar-files there to get a complete list of all used jar-liberaries
+
+== TODO ==
+
+write an ant-task to compile a binary release of the webapp
+ 
+ 
