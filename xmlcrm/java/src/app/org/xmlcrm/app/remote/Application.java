@@ -24,18 +24,13 @@ import org.red5.server.api.stream.IBroadcastStream;
 import org.red5.server.api.stream.IPlayItem;
 import org.red5.server.api.stream.IPlaylistSubscriberStream;
 import org.red5.server.api.stream.IStreamAwareScopeHandler;
-//import org.red5.server.api.stream.IStreamCapableConnection;
 import org.red5.server.api.stream.ISubscriberStream;
 import org.xmlcrm.app.conference.configutils.BandwidthConfigFactory;
 import org.xmlcrm.app.conference.configutils.CustomBandwidth;
 import org.xmlcrm.app.conference.configutils.UserConfigFactory;
 import org.xmlcrm.app.quartz.scheduler.QuartzSessionClear;
-//import org.red5.server.api.stream.support.SimpleBandwidthConfigure;
 
-
-//import org.xmlcrmred5.configutils.BandWidthHelper;
 import org.xmlcrm.app.conference.videobeans.RoomClient;
-import org.xmlcrm.utils.math.Calender;
 
 /**
  * 
@@ -217,14 +212,15 @@ public class Application extends ApplicationAdapter implements
 			RoomClient currentClient = ClientList.get(current.getClient().getId());
 			String roomname = currentClient.getUserroom();
 			String orgdomain = currentClient.getDomain();	
-			String streamid = currentClient.getStreamid();
+			//String streamid = currentClient.getStreamid();
 			
-			log.error("##### roomLeave :.remove " + currentClient.getStreamid()); // just a unique number
+			log.error("##### roomLeave :. " + currentClient.getStreamid()); // just a unique number
 
 
 			log.error("removing USername "+currentClient.getUsername()+" "+currentClient.getConnectedSince()+" streamid: "+currentClient.getStreamid());
-			ClientList.remove(currentClient.getStreamid());
 			
+
+			this.disconnectUser(currentClient);
 			//If this Room is empty clear the Room Poll List
 			HashMap<String,RoomClient> rcpList = this.getClientListByRoomAndDomain(roomname, orgdomain);
 			log.error("roomLeave rcpList size: "+rcpList.size());
@@ -273,7 +269,7 @@ public class Application extends ApplicationAdapter implements
 			String orgdomain = currentClient.getDomain();	
 			currentClient.setUserroom("");
 			
-			log.error("##### logicalRoomLeave :.remove " + currentClient.getStreamid()); // just a unique number
+			log.error("##### logicalRoomLeave :. " + currentClient.getStreamid()); // just a unique number
 
 
 			log.error("removing USername "+currentClient.getUsername()+" "+currentClient.getConnectedSince()+" streamid: "+currentClient.getStreamid());
@@ -329,7 +325,7 @@ public class Application extends ApplicationAdapter implements
 	@Override
 	public void appDisconnect(IConnection conn){
 		
-		log.debug("appDisconnect: ");
+		log.debug("appDisconnect ID: "+conn.getClient().getId());
 		//key = streamid
 		
 	}
@@ -1122,6 +1118,16 @@ public class Application extends ApplicationAdapter implements
 	 */
 	public static HashMap<String, RoomClient> getClientList() {
 		return ClientList;
+	}
+	
+	
+	public void disconnectUser(RoomClient rcl){
+		try {
+			ClientList.remove(rcl.getStreamid());
+			
+		} catch (Exception err) {
+			log.error("[disconnectUser]",err);
+		}
 	}
 	
 }

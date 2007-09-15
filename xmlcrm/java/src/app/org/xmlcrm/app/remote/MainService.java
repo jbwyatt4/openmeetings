@@ -3,6 +3,7 @@ package org.xmlcrm.app.remote;
 import java.util.Date;
 import java.util.List;
 import java.util.LinkedHashMap;
+import java.util.Iterator;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -18,7 +19,10 @@ import org.xmlcrm.app.data.user.Statemanagement;
 
 import org.xmlcrm.app.data.conference.Invitationmanagement;
 import org.xmlcrm.app.data.conference.Feedbackmanagement;
+import org.xmlcrm.app.data.basic.AuthLevelmanagement;
 import org.xmlcrm.app.rss.LoadAtomRssFeed;
+
+import org.xmlcrm.app.conference.videobeans.RoomClient;
 
 /**
  * 
@@ -256,6 +260,25 @@ public class MainService {
     	Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
     	return LoadAtomRssFeed.getInstance().getRssFeeds(user_level);
     }
+    
+	public LinkedHashMap<Integer,RoomClient> getUsersByDomain(String SID, String domain) {
+    	Long users_id = Sessionmanagement.getInstance().checkSession(SID);
+    	Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
+    	if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)){
+    		LinkedHashMap<Integer,RoomClient> lMap = new LinkedHashMap<Integer,RoomClient>();
+    		Integer counter = 0;
+    		for (Iterator<String> it = Application.getClientList().keySet().iterator();it.hasNext();) {
+    			RoomClient rc = Application.getClientList().get(it.next());
+    			if (rc.getDomain().equals(domain)) {
+    				lMap.put(counter, rc);
+    				counter++;
+    			}
+    		}
+    		return lMap;
+    	} else {
+    		return null;
+    	}
+	}
 
     
     /*
