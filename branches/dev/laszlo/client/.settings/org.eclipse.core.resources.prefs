@@ -1,4 +1,7 @@
-#Sat Aug 04 19:01:59 CEST 2007
+#Sat Sep 15 15:00:35 CEST 2007
+=\=\=\=\=\=\=
+<<<<<<<=.mine
+>>>>>>>=.r486
 eclipse.preferences.version=1
 encoding//xmlcrm/newstreaming/_rtmpconnection.lzx=UTF-8
 encoding//xmlcrm/newstreaming/camera.lzx=UTF-8
@@ -182,3 +185,4 @@ encoding//xmlcrm/videoconference/xmlcrm/hibernate/rtmphib.lzx=UTF-8
 encoding//xmlcrm/videoconference/xmlcrm/navi/mainnavi.lzx=UTF-8
 encoding//xmlcrm/videoconference/xmlcrm/navi/menuassets.lzx=UTF-8
 encoding//xmlcrm/videoconference/xmlcrm/navi/navifunctions.lzx=UTF-8
+instance/org.eclipse.core.net/org.eclipse.core.net.hasMigrated=true
