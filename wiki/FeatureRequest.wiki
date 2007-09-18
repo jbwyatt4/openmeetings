@@ -1,7 +1,9 @@
 #summary You can post / comment here feature's you would like to see
 
 You can also post your request to the mailing lists to discuss your requests:
+
 Developer-List: http://groups.google.com/group/openmeetings-dev
+
 User-List: http://groups.google.com/group/openmeetings-user
 
 
@@ -19,6 +21,7 @@ User-List: http://groups.google.com/group/openmeetings-user
 
 = Release 1.0 =
   * Plugin's directory, enable groovy for plugin developement
+ 
  
  
  
