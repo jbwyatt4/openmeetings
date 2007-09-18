@@ -1,5 +1,13 @@
 #summary You can post / comment here feature's you would like to see
 
+You can also post your request to the mailing lists:
+
+Developer-List: http://groups.google.com/group/openmeetings-dev
+
+User-List: http://groups.google.com/group/openmeetings-user
+
+To discuss your request.
+
 = Release 0.5 Final =
   * resizeable video-views at conference modus (by c.kung)
   * support for right-to-left languages (see Issue177) (by M.Omr) 
@@ -14,6 +22,8 @@
 
 = Release 1.0 =
   * Plugin's directory, enable groovy for plugin developement
+ 
+ 
  
  
  
