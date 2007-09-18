@@ -5,8 +5,16 @@
   * support for right-to-left languages (see Issue177) (by M.Omr) 
 
 = Release 0.6 =
+  * record a meeting (see Issue114) (several demands)
+  * contact-management for each user (gmludo)
+  * seperated file-control system / file-browser
+
+= Release 0.7 =
+  * SIP-Gate, Asterisk-Plugin (by c.kung)
 
 = Release 1.0 =
+  * Plugin's directory, enable groovy for plugin developement
+ 
  
  
  
