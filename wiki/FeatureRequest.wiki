@@ -2,9 +2,11 @@
 
 = Release 0.5 Final =
   * resizeable video-views at conference modus (by c.kung)
+  * support for right-to-left languages (see Issue177) (by M.Omr) 
 
 = Release 0.6 =
 
 = Release 1.0 =
+ 
  
  
