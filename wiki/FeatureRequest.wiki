@@ -15,12 +15,14 @@ User-List: http://groups.google.com/group/openmeetings-user
   * record a meeting (see Issue114) (several demands)
   * contact-management for each user (gmludo)
   * seperated file-control system / file-browser
+  * history of conference-events
 
 = Release 0.7 =
   * SIP-Gate, Asterisk-Plugin (by c.kung)
 
 = Release 1.0 =
   * Plugin's directory, enable groovy for plugin developement
+ 
  
  
  
