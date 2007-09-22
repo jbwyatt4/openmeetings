@@ -49,13 +49,12 @@
 <class name="participants" extends="simplebasetabpane" >
 
 	<handler name="onvisible">
-		if ( canvas.htmlframeisloaded){
-			//canvas.ifrm.hide();
-			//canvas.setAttribute('htmlframeisloaded',false);
-		}
-		this.getClientListScope.doCall();
+        Debug.write("this.isinited",this.isinited);
+        if (this.isinited){
+            this.getClientListScope.doCall();
+        }
 	</handler>
-	
+    
     <netremotecallhib name="getClientListScope" funcname="getClientListScope" remotecontext="$once{ canvas.thishib }" >          
         <handler name="ondata" args="value">
         	<![CDATA[

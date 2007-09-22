@@ -38,7 +38,6 @@
             }
             //Debug.write("hib.conferencedomain: ",hib.conferencedomain);
             clearStageContent();
-            canvas._mainbgcontentNavi.navi._innercontent.clearAllSubItemLists();  
             new global[parent.roomClassName](canvas.main_content._content.inner);          
         </handler>
 	</simplelabelbutton>

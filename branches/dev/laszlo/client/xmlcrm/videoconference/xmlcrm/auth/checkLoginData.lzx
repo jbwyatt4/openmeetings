@@ -268,9 +268,12 @@
         name="_savelogindata" labelid="288" >
         <handler name="oninit">
             var t = new sharedobject();
+            Debug.write("t: ",t);
             t.getLocal('userdata');
             var g = t.getData('userdata');
+            Debug.write("g: ",g);
             var save = g["saveuserdata"];
+            Debug.write("save: ",save);
             if(save) this.setValue(true);
         </handler>
     </labelcheckbox>        
