@@ -15,7 +15,7 @@
             g["cam"]=availibleCams3.getValue();
             g["mic"]=availibleMics3.getValue();
             //Debug.write("sharedobject store ",g["cam"],g["mic"]);
-            g["saveuserdata"] = true;
+            g["savecamdata"] = true;
             t.setData('userdata',g);
             t.flush();  
         } else {
@@ -25,7 +25,7 @@
             if (g==null) g = new Array();
             g["cam"]=availibleCams3.getValue();
             g["mic"]=availibleMics3.getValue();            
-            g["saveuserdata"]=false;
+            g["savecamdata"]=false;
             t.setData('userdata',g);
             t.flush(); 
         }        
@@ -97,7 +97,7 @@
             var t = new sharedobject();
             t.getLocal('userdata');
             var g = t.getData('userdata');
-            var save = g["saveuserdata"];
+            var save = g["savecamdata"];
             //Debug.write("save: ",save);
             if(save) this.setValue(true);
         </handler>         

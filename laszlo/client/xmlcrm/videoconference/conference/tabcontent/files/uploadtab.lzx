@@ -10,7 +10,10 @@
 <class name="uploadtab" extends="simplebasetabpane" >
 
     <handler name="onvisible">
-    	this.getListOfFiles.doCall();
+        Debug.write("this.isinited",this.isinited);
+        if (this.isinited){
+            this.getListOfFiles.doCall();
+        }
     </handler>
 
 			<netremotecallhib name="getListOfFiles" funcname="fileservice.getListOfFiles" 

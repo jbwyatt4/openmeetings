@@ -4,7 +4,9 @@
 <class name="conference" extends="basecontentview" destroyByMethod="true" >
 
 	<handler name="ontabcontentleave">
+        Debug.write("ontabcontentleave:",this);
 		this.logicalRoomLeave.doCall();
+        Debug.write("this.logicalRoomLeave ",this.logicalRoomLeave);
 	</handler>
 	    
 	<netremotecallhib name="logicalRoomLeave" funcname="logicalRoomLeave" remotecontext="$once{ canvas.thishib }" >      

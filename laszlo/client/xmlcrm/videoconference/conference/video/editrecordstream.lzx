@@ -33,7 +33,7 @@
             g["cam"]=availibleCams.getValue();
             g["mic"]=availibleMics.getValue();
             //Debug.write("sharedobject store ",g["cam"],g["mic"]);
-            g["saveuserdata"] = true;
+            g["savecamdata"] = true;
             t.setData('userdata',g);
             t.flush();  
         } else {
@@ -43,7 +43,7 @@
             if (g==null) g = new Array();
             g["cam"]=availibleCams.getValue();
             g["mic"]=availibleMics.getValue();
-            g["saveuserdata"]=false;
+            g["savecamdata"]=false;
             t.setData('userdata',g);
             t.flush(); 
         }        
@@ -54,7 +54,7 @@
         var t = new sharedobject();
         t.getLocal('userdata');
         var g = t.getData('userdata');
-        var save = g["saveuserdata"];
+        var save = g["savecamdata"];
         //Debug.write("save: ",save,g["cam"],g["mic"]);
         if(save) this.doninitalize(g["cam"],g["mic"]);
     </handler> 
@@ -93,7 +93,8 @@
 		//Debug.write(this.myvideocontainer);
 		//Debug.write(this.myvideocontainer.stream);
 		//Debug.write(this.myvideocontainer.v_output);
-		this.myvideocontainer.v_output.setAttribute('url', canvas.streamid);
+        this.myvideocontainer.v_output.url = canvas.streamid;
+		this.myvideocontainer.v_output.setAttribute('streamname', canvas.streamid);
 		this.myvideocontainer.v_output.broadcast();
         
         this.myvideocontainer.parent.parent.setAttribute('chatpartnername',canvas.firstName+' '+canvas.lastName);
@@ -175,8 +176,8 @@
             var t = new sharedobject();
             t.getLocal('userdata');
             var g = t.getData('userdata');
-            var save = g["saveuserdata"];
-            //Debug.write("save: ",save);
+            var save = g["savecamdata"];
+            Debug.write("savecamdata save: ",save);
             if(save) this.setValue(true);
         </handler>         
     </checkbox>

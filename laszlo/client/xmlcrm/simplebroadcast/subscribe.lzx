@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<canvas debug="true" width="100%" height="100%" >
+    
+<debug fontsize="14" oninit="Debug.showInternalProperties = true" />
+
+    
+<include href="incubator/lzcombobox.lzx" />
+<include href="editrecordstream.lzx" />
+<include href="netremotecallhib.lzx" />
+<include href="connection.lzx" />
+<include href="av/rtmpstatus.lzx" />
+    
+<attribute name="connectionurl" value="rtmp://macbook:1935/oflaDemo/room1" type="string" />    
+<attribute name="streamname" value="stream1" type="string" />    
+  
+<simplelayout axis="y" spacing="2" />
+        
+<view x="0" y="0" name="_videoview" layout="axis:y;spacing:2">
+    <videoview name="_videoview" width="120" height="80" >
+        <mediastream name="v_output" debug="true" type="rtmp" >
+            <handler name="onurl">
+                Debug.write("stream onurl ",this);
+            </handler>
+        </mediastream>
+        <camera name="cameraRef" show="false" width="120" height="80" fps="20" bandwidth="8192" />
+        <microphone name="microphoneRef" capturing="false">            
+            <handler name="onlevel">
+                this.parent.parent._loadness.setLevel(this.level);
+            </handler>
+        </microphone>
+    </videoview>      
+    <view name="_loadness">
+        <method name="setLevel" args="l">
+            this._meter.setAttribute('width',l);
+        </method>
+        <view name="_meter" bgcolor="black" width="1" height="20" />
+    </view>
+</view>     
+  
+     
+<view name="_connectionurl" layout="axis:y;spacing:2" y="100">
+    <view layout="axis:x;spacing:2">
+        <text fontsize="12" text="Streaming URL:" />
+        <text  fontsize="12" text="${ canvas.connectionurl }" fgcolor="0xBBBBBB" />  
+        <rtmpstatus />
+    </view>
+    <view layout="axis:x;spacing:2">
+        <text fontsize="12" text="Stream NAME" />
+        <text  fontsize="12" text="${ canvas.streamname }" fgcolor="0xBBBBBB" />  
+    </view>    
+    <button name="_edit" text="edit connection settings">
+        <handler name="onclick">
+            
+        </handler>
+    </button>    
+    <button name="_connect" text="connect">
+        <handler name="onclick">
+            canvas.thishib.src = canvas.connectionurl;
+            canvas.thishib.subscribe = true;
+            canvas.thishib.connect();
+        </handler>
+    </button>      
+</view>    
+   
+   
+  
+    
+    
+
+    
+</canvas>
