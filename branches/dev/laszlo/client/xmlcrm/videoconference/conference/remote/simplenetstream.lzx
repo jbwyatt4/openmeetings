@@ -66,7 +66,9 @@
 					this.playing = true;
 					parent.stream = this;
 					parent._setPlayStream();
+				
 					this._flashstream.setBufferTime(this.buffertime);
+				
 					this._flashstream.play(this.streamname,start);
 
 				} else {
@@ -202,14 +204,14 @@
                     return;
                 }
 
-                if (global['rtmpconnection'] == undefined) {
-                    Debug.warn("rtmpconnection must be included");
+                if (global['devrtmpconnection'] == undefined) {
+                    Debug.warn("devrtmpconnection must be included");
                 } 
     
                 // If we don't define our own connection, then use
                 // the default one (the first rtmpconnection created).
                 //Debug.write("_findnc type rtmp, rtmpconnection", this.rtmpconnection, "_nc", global.rtmpconnection.prototype._default._nc);
-                this._nc = global.rtmpconnection.prototype._default._nc;
+                this._nc = global.devrtmpconnection.prototype._default._nc;
                 
                 Debug.write('this._nc', this._nc);
 

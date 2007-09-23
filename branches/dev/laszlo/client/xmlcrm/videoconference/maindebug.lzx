@@ -101,7 +101,9 @@ of the red5-servlet
     -swagner
  -->
 <attribute name="_nc" value="null" />
-
+	
+<attribute name="vaquality" value="best" type="string" />
+	
 <attribute name="moderatorStreamID" value="" type="string" />
 <attribute name="moderatorationObject" value="" type="string" />
 <attribute name="moderatorName" type="string" setter="this.setModeratorName(moderatorName)" />

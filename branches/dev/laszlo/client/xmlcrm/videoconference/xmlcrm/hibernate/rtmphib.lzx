@@ -24,7 +24,7 @@
     </element>
 </dataset>
 
-<rtmpconnection name="thishib" id="hib" debug="true" autoconnect="false"
+<devrtmpconnection name="thishib" id="hib" debug="true" autoconnect="false"
     src="$once{ this.protocollName+'://'+canvas.rtmphostlocal+':'+this.protocollPort+'/xmlcrm/hibernate' }" >
 
   	 <attribute name="protocollName" type="string" value="rtmp" />
@@ -508,6 +508,6 @@
             </handler>   
         </netremotecallhib>       
          
-</rtmpconnection>
+</devrtmpconnection>
 
 </library>

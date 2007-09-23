@@ -17,7 +17,7 @@
 	width="300" height="250" x="14" >
 	
 	<handler name="oninit">
-		//Debug.write("############################### ");
+		Debug.write("############################### ");
 	</handler>
 
     <attribute name="myvideocontainer" value="null" />
@@ -60,48 +60,34 @@
     </handler> 
 
     <method name="doninitalize" args="valCam,valMic">
-    	////Debug.write("this.myvideocontainer: ",this.myvideocontainer);
+    	Debug.write("doninitalize this.myvideocontainer: ",this.myvideocontainer);
     
         this.myvideocontainer.cameraRef.setAttribute('deviceindex',valCam);
         this.myvideocontainer.microphoneRef.setAttribute('deviceindex',valMic);
 
 		this.myvideocontainer.parent.parent.setAttribute('isremote',false);
-		
-	    //v.record(v.url);
-	    
-	    //canvas._ns = new NetStream(canvas.thishib._nc);
-		
-		//Debug.write("publishing streamid: ",canvas.streamid);
-	    //canvas._ns.publish(canvas.streamid,"live");
-	    //this.myvideocontainer.microphoneRef._mic.setRate(4);
-	    //this.myvideocontainer.cameraRef._cam.setQuality(16384/4);
-	    //this.myvideocontainer.microphoneRef._dev.setUseEchoSuppression(true);
-	    
-	    //canvas._ns.attachVideo(this.myvideocontainer.cameraRef._dev);
-	    //canvas._ns.attachAudio(this.myvideocontainer.microphoneRef._dev);  
-	    //Attach Devices to Stream
-	    ////Debug.write(cameraRef._cam);
-	    ////Debug.write(microphoneRef._mic);
-	    //
-	    //      
-		
 	    
 	    this.myvideocontainer.microphoneRef.setAttribute('capturing',true);
         this.myvideocontainer.cameraRef.setAttribute('show',true);
         this.myvideocontainer.parent.parent.setIdentifier(canvas.streamid);
 		
-		//Debug.write(this.myvideocontainer);
-		//Debug.write(this.myvideocontainer.stream);
-		//Debug.write(this.myvideocontainer.v_output);
-        this.myvideocontainer.v_output.url = canvas.streamid;
-		this.myvideocontainer.v_output.setAttribute('streamname', canvas.streamid);
-		this.myvideocontainer.v_output.broadcast();
+		//camera.setMode(width, height, fps[, favorsize])
+		this.myvideocontainer.cameraRef.setMode(this.myvideocontainer.width,this.myvideocontainer.height,30);
+		//camera.setQuality(bandwidth, picturequality)
+		this.myvideocontainer.cameraRef.setQuality(this.myvideocontainer.cameraRef.bandwidth,0.7);
+		//Microphone.set
+		if (canvas.vaquality=="best") {
+			this.myvideocontainer.microphoneRef.setRate(44);
+		} else {
+			this.myvideocontainer.microphoneRef.setRate(22);
+		}
+		
+		//Microphone setUseEchoSupression(bool)
+	    this.myvideocontainer.microphoneRef.setUseEchoSupression(true);
+		
+		this.myvideocontainer.v_output.broadcast(canvas.streamid,this.myvideocontainer.cameraRef,this.myvideocontainer.microphoneRef);
         
         this.myvideocontainer.parent.parent.setAttribute('chatpartnername',canvas.firstName+' '+canvas.lastName);
-        
-        //this.myvideocontainer.microphoneRef._mic.setRate(4);
-	    //this.myvideocontainer.cameraRef._cam.setQuality(16384/4);
-	    //this.myvideocontainer.microphoneRef._dev.setUseEchoSuppression(true);
         
         this.close();
     </method>    
@@ -119,24 +105,27 @@
     <combobox fontsize="12" id="availibleCams" x="10" y="100" width="280" editable="false">
         <handler name="oninit">
             <![CDATA[
-            //Get all availible Cam's
-            this.parent.myvideocontainer = canvas._videocontainer.getNewVideoObject();
-            var tw = this.parent.myvideocontainer.cameraRef.getCameraNames();
-            var r = "";
-            for (var eg=0;eg<tw.length;eg++){
-                this.addItem(tw[eg],eg);
-                r=eg;
-            }
-            var t = new sharedobject();
-            t.getLocal('userdata');
-            var g = t.getData('userdata');
-            if (g!=null){
-            	var cam = g["cam"];
-            } else {
-            	var cam = r;
-            }
-			if (cam=='undefined' || cam =='' || cam == null) cam=r;
-			this.selectItem(String(cam));    
+				//Get all availible Cam's
+				this.parent.myvideocontainer = canvas._videocontainer.getNewVideoObject();
+				
+				Debug.write("availibleCams this.parent.myvideocontainer ",this.parent.myvideocontainer);
+				
+				var tw = this.parent.myvideocontainer.cameraRef.getCameraNames();
+				var r = "";
+				for (var eg=0;eg<tw.length;eg++){
+					this.addItem(tw[eg],eg);
+					r=eg;
+				}
+				var t = new sharedobject();
+				t.getLocal('userdata');
+				var g = t.getData('userdata');
+				if (g!=null){
+					var cam = g["cam"];
+				} else {
+					var cam = r;
+				}
+				if (cam=='undefined' || cam =='' || cam == null) cam=r;
+				this.selectItem(String(cam));    
 
             ]]>
         </handler>

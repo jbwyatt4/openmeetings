@@ -1,4 +1,4 @@
-#Sun Sep 23 18:07:52 CEST 2007
+#Sun Sep 23 20:28:15 CEST 2007
 =\=\=\=\=\=\=
 <<<<<<<=.mine
 >>>>>>>=.r486
@@ -50,8 +50,11 @@ encoding//xmlcrm/videoconference/conference/popups/loginweb.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/popups/messagewin.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/popups/resultpollwin.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/popups/rpcerrordialog.lzx=UTF-8
+encoding//xmlcrm/videoconference/conference/remote/devcamera.lzx=UTF-8
+encoding//xmlcrm/videoconference/conference/remote/devrtmpconnection.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/remote/library.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/remote/sharedobject.lzx=UTF-8
+encoding//xmlcrm/videoconference/conference/remote/simplenetstream.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/tabbar/conferencecontainertab.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/tabbar/library.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/tabcontent/charttab.lzx=UTF-8
@@ -192,6 +195,7 @@ encoding//xmlcrm/videoconference/xmlcrm/content/roomadmin/roomvalueform.lzx=UTF-
 encoding//xmlcrm/videoconference/xmlcrm/content/roomadmin/roomvalueformmod.lzx=UTF-8
 encoding//xmlcrm/videoconference/xmlcrm/content/settings/usersettings.lzx=UTF-8
 encoding//xmlcrm/videoconference/xmlcrm/content/wizard/previousnext.lzx=UTF-8
+encoding//xmlcrm/videoconference/xmlcrm/hibernate/library.lzx=UTF-8
 encoding//xmlcrm/videoconference/xmlcrm/hibernate/netremotecallhib.lzx=UTF-8
 encoding//xmlcrm/videoconference/xmlcrm/hibernate/rtmphib.lzx=UTF-8
 encoding//xmlcrm/videoconference/xmlcrm/navi/mainnavi.lzx=UTF-8
