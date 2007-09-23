@@ -1,14 +1,4 @@
-<!-- * X_LZ_COPYRIGHT_BEGIN ***************************************************
-* Copyright 2006-2007 Laszlo Systems, Inc.  All Rights Reserved.              *
-* Use is subject to license terms.                                            *
-* X_LZ_COPYRIGHT_END ****************************************************** -->
-
-
 <library>
-
-
-    <include href="mediadevice.lzx"/>
-
 
     <!--
         Microphone. 
@@ -27,9 +17,7 @@
             <microphone capturing="false"/>
         @END_CODE
     -->
-    <class name="microphone"
-        extends="mediadevice"
-    >
+    <class name="devmicrophone" extends="devmediadevice" >
 
 
         <!--- Flash movie clip for microphone. 
@@ -51,7 +39,11 @@
 
         <!--- Mediastream to associate with the microphone, for audio recording. -->
         <attribute name="stream" value="null" setter="this._setStream(stream)"/>
-
+		
+		<attribute name="rate" value="11" type="number" />
+		
+		<!--- Microphone useEchoSupression -->
+		<attribute name="suppress" value="false" type="boolean" />
 
         <!--- Event sent when microphone level changes. 
               @keywords private -->
@@ -194,6 +186,24 @@
             }
           ]]>
         </method>
+		
+		<method name="setRate" args="rate">
+			<![CDATA[
+				this.rate = rate;
+				if (this._dev) {
+					this._dev.setRate(rate);
+				}
+			]]>
+		</method>
+		
+		<method name="setUseEchoSupression" args="supression">
+			<![CDATA[
+				this.supression = supression;
+				if (this._dev) {
+					this._dev.setUseEchoSuppression(supression);
+				}
+		    ]]>
+		</method>
 
 
     </class>
