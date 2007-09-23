@@ -7,5 +7,6 @@
 	<include href="devcamera.lzx" />
 	<include href="devrtmpconnection.lzx" />
 	<include href="simplenetstream.lzx" />	
+	<include href="devvideoview.lzx" />	
     
 </library>

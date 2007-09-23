@@ -51,6 +51,7 @@
 	<handler name="onvisible">
         Debug.write("this.isinited",this.isinited);
         if (this.isinited){
+			this._listofUsers.clearList();
             this.getClientListScope.doCall();
         }
 	</handler>

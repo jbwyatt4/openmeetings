@@ -80,19 +80,19 @@
 		</handler>
 		
 		<!-- This is the videoview -->
-		<videoview name="_videoview" visible="false" x="3" y="2" width="120" height="80" >
-	        <simplenetstream name="v_output" buffertime="0.5">
+		<devvideoview name="_videoview" visible="false" x="3" y="2" width="120" height="80" >		
+	        <simplenetstream name="v_output" buffertime="0.3">
 				<handler name="onstatus" args="info">
 					Debug.write("simplenetstream onstatus",info.code, info);
 				</handler>
 	        </simplenetstream>
-            <devcamera name="cameraRef" show="false" width="120" height="80" fps="20" bandwidth="8192" />
+            <devcamera name="cameraRef" show="false" width="120" height="80" fps="22" bandwidth="8192" />
             <devmicrophone name="microphoneRef" capturing="false">            
             	<handler name="onlevel">
             		this.parent.parent.parent._loadness.setLevel(this.level);
             	</handler>
             </devmicrophone>
-		</videoview>		
+		</devvideoview>		
 		<view name="_sendInvitation" visible="true" x="3" y="2" width="120" height="80" >
 			<handler name="onclick">
 				new invitemainwindow(canvas.main_content._content.inner);
@@ -100,6 +100,7 @@
 			<labeltext multiline="true" width="100" y="20" x="24" labelid="213" 
 				fgcolor="white" fontstyle="bold" />
 		</view>
+		
 	</view>
 	
 	<view name="_loadness" x="1" width="126" height="18" y="105" bgcolor="0xFFFFFF">
@@ -134,20 +135,20 @@
 		height="$once{ parent.height-21 }" y="20" x="1" bgcolor="white">
 		<method name="initUserObject">
 			<![CDATA[
-			this.setAttribute('visible',true);
-			var tString = '';
-			//Debug.write("clientVars: ",parent.clientVars);
-			for (var eg in parent.clientVars){
-				if (eg!='userip'){
-					tString += eg+': <BR/>'+parent.clientVars[eg]+'<BR />';
-				} else {
-					tString += eg+': <BR/>'+parent.clientVars[eg]+'<BR />';
-					tString += 'WHOIS:<BR/>';
-					tString += '<A HREF="http://www.networksolutions.com/whois/results.jsp?whoistoken='+parent.clientVars[eg]+'" TARGET="_BLANK">'+parent.clientVars[eg]+'</A><BR/><BR/>';
+				this.setAttribute('visible',true);
+				var tString = '';
+				//Debug.write("clientVars: ",parent.clientVars);
+				for (var eg in parent.clientVars){
+					if (eg!='userip'){
+						tString += eg+': <BR/>'+parent.clientVars[eg]+'<BR />';
+					} else {
+						tString += eg+': <BR/>'+parent.clientVars[eg]+'<BR />';
+						tString += 'WHOIS:<BR/>';
+						tString += '<A HREF="http://www.networksolutions.com/whois/results.jsp?whoistoken='+parent.clientVars[eg]+'" TARGET="_BLANK">'+parent.clientVars[eg]+'</A><BR/><BR/>';
+					}
 				}
-			}
-			//Debug.write("tString: ",tString);
-			this.inner._usertext.setText(tString);
+				//Debug.write("tString: ",tString);
+				this.inner._usertext.setText(tString);
 			]]>
 		</method>
 		<view x="$once{ parent.width-20 }" y="2" name="infoview" resource="showusercontextclose">
