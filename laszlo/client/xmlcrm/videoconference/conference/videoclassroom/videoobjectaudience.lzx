@@ -74,19 +74,17 @@
 		
 		<!-- This is the videoview  -->
 		<videoview name="_videoview" visible="false" x="5" width="240" height="180" y="0" >
-	        <mediastream name="v_output" debug="true" type="rtmp" >
-	            <handler name="onurl">
-	                //Debug.write("stream onurl ",this);
-					//Debug.write("stream onurl 2 ",this.url);
-	                //this.parent.play(-1,false);
-	            </handler>
-	        </mediastream>
-            <camera name="cameraRef" show="false" width="240" height="180" fps="30" />
-            <microphone name="microphoneRef" capturing="false">         
+	        <simplenetstream name="v_output" buffertime="0.5">
+				<handler name="onstatus" args="info">
+					Debug.write("simplenetstream onstatus",info.code, info);
+				</handler>
+	        </simplenetstream>
+            <devcamera name="cameraRef" show="false" width="240" height="180" fps="30" />
+            <devmicrophone name="microphoneRef" capturing="false">         
             	<handler name="onlevel">
             		this.parent.parent.parent._loadness.setLevel(this.level);
             	</handler>
-            </microphone>
+            </devmicrophone>
 		</videoview>
 
 	</view>

@@ -64,7 +64,7 @@
         
 <view x="0" y="0" name="_videoview" layout="axis:y;spacing:2">
     <videoview name="_videoview" width="320" height="240" >
-        <simplenetstream name="v_output" >
+        <simplenetstream name="v_output" buffertime="0.5">
 			<handler name="onstatus" args="info">
 				Debug.write("simplenetstream onstatus",info.code, info);
 			</handler>

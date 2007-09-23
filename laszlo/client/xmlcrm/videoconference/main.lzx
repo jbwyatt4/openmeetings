@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <canvas debug="false" width="100%" height="100%" >
-    
+ 
 <!-- these properties will be overwritten by config.xml
     
      -->  
@@ -99,7 +99,9 @@ of the red5-servlet
     -swagner
  -->
 <attribute name="_nc" value="null" />
-
+	
+<attribute name="vaquality" value="best" type="string" />
+	
 <attribute name="moderatorStreamID" value="" type="string" />
 <attribute name="moderatorationObject" value="" type="string" />
 <attribute name="moderatorName" type="string" setter="this.setModeratorName(moderatorName)" />

@@ -2,7 +2,8 @@
 <library>
 
 <class name="checkLoginData" extends="labelexplorerbox" labelid="108"
-    docking="true" resizeable="false" closable="false" width="360" x="350" y="0" height="260">
+    docking="true" resizeable="false" closable="false" 
+	width="360" x="350" y="0" height="260">
     
     <handler name="onclose">
     	if (this.childObj!=null) this.childObj.close();
@@ -112,6 +113,17 @@
 			</handler>
         </combobox>	
 	
+    <labeltext name="nlabelquality" text="Quality" y="162" x="2" visible="true" />     
+        <combobox name="ncomboquality" width="170" y="162" x="120" editable="false" >
+			<handler name="oninit">
+				this.addItem("best ~ 16KB upload","best");
+				this.addItem("medium ~ 10KB upload ","medium");
+				this.selectItem("best");
+			</handler>
+			<handler name="onselect">
+				canvas.vaquality = this.getValue();
+			</handler>
+	    </combobox>
 
     <labeltext name="n4" labelid="184" width="200" y="102" resize="false" x="2" visible="false" />     
         <combobox name="organisation" width="170" y="102" x="120" editable="false" visible="false" />
@@ -211,6 +223,8 @@
 					parent.n4.setAttribute('visible',true);
 					parent.organisation.setAttribute('visible',true);
 					parent.b3.setAttribute('visible',true);
+					parent.nlabelquality.setAttribute('visible',true);
+					parent.ncomboquality.setAttribute('visible',true);
 			
 					for (var i=0;i<value.organisation_users.length;i++){
 						parent.organisation.addItem(value.organisation_users[i].organisation.name,String(i));
