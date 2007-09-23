@@ -1,12 +1,4 @@
-<!-- * X_LZ_COPYRIGHT_BEGIN ***************************************************
-* Copyright 2006-2007 Laszlo Systems, Inc.  All Rights Reserved.              *
-* Use is subject to license terms.                                            *
-* X_LZ_COPYRIGHT_END ****************************************************** -->
 <library>
-
-
-    <include href="mediadevice.lzx"/>
-
 
     <!--
         Camera.
@@ -15,8 +7,8 @@
             <camera/>
         @END_CODE
     -->
-    <class name="camera" 
-        extends="mediadevice"
+    <class name="devcamera" 
+        extends="devmediadevice"
     >
 
 
@@ -249,10 +241,14 @@
             this.setAttribute("width", width);
             this.setAttribute("height", height);
             this.setAttribute("fps", fps);
-            this.setAttribute("favorsize", favorsize);
+			if (favorsize != undefined){
+				this.setAttribute("favorsize", favorsize);
+			} else {
+				this.setAttribute("favorsize", true);
+			}
 
             if (this._dev) {
-                this._dev.setMode(width, height, fps, favorsize); 
+                this._dev.setMode(this.width, this.height, this.fps, this.favorsize); 
             }
           ]]>
         </method> 

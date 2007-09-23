@@ -1,4 +1,4 @@
-#Sat Sep 22 17:03:47 CEST 2007
+#Sun Sep 23 18:07:52 CEST 2007
 =\=\=\=\=\=\=
 <<<<<<<=.mine
 >>>>>>>=.r486
@@ -15,14 +15,13 @@ encoding//xmlcrm/patches/lps403/menudataset_test.lzx=UTF-8
 encoding//xmlcrm/patches/lps403/rtmpconnection.lzx=UTF-8
 encoding//xmlcrm/patches/lps405/camera.lzx=UTF-8
 encoding//xmlcrm/patches/lps405/rtmpconnection.lzx=UTF-8
+encoding//xmlcrm/simplebroadcast/avlib/devcamera.lzx=UTF-8
 encoding//xmlcrm/simplebroadcast/avlib/devmediadevice.lzx=UTF-8
 encoding//xmlcrm/simplebroadcast/avlib/devmicrophone.lzx=UTF-8
+encoding//xmlcrm/simplebroadcast/avlib/library.lzx=UTF-8
 encoding//xmlcrm/simplebroadcast/avlib/simplenetstream.lzx=UTF-8
-encoding//xmlcrm/simplebroadcast/connection.lzx=UTF-8
+encoding//xmlcrm/simplebroadcast/broadcast.lzx=UTF-8
 encoding//xmlcrm/simplebroadcast/editrecordstream.lzx=UTF-8
-encoding//xmlcrm/simplebroadcast/maindebug.lzx=UTF-8
-encoding//xmlcrm/simplebroadcast/netremotecallhib.lzx=UTF-8
-encoding//xmlcrm/simplebroadcast/rtmpconnection.lzx=UTF-8
 encoding//xmlcrm/simplebroadcast/subscribe.lzx=UTF-8
 encoding//xmlcrm/streaming/camera.lzx=UTF-8
 encoding//xmlcrm/streaming/rtmpconnection.lzx=UTF-8
@@ -198,3 +197,4 @@ encoding//xmlcrm/videoconference/xmlcrm/hibernate/rtmphib.lzx=UTF-8
 encoding//xmlcrm/videoconference/xmlcrm/navi/mainnavi.lzx=UTF-8
 encoding//xmlcrm/videoconference/xmlcrm/navi/menuassets.lzx=UTF-8
 encoding//xmlcrm/videoconference/xmlcrm/navi/navifunctions.lzx=UTF-8
+instance/org.eclipse.core.net/org.eclipse.core.net.hasMigrated=true

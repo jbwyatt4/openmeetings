@@ -17,20 +17,30 @@
 	width="340" height="250" x="14" >
 
     <method name="doninitalize" args="valCam,valMic">
-    	////Debug.write("this.myvideocontainer: ",this.myvideocontainer);
+		
+		var cam = canvas._videoview._videoview.cameraRef;
+		var mic = canvas._videoview._videoview.microphoneRef;
     
-        canvas._videoview._videoview.cameraRef.setAttribute('deviceindex',valCam);
-        canvas._videoview._videoview.microphoneRef.setAttribute('deviceindex',valMic);
+		//set device-index
+        cam.setAttribute('deviceindex',valCam);
+        mic.setAttribute('deviceindex',valMic);	
+		
+		//do Cam and Microphone Setup
+		//camera.setMode(width, height, fps[, favorsize])
+		cam.setMode(canvas._videoview._videoview.width,canvas._videoview._videoview.height,30);
+		//camera.setQuality(bandwidth, picturequality)
+		cam.setQuality(0,0.7);
+		//Microphone.set
+		mic.setRate(44);
+		//Microphone setUseEchoSupression(bool)
+	    mic.setUseEchoSupression(true);
+		
+		//start audio and video
+	    mic.setAttribute('capturing',true);
+        cam.setAttribute('show',true);
 
-		canvas._videoview._videoview.parent.parent.setAttribute('isremote',false);		
-	    
-	    canvas._videoview._videoview.microphoneRef.setAttribute('capturing',true);
-        canvas._videoview._videoview.cameraRef.setAttribute('show',true);
-
-        canvas._videoview._videoview.v_output.islive = true;
-		canvas._videoview._videoview.v_output.setAttribute('streamname', canvas.streamname);
-        canvas._videoview._videoview.v_output.setAttribute('url', canvas.streamname);
-		//canvas._videoview._videoview.v_output.broadcast();
+		//start broadcast
+		canvas._videoview._videoview.v_output.broadcast(canvas.streamname,cam,mic);
 
         this.close();
     </method>    

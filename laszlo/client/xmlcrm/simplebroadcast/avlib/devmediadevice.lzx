@@ -1,16 +1,10 @@
-<!-- * X_LZ_COPYRIGHT_BEGIN ***************************************************
-* Copyright 2006-2007 Laszlo Systems, Inc.  All Rights Reserved.              *
-* Use is subject to license terms.                                            *
-* X_LZ_COPYRIGHT_END ****************************************************** -->
-
-
 <library>
 
 
     <!--
         Media device, an abstract class.
     -->
-    <class name="mediadevice" extends="node">
+    <class name="devmediadevice" extends="node">
 
 
         <!--- Shared flag defined in mediadevice.prototype that 
@@ -207,7 +201,7 @@
                     // to send them to a dead object. The class method
                     // forwards the message to all existing mediadevices.
 
-                    mediadevice.prototype._onStatusStatic(info);
+                    devmediadevice.prototype._onStatusStatic(info);
                 };
 
                 // Set up initial values for device properties.
@@ -431,9 +425,9 @@
     <script><![CDATA[
 
         // Initialize the shared class variables in mediadevice.prototype. 
-        mediadevice.prototype.allowed = false;
-        mediadevice.prototype._allowedknown = false;
-        mediadevice.prototype._instances = [];
+        devmediadevice.prototype.allowed = false;
+        devmediadevice.prototype._allowedknown = false;
+        devmediadevice.prototype._instances = [];
 
       ]]>
     </script>
