@@ -83,9 +83,6 @@
                 	}
                 }
                 canvas.thishib.getCurrentModerator.doCall(); 
-				//whats this for?
-				//refObj=null;
-				
                 ]]>
             </handler>   
         </netremotecallhib> 
@@ -93,20 +90,14 @@
 	<method name="addItem" args="connectedSince,isMod,streamid,username,userroom,formatedDate,position,color,object">
 		<![CDATA[
 		////Debug.write("initializeStreams addItem: ",connectedSince,isMod,streamid,username,userroom,formatedDate);
-		////Debug.write("initializeStreams addItem: username ",username);
-		////Debug.write("initializeStreams addItem: streamid ",streamid);
-		////Debug.write("initializeStreams addItem: object ",object);
 		if (streamid!=canvas.streamid){
             var myvideocontainer = this.getNewVideoObjectByPos(position);
-            //Debug.write("myvideocontainer: ",myvideocontainer.v_output);
-	  		myvideocontainer.v_output._stream=null;
+            myvideocontainer.v_output._stream=null;
 	  		myvideocontainer.parent.parent.clientVars = object;
 	  		myvideocontainer.parent.parent.setAttribute('chatpartnername',object.firstname+' '+object.lastname);
 	  		myvideocontainer.parent.parent.setAttribute('uniqueid',streamid);
 	  		myvideocontainer.parent.parent.setAttribute('isremote',true);
-	  		myvideocontainer.v_output.play(streamid,-1);
-	  		////Debug.write(myvideocontainer.v_output._nc);
-	  		////Debug.write(myvideocontainer.v_output._stream);		
+	  		myvideocontainer.v_output.play(streamid,-1);	
 		}
 		]]>
 	</method>
@@ -115,19 +106,13 @@
 	<method name="addClientItem" args="connectedSince,isMod,streamid,username,userroom,formatedDate,position,color,object">
 		<![CDATA[
 		////Debug.write("initializeStreams addClientItem: ",connectedSince,isMod,streamid,username,userroom,formatedDate);
-		////Debug.write("initializeStreams addClientItem: username ",username);
-		////Debug.write("initializeStreams addClientItem: object: ",object);
-		////Debug.write("initializeStreams addClientItem: streamid ",streamid);
 		if (streamid!=canvas.streamid){
             var myvideocontainer = this.getNewVideoObjectByPos(position);
-            ////Debug.write("myvideocontainer: ",myvideocontainer.v_output);
-	  		myvideocontainer.v_output._stream=null;
+            myvideocontainer.v_output._stream=null;
 	  		myvideocontainer.parent.parent.clientVars = object;
 	  		myvideocontainer.parent.parent.setAttribute('chatpartnername',object.firstname+' '+object.lastname);
 	  		myvideocontainer.parent.parent.setAttribute('uniqueid',streamid);
-	  		myvideocontainer.parent.parent.setAttribute('isremote',true);
-	  		////Debug.write(myvideocontainer.v_output._nc);
-	  		////Debug.write(myvideocontainer.v_output._stream);		
+	  		myvideocontainer.parent.parent.setAttribute('isremote',true);	
 		}
 		]]>
 	</method>
@@ -167,7 +152,7 @@
 				this.subviews[i]._chatvideoinner.setResourceNumber(canvas.currentuserpos+1);
 				this.subviews[i]._chatvideoinner._videoview.setAttribute('visible',true);
 				////Debug.write("canvas.currentusercolor : ",canvas.currentusercolor);
-				canvas.thishib.setUserObjectOne2Four.doCall();
+				canvas.thishib.setAudienceModus.doCall();
 			    this.subviews[i].setAttribute('chatpartnername',hib.userobject.firstname+' '+hib.userobject.lastname);
 				return this.subviews[i].getVideoReference();
 			}

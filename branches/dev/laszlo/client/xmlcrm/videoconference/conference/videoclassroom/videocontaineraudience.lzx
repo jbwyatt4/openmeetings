@@ -96,26 +96,15 @@
 	<method name="addItem" args="connectedSince,isMod,streamid,username,userroom,formatedDate,position,color,object">
 		<![CDATA[	
 		//Debug.write("initializeStreams addItem: ",connectedSince,isMod,streamid,username,userroom,formatedDate);
-		//Debug.write("initializeStreams addItem: username ",username);
-		//Debug.write("initializeStreams addItem: isMod ",object.isMod);
-		//Debug.write("initializeStreams addItem: object ",object);
 		if (streamid!=canvas.streamid && object.isMod){
             var myvideocontainer = this.getNewVideoObjectByPos();
-			//Debug.write("#####3###### : set play",myvideocontainer.v_output);
-            //Debug.write("myvideocontainer: ",myvideocontainer.v_output);
-	  		myvideocontainer.v_output._stream=null;
+			myvideocontainer.v_output._stream=null;
 	  		myvideocontainer.parent.parent.clientVars = object;
 	  		myvideocontainer.parent.parent.setAttribute('chatpartnername',object.firstname+' '+object.lastname);
 	  		myvideocontainer.parent.parent.setAttribute('uniqueid',streamid);
 	  		myvideocontainer.parent.parent.setAttribute('isremote',true);
-			//Debug.write("#####1###### set : set stream",streamid);
 			myvideocontainer.setAttribute('visible',true);
-	  		myvideocontainer.v_output.setAttribute('url',streamid);
-			//Debug.write("#####2###### : set play",myvideocontainer.v_output);
-	  		myvideocontainer.v_output.play();
-			
-			//Debug.write("#####3###### : set play",myvideocontainer.v_output);
-
+	  		myvideocontainer.v_output.play(streamid,-1);
 		}
 		]]>
 	</method>
@@ -125,9 +114,6 @@
 	<method name="addClientItem" args="connectedSince,isMod,streamid,username,userroom,formatedDate,position,color,object">
 		<![CDATA[
 		//Debug.write("initializeStreams addClientItem: ",connectedSince,isMod,streamid,username,userroom,formatedDate);
-		//Debug.write("initializeStreams addClientItem: username ",username);
-		//Debug.write("initializeStreams addClientItem: object: ",object);
-		//Debug.write("initializeStreams addClientItem: streamid ",streamid);
 		if (streamid!=canvas.streamid){
             var myvideocontainer = this.getNewVideoObjectByPos();
             //Debug.write("myvideocontainer: ",myvideocontainer.v_output);
@@ -135,9 +121,7 @@
 	  		myvideocontainer.parent.parent.clientVars = object;
 	  		myvideocontainer.parent.parent.setAttribute('chatpartnername',object.firstname+' '+object.lastname);
 	  		myvideocontainer.parent.parent.setAttribute('uniqueid',streamid);
-	  		myvideocontainer.parent.parent.setAttribute('isremote',true);
-	  		//Debug.write(myvideocontainer.v_output._nc);
-	  		//Debug.write(myvideocontainer.v_output._stream);		
+	  		myvideocontainer.parent.parent.setAttribute('isremote',true);	
 		}
 		]]>
 	</method>
@@ -152,8 +136,7 @@
             //remove Stream from view
             //Debug.write("Found client to startStream");
 			this._video1._chatvideoinner._videoview.setAttribute('visible',true);
-	  		this.subviews[userpos]._chatvideoinner._videoview.v_output.setAttribute('url',searchid);
-	  		this.subviews[userpos]._chatvideoinner._videoview.v_output.play(-1,false);	
+			this._video1._chatvideoinner._videoview.v_output.play(searchid,-1);
 			return this.subviews[userpos].getVideoReference();
 		}
 		return null;
@@ -168,7 +151,7 @@
 	 -->
 	<method name="getNewVideoObject">
 		<![CDATA[
-        //Debug.write("getNewVideoObject");
+        Debug.write("getNewVideoObject");
 		//Get a Free VideoView Slot
 		if (!this._video1.isassigned){
 			//A free Slot has been found
@@ -181,7 +164,9 @@
 			this._video1._chatvideoinner.setResourceNumber(1);
 			this._video1._chatvideoinner._videoview.setAttribute('visible',true);
 			//Debug.write("canvas.currentusercolor : ",canvas.currentusercolor);
-			canvas.thishib.setUserObjectOne2Four.doCall();
+			canvas.currentuserpos=1;
+			canvas.thishib.setAudienceModus.doCall();
+			//canvas.thishib.testMethod.doCall();
 			return this._video1.getVideoReference();
 		}
 
@@ -256,8 +241,9 @@
 		]]>
 	</method>	
 
+
 	<videoobjectaudience name="_video1" x="0" y="0" />
-	
+
 </class>
 
 </library>

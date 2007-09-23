@@ -1,4 +1,4 @@
-#Sun Sep 23 20:28:15 CEST 2007
+#Mon Sep 24 00:52:27 CEST 2007
 =\=\=\=\=\=\=
 <<<<<<<=.mine
 >>>>>>>=.r486
@@ -51,7 +51,9 @@ encoding//xmlcrm/videoconference/conference/popups/messagewin.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/popups/resultpollwin.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/popups/rpcerrordialog.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/remote/devcamera.lzx=UTF-8
+encoding//xmlcrm/videoconference/conference/remote/devmicrophone.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/remote/devrtmpconnection.lzx=UTF-8
+encoding//xmlcrm/videoconference/conference/remote/devvideoview.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/remote/library.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/remote/sharedobject.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/remote/simplenetstream.lzx=UTF-8

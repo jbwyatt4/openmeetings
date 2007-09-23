@@ -18,7 +18,7 @@
 	int chatpartnername
  -->
     
-<class name="videoobjectaudience" extends="view" width="252" height="270" visible="true">
+<class name="videoobjectaudience" extends="view" width="252" height="270" visible="true" >
 		
 	<!-- Set the Name of the partner -->
 	<attribute name="chatpartnername" value="" type="string" />
@@ -73,19 +73,19 @@
 		</handler>
 		
 		<!-- This is the videoview  -->
-		<videoview name="_videoview" visible="false" x="5" width="240" height="180" y="0" >
-	        <simplenetstream name="v_output" buffertime="0.5">
+		<devvideoview name="_videoview" visible="false" x="5" width="240" height="180" y="0" >
+	        <simplenetstream name="v_output" buffertime="0.3">
 				<handler name="onstatus" args="info">
 					Debug.write("simplenetstream onstatus",info.code, info);
 				</handler>
 	        </simplenetstream>
-            <devcamera name="cameraRef" show="false" width="240" height="180" fps="30" />
+            <devcamera name="cameraRef" show="false" width="240" height="180" fps="22" bandwidth="16384" />
             <devmicrophone name="microphoneRef" capturing="false">         
             	<handler name="onlevel">
             		this.parent.parent.parent._loadness.setLevel(this.level);
             	</handler>
             </devmicrophone>
-		</videoview>
+		</devvideoview>
 
 	</view>
 	

@@ -219,18 +219,25 @@
             </handler>  
         </netremotecallhib>        
         
-        <netremotecallhib name="setUserObjectOne2Four" funcname="setUserObjectOne2Four">
-            <netparam name="vars1"><method name="getValue"> return canvas.currentusercolor; </method></netparam>        
-            <netparam name="vars2"><method name="getValue"> return canvas.currentuserpos; </method></netparam>      
+        <netremotecallhib name="testMethod" funcname="testMethod">
             <handler name="ondata" args="value">
                 //The onResult-Handler will be called be the rtmpconnection
-                //Debug.write("setUserObjectOne2Four: ",value);                   
+                Debug.write("testMethod ",value);                   
             </handler>  
         </netremotecallhib>
-        <netremotecallhib name="setUserObjectNewOne2Four" funcname="setUserObjectNewOne2Four">
+
+        <netremotecallhib name="setAudienceModus" funcname="setAudienceModus">
+            <netparam><method name="getValue">return canvas.currentusercolor;</method></netparam>        
+            <netparam><method name="getValue">return canvas.currentuserpos;</method></netparam>      
             <handler name="ondata" args="value">
                 //The onResult-Handler will be called be the rtmpconnection
-                //Debug.write("setUserObjectNewOne2Four: ",value);    
+                Debug.write("setAudienceModus: ",value);                   
+            </handler>  
+        </netremotecallhib>
+        <netremotecallhib name="setAudienceModusClient" funcname="setAudienceModusClient">
+            <handler name="ondata" args="value">
+                //The onResult-Handler will be called be the rtmpconnection
+                Debug.write("setUserObjectNewOneFour: ",value);    
                 canvas._videocontainer.addClientItem(value.connectedSince,value.isMod,value.streamid,value.username,value.userroom,value.formatedDate,value.userpos,value.usercolor,value); 
                 canvas.setAttribute('numberofpartners',canvas.getAttribute('numberofpartners')+1);                              
             </handler>  
@@ -238,35 +245,35 @@
         <netremotecallhib name="getCurrentModerator" funcname="getCurrentModerator">
             <handler name="ondata" args="value">
 				<![CDATA[
-                //The onResult-Handler will be called be the rtmpconnection
-                Debug.write("getCurrentModerator: ",value);
-				if (value!=null){
-					canvas.setAttribute('moderatorationObject',value);
-					canvas.setAttribute('moderatorStreamID',value.streamid);
-					canvas.setAttribute('moderatorName',value.firstname+' '+value.lastname);
-				} else {
-					
-				}
-				
-                //Debug.write("throw event to drawarea: ",canvas.moderatorStreamID,canvas.ismoderator);
-				if (canvas.ismoderator){
-					Debug.write("############## editrecordstream 3");
-					new editrecordstream(canvas.main_content._content.inner,{y:-320});
-				} else if (value==null){
-					//no moderator availible
-					//check if this is conferncemodus
-					if (this.parent.modus == "confernce"){
-						Debug.write("############## editrecordstream 4");
-						new editrecordstream(canvas.main_content._content.inner,{y:-320});
+					//The onResult-Handler will be called be the rtmpconnection
+					Debug.write("getCurrentModerator: ",value);
+					if (value!=null){
+						canvas.setAttribute('moderatorationObject',value);
+						canvas.setAttribute('moderatorStreamID',value.streamid);
+						canvas.setAttribute('moderatorName',value.firstname+' '+value.lastname);
 					} else {
-						// in audience modus you get no notification
-						// cause you are not able to register your stream
-						// as non moderator
+						
+					}
 					
-					}					
-				} else {
-					_drawarea.onopenWhiteBoard.sendEvent();
-				}
+					//Debug.write("throw event to drawarea: ",canvas.moderatorStreamID,canvas.ismoderator);
+					if (canvas.ismoderator){
+						Debug.write("############## editrecordstream 3");
+						new editrecordstream(canvas.main_content._content.inner,{y:-320});
+					} else if (value==null){
+						//no moderator availible
+						//check if this is conferncemodus
+						if (this.parent.modus == "confernce"){
+							Debug.write("############## editrecordstream 4");
+							new editrecordstream(canvas.main_content._content.inner,{y:-320});
+						} else {
+							// in audience modus you get no notification
+							// cause you are not able to register your stream
+							// as non moderator
+						
+						}					
+					} else {
+						_drawarea.onopenWhiteBoard.sendEvent();
+					}
 				]]>
             </handler>  
         </netremotecallhib>        

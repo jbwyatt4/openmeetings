@@ -74,7 +74,8 @@
 		//camera.setMode(width, height, fps[, favorsize])
 		this.myvideocontainer.cameraRef.setMode(this.myvideocontainer.width,this.myvideocontainer.height,30);
 		//camera.setQuality(bandwidth, picturequality)
-		this.myvideocontainer.cameraRef.setQuality(this.myvideocontainer.cameraRef.bandwidth,0.7);
+		Debug.write("this.myvideocontainer.cameraRef.bandwidth: ",this.myvideocontainer.cameraRef.bandwidth);
+		this.myvideocontainer.cameraRef.setQuality(this.myvideocontainer.cameraRef.bandwidth,0.9);
 		//Microphone.set
 		if (canvas.vaquality=="best") {
 			this.myvideocontainer.microphoneRef.setRate(44);
@@ -84,7 +85,7 @@
 		
 		//Microphone setUseEchoSupression(bool)
 	    this.myvideocontainer.microphoneRef.setUseEchoSupression(true);
-		
+		this.myvideocontainer.v_output.setBufferTime(0);
 		this.myvideocontainer.v_output.broadcast(canvas.streamid,this.myvideocontainer.cameraRef,this.myvideocontainer.microphoneRef);
         
         this.myvideocontainer.parent.parent.setAttribute('chatpartnername',canvas.firstName+' '+canvas.lastName);
@@ -107,9 +108,7 @@
             <![CDATA[
 				//Get all availible Cam's
 				this.parent.myvideocontainer = canvas._videocontainer.getNewVideoObject();
-				
 				Debug.write("availibleCams this.parent.myvideocontainer ",this.parent.myvideocontainer);
-				
 				var tw = this.parent.myvideocontainer.cameraRef.getCameraNames();
 				var r = "";
 				for (var eg=0;eg<tw.length;eg++){
