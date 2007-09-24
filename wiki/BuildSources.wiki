@@ -3,7 +3,11 @@
 
 = Source Locations Developer Version =
 
-= LaszloClient =
+You need to compile two apps:
+  * Client - build with OpenLaszlo
+  * Webapp - Java-Webapp
+
+= Openlaszlo Client (Client-Side) =
 
 http://openmeetings.googlecode.com/svn/branches/dev/laszlo/client/
 
@@ -20,7 +24,7 @@ Step-By-Step:
   * alter the config.xml in videoconference/config.xml (for example C:/Program Files/Openlaszlo Server 4.0.5/Server/lps-4.0.5/videoconference/config.xml) ... _rtmphostlocal should match the IP/domain of your red5-streaming server (if its on the same IP like your Openlaszlo-Server you can leave it blank)
   * Start OpenLaszlo Server and run: http://localhost($LPS-HOST):8080
 
-Java Layer:
+= Java Webapp (Server-Side) =
 
 http://openmeetings.googlecode.com/svn/branches/dev/xmlcrm/java/
 
@@ -42,6 +46,7 @@ you can download the latest Beta-release and replace the jar-files there to get 
 == TODO ==
 
 write an ant-task to compile a binary release of the webapp
+ 
  
  
  
