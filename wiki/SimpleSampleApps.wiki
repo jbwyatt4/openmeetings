@@ -1,4 +1,4 @@
-#summary Some simle OpenLaszlo Red5 Sample Apps
+#summary Some simple OpenLaszlo Red5 Sample Apps
 
 There are some small test apps for usage of Open-Laszlo with Red5:
 
@@ -14,6 +14,7 @@ There are some small test apps for usage of Open-Laszlo with Red5:
   * Compiled Binary: http://inno02.fh-pforzheim.de:8080/xmlcrm/subscribe.lzx.lzr=swf8.swf
   * To compile the Sources you need just place the content in of the sources into an OpenLaszlo Server (version 4.0.5)
 
+ 
  
  
  
