@@ -596,12 +596,26 @@ public class Application extends ApplicationAdapter implements
 		}
 		return currentClient;
 	}	
-	public int setUserObjectOne2Four(String colorObj, int userPos){
+	
+	public String testMethod() {
 		try {
 			IConnection current = Red5.getConnectionLocal();
 			
 			RoomClient currentClient = ClientList.get(current.getClient().getId());
-			log.error("xmlcrm setUserObjectOne2Four: "+currentClient.getUsername());
+			log.error("testMethod: "+currentClient.getUsername());
+			
+		} catch (Exception err) {
+			log.error("[testMethod]",err);
+		}
+		return "ulllli";	
+	}
+	
+	public int setAudienceModus(String colorObj, int userPos){
+		try {
+			IConnection current = Red5.getConnectionLocal();
+			
+			RoomClient currentClient = ClientList.get(current.getClient().getId());
+			log.error("xmlcrm setUserObjectOneFour: "+currentClient.getUsername());
 			currentClient.setUsercolor(colorObj);
 			currentClient.setUserpos(userPos);
 			String roomname = currentClient.getUserroom();
@@ -615,10 +629,12 @@ public class Application extends ApplicationAdapter implements
 				} else {				
 					RoomClient rcl = ClientList.get(conn.getClient().getId());
 					//Check if the Client is in the same room and same domain 
-					if(roomname.equals(rcl.getUserroom()) && orgdomain.equals(rcl.getDomain())){					
+					if(roomname.equals(rcl.getUserroom()) && orgdomain.equals(rcl.getDomain())){	
+						log.error("setUserObjectOneFour Found Client to " + conn);
+						log.error("setUserObjectOneFour Found Client to " + conn.getClient());
 						if (conn instanceof IServiceCapableConnection) {
-							((IServiceCapableConnection) conn).invoke("setUserObjectNewOne2Four",new Object[] { currentClient }, this);
-							log.error("sending setUserObjectNewOne2Four to " + conn);
+							((IServiceCapableConnection) conn).invoke("setAudienceModusClient",new Object[] { currentClient }, this);
+							log.error("sending setUserObjectNewOneFour to " + conn);
 						}
 					}
 				}
@@ -638,7 +654,7 @@ public class Application extends ApplicationAdapter implements
 		try {
 			IConnection current = Red5.getConnectionLocal();
 			RoomClient currentClient = ClientList.get(current.getClient().getId());
-			log.error("xmlcrm setUserObjectOne2Four: "+currentClient.getUsername());			
+			log.error("xmlcrm getClientListScope: "+currentClient.getUsername());			
 			String roomname = currentClient.getUserroom();
 			String orgdomain = currentClient.getDomain();				
 			Set<String> keys = ClientList.keySet();
