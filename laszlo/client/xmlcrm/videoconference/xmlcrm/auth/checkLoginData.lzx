@@ -223,8 +223,8 @@
 					parent.n4.setAttribute('visible',true);
 					parent.organisation.setAttribute('visible',true);
 					parent.b3.setAttribute('visible',true);
-					parent.nlabelquality.setAttribute('visible',true);
-					parent.ncomboquality.setAttribute('visible',true);
+					parent.nlabelquality.setAttribute('visible',false);
+					parent.ncomboquality.setAttribute('visible',false);
 			
 					for (var i=0;i<value.organisation_users.length;i++){
 						parent.organisation.addItem(value.organisation_users[i].organisation.name,String(i));
