@@ -10,7 +10,7 @@ http://openmeetings.googlecode.com/svn/branches/dev/laszlo/client/
 for compiling the client you need to install the Open-Laszlo-Server:
 http://www.openlaszlo.org
 
-please the content of 
+place the content of 
 http://openmeetings.googlecode.com/svn/branches/dev/laszlo/client/xmlcrm/videoconference/
 
 and you need to replace the rtmpconnection.lzx from your OpenLaszlo Installation with this one:
@@ -39,5 +39,6 @@ you can download the latest Beta-release and replace the jar-files there to get 
 == TODO ==
 
 write an ant-task to compile a binary release of the webapp
+ 
  
  
