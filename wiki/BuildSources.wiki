@@ -3,7 +3,7 @@
 
 = Source Locations Developer Version =
 
-LaszloClient:
+= LaszloClient =
 
 http://openmeetings.googlecode.com/svn/branches/dev/laszlo/client/
 
@@ -13,9 +13,12 @@ http://www.openlaszlo.org
 place the content of 
 http://openmeetings.googlecode.com/svn/branches/dev/laszlo/client/xmlcrm/videoconference/
 
-and you need to replace the rtmpconnection.lzx from your OpenLaszlo Installation with this one:
-http://openmeetings.googlecode.com/svn/branches/dev/laszlo/client/xmlcrm/patches/lps403/
-
+Step-By-Step:
+  * Download and Install Open-Laszlo 4.0.5 (Version 4.0.5 is needed!)
+  * Checkout from the SVN using http://openmeetings.googlecode.com/svn/branches/dev/laszlo/client/ as root of your Project ($CLIENT_SOURCE_ROOT)
+  * Copy the directory videoconference of $CLIENT_SOURCE_ROOT/xmlcrm/ into your Openlaszlo -WebRoot ($LPS-HOME/Server/lps-4.0.5/) ... on Windows your Path if you're using the default one's will look like C:/Program Files/Openlaszlo Server 4.0.5/Server/lps-4.0.5/videoconference/... 
+  * alter the config.xml in videoconference/config.xml (for example C:/Program Files/Openlaszlo Server 4.0.5/Server/lps-4.0.5/videoconference/config.xml) ... _rtmphostlocal should match the IP/domain of your red5-streaming server (if its on the same IP like your Openlaszlo-Server you can leave it blank)
+  * Start OpenLaszlo Server and run: http://localhost($LPS-HOST):8080
 
 Java Layer:
 
@@ -39,6 +42,7 @@ you can download the latest Beta-release and replace the jar-files there to get 
 == TODO ==
 
 write an ant-task to compile a binary release of the webapp
+ 
  
  
  
