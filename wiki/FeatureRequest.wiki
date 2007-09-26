@@ -10,7 +10,7 @@ User-List: http://groups.google.com/group/openmeetings-user
 
 = Release 0.5 Final =
 
-  * resizeable video-views at conference modus (by c.kung)
+  * resizeable video-views at conference modus (see Issue194) (by c.kung)
   * support for right-to-left languages (see Issue177) (by M.Omr) 
 
 = Release 0.6 =
