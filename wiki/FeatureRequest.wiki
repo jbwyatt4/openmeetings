@@ -1,4 +1,5 @@
 #summary You can post / comment here feature's you would like to see
+#labels Featured
 
 You can also post your request to the mailing lists to discuss your requests:
 
