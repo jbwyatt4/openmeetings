@@ -19,6 +19,8 @@ User-List: http://groups.google.com/group/openmeetings-user
   * contact-management for each user (gmludo)
   * seperated file-control system / file-browser
   * history of conference-events
+  * possibility to talk in audience modus (Issue197) (by c.kung)
+  * private chat feature (Issue198) (by miltonshaw) 
 
 = Release 0.7 =
 
