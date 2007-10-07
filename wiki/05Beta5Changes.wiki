@@ -1,0 +1,13 @@
+#summary 0.5 Beta5 Changes
+
+= Main Changes =
+
+  * imporved audio / video quality settings
+  * compability to red5-0.6.3
+  * lot of bugfixes
+  * fixes video-freeze bug from Issue178
+
+
+= Minor Changes =
+
+  * repaired invitation-system
