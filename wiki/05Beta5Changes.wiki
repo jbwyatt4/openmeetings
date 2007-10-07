@@ -3,6 +3,7 @@
 = Main Changes =
 
   * imporved audio / video quality settings
+  * choose a/v quality at login
   * compability to red5-0.6.3
   * reworked video/audio components (now independent from OpenLaszlo Components)
   * Bugfixes
