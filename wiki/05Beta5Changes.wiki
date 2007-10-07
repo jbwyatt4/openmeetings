@@ -4,10 +4,12 @@
 
   * imporved audio / video quality settings
   * compability to red5-0.6.3
-  * lot of bugfixes
+  * reworked video/audio components (now independent from OpenLaszlo Components)
+  * Bugfixes
   * fixes video-freeze bug from Issue178
 
 
 = Minor Changes =
 
   * repaired invitation-system
+  * choose language combobox for invited users
