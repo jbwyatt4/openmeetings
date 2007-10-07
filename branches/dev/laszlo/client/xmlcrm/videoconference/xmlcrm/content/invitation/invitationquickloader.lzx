@@ -5,13 +5,42 @@
     docking="true" resizeable="false" closable="false" width="324" x="300" y="0" height="120">
 	 
 	<attribute name="userlang" value="1" type="number" />
+	 
+    <labeltext name="labellanguages" labelid="227" width="200" y="30" resize="false" x="10" />     
+        <combobox name="languages" width="170" y="30" x="120" editable="false">
+            <netremotecallhib name="getLanguages" funcname="xmlcrm.getLanguages" remotecontext="$once{ canvas.thishib }" >      
+                <handler name="oninit">
+                    this.doCall();
+                </handler>
+                <handler name="ondata" args="value">
+                    //The onResult-Handler will be called be the rtmpconnection
+                    //Debug.write("getLanguages: ",value);
+                    <![CDATA[
+                    for (var i=0;i<value.length;i++){
+                        this.parent.addItem(value[i].name,value[i].language_id);
+                    }
+                    this.parent.selectItem(value[0].language_id);
+                    ]]>
+                </handler>  
+            </netremotecallhib>
+        </combobox>		 
 
-	<labeltext y="30" x="10" fontstyle="bold" labelid="229" />
+	<labeltext name="labelloading" y="30" x="10" fontstyle="bold" labelid="229" visibility="hidden" />
+	 
+	 	<simplelabelbutton name="connect" y="80" x="120" text="start" 
+			labelid="228" width="170" height="20" onclick="parent.login();" />
 
-    <handler name="oninit">
+    <method name="login">
         //Debug.write("this.parent: ",this.parent);
+		
+		this.userlang = Number(this.languages.getValue());
+		
+		this.labellanguages.setAttribute('visibility','hidden');
+		this.languages.setAttribute('visibility','hidden');
+		this.connect.setAttribute('visibility','hidden');
+		this.labelloading.setAttribute('visibility','visible');
            
-        parent.userlang = Number(parent.languages.getValue());
+        parent.userlang = Number(this.userlang);
            
         var userObject = new Array();
            
@@ -36,18 +65,18 @@
            
         hib.userobject = userObject;
            
-        hib.userlang = Number(parent.languages.getValue());
+        hib.userlang = Number(this.userlang);
 
         this.getLanguageById.doCall();
                   
-    </handler>
+    </method>
 
     <netremotecallhib name="getLanguageById" funcname="xmlcrm.getLanguageById" 
 		remotecontext="$once{ canvas.thishib }" >      
         <netparam name="vars1"><method name="getValue"> return parent.parent.userlang; </method></netparam> 
         <handler name="ondata" args="value">
             //The onResult-Handler will be called be the rtmpconnection
-            //Debug.write("getLanguageById: ",value);
+            Debug.write("getLanguageById: ",value);
             setLabelObject(value);
 			parent.getStates.doCall();
         </handler>  
@@ -58,7 +87,7 @@
 		remotecontext="$once{ canvas.thishib }" >  
         <handler name="ondata" args="value">
             //The onResult-Handler will be called be the rtmpconnection
-            //Debug.write("getStates: ",value);
+            Debug.write("getStates: ",value);
             canvas.statesInitValues = value;
             parent.getUserSalutations.doCall();
         </handler>  
@@ -67,9 +96,10 @@
     <netremotecallhib name="getUserSalutations" funcname="userservice.getUserSalutations" 
 		remotecontext="$once{ canvas.thishib }" >  
 		<netparam name="vars1"><method name="getValue">return canvas.sessionId;</method></netparam>
+        <netparam name="vars2"><method name="getValue"> return parent.parent.userlang; </method></netparam> 
         <handler name="ondata" args="value">
             //The onResult-Handler will be called be the rtmpconnection
-            //Debug.write("getUserSalutations ",value);
+            Debug.write("getUserSalutations ",value);
             canvas.salutationsInitValues = value;
             parent.getRoomTypes.doCall();
         </handler>  
@@ -80,7 +110,7 @@
 		<netparam name="vars1"><method name="getValue">return canvas.sessionId;</method></netparam>
         <handler name="ondata" args="value">
             //The onResult-Handler will be called be the rtmpconnection
-            //Debug.write("getRoomTypes ",value);
+            Debug.write("getRoomTypes ",value);
             canvas.roomTypesInitValues = value;
             parent.setUsername.doCall();
         </handler>  
@@ -92,16 +122,15 @@
         <netparam name="vars2"><method name="getValue">return canvas.currentuser;</method></netparam>
         <netparam name="vars3"><method name="getValue">return canvas.firstName;</method></netparam>
         <netparam name="vars4"><method name="getValue">return canvas.lastName;</method></netparam>      
-        <netparam name="vars6"><method name="getValue">return parent.parent.currentdomain;</method></netparam>
+        <netparam name="vars6"><method name="getValue">return canvas.initdomainid;</method></netparam>
         <handler name="ondata" args="value">
             //The onResult-Handler will be called be the rtmpconnection
-            //Debug.write("setUsername: ",value);
+            Debug.write("setUsername: ",value);
 	        hib.connectedroom=canvas.initroomid;
             hib.conferencedomain = canvas.initdomainid;
 
             //Debug.write("hib.conferencedomain: ",hib.conferencedomain);
-            clearStageContent();
-            canvas._mainbgcontentNavi.navi._innercontent.clearAllSubItemLists(); 			
+            clearStageContent();		
 			if (canvas.initroomtype=="conference"){
 				new conference(canvas.main_content._content.inner); 
 			} else {
