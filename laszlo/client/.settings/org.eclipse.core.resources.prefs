@@ -1,4 +1,4 @@
-#Mon Sep 24 00:52:27 CEST 2007
+#Sat Oct 06 11:07:03 CEST 2007
 =\=\=\=\=\=\=
 <<<<<<<=.mine
 >>>>>>>=.r486
@@ -141,6 +141,8 @@ encoding//xmlcrm/videoconference/resources/library.lzx=UTF-8
 encoding//xmlcrm/videoconference/test/content/audiotest.lzx=UTF-8
 encoding//xmlcrm/videoconference/test/content/library.lzx=UTF-8
 encoding//xmlcrm/videoconference/test/lang/en.lzx=UTF-8
+encoding//xmlcrm/videoconference/test/lazslo-rtltext/rtltext.lzx=UTF-8
+encoding//xmlcrm/videoconference/test/lazslo-rtltext/test.lzx=UTF-8
 encoding//xmlcrm/videoconference/test/lib/library.lzx=UTF-8
 encoding//xmlcrm/videoconference/test/lib/nextButton.lzx=UTF-8
 encoding//xmlcrm/videoconference/test/main.lzx=UTF-8

@@ -28,8 +28,8 @@
     
     <attribute name="labeliderror" value="0" type="number" />
     
-    <labeltext name="n1" labelid="109" width="200" y="42" resize="false" x="2"/>
-        <customedittext name="username" y="42" x="120" width="170" >
+    <labeltext name="n1" labelid="109" width="200" y="24" resize="false" x="2"/>
+        <customedittext name="username" y="24" x="120" width="170" >
             <handler name="oninit">
                 var t = new sharedobject();
                 t.getLocal('userdata');
@@ -39,8 +39,8 @@
             </handler>             
         </customedittext>    
 
-    <labeltext name="n2" labelid="110" width="200" y="72" resize="false" x="2"/>
-        <customedittext name="userpass" y="72" password="true" x="120" width="170" >
+    <labeltext name="n2" labelid="110" width="200" y="54" resize="false" x="2"/>
+        <customedittext name="userpass" y="54" password="true" x="120" width="170" >
             <method event="oninit">
                 var t = new sharedobject();
                 t.getLocal('userdata');
@@ -49,9 +49,9 @@
             </method>                
         </customedittext>
     
-    <labeltext name="n3" labelid="111" width="200" y="102" resize="false" x="2"/>  
+    <labeltext name="n3" labelid="111" width="200" y="84" resize="false" x="2"/>  
         
-        <combobox name="languages" width="170" y="102" x="120" editable="false">
+        <combobox name="languages" width="170" y="84" x="120" editable="false">
             <netremotecallhib name="getLanguages" funcname="xmlcrm.getLanguages" remotecontext="$once{ canvas.thishib }" >      
                 <handler name="oninit">
                     this.doCall();
@@ -69,9 +69,9 @@
             </netremotecallhib>
         </combobox>
 	
-    <labeltext name="n5" text="Color-Style" width="200" y="132" resize="false" x="2"/>  
+    <labeltext name="n5" text="Color-Style" width="200" y="114" resize="false" x="2"/>  
         
-        <combobox name="colors" width="170" y="132" x="120" editable="false">
+        <combobox name="colors" width="170" y="114" x="120" editable="false">
 			<attribute name="initselect" value="true" type="boolean" />
             <handler name="oninit">
 				this.addItem('redorange','redorange');
@@ -113,8 +113,8 @@
 			</handler>
         </combobox>	
 	
-    <labeltext name="nlabelquality" text="Quality" y="162" x="2" visible="true" />     
-        <combobox name="ncomboquality" width="170" y="162" x="120" editable="false" >
+    <labeltext name="nlabelquality" text="Quality" y="144" x="2" visible="true" />     
+        <combobox name="ncomboquality" width="170" y="144" x="120" editable="false" >
 			<handler name="oninit">
 				this.addItem("best ~ 16KB upload","best");
 				this.addItem("medium ~ 10KB upload ","medium");
@@ -125,8 +125,8 @@
 			</handler>
 	    </combobox>
 
-    <labeltext name="n4" labelid="184" width="200" y="102" resize="false" x="2" visible="false" />     
-        <combobox name="organisation" width="170" y="102" x="120" editable="false" visible="false" />
+    <labeltext name="n4" labelid="184" width="200" y="84" resize="false" x="2" visible="false" />     
+        <combobox name="organisation" width="170" y="84" x="120" editable="false" visible="false" />
         
     <simplelabelbutton labelid="123" name="_register" width="120" y="$once{ parent.height-40 }" 
         visible="false" x="100">
@@ -155,7 +155,7 @@
     	</handler>
     </simplelabelbutton> 	
     
-     <text name="errormess" resize="true" y="158" />
+     <text name="errormess" resize="true" y="168" x="2" fgcolor="red" fontsize="12"/>
 
     <netremotecallhib name="loginUser" funcname="xmlcrm.loginUser" remotecontext="$once{ canvas.thishib }" >      
         <netparam name="vars1"><method name="getValue"> return canvas.sessionId; </method></netparam>  
