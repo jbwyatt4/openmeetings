@@ -15,7 +15,7 @@
   * configure Red5, the default ports Red5 is listening are also the default ports openmeetings application will try to connect. However you will find the exact port settings in _$RED5-HOME/conf/red5.properties_ (or follow the installation of red5)
 
 = Install Openmeetings =
-  # Download Openmeetings 0.5 Rc5 (beta5) from [ http://code.google.com/p/openmeetings/downloads/list Openmeetings-Download-Page]
+  # Download Openmeetings 0.5 Rc5 (beta5) from [ http://code.google.com/p/openmeetings/downloads/list Openmeetings-Download-Page] (Please make sure that you use an up-to-date unzip-software)
   # Unpack it to _$RED5-HOME/webapps/_ your new folder structure will be _$RED5-HOME/webapps/xmlcrm/_ this is the base directory of Openmeetings (following $OPENMEETINGS-HOME)
   # Prepare Database Settings - goto $OPENMEETINGS-HOME/install there are two preconfigured files for MySQL and Postgres: mysql_hibernate.cfg.xml and postgres_hibernate.cfg.xml. Following explains it for MySQL-Database-Users, Postgres-Database-Users and Any-Database-Users. Choose Your One!! Of course the database must already exist! Meaning if you want to use  `jdbc:mysql://localhost/xmlcrm` then the database `xmlcrm` must be already an existing empty database!!
     * MySQL-Database-User: Rename `mysql_hibernate.cfg.xml` to `hibernate.cfg.xml` and alter following config values in (`mysql_`)`hibernate.cfg.xml`
