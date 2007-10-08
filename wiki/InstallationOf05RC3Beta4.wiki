@@ -1,5 +1,4 @@
 #summary Installation of 05 Release Candidate 4
-#labels Featured
 
 
 = Requirements =
@@ -78,5 +77,3 @@ If you have it that far and openoffice+imagmagick runs correctly your installati
   }}}
   * Use the Debug-Application: Enter in your browser http://$RED-HOST:$RED5-PORT/xmlcrm/maindebug.lzx.lzr=swf8.swf for example http://localhost:5080/xmlcrm/maindebug.lzx.lzr=swf8.swf
   * If you have Problems with convertion-jops check your Red5-Log output. There will be error Messages which help you. You must install Open-Office and `ImageMagick` and `GhostScript` to run all Convertion-Jobs correctly.
-
-
