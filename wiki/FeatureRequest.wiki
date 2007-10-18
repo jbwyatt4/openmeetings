@@ -22,6 +22,7 @@ User-List: http://groups.google.com/group/openmeetings-user
   * history of conference-events
   * possibility to talk in audience modus (Issue197) (by c.kung)
   * private chat feature (Issue198) (by miltonshaw) 
+  * mute button (by rancho) (Issue204)
 
 = Release 0.7 =
 
