@@ -108,7 +108,7 @@
 
 <class name="conferencecontainertab" extends="tabs" inset_top="2" inset_left="2"
     width="262" height="286" tabclass="icontab" >
-    <charttab iconresourcename="ksirc_rsc2" labelid="244" />
+    <chattab iconresourcename="ksirc_rsc2" labelid="244" />
     <uploadtab iconresourcename="library2" labelid="245" />
     <participants iconresourcename="kuser_rsc2" labelid="246" />
 </class>    

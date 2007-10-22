@@ -2,7 +2,7 @@
 <library>
 
 <class name="answerpoll" extends="labelexplorerbox" labelid="18"
-    docking="true" resizeable="false" closable="false" width="500" x="100" y="220" height="240">
+    docking="true" resizeable="false" closable="true" width="500" x="100" height="240">
     
 	<attribute name="createdBy" type="string" value="" />
 	<attribute name="pollDate" type="string" value="" />
@@ -45,11 +45,8 @@
 		</handler>
 	</combobox>
 	
-    <simplelabelbutton labelid="25" width="200" x="80" y="218">
-    	<handler name="onclick">
-    		this.parent.close();
-    	</handler>
-    </simplelabelbutton>
+    <simplelabelbutton labelid="25" width="200" x="80" y="218" 
+        onclick="this.parent.close();" />
     
     <simplelabelbutton labelid="32" width="200" x="290" y="218">
     	<handler name="onclick">

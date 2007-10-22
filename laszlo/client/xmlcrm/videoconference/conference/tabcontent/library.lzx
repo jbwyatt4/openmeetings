@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library>
 
-	<include href="charttab.lzx" />
+	<include href="chattab.lzx" />
 	<include href="participants.lzx" />
 
 	<include href="files/" />

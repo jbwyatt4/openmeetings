@@ -198,7 +198,7 @@
 		//no init-object so load directly
 		} else if (isInitLoader){
 			//check if this is conference or audience modus
-			if (canvas.thishib.modus == "confernce"){
+			if (canvas.thishib.modus == "conference"){
 				//Debug.write("############## editrecordstream 1");
 				new editrecordstream(canvas.main_content._content.inner,{y:-320});	
 			} else if(canvas.thishib.modus == "audience"){
@@ -423,7 +423,7 @@
 		//check if this is syncing cause if init of new user
 		if (this.isInitLoader){
 			//check if this is conference or audience modus
-			if (canvas.thishib.modus == "confernce"){
+			if (canvas.thishib.modus == "conference"){
 				//Debug.write("############## editrecordstream 2");
 				new editrecordstream(canvas.main_content._content.inner,{y:-320});	
 			} else if(canvas.thishib.modus == "audience"){

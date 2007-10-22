@@ -8,92 +8,38 @@ var labelObj;
 var tempActionForNavi = '';
     
 function quicklink(action){
+    mainmenuList.doAction(action);
+}   
+    
+function quicklinkAct(action){
     var t = new Array();
-    t["action"]=action;
+    t.action = action;
     loadContent(t,null,null);
-}        
+}            
 
 function loadContent(obj,parentobj,preparentobj){
 	
-	Debug.write("loadContent: ",obj.action,obj,parentobj,preparentobj);
+	Debug.write("loadContent: ",obj.action);
     
 	tempActionForNavi = obj.action;
-    
-	if (obj.action=="conf1"){
-        if (!clearStageContent(obj)) {
-            loadContentByTempActionForNavi();
-        }
-    } else if (obj.action=="conf2"){
-        if (!clearStageContent(obj)) {
-            loadContentByTempActionForNavi();
-        }
-    } else if (obj.action=="home"){
-        if (!clearStageContent(obj)) {
-            loadContentByTempActionForNavi();
-        }
-    } else if (obj.action=="userself"){
-        if (!clearStageContent(obj)) {
-            loadContentByTempActionForNavi();
-        }
-    } else if (obj.action=="useradmin"){
-        if (!clearStageContent(obj)) {
-            loadContentByTempActionForNavi();
-        }
-    } else if (obj.action=="groupadmin"){
-        if (!clearStageContent(obj)) {
-            loadContentByTempActionForNavi();
-        }
-    } else if (obj.action=="orgadmin"){
-        if (!clearStageContent(obj)) {
-            loadContentByTempActionForNavi();
-        }
-    } else if (obj.action=="roomadmin"){
-        if (!clearStageContent(obj)) {
-            loadContentByTempActionForNavi();
-        }
-    } else if (obj.action=="roomconfiguremod"){
-        if (!clearStageContent(obj)) {
-            loadContentByTempActionForNavi();
-        }
-    } else if (obj.action=="issuetracker"){
-        if (!clearStageContent(obj)) {
-            loadContentByTempActionForNavi();
-        }
-    } else if (obj.action=="confadmin"){
-        if (!clearStageContent(obj)) {
-            loadContentByTempActionForNavi();
-        }
+
+    if (!clearStageContent(obj)) {
+        loadContentByTempActionForNavi();
     }
 	
 }
     
 function loadContentByTempActionForNavi(){
 	
-	//Debug.write("loadContentByString ",action);
-	
-	if (tempActionForNavi=="conf1"){
-		new conferenceboard(canvas.main_content._content.inner);
-    } else if (tempActionForNavi=="conf2"){
-		new audienceboard(canvas.main_content._content.inner); 
-    } else if (tempActionForNavi=="home"){
-		new maindashboard(canvas.main_content._content.inner);
-    } else if (tempActionForNavi=="userself"){
-        new usersettings(canvas.main_content._content.inner);
-    } else if (tempActionForNavi=="useradmin"){
-        new configureusers(canvas.main_content._content.inner);
-    } else if (tempActionForNavi=="groupadmin"){
-    } else if (tempActionForNavi=="orgadmin"){
-		new orgadmin(canvas.main_content._content.inner);
-    } else if (tempActionForNavi=="roomadmin"){
-		new roomadmin(canvas.main_content._content.inner);
-    } else if (tempActionForNavi=="roomconfiguremod"){
-		new roomconfiguremod(canvas.main_content._content.inner);
-    } else if (tempActionForNavi=="issuetracker"){
-		new issuetracker(canvas.main_content._content.inner);
-    } else if (tempActionForNavi=="confadmin"){
-		new confadmin(canvas.main_content._content.inner);
+    if (tempActionForNavi!="logout"){
+        Debug.write("loadContentByString ",tempActionForNavi);
+        new global[tempActionForNavi](canvas.main_content._content.inner);
+	} else {
+        canvas._mainbgcontentNavi.navi.destroy();
+        canvas._mainbgcontentNavi.help.destroy();
+        canvas.thishib.initlanguageLoaded = false;
+        canvas.thishib.getLanguageById.doCall();
     }
-	
 }    
 
 function clearStageContent(obj){

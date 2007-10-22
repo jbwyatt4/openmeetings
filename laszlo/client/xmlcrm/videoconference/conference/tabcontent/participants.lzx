@@ -61,27 +61,25 @@
         	<![CDATA[
             //The onResult-Handler will be called by the rtmpconnection
             //Debug.write("getClientListScope Instance: ",value);
-
-            for (var i in value){
-            	//Debug.write("getClientListScope value: ",value[i]);
-            	if (value[i].username!=null){
-            		parent._listofUsers.addItem(value[i]);
-            	}
-            }
-
+                for (var i in value){
+                    //Debug.write("getClientListScope value: ",value[i]);
+                    if (value[i].username!=null){
+                        parent._listofUsers.addItem(value[i]);
+                    }
+                }
             ]]>
         </handler>   
     </netremotecallhib>
 	
 	<view id="_participants" />
 	
-	<simplelabelbutton labelid="24" width="140" x="0" y="0" enabled="${ canvas.ismoderator }">
+	<simplelabelbutton name="createPoll" labelid="24" width="140" x="0" y="0" enabled="${ canvas.ismoderator }">
 		<handler name="onclick">
 			new createpollwin(canvas.main_content._content.inner);
 		</handler>
 	</simplelabelbutton>
 	
-	<simplelabelbutton labelid="37" width="140" x="0" y="20" enabled="${  canvas.ismoderator }">
+	<simplelabelbutton name="pollResults" labelid="37" width="140" x="0" y="20" enabled="${  canvas.ismoderator }">
 		<handler name="onclick">
 			this.getVotes.doCall();
 		</handler>
@@ -101,7 +99,7 @@
 	</simplelabelbutton>	
     
 
-	<simplelabelbutton labelid="42" width="100" x="142" y="0" >
+	<simplelabelbutton name="checkPollVoted" labelid="42" width="100" x="142" y="0" >
 		<handler name="onclick">
 			this.checkHasVoted.doCall();
 		</handler>

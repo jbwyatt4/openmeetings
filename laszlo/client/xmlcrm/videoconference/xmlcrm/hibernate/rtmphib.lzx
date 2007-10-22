@@ -58,6 +58,9 @@
 	<!-- shows what kind of conference it is at the moment
 		wether its conference or audience -->
 	<attribute name="modus" value="" type="string" />
+    
+    <!-- shows what kind of room the use is public or private -->
+    <attribute name="roomtype" value="" type="string" />
         
          
      <handler name="onconnect">
@@ -192,9 +195,9 @@
         <netparam name="vars2"><method name="getValue"> return parent.parent.userlang; </method></netparam> 
         <handler name="ondata" args="value">
             //The onResult-Handler will be called be the rtmpconnection
-            //Debug.write("getNavi: ",value);
+            Debug.write("getNavi: ",value);
             new mainnavi(canvas._mainbgcontentNavi,{name:'navi',naviObject:value});
-            new helpandbugs(canvas._mainbgcontentNavi);
+            new helpandbugs(canvas._mainbgcontentNavi,{name:'help'});
         </handler>  
     </netremotecallhib>
     
@@ -388,13 +391,13 @@
         <netremotecallhib name="sendVarsToMessage" funcname="sendVarsToMessage">
             <handler name="ondata" args="value">
                 <![CDATA[
-                //The onResult-Handler will be called be the rtmpconnection
-                //Debug.write("sendVarsToMessage : ",value);
-                if (value[0]=='chat'){
-                    canvas.addChatHistory(value);
-                } else if(value[0]=='fileslist'){
-                    _imageslistdraw.parent.oninit.sendEvent();
-                }
+                    //The onResult-Handler will be called be the rtmpconnection
+                    Debug.write("sendVarsToMessage : ",value);
+                    if (value[0]=='chat'){
+                        canvas.addChatHistory(value);
+                    } else if(value[0]=='fileslist'){
+                        _imageslistdraw.parent.onvisible.sendEvent();
+                    }
                 ]]>
             </handler>   
         </netremotecallhib>  

@@ -4,7 +4,7 @@
 <class name="bigTextListItem" extends="textlistitem" fontsize="12" />
 
  <class name="createpollwin" extends="labelexplorerbox" labelid="18"
-    docking="true" resizeable="false" closable="false" width="500" x="100" y="220" height="240">
+    docking="true" resizeable="false" closable="true" width="500" x="100" height="240">
     
     <labeltext fontstyle="bold" labelid="19" y="22" />
     
@@ -37,16 +37,11 @@
     		]]>
     	</handler>
     </combobox>
-     
-     
 
-    <simplelabelbutton labelid="25" width="200" x="80" y="218">
-    	<handler name="onclick">
-    		this.parent.close();
-    	</handler>
-    </simplelabelbutton>
+    <simplelabelbutton labelid="25" width="100" x="280" y="218" 
+        onclick="this.parent.close();" />
     
-    <simplelabelbutton labelid="22" width="200" x="290" y="218">
+    <simplelabelbutton labelid="22" width="100" x="390" y="218">
     	<handler name="onclick">
     		this.parent.createPoll.pollquestion = this.parent._question.getText();
     		this.parent.createPoll.polltypesid = this.parent._polltypes.getValue();

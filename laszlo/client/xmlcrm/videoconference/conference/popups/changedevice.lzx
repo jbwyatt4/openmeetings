@@ -2,7 +2,7 @@
 <library>
 
 <class name="changedevice" extends="labelexplorerbox" labelid="51"
-    docking="true" resizeable="false" closable="true" width="300" x="14" y="-300" height="260">
+    docking="true" resizeable="false" closable="true" width="300" x="14" height="260">
 
     <method name="storelocaldata">
         <![CDATA[
@@ -108,17 +108,12 @@
             this.parent.doninitalize(availibleCams.getValue(),availibleMics.getValue());
         </handler>
     </simplelabelbutton>
-    <animator attribute="y" to="20" duration="1000" start="true"/>
-
     
     <labeltext labelid="56" width="300"
     	y="150" multiline="true" resize="false"/>
     
-    <simplelabelbutton labelid="55" width="100" x="80" y="190">
-    	<handler name="onclick"> 	
-    		this.parent.close();
-    	</handler>
-    </simplelabelbutton>
+    <simplelabelbutton labelid="55" width="100" x="80" y="190" 
+        onclick="this.parent.close();" />
     
 </class>
 

@@ -12,5 +12,7 @@
 	<include href="dashboard/" />
 	<include href="issuetracker/" />
     <include href="confadmin/" />
+    <include href="meetings/" />
+    <include href="events/" />
 
 </library>

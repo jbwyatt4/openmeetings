@@ -17,7 +17,7 @@
 </class>
     
 <class name="applyformoderation"  extends="labelexplorerbox" labelid="81"
-	width="500" height="250" x="14" y="-300" closable="true">
+	width="500" height="250" x="14" closable="true">
 	
 	<attribute name="applymessage" value="null" />
 	
@@ -114,14 +114,9 @@
     	</handler>
     </simplelabelbutton>
     
-    <simplelabelbutton labelid="83" width="200" x="290" y="218" >
-    	<handler name="onclick">
-    		this.parent.close();
-    	</handler>
-    </simplelabelbutton>
-    
-    <animator attribute="y" to="20" duration="1000" start="true"/>
-    
+    <simplelabelbutton labelid="83" width="200" x="290" y="218" 
+        onclick="this.parent.close();" />
+  
 </class>
 
 </library>

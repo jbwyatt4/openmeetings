@@ -1,78 +1,64 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library>
-
-    <!-- lz.menubutton -->
-<include href="lz/floatinglist.lzx" />
-<include href="lz/textlistitem.lzx" />
-        
-<include href="menuassets.lzx" />
+  
+<resource name="cl_navibar_rsc" src="resources/cr_navibar.swf" />  
+<resource name="cl_navibarbtn_rsc" src="resources/cr_navibarbtn.swf" />  
+<resource name="cr_navibar_rsc" src="resources/cl_navibar.swf" />  
+<resource name="cr_navibarbtn_rsc" src="resources/cl_navibarbtn.swf" />               
+<resource name="navibar_rsc" src="resources/navibar.swf" />    
+<resource name="mainnavi_rsc" src="resources/navibarbtn.swf" />
     
-<class name="meetingsmenulistitem" extends="textlistitem">
-    <attribute name="action" value="" type="string" />
-    <attribute name="list" value="null" />
-    <attribute name="isopen" value="false" type="boolean" />
-    <attribute name="isleaf" value="false" type="boolean" />   
-</class>     
-    
-    
-<class name="menumeetingsfloatinglist" extends="floatinglist" width="140" >
-    
-    <handler name="onselect" args="obj">
-        Debug.write(this,obj);
-        this.owner.parent.sendOpenMenu(this.owner._menuRef,false);
-        loadContent(obj,null,null);
-    </handler>    
+<class name="subitemsListContainter" extends="view" visibility="hidden"
+    layout="axis:x;spacing:0" />   
      
-    <method name="open">
-        this.setAttribute('visible',true);
-        LzModeManager.makeModal( this );
+<class name="textboxSubBlank" extends="text" text="$once{ parent.text }" 
+    fgcolor="0xFFFFFF"
+        fontsize="14" y="6" x="10" />
+    
+<class name="subitemsListItem" extends="view" 
+    width="${ this._ctext.width+20 }" >
+    
+    <attribute name="action" value="" type="string" />
+    
+    <attribute name="isopen" value="false" type="boolean" />
+    <attribute name="isleaf" value="false" type="boolean" />
+    <attribute name="list" value="null" />
+    <attribute name="textvalue" value="null" />
+    <attribute name="selected" value="false" type="boolean" />
+    
+    <handler name="onmouseover">
+        if (!this.selected){
+            this._ctext.destroy();
+            new textboxSubBlank(this,{name:'_ctext','fgcolor':'0x000000'});
+        }
+    </handler>
+    <handler name="onmouseout">
+        if (!this.selected){
+            this._ctext.destroy();
+            new textboxSubBlank(this,{name:'_ctext'});
+        }        
+    </handler>    
+    
+    <method name="resetItem">
+        this.selected = false;
+        this._ctext.destroy();
+        new textboxSubBlank(this,{name:'_ctext'});   
     </method>
     
-    <method name="close">
-        this.setAttribute('visible',false);
-        LzModeManager.release( this );
-    </method>   
+    <view width="1" height="10" y="13" bgcolor="0xFFFFFF" x="${ parent.width-1 }" />
+    <textboxSubBlank name="_ctext" />
     
-    <!--- @keywords private -->
-    <method name="passModeEvent" args="event,view" > 
-        <![CDATA[
-            //Debug.write("tt : ",event,view);
-            // Once a view has been made modal, this method
-            // gets called by the system ONLY when a user clicks on
-            // a view 'outside' the contents of this view.  
-            if ( event == 'onmousedown' ) {
-                if ( view != null ) { // view is a clickable view
-                    // view is not LITERALLY part of the class hierarchy but
-                    // it maybe part of the floatingview of this menu, or part
-                    // of the parent view that contains this menu 
-                    Debug.write("tt : ",view);
-                    if (!this.checkForSubChild(view)) 
-                        this.owner.parent.sendOpenMenu(this.owner._menuRef,false);
-                } else { // view is not a clickable view so close the menu
-                    //this.open(false);
-                    this.owner.parent.sendOpenMenu(this.owner._menuRef,false);
-                }
-            }
-            // since a menu is not strictly modal ( 'fragile' ), always return
-            // true to pass the event to the object that was clicked on
-            return true; 
-        ]]> 
-    </method>     
+    <handler name="onclick">
+        this._ctext.destroy();
+        new textboxSubBlank(this,{'fgcolor':'0xFF3300'});        
+        if (this.isleaf) loadContent(this,null,null);
+        this.selected=true;
+        parent.parent.parent.setSubItem(this);
+    </handler>
+</class>      
     
-    <method name="checkForSubChild" args="v">
-        <![CDATA[
-            for (var eg=0;eg<this.subviews.length;eg++){
-                if (this.subviews[eg]==v) return true;
-            } 
-            return false;
-        ]]>
-    </method>
-   
-</class>   
-
-    
-<class name="mainmenumeetingsitem" extends="button" fontstyle="bold"
-    height="$once{ parent.height-2 }" >
+<class name="mainmenumeetingsitem" extends="view" height="30"
+    width="${ this._ctext.width+20 }" >
         
     <attribute name="action" value="" type="string" />
     
@@ -80,48 +66,108 @@
     <attribute name="isopen" value="false" type="boolean" />
     <attribute name="isleaf" value="false" type="boolean" />
     <attribute name="list" value="null" />
+    <attribute name="textvalue" value="null" />
+    <attribute name="selected" value="false" type="boolean" />
     
+    <handler name="onmouseover">
+        if (!this.selected){
+            this.bgc.setAttribute('visibility','visible');
+        }
+    </handler>
+    <handler name="onmouseout">
+        if (!this.selected){
+            this.bgc.setAttribute('visibility','hidden');
+        }
+    </handler>
+      
+    <view width="${ parent.width }" resource="mainnavi_rsc" 
+        stretches="width" visibility="hidden" name="bgc"/>
+    <view width="1" height="10" y="13" bgcolor="0x666666" x="${ parent.width-1 }" />
+    <text text="$once{ parent.text }" name="_ctext"
+        fontsize="14" y="6" x="10" />
+    
+
     <handler name="oninit">
         <![CDATA[
+            Debug.write(this.list,list.length);
             if (list!=null && list.length!=0){
-                this._menuRef = new menumeetingsfloatinglist(this,{name:'menu1',visible:false,atach:'bottom'});
+                this._menuRef = new subitemsListContainter(this.parent.parent.subitemlist)
                 for (var i=0;i<this.list.length;i++) {
-                    new meetingsmenulistitem(this._menuRef,{list:this.list[i].subnavi,text:this.list[i].label.value,open:this.list[i].isleaf,isleaf:this.list[i].isleaf,action:this.list[i].action});
+                    new subitemsListItem(this._menuRef,{textvalue:this.list[i].name,list:this.list[i].subnavi,text:this.list[i].label.value,isopen:this.list[i].isopen,isleaf:this.list[i].isleaf,action:this.list[i].action});
                 }
             }
         ]]>
-    </handler>
+    </handler>    
     
-    <handler name="onmousedown">
-        this.parent.sendOpenMenu(this._menuRef,true);
-        Debug.write(myresultnavi,canvas.myresultnavi);
-        if (this.isleaf) {
-            loadContent(this,null,null);
-        }
+    <handler name="onclick">
+        this.selected = true;
+        this.parent.parent.sendOpenMenu(this._menuRef,this);
+        this.bgc.setAttribute('visibility','visible');
+        if (this.isleaf) loadContent(this,null,null);
+        else this._menuRef.subviews[0].onclick.sendEvent();
     </handler>
 
-</class>    
+</class>     
 
     
-<class name="mainnavi" extends="view" height="30" width="${ canvas.width }"
-    layout="axis:x;spacing:0" bgcolor="$once{canvas.basebgcolorizer}">
+<class name="mainnavi" extends="view" height="30" width="${ canvas.width }" y="50" >
         
     <attribute name="naviObject" value="null" />
     <attribute name="currentmenu" value="null" />
+    <attribute name="currentMainmenu" value="null" />
+    <attribute name="currentSubmenu" value="null" />
     
-    <method name="sendOpenMenu" args="menuref,open">
-        if (this.currentmenu==menuref) open=false;
-        if (this.currentmenu!=null) this.currentmenu.close();
-        this.currentmenu = menuref;
-        if (menuref!=null) {
-            menuref.clearSelection();
-            if (open){
-                menuref.open();
-            } else {
-                this.currentmenu=null;
-                menuref.close();
+    <view width="${ parent.width }" resource="navibar_rsc" stretches="width" >
+        <handler name="oninit">
+            this.setShadow();
+        </handler>
+        <method name="setShadow" >
+            <![CDATA[
+            if (this.isinited){
+                this.normalMC = this.getMCRef();
+                   this.displacementMap = new flash.filters.DropShadowFilter();
+                this.normalMC.filters = [this.displacementMap];
             }
-        }
+            ]]>              
+        </method>         
+    </view>
+    <view name="itemlist" layout="axis:x;spacing:0" id="mainmenuList">
+        <method name="doAction" args="action">
+            <![CDATA[
+                for (var i=0;i<this.subviews.length;i++) {
+                    if (this.subviews[i].action == action) {
+                        this.subviews[i].onclick.sendEvent();
+                        return true;
+                    }
+                } 
+            ]]>
+        </method>
+    </view>
+    <view name="subitemlist" y="30" />
+
+    <method name="sendOpenMenu" args="menuref,obj">
+        <![CDATA[
+            if (this.currentmenu!=null) {
+                this.currentmenu.setAttribute('visibility','hidden'); 
+            }
+            if (this.currentMainmenu!=null && this.currentMainmenu!=obj) {
+                Debug.write("New MainMenuItem",obj);
+                this.currentMainmenu.bgc.setAttribute('visibility','hidden');
+                this.currentMainmenu.selected = false;
+            } else {
+                obj.bgc.setAttribute('visibility','visible');
+            }
+            this.currentMainmenu = obj;
+            this.currentmenu = menuref;
+            this.currentmenu.setAttribute('visibility','visible');
+        ]]>
+    </method>
+    
+    <method name="setSubItem" args="obj">
+        <![CDATA[
+            if (this.currentSubmenu!=null && this.currentSubmenu!=obj) this.currentSubmenu.resetItem();
+            this.currentSubmenu=obj;
+        ]]>
     </method>
     
     <!---
@@ -129,26 +175,120 @@
    	-->
     <handler name="oninit">
     	<![CDATA[  
-    	var value = this.naviObject;
-    	for (var i=0;i<value.length;i++){
-    		//var t1 = new mainnavitree(t,{list:value[i].mainnavi,depth:1,text:value[i].label.value,open:value[i].isleaf,isleaf:value[i].isleaf,action:value[i].action});
-			//Debug.write("value[i]: ",value[i]);
-    		var t1 = new mainmenumeetingsitem(this,{list:value[i].mainnavi,isleaf:value[i].isleaf,text:value[i].label.value,action:value[i].action});
-            if (i==0) loadContent(t1,null,null);
-    	}
-        //Debug.write("this: ",this);
+            var value = this.naviObject;
+            for (var i=0;i<value.length;i++){
+                var t1 = new mainmenumeetingsitem(this.itemlist,{textvalue:value[i].name,list:value[i].mainnavi,isleaf:value[i].isleaf,text:value[i].label.value,action:value[i].action});
+                if (i==0) t1.onclick.sendEvent();
+                Debug.write("t1: ",t1);
+            }
+            Debug.write("this: ",this);
     	]]>
     </handler>
 
-</class>
+</class>   
     
-<class name="helpandbugs" extends="view" x="${ parent.width-120 }" bgcolor="0xFFFFFF" >
+
+<class name="helpandbugs" extends="view" x="${ parent.width-290 }" layout="axis:x">
+    <view name="btn1" width="80">
+        <view name="v1a" resource="cl_navibar_rsc" />
+        <view name="v1b" x="10" width="$once{ parent.width-10 }" 
+            stretches="width" resource="navibar_rsc" />
+        
+        <view name="v2a" resource="cl_navibarbtn_rsc" visibility="hidden"/>
+        <view name="v2b" x="10" width="$once{ parent.width-10 }" visibility="hidden"
+            stretches="width" resource="mainnavi_rsc" />     
+        
+        <handler name="onmouseover">
+            this.v1a.setAttribute('visibility','hidden');
+            this.v1b.setAttribute('visibility','hidden');
+            this.v2a.setAttribute('visibility','visible');
+            this.v2b.setAttribute('visibility','visible');            
+        </handler>   
+        <handler name="onmouseout">
+            this.v1a.setAttribute('visibility','visible');
+            this.v1b.setAttribute('visibility','visible');
+            this.v2a.setAttribute('visibility','hidden');
+            this.v2b.setAttribute('visibility','hidden');            
+        </handler>  
+        <labeltext labelid="5" align="center" y="6" fontsize="14" />
+        <handler name="onclick">
+            quicklinkAct("usersettings");
+        </handler>    
+            
+    </view>
+    <view name="btn3" width="80">
+
+        <view name="v1b" width="$once{ parent.width }" 
+            stretches="width" resource="navibar_rsc" />
+
+        <view name="v2b" width="$once{ parent.width }" visibility="hidden"
+            stretches="width" resource="mainnavi_rsc" />     
+        
+        <handler name="onmouseover">
+            this.v1b.setAttribute('visibility','hidden');
+            this.v2b.setAttribute('visibility','visible');            
+        </handler>   
+        <handler name="onmouseout">
+            this.v1b.setAttribute('visibility','visible');
+            this.v2b.setAttribute('visibility','hidden');            
+        </handler>  
+        <labeltext labelid="310" align="center" y="6" fontsize="14" />
+        <handler name="onclick">
+            quicklinkAct('logout');
+        </handler>    
+            
+    </view>    
+    <view name="btn2" width="120">
+        
+        <view name="v1b" width="$once{ parent.width-10 }" 
+            stretches="width" resource="navibar_rsc" />
+        <view name="v1a"  x="$once{ parent.width-10 }" 
+            resource="cr_navibar_rsc" />
+        
+        <view name="v2b" width="$once{ parent.width-10 }" visibility="hidden"
+            stretches="width" resource="mainnavi_rsc" />    
+        <view name="v2a" x="$once{ parent.width-10 }" 
+            resource="cr_navibarbtn_rsc" visibility="hidden"/> 
+        
+        <handler name="onmouseover">
+            this.v1a.setAttribute('visibility','hidden');
+            this.v1b.setAttribute('visibility','hidden');
+            this.v2a.setAttribute('visibility','visible');
+            this.v2b.setAttribute('visibility','visible');            
+        </handler>   
+        <handler name="onmouseout">
+            this.v1a.setAttribute('visibility','visible');
+            this.v1b.setAttribute('visibility','visible');
+            this.v2a.setAttribute('visibility','hidden');
+            this.v2b.setAttribute('visibility','hidden');            
+        </handler>    
+        <labeltext labelid="284" x="10" y="6" fontsize="14" />
+        <handler name="onclick">
+            LzBrowser.loadURL("http://code.google.com/p/openmeetings/issues/list","_blank");
+        </handler>       
+         
+    </view>    
+    
+    <handler name="oninit">
+        this.setShadow();
+    </handler>
+    <method name="setShadow" >
+        <![CDATA[
+        if (this.isinited){
+            this.normalMC = this.getMCRef();
+               this.displacementMap = new flash.filters.DropShadowFilter();
+            this.normalMC.filters = [this.displacementMap];
+        }
+        ]]>              
+    </method>        
+    <!--
     <labeltext labelid="284" fgcolor="red" fontsize="10" >  
         <handler name="onclick">
             LzBrowser.loadURL("http://code.google.com/p/openmeetings/issues/list","_blank");
         </handler>
         
     </labeltext>
+    -->    
 </class>    
 
 </library>
