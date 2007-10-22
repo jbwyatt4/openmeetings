@@ -933,4 +933,7 @@
 <string id="309" name="conferencebar">
 <value>Back to Rooms</value>
 </string>	
+<string id="310" name="conferencebar">
+<value>Logout</value>
+</string>	
 </language>

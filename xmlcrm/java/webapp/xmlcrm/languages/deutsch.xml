@@ -926,5 +926,8 @@
 </string>	
 <string id="309" name="conferencebar">
 <value>Zurück zur Raum-Übersicht</value>
+</string>	
+<string id="310" name="conferencebar">
+<value>Logout</value>
 </string>			
 </language>
