@@ -37,10 +37,10 @@
 	        if (x>=0 && y>=0 && x<=_drawarea.width && y<=_drawarea.height){
 		        var downloadurl = 'http://'+canvas.rtmphostlocal+':'+canvas.red5httpport+'/xmlcrm/DownloadHandler?fileName='+this.filename+'&moduleName='+this.uploadmodul+'&parentPath='+canvas.uploadmoduleimgfolder+'/'+'&room='+hib.connectedroom+'&domain='+hib.conferencedomain+'&sid='+canvas.sessionId;
 
-		        //Debug.write(downloadurl);        
+		        Debug.write(_drawarea);        
 		        //Debug.write(downloadurl,x,y,this.baseurl,this.fileName,this.moduleName,this.parentPath,this.room,this.domain);
 			
-		        _drawarea.parent.clearAreaAndAddImage(downloadurl,x,y,this.baseurl,this.fileName,this.moduleName,this.parentPath,this.room,this.domain);
+		        _drawarea.parent.parent.clearAreaAndAddImage(downloadurl,x,y,this.baseurl,this.fileName,this.moduleName,this.parentPath,this.room,this.domain);
 		        
 		        this.dragger.remove();     
 		        this.doStop();
