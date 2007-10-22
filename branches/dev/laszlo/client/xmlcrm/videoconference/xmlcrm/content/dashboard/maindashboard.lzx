@@ -16,14 +16,18 @@
     
     <handler name="oninit">
         <![CDATA[
-            this.urlv.setText("<u><A HREF='"+this.link+"' TARGET='_BLANK'><FONT color='#0000CC'>"+canvas.getLabelName(285)+"</FONT></A></u>");
+            this.urlv.setText("<u><FONT color='#0000CC'>"+canvas.getLabelName(285)+"</FONT></u>");
         ]]>
     </handler>
     
     <labeltext fontsize="10" text="$once{ parent.titel }" fontstyle="bold" multiline="true" width="$once{ parent.width }" />
     <labeltext fontsize="10" text="$once{ parent.updated }" fontstyle="italic" />
     <labeltext fontsize="10" name="summaryv" text="$once{ parent.summary }"  multiline="true" width="$once{ parent.width }" />
-    <labeltext fontsize="10" name="urlv" />
+    <labeltext fontsize="10" name="urlv">
+        <handler name="onclick">
+            LzBrowser.loadURL(parent.link,"_blank");
+        </handler>
+    </labeltext>
     <view height="1" width="$once{ parent.width }" bgcolor="$once{ canvas.basebgcolorizer }" />
 </class>    
     
@@ -69,22 +73,34 @@
     
     <handler name="oninit">
         <![CDATA[
-            this.homepage.setText("<u><A HREF='"+canvas.getLabelName(282)+"' TARGET='_BLANK'><FONT color='#0000CC'>"+canvas.getLabelName(286)+"</FONT></A></u>");
-            this.mailing.setText("<u><A HREF='"+canvas.getLabelName(283)+"' TARGET='_BLANK'><FONT color='#0000CC'>"+canvas.getLabelName(287)+"</FONT></A></u>");
+            this.homepage.setText("<u><FONT color='#0000CC'>"+canvas.getLabelName(286)+"</FONT></u>");
+            this.homepage.setAttribute('link',canvas.getLabelName(282));
+            this.mailing.setText("<u><FONT color='#0000CC'>"+canvas.getLabelName(287)+"</FONT></u>");
+            this.homepage.setAttribute('link',canvas.getLabelName(283));
         ]]>
     </handler>
     
     <labeltext fontstyle="bold" y="10" labelid="278" x="10" />
     
         <simplelabelbutton y="40" labelid="279" x="30"
-            onclick="quicklink('conf1')" />
+            onclick="quicklink('meetings')" />
         <simplelabelbutton y="70" labelid="280" x="30" 
-            onclick="quicklink('conf2')" />    
+            onclick="quicklink('events')" />    
             
     <labeltext fontstyle="bold" x="10" y="110" labelid="281" />
     
-        <labeltext name="homepage" x="30" y="140" />
-        <labeltext name="mailing" x="30" y="170" />
+        <labeltext name="homepage" x="30" y="140" >
+            <attribute name="link" type="string" value="" />
+            <handler name="onclick">
+                LzBrowser.loadURL(parent.link,"_blank");
+            </handler>            
+        </labeltext>    
+        <labeltext name="mailing" x="30" y="170" >
+            <attribute name="link" type="string" value="" />
+            <handler name="onclick">
+                LzBrowser.loadURL(parent.link,"_blank");
+            </handler>            
+        </labeltext>  
     
         <handler name="oninit">
             this.getRssFeeds.doCall();

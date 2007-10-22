@@ -2,7 +2,7 @@
 <library>
 
 <class name="rpcerrordialog" extends="labelexplorerbox" labelid="204"
-    docking="true" resizeable="false" closable="true" width="300" x="200" y="100" height="230">
+    docking="true" resizeable="false" closable="true" width="300" x="200" height="230">
 	
     <attribute name="errortext" value="" type="string" />
 	<attribute name="errorid" value="0" type="number" />

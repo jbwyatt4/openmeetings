@@ -3,7 +3,7 @@
 
 <class name="checkLoginData" extends="labelexplorerbox" labelid="108"
     docking="true" resizeable="false" closable="false" 
-	width="360" x="350" y="0" height="260">
+	width="360" x="350" height="260">
     
     <handler name="onclose">
     	if (this.childObj!=null) this.childObj.close();
@@ -68,7 +68,7 @@
                 </handler>  
             </netremotecallhib>
         </combobox>
-	
+
     <labeltext name="n5" text="Color-Style" width="200" y="114" resize="false" x="2"/>  
         
         <combobox name="colors" width="170" y="114" x="120" editable="false">
@@ -79,6 +79,7 @@
 				this.addItem('steelblue','steelblue');
 				this.addItem('lightsteelblue','lightsteelblue');
 				this.addItem('goldenrod','goldenrod');
+                this.addItem('silvergray','silvergray');
 				this.selectItem('lightsteelblue');
 			</handler>
 			<handler name="onselect" args="v">
@@ -106,13 +107,17 @@
 						canvas.setAttribute('basebgcolorizer',"0xDAA520");
 						canvas.setAttribute('baseMousecolorizer',"0xE8C064");
 						canvas.setAttribute('baseMouseOvercolorizer',"0xE8C064");
+					} else if (v.value=="silvergray"){
+						canvas.setAttribute('basebgcolorizer',"0xC4C8CC");
+						canvas.setAttribute('baseMousecolorizer',"0xC2C8CD");
+						canvas.setAttribute('baseMouseOvercolorizer',"0xC2C8CD");
 					}
 					this.parent.close();
 					new checkLoginData(canvas.main_content._content.inner);
 				}
 			</handler>
         </combobox>	
-	
+    
     <labeltext name="nlabelquality" text="Quality" y="144" x="2" visible="true" />     
         <combobox name="ncomboquality" width="170" y="144" x="120" editable="false" >
 			<handler name="oninit">
@@ -198,7 +203,10 @@
 				canvas.setAttribute('official_code','');
 				canvas.setAttribute('picture_uri','');
 				canvas.setAttribute('language','');
-            	
+                
+                if (parent.languages.getText()=='arabic') {
+                    canvas.isrtl = true;
+                }
                 hib.userlang = Number(parent.languages.getValue());
             	hib.userobject = value;
             	if (value.organisation_users.length==0){
@@ -291,15 +299,18 @@
             if(save) this.setValue(true);
         </handler>
     </labelcheckbox>        
-    
+
     <labeltext align="right" resize="true" valign="bottom">
         <handler name="oninit">
             <![CDATA[
-                this.setText("<u><A HREF='http://code.google.com/p/openmeetings' TARGET='_BLANK'><FONT color='#0000CC'>visit code.google.com/p/openmeetings</FONT></A></u>");
+                this.setText("<u><FONT color='#0000CC'>visit openmeetings.googlecode.com</FONT></u>");
             ]]>
         </handler>
+        <handler name="onclick">
+            LzBrowser.loadURL("http://openmeetings.googlecode.com/","_blank");
+        </handler>        
     </labeltext>
-    
+
 
 </class>
 

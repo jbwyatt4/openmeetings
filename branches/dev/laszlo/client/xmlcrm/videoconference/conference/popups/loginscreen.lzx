@@ -12,7 +12,7 @@ There is no login any more
  -->
  
  <class name="loginscreen" extends="labelexplorerbox" labelid="14"
-    docking="true" resizeable="false" closable="false" width="324" x="200" y="0" height="300">
+    docking="true" resizeable="false" closable="false" width="324" x="200" height="300">
     
     <method name="setStep" args="stepNo">
     	if (stepNo==1){

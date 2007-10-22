@@ -9,6 +9,7 @@
     <include href="popups/" />
     <include href="moderation/" />
 	<include href="video/" />
+    <include href="polls/" />
 	<include href="videoclassroom/" />
     <include href="global/functions.lzx" />
     

@@ -420,9 +420,16 @@
             ////Debug.write("netremotecall", this, "onResult", value);
 
             if (this.dataobject!=null) {
-            	//Debug.write("onResult: ",this,value,dataobject);
-                var element = LzDataElement.valueToElement(value);
-                this.dataobject.setChildNodes(element.childNodes);
+                if ( this.dataobject instanceof LzDataset ) {
+                    //Debug.write("onResult: ",this,value,dataobject);
+                    var element = LzDataElement.valueToElement(value);
+                    this.dataobject.setData(element.childNodes);
+                } else if ( this.dataobject instanceof LzDataElement ) {
+                    var element = LzDataElement.valueToElement(value);
+                    this.dataobject.appendChild( element );
+                } else {
+                    Debug.warn("dataobject is not LzDataset or LzDataElement: ",this,this.dataobject,delegate);
+                }
             }
 
             this.ondata.sendEvent(value);		

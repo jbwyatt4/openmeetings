@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library>
  
- <class name="uploadwindow" extends="explorerbox" title="Choose a file"
-    docking="true" closable="true" width="264" x="200" y="0" height="200">
+ <class name="uploadwindow" extends="labelexplorerbox" labelid="304"
+    docking="true" closable="true" width="264" x="200" height="200">
     
     <handler name="oninit">
     	LzModeManager.makeModal(this);
@@ -25,7 +25,7 @@
  	<fileupload name="myFileUpload" isOnlyImage="${ this.parent.isOnlyImage }" 
  		 isOnlyPpt="${ this.parent.isOnlyPpt }">
 		<method name="onComplete" args="fr">
-			//Debug.write("oncomplete ",fr);
+			Debug.write("oncomplete ",fr);
 			this.parent.progressBar.setValue(100);
 			this.parent.upload.setAttribute('enabled', false);
 			this.parent.upload.setAttribute("visible",false);
@@ -59,7 +59,7 @@
     
 	    <method name="onHTTPError" args="fr, httpError">
 	        <![CDATA[
-	            //Debug.write('onHTTPError invoked: ' + httpError);
+	            Debug.write('onHTTPError invoked: ' + httpError);
 	            new errorpopup(canvas,{error:'HTTP-ERROR: '+httpError});
 	            this.parent.close();
 		  		var tempSendArray = new Array ();
@@ -96,8 +96,7 @@
 		<handler name="onclick">
 			<![CDATA[
 			var uploadurl = 'http://'+canvas.rtmphostlocal+':'+canvas.red5httpport+'/xmlcrm/UploadHandler?moduleName='+this.parent.uploadmodule+'&room='+hib.connectedroom+'&domain='+hib.conferencedomain+'&sid='+canvas.sessionId;
-
-            //Debug.write("uploadurl: ",uploadurl);
+            Debug.write("uploadurl: ",uploadurl);
 			parent.myFileUpload.upload(uploadurl);
 			]]>
 		</handler>
@@ -108,8 +107,8 @@
 		<view name="status" x="1" y="1" height="8" bgcolor="#D6DEEF"/>
 		<method name="setValue" args="value">
 			<![CDATA[
-			status.setAttribute('width', value * 198 / 100);
-			percent.setText(Math.round(value) + '%');
+                status.setAttribute('width', value * 198 / 100);
+                percent.setText(Math.round(value) + '%');
 			]]>
 		</method>
 		<text name="percent" align="center" resize="true" y="-18" fontstyle="bold" 
@@ -118,7 +117,7 @@
 	
 	<button name="_close" x="90" y="170" text="cancel" width="160" height="20">
 		<handler name="onclick">
-			//Debug.write("this.parent: ",this.parent);
+			Debug.write("this.parent: ",this.parent);
 			this.parent.close();
 		</handler>
 	</button>

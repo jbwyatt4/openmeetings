@@ -15,7 +15,7 @@
 </class>
 
 <class name="editwhiteboarddefault" extends="labelexplorerbox" labelid="66"
-    docking="true" resizeable="false" closable="true" width="400" x="100" y="220" height="240">
+    docking="true" resizeable="false" closable="true" width="400" x="100" height="240">
     
     <attribute name="refObj" value="null" />
     

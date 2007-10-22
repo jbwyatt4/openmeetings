@@ -5,9 +5,6 @@
     <include href="loginscreen.lzx" />
     <include href="loginweb.lzx" />
     <include href="errorpopup.lzx" />
-    <include href="createpollwin.lzx" />
-    <include href="answerpoll.lzx" />
-    <include href="resultpollwin.lzx" />
     <include href="messagewin.lzx" />
     <include href="changedevice.lzx" />
     <include href="headermenu.lzx" />

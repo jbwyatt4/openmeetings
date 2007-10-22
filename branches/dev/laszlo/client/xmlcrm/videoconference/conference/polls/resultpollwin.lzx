@@ -3,7 +3,7 @@
 
 
 <class name="resultpollwin" extends="labelexplorerbox" labelid="37"
-    docking="true" resizeable="false" closable="false" width="500" x="100" y="120" height="390">
+    docking="true" resizeable="false" closable="true" width="500" x="100" height="390">
     
 	<attribute name="createdBy" type="string" value="" />
 	<attribute name="pollDate" type="string" value="" />
@@ -83,7 +83,8 @@
 	</handler>
 
 	<labeltext y="22" name="head" />
-	<labeltext text="$once{ parent.pollQuestion }" y="42" x="0" height="60" width="380" multiline="true" resize="false"/>
+	<labeltext text="$once{ parent.pollQuestion }" y="42" x="0" height="60" 
+        width="380" multiline="true" resize="false"/>
 	
 	<labeltext y="102" labelid="39"/>
 	
@@ -91,16 +92,10 @@
 	
 	<labeltext y="122" labelid="40"/>
 	
-	<view name="_resultpollvotes" layout="axis:y;spacing:2" y="122" x="100">
+	<view name="_resultpollvotes" layout="axis:y;spacing:2" y="122" x="100" />
 	
-	</view>
-	
-    <simplelabelbutton labelid="25" width="200" x="290" y="368">
-    	<handler name="onclick">
-    		this.parent.close();
-    	</handler>
-    </simplelabelbutton>
-    
+    <simplelabelbutton labelid="25" width="100" x="390" y="$once{ parent.height-22 }" 
+        onclick="this.parent.close();" />    
     
 </class>
 

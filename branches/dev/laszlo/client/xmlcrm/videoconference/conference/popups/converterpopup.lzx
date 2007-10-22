@@ -3,7 +3,7 @@
 
 <class name="converterpopup" extends="labelexplorerbox" labelid="204"
 	docking="true" resizeable="false" closable="true" 
-    width="324" x="200" y="200" height="230">
+    width="324" x="200" height="230">
 
 	<attribute name="error" value="null" />
     

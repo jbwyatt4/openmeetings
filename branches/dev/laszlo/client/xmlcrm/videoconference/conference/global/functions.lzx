@@ -49,7 +49,19 @@ function getCurrentMouseWheelObject(obj) {
 }  
 function disableCurrentMouseWheelObject() {
     currentMouseWheelObject=null;
-}   
+}  
+    
+function getStringDate(dateObj){
+	var hours = dateObj.getHours();
+	if (hours<10) hours="0"+hours;
+	var minutes = dateObj.getMinutes();
+	if (minutes<10) minutes="0"+minutes;
+	var date = dateObj.getDate();
+	if (date<10) date="0"+date;
+	var month = dateObj.getMonth();
+	if (month<10) month="0"+month;
+    return date+'.'+month+'.'+dateObj.getFullYear()+' '+hours+':'+minutes;
+}     
               
 ]]>
 </script>
@@ -151,8 +163,12 @@ function disableCurrentMouseWheelObject() {
 
 <method name="addChatHistory" args="value,client">
   	<![CDATA[
-  	//Debug.write("addChatHistory: ",value,client);
-  	var newmessage = "<FONT COLOR='"+value[5]+"' size='11'>"+client.firstname+" "+client.lastname+":"+value[4]+"</FONT><br />";
+  	Debug.write("addChatHistory: ",value,client);
+    if (value[7]){
+          var newmessage = "<FONT COLOR='"+value[5]+"' size='11'>"+client.firstname+" "+client.lastname+"</FONT>:<FONT COLOR='0x000000' size='11'>"+value[4]+"</FONT><br />";
+    } else {
+          var newmessage = "<FONT COLOR='"+value[5]+"' size='11'>"+client.firstname+" "+client.lastname+"</FONT>:<FONT COLOR='0x000000' size='11'>"+value[4]+"</FONT><br />";
+    }
   	//Debug.write("newmessage: ",newmessage);
   	chartcontent.addChartItem(newmessage);
   	chathistory.push(newmessage);
@@ -232,8 +248,46 @@ function disableCurrentMouseWheelObject() {
             obj.step(-d);
         }
     ]]>
-</method>      
-  
+</method>     
+    
+<method name="reverseWords" args="str">
+    <![CDATA[
+        if ( str == "" || str == null ) return ""; // undefined
+        // first char indicates the main directive of str (rtl/ltr)
+        if ( isLTR( str.charCodeAt( 0 ) ) ) return str; // english or number
+        var words_arr = str.split( "" ); // an array of chars
+        for ( var i = 0, str = ""; i < words_arr.length; i++ ) // reverse their order
+            str += words_arr[ words_arr.length - i - 1 ];
+        return str;
+    ]]>
+</method>
+    
+<method name="isLTR" args="c">
+    <![CDATA[
+        return ( c >= 48 && c <= 57 || c >= 65 && c <= 90 || c >= 97 && c <= 122 );
+    ]]>
+</method>
+
+<method name="isHEB" args="c">
+    <![CDATA[
+        return ( c >= 224 && c <= 250 );
+    ]]>
+</method>    
+
+<method name="setTextAlign" args="obj,type">
+    switch ( type ) {
+        case "left" :
+            obj.setX( 0 );
+        break;
+        case "center" :
+            obj.setX( this.parent.width / 2 - this.getTextWidth() / 2 );
+        break;
+        case "right" :
+            obj.setX( this.parent.width - this.getTextWidth() );
+        break;
+    }
+</method>         
+
 <!--
 
  -->

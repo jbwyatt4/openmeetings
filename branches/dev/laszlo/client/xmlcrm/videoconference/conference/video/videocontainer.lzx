@@ -17,7 +17,7 @@
 	<attribute name="currentuserObject" value="null" />
 	
 	<handler name="oninit">
-		canvas.thishib.modus = "confernce";
+		canvas.thishib.modus = "conference";
 		canvas._videocontainer=this;
 		this.allUsers = new Array();
 		this.streams = new Array();

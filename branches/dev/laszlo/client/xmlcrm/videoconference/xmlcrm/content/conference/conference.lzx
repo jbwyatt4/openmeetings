@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<library>
+<library>   
      
 <class name="conference" extends="basecontentview" destroyByMethod="true" >
+    
+    <handler name="oninit">
+        canvas._mainbgcontentNavi.setAttribute('height',0);
+        canvas.setAttribute('naviHeightDelta',20);
+        new conferencemenubar(canvas._conferencemenu);
+        canvas._conferencemenu.setAttribute('visibility','visible');
+    </handler>
 
 	<handler name="ontabcontentleave">
         Debug.write("ontabcontentleave:",this);
@@ -16,6 +23,10 @@
             canvas.thishib.reconnectAfterRoomleft = true;
             canvas.thishib.reconnectedRoomInstance = this.parent;
             canvas.thishib.disconnect();
+            canvas._mainbgcontentNavi.setAttribute('height',canvas.naviHeight);
+            canvas.setAttribute('naviHeightDelta',canvas.naviHeight);
+            canvas._conferencemenu.subviews[0].destroy();
+            canvas._conferencemenu.setAttribute('visibility','hidden');
     	</handler>
     </netremotecallhib>
 
@@ -38,8 +49,6 @@
 	 -->
 	<videocontainer name="_videocontainer" x="2" y="2" />
 
-
-
   	<moderationpanel x="2" y="256" />
 
   <!--
@@ -54,12 +63,10 @@
      -->
     
    <whiteboard name="_whiteboard" x="268" y="2" >
-        <handler name="onsharedMessage" args="obj">
-                
+        <handler name="onsharedMessage" args="obj"> 
             //Debug.write("send: ",obj);
             canvas.objWhiteboard = obj;
             hib.sendVars.doCall();
-            
         </handler>   
 	
 		<handler name="isloadingImage" args="val" >

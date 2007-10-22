@@ -8,5 +8,6 @@
 	<include href="conferencedetailsarea.lzx" />
 	<include href="roomlistItem.lzx" />
 	<include href="audience.lzx" />
+    <include href="conferencemenubar.lzx" />
 
 </library>

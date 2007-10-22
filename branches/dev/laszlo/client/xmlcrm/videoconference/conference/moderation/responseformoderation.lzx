@@ -2,7 +2,7 @@
 <library>
     
 <class name="responseformoderation"  extends="labelexplorerbox" labelid="81"
-	width="500" height="250" x="14" y="-300" closable="true">
+	width="500" height="250" x="14" closable="true">
 	
 	<attribute name="applymessage" value="null" />
     <!-- Time till automatically apply for modaration will be accepted -->
@@ -70,9 +70,7 @@
             ]]>
         </handler>   
     </netremotecallhib> 
-    
-    <animator attribute="y" to="20" duration="1000" start="true"/>
-    
+
 </class>
 
 </library>

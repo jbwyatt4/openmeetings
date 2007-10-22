@@ -3,8 +3,17 @@
     
 <class name="audience" extends="basecontentview" destroyByMethod="true" >
 
+    <handler name="oninit">
+        canvas._mainbgcontentNavi.setAttribute('height',0);
+        canvas.setAttribute('naviHeightDelta',20);
+        new conferencemenubar(canvas._conferencemenu);
+        canvas._conferencemenu.setAttribute('visibility','visible');
+    </handler>
+
 	<handler name="ontabcontentleave">
+        Debug.write("ontabcontentleave:",this);
 		this.logicalRoomLeave.doCall();
+        Debug.write("this.logicalRoomLeave ",this.logicalRoomLeave);
 	</handler>
 	
 	<netremotecallhib name="logicalRoomLeave" funcname="logicalRoomLeave" remotecontext="$once{ canvas.thishib }" >      
@@ -13,7 +22,11 @@
     		//this.parent.destroy();
             canvas.thishib.reconnectAfterRoomleft = true;
             canvas.thishib.reconnectedRoomInstance = this.parent;
-            canvas.thishib.disconnect();            
+            canvas.thishib.disconnect();
+            canvas._mainbgcontentNavi.setAttribute('height',canvas.naviHeight);
+            canvas.setAttribute('naviHeightDelta',canvas.naviHeight);
+            canvas._conferencemenu.subviews[0].destroy();
+            canvas._conferencemenu.setAttribute('visibility','hidden');        
     	</handler>
     </netremotecallhib>
 
