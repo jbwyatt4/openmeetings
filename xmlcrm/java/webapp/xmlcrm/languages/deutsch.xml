@@ -7,13 +7,13 @@
 <value>Meeting</value>
 </string>
 <string id="3" name="classroom">
-<value>Auditorium</value>
+<value>Event</value>
 </string>
 <string id="4" name="settings">
 <value>Einstellungen</value>
 </string>
 <string id="5" name="benutzer">
-<value>Benutzer</value>
+<value>Profil</value>
 </string>
 <string id="6" name="admin">
 <value>Administration</value>
@@ -43,7 +43,7 @@
 <value>VideoConference</value>
 </string>
 <string id="15" name="import">
-<value>Präsentation importieren</value>
+<value>Datei importieren</value>
 </string>
 <string id="16" name="refreshfiles">
 <value>Liste neu laden</value>
@@ -289,7 +289,7 @@
 <value>Change Moderator</value>
 </string>
 <string id="97" name="nonmoderrormessage">
-<value>You are not moderating this course!</value>
+<value>Sie sind nicht der Moderator dieser Konferenz!</value>
 </string>
 <string id="98" name="moderator">
 <value>Moderator:</value>
@@ -817,28 +817,28 @@
 <value>von</value>
 </string>	
 <string id="273" name="organisation_usersheader">
-<value>Users</value>
+<value>Benutzer</value>
 </string>
 <string id="274" name="organisation_usersicondelete">
-<value>delete user from organisation</value>
+<value>Benutzer aus Organisation entfernen</value>
 </string>	
 <string id="275" name="organisation_usersdeletedhead">
-<value>delete</value>
+<value>löschen</value>
 </string>
 <string id="276" name="organisation_usersalreadadded">
-<value>This user is already member of this organisation.</value>
+<value>Dieser Benutzer ist bereits Teil dieser Organisation.</value>
 </string>	
 <string id="277" name="dashboard_newsheader">
-<value>News</value>
+<value>Neuigkeiten</value>
 </string>
 <string id="278" name="dashboard_quicklinksheader">
 <value>Quicklinks</value>
 </string>	
 <string id="279" name="dashboard_quicklinkConf">
-<value>Goto Conference</value>
+<value>zu den Konferenzräumen (max. 4 Teilnehmer)</value>
 </string>	
 <string id="280" name="dashboard_quicklinkAudit">
-<value>Goto Auditorium</value>
+<value>zu den Eventräumen (unbegrenzte Zuschauer)</value>
 </string>	
 <string id="281" name="dashboard_quicklinksupport">
 <value>Help and Support</value>
@@ -850,18 +850,81 @@
 <value>http://groups.google.com/group/openmeetings-user</value>
 </string>	
 <string id="284" name="dashboard_reportbugs">
-<value>Report a bug!</value>
+<value>Fehler melden!</value>
 </string>	
 <string id="285" name="dashboard_rsslistitemlinktext">
-<value>more</value>
+<value>mehr</value>
 </string>
 <string id="286" name="dashboard_quicklinkhomepagelabel">
-<value>Project Webside (code.google.com/p/openmeetings/)</value>
+<value>Projekt Webside (code.google.com/p/openmeetings/)</value>
 </string>		
 <string id="287" name="dashboard_quicklinkmailinglistlabel">
 <value>User Mailing List (groups.google.com/group/openmeetings-user)</value>
 </string>		
 <string id="288" name="login_rememberuser">
-<value>Remember Login</value>
-</string>								
+<value>Login merken</value>
+</string>						
+<string id="289" name="main_navi">
+<value>Dateien</value>
+</string>
+<string id="290" name="subnavi">
+<value>Meine Übesicht</value>
+</string>
+<string id="291" name="subnavi">
+<value>meine Meetings</value>
+</string>
+<string id="292" name="subnavi">
+<value>meine Events</value>
+</string>	
+<string id="293" name="subnavi">
+<value>Öffentliche Meetings</value>
+</string>	
+<string id="294" name="subnavi">
+<value>Private Meetings</value>
+</string>	
+<string id="295" name="subnavi">
+<value>Öffentliche Events</value>
+</string>	
+<string id="296" name="subnavi">
+<value>Private Events</value>
+</string>	
+<string id="297" name="subnavi">
+<value>Öffentliche Dateien</value>
+</string>
+<string id="298" name="subnavi">
+<value>Private Dateien</value>
+</string>	
+<string id="299" name="subnavi">
+<value>Persönliche Dateien</value>
+</string>	
+<string id="300" name="subnavi">
+<value></value>
+</string>	
+<string id="301" name="conferencebar">
+<value>Moderation</value>
+</string>	
+<string id="302" name="conferencebar">
+<value>Moderation anfordern</value>
+</string>	
+<string id="303" name="conferencebar">
+<value>Umfrage</value>
+</string>	
+<string id="304" name="conferencebar">
+<value>Datei auswählen</value>
+</string>	
+<string id="305" name="conferencebar">
+<value>Einstellungen</value>
+</string>	
+<string id="306" name="conferencebar">
+<value>Kamera und Mikro Einstellungen</value>
+</string>	
+<string id="307" name="conferencebar">
+<value>Zeichenbrett Einstellungen</value>
+</string>	
+<string id="308" name="conferencebar">
+<value>Verlassen</value>
+</string>	
+<string id="309" name="conferencebar">
+<value>Zurück zur Raum-Übersicht</value>
+</string>			
 </language>

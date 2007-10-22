@@ -864,4 +864,67 @@
 <string id="288" name="login_rememberuser">
 <value>Remember Login</value>
 </string>	
+<string id="289" name="main_navi">
+<value>Content</value>
+</string>
+<string id="290" name="subnavi">
+<value>My Home Page</value>
+</string>
+<string id="291" name="subnavi">
+<value>My Scheduled Meetings</value>
+</string>
+<string id="292" name="subnavi">
+<value>My Scheduled Events</value>
+</string>	
+<string id="293" name="subnavi">
+<value>Public Meetings</value>
+</string>	
+<string id="294" name="subnavi">
+<value>Private Meetings</value>
+</string>	
+<string id="295" name="subnavi">
+<value>Public Events</value>
+</string>	
+<string id="296" name="subnavi">
+<value>Private Events</value>
+</string>	
+<string id="297" name="subnavi">
+<value>Public Content</value>
+</string>
+<string id="298" name="subnavi">
+<value>Private Content</value>
+</string>	
+<string id="299" name="subnavi">
+<value>Personal Content</value>
+</string>	
+<string id="300" name="subnavi">
+<value></value>
+</string>	
+<string id="301" name="conferencebar">
+<value>Moderation</value>
+</string>	
+<string id="302" name="conferencebar">
+<value>Apply for Moderation</value>
+</string>	
+<string id="303" name="conferencebar">
+<value>Polls</value>
+</string>	
+<string id="304" name="conferencebar">
+<value>Choose a file</value>
+</string>	
+<string id="305" name="conferencebar">
+<value>Settings</value>
+</string>	
+<string id="306" name="conferencebar">
+<value>Cam and Mic Settings</value>
+</string>	
+<string id="307" name="conferencebar">
+<value>Whiteboard Settings</value>
+</string>	
+<string id="308" name="conferencebar">
+<value>Exit</value>
+</string>	
+<string id="309" name="conferencebar">
+<value>Back to Rooms</value>
+</string>	
 </language>
