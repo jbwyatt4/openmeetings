@@ -23,6 +23,7 @@ User-List: http://groups.google.com/group/openmeetings-user
   * possibility to talk in audience modus (Issue197) (by c.kung)
   * private chat feature (Issue198) (by miltonshaw) 
   * mute button (by rancho) (Issue204)
+  * accept non-authenticated smtp-servers (by t.lemeur) (Issue207)
 
 = Release 0.7 =
 
