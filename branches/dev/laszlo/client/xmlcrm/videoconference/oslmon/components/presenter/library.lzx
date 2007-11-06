@@ -1,14 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library>
 
-<!-- Basecolor: C6CEDF -->
 
-    <include href="resources/" />
 	<include href="guipresenter.lzx" />
-    <include href="guipresentermini.lzx" />
-    <include href="presenterminibtn.lzx" />
-    <include href="barmenu.lzx" />
-    <include href="guipresentermaxi.lzx" />
 
     
 </library>
