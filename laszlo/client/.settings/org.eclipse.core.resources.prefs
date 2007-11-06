@@ -1,8 +1,4 @@
-<<<<<<< .mine
-#Mon Sep 24 12:04:08 CEST 2007
-=======
-#Sat Oct 06 11:07:03 CEST 2007
->>>>>>> .r588
+#Tue Nov 06 15:39:23 CET 2007
 =\=\=\=\=\=\=
 <<<<<<<=.mine
 >>>>>>>=.r486
@@ -37,13 +33,11 @@ encoding//xmlcrm/videoconference/conference/moderation/applyformoderation.lzx=UT
 encoding//xmlcrm/videoconference/conference/moderation/library.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/moderation/moderationpanel.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/moderation/responseformoderation.lzx=UTF-8
-encoding//xmlcrm/videoconference/conference/popups/answerpoll.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/popups/autoloader.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/popups/changedevice.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/popups/confirmation.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/popups/confirmationsingle.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/popups/converterpopup.lzx=UTF-8
-encoding//xmlcrm/videoconference/conference/popups/createpollwin.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/popups/editwhiteboarddefault.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/popups/errormoderatorpopup.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/popups/errorpopup.lzx=UTF-8
@@ -52,7 +46,6 @@ encoding//xmlcrm/videoconference/conference/popups/library.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/popups/loginscreen.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/popups/loginweb.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/popups/messagewin.lzx=UTF-8
-encoding//xmlcrm/videoconference/conference/popups/resultpollwin.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/popups/rpcerrordialog.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/remote/devcamera.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/remote/devmicrophone.lzx=UTF-8
@@ -63,7 +56,7 @@ encoding//xmlcrm/videoconference/conference/remote/sharedobject.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/remote/simplenetstream.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/tabbar/conferencecontainertab.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/tabbar/library.lzx=UTF-8
-encoding//xmlcrm/videoconference/conference/tabcontent/charttab.lzx=UTF-8
+encoding//xmlcrm/videoconference/conference/tabcontent/chattab.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/tabcontent/files/baselistpresentationItem.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/tabcontent/files/imagelistinnertable.lzx=UTF-8
 encoding//xmlcrm/videoconference/conference/tabcontent/files/imageslistdraw.lzx=UTF-8
@@ -170,10 +163,9 @@ encoding//xmlcrm/videoconference/xmlcrm/content/confadmin/confadminlistitem.lzx=
 encoding//xmlcrm/videoconference/xmlcrm/content/confadmin/confvalueform.lzx=UTF-8
 encoding//xmlcrm/videoconference/xmlcrm/content/confadmin/library.lzx=UTF-8
 encoding//xmlcrm/videoconference/xmlcrm/content/conference/audience.lzx=UTF-8
-encoding//xmlcrm/videoconference/xmlcrm/content/conference/audienceboard.lzx=UTF-8
 encoding//xmlcrm/videoconference/xmlcrm/content/conference/conference.lzx=UTF-8
-encoding//xmlcrm/videoconference/xmlcrm/content/conference/conferenceboard.lzx=UTF-8
 encoding//xmlcrm/videoconference/xmlcrm/content/conference/conferencedetailsarea.lzx=UTF-8
+encoding//xmlcrm/videoconference/xmlcrm/content/conference/conferencemenubar.lzx=UTF-8
 encoding//xmlcrm/videoconference/xmlcrm/content/conference/conferencerooms.lzx=UTF-8
 encoding//xmlcrm/videoconference/xmlcrm/content/conference/library.lzx=UTF-8
 encoding//xmlcrm/videoconference/xmlcrm/content/conference/roomlistItem.lzx=UTF-8
@@ -183,6 +175,7 @@ encoding//xmlcrm/videoconference/xmlcrm/content/contentviews/basecontentview.lzx
 encoding//xmlcrm/videoconference/xmlcrm/content/contentviews/contentsavewindow.lzx=UTF-8
 encoding//xmlcrm/videoconference/xmlcrm/content/contentviews/library.lzx=UTF-8
 encoding//xmlcrm/videoconference/xmlcrm/content/dashboard/maindashboard.lzx=UTF-8
+encoding//xmlcrm/videoconference/xmlcrm/content/events/privateevents.lzx=UTF-8
 encoding//xmlcrm/videoconference/xmlcrm/content/invitation/invitationquickloader.lzx=UTF-8
 encoding//xmlcrm/videoconference/xmlcrm/content/invitation/invitationuserwin.lzx=UTF-8
 encoding//xmlcrm/videoconference/xmlcrm/content/invitation/invitemainwindow.lzx=UTF-8
@@ -190,6 +183,7 @@ encoding//xmlcrm/videoconference/xmlcrm/content/invitation/library.lzx=UTF-8
 encoding//xmlcrm/videoconference/xmlcrm/content/issuetracker/issuetracker.lzx=UTF-8
 encoding//xmlcrm/videoconference/xmlcrm/content/issuetracker/library.lzx=UTF-8
 encoding//xmlcrm/videoconference/xmlcrm/content/library.lzx=UTF-8
+encoding//xmlcrm/videoconference/xmlcrm/content/meetings/privatemeetings.lzx=UTF-8
 encoding//xmlcrm/videoconference/xmlcrm/content/orgadmin/chooseuserwindow.lzx=UTF-8
 encoding//xmlcrm/videoconference/xmlcrm/content/orgadmin/library.lzx=UTF-8
 encoding//xmlcrm/videoconference/xmlcrm/content/orgadmin/orgadmin.lzx=UTF-8
