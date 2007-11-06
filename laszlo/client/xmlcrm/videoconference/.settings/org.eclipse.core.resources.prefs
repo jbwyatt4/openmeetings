@@ -1,16 +1,22 @@
-#Mon Oct 22 16:16:58 CEST 2007
+#Tue Nov 06 17:30:01 CET 2007
 eclipse.preferences.version=1
 encoding//conference/global/functions.lzx=UTF-8
 encoding//conference/tabbar/conferencecontainertab.lzx=UTF-8
-encoding//conference/tabcontent/charttab.lzx=UTF-8
 encoding//conference/tabcontent/chattab.lzx=UTF-8
 encoding//conference/tabcontent/library.lzx=UTF-8
 encoding//conference/tabcontent/participants.lzx=UTF-8
+encoding//conference/video/videoobject.lzx=UTF-8
+encoding//conference/videoclassroom/videoobjectaudience.lzx=UTF-8
+encoding//conference/whiteboard/helper/dragView.lzx=UTF-8
 encoding//conference/whiteboard/menu/drawchoosemodir.lzx=UTF-8
 encoding//conference/whiteboard/toolbar/basetoolbarmenu.lzx=UTF-8
 encoding//conference/whiteboard/toolbar/paintmenu.lzx=UTF-8
+encoding//conference/whiteboard/whiteboard.lzx=UTF-8
 encoding//oslmon/components/button/basechooseseicon.lzx=UTF-8
 encoding//oslmon/components/button/simplelabelbutton.lzx=UTF-8
+encoding//oslmon/components/explorer/explorerbox.lzx=UTF-8
+encoding//oslmon/components/presenter/guipresenter.lzx=UTF-8
+encoding//oslmon/components/presenter/library.lzx=UTF-8
 encoding//oslmon/components/text/labeltooltip.lzx=UTF-8
 encoding//test/lazslo-rtltext/rtltext.lzx=UTF-8
 encoding//test/lazslo-rtltext/test.lzx=UTF-8
@@ -20,7 +26,6 @@ encoding//xmlcrm/content/admin/library.lzx=UTF-8
 encoding//xmlcrm/content/admin/useradmin.lzx=UTF-8
 encoding//xmlcrm/content/admin/uservalueform.lzx=UTF-8
 encoding//xmlcrm/content/conference/audience.lzx=UTF-8
-encoding//xmlcrm/content/conference/audienceboard.lzx=UTF-8
 encoding//xmlcrm/content/conference/conference.lzx=UTF-8
 encoding//xmlcrm/content/dashboard/maindashboard.lzx=UTF-8
 encoding//xmlcrm/content/events/library.lzx=UTF-8

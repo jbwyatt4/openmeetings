@@ -230,7 +230,7 @@
 	<!-- 
 		The Content Area    
 	 -->
-    <view width="654" height="492" y="68" name="_drawareaMask" clip="true" >
+    <view width="654" height="492" y="68" name="_drawareaMask" clip="true" bgcolor="white" >
 	    <basedrawsave y="0" name="_drawarea" id="_drawarea" width="654" height="492" >
             <handler name="onprogress" args="perc">
                 //Debug.write("onprogress: ",perc);
