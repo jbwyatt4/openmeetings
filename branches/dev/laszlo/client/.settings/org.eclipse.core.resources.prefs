@@ -1,4 +1,4 @@
-#Tue Nov 06 15:39:23 CET 2007
+#Tue Nov 06 17:00:25 CET 2007
 =\=\=\=\=\=\=
 <<<<<<<=.mine
 >>>>>>>=.r486
@@ -115,6 +115,7 @@ encoding//xmlcrm/videoconference/oslmon/components/explorer/explorerbox.lzx=UTF-
 encoding//xmlcrm/videoconference/oslmon/components/explorer/library.lzx=UTF-8
 encoding//xmlcrm/videoconference/oslmon/components/library.lzx=UTF-8
 encoding//xmlcrm/videoconference/oslmon/components/list/monitorlist.lzx=UTF-8
+encoding//xmlcrm/videoconference/oslmon/components/presenter/guipresenter.lzx=UTF-8
 encoding//xmlcrm/videoconference/oslmon/components/simplevaluelist/library.lzx=UTF-8
 encoding//xmlcrm/videoconference/oslmon/components/simplevaluelist/recordvaluelist.lzx=UTF-8
 encoding//xmlcrm/videoconference/oslmon/components/simplevaluelist/simplevaluelist.lzx=UTF-8
