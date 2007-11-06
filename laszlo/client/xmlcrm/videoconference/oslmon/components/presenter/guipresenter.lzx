@@ -366,10 +366,9 @@
             y="0" height="20" clip="true"/>
 		<text fontsize="10" name="_title" height="17" x="6" y="1" text="${ this.parent.parent.title }" 
 			resize="true" fontstyle="bold" fgcolor="white" />
-        </view>  
 	</view>
     <handler name="onaddsubview" args="v">
-		//////Debug.write("onaddsubview",v);
+		//Debug.write("onaddsubview",v);
 		if (v.parent.subviews.length>2) this._resizeview.bringToFront();
     </handler>
     <view visibility="$once{ ((this.parent.resizeable) ? 'visible' : 'hidden' ) }"
