@@ -2,7 +2,7 @@
 <library>
     
 <class name="videoboardaudience" extends="guipresenter" x="2" y="2"
-    width="266" height="280" closable="false" labelid="313"
+    width="266" height="280" closable="false" title="Video and Audio"
     resizeable="false">
     <videocontaineraudience name="_videocontainer" x="2" y="22" />
 </class>   

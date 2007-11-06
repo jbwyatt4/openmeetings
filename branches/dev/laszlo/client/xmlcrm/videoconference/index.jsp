@@ -27,6 +27,7 @@
 		}
 	
 	</style>
+	<link rel="shortcut icon" href="favicon.ico"> 
 </head>
 <body align="center" valign="middle" align="center" onLoad="focusSWF()">
 

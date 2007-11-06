@@ -2,13 +2,13 @@
 <library>   
     
 <class name="videoboard" extends="guipresenter" x="2" y="2"
-    width="266" height="280" closable="false" labelid="313"
+    width="266" height="280" closable="false" title="Video and Audio"
     resizeable="false">
     <videocontainer name="_videocontainer" x="2" y="22" />
 </class>   
     
 <class name="whiteboardpanel" extends="guipresenter" x="270" y="2"
-    width="660" height="592" closable="false" labelid="315"
+    width="660" height="592" closable="false" title="Whiteboard"
     resizeable="false">
    <whiteboard name="_whiteboard" y="22" x="4">
         <handler name="onsharedMessage" args="obj"> 
