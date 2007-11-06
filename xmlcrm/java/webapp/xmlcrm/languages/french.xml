@@ -930,4 +930,31 @@
 <string id="310" name="conferencebar">
 <value>Logout</value>
 </string>	
+<string id="311" name="conference">
+<value>Desktop Viewer</value>
+</string>	
+<string id="312" name="conference">
+<value>start Desktop Viewer</value>
+</string>
+<string id="313" name="conference">
+<value>Video and Audio</value>
+</string>	
+<string id="314" name="conference">
+<value>Chat</value>
+</string>
+<string id="315" name="conference">
+<value>Whiteboard</value>
+</string>	
+<string id="316" name="conference">
+<value>Moderation</value>
+</string>
+<string id="317" name="conference">
+<value>Files</value>
+</string>	
+<string id="318" name="conference">
+<value>Users</value>
+</string>
+<string id="319" name="conference">
+<value>Polls</value>
+</string>
 </language>
