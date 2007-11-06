@@ -39,10 +39,10 @@
 </class>  
     
     
-<class name="filespanel" extends="guipresenter" x="2" y="334"
-    width="266" height="400" closable="false" title="Chat Files User"
+<class name="filespanel" extends="guipresenter" x="2" y="284"
+    width="266" height="310" closable="false" title="Chat Files User"
     resizeable="false">
-    <conferencecontainertab x="4" y="22" name="_menubar" />
+    <conferencecontainertab x="2" y="22" name="_menubar" />
 </class>        
     
     
@@ -52,11 +52,11 @@
         canvas._mainbgcontentNavi.setAttribute('height',0);
         canvas.setAttribute('naviHeightDelta',20);
         new conferencemenubar(canvas._conferencemenu);
+        new moderationpanel(canvas._conferencemenu,{x:400});
         canvas._conferencemenu.setAttribute('visibility','visible');
         
         new videoboard(this);
         new whiteboardpanel(this);
-        new modpanel(this);
         new filespanel(this);
     </handler>
 
@@ -76,6 +76,7 @@
             canvas._mainbgcontentNavi.setAttribute('height',canvas.naviHeight);
             canvas.setAttribute('naviHeightDelta',canvas.naviHeight);
             canvas._conferencemenu.subviews[0].destroy();
+            canvas._conferencemenu.subviews[1].destroy();
             canvas._conferencemenu.setAttribute('visibility','hidden');
     	</handler>
     </netremotecallhib>

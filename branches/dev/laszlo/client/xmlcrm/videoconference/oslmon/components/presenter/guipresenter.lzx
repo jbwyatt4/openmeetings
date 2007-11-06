@@ -361,11 +361,10 @@
     </view>        
     
 	<view x="1" y="1" width="${ this.parent.width-1 }" height="20" name="_titlebar" >
-		<view width="${ this.parent.parent.width-2 }" 
-            bgcolor="$once{ canvas.basebgcolorizer }"           
-            y="0" height="20" clip="true"/>
+		<view width="${ this.parent.parent.width-2 }" y="0" bgcolor="$once{ canvas.basebgcolorizer }" 
+            resource="explorer_thumb_rsc" stretches="width" />
 		<text fontsize="10" name="_title" height="17" x="6" y="1" text="${ this.parent.parent.title }" 
-			resize="true" fontstyle="bold" fgcolor="white" />
+			resize="true" fontstyle="bold" fgcolor="black" bgcolor="white"/>
 	</view>
     <handler name="onaddsubview" args="v">
 		//Debug.write("onaddsubview",v);
