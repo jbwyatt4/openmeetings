@@ -40,7 +40,7 @@
     
     
 <class name="filespanel" extends="guipresenter" x="2" y="334"
-    width="266" height="400" closable="false" text="Chat,Files,User"
+    width="266" height="400" closable="false" title="Chat Files User"
     resizeable="false">
     <conferencecontainertab x="4" y="22" name="_menubar" />
 </class>        
