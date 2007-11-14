@@ -72,10 +72,20 @@
             insert="true"
             column="deleted"
         />
+		
 
+        <property
+            name="user_id"
+            type="long"
+            update="true"
+            insert="true"
+            column="user_id"
+        />
+<!--
         <many-to-one
             name="users"
             class="org.xmlcrm.app.hibernate.beans.user.Users"
+			lazy="false"
             cascade="none"
             outer-join="true"
             update="true"
@@ -83,7 +93,7 @@
             column="user_id"
             not-null="false"
         />
-
+ -->
         <!--
             To add non XDoclet property mappings, create a file named
                 hibernate-properties-Configuration.xml

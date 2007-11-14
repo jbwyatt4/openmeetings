@@ -69,6 +69,7 @@ public class Configurationmanagement {
 	
 	public Configuration getConfByConfigurationId(long user_level, long configuration_id) {
 		try {
+			log.debug("getConfByConfigurationId1: user_level "+user_level);
 			if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)) {
 				Configuration configuration = null;
 				Object idf = HibernateUtil.createSession();
@@ -76,11 +77,15 @@ public class Configurationmanagement {
 				Transaction tx = session.beginTransaction();
 				Query query = session.createQuery("select c from Configuration as c where c.configuration_id = :configuration_id");
 				query.setLong("configuration_id", configuration_id);
-				for (Iterator it = query.iterate(); it.hasNext();) {
-					configuration = (Configuration) it.next();
-				}
+				query.setMaxResults(1);
+				configuration = (Configuration) query.uniqueResult();
 				tx.commit();
 				HibernateUtil.closeSession(idf);
+				log.debug("getConfByConfigurationId4: "+configuration);
+				
+				if (configuration!=null && configuration.getUser_id()!=null) {
+					configuration.setUsers(Usermanagement.getInstance().getUser(configuration.getUser_id()));
+				}
 				return configuration;
 			} else {
 				log.error("[getConfByConfigurationId] Permission denied "+user_level);
@@ -142,6 +147,7 @@ public class Configurationmanagement {
 	 */
 	private Long selectMaxFromConfigurations(){
 		try {
+			log.debug("selectMaxFromConfigurations ");
 			//get all users
 			Object idf = HibernateUtil.createSession();
 			Session session = HibernateUtil.getSession();
@@ -170,8 +176,7 @@ public class Configurationmanagement {
 			configuration.setStarttime(new Date());
 			configuration.setDeleted("false");
 			configuration.setComment(comment);
-			if (USER_ID!=null) configuration.setUsers(Usermanagement.getInstance().getUser(new Long(USER_ID)));
-
+			if (USER_ID!=null) configuration.setUser_id(USER_ID);
 			try {
 				Object idf = HibernateUtil.createSession();
 				Session session = HibernateUtil.getSession();
@@ -205,7 +210,7 @@ public class Configurationmanagement {
 					return this.addConfig(conf);
 				} else {
 					log.info("update Configuration ID: "+conf.getConfiguration_id());
-					conf.setUsers(Usermanagement.getInstance().getUser(users_id));
+					conf.setUser_id(users_id);
 					conf.setDeleted("false");
 					conf.setUpdatetime(new Date());
 					return this.updateConfig(conf);

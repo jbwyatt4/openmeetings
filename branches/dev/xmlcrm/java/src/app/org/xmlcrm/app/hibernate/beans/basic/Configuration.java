@@ -17,6 +17,7 @@ public class Configuration {
 	private Date updatetime;
 	private String comment;
 	private String deleted;
+	private Long user_id;
 	
 	private Users users;
 	
@@ -109,17 +110,29 @@ public class Configuration {
 	public void setDeleted(String deleted) {
 		this.deleted = deleted;
 	}
-    
-    
+	
     /**
-     * @hibernate.many-to-one
-     *  cascade="none"
+     * @hibernate.property
      *  column="user_id"
-     *  lazy="false"
-     *  class="org.xmlcrm.app.hibernate.beans.user.Users"
-     *  not-null="false"
-     *  outer-join="true"
-     */     
+     *  type="long"
+     */	
+    public Long getUser_id() {
+		return user_id;
+	}
+
+	public void setUser_id(Long user_id) {
+		this.user_id = user_id;
+	}
+
+	//    /**
+//     * @hibernate.many-to-one
+//     *  cascade="none"
+//     *  column="user_id"
+//     *  lazy="false"
+//     *  class="org.xmlcrm.app.hibernate.beans.user.Users"
+//     *  not-null="false"
+//     *  outer-join="true"
+//     */     
     public Users getUsers() {
         return users;
     }
