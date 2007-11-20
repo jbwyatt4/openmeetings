@@ -1,0 +1,198 @@
+#summary InstallationDebian openmeetings05Beta5
+#labels Installation
+
+= Contributed =
+
+Contributed by Roberto T.
+
+Install OpenMeetings
+Roberto Torresani erreti@gmail.com
+
+
+
+
+Install the svn version on a linux debian
+
+
+    *  Install Mysql
+
+aptitude install mysql-server
+
+
+    *  Create database
+
+      mysql
+
+            create database <db_name>;
+
+            \q
+
+
+    *  Install xvfb
+
+      aptitude install xvfb
+
+
+    *  Install OpenOffice
+
+      aptitude install openoffice.org
+
+
+    *  Edit file
+
+      vi /usr/lib/openoffice/share/registry/data/org/openoffice/Setup.xcu
+
+            After <node oor:name="Office"> insert the following lines:
+
+            <prop oor:name="ooSetupConnectionURL" oor:type="xs:string">
+
+		<value>socket,host=localhost,port=8100;urp</value>
+	   </prop>
+
+    *  Install ImageMagick
+
+      aptitude install imagemagick
+
+
+    *  Install Ghostscript
+
+      aptitude install gs-gpl
+
+
+    * Install SwfTools
+
+      wget http://ftp.it.debian.org/debian/pool/main/s/swftools/swftools_0.8.1-1_i386.deb
+
+      aptitude install libart-2.0-2
+
+      dpkg -i swftools_0.8.1-1_i386.deb
+
+      rm swftools_0.8.1-1_i386.deb
+
+
+    *  Install Red5
+
+      aptitude install sun-java5-bin
+
+      wget http://dl.fancycode.com/red5/0.6.3/debian/red5_0.6.3-1_all.deb
+
+      dpkg -i red5_0.6.3-1_all.deb
+
+      rm red5_0.6.3-1_all.deb
+
+
+    *  Instal java jdk
+
+      aptitude search sun-java5-demo
+
+      wget http://ftp.it.debian.org/debian/pool/non-free/s/sun-java5/sun-java5-demo_1.5.0-13-1_i386.deb
+
+      dpkg -i sun-java5-demo_1.5.0-13-1_i386.deb
+
+      wget http://ftp.it.debian.org/debian/pool/non-free/s/sun-java5/sun-java5-jdk_1.5.0-13-1_i386.deb
+
+      dpkg -i sun-java5-jdk_1.5.0-13-1_i386.deb
+
+    *  Download openlazslo
+
+      wget http://download.openlaszlo.org/4.0.6/openlaszlo-4.0.6-unix.tar.gz
+
+      tar -xvf openlaszlo-4.0.6-unix.tar.gz
+
+      mv lps-4.0.6/ /opt/
+
+      rm openlaszlo-4.0.6-unix.tar.gz
+
+    *  Download Openmeetings5 Beta5
+
+      wget http://openmeetings.googlecode.com/files/openmeetings05Beta5.tar.gz
+
+      tar -xvf openmeetings05Beta5.tar.gz
+
+      rm openmeetings05Beta5.tar.gz
+
+    *  Config hibernate (mysql)
+
+      cd xmlcrm/install/
+
+      cp mysql_hibernate.cfg.xml hibernate.cfg.xml
+
+      vi hibernate.cfg.xml
+
+            <property name="connection.username"><DB_USER></property>
+
+            <property name="connection.password"><DB_PASSWORD></property>
+
+            <property name="connection.url">jdbc:mysql://<DB_HOST>/<DB_NAME></property>
+
+      cd
+
+
+    *  Install subversion
+
+      aptitude install subversion
+
+    *  Download svn Openmeetings
+
+      svn checkout http://openmeetings.googlecode.com/svn/branches/dev/
+
+
+    *  Copy videoconference in openlazslo
+
+      cp -r dev/laszlo/client/xmlcrm/videoconference /opt/lps-4.0.6/Server/lps-4.0.6/
+
+
+    *  Configure rtmp host
+
+      cd /opt/lps-4.0.6/Server/lps-4.0.6/videoconference/
+
+      vi config.xml
+
+            <rtmphostlocal><HOST></rtmphostlocal>
+
+      cd
+
+
+    *  Configure xmlcrm
+
+      cp /root/dev/xmlcrm/java/outputjar/xmlcrm.jar /root/xmlcrm/WEB-INF/lib/xmlcrm.jar
+
+      cp /root/dev/xmlcrm/java/webapp/xmlcrm/languages/* /root/xmlcrm/languages/
+
+      cp -r /root/xmlcrm /usr/lib/red5/webapps/
+
+
+    *  if necessary
+
+      dpkg-reconfigure locales
+      aptitude install xfonts-base
+
+    *  Start red5 server
+
+      /etc/init.d/red5 start
+
+    *  Start openoffice service
+
+      xvfb-run --server-args='-screen 0 800x600x16' -a /usr/lib/openoffice/program/soffice -headless -nologo -norestore
+
+    *  Start openlazslo
+
+      export JAVA_HOME=/usr/lib/jvm/java-1.5.0-sun
+
+      /opt/lps-4.0.6/Server/tomcat-5.0.24/bin/startup.sh
+
+
+    *  Set database
+
+      http://213.21.184.138:5080/xmlcrm/Install
+
+    *  Access videoconference
+
+      http://213.21.184.138:8080/lps-4.0.6/videoconference/
+
+
+== Comments ==
+
+  *  there is no need to install OpenLaszlo if you only use the application but don't want to modify it.
+  *  you might would like to have a look at this shell script to start/stop/restart/status 
+http://wiki.conzul.de/index.php/OpenOffice2.x
