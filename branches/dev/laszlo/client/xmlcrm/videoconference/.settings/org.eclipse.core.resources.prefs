@@ -1,11 +1,14 @@
-#Tue Nov 06 17:30:01 CET 2007
+#Thu Nov 15 14:50:19 CET 2007
 eclipse.preferences.version=1
 encoding//conference/global/functions.lzx=UTF-8
+encoding//conference/remote/devrtmpconnection.lzx=UTF-8
 encoding//conference/tabbar/conferencecontainertab.lzx=UTF-8
 encoding//conference/tabcontent/chattab.lzx=UTF-8
 encoding//conference/tabcontent/library.lzx=UTF-8
 encoding//conference/tabcontent/participants.lzx=UTF-8
+encoding//conference/video/videocontainer.lzx=UTF-8
 encoding//conference/video/videoobject.lzx=UTF-8
+encoding//conference/videoclassroom/videocontaineraudience.lzx=UTF-8
 encoding//conference/videoclassroom/videoobjectaudience.lzx=UTF-8
 encoding//conference/whiteboard/helper/dragView.lzx=UTF-8
 encoding//conference/whiteboard/menu/drawchoosemodir.lzx=UTF-8

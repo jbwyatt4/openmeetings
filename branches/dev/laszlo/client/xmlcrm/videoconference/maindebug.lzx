@@ -47,7 +47,7 @@ of the red5-servlet
 <!-- 
 	Version number of this distro
  -->
-<attribute name="currentappversion" value="Version 0.5 Beta1" type="string" />
+<attribute name="currentappversion" value="Version 0.5 Beta5" type="string" />
 
 <silverstyle name="defaultstyle" isdefault="true" basecolor="${ canvas.basebgcolorizer }"
 	canvascolor="white" />
@@ -81,7 +81,12 @@ of the red5-servlet
 
 <resource name="mainbackroundmenu_rsc" src="resources/mainbackroundmenu.png" />
 
-
+<!-- Value's will be overwritten by config.xml -->
+<!-- Name of the Application -->
+<attribute name="currentappname" value="OpenMeetings" type="string" />    
+<attribute name="currentappnameurl" value="OpenMeetings" type="string" />    
+<attribute name="currentappnamebugurl" value="OpenMeetings" type="string" />    
+        
 <!-- URL/IP to use for the Server -->
 <attribute name="rmpthost" value="" type="string" />
 
@@ -223,8 +228,14 @@ containing the VideoViews
     this.setAttribute('baseMousecolorizer',canvas.myConfigSet.getPointer().xpathQuery('config/baseMousecolorizer/text()'));  
     this.setAttribute('baseMouseOvercolorizer',canvas.myConfigSet.getPointer().xpathQuery('config/baseMouseOvercolorizer/text()'));  
     this.setAttribute('currentappversion',canvas.myConfigSet.getPointer().xpathQuery('config/currentappversion/text()'));  
-    
+    this.setAttribute('currentappname',canvas.myConfigSet.getPointer().xpathQuery('config/currentappname/text()'));  
+    this.setAttribute('currentappnameurl',canvas.myConfigSet.getPointer().xpathQuery('config/currentappnameurl/text()'));  
+    this.setAttribute('currentappnamebugurl',canvas.myConfigSet.getPointer().xpathQuery('config/currentappnamebugurl/text()'));  
 
+    mainBaseText.setText(canvas.currentappname);
+    mainBaseText.setShadow();
+    mainBaseTextLabel.setAttribute('text',canvas.currentappnameurl);  
+        
 	this.chathistory=new Array();
 	
 	var doubleSlash = _url.indexOf("//");
@@ -282,11 +293,8 @@ containing the VideoViews
 
 <view name="_mainbgcontentNavi" y="0" x="0" bgcolor="${ canvas.basebgcolorizer }" clip="true"
     width="100%" height="$once{ canvas.naviHeight }" >
-    <text text="OpenMeetings" x="10" y="10"
+    <text id="mainBaseText" x="10" y="10"
         fgcolor="white" fontsize="20" fontstyle="bold">
-        <handler name="oninit">
-            this.setShadow();
-        </handler>
         <method name="setShadow" >
             <![CDATA[
             if (this.isinited){
@@ -297,9 +305,9 @@ containing the VideoViews
             ]]>              
         </method> 
         <handler name="onclick">
-            LzBrowser.loadURL("http://openmeetings.googlecode.com/","_blank");
+            LzBrowser.loadURL(canvas.currentappnameurl,"_blank");
         </handler>  
-        <labeltooltip text="http://openmeetings.googlecode.com/" />      
+        <labeltooltip id="mainBaseTextLabel" />      
     </text>
     <handler name="oninit">
         var cmenu = new LzContextMenu();

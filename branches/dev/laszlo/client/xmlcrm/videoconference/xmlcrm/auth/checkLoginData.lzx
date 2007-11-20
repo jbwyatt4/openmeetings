@@ -300,14 +300,15 @@
         </handler>
     </labelcheckbox>        
 
+
     <labeltext align="right" resize="true" valign="bottom">
         <handler name="oninit">
             <![CDATA[
-                this.setText("<u><FONT color='#0000CC'>visit openmeetings.googlecode.com</FONT></u>");
+                this.setText("<u><FONT color='#0000CC'>visit "+ canvas.currentappname +"</FONT></u>");
             ]]>
         </handler>
         <handler name="onclick">
-            LzBrowser.loadURL("http://openmeetings.googlecode.com/","_blank");
+            LzBrowser.loadURL(canvas.currentappnameurl,"_blank");
         </handler>        
     </labeltext>
 
