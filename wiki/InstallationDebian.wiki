@@ -195,4 +195,4 @@ aptitude install mysql-server
 
   *  there is no need to install OpenLaszlo if you only use the application but don't want to modify it.
   *  you might would like to have a look at this shell script to start/stop/restart/status 
-http://wiki.conzul.de/index.php/OpenOffice2.x
+    http://wiki.conzul.de/index.php/OpenOffice2.x
