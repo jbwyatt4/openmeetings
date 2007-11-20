@@ -43,5 +43,20 @@ of the red5-servlet
 	Version number of this distro
  -->
 <currentappversion>Version 0.5 Beta5</currentappversion>
+    
+<!--
+    Name of the Application
+ -->    
+<currentappname>OpenMeetings</currentappname>    
+    
+<!-- 
+    URL to the Home of the Application
+-->    
+<currentappnameurl>http://openmeetings.googlecode.com</currentappnameurl>        
 
+<!--
+    URL to Bugs/Support
+ -->
+<currentappnamebugurl>http://code.google.com/p/openmeetings/issues/list</currentappnamebugurl>   
+        
 </config>

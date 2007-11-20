@@ -264,7 +264,7 @@
         </handler>    
         <labeltext labelid="284" x="10" y="6" fontsize="14" />
         <handler name="onclick">
-            LzBrowser.loadURL("http://code.google.com/p/openmeetings/issues/list","_blank");
+            LzBrowser.loadURL(canvas.currentappnamebugurl,"_blank");
         </handler>       
          
     </view>    
@@ -281,14 +281,7 @@
         }
         ]]>              
     </method>        
-    <!--
-    <labeltext labelid="284" fgcolor="red" fontsize="10" >  
-        <handler name="onclick">
-            LzBrowser.loadURL("http://code.google.com/p/openmeetings/issues/list","_blank");
-        </handler>
-        
-    </labeltext>
-    -->    
+
 </class>    
 
 </library>
