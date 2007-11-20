@@ -184,11 +184,11 @@ aptitude install mysql-server
 
     *  Set database
 
-      http://213.21.184.138:5080/xmlcrm/Install
+      http://$YOUR_IP:5080/xmlcrm/Install
 
     *  Access videoconference
 
-      http://213.21.184.138:8080/lps-4.0.6/videoconference/
+      http://$YOUR_IP:8080/lps-4.0.6/videoconference/
 
 
 == Comments ==
