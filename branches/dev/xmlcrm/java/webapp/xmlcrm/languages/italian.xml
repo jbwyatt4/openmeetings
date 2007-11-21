@@ -16,7 +16,7 @@
 <value>Utente</value>
 </string>
 <string id="6" name="admin">
-<value>Administrazione</value>
+<value>Amministrazione</value>
 </string>
 <string id="7" name="stop">
 <value>Stop</value>
@@ -55,7 +55,7 @@
 <value>Nuovo sondaggio</value>
 </string>
 <string id="19" name="newpollheader">
-<value>Un nuovo sondaggio per l conferenza.</value>
+<value>Un nuovo sondaggio per la conferenza.</value>
 </string>
 <string id="20" name="question">
 <value>Domanda:</value>
@@ -121,7 +121,7 @@
 <value>Risposte:</value>
 </string>
 <string id="41" name="nopoll">
-<value>Nessun sondaggio è stato avviato.</value>
+<value>Nessun sondaggio è attivo.</value>
 </string>
 <string id="42" name="votings">
 <value>Vota!</value>
@@ -139,7 +139,7 @@
 <value>Altri partecipanti</value>
 </string>
 <string id="47" name="alreadychosen">
-<value>Già schelto</value>
+<value>Già scelto</value>
 </string>
 <string id="48" name="enter">
 <value>entra</value>
@@ -148,7 +148,7 @@
 <value>Il moderatore ha lasciato l'incontro.</value>
 </string>
 <string id="50" name="systemmessage">
-<value>System information</value>
+<value>Informazioni di sistema</value>
 </string>
 <string id="51" name="chossedevice">
 <value>Scegli il dispositivo</value>
@@ -187,7 +187,7 @@
 <value>Cancella la lavagna</value>
 </string>
 <string id="63" name="clearwhiteboardquestion">
-<value>Vuoi che la lavagnia sia pulita prima di aggiungere una nuova immagine?</value>
+<value>Vuoi che la lavagna sia pulita prima di aggiungere una nuova immagine?</value>
 </string>
 <string id="64" name="dontaskagain">
 <value>Non chiedere ancora</value>
@@ -289,7 +289,7 @@
 <value>Cambia moderatore</value>
 </string>
 <string id="97" name="nonmoderrormessage">
-<value>Non sei il moderatoreper questo corso!</value>
+<value>Non sei il moderatore per questo corso!</value>
 </string>
 <string id="98" name="moderator">
 <value>Moderatore:</value>
@@ -700,7 +700,7 @@ Inserisci due password identiche di minimo quattro caratteri
 </value>
 </string>
 <string id="233" name="user_registerMailError">
-<value>Mails sbagliata</value>
+<value>Mail sbagliata</value>
 </string>
 <string id="234" name="user_registerMailErrorHeader">
 <value>Hai inserito una mail non valida</value>
@@ -721,7 +721,7 @@ Il tuo profilo è stato creato correttamente. Puoi effettuare il login.
 <value>Condivisione non permessa</value>
 </string>	
 <string id="239" name="user_doStartScreenViewer">
-<value>Scarica l'immagine</value>
+<value>Condivisione desktop</value>
 </string>	
 <string id="240" name="screen_warnBandwidth">
 <value>larghezza di banda insufficiente: Non sei abilitato a sincronizzare le immagini. i Frames saranno lasciati. Se visualizzi questo messaggio chiedi al moderatore di abbassare la qualità.</value>
@@ -811,7 +811,7 @@ Il tuo profilo è stato creato correttamente. Puoi effettuare il login.
 <value>Ultimo aggiornamento</value>
 </string>
 <string id="269" name="confadminform_labelupdatedby">
-<value>updatedby</value>
+<value>aggiornato da</value>
 </string>
 <string id="270" name="confadminform_labelcomment">
 <value>commenti</value>
@@ -823,31 +823,31 @@ Il tuo profilo è stato creato correttamente. Puoi effettuare il login.
 <value>di</value>
 </string>	
 <string id="273" name="organisation_usersheader">
-<value>Users</value>
+<value>Utenti</value>
 </string>
 <string id="274" name="organisation_usersicondelete">
-<value>delete user from organisation</value>
+<value>Cancella l'utente dall'organizzazione</value>
 </string>	
 <string id="275" name="organisation_usersdeletedhead">
-<value>delete</value>
+<value>cancella</value>
 </string>
 <string id="276" name="organisation_usersalreadadded">
-<value>This user is already member of this organisation.</value>
+<value>Questo utente � gi� membro di questa organizzazione.</value>
 </string>		
 <string id="277" name="dashboard_newsheader">
 <value>News</value>
 </string>
 <string id="278" name="dashboard_quicklinksheader">
-<value>Quicklinks</value>
+<value>Link veloce</value>
 </string>	
 <string id="279" name="dashboard_quicklinkConf">
-<value>Goto Conference</value>
+<value>Vai alla Conferenza</value>
 </string>	
 <string id="280" name="dashboard_quicklinkAudit">
-<value>Goto Auditorium</value>
+<value>Vai all'Auditorium</value>
 </string>	
 <string id="281" name="dashboard_quicklinksupport">
-<value>Help and Support</value>
+<value>Aiuto e supporto</value>
 </string>	
 <string id="282" name="dashboard_quickhomepageurl">
 <value>http://code.google.com/p/openmeetings/</value>
@@ -856,19 +856,19 @@ Il tuo profilo è stato creato correttamente. Puoi effettuare il login.
 <value>http://groups.google.com/group/openmeetings-user</value>
 </string>	
 <string id="284" name="dashboard_reportbugs">
-<value>Report a bug!</value>
+<value>Riporta un errore!</value>
 </string>	
 <string id="285" name="dashboard_rsslistitemlinktext">
-<value>more</value>
+<value>Altre informazioni</value>
 </string>
 <string id="286" name="dashboard_quicklinkhomepagelabel">
-<value>Project Webside (code.google.com/p/openmeetings/)</value>
+<value>Sito web del progetto (code.google.com/p/openmeetings/)</value>
 </string>		
 <string id="287" name="dashboard_quicklinkmailinglistlabel">
-<value>User Mailing List (groups.google.com/group/openmeetings-user)</value>
+<value>Mailing List utenti (groups.google.com/group/openmeetings-user)</value>
 </string>		
 <string id="288" name="login_rememberuser">
-<value>Remember Login</value>
+<value>Ricorda utente</value>
 </string>	
 <string id="289" name="main_navi">
 <value>Content</value>
@@ -877,90 +877,90 @@ Il tuo profilo è stato creato correttamente. Puoi effettuare il login.
 <value>My Home Page</value>
 </string>
 <string id="291" name="subnavi">
-<value>My Scheduled Meetings</value>
+<value>Mie conferenze fissate</value>
 </string>
 <string id="292" name="subnavi">
-<value>My Scheduled Events</value>
+<value>Mie eventi fissati</value>
 </string>	
 <string id="293" name="subnavi">
-<value>Public Meetings</value>
+<value>Conferenze pubbliche</value>
 </string>	
 <string id="294" name="subnavi">
-<value>Private Meetings</value>
+<value>Conferenze private</value>
 </string>	
 <string id="295" name="subnavi">
-<value>Public Events</value>
+<value>Eventi pubblici</value>
 </string>	
 <string id="296" name="subnavi">
-<value>Private Events</value>
+<value>Eventi privati</value>
 </string>	
 <string id="297" name="subnavi">
-<value>Public Content</value>
+<value>Contenuti pubblici</value>
 </string>
 <string id="298" name="subnavi">
-<value>Private Content</value>
+<value>Contenuti privati</value>
 </string>	
 <string id="299" name="subnavi">
-<value>Personal Content</value>
+<value>Contenuti personali</value>
 </string>	
 <string id="300" name="subnavi">
 <value></value>
 </string>	
 <string id="301" name="conferencebar">
-<value>Moderation</value>
+<value>Moderatore</value>
 </string>	
 <string id="302" name="conferencebar">
-<value>Apply for Moderation</value>
+<value>Assegna moderatore</value>
 </string>	
 <string id="303" name="conferencebar">
-<value>Polls</value>
+<value>Sondaggio</value>
 </string>	
 <string id="304" name="conferencebar">
-<value>Choose a file</value>
+<value>Scegli un file</value>
 </string>	
 <string id="305" name="conferencebar">
-<value>Settings</value>
+<value>Impostazioni</value>
 </string>	
 <string id="306" name="conferencebar">
-<value>Cam and Mic Settings</value>
+<value>Impostazioni Cam e Mic</value>
 </string>	
 <string id="307" name="conferencebar">
-<value>Whiteboard Settings</value>
+<value>Impostazioni lavagna</value>
 </string>	
 <string id="308" name="conferencebar">
-<value>Exit</value>
+<value>Esci</value>
 </string>	
 <string id="309" name="conferencebar">
-<value>Back to Rooms</value>
+<value>Torna alle stanze</value>
 </string>
 <string id="310" name="conferencebar">
 <value>Logout</value>
 </string>		
 <string id="311" name="conference">
-<value>Desktop Viewer</value>
+<value>Visualizzatore desktop</value>
 </string>	
 <string id="312" name="conference">
-<value>start Desktop Viewer</value>
+<value>Avvia visualizzatore desktop</value>
 </string>
 <string id="313" name="conference">
-<value>Video and Audio</value>
+<value>Video e Audio</value>
 </string>	
 <string id="314" name="conference">
 <value>Chat</value>
 </string>
 <string id="315" name="conference">
-<value>Whiteboard</value>
+<value>Lavagna</value>
 </string>	
 <string id="316" name="conference">
-<value>Moderation</value>
+<value>Moderatore</value>
 </string>
 <string id="317" name="conference">
 <value>Files</value>
 </string>	
 <string id="318" name="conference">
-<value>Users</value>
+<value>Utenti</value>
 </string>
 <string id="319" name="conference">
-<value>Polls</value>
+<value>Sondaggio</value>
 </string>
 </language>
