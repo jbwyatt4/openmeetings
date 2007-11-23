@@ -527,8 +527,6 @@ public class Organisationmanagement {
 			tx.commit();
 			HibernateUtil.closeSession(idf);
 			log.error(ll.size());
-			log.error(ll.get(0));
-			log.error(ll.get(0).getClass().getName());
 			return new Long(ll.size());	
 			
 		} catch (HibernateException ex) {
