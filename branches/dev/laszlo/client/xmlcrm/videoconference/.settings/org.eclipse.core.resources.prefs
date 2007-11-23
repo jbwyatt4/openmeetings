@@ -1,7 +1,9 @@
-#Thu Nov 15 14:50:19 CET 2007
+#Fri Nov 23 17:40:42 CET 2007
 eclipse.preferences.version=1
 encoding//conference/global/functions.lzx=UTF-8
+encoding//conference/popups/rpcerrordialog.lzx=UTF-8
 encoding//conference/remote/devrtmpconnection.lzx=UTF-8
+encoding//conference/remote/simplenetstream.lzx=UTF-8
 encoding//conference/tabbar/conferencecontainertab.lzx=UTF-8
 encoding//conference/tabcontent/chattab.lzx=UTF-8
 encoding//conference/tabcontent/library.lzx=UTF-8
@@ -18,6 +20,7 @@ encoding//conference/whiteboard/whiteboard.lzx=UTF-8
 encoding//oslmon/components/button/basechooseseicon.lzx=UTF-8
 encoding//oslmon/components/button/simplelabelbutton.lzx=UTF-8
 encoding//oslmon/components/explorer/explorerbox.lzx=UTF-8
+encoding//oslmon/components/labelradiobutton.lzx=UTF-8
 encoding//oslmon/components/presenter/guipresenter.lzx=UTF-8
 encoding//oslmon/components/presenter/library.lzx=UTF-8
 encoding//oslmon/components/text/labeltooltip.lzx=UTF-8
@@ -30,12 +33,16 @@ encoding//xmlcrm/content/admin/useradmin.lzx=UTF-8
 encoding//xmlcrm/content/admin/uservalueform.lzx=UTF-8
 encoding//xmlcrm/content/conference/audience.lzx=UTF-8
 encoding//xmlcrm/content/conference/conference.lzx=UTF-8
+encoding//xmlcrm/content/contentviews/contentsavewindow.lzx=UTF-8
 encoding//xmlcrm/content/dashboard/maindashboard.lzx=UTF-8
 encoding//xmlcrm/content/events/library.lzx=UTF-8
 encoding//xmlcrm/content/events/privateevents.lzx=UTF-8
 encoding//xmlcrm/content/events/publicevents.lzx=UTF-8
+encoding//xmlcrm/content/invitation/invitationuserwin.lzx=UTF-8
+encoding//xmlcrm/content/invitation/invitemainwindow.lzx=UTF-8
 encoding//xmlcrm/content/library.lzx=UTF-8
 encoding//xmlcrm/content/meetings/library.lzx=UTF-8
+encoding//xmlcrm/content/orgadmin/orgadminvalueform.lzx=UTF-8
 encoding//xmlcrm/content/settings/usersettings.lzx=UTF-8
 encoding//xmlcrm/hibernate/rtmphib.lzx=UTF-8
 encoding//xmlcrm/navi/library.lzx=UTF-8
