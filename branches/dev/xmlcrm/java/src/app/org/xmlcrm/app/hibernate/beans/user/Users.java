@@ -33,6 +33,7 @@ public class Users {
 	private String deleted;
 	private Long language_id;
 	private Adresses adresses;
+	private String resethash;
 	
 	private Userlevel userlevel;
 
@@ -333,6 +334,18 @@ public class Users {
 	}
 	public void setOrganisation_users(Set organisation_users) {
 		this.organisation_users = organisation_users;
+	}
+
+    /**
+     * @hibernate.property
+     *  column="resethash"
+     *  type="string"
+     */	
+	public String getResethash() {
+		return resethash;
+	}
+	public void setResethash(String resethash) {
+		this.resethash = resethash;
 	}
 	
 	

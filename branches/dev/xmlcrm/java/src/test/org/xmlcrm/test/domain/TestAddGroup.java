@@ -30,7 +30,7 @@ public class TestAddGroup extends TestCase {
 		
 		log.error("new organisation_user: "+organisation_usersid);
 		
-		Users us = Usermanagement.getInstance().getUser(1);
+		Users us = Usermanagement.getInstance().getUser(new Long(1));
 		
 		log.error(us.getLastname());
 		log.error(us.getAdresses().getTown());

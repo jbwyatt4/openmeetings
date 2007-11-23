@@ -19,12 +19,14 @@ import org.xmlcrm.app.hibernate.beans.user.*;
 import org.xmlcrm.app.hibernate.beans.adresses.Adresses_Emails;
 import org.xmlcrm.app.hibernate.beans.adresses.Emails;
 import org.xmlcrm.app.hibernate.utils.HibernateUtil;
+import org.xmlcrm.app.templates.ResetPasswordTemplate;
 import org.xmlcrm.app.data.basic.AuthLevelmanagement;
 import org.xmlcrm.app.data.basic.Configurationmanagement;
 import org.xmlcrm.app.data.beans.basic.SearchResult;
 import org.xmlcrm.app.data.user.Organisationmanagement;
 import org.xmlcrm.utils.mappings.CastMapToObject;
 import org.xmlcrm.utils.math.*;
+import org.xmlcrm.utils.mail.MailHandler;
 
 import org.red5.io.utils.ObjectMap;
 
@@ -135,8 +137,7 @@ public class Usermanagement {
 	 * @param user_id
 	 * @return
 	 */
-	public Users getUser(long user_id) {
-		Users users = new Users();
+	public Users getUser(Long user_id) {
 		if (user_id > 0) {
 			try {
 				Object idf = HibernateUtil.createSession();
@@ -144,11 +145,10 @@ public class Usermanagement {
 				Transaction tx = session.beginTransaction();
 				Query query = session.createQuery("select c from Users as c where c.user_id = :user_id");
 				query.setLong("user_id", user_id);
-				for (Iterator it2 = query.iterate(); it2.hasNext();) {
-					users = (Users) it2.next();
-				}
+				Users users = (Users) query.uniqueResult();
 				tx.commit();
 				HibernateUtil.closeSession(idf);
+				return users;
 				// TODO: Einbinden der Benutzergruppen
 				// users.setUsergroups(ResHandler.getGroupmanagement().getUserGroups(user_id));
 			} catch (HibernateException ex) {
@@ -157,9 +157,28 @@ public class Usermanagement {
 				log.error(ex2);
 			}
 		} else {
-			users.setFirstname("Error: No USER_ID given");
+			log.error("[getUser] "+"Error: No USER_ID given");
 		}
-		return users;
+		return null;
+	}
+	
+	public void updateUser(Users user) {
+		if (user.getUser_id() > 0) {
+			try {
+				Object idf = HibernateUtil.createSession();
+				Session session = HibernateUtil.getSession();
+				Transaction tx = session.beginTransaction();
+				session.update(user);
+				tx.commit();
+				HibernateUtil.closeSession(idf);
+			} catch (HibernateException ex) {
+				log.error("[updateUser] ",ex);
+			} catch (Exception ex2) {
+				log.error("[updateUser] ",ex2);
+			}
+		} else {
+			log.error("[updateUser] "+"Error: No USER_ID given");
+		}
 	}
 
 	/**
@@ -439,30 +458,6 @@ public class Usermanagement {
 			return null;
 		}
 		return null;
-	}
-
-	public String resetPassword(int USER_ID) {
-		String res = "Fehler beim Update";
-		try {
-			Object idf = HibernateUtil.createSession();
-			Session session = HibernateUtil.getSession();
-			Transaction tx = session.beginTransaction();
-			MD5Calc md5 = new MD5Calc("MD5");
-			String newPass = GenerateRandom.randomstring(5, 10);
-			String hqlUpdate = "update users set password = :password where USER_ID= :USER_ID";
-			int updatedEntities = session.createQuery(hqlUpdate).setString(
-					"password", md5.do_checksum(newPass)).setInteger("USER_ID",
-					USER_ID).executeUpdate();
-			res = "Success" + updatedEntities;
-			tx.commit();
-			HibernateUtil.closeSession(idf);
-			Emailmanagement.getInstance().sendNewPass(USER_ID, newPass);
-		} catch (HibernateException ex) {
-			log.error(ex);
-		} catch (Exception ex2) {
-			log.error(ex2);
-		}
-		return res;
 	}
 
 	public String updateUserdata(int DATA_ID, long USER_ID, String DATA_KEY,
@@ -984,6 +979,67 @@ public class Usermanagement {
 			log.error("[saveOrUpdateUser]",ex);
 		}
 		
+		return null;
+	}
+	
+	public Long resetUser(String email, String username, String appLink) {
+		
+		log.error("email "+email);
+		
+		if (email.length()>0){
+			
+			Adresses_Emails addr_e = (Adresses_Emails) Emailmanagement.getInstance().getAdresses_EmailsByMail(email);
+			
+			log.error("addr_e "+addr_e);
+			if (addr_e!=null) {
+				log.error("getAdresses_id "+addr_e.getAdresses_id());
+				Users us = this.getUserByAdressesId(addr_e.getAdresses_id());
+				log.error("us "+us);
+				if (us!=null) {
+					String loginData = us.getLogin()+new Date();
+					MD5Calc md5 = new MD5Calc("MD5");
+					log.error("User: "+us.getLogin());
+					us.setResethash(md5.do_checksum(loginData));
+					this.updateUser(us);
+					String reset_link = appLink+"?hash="+us.getResethash();
+					
+					Adresses_Emails addrE = (Adresses_Emails) us.getAdresses().getEmails().iterator().next();
+					String template = ResetPasswordTemplate.getInstance().getResetPasswordTemplate(reset_link);
+					
+					MailHandler.sendMail(addrE.getMail().getEmail(), "RESET PASS", template);
+					
+				} else {
+					return new Long(-1);
+				}
+			} else {
+				return new Long(-1);
+			}
+		
+		} else if (username.length()>0){
+			
+		}
+		
+		return new Long(-2);
+	}
+	
+	private Users getUserByAdressesId(Long adresses_id) {
+		try {
+			String hql = "SELECT u FROM Users as u " +
+					" where u.adresses.adresses_id = :adresses_id" +
+					" AND deleted != :deleted";
+			Object idf = HibernateUtil.createSession();
+			Session session = HibernateUtil.getSession();
+			Transaction tx = session.beginTransaction();
+			Query query = session.createQuery(hql);
+			query.setLong("adresses_id", adresses_id);
+			query.setString("deleted", "true");
+			Users us = (Users) query.uniqueResult();
+			tx.commit();
+			HibernateUtil.closeSession(idf);
+			return us;			
+		} catch (Exception e) {
+			log.error("[getUserByAdressesId]",e);
+		}
 		return null;
 	}
 

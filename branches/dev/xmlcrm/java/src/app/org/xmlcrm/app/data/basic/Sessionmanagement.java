@@ -107,7 +107,8 @@ public class Sessionmanagement {
 			if (sessiondata!=null) log.error("checkSession USER_ID: "+sessiondata.getUser_id());
 				
 			if (sessiondata!=null) updatesession(SID);
-			if (count == 0 || sessiondata.equals(null) || sessiondata.getUser_id().equals(null) || sessiondata.getUser_id().equals(new Long(0)) ) {
+			if (sessiondata==null || count == 0 || sessiondata.equals(null) ||
+					sessiondata.getUser_id()==null || sessiondata.getUser_id().equals(null) || sessiondata.getUser_id().equals(new Long(0)) ) {
 				return new Long(0);
 			} else {
 				return sessiondata.getUser_id();

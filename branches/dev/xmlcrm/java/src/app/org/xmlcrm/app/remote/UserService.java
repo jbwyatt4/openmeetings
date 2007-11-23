@@ -35,6 +35,11 @@ public class UserService {
         return Usermanagement.getInstance().getUser(users_id);
 	}
 	
+	public Long resetUserPwd(String SID, String email, String login, String applink){
+		Sessionmanagement.getInstance().checkSession(SID);
+		return Usermanagement.getInstance().resetUser(email, login, applink);
+	}
+	
 	/**
 	 * get user by id, admin only
 	 * @param SID
