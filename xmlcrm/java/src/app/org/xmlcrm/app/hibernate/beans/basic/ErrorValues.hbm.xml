@@ -7,47 +7,23 @@
 <hibernate-mapping
 >
     <class
-        name="org.xmlcrm.app.hibernate.beans.basic.Configuration"
-        table="configuration"
+        name="org.xmlcrm.app.hibernate.beans.basic.ErrorValues"
+        table="errorvalues"
     >
 
         <id
-            name="configuration_id"
-            column="configuration_id"
+            name="errorValuesId"
+            column="errorValuesId"
             type="java.lang.Long"
         >
             <generator class="increment">
               <!--  
                   To add non XDoclet generator parameters, create a file named 
-                  hibernate-generator-params-Configuration.xml 
+                  hibernate-generator-params-ErrorValues.xml 
                   containing the additional parameters and place it in your merge dir. 
               --> 
             </generator>
         </id>
-
-        <property
-            name="comment"
-            type="string"
-            update="true"
-            insert="true"
-            column="comment"
-        />
-
-        <property
-            name="conf_key"
-            type="string"
-            update="true"
-            insert="true"
-            column="conf_key"
-        />
-
-        <property
-            name="conf_value"
-            type="string"
-            update="true"
-            insert="true"
-            column="conf_value"
-        />
 
         <property
             name="starttime"
@@ -73,17 +49,19 @@
             column="deleted"
         />
 
-        <property
-            name="user_id"
-            type="long"
-            update="true"
-            insert="true"
-            column="user_id"
+        <many-to-one
+            name="fieldvalues"
+            class="org.xmlcrm.app.hibernate.beans.lang.Fieldvalues"
+            cascade="none"
+            outer-join="true"
+            update="false"
+            insert="false"
+            column="fieldvalues_id"
         />
 
         <!--
             To add non XDoclet property mappings, create a file named
-                hibernate-properties-Configuration.xml
+                hibernate-properties-ErrorValues.xml
             containing the additional properties and place it in your merge dir.
         -->
 

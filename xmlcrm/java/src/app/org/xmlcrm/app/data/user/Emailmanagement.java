@@ -89,6 +89,27 @@ public class Emailmanagement {
 		}
 		return null;
 	}
+	
+	public Adresses_Emails getAdresses_EmailsByMail(String email) {
+		try {
+			String hql = "select c from Adresses_Emails as c " +
+					" where c.mail.email = :email ";
+			Object idf = HibernateUtil.createSession();
+			Session session = HibernateUtil.getSession();
+			Transaction tx = session.beginTransaction();
+			Query query = session.createQuery(hql);
+			query.setString("email", email);
+			Adresses_Emails e = (Adresses_Emails) query.uniqueResult();
+			tx.commit();
+			HibernateUtil.closeSession(idf);
+			return e;
+		} catch (HibernateException ex) {
+			log.error(ex);
+		} catch (Exception ex2) {
+			log.error(ex2);
+		}
+		return null;
+	}	
 
 	public List getemailsCon(int CONTACT_ID) {
 		try {
@@ -351,46 +372,6 @@ public class Emailmanagement {
 			log.error(ex2);
 		}
 		return res;
-	}
-
-	public String sendNewPass(long users_id, String Userpass) {
-		String succ = "invalid email";
-		String mail = "";
-		try {
-			//            Object idf = HibernateUtil.createSession(); 			Session session = HibernateUtil.getSession();
-			//            Transaction tx = session.beginTransaction();
-			//            Query query = session.createQuery("select c from emails as c where c.USER_ID = :USER_ID");
-			//            query.setInteger("USER_ID", users_id);   
-			//            int count = query.list().size();
-			//            Emails[] emails = new Emails[count];
-			//            int k = 0;
-			//            for (Iterator it2 = query.iterate(); it2.hasNext();) {
-			//                emails[k] = (Emails) it2.next();
-			//                k++;
-			//            }
-			//            tx.commit();
-			//            HibernateUtil.closeSession(idf);
-			//            mail = emails[0].getEmail();
-		} catch (HibernateException ex) {
-			succ = "Error: " + ex;
-		} catch (Exception ex2) {
-			succ = "Error: " + ex2;
-		}
-		MailHandler MailHandler = new MailHandler();
-		String data = "";
-		data += "<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>";
-		data += "<html xmlns='http://www.w3.org/1999/xhtml' xml:lang='de' lang='de'>";
-		data += "<head>";
-		data += "<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1' /></head><body";
-		data += "<b>Ihr Passwort wurde neu gesetzt</b><br />";
-		data += "<br /><b>Ihr neues Passwort:</b>";
-		data += "<br />Passwort: " + Userpass;
-		data += "<br />EMail: " + mail + "<br /><br />";
-		data += "Sie können Ihr Passwort in ihrem Benutzerkonto jederzeit ändern";
-		data += "<br />http://www.xmlshopsystem.xulu";
-		data += "<br />service@xmlshopsystem.xulu</body></html>";
-		succ = MailHandler.sendMail(mail, "Willkommen im XMLShop", data);
-		return succ;
 	}
 
 }

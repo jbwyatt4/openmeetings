@@ -193,6 +193,14 @@
 
         </set>
 
+        <property
+            name="resethash"
+            type="string"
+            update="true"
+            insert="true"
+            column="resethash"
+        />
+
         <!--
             To add non XDoclet property mappings, create a file named
                 hibernate-properties-Users.xml

@@ -50,6 +50,7 @@
 		<mapping resource="org/xmlcrm/app/hibernate/beans/basic/Sessiondata.hbm.xml"/>
 		<mapping resource="org/xmlcrm/app/hibernate/beans/user/Users_Usergroups.hbm.xml"/>
 		<mapping resource="org/xmlcrm/app/hibernate/beans/basic/Configuration.hbm.xml"/>
+		<mapping resource="org/xmlcrm/app/hibernate/beans/basic/ErrorValues.hbm.xml"/>
 		<mapping resource="org/xmlcrm/app/hibernate/beans/user/Userlevel.hbm.xml"/>
 		<mapping resource="org/xmlcrm/app/hibernate/beans/adresses/Adresses_Phones.hbm.xml"/>
 		<mapping resource="org/xmlcrm/app/hibernate/beans/termine/Termine_Todolist.hbm.xml"/>
