@@ -6,13 +6,12 @@ import org.xmlcrm.app.hibernate.beans.lang.Fieldvalues;
 
 /**
  * 
- * @hibernate.class table="errorvalues"
+ * @hibernate.class table="errortypes"
  *
  */
-public class ErrorValues {
+public class ErrorType {
 	
-	private Long errorValuesId;
-	private ErrorType errorType;
+	private Long errortype_id;
 	private Fieldvalues fieldvalues;
 	private Date starttime;
 	private Date updatetime;
@@ -21,14 +20,14 @@ public class ErrorValues {
     /**
      * 
      * @hibernate.id
-     *  column="errorValuesId"
+     *  column="errortype_id"
      *  generator-class="increment"
      */ 
-	public Long getErrorValuesId() {
-		return errorValuesId;
+	public Long getErrortype_id() {
+		return errortype_id;
 	}
-	public void setErrorValuesId(Long errorValuesId) {
-		this.errorValuesId = errorValuesId;
+	public void setErrortype_id(Long errortype_id) {
+		this.errortype_id = errortype_id;
 	}
 	
 	/**
@@ -82,21 +81,6 @@ public class ErrorValues {
 	public void setFieldvalues(Fieldvalues fieldvalues) {
 		this.fieldvalues = fieldvalues;
 	}
-	
-    /**
-	 * @hibernate.many-to-one
-	 * column = "errortype_id"
-	 * class = "org.xmlcrm.app.hibernate.beans.basic.ErrorType"
-	 * insert="false"
-	 * update="false"
-	 * outer-join="true"
-	 * lazy="false"
-     */	
-	public ErrorType getErrorType() {
-		return errorType;
-	}
-	public void setErrorType(ErrorType errorType) {
-		this.errorType = errorType;
-	}
-	
+
+
 }

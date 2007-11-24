@@ -57,6 +57,7 @@
 		<mapping resource="org/xmlcrm/app/hibernate/beans/rooms/RoomTypes.hbm.xml"/>
 		<mapping resource="org/xmlcrm/app/hibernate/beans/contact/Contacts.hbm.xml"/>
 		<mapping resource="org/xmlcrm/app/hibernate/beans/adresses/Adresses_Emails.hbm.xml"/>
+		<mapping resource="org/xmlcrm/app/hibernate/beans/basic/ErrorType.hbm.xml"/>
 		<mapping resource="org/xmlcrm/app/hibernate/beans/user/Users.hbm.xml"/>
 		<mapping resource="org/xmlcrm/app/hibernate/beans/user/Userdata.hbm.xml"/>
 	</session-factory>

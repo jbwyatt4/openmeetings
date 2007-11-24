@@ -983,43 +983,73 @@ public class Usermanagement {
 	}
 	
 	public Long resetUser(String email, String username, String appLink) {
-		
-		log.error("email "+email);
-		
-		if (email.length()>0){
-			
-			Adresses_Emails addr_e = (Adresses_Emails) Emailmanagement.getInstance().getAdresses_EmailsByMail(email);
-			
-			log.error("addr_e "+addr_e);
-			if (addr_e!=null) {
-				log.error("getAdresses_id "+addr_e.getAdresses_id());
-				Users us = this.getUserByAdressesId(addr_e.getAdresses_id());
-				log.error("us "+us);
-				if (us!=null) {
-					String loginData = us.getLogin()+new Date();
-					MD5Calc md5 = new MD5Calc("MD5");
-					log.error("User: "+us.getLogin());
-					us.setResethash(md5.do_checksum(loginData));
-					this.updateUser(us);
-					String reset_link = appLink+"?hash="+us.getResethash();
-					
-					Adresses_Emails addrE = (Adresses_Emails) us.getAdresses().getEmails().iterator().next();
-					String template = ResetPasswordTemplate.getInstance().getResetPasswordTemplate(reset_link);
-					
-					MailHandler.sendMail(addrE.getMail().getEmail(), "RESET PASS", template);
-					
+		try {
+			//check if Mail given
+			if (email.length()>0){
+				Adresses_Emails addr_e = (Adresses_Emails) Emailmanagement.getInstance().getAdresses_EmailsByMail(email);
+				//log.debug("addr_e "+addr_e);
+				if (addr_e!=null) {
+					//log.debug("getAdresses_id "+addr_e.getAdresses_id());
+					Users us = this.getUserByAdressesId(addr_e.getAdresses_id());
+					if (us!=null) {
+						this.sendHashByUser(us, appLink);
+						return new Long(-4);
+					} else {
+						return new Long(-1);
+					}
 				} else {
 					return new Long(-1);
 				}
-			} else {
-				return new Long(-1);
+			//check if username given
+			} else if (username.length()>0){
+				Users us = this.getUserByName(username);
+				if (us!=null) {
+					this.sendHashByUser(us, appLink);
+					return new Long(-4);
+				} else {
+					return new Long(-3);
+				}
 			}
-		
-		} else if (username.length()>0){
-			
+		} catch (Exception e) {
+			log.error("[resetUser]",e);
+			return new Long(-1);
 		}
-		
 		return new Long(-2);
+	}
+	
+	private void sendHashByUser(Users us, String appLink) throws Exception {
+		String loginData = us.getLogin()+new Date();
+		MD5Calc md5 = new MD5Calc("MD5");
+		log.error("User: "+us.getLogin());
+		us.setResethash(md5.do_checksum(loginData));
+		this.updateUser(us);
+		String reset_link = appLink+"?hash="+us.getResethash();
+		
+		Adresses_Emails addrE = (Adresses_Emails) us.getAdresses().getEmails().iterator().next();
+		String template = ResetPasswordTemplate.getInstance().getResetPasswordTemplate(reset_link);
+		
+		MailHandler.sendMail(addrE.getMail().getEmail(), "RESET PASS", template);
+	}
+	
+	private Users getUserByName(String login) {
+		try {
+			String hql = "SELECT u FROM Users as u " +
+					" where u.login = :login" +
+					" AND deleted != :deleted";
+			Object idf = HibernateUtil.createSession();
+			Session session = HibernateUtil.getSession();
+			Transaction tx = session.beginTransaction();
+			Query query = session.createQuery(hql);
+			query.setString("login", login);
+			query.setString("deleted", "true");
+			Users us = (Users) query.uniqueResult();
+			tx.commit();
+			HibernateUtil.closeSession(idf);
+			return us;			
+		} catch (Exception e) {
+			log.error("[getUserByAdressesId]",e);
+		}
+		return null;
 	}
 	
 	private Users getUserByAdressesId(Long adresses_id) {
