@@ -38,20 +38,27 @@ public class ErrorService {
         //long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
 
         if (errorid==-20) {
-        	return new ErrorResult(errorid,"duplicate filename, please choose another filename");
+        	return new ErrorResult(errorid,"duplicate filename, please choose another filename","Error");
         } else if (errorid==-21){
-        	return new ErrorResult(errorid,"filename too short");
+        	return new ErrorResult(errorid,"filename too short","Error");
         } else if (errorid<0){
         	log.error("errorid,language_id: "+errorid+"|"+language_id);
         	ErrorValues eValues = this.getErrorValuesById(errorid*(-1));
 	        if (eValues!=null){
-	        	Fieldlanguagesvalues fValues = Fieldmanagment.getInstance().getFieldByIdAndLanguage(eValues.getFieldvalues().getFieldvalues_id(),language_id);
-	        	if (fValues!=null) {
-	        		return new ErrorResult(errorid,fValues.getValue());
+	        	log.error(eValues.getFieldvalues());
+	        	log.error(eValues.getFieldvalues().getFieldvalues_id());
+	        	log.error(eValues.getErrorType());
+	        	log.error(eValues.getErrorType().getErrortype_id());
+	        	log.error(eValues.getErrorType().getFieldvalues());
+	        	log.error(eValues.getErrorType().getFieldvalues().getFieldvalues_id());
+	        	Fieldlanguagesvalues errorValue = Fieldmanagment.getInstance().getFieldByIdAndLanguage(eValues.getFieldvalues().getFieldvalues_id(),language_id);
+	        	Fieldlanguagesvalues typeValue = Fieldmanagment.getInstance().getFieldByIdAndLanguage(eValues.getErrorType().getFieldvalues().getFieldvalues_id(),language_id);
+	        	if (errorValue!=null) {
+	        		return new ErrorResult(errorid,errorValue.getValue(),typeValue.getValue());
 	        	}
         	}
         } else {
-        	return new ErrorResult(errorid,"Error ... please check your input");
+        	return new ErrorResult(errorid,"Error ... please check your input","Error");
         }
         
         return null;

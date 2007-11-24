@@ -7,19 +7,19 @@
 <hibernate-mapping
 >
     <class
-        name="org.xmlcrm.app.hibernate.beans.basic.ErrorValues"
-        table="errorvalues"
+        name="org.xmlcrm.app.hibernate.beans.basic.ErrorType"
+        table="errortypes"
     >
 
         <id
-            name="errorValuesId"
-            column="errorValuesId"
+            name="errortype_id"
+            column="errortype_id"
             type="java.lang.Long"
         >
             <generator class="increment">
               <!--  
                   To add non XDoclet generator parameters, create a file named 
-                  hibernate-generator-params-ErrorValues.xml 
+                  hibernate-generator-params-ErrorType.xml 
                   containing the additional parameters and place it in your merge dir. 
               --> 
             </generator>
@@ -59,19 +59,9 @@
             column="fieldvalues_id"
         />
 
-        <many-to-one
-            name="errorType"
-            class="org.xmlcrm.app.hibernate.beans.basic.ErrorType"
-            cascade="none"
-            outer-join="true"
-            update="false"
-            insert="false"
-            column="errortype_id"
-        />
-
         <!--
             To add non XDoclet property mappings, create a file named
-                hibernate-properties-ErrorValues.xml
+                hibernate-properties-ErrorType.xml
             containing the additional properties and place it in your merge dir.
         -->
 
