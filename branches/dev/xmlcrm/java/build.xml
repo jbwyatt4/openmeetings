@@ -103,6 +103,83 @@
 
 	</target>
 
+	<!-- start of xdoclet2 -->
+	<property name="xdoclet2.lib.dir" value="${basedir}/lib/xdoclet2/"/>
+
+    <target name="xdoclet2">
+        <path id="xdoclet2.task.classpath">
+            <!-- xdoclet2 -->
+            <pathelement location="${xdoclet2.lib.dir}/lib/xdoclet-2.0.6.jar"/>
+            <!-- Add the xdoclet2 plugins jar here -->
+            
+			<pathelement location="${xdoclet2.lib.dir}/plugins/xdoclet-plugin-hibernate-1.0.4-SNAPSHOT.jar"/>
+            <!-- xdoclet2 runtime dependencies -->
+            <pathelement location="${xdoclet2.lib.dir}/lib/commons-beanutils-1.7.0.jar"/>
+            <pathelement location="${xdoclet2.lib.dir}/lib/commons-logging-1.0.4.jar"/>
+            <pathelement location="${xdoclet2.lib.dir}/lib/qdox-20051211.114207.jar"/>
+            <pathelement location="${xdoclet2.lib.dir}/lib/commons-collections-3.1.jar"/>
+			<pathelement location="${xdoclet2.lib.dir}/lib/dom4j-1.6.jar"/>
+			<pathelement location="${xdoclet2.lib.dir}/lib/saxpath-1.0-FCS.jar"/>
+            <pathelement location="${xdoclet2.lib.dir}/lib/commons-jelly-20050813.225330.jar"/>
+			<pathelement location="${xdoclet2.lib.dir}/lib/generama-1.2.1.jar"/>
+			<pathelement location="${xdoclet2.lib.dir}/lib/velocity-1.4.jar"/>
+            <pathelement location="${xdoclet2.lib.dir}/lib/commons-jelly-tags-define-1.0.jar"/>
+			<pathelement location="${xdoclet2.lib.dir}/lib/jaxen-1.1-beta-4.jar"/>
+			<pathelement location="${xdoclet2.lib.dir}/lib/xdoclet-2.0.4.jar"/>
+            <pathelement location="${xdoclet2.lib.dir}/lib/commons-jelly-tags-jsl-1.0.jar"/>
+			<pathelement location="${xdoclet2.lib.dir}/lib/nanocontainer-1.0-beta-3.jar"/>
+			<pathelement location="${xdoclet2.lib.dir}/lib/xerces-2.4.0.jar"/>
+            <pathelement location="${xdoclet2.lib.dir}/lib/commons-jelly-tags-xml-20050823.222913.jar"/>
+			<pathelement location="${xdoclet2.lib.dir}/lib/nanocontainer-ant-1.0-beta-3.jar"/>
+            <pathelement location="${xdoclet2.lib.dir}/lib/commons-jexl-1.0.jar"/>
+			<pathelement location="${xdoclet2.lib.dir}/lib/picocontainer-1.0.jar"/>
+        </path>
+
+        <taskdef
+            name="xdoclet2"
+            classname="org.xdoclet.ant.XDocletTask"
+            classpathref="xdoclet2.task.classpath"
+            />
+
+    </target>
+
+    <target name="remove" depends="xdoclet2" >
+        <delete>
+            <fileset dir="${basedir}/src/app">
+                <include name="**/*.hbm.xml"/>
+            </fileset>
+        </delete>
+    </target>
+    
+    <target name="hibernate" depends="remove">
+        <xdoclet2>
+            <!-- defines the file handled by xdoclet2 -->
+            <fileset dir="${basedir}/src/app">
+                <include name="**/*.java"/>
+            </fileset>
+
+            <!-- defines the processing of a plugin -->
+            <component
+                classname="org.xdoclet.plugin.hibernate.HibernateMappingPlugin"
+                destdir="${basedir}/src/app"
+                version="3.0"
+                />
+			<component
+				classname="org.xdoclet.plugin.hibernate.HibernateConfigPlugin"
+				destdir="${basedir}/src/app" version="3.0"
+				dialect="${hibernate.dialect}"
+				jdbcdriver="${hibernate.connection.driver_class}"
+				jdbcurl="${hibernate.connection.url}"
+				jdbcusername="${hibernate.connection.username}"
+				jdbcpassword="${hibernate.connection.password}"
+				showsql="true" hbm2ddlauto="update"/>
+        </xdoclet2>
+    </target>
+	
+	
+	<!-- end of xdoclet 2 -->
+
+
 
 	<!-- Export SQL schema using mapping files and hibernate configuration -->
 <!--	<target name="Export SQL Schema" depends="Generate Mappings">

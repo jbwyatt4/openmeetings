@@ -173,9 +173,9 @@ public class Adresses {
      * inverse = "false" 
      * cascade = "none"
      * lazy="false"
-     * @hibernate.collection-one-to-many 
+     * @hibernate.one-to-many 
      * class = "org.xmlcrm.app.hibernate.beans.adresses.Adresses_Emails"
-     * @hibernate.collection-key 
+     * @hibernate.key 
      * column = "adresses_id"
      */		
 	public Set getEmails() {

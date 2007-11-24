@@ -1,140 +1,23 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
-<!DOCTYPE hibernate-mapping PUBLIC
-    "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
-    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-
-<hibernate-mapping
->
-    <class
-        name="org.xmlcrm.app.hibernate.beans.basic.Navisub"
-        table="navisub"
-    >
-
-        <id
-            name="sub_id"
-            column="sub_id"
-            type="java.lang.Long"
-        >
-            <generator class="increment">
-              <!--  
-                  To add non XDoclet generator parameters, create a file named 
-                  hibernate-generator-params-Navisub.xml 
-                  containing the additional parameters and place it in your merge dir. 
-              --> 
-            </generator>
-        </id>
-
-        <property
-            name="main_id"
-            type="long"
-            update="true"
-            insert="true"
-            column="main_id"
-        />
-
-        <property
-            name="level_id"
-            type="long"
-            update="true"
-            insert="true"
-            column="level_id"
-        />
-
-        <property
-            name="action"
-            type="string"
-            update="true"
-            insert="true"
-            column="action"
-        />
-
-        <property
-            name="comment"
-            type="string"
-            update="true"
-            insert="true"
-            column="comment"
-        />
-
-        <property
-            name="icon"
-            type="string"
-            update="true"
-            insert="true"
-            column="icon"
-        />
-
-        <property
-            name="isleaf"
-            type="boolean"
-            update="true"
-            insert="true"
-            column="isleaf"
-        />
-
-        <property
-            name="isopen"
-            type="boolean"
-            update="true"
-            insert="true"
-            column="isopen"
-        />
-
-        <property
-            name="name"
-            type="string"
-            update="true"
-            insert="true"
-            column="name"
-        />
-
-        <property
-            name="naviorder"
-            type="int"
-            update="true"
-            insert="true"
-            column="naviorder"
-        />
-
-        <property
-            name="starttime"
-            type="java.util.Date"
-            update="true"
-            insert="true"
-            column="starttime"
-        />
-
-        <property
-            name="updatetime"
-            type="java.util.Date"
-            update="true"
-            insert="true"
-            column="updatetime"
-        />
-
-        <property
-            name="deleted"
-            type="string"
-            update="true"
-            insert="true"
-            column="deleted"
-        />
-
-        <property
-            name="fieldvalues_id"
-            type="long"
-            update="true"
-            insert="true"
-            column="fieldvalues_id"
-        />
-
-        <!--
-            To add non XDoclet property mappings, create a file named
-                hibernate-properties-Navisub.xml
-            containing the additional properties and place it in your merge dir.
-        -->
-
-    </class>
-
+<hibernate-mapping>
+  <class table="navisub" name="org.xmlcrm.app.hibernate.beans.basic.Navisub">
+    <id column="sub_id" name="sub_id">
+      <generator class="increment"/>
+    </id>
+    <property name="main_id" type="long" column="main_id"/>
+    <property name="level_id" type="long" column="level_id"/>
+    <property name="action" type="string" column="action"/>
+    <property name="comment" type="string" column="comment"/>
+    <property name="icon" type="string" column="icon"/>
+    <property name="isleaf" type="boolean" column="isleaf"/>
+    <property name="isopen" type="boolean" column="isopen"/>
+    <property name="name" type="string" column="name"/>
+    <property name="naviorder" type="int" column="naviorder"/>
+    <property name="starttime" type="java.util.Date" column="starttime"/>
+    <property name="updatetime" type="java.util.Date" column="updatetime"/>
+    <property name="deleted" type="string" column="deleted"/>
+    <property name="fieldvalues_id" type="long" column="fieldvalues_id"/>
+  </class>
 </hibernate-mapping>

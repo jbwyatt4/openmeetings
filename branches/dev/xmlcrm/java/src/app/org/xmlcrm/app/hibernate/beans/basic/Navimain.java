@@ -175,12 +175,13 @@ public class Navimain {
      * @hibernate.set 
      * table = "navisub" 
      * inverse = "true" 
+     * lazy="false" 
      * cascade = "all"
      * where = "deleted='false'";
      * order-by = "naviorder"
-     * @hibernate.collection-one-to-many 
+     * @hibernate.one-to-many 
      * class = "org.xmlcrm.app.hibernate.beans.basic.Navisub"
-     * @hibernate.collection-key 
+     * @hibernate.key 
      * column = "main_id"
      */
     public Set getSubnavi() {

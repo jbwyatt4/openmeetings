@@ -117,5 +117,25 @@
 	<classpathentry kind="lib" path="lib/commons-digester-1.8.jar"/>
 	<classpathentry kind="lib" path="lib/red5/commons-collections.jar"/>
 	<classpathentry kind="lib" path="lib/resources/kunststoff.jar"/>
+	<classpathentry kind="lib" path="lib/xdoclet2/lib/commons-beanutils-1.7.0.jar"/>
+	<classpathentry kind="lib" path="lib/xdoclet2/lib/commons-collections-3.1.jar"/>
+	<classpathentry kind="lib" path="lib/xdoclet2/lib/commons-jelly-20050813.225330.jar"/>
+	<classpathentry kind="lib" path="lib/xdoclet2/lib/commons-jelly-tags-define-1.0.jar"/>
+	<classpathentry kind="lib" path="lib/xdoclet2/lib/commons-jelly-tags-jsl-1.0.jar"/>
+	<classpathentry kind="lib" path="lib/xdoclet2/lib/commons-jelly-tags-xml-20050823.222913.jar"/>
+	<classpathentry kind="lib" path="lib/xdoclet2/lib/commons-jexl-1.0.jar"/>
+	<classpathentry kind="lib" path="lib/xdoclet2/lib/commons-logging-1.0.4.jar"/>
+	<classpathentry kind="lib" path="lib/xdoclet2/lib/dom4j-1.6.jar"/>
+	<classpathentry kind="lib" path="lib/xdoclet2/lib/generama-1.2.1.jar"/>
+	<classpathentry kind="lib" path="lib/xdoclet2/lib/jaxen-1.1-beta-4.jar"/>
+	<classpathentry kind="lib" path="lib/xdoclet2/lib/nanocontainer-1.0-beta-3.jar"/>
+	<classpathentry kind="lib" path="lib/xdoclet2/lib/nanocontainer-ant-1.0-beta-3.jar"/>
+	<classpathentry kind="lib" path="lib/xdoclet2/lib/picocontainer-1.0.jar"/>
+	<classpathentry kind="lib" path="lib/xdoclet2/lib/qdox-20051211.114207.jar"/>
+	<classpathentry kind="lib" path="lib/xdoclet2/lib/saxpath-1.0-FCS.jar"/>
+	<classpathentry kind="lib" path="lib/xdoclet2/lib/velocity-1.4.jar"/>
+	<classpathentry kind="lib" path="lib/xdoclet2/lib/xdoclet-2.0.4.jar"/>
+	<classpathentry kind="lib" path="lib/xdoclet2/lib/xerces-2.4.0.jar"/>
+	<classpathentry kind="lib" path="lib/xdoclet2/plugins/xdoclet-plugin-hibernate-1.0.4-SNAPSHOT.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
