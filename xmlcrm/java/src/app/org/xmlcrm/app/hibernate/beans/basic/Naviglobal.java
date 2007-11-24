@@ -185,9 +185,10 @@ public class Naviglobal {
      * cascade = "all"
      * where = "deleted='false'"
      * order-by = "naviorder"
-     * @hibernate.collection-one-to-many 
+     * lazy="false"
+     * @hibernate.one-to-many 
      * class = "org.xmlcrm.app.hibernate.beans.basic.Navimain"
-     * @hibernate.collection-key 
+     * @hibernate.key 
      * column = "global_id"
      */
     public Set getMainnavi() {

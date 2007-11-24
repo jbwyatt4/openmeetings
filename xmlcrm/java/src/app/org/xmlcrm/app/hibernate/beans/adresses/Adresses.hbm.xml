@@ -1,140 +1,24 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
-<!DOCTYPE hibernate-mapping PUBLIC
-    "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
-    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-
-<hibernate-mapping
->
-    <class
-        name="org.xmlcrm.app.hibernate.beans.adresses.Adresses"
-        table="adresses"
-        lazy="false"
-    >
-
-        <id
-            name="adresses_id"
-            column="adresses_id"
-            type="java.lang.Long"
-        >
-            <generator class="increment">
-              <!--  
-                  To add non XDoclet generator parameters, create a file named 
-                  hibernate-generator-params-Adresses.xml 
-                  containing the additional parameters and place it in your merge dir. 
-              --> 
-            </generator>
-        </id>
-
-        <property
-            name="additionalname"
-            type="string"
-            update="true"
-            insert="true"
-            column="additionalname"
-        />
-
-        <property
-            name="comment"
-            type="string"
-            update="true"
-            insert="true"
-            column="comment"
-        />
-
-        <property
-            name="fax"
-            type="string"
-            update="true"
-            insert="true"
-            column="fax"
-        />
-
-        <property
-            name="starttime"
-            type="java.util.Date"
-            update="true"
-            insert="true"
-            column="starttime"
-        />
-
-        <many-to-one
-            name="states"
-            class="org.xmlcrm.app.hibernate.beans.adresses.States"
-            cascade="none"
-            outer-join="true"
-            update="true"
-            insert="true"
-            column="state_id"
-            not-null="false"
-        />
-
-        <property
-            name="street"
-            type="string"
-            update="true"
-            insert="true"
-            column="street"
-        />
-
-        <property
-            name="town"
-            type="string"
-            update="true"
-            insert="true"
-            column="town"
-        />
-
-        <property
-            name="updatetime"
-            type="java.util.Date"
-            update="true"
-            insert="true"
-            column="updatetime"
-        />
-
-        <property
-            name="zip"
-            type="string"
-            update="true"
-            insert="true"
-            column="zip"
-        />
-
-        <property
-            name="deleted"
-            type="string"
-            update="true"
-            insert="true"
-            column="deleted"
-        />
-
-        <set
-            name="emails"
-            table="adresses_emails"
-            lazy="false"
-            inverse="false"
-            cascade="none"
-            sort="unsorted"
-        >
-
-            <key
-                column="adresses_id"
-            >
-            </key>
-
-            <one-to-many
-                  class="org.xmlcrm.app.hibernate.beans.adresses.Adresses_Emails"
-            />
-
-        </set>
-
-        <!--
-            To add non XDoclet property mappings, create a file named
-                hibernate-properties-Adresses.xml
-            containing the additional properties and place it in your merge dir.
-        -->
-
-    </class>
-
+<hibernate-mapping>
+  <class table="adresses" lazy="false" name="org.xmlcrm.app.hibernate.beans.adresses.Adresses">
+    <id column="adresses_id" name="adresses_id">
+      <generator class="increment"/>
+    </id>
+    <property name="additionalname" type="string" column="additionalname"/>
+    <property name="comment" type="string" column="comment"/>
+    <property name="fax" type="string" column="fax"/>
+    <property name="starttime" type="java.util.Date" column="starttime"/>
+    <many-to-one outer-join="true" not-null="false" column="state_id" lazy="false" cascade="none" name="states" class="org.xmlcrm.app.hibernate.beans.adresses.States"/>
+    <property name="street" type="string" column="street"/>
+    <property name="town" type="string" column="town"/>
+    <property name="updatetime" type="java.util.Date" column="updatetime"/>
+    <property name="zip" type="string" column="zip"/>
+    <property name="deleted" type="string" column="deleted"/>
+    <set table="adresses_emails" lazy="false" inverse="false" cascade="none" name="emails">
+      <key column="adresses_id"/>
+      <one-to-many class="org.xmlcrm.app.hibernate.beans.adresses.Adresses_Emails"/>
+    </set>
+  </class>
 </hibernate-mapping>

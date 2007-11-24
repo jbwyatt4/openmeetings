@@ -1,68 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
-<!DOCTYPE hibernate-mapping PUBLIC
-    "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
-    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-
-<hibernate-mapping
->
-    <class
-        name="org.xmlcrm.app.hibernate.beans.basic.Sessiondata"
-        table="sessiondata"
-    >
-
-        <id
-            name="id"
-            column="id"
-            type="java.lang.Long"
-        >
-            <generator class="increment">
-              <!--  
-                  To add non XDoclet generator parameters, create a file named 
-                  hibernate-generator-params-Sessiondata.xml 
-                  containing the additional parameters and place it in your merge dir. 
-              --> 
-            </generator>
-        </id>
-
-        <property
-            name="refresh_time"
-            type="java.util.Date"
-            update="true"
-            insert="true"
-            column="refresh_time"
-        />
-
-        <property
-            name="session_id"
-            type="string"
-            update="true"
-            insert="true"
-            column="session_id"
-        />
-
-        <property
-            name="starttermin_time"
-            type="java.util.Date"
-            update="true"
-            insert="true"
-            column="starttermin_time"
-        />
-
-        <property
-            name="user_id"
-            type="long"
-            update="true"
-            insert="true"
-            column="user_id"
-        />
-
-        <!--
-            To add non XDoclet property mappings, create a file named
-                hibernate-properties-Sessiondata.xml
-            containing the additional properties and place it in your merge dir.
-        -->
-
-    </class>
-
+<hibernate-mapping>
+  <class table="sessiondata" name="org.xmlcrm.app.hibernate.beans.basic.Sessiondata">
+    <id column="id" name="id">
+      <generator class="increment"/>
+    </id>
+    <property name="refresh_time" type="java.util.Date" column="refresh_time"/>
+    <property name="session_id" type="string" column="session_id"/>
+    <property name="starttermin_time" type="java.util.Date" column="starttermin_time"/>
+    <property name="user_id" type="long" column="user_id"/>
+  </class>
 </hibernate-mapping>

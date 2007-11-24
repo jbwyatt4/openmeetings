@@ -1,80 +1,15 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
-<!DOCTYPE hibernate-mapping PUBLIC
-    "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
-    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-
-<hibernate-mapping
->
-    <class
-        name="org.xmlcrm.app.hibernate.beans.basic.ErrorValues"
-        table="errorvalues"
-    >
-
-        <id
-            name="errorValuesId"
-            column="errorValuesId"
-            type="java.lang.Long"
-        >
-            <generator class="increment">
-              <!--  
-                  To add non XDoclet generator parameters, create a file named 
-                  hibernate-generator-params-ErrorValues.xml 
-                  containing the additional parameters and place it in your merge dir. 
-              --> 
-            </generator>
-        </id>
-
-        <property
-            name="starttime"
-            type="java.util.Date"
-            update="true"
-            insert="true"
-            column="starttime"
-        />
-
-        <property
-            name="updatetime"
-            type="java.util.Date"
-            update="true"
-            insert="true"
-            column="updatetime"
-        />
-
-        <property
-            name="deleted"
-            type="string"
-            update="true"
-            insert="true"
-            column="deleted"
-        />
-
-        <many-to-one
-            name="fieldvalues"
-            class="org.xmlcrm.app.hibernate.beans.lang.Fieldvalues"
-            cascade="none"
-            outer-join="true"
-            update="false"
-            insert="false"
-            column="fieldvalues_id"
-        />
-
-        <many-to-one
-            name="errorType"
-            class="org.xmlcrm.app.hibernate.beans.basic.ErrorType"
-            cascade="none"
-            outer-join="true"
-            update="false"
-            insert="false"
-            column="errortype_id"
-        />
-
-        <!--
-            To add non XDoclet property mappings, create a file named
-                hibernate-properties-ErrorValues.xml
-            containing the additional properties and place it in your merge dir.
-        -->
-
-    </class>
-
+<hibernate-mapping>
+  <class table="errorvalues" name="org.xmlcrm.app.hibernate.beans.basic.ErrorValues">
+    <id column="errorValuesId" name="errorValuesId">
+      <generator class="increment"/>
+    </id>
+    <property name="starttime" type="java.util.Date" column="starttime"/>
+    <property name="updatetime" type="java.util.Date" column="updatetime"/>
+    <property name="deleted" type="string" column="deleted"/>
+    <many-to-one outer-join="true" insert="false" column="fieldvalues_id" lazy="false" update="false" name="fieldvalues" class="org.xmlcrm.app.hibernate.beans.lang.Fieldvalues"/>
+    <many-to-one outer-join="true" insert="false" column="errortype_id" lazy="false" update="false" name="errorType" class="org.xmlcrm.app.hibernate.beans.basic.ErrorType"/>
+  </class>
 </hibernate-mapping>

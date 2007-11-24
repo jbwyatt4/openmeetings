@@ -1,77 +1,15 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
-<!DOCTYPE hibernate-mapping PUBLIC
-    "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
-    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-
-<hibernate-mapping
->
-    <class
-        name="org.xmlcrm.app.hibernate.beans.user.Userlevel"
-        table="userlevel"
-        lazy="false"
-    >
-
-        <id
-            name="level_id"
-            column="level_id"
-            type="java.lang.Long"
-        >
-            <generator class="increment">
-              <!--  
-                  To add non XDoclet generator parameters, create a file named 
-                  hibernate-generator-params-Userlevel.xml 
-                  containing the additional parameters and place it in your merge dir. 
-              --> 
-            </generator>
-        </id>
-
-        <property
-            name="description"
-            type="string"
-            update="true"
-            insert="true"
-            column="description"
-        />
-
-        <property
-            name="starttime"
-            type="java.util.Date"
-            update="true"
-            insert="true"
-            column="starttime"
-        />
-
-        <property
-            name="updatetime"
-            type="java.util.Date"
-            update="true"
-            insert="true"
-            column="updatetime"
-        />
-
-        <property
-            name="deleted"
-            type="string"
-            update="true"
-            insert="true"
-            column="deleted"
-        />
-
-        <property
-            name="statuscode"
-            type="int"
-            update="true"
-            insert="true"
-            column="statuscode"
-        />
-
-        <!--
-            To add non XDoclet property mappings, create a file named
-                hibernate-properties-Userlevel.xml
-            containing the additional properties and place it in your merge dir.
-        -->
-
-    </class>
-
+<hibernate-mapping>
+  <class table="userlevel" lazy="false" name="org.xmlcrm.app.hibernate.beans.user.Userlevel">
+    <id column="level_id" name="level_id">
+      <generator class="increment"/>
+    </id>
+    <property name="description" type="string" column="description"/>
+    <property name="starttime" type="java.util.Date" column="starttime"/>
+    <property name="updatetime" type="java.util.Date" column="updatetime"/>
+    <property name="deleted" type="string" column="deleted"/>
+    <property name="statuscode" type="int" column="statuscode"/>
+  </class>
 </hibernate-mapping>

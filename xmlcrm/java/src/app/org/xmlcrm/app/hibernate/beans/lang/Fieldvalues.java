@@ -88,9 +88,9 @@ public class Fieldvalues {
      * table = "fieldlanguagesvalues" 
      * inverse = "true" 
      * cascade = "none"
-     * @hibernate.collection-one-to-many 
+     * @hibernate.one-to-many 
      * class = "org.xmlcrm.app.hibernate.beans.lang.Fieldlanguagesvalues"
-     * @hibernate.collection-key 
+     * @hibernate.key 
      * column = "fieldvalues_id"
      */	
 	public Set getFieldlanguagesvalues() {

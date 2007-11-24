@@ -324,9 +324,9 @@ public class Users {
      * where ="deleted = 'false'"
      * lazy = "false"
      * cascade = "none"
-     * @hibernate.collection-one-to-many 
+     * @hibernate.one-to-many 
      * class = "org.xmlcrm.app.hibernate.beans.domain.Organisation_Users"
-     * @hibernate.collection-key 
+     * @hibernate.key 
      * column = "user_id"
      */	
 	public Set getOrganisation_users() {
