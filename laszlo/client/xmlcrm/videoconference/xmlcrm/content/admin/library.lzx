@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library>
 
-	<include href="configureusers.lzx" />
     <include href="useradmin.lzx" />
 	<include href="configureusersListItem.lzx" />
 	<include href="uservalueform.lzx" />

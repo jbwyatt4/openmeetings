@@ -9,7 +9,7 @@
 	<!--handlers -->
 
 	<handler name="onsavecompleted" >
-		this.getUserById.doCall();
+		//this.getUserById.doCall();
 	</handler>
 	
 	<handler name="onreload" >
@@ -22,7 +22,7 @@
         this.firstname.setText('');
         this.lastname.setText('');
         this.email.setText('');
-        this.age.setText(parseDateToString(new Date()));
+        this.age.setText('');
         this.street.setText('');
         this.house.setText('');
         this.zip.setText('');
@@ -30,7 +30,7 @@
         var defaultstate = canvas.getCountryRecord(1);
         this.state.addAndSelectItem(defaultstate.name,defaultstate.state_id);
         this.adress_comment.setText('');
-        this.status.selectItem(String('0'));
+        this.status.selectItem(String('1'));
         this._organisationslist.clearList();
 	</handler>
 	
@@ -45,6 +45,7 @@
     <method name="initValueFieldsByObject" args="obj">
 		this.user_id = obj.user_id;
 		if (this.user_id!=0){
+			Debug.write("this.getUserById this.user_id",this.user_id);
 			this.getUserById.doCall();
 		}
     </method>
@@ -79,6 +80,7 @@
   		<netparam><method name="getValue"> return canvas.sessionId; </method></netparam>
     	<netparam><method name="getValue">return parent.parent.user_id;</method></netparam>
     	<handler name="ondata" args="value">
+			Debug.write("getUserById: ",value);
     		parent.initFields(value);
     	</handler>
   	</netremotecallhib>
@@ -97,7 +99,7 @@
 	</netremotecallhib>		
 
   	<netremotecallhib name="saveOrUpdateUser" funcname="userservice.saveOrUpdateUser" 
-  		remotecontext="$once{ canvas.thishib }" registerObject="true" >   
+  		remotecontext="$once{ canvas.thishib }" registerObject="true" activeErrorHandler="false" >   
 		<attribute name="sendObject" value="null" />
 		<!-- gets called by Observer -->
   		<method name="prepareCall">
@@ -116,7 +118,9 @@
   			this.sendObject["comment"] = this.parent.adress_comment.getText();
   			this.sendObject["telefon"] = '';
   			this.sendObject["fax"] = '';
-  			this.sendObject["userage"] = parseStringToDate(this.parent.age.getText());
+			var date = this.parent.age.getText();
+			if (date.length>0) date = parseStringToDate(date);
+  			this.sendObject["userage"] = date;
   			this.sendObject["mobil"] = '';
   			this.sendObject["availible"] = 0;
   			this.sendObject["status"] = Number(this.parent.status.getValue());
@@ -130,14 +134,14 @@
     	<netparam><method name="getValue">return parent.sendObject;</method></netparam>	  		
     	<handler name="ondata" args="val">
 			<![CDATA[
-    		//Debug.write("saveOrUpdateUser: ",val);
-			if (val>0){
-				//Debug.write("saveOrUpdateUser val greater 0: ",val);
+				//Debug.write("saveOrUpdateUser: ",val);
+				if (val>0){
+					var obj = new Array();
+					obj["user_id"] = val;
+					this.parent.initValueFieldsByObject(obj);
+					new rpcerrordialog(canvas.main_content._content.inner,{errorid:-23});
+				}
 				this.parent.parent._turnoverlist.oncallnext.sendEvent();
-				var obj = new Array();
-				obj["user_id"] = val;
-				this.parent.initValueFieldsByObject(obj);
-			}
 			]]>
     	</handler>
   	</netremotecallhib>	

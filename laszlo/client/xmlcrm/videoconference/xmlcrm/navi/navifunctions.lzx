@@ -63,6 +63,7 @@ function getLabelNameXMLCRM(labelid){
 }
 
 function parseDateToString(dateObj){
+	if (dateObj==null) return "";
 	var d = dateObj.getDate();
 	if (d<10) d = "0"+d;
 	var m = dateObj.getMonth()+1;
