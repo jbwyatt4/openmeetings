@@ -71,14 +71,14 @@ public class AddDefaultfield extends TestCase {
 //		Fieldmanagment.getInstance().addFourFieldValues("send_invitationwin_btn_confirm", 218, "abschicken", "Send", "Send", "Send");
 //		Fieldmanagment.getInstance().addFourFieldValues("send_invitationwin_btn_cancel", 219, "abbrechen", "cancel", "cancel", "cancel");
 //		Fieldmanagment.getInstance().addFourFieldValues("send_chat_text_btn", 220, "senden", "send", "appeler", "emitir");
-		Fieldmanagment.getInstance().addFourFieldValues("invited_userwin_header", 221, "Benutzerdaten", "Userdata", "userdata", "userdata");
-		Fieldmanagment.getInstance().addFourFieldValues("invited_userwin_subject", 222, "Nickname für diese Konference", "Your nickname for this conference", "Your nickname for this conference", "Your nickname for this conference");
-		Fieldmanagment.getInstance().addFourFieldValues("invited_userwin_login", 223, "Spitzname/Alias", "nick", "nick", "nick");
-		Fieldmanagment.getInstance().addFourFieldValues("invited_userwin_firstname", 224, "Vorname", "firstname", "firstname", "firstname");
-		Fieldmanagment.getInstance().addFourFieldValues("invited_userwin_lastname", 225, "Nachname", "lastname", "lastname", "lastname");
-		Fieldmanagment.getInstance().addFourFieldValues("invited_userwin_mail", 226, "EMail", "email", "email", "email");
-		Fieldmanagment.getInstance().addFourFieldValues("invited_userwin_lang", 227, "Sprache", "language", "language", "language");
-		Fieldmanagment.getInstance().addFourFieldValues("invited_userwin_enter", 228, "Absenden", "enter", "enter", "enter");
+//		Fieldmanagment.getInstance().addFourFieldValues("invited_userwin_header", 221, "Benutzerdaten", "Userdata", "userdata", "userdata");
+//		Fieldmanagment.getInstance().addFourFieldValues("invited_userwin_subject", 222, "Nickname für diese Konference", "Your nickname for this conference", "Your nickname for this conference", "Your nickname for this conference");
+//		Fieldmanagment.getInstance().addFourFieldValues("invited_userwin_login", 223, "Spitzname/Alias", "nick", "nick", "nick");
+//		Fieldmanagment.getInstance().addFourFieldValues("invited_userwin_firstname", 224, "Vorname", "firstname", "firstname", "firstname");
+//		Fieldmanagment.getInstance().addFourFieldValues("invited_userwin_lastname", 225, "Nachname", "lastname", "lastname", "lastname");
+//		Fieldmanagment.getInstance().addFourFieldValues("invited_userwin_mail", 226, "EMail", "email", "email", "email");
+//		Fieldmanagment.getInstance().addFourFieldValues("invited_userwin_lang", 227, "Sprache", "language", "language", "language");
+//		Fieldmanagment.getInstance().addFourFieldValues("invited_userwin_enter", 228, "Absenden", "enter", "enter", "enter");
 		
 	}
 

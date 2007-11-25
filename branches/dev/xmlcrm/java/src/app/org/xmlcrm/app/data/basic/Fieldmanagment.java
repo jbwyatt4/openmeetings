@@ -66,8 +66,7 @@ public class Fieldmanagment {
 			Session session = HibernateUtil.getSession();
 			Transaction tx = session.beginTransaction();
 
-			Query query = session
-					.createQuery("select f from Fieldlanguagesvalues f WHERE f.language_id = :language_id ");
+			Query query = session.createQuery("select f from Fieldlanguagesvalues f WHERE f.language_id = :language_id ");
 			query.setLong("language_id", language_id);
 			List returnList = query.list();
 			tx.commit();
@@ -82,23 +81,6 @@ public class Fieldmanagment {
 		return null;
 	}
 
-	/**
-	 * @deprecated
-	 * @param name
-	 * @param field_id
-	 * @param german
-	 * @param english
-	 * @param french
-	 * @param spanish
-	 */
-	public void addFourFieldValues(String name, long field_id, String german,
-			String english, String french, String spanish) {
-		this.addField(name);
-		this.addFieldValueByFieldAndLanguage(field_id, 1, german);
-		this.addFieldValueByFieldAndLanguage(field_id, 2, english);
-		this.addFieldValueByFieldAndLanguage(field_id, 3, french);
-		this.addFieldValueByFieldAndLanguage(field_id, 4, spanish);
-	}
 
 	public Long addFieldValueByFieldAndLanguage(long field_id,
 			long language_id, String fieldvalue) {
@@ -153,27 +135,34 @@ public class Fieldmanagment {
 		return null;
 	}
 
-	public List getFields(long language_id) {
-
+	private void updateField(Fieldvalues fv) {
 		try {
 			Object idf = HibernateUtil.createSession();
 			Session session = HibernateUtil.getSession();
 			Transaction tx = session.beginTransaction();
-
-			Query query = session
-					.createQuery("select c from Fieldvalues c, Fieldlanguagesvalues f WHERE f.language_id = :language_id ");
-			query.setLong("language_id", language_id);
-			List returnList = query.list();
+			session.update(fv);
 			tx.commit();
 			HibernateUtil.closeSession(idf);
-
-			return returnList;
 		} catch (HibernateException ex) {
-			log.error("[getConfKey]: ",ex);
+			log.error("[updateFieldLanguagesLabel]: ",ex);
 		} catch (Exception ex2) {
-			log.error("[getConfKey]: ",ex2);
+			log.error("[updateFieldLanguagesLabel]: ",ex2);
 		}
-		return null;
 	}
+	
+	private void updateFieldLanguagesLabel(Fieldlanguagesvalues flv) {
+		try {
+			Object idf = HibernateUtil.createSession();
+			Session session = HibernateUtil.getSession();
+			Transaction tx = session.beginTransaction();
+			session.update(flv);
+			tx.commit();
+			HibernateUtil.closeSession(idf);
+		} catch (HibernateException ex) {
+			log.error("[updateFieldLanguagesLabel]: ",ex);
+		} catch (Exception ex2) {
+			log.error("[updateFieldLanguagesLabel]: ",ex2);
+		}
+	}	
 
 }
