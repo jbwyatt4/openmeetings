@@ -3,7 +3,7 @@ package org.xmlcrm.test.adresses;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.xmlcrm.app.hibernate.beans.adresses.Adresses;
-import org.xmlcrm.app.data.user.Adressmanagement;
+import org.xmlcrm.app.data.user.Addressmanagement;
 
 import junit.framework.TestCase;
 
@@ -17,7 +17,7 @@ public class TestgetAdress extends TestCase {
 	
 	public void testGetAdress(){
 		
-		Adresses adresses = Adressmanagement.getInstance().getAdressbyId(1);
+		Adresses adresses = Addressmanagement.getInstance().getAdressbyId(1);
 		
 		log.error("Adresses: "+adresses.getStates().getName());
 		log.error("Adresses: "+adresses.getEmails().size());

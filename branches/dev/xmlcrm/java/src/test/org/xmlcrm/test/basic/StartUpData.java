@@ -17,7 +17,7 @@ public class StartUpData extends TestCase {
 		super(testname);
 	}
 	
-	public void testGenerateBasicNavi(){
+	public void testGenerateBasicNavi() throws Exception{
 		
 		Usermanagement.getInstance().addUserLevel("User", 1);
 		Usermanagement.getInstance().addUserLevel("Moderator", 2);
@@ -53,16 +53,16 @@ public class StartUpData extends TestCase {
 		Statemanagement.getInstance().addState("Danemark");
 		
 		//Add user
-		long user_id = Usermanagement.getInstance().registerUserInit(new Long(3),3, 1, 1, 
+		Long user_id = Usermanagement.getInstance().registerUserInit(new Long(3),3, 1, 1, 
 				"swagner", "test", "lastname", "firstname", 
 				"seba.wagner@gmail.com", new java.util.Date(), "street", "no", "fax", 
 				"zip", 1, "town", 0, false, null);
 		
 		//Add default group
-		long organisation_id = Organisationmanagement.getInstance().addOrganisation("default", user_id);
+		Long organisation_id = Organisationmanagement.getInstance().addOrganisation("default", user_id);
 		
 		//Add user to default group
-		long organisation_usersid = Organisationmanagement.getInstance().addUserToOrganisation(new Long(3), 1, organisation_id, 1,"");
+		Long organisation_usersid = Organisationmanagement.getInstance().addUserToOrganisation(new Long(3), 1, organisation_id, 1,"");
 		
 //		Configurationmanagement.getInstance().addConfByKey(3, "allow_frontend_register", "1", 1, "");
 //		

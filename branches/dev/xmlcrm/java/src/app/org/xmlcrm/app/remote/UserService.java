@@ -187,24 +187,32 @@ public class UserService {
     public Long saveOrUpdateUser(String SID, Object regObjectObj){
     	try {
     		LinkedHashMap argObjectMap = (LinkedHashMap) regObjectObj;
-    		Long user_idClient = Long.valueOf(argObjectMap.get("user_idClient").toString()).longValue();
+    		Long user_idClient = null;
+    		if (argObjectMap.get("user_idClient")!=null){
+    			user_idClient = Long.valueOf(argObjectMap.get("user_idClient").toString()).longValue();
+    		}
+    		//log.error("saveOrUpdateUser1: ");
 	        Long users_id = Sessionmanagement.getInstance().checkSession(SID);
-	        long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);	
+	        //log.error("saveOrUpdateUser2: ");
+	        Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);	
 	        
 //	        log.error("saveOrUpdateUser1: "+argObjectMap.get("organisations"));
 //	        log.error("saveOrUpdateUser2: "+argObjectMap.get("organisations").getClass());
 //	        log.error("saveOrUpdateUser3: "+argObjectMap.get("user_idClient"));
 	        //TODO: there is a BUG here: value send is Time as GMT but here it gets CEST which is wrong	  
 	        //but maybe a OS-related-issue
-	        log.error("saveOrUpdateUser4: "+argObjectMap.get("userage"));
-	        log.error("saveOrUpdateUser5: "+argObjectMap.get("userage").getClass());
+	        //log.error("saveOrUpdateUser4: "+argObjectMap.get("userage"));
+	        //log.error("saveOrUpdateUser5: "+argObjectMap.get("userage").getClass());
 	        
 	        LinkedHashMap organisations = (LinkedHashMap) argObjectMap.get("organisations");
-	        Date age = (Date) argObjectMap.get("userage");
+	        Date age = null;
+	        if (argObjectMap.get("userage") instanceof Date){
+	        	age = (Date) argObjectMap.get("userage");
+	        	log.error("saveOrUpdateUser7: "+age.getTimezoneOffset());
+	        }	        
 
-	        log.error("saveOrUpdateUser6: "+age);
-	        log.error("saveOrUpdateUser7: "+age.getTimezoneOffset());
-	        
+	        //log.error("saveOrUpdateUser6: "+age);
+	       
     		if (user_idClient==null || user_idClient==0){
 	        	return Usermanagement.getInstance().registerUserInit(user_level, 
 	        			Long.valueOf(argObjectMap.get("level_id").toString()).longValue(), 
