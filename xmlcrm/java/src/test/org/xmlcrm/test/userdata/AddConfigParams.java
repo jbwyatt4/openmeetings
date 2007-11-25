@@ -21,7 +21,7 @@ public class AddConfigParams extends TestCase {
 		MainService mService = new MainService();
 		Sessiondata sessionData = mService.getsessiondata();
 		
-		Users us = mService.loginUser(sessionData.getSession_id(), "wagner", "test");		
+		Users us = (Users) mService.loginUser(sessionData.getSession_id(), "wagner", "test");		
 		
 		String ret = "";
 		

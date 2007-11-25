@@ -37,11 +37,7 @@ public class ErrorService {
         //Long users_id = Sessionmanagement.getInstance().checkSession(SID);
         //long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
 
-        if (errorid==-20) {
-        	return new ErrorResult(errorid,"duplicate filename, please choose another filename","Error");
-        } else if (errorid==-21){
-        	return new ErrorResult(errorid,"filename too short","Error");
-        } else if (errorid<0){
+        if (errorid<0){
         	log.error("errorid,language_id: "+errorid+"|"+language_id);
         	ErrorValues eValues = this.getErrorValuesById(errorid*(-1));
 	        if (eValues!=null){

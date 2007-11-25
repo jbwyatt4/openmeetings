@@ -16,7 +16,7 @@ public class Addadminuser extends TestCase{
 		super(testname);
 	}
 	
-	public void testAddADminUser(){
+	public void testAddADminUser() throws Exception{
 		Statemanagement.getInstance().addState("Deutschland");
 		
 		//(long user_level,String login, String Userpass, String lastname, String firstname, String email, int age, String street, String additionalname, String fax, String zip, long states_id, String town, long language_id)

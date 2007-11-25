@@ -143,8 +143,8 @@ public class Emailmanagement {
 	 */
 	public Long registerEmail(String EMail, long adresses_id, String Username,
 			String Userpass, String comment) {
-		long mail_id = this.registerEmail(EMail, Username, Userpass, comment);
-		if (mail_id != -1) {
+		Long mail_id = this.registerEmail(EMail, Username, Userpass, comment);
+		if (mail_id != null) {
 			try {			
 				
 				Adresses_Emails addr_emails = new Adresses_Emails();
@@ -169,7 +169,7 @@ public class Emailmanagement {
 				log.error("Error: " ,ex2);
 			}
 		}
-		return new Long(-1);
+		return null;
 	}
 
 	/**
@@ -205,7 +205,7 @@ public class Emailmanagement {
 			log.error("Error: " ,ex2);
 		}
 
-		return new Long(-1);
+		return null;
 
 	}
 
@@ -301,6 +301,7 @@ public class Emailmanagement {
 	 */
 	public boolean checkUserEMail(String email) {
 		try {
+			if (email.length()==0) return true;
 			log.error("checkUserMail: " + email);
 			Object idf = HibernateUtil.createSession();
 			Session session = HibernateUtil.getSession();

@@ -188,7 +188,7 @@ public class Usermanagement {
 	 * @param Userpass
 	 * @return
 	 */
-	public Users loginUser(String SID, String Username, String Userpass) {
+	public Object loginUser(String SID, String Username, String Userpass) {
 		try {
 			Object idf = HibernateUtil.createSession();
 			Session session = HibernateUtil.getSession();
@@ -206,10 +206,7 @@ public class Usermanagement {
 			log.error("debug SIZE: " + ll.size());
 			
 			if (ll.size()==0) {
-				Users usersA = new Users();
-				usersA.setLevel_id(new Long(-1));
-				usersA.setFirstname("Wrong - " + Username + " not Found");
-				return usersA;
+				return new Long(-10);
 			} else {
 				Users users = (Users) ll.get(0);
 				String chsum = md5.do_checksum(Userpass);
@@ -220,10 +217,7 @@ public class Usermanagement {
 					updateLastLogin(users);
 					return users;
 				} else {
-					Users usersA = new Users();
-					usersA.setLevel_id(new Long(-1));
-					usersA.setFirstname("Wrong -Invalid Password for" + Username);
-					return usersA;
+					return new Long(-11);
 				}
 			}
 		
@@ -232,14 +226,12 @@ public class Usermanagement {
 		} catch (Exception ex2) {
 			log.error("[loginUser]: ",ex2);
 		}
-		return null;
+		return new Long(-1);
 	}
 
-	public String logout(String SID, long USER_ID) {
-		String result = "Fehler im logout";
+	public Long logout(String SID, long USER_ID) {
 		Sessionmanagement.getInstance().updateUser(SID, 0);
-		result = "Erfolgreich";
-		return result;
+		return new Long(-12);
 	}
 
 	private void updateLastLogin(Users us) {
@@ -416,12 +408,12 @@ public class Usermanagement {
 							MD5Calc md5 = new MD5Calc("MD5");
 							us.setPassword(md5.do_checksum(password));
 						} else {
-							return new Long(-6);
+							return new Long(-7);
 						}
 					}					
 					
 					//Todo implement Phone
-					Adressmanagement.getInstance().updateAdress(us.getAdresses().getAdresses_id(), street, zip, town, states_id, additionalname, comment, fax);
+					Addressmanagement.getInstance().updateAdress(us.getAdresses().getAdresses_id(), street, zip, town, states_id, additionalname, comment, fax);
 					Emailmanagement.getInstance().updateUserEmail(mail.getMail().getMail_id(),user_id, email);
 					
 					//add or delete organisations from this user
@@ -443,9 +435,9 @@ public class Usermanagement {
 					
 				} else {
 					if (!checkName) {
-						return new Long(-5);
+						return new Long(-15);
 					} else if (!checkEmail) {
-						return new Long(-4);
+						return new Long(-17);
 					}
 				}
 			} catch (HibernateException ex) {
@@ -455,9 +447,9 @@ public class Usermanagement {
 			}
 		} else {
 			log.error("Error: Permission denied");
-			return null;
+			return new Long(-1);
 		}
-		return null;
+		return new Long(-1);
 	}
 
 	public String updateUserdata(int DATA_ID, long USER_ID, String DATA_KEY,
@@ -660,14 +652,13 @@ public class Usermanagement {
 			
 			Query query = session.createQuery("select c from Users as c where c.user_id = :user_id AND deleted <> 'true'");
 			query.setLong("user_id", user_id);
-			List ll = query.list();
+			Users us = (Users) query.uniqueResult();
 			
 			tx.commit();
 			HibernateUtil.closeSession(idf);
 			
-			if (ll.size()>0){
-				Users users  = (Users) ll.get(0);
-				return users.getLevel_id();
+			if (us!=null){
+				return us.getLevel_id();
 			}
 		} catch (HibernateException ex) {
 			log.error("[getUserLevelByID]" ,ex);
@@ -706,18 +697,22 @@ public class Usermanagement {
 			String firstname, String email, Date age, String street,
 			String additionalname, String fax, String zip, long states_id,
 			String town, long language_id) {
-		// Checks if FrontEndUsers can register
-		if (Configurationmanagement.getInstance().getConfKey(3,"allow_frontend_register").getConf_value().equals("1")) {
-			// TODO: add availible params sothat users have to verify their
-			// login-data
-			// TODO: add status from Configuration items
-			Long user_id = this.registerUserInit(3, 1, 0, 1, login, Userpass,lastname, firstname, email, age, street, additionalname,fax, zip, states_id, town, language_id, true, new LinkedHashMap());
-			// Get the default organisation_id of registered users
-			if (user_id>0){
-				long organisation_id = Long.valueOf(Configurationmanagement.getInstance().getConfKey(3,"default_domain_id").getConf_value()).longValue();
-				Organisationmanagement.getInstance().addUserToOrganisation(new Long(3), user_id,organisation_id, user_id, "");
+		try {
+			// Checks if FrontEndUsers can register
+			if (Configurationmanagement.getInstance().getConfKey(3,"allow_frontend_register").getConf_value().equals("1")) {
+				// TODO: add availible params sothat users have to verify their
+				// login-data
+				// TODO: add status from Configuration items
+				Long user_id = this.registerUserInit(3, 1, 0, 1, login, Userpass,lastname, firstname, email, age, street, additionalname,fax, zip, states_id, town, language_id, true, new LinkedHashMap());
+				// Get the default organisation_id of registered users
+				if (user_id>0){
+					long organisation_id = Long.valueOf(Configurationmanagement.getInstance().getConfKey(3,"default_domain_id").getConf_value()).longValue();
+					Organisationmanagement.getInstance().addUserToOrganisation(new Long(3), user_id,organisation_id, user_id, "");
+				}
+				return user_id;
 			}
-			return user_id;
+		} catch (Exception e) {
+			log.error("[registerUser]",e);
 		}
 		return null;
 	}
@@ -750,48 +745,54 @@ public class Usermanagement {
 			int status, String login, String Userpass, String lastname,
 			String firstname, String email, Date age, String street,
 			String additionalname, String fax, String zip, long states_id,
-			String town, long language_id, boolean sendWelcomeMessage, LinkedHashMap organisations) {
-		//TODO: make phoen number persistent
+			String town, long language_id, boolean sendWelcomeMessage, LinkedHashMap organisations) throws Exception {
+		//TODO: make phone number persistent
 		// User Level must be at least Admin
 		// Moderators will get a temp update of there UserLevel to add Users to
 		// their Group
 		if (AuthLevelmanagement.getInstance().checkModLevel(user_level)) {
 			// Check for required data
-			if (!login.equals("") && !Userpass.equals("")) {
-
+			if (login.length()>=4 && Userpass.length()>=4) {
 				// Check for duplicates
 				boolean checkName = this.checkUserLogin(login);
 				boolean checkEmail = Emailmanagement.getInstance().checkUserEMail(email);
 				if (checkName && checkEmail) {
 					
-					if (sendWelcomeMessage) {
+					if (sendWelcomeMessage && email.length()!=0) {
 						String sendMail = Emailmanagement.getInstance().sendMail(login, Userpass, email);
-						if (!sendMail.equals("success")) return new Long(-6);
+						if (!sendMail.equals("success")) return new Long(-19);
 					}						
-					
-					long adress_id = Adressmanagement.getInstance().saveAdress(street, zip, town, states_id, additionalname, "",fax);
-					long user_id = this.addUser(level_id, availible, status,firstname, login, lastname, language_id, Userpass,adress_id, age);
-					long adress_emails_id = Emailmanagement.getInstance().registerEmail(email, adress_id, login, Userpass,"");
-					
+					Long address_id = Addressmanagement.getInstance().saveAddress(street, zip, town, states_id, additionalname, "",fax);
+					if (address_id==null) {
+						return new Long(-22);
+					}
+					Long user_id = this.addUser(level_id, availible, status,firstname, login, lastname, language_id, Userpass,address_id, age);
+					if (user_id==null) {
+						return new Long(-111);
+					}
+					Long adress_emails_id = Emailmanagement.getInstance().registerEmail(email, address_id, login, Userpass,"");
+					if (adress_emails_id==null) {
+						return new Long(-112);
+					}					
 					Organisationmanagement.getInstance().addUserOrganisationsByHashMap(user_id, organisations);
 					
-					if (adress_id > 0 && user_id > 0 && adress_emails_id > 0) {
+					if (address_id > 0 && user_id > 0 && adress_emails_id > 0) {
 						return user_id;
 					} else {
-						return new Long(-1);
+						return new Long(-16);
 					}
 				} else {
 					if (!checkName) {
-						return new Long(-5);
+						return new Long(-15);
 					} else if (!checkEmail) {
-						return new Long(-4);
+						return new Long(-17);
 					}
 				}
 			} else {
-				return new Long(-3);
+				return new Long(-13);
 			}
 		}
-		return null;
+		return new Long(-1);
 	}
 
 	/**
@@ -822,7 +823,7 @@ public class Usermanagement {
 			users.setLogin(login);
 			users.setLastname(lastname);
 			users.setAge(age);
-			users.setAdresses(Adressmanagement.getInstance().getAdressbyId(adress_id));
+			users.setAdresses(Addressmanagement.getInstance().getAdressbyId(adress_id));
 			users.setAvailible(availible);
 			users.setLastlogin(new Date());
 			users.setLasttrans(new Long(0));
@@ -830,7 +831,6 @@ public class Usermanagement {
 			users.setStatus(status);
 			users.setTitle_id(new Integer(1));
 			users.setStarttime(new Date());
-			users.setUpdatetime(new Date());
 			// this is needed cause the language is not a needed data at
 			// registering
 			if (language_id != 0) {
@@ -956,8 +956,8 @@ public class Usermanagement {
 						}
 					}					
 					
-					Adressmanagement.getInstance().updateAdress(user.getAdresses());
-					savedUser.setAdresses(Adressmanagement.getInstance().getAdressbyId(user.getAdresses().getAdresses_id()));
+					Addressmanagement.getInstance().updateAdress(user.getAdresses());
+					savedUser.setAdresses(Addressmanagement.getInstance().getAdressbyId(user.getAdresses().getAdresses_id()));
 					
 					Object idf = HibernateUtil.createSession();
 					Session session = HibernateUtil.getSession();
@@ -1002,10 +1002,10 @@ public class Usermanagement {
 						this.sendHashByUser(us, appLink);
 						return new Long(-4);
 					} else {
-						return new Long(-1);
+						return new Long(-9);
 					}
 				} else {
-					return new Long(-1);
+					return new Long(-9);
 				}
 			//check if username given
 			} else if (username.length()>0){

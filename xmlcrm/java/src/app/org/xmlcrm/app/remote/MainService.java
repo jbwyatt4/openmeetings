@@ -125,7 +125,7 @@ public class MainService {
      * @param Userpass
      * @return a valid user account or an empty user with an error message and level -1
      */
-    public Users loginUser(String SID, String Username, String Userpass){
+    public Object loginUser(String SID, String Username, String Userpass){
     	log.error("loginUser 111: "+SID+" "+Username+" "+Userpass);
         return Usermanagement.getInstance().loginUser(SID,Username,Userpass);
     } 
@@ -143,7 +143,7 @@ public class MainService {
      * @param SID
      * @return string value if completed
      */
-    public String logoutUser(String SID){
+    public Long logoutUser(String SID){
     	Long users_id = Sessionmanagement.getInstance().checkSession(SID);
     	return Usermanagement.getInstance().logout(SID,users_id);
     }
@@ -186,7 +186,7 @@ public class MainService {
     	} catch (Exception ex) {
     		log.error("registerUserByObject",ex);
     	}
-    	return null;
+    	return new Long(-1);
     }
     
     /**

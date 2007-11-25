@@ -13,15 +13,15 @@ import org.xmlcrm.app.hibernate.beans.adresses.Adresses;
 import org.xmlcrm.app.hibernate.beans.adresses.States;
 import org.xmlcrm.app.hibernate.utils.HibernateUtil;
 
-public class Adressmanagement {
+public class Addressmanagement {
 
-	private static final Log log = LogFactory.getLog(Adressmanagement.class);
+	private static final Log log = LogFactory.getLog(Addressmanagement.class);
 
-	private static Adressmanagement instance = null;
+	private static Addressmanagement instance = null;
 
-	public static synchronized Adressmanagement getInstance() {
+	public static synchronized Addressmanagement getInstance() {
 		if (instance == null) {
-			instance = new Adressmanagement();
+			instance = new Addressmanagement();
 		}
 		return instance;
 	}
@@ -37,7 +37,7 @@ public class Adressmanagement {
 	 * @param fax
 	 * @return id of generated Adress-Object or NULL
 	 */
-	public Long saveAdress(String street, String zip, String town,
+	public Long saveAddress(String street, String zip, String town,
 			long states_id, String additionalname, String comment, String fax) {
 		try {
 			States st = Statemanagement.getInstance().getStateById(states_id);

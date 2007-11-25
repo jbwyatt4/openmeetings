@@ -87,7 +87,7 @@ public class ImportInitvalues {
 	public void loadConfiguration(String allowfrontendRegister, String smtpServer, String smtpPort, 
 			String referer, String mailauthname, String mailauthpass, String default_lang, 
 			String swf_path, String im_path, String url_feed, String url_feed2){
-		
+
 		//"1"
 		Configurationmanagement.getInstance().addConfByKey(3, "allow_frontend_register", allowfrontendRegister, null, "");
 		
@@ -142,16 +142,20 @@ public class ImportInitvalues {
 	
 	public void loadInitUserAndOrganisation(String username, String userpass, String email, String defaultOrganisationName) {
 		//Add user
-		long user_id = Usermanagement.getInstance().registerUserInit(new Long(3),3, 1, 1, 
-				username, userpass, "lastname", "firstname", 
-				email, new java.util.Date(), "street", "no", "fax", 
-				"zip", 1, "town", 0, false, null);
-		
-		//Add default group
-		long organisation_id = Organisationmanagement.getInstance().addOrganisation(defaultOrganisationName, user_id);
-		
-		//Add user to default group
-		Organisationmanagement.getInstance().addUserToOrganisation(new Long(3), 1, organisation_id, 1,"");		
+		try {
+			Long user_id = Usermanagement.getInstance().registerUserInit(new Long(3),3, 1, 1, 
+					username, userpass, "lastname", "firstname", 
+					email, new java.util.Date(), "street", "no", "fax", 
+					"zip", 1, "town", 0, false, null);
+			
+			//Add default group
+			Long organisation_id = Organisationmanagement.getInstance().addOrganisation(defaultOrganisationName, user_id);
+			
+			//Add user to default group
+			Organisationmanagement.getInstance().addUserToOrganisation(new Long(3), 1, organisation_id, 1,"");	
+		} catch (Exception e) {
+			log.error("[loadInitUserAndOrganisation] ",e);
+		}
 	}
 	
 	/**
