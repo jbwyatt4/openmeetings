@@ -1,6 +1,7 @@
-#Sun Nov 25 11:29:26 CET 2007
+#Sun Nov 25 18:27:11 CET 2007
 eclipse.preferences.version=1
 encoding//conference/global/functions.lzx=UTF-8
+encoding//conference/popups/errorpopup.lzx=UTF-8
 encoding//conference/popups/rpcerrordialog.lzx=UTF-8
 encoding//conference/remote/devrtmpconnection.lzx=UTF-8
 encoding//conference/remote/simplenetstream.lzx=UTF-8
@@ -32,14 +33,16 @@ encoding//xmlcrm/auth/registerNewUser.lzx=UTF-8
 encoding//xmlcrm/auth/resetform.lzx=UTF-8
 encoding//xmlcrm/auth/resetpassword.lzx=UTF-8
 encoding//xmlcrm/content/admin/chooseorganisationwindow.lzx=UTF-8
-encoding//xmlcrm/content/admin/configureusers.lzx=UTF-8
+encoding//xmlcrm/content/admin/configureusersListItem.lzx=UTF-8
 encoding//xmlcrm/content/admin/library.lzx=UTF-8
 encoding//xmlcrm/content/admin/useradmin.lzx=UTF-8
 encoding//xmlcrm/content/admin/uservalueform.lzx=UTF-8
 encoding//xmlcrm/content/confadmin/confvalueform.lzx=UTF-8
 encoding//xmlcrm/content/conference/audience.lzx=UTF-8
 encoding//xmlcrm/content/conference/conference.lzx=UTF-8
-encoding//xmlcrm/content/contentviews/contentsavewindow.lzx=UTF-8
+encoding//xmlcrm/content/contentviews/basecontentsaveview.lzx=UTF-8
+encoding//xmlcrm/content/contentviews/basecontentview.lzx=UTF-8
+encoding//xmlcrm/content/contentviews/library.lzx=UTF-8
 encoding//xmlcrm/content/dashboard/maindashboard.lzx=UTF-8
 encoding//xmlcrm/content/events/library.lzx=UTF-8
 encoding//xmlcrm/content/events/privateevents.lzx=UTF-8
@@ -55,6 +58,7 @@ encoding//xmlcrm/content/settings/usersettings.lzx=UTF-8
 encoding//xmlcrm/content/wizard/previousnext.lzx=UTF-8
 encoding//xmlcrm/hibernate/netremotecallhib.lzx=UTF-8
 encoding//xmlcrm/hibernate/rtmphib.lzx=UTF-8
+encoding//xmlcrm/library.lzx=UTF-8
 encoding//xmlcrm/navi/library.lzx=UTF-8
 encoding//xmlcrm/navi/mainnavi.lzx=UTF-8
 encoding//xmlcrm/navi/navifunctions.lzx=UTF-8

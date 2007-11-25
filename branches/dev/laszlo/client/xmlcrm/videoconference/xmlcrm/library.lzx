@@ -6,6 +6,5 @@
     <include href="usermanage/" />
     <include href="navi/" />
     <include href="content/" />
-    <include href="messages/" />
 
 </library>

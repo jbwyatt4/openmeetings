@@ -12,7 +12,9 @@
     
 	<handler name="onnew" />
     <handler name="ondelete" />
-    <handler name="onsavecompleted" />
+    <handler name="onsavecompleted" >
+		this._savecontentbar._newRecord.setAttribute('visibility','hidden');
+	</handler>
 	<handler name="onreload" />
 
     <view name="_savecontentbar" layout="axis:x;spacing:2;inset:2" x="2" height="28" width="$once{ parent.width }"
@@ -24,7 +26,8 @@
         <basechooseseicon resourceN="reload_rsc" labelid="156" y="2" 
         	onclick="this.parent.parent.doReloadEvent()" visible="$once{ parent.parent.refreshIsVisible }" />        
         <basechooseseicon resourceN="button_cancel_rsc" labelid="157" y="2" 
-        	onclick="this.parent.parent.doDeleteEvent()" visible="$once{ parent.parent.deleteIsVisible }" />         	 	      	
+        	onclick="this.parent.parent.doDeleteEvent()" visible="$once{ parent.parent.deleteIsVisible }" />
+		<labeltext name="_newRecord" visibility="hidden" labelid="344" fgcolor="green" />        	 	      	
     </view>
     
     <method name="addViewToObserver" args="obj">
@@ -33,6 +36,7 @@
     </method>
 	
 	<method name="doAddEvent">
+		this._savecontentbar._newRecord.setAttribute('visibility','visible');
 		this.onnew.sendEvent();
 	</method>
     

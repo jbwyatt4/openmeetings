@@ -162,7 +162,8 @@
     
      <text name="errormess" resize="true" y="168" x="2" fgcolor="red" fontsize="12"/>
 
-    <netremotecallhib name="loginUser" funcname="xmlcrm.loginUser" remotecontext="$once{ canvas.thishib }" >      
+    <netremotecallhib name="loginUser" funcname="xmlcrm.loginUser" 
+		remotecontext="$once{ canvas.thishib }" activeErrorHandler="true" >      
         <netparam><method name="getValue"> return canvas.sessionId; </method></netparam>  
         <netparam><method name="getValue"> return parent.parent.username.getText(); </method></netparam>  
         <netparam><method name="getValue"> return parent.parent.userpass.getText(); </method></netparam>  
@@ -170,79 +171,76 @@
 			<![CDATA[
             //The onResult-Handler will be called be the rtmpconnection
             //Debug.write("loginUser: ",value);
-            
-            if (value.level_id!=-1){
-                
-                if (this.parent._savelogindata.getValue()) {
-                    var t = new sharedobject();
-                    t.getLocal('userdata');
-                    var g = t.getData('userdata');
-                    if (g==null) g = new Array();
-                    g["username"] = parent.username.getText();
-                    g["userpass"] = parent.userpass.getText();
-                    g["saveuserdata"]=true;
-                    t.setData('userdata',g);
-                    t.flush(); 
-                } else {
-                    var t = new sharedobject();
-                    t.getLocal('userdata');
-                    var g = t.getData('userdata');
-                    if (g==null) g = new Array();
-                    g["username"] = '';
-                    g["userpass"] = '';
-                    g["saveuserdata"]=false;
-                    t.setData('userdata',g);
-                    t.flush();                 
-                }
-            
-				canvas.setAttribute('user_id',value.user_id);
-				canvas.setAttribute('firstName',value.firstname);
-				canvas.setAttribute('lastName',value.lastname);
-				canvas.setAttribute('mail','');
-				canvas.setAttribute('lastLogin','');
-				canvas.setAttribute('official_code','');
-				canvas.setAttribute('picture_uri','');
-				canvas.setAttribute('language','');
-                
-                if (parent.languages.getText()=='arabic') {
-                    canvas.isrtl = true;
-                }
-                hib.userlang = Number(parent.languages.getValue());
-            	hib.userobject = value;
-            	if (value.organisation_users.length==0){
-            		//Debug.write("this user has no Organisation ");
-                } else if (value.organisation_users.length==1){
-            		hib.currentdomain = value.organisation_users[0].organisation.name;
-            		hib.currentdomainObj = value.organisation_users[0].organisation;
-	            	hib.getLanguageById.doCall();
-	                parent.close();
-                } else {
+				if (!(value<0)){
 					
-					parent.n1.setAttribute('visible',false);
-					parent.username.setAttribute('visible',false);
-					parent.n2.setAttribute('visible',false);
-			        parent.userpass.setAttribute('visible',false);
-					parent.n3.setAttribute('visible',false);
-			        parent.languages.setAttribute('visible',false);
-                    parent.n5.setAttribute('visible',false);
-                    parent.colors.setAttribute('visible',false);
-	 				parent._register.setAttribute('visible',false);
-					parent.b2.setAttribute('visible',false);
-					parent.n4.setAttribute('visible',true);
-					parent.organisation.setAttribute('visible',true);
-					parent.b3.setAttribute('visible',true);
-					parent.nlabelquality.setAttribute('visible',false);
-					parent.ncomboquality.setAttribute('visible',false);
-			
-					for (var i=0;i<value.organisation_users.length;i++){
-						parent.organisation.addItem(value.organisation_users[i].organisation.name,String(i));
+					if (this.parent._savelogindata.getValue()) {
+						var t = new sharedobject();
+						t.getLocal('userdata');
+						var g = t.getData('userdata');
+						if (g==null) g = new Array();
+						g["username"] = parent.username.getText();
+						g["userpass"] = parent.userpass.getText();
+						g["saveuserdata"]=true;
+						t.setData('userdata',g);
+						t.flush(); 
+					} else {
+						var t = new sharedobject();
+						t.getLocal('userdata');
+						var g = t.getData('userdata');
+						if (g==null) g = new Array();
+						g["username"] = '';
+						g["userpass"] = '';
+						g["saveuserdata"]=false;
+						t.setData('userdata',g);
+						t.flush();                 
 					}
-					parent.organisation.selectItem(String(i-1));
-                	//Debug.write("multiple organisations Issue 31 http://code.google.com/p/openmeetings/issues/detail?id=31");
-                }
-            }  else {
-                parent.errormess.setText(value.firstname);
-            }
+				
+					canvas.setAttribute('user_id',value.user_id);
+					canvas.setAttribute('firstName',value.firstname);
+					canvas.setAttribute('lastName',value.lastname);
+					canvas.setAttribute('mail','');
+					canvas.setAttribute('lastLogin','');
+					canvas.setAttribute('official_code','');
+					canvas.setAttribute('picture_uri','');
+					canvas.setAttribute('language','');
+					
+					if (parent.languages.getText()=='arabic') {
+						canvas.isrtl = true;
+					}
+					hib.userlang = Number(parent.languages.getValue());
+					hib.userobject = value;
+					if (value.organisation_users.length==0){
+						//Debug.write("this user has no Organisation ");
+					} else if (value.organisation_users.length==1){
+						hib.currentdomain = value.organisation_users[0].organisation.name;
+						hib.currentdomainObj = value.organisation_users[0].organisation;
+						hib.getLanguageById.doCall();
+						parent.close();
+					} else {
+						
+						parent.n1.setAttribute('visible',false);
+						parent.username.setAttribute('visible',false);
+						parent.n2.setAttribute('visible',false);
+						parent.userpass.setAttribute('visible',false);
+						parent.n3.setAttribute('visible',false);
+						parent.languages.setAttribute('visible',false);
+						parent.n5.setAttribute('visible',false);
+						parent.colors.setAttribute('visible',false);
+						 parent._register.setAttribute('visible',false);
+						parent.b2.setAttribute('visible',false);
+						parent.n4.setAttribute('visible',true);
+						parent.organisation.setAttribute('visible',true);
+						parent.b3.setAttribute('visible',true);
+						parent.nlabelquality.setAttribute('visible',false);
+						parent.ncomboquality.setAttribute('visible',false);
+				
+						for (var i=0;i<value.organisation_users.length;i++){
+							parent.organisation.addItem(value.organisation_users[i].organisation.name,String(i));
+						}
+						parent.organisation.selectItem(String(i-1));
+						//Debug.write("multiple organisations Issue 31 http://code.google.com/p/openmeetings/issues/detail?id=31");
+					}
+				}
             ]]>
         </handler>  
     </netremotecallhib>

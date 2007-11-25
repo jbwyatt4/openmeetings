@@ -200,6 +200,7 @@ containing the VideoViews
 <attribute name="isrtl" value="false" type="boolean" />    
     
 <handler name="oninit">
+	//this.setAttribute('framerate',20);
     var cmenu = new LzContextMenu();
     canvas.setDefaultContextMenu(cmenu);
     cmenu.hideBuiltInItems();

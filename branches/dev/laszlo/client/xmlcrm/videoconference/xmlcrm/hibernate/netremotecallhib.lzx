@@ -20,15 +20,22 @@
 	</handler>	
 	<method name="doCall">
         canvas._loadingAll.setAttribute('visible',true);
+		//Debug.write("doCall: ",this);
 		this.call();
 	</method>
 	
 	<handler name="sendCallBack" />
 	
+	<!--
+
+	 -->
 	<handler name="ondata" args="value">
 		<![CDATA[
 			////Debug.write("ondata: ",this,Number(value),this.returnObj);
+			
 			canvas._loadingAll.setAttribute('visible',false);
+			
+			//Another Error Handler for the Form-Components
 			if (this.returnObj!=null && Number(value)>0) {
 				//Debug.write("this.returnObj.processNext");
 				this.returnObj.processNext();
