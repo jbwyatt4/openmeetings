@@ -109,7 +109,7 @@
 	
      <netremotecallhib name="registerUserByObject" funcname="xmlcrm.registerUserByObject" 
      	remotecontext="$once{ canvas.thishib }" >      
-        <netparam name="vars1">
+        <netparam>
         	<method name="getValue"> 
         		return this.parent.parent.regObject; 
         	</method>

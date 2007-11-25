@@ -26,11 +26,11 @@
 		</handler>
 		
 		<netremotecallhib name="getOrganisations" funcname="organisationservice.getOrganisations" remotecontext="$once{ canvas.thishib }" >      
-			<netparam name="vars1"><method name="getValue"> return canvas.sessionId; </method></netparam>
-			<netparam name="vars2"><method name="getValue"> return parent.parent.start; </method></netparam>
-			<netparam name="vars3"><method name="getValue"> return parent.parent.step; </method></netparam>
-			<netparam name="vars4"><method name="getValue"> return parent.parent.orderby; </method></netparam>
-			<netparam name="vars5"><method name="getValue"> return parent.parent.asc; </method></netparam>
+			<netparam><method name="getValue"> return canvas.sessionId; </method></netparam>
+			<netparam><method name="getValue"> return parent.parent.start; </method></netparam>
+			<netparam><method name="getValue"> return parent.parent.step; </method></netparam>
+			<netparam><method name="getValue"> return parent.parent.orderby; </method></netparam>
+			<netparam><method name="getValue"> return parent.parent.asc; </method></netparam>
 	    	<handler name="ondata" args="value">
 	    		//Debug.write("getOrganisations ",value);
 	    		//this.parent.destroy();

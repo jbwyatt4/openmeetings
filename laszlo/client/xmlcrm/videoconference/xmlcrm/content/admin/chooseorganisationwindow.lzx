@@ -17,11 +17,11 @@
     </handler>
 	
 	<netremotecallhib name="getOrganisations" funcname="organisationservice.getOrganisations" remotecontext="$once{ canvas.thishib }" >      
-		<netparam name="vars1"><method name="getValue"> return canvas.sessionId; </method></netparam>
-		<netparam name="vars2"><method name="getValue"> return 0; </method></netparam>
-		<netparam name="vars3"><method name="getValue"> return 200; </method></netparam>
-		<netparam name="vars4"><method name="getValue"> return "organisation_id"; </method></netparam>
-		<netparam name="vars5"><method name="getValue"> return true; </method></netparam>
+		<netparam><method name="getValue"> return canvas.sessionId; </method></netparam>
+		<netparam><method name="getValue"> return 0; </method></netparam>
+		<netparam><method name="getValue"> return 200; </method></netparam>
+		<netparam><method name="getValue"> return "organisation_id"; </method></netparam>
+		<netparam><method name="getValue"> return true; </method></netparam>
 		<handler name="ondata" args="value">
 			<![CDATA[
 			//Debug.write("getOrganisations ",value);

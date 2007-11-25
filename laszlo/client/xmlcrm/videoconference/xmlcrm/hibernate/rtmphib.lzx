@@ -116,11 +116,11 @@
     </netremotecallhib>
     
         <netremotecallhib name="setUsernameReconnect" funcname="setUsername" remotecontext="$once{ canvas.thishib }" >   
-            <netparam name="vars1"><method name="getValue">return canvas.user_id;</method></netparam>
-            <netparam name="vars2"><method name="getValue">return canvas.currentuser;</method></netparam>
-            <netparam name="vars3"><method name="getValue">return canvas.firstName;</method></netparam>
-            <netparam name="vars4"><method name="getValue">return canvas.lastName;</method></netparam>      
-            <netparam name="vars6"><method name="getValue">return parent.parent.currentdomain;</method></netparam>
+            <netparam><method name="getValue">return canvas.user_id;</method></netparam>
+            <netparam><method name="getValue">return canvas.currentuser;</method></netparam>
+            <netparam><method name="getValue">return canvas.firstName;</method></netparam>
+            <netparam><method name="getValue">return canvas.lastName;</method></netparam>      
+            <netparam><method name="getValue">return parent.parent.currentdomain;</method></netparam>
             <handler name="ondata" args="value">
                 //The onResult-Handler will be called be the rtmpconnection
                 //Debug.write("setUsername: ",value);                    
@@ -128,7 +128,7 @@
         </netremotecallhib>    
     
     <netremotecallhib name="getLanguageById" funcname="xmlcrm.getLanguageById" >      
-        <netparam name="vars1"><method name="getValue"> return parent.parent.userlang; </method></netparam> 
+        <netparam><method name="getValue"> return parent.parent.userlang; </method></netparam> 
         <handler name="ondata" args="value">
             //The onResult-Handler will be called be the rtmpconnection
             //Debug.write("getLanguageById: ",value);
@@ -148,13 +148,14 @@
     </netremotecallhib>
 	
     <netremotecallhib name="markSessionAsLogedIn" funcname="xmlcrm.markSessionAsLogedIn" >
-		<netparam name="vars1"><method name="getValue">return canvas.sessionId;</method></netparam>
+		<netparam><method name="getValue">return canvas.sessionId;</method></netparam>
         <handler name="ondata" args="value">
             //The onResult-Handler will be called be the rtmpconnection
             //Debug.write("markSessionAsLogedIn ",value);
 			if (canvas.mail == undefined) {
 			    new invitationuserwin(canvas.main_content._content.inner);
 			} else {		
+				//not used for the moment
                 new invitationquickloader(canvas.main_content._content.inner);
 			}                 
         </handler>  
@@ -170,18 +171,23 @@
     </netremotecallhib>    
     
     <netremotecallhib name="getUserSalutations" funcname="userservice.getUserSalutations" >
-		<netparam name="vars1"><method name="getValue">return canvas.sessionId;</method></netparam>
-		<netparam name="vars2"><method name="getValue"> return parent.parent.userlang; </method></netparam> 
+		<netparam><method name="getValue">return canvas.sessionId;</method></netparam>
+		<netparam><method name="getValue"> return parent.parent.userlang; </method></netparam> 
         <handler name="ondata" args="value">
             //The onResult-Handler will be called be the rtmpconnection
             //Debug.write("getUserSalutations ",value);
             canvas.salutationsInitValues = value;
-            new checkLoginData(canvas.main_content._content.inner);
+			//check for password reset
+			if (canvas.isResetUsername){
+				new resetpassword(canvas.main_content._content.inner);
+			} else {
+				new checkLoginData(canvas.main_content._content.inner);
+			}
         </handler>  
     </netremotecallhib>   
     
     <netremotecallhib name="getRoomTypes" funcname="conferenceservice.getRoomTypes" >
-		<netparam name="vars1"><method name="getValue">return canvas.sessionId;</method></netparam>
+		<netparam><method name="getValue">return canvas.sessionId;</method></netparam>
         <handler name="ondata" args="value">
             //The onResult-Handler will be called be the rtmpconnection
             //Debug.write("getRoomTypes ",value);
@@ -191,8 +197,8 @@
     </netremotecallhib>    	 
     
     <netremotecallhib name="getNavi" funcname="xmlcrm.getNavi" dataobject="myresultnavi">      
-        <netparam name="vars1"><method name="getValue"> return canvas.sessionId; </method></netparam> 
-        <netparam name="vars2"><method name="getValue"> return parent.parent.userlang; </method></netparam> 
+        <netparam><method name="getValue"> return canvas.sessionId; </method></netparam> 
+        <netparam><method name="getValue"> return parent.parent.userlang; </method></netparam> 
         <handler name="ondata" args="value">
             //The onResult-Handler will be called be the rtmpconnection
             Debug.write("getNavi: ",value);
@@ -210,11 +216,11 @@
         </netremotecallhib> 
         
         <netremotecallhib name="setUsername" funcname="setUsername" remotecontext="$once{ canvas.thishib }" >   
-            <netparam name="vars1"><method name="getValue">return canvas.user_id;</method></netparam>
-            <netparam name="vars2"><method name="getValue">return canvas.currentuser;</method></netparam>
-            <netparam name="vars3"><method name="getValue">return canvas.firstName;</method></netparam>
-            <netparam name="vars4"><method name="getValue">return canvas.lastName;</method></netparam>      
-            <netparam name="vars6"><method name="getValue">return parent.parent.currentdomain;</method></netparam>
+            <netparam><method name="getValue">return canvas.user_id;</method></netparam>
+            <netparam><method name="getValue">return canvas.currentuser;</method></netparam>
+            <netparam><method name="getValue">return canvas.firstName;</method></netparam>
+            <netparam><method name="getValue">return canvas.lastName;</method></netparam>      
+            <netparam><method name="getValue">return parent.parent.currentdomain;</method></netparam>
             <handler name="ondata" args="value">
                 //The onResult-Handler will be called be the rtmpconnection
                 //Debug.write("setUsername: ",value);

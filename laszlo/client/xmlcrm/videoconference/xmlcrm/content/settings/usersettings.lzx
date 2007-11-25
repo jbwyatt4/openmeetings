@@ -52,7 +52,7 @@
 	
   	<netremotecallhib name="getUserSelf" funcname="userservice.getUserSelf" 
   		remotecontext="$once{ canvas.thishib }" > 
-  		<netparam name="vars1"><method name="getValue"> return canvas.sessionId; </method></netparam>
+  		<netparam><method name="getValue"> return canvas.sessionId; </method></netparam>
     	<handler name="ondata" args="value">
 			//Debug.write("getUserSelf: ",value);
     		parent.initFields(value);
@@ -85,8 +85,8 @@
             Debug.write("this.parent.userObj: ",this.parent.userObj);
             Debug.write("this.parent.userObj.adresses.states ",this.parent.userObj.adresses.states);
   		</method>
-  		<netparam name="vars1"><method name="getValue"> return canvas.sessionId; </method></netparam>
-    	<netparam name="vars2"><method name="getValue">return this.parent.parent.userObj;</method></netparam>	  		
+  		<netparam><method name="getValue"> return canvas.sessionId; </method></netparam>
+    	<netparam><method name="getValue">return this.parent.parent.userObj;</method></netparam>	  		
         <handler name="ondata" args="value"> 
             Debug.write("updateUserSelfSmall: ",value);
         </handler>

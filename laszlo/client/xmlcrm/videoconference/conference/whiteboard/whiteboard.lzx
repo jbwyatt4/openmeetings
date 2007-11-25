@@ -278,8 +278,8 @@
     
         <netremotecallhib name="sendMessageWithClientById" funcname="sendMessageWithClientById"
 			remotecontext="$once{ canvas.thishib }" >
-            <netparam name="vars1"><method name="getValue">return parent.parent.sendObject;</method></netparam>
-            <netparam name="vars2"><method name="getValue">return parent.parent.sendObjectToClientID;</method></netparam>
+            <netparam><method name="getValue">return parent.parent.sendObject;</method></netparam>
+            <netparam><method name="getValue">return parent.parent.sendObjectToClientID;</method></netparam>
             <handler name="ondata" args="value">
                 <![CDATA[
                 //The onResult-Handler will be called be the rtmpconnection

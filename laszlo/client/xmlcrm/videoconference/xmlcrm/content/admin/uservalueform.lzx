@@ -76,16 +76,16 @@
 	
   	<netremotecallhib name="getUserById" funcname="userservice.getUserById" 
   		remotecontext="$once{ canvas.thishib }" > 
-  		<netparam name="vars1"><method name="getValue"> return canvas.sessionId; </method></netparam>
-    	<netparam name="vars2"><method name="getValue">return parent.parent.user_id;</method></netparam>
+  		<netparam><method name="getValue"> return canvas.sessionId; </method></netparam>
+    	<netparam><method name="getValue">return parent.parent.user_id;</method></netparam>
     	<handler name="ondata" args="value">
     		parent.initFields(value);
     	</handler>
   	</netremotecallhib>
 	
 	<netremotecallhib name="deleteUserAdmin" funcname="userservice.deleteUserAdmin" remotecontext="$once{ canvas.thishib }" >      
-		<netparam name="vars1"><method name="getValue"> return canvas.sessionId; </method></netparam>
-		<netparam name="vars2"><method name="getValue"> return parent.parent.user_id; </method></netparam>
+		<netparam><method name="getValue"> return canvas.sessionId; </method></netparam>
+		<netparam><method name="getValue"> return parent.parent.user_id; </method></netparam>
 		<handler name="ondata" args="value">
 			//Debug.write("deleteUserAdmin ",value);
 			//this.parent.destroy();
@@ -126,8 +126,8 @@
 
   			//Debug.write("prepareCall: ",this.sendObject);
   		</method>
-  		<netparam name="vars1"><method name="getValue"> return canvas.sessionId; </method></netparam>
-    	<netparam name="vars2"><method name="getValue">return parent.sendObject;</method></netparam>	  		
+  		<netparam><method name="getValue"> return canvas.sessionId; </method></netparam>
+    	<netparam><method name="getValue">return parent.sendObject;</method></netparam>	  		
     	<handler name="ondata" args="val">
 			<![CDATA[
     		//Debug.write("saveOrUpdateUser: ",val);

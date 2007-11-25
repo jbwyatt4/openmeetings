@@ -9,6 +9,12 @@
 	<!-- if true this object will register at the update-observer -->
 	<attribute name="registerObject" value="false" type="boolean" />
 	
+	<!-- show Error Messages with normal Box -->
+    <attribute name="activeErrorHandler" value="false" type="boolean" />	
+	
+	<!-- show Error Messages with Callback Box -->
+	<attribute name="isCallBackHandler" value="false" type="boolean" />	
+	
 	<handler name="oninit">
 		if (this.registerObject) this.parent.addViewToObserver(this);
 	</handler>	
@@ -16,18 +22,32 @@
         canvas._loadingAll.setAttribute('visible',true);
 		this.call();
 	</method>
+	
+	<handler name="sendCallBack" />
+	
 	<handler name="ondata" args="value">
 		<![CDATA[
-		////Debug.write("ondata: ",this,Number(value),this.returnObj);
-        canvas._loadingAll.setAttribute('visible',false);
-		if (this.returnObj!=null && Number(value)>0) {
-			//Debug.write("this.returnObj.processNext");
-			this.returnObj.processNext();
-		} else if (this.returnObj!=null && Number(value)<0) {
-		    this.returnObj.errorByCode(Number(value));
-		} else if (this.returnObj!=null && value==null) {
-		    this.returnObj.errorByCode(-1);
-		}
+			////Debug.write("ondata: ",this,Number(value),this.returnObj);
+			canvas._loadingAll.setAttribute('visible',false);
+			if (this.returnObj!=null && Number(value)>0) {
+				//Debug.write("this.returnObj.processNext");
+				this.returnObj.processNext();
+			} else if (this.returnObj!=null && Number(value)<0) {
+				this.returnObj.errorByCode(Number(value));
+			} else if (this.returnObj!=null && value==null) {
+				this.returnObj.errorByCode(-1);
+			}
+			
+            if (this.activeErrorHandler) {
+                if (Number(value)<0){
+                    Debug.warn("Received Error ID: ",value);
+					if (this.isCallBackHandler) {
+						new callbackrpcerrordialog(canvas.main_content._content.inner,{callBackObject:this,errorid:Number(value)});
+					} else {
+						new rpcerrordialog(canvas.main_content._content.inner,{errorid:Number(value)});
+					}
+                }
+            }			
 		]]>
 	</handler>	
 </class>
