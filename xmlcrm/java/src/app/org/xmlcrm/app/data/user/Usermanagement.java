@@ -982,6 +982,13 @@ public class Usermanagement {
 		return null;
 	}
 	
+	/**
+	 * reset a username by a given mail oder login by sending a mail to the registered EMail-Address
+	 * @param email
+	 * @param username
+	 * @param appLink
+	 * @return
+	 */
 	public Long resetUser(String email, String username, String appLink) {
 		try {
 			//check if Mail given
@@ -1071,6 +1078,51 @@ public class Usermanagement {
 			log.error("[getUserByAdressesId]",e);
 		}
 		return null;
+	}
+	
+	public Object getUserByHash (String hash) {
+		try {
+			if (hash.length()==0) return new Long(-5);
+			String hql = "SELECT u FROM Users as u " +
+					" where u.resethash = :resethash" +
+					" AND deleted != :deleted";
+			Object idf = HibernateUtil.createSession();
+			Session session = HibernateUtil.getSession();
+			Transaction tx = session.beginTransaction();
+			Query query = session.createQuery(hql);
+			query.setString("resethash", hash);
+			query.setString("deleted", "true");
+			Users us = (Users) query.uniqueResult();
+			tx.commit();
+			HibernateUtil.closeSession(idf);
+			if (us!=null) {
+				return us;		
+			} else {
+				return new Long(-5);
+			}
+		} catch (Exception e) {
+			log.error("[getUserByAdressesId]",e);
+		}
+		return new Long(-1);
+	}
+	
+	public Object resetPassByHash (String hash, String pass) {
+		try {
+			Object u = this.getUserByHash(hash);
+			if (u instanceof Users) {
+				Users us = (Users) u;
+				MD5Calc md5 = new MD5Calc("MD5");
+				us.setPassword(md5.do_checksum(pass));
+				us.setResethash("");
+				this.updateUser(us);
+				return new Long(-8);
+			} else {
+				return u;
+			}
+		} catch (Exception e) {
+			log.error("[getUserByAdressesId]",e);
+		}
+		return new Long(-1);
 	}
 
 }

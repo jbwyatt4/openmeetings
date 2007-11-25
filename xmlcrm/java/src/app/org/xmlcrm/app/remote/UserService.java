@@ -40,6 +40,16 @@ public class UserService {
 		return Usermanagement.getInstance().resetUser(email, login, applink);
 	}
 	
+	public Object getUserByHash(String SID, String hash) {
+		Sessionmanagement.getInstance().checkSession(SID);
+		return Usermanagement.getInstance().getUserByHash(hash);
+	}
+	
+	public Object resetPassByHash(String SID, String hash, String pass) {
+		Sessionmanagement.getInstance().checkSession(SID);
+		return Usermanagement.getInstance().resetPassByHash(hash,pass);
+	}
+	
 	/**
 	 * get user by id, admin only
 	 * @param SID
