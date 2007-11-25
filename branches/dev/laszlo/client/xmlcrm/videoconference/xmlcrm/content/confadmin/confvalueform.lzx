@@ -62,8 +62,8 @@
 	
   	<netremotecallhib name="getConfByConfigurationId" funcname="configservice.getConfByConfigurationId" 
   		remotecontext="$once{ canvas.thishib }" > 
-  		<netparam name="vars1"><method name="getValue">return canvas.sessionId; </method></netparam>
-    	<netparam name="vars2"><method name="getValue">return parent.parent.configuration_id;</method></netparam>
+  		<netparam><method name="getValue">return canvas.sessionId; </method></netparam>
+    	<netparam><method name="getValue">return parent.parent.configuration_id;</method></netparam>
     	<handler name="ondata" args="value">
     		parent.initFields(value);
     	</handler>
@@ -79,8 +79,8 @@
             this.sendObject["conf_value"] = this.parent.conf_value.getText();
   			//Debug.write("prepareCall: ",this.sendObject);
   		</method>
-  		<netparam name="vars1"><method name="getValue">return canvas.sessionId; </method></netparam>
-    	<netparam name="vars2"><method name="getValue">return parent.sendObject;</method></netparam>	
+  		<netparam><method name="getValue">return canvas.sessionId; </method></netparam>
+    	<netparam><method name="getValue">return parent.sendObject;</method></netparam>	
         <handler name="ondata" args="value">
 			//Debug.write("deleteConfiguration ",value);
 			if (value>0){
@@ -102,8 +102,8 @@
             this.sendObject["conf_value"] = this.parent.conf_value.getText();
             //Debug.write("prepareCall: ",this.sendObject);
   		</method>
-  		<netparam name="vars1"><method name="getValue">return canvas.sessionId; </method></netparam>
-    	<netparam name="vars2"><method name="getValue">return parent.sendObject;</method></netparam>	  		
+  		<netparam><method name="getValue">return canvas.sessionId; </method></netparam>
+    	<netparam><method name="getValue">return parent.sendObject;</method></netparam>	  		
     	<handler name="ondata" args="val">
 			<![CDATA[
     		//Debug.write("saveOrUpdateConfiguration ",val);

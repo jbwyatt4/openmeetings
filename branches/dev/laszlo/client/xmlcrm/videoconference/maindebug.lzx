@@ -184,6 +184,9 @@ of the red5-servlet
 <attribute name="initdomainid" value="" type="string" />
 <attribute name="initlangid" value="1" type="number" />
 <attribute name="isinitRoomDirect" value="false" type="boolean" />
+	
+<attribute name="isResetUsername" value="false" type="boolean" />
+<attribute name="resetHash" value="" type="string" />
     
 <attribute name="naviHeight" value="110" type="number" />    
 <attribute name="naviHeightDelta" value="110" type="number" />    
@@ -256,6 +259,7 @@ containing the VideoViews
         this.setAttribute('rtmphostlocal',server);
     }
 	
+	//Check for Invitation
 	var domain = LzBrowser.getInitArg('domain');
 	var room = LzBrowser.getInitArg('room');
 	var roomtype = LzBrowser.getInitArg('roomtype');
@@ -271,6 +275,14 @@ containing the VideoViews
 		canvas.firstName = emailGuest;
 		canvas.mail = emailGuest;
 
+	}
+		
+	//check for reset password
+	var hash = LzBrowser.getInitArg('hash');
+		
+	if (hash!=undefined){
+		canvas.isResetUsername = true;
+		canvas.resetHash = hash;		
 	}
 	
 	//Debug.write("rtmphostlocal,rmpthost: ",canvas.rtmphostlocal,canvas.rmpthost);	
@@ -311,7 +323,7 @@ containing the VideoViews
     </text>
     <handler name="oninit">
         var cmenu = new LzContextMenu();
-        this.setDefaultContextMenu(cmenu);
+        this.setContextMenu(cmenu);
         cmenu.hideBuiltInItems();
     </handler>     
 </view>

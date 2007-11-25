@@ -28,7 +28,7 @@
 	
 	<netremotecallhib name="getIssuesForProject" funcname="issueservice.getIssuesForProject" 
 		remotecontext="$once{ canvas.thishib }" >   
-		<netparam name="vars1"><method name="getValue">return this.parent.parent.projectid;</method></netparam>  
+		<netparam><method name="getValue">return this.parent.parent.projectid;</method></netparam>  
 		<handler name="ondata" args="value">	
 			//Debug.write("getIssuesForProject: ",value);
 			<![CDATA[
@@ -60,8 +60,8 @@
 		
 	<netremotecallhib name="getIssueById" funcname="issueservice.getIssueById" 
 		remotecontext="$once{ canvas.thishib }" >   
-		<netparam name="vars1"><method name="getValue">return issuecontentareaRoot.currentprojectId;</method></netparam>  
-		<netparam name="vars2"><method name="getValue">return this.parent.parent.issuesid;</method></netparam>  
+		<netparam><method name="getValue">return issuecontentareaRoot.currentprojectId;</method></netparam>  
+		<netparam><method name="getValue">return this.parent.parent.issuesid;</method></netparam>  
 		<handler name="ondata" args="value">	
 			//Debug.write("getIssueById: ",value);
 			<![CDATA[
@@ -183,10 +183,10 @@
 		
 			<netremotecallhib name="createIssueForParent" funcname="issueservice.createIssueForParent" 
 				remotecontext="$once{ canvas.thishib }" >   
-				<netparam name="vars1"><method name="getValue">return this.parent.parent.currentprojectId;</method></netparam>  
-				<netparam name="vars2"><method name="getValue">return this.parent.parent.currentissuesId;</method></netparam>  
-				<netparam name="vars3"><method name="getValue">return this.parent.parent.title_t.getText();</method></netparam>  
-				<netparam name="vars4"><method name="getValue">return this.parent.parent.content_t.messagebody.content.txt.getHTMLText();</method></netparam>  
+				<netparam><method name="getValue">return this.parent.parent.currentprojectId;</method></netparam>  
+				<netparam><method name="getValue">return this.parent.parent.currentissuesId;</method></netparam>  
+				<netparam><method name="getValue">return this.parent.parent.title_t.getText();</method></netparam>  
+				<netparam><method name="getValue">return this.parent.parent.content_t.messagebody.content.txt.getHTMLText();</method></netparam>  
 				<handler name="ondata" args="value">	
 					//Debug.write("createIssueForParent ",value);
 					<![CDATA[
@@ -197,10 +197,10 @@
 		
 			<netremotecallhib name="setIssueContent" funcname="issueservice.setIssueContent" 
 				remotecontext="$once{ canvas.thishib }" >   
-				<netparam name="vars1"><method name="getValue">return this.parent.parent.currentprojectId;</method></netparam>  
-				<netparam name="vars2"><method name="getValue">return this.parent.parent.currentissuesId;</method></netparam>  
-				<netparam name="vars3"><method name="getValue">return this.parent.parent.title_t.getText();</method></netparam>  
-				<netparam name="vars4"><method name="getValue">return this.parent.parent.content_t.messagebody.content.txt.getHTMLText();</method></netparam>  
+				<netparam><method name="getValue">return this.parent.parent.currentprojectId;</method></netparam>  
+				<netparam><method name="getValue">return this.parent.parent.currentissuesId;</method></netparam>  
+				<netparam><method name="getValue">return this.parent.parent.title_t.getText();</method></netparam>  
+				<netparam><method name="getValue">return this.parent.parent.content_t.messagebody.content.txt.getHTMLText();</method></netparam>  
 				<handler name="ondata" args="value">	
 					//Debug.write("setIssueContent ",value);
 					<![CDATA[
@@ -220,8 +220,8 @@
 		</method>
 			<netremotecallhib name="deleteIssue" funcname="issueservice.deleteIssue" 
 				remotecontext="$once{ canvas.thishib }" >   
-				<netparam name="vars1"><method name="getValue">return this.parent.parent.currentprojectId;</method></netparam>  
-				<netparam name="vars2"><method name="getValue">return this.parent.parent.currentissuesId;</method></netparam>  
+				<netparam><method name="getValue">return this.parent.parent.currentprojectId;</method></netparam>  
+				<netparam><method name="getValue">return this.parent.parent.currentissuesId;</method></netparam>  
 				<handler name="ondata" args="value">	
 					//Debug.write("createIssueForParent ",value);
 					<![CDATA[

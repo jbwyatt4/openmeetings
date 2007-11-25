@@ -17,13 +17,13 @@
     </handler>
 	
 	<netremotecallhib name="searchUser" funcname="userservice.searchUser" remotecontext="$once{ canvas.thishib }" >      
-		<netparam name="vars1"><method name="getValue"> return canvas.sessionId; </method></netparam>
-		<netparam name="vars2"><method name="getValue"> return "login"; </method></netparam>
-		<netparam name="vars3"><method name="getValue"> return parent.parent.searchstring.getText(); </method></netparam>
-		<netparam name="vars4"><method name="getValue"> return 200; </method></netparam>
-		<netparam name="vars5"><method name="getValue"> return 0; </method></netparam>
-		<netparam name="vars6"><method name="getValue"> return "user_id"; </method></netparam>
-		<netparam name="vars7"><method name="getValue"> return true; </method></netparam>
+		<netparam><method name="getValue"> return canvas.sessionId; </method></netparam>
+		<netparam><method name="getValue"> return "login"; </method></netparam>
+		<netparam><method name="getValue"> return parent.parent.searchstring.getText(); </method></netparam>
+		<netparam><method name="getValue"> return 200; </method></netparam>
+		<netparam><method name="getValue"> return 0; </method></netparam>
+		<netparam><method name="getValue"> return "user_id"; </method></netparam>
+		<netparam><method name="getValue"> return true; </method></netparam>
 		<handler name="ondata" args="value">
 			<![CDATA[
 			//Debug.write("searchUser ",value);
@@ -69,10 +69,10 @@
     
         <netremotecallhib name="addUserToOrganisation" remotecontext="$once{ canvas.thishib }" 
             funcname="organisationservice.addUserToOrganisation" >      
-            <netparam name="vars1"><method name="getValue"> return canvas.sessionId; </method></netparam>
-            <netparam name="vars3"><method name="getValue"> return parent.parent.organisation_id; </method></netparam>
-            <netparam name="vars2"><method name="getValue"> return parent.parent.usersId; </method></netparam>
-            <netparam name="vars4"><method name="getValue"> return ''; </method></netparam>
+            <netparam><method name="getValue"> return canvas.sessionId; </method></netparam>
+            <netparam><method name="getValue"> return parent.parent.organisation_id; </method></netparam>
+            <netparam><method name="getValue"> return parent.parent.usersId; </method></netparam>
+            <netparam><method name="getValue"> return ''; </method></netparam>
             <handler name="ondata" args="value">
                 Debug.write("addUserToOrganisation ",value);
                 if (value>0){

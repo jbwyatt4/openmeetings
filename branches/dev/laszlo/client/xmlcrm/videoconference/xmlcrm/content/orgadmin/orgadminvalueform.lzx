@@ -42,8 +42,8 @@
 	
   	<netremotecallhib name="getOrganisationById" funcname="organisationservice.getOrganisationById" 
   		remotecontext="$once{ canvas.thishib }" > 
-  		<netparam name="vars1"><method name="getValue"> return canvas.sessionId; </method></netparam>
-    	<netparam name="vars2"><method name="getValue">return parent.parent.organisation_id;</method></netparam>
+  		<netparam><method name="getValue"> return canvas.sessionId; </method></netparam>
+    	<netparam><method name="getValue">return parent.parent.organisation_id;</method></netparam>
     	<handler name="ondata" args="value">
     		parent.initFields(value);
     	</handler>
@@ -61,8 +61,8 @@
 	<!-- remotecalls -->
 
 	<netremotecallhib name="deleteOrganisation" funcname="organisationservice.deleteOrganisation" remotecontext="$once{ canvas.thishib }" >      
-		<netparam name="vars1"><method name="getValue"> return canvas.sessionId; </method></netparam>
-		<netparam name="vars2"><method name="getValue"> return parent.parent.organisation_id; </method></netparam>
+		<netparam><method name="getValue"> return canvas.sessionId; </method></netparam>
+		<netparam><method name="getValue"> return parent.parent.organisation_id; </method></netparam>
 		<handler name="ondata" args="value">
 			//Debug.write("deleteOrganisation ",value);
 			//this.parent.destroy();
@@ -84,8 +84,8 @@
 
   			//Debug.write("prepareCall: ",this.sendObject);
   		</method>
-  		<netparam name="vars1"><method name="getValue"> return canvas.sessionId; </method></netparam>
-    	<netparam name="vars2"><method name="getValue">return parent.sendObject;</method></netparam>	  		
+  		<netparam><method name="getValue"> return canvas.sessionId; </method></netparam>
+    	<netparam><method name="getValue">return parent.sendObject;</method></netparam>	  		
     	<handler name="ondata" args="val">
 			<![CDATA[
     		//Debug.write("saveOrUpdateOrganisation: ",val);
@@ -128,12 +128,12 @@
 	
         <netremotecallhib name="getUsersByOrganisation" funcname="organisationservice.getUsersByOrganisation" 
               remotecontext="$once{ canvas.thishib }" > 
-              <netparam name="vars1"><method name="getValue"> return canvas.sessionId; </method></netparam>
-            <netparam name="vars6"><method name="getValue">return parent.parent.parent.organisation_id;</method></netparam>
-            <netparam name="vars2"><method name="getValue"> return 0; </method></netparam>
-            <netparam name="vars3"><method name="getValue"> return 200; </method></netparam>
-            <netparam name="vars4"><method name="getValue"> return "user_id"; </method></netparam>
-            <netparam name="vars5"><method name="getValue"> return true; </method></netparam>		  
+              <netparam><method name="getValue"> return canvas.sessionId; </method></netparam>
+            <netparam><method name="getValue">return parent.parent.parent.organisation_id;</method></netparam>
+            <netparam><method name="getValue"> return 0; </method></netparam>
+            <netparam><method name="getValue"> return 200; </method></netparam>
+            <netparam><method name="getValue"> return "user_id"; </method></netparam>
+            <netparam><method name="getValue"> return true; </method></netparam>		  
             <handler name="ondata" args="value">
                 Debug.write("getUsersByorganisation ",value);
 	    		this.parent.initValues(value.records);
@@ -153,10 +153,10 @@
                 
         <netremotecallhib name="deleteUserFromOrganisation" remotecontext="$once{ canvas.thishib }" 
             funcname="organisationservice.deleteUserFromOrganisation" >      
-            <netparam name="vars1"><method name="getValue"> return canvas.sessionId; </method></netparam>
-            <netparam name="vars3"><method name="getValue"> return parent.parent.parent.organisation_id; </method></netparam>
-            <netparam name="vars2"><method name="getValue"> return parent.parent.usersId; </method></netparam>
-            <netparam name="vars4"><method name="getValue"> return ''; </method></netparam>
+            <netparam><method name="getValue"> return canvas.sessionId; </method></netparam>
+            <netparam><method name="getValue"> return parent.parent.parent.organisation_id; </method></netparam>
+            <netparam><method name="getValue"> return parent.parent.usersId; </method></netparam>
+            <netparam><method name="getValue"> return ''; </method></netparam>
             <handler name="ondata" args="value">
                 Debug.write("deleteUserFromOrganisation ",value);
                 //this.parent.destroy();

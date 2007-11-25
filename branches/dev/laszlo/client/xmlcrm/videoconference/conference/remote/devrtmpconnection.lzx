@@ -358,9 +358,6 @@
 
         <!--- Error handling event. -->
         <handler name="onerror"/>
-        
-        <attribute name="activeErrorHandler" value="false" type="boolean" />
-
 
         <!--- Call the remote method, passing the array of params. -->
         <method name="call" args="params"><![CDATA[
@@ -431,13 +428,6 @@
                     this.dataobject.appendChild( element );
                 } else {
                     Debug.warn("dataobject is not LzDataset or LzDataElement: ",this,this.dataobject,delegate);
-                }
-            }
-
-            if (this.activeErrorHandler) {
-                if (Number(value)<0){
-                    Debug.warn("Received Error ID: ",value);
-                    new rpcerrordialog(canvas.main_content._content.inner,{errorid:Number(value)});
                 }
             }
             this.ondata.sendEvent(value);		

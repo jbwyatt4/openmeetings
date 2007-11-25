@@ -46,9 +46,9 @@
     </view>
 
     <netremotecallhib name="getAllUsers" funcname="xmlcrm.getAllUsers" remotecontext="$once{ canvas.thishib }" >      
-        <netparam name="vars1"><method name="getValue"> return canvas.sessionId; </method></netparam>  
-        <netparam name="vars2"><method name="getValue"> return 0; </method></netparam>  
-        <netparam name="vars3"><method name="getValue"> return 100; </method></netparam>  
+        <netparam><method name="getValue"> return canvas.sessionId; </method></netparam>  
+        <netparam><method name="getValue"> return 0; </method></netparam>  
+        <netparam><method name="getValue"> return 100; </method></netparam>  
         <handler name="ondata" args="value">
             <![CDATA[
             //The onResult-Handler will be called be the rtmpconnection

@@ -148,11 +148,11 @@
 	</method>
     
 	  	<netremotecallhib name="saveAsObject" funcname="fileservice.saveAsObject" remotecontext="$once{ canvas.thishib }" >   
-	  		<netparam name="vars1"><method name="getValue"> return canvas.sessionId; </method></netparam>
+	  		<netparam><method name="getValue"> return canvas.sessionId; </method></netparam>
 			<netparam><method name="getValue">return hib.connectedroom;</method></netparam>        	
 			<netparam><method name="getValue">return hib.conferencedomain;</method></netparam> 			  
-			<netparam name="vars2"><method name="getValue"> return parent.parent.savefileName; </method></netparam>
-			<netparam name="vars3"><method name="getValue"> return parent.parent.fileData;</method></netparam>
+			<netparam><method name="getValue"> return parent.parent.savefileName; </method></netparam>
+			<netparam><method name="getValue"> return parent.parent.fileData;</method></netparam>
 	        <handler name="ondata" args="value">	
 				<![CDATA[
 					//Debug.write("  saveAsImage: ",value);   
@@ -279,7 +279,7 @@
 	
 		<!-- load the objects of that wml file -->
 	  	<netremotecallhib name="loadWmlObject" funcname="fileservice.loadWmlObject" remotecontext="$once{ canvas.thishib }" >   
-			<netparam name="vars1"><method name="getValue"> return canvas.sessionId; </method></netparam>
+			<netparam><method name="getValue"> return canvas.sessionId; </method></netparam>
 			<netparam><method name="getValue">return parent.String3;</method></netparam>        	
 			<netparam><method name="getValue">return parent.String2;</method></netparam>  
 			  <netparam><method name="getValue">return parent.String1;</method></netparam>

@@ -108,7 +108,7 @@
         
         <netremotecallhib name="getRssFeeds" funcname="xmlcrm.getRssFeeds" 
 			remotecontext="$once{ canvas.thishib }" > 
-        	<netparam name="vars1"><method name="getValue"> return canvas.sessionId; </method></netparam>
+        	<netparam><method name="getValue"> return canvas.sessionId; </method></netparam>
             <handler name="ondata" args="value">
             	<![CDATA[
                     Debug.write("getRssFeeds: ",value);

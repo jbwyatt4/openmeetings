@@ -2,7 +2,8 @@
 <library>
 
 <class name="rpcerrordialog" extends="labelexplorerbox" labelid="204"
-    docking="true" resizeable="false" closable="true" width="300" x="200" height="230">
+    docking="true" resizeable="false" closable="true" width="300" 
+	x="$once{ canvas.width/2-this.width/2 }" height="230">
 	
     <attribute name="errortext" value="" type="string" />
 	<attribute name="errorid" value="0" type="number" />
@@ -16,21 +17,37 @@
     </method>
 	
 	<netremotecallhib name="getErrorByCode" funcname="errorservice.getErrorByCode" remotecontext="$once{ canvas.thishib }" >      
-		<netparam name="vars1"><method name="getValue"> return canvas.sessionId; </method></netparam>
-		<netparam name="vars2"><method name="getValue"> return parent.parent.errorid; </method></netparam>
-        <netparam name="vars3"><method name="getValue"> return canvas.thishib.userlang; </method></netparam>
+		<netparam><method name="getValue"> return canvas.sessionId; </method></netparam>
+		<netparam><method name="getValue"> return parent.parent.errorid; </method></netparam>
+        <netparam><method name="getValue"> return canvas.thishib.userlang; </method></netparam>
 		<handler name="ondata" args="value">
 			Debug.write("getErrorByCode ",value);
 			//this.parent.destroy();
 			this.parent.setAttribute('errortext',value.errmessage);
+			this.parent.setAttribute('title',value.errortype);
 		</handler>
 	</netremotecallhib>		
 
 	<view y="24" width="298" height="200">
 		<text y="30" x="10" fontsize="10" fontstyle="bold" text="${ parent.parent.errortext }"
-			multiline="true" width="286" />
+			multiline="true" width="280" />
 		<vscrollbar />
 	</view>
+</class>
+	
+<class name="callbackrpcerrordialog" extends="rpcerrordialog"
+	closable="false"  height="250">
+	
+	<attribute name="callBackObject" value="null" />
+	
+	<method name="doCallBack">
+		this.callBackObject.sendCallBack.sendEvent();
+		this.close();
+	</method>
+	
+    <simplelabelbutton name="_btn" labelid="333" width="120" x="$once{ parent.width-130 }" 
+		y="$once{ parent.height-24 }" onclick="parent.doCallBack();" /> 
+	
 </class>
    
 
