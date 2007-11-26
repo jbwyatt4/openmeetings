@@ -2,5 +2,7 @@
 <library>
     
     <include href="languageseditor.lzx" />
+    <include href="fieldvaluesListItem.lzx" />
+    <include href="fieldvalueform.lzx" />
 
 </library>

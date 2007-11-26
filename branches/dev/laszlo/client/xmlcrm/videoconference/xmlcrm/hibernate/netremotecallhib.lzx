@@ -20,7 +20,7 @@
 	</handler>	
 	<method name="doCall">
         canvas._loadingAll.setAttribute('visible',true);
-		Debug.write("doCall: ",this);
+		//Debug.write("doCall: ",this);
 		this.call();
 	</method>
 	
