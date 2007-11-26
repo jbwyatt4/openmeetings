@@ -59,50 +59,6 @@
 		<pathelement path="${main.out.dir}"/>
 	</path>
 
-
-
-	<!-- Generate mapping files for hibernate -->
-	<target name="Generate hbm"
-		description="Generates Hibernate class descriptor files."
-		>
-
-		<!-- Define the hibernatedoclet task -->
-		<taskdef name="hibernatedoclet" classname="xdoclet.modules.hibernate.HibernateDocletTask">
-			<classpath refid="xdoclet.classpath"/>
-		</taskdef>
-
-		<!-- Execute the hibernatedoclet task -->
-		<hibernatedoclet
-			destdir="${main.out.dir}"
-			excludedtags="@version,@author,@todo, lazy"
-			force="true"
-			verbose="true">
-
-			<fileset dir="${main.src.dir}">
-				<include name="**/*.java"/>
-			</fileset>
-
-			<hibernate version="3.0"/>
-
-			<hibernatecfg
-				driver="${hibernate.connection.driver_class}"
-				jdbcUrl="${hibernate.connection.url}"
-				userName="${hibernate.connection.username}"
-				password="${hibernate.connection.password}"
-				dialect="${hibernate.dialect}"
-				showSql="true"
-				useOuterJoin="false"
-				destDir="${main.out.dir}">
-			
-				<otherProperty name="c3p0.max_size" value="20" />
-			    <otherProperty name="c3p0.min_size" value="2" />
-			    <otherProperty name="c3p0.max_statements" value="100" />
-			    <otherProperty name="c3p0.timeout" value="3600" />
-			</hibernatecfg>				
-		</hibernatedoclet>
-
-	</target>
-
 	<!-- start of xdoclet2 -->
 	<property name="xdoclet2.lib.dir" value="${basedir}/lib/xdoclet2/"/>
 
@@ -246,7 +202,7 @@
 
 
 	<!-- Build entire project -->
-	<target name="build project" depends="clean, prepare, compile, Generate hbm"/>
+	<target name="build project" depends="clean, prepare, compile, hibernate"/>
 
 	
 

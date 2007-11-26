@@ -34,11 +34,6 @@
 	<classpathentry kind="lib" path="lib/hibernate3/ant-junit-1.6.5.jar"/>
 	<classpathentry kind="lib" path="lib/hibernate3/ant-antlr-1.6.5.jar"/>
 	<classpathentry kind="lib" path="lib/hibernate3/ant-1.6.5.jar"/>
-	<classpathentry kind="lib" path="lib/xdoclet/xjavadoc-1.1.jar"/>
-	<classpathentry kind="lib" path="lib/xdoclet/xdoclet-xdoclet-module-1.2.3.jar"/>
-	<classpathentry kind="lib" path="lib/xdoclet/xdoclet-hibernate-module-1.2.3.jar"/>
-	<classpathentry kind="lib" path="lib/xdoclet/xdoclet-de-locale-1.2.3.jar"/>
-	<classpathentry kind="lib" path="lib/xdoclet/xdoclet-1.2.3.jar"/>
 	<classpathentry kind="lib" path="lib/postgresql-8.2-504.jdbc2.jar"/>
 	<classpathentry kind="lib" path="lib/itext-1.3.jar"/>
 	<classpathentry kind="lib" path="lib/hibernate3.jar"/>
@@ -134,8 +129,8 @@
 	<classpathentry kind="lib" path="lib/xdoclet2/lib/qdox-20051211.114207.jar"/>
 	<classpathentry kind="lib" path="lib/xdoclet2/lib/saxpath-1.0-FCS.jar"/>
 	<classpathentry kind="lib" path="lib/xdoclet2/lib/velocity-1.4.jar"/>
-	<classpathentry kind="lib" path="lib/xdoclet2/lib/xdoclet-2.0.4.jar"/>
-	<classpathentry kind="lib" path="lib/xdoclet2/lib/xerces-2.4.0.jar"/>
 	<classpathentry kind="lib" path="lib/xdoclet2/plugins/xdoclet-plugin-hibernate-1.0.4-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="lib/xdoclet2/lib/xdoclet-2.0.6.jar"/>
+	<classpathentry kind="lib" path="lib/xdoclet2/lib/xerces-2.4.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
