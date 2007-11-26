@@ -17,6 +17,14 @@
             </handler>
         </combobox>
     
+    <simplelabelbutton name="b2" labelid="360" width="160" x="300" 
+    				   y="$once{ parent.height-40 }">
+    	<handler name="onclick">
+    		//var tURL = var uploadurl = 'http://'+canvas.rtmphostlocal+':'+canvas.red5httpport+'/xmlcrm/Langexport
+            LzBrowser.loadURL("","_BLANK");
+    	</handler>
+    </simplelabelbutton>  
+    
 	<turnoverlist name="_turnoverlist" width="460" height="540" x="2" y="60" 
 		orderby="fieldvalues_id" step="50" asc="true">
         

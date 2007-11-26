@@ -116,7 +116,8 @@
 	        				text="$path{ 'name/text()' }" />	
 		
 	    <labeltext labelid="355" width="200" y="130" resize="false" x="2"/>
-	        <customedittext name="fieldvalue" y="130" x="120" width="270" text="$path{ 'fieldlanguagesvalue/value/text()' }" />	
+	        <customscrolledittext name="fieldvalue" y="130" x="120" width="270" height="120"
+	        					  text="$path{ 'fieldlanguagesvalue/value/text()' }" />	
 	</view>
 	
 </class>
