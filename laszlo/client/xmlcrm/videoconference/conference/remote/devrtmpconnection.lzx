@@ -401,7 +401,8 @@
             } else {
         	    Debug.warn("ERROR: no remotecontext availible abort call");
             }
-        
+        	//Debug.write('call', this, rtmpObject, rtmpObject.status);
+        	//Debug.write('call', this.remotecontext);
             if (rtmpObject.debug) //Debug.write('call', this, rtmpObject, rtmpObject.status);
             if (rtmpObject.status=="connected"){
                 rtmpObject.call(this.funcname, this, params);

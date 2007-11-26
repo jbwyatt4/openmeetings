@@ -52,26 +52,9 @@
     <labeltext name="n3" labelid="111" width="200" y="84" resize="false" x="2"/>  
         
         <combobox name="languages" width="170" y="84" x="120" editable="false" 
-            defaultselection="0" >
+            defaultselection="1" >
             <textlistitem datapath="languagesSet:/item" text="$path{ 'name/text()' }" 
                 value="$path{ 'language_id/text()' }" />
-            <!--
-            <netremotecallhib name="getLanguages" funcname="languageservice.getLanguages" remotecontext="$once{ canvas.thishib }" >      
-                <handler name="oninit">
-                    this.doCall();
-                </handler>
-                <handler name="ondata" args="value">
-                    //The onResult-Handler will be called be the rtmpconnection
-                    //Debug.write("getLanguages: ",value);
-                    <![CDATA[
-                    for (var i=0;i<value.length;i++){
-                        this.parent.addItem(value[i].name,value[i].language_id);
-                    }
-                    this.parent.selectItem(value[0].language_id);
-                    ]]>
-                </handler>  
-            </netremotecallhib>
-            -->
         </combobox>
 
     <labeltext name="n5" text="Color-Style" width="200" y="114" resize="false" x="2"/>  

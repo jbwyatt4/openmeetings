@@ -1,29 +1,75 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library>
+	<include href="fieldvalueform.lzx" />
 
 <class name="languageseditor" extends="basecontentview">
 	
-    <labeltext name="n3" labelid="111" width="200" y="2" resize="true" x="2"/>  
+    <labeltext name="n3" labelid="349" width="200" y="2" resize="true" x="2"/>  
         
-        <combobox name="languages" width="170" y="2" x="120" editable="false">
-            <netremotecallhib name="getLanguages" funcname="xmlcrm.getLanguages" remotecontext="$once{ canvas.thishib }" >      
-                <handler name="oninit">
-                    this.doCall();
-                </handler>
-                <handler name="ondata" args="value">
-                    //The onResult-Handler will be called be the rtmpconnection
-                    //Debug.write("getLanguages: ",value);
-                    <![CDATA[
-                    for (var i=0;i<value.length;i++){
-                        this.parent.addItem(value[i].name,value[i].language_id);
-                    }
-                    this.parent.selectItem(value[0].language_id);
-                    ]]>
-                </handler>  
-            </netremotecallhib>
+        <combobox name="languages" width="170" y="2" x="120" editable="false" 
+            defaultselection="1" >
+            <textlistitem datapath="languagesSet:/item" text="$path{ 'name/text()' }" 
+                value="$path{ 'language_id/text()' }" />
+            <handler name="onselect">
+                parent._turnoverlist.language_id = Number(this.value);
+                if (this.parent._turnoverlist.isinited)
+                	parent._turnoverlist.oncallnext.sendEvent();
+            </handler>
         </combobox>
+    
+	<turnoverlist name="_turnoverlist" width="460" height="540" x="2" y="60" 
+		orderby="fieldvalues_id" step="50" asc="true">
+        
+        <attribute name="language_id" value="0" type="number" />
+
+		<handler name="oninit">
+			this.addHeaderItem(350,120);
+			this.addHeaderItem(351,126);
+			this.addHeaderItem(352,200);
+			this.getFieldsByLanguage.doCall();
+		</handler>
+		
+		<handler name="oncallnext" >
+			this.getFieldsByLanguage.doCall();
+		</handler>
+		
+		<handler name="oncallpre" >		
+			this.getFieldsByLanguage.doCall();
+		</handler>
+		
+		<handler name="onclickedItem" args="obj">
+			//Debug.write("onclickedItem",obj,obj.obj);
+			parent._fieldvalueform.initValueFieldsByObject(obj.obj);
+		</handler>
+		
+		<netremotecallhib name="getFieldsByLanguage" funcname="languageservice.getFieldsByLanguage" 
+						  remotecontext="$once{ canvas.thishib }" >      
+			<netparam><method name="getValue"> return canvas.sessionId; </method></netparam>
+			<netparam><method name="getValue"> return parent.parent.start; </method></netparam>
+			<netparam><method name="getValue"> return parent.parent.step; </method></netparam>
+			<netparam><method name="getValue"> return parent.parent.orderby; </method></netparam>
+			<netparam><method name="getValue"> return parent.parent.asc; </method></netparam>
+            <netparam><method name="getValue"> return parent.parent.language_id; </method></netparam>
+	    	<handler name="ondata" args="value">
+	    		Debug.write("getFieldsByLanguage ",value);
+	    		//this.parent.destroy();
+	    		this.parent.initValues(value.records);
+	    		this.parent.renderContent(value.result);
+	    	</handler>
+	    </netremotecallhib>	
+	    
+	    <method name="renderContent" args="records">
+	    	<![CDATA[
+                this.clearList();
+                for (var i=0;i<records.length;i++){
+                    new fieldvaluesListItem(this._innerlist._inn._inn,{obj:records[i],fieldvalues_id:records[i].fieldvalues_id,fieldname:records[i].name,fieldvalue:records[i].fieldlanguagesvalue.value});
+                }
+	    	]]>
+	    </method>
+
+	</turnoverlist>
 	
-	
+	<fieldvalueform name="_fieldvalueform" x="470" y="60" />
 	
 </class>
 
