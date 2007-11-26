@@ -124,7 +124,7 @@ public class Organisationmanagement {
 	 * @param user_level
 	 * @return
 	 */
-	public List getOrganisations(int start ,int max, String orderby, boolean asc) {
+	public List<Organisation> getOrganisations(int start ,int max, String orderby, boolean asc) {
 		try {
 			Object idf = HibernateUtil.createSession();
 			Session session = HibernateUtil.getSession();
@@ -135,7 +135,7 @@ public class Organisationmanagement {
 			crit.setMaxResults(max);
 			if (asc) crit.addOrder(Order.asc(orderby));
 			else crit.addOrder(Order.desc(orderby));
-			List ll = crit.list();
+			List<Organisation> ll = crit.list();
 			tx.commit();
 			HibernateUtil.closeSession(idf);
 			return ll;

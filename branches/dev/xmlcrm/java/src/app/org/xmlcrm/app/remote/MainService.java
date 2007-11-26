@@ -32,23 +32,6 @@ import org.xmlcrm.app.conference.videobeans.RoomClient;
 public class MainService {
 	
 	private static final Log log = LogFactory.getLog(MainService.class);
-	
-	/**
-	 * get a List of all availible Languages
-	 * @return
-	 */
-	public List getLanguages(){
-		return Languagemanagement.getInstance().getLanguages();
-	}
-	
-	/**
-	 * get all fileds of a given Language_id
-	 * @param language_id
-	 * @return
-	 */
-	public List getLanguageById(int language_id){
-		return Fieldmanagment.getInstance().getAllFieldsByLanguage(language_id);
-	}
    
 	/**
 	 * get Navigation

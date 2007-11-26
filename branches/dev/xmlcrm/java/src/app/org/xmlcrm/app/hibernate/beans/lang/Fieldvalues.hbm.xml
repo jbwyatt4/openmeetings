@@ -10,7 +10,7 @@
     <property name="starttime" type="java.util.Date" column="starttime"/>
     <property name="updatetime" type="java.util.Date" column="updatetime"/>
     <property name="deleted" type="string" column="deleted"/>
-    <set table="fieldlanguagesvalues" inverse="true" cascade="none" name="fieldlanguagesvalues">
+    <set table="fieldlanguagesvalues" lazy="false" inverse="true" cascade="none" name="fieldlanguagesvalues">
       <key column="fieldvalues_id"/>
       <one-to-many class="org.xmlcrm.app.hibernate.beans.lang.Fieldlanguagesvalues"/>
     </set>

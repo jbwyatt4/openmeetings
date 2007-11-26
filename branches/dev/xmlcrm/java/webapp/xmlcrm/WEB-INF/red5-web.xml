@@ -71,7 +71,7 @@
 		singleton="true" />		
 	
 	<!-- Class for Methods which can be invoked by the client -->
-    <bean id="languageervice.service" 
+    <bean id="languageservice.service" 
 	    class="org.xmlcrm.app.remote.LanguageService" 
 		singleton="true" />	
 			
