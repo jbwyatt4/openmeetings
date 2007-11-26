@@ -38,17 +38,17 @@ public class LanguageService {
 	public Fieldvalues getFieldvalueById(String SID, Long fieldvalues_id, Long language_id) {
         Long users_id = Sessionmanagement.getInstance().checkSession(SID);
         Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
-        if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)){
+        if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)) {
         	return Fieldmanagment.getInstance().getFieldvaluesById(fieldvalues_id, language_id);
         }
         return null;
 	}
 	
-	public Fieldvalues deleteFieldvalueLanguageById(String SID, Long fieldvalues_id, Long language_id) {
+	public Long deleteFieldlanguagesvaluesById(String SID, Long fieldlanguagesvalues_id) {
         Long users_id = Sessionmanagement.getInstance().checkSession(SID);
         Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
         if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)){
-        	return Fieldmanagment.getInstance().getFieldvaluesById(fieldvalues_id, language_id);
+        	return Fieldmanagment.getInstance().deleteFieldlanguagesvaluesById(fieldlanguagesvalues_id);
         }
         return null;
 	}

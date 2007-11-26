@@ -54,6 +54,29 @@ public class Fieldmanagment {
 		}
 		return null;
 	}
+	
+	public Long deleteFieldlanguagesvaluesById(Long fieldlanguagesvalues_id) {
+		try {
+			Fieldlanguagesvalues flv = this.getFieldlanguagesvaluesById(fieldlanguagesvalues_id);
+			if (flv == null) {
+				return new Long(-27);
+			}
+			
+			Object idf = HibernateUtil.createSession();
+			Session session = HibernateUtil.getSession();
+			Transaction tx = session.beginTransaction();
+			session.delete(flv);
+			tx.commit();
+			HibernateUtil.closeSession(idf);
+			
+			return new Long(-28);
+		} catch (HibernateException ex) {
+			log.error("[getFieldByIdAndLanguage]: " + ex);
+		} catch (Exception ex2) {
+			log.error("[getFieldByIdAndLanguage]: " + ex2);
+		}
+		return new Long(-1);
+	}	
 
 	public List<Fieldlanguagesvalues> getAllFieldsByLanguage(Long language_id) {
 		try {
@@ -132,8 +155,10 @@ public class Fieldmanagment {
 	
 	public Fieldvalues getFieldvaluesById(Long fieldvalues_id, Long language_id) {
 		try {
+			//log.error("Long fieldvalues_id, Long language_id "+fieldvalues_id+" || "+language_id);
 			Fieldvalues fv = this.getFieldvaluesById(fieldvalues_id);
 			fv.setFieldlanguagesvalue(this.getFieldByIdAndLanguage(fieldvalues_id, language_id));
+			return fv;
 		} catch (Exception e) {
 			log.error("[getFieldvaluesById] ",e);
 		}
@@ -166,7 +191,7 @@ public class Fieldmanagment {
 				flv.setValue(value);
 				this.updateFieldLanguagesLabel(flv);
 			}
-			return new Long(1);
+			return fieldvalues_id;
 		} catch (HibernateException ex) {
 			log.error("[updateFieldLanguagesLabel]: ",ex);
 		} catch (Exception ex2) {
@@ -186,7 +211,7 @@ public class Fieldmanagment {
 				this.updateField(fv);
 			}
 			this.addFieldValueByFieldAndLanguage(fieldvalues_id, language_id, value);
-			return new Long(1);
+			return fieldvalues_id;
 		} catch (HibernateException ex) {
 			log.error("[updateFieldLanguagesLabel]: ",ex);
 		} catch (Exception ex2) {
@@ -200,7 +225,7 @@ public class Fieldmanagment {
 			Long fieldvalues_id = this.addField(name);
 			if (fieldvalues_id>0) {
 				this.addFieldValueByFieldAndLanguage(fieldvalues_id, language_id, value);
-				return new Long(1);
+				return fieldvalues_id;
 			} else {
 				return new Long(-1);
 			}
