@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<library>
+
+<class name="languageseditor" extends="basecontentview">
+	
+    <labeltext name="n3" labelid="111" width="200" y="2" resize="true" x="2"/>  
+        
+        <combobox name="languages" width="170" y="2" x="120" editable="false">
+            <netremotecallhib name="getLanguages" funcname="xmlcrm.getLanguages" remotecontext="$once{ canvas.thishib }" >      
+                <handler name="oninit">
+                    this.doCall();
+                </handler>
+                <handler name="ondata" args="value">
+                    //The onResult-Handler will be called be the rtmpconnection
+                    //Debug.write("getLanguages: ",value);
+                    <![CDATA[
+                    for (var i=0;i<value.length;i++){
+                        this.parent.addItem(value[i].name,value[i].language_id);
+                    }
+                    this.parent.selectItem(value[0].language_id);
+                    ]]>
+                </handler>  
+            </netremotecallhib>
+        </combobox>
+	
+	
+	
+</class>
+
+</library>

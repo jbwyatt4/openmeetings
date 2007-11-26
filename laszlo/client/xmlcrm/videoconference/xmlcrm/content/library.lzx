@@ -14,5 +14,6 @@
     <include href="confadmin/" />
     <include href="meetings/" />
     <include href="events/" />
+	<include href="languageseditor/" />
 
 </library>
