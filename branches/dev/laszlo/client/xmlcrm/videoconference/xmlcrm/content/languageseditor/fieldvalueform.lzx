@@ -10,13 +10,12 @@
 	<!-- handler -->
 	
 	<handler name="onsavecompleted" >
-		//this.getOrganisationById.doCall();
+		//this.getFieldvalueById.doCall();
 	</handler>
 	
 	<handler name="onreload" >
 		if (this.fieldvalues_id!=0) {
             this.getFieldvalueById.doCall();
-            parent._turnoverlist.oncallnext.sendEvent();
         }
 	</handler>	
 
@@ -27,8 +26,10 @@
 	</handler>
 	
     <handler name="ondelete" >
-		if (this.organisation_id!=0){
-			//this.deleteOrganisation.doCall();
+		if (this.fieldlanguagesvalues_id!=0){
+			this.deleteFieldlanguagesvaluesById.doCall();
+		} else {
+			new rpcerrordialog(canvas.main_content._content.inner,{errorid:-29});
 		}
     </handler>	
 	
@@ -54,34 +55,23 @@
     	<netparam><method name="getValue">return parent.parent.fieldvalues_id;</method></netparam>
     	<netparam><method name="getValue">return parent.parent.parent._turnoverlist.language_id;</method></netparam>
     	<handler name="ondata" args="value">
+    		Debug.write("getFieldvalueById ",value);
+    		Debug.write(parent.fieldvalues_id);
+    		Debug.write(parent.parent._turnoverlist.language_id);
     		parent.initValueFieldsByObject(value);
     	</handler>
   	</netremotecallhib>	
 
-	
-    
-    <method name="initFields" args="obj">
-    	<![CDATA[
-	    	this.fieldvalues_id = obj.organisation_id;
-	        this.orgname.setText(obj.name);
-        ]]>
-    </method>
-	
-	<!-- 
-
-	<netremotecallhib name="deleteOrganisation" funcname="organisationservice.deleteOrganisation" remotecontext="$once{ canvas.thishib }" >      
+	<netremotecallhib name="deleteFieldlanguagesvaluesById" activeErrorHandler="true"
+		funcname="languageservice.deleteFieldlanguagesvaluesById" remotecontext="$once{ canvas.thishib }" >      
 		<netparam><method name="getValue"> return canvas.sessionId; </method></netparam>
-		<netparam><method name="getValue"> return parent.parent.organisation_id; </method></netparam>
+		<netparam><method name="getValue"> return parent.parent.fieldlanguagesvalues_id; </method></netparam>
 		<handler name="ondata" args="value">
-			//Debug.write("deleteOrganisation ",value);
-			//this.parent.destroy();
-			if (value>0){
-				this.parent.parent._turnoverlist.oncallnext.sendEvent();
-				this.parent.onnew.sendEvent();
-			}
+			Debug.write("deleteFieldlanguagesvaluesById ",value);
+			this.parent.parent._turnoverlist.oncallnext.sendEvent();
+			this.parent.getFieldvalueById.doCall();
 		</handler>
 	</netremotecallhib>	
-	remotecalls -->
 
   	<netremotecallhib name="saveOrUpdateLabel" funcname="languageservice.saveOrUpdateLabel" 
   		remotecontext="$once{ canvas.thishib }" registerObject="true" >   
@@ -104,7 +94,7 @@
 	    		Debug.write("saveOrUpdateOrganisation: ",val);
 				if (val>0){
 					Debug.write("saveOrUpdateUser val greater 0: ",val);
-					parent.fieldvalues_id = value;
+					parent.fieldvalues_id = val;
 					parent.getFieldvalueById.doCall();
 				}
 				parent.parent._turnoverlist.oncallnext.sendEvent();
