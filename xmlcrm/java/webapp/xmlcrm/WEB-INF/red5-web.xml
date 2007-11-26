@@ -69,5 +69,10 @@
     <bean id="issueservice.service" 
 	    class="org.xmlcrm.app.remote.IssueService" 
 		singleton="true" />		
-		
+	
+	<!-- Class for Methods which can be invoked by the client -->
+    <bean id="languageervice.service" 
+	    class="org.xmlcrm.app.remote.LanguageService" 
+		singleton="true" />	
+			
 </beans>
