@@ -24,7 +24,7 @@ public class TestLogin extends TestCase {
 		
 		System.out.println("us: "+us.getFirstname());
 		
-		mService.getLanguageById(1);
+		//mService.getLanguageById(1);
 		
 	}
 

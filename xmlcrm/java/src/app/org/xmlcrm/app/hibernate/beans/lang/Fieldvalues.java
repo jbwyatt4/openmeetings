@@ -16,7 +16,9 @@ public class Fieldvalues {
 	private Date updatetime;
 	private String deleted;
 	
-	public Set fieldlanguagesvalues;
+	private Set fieldlanguagesvalues;
+	
+	private Fieldlanguagesvalues fieldlanguagesvalue;
 	
     public Fieldvalues() {
 		super();
@@ -88,6 +90,7 @@ public class Fieldvalues {
      * table = "fieldlanguagesvalues" 
      * inverse = "true" 
      * cascade = "none"
+     * lazy = "false"
      * @hibernate.one-to-many 
      * class = "org.xmlcrm.app.hibernate.beans.lang.Fieldlanguagesvalues"
      * @hibernate.key 
@@ -100,5 +103,11 @@ public class Fieldvalues {
 		this.fieldlanguagesvalues = fieldlanguagesvalues;
 	}
 
+	public Fieldlanguagesvalues getFieldlanguagesvalue() {
+		return fieldlanguagesvalue;
+	}
+	public void setFieldlanguagesvalue(Fieldlanguagesvalues fieldlanguagesvalue) {
+		this.fieldlanguagesvalue = fieldlanguagesvalue;
+	}
 	
 }
