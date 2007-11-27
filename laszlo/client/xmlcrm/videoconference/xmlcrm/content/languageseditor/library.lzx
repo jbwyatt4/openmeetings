@@ -4,5 +4,6 @@
     <include href="languageseditor.lzx" />
     <include href="fieldvaluesListItem.lzx" />
     <include href="fieldvalueform.lzx" />
+    <include href="addlanguage.lzx" />
 
 </library>
