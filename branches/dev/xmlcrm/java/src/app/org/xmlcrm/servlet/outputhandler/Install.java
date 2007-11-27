@@ -123,6 +123,7 @@ public class Install extends VelocityViewServlet {
 						
 					ImportInitvalues.getInstance().loadInitLanguages(filePath);
 					ImportInitvalues.getInstance().loadMainMenu();
+					ImportInitvalues.getInstance().loadErrorMappingsFromXML(filePath);	
 					ImportInitvalues.getInstance().loadSalutations();
 					ImportInitvalues.getInstance().loadConfiguration(configdefault, configsmtp, configsmtpport, 
 									configreferer, configmailuser, configmailpass, configdefaultLang, swf_path, im_path, url_feed, url_feed2);

@@ -12,6 +12,7 @@ import org.xmlcrm.app.hibernate.beans.lang.Fieldvalues;
 public class ErrorType {
 	
 	private Long errortype_id;
+	private Long fieldvalues_id;
 	private Fieldvalues fieldvalues;
 	private Date starttime;
 	private Date updatetime;
@@ -80,6 +81,18 @@ public class ErrorType {
 	}
 	public void setFieldvalues(Fieldvalues fieldvalues) {
 		this.fieldvalues = fieldvalues;
+	}
+	
+	/**
+     * @hibernate.property
+     *  column="fieldvalues_id"
+     *  type="long"
+     */  
+	public Long getFieldvalues_id() {
+		return fieldvalues_id;
+	}
+	public void setFieldvalues_id(Long fieldvalues_id) {
+		this.fieldvalues_id = fieldvalues_id;
 	}
 
 
