@@ -51,10 +51,24 @@
     
     <labeltext name="n3" labelid="111" width="200" y="84" resize="false" x="2"/>  
         
-        <combobox name="languages" width="170" y="84" x="120" editable="false" 
-            defaultselection="1" >
+        <combobox name="languages" width="170" y="84" x="120" editable="false" >
             <textlistitem datapath="languagesSet:/item" text="$path{ 'name/text()' }" 
                 value="$path{ 'language_id/text()' }" />
+            <handler name="oninit">
+                var t = new sharedobject();
+                t.getLocal('userdata');
+                var g = t.getData('userdata');
+                Debug.write("g: ",g);
+                if(g!=null) {
+                	if (g["userlang"]!=null) {
+                		this.selectItem(g["userlang"]);
+                	} else {
+                		this.selectItemAt(0);
+                	}
+                } else {
+            		this.selectItemAt(0);
+            	}
+            </handler>                 
         </combobox>
 
     <labeltext name="n5" text="Color-Style" width="200" y="114" resize="false" x="2"/>  
@@ -67,9 +81,21 @@
 				this.addItem('steelblue','steelblue');
 				this.addItem('lightsteelblue','lightsteelblue');
 				this.addItem('goldenrod','goldenrod');
-                this.addItem('silvergray','silvergray');
-				this.selectItem('lightsteelblue');
-			</handler>
+                this.addItem('silvergray','silvergray'); 
+                var t = new sharedobject();
+                t.getLocal('userdata');
+                var g = t.getData('userdata');
+                Debug.write("g: ",g);
+                if(g!=null) {
+                	if (g["userlang"]!=null) {
+                		this.selectItem(g["usercolor"]);
+                	} else {
+                		this.selectItem('lightsteelblue');
+                	}
+                } else {
+            		this.selectItem('lightsteelblue');
+            	}
+            </handler> 
 			<handler name="onselect" args="v">
 				//Debug.write("onselect: ",v.value);
 				if (this.initselect){
@@ -111,8 +137,20 @@
 			<handler name="oninit">
 				this.addItem("best ~ 16KB upload","best");
 				this.addItem("medium ~ 10KB upload ","medium");
-				this.selectItem("best");
-			</handler>
+                var t = new sharedobject();
+                t.getLocal('userdata');
+                var g = t.getData('userdata');
+                Debug.write("g: ",g);
+                if(g!=null) {
+                	if (g["userlang"]!=null) {
+                		this.selectItem(g["userquality"]);
+                	} else {
+                		this.selectItem("best");
+                	}
+                } else {
+            		this.selectItem("best");
+            	}
+            </handler> 
 			<handler name="onselect">
 				canvas.vaquality = this.getValue();
 			</handler>
@@ -168,6 +206,9 @@
 						if (g==null) g = new Array();
 						g["username"] = parent.username.getText();
 						g["userpass"] = parent.userpass.getText();
+						g["userquality"] = parent.ncomboquality.getValue();
+						g["usercolor"] = parent.colors.getValue();
+						g["userlang"] = parent.languages.getValue();
 						g["saveuserdata"]=true;
 						t.setData('userdata',g);
 						t.flush(); 
@@ -178,6 +219,9 @@
 						if (g==null) g = new Array();
 						g["username"] = '';
 						g["userpass"] = '';
+						g["userquality"] = null;
+						g["usercolor"] = null;
+						g["userlang"] = null;
 						g["saveuserdata"]=false;
 						t.setData('userdata',g);
 						t.flush();                 
@@ -198,14 +242,14 @@
 					hib.userlang = Number(parent.languages.getValue());
 					hib.userobject = value;
 					if (value.organisation_users.length==0){
-						//Debug.write("this user has no Organisation ");
+						Debug.warn("this user has no Organisation ");
 					} else if (value.organisation_users.length==1){
 						hib.currentdomain = value.organisation_users[0].organisation.name;
 						hib.currentdomainObj = value.organisation_users[0].organisation;
 						hib.getLanguageById.doCall();
 						parent.close();
 					} else {
-						
+						parent._savelogindata.setAttribute('visible',false);
 						parent.n1.setAttribute('visible',false);
 						parent.username.setAttribute('visible',false);
 						parent.n2.setAttribute('visible',false);
@@ -214,7 +258,7 @@
 						parent.languages.setAttribute('visible',false);
 						parent.n5.setAttribute('visible',false);
 						parent.colors.setAttribute('visible',false);
-						 parent._register.setAttribute('visible',false);
+						parent._register.setAttribute('visible',false);
 						parent.b2.setAttribute('visible',false);
 						parent.n4.setAttribute('visible',true);
 						parent.organisation.setAttribute('visible',true);
