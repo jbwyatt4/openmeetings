@@ -76,6 +76,7 @@ public class ErrorManagement {
 			ErrorValues eValue = new ErrorValues();
 			eValue.setErrorvalues_id(errorvalues_id);
 			eValue.setErrortype_id(errortype_id);
+			eValue.setDeleted("false");
 			eValue.setStarttime(new Date());
 			eValue.setFieldvalues_id(fieldvalues_id);
 			Object idf = HibernateUtil.createSession();
