@@ -91,6 +91,30 @@ public class Usermanagement {
 		return null;
 	}
 	
+	public List<Users> getAllUsers(){
+		try {
+			
+			//get all users
+			Object idf = HibernateUtil.createSession();
+			Session session = HibernateUtil.getSession();
+			Transaction tx = session.beginTransaction();
+			Criteria crit = session.createCriteria(Users.class);
+			crit.add(Restrictions.eq("deleted", "false"));
+
+			List<Users> ll = crit.list();
+			tx.commit();
+			HibernateUtil.closeSession(idf);
+			
+			return ll;				
+
+		} catch (HibernateException ex) {
+			log.error("[getAllUsers] "+ex);
+		} catch (Exception ex2) {
+			log.error("[getAllUsers] "+ex2);
+		}
+		return null;
+	}	
+	
 	/**
 	 * returns the maximum
 	 * @return
