@@ -1074,19 +1074,49 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   <string id="356" name="languageseditor">
     <value>Label-ID</value>
   </string>
-  <string id="357" name="hans">
+  <string id="357" name="languageseditor">
     <value>You did only delete the Label NOT the Field! You cannot delete the Field, it may has Labels in other Languages.</value>
   </string>
-  <string id="358" name="qwe">
+  <string id="358" name="languageseditor">
     <value>Invalid Labelid. The FieldLanguagesvalues_Id cannot be found in the database.</value>
   </string>
   <string id="359" name="languageseditor">
     <value>You cannot delete this Field. You can only delete Labels NOT Fields. There is no Label loaded at the moment, wether it is not selected any Field or there is no Label for this Language for that Field defined.</value>
   </string>
-  <string id="360" name="newlabel">
+  <string id="360" name="languageseditor">
     <value>export to XML</value>
   </string>
-  <string id="361" name="null">
-    <value></value>
+  <string id="361" name="languageseditor">
+    <value>You need to logout to see any changes.</value>
+  </string>
+  <string id="362" name="languageseditor">
+    <value>Add new language</value>
+  </string>
+  <string id="363" name="languageseditor">
+    <value>delete language</value>
+  </string>
+  <string id="364" name="languageseditor">
+    <value>Add new language</value>
+  </string>
+  <string id="365" name="languageseditor">
+    <value>Name</value>
+  </string>
+  <string id="366" name="languageseditor">
+    <value>add language</value>
+  </string>
+  <string id="367" name="languageseditor">
+    <value>Backup</value>
+  </string>
+  <string id="368" name="turnoverlist">
+    <value>goto first</value>
+  </string>
+  <string id="369" name="turnoverlist">
+    <value>goto previous</value>
+  </string>
+  <string id="370" name="turnoverlist">
+    <value>goto next</value>
+  </string>
+  <string id="371" name="turnoverlist">
+    <value>goto last</value>
   </string>
 </language>

@@ -69,7 +69,7 @@ public class LanguageService {
         return null;
 	}
 	
-	public Long updateLanguage(String SID, Long language_id) {
+	public Long deleteLanguage(String SID, Long language_id) {
         Long users_id = Sessionmanagement.getInstance().checkSession(SID);
         Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
         if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)) {
