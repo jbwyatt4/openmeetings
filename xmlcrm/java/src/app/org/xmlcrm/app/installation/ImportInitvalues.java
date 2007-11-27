@@ -75,6 +75,7 @@ public class ImportInitvalues {
 		Navimanagement.getInstance().addMainStructure("roomadmin", 4, 186, true, false, 3, "roomadmin",5);
 		Navimanagement.getInstance().addMainStructure("confadmin", 5, 263, true, false, 3, "confadmin",5);
 		Navimanagement.getInstance().addMainStructure("languageseditor", 6, 348, true, false, 3, "languageseditor",5);
+		Navimanagement.getInstance().addMainStructure("backup", 6, 367, true, false, 3, "backup",5);
 			
 	}
 	
