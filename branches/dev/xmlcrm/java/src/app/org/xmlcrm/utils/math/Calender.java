@@ -20,6 +20,16 @@ public class Calender {
 
         return instance;
     }	
+    
+    public String getDateByMiliSeconds(long msek){
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MMM-yyyy", Locale.GERMAN);
+        Date dateOld = new Date();
+        long timeAdv = msek;
+        dateOld.setTime(timeAdv);
+        String result = sdf.format(dateOld);
+        return result;
+    }
+    
     public String getDatumMili(long msek){
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MMM-yyyy 'um' HH-mm-ss", Locale.GERMAN);
         Date dateOld = new Date();
