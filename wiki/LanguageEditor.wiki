@@ -1,1 +1,12 @@
 #summary Description of the Language-Editor
+#labels Phase-Documentation
+
+Features:
+
+  * edit the labels of any language, changes will take effect as soon as you re-login
+  * add new languages (for example to fit your co-operative design and language of your company)
+  * export the language-files to an XML File (these language Files can be used for your next installation or as contribution to the project)
+
+Screen from the Administration Panel:
+
+http://openmeetings.googlecode.com/svn/branches/dev/laszlo/client/xmlcrm/resources/screens/ScreenLanguageEditor.png
