@@ -31,7 +31,6 @@ public class Languagemanagement {
 		if (instance == null) {
 			instance = new Languagemanagement();
 		}
-
 		return instance;
 	}
 	

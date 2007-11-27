@@ -10,6 +10,7 @@ import org.dom4j.io.SAXReader;
 import org.dom4j.Element;
 import org.dom4j.Document;
 import org.xmlcrm.app.data.basic.Configurationmanagement;
+import org.xmlcrm.app.data.basic.ErrorManagement;
 import org.xmlcrm.app.data.basic.Fieldmanagment;
 import org.xmlcrm.app.data.basic.Languagemanagement;
 import org.xmlcrm.app.data.basic.Navimanagement;
@@ -28,6 +29,8 @@ public class ImportInitvalues {
 	private static final String nameOfLanguageFile = "languages.xml";
 	
 	private static final String nameOfCountriesFile = "countries.xml";
+	
+	private static final String nameOfErrorFile = "errorvalues.xml";
 	
 	private static ImportInitvalues instance;
 
@@ -75,8 +78,43 @@ public class ImportInitvalues {
 		Navimanagement.getInstance().addMainStructure("roomadmin", 4, 186, true, false, 3, "roomadmin",5);
 		Navimanagement.getInstance().addMainStructure("confadmin", 5, 263, true, false, 3, "confadmin",5);
 		Navimanagement.getInstance().addMainStructure("languageseditor", 6, 348, true, false, 3, "languageseditor",5);
-		Navimanagement.getInstance().addMainStructure("backup", 6, 367, true, false, 3, "backup",5);
-			
+		Navimanagement.getInstance().addMainStructure("backup", 7, 367, true, false, 3, "backup",5);
+		
+		ErrorManagement.getInstance().addErrorType(new Long(1), new Long(322));
+		ErrorManagement.getInstance().addErrorType(new Long(2), new Long(323));
+		
+	}
+
+	public void loadErrorMappingsFromXML(String filePath) throws Exception{
+		
+        SAXReader reader = new SAXReader();
+        Document document = reader.read(filePath+ImportInitvalues.nameOfErrorFile);
+        
+        Element root = document.getRootElement();
+        
+        for ( Iterator it = root.elementIterator( "row" ); it.hasNext(); ) {
+        	
+        	Element row = (Element) it.next();
+        	
+        	Long errorvalues_id = null;
+        	Long fieldvalues_id = null;
+        	Long errortype_id = null;
+        	
+        	for ( Iterator itSub = row.elementIterator( "field" ); itSub.hasNext(); ) {
+        		
+        		Element field = (Element) itSub.next();
+        		
+        		String name = field.attributeValue("name");
+        		String text = field.getText();
+        		//System.out.println("NAME | TEXT "+name+" | "+text);
+        		if (name.equals("errorvalues_id")) errorvalues_id = Long.valueOf(text).longValue();
+        		if (name.equals("fieldvalues_id")) fieldvalues_id = Long.valueOf(text).longValue();
+        		if (name.equals("errortype_id")) errortype_id = Long.valueOf(text).longValue();
+        	}
+        	
+        	ErrorManagement.getInstance().addErrorValues(errorvalues_id, errortype_id, fieldvalues_id);
+        }	
+        log.error("ErrorMappings ADDED");
 	}
 	
 	public void loadSalutations(){
@@ -180,9 +218,8 @@ public class ImportInitvalues {
         	Statemanagement.getInstance().addState(country);
         	
         }
-        
-		
 	}	
+	
 	
 	/**
 	 * load all availible languages File names and language name's from the config file
@@ -208,7 +245,7 @@ public class ImportInitvalues {
         	languages.add(country);
         	
         }
-		
+        log.error("Countries ADDED ");
         return languages;
 		
 	}
@@ -231,7 +268,7 @@ public class ImportInitvalues {
 		{
 			String lang = itLang.next();
 			
-			//log.error("loadInitLanguages lang: "+lang);
+			log.error("loadInitLanguages lang: "+lang);
 			
 			Long languages_id = Languagemanagement.getInstance().addLanguage(lang);
 			
@@ -242,7 +279,7 @@ public class ImportInitvalues {
 	        
 	        for ( Iterator it = root.elementIterator( "string" ); it.hasNext(); ) {
 	            Element item = (Element) it.next();
-	            log.error(item.getName());
+	            //log.error(item.getName());
 	            
 	            Long id = Long.valueOf(item.attributeValue("id")).longValue();
 	            String name = item.attributeValue("name");
@@ -261,7 +298,7 @@ public class ImportInitvalues {
 	        	Fieldmanagment.getInstance().addFieldValueByFieldAndLanguage(id,languages_id,value);
 	        	
 	        }
-	        
+	        log.error("Lang ADDED: "+lang);
 	        if(!langFieldIdIsInited) langFieldIdIsInited=true;
 		}	
 		

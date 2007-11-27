@@ -10,6 +10,7 @@ import org.hibernate.Transaction;
 
 import org.xmlcrm.app.data.basic.Fieldmanagment;
 import org.xmlcrm.app.data.beans.basic.ErrorResult;
+import org.xmlcrm.app.data.basic.ErrorManagement;
 import org.xmlcrm.app.hibernate.beans.basic.ErrorValues;
 import org.xmlcrm.app.hibernate.beans.lang.Fieldlanguagesvalues;
 import org.xmlcrm.app.hibernate.utils.HibernateUtil;
@@ -39,7 +40,7 @@ public class ErrorService {
 
         if (errorid<0){
         	log.error("errorid,language_id: "+errorid+"|"+language_id);
-        	ErrorValues eValues = this.getErrorValuesById(errorid*(-1));
+        	ErrorValues eValues = ErrorManagement.getInstance().getErrorValuesById(errorid*(-1));
 	        if (eValues!=null){
 	        	log.error(eValues.getFieldvalues());
 	        	log.error(eValues.getFieldvalues().getFieldvalues_id());
@@ -59,29 +60,6 @@ public class ErrorService {
         
         return null;
 	}
-	
-	public ErrorValues getErrorValuesById(Long errorValuesId) {
-		try {
-			String hql = "select c from ErrorValues as c " +
-					" where c.errorValuesId = :errorValuesId " +
-					" AND c.deleted != :deleted";
-			Object idf = HibernateUtil.createSession();
-			Session session = HibernateUtil.getSession();
-			Transaction tx = session.beginTransaction();
-			Query query = session.createQuery(hql);
-			query.setLong("errorValuesId", errorValuesId);
-			query.setString("deleted", "true");
-			ErrorValues e = (ErrorValues) query.uniqueResult();
-			tx.commit();
-			HibernateUtil.closeSession(idf);
-			return e;
-		} catch (HibernateException ex) {
-			log.error("[getErrorValuesById]",ex);
-		} catch (Exception ex2) {
-			log.error("[getErrorValuesById]",ex2);
-		}
-		return null;
-	}	
 	
 
 }

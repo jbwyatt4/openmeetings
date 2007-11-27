@@ -10,5 +10,6 @@
     <property name="updatetime" type="java.util.Date" column="updatetime"/>
     <property name="deleted" type="string" column="deleted"/>
     <many-to-one outer-join="true" insert="false" column="fieldvalues_id" lazy="false" update="false" name="fieldvalues" class="org.xmlcrm.app.hibernate.beans.lang.Fieldvalues"/>
+    <property name="fieldvalues_id" type="long" column="fieldvalues_id"/>
   </class>
 </hibernate-mapping>
