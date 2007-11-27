@@ -17,11 +17,14 @@
             </handler>
         </combobox>
     
-    <simplelabelbutton name="b2" labelid="360" width="160" x="300" 
-    				   y="$once{ parent.height-40 }">
+    <simplelabelbutton name="b2" labelid="360" width="160" x="300" y="2">
     	<handler name="onclick">
-    		//var tURL = var uploadurl = 'http://'+canvas.rtmphostlocal+':'+canvas.red5httpport+'/xmlcrm/Langexport
-            LzBrowser.loadURL("","_BLANK");
+    		<![CDATA[
+	    		var exporturl = 'http://'+canvas.rtmphostlocal+':'+canvas.red5httpport
+	    				+'/xmlcrm/LangExport?language='+parent.languages.getValue()
+	    				+'&sid='+canvas.sessionId;
+	            LzBrowser.loadURL(exporturl,"_parent");
+            ]]>
     	</handler>
     </simplelabelbutton>  
     
