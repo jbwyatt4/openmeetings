@@ -14,6 +14,11 @@ import org.xmlcrm.app.data.beans.basic.SearchResult;
 import org.xmlcrm.app.hibernate.beans.lang.Fieldlanguagesvalues;
 import org.xmlcrm.app.hibernate.beans.lang.Fieldvalues;
 
+/**
+ * 
+ * @author sebastianwagner
+ *
+ */
 public class LanguageService {
 	
 	private static final Log log = LogFactory.getLog(LanguageService.class);
@@ -40,6 +45,35 @@ public class LanguageService {
         Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
         if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)) {
         	return Fieldmanagment.getInstance().getFieldvaluesById(fieldvalues_id, language_id);
+        }
+        return null;
+	}
+	
+	public Long addLanguage(String SID, String langName) {
+        Long users_id = Sessionmanagement.getInstance().checkSession(SID);
+        Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
+        if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)) {
+        	if (langName.length()==0) return new Long(-30);
+        	return Languagemanagement.getInstance().addLanguage(langName);
+        }
+        return null;
+	}
+	
+	public Long updateLanguage(String SID, Long language_id, String langName) {
+        Long users_id = Sessionmanagement.getInstance().checkSession(SID);
+        Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
+        if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)) {
+        	if (langName.length()==0) return new Long(-30);
+        	return Languagemanagement.getInstance().updateLanguage(language_id, langName, "false");
+        }
+        return null;
+	}
+	
+	public Long updateLanguage(String SID, Long language_id) {
+        Long users_id = Sessionmanagement.getInstance().checkSession(SID);
+        Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
+        if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)) {
+        	return Languagemanagement.getInstance().updateLanguage(language_id, "", "true");
         }
         return null;
 	}

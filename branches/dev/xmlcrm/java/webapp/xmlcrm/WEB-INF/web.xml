@@ -113,7 +113,16 @@
     	<url-pattern>/ScreenRequestHandler</url-pattern>
     </servlet-mapping>
 	
+	<servlet>
+    	<servlet-name>LangExport</servlet-name>
+    	<servlet-class>org.xmlcrm.servlet.outputhandler.LangExport</servlet-class>
+    </servlet>
     
+    <servlet-mapping>
+    	<servlet-name>LangExport</servlet-name>
+    	<url-pattern>/LangExport</url-pattern>
+    </servlet-mapping>
+	
     <security-constraint>
         <web-resource-collection>
             <web-resource-name>Forbidden</web-resource-name>
