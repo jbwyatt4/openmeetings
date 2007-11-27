@@ -18,6 +18,11 @@ import org.xmlcrm.app.hibernate.beans.lang.Fieldlanguagesvalues;
 import org.xmlcrm.app.hibernate.beans.lang.Fieldvalues;
 import org.xmlcrm.app.hibernate.utils.HibernateUtil;
 
+/**
+ * 
+ * @author sebastianwagner
+ *
+ */
 public class Fieldmanagment {
 
 	private static final Log log = LogFactory.getLog(Fieldmanagment.class);
@@ -153,6 +158,15 @@ public class Fieldmanagment {
 		return null;
 	}
 	
+	public List<Fieldvalues> getMixedFieldValuesList(Long language_id) throws Exception {
+		List<Fieldvalues> ll = this.getFieldsValues();
+		for (Iterator<Fieldvalues> iter = ll.iterator(); iter.hasNext();){
+			Fieldvalues fv = iter.next();
+			fv.setFieldlanguagesvalue(this.getFieldByIdAndLanguage(fv.getFieldvalues_id(), language_id));
+		}
+		return ll;
+	}	
+	
 	public Fieldvalues getFieldvaluesById(Long fieldvalues_id, Long language_id) {
 		try {
 			//log.error("Long fieldvalues_id, Long language_id "+fieldvalues_id+" || "+language_id);
@@ -270,6 +284,18 @@ public class Fieldmanagment {
 			Fieldvalues fv = iter.next();
 			fv.setFieldlanguagesvalue(this.getFieldByIdAndLanguage(fv.getFieldvalues_id(), language_id));
 		}
+		return ll;
+	}
+	
+	private List<Fieldvalues> getFieldsValues() throws Exception {
+		Object idf = HibernateUtil.createSession();
+		Session session = HibernateUtil.getSession();
+		Transaction tx = session.beginTransaction();
+		Criteria crit = session.createCriteria(Fieldvalues.class);
+		crit.add(Restrictions.eq("deleted", "false"));
+		List<Fieldvalues> ll = crit.list();
+		tx.commit();
+		HibernateUtil.closeSession(idf);
 		return ll;
 	}
 	

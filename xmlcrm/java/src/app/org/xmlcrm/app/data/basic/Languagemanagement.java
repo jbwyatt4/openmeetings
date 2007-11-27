@@ -13,6 +13,11 @@ import org.xmlcrm.app.hibernate.utils.HibernateUtil;
 
 import org.xmlcrm.app.hibernate.beans.lang.FieldLanguage;
 
+/**
+ * 
+ * @author sebastianwagner
+ *
+ */
 public class Languagemanagement {
 
 	private static final Log log = LogFactory.getLog(Languagemanagement.class);
@@ -29,6 +34,31 @@ public class Languagemanagement {
 
 		return instance;
 	}
+	
+	public Long updateLanguage(Long language_id, String langName, String deleted) {
+		try {
+			FieldLanguage fl = this.getLanguageById(language_id);
+			fl.setUpdatetime(new Date());
+			if (langName.length()>0) fl.setName(langName);
+			fl.setDeleted(deleted);
+			this.updateLanguage(fl);
+			return language_id;
+		} catch (HibernateException ex) {
+			log.error("[updateLanguage]: ",ex);
+		} catch (Exception ex2) {
+			log.error("[updateLanguage]: ",ex2);
+		}
+		return new Long(-1);
+	}	
+	
+	private void updateLanguage(FieldLanguage fl) throws Exception {
+		Object idf = HibernateUtil.createSession();
+		Session session = HibernateUtil.getSession();
+		Transaction tx = session.beginTransaction();
+		session.update(fl);
+		tx.commit();
+		HibernateUtil.closeSession(idf);
+	}	
 
 	public Long addLanguage(String langName) {
 		try {
@@ -38,6 +68,7 @@ public class Languagemanagement {
 
 			FieldLanguage fl = new FieldLanguage();
 			fl.setStarttime(new Date());
+			fl.setDeleted("false");
 			fl.setName(langName);
 
 			Long languages_id = (Long)session.save(fl);
@@ -47,9 +78,9 @@ public class Languagemanagement {
 			
 			return languages_id;
 		} catch (HibernateException ex) {
-			log.error("[getConfKey]: ",ex);
+			log.error("[addLanguage]: ",ex);
 		} catch (Exception ex2) {
-			log.error("[getConfKey]: ",ex2);
+			log.error("[addLanguage]: ",ex2);
 		}
 		return null;
 	}
@@ -71,24 +102,48 @@ public class Languagemanagement {
 			log.error("[getConfKey]: ",ex2);
 		}
 	}
-
 	
-	public List getLanguages() {
+	public FieldLanguage getLanguageById(Long language_id) {
 		try {
+			String hql = "select c from FieldLanguage as c " +
+					"WHERE c.deleted != :deleted " +
+					"AND c.language_id = :language_id";
 			Object idf = HibernateUtil.createSession();
 			Session session = HibernateUtil.getSession();
 			Transaction tx = session.beginTransaction();
-			Query query = session
-					.createQuery("select c from FieldLanguage as c");
-			List ll = query.list();
+			Query query = session.createQuery(hql);
+			query.setString("deleted", "true");
+			query.setLong("language_id", language_id);
+			FieldLanguage fl = (FieldLanguage) query.uniqueResult();
 			tx.commit();
 			HibernateUtil.closeSession(idf);
-
+			return fl;
+		} catch (HibernateException ex) {
+			log.error("[getLanguageById]: ",ex);
+		} catch (Exception ex2) {
+			log.error("[getLanguageById]: ",ex2);
+		}
+		return null;
+	}
+	
+	
+	public List<FieldLanguage> getLanguages() {
+		try {
+			String hql = "select c from FieldLanguage as c " +
+					"WHERE c.deleted != :deleted ";
+			Object idf = HibernateUtil.createSession();
+			Session session = HibernateUtil.getSession();
+			Transaction tx = session.beginTransaction();
+			Query query = session.createQuery(hql);
+			query.setString("deleted", "true");
+			List<FieldLanguage> ll = query.list();
+			tx.commit();
+			HibernateUtil.closeSession(idf);
 			return ll;
 		} catch (HibernateException ex) {
-			log.error("[getConfKey]: ",ex);
+			log.error("[getLanguages]: ",ex);
 		} catch (Exception ex2) {
-			log.error("[getConfKey]: ",ex2);
+			log.error("[getLanguages]: ",ex2);
 		}
 		return null;
 	}
