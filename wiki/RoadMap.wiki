@@ -1,10 +1,6 @@
 #summary Roadmap of openmeeting
 #labels Phase-Requirements,Featured
 
-see calender for future date:
-[http://www.google.com/calendar/embed?src=6cgnvpn4qt9tp9rmjer98otd30%40group.calendar.google.com HTML] [http://www.google.com/calendar/ical/6cgnvpn4qt9tp9rmjer98otd30%40group.calendar.google.com/public/basic.ics ICAL]
-
-
 =Milestone pre 0.5=
 _released at 03.04.2007_
   * initial package, basic functionality, one webapp only
@@ -50,4 +46,3 @@ _released at 03.04.2007_
 
 =Milestone 1.1=
   * Module loader available for custom Modules
-
