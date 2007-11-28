@@ -2,7 +2,7 @@
 
 With the Backup panel you can:
 
-  * Export your Userdate (Including Adresses, Emails, Organisation-MamberShip) to an XML-File
+  * Export your Userdate (Including Adresses, Emails, Organisation-Membership) to an XML-File
   * Import the File again
   * You can also only export users of a certain group
 
