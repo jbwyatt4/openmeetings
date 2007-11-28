@@ -141,9 +141,8 @@ public class Emailmanagement {
 	 * @param sendWelcomeMail
 	 * @return the new mail_id or -1
 	 */
-	public Long registerEmail(String EMail, long adresses_id, String Username,
-			String Userpass, String comment) {
-		Long mail_id = this.registerEmail(EMail, Username, Userpass, comment);
+	public Long registerEmail(String EMail, long adresses_id, String comment) {
+		Long mail_id = this.registerEmail(EMail, comment);
 		if (mail_id != null) {
 			try {			
 				
@@ -180,8 +179,7 @@ public class Emailmanagement {
 	 * @param comment
 	 * @return
 	 */
-	public Long registerEmail(String EMail, String Username, String Userpass,
-			String comment) {
+	public Long registerEmail(String EMail,	String comment) {
 		try {
 			Emails emails = new Emails();
 			emails.setEmail(EMail);
