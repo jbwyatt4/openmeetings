@@ -15,26 +15,34 @@ _released at 03.04.2007_
   # _Beta1 released at 24.05.2007_ 
   # _Beta2 released at 18.06.2007_ [05Beta2Changes] 
   # _Beta3 released at 06.07.2007_ [05Beta3Changes] 
+  # _Beta4 released at 21.08.2007_ [05Beta4Changes] 
+  # _Beta5 released at 07.10.2007_ [05Beta5Changes] 
 
-  * Reworked Conference and Audience Application
+  * Reworked Conference and Audience Application with Panels (done)
   * Initial Support for users authentification and administration of users in their organisations
-  * System invitation
+  * System invitation (done)
   * Installation guide for this resource to be deployed
   * Announcement of project to wider audience
-  * Rework Images and Document Converter
-  * Offline Installation
-  * Rework Forms feedback
-  * Calender for planing a meeting and notifications
+  * Rework Images and Document Converter (done)
+  * Offline Installation (done)
+  * Rework Forms feedback (done)
   * include [ScreenViewer]
   * include [SWFPresentationViewer]
+  * include [BackupPanel]
+  * include [LanguageEditor]
+  * Recording storing and fully for whiteboard
+  * reset Password (done)
+  * add Mute Button
+  * improve BuildFromSource
 
 =Milestone 0.6=
 
+  * Calender for planing a meeting and notifications
   * reworked file-browser
   * contact management
 
 =Milestone 1.0=
-  * Recording storing and fully for whiteboard
+
   * More beautiful UI
   * Wider range of document convertings, uploadings which can be used in whiteboard
   * Audience-Modus complete
@@ -42,6 +50,4 @@ _released at 03.04.2007_
 
 =Milestone 1.1=
   * Module loader available for custom Modules
-
-
 
