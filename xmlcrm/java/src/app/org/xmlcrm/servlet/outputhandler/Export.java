@@ -33,9 +33,9 @@ import org.xmlcrm.app.hibernate.beans.user.*;
  * @author sebastianwagner
  *
  */
-public class UserExport extends HttpServlet {
+public class Export extends HttpServlet {
 
-	private static final Log log = LogFactory.getLog(UserExport.class);
+	private static final Log log = LogFactory.getLog(Export.class);
 
 	/*
 	 * (non-Javadoc)
@@ -126,9 +126,9 @@ public class UserExport extends HttpServlet {
 			user.addElement("login").setText(u.getLogin());
 			user.addElement("pass").setText(u.getPassword());
 			
-			String pcitureuri = u.getPictureuri();
-			if (pcitureuri != null) user.addElement("pcitureuri").setText(pcitureuri);
-			else user.addElement("pcitureuri").setText("");
+			String pictureuri = u.getPictureuri();
+			if (pictureuri != null) user.addElement("pictureuri").setText(pictureuri);
+			else user.addElement("pictureuri").setText("");
 			
 			if ( u.getLanguage_id() != null ) user.addElement("language_id").setText(u.getLanguage_id().toString());
 			else user.addElement("language_id").setText("");
@@ -140,7 +140,7 @@ public class UserExport extends HttpServlet {
 			
 			user.addElement("additionalname").setText(u.getAdresses().getAdditionalname());
 			user.addElement("comment").setText(u.getAdresses().getComment());
-			//A User can not have a deleted Adress, you cannot delte the Adress of an User
+			//A User can not have a deleted Adress, you cannot delete the Adress of an User
 			//String deleted = u.getAdresses().getDeleted()
 			//Phone Number not done yet
 			user.addElement("fax").setText(u.getAdresses().getFax());
@@ -149,8 +149,11 @@ public class UserExport extends HttpServlet {
 			user.addElement("town").setText(u.getAdresses().getTown());
 			user.addElement("zip").setText(u.getAdresses().getZip());
 			
-			Adresses_Emails addrE = (Adresses_Emails) u.getAdresses().getEmails().iterator().next();
-			user.addElement("email").setText(addrE.getMail().getEmail());
+			Element user_emails = user.addElement("emails");
+			for (Iterator<Adresses_Emails> iterObj=u.getAdresses().getEmails().iterator();iterObj.hasNext();){
+				Adresses_Emails addrE = iterObj.next();
+				user_emails.addElement("mail").setText(addrE.getMail().getEmail());
+			}
 			
 			Element user_organisations = user.addElement("organisations");
 			//List<String> organisations = new LinkedList();

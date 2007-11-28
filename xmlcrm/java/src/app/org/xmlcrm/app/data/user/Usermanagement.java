@@ -794,7 +794,7 @@ public class Usermanagement {
 					if (user_id==null) {
 						return new Long(-111);
 					}
-					Long adress_emails_id = Emailmanagement.getInstance().registerEmail(email, address_id, login, Userpass,"");
+					Long adress_emails_id = Emailmanagement.getInstance().registerEmail(email, address_id,"");
 					if (adress_emails_id==null) {
 						return new Long(-112);
 					}					
@@ -884,6 +884,23 @@ public class Usermanagement {
 		return null;
 	}
 
+	public Long addUser(Users usr) {
+		try {
+			Object idf = HibernateUtil.createSession();
+			Session session = HibernateUtil.getSession();
+			Transaction tx = session.beginTransaction();
+			Long user_id = (Long) session.save(usr);
+			tx.commit();
+			HibernateUtil.closeSession(idf);
+			return user_id;
+		} catch (HibernateException ex) {
+			log.error("[registerUser]" ,ex);
+		} catch (Exception ex2) {
+			log.error("[registerUser]" ,ex2);
+		}
+		return null;
+	}
+	
 	/**
 	 * check for duplicates
 	 * @param DataValue

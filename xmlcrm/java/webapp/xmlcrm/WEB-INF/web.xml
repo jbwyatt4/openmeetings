@@ -124,15 +124,25 @@
     </servlet-mapping>
 	
 	<servlet>
-    	<servlet-name>UserExport</servlet-name>
-    	<servlet-class>org.xmlcrm.servlet.outputhandler.UserExport</servlet-class>
+    	<servlet-name>Export</servlet-name>
+    	<servlet-class>org.xmlcrm.servlet.outputhandler.Export</servlet-class>
     </servlet>
     
     <servlet-mapping>
-    	<servlet-name>UserExport</servlet-name>
-    	<url-pattern>/UserExport</url-pattern>
+    	<servlet-name>Export</servlet-name>
+    	<url-pattern>/Export</url-pattern>
     </servlet-mapping>
 	
+	<servlet>
+    	<servlet-name>Import</servlet-name>
+    	<servlet-class>org.xmlcrm.servlet.outputhandler.Import</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+    	<servlet-name>Import</servlet-name>
+    	<url-pattern>/Import</url-pattern>
+    </servlet-mapping>
+		
     <security-constraint>
         <web-resource-collection>
             <web-resource-name>Forbidden</web-resource-name>
