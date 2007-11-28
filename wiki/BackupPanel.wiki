@@ -1,1 +1,15 @@
 #summary Description about the BackupPanel
+
+With the Backup panel you can:
+
+  * Export your Userdate (Including Adresses, Emails, Organisation-MamberShip) to an XML-File
+  * Import the File again
+  * You can also only export users of a certain group
+
+There Organisations must be already existing!
+It will check if the login or Mail does already exist before Adding the Users
+It will not generate Organisation, it will just add the Link between an User and an Organisation.
+
+Screen:
+
+http://openmeetings.googlecode.com/svn/branches/dev/laszlo/client/xmlcrm/resources/screens/screen_backupPanel.png
