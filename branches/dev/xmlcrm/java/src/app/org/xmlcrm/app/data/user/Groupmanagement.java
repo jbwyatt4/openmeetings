@@ -146,7 +146,7 @@ public class Groupmanagement {
 				int updatedEntities = session.createQuery(hqlUpdate).setLong(
 						"usergroup_id", usergroup_id.longValue()).setLong(
 						"user_id", user_id.longValue()).setLong("updatetime",
-						Calender.getInstance().getTimeStampMili()).setString(
+						new Long(-1)).setString(
 						"comment", comment).setLong("users_usergroups_id",
 						users_usergroups_id.longValue()).executeUpdate();
 				res = "Success: " + updatedEntities;
@@ -451,7 +451,7 @@ public class Groupmanagement {
 						level_id.longValue()).setString("name", name)
 						.setString("description", description).setLong(
 								"updatetime",
-								Calender.getInstance().getTimeStampMili())
+								new Long(-1))
 						.setString("comment", comment).setLong("usergroup_id",
 								usergroup_id.longValue()).executeUpdate();
 				res = "Success" + updatedEntities;

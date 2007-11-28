@@ -25,6 +25,7 @@ import org.xmlcrm.app.data.basic.Sessionmanagement;
 import org.xmlcrm.app.data.user.Usermanagement;
 import org.xmlcrm.app.data.user.Organisationmanagement;
 import org.xmlcrm.app.hibernate.beans.adresses.Adresses_Emails;
+import org.xmlcrm.app.hibernate.beans.domain.Organisation;
 import org.xmlcrm.app.hibernate.beans.domain.Organisation_Users;
 import org.xmlcrm.app.hibernate.beans.user.*;
 
@@ -55,45 +56,66 @@ public class Export extends HttpServlet {
 			}
 			System.out.println("sid: " + sid);
 			
-			String organisation = httpServletRequest.getParameter("organisation");
-			if (organisation == null) {
-				organisation = "0";
-			}
-			Long organisation_id = Long.valueOf(organisation).longValue();
-			System.out.println("organisation_id: " + organisation_id);
-
 			Long users_id = Sessionmanagement.getInstance().checkSession(sid);
-			Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
+			Long user_level = Usermanagement.getInstance().getUserLevelByID(
+					users_id);
 
-			System.out.println("users_id: "+users_id);
-			System.out.println("user_level: "+user_level);
-			
-			//if (user_level!=null && user_level > 0) {
+			System.out.println("users_id: " + users_id);
+			System.out.println("user_level: " + user_level);
+
+			// if (user_level!=null && user_level > 0) {
 			if (true) {
 				
-				List<Users> uList = Organisationmanagement.getInstance().getUsersByOrganisationId(organisation_id);
+				String moduleName = httpServletRequest.getParameter("moduleName");
+				if (moduleName == null) {
+					moduleName = "moduleName";
+				}
+				System.out.println("moduleName: " + moduleName);
 				
-				if (uList!=null) {
-					Document doc = this.createDocument(uList);
+				if (moduleName.equals("users") || moduleName.equals("userorganisations")) {
+					String organisation = httpServletRequest.getParameter("organisation");
+					if (organisation == null) {
+						organisation = "0";
+					}
+					Long organisation_id = Long.valueOf(organisation).longValue();
+					System.out.println("organisation_id: " + organisation_id);
+
+					List<Users> uList = null;
+					String downloadName = "users";
+					if (moduleName.equals("userorganisations")) {
+						Organisation  orga = Organisationmanagement.getInstance().getOrganisationById(organisation_id);
+						downloadName += "_"+orga.getName();
+						uList = Organisationmanagement.getInstance()
+							.getUsersByOrganisationId(organisation_id);
+					} else {
+						uList = Usermanagement.getInstance().getAllUsers();
+					}
 					
-					String requestedFile = "users.xml";
-					
-					httpServletResponse.reset();
-					httpServletResponse.resetBuffer();
-					OutputStream out = httpServletResponse.getOutputStream();
-					httpServletResponse.setContentType("APPLICATION/OCTET-STREAM");
-					httpServletResponse.setHeader("Content-Disposition","attachment; filename=\"" + requestedFile + "\"");
-					//httpServletResponse.setHeader("Content-Length", ""+ rf.length());
-					
-					this.serializetoXML(out, "UTF-8", doc);
-					
-					out.flush();
-					out.close();
+					if (uList != null) {
+						Document doc = this.createDocument(uList);
+
+						String requestedFile = "users.xml";
+
+						httpServletResponse.reset();
+						httpServletResponse.resetBuffer();
+						OutputStream out = httpServletResponse.getOutputStream();
+						httpServletResponse.setContentType("APPLICATION/OCTET-STREAM");
+						httpServletResponse.setHeader("Content-Disposition",
+								"attachment; filename=\"" + downloadName
+										+ ".xml\"");
+						// httpServletResponse.setHeader("Content-Length", ""+
+						// rf.length());
+
+						this.serializetoXML(out, "UTF-8", doc);
+
+						out.flush();
+						out.close();
+					}
+
 				}
 			} else {
-				System.out.println("ERROR LangExport: not authorized FileDownload "+(new Date()));
-			}
-	
+				System.out.println("ERROR LangExport: not authorized FileDownload "+ (new Date()));
+			}	
 		} catch (Exception er) {
 			log.error("ERROR ", er);
 			System.out.println("Error exporting: " + er);
@@ -112,13 +134,15 @@ public class Export extends HttpServlet {
 				"###############################################");
 		
 		Element root = document.addElement("root");
+		
+		Element users = root.addElement("users");
 
 		for (Iterator<Users> it = uList.iterator();it.hasNext();) {
 			Users u = it.next();
 
-			Element user = root.addElement("user");
+			Element user = users.addElement("user");
 
-			user.addElement("age").setText(Calender.getInstance().getDateByMiliSeconds(u.getAge().getTime()));
+			user.addElement("age").setText(Calender.getDateByMiliSeconds(u.getAge()));
 			user.addElement("availible").setText(u.getAvailible().toString());
 			user.addElement("deleted").setText(u.getDeleted());
 			user.addElement("firstname").setText(u.getFirstname());
@@ -134,7 +158,7 @@ public class Export extends HttpServlet {
 			else user.addElement("language_id").setText("");
 				
 			user.addElement("status").setText(u.getStatus().toString());
-			user.addElement("regdate").setText(Calender.getInstance().getDateByMiliSeconds(u.getRegdate().getTime()));
+			user.addElement("regdate").setText(Calender.getDateWithTimeByMiliSeconds(u.getRegdate()));
 			user.addElement("title_id").setText(u.getTitle_id().toString());
 			user.addElement("level_id").setText(u.getLevel_id().toString());
 			

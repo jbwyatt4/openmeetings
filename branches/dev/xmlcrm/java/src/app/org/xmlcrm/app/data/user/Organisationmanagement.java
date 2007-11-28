@@ -147,6 +147,29 @@ public class Organisationmanagement {
 		return null;
 	}	
 	
+	public List<Organisation> getOrganisations(Long user_level) {
+		try {
+			if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)){
+				Object idf = HibernateUtil.createSession();
+				Session session = HibernateUtil.getSession();
+				Transaction tx = session.beginTransaction();
+				Criteria crit = session.createCriteria(Organisation.class);
+				List<Organisation> ll = crit.list();
+				tx.commit();
+				HibernateUtil.closeSession(idf);
+				return ll;
+			} else {
+				log.error("[getOrganisations] noPremission");
+			}			
+		} catch (HibernateException ex) {
+			log.error("[getOrganisations]" ,ex);
+		} catch (Exception ex2) {
+			log.error("[getOrganisations]" ,ex2);
+		}
+		return null;
+	}	
+	
+	
 	/**
 	 * 
 	 * @return
@@ -321,12 +344,10 @@ public class Organisationmanagement {
 			Query query = session.createQuery("select c from Organisation as c where c.organisation_id = :organisation_id AND deleted != :deleted");
 			query.setLong("organisation_id", organisation_id);
 			query.setString("deleted", "true");
-			List ll = query.list();
+			Organisation o = (Organisation) query.uniqueResult();
 			tx.commit();
 			HibernateUtil.closeSession(idf);
-			if (ll.size() > 0) {
-				return (Organisation) ll.get(0);
-			}
+			return o;
 		} catch (HibernateException ex) {
 			log.error("[getOrganisationById]",ex);
 		} catch (Exception ex2) {
@@ -386,8 +407,8 @@ public class Organisationmanagement {
 	 * @param insertedby
 	 * @return
 	 */
-	public Long addUserToOrganisation(Long user_level, long user_id, long organisation_id,
-			long insertedby, String comment) {
+	public Long addUserToOrganisation(Long user_level, Long user_id, Long organisation_id,
+			Long insertedby, String comment) {
 		try {
 			if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)){
 				if (this.getOrganisation_UserByUserAndOrganisation(user_id, organisation_id)==null) {
@@ -582,7 +603,7 @@ public class Organisationmanagement {
 	 * @param organisation_id
 	 * @return
 	 */
-	public List getUsersByOrganisationId(long organisation_id){
+	public List<Users> getUsersByOrganisationId(long organisation_id){
 		try {
 
 			//get all users
@@ -593,12 +614,12 @@ public class Organisationmanagement {
 			Criteria subcrit = crit.createCriteria("organisation");
 			subcrit.add(Restrictions.eq("organisation_id", organisation_id));
 			crit.add(Restrictions.ne("deleted", "true"));
-			List userOrg = crit.list();
+			List<Organisation_Users> userOrg = crit.list();
 			tx.commit();
 			HibernateUtil.closeSession(idf);
 			List<Users> userL = new LinkedList<Users>();
-			for (Iterator it = userOrg.iterator();it.hasNext();){
-				Organisation_Users us = (Organisation_Users) it.next();
+			for (Iterator<Organisation_Users> it = userOrg.iterator();it.hasNext();){
+				Organisation_Users us = it.next();
 				userL.add(Usermanagement.getInstance().getUser(us.getUser_id()));
 			}
 			Collections.sort(userL,new UsersLoginComperator());
@@ -817,7 +838,7 @@ public class Organisationmanagement {
 				for (Iterator it = org.keySet().iterator();it.hasNext();){
 					Integer key = (Integer) it.next();
 					Long newOrgId = Long.valueOf(org.get(key).toString()).longValue();
-					this.addUserToOrganisation(new Long(3), us, newOrgId, 1, "");
+					this.addUserToOrganisation(new Long(3), us, newOrgId, new Long(1), "");
 				}
 			}
 		} catch (Exception ex) {

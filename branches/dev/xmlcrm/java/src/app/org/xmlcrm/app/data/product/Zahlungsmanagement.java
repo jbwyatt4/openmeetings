@@ -34,10 +34,8 @@ public class Zahlungsmanagement {
 			}
 			tx.commit();
 			HibernateUtil.closeSession(idf);
-			zahlungsarten.setStarttimeDE(CalenderI.getDatumMili(zahlungsarten
-					.getStarttime()));
-			zahlungsarten.setUpdatetimeDE(CalenderI.getDatumMili(zahlungsarten
-					.getUpdatetime()));
+			zahlungsarten.setStarttimeDE("");
+			zahlungsarten.setUpdatetimeDE("");
 		} catch (HibernateException ex) {
 			zahlungsarten.setComment("Error: "+ex);
 		} catch (Exception ex2) {
@@ -66,10 +64,8 @@ public class Zahlungsmanagement {
 				tx.commit();
 				HibernateUtil.closeSession(idf);
 				for (int vars = 0; vars < zahlungsarten.length; vars++) {
-					zahlungsarten[vars].setStarttimeDE(CalenderI
-							.getDatumMili(zahlungsarten[vars].getStarttime()));
-					zahlungsarten[vars].setUpdatetimeDE(CalenderI
-							.getDatumMili(zahlungsarten[vars].getUpdatetime()));
+					zahlungsarten[vars].setStarttimeDE("");
+					zahlungsarten[vars].setUpdatetimeDE("");
 				}
 			} catch (HibernateException ex) {
 				zahlungsarten[0] = new zahlungsarten();

@@ -36,6 +36,17 @@ public class OrganisationService {
 		return null;
 	}
 	
+	public List<Organisation> getAllOrganisations(String SID){
+		try {
+	        Long users_id = Sessionmanagement.getInstance().checkSession(SID);
+	        Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
+	        return Organisationmanagement.getInstance().getOrganisations(user_level);
+		} catch (Exception e){
+			log.error("getAllOrganisations",e);
+		}
+		return null;
+	}	
+	
 	/**
 	 * get an organisation by a given id
 	 * @param SID

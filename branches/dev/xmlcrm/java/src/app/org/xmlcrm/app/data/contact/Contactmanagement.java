@@ -222,10 +222,7 @@ public class Contactmanagement {
 						+ "where CONTACT_ID= :CONTACT_ID";
 				int updatedEntities = session.createQuery(hqlUpdate).setString(
 						"firstname", firstname).setString("lastname", lastname)
-						.setLong("updatetime",
-								Calender.getInstance().getTimeStampMili())
-						.setLong("age",
-								Calender.getInstance().getTimeStampMili())
+						.setLong("updatetime",new Long(-1))
 						.setString("adress", adress).setString("zip", zip)
 						.setString("town", town).setString("state", state)
 						.setString("comment", comment).setString("telefon",
@@ -583,8 +580,8 @@ public class Contactmanagement {
 			congroups.setName(name);
 			//			congroups.setUSER_ID(USER_ID);
 			congroups.setFreigabe(freigabe);
-			congroups.setStarttime(Calender.getInstance().getTimeStampMili());
-			congroups.setUpdatetime(Calender.getInstance().getTimeStampMili());
+			congroups.setStarttime(new Long(-1));
+			congroups.setUpdatetime(new Long(-1));
 			congroups.setDescription(description);
 			congroups.setComment(comment);
 			try {
@@ -622,7 +619,7 @@ public class Contactmanagement {
 						"name", name).setInteger("freigabe", freigabe)
 						.setString("description", description).setLong(
 								"updatetime",
-								Calender.getInstance().getTimeStampMili())
+								new Long(-1))
 						.setString("comment", comment).setInteger(
 								"CONGROUP_ID", CONGROUP_ID).setInteger(
 								"USER_ID", USER_ID).executeUpdate();
@@ -888,7 +885,7 @@ public class Contactmanagement {
 					int updatedEntities = session.createQuery(hqlUpdate)
 							.setInteger("CONGROUP_ID", CONGROUP_ID).setLong(
 									"updatetime",
-									Calender.getInstance().getTimeStampMili())
+									new Long(-1))
 							.setString("comment", comment).setInteger("UID",
 									UID).executeUpdate();
 					tx.commit();

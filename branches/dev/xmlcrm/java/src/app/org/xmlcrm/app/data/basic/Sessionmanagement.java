@@ -52,7 +52,7 @@ public class Sessionmanagement {
 		
 		MD5Calc md5 = new MD5Calc("MD5");
 
-		long thistime = Calender.getInstance().getTimeStampMili();
+		long thistime = new Date().getTime();
 		String chsum = md5.do_checksum(String.valueOf(thistime).toString());
 		Sessiondata sessiondata = new Sessiondata();
 		sessiondata.setSession_id(chsum);
