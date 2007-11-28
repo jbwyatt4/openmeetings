@@ -7,6 +7,10 @@ Features:
   * add new languages (for example to fit your co-operative design and language of your company)
   * export the language-files to an XML File (these language Files can be used for your next installation or as contribution to the project)
 
+Issues:
+  
+  * Issue224
+
 Screen from the Administration Panel:
 
 http://openmeetings.googlecode.com/svn/branches/dev/laszlo/client/xmlcrm/resources/screens/ScreenLanguageEditor.png
