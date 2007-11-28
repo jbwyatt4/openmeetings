@@ -15,5 +15,6 @@
     <include href="meetings/" />
     <include href="events/" />
 	<include href="languageseditor/" />
+	<include href="backup/" />
 
 </library>

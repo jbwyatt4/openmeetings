@@ -9,6 +9,9 @@
  		<!-- Show only PowerPoint Presentations in FileBrowser -->
  		<attribute name="isOnlyPpt" value="false" type="boolean" />
  		
+ 		<!-- Show only XML Files in FileBrowser -->
+ 		<attribute name="isOnlyXml" value="false" type="boolean" />
+ 		 		
 		<method event="oninit" args="invoker">
 		<![CDATA[
 			fr = new flash.net.FileReference();	
@@ -41,6 +44,13 @@
 				var imageTypes = new Object();
 				imageTypes.description = "Powerpoint (*.ppt, *.odp)";
 				imageTypes.extension = "*.ppt; *.odp;";
+				allTypes.push(imageTypes); 				
+				fr.browse(allTypes);
+			} else if(this.isOnlyXml){	
+				var allTypes = new Array();
+				var imageTypes = new Object();
+				imageTypes.description = "Powerpoint (*.xml)";
+				imageTypes.extension = "*.xml;";
 				allTypes.push(imageTypes); 				
 				fr.browse(allTypes);
 			} else {	
