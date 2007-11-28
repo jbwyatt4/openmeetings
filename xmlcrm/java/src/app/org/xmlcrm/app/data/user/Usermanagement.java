@@ -486,8 +486,7 @@ public class Usermanagement {
 			String hqlUpdate = "update userdata set DATA_KEY= :DATA_KEY, USER_ID = :USER_ID, DATA = :DATA, updatetime = :updatetime, comment = :Comment where DATA_ID= :DATA_ID";
 			int updatedEntities = session.createQuery(hqlUpdate).setString(
 					"DATA_KEY", DATA_KEY).setLong("USER_ID", USER_ID)
-					.setString("DATA", DATA).setLong("updatetime",
-							Calender.getInstance().getTimeStampMili())
+					.setString("DATA", DATA).setLong("updatetime",new Long(-1))
 					.setString("Comment", Comment).setInteger("DATA_ID",
 							DATA_ID).executeUpdate();
 			res = "Success" + updatedEntities;
@@ -512,7 +511,7 @@ public class Usermanagement {
 					+ "comment = :comment where user_id= :user_id AND data_key = :data_key";
 			int updatedEntities = session.createQuery(hqlUpdate).setString(
 					"data", DATA).setLong("updatetime",
-					Calender.getInstance().getTimeStampMili()).setString(
+					new Long(-1)).setString(
 					"comment", Comment).setLong("user_id", USER_ID.longValue())
 					.setString("data_key", DATA_KEY).executeUpdate();
 			res = "Success" + updatedEntities;
@@ -906,7 +905,7 @@ public class Usermanagement {
 	 * @param DataValue
 	 * @return
 	 */
-	private boolean checkUserLogin(String DataValue) {
+	public boolean checkUserLogin(String DataValue) {
 		try {
 			Object idf = HibernateUtil.createSession();
 			Session session = HibernateUtil.getSession();

@@ -26,7 +26,7 @@ public class TestAddGroup extends TestCase {
 
 		log.error("new organisation: "+organisation_id);
 
-		long organisation_usersid = Organisationmanagement.getInstance().addUserToOrganisation(new Long(3), 1, organisation_id, 1,"");
+		long organisation_usersid = Organisationmanagement.getInstance().addUserToOrganisation(new Long(3), new Long(1), organisation_id, new Long(1),"");
 		
 		log.error("new organisation_user: "+organisation_usersid);
 		
