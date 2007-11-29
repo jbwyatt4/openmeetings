@@ -6,6 +6,12 @@
 <resource name="showusercontextclose" src="resources/error.png" />
 <resource name="showusercontext" src="resources/1downarrow.png" />
 
+<resource name="speaking" src="resources/speaking.png" />
+<resource name="mute_btn_rsc">
+	<frame src="resources/icon_mute.png" />
+	<frame src="resources/icon_mute_red.png" />
+</resource>
+
 <!-- #################
 	Class videoobject
 	
@@ -30,6 +36,17 @@
 	<attribute name="uniqueid" value="-2" type="string" />
 	
 	<attribute name="isremote" value="true" type="boolean" />
+	
+	<handler name="onisremote" args="r">
+		this.isremote = r;
+		if (r) {
+			this.message.setAttribute('visibility','hidden');
+			this.showuser.setAttribute('visibility','visible');
+		} else {
+			this.message.setAttribute('visibility','visible');
+			this.showuser.setAttribute('visibility','hidden');
+		}
+	</handler>
 	
 	<attribute name="clientVars" value="null" />
 	
@@ -89,9 +106,13 @@
             <devcamera name="cameraRef" show="false" width="120" height="80" fps="22" bandwidth="8192" />
             <devmicrophone name="microphoneRef" capturing="false">            
             	<handler name="onlevel">
-            		this.parent.parent.parent._loadness.setLevel(this.level);
-            	</handler>
+            		<![CDATA[
+	            		this.parent.parent.parent._loudness.loudness.setAttribute('text',this.level);
+
+            		]]>
+            	</handler>         	
             </devmicrophone>
+            
 		</devvideoview>		
 		<view name="_sendInvitation" visible="true" x="3" y="2" width="120" height="80" >
 			<handler name="onclick">
@@ -100,42 +121,52 @@
 			<labeltext multiline="true" width="100" y="20" x="24" labelid="213" 
 				fgcolor="white" fontstyle="bold" />
 		</view>
-		
 	</view>
-	
-	<view name="_loadness" x="1" width="126" height="18" y="105" bgcolor="0xFFFFFF">
+	<!--
+	if (this.level>10) {
+		Debug.write("level greater 10");
+	} else {
+		Debug.write("level smaller 10");
+	}
+	 -->
+	<view name="_loudness" x="1" width="126" height="18" y="105" bgcolor="0xFFFFFF" >
+		<labeltext name="loudness"/>		
+		<!--
 		<method name="setLevel" args="ll">
 			this._loudness.setAttribute('frame',Math.round(ll/4));
 		</method>
-		<view x="2" y="2" name="_loudness" resource="loudness">
-			<handler name="oninit">
-				//Debug.write("this: ",this);
-				this.setAttribute('frame',1);
-			</handler>
-		</view>
+		<view x="2" y="2" name="_loudness" resource="loudness" 
+			 oninit="this.setAttribute('frame',1)" />
+		-->
 	</view>
 	
-	<view x="$once{ parent.width-20 }" y="2" resource="messagebox_info_rsc" 
-		onmouseover="" onmouseup="" visible="${ ( (!parent.isremote) ? true : false ) }">
+	<view name="mute" x="$once{ parent.width-20 }" y="$once{ parent.height-18 }" 
+		onmouseover="" onmouseup="" resource="mute_btn_rsc" >
+		<labeltooltip inittwice="true" labelid="57" />
+	</view>
+	
+	<view name="message" x="$once{ parent.width-20 }" y="2" resource="messagebox_info_rsc" 
+		onmouseover="" onmouseup="" visibility="hidden">
 		<handler name="onclick">
 			new changedevice(canvas.main_content._content.inner);
 		</handler>
 		<labeltooltip inittwice="true" labelid="57" />
 	</view>
 	
-	<view x="$once{ parent.width-20 }" y="2" name="infoview" resource="showusercontext"
-		onmouseover="" onmouseup="" visible="${ ( (!parent.isremote) ? false : true ) }">
+	<view name="showuser" x="$once{ parent.width-20 }" y="2"
+		onmouseover="" onmouseup="" resource="showusercontext">
 		<handler name="onclick">
-			parent.infostuff.initUserObject();
+			new videoinfostuff(parent);
 		</handler>
 		<labeltooltip inittwice="true" labelid="68" />
 	</view>
 	
-	<view visible="false" name="infostuff" width="$once{ parent.width-2 }" 
+</class>
+
+<class name="videoinfostuff" extends="view" width="$once{ parent.width-2 }" 
 		height="$once{ parent.height-21 }" y="20" x="1" bgcolor="white">
-		<method name="initUserObject">
+		<handler name="oninit">
 			<![CDATA[
-				this.setAttribute('visible',true);
 				var tString = '';
 				//Debug.write("clientVars: ",parent.clientVars);
 				for (var eg in parent.clientVars){
@@ -150,7 +181,7 @@
 				//Debug.write("tString: ",tString);
 				this.inner._usertext.setText(tString);
 			]]>
-		</method>
+		</handler>
 		<view x="$once{ parent.width-20 }" y="2" name="infoview" resource="showusercontextclose">
 			<handler name="onclick">
 				parent.setAttribute('visible',false);
@@ -162,8 +193,7 @@
 			<text name="_usertext" width="$once{ parent.width }" multiline="true" />
 			<vscrollbar />
 		</view>
-	</view>
-	
+
 </class>
 
 </library>

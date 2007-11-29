@@ -157,8 +157,10 @@
                 targets.push(this);
 
                 // Hook up our notification events. 
+                //_root.Debug.write("mediadevice onActivity INIT ONCE");
 
                 dev.onActivity = function(active) {
+                	//_root.Debug.write("mediadevice onActivity INIT");
                     // Send the onActivity notification to all mediadevice 
                     // objects that are attached to this Flash device 
                     // (in the targets array). 
@@ -412,10 +414,11 @@
 
         <!--- Handler for the Flash device onActivity callback. 
               @keywords private -->
-        <method name="_onActivity" args="active"><![CDATA[
-            //Debug.write("mediadevice _onActivity", this, active);
-            this.setAttribute("active", active);
-          ]]>
+        <method name="_onActivity" args="active">
+        	<![CDATA[
+            	Debug.write("mediadevice _onActivity", this, active);
+            	this.setAttribute("active", active);
+          	]]>
         </method>
 
 
