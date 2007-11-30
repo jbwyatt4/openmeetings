@@ -176,6 +176,16 @@
 		]]>
 	</method>
 	
+	<method name="setSpeakingByPos" args="pos,bool">
+		<![CDATA[
+			if (bool){
+				this.subviews[pos]._loudness.loudness.setAttribute('opacity',1);
+			} else {
+				this.subviews[pos]._loudness.loudness.setAttribute('opacity',0.2);
+			}
+		]]>
+	</method>	
+	
 	<!-- 
 		Method makes this View free for a new Client
 		by the partnerid
