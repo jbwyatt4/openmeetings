@@ -408,8 +408,12 @@
             <handler name="ondata" args="value">
                 <![CDATA[
                     //The onResult-Handler will be called be the rtmpconnection
-                    Debug.write("sendVarsToMessage : ",value);
-                    if (value[0]=='chat'){
+                    //Debug.write("sendVarsToMessage : ",value);
+                    if (value[0]=='audioActivity'){
+	                    //canvas.currentModApply
+	                    //Debug.write("audioActivity Client ",value[1],value[2]);
+	                    canvas._videocontainer.setSpeakingByPos(value[2],value[1]);	                    
+                	} else if (value[0]=='chat'){
                         canvas.addChatHistory(value);
                     } else if(value[0]=='fileslist'){
                         _imageslistdraw.parent.onvisible.sendEvent();
@@ -432,7 +436,7 @@
             <handler name="ondata" args="value">
                 <![CDATA[
                 //The onResult-Handler will be called be the rtmpconnection
-                Debug.write("sendVarsToMessageWithClient : ",value,value.message,value.message[0],value.client);
+                //Debug.write("sendVarsToMessageWithClient : ",value,value.message,value.message[0],value.client);
                 if (value.message[0]=='applyforMod'){
                     //canvas.currentModApply
                     if (canvas.streamid!=value.client.streamid) new responseformoderation(canvas.main_content._content.inner,{userobject:value.client,clientId:value.client.streamid});

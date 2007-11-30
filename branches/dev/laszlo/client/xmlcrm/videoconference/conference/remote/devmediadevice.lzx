@@ -416,7 +416,7 @@
               @keywords private -->
         <method name="_onActivity" args="active">
         	<![CDATA[
-            	Debug.write("mediadevice _onActivity", this, active);
+            	//Debug.write("mediadevice _onActivity", this, active);
             	this.setAttribute("active", active);
           	]]>
         </method>
