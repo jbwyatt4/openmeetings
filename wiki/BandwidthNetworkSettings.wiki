@@ -22,7 +22,7 @@
   * That means:
     1 Client(Listener) = 1 DownStreams = 1*16 KBit = 16 DownStream
     OR
-    1 Client(Moderator) = 1 UpStream = 1*12 KBit = 16 UpStream
+    1 Client(Moderator) = 1 UpStream = 1*12 KBit = 12 UpStream
     1 Server with 1 Conference á n People (Unlimited Room) =
     n*3 Outgoing Streams á 16 KBit = n*3*16 = UNLIMITED KBit Outgoing traffic
     1 Incoming Stream á 10 Kbit = 1*12 = 12KBit Incoming traffic
