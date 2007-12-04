@@ -42,9 +42,11 @@
 		if (r) {
 			this.message.setAttribute('visibility','hidden');
 			this.showuser.setAttribute('visibility','visible');
+			this.mute.setAttribute('visibility','visible')
 		} else {
 			this.message.setAttribute('visibility','visible');
 			this.showuser.setAttribute('visibility','hidden');
+			this.mute.setAttribute('visibility','hidden')
 		}
 	</handler>
 	
@@ -164,6 +166,18 @@
 	
 	<view name="mute" x="$once{ parent.width-20 }" y="$once{ parent.height-18 }" 
 		onmouseover="" onmouseup="" resource="mute_btn_rsc" >
+		<attribute name="isload" value="true" type="boolean" />
+		<handler name="onclick">
+			if (this.isload){
+				parent._chatvideoinner._videoview.v_output.setVolume(0);
+				this.setResourceNumber(2);
+				this.isload = false;
+			} else {
+				parent._chatvideoinner._videoview.v_output.setVolume(100);
+				this.setResourceNumber(1);
+				this.isload = true;
+			}
+		</handler>
 		<labeltooltip inittwice="true" labelid="373" />
 	</view>
 	

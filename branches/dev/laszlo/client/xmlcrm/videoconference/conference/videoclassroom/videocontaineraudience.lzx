@@ -241,7 +241,16 @@
 		]]>
 	</method>	
 
-
+	<method name="setSpeakingByPos" args="pos,bool">
+		<![CDATA[
+			if (bool){
+				this._video1._loudness.loudness.setAttribute('opacity',1);
+			} else {
+				this._video1._loudness.loudness.setAttribute('opacity',0.2);
+			}
+		]]>
+	</method>	
+	
 	<videoobjectaudience name="_video1" x="0" y="0" />
 
 </class>
