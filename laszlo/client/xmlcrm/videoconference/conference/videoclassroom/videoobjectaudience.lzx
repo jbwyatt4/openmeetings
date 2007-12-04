@@ -33,6 +33,19 @@
 	
 	<attribute name="isremote" value="true" type="boolean" />
 	
+	<handler name="onisremote" args="r">
+		this.isremote = r;
+		if (r) {
+			this.message.setAttribute('visibility','hidden');
+			this.showuser.setAttribute('visibility','visible');
+			this.mute.setAttribute('visibility','visible')
+		} else {
+			this.message.setAttribute('visibility','visible');
+			this.showuser.setAttribute('visibility','hidden');
+			this.mute.setAttribute('visibility','hidden')
+		}
+	</handler>
+	
 	<attribute name="clientVars" value="null" />
 	
 	<handler name="oninit">
@@ -80,48 +93,96 @@
 				</handler>
 	        </simplenetstream>
             <devcamera name="cameraRef" show="false" width="240" height="180" fps="22" bandwidth="16384" />
-            <devmicrophone name="microphoneRef" capturing="false">         
+            <devmicrophone name="microphoneRef" capturing="false">     
+            	<attribute name="isgreater" value="false" type="boolean" />       
             	<handler name="onlevel">
-            		this.parent.parent.parent._loadness.setLevel(this.level);
-            	</handler>
+            		<![CDATA[
+	            		//this.parent.parent.parent._loudness.loudness.setAttribute('text',this.level);
+						if (this.level>canvas.loadnessAcitviation) {
+							if (!this.isgreater) {
+								this.isgreater = true;
+								this.sendNotification();
+								//this.parent.parent.parent._loudness.loudness.setAttribute('opacity',1);
+							}
+						} else {
+							if (this.isgreater) {
+								this.isgreater = false;
+								this.sendNotification();
+								//this.parent.parent.parent._loudness.loudness.setAttribute('opacity',0.2);
+							}
+						}
+            		]]>
+            	</handler>    
+            	<method name="sendNotification">
+            		//Debug.write("Level sendNotification ",this.isgreater);
+			  		parent.objMessage = new Array ();
+			  		parent.objMessage[0] = 'audioActivity';
+			  		parent.objMessage[1] = this.isgreater;
+			  		parent.objMessage[2] = 0;
+				  	parent.sendMessage.doCall();
+            	</method>    	
             </devmicrophone>
+            <attribute name="objMessage" value="null" />
+	        <netremotecallhib name="sendMessage" funcname="sendMessage" 
+				remotecontext="$once{ canvas.thishib }" showLoading="false" > 
+	        	<netparam><method name="getValue"> return parent.parent.objMessage; </method></netparam>
+	        </netremotecallhib>              
 		</devvideoview>
 
 	</view>
 	
-	<view name="_loadness" x="1" y="204" bgcolor="white" width="250">
-		<method name="setLevel" args="ll">
-			this._loudness.setAttribute('frame',Math.round(ll/4));
-		</method>
-		<view name="_loudness" resource="loudnessBig" >
-			<handler name="oninit">
-				//Debug.write("this: ",this);
-				this.setAttribute('frame',1);
-			</handler>
+	<view name="_loudness" x="1" y="204">
+		<view x="2" y="2" name="loudness" resource="speaking" opacity="0.2"
+			  onmouseover="" onmouseout="" >		
+			<labeltooltip inittwice="true" labelid="372" />
 		</view>
 	</view>
+	
+	<view name="mute" x="$once{ parent.width-20 }" y="204" 
+		onmouseover="" onmouseup="" resource="mute_btn_rsc" >
+		<attribute name="isload" value="true" type="boolean" />
+		<handler name="onclick">
+			if (this.isload){
+				parent._chatvideoinner._videoview.v_output.setVolume(0);
+				this.setResourceNumber(2);
+				this.isload = false;
+			} else {
+				parent._chatvideoinner._videoview.v_output.setVolume(100);
+				this.setResourceNumber(1);
+				this.isload = true;
+			}
+		</handler>
+		<labeltooltip inittwice="true" labelid="373" />
+	</view>	
 
 	<view x="$once{ parent.width-20 }" y="2" resource="messagebox_info_rsc" 
-		onmouseover="" onmouseup="" visible="${ ( (!parent.isremote) ? true : false ) }">
+		onmouseover="" onmouseup="" name="message">
 		<handler name="onclick">
 			new changedevice(canvas.main_content._content.inner);
 		</handler>
 		<labeltooltip inittwice="true" labelid="57" />
 	</view>
 	
-	<view x="$once{ parent.width-20 }" y="2" name="infoview" resource="showusercontextau"
-		onmouseover="" onmouseup="" visible="${ ( (!parent.isremote) ? false : true ) }">
+	<view x="$once{ parent.width-20 }" y="2" name="showuser" resource="showusercontextau"
+		onmouseover="" onmouseup="">
 		<handler name="onclick">
-			parent.infostuff.initUserObject();
+			new infostuffaudience(parent);
 		</handler>
 		<labeltooltip inittwice="true" labelid="68" />
 	</view>
 	
-	<view visible="false" name="infostuff" width="$once{ parent.width-2 }" visibility="hidden"
+	<simplelabelbutton name="_sendInvitation" x="2" y="234" width="200" labelid="213" >
+		<handler name="onclick">
+			new invitemainwindow(canvas.main_content._content.inner);
+		</handler>
+	</simplelabelbutton>
+    
+</class>
+
+<class name="infostuffaudience"	extends="view" width="$once{ parent.width-2 }" visibility="hidden"
 		height="$once{ parent.height-41 }" y="20" x="1" bgcolor="white">
 		<method name="initUserObject">
 			<![CDATA[
-			this.setAttribute('visibility','visible');
 			var tString = '';
 			Debug.write("initUserObject *** clientVars: ",parent.clientVars);
 			for (var eg in parent.clientVars){
@@ -139,7 +200,7 @@
 		</method>
 		<view x="$once{ parent.width-20 }" y="2" name="infoview" resource="showusercontextcloseau">
 			<handler name="onclick">
-				parent.setAttribute('visibility','hidden');
+				parent.desotry();
 			</handler>
 			<labeltooltip inittwice="true" labelid="85" />
 		</view>	
@@ -148,14 +209,6 @@
 			<text name="_usertext" width="$once{ parent.width }" multiline="true" />
 			<vscrollbar />
 		</view>
-	</view>
-	
-	<simplelabelbutton name="_sendInvitation" x="2" y="234" width="200" labelid="213" >
-		<handler name="onclick">
-			new invitemainwindow(canvas.main_content._content.inner);
-		</handler>
-	</simplelabelbutton>
-    
 </class>
 
 </library>

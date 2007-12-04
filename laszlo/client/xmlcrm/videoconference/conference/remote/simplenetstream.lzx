@@ -31,6 +31,8 @@
 		
 		<attribute name="buffertime" value="0.1" type="number" />
 		
+		<attribute name="soundRef" value="null" />
+		
 		<handler name="onstatus" args="info" />
 
         <!--- Event sent when a cue point occurs,
@@ -46,6 +48,7 @@
 
 		<handler name="onstart" />
 		<handler name="onstop" />
+
         <!--- 
             Play the mediastream at this.url. 
          -->
@@ -56,13 +59,10 @@
 					this._findnc();
 				}
 				if (this._nc!=null){
-					this._createStream();
-				
-				
-				
+					this._createStream();				
 					this.streamname = streamname;
-					Debug.write("play", this.streamname);
-					Debug.write("this._flashstream", this._flashstream);
+					//Debug.write("play", this.streamname);
+					//Debug.write("this._flashstream", this._flashstream);
 					this.playing = true;
 					parent.stream = this;
 					parent._setPlayStream();
@@ -70,7 +70,13 @@
 					this._flashstream.setBufferTime(this.buffertime);
 				
 					this._flashstream.play(this.streamname,start);
-
+					
+					//Debug.write(this._flashstream);
+					_root.createEmptyMovieClip("vSound",_root.getNextHighestDepth());
+					_root.vSound.attachAudio(this._flashstream);
+					//Debug.write(_root.vSound);
+					this.soundRef = new Sound(_root.vSound);
+					//Debug.write(this.soundRef);
 				} else {
 					Debug.warn("Cant create Stream without valid rtmp-connection");
 				}
@@ -441,6 +447,11 @@
                 this.onmetadata.sendEvent(info);
             }
           ]]>
+        </method>
+        
+        <method name="setVolume" args="vol">
+        	Debug.write(this.soundRef,vol);
+        	this.soundRef.setVolume(vol);
         </method>
 
 
