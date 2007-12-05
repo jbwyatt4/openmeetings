@@ -12,6 +12,7 @@ import org.xmlcrm.app.hibernate.beans.basic.Configuration;
 import org.xmlcrm.app.hibernate.beans.basic.Sessiondata;
 
 import org.xmlcrm.app.hibernate.beans.user.Users;
+import org.xmlcrm.app.hibernate.beans.user.Userdata;
 
 import org.xmlcrm.app.data.basic.*;
 import org.xmlcrm.app.data.user.Usermanagement;
@@ -237,10 +238,43 @@ public class MainService {
     	return Feedbackmanagement.getInstance().sendFeedback(username, email, message);
     }
     
+    public List<Userdata> getUserdata(String SID){
+    	Long users_id = Sessionmanagement.getInstance().checkSession(SID);
+    	Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
+    	if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)){
+    		return Usermanagement.getInstance().getUserdataDashBoard(users_id);
+    	}
+    	return null;
+    }
+    
+    
+    /**
+     * @deprecated
+     * @param SID
+     * @return
+     */
     public LinkedHashMap<String,LinkedHashMap<String,LinkedHashMap<String,LinkedHashMap<String,Object>>>> getRssFeeds(String SID) {
     	Long users_id = Sessionmanagement.getInstance().checkSession(SID);
     	Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
     	return LoadAtomRssFeed.getInstance().getRssFeeds(user_level);
+    }
+    
+    
+    
+    /**
+     * 
+     * @param SID
+     * @param urlEndPoint
+     * @return
+     */
+    public LinkedHashMap<String,LinkedHashMap<String,LinkedHashMap<String,Object>>> getRssFeedByURL(String SID, String urlEndPoint) {
+    	Long users_id = Sessionmanagement.getInstance().checkSession(SID);
+    	Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
+    	if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)){
+    		return LoadAtomRssFeed.getInstance().parseRssFeed(urlEndPoint);
+    	} else {
+    		return null;
+    	}
     }
     
 	public LinkedHashMap<Integer,RoomClient> getUsersByDomain(String SID, String domain) {

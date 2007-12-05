@@ -22,6 +22,8 @@ public class DownloadHandler extends HttpServlet {
 	private static final Log log = LogFactory.getLog(DownloadHandler.class);
 	
 	private static final String defaultImageName = "deleted.jpg";
+	private static final String defaultProfileImageName = "profile_pic.jpg";
+	private static final String defaultChatImageName = "_chat_profile_pic.jpg";
 	private static final String defaultSWFName = "deleted.swf";
 	private static final String defaultPDFName = "deleted.pdf";
 
@@ -65,6 +67,12 @@ public class DownloadHandler extends HttpServlet {
 				if (parentPath == null) {
 					parentPath = "nomodule";
 				}
+				
+				String requestedFile = httpServletRequest.getParameter("fileName");
+				if (requestedFile == null) {
+					requestedFile = "";
+				}
+				
 				//make a complete name out of domain(organisation) + roomname
 				String roomName = domain+"_"+room;
 				//trim whitespaces cause it is a directory name
@@ -79,7 +87,7 @@ public class DownloadHandler extends HttpServlet {
 //
 //				System.out.println("#### moduleName: " + moduleName);
 
-				working_dir = current_dir+File.separatorChar+"upload"+File.separatorChar;
+				working_dir = current_dir+"upload"+File.separatorChar;
 				
 				// Add the Folder for the Room
 
@@ -94,13 +102,62 @@ public class DownloadHandler extends HttpServlet {
 						working_dir = current_dir + roomName
 								+ File.separatorChar;
 					}
+				} else if (moduleName.equals("userprofile")){
+					working_dir += "profiles" + File.separatorChar;
+					File f = new File(working_dir);
+					if (!f.exists()) {
+						boolean c = f.mkdir();
+						if (!c) {
+							log.error("cannot write to directory");
+							System.out.println("cannot write to directory");
+						}
+					}
+					
+					working_dir += "profile_"+users_id + File.separatorChar;
+					File f2 = new File(working_dir);
+					if (!f2.exists()) {
+						boolean c = f2.mkdir();
+						if (!c) {
+							log.error("cannot write to directory");
+							System.out.println("cannot write to directory");
+						}
+					}
+				} else if (moduleName.equals("chat")){
+					
+					working_dir += "profiles" + File.separatorChar;
+					File f = new File(working_dir);
+					if (!f.exists()) {
+						boolean c = f.mkdir();
+						if (!c) {
+							log.error("cannot write to directory");
+							System.out.println("cannot write to directory");
+						}
+					}
+					
+					String remoteUser_id = httpServletRequest.getParameter("remoteUserid");
+					if(remoteUser_id == null){
+						remoteUser_id = "0";
+					}	
+					
+					working_dir += "profile_"+remoteUser_id + File.separatorChar;
+					File f2 = new File(working_dir);
+					if (!f2.exists()) {
+						boolean c = f2.mkdir();
+						if (!c) {
+							log.error("cannot write to directory");
+							System.out.println("cannot write to directory");
+						}
+					}
+					
+					requestedFile = this.getChatUserName(working_dir);
+					
 				} else {
 					working_dir = working_dir + roomName + File.separatorChar;
 				}
-
+				
 				if (!moduleName.equals("nomodule")) {
 
-					String requestedFile = httpServletRequest.getParameter("fileName");
+					
 					System.out.println("requestedFile: " + requestedFile + " current_dir: "+working_dir);
 
 					String full_path = working_dir + requestedFile;
@@ -116,15 +173,23 @@ public class DownloadHandler extends HttpServlet {
 						}
 						//replace the path with the default picture/document
 						if (requestedFile.endsWith(".jpg")){
+							requestedFile = DownloadHandler.defaultImageName;
+							if (moduleName.equals("userprofile")) {
+								requestedFile = DownloadHandler.defaultProfileImageName;
+							} else if (moduleName.equals("chat")) {
+								requestedFile = DownloadHandler.defaultChatImageName;
+							}
 							//request for an image
 							full_path = current_dir + File.separatorChar + "default" + 
-									File.separatorChar + DownloadHandler.defaultImageName;
+									File.separatorChar + requestedFile;
 						} else if (requestedFile.endsWith(".swf")){
+							requestedFile = DownloadHandler.defaultSWFName;
 							//request for a SWFPresentation
 							full_path = current_dir + File.separatorChar + "default" + 
 									File.separatorChar + DownloadHandler.defaultSWFName;
 						} else {
 							//Any document, must be a download request
+							requestedFile = DownloadHandler.defaultPDFName;
 							full_path = current_dir + File.separatorChar + "default" + 
 								File.separatorChar + DownloadHandler.defaultPDFName;
 						}
@@ -175,5 +240,19 @@ public class DownloadHandler extends HttpServlet {
 			er.printStackTrace();
 		}
 	}
+	
+	private String getChatUserName(String userprofile_folder) throws Exception{
+		
+		File f = new File(userprofile_folder);
+		if (f.exists() && f.isDirectory()) {
+			String filesString[] = f.list();
+			for (int i=0;i<filesString.length;i++) {
+				String fileName = filesString[i];
+				if (fileName.startsWith("_chat_")) return fileName;
+			}
+		}
+		return "_no.jpg";
+	}
+		
 
 }

@@ -26,10 +26,13 @@ import org.xmlcrm.app.documents.GenerateThumbs;
 import org.xmlcrm.app.documents.GeneratePDF;
 import org.xmlcrm.app.documents.GenerateImage;
 import org.xmlcrm.app.remote.Application;
+import org.xmlcrm.app.hibernate.beans.user.Users;
 
 public class UploadHandler extends HttpServlet {
 
 	private static final Log log = LogFactory.getLog(UploadHandler.class);
+	
+	private String filesString[] = null;
 
 	protected HashMap<String, String> fileExtensions = new HashMap<String, String>();
 
@@ -83,6 +86,7 @@ public class UploadHandler extends HttpServlet {
 	protected void service(HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) throws ServletException,
 			IOException {
+		boolean resize = false;
 		try {
 
 			if (httpServletRequest.getContentLength() > 0) {
@@ -95,7 +99,7 @@ public class UploadHandler extends HttpServlet {
 				}
 
 				Long users_id = Sessionmanagement.getInstance().checkSession(sid);
-				long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
+				Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
 
 				if (user_level > 0) {
 					String room = httpServletRequest.getParameter("room");
@@ -111,6 +115,8 @@ public class UploadHandler extends HttpServlet {
 					if (moduleName == null) {
 						moduleName = "nomodule";
 					}
+					
+					//System.out.println("MODUL-NAME: "+moduleName);
 					//make a complete name out of domain(organisation) + roomname
 					String roomName = domain + "_" + room;
 					//trim whitespaces cause it is a directory name
@@ -119,18 +125,33 @@ public class UploadHandler extends HttpServlet {
 					//Get the current User-Directory
 
 					String current_dir = getServletContext().getRealPath("/");
-					String working_dir = current_dir + File.separatorChar + "upload"
+					String working_dir = current_dir + "upload"
 							+ File.separatorChar + roomName
 							+ File.separatorChar;
-					String working_dirppt = current_dir + File.separatorChar
-							+ "uploadtemp" + File.separatorChar + roomName
-							+ File.separatorChar;
+					String working_dirppt = "";
+					if (moduleName.equals("userprofile")){
+						//System.out.println("IS USER PROFILE");
+						working_dirppt = current_dir + "uploadtemp" 
+							+ File.separatorChar + "profiles" + File.separatorChar;
+						File f2 = new File(working_dirppt);
+						if (!f2.exists()) {
+							f2.mkdir();
+						}	
+						working_dirppt += "profile_" + users_id + File.separatorChar;
+					} else {
+						//System.out.println("IS SYSTEM PROFILE");
+						//Add the Folder for the Room if it does not exist yet
+						File localFolder = new File(working_dir);
+						if (!localFolder.exists()) {
+							localFolder.mkdir();
+						}
 
-					//Add the Folder for the Room if it does not exist yet
-					File localFolder = new File(working_dir);
-					if (!localFolder.exists()) {
-						localFolder.mkdir();
+						working_dirppt = current_dir + "uploadtemp" 
+						+ File.separatorChar + roomName
+						+ File.separatorChar;
 					}
+
+					// add Temp Folder Structure
 					File localFolderppt = new File(working_dirppt);
 					if (!localFolderppt.exists()) {
 						localFolderppt.mkdir();
@@ -168,11 +189,48 @@ public class UploadHandler extends HttpServlet {
 						boolean isJpg = checkForJpg(newFileSystemExtName);
 
 						String completeName = "";
+						
+						//add outputfolders for profiles
+						if (moduleName.equals("userprofile")) {
+							//User Profile Update
+							this.deleteUserProfileFilesStoreTemp(current_dir, users_id);
+							
+							completeName = current_dir + "upload"
+								+ File.separatorChar + "profiles" + File.separatorChar;
+							File f = new File(completeName);
+							if (!f.exists()) {
+								boolean c = f.mkdir();
+								if (!c) {
+									log.error("cannot write to directory");
+									System.out.println("cannot write to directory");
+								}
+							}
+							completeName += "profile_"+users_id + File.separatorChar;
+							File f2 = new File(completeName);
+							if (!f2.exists()) {
+								boolean c = f2.mkdir();
+								if (!c) {
+									log.error("cannot write to directory");
+									System.out.println("cannot write to directory");
+								}
+							}
+							resize = true;
+						}						
 						//if it is a presenation it will be copied to another place
 						if (canBeConverted || isPDF || isImage) {
+							//check if this is a room file or UserProfile
+							if (moduleName.equals("userprofile")) {
+								resize = true;
+							}
 							completeName = working_dirppt + newFileSystemName;
 						} else if (isJpg) {
-							completeName = working_dir + newFileSystemName;
+							//check if this is a room file or UserProfile
+							if (moduleName.equals("userprofile")) {
+								resize = true;
+								completeName += newFileSystemName;
+							} else {
+								completeName = working_dir + newFileSystemName;
+							}
 						} else {
 							return;
 						}
@@ -189,6 +247,8 @@ public class UploadHandler extends HttpServlet {
 							}
 							completeName = tempd;
 						}
+						
+						//System.out.println("WRITE FILE TO: "+completeName + newFileSystemExtName);
 
 						FileOutputStream fos = new FileOutputStream(completeName + newFileSystemExtName);
 						byte[] buffer = new byte[1024];
@@ -214,13 +274,41 @@ public class UploadHandler extends HttpServlet {
 									newFileSystemName + newFileSystemExtName, roomName, 
 									newFileSystemName, false, completeName, newFileSystemExtName);						
 						} else if (isImage) {
-							//convert it to JPG
-							returnError = GenerateImage.getInstance().convertImage(current_dir, 
-									newFileSystemName+ newFileSystemExtName, 
-									roomName,newFileSystemName, false);
+							if (resize) {
+								//User Profile Update
+								this.deleteUserProfileFiles(current_dir, users_id);
+								//convert it to JPG
+					 			returnError = GenerateImage.getInstance().convertImageUserProfile(current_dir,
+										newFileSystemName+ newFileSystemExtName,
+										users_id, newFileSystemName, false);
+							} else {
+								//convert it to JPG
+					 			returnError = GenerateImage.getInstance().convertImage(current_dir, 
+										newFileSystemName+ newFileSystemExtName, 
+										roomName,newFileSystemName, false);
+							}
 						} else if (isJpg) {
-							HashMap<String,Object> processThumb = GenerateThumbs.getInstance().generateThumb(current_dir, completeName, 50);
-							returnError.put("processThumb", processThumb);
+							if (resize) {
+								//User Profile Update
+								this.deleteUserProfileFiles(current_dir, users_id);
+								//is UserProfile Picture
+								HashMap<String,Object> processThumb1 = GenerateThumbs.getInstance().generateThumb("_chat_", current_dir, completeName, 40);
+								HashMap<String,Object> processThumb2 = GenerateThumbs.getInstance().generateThumb("_profile_", current_dir, completeName, 126);
+								HashMap<String,Object> processThumb3 = GenerateThumbs.getInstance().generateThumb("_big_", current_dir, completeName, 240);
+								returnError.put("processThumb1", processThumb1);
+								returnError.put("processThumb2", processThumb2);
+								returnError.put("processThumb3", processThumb3);
+								
+								File fileNameToStore = new File(completeName+".jpg");
+								String pictureuri = fileNameToStore.getName();
+								Users us = Usermanagement.getInstance().getUser(users_id);
+								us.setUpdatetime(new java.util.Date());
+								us.setPictureuri(pictureuri);
+								Usermanagement.getInstance().updateUser(us);
+							} else {
+								HashMap<String,Object> processThumb = GenerateThumbs.getInstance().generateThumb("_thumb_", current_dir, completeName, 50);
+								returnError.put("processThumb", processThumb);
+							}
 						}
 						
 						//Flash cannot read the response of an upload
@@ -230,9 +318,11 @@ public class UploadHandler extends HttpServlet {
 						hs.put("message", "library");
 						hs.put("action", "newFile");
 						hs.put("error", returnError);
-						hs.put("fileName", completeName);		
+						hs.put("fileName", completeName);	
 						
-						Application.getInstance().sendMessageWithClientByUserId(hs,users_id.toString());
+						if(!moduleName.equals("userprofile")) {
+							Application.getInstance().sendMessageWithClientByUserId(hs,users_id.toString());
+						}
 						
 					}
 				}
@@ -244,7 +334,27 @@ public class UploadHandler extends HttpServlet {
 		}
 
 	}
+	
+	private void deleteUserProfileFilesStoreTemp(String current_dir, Long users_id) throws Exception{
+		
+		String working_imgdir = current_dir + "upload" + File.separatorChar + "profiles" + File.separatorChar + "profile_"+users_id + File.separatorChar;
+		File f = new File(working_imgdir);
+		if (f.exists() && f.isDirectory()) {
+			this.filesString = f.list();
+		}
+	}
+	
+	private void deleteUserProfileFiles(String current_dir, Long users_id) throws Exception{
+		
+		String working_imgdir = current_dir + "upload" + File.separatorChar + "profiles" + File.separatorChar + "profile_"+users_id + File.separatorChar;
 
+		for (int i=0;i<this.filesString.length;i++) {
+			String fileName = filesString[i];
+			File subf = new File(working_imgdir + fileName);
+			subf.delete();
+		}
+	}
+	
 	private boolean checkForConvertion(String fileExtension) throws Exception {
 		Iterator<String> extensionIt = fileExtensions.keySet().iterator();
 		while (extensionIt.hasNext()) {

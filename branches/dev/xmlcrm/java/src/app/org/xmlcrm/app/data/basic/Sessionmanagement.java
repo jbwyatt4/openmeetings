@@ -48,7 +48,7 @@ public class Sessionmanagement {
 	 * @return
 	 */
 	public Sessiondata startsession() {
-		log.error("startsession User: || ");
+		//log.error("startsession User: || ");
 		
 		MD5Calc md5 = new MD5Calc("MD5");
 
@@ -85,7 +85,7 @@ public class Sessionmanagement {
 	 */
 	public Long checkSession(String SID) {
 		try {
-			log.error("checkSession User: || "+SID);
+			log.debug("checkSession User: || "+SID);
 			Object idf = HibernateUtil.createSession();
 			Session session = HibernateUtil.getSession();
 			Transaction tx = session.beginTransaction();
@@ -129,7 +129,7 @@ public class Sessionmanagement {
 	 */
 	public void updateUser(String SID, long USER_ID) {
 		try {
-			log.error("updateUser User: "+USER_ID+" || "+SID);
+			log.debug("updateUser User: "+USER_ID+" || "+SID);
 			
 			Object idf = HibernateUtil.createSession();
 			Session session = HibernateUtil.getSession();
@@ -149,7 +149,7 @@ public class Sessionmanagement {
 			HibernateUtil.closeSession(idf);
 			
 			Sessiondata sd = (Sessiondata) fullList.get(0);
-			log.error("Found session to update: "+sd.getSession_id()+ " userId: "+USER_ID);
+			log.debug("Found session to update: "+sd.getSession_id()+ " userId: "+USER_ID);
 			
 			idf = HibernateUtil.createSession();
 			session = HibernateUtil.getSession();
@@ -163,7 +163,7 @@ public class Sessionmanagement {
 			tx.commit();
 			HibernateUtil.closeSession(idf);
 			
-			log.error("session updated User: "+USER_ID);
+			log.debug("session updated User: "+USER_ID);
 
 		} catch (HibernateException ex) {
 			log.error("[updateUser]: " ,ex);
@@ -178,7 +178,7 @@ public class Sessionmanagement {
 	 */
 	private void updatesession(String SID) {
 		try {
-			log.error("****** updatesession: "+SID);
+			log.debug("****** updatesession: "+SID);
 			Object idf = HibernateUtil.createSession();
 			Session session = HibernateUtil.getSession();
 			Transaction tx = session.beginTransaction();
@@ -191,9 +191,9 @@ public class Sessionmanagement {
 				log.error("Found NO session to updateSession: ");
 
 			} else {
-				log.error("Found session to updateSession: ");
+				log.debug("Found session to updateSession: ");
 				Sessiondata sd = (Sessiondata) fullList.iterator().next();
-				log.error("Found session to updateSession sd "+sd.getUser_id()+" "+sd.getSession_id());
+				log.debug("Found session to updateSession sd "+sd.getUser_id()+" "+sd.getSession_id());
 				sd.setRefresh_time(new Date());
 				
 				Object idf2 = HibernateUtil.createSession();
@@ -219,7 +219,7 @@ public class Sessionmanagement {
 	 */
 	private List getSessionToDelete(Date date){
 		try {
-			log.error("****** sessionToDelete: "+date);
+			log.debug("****** sessionToDelete: "+date);
 			Object idf = HibernateUtil.createSession();
 			Session session = HibernateUtil.getSession();
 			Transaction tx = session.beginTransaction();
@@ -243,11 +243,11 @@ public class Sessionmanagement {
 	 */
 	public void clearSessionTable(){
 		try {
-			log.error("****** clearSessionTable: ");
+			log.debug("****** clearSessionTable: ");
 			Calendar rightNow = Calendar.getInstance();
 			rightNow.setTimeInMillis(rightNow.getTimeInMillis()-1800000);
 		    List l = this.getSessionToDelete(rightNow.getTime());
-		    log.error("clearSessionTable: "+l.size());
+		    log.debug("clearSessionTable: "+l.size());
 		    for (Iterator it = l.iterator();it.hasNext();){
 				Object idf = HibernateUtil.createSession();
 				Session session = HibernateUtil.getSession();
