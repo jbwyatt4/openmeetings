@@ -22,7 +22,7 @@ public class GenerateThumbs {
 		return instance;
 	}
 	
-	public HashMap<String,Object> generateThumb(String current_dir, String filepath, int thumbSize) {
+	public HashMap<String,Object> generateThumb(String pre, String current_dir, String filepath, int thumbSize) {
 		HashMap<String,Object> returnMap = new HashMap<String,Object>();
 		returnMap.put("process", "generateThumb");		
 		try {
@@ -39,7 +39,7 @@ public class GenerateThumbs {
 			
 			String command = current_dir + "jod" + File.separatorChar
 					+ runtimeFile + " " + filepath + ".jpg " + folder
-					+ "_thumb_"+name+".jpg "+thumbSize;
+					+ pre+name+".jpg "+thumbSize;
 			returnMap.put("command", command);
 			Process proc = rt.exec(command);
 			InputStream stderr = proc.getErrorStream();

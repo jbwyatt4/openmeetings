@@ -308,7 +308,7 @@ public class Usermanagement {
 		return null;
 	}
 
-	public List getUserdata(Long user_id) {
+	public List getUserdataDashBoard(Long user_id) {
 		if (user_id.longValue() > 0) {
 			try {
 				Object idf = HibernateUtil.createSession();
