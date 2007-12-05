@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <canvas debug="false" width="100%" height="100%" >
-
+    
 <!-- these properties will be overwritten by config.xml
     
      -->  
@@ -171,7 +171,7 @@ of the red5-servlet
 <attribute name="language" value="" type="string" />
 
 <!-- User porperties -->
-<attribute name="currentusercolor" value="0x000000" type="string" />
+<attribute name="currentusercolor" value="0" type="number" />
 <attribute name="currentuserpos" value="0" type="number" />
 	
 <attribute name="currentModApply" value="null" />	
@@ -301,7 +301,26 @@ containing the VideoViews
 <method name="getLabelName" args="id">
 	return getLabelNameXMLCRM(id);
 </method>
-    
+
+<!-- 
+    Into this view alle Windows will be loaded
+ -->
+<view name="main_content" y="${ canvas.naviHeightDelta }" width="${canvas.width}" 
+    height="${canvas.height-canvas.naviHeightDelta}" >
+    <view x="0" name="_content" layout="axis:y;spacing:2">
+        <view name="inner" />
+        
+        <method name="clearAll">
+            Debug.write("clearAll this.inner: ",this.inner,this.inner.subviews.length);
+            for (var eg in this.inner.subviews){
+                Debug.write("clearAll this.inner.subviews: ",this.inner.subviews[eg]);
+                return this.inner.subviews[eg].close();                
+            }
+        </method>
+    </view>
+    <vscrollbar />
+</view>  
+  
 <!-- 
 	Navigation
  -->
@@ -330,25 +349,6 @@ containing the VideoViews
         cmenu.hideBuiltInItems();
     </handler>     
 </view>
-
-<!-- 
-    Into this view alle Windows will be loaded
- -->
-<view name="main_content" y="${ canvas.naviHeightDelta }" width="${canvas.width}" 
-    height="${canvas.height-canvas.naviHeightDelta}" >
-    <view x="0" name="_content" layout="axis:y;spacing:2">
-        <view name="inner" />
-        
-        <method name="clearAll">
-            Debug.write("clearAll this.inner: ",this.inner,this.inner.subviews.length);
-            for (var eg in this.inner.subviews){
-                Debug.write("clearAll this.inner.subviews: ",this.inner.subviews[eg]);
-                return this.inner.subviews[eg].close();                
-            }
-        </method>
-    </view>
-    <vscrollbar />
-</view>  
 
 <view name="_conferencemenu" y="0" x="0" height="20" width="100%" 
     bgcolor="${ canvas.basebgcolorizer }" visibility="hidden" /> 

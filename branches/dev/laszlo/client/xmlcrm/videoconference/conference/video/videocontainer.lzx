@@ -18,6 +18,12 @@
 	
 	<handler name="oninit">
 		canvas.thishib.modus = "conference";
+		
+		this._video1.usercolor=0x4174B1;
+		this._video2.usercolor=0x00CC00;
+		this._video3.usercolor=0xFFCC33;
+		this._video4.usercolor=0xFF6633;
+		
 		canvas._videocontainer=this;
 		this.allUsers = new Array();
 		this.streams = new Array();
@@ -83,6 +89,7 @@
                 	}
                 }
                 canvas.thishib.getCurrentModerator.doCall(); 
+                chartcontent.doInit();
                 ]]>
             </handler>   
         </netremotecallhib> 
@@ -225,13 +232,13 @@
 		]]>
 	</method>	
 
-	<videoobject name="_video1" x="0" y="0" usercolor="#4174B1" userposition="0" />
+	<videoobject name="_video1" x="0" y="0" userposition="0" />
 	
-	<videoobject name="_video2" x="130" y="0" usercolor="#00CC00" userposition="1" />
+	<videoobject name="_video2" x="130" y="0" userposition="1" />
 	
-	<videoobject name="_video3" x="0" y="126" usercolor="#FFCC33" userposition="2" />
+	<videoobject name="_video3" x="0" y="126" userposition="2" />
 	
-	<videoobject name="_video4" x="130" y="126" usercolor="#FF6633" userposition="3" />
+	<videoobject name="_video4" x="130" y="126" userposition="3" />
 	
 </class>
 

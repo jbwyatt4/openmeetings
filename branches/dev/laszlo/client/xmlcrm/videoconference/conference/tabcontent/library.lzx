@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library>
 
-	<include href="chattab.lzx" />
 	<include href="participants.lzx" />
 
 	<include href="files/" />
-
+	<include href="chat/" />
     
 </library>

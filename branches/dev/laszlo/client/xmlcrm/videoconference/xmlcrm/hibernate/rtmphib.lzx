@@ -414,6 +414,8 @@
 	                    //Debug.write("audioActivity Client ",value[1],value[2]);
 	                    canvas._videocontainer.setSpeakingByPos(value[2],value[1]);	                    
                 	} else if (value[0]=='chat'){
+                		// Not Used
+                		Debug.warn("Not Used");
                         canvas.addChatHistory(value);
                     } else if(value[0]=='fileslist'){
                         _imageslistdraw.parent.onvisible.sendEvent();
@@ -443,7 +445,7 @@
                 } else if (value.message[0]=='applyModAnswer'){
                     canvas.currentModApply.setUserAnswer(value);
                 } else if (value.message[0]=='chat'){
-                    canvas.addChatHistory(value.message,value.client);
+                    chartcontent.addChatHistory(value.message,value.client);
                 } else if (value.message[0]=='whiteboard'){
 					if (value.message[1]=='wmlloadcomplete'){
 						_drawarea.sendCompleteWmlLoadedRClient(value.client);

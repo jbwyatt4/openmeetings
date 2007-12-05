@@ -27,7 +27,7 @@
 	<!-- Set the Name of the partner -->
 	<attribute name="chatpartnername" value="" type="string" />
 	
-	<attribute name="usercolor" value="" type="string" />
+	<attribute name="usercolor" value="0" type="number" />
 	<attribute name="userposition" value="0" type="number" />
 		
 	<!-- Set the ID of the Partner 
