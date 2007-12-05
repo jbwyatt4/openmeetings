@@ -173,7 +173,7 @@ of the red5-servlet
 <attribute name="language" value="" type="string" />
 
 <!-- User porperties -->
-<attribute name="currentusercolor" value="0x000000" type="string" />
+<attribute name="currentusercolor" value="0" type="number" />
 <attribute name="currentuserpos" value="0" type="number" />
 	
 <attribute name="currentModApply" value="null" />	

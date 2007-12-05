@@ -21,10 +21,17 @@
     
     <attribute name="isOnlyImage" value="false" type="boolean" />
     <attribute name="isOnlyPpt" value="false" type="boolean" />
+    <attribute name="isOnlyProfile" value="false" type="boolean" />
+    <attribute name="isOnlyXml" value="false" type="boolean" />
+    
+    <attribute name="isdefaultreturn" value="true" type="boolean" />
+    <attribute name="returnObj" value="true" type="boolean" />
     
  	<fileupload name="myFileUpload" isOnlyImage="${ this.parent.isOnlyImage }" 
- 		 isOnlyPpt="${ this.parent.isOnlyPpt }">
+ 		 isOnlyPpt="${ this.parent.isOnlyPpt }" isOnlyProfile="${ this.parent.isOnlyProfile }" 
+ 		 isOnlyXml="${ this.parent.isOnlyXml }">
 		<method name="onComplete" args="fr">
+			
 			Debug.write("oncomplete ",fr);
 			this.parent.progressBar.setValue(100);
 			this.parent.upload.setAttribute('enabled', false);
@@ -32,6 +39,7 @@
 			this.parent.browse.setAttribute("visible",false);
 			this.parent.txtFile.setAttribute("visible",false);
 
+			if (parent.isdefaultreturn) {
 	  		var tempSendArray = new Array ();
 	  		tempSendArray[0] = 'fileslist';
 	  		var nowTime = new Date();
@@ -44,7 +52,9 @@
 	  		canvas.objMessage = tempSendArray;
 	  		canvas.thishib.sendMessage.doCall();
 
-		
+			} else {
+				parent.returnObj.sendRefresh();
+			}
 			this.parent.close();
 		</method>
 

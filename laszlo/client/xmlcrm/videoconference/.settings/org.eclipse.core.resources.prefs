@@ -1,4 +1,4 @@
-#Mon Nov 26 23:17:37 CET 2007
+#Wed Dec 05 19:02:19 CET 2007
 eclipse.preferences.version=1
 encoding//conference/global/functions.lzx=UTF-8
 encoding//conference/popups/errorpopup.lzx=UTF-8
@@ -6,7 +6,6 @@ encoding//conference/popups/rpcerrordialog.lzx=UTF-8
 encoding//conference/remote/devrtmpconnection.lzx=UTF-8
 encoding//conference/remote/simplenetstream.lzx=UTF-8
 encoding//conference/tabbar/conferencecontainertab.lzx=UTF-8
-encoding//conference/tabcontent/chattab.lzx=UTF-8
 encoding//conference/tabcontent/library.lzx=UTF-8
 encoding//conference/tabcontent/participants.lzx=UTF-8
 encoding//conference/video/videocontainer.lzx=UTF-8

@@ -93,7 +93,7 @@
 	<simplelabelbutton width="190" labelid="15" y="0" x="0" >
         <view resource="add_file_icon_rsc" y="2" x="4" />
 	    <handler name="onclick">
-	        new uploadwindow(canvas.main_content._content.inner,{x:60,y:60,uploadmodule:canvas.uploadmoduleimg,isOnlyImage:true});
+	        new uploadwindow(canvas.main_content._content.inner,{x:60,uploadmodule:canvas.uploadmoduleimg,isOnlyImage:true});
 	    </handler>
 	</simplelabelbutton>
 

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<library>
+
+	<include href="chattabitem.lzx" />
+	<include href="chatoutput.lzx" />
+	<include href="chattabbottom.lzx" />
+	<include href="chattab.lzx" />
+
+    
+</library>
