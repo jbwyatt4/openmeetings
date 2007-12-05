@@ -7,6 +7,7 @@
 
 	<attribute name="user_id" value="0" type="number" />
 	<attribute name="username" value="" type="string" />
+	<attribute name="usertime" value="" type="string" />
 	<attribute name="usercolor" value="0" type="string" />
 	<attribute name="cbtext" value="" type="string" />
 	
@@ -19,15 +20,19 @@
 	        		+'&sid='+canvas.sessionId;
 	        Debug.write("downloadurl "+downloadurl);
 	        this._userpic.setAttribute('src',downloadurl);	
+	        
+	        Debug.write("TIME: "+this.usertime);
         ]]>
 	</handler>
 	
 	<image name="_userpic" />
 	
-	<text multiline="true" text="$once{ parent.username }" x="40"
+	
+	<text text="$once{ parent.username }" x="40"
 		  width="$once{ parent.width - 40 }" bgcolor="$once{ parent.usercolor }"
 		  selectable="true" />
-		  
+	<text text="$once{ parent.usertime }" align="right" selectable="true" />
+	
 	<text multiline="true" text="$once{ parent.cbtext }" x="40" y="20"
 		  width="$once{ parent.width - 40 }" selectable="true" />
 

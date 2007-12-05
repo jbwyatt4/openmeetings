@@ -45,7 +45,7 @@
 	  		//this._cbtext.setText(this._cbtext.text+newmessage);
 	  		var usercolor = value[5];
 	  		if (usercolor==0)usercolor=0xCCCCCC;
-		    new chattabitem(this._cbtext,{cbtext:newmessage,user_id:value[8],usercolor:usercolor,username:username});
+		    new chattabitem(this._cbtext,{cbtext:newmessage,user_id:value[8],usercolor:usercolor,username:username,usertime:value[1]});
 	  		this.setScrollToMax();			  	
 	  	]]>
 	</method>			
@@ -59,7 +59,7 @@
 		]]>
 	</method>
 	
-	<view name="_cbtext" width="230" layout="axis:y;spacing:2" />
+	<view name="_cbtext" width="240" layout="axis:y;spacing:2" />
 	
 	<vscrollbar name="myscrollbar" />
 
