@@ -1,0 +1,21 @@
+#summary 0.5 Beta6 Changes
+
+= Main Changes =
+
+  * new Layout (Container)
+  * new Chat Module see: [ChatModul]
+  * User Profile with Image
+  * advanced Language editing with import/export see: [LanguageEditor]
+  * Backup Module to import/export userdata see: [BackupPanel]
+  * Mute Button to turn sound off, if a somebody has bad audio/strong echo/bad bandwidth
+  * remote Activity (green Light if somebody is speaking in VideoBox)
+  * Japanese Language-File added (thx to H.Kuze from net8/OpenLaszlo.jp)
+
+
+= Minor Changes =
+
+  * improved LocalStorage (LoginBox remembers)
+  * improved Dashboard
+  * Some Fixes for Administration Panels
+  * Better List-view (jump to first/last and change row-count)
+  * improved tooltips
