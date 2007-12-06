@@ -14,7 +14,7 @@
 
 = Minor Changes =
 
-  * improved LocalStorage (Login-Box remembers)
+  * improved Local-Storage (Login-Box remembers)
   * improved Dashboard
   * Some Fixes for Administration Panels
   * Better List-view (jump to first/last and change row-count)
