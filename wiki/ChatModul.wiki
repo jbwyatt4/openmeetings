@@ -6,4 +6,5 @@
   * Chat history persistent for 50 items (relogin and chat history is availible)
 
 = Screen =
-http://openmeetings.googlecode.com/svn/branches/dev/laszlo/client/xmlcrm/resources/screens/screen_chatboxnew.png
+
+http://openmeetings.googlecode.com/svn/branches/dev/laszlo/client/xmlcrm/resources/screens/screen_chatboxnew_v2.png
