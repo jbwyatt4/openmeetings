@@ -8,9 +8,12 @@ Features:
   * export the language-files to an XML File (these language Files can be used for your next installation or as contribution to the project)
   * import of language files
 
+
+_you should restart the server if you face problems, as the database cache might be invalid_
 Issues:
   
   * Issue224
+  * Issue228
 
 Screen from the Administration Panel:
 
