@@ -1,4 +1,4 @@
-#summary Installation of 05 Release Candidate 6
+#summary Installation of 05 Release Candidate 6 and Release Candidate 6
 #labels Featured
 
 
