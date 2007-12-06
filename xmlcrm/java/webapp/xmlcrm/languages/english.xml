@@ -1084,7 +1084,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>You cannot delete this Field. You can only delete Labels NOT Fields. There is no Label loaded at the moment, wether it is not selected any Field or there is no Label for this Language for that Field defined.</value>
   </string>
   <string id="360" name="languageseditor">
-    <value>export to XML</value>
+    <value>export</value>
   </string>
   <string id="361" name="languageseditor">
     <value>You need to logout to see any changes.</value>
@@ -1142,5 +1142,44 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   </string>
   <string id="379" name="dashboard">
     <value>Upload new Image</value>
+  </string>
+  <string id="380" name="backuppanel">
+    <value>Userdata - Export</value>
+  </string>
+  <string id="381" name="backuppanel">
+    <value>All organisations must be already existing!</value>
+  </string>
+  <string id="382" name="backuppanel">
+    <value>start export</value>
+  </string>
+  <string id="383" name="backuppanel">
+    <value>By organisation</value>
+  </string>
+  <string id="384" name="backuppanel">
+    <value>start export</value>
+  </string>
+  <string id="385" name="backuppanel">
+    <value>Userdata - Import</value>
+  </string>
+  <string id="386" name="backuppanel">
+    <value>choose users.xml</value>
+  </string>
+  <string id="387" name="languageseditor">
+    <value>import</value>
+  </string>
+  <string id="388" name="languageseditor">
+    <value>Export to XML - These files can be used to: 
+		- Contribute to the project 
+		- Import into another System 
+		- Backup 
+		- Customization 
+		- Put it into the language-directory for your next installation</value>
+  </string>
+  <string id="389" name="languageseditor">
+    <value>Choose a language file to import. Choose the right Langauge from the Combobox! 
+		No matter what the name of the file is, it will be imported into this language!</value>
+  </string>
+  <string id="390" name="importwindow">
+    <value>import - choose file</value>
   </string>
 </language>
