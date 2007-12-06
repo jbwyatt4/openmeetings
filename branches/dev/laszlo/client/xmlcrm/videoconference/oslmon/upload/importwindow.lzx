@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library>
  
- <class name="importwindow" extends="labelexplorerbox" labelid="379"
+ <class name="importwindow" extends="labelexplorerbox" labelid="390"
     docking="true" closable="true" width="264" x="200" height="200">
     
     <handler name="oninit">
@@ -16,6 +16,7 @@
 	<attribute name="sessionid" value="" type="string" />
     
     <attribute name="uploadmodule" value="users" type="string" />
+    <attribute name="secondid" value="0" type="number" />
     
  	<fileupload name="myFileUpload" isOnlyXml="true" >
 		<method name="onComplete" args="fr">
@@ -67,6 +68,7 @@
 			<![CDATA[
 			var uploadurl = 'http://'+canvas.rtmphostlocal+':'+canvas.red5httpport
 				+'/xmlcrm/Import?moduleName='+this.parent.uploadmodule
+				+'&secondid='+parent.secondid
 				+'&sid='+canvas.sessionId;
             Debug.write("uploadurl: ",uploadurl);
 			parent.myFileUpload.upload(uploadurl);
