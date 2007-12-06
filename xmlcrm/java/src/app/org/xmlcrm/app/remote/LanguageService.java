@@ -64,7 +64,7 @@ public class LanguageService {
         Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
         if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)) {
         	if (langName.length()==0) return new Long(-30);
-        	return Languagemanagement.getInstance().updateLanguage(language_id, langName, "false");
+        	return Languagemanagement.getInstance().updateFieldLanguage(language_id, langName, "false");
         }
         return null;
 	}
@@ -73,7 +73,7 @@ public class LanguageService {
         Long users_id = Sessionmanagement.getInstance().checkSession(SID);
         Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
         if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)) {
-        	return Languagemanagement.getInstance().updateLanguage(language_id, "", "true");
+        	return Languagemanagement.getInstance().updateFieldLanguage(language_id, "", "true");
         }
         return null;
 	}

@@ -68,7 +68,7 @@ public class LangExport extends HttpServlet {
 			System.out.println("user_level: "+user_level);
 			
 			if (user_level!=null && user_level > 0) {
-				FieldLanguage fl = Languagemanagement.getInstance().getLanguageById(language_id);
+				FieldLanguage fl = Languagemanagement.getInstance().getFieldLanguageById(language_id);
 
 				List<Fieldvalues> fvList = Fieldmanagment.getInstance().getMixedFieldValuesList(language_id);
 				

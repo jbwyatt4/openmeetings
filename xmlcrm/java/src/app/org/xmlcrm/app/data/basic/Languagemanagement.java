@@ -34,30 +34,6 @@ public class Languagemanagement {
 		return instance;
 	}
 	
-	public Long updateLanguage(Long language_id, String langName, String deleted) {
-		try {
-			FieldLanguage fl = this.getLanguageById(language_id);
-			fl.setUpdatetime(new Date());
-			if (langName.length()>0) fl.setName(langName);
-			fl.setDeleted(deleted);
-			this.updateLanguage(fl);
-			return language_id;
-		} catch (HibernateException ex) {
-			log.error("[updateLanguage]: ",ex);
-		} catch (Exception ex2) {
-			log.error("[updateLanguage]: ",ex2);
-		}
-		return new Long(-1);
-	}	
-	
-	private void updateLanguage(FieldLanguage fl) throws Exception {
-		Object idf = HibernateUtil.createSession();
-		Session session = HibernateUtil.getSession();
-		Transaction tx = session.beginTransaction();
-		session.update(fl);
-		tx.commit();
-		HibernateUtil.closeSession(idf);
-	}	
 
 	public Long addLanguage(String langName) {
 		try {
@@ -102,7 +78,34 @@ public class Languagemanagement {
 		}
 	}
 	
-	public FieldLanguage getLanguageById(Long language_id) {
+	public Long updateFieldLanguage(Long language_id, String langName, String deleted) {
+		try {
+			FieldLanguage fl = this.getFieldLanguageById(language_id);
+			fl.setUpdatetime(new Date());
+			if (langName.length()>0) fl.setName(langName);
+			fl.setDeleted(deleted);
+			this.updateLanguage(fl);
+			return language_id;
+		} catch (HibernateException ex) {
+			log.error("[updateLanguage]: ",ex);
+		} catch (Exception ex2) {
+			log.error("[updateLanguage]: ",ex2);
+		}
+		return new Long(-1);
+	}
+
+	
+	private void updateLanguage(FieldLanguage fl) throws Exception {
+		Object idf = HibernateUtil.createSession();
+		Session session = HibernateUtil.getSession();
+		Transaction tx = session.beginTransaction();
+		session.update(fl);
+		tx.commit();
+		HibernateUtil.closeSession(idf);
+	}	
+
+
+	public FieldLanguage getFieldLanguageById(Long language_id) {
 		try {
 			String hql = "select c from FieldLanguage as c " +
 					"WHERE c.deleted != :deleted " +
@@ -124,7 +127,6 @@ public class Languagemanagement {
 		}
 		return null;
 	}
-	
 	
 	public List<FieldLanguage> getLanguages() {
 		try {
