@@ -20,7 +20,7 @@
 	 
     <labeltext name="n3" labelid="227" width="200" y="200" resize="false" x="10" />     
         <combobox name="languages" width="170" y="200" x="120" editable="false">
-            <netremotecallhib name="getLanguages" funcname="xmlcrm.getLanguages" remotecontext="$once{ canvas.thishib }" >      
+            <netremotecallhib name="getLanguages" funcname="languageservice.getLanguages" remotecontext="$once{ canvas.thishib }" >      
                 <handler name="oninit">
                     this.doCall();
                 </handler>
