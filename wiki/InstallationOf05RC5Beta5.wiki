@@ -1,5 +1,4 @@
 #summary Installation of 05 Release Candidate 5
-#labels Featured
 
 
 = Requirements =
