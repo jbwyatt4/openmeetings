@@ -1119,4 +1119,28 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   <string id="371" name="turnoverlist">
     <value></value>
   </string>
+  <string id="372" name="videobox">
+    <value></value>
+  </string>
+  <string id="373" name="videobox">
+    <value></value>
+  </string>
+  <string id="374" name="dashboard">
+    <value></value>
+  </string>
+  <string id="375" name="dashboard">
+    <value></value>
+  </string>
+  <string id="376" name="dashboard">
+    <value></value>
+  </string>
+  <string id="377" name="dashboard">
+    <value></value>
+  </string>
+  <string id="378" name="dashboard">
+    <value></value>
+  </string>
+  <string id="379" name="dashboard">
+    <value></value>
+  </string>
 </language>
