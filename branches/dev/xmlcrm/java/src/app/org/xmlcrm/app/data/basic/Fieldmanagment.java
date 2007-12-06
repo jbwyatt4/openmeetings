@@ -14,6 +14,7 @@ import org.hibernate.Transaction;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.xmlcrm.app.data.beans.basic.SearchResult;
+import org.xmlcrm.app.hibernate.beans.lang.FieldLanguage;
 import org.xmlcrm.app.hibernate.beans.lang.Fieldlanguagesvalues;
 import org.xmlcrm.app.hibernate.beans.lang.Fieldvalues;
 import org.xmlcrm.app.hibernate.utils.HibernateUtil;
@@ -104,7 +105,6 @@ public class Fieldmanagment {
 		return null;
 	}
 
-
 	public Long addFieldValueByFieldAndLanguage(Long field_id,
 			Long language_id, String fieldvalue) {
 		try {
@@ -132,6 +132,25 @@ public class Fieldmanagment {
 		}
 		return null;
 	}
+	
+	public void updateFieldValueByFieldAndLanguage(Fieldlanguagesvalues flv) {
+		try {
+			Object idf = HibernateUtil.createSession();
+			Session session = HibernateUtil.getSession();
+			Transaction tx = session.beginTransaction();
+
+			session.update(flv);
+
+			tx.commit();
+			HibernateUtil.closeSession(idf);
+
+		} catch (HibernateException ex) {
+			log.error("[updateFieldValueByFieldAndLanguage]: ",ex);
+		} catch (Exception ex2) {
+			log.error("[updateFieldValueByFieldAndLanguage]: ",ex2);
+		}
+
+	}	
 
 	public Long addField(String fieldName) {
 		try {
@@ -157,6 +176,32 @@ public class Fieldmanagment {
 		}
 		return null;
 	}
+	
+	public Long addFieldById(String fieldName, Long fieldvalues_id) {
+		try {
+			Object idf = HibernateUtil.createSession();
+			Session session = HibernateUtil.getSession();
+			Transaction tx = session.beginTransaction();
+
+			Fieldvalues fl = new Fieldvalues();
+			fl.setFieldvalues_id(fieldvalues_id);
+			fl.setStarttime(new Date());
+			fl.setName(fieldName);
+			fl.setDeleted("false");
+
+			Long fieldId = (Long)session.save(fl);
+
+			tx.commit();
+			HibernateUtil.closeSession(idf);
+			
+			return fieldId;
+		} catch (HibernateException ex) {
+			log.error("[getConfKey]: ",ex);
+		} catch (Exception ex2) {
+			log.error("[getConfKey]: ",ex2);
+		}
+		return null;
+	}	
 	
 	public List<Fieldvalues> getMixedFieldValuesList(Long language_id) throws Exception {
 		List<Fieldvalues> ll = this.getFieldsValues();
@@ -315,7 +360,7 @@ public class Fieldmanagment {
 		return ll;
 	}		
 	
-	private Fieldvalues getFieldvaluesById(Long fieldvalues_id) throws Exception {
+	public Fieldvalues getFieldvaluesById(Long fieldvalues_id) throws Exception {
 		String hql = "select f from Fieldvalues f WHERE f.fieldvalues_id = :fieldvalues_id ";
 		Object idf = HibernateUtil.createSession();
 		Session session = HibernateUtil.getSession();
