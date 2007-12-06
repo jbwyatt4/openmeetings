@@ -6,10 +6,9 @@ Features:
   * edit the labels of any language, changes will take effect as soon as you re-login
   * add new languages (for example to fit your co-operative design and language of your company)
   * export the language-files to an XML File (these language Files can be used for your next installation or as contribution to the project)
-  * import of language files
+  * import of language files (_you should restart the server if you face problems, as the database cache might be invalid_)
 
 
-_you should restart the server if you face problems, as the database cache might be invalid_
 Issues:
   
   * Issue224
