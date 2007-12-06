@@ -9,13 +9,14 @@
   * Backup Module to import/export userdata see: [BackupPanel]
   * Mute Button to turn sound off, if a somebody has bad audio/strong echo/bad bandwidth
   * remote Activity (green Light if somebody is speaking in VideoBox)
-  * Japanese Language-File added (thx to H.Kuze from net8/OpenLaszlo.jp)
+  * Japanese Language-File added (thx to H.Kuze from net8/Open-Laszlo.jp)
 
 
 = Minor Changes =
 
-  * improved LocalStorage (LoginBox remembers)
+  * improved LocalStorage (Login-Box remembers)
   * improved Dashboard
   * Some Fixes for Administration Panels
   * Better List-view (jump to first/last and change row-count)
   * improved tooltips
+  * tests and fixes to run without problems on mysql and postgres
