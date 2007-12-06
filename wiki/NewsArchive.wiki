@@ -1,0 +1,21 @@
+#summary former news
+
+  * Demo Portal Update to r607 at 06.11.2007
+  * Demo Portal Update to r587 at 22.10.2007 (fixes, updates and arabic language added(Issue177))
+  * 0.5 RC5 (Beta5) released at 07.10.2007 [InstallationOf05RC5Beta5] [05Beta5Changes]
+  * Looking for some simple Openlaszlo-Red5 Sample Applications? see: SimpleSampleApps
+  * Demo Portal Update to r563, improved Quality-setting, new Server-Versions, Bug-Fixes at 24.09.2007 (Please report if Audio/Video has better quality)
+  * Missing a feature? Post it to the wiki-page! see: FeatureRequest
+  * Demo Portal Minor Update for Issue178 at 15.09.2007
+  * Demo Portal Minor Update to r546 at 31.08.2007
+  * 0.5 RC4 (Beta4) released at 21.08.2007 [InstallationOf05RC3Beta4] [05Beta4Changes]
+  * Demo Portal Minor Update Fixed [ScreenViewer], updates minor fixes at 21.08.2007
+  * Demo Portal Minor Update to Beta4 at 20.08.2007
+  * Demo Portal Updated at 17.08.2007 to r523 including the [SWFPresentationViewer], including korean, chinese simplefied/tradtional (all incomplete) translation, Bugs and Updates
+  * Demo Portal Updated at 03.08.2007 to r497 including the [SWFPresentationViewer], including spanish, swedish, chinese translation
+  * First Screen of SWFPresentation Component at 27.07.2007 see: [SWFPresentationViewer]
+  * 0.5 RC3 (Beta3) release at 06.07.2007 [InstallationOf05RC3Beta3] [05Beta3Changes]
+  * Demo Portal Updated at 04.07.2007 to r410 including the ScreenViewer
+  * First Screen of the Shared Desktop Viewer 27.06.2007 see: [ScreenViewer]
+  * 0.5 RC2 (Beta2) released 18.06.2007 [InstallationOf05RC2Beta2] [05Beta2Changes]
+  * 0.5 Beta 1 released 24.05.2007
