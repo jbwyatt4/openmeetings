@@ -1,4 +1,4 @@
-#summary 0.5 Beta6 Changes
+#summary 0.5 Beta6 and Beta7 Changes
 
 = Main Changes =
 
