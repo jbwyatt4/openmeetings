@@ -8,7 +8,7 @@
   * advanced Language editing with import/export see: [LanguageEditor]
   * Backup Module to import/export userdata see: [BackupPanel]
   * Mute Button to turn sound off, if a somebody has bad audio/strong echo/bad bandwidth
-  * remote Activity (green Light if somebody is speaking in VideoBox)
+  * remote Activity (green Light if somebody is speaking in Video-Box)
   * Japanese Language-File added (thx to H.Kuze from net8/Open-Laszlo.jp)
 
 
