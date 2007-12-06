@@ -8,6 +8,11 @@ http://openmeetings.googlecode.com/svn/branches/dev/xmlcrm/java/webapp/xmlcrm/la
 
 Just take one file and translate it to your language.
 
+= Import and export of Language Files =
+
+  * *Use the [LanguageEditor] for translation*
+  * with the [LanguageEditor] you can import and export Language Files
+
 = How to add it as installation option =
 
 Once you have finished the translation you can add a new node to:
