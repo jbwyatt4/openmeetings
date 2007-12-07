@@ -1,7 +1,7 @@
 #summary Roadmap of openmeeting
 #labels Phase-Requirements,Featured
 
-_OpenMeetings is an active project so things may change here_
+_Open-Meetings is an active project so things may change here_
 
 =Milestone pre 0.5=
 _released at 03.04.2007_
