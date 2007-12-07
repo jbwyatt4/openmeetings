@@ -54,10 +54,6 @@ public class Application extends ApplicationAdapter implements
 		return instance;
 	}
 	
-	public Application(){
-		instance = this;
-	}
-	
 	private void initBandWidthConfigs(){
 		try {
 			log.debug("Init Stuff Config parser: ");
@@ -70,6 +66,7 @@ public class Application extends ApplicationAdapter implements
 
 	@Override
 	public boolean appStart(IScope scope) {
+		instance = this;
 		// init your handler here
 		initBandWidthConfigs();
 		//System.out.println("################## appStart    ");

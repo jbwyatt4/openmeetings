@@ -37,6 +37,15 @@ public class Calender {
         return result;
     }
     
+    public static String getTimeForStreamId(Date t){
+        SimpleDateFormat sdf = new SimpleDateFormat("dd_MM_yyyy_HH_mm_ss");
+        Date dateOld = new Date();
+        long timeAdv = t.getTime();
+        dateOld.setTime(timeAdv);
+        String result = sdf.format(dateOld);
+        return result;
+    }    
+    
     public static Date parseDate(String dateString) {
     	try {
     		return dateFormat__ddMMyyyy.parse(dateString);

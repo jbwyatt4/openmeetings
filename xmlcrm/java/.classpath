@@ -61,7 +61,6 @@
 	<classpathentry kind="lib" path="lib/red5/servlets-default-5.5.20.jar"/>
 	<classpathentry kind="lib" path="lib/red5/servlet-api-2.5.jar"/>
 	<classpathentry kind="lib" path="lib/red5/servlet-api.jar"/>
-	<classpathentry kind="lib" path="lib/red5/red5.jar"/>
 	<classpathentry kind="lib" path="lib/red5/quartz-1.6.0.jar"/>
 	<classpathentry kind="lib" path="lib/red5/naming-resources.jar"/>
 	<classpathentry kind="lib" path="lib/red5/naming-factory.jar"/>
@@ -132,5 +131,6 @@
 	<classpathentry kind="lib" path="lib/xdoclet2/plugins/xdoclet-plugin-hibernate-1.0.4-SNAPSHOT.jar"/>
 	<classpathentry kind="lib" path="lib/xdoclet2/lib/xdoclet-2.0.6.jar"/>
 	<classpathentry kind="lib" path="lib/xdoclet2/lib/xerces-2.4.0.jar"/>
+	<classpathentry kind="lib" path="lib/red5/red5.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
