@@ -15,6 +15,7 @@ _released at 03.04.2007_
   # _Beta3 released at 06.07.2007_ [05Beta3Changes] 
   # _Beta4 released at 21.08.2007_ [05Beta4Changes] 
   # _Beta5 released at 07.10.2007_ [05Beta5Changes] 
+  # _Beta7 released at 06.12.2007_ [05Beta6Changes] 
 
   * Reworked Conference and Audience Application with Panels (done)
   * Initial Support for users authentification and administration of users in their organisations
@@ -28,14 +29,15 @@ _released at 03.04.2007_
   * include [SWFPresentationViewer]
   * include [BackupPanel]
   * include [LanguageEditor]
-  * Recording storing and fully for whiteboard
+  * Recording of a meeting/event
   * reset Password (done)
-  * add Mute Button
+  * add Mute Button (done)
   * improve BuildFromSource
 
 =Milestone 0.6=
 
   * Calender for planing a meeting and notifications
+  * openID integration
   * reworked file-browser
   * contact management
 
