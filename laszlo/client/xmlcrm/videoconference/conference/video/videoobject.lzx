@@ -197,6 +197,36 @@
 		<labeltooltip inittwice="true" labelid="68" />
 	</view>
 	
+    <simplelabelbutton x="30" y="$once{ parent.height-18 }" 
+			text="s" width="30" height="18">
+    	<handler name="onclick">
+            this.parent.recordMeetingStream.doCall();
+    	</handler>
+    </simplelabelbutton> 
+    
+    <simplelabelbutton x="70" y="$once{ parent.height-18 }" 
+			text="e" width="30" height="18">
+    	<handler name="onclick">
+            this.parent.stopRecordMeetingStream.doCall();
+    	</handler>
+    </simplelabelbutton>     
+		
+  	<netremotecallhib name="recordMeetingStream" funcname="streamservice.recordMeetingStream" 
+  					  remotecontext="$once{ canvas.thishib }" >   
+    	<handler name="ondata" args="value">
+			//The onResult-Handler will be called be the rtmpconnection
+			Debug.write("+++++++++++++++++ recordShow: ",value);				
+		</handler>	
+  	</netremotecallhib>
+  	
+  	<netremotecallhib name="stopRecordMeetingStream" funcname="streamservice.stopRecordMeetingStream" 
+  					  remotecontext="$once{ canvas.thishib }" >   
+    	<handler name="ondata" args="value">
+			//The onResult-Handler will be called be the rtmpconnection
+			Debug.write("+++++++++++++++++ stopRecordingShow: ",value);				
+		</handler>	
+  	</netremotecallhib>  
+  		
 </class>
 
 <class name="videoinfostuff" extends="view" width="$once{ parent.width-2 }" 
