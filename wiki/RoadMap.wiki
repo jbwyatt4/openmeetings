@@ -29,6 +29,7 @@ _released at 03.04.2007_
   * include [SWFPresentationViewer]
   * include [BackupPanel]
   * include [LanguageEditor]
+  * improved Chat [ChatModul]
   * Recording of a meeting/event
   * reset Password (done)
   * add Mute Button (done)
