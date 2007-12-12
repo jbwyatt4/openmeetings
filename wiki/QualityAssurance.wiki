@@ -10,7 +10,7 @@
 || MacOSX Firefox 2.0 || . || . || . ||
 || MacOSX Safari 2.0 || . || . || . ||
 
-== Quality List Debian Package ==
+== Quality Check List ==
 || ** || ** || *Pass* || *Fail* || *Comments* ||
 || 1. || Frontend UI || . || . || . ||
 || 2. || Login Language Bar Appears || . || . || . ||
