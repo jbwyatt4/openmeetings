@@ -1,4 +1,4 @@
-#summary One-sentence summary of this page.
+#summary Quality Check Sheet
 
 = Quality Assurance =
 
@@ -29,5 +29,3 @@
 || 13. || Check all Menus for Undefines || || || ||
 || 14. || Conference Video/Audio Latency Test || || || ||
 || 15. || Choose Device Dialog Appearing After Refreshing Meeting || || || ||
-
-Add your content here.
