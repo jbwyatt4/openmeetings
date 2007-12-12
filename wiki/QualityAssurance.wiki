@@ -2,15 +2,13 @@
 
 = Quality Assurance =
 
-== Quality List ==
-
 || *Platform* || *SWF8* || *SWF9* || *DHTML* ||
 || WinXP Firefox 2.0 || . || . || . ||
 || WinXP IE 6.0 || . || . || . ||
-|| WinXP IE 7.0 || || || ||
-|| Linux Firefox 2.0 || || || ||
-|| MacOSX Firefox 2.0 || || || ||
-|| MacOSX Safari 2.0 || || || ||
+|| WinXP IE 7.0 || . || . || . ||
+|| Linux Firefox 2.0 || . || . || . ||
+|| MacOSX Firefox 2.0 || . || . || . ||
+|| MacOSX Safari 2.0 || . || . || . ||
 
 == Quality List Debian Package ==
 || ** || ** || *Pass* || *Fail* || *Comments* ||
