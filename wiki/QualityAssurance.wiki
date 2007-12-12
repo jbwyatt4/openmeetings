@@ -12,7 +12,7 @@
 
 == Quality Check List ==
 || ** || ** || *Pass* || *Fail* || *Comments* ||
-|| 1. || Frontend UI || . || . || . ||
+|| 1. || Frontend UI Loads Correctly with All Data Fields || . || . || . ||
 || 2. || Login Language Bar Appears || . || . || . ||
 || 3. || Companies List Shows Up if Multiple || . || . || . ||
 || 4. || Email Invitation Sending/Receive || . || . || . ||
