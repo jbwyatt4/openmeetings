@@ -12,18 +12,18 @@
 
 == Quality List Debian Package ==
 || ** || ** || *Pass* || *Fail* || *Comments* ||
-|| 1. || Frontend UI || || || ||
-|| 2. || Login Language Bar Appears || || || ||
-|| 3. || Companies List Shows Up if Multiple || || || ||
-|| 4. || Email Invitation Sending/Receive || || || ||
-|| 5. || Three People Joining Conference Invokes the Webcam Dialog Box || || || ||
-|| 6. || Conference Video/Audio Latency Test || || || ||
-|| 7. || Upload Files || || || ||
-|| 8. || View Files || || || ||
-|| 9. || View Users || || || ||
-|| 10. || Switching Rooms to Confirm No Grayout and Back to Same Window || || || ||
-|| 11. || Switching Between Image and Documents in Whiteboard Does Not Freeze || || || ||
-|| 12. || Duplicate Video if Only Exit and Browser Isn't Closed || || || ||
-|| 13. || Check all Menus for Undefines || || || ||
-|| 14. || Conference Video/Audio Latency Test || || || ||
-|| 15. || Choose Device Dialog Appearing After Refreshing Meeting || || || ||
+|| 1. || Frontend UI || . || . || . ||
+|| 2. || Login Language Bar Appears || . || . || . ||
+|| 3. || Companies List Shows Up if Multiple || . || . || . ||
+|| 4. || Email Invitation Sending/Receive || . || . || . ||
+|| 5. || Three People Joining Conference Invokes the Webcam Dialog Box || . || . || . ||
+|| 6. || Conference Video/Audio Latency Test || . || . || . ||
+|| 7. || Upload Files || . || . || . ||
+|| 8. || View Files || . || . || . ||
+|| 9. || View Users || . || . || . ||
+|| 10. || Switching Rooms to Confirm No Grayout and Back to Same Window || . || . || . ||
+|| 11. || Switching Between Image and Documents in Whiteboard Does Not Freeze || . || . || . ||
+|| 12. || Duplicate Video if Only Exit and Browser Isn't Closed || . || . || . ||
+|| 13. || Check all Menus for Undefines || . || . || . ||
+|| 14. || Conference Video/Audio Latency Test || . || . || . ||
+|| 15. || Choose Device Dialog Appearing After Refreshing Meeting || . || . || . ||
