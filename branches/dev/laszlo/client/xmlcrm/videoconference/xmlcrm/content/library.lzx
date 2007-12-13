@@ -16,5 +16,6 @@
     <include href="events/" />
 	<include href="languageseditor/" />
 	<include href="backup/" />
+	<include href="recording/" />
 
 </library>

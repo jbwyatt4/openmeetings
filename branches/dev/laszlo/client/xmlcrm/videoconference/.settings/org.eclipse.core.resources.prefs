@@ -1,4 +1,4 @@
-#Wed Dec 05 19:02:19 CET 2007
+#Thu Dec 13 16:01:17 CET 2007
 eclipse.preferences.version=1
 encoding//conference/global/functions.lzx=UTF-8
 encoding//conference/popups/errorpopup.lzx=UTF-8
@@ -40,6 +40,7 @@ encoding//xmlcrm/content/admin/uservalueform.lzx=UTF-8
 encoding//xmlcrm/content/confadmin/confvalueform.lzx=UTF-8
 encoding//xmlcrm/content/conference/audience.lzx=UTF-8
 encoding//xmlcrm/content/conference/conference.lzx=UTF-8
+encoding//xmlcrm/content/conference/conferencemenubar.lzx=UTF-8
 encoding//xmlcrm/content/contentviews/basecontentsaveview.lzx=UTF-8
 encoding//xmlcrm/content/contentviews/basecontentview.lzx=UTF-8
 encoding//xmlcrm/content/contentviews/library.lzx=UTF-8
