@@ -266,7 +266,7 @@ public class Roommanagement {
 	 * @param roomtypes_id
 	 * @return
 	 */
-	public List getPublicRooms(long user_level, long roomtypes_id){
+	public List<Rooms> getPublicRooms(long user_level, long roomtypes_id){
 		try {
 			log.error("getPublicRooms: roomtypes_id "+roomtypes_id);
 			if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)){
@@ -303,6 +303,49 @@ public class Roommanagement {
 		}
 		return null;
 	}	
+	
+	/**
+	 * get all rooms which are availible for public
+	 * @param user_level
+	 * @param roomtypes_id
+	 * @return
+	 */
+	public List<Rooms> getPublicRooms(long user_level){
+		try {
+			if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)){
+				//log.error("### getPublicRooms: create Query "+roomtypes_id);
+				Object idf = HibernateUtil.createSession();
+				Session session = HibernateUtil.getSession();
+				Transaction tx = session.beginTransaction();
+//				Criteria crit = session.createCriteria(Rooms.class);
+//				Criteria subcriteriaRoomType = crit.createCriteria("roomtype");
+//				subcriteriaRoomType.add(Restrictions.eq("roomtypes_id", roomtypes_id));
+//				crit.add(Restrictions.eq("ispublic", true));
+//				crit.add(Restrictions.ne("deleted", "true"));			
+//				List ll = crit.list();
+				String queryString = "SELECT r from Rooms r " +
+						"JOIN r.roomtype as rt " +
+						"WHERE " +
+						"r.ispublic=:ispublic and r.deleted=:deleted";
+				Query q = session.createQuery(queryString);
+				//
+				q.setBoolean("ispublic", true);
+				q.setString("deleted", "false");
+				
+				List ll = q.list();
+				tx.commit();
+				HibernateUtil.closeSession(idf);
+				log.error("### getPublicRooms: size Room List "+ll.size());
+				return ll;
+			}
+		} catch (HibernateException ex) {
+			log.error("[getRoomsByOrganisation] ", ex);
+		} catch (Exception ex2) {
+			log.error("[getRoomsByOrganisation] ", ex2);
+		}
+		return null;
+	}	
+	
 	
 	/**
 	 * adds a new Record to the table rooms
@@ -411,7 +454,7 @@ public class Roommanagement {
 	 * @param roomtypes_id
 	 * @return
 	 */
-	public List getRoomsOrganisationByOrganisationIdAndRoomType(long user_level,long organisation_id, long roomtypes_id){
+	public List<Rooms_Organisation> getRoomsOrganisationByOrganisationIdAndRoomType(long user_level,long organisation_id, long roomtypes_id){
 		try {
 			if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)){
 				Object idf = HibernateUtil.createSession();
@@ -440,14 +483,14 @@ public class Roommanagement {
 			log.error("[getRoomsByOrganisation] ", ex2);
 		}
 		return null;
-	}
+	}	
 	
 	/**
 	 * Gets all rooms by an organisation
 	 * @param organisation_id
 	 * @return list of Rooms_Organisation with Rooms as Sub-Objects or null
 	 */
-	public List getRoomsOrganisationByOrganisationId(long user_level,long organisation_id){
+	public List<Rooms_Organisation> getRoomsOrganisationByOrganisationId(long user_level,long organisation_id){
 		try {
 			if (AuthLevelmanagement.getInstance().checkModLevel(user_level)){
 				Object idf = HibernateUtil.createSession();

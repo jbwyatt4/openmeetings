@@ -1,5 +1,6 @@
 package org.xmlcrm.app.remote;
 
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.LinkedList;
@@ -22,7 +23,17 @@ import org.red5.server.api.Red5;
 import org.red5.server.api.service.IServiceCapableConnection;
 
 import org.xmlcrm.app.conference.videobeans.RoomClient;
+import org.xmlcrm.app.data.basic.AuthLevelmanagement;
+import org.xmlcrm.app.data.basic.Sessionmanagement;
+import org.xmlcrm.app.data.user.Usermanagement;
 import org.xmlcrm.utils.math.Calender;
+import org.xmlcrm.app.hibernate.beans.user.Users;
+import org.xmlcrm.app.hibernate.beans.domain.Organisation_Users;
+import org.xmlcrm.app.data.conference.Roommanagement;
+import org.xmlcrm.app.documents.CreateLibraryPresentation;
+import org.xmlcrm.app.documents.LoadLibraryPresentation;
+import org.xmlcrm.app.hibernate.beans.rooms.Rooms;
+import org.xmlcrm.app.data.record.Recordingmanagement;
 
 /**
  * 
@@ -88,10 +99,13 @@ public class StreamService {
 		return null;
 	}
 	
-	public Long stopRecordMeetingStream(String recordingName){
+	public Long stopRecordMeetingStream(String recordingName, String newRecordFileName, String comment){
 		try {
+			log.error("stopRecordMeetingStream");
+			
 			IConnection current = Red5.getConnectionLocal();
 			RoomClient currentClient = Application.getClientList().get(current.getClient().getId());
+			Long rooms_id = currentClient.getRoom_id();
 			String roomname = currentClient.getUserroom();
 			String orgdomain = currentClient.getDomain();	
 			
@@ -110,10 +124,20 @@ public class StreamService {
 			}	
 			LinkedHashMap<String,Object> roomRecording = roomRecordingList.get(recordingName);
 			
-			roomRecording.put("endtime", new java.util.Date());
+			Date starttime = (Date) roomRecording.get("starttime");
+			Date endtime =  new java.util.Date();
+			Long duration = endtime.getTime() - starttime.getTime();
+			roomRecording.put("endtime",endtime);
 			roomRecording.put("enduser", currentClient);
+			roomRecording.put("recordname", newRecordFileName);
 			
-			this.saveToFile(roomRecording, roomname, recordingName);
+			XStream xStream = new XStream(new XppDriver());
+			xStream.setMode(XStream.NO_REFERENCES);
+			String xmlString = xStream.toXML(roomRecording);
+			
+			log.error(xmlString);
+			
+			return Recordingmanagement.getInstance().addRecording(newRecordFileName, duration, xmlString, rooms_id);
 		} catch (Exception err) {
 			log.error("[stopRecordMeetingStream]",err);
 		}
@@ -163,42 +187,38 @@ public class StreamService {
 		
 	}
 	
-	private void saveToFile(LinkedHashMap<String,Object> roomRecording, String roomname, String recordingName) {
+	public LinkedHashMap<String,Object> getAllRecordings(String SID){
 		try {
+	        Long users_id = Sessionmanagement.getInstance().checkSession(SID);
+	        Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);  
+	        
+	        if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)){
+	        	LinkedHashMap<String,Object> returnList = new LinkedHashMap<String,Object>();
+	        	
+				
+				returnList.put("publicRooms", Roommanagement.getInstance().getPublicRooms(user_level));
+				
+				Users us = Usermanagement.getInstance().getUser(users_id);
+				
+				LinkedList<List> privateRooms = new LinkedList<List>();
+				
+				for (Iterator<Organisation_Users> iter = us.getOrganisation_users().iterator();iter.hasNext();) {
+					Organisation_Users orgUser = iter.next();
+					Long organisation_id = orgUser.getOrganisation().getOrganisation_id();
+					privateRooms.add(Roommanagement.getInstance().getRoomsOrganisationByOrganisationId(user_level, organisation_id));
+				}
+				
+				returnList.put("privateRooms",privateRooms);
+				
+				return returnList;
+	        }
 
-			XStream xStream = new XStream(new XppDriver());
-			xStream.setMode(XStream.NO_REFERENCES);
-			String xmlObject = xStream.toXML(roomRecording);
 			
-			IScope scope = Red5.getConnectionLocal().getScope().getParent();
-			String current_dir = scope.getResource("upload/").getFile().getAbsolutePath();
 			
-			String recordingPath = current_dir + "recordings";
-			
-			File recordingDir = new File(recordingPath);
-			if (!recordingDir.exists()) {
-				boolean c = recordingDir.mkdir();
-				if (!c) log.error("COULD NOT WRITE TO DISK "+recordingPath);
-			}
-			
-			String roomRecordingPath = recordingPath + File.separatorChar + roomname;
-			
-			File roomDir = new File(roomRecordingPath);
-			if (!recordingDir.exists()) {
-				boolean c = recordingDir.mkdir();
-				if (!c) log.error("COULD NOT WRITE TO DISK "+roomRecordingPath);
-			}	
-			
-			String filePath = roomRecordingPath + File.separatorChar + recordingName;
-			
-			FileOutputStream fos = new FileOutputStream(filePath);
-			PrintStream p = new PrintStream( fos );
-			p.print(xmlObject);
-			p.close();
-			fos.close();
 		} catch (Exception err) {
-			log.error("[saveToFile]",err);
-		}
+			log.error("[getAllRecordings]",err);
+		}		
+		return null;
 	}
 
 }

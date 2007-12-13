@@ -150,6 +150,10 @@ public class Application extends ApplicationAdapter implements
 		return true;
 	}
 	
+	/**
+	 * @deprecated
+	 * @return
+	 */
 	public RoomClient logicalRoomEnter(){
 		try {
 			IConnection current = Red5.getConnectionLocal();
@@ -493,12 +497,64 @@ public class Application extends ApplicationAdapter implements
 		return returnVal;
 	}
 	
+	
+	public HashMap<String,RoomClient> setRoomValues(String userroom, Long room_id, String orgdomain){
+		try {
+
+			HashMap <String,RoomClient> roomClientList = new HashMap<String,RoomClient>();
+			IConnection current = Red5.getConnectionLocal();
+			String streamid = current.getClient().getId();
+			RoomClient currentClient = ClientList.get(streamid);
+			currentClient.setDomain(orgdomain);
+			currentClient.setRoom_id(room_id);
+			currentClient.setUserroom(userroom);
+			ClientList.put(streamid, currentClient);
+			
+			log.error("##### setRoomValues : " + currentClient.getUsername()+" "+currentClient.getStreamid()); // just a unique number
+
+			//Check for Moderation
+			//LogicalRoom ENTER
+			Set<String> keys = ClientList.keySet();
+			Iterator<String> iter = keys.iterator();
+			int roomcount = 0;
+			while (iter.hasNext()) {
+				String key = (String) iter.next();
+				RoomClient rcl = ClientList.get(key);
+//				log.error("#+#+#+#+##+## logicalRoomEnter ClientList key: "+rcl.getStreamid());
+//				log.error("#+#+#+#+##+## logicalRoomEnter ClientList key: "+rcl.getUserroom());
+				//Check if the Client is in the same room and same domain 
+				//and is not the same like we have just declared to be moderating this room
+				if(userroom.equals(rcl.getUserroom()) && orgdomain.equals(rcl.getDomain()) && !streamid.equals(rcl.getStreamid())){
+//					log.debug("set to ++ for client: "+rcl.getStreamid()+" "+roomcount);
+					roomcount++;
+					roomClientList.put(key, rcl);
+				}				
+			}
+			
+			if (roomcount==0){
+				log.error("Room is empty so set this user to be moderation role");
+				currentClient.setIsMod(true);
+				ClientList.put(streamid, currentClient);
+			} else {
+				log.error("Room is already somebody so set this user not to be moderation role");
+				currentClient.setIsMod(false);
+				ClientList.put(streamid, currentClient);
+			}	
+			
+			return roomClientList;
+		} catch (Exception err){
+			log.error("[setRoomValues]",err);
+		}
+		return null;
+	}	
+	
 	/**
 	 * this is necessary to switch the Domain while connected <b>before</b> entering a room 
 	 * cause users can access public rooms or rooms of their domain
 	 * public rooms have always the domain "public" while private/organisation rooms have 
 	 * their own ones
 	 * @param orgdomain
+	 * @deprecated
 	 * @return
 	 */
 	public RoomClient setUserDomain(String orgdomain){
@@ -567,6 +623,7 @@ public class Application extends ApplicationAdapter implements
 	 * this method will be called right at the start of each conference
 	 * it will add the user to the list of users of a room
 	 * @param userroom
+	 * @deprecated
 	 * @return
 	 */
 	public RoomClient setUserroom(String userroom){
@@ -644,6 +701,7 @@ public class Application extends ApplicationAdapter implements
 
 	/**
 	 * Get all ClientList Objects of that room and domain
+	 * @TODO: Check if this Function is deprecated
 	 * @return
 	 */
 	public HashMap<String,RoomClient> getClientListScope(){

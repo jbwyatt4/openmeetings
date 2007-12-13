@@ -64,7 +64,7 @@ public class ConferenceLibrary {
 			LinkedHashMap<String,LinkedHashMap> presentationObject = null;
 						
 	        Long users_id = Sessionmanagement.getInstance().checkSession(SID);
-	        long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);  
+	        Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);  
 	        
 	        if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)){
 				
