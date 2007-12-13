@@ -5,11 +5,15 @@ import java.util.List;
 import java.util.LinkedList;
 import java.util.LinkedHashMap;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.PrintStream;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.io.xml.DomDriver;
+import com.thoughtworks.xstream.io.xml.XppDriver;
 
 import org.red5.server.stream.ClientBroadcastStream;
 import org.red5.server.api.IConnection;
@@ -109,7 +113,7 @@ public class StreamService {
 			roomRecording.put("endtime", new java.util.Date());
 			roomRecording.put("enduser", currentClient);
 			
-			this.saveToFile(roomRecording, recordingName);
+			this.saveToFile(roomRecording, roomname, recordingName);
 		} catch (Exception err) {
 			log.error("[stopRecordMeetingStream]",err);
 		}
@@ -159,31 +163,42 @@ public class StreamService {
 		
 	}
 	
-	private void saveToFile(LinkedHashMap<String,Object> roomRecording, String recordingName) throws Exception {
-		
-		XStream xStream = new XStream();
-		String xmlObject = xStream.toXML(roomRecording);
-		
-		IScope scope = Red5.getConnectionLocal().getScope().getParent();
-		String current_dir = scope.getResource("upload/").getFile().getAbsolutePath();
-		
-		String recordingPath = current_dir + "recordings";
-		
-		File recordingDir = new File(recordingPath);
-		if (!recordingDir.exists()) {
-			boolean c = recordingDir.mkdir();
-			if (!c) log.error("COULD NOT WRITE TO DISK "+recordingPath);
+	private void saveToFile(LinkedHashMap<String,Object> roomRecording, String roomname, String recordingName) {
+		try {
+
+			XStream xStream = new XStream(new XppDriver());
+			xStream.setMode(XStream.NO_REFERENCES);
+			String xmlObject = xStream.toXML(roomRecording);
+			
+			IScope scope = Red5.getConnectionLocal().getScope().getParent();
+			String current_dir = scope.getResource("upload/").getFile().getAbsolutePath();
+			
+			String recordingPath = current_dir + "recordings";
+			
+			File recordingDir = new File(recordingPath);
+			if (!recordingDir.exists()) {
+				boolean c = recordingDir.mkdir();
+				if (!c) log.error("COULD NOT WRITE TO DISK "+recordingPath);
+			}
+			
+			String roomRecordingPath = recordingPath + File.separatorChar + roomname;
+			
+			File roomDir = new File(roomRecordingPath);
+			if (!recordingDir.exists()) {
+				boolean c = recordingDir.mkdir();
+				if (!c) log.error("COULD NOT WRITE TO DISK "+roomRecordingPath);
+			}	
+			
+			String filePath = roomRecordingPath + File.separatorChar + recordingName;
+			
+			FileOutputStream fos = new FileOutputStream(filePath);
+			PrintStream p = new PrintStream( fos );
+			p.print(xmlObject);
+			p.close();
+			fos.close();
+		} catch (Exception err) {
+			log.error("[saveToFile]",err);
 		}
-		
-		String roomFile = recordingPath + File.separatorChar + recordingName;
-		
-		File roomDir = new File(recordingPath);
-		if (!recordingDir.exists()) {
-			boolean c = recordingDir.mkdir();
-			if (!c) log.error("COULD NOT WRITE TO DISK "+recordingPath);
-		}	
-		
-		
 	}
 
 }
