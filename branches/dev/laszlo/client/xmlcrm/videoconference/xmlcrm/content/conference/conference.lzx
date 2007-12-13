@@ -34,8 +34,8 @@
     
 <class name="modpanel" extends="guipresenter" x="2" y="284"
     width="266" height="46" closable="false" labelid="316"
-    resizeable="false">
-    <moderationpanel y="22" />
+    resizeable="false">	
+	<moderationpanel y="22" />
 </class>  
     
     

@@ -14,9 +14,9 @@
 		</handler>
 	</simplelabelbutton>
     -->
-    
+   
     <handler name="oninit">
-        this.getRssFeeds.doCall();
+        //this.getRssFeeds.doCall();
     </handler>
     
     <netremotecallhib name="getRssFeeds" funcname="xmlcrm.getRssFeeds" 
