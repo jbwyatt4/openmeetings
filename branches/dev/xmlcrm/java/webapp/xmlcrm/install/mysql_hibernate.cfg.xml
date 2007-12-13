@@ -64,6 +64,7 @@
     <mapping resource="org/xmlcrm/app/hibernate/beans/lang/FieldLanguage.hbm.xml"/>
     <mapping resource="org/xmlcrm/app/hibernate/beans/lang/Fieldlanguagesvalues.hbm.xml"/>
     <mapping resource="org/xmlcrm/app/hibernate/beans/lang/Fieldvalues.hbm.xml"/>
+    <mapping resource="org/xmlcrm/app/hibernate/beans/recording/Recording.hbm.xml"/>
     <mapping resource="org/xmlcrm/app/hibernate/beans/rooms/RoomTypes.hbm.xml"/>
     <mapping resource="org/xmlcrm/app/hibernate/beans/rooms/Rooms.hbm.xml"/>
     <mapping resource="org/xmlcrm/app/hibernate/beans/rooms/Rooms_Organisation.hbm.xml"/>

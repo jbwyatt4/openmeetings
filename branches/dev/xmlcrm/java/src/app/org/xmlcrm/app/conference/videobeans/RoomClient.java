@@ -15,6 +15,7 @@ public class RoomClient {
 	String userip;
 	String domain = "";
 	int userport;
+	Long room_id;
 	
 	String user_id = "";
 	String firstname = "";
@@ -272,11 +273,15 @@ public class RoomClient {
 	public String getDomain() {
 		return domain;
 	}
-
 	public void setDomain(String domain) {
 		this.domain = domain;
 	}
-	
-	
+
+	public Long getRoom_id() {
+		return room_id;
+	}
+	public void setRoom_id(Long room_id) {
+		this.room_id = room_id;
+	}
 	
 }
