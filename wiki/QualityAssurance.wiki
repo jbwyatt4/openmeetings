@@ -1,3 +1,5 @@
+#Quality Assurance Check list
+
 == Video/Audio Check List ==
 || ** || ** || *Pass* || *Fail* || *Comments* ||
 || . || Enter conference room and get "Choose Device" popup window|| . || . || . ||
