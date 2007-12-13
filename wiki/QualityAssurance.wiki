@@ -1,4 +1,4 @@
-#Quality Assurance Check list
+#summary Quality Assurance Check list
 
 == Video/Audio Check List ==
 || ** || ** || *Pass* || *Fail* || *Comments* ||
