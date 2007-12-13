@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<library>
+ 
+ <class name="recordingsavewin" extends="labelexplorerbox" labelid="391"
+    docking="true" resizeable="false" closable="false" width="400" 
+    x="300" height="226">
+ 	
+ 	<attribute name="recordingsName" value="" type="string" />
+ 	
+ 	<handler name="oninit">
+ 		this.rName.setText("recording_"+getStringDateFileSave());
+ 	</handler>
+ 	
+    <labeltext labelid="392" width="200" y="22" resize="false" x="2"/>
+        <customedittext name="rName" y="22" x="120" width="270" />	
+	
+    <labeltext labelid="393" width="200" y="52" resize="false" x="2"/>
+        <customscrolledittext name="rComment" y="52" x="120" width="270" height="120" />	
+	        					  
+    <simplelabelbutton labelid="25" width="100" x="180" y="190" 
+        onclick="this.parent.close();" />
+    
+    <simplelabelbutton labelid="22" width="100" x="294" y="190" 
+		onclick="this.parent.stopRecordMeetingStream.doCall();" />
+  	
+  	<netremotecallhib name="stopRecordMeetingStream" remotecontext="$once{ canvas.thishib }"
+		funcname="streamservice.stopRecordMeetingStream"  >
+  		<netparam><method name="getValue">return parent.parent.recordingsName;</method></netparam>
+		<netparam><method name="getValue">return parent.parent.rName.getText();</method></netparam>
+		<netparam><method name="getValue">return parent.parent.rComment.getText();</method></netparam>    
+    	<handler name="ondata" args="value">
+			//The onResult-Handler will be called be the rtmpconnection
+			Debug.write("+++++++++++++++++ stopRecordingShow: ",value);	
+			parent.close();
+		</handler>	
+  	</netremotecallhib>  
+</class>
+
+</library>

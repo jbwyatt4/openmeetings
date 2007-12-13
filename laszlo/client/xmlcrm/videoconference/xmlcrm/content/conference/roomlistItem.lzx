@@ -28,7 +28,8 @@
 			canvas.isConference = !parent.isaudience;
 			if (parent.isaudience) connectedIsAudience = '_'+'audi';
             if (this.parent.ispublic){
-                hib.connectedroom=parent.obj.rooms_id+connectedIsAudience;
+            	hib.currentroomid = parent.obj.rooms_id;
+                hib.connectedroom = parent.obj.rooms_id+connectedIsAudience;
                 hib.conferencedomain="public";
                 //Debug.write("ispublic");
             } else {

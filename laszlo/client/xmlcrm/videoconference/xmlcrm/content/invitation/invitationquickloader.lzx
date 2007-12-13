@@ -124,9 +124,12 @@
         <netparam><method name="getValue">return canvas.lastName;</method></netparam>      
         <netparam><method name="getValue">return canvas.initdomainid;</method></netparam>
         <handler name="ondata" args="value">
+        	
+			//TODO: set currentroomid
             //The onResult-Handler will be called be the rtmpconnection
             Debug.write("setUsername: ",value);
-	        hib.connectedroom=canvas.initroomid;
+            hib.currentroomid = canvas.initroomid;
+	        hib.connectedroom = canvas.initroomid;
             hib.conferencedomain = canvas.initdomainid;
 
             //Debug.write("hib.conferencedomain: ",hib.conferencedomain);

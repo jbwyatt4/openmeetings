@@ -42,56 +42,27 @@
 		this.currentuserObject.push(canvas.language);
 		
 		//Debug.write("this.currentuserObject: ",this.currentuserObject);
-		this.setUserDomain.doCall();
-	</method>
-	
-    
-        <netremotecallhib name="setUserDomain" funcname="setUserDomain" remotecontext="$once{ canvas.thishib }" >   
-            <netparam><method name="getValue">return hib.conferencedomain;</method></netparam>     
-            <handler name="ondata" args="value">
-                //The onResult-Handler will be called be the rtmpconnection
-                //Debug.write("setUserDomain: ",value);
-                parent.setUserroom.doCall();                       
-            </handler>  
-        </netremotecallhib>    
+		this.setRoomValues.doCall();
+	</method>  
 
-	  	<netremotecallhib name="setUserroom" funcname="setUserroom" remotecontext="$once{ canvas.thishib }" >   
-        	<netparam><method name="getValue">return hib.connectedroom;</method></netparam>	  	
-			<handler name="ondata" args="value">
-				//The onResult-Handler will be called be the rtmpconnection
-				//Debug.write("setUserroom: ",value);
-				parent.logicalRoomEnter.doCall();						
-			</handler>	
-	  	</netremotecallhib>
-
-	  	<netremotecallhib name="logicalRoomEnter" funcname="logicalRoomEnter" remotecontext="$once{ canvas.thishib }" >   
-        	<handler name="ondata" args="value">
-				//The onResult-Handler will be called be the rtmpconnection
-				//Debug.write("logicalRoomEnter: ",value);
-				 
- 			 	parent.getClientListScope.doCall();					
-			</handler>	
-	  	</netremotecallhib>	
-	
-        <netremotecallhib name="getClientListScope" funcname="getClientListScope" remotecontext="$once{ canvas.thishib }" >   
-            <handler name="ondata" args="value">
-            	<![CDATA[
-                //The onResult-Handler will be called be the rtmpconnection
-                //Debug.write("getClientListScope #####################: ",value);
-                for (var i in value){
-                	//Debug.write("getClientListScope value: ",value[i]);
-                	if (value[i].username!=null){
-                		this.parent.addItem(value[i].connectedSince,value[i].isMod,value[i].streamid,value[i].username,value[i].userroom,value[i].formatedDate,value[i].userpos,value[i].usercolor,value[i]);
-                	}
-                }
-                ////Debug.write("canvas.currentuser: ",canvas.currentuser);
-                ////Debug.write("canvas.firstName: ",canvas.firstName);
-                ////Debug.write("canvas.lastName: ",canvas.lastName);
-					
-                canvas.thishib.getCurrentModerator.doCall(); 
-                ]]>
-            </handler>   
-        </netremotecallhib>  		  	
+  	<netremotecallhib name="setRoomValues" funcname="setRoomValues" remotecontext="$once{ canvas.thishib }" >   
+    	<netparam><method name="getValue">return hib.connectedroom;</method></netparam>	 
+    	<netparam><method name="getValue">return hib.currentroomid;</method></netparam>
+    	<netparam><method name="getValue">return hib.conferencedomain;</method></netparam>  	
+		<handler name="ondata" args="value">
+			//The onResult-Handler will be called be the rtmpconnection
+			Debug.write("setUserroom: ",value,hib.connectedroom);
+            Debug.write("+++++++++++++++++ getClientListScope : ",value);
+            for (var i in value){
+            	////Debug.write("getClientListScope value: ",value[i]);
+            	if (value[i].username!=null){
+            		this.parent.addItem(value[i].connectedSince,value[i].isMod,value[i].streamid,value[i].username,value[i].userroom,value[i].formatedDate,value[i].userpos,value[i].usercolor,value[i]);
+            	}
+            }
+            canvas.thishib.getCurrentModerator.doCall(); 
+            chartcontent.doInit();				
+		</handler>	
+  	</netremotecallhib>		  	
 	  	
 	<method name="addItem" args="connectedSince,isMod,streamid,username,userroom,formatedDate,position,color,object">
 		<![CDATA[	

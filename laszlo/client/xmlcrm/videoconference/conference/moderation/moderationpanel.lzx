@@ -18,7 +18,7 @@
 		onclick="this.parent.recordMeetingStream.doCall();" />
 
     <simplelabelbutton text="e" width="30" height="18" 
-    	onclick="this.parent.stopRecordMeetingStream.doCall();" /> 
+    	onclick="new recordingsavewin(canvas.main_content._content.inner,{recordingsName:parent.recordingsName});" /> 
 		
   	<netremotecallhib name="recordMeetingStream" funcname="streamservice.recordMeetingStream" 
   					  remotecontext="$once{ canvas.thishib }" >   
@@ -28,15 +28,7 @@
 			parent.recordingsName = value;
 		</handler>	
   	</netremotecallhib>
-  	
-  	<netremotecallhib name="stopRecordMeetingStream" funcname="streamservice.stopRecordMeetingStream" 
-  					  remotecontext="$once{ canvas.thishib }" >
-  		<netparam><method name="getValue">return parent.parent.recordingsName;</method></netparam>	    
-    	<handler name="ondata" args="value">
-			//The onResult-Handler will be called be the rtmpconnection
-			Debug.write("+++++++++++++++++ stopRecordingShow: ",value);				
-		</handler>	
-  	</netremotecallhib>  	
+	
 	
 </class>
 
