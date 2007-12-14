@@ -18,9 +18,9 @@
 	        var xVal = canvas.getMouse('x');
 	        var yVal = canvas.getMouse('y');
 			////Debug.write("mytext: ",this.mytext);
-			if (this.multiline){
+			if (this.multiline && this.text.length!=0){
 				this.holder = new xmlcrmtooltipmulti(canvas,{text:this.text,holder:this});
-			} else {
+			} else if (this.text.length!=0){
 				this.holder = new xmlcrmtooltip(canvas,{text:this.text,holder:this});
 			}
 	        if (xVal<canvas.width/2){

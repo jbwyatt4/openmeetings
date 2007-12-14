@@ -2,5 +2,6 @@
 <library>
 	
     <include href="recordingsavewin.lzx" />
+    <include href="record.lzx" />
 
 </library>

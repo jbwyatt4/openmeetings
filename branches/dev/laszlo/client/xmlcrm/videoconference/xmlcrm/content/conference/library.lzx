@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library>
-    
+	
+	<resource name="go_jump_rsc" src="resources/go-jump.png" />
+	<resource name="messagebox_info_big_rsc" src="resources/messagebox_info.png" />
+	<resource name="reload_rsc" src="resources/reload.png" />
+
     <include href="conference.lzx" />
     <include href="conferencerooms.lzx" />
 	<include href="conferencedetailsarea.lzx" />
 	<include href="roomlistItem.lzx" />
 	<include href="audience.lzx" />
+	<include href="roomlistdetails.lzx" />
     <include href="conferencemenubar.lzx" />
 
 </library>
