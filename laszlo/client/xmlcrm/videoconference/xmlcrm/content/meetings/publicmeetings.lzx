@@ -18,25 +18,28 @@
               <netparam><method name="getValue">return 1;</method></netparam>  
             <handler name="ondata" args="value">	
                 <![CDATA[
+                	Debug.write("getRoomsPublic: ",value);
                     if (value!=null){
                         for(var eg=0;eg<value.length;eg++){
                             //Debug.write(value[eg]);
                             var time = value[eg].starttime.getHours()+':'+value[eg].starttime.getMinutes()+' '+value[eg].starttime.getDate()+'.'+(value[eg].starttime.getMonth()+1)+'.'+value[eg].starttime.getFullYear();
-                            new roomlistItem(parent.inn.inn.inn,{obj:value[eg],ispublic:true,roomid:value[eg].rooms_id,starttime:time,roomname:value[eg].name});
+                            new roomlistItem(parent.inn.inn.inn,{currentusers:value[eg].currentusers,obj:value[eg],ispublic:true,roomid:value[eg].rooms_id,starttime:time,roomname:value[eg].name});
                         }
                     }
                 ]]>	        	          				
             </handler>	
           </netremotecallhib>   
           
-          <view width="480" height="200" name="inn"
+          <view width="480" height="500" name="inn"
               bgcolor="$once{ canvas.basebgcolorizer }" >
-              <view x="1" y="1" width="478" height="198" name="inn" bgcolor="0xFFFFFF" clip="true" >
+              <view x="1" y="1" width="478" height="498" name="inn" bgcolor="0xFFFFFF" clip="true" >
                   <view layout="axis:y;spacing:2" name="inn" />
                   <vscrollbar />
               </view>
           </view>
     </view>
+    
+    <roomlistdetails x="510" y="50" name="_roomlistdetails" />
  
 </class>
 

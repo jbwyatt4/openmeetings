@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<library>
+	
+<class name="userroomtabitem" extends="view" 
+	   width="$once{ parent.width }" bgcolor="0xFFFFFF">
+
+	<attribute name="user_id" value="0" type="number" />
+	<attribute name="username" value="" type="string" />
+	<attribute name="usertime" value="" type="string" />
+	<attribute name="cbtext" value="" type="string" />
+	
+	<handler name="oninit">
+		<![CDATA[
+	        var downloadurl = 'http://'+canvas.rtmphostlocal+':'+canvas.red5httpport
+	        		+'/xmlcrm/DownloadHandler?fileName=CHAT'
+	        		+'&moduleName=chat&parentPath=&room=&domain='
+	        		+'&remoteUserid='+this.user_id
+	        		+'&sid='+canvas.sessionId;
+	        Debug.write("downloadurl "+downloadurl);
+	        this._userpic.setAttribute('src',downloadurl);	
+	        
+	        Debug.write("TIME: "+this.usertime);
+        ]]>
+	</handler>
+	
+	<image name="_userpic" />
+
+	<text text="$once{ parent.username }" x="40"
+		  width="$once{ parent.width - 40 }"
+		  selectable="true" />
+	
+	<text text="$once{ parent.usertime }" x="40" y="20" />
+
+</class>
+
+<class name="roomlistdetails" extends="view"  >
+
+	<attribute name="roomid" value="0" type="number" />
+	<attribute name="roomname" value="" type="string" />
+	<attribute name="currentusers" value="null" />
+	
+	<method name="doinit" args="currentusers,roomid,roomname">
+		<![CDATA[
+			Debug.write("doinit",currentusers,roomid,roomname);
+			this.setAttribute('currentusers',currentusers);
+			this.setAttribute('roomid',roomid);
+			this.setAttribute('roomname',roomname);
+			this._roomname.setAttribute('text',canvas.getLabelName(406)+roomname);
+			this._users.clearList();
+			for (var i = 0;i<this.currentusers.length;i++){
+				var username = this.currentusers[i].firstname + " "
+						+ this.currentusers[i].lastname
+						+ " (" + this.currentusers[i].username + ") ";
+				 new userroomtabitem(this._users._users._cbtext,{user_id:this.currentusers[i].user_id,username:username,usertime:canvas.getLabelName(408)+parseDateToStringTime(this.currentusers[i].roomEnter)});
+			}
+			chartcontentRPC.doinit();
+			this.addClientToChatNotification.doCall();
+		]]>
+	</method>
+	
+	<netremotecallhib name="addClientToChatNotification" remotecontext="$once{ canvas.thishib }" 
+		funcname="chatservice.addClientToChatNotification" >   
+		<netparam><method name="getValue">return hib.connectedroom;</method></netparam>
+		<netparam><method name="getValue">return parent.parent.roomid;</method></netparam>
+		<netparam><method name="getValue">return hib.conferencedomain;</method></netparam>
+		<handler name="ondata" args="value">	
+		    <![CDATA[
+		    	Debug.write("addClientToChatNotification: ",value);
+		    ]]>	        	          				
+		</handler>	
+	</netremotecallhib> 	
+	
+	<netremotecallhib name="getRoomClientsListByRoomId" funcname="conferenceservice.getRoomClientsListByRoomId" 
+		remotecontext="$once{ canvas.thishib }" >   
+		<netparam><method name="getValue">return parent.parent.roomid;</method></netparam>
+		<handler name="ondata" args="value">	
+		    <![CDATA[
+		    	Debug.write("getRoomClientsListByRoomId: ",value);
+		    	parent.currentusers = value;
+		    	parent.doinit();
+		    ]]>	        	          				
+		</handler>	
+	</netremotecallhib>   	
+	
+	<labeltext labelid="404" fontstyle="italic" />
+	
+	<labeltext name="_roomname" labelid="406" y="20" />
+	<labeltext labelid="407" y="40" />
+	<view name="_users" bgcolor="$once{ canvas.basebgcolorizer }" 
+		  width="300" height="100" y="60" >
+		<method name="clearList">
+			for (var eg in this._users._cbtext.subviews) 
+				this._users._cbtext.subviews[eg].destroy();
+		</method>
+		<view name="_users" width="298" height="98" x="1" y="1" clip="true" bgcolor="0xFFFFFF" >
+			<view name="_cbtext" width="286" layout="axis:y;spacing:2" />
+			<vscrollbar />
+		</view>
+	</view>
+	<labeltext y="170" labelid="405" />
+	<view name="_chat" y="190" height="320" >
+		<view name="_chartoutputborder" height="${ parent.height-30 }"
+	        bgcolor="$once{ canvas.basebgcolorizer }" width="300">
+			<chatoutputRoomsList name="_chatoutput" id="chartcontentRPC" x="1" y="1"  />
+		</view>
+		<chattabbottomRoomList name="_chattabbottom" x="0" width="254" 
+					   y="${ parent.height-28 }" />		
+	</view>
+
+</class>
+
+</library>

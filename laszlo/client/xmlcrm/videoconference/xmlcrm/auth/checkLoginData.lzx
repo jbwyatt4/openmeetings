@@ -235,6 +235,7 @@
 					canvas.setAttribute('official_code','');
 					canvas.setAttribute('picture_uri','');
 					canvas.setAttribute('language','');
+					canvas.setAttribute('currentuser',value.login);
 					
 					if (parent.languages.getText()=='arabic') {
 						canvas.isrtl = true;

@@ -103,6 +103,7 @@
         this.selected = true;
         this.parent.parent.sendOpenMenu(this._menuRef,this);
         this.bgc.setAttribute('visibility','visible');
+        Debug.write("onclick",this);
         if (this.isleaf) loadContent(this,null,null);
         else this._menuRef.subviews[0].onclick.sendEvent();
     </handler>

@@ -2,9 +2,9 @@
 <library>
 
 
-<class name="chattabbottom" extends="view" >
+<class name="chattabbottomRoomList" extends="view" >
 
-		<view x="2" y="0" height="20" width="168" name="message" bgcolor="$once{ canvas.basebgcolorizer }">
+		<view x="0" y="0" height="20" width="168" name="message" bgcolor="$once{ canvas.basebgcolorizer }">
 			<method name="getText">
 				return this._ctext.getText();
 			</method>
@@ -37,8 +37,8 @@
                 var message = this.parent.message.getText();
                 if (canvas.isrtl) message = canvas.reverseWords(message)
 	  			parent.objMessage[4] = message;
-	  			parent.objMessage[5] = canvas.currentusercolor;
-	  			parent.objMessage[6] = canvas.currentuserpos;
+	  			parent.objMessage[5] = 0xCCCCCC;
+	  			parent.objMessage[6] = 0;
                 parent.objMessage[7] = canvas.isrtl;
                 parent.objMessage[8] = hib.userobject.user_id;
 	  			if (this.parent.message.getText().length!=0){

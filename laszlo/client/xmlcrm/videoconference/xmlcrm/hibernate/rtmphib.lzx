@@ -451,7 +451,8 @@
                 } else if (value.message[0]=='applyModAnswer'){
                     canvas.currentModApply.setUserAnswer(value);
                 } else if (value.message[0]=='chat'){
-                    chartcontent.addChatHistory(value.message,value.client);
+                    if (chartcontent) chartcontent.addChatHistory(value.message,value.client);
+                    if (chartcontentRPC) chartcontentRPC.addChatHistory(value.message,value.client);
                 } else if (value.message[0]=='whiteboard'){
 					if (value.message[1]=='wmlloadcomplete'){
 						_drawarea.sendCompleteWmlLoadedRClient(value.client);

@@ -61,6 +61,14 @@ function getLabelNameXMLCRM(labelid){
 	}
 	
 }
+function parseDateAsTimeString(){
+	var dateObj = new Date();
+	var h = dateObj.getHours();
+	if (h<10) h = "0"+h;	
+	var m = dateObj.getMinutes();
+	if (m<10) m = "0"+m;		
+	return h+':'+m;
+}
 
 function parseDateToString(dateObj){
 	if (dateObj==null) return "";
@@ -71,6 +79,21 @@ function parseDateToString(dateObj){
 	var y = dateObj.getFullYear();
 	if (y<10) y = "0"+y;
 	return d+'.'+m+'.'+y;
+}
+
+function parseDateToStringTime(dateObj){
+	if (dateObj==null) return "";
+	var d = dateObj.getDate();
+	if (d<10) d = "0"+d;
+	var mo = dateObj.getMonth()+1;
+	if (mo<10) mo = "0"+mo;
+	var y = dateObj.getFullYear();
+	if (y<10) y = "0"+y;
+	var h = dateObj.getHours();
+	if (h<10) h = "0"+h;	
+	var m = dateObj.getMinutes();
+	if (m<10) m = "0"+m;		
+	return d+'.'+mo+'.'+y+' '+h+':'+m;
 }
 function parseStringToDate(t){
 	if (t.length==10){
