@@ -1,7 +1,10 @@
 package org.xmlcrm.app.remote;
 
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.LinkedList;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -10,6 +13,8 @@ import org.xmlcrm.app.data.beans.basic.SearchResult;
 import org.xmlcrm.app.data.user.Usermanagement;
 import org.xmlcrm.app.data.conference.Roommanagement;
 import org.xmlcrm.app.hibernate.beans.rooms.Rooms;
+import org.xmlcrm.app.hibernate.beans.rooms.Rooms_Organisation;
+import org.xmlcrm.app.conference.videobeans.RoomClient;
 
 /**
  * 
@@ -26,10 +31,15 @@ public class ConferenceService {
 	 * @param organisation_id
 	 * @return
 	 */
-	public List getRoomsByOrganisationAndType(String SID, long organisation_id, long roomtypes_id){
+	public List<Rooms_Organisation> getRoomsByOrganisationAndType(String SID, long organisation_id, long roomtypes_id){
         Long users_id = Sessionmanagement.getInstance().checkSession(SID);
         long User_level = Usermanagement.getInstance().getUserLevelByID(users_id);
-        return Roommanagement.getInstance().getRoomsOrganisationByOrganisationIdAndRoomType(User_level, organisation_id, roomtypes_id);
+        List<Rooms_Organisation> roomOrgsList = Roommanagement.getInstance().getRoomsOrganisationByOrganisationIdAndRoomType(User_level, organisation_id, roomtypes_id);
+        for (Iterator<Rooms_Organisation> iter = roomOrgsList.iterator();iter.hasNext();) {
+        	Rooms_Organisation orgRoom = iter.next();
+        	orgRoom.getRoom().setCurrentusers(this.getRoomClientsListByRoomId(orgRoom.getRoom().getRooms_id()));
+        }
+        return roomOrgsList;        
 	}
 	
 	/**
@@ -51,11 +61,16 @@ public class ConferenceService {
 	 * @param organisation_id
 	 * @return
 	 */
-	public List getRoomsPublic(String SID, long roomtypes_id){
+	public List getRoomsPublic(String SID, Long roomtypes_id){
         Long users_id = Sessionmanagement.getInstance().checkSession(SID);
         long User_level = Usermanagement.getInstance().getUserLevelByID(users_id);
         log.error("getRoomsPublic user_level: "+User_level);
-        return Roommanagement.getInstance().getPublicRooms(User_level, roomtypes_id);
+        List<Rooms> roomList = Roommanagement.getInstance().getPublicRooms(User_level, roomtypes_id);
+        for (Iterator<Rooms> iter = roomList.iterator();iter.hasNext();) {
+        	Rooms rooms = iter.next();
+        	rooms.setCurrentusers(this.getRoomClientsListByRoomId(rooms.getRooms_id()));
+        }
+        return roomList;
 	}
 	
 	/**
@@ -179,6 +194,28 @@ public class ConferenceService {
         Long users_id = Sessionmanagement.getInstance().checkSession(SID);
         long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
         return Roommanagement.getInstance().deleteRoomById(user_level, rooms_id);
+	}
+	
+	/**
+	 * return all participants of a room
+	 * @param room_id
+	 * @return
+	 */
+	public List<RoomClient> getRoomClientsListByRoomId(Long room_id) {
+		try {
+			//log.error("getRoomClientsListByRoomId: "+room_id);
+			LinkedList<RoomClient> clients = new LinkedList<RoomClient>();
+			HashMap<String,RoomClient> clientList = Application.getClientList();
+			for (Iterator<String> iter = clientList.keySet().iterator();iter.hasNext();) {
+				RoomClient rcl = clientList.get(iter.next());
+				//log.error("COMPARE: "+rcl.getRoom_id()+" || "+room_id);
+				if (rcl.getRoom_id()!=null && rcl.getRoom_id().equals(room_id)) clients.add(rcl);
+			}
+			return clients;
+		} catch (Exception err) {
+			log.error("[getRoomClientsListByRoomId]",err);
+		}
+		return null;
 	}
 	
 }

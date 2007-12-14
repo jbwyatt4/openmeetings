@@ -79,18 +79,16 @@ public class Addressmanagement {
 	 */
 	public Adresses getAdressbyId(long adresses_id) {
 		try {
+			String hql = "select c from Adresses as c where c.adresses_id = :adresses_id";
 			Object idf = HibernateUtil.createSession();
 			Session session = HibernateUtil.getSession();
 			Transaction tx = session.beginTransaction();
-			Query query = session
-					.createQuery("select c from Adresses as c where c.adresses_id = :adresses_id");
+			Query query = session.createQuery(hql);
 			query.setLong("adresses_id", adresses_id);
-			List ll = query.list();
+			Adresses addr = (Adresses) query.uniqueResult();
 			tx.commit();
 			HibernateUtil.closeSession(idf);
-			if (ll.size() > 0) {
-				return (Adresses) ll.get(0);
-			}
+			return addr;
 		} catch (HibernateException ex) {
 			log.error(ex);
 		} catch (Exception ex2) {

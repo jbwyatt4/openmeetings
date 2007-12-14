@@ -64,7 +64,7 @@ public class BandWidthHelper implements IScheduledJob {
 			this.calcAverageUsersPing(currentConnection);
 			if (i==maxI){
 				//Remove that job and calc average
-				refInstance.detectedBandwidth((overAllPingTime/maxI),schedulerName,currentConnection);
+				//efInstance.detectedBandwidth((overAllPingTime/maxI),schedulerName,currentConnection);
 			}
 			i++;
 		} catch (Exception err){

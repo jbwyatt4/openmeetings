@@ -17,6 +17,8 @@ public class RoomClient {
 	int userport;
 	Long room_id;
 	
+	Date roomEnter = null;
+	
 	String user_id = "";
 	String firstname = "";
 	String lastname = "";
@@ -26,6 +28,9 @@ public class RoomClient {
 	String picture_uri;
 	String language = "";
 	
+	Boolean isChatNotification = false;
+	String chatUserroom = "";
+	String chatDomain = "";
 	
 	String swfurl;
 	
@@ -282,6 +287,34 @@ public class RoomClient {
 	}
 	public void setRoom_id(Long room_id) {
 		this.room_id = room_id;
+	}
+
+	public Date getRoomEnter() {
+		return roomEnter;
+	}
+	public void setRoomEnter(Date roomEnter) {
+		this.roomEnter = roomEnter;
+	}
+
+	public Boolean getIsChatNotification() {
+		return isChatNotification;
+	}
+	public void setIsChatNotification(Boolean isChatNotification) {
+		this.isChatNotification = isChatNotification;
+	}
+
+	public String getChatUserroom() {
+		return chatUserroom;
+	}
+	public void setChatUserroom(String chatUserroom) {
+		this.chatUserroom = chatUserroom;
+	}
+
+	public String getChatDomain() {
+		return chatDomain;
+	}
+	public void setChatDomain(String chatDomain) {
+		this.chatDomain = chatDomain;
 	}
 	
 }
