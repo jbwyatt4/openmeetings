@@ -1168,18 +1168,66 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>import</value>
   </string>
   <string id="388" name="languageseditor">
-    <value>Export to XML - These files can be used to: 
-		- Contribute to the project 
-		- Import into another System 
-		- Backup 
-		- Customization 
-		- Put it into the language-directory for your next installation</value>
+    <value>Export to XML - These files can be used to: - Contribute to the project - Import into another System - Backup - Customization - Put it into the language-directory for your next installation</value>
   </string>
   <string id="389" name="languageseditor">
-    <value>Choose a language file to import. Choose the right Langauge from the Combobox! 
-		No matter what the name of the file is, it will be imported into this language!</value>
+    <value>Choose a language file to import. Choose the right Langauge from the Combobox! No matter what the name of the file is, it will be imported into this language!</value>
   </string>
   <string id="390" name="importwindow">
     <value>import - choose file</value>
+  </string>
+  <string id="391" name="recordingsavewin">
+    <value>Save as</value>
+  </string>
+  <string id="392" name="recordingsavewin">
+    <value>Name:</value>
+  </string>
+  <string id="393" name="recordingsavewin">
+    <value>Comment:</value>
+  </string>
+  <string id="394" name="recordingsavewin">
+    <value>save</value>
+  </string>
+  <string id="395" name="record">
+    <value>Recordings</value>
+  </string>
+  <string id="396" name="recorder">
+    <value>Recordings Viewer</value>
+  </string>
+  <string id="397" name="record">
+    <value>Recordings of public and private Rooms</value>
+  </string>
+  <string id="398" name="roomslist">
+    <value>Users :</value>
+  </string>
+  <string id="399" name="roomslist">
+    <value>Joined:</value>
+  </string>
+  <string id="400" name="roomslist">
+    <value></value>
+  </string>
+  <string id="401" name="roomslist">
+    <value>Users in this Room:</value>
+  </string>
+  <string id="402" name="roomslist">
+    <value>refresh</value>
+  </string>
+  <string id="403" name="roomslist">
+    <value>This Room is Full. Try again in a few minutes.</value>
+  </string>
+  <string id="404" name="roomsList">
+    <value>click on a room to get details</value>
+  </string>
+  <string id="405" name="roomslist">
+    <value>Chat with the users in this Room:</value>
+  </string>
+  <string id="406" name="roomslist">
+    <value>Room:</value>
+  </string>
+  <string id="407" name="roomslist">
+    <value>Users in this room:</value>
+  </string>
+  <string id="408" name="roomslist">
+    <value>since:</value>
   </string>
 </language>

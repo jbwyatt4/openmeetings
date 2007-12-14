@@ -110,33 +110,16 @@ public class Application extends ApplicationAdapter implements
 	
 			//Store the Connection into a bean and add it to the HashMap
 			RoomClient rcm = new RoomClient();
-			rcm.setConnectedSince(new Date());//in miliseconds since 1970
-			//rcm.setFormatedDate(Calender.getInstance().getTimeMili(rcm.getConnectedSince().getTime()));
+			rcm.setConnectedSince(new Date());
 			rcm.setStreamid(client.getId());
-			rcm.setUserroom(room.getName());
+			rcm.setUserroom("");
 			
 			rcm.setUserport(conn.getRemotePort());
 			rcm.setUserip(conn.getRemoteAddress());
-			rcm.setSwfurl(conn.getConnectParams().get("swfUrl").toString());
-//			IBandwidthConfigure bandwidthConfig = conn.getClient().getBandwidthConfigure();
-			
+			rcm.setSwfurl(conn.getConnectParams().get("swfUrl").toString());			
 			log.error("##### : " + rcm.getStreamid()); // just a unique number
 			
-			//conn.ping();
-			//int getLastPing = conn.getLastPingTime();
-			
-			//log.debug("getLastPing: "+getLastPing);
-			
-			//Start Bandwidth detection
-//			BandWidthHelper bwHelp = new BandWidthHelper();
-//			String jobName = addScheduledJob(750,bwHelp);
-//			bwHelp.setSchedulerName(jobName);
-//			bwHelp.setConnection(conn);
-//			bwHelp.setRefInstance(this);
-			
-//			log.debug("bandwidthConfig: "+bandwidthConfig);
-			
-//			Set the moderation for the CLient on startup
+			//Set the moderation for the CLient on startup
 			log.error("Current clients in this room: "+conn.getScope().getClients().size());		
 			
 			log.error("This client is not the moderator"+rcm.getStreamid());
@@ -269,7 +252,7 @@ public class Application extends ApplicationAdapter implements
 			String roomname = currentClient.getUserroom();
 			String orgdomain = currentClient.getDomain();	
 			currentClient.setUserroom("");
-			
+			currentClient.setRoom_id(null);
 			log.error("##### logicalRoomLeave :. " + currentClient.getStreamid()); // just a unique number
 
 
@@ -434,25 +417,14 @@ public class Application extends ApplicationAdapter implements
 	public String setModerator(String id) {
 		String returnVal = "setModerator";
 		try {
-			
-			// IConnection current = Red5.getConnectionLocal();
-			// String id = current.getClient().getId();
 			log.error("*..*setModerator id: " + id);
 			
 			IConnection current = Red5.getConnectionLocal();
 			String streamid = current.getClient().getId();
 			
-			log.debug("streamid: "+streamid);
-			
-			
 			RoomClient rlc = ClientList.get(id);
-			
-			log.debug("RooymClient rlc: "+rlc.getUserroom());
 			String roomname = rlc.getUserroom();
 			String orgdomain = rlc.getDomain();
-			
-			log.debug("roomname: "+roomname);
-			log.debug("orgdomain: "+orgdomain);
 			
 			rlc.setIsMod(new Boolean(true));
 			//Put the mod-flag to true for this client
@@ -464,10 +436,6 @@ public class Application extends ApplicationAdapter implements
 			while (iter.hasNext()) {
 				String key = (String) iter.next();
 				RoomClient rcl = ClientList.get(key);
-				
-				log.debug("#+#+#+#+##+## unsetModerator ClientList key: "+rcl.getStreamid());
-				log.debug("#+#+#+#+##+## unsetModerator ClientList key: "+rcl.getUserroom());
-				
 				//Check if the Client is in the same room and same domain 
 				//and is not the same like we have just declared to be moderating this room
 				if(roomname.equals(rcl.getUserroom()) && orgdomain.equals(rcl.getDomain()) && !id.equals(rcl.getStreamid())){
@@ -508,6 +476,7 @@ public class Application extends ApplicationAdapter implements
 			currentClient.setDomain(orgdomain);
 			currentClient.setRoom_id(room_id);
 			currentClient.setUserroom(userroom);
+			currentClient.setRoomEnter(new Date());
 			ClientList.put(streamid, currentClient);
 			
 			log.error("##### setRoomValues : " + currentClient.getUsername()+" "+currentClient.getStreamid()); // just a unique number
@@ -650,19 +619,6 @@ public class Application extends ApplicationAdapter implements
 		}
 		return currentClient;
 	}	
-	
-	public String testMethod() {
-		try {
-			IConnection current = Red5.getConnectionLocal();
-			
-			RoomClient currentClient = ClientList.get(current.getClient().getId());
-			log.error("testMethod: "+currentClient.getUsername());
-			
-		} catch (Exception err) {
-			log.error("[testMethod]",err);
-		}
-		return "ulllli";	
-	}
 	
 	public int setAudienceModus(String colorObj, int userPos){
 		try {
@@ -1125,41 +1081,6 @@ public class Application extends ApplicationAdapter implements
 	 */
 	public void resultReceived(IPendingServiceCall call) {
 		log.error("Received result " + call.getResult() + " for "+ call.getServiceMethodName());
-	}
-	
-	public int getYourPingTime(){
-		IConnection conn = Red5.getConnectionLocal();
-		conn.ping();
-		int lastPingTime = conn.getLastPingTime();
-		return lastPingTime;
-	}
-	
-	public void detectedBandwidth(int averagePingTime, String schedulerName, IConnection conn){
-		try {
-			log.debug("overAllPingTime: "+averagePingTime);
-			removeScheduledJob(schedulerName);
-			
-			log.debug("averagePingTime "+averagePingTime);
-			
-			measureBandwidth(conn);
-			
-			CustomBandwidth ctx = bwFactory.getBandwidthForClient(averagePingTime);
-			
-			log.debug("----> "+ctx.getGroupName());
-			
-			
-			((IServiceCapableConnection) conn).invoke("detectedBandWidth", new Object[] { ctx },this);
-			
-			//conn.getClient().setBandwidthConfigure(ctx);
-			
-			IBandwidthConfigure bandwidthConfig = conn.getClient().getBandwidthConfigure();
-			
-			log.debug("bandwidthConfig: "+bandwidthConfig);			
-		
-		} catch (Exception err) {
-			log.error("[detectedBandwidth]"+err);
-		}
-		
 	}
 
 	/* (non-Javadoc)

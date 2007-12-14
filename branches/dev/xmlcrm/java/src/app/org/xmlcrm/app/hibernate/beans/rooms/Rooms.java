@@ -1,6 +1,9 @@
 package org.xmlcrm.app.hibernate.beans.rooms;
 
 import java.util.Date;
+import java.util.List;
+
+import org.xmlcrm.app.conference.videobeans.RoomClient;
 
 /**
  * 
@@ -18,6 +21,8 @@ public class Rooms {
 	private Date updatetime;
 	private String deleted;
 	private Boolean ispublic;
+	
+	private List<RoomClient> currentusers;
     
     /**
      * @hibernate.property
@@ -120,5 +125,11 @@ public class Rooms {
 		this.ispublic = ispublic;
 	}
 	
+	public List<RoomClient> getCurrentusers() {
+		return currentusers;
+	}
+	public void setCurrentusers(List<RoomClient> currentusers) {
+		this.currentusers = currentusers;
+	}
 	
 }
