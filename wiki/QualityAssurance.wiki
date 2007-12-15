@@ -30,3 +30,12 @@
 
 ==  Installation and Default Value's ==
 || ** || ** || *Pass* || *Fail* || *Comments* ||
+
+==  Dashboard ==
+|| ** || ** || *Pass* || *Fail* || *Comments* ||
+
+==  Calendar ==
+|| ** || ** || *Pass* || *Fail* || *Comments* ||
+
+==  Contacts ==
+|| ** || ** || *Pass* || *Fail* || *Comments* ||
