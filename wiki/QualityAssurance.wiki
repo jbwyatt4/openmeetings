@@ -25,8 +25,13 @@
 || . || "Dektop Publisher" popup has the default settings and runs when "start sharing" is selected|| . || . || . ||
 || . || "Dektop Publisher" stops sharing when the "stop sharing" button has been pressed|| . || . || . ||
 
-==  User Administration ==
+
+=  Administration =
+== Users ==
 || ** || ** || *Pass* || *Fail* || *Comments* ||
+|| . || List loads correctly when selecting the subheadings (Users, Organsation, etc..)|| . || . || . ||
+|| . || Tool bar has the following buttons: save, new record, refresh record, and delete record|| . || . || . ||
+
 
 ==  Language Editor and Backup Tools ==
 || ** || ** || *Pass* || *Fail* || *Comments* ||
