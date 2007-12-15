@@ -21,6 +21,9 @@
 
 ==  Screen Sharing ==
 || ** || ** || *Pass* || *Fail* || *Comments* ||
+|| . || Clicking on the "Share your Screen" brings up the "screeviewer client application" popup|| . || . || . ||
+|| . || "Dektop Publisher" popup has the default settings and runs when "start sharing" is selected|| . || . || . ||
+|| . || "Dektop Publisher" stops sharing when the "stop sharing" button has been pressed|| . || . || . ||
 
 ==  User Administration ==
 || ** || ** || *Pass* || *Fail* || *Comments* ||
