@@ -51,8 +51,12 @@
 
 == Language-Editor ==
 || ** || ** || *Pass* || *Fail* || *Comments* ||
-|| . || "Add Language" and  || . || . || . ||
+|| . || "Add Language" and "Delete Language" tool buttons appear properly || . || . || . ||
 || . || Tool bar has the following buttons: save, new record, refresh record, and delete record|| . || . || . ||
+|| . || Pull down list show all installed languages || . || . || . ||
+|| . || Export and Import buttons appear properly on page || . || . || . ||
+|| . || Label-ID, Label-Name, and Value appear correctly  || . || . || . ||
+|| . || Values appear correctly after selecting from the left hand list || . || . || . ||
 
 ==  Language Editor and Backup Tools ==
 || ** || ** || *Pass* || *Fail* || *Comments* ||
