@@ -1,25 +1,25 @@
 #summary Quality Assurance Check list
 
-== Video/Audio Check List ==
+= Video/Audio Check List =
 || ** || ** || *Pass* || *Fail* || *Comments* ||
 || . || Enter conference room and get "Choose Device" popup window|| . || . || . ||
 || . || Mute icon working properly when there are 2 or more participants|| . || . || . ||
 
 
-==  Files / Conversion ==
+=  Files / Conversion =
 || ** || ** || *Pass* || *Fail* || *Comments* ||
 || . || File list appears correctly when the "Files" tab is selected|| . || . || . ||
 || . || "choose a file" pop up appears after clicking on the "File Upload" || . || . || . ||
 || . || clicking on the browse makes the pop up appear to select the file for uploading|| . || . || . ||
 || . || after selecting file and uploading, File appears correctly in "Files" list|| . || . || . ||
 
-==  White board / Documents ==
+=  White board / Documents =
 || ** || ** || *Pass* || *Fail* || *Comments* ||
 || . || Clicking on the file updates the white board area|| . || . || . ||
 || . || Question: should the pop up asking to clear the white board area always appear when selecting a new image?|| . || . || . ||
 || . || Clicking on the file updates the whiteboard area|| . || . || . ||
 
-==  Screen Sharing ==
+=  Screen Sharing =
 || ** || ** || *Pass* || *Fail* || *Comments* ||
 || . || Clicking on the "Share your Screen" brings up the "screeviewer client application" popup|| . || . || . ||
 || . || "Dektop Publisher" popup has the default settings and runs when "start sharing" is selected|| . || . || . ||
@@ -29,9 +29,20 @@
 =  Administration =
 == Users ==
 || ** || ** || *Pass* || *Fail* || *Comments* ||
-|| . || List loads correctly when selecting the subheadings (Users, Organsation, etc..)|| . || . || . ||
+|| . || User list appears correctly || . || . || . ||
 || . || Tool bar has the following buttons: save, new record, refresh record, and delete record|| . || . || . ||
 
+== Organsiations ==
+|| ** || ** || *Pass* || *Fail* || *Comments* ||
+|| . || Organsation list appears correctly || . || . || . ||
+|| . || Tool bar has the following buttons: save, new record, refresh record, and delete record|| . || . || . ||
+
+
+
+== Organsiations ==
+|| ** || ** || *Pass* || *Fail* || *Comments* ||
+|| . || Organsation list appears correctly || . || . || . ||
+|| . || Tool bar has the following buttons: save, new record, refresh record, and delete record|| . || . || . ||
 
 ==  Language Editor and Backup Tools ==
 || ** || ** || *Pass* || *Fail* || *Comments* ||
