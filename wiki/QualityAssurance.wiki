@@ -39,9 +39,19 @@
 
 
 
-== Organsiations ==
+== Conference Rooms ==
 || ** || ** || *Pass* || *Fail* || *Comments* ||
-|| . || Organsation list appears correctly || . || . || . ||
+|| . || Conference Rooms list appears correctly || . || . || . ||
+|| . || Tool bar has the following buttons: save, new record, refresh record, and delete record|| . || . || . ||
+
+== Configuration ==
+|| ** || ** || *Pass* || *Fail* || *Comments* ||
+|| . || ID and Key list appears correctly || . || . || . ||
+|| . || Tool bar has the following buttons: save, new record, refresh record, and delete record|| . || . || . ||
+
+== Language-Editor ==
+|| ** || ** || *Pass* || *Fail* || *Comments* ||
+|| . || "Add Language" and  || . || . || . ||
 || . || Tool bar has the following buttons: save, new record, refresh record, and delete record|| . || . || . ||
 
 ==  Language Editor and Backup Tools ==
