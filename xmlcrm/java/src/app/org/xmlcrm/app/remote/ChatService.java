@@ -158,7 +158,7 @@ public class ChatService implements IPendingServiceCallback {
 	 * @param orgdomain
 	 * @return
 	 */
-	public Long removeClientFromChatNotification(String userroom, Long room_id, String orgdomain){
+	public Long removeClientFromChatNotification(){
 		try {
 			IConnection current = Red5.getConnectionLocal();
 			RoomClient currentClient = Application.getClientList().get(current.getClient().getId());					
