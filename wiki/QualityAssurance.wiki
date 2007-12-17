@@ -58,8 +58,10 @@
 || . || Label-ID, Label-Name, and Value appear correctly  || . || . || . ||
 || . || Values appear correctly after selecting from the left hand list || . || . || . ||
 
-==  Language Editor and Backup Tools ==
+==  Backup ==
 || ** || ** || *Pass* || *Fail* || *Comments* ||
+|| . || Pull down list shows all valid organsations || . || . || . ||
+
 
 ==  Installation and Default Value's ==
 || ** || ** || *Pass* || *Fail* || *Comments* ||
