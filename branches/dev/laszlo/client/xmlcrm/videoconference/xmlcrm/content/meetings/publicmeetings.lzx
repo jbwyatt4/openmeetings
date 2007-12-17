@@ -2,7 +2,21 @@
 <library>
 
 <class name="publicmeetings" extends="basecontentview">	
-	
+
+	<handler name="ontabcontentleave">
+		canvas.thishib.removeClientFromChatNotification.doCall();
+	</handler>
+	    
+	<netremotecallhib name="removeClientFromChatNotification" 
+		funcname="chatservice.removeClientFromChatNotification" 
+		remotecontext="$once{ canvas.thishib }" >      
+    	<handler name="ondata" args="value">
+    		Debug.write("removeClientFromChatNotification: ",value);
+    		//this.parent.destroy();
+            this.parent.destroy();
+    	</handler>
+    </netremotecallhib>
+    
 	<labeltext fontstyle="bold" y="10" labelid="128" />
     
     <view y="60" x="20">

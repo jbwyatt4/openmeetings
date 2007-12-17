@@ -2,7 +2,11 @@
 <library>
 
 <class name="publicevents" extends="basecontentview">	
-	
+
+	<handler name="ontabcontentleave">
+		canvas.thishib.removeClientFromChatNotification.doCall();
+	</handler>
+    
 	<labeltext fontstyle="bold" y="10" labelid="128" />
 		
 	<labeltext y="40" labelid="129" />

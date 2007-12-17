@@ -546,7 +546,14 @@
                 ]]>
             </handler>   
         </netremotecallhib>       
-         
+        
+	<netremotecallhib name="removeClientFromChatNotification"
+		funcname="chatservice.removeClientFromChatNotification" >      
+    	<handler name="ondata" args="value">
+    		Debug.write("removeClientFromChatNotification: ",value);
+    	</handler>
+    </netremotecallhib>
+    
 </devrtmpconnection>
 
 </library>
