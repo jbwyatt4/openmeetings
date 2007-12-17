@@ -6,8 +6,6 @@
 	<resource name="reload_rsc" src="resources/reload.png" />
 
     <include href="conference.lzx" />
-    <include href="conferencerooms.lzx" />
-	<include href="conferencedetailsarea.lzx" />
 	<include href="roomlistItem.lzx" />
 	<include href="audience.lzx" />
 	<include href="roomlistdetails.lzx" />

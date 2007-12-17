@@ -2,7 +2,11 @@
 <library>
 
 <class name="privatemeetings" extends="basecontentview">	
-
+		
+	<handler name="ontabcontentleave">
+		canvas.thishib.removeClientFromChatNotification.doCall();
+	</handler>
+    
 	<labeltext fontstyle="bold" y="10" labelid="128" />
 
 	<view y="60" x="20">
