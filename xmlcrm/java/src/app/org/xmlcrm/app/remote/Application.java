@@ -253,6 +253,7 @@ public class Application extends ApplicationAdapter implements
 			String orgdomain = currentClient.getDomain();	
 			currentClient.setUserroom("");
 			currentClient.setRoom_id(null);
+			currentClient.setIsRecording(false);
 			log.error("##### logicalRoomLeave :. " + currentClient.getStreamid()); // just a unique number
 
 
@@ -324,10 +325,36 @@ public class Application extends ApplicationAdapter implements
 	 */
 	public void streamPublishStart(IBroadcastStream stream) {
 
+		IConnection current = Red5.getConnectionLocal();
+		String streamid = current.getClient().getId();
+		RoomClient currentClient = ClientList.get(streamid);
+		String roomname = currentClient.getUserroom();
+		String orgdomain = currentClient.getDomain();			
 		// Notify all the clients that the stream had been started
 		log.error("start streamPublishStart broadcast start: "+ stream.getPublishedName());
 		
-		sendClientBroadcastNotifications(stream,"newStream",ClientList.get(Red5.getConnectionLocal().getClient().getId()));
+		Iterator<IConnection> it = current.getScope().getConnections();
+		while (it.hasNext()) {
+			IConnection conn = it.next();
+			if (conn.equals(current)){
+				continue;
+			} else {
+				if (conn instanceof IServiceCapableConnection) {
+					RoomClient rcl = ClientList.get(conn.getClient().getId());
+					log.error("is this users still alive? :"+rcl);
+					//Check if the Client is in the same room and same domain 
+					if(roomname.equals(rcl.getUserroom()) && orgdomain.equals(rcl.getDomain())){
+						IServiceCapableConnection iStream = (IServiceCapableConnection) conn;
+//							log.info("IServiceCapableConnection ID " + iStream.getClient().getId());
+						iStream.invoke("newStream",new Object[] { currentClient }, this);
+						log.debug("sending notification to " + conn+" ID: ");
+						if (rcl.getIsRecording()){
+							StreamService.addRecordingByStreamId(current, streamid, currentClient, rcl.getRoomRecordingName());
+						}
+					}
+				}
+			}
+		}		
 	}
 
 	
@@ -1111,7 +1138,6 @@ public class Application extends ApplicationAdapter implements
 	public static HashMap<String, RoomClient> getClientList() {
 		return ClientList;
 	}
-	
 	
 	public void disconnectUser(RoomClient rcl){
 		try {

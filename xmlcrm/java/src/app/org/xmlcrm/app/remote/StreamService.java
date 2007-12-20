@@ -48,13 +48,15 @@ public class StreamService {
 			IConnection current = Red5.getConnectionLocal();
 			RoomClient currentClient = Application.getClientList().get(current.getClient().getId());
 			String roomname = currentClient.getUserroom();
-			String orgdomain = currentClient.getDomain();	
-			
+			String orgdomain = currentClient.getDomain();
 			String recordingName = this.generateFileName(currentClient.getStreamid());
+			currentClient.setIsRecording(true);
+			currentClient.setRoomRecordingName(recordingName);
+			Application.getClientList().put(current.getClient().getId(), currentClient);
 			
 			LinkedHashMap<String,Object> roomRecording = new LinkedHashMap<String,Object>();
 			
-			List<Object> roomStreams = new LinkedList<Object>();
+			List<LinkedHashMap<String,Object>> roomStreams = new LinkedList<LinkedHashMap<String,Object>>();
 			
 			//get all stream and start recording them
 			Iterator<IConnection> it = current.getScope().getConnections();
@@ -75,7 +77,8 @@ public class StreamService {
 						
 						roomStream.put("streamName", streamName);
 						roomStream.put("remoteAdress", remoteAdress);
-						roomStream.put("starttime",new java.util.Date());
+						roomStream.put("startdate",new java.util.Date());
+						roomStream.put("starttime",0);
 						roomStream.put("rcl", rcl);
 						
 						roomStreams.add(roomStream);
@@ -105,6 +108,9 @@ public class StreamService {
 			Long rooms_id = currentClient.getRoom_id();
 			String roomname = currentClient.getUserroom();
 			String orgdomain = currentClient.getDomain();	
+			currentClient.setIsRecording(false);
+			currentClient.setRoomRecordingName("");
+			Application.getClientList().put(current.getClient().getId(), currentClient);
 			
 			//get all stream and start recording them
 			Iterator<IConnection> it = current.getScope().getConnections();
@@ -146,7 +152,7 @@ public class StreamService {
 	 *
 	 * @param conn
 	 */
-	private void recordShow(IConnection conn, String streamid, String streamName) throws Exception {
+	private static void recordShow(IConnection conn, String streamid, String streamName) throws Exception {
 		log.error("Recording show for: " + conn.getScope().getContextPath());
 		log.error("Name of CLient and Stream to be recorded: "+streamid);		
 		log.error("Application.getInstance()"+Application.getInstance());
@@ -169,7 +175,7 @@ public class StreamService {
 	 *
 	 * @param conn
 	 */
-	private void stopRecordingShow(IConnection conn, String streamid) throws Exception {
+	public static void stopRecordingShow(IConnection conn, String streamid) throws Exception {
 		log.debug("Stop recording show for: " + conn.getScope().getContextPath());
 		// Get a reference to the current broadcast stream.
 		ClientBroadcastStream stream = (ClientBroadcastStream) Application.getInstance().getBroadcastStream(
@@ -178,7 +184,7 @@ public class StreamService {
 		stream.stopRecording();
 	}
 	
-	private String generateFileName(String streamid) throws Exception{
+	public static String generateFileName(String streamid) throws Exception{
 		String dateString = Calender.getTimeForStreamId(new java.util.Date());
 		return streamid+"_"+dateString;
 		
@@ -249,6 +255,34 @@ public class StreamService {
 			log.error("[getRecordingById]",err);
 		}		
 		return null;
+	}
+	
+	public static void addRecordingByStreamId(IConnection conn, String streamId, RoomClient rcl, String roomrecordingName) {
+		try {
+			LinkedHashMap<String,Object> roomRecording = roomRecordingList.get(roomrecordingName);
+			List<LinkedHashMap<String,Object>> roomStreams = (List<LinkedHashMap<String,Object>>)roomRecording.get("streamlist");
+			
+			LinkedHashMap<String,Object> roomStream = new LinkedHashMap<String,Object>();
+			
+			String streamName = generateFileName(rcl.getStreamid());
+			String remoteAdress = conn.getRemoteAddress();
+			
+			recordShow(conn, rcl.getStreamid(), streamName);
+			
+			roomStream.put("streamName", streamName);
+			roomStream.put("remoteAdress", remoteAdress);
+			roomStream.put("startdate",new java.util.Date());
+			roomStream.put("starttime",0);
+			roomStream.put("rcl", rcl);
+			
+			roomStreams.add(roomStream);
+			
+			roomRecording.put("streamlist",roomStreams);
+			roomRecordingList.put(roomrecordingName, roomRecording);
+			
+		} catch (Exception err) {
+			log.error("[addRecordingByStreamId]",err);
+		}	
 	}
 
 }

@@ -33,6 +33,8 @@ public class RoomClient {
 	String chatDomain = "";
 	
 	String swfurl;
+	Boolean isRecording;
+	String roomRecordingName;
 	
 	public RoomClient() {
 		super();
@@ -315,6 +317,22 @@ public class RoomClient {
 	}
 	public void setChatDomain(String chatDomain) {
 		this.chatDomain = chatDomain;
+	}
+
+	public Boolean getIsRecording() {
+		return isRecording;
+	}
+
+	public void setIsRecording(Boolean isRecording) {
+		this.isRecording = isRecording;
+	}
+
+	public String getRoomRecordingName() {
+		return roomRecordingName;
+	}
+
+	public void setRoomRecordingName(String roomRecordingName) {
+		this.roomRecordingName = roomRecordingName;
 	}
 	
 }
