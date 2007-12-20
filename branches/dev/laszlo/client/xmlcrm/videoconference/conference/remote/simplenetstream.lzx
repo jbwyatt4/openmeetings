@@ -28,12 +28,12 @@
         <!--- A reference to the Flash NetStream object.
               @keywords private -->
         <attribute name="_flashstream" value="null"/>
-		
-		<attribute name="buffertime" value="0.1" type="number" />
-		
-		<attribute name="soundRef" value="null" />
-		
-		<handler name="onstatus" args="info" />
+        
+        <attribute name="buffertime" value="0.1" type="number" />
+        
+        <attribute name="soundRef" value="null" />
+        
+        <handler name="onstatus" args="info" />
 
         <!--- Event sent when a cue point occurs,
               whose parameter is a dictionary of metadata. -->
@@ -46,8 +46,8 @@
               whose parameter is a dictionary of metadata. -->
         <handler name="onmetadata"/>
 
-		<handler name="onstart" />
-		<handler name="onstop" />
+        <handler name="onstart" />
+        <handler name="onstop" />
 
         <!--- 
             Play the mediastream at this.url. 
@@ -55,33 +55,38 @@
 
         <method name="play" args="streamname,start">
             <![CDATA[
-				if (this._nc==null){
-					this._findnc();
-				}
-				if (this._nc!=null){
-					this._createStream();				
-					this.streamname = streamname;
-					//Debug.write("play", this.streamname);
-					//Debug.write("this._flashstream", this._flashstream);
-					this.playing = true;
-					parent.stream = this;
-					parent._setPlayStream();
-				
-					this._flashstream.setBufferTime(this.buffertime);
-				
-					this._flashstream.play(this.streamname,start);
-					
-					//Debug.write(this._flashstream);
-					_root.createEmptyMovieClip("vSound",_root.getNextHighestDepth());
-					_root.vSound.attachAudio(this._flashstream);
-					//Debug.write(_root.vSound);
-					this.soundRef = new Sound(_root.vSound);
-					//Debug.write(this.soundRef);
-				} else {
-					Debug.warn("Cant create Stream without valid rtmp-connection");
-				}
+                if (this._nc==null){
+                    this._findnc();
+                }
+                if (this._nc!=null){
+                    this._createStream();               
+                    this.streamname = streamname;
+                    //Debug.write("play", this.streamname);
+                    //Debug.write("this._flashstream", this._flashstream);
+                    this.playing = true;
+                    parent.stream = this;
+                    parent._setPlayStream();
+                
+                    this._flashstream.setBufferTime(this.buffertime);
+                
+                    if (start!=0){
+                    	this.mode = "broadcasting";
+                    	this._flashstream.play(this.streamname,start);
+                    }else {
+                    	this.mode = "playing";
+                    	this._flashstream.play(this.streamname);
+                    }
+                    //Debug.write(this._flashstream);
+                    _root.createEmptyMovieClip("vSound",_root.getNextHighestDepth());
+                    _root.vSound.attachAudio(this._flashstream);
+                    //Debug.write(_root.vSound);
+                    this.soundRef = new Sound(_root.vSound);
+                    //Debug.write(this.soundRef);
+                } else {
+                    Debug.warn("Cant create Stream without valid rtmp-connection");
+                }
             ]]>
-        </method>		
+        </method>       
         
 
        <!--- Stop the stream. Whereas pause will keep the 'mode' as 
@@ -120,10 +125,10 @@
             this.setAttribute("time", 0);
             this.setAttribute("progress", 0);
             this.setAttribute("mode", "");
-			this.playing = false;
+            this.playing = false;
           ]]>
         </method>
-		
+        
 
         <!--- Works for playback and mimics animator pause() semantics. -->
         <method name="pause" args="p"><![CDATA[
@@ -131,7 +136,7 @@
             this.setAttribute("paused",  (p == null) ? !this['paused'] : p)
           ]]>
         </method>
-		
+        
 
 
         <!--- Start recording. -->
@@ -149,32 +154,32 @@
             this.setAttribute("mode", "recording");
             this._activateTimeDel();
           ]]> 
-        </method>		
+        </method>       
 
 
         <!--- start sending a live mediastream to the server. -->
         <method name="broadcast" args="streamname,cam,mic">
             <![CDATA[
-				if (this._nc==null){
-					this._findnc();
-				}
-				if (this._nc!=null){
-					this._createStream();
-				
-					this._flashstream.attachVideo(cam._dev);
-					this._flashstream.attachAudio(mic._dev);
-				
-					this.streamname = streamname;
-					Debug.write("publish", this.streamname);
-					Debug.write("this._flashstream", this._flashstream);
-				
-					this._flashstream.publish(this.streamname,"live");
+                if (this._nc==null){
+                    this._findnc();
+                }
+                if (this._nc!=null){
+                    this._createStream();
+                
+                    this._flashstream.attachVideo(cam._dev);
+                    this._flashstream.attachAudio(mic._dev);
+                
+                    this.streamname = streamname;
+                    Debug.write("publish", this.streamname);
+                    Debug.write("this._flashstream", this._flashstream);
+                
+                    this._flashstream.publish(this.streamname,"live");
 
-				} else {
-					Debug.warn("Cant create Stream without valid rtmp-connection");
-				}
+                } else {
+                    Debug.warn("Cant create Stream without valid rtmp-connection");
+                }
             ]]>
-        </method>		
+        </method>       
 
 
         <!--- Close the stream. -->
@@ -191,14 +196,14 @@
                 this._flashstream = null;
             ]]>
         </method>
-		
-		<method name="setBufferTime" args="buffer">
-			this.buffertime = buffer;
-			if (this._flashstream!=null) {
-				this._flashstream.setBufferTime(this.buffertime);
-			}
-		</method>
-			
+        
+        <method name="setBufferTime" args="buffer">
+            this.buffertime = buffer;
+            if (this._flashstream!=null) {
+                this._flashstream.setBufferTime(this.buffertime);
+            }
+        </method>
+            
 
 
         <!--- Find or create the Flash NetConnection object.
@@ -268,7 +273,7 @@
               @keywords private -->
         <method name="_onStatus" args="info"><![CDATA[
 
-			this.onstatus.sendEvent(info);
+            this.onstatus.sendEvent(info);
 
             switch (info.code) {
 
@@ -399,9 +404,7 @@
         <!--- Handle the onPlayStatus callback from the Flash NetStream object. 
               @keywords private -->
         <method name="_onPlayStatus" args="info"><![CDATA[
-            if (this.debug) {
-                Debug.write("mediastream onPlayStatus", this, info.code, info);
-            }
+            Debug.write("mediastream onPlayStatus", this, info.code, info);
 
             switch (info.code) {
 
@@ -450,8 +453,8 @@
         </method>
         
         <method name="setVolume" args="vol">
-        	Debug.write(this.soundRef,vol);
-        	this.soundRef.setVolume(vol);
+            Debug.write(this.soundRef,vol);
+            this.soundRef.setVolume(vol);
         </method>
 
 

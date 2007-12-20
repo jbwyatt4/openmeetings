@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<library>
+	
+<class name="videoboardstream" extends="guipresenter" x="2" y="2"
+    width="266" height="280" closable="false" title="Video and Audio"
+    resizeable="false">
+    <videocontainerstream name="_videocontainer" x="2" y="22" />
+</class>  
+
+<class name="recordingsviewer" extends="basecontentview">
+
+		<handler name="oninit">
+			this.getRecordingById.doCall();
+		</handler>
+		
+	  	<netremotecallhib name="getRecordingById" funcname="streamservice.getRecordingById" 
+			remotecontext="$once{ canvas.thishib }" dataobject="$once{ parent.parent.recordingsForUser }" >   
+	  		<netparam><method name="getValue">return canvas.sessionId;</method></netparam>
+	  		<netparam><method name="getValue">return canvas.currentrecorder_id;</method></netparam>    
+	        <handler name="ondata" args="value">	
+                <![CDATA[
+                	Debug.write("getAllRecordingsForUser",value);
+                	
+                	for (var i=0;i<value.roomRecording.streamlist.length;i++){
+                		Debug.write(value.roomRecording.streamlist[i]);
+                		//TODO: Check starting point
+                		var userpos = value.roomRecording.streamlist[i].rcl.userpos;
+                		var streamname = value.roomRecording.streamlist[i].streamName+".flv";
+                		canvas._videocontainer.startStream(streamname,userpos,value.roomRecording.streamlist[i].rcl);
+                	}
+                ]]>	        	          				
+	        </handler>	
+	  	</netremotecallhib>  
+	  	
+	 <view name="videorecorder" onclick="">
+	 	<videoboardstream name="_videoboard" />
+	 </view>	
+	 
+	
+</class>
+
+</library>
