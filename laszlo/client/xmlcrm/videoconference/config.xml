@@ -8,7 +8,7 @@ inno02.fh-pforzheim.de macbook 192.168.2.103
     domain-name it has been loading from  
     inno02.fh-pforzheim.de  
     -->
-<rtmphostlocal>macbook</rtmphostlocal>
+<rtmphostlocal>192.168.2.102</rtmphostlocal>
 
 <!--  
 Port to use for the Server

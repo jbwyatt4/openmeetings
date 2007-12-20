@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library>
 	
+	<resource name="_recording_play_rsc" src="resources/noatunplay.png" />
+	
+	<include href="video/" />
     <include href="recordingsavewin.lzx" />
     <include href="record.lzx" />
+    <include href="recordingsviewer.lzx" />
 
 </library>
