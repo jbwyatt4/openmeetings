@@ -1,6 +1,7 @@
 package org.xmlcrm.app.hibernate.beans.recording;
 
 import java.util.Date;
+import java.util.LinkedHashMap;
 
 import org.xmlcrm.app.hibernate.beans.rooms.Rooms;
 
@@ -22,6 +23,7 @@ public class Recording {
 	private Date updatetime;
 	private String deleted;
 	
+	private LinkedHashMap<String,Object> roomRecording;
 
 	/**
      * @hibernate.property
@@ -136,5 +138,11 @@ public class Recording {
 		this.xmlString = xmlString;
 	}
 	
+	public LinkedHashMap<String, Object> getRoomRecording() {
+		return roomRecording;
+	}
+	public void setRoomRecording(LinkedHashMap<String, Object> roomRecording) {
+		this.roomRecording = roomRecording;
+	}
 	
 }
