@@ -230,5 +230,25 @@ public class StreamService {
 		}		
 		return null;
 	}
+	
+	public Recording getRecordingById(String SID, Long recording_id) {
+		try {
+	        Long users_id = Sessionmanagement.getInstance().checkSession(SID);
+	        Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);  
+
+	        if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)){
+	        	Recording rec = Recordingmanagement.getInstance().getRecordingById(recording_id);
+	        	
+				XStream xStream = new XStream(new XppDriver());
+				xStream.setMode(XStream.NO_REFERENCES);
+				rec.setRoomRecording((LinkedHashMap<String, Object>)xStream.fromXML(rec.getXmlString()));
+				
+				return rec;
+	        }
+		} catch (Exception err) {
+			log.error("[getRecordingById]",err);
+		}		
+		return null;
+	}
 
 }
