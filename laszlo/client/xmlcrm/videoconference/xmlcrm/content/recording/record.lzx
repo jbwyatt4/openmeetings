@@ -37,7 +37,9 @@
 	  						var seconds = Math.round(duration/1000);
 	  						var minutes = Math.floor(seconds/60);
 	  						var deltaSeconds = seconds-(minutes*60);
-	  						this._text.text = canvas.getLabelName(410)+minutes+":"+deltaSeconds+" ";
+	  						var dateStr = this.datapath.xpathQuery('starttime/text()');
+	  						Debug.write("dateStr: ",dateStr,this);
+	  						this._text.text = canvas.getLabelName(411)+dateStr+canvas.getLabelName(410)+minutes+":"+deltaSeconds+" ";
 	  					</handler>
 	  					<handler name="ondblclick">
 	  						canvas.currentrecorder_id = Number(this.datapath.xpathQuery('recording_id/text()'));
