@@ -1,166 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library>
 
-<class name="imagefordrawView" extends="image" stretches="both">
-	
-	<attribute name="downloadurl" value="" type="string" />
-		
-	<attribute name="alterModus" value="true" type="boolean" />
-	
-	<attribute name="baseurl" value="" type="string" />
-	<attribute name="fileName" value="" type="string" />
-	<attribute name="moduleName" value="" type="string" />
-	<attribute name="parentPath" value="" type="string" />
-	<attribute name="room" value="" type="string" />
-	<attribute name="domain" value="" type="string" />
-		<!--
-			if (this.width>this.refObj.width){
-				var height = this.height/(this.width/this.refObj.width)
-				this.setAttribute('width',this.refObj.width);
-				this.setAttribute('height',height);
-				this.setAttribute('x',0);
-			}
-			if (this.height>this.refObj.height){
-				var width = this.width/(this.height/this.refObj.height)
-				this.setAttribute('height',this.refObj.height);
-				this.setAttribute('width',width);
-				this.setAttribute('y',0);
-			}
-			if(this.y+this.height>this.refObj.height){
-				this.setAttribute('y',0);
-			}
-			if(this.x+this.width>this.refObj.width){
-				this.setAttribute('x',0);
-			}	            	
-         -->            
-	<attribute name="refObj" value="null" />
-	<handler name="onload">
-		<![CDATA[
-			//Debug.write("image loaded");
-			//this.refObj.parent._loading.setAttribute('visible',false);
-            
-			if (this.width>this.refObj.width){
-				var height = this.height/(this.width/this.refObj.width)
-				this.setAttribute('width',this.refObj.width);
-				this.setAttribute('height',height);
-				this.setAttribute('x',0);
-			}
-			if (this.height>this.refObj.height){
-				var width = this.width/(this.height/this.refObj.height)
-				this.setAttribute('height',this.refObj.height);
-				this.setAttribute('width',width);
-				this.setAttribute('y',0);
-			}
-			if(this.y+this.height>this.refObj.height){
-				this.setAttribute('y',0);
-			}
-			if(this.x+this.width>this.refObj.width){
-				this.setAttribute('x',0);
-			}	
-	
-			//only send syncCommand if alterModus is true (meaning that this is the Moderator)
-			//otherwise just send a notification to moderator that this image has been loaded
-			if (this.alterModus){
-				this.refObj.storeTempValsAndLoadSyncList(this);
-			} else {
-				this.refObj.sendLoadNotificationImage("imageloadcomplete");
-			}
-			this.refObj.layers.push(this);			
-			
-			this.oninit.sendEvent();
-			this.refObj.parent.parent.isloadedImage.sendEvent(this);
-			
-			//send notification to wml-loader
-			//this is send later then in normal objects cause it needs to be send after the image
-			//has been loaded completely
-			if (this.refObj.isWmlLoaderImage){
-				this.refObj.isWmlLoaderImage=false;
-                //Debug.write("1 onwmlLoaderSend.sendEvent( image )");
-				if (this.refObj.onwmlLoaderSend) this.refObj.onwmlLoaderSend.sendEvent('image');
-			}
-		]]>
-	</handler>
-	<handler name="onerror" args="error">
-		<![CDATA[
-		//Debug.write("onerror "+error);
-			//only send syncCommand if alterModus is true (meaning that this is the Moderator)
-			//otherwise just send a notification to moderator that this iamge has been loaded
-			if (this.alterModus){
-				this.refObj.storeTempValsAndLoadSyncList(this);
-			} else {
-				this.refObj.sendLoadNotificationImage("imageloaderror");
-			}
-			this.refObj.layers.push(this);			
-			
-			this.oninit.sendEvent();
-			this.refObj.parent.parent.isloadedImage.sendEvent(this);
-			
-			//send notification to wml-loader
-			//this is send later then in normal objects cause it needs to be send after the image
-			//has been loaded completely
-			if (this.refObj.isWmlLoaderImage){
-				this.refObj.isWmlLoaderImage=false;
-				if (this.refObj.onwmlLoaderSend) this.refObj.onwmlLoaderSend.sendEvent('image');
-			}
-		]]>
-	</handler>
-	<handler name="ontimeout" args="error">
-		<![CDATA[
-		//Debug.write("ontimeout "+error);
-			//only send syncCommand if alterModus is true (meaning that this is the Moderator)
-			//otherwise just send a notification to moderator that this iamge has been loaded
-			if (this.alterModus){
-				this.refObj.storeTempValsAndLoadSyncList(this);
-			} else {
-				this.refObj.sendLoadNotificationImage("imageloadtimeout");
-			}
-			this.refObj.layers.push(this);			
-			
-			this.oninit.sendEvent();
-			this.refObj.parent.parent.isloadedImage.sendEvent(this);
-			
-			//send notification to wml-loader
-			//this is send later then in normal objects cause it needs to be send after the image
-			//has been loaded completely
-			if (this.refObj.isWmlLoaderImage){
-				this.refObj.isWmlLoaderImage=false;
-				if (this.refObj.onwmlLoaderSend) this.refObj.onwmlLoaderSend.sendEvent('image');
-			}
-		]]>
-	</handler>	
-</class>
-    
-<class name="imageforScreenViewer" extends="image" stretches="both" x="0" y="0">
-	
-	<attribute name="downloadurl" value="" type="string" />
-		
-	<attribute name="alterModus" value="true" type="boolean" />
-	
-	<attribute name="baseurl" value="" type="string" />
-	<attribute name="fileName" value="" type="string" />
-	<attribute name="moduleName" value="" type="string" />
-	<attribute name="parentPath" value="" type="string" />
-	<attribute name="room" value="" type="string" />
-	<attribute name="domain" value="" type="string" />
-    
-    <attribute name="username" value="" type="string" />
-		
-	<attribute name="refObj" value="null" />
-	<handler name="onload">
-        this.refObj.layers.push(this);	
-        this.refObj.isScreenImageLoading=false;
-        this.refObj.toggleVisibleScreenSharing();
-	</handler>
-	<handler name="onerror" args="error">
-        this.refObj.toggleVisibleScreenSharing();
-	</handler>
-	<handler name="ontimeout" args="error">
-        this.refObj.toggleVisibleScreenSharing();
-	</handler>	
-    
-</class>
-    
-
 <class name="basedrawimage" extends="basedrawletter">
 	
 	<!-- attribute shows if this image is loaded as part of a wml-file-object
@@ -204,25 +44,46 @@
 	 -->
   	<method name="addImageToLayer" args="obj,nameing,urlname,posx,posy,width,height,alterModus,baseurl,fileName,moduleName,parentPath,room,domain">
         <![CDATA[
-		//only show if it is not part of wml-file-object
-		if (!this.isWmlLoaderImage) {
-			this.loadimageDataWinRef = new loadwhiteboardwindow(canvas.main_content._content.inner,{refObj:this});
-			this.loadimageDataWinRef.setMessage(canvas.getLabelName(this.imageLoadMessageId));
-		}
-		var src = baseurl+'?fileName='+fileName+'&moduleName='+moduleName+'&parentPath='+parentPath+'&room='+room+'&domain='+domain+'&sid='+canvas.sessionId;
-
-  		if (alterModus){
-			this.currentlayer = new imagefordrawView(obj,{src:src,refObj:this,name:nameing,x:posx,y:posy,downloadurl:urlname,alterModus:alterModus,baseurl:baseurl,fileName:fileName,moduleName:moduleName,parentPath:parentPath,room:room,domain:domain});
-		} else {
-			this.currentlayer = new imagefordrawView(obj,{src:src,refObj:this,name:nameing,x:posx,y:posy,downloadurl:urlname,width:width,height:height,alterModus:alterModus,baseurl:baseurl,fileName:fileName,moduleName:moduleName,parentPath:parentPath,room:room,domain:domain});
-		}
-		this.parent.parent.isloadingImage.sendEvent(this.currentlayer);
-		//this.parent._loading.setAttribute('visible',true);
-		//Add Layer to global Layer  	
-	    return this.currentlayer;
+			//only show if it is not part of wml-file-object
+			if (!this.isWmlLoaderImage) {
+				this.loadimageDataWinRef = new loadwhiteboardwindow(canvas.main_content._content.inner,{refObj:this});
+				this.loadimageDataWinRef.setMessage(canvas.getLabelName(this.imageLoadMessageId));
+			}
+			var src = baseurl+'?fileName='+fileName+'&moduleName='+moduleName+'&parentPath='+parentPath+'&room='+room+'&domain='+domain+'&sid='+canvas.sessionId;
+	
+	  		if (alterModus){
+				this.currentlayer = new imagefordrawView(obj,{src:src,refObj:this,name:nameing,x:posx,y:posy,downloadurl:urlname,alterModus:alterModus,baseurl:baseurl,fileName:fileName,moduleName:moduleName,parentPath:parentPath,room:room,domain:domain});
+			} else {
+				this.currentlayer = new imagefordrawView(obj,{src:src,refObj:this,name:nameing,x:posx,y:posy,downloadurl:urlname,width:width,height:height,alterModus:alterModus,baseurl:baseurl,fileName:fileName,moduleName:moduleName,parentPath:parentPath,room:room,domain:domain});
+			}
+			this.parent.parent.isloadingImage.sendEvent(this.currentlayer);
+			//this.parent._loading.setAttribute('visible',true);
+			//Add Layer to global Layer  	
+		    return this.currentlayer;
 		]]>
   	</method>
-    
+  	
+  	<method name="addImageToLayerRecorded" args="obj,nameing,urlname,posx,posy,width,height,alterModus,baseurl,fileName,moduleName,parentPath,room,domain">
+        <![CDATA[
+			//only show if it is not part of wml-file-object
+			if (!this.isWmlLoaderImage) {
+				this.loadimageDataWinRef = new loadwhiteboardwindow(canvas.main_content._content.inner,{refObj:this});
+				this.loadimageDataWinRef.setMessage(canvas.getLabelName(this.imageLoadMessageId));
+			}
+			var src = baseurl+'?fileName='+fileName+'&moduleName='+moduleName+'&parentPath='+parentPath+'&room='+room+'&domain='+domain+'&sid='+canvas.sessionId;
+	
+	  		if (alterModus){
+				this.currentlayer = new imagefordrawView(obj,{src:src,refObj:this,name:nameing,x:posx,y:posy,downloadurl:urlname,alterModus:alterModus,baseurl:baseurl,fileName:fileName,moduleName:moduleName,parentPath:parentPath,room:room,domain:domain,recorderModus:true});
+			} else {
+				this.currentlayer = new imagefordrawView(obj,{src:src,refObj:this,name:nameing,x:posx,y:posy,downloadurl:urlname,width:width,height:height,alterModus:alterModus,baseurl:baseurl,fileName:fileName,moduleName:moduleName,parentPath:parentPath,room:room,domain:domain,recorderModus:true});
+			}
+			this.parent.parent.isloadingImage.sendEvent(this.currentlayer);
+			//this.parent._loading.setAttribute('visible',true);
+			//Add Layer to global Layer  	
+		    return this.currentlayer;
+		]]>
+  	</method>
+  	
   	<method name="incomingScreenSharing" args="value">
         <![CDATA[
 		//only do if last image has been loading successfully
@@ -273,6 +134,11 @@
   		this.addImageToLayer(refObj,actionObject[actionObject.length-1],actionObject[1],actionObject[actionObject.length-5],actionObject[actionObject.length-4],actionObject[actionObject.length-3],actionObject[actionObject.length-2],false,actionObject[2],actionObject[3],actionObject[4],actionObject[5],actionObject[6],actionObject[7]);
   	</method>
   	
+  	<method name="addImageToLayerHistoryRecorded" args="actionObject,refObj,isWmlLoader">
+		this.isWmlLoaderImage = isWmlLoader;
+  		this.addImageToLayerRecorded(refObj,actionObject[actionObject.length-1],actionObject[1],actionObject[actionObject.length-5],actionObject[actionObject.length-4],actionObject[actionObject.length-3],actionObject[actionObject.length-2],false,actionObject[2],actionObject[3],actionObject[4],actionObject[5],actionObject[6],actionObject[7]);
+  	</method>
+  	
   	<method name="registerNewImage" args="urlname,posx,posy,width,height,baseurl,fileName,moduleName,parentPath,room,domain">
 		var actionObject = new Array();
 	    actionObject.push('image');
@@ -293,11 +159,16 @@
 	    this.checkStepLayers();
 	    this.onsharedMessage('draw',actionObject);	
   	</method>
-		
 	
 	<method name="storeTempValsAndLoadSyncList" args="objRef">
 		this.syncImageRefObj = objRef;
 		this.getImageClientListScope.doCall();
+	</method>
+	
+	<method name="storeTempValsAndLoadSyncListRecording" args="objRef">
+		this.syncImageRefObj = objRef;
+		this.doRegisterAfterLoadingOrRecording();
+		this.sendCompleteImageSync();
 	</method>
 	
 	<method name="sendLoadNotificationImage" args="message" >
@@ -334,16 +205,20 @@
 						parent._loadingUsersImageList.push(value[eg]);
 					}
 				}
-				this.parent.imageSyncMessageText = canvas.getLabelName(this.parent.imageSyncMessageId);
-				//now send notifications to connected clients
-				this.parent.setAttribute('drawmodus','image');
-				this.parent.registerNewImage(this.parent.syncImageRefObj.src,this.parent.syncImageRefObj.x,this.parent.syncImageRefObj.y,this.parent.syncImageRefObj.width,this.parent.syncImageRefObj.height,this.parent.syncImageRefObj.baseurl,this.parent.syncImageRefObj.fileName,this.parent.syncImageRefObj.moduleName,this.parent.syncImageRefObj.parentPath,this.parent.syncImageRefObj.room,this.parent.syncImageRefObj.domain);
+				this.parent.doRegisterAfterLoadingOrRecording();
 				//set modus to hand so users can directly select that image
 				this.parent.setModus('hand');	
 				this.parent.startImgaesyncCheck();			
             ]]>
         </handler>   
     </netremotecallhib>
+    
+    <method name="doRegisterAfterLoadingOrRecording">
+		this.imageSyncMessageText = canvas.getLabelName(this.imageSyncMessageId);
+		//now send notifications to connected clients
+		this.setAttribute('drawmodus','image');
+		this.registerNewImage(this.syncImageRefObj.src,this.syncImageRefObj.x,this.syncImageRefObj.y,this.syncImageRefObj.width,this.syncImageRefObj.height,this.syncImageRefObj.baseurl,this.syncImageRefObj.fileName,this.syncImageRefObj.moduleName,this.syncImageRefObj.parentPath,this.syncImageRefObj.room,this.syncImageRefObj.domain);		
+    </method>
 	
 	<!-- after loading the objects check if all connected clients of that conference
 		have loaded the file completely, check it every 1 seconds -->

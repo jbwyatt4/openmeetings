@@ -4,6 +4,8 @@
 	<include href="basedraw.lzx" />
 	<include href="basedrawobject.lzx" />
 	<include href="basedrawletter.lzx" />
+	<include href="imagefordrawView.lzx" />
+	<include href="imageforScreenViewer.lzx" />
 	<include href="basedrawimage.lzx" />
 	<include href="basedrawsave.lzx" />
 	<include href="basedrawwords.lzx" />
