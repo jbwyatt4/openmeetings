@@ -7,35 +7,82 @@
     <videocontainerstream name="_videocontainer" x="2" y="22" />
 </class>  
 
-<class name="recordingsviewer" extends="basecontentview">
-
-		<handler name="oninit">
-			this.getRecordingById.doCall();
+<class name="whiteboardpanelrecord" extends="guipresenter" x="270" y="2"
+    width="660" height="592" closable="false" title="Whiteboard"
+    resizeable="false">
+   <whiteboard name="_whiteboard" y="22" x="4">
+        <handler name="onsharedMessage" args="obj"> 
+            Debug.write("send: ",obj);
+        </handler>   
+		<handler name="isloadingImage" args="val" >
+			Debug.write("isloadingImage: ",val);
 		</handler>
-		
-	  	<netremotecallhib name="getRecordingById" funcname="streamservice.getRecordingById" 
-			remotecontext="$once{ canvas.thishib }" dataobject="$once{ parent.parent.recordingsForUser }" >   
-	  		<netparam><method name="getValue">return canvas.sessionId;</method></netparam>
-	  		<netparam><method name="getValue">return canvas.currentrecorder_id;</method></netparam>    
-	        <handler name="ondata" args="value">	
-                <![CDATA[
-                	Debug.write("getAllRecordingsForUser",value);
-                	
-                	for (var i=0;i<value.roomRecording.streamlist.length;i++){
-                		Debug.write(value.roomRecording.streamlist[i]);
-                		//TODO: Check starting point
-                		var userpos = value.roomRecording.streamlist[i].rcl.userpos;
-                		var streamname = value.roomRecording.streamlist[i].streamName+".flv";
-                		canvas._videocontainer.startStream(streamname,userpos,value.roomRecording.streamlist[i].rcl);
-                	}
-                ]]>	        	          				
-	        </handler>	
-	  	</netremotecallhib>  
-	  	
+		<handler name="isloadedImage" args="val" >        
+			Debug.write("isloadedImage: ",val);
+		</handler>
+   </whiteboard>    
+</class>  
+
+<class name="recordingsviewer" extends="basecontentview">
+	
+	<attribute name="timerDel" value="null" />
+	<attribute name="currentTime" value="0" type="number" />
+	<attribute name="recordingValue" value="null" />
+	<attribute name="timeStepSyncing" value="500" type="number" />
+
+	<handler name="oninit">
+		this.getRecordingById.doCall();
+	</handler>
+	
+  	<netremotecallhib name="getRecordingById" funcname="streamservice.getRecordingById" 
+		remotecontext="$once{ canvas.thishib }" dataobject="$once{ parent.parent.recordingsForUser }" >   
+  		<netparam><method name="getValue">return canvas.sessionId;</method></netparam>
+  		<netparam><method name="getValue">return canvas.currentrecorder_id;</method></netparam>    
+        <handler name="ondata" args="value">	
+            <![CDATA[
+            	Debug.write("getRecordingById",this.recordingValue.roomRecording);
+            	parent.recordingValue = value;
+            	parent.timerDel = new LzDelegate( parent, "timeLineAction" );
+            	parent.timeLineAction();
+            ]]>	        	          				
+        </handler>	
+  	</netremotecallhib>  
+
+    <method name="timeLineAction">
+    	<![CDATA[
+	        Debug.write("timeLineAction: ",this.currentTime);
+	        
+        	for (var i=0;i<this.recordingValue.roomRecording.streamlist.length;i++){
+        		//Debug.write(this.recordingValue.roomRecording.streamlist[i]);
+        		var starttime =  (Math.round(this.recordingValue.roomRecording.streamlist[i].starttime/this.timeStepSyncing))*this.timeStepSyncing;
+        		//Debug.write("timeLineAction starttime: ",starttime);
+        		if (starttime == this.currentTime){
+	        		var userpos = this.recordingValue.roomRecording.streamlist[i].rcl.userpos;
+	        		var streamname = this.recordingValue.roomRecording.streamlist[i].streamName+".flv";
+	        		Debug.write("Found - ",starttime,userpos,streamname);
+	        		canvas._videocontainer.startStream(streamname,userpos,this.recordingValue.roomRecording.streamlist[i].rcl);
+        		}
+        	}
+        
+        	for (var i=0;i<this.recordingValue.roomRecording.whiteboard.length;i++){
+        		var starttime =  (Math.round(this.recordingValue.roomRecording.whiteboard[i].starttime/this.timeStepSyncing))*this.timeStepSyncing;
+        		Debug.write("timeLineAction Whiteboard starttime: ",starttime);
+        		if (starttime == this.currentTime){
+        			var action = this.recordingValue.roomRecording.whiteboard[i].action;
+        			Debug.write("Found - ",starttime,action);
+        			_drawarea.sendRecordedObject(action[2],action[3],false);
+        		}
+        	}
+	        LzTimer.addTimer( this.timerDel, this.timeStepSyncing );
+	        this.currentTime += this.timeStepSyncing;
+        ]]>
+    </method>
+    
 	 <view name="videorecorder" onclick="">
 	 	<videoboardstream name="_videoboard" />
 	 </view>	
 	 
+	<whiteboardpanelrecord name="_whiteboardpanelrecord" />
 	
 </class>
 

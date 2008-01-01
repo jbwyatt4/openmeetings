@@ -677,6 +677,83 @@
 	</method>
 	
 	
+	<method name="sendRecordedObject" args="action,actionObject,isWmlLoader">
+		//Debug.write("sendWatchObject: ",action,actionObject);
+		<![CDATA[
+		if (action=='draw' || action=='redo'){
+			var lastactionObject = actionObject;
+			
+			//Redraw the View on the paintarea
+			if (actionObject[0]=='paint'){
+				this.paintactionHistory(lastactionObject,this);
+			} else if (actionObject[0]=='line'){
+				this.lineactionHistory(lastactionObject,this);
+			} else if (actionObject[0]=='uline'){
+				this.ulineactionHistory(lastactionObject,this);
+			} else if (actionObject[0]=='drawarrow'){
+				this.drawarrowlineactionHistory(lastactionObject,this);
+			} else if(action,actionObject[0]=='letter'){
+				this.drawactionHistory(lastactionObject,this);
+			} else if(actionObject[0]=='image'){
+				//Image will send the onwmlLoaderSend later cause it has to be send
+				//once the image has been loaded completely
+				this.addImageToLayerHistoryRecorded(lastactionObject,this,isWmlLoader);
+			} else if(actionObject[0]=='swf'){
+				//Image will send the onwmlLoaderSend later cause it has to be send
+				//once the image has been loaded completely
+				this.addSWFToLayerHistory(lastactionObject,this,isWmlLoader);
+			} else if(actionObject[0]=='rectangle'){
+				this.drawrectangleToHistory(lastactionObject,this);
+			} else if(actionObject[0]=='ellipse'){
+				this.drawellipseToHistory(lastactionObject,this);
+			}
+			//set counter to maximum otherwise trouble in naming conventions
+			//the 6th array index count from the end of each object is always the counter of the
+			//object
+			this.compareAndSetCounter(lastactionObject[lastactionObject.length-6]);
+			this.baseactionobjectList.push(lastactionObject);
+			
+			//Send a notifcation for the library loader sothat it can show progress
+			//and Browser does not hangUp and images can be proceed
+			//only send if type ain#t image cause image will send its own one after 
+			// it has been loaded completely
+			if (isWmlLoader && actionObject[0]!='image' && isWmlLoader && actionObject[0]!='swf') {
+				if (this.onwmlLoaderSend) this.onwmlLoaderSend.sendEvent(actionObject[0]);
+			}
+            
+		} else if(action=='clear'){
+			this.clearAll();
+		} else if(action=='delete' || action=='undo'){
+			var lastactionObject = actionObject;	
+			var obj = this.getObjectByName(lastactionObject[lastactionObject.length-1]);
+			obj.destroy();
+		} else if(action=='size'){
+			var lastactionObject = actionObject;	
+			var obj = this.getObjectByName(lastactionObject[lastactionObject.length-1]);
+			obj.setAttribute('x',lastactionObject[lastactionObject.length-5]);
+			obj.setAttribute('y',lastactionObject[lastactionObject.length-4]);
+			obj.setAttribute('width',lastactionObject[lastactionObject.length-3]);
+			obj.setAttribute('height',lastactionObject[lastactionObject.length-2]);
+		} else if (action=="loadwml"){
+			//Debug.write(actionObject,actionObject["wmlfileName"],actionObject["wmlroom"],actionObject["wmldomain"]);
+			this.remoteWmlLoader(actionObject["wmlfileName"],actionObject["wmlroom"],actionObject["wmldomain"]);
+		} else if (action=="editText"){
+			this.editTextByHistory(actionObject,this);
+		} else if (action=="initgetVars"){
+			//Debug.write("initUser isMod ",canvas.ismoderator,actionObject);
+			if (canvas.ismoderator){
+				//Debug.write("send all whiteboard objects to new user");
+				var obj = new Array();
+			    obj[0] = 'whiteboard';
+			    obj[1] = 'inituser';
+			    obj[2] = this.baseactionobjectList;
+				this.oninitUser(actionObject,obj);
+			}
+		} else if (action=="swf"){
+			this.remoteObjectUpdate(actionObject);	
+		}
+		]]>
+	</method>
 	
 	
 	<!-- #####################
