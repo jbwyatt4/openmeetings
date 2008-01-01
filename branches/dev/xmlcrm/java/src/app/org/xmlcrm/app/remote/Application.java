@@ -862,8 +862,11 @@ public class Application extends ApplicationAdapter implements
 							((IServiceCapableConnection) conn).invoke("sendVarsToWhiteboard", new Object[] { vars },this);
 							log.debug("sending sendVarsToWhiteboard to " + conn);
 						}
+						if (rcl.getIsRecording()){
+							StreamService.addWhiteBoardEvent(rcl.getRoomRecordingName(),vars);
+						}						
 					}
-				}
+				}				
 				return 1;
 			} else {
 				// log.debug("*..*you are not allowed to send: "+ismod);
