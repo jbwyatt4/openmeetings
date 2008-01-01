@@ -90,6 +90,9 @@ public class StreamService {
 			roomRecording.put("starttime", new java.util.Date());
 			roomRecording.put("startedby", currentClient);
 			
+			LinkedList<Object> whiteBoardEvents = new LinkedList<Object>();
+			roomRecording.put("whiteboard", whiteBoardEvents);
+			
 			roomRecordingList.put(recordingName, roomRecording);
 			
 			return recordingName;
@@ -262,6 +265,9 @@ public class StreamService {
 			LinkedHashMap<String,Object> roomRecording = roomRecordingList.get(roomrecordingName);
 			List<LinkedHashMap<String,Object>> roomStreams = (List<LinkedHashMap<String,Object>>)roomRecording.get("streamlist");
 			
+			Date recordingsStartTime = (Date) roomRecording.get("starttime");
+			Date currentDate = new Date();
+			
 			LinkedHashMap<String,Object> roomStream = new LinkedHashMap<String,Object>();
 			
 			String streamName = generateFileName(rcl.getStreamid());
@@ -272,7 +278,7 @@ public class StreamService {
 			roomStream.put("streamName", streamName);
 			roomStream.put("remoteAdress", remoteAdress);
 			roomStream.put("startdate",new java.util.Date());
-			roomStream.put("starttime",0);
+			roomStream.put("starttime",currentDate.getTime()-recordingsStartTime.getTime());
 			roomStream.put("rcl", rcl);
 			
 			roomStreams.add(roomStream);
@@ -284,5 +290,26 @@ public class StreamService {
 			log.error("[addRecordingByStreamId]",err);
 		}	
 	}
-
+	
+	public static void addWhiteBoardEvent(String roomrecordingName,Object vars) {
+		try {
+			LinkedHashMap<String,Object> roomRecording = roomRecordingList.get(roomrecordingName);
+			
+			Date recordingsStartTime = (Date) roomRecording.get("starttime");
+			Date currentDate = new Date();
+			
+			LinkedList<Object> whiteBoardEvents = (LinkedList<Object>) roomRecording.get("whiteboard");
+			
+			LinkedHashMap<String,Object> whiteBoardEvent = new LinkedHashMap<String,Object>();
+			whiteBoardEvent.put("starttime",currentDate.getTime()-recordingsStartTime.getTime());
+			whiteBoardEvent.put("action", vars);
+			
+			whiteBoardEvents.add(whiteBoardEvent);
+			roomRecording.put("whiteboard", whiteBoardEvents);
+			roomRecordingList.put(roomrecordingName, roomRecording);
+			
+		} catch (Exception err) {
+			log.error("[addRecordingByStreamId]",err);
+		}	
+	}
 }
