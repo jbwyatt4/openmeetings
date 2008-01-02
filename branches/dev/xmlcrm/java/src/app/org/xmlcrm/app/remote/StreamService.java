@@ -43,7 +43,7 @@ public class StreamService {
 	
 	private static LinkedHashMap<String,LinkedHashMap<String,Object>> roomRecordingList = new LinkedHashMap<String,LinkedHashMap<String,Object>>();
 	
-	public String recordMeetingStream(){
+	public String recordMeetingStream(Object initwhiteboardvars){
 		try {
 			IConnection current = Red5.getConnectionLocal();
 			RoomClient currentClient = Application.getClientList().get(current.getClient().getId());
@@ -85,6 +85,7 @@ public class StreamService {
 					}
 				}
 			}
+			roomRecording.put("initwhiteboardvars", initwhiteboardvars);
 			roomRecording.put("streamlist", roomStreams);
 			roomRecording.put("recordingName", recordingName);
 			roomRecording.put("starttime", new java.util.Date());
