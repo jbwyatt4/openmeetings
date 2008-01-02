@@ -50,6 +50,7 @@
     <attribute name="isSendPartArray" value="true" type="boolean" />
     
     <attribute name="isRecordingLoad" value="false" type="boolean" />
+    <attribute name="isinitRecordingLoad" value="false" type="boolean" />
 	
 	<!-- Start and Stop Event will be thrown by the loading process -->
 	<handler name="onwmlloadStart" />
@@ -126,13 +127,13 @@
     <method name="sendPHPData" args="pix,pixH,pixW">
         //Debug.write("### sendPHPData: ",pix,pixH,pixW);
         <![CDATA[
-        //Create the LoadVars object and pass data to PHP script
-        var output = new LoadVars();
-        output.img = pix.toString();
-        output.height = pixH;
-        output.width = pixW;
-        //The page (and this movie itself) should be in a server to work
-        output.send(this.sendURL, "output", "POST");
+	        //Create the LoadVars object and pass data to PHP script
+	        var output = new LoadVars();
+	        output.img = pix.toString();
+	        output.height = pixH;
+	        output.width = pixW;
+	        //The page (and this movie itself) should be in a server to work
+	        output.send(this.sendURL, "output", "POST");
         ]]> 
     </method>
 	
@@ -342,7 +343,7 @@
 				this._loadmessageTxt = canvas.getLabelName(this.syncmessageId);
 			    this.loadfileDataWinRef.setMessage(this._loadmessageTxt);
 				if (this.onwmlloadStop) this.onwmlloadStop.sendEvent();
-				if (this.isRecordingLoad) {
+				if (this.isRecordingLoad || this.isinitRecordingLoad) {
 					this.sendCompleteWmlSync(null);
 				} else if (!this.wmlspreadNews){
 					this.wmlloadingComplete();
@@ -431,8 +432,14 @@
 		gets its own *sync* complete nofification
 		 -->
 	<method name="sendCompleteWmlSync" args="client">
-		////Debug.write("sendCompleteWmlSync: ",client);
+		Debug.write("sendCompleteWmlSync: ",client);
 		this.loadfileDataWinRef.close();
+		if (this.isinitRecordingLoad){
+			this.isinitRecordingLoad = false;
+			Debug.write("this.isinitRecordingLoad",this);
+			Debug.write(this.parent.parent.parent.parent);
+			this.parent.parent.parent.parent.timeLineAction();
+		}
 		//Debug.write("this.loadfileDataWinRef closed: ",this.loadfileDataWinRef);
 		//check if this is syncing cause if init of new user
 		if (this.isInitLoader){

@@ -50,7 +50,7 @@
     
     <handler name="oninit">
         canvas._mainbgcontentNavi.setAttribute('height',0);
-        canvas.setAttribute('naviHeightDelta',20);
+        canvas.setAttribute('naviHeightDelta',28);
         new conferencemenubar(canvas._conferencemenu);
         new moderationpanel(canvas._conferencemenu,{x:400});
         canvas._conferencemenu.setAttribute('visibility','visible');

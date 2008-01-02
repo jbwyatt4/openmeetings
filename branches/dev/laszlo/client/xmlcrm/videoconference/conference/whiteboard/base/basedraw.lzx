@@ -1331,7 +1331,7 @@
 		
 		this.currentlayer = new drawviewnew(this,{name:'rectangle'+this.getCounter(),x:x,y:y,width:width,height:height});
 		
-		this.drawrectangleHistory(this.currentlayer,0,0,width,height);
+		this.drawrectangleHistory(this.currentlayer,0,0,width,height,this.currentrectanglestroke,this.currentrectangleineWidth);
 		
 		this.currentlayer.setAttribute('stretches','both');
 		
