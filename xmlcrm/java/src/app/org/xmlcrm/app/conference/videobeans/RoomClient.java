@@ -33,7 +33,7 @@ public class RoomClient {
 	String chatDomain = "";
 	
 	String swfurl;
-	Boolean isRecording;
+	Boolean isRecording = false;
 	String roomRecordingName;
 	
 	public RoomClient() {
