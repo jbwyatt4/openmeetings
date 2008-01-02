@@ -31,6 +31,7 @@
 	<attribute name="timeStepSyncing" value="500" type="number" />
 
 	<handler name="oninit">
+		canvas.thishib.modus = "recording";
 		this.getRecordingById.doCall();
 	</handler>
 	
@@ -50,7 +51,7 @@
 
     <method name="timeLineAction">
     	<![CDATA[
-	        Debug.write("timeLineAction: ",this.currentTime);
+	        //Debug.write("timeLineAction: ",this.currentTime);
 	        
         	for (var i=0;i<this.recordingValue.roomRecording.streamlist.length;i++){
         		//Debug.write(this.recordingValue.roomRecording.streamlist[i]);
@@ -66,10 +67,10 @@
         
         	for (var i=0;i<this.recordingValue.roomRecording.whiteboard.length;i++){
         		var starttime =  (Math.round(this.recordingValue.roomRecording.whiteboard[i].starttime/this.timeStepSyncing))*this.timeStepSyncing;
-        		Debug.write("timeLineAction Whiteboard starttime: ",starttime);
+        		//Debug.write("timeLineAction Whiteboard starttime: ",starttime);
         		if (starttime == this.currentTime){
         			var action = this.recordingValue.roomRecording.whiteboard[i].action;
-        			Debug.write("Found - ",starttime,action);
+        			//Debug.write("Found - ",starttime,action);
         			_drawarea.sendRecordedObject(action[2],action[3],false);
         		}
         	}

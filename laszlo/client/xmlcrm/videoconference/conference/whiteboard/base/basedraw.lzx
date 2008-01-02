@@ -701,7 +701,7 @@
 			} else if(actionObject[0]=='swf'){
 				//Image will send the onwmlLoaderSend later cause it has to be send
 				//once the image has been loaded completely
-				this.addSWFToLayerHistory(lastactionObject,this,isWmlLoader);
+				this.addSWFToLayerHistoryRecording(lastactionObject,this,isWmlLoader);
 			} else if(actionObject[0]=='rectangle'){
 				this.drawrectangleToHistory(lastactionObject,this);
 			} else if(actionObject[0]=='ellipse'){
@@ -736,7 +736,7 @@
 			obj.setAttribute('height',lastactionObject[lastactionObject.length-2]);
 		} else if (action=="loadwml"){
 			//Debug.write(actionObject,actionObject["wmlfileName"],actionObject["wmlroom"],actionObject["wmldomain"]);
-			this.remoteWmlLoader(actionObject["wmlfileName"],actionObject["wmlroom"],actionObject["wmldomain"]);
+			this.remoteWmlLoaderRecording(actionObject["wmlfileName"],actionObject["wmlroom"],actionObject["wmldomain"]);
 		} else if (action=="editText"){
 			this.editTextByHistory(actionObject,this);
 		} else if (action=="initgetVars"){
@@ -1365,8 +1365,8 @@
     
   	<method name="drawrectangleHistory" args="parentObj,x1,y1,x2,y2,stroke,line">
    		<![CDATA[
-    		parentObj.strokeStyle = this.currentrectanglestroke;
-    		parentObj.lineWidth = this.currentrectangleineWidth;
+    		parentObj.strokeStyle = stroke;
+    		parentObj.lineWidth = line;
     		parentObj.beginPath();
     		parentObj.moveTo(x1,y1);
     		parentObj.lineTo(x1,y2);
