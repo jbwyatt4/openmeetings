@@ -67,7 +67,7 @@ http://openmeetings.googlecode.com/svn/branches/dev/laszlo/client/xmlcrm/resourc
   # Step 4 - enter Application (http://$rmpthostlocal/xmlcrm/) 
 http://openmeetings.googlecode.com/svn/branches/dev/laszlo/client/xmlcrm/resources/screens/install_step4.png
 
-If you have it that far and openoffice+imagmagick runs correctly your installation is complete
+Now you can login. All basics are installed. Now login and goto the Meeting-Rooms and check all features. You properbly will have some difficulties uploading files. Check if OpenOffice is really running, swftool, ImageMagick (including GhostScript) is availible on  your System-Path (or your customize the path in the Configuration). On Linux your properbly will have to make some shell-Script executable, you find them in $Openmeetings-Home/jod/*.sh.
 
 
 = Tips and Tricks =
