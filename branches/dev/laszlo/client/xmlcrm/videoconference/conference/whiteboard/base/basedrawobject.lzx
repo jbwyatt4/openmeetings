@@ -1,152 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library>
-    
-<class name="SWFResourceView" extends="view" 
-    clip="true">
-    
-    <attribute name="refObj" value="null" />
-	<attribute name="alterModus" value="true" type="boolean" />
-	
-	<attribute name="baseurl" value="" type="string" />
-	<attribute name="fileName" value="" type="string" />
-	<attribute name="moduleName" value="" type="string" />
-	<attribute name="parentPath" value="" type="string" />
-	<attribute name="room" value="" type="string" />
-	<attribute name="domain" value="" type="string" />    
-    <attribute name="slideNumber" value="1" type="number" /> 
-    
-    <attribute name="currentzoomFactor" value="100" type="number" />
-    <attribute name="zoomlevel" value="20" type="number" />
-    <attribute name="initwidth" value="0" type="number" />
-    <attribute name="initheight" value="0" type="number" />
-    
-    <!-- for wml-loaded SWF's
-        attribute only set on init
-     -->
-    <attribute name="innerwidth" value="0" type="number" />
-    <attribute name="innerheight" value="0" type="number" />
-    <attribute name="innerx" value="0" type="number" />
-    <attribute name="innery" value="0" type="number" />
-    <attribute name="currentzoom" value="0" type="number" />
-    
-    <attribute name="typeOfObject" value="swf" type="string" />
-    
-    <view name="_swfView" play="false" stretches="both">
-        <handler name="onframe" args="i">
-            ////Debug.write("onframe",i);
-        </handler>
-        
-        <handler name="onplay" args="i">
-            ////Debug.write("onplay",i);
-        </handler>
-        
-        <handler name="onstop" args="i">
-            ////Debug.write("onstop",i);
-        </handler>
-        
-        <handler name="onload">
-            <![CDATA[
-                ////Debug.write("onload: ",this);
-                ////Debug.write("onload: ",this.stop);
-                this.stop();
-                this.setAttribute('play',false);             
-                ////Debug.write("swf loaded");
-                
-                this.parent.initwidth = this.width;
-                this.parent.initheight = this.height;
-                
-                this.setAttribute('frame',parent.slideNumber);
-                
-                //only send syncCommand if alterModus is true (meaning that this is the Moderator)
-                //otherwise just send a notification to moderator that this iamge has been loaded
-                if (this.parent.alterModus){
-                    this.parent.refObj.storeTempValsAndLoadSyncListSWF(this.parent);
-                    this.parent.refObj.doShowObjectBounds(this.parent.name);
-                } else {
-                    this.parent.refObj.sendLoadNotificationSWF("swfloadcomplete");
-                }
-                
-                if (this.parent.refObj.isWmlLoaderImage){
-                    this.setAttribute('width',this.parent.innerwidth);
-                    this.setAttribute('height',this.parent.innerheight);
-                    this.setAttribute('x',this.parent.innerx);
-                    this.setAttribute('y',this.parent.innery);
-                    this.parent.currentzoomFactor = this.parent.currentzoom;
-                }
-
-                this.parent.refObj.layers.push(this.parent);			
-                
-                this.oninit.sendEvent();
-                this.parent.refObj.parent.parent.isloadedImage.sendEvent(this);
-                
-                //send notification to wml-loader
-                //this is send later then in normal objects cause it needs to be send after the image
-                //has been loaded completely
-                if (this.parent.refObj.isWmlLoaderImage){
-                    this.parent.refObj.isWmlLoaderImage=false;
-                    if (this.parent.refObj.onwmlLoaderSend) this.parent.refObj.onwmlLoaderSend.sendEvent('swf');
-                }
-            ]]>
-        </handler>
-        <handler name="onerror" args="error">
-            <![CDATA[
-            ////Debug.write("onerror "+error);
-                
-                this.parent.initwidth = this.width;
-                this.parent.initheight = this.height;
-                                
-                //only send syncCommand if alterModus is true (meaning that this is the Moderator)
-                //otherwise just send a notification to moderator that this iamge has been loaded
-                if (this.parent.alterModus){
-                    this.parent.refObj.storeTempValsAndLoadSyncListSWF(this.parent);
-                } else {
-                    this.parent.refObj.sendLoadNotificationSWF("swfloaderror");
-                }
-                this.parent.refObj.layers.push(this.parent);			
-                
-                this.oninit.sendEvent();
-                this.parent.refObj.parent.parent.isloadedImage.sendEvent(this.parent);
-                
-                //send notification to wml-loader
-                //this is send later then in normal objects cause it needs to be send after the image
-                //has been loaded completely
-                if (this.parent.refObj.isWmlLoaderImage){
-                    this.parent.refObj.isWmlLoaderImage=false;
-                    if (this.parent.refObj.onwmlLoaderSend) this.parent.refObj.onwmlLoaderSend.sendEvent('swf');
-                }
-            ]]>
-        </handler>
-        <handler name="ontimeout" args="error">
-            <![CDATA[
-            ////Debug.write("ontimeout "+error);
-                
-                this.parent.initwidth = this.width;
-                this.parent.initheight = this.height;
-                                
-                //only send syncCommand if alterModus is true (meaning that this is the Moderator)
-                //otherwise just send a notification to moderator that this iamge has been loaded
-                if (this.parent.alterModus){
-                    this.parent.refObj.storeTempValsAndLoadSyncListSWF(this.parent);
-                } else {
-                    this.parent.refObj.sendLoadNotificationSWF("swfloadtimeout");
-                }
-                this.parent.refObj.layers.push(this.parent);			
-                
-                this.oninit.sendEvent();
-                this.parent.refObj.parent.parent.isloadedImage.sendEvent(this.parent);
-                
-                //send notification to wml-loader
-                //this is send later then in normal objects cause it needs to be send after the image
-                //has been loaded completely
-                if (this.parent.refObj.isWmlLoaderImage){
-                    this.parent.refObj.isWmlLoaderImage=false;
-                    if (this.parent.refObj.onwmlLoaderSend) this.parent.refObj.onwmlLoaderSend.sendEvent('swf');
-                }
-            ]]>
-        </handler> 
-    </view>    
-        
-</class>
 
 <class name="basedrawobject" extends="basedraw">
     
@@ -213,11 +66,47 @@
             return this.currentlayer;
 		]]>
   	</method>
+  	
+  	<method name="addPresentationToLayerRecording" args="obj,urlName,nameing,posx,posy,width,height,alterModus,baseurl,fileName,moduleName,parentPath,room,domain,slideNumber,currentzoom,innerwidth,innerheight,innerx,innery">
+        <![CDATA[
+            //Debug.write("addPresentationToLayer",obj,nameing,posx,posy,width,height,alterModus,baseurl,fileName,moduleName,parentPath,room,domain,slideNumber);
+            //only show if it is not part of wml-file-object
+            if (!this.isWmlLoaderImage) {
+                this.loadimageDataWinRef = new loadwhiteboardwindow(canvas.main_content._content.inner,{refObj:this});
+                this.loadimageDataWinRef.setMessage(canvas.getLabelName(this.imageLoadMessageId));
+            }
+            var downloadurl = 'http://'+canvas.rtmphostlocal+':'+canvas.red5httpport+'/xmlcrm/DownloadHandler?' +
+                    'fileName=' + fileName +
+                    '&moduleName=' + moduleName + 
+                    '&parentPath=' + parentPath +
+                    '&room='+room + 
+                    '&domain='+domain + 
+                    '&sid='+canvas.sessionId;
+            var width= this.width;
+            var height = this.height;
+            if (alterModus){
+                this.currentlayer = new SWFResourceView(obj,{refObj:this,name:nameing,x:posx,y:posy,alterModus:alterModus,baseurl:baseurl,fileName:fileName,moduleName:moduleName,parentPath:parentPath,room:room,domain:domain,slideNumber:slideNumber,width:width,height:height,currentzoom:currentzoom,innerwidth:innerwidth,innerheight:innerheight,innerx:innerx,innery:innery,recorderModus:true});
+            } else {
+                this.currentlayer = new SWFResourceView(obj,{refObj:this,name:nameing,x:posx,y:posy,alterModus:alterModus,baseurl:baseurl,fileName:fileName,moduleName:moduleName,parentPath:parentPath,room:room,domain:domain,slideNumber:slideNumber,width:width,height:height,currentzoom:currentzoom,innerwidth:innerwidth,innerheight:innerheight,innerx:innerx,innery:innery,recorderModus:true});
+            }
+            this.parent.parent.isloadingImage.sendEvent(this.currentlayer);
+            this.currentlayer._swfView.setSource(downloadurl);
+
+            //Add Layer to global Layer  	
+            return this.currentlayer;
+		]]>
+  	</method>  	
     
   	<method name="addSWFToLayerHistory" args="actionObject,refObj,isWmlLoader">
 		this.isWmlLoaderImage = isWmlLoader;
         this.baseactionobjectList.push(actionObject);	
   		this.addPresentationToLayer(refObj,actionObject[1],actionObject[actionObject.length-1],actionObject[actionObject.length-5],actionObject[actionObject.length-4],actionObject[actionObject.length-3],actionObject[actionObject.length-2],false,actionObject[2],actionObject[3],actionObject[4],actionObject[5],actionObject[6],actionObject[7],actionObject[8],actionObject[16],actionObject[11],actionObject[12],actionObject[9],actionObject[10]);
+  	</method>
+  	
+  	<method name="addSWFToLayerHistoryRecording" args="actionObject,refObj,isWmlLoader">
+		this.isWmlLoaderImage = isWmlLoader;
+        this.baseactionobjectList.push(actionObject);	
+  		this.addPresentationToLayerRecording(refObj,actionObject[1],actionObject[actionObject.length-1],actionObject[actionObject.length-5],actionObject[actionObject.length-4],actionObject[actionObject.length-3],actionObject[actionObject.length-2],false,actionObject[2],actionObject[3],actionObject[4],actionObject[5],actionObject[6],actionObject[7],actionObject[8],actionObject[16],actionObject[11],actionObject[12],actionObject[9],actionObject[10]);
   	</method>
   	
   	<method name="registerNewSWF" args="urlname,posx,posy,width,height,baseurl,fileName,moduleName,parentPath,room,domain,slideNumber,innerx,innery,innerwidth,innerheight,zoomlevel,currentzoom,initwidth,initheight">
@@ -255,6 +144,12 @@
 		this.syncImageRefObj = objRef;
 		this.getSWFClientListScope.doCall();
 	</method>    
+	
+	<method name="storeTempValsAndLoadSyncListSWFRecording" args="objRef">
+		this.syncImageRefObj = objRef;
+		this.doRegisterNewSwf();
+		this.sendCompleteSWFSync();
+	</method>    
     
 	<method name="sendLoadNotificationSWF" args="message" >
 		this.imageLoadingCompleteMessage = new Array();
@@ -268,9 +163,8 @@
 		<netparam name="vars"><method name="getValue">return parent.parent.imageLoadingCompleteMessage;</method></netparam>
 		<handler name="ondata" args="value">
 			<![CDATA[
-			//The onResult-Handler will be called be the rtmpconnection
-			////Debug.write("getValue : ",value);
-			
+				//The onResult-Handler will be called be the rtmpconnection
+				////Debug.write("getValue : ",value);
 			]]>
 		</handler>   
 	</netremotecallhib>     
@@ -290,27 +184,31 @@
 						parent._loadingUsersImageList.push(value[eg]);
 					}
 				}
-				this.parent.imageSyncMessageText = canvas.getLabelName(this.parent.imageSyncMessageId);
-				//now send notifications to connected clients
-				this.parent.setAttribute('drawmodus','hand');
-                
-				this.parent.registerNewSWF(this.parent.syncImageRefObj.baseurl,this.parent.syncImageRefObj.x,
-                        this.parent.syncImageRefObj.y,this.parent.syncImageRefObj._swfView.width,
-                        this.parent.syncImageRefObj._swfView.height,this.parent.syncImageRefObj.baseurl,
-                        this.parent.syncImageRefObj.fileName,this.parent.syncImageRefObj.moduleName,
-                        this.parent.syncImageRefObj.parentPath,this.parent.syncImageRefObj.room,
-                        this.parent.syncImageRefObj.domain,this.parent.syncImageRefObj.slideNumber,
-                        this.parent.syncImageRefObj._swfView.x,this.parent.syncImageRefObj._swfView.y,
-                        this.parent.syncImageRefObj._swfView.width,this.parent.syncImageRefObj._swfView.height,
-                        this.parent.syncImageRefObj.zoomlevel,this.parent.syncImageRefObj.currentzoomFactor,
-                        this.parent.syncImageRefObj.initwidth,this.parent.syncImageRefObj.initheight);
-                
-				//set modus to hand so users can directly select that image
-				this.parent.setModus('swf');	
+				this.parent.doRegisterNewSwf();	
 				this.parent.startSWFsyncCheck();			
             ]]>
         </handler>   
     </netremotecallhib>
+    
+    <method name="doRegisterNewSwf">
+		this.imageSyncMessageText = canvas.getLabelName(this.imageSyncMessageId);
+		//now send notifications to connected clients
+		this.setAttribute('drawmodus','hand');
+        
+		this.registerNewSWF(this.syncImageRefObj.baseurl,this.syncImageRefObj.x,
+                this.syncImageRefObj.y,this.syncImageRefObj._swfView.width,
+                this.syncImageRefObj._swfView.height,this.syncImageRefObj.baseurl,
+                this.syncImageRefObj.fileName,this.syncImageRefObj.moduleName,
+                this.syncImageRefObj.parentPath,this.syncImageRefObj.room,
+                this.syncImageRefObj.domain,this.syncImageRefObj.slideNumber,
+                this.syncImageRefObj._swfView.x,this.syncImageRefObj._swfView.y,
+                this.syncImageRefObj._swfView.width,this.syncImageRefObj._swfView.height,
+                this.syncImageRefObj.zoomlevel,this.syncImageRefObj.currentzoomFactor,
+                this.syncImageRefObj.initwidth,this.syncImageRefObj.initheight);
+        
+		//set modus to hand so users can directly select that image
+		this.setModus('swf');
+    </method>
 	
 	<!-- after loading the objects check if all connected clients of that conference
 		have loaded the file completely, check it every 1 seconds -->
