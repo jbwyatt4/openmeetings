@@ -119,7 +119,7 @@
 	</method>
 </class>  
     
-<class name="conferencemenubar" extends="menubar">
+<class name="conferencemenubar" extends="menubar" height="28">
     <labelmenu labelid="308" width="250">
         <labelmenuitem labelid="309" command="cmd_quit" />
     </labelmenu>
