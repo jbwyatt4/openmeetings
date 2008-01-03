@@ -71,6 +71,9 @@ public class ChatService implements IPendingServiceCallback {
 					if (roomname.equals(rcl.getUserroom()) && orgdomain.equals(rcl.getDomain())) {
 						((IServiceCapableConnection) conn).invoke("sendVarsToMessageWithClient",new Object[] { hsm }, this);
 						log.debug("sending sendVarsToMessageWithClient to " + conn);
+						if (rcl.getIsRecording()){
+							StreamService.addChatEvent(rcl.getRoomRecordingName(),hsm);
+						}							
 					} else if (rcl.getIsChatNotification()) {
 						if (roomname.equals(rcl.getChatUserroom()) && orgdomain.equals(rcl.getChatDomain())) {
 							((IServiceCapableConnection) conn).invoke("sendVarsToMessageWithClient",new Object[] { hsm }, this);

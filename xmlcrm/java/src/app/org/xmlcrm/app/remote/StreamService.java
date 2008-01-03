@@ -94,6 +94,9 @@ public class StreamService {
 			LinkedList<Object> whiteBoardEvents = new LinkedList<Object>();
 			roomRecording.put("whiteboard", whiteBoardEvents);
 			
+			LinkedList<Object> chatvaluesEvents = new LinkedList<Object>();
+			roomRecording.put("chatvalues", chatvaluesEvents);
+			
 			roomRecordingList.put(recordingName, roomRecording);
 			
 			return recordingName;
@@ -313,4 +316,27 @@ public class StreamService {
 			log.error("[addRecordingByStreamId]",err);
 		}	
 	}
+	
+	public static void addChatEvent(String roomrecordingName,Object vars) {
+		try {
+			LinkedHashMap<String,Object> roomRecording = roomRecordingList.get(roomrecordingName);
+			
+			Date recordingsStartTime = (Date) roomRecording.get("starttime");
+			Date currentDate = new Date();
+			
+			LinkedList<Object> chatvaluesEvents = (LinkedList<Object>) roomRecording.get("chatvalues");
+			
+			LinkedHashMap<String,Object> chatvaluesEvent = new LinkedHashMap<String,Object>();
+			chatvaluesEvent.put("starttime",currentDate.getTime()-recordingsStartTime.getTime());
+			chatvaluesEvent.put("action", vars);
+			
+			chatvaluesEvents.add(chatvaluesEvent);
+			roomRecording.put("chatvalues", chatvaluesEvents);
+			roomRecordingList.put(roomrecordingName, roomRecording);
+			
+		} catch (Exception err) {
+			log.error("[addRecordingByStreamId]",err);
+		}	
+	}
+	
 }
