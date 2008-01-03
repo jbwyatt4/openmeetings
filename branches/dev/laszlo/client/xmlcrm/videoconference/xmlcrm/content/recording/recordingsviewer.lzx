@@ -23,7 +23,62 @@
    </whiteboard>    
 </class>  
 
-<class name="recordingsviewer" extends="basecontentview">
+<class name="recorderClickMask" extends="view" 
+	   width="${ parent.width }" height="${ parent.height }">
+	<handler name="onclick">
+		new errorpopup(canvas,{error:canvas.getLabelName(412)});
+	</handler>
+</class>	
+ 
+<class name="recordplayerBG" extends="view" width="100%" height="100%">
+	<view name="bginner" width="100%" height="100%"
+		  bgcolor="0xFFFFFF" opacity="0.7" onclick="parent._btn.onclick.sendEvent();" />
+	<view align="center" y="${ (parent.parent.height-40)/2 }" resource="_recording_playBig_rsc" 
+		  name="_btn" onmouseover="this.setResourceNumber(2);" 
+		  onmouseout="this.setResourceNumber(1);" >
+	    <handler name="oninit">
+	        this.setShadow();
+	    </handler>
+	    <method name="setShadow" >
+	        <![CDATA[
+	        if (this.isinited){
+	            this.normalMC = this.getMCRef();
+	           	this.displacementMap = new flash.filters.DropShadowFilter();
+	            this.normalMC.filters = [this.displacementMap];
+	        }
+	        ]]>              
+	    </method> 
+	    <handler name="onclick">
+	    	parent.destroy();
+	    	parent.parent.getRecordingById.doCall();
+	    </handler>
+	    <labeltooltip labelid="413" />
+	</view>
+</class>
+	
+<class name="recorderProgressBar" extends="view" bgcolor="0xCCCCCC"
+	  height="40" y="${ parent.height-40 }" width="100%">
+	<view resource="_recording_smallplay_rsc">
+		<handler name="onclick">
+			//Todo: Fill with play / pause logic
+		</handler>
+		<labeltooltip labelid="413" />
+	</view>
+	<view name="progressbar" x="83" width="${ parent.width-183 }" height="40">
+		<view width="${ parent.width }" height="10" y="15" bgcolor="0xAAAAAA" />
+		<view name="thumb" resource="_recording_gripper_thumb_rsc">
+			<handler name="onclick">
+				//Todo: Fill with drag / seek logic
+			</handler>
+		</view>
+	</view>
+	<view name="_currentTime" x="${ parent.width-80 }" y="12" >
+		<labeltext fontsize="14" name="_timetext" text="--:--" />
+	</view>
+</class>
+
+<class name="recordingsviewer" extends="basecontentview" 
+	   height="${ parent.parent.parent.height }" width="${ parent.parent.parent.width }" >
 	
 	<attribute name="timerDel" value="null" />
 	<attribute name="currentTime" value="0" type="number" />
@@ -34,8 +89,25 @@
 
 	<handler name="oninit">
 		canvas.thishib.modus = "recording";
-		this.getRecordingById.doCall();
+		this.initRecordingComponents();
 	</handler>
+	
+	<method name="initRecordingComponents">
+		new videoboardstream(this,{name:'_videoboardstream'});
+		new whiteboardpanelrecord(this,{name:'_whiteboardpanelrecord'});
+		new filespanel(this,{name:'_filespanel'});
+		new recorderClickMask(this,{name:'_recorderClickMask'});
+		new recordplayerBG(this,{name:'_recordplayerBG'});
+		new recorderProgressBar(this,{name:'progress'});
+	</method>
+	
+	<method name="clearComponents">
+		for (var eg in this.subviews) this.subviews[eg].destroy();
+	</method>
+	
+	<!--
+	this.getRecordingById.doCall();
+	-->
 	
   	<netremotecallhib name="getRecordingById" funcname="streamservice.getRecordingById" 
 		remotecontext="$once{ canvas.thishib }">   
@@ -47,15 +119,31 @@
             	Debug.write("getRecordingById",parent.recordingValue.roomRecording);
             	parent.timerDel = new LzDelegate( parent, "timeLineAction" );
             	_drawarea.isinitRecordingLoad = true;
-            	_drawarea.loadwmlObjectToStage(parent.recordingValue.roomRecording.initwhiteboardvars,"","","",true,true);
-            	//parent.loadInitArgsByObject();
+            	if (parent.recordingValue.roomRecording.initwhiteboardvars!=null && parent.recordingValue.roomRecording.initwhiteboardvars.length>0){
+            		_drawarea.loadwmlObjectToStage(parent.recordingValue.roomRecording.initwhiteboardvars,"","","",true,true);
+            	} else {
+            		parent.timeLineAction();
+            	}
             ]]>	        	          				
         </handler>	
   	</netremotecallhib>  
 
     <method name="timeLineAction">
     	<![CDATA[
-	        //Debug.write("timeLineAction: ",this.currentTime);
+	        //	        
+    		var perc = Math.round((100/this.recordingValue.duration)*this.currentTime);
+    		var newW = Math.round((this.progress.progressbar.width/100)*perc);
+	        Debug.write("timeLineAction: ",this.currentTime,perc,newW,this.recordingValue.duration);
+	        this.progress.progressbar.thumb.setAttribute('x',newW);
+	        
+	        var restTime = this.recordingValue.duration-this.currentTime;
+	        if (restTime<0)restTime=0;
+			var seconds = Math.round(restTime/1000);
+			var minutes = Math.floor(seconds/60);
+			var deltaSeconds = seconds-(minutes*60);
+			if (deltaSeconds<10) deltaSeconds = "0"+deltaSeconds;
+			if (minutes<10) minutes = "0"+minutes;	
+			this.progress._currentTime._timetext.setAttribute('text',minutes+":"+deltaSeconds);
 	        
         	for (var i=0;i<this.recordingValue.roomRecording.streamlist.length;i++){
         		//Debug.write(this.recordingValue.roomRecording.streamlist[i]);
@@ -78,16 +166,26 @@
         			_drawarea.sendRecordedObject(action[2],action[3],false);
         		}
         	}
-	        LzTimer.addTimer( this.timerDel, this.timeStepSyncing );
-	        this.currentTime += this.timeStepSyncing;
+        	
+        	for (var i=0;i<this.recordingValue.roomRecording.chatvalues.length;i++){
+        		var starttime =  (Math.round(this.recordingValue.roomRecording.chatvalues[i].starttime/this.timeStepSyncing))*this.timeStepSyncing;
+        		if (starttime == this.currentTime){
+        			var action = this.recordingValue.roomRecording.chatvalues[i].action;
+        			chartcontent.addChatHistory(action.message,action.client);
+        		}
+        	}
+        	if (perc<100){
+		        LzTimer.addTimer( this.timerDel, this.timeStepSyncing );
+		        this.currentTime += this.timeStepSyncing;
+        	} else {
+        		this.currentTime = 0;
+        		this.clearComponents();
+        		this.initRecordingComponents();
+        		this.progress._currentTime._timetext.setAttribute('text',"--:--");
+        		this.progress.progressbar.thumb.setAttribute('x',0);
+        	}
         ]]>
     </method>
-    
-	 <view name="videorecorder" onclick="">
-	 	<videoboardstream name="_videoboard" />
-	 </view>	
-	 
-	<whiteboardpanelrecord name="_whiteboardpanelrecord" />
 	
 </class>
 

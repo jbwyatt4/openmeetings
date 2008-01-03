@@ -33,13 +33,17 @@
 	  					<labeltext x="20" text="$path{ 'name/text()' }" y="2" />
 	  					<labeltext x="260" text="$path{ 'rooms/name/text()' }" y="2" />
 	  					<handler name="ondata">
-	  						var duration = Number(this.datapath.xpathQuery('duration/text()'));
-	  						var seconds = Math.round(duration/1000);
-	  						var minutes = Math.floor(seconds/60);
-	  						var deltaSeconds = seconds-(minutes*60);
-	  						var dateStr = this.datapath.xpathQuery('starttime/text()');
-	  						Debug.write("dateStr: ",dateStr,this);
-	  						this._text.text = canvas.getLabelName(411)+dateStr+canvas.getLabelName(410)+minutes+":"+deltaSeconds+" ";
+	  						<![CDATA[
+		  						var duration = Number(this.datapath.xpathQuery('duration/text()'));
+		  						var seconds = Math.round(duration/1000);
+		  						var minutes = Math.floor(seconds/60);
+		  						var deltaSeconds = seconds-(minutes*60);
+		  						var dateStr = this.datapath.xpathQuery('starttime/text()');
+		  						Debug.write("dateStr: ",dateStr,this);
+		  						if (minutes<10) minutes = "0"+minutes;
+		  						if (deltaSeconds<10) deltaSeconds = "0"+deltaSeconds;
+		  						this._text.text = canvas.getLabelName(411)+dateStr+canvas.getLabelName(410)+minutes+":"+deltaSeconds+" ";
+	  						]]>
 	  					</handler>
 	  					<handler name="ondblclick">
 	  						canvas.currentrecorder_id = Number(this.datapath.xpathQuery('recording_id/text()'));

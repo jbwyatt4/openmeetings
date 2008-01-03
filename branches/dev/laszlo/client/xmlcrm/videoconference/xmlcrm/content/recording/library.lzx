@@ -2,6 +2,9 @@
 <library>
 	
 	<resource name="_recording_play_rsc" src="resources/noatunplay.png" />
+	<resource name="_recording_gripper_thumb_rsc" src="resources/gripper_thumb.swf" />
+	<resource name="_recording_smallplay_rsc" src="resources/recorder_smallplay.swf" />
+	<resource name="_recording_playBig_rsc" src="resources/recorder_bigplay.swf" />
 	
 	<include href="video/" />
     <include href="recordingsavewin.lzx" />
