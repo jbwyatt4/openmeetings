@@ -861,10 +861,10 @@ public class Application extends ApplicationAdapter implements
 						if (!currentClient.getStreamid().equals(rcl.getStreamid()) && roomname.equals(rcl.getUserroom()) && orgdomain.equals(rcl.getDomain())) {
 							((IServiceCapableConnection) conn).invoke("sendVarsToWhiteboard", new Object[] { vars },this);
 							log.debug("sending sendVarsToWhiteboard to " + conn);
+							if (rcl.getIsRecording()){
+								StreamService.addWhiteBoardEvent(rcl.getRoomRecordingName(),vars);
+							}								
 						}
-						if (rcl.getIsRecording()){
-							StreamService.addWhiteBoardEvent(rcl.getRoomRecordingName(),vars);
-						}						
 					}
 				}				
 				return 1;
