@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library>
-    
+	
+<include href="incubator/roundrect.lzx"/> 
 
 	<!-- 
 		Icons for the TabbarIconButtons
@@ -8,109 +9,78 @@
 <resource name="ksirc_rsc2" src="resources/ksirc.png" />
 <resource name="kuser_rsc2" src="resources/kuser.png" />   
 <resource name="library2" src="resources/folder.png" />  
-        
-<class name="icontab" extends="basetab">
-
-        <!--- Text padding. Default is 20. -->
-    <attribute name="padding" value="20" />
-
-        <!--- @keywords private -->
-    <attribute name="tabstate" value="2" type="number"/>
-        <!--- @keywords private -->
-    <attribute name="MIN_TEXT_BORDER" value="2" type="number"/>
-        <!--- @keywords private -->
-    <attribute name="titleshift" value="${this.tabstate == 4 ? 4 : 0}" type="number"/>
-        <!--- @keywords private -->
-    <attribute name="width" value="${tabview.labeltext.getTextWidth() + 2*padding + 20}" />
-
-    <attribute name="labelid" type="number" setter="setLabelId(labelid)" />
-    <method name="setLabelId" args="_labelid" >
-        this.labelid = _labelid;
-        this.setAttribute('text',canvas.getLabelName(this.labelid));
-    </method>   
     
-    <handler name="oninit">
-        Debug.write("icontab: ",this);
-        this.setAttribute("labelid",tabpane.labelid);
-    </handler>
-    
-    <view name="tabview" width="100%" >
-        <stableborderlayout axis="x"/>
-        <view name="left" resource="tab_L_rsc">
-            <attribute name="frame" value="${classroot.tabstate}"/>
-        </view>
-        <view name="middle" resource="tab_M_rsc" stretches="width">
-            <attribute name="frame" value="${classroot.tabstate}"/>
-        </view>
-        <view name="right" resource="tab_R_rsc">
-            <attribute name="frame" value="${classroot.tabstate}"/>
-        </view>
-        <view name="_icon"
-            x="10"
-            y="${parent.parent.height/2-(this.height/2) - parent.parent.titleshift +6}"
-            resource="$once{ parent.parent.tabpane.iconresourcename }" />
-        <statictext name="labeltext"
-                x="${(parent.parent.width/2 - this.width/2)+4}"
-                y="${parent.parent.height/2-(this.height/2) - parent.parent.titleshift +4}"
-                text="${parent.parent.text}"
-                resize="true" >
-        </statictext>
-    </view>
-
-        <!--- @keywords private -->
-    <method name="_applystyle" args="s">
-        tabview.labeltext.setAttribute('fgcolor',s.textcolor);
-        setTint(tabview.left, s.basecolor);
-        setTint(tabview.middle, s.basecolor);
-        setTint(tabview.right, s.basecolor);
-    </method>
-
-        <!--- @keywords private -->
-    <method name="_showEnabled">
-        setAttribute('tabstate', this._enabled ? 2 : 1);
-    </method>
-        <!--- @keywords private -->
-    <handler name="onmouseover">
-        setAttribute('tabstate', 3);
-    </handler>
-        <!--- @keywords private -->
-    <handler name="onmouseout">
-        if (!this["selected"]) {
-            setAttribute('tabstate',2);
-        }
-    </handler>
-        <!--- @keywords private -->
-        <method name="setSelected" args="s">
-            <![CDATA[
-                if (s) {
-                   setAttribute('tabstate', 4);
-                   setAttribute("y", 1);
-                } else {
-                    setAttribute('tabstate', 2);
-                    setAttribute("y",0);
-                }
-
-                super.setSelected(s);
-            ]]>
-        </method>
-        <!--- @keywords private -->
-    <method name="setHilite" args="dohilite">
-        tabview.labeltext.setAttribute('fgcolor',
-            dohilite ? style.texthilitecolor : style.textcolor);
-    </method>
-
-</class>
-    
-<class name="simplebasetabpane" extends="tabpane">
-	<attribute name="iconresourcename" value="" type="string" />
-    <attribute name="labelid" type="number" value="0" />
+<class name="simplebasetabpane" extends="view" height="$once{ parent.height-20 }" 
+	   width="$once{ parent.width }" y="24" x="2" >
+	
 </class>    
 
-<class name="conferencecontainertab" extends="tabs" inset_top="2" inset_left="2"
-    width="262" height="286" tabclass="icontab" >
-    <chattab iconresourcename="ksirc_rsc2" labelid="244" />
-    <uploadtab iconresourcename="library2" labelid="245" />
-    <participants iconresourcename="kuser_rsc2" labelid="246" />
+<class name="openmeetingsTabButton" extends="roundrectgradient" width="85" height="40"
+	borderWidth="1" borderRadius="5" >
+	<attribute name="labelid" type="number" value="0" />
+	<attribute name="iconresourcename" value="" type="string" />
+	<view x="4" y="4" resource="$once{ parent.iconresourcename }" />
+	<labeltext x="24" y="2" labelid="$once{parent.labelid }" />
+</class>
+
+<class name="conferencecontainertab" extends="view"
+    width="262" height="286">
+	
+	<attribute name="uploadTapIsInited" value="false" type="boolean" />
+	<attribute name="membersTapIsInited" value="false" type="boolean" />
+	
+    <openmeetingsTabButton name="b1" iconresourcename="ksirc_rsc2" labelid="244" x="1" y="0" 
+    					   opacity="0.9">
+    	<handler name="onclick">
+    		parent._chattab.setAttribute('visible',true);
+    		if (parent.uploadTapIsInited) parent._uploadtab.setAttribute('visible',false);
+    		if (parent.membersTapIsInited) parent._participants.setAttribute('visible',false);
+    		this.setAttribute('opacity',0.9);
+    		parent.b2.setAttribute('opacity',1);
+    		parent.b3.setAttribute('opacity',1);
+    	</handler>
+    </openmeetingsTabButton>
+    <openmeetingsTabButton name="b2" iconresourcename="library2" labelid="245" x="88" y="0" >
+    	<handler name="onclick">
+    		parent._chattab.setAttribute('visible',false);
+    		if (parent.uploadTapIsInited) {
+    			parent._uploadtab.setAttribute('visible',true);
+    		} else {
+    			var t = new uploadtab(this.parent,{name:'_uploadtab'});
+    			t.onvisible.sendEvent();
+    			parent.uploadTapIsInited = true;
+    		}
+    		if (parent.membersTapIsInited) parent._participants.setAttribute('visible',false);
+    		this.setAttribute('opacity',0.9);
+    		parent.b1.setAttribute('opacity',1);
+    		parent.b3.setAttribute('opacity',1);    		
+    	</handler>
+    </openmeetingsTabButton>	
+    <openmeetingsTabButton name="b3" iconresourcename="kuser_rsc2" labelid="246" x="175" y="0" >
+    	<handler name="onclick">
+    		parent._chattab.setAttribute('visible',false);
+    		if (parent.uploadTapIsInited) parent._uploadtab.setAttribute('visible',false);
+    		if (parent.membersTapIsInited) {
+    			parent._participants.setAttribute('visible',true);
+    		} else {
+    			var t = new participants(this.parent,{name:'_participants'});
+    			t.onvisible.sendEvent();
+    			parent.membersTapIsInited = true;
+    		} 
+    		this.setAttribute('opacity',0.9);
+    		parent.b2.setAttribute('opacity',1);
+    		parent.b1.setAttribute('opacity',1);    		
+    	</handler>
+    </openmeetingsTabButton>	
+    <view y="22" bgcolor="0x000000" x="1" width="259" height="20">
+    	<view y="1" bgcolor="$once{ canvas.basebgcolorizer }" 
+    		  width="$once{ parent.width }" height="$once{ parent.height-1 }" />
+    </view>
+    <chattab name="_chattab" />
+    <!--
+    <uploadtab name="_uploadtab" visible="false" />
+    <participants name="_participants" visible="false" />
+     -->
 </class>    
 
 </library>
