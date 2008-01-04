@@ -8,7 +8,7 @@ import org.red5.server.api.stream.support.SimpleBandwidthConfigure;
  *
  */
 public class CustomBandwidth extends SimpleBandwidthConfigure{
-
+ 
 	private String groupName = "";
 	private String description = "";
 	private int minpingTime = 0;

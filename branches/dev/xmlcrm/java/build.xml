@@ -2,9 +2,13 @@
 
 	<!-- Sources and output dirs -->
 	<property name="main.src.dir" value="${basedir}/src/app"/>
-	<property name="main.out.dir" value="${basedir}/src/app"/>
+	<property name="main.out.dir" value="${basedir}/bin"/>
 	<property name="test.src.dir" value="${basedir}/src/test"/>
-	<property name="test.out.dir" value="${basedir}/bin/test"/>
+	<property name="test.out.dir" value="${basedir}/bin"/>
+	
+	<property name="classes.dir" value="${basedir}/bin"/>
+	
+	<property name="dist.dir" value="dist"/>
 	
 	<!-- Conf dirs -->
 	<property name="conf.dir" value="${basedir}/conf"/>
@@ -29,12 +33,22 @@
 	<property name="jakarta.common.lib" value="${project.lib}/jakarta-commons" />
 	<!--JDBC Drivers-->
 	<property name="database.lib" value="${project.lib}/database" />
-
+	<property name="quartz.lib" value="${project.lib}/quartz" />
+	<property name="red5.lib" value="${project.lib}/red5" />
+	<property name="upload.lib" value="${project.lib}/upload" />
+	<property name="xstream.lib" value="${project.lib}/xstream" />
+	<property name="web.lib" value="${project.lib}" />
+	
 	<!-- compile classpath -->
 	<path id="compile.classpath">
 		<fileset dir="${log4j.lib}" includes="*.jar"/>
 		<fileset dir="${hibernate.lib}" includes="*.jar"/>
 		<fileset dir="${project.lib}" includes="*.jar"/>
+		<fileset dir="${jakarta.common.lib}" includes="*.jar"/>
+		<fileset dir="${quartz.lib}" includes="*.jar"/>
+		<fileset dir="${red5.lib}" includes="*.jar"/>
+		<fileset dir="${upload.lib}" includes="*.jar"/>
+		<fileset dir="${xstream.lib}" includes="*.jar"/>
 		<fileset dir="${web.lib}" includes="*.jar"/>
 	</path>
 
@@ -135,7 +149,12 @@
 	
 	<!-- end of xdoclet 2 -->
 
+	<!-- build webapp -->
 
+	<target name="dist" description="binary distribution of OpenMeetings"
+		depends="cleanForBinary, jar, signWebStartJars">
+		
+	</target>
 
 	<!-- Export SQL schema using mapping files and hibernate configuration -->
 <!--	<target name="Export SQL Schema" depends="Generate Mappings">
@@ -160,6 +179,11 @@
 
 	<!-- Check timestamp on files -->
 	<target name="prepare">
+		<mkdir dir="${dist.dir}"/>
+		<copy todir="${dist.dir}" filtering="true">
+			<fileset dir="webapp">
+			</fileset>
+		</copy>		
 		<tstamp/>
 	</target>
 
@@ -178,26 +202,96 @@
 		</copy>
 	</target>
 
-
-	<!-- Normal build of application -->
+	<!-- Compile JAR -->
+	<target name="jar" description="Make Archive" depends="compile">
+		<tstamp prefix="build">
+			<format property="TODAY" pattern="d-MMMM-yyyy" locale="en"/>
+		</tstamp>
+		<manifestclasspath property="jar.classpath" jarfile="xmlcrm.jar">
+			<classpath refid="compile.classpath"/>
+		</manifestclasspath>
+		<jar destfile="${dist.dir}/xmlcrm/WEB-INF/lib/xmlcrm.jar">
+			<fileset dir="${classes.dir}">
+				<include name="**"/>
+				<exclude name="**/test/**"/>
+				<exclude name="**/webstart/**"/>
+				<exclude name="**/*.png"/>
+				<exclude name="**/*.vm"/>
+				<exclude name="hibernate.cfg.xml"/>
+			</fileset>
+			<manifest>
+				<attribute name="Built-By" value="OpenMeetings - http://openmeetings.googlecode.com"/>
+				<attribute name="Built-On" value="${build.TODAY}"/>
+				<attribute name="Class-Path" value="conf/ ${jar.classpath}"/>
+			</manifest>
+		</jar>	
+		<jar destfile="${dist.dir}/xmlcrm/WEB-INF/lib/xmlcrm-templates.jar">
+			<fileset dir="${classes.dir}">
+				<include name="**"/>
+				<exclude name="**/org/**"/>
+				<exclude name="**/*.png"/>
+				<exclude name="**/*.properties"/>
+				<exclude name="hibernate.cfg.xml"/>
+			</fileset>
+			<manifest>
+				<attribute name="Built-By" value="OpenMeetings - http://openmeetings.googlecode.com"/>
+				<attribute name="Built-On" value="${build.TODAY}"/>
+				<attribute name="Class-Path" value="conf/ ${jar.classpath}"/>
+			</manifest>
+		</jar>		
+	</target>
+	
+	<target name="signWebStartJars">
+	    <delete file="filetest.keystore" />
+	    <genkey alias="filetest"
+	      storepass="secret"
+	      keystore="filetest.keystore"
+	      verbose="true">
+	      	<dname>
+	        	<param name="CN" value="Sebastian Wagner"/>
+	        	<param name="OU" value="technology"/>
+	        	<param name="O"  value="openmeetings.googlecode.com"/>
+	        	<param name="C"  value="DE"/>
+			</dname>
+	    </genkey>		
+		<signjar
+		    alias="filetest" keystore="filetest.keystore"
+		    storepass="secret"
+		    lazy="false"
+		    >
+		  <path>
+		    <fileset dir="${dist.dir}/xmlcrm/screen" includes="**/*.jar" />
+		  </path>
+		</signjar>	
+	</target>
+		
+	<!-- Normal build of application
+	compiler="org.eclipse.jdt.core.JDTCompilerAdapter" -->
 	<target name="compile" depends="prepare, resources">
-		<javac srcdir="${main.src.dir}" destdir="${main.out.dir}" compiler="org.eclipse.jdt.core.JDTCompilerAdapter">
+		<echo message="${main.out.dir}"></echo>
+		<javac srcdir="${main.src.dir}" destdir="${main.out.dir}" >
 			<classpath refid="compile.classpath"/>
 		</javac>
 	</target>
 
-	<!-- Build of junit tests -->
+	<!-- Build of junit tests
+	compiler="org.eclipse.jdt.core.JDTCompilerAdapter"
+	 -->
 	<target name="compileTest" depends="compile">
-		<javac srcdir="${test.src.dir}" destdir="${test.out.dir}" compiler="org.eclipse.jdt.core.JDTCompilerAdapter">
+		<javac srcdir="${test.src.dir}" destdir="${test.out.dir}" >
 			<classpath refid="compile.classpath"/>
 		</javac>
 	</target>
 
 	<!-- Remove classes directory for clean build -->
-	<target name="clean"
+	<target name="clean" depends="cleanForBinary" 
 		description="Prepare for clean build">
 		<delete file="${main.out.dir}/**/*.hbm.xml"/>
 		<!--mkdir dir="${main.out.dir}"/-->
+	</target>
+	
+	<target name="cleanForBinary" description="Clean For Binary">
+		<delete dir="${dist.dir}"/>
 	</target>
 
 
