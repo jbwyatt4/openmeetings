@@ -26,26 +26,13 @@ Step-By-Step:
 
 = Java Webapp (Server-Side) =
 
+1.) Download (SVN - Checkout) from:
 http://openmeetings.googlecode.com/svn/branches/dev/xmlcrm/java/
+2.) change dir your local copy
+3.) Run: ant dist
+there is now a directory dist, inside of that directory there is a compiled red5-webapp.
+You have to copy the Laszlo-Client from the Step-By-Step scenario into it.
 
-There is a empty skeleton of the webapp inside the directory:
-http://openmeetings.googlecode.com/svn/branches/dev/xmlcrm/java/webapp/
-
-you need to build a jar file (xmlcrm.jar) based on the content of:
-http://openmeetings.googlecode.com/svn/branches/dev/xmlcrm/java/src/app/
-but without the hibernate.cfg.xml inside of it (cause this file is loaded from the file system _not_ from the jar file.
-
-To edit the template's (for example for mailings, installation) you need to compile a jar file (xmlcrm-templates.jar) based on the content of:
-http://openmeetings.googlecode.com/svn/branches/dev/xmlcrm/java/src/templates/
-
-both jar files should be inside of the WEB-INF/lib/-directory of the webapp:
-http://openmeetings.googlecode.com/svn/branches/dev/xmlcrm/java/webapp/xmlcrm/WEB-INF/lib/
-
-you can download the latest Beta-release and replace the jar-files there to get a complete list of all used jar-liberaries
-
-== TODO ==
-
-write an ant-task to compile a binary release of the webapp
  
  
  
