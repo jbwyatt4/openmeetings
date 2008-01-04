@@ -3,7 +3,7 @@ package org.xmlcrm.app.conference.videobeans;
 import java.util.Date;
 
 public class RoomClient {
-	
+	 
 	String username = "";
 	String streamid = "";
 	String userroom = "";

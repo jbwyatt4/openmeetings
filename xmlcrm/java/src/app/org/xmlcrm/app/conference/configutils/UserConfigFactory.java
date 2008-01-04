@@ -14,7 +14,7 @@ import org.w3c.dom.NodeList;
 import org.xmlcrm.app.conference.videobeans.UserSecurity;
 
 public class UserConfigFactory {
-
+ 
 
 	protected static Log log = LogFactory.getLog(UserConfigFactory.class.getName());
 
