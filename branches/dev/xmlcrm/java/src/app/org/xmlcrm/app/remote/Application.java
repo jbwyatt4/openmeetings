@@ -203,6 +203,8 @@ public class Application extends ApplicationAdapter implements
 
 			log.error("removing USername "+currentClient.getUsername()+" "+currentClient.getConnectedSince()+" streamid: "+currentClient.getStreamid());
 			
+			//stop any recordings
+			if (currentClient.getIsRecording()) StreamService.cancelRecording(currentClient.getRoomRecordingName());
 
 			this.disconnectUser(currentClient);
 			//If this Room is empty clear the Room Poll List
@@ -256,6 +258,8 @@ public class Application extends ApplicationAdapter implements
 			currentClient.setIsRecording(false);
 			log.error("##### logicalRoomLeave :. " + currentClient.getStreamid()); // just a unique number
 
+			//stop any recordings if this user is recording
+			if (currentClient.getIsRecording()) StreamService.cancelRecording(currentClient.getRoomRecordingName());
 
 			log.error("removing USername "+currentClient.getUsername()+" "+currentClient.getConnectedSince()+" streamid: "+currentClient.getStreamid());
 			ClientList.put(currentClient.getStreamid(),currentClient);
@@ -359,8 +363,8 @@ public class Application extends ApplicationAdapter implements
 
 	
 	/**
-	 * This method handles the Event after a stream has been removed all conencted
-	 * Clients in the same room will gat a notification
+	 * This method handles the Event after a stream has been removed all connected
+	 * Clients in the same room will get a notification
 	 * 
 	 * @return void
 	 * 
@@ -370,14 +374,16 @@ public class Application extends ApplicationAdapter implements
 		// Notify all the clients that the stream had been started
 		log.error("start streamBroadcastClose broadcast close: "+ stream.getPublishedName());
 		try {
-			sendClientBroadcastNotifications(stream,"closeStream",ClientList.get(Red5.getConnectionLocal().getClient().getId()));
+			RoomClient rcl = ClientList.get(Red5.getConnectionLocal().getClient().getId());
+			
+			sendClientBroadcastNotifications(stream,"closeStream",rcl);
 		} catch (Exception e){
 			log.error("[streamBroadcastClose]",e);
 		}
 	}
 	
 	/**
-	 * This method handles the notification roombased
+	 * This method handles the notification room-based
 	 * 
 	 * @return void
 	 * 
@@ -385,7 +391,7 @@ public class Application extends ApplicationAdapter implements
 	private void sendClientBroadcastNotifications(IBroadcastStream stream,String clientFunction, RoomClient rc){
 		try {
 
-			// Store the local sothat we do not send notification to ourself back
+			// Store the local so that we do not send notification to ourself back
 			IConnection current = Red5.getConnectionLocal();
 			RoomClient currentClient = ClientList.get(current.getClient().getId());
 			String roomname = currentClient.getUserroom();
@@ -403,11 +409,7 @@ public class Application extends ApplicationAdapter implements
 					//there is a Bug in the current implementation of the appDisconnect
 					if (clientFunction.equals("closeStream")){
 						// Don't notify current client
-						log.info("-----> current found : "+current.getRemoteAddress()+" "+current.getRemotePort());
 						current.ping();
-						log.info("-----> current ping time : "+current.getLastPingTime());
-						
-						log.info("-----> current closed: "+current.getSessionId());
 					}
 					continue;
 				} else {
@@ -416,7 +418,7 @@ public class Application extends ApplicationAdapter implements
 						log.error("is this users still alive? :"+rcl);
 						//Check if the Client is in the same room and same domain 
 						if(roomname.equals(rcl.getUserroom()) && orgdomain.equals(rcl.getDomain())){
-							conn.ping();
+							//conn.ping();
 							IServiceCapableConnection iStream = (IServiceCapableConnection) conn;
 	//							log.info("IServiceCapableConnection ID " + iStream.getClient().getId());
 							iStream.invoke(clientFunction,new Object[] { rc }, this);

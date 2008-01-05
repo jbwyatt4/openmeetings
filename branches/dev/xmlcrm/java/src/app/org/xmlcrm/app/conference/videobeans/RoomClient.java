@@ -1,6 +1,7 @@
 package org.xmlcrm.app.conference.videobeans;
 
 import java.util.Date;
+import java.util.LinkedList;
 
 public class RoomClient {
 	 
@@ -322,7 +323,6 @@ public class RoomClient {
 	public Boolean getIsRecording() {
 		return isRecording;
 	}
-
 	public void setIsRecording(Boolean isRecording) {
 		this.isRecording = isRecording;
 	}
@@ -330,9 +330,8 @@ public class RoomClient {
 	public String getRoomRecordingName() {
 		return roomRecordingName;
 	}
-
 	public void setRoomRecordingName(String roomRecordingName) {
 		this.roomRecordingName = roomRecordingName;
 	}
-	
+
 }

@@ -5,6 +5,11 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.LinkedList;
 import java.util.LinkedHashMap;
+import java.io.File;
+import java.io.PrintWriter;
+import java.io.FileWriter;
+import java.io.BufferedReader;
+import java.io.FileReader;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -14,6 +19,7 @@ import com.thoughtworks.xstream.io.xml.XppDriver;
 
 import org.red5.server.stream.ClientBroadcastStream;
 import org.red5.server.api.IConnection;
+import org.red5.server.api.IScope;
 import org.red5.server.api.Red5;
 import org.red5.server.api.service.IServiceCapableConnection;
 
@@ -39,11 +45,15 @@ import org.xmlcrm.app.data.record.Recordingmanagement;
  */
 public class StreamService {
 	
+	private static String fileNameXML = "recording_";
+	private static String folderForRecordings = "recorded";
+	
+	
 	private static final Log log = LogFactory.getLog(StreamService.class);
 	
 	private static LinkedHashMap<String,LinkedHashMap<String,Object>> roomRecordingList = new LinkedHashMap<String,LinkedHashMap<String,Object>>();
 	
-	public String recordMeetingStream(Object initwhiteboardvars){
+	public String recordMeetingStream(String conferenceType, Object initwhiteboardvars){
 		try {
 			IConnection current = Red5.getConnectionLocal();
 			RoomClient currentClient = Application.getClientList().get(current.getClient().getId());
@@ -55,7 +65,7 @@ public class StreamService {
 			Application.getClientList().put(current.getClient().getId(), currentClient);
 			
 			LinkedHashMap<String,Object> roomRecording = new LinkedHashMap<String,Object>();
-			
+			roomRecording.put("conferenceType", conferenceType);
 			List<LinkedHashMap<String,Object>> roomStreams = new LinkedList<LinkedHashMap<String,Object>>();
 			
 			//get all stream and start recording them
@@ -119,7 +129,8 @@ public class StreamService {
 			currentClient.setRoomRecordingName("");
 			Application.getClientList().put(current.getClient().getId(), currentClient);
 			
-			//get all stream and start recording them
+			//get all stream and stop recording them
+			//Todo: Check that nobody does Recording at the same time Issue 253
 			Iterator<IConnection> it = current.getScope().getConnections();
 			while (it.hasNext()) {
 				IConnection conn = it.next();
@@ -147,7 +158,27 @@ public class StreamService {
 			
 			log.error(xmlString);
 			
-			return Recordingmanagement.getInstance().addRecording(newRecordFileName, duration, xmlString, rooms_id);
+			//make persistent
+			Long recording_id = Recordingmanagement.getInstance().addRecording(newRecordFileName, duration, "", rooms_id);
+			
+			//save XML to Disk
+			IScope scope = Red5.getConnectionLocal().getScope().getParent();
+			String current_dir = scope.getResource("upload/").getFile().getAbsolutePath();
+			//System.out.println(current_dir  + File.separatorChar + this.folderForRecordings);
+			File f = new File(current_dir  + File.separatorChar + this.folderForRecordings);
+			if (!f.exists()){
+				f.mkdir();
+			}
+			String fileName = f.getAbsolutePath() + File.separatorChar + this.fileNameXML+recording_id+".xml";
+			//System.out.println("fileName"+fileName);
+			PrintWriter pw = new PrintWriter(new FileWriter(fileName));
+		    pw.println(xmlString);
+		    pw.flush();
+		    pw.close();
+			//remove recording from Temp - List
+			roomRecordingList.remove(recordingName);
+			
+			return recording_id;
 		} catch (Exception err) {
 			log.error("[stopRecordMeetingStream]",err);
 		}
@@ -254,7 +285,22 @@ public class StreamService {
 	        	
 				XStream xStream = new XStream(new XppDriver());
 				xStream.setMode(XStream.NO_REFERENCES);
-				rec.setRoomRecording((LinkedHashMap<String, Object>)xStream.fromXML(rec.getXmlString()));
+				
+				IScope scope = Red5.getConnectionLocal().getScope().getParent();
+				String current_dir = scope.getResource("upload/").getFile().getAbsolutePath();
+				//System.out.println(current_dir  + File.separatorChar + this.folderForRecordings);
+				File f = new File(current_dir + File.separatorChar + this.folderForRecordings);
+				if (!f.exists()){
+					f.mkdir();
+				}
+				String fileName = f.getAbsolutePath() + File.separatorChar + this.fileNameXML+recording_id+".xml";
+				//System.out.println("fileName"+fileName);
+				BufferedReader reader = new BufferedReader(new FileReader(fileName));
+			    String xmlString = "";
+			    while (reader.ready()) {
+			    	xmlString += reader.readLine();
+			    }
+				rec.setRoomRecording((LinkedHashMap<String, Object>)xStream.fromXML(xmlString));
 				
 				return rec;
 	        }
@@ -337,6 +383,14 @@ public class StreamService {
 		} catch (Exception err) {
 			log.error("[addRecordingByStreamId]",err);
 		}	
+	}
+	
+	public static void cancelRecording(String roomrecordingName){
+		try {
+			roomRecordingList.remove(roomrecordingName);
+		} catch (Exception err) {
+			log.error("[cancelRecording]",err);
+		}
 	}
 	
 }
