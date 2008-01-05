@@ -29,7 +29,7 @@ Step-By-Step:
   * Download (SVN - Checkout) from:
 http://openmeetings.googlecode.com/svn/branches/dev/xmlcrm/java/
   * change dir your local copy
-  * Run: ant dist
+  * Run: ant dist (JAVA_HOME must be set and point to a JDK)
 
 there is now a directory dist, inside of that directory there is a compiled red5-webapp.
 You have to copy the Laszlo-Client from the Step-By-Step scenario into it.
