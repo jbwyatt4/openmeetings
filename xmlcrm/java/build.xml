@@ -292,6 +292,7 @@
 	
 	<target name="cleanForBinary" description="Clean For Binary">
 		<delete dir="${dist.dir}"/>
+		<delete file="filetest.keystore" />
 	</target>
 
 
