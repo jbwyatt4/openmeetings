@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<library>
+
+<!-- #################
+	Class videocontainer lol
+ -->
+ 
+<class name="videoeventcontainerstream" extends="view" >
+	
+	<handler name="oninit">		
+		canvas._videocontainer=this;
+	</handler>
+		
+	<method name="startStream" args="flv,userpos,object">
+		Debug.write("startStream: ",flv,userpos,object);
+		this.subviews[0]._chatvideoinner._videoview.v_output._stream=null;
+	  	this.subviews[0].clientVars = object;
+	  	this.subviews[0].setAttribute('chatpartnername',object.firstname+' '+object.lastname);
+	  	this.subviews[0].setAttribute('uniqueid',flv);
+	  	this.subviews[0].setAttribute('isremote',true);
+	  	this.subviews[0]._chatvideoinner._videoview.setAttribute('visible',true);
+		this.subviews[0]._chatvideoinner._videoview.v_output.play(flv,0);
+		return this.subviews[0].getVideoReference();
+	</method>
+
+	<method name="disconnectclient" args="userpos">
+		////Debug.write("disconnectclient: ",searchid,userpos);
+		this.subviews[0].setAttribute('isassigned',false);
+		this.subviews[0]._chatvideoinner.setResourceNumber(5);
+		this.subviews[0].resetValues();
+		this.subviews[0]._chatvideoinner._videoview.setAttribute('visible',false);
+		return this.subviews[0].getVideoReferenceDis();
+	</method>	
+
+	<videoobjectaudience name="_video1" x="0" y="0" />
+	
+</class>
+
+</library>

@@ -7,6 +7,17 @@
     <videocontainerstream name="_videocontainer" x="2" y="22" />
 </class>  
 
+<class name="videoboardstreamEvent" extends="guipresenter" x="2" y="2"
+    width="266" height="280" closable="false" title="Video and Audio"
+    resizeable="false">
+    <videoeventcontainerstream name="_videocontainer" x="2" y="22" />
+</class>  
+
+<class name="videoboardstreamPlaceHolder" extends="guipresenter" x="2" y="2"
+    width="266" height="280" closable="false" title="Video and Audio"
+    resizeable="false">
+</class>  
+
 <class name="whiteboardpanelrecord" extends="guipresenter" x="270" y="2"
     width="660" height="592" closable="false" title="Whiteboard"
     resizeable="false">
@@ -93,16 +104,29 @@
 	</handler>
 	
 	<method name="initRecordingComponents">
-		new videoboardstream(this,{name:'_videoboardstream'});
+		new videoboardstreamPlaceHolder(this,{name:'_videoboardstream'});
 		new whiteboardpanelrecord(this,{name:'_whiteboardpanelrecord'});
 		new filespanel(this,{name:'_filespanel'});
 		new recorderClickMask(this,{name:'_recorderClickMask'});
 		new recordplayerBG(this,{name:'_recordplayerBG'});
-		new recorderProgressBar(this,{name:'progress'});
 	</method>
 	
 	<method name="clearComponents">
 		for (var eg in this.subviews) this.subviews[eg].destroy();
+	</method>
+	
+	<method name="initRecordingsViewByType">
+		this._videoboardstream.destroy();
+		this._recorderClickMask.destroy();
+		this._recordplayerBG.destroy();
+		if (this.recordingValue.roomRecording.conferenceType=="conference"){
+			new videoboardstream(this,{name:'_videoboardstream'});
+		} else {
+			new videoboardstreamEvent(this,{name:'_videoboardstream'});
+		}
+		new recorderClickMask(this,{name:'_recorderClickMask'});
+		//new recordplayerBG(this,{name:'_recordplayerBG'});
+		new recorderProgressBar(this,{name:'progress'});		
 	</method>
 	
 	<!--
@@ -119,6 +143,7 @@
             	Debug.write("getRecordingById",parent.recordingValue.roomRecording);
             	parent.timerDel = new LzDelegate( parent, "timeLineAction" );
             	_drawarea.isinitRecordingLoad = true;
+            	parent.initRecordingsViewByType();
             	if (parent.recordingValue.roomRecording.initwhiteboardvars!=null && parent.recordingValue.roomRecording.initwhiteboardvars.length>0){
             		_drawarea.loadwmlObjectToStage(parent.recordingValue.roomRecording.initwhiteboardvars,"","","",true,true);
             	} else {
@@ -133,7 +158,7 @@
 	        //	        
     		var perc = Math.round((100/this.recordingValue.duration)*this.currentTime);
     		var newW = Math.round((this.progress.progressbar.width/100)*perc);
-	        Debug.write("timeLineAction: ",this.currentTime,perc,newW,this.recordingValue.duration);
+	        //Debug.write("timeLineAction: ",this.currentTime,perc,newW,this.recordingValue.duration);
 	        this.progress.progressbar.thumb.setAttribute('x',newW);
 	        
 	        var restTime = this.recordingValue.duration-this.currentTime;
@@ -181,8 +206,8 @@
         		this.currentTime = 0;
         		this.clearComponents();
         		this.initRecordingComponents();
-        		this.progress._currentTime._timetext.setAttribute('text',"--:--");
-        		this.progress.progressbar.thumb.setAttribute('x',0);
+        		//this.progress._currentTime._timetext.setAttribute('text',"--:--");
+        		//this.progress.progressbar.thumb.setAttribute('x',0);
         	}
         ]]>
     </method>
