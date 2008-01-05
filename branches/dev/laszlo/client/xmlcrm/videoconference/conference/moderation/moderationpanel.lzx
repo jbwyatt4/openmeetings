@@ -5,20 +5,37 @@
 	
 	<attribute name="recordingsName" value="" type="string" />
 
-  	<text fontsize="12" id="mymod" resize="true" name="_text" />
+  	<labeltext id="mymod" resize="true" name="_text" y="4" />
   	
-	<view y="2" name="infoview" resource="applyformodicon">
+  	<simplelabelbutton name="mod_btn" width="30" height="24" y="2">
 		<handler name="onclick">
 			new applyformoderation(canvas.main_content._content.inner);
-		</handler>
-		<labeltooltip inittwice="true" labelid="84" />
-	</view>	
+		</handler>	
+		<view x="7" y="4" name="infoview" resource="applyformodicon" />
+		<labeltooltip inittwice="true" labelid="84" />  	
+  	</simplelabelbutton>
+  	
+	<labeltext labelid="417" y="4" />
 	
-    <simplelabelbutton text="s" width="30" height="18" 
-		onclick="this.parent.recordMeetingStream.doCall();" />
-
-    <simplelabelbutton text="e" width="30" height="18" 
-    	onclick="new recordingsavewin(canvas.main_content._content.inner,{recordingsName:parent.recordingsName});" /> 
+    <simplelabelbutton name="sta_btn" width="30" height="24" y="2">
+    	<handler name="onclick">
+    		this.parent.recordMeetingStream.doCall();
+    		this.setAttribute('visibility','hidden');
+    		parent.stp_btn.setAttribute('visibility','visible');
+    	</handler>
+		<view resource="start_recording_conf" x="3" y="1" />
+		<labeltooltip labelid="415" />
+	</simplelabelbutton>
+	
+    <simplelabelbutton name="stp_btn" width="30" height="24" y="2" visibility="hidden">
+    	<handler name="onclick">
+    		new recordingsavewin(canvas.main_content._content.inner,{recordingsName:parent.recordingsName});
+    		this.setAttribute('visibility','hidden');
+    		parent.sta_btn.setAttribute('visibility','visible');
+    	</handler>    	
+		<view resource="stop_recording_conf" x="7" y="4" />
+		<labeltooltip labelid="416" />
+	</simplelabelbutton>    	
 		
   	<netremotecallhib name="recordMeetingStream" funcname="streamservice.recordMeetingStream" 
   					  remotecontext="$once{ canvas.thishib }" >  
