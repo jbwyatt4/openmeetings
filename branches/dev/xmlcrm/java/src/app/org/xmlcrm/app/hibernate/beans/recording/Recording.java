@@ -65,7 +65,7 @@ public class Recording {
     /**
      * @hibernate.many-to-one
      *  cascade="none"
-     *  column="roomtypes_id"
+     *  column="rooms"
      *  lazy="false"
      *  class="org.xmlcrm.app.hibernate.beans.rooms.Rooms"
      *  not-null="false"

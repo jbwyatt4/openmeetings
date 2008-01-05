@@ -1230,4 +1230,31 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   <string id="408" name="roomslist">
     <value>since:</value>
   </string>
+  <string id="409" name="record">
+    <value>play recording</value>
+  </string>
+  <string id="410" name="record">
+    <value>Length:</value>
+  </string>
+  <string id="411" name="record">
+    <value>Date:</value>
+  </string>
+  <string id="412" name="record">
+    <value>Recorder Mode! You cannot change any values, this is a recorded File!</value>
+  </string>
+  <string id="413" name="record">
+    <value>Play this recording</value>
+  </string>
+  <string id="414" name="record">
+    <value>Play / Pause</value>
+  </string>
+  <string id="415" name="record">
+    <value>Start recording</value>
+  </string>
+  <string id="416" name="record">
+    <value>stop recording</value>
+  </string>
+  <string id="417" name="record">
+    <value>Recording:</value>
+  </string>
 </language>

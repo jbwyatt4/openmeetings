@@ -92,7 +92,7 @@ public class MainService {
 		return -1;
 	}
 
-	
+	 
 	/**
 	 * load this session id before doing anything else
 	 * @return a unique session identifier
@@ -220,10 +220,10 @@ public class MainService {
      * send an invitation to another user
      * 
      */
-    public String sendInvitation(String SID, String username, String message, String domain, String room, String roomtype, String baseurl, String email, String subject){
+    public String sendInvitation(String SID, String username, String message, String domain, String room, String roomtype, String baseurl, String email, String subject, Long room_id){
     	Long users_id = Sessionmanagement.getInstance().checkSession(SID);
     	Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
-    	return Invitationmanagement.getInstance().sendInvitionLink(user_level, username, message, domain, room, roomtype, baseurl, email, subject);
+    	return Invitationmanagement.getInstance().sendInvitionLink(user_level, username, message, domain, room, roomtype, baseurl, email, subject, room_id);
     }
     
     /**
