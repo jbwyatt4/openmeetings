@@ -34,10 +34,10 @@
 	
 	<handler name="onclick">
 		var connectedIsAudience = '';
+        hib.currentroomid = this.obj.rooms_id;
 		canvas.isConference = !this.isaudience;
 		if (this.isaudience) connectedIsAudience = '_'+'audi';
         if (this.ispublic){
-        	hib.currentroomid = this.obj.rooms_id;
             hib.connectedroom = this.obj.rooms_id+connectedIsAudience;
             hib.conferencedomain="public";
             //Debug.write("ispublic");
@@ -64,6 +64,7 @@
 		var connectedIsAudience = '';
 		canvas.isConference = !this.isaudience;
 		if (this.isaudience) connectedIsAudience = '_'+'audi';
+		hib.currentroomid = this.obj.rooms_id;
         if (this.ispublic){
         	hib.currentroomid = this.obj.rooms_id;
             hib.connectedroom = this.obj.rooms_id+connectedIsAudience;

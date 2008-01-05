@@ -129,7 +129,7 @@
             //The onResult-Handler will be called be the rtmpconnection
             Debug.write("setUsername: ",value);
             hib.currentroomid = canvas.initroomid;
-	        hib.connectedroom = canvas.initroomid;
+	        hib.connectedroom = canvas.initroomStr;
             hib.conferencedomain = canvas.initdomainid;
 
             //Debug.write("hib.conferencedomain: ",hib.conferencedomain);
