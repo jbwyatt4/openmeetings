@@ -2,5 +2,6 @@
 <library>
 
     <include href="videocontainerstream.lzx" />
+    <include href="videoeventcontainerstream.lzx" />   
     
 </library>
