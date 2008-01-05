@@ -26,11 +26,12 @@ public class Invitationmanagement {
 		return instance;
 	}
 	
-	public String sendInvitionLink(long user_level, String username, String message, String domain, String room, String roomtype, String baseurl, String email, String subject){
+	public String sendInvitionLink(long user_level, String username, String message, String domain, String room, 
+			String roomtype, String baseurl, String email, String subject, Long room_id){
 		try {
 			if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)){
 				
-				String invitation_link = baseurl+"?lzr=swf8&lzt=swf&domain="+domain+"&room="+room+"&roomtype="+roomtype+"&email="+email;
+				String invitation_link = baseurl+"?lzr=swf8&lzt=swf&domain="+domain+"&room="+room+"&roomtype="+roomtype+"&email="+email+"&roomid="+room_id;
 				
 				String template = InvitationTemplate.getInstance().getRegisterInvitationTemplate(username, message, invitation_link);
 			
