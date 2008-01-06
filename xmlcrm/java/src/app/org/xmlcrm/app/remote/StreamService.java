@@ -78,20 +78,25 @@ public class StreamService {
 					//Check if the Client is in the same room and same domain 
 					if(roomname.equals(rcl.getUserroom()) && orgdomain.equals(rcl.getDomain())){
 						
-						LinkedHashMap<String,Object> roomStream = new LinkedHashMap<String,Object>();
-						
-						String streamName = this.generateFileName(rcl.getStreamid());
-						String remoteAdress = conn.getRemoteAddress();
-						
-						this.recordShow(conn, rcl.getStreamid(), streamName);
-						
-						roomStream.put("streamName", streamName);
-						roomStream.put("remoteAdress", remoteAdress);
-						roomStream.put("startdate",new java.util.Date());
-						roomStream.put("starttime",0);
-						roomStream.put("rcl", rcl);
-						
-						roomStreams.add(roomStream);
+						if (!conferenceType.equals("audience") || rcl.getIsMod()){
+							LinkedHashMap<String,Object> roomStream = new LinkedHashMap<String,Object>();
+							
+							String streamName = this.generateFileName(rcl.getStreamid());
+							String remoteAdress = conn.getRemoteAddress();
+							
+							this.recordShow(conn, rcl.getStreamid(), streamName);
+							
+							roomStream.put("streamName", streamName);
+							roomStream.put("remoteAdress", remoteAdress);
+							roomStream.put("startdate",new java.util.Date());
+							roomStream.put("starttime",0);
+							roomStream.put("rcl", rcl);
+							
+							roomStreams.add(roomStream);
+						} else {
+							
+						}
+
 					}
 				}
 			}
@@ -129,6 +134,9 @@ public class StreamService {
 			currentClient.setRoomRecordingName("");
 			Application.getClientList().put(current.getClient().getId(), currentClient);
 			
+			LinkedHashMap<String,Object> roomRecording = roomRecordingList.get(recordingName);
+			String conferenceType = (String) roomRecording.get("conferenceType");
+			
 			//get all stream and stop recording them
 			//Todo: Check that nobody does Recording at the same time Issue 253
 			Iterator<IConnection> it = current.getScope().getConnections();
@@ -139,11 +147,12 @@ public class StreamService {
 					log.error("is this users still alive? :"+rcl);
 					//Check if the Client is in the same room and same domain 
 					if(roomname.equals(rcl.getUserroom()) && orgdomain.equals(rcl.getDomain())){
-						this.stopRecordingShow(conn,rcl.getStreamid());
+						if (!conferenceType.equals("audience") || rcl.getIsMod()){
+							this.stopRecordingShow(conn,rcl.getStreamid());
+						}
 					}
 				}
 			}	
-			LinkedHashMap<String,Object> roomRecording = roomRecordingList.get(recordingName);
 			
 			Date starttime = (Date) roomRecording.get("starttime");
 			Date endtime =  new java.util.Date();
@@ -315,27 +324,30 @@ public class StreamService {
 			LinkedHashMap<String,Object> roomRecording = roomRecordingList.get(roomrecordingName);
 			List<LinkedHashMap<String,Object>> roomStreams = (List<LinkedHashMap<String,Object>>)roomRecording.get("streamlist");
 			
-			Date recordingsStartTime = (Date) roomRecording.get("starttime");
-			Date currentDate = new Date();
+			String conferenceType = (String) roomRecording.get("conferenceType");
 			
-			LinkedHashMap<String,Object> roomStream = new LinkedHashMap<String,Object>();
-			
-			String streamName = generateFileName(rcl.getStreamid());
-			String remoteAdress = conn.getRemoteAddress();
-			
-			recordShow(conn, rcl.getStreamid(), streamName);
-			
-			roomStream.put("streamName", streamName);
-			roomStream.put("remoteAdress", remoteAdress);
-			roomStream.put("startdate",new java.util.Date());
-			roomStream.put("starttime",currentDate.getTime()-recordingsStartTime.getTime());
-			roomStream.put("rcl", rcl);
-			
-			roomStreams.add(roomStream);
-			
-			roomRecording.put("streamlist",roomStreams);
-			roomRecordingList.put(roomrecordingName, roomRecording);
-			
+			if (!conferenceType.equals("audience") || rcl.getIsMod()){
+				Date recordingsStartTime = (Date) roomRecording.get("starttime");
+				Date currentDate = new Date();
+				
+				LinkedHashMap<String,Object> roomStream = new LinkedHashMap<String,Object>();
+				
+				String streamName = generateFileName(rcl.getStreamid());
+				String remoteAdress = conn.getRemoteAddress();
+				
+				recordShow(conn, rcl.getStreamid(), streamName);
+				
+				roomStream.put("streamName", streamName);
+				roomStream.put("remoteAdress", remoteAdress);
+				roomStream.put("startdate",new java.util.Date());
+				roomStream.put("starttime",currentDate.getTime()-recordingsStartTime.getTime());
+				roomStream.put("rcl", rcl);
+				
+				roomStreams.add(roomStream);
+				
+				roomRecording.put("streamlist",roomStreams);
+				roomRecordingList.put(roomrecordingName, roomRecording);
+			}
 		} catch (Exception err) {
 			log.error("[addRecordingByStreamId]",err);
 		}	
