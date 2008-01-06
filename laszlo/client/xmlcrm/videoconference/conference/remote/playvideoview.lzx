@@ -39,7 +39,7 @@
     	this.__LZmovieClipRef.__lzvideo.attachVideo(this._ns);
     	this._ns.setBufferTime(this.buffertime);
     	this._ns.play(flv);
-    </method>
+    </method>  
     <method name="stop">
     	if (this._ns!=null){
 	    	this._ns.pause();

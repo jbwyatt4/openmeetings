@@ -100,17 +100,10 @@
 	<method name="startStream" args="searchid,userpos">
 		//Debug.write("startStream: ",searchid,userpos);
 		<![CDATA[
-
-		//Debug.write("startStream: ",this.subviews[userpos],searchid,userpos);
-		if (this.subviews[userpos].uniqueid == searchid){
-			//VideoView with Partner has been found
-            //remove Stream from view
-            //Debug.write("Found client to startStream");
+			//Debug.write("startStream: ",this.subviews[userpos],searchid,userpos);
 			this._video1._chatvideoinner._videoview.setAttribute('visible',true);
 			this._video1._chatvideoinner._videoview.v_output.play(searchid,-1);
-			return this.subviews[userpos].getVideoReference();
-		}
-		return null;
+			return this._video1.getVideoReference();
 		]]>
 	</method>
 

@@ -68,8 +68,8 @@
         </method>	
         
         <method name="disconnect">
+        	canvas.currentNC = null;
             this._nc.close();
-            canvas.currentNC = null;
         </method>
     <!-- 
         With this function all methods are registered to the NetConnection

@@ -218,7 +218,7 @@
     
                 // If we don't define our own connection, then use
                 // the default one (the first rtmpconnection created).
-                //Debug.write("_findnc type rtmp, rtmpconnection", this.rtmpconnection, "_nc", global.rtmpconnection.prototype._default._nc);
+                Debug.write("_findnc type rtmp, rtmpconnection", canvas.currentNC);
                 this._nc = canvas.currentNC;
                 
                 Debug.write('this._nc', this._nc);
