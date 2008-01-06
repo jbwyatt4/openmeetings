@@ -1,6 +1,4 @@
 <library>
-	
-<include href="extensions/av/mediastream.lzx"/>
 
     <!--
         Video view.
@@ -96,21 +94,21 @@
             vid._height = this.height;
             this._clipinitdone = true;
 
-            //Debug.write("videoview stream", this.stream);
+            Debug.write("videoview stream", this.stream);
 
             var stream = 
-                this.stream;
+                this.v_output;
 
-            //Debug.write("videoview init found stream", this, stream);
+            Debug.write("videoview init found stream", this, stream, simplenetstream);
             if (!stream) {
                stream = 
-                    new global.mediastream(
+                    new simplenetstream(
                         this, 
                         {debug:this.debug}, 
                         null, 
                         true);
                 this.stream = stream;
-                //Debug.write("videoview init made stream", this.stream);
+                Debug.write("videoview init made stream", this.stream);
 
                 // only use this.url if we auto-created the mediastream
                 stream.setAttribute("type", this.type);

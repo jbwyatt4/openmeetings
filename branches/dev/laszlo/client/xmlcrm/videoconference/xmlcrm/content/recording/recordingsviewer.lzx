@@ -92,7 +92,7 @@
 	   height="${ parent.parent.parent.height }" width="${ parent.parent.parent.width }" >
 	
 	<attribute name="timerDel" value="null" />
-	<attribute name="currentTime" value="0" type="number" />
+	<attribute name="currentTime" value="-500" type="number" />
 	<attribute name="recordingValue" value="null" />
 	<attribute name="timeStepSyncing" value="500" type="number" />
 	
@@ -103,15 +103,34 @@
 		this.initRecordingComponents();
 	</handler>
 	
+	<handler name="ontabcontentleave">
+		this.clearComponents();
+	</handler>
+	
 	<method name="initRecordingComponents">
 		new videoboardstreamPlaceHolder(this,{name:'_videoboardstream'});
 		new whiteboardpanelrecord(this,{name:'_whiteboardpanelrecord'});
 		new filespanel(this,{name:'_filespanel'});
 		new recorderClickMask(this,{name:'_recorderClickMask'});
+        canvas.thishib.reconnectionAction = true;
+        canvas.thishib.reconnectObjRef = this;
+        canvas.thishib.disconnect();
+        Debug.write("canvas.thishib: ",canvas.thishib);
+        canvas.thishib.connect();
+        //this.reconnectSuccess();
+	</method>
+	
+	<method name="reconnectSuccess">
+		this.showStartPlaybackBtn();
+	</method>
+	
+	<method name="showStartPlaybackBtn">
+		Debug.write("INIT showStartPlaybackBtn",this);
 		new recordplayerBG(this,{name:'_recordplayerBG'});
 	</method>
 	
 	<method name="clearComponents">
+		if (canvas._videocontainer) canvas._videocontainer.stopVideos();
 		for (var eg in this.subviews) this.subviews[eg].destroy();
 	</method>
 	

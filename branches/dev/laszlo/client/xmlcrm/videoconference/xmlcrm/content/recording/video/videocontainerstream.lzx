@@ -13,13 +13,12 @@
 		
 	<method name="startStream" args="flv,userpos,object">
 		Debug.write("startStream: ",flv,userpos,object);
-		this.subviews[userpos]._chatvideoinner._videoview.v_output._stream=null;
 	  	this.subviews[userpos].clientVars = object;
 	  	this.subviews[userpos].setAttribute('chatpartnername',object.firstname+' '+object.lastname);
 	  	this.subviews[userpos].setAttribute('uniqueid',flv);
 	  	this.subviews[userpos].setAttribute('isremote',true);
 	  	this.subviews[userpos]._chatvideoinner._videoview.setAttribute('visible',true);
-		this.subviews[userpos]._chatvideoinner._videoview.v_output.play(flv,0);
+		this.subviews[userpos]._chatvideoinner._videoview.playStream(flv);
 		return this.subviews[userpos].getVideoReference();
 	</method>
 
@@ -31,14 +30,22 @@
 		this.subviews[userpos]._chatvideoinner._videoview.setAttribute('visible',false);
 		return this.subviews[userpos].getVideoReferenceDis();
 	</method>	
+	
+	<method name="stopVideos">
+		Debug.write("stopVideos");
+		this._video1._chatvideoinner._videoview.stop();
+		this._video2._chatvideoinner._videoview.stop();
+		this._video3._chatvideoinner._videoview.stop();
+		this._video4._chatvideoinner._videoview.stop();
+	</method>
 
-	<videoobject name="_video1" x="0" y="0" userposition="0" />
+	<videoobjectplay name="_video1" x="0" y="0" userposition="0" />
 	
-	<videoobject name="_video2" x="130" y="0" userposition="1" />
+	<videoobjectplay name="_video2" x="130" y="0" userposition="1" />
 	
-	<videoobject name="_video3" x="0" y="126" userposition="2" />
+	<videoobjectplay name="_video3" x="0" y="126" userposition="2" />
 	
-	<videoobject name="_video4" x="130" y="126" userposition="3" />
+	<videoobjectplay name="_video4" x="130" y="126" userposition="3" />
 	
 </class>
 

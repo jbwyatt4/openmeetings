@@ -34,6 +34,10 @@
         <attribute name="soundRef" value="null" />
         
         <handler name="onstatus" args="info" />
+        
+        <!--- The pending stream name. 
+              @keywords private -->
+        <attribute name="_pendingstreamname" value="" type="string"/>        
 
         <!--- Event sent when a cue point occurs,
               whose parameter is a dictionary of metadata. -->
@@ -74,7 +78,7 @@
                     	this._flashstream.play(this.streamname,start);
                     }else {
                     	this.mode = "playing";
-                    	this._flashstream.play(this.streamname);
+                    	this._flashstream.play(this.streamname,0);
                     }
                     //Debug.write(this._flashstream);
                     _root.createEmptyMovieClip("vSound",_root.getNextHighestDepth());
@@ -109,11 +113,11 @@
 
                 case "playing":
                     this._flashstream.play(false);
-                    this._deactivateTimeDel();
                     break;
 
                 case "":
                     // Already stopped. 
+                    Debug.warn("Already stopped " + this.mode);
                     break;
 
                 default:
@@ -160,9 +164,9 @@
         <!--- start sending a live mediastream to the server. -->
         <method name="broadcast" args="streamname,cam,mic">
             <![CDATA[
-                if (this._nc==null){
-                    this._findnc();
-                }
+
+                this._findnc();
+                
                 if (this._nc!=null){
                     this._createStream();
                 
@@ -211,18 +215,11 @@
         <method name="_findnc">
             <![CDATA[
                 Debug.write("_findnc", this, this._nc);
-                if (this._nc) {
-                    return;
-                }
-
-                if (global['devrtmpconnection'] == undefined) {
-                    Debug.warn("devrtmpconnection must be included");
-                } 
     
                 // If we don't define our own connection, then use
                 // the default one (the first rtmpconnection created).
                 //Debug.write("_findnc type rtmp, rtmpconnection", this.rtmpconnection, "_nc", global.rtmpconnection.prototype._default._nc);
-                this._nc = global.devrtmpconnection.prototype._default._nc;
+                this._nc = canvas.currentNC;
                 
                 Debug.write('this._nc', this._nc);
 
