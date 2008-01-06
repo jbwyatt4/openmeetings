@@ -92,12 +92,10 @@
         <![CDATA[
   	 	    Debug.write("error ",this.status);
   	 	    if (this.reconnectionAction){
-                this.initConnection();
                 this.connect();
   	 	    } else if (this.reconnectAfterRoomleft) {
                 Debug.write("this.reconnectAfterRoomleft: ",this.reconnectAfterRoomleft);
                 this.counterror=0;
-                this.initConnection();
                 this.connect();
             } else {
   	 	        this.setAttribute('protocollName','rtmpt');
@@ -107,7 +105,6 @@
   	 	        //Debug.write("new src ",this.src);
                 if (this.counterror<3){
                     this.counterror++;
-	  	 	        this.initConnection();
 	  	 	        //Debug.write("try ",this.counterror,"one");
                     canvas.thishib.loaderVar.error.setText("try "+this.counterror);
 	  	 	        this.connect();
@@ -271,7 +268,7 @@
         <netremotecallhib name="setAudienceModusClient" funcname="setAudienceModusClient">
             <handler name="ondata" args="value">
                 //The onResult-Handler will be called be the rtmpconnection
-                Debug.write("setUserObjectNewOneFour: ",value);    
+                Debug.write("setAudienceModusClient: ",value);    
                 canvas._videocontainer.addClientItem(value.connectedSince,value.isMod,value.streamid,value.username,value.userroom,value.formatedDate,value.userpos,value.usercolor,value); 
                 canvas.setAttribute('numberofpartners',canvas.getAttribute('numberofpartners')+1);                              
             </handler>  
@@ -314,7 +311,7 @@
         <netremotecallhib name="newStream" funcname="newStream">
             <handler name="ondata" args="value">
                 //The onResult-Handler will be called be the rtmpconnection
-                ////Debug.write("newStream: ",value);
+                Debug.write("newStream: ",value);
                 canvas._videocontainer.startStream(value.streamid,value.userpos); 
             </handler>   
         </netremotecallhib>    
@@ -403,7 +400,7 @@
 						//Debug.write("############## editrecordstream 5");
 						new editrecordstream(canvas.main_content._content.inner,{y:-320});
 					} else {
-						canvas._videocontainer.getClientListScope.doCall();
+						//Debug.warn("canvas._videocontainer.getClientListScope.doCall");
 					}
 				}
 				]]>

@@ -13,13 +13,12 @@
 		
 	<method name="startStream" args="flv,userpos,object">
 		Debug.write("startStream: ",flv,userpos,object);
-		this.subviews[0]._chatvideoinner._videoview.v_output._stream=null;
 	  	this.subviews[0].clientVars = object;
 	  	this.subviews[0].setAttribute('chatpartnername',object.firstname+' '+object.lastname);
 	  	this.subviews[0].setAttribute('uniqueid',flv);
 	  	this.subviews[0].setAttribute('isremote',true);
 	  	this.subviews[0]._chatvideoinner._videoview.setAttribute('visible',true);
-		this.subviews[0]._chatvideoinner._videoview.v_output.play(flv,0);
+		this.subviews[0]._chatvideoinner._videoview.playStream(flv);
 		return this.subviews[0].getVideoReference();
 	</method>
 
@@ -33,10 +32,10 @@
 	</method>	
 	
 	<method name="stopVideos">
-		this._video1._chatvideoinner._videoview.v_output.stop();
+		this._video1._chatvideoinner._videoview.stop();
 	</method>	
 
-	<videoobjectaudience name="_video1" x="0" y="0" />
+	<videoobjectaudienceplay name="_video1" x="0" y="0" />
 	
 </class>
 
