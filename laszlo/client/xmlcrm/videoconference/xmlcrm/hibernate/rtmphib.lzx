@@ -25,7 +25,7 @@
     </element>
 </dataset>
 
-<devrtmpconnection name="thishib" id="hib" debug="true" autoconnect="false"
+<class name="hibrtmpconnection" extends="devrtmpconnection" debug="false"
     src="$once{ this.protocollName+'://'+canvas.rtmphostlocal+':'+this.protocollPort+'/xmlcrm/hibernate' }" >
 
   	 <attribute name="protocollName" type="string" value="rtmp" />
@@ -37,6 +37,9 @@
     <!-- reconnect after each conference -->
     <attribute name="reconnectAfterRoomleft" type="boolean" value="false" />
     <attribute name="reconnectedRoomInstance" value="null" />
+    
+    <attribute name="reconnectionAction" value="false" type="boolean" />
+    <attribute name="reconnectObjRef" value="null" />
          
      <attribute name="userobject" value="null" />
      
@@ -71,8 +74,11 @@
         
          
      <handler name="onconnect">
-        //Debug.write("connected");
-        if (this.reconnectAfterRoomleft) {
+        Debug.write("connected");
+        if (this.reconnectionAction){
+        	this.reconnectObjRef.reconnectSuccess();
+        	this.reconnectionAction = false;
+        } else if (this.reconnectAfterRoomleft) {
             //Return to content after reconnect
             canvas.thishib.reconnectedRoomInstance.destroy();
             this.setUsernameReconnect.doCall();
@@ -85,10 +91,13 @@
     <handler name="onerror" >
         <![CDATA[
   	 	    Debug.write("error ",this.status);
-            if (this.reconnectAfterRoomleft) {
+  	 	    if (this.reconnectionAction){
+                this.initConnection();
+                this.connect();
+  	 	    } else if (this.reconnectAfterRoomleft) {
                 Debug.write("this.reconnectAfterRoomleft: ",this.reconnectAfterRoomleft);
                 this.counterror=0;
-                this.init();
+                this.initConnection();
                 this.connect();
             } else {
   	 	        this.setAttribute('protocollName','rtmpt');
@@ -98,7 +107,7 @@
   	 	        //Debug.write("new src ",this.src);
                 if (this.counterror<3){
                     this.counterror++;
-	  	 	        this.init();
+	  	 	        this.initConnection();
 	  	 	        //Debug.write("try ",this.counterror,"one");
                     canvas.thishib.loaderVar.error.setText("try "+this.counterror);
 	  	 	        this.connect();
@@ -115,7 +124,7 @@
     <netremotecallhib name="getsessiondata" funcname="xmlcrm.getsessiondata" >      
         <handler name="ondata" args="value">
             //The onResult-Handler will be called be the rtmpconnection
-            //Debug.write("getsessiondata: ",value);
+            Debug.write("getsessiondata: ",value);
             canvas.sessionObject = value;
             canvas.sessionId = value.session_id;           
             parent.getLanguages.doCall();
@@ -554,6 +563,8 @@
     	</handler>
     </netremotecallhib>
     
-</devrtmpconnection>
+</class>
+
+<hibrtmpconnection name="thishib" id="hib" />
 
 </library>

@@ -5,7 +5,8 @@
     <include href="devmediadevice.lzx" />
 	<include href="devmicrophone.lzx" />
 	<include href="devcamera.lzx" />
-	<include href="devrtmpconnection.lzx" />
+	<include href="playvideoview.lzx" />
+	<include href="devrtmpconnection2.lzx" />
 	<include href="simplenetstream.lzx" />	
 	<include href="devvideoview.lzx" />	
     

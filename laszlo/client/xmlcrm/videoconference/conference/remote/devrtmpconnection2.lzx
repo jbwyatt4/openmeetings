@@ -1,203 +1,76 @@
-<!-- * X_LZ_COPYRIGHT_BEGIN ***************************************************
-* Copyright 2006-2007 Laszlo Systems, Inc.  All Rights Reserved.              *
-* Use is subject to license terms.                                            *
-* X_LZ_COPYRIGHT_END ****************************************************** -->
-
-
 <library>
 
 
-    <!---
-        RTMP connection.
-        @todo document
-    -->
-    <class name="devrtmpconnection" extends="node">
-
-
-        <!--- Connect automatically during init. If false, you need to explicitly
-              call connect(). Default is true. -->
-        <attribute name="autoconnect" value="true" type="boolean" />
-
-        <!--- String to indicate connection status. -->
-        <attribute name="status" value="disconnected" type="string"/>
-
-        <!--- Number to indicate what stage of connection we're in:
-            0: disconnected, 1: connecting, 2: connected. -->
-        <attribute name="stage" value="0" type="number"/>
-
-        <!--- A reference to the Flash NetConnection object.
-              @keywords private -->
-        <attribute name="_nc" value="null" />
-
-        <!--- Application url,
-              for example : "rtmp:/appname" or "rtmp://myserver.com/myapp/". -->
-        <attribute name="src" value="" type="string"/>
-
-        <!--- Turn on for verbose debugger output. -->
-        <attribute name="debug" value="false"/>
-
-
-        <!--- Event sent when connection established. 
-              @keywords private -->
-        <event name="onconnect"/>
-
-		<method name="initConnection">
+<class name="devrtmpconnection" extends="node">
+    	
+    	<attribute name="debug" value="false" type="boolean" />
+    	
+    	<handler name="onconnect"/>
+    	<handler name="onerror"/>
+    	
+    	<attribute name="src" value="" type="string"/>
+    	
+		<method name="connect">
             this._nc = new NetConnection();
 
             // local reference to rtmpconnection
             this._nc.t = this;          
-
+            
+            var ok = this._nc.connect(src == "null" ? null : src);
+            if (this.debug) {
+            	Debug.write("Ok:",ok);
+            }
+            
             canvas.currentNC = this._nc;
             
             this._nc.onStatus = function(info){
                 this.t._onStatus(info);
             }
+            
+    		Debug.write("registerMethods");
+			//Register Methods
+			this.registerMethods();    	            
 		</method>
 		
-        <!--- Initialize the rtmpconnection. 
-              @keywords private -->
-        <method name="init"><![CDATA[
-            super.init();
-			
-            this.initConnection();
-
-            if (this.autoconnect) {
-                this.connect();
-            }
-		
-			//Register Methods
-			this.registerMethods();
-          ]]>
-        </method>
-
-
-        <!--- Connect to the rtmp server. -->
-        <method name="connect"><![CDATA[
-
-        	Debug.write("stage: ",this.stage);
-        	
-            if (this.stage > 0) {
-                return; // already connected or connecting
-            }
-
-            if (this.debug) {
-                if (this.src == "") {
-                    Debug.write("no src url defined for", this);
-                    return;
-                }
-                if (typeof(src) != "string") {
-                    Debug.write("src", this.src, "must be a string in", this);
-                    return;
-                }
-            }
-
-            Debug.write("connect", src);
-
-            var ok = 
-                this._nc.connect(src == "null" ? null : src);
-
-            this.setAttribute("status", "connecting");
-            this.setAttribute("stage", 1);
-
-            var t = this;
-            this._nc.onStatus = function(info) {
-                this.t._onStatus(info);
-            };
-
-            // Local reference to devrtmpconnection.
-            // For some reason this cannot be done as a closure (in FP7).
-            // See bug lpp-2197.
-            this._nc.t = this;
-
-          ]]>
-        </method>
-        
-        <method name="disconnect">
-            this._nc.close();
-        </method>
-
-
-        <!--- Handle the onStatus callback from the Flash NetConnection object. 
-              @keywords private -->
         <method name="_onStatus" args="info"><![CDATA[
             if (this.debug) {
                 Debug.write("devrtmpconnection", this, "_onStatus", info.code);
             }
 
             var msg = "";
-            var s = this.stage;
 
             switch (info.code) {
 
-                case "NetConnection.Connect.AppShutdown": {
-                    // The application has been shut down 
-                    // (for example, if the application is out of memory 
-                    // resources and must be shut down to prevent the 
-                    // server from crashing) or the server has been shut down.
-                    msg = "disconnected (error)";
-                    s = 0;
-                    break;
-                }
-
-                case "NetConnection.Connect.Closed": {
-                    // The connection was successfully closed.
-                    msg = "disconnected";
-                    s = 0;
-                    break;
-                }
-
-                case "NetConnection.Connect.Failed": {
-                    // The connection attempt failed; 
-                    // for example, the server is not running.
-                    msg = "connection failed";
-                    s = 0;
-                    break;
-                }
-
-                case "NetConnection.Connect.Rejected": {
-                    // The client does not have permission to connect 
-                    // to the application, or the application expected 
-                    // different parameters from those that were passed, 
-                    // or the application specifically rejected the client.
-                    msg = "connection rejected";
-                    s = 0;
-                    break;
-                }
-
                 case "NetConnection.Connect.Success": {
                     // The connection attempt succeeded.
-                    msg = "connected";
+                    msg = info.code;
                     s = 2;
                     break;
                 }
 
                 default: {
                     msg = info.code;
+                    s = 0;
                     break;
                 }
 
             }
 
             this.setAttribute("status", msg);
-            this.setAttribute("stage", s);
-
-            if (this.debug) {
-                if (s == 2) {
-                    Debug.write("connected to " + this.src);
-                } else {
-                    Debug.write("connection failed to", this.src, ":", msg);
-                }
-            }
 
             if (s == 2) {
-                if (this.onconnect) this.onconnect.sendEvent();
+                this.onconnect.sendEvent();
             } else {
-            	if (this.onerror) this.onerror.sendEvent();
+            	this.onerror.sendEvent();
             }
 
           ]]>
+        </method>	
+        
+        <method name="disconnect">
+            this._nc.close();
+            canvas.currentNC = null;
         </method>
-    
     <!-- 
         With this function all methods are registered to the NetConnection
         A server can invoke this Method with a call for it from the Client
@@ -208,17 +81,18 @@
      -->
     <method name="registerMethods">
         <![CDATA[
-        
-        //Register all methods which are onstanceof netremotecallhib
-        for (var i=0;i<this.subnodes.length;i++){
-            //If it is of Type netremotecallhib then register it to the NetConnection
-            if (this.subnodes[i] instanceof netremotecallhib){
-                var t = this;
-                this._nc[this.subnodes[i].funcname] = function( args ){
-                    return t.remoteCallMethod(arguments.callee,args);
-                }
-            }
-        }
+	        if (this.subnodes!=null){
+		        //Register all methods which are onstanceof netremotecallhib
+		        for (var i=0;i<this.subnodes.length;i++){
+		            //If it is of Type netremotecallhib then register it to the NetConnection
+		            if (this.subnodes[i] instanceof netremotecallhib){
+		                var t = this;
+		                this._nc[this.subnodes[i].funcname] = function( args ){
+		                    return t.remoteCallMethod(arguments.callee,args);
+		                }
+		            }
+		        }
+        	}
         ]]>
     </method>
     
@@ -252,12 +126,9 @@
             }
         ]]>
     </method>		
-
-
-    <!--- make a remote call to the rtmp server 
-        todo: we probably don't want to expost the Flash callback object-->
+    
     <method name="call" args="func, obj, params">
-    	if (this.debug) //Debug.write("*** call: func, obj, params",func,obj, typeof (params) ,params.length);
+    	if (this.debug) Debug.write("*** call: func, obj, params",func,obj, typeof (params) ,params.length);
     	if (params.length != 0){
 	    	//does this really work?
 	    	ASSetPropFlags(_global, null, 8, 1);
@@ -294,11 +165,8 @@
             this._nc.call(func, obj);
         }
     </method>
-        
     
-
-
-    </class>
+</class>
 
 
     <!---
@@ -365,10 +233,8 @@
             }
         	//Debug.write('call', this, rtmpObject, rtmpObject.status);
         	//Debug.write('call', this.remotecontext);
-            if (rtmpObject.debug) //Debug.write('call', this, rtmpObject, rtmpObject.status);
-            if (rtmpObject.status=="connected"){
-                rtmpObject.call(this.funcname, this, params);
-            }
+            if (rtmpObject.debug) Debug.write('call', this, rtmpObject, rtmpObject.status);
+            rtmpObject.call(this.funcname, this, params);
 
           ]]>
         </method>

@@ -31,6 +31,10 @@
 		this.subviews[0]._chatvideoinner._videoview.setAttribute('visible',false);
 		return this.subviews[0].getVideoReferenceDis();
 	</method>	
+	
+	<method name="stopVideos">
+		this._video1._chatvideoinner._videoview.v_output.stop();
+	</method>	
 
 	<videoobjectaudience name="_video1" x="0" y="0" />
 	
