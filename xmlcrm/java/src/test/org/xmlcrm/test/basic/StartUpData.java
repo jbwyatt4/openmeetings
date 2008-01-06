@@ -23,17 +23,17 @@ public class StartUpData extends TestCase {
 		Usermanagement.getInstance().addUserLevel("Moderator", 2);
 		Usermanagement.getInstance().addUserLevel("Admin", 3);	
 		
-		Navimanagement.getInstance().addGlobalStructure("home", 1, 124, true, true, 1, "home");
+		Navimanagement.getInstance().addGlobalStructure("home", 1, 124, true, true, 1, "home","false");
 		
-		Navimanagement.getInstance().addGlobalStructure("conf", 2, 1, false, true, 1, "conference");
+		Navimanagement.getInstance().addGlobalStructure("conf", 2, 1, false, true, 1, "conference","false");
 		Navimanagement.getInstance().addMainStructure("conf1", 1, 2, true, true, 1, "meeting", 2);
 		Navimanagement.getInstance().addMainStructure("conf2", 2, 3, true, true, 1, "classroom", 2);
 		
-		Navimanagement.getInstance().addGlobalStructure("settings", 3, 4, false, true, 1, "setings");
+		Navimanagement.getInstance().addGlobalStructure("settings", 3, 4, false, true, 1, "setings","false");
 		Navimanagement.getInstance().addMainStructure("userself", 1, 5, true, false, 1, "userself",3);
 		Navimanagement.getInstance().addMainStructure("roomconfiguremod", 2, 192, true, false, 1, "roomconfiguremod",3);
 		
-		Navimanagement.getInstance().addGlobalStructure("admin", 4, 6, false, true, 2, "admin");
+		Navimanagement.getInstance().addGlobalStructure("admin", 4, 6, false, true, 2, "admin","false");
 		Navimanagement.getInstance().addMainStructure("useradmin", 1, 125, true, false, 2, "useradmin",4);
 		Navimanagement.getInstance().addMainStructure("groupadmin", 1, 126, true, false, 2, "groupadmin",4);
 		Navimanagement.getInstance().addMainStructure("orgadmin", 1, 127, true, false, 3, "orgadmin",4);

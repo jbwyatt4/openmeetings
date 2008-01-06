@@ -860,8 +860,10 @@ public class Application extends ApplicationAdapter implements
 						RoomClient rcl = ClientList.get(conn.getClient().getId());
 						log.debug("*..*idremote: " + rcl.getStreamid());
 						log.debug("*..*my idstreamid: " + currentClient.getStreamid());
-						if (!currentClient.getStreamid().equals(rcl.getStreamid()) && roomname.equals(rcl.getUserroom()) && orgdomain.equals(rcl.getDomain())) {
-							((IServiceCapableConnection) conn).invoke("sendVarsToWhiteboard", new Object[] { vars },this);
+						if (roomname.equals(rcl.getUserroom()) && orgdomain.equals(rcl.getDomain())) {
+							if (!currentClient.getStreamid().equals(rcl.getStreamid())) {
+								((IServiceCapableConnection) conn).invoke("sendVarsToWhiteboard", new Object[] { vars },this);
+							}
 							log.debug("sending sendVarsToWhiteboard to " + conn);
 							if (rcl.getIsRecording()){
 								StreamService.addWhiteBoardEvent(rcl.getRoomRecordingName(),vars);
