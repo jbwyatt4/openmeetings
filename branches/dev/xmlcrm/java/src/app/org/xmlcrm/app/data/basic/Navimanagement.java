@@ -82,7 +82,7 @@ public class Navimanagement {
 
 	public void addGlobalStructure(String action, int naviorder,
 			long fieldvalues_id, boolean isleaf, boolean isopen, long level_id,
-			String name) {
+			String name, String deleted) {
 		try {
 			Naviglobal ng = new Naviglobal();
 			ng.setAction(action);
@@ -92,7 +92,7 @@ public class Navimanagement {
 			ng.setFieldvalues_id(fieldvalues_id);
 			ng.setIsleaf(isleaf);
 			ng.setIsopen(isopen);
-			ng.setDeleted("false");
+			ng.setDeleted(deleted);
 			ng.setLevel_id(level_id);
 			ng.setName(name);
 			ng.setStarttime(new Date());

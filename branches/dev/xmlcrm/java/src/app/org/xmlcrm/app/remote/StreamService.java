@@ -343,6 +343,8 @@ public class StreamService {
 	
 	public static void addWhiteBoardEvent(String roomrecordingName,Object vars) {
 		try {
+			
+			log.error("roomrecordingName: "+roomrecordingName);
 			LinkedHashMap<String,Object> roomRecording = roomRecordingList.get(roomrecordingName);
 			
 			Date recordingsStartTime = (Date) roomRecording.get("starttime");

@@ -49,36 +49,40 @@ public class ImportInitvalues {
 		Usermanagement.getInstance().addUserLevel("Moderator", 2);
 		Usermanagement.getInstance().addUserLevel("Admin", 3);	
 		
-		Navimanagement.getInstance().addGlobalStructure("home", 1, 124, false, true, 1, "home");
+		Navimanagement.getInstance().addGlobalStructure("home", 1, 124, false, true, 1, "home","false");
 		Navimanagement.getInstance().addMainStructure("maindashboard", 1, 290, true, true, 1, "maindashboard", 1);
 		Navimanagement.getInstance().addMainStructure("myscheduledmeetings", 2, 291, true, true, 1, "myscheduledmeetings", 1);
 		Navimanagement.getInstance().addMainStructure("myscheduledevents", 3, 292, true, true, 1, "myscheduledevents", 1);
 		
-		Navimanagement.getInstance().addGlobalStructure("content", 2, 289, false, true, 1, "content");
+		Navimanagement.getInstance().addGlobalStructure("content", 2, 289, false, true, 1, "content","true");
 		Navimanagement.getInstance().addMainStructure("publiccontent", 4, 297, true, true, 1, "publiccontent", 2);
 		Navimanagement.getInstance().addMainStructure("privatecontent", 5, 298, true, true, 1, "privatecontent", 2);
 		Navimanagement.getInstance().addMainStructure("personalcontent", 6, 299, true, true, 1, "personalcontent", 2);
 		
-		Navimanagement.getInstance().addGlobalStructure("meetings", 3, 2, false, true, 1, "meetings");
-		Navimanagement.getInstance().addMainStructure("publicmeetings", 7, 293, true, true, 1, "publicmeetings", 3);
-		Navimanagement.getInstance().addMainStructure("privatemeetings", 8, 294, true, true, 1, "privatemeetings", 3);
+		Navimanagement.getInstance().addGlobalStructure("record", 3, 395, false, true, 1, "record","false");
+		Navimanagement.getInstance().addMainStructure("record", 7, 395, true, true, 1, "record", 3);
+		Navimanagement.getInstance().addMainStructure("recordingsviewer", 8, 396, true, true, 1, "recordingsviewer", 3);
 		
-		Navimanagement.getInstance().addGlobalStructure("events", 4, 3, false, true, 1, "events");
-		Navimanagement.getInstance().addMainStructure("publicevents", 9, 295, true, true, 1, "publicevents", 4);
-		Navimanagement.getInstance().addMainStructure("privateevents", 10, 296, true, true, 1, "privateevents", 4);
+		Navimanagement.getInstance().addGlobalStructure("meetings", 4, 2, false, true, 1, "meetings","false");
+		Navimanagement.getInstance().addMainStructure("publicmeetings", 9, 293, true, true, 1, "publicmeetings", 4);
+		Navimanagement.getInstance().addMainStructure("privatemeetings", 10, 294, true, true, 1, "privatemeetings", 4);
+		
+		Navimanagement.getInstance().addGlobalStructure("events", 5, 3, false, true, 1, "events","false");
+		Navimanagement.getInstance().addMainStructure("publicevents", 11, 295, true, true, 1, "publicevents", 5);
+		Navimanagement.getInstance().addMainStructure("privateevents", 12, 296, true, true, 1, "privateevents", 5);
 		
 		//Navimanagement.getInstance().addGlobalStructure("settings", 4, 4, false, true, 1, "setings");
 		//Navimanagement.getInstance().addMainStructure("userself", 1, 5, true, false, 1, "userself",3);
 		//Navimanagement.getInstance().addMainStructure("roomconfiguremod", 2, 192, true, false, 1, "roomconfiguremod",3);
 		
-		Navimanagement.getInstance().addGlobalStructure("admin", 5, 6, false, true, 2, "admin");
-		Navimanagement.getInstance().addMainStructure("useradmin", 1, 125, true, false, 2, "useradmin",5);
+		Navimanagement.getInstance().addGlobalStructure("admin", 6, 6, false, true, 2, "admin","false");
+		Navimanagement.getInstance().addMainStructure("useradmin", 13, 125, true, false, 2, "useradmin",6);
 		//Navimanagement.getInstance().addMainStructure("groupadmin", 2, 126, true, false, 2, "groupadmin",4);
-		Navimanagement.getInstance().addMainStructure("orgadmin", 3, 127, true, false, 3, "orgadmin",5);
-		Navimanagement.getInstance().addMainStructure("roomadmin", 4, 186, true, false, 3, "roomadmin",5);
-		Navimanagement.getInstance().addMainStructure("confadmin", 5, 263, true, false, 3, "confadmin",5);
-		Navimanagement.getInstance().addMainStructure("languageseditor", 6, 348, true, false, 3, "languageseditor",5);
-		Navimanagement.getInstance().addMainStructure("backup", 7, 367, true, false, 3, "backup",5);
+		Navimanagement.getInstance().addMainStructure("orgadmin", 14, 127, true, false, 3, "orgadmin",6);
+		Navimanagement.getInstance().addMainStructure("roomadmin", 15, 186, true, false, 3, "roomadmin",6);
+		Navimanagement.getInstance().addMainStructure("confadmin", 16, 263, true, false, 3, "confadmin",6);
+		Navimanagement.getInstance().addMainStructure("languageseditor", 17, 348, true, false, 3, "languageseditor",6);
+		Navimanagement.getInstance().addMainStructure("backup", 18, 367, true, false, 3, "backup",6);
 		
 		ErrorManagement.getInstance().addErrorType(new Long(1), new Long(322));
 		ErrorManagement.getInstance().addErrorType(new Long(2), new Long(323));
