@@ -50,31 +50,8 @@ function getCurrentMouseWheelObject(obj) {
 function disableCurrentMouseWheelObject() {
     currentMouseWheelObject=null;
 }  
-    
-function getStringDate(dateObj){
-	var hours = dateObj.getHours();
-	if (hours<10) hours="0"+hours;
-	var minutes = dateObj.getMinutes();
-	if (minutes<10) minutes="0"+minutes;
-	var date = dateObj.getDate();
-	if (date<10) date="0"+date;
-	var month = dateObj.getMonth();
-	if (month<10) month="0"+month;
-    return date+'.'+month+'.'+dateObj.getFullYear()+' '+hours+':'+minutes;
-}     
 
-function getStringDateFileSave(){
-	var dateObj = new Date();
-	var hours = dateObj.getHours();
-	if (hours<10) hours="0"+hours;
-	var minutes = dateObj.getMinutes();
-	if (minutes<10) minutes="0"+minutes;
-	var date = dateObj.getDate();
-	if (date<10) date="0"+date;
-	var month = dateObj.getMonth();
-	if (month<10) month="0"+month;
-    return date+'_'+month+'_'+dateObj.getFullYear()+'_at_'+hours+'_'+minutes;
-}               
+             
 ]]>
 </script>
 

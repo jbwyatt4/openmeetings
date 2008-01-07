@@ -25,7 +25,7 @@
                 <![CDATA[
                     if (value!=null){
                         for(var eg=0;eg<value.length;eg++){
-                            new roomlistItem(parent.inn.inn.inn,{currentusers:value[eg].room.currentusers,obj:value[eg],ispublic:false,roomid:value[eg].room.rooms_id,starttime:getStringDate(value[eg].room.starttime),roomname:value[eg].room.name});
+                            new roomlistItem(parent.inn.inn.inn,{currentusers:value[eg].room.currentusers,obj:value[eg],ispublic:false,roomid:value[eg].room.rooms_id,starttime:parseDateToStringTime(value[eg].room.starttime),roomname:value[eg].room.name});
                         }
                     }
                 ]]>	        	          				
