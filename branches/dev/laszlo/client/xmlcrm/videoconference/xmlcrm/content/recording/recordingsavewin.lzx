@@ -17,10 +17,21 @@
     <labeltext labelid="393" width="200" y="52" resize="false" x="2"/>
         <customscrolledittext name="rComment" y="52" x="120" width="270" height="120" />	
 	        					  
-    <simplelabelbutton labelid="25" width="100" x="180" y="190" 
-        onclick="this.parent.close();" />
-    
-    <simplelabelbutton labelid="22" width="100" x="294" y="190" 
+    <simplelabelbutton labelid="420" width="100" x="70" y="190" >
+    	<handler name="onclick">
+    		parent.clientCancelRecording.doCall();
+    	</handler>
+    	<labeltooltip labelid="421" />
+    </simplelabelbutton>
+  
+    <simplelabelbutton labelid="422" width="100" x="180" y="190" >
+    	<handler name="onclick">
+    		parent.close();
+    	</handler>
+    	<labeltooltip labelid="423" />
+    </simplelabelbutton>
+        
+    <simplelabelbutton labelid="22" width="100" x="290" y="190" 
 		onclick="this.parent.stopRecordMeetingStream.doCall();" />
   	
   	<netremotecallhib name="stopRecordMeetingStream" remotecontext="$once{ canvas.thishib }"
@@ -34,6 +45,16 @@
 			parent.close();
 		</handler>	
   	</netremotecallhib>  
+  	
+  	<netremotecallhib name="clientCancelRecording" remotecontext="$once{ canvas.thishib }"
+		funcname="streamservice.clientCancelRecording"  >
+  		<netparam><method name="getValue">return parent.parent.recordingsName;</method></netparam>
+		<handler name="ondata" args="value">
+			//The onResult-Handler will be called be the rtmpconnection
+			Debug.write("+++++++++++++++++ clientCancelRecording: ",value);	
+			parent.close();
+		</handler>	
+  	</netremotecallhib>    	
 </class>
 
 </library>

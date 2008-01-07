@@ -342,6 +342,10 @@
 				_drawarea.sendCompleteImageLoadedRClient(value);
                 if (canvas.currentModApply!=null) canvas.currentModApply.rejectUser(value);
                 //parent.getClientListScope.doCall();  
+                if (value.isRecording) {
+		    		mymod.parent.recordingUser = null;
+		    		mymod.parent.setMessage();                	
+                }
             </handler>   
         </netremotecallhib>     
 		<netremotecallhib name="logicalRoomLeaveDis" funcname="logicalRoomLeaveDis" >      
@@ -352,6 +356,10 @@
 				_drawarea.sendCompleteWmlLoadedRClient(value);
 				_drawarea.sendCompleteImageLoadedRClient(value);
 	    		if (canvas.currentModApply!=null) canvas.currentModApply.rejectUser(value);
+               	if (value.isRecording) {
+		    		mymod.parent.recordingUser = null;
+		    		mymod.parent.setMessage();                	
+                }	    		
 	    	</handler>
 	    </netremotecallhib>             
   
@@ -557,6 +565,23 @@
 		funcname="chatservice.removeClientFromChatNotification" >      
     	<handler name="ondata" args="value">
     		Debug.write("removeClientFromChatNotification: ",value);
+    	</handler>
+    </netremotecallhib>
+    
+    <!-- recordings Notifications -->
+	<netremotecallhib name="stopedRecording" funcname="stopedRecording" >      
+    	<handler name="ondata" args="value">
+    		Debug.write("stopedRecording: ",value);
+    		mymod.parent.recordingUser = null;
+    		mymod.parent.setMessage();
+    	</handler>
+    </netremotecallhib>
+    
+	<netremotecallhib name="startedRecording" funcname="startedRecording" >      
+    	<handler name="ondata" args="value">
+    		Debug.write("startedRecording: ",value);
+    		mymod.parent.recordingUser = value;
+    		mymod.parent.setMessage();
     	</handler>
     </netremotecallhib>
     
