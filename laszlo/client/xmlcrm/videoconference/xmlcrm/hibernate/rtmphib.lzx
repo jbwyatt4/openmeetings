@@ -84,7 +84,7 @@
             this.setUsernameReconnect.doCall();
             loadContentByTempActionForNavi();
         } else {
-            canvas.thishib.loaderVar.destroy();
+			canvas.thishib.loaderVar.setProgress();
             this.getsessiondata.call();    
         }    
     </handler>
@@ -123,7 +123,8 @@
             //The onResult-Handler will be called be the rtmpconnection
             Debug.write("getsessiondata: ",value);
             canvas.sessionObject = value;
-            canvas.sessionId = value.session_id;           
+            canvas.sessionId = value.session_id;     
+            canvas.thishib.loaderVar.setProgress();
             parent.getLanguages.doCall();
         </handler>  
     </netremotecallhib>
@@ -132,8 +133,9 @@
         dataobject="languagesSet" >      
         <handler name="ondata" args="value">
             //The onResult-Handler will be called be the rtmpconnection
-            Debug.write("getLanguages: ",value);
-            parent.getLanguageById.doCall();
+            //Debug.write("getLanguages: ",value);
+            canvas.thishib.loaderVar.setProgress();
+            parent.getLanguageByIdAndMax.doCall();
         </handler>  
     </netremotecallhib>    
     
@@ -149,23 +151,39 @@
             </handler>  
         </netremotecallhib>    
     
-    <netremotecallhib name="getLanguageById" funcname="languageservice.getLanguageById" >      
-        <netparam><method name="getValue"> return parent.parent.userlang; </method></netparam> 
+    <netremotecallhib name="getLanguageByIdAndMax" funcname="languageservice.getLanguageByIdAndMax" >
+    	<attribute name="start" value="0" type="number" />
+    	<attribute name="step" value="100" type="number" /> 
+    	<attribute name="max" value="600" type="number" />    
+        <netparam><method name="getValue">return parent.parent.userlang;</method></netparam> 
+        <netparam><method name="getValue">return parent.start;</method></netparam> 
+        <netparam><method name="getValue">return parent.step;</method></netparam> 
         <handler name="ondata" args="value">
-            //The onResult-Handler will be called be the rtmpconnection
-            //Debug.write("getLanguageById: ",value);
-            setLabelObject(value);
-            if (parent.initlanguageLoaded){
-            	parent.getRoomTypes.doCall();
-            } else {
-            	parent.initlanguageLoaded=true;
-			    if(!canvas.isinitRoomDirect){
-            	    parent.getStates.doCall();
-			    } else {
-			        //Debug.write("canvas.isinitRoomDirect is true");
-			        parent.markSessionAsLogedIn.doCall();
-			    }
-            }
+        	<![CDATA[
+        		Debug.write("getLanguageByIdAndMax: ",value);
+        		setLabelObjectByHundred(this.start,value);
+	            //The onResult-Handler will be called be the rtmpconnection
+	            if (this.start <= max){
+	            	this.start += this.step;
+					canvas.thishib.loaderVar.setProgress();
+					this.doCall();
+	            } else {
+		            if (parent.initlanguageLoaded){
+		            	canvas.thishib.loaderVar.setProgress();
+		            	parent.getRoomTypes.doCall();
+		            } else {
+		            	parent.initlanguageLoaded=true;
+					    if(!canvas.isinitRoomDirect){
+					    	canvas.thishib.loaderVar.setProgress();
+		            	    parent.getStates.doCall();
+					    } else {
+					    	canvas.thishib.loaderVar.setProgress();
+					        //Debug.write("canvas.isinitRoomDirect is true");
+					        parent.markSessionAsLogedIn.doCall();
+					    }
+		            }
+				}
+			]]>
         </handler>  
     </netremotecallhib>
 	
@@ -188,6 +206,7 @@
             //The onResult-Handler will be called be the rtmpconnection
             //Debug.write("getStates: ",value);
             canvas.statesInitValues = value;
+            canvas.thishib.loaderVar.setProgress();
             parent.getUserSalutations.doCall();
         </handler>  
     </netremotecallhib>    
@@ -203,6 +222,7 @@
 			if (canvas.isResetUsername){
 				new resetpassword(canvas.main_content._content.inner);
 			} else {
+				canvas.thishib.loaderVar.destroy();
 				new checkLoginData(canvas.main_content._content.inner);
 			}
         </handler>  
@@ -214,6 +234,7 @@
             //The onResult-Handler will be called be the rtmpconnection
             //Debug.write("getRoomTypes ",value);
             canvas.roomTypesInitValues = value;
+            canvas.thishib.loaderVar.setProgress();
             parent.setUsername.doCall();
         </handler>  
     </netremotecallhib>    	 
@@ -224,6 +245,7 @@
         <handler name="ondata" args="value">
             //The onResult-Handler will be called be the rtmpconnection
             Debug.write("getNavi: ",value);
+            canvas.thishib.loaderVar.destroy();
             new mainnavi(canvas._mainbgcontentNavi,{name:'navi',naviObject:value});
             new helpandbugs(canvas._mainbgcontentNavi,{name:'help'});
         </handler>  
@@ -246,6 +268,7 @@
             <handler name="ondata" args="value">
                 //The onResult-Handler will be called be the rtmpconnection
                 //Debug.write("setUsername: ",value);
+                canvas.thishib.loaderVar.setProgress();
                 parent.getNavi.doCall();                    
             </handler>  
         </netremotecallhib>        
@@ -565,23 +588,6 @@
 		funcname="chatservice.removeClientFromChatNotification" >      
     	<handler name="ondata" args="value">
     		Debug.write("removeClientFromChatNotification: ",value);
-    	</handler>
-    </netremotecallhib>
-    
-    <!-- recordings Notifications -->
-	<netremotecallhib name="stopedRecording" funcname="stopedRecording" >      
-    	<handler name="ondata" args="value">
-    		Debug.write("stopedRecording: ",value);
-    		mymod.parent.recordingUser = null;
-    		mymod.parent.setMessage();
-    	</handler>
-    </netremotecallhib>
-    
-	<netremotecallhib name="startedRecording" funcname="startedRecording" >      
-    	<handler name="ondata" args="value">
-    		Debug.write("startedRecording: ",value);
-    		mymod.parent.recordingUser = value;
-    		mymod.parent.setMessage();
     	</handler>
     </netremotecallhib>
     

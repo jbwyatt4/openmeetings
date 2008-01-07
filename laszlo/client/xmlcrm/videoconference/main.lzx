@@ -180,7 +180,8 @@ of the red5-servlet
 <attribute name="sessionId" value="" type="string" />
 	
 <!-- attributes for direct room access -->
-<attribute name="initroomid" value="" type="string" />
+<attribute name="initroomid" value="0" type="number" />
+<attribute name="initroomStr" value="" type="string" />
 <attribute name="initroomtype" value="" type="string" />
 <attribute name="initdomainid" value="" type="string" />
 <attribute name="initlangid" value="1" type="number" />
@@ -190,7 +191,9 @@ of the red5-servlet
 <attribute name="resetHash" value="" type="string" />
     
 <attribute name="naviHeight" value="110" type="number" />    
-<attribute name="naviHeightDelta" value="110" type="number" />    
+<attribute name="naviHeightDelta" value="110" type="number" />  
+
+<attribute name="currentrecorder_id" value="0" type="number" /> 
 
 <!-- 
 Holds a refernce to the current VideoCOntainer Object
@@ -265,13 +268,16 @@ containing the VideoViews
 	//Check for Invitation
 	var domain = LzBrowser.getInitArg('domain');
 	var room = LzBrowser.getInitArg('room');
+	var roomid = LzBrowser.getInitArg('roomid');
 	var roomtype = LzBrowser.getInitArg('roomtype');
 	var emailGuest = LzBrowser.getInitArg('email');
 		
 	//Debug.write("domain: ",domain);
 
-	if (domain!=undefined && room!=undefined && roomtype!=undefined && emailGuest != undefined){
-		canvas.initroomid = room;
+	if (domain!=undefined && room!=undefined && roomtype!=undefined 
+			&& roomid!=undefined && emailGuest != undefined){
+		canvas.initroomid = Number(roomid);
+		canvas.initroomStr = room;
 		canvas.initroomtype = roomtype;
 		canvas.initdomainid = domain;
 		canvas.isinitRoomDirect = true;
@@ -299,7 +305,7 @@ containing the VideoViews
 </method>
 
 <method name="getLabelName" args="id">
-	return getLabelNameXMLCRM(id);
+	return getLabelTag(id);
 </method>
 
 <!-- 
