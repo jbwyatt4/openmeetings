@@ -2,7 +2,8 @@
 <library>
     
 <class name="documentmenu" extends="basetoolbarmenu" >
-    
+	
+    <!--
     <drawchoosemodir y="4" name="b1" modi="plain" resourceN="plain" labelid="69" />
     <drawsimpleclick y="4" name="b2" modi="saveobj" resourceN="saveobj" labelid="197" />
 
@@ -30,7 +31,8 @@
     
     <customedittext y="4" name="_zoom" width="60" />
     <labeltext y="6" labelid="253" />	
-        
+     -->
+     
 </class>
     
 </library>

@@ -6,7 +6,32 @@
 var labelObj;
     
 var tempActionForNavi = '';
-    
+
+// Load Labels from List
+var labels = new Array();
+
+function setLabelObjectByHundred(no,obj){
+    if(no!=0) no = Math.floor(no/100);
+    //Debug.write("SetLabelObject: ",no,obj);
+	labels[no] = obj;
+}
+
+function getLabelTag(labelid){
+  var no = Math.floor(labelid/100);
+  return getLabelTagByNo(no,labelid);
+}
+
+function getLabelTagByNo(no,labelid){
+	var labeltag = "";
+	//Debug.write("Search label tag in: ",labelid,labels[no]);
+    for (var eg=0;eg<=labels[no].length;eg++){
+	    if (labels[no][eg].fieldvalues_id==labelid){
+		    return labels[no][eg].value;
+	    }
+    }
+	return 'error';
+}
+
 function quicklink(action){
     mainmenuList.doAction(action);
 }   
@@ -38,7 +63,7 @@ function loadContentByTempActionForNavi(){
         canvas._mainbgcontentNavi.navi.destroy();
         canvas._mainbgcontentNavi.help.destroy();
         canvas.thishib.initlanguageLoaded = false;
-        canvas.thishib.getLanguageById.doCall();
+        canvas.thishib.getLanguageByIdAndMax.doCall();
     }
 }    
 

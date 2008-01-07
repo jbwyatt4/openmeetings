@@ -307,7 +307,7 @@ containing the VideoViews
 </method>
 
 <method name="getLabelName" args="id">
-	return getLabelNameXMLCRM(id);
+	return getLabelTag(id);
 </method>
 
 <!-- 

@@ -1,13 +1,32 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library>
-	
-<class name="autoloader" extends="view" width="300" x="300" y="140" 
-    height="200" layout="axis:y;spacing:2">
+    
+<class name="autoloader" extends="view" align="center" valign="middle"
+    layout="axis:y;spacing:2">
 
+	<attribute name="maxwidth" value="290" type="number" />
+	<attribute name="maxsteps" value="12" type="number" />
+	<attribute name="currentsteps" value="0" type="number" />
+	
+	<method name="setProgress">
+		this.currentsteps += 1;
+		Debug.write("setProgress ",this.currentsteps);
+		var w = Math.round(((this.maxwidth-2)/this.maxsteps)*this.currentsteps);
+		this.loadingbar.setAttribute('visibility','visible');
+		this.loadingbar._loadingbar.setAttribute('width',w);
+	</method>
     
     <text fontsize="12" >Autoconnect</text>
     <text fontsize="12" name="error" />
     <text fontsize="12" name="src" />
+    
+    <view name="loadingbar" bgcolor="$once{ canvas.basebgcolorizer }" height="10" 
+          x="0" y="60" width="$once{ parent.maxwidth }" visibility="hidden">
+        <view x="1" width="$once{ parent.parent.maxwidth-2 }" 
+        	  height="8" y="1" bgcolor="white" />
+        <view x="1" width="0" height="8" y="1" name="_loadingbar"
+        	  bgcolor="$once{ canvas.baseMouseOvercolorizer }" />	  
+    </view>
         
 </class>
 
