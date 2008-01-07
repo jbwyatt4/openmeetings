@@ -60,6 +60,7 @@
             	}
             }
             canvas.thishib.getCurrentModerator.doCall(); 
+            mymod.parent.checkForRecording.doCall();
             chartcontent.doInit();				
 		</handler>	
   	</netremotecallhib>		  	

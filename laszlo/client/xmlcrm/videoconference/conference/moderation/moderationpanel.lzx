@@ -11,10 +11,10 @@
 	<handler name="oninit">
 		<![CDATA[
 			Debug.write(user);
-			var tString = this.error+"<BR/>"
-					+user.username+"<BR/>" 
-					+user.firstname+" "+user.lastname+"<BR/>"
-					+parseDateToStringTime(user.roomEnter);
+			var tString = this.error + "<BR/>"
+					+ user.username+"<BR/>" 
+					+ user.firstname + " " + user.lastname + "<BR/>"
+					+ parseDateToStringTime(user.roomEnter);
 			this.textInner._inner.setText(tString);
 		]]>
 	</handler>
@@ -30,8 +30,27 @@
 <class name="moderationpanel" extends="view" layout="axis:x;spacing:2">
 	
 	<attribute name="recordingsName" value="" type="string" />
-
-  	<labeltext id="mymod" resize="true" name="_text" y="4" />
+  	<attribute name="initial" value="true" type="boolean" />
+  	<attribute name="recordingUser" value="null" />
+  	
+	<method name="setMessage">
+		<![CDATA[
+			Debug.write("setMessage: ",this.recordingUser);
+			if (this.recordingUser!=null){
+				var tString = canvas.getLabelName(419) + " "
+						+ this.recordingUser.username+" " 
+						+ this.recordingUser.firstname + " " + this.recordingUser.lastname + " "
+						+ parseDateToStringTime(this.recordingUser.roomEnter);
+				this._inner.setText(tString);
+			} else {
+				this._inner.setText("");
+				this.sta_btn.setAttribute('visibility','visible');
+    			this.stp_btn.setAttribute('visibility','hidden');
+			}
+		]]>
+	</method>  	
+	
+	<labeltext id="mymod" resize="true" name="_text" y="4" />
   	
   	<simplelabelbutton name="mod_btn" width="30" height="24" y="2">
 		<handler name="onclick">
@@ -45,9 +64,7 @@
 	
     <simplelabelbutton name="sta_btn" width="30" height="24" y="2">
     	<handler name="onclick">
-    		this.parent.checkForRecording.doCall();
-    		this.setAttribute('visibility','hidden');
-    		parent.stp_btn.setAttribute('visibility','visible');
+    		this.parent.checkForRecording.doCall();   		
     	</handler>
 		<view resource="start_recording_conf" x="3" y="1" />
 		<labeltooltip labelid="415" />
@@ -56,8 +73,6 @@
     <simplelabelbutton name="stp_btn" width="30" height="24" y="2" visibility="hidden">
     	<handler name="onclick">
     		new recordingsavewin(canvas.main_content._content.inner,{recordingsName:parent.recordingsName});
-    		this.setAttribute('visibility','hidden');
-    		parent.sta_btn.setAttribute('visibility','visible');
     	</handler>    	
 		<view resource="stop_recording_conf" x="7" y="4" />
 		<labeltooltip labelid="416" />
@@ -71,6 +86,8 @@
 			//The onResult-Handler will be called be the rtmpconnection
 			Debug.write("+++++++++++++++++ recordShow: ",value);		
 			parent.recordingsName = value;
+			parent.sta_btn.setAttribute('visibility','hidden');
+			parent.stp_btn.setAttribute('visibility','visible');			
 		</handler>	
   	</netremotecallhib>
   	
@@ -79,14 +96,19 @@
 		<handler name="ondata" args="value">
 			//The onResult-Handler will be called be the rtmpconnection
 			Debug.write("+++++++++++++++++ checkForRecording: ",value);	
-			if (value==null) {
+			parent.recordingUser = value;
+			if (parent.initial){
+				parent.initial = false;
+			} else if (value==null) {
 				this.parent.recordMeetingStream.doCall();
 			} else {
 				new errorpopupuserinfo(canvas,{error:canvas.getLabelName(418),user:value});
 			}
+			parent.setMessage();
 		</handler>	
-  	</netremotecallhib>  	
-	
+  	</netremotecallhib>  
+  		
+	<labeltext fgcolor="red" name="_inner" y="4" />
 	
 </class>
 
