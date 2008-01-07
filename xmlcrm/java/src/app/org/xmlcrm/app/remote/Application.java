@@ -228,7 +228,7 @@ public class Application extends ApplicationAdapter implements
 						log.error("sending roomDisconnect to " + cons);
 						RoomClient rcl = ClientList.get(cons.getClient().getId());
 						//Check if the Client is in the same room and same domain except its the current one
-						if(orgdomain.equals(rcl.getDomain())){					
+						if(roomname.equals(rcl.getUserroom()) && orgdomain.equals(rcl.getDomain())){				
 							((IServiceCapableConnection) cons).invoke("roomDisconnect",new Object[] { currentClient }, this);
 							log.error("sending roomDisconnect to " + cons);
 						}
@@ -253,16 +253,12 @@ public class Application extends ApplicationAdapter implements
 			RoomClient currentClient = ClientList.get(current.getClient().getId());
 			String roomname = currentClient.getUserroom();
 			String orgdomain = currentClient.getDomain();	
-			currentClient.setUserroom("");
-			currentClient.setRoom_id(null);
-			currentClient.setIsRecording(false);
-			log.error("##### logicalRoomLeave :. " + currentClient.getStreamid()); // just a unique number
-
 			//stop any recordings if this user is recording
-			if (currentClient.getIsRecording()) StreamService.cancelRecording(currentClient.getRoomRecordingName());
-
-			log.error("removing USername "+currentClient.getUsername()+" "+currentClient.getConnectedSince()+" streamid: "+currentClient.getStreamid());
-			ClientList.put(currentClient.getStreamid(),currentClient);
+			if (currentClient.getIsRecording()) {
+				StreamService.cancelRecording(currentClient.getRoomRecordingName());
+			}
+			
+			log.error("##### logicalRoomLeave :. " + currentClient.getStreamid()); // just a unique number
 			
 			//If this Room is empty clear the Room Poll List
 			HashMap<String,RoomClient> rcpList = this.getClientListByRoomAndDomain(roomname, orgdomain);
@@ -276,12 +272,11 @@ public class Application extends ApplicationAdapter implements
 			
 			Iterator<IConnection> it = current.getScope().getConnections();
 			while (it.hasNext()) {
-				log.error("hasNext == true");
 				IConnection cons = it.next();
-				log.error("cons Host: "+cons);
+				//log.error("cons Host: "+cons);
 				if (cons instanceof IServiceCapableConnection) {
 					if (!cons.equals(current)){
-						log.error("sending roomDisconnect to " + cons);
+						//log.error("sending roomDisconnect to " + cons);
 						RoomClient rcl = ClientList.get(cons.getClient().getId());
 						//Check if the Client is in the same room and same domain except its the current one
 						if(roomname.equals(rcl.getUserroom()) && orgdomain.equals(rcl.getDomain())){					
@@ -290,7 +285,13 @@ public class Application extends ApplicationAdapter implements
 						}
 					}
 				}
-			}			
+			}	
+			currentClient.setUserroom("");
+			currentClient.setRoom_id(null);			
+			currentClient.setIsRecording(false);
+			
+			log.error("removing USername "+currentClient.getUsername()+" "+currentClient.getConnectedSince()+" streamid: "+currentClient.getStreamid());
+			ClientList.put(currentClient.getStreamid(),currentClient);
 			
 		} catch (Exception err){
 			log.error("[roomDisconnect]",err);

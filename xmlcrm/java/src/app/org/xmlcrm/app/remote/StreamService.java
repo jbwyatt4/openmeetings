@@ -1,6 +1,7 @@
 package org.xmlcrm.app.remote;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.LinkedList;
@@ -21,6 +22,8 @@ import org.red5.server.stream.ClientBroadcastStream;
 import org.red5.server.api.IConnection;
 import org.red5.server.api.IScope;
 import org.red5.server.api.Red5;
+import org.red5.server.api.service.IPendingServiceCall;
+import org.red5.server.api.service.IPendingServiceCallback;
 import org.red5.server.api.service.IServiceCapableConnection;
 
 import org.xmlcrm.app.conference.videobeans.RoomClient;
@@ -43,7 +46,7 @@ import org.xmlcrm.app.data.record.Recordingmanagement;
  * @author sebastianwagner
  *
  */
-public class StreamService {
+public class StreamService implements IPendingServiceCallback {
 	
 	private static String fileNameXML = "recording_";
 	private static String folderForRecordings = "recorded";
@@ -77,6 +80,8 @@ public class StreamService {
 					log.error("is this users still alive? :"+rcl);
 					//Check if the Client is in the same room and same domain 
 					if(roomname.equals(rcl.getUserroom()) && orgdomain.equals(rcl.getDomain())){
+						
+						((IServiceCapableConnection) conn).invoke("startedRecording",new Object[] { currentClient }, this);
 						
 						if (!conferenceType.equals("audience") || rcl.getIsMod()){
 							LinkedHashMap<String,Object> roomStream = new LinkedHashMap<String,Object>();
@@ -147,6 +152,7 @@ public class StreamService {
 					log.error("is this users still alive? :"+rcl);
 					//Check if the Client is in the same room and same domain 
 					if(roomname.equals(rcl.getUserroom()) && orgdomain.equals(rcl.getDomain())){
+						((IServiceCapableConnection) conn).invoke("stopedRecording",new Object[] { currentClient }, this);
 						if (!conferenceType.equals("audience") || rcl.getIsMod()){
 							this.stopRecordingShow(conn,rcl.getStreamid());
 						}
@@ -399,12 +405,92 @@ public class StreamService {
 		}	
 	}
 	
+	public Long clientCancelRecording(String roomrecordingName){
+		try {
+			
+			IConnection current = Red5.getConnectionLocal();
+			RoomClient currentClient = Application.getClientList().get(current.getClient().getId());
+			Long rooms_id = currentClient.getRoom_id();
+			String roomname = currentClient.getUserroom();
+			String orgdomain = currentClient.getDomain();	
+			currentClient.setIsRecording(false);
+			currentClient.setRoomRecordingName("");
+			Application.getClientList().put(current.getClient().getId(), currentClient);
+			
+			LinkedHashMap<String,Object> roomRecording = roomRecordingList.get(roomrecordingName);
+			String conferenceType = (String) roomRecording.get("conferenceType");
+			
+			//get all stream and stop recording them
+			//Todo: Check that nobody does Recording at the same time Issue 253
+			Iterator<IConnection> it = current.getScope().getConnections();
+			while (it.hasNext()) {
+				IConnection conn = it.next();
+				if (conn instanceof IServiceCapableConnection) {
+					RoomClient rcl = Application.getClientList().get(conn.getClient().getId());
+					log.error("is this users still alive? :"+rcl);
+					//Check if the Client is in the same room and same domain 
+					if(roomname.equals(rcl.getUserroom()) && orgdomain.equals(rcl.getDomain())){
+						((IServiceCapableConnection) conn).invoke("stopedRecording",new Object[] { currentClient }, this);
+						if (!conferenceType.equals("audience") || rcl.getIsMod()){
+							this.stopRecordingShow(conn,rcl.getStreamid());
+						}
+					}
+				}
+			}
+			
+			roomRecordingList.remove(roomrecordingName);
+			
+			return new Long(1);
+		} catch (Exception err) {
+			log.error("[cancelRecording]",err);
+		}
+		return new Long(-1);
+	}
+	
 	public static void cancelRecording(String roomrecordingName){
 		try {
 			roomRecordingList.remove(roomrecordingName);
 		} catch (Exception err) {
 			log.error("[cancelRecording]",err);
 		}
+	}
+	
+	public RoomClient checkForRecording(){
+		try {
+			IConnection current = Red5.getConnectionLocal();
+			RoomClient currentClient = Application.getClientList().get(current.getClient().getId());
+			String roomname = currentClient.getUserroom();
+			String orgdomain = currentClient.getDomain();	
+			
+			//Check if any client in the same room is recording at the moment
+			
+			Iterator<IConnection> it = current.getScope().getConnections();
+			while (it.hasNext()) {
+				IConnection cons = it.next();
+				log.error("cons Host: "+cons);
+				if (cons instanceof IServiceCapableConnection) {
+					if (!cons.equals(current)){
+						log.error("sending roomDisconnect to " + cons);
+						RoomClient rcl = Application.getClientList().get(cons.getClient().getId());
+						//Check if the Client is in the same room and same domain except its the current one
+						if(roomname.equals(rcl.getUserroom()) && orgdomain.equals(rcl.getDomain())){					
+							if (rcl.getIsRecording()){
+								return rcl;
+							}
+						}
+					}
+				}
+			}
+			
+		} catch (Exception err) {
+			log.error("[cancelRecording]",err);
+		}
+		return null;
+	}
+
+	public void resultReceived(IPendingServiceCall arg0) {
+		// TODO Auto-generated method stub
+		log.error("resultReceived"+arg0);
 	}
 	
 }
