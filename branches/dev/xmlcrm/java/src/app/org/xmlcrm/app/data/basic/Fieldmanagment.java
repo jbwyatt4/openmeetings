@@ -105,6 +105,30 @@ public class Fieldmanagment {
 		return null;
 	}
 
+
+	public List<Fieldlanguagesvalues> getAllFieldsByLanguage(Long language_id, int start, int max) {
+		try {
+			Object idf = HibernateUtil.createSession();
+			Session session = HibernateUtil.getSession();
+			Transaction tx = session.beginTransaction();
+
+			Query query = session.createQuery("select f from Fieldlanguagesvalues f WHERE f.language_id = :language_id ");
+			query.setLong("language_id", language_id);
+			query.setMaxResults(max);
+			query.setFirstResult(start);
+			List<Fieldlanguagesvalues> returnList = query.list();
+			tx.commit();
+			HibernateUtil.closeSession(idf);
+
+			return returnList;
+		} catch (HibernateException ex) {
+			log.error("[getConfKey]: " + ex);
+		} catch (Exception ex2) {
+			log.error("[getConfKey]: " + ex2);
+		}
+		return null;
+	}
+	
 	public Long addFieldValueByFieldAndLanguage(Long field_id,
 			Long language_id, String fieldvalue) {
 		try {
