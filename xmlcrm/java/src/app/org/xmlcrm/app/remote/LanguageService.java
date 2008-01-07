@@ -32,12 +32,23 @@ public class LanguageService {
 	}
 	
 	/**
-	 * get all fileds of a given Language_id
+	 * get all fields of a given Language_id
 	 * @param language_id
+	 * @deprecated
 	 * @return
 	 */
 	public List<Fieldlanguagesvalues> getLanguageById(Long language_id){
 		return Fieldmanagment.getInstance().getAllFieldsByLanguage(language_id);
+	}
+	
+	
+	/**
+	 * get all fields of a given Language_id by params
+	 * @param language_id
+	 * @return
+	 */
+	public List<Fieldlanguagesvalues> getLanguageByIdAndMax(Long language_id, int start, int max){
+		return Fieldmanagment.getInstance().getAllFieldsByLanguage(language_id,start,max);
 	}
 	
 	public Fieldvalues getFieldvalueById(String SID, Long fieldvalues_id, Long language_id) {
