@@ -2,12 +2,12 @@
 <library>   
     
 <class name="videoboard" extends="guipresenter" x="2" y="2"
-    width="266" height="280" closable="false" title="Video and Audio"
+    width="270" height="280" closable="false" title="Video and Audio"
     resizeable="false">
     <videocontainer name="_videocontainer" x="2" y="22" />
 </class>   
     
-<class name="whiteboardpanel" extends="guipresenter" x="270" y="2"
+<class name="whiteboardpanel" extends="guipresenter" x="274" y="2"
     width="660" height="592" closable="false" title="Whiteboard"
     resizeable="false">
    <whiteboard name="_whiteboard" y="22" x="4">
@@ -40,7 +40,7 @@
     
     
 <class name="filespanel" extends="guipresenter" x="2" y="284"
-    width="266" height="310" closable="false" title="Chat Files User"
+    width="270" height="310" closable="false" title="Chat Files User"
     resizeable="false">
     <conferencecontainertab x="2" y="22" name="_menubar" />
 </class>        

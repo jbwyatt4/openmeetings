@@ -22,7 +22,7 @@
 	int chatpartnername
  -->
     
-<class name="videoobject" extends="view" bgcolor="0x000000" width="128" height="124" visible="true">
+<class name="videoobject" extends="view" bgcolor="0x000000" width="132" height="120" visible="true">
 		
 	<!-- Set the Name of the partner -->
 	<attribute name="chatpartnername" value="" type="string" />
@@ -87,25 +87,27 @@
 		if it has been assigned one then no other can connect -->
 	<attribute name="isassigned" value="false" type="boolean" />
 		
-	<view name="_innertop" width="126" height="18" x="1" y="1" bgcolor="$once{ canvas.basebgcolorizer }">
+	<view name="_innertop" width="130" height="18" x="1" y="1" bgcolor="$once{ canvas.basebgcolorizer }">
   		<text text="${ parent.parent.chatpartnername }" width="166" fgcolor="white"
   			fontsize="9" />
 	</view>
 
 	
-	<view name="_chatvideoinner" x="1" y="20" width="126" resource="chatbgitem" height="84" >
+	<view name="_chatvideoinner" x="1" y="20" width="130" height="100" >
+		
+		<view name="r" resource="chatbgitem" x="1" y="2" stretches="both" width="128" height="96" ></view>
 		<handler name="oninit">
-			this.setResourceNumber(5);
+			this.r.setResourceNumber(5);
 		</handler>
 		
 		<!-- This is the videoview -->
-		<devvideoview name="_videoview" visible="false" x="3" y="2" width="120" height="80" >		
+		<devvideoview name="_videoview" visible="false" x="1" y="2" width="128" height="96" >		
 	        <simplenetstream name="v_output" buffertime="0.3">
 				<handler name="onstatus" args="info">
 					Debug.write("simplenetstream onstatus",info.code, info);
 				</handler>
 	        </simplenetstream>
-            <devcamera name="cameraRef" show="false" width="120" height="80" fps="22" bandwidth="8192" />
+            <devcamera name="cameraRef" show="false" width="128" height="96" fps="22" bandwidth="8192" />
             <devmicrophone name="microphoneRef" capturing="false">     
             	<attribute name="isgreater" value="false" type="boolean" />       
             	<handler name="onlevel">
@@ -139,7 +141,7 @@
 	        	<netparam><method name="getValue"> return parent.parent.objMessage; </method></netparam>
 	        </netremotecallhib>  
 		</devvideoview>		
-		<view name="_sendInvitation" visible="true" x="3" y="2" width="120" height="80" >
+		<view name="_sendInvitation" visible="true" x="1" y="2" width="128" height="96" >
 			<handler name="onclick">
 				new invitemainwindow(canvas.main_content._content.inner);
 			</handler>
@@ -148,7 +150,7 @@
 		</view>
 	</view>
 
-	<view name="_loudness" x="1" width="126" height="18" y="105" bgcolor="0xFFFFFF" >
+	<view name="_loudness" x="1" width="126" height="18" y="$once{ parent.height-18 }" >
 		<view x="2" y="2" name="loudness" resource="speaking" opacity="0.2"
 			  onmouseover="" onmouseout="" >		
 			<labeltooltip inittwice="true" labelid="372" />

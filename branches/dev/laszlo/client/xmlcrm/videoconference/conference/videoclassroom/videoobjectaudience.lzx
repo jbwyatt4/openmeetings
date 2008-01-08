@@ -79,20 +79,20 @@
   			fontsize="10" fontstyle="bold" />
 	</view>
 
-	<view name="_chatvideoinner" x="1" y="20" width="240" resource="chatbgitemau" height="180" >
+	<view name="_chatvideoinner" x="1" y="20" width="250" resource="chatbgitemau" height="187.5" >
 		
 		<handler name="oninit">
 			this.setResourceNumber(5);
 		</handler>
 		
 		<!-- This is the videoview  -->
-		<devvideoview name="_videoview" visible="false" x="5" width="240" height="180">
+		<devvideoview name="_videoview" visible="false" width="250" height="187.5">
 	        <simplenetstream name="v_output" buffertime="0.3">
 				<handler name="onstatus" args="info">
 					Debug.write("simplenetstream onstatus",info.code, info);
 				</handler>
 	        </simplenetstream>
-            <devcamera name="cameraRef" show="false" width="240" height="180" fps="22" bandwidth="16384" />
+            <devcamera name="cameraRef" show="false" width="250" height="187.5" fps="22" bandwidth="16384" />
             <devmicrophone name="microphoneRef" capturing="false">     
             	<attribute name="isgreater" value="false" type="boolean" />       
             	<handler name="onlevel">
@@ -128,14 +128,14 @@
 
 	</view>
 	
-	<view name="_loudness" x="1" y="204">
+	<view name="_loudness" x="1" y="208">
 		<view x="2" y="2" name="loudness" resource="speaking" opacity="0.2"
 			  onmouseover="" onmouseout="" >		
 			<labeltooltip inittwice="true" labelid="372" />
 		</view>
 	</view>
 	
-	<view name="mute" x="$once{ parent.width-20 }" y="204" 
+	<view name="mute" x="$once{ parent.width-20 }" y="208" 
 		onmouseover="" onmouseup="" resource="mute_btn_rsc" >
 		<attribute name="isload" value="true" type="boolean" />
 		<handler name="onclick">

@@ -13,6 +13,7 @@
 	<labeltext y="40" labelid="130" />
 	<view y="60" x="20">
 		<handler name="oninit">
+			canvas.thishib.roomtype = "private";
 			this.getRoomsByOrganisationAndType.doCall();
 		</handler>
 		
