@@ -8,7 +8,7 @@ inno02.fh-pforzheim.de macbook 192.168.2.103
     domain-name it has been loading from  
     inno02.fh-pforzheim.de  
     -->
-<rtmphostlocal>192.168.2.102</rtmphostlocal>
+<rtmphostlocal>macbook</rtmphostlocal>
 
 <!--  
 Port to use for the Server
@@ -42,7 +42,7 @@ of the red5-servlet
 <!-- 
 	Version number of this distro
  -->
-<currentappversion>Version 0.5 Beta5</currentappversion>
+<currentappversion>Version 0.5 Beta7</currentappversion>
     
 <!--
     Name of the Application

@@ -88,7 +88,7 @@
     </simplelabelbutton>       
     
 	<turnoverlist name="_turnoverlist" width="460" height="540" x="2" y="60" 
-		orderby="fieldvalues_id" step="50" asc="true">
+		orderby="fieldvalues_id" step="25" asc="true">
         
         <attribute name="language_id" value="0" type="number" />
 

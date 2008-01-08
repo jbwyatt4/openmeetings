@@ -7,8 +7,6 @@
 
 <resource name="dashboard_placeholder" src="dashboard.png" />
 
-<resource name="loudnessBig" src="loudnessBig.swf" />
-
 <resource name="filesave_rsc" src="filesave.png" />
 <resource name="button_cancel_rsc" src="button_cancel.png" />
 <resource name="edit_add_rsc" src="edit_add.png" />

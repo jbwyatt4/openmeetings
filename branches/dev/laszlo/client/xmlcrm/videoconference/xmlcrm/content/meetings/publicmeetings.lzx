@@ -4,6 +4,7 @@
 <class name="publicmeetings" extends="basecontentview">	
 
 	<handler name="ontabcontentleave">
+		canvas._chartcontentRPC = null;
 		canvas.thishib.removeClientFromChatNotification.doCall();
 	</handler>
 	    

@@ -53,7 +53,7 @@
 						+ " (" + this.currentusers[i].username + ") ";
 				 new userroomtabitem(this._users._users._cbtext,{user_id:this.currentusers[i].user_id,username:username,usertime:canvas.getLabelName(408)+parseDateToStringTime(this.currentusers[i].roomEnter)});
 			}
-			chartcontentRPC.doinit();
+			canvas._chartcontentRPC.doinit();
 			this.addClientToChatNotification.doCall();
 		]]>
 	</method>
@@ -101,7 +101,11 @@
 	<view name="_chat" y="190" height="320" >
 		<view name="_chartoutputborder" height="${ parent.height-30 }"
 	        bgcolor="$once{ canvas.basebgcolorizer }" width="300">
-			<chatoutputRoomsList name="_chatoutput" id="chartcontentRPC" x="1" y="1"  />
+			<chatoutputRoomsList name="_chatoutput" x="1" y="1" >
+				<handler name="oninit">
+					canvas._chartcontentRPC = this;
+				</handler>
+			</chatoutputRoomsList>
 		</view>
 		<chattabbottomRoomList name="_chattabbottom" x="0" width="254" 
 					   y="${ parent.height-28 }" />		
