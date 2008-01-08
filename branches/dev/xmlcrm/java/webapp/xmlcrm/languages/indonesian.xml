@@ -1257,4 +1257,46 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   <string id="417" name="record">
     <value>Recording:</value>
   </string>	
+  <string id="418" name="record_error_msg">
+    <value>There is already somebody recording at the moment:</value>
+  </string>
+  <string id="419" name="record_message">
+    <value>Recording! By User:</value>
+  </string>
+  <string id="420" name="record_cancel">
+    <value>cancel</value>
+  </string>
+  <string id="421" name="record_cancal_tooltip">
+    <value>Recording will be canceled and not saved.</value>
+  </string>
+  <string id="422" name="cancel_dialog_resume">
+    <value>resume</value>
+  </string>
+  <string id="423" name="cancel_dialog_resume_tooltip">
+    <value>Close this window and resume recording</value>
+  </string>
+  <string id="424" name="painttools_ellipse_color">
+    <value>change Linecolor</value>
+  </string>
+  <string id="425" name="colorpicker_head">
+    <value>Choose Color</value>
+  </string>
+  <string id="426" name="painttools_line_disable">
+    <value>Disable / Enable Linecolor</value>
+  </string>
+  <string id="427" name="painttools_fill_disable">
+    <value>change Fillcolor</value>
+  </string>
+  <string id="428" name="painttools_line_disable">
+    <value>Disable / Enable Fillcolor</value>
+  </string>
+  <string id="429" name="change_width_arrow_down_slider">
+    <value>Change Linewidth</value>
+  </string>
+  <string id="430" name="close_small_popups">
+    <value>close</value>
+  </string>
+  <string id="431" name="paint_tool_letter">
+    <value>change Fontsize</value>
+  </string>	
 </language>
