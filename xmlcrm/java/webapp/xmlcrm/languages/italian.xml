@@ -91,7 +91,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Sondaggio</value>
   </string>
   <string id="29" name="moderation">
-    <value>caveat Sie müssen Moderator/Lehrer in diesem Raum sein um eine Umfrage anzulegen.</value>
+    <value>Devi essere moderatore per creare una domanda</value>
   </string>
   <string id="30" name="vote">
     <value>Il tuo voto è stato registrato.</value>
@@ -100,7 +100,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Hai già votato per questo sondaggio.</value>
   </string>
   <string id="32" name="voting">
-    <value>Vota !</value>
+    <value>Vota!</value>
   </string>
   <string id="33" name="answer">
     <value>La tua risposta:</value>
@@ -136,7 +136,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Incontro (massimo 4 partecipanti)</value>
   </string>
   <string id="44" name="conference">
-    <value>Conferenza (massimo 50 partecipanti)</value>
+    <value>Conferenza (massimo 100 partecipanti)</value>
   </string>
   <string id="45" name="type">
     <value>Tipo</value>
@@ -832,7 +832,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>cancella</value>
   </string>
   <string id="276" name="organisation_usersalreadadded">
-    <value>Questo utente � gi� membro di questa organizzazione.</value>
+    <value>Questo utente è già membro di questa organizzazione.</value>
   </string>
   <string id="277" name="dashboard_newsheader">
     <value>News</value>
@@ -874,13 +874,13 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Content</value>
   </string>
   <string id="290" name="subnavi">
-    <value>My Home Page</value>
+    <value>Mia Home Page</value>
   </string>
   <string id="291" name="subnavi">
     <value>Mie conferenze fissate</value>
   </string>
   <string id="292" name="subnavi">
-    <value>Mie eventi fissati</value>
+    <value>Miei eventi fissati</value>
   </string>
   <string id="293" name="subnavi">
     <value>Conferenze pubbliche</value>
@@ -964,303 +964,339 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Sondaggio</value>
   </string>
   <string id="320" name="loginwindow">
-    <value>There is no User connected to this Username</value>
+    <value>Non ci sono utenti collegati con questo Username</value>
   </string>
   <string id="321" name="loginwindow">
-    <value>The email containing a special link has been sent to your email address, please check your mailbox. If you still have not received a email, please adjust your email spam settings and resend confirmation email.</value>
+    <value>Una mail, contenente un link, è stata inviata al tuo indirizzo email, controlla la tua posta. Se non hai ricevuto la mail, controlla il tuo filtro di spam e richiedi nuovamente la mail di conferma.</value>
   </string>
   <string id="322" name="errortype">
-    <value>Error</value>
+    <value>Errore</value>
   </string>
   <string id="323" name="errortype">
-    <value>Message</value>
+    <value>Messaggio</value>
   </string>
   <string id="324" name="resetpass">
-    <value>Invalid Hash. No User found.</value>
+    <value>Hash non valida. Utente non trovato.</value>
   </string>
   <string id="325" name="resetpass">
-    <value>Reset Your Password</value>
+    <value>Resetta la tua password</value>
   </string>
   <string id="326" name="resetpass">
     <value>Login</value>
   </string>
   <string id="327" name="resetpass">
-    <value>change Password</value>
+    <value>cambia password</value>
   </string>
   <string id="328" name="resetpass">
-    <value>new Password</value>
+    <value>nuova password</value>
   </string>
   <string id="329" name="resetpass">
-    <value>re-enter Password</value>
+    <value>ripeti la password</value>
   </string>
   <string id="330" name="resetpass">
-    <value>The Passwords you entered weren't identical.</value>
+    <value>Le password inserite non sono identiche.</value>
   </string>
   <string id="331" name="resetpass">
-    <value>4 or more characters; capitalization matters!</value>
+    <value>4 o più caratteri; sensibile alle maiuscole;</value>
   </string>
   <string id="332" name="resetpass">
-    <value>Password set. You can login now.</value>
+    <value>Password impostata. Ora puoi collegarti.</value>
   </string>
   <string id="333" name="rpccallback">
     <value>OK</value>
   </string>
   <string id="334" name="rpcgeneralerror">
-    <value>Unkown Error. Please report this to your Service-Team.</value>
+    <value>Unkown Error. Contatta il tuo amministratore.</value>
   </string>
   <string id="335" name="loginwindow">
-    <value>Username not found</value>
+    <value>Username non trovato</value>
   </string>
   <string id="336" name="loginwindow">
-    <value>Invalid Password</value>
+    <value>Password non valida</value>
   </string>
   <string id="337" name="logout">
-    <value>Successfully Logged out</value>
+    <value>Scollegamento effettuato</value>
   </string>
   <string id="338" name="registration">
-    <value>Frontend Registration disabled.</value>
+    <value>Registrazioni disabilitate.</value>
   </string>
   <string id="339" name="registration">
-    <value>Invalid EMail</value>
+    <value>EMail non valida</value>
   </string>
   <string id="340" name="registration">
-    <value>duplicate filename, please choose another filename</value>
+    <value>nome del file duplicato, scegli un altro nome</value>
   </string>
   <string id="341" name="filebrowser">
-    <value>filename too short</value>
+    <value>nome di file troppo corto</value>
   </string>
   <string id="342" name="filebrowser">
-    <value>Could not save Address</value>
+    <value>Salvataggio di indirizzo non possibile</value>
   </string>
   <string id="343" name="useradmin">
-    <value>User added but you need to assign this User to an Organisation, otherwise he won't be able to sign-in.</value>
+    <value>Utente aggiunto, ma deve essere assegnato ad un'organizzazione, altrimenti non potrà collegarsi.</value>
   </string>
   <string id="344" name="adminforms">
-    <value>New Record</value>
+    <value>Nuova registrazione</value>
   </string>
   <string id="345" name="languageseditor">
-    <value>No Field found with this FieldId.</value>
+    <value>Nessun testo trovato con questo ID.</value>
   </string>
   <string id="346" name="languageseditor">
-    <value>No Label found for that Field.</value>
+    <value>Nessun valore trovato per questo elemento.</value>
   </string>
   <string id="347" name="errormessage">
-    <value>Admin Authorization required</value>
+    <value>Permessi da amministratore richiesti</value>
   </string>
   <string id="348" name="mainnavi">
-    <value>Language-Editor</value>
+    <value>Editor linguaggi</value>
   </string>
   <string id="349" name="languageseditor">
-    <value>Language</value>
+    <value>Linguaggi</value>
   </string>
   <string id="350" name="languageseditor">
-    <value>Label-ID</value>
+    <value>Identificativo-ID</value>
   </string>
   <string id="351" name="languageseditor">
-    <value>Label-Name</value>
+    <value>Identificaivo-Nome</value>
   </string>
   <string id="352" name="languageseditor">
-    <value>Value</value>
+    <value>Valore</value>
   </string>
   <string id="353" name="languageseditor">
-    <value>Fieldvalues</value>
+    <value>Record</value>
   </string>
   <string id="354" name="languageseditor">
-    <value>LabelName</value>
+    <value>Nome dell'identificativo</value>
   </string>
   <string id="355" name="languageseditor">
-    <value>LabelValue</value>
+    <value>Testo</value>
   </string>
   <string id="356" name="languageseditor">
-    <value>Label-ID</value>
+    <value>ID</value>
   </string>
   <string id="357" name="languageseditor">
-    <value>You did only delete the Label NOT the Field! You cannot delete the Field, it may has Labels in other Languages.</value>
+    <value>Puoi cancellare solo l'identificativo, non il record! Potrebbe essere utilizzato in altri linguaggi.</value>
   </string>
   <string id="358" name="languageseditor">
-    <value>Invalid Labelid. The FieldLanguagesvalues_Id cannot be found in the database.</value>
+    <value>ID non valido. l'identificativo del linguaggio non è presente nel database.</value>
   </string>
   <string id="359" name="languageseditor">
     <value>You cannot delete this Field. You can only delete Labels NOT Fields. There is no Label loaded at the moment, wether it is not selected any Field or there is no Label for this Language for that Field defined.</value>
   </string>
   <string id="360" name="languageseditor">
-    <value>export</value>
+    <value>esporta</value>
   </string>
   <string id="361" name="languageseditor">
-    <value>You need to logout to see any changes.</value>
+    <value>Devi scollegarti per vedere i cambiamenti.</value>
   </string>
   <string id="362" name="languageseditor">
-    <value>Add new language</value>
+    <value>Aggiungi un nuovo linguaggio</value>
   </string>
   <string id="363" name="languageseditor">
-    <value>delete language</value>
+    <value>cancella linguaggio</value>
   </string>
   <string id="364" name="languageseditor">
-    <value>Add new language</value>
+    <value>Aggiungi nuovo linguaggio</value>
   </string>
   <string id="365" name="languageseditor">
-    <value>Name</value>
+    <value>Nome</value>
   </string>
   <string id="366" name="languageseditor">
-    <value>add language</value>
+    <value>aggiungi linguaggio</value>
   </string>
   <string id="367" name="languageseditor">
     <value>Backup</value>
   </string>
   <string id="368" name="turnoverlist">
-    <value>goto first</value>
+    <value>vai al primo</value>
   </string>
   <string id="369" name="turnoverlist">
-    <value>goto previous</value>
+    <value>vai al precedente</value>
   </string>
   <string id="370" name="turnoverlist">
-    <value>goto next</value>
+    <value>vai al prossimo</value>
   </string>
   <string id="371" name="turnoverlist">
-    <value>goto last</value>
+    <value>vai all'ultimo</value>
   </string>
   <string id="372" name="videobox">
     <value>user speaks</value>
   </string>
   <string id="373" name="videobox">
-    <value>turn sound on/off</value>
+    <value>suono on/off</value>
   </string>
   <string id="374" name="dashboard">
-    <value>System</value>
+    <value>Sistema</value>
   </string>
   <string id="375" name="dashboard">
-    <value>Your Settings</value>
+    <value>I tuoi settaggi</value>
   </string>
   <string id="376" name="dashboard">
-    <value>hi,</value>
+    <value>ciao,</value>
   </string>
   <string id="377" name="dashboard">
-    <value>Edit your profile</value>
+    <value>Modifica il profilo</value>
   </string>
   <string id="378" name="dashboard">
-    <value>New Messages:</value>
+    <value>Nuovi messaggi:</value>
   </string>
   <string id="379" name="dashboard">
-    <value>Upload new Image</value>
+    <value>Carica nuove immagini</value>
   </string>
   <string id="380" name="backuppanel">
-    <value>Userdata - Export</value>
+    <value>Esporta dati utente</value>
   </string>
   <string id="381" name="backuppanel">
-    <value>All organisations must be already existing!</value>
+    <value>Le organizzazioni devono esistere tutte!</value>
   </string>
   <string id="382" name="backuppanel">
-    <value>start export</value>
+    <value>Inizia esportazione</value>
   </string>
   <string id="383" name="backuppanel">
-    <value>By organisation</value>
+    <value>Per organizzazione</value>
   </string>
   <string id="384" name="backuppanel">
-    <value>start export</value>
+    <value>inizia esportazione</value>
   </string>
   <string id="385" name="backuppanel">
-    <value>Userdata - Import</value>
+    <value>Dati utente - Importazione</value>
   </string>
   <string id="386" name="backuppanel">
-    <value>choose users.xml</value>
+    <value>scegli users.xml</value>
   </string>
   <string id="387" name="languageseditor">
-    <value>import</value>
+    <value>importa</value>
   </string>
   <string id="388" name="languageseditor">
-    <value>Export to XML - These files can be used to: 
-		- Contribute to the project 
-		- Import into another System 
-		- Backup 
-		- Customization 
-		- Put it into the language-directory for your next installation</value>
+    <value>esporta in XML - Questi file possono essere usati per: - Contribuire al progetto - Importare in altro sistema - Backup - Personalizzazione - Inserire nella directoy dei linguaggi della tua prossima installazione</value>
   </string>
   <string id="389" name="languageseditor">
-    <value>Choose a language file to import. Choose the right Langauge from the Combobox! 
-		No matter what the name of the file is, it will be imported into this language!</value>
+    <value>Scegli un file di linguaggio da importare. Scegli il giusto linguaggio dalla combobox! Non importa il nome del file, esso sarà importato in questo linguaggio!</value>
   </string>
   <string id="390" name="importwindow">
-    <value>import - choose file</value>
+    <value>importazione - file scelto</value>
   </string>
   <string id="391" name="recordingsavewin">
-    <value>Save as</value>
+    <value>Salva come</value>
   </string>
   <string id="392" name="recordingsavewin">
-    <value>Name:</value>
+    <value>Nome:</value>
   </string>
   <string id="393" name="recordingsavewin">
-    <value>Comment:</value>
+    <value>Commento:</value>
   </string>
   <string id="394" name="recordingsavewin">
     <value>save</value>
   </string>
   <string id="395" name="record">
-    <value>Recordings</value>
+    <value>Registra</value>
   </string>
   <string id="396" name="recorder">
-    <value>Recordings Viewer</value>
+    <value>Visualizza registrazioni</value>
   </string>
   <string id="397" name="record">
-    <value>Recordings of public and private Rooms</value>
+    <value>Registrazioni delle stanze private e pubbliche</value>
   </string>
   <string id="398" name="roomslist">
-    <value>Users :</value>
+    <value>Utenti:</value>
   </string>
   <string id="399" name="roomslist">
-    <value>Joined:</value>
+    <value>Collegati:</value>
   </string>
   <string id="400" name="roomslist">
     <value></value>
   </string>
   <string id="401" name="roomslist">
-    <value>Users in this Room:</value>
+    <value>Utenti nella stanza:</value>
   </string>
   <string id="402" name="roomslist">
     <value>refresh</value>
   </string>
   <string id="403" name="roomslist">
-    <value>This Room is Full. Try again in a few minutes.</value>
+    <value>Questa stanza è piena. Riprova fra qualche minuto.</value>
   </string>
   <string id="404" name="roomsList">
-    <value>click on a room to get details</value>
+    <value>clicca sulla stanza per avere dettagli.</value>
   </string>
   <string id="405" name="roomslist">
-    <value>Chat with the users in this Room:</value>
+    <value>Chatta con gli utenti di questa stanza:</value>
   </string>
   <string id="406" name="roomslist">
-    <value>Room:</value>
+    <value>Stanza:</value>
   </string>
   <string id="407" name="roomslist">
-    <value>Users in this room:</value>
+    <value>Utenti nella stanza:</value>
   </string>
   <string id="408" name="roomslist">
-    <value>since:</value>
-  </string>	
+    <value>fino a:</value>
+  </string>
   <string id="409" name="record">
-    <value>play recording</value>
+    <value>vedi registrazione</value>
   </string>
   <string id="410" name="record">
-    <value>Length:</value>
+    <value>Durata:</value>
   </string>
   <string id="411" name="record">
-    <value>Date:</value>
+    <value>Data:</value>
   </string>
   <string id="412" name="record">
-    <value>Recorder Mode! You cannot change any values, this is a recorded File!</value>
+    <value>Registrazione! Non puoi fare modifiche, è un file registrato!</value>
   </string>
   <string id="413" name="record">
-    <value>Play this recording</value>
+    <value>Visualizza la registrazione</value>
   </string>
   <string id="414" name="record">
     <value>Play / Pause</value>
   </string>
   <string id="415" name="record">
-    <value>Start recording</value>
+    <value>Inizia registrazione</value>
   </string>
   <string id="416" name="record">
-    <value>stop recording</value>
+    <value>stop registrazione</value>
   </string>
   <string id="417" name="record">
-    <value>Recording:</value>
+    <value>Registrazioni:</value>
+  </string>
+  <string id="418" name="record_error_msg">
+    <value>There is already somebody recording at the moment:</value>
+  </string>
+  <string id="419" name="record_message">
+    <value>Recording! By User:</value>
+  </string>
+  <string id="420" name="record_cancel">
+    <value>cancel</value>
+  </string>
+  <string id="421" name="record_cancal_tooltip">
+    <value>Recording will be canceled and not saved.</value>
+  </string>
+  <string id="422" name="cancel_dialog_resume">
+    <value>resume</value>
+  </string>
+  <string id="423" name="cancel_dialog_resume_tooltip">
+    <value>Close this window and resume recording</value>
+  </string>
+  <string id="424" name="painttools_ellipse_color">
+    <value>change Linecolor</value>
+  </string>
+  <string id="425" name="colorpicker_head">
+    <value>Choose Color</value>
+  </string>
+  <string id="426" name="painttools_line_disable">
+    <value>Disable / Enable Linecolor</value>
+  </string>
+  <string id="427" name="painttools_fill_disable">
+    <value>change Fillcolor</value>
+  </string>
+  <string id="428" name="painttools_line_disable">
+    <value>Disable / Enable Fillcolor</value>
+  </string>
+  <string id="429" name="change_width_arrow_down_slider">
+    <value>Change Linewidth</value>
+  </string>
+  <string id="430" name="close_small_popups">
+    <value>close</value>
+  </string>
+  <string id="431" name="paint_tool_letter">
+    <value>change Fontsize</value>
   </string>	
 </language>
