@@ -1,5 +1,7 @@
 package org.xmlcrm.app.documents;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 
@@ -10,6 +12,9 @@ import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.io.SAXReader;
 import org.dom4j.Element;
+
+import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.io.xml.XppDriver;
 
 public class LibraryWmlLoader {
 	
@@ -32,51 +37,23 @@ public class LibraryWmlLoader {
 
 	public LinkedHashMap loadWmlFile(String filePath, String fileName){
 		try {
-			LinkedHashMap<Integer,LinkedHashMap> lMap = new LinkedHashMap<Integer,LinkedHashMap>();
+			LinkedHashMap lMap = new LinkedHashMap();
 			String filepathComplete = filePath+wmlFolderName+fileName+fileExt;
 			
 			log.error("filepathComplete: "+filepathComplete);
 			
-	        SAXReader reader = new SAXReader();
-	        Document document = reader.read(filepathComplete);
-	        
-	        Element root = document.getRootElement();
-	        Integer k = 0;
-	        
-	        for ( Iterator i = root.elementIterator( "item" ); i.hasNext(); ) {
-	            Element item = (Element) i.next();
-	            log.error(item.getName());
-	            
-	            String nodeVal = item.element("itemname").getText();
-	            
-	            LinkedHashMap<Integer,Object> subMap = new LinkedHashMap<Integer,Object>();
-	            subMap.put(0, nodeVal);
-	            
-				if (nodeVal.equals("paint")){
-					this.createListObjectPaintByNode(item, subMap);
-				} else if (nodeVal.equals("letter")){
-					this.createListObjectLetterByNode(item, subMap);
-				} else if (nodeVal.equals("image")){
-					this.createListObjectImageByNode(item, subMap);
-				} else if (nodeVal.equals("line") || nodeVal.equals("uline") || nodeVal.equals("drawarrow")){
-					this.createListObjectObjecByNode(item, subMap);
-				} else if (nodeVal.equals("rectangle") || nodeVal.equals("ellipse")){
-					this.createListObjectRectAndEllipseByNode(item, subMap);
-				} else if (nodeVal.equals("swf")){
-					this.createListObjectSWFByNode(item, subMap);
-				} 
-				
-				log.error(subMap);
-	            lMap.put(k, subMap);
-	            
-	            k++;
-
-	        }
+			XStream xStream = new XStream(new XppDriver());
+			xStream.setMode(XStream.NO_REFERENCES);
 			
+			BufferedReader reader = new BufferedReader(new FileReader(filepathComplete));
+		    String xmlString = "";
+		    while (reader.ready()) {
+		    	xmlString += reader.readLine();
+		    }
+			
+		    lMap = (LinkedHashMap) xStream.fromXML(xmlString);
 			
 			return lMap;
-		} catch (DocumentException domErr){
-			log.error("DocumentException loadWmlFile",domErr);
 		} catch (Exception err){
 			log.error("loadWmlFile",err);
 		}
@@ -85,7 +62,11 @@ public class LibraryWmlLoader {
 		
 	}
 	
-	
+	/**
+	 * @deprecated
+	 * @param paintElement
+	 * @param subMap
+	 */
 	private void createListObjectPaintByNode(Element paintElement, LinkedHashMap<Integer,Object> subMap){
 		try {
 			
@@ -122,6 +103,11 @@ public class LibraryWmlLoader {
 		}
 	}
 	
+	/**
+	 * @deprecated
+	 * @param paintElement
+	 * @param subMap
+	 */
 	public void createListObjectLetterByNode(Element paintElement, LinkedHashMap<Integer,Object> subMap){
 		try {
 
@@ -141,6 +127,11 @@ public class LibraryWmlLoader {
 		}
 	}	
 	
+	/**
+	 * @deprecated
+	 * @param paintElement
+	 * @param subMap
+	 */
 	public void createListObjectImageByNode(Element paintElement, LinkedHashMap<Integer,Object> subMap){
 		try {
 
@@ -163,6 +154,11 @@ public class LibraryWmlLoader {
 		}
 	}	
 	
+	/**
+	 * @deprecated
+	 * @param paintElement
+	 * @param subMap
+	 */
 	public void createListObjectObjecByNode(Element paintElement, LinkedHashMap<Integer,Object> subMap){
 		try {	
 			
@@ -185,6 +181,11 @@ public class LibraryWmlLoader {
 		}
 	}		
 	
+	/**
+	 * @deprecated
+	 * @param paintElement
+	 * @param subMap
+	 */
 	public void createListObjectRectAndEllipseByNode(Element paintElement, LinkedHashMap<Integer,Object> subMap){
 		try {	
 			
@@ -202,7 +203,11 @@ public class LibraryWmlLoader {
 		}
 	}
 	
-	
+	/**
+	 * @deprecated
+	 * @param paintElement
+	 * @param subMap
+	 */
 	public void createListObjectSWFByNode(Element paintElement, LinkedHashMap<Integer,Object> subMap){
 		try {
 

@@ -3,6 +3,7 @@ package org.xmlcrm.app.documents;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.BufferedWriter;
+import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.LinkedHashMap;
 import java.util.Iterator;
@@ -18,6 +19,9 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Text;
 import org.xmlcrm.utils.stringhandlers.StringComparer;
+
+import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.io.xml.XppDriver;
 
 
 
@@ -43,96 +47,47 @@ public class LibraryDocumentConverter {
 	public Long writeToLocalFolder(String filePath, String fileName, LinkedHashMap objList) {
 		try {
 			
-		log.error("filePath: "+filePath);
-		
-		String fileNameExtName = fileName.substring(fileName.length()-4,fileName.length());
-		if (fileNameExtName.equals(fileExt)){
-			fileName = StringComparer.getInstance().compareForRealPaths(fileName.substring(0, fileName.length()-4));
-		} else {
-			fileName = StringComparer.getInstance().compareForRealPaths(fileName.substring(0, fileName.length()));
-		}
-		
-		if (fileName.length()<=0){
-			return new Long(-21);
-		}
-		
-		String filepathComplete = filePath+wmlFolderName+fileName+fileExt;
-		
-		//Add the Folder for the Room if it does not exist yet
-		File localFolder = new File(filePath);
-		if (!localFolder.exists()){
-			localFolder.mkdir();
-		}		
-		//Add the Folder for the wmlFiles if it does not exist yet
-		File localFolder2 = new File(filePath+wmlFolderName);
-		if (!localFolder2.exists()){
-			localFolder2.mkdir();
-		}
-		
-		if (this.checkFileExist(filepathComplete)){
-			return new Long(-20);
-		}		
-		
-		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-		
-		DocumentBuilder construct = factory.newDocumentBuilder();
-		
-		Document document = construct.newDocument();
-		
-		Element root = document.createElement("whiteboard");
-		document.appendChild(root);
-		
-		for (Iterator it = objList.keySet().iterator();it.hasNext();){
+			log.error("filePath: "+filePath);
 			
-			Integer key = (Integer) it.next();
-			LinkedHashMap innerlMap = (LinkedHashMap) objList.get(key);
-			String baseItem = (String) innerlMap.get(0);
-			log.error("baseItem: "+baseItem);
+			String fileNameExtName = fileName.substring(fileName.length()-4,fileName.length());
+			if (fileNameExtName.equals(fileExt)){
+				fileName = StringComparer.getInstance().compareForRealPaths(fileName.substring(0, fileName.length()-4));
+			} else {
+				fileName = StringComparer.getInstance().compareForRealPaths(fileName.substring(0, fileName.length()));
+			}
 			
-			Element baseElement = document.createElement("item");
-			root.appendChild(baseElement);
+			if (fileName.length()<=0){
+				return new Long(-21);
+			}
 			
-			Element elementName = document.createElement("itemname");
-			baseElement.appendChild(elementName);
-			Text mytxt = document.createTextNode(baseItem);
-			elementName.appendChild(mytxt);
+			String filepathComplete = filePath+wmlFolderName+fileName+fileExt;
 			
-			if (baseItem.equals("paint")){
-				this.createNodesByPaint(document, baseElement, innerlMap);
-			} else if (baseItem.equals("letter")){
-				this.createNodesByLetter(document, baseElement, innerlMap);
-			} else if (baseItem.equals("image")){
-				this.createNodesByImage(document, baseElement, innerlMap);
-			} else if (baseItem.equals("line") || baseItem.equals("uline") || baseItem.equals("drawarrow")){
-				this.createNodesByObject(document, baseElement, innerlMap);
-			} else if (baseItem.equals("rectangle") || baseItem.equals("ellipse")){
-				this.createNodesByRectAndEllipse(document, baseElement, innerlMap);
-			} else if (baseItem.equals("swf")){
-				this.createNodesBySWF(document, baseElement, innerlMap);
-			} 
+			//Add the Folder for the Room if it does not exist yet
+			File localFolder = new File(filePath);
+			if (!localFolder.exists()){
+				localFolder.mkdir();
+			}		
+			//Add the Folder for the wmlFiles if it does not exist yet
+			File localFolder2 = new File(filePath+wmlFolderName);
+			if (!localFolder2.exists()){
+				localFolder2.mkdir();
+			}
 			
-		}
-		
-		log.error("writeToLocalFolder XML " + document);
-		log.error("writeToLocalFolder XML " + document.toString());
-		
-		StringWriter stringOut = new StringWriter();
-		
-		// format
-		OutputFormat format = new OutputFormat(document);
-		format.setIndenting(true);
-		format.setPreserveSpace(false);
-
-		// serialize
-		XMLSerializer serial = new XMLSerializer(stringOut, format);
-		serial.asDOMSerializer();
-		serial.serialize(document);
-		String docString = stringOut.toString();
-		
-		log.error("docString "+docString);
-		
-		return this.writeFileToLocation(filepathComplete, docString);
-		
+			if (this.checkFileExist(filepathComplete)){
+				return new Long(-20);
+			}		
+			
+			XStream xStream = new XStream(new XppDriver());
+			xStream.setMode(XStream.NO_REFERENCES);
+			String xmlString = xStream.toXML(objList);		
+			
+			PrintWriter pw = new PrintWriter(new FileWriter(filepathComplete));
+		    pw.println(xmlString);
+		    pw.flush();
+		    pw.close();
+	    
+		    return new Long(1);
+		    
 		} catch (Exception err){
 			log.error("writeToLocalFolder",err);
 		}
@@ -141,6 +96,22 @@ public class LibraryDocumentConverter {
 		
 	}
 	
+	private boolean checkFileExist(String filepathComplete){
+		try {
+			File f = new File(filepathComplete);
+			return f.exists();
+		} catch (Exception err){
+			log.error("checkFileExist",err);
+		}
+		return true;
+	}	
+	
+	/**
+	 * @deprecated
+	 * @param filepathComplete
+	 * @param wmlData
+	 * @return
+	 */
 	private Long writeFileToLocation(String filepathComplete, String wmlData){
 		try {
 
@@ -160,16 +131,12 @@ public class LibraryDocumentConverter {
 		return null;
 	}
 	
-	private boolean checkFileExist(String filepathComplete){
-		try {
-			File f = new File(filepathComplete);
-			return f.exists();
-		} catch (Exception err){
-			log.error("checkFileExist",err);
-		}
-		return true;
-	}
-	
+	/**
+	 * @deprecated
+	 * @param document
+	 * @param baseElement
+	 * @param paint
+	 */
 	private void createNodesByPaint(Document document, Element baseElement, LinkedHashMap paint){
 		try {
 			
@@ -237,6 +204,12 @@ public class LibraryDocumentConverter {
 		}
 	}
 	
+	/**
+	 * @deprecated
+	 * @param document
+	 * @param baseElement
+	 * @param letter
+	 */
 	private void createNodesByLetter(Document document, Element baseElement, LinkedHashMap letter){
 		try {
 			
@@ -295,6 +268,12 @@ public class LibraryDocumentConverter {
 		}
 	}
 	
+	/**
+	 * @deprecated
+	 * @param document
+	 * @param baseElement
+	 * @param image
+	 */
 	private void createNodesByImage(Document document, Element baseElement, LinkedHashMap image){
 		try {
 			
@@ -368,7 +347,12 @@ public class LibraryDocumentConverter {
 		}
 	}
 	
-	
+	/**
+	 * @deprecated
+	 * @param document
+	 * @param baseElement
+	 * @param paintObject
+	 */
 	private void createNodesByObject(Document document, Element baseElement, LinkedHashMap paintObject){
 		try {
 			
@@ -442,7 +426,12 @@ public class LibraryDocumentConverter {
 		}
 	}
 	
-	
+	/**
+	 * @deprecated
+	 * @param document
+	 * @param baseElement
+	 * @param paintObject
+	 */
 	private void createNodesByRectAndEllipse(Document document, Element baseElement, LinkedHashMap paintObject){
 		try {
 
@@ -491,6 +480,12 @@ public class LibraryDocumentConverter {
 		}
 	}
 	
+	/**
+	 * @deprecated
+	 * @param document
+	 * @param baseElement
+	 * @param image
+	 */
 	private void createNodesBySWF(Document document, Element baseElement, LinkedHashMap image){
 		try {
 			
