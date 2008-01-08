@@ -64,7 +64,11 @@
 	</method>
 	
 	<method name="clearList">
-		for (var eg in this._cbtext.subviews) this._cbtext.subviews[eg].destroy();
+		<![CDATA[
+			while (this._cbtext.subviews.length > 0) {
+				this._cbtext.subviews[0].destroy();
+			}
+		]]>		
 	</method>
 	
 	<view name="_cbtext" width="284" layout="axis:y;spacing:2" />

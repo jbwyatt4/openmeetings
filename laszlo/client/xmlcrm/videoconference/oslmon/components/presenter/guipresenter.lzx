@@ -378,7 +378,7 @@
 	                this.setResourceNumber(2);
 	                this.parent.parent.parent.close();
 	            </handler>
-	            <labeltooltip text="close" />
+	            <labeltooltip labelid="430" />
 	        </view>  
 	    </view>  			
 	</view>

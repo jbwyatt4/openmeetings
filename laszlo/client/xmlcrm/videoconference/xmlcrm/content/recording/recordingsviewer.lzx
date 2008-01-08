@@ -130,8 +130,12 @@
 	</method>
 	
 	<method name="clearComponents">
-		if (canvas._videocontainer) canvas._videocontainer.stopVideos();
-		for (var eg in this.subviews) this.subviews[eg].destroy();
+		<![CDATA[
+			if (canvas._videocontainer) canvas._videocontainer.stopVideos();
+			while (this.subviews.length > 0) {
+				this.subviews[0].destroy();
+			}
+		]]>
 	</method>
 	
 	<method name="initRecordingsViewByType">

@@ -65,6 +65,9 @@
         canvas._videocontainer = null;
         canvas._chartcontent = null;
         canvas._mymod = null;
+        if (_drawarea.letterObjectIsActive){
+        	_drawarea.currentletterObj.destroy();
+        }        
 		this.logicalRoomLeave.doCall();
         Debug.write("this.logicalRoomLeave ",this.logicalRoomLeave);
 	</handler>

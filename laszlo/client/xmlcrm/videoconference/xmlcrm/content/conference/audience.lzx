@@ -25,7 +25,10 @@
         Debug.write("ontabcontentleave:",this);
         canvas._videocontainer = null;
         canvas._chartcontent = null;
-        canvas._mymod = null;        
+        canvas._mymod = null;       
+        if (_drawarea.letterObjectIsActive){
+        	_drawarea.currentletterObj.destroy();
+        }
 		this.logicalRoomLeave.doCall();
         Debug.write("this.logicalRoomLeave ",this.logicalRoomLeave);
 	</handler>
@@ -39,8 +42,7 @@
             canvas.thishib.disconnect();
             canvas._mainbgcontentNavi.setAttribute('height',canvas.naviHeight);
             canvas.setAttribute('naviHeightDelta',canvas.naviHeight);
-            canvas._conferencemenu.subviews[0].destroy();
-            canvas._conferencemenu.subviews[1].destroy();
+            canvas._conferencemenu.removeAll();
             canvas._conferencemenu.setAttribute('visibility','hidden');        
     	</handler>
     </netremotecallhib>

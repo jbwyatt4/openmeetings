@@ -65,28 +65,41 @@
   	<attribute name="prevx" type="number" value="0"/>
   	<attribute name="prevy" type="number" value="0"/>
   	
-  	<attribute name="currentlayerstroke" value="0x000000" />
-  	<attribute name="currentlayerlineWidth" value="1" type="number" />
+  	<!-- paint -->
+  	<attribute name="currentlayerstroke" value="0xFF6600" />
+  	<attribute name="currentlayerlineWidth" value="2" type="number" />
   	
   	<!-- for drawing line -->
-  	<attribute name="currentlinestroke" value="0x000000" />
-  	<attribute name="currentlinelineWidth" value="1" type="number" />  	
+  	<attribute name="currentlinestroke" value="0xFF6600" />
+  	<attribute name="currentlinelineWidth" value="2" type="number" />  	
   	
   	<!-- for drawing uline -->
-  	<attribute name="currentulinestroke" value="0x000000" />
-  	<attribute name="currentulinelineWidth" value="1" type="number" />  
+  	<attribute name="currentulinestroke" value="0xFF6600" />
+  	<attribute name="currentulinelineWidth" value="2" type="number" />  
   	
   	<!-- for drawing drawarrow -->
-  	<attribute name="currentdrawarrowlinestroke" value="0x000000" />
+  	<attribute name="currentdrawarrowlinestroke" value="0xFF6600" />
   	<attribute name="currentdrawarrowlinelineWidth" value="1" type="number" />    	
   	
-  	<!--  for drawing rectangles -->
-  	<attribute name="currentrectanglestroke" value="0x000000" />
-  	<attribute name="currentrectangleineWidth" value="1" type="number" />
+  	<!--  
+  		for drawing rectangles the variable 
+  		with *Dis* indicates if the line/fil-color is active (+1/-1)
+  	 -->
+  	<attribute name="currentrectanglestroke" value="0xFF6600" />
+  	<attribute name="currentrectanglestrokeDis" value="1" type="number" />
+  	<attribute name="currentrectanglestrokeFill" value="0xFFFF33" />
+  	<attribute name="currentrectanglestrokeFillDis" value="1" type="number" />
+  	<attribute name="currentrectangleineWidth" value="4" type="number" />
   	
-  	<!-- for drawing ellipse  -->
-  	<attribute name="currentellipsestroke" value="0x000000" />
-  	<attribute name="currentellipselineWidth" value="1" />
+  	<!-- 
+	  	for drawing ellipse the variable 
+	  	with *Dis* indicates if the line/fil-color is active (+1/-1)
+  	 -->
+  	<attribute name="currentellipsestroke" value="0xFF6600" />
+  	<attribute name="currentellipsestrokeDis" value="1" type="number" />
+  	<attribute name="currentellipsestrokeFill" value="0xFFFF33" />
+  	<attribute name="currentellipsestrokeFillDis" value="1" type="number" />
+  	<attribute name="currentellipselineWidth" value="4" />
   	
   	<attribute name="painttrans" value="false" type="boolean" />
   	
@@ -161,19 +174,21 @@
 	</handler>
 	
 	<method name="clearAll">
-		if (this.boundingref!=null) this.boundingref.removeIt();
-		for (var eg in this.subviews){
-			this.subviews[eg].destroy();
-		}
-		for (var eg in this.basdrawredoView.subviews){
-			this.basdrawredoView.subviews[eg].destroy();
-		}
-		this.layers = new Array();
-		this.redolayers = new Array();
-		this.baseactionobjectList = new Array();
-		this.baseredoactionobjectList = new Array();	
-		this.checkStepLayers();	
-		this.onsharedMessage('clear',null);	
+		<![CDATA[
+			if (this.boundingref!=null) this.boundingref.removeIt();
+			while (this.subviews.length > 0) {
+				this.subviews[0].destroy();
+			}
+			while (this.basdrawredoView.subviews.length > 0) {
+				this.basdrawredoView.subviews[0].destroy();
+			}			
+			this.layers = new Array();
+			this.redolayers = new Array();
+			this.baseactionobjectList = new Array();
+			this.baseredoactionobjectList = new Array();	
+			this.checkStepLayers();	
+			this.onsharedMessage('clear',null);	
+		]]>
 	</method>
 	
 	<method name="doAction" args="modi">
@@ -185,6 +200,12 @@
 	</method>
 	
 	<method name="setModus" args="modi">
+		//check if previous modi has been txt, which might not be saved to the board yet
+		if (this.drawmodus=='letter'){
+			if (this.letterObjectIsActive){
+				this.currentletterObj.drawtoArray();
+			}
+		}
 		this.setAttribute('drawmodus',modi);
 		if (modi=='plain'){
 			this.clearAll();
@@ -599,7 +620,7 @@
 		object cause the file loading will make a seperate notification
 	 -->
 	<method name="sendWatchObject" args="action,actionObject,isWmlLoader">
-		//Debug.write("sendWatchObject: ",action,actionObject);
+		Debug.write("sendWatchObject: ",action,actionObject);
 		<![CDATA[
 		if (action=='draw' || action=='redo'){
 			var lastactionObject = actionObject;
@@ -781,11 +802,11 @@
 	
 	<method name="drawlineRegisterPaint" args="x1,y1,x2,y2">
 	    var actionObject = new Array();
-	    actionObject.push('point');
-	    actionObject.push(x1);
-	    actionObject.push(y1);
-	    actionObject.push(x2);
-	    actionObject.push(y2);
+	    actionObject[0] = 'point';
+	    actionObject[1] = x1;
+	    actionObject[2] = y1;
+	    actionObject[3] = x2;
+	    actionObject[4] = y2;
 	    this.basetempactionobjectList.push(actionObject);
 	</method>
 	
@@ -858,17 +879,17 @@
 
   	<method name="registerFinal">
 		var actionObject = new Array();
-	    actionObject.push('paint');
-	    actionObject.push(this.basetempactionobjectList);
-	    actionObject.push(currentlayer.fillstyle);
-	    actionObject.push(currentlayer.lineWidth);
-	    actionObject.push(currentlayer.strokeStyle);
-		actionObject.push(this.counter);
-	    actionObject.push(currentlayer.x);
-	    actionObject.push(currentlayer.y);
-	    actionObject.push(currentlayer.width);
-	    actionObject.push(currentlayer.height);	   
-	    actionObject.push(this.currentlayer.name);
+	    actionObject[0] = 'paint';
+	    actionObject[1] = this.basetempactionobjectList;
+	    actionObject[2] = currentlayer.fillstyle;
+	    actionObject[3] = currentlayer.lineWidth;
+	    actionObject[4] = currentlayer.strokeStyle;
+		actionObject[5] = this.counter;
+	    actionObject[6] = currentlayer.x;
+	    actionObject[7] = currentlayer.y;
+	    actionObject[8] = currentlayer.width;
+	    actionObject[9] = currentlayer.height;	   
+	    actionObject[10] = this.currentlayer.name;
 	    this.baseactionobjectList.push(actionObject);		
 	    this.onsharedMessage('draw',actionObject);
   	</method>      
@@ -954,20 +975,20 @@
   	
   	<method name="lineregisterFinal">
 		var actionObject = new Array();
-	    actionObject.push('line');
-	    actionObject.push(currentlayer.fillstyle);
-	    actionObject.push(currentlayer.lineWidth);
-	    actionObject.push(currentlayer.strokeStyle);
-	    actionObject.push(this.startx);	
-	    actionObject.push(this.starty);	
-	    actionObject.push(this.endx);	
-	    actionObject.push(this.endy);	
-		actionObject.push(this.counter);    
-	    actionObject.push(currentlayer.x);
-	    actionObject.push(currentlayer.y);
-	    actionObject.push(currentlayer.width);
-	    actionObject.push(currentlayer.height);	 
-	    actionObject.push(this.currentlayer.name);
+	    actionObject[0] = 'line';
+	    actionObject[1] = currentlayer.fillstyle;
+	    actionObject[2] = currentlayer.lineWidth;
+	    actionObject[3] = currentlayer.strokeStyle;
+	    actionObject[4] = this.startx;	
+	    actionObject[5] = this.starty;	
+	    actionObject[6] = this.endx;	
+	    actionObject[7] = this.endy;	
+		actionObject[8] = this.counter;    
+	    actionObject[9] = currentlayer.x;
+	    actionObject[10] = currentlayer.y;
+	    actionObject[11] = currentlayer.width;
+	    actionObject[12] = currentlayer.height;	 
+	    actionObject[13] = this.currentlayer.name;
 	    this.baseactionobjectList.push(actionObject);		
 	    this.onsharedMessage('draw',actionObject);
   	</method>     	
@@ -1053,20 +1074,20 @@
   	
   	<method name="ulineregisterFinal">
 		var actionObject = new Array();
-	    actionObject.push('uline');
-	    actionObject.push(currentlayer.fillstyle);
-	    actionObject.push(currentlayer.lineWidth);
-	    actionObject.push(currentlayer.strokeStyle);
-	    actionObject.push(this.startx);	
-	    actionObject.push(this.starty);	
-	    actionObject.push(this.endx);	
-	    actionObject.push(this.endy);	
-		actionObject.push(this.counter);    
-	    actionObject.push(currentlayer.x);
-	    actionObject.push(currentlayer.y);
-	    actionObject.push(currentlayer.width);
-	    actionObject.push(currentlayer.height);	 
-	    actionObject.push(this.currentlayer.name);
+	    actionObject[0] = 'uline';
+	    actionObject[1] = currentlayer.fillstyle;
+	    actionObject[2] = currentlayer.lineWidth;
+	    actionObject[3] = currentlayer.strokeStyle;
+	    actionObject[4] = this.startx;	
+	    actionObject[5] = this.starty;	
+	    actionObject[6] = this.endx;	
+	    actionObject[7] = this.endy;	
+		actionObject[8] = this.counter;    
+	    actionObject[9] = currentlayer.x;
+	    actionObject[10] = currentlayer.y;
+	    actionObject[11] = currentlayer.width;
+	    actionObject[12] = currentlayer.height;	 
+	    actionObject[13] = this.currentlayer.name;
 	    this.baseactionobjectList.push(actionObject);		
 	    this.onsharedMessage('draw',actionObject);
   	</method>     	
@@ -1230,20 +1251,20 @@
   	
   	<method name="drawarrowlineregisterFinal">
 		var actionObject = new Array();
-	    actionObject.push('drawarrow');
-	    actionObject.push(currentlayer.fillstyle);
-	    actionObject.push(currentlayer.lineWidth);
-	    actionObject.push(currentlayer.strokeStyle);
-	    actionObject.push(this.startx);	
-	    actionObject.push(this.starty);	
-	    actionObject.push(this.endx);	
-	    actionObject.push(this.endy);	 
-		actionObject.push(this.counter);   
-	    actionObject.push(currentlayer.x);
-	    actionObject.push(currentlayer.y);
-	    actionObject.push(currentlayer.width);
-	    actionObject.push(currentlayer.height);	 
-	    actionObject.push(this.currentlayer.name);
+	    actionObject[0] = 'drawarrow';
+	    actionObject[1] = currentlayer.fillstyle;
+	    actionObject[2] = currentlayer.lineWidth;
+	    actionObject[3] = currentlayer.strokeStyle;
+	    actionObject[4] = this.startx;	
+	    actionObject[5] = this.starty;	
+	    actionObject[6] = this.endx;	
+	    actionObject[7] = this.endy;	 
+		actionObject[8] = this.counter;   
+	    actionObject[9] = currentlayer.x;
+	    actionObject[10] = currentlayer.y;
+	    actionObject[11] = currentlayer.width;
+	    actionObject[12] = currentlayer.height;	 
+	    actionObject[13] = this.currentlayer.name;
 	    this.baseactionobjectList.push(actionObject);		
 	    this.onsharedMessage('draw',actionObject);
   	</method>     	
@@ -1251,51 +1272,51 @@
 	
 	<method name="drawarrowlineactionHistory" args="lastActionObject,parentView">
 		<![CDATA[
-		//Debug.write("## lineactionHistory",parentView," 2 ## NEW x,y ",lastActionObject[lastActionObject.length-5],lastActionObject[lastActionObject.length-4]," width,height: ",lastActionObject[lastActionObject.length-3],lastActionObject[lastActionObject.length-2]);
-		
-		this.currentlayer = new drawviewnew(parentView,{name:lastActionObject[lastActionObject.length-1],x:lastActionObject[lastActionObject.length-5],y:lastActionObject[lastActionObject.length-4],width:lastActionObject[lastActionObject.length-3],height:lastActionObject[lastActionObject.length-2]});
-		
-		var t = new drawarrowWhiteBoard(this.currentlayer,{x:0,y:0});
-		
-		t.setTint(lastActionObject[3],100);
-    	
-    	var tx = lastActionObject[6]-lastActionObject[4];
-    	var ty = lastActionObject[7]-lastActionObject[5];
-
-   		var gegenkathete = Math.abs(ty);
-   		var ankathete = Math.abs(tx); 
-   		var hypothenuse = Math.sqrt((ankathete*ankathete)+(gegenkathete*gegenkathete));
-   		var sinAlpha = (gegenkathete/hypothenuse);
-   		var alpha = Math.asin(sinAlpha);
-		var alpha = alpha/(Math.PI/180);
+			//Debug.write("## lineactionHistory",parentView," 2 ## NEW x,y ",lastActionObject[lastActionObject.length-5],lastActionObject[lastActionObject.length-4]," width,height: ",lastActionObject[lastActionObject.length-3],lastActionObject[lastActionObject.length-2]);
 			
-		var newx = 0;
-		var newy = 0;
-    	if (tx>=0 && ty>=0){  	
-    		t.setAttribute('rotation',(alpha-45));
-    	} else if (tx<0 && ty>=0){
-    		newx = lastActionObject[lastActionObject.length-3];
-    		t.setAttribute('rotation',(45+90-alpha));
-    	} else if (tx<0 && ty<0){
-    		newy = lastActionObject[lastActionObject.length-2];
-    		newx = lastActionObject[lastActionObject.length-3];
-    		t.setAttribute('rotation',(alpha+45+90));
-    	} else if (tx>0 && ty<=0){
-    		newy = lastActionObject[lastActionObject.length-2];
-    		t.setAttribute('rotation',(45-alpha-90));
-    	}
-    	
-    	t.setAttribute('x',newx);
-    	t.setAttribute('y',newy);
-    	
-    	//Scaling
-    	var basicLength = Math.sqrt((t.width*t.width)+(t.width*t.width));
-    	t.getMCRef()._xscale = (hypothenuse/basicLength)*100;
-    	t.getMCRef()._yscale = (hypothenuse/basicLength)*100;
-    	
-    	this.currentlayer.fillstyle = lastActionObject[1];
-    	this.currentlayer.lineWidth = lastActionObject[2];
-   		this.currentlayer.strokeStyle = lastActionObject[3];
+			this.currentlayer = new drawviewnew(parentView,{name:lastActionObject[lastActionObject.length-1],x:lastActionObject[lastActionObject.length-5],y:lastActionObject[lastActionObject.length-4],width:lastActionObject[lastActionObject.length-3],height:lastActionObject[lastActionObject.length-2]});
+			
+			var t = new drawarrowWhiteBoard(this.currentlayer,{x:0,y:0});
+			
+			t.setTint(lastActionObject[3],100);
+	    	
+	    	var tx = lastActionObject[6]-lastActionObject[4];
+	    	var ty = lastActionObject[7]-lastActionObject[5];
+	
+	   		var gegenkathete = Math.abs(ty);
+	   		var ankathete = Math.abs(tx); 
+	   		var hypothenuse = Math.sqrt((ankathete*ankathete)+(gegenkathete*gegenkathete));
+	   		var sinAlpha = (gegenkathete/hypothenuse);
+	   		var alpha = Math.asin(sinAlpha);
+			var alpha = alpha/(Math.PI/180);
+				
+			var newx = 0;
+			var newy = 0;
+	    	if (tx>=0 && ty>=0){  	
+	    		t.setAttribute('rotation',(alpha-45));
+	    	} else if (tx<0 && ty>=0){
+	    		newx = lastActionObject[lastActionObject.length-3];
+	    		t.setAttribute('rotation',(45+90-alpha));
+	    	} else if (tx<0 && ty<0){
+	    		newy = lastActionObject[lastActionObject.length-2];
+	    		newx = lastActionObject[lastActionObject.length-3];
+	    		t.setAttribute('rotation',(alpha+45+90));
+	    	} else if (tx>0 && ty<=0){
+	    		newy = lastActionObject[lastActionObject.length-2];
+	    		t.setAttribute('rotation',(45-alpha-90));
+	    	}
+	    	
+	    	t.setAttribute('x',newx);
+	    	t.setAttribute('y',newy);
+	    	
+	    	//Scaling
+	    	var basicLength = Math.sqrt((t.width*t.width)+(t.width*t.width));
+	    	t.getMCRef()._xscale = (hypothenuse/basicLength)*100;
+	    	t.getMCRef()._yscale = (hypothenuse/basicLength)*100;
+	    	
+	    	this.currentlayer.fillstyle = lastActionObject[1];
+	    	this.currentlayer.lineWidth = lastActionObject[2];
+	   		this.currentlayer.strokeStyle = lastActionObject[3];
 
    		]]>
 	</method>
@@ -1314,36 +1335,32 @@
 
 	<method name="endRect">
 		<![CDATA[
-		////Debug.write(" this.startx, this.starty , this.endx, this.endy ",this.startx, this.starty , this.endx, this.endy);
-		this.currentlayer.destroy();
-		var x = this.startx;
-		var width = this.endx - this.startx;
-		if (this.endx<this.startx){
-			x = this.endx;
-			width = Math.abs(width);
-		}
-		var y = this.starty;
-		var height = this.endy - this.starty;
-		if (this.endy<this.starty){
-			y = this.endy;
-			height = Math.abs(height);
-		}
-		
-		this.currentlayer = new drawviewnew(this,{name:'rectangle'+this.getCounter(),x:x,y:y,width:width,height:height});
-		
-		this.drawrectangleHistory(this.currentlayer,0,0,width,height,this.currentrectanglestroke,this.currentrectangleineWidth);
-		
-		this.currentlayer.setAttribute('stretches','both');
-		
-		this.drawrectregisterFinal(this.currentlayer.name,this.currentrectanglestroke,this.currentrectangleineWidth,x,y,width,height);
-		
-		this.checkStepLayers();
+			////Debug.write(" this.startx, this.starty , this.endx, this.endy ",this.startx, this.starty , this.endx, this.endy);
+			this.currentlayer.destroy();
+			var x = this.startx;
+			var width = this.endx - this.startx;
+			if (this.endx<this.startx){
+				x = this.endx;
+				width = Math.abs(width);
+			}
+			var y = this.starty;
+			var height = this.endy - this.starty;
+			if (this.endy<this.starty){
+				y = this.endy;
+				height = Math.abs(height);
+			}
+			
+			this.currentlayer = new drawviewnew(this,{name:'rectangle'+this.getCounter(),x:x,y:y,width:width,height:height});
+			this.drawrectangleHistory(this.currentlayer,0,0,width,height,this.currentrectanglestroke,this.currentrectangleineWidth,this.currentrectanglestrokeFill,this.currentrectanglestrokeDis,this.currentrectanglestrokeFillDis);
+			this.currentlayer.setAttribute('stretches','both');
+			this.drawrectregisterFinal(this.currentlayer.name,this.currentrectanglestroke,this.currentrectangleineWidth,this.currentrectanglestrokeFill,this.currentrectanglestrokeDis,this.currentrectanglestrokeFillDis,x,y,width,height);
+			this.checkStepLayers();
 		]]>
 	</method> 
     
   	<method name="drawrectangle" args="x1,y1,x2,y2">
    		<![CDATA[
-    		currentlayer.strokeStyle = this.currentrectanglestroke;
+    		
     		currentlayer.lineWidth = this.currentrectangleineWidth;
     		currentlayer.beginPath();
     		currentlayer.moveTo(x1,y1);
@@ -1351,21 +1368,29 @@
     		currentlayer.lineTo(x2,y2);
     		currentlayer.lineTo(x2,y1);
     		currentlayer.lineTo (x1,y1);
-    		currentlayer.stroke();
+    		this.closePath();
+    		
+    		if (this.currentrectanglestrokeDis!=-1){
+	    		currentlayer.strokeStyle = this.currentrectanglestroke;
+	    		currentlayer.stroke();
+    		}
+
+    		if (this.currentrectanglestrokeFillDis!=-1){
+	    		currentlayer.fillStyle = this.currentrectanglestrokeFill;
+	    		currentlayer.fill();
+    		}
+    		
     	]]>   
   	</method>    
   	
   	<method name="drawrectangleToHistory" args="lastActionObject,parentView">
-
 		this.currentlayer = new drawviewnew(parentView,{name:lastActionObject[lastActionObject.length-1],x:lastActionObject[lastActionObject.length-5],y:lastActionObject[lastActionObject.length-4],width:lastActionObject[lastActionObject.length-3],height:lastActionObject[lastActionObject.length-2]});
-   		
-   		this.drawrectangleHistory(this.currentlayer,0,0,lastActionObject[lastActionObject.length-3],lastActionObject[lastActionObject.length-2],lastActionObject[1],lastActionObject[2]);
-
+   		this.drawrectangleHistory(this.currentlayer,0,0,lastActionObject[lastActionObject.length-3],lastActionObject[lastActionObject.length-2],lastActionObject[1],lastActionObject[2],lastActionObject[3],lastActionObject[4],lastActionObject[5]);
   	</method>
     
-  	<method name="drawrectangleHistory" args="parentObj,x1,y1,x2,y2,stroke,line">
+  	<method name="drawrectangleHistory" args="parentObj,x1,y1,x2,y2,stroke,line,fill,strokeDis,fillDis">
    		<![CDATA[
-    		parentObj.strokeStyle = stroke;
+    		Debug.write("drawrectangleHistory",parentObj,x1,y1,x2,y2,stroke,line,fill,strokeDis,fillDis);
     		parentObj.lineWidth = line;
     		parentObj.beginPath();
     		parentObj.moveTo(x1,y1);
@@ -1373,21 +1398,34 @@
     		parentObj.lineTo(x2,y2);
     		parentObj.lineTo(x2,y1);
     		parentObj.lineTo (x1,y1);
-    		parentObj.stroke();
+    		
+    		if (strokeDis!=-1){
+	    		parentObj.strokeStyle = stroke;
+	    		parentObj.stroke();
+    		}
+    		
+    		if (fillDis!=-1){
+	    		parentObj.fillStyle = fill;
+	    		parentObj.fill();
+    		}
     	]]>   
   	</method>  
   	
-  	<method name="drawrectregisterFinal" args="newName,stroke,line,x,y,width,height" >
+  	<method name="drawrectregisterFinal" args="newName,stroke,line,fill,strokeDis,fillDis,x,y,width,height" >
+  		Debug.write("drawrectregisterFinal",newName,stroke,line,fill,strokeDis,fillDis,x,y,width,height);
 		var actionObject = new Array();
-	    actionObject.push('rectangle');
-	    actionObject.push(stroke);
-	    actionObject.push(line);
-		actionObject.push(this.counter);
-	    actionObject.push(x);
-	    actionObject.push(y);
-	    actionObject.push(width);
-	    actionObject.push(height);	    
-	    actionObject.push(newName);
+	    actionObject[0] = 'rectangle';
+	    actionObject[1] = stroke;
+	    actionObject[2] = line;
+	    actionObject[3] = fill;
+	    actionObject[4] = strokeDis;
+	    actionObject[5] = fillDis;
+		actionObject[6] = this.counter;
+	    actionObject[7] = x;
+	    actionObject[8] = y;
+	    actionObject[9] = width;
+	    actionObject[10] = height;	    
+	    actionObject[11] = newName;
 	    this.baseactionobjectList.push(actionObject);
 	    this.onsharedMessage('draw',actionObject);
   	</method>
@@ -1405,33 +1443,27 @@
   	
   	<method name="endEllipse">
   		<![CDATA[
-		////Debug.write(" this.startx, this.starty , this.endx, this.endy ",this.startx, this.starty , this.endx, this.endy);
-		this.currentlayer.destroy();
-		var x = this.startx;
-		var width = this.endx - this.startx;
-		if (this.endx<this.startx){
-			x = this.endx;
-			width = Math.abs(width);
-		}
-		var y = this.starty;
-		var height = this.endy - this.starty;
-		if (this.endy<this.starty){
-			y = this.endy;
-			height = Math.abs(height);
-		}
-		
-		this.currentlayer = new drawviewnew(this,{name:'ellipse'+this.getCounter(),x:x,y:y,width:width,height:height});
-		
-		this.drawellipse(0,0,width,height);
-
-
-		//Debug.write("this.currentellipsestroke,this.currentellipselineWidth: ",this.currentellipsestroke,this.currentellipselineWidth);
-   		
-		this.drawellipseregisterFinal(this.currentlayer.name,this.currentellipsestroke,this.currentellipselineWidth,x,y,width,height);
-		
-		this.layers.push(this.currentlayer);
-		
-		this.checkStepLayers();
+			////Debug.write(" this.startx, this.starty , this.endx, this.endy ",this.startx, this.starty , this.endx, this.endy);
+			this.currentlayer.destroy();
+			var x = this.startx;
+			var width = this.endx - this.startx;
+			if (this.endx<this.startx){
+				x = this.endx;
+				width = Math.abs(width);
+			}
+			var y = this.starty;
+			var height = this.endy - this.starty;
+			if (this.endy<this.starty){
+				y = this.endy;
+				height = Math.abs(height);
+			}
+			
+			this.currentlayer = new drawviewnew(this,{name:'ellipse'+this.getCounter(),x:x,y:y,width:width,height:height});
+			this.drawellipse(0,0,width,height);
+			//Debug.write("this.currentellipsestroke,this.currentellipselineWidth: ",this.currentellipsestroke,this.currentellipselineWidth);
+			this.drawellipseregisterFinal(this.currentlayer.name,this.currentellipsestroke,this.currentellipselineWidth,this.currentellipsestrokeFill,this.currentellipsestrokeDis,this.currentellipsestrokeFillDis,x,y,width,height);
+			this.layers.push(this.currentlayer);
+			this.checkStepLayers();
 		]]>
   	</method>
   	
@@ -1439,49 +1471,72 @@
 
 		this.currentlayer = new drawviewnew(parentView,{name:lastActionObject[lastActionObject.length-1],x:lastActionObject[lastActionObject.length-5],y:lastActionObject[lastActionObject.length-4],width:lastActionObject[lastActionObject.length-3],height:lastActionObject[lastActionObject.length-2]});
    		//Debug.write("lastActionObject[1],lastActionObject[2]: ",lastActionObject[1],lastActionObject[2]);
-   		this.drawellipseHistory(this.currentlayer,0,0,lastActionObject[lastActionObject.length-3],lastActionObject[lastActionObject.length-2],lastActionObject[1],lastActionObject[2]);
+   		this.drawellipseHistory(this.currentlayer,0,0,lastActionObject[lastActionObject.length-3],lastActionObject[lastActionObject.length-2],lastActionObject[1],lastActionObject[2],lastActionObject[3],lastActionObject[4],lastActionObject[5]);
 
   	</method>
     
-  	<method name="drawellipseHistory" args="parentObj,x1,y1,x2,y2,stroke,line">
+  	<method name="drawellipseHistory" args="parentObj,x1,y1,x2,y2,stroke,line,fill,strokeDis,fillDis">
    		<![CDATA[
    			//Debug.write("stroke,line: ",stroke,line);
 	    	var rx = (x1+x2)/2;
 	    	var ry = (y1+y2)/2;
 	    	var xradius = Math.abs(rx-x1);
 	    	var yradius = Math.abs(ry-y1);
-	    	parentObj.strokeStyle = stroke;
+	    	
 	    	parentObj.lineWidth = line;
 	    	parentObj.oval(rx,ry,xradius,yradius);
-	    	parentObj.stroke();
+	    	
+	    	if (strokeDis!=-1){
+		    	parentObj.strokeStyle = stroke;
+		    	parentObj.stroke();
+	    	}
+
+	    	if (fillDis!=-1){
+		    	parentObj.fillStyle = fill;
+		    	parentObj.fill();
+	    	}
+
     	]]>   
   	</method>  	
   	 
 	<method name="drawellipse" args="x1,y1,x2,y2">
    		<![CDATA[
-   		//Debug.write("stroke,line: ",this.currentellipsestroke,this.currentellipselineWidth);
-    	var rx = (x1+x2)/2;
-    	var ry = (y1+y2)/2;
-    	var xradius = Math.abs(rx-x1);
-    	var yradius = Math.abs(ry-y1);
-    	currentlayer.strokeStyle = this.currentellipsestroke;
-    	currentlayer.lineWidth = this.currentellipselineWidth;
-    	currentlayer.oval(rx,ry,xradius,yradius);
-    	currentlayer.stroke();
+	   		//Debug.write("stroke,line: ",this.currentellipsestroke,this.currentellipselineWidth);
+	    	var rx = (x1+x2)/2;
+	    	var ry = (y1+y2)/2;
+	    	var xradius = Math.abs(rx-x1);
+	    	var yradius = Math.abs(ry-y1);
+	    	
+	    	currentlayer.lineWidth = this.currentellipselineWidth;
+	    	currentlayer.oval(rx,ry,xradius,yradius);
+	    	
+	    	if (this.currentellipsestrokeDis!=-1){
+		    	currentlayer.strokeStyle = this.currentellipsestroke;
+		    	currentlayer.stroke();
+	    	}
+	    	
+	    	if (this.currentellipsestrokeFillDis!=-1){
+		    	currentlayer.fillStyle = this.currentellipsestrokeFill;
+		    	currentlayer.fill(); 
+	    	}
+   	
     	]]>   
   	</method>
   	
-  	<method name="drawellipseregisterFinal" args="newName,stroke,line,x,y,width,height" >
+  	<method name="drawellipseregisterFinal" args="newName,stroke,line,fill,strokeDis,fillDis,x,y,width,height" >
 		var actionObject = new Array();
-	    actionObject.push('ellipse');
-	    actionObject.push(stroke);
-	    actionObject.push(line);
-		actionObject.push(this.counter);
-	    actionObject.push(x);
-	    actionObject.push(y);
-	    actionObject.push(width);
-	    actionObject.push(height);	    
-	    actionObject.push(newName);
+	    actionObject[0] = 'ellipse';
+	    actionObject[1] = stroke;
+	    actionObject[2] = line;
+	    actionObject[3] = fill;
+	    actionObject[4] = strokeDis;
+	    actionObject[5] = fillDis;
+		actionObject[6] = this.counter;
+	    actionObject[7] = x;
+	    actionObject[8] = y;
+	    actionObject[9] = width;
+	    actionObject[10] = height;	    
+	    actionObject[11] = newName;
 	    this.baseactionobjectList.push(actionObject);
 	    this.onsharedMessage('draw',actionObject);
   	</method>  
