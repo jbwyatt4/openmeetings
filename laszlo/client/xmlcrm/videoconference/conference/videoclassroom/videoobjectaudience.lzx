@@ -97,18 +97,15 @@
             	<attribute name="isgreater" value="false" type="boolean" />       
             	<handler name="onlevel">
             		<![CDATA[
-	            		//this.parent.parent.parent._loudness.loudness.setAttribute('text',this.level);
-						if (this.level>canvas.loadnessAcitviation) {
+	            		if (this.level>canvas.loadnessAcitviation) {
 							if (!this.isgreater) {
 								this.isgreater = true;
 								this.sendNotification();
-								//this.parent.parent.parent._loudness.loudness.setAttribute('opacity',1);
 							}
 						} else {
 							if (this.isgreater) {
 								this.isgreater = false;
 								this.sendNotification();
-								//this.parent.parent.parent._loudness.loudness.setAttribute('opacity',0.2);
 							}
 						}
             		]]>

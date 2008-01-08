@@ -189,33 +189,37 @@
 			if (minutes<10) minutes = "0"+minutes;	
 			this.progress._currentTime._timetext.setAttribute('text',minutes+":"+deltaSeconds);
 	        
-        	for (var i=0;i<this.recordingValue.roomRecording.streamlist.length;i++){
+			var streamList = this.recordingValue.roomRecording.streamlist;
+			
+        	for (var i=0;i<streamList.length;i++){
         		//Debug.write(this.recordingValue.roomRecording.streamlist[i]);
-        		var starttime =  (Math.round(this.recordingValue.roomRecording.streamlist[i].starttime/this.timeStepSyncing))*this.timeStepSyncing;
+        		var starttime =  (Math.round(streamList[i].starttime/this.timeStepSyncing))*this.timeStepSyncing;
         		//Debug.write("timeLineAction starttime: ",starttime);
         		if (starttime == this.currentTime){
-	        		var userpos = this.recordingValue.roomRecording.streamlist[i].rcl.userpos;
-	        		var streamname = this.recordingValue.roomRecording.streamlist[i].streamName+".flv";
+	        		var userpos = streamList[i].rcl.userpos;
+	        		var streamname = streamList[i].streamName+".flv";
 	        		Debug.write("Found - ",starttime,userpos,streamname);
 	        		canvas._videocontainer.startStream(streamname,userpos,this.recordingValue.roomRecording.streamlist[i].rcl);
         		}
         	}
-        
-        	for (var i=0;i<this.recordingValue.roomRecording.whiteboard.length;i++){
-        		var starttime =  (Math.round(this.recordingValue.roomRecording.whiteboard[i].starttime/this.timeStepSyncing))*this.timeStepSyncing;
+        	
+        	var whiteBoard = this.recordingValue.roomRecording.whiteboard;
+        	for (var i=0;i<whiteBoard.length;i++){
+        		var starttime =  (Math.round(whiteBoard[i].starttime/this.timeStepSyncing))*this.timeStepSyncing;
         		//Debug.write("timeLineAction Whiteboard starttime: ",starttime);
         		if (starttime == this.currentTime){
-        			var action = this.recordingValue.roomRecording.whiteboard[i].action;
+        			var action = whiteBoard[i].action;
         			//Debug.write("Found - ",starttime,action);
         			_drawarea.sendRecordedObject(action[2],action[3],false);
         		}
         	}
         	
-        	for (var i=0;i<this.recordingValue.roomRecording.chatvalues.length;i++){
-        		var starttime =  (Math.round(this.recordingValue.roomRecording.chatvalues[i].starttime/this.timeStepSyncing))*this.timeStepSyncing;
+        	var chatValues = this.recordingValue.roomRecording.chatvalues;
+        	for (var i=0;i<chatValues.length;i++){
+        		var starttime =  (Math.round(chatValues[i].starttime/this.timeStepSyncing))*this.timeStepSyncing;
         		if (starttime == this.currentTime){
-        			var action = this.recordingValue.roomRecording.chatvalues[i].action;
-        			chartcontent.addChatHistory(action.message,action.client);
+        			var action = chatValues[i].action;
+        			canvas._chartcontent.addChatHistory(action.message,action.client);
         		}
         	}
         	if (perc<100){

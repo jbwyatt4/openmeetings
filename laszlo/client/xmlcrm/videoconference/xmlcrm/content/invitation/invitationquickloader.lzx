@@ -2,7 +2,7 @@
 <library>
  
  <class name="invitationquickloader" extends="labelexplorerbox" labelid="230"
-    docking="true" resizeable="false" closable="false" width="324" x="300" y="0" height="120">
+    docking="true" resizeable="false" closable="false" width="324" x="400" y="0" height="120">
 	 
 	<attribute name="userlang" value="1" type="number" />
 	 
@@ -66,86 +66,12 @@
         hib.userobject = userObject;
            
         hib.userlang = Number(this.userlang);
-
-        this.getLanguageById.doCall();
-                  
+        canvas.thishib.loaderVar = new autoloaderBarOnly(canvas);
+		canvas.thishib.loaderVar.setProgress();
+		this.close();
+        canvas.thishib.loaderVar.getLanguageByIdAndMax.doCall();         
     </method>
-
-    <netremotecallhib name="getLanguageById" funcname="languageservice.getLanguageById" 
-		remotecontext="$once{ canvas.thishib }" >      
-        <netparam><method name="getValue"> return parent.parent.userlang; </method></netparam> 
-        <handler name="ondata" args="value">
-            //The onResult-Handler will be called be the rtmpconnection
-            Debug.write("getLanguageById: ",value);
-            setLabelObject(value);
-			parent.getStates.doCall();
-        </handler>  
-    </netremotecallhib>	 
-	 
-    
-    <netremotecallhib name="getStates" funcname="xmlcrm.getStates" 
-		remotecontext="$once{ canvas.thishib }" >  
-        <handler name="ondata" args="value">
-            //The onResult-Handler will be called be the rtmpconnection
-            Debug.write("getStates: ",value);
-            canvas.statesInitValues = value;
-            parent.getUserSalutations.doCall();
-        </handler>  
-    </netremotecallhib>    
-    
-    <netremotecallhib name="getUserSalutations" funcname="userservice.getUserSalutations" 
-		remotecontext="$once{ canvas.thishib }" >  
-		<netparam><method name="getValue">return canvas.sessionId;</method></netparam>
-        <netparam><method name="getValue"> return parent.parent.userlang; </method></netparam> 
-        <handler name="ondata" args="value">
-            //The onResult-Handler will be called be the rtmpconnection
-            Debug.write("getUserSalutations ",value);
-            canvas.salutationsInitValues = value;
-            parent.getRoomTypes.doCall();
-        </handler>  
-    </netremotecallhib>   
-    
-    <netremotecallhib name="getRoomTypes" funcname="conferenceservice.getRoomTypes" 
-		remotecontext="$once{ canvas.thishib }" >  
-		<netparam><method name="getValue">return canvas.sessionId;</method></netparam>
-        <handler name="ondata" args="value">
-            //The onResult-Handler will be called be the rtmpconnection
-            Debug.write("getRoomTypes ",value);
-            canvas.roomTypesInitValues = value;
-            parent.setUsername.doCall();
-        </handler>  
-    </netremotecallhib>    	 
-	 
-    <netremotecallhib name="setUsername" funcname="setUsername" remotecontext="$once{ canvas.thishib }" >   
-        <netparam><method name="getValue">return canvas.user_id;</method></netparam>
-        <netparam><method name="getValue">return canvas.currentuser;</method></netparam>
-        <netparam><method name="getValue">return canvas.firstName;</method></netparam>
-        <netparam><method name="getValue">return canvas.lastName;</method></netparam>      
-        <netparam><method name="getValue">return canvas.initdomainid;</method></netparam>
-        <handler name="ondata" args="value">
-        	
-			//TODO: set currentroomid
-            //The onResult-Handler will be called be the rtmpconnection
-            Debug.write("setUsername: ",value);
-            hib.currentroomid = canvas.initroomid;
-	        hib.connectedroom = canvas.initroomStr;
-            hib.conferencedomain = canvas.initdomainid;
-
-            //Debug.write("hib.conferencedomain: ",hib.conferencedomain);
-            clearStageContent();		
-			if (canvas.initroomtype=="conference"){
-				new conference(canvas.main_content._content.inner); 
-			} else {
-				new audience(canvas.main_content._content.inner); 
-			}
-			this.parent.close();	                 
-        </handler>  
-    </netremotecallhib>  
-	  	 	
+	 	
 </class>
-	
-<!--
-
-  -->
 
 </library>

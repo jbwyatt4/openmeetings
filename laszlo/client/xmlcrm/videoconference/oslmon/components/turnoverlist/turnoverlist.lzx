@@ -94,8 +94,9 @@
 	<combobox name="languages" width="100" x="$once{ parent.width-149 }" 
 			  editable="false" height="22" >
 		<attribute name="sendEventToReload" value="false" type="boolean" />
-        <textlistitem value="20" text="20" />
+        <textlistitem value="25" text="25" />
         <textlistitem value="50" text="50" />
+        <textlistitem value="75" text="75" />
         <textlistitem value="100" text="100" />
         <textlistitem value="200" text="200" />
         <handler name="onselect">

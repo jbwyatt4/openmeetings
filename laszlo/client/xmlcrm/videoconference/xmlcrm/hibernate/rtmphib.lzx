@@ -178,7 +178,7 @@
 		            	    parent.getStates.doCall();
 					    } else {
 					    	canvas.thishib.loaderVar.setProgress();
-					        //Debug.write("canvas.isinitRoomDirect is true");
+					        Debug.write("canvas.isinitRoomDirect is true");
 					        parent.markSessionAsLogedIn.doCall();
 					    }
 		            }
@@ -191,7 +191,8 @@
 		<netparam><method name="getValue">return canvas.sessionId;</method></netparam>
         <handler name="ondata" args="value">
             //The onResult-Handler will be called be the rtmpconnection
-            //Debug.write("markSessionAsLogedIn ",value);
+            Debug.write("markSessionAsLogedIn ",value);
+            canvas.thishib.loaderVar.close();
 			if (canvas.mail == undefined) {
 			    new invitationuserwin(canvas.main_content._content.inner);
 			} else {		
@@ -222,7 +223,7 @@
 			if (canvas.isResetUsername){
 				new resetpassword(canvas.main_content._content.inner);
 			} else {
-				canvas.thishib.loaderVar.destroy();
+				canvas.thishib.loaderVar.close();
 				new checkLoginData(canvas.main_content._content.inner);
 			}
         </handler>  
@@ -245,7 +246,7 @@
         <handler name="ondata" args="value">
             //The onResult-Handler will be called be the rtmpconnection
             Debug.write("getNavi: ",value);
-            canvas.thishib.loaderVar.destroy();
+            canvas.thishib.loaderVar.close();
             new mainnavi(canvas._mainbgcontentNavi,{name:'navi',naviObject:value});
             new helpandbugs(canvas._mainbgcontentNavi,{name:'help'});
         </handler>  
@@ -366,8 +367,8 @@
                 if (canvas.currentModApply!=null) canvas.currentModApply.rejectUser(value);
                 //parent.getClientListScope.doCall();  
                 if (value.isRecording) {
-		    		mymod.parent.recordingUser = null;
-		    		mymod.parent.setMessage();                	
+		    		canvas._mymod.recordingUser = null;
+		    		canvas._mymod.setMessage();                	
                 }
             </handler>   
         </netremotecallhib>     
@@ -380,8 +381,8 @@
 				_drawarea.sendCompleteImageLoadedRClient(value);
 	    		if (canvas.currentModApply!=null) canvas.currentModApply.rejectUser(value);
                	if (value.isRecording) {
-		    		mymod.parent.recordingUser = null;
-		    		mymod.parent.setMessage();                	
+		    		canvas._mymod.recordingUser = null;
+		    		canvas._mymod.setMessage();                	
                 }	    		
 	    	</handler>
 	    </netremotecallhib>             
@@ -488,8 +489,8 @@
                 } else if (value.message[0]=='applyModAnswer'){
                     canvas.currentModApply.setUserAnswer(value);
                 } else if (value.message[0]=='chat'){
-                    if (chartcontent) chartcontent.addChatHistory(value.message,value.client);
-                    if (chartcontentRPC) chartcontentRPC.addChatHistory(value.message,value.client);
+                    if (canvas._chartcontent) canvas._chartcontent.addChatHistory(value.message,value.client);
+                    if (canvas._chartcontentRPC) canvas._chartcontentRPC.addChatHistory(value.message,value.client);
                 } else if (value.message[0]=='whiteboard'){
 					if (value.message[1]=='wmlloadcomplete'){
 						_drawarea.sendCompleteWmlLoadedRClient(value.client);
@@ -588,6 +589,23 @@
 		funcname="chatservice.removeClientFromChatNotification" >      
     	<handler name="ondata" args="value">
     		Debug.write("removeClientFromChatNotification: ",value);
+    	</handler>
+    </netremotecallhib>
+    
+   <!-- recordings Notifications -->
+	<netremotecallhib name="stopedRecording" funcname="stopedRecording" >      
+    	<handler name="ondata" args="value">
+    		Debug.write("stopedRecording: ",value);
+    		canvas._mymod.parent.recordingUser = null;
+    		canvas._mymod.parent.setMessage();
+    	</handler>
+    </netremotecallhib>
+    
+	<netremotecallhib name="startedRecording" funcname="startedRecording" >      
+    	<handler name="ondata" args="value">
+    		Debug.write("startedRecording: ",value);
+    		canvas._mymod.parent.recordingUser = value;
+    		canvas._mymod.parent.setMessage();
     	</handler>
     </netremotecallhib>
     

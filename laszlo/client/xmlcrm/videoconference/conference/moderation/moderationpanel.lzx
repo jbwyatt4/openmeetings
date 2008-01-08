@@ -33,6 +33,10 @@
   	<attribute name="initial" value="true" type="boolean" />
   	<attribute name="recordingUser" value="null" />
   	
+  	<handler name="oninit">
+  		canvas._mymod = this;
+  	</handler>
+  	
 	<method name="setMessage">
 		<![CDATA[
 			Debug.write("setMessage: ",this.recordingUser);
@@ -50,7 +54,7 @@
 		]]>
 	</method>  	
 	
-	<labeltext id="mymod" resize="true" name="_text" y="4" />
+	<labeltext name="mymodText" resize="true" y="4" />
   	
   	<simplelabelbutton name="mod_btn" width="30" height="24" y="2">
 		<handler name="onclick">

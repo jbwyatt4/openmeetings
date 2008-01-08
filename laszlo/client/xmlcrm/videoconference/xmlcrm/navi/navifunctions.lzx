@@ -23,10 +23,11 @@ function getLabelTag(labelid){
 
 function getLabelTagByNo(no,labelid){
 	var labeltag = "";
+	var l = labels[no]
 	//Debug.write("Search label tag in: ",labelid,labels[no]);
-    for (var eg=0;eg<=labels[no].length;eg++){
-	    if (labels[no][eg].fieldvalues_id==labelid){
-		    return labels[no][eg].value;
+    for (var eg=0;eg<=l.length;eg++){
+	    if (l[eg].fieldvalues_id==labelid){
+		    return l[eg].value;
 	    }
     }
 	return 'error';

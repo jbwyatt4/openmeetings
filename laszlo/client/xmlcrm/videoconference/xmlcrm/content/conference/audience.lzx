@@ -23,6 +23,9 @@
 
 	<handler name="ontabcontentleave">
         Debug.write("ontabcontentleave:",this);
+        canvas._videocontainer = null;
+        canvas._chartcontent = null;
+        canvas._mymod = null;        
 		this.logicalRoomLeave.doCall();
         Debug.write("this.logicalRoomLeave ",this.logicalRoomLeave);
 	</handler>

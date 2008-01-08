@@ -159,8 +159,8 @@ function disableCurrentMouseWheelObject() {
           var newmessage = "<FONT COLOR='"+value[5]+"' size='11'>"+client.firstname+" "+client.lastname+"</FONT>:<FONT COLOR='0x000000' size='11'>"+value[4]+"</FONT><br />";
     }
   	//Debug.write("newmessage: ",newmessage);
-  	chartcontent.addChartItem(newmessage);
-  	chathistory.push(newmessage);
+  	canvas._chartcontent.addChartItem(newmessage);
+  	canvas._chathistory.push(newmessage);
   	]]>
 </method>
 
@@ -199,7 +199,7 @@ function disableCurrentMouseWheelObject() {
 <method name="setModeratorName" args="mod">
 	<![CDATA[
 	this.moderatorName = mod;
-	mymod.setText(canvas.getLabelName(98)+' '+this.moderatorName);
+	canvas._mymod.mymodText.setText(canvas.getLabelName(98)+' '+this.moderatorName);
 	//Debug.write("canvas.moderatorStreamID==canvas.streamid",canvas.moderatorStreamID==canvas.streamid);
 	if (canvas.moderatorStreamID==canvas.streamid){
 		this.setAttribute('ismoderator',true);

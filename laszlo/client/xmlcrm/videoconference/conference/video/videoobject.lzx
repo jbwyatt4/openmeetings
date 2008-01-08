@@ -115,13 +115,11 @@
 							if (!this.isgreater) {
 								this.isgreater = true;
 								this.sendNotification();
-								//this.parent.parent.parent._loudness.loudness.setAttribute('opacity',1);
 							}
 						} else {
 							if (this.isgreater) {
 								this.isgreater = false;
 								this.sendNotification();
-								//this.parent.parent.parent._loudness.loudness.setAttribute('opacity',0.2);
 							}
 						}
             		]]>
@@ -155,13 +153,6 @@
 			  onmouseover="" onmouseout="" >		
 			<labeltooltip inittwice="true" labelid="372" />
 		</view>
-		<!--
-		<method name="setLevel" args="ll">
-			this._loudness.setAttribute('frame',Math.round(ll/4));
-		</method>
-		<view x="2" y="2" name="_loudness" resource="loudness" 
-			 oninit="this.setAttribute('frame',1)" />
-		-->
 	</view>
 	
 	<view name="mute" x="$once{ parent.width-20 }" y="$once{ parent.height-18 }" 
