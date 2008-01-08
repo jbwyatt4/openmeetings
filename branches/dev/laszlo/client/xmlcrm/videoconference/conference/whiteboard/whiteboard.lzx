@@ -17,7 +17,7 @@
 <resource name="_boundingBoxPointer" src="resources/boundingBoxPointer.png" />
 
 <resource name="letter" src="resources/applixware.png" />
-<resource name="paint" src="resources/color_line.png" />
+<resource name="paint" src="toolbar/resources/draw-freehand.png" />
 <resource name="saveobj" src="resources/filesave.png" />
 <resource name="loadobj" src="resources/fileopen.png" />
 <resource name="revert" src="resources/undo.png" />
@@ -30,8 +30,8 @@
 <resource name="italic" src="resources/italic.png" />
 <resource name="combodown" src="resources/combodown.png" />
 <resource name="deleteIcon" src="resources/button_cancel.png" />
-<resource name="ellipse" src="resources/mix_record.png" />
-<resource name="rectangle" src="resources/tool_delay.png" />
+<resource name="ellipse" src="toolbar/resources/draw-ellipse.png" />
+<resource name="rectangle" src="toolbar/resources/draw-rectangle.png" />
 <resource name="imageIcon" src="resources/image.png" />
 <resource name="handIcon" src="resources/wizard.png" />
 <resource name="sharedIcon" src="resources/kuser.png" />
@@ -91,6 +91,8 @@
 	<attribute name="sendObjectToClientID" value="0" type="number"  />
     
     <attribute name="confirmdialog" value="null" />
+    
+    <attribute name="documentmenuIsInited" value="false" type="boolean" />
 	
 	<method name="sendConfirmation" args="yesno,askagain" >
 		
@@ -208,13 +210,18 @@
             this._paintmenu.setAttribute('visible',true);
             this._painttoolsPalette.setAttribute('visible',true);
             this._documentmenu.setAttribute('visible',false);
-            this._documenttoolsPalette.setAttribute('visible',false);
+            //this._documenttoolsPalette.setAttribute('visible',false);
             if (bool) this._toolbarTabList.setSelection(this._toolbarTabList.b_paint);
         } else if (menuId==2){
             this._paintmenu.setAttribute('visible',false);
             this._painttoolsPalette.setAttribute('visible',false);
+            if (!this.documentmenuIsInited){
+            	new documentmenu(this,{name:'_documentmenu',x:0,y:38,visible:false});
+            	this._documentmenu.sendInFrontOf(this._paintmenu);
+            	this.documentmenuIsInited = true;
+            }
             this._documentmenu.setAttribute('visible',true);
-            this._documenttoolsPalette.setAttribute('visible',true);
+            //this._documenttoolsPalette.setAttribute('visible',true);            
             if (bool) this._toolbarTabList.setSelection(this._toolbarTabList.b_doc);
         }
     </method>
@@ -224,8 +231,6 @@
 	 -->
 
 	<paintmenu name="_paintmenu" x="0" y="38" visible="true" />
-    
-    <documentmenu name="_documentmenu" x="0" y="38" visible="false" />
     
 	<!-- 
 		The Content Area    
@@ -239,6 +244,10 @@
             <handler name="onmousedown" >
                 
             </handler>
+            <handler name="ondrawmodus" args="d">
+            	this.drawmodus = d;
+            	parent.parent._painttoolsPalette.loadToolsByModi(d);
+            </handler>
             <handler name="setNewScreenUserName" args="value">
                 this.parent.parent._sharingClientName.setText(value);
             </handler>
@@ -248,7 +257,7 @@
                 var tempSendArray = new Array ();
                 tempSendArray[0] = 'whiteboard';
                 tempSendArray[1] = new Date();
-                //Debug.write("Setting Message: ",action);
+                Debug.write("onsharedMessage Setting Message: ",action,obj);
                 tempSendArray[2] = action;
                 tempSendArray[3] = obj;
                      
@@ -298,8 +307,10 @@
 	<painttoolsPalette name="_painttoolsPalette" />
     
     
-	<!-- Context sensitive stuff -->
+	<!-- Context sensitive stuff
+	not needed for the moment
 	<documenttoolsPalette name="_documenttoolsPalette" />
+	 -->
     
 </class>
     

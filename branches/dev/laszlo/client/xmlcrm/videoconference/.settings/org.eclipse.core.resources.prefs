@@ -1,4 +1,4 @@
-#Thu Dec 13 16:01:17 CET 2007
+#Tue Jan 08 17:05:50 CET 2008
 eclipse.preferences.version=1
 encoding//conference/global/functions.lzx=UTF-8
 encoding//conference/popups/errorpopup.lzx=UTF-8
@@ -21,6 +21,8 @@ encoding//oslmon/components/button/basechooseseicon.lzx=UTF-8
 encoding//oslmon/components/button/simplelabelbutton.lzx=UTF-8
 encoding//oslmon/components/explorer/explorerbox.lzx=UTF-8
 encoding//oslmon/components/labelradiobutton.lzx=UTF-8
+encoding//oslmon/components/lps/changewidthletterslider.lzx=UTF-8
+encoding//oslmon/components/lps/changewidthslider.lzx=UTF-8
 encoding//oslmon/components/presenter/guipresenter.lzx=UTF-8
 encoding//oslmon/components/presenter/library.lzx=UTF-8
 encoding//oslmon/components/text/customscrolledittext.lzx=UTF-8

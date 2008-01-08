@@ -3,6 +3,13 @@
 
 <class name="drawchooseseperator" extends="basemenuseperator" />
 
+<class name="drawchoosemodirPlain" extends="basechooseseicon" width="24" height="24">
+	<attribute name="modi" value="" type="string" />
+	<attribute name="isSelectablemodi" value="false" type="boolean" />
+	<handler name="onclick">
+		this.parent.parent._drawareaMask._drawarea.setModus(modi);
+	</handler>
+</class>
 
 <class name="drawchoosemodir" extends="basechooseseicon" width="24" height="24">
 	<attribute name="modi" value="" type="string" />

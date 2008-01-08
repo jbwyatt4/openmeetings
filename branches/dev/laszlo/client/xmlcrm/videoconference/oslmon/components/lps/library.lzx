@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<library>
+    
+	<resource name="colorlinechoose_rsc" src="resources/color_line.png" />
+	<resource name="colorlineblock_rsc" src="resources/lock.png" />    
+	<resource name="colorfillchoose_rsc" src="resources/fill-color.png" />
+	<resource name="colorfillblock_rsc" src="resources/lock.png" />
+    <resource name="arrow_down_slider_rsc" src="resources/arrow_down_slider.png" /> 
+
+	<include href="vslider.lzx" /> 
+	<include href="colorpicker.lzx" />
+    <include href="linecolorchoose.lzx" />
+    <include href="lineonlycolorchoose.lzx" />
+    <include href="linecolorchoose.lzx" />
+    <include href="fillcolorchoose.lzx" />
+    <include href="changewidthslider.lzx" />
+    <include href="changewidthletterslider.lzx" />
+    
+</library>

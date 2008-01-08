@@ -21,7 +21,7 @@
 	</method>
 	
     <!-- The Color of the letter Object  -->
-  	<attribute name="currentlayerletter" value="0x000000" setter="this.setNewLayerLetter(currentlayerletter)" />
+  	<attribute name="currentlayerletter" value="0xFF6600" setter="this.setNewLayerLetter(currentlayerletter)" />
     
     <!-- The Size of the Letter Object -->
   	<attribute name="currentlayersize" value="12" type="number" setter="this.setNewLayerSize(currentlayersize)" />

@@ -401,8 +401,8 @@
             <handler name="ondata" args="value">
                 <![CDATA[
                 //The onResult-Handler will be called be the rtmpconnection
-                //Debug.write("sendVarsToWhiteboard : ",value);
-                _drawarea.sendWatchObject(value[2],value[3],false);
+	                Debug.write("sendVarsToWhiteboard : ",value);
+	                _drawarea.sendWatchObject(value[2],value[3],false);
                 ]]>
             </handler>   
         </netremotecallhib>   

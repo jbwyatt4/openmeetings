@@ -17,5 +17,6 @@
 	<include href="simplevaluelist/" />
     <include href="validbox/" />
     <include href="presenter/" />
+    <include href="lps/" />
 
 </library>

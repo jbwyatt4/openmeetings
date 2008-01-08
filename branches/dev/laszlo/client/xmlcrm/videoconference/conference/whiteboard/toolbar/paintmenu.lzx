@@ -3,7 +3,7 @@
     
 <class name="paintmenu" extends="basetoolbarmenu" >
     
-    <drawchoosemodir y="4" name="b3" modi="plain" resourceN="plain" labelid="69" />
+    <drawchoosemodirPlain y="4" name="b3" modi="plain" resourceN="plain" labelid="69" />
     <drawsimpleclick y="4" name="b13" modi="saveobj" resourceN="saveobj" labelid="197" />
     
     <drawchooseseperator y="4" />

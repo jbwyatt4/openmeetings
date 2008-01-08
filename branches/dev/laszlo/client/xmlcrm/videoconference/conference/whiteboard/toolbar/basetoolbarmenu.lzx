@@ -10,9 +10,13 @@
             this.selectedButton.onmouseout.sendEvent();		
         } 
         if (bool){
+        	if (this.selectedButton!=null){
+        		this.selectedButton.setAttribute('enabled',true);
+        		this.selectedButton.setAttribute('isselected',false);
+        	}
             this.selectedButton=obj;	
             this.selectedButton.setAttribute('isselected',true);	
-            this.selectedButton.setResourceNumber(3);
+            this.selectedButton.setAttribute('enabled',false);
         }
     </method>
 </class>  

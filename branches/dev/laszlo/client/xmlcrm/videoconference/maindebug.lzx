@@ -365,7 +365,11 @@ and some more references to temp-objects
 <view name="_conferencemenu" y="0" x="0" height="20" width="100%" 
     bgcolor="$once{ canvas.basebgcolorizer }" visibility="hidden" > 
     <method name="removeAll">
-    	for (var eg in this.subviews) this.subviews.destroy();
+		<![CDATA[
+			while (this.subviews.length > 0) {
+				this.subviews[0].destroy();
+			}
+		]]>
     </method>
 </view>   
     
