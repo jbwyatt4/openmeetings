@@ -20,7 +20,7 @@
             } else if (stringSub=='editBoardSettings') {
                 new editwhiteboarddefault(canvas.main_content._content.inner);
             } else if (stringSub=='quit') {
-                Debug.write(canvas.thishib.modus);
+                Debug.write(canvas.thishib.modus,canvas.thishib.roomtype);
                 if (canvas.thishib.modus=='audience' && canvas.thishib.roomtype=='public'){
                     var t = new Array();
                     t.action = 'publicevents';

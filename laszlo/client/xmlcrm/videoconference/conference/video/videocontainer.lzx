@@ -133,7 +133,7 @@
 				this.subviews[i].setAttribute('isassigned',true);
 				canvas.currentusercolor = this.subviews[i].usercolor;
 				canvas.currentuserpos = this.subviews[i].userposition;
-				this.subviews[i]._chatvideoinner.setResourceNumber(canvas.currentuserpos+1);
+				this.subviews[i]._chatvideoinner.r.setResourceNumber(canvas.currentuserpos+1);
 				this.subviews[i]._chatvideoinner._videoview.setAttribute('visible',true);
 				////Debug.write("canvas.currentusercolor : ",canvas.currentusercolor);
 				canvas.thishib.setAudienceModus.doCall();
@@ -151,7 +151,7 @@
 		if (!this.subviews[pos].isassigned){
 			//A free Slot has been found
 			//return the Reference to the VideoView it and mark it as used
-			this.subviews[pos]._chatvideoinner.setResourceNumber(pos+1);
+			this.subviews[pos]._chatvideoinner.r.setResourceNumber(pos+1);
 			this.subviews[pos]._chatvideoinner._videoview.setAttribute('visible',true);
 			this.subviews[pos].setAttribute('isassigned',true);
 			return this.subviews[pos].getVideoReference();
@@ -200,7 +200,7 @@
             //mark this view as free
             ////Debug.write("Found client to disconnect");
 			this.subviews[userpos].setAttribute('isassigned',false);
-			this.subviews[userpos]._chatvideoinner.setResourceNumber(5);
+			this.subviews[userpos]._chatvideoinner.r.setResourceNumber(5);
 			this.subviews[userpos].resetValues();
 			this.subviews[userpos]._chatvideoinner._videoview.setAttribute('visible',false);
 			return this.subviews[userpos].getVideoReferenceDis();
@@ -211,11 +211,11 @@
 
 	<videoobject name="_video1" x="0" y="0" userposition="0" />
 	
-	<videoobject name="_video2" x="130" y="0" userposition="1" />
+	<videoobject name="_video2" x="134" y="0" userposition="1" />
 	
 	<videoobject name="_video3" x="0" y="126" userposition="2" />
 	
-	<videoobject name="_video4" x="130" y="126" userposition="3" />
+	<videoobject name="_video4" x="134" y="126" userposition="3" />
 	
 </class>
 
