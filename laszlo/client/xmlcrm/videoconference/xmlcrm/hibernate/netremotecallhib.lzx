@@ -34,7 +34,7 @@
 	 -->
 	<handler name="ondata" args="value">
 		<![CDATA[
-			////Debug.write("ondata: ",this,Number(value),this.returnObj);
+			//Debug.write("ondata: ",this.funcname,value);
 			
 			if (this.showLoading) canvas._loadingAll.setAttribute('visible',false);
 			

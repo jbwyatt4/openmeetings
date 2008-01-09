@@ -27,7 +27,8 @@
 	  			<view layout="axis:y;spacing:2" name="inn" width="$once{ parent.width }" datapath="local:classroot.recordingsForUser:/">
 	  				<view datapath="item/" height="24" onmouseout="this.setBGColor(0xFFFFFF)" bgcolor="0xFFFFFF"
 	  					  onmouseover="this.setBGColor(canvas.baseMousecolorizer)" width="$once{ parent.width }">
-	  					<view resource="_recording_play_rsc" onmouseover="" onmouseout="" y="1" >
+	  					<view resource="_recording_play_rsc" onmouseover="" onmouseout="" 
+	  						  y="1" onclick="parent.ondblclick.sendEvent()" >
 	  						<labeltooltip labelid="409" />
 	  					</view>
 	  					<labeltext x="20" text="$path{ 'name/text()' }" y="2" />

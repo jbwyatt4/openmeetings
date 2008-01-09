@@ -2,7 +2,7 @@
 <library>
 <!--  -->
 
-<class name="imageslistdraw" extends="view" width="280" height="270" bgcolor="$once{ canvas.basebgcolorizer }">
+<class name="imageslistdraw" extends="view" width="294" height="270" bgcolor="$once{ canvas.basebgcolorizer }">
 	<view width="${ parent.width-2 }" height="${ parent.height-2 }" x="1" y="1" bgcolor="white" />
 
 	<attribute name="uploadmodul" value="" type="string" />

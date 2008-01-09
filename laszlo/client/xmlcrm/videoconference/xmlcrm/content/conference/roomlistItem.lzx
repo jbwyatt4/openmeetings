@@ -42,7 +42,7 @@
             hib.conferencedomain="public";
             //Debug.write("ispublic");
         } else {
-            hib.connectedroom=parent.obj.room.rooms_id+connectedIsAudience;
+            hib.connectedroom= this.obj.room.rooms_id+connectedIsAudience;
             hib.conferencedomain = this.obj.organisation.organisation_id;
             //Debug.write("non ispublic");
         }
@@ -66,12 +66,11 @@
 		if (this.isaudience) connectedIsAudience = '_'+'audi';
 		hib.currentroomid = this.obj.rooms_id;
         if (this.ispublic){
-        	hib.currentroomid = this.obj.rooms_id;
             hib.connectedroom = this.obj.rooms_id+connectedIsAudience;
             hib.conferencedomain="public";
             //Debug.write("ispublic");
         } else {
-            hib.connectedroom=parent.obj.room.rooms_id+connectedIsAudience;
+            hib.connectedroom = this.obj.room.rooms_id+connectedIsAudience;
             hib.conferencedomain = this.obj.organisation.organisation_id;
             //Debug.write("non ispublic");
         }

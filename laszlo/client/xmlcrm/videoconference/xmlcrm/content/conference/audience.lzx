@@ -23,6 +23,7 @@
 
 	<handler name="ontabcontentleave">
         Debug.write("ontabcontentleave:",this);
+        canvas._videocontainer._video1.resetValues();
         canvas._videocontainer = null;
         canvas._chartcontent = null;
         canvas._mymod = null;       

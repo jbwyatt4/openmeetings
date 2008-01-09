@@ -67,6 +67,7 @@
     <method name="resetValues">
     	this.uniqueid = '0';
     	this.setAttribute('chatpartnername','');
+    	this._chatvideoinner._videoview.v_output.stop();
     	this.clientVars=null;
     </method>
     
