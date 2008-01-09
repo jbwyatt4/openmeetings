@@ -247,6 +247,7 @@
 					} else if (value.organisation_users.length==1){
 						hib.currentdomain = value.organisation_users[0].organisation.name;
 						hib.currentdomainObj = value.organisation_users[0].organisation;
+						hib.getLanguageByIdAndMax.start = 0;
 						hib.getLanguageByIdAndMax.doCall();
 						parent.close();
 					} else {
