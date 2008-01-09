@@ -591,7 +591,7 @@ public class Application extends ApplicationAdapter implements
 	 * @param orgdomain
 	 * @return
 	 */
-	public RoomClient setUsername(String userId, String username, String firstname, String lastname, String orgdomain){
+	public RoomClient setUsername(Long userId, String username, String firstname, String lastname, String orgdomain){
 		try {
 
 			log.error("#*#*#*#*#*#*# setUsername userId: "+userId+" username: "+username+" firstname: "+firstname+" lastname: "+lastname);

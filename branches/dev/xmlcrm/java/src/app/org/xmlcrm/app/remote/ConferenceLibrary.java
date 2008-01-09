@@ -81,8 +81,6 @@ public class ConferenceLibrary {
 				log.error(working_dir);
 				File dir = new File(working_dir);
 				
-				
-	
 				//First get all Directories of this Folder
 				FilenameFilter ff = new FilenameFilter() {
 				     public boolean accept(File b, String name) {

@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.LinkedHashMap;
 
 import org.xmlcrm.app.hibernate.beans.rooms.Rooms;
+import org.xmlcrm.app.hibernate.beans.user.Users;
 
 /**
  * 
@@ -24,6 +25,10 @@ public class Recording {
 	private String deleted;
 	
 	private LinkedHashMap<String,Object> roomRecording;
+	
+	private String starttimeAsString;
+	//this ID is not mapped as it can be null (Invited Users)
+	private Users recordedby = null;
 
 	/**
      * @hibernate.property
@@ -143,6 +148,29 @@ public class Recording {
 	}
 	public void setRoomRecording(LinkedHashMap<String, Object> roomRecording) {
 		this.roomRecording = roomRecording;
+	}
+	
+	public String getStarttimeAsString() {
+		return starttimeAsString;
+	}
+	public void setStarttimeAsString(String starttimeAsString) {
+		this.starttimeAsString = starttimeAsString;
+	}
+	
+    /**
+     * @hibernate.many-to-one
+     *  cascade="none"
+     *  column="recordedby"
+     *  lazy="false"
+     *  class="org.xmlcrm.app.hibernate.beans.user.Users"
+     *  not-null="false"
+     *  outer-join="true"
+     */		
+	public Users getRecordedby() {
+		return recordedby;
+	}
+	public void setRecordedby(Users recordedby) {
+		this.recordedby = recordedby;
 	}
 	
 }

@@ -11,6 +11,7 @@ import org.hibernate.Transaction;
 import org.xmlcrm.app.data.conference.Roommanagement;
 import org.xmlcrm.app.hibernate.beans.recording.Recording;
 import org.xmlcrm.app.hibernate.beans.rooms.Rooms;
+import org.xmlcrm.app.hibernate.beans.user.Users;
 import org.xmlcrm.app.hibernate.utils.HibernateUtil;
 
 public class Recordingmanagement {
@@ -28,11 +29,12 @@ public class Recordingmanagement {
 		return instance;
 	}
 	
-	public Long addRecording(String name, Long duration, String xmlString, Long rooms_id) throws Exception{
+	public Long addRecording(String name, Long duration, String xmlString, Long rooms_id, Users recordedby) throws Exception{
 		Recording recording = new Recording();
 		recording.setDeleted("false");
 		recording.setDuration(duration);
 		recording.setComment("");
+		recording.setRecordedby(recordedby);
 		recording.setName(name);
 		recording.setXmlString(xmlString);
 		recording.setRooms(Roommanagement.getInstance().getRoomById(rooms_id));
@@ -140,6 +142,21 @@ public class Recordingmanagement {
 		}
 		return null;
 	}	
+	
+	public void updateRecording(Recording rec){
+		try {
+			Object idf = HibernateUtil.createSession();
+			Session session = HibernateUtil.getSession();
+			Transaction tx = session.beginTransaction();
+			session.update(rec);
+			tx.commit();
+			HibernateUtil.closeSession(idf);
+		} catch (HibernateException ex) {
+			log.error(ex);
+		} catch (Exception ex2) {
+			log.error(ex2);
+		}
+	}
 	
 	
 }
