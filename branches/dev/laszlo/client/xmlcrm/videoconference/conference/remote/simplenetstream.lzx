@@ -37,7 +37,9 @@
         
         <!--- The pending stream name. 
               @keywords private -->
-        <attribute name="_pendingstreamname" value="" type="string"/>        
+        <attribute name="_pendingstreamname" value="" type="string"/>   
+        
+        <attribute name="mode" value="" type="string"/>       
 
         <!--- Event sent when a cue point occurs,
               whose parameter is a dictionary of metadata. -->
@@ -97,6 +99,7 @@
               playing, stop will set mode to "" and is heavier-weight
               operation. -->
         <method name="stop"><![CDATA[
+        	Debug.write("STOP ",this.mode);
             if (this._flashstream == null) {
                  return;
             }

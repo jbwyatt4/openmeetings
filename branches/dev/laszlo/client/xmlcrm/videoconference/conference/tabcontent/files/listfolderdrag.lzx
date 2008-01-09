@@ -3,7 +3,7 @@
     
 <resource name="folder_yellow_rsc" src="resources/folder.png" />
 	
-<class name="listfolderdrag" extends="text" height="18" width="280" resize="false"
+<class name="listfolderdrag" extends="text" height="18" width="294" resize="false"
     onmouseover="this.setBGColor(0x799FCE)" text="$once{ '     '+this.foldername }" 
     onmouseout="this.setBGColor(white)" bgcolor="white" >
     

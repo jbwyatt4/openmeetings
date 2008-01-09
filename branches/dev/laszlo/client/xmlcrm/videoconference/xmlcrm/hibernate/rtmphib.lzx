@@ -301,7 +301,7 @@
             <handler name="ondata" args="value">
 				<![CDATA[
 					//The onResult-Handler will be called be the rtmpconnection
-					Debug.write("getCurrentModerator: ",value);
+					Debug.write("############   getCurrentModerator: ",value);
 					if (value!=null){
 						canvas.setAttribute('moderatorationObject',value);
 						canvas.setAttribute('moderatorStreamID',value.streamid);
@@ -310,14 +310,15 @@
 						
 					}
 					
-					//Debug.write("throw event to drawarea: ",canvas.moderatorStreamID,canvas.ismoderator);
+					Debug.write("throw event to drawarea: ",canvas.moderatorStreamID,canvas.ismoderator);
 					if (canvas.ismoderator){
 						Debug.write("############## editrecordstream 3");
 						new editrecordstream(canvas.main_content._content.inner,{y:-320});
 					} else if (value==null){
+						Debug.write("############   value IS NULL: ",this.parent.modus);
 						//no moderator availible
-						//check if this is conferncemodus
-						if (this.parent.modus == "confernce"){
+						//check if this is conferencemodus
+						if (this.parent.modus == "conference"){
 							Debug.write("############## editrecordstream 4");
 							new editrecordstream(canvas.main_content._content.inner,{y:-320});
 						} else {
@@ -429,7 +430,7 @@
 				if (parent.modus == "audience"){
 					canvas._videocontainer.clearAllVideoRefernces();
 					if (canvas.ismoderator){
-						//Debug.write("############## editrecordstream 5");
+						Debug.write("############## editrecordstream 5");
 						new editrecordstream(canvas.main_content._content.inner,{y:-320});
 					} else {
 						//Debug.warn("canvas._videocontainer.getClientListScope.doCall");

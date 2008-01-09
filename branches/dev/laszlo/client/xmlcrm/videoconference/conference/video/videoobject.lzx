@@ -80,6 +80,7 @@
     	this.uniqueid = '0';
     	this.setAttribute('chatpartnername','');
     	this.clientVars=null;
+    	this._chatvideoinner._videoview.v_output.stop();
 		this._chatvideoinner._sendInvitation.setAttribute('visible',true);
     </method>
     
