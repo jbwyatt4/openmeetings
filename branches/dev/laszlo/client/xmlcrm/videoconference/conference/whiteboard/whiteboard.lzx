@@ -209,7 +209,7 @@
         if (menuId==1){
             this._paintmenu.setAttribute('visible',true);
             this._painttoolsPalette.setAttribute('visible',true);
-            if (!this.documentmenuIsInited) this._documentmenu.setAttribute('visible',false);
+            if (this.documentmenuIsInited) this._documentmenu.setAttribute('visible',false);
             //this._documenttoolsPalette.setAttribute('visible',false);
             if (bool) this._toolbarTabList.setSelection(this._toolbarTabList.b_paint);
         } else if (menuId==2){
