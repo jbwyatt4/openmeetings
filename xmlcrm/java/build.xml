@@ -2,9 +2,10 @@
 
 	<!-- Sources and output dirs -->
 	<property name="main.src.dir" value="${basedir}/src/app"/>
-	<property name="main.out.dir" value="${basedir}/bin"/>
+	<property name="webstart.src.dir" value="${basedir}/src/screenviewer"/>
+	<property name="templates.src.dir" value="${basedir}/src/templates"/>
 	<property name="test.src.dir" value="${basedir}/src/test"/>
-	<property name="test.out.dir" value="${basedir}/bin"/>
+	<property name="main.out.dir" value="${basedir}/bin"/>
 	
 	<property name="classes.dir" value="${basedir}/bin"/>
 	
@@ -190,15 +191,37 @@
 
 	<!-- Copy any resource or configuration files -->
 	<target name="resources">
-		<copy todir="${main.out.dir}" includeEmptyDirs="no">
+		<copy todir="${main.out.dir}" includeEmptyDirs="yes">
 			<fileset dir="${main.src.dir}">
 				<patternset>
 					<include name="**/*.conf"/>
 					<include name="**/*.properties"/>
 					<include name="**/*.xml"/>
+					<include name="**/*.png"/>
+					<include name="**/*.vm"/>
 					<exclude name="hibernate.properties"/>
 				</patternset>
 			</fileset>
+			<fileset dir="${webstart.src.dir}">
+				<patternset>
+					<include name="**/*.conf"/>
+					<include name="**/*.properties"/>
+					<include name="**/*.xml"/>
+					<include name="**/*.png"/>
+					<include name="**/*.vm"/>
+					<exclude name="hibernate.properties"/>
+				</patternset>
+			</fileset>			
+			<fileset dir="${templates.src.dir}">
+				<patternset>
+					<include name="**/*.conf"/>
+					<include name="**/*.properties"/>
+					<include name="**/*.xml"/>
+					<include name="**/*.png"/>
+					<include name="**/*.vm"/>
+					<exclude name="hibernate.properties"/>
+				</patternset>
+			</fileset>			
 		</copy>
 	</target>
 
@@ -272,13 +295,22 @@
 		<javac srcdir="${main.src.dir}" destdir="${main.out.dir}" >
 			<classpath refid="compile.classpath"/>
 		</javac>
+		<javac srcdir="${webstart.src.dir}" destdir="${main.out.dir}" >
+			<classpath refid="compile.classpath"/>
+		</javac>
+		<javac srcdir="${templates.src.dir}" destdir="${main.out.dir}" >
+			<classpath refid="compile.classpath"/>
+		</javac>
+		<javac srcdir="${test.src.dir}" destdir="${main.out.dir}" >
+			<classpath refid="compile.classpath"/>
+		</javac>		
 	</target>
 
 	<!-- Build of junit tests
 	compiler="org.eclipse.jdt.core.JDTCompilerAdapter"
 	 -->
 	<target name="compileTest" depends="compile">
-		<javac srcdir="${test.src.dir}" destdir="${test.out.dir}" >
+		<javac srcdir="${test.src.dir}" destdir="${main.out.dir}" >
 			<classpath refid="compile.classpath"/>
 		</javac>
 	</target>
