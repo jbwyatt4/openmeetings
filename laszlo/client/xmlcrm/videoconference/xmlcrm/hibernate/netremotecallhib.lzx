@@ -23,7 +23,7 @@
 	</handler>	
 	<method name="doCall">
         if (this.showLoading) canvas._loadingAll.setAttribute('visible',true);
-		//Debug.write("doCall: ",this);
+		//Debug.write("doCall: ",this.funcname);
 		this.call();
 	</method>
 	
