@@ -21,29 +21,53 @@
 	        </handler>	
 	  	</netremotecallhib>   
 	  	
+	  	<netremotecallhib name="deleteRecordedFile" funcname="streamservice.deleteRecordedFile" 
+			remotecontext="$once{ canvas.thishib }" activeErrorHandler="true">   
+			<attribute name="recordedFileToDelete" value="0" type="number" />
+	  		<netparam><method name="getValue">return canvas.sessionId;</method></netparam>
+	  		<netparam><method name="getValue">return parent.recordedFileToDelete;</method></netparam>    
+	        <handler name="ondata" args="value">	
+	            <![CDATA[
+	            	if (value>0){
+	            		parent.getAllRecordingsForUser.doCall();
+	            	}
+	            ]]>	        	          				
+	        </handler>	
+	  	</netremotecallhib>  	  	
+	  	
 	  	<view width="680" height="200" name="inn"
 	  		bgcolor="$once{ canvas.basebgcolorizer }" >
 	  		<view x="1" y="1" width="678" height="198" name="inn" bgcolor="0xFFFFFF" clip="true" >
-	  			<view layout="axis:y;spacing:2" name="inn" width="$once{ parent.width }" datapath="local:classroot.recordingsForUser:/">
+	  			<datapath xpath="local:classroot.recordingsForUser:/"  pooling="true"/>
+	  			<view layout="axis:y;spacing:2" name="inn" width="$once{ parent.width }" >
 	  				<view datapath="item/" height="24" onmouseout="this.setBGColor(0xFFFFFF)" bgcolor="0xFFFFFF"
-	  					  onmouseover="this.setBGColor(canvas.baseMousecolorizer)" width="$once{ parent.width }">
+	  					  onmouseover="this.setBGColor(canvas.baseMousecolorizer)" width="$once{ parent.width-14 }">
 	  					<view resource="_recording_play_rsc" onmouseover="" onmouseout="" 
 	  						  y="1" onclick="parent.ondblclick.sendEvent()" >
 	  						<labeltooltip labelid="409" />
 	  					</view>
 	  					<labeltext x="20" text="$path{ 'name/text()' }" y="2" />
 	  					<labeltext x="260" text="$path{ 'rooms/name/text()' }" y="2" />
+	  					
+	  					<view resource="_recording_delete" onmouseover="" onmouseout="" 
+	  						  y="1" x="$once{ parent.width-24 }" >
+	  						<handler name="onclick">
+	  							var rec = Number(parent.datapath.xpathQuery('recording_id/text()'));
+	  							parent.parent.parent.parent.parent.deleteRecordedFile.recordedFileToDelete = rec;
+	  							parent.parent.parent.parent.parent.deleteRecordedFile.doCall();
+	  						</handler>
+	  						<labeltooltip labelid="432" />
+	  					</view>
 	  					<handler name="ondata">
 	  						<![CDATA[
 		  						var duration = Number(this.datapath.xpathQuery('duration/text()'));
 		  						var seconds = Math.round(duration/1000);
 		  						var minutes = Math.floor(seconds/60);
 		  						var deltaSeconds = seconds-(minutes*60);
-		  						var dateStr = this.datapath.xpathQuery('starttime/text()');
-		  						Debug.write("dateStr: ",dateStr,this);
-		  						if (minutes<10) minutes = "0"+minutes;
-		  						if (deltaSeconds<10) deltaSeconds = "0"+deltaSeconds;
-		  						this._text.text = canvas.getLabelName(411)+dateStr+canvas.getLabelName(410)+minutes+":"+deltaSeconds+" ";
+		  						var dateStr = this.datapath.xpathQuery('starttimeAsString/text()');
+		  						var recordedby = this.datapath.xpathQuery('recordedby/login/text()');
+		  						if (recordedby==null) recordedby=canvas.getLabelName(433);
+		  						this._text.text = canvas.getLabelName(411)+dateStr+canvas.getLabelName(410)+minutes+":"+deltaSeconds+" "+canvas.getLabelName(434)+""+recordedby;
 	  						]]>
 	  					</handler>
 	  					<handler name="ondblclick">
