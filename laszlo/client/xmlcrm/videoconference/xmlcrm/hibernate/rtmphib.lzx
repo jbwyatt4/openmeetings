@@ -596,16 +596,16 @@
 	<netremotecallhib name="stopedRecording" funcname="stopedRecording" >      
     	<handler name="ondata" args="value">
     		Debug.write("stopedRecording: ",value);
-    		canvas._mymod.parent.recordingUser = null;
-    		canvas._mymod.parent.setMessage();
+    		canvas._mymod.recordingUser = null;
+    		canvas._mymod.setMessage();
     	</handler>
     </netremotecallhib>
     
 	<netremotecallhib name="startedRecording" funcname="startedRecording" >      
     	<handler name="ondata" args="value">
     		Debug.write("startedRecording: ",value);
-    		canvas._mymod.parent.recordingUser = value;
-    		canvas._mymod.parent.setMessage();
+    		canvas._mymod.recordingUser = value;
+    		canvas._mymod.setMessage();
     	</handler>
     </netremotecallhib>
     
