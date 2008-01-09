@@ -20,7 +20,7 @@ public class RoomClient {
 	
 	Date roomEnter = null;
 	
-	String user_id = "";
+	Long user_id = null;
 	String firstname = "";
 	String lastname = "";
 	String mail;
@@ -41,7 +41,7 @@ public class RoomClient {
 		super();
 	}
 	
-	public void setUserObject(String user_id, String username, String firstname, String lastname) {
+	public void setUserObject(Long user_id, String username, String firstname, String lastname) {
 		this.user_id = user_id;
 		this.username = username;
 		this.firstname = firstname;
@@ -265,16 +265,12 @@ public class RoomClient {
 	public void setPicture_uri(String picture_uri) {
 		this.picture_uri = picture_uri;
 	}
-	/**
-	 * @return the user_id
-	 */
-	public String getUser_id() {
+
+	public Long getUser_id() {
 		return user_id;
 	}
-	/**
-	 * @param user_id the user_id to set
-	 */
-	public void setUser_id(String user_id) {
+
+	public void setUser_id(Long user_id) {
 		this.user_id = user_id;
 	}
 

@@ -8,6 +8,8 @@ import java.util.Iterator;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import org.red5.server.api.IConnection;
+import org.red5.server.api.Red5;
 import org.xmlcrm.app.hibernate.beans.basic.Configuration;
 import org.xmlcrm.app.hibernate.beans.basic.Sessiondata;
 
@@ -110,7 +112,9 @@ public class MainService {
      */
     public Object loginUser(String SID, String Username, String Userpass){
     	log.error("loginUser 111: "+SID+" "+Username+" "+Userpass);
-        return Usermanagement.getInstance().loginUser(SID,Username,Userpass);
+    	IConnection current = Red5.getConnectionLocal();
+    	RoomClient currentClient = Application.getClientList().get(current.getClient().getId());
+        return Usermanagement.getInstance().loginUser(SID,Username,Userpass, currentClient);
     } 
     
     /**

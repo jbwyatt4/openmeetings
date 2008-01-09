@@ -40,6 +40,7 @@ import org.xmlcrm.app.hibernate.beans.rooms.Rooms;
 import org.xmlcrm.app.hibernate.beans.rooms.Rooms_Organisation;
 import org.xmlcrm.app.hibernate.beans.recording.Recording;
 import org.xmlcrm.app.data.record.Recordingmanagement;
+import org.xmlcrm.utils.math.Calender;
 
 /**
  * 
@@ -167,6 +168,13 @@ public class StreamService implements IPendingServiceCallback {
 			roomRecording.put("enduser", currentClient);
 			roomRecording.put("recordname", newRecordFileName);
 			
+			RoomClient startedClient = (RoomClient) roomRecording.get("startedby");
+			Long recordedby = startedClient.getUser_id();
+			Users us = null;
+			if (recordedby!=null && recordedby>0){
+				us = Usermanagement.getInstance().getUser(recordedby);
+			}
+			
 			XStream xStream = new XStream(new XppDriver());
 			xStream.setMode(XStream.NO_REFERENCES);
 			String xmlString = xStream.toXML(roomRecording);
@@ -174,7 +182,7 @@ public class StreamService implements IPendingServiceCallback {
 			log.error(xmlString);
 			
 			//make persistent
-			Long recording_id = Recordingmanagement.getInstance().addRecording(newRecordFileName, duration, "", rooms_id);
+			Long recording_id = Recordingmanagement.getInstance().addRecording(newRecordFileName, duration, "", rooms_id, us);
 			
 			//save XML to Disk
 			IScope scope = Red5.getConnectionLocal().getScope().getParent();
@@ -279,7 +287,14 @@ public class StreamService implements IPendingServiceCallback {
 					
 				}
 				if (whereClause.length()!=0) whereClause += ") AND ";
-				return Recordingmanagement.getInstance().getRecordingsByWhereClause(whereClause);
+				List<Recording> rList = Recordingmanagement.getInstance().getRecordingsByWhereClause(whereClause);
+				
+				for (Iterator<Recording> iter = rList.iterator();iter.hasNext();) {
+					Recording rec = iter.next();
+					rec.setStarttimeAsString(Calender.getDateWithTimeByMiliSeconds(rec.getStarttime()));
+				}
+				
+				return rList;
 	        }
 
 			
@@ -491,6 +506,24 @@ public class StreamService implements IPendingServiceCallback {
 	public void resultReceived(IPendingServiceCall arg0) {
 		// TODO Auto-generated method stub
 		log.error("resultReceived"+arg0);
+	}
+	
+	public Long deleteRecordedFile(String SID, Long recording_id){
+		try {
+	    	Long users_id = Sessionmanagement.getInstance().checkSession(SID);
+	    	Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
+	    	if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)){
+	    		Recording rec = Recordingmanagement.getInstance().getRecordingById(recording_id);
+	    		if (rec!=null) {
+	    			rec.setDeleted("true");
+	    			Recordingmanagement.getInstance().updateRecording(rec);
+	    			return new Long(recording_id);
+	    		}
+	    	}
+		} catch (Exception err) {
+			log.error("[deleteRecordedFile]",err);
+		}
+		return new Long(-1);
 	}
 	
 }

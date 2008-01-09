@@ -20,6 +20,7 @@ import org.xmlcrm.app.hibernate.beans.adresses.Adresses_Emails;
 import org.xmlcrm.app.hibernate.beans.adresses.Emails;
 import org.xmlcrm.app.hibernate.utils.HibernateUtil;
 import org.xmlcrm.app.templates.ResetPasswordTemplate;
+import org.xmlcrm.app.conference.videobeans.RoomClient;
 import org.xmlcrm.app.data.basic.AuthLevelmanagement;
 import org.xmlcrm.app.data.basic.Configurationmanagement;
 import org.xmlcrm.app.data.beans.basic.SearchResult;
@@ -212,7 +213,7 @@ public class Usermanagement {
 	 * @param Userpass
 	 * @return
 	 */
-	public Object loginUser(String SID, String Username, String Userpass) {
+	public Object loginUser(String SID, String Username, String Userpass, RoomClient currentClient) {
 		try {
 			Object idf = HibernateUtil.createSession();
 			Session session = HibernateUtil.getSession();
@@ -239,6 +240,7 @@ public class Usermanagement {
 					Sessionmanagement.getInstance().updateUser(SID, users.getUser_id());
 					users.setUserlevel(getUserLevel(users.getLevel_id()));		
 					updateLastLogin(users);
+					currentClient.setUser_id(users.getUser_id());
 					return users;
 				} else {
 					return new Long(-11);
