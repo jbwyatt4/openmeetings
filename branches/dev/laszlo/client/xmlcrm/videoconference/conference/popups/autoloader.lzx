@@ -61,7 +61,7 @@
     	<attribute name="start" value="0" type="number" />
     	<attribute name="step" value="100" type="number" /> 
     	<attribute name="max" value="600" type="number" />    
-        <netparam><method name="getValue">return parent.parent.userlang;</method></netparam> 
+        <netparam><method name="getValue">return canvas.thishib.userlang;</method></netparam> 
         <netparam><method name="getValue">return parent.start;</method></netparam> 
         <netparam><method name="getValue">return parent.step;</method></netparam> 
         <handler name="ondata" args="value">
