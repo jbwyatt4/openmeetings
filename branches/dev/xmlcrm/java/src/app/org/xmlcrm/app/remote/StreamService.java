@@ -268,7 +268,7 @@ public class StreamService implements IPendingServiceCallback {
 					Organisation_Users orgUser = iter.next();
 					Long organisation_id = orgUser.getOrganisation().getOrganisation_id();
 					
-					List<Rooms_Organisation> rOrgList = Roommanagement.getInstance().getRoomsOrganisationByOrganisationId(user_level, organisation_id);
+					List<Rooms_Organisation> rOrgList = Roommanagement.getInstance().getRoomsOrganisationByOrganisationId(3, organisation_id);
 					for (Iterator<Rooms_Organisation> iterOrgList = rOrgList.iterator();iterOrgList.hasNext();){
 						Rooms_Organisation rOrg = iterOrgList.next();
 		        		if (i==0) whereClause += " (";
