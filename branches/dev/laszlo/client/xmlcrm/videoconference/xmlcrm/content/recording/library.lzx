@@ -11,5 +11,6 @@
     <include href="recordingsavewin.lzx" />
     <include href="record.lzx" />
     <include href="recordingsviewer.lzx" />
+    <include href="recordingstartwin.lzx" />
 
 </library>

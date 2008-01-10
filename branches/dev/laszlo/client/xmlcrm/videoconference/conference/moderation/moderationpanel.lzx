@@ -76,24 +76,20 @@
 	
     <simplelabelbutton name="stp_btn" width="30" height="24" y="2" visibility="hidden">
     	<handler name="onclick">
-    		new recordingsavewin(canvas.main_content._content.inner,{recordingsName:parent.recordingsName});
+    		parent.stopRecordMeetingStream.doCall();
     	</handler>    	
 		<view resource="stop_recording_conf" x="7" y="4" />
 		<labeltooltip labelid="416" />
 	</simplelabelbutton>    	
-		
-  	<netremotecallhib name="recordMeetingStream" funcname="streamservice.recordMeetingStream" 
-  					  remotecontext="$once{ canvas.thishib }" >  
-  		<netparam><method name="getValue">return canvas.thishib.modus;</method></netparam>
-  		<netparam><method name="getValue">return _drawarea.baseactionobjectList;</method></netparam> 
-    	<handler name="ondata" args="value">
+	
+  	<netremotecallhib name="stopRecordMeetingStream" remotecontext="$once{ canvas.thishib }"
+		funcname="streamservice.stopRecordMeetingStream"  >
+  		<netparam><method name="getValue">return parent.parent.recordingsName;</method></netparam>
+		<handler name="ondata" args="value">
 			//The onResult-Handler will be called be the rtmpconnection
-			Debug.write("+++++++++++++++++ recordShow: ",value);		
-			parent.recordingsName = value;
-			parent.sta_btn.setAttribute('visibility','hidden');
-			parent.stp_btn.setAttribute('visibility','visible');			
+			Debug.write("+++++++++++++++++ stopRecordingShow: ",value);	
 		</handler>	
-  	</netremotecallhib>
+  	</netremotecallhib>  	
   	
   	<netremotecallhib name="checkForRecording" funcname="streamservice.checkForRecording" 
   					  remotecontext="$once{ canvas.thishib }" >  
@@ -104,7 +100,7 @@
 			if (parent.initial){
 				parent.initial = false;
 			} else if (value==null) {
-				this.parent.recordMeetingStream.doCall();
+				new recordingstartwin(canvas.main_content._content.inner,{modpanel:parent});
 			} else {
 				new errorpopupuserinfo(canvas,{error:canvas.getLabelName(418),user:value});
 			}

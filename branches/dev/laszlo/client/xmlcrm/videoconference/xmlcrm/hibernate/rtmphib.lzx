@@ -78,6 +78,7 @@
         if (this.reconnectionAction){
         	this.reconnectObjRef.reconnectSuccess();
         	this.reconnectionAction = false;
+        	this.setUsernameReconnect.doCall();
         } else if (this.reconnectAfterRoomleft) {
             //Return to content after reconnect
             canvas.thishib.reconnectedRoomInstance.destroy();
@@ -147,7 +148,7 @@
             <netparam><method name="getValue">return parent.parent.currentdomain;</method></netparam>
             <handler name="ondata" args="value">
                 //The onResult-Handler will be called be the rtmpconnection
-                //Debug.write("setUsername: ",value);                    
+                Debug.write("setUsername: ",value);                    
             </handler>  
         </netremotecallhib>    
     
