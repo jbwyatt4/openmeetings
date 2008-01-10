@@ -174,7 +174,7 @@ public class Usermanagement {
 				tx.commit();
 				HibernateUtil.closeSession(idf);
 				return users;
-				// TODO: Einbinden der Benutzergruppen
+				// TODO: Add Usergroups to user
 				// users.setUsergroups(ResHandler.getGroupmanagement().getUserGroups(user_id));
 			} catch (HibernateException ex) {
 				log.error(ex);
