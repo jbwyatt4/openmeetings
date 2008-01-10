@@ -17,5 +17,12 @@
 	<resizestate name="rs" height="20" />
 </class>
 
+<class name="turnoverlistheaderitemsimple" extends="simplelabelbutton" >
+	<attribute name="asc" value="true" type="boolean" />
+	<attribute name="pathOrder" value="" type="string" />
+	<handler name="onclick">
+		parent.setNewSortOrder(this.pathOrder,this);
+	</handler>
+</class>
 
 </library>
