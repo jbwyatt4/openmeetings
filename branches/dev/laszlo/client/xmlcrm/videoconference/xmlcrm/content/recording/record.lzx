@@ -34,40 +34,60 @@
 	            ]]>	        	          				
 	        </handler>	
 	  	</netremotecallhib>  	  	
-	  	
-	  	<view width="680" height="200" name="inn"
-	  		bgcolor="$once{ canvas.basebgcolorizer }" >
-	  		<view x="1" y="1" width="678" height="198" name="inn" bgcolor="0xFFFFFF" clip="true" >
-	  			<datapath xpath="local:classroot.recordingsForUser:/"  pooling="true"/>
+	  	<view name="_head" layout="axis:x;" x="1" >
+  			<method name="setNewSortOrder" args="path,obj">
+  				<![CDATA[
+  					if (obj.asc) {
+  						parent.inn.inn.inn.inn.datapath.setOrder(path,ascendent);
+  					} else {
+  						parent.inn.inn.inn.inn.datapath.setOrder(path,descendent);
+  					}
+  					obj.asc=!obj.asc;
+  					parent.inn.inn._dPath.updateData();
+  				]]>
+  			</method>	  
+	        <method name="descendent" args="a,b">
+                <![CDATA[
+					if(a == b) return 0;
+					else if(a > b) return 1;
+					else return -1;
+                ]]>
+            </method>
+            <method name="ascendent" args="a,b">
+                <![CDATA[
+					if(a == b) return 0;
+					else if(a < b) return 1;
+					else return -1;
+                ]]>
+            </method>
+	  		<turnoverlistheaderitemsimple width="20" />
+	  		<turnoverlistheaderitemsimple name="recname" labelid="435" width="350" pathOrder="name/text()" />
+	  		<turnoverlistheaderitemsimple name="roomname" labelid="436" width="200" pathOrder="rooms/name/text()" />
+	  		<turnoverlistheaderitemsimple name="dateasstring" labelid="437" width="150" pathOrder="starttimeAsString/text()" />
+	  		<turnoverlistheaderitemsimple width="41" />
+	  	</view>
+	  	<view width="762" height="200" name="inn"
+	  		bgcolor="$once{ canvas.basebgcolorizer }" y="20" >
+	  		
+	  		<view x="1" y="1" width="760" height="198" name="inn" bgcolor="0xFFFFFF" clip="true" >
+	  			<datapath name="_dPath" xpath="local:classroot.recordingsForUser:/"  pooling="true"/>
 	  			<view layout="axis:y;spacing:2" name="inn" width="$once{ parent.width }" >
-	  				<view datapath="item/" height="24" onmouseout="this.setBGColor(0xFFFFFF)" bgcolor="0xFFFFFF"
+	  				
+	  				<view datapath="item/" name="inn" height="24" onmouseout="this.setBGColor(0xFFFFFF)" bgcolor="0xFFFFFF"
 	  					  onmouseover="this.setBGColor(canvas.baseMousecolorizer)" width="$once{ parent.width-14 }">
-	  					<view resource="_recording_play_rsc" onmouseover="" onmouseout="" 
-	  						  y="1" onclick="parent.ondblclick.sendEvent()" >
-	  						<labeltooltip labelid="409" />
-	  					</view>
-	  					<labeltext x="20" text="$path{ 'name/text()' }" y="2" />
-	  					<labeltext x="260" text="$path{ 'rooms/name/text()' }" y="2" />
 	  					
-	  					<view resource="_recording_delete" onmouseover="" onmouseout="" 
-	  						  y="1" x="$once{ parent.width-24 }" >
-	  						<handler name="onclick">
-	  							var rec = Number(parent.datapath.xpathQuery('recording_id/text()'));
-	  							parent.parent.parent.parent.parent.deleteRecordedFile.recordedFileToDelete = rec;
-	  							parent.parent.parent.parent.parent.deleteRecordedFile.doCall();
-	  						</handler>
-	  						<labeltooltip labelid="432" />
-	  					</view>
 	  					<handler name="ondata">
 	  						<![CDATA[
 		  						var duration = Number(this.datapath.xpathQuery('duration/text()'));
 		  						var seconds = Math.round(duration/1000);
 		  						var minutes = Math.floor(seconds/60);
 		  						var deltaSeconds = seconds-(minutes*60);
+		  						if (minutes<10) minutes="0"+minutes;
+		  						if (deltaSeconds<10) deltaSeconds="0"+deltaSeconds;
 		  						var dateStr = this.datapath.xpathQuery('starttimeAsString/text()');
 		  						var recordedby = this.datapath.xpathQuery('recordedby/login/text()');
 		  						if (recordedby==null) recordedby=canvas.getLabelName(433);
-		  						this._text.text = canvas.getLabelName(411)+dateStr+canvas.getLabelName(410)+minutes+":"+deltaSeconds+" "+canvas.getLabelName(434)+""+recordedby;
+		  						this._text.text = canvas.getLabelName(411)+dateStr+" "+canvas.getLabelName(410)+minutes+":"+deltaSeconds+" "+canvas.getLabelName(434)+""+recordedby;
 	  						]]>
 	  					</handler>
 	  					<handler name="ondblclick">
@@ -75,11 +95,31 @@
 	  						Debug.write("canvas.currentrecorder_id: ",canvas.currentrecorder_id);
 	  						quicklinkAct('recordingsviewer');
 	  					</handler>	
-	  					<labeltooltip name="_text" />  					
+	  					
+	  					<view resource="_recording_play_rsc" onmouseover="" onmouseout="" 
+	  						  y="1" onclick="parent.ondblclick.sendEvent()" >
+	  						<labeltooltip labelid="409" />
+	  					</view>
+	  					<labeltext x="20" text="$path{ 'name/text()' }" y="2" width="350" resize="false" />
+	  					<labeltext x="370" text="$path{ 'rooms/name/text()' }" y="2" width="200" resize="false" />
+	  					<labeltext x="570" text="$path{ 'starttimeAsString/text()' }" y="2" width="150" resize="false" />
+	  					<view resource="_recording_delete" onmouseover="" onmouseout="" 
+	  						  y="1" x="720" >
+	  						<handler name="onclick">
+	  							var rec = Number(parent.datapath.xpathQuery('recording_id/text()'));
+	  							parent.parent.parent.parent.parent.deleteRecordedFile.recordedFileToDelete = rec;
+	  							parent.parent.parent.parent.parent.deleteRecordedFile.doCall();
+	  						</handler>
+	  						<labeltooltip labelid="432" />
+	  					</view>
+	  					<labeltooltip name="_text" />  		
+	  								
 	  				</view>
+	  				
 	  			</view>
 	  			<vscrollbar />
 	  		</view>
+	  		
 	  	</view>
 	</view>
     
