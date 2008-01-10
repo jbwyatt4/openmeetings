@@ -88,6 +88,29 @@ public class ChatService implements IPendingServiceCallback {
 		return 1;
 	}
 	
+	public List<HashMap<String,Object>> clearChat() {
+		try {
+			IConnection current = Red5.getConnectionLocal();
+			RoomClient currentClient = Application.getClientList().get(current.getClient().getId());
+			String roomname = currentClient.getUserroom();
+			String orgdomain = currentClient.getDomain();
+			
+			String chatroom = "_"+roomname+"_"+orgdomain;
+			System.out.println("GET CHATROOM: "+chatroom);
+			
+			List<HashMap<String,Object>> myChatList = myChats.get(chatroom);
+			myChatList = new LinkedList<HashMap<String,Object>>();
+			
+			myChats.put(chatroom,myChatList);
+			
+			return myChatList;
+			
+		} catch (Exception err) {
+			log.error("[clearChat] ",err);
+			return null;
+		}
+	}
+	
 	public List<HashMap<String,Object>> getRoomChatHistory() {
 		try {
 			IConnection current = Red5.getConnectionLocal();
