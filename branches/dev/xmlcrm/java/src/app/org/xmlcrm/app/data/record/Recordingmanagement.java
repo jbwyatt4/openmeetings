@@ -29,11 +29,11 @@ public class Recordingmanagement {
 		return instance;
 	}
 	
-	public Long addRecording(String name, Long duration, String xmlString, Long rooms_id, Users recordedby) throws Exception{
+	public Long addRecording(String name, Long duration, String xmlString, Long rooms_id, Users recordedby, String  comment) throws Exception{
 		Recording recording = new Recording();
 		recording.setDeleted("false");
 		recording.setDuration(duration);
-		recording.setComment("");
+		recording.setComment(comment);
 		recording.setRecordedby(recordedby);
 		recording.setName(name);
 		recording.setXmlString(xmlString);

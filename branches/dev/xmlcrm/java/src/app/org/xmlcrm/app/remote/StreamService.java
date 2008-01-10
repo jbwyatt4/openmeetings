@@ -34,13 +34,10 @@ import org.xmlcrm.utils.math.Calender;
 import org.xmlcrm.app.hibernate.beans.user.Users;
 import org.xmlcrm.app.hibernate.beans.domain.Organisation_Users;
 import org.xmlcrm.app.data.conference.Roommanagement;
-import org.xmlcrm.app.documents.CreateLibraryPresentation;
-import org.xmlcrm.app.documents.LoadLibraryPresentation;
 import org.xmlcrm.app.hibernate.beans.rooms.Rooms;
 import org.xmlcrm.app.hibernate.beans.rooms.Rooms_Organisation;
 import org.xmlcrm.app.hibernate.beans.recording.Recording;
 import org.xmlcrm.app.data.record.Recordingmanagement;
-import org.xmlcrm.utils.math.Calender;
 
 /**
  * 
@@ -57,19 +54,21 @@ public class StreamService implements IPendingServiceCallback {
 	
 	private static LinkedHashMap<String,LinkedHashMap<String,Object>> roomRecordingList = new LinkedHashMap<String,LinkedHashMap<String,Object>>();
 	
-	public String recordMeetingStream(String conferenceType, Object initwhiteboardvars){
+	public String recordMeetingStream(String conferenceType, Object initwhiteboardvars, String roomRecordingsTableString, String comment){
 		try {
 			IConnection current = Red5.getConnectionLocal();
 			RoomClient currentClient = Application.getClientList().get(current.getClient().getId());
 			String roomname = currentClient.getUserroom();
 			String orgdomain = currentClient.getDomain();
-			String recordingName = this.generateFileName(currentClient.getStreamid());
+			String recordingName = generateFileName(currentClient.getStreamid());
 			currentClient.setIsRecording(true);
 			currentClient.setRoomRecordingName(recordingName);
 			Application.getClientList().put(current.getClient().getId(), currentClient);
 			
 			LinkedHashMap<String,Object> roomRecording = new LinkedHashMap<String,Object>();
 			roomRecording.put("conferenceType", conferenceType);
+			roomRecording.put("roomRecordingsTableString", roomRecordingsTableString);
+			roomRecording.put("comment", comment);
 			List<LinkedHashMap<String,Object>> roomStreams = new LinkedList<LinkedHashMap<String,Object>>();
 			
 			//get all stream and start recording them
@@ -87,10 +86,10 @@ public class StreamService implements IPendingServiceCallback {
 						if (!conferenceType.equals("audience") || rcl.getIsMod()){
 							LinkedHashMap<String,Object> roomStream = new LinkedHashMap<String,Object>();
 							
-							String streamName = this.generateFileName(rcl.getStreamid());
+							String streamName = generateFileName(rcl.getStreamid());
 							String remoteAdress = conn.getRemoteAddress();
 							
-							this.recordShow(conn, rcl.getStreamid(), streamName);
+							recordShow(conn, rcl.getStreamid(), streamName);
 							
 							roomStream.put("streamName", streamName);
 							roomStream.put("remoteAdress", remoteAdress);
@@ -127,20 +126,15 @@ public class StreamService implements IPendingServiceCallback {
 		return null;
 	}
 	
-	public Long stopRecordMeetingStream(String recordingName, String newRecordFileName, String comment){
+	public Long stopRecordMeetingStream(String recordingName){
 		try {
-			log.error("stopRecordMeetingStream");
-			
 			IConnection current = Red5.getConnectionLocal();
 			RoomClient currentClient = Application.getClientList().get(current.getClient().getId());
-			Long rooms_id = currentClient.getRoom_id();
+
+			LinkedHashMap<String,Object> roomRecording = roomRecordingList.get(recordingName);
 			String roomname = currentClient.getUserroom();
 			String orgdomain = currentClient.getDomain();	
-			currentClient.setIsRecording(false);
-			currentClient.setRoomRecordingName("");
-			Application.getClientList().put(current.getClient().getId(), currentClient);
-			
-			LinkedHashMap<String,Object> roomRecording = roomRecordingList.get(recordingName);
+
 			String conferenceType = (String) roomRecording.get("conferenceType");
 			
 			//get all stream and stop recording them
@@ -155,11 +149,51 @@ public class StreamService implements IPendingServiceCallback {
 					if(roomname.equals(rcl.getUserroom()) && orgdomain.equals(rcl.getDomain())){
 						((IServiceCapableConnection) conn).invoke("stopedRecording",new Object[] { currentClient }, this);
 						if (!conferenceType.equals("audience") || rcl.getIsMod()){
-							this.stopRecordingShow(conn,rcl.getStreamid());
+							stopRecordingShow(conn,rcl.getStreamid());
 						}
 					}
 				}
-			}	
+			}
+			return stopRecordAndSave(current, recordingName, currentClient);
+		} catch (Exception err) {
+			log.error("[stopRecordAndSave]",err);
+		}
+		return new Long(-1);
+	}
+	
+	public static Long stopRecordAndSave(IConnection current, String recordingName, RoomClient currentClient){
+		try {
+			log.error("stopRecordMeetingStream");
+			LinkedHashMap<String,Object> roomRecording = roomRecordingList.get(recordingName);
+			
+			String roomname = currentClient.getUserroom();
+			String orgdomain = currentClient.getDomain();	
+			currentClient.setIsRecording(false);
+			currentClient.setRoomRecordingName("");
+			Application.getClientList().put(current.getClient().getId(), currentClient);
+			
+			
+			String conferenceType = (String) roomRecording.get("conferenceType");
+			
+			//get all stream and stop recording them
+			//Todo: Check that nobody does Recording at the same time Issue 253
+			Iterator<IConnection> it = current.getScope().getConnections();
+			while (it.hasNext()) {
+				IConnection conn = it.next();
+				if (conn instanceof IServiceCapableConnection) {
+					RoomClient rcl = Application.getClientList().get(conn.getClient().getId());
+					log.error("is this users still alive? :"+rcl);
+					//Check if the Client is in the same room and same domain 
+					if(roomname.equals(rcl.getUserroom()) && orgdomain.equals(rcl.getDomain())){
+						if (!conferenceType.equals("audience") || rcl.getIsMod()){
+							stopRecordingShow(conn,rcl.getStreamid());
+						}
+					}
+				}
+			}				
+			
+			String newRecordFileName = (String) roomRecording.get("roomRecordingsTableString");
+			String comment = (String) roomRecording.get("comment");
 			
 			Date starttime = (Date) roomRecording.get("starttime");
 			Date endtime =  new java.util.Date();
@@ -182,17 +216,17 @@ public class StreamService implements IPendingServiceCallback {
 			log.error(xmlString);
 			
 			//make persistent
-			Long recording_id = Recordingmanagement.getInstance().addRecording(newRecordFileName, duration, "", rooms_id, us);
+			Long recording_id = Recordingmanagement.getInstance().addRecording(newRecordFileName, duration, "", currentClient.getRoom_id(), us, comment);
 			
 			//save XML to Disk
 			IScope scope = Red5.getConnectionLocal().getScope().getParent();
 			String current_dir = scope.getResource("upload/").getFile().getAbsolutePath();
 			//System.out.println(current_dir  + File.separatorChar + this.folderForRecordings);
-			File f = new File(current_dir  + File.separatorChar + this.folderForRecordings);
+			File f = new File(current_dir  + File.separatorChar + folderForRecordings);
 			if (!f.exists()){
 				f.mkdir();
 			}
-			String fileName = f.getAbsolutePath() + File.separatorChar + this.fileNameXML+recording_id+".xml";
+			String fileName = f.getAbsolutePath() + File.separatorChar + fileNameXML+recording_id+".xml";
 			//System.out.println("fileName"+fileName);
 			PrintWriter pw = new PrintWriter(new FileWriter(fileName));
 		    pw.println(xmlString);
@@ -203,7 +237,7 @@ public class StreamService implements IPendingServiceCallback {
 			
 			return recording_id;
 		} catch (Exception err) {
-			log.error("[stopRecordMeetingStream]",err);
+			log.error("[stopRecordAndSave]",err);
 		}
 		return new Long(-1);
 	}	
@@ -319,11 +353,11 @@ public class StreamService implements IPendingServiceCallback {
 				IScope scope = Red5.getConnectionLocal().getScope().getParent();
 				String current_dir = scope.getResource("upload/").getFile().getAbsolutePath();
 				//System.out.println(current_dir  + File.separatorChar + this.folderForRecordings);
-				File f = new File(current_dir + File.separatorChar + this.folderForRecordings);
+				File f = new File(current_dir + File.separatorChar + folderForRecordings);
 				if (!f.exists()){
 					f.mkdir();
 				}
-				String fileName = f.getAbsolutePath() + File.separatorChar + this.fileNameXML+recording_id+".xml";
+				String fileName = f.getAbsolutePath() + File.separatorChar + fileNameXML+recording_id+".xml";
 				//System.out.println("fileName"+fileName);
 				BufferedReader reader = new BufferedReader(new FileReader(fileName));
 			    String xmlString = "";
@@ -447,7 +481,7 @@ public class StreamService implements IPendingServiceCallback {
 					if(roomname.equals(rcl.getUserroom()) && orgdomain.equals(rcl.getDomain())){
 						((IServiceCapableConnection) conn).invoke("stopedRecording",new Object[] { currentClient }, this);
 						if (!conferenceType.equals("audience") || rcl.getIsMod()){
-							this.stopRecordingShow(conn,rcl.getStreamid());
+							stopRecordingShow(conn,rcl.getStreamid());
 						}
 					}
 				}
@@ -460,14 +494,6 @@ public class StreamService implements IPendingServiceCallback {
 			log.error("[cancelRecording]",err);
 		}
 		return new Long(-1);
-	}
-	
-	public static void cancelRecording(String roomrecordingName){
-		try {
-			roomRecordingList.remove(roomrecordingName);
-		} catch (Exception err) {
-			log.error("[cancelRecording]",err);
-		}
 	}
 	
 	public RoomClient checkForRecording(){

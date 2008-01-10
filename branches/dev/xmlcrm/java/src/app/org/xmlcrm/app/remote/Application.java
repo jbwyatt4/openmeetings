@@ -203,8 +203,13 @@ public class Application extends ApplicationAdapter implements
 
 			log.error("removing USername "+currentClient.getUsername()+" "+currentClient.getConnectedSince()+" streamid: "+currentClient.getStreamid());
 			
-			//stop any recordings
-			if (currentClient.getIsRecording()) StreamService.cancelRecording(currentClient.getRoomRecordingName());
+			//stop and save any recordings
+			if (currentClient.getIsRecording()) {
+				StreamService.stopRecordAndSave(current, currentClient.getRoomRecordingName(), currentClient);
+				
+				//set to true and overwrite the default one cause otherwise no notification is send
+				currentClient.setIsRecording(true);
+			}
 
 			this.disconnectUser(currentClient);
 			//If this Room is empty clear the Room Poll List
@@ -253,10 +258,14 @@ public class Application extends ApplicationAdapter implements
 			RoomClient currentClient = ClientList.get(current.getClient().getId());
 			String roomname = currentClient.getUserroom();
 			String orgdomain = currentClient.getDomain();	
-			//stop any recordings if this user is recording
+			
+			//stop and save any recordings if this user is recording
 			if (currentClient.getIsRecording()) {
-				StreamService.cancelRecording(currentClient.getRoomRecordingName());
-			}
+				StreamService.stopRecordAndSave(current, currentClient.getRoomRecordingName(), currentClient);
+				
+				//set to true and overwrite the default one cause otherwise no notification is send
+				currentClient.setIsRecording(true);
+			}			
 			
 			log.error("##### logicalRoomLeave :. " + currentClient.getStreamid()); // just a unique number
 			
