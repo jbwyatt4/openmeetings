@@ -19,7 +19,7 @@
 
 	<handler name="onnew">
 		this.configuration_id=0;
-		this.comment.setText('');
+		this.comment.setAttribute('text','');
 		this.conf_key.setText('');
 		this.conf_value.setText('');
 		this.updatetime.setText('');
@@ -46,7 +46,7 @@
     	<![CDATA[
             //Debug.write("initFields: ",obj);
             this.confobj = obj;
-			this.comment.setText(obj.comment);
+			this.comment.setAttribute('text',obj.comment);
 			this.conf_key.setText(obj.conf_key);
 			this.conf_value.setText(obj.conf_value);
 			this.updatetime.setText(obj.updatetime);

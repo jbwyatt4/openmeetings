@@ -7,7 +7,7 @@
 <class name="chattab" extends="simplebasetabpane" >
 
 	<view name="_chartoutputborder" height="${ parent.height-30 }"
-        bgcolor="$once{ canvas.basebgcolorizer }" width="254">
+        bgcolor="$once{ canvas.basebgcolorizer }" width="260">
 		
 		<chatoutput name="_chatoutput" x="1" y="1" >
 			<handler name="oninit">
