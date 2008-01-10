@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <canvas debug="false" width="100%" height="100%" >
-    
+
 <!-- these properties will be overwritten by config.xml
     
      -->  
@@ -161,7 +161,7 @@ of the red5-servlet
 
 <!-- Username of current user -->
 <attribute name="currentusename" value="defaultname" type="string" />
-<attribute name="user_id" value="0" type="string" />
+<attribute name="user_id" value="0" type="number" />
 <attribute name="firstName" value="" type="string" />
 <attribute name="lastName" value="" type="string" />
 <attribute name="mail" value="" type="string" />
@@ -321,11 +321,15 @@ and some more references to temp-objects
         <view name="inner" />
         
         <method name="clearAll">
-            Debug.write("clearAll this.inner: ",this.inner,this.inner.subviews.length);
-            for (var eg in this.inner.subviews){
-                Debug.write("clearAll this.inner.subviews: ",this.inner.subviews[eg]);
-                return this.inner.subviews[eg].close();                
-            }
+        	<![CDATA[
+	            Debug.write("clearAll this.inner: ",this.inner,this.inner.subviews.length);
+	            var baseContent = this.inner.subviews[0].close();
+	            for (var eg in this.inner.subviews) {
+	                Debug.write("clearAll this.inner.subviews: ",this.inner.subviews[eg]);
+	                if (eg!=0) this.inner.subviews[eg].close();               
+	            }
+	            return baseContent;
+            ]]>
         </method>
     </view>
     <vscrollbar />
