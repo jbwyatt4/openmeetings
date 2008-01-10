@@ -34,6 +34,26 @@ http://openmeetings.googlecode.com/svn/branches/dev/xmlcrm/java/
 there is now a directory dist, inside of that directory there is a compiled red5-webapp.
 You have to copy the Laszlo-Client from the Step-By-Step scenario into it.
 
+== Small howto to deploy/run the Sources == 
+Comment by kunthar,  Today (20 minutes ago) 10.01.2008
+
+Notes on building sources;
+
+If you see error fields on login form it means you didnt run Install yet and necessary fields in Db is NOT yet populated.
+
+Basic steps; After checkout fresh copy from svn repo (windows users look for tortoise svn, linux users already knows what to do, hehe), 
+  # set JAVA_HOME to jdk 1.5 or greater,
+  # run ant dist at where build.xml located, 
+  # copy xmlcrm dir which is inside of dist to red5 server webapps dir, 
+  # change config.xml and install/hibernate.cfg.xml to wanted db connection, (dont forget to run mysql or any db at this moment) 
+  # copy main.lzx.lzr=swf8.swf and maindebug.lzx.lzr=swf8.swf to red5 webapps dir, 
+  # run http://localhost:5080/xmlcrm/Install (not install case sensitive) 
+  # watch populated fields from red5 console, it takes a time, grab o coffee :) 
+  # Finally run http://localhost:5080/xmlcrm All paths relative, be carefull.
+
+Final note: Every little change effects immediately when you refresh browser window while you work with Laszlo. And comment is <!-- --> lines Hope it helps some one, Happy coding
+
+
  
  
  
