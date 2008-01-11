@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<library>
+
+<!-- ###################
+	Class charttab
+ -->
+<class name="overallchat" extends="guipresenter" resizeable="false"
+    width="810" height="280" y="240" x="10" closable="true" labelid="375" >
+	
+	<handler name="onclose">
+		Debug.write("close: ",this);
+		canvas._overallchartcontent=null;
+	</handler>
+	
+	<view y="20" bgcolor="white" x="1" width="$once{ parent.width-2 }" 
+		  height="$once{ parent.height-22 }" >
+
+		<view name="_chartoutputborder" height="$once{ parent.height-30 }"
+	        bgcolor="$once{ canvas.basebgcolorizer }" width="260">
+			
+			<overallchatoutput name="_chatoutput" x="1" y="1" >
+				<handler name="oninit">
+					if (canvas._overallchartcontent!=null) canvas._overallchartcontent.parent.parent.parent.close();
+					canvas._overallchartcontent = this;
+				</handler>
+			</overallchatoutput>
+	
+		</view>
+		
+		<overallchattabbottom name="_chattabbottom" 
+					   y="$once{ parent.height-28 }" x="0" width="254" />
+				   
+	</view>
+	
+</class>
+
+</library>

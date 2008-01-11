@@ -49,6 +49,7 @@
 	  		//this._cbtext.setText(this._cbtext.text+newmessage);
 	  		var usercolor = value[5];
 	  		if (usercolor==0)usercolor=0xCCCCCC;
+	  		if ( usercolor==null || usercolor==0 || usercolor.length==0 )usercolor=0xCCCCCC;
 		    new chattabitem(this._cbtext,{cbtext:newmessage,user_id:value[8],usercolor:usercolor,username:username,usertime:value[1]});
 	  		this.setScrollToMax();			  	
 	  	]]>

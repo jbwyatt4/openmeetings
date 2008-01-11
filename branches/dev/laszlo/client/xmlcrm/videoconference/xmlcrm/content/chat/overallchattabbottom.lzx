@@ -2,16 +2,17 @@
 <library>
 
 
-<class name="chattabbottom" extends="view" >
+<class name="overallchattabbottom" extends="view" >
 
-		<view x="2" y="0" height="20" width="168" name="message" bgcolor="0xEEEEEE">
+		<view x="2" y="0" height="20" width="168" name="message" 
+			  bgcolor="$once{ canvas.basebgcolorizer }">
 			<method name="getText">
 				return this._ctext.getText();
 			</method>
 			<method name="setText" args="txt">
 				this._ctext.setText(txt);
 			</method>
-			<inputtext name="_ctext" width="${ parent.width }" height="${ parent.height-2 }"
+			<inputtext name="_ctext" width="${ parent.width-2 }" height="${ parent.height-2 }"
 				x="1" y="1" bgcolor="white" >
 				<method event="onkeyup" args="key">
 	                <![CDATA[
@@ -43,20 +44,20 @@
                 parent.objMessage[8] = hib.userobject.user_id;
 	  			if (this.parent.message.getText().length!=0){
 			  		//Debug.write("send: ",this.parent.objMessage);
-			  		parent.sendMessageWithClient.doCall();
+			  		parent.sendMessageToOverallChat.doCall();
 			  		this.parent.message.setText('');
 		  		}
 		  	</handler>
 		</simplelabelbutton>
 		<simplelabelbutton x="240" y="0" name="_delete_chat_log">
 			<handler name="onclick">
-				parent.clearChat.doCall();
+				parent.clearOverallChat.doCall();
 			</handler>
 			<view x="3" y="1" resource="delete_chat_log_rsc" />
 			<labeltooltip labelid="442" />
 		</simplelabelbutton>
 		
-        <netremotecallhib name="clearChat" funcname="chatservice.clearChat" 
+        <netremotecallhib name="clearOverallChat" funcname="chatservice.clearOverallChat" 
 			remotecontext="$once{ canvas.thishib }" > 
             <handler name="ondata" args="value">
             	<![CDATA[
@@ -67,13 +68,13 @@
             </handler>   
         </netremotecallhib>		
 		
-        <netremotecallhib name="sendMessageWithClient" funcname="chatservice.sendMessageWithClient" 
+        <netremotecallhib name="sendMessageToOverallChat" funcname="chatservice.sendMessageToOverallChat" 
 			remotecontext="$once{ canvas.thishib }" > 
-        	<netparam><method name="getValue"> return parent.parent.objMessage; </method></netparam>
+        	<netparam><method name="getValue"> return parent.parent.objMessage;</method></netparam>
             <handler name="ondata" args="value">
             	<![CDATA[
                 	//The onResult-Handler will be called be the rtmpconnection
-					Debug.write("chatservice.sendMessageWithClient getValue : ",value);
+					Debug.write("chatservice.sendMessageToOverallChat getValue : ",value);
                 ]]>
             </handler>   
         </netremotecallhib>

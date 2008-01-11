@@ -611,6 +611,16 @@
     	</handler>
     </netremotecallhib>
     
+    <!-- notifications for Overall-Chat -->
+	<netremotecallhib name="sendVarsToOverallChat" funcname="sendVarsToOverallChat" >      
+    	<handler name="ondata" args="value">
+    		Debug.write("sendVarsToOverallChat: ",value);
+    		if (canvas._overallchartcontent!=null){
+    			canvas._overallchartcontent.addChatHistory(value.message,value.client);
+    		}
+    	</handler>
+    </netremotecallhib>
+    
 </class>
 
 <hibrtmpconnection name="thishib" id="hib" />
