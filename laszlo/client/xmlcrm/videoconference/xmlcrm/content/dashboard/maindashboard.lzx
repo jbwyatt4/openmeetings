@@ -35,10 +35,13 @@
 	
 	<profilespanel x="420" />
 
+	<overallchat name="_overallchat" />
+	
+	<!--
     <rsspanel name="feed1" x="10" y="230" />
 
     <rsspanel name="feed2" x="420" y="230" />
-		
+	 -->
 		
 </class>
 
