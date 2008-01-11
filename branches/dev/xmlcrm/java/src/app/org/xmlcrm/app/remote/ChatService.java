@@ -22,6 +22,12 @@ import org.xmlcrm.app.conference.videobeans.RoomClient;
  */
 public class ChatService implements IPendingServiceCallback {
 
+	//the overall chatroom is jsut another room
+	private static final String overallChatRoomName = "overall";
+	
+	//number of items in the Chatroom history
+	private static final int chatRoomHistory = 50;
+	
 	private static final Log log = LogFactory.getLog(ChatService.class);
 	
 	private static LinkedHashMap<String,List<HashMap<String,Object>>> myChats = new LinkedHashMap<String,List<HashMap<String,Object>>>();
@@ -54,11 +60,11 @@ public class ChatService implements IPendingServiceCallback {
 			List<HashMap<String,Object>> myChatList = myChats.get(chatroom);
 			if (myChatList==null) myChatList = new LinkedList<HashMap<String,Object>>();
 			
-			if (myChatList.size()==50) myChatList.remove(0);
+			if (myChatList.size()==chatRoomHistory) myChatList.remove(0);
 			myChatList.add(hsm);
 			myChats.put(chatroom,myChatList);
 			
-			System.out.println("SET CHATROOM: "+chatroom);
+			log.debug("SET CHATROOM: "+chatroom);
 			
 			//broadcast to everybody in the room/domain
 			Iterator<IConnection> it = current.getScope().getConnections();
@@ -96,7 +102,7 @@ public class ChatService implements IPendingServiceCallback {
 			String orgdomain = currentClient.getDomain();
 			
 			String chatroom = "_"+roomname+"_"+orgdomain;
-			System.out.println("GET CHATROOM: "+chatroom);
+			log.error("GET CHATROOM: "+chatroom);
 			
 			List<HashMap<String,Object>> myChatList = myChats.get(chatroom);
 			myChatList = new LinkedList<HashMap<String,Object>>();
@@ -119,7 +125,7 @@ public class ChatService implements IPendingServiceCallback {
 			String orgdomain = currentClient.getDomain();
 			
 			String chatroom = "_"+roomname+"_"+orgdomain;
-			System.out.println("GET CHATROOM: "+chatroom);
+			log.debug("GET CHATROOM: "+chatroom);
 			
 			List<HashMap<String,Object>> myChatList = myChats.get(chatroom);
 			if (myChatList==null) myChatList = new LinkedList<HashMap<String,Object>>();	
@@ -141,7 +147,7 @@ public class ChatService implements IPendingServiceCallback {
 		try {
 			
 			String chatroom = "_"+roomname+"_"+orgdomain;
-			System.out.println("GET CHATROOM: "+chatroom);
+			log.debug("GET CHATROOM: "+chatroom);
 			
 			List<HashMap<String,Object>> myChatList = myChats.get(chatroom);
 			if (myChatList==null) myChatList = new LinkedList<HashMap<String,Object>>();	
@@ -206,5 +212,87 @@ public class ChatService implements IPendingServiceCallback {
 		// TODO Auto-generated method stub
 		log.error("resultReceived ChatService "+arg0);
 	}
+	
+	/**
+	 * sends a message to all connected users
+	 * @param SID
+	 * @param newMessage
+	 * @return
+	 */
+	public int sendMessageToOverallChat(Object newMessage) {
+		try {
+			IConnection current = Red5.getConnectionLocal();
+			RoomClient currentClient = Application.getClientList().get(current.getClient().getId());
+			
+			HashMap<String,Object> hsm = new HashMap<String,Object>();
+			hsm.put("client", currentClient);
+			hsm.put("message", newMessage);
+			
+			List<HashMap<String,Object>> myChatList = myChats.get(overallChatRoomName);
+			if (myChatList==null) myChatList = new LinkedList<HashMap<String,Object>>();
+			
+			if (myChatList.size()==chatRoomHistory) myChatList.remove(0);
+			myChatList.add(hsm);
+			myChats.put(overallChatRoomName,myChatList);
+			
+			log.debug("SET CHATROOM: "+overallChatRoomName);
+			
+			//broadcast to everybody in the room/domain
+			Iterator<IConnection> it = current.getScope().getConnections();
+			while (it.hasNext()) {
+				IConnection conn = it.next();
+				if (conn instanceof IServiceCapableConnection) {
+					RoomClient rcl = Application.getClientList().get(conn.getClient().getId());
+					log.debug("*..*idremote: " + rcl.getStreamid());
+					log.debug("*..*my idstreamid: " + currentClient.getStreamid());
+					((IServiceCapableConnection) conn).invoke("sendVarsToOverallChat",new Object[] { hsm }, this);
+				}
+			}
+		} catch (Exception err) {
+			log.error("[ChatService sendMessageToOverallChat] ",err);
+			return -1;
+		}
+		return 1;
+	}
+	
+	
+	/**
+	 * gets the chat history of overallChat
+	 * @param roomname
+	 * @param orgdomain
+	 * @return
+	 */
+	public List<HashMap<String,Object>> getOverallChatHistory() {
+		try {
+			
+			List<HashMap<String,Object>> myChatList = myChats.get(overallChatRoomName);
+			if (myChatList==null) myChatList = new LinkedList<HashMap<String,Object>>();	
+			
+			return myChatList;
+		} catch (Exception err) {
+			log.error("[getRoomChatHistory] ",err);
+			return null;
+		}
+	}	
+	
+	/**
+	 * clear the overallChat history
+	 * @return
+	 */
+	public List<HashMap<String,Object>> clearOverallChat() {
+		try {
+			
+			List<HashMap<String,Object>> myChatList = myChats.get(overallChatRoomName);
+			myChatList = new LinkedList<HashMap<String,Object>>();
+			
+			myChats.put(overallChatRoomName,myChatList);
+			
+			return myChatList;
+			
+		} catch (Exception err) {
+			log.error("[clearChat] ",err);
+			return null;
+		}
+	}	
 	
 }
