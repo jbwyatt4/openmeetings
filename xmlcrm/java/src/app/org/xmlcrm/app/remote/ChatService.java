@@ -14,6 +14,7 @@ import org.red5.server.api.service.IPendingServiceCall;
 import org.red5.server.api.service.IPendingServiceCallback;
 import org.red5.server.api.service.IServiceCapableConnection;
 import org.xmlcrm.app.conference.videobeans.RoomClient;
+import org.xmlcrm.utils.stringhandlers.ChatString;
 
 /**
  * 
@@ -223,6 +224,17 @@ public class ChatService implements IPendingServiceCallback {
 		try {
 			IConnection current = Red5.getConnectionLocal();
 			RoomClient currentClient = Application.getClientList().get(current.getClient().getId());
+			
+			log.error(newMessage.getClass().getName());
+			LinkedHashMap messageMap = (LinkedHashMap) newMessage;
+			//adding delimiter space, cause otherwise an emoticon in the last string would not be found
+			String messageText = messageMap.get(4).toString()+" ";
+			log.error("messageText"+messageText);
+			LinkedList<String[]> parsedStringObjects = ChatString.getInstance().parseChatString(messageText);
+			log.error("parsedStringObjects"+parsedStringObjects.size());
+			messageMap.put(9, parsedStringObjects);
+			newMessage = messageMap;
+			
 			
 			HashMap<String,Object> hsm = new HashMap<String,Object>();
 			hsm.put("client", currentClient);
