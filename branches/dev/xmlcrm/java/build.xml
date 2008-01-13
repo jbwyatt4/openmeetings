@@ -183,6 +183,8 @@
 		<mkdir dir="${dist.dir}"/>
 		<copy todir="${dist.dir}" filtering="true">
 			<fileset dir="webapp">
+				<exclude name="**/*.fla"/>
+				<exclude name="**/*.gif"/>
 			</fileset>
 		</copy>		
 		<tstamp/>

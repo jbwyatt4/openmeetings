@@ -1,6 +1,9 @@
 package org.xmlcrm.app.remote;
 
  
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -29,8 +32,11 @@ import org.xmlcrm.app.conference.configutils.BandwidthConfigFactory;
 import org.xmlcrm.app.conference.configutils.CustomBandwidth;
 import org.xmlcrm.app.conference.configutils.UserConfigFactory;
 import org.xmlcrm.app.quartz.scheduler.QuartzSessionClear;
-
+import org.xmlcrm.utils.stringhandlers.ChatString;
 import org.xmlcrm.app.conference.videobeans.RoomClient;
+
+import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.io.xml.XppDriver;
 
 /**
  * 
@@ -44,6 +50,11 @@ public class Application extends ApplicationAdapter implements
 	private static final Log log = LogFactory.getLog(Application.class);
 
 	private static HashMap<String,RoomClient> ClientList = new HashMap<String,RoomClient>();
+	
+	/*
+	 * EMoticons FileList
+	 */
+	public static LinkedList<LinkedList<String>> emotfilesList = new LinkedList<LinkedList<String>>();
 	
 	private static BandwidthConfigFactory bwFactory = null;
 	private static UserConfigFactory userFactory = null;
@@ -66,15 +77,41 @@ public class Application extends ApplicationAdapter implements
 
 	@Override
 	public boolean appStart(IScope scope) {
-		instance = this;
-		// init your handler here
-		initBandWidthConfigs();
-		//System.out.println("################## appStart    ");
-		QuartzSessionClear bwHelp = new QuartzSessionClear();
-		String jobName = addScheduledJob(300000,bwHelp);
-		log.error("jobName: "+jobName);
+		try {
+			String filePath = scope.getResource("public/").getFile().getAbsolutePath();
+			this.loadEmot(filePath);
+			instance = this;
+			// init your handler here
+			initBandWidthConfigs();
+			//System.out.println("################## appStart    ");
+			QuartzSessionClear bwHelp = new QuartzSessionClear();
+			String jobName = addScheduledJob(300000,bwHelp);
+			log.error("jobName: "+jobName);
+		} catch (Exception err) {
+			log.error("[appStart]",err);
+		}
 		return true;
 	}
+	
+	public void loadEmot(String filePath){
+		try {
+			String fileName = filePath + File.separatorChar + "emoticons" + File.separatorChar + "emotes.xml";
+			XStream xStream = new XStream(new XppDriver());
+			xStream.setMode(XStream.NO_REFERENCES);
+			BufferedReader reader = new BufferedReader(new FileReader(fileName));
+		    String xmlString = "";
+		    while (reader.ready()) {
+		    	xmlString += reader.readLine();
+		    }
+		    emotfilesList = (LinkedList<LinkedList<String>>) xStream.fromXML(xmlString);
+		    ChatString.getInstance().replaceAllRegExp();
+		    log.error("loadEmot completed");
+		} catch (Exception err) {
+			log.error("[loadEmot]",err);
+		}
+	}
+	
+	
 
 	@Override
 	public boolean roomConnect(IConnection conn, Object[] params) {
