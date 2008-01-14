@@ -54,7 +54,7 @@
 		<simplelabelbutton name="_show_emots">
 			<handler name="onclick">
 				//parent.clearOverallChat.doCall();
-				var pick = new emoticonsselector(canvas,{x:(this.getAttributeRelative('x',canvas)-140),y:(this.getAttributeRelative('y',canvas)-140)});
+				var pick = new emoticonsselector(canvas,{btnRef:this.parent,x:(this.getAttributeRelative('x',canvas)-140),y:(this.getAttributeRelative('y',canvas)-140)});
 				LzModeManager.makeModal( pick );
 			</handler>
 			<view x="2" y="1">
