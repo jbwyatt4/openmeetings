@@ -51,7 +51,72 @@ function disableCurrentMouseWheelObject() {
     currentMouseWheelObject=null;
 }  
 
-             
+
+var maxsize = 220;
+var textFieldtext = "";
+var startIndex = 0;
+var currentLine = 0;
+var textObject = null;
+var myTextFormat = null;
+var lineHeight = 0;
+
+function calcLineWidthByTextField(maxsizeText,textForCalcing,fontsize, fontname){
+	//check test/testLineWidth.lzx in test-directory for a detailed example calculation 
+	//Debug.write("calcLineWidthByTextField: ",textForCalcing);
+	
+	maxsize = maxsizeText;
+	startIndex = 0;
+	currentLine = 0;
+	textObject = new Array();
+	
+	textFieldtext = textForCalcing;
+	myTextFormat = new TextFormat();
+	myTextFormat.size = fontsize;
+	myTextFormat.font = fontname;
+	
+	var metrics = myTextFormat.getTextExtent(textFieldtext, 100000);
+	lineHeight = metrics.ascent+metrics.descent;
+	//Debug.write(lineHeight);
+	
+	measureLine();
+	
+	for (var k = 0;k<textObject.length;k++){
+		var metrics = myTextFormat.getTextExtent(textObject[k]["text"], 100000);
+		textObject[k]["lineWidth"] = metrics.width;
+		//Debug.write("text: ",k,textObject[k]["lineWidth"],textObject[k]["text"]);
+	}
+	
+	return textObject;
+}
+
+function measureLine(){		
+	//Debug.write("restString: ",textFieldtext);
+	for (var i=textFieldtext.length;i>0;i--){
+		var testTxt = textFieldtext.slice(startIndex, i);
+		var metrics = myTextFormat.getTextExtent(testTxt, 100000);
+		//Debug.write("metrics: ",testTxt,startIndex,metrics.width);
+		if (metrics.width<=maxsize){
+
+			testTxt = textFieldtext.slice(startIndex, i-1);
+			textObject[currentLine] = new Array();
+			textObject[currentLine]["text"] = testTxt;
+			textFieldtext = textFieldtext.slice(i-1, textFieldtext.length);
+			
+			if (textFieldtext.length==1){
+				textObject[currentLine]["text"]+=textFieldtext;
+				return;
+			} else {
+				currentLine+=1;
+				return measureLine();
+			}
+		}
+	}		
+}  
+
+function getLineHeight(){
+	return lineHeight;
+}
+
 ]]>
 </script>
 

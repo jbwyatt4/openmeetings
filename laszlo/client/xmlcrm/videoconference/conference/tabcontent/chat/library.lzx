@@ -6,6 +6,7 @@
 	<include href="chattabbottomRoomList.lzx" />
 	<include href="chatoutputRoomsList.lzx" />
 	<include href="chattabitem.lzx" />
+	<include href="chattabitememoticons.lzx" />
 	<include href="chatoutput.lzx" />
 	<include href="chattabbottom.lzx" />
 	<include href="chattab.lzx" />
