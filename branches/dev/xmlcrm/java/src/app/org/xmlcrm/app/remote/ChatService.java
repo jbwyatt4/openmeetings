@@ -2,6 +2,7 @@ package org.xmlcrm.app.remote;
 
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.HashMap;
 import java.util.List;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
@@ -51,6 +52,16 @@ public class ChatService implements IPendingServiceCallback {
 				roomname = currentClient.getChatUserroom();
 				orgdomain = currentClient.getChatDomain();
 			}
+			
+			//log.error(newMessage.getClass().getName());
+			LinkedHashMap messageMap = (LinkedHashMap) newMessage;
+			//adding delimiter space, cause otherwise an emoticon in the last string would not be found
+			String messageText = messageMap.get(4).toString()+" ";
+			//log.error("messageText"+messageText);
+			LinkedList<String[]> parsedStringObjects = ChatString.getInstance().parseChatString(messageText);
+			//log.error("parsedStringObjects"+parsedStringObjects.size());
+			messageMap.put(9, parsedStringObjects);
+			newMessage = messageMap;			
 			
 			HashMap<String,Object> hsm = new HashMap<String,Object>();
 			hsm.put("client", currentClient);
@@ -225,13 +236,13 @@ public class ChatService implements IPendingServiceCallback {
 			IConnection current = Red5.getConnectionLocal();
 			RoomClient currentClient = Application.getClientList().get(current.getClient().getId());
 			
-			log.error(newMessage.getClass().getName());
+			//log.error(newMessage.getClass().getName());
 			LinkedHashMap messageMap = (LinkedHashMap) newMessage;
 			//adding delimiter space, cause otherwise an emoticon in the last string would not be found
 			String messageText = messageMap.get(4).toString()+" ";
-			log.error("messageText"+messageText);
+			//log.error("messageText"+messageText);
 			LinkedList<String[]> parsedStringObjects = ChatString.getInstance().parseChatString(messageText);
-			log.error("parsedStringObjects"+parsedStringObjects.size());
+			//log.error("parsedStringObjects"+parsedStringObjects.size());
 			messageMap.put(9, parsedStringObjects);
 			newMessage = messageMap;
 			
@@ -333,6 +344,31 @@ public class ChatService implements IPendingServiceCallback {
 			log.error("[getAllPublicEmoticons] ",err);
 			return null;
 		}
+	}
+	
+	public LinkedHashMap<String,LinkedList<RoomClient>> getChatOverallUsers(){
+		try {
+			LinkedHashMap<String,LinkedList<RoomClient>> clientList = new LinkedHashMap<String,LinkedList<RoomClient>>();
+			LinkedList<RoomClient> guestList = new LinkedList<RoomClient>();
+			LinkedList<RoomClient> overallList = new LinkedList<RoomClient>();
+			
+			HashMap<String, RoomClient> cList = Application.getClientList();
+			for (Iterator<String> iter = cList.keySet().iterator();iter.hasNext();) {
+				RoomClient rcl = cList.get(iter.next());
+				if (rcl.getUser_id()==null || rcl.getUser_id()<=0) {
+					guestList.add(rcl);
+				} else {
+					overallList.add(rcl);
+				}
+			}
+			
+			clientList.put("guestList", guestList); 
+			clientList.put("overallList", overallList); 
+			return clientList;
+		} catch (Exception err) {
+			log.error("[getChatOverallUsers]",err);
+		}
+		return null;
 	}
 	
 }

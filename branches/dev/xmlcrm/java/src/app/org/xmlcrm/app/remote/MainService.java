@@ -10,6 +10,9 @@ import org.apache.commons.logging.LogFactory;
 
 import org.red5.server.api.IConnection;
 import org.red5.server.api.Red5;
+import org.red5.server.api.service.IPendingServiceCall;
+import org.red5.server.api.service.IPendingServiceCallback;
+import org.red5.server.api.service.IServiceCapableConnection;
 import org.xmlcrm.app.hibernate.beans.basic.Configuration;
 import org.xmlcrm.app.hibernate.beans.basic.Sessiondata;
 
@@ -32,7 +35,7 @@ import org.xmlcrm.app.conference.videobeans.RoomClient;
  * @author swagner
  *
  */
-public class MainService {
+public class MainService implements IPendingServiceCallback {
 	
 	private static final Log log = LogFactory.getLog(MainService.class);
    
@@ -111,10 +114,38 @@ public class MainService {
      * @return a valid user account or an empty user with an error message and level -1
      */
     public Object loginUser(String SID, String Username, String Userpass){
-    	log.error("loginUser 111: "+SID+" "+Username);
-    	IConnection current = Red5.getConnectionLocal();
-    	RoomClient currentClient = Application.getClientList().get(current.getClient().getId());
-        return Usermanagement.getInstance().loginUser(SID,Username,Userpass, currentClient);
+    	try {
+        	log.debug("loginUser 111: "+SID+" "+Username);
+        	IConnection current = Red5.getConnectionLocal();
+        	RoomClient currentClient = Application.getClientList().get(current.getClient().getId());
+            Object obj = Usermanagement.getInstance().loginUser(SID,Username,Userpass, currentClient);
+            
+            if (currentClient.getUser_id()!=null && currentClient.getUser_id()>0) {
+            	Users us = (Users) obj;
+            	currentClient.setFirstname(us.getFirstname());
+            	currentClient.setLastname(us.getLastname());
+    			Iterator<IConnection> it = current.getScope().getConnections();
+    			while (it.hasNext()) {
+    				//log.error("hasNext == true");
+    				IConnection cons = it.next();
+    				//log.error("cons Host: "+cons);
+    				if (cons instanceof IServiceCapableConnection) {
+    					if (!cons.equals(current)){
+    						//log.error("sending roomDisconnect to " + cons);
+    						RoomClient rcl = Application.getClientList().get(cons.getClient().getId());
+    						//Send to all connected users
+							((IServiceCapableConnection) cons).invoke("roomConnect",new Object[] { currentClient }, this);
+							//log.error("sending roomDisconnect to " + cons);
+    					}
+    				}
+    			} 
+            }
+
+			return obj;
+    	} catch (Exception err) {
+    		log.error("loginUser",err);
+    	}
+    	return null;
     } 
     
     /**
@@ -298,6 +329,11 @@ public class MainService {
     	} else {
     		return null;
     	}
+	}
+
+	public void resultReceived(IPendingServiceCall arg0) {
+		// TODO Auto-generated method stub
+		log.error("[resultReceived]"+arg0);
 	}
 
     
