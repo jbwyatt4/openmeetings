@@ -4,7 +4,7 @@
 <class name="infospanel" extends="guipresenter" resizeable="false"
     width="400" height="224" closable="true" labelid="374" y="10">
 	<view y="20" bgcolor="white" x="1" width="$once{ parent.width-2 }" 
-		  height="$once{ parent.height-22 }" >
+		  height="$once{ parent.height-21 }" >
     <handler name="oninit">
         <![CDATA[
             this.homepage.setText("<u><FONT color='#0000CC'>"+canvas.getLabelName(286)+"</FONT></u>");
