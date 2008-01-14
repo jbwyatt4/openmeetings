@@ -36,34 +36,8 @@
 	
 	
 	
-	<text multiline="true" x="40" y="20"
-		  width="220" selectable="true" height="240">
-		<handler name="oninit">
-			<![CDATA[
-				Debug.write("this: ",this);
-				//this.sprite.__LZtextclip.wordWrap=true;
-				//this.sprite.__LZtextclip.htmlText = "<p>Here's a picture from my last vacation:<img src='emotes/face-angel.jpg'>";
-				//this.setText(parent.cbtext);
-				//Debug.write("this: ",this.sprite.__LZtextclip.htmlText);
-				
-				var newmessage = "<p>Here's a picture from my last vacation:<img src='emotes/face-angel.jpg' hspace='0' vspace='0' >" +
-					"<p>another one: <img src='emotes/face-sad.swf' hspace='0' vspace='0' >";
-				
-				newmessage = "<P ALIGN='LEFT'><FONT FACE='Verdana' SIZE='11' COLOR='#000000' LETTERSPACING='0' KERNING='0'>Here's a picture from my last vacation:<FONT SIZE='2'><IMG SRC='emotes/face-angel.jpg' VSPACE='0' HSPACE='0'> </FONT>another one: <FONT SIZE='2'><IMG SRC='emotes/face-sad.swf' VSPACE='0' HSPACE='0'> </FONT></FONT></P>"; 
-
-				Debug.write("this",this.sprite.__LZtextclip.htmlText);
-				sprite.__LZmovieClipRef.createTextField("txtField_", 100, 0,0, 240,220);
-				sprite.__LZmovieClipRef.txtField_.html = true;
-				sprite.__LZmovieClipRef.txtField_.multiline = true;
-				sprite.__LZmovieClipRef.txtField_.wordWrap = true;
-				sprite.__LZmovieClipRef.txtField_.selectable = true;
-				//sprite.__LZmovieClipRef.txtField_.embedFonts = tfEmbedfonts;
-				sprite.__LZmovieClipRef.txtField_.autoSize = true;
-				//sprite.__LZmovieClipRef.txtField_.type = "input";
-				sprite.__LZmovieClipRef.txtField_.border = true;
-				sprite.__LZmovieClipRef.txtField_.htmlText = newmessage; 
-			]]>
-		</handler>
+	<text multiline="true" x="40" y="20" text="$once{ parent.cbtext }"
+		  width="220" selectable="true" >
 	</text>
 
 </class>

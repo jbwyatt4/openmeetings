@@ -5,11 +5,8 @@
 <class name="overallchatoutput" extends="view" height="$once{ parent.height-2 }" 
             clip="true" bgcolor="0xFFFFFF" width="$once{ parent.width-2 }" >
 
-<!--
-    Invoked from VideoContainer cause domain/room must be set first
- -->
     <handler name="oninit">
-        //Debug.write("oninit");
+        Debug.write("oninit");
         <![CDATA[
         	this._cbtext.clearChatOutput();
             this.getOverallChatHistory.doCall();
@@ -36,18 +33,18 @@
             //is Right To Left ?
             if (value[7]){
                 var username = client.firstname+" "+client.lastname;
-                var newmessage = value[4];
+                var messageObj = value[9];
             } else {
                 var username = client.firstname+" "+client.lastname;
-                var newmessage = value[4];
+                var messageObj = value[9];
             }
             //var newmessage = "<FONT COLOR='"+value[5]+"' size='11'>"+client.firstname+" "+client.lastname+"</FONT>:<FONT COLOR='0x000000' size='11'>"+value[4]+"</FONT><br />";
-            Debug.write("newmessage: ",newmessage);
+            Debug.write("messageObj: ",messageObj);
             var usercolor = value[5];
             if ( usercolor==null || usercolor==0 || usercolor.length==0 )usercolor=0xCCCCCC;
-            new chattabitem(this._cbtext,{cbtext:newmessage,user_id:value[8],usercolor:usercolor,username:username,usertime:value[1]});
+            new chattabitememoticons(this._cbtext,{messageObj:messageObj,user_id:value[8],usercolor:usercolor,username:username,usertime:value[1]});
             this.setScrollToMax();              
-        ]]>
+        ]]> 
     </method>           
     
     <method name="setScrollToMax">
@@ -62,6 +59,7 @@
     <view name="_cbtext" width="244" layout="axis:y;spacing:2" >
     	<method name="clearChatOutput">
     		<![CDATA[
+    			Debug.write("clearChatOutput ",this.subviews.length);
     			while (this.subviews.length>0){
     				this.subviews[0].destroy();
     			}
