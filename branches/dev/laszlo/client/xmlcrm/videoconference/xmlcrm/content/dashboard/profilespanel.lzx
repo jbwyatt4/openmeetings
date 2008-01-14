@@ -4,7 +4,7 @@
 <class name="profilespanel" extends="guipresenter" resizeable="false"
     width="400" height="224" y="10" closable="true" labelid="375" >
 	<view y="20" bgcolor="white" x="1" width="$once{ parent.width-2 }" 
-		  height="$once{ parent.height-22 }" >
+		  height="$once{ parent.height-21 }" >
     <handler name="oninit">
         <![CDATA[
 			this.getUserSelf.doCall();

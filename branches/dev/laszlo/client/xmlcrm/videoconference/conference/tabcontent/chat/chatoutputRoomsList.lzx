@@ -36,21 +36,21 @@
 	<method name="addChatHistory" args="value,client">
 	  	<![CDATA[
 		  	//Debug.write("addChatHistory: ",value,client);
-		  	//is Right To Left ?
+		  	//is Right To Left ? not checked for the moment
 		    if (value[7]){
 				var username = client.firstname+" "+client.lastname;
-		    	var newmessage = value[4];
 		    } else {
 				var username = client.firstname+" "+client.lastname;
-		    	var newmessage = value[4];
 		    }
+		    var messageObj = value[9];
 		    //var newmessage = "<FONT COLOR='"+value[5]+"' size='11'>"+client.firstname+" "+client.lastname+"</FONT>:<FONT COLOR='0x000000' size='11'>"+value[4]+"</FONT><br />";
 		  	//Debug.write("newmessage: ",newmessage);
 	  		//this._cbtext.setText(this._cbtext.text+newmessage);
 	  		var usercolor = value[5];
 	  		if (usercolor==0)usercolor=0xCCCCCC;
 	  		if ( usercolor==null || usercolor==0 || usercolor.length==0 )usercolor=0xCCCCCC;
-		    new chattabitem(this._cbtext,{cbtext:newmessage,user_id:value[8],usercolor:usercolor,username:username,usertime:value[1]});
+		    //new chattabitem(this._cbtext,{cbtext:newmessage,user_id:value[8],usercolor:usercolor,username:username,usertime:value[1]});
+		    new chattabitememoticons(this._cbtext,{messageObj:messageObj,user_id:value[8],usercolor:usercolor,username:username,usertime:value[1]});
 	  		this.setScrollToMax();			  	
 	  	]]>
 	</method>			

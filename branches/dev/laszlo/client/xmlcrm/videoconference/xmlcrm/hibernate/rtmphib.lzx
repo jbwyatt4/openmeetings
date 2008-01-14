@@ -362,15 +362,21 @@
             <handler name="ondata" args="value">
                 //The onResult-Handler will be called be the rtmpconnection
                 //Debug.write("roomDisconnect: ",value);
-                canvas._videocontainer.disconnectclient(value.streamid,value.userpos); 
-				//remove that client from sync list of wmlFileLoader/image if present
-				_drawarea.sendCompleteWmlLoadedRClient(value);
-				_drawarea.sendCompleteImageLoadedRClient(value);
-                if (canvas.currentModApply!=null) canvas.currentModApply.rejectUser(value);
-                //parent.getClientListScope.doCall();  
-                if (value.isRecording) {
-		    		canvas._mymod.recordingUser = null;
-		    		canvas._mymod.setMessage();                	
+                if (canvas._overallchartcontent!=null){
+                	var parentObj = canvas._overallchartcontent.parent.parent.parent._chatparticipants;
+                	parentObj.removeItemById(value.user_id);
+                }
+                if (canvas._videocontainer!=null){
+	                canvas._videocontainer.disconnectclient(value.streamid,value.userpos); 
+					//remove that client from sync list of wmlFileLoader/image if present
+					_drawarea.sendCompleteWmlLoadedRClient(value);
+					_drawarea.sendCompleteImageLoadedRClient(value);
+	                if (canvas.currentModApply!=null) canvas.currentModApply.rejectUser(value);
+	                //parent.getClientListScope.doCall();  
+	                if (value.isRecording) {
+			    		canvas._mymod.recordingUser = null;
+			    		canvas._mymod.setMessage();                	
+	                }
                 }
             </handler>   
         </netremotecallhib>     
@@ -620,7 +626,17 @@
     		}
     	</handler>
     </netremotecallhib>
-    
+
+	<netremotecallhib name="roomConnect" funcname="roomConnect" >      
+    	<handler name="ondata" args="value">
+    		Debug.write("roomConnect: ",value);
+    		if (canvas._overallchartcontent!=null){
+    			var parentObj = canvas._overallchartcontent.parent.parent.parent._chatparticipants._list;
+    			new chatparticipent(parentObj,{user_id:value.user_id,username:value.lastname+", "+value.firstname});				
+    		}
+    	</handler>
+    </netremotecallhib>
+     
 </class>
 
 <hibrtmpconnection name="thishib" id="hib" />

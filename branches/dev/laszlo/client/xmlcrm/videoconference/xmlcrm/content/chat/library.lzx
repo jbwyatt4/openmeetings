@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library>
 
+	<include href="emoticonsselector.lzx" />
 	<include href="overallchatoutput.lzx" />
 	<include href="overallchattabbottom.lzx" />
 	<include href="overallchat.lzx" />

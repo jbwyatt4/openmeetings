@@ -340,7 +340,7 @@ and some more references to temp-objects
 	Navigation
  -->
 
-<view name="_mainbgcontentNavi" y="0" x="0" bgcolor="${ canvas.basebgcolorizer }" clip="true"
+<view name="_mainbgcontentNavi" y="0" x="0" bgcolor="${ canvas.baseMousecolorizer }" clip="true"
     width="100%" height="$once{ canvas.naviHeight }" visibility="hidden">
     <text id="mainBaseText" x="10" y="10"
         fgcolor="white" fontsize="20" fontstyle="bold">
@@ -366,7 +366,7 @@ and some more references to temp-objects
 </view>
 
 <view name="_conferencemenu" y="0" x="0" height="20" width="100%" 
-    bgcolor="$once{ canvas.basebgcolorizer }" visibility="hidden" > 
+    bgcolor="$once{ canvas.baseMousecolorizer }" visibility="hidden" > 
     <method name="removeAll">
 		<![CDATA[
 			while (this.subviews.length > 0) {

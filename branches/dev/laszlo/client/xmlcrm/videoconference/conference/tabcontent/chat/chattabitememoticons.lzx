@@ -41,7 +41,7 @@
 		<handler name="oninit">
 			<![CDATA[
 				this.sprite.__LZtextclip.wordWrap = false;
-				//Debug.write(this.sprite.__LZtextclip);
+				Debug.write(this);
 				//Debug.write(this.sprite.getTextFormat());
 				tFormat = this.sprite.__LZtextclip.getTextFormat();
 				//Debug.write(this.sprite.__LZtextclip.getTextFormat());
@@ -55,7 +55,7 @@
 						t += items[i][1];
 					} else {
 						if (t.length!=0){
-							var tempString = calcLineWidthByTextField(this.width, t,this.fontsize,"Verdana");
+							var tempString = calcLineWidthByTextField(this.width, t,this.fontsize,this.fontname);
 							var x = tempString[tempString.length-1]["lineWidth"];
 							var y = (tempString.length-1)*(getLineHeight()+parent.leading-1);
 						}else {
@@ -69,8 +69,8 @@
 						m.setSource(swfurl);
 					}
 				}
-				//Debug.write("TTTT: ",t);
-				var tString = calcLineWidthByTextField(this.width, t,this.fontsize,"Verdana");
+				//Debug.write("TTTT: ",t);"Verdana"
+				var tString = calcLineWidthByTextField(this.width, t,this.fontsize,this.fontname);
 				
 				for (var k = 0;k<tString.length;k++){
 					this.setText(this.getText()+textObject[k]["text"]+"\r");
