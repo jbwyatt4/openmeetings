@@ -269,11 +269,11 @@ public class Application extends ApplicationAdapter implements
 					if (!cons.equals(current)){
 						log.error("sending roomDisconnect to " + cons);
 						RoomClient rcl = ClientList.get(cons.getClient().getId());
-						//Check if the Client is in the same room and same domain except its the current one
-						if(roomname.equals(rcl.getUserroom()) && orgdomain.equals(rcl.getDomain())){				
+						//Send to all connected users
+						//if(roomname.equals(rcl.getUserroom()) && orgdomain.equals(rcl.getDomain())){				
 							((IServiceCapableConnection) cons).invoke("roomDisconnect",new Object[] { currentClient }, this);
 							log.error("sending roomDisconnect to " + cons);
-						}
+						//}
 					}
 				}
 			}			
