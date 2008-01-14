@@ -111,7 +111,7 @@ public class MainService {
      * @return a valid user account or an empty user with an error message and level -1
      */
     public Object loginUser(String SID, String Username, String Userpass){
-    	log.error("loginUser 111: "+SID+" "+Username+" "+Userpass);
+    	log.error("loginUser 111: "+SID+" "+Username);
     	IConnection current = Red5.getConnectionLocal();
     	RoomClient currentClient = Application.getClientList().get(current.getClient().getId());
         return Usermanagement.getInstance().loginUser(SID,Username,Userpass, currentClient);

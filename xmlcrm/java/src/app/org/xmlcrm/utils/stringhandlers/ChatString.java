@@ -54,10 +54,11 @@ public class ChatString {
 				LinkedList<String> emot = iter.next();
 				
 				//log.error("CHECK EMOT: "+ emot.get(0) + emot.get(1) + emot.size());
-				list = this.splitStr(list,emot.get(0), emot.get(1), emot.get(emot.size()-2), emot.get(1));
+				list = this.splitStr(list,emot.get(0), emot.get(1), emot.get(emot.size()-2));
 				
 				if (emot.size()>4) {
-					list = this.splitStr(list,emot.get(0), emot.get(3), emot.get(emot.size()-2), emot.get(3));
+					//log.error("CHECK EMOT ASIAN: "+ emot.get(0) + emot.get(2) + emot.size());
+					list = this.splitStr(list,emot.get(0), emot.get(2), emot.get(emot.size()-2));
 				}
 			}			
 			
@@ -77,7 +78,7 @@ public class ChatString {
 	
 
 	
-	private LinkedList<String[]> splitStr (LinkedList<String[]> list, String image, String regexp, String spaces, String name){
+	private LinkedList<String[]> splitStr (LinkedList<String[]> list, String image, String regexp, String spaces){
 		
 		LinkedList<String[]> newList = new LinkedList<String[]>();
 		
@@ -95,7 +96,7 @@ public class ChatString {
 					String[] textA = {"text",newStr[k]};
 					newList.add(textA);
 					if (k+1!=newStr.length){
-						String[] imageA = {"image",image, spaces, name };
+						String[] imageA = {"image",image, spaces, regexp.replace("\\", "") };
 						newList.add(imageA);
 					}
 				}

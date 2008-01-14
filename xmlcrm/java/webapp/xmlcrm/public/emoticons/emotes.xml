@@ -22,20 +22,20 @@
     <string>bye.swf</string>
     <string>(bye)</string>
 	<string>      </string>
-	<string>n</string>
+	<string>y</string>
   </linked-list>
   <linked-list>
     <string>cool.swf</string>
     <string>B)</string>
 	<string>    </string>
-	<string>n</string>
+	<string>y</string>
   </linked-list>
   <linked-list>
     <string>crazy.swf</string>
     <string>(c)</string>
     <string>`(•.°)~</string>
 	<string>    </string>  
-	<string>n</string>
+	<string>y</string>
   </linked-list>
   <linked-list>
     <string>cry.swf</string>
@@ -62,13 +62,13 @@
     <string>&gt;:(</string>
     <string>(\_/)</string>
 	<string>    </string>
-	<string>n</string>
+	<string>y</string>
   </linked-list>
   <linked-list>
     <string>good.swf</string>
     <string>(good)</string>
 	<string>      </string>
-	<string>n</string>
+	<string>y</string>
   </linked-list>
   <linked-list>
     <string>guns.swf</string>
@@ -98,7 +98,7 @@
     <string>hmmm.swf</string>
     <string>(think)</string>
 	<string>    </string>
-	<string>n</string>
+	<string>y</string>
   </linked-list>
   <linked-list>
     <string>idea.swf</string>
@@ -128,7 +128,7 @@
     <string>no.swf</string>
     <string>(no)</string>
 	<string>    </string>
-	<string>n</string>
+	<string>y</string>
   </linked-list>
   <linked-list>
     <string>noexpression.swf</string>
@@ -186,7 +186,7 @@
     <string>smartass.swf</string>
     <string>(clever)</string>
 	<string>     </string>
-	<string>n</string>
+	<string>y</string>
   </linked-list>
   <linked-list>
     <string>smile.swf</string>
@@ -217,7 +217,7 @@
     <string>wall.swf</string>
     <string>(wall)</string>
 	<string>        </string>
-	<string>y</string>
+	<string>n</string>
   </linked-list>
   <linked-list>
     <string>whistle.swf</string>
@@ -248,6 +248,6 @@
     <string>yes.swf</string>
     <string>(yes)</string>
 	<string>    </string>
-	<string>n</string>
+	<string>y</string>
   </linked-list>
 </linked-list>

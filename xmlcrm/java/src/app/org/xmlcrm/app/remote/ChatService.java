@@ -307,4 +307,32 @@ public class ChatService implements IPendingServiceCallback {
 		}
 	}	
 	
+	public LinkedList<LinkedList<String>> getAllPublicEmoticons(){
+		try {
+			LinkedList<LinkedList<String>> publicemotes = new LinkedList<LinkedList<String>>();
+			LinkedList<LinkedList<String>> allEmotes = Application.emotfilesList;
+			for (Iterator<LinkedList<String>> iter = allEmotes.iterator();iter.hasNext();){
+				LinkedList<String> emot = iter.next();
+				LinkedList<String> emotPub = new LinkedList<String>();
+				if (emot.get((emot.size()-1)).equals("y")){
+					emotPub.add(emot.get(0));
+					emotPub.add(emot.get(1).replace("\\", ""));
+					if (emot.size()>4) {
+						emotPub.add(emot.get(2).replace("\\", ""));
+						emotPub.add(emot.get(3));
+						emotPub.add(emot.get(4));
+					} else {
+						emotPub.add(emot.get(2));
+						emotPub.add(emot.get(3));
+					}
+					publicemotes.add(emotPub);
+				}
+			}
+			return publicemotes;
+		} catch (Exception err) {
+			log.error("[getAllPublicEmoticons] ",err);
+			return null;
+		}
+	}
+	
 }
