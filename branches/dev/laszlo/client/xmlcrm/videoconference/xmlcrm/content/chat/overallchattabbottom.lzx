@@ -1,11 +1,99 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library>
+	
+<class name="emoticonsselector" extends="closableview" bgcolor="$once{ canvas.basebgcolorizer }" 
+    clickable="true" width="160" height="140" >
 
+    <attribute name="btnRef" value="null" />
 
-<class name="overallchattabbottom" extends="view" >
+    <!--- @keywords private -->
+    <method name="passModeEvent" args="eventStr,view" > 
+        <![CDATA[
+            if ( eventStr == "onmousedown"  ){
+                if ( view != null ) {
+                   if ( !view.childOf(this) ) {
+                        this.close();
+                   }
+                } else {
+                    this.close();
+                }
+            }
+            if (view && view.childOf(this)) {
+                if (view[ eventStr ]) {
+                    view[ eventStr ].sendEvent( view );
+                }
+                return false;
+            }
+            return true;
+        ]]> 
+    </method>
+    
+    <handler name="oninit">
+    	this.getAllPublicEmoticons.doCall();
+    </handler>
+    
+        <netremotecallhib name="getAllPublicEmoticons" funcname="chatservice.getAllPublicEmoticons" 
+			remotecontext="$once{ canvas.thishib }" > 
+            <handler name="ondata" args="value">
+            	<![CDATA[
+                	//The onResult-Handler will be called be the rtmpconnection
+					Debug.write("getAllPublicEmoticons : ",value);
+					for (var i=0;i<value.length;i++){
+						var swfurl = 'http://'+canvas.rtmphostlocal+':'+canvas.red5httpport+'/xmlcrm/public/emoticons/'+value[i][0];
+						iconlabel = value[i][1];
+						if (value[i].length>4){
+							iconlabel += ", "+value[i][2];							
+						}
+						var m = new chatInnerSmilyIcon(parent.inn.inn,{x:x+this.x,y:y+this.y,iconvalue:value[i][1],iconlabel:iconlabel});
+						m.setSource(swfurl);						
+					}
+                ]]>
+            </handler>   
+        </netremotecallhib>    
 
-		<view x="2" y="0" height="20" width="168" name="message" 
+    <view bgcolor="$once{ canvas.baseMousecolorizer }" width="$once{ parent.width-2 }" 
+    	  height="$once{ parent.height-2 }" x="1" y="1" />
+    	  
+    <labeltext x="1" y="1" labelid="446" />
+	<view name="inn" width="158" height="118" x="0" y="20" clip="true">
+		<view name="inn" width="$once{ parent.height }" >
+			<wrappinglayout axis="x" spacing="2" />
+		</view>
+		<vscrollbar name="myscrollbar" />
+	</view>
+    
+    <view name="_close" x="$once{ parent.width-this.width-2 }" y="2"
+        resource="btn_presenter_close"
+        onmouseover="this.setResourceNumber(2)"
+        onmouseout="this.setResourceNumber(1)"
+        onmousedown="this.setResourceNumber(3)"
+        onmouseup="this.setResourceNumber(1)" >
+        <handler name="onclick">
+            this.setResourceNumber(2);
+            this.parent.close();
+        </handler>
+        <labeltooltip labelid="430" />
+    </view>    
+	
+</class>	
+
+<class name="chatInnerSmilyIcon" extends="view" onmouseover="" onmouseout="">
+	<attribute name="iconlabel" value="" type="string" />
+	<attribute name="iconvalue" value="" type="string" />
+	<handler name="onclick">
+		var messageBox = canvas._overallchartcontent.parent.parent._chattabbottom.message;
+		messageBox.setText(messageBox.getText()+" "+iconvalue+"  ");
+		LzFocus.setFocus(messageBox._ctext);
+		messageBox._ctext.setSelection(messageBox.getText().length-1,messageBox.getText().length);
+	</handler>
+	<labeltooltip text="$once{ parent.iconlabel }" />
+</class>
+
+<class name="overallchattabbottom" extends="view" layout="axis:x;spacing:2" >
+
+		<view height="20" width="485" name="message" 
 			  bgcolor="$once{ canvas.basebgcolorizer }">
+			<attribute name="curserpos" value="0" type="number" />
 			<method name="getText">
 				return this._ctext.getText();
 			</method>
@@ -26,7 +114,7 @@
 		</view>
 
 	  	<attribute name="objMessage" value="null" />
-	  	<simplelabelbutton x="170" y="0" labelid="220" name="_button" width="70" > 
+	  	<simplelabelbutton labelid="220" name="_button" width="70" > 
 		  	<handler name="onclick">
 		  		parent.objMessage = new Array ();
 		  		parent.objMessage[0] = 'chat';
@@ -48,8 +136,25 @@
 			  		this.parent.message.setText('');
 		  		}
 		  	</handler>
+		  	<labeltooltip labelid="444" />
 		</simplelabelbutton>
-		<simplelabelbutton x="240" y="0" name="_delete_chat_log">
+
+		<simplelabelbutton name="_show_emots">
+			<handler name="onclick">
+				//parent.clearOverallChat.doCall();
+				var pick = new emoticonsselector(canvas,{x:(this.getAttributeRelative('x',canvas)-140),y:(this.getAttributeRelative('y',canvas)-140)});
+				LzModeManager.makeModal( pick );
+			</handler>
+			<view x="2" y="1">
+				<handler name="oninit">
+					var swfurl = 'http://'+canvas.rtmphostlocal+':'+canvas.red5httpport+'/xmlcrm/public/emoticons/smile_btn.swf';
+					this.setSource(swfurl);
+				</handler>
+			</view>
+			<labeltooltip labelid="445" />
+		</simplelabelbutton>			
+		  
+		<simplelabelbutton name="_delete_chat_log">
 			<handler name="onclick">
 				parent.clearOverallChat.doCall();
 			</handler>

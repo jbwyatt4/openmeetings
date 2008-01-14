@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" ?>
 <library>  
 
 <class name="changewidthslider" extends="view" bgcolor="white" width="60" height="24">
