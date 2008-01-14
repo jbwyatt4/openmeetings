@@ -44,7 +44,7 @@
 						if (value[i].length>4){
 							iconlabel += ", "+value[i][2];							
 						}
-						var m = new chatInnerSmilyIcon(parent.inn.inn,{x:x+this.x,y:y+this.y,iconvalue:value[i][1],iconlabel:iconlabel});
+						var m = new chatInnerSmilyIcon(parent.inn.inn,{iconvalue:value[i][1],iconlabel:iconlabel});
 						m.setSource(swfurl);						
 					}
                 ]]>
@@ -81,7 +81,7 @@
 	<attribute name="iconlabel" value="" type="string" />
 	<attribute name="iconvalue" value="" type="string" />
 	<handler name="onclick">
-		var messageBox = canvas._overallchartcontent.parent.parent._chattabbottom.message;
+		var messageBox = parent.parent.parent.btnRef.message;
 		messageBox.setText(messageBox.getText()+" "+iconvalue+"  ");
 		LzFocus.setFocus(messageBox._ctext);
 		messageBox._ctext.setSelection(messageBox.getText().length-1,messageBox.getText().length);
