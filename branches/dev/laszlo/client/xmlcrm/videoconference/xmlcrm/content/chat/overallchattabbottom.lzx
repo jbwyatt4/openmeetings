@@ -12,7 +12,7 @@
 			<method name="setText" args="txt">
 				this._ctext.setText(txt);
 			</method>
-			<inputtext name="_ctext" width="${ parent.width-2 }" height="${ parent.height-2 }"
+			<inputtext name="_ctext" width="$once{ parent.width-2 }" height="$once{ parent.height-2 }"
 				x="1" y="1" bgcolor="white" >
 				<method event="onkeyup" args="key">
 	                <![CDATA[
