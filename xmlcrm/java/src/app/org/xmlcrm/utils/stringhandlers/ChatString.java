@@ -7,7 +7,6 @@ import java.util.LinkedList;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.xmlcrm.app.remote.Application;
-import org.xmlcrm.emotes.TestChatParsing;
 
 public class ChatString {
 	
