@@ -162,9 +162,11 @@
 		////Debug.write(" g[image] ",storedImageDate);
 		if (storedImageDate["clearField"] && !storedImageDate["askagainclear"]){
 			_drawarea.setModus('plain');
-			_drawarea.addNewImage(this.downloadurl,this.x,this.y);
+			Debug.write(" _drawarea.addNewImage 1 ",this.downloadurl,this.x,this.y);
+			_drawarea.addNewImage(this.downloadurl,this.x,this.y,this.baseurl,this.fileName,this.moduleName,this.parentPath,this.room,this.domain);
 		} else if (!storedImageDate["askagainclear"] && !storedImageDate["clearField"]){
-			_drawarea.addNewImage(this.downloadurl,this.x,this.y);
+			_drawarea.addNewImage(this.downloadurl,this.x,this.y,this.baseurl,this.fileName,this.moduleName,this.parentPath,this.room,this.domain);
+			Debug.write(" _drawarea.addNewImage 2 ",this.downloadurl,this.x,this.y);
 		} else if (storedImageDate["askagainclear"]){
 			this.confirmdialog = new confirmation(canvas.main_content._content.inner,{labelid:62,labeliderror:63,refObj:this});
 		} else {
