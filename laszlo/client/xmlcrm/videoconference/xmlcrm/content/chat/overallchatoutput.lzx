@@ -56,7 +56,7 @@
         ]]>
     </method>
     
-    <view name="_cbtext" width="244" layout="axis:y;spacing:2" >
+    <view name="_cbtext" width="$once{ parent.width }" layout="axis:y;spacing:2" >
     	<method name="clearChatOutput">
     		<![CDATA[
     			Debug.write("clearChatOutput ",this.subviews.length);
