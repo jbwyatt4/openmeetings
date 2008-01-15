@@ -7,7 +7,26 @@
 <resource name="showusercontextcloseau" src="resources/error.png" />
 <resource name="showusercontextau" src="resources/1downarrow.png" />
 	
-
+<class name="videouserProfilePicBig" extends="view" width="250" height="187.5" 
+	   clip="true" bgcolor="white">
+	<attribute name="value" value="null" />
+	<handler name="oninit">
+		<![CDATA[
+			if (this.value.picture_uri==null || this.value.picture_uri.length==0){
+				this.value.picture_uri = "d.jpg";
+			} else {
+				this.value.picture_uri = "_profile_"+value.picture_uri;
+			}
+	        var downloadurl = 'http://'+canvas.rtmphostlocal+':'+canvas.red5httpport
+	        		+'/xmlcrm/DownloadHandler?fileName='+value.picture_uri
+	        		+'&moduleName=remoteuserprofilebig&parentPath=&room=&domain='
+	        		+'&remoteUserid='+this.value.user_id
+	        		+'&sid='+canvas.sessionId;
+	        this._userpic.setAttribute('src',downloadurl);	
+        ]]>
+	</handler>	
+	<image name="_userpic" />
+</class>
 <!-- #################
 	Class videoobject
 	
@@ -22,9 +41,10 @@
 		
 	<!-- Set the Name of the partner -->
 	<attribute name="chatpartnername" value="" type="string" />
+	<attribute name="showUserProfilePic" type="boolean" value="false" />
 	
 	<attribute name="usercolor" value="" type="string" />
-	<attribute name="userposition" value="o" type="number" />
+	<attribute name="userposition" value="0" type="number" />
 		
 	<!-- Set the ID of the Partner 
 		@keywords private
@@ -32,6 +52,7 @@
 	<attribute name="uniqueid" value="-2" type="string" />
 	
 	<attribute name="isremote" value="true" type="boolean" />
+	<attribute name="clientVars" value="null" />
 	
 	<handler name="onisremote" args="r">
 		this.isremote = r;
@@ -46,7 +67,9 @@
 		}
 	</handler>
 	
-	<attribute name="clientVars" value="null" />
+	<method name="updateAVSettingsSymbol" args="rcl">
+		Debug.warn("updateAVSettingsSymbol TODO ",rcl);
+	</method>	
 	
 	<handler name="oninit">
 		this.clientVars = new Array();
@@ -68,8 +91,25 @@
     	this.uniqueid = '0';
     	this.setAttribute('chatpartnername','');
     	this._chatvideoinner._videoview.v_output.stop();
+    	if (this.showUserProfilePic){
+    		this._chatvideoinner.userProfilePic.destroy();
+    		this.showUserProfilePic = false;
+    	}    	
     	this.clientVars=null;
     </method>
+
+    <method name="setVideouserProfilePic" args="value">
+    	Debug.write("### setVideouserProfilePic ",value);
+    	new videouserProfilePicBig(this._chatvideoinner,{name:'userProfilePic',value:value});
+    	this.showUserProfilePic = true;
+    </method>    
+    
+    <method name="deleteVideoConfProfilePic" args="value">
+    	Debug.write("### setVideouserProfilePic ",value);
+    	if (this.showUserProfilePic){
+    		this._chatvideoinner.userProfilePic.destroy();
+    	}
+    </method>    
     
 	<!-- Attribute shows if an Video-Stream has been assigned to this videoview 
 		if it has been assigned one then no other can connect -->

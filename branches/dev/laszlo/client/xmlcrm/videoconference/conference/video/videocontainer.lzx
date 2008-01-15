@@ -13,7 +13,8 @@
 	<attribute name="streams" value="null" />
 
 	<attribute name="allUsers" value="null" />
-	
+  	
+	<attribute name="remoteMessage" value="null" />
 	<attribute name="currentuserObject" value="null" />
 	
 	<handler name="oninit">
@@ -57,10 +58,10 @@
     	<netparam><method name="getValue">return hib.conferencedomain;</method></netparam>  	
 		<handler name="ondata" args="value">
 			//The onResult-Handler will be called be the rtmpconnection
-			Debug.write("setUserroom: ",value,hib.connectedroom);
+			Debug.write("setRoomValues: ",value,hib.connectedroom);
             Debug.write("+++++++++++++++++ getClientListScope : ",value);
             for (var i in value){
-            	////Debug.write("getClientListScope value: ",value[i]);
+            	Debug.write("getClientListScope value: ",value[i]);
             	if (value[i].username!=null){
             		this.parent.addItem(value[i].connectedSince,value[i].isMod,value[i].streamid,value[i].username,value[i].userroom,value[i].formatedDate,value[i].userpos,value[i].usercolor,value[i]);
             	}
@@ -70,6 +71,18 @@
             canvas._chartcontent.doInit();				
 		</handler>	
   	</netremotecallhib>
+
+	<!-- invoked if another client logs into the room 
+	after choosing devices -->     
+    <method name="setAVSettingsToClient" args="userposition,rcl">
+    	Debug.write("addNoAVClient ",userposition,rcl);
+		if (rcl.avsettings=="n"){
+			this.subviews[userposition].setVideouserProfilePic(rcl);
+		} else if (rcl.avsettings=="a"){
+			this.subviews[userposition].setVideouserProfilePic(rcl);
+		}
+    	this.subviews[userposition].updateAVSettingsSymbol(rcl);
+    </method>    	
 
 	<method name="addItem" args="connectedSince,isMod,streamid,username,userroom,formatedDate,position,color,object">
 		<![CDATA[
@@ -81,7 +94,19 @@
 	  		myvideocontainer.parent.parent.setAttribute('chatpartnername',object.firstname+' '+object.lastname);
 	  		myvideocontainer.parent.parent.setAttribute('uniqueid',streamid);
 	  		myvideocontainer.parent.parent.setAttribute('isremote',true);
-	  		myvideocontainer.v_output.play(streamid,-1);	
+	  		Debug.write("object.avsettings: ",object.avsettings);
+	  		if (object.avsettings=="n"){
+    			myvideocontainer.setVideouserProfilePic(object);
+    		} else if (object.avsettings=="a"){
+    			myvideocontainer.parent.parent.setVideouserProfilePic(object);
+    			Debug.warn("start play");
+    			myvideocontainer.v_output.play(streamid,-1);	
+    		} else {
+    			myvideocontainer.v_output.play(streamid,-1);
+    			Debug.warn("start play");
+    		}
+    		myvideocontainer.parent.parent.updateAVSettingsSymbol(object);
+	  		return myvideocontainer;
 		}
 		]]>
 	</method>
@@ -97,6 +122,11 @@
 	  		myvideocontainer.parent.parent.setAttribute('chatpartnername',object.firstname+' '+object.lastname);
 	  		myvideocontainer.parent.parent.setAttribute('uniqueid',streamid);
 	  		myvideocontainer.parent.parent.setAttribute('isremote',true);	
+	  		Debug.write("addClientItem avsettings: ",object.avsettings);
+    		if (object.avsettings=="n" || object.avsettings=="a"){
+    			myvideocontainer.parent.parent.setVideouserProfilePic(value[i]);
+    		}
+    		myvideocontainer.parent.parent.updateAVSettingsSymbol(object);
 		}
 		]]>
 	</method>
@@ -104,16 +134,16 @@
 	<method name="startStream" args="searchid,userpos">
 		////Debug.write("startStream: ",searchid,userpos);
 		<![CDATA[
-
-		////Debug.write("startStream: ",this.subviews[userpos],searchid,userpos);
-		if (this.subviews[userpos].uniqueid == searchid){
-			//VideoView with Partner has been found
-            //remove Stream from view
-            ////Debug.write("Found client to startStream");
-			this.subviews[userpos]._chatvideoinner._videoview.v_output.play(searchid,-1);
-			return this.subviews[userpos].getVideoReference();
-		}
-		return null;
+	
+			////Debug.write("startStream: ",this.subviews[userpos],searchid,userpos);
+			if (this.subviews[userpos].uniqueid == searchid){
+				//VideoView with Partner has been found
+	            //remove Stream from view
+	            ////Debug.write("Found client to startStream");
+				this.subviews[userpos]._chatvideoinner._videoview.v_output.play(searchid,-1);
+				return this.subviews[userpos].getVideoReference();
+			}
+			return null;
 		]]>
 	</method>
 
@@ -125,38 +155,38 @@
 	 -->
 	<method name="getNewVideoObject">
 		<![CDATA[
-		//Get a Free VideoView Slot
-		for (var i=0;i<this.subviews.length;i++){
-			if (!this.subviews[i].isassigned){
-				//A free Slot has been found
-				//return the Reference to the VideoView it and mark it as used
-				this.subviews[i].setAttribute('isassigned',true);
-				canvas.currentusercolor = this.subviews[i].usercolor;
-				canvas.currentuserpos = this.subviews[i].userposition;
-				this.subviews[i]._chatvideoinner.r.setResourceNumber(canvas.currentuserpos+1);
-				this.subviews[i]._chatvideoinner._videoview.setAttribute('visible',true);
-				////Debug.write("canvas.currentusercolor : ",canvas.currentusercolor);
-				canvas.thishib.setAudienceModus.doCall();
-			    this.subviews[i].setAttribute('chatpartnername',hib.userobject.firstname+' '+hib.userobject.lastname);
-				return this.subviews[i].getVideoReference();
+			//Get a Free VideoView Slot
+			for (var i=0;i<this.subviews.length;i++){
+				if (!this.subviews[i].isassigned){
+					//A free Slot has been found
+					//return the Reference to the VideoView it and mark it as used
+					this.subviews[i].setAttribute('isassigned',true);
+					canvas.currentusercolor = this.subviews[i].usercolor;
+					canvas.currentuserpos = this.subviews[i].userposition;
+					this.subviews[i]._chatvideoinner.r.setResourceNumber(canvas.currentuserpos+1);
+					this.subviews[i]._chatvideoinner._videoview.setAttribute('visible',true);
+					////Debug.write("canvas.currentusercolor : ",canvas.currentusercolor);
+					canvas.thishib.setAudienceModus.doCall();
+				    this.subviews[i].setAttribute('chatpartnername',hib.userobject.firstname+' '+hib.userobject.lastname);
+					return this.subviews[i].getVideoReference();
+				}
 			}
-		}
-		return null;
+			return null;
 		]]>
 	</method>
 	<method name="getNewVideoObjectByPos" args="pos">
 		<![CDATA[
-		//Get a Free VideoView Slot by Position
-		////Debug.write("this.subviews[pos]: ",this.subviews,this.subviews[pos],pos);
-		if (!this.subviews[pos].isassigned){
-			//A free Slot has been found
-			//return the Reference to the VideoView it and mark it as used
-			this.subviews[pos]._chatvideoinner.r.setResourceNumber(pos+1);
-			this.subviews[pos]._chatvideoinner._videoview.setAttribute('visible',true);
-			this.subviews[pos].setAttribute('isassigned',true);
-			return this.subviews[pos].getVideoReference();
-		}
-		return null;
+			//Get a Free VideoView Slot by Position
+			////Debug.write("this.subviews[pos]: ",this.subviews,this.subviews[pos],pos);
+			if (!this.subviews[pos].isassigned){
+				//A free Slot has been found
+				//return the Reference to the VideoView it and mark it as used
+				this.subviews[pos]._chatvideoinner.r.setResourceNumber(pos+1);
+				this.subviews[pos]._chatvideoinner._videoview.setAttribute('visible',true);
+				this.subviews[pos].setAttribute('isassigned',true);
+				return this.subviews[pos].getVideoReference();
+			}
+			return null;
 		]]>
 	</method>
 	
@@ -179,33 +209,33 @@
 	<method name="closeStreamClient" args="searchid,userpos">
 		////Debug.write("closeStreamclient: ",searchid,userpos);
 		<![CDATA[
-
-		////Debug.write("closeStreamClient: ",this.subviews[userpos],searchid,userpos);
-		if (this.subviews[userpos].uniqueid == searchid){
-			//VideoView with Partner has been found
-            //remove Stream from view
-            ////Debug.write("Found client to closeStream");
-			this.subviews[userpos]._chatvideoinner._videoview.setAttribute('visible',false);
-			return this.subviews[userpos].getVideoReference();
-		}
-		return null;
+	
+			////Debug.write("closeStreamClient: ",this.subviews[userpos],searchid,userpos);
+			if (this.subviews[userpos].uniqueid == searchid){
+				//VideoView with Partner has been found
+	            //remove Stream from view
+	            ////Debug.write("Found client to closeStream");
+				this.subviews[userpos]._chatvideoinner._videoview.setAttribute('visible',false);
+				return this.subviews[userpos].getVideoReference();
+			}
+			return null;
 		]]>
 	</method>
 	<method name="disconnectclient" args="searchid,userpos">
 		////Debug.write("disconnectclient: ",searchid,userpos);
 		<![CDATA[
-		////Debug.write("disconnectclient: ",this.subviews[userpos],searchid,userpos);
-		if (this.subviews[userpos].uniqueid == searchid){
-			//VideoView with Partner has been found
-            //mark this view as free
-            ////Debug.write("Found client to disconnect");
-			this.subviews[userpos].setAttribute('isassigned',false);
-			this.subviews[userpos]._chatvideoinner.r.setResourceNumber(5);
-			this.subviews[userpos].resetValues();
-			this.subviews[userpos]._chatvideoinner._videoview.setAttribute('visible',false);
-			return this.subviews[userpos].getVideoReferenceDis();
-		}
-		return null;
+			////Debug.write("disconnectclient: ",this.subviews[userpos],searchid,userpos);
+			if (this.subviews[userpos].uniqueid == searchid){
+				//VideoView with Partner has been found
+	            //mark this view as free
+	            ////Debug.write("Found client to disconnect");
+				this.subviews[userpos].setAttribute('isassigned',false);
+				this.subviews[userpos]._chatvideoinner.r.setResourceNumber(5);
+				this.subviews[userpos].resetValues();
+				this.subviews[userpos]._chatvideoinner._videoview.setAttribute('visible',false);
+				return this.subviews[userpos].getVideoReferenceDis();
+			}
+			return null;
 		]]>
 	</method>	
 

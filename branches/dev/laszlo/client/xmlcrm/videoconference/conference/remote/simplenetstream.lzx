@@ -29,7 +29,7 @@
               @keywords private -->
         <attribute name="_flashstream" value="null"/>
         
-        <attribute name="buffertime" value="0.1" type="number" />
+        <attribute name="buffertime" value="0" type="number" />
         
         <attribute name="soundRef" value="null" />
         
@@ -167,14 +167,14 @@
         <!--- start sending a live mediastream to the server. -->
         <method name="broadcast" args="streamname,cam,mic">
             <![CDATA[
-
+				Debug.write("broadcast ",streamname,cam,mic);
                 this._findnc();
                 
                 if (this._nc!=null){
                     this._createStream();
                 
-                    this._flashstream.attachVideo(cam._dev);
-                    this._flashstream.attachAudio(mic._dev);
+                    if (cam!=null) this._flashstream.attachVideo(cam._dev);
+                    if (mic!=null) this._flashstream.attachAudio(mic._dev);
                 
                     this.streamname = streamname;
                     Debug.write("publish", this.streamname);
