@@ -5,21 +5,65 @@ import java.util.LinkedList;
 
 public class RoomClient {
 	 
+	/*
+	 * login name
+	 */
 	String username = "";
+	
+	/*
+	 * a unique id
+	 */
 	String streamid = "";
+	
+	/*
+	 * this indicated if two people are in the same room
+	 * if they have the same userroom _and_ domain
+	 * in public rooms the domain == 'public'
+	 * in private rooms the domain is the organisation_id
+	 * its necessary to check both cause otherwise its theoretically possible
+	 * to make a room private _and_ public, then the room would have the same ID but a different domain
+	 * 
+	 */
 	String userroom = "";
+	String domain = "";
+	
+	/*
+	 * true indicates that this user is Moderating
+	 * in Events rooms (only 1 Video) this means that this user is currently 
+	 * sharing its video/audio
+	 * 
+	 */
 	Boolean isMod = false;
 	Date connectedSince;
 	String formatedDate;
+	
+	/*
+	 * the color of the user, only needed in 4x4 Conference, in these rooms each user has its own
+	 * color 
+	 */
 	String usercolor;
 	Integer userpos;
+	/*
+	 * client IP
+	 */
 	String userip;
-	String domain = "";
+	/*
+	 * client Port
+	 */
 	int userport;
+	/*
+	 * current room idd while conferencing
+	 */
 	Long room_id;
 	
 	Date roomEnter = null;
 	
+	/*
+	 * some vars _not_ directly connected to the user-record from the database
+	 * cause a user is not _forced_ to login he can also be an invited user, so user_id
+	 * might be null or 0 even if somebody is already in a conference room
+	 * 
+	 */
 	Long user_id = null;
 	String firstname = "";
 	String lastname = "";
@@ -29,9 +73,22 @@ public class RoomClient {
 	String picture_uri;
 	String language = "";
 	
+	/*
+	 * these vars are necessary to send notifications from the chatroom of a 
+	 * conference to outside of the conference room
+	 */
 	Boolean isChatNotification = false;
 	String chatUserroom = "";
 	String chatDomain = "";
+	
+	/*
+	 * avsettings can be:
+	 * av - video and audio
+	 * a - audio only
+	 * v - video only
+	 * n - no av only static Image
+	 */
+	String avsettings = "";
 	
 	String swfurl;
 	Boolean isRecording = false;
@@ -328,6 +385,13 @@ public class RoomClient {
 	}
 	public void setRoomRecordingName(String roomRecordingName) {
 		this.roomRecordingName = roomRecordingName;
+	}
+
+	public String getAvsettings() {
+		return avsettings;
+	}
+	public void setAvsettings(String avsettings) {
+		this.avsettings = avsettings;
 	}
 
 }

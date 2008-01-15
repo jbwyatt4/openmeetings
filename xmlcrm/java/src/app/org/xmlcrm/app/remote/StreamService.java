@@ -89,8 +89,10 @@ public class StreamService implements IPendingServiceCallback {
 							String streamName = generateFileName(rcl.getStreamid());
 							String remoteAdress = conn.getRemoteAddress();
 							
-							recordShow(conn, rcl.getStreamid(), streamName);
-							
+							//if the user does publish av, a, v
+							if (!rcl.getAvsettings().equals("n")){
+								recordShow(conn, rcl.getStreamid(), streamName);
+							}
 							roomStream.put("streamName", streamName);
 							roomStream.put("remoteAdress", remoteAdress);
 							roomStream.put("startdate",new java.util.Date());
@@ -149,7 +151,10 @@ public class StreamService implements IPendingServiceCallback {
 					if(roomname.equals(rcl.getUserroom()) && orgdomain.equals(rcl.getDomain())){
 						((IServiceCapableConnection) conn).invoke("stopedRecording",new Object[] { currentClient }, this);
 						if (!conferenceType.equals("audience") || rcl.getIsMod()){
-							stopRecordingShow(conn,rcl.getStreamid());
+							//if the user does publish av, a, v
+							if (!rcl.getAvsettings().equals("n")){
+								stopRecordingShow(conn,rcl.getStreamid());
+							}
 						}
 					}
 				}
@@ -186,7 +191,10 @@ public class StreamService implements IPendingServiceCallback {
 					//Check if the Client is in the same room and same domain 
 					if(roomname.equals(rcl.getUserroom()) && orgdomain.equals(rcl.getDomain())){
 						if (!conferenceType.equals("audience") || rcl.getIsMod()){
-							stopRecordingShow(conn,rcl.getStreamid());
+							//if the user does publish av, a, v
+							if (!rcl.getAvsettings().equals("n")){
+								stopRecordingShow(conn,rcl.getStreamid());
+							}
 						}
 					}
 				}
@@ -390,7 +398,10 @@ public class StreamService implements IPendingServiceCallback {
 				String streamName = generateFileName(rcl.getStreamid());
 				String remoteAdress = conn.getRemoteAddress();
 				
-				recordShow(conn, rcl.getStreamid(), streamName);
+				//if the user does publish av, a, v
+				if (!rcl.getAvsettings().equals("n")){
+					recordShow(conn, rcl.getStreamid(), streamName);
+				}
 				
 				roomStream.put("streamName", streamName);
 				roomStream.put("remoteAdress", remoteAdress);
@@ -481,7 +492,10 @@ public class StreamService implements IPendingServiceCallback {
 					if(roomname.equals(rcl.getUserroom()) && orgdomain.equals(rcl.getDomain())){
 						((IServiceCapableConnection) conn).invoke("stopedRecording",new Object[] { currentClient }, this);
 						if (!conferenceType.equals("audience") || rcl.getIsMod()){
-							stopRecordingShow(conn,rcl.getStreamid());
+							//if the user does publish av, a, v
+							if (!rcl.getAvsettings().equals("n")){
+								stopRecordingShow(conn,rcl.getStreamid());
+							}
 						}
 					}
 				}
