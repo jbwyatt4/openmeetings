@@ -18,7 +18,18 @@
 	  	this.subviews[0].setAttribute('uniqueid',flv);
 	  	this.subviews[0].setAttribute('isremote',true);
 	  	this.subviews[0]._chatvideoinner._videoview.setAttribute('visible',true);
-		this.subviews[0]._chatvideoinner._videoview.playStream(flv);
+	  	
+  		if (object.avsettings=="n"){
+			this.subviews[0].setVideouserProfilePic(object);
+		} else if (object.avsettings=="a"){
+			this.subviews[0].setVideouserProfilePic(object);
+			Debug.warn("start play");
+			this.subviews[0]._chatvideoinner._videoview.playStream(flv);
+		} else {
+			myvideocontainer.v_output.play(streamid,-1);
+			this.subviews[0]._chatvideoinner._videoview.playStream(flv);
+		}	  	
+		
 		return this.subviews[0].getVideoReference();
 	</method>
 

@@ -2,23 +2,23 @@
 <library>
 	
 <class name="videoboardstream" extends="guipresenter" x="2" y="2"
-    width="266" height="280" closable="false" title="Video and Audio"
+    width="270" height="280" closable="false" title="Video and Audio"
     resizeable="false">
     <videocontainerstream name="_videocontainer" x="2" y="22" />
 </class>  
 
 <class name="videoboardstreamEvent" extends="guipresenter" x="2" y="2"
-    width="266" height="280" closable="false" title="Video and Audio"
+    width="270" height="280" closable="false" title="Video and Audio"
     resizeable="false">
     <videoeventcontainerstream name="_videocontainer" x="2" y="22" />
 </class>  
 
 <class name="videoboardstreamPlaceHolder" extends="guipresenter" x="2" y="2"
-    width="266" height="280" closable="false" title="Video and Audio"
+    width="270" height="280" closable="false" title="Video and Audio"
     resizeable="false">
 </class>  
 
-<class name="whiteboardpanelrecord" extends="guipresenter" x="270" y="2"
+<class name="whiteboardpanelrecord" extends="guipresenter" x="274" y="2"
     width="660" height="592" closable="false" title="Whiteboard"
     resizeable="false">
    <whiteboard name="_whiteboard" y="22" x="4">

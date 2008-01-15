@@ -4,9 +4,9 @@
 <class name="innerlistView" extends="view" layout="axis:y;spacing:1;inset:1" 
 	width="258" bgcolor="$once{ canvas.basebgcolorizer }" />
 
-<class name="userTagView" extends="text" height="18" width="280" 
-    onmouseover="this.setBGColor(canvas.baseMousecolorizer)" onmouseout="this.setBGColor(white)" 
-    bgcolor="white" text="$once{ this.firstname+' '+this.lastname }" fontsize="11" resize="false">
+<class name="userTagView" extends="text" width="280" bgcolor="white"
+    onmouseover="this.setBGColor(canvas.baseMousecolorizer)" 
+    onmouseout="this.setBGColor(white)" >
 	
 	<attribute name="connectedSince" value="" type="string" />
 	<attribute name="isMod" value="" type="string" />
@@ -16,7 +16,27 @@
 	<attribute name="formatedDate" value="" type="string" />
 	<attribute name="firstname" value="" type="string" />
 	<attribute name="lastname" value="" type="string" />
+	<attribute name="user_id" value="0" type="number" />
 	<attribute name="refObj" value="null" />
+	
+	<handler name="oninit">
+		<![CDATA[
+	        var downloadurl = 'http://'+canvas.rtmphostlocal+':'+canvas.red5httpport
+	        		+'/xmlcrm/DownloadHandler?fileName=CHAT'
+	        		+'&moduleName=chat&parentPath=&room=&domain='
+	        		+'&remoteUserid='+this.user_id
+	        		+'&sid='+canvas.sessionId;
+	        this._userpic.setAttribute('src',downloadurl);	
+        ]]>
+	</handler>
+	
+	<image name="_userpic" >
+		<handler name="onload">
+			parent.setAttribute('height',this.height);
+		</handler>
+	</image>
+	
+	<labeltext x="40" text="$once{ parent.firstname+' '+parent.lastname }" />
 </class>
 
 <class name="listofUsers" extends="view" width="260" height="240" bgcolor="$once{ canvas.basebgcolorizer }">
@@ -25,7 +45,7 @@
 
 	<method name="addItem" args="object">
 		//Debug.write(object);
-		new userTagView(this._table.innerlist,{firstname:object.firstname,lastname:object.lastname,refObj:object,connectedSince:object.connectedSince,isMod:object.isMod,streamid:object.streamid,username:object.username,userroom:object.userroom,formatedDate:object.formatedDate});
+		new userTagView(this._table.innerlist,{user_id:object.user_id,firstname:object.firstname,lastname:object.lastname,refObj:object,connectedSince:object.connectedSince,isMod:object.isMod,streamid:object.streamid,username:object.username,userroom:object.userroom,formatedDate:object.formatedDate});
 	</method>
 	
 	<method name="clearList">

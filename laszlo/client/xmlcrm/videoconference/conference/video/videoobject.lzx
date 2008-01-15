@@ -12,6 +12,27 @@
 	<frame src="resources/icon_mute_red.png" />
 </resource>
 
+<class name="videouserProfilePic" extends="view" x="1" y="2" width="128" height="96" 
+	   clip="true" bgcolor="black">
+	<attribute name="value" value="null" />
+	<handler name="oninit">
+		<![CDATA[
+			if (this.value.picture_uri==null || this.value.picture_uri.length==0){
+				this.value.picture_uri = "d.jpg";
+			} else {
+				this.value.picture_uri = "_profile_"+value.picture_uri;
+			}
+	        var downloadurl = 'http://'+canvas.rtmphostlocal+':'+canvas.red5httpport
+	        		+'/xmlcrm/DownloadHandler?fileName='+value.picture_uri
+	        		+'&moduleName=remoteuserprofile&parentPath=&room=&domain='
+	        		+'&remoteUserid='+this.value.user_id
+	        		+'&sid='+canvas.sessionId;
+	        this._userpic.setAttribute('src',downloadurl);	
+        ]]>
+	</handler>	
+	<image name="_userpic" />
+</class>
+
 <!-- #################
 	Class videoobject
 	
@@ -22,10 +43,11 @@
 	int chatpartnername
  -->
     
-<class name="videoobject" extends="view" bgcolor="0x000000" width="132" height="120" visible="true">
+<class name="videoobject" extends="view" bgcolor="0x000000" width="132" height="120">
 		
 	<!-- Set the Name of the partner -->
 	<attribute name="chatpartnername" value="" type="string" />
+	<attribute name="showUserProfilePic" type="boolean" value="false" />
 	
 	<attribute name="usercolor" value="0" type="number" />
 	<attribute name="userposition" value="0" type="number" />
@@ -69,6 +91,10 @@
 		return this._chatvideoinner._videoview;
 	</method>
 	
+	<method name="updateAVSettingsSymbol" args="rcl">
+		Debug.warn("updateAVSettingsSymbol TODO ",rcl);
+	</method>
+	
     <method name="setIdentifier" args="id">
     	//for development replace this by the real name later after authentification
     	//this.setAttribute('chatpartnername',('StreamID: '+id));
@@ -80,8 +106,18 @@
     	this.uniqueid = '0';
     	this.setAttribute('chatpartnername','');
     	this.clientVars=null;
+    	if (this.showUserProfilePic){
+    		this._chatvideoinner.userProfilePic.destroy();
+    		this.showUserProfilePic = false;
+    	}
     	this._chatvideoinner._videoview.v_output.stop();
 		this._chatvideoinner._sendInvitation.setAttribute('visible',true);
+    </method>
+    
+    <method name="setVideouserProfilePic" args="value">
+    	Debug.write("### setVideouserProfilePic ",value);
+    	new videouserProfilePic(this._chatvideoinner,{name:'userProfilePic',value:value});
+    	this.showUserProfilePic = true;
     </method>
     
 	<!-- Attribute shows if an Video-Stream has been assigned to this videoview 
@@ -96,7 +132,7 @@
 	
 	<view name="_chatvideoinner" x="1" y="20" width="130" height="100" >
 		
-		<view name="r" resource="chatbgitem" x="1" y="2" stretches="both" width="128" height="96" ></view>
+		<view name="r" resource="chatbgitem" x="1" y="2" stretches="both" width="128" height="96" />
 		<handler name="oninit">
 			this.r.setResourceNumber(5);
 		</handler>

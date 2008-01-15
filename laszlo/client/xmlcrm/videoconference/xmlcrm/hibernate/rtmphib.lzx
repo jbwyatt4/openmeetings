@@ -499,6 +499,8 @@
                 } else if (value.message[0]=='chat'){
                     if (canvas._chartcontent) canvas._chartcontent.addChatHistory(value.message,value.client);
                     if (canvas._chartcontentRPC) canvas._chartcontentRPC.addChatHistory(value.message,value.client);
+                } else if (value.message[0]=='avsettings'){
+                    canvas._videocontainer.setAVSettingsToClient(value.message[1],value.client);
                 } else if (value.message[0]=='whiteboard'){
 					if (value.message[1]=='wmlloadcomplete'){
 						_drawarea.sendCompleteWmlLoadedRClient(value.client);
@@ -632,7 +634,7 @@
     		Debug.write("roomConnect: ",value);
     		if (canvas._overallchartcontent!=null){
     			var parentObj = canvas._overallchartcontent.parent.parent.parent._chatparticipants._list;
-    			new chatparticipent(parentObj,{user_id:value.user_id,username:value.lastname+", "+value.firstname});				
+    			new chatparticipent(parentObj,{user_id:value.user_id,username:value.firstname+", "+value.lastname});				
     		}
     	</handler>
     </netremotecallhib>
