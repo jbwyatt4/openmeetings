@@ -19,7 +19,6 @@ import org.red5.server.api.IClient;
 import org.red5.server.api.IConnection;
 import org.red5.server.api.IScope;
 import org.red5.server.api.Red5;
-import org.red5.server.api.IBandwidthConfigure;
 import org.red5.server.api.service.IPendingServiceCall;
 import org.red5.server.api.service.IPendingServiceCallback;
 import org.red5.server.api.service.IServiceCapableConnection;
@@ -29,11 +28,12 @@ import org.red5.server.api.stream.IPlaylistSubscriberStream;
 import org.red5.server.api.stream.IStreamAwareScopeHandler;
 import org.red5.server.api.stream.ISubscriberStream;
 import org.xmlcrm.app.conference.configutils.BandwidthConfigFactory;
-import org.xmlcrm.app.conference.configutils.CustomBandwidth;
 import org.xmlcrm.app.conference.configutils.UserConfigFactory;
 import org.xmlcrm.app.quartz.scheduler.QuartzSessionClear;
 import org.xmlcrm.utils.stringhandlers.ChatString;
 import org.xmlcrm.app.conference.videobeans.RoomClient;
+import org.xmlcrm.app.data.user.Usermanagement;
+import org.xmlcrm.app.hibernate.beans.user.Users;
 
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.XppDriver;
@@ -539,9 +539,55 @@ public class Application extends ApplicationAdapter implements
 			returnVal = err.toString();
 		}
 		return returnVal;
-	}
+	}  
 	
-	
+	/**
+	 * this must be set _after_ the Video/Audio-Settings have been chosen (see editrecordstream.lzx)
+	 * but _before_ anything else happens, it cannot be applied _after_ the stream has started!
+	 * avsettings can be:
+	 * av - video and audio
+	 * a - audio only
+	 * v - video only
+	 * n - no av only static image
+	 * @param avsetting
+	 * @return
+	 */
+	public RoomClient setUserAVSettings(String avsettings, Object newMessage){
+		try {
+			IConnection current = Red5.getConnectionLocal();
+			String streamid = current.getClient().getId();
+			RoomClient currentClient = ClientList.get(streamid);
+			currentClient.setAvsettings(avsettings);
+			String roomname = currentClient.getUserroom();
+			String orgdomain = currentClient.getDomain();					
+			ClientList.put(streamid, currentClient);
+			
+			HashMap<String,Object> hsm = new HashMap<String,Object>();
+			hsm.put("client", currentClient);
+			hsm.put("message", newMessage);			
+			
+			Iterator<IConnection> it = current.getScope().getConnections();
+			while (it.hasNext()) {
+				IConnection conn = it.next();				
+				RoomClient rcl = ClientList.get(conn.getClient().getId());
+				//Check if the Client is in the same room and same domain 
+				if(roomname.equals(rcl.getUserroom()) && orgdomain.equals(rcl.getDomain())){	
+					log.error("setUserObjectOneFour Found Client to " + conn);
+					log.error("setUserObjectOneFour Found Client to " + conn.getClient());
+					if (conn instanceof IServiceCapableConnection) {
+						((IServiceCapableConnection) conn).invoke("sendVarsToMessageWithClient",new Object[] { hsm }, this);
+						log.error("sending setUserObjectNewOneFour to " + conn);
+					}
+				}
+			}
+			
+			return currentClient;
+		} catch (Exception err){
+			log.error("[setUserAVSettings]",err);
+		}
+		return null;
+	}	
+	 
 	public HashMap<String,RoomClient> setRoomValues(String userroom, Long room_id, String orgdomain){
 		try {
 
@@ -639,24 +685,25 @@ public class Application extends ApplicationAdapter implements
 	 */
 	public RoomClient setUsername(Long userId, String username, String firstname, String lastname, String orgdomain){
 		try {
-
-			log.error("#*#*#*#*#*#*# setUsername userId: "+userId+" username: "+username+" firstname: "+firstname+" lastname: "+lastname);
-			
-			IConnection current = Red5.getConnectionLocal();
-			log.error("current: "+current.getScope().getName());
-			
-			log.error(current.getClient());
-			log.error(current.getClient().getId());
+			//log.error("#*#*#*#*#*#*# setUsername userId: "+userId+" username: "+username+" firstname: "+firstname+" lastname: "+lastname);
+			IConnection current = Red5.getConnectionLocal();			
 			String streamid = current.getClient().getId();
 			RoomClient currentClient = ClientList.get(streamid);
-			log.error("[setUsername] id: "+currentClient.getStreamid());
+			//log.error("[setUsername] id: "+currentClient.getStreamid());
 			currentClient.setUsername(username);
 			currentClient.setDomain(orgdomain);
-
 			currentClient.setUserObject(userId, username, firstname, lastname);
-			ClientList.put(streamid, currentClient);
-			log.error("##### setUsername : " + currentClient.getUsername()+" "+currentClient.getStreamid()); // just a unique number
 			
+			//only fill this value from User-REcord
+			//cause invited users have non
+			//you cannot set the firstname,lastname from the UserRecord
+			Users us = Usermanagement.getInstance().getUser(userId);
+			if (us!=null && us.getPictureuri()!=null){
+				//set Picture-URI
+				System.out.println("###### SET PICTURE URI");
+				currentClient.setPicture_uri(us.getPictureuri());
+			}
+			ClientList.put(streamid, currentClient);
 			return currentClient;
 		} catch (Exception err){
 			log.error("[setUsername]",err);

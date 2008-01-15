@@ -122,6 +122,60 @@ public class DownloadHandler extends HttpServlet {
 							System.out.println("cannot write to directory");
 						}
 					}
+				} else if (moduleName.equals("remoteuserprofile")){
+					working_dir += "profiles" + File.separatorChar;
+					File f = new File(working_dir);
+					if (!f.exists()) {
+						boolean c = f.mkdir();
+						if (!c) {
+							log.error("cannot write to directory");
+							System.out.println("cannot write to directory");
+						}
+					}
+					
+					String remoteUser_id = httpServletRequest.getParameter("remoteUserid");
+					if(remoteUser_id == null){
+						remoteUser_id = "0";
+					}
+					
+					working_dir += "profile_"+remoteUser_id + File.separatorChar;
+					File f2 = new File(working_dir);
+					if (!f2.exists()) {
+						boolean c = f2.mkdir();
+						if (!c) {
+							log.error("cannot write to directory");
+							System.out.println("cannot write to directory");
+						}
+					}
+					
+				} else if (moduleName.equals("remoteuserprofilebig")){
+					working_dir += "profiles" + File.separatorChar;
+					File f = new File(working_dir);
+					if (!f.exists()) {
+						boolean c = f.mkdir();
+						if (!c) {
+							log.error("cannot write to directory");
+							System.out.println("cannot write to directory");
+						}
+					}
+					
+					String remoteUser_id = httpServletRequest.getParameter("remoteUserid");
+					if(remoteUser_id == null){
+						remoteUser_id = "0";
+					}
+					
+					working_dir += "profile_"+remoteUser_id + File.separatorChar;
+					File f2 = new File(working_dir);
+					if (!f2.exists()) {
+						boolean c = f2.mkdir();
+						if (!c) {
+							log.error("cannot write to directory");
+							System.out.println("cannot write to directory");
+						}
+					}
+					
+					requestedFile = this.getBigProfileUserName(working_dir);
+					
 				} else if (moduleName.equals("chat")){
 					
 					working_dir += "profiles" + File.separatorChar;
@@ -253,6 +307,18 @@ public class DownloadHandler extends HttpServlet {
 		}
 		return "_no.jpg";
 	}
+	
+	private String getBigProfileUserName(String userprofile_folder) throws Exception{
 		
+		File f = new File(userprofile_folder);
+		if (f.exists() && f.isDirectory()) {
+			String filesString[] = f.list();
+			for (int i=0;i<filesString.length;i++) {
+				String fileName = filesString[i];
+				if (fileName.startsWith("_big_")) return fileName;
+			}
+		}
+		return "_no.jpg";
+	}	
 
 }
