@@ -46,6 +46,13 @@ Tips for Installation:
 
   * FeatureRequest
   * NewsArchive
+Mailing-Lists:
+  * User: http://groups.google.com/group/openmeetings-user
+  * Developers: http://groups.google.com/group/openmeetings-dev
+
+== Hosting, Customization and Services ==
+  
+  * http://www.webbase-design.de/cms/service.html
 
 == Other Pages ==
 
