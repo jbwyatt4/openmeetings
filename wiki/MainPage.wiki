@@ -4,13 +4,13 @@
 
 Current Version Beta7, installation Instruction can be taken from Beta6:
 
-InstallationOf05RC5Beta6 [05Beta6Changes]
+InstallationOf05RC5Beta6 ( [05Beta6Changes] )
 
 Tips for Installation:
   * InstallationDebian
   * ConvertersInstallation
   * OpenOfficeConverter
-  * qosTips
+  * [qosTips]
 
 Source Build:
   * BuildSources
