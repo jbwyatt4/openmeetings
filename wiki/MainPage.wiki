@@ -2,7 +2,7 @@
 
 == Installation ==
 
-Current Version Beta7, installation Instruction can be taken from Beta6:
+Current Version Beta7, installation instructions are the same as Beta6:
 
 [InstallationOf05RC6Beta6] ( [05Beta6Changes] )
 
