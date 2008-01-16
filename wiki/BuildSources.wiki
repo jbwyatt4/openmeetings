@@ -54,9 +54,8 @@ Basic steps; After checkout fresh copy from svn repo (windows users look for tor
 Final note: Every little change effects immediately when you refresh browser window while you work with Laszlo. And comment is <!-- --> lines Hope it helps some one, Happy coding
 
 
- 
- 
- 
+= Links =
+BuildSources
  
  
  
