@@ -12,18 +12,19 @@
   * DemoServer 	Support 	about the Live Demo Server 	 	 
   * DocumentImporting 	Design 	about importing of documents. 	 
   * FeatureRequest 	---- 	You can post / comment here feature's you would like to see 
+  * FileIndex
   * [Installation05Beta1] 	---- 	installation Instruction for the 0.5Beta1 release 	
-  * Installation0_5_DEV_Release 	---- 	How to install dev-0.5 Release from source, Please: this is for developers not end users!  	 
-  * InstallationDebian 	---- 	InstallationDebian openmeetings05Beta5   Installation 	
-  * InstallationMileStone05Beta1 	---- 	Installation Instructions for the first beta release 	 
-  * InstallationOf05RC2Beta2 	---- 	Installation instructions of 0.5 Release Candidate 2 	 
-  * InstallationOf05RC2Beta2_PO 	---- 	One-sentence summary of this page. 	 	 
-  * InstallationOf05RC3Beta3 	---- 	Installation of 05 Release Candidate 3 	 	 
-  * InstallationOf05RC3Beta4 	---- 	Installation of 05 Release Candidate 4 	 	 
-  * InstallationOf05RC5Beta5 	---- 	Installation of 05 Release Candidate 5 	
-  * InstallationOf05RC6Beta6 	---- 	Installation of 05 Release Candidate 6 and Release Candidate 7    	 
-  * Installation_pre_0_5Release 	---- 	How to install pre-0.5 Release, Please: this is for developers not end users! 
-  * Internationalisation 	Design 	This Page should documentate the progress of internationalisation 	 	 
+  * [Installation0_5_DEV_Release] 	---- 	How to install dev-0.5 Release from source, Please: this is for developers not end users!  	 
+  * [InstallationDebian] 	---- 	InstallationDebian openmeetings05Beta5   Installation 	
+  * [InstallationMileStone05Beta1] 	---- 	Installation Instructions for the first beta release 	 
+  * [InstallationOf05RC2Beta2] 	---- 	Installation instructions of 0.5 Release Candidate 2 	 
+  * [InstallationOf05RC2Beta2_PO] 	---- 	One-sentence summary of this page. 	 	 
+  * [InstallationOf05RC3Beta3] 	---- 	Installation of 05 Release Candidate 3 	 	 
+  * [InstallationOf05RC3Beta4] 	---- 	Installation of 05 Release Candidate 4 	 	 
+  * [InstallationOf05RC5Beta5] 	---- 	Installation of 05 Release Candidate 5 	
+  * [InstallationOf05RC6Beta6] 	---- 	Installation of 05 Release Candidate 6 and Release Candidate 7    	 
+  * [Installation_pre_0_5Release] 	---- 	How to install pre-0.5 Release, Please: this is for developers not end users! 
+  * [Internationalisation] 	Design 	This Page should documentate the progress of internationalisation 	 	 
   * LanguageEditor 	Documentation 	Description of the Language-Editor
   * MainPage 	---- 	OpenMeetings Wiki Main Page 
   * NewsArchive 	---- 	former news 	
