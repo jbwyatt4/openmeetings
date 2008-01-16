@@ -4,25 +4,25 @@
 = Source Locations Developer Version =
 
 You need to compile two apps:
-  * Client - build with OpenLaszlo
+  * Client - build with !OpenLaszlo
   * Webapp - Java-Webapp
 
 = Openlaszlo Client (Client-Side) =
 
 http://openmeetings.googlecode.com/svn/branches/dev/laszlo/client/
 
-for compiling the client you need to install the Open-Laszlo-Server:
+for compiling the client you need to install the !OpenLaszlo-Server:
 http://www.openlaszlo.org
 
 place the content of 
 http://openmeetings.googlecode.com/svn/branches/dev/laszlo/client/xmlcrm/videoconference/
 
 Step-By-Step:
-  * Download and Install Open-Laszlo 4.0.6 (Version > 4.0.5 is needed!)
+  * Download and Install !OpenLaszlo 4.0.7 (Version > 4.0.5 is needed!)
   * Checkout from the SVN using http://openmeetings.googlecode.com/svn/branches/dev/laszlo/client/ as root of your Project ($CLIENT_SOURCE_ROOT)
-  * Copy the directory videoconference of $CLIENT_SOURCE_ROOT/xmlcrm/ into your Openlaszlo -WebRoot ($LPS-HOME/Server/lps-4.0.5/) ... on Windows your Path if you're using the default one's will look like C:/Program Files/Openlaszlo Server 4.0.5/Server/lps-4.0.5/videoconference/... 
+  * Copy the directory videoconference of $CLIENT_SOURCE_ROOT/xmlcrm/ into your Openlaszlo -WebRoot ($LPS-HOME/Server/lps-4.0.7/) ... on Windows your Path if you're using the default one's will look like C:/Program Files/Openlaszlo Server 4.0.5/Server/lps-4.0.5/videoconference/... 
   * alter the config.xml in videoconference/config.xml (for example C:/Program Files/Openlaszlo Server 4.0.5/Server/lps-4.0.5/videoconference/config.xml) ... _rtmphostlocal should match the IP/domain of your red5-streaming server (if its on the same IP like your Openlaszlo-Server you can leave it blank)
-  * Start OpenLaszlo Server and run: http://localhost($LPS-HOST):8080/lps-4.0.5/videoconference/maindebug.lzx?lzr=swf8&lzproxied=solo and http://localhost($LPS-HOST):8080/lps-4.0.5/videoconference/main.lzx?lzr=swf8&lzproxied=solo
+  * Start OpenLaszlo Server and run: http://localhost($LPS-HOST):8080/lps-4.0.7/videoconference/maindebug.lzx?lzr=swf8&lzproxied=solo and http://localhost($LPS-HOST):8080/lps-4.0.7/videoconference/main.lzx?lzr=swf8&lzproxied=solo
 
 = Java Webapp (Server-Side) =
 
