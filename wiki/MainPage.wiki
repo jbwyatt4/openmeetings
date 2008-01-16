@@ -30,7 +30,6 @@ Tips for Installation:
 == Documentation ==
  
   * [Internationalisation]
-  * RoadMap
   * BandwidthNetworkSettings
   * SimpleSampleApps  	
   * [databasescheme] (outdated)
@@ -45,6 +44,7 @@ Tips for Installation:
 == Community == 
 
   * FeatureRequest
+  * RoadMap
   * NewsArchive
 Mailing-Lists:
   * User: http://groups.google.com/group/openmeetings-user
