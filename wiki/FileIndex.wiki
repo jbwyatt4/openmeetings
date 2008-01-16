@@ -1,8 +1,8 @@
-  * 05Beta2Changes  	----  	0.5 Beta2 Changes     	 
-  * 05Beta3Changes 	---- 	0.5 Beta3 Changes 	 	 
-  * 05Beta4Changes 	---- 	0.5 Beta4 Changes 	 	 
-  * 05Beta5Changes 	---- 	0.5 Beta5 Changes 	 	 
-  * 05Beta6Changes 	---- 	0.5 Beta6 and Beta7 Changes 	 
+  * [05Beta2Changes]  	----  	0.5 Beta2 Changes     	 
+  * [05Beta3Changes] 	---- 	0.5 Beta3 Changes 	 	 
+  * [05Beta4Changes] 	---- 	0.5 Beta4 Changes 	 	 
+  * [05Beta5Changes] 	---- 	0.5 Beta5 Changes 	 	 
+  * [05Beta6Changes] 	---- 	0.5 Beta6 and Beta7 Changes 	 
   * AdminScreenshots 	---- 	The screenshots of the admin console   Configuration 	 
   * BackupPanel 	---- 	Description about the BackupPanel 	
   * BandwidthNetworkSettings 	---- 	about the configuration of Bandwidth, Ports 	 
@@ -12,7 +12,7 @@
   * DemoServer 	Support 	about the Live Demo Server 	 	 
   * DocumentImporting 	Design 	about importing of documents. 	 
   * FeatureRequest 	---- 	You can post / comment here feature's you would like to see 
-  * Installation05Beta1 	---- 	installation Instruction for the 0.5Beta1 release 	
+  * [Installation05Beta1] 	---- 	installation Instruction for the 0.5Beta1 release 	
   * Installation0_5_DEV_Release 	---- 	How to install dev-0.5 Release from source, Please: this is for developers not end users!  	 
   * InstallationDebian 	---- 	InstallationDebian openmeetings05Beta5   Installation 	
   * InstallationMileStone05Beta1 	---- 	Installation Instructions for the first beta release 	 
