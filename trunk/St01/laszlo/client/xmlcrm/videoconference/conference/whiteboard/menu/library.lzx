@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<library>
+
+	<include href="choosedrawareaobjectcombobox.lzx" />
+	<include href="drawareaobjectcombobox.lzx" />
+	<include href="drawareaalterposition.lzx" />
+	<include href="drawchoosemodir.lzx" />
+	<include href="drawchoosesizeradio.lzx" />
+	<include href="drawcolorpicker.lzx" />
+
+</library>

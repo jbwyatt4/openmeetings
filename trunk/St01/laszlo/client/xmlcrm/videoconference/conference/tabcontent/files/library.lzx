@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<library>
+ 
+	<include href="uploadtab.lzx" />
+    <include href="imageslistdraw.lzx" />
+	<include href="imagelistinnertable.lzx" />
+	<include href="listimagedrag.lzx" />
+	<include href="listwml.lzx" />
+	<include href="listfolderdrag.lzx" />
+	<include href="listppt.lzx" />
+    
+    <include href="baselistpresentationItem.lzx" />
+    <include href="listpresentationThumb.lzx" />
+    <include href="listpresentationFilePDF.lzx" />
+    <include href="listpresentationFileOrig.lzx" />
+    
+</library>

@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<library>
+
+<resource name="step_back" src="resources/step_back.png" />
+<resource name="step_fwd" src="resources/step_fwd.png" />
+
+<class name="innerlist" layout="axis:y;spacing:2" />
+	
+<class name="turnoverlist" extends="view">
+
+	<attribute name="start" value="0" type="number" />
+	<attribute name="step" value="100" type="number" />
+	<attribute name="orderby" value="firstname" type="string" />
+	<attribute name="asc" value="true" type="boolean" />
+	<attribute name="records" value="0" type="number" />
+	
+	<handler name="oncallnext" />
+	<handler name="oncallpre" />
+	<handler name="onclickedItem" args="obj" />
+	
+	<method name="callfirst">
+		this.start = 0;
+		this.oncallnext.sendEvent();
+	</method>
+	
+	<method name="calllast">
+		this.start = this.records-this.step;
+		this.oncallnext.sendEvent();
+	</method>
+	
+	<method name="callnext">
+		this._next1.setAttribute('enabled',false);
+		this._pre2.setAttribute('enabled',false);
+		if (this.records>(this.start+this.step)){
+			this.start+=this.step;
+		}
+		this.oncallnext.sendEvent();
+	</method>
+	
+	<method name="callpre">
+		this._next1.setAttribute('enabled',false);
+		this._pre2.setAttribute('enabled',false);
+		if (this.start>0){
+			this.start-=this.step;
+		}
+		this.oncallpre.sendEvent();
+	</method>
+	
+	<method name="initValues" args="rec">
+		<![CDATA[
+            this.records = rec;
+            if (this.records>(this.start+this.step)){
+                this._next1.setAttribute('enabled',true);
+            } else {
+                this._next1.setAttribute('enabled',false);
+            }
+            if (this.start>0){
+                this._pre2.setAttribute('enabled',true);
+            } else {
+                this._pre2.setAttribute('enabled',false);
+            }
+            this._records.setText(this.start + ' - ' +(this.start+this.step) + ' ' + canvas.getLabelName(272) + ' ' + this.records);
+		]]>
+	</method>
+	
+	<method name="addHeaderItem" args="labelid,width" >
+		new turnoverlistheaderitem(this._innerlisthead._inn,{labelid:labelid,width:width,subviewsid:this._innerlisthead._inn.subviews.length});
+	</method>
+	
+	<method name="sendWidthUpdate" args="w,subviewsid" >
+		<![CDATA[
+		////Debug.write(w,subviewsid,this._innerlist._inn);
+		for (var i=0;i<this._innerlist._inn._inn.subviews.length;i++){
+			this._innerlist._inn._inn.subviews[i].subviews[subviewsid].setAttribute('width',w);
+		}
+		]]>
+	</method>
+	
+	<method name="clearList">
+		this._innerlist._inn._inn.destroy();
+		new innerlist(this._innerlist._inn,{name:'_inn'});
+	</method>
+    
+    <labeltext name="_records" x="2" resize="true" />
+    
+	<simplelabelbuttontooltip name="_pre1" x="$once{ parent.width-196 }" width="22" height="22" 
+		enabled="true" onclick="parent.callfirst()" tooltipId="368">
+		<view resource="step_back" />
+	</simplelabelbuttontooltip>
+	<simplelabelbuttontooltip name="_pre2" x="$once{ parent.width-172 }" width="22" height="22" 
+		enabled="false" onclick="parent.callpre()" tooltipId="369" >
+		<view resource="step_back" />
+	</simplelabelbuttontooltip>
+	<combobox name="languages" width="100" x="$once{ parent.width-149 }" 
+			  editable="false" height="22" >
+		<attribute name="sendEventToReload" value="false" type="boolean" />
+        <textlistitem value="25" text="25" />
+        <textlistitem value="50" text="50" />
+        <textlistitem value="75" text="75" />
+        <textlistitem value="100" text="100" />
+        <textlistitem value="200" text="200" />
+        <handler name="onselect">
+        	if (this.sendEventToReload){ 
+        		parent.setAttribute('step',Number(this.getValue()));
+        	}
+        </handler>
+        <handler name="oninit">
+        	this.selectItem(String(parent.step));
+        	this.sendEventToReload = true;
+        </handler>
+	</combobox>
+	<simplelabelbuttontooltip name="_next1" x="$once{ parent.width-48 }" width="22" height="22" 
+		enabled="false" onclick="parent.callnext()" tooltipId="370">
+		<view resource="step_fwd" />
+	</simplelabelbuttontooltip>
+	<simplelabelbuttontooltip name="_next2" x="$once{ parent.width-24 }" width="22" height="22" 
+		enabled="true" onclick="parent.calllast()" tooltipId="371">
+		<view resource="step_fwd" />
+	</simplelabelbuttontooltip>
+	
+	
+	<view name="_innerlisthead" height="20" width="$once{ parent.width }" 
+		x="${ parent._innerlist.x }" y="22" clip="true">
+		<view name="_inn" layout="axis:x;spacing:0" />
+	</view>	
+	
+	<view name="_innerlist" height="$once{ parent.height-22 }" width="$once{ parent.width }"
+		y="42" clip="true">
+		<view name="_inn" >
+			<innerlist name="_inn" />
+		</view>
+		<vscrollbar />
+		<hscrollbar />
+	</view>
+
+</class>
+
+</library>

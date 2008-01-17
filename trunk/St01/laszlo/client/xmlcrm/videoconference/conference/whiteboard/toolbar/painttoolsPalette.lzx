@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<library>
+	
+<!-- Line -->	
+<class name="drawlineTools" extends="view" x="340" layout="axis:x;spacing:2">
+	<lineonlycolorchoose y="42" name="lineColor" 
+		selectedColor="$once{ this.parent.parent.parent._drawareaMask._drawarea.currentlinestroke }" >
+		<handler name="onselectedColor" args="sel">
+			this.parent.parent.parent._drawareaMask._drawarea.setAttribute('currentlinestroke',sel);
+		</handler>
+	</lineonlycolorchoose>		
+	<changewidthslider y="42" name="linewidth" 
+		initialNumber="$once{ this.parent.parent.parent._drawareaMask._drawarea.currentlinelineWidth }" >
+		<handler name="oninitialNumber" args="i">
+			this.parent.parent.parent._drawareaMask._drawarea.setAttribute('currentlinelineWidth',i);
+		</handler>
+	</changewidthslider>     
+</class>
+
+	<!-- Uline -->
+<class name="drawulineTools" extends="view" x="340" layout="axis:x;spacing:2">	
+	<lineonlycolorchoose y="42" name="lineColor" 
+		selectedColor="$once{ this.parent.parent.parent._drawareaMask._drawarea.currentulinestroke }" >
+		<handler name="onselectedColor" args="sel">
+			this.parent.parent.parent._drawareaMask._drawarea.setAttribute('currentulinestroke',sel);
+		</handler>
+	</lineonlycolorchoose>		
+	<changewidthslider y="42" name="linewidth" 
+		initialNumber="$once{ this.parent.parent.parent._drawareaMask._drawarea.currentulinelineWidth }" >
+		<handler name="oninitialNumber" args="i">
+			this.parent.parent.parent._drawareaMask._drawarea.setAttribute('currentulinelineWidth',i);
+		</handler>
+	</changewidthslider> 	
+</class>
+
+<!-- drawarrow -->
+<class name="drawdrawarrowTools" extends="view" x="340" layout="axis:x;spacing:2">
+	<lineonlycolorchoose y="42" name="lineColor" 
+		selectedColor="$once{ this.parent.parent.parent._drawareaMask._drawarea.currentdrawarrowlinestroke }" >
+		<handler name="onselectedColor" args="sel">
+			this.parent.parent.parent._drawareaMask._drawarea.setAttribute('currentdrawarrowlinestroke',sel);
+		</handler>
+	</lineonlycolorchoose>	 
+</class>
+   
+<!-- Paint -->
+<class name="drawpaintTools" extends="view" x="340" layout="axis:x;spacing:2">	
+	<lineonlycolorchoose y="42" name="lineColor" 
+		selectedColor="$once{ this.parent.parent.parent._drawareaMask._drawarea.currentlayerstroke }" >
+		<handler name="onselectedColor" args="sel">
+			this.parent.parent.parent._drawareaMask._drawarea.setAttribute('currentlayerstroke',sel);
+		</handler>
+	</lineonlycolorchoose>		
+	<changewidthslider y="42" name="linewidth" 
+		initialNumber="$once{ this.parent.parent.parent._drawareaMask._drawarea.currentlayerlineWidth }" >
+		<handler name="oninitialNumber" args="i">
+			this.parent.parent.parent._drawareaMask._drawarea.setAttribute('currentlayerlineWidth',i);
+		</handler>
+	</changewidthslider>  	  
+</class>
+	
+<!-- letter -->
+<class name="drawletterTools" extends="view" x="340" layout="axis:x;spacing:2">	
+	<lineonlycolorchoose y="42" name="lineColor" 
+		selectedColor="$once{ this.parent.parent.parent._drawareaMask._drawarea.currentlayerletter }" >
+		<handler name="onselectedColor" args="sel">
+			this.parent.parent.parent._drawareaMask._drawarea.setAttribute('currentlayerletter',sel);
+		</handler>
+	</lineonlycolorchoose>
+    <basechooseseicon resourceN="italic" y="43" height="23" width="24" labelid="86" >
+        <handler name="onclick">
+            this.parent.parent.parent._drawareaMask._drawarea.setAttribute('italic',!this.parent.parent._drawareaMask._drawarea.getAttribute('italic'));
+        </handler>
+    </basechooseseicon>
+    <basechooseseicon resourceN="bold" y="43" height="23" width="24" labelid="87" >
+        <handler name="onclick">
+            this.parent.parent.parent._drawareaMask._drawarea.setAttribute('bold',!this.parent.parent._drawareaMask._drawarea.getAttribute('bold'));
+        </handler>
+    </basechooseseicon>  
+    <changewidthletterslider y="42" name="linewidth" 
+		initialNumber="$once{ this.parent.parent.parent._drawareaMask._drawarea.currentlayersize }" >
+		<handler name="oninitialNumber" args="i">
+			this.parent.parent.parent._drawareaMask._drawarea.setAttribute('currentlayersize',i);
+		</handler>
+	</changewidthletterslider>  	   
+</class>
+
+<!-- rectangle -->
+<class name="drawrectangleTools" extends="view" x="340" layout="axis:x;spacing:2">
+	<linecolorchoose y="42" name="lineColor"  
+		selectedColor="$once{ this.parent.parent.parent._drawareaMask._drawarea.currentrectanglestroke }" 
+		selectedColorDis="$once{ this.parent.parent.parent._drawareaMask._drawarea.currentrectanglestrokeDis }" >
+		<handler name="onselectedColor" args="sel">
+			if (sel==-1){
+				this.parent.parent.parent._drawareaMask._drawarea.setAttribute('currentrectanglestrokeDis',-1);
+			} else if (!this.inInitColorSelection){
+				this.parent.parent.parent._drawareaMask._drawarea.setAttribute('currentrectanglestrokeDis',1);
+				this.parent.parent.parent._drawareaMask._drawarea.setAttribute('currentrectanglestroke',sel);
+			} else {
+				this.inInitColorSelection = false;
+			}
+		</handler>
+	</linecolorchoose>
+	<fillcolorchoose y="42" name="FillColor" 
+		selectedColor="$once{ this.parent.parent.parent._drawareaMask._drawarea.currentrectanglestrokeFill }"
+		selectedColorDis="$once{ this.parent.parent.parent._drawareaMask._drawarea.currentrectanglestrokeFillDis }" >
+		<handler name="onselectedColor" args="sel">
+			if (sel==-1){
+				this.parent.parent.parent._drawareaMask._drawarea.setAttribute('currentrectanglestrokeFillDis',-1);
+			} else if (!this.inInitColorSelection){
+				this.parent.parent.parent._drawareaMask._drawarea.setAttribute('currentrectanglestrokeFillDis',1);
+				this.parent.parent.parent._drawareaMask._drawarea.setAttribute('currentrectanglestrokeFill',sel);
+			} else {
+				this.inInitColorSelection = false;
+			}			
+		</handler>
+	</fillcolorchoose>	
+	<changewidthslider y="42" name="linewidth" 
+		initialNumber="$once{ this.parent.parent.parent._drawareaMask._drawarea.currentrectangleineWidth }" >
+		<handler name="oninitialNumber" args="i">
+			this.parent.parent.parent._drawareaMask._drawarea.setAttribute('currentrectangleineWidth',i);
+		</handler>
+	</changewidthslider>    
+</class>
+
+<!-- ellipse -->
+<class name="drawellipseTools" extends="view" x="340" layout="axis:x;spacing:2">	
+	<linecolorchoose y="42" name="lineColor" 
+		selectedColor="$once{ this.parent.parent.parent._drawareaMask._drawarea.currentellipsestroke }"
+		selectedColorDis="$once{ this.parent.parent.parent._drawareaMask._drawarea.currentellipsestrokeDis }">
+		<handler name="onselectedColor" args="sel">
+			if (sel==-1){
+				this.parent.parent.parent._drawareaMask._drawarea.setAttribute('currentellipsestrokeDis',-1);
+			} else if (!this.inInitColorSelection){
+				this.parent.parent.parent._drawareaMask._drawarea.setAttribute('currentellipsestrokeDis',1);
+				this.parent.parent.parent._drawareaMask._drawarea.setAttribute('currentellipsestroke',sel);
+			} else {
+				this.inInitColorSelection = false;
+			}				
+		</handler>
+	</linecolorchoose>
+	<fillcolorchoose y="42" name="FillColor" 
+		selectedColor="$once{ this.parent.parent.parent._drawareaMask._drawarea.currentellipsestrokeFill }"
+		selectedColorDis="$once{ this.parent.parent.parent._drawareaMask._drawarea.currentellipsestrokeFillDis }">
+		<handler name="onselectedColor" args="sel">
+			if (sel==-1){
+				this.parent.parent.parent._drawareaMask._drawarea.setAttribute('currentellipsestrokeFillDis',-1);
+			} else if (!this.inInitColorSelection){
+				this.parent.parent.parent._drawareaMask._drawarea.setAttribute('currentellipsestrokeFillDis',1);
+				this.parent.parent.parent._drawareaMask._drawarea.setAttribute('currentellipsestrokeFill',sel);
+			} else {
+				this.inInitColorSelection = false;
+			}		
+		</handler>
+	</fillcolorchoose>	
+	<changewidthslider y="42" name="linewidth"
+		initialNumber="$once{ this.parent.parent.parent._drawareaMask._drawarea.currentellipselineWidth }" >
+		<handler name="oninitialNumber" args="i">
+			this.parent.parent.parent._drawareaMask._drawarea.setAttribute('currentellipselineWidth',i);
+		</handler>
+	</changewidthslider>
+</class>   
+
+<class name="painttoolsPalette" extends="view" >        
+	<method name="clearContent">
+		<![CDATA[
+			while (this.subviews.length > 0) {
+				this.subviews[0].destroy();
+			}
+		]]>
+	</method>
+	<method name="loadToolsByModi" args="modi">
+		if (global["draw"+modi+"Tools"]!=undefined) {
+			this.clearContent();
+			new global["draw"+modi+"Tools"](this);		
+		}
+	</method>
+</class>
+    
+</library>
