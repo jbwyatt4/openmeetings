@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<library>
+
+<!-- ###################
+	Class charttab
+ -->
+<class name="overallchat" extends="guipresenter" resizeable="false"
+    width="810" height="280" y="240" x="10" closable="true" labelid="443" >
+	
+	<handler name="onclose">
+		Debug.write("close: ",this);
+		canvas._overallchartcontent=null;
+	</handler>
+	
+	<view y="20" bgcolor="white" x="1" width="$once{ parent.width-2 }" 
+		  height="$once{ parent.height-21 }" />
+	
+	<view y="22" bgcolor="white" x="4" height="$once{ parent.height-25 }" >
+		<view name="_chartoutputborder" height="$once{ parent.height-30 }"
+	        bgcolor="$once{ canvas.basebgcolorizer }" width="604">
+			<overallchatoutput name="_chatoutput" x="1" y="1" >
+				<handler name="oninit">
+					if (canvas._overallchartcontent!=null) canvas._overallchartcontent.parent.parent.parent.close();
+					canvas._overallchartcontent = this;
+				</handler>
+			</overallchatoutput>
+		</view>
+		<overallchattabbottom name="_chattabbottom" 
+					   y="$once{ parent.height-28 }" x="0" width="254" />
+	</view>
+	
+	<view x="610" y="22" name="_chatparticipantsBorder" height="$once{ parent.height-22 }" width="1" />
+	
+	<view x="612" y="22" name="_chatparticipants" height="$once{ parent.height-24 }" 
+	        width="190" clip="true" >
+	    <handler name="oninit">
+	    	this.getChatOverallUsers.doCall();
+	    </handler>
+	    
+	        <netremotecallhib name="getChatOverallUsers" funcname="chatservice.getChatOverallUsers" 
+				remotecontext="$once{ canvas.thishib }" > 
+	            <handler name="ondata" args="value">
+	            	<![CDATA[
+	                	//The onResult-Handler will be called be the rtmpconnection
+						Debug.write("getChatOverallUsers : ",value);
+						for (var i=0;i<value.overallList.length;i++){
+							new chatparticipent(this.parent._list,{user_id:value.overallList[i].user_id,username:value.overallList[i].firstname+" "+value.overallList[i].lastname});				
+						}
+	                ]]>
+	            </handler>   
+	        </netremotecallhib>
+	        
+	        <method name="removeItemById" args="user_id">
+	        	<![CDATA[
+	        		for (var i=0;i<this._list.subviews.length;i++) {
+	        			if (this._list.subviews[i].user_id==user_id) {
+	        				this._list.subviews[i].destroy();
+	        			}
+	        		}
+	        	]]>
+	        </method>
+	        
+		<view name="_list" width="176" layout="axis:y" />
+		<vscrollbar name="_scroll" />
+	</view>
+	
+</class>
+
+<class name="chatparticipent" extends="view" width="$once{ parent.width }" >
+	<attribute name="user_id" value="0" type="number" />
+	<attribute name="username" value="" type="string" />	
+	<handler name="oninit">
+		<![CDATA[
+			Debug.write("WIDTH: "+this.width);
+	        var downloadurl = 'http://'+canvas.rtmphostlocal+':'+canvas.red5httpport
+	        		+'/xmlcrm/DownloadHandler?fileName=CHAT'
+	        		+'&moduleName=chat&parentPath=&room=&domain='
+	        		+'&remoteUserid='+this.user_id
+	        		+'&sid='+canvas.sessionId;
+	        //Debug.write("downloadurl "+downloadurl);
+	        this._userpic.setAttribute('src',downloadurl);	
+	        
+	        //Debug.write("TIME: "+this.usertime);
+        ]]>
+	</handler>
+	<image name="_userpic" />
+	<text text="$once{ parent.username }" x="40" resize="false"
+		  width="$once{ parent.width - 40 }" bgcolor="0xCCCCCC"
+		  selectable="true" />	
+</class>
+
+</library>
