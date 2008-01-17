@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<library>
-	
-    <include href="invitationquickloader.lzx" />
-	<include href="invitemainwindow.lzx" />
-	<include href="invitationuserwin.lzx" />
-
-</library>
