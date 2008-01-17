@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<config>
+
+<!-- URL/IP to use for the Server 192.168.178.28 
+inno02.fh-pforzheim.de macbook 192.168.2.103
+192.168.2.102 bxlug.homelinux.org 213.219.160.72
+    if this value is empty it will try to connect to the 
+    domain-name it has been loading from  
+    inno02.fh-pforzheim.de  
+    -->
+<rtmphostlocal>macbook</rtmphostlocal>
+
+<!--  
+Port to use for the Server
+To this port the default server lookup is done
+
+You can find all this configuraiton in your red5-Config in: $RED5_HOME/conf/red5.properties
+ -->
+<rmptport>1935</rmptport>
+
+<!-- 
+Port to use for the Server
+To this port the fallback is done once the default rtmport failed
+this should workaround 99% of all firewalls
+ -->
+<rmptTunnelport>8088</rmptTunnelport>
+
+<!-- 
+Port to use for the Server
+This port is used to connec to the http-servlet
+of the red5-servlet
+ -->
+<red5httpport>5080</red5httpport>
+	
+<!--
+	These colors are the main colors and style the hole application
+ -->
+<basebgcolorizer>0xB0C4DE</basebgcolorizer>
+<baseMousecolorizer>0xC4D5E6</baseMousecolorizer>
+<baseMouseOvercolorizer>0xC4D5E6</baseMouseOvercolorizer>
+	
+<!-- 
+	Version number of this distro
+ -->
+<currentappversion>Version 0.5 Beta7</currentappversion>
+    
+<!--
+    Name of the Application
+ -->    
+<currentappname>OpenMeetings</currentappname>    
+    
+<!-- 
+    URL to the Home of the Application
+-->    
+<currentappnameurl>http://openmeetings.googlecode.com</currentappnameurl>        
+
+<!--
+    URL to Bugs/Support
+ -->
+<currentappnamebugurl>http://code.google.com/p/openmeetings/issues/list</currentappnamebugurl>   
+        
+<!--
+    Video-Settings
+ -->
+<loadnessAcitviation>7</loadnessAcitviation>    
+        
+</config>

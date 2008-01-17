@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<library>
+
+	<include href="confadmin.lzx" />
+    <include href="confadminlistitem.lzx" />
+    <include href="confvalueform.lzx" />
+
+</library>

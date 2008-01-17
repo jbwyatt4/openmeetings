@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<library>
+ 
+ <class name="invitationquickloader" extends="labelexplorerbox" labelid="230"
+    docking="true" resizeable="false" closable="false" width="324" x="400" y="0" height="120">
+	 
+	<attribute name="userlang" value="1" type="number" />
+	 
+    <labeltext name="labellanguages" labelid="227" width="200" y="30" resize="false" x="10" />     
+        <combobox name="languages" width="170" y="30" x="120" editable="false">
+            <netremotecallhib name="getLanguages" funcname="languageservice.getLanguages" remotecontext="$once{ canvas.thishib }" >      
+                <handler name="oninit">
+                    this.doCall();
+                </handler>
+                <handler name="ondata" args="value">
+                    //The onResult-Handler will be called be the rtmpconnection
+                    //Debug.write("getLanguages: ",value);
+                    <![CDATA[
+                    for (var i=0;i<value.length;i++){
+                        this.parent.addItem(value[i].name,value[i].language_id);
+                    }
+                    this.parent.selectItem(value[0].language_id);
+                    ]]>
+                </handler>  
+            </netremotecallhib>
+        </combobox>		 
+
+	<labeltext name="labelloading" y="30" x="10" fontstyle="bold" labelid="229" visibility="hidden" />
+	 
+	 	<simplelabelbutton name="connect" y="80" x="120" text="start" 
+			labelid="228" width="170" height="20" onclick="parent.login();" />
+
+    <method name="login">
+        //Debug.write("this.parent: ",this.parent);
+		
+		this.userlang = Number(this.languages.getValue());
+		
+		this.labellanguages.setAttribute('visibility','hidden');
+		this.languages.setAttribute('visibility','hidden');
+		this.connect.setAttribute('visibility','hidden');
+		this.labelloading.setAttribute('visibility','visible');
+           
+        parent.userlang = Number(this.userlang);
+           
+        var userObject = new Array();
+           
+        canvas.setAttribute('currentuser',canvas.mail);
+        canvas.setAttribute('user_id',-1);
+        canvas.setAttribute('firstName',"");
+        canvas.setAttribute('lastName',canvas.mail);	
+        canvas.setAttribute('mail',canvas.mail);
+        canvas.setAttribute('lastLogin','');
+        canvas.setAttribute('official_code','');
+        canvas.setAttribute('picture_uri','');
+        canvas.setAttribute('language','');					
+       
+        userObject["login"] = canvas.mail;
+        userObject["firstname"] = "";
+        userObject["lastname"] = canvas.mail;
+        userObject["adresses"] = new Array();
+        userObject["adresses"]["emails"] = new Array();
+        userObject["adresses"]["emails"][0] = new Array();
+        userObject["adresses"]["emails"][0]["mail"] = new Array();
+        userObject["adresses"]["emails"][0]["mail"]["email"] = canvas.mail;
+           
+        hib.userobject = userObject;
+           
+        hib.userlang = Number(this.userlang);
+        canvas.thishib.loaderVar = new autoloaderBarOnly(canvas);
+		canvas.thishib.loaderVar.setProgress();
+		this.close();
+        canvas.thishib.loaderVar.getLanguageByIdAndMax.doCall();         
+    </method>
+	 	
+</class>
+
+</library>
