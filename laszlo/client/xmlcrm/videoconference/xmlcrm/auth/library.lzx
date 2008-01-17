@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<library>
+    
+	<include href="resetform.lzx" />
+    <include href="checkLoginData.lzx" />
+    <include href="registerNewUser.lzx" />
+	<include href="resetpassword.lzx" />
+
+</library>

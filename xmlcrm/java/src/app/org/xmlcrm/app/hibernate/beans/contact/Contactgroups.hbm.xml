@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+  <class table="contactgroups" name="org.xmlcrm.app.hibernate.beans.contact.Contactgroups">
+    <id column="contactgroup_id" name="contactgroup_id">
+      <generator class="increment"/>
+    </id>
+    <property name="comment" type="string" column="comment"/>
+    <property name="description" type="string" column="description"/>
+    <property name="freigabe_id" type="long" column="freigabe_id"/>
+    <property name="name" type="string" column="name"/>
+    <property name="starttime" type="java.util.Date" column="starttime"/>
+    <property name="updatetime" type="java.util.Date" column="updatetime"/>
+    <property name="deleted" type="string" column="deleted"/>
+  </class>
+</hibernate-mapping>
