@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<library>
-
-	<include href="dateselector.lzx" />
-	<include href="datefield.lzx" />
-	<include href="calendarwindow.lzx" />
-
-</library>

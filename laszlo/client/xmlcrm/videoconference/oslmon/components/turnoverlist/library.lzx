@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<library>
-
-	<include href="turnoverlist.lzx" />
-	<include href="turnoverlistheaderitem.lzx" />
-	<include href="turnovertextitem.lzx" />
-    <include href="basecontentlistitem.lzx" />
-
-</library>
