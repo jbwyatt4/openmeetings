@@ -20,6 +20,8 @@ sudo apt-get install xvfb openoffice.org
 xvfb-run --server-args='-screen 0 800x600x16' -a /usr/lib/openoffice/program/soffice -headless -nologo -norestore
 }}}
 
+NOTE: Since OpenOffice 2.3 comes already with an build-in FrameBuffer there is no need for xvfb anymore.
+
 
 = Mac OSx =
 Install Open-Office from the Open-Office webside
