@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<descr>
-	アプリケーションのメインプログラム。各種設定と初期画面表示を行います。
-	設定値には、myConfigSetのdatasetを使ってXML設定ファイルを読み込んで
-	各設定値に設定しています。
-</descr>
