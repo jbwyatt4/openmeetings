@@ -294,7 +294,7 @@
     </netremotecallhib>    
     
     <!-- 
-    This method is just a test for returning Object Variables from Client to Server
+    	@descr This method is just a test for returning Object Variables from Client to Server
      -->
     <netremotecallhib name="testObject" funcname="xmlcrm.testObject" 
 		remotecontext="$once{ canvas.thishib }" >      
