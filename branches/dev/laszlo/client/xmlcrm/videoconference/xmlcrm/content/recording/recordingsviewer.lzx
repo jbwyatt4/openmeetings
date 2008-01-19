@@ -195,15 +195,23 @@
 	        
 			var streamList = this.recordingValue.roomRecording.streamlist;
 			
+			Debug.write(this.recordingValue.roomRecording.streamlist);
+			
         	for (var i=0;i<streamList.length;i++){
-        		//Debug.write(this.recordingValue.roomRecording.streamlist[i]);
+        		//Debug.write(streamList[i]);
+        		//Debug.write(streamList[i].starttime);
+        		//Debug.write(streamList[i].streamstart);
+        		//Debug.write(streamList[i].avset);
+        		//Debug.write(streamList[i].streamName);
         		var starttime =  (Math.round(streamList[i].starttime/this.timeStepSyncing))*this.timeStepSyncing;
         		//Debug.write("timeLineAction starttime: ",starttime);
         		if (starttime == this.currentTime){
-	        		var userpos = streamList[i].rcl.userpos;
-	        		var streamname = streamList[i].streamName+".flv";
-	        		Debug.write("Found - ",starttime,userpos,streamname);
-	        		canvas._videocontainer.startStream(streamname,userpos,this.recordingValue.roomRecording.streamlist[i].rcl);
+        			if (streamList[i].streamstart && !streamList[i].avset){
+		        		var userpos = streamList[i].rcl.userpos;
+		        		var streamname = streamList[i].streamName+".flv";
+		        		Debug.write("Found - ",starttime,userpos,streamname);
+		        		canvas._videocontainer.startStream(streamname,userpos,this.recordingValue.roomRecording.streamlist[i].rcl);
+        			}
         		}
         	}
         	
