@@ -4,11 +4,11 @@
 
 = Requirements =
 
-  * Database availible (MySQL,Postgres,... MSSQL,Oracle,DB2 see [http://www.hibernate.org/hib_docs/reference/en/html/session-configuration.html#configuration-optional-dialects   full-list]) I recommend to make/use an empty database/scheme
-  Database MUST listen and allow TCP/IP connections! And the default character-set/scheme must be UTF8! _For example_ a fresh MySQL does *not* listen on TCP/IP by default and has *not* utf8 as default-character-set defined. You have to change these settings and restart your database server sothat changes take effect (mysql-config is in my.cnf). Postgres for example does also not listen by default on TCP/IP but uses by default UTF8 (since postgres 7 or 8). In Postgres you need to create a database using *template1* cause template1 create automatically a scheme called *public* which is needed (and since postgres 8 you can use several schemes inside one database public is the default one [http://www.postgresql.org/docs/8.2/interactive/ddl-schemas.html#DDL-SCHEMAS-PATH Postgres-Docs]).
+  * Database available (MySQL,Postgres,... MSSQL,Oracle,DB2 see [http://www.hibernate.org/hib_docs/reference/en/html/session-configuration.html#configuration-optional-dialects   full-list]) I recommend to make/use an empty database/scheme
+  Database MUST listen and allow TCP/IP connections! And the default character-set/scheme must be UTF8! _For example_ a fresh MySQL does *not* listen on TCP/IP by default and has *not* utf8 as default-character-set defined. You have to change these settings and restart your database server so that changes take effect (mysql-config is in my.cnf). Postgres for example does also not listen by default on TCP/IP but uses by default UTF8 (since postgres 7 or 8). In Postgres you need to create a database using *template1* cause template1 create automatically a scheme called *public* which is needed (and since postgres 8 you can use several schemes inside one database public is the default one [http://www.postgresql.org/docs/8.2/interactive/ddl-schemas.html#DDL-SCHEMAS-PATH Postgres-Docs]).
   * Open-Office-Service started and listening on port 8100 (see OpenOfficeConverter, this is not necessary for installation but for running later on)
   * Installed `ImageMagick` (this is not necessary for installation but for running later on), you can get more information on http://www.imagemagick.org regarding installation. The instructions for installation can be found there http://www.imagemagick.org/script/binary-releases.php, however on most linux systems you can get it via your favorite package managers (apt-get it)
-  * Installed `GhostScript` (this is not necessary for installation but for running later on), you can get more information on http://pages.cs.wisc.edu/~ghost/ regarding installation. The instructions for installation can be found there, however on most linux systems you can get it via your favorite package managers (apt-get it).
+  * Installed `GhostScript` (this is not necessary for installation but for running later on), you can get more information on http://pages.cs.wisc.edu/~ghost/ regarding installation. The instructions for installation can be found there, however on most linux systems you can get it via your favourite package managers (apt-get it).
   * Installed `SWFTools` (this is not necessary for installation but for running later on), you can get more information on http://www.swftools.org/ regarding installation. Some of the Linux distributions already have it in there package manager see http://packages.debian.org/unstable/utils/swftools) 
 
 = Install latest Red5 Server (v0.6.3) =
@@ -20,7 +20,7 @@
 = Install Openmeetings =
   # Download Openmeetings 0.5 Rc6 (beta6) from [ http://code.google.com/p/openmeetings/downloads/list Openmeetings-Download-Page] (Please make sure that you use an up-to-date unzip-software)
   # Unpack it to _$RED5-HOME/webapps/_ your new folder structure will be _$RED5-HOME/webapps/xmlcrm/_ this is the base directory of Openmeetings (following $OPENMEETINGS-HOME)
-  # Prepare Database Settings - goto $OPENMEETINGS-HOME/install there are two preconfigured files for MySQL and Postgres: mysql_hibernate.cfg.xml and postgres_hibernate.cfg.xml. Following explains it for MySQL-Database-Users, Postgres-Database-Users and Any-Database-Users. Choose Your One!! Of course the database must already exist! Meaning if you want to use  `jdbc:mysql://localhost/xmlcrm` then the database `xmlcrm` must be already an existing empty database!!
+  # Prepare Database Settings - go to $OPENMEETINGS-HOME/install there are two preconfigured files for MySQL and Postgres: mysql_hibernate.cfg.xml and postgres_hibernate.cfg.xml. Following explains it for MySQL-Database-Users, Postgres-Database-Users and Any-Database-Users. Choose Your One!! Of course the database must already exist! Meaning if you want to use  `jdbc:mysql://localhost/xmlcrm` then the database `xmlcrm` must be already an existing empty database!!
     * MySQL-Database-User: Rename `mysql_hibernate.cfg.xml` to `hibernate.cfg.xml` and alter following config values in (`mysql_`)`hibernate.cfg.xml`
      {{{
 		<property name="connection.username">root</property>
@@ -69,14 +69,14 @@ http://openmeetings.googlecode.com/svn/branches/dev/laszlo/client/xmlcrm/resourc
   # Step 4 - enter Application (http://$rmpthostlocal/xmlcrm/) 
 http://openmeetings.googlecode.com/svn/branches/dev/laszlo/client/xmlcrm/resources/screens/install_step4.png
 
-Now you can login. All basics are installed. Now login and goto the Meeting-Rooms and check all features. You properbly will have some difficulties uploading files. Check if OpenOffice is really running, swftool, ImageMagick (including GhostScript) is availible on  your System-Path (or your customize the path in the Configuration). On Linux your properbly will have to make some shell-Script executable, you find them in $Openmeetings-Home/jod/*.sh.
+Now you can login. All basics are installed. Now login and go to the Meeting-Rooms and check all features. You possibly will have some difficulties uploading files. Check if OpenOffice is really running, swftool, ImageMagick (including GhostScript) is available on  your System-Path (or your customize the path in the Configuration). On Linux your possibly will have to make some shell-Script executable, you find them in $Openmeetings-Home/jod/*.sh.
 
 
 = Tips and Tricks =
 
-  * Increase Performace by changing log-Level: Goto _$RED5-HOME/conf/log4j.properties_ and  change the first line to:
+  * Increase Performance by changing log-Level: Go to _$RED5-HOME/conf/log4j.properties_ and  change the first line to:
   {{{
     log4j.rootCategory=ERROR, CONSOLE 
   }}}
   * Use the Debug-Application: Enter in your browser http://$RED-HOST:$RED5-PORT/xmlcrm/maindebug.lzx.lzr=swf8.swf for example http://localhost:5080/xmlcrm/maindebug.lzx.lzr=swf8.swf
-  * If you have Problems with convertion-jops check your Red5-Log output. There will be error Messages which help you. You must install Open-Office and `ImageMagick` and `GhostScript` to run all Convertion-Jobs correctly.
+  * If you have Problems with conversion-jobs check your Red5-Log output. There will be error Messages which help you. You must install Open-Office and `ImageMagick` and `GhostScript` to run all conversion-Jobs correctly.
