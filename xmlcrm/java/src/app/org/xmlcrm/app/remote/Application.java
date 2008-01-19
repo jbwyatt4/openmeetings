@@ -269,11 +269,17 @@ public class Application extends ApplicationAdapter implements
 					if (!cons.equals(current)){
 						log.error("sending roomDisconnect to " + cons);
 						RoomClient rcl = ClientList.get(cons.getClient().getId());
-						//Send to all connected users
-						//if(roomname.equals(rcl.getUserroom()) && orgdomain.equals(rcl.getDomain())){				
-							((IServiceCapableConnection) cons).invoke("roomDisconnect",new Object[] { currentClient }, this);
-							log.error("sending roomDisconnect to " + cons);
-						//}
+						//Send to all connected users	
+						((IServiceCapableConnection) cons).invoke("roomDisconnect",new Object[] { currentClient }, this);
+						log.error("sending roomDisconnect to " + cons);
+						//only to the members of the current room
+						if(roomname.equals(rcl.getUserroom()) && orgdomain.equals(rcl.getDomain())){			
+							//add Notification if another user is recording
+							log.error("###########[roomLeave]");
+							if (rcl.getIsRecording()){
+								StreamService.stopRecordingShowByClient(cons, rcl, rcl.getRoomRecordingName());
+							}
+						}
 					}
 				}
 			}			
@@ -328,7 +334,14 @@ public class Application extends ApplicationAdapter implements
 						if(roomname.equals(rcl.getUserroom()) && orgdomain.equals(rcl.getDomain())){					
 							((IServiceCapableConnection) cons).invoke("logicalRoomLeaveDis",new Object[] { currentClient }, this);
 							log.error("sending roomDisconnect to " + cons);
+							
+							//add Notification if another user is recording in this room
+							if (rcl.getIsRecording()){
+								log.error("###########[logicalRoomLeave]");
+								StreamService.stopRecordingShowByClient(cons, rcl, rcl.getRoomRecordingName());
+							}
 						}
+						
 					}
 				}
 			}	
@@ -440,7 +453,8 @@ public class Application extends ApplicationAdapter implements
 
 			// Store the local so that we do not send notification to ourself back
 			IConnection current = Red5.getConnectionLocal();
-			RoomClient currentClient = ClientList.get(current.getClient().getId());
+			String streamid = current.getClient().getId();
+			RoomClient currentClient = ClientList.get(streamid);
 			String roomname = currentClient.getUserroom();
 			String orgdomain = currentClient.getDomain();	
 			
@@ -470,6 +484,12 @@ public class Application extends ApplicationAdapter implements
 	//							log.info("IServiceCapableConnection ID " + iStream.getClient().getId());
 							iStream.invoke(clientFunction,new Object[] { rc }, this);
 							log.debug("sending notification to " + conn+" ID: ");
+
+							//if this close stream event then stop the recording of this stream
+							if (clientFunction.equals("closeStream") && rcl.getIsRecording()){
+								log.error("###########[sendClientBroadcastNotifications]");
+								StreamService.stopRecordingShowByClient(conn, rcl, rcl.getRoomRecordingName());
+							}
 						}
 					}
 				}
@@ -577,6 +597,11 @@ public class Application extends ApplicationAdapter implements
 					if (conn instanceof IServiceCapableConnection) {
 						((IServiceCapableConnection) conn).invoke("sendVarsToMessageWithClient",new Object[] { hsm }, this);
 						log.error("sending setUserObjectNewOneFour to " + conn);
+						
+						//if somebody is recording in this room add the event
+						if (rcl.getIsRecording()) {
+							StreamService.addRoomClientAVSetEvent(rcl, rcl.getRoomRecordingName(), conn.getRemoteAddress());
+						}
 					}
 				}
 			}
@@ -619,6 +644,10 @@ public class Application extends ApplicationAdapter implements
 //					log.debug("set to ++ for client: "+rcl.getStreamid()+" "+roomcount);
 					roomcount++;
 					roomClientList.put(key, rcl);
+					//if any user in this room is recording add this client to the list
+					if (rcl.getIsRecording()) {
+						StreamService.addRoomClientEnterEvent(rcl, rcl.getRoomRecordingName(), rcl.getUserip());
+					}
 				}				
 			}
 			

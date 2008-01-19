@@ -54,6 +54,20 @@ public class StreamService implements IPendingServiceCallback {
 	
 	private static LinkedHashMap<String,LinkedHashMap<String,Object>> roomRecordingList = new LinkedHashMap<String,LinkedHashMap<String,Object>>();
 	
+	/**
+	 * this function starts recording a Conference (Meeting or Event)
+	 * 
+	 * the temp-value contains an attribute called *streamlist*
+	 * the streamlist all room-streaming events are inside
+	 * avset means this is an streaming event where only the audio-video settings have been altered
+	 * 
+	 * 
+	 * @param conferenceType
+	 * @param initwhiteboardvars
+	 * @param roomRecordingsTableString
+	 * @param comment
+	 * @return
+	 */
 	public String recordMeetingStream(String conferenceType, Object initwhiteboardvars, String roomRecordingsTableString, String comment){
 		try {
 			IConnection current = Red5.getConnectionLocal();
@@ -69,7 +83,9 @@ public class StreamService implements IPendingServiceCallback {
 			roomRecording.put("conferenceType", conferenceType);
 			roomRecording.put("roomRecordingsTableString", roomRecordingsTableString);
 			roomRecording.put("comment", comment);
+			
 			List<LinkedHashMap<String,Object>> roomStreams = new LinkedList<LinkedHashMap<String,Object>>();
+			List<LinkedHashMap<String,Object>> roomClients = new LinkedList<LinkedHashMap<String,Object>>();
 			
 			//get all stream and start recording them
 			Iterator<IConnection> it = current.getScope().getConnections();
@@ -83,39 +99,62 @@ public class StreamService implements IPendingServiceCallback {
 						
 						((IServiceCapableConnection) conn).invoke("startedRecording",new Object[] { currentClient }, this);
 						
+						String remoteAdress = conn.getRemoteAddress();
+						Date startDate = new Date();
+						
+						//add streamings to record File
 						if (!conferenceType.equals("audience") || rcl.getIsMod()){
 							LinkedHashMap<String,Object> roomStream = new LinkedHashMap<String,Object>();
 							
 							String streamName = generateFileName(rcl.getStreamid());
-							String remoteAdress = conn.getRemoteAddress();
 							
 							//if the user does publish av, a, v
-							if (!rcl.getAvsettings().equals("n")){
+							if (!rcl.getAvsettings().equals("n")){								
 								recordShow(conn, rcl.getStreamid(), streamName);
-							}
+							} 
+							
 							roomStream.put("streamName", streamName);
+							//stream starting
+							roomStream.put("streamstart", true);
+							//is not only a avset-event
+							roomStream.put("avset", false);
 							roomStream.put("remoteAdress", remoteAdress);
-							roomStream.put("startdate",new java.util.Date());
+							roomStream.put("startdate",startDate);
 							roomStream.put("starttime",0);
 							roomStream.put("rcl", rcl);
 							
 							roomStreams.add(roomStream);
-						} else {
-							
-						}
+						} 
 
+						//add room Clients enter/leave Events to record File
+						LinkedHashMap<String,Object> roomClient = new LinkedHashMap<String,Object>();						
+						roomClient.put("remoteAdress", remoteAdress);
+						roomClient.put("roomenter", true);
+						roomClient.put("startdate",startDate);
+						roomClient.put("starttime",0);
+						roomClient.put("rcl", rcl);
+						
+						roomClients.add(roomClient);
 					}
 				}
 			}
+			
 			roomRecording.put("initwhiteboardvars", initwhiteboardvars);
-			roomRecording.put("streamlist", roomStreams);
 			roomRecording.put("recordingName", recordingName);
 			roomRecording.put("starttime", new java.util.Date());
 			roomRecording.put("startedby", currentClient);
 			
+			//add Room Client enter/leave events
+			roomRecording.put("roomclients", roomClients);
+			
+			//add Stream-Events
+			roomRecording.put("streamlist", roomStreams);
+			
+			//add Whiteboard-Events
 			LinkedList<Object> whiteBoardEvents = new LinkedList<Object>();
 			roomRecording.put("whiteboard", whiteBoardEvents);
 			
+			//add Chat-Events
 			LinkedList<Object> chatvaluesEvents = new LinkedList<Object>();
 			roomRecording.put("chatvalues", chatvaluesEvents);
 			
@@ -128,12 +167,12 @@ public class StreamService implements IPendingServiceCallback {
 		return null;
 	}
 	
-	public Long stopRecordMeetingStream(String recordingName){
+	public Long stopRecordMeetingStream(String roomrecordingName){
 		try {
 			IConnection current = Red5.getConnectionLocal();
 			RoomClient currentClient = Application.getClientList().get(current.getClient().getId());
 
-			LinkedHashMap<String,Object> roomRecording = roomRecordingList.get(recordingName);
+			LinkedHashMap<String,Object> roomRecording = roomRecordingList.get(roomrecordingName);
 			String roomname = currentClient.getUserroom();
 			String orgdomain = currentClient.getDomain();	
 
@@ -150,26 +189,20 @@ public class StreamService implements IPendingServiceCallback {
 					//Check if the Client is in the same room and same domain 
 					if(roomname.equals(rcl.getUserroom()) && orgdomain.equals(rcl.getDomain())){
 						((IServiceCapableConnection) conn).invoke("stopedRecording",new Object[] { currentClient }, this);
-						if (!conferenceType.equals("audience") || rcl.getIsMod()){
-							//if the user does publish av, a, v
-							if (!rcl.getAvsettings().equals("n")){
-								stopRecordingShow(conn,rcl.getStreamid());
-							}
-						}
 					}
 				}
 			}
-			return stopRecordAndSave(current, recordingName, currentClient);
+			return stopRecordAndSave(current, roomrecordingName, currentClient);
 		} catch (Exception err) {
 			log.error("[stopRecordAndSave]",err);
 		}
 		return new Long(-1);
 	}
 	
-	public static Long stopRecordAndSave(IConnection current, String recordingName, RoomClient currentClient){
+	public static Long stopRecordAndSave(IConnection current, String roomrecordingName, RoomClient currentClient){
 		try {
-			log.error("stopRecordMeetingStream");
-			LinkedHashMap<String,Object> roomRecording = roomRecordingList.get(recordingName);
+			log.error("stopRecordAndSave "+currentClient.getUsername()+","+currentClient.getUserip());
+			LinkedHashMap<String,Object> roomRecording = roomRecordingList.get(roomrecordingName);
 			
 			String roomname = currentClient.getUserroom();
 			String orgdomain = currentClient.getDomain();	
@@ -191,10 +224,9 @@ public class StreamService implements IPendingServiceCallback {
 					//Check if the Client is in the same room and same domain 
 					if(roomname.equals(rcl.getUserroom()) && orgdomain.equals(rcl.getDomain())){
 						if (!conferenceType.equals("audience") || rcl.getIsMod()){
-							//if the user does publish av, a, v
-							if (!rcl.getAvsettings().equals("n")){
-								stopRecordingShow(conn,rcl.getStreamid());
-							}
+							//stop the recorded flv and add the event to the notifications
+							log.error("###########[stopRecordAndSave]");
+							stopRecordingShowByClient(conn, rcl, roomrecordingName);
 						}
 					}
 				}
@@ -241,7 +273,7 @@ public class StreamService implements IPendingServiceCallback {
 		    pw.flush();
 		    pw.close();
 			//remove recording from Temp - List
-			roomRecordingList.remove(recordingName);
+			roomRecordingList.remove(roomrecordingName);
 			
 			return recording_id;
 		} catch (Exception err) {
@@ -269,6 +301,41 @@ public class StreamService implements IPendingServiceCallback {
 			stream.saveAs(streamName, false);
 		} catch (Exception e) {
 			log.error("Error while saving stream: " + streamName, e);
+		}
+	}
+	
+	public static void stopRecordingShowByClient(IConnection conn, RoomClient rcl, String roomrecordingName) {
+		try {
+			
+			log.error("stopRecordingShowByClient: "+rcl.getIsRecording()+","+rcl.getUsername()+","+rcl.getUserip());
+			
+			LinkedHashMap<String,Object> roomRecording = roomRecordingList.get(roomrecordingName);
+			Date recordingsStartTime = (Date) roomRecording.get("starttime");
+			Date currentDate = new Date();
+			List<LinkedHashMap<String,Object>> roomStreams = (List<LinkedHashMap<String,Object>>)roomRecording.get("streamlist");
+			
+			LinkedHashMap<String,Object> roomStream = new LinkedHashMap<String,Object>();
+			
+			String streamName = generateFileName(rcl.getStreamid());			
+			roomStream.put("streamName", "");
+			roomStream.put("streamstart", false);
+			roomStream.put("avset", false);
+			roomStream.put("remoteAdress", conn.getRemoteAddress());
+			roomStream.put("startdate",currentDate);
+			roomStream.put("starttime",currentDate.getTime()-recordingsStartTime.getTime());
+			roomStream.put("rcl", rcl);
+			
+			roomStreams.add(roomStream);
+			
+			roomRecording.put("streamlist",roomStreams);
+			roomRecordingList.put(roomrecordingName, roomRecording);
+
+			if (rcl.getAvsettings().equals("a") && rcl.getAvsettings().equals("v") && rcl.getAvsettings().equals("av")){
+				stopRecordingShow(conn,rcl.getStreamid());
+			}
+			
+		} catch (Exception err) {
+			log.error("[stopRecordingShowByClient]",err);
 		}
 	}
 
@@ -404,6 +471,10 @@ public class StreamService implements IPendingServiceCallback {
 				}
 				
 				roomStream.put("streamName", streamName);
+				//this is a recording event
+				roomStream.put("streamstart", true);
+				//this is not an av event
+				roomStream.put("avset", false);
 				roomStream.put("remoteAdress", remoteAdress);
 				roomStream.put("startdate",new java.util.Date());
 				roomStream.put("starttime",currentDate.getTime()-recordingsStartTime.getTime());
@@ -464,6 +535,56 @@ public class StreamService implements IPendingServiceCallback {
 			log.error("[addRecordingByStreamId]",err);
 		}	
 	}
+	
+	
+	public static void addRoomClientAVSetEvent(RoomClient rcl, String roomrecordingName, String remoteAdress) {
+		try {
+			LinkedHashMap<String,Object> roomRecording = roomRecordingList.get(roomrecordingName);
+			Date recordingsStartTime = (Date) roomRecording.get("starttime");
+			Date currentDate = new Date();
+			List<LinkedHashMap<String,Object>> roomStreams = (List<LinkedHashMap<String,Object>>)roomRecording.get("streamlist");
+			
+			LinkedHashMap<String,Object> roomStream = new LinkedHashMap<String,Object>();
+						
+			roomStream.put("streamName", "");
+			roomStream.put("streamstart", false);
+			roomStream.put("avset", true);
+			roomStream.put("remoteAdress", remoteAdress);
+			roomStream.put("startdate",currentDate);
+			roomStream.put("starttime",currentDate.getTime()-recordingsStartTime.getTime());
+			roomStream.put("rcl", rcl);
+			
+			roomStreams.add(roomStream);
+			
+			roomRecording.put("streamlist",roomStreams);
+			roomRecordingList.put(roomrecordingName, roomRecording);			
+		} catch (Exception err) {
+			log.error("[addRoomClientAVSetEvent]",err);
+		}	
+	}	
+	
+	public static void addRoomClientEnterEvent(RoomClient rcl, String roomrecordingName, String remoteAdress) {
+		try {
+			LinkedHashMap<String,Object> roomRecording = roomRecordingList.get(roomrecordingName);
+			Date recordingsStartTime = (Date) roomRecording.get("starttime");
+			Date currentDate = new Date();
+			List<LinkedHashMap<String,Object>> roomClients = (List<LinkedHashMap<String,Object>>)roomRecording.get("roomclients");
+			
+			LinkedHashMap<String,Object> roomClient = new LinkedHashMap<String,Object>();						
+			roomClient.put("remoteAdress", remoteAdress);
+			roomClient.put("roomenter", true);
+			roomClient.put("startdate",currentDate);
+			roomClient.put("starttime",currentDate.getTime()-recordingsStartTime.getTime());
+			roomClient.put("rcl", rcl);
+			
+			roomClients.add(roomClient);
+			
+			roomRecording.put("roomclients",roomClients);
+			roomRecordingList.put(roomrecordingName, roomRecording);			
+		} catch (Exception err) {
+			log.error("[addRoomClientEnterEvent]",err);
+		}	
+	}	
 	
 	public Long clientCancelRecording(String roomrecordingName){
 		try {
