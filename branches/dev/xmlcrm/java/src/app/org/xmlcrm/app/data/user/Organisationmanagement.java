@@ -24,7 +24,6 @@ import org.xmlcrm.app.data.beans.basic.SearchResult;
 import org.xmlcrm.app.data.basic.AuthLevelmanagement;
 import org.xmlcrm.app.hibernate.beans.domain.Organisation;
 import org.xmlcrm.app.hibernate.beans.domain.Organisation_Users;
-import org.xmlcrm.app.hibernate.beans.issues.Project;
 import org.xmlcrm.app.hibernate.beans.user.Users;
 import org.xmlcrm.app.hibernate.utils.HibernateUtil;
 
