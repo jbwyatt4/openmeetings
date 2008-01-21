@@ -1,0 +1,189 @@
+<html xmlns:exslt="http://exslt.org/common">
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title><%= @lzxclass.classname %></title>
+    <link href="<%= @lzxclass.get_depths_string %>styles.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <a name="element" shape="rect"></a>
+    <div class="head">
+      <div class="left">
+        <h1>&lt;<%= @lzxclass.classname %>&gt;</h1>
+        <p class="summary"><%= @lzxclass.classcomment %></p>
+        <% unless @lzxclass.doc.nil? %>
+        <p class="externaldoc"><%= @lzxclass.doc %></p>
+        <% end %>
+      </div>
+      <div class="right">
+        <div>
+          <% unless @lzxclass.extends.nil? %>
+          <i>Extends</i><a href="#"> <%= @lzxclass.extends %></a>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="wrapper-description">
+    </div>
+    <% unless @lzxclass.attribute_list.empty? %>
+    <a name="attributes" shape="rect"></a>
+    <table summary="" width="100%" border="0" cellspacing="2" cellpadding="2">
+      <tr bgcolor="#5B607C">
+        <td colspan="6" rowspan="1"><span class="docTableTitle"><a href="info-attributes.html" shape="rect">Attributes</a></span></td>
+      </tr>
+      <tr bgcolor="#e6e6e6">
+        <td rowspan="1" colspan="1"><span class="docTableColHeading"><a href="info-attribinfo.html#name" shape="rect">Name</a></span></td>
+        <td rowspan="1" colspan="1"><span class="docTableColHeading"><a href="info-attribinfo.html#usage" shape="rect">Usage</a></span></td>
+        <td rowspan="1" colspan="1"><span class="docTableColHeading"><a href="info-attribinfo.html#typetag" shape="rect">Type (Tag)</a></span></td>
+        <td rowspan="1" colspan="1"><span class="docTableColHeading"><a href="info-attribinfo.html#typejs" shape="rect">Type (JS)</a></span></td>
+        <td rowspan="1" colspan="1"><span class="docTableColHeading"><a href="info-attribinfo.html#typejs" shape="rect">Default</a></span></td>
+        <td rowspan="1" colspan="1"><span class="docTableColHeading"><a href="info-attribinfo.html#category" shape="rect">Category</a></span></td>
+      </tr>
+      <% @lzxclass.attribute_list.each do |atr| %>
+      <tr>
+        <td rowspan="1" colspan="1"><span class="docParam"><a name="attr-name" shape="rect"></a><%= atr[:name] %></span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"></span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"><%= atr[:type] %></span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"></span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"></span><%= atr[:value] %></td>
+        <td rowspan="1" colspan="1"><span class="smaller"><a href="info-attributes.html#final" shape="rect"></a></span></td>
+      </tr>
+      <tr>
+        <td rowspan="1" colspan="1">&nbsp;</td>
+        <td colspan="5" rowspan="1"><span class="smaller">
+            <p><%= atr[:comment] %></p>
+        </span></td>
+      </tr>
+      <tr>
+        <td colspan="6" rowspan="1">
+          <hr size="1" bgcolor="#e5e5e5">
+        </td>
+      </tr>
+      <% end %>
+    </table>
+    <br clear="none">
+    <% if(false) %>
+    <div class="lfcInherited">
+      <div class="title">
+      </div>
+      <p>
+      </p>
+    </div>
+    <% end %>
+    <% end %>
+    <% unless @lzxclass.method_list.empty? %>
+    <a name="methods" shape="rect"></a>
+    <h3>Methods</h3>
+    <% @lzxclass.method_list.each do |method| %>
+    <a name="<%= method[:name] %>" shape="rect"></a>
+    <table summary="" width="100%" border="0" cellspacing="2" cellpadding="2">
+      <tr bgcolor="#e5e5e5">
+        <td colspan="3" rowspan="1"><span class="docTableTitleGray"><%= method[:name] %></span></td>
+      </tr>
+      <tr>
+        <td colspan="3" rowspan="1">
+          <span class="docPrototype"><span class="classname"><%= @lzxclass.classname %></span>.<span class="methodname"><%= method[:name] %></span></span>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="3" rowspan="1">
+          <p class="smaller"><%= method[:comment] %></p>
+        </td>
+      </tr>
+      <% unless method[:args].empty? %>
+      <tr bgcolor="#e6e6e6">
+        <td colspan="3" rowspan="1"><span class="docTableSubTitle">Parameters</span></td>
+      </tr>
+      <tr bgcolor="#e6e6e6">
+        <td rowspan="1" colspan="1"><span class="docTableColHeading">Name</span></td>
+        <td rowspan="1" colspan="1"><span class="docTableColHeading">Type</span></td>
+        <td rowspan="1" colspan="1"><span class="docTableColHeading">Desc</span></td>
+      </tr>
+      <% method[:args].each do |param| %>
+      <tr>
+        <td rowspan="1" colspan="1"><span class="docParam"><%= param %></span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"></span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"></span></td>
+      </tr>
+      <% end %>
+      <% end %>
+      <tr>
+        <td colspan="3" rowspan="1">
+          <hr size="1" bgcolor="#e5e5e5">
+        </td>
+      </tr>
+    </table>
+    <br clear="none">
+    <% if(false) %>
+    <div class="lfcInherited">
+      <div class="title">
+      </div>
+      <p>
+      </p>
+    </div>
+    <% end %>
+    <% end %>
+    <% end %>
+    <% unless @lzxclass.event_list.empty? %>
+    <a name="events" shape="rect"></a>
+    <hr/>
+    <table summary="" width="100%" border="0" cellspacing="2" cellpadding="2">
+      <tr bgcolor="#5B607C">
+        <td colspan="2" rowspan="1"><span class="docTableTitle">Events</span></td>
+      </tr>
+      <tr bgcolor="#e6e6e6">
+        <td rowspan="1" colspan="1"><span class="docTableColHeading">Name</span></td>
+        <td rowspan="1" colspan="1"><span class="docTableColHeading">Description</span></td>
+      </tr>
+      <% @lzxclass.event_list.each do |event| %>
+      <tr>
+        <td rowspan="1" colspan="1"><a name="event-onaddsubresource" shape="rect"></a><span class="docParam"><%= event[:name] %></span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"><%= event[:comment] %></span></td>
+      </tr>
+      <% end %>
+    </table>
+    <br clear="none">
+    <% if(false) %>
+    <div class="lfcInherited">
+      <div class="title">
+      </div>
+      <p>
+      </p>
+    </div>
+    <% end %>
+    <br clear="none">
+    <% end %>
+    <% unless @lzxclass.view_list.empty? %>
+    <a name="events" shape="rect"></a>
+    <hr/>
+    <table summary="" width="100%" border="0" cellspacing="2" cellpadding="2">
+      <tr bgcolor="#5B607C">
+        <td colspan="2" rowspan="1"><span class="docTableTitle">Events</span></td>
+      </tr>
+      <tr bgcolor="#e6e6e6">
+        <td rowspan="1" colspan="1"><span class="docTableColHeading">Name</span></td>
+        <td rowspan="1" colspan="1"><span class="docTableColHeading">Description</span></td>
+      </tr>
+      <% @lzxclass.view_list.each do |view| %>
+      <tr>
+        <td rowspan="1" colspan="1"><a name="event-onaddsubresource" shape="rect"></a><span class="docParam"><%= view[:name] %></span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"><%= view[:comment] %></span></td>
+      </tr>
+      <% end %>
+    </table>
+    <br clear="none">
+    <% if(false) %>
+    <div class="lfcInherited">
+      <div class="title">
+      </div>
+      <p>
+      </p>
+    </div>
+    <% end %>
+    <br clear="none">
+    <% end %>
+    <p class="copyright">Copyright &copy; 2002-2005 <a href="http://www.laszlosystems.com/" target="_top">Laszlo Systems, Inc.</a>
+      All Rights Reserved. Unauthorized use, duplication or
+      distribution is strictly prohibited. This is the proprietary
+      information of Laszlo Systems, Inc. Use is subject to license terms.</p>
+  </body>
+</html>
