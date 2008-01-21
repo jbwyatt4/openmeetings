@@ -130,7 +130,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>開始されている投票はありません</value>
   </string>
   <string id="42" name="votings">
-    <value>投票!</value>
+    <value>投票</value>
   </string>
   <string id="43" name="meeting">
     <value>ミーティング (最大4席)</value>
@@ -151,7 +151,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>入室</value>
   </string>
   <string id="49" name="modleave">
-    <value>モデレータが退席しました</value>
+    <value>モデレータが退室しました</value>
   </string>
   <string id="50" name="systemmessage">
     <value>システム情報</value>
@@ -229,7 +229,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>自由線</value>
   </string>
   <string id="75" name="drawline">
-    <value>線</value>
+    <value>直線</value>
   </string>
   <string id="76" name="drawu">
     <value>下線</value>
@@ -295,13 +295,13 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>モデレータの変更</value>
   </string>
   <string id="97" name="nonmoderrormessage">
-    <value>あなたはモデレータではありません!</value>
+    <value>あなたはモデレータではありません。</value>
   </string>
   <string id="98" name="moderator">
     <value>モデレータ:</value>
   </string>
   <string id="99" name="roomfullmessage">
-    <value>この部屋は満員です。後で再度アクセスしてください。</value>
+    <value>この部屋は満員です。</value>
   </string>
   <string id="100" name="elllipse">
     <value>楕円</value>
@@ -340,7 +340,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>言語</value>
   </string>
   <string id="112" name="Authreg">
-    <value>ログイン名</value>
+    <value>ログイン</value>
   </string>
   <string id="113" name="regformhead">
     <value>サインアップ</value>
@@ -355,10 +355,10 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>パスワード再入力:</value>
   </string>
   <string id="117" name="regformfirstname">
-    <value>ファーストネーム:</value>
+    <value>名:</value>
   </string>
   <string id="118" name="regformlastname">
-    <value>ラストネーム:</value>
+    <value>姓:</value>
   </string>
   <string id="119" name="regformmail">
     <value>メールアドレス:</value>
@@ -409,10 +409,10 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>パスワード再入力</value>
   </string>
   <string id="135" name="useralterself_firstname">
-    <value>ファーストネーム</value>
+    <value>名</value>
   </string>
   <string id="136" name="useralterself_lastname">
-    <value>ラストネーム</value>
+    <value>姓</value>
   </string>
   <string id="137" name="useralterself_email">
     <value>メールアドレス</value>
@@ -448,10 +448,10 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>ログイン名</value>
   </string>
   <string id="148" name="admin_userlist_firstnam">
-    <value>ファーストネーム</value>
+    <value>名</value>
   </string>
   <string id="149" name="admin_userlist_lastname">
-    <value>ラストネーム</value>
+    <value>姓</value>
   </string>
   <string id="150" name="turnoverlist_next">
     <value>次</value>
@@ -676,10 +676,10 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>別名</value>
   </string>
   <string id="224" name="invited_userwin_firstname">
-    <value>ファーストネーム</value>
+    <value>名</value>
   </string>
   <string id="225" name="invited_userwin_lastname">
-    <value>ラストネーム</value>
+    <value>姓</value>
   </string>
   <string id="226" name="invited_userwin_mail">
     <value>メールアドレス</value>
@@ -721,7 +721,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>共有は許可されていません。</value>
   </string>
   <string id="239" name="user_doStartScreenViewer">
-    <value>画面の共有</value>
+    <value>画面の動画キャプチャ</value>
   </string>
   <string id="240" name="screen_warnBandwidth">
     <value>帯域不良: 画面の同期ができません。フレームが落ちます。この警告が頻発する場合、品質を落とすようにモデレータに依頼してください。</value>
@@ -766,25 +766,25 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>%</value>
   </string>
   <string id="254" name="whiteboard_documenttoolbar_slide">
-    <value>of</value>
-  </string>
-  <string id="255" name="whiteboard_documenttoolbar_firstslide">
     <value>最初へ</value>
   </string>
-  <string id="256" name="whiteboard_documenttoolbar_preslide">
+  <string id="255" name="whiteboard_documenttoolbar_firstslide">
     <value>前へ</value>
   </string>
-  <string id="257" name="whiteboard_documenttoolbar_nextslide">
+  <string id="256" name="whiteboard_documenttoolbar_preslide">
     <value>次へ</value>
+  </string>
+  <string id="257" name="whiteboard_documenttoolbar_nextslide">
+    <value>最後へ</value>
   </string>
   <string id="258" name="whiteboard_documenttoolbar_lastslide">
     <value>最後へ</value>
   </string>
   <string id="259" name="whiteboard_documenttoolbar_zoomminus">
-    <value>縮小 --</value>
+    <value>縮小</value>
   </string>
   <string id="260" name="whiteboard_documenttoolbar_zoomplus">
-    <value>拡大 ++</value>
+    <value>拡大</value>
   </string>
   <string id="261" name="salutation_mr">
     <value>男性</value>
@@ -838,13 +838,13 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>ニュース</value>
   </string>
   <string id="278" name="dashboard_quicklinksheader">
-    <value>クイックリンク</value>
+    <value>リンク</value>
   </string>
   <string id="279" name="dashboard_quicklinkConf">
-    <value>会議室に入る</value>
+    <value>会議室に入室</value>
   </string>
   <string id="280" name="dashboard_quicklinkAudit">
-    <value>講演室に入る</value>
+    <value>講演室に入室</value>
   </string>
   <string id="281" name="dashboard_quicklinksupport">
     <value>ヘルプ・サポート</value>
@@ -856,10 +856,10 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>http://groups.google.com/group/openmeetings-user</value>
   </string>
   <string id="284" name="dashboard_reportbugs">
-    <value>バグレポート!</value>
+    <value>バグ報告</value>
   </string>
   <string id="285" name="dashboard_rsslistitemlinktext">
-    <value>もっと</value>
+    <value>続き・・・</value>
   </string>
   <string id="286" name="dashboard_quicklinkhomepagelabel">
     <value>プロジェクトWebサイト (code.google.com/p/openmeetings/)</value>
@@ -871,76 +871,76 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>次回から入力を省略</value>
   </string>
   <string id="289" name="main_navi">
-    <value>Content</value>
+    <value>コンテンツ</value>
   </string>
   <string id="290" name="subnavi">
-    <value>My Home Page</value>
+    <value>マイページ</value>
   </string>
   <string id="291" name="subnavi">
-    <value>My Scheduled Meetings</value>
+    <value>スケジュール済み会議</value>
   </string>
   <string id="292" name="subnavi">
-    <value>My Scheduled Events</value>
+    <value>スケジュール済みイベント</value>
   </string>
   <string id="293" name="subnavi">
-    <value>Public Meetings</value>
+    <value>パブリック会議</value>
   </string>
   <string id="294" name="subnavi">
-    <value>Private Meetings</value>
+    <value>プライベート会議</value>
   </string>
   <string id="295" name="subnavi">
-    <value>Public Events</value>
+    <value>パブリックイベント</value>
   </string>
   <string id="296" name="subnavi">
-    <value>Private Events</value>
+    <value>プライベートイベント</value>
   </string>
   <string id="297" name="subnavi">
-    <value>Public Content</value>
+    <value>パブリックコンテンツ</value>
   </string>
   <string id="298" name="subnavi">
-    <value>Private Content</value>
+    <value>プライベートコンテンツ</value>
   </string>
   <string id="299" name="subnavi">
-    <value>Personal Content</value>
+    <value>パーソナルコンテンツ</value>
   </string>
   <string id="300" name="subnavi">
     <value></value>
   </string>
   <string id="301" name="conferencebar">
-    <value>Moderation</value>
+    <value>モデレータ</value>
   </string>
   <string id="302" name="conferencebar">
-    <value>Apply for Moderation</value>
+    <value>モデレータになる</value>
   </string>
   <string id="303" name="conferencebar">
-    <value>Polls</value>
+    <value>投票</value>
   </string>
   <string id="304" name="conferencebar">
-    <value>Choose a file</value>
+    <value>フィル選択</value>
   </string>
   <string id="305" name="conferencebar">
-    <value>Settings</value>
+    <value>設定</value>
   </string>
   <string id="306" name="conferencebar">
-    <value>Cam and Mic Settings</value>
+    <value>カメラとマイクの設定</value>
   </string>
   <string id="307" name="conferencebar">
-    <value>Whiteboard Settings</value>
+    <value>ホワイトボード設定</value>
   </string>
   <string id="308" name="conferencebar">
-    <value>Exit</value>
+    <value>退室</value>
   </string>
   <string id="309" name="conferencebar">
-    <value>Back to Rooms</value>
+    <value>戻る</value>
   </string>
   <string id="310" name="conferencebar">
-    <value>Logout</value>
+    <value>ログアウト</value>
   </string>
   <string id="311" name="loginwindow">
-    <value>Forgot your password?</value>
+    <value>パスワードを忘れた</value>
   </string>
   <string id="312" name="loginwindow">
-    <value>Reset Password</value>
+    <value>パスワードのリセット</value>
   </string>
   <string id="313" name="loginwindow">
     <value>By Mail</value>
@@ -949,10 +949,10 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>By Login</value>
   </string>
   <string id="315" name="loginwindow">
-    <value>Your Mail</value>
+    <value>メールアドレス</value>
   </string>
   <string id="316" name="loginwindow">
-    <value>Your Login</value>
+    <value>ログイン名</value>
   </string>
   <string id="317" name="loginwindow">
     <value>Send Mail with reset Link</value>
@@ -970,37 +970,37 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>The email containing a special link has been sent to your email address, please check your mailbox. If you still have not received a email, please adjust your email spam settings and resend confirmation email.</value>
   </string>
   <string id="322" name="errortype">
-    <value>Error</value>
+    <value>エラー</value>
   </string>
   <string id="323" name="errortype">
-    <value>Message</value>
+    <value>メッセージ</value>
   </string>
   <string id="324" name="resetpass">
     <value>Invalid Hash. No User found.</value>
   </string>
   <string id="325" name="resetpass">
-    <value>Reset Your Password</value>
+    <value>パスワードのリセット</value>
   </string>
   <string id="326" name="resetpass">
-    <value>Login</value>
+    <value>ログイン</value>
   </string>
   <string id="327" name="resetpass">
-    <value>change Password</value>
+    <value>パスワード変更</value>
   </string>
   <string id="328" name="resetpass">
-    <value>new Password</value>
+    <value>新しいパスワード</value>
   </string>
   <string id="329" name="resetpass">
     <value>re-enter Password</value>
   </string>
   <string id="330" name="resetpass">
-    <value>The Passwords you entered weren't identical.</value>
+    <value>パスワードが合っていません。</value>
   </string>
   <string id="331" name="resetpass">
-    <value>4 or more characters; capitalization matters!</value>
+    <value>4文字以上必要です。大文字小文字の区別があります。</value>
   </string>
   <string id="332" name="resetpass">
-    <value>Password set. You can login now.</value>
+    <value>パスワードが設定されました。ログイン可能です。</value>
   </string>
   <string id="333" name="rpccallback">
     <value>OK</value>
@@ -1009,25 +1009,25 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Unkown Error. Please report this to your Service-Team.</value>
   </string>
   <string id="335" name="loginwindow">
-    <value>Username not found</value>
+    <value>ユーザ名が見つかりません。</value>
   </string>
   <string id="336" name="loginwindow">
-    <value>Invalid Password</value>
+    <value>パスワードが無効です。</value>
   </string>
   <string id="337" name="logout">
-    <value>Successfully Logged out</value>
+    <value>ログアウト完了</value>
   </string>
   <string id="338" name="registration">
     <value>Frontend Registration disabled.</value>
   </string>
   <string id="339" name="registration">
-    <value>Invalid EMail</value>
+    <value>無効なメールアドレスです。</value>
   </string>
   <string id="340" name="registration">
-    <value>duplicate filename, please choose another filename</value>
+    <value>ファイル名が重複しています。別の名前にしてください。</value>
   </string>
   <string id="341" name="filebrowser">
-    <value>filename too short</value>
+    <value>ファイル名が短すぎます。</value>
   </string>
   <string id="342" name="filebrowser">
     <value>Could not save Address</value>
@@ -1045,232 +1045,233 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>No Label found for that Field.</value>
   </string>
   <string id="347" name="errormessage">
-    <value>Admin Authorization required</value>
+    <value>管理者権限が必要です。</value>
   </string>
   <string id="348" name="mainnavi">
-    <value>Language-Editor</value>
+    <value>言語エディタ</value>
   </string>
   <string id="349" name="languageseditor">
-    <value>Language</value>
+    <value>言語</value>
   </string>
   <string id="350" name="languageseditor">
-    <value>Label-ID</value>
+    <value>ラベルID</value>
   </string>
   <string id="351" name="languageseditor">
-    <value>Label-Name</value>
+    <value>ラベル名</value>
   </string>
   <string id="352" name="languageseditor">
-    <value>Value</value>
+    <value>値</value>
   </string>
   <string id="353" name="languageseditor">
-    <value>Fieldvalues</value>
+    <value>フィールド値</value>
   </string>
   <string id="354" name="languageseditor">
-    <value>LabelName</value>
+    <value>ラベル名</value>
   </string>
   <string id="355" name="languageseditor">
-    <value>LabelValue</value>
+    <value>値</value>
   </string>
   <string id="356" name="languageseditor">
-    <value>Label-ID</value>
+    <value>ラベルID</value>
   </string>
   <string id="357" name="languageseditor">
-    <value>You did only delete the Label NOT the Field! You cannot delete the Field, it may has Labels in other Languages.</value>
+    <value>ラベルのみ削除可能です。フィールドは他の言語で使われている可能性があるため削除できません。
+</value>
   </string>
   <string id="358" name="languageseditor">
-    <value>Invalid Labelid. The FieldLanguagesvalues_Id cannot be found in the database.</value>
+    <value>ラベルIDが無効です。FieldLanguagesvalues_Idがデータベースにありません。</value>
   </string>
   <string id="359" name="languageseditor">
-    <value>You cannot delete this Field. You can only delete Labels NOT Fields. There is no Label loaded at the moment, wether it is not selected any Field or there is no Label for this Language for that Field defined.</value>
+    <value>このフィールドは削除不可です。ラベルのみ削除可能です。There is no Label loaded at the moment, wether it is not selected any Field or there is no Label for this Language for that Field defined.</value>
   </string>
   <string id="360" name="languageseditor">
-    <value>export</value>
+    <value>エクスポート</value>
   </string>
   <string id="361" name="languageseditor">
-    <value>You need to logout to see any changes.</value>
+    <value>変更を有効にするには再ログインが必要です。</value>
   </string>
   <string id="362" name="languageseditor">
-    <value>Add new language</value>
+    <value>新しい言語の追加</value>
   </string>
   <string id="363" name="languageseditor">
-    <value>delete language</value>
+    <value>言語の削除</value>
   </string>
   <string id="364" name="languageseditor">
-    <value>Add new language</value>
+    <value>新しい言語の追加</value>
   </string>
   <string id="365" name="languageseditor">
-    <value>Name</value>
+    <value>名前</value>
   </string>
   <string id="366" name="languageseditor">
-    <value>add language</value>
+    <value>言語の追加</value>
   </string>
   <string id="367" name="languageseditor">
-    <value>Backup</value>
+    <value>バックアップ</value>
   </string>
   <string id="368" name="turnoverlist">
-    <value>goto first</value>
+    <value>最初へ</value>
   </string>
   <string id="369" name="turnoverlist">
-    <value>goto previous</value>
+    <value>前へ</value>
   </string>
   <string id="370" name="turnoverlist">
-    <value>goto next</value>
+    <value>次へ</value>
   </string>
   <string id="371" name="turnoverlist">
-    <value>goto last</value>
+    <value>最後へ</value>
   </string>
   <string id="372" name="videobox">
-    <value>user speaks</value>
+    <value>ユーザが話し中</value>
   </string>
   <string id="373" name="videobox">
-    <value>turn sound on/off</value>
+    <value>音声オン/オフ</value>
   </string>
   <string id="374" name="dashboard">
-    <value>System</value>
+    <value>システム</value>
   </string>
   <string id="375" name="dashboard">
-    <value>Your Settings</value>
+    <value>設定</value>
   </string>
   <string id="376" name="dashboard">
-    <value>hi,</value>
+    <value>ユーザ:</value>
   </string>
   <string id="377" name="dashboard">
-    <value>Edit your profile</value>
+    <value>プロファイル編集</value>
   </string>
   <string id="378" name="dashboard">
-    <value>New Messages:</value>
+    <value>新しいメッセージ:</value>
   </string>
   <string id="379" name="dashboard">
-    <value>Upload new Image</value>
+    <value>画像アップロード</value>
   </string>
   <string id="380" name="backuppanel">
-    <value>Userdata - Export</value>
+    <value>ユーザデータ - エクスポート</value>
   </string>
   <string id="381" name="backuppanel">
-    <value>All organisations must be already existing!</value>
+    <value>組織はすべて存在している必要があります。</value>
   </string>
   <string id="382" name="backuppanel">
-    <value>start export</value>
+    <value>エクスポート開始</value>
   </string>
   <string id="383" name="backuppanel">
-    <value>By organisation</value>
+    <value>組織を選択:</value>
   </string>
   <string id="384" name="backuppanel">
-    <value>start export</value>
+    <value>エクスポート開始</value>
   </string>
   <string id="385" name="backuppanel">
-    <value>Userdata - Import</value>
+    <value>ユーザデータ - インポート</value>
   </string>
   <string id="386" name="backuppanel">
-    <value>choose users.xml</value>
+    <value>users.xmlの選択</value>
   </string>
   <string id="387" name="languageseditor">
-    <value>import</value>
+    <value>インポート</value>
   </string>
   <string id="388" name="languageseditor">
-    <value>Export to XML - These files can be used to: 
-		- Contribute to the project 
-		- Import into another System 
-		- Backup 
-		- Customization 
-		- Put it into the language-directory for your next installation</value>
+    <value>XMLファイルにエクスポート - 主な用途: 
+		- プロジェクトへのコントリビュート 
+		- 他のシステムへのインポート 
+		- バックアップ 
+		- カスタマイズ
+		- languageディレクトリにコピーすれば、次のインストール時に適用</value>
   </string>
   <string id="389" name="languageseditor">
-    <value>Choose a language file to import. Choose the right Langauge from the Combobox! 
-		No matter what the name of the file is, it will be imported into this language!</value>
+    <value>インポート先の言語ファイルを選択してください。 ファイル名に関わらず選択した言語にインポートされます。
+</value>
   </string>
   <string id="390" name="importwindow">
-    <value>import - choose file</value>
+    <value>インポート - ファイル選択</value>
   </string>
   <string id="391" name="recordingsavewin">
-    <value>Save as</value>
+    <value>名前を付けて保存</value>
   </string>
   <string id="392" name="recordingsavewin">
-    <value>Name:</value>
+    <value>名前:</value>
   </string>
   <string id="393" name="recordingsavewin">
-    <value>Comment:</value>
+    <value>コメント:</value>
   </string>
   <string id="394" name="recordingsavewin">
-    <value>save</value>
+    <value>保存</value>
   </string>
   <string id="395" name="record">
-    <value>Recordings</value>
+    <value>録画</value>
   </string>
   <string id="396" name="recorder">
-    <value>Recordings Viewer</value>
+    <value>録画ファイル</value>
   </string>
   <string id="397" name="record">
-    <value>Recordings of public and private Rooms</value>
+    <value>パブリック/プライベート会議室の録画ファイル</value>
   </string>
   <string id="398" name="roomslist">
-    <value>Users :</value>
+    <value>利用中ユーザ数:</value>
   </string>
   <string id="399" name="roomslist">
     <value>Joined:</value>
   </string>
   <string id="400" name="roomslist">
-    <value></value>
+    <value>会議室リスト</value>
   </string>
   <string id="401" name="roomslist">
-    <value>Users in this Room:</value>
+    <value>会議室内のユーザ:</value>
   </string>
   <string id="402" name="roomslist">
-    <value>refresh</value>
+    <value>更新</value>
   </string>
   <string id="403" name="roomslist">
-    <value>This Room is Full. Try again in a few minutes.</value>
+    <value>この会議室は満員です。</value>
   </string>
   <string id="404" name="roomsList">
-    <value>click on a room to get details</value>
+    <value>詳細表示</value>
   </string>
   <string id="405" name="roomslist">
-    <value>Chat with the users in this Room:</value>
+    <value>会議室内のユーザとチャット:</value>
   </string>
   <string id="406" name="roomslist">
-    <value>Room:</value>
+    <value>会議室:</value>
   </string>
   <string id="407" name="roomslist">
-    <value>Users in this room:</value>
+    <value>会議室にいるユーザ:</value>
   </string>
   <string id="408" name="roomslist">
-    <value>since:</value>
+    <value>入室時刻:</value>
   </string>	
   <string id="409" name="record">
-    <value>play recording</value>
+    <value>録画ファイルの再生</value>
   </string>
   <string id="410" name="record">
-    <value>Length:</value>
+    <value>長さ:</value>
   </string>
   <string id="411" name="record">
-    <value>Date:</value>
+    <value>日付:</value>
   </string>
   <string id="412" name="record">
-    <value>Recorder Mode! You cannot change any values, this is a recorded File!</value>
+    <value>再生中! 画面上では何も変更できません。これは録画ファイルです。</value>
   </string>
   <string id="413" name="record">
-    <value>Play this recording</value>
+    <value>録画ファイルの再生</value>
   </string>
   <string id="414" name="record">
-    <value>Play / Pause</value>
+    <value>再生 / 一時停止</value>
   </string>
   <string id="415" name="record">
-    <value>Start recording</value>
+    <value>録画開始</value>
   </string>
   <string id="416" name="record">
-    <value>stop recording</value>
+    <value>録画停止</value>
   </string>
   <string id="417" name="record">
-    <value>Recording:</value>
+    <value>録画:</value>
   </string>	
   <string id="418" name="record_error_msg">
     <value>There is already somebody recording at the moment:</value>
   </string>
   <string id="419" name="record_message">
-    <value>Recording! By User:</value>
+    <value>録画中!  実行ユーザ:</value>
   </string>
   <string id="420" name="record_cancel">
-    <value>cancel</value>
+    <value>キャンセル</value>
   </string>
   <string id="421" name="record_cancal_tooltip">
     <value>Recording will be canceled and not saved.</value>
@@ -1282,72 +1283,72 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Close this window and resume recording</value>
   </string>
   <string id="424" name="painttools_ellipse_color">
-    <value>change Linecolor</value>
+    <value>線の色</value>
   </string>
   <string id="425" name="colorpicker_head">
-    <value>Choose Color</value>
+    <value>色選択</value>
   </string>
   <string id="426" name="painttools_line_disable">
-    <value>Disable / Enable Linecolor</value>
+    <value>線の色変更の有効/無効</value>
   </string>
   <string id="427" name="painttools_fill_disable">
-    <value>change Fillcolor</value>
+    <value>塗りつぶし</value>
   </string>
   <string id="428" name="painttools_line_disable">
-    <value>Disable / Enable Fillcolor</value>
+    <value>塗りつぶし色変更の有効/無効</value>
   </string>
   <string id="429" name="change_width_arrow_down_slider">
-    <value>Change Linewidth</value>
+    <value>線の太さ</value>
   </string>
   <string id="430" name="close_small_popups">
-    <value>close</value>
+    <value>閉じる</value>
   </string>
   <string id="431" name="paint_tool_letter">
-    <value>change Fontsize</value>
+    <value>フォントサイズ変更</value>
   </string>	
   <string id="432" name="recordingslist_delete">
-    <value>Delete Recording</value>
+    <value>録画ファイルの削除</value>
   </string>
   <string id="433" name="recordingslist_recordedByGuest">
-    <value>Guest</value>
+    <value>ゲスト</value>
   </string>
   <string id="434" name="recordingslist_recordedby">
     <value>By:</value>
   </string>
   <string id="435" name="recordings_table_head_name">
-    <value>Name</value>
+    <value>名前</value>
   </string>
   <string id="436" name="recordings_table_head_room">
-    <value>Room</value>
+    <value>会議室</value>
   </string>
   <string id="437" name="recordings_table_head_date">
-    <value>Date</value>
+    <value>日付</value>
   </string>
   <string id="438" name="record_start_cancel">
-    <value>cancel</value>
+    <value>キャンセル</value>
   </string>
   <string id="439" name="record_start_start">
-    <value>start</value>
+    <value>開始</value>
   </string>
   <string id="440" name="filesbrowser_table_head_name">
-    <value>Name</value>
+    <value>名前</value>
   </string>
   <string id="441" name="filesbrowser_table_head_date">
-    <value>Date</value>
+    <value>日付</value>
   </string>
   <string id="442" name="chat_clear_history">
-    <value>Delete Server-Chatlog</value>
+    <value>チャット記録の削除</value>
   </string>
   <string id="443" name="chat_overall_header">
-    <value>Chat</value>
+    <value>チャット</value>
   </string>
   <string id="444" name="chat_send_btn">
-    <value>send message</value>
+    <value>メッセージ送信</value>
   </string>
   <string id="445" name="chat_emot_btn">
-    <value>Emoticons</value>
+    <value>顔文字</value>
   </string>
   <string id="446" name="chat_emot_win">
-    <value>Emoticons</value>
+    <value>顔文字</value>
   </string>	
 </language>
