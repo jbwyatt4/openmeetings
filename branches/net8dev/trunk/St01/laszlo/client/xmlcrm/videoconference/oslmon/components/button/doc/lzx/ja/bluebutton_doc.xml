@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<descr>
+    omouseover/onmouseout/onmousedown/onmouseupでリソースが切り替わります。
+	basecomponentを継承しているが、basebutton(?)
+</descr>
