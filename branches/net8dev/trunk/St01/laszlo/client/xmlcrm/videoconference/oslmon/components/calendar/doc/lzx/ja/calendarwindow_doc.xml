@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<descr>
+	カレンダーのClickable icon。通常は*小さな*カレンダーだが、クリックされると（多分）カレンダーが
+	大きく表示される。このクラスではクリックされたときに自分をdestroy()して消している。
+	*datepickerと代替可能(?)
+</descr>
