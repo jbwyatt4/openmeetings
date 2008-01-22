@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<descr>
+	colorsliderクラス,colorpotクラス,colorrowクラス,colorpickerクラスが一つのファイルにあるので分けましょう。
+	lpsのincubator/colorpicker.lzxをモディファイしたようです。
+	whiteboard → paintの塗りつぶし色選択機能。
+	*第１行目にutf encoding tagの記述が抜けています。	
+</descr>
