@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<descr>
+	clickableな汎用basecomponent(view)。何に使っているのかわからないが、依存関係の小さいいいクラス。
+	*resourceが同一ファイルに記述されている。
+</descr>
