@@ -100,7 +100,7 @@ Alphabetical:
   * TestingBusinessLogic 	Implementation 	How to test the business Logic  	 
   * TipsImprovePerformance 	Implementation 	Some tips to improve performance.
   * [databasescheme] 	Design, Implementation 	Database Schemes of project. 
-  * [qosTips] 	---- 	QoS tips to improve the network performances for OpenMeetings   Configuration Featured 
+  * [qosTips] 	---- 	QoS tips to improve the network performances for !OpenMeetings   Configuration Featured 
   * [wml] 	Design 	about wml file format
 
 == Wiki Index ==
