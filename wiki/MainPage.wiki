@@ -102,3 +102,7 @@ Alphabetical:
   * [databasescheme] 	Design, Implementation 	Database Schemes of project. 
   * [qosTips] 	---- 	QoS tips to improve the network performances for OpenMeetings   Configuration Featured 
   * [wml] 	Design 	about wml file format
+
+== Wiki Index ==
+
+  * [http://code.google.com/p/openmeetings/w/list Change History] Change History of wiki Files
