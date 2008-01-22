@@ -1,6 +1,8 @@
 #summary about wml file format
 #labels Phase-Design
 
+_outdated - WML Files are not in this format stored anymore_
+
 = Summary =
 
 You can store and load files in the whiteboard. These files will be stored with the extension *.wml* on the file-system (owned by the owner of the Java-Process)
