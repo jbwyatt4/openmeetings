@@ -6,7 +6,8 @@
 You need to compile two apps:
   * Client - build with !OpenLaszlo
   * Webapp - Java-Webapp
-you need both! and it should be the same revision number (SVN Revision number) !
+you need both! and you should use the same revision number (SVN Revision number) !
+
 
 = Openlaszlo Client (Client-Side) =
 
