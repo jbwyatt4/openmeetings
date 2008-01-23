@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<descr>
+	textフィールド内に任意のheight,width=3pix,背景色黒のviewを持つ汎用クラス。
+	*内部のviewのheightが'parent.parent'指定されているので,クラスのattribute化しましょう。
+</descr>

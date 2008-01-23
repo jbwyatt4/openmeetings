@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<descr>
+	recordlistItemクラス,recordvaluelistクラスがありますので、別ファイルにしましょう。
+	'■some text [delete icon]'を表示する汎用クラス。
+</descr>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<descr>
+	turnoverlistheaderitemクラス,turnoverlistheaderitemsimpleクラスが同梱されています。
+	依存関係はないようですので別ファイルにしましょう。
+	resizableな汎用ボタンのようです。特にどこで使うかわかりません。
+	*'parent.parent...'とクラス外に依存する記述が多数みられますので修正しましょう。
+</descr>
