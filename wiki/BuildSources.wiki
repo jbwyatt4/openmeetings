@@ -9,6 +9,8 @@ You need to compile two apps:
 you need both! and you should use the same revision number (SVN Revision number) !
 
 
+
+
 = Openlaszlo Client (Client-Side) =
 
 http://openmeetings.googlecode.com/svn/branches/dev/laszlo/client/
