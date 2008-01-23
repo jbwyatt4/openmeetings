@@ -2,7 +2,7 @@
 <descr>
 	ドッキングできる汎用のview box。（だと思います）
 	drag移動しても重ならず、適当な間隔で接続・配置されるもの（らしい）。
-    *components/presenter/guipresenter.lzxとほぼ同じコードであるが
+    *components/explorer/explorer.lzxとほぼ同じコードであるが
     attributeのresizeableが
          explorer → false
          guipresenter → true
