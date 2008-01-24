@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rlzxdoc>
- <class name="">
+ <class name="labeltooltip">
    <doc>
    	ラベル付きのtooltip。viewクラスを継承している。<br/>
    	*incubator/tooltipクラスを継承することで代替可能では？　その場合、以下の２つのクラスも<br>
