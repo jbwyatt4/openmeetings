@@ -130,7 +130,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>No hay encuestas</value>
   </string>
   <string id="42" name="votings">
-    <value>Vote!</value>
+    <value>Votar!</value>
   </string>
   <string id="43" name="meeting">
     <value>Reunión (max 4 puestos)</value>
@@ -145,7 +145,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Otros puestos</value>
   </string>
   <string id="47" name="alreadychosen">
-    <value>Ya ha elegido</value>
+    <value>Ya ha Seleccionado</value>
   </string>
   <string id="48" name="enter">
     <value>Ingresar</value>
@@ -157,19 +157,19 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Información del Sistema</value>
   </string>
   <string id="51" name="chossedevice">
-    <value>Elegir dispositivo</value>
+    <value>Seleccionar dispositivo</value>
   </string>
   <string id="52" name="choosecam">
-    <value>Elegir cámara:</value>
+    <value>Seleccionar cámara:</value>
   </string>
   <string id="53" name="choosemic">
-    <value>Elegir micrófono:</value>
+    <value>Seleccionar micrófono:</value>
   </string>
   <string id="54" name="ok">
-    <value>ok</value>
+    <value>OK</value>
   </string>
   <string id="55" name="cancel2">
-    <value>cancelar</value>
+    <value>Cancelar</value>
   </string>
   <string id="56" name="reconeectneeded">
     <value>Necesita reconectarse</value>
@@ -184,7 +184,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Idioma:</value>
   </string>
   <string id="60" name="ok2">
-    <value>ok</value>
+    <value>OK</value>
   </string>
   <string id="61" name="cancel3">
     <value>cancelar</value>
@@ -250,22 +250,22 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Aplicar para ser moderador</value>
   </string>
   <string id="82" name="apply">
-    <value>aplicar</value>
+    <value>Aplicar</value>
   </string>
   <string id="83" name="cancel">
-    <value>cancelar</value>
+    <value>Cancelar</value>
   </string>
   <string id="84" name="mod">
     <value>Convertirse en moderador</value>
   </string>
   <string id="85" name="close">
-    <value>cerrar</value>
+    <value>Cerrar</value>
   </string>
   <string id="86" name="italic">
-    <value>italica</value>
+    <value>Italica</value>
   </string>
   <string id="87" name="bold">
-    <value>negrilla</value>
+    <value>Negrilla</value>
   </string>
   <string id="88" name="waiting">
     <value>ESPERANDO</value>
@@ -274,13 +274,13 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Un usuario desea aplicar para ser moderador:</value>
   </string>
   <string id="90" name="accept">
-    <value>aceptar</value>
+    <value>Aceptar</value>
   </string>
   <string id="91" name="reject">
-    <value>denegar</value>
+    <value>Denegar</value>
   </string>
   <string id="92" name="cancel">
-    <value>cancelar</value>
+    <value>Cancelar</value>
   </string>
   <string id="93" name="sendmodrequestmessage">
     <value>Enviando la solicitud a los siguientes usuarios</value>
@@ -325,7 +325,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Este email ya está registrado</value>
   </string>
   <string id="107" name="emailtaken">
-    <value>Error del sistema, por favor contacte al administrador del sistema</value>
+    <value>Error, por favor contacte al administrador del sistema</value>
   </string>
   <string id="108" name="Authlogin">
     <value>Login</value>
@@ -334,7 +334,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Usuario:</value>
   </string>
   <string id="110" name="Authpass">
-    <value>Clave:</value>
+    <value>Contraseña:</value>
   </string>
   <string id="111" name="Authlang">
     <value>Idioma</value>
@@ -349,10 +349,10 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Usuario:</value>
   </string>
   <string id="115" name="regformpass">
-    <value>Clave:</value>
+    <value>Contraseña:</value>
   </string>
   <string id="116" name="regformretype">
-    <value>Clave (otra vez):</value>
+    <value>Contraseña (otra vez):</value>
   </string>
   <string id="117" name="regformfirstname">
     <value>Nombre(s):</value>
@@ -406,7 +406,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Clave</value>
   </string>
   <string id="134" name="useralterself_passretype">
-    <value>Reescribir Clave</value>
+    <value>Reescribir Contraseña</value>
   </string>
   <string id="135" name="useralterself_firstname">
     <value>Nombre(s)</value>
@@ -673,7 +673,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Su sobrenombre para esta conferencia</value>
   </string>
   <string id="223" name="invited_userwin_login">
-    <value>sobrenombre</value>
+    <value>nombre para mostrar</value>
   </string>
   <string id="224" name="invited_userwin_firstname">
     <value>nombre</value>
@@ -700,7 +700,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Clave equivocada</value>
   </string>
   <string id="232" name="user_registerFalsePWDHeader">
-    <value>Por favor ingrese 2 veces las misma clave con un mínimo de 4 caracteres</value>
+    <value>Por favor ingrese 2 veces las misma contraseña con un mínimo de 4 caracteres</value>
   </string>
   <string id="233" name="user_registerMailError">
     <value>Correo inválido</value>
@@ -715,7 +715,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Su cuenta ha sido creada, puede ingresar desde este momento</value>
   </string>
   <string id="237" name="user_sharing_message">
-    <value>Ud no puede compartir su escritorio en este momento. Alguien más ya está compartiendo su escritorio.</value>
+    <value>Usted no puede compartir su escritorio en este momento. Alguien más ya está compartiendo su escritorio.</value>
   </string>
   <string id="238" name="user_sharing_messageHeader">
     <value>Compartición prohibida</value>
@@ -724,7 +724,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Compartir su escritorio</value>
   </string>
   <string id="240" name="screen_warnBandwidth">
-    <value>Problemas de conexión: Su ancho de banda es insuficiente y se perderán información. Si el mensaje se repite con frecuencia solicite al moderador reducir la calidad often you could ask the moderator to reduce the Quality.</value>
+    <value>Problemas de conexión: Su ancho de banda es insuficiente y se perderán información. Si el mensaje se repite con frecuencia solicite al moderador reducir la calidad.</value>
   </string>
   <string id="241" name="screen_userlabel">
     <value>Escritorio de:</value>
@@ -823,31 +823,31 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>de</value>
   </string>
   <string id="273" name="organisation_usersheader">
-    <value>Users</value>
+    <value>Usuarios</value>
   </string>
   <string id="274" name="organisation_usersicondelete">
-    <value>delete user from organisation</value>
+    <value>Eliminar usuario de la organización</value>
   </string>
   <string id="275" name="organisation_usersdeletedhead">
-    <value>delete</value>
+    <value>Eliminar</value>
   </string>
   <string id="276" name="organisation_usersalreadadded">
-    <value>This user is already member of this organisation.</value>
+    <value>Este usuario ya es miembro de la organización</value>
   </string>
   <string id="277" name="dashboard_newsheader">
-    <value>News</value>
+    <value>Noticias</value>
   </string>
   <string id="278" name="dashboard_quicklinksheader">
-    <value>Quicklinks</value>
+    <value>Links rápidos</value>
   </string>
   <string id="279" name="dashboard_quicklinkConf">
-    <value>Goto Conference</value>
+    <value>Ir a la conferencia</value>
   </string>
   <string id="280" name="dashboard_quicklinkAudit">
-    <value>Goto Auditorium</value>
+    <value>Ir al Auditorio</value>
   </string>
   <string id="281" name="dashboard_quicklinksupport">
-    <value>Help and Support</value>
+    <value>Ayuda y Soporte</value>
   </string>
   <string id="282" name="dashboard_quickhomepageurl">
     <value>http://code.google.com/p/openmeetings/</value>
@@ -856,493 +856,492 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>http://groups.google.com/group/openmeetings-user</value>
   </string>
   <string id="284" name="dashboard_reportbugs">
-    <value>Report a bug!</value>
+    <value>Reportar un bug!</value>
   </string>
   <string id="285" name="dashboard_rsslistitemlinktext">
-    <value>more</value>
+    <value>más</value>
   </string>
   <string id="286" name="dashboard_quicklinkhomepagelabel">
-    <value>Project Website (code.google.com/p/openmeetings/)</value>
+    <value>Sitio Web del Proyecto (code.google.com/p/openmeetings/)</value>
   </string>
   <string id="287" name="dashboard_quicklinkmailinglistlabel">
-    <value>User Mailing List (groups.google.com/group/openmeetings-user)</value>
+    <value>Lista de correos del Proyecto (groups.google.com/group/openmeetings-user)</value>
   </string>
   <string id="288" name="login_rememberuser">
-    <value>Remember Login</value>
+    <value>Recordar</value>
   </string>
   <string id="289" name="main_navi">
-    <value>Content</value>
+    <value>Contenido</value>
   </string>
   <string id="290" name="subnavi">
-    <value>My Home Page</value>
+    <value>Mi página de inicio</value>
   </string>
   <string id="291" name="subnavi">
-    <value>My Scheduled Meetings</value>
+    <value>Mis reuniones programadas</value>
   </string>
   <string id="292" name="subnavi">
-    <value>My Scheduled Events</value>
+    <value>Mis eventos programados</value>
   </string>
   <string id="293" name="subnavi">
-    <value>Public Meetings</value>
+    <value>Reuniones públicas</value>
   </string>
   <string id="294" name="subnavi">
-    <value>Private Meetings</value>
+    <value>Reuniones privadas</value>
   </string>
   <string id="295" name="subnavi">
-    <value>Public Events</value>
+    <value>Eventos públicos</value>
   </string>
   <string id="296" name="subnavi">
-    <value>Private Events</value>
+    <value>Eventos privados</value>
   </string>
   <string id="297" name="subnavi">
-    <value>Public Content</value>
+    <value>Contenido público</value>
   </string>
   <string id="298" name="subnavi">
-    <value>Private Content</value>
+    <value>Contenido privado</value>
   </string>
   <string id="299" name="subnavi">
-    <value>Personal Content</value>
+    <value>Contenido personal</value>
   </string>
   <string id="300" name="subnavi">
-    <value></value>
+    <value>...</value>
   </string>
   <string id="301" name="conferencebar">
-    <value>Moderation</value>
+    <value>Moderación</value>
   </string>
   <string id="302" name="conferencebar">
-    <value>Apply for Moderation</value>
+    <value>Solicitar una moderación</value>
   </string>
   <string id="303" name="conferencebar">
-    <value>Polls</value>
+    <value>Encuestas</value>
   </string>
   <string id="304" name="conferencebar">
-    <value>Choose a file</value>
+    <value>Seleccione un archivo</value>
   </string>
   <string id="305" name="conferencebar">
-    <value>Settings</value>
+    <value>Configuración</value>
   </string>
   <string id="306" name="conferencebar">
-    <value>Cam and Mic Settings</value>
+    <value>Cámara y Micrófono</value>
   </string>
   <string id="307" name="conferencebar">
-    <value>Whiteboard Settings</value>
+    <value>Configuración de la pizarra</value>
   </string>
   <string id="308" name="conferencebar">
-    <value>Exit</value>
+    <value>Salir</value>
   </string>
   <string id="309" name="conferencebar">
-    <value>Back to Rooms</value>
+    <value>Regresar a las salas</value>
   </string>
   <string id="310" name="conferencebar">
-    <value>Logout</value>
+    <value>Cerrar sesión</value>
   </string>
   <string id="311" name="loginwindow">
-    <value>Desktop Viewer</value>
+    <value>Visor de escritorio</value>
   </string>
   <string id="312" name="loginwindow">
-    <value>start Desktop Viewer</value>
+    <value>iniciar Visor de escritorio</value>
   </string>
   <string id="313" name="loginwindow">
-    <value>Video and Audio</value>
+    <value>Audio y Video</value>
   </string>
   <string id="314" name="loginwindow">
     <value>Chat</value>
   </string>
   <string id="315" name="loginwindow">
-    <value>Whiteboard</value>
+    <value>Pizarra</value>
   </string>
   <string id="316" name="loginwindow">
-    <value>Moderation</value>
+    <value>Moderación</value>
   </string>
   <string id="317" name="loginwindow">
-    <value>Files</value>
+    <value>Archivos</value>
   </string>
   <string id="318" name="loginwindow">
-    <value>Users</value>
+    <value>Usuarios</value>
   </string>
   <string id="319" name="loginwindow">
-    <value>Polls</value>
+    <value>Encuestas</value>
   </string>
   <string id="320" name="loginwindow">
-    <value>There is no User connected to this Username</value>
+    <value>NO hay persona conectada para este nombre de usuario</value>
   </string>
   <string id="321" name="loginwindow">
-    <value>The email containing a special link has been sent to your email address, please check your mailbox. If you still have not received a email, please adjust your email spam settings and resend confirmation email.</value>
+    <value>El email contiene un hipervínculo especial ha sido enviado, por favor revise su bandeja de entrada. Si no aparece este correo por favor revise la configuración de spam de su servidor y reenvie este correo nuevamente.</value>
   </string>
   <string id="322" name="errortype">
     <value>Error</value>
   </string>
   <string id="323" name="errortype">
-    <value>Message</value>
+    <value>Mensaje</value>
   </string>
   <string id="324" name="resetpass">
-    <value>Invalid Hash. No User found.</value>
+    <value>No se encontró al usuario (hash incorrecto).</value>
   </string>
   <string id="325" name="resetpass">
-    <value>Reset Your Password</value>
+    <value>Generar contraseña</value>
   </string>
   <string id="326" name="resetpass">
     <value>Login</value>
   </string>
   <string id="327" name="resetpass">
-    <value>change Password</value>
+    <value>cambiar contraseña</value>
   </string>
   <string id="328" name="resetpass">
-    <value>new Password</value>
+    <value>nueva contraseña</value>
   </string>
   <string id="329" name="resetpass">
-    <value>re-enter Password</value>
+    <value>vuelva a escribir la contraseña</value>
   </string>
   <string id="330" name="resetpass">
-    <value>The Passwords you entered weren't identical.</value>
+    <value>Las contraseñas ingresadas no son iguales.</value>
   </string>
   <string id="331" name="resetpass">
-    <value>4 or more characters; capitalization matters!</value>
+    <value>Escriba 4 o más caracteres. Se diferencia mayúsculas</value>
   </string>
   <string id="332" name="resetpass">
-    <value>Password set. You can login now.</value>
+    <value>La contraseña ha sido cambiada, ahora puede iniciar sesión.</value>
   </string>
   <string id="333" name="rpccallback">
     <value>OK</value>
   </string>
   <string id="334" name="rpcgeneralerror">
-    <value>Unkown Error. Please report this to your Service-Team.</value>
+    <value>Error..</value>
   </string>
   <string id="335" name="loginwindow">
-    <value>Username not found</value>
+    <value>No se encontró el usuario</value>
   </string>
   <string id="336" name="loginwindow">
-    <value>Invalid Password</value>
+    <value>Contraseña incorrecta</value>
   </string>
   <string id="337" name="logout">
-    <value>Successfully Logged out</value>
+    <value>Usted ha salido del sistema</value>
   </string>
   <string id="338" name="registration">
-    <value>Frontend Registration disabled.</value>
+    <value>Se encuentra desabilitada la opción de registro.</value>
   </string>
   <string id="339" name="registration">
-    <value>Invalid EMail</value>
+    <value>EMail incorrecto</value>
   </string>
   <string id="340" name="registration">
-    <value>duplicate filename, please choose another filename</value>
+    <value>archivo duplicado, por favor seleccione otro</value>
   </string>
   <string id="341" name="filebrowser">
-    <value>filename too short</value>
+    <value>el archivo es muy corto</value>
   </string>
   <string id="342" name="filebrowser">
-    <value>Could not save Address</value>
+    <value>No se pudo guardar la dirección</value>
   </string>
   <string id="343" name="useradmin">
-    <value>User added but you need to assign this User to an Organisation, otherwise he won't be able to sign-in.</value>
+    <value>El usuario fue añadido, sin embargo deberá ser agregado a alguna organización, caso contrario no podrá iniciar sesión.</value>
   </string>
   <string id="344" name="adminforms">
-    <value>New Record</value>
+    <value>Nueva grabación</value>
   </string>
   <string id="345" name="languageseditor">
-    <value>No Field found with this FieldId.</value>
+    <value>No se encontró un campo en este FieldId.</value>
   </string>
   <string id="346" name="languageseditor">
-    <value>No Label found for that Field.</value>
+    <value>No se encontró una etiqueta para este campo.</value>
   </string>
   <string id="347" name="errormessage">
-    <value>Admin Authorization required</value>
+    <value>Se necesita autorización del administrador</value>
   </string>
   <string id="348" name="mainnavi">
-    <value>Language-Editor</value>
+    <value>Editor de lenguaje.</value>
   </string>
   <string id="349" name="languageseditor">
-    <value>Language</value>
+    <value>Lenguaje</value>
   </string>
   <string id="350" name="languageseditor">
-    <value>Label-ID</value>
+    <value>Etiqueta-ID</value>
   </string>
   <string id="351" name="languageseditor">
-    <value>Label-Name</value>
+    <value>Etiqueta-Nombre</value>
   </string>
   <string id="352" name="languageseditor">
-    <value>Value</value>
+    <value>Valor</value>
   </string>
   <string id="353" name="languageseditor">
-    <value>Fieldvalues</value>
+    <value>Valor de los campos</value>
   </string>
   <string id="354" name="languageseditor">
-    <value>LabelName</value>
+    <value>Nombre de la etiqueta</value>
   </string>
   <string id="355" name="languageseditor">
-    <value>LabelValue</value>
+    <value>Valor de la etiqueta</value>
   </string>
   <string id="356" name="languageseditor">
-    <value>Label-ID</value>
+    <value>ID de la etiqueta</value>
   </string>
   <string id="357" name="languageseditor">
-    <value>You did only delete the Label NOT the Field! You cannot delete the Field, it may has Labels in other Languages.</value>
+    <value>Usted solo eliminó la etiqueta pero no el campo. No se puede eliminar un campo.</value>
   </string>
   <string id="358" name="languageseditor">
-    <value>Invalid Labelid. The FieldLanguagesvalues_Id cannot be found in the database.</value>
+    <value>Labelid incorrecto. Su FieldLanguagesvalues_Id no se encontró en la base de datos.</value>
   </string>
   <string id="359" name="languageseditor">
-    <value>You cannot delete this Field. You can only delete Labels NOT Fields. There is no Label loaded at the moment, wether it is not selected any Field or there is no Label for this Language for that Field defined.</value>
+    <value>Usted no puede eliminar este campo, solo etiquetas. No hay una etiqueta cargada por el momento o no se encuentra seleccionada alguna (puede que no exista ésta para el lenguaje seleccionado).</value>
   </string>
   <string id="360" name="languageseditor">
-    <value>export</value>
+    <value>exportar</value>
   </string>
   <string id="361" name="languageseditor">
-    <value>You need to logout to see any changes.</value>
+    <value>Necesita cerrar sesión para ver los cambios.</value>
   </string>
   <string id="362" name="languageseditor">
-    <value>Add new language</value>
+    <value>Añadir nuevo lenguaje/value>
   </string>
   <string id="363" name="languageseditor">
-    <value>delete language</value>
+    <value>eliminar lenguaje</value>
   </string>
   <string id="364" name="languageseditor">
-    <value>Add new language</value>
+    <value>Añadir nuevo lenguaje</value>
   </string>
   <string id="365" name="languageseditor">
-    <value>Name</value>
+    <value>Nombre</value>
   </string>
   <string id="366" name="languageseditor">
-    <value>add language</value>
+    <value>añadir lenguaje</value>
   </string>
   <string id="367" name="languageseditor">
     <value>Backup</value>
   </string>
   <string id="368" name="turnoverlist">
-    <value>goto first</value>
+    <value>ir al inicio</value>
   </string>
   <string id="369" name="turnoverlist">
-    <value>goto previous</value>
+    <value>anterior</value>
   </string>
   <string id="370" name="turnoverlist">
-    <value>goto next</value>
+    <value>siguiente</value>
   </string>
   <string id="371" name="turnoverlist">
-    <value>goto last</value>
+    <value>ir al final</value>
   </string>
   <string id="372" name="videobox">
-    <value>user speaks</value>
+    <value>el usuario habla</value>
   </string>
   <string id="373" name="videobox">
-    <value>turn sound on/off</value>
+    <value>encender o apagar sonido</value>
   </string>
   <string id="374" name="dashboard">
-    <value>System</value>
+    <value>Sistema</value>
   </string>
   <string id="375" name="dashboard">
-    <value>Your Settings</value>
+    <value>Su configuración</value>
   </string>
   <string id="376" name="dashboard">
-    <value>hi,</value>
+    <value>hola,</value>
   </string>
   <string id="377" name="dashboard">
-    <value>Edit your profile</value>
+    <value>Editar su perfil</value>
   </string>
   <string id="378" name="dashboard">
-    <value>New Messages:</value>
+    <value>Nuevos mensajes:</value>
   </string>
   <string id="379" name="dashboard">
-    <value>Upload new Image</value>
+    <value>Subir una nueva imagen</value>
   </string>
   <string id="380" name="backuppanel">
-    <value>Userdata - Export</value>
+    <value>Datos de usuario - Exportar</value>
   </string>
   <string id="381" name="backuppanel">
-    <value>All organisations must be already existing!</value>
+    <value>Todas las organizaciones deben existir!</value>
   </string>
   <string id="382" name="backuppanel">
-    <value>start export</value>
+    <value>iniciar proceso de exportación</value>
   </string>
   <string id="383" name="backuppanel">
-    <value>By organisation</value>
+    <value>Por organización</value>
   </string>
   <string id="384" name="backuppanel">
-    <value>start export</value>
+    <value>iniciar proceso de exportación</value>
   </string>
   <string id="385" name="backuppanel">
-    <value>Userdata - Import</value>
+    <value>Datos de usuario - Importar</value>
   </string>
   <string id="386" name="backuppanel">
-    <value>choose users.xml</value>
+    <value>seleccionar archivo de usuarios.xml</value>
   </string>
   <string id="387" name="languageseditor">
-    <value>import</value>
+    <value>importar</value>
   </string>
   <string id="388" name="languageseditor">
-    <value>Export to XML - These files can be used to: 
-		- Contribute to the project 
-		- Import into another System 
-		- Backup 
-		- Customization 
-		- Put it into the language-directory for your next installation</value>
+    <value>Exportar a XML - Estos archivos pueden ser usados para:
+		- Contribuir en el proyecto
+		- Importarlos en otro sistema
+		- Respaldo
+		- Personalización
+		- COlocarlo en el directorio de lenguajes en la próxima instalación.</value>
   </string>
   <string id="389" name="languageseditor">
-    <value>Choose a language file to import. Choose the right Langauge from the Combobox! 
-		No matter what the name of the file is, it will be imported into this language!</value>
+    <value>Seleccione un archivo de lenguaje a importar. Seleccione correctamente el lenguaje del selector (no importa el nombre que tenga, será importado a este lenguaje de todos modos).</value>
   </string>
   <string id="390" name="importwindow">
-    <value>import - choose file</value>
+    <value>importar - seleccionar archivo</value>
   </string>
   <string id="391" name="recordingsavewin">
-    <value>Save as</value>
+    <value>Guardar como...</value>
   </string>
   <string id="392" name="recordingsavewin">
-    <value>Name:</value>
+    <value>Nombre:</value>
   </string>
   <string id="393" name="recordingsavewin">
-    <value>Comment:</value>
+    <value>Comentario:</value>
   </string>
   <string id="394" name="recordingsavewin">
-    <value>save</value>
+    <value>guardar</value>
   </string>
   <string id="395" name="record">
-    <value>Recordings</value>
+    <value>Grabaciones</value>
   </string>
   <string id="396" name="recorder">
-    <value>Recordings Viewer</value>
+    <value>Visor de grabaciones</value>
   </string>
   <string id="397" name="record">
-    <value>Recordings of public and private Rooms</value>
+    <value>Grabaciones de salas públicas y privadas</value>
   </string>
   <string id="398" name="roomslist">
-    <value>Users :</value>
+    <value>Usuarios:</value>
   </string>
   <string id="399" name="roomslist">
-    <value>Joined:</value>
+    <value>En el sistema:</value>
   </string>
   <string id="400" name="roomslist">
     <value></value>
   </string>
   <string id="401" name="roomslist">
-    <value>Users in this Room:</value>
+    <value>Usuarios en la sala:</value>
   </string>
   <string id="402" name="roomslist">
-    <value>refresh</value>
+    <value>actualizar</value>
   </string>
   <string id="403" name="roomslist">
-    <value>This Room is Full. Try again in a few minutes.</value>
+    <value>La sala esta llena, por favor intente en unos minutos.</value>
   </string>
   <string id="404" name="roomsList">
-    <value>click on a room to get details</value>
+    <value>Haga click en una sala para ver los detalles</value>
   </string>
   <string id="405" name="roomslist">
-    <value>Chat with the users in this Room:</value>
+    <value>Escribirle a los usuarios de esta sala:</value>
   </string>
   <string id="406" name="roomslist">
-    <value>Room:</value>
+    <value>Sala:</value>
   </string>
   <string id="407" name="roomslist">
-    <value>Users in this room:</value>
+    <value>Usuarios en esta sala:</value>
   </string>
   <string id="408" name="roomslist">
-    <value>since:</value>
+    <value>desde:</value>
   </string>	
   <string id="409" name="record">
-    <value>play recording</value>
+    <value>reproducir grabación</value>
   </string>
   <string id="410" name="record">
-    <value>Length:</value>
+    <value>Duración:</value>
   </string>
   <string id="411" name="record">
-    <value>Date:</value>
+    <value>Fecha:</value>
   </string>
   <string id="412" name="record">
-    <value>Recorder Mode! You cannot change any values, this is a recorded File!</value>
+    <value>Modo de grabación! No puede cambiar ningun valor ya que se trata de un archivo grabado.</value>
   </string>
   <string id="413" name="record">
-    <value>Play this recording</value>
+    <value>Reproducir esta grabación</value>
   </string>
   <string id="414" name="record">
-    <value>Play / Pause</value>
+    <value>Reproducir / Pausa</value>
   </string>
   <string id="415" name="record">
-    <value>Start recording</value>
+    <value>Iniciar grabación</value>
   </string>
   <string id="416" name="record">
-    <value>stop recording</value>
+    <value>Detener grabación</value>
   </string>
   <string id="417" name="record">
-    <value>Recording:</value>
+    <value>Grabación:</value>
   </string>	
   <string id="418" name="record_error_msg">
-    <value>There is already somebody recording at the moment:</value>
+    <value>Actualmente alguien se encuentra grabando:</value>
   </string>
   <string id="419" name="record_message">
-    <value>Recording! By User:</value>
+    <value>Grabando! Por el usuario:</value>
   </string>
   <string id="420" name="record_cancel">
-    <value>cancel</value>
+    <value>cancelar</value>
   </string>
   <string id="421" name="record_cancal_tooltip">
-    <value>Recording will be canceled and not saved.</value>
+    <value>La grabación será cancelada y no guardada.</value>
   </string>
   <string id="422" name="cancel_dialog_resume">
-    <value>resume</value>
+    <value>reanudar</value>
   </string>
   <string id="423" name="cancel_dialog_resume_tooltip">
-    <value>Close this window and resume recording</value>
+    <value>Cerrar ventana y reanudar grabación</value>
   </string>
   <string id="424" name="painttools_ellipse_color">
-    <value>change Linecolor</value>
+    <value>Cambiar el color de línea</value>
   </string>
   <string id="425" name="colorpicker_head">
-    <value>Choose Color</value>
+    <value>Seleccionar color</value>
   </string>
   <string id="426" name="painttools_line_disable">
-    <value>Disable / Enable Linecolor</value>
+    <value>Deshabilitar / Habilitar Color de línea</value>
   </string>
   <string id="427" name="painttools_fill_disable">
-    <value>change Fillcolor</value>
+    <value>cambiar color de relleno</value>
   </string>
   <string id="428" name="painttools_line_disable">
-    <value>Disable / Enable Fillcolor</value>
+    <value>Deshabilitar / Habilitar color de relleno</value>
   </string>
   <string id="429" name="change_width_arrow_down_slider">
-    <value>Change Linewidth</value>
+    <value>cambiar grosor de línea</value>
   </string>
   <string id="430" name="close_small_popups">
-    <value>close</value>
+    <value>cerrar</value>
   </string>
   <string id="431" name="paint_tool_letter">
-    <value>change Fontsize</value>
+    <value>cambiar tamaño de letra</value>
   </string>	
   <string id="432" name="recordingslist_delete">
-    <value>Delete Recording</value>
+    <value>Eliminar grabación</value>
   </string>
   <string id="433" name="recordingslist_recordedByGuest">
-    <value>Guest</value>
+    <value>Invitado</value>
   </string>
   <string id="434" name="recordingslist_recordedby">
-    <value>By:</value>
+    <value>Por:</value>
   </string>
   <string id="435" name="recordings_table_head_name">
-    <value>Name</value>
+    <value>Nombre</value>
   </string>
   <string id="436" name="recordings_table_head_room">
-    <value>Room</value>
+    <value>Sala</value>
   </string>
   <string id="437" name="recordings_table_head_date">
-    <value>Date</value>
+    <value>Fecha</value>
   </string>
   <string id="438" name="record_start_cancel">
-    <value>cancel</value>
+    <value>cancelar</value>
   </string>
   <string id="439" name="record_start_start">
-    <value>start</value>
+    <value>iniciar</value>
   </string>
   <string id="440" name="filesbrowser_table_head_name">
-    <value>Name</value>
+    <value>Nombre</value>
   </string>
   <string id="441" name="filesbrowser_table_head_date">
-    <value>Date</value>
+    <value>Fecha</value>
   </string>
   <string id="442" name="chat_clear_history">
-    <value>Delete Server-Chatlog</value>
+    <value>Eliminar log de chat en el servidor</value>
   </string>
   <string id="443" name="chat_overall_header">
     <value>Chat</value>
   </string>
   <string id="444" name="chat_send_btn">
-    <value>send message</value>
+    <value>enviar mensaje</value>
   </string>
   <string id="445" name="chat_emot_btn">
     <value>Emoticons</value>
