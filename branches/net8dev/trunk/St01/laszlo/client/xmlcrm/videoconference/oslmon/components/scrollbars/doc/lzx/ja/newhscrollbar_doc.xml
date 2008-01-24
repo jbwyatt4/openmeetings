@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<descr>
+<rlzxdoc>
+ <class name="newhscrollbar">
+   <doc>
 	lps/components/incubatorにあるものと同じ。
 	*もういらない？
-</descr>
+   </doc>
+ </class>
+</rlzxdoc>

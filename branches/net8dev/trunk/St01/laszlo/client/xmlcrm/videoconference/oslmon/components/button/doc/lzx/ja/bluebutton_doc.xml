@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<descr>
+<rlzxdoc>
+ <class name="bluebutton">
+   <doc>
     omouseover/onmouseout/onmousedown/onmouseupでリソースが切り替わります。
 	basecomponentを継承しているが、basebutton(?)
-</descr>
+   </doc>
+ </class>
+</rlzxdoc>
