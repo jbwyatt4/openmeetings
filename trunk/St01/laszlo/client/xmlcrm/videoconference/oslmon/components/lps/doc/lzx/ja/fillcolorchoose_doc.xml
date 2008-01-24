@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<descr>
+<rlzxdoc>
+ <class name="filecolorchoose">
+   <doc>
 	whiteboard → paintの'塗りつぶし'機能。
-</descr>
+   </doc>
+ </class>
+</rlzxdoc>

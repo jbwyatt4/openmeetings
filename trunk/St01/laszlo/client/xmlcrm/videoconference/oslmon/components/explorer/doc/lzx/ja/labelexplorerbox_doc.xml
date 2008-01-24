@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<descr>
-	explorerboxを継承した、ラベル表示付きview box。
+<rlzxdoc>
+ <class name="labelexplorerbox">
+   <doc>
+   	explorerboxを継承した、ラベル表示付きview box。
 	表示文字の多言語に対応している。
-</descr>
+   </doc>
+ </class>
+</rlzxdoc>

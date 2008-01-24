@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<descr>
+<rlzxdoc>
+ <class name="vslider">
+   <doc>
 	lps/components/inclubator/vslider.lzxと同じ。
 	もともとこのコンポーネントはsebastianがcontributeしたものです。
-</descr>
+   </doc>
+ </class>
+</rlzxdoc>

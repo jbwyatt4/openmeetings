@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<descr>
-	changewidthsliderクラス,closableviewクラス,changewidthsliderwinクラスが一つの
+<rlzxdoc>
+ <class name="changewidthslider">
+   <doc>
+   	changewidthsliderクラス,closableviewクラス,changewidthsliderwinクラスが一つの
 	ファイルになっています。ファイルを分けましょう。
 	*changewidthletterslider.lzx/changewidthslider.lzxの違い
 		[changewidht*slider]
@@ -8,4 +10,10 @@
 	    	labeltooltip 'labelid'
 	    [changewidth*sliderwin]
 	    	attribute 'initialNumber'のvalue	    
-</descr>
+   </doc>
+ </class>
+ <class name="changewidthletterslider">
+   <doc>
+   </doc>
+ </class>
+</rlzxdoc>

@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<descr>
+<rlzxdoc>
+ <class name="recordvaluelist">
+   <doc>
 	recordlistItemクラス,recordvaluelistクラスがありますので、別ファイルにしましょう。
 	'■some text [delete icon]'を表示する汎用クラス。
-</descr>
+   </doc>
+ </class>
+ <class name="recordlistItem">
+   <doc>
+   </doc>
+ </class>
+</rlzxdoc>
