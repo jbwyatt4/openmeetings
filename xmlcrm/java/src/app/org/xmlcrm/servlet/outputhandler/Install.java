@@ -39,7 +39,7 @@ public class Install extends VelocityViewServlet {
 			String lang = httpServletRequest.getParameter("lang");
 			if (lang == null) lang = "EN";
 
-			String working_dir = getServletContext().getRealPath("/")+Application.configDirName;
+			String working_dir = getServletContext().getRealPath("/")+Application.configDirName+File.separatorChar;
 			
 			if (command == null){
 				log.error("command equals null");
