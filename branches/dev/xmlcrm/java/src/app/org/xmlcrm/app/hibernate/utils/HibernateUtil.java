@@ -7,6 +7,8 @@ import org.apache.commons.logging.LogFactory;
 import org.hibernate.*;
 import org.hibernate.cfg.*;
 
+import org.xmlcrm.app.remote.Application;
+
 public class HibernateUtil {
 	
 	private static final Log log = LogFactory.getLog(HibernateUtil.class);
@@ -67,8 +69,7 @@ public class HibernateUtil {
 		try {
 			if (sessionFactory == null) {
 				if (isLife){
-					String current_dir = System.getProperty("/xmlcrm")+"install/"+"hibernate.cfg.xml";
-					//log.error("SessionFactory Path: "+current_dir);
+					String current_dir = Application.webAppPath+File.separatorChar+Application.configDirName+File.separatorChar+"hibernate.cfg.xml";
 					sessionFactory = new Configuration().configure(new File(current_dir)).buildSessionFactory();
 				} else {
 					sessionFactory = new Configuration().configure().buildSessionFactory();

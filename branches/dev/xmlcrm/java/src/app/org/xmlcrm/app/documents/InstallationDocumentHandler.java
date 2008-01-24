@@ -13,8 +13,6 @@ public class InstallationDocumentHandler {
 	
 	public static final String installFileName = "install.xml";
 	
-	public static final String installFolderName = "install/";
-	
 	private static InstallationDocumentHandler instance;
 
 	private InstallationDocumentHandler() {}

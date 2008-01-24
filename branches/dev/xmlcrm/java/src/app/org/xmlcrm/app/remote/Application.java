@@ -59,6 +59,10 @@ public class Application extends ApplicationAdapter implements
 	private static BandwidthConfigFactory bwFactory = null;
 	private static UserConfigFactory userFactory = null;
 	
+	//The Global WebApp Path
+	public static String webAppPath = "";
+	public static String configDirName = "conf";
+	
 	private static Application instance = null;
 	
 	public static synchronized Application getInstance(){
@@ -78,6 +82,8 @@ public class Application extends ApplicationAdapter implements
 	@Override
 	public boolean appStart(IScope scope) {
 		try {
+			webAppPath = scope.getResource("/").getFile().getAbsolutePath();			
+			scope.getResource("public/").getFile().getParentFile().getAbsolutePath();
 			String filePath = scope.getResource("public/").getFile().getAbsolutePath();
 			this.loadEmot(filePath);
 			instance = this;

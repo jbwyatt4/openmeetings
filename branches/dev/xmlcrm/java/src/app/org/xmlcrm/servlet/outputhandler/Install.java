@@ -15,6 +15,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.xmlcrm.app.documents.InstallationDocumentHandler;
 import org.xmlcrm.app.installation.ImportInitvalues;
+import org.xmlcrm.app.remote.Application;
 
 public class Install extends VelocityViewServlet {
 
@@ -37,8 +38,8 @@ public class Install extends VelocityViewServlet {
 			
 			String lang = httpServletRequest.getParameter("lang");
 			if (lang == null) lang = "EN";
-			
-			String working_dir = getServletContext().getRealPath("/")+InstallationDocumentHandler.installFolderName;
+
+			String working_dir = getServletContext().getRealPath("/")+Application.configDirName;
 			
 			if (command == null){
 				log.error("command equals null");
