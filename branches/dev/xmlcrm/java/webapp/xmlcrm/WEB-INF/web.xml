@@ -154,7 +154,7 @@
         </web-resource-collection>
         <web-resource-collection>
             <web-resource-name>Forbidden</web-resource-name>
-            <url-pattern>/install/*</url-pattern>
+            <url-pattern>/conf/*</url-pattern>
         </web-resource-collection>
         <web-resource-collection>
             <web-resource-name>Forbidden</web-resource-name>
