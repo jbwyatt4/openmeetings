@@ -35,6 +35,7 @@ http://openmeetings.googlecode.com/svn/branches/dev/xmlcrm/java/
 
 there is now a directory dist, inside of that directory there is a compiled red5-webapp.
 You have to copy the Laszlo-Client from the Step-By-Step scenario into it.
+Since r897 the name of the folder *install* is *conf*!
 
 == Small howto to deploy/run the Sources == 
 Comment by kunthar,  Today (20 minutes ago) 10.01.2008
