@@ -862,7 +862,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>more</value>
   </string>
   <string id="286" name="dashboard_quicklinkhomepagelabel">
-    <value>Project Webside (code.google.com/p/openmeetings/)</value>
+    <value>Project Website (code.google.com/p/openmeetings/)</value>
   </string>
   <string id="287" name="dashboard_quicklinkmailinglistlabel">
     <value>User Mailing List (groups.google.com/group/openmeetings-user)</value>
