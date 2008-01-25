@@ -82,7 +82,7 @@
             </tabs>
 
 	
-	<rtmpconnection src="rtmp://192.168.0.1/xmlcrm/test" autoconnect="true"/>
+	<rtmpconnection src="rtmp://192.168.0.1/'+canvas.webAppRootKey+'/test" autoconnect="true"/>
 	<mediastream name="s1" type="rtmp"/>
 	<mediastream name="s2" type="rtmp"/>
 	<simplelayout/>
