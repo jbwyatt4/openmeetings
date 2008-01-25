@@ -163,6 +163,8 @@
         <handler name="ondata" args="value">	
             <![CDATA[
             	parent.recordingValue = value;
+            	Debug.write(parent.recordingValue.roomRecording.streamlist);
+            	Debug.write(parent.recordingValue.roomRecording.roomclients);
             	Debug.write("getRecordingById",parent.recordingValue.roomRecording);
             	parent.timerDel = new LzDelegate( parent, "timeLineAction" );
             	_drawarea.isinitRecordingLoad = true;
@@ -193,9 +195,30 @@
 			if (minutes<10) minutes = "0"+minutes;	
 			this.progress._currentTime._timetext.setAttribute('text',minutes+":"+deltaSeconds);
 	        
+			var roomclients = parent.recordingValue.roomRecording.roomclients;
+			
+			for (var i=0;i<roomclients.length;i++){
+        		var starttime =  (Math.round(roomclients[i].starttime/this.timeStepSyncing))*this.timeStepSyncing;
+        		//Debug.write("timeLineAction starttime: ",starttime);
+        		if (starttime == this.currentTime){
+        			Debug.write("Found Room Event: ",roomclients[i]);
+        			if (roomclients[i].roomenter){
+        				var userpos = streamList[i].rcl.userpos;
+		        		var streamname = streamList[i].streamName+".flv";
+        				Debug.write("Found ROOM User Entered Enter",starttime,userpos,streamname);
+        				//canvas._videocontainer.startStream(streamname,userpos,this.recordingValue.roomRecording.streamlist[i].rcl);
+        			} else if (roomclients[i].streamstart && !streamList[i].avset){
+		        		var userpos = streamList[i].rcl.userpos;
+		        		var streamname = streamList[i].streamName+".flv";
+		        		Debug.write("Found ROOM User Entered Left",starttime,userpos,streamname);
+		        		//canvas._videocontainer.startStream(streamname,userpos,this.recordingValue.roomRecording.streamlist[i].rcl);
+        			}
+        		}
+			}
+			
 			var streamList = this.recordingValue.roomRecording.streamlist;
 			
-			Debug.write(this.recordingValue.roomRecording.streamlist);
+			//Debug.write(this.recordingValue.roomRecording.streamlist);
 			
         	for (var i=0;i<streamList.length;i++){
         		//Debug.write(streamList[i]);
@@ -206,11 +229,21 @@
         		var starttime =  (Math.round(streamList[i].starttime/this.timeStepSyncing))*this.timeStepSyncing;
         		//Debug.write("timeLineAction starttime: ",starttime);
         		if (starttime == this.currentTime){
+        			Debug.write("Found User Event: ",streamList[i]);
         			if (streamList[i].streamstart && !streamList[i].avset){
+        				var userpos = streamList[i].rcl.userpos;
+		        		var streamname = streamList[i].streamName+".flv";
+        				Debug.write("Found User Entered To END! - ",starttime,userpos,streamname);
+        				canvas._videocontainer.startStream(streamname,userpos,this.recordingValue.roomRecording.streamlist[i].rcl);
+        			} else if (streamList[i].streamstart && !streamList[i].avset){
 		        		var userpos = streamList[i].rcl.userpos;
 		        		var streamname = streamList[i].streamName+".flv";
 		        		Debug.write("Found - ",starttime,userpos,streamname);
 		        		canvas._videocontainer.startStream(streamname,userpos,this.recordingValue.roomRecording.streamlist[i].rcl);
+        			} else if (!streamList[i].streamstart) {
+        				var userpos = streamList[i].rcl.userpos;
+		        		var streamname = streamList[i].streamName+".flv";
+        				Debug.write("Found Stream To END! - ",starttime,userpos,streamname);
         			}
         		}
         	}
