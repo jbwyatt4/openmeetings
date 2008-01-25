@@ -61,6 +61,19 @@ public class StreamService implements IPendingServiceCallback {
 	 * the streamlist all room-streaming events are inside
 	 * avset means this is an streaming event where only the audio-video settings have been altered
 	 * 
+	 * Meaning of the boolean Values in the *streamlist* :
+	 * streamstart = true && avset = false => an initial user (a user which has been already in the room when you started the recorder-session) 
+	 * streamstart = true && avset = true => new user did start streaming
+	 * streamstart = false && avset =  true => new user did has chosen his av/settings, if he has chosen *n* 
+	 * 									(rcl.avsettings == "n") then he will not send any streamstart event cause he
+	 * 									does not stream audio/video => show the picture of the user
+	 * streamstart = false && avset = false => user did finished streaming
+	 * 									if the user has rcl.avsettings != "n" stop playing the stream
+	 * 
+	 * 
+	 * Meaning of the boolean Values in the *roomclients* :
+	 * roomenter =  true => a new user OR initial user
+	 * roomenter = false => a user has left the Conference 
 	 * 
 	 * @param conferenceType
 	 * @param initwhiteboardvars
@@ -474,7 +487,7 @@ public class StreamService implements IPendingServiceCallback {
 				//this is a recording event
 				roomStream.put("streamstart", true);
 				//this is not an av event
-				roomStream.put("avset", false);
+				roomStream.put("avset", true);
 				roomStream.put("remoteAdress", remoteAdress);
 				roomStream.put("startdate",new java.util.Date());
 				roomStream.put("starttime",currentDate.getTime()-recordingsStartTime.getTime());
