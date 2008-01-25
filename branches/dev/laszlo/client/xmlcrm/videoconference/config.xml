@@ -80,5 +80,16 @@ of the red5-servlet
     web.xml
  -->
 <webAppRootKey>openmeetings</webAppRootKey>  
+    
+<!--
+    Window-Effect Settings
+    showWindowEffect-values:
+    y = yes
+    n = no
+    showWindowEffectOpacity-values
+    between 0 and 1
+ -->
+<showWindowEffect>y</showWindowEffect>    
+
         
 </config>

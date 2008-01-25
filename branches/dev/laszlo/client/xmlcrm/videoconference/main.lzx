@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <canvas debug="false" width="100%" height="100%" >
- 
+     
 <!-- 
 ##########################################################
 these properties will be overwritten by config.xml -->  
@@ -53,6 +53,7 @@ these properties will be overwritten by config.xml -->
 
 <!-- Video Settings -->
 <attribute name="loudnessAcitviation" value="10" type="number" />
+<attribute name="showWindowEffect" value="y" type="string" />    
 
 <!-- END OF config.xml attributes
 ##########################################################
@@ -247,6 +248,7 @@ and some more references to temp-objects
 	    this.setAttribute('currentappnamebugurl',canvas.myConfigSet.getPointer().xpathQuery('config/currentappnamebugurl/text()'));
 	    this.setAttribute('loudnessAcitviation',canvas.myConfigSet.getPointer().xpathQuery('config/loudnessAcitviation/text()'));
 		this.setAttribute('webAppRootKey',canvas.myConfigSet.getPointer().xpathQuery('config/webAppRootKey/text()'));
+		this.setAttribute('showWindowEffect',canvas.myConfigSet.getPointer().xpathQuery('config/showWindowEffect/text()'));  
 
 		mainBaseText.setText(canvas.currentappname);
 	    mainBaseText.setShadow();
@@ -303,7 +305,7 @@ and some more references to temp-objects
 		
 		//Debug.write("rtmphostlocal,rmpthost: ",canvas.rtmphostlocal,canvas.rmpthost);	
 	
-	    var src = 'rtmp://'+canvas.rtmphostlocal+':'+canvas.rmptport+'/xmlcrm/hibernate';
+	    var src = 'rtmp://'+canvas.rtmphostlocal+':'+canvas.rmptport+'/'+canvas.webAppRootKey+'/hibernate';
 	    canvas.thishib.setAttribute('src',src);
 	    canvas.thishib.loaderVar = new autoloader(canvas);
 	    canvas.thishib.loaderVar.src.setText(src);
