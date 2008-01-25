@@ -45,6 +45,7 @@ public class ScreenCastTemplate extends VelocityLoader{
 	
 	        context.put("rtmphostlocal", rtmphostlocal); //rtmphostlocal
 	        context.put("red5httpport", red5httpport); //red5httpport
+	        context.put("webAppRootKey", "openmeetings"); //TODO: Query webAppRootKey by Servlet
 	        context.put("SID", SID);
 	        context.put("ROOM", ROOM);
 	        context.put("DOMAIN", DOMAIN);

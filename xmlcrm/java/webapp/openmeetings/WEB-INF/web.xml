@@ -35,7 +35,7 @@
 	 -->
 	<context-param>
 		<param-name>webAppRootKey</param-name>
-		<param-value>/xmlcrm</param-value>
+		<param-value>/openmeetings</param-value>
 	</context-param>
 	
 	<listener>

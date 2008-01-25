@@ -15,7 +15,7 @@
 	<property name="conf.dir" value="${basedir}/conf"/>
 	
 	<!-- Distribution properties -->
-	<property name="project.distname" value="xmlcrm"/>
+	<property name="project.distname" value="openmeetings"/>
 
 
 	<!-- Hibernate Properties -->
@@ -232,10 +232,10 @@
 		<tstamp prefix="build">
 			<format property="TODAY" pattern="d-MMMM-yyyy" locale="en"/>
 		</tstamp>
-		<manifestclasspath property="jar.classpath" jarfile="xmlcrm.jar">
+		<manifestclasspath property="jar.classpath" jarfile="openmeetings.jar">
 			<classpath refid="compile.classpath"/>
 		</manifestclasspath>
-		<jar destfile="${dist.dir}/xmlcrm/WEB-INF/lib/xmlcrm.jar">
+		<jar destfile="${dist.dir}/${project.distname}/WEB-INF/lib/openmeetings.jar">
 			<fileset dir="${classes.dir}">
 				<include name="**"/>
 				<exclude name="**/test/**"/>
@@ -250,7 +250,7 @@
 				<attribute name="Class-Path" value="conf/ ${jar.classpath}"/>
 			</manifest>
 		</jar>	
-		<jar destfile="${dist.dir}/xmlcrm/WEB-INF/lib/xmlcrm-templates.jar">
+		<jar destfile="${dist.dir}/${project.distname}/WEB-INF/lib/openmeetings-templates.jar">
 			<fileset dir="${classes.dir}">
 				<include name="**"/>
 				<exclude name="**/org/**"/>
@@ -285,7 +285,7 @@
 		    lazy="false"
 		    >
 		  <path>
-		    <fileset dir="${dist.dir}/xmlcrm/screen" includes="**/*.jar" />
+		    <fileset dir="${dist.dir}/${project.distname}/screen" includes="**/*.jar" />
 		  </path>
 		</signjar>	
 	</target>
