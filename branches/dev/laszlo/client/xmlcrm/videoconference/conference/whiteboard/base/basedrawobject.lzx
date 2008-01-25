@@ -40,7 +40,7 @@
                 this.loadimageDataWinRef = new loadwhiteboardwindow(canvas.main_content._content.inner,{refObj:this});
                 this.loadimageDataWinRef.setMessage(canvas.getLabelName(this.imageLoadMessageId));
             }
-            var downloadurl = 'http://'+canvas.rtmphostlocal+':'+canvas.red5httpport+'/xmlcrm/DownloadHandler?' +
+            var downloadurl = 'http://'+canvas.rtmphostlocal+':'+canvas.red5httpport+'/'+canvas.webAppRootKey+'/DownloadHandler?' +
                     'fileName=' + fileName +
                     '&moduleName=' + moduleName + 
                     '&parentPath=' + parentPath +
@@ -75,7 +75,7 @@
                 this.loadimageDataWinRef = new loadwhiteboardwindow(canvas.main_content._content.inner,{refObj:this});
                 this.loadimageDataWinRef.setMessage(canvas.getLabelName(this.imageLoadMessageId));
             }
-            var downloadurl = 'http://'+canvas.rtmphostlocal+':'+canvas.red5httpport+'/xmlcrm/DownloadHandler?' +
+            var downloadurl = 'http://'+canvas.rtmphostlocal+':'+canvas.red5httpport+'/'+canvas.webAppRootKey+'/DownloadHandler?' +
                     'fileName=' + fileName +
                     '&moduleName=' + moduleName + 
                     '&parentPath=' + parentPath +

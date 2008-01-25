@@ -73,7 +73,7 @@
 		<![CDATA[
 			Debug.write("WIDTH: "+this.width);
 	        var downloadurl = 'http://'+canvas.rtmphostlocal+':'+canvas.red5httpport
-	        		+'/xmlcrm/DownloadHandler?fileName=CHAT'
+	        		+'/'+canvas.webAppRootKey+'/DownloadHandler?fileName=CHAT'
 	        		+'&moduleName=chat&parentPath=&room=&domain='
 	        		+'&remoteUserid='+this.user_id
 	        		+'&sid='+canvas.sessionId;
