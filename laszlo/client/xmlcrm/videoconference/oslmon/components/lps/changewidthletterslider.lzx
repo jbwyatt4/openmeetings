@@ -98,6 +98,9 @@
             parent.btnRef.numericValue.setText(v);
             parent.btnRef.setAttribute('initialNumber',v);
         </handler>
+        <handler name="onvalueChosenFinal">
+            parent.close();
+        </handler>
     </vslider>
     
     <view name="_close" x="$once{ parent.width-this.width-2 }" y="2"
