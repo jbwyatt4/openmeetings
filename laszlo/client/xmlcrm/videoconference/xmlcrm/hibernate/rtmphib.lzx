@@ -91,7 +91,7 @@
     </handler>
     <handler name="onerror" >
         <![CDATA[
-  	 	    Debug.write("error ",this.status);
+  	 	    Debug.write("error ",this.status,this.src);
   	 	    if (this.reconnectionAction){
                 this.connect();
   	 	    } else if (this.reconnectAfterRoomleft) {
@@ -314,14 +314,14 @@
 					Debug.write("throw event to drawarea: ",canvas.moderatorStreamID,canvas.ismoderator);
 					if (canvas.ismoderator){
 						Debug.write("############## editrecordstream 3");
-						new editrecordstream(canvas.main_content._content.inner,{y:-320});
+						new editrecordstream(canvas.main_content._content.inner);
 					} else if (value==null){
 						Debug.write("############   value IS NULL: ",this.parent.modus);
 						//no moderator availible
 						//check if this is conferencemodus
 						if (this.parent.modus == "conference"){
 							Debug.write("############## editrecordstream 4");
-							new editrecordstream(canvas.main_content._content.inner,{y:-320});
+							new editrecordstream(canvas.main_content._content.inner);
 						} else {
 							// in audience modus you get no notification
 							// cause you are not able to register your stream
@@ -438,7 +438,7 @@
 					canvas._videocontainer.clearAllVideoRefernces();
 					if (canvas.ismoderator){
 						Debug.write("############## editrecordstream 5");
-						new editrecordstream(canvas.main_content._content.inner,{y:-320});
+						new editrecordstream(canvas.main_content._content.inner);
 					} else {
 						//Debug.warn("canvas._videocontainer.getClientListScope.doCall");
 					}

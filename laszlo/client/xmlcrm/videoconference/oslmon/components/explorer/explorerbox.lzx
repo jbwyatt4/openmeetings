@@ -1,13 +1,24 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library>
 
-<class name="explorerbox" extends="view" width="250" y="-500"
+<class name="explorerbox" extends="view" width="250" y="100" visibility="hidden"
     height="400" bgcolor="$once{ canvas.basebgcolorizer }" 
 	onmousedown="this._startDragState(this)" onmouseup="this._removeDragState(this)" >
 
     <handler name="oninit">
-        this.setShadow();
+    	Debug.write("showWindowEffect? ",canvas.showWindowEffect);
+    	if (canvas.showWindowEffect=="y"){
+    		Debug.write("showWindowEffect ? YES");
+    		new boxiniteffect(parent,{x:this.x+(this.width/2)-50,y:this.y+(this.height/2)-10,zielx:this.x,ziely:this.y,zielwidth:this.width,zielheight:this.height,objRef:this});
+    	} else {
+    		this.sendAnniComplete();
+    	}
     </handler>
+    
+    <method name="sendAnniComplete">
+    	this.setAttribute('visibility','visible');
+    	this.setShadow();
+    </method>
 
     <method name="setShadow" args="bool">
         this.hasshadow = bool;
@@ -71,7 +82,8 @@
 	
 	<method name="close">
 		if (this.onclose) this.onclose.sendEvent();
-		this.doOut.doStart();
+		//this.doOut.doStart();
+		this.doDestroy();
 	</method>
 	
 	<method name="toggleopen">
@@ -274,12 +286,9 @@
 		]]>
 	</method>
 	
-	<dragstate name="dragger">
-					
-	</dragstate>
+	<dragstate name="dragger" />
     
-    
-    <animator attribute="y" to="20" duration="1000" start="true"/>
+    <animator attribute="y" to="20" duration="1000" start="false" />
         
     <animator name="doOut" attribute="y" to="-500" duration="1000" start="false" onstop="parent.doDestroy()" />    
     

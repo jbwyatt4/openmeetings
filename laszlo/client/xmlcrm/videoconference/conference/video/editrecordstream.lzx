@@ -14,7 +14,7 @@
  -->
  
 <class name="editrecordstream"  extends="labelexplorerbox" labelid="51"
-	width="300" height="250" x="14" >
+	width="300" height="250" x="14" y="40" >
 
     <attribute name="myvideocontainer" value="null" />
     
@@ -24,6 +24,7 @@
     <attribute name="currentClient" value="null" />
     	
 	<handler name="oninit">
+		Debug.write("editrecordstream ###################### ");
 		this.myvideocontainer = canvas._videocontainer.getNewVideoObject();
 		Debug.write("availibleCams this.myvideocontainer ",this.myvideocontainer);		
         var t = new sharedobject();
@@ -281,7 +282,7 @@
             this.parent.setUserAVSettings.doCall();
         </handler>
     </simplelabelbutton>
-    <animator attribute="y" to="20" duration="1000" start="true"/>
+
 </class>
     
 </library>
