@@ -27,6 +27,7 @@
 	        		+'&moduleName=remoteuserprofile&parentPath=&room=&domain='
 	        		+'&remoteUserid='+this.value.user_id
 	        		+'&sid='+canvas.sessionId;
+	        Debug.write(downloadurl);
 	        this._userpic.setAttribute('src',downloadurl);	
         ]]>
 	</handler>	

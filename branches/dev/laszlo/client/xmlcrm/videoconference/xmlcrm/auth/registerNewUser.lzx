@@ -2,7 +2,7 @@
 <library>
 
 <class name="registerNewUser" extends="labelexplorerbox" labelid="113"
-    docking="true" resizeable="false" closable="false" width="400" x="1000" y="0" height="360">
+    docking="true" resizeable="false" closable="false" width="400" x="400" y="0" height="360">
     
     <attribute name="refObj" value="null" />
     <attribute name="regObject" value="null" />
@@ -98,16 +98,6 @@
     		this.parent.close();
     	</handler>
     </simplelabelbutton>   
-    
-    
-    <!-- 
-    Long registerUser
-    String SID, String Username, String Userpass, String lastname, 
-	String firstname, String email, int age, String street, String additionalname, 
-	String fax, String zip, long states_id, String town, long language_id
-     -->
-
-	<animator attribute="x" to="400" duration="1000" start="true" />
 	
      <netremotecallhib name="registerUserByObject" funcname="xmlcrm.registerUserByObject" 
      	remotecontext="$once{ canvas.thishib }" activeErrorHandler="true" >     

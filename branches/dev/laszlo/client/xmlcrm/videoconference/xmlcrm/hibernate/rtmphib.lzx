@@ -282,6 +282,10 @@
             </handler>  
         </netremotecallhib>
 
+		<!--- 
+			this remotecall is qute important as only at this point you can decide which
+			position a newly connected user has
+		 -->
         <netremotecallhib name="setAudienceModus" funcname="setAudienceModus">
             <netparam><method name="getValue">return canvas.currentusercolor;</method></netparam>        
             <netparam><method name="getValue">return canvas.currentuserpos;</method></netparam>      
@@ -290,6 +294,8 @@
                 Debug.write("setAudienceModus: ",value);                   
             </handler>  
         </netremotecallhib>
+        
+        <!--- Notification of new User -->
         <netremotecallhib name="setAudienceModusClient" funcname="setAudienceModusClient">
             <handler name="ondata" args="value">
                 //The onResult-Handler will be called be the rtmpconnection
@@ -297,7 +303,8 @@
                 canvas._videocontainer.addClientItem(value.connectedSince,value.isMod,value.streamid,value.username,value.userroom,value.formatedDate,value.userpos,value.usercolor,value); 
                 canvas.setAttribute('numberofpartners',canvas.getAttribute('numberofpartners')+1);                              
             </handler>  
-        </netremotecallhib>        
+        </netremotecallhib>      
+          
         <netremotecallhib name="getCurrentModerator" funcname="getCurrentModerator">
             <handler name="ondata" args="value">
 				<![CDATA[
