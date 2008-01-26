@@ -195,7 +195,7 @@
 			if (minutes<10) minutes = "0"+minutes;	
 			this.progress._currentTime._timetext.setAttribute('text',minutes+":"+deltaSeconds);
 	        
-			var roomclients = parent.recordingValue.roomRecording.roomclients;
+			var roomclients = this.recordingValue.roomRecording.roomclients;
 			
 			for (var i=0;i<roomclients.length;i++){
         		var starttime =  (Math.round(roomclients[i].starttime/this.timeStepSyncing))*this.timeStepSyncing;
@@ -203,15 +203,13 @@
         		if (starttime == this.currentTime){
         			Debug.write("Found Room Event: ",roomclients[i]);
         			if (roomclients[i].roomenter){
-        				var userpos = streamList[i].rcl.userpos;
-		        		var streamname = streamList[i].streamName+".flv";
-        				Debug.write("Found ROOM User Entered Enter",starttime,userpos,streamname);
-        				//canvas._videocontainer.startStream(streamname,userpos,this.recordingValue.roomRecording.streamlist[i].rcl);
-        			} else if (roomclients[i].streamstart && !streamList[i].avset){
-		        		var userpos = streamList[i].rcl.userpos;
-		        		var streamname = streamList[i].streamName+".flv";
-		        		Debug.write("Found ROOM User Entered Left",starttime,userpos,streamname);
-		        		//canvas._videocontainer.startStream(streamname,userpos,this.recordingValue.roomRecording.streamlist[i].rcl);
+        				var userpos = roomclients[i].rcl.userpos;
+        				Debug.write("Found ROOM User Enter",starttime,userpos);
+        				canvas._videocontainer.enterRoom(userpos,this.recordingValue.roomRecording.streamlist[i].rcl);
+        			} else {
+		        		var userpos = roomclients[i].rcl.userpos;
+		        		Debug.write("Found ROOM User Left",starttime,userpos);
+		        		canvas._videocontainer.disconnectclient(userpos);
         			}
         		}
 			}
@@ -230,20 +228,27 @@
         		//Debug.write("timeLineAction starttime: ",starttime);
         		if (starttime == this.currentTime){
         			Debug.write("Found User Event: ",streamList[i]);
-        			if (streamList[i].streamstart && !streamList[i].avset){
+        			if (streamList[i].streamstart && streamList[i].avset){
         				var userpos = streamList[i].rcl.userpos;
 		        		var streamname = streamList[i].streamName+".flv";
-        				Debug.write("Found User Entered To END! - ",starttime,userpos,streamname);
+        				Debug.write("Found User Entered To Start Stream! - ",starttime,userpos,streamname);
         				canvas._videocontainer.startStream(streamname,userpos,this.recordingValue.roomRecording.streamlist[i].rcl);
         			} else if (streamList[i].streamstart && !streamList[i].avset){
 		        		var userpos = streamList[i].rcl.userpos;
 		        		var streamname = streamList[i].streamName+".flv";
-		        		Debug.write("Found - ",starttime,userpos,streamname);
+		        		Debug.write("Found - INIT",starttime,userpos,streamname);
 		        		canvas._videocontainer.startStream(streamname,userpos,this.recordingValue.roomRecording.streamlist[i].rcl);
-        			} else if (!streamList[i].streamstart) {
+        			} else if (!streamList[i].streamstart && !streamList[i].avset) {
         				var userpos = streamList[i].rcl.userpos;
 		        		var streamname = streamList[i].streamName+".flv";
         				Debug.write("Found Stream To END! - ",starttime,userpos,streamname);
+        				//Todo: In future releases people will be ale to stop/start streaming
+        				//while the application is running
+        			} else if (!streamList[i].streamstart && streamList[i].avset) {
+        				var userpos = streamList[i].rcl.userpos;
+        				var avsettings = streamList[i].rcl.avsettings;
+        				Debug.write("Found AVEvent! - ",starttime,userpos);
+        				canvas._videocontainer.setAVOnlyStream(userpos,streamList[i].rcl);
         			}
         		}
         	}
