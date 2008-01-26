@@ -238,8 +238,8 @@ public class StreamService implements IPendingServiceCallback {
 					if(roomname.equals(rcl.getUserroom()) && orgdomain.equals(rcl.getDomain())){
 						if (!conferenceType.equals("audience") || rcl.getIsMod()){
 							//stop the recorded flv and add the event to the notifications
-							log.error("###########[stopRecordAndSave]");
-							stopRecordingShowByClient(conn, rcl, roomrecordingName);
+							log.error("*** sendClientBroadcastNotifications Any Client is Recording - stop that");
+							stopRecordingShowForClient(conn, rcl, roomrecordingName, true);
 						}
 					}
 				}
@@ -317,10 +317,18 @@ public class StreamService implements IPendingServiceCallback {
 		}
 	}
 	
-	public static void stopRecordingShowByClient(IConnection conn, RoomClient rcl, String roomrecordingName) {
+	/**
+	 * if doStopStream = false this use is already away, no connection can be stoped
+	 * @param conn
+	 * @param rcl
+	 * @param roomrecordingName
+	 * @param doStopStream
+	 */
+	public static void stopRecordingShowForClient(IConnection conn, RoomClient rcl, 
+			String roomrecordingName, boolean doStopStream) {
 		try {
-			
-			log.error("stopRecordingShowByClient: "+rcl.getIsRecording()+","+rcl.getUsername()+","+rcl.getUserip());
+			StreamService.addRoomClientEnterEvent(rcl, roomrecordingName, rcl.getUserip(), false);
+			log.error("### stopRecordingShowForClient: "+rcl.getIsRecording()+","+rcl.getUsername()+","+rcl.getUserip());
 			
 			LinkedHashMap<String,Object> roomRecording = roomRecordingList.get(roomrecordingName);
 			Date recordingsStartTime = (Date) roomRecording.get("starttime");
@@ -329,7 +337,6 @@ public class StreamService implements IPendingServiceCallback {
 			
 			LinkedHashMap<String,Object> roomStream = new LinkedHashMap<String,Object>();
 			
-			String streamName = generateFileName(rcl.getStreamid());			
 			roomStream.put("streamName", "");
 			roomStream.put("streamstart", false);
 			roomStream.put("avset", false);
@@ -343,7 +350,8 @@ public class StreamService implements IPendingServiceCallback {
 			roomRecording.put("streamlist",roomStreams);
 			roomRecordingList.put(roomrecordingName, roomRecording);
 
-			if (rcl.getAvsettings().equals("a") && rcl.getAvsettings().equals("v") && rcl.getAvsettings().equals("av")){
+			if ((rcl.getAvsettings().equals("a") || rcl.getAvsettings().equals("v") 
+					|| rcl.getAvsettings().equals("av")) && doStopStream){
 				stopRecordingShow(conn,rcl.getStreamid());
 			}
 			
@@ -359,10 +367,10 @@ public class StreamService implements IPendingServiceCallback {
 	 * @param conn
 	 */
 	public static void stopRecordingShow(IConnection conn, String streamid) throws Exception {
-		log.debug("Stop recording show for: " + conn.getScope().getContextPath());
-		// Get a reference to the current broadcast stream.
-		ClientBroadcastStream stream = (ClientBroadcastStream) Application.getInstance().getBroadcastStream(
-				conn.getScope(), streamid);
+		log.error("** stopRecordingShow: "+conn);
+		log.error("### Stop recording show for streamid: "+ streamid + " || " + conn.getScope().getContextPath());
+		ClientBroadcastStream stream = (ClientBroadcastStream) Application.getInstance().
+												getBroadcastStream(conn.getScope(), streamid);
 		// Stop recording.
 		stream.stopRecording();
 	}
@@ -576,7 +584,8 @@ public class StreamService implements IPendingServiceCallback {
 		}	
 	}	
 	
-	public static void addRoomClientEnterEvent(RoomClient rcl, String roomrecordingName, String remoteAdress) {
+	public static void addRoomClientEnterEvent(RoomClient rcl, String roomrecordingName, 
+				String remoteAdress, boolean enter) {
 		try {
 			LinkedHashMap<String,Object> roomRecording = roomRecordingList.get(roomrecordingName);
 			Date recordingsStartTime = (Date) roomRecording.get("starttime");
@@ -585,7 +594,7 @@ public class StreamService implements IPendingServiceCallback {
 			
 			LinkedHashMap<String,Object> roomClient = new LinkedHashMap<String,Object>();						
 			roomClient.put("remoteAdress", remoteAdress);
-			roomClient.put("roomenter", true);
+			roomClient.put("roomenter", enter);
 			roomClient.put("startdate",currentDate);
 			roomClient.put("starttime",currentDate.getTime()-recordingsStartTime.getTime());
 			roomClient.put("rcl", rcl);
@@ -598,7 +607,7 @@ public class StreamService implements IPendingServiceCallback {
 			log.error("[addRoomClientEnterEvent]",err);
 		}	
 	}	
-	
+
 	public Long clientCancelRecording(String roomrecordingName){
 		try {
 			
