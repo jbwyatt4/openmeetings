@@ -40,6 +40,7 @@ Tips for Installation:
   * TestingBusinessLogic
   * AdminScreenshots
   * QualityAssurance
+  * CodingGuidelines - Client-Side Coding Guidelines
 
 == Community == 
 
@@ -67,7 +68,8 @@ Alphabetical:
   * BackupPanel 	---- 	Description about the BackupPanel 	
   * BandwidthNetworkSettings 	---- 	about the configuration of Bandwidth, Ports 	 
   * BuildSources 	Implementation 	How To Build From Sources    	 
-  * ChatModul 	---- 	description of the ChatModule 		 
+  * ChatModul 	---- 	description of the ChatModule 		
+  * CodingGuidelines 
   * ConvertersInstallation 	Documentation 	About the installation of the converters 	 
   * DemoServer 	Support 	about the Live Demo Server 	 	 
   * DocumentImporting 	Design 	about importing of documents. 	 
