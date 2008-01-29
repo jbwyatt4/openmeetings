@@ -63,7 +63,8 @@ MyClass1.lzx:
 }}}
 
 === Comments === 
-Use Lzxdoc style comment tags{{{ <---  --> }}} for class,attribute,method.
+Use Lzxdoc style comment tags{{{ <---  --> }}} for class, attribute, method.
+We can generate the LZX Document from the comments.
 See also [http://wiki.openlaszlo.org/LzxdocTool LzxdocTool]
 
 Example:
