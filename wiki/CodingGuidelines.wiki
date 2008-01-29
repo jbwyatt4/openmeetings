@@ -1,5 +1,6 @@
 = Openmeetings LZX Coding Guidelines (Beta)=
 
+
 == (1) Naming Convention ==
 || *Type* || *Rules* || *Examples* ||
 || class || It is a user-defined class. Start each user-defined class with *upper case*.  || {{{<MyClass />}}} ||
@@ -59,4 +60,69 @@ MyClass1.lzx:
    <class name="MyClass1" />  <== general class
    <class name="MyClass2" />  <== second general class. There must be one general class per file.
  </library>
+}}}
+
+=== Comments === 
+Use Lzxdoc style comment tags{{{ <---  --> }}} for class,attribute,method.
+See also http://wiki.openlaszlo.org/LzxdocTool_Syntax/
+
+Example:
+{{{
+ Normal comment: <!-- normal comment -->
+ For LzxDoc comment: <!--- Lzxdoc comment -->   <== Notice! It has more than two Hyphens.
+}}}
+
+Examples:
+{{{
+    <!---
+        A layout specifically for toolbar buttons, with optional
+        automatic button "collapsing".
+
+        Sample usage:
+        @START_CODE
+        <canvas>
+            <include href="../toolbarlayout.lzx"/>
+            ...
+        </canvas>
+        @END_CODE
+    -->
+    <class name="toolbarlayout">
+        <!--- A pixel amount to use between each view in the layout -->
+        <attribute name="spacing" value="2"/>
+
+        <!--- The number of items controlled by the layout
+              @keywords readonly -->
+        <attribute name="numitems" value="0"/>
+
+        <!--- reference that is set on the tag, but cannot be set via javascript 
+              @keywords final-->
+        <attribute name="vref" value="null"/>
+
+        <!--- @keywords private -->
+        <method name="init">
+           ...
+        </method>
+
+        <!--- @param string name: name of current button, use empty string to get first button name
+              @returns string: name of previous named button in current layout -->
+       <method name="getPreviousButtonName" args="name">
+           ...
+       </method>
+    </class>
+}}}
+
+The following keywords are allowed:
+{{{
+  @START_CODE / @END_CODE
+      Use these to surround class-level sample code.  Use in class comments only.
+
+  @keywords
+      "private" - docs will not be generated for this element.
+
+  @param type name description
+      Use to document method parameters.  If name does not match an actual parameter
+      name for the method in question, the tool will display a warning.
+
+  @returns type description
+      Use to document the return value of a method.
 }}}
