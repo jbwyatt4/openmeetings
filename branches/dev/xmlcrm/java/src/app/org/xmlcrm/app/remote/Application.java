@@ -63,20 +63,12 @@ public class Application extends ApplicationAdapter implements
 	public static String webAppPath = "";
 	public static String configDirName = "conf";
 	
+	private static long broadCastCounter = -1;
+	
 	private static Application instance = null;
 	
 	public static synchronized Application getInstance(){
 		return instance;
-	}
-	
-	private void initBandWidthConfigs(){
-		try {
-			log.debug("Init Stuff Config parser: ");
-			
-		} catch (Exception err){
-			log.error("Err: "+err);
-		}
-
 	}
 
 	@Override
@@ -88,7 +80,6 @@ public class Application extends ApplicationAdapter implements
 			this.loadEmot(filePath);
 			instance = this;
 			// init your handler here
-			initBandWidthConfigs();
 			//System.out.println("################## appStart    ");
 			QuartzSessionClear bwHelp = new QuartzSessionClear();
 			String jobName = addScheduledJob(300000,bwHelp);
@@ -115,8 +106,7 @@ public class Application extends ApplicationAdapter implements
 		} catch (Exception err) {
 			log.error("[loadEmot]",err);
 		}
-	}
-	
+	}	
 	
 
 	@Override
@@ -403,7 +393,7 @@ public class Application extends ApplicationAdapter implements
 		String roomname = currentClient.getUserroom();
 		String orgdomain = currentClient.getDomain();			
 		// Notify all the clients that the stream had been started
-		log.debug("start streamPublishStart broadcast start: "+ stream.getPublishedName());
+		log.error("start streamPublishStart broadcast start: "+ stream.getPublishedName() + "CONN " + current);
 		
 		Iterator<IConnection> it = current.getScope().getConnections();
 		while (it.hasNext()) {
@@ -577,15 +567,20 @@ public class Application extends ApplicationAdapter implements
 	 * a - audio only
 	 * v - video only
 	 * n - no av only static image
+	 * furthermore there will be set an attribtue called "broadCastCounter"
+	 * this is the name this user will publish his stream
 	 * @param avsetting
+	 * @param newMessage
 	 * @return
 	 */
 	public RoomClient setUserAVSettings(String avsettings, Object newMessage){
 		try {
+
 			IConnection current = Red5.getConnectionLocal();
 			String streamid = current.getClient().getId();
 			RoomClient currentClient = ClientList.get(streamid);
 			currentClient.setAvsettings(avsettings);
+			currentClient.setBroadCastID(broadCastCounter++);
 			String roomname = currentClient.getUserroom();
 			String orgdomain = currentClient.getDomain();					
 			ClientList.put(streamid, currentClient);

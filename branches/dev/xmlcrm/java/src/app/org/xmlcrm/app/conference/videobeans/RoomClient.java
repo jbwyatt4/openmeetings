@@ -42,6 +42,11 @@ public class RoomClient {
 	 * color 
 	 */
 	String usercolor;
+	/*
+	 * no longer needed since broadCastId is now the new unique id
+	 * 
+	 * @deprecated
+	 */
 	Integer userpos;
 	/*
 	 * client IP
@@ -57,6 +62,11 @@ public class RoomClient {
 	Long room_id;
 	
 	Date roomEnter = null;
+	
+	/*
+	 * this is the id this user is currently using to broadcast a stream
+	 */
+	long broadCastID = 0;
 	
 	/*
 	 * some vars _not_ directly connected to the user-record from the database
@@ -392,6 +402,14 @@ public class RoomClient {
 	}
 	public void setAvsettings(String avsettings) {
 		this.avsettings = avsettings;
+	}
+
+	public long getBroadCastID() {
+		return broadCastID;
+	}
+
+	public void setBroadCastID(long broadCastID) {
+		this.broadCastID = broadCastID;
 	}
 
 }

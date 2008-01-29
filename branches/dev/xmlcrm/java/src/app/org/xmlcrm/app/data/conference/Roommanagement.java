@@ -76,7 +76,7 @@ public class Roommanagement {
 	 * get all availible RoomTypes
 	 * @return List of RoomTypes
 	 */
-	public List getAllRoomTypes(long user_level){
+	public List getAllRoomTypes(Long user_level){
 		try {
 			if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)){
 				Object idf = HibernateUtil.createSession();
