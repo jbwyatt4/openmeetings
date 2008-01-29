@@ -1,0 +1,62 @@
+= Coding Guidelines (Beta)=
+
+== (1) Naming Convention ==
+|| *Type* || *Rules* || *Examples* ||
+|| class || It is a user-defined class. Start each user-defined class with *upper case*.  || {{{<MyClass />}}} ||
+|| private class || It is a user-defined private class. Start each private class within the specific class with *underscore*.||{{{<_MyPrivateClass />}}}  ||
+
+== (2) Coding Rules ==
+=== Rules in a class === 
+Do not use *"parent.*something" within a class in order to access the values outside of the class. 
+
+Example:
+{{{
+<!-- NG -->
+<class name="MyClass">
+  <view width="${parent.parent.parent.width}" />
+</class>
+}}}
+
+=== Debug statement ===
+Use *if($debug) Debug.write(.....)* for the Debug statements. 
+Just for performance issue.
+
+Example:
+{{{
+<!-- Not Bad, but Not Recommended -->
+<handler name="onsomething">
+  Debug.write("something",obj);
+</handler>
+
+<!-- OK -->
+<handler name="onsomething">
+  if($debug) Debug.write("something",obj);
+</handler>
+}}}
+
+=== Class File ===
+*One class per file*, with filename same as classname.
+Small private classes only for the general class should be encapsulated in the same file. 
+
+Example:
+{{{
+<!-- OK -->
+MyClass1.lzx:
+ <library>
+   <class name="MyClass1" /> 
+ </library>
+
+<!-- OK -->
+MyClass1.lzx:
+ <library>
+   <class name="MyClass1" />
+   <class name="_MyPrivateClass1" />  <== private class for MyClass1 only
+ </library>
+
+<!-- NG -->
+MyClass1.lzx:
+ <library>
+   <class name="MyClass1" />  <== general class
+   <class name="MyClass2" />  <== second general class. There must be one general class per file.
+ </library>
+}}}
