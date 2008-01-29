@@ -4,35 +4,16 @@
 <dataset name="myresultnavi" />
 
 <dataset name="languagesSet" />        
-    
-<dataset name="myresultnavi2" >
-    <element>
-        <item>
-            <label>
-                <value>hans1</value>
-            </label>    
-        </item>
-        <item>
-            <label>
-                <value>hans2</value>
-            </label>  
-        </item>
-        <item>
-            <label>
-                <value>hans3</value>
-            </label>  
-        </item>                
-    </element>
-</dataset>
+
 
 <class name="hibrtmpconnection" extends="devrtmpconnection" debug="false"
     src="$once{ this.protocollName+'://'+canvas.rtmphostlocal+':'+this.protocollPort+'/'+canvas.webAppRootKey+'/hibernate' }" >
 
-  	 <attribute name="protocollName" type="string" value="rtmp" />
-  	 <attribute name="protocollPort" type="string" value="$once{ canvas.rmptport }" />
-     <attribute name="counterror" type="number" value="0" />
+	<attribute name="protocollName" type="string" value="rtmp" />
+  	<attribute name="protocollPort" type="string" value="$once{ canvas.rmptport }" />
+    <attribute name="counterror" type="number" value="0" />
     
-     <attribute name="loaderVar" value="null" />
+    <attribute name="loaderVar" value="null" />
     
     <!-- reconnect after each conference -->
     <attribute name="reconnectAfterRoomleft" type="boolean" value="false" />
@@ -46,7 +27,7 @@
      <!-- default will be loaded on startup -->
      <attribute name="userlang" value="1" type="number" />
      
-     <!-- The default Language will be laoded on init  -->
+     <!-- The default Language will be loaded on init  -->
      <attribute name="initlanguageLoaded" value="false" type="boolean" />
      
      <!-- This domain is the orgdomain used in the video-conference -->
@@ -131,7 +112,7 @@
     </netremotecallhib>
     
     <netremotecallhib name="getLanguages" funcname="languageservice.getLanguages" 
-        dataobject="languagesSet" >      
+    				  dataobject="languagesSet" >      
         <handler name="ondata" args="value">
             //The onResult-Handler will be called be the rtmpconnection
             //Debug.write("getLanguages: ",value);
@@ -345,7 +326,7 @@
             <handler name="ondata" args="value">
                 //The onResult-Handler will be called be the rtmpconnection
                 Debug.write("newStream: ",value);
-                canvas._videocontainer.startStream(value.streamid,value.userpos); 
+                canvas._videocontainer.startStream(value.broadCastID); 
             </handler>   
         </netremotecallhib>    
         <netremotecallhib name="closeStream" funcname="closeStream">
@@ -353,7 +334,7 @@
                 //The onResult-Handler will be called be the rtmpconnection
                 //Debug.write("closeStream: ",value);
                 //free the VideoContainer
-                canvas._videocontainer.closeStreamClient(value.streamid,value.userpos); 
+                canvas._videocontainer.closeStreamClient(value.broadCastID); 
                 canvas.setAttribute('numberofpartners',canvas.getAttribute('numberofpartners')-1);       
                 //TODO:check first current tab
             </handler>   
@@ -374,7 +355,7 @@
                 	parentObj.removeItemById(value.user_id);
                 }
                 if (canvas._videocontainer!=null){
-	                canvas._videocontainer.disconnectclient(value.streamid,value.userpos); 
+	                canvas._videocontainer.disconnectclient(value.broadCastID); 
 					//remove that client from sync list of wmlFileLoader/image if present
 					_drawarea.sendCompleteWmlLoadedRClient(value);
 					_drawarea.sendCompleteImageLoadedRClient(value);
@@ -390,7 +371,7 @@
 		<netremotecallhib name="logicalRoomLeaveDis" funcname="logicalRoomLeaveDis" >      
 	    	<handler name="ondata" args="value">
 	    		//Debug.write("logicalRoomLeaveDis: ",value);
-	    		canvas._videocontainer.disconnectclient(value.streamid,value.userpos); 
+	    		canvas._videocontainer.disconnectclient(value.broadCastID); 
 				//remove that client from sync list of wmlFileLoader/image if present
 				_drawarea.sendCompleteWmlLoadedRClient(value);
 				_drawarea.sendCompleteImageLoadedRClient(value);
@@ -507,7 +488,7 @@
                     if (canvas._chartcontent) canvas._chartcontent.addChatHistory(value.message,value.client);
                     if (canvas._chartcontentRPC) canvas._chartcontentRPC.addChatHistory(value.message,value.client);
                 } else if (value.message[0]=='avsettings'){
-                    canvas._videocontainer.setAVSettingsToClient(value.message[1],value.client);
+                    canvas._videocontainer.setAVSettingsToClient(value.client);
                 } else if (value.message[0]=='whiteboard'){
 					if (value.message[1]=='wmlloadcomplete'){
 						_drawarea.sendCompleteWmlLoadedRClient(value.client);

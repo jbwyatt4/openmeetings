@@ -290,6 +290,10 @@
             this.mic = mic;
           ]]>
         </method>
+        
+        <method name="stop">
+        	this.__LZmovieClipRef.clear();
+        </method>
 
 
     </class>
