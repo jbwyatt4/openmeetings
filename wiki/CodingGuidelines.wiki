@@ -64,7 +64,7 @@ MyClass1.lzx:
 
 === Comments === 
 Use Lzxdoc style comment tags{{{ <---  --> }}} for class,attribute,method.
-See also http://wiki.openlaszlo.org/LzxdocTool_Syntax/
+See also [http://wiki.openlaszlo.org/LzxdocTool_Syntax LzxdocTool]
 
 Example:
 {{{
