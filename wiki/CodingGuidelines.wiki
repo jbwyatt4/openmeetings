@@ -18,6 +18,15 @@ Example:
 </class>
 }}}
 
+use
+{{{
+<!-- OK -->
+<class name="MyClass">
+   <attribute name="parentAAA" />
+   <view width="${classroot.parentAAA.width}" />
+</class>
+}}}
+
 === Debug statement ===
 Use *if($debug) Debug.write(.....)* for the Debug statements. 
 Just for performance issue.
