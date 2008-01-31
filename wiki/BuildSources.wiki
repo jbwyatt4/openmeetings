@@ -1,6 +1,9 @@
 #summary How To Build From Sources
 #labels Featured,Phase-Implementation
 
+  * [http://code.google.com/p/openmeetings/source/browse browse SVN source]
+  * [http://code.google.com/p/openmeetings/source/ist SVN change history]
+
 = Source Locations Developer Version =
 
 You need to compile two apps:
