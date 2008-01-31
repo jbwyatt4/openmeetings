@@ -560,15 +560,33 @@ public class Application extends ApplicationAdapter implements
 	}  
 	
 	/**
+	 * there will be set an attribute called "broadCastCounter"
+	 * this is the name this user will publish his stream
+	 * @return long broadCastId
+	 */
+	public long getBroadCastId(){
+		try {
+			IConnection current = Red5.getConnectionLocal();
+			String streamid = current.getClient().getId();
+			RoomClient currentClient = ClientList.get(streamid);
+			currentClient.setBroadCastID(broadCastCounter++);				
+			ClientList.put(streamid, currentClient);
+			return currentClient.getBroadCastID();
+		} catch (Exception err){
+			log.error("[getBroadCastId]",err);
+		}
+		return -1;
+	}
+	
+	/**
 	 * this must be set _after_ the Video/Audio-Settings have been chosen (see editrecordstream.lzx)
 	 * but _before_ anything else happens, it cannot be applied _after_ the stream has started!
 	 * avsettings can be:
 	 * av - video and audio
 	 * a - audio only
 	 * v - video only
-	 * n - no av only static image
-	 * furthermore there will be set an attribtue called "broadCastCounter"
-	 * this is the name this user will publish his stream
+	 * n - no a/v only static image
+	 * furthermore 
 	 * @param avsetting
 	 * @param newMessage
 	 * @return
@@ -580,7 +598,6 @@ public class Application extends ApplicationAdapter implements
 			String streamid = current.getClient().getId();
 			RoomClient currentClient = ClientList.get(streamid);
 			currentClient.setAvsettings(avsettings);
-			currentClient.setBroadCastID(broadCastCounter++);
 			String roomname = currentClient.getUserroom();
 			String orgdomain = currentClient.getDomain();					
 			ClientList.put(streamid, currentClient);

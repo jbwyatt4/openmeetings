@@ -13,5 +13,6 @@
     <property name="updatetime" type="java.util.Date" column="updatetime"/>
     <property name="deleted" type="string" column="deleted"/>
     <property name="ispublic" type="boolean" column="ispublic"/>
+    <property name="numberOfPartizipants" type="long" column="numberOfPartizipants"/>
   </class>
 </hibernate-mapping>

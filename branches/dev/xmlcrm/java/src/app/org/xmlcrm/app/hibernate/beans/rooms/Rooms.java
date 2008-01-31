@@ -21,6 +21,7 @@ public class Rooms {
 	private Date updatetime;
 	private String deleted;
 	private Boolean ispublic;
+	private Long numberOfPartizipants = new Long(4);
 	
 	private List<RoomClient> currentusers;
     
@@ -130,6 +131,18 @@ public class Rooms {
 	}
 	public void setCurrentusers(List<RoomClient> currentusers) {
 		this.currentusers = currentusers;
+	}
+	
+	/**
+     * @hibernate.property
+     *  column="numberOfPartizipants"
+     *  type="long"
+     */	
+	public Long getNumberOfPartizipants() {
+		return numberOfPartizipants;
+	}
+	public void setNumberOfPartizipants(Long numberOfPartizipants) {
+		this.numberOfPartizipants = numberOfPartizipants;
 	}
 	
 }
