@@ -14,7 +14,8 @@ You need to compile two apps:
 
 = Openlaszlo Client (Client-Side) =
 
-http://openmeetings.googlecode.com/svn/branches/dev/laszlo/client/
+SVN URL: http://openmeetings.googlecode.com/svn/branches/dev/laszlo/client/
+Browse in Code via Browser: http://code.google.com/p/openmeetings/source/browse/branches/dev/laszlo/client/
 
 for compiling the client you need to install the !OpenLaszlo-Server:
 http://www.openlaszlo.org
