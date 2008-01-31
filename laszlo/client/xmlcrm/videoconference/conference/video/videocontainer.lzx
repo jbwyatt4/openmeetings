@@ -52,6 +52,7 @@
     <method name="setAVSettingsToClient" args="rcl">
     	if ($debug) Debug.warn("setAVSettingsToClient ",rcl.broadCastID,rcl);
     	var obj = this.getVideoObjectByBroadCastId(rcl.broadCastID);
+    	if ($debug) Debug.warn("setAVSettingsToClient: ",obj);
 		if (rcl.avsettings=="n"){
 			obj.setVideouserProfilePic(rcl);
 		} else if (rcl.avsettings=="a"){
@@ -65,7 +66,9 @@
      --> 
     <method name="getVideoObjectByBroadCastId" args="broadcastId">
     	<![CDATA[
+    		
     		for (var i=0;i<this._videoviewcontent.subviews.length;i++){
+    			if ($debug) Debug.warn("getVideoObjectByBroadCastId: ",this._videoviewcontent.subviews[i].broadcastId,broadcastId);
     			if (this._videoviewcontent.subviews[i].broadcastId==String(broadcastId)){
     				return this._videoviewcontent.subviews[i];
     			}
@@ -82,7 +85,7 @@
 	  		myvideocontainer.parent.parent.setAttribute('chatpartnername',object.firstname+' '+object.lastname);
 	  		if ($debug) Debug.write("object.avsettings: ",object.avsettings);
 	  		if (object.avsettings=="n"){
-    			myvideocontainer.setVideouserProfilePic(object);
+    			myvideocontainer.parent.parent.setVideouserProfilePic(object);
     		} else if (object.avsettings=="a"){
     			myvideocontainer.parent.parent.setVideouserProfilePic(object);
     			if ($debug) Debug.warn("start play");
@@ -107,7 +110,7 @@
 	  		myvideocontainer.parent.parent.setAttribute('chatpartnername',object.firstname+' '+object.lastname);
 	  		if ($debug) Debug.write("addClientItem avsettings: ",object.avsettings);
     		if (object.avsettings=="n" || object.avsettings=="a"){
-    			myvideocontainer.parent.parent.setVideouserProfilePic(value[i]);
+    			myvideocontainer.parent.parent.setVideouserProfilePic(object);
     		}
     		myvideocontainer.parent.parent.updateAVSettingsSymbol(object);
 		}
