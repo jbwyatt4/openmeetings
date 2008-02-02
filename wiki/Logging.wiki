@@ -1,0 +1,45 @@
+#summary One-sentence summary of this page.
+
+= Server Side Logging =
+
+== Red5 Version <= 0.6.3 ==
+
+comment out (meaning remove <!--- --->) this part in $OpenMeetings-Home/WEB-INF/web.xml
+
+{{{
+	<context-param>
+	    <param-name>log4jConfigLocation</param-name>
+	    <param-value>/WEB-INF/log4j.properties</param-value>
+	</context-param>
+}}}
+
+then the number of debug-log-statements is much better
+
+== Red5 Version > 0.6.3 (Latest Trunk) ==
+
+Todo: Issue 323
+
+== OpenLaszlo Client Log ==
+
+use the debug-version (maindebug.lzx) and watch the Laszlo-Debugger
+You can change the log - level for more detailed log about rpc-calls by comment out (meaning remove // )
+from 
+{{{
+<method name="doCall">
+        if (this.showLoading) canvas._loadingAll.setAttribute('visible',true);
+		//Debug.write("doCall: ",this.funcname);
+		this.call();
+	</method>
+	}}}
+to 
+{{{
+<method name="doCall">
+        if (this.showLoading) canvas._loadingAll.setAttribute('visible',true);
+		Debug.write("doCall: ",this.funcname);
+		this.call();
+	</method>
+	}}}
+in
+http://openmeetings.googlecode.com/svn/branches/dev/laszlo/client/xmlcrm/videoconference/xmlcrm/hibernate/netremotecallhib.lzx
+
+that way you see all remotecalls before send to the serer
