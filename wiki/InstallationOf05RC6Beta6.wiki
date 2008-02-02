@@ -6,21 +6,21 @@
 
   * Database available (MySQL,Postgres,... MSSQL,Oracle,DB2 see [http://www.hibernate.org/hib_docs/reference/en/html/session-configuration.html#configuration-optional-dialects   full-list]) I recommend to make/use an empty database/scheme
   Database MUST listen and allow TCP/IP connections! And the default character-set/scheme must be UTF8! _For example_ a fresh MySQL does *not* listen on TCP/IP by default and has *not* utf8 as default-character-set defined. You have to change these settings and restart your database server so that changes take effect (mysql-config is in my.cnf). Postgres for example does also not listen by default on TCP/IP but uses by default UTF8 (since postgres 7 or 8). To change Postgres listening on TCP/IP check postgresql.conf and add your host to the pg_hba.conf. In Postgres you need to create a database using *template1* cause template1 create automatically a scheme called *public* which is needed (and since postgres 8 you can use several schemes inside one database public is the default one [http://www.postgresql.org/docs/8.2/interactive/ddl-schemas.html#DDL-SCHEMAS-PATH Postgres-Docs]).
-  * Open-Office-Service started and listening on port 8100 (see OpenOfficeConverter, this is not necessary for installation but for running later on)
-  * Installed `ImageMagick` (this is not necessary for installation but for running later on), you can get more information on http://www.imagemagick.org regarding installation. The instructions for installation can be found there http://www.imagemagick.org/script/binary-releases.php, however on most linux systems you can get it via your favorite package managers (apt-get it)
-  * Installed `GhostScript` (this is not necessary for installation but for running later on), you can get more information on http://pages.cs.wisc.edu/~ghost/ regarding installation. The instructions for installation can be found there, however on most linux systems you can get it via your favourite package managers (apt-get it).
-  * Installed `SWFTools` (this is not necessary for installation but for running later on), you can get more information on http://www.swftools.org/ regarding installation. Some of the Linux distributions already have it in there package manager see http://packages.debian.org/unstable/utils/swftools) 
+  * !OpenOffice-Service started and listening on port 8100 (see OpenOfficeConverter, this is not necessary for installation but for running later on)
+  * Installed !ImageMagick (this is not necessary for installation but for running later on), you can get more information on http://www.imagemagick.org regarding installation. The instructions for installation can be found there http://www.imagemagick.org/script/binary-releases.php, however on most linux systems you can get it via your favorite package managers (apt-get it)
+  * Installed !GhostScript (this is not necessary for installation but for running later on), you can get more information on http://pages.cs.wisc.edu/~ghost/ regarding installation. The instructions for installation can be found there, however on most linux systems you can get it via your favorite package managers (apt-get it).
+  * Installed !SWFTools (this is not necessary for installation but for running later on), you can get more information on http://www.swftools.org/ regarding installation. Some of the Linux distributions already have it in there package manager see http://packages.debian.org/unstable/utils/swftools) 
 
 = Install latest Red5 Server (v0.6.3) =
 
   * you can get the latest Version of Red5 from: http://www.osflash.org
-  * configure Red5, the default ports Red5 is listening are also the default ports openmeetings application will try to connect. However you will find the exact port settings in _$RED5-HOME/conf/red5.properties_ (or follow the installation of red5)
+  * configure Red5, the default ports Red5 is listening are also the default ports !OpenMeetings application will try to connect. However you will find the exact port settings in _$RED5-HOME/conf/red5.properties_ (or follow the installation of red5)
   If you download the source-distribution of red5 you must first make a binary (ant dist) and then you got your red5-binary in the folder *dist* inside of red5. You need at least ant version 1.7 to compile red5.
-  change the Log-level of Red5, otherwise installation takes up to an hour cause of thousends debug-info-logs, see [Logging]
+  *Change the Log-level of Red5*, otherwise installation takes up to an hour cause of thousands debug-info-logs, see [Logging]
 
-= Install Openmeetings =
-  # Download Openmeetings 0.5 Rc6 (beta6) from [ http://code.google.com/p/openmeetings/downloads/list Openmeetings-Download-Page] (Please make sure that you use an up-to-date unzip-software)
-  # Unpack it to _$RED5-HOME/webapps/_ your new folder structure will be _$RED5-HOME/webapps/xmlcrm/_ this is the base directory of Openmeetings (following $OPENMEETINGS-HOME)
+= Install !OpenMeetings =
+  # Download !OpenMeetings 0.5 Rc6 (beta6) from [ http://code.google.com/p/openmeetings/downloads/list !OpenMeetings-Download-Page] (Please make sure that you use an up-to-date unzip-software)
+  # Unpack it to _$RED5-HOME/webapps/_ your new folder structure will be _$RED5-HOME/webapps/xmlcrm/_ this is the base directory of !OpenMeetings (following $OPENMEETINGS-HOME)
   # Prepare Database Settings - go to $OPENMEETINGS-HOME/install there are two preconfigured files for MySQL and Postgres: mysql_hibernate.cfg.xml and postgres_hibernate.cfg.xml. Following explains it for MySQL-Database-Users, Postgres-Database-Users and Any-Database-Users. Choose Your One!! Of course the database must already exist! Meaning if you want to use  `jdbc:mysql://localhost/xmlcrm` then the database `xmlcrm` must be already an existing empty database!!
     * MySQL-Database-User: Rename `mysql_hibernate.cfg.xml` to `hibernate.cfg.xml` and alter following config values in (`mysql_`)`hibernate.cfg.xml`
      {{{
