@@ -16,7 +16,7 @@
   * you can get the latest Version of Red5 from: http://www.osflash.org
   * configure Red5, the default ports Red5 is listening are also the default ports !OpenMeetings application will try to connect. However you will find the exact port settings in _$RED5-HOME/conf/red5.properties_ (or follow the installation of red5)
   If you download the source-distribution of red5 you must first make a binary (ant dist) and then you got your red5-binary in the folder *dist* inside of red5. You need at least ant version 1.7 to compile red5.
-  * *Change the Log-level of Red5*, otherwise installation takes up to an hour cause of thousands debug-info-logs, see [Logging]
+  * *Change the Log-level of Red5*, otherwise installation takes up to an hour cause of thousands debug-info-logs. A normal Installation of !OpenMeetings-Core (import of Database  Values) with reduced Log-Statements does only need 3-5 Minutes. see [Logging]
 
 = Install !OpenMeetings =
   # Download !OpenMeetings 0.5 Rc6 (beta6) from [ http://code.google.com/p/openmeetings/downloads/list !OpenMeetings-Download-Page] (Please make sure that you use an up-to-date unzip-software)
