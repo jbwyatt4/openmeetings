@@ -4,7 +4,7 @@
 
 == Red5 Version <= 0.6.3 ==
 
-comment out (meaning remove <!--- --->) this part in $OpenMeetings-Home/WEB-INF/web.xml
+comment out (meaning remove <!--- --->) this part in $!OpenMeetings-Home/WEB-INF/web.xml
 
 {{{
 	<context-param>
@@ -19,7 +19,7 @@ then the number of debug-log-statements is much better
 
 Todo: Issue 323
 
-== OpenLaszlo Client Log ==
+== !OpenLaszlo Client Log ==
 
 use the debug-version (maindebug.lzx) and watch the Laszlo-Debugger
 You can change the log - level for more detailed log about rpc-calls by comment out (meaning remove // )
