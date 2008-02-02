@@ -4,6 +4,7 @@
 
 == Red5 Version < or equal 0.6.3 ==
 
+since !OpenMeetings SVN Version r926 and newer
 comment out (meaning remove <!--- --->) this part in $!OpenMeetings-Home/WEB-INF/web.xml
 
 {{{
@@ -13,7 +14,20 @@ comment out (meaning remove <!--- --->) this part in $!OpenMeetings-Home/WEB-INF
 	</context-param>
 }}}
 
-then the number of debug-log-statements is much better
+(this enables webapp-specific logging, you can change the logging in the log4j.properties of the !OpenMeetings-webapp)
+
+*!OpenMeetings Beta7* and versions before simply change the overall debug level to ERROR:
+
+goto: $RED5-HOME/conf/log4j.properties and change 
+{{{
+log4j.rootCategory=DEBUG, CONSOLE
+}}}
+to
+{{{
+log4j.rootCategory=ERROR, CONSOLE
+}}}
+
+this reduces the number of debug-info-logs, in particular hibernate + c3p0 throw thousands of log statements.
 
 == Red5 Version > 0.6.3 (Latest Trunk) ==
 
