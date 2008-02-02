@@ -2,7 +2,7 @@
 
 = Server Side Logging =
 
-== Red5 Version > or = 0.6.3 ==
+== Red5 Version > or equal 0.6.3 ==
 
 comment out (meaning remove <!--- --->) this part in $!OpenMeetings-Home/WEB-INF/web.xml
 
