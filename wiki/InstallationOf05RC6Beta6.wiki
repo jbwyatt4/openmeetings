@@ -9,7 +9,7 @@
   * *!OpenOffice-Service* started and listening on port 8100 (see OpenOfficeConverter, this is not necessary for installation but for running later on)
   * Installed *!ImageMagick* (this is not necessary for installation but for running later on), you can get more information on http://www.imagemagick.org regarding installation. The instructions for installation can be found there http://www.imagemagick.org/script/binary-releases.php, however on most linux systems you can get it via your favorite package managers (apt-get it)
   * Installed *!GhostScript* (this is not necessary for installation but for running later on), you can get more information on http://pages.cs.wisc.edu/~ghost/ regarding installation. The instructions for installation can be found there, however on most linux systems you can get it via your favorite package managers (apt-get it).
-  * Installed *!SWFTools* (this is not necessary for installation but for running later on), you can get more information on http://www.swftools.org/ regarding installation. Some of the Linux distributions already have it in there package manager see http://packages.debian.org/unstable/utils/swftools) 
+  * Installed *SWFTools* (this is not necessary for installation but for running later on), you can get more information on http://www.swftools.org/ regarding installation. Some of the Linux distributions already have it in there package manager see http://packages.debian.org/unstable/utils/swftools) 
 
 = Install latest Red5 Server (v0.6.3) =
 
