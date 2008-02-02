@@ -16,6 +16,7 @@ Tips for Installation:
 == Source Build ==
 
   * BuildSources
+  * [Logging]
   * [http://code.google.com/p/openmeetings/source/browse browse SVN source]
   * [http://code.google.com/p/openmeetings/source/list SVN change history]
 
