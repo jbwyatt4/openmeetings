@@ -50,14 +50,15 @@
 	<!-- invoked if another client logs into the room 
 	after choosing devices -->     
     <method name="setAVSettingsToClient" args="rcl">
-    	if ($debug) Debug.warn("setAVSettingsToClient ",rcl.broadCastID,rcl);
+    	if ($debug) Debug.write("setAVSettingsToClient ",rcl.broadCastID,rcl);
     	var obj = this.getVideoObjectByBroadCastId(rcl.broadCastID);
-    	if ($debug) Debug.warn("setAVSettingsToClient: ",obj);
+    	if ($debug) Debug.write("setAVSettingsToClient: ",obj,rcl.avsettings);
 		if (rcl.avsettings=="n"){
 			obj.setVideouserProfilePic(rcl);
 		} else if (rcl.avsettings=="a"){
 			obj.setVideouserProfilePic(rcl);
 		}
+		obj.clientVars = rcl;
     	obj.updateAVSettingsSymbol(rcl);
     </method> 
     
@@ -66,13 +67,23 @@
      --> 
     <method name="getVideoObjectByBroadCastId" args="broadcastId">
     	<![CDATA[
+    		//if ($debug) Debug.write("getVideoObjectByBroadCastId1 SEARCH: ",broadcastId);
+    		
+    		//for (var i=0;i<this._videoviewcontent.subviews.length;i++){
+    		//	if ($debug) Debug.write("getVideoObjectByBroadCastId6 broadcastId: ",this._videoviewcontent.subviews[i].broadcastId);
+    		//	if ($debug) Debug.write("getVideoObjectByBroadCastId7 streamid,user_id: ",this._videoviewcontent.subviews[i].clientVars.streamid,this._videoviewcontent.subviews[i].clientVars.user_id);
+    		//}
     		
     		for (var i=0;i<this._videoviewcontent.subviews.length;i++){
-    			if ($debug) Debug.warn("getVideoObjectByBroadCastId: ",this._videoviewcontent.subviews[i].broadcastId,broadcastId);
+    			//if ($debug) Debug.write("getVideoObjectByBroadCastId2 broadcastId VIEW: ",this._videoviewcontent.subviews[i].broadcastId);
+    			//if ($debug) Debug.write("getVideoObjectByBroadCastId3 broadcastId SEARCH: ",broadcastId);
+    			//if ($debug) Debug.write("getVideoObjectByBroadCastId4 obj: ",this._videoviewcontent.subviews[i]);
+    			//if ($debug) Debug.write("getVideoObjectByBroadCastId5 streamid,user_id: ",this._videoviewcontent.subviews[i].clientVars.streamid,this._videoviewcontent.subviews[i].clientVars.user_id);
     			if (this._videoviewcontent.subviews[i].broadcastId==String(broadcastId)){
     				return this._videoviewcontent.subviews[i];
     			}
     		}
+    		
     	]]>
     </method>   	
 
@@ -105,7 +116,7 @@
 		<![CDATA[
 		if ($debug) Debug.write("initializeStreams addClientItem: ",connectedSince,isMod,streamid,username,userroom,formatedDate);
 		if (streamid!=canvas.streamid){
-            var myvideocontainer = this.getNewVideoObjectByPos(position);
+            var myvideocontainer = this.getNewVideoObjectByPos(object.broadCastID);
 	  		myvideocontainer.parent.parent.clientVars = object;
 	  		myvideocontainer.parent.parent.setAttribute('chatpartnername',object.firstname+' '+object.lastname);
 	  		if ($debug) Debug.write("addClientItem avsettings: ",object.avsettings);
@@ -119,9 +130,9 @@
 		
 	<method name="startStream" args="broadcastId">
 		<![CDATA[
-			if ($debug) Debug.write("startStream broadcastId: ",broadcastId);
+			//if ($debug) Debug.write("startStream broadcastId: ",broadcastId);
 			var obj = this.getVideoObjectByBroadCastId(broadcastId);
-			if ($debug) Debug.write("startStream obj: ",obj);
+			//if ($debug) Debug.write("startStream obj: ",obj);
 			if (obj != null ){
 				obj._chatvideoinner._videoview.subscribeStream(broadcastId,-1);
 			}

@@ -64,7 +64,7 @@
 		@param string id the broadcastId, can be a id for playing or publishing
 	-->
     <method name="setIdentifier" args="id">
-        this.broadcastId = id;
+        //this.broadcastId = id;
 		this._chatvideoinner._sendInvitation.setAttribute('visible',false);
     </method>
     
