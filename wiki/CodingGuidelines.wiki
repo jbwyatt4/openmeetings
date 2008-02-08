@@ -3,17 +3,17 @@
 
 == (1) Naming Convention ==
 || *Type* || *Rules* || *Examples* ||
-|| class || It is a user-defined general class. Start each user-defined class with *upper case*.  || {{{<MyClass />}}} ||
-|| private class || It is a user-defined private class. Start each private class with *underscore*. A private class is used only for the specific general class. ||{{{<_MyPrivateClass />}}}  ||
+|| class || It is a user-defined general class. Use *lowerCamelCase* Start for each user-defined class name  || {{{<myClass />}}} ||
+|| private class || It is a user-defined private class. Use *lowerCamelCase* Start for each private class name. A private class is used only for the specific general class. ||{{{<_myPrivateClass />}}}  ||
 
 == (2) Coding Rules ==
 === Rules in a class === 
-Do not use *"parent.*something" within a class in order to access the values outside of the class. 
+*If possible* , do not use *"parent.*something" within a class in order to access the values outside of the class.  
 
 Example:
 {{{
 <!-- NG -->
-<class name="MyClass">
+<class name="myClass">
   <view width="${parent.parent.parent.width}" />
 </class>
 }}}
@@ -21,7 +21,7 @@ Example:
 
 === Debug statement ===
 Use *if($debug) Debug.write(.....)* for the Debug statements. 
-Just for performance issue.
+Just for a performance issue.
 
 Example:
 {{{
@@ -43,23 +43,23 @@ Small private classes only for the general class should be encapsulated in the s
 Example:
 {{{
 <!-- OK -->
-MyClass1.lzx:
+myClass1.lzx:
  <library>
-   <class name="MyClass1" /> 
+   <class name="myClass1" /> 
  </library>
 
 <!-- OK -->
-MyClass1.lzx:
+myClass1.lzx:
  <library>
-   <class name="MyClass1" />
-   <class name="_MyPrivateClass1" />  <== private class for MyClass1 only
+   <class name="myClass1" />
+   <class name="_myPrivateClass1" />  <== It is a class needed for myClass1 only
  </library>
 
 <!-- NG -->
-MyClass1.lzx:
+myClass1.lzx:
  <library>
-   <class name="MyClass1" />  <== general class
-   <class name="MyClass2" />  <== second general class. There must be one general class per file.
+   <class name="myClass1" />  <== general class
+   <class name="myClass2" />  <== second general class. But there must be *one* general class per file.
  </library>
 }}}
 
@@ -83,12 +83,12 @@ Examples:
         Sample usage:
         @START_CODE
         <canvas>
-            <include href="../toolbarlayout.lzx"/>
+            <include href="../toolBarLayout.lzx"/>
             ...
         </canvas>
         @END_CODE
     -->
-    <class name="toolbarlayout">
+    <class name="toolBarLayout">
         <!--- A pixel amount to use between each view in the layout -->
         <attribute name="spacing" value="2"/>
 
