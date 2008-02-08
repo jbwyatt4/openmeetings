@@ -3,8 +3,8 @@
 
 == (1) Naming Convention ==
 || *Type* || *Rules* || *Examples* ||
-|| class || It is a user-defined general class. Use *lowerCamelCase* Start for each user-defined class name  || {{{<myClass />}}} ||
-|| private class || It is a user-defined private class. Use *lowerCamelCase* Start for each private class name. A private class is used only for the specific general class. ||{{{<_myPrivateClass />}}}  ||
+|| class || User-defined general class. Use *lowerCamelCase* for a class name  || {{{<myClass />}}} ||
+|| private class || User-defined private class. Use *lowerCamelCase* for a private class name. A private class is used only in the general class. ||{{{<_myPrivateClass />}}}  ||
 
 == (2) Coding Rules ==
 === Rules in a class === 
