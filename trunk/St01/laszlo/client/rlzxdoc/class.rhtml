@@ -39,6 +39,7 @@
         <td rowspan="1" colspan="1"><span class="docTableColHeading"><a href="info-attribinfo.html#category" shape="rect">Category</a></span></td>
       </tr>
       <% @lzxclass.attribute_list.each do |atr| %>
+      <% unless atr[:private] %>
       <tr>
         <td rowspan="1" colspan="1"><span class="docParam"><a name="attr-name" shape="rect"></a><%= atr[:name] %></span></td>
         <td rowspan="1" colspan="1"><span class="smaller"></span></td>
@@ -58,6 +59,7 @@
           <hr size="1" bgcolor="#e5e5e5">
         </td>
       </tr>
+      <% end %>
       <% end %>
     </table>
     <br clear="none">
@@ -90,6 +92,7 @@
         </td>
       </tr>
       <% unless method[:args].empty? %>
+      <% unless method[:private] %>
       <tr bgcolor="#e6e6e6">
         <td colspan="3" rowspan="1"><span class="docTableSubTitle">Parameters</span></td>
       </tr>
@@ -104,6 +107,7 @@
         <td rowspan="1" colspan="1"><span class="smaller"></span></td>
         <td rowspan="1" colspan="1"><span class="smaller"></span></td>
       </tr>
+      <% end %>
       <% end %>
       <% end %>
       <tr>
@@ -135,10 +139,12 @@
         <td rowspan="1" colspan="1"><span class="docTableColHeading">Description</span></td>
       </tr>
       <% @lzxclass.event_list.each do |event| %>
+      <% unless event[:private] %>
       <tr>
         <td rowspan="1" colspan="1"><a name="event-onaddsubresource" shape="rect"></a><span class="docParam"><%= event[:name] %></span></td>
         <td rowspan="1" colspan="1"><span class="smaller"><%= event[:comment] %></span></td>
       </tr>
+      <% end %>
       <% end %>
     </table>
     <br clear="none">
@@ -164,10 +170,12 @@
         <td rowspan="1" colspan="1"><span class="docTableColHeading">Description</span></td>
       </tr>
       <% @lzxclass.view_list.each do |view| %>
+      <% unless view[:private] %>
       <tr>
         <td rowspan="1" colspan="1"><a name="event-onaddsubresource" shape="rect"></a><span class="docParam"><%= view[:name] %></span></td>
         <td rowspan="1" colspan="1"><span class="smaller"><%= view[:comment] %></span></td>
       </tr>
+      <% end %>
       <% end %>
     </table>
     <br clear="none">
@@ -181,9 +189,6 @@
     <% end %>
     <br clear="none">
     <% end %>
-    <p class="copyright">Copyright &copy; 2002-2005 <a href="http://www.laszlosystems.com/" target="_top">Laszlo Systems, Inc.</a>
-      All Rights Reserved. Unauthorized use, duplication or
-      distribution is strictly prohibited. This is the proprietary
-      information of Laszlo Systems, Inc. Use is subject to license terms.</p>
+    <p class="copyright">Copyright &copy;</p>
   </body>
 </html>
