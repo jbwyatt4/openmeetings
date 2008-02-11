@@ -72,7 +72,7 @@ class LzxFile
 end
 
 class LzxClass
-  attr_reader :classname, :attribute_list, :method_list, :event_list, :view_list, :classcomment, :extends, :category
+  attr_reader :classname, :attribute_list, :method_list, :event_list, :view_list, :classcomment, :extends, :category, :private
   attr_accessor :doc, :hierarchy_depths
 
   def initialize(classname, comment, extends)
@@ -80,31 +80,46 @@ class LzxClass
     @method_list = Array.new
     @event_list = Array.new
     @view_list = Array.new
+    @private = false
+    @private = comment.include?(@@private_keyword) unless comment.nil?
 
     @classname = classname
     @classcomment = comment
     @extends = extends
   end
 
+  def private?
+    @private
+  end
+
   def add_method(name, args, comment)
+    private = false
+    private = comment.include?(@@private_keyword) unless comment.nil?
+
     if args.nil?
       args = { }
     else
       args = args.split(",")
     end
-    @method_list << {:name => name, :args => args, :comment => comment}
+    @method_list << {:name => name, :args => args, :comment => comment, :private => private}
   end
 
   def add_attribute(name, type, value, comment)
-    @attribute_list << {:name => name, :type => type, :value => value, :comment => comment}
+    private = false
+    private = comment.include?(@@private_keyword) unless comment.nil?
+    @attribute_list << {:name => name, :type => type, :value => value, :comment => comment, :private => private}
   end
 
   def add_event(name, comment)
-    @event_list << {:name => name, :comment => comment}
+    private = false
+    private = comment.include?(@@private_keyword) unless comment.nil?
+    @event_list << {:name => name, :comment => comment, :private => private}
   end
 
   def add_view(name, comment)
-    @view_list << {:name => name, :comment => comment}
+    private = false
+    private = comment.include?(@@private_keyword) unless comment.nil?
+    @view_list << {:name => name, :comment => comment, :private => private}
   end
 
   def get_depths_string
@@ -123,6 +138,7 @@ def add_class_from_lzx(lzxfile_path)
 end
 
 # main
+@@private_keyword = "@keywords private"
 
 #basedir to create lzxdoc
 @basedir = ARGV[0] || "."
@@ -136,6 +152,9 @@ exceptdirs_input = ARGV[2] || "doc"
 
 #locale (ex. ja)
 @locale = ARGV[3] || "ja"
+
+#output keyword comments?
+@output_private_keywords = false
 
 @rlzxdoc_root = File.dirname(File.expand_path(__FILE__))
 
@@ -172,13 +191,15 @@ class_erb = File.open(@rlzxdoc_root + '/class.rhtml') {|f| ERB.new(f.read)}
 
   @lzxclass = lzxclass[:class]
   unless @lzxclass.nil?
-    File.open("#{html_output_dir}/#{@lzxclass.classname}.html", "w"){ |file| file.puts class_erb.result(binding) }
+    unless @lzxclass.private?
+      File.open("#{html_output_dir}/#{@lzxclass.classname}.html", "w"){ |file| file.puts class_erb.result(binding) }
 
-    url = "#{File.dirname(lzxclass[:path])}/#{@lzxclass.classname}.html"
-    category = File.dirname(lzxclass[:path])
-    @nav.store(category, Array.new) unless @nav.key?(category)
-    @nav[category] << {:title => @lzxclass.classname, :url => url}
-    puts "create: #{lzxclass[:path]}"
+      url = "#{File.dirname(lzxclass[:path])}/#{@lzxclass.classname}.html"
+      category = File.dirname(lzxclass[:path])
+      @nav.store(category, Array.new) unless @nav.key?(category)
+      @nav[category] << {:title => @lzxclass.classname, :url => url}
+      puts "create: #{lzxclass[:path]}"
+    end
   end
 }
 
