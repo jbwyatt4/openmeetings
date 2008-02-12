@@ -66,5 +66,8 @@ Dir::glob("**/").each { |dir|
   end
 }
 
+@lzx_classes.sort!{ |a,b|
+  a[:class].classname <=> b[:class].classname}
+
 nav_erb = File.open(@rlzxdoc_root + '/class_name_csv.erb') {|f| ERB.new(f.read, nil, '%')}
 File.open("#{expand_outputdir}/class_name.csv", "w"){ |file| file.puts nav_erb.result(binding)}
