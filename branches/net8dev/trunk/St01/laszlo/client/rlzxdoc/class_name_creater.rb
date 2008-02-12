@@ -1,7 +1,7 @@
 #/opt/local/bin/ruby
 
 #
-# lzx class name converter
+# lzx class name creater
 #
 # togawamanabu <togawamanabu@gmail.com>
 #
@@ -28,7 +28,7 @@ end
 # main
 @@private_keyword = "@keywords private"
 
-#basedir to create lzxdoc
+#basedir to create class list
 @basedir = ARGV[0] || "."
 
 #outputdir for lzxdoc
@@ -37,12 +37,6 @@ end
 #exceptdirs list from lzxdoc
 exceptdirs_input = ARGV[2] || "doc"
 @exceptdirs = exceptdirs_input.split(",")
-
-#locale (ex. ja)
-@locale = ARGV[3] || "ja"
-
-#output keyword comments?
-@output_private_keywords = false
 
 @rlzxdoc_root = File.dirname(File.expand_path(__FILE__))
 
