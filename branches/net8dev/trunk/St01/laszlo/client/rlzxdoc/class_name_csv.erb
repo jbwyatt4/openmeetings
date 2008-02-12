@@ -1,4 +1,4 @@
 % @lzx_classes.each do |lzxclass|
 % classname = lzxclass[:class].classname
-<%= classname %>,<%= classname %>
+<%=  File.dirname(lzxclass[:path]) %>,<%= classname %>,<%= classname %>
 % end
