@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<descr>
+<descr> 
 	URLで直接指定されるcanvasを持つアプリケーション。OpenMeetings本体のアプリケーションファイル。
 	global attributeとinitial load時の振る舞いが記述されている。
 	読み込み設定ファイルはmyConfigSetで指定されているdatasetである。
