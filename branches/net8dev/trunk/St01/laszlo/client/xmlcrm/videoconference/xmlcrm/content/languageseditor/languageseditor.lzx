@@ -72,7 +72,7 @@
     	<handler name="onclick">
     		<![CDATA[
 	    		var exporturl = 'http://'+canvas.rtmphostlocal+':'+canvas.red5httpport
-	    				+'/xmlcrm/LangExport?language='+parent.languages.getValue()
+	    				+'/'+canvas.webAppRootKey+'/LangExport?language='+parent.languages.getValue()
 	    				+'&sid='+canvas.sessionId;
 	            LzBrowser.loadURL(exporturl,"_parent");
             ]]>

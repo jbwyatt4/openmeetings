@@ -16,7 +16,7 @@
 	</class>
 	
 	<class name="hibrtmpconnection" extends="devrtmpconnection" debug="true"
-    	src="rtmp://192.168.2.102:1935/xmlcrm/hibernate" >
+    	src="rtmp://192.168.2.102:1935/openmeetings/hibernate" >
 		<handler name="onconnect">
         	Debug.write("connected");   
         	var t = new videoview(canvas.i.v_container);

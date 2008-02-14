@@ -18,7 +18,7 @@
 				this.value.picture_uri = "_profile_"+value.picture_uri;
 			}
 	        var downloadurl = 'http://'+canvas.rtmphostlocal+':'+canvas.red5httpport
-	        		+'/xmlcrm/DownloadHandler?fileName='+value.picture_uri
+	        		+'/'+canvas.webAppRootKey+'/DownloadHandler?fileName='+value.picture_uri
 	        		+'&moduleName=remoteuserprofilebig&parentPath=&room=&domain='
 	        		+'&remoteUserid='+this.value.user_id
 	        		+'&sid='+canvas.sessionId;
@@ -138,7 +138,7 @@
             	<attribute name="isgreater" value="false" type="boolean" />       
             	<handler name="onlevel">
             		<![CDATA[
-	            		if (this.level>canvas.loadnessAcitviation) {
+	            		if (this.level>canvas.loudnessAcitviation) {
 							if (!this.isgreater) {
 								this.isgreater = true;
 								this.sendNotification();

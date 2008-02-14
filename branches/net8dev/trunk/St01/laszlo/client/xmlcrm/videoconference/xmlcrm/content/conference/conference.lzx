@@ -2,12 +2,12 @@
 <library>   
     
 <class name="videoboard" extends="guipresenter" x="2" y="2"
-    width="270" height="280" closable="false" title="Video and Audio"
+    width="290" height="280" closable="false" title="Video and Audio"
     resizeable="false">
-    <videocontainer name="_videocontainer" x="2" y="22" />
+    <videocontainer name="_videocontainer" x="1" y="22" />
 </class>   
     
-<class name="whiteboardpanel" extends="guipresenter" x="274" y="2"
+<class name="whiteboardpanel" extends="guipresenter" x="296" y="2"
     width="660" height="592" closable="false" title="Whiteboard"
     resizeable="false">
    <whiteboard name="_whiteboard" y="22" x="4">
@@ -40,9 +40,9 @@
     
     
 <class name="filespanel" extends="guipresenter" x="2" y="284"
-    width="270" height="310" closable="false" title="Chat Files User"
+    width="290" height="310" closable="false" title="Chat Files User"
     resizeable="false">
-    <conferencecontainertab x="2" y="22" name="_menubar" />
+    <conferencecontainertab x="1" y="22" name="_menubar" />
 </class>        
     
     
@@ -56,8 +56,9 @@
         canvas._conferencemenu.setAttribute('visibility','visible');
         
         new videoboard(this);
-        new whiteboardpanel(this);
         new filespanel(this);
+        
+        new whiteboardpanel(this);
     </handler>
 
 	<handler name="ontabcontentleave">
