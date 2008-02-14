@@ -163,6 +163,8 @@
         <handler name="ondata" args="value">	
             <![CDATA[
             	parent.recordingValue = value;
+            	Debug.write(parent.recordingValue.roomRecording.streamlist);
+            	Debug.write(parent.recordingValue.roomRecording.roomclients);
             	Debug.write("getRecordingById",parent.recordingValue.roomRecording);
             	parent.timerDel = new LzDelegate( parent, "timeLineAction" );
             	_drawarea.isinitRecordingLoad = true;
@@ -193,17 +195,61 @@
 			if (minutes<10) minutes = "0"+minutes;	
 			this.progress._currentTime._timetext.setAttribute('text',minutes+":"+deltaSeconds);
 	        
+			var roomclients = this.recordingValue.roomRecording.roomclients;
+			
+			for (var i=0;i<roomclients.length;i++){
+        		var starttime =  (Math.round(roomclients[i].starttime/this.timeStepSyncing))*this.timeStepSyncing;
+        		//Debug.write("timeLineAction starttime: ",starttime);
+        		if (starttime == this.currentTime){
+        			Debug.write("Found Room Event: ",roomclients[i]);
+        			if (roomclients[i].roomenter){
+        				var userpos = roomclients[i].rcl.userpos;
+        				Debug.write("Found ROOM User Enter",starttime,userpos);
+        				canvas._videocontainer.enterRoom(userpos,this.recordingValue.roomRecording.streamlist[i].rcl);
+        			} else {
+		        		var userpos = roomclients[i].rcl.userpos;
+		        		Debug.write("Found ROOM User Left",starttime,userpos);
+		        		canvas._videocontainer.disconnectclient(userpos);
+        			}
+        		}
+			}
+			
 			var streamList = this.recordingValue.roomRecording.streamlist;
 			
+			//Debug.write(this.recordingValue.roomRecording.streamlist);
+			
         	for (var i=0;i<streamList.length;i++){
-        		//Debug.write(this.recordingValue.roomRecording.streamlist[i]);
+        		//Debug.write(streamList[i]);
+        		//Debug.write(streamList[i].starttime);
+        		//Debug.write(streamList[i].streamstart);
+        		//Debug.write(streamList[i].avset);
+        		//Debug.write(streamList[i].streamName);
         		var starttime =  (Math.round(streamList[i].starttime/this.timeStepSyncing))*this.timeStepSyncing;
         		//Debug.write("timeLineAction starttime: ",starttime);
         		if (starttime == this.currentTime){
-	        		var userpos = streamList[i].rcl.userpos;
-	        		var streamname = streamList[i].streamName+".flv";
-	        		Debug.write("Found - ",starttime,userpos,streamname);
-	        		canvas._videocontainer.startStream(streamname,userpos,this.recordingValue.roomRecording.streamlist[i].rcl);
+        			Debug.write("Found User Event: ",streamList[i]);
+        			if (streamList[i].streamstart && streamList[i].avset){
+        				var userpos = streamList[i].rcl.userpos;
+		        		var streamname = streamList[i].streamName+".flv";
+        				Debug.write("Found User Entered To Start Stream! - ",starttime,userpos,streamname);
+        				canvas._videocontainer.startStream(streamname,userpos,this.recordingValue.roomRecording.streamlist[i].rcl);
+        			} else if (streamList[i].streamstart && !streamList[i].avset){
+		        		var userpos = streamList[i].rcl.userpos;
+		        		var streamname = streamList[i].streamName+".flv";
+		        		Debug.write("Found - INIT",starttime,userpos,streamname);
+		        		canvas._videocontainer.startStream(streamname,userpos,this.recordingValue.roomRecording.streamlist[i].rcl);
+        			} else if (!streamList[i].streamstart && !streamList[i].avset) {
+        				var userpos = streamList[i].rcl.userpos;
+		        		var streamname = streamList[i].streamName+".flv";
+        				Debug.write("Found Stream To END! - ",starttime,userpos,streamname);
+        				//Todo: In future releases people will be ale to stop/start streaming
+        				//while the application is running
+        			} else if (!streamList[i].streamstart && streamList[i].avset) {
+        				var userpos = streamList[i].rcl.userpos;
+        				var avsettings = streamList[i].rcl.avsettings;
+        				Debug.write("Found AVEvent! - ",starttime,userpos);
+        				canvas._videocontainer.setAVOnlyStream(userpos,streamList[i].rcl);
+        			}
         		}
         	}
         	

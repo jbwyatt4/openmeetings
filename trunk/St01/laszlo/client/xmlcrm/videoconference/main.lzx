@@ -1,52 +1,63 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<canvas debug="false">
+<canvas debug="false" width="100%" height="100%" >
+     
+<!-- 
+##########################################################
+these properties will be overwritten by config.xml -->  
     
-<!---
-	@descr these properties will be overwritten by config.xml
--->  
-    
-<!--
-    URL/IP to use for the Server 192.168.178.28 
-    inno02.fh-pforzheim.de macbook 192.168.2.103
-    192.168.2.102 bxlug.homelinux.org 213.219.160.72
--->
-<!---
-    @descr if this value is empty it will try to connect to the 
+<!-- URL/IP to use for the Server 192.168.178.28 
+	inno02.fh-pforzheim.de macbook 192.168.2.103
+	192.168.2.102 bxlug.homelinux.org 213.219.160.72
+	    if this value is empty it will try to connect to the 
     domain-name it has been loading from
--->
+    -->
 <attribute name="rtmphostlocal" value="" type="string" />
  
-<!---
-    @descr Port to use for the Server
-           To this port the default server lookup is done
-           You can find all this configuraiton in your red5-Config in: $RED5_HOME/conf/red5.properties
--->
+<!--  
+	Port to use for the Server
+	To this port the default server lookup is done
+	
+	You can find all this configuraiton in your red5-Config in: $RED5_HOME/conf/red5.properties
+ -->
 <attribute name="rmptport" value="1935" type="string" />
 
-<!---
-    @descr Port to use for the Server
-		   To this port the fallback is done once the default rtmport failed
-		   this should workaround 99% of all firewalls
--->
+<!-- 
+	Port to use for the Server
+	To this port the fallback is done once the default rtmport failed
+	this should workaround 99% of all firewalls
+ -->
 <attribute name="rmptTunnelport" value="8088" type="string" />
 
-<!---
-	@descr Port to use for the Server
-		   This port is used to connec to the http-servlet of the red5-servlet
--->
+<!-- 
+	Port to use for the Server
+	This port is used to connec to the http-servlet
+	of the red5-servlet
+ -->
 <attribute name="red5httpport" value="5080" type="string" />
 	
-<!---
-	@descr These colors are the main colors and style the hole application
--->
+<!--
+	These colors are the main colors and style the hole application
+ -->
 <attribute name="basebgcolorizer" value="0xB0C4DE" type="string" />	
 <attribute name="baseMousecolorizer" value="0xC4D5E6" type="string" />	
 <attribute name="baseMouseOvercolorizer" value="0xC4D5E6" type="string" />  	
-	
-<!--= 
-	@descr Version number of this distro
--->
-<attribute name="currentappversion" value="Version 0.5 Beta5" type="string" />
+
+<attribute name="currentappversion" value="" type="string" />
+
+<attribute name="webAppRootKey" value="" type="string" />
+
+<!-- Name of the Application -->
+<attribute name="currentappname" value="OpenMeetings" type="string" />   
+<attribute name="currentappnameurl" value="OpenMeetings" type="string" />   
+<attribute name="currentappnamebugurl" value="OpenMeetings" type="string" /> 
+
+<!-- Video Settings -->
+<attribute name="loudnessAcitviation" value="10" type="number" />
+<attribute name="showWindowEffect" value="y" type="string" />    
+
+<!-- END OF config.xml attributes
+##########################################################
+ -->
 
 <silverstyle name="defaultstyle" isdefault="true" basecolor="${ canvas.basebgcolorizer }"
 	canvascolor="white" />
@@ -58,7 +69,7 @@
 </splash>
 
 <include href="incubator/lzcombobox.lzx" />
-<include href="incubator/shadowbox.lzx" /> 
+<include href="incubator/shadowbox.lzx" />
 
 <include href="oslmon/" /> 
 <include href="resources/" />
@@ -79,44 +90,25 @@
 <resource name="configure_vidrsc" src="resources/configure.png" />
 
 <resource name="mainbackroundmenu_rsc" src="resources/mainbackroundmenu.png" />
-
-<!-- Value's will be overwritten by config.xml -->
-<!-- Name of the Application -->
-<attribute name="currentappname" value="OpenMeetings" type="string" />    
-<attribute name="currentappnameurl" value="OpenMeetings" type="string" />    
-<attribute name="currentappnamebugurl" value="OpenMeetings" type="string" />  
-
-<!---
-	@descr Video Settings 
--->
-<attribute name="loadnessAcitviation" value="10" type="number" /> 
         
-<!---
-	@descr URL/IP to use for the Server 
--->
+<!-- URL/IP to use for the Server -->
 <attribute name="rmpthost" value="" type="string" />
 
-<!---
-	@descr Username/Nickname 
--->
+<!-- Username/Nickname -->
 <attribute name="currentuser" value="" type="string" />
 
-<!---
-	@descr Roomname internaly Scope 
--->
+<!-- Roomname internaly Scope -->
 <attribute name="currentcourse" value="" type="string" />
 
-<!---
-	@descr Roomname/Coursename 
--->
+<!-- Roomname/Coursename -->
 <attribute name="currentcourseName" value="" type="string" />
 
-<!---
-	@descr The Reference for a Streaming Object
-    	   This should be removed later when the OpenLaszlo API handles
-           the broadcast better
-           -swagner
--->
+<!-- 
+    The Reference for a Streaming Object
+    This should be removed later when the OpenLaszlo API handles
+    the broadcast better
+    -swagner
+ -->
 <attribute name="_nc" value="null" />
 	
 <attribute name="vaquality" value="best" type="string" />
@@ -128,10 +120,10 @@
 <attribute name="ismoderator" value="false" type="boolean" />
 
 <attribute name="loadingmessage" value="" type="string" />
-<!---
-	@descr The state of the Application
-		   At the beginning you should choose how many users are allowed to
-		   login simultaniously
+<!-- 
+	The state of the Application
+	At the beginning you should choose how many users are allowed to
+	login simultaniously
  -->
 <attribute name="islogedin" value="false" type="boolean" />
    
@@ -143,25 +135,19 @@
 <attribute name="uploadmoduleimg" value="videoconf1" type="string" />
 <attribute name="foldersequence" value="null" />
 <attribute name="uploadmoduleimgfolder" value="" type="string" />
-<!---
-	@descr Can be either 2 or 4
-	       But theoretically there is no limit
--->
+<!-- 
+	Can be either 2 or 4
+	But theoretically there is no limit
+ -->
 <attribute name="numberofallowedpartners" value="0" type="number" />
 
-<!---
-	@descr Number of currently connected Users 
--->
+<!-- Number of currently connected Users -->
 <attribute name="numberofpartners" value="0" type="number" />
 
-<!---
-	@descr unique ID of this Stream 
--->
+<!-- unique ID of this Stream -->
 <attribute name="streamid" value="0" type="string" />
 
-<!---
-	@descr id of the current Mod in this room
--->
+<!-- id of the current Mod in this room -->
 <attribute name="currentmodid" value="0" type="string" />
 
 <attribute name="currentlanguage" value="english" type="string" />
@@ -176,9 +162,7 @@
 <attribute name="salutationsInitValues" value="null" />
 <attribute name="roomTypesInitValues" value="null" />
 
-<!---
-	@descr Username of current user 
--->
+<!-- Username of current user -->
 <attribute name="currentusename" value="defaultname" type="string" />
 <attribute name="user_id" value="0" type="number" />
 <attribute name="firstName" value="" type="string" />
@@ -189,9 +173,7 @@
 <attribute name="picture_uri" value="" type="string" />
 <attribute name="language" value="" type="string" />
 
-<!--- 
-	@descr User porperties 
--->
+<!-- User porperties -->
 <attribute name="currentusercolor" value="0" type="number" />
 <attribute name="currentuserpos" value="0" type="number" />
 	
@@ -200,9 +182,7 @@
 <attribute name="sessionObject" value="null" />
 <attribute name="sessionId" value="" type="string" />
 	
-<!---
-	@descr attributes for direct room access
--->
+<!-- attributes for direct room access -->
 <attribute name="initroomid" value="0" type="number" />
 <attribute name="initroomStr" value="" type="string" />
 <attribute name="initroomtype" value="" type="string" />
@@ -218,10 +198,11 @@
 
 <attribute name="currentrecorder_id" value="0" type="number" /> 
 
-<!--- 
-	@descr Holds a refernce to the current VideoCOntainer Object
-		   containing the VideoViews and some more references to temp-objects
--->
+<!-- 
+Holds a refernce to the current VideoCOntainer Object
+containing the VideoViews
+and some more references to temp-objects
+ -->
 <attribute name="_videocontainer" value="null" />
 <attribute name="_chartcontent" value="null" />
 <attribute name="_chartcontentRPC" value="null" />
@@ -253,6 +234,7 @@
 			
 <method name="myinit">
 	<![CDATA[
+	//Set Config-values by config.xml, see comments on config.xml
 	    this.setAttribute('rtmphostlocal',canvas.myConfigSet.getPointer().xpathQuery('config/rtmphostlocal/text()'));   
 	    this.setAttribute('rmptport',Number(canvas.myConfigSet.getPointer().xpathQuery('config/rmptport/text()')));  
 	    this.setAttribute('rmptTunnelport',Number(canvas.myConfigSet.getPointer().xpathQuery('config/rmptTunnelport/text()')));  
@@ -264,9 +246,11 @@
 	    this.setAttribute('currentappname',canvas.myConfigSet.getPointer().xpathQuery('config/currentappname/text()'));  
 	    this.setAttribute('currentappnameurl',canvas.myConfigSet.getPointer().xpathQuery('config/currentappnameurl/text()'));  
 	    this.setAttribute('currentappnamebugurl',canvas.myConfigSet.getPointer().xpathQuery('config/currentappnamebugurl/text()'));
-	    this.setAttribute('loadnessAcitviation',canvas.myConfigSet.getPointer().xpathQuery('config/loadnessAcitviation/text()'));
-	
-	    mainBaseText.setText(canvas.currentappname);
+	    this.setAttribute('loudnessAcitviation',canvas.myConfigSet.getPointer().xpathQuery('config/loudnessAcitviation/text()'));
+		this.setAttribute('webAppRootKey',canvas.myConfigSet.getPointer().xpathQuery('config/webAppRootKey/text()'));
+		this.setAttribute('showWindowEffect',canvas.myConfigSet.getPointer().xpathQuery('config/showWindowEffect/text()'));  
+
+		mainBaseText.setText(canvas.currentappname);
 	    mainBaseText.setShadow();
 	    mainBaseTextLabel.setAttribute('text',canvas.currentappnameurl);  
 	        
@@ -321,7 +305,7 @@
 		
 		//Debug.write("rtmphostlocal,rmpthost: ",canvas.rtmphostlocal,canvas.rmpthost);	
 	
-	    var src = 'rtmp://'+canvas.rtmphostlocal+':'+canvas.rmptport+'/xmlcrm/hibernate';
+	    var src = 'rtmp://'+canvas.rtmphostlocal+':'+canvas.rmptport+'/'+canvas.webAppRootKey+'/hibernate';
 	    canvas.thishib.setAttribute('src',src);
 	    canvas.thishib.loaderVar = new autoloader(canvas);
 	    canvas.thishib.loaderVar.src.setText(src);
@@ -333,9 +317,9 @@
 	return getLabelTag(id);
 </method>
 
-<!--- 
-    @descr Into this view alle Windows will be loaded
--->
+<!-- 
+    Into this view alle Windows will be loaded
+ -->
 <view name="main_content" y="${ canvas.naviHeightDelta }" width="${canvas.width}" 
     height="${canvas.height-canvas.naviHeightDelta}" visibility="hidden">
     <view x="0" name="_content" layout="axis:y;spacing:2">
@@ -356,9 +340,10 @@
     <vscrollbar />
 </view>  
   
-<!--- 
-	@desr Navigation
--->
+<!-- 
+	Navigation
+ -->
+
 <view name="_mainbgcontentNavi" y="0" x="0" bgcolor="${ canvas.baseMousecolorizer }" clip="true"
     width="100%" height="$once{ canvas.naviHeight }" visibility="hidden">
     <text id="mainBaseText" x="10" y="10"

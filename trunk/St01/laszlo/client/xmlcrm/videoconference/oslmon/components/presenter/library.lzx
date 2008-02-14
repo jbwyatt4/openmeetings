@@ -2,6 +2,7 @@
 <library>
 
 	<include href="resources/" />
+	<include href="boxiniteffect.lzx" />
 	<include href="guipresenter.lzx" />
 
     

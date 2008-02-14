@@ -3,37 +3,37 @@
     
     <debug fontsize="14" oninit="Debug.showInternalProperties = true" />
     
-<!-- these properties will be overwritten by config.xml
-    
-     -->  
+<!-- 
+##########################################################
+these properties will be overwritten by config.xml -->  
     
 <!-- URL/IP to use for the Server 192.168.178.28 
-inno02.fh-pforzheim.de macbook 192.168.2.103
-192.168.2.102 bxlug.homelinux.org 213.219.160.72
-    if this value is empty it will try to connect to the 
+	inno02.fh-pforzheim.de macbook 192.168.2.103
+	192.168.2.102 bxlug.homelinux.org 213.219.160.72
+	    if this value is empty it will try to connect to the 
     domain-name it has been loading from
     -->
 <attribute name="rtmphostlocal" value="" type="string" />
  
 <!--  
-Port to use for the Server
-To this port the default server lookup is done
-
-You can find all this configuraiton in your red5-Config in: $RED5_HOME/conf/red5.properties
+	Port to use for the Server
+	To this port the default server lookup is done
+	
+	You can find all this configuraiton in your red5-Config in: $RED5_HOME/conf/red5.properties
  -->
 <attribute name="rmptport" value="1935" type="string" />
 
 <!-- 
-Port to use for the Server
-To this port the fallback is done once the default rtmport failed
-this should workaround 99% of all firewalls
+	Port to use for the Server
+	To this port the fallback is done once the default rtmport failed
+	this should workaround 99% of all firewalls
  -->
 <attribute name="rmptTunnelport" value="8088" type="string" />
 
 <!-- 
-Port to use for the Server
-This port is used to connec to the http-servlet
-of the red5-servlet
+	Port to use for the Server
+	This port is used to connec to the http-servlet
+	of the red5-servlet
  -->
 <attribute name="red5httpport" value="5080" type="string" />
 	
@@ -43,11 +43,23 @@ of the red5-servlet
 <attribute name="basebgcolorizer" value="0xB0C4DE" type="string" />	
 <attribute name="baseMousecolorizer" value="0xC4D5E6" type="string" />	
 <attribute name="baseMouseOvercolorizer" value="0xC4D5E6" type="string" />  	
-	
-<!-- 
-	Version number of this distro
+
+<attribute name="currentappversion" value="" type="string" />
+
+<attribute name="webAppRootKey" value="" type="string" />
+
+<!-- Name of the Application -->
+<attribute name="currentappname" value="OpenMeetings" type="string" />   
+<attribute name="currentappnameurl" value="OpenMeetings" type="string" />   
+<attribute name="currentappnamebugurl" value="OpenMeetings" type="string" /> 
+
+<!-- Video Settings -->
+<attribute name="loudnessAcitviation" value="10" type="number" />
+<attribute name="showWindowEffect" value="y" type="string" />    
+
+<!-- END OF config.xml attributes
+##########################################################
  -->
-<attribute name="currentappversion" value="Version 0.5 Beta5" type="string" />
 
 <silverstyle name="defaultstyle" isdefault="true" basecolor="${ canvas.basebgcolorizer }"
 	canvascolor="white" />
@@ -59,7 +71,7 @@ of the red5-servlet
 </splash>
 
 <include href="incubator/lzcombobox.lzx" />
-<include href="incubator/shadowbox.lzx" /> 
+<include href="incubator/shadowbox.lzx" />
 
 <include href="oslmon/" /> 
 <include href="resources/" />
@@ -80,15 +92,6 @@ of the red5-servlet
 <resource name="configure_vidrsc" src="resources/configure.png" />
 
 <resource name="mainbackroundmenu_rsc" src="resources/mainbackroundmenu.png" />
-
-<!-- Value's will be overwritten by config.xml -->
-<!-- Name of the Application -->
-<attribute name="currentappname" value="OpenMeetings" type="string" />    
-<attribute name="currentappnameurl" value="OpenMeetings" type="string" />    
-<attribute name="currentappnamebugurl" value="OpenMeetings" type="string" />  
-
-<!-- Video Settings -->
-<attribute name="loadnessAcitviation" value="10" type="number" /> 
         
 <!-- URL/IP to use for the Server -->
 <attribute name="rmpthost" value="" type="string" />
@@ -233,6 +236,7 @@ and some more references to temp-objects
 			
 <method name="myinit">
 	<![CDATA[
+	//Set Config-values by config.xml, see comments on config.xml
 	    this.setAttribute('rtmphostlocal',canvas.myConfigSet.getPointer().xpathQuery('config/rtmphostlocal/text()'));   
 	    this.setAttribute('rmptport',Number(canvas.myConfigSet.getPointer().xpathQuery('config/rmptport/text()')));  
 	    this.setAttribute('rmptTunnelport',Number(canvas.myConfigSet.getPointer().xpathQuery('config/rmptTunnelport/text()')));  
@@ -244,9 +248,11 @@ and some more references to temp-objects
 	    this.setAttribute('currentappname',canvas.myConfigSet.getPointer().xpathQuery('config/currentappname/text()'));  
 	    this.setAttribute('currentappnameurl',canvas.myConfigSet.getPointer().xpathQuery('config/currentappnameurl/text()'));  
 	    this.setAttribute('currentappnamebugurl',canvas.myConfigSet.getPointer().xpathQuery('config/currentappnamebugurl/text()'));
-	    this.setAttribute('loadnessAcitviation',canvas.myConfigSet.getPointer().xpathQuery('config/loadnessAcitviation/text()'));
-	
-	    mainBaseText.setText(canvas.currentappname);
+	    this.setAttribute('loudnessAcitviation',canvas.myConfigSet.getPointer().xpathQuery('config/loudnessAcitviation/text()'));
+		this.setAttribute('webAppRootKey',canvas.myConfigSet.getPointer().xpathQuery('config/webAppRootKey/text()'));
+		this.setAttribute('showWindowEffect',canvas.myConfigSet.getPointer().xpathQuery('config/showWindowEffect/text()'));  
+
+		mainBaseText.setText(canvas.currentappname);
 	    mainBaseText.setShadow();
 	    mainBaseTextLabel.setAttribute('text',canvas.currentappnameurl);  
 	        
@@ -301,7 +307,7 @@ and some more references to temp-objects
 		
 		//Debug.write("rtmphostlocal,rmpthost: ",canvas.rtmphostlocal,canvas.rmpthost);	
 	
-	    var src = 'rtmp://'+canvas.rtmphostlocal+':'+canvas.rmptport+'/xmlcrm/hibernate';
+	    var src = 'rtmp://'+canvas.rtmphostlocal+':'+canvas.rmptport+'/'+canvas.webAppRootKey+'/hibernate';
 	    canvas.thishib.setAttribute('src',src);
 	    canvas.thishib.loaderVar = new autoloader(canvas);
 	    canvas.thishib.loaderVar.src.setText(src);

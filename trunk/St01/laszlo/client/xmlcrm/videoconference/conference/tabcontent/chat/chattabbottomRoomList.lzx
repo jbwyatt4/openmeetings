@@ -58,7 +58,7 @@
 			</handler>
 			<view x="2" y="1">
 				<handler name="oninit">
-					var swfurl = 'http://'+canvas.rtmphostlocal+':'+canvas.red5httpport+'/xmlcrm/public/emoticons/smile_btn.swf';
+					var swfurl = 'http://'+canvas.rtmphostlocal+':'+canvas.red5httpport+'/'+canvas.webAppRootKey+'/public/emoticons/smile_btn.swf';
 					this.setSource(swfurl);
 				</handler>
 			</view>

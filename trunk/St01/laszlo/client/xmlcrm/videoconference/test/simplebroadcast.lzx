@@ -3,7 +3,7 @@
 	
 	<debug fontsize="14" oninit="Debug.showInternalProperties = true"/>
 	
-	<rtmpconnection src="rtmp://macbook/xmlcrm/hibernate" autoconnect="true"/>
+	<rtmpconnection src="rtmp://macbook/'+canvas.webAppRootKey+'/hibernate" autoconnect="true"/>
 	<mediastream name="s1" type="rtmp"/>
 	<mediastream name="s2" type="rtmp"/>
 	<simplelayout/>

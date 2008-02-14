@@ -23,10 +23,11 @@
 				this.value.picture_uri = "_profile_"+value.picture_uri;
 			}
 	        var downloadurl = 'http://'+canvas.rtmphostlocal+':'+canvas.red5httpport
-	        		+'/xmlcrm/DownloadHandler?fileName='+value.picture_uri
+	        		+'/'+canvas.webAppRootKey+'/DownloadHandler?fileName='+value.picture_uri
 	        		+'&moduleName=remoteuserprofile&parentPath=&room=&domain='
 	        		+'&remoteUserid='+this.value.user_id
 	        		+'&sid='+canvas.sessionId;
+	        Debug.write(downloadurl);
 	        this._userpic.setAttribute('src',downloadurl);	
         ]]>
 	</handler>	
@@ -150,7 +151,7 @@
             	<handler name="onlevel">
             		<![CDATA[
 	            		//this.parent.parent.parent._loudness.loudness.setAttribute('text',this.level);
-						if (this.level>canvas.loadnessAcitviation) {
+						if (this.level>canvas.loudnessAcitviation) {
 							if (!this.isgreater) {
 								this.isgreater = true;
 								this.sendNotification();

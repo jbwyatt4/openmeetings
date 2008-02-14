@@ -8,7 +8,7 @@ inno02.fh-pforzheim.de macbook 192.168.2.103
     domain-name it has been loading from  
     inno02.fh-pforzheim.de  
     -->
-<rtmphostlocal>macbook</rtmphostlocal>
+<rtmphostlocal>192.168.254.180</rtmphostlocal>
 
 <!--  
 Port to use for the Server
@@ -46,22 +46,50 @@ of the red5-servlet
     
 <!--
     Name of the Application
+    this is the Top-Icon Name of the Application
  -->    
 <currentappname>OpenMeetings</currentappname>    
     
 <!-- 
     URL to the Home of the Application
+    this is the URL which is used if you click on the Top-icon
 -->    
 <currentappnameurl>http://openmeetings.googlecode.com</currentappnameurl>        
 
 <!--
     URL to Bugs/Support
+    this is the URL which is used if you click on *report a bug*
  -->
 <currentappnamebugurl>http://code.google.com/p/openmeetings/issues/list</currentappnamebugurl>   
         
 <!--
     Video-Settings
+    this value is used in Audio_Streaming, at which the *activity-meter* will
+    send a notification for all connected hosts of a conference
+    the result of this notification is that you see the green-light highlighted if
+    a remote user is speaking
  -->
-<loadnessAcitviation>7</loadnessAcitviation>    
+<loudnessAcitviation>7</loudnessAcitviation>   
+    
+<!--
+    OpenMeetings-Webapp Name
+    This is the name of the WebApp the Client will try to connect
+    in former versions (till 0.5 Beta7) the name was xmlcrm
+    the same param kann be find in the webapp in the Red5-Webapp
+    red5-web.properties
+    web.xml
+ -->
+<webAppRootKey>openmeetings</webAppRootKey>  
+    
+<!--
+    Window-Effect Settings
+    showWindowEffect-values:
+    y = yes
+    n = no
+    showWindowEffectOpacity-values
+    between 0 and 1
+ -->
+<showWindowEffect>y</showWindowEffect>    
+
         
 </config>
