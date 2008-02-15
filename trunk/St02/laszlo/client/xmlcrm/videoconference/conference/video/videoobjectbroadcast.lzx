@@ -9,15 +9,51 @@
     
 <class name="videoobjectbroadcast" extends="basevideoobject" isremote="false">
 	
-	<view name="_chatvideoinner" x="1" y="20" width="130" height="100" >
-		
+	<view name="_chatvideoinner" x="1" y="20" width="130" height="100" clip="true">
+
+		<!-- for zoom -->
+		<attribute name="zoomlevel" value="1" />
+		<attribute name="_W" value="$once{this._videoview.width}" />
+		<attribute name="_H" value="$once{this._videoview.height}"/>
+		<handler name="ondblclick"><![CDATA[
+			this.zoomlevel += 1;
+			if(this.zoomlevel>3) this.zoomlevel = 1;
+if( $debug) Debug.write("_W x _H",_W,_H);
+			var w = this._W * this.zoomlevel;
+			var h = this._H * this.zoomlevel;
+			this._videoview.setAttribute('width' ,w);
+			this._videoview.setAttribute('height',h);
+			this._videoview.setAttribute('x',1);
+			this._videoview.setAttribute('y',2);
+			//this._videoview.animate('x',w/2-this.getMouse('x'),500,true);
+			//this._videoview.animate('y',h/2-this.getMouse('y'),500,true);
+			if( $debug) Debug.write("w h",w,h);
+			if( $debug) Debug.write("zoomlevel:",this.zoomlevel);
+	    ]]></handler>
+		<handler name="onmousedown">
+			if( $debug) Debug.write("zoomlevel:",this.zoomlevel);
+			if(this.zoomlevel!=1)this._videoview.dragger.apply();
+		</handler>
+		<handler name="onmouseup">
+			this._videoview.dragger.remove();
+		</handler>
+		<handler name="onx" reference="this._videoview">
+			Debug.write(this._videoview.x,this._videoview.y);
+		</handler>
+
 		<view name="r" resource="chatbgitem" x="1" y="2" stretches="both" width="128" height="96" />
+
 		<handler name="oninit">
 			this.r.setResourceNumber(5);
 		</handler>
 		
-		<!-- This is the videoview -->
-		<devvideoview name="_videoview" visible="false" x="1" y="2" width="128" height="96" >		
+		<!-- This is the videoview 128x96-->
+		<devvideoview name="_videoview" visible="false" x="1" y="2" width="128" height="96" >
+		<dragstate name="dragger" apply="false"
+				drag_min_x="${parent._W-this.width}"
+				drag_max_x="1"
+				drag_min_y="${parent._H-this.height}"
+				drag_max_y="2"/>
 	        <simplenetstream name="v_output" buffertime="0">
 				<handler name="onstatus" args="info">
 					Debug.write("simplenetstream onstatus",info.code, info);

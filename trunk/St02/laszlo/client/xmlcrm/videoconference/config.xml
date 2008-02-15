@@ -8,7 +8,7 @@ inno02.fh-pforzheim.de macbook 192.168.2.103
     domain-name it has been loading from  
     inno02.fh-pforzheim.de  
     -->
-<rtmphostlocal>192.168.254.180</rtmphostlocal>
+<rtmphostlocal>127.0.0.1</rtmphostlocal>
 
 <!--  
 Port to use for the Server
@@ -36,7 +36,8 @@ of the red5-servlet
 	These colors are the main colors and style the hole application
  -->
 <basebgcolorizer>0xB0C4DE</basebgcolorizer>
-<baseMousecolorizer>0xC4D5E6</baseMousecolorizer>
+<!--<baseMousecolorizer>0xC4D5E6</baseMousecolorizer>-->
+<baseMousecolorizer>0x4e6883</baseMousecolorizer>
 <baseMouseOvercolorizer>0xC4D5E6</baseMouseOvercolorizer>
 	
 <!-- 
@@ -48,7 +49,7 @@ of the red5-servlet
     Name of the Application
     this is the Top-Icon Name of the Application
  -->    
-<currentappname>OpenMeetings</currentappname>    
+<currentappname>IBM</currentappname>    
     
 <!-- 
     URL to the Home of the Application
