@@ -1,0 +1,10 @@
+<library>
+
+    <include href="devmediadevice.lzx" />
+	<include href="devmicrophone.lzx" />
+	<include href="devcamera.lzx" />
+	<include href="simplenetstream.lzx" />
+	
+
+
+</library>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<library>
+
+<resource name="date_icon_rsc" src="resources/date.png" />
+
+<class name="datefield" extends="view">
+
+	<view x="$once{ this.parent.width-19 }" y="1" resource="explorer_button_rsc"
+	onmouseover="this.setResourceNumber(2)" onmouseout="this.setResourceNumber(1)"
+	onmousedown="this.setResourceNumber(3)" >
+		<handler name="onmouseup">
+			this.setResourceNumber(1);
+			this.parent.parent.destroy();
+		</handler>									
+	</view>
+
+	<method name="setText" args="txt">
+		this.setAttribute('text',txt);
+	</method>
+	<method name="getText" >
+		return this._text.getText();
+	</method>	
+    
+    <method name="setDate" args="d">
+        
+    </method>
+    <method name="getDate">
+        var tString = this._text.getText();
+        var y = tString.substring(6,10);
+        var m = Number(tString.substring(3,5))-1;
+        var d = tString.substring(0,2);     
+        var date = new Date(Date.UTC(y,m,d));
+        Debug.write(date); 
+        return date;
+    </method>
+    
+	<attribute name="text" value="" type="string" />
+
+	<customedittext name="_text" width="$once{ parent.width-20 }" align="left" text="${ parent.text }" />
+
+	<view resource="date_icon_rsc" align="right" onmouseover="" onmouseout="">
+		<handler name="onclick">
+			new calendarwindow(this.parent.parent,{fieldRef:this.parent._text,x:this.parent.x+(this.parent.width-200),y:this.parent.y});
+		</handler>
+		<labeltooltip labelid="162" />
+	</view>
+
+</class>
+
+</library>
