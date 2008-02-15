@@ -1,0 +1,1 @@
+%4convert -thumbnail %3 %1 %2

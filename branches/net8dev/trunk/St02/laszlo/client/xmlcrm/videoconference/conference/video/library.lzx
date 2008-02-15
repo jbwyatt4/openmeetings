@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<library>
+
+	<resource name="chatbgitem" src="resources/bgitemvideochat.swf" />
+	
+	<resource name="showusercontextclose" src="resources/error.png" />
+	<resource name="showusercontext" src="resources/1downarrow.png" />
+	
+	<resource name="speaking" src="resources/speaking.png" />
+	<resource name="mute_btn_rsc">
+		<frame src="resources/icon_mute.png" />
+		<frame src="resources/icon_mute_red.png" />
+	</resource>
+   
+    <include href="videouserProfilePic.lzx" />
+    <include href="videoinfostuff.lzx" />
+    <include href="editrecordstream.lzx" />
+    <include href="basevideoobject.lzx" />
+    <include href="videoobjectbroadcast.lzx" />
+    <include href="videoobjectplayBroadcast.lzx" />
+    <include href="videocontainer.lzx" />
+    
+</library>
