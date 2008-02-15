@@ -1,0 +1,28 @@
+<html xmlns:d="docbuild">
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="SHORTCUT ICON" href="http://www.openlaszlo.org/favicon.ico">
+    <title>LZX Doc Class List</title>
+    <style type="text/css">
+      img {border: 0}
+      body {margin: 0}
+    </style>
+  </head>
+  <body>
+    <dl>
+      <% @lzx_classes.each do |lzxclassfile| %>
+      <% lzxclass = lzxclassfile[:class] %>
+      <% classpath = File.dirname(lzxclassfile[:path]) %>
+      <dt><a href="<%= classpath %>/<%= lzxclass.classname %>.html"><%= lzxclass.classname %></a> - <%= classpath %></dt>
+      <dd>
+        <p><%= lzxclass.classcomment %></p>
+        <% unless lzxclass.doc.nil? %>
+        <p><%= lzxclass.doc %></p>
+        <% end %>
+      </dd>
+      <% end %>
+      </dl>
+    </div>
+  </body>
+</html>
