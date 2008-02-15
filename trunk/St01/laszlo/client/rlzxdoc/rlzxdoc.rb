@@ -95,5 +95,9 @@ class_erb = File.open(@rlzxdoc_root + '/class.rhtml') {|f| ERB.new(f.read)}
 nav_erb = File.open(@rlzxdoc_root + '/nav.rhtml') {|f| ERB.new(f.read)}
 File.open("#{expand_outputdir}/nav.html", "w"){ |file| file.puts nav_erb.result(binding)}
 
+#create class list html
+class_list_erb = File.open(@rlzxdoc_root + '/class_list.rhtml') { |f| ERB.new(f.read)}
+File.open("#{expand_outputdir}/classlist.html", "w"){ |file| file.puts class_list_erb.result(binding)}
+
 #clean up empty dirs
 #Dir::glob("**/").each { |dir| Dir.rmdir(dir) if Dir.entries(dir).join == "..."}
