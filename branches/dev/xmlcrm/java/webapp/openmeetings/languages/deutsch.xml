@@ -1305,4 +1305,67 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   <string id="431" name="paint_tool_letter">
     <value>change Fontsize</value>
   </string>	
+  <string id="432" name="recordingslist_delete">
+    <value>Delete Recording</value>
+  </string>
+  <string id="433" name="recordingslist_recordedByGuest">
+    <value>Guest</value>
+  </string>
+  <string id="434" name="recordingslist_recordedby">
+    <value>By:</value>
+  </string>
+  <string id="435" name="recordings_table_head_name">
+    <value>Name</value>
+  </string>
+  <string id="436" name="recordings_table_head_room">
+    <value>Room</value>
+  </string>
+  <string id="437" name="recordings_table_head_date">
+    <value>Date</value>
+  </string>
+  <string id="438" name="record_start_cancel">
+    <value>cancel</value>
+  </string>
+  <string id="439" name="record_start_start">
+    <value>start</value>
+  </string>
+  <string id="440" name="filesbrowser_table_head_name">
+    <value>Name</value>
+  </string>
+  <string id="441" name="filesbrowser_table_head_date">
+    <value>Date</value>
+  </string>
+  <string id="442" name="chat_clear_history">
+    <value>Delete Server-Chatlog</value>
+  </string>
+  <string id="443" name="chat_overall_header">
+    <value>Chat</value>
+  </string>
+  <string id="444" name="chat_send_btn">
+    <value>send message</value>
+  </string>
+  <string id="445" name="chat_emot_btn">
+    <value>Emoticons</value>
+  </string>
+  <string id="446" name="chat_emot_win">
+    <value>Emoticons</value>
+  </string>
+  <string id="447" name="choose_video_settings">
+    <value>Choose Published Devices</value>
+  </string>
+  <string id="448" name="choose_video_settings_combo">
+    <value>Audio and Video</value>
+  </string>
+  <string id="449" name="choose_video_settings_combo">
+    <value>Audio only</value>
+  </string>
+  <string id="450" name="choose_video_settings_combo">
+    <value>Video only</value>
+  </string>
+  <string id="451" name="choose_video_settings_combo">
+    <value>no Audio/Video (static Image)</value>
+  </string>
+  <string id="452" name="choose_video_settings_info_text">
+    <value>No Audio/Video from your PC will be published, instead of that a picture from your profile will be shown. Choose these settings if you have problems with your bandwidth or a very slow Internet connection.</value>
+  </string>	
 </language>
