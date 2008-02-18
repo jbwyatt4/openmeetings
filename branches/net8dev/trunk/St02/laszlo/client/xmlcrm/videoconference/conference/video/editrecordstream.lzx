@@ -153,15 +153,21 @@
         ]]>
     </method>    
 
-    <labeltext labelid="447" fontsize="12" x="10" y="20" />
+<!-- 2008.2.19 IBMデモ用にコメントアウト -->
+<!--    <labeltext labelid="447" fontsize="12" x="10" y="20" />-->
     
     <combobox fontsize="12" name="availibleSettings" x="10" y="40" width="280" editable="false">
         <handler name="oninit">
             <![CDATA[
-				this.addItem(canvas.getLabelName(448),"av");
-				this.addItem(canvas.getLabelName(449),"a");
-				this.addItem(canvas.getLabelName(450),"v");
-				this.addItem(canvas.getLabelName(451),"n");
+				this.addItem("音声/映像","av");
+				this.addItem("音声のみ","a");
+				this.addItem("映像のみ","v");
+				this.addItem("音声映像なし","n");
+// 2008.2.19 IBMデモ用にコメントアウト
+//				this.addItem(canvas.getLabelName(448),"av");
+//				this.addItem(canvas.getLabelName(449),"a");
+//				this.addItem(canvas.getLabelName(450),"v");
+//				this.addItem(canvas.getLabelName(451),"n");
             
 				var r = "av";
 
@@ -209,7 +215,6 @@
         	]]>
         </handler>
     </combobox>    
-     
     <labeltext name="availibleCamsLabel" labelid="52" fontsize="12" x="10" y="80" />
 
     <combobox fontsize="12" name="availibleCams" x="10" y="100" width="280" editable="false">
@@ -264,9 +269,11 @@
         </handler>
     </combobox>
     
+<!-- 2008.2.19 IBMデモ用にコメントアウト -->
+<!-- 
     <labeltext name="infoTextNoAV" labelid="452" multiline="true" width="280" 
     		   fontsize="12" x="10" y="80" visibility="hidden" />
-    
+-->
     <!-- Remember Me -->    
     <checkbox name="holddatainSO" text="Do not ask again" x="10" y="210">
         <handler name="oninit">

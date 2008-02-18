@@ -37,9 +37,6 @@ if( $debug) Debug.write("_W x _H",_W,_H);
 		<handler name="onmouseup">
 			this._videoview.dragger.remove();
 		</handler>
-		<handler name="onx" reference="this._videoview">
-			Debug.write(this._videoview.x,this._videoview.y);
-		</handler>
 
 		<view name="r" resource="chatbgitem" x="1" y="2" stretches="both" width="128" height="96" />
 
@@ -49,7 +46,7 @@ if( $debug) Debug.write("_W x _H",_W,_H);
 		
 		<!-- This is the videoview 128x96-->
 		<devvideoview name="_videoview" visible="false" x="1" y="2" width="128" height="96" >
-		<dragstate name="dragger" apply="false"
+			<dragstate name="dragger" apply="false"
 				drag_min_x="${parent._W-this.width}"
 				drag_max_x="1"
 				drag_min_y="${parent._H-this.height}"
