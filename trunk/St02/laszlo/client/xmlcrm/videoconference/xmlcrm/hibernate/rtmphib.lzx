@@ -25,7 +25,7 @@
      <attribute name="userobject" value="null" />
      
      <!-- default will be loaded on startup -->
-     <attribute name="userlang" value="1" type="number" />
+     <attribute name="userlang" value="13" type="number" />
      
      <!-- The default Language will be loaded on init  -->
      <attribute name="initlanguageLoaded" value="false" type="boolean" />
