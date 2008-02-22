@@ -24,7 +24,7 @@
 	<method name="doCall">
         if (this.showLoading) canvas._loadingAll.setAttribute('visible',true);
 		Debug.write("doCall: ",this.funcname);
-		this.call();
+		this.callRPC();
 	</method>
 	
 	<handler name="sendCallBack" />

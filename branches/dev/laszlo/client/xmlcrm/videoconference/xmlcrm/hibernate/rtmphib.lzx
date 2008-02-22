@@ -67,7 +67,7 @@
             loadContentByTempActionForNavi();
         } else {
 			canvas.thishib.loaderVar.setProgress();
-            this.getsessiondata.call();    
+            this.getsessiondata.callRPC();    
         }    
     </handler>
     <handler name="onerror" >

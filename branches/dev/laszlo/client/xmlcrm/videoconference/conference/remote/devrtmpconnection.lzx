@@ -127,7 +127,7 @@
         ]]>
     </method>		
     
-    <method name="call" args="func, obj, params">
+    <method name="callRPC" args="func, obj, params">
     	if (this.debug) Debug.write("*** call: func, obj, params",func,obj, typeof (params) ,params.length);
     	if (params.length != 0){
 	    	//does this really work?
@@ -190,7 +190,7 @@
         <handler name="onerror"/>
 
         <!--- Call the remote method, passing the array of params. -->
-        <method name="call" args="params"><![CDATA[
+        <method name="callRPC" args="params"><![CDATA[
             if (this.funcname == null) {
                 //Debug.write("No funcname given");
                 if (this.onerror) this.onerror.sendEvent("No funcname given");
@@ -234,7 +234,7 @@
         	//Debug.write('call', this, rtmpObject, rtmpObject.status);
         	//Debug.write('call', this.remotecontext);
             if (rtmpObject.debug) Debug.write('call', this, rtmpObject, rtmpObject.status);
-            rtmpObject.call(this.funcname, this, params);
+            rtmpObject.callRPC(this.funcname, this, params);
 
           ]]>
         </method>
