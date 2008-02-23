@@ -32,15 +32,21 @@
     
 	<handler name="onwidth">
         <![CDATA[
-        if(this.name.indexOf('line')>=0 || this.name.indexOf('uline')>=0 || (this.name.indexOf('drawarrow')>=0 && this.isinited) || this.name.indexOf('paint')>=0 || this.name.indexOf('rectangle')>=0 || this.name.indexOf('ellipse')>=0 )
-            this.getMCRef()._xscale = (this.width/this.initwidth)*100;
+        if(this.name.indexOf('line')>=0 || this.name.indexOf('uline')>=0 || (this.name.indexOf('drawarrow')>=0 && this.isinited) || this.name.indexOf('paint')>=0 || this.name.indexOf('rectangle')>=0 || this.name.indexOf('ellipse')>=0 ) {
+        	if (this.isinited) {
+        		this.getMCRef()._xscale = (this.width/this.initwidth)*100;
+        	}
+        }
         ]]>
     </handler>
     
     <handler name="onheight">
     	<![CDATA[
-        if(this.name.indexOf('line')>=0 || this.name.indexOf('uline')>=0 || (this.name.indexOf('drawarrow')>=0 && this.isinited) || this.name.indexOf('paint')>=0  || this.name.indexOf('rectangle')>=0 || this.name.indexOf('ellipse')>=0 )
-            this.getMCRef()._yscale = (this.height/this.initheight)*100;     
+        if(this.name.indexOf('line')>=0 || this.name.indexOf('uline')>=0 || (this.name.indexOf('drawarrow')>=0 && this.isinited) || this.name.indexOf('paint')>=0  || this.name.indexOf('rectangle')>=0 || this.name.indexOf('ellipse')>=0 ) {
+        	if (this.isinited) {
+        		this.getMCRef()._yscale = (this.height/this.initheight)*100;  
+        	}
+        }
         ]]>   
     </handler>
     <!-- 
