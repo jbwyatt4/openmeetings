@@ -22,7 +22,7 @@ def convert_class_from_lzx(lzxfile_path)
   after_file_path = lzxfile_path
   @convert_classes.each_pair do |before, after|
     if lzxfile_path.include?(before)
-      after_file_path.gsub!(Regexp.new(before), after) if lzxfile_path.include?(before)
+      after_file_path.gsub!(Regexp.new(before + "\.lzx"), after + ".lzx") if lzxfile_path.include?(before)
     end
   end
 
@@ -33,7 +33,9 @@ def convert_class_from_lzx(lzxfile_path)
   original_file.each do |line|
     @convert_classes.each_pair do |before, after|
       if line.include?(before)
-        line.gsub!(Regexp.new(before), after) if line.include?(before)
+        #line.gsub!(Regexp.new("(#{before})( |>|/)"), "#{after}\2") #if line.index(/( src=)/).nil?
+        line.gsub!(Regexp.new("(<|</|name=\"|extends=\")#{before}(\W)"), '\1' + after + '\2')
+        line.gsub!(Regexp.new("(.*)#{before}\.lzx"), '\1' + after + '.lzx') if line.include?("href=")
       end
     end
     converted_file.puts(line)
@@ -63,11 +65,9 @@ end
 FileUtils.rm_r(@expand_outputdir) if File.exist?(@expand_outputdir)
 Dir.mkdir(@expand_outputdir)
 
-Dir::chdir(@basedir)
-
 #get list from csv
 @convert_classes = Hash.new
-CSV.open(@csvfile, 'r') do |row|
+CSV.open(Dir::pwd + "/" + @csvfile, 'r') do |row|
   @convert_classes[row[0]] = row[1]
 end
 
