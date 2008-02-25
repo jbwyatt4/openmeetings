@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<library>
+    
+<!-- #######################
+	Class editrecordstream
+	
+	Description:
+	This Class shows a window where you can alter you Video-/Microphone- Input-Resources
+	and start to stream. The app could also use the default values for Cam/Mic but
+	must users don't know how to alter this (wether in System-Control-Panel or by Right Clicking
+	on the Flash-Screen and *>Prefernces>Camera* )
+	So I think it is better if Users are forced to choose something from this list
+	
+ -->
+ 
+<class name="editrecordstream"  extends="window" title="Video-Audio-Device"
+	width="340" height="250" x="14" >
+
+    <method name="doninitalize" args="valCam,valMic">
+		
+		var cam = canvas._videoview._videoview.cameraRef;
+		var mic = canvas._videoview._videoview.microphoneRef;
+    
+		//set device-index
+        cam.setAttribute('deviceindex',valCam);
+        mic.setAttribute('deviceindex',valMic);	
+		
+		//do Cam and Microphone Setup
+		//camera.setMode(width, height, fps[, favorsize])
+		cam.setMode(canvas._videoview._videoview.width,canvas._videoview._videoview.height,30);
+		//camera.setQuality(bandwidth, picturequality)
+		cam.setQuality(0,0.7);
+		//Microphone.set
+		mic.setRate(44);
+		//Microphone setUseEchoSupression(bool)
+	    mic.setUseEchoSupression(true);
+		
+		//start audio and video
+	    mic.setAttribute('capturing',true);
+        cam.setAttribute('show',true);
+
+		//start broadcast
+		canvas._videoview._videoview.v_output.broadcast(canvas.streamname,cam,mic);
+
+        this.close();
+    </method>    
+     
+    <text text="Cam:" fontsize="12" x="10" y="20" />
+
+    <combobox fontsize="12" id="availibleCams" x="10" y="20" width="280" editable="false">
+        <handler name="oninit">
+            <![CDATA[
+                //Get all availible Cam's
+                var tw = canvas._videoview._videoview.cameraRef.getCameraNames();
+                var r = "";
+                for (var eg=0;eg<tw.length;eg++){
+                    this.addItem(tw[eg],eg);
+                    r=eg;
+                }
+                this.selectItem(String(r));    
+            ]]>
+        </handler>
+    </combobox>
+    
+    <text text="Mic:" fontsize="12" x="10" y="50" />
+
+    <combobox fontsize="12" id="availibleMics"  x="10" y="50" width="280" editable="false">
+        <handler name="oninit">
+            <![CDATA[
+                //Get all availible Mic's
+                var tw = Microphone.names;
+                var r = "";
+                for (var eg=0;eg<tw.length;eg++){
+                    r=eg;
+                    this.addItem(tw[eg],eg);
+                }
+                this.selectItem(String(r));  
+            ]]>
+        </handler>
+    </combobox>
+    
+    <button fontsize="12" text="Choose devices" x="190" y="100" width="100">
+        <handler name="onclick">
+            this.parent.doninitalize(availibleCams.getValue(),availibleMics.getValue());
+        </handler>
+    </button>
+    <animator attribute="y" to="20" duration="1000" start="true"/>
+</class>
+    
+</library>

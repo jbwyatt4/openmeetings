@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<library>
+
+
+<class name="backup" extends="basecontentview">
+	
+	<labeltext labelid="380" y="2" x="2" fontstyle="bold" />  
+	
+    <simplelabelbutton labelid="382" width="160" x="2" y="32">
+    	<handler name="onclick">
+    		<![CDATA[
+	    		var exporturl = 'http://'+canvas.rtmphostlocal+':'+canvas.red5httpport
+	    				+'/'+canvas.webAppRootKey+'/Export?organisation='+0
+	    				+'&moduleName=users'
+	    				+'&sid='+canvas.sessionId;
+	    		Debug.write("exporturl "+exporturl);
+	            LzBrowser.loadURL(exporturl,"_parent");
+            ]]>
+    	</handler>
+    </simplelabelbutton>   
+    
+    <labeltext labelid="381" y="32" x="200"/>  
+	
+	<labeltext labelid="383" y="62" x="2"/>  
+	
+    <combobox name="organistations" width="170" y="62" x="120" editable="false" >
+    	<handler name="oninit">
+    		this.getAllOrganisations.doCall();
+    	</handler>
+		<netremotecallhib name="getAllOrganisations" funcname="organisationservice.getAllOrganisations" 
+						  remotecontext="$once{ canvas.thishib }" >      
+			<netparam><method name="getValue"> return canvas.sessionId; </method></netparam>
+	    	<handler name="ondata" args="value">
+	    		<![CDATA[
+		    		Debug.write("getAllOrganisations ",value);
+		    		for (var i=0;i<value.length;i++) {
+		    			this.parent.addItem(value[i].name,value[i].organisation_id);
+		    		}
+		    		this.parent.selectItem(String(value[0].organisation_id));
+	    		]]>
+	    	</handler>
+	    </netremotecallhib>	                
+    </combobox>
+    
+    <simplelabelbutton labelid="384" x="300" y="62">
+    	<handler name="onclick">
+    		<![CDATA[
+	    		var exporturl = 'http://'+canvas.rtmphostlocal+':'+canvas.red5httpport
+	    				+'/'+canvas.webAppRootKey+'/Export?organisation='+parent.organistations.getValue()
+	    				+'&moduleName=userorganisations'
+	    				+'&sid='+canvas.sessionId;
+	    		Debug.write("exporturl "+exporturl);
+	            LzBrowser.loadURL(exporturl,"_parent");
+            ]]>
+    	</handler>
+    </simplelabelbutton>   
+	
+	<labeltext labelid="385" y="92" x="2" fontstyle="bold" />  
+	
+    <simplelabelbutton labelid="386" x="2" y="122">
+	    <handler name="onclick">
+	        new importwindow(canvas.main_content._content.inner,{x:60,y:60,uploadmodule:'users'});
+	    </handler>
+    </simplelabelbutton> 
+    
+</class>
+
+</library>

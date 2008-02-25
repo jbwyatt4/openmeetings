@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<library>
+
+<!-- #################
+	Class videocontainer
+ -->
+ 
+<class name="videocontaineraudience" extends="view" >
+	
+	<!-- 
+		Attribute stores all Initial Streams
+	 -->
+	<attribute name="streams" value="null" />
+
+	<attribute name="allUsers" value="null" />
+	
+	<attribute name="currentuserObject" value="null" />
+	
+	<handler name="oninit">
+		canvas.thishib.modus = "audience";
+		canvas._videocontainer=this;
+		this.allUsers = new Array();
+		this.streams = new Array();
+		this.initializeStreams();
+	</handler>
+	
+	<method name="addUser" args="objectR">
+		this.allUsers.push(objectR);
+	</method>
+	
+	<method name="initializeStreams">
+		//Get teachers Streams
+		this.currentuserObject = new Array();
+		this.currentuserObject.push(canvas.currentuser);
+		this.currentuserObject.push(canvas.user_id);
+		this.currentuserObject.push(canvas.firstName);
+		this.currentuserObject.push(canvas.lastName);
+		this.currentuserObject.push(canvas.mail);
+		this.currentuserObject.push(canvas.lastLogin);
+		this.currentuserObject.push(canvas.official_code);
+		this.currentuserObject.push(canvas.picture_uri);
+		this.currentuserObject.push(canvas.language);
+		
+		//Debug.write("this.currentuserObject: ",this.currentuserObject);
+		this.setRoomValues.doCall();
+	</method>  
+	
+	<!-- invoked if another client logs into the room 
+	after choosing devices -->     
+    <method name="setAVSettingsToClient" args="userposition,rcl">
+    	Debug.write("addNoAVClient ",userposition,rcl);
+		if (rcl.avsettings=="n"){
+			this.subviews[userposition].setVideouserProfilePic(rcl);
+		} else if (rcl.avsettings=="a"){
+			this.subviews[userposition].setVideouserProfilePic(rcl);
+		} else {
+			this.subviews[userposition].deleteVideoConfProfilePic();
+		}
+    	this.subviews[userposition].updateAVSettingsSymbol(rcl);
+    </method>    	
+
+  	<netremotecallhib name="setRoomValues" funcname="setRoomValues" remotecontext="$once{ canvas.thishib }" >   
+    	<netparam><method name="getValue">return hib.connectedroom;</method></netparam>	 
+    	<netparam><method name="getValue">return hib.currentroomid;</method></netparam>
+    	<netparam><method name="getValue">return hib.conferencedomain;</method></netparam>  	
+		<handler name="ondata" args="value">
+			//The onResult-Handler will be called be the rtmpconnection
+			Debug.write("setUserroom: ",value,hib.connectedroom);
+            Debug.write("+++++++++++++++++ getClientListScope : ",value);
+            for (var i in value){
+            	////Debug.write("getClientListScope value: ",value[i]);
+            	if (value[i].username!=null){
+            		this.parent.addItem(value[i].connectedSince,value[i].isMod,value[i].streamid,value[i].username,value[i].userroom,value[i].formatedDate,value[i].userpos,value[i].usercolor,value[i]);
+            	}
+            }
+            canvas.thishib.getCurrentModerator.doCall(); 
+            canvas._mymod.checkForRecording.doCall();
+            canvas._chartcontent.doInit();				
+		</handler>	
+  	</netremotecallhib>		  	
+	  	
+	<method name="addItem" args="connectedSince,isMod,streamid,username,userroom,formatedDate,position,color,object">
+		<![CDATA[	
+			//Debug.write("initializeStreams addItem: ",connectedSince,isMod,streamid,username,userroom,formatedDate);
+			if (streamid!=canvas.streamid && object.isMod){
+	            var myvideocontainer = this.getNewVideoObjectByPos();
+				myvideocontainer.v_output._stream=null;
+		  		myvideocontainer.parent.parent.clientVars = object;
+		  		myvideocontainer.parent.parent.setAttribute('chatpartnername',object.firstname+' '+object.lastname);
+		  		myvideocontainer.parent.parent.setAttribute('uniqueid',streamid);
+		  		myvideocontainer.parent.parent.setAttribute('isremote',true);
+				myvideocontainer.setAttribute('visible',true);
+		  		//myvideocontainer.v_output.play(streamid,-1);
+		  		if (object.avsettings=="n"){
+	    			myvideocontainer.parent.parent.setVideouserProfilePic(object);
+	    		} else if (object.avsettings=="a"){
+	    			myvideocontainer.parent.parent.setVideouserProfilePic(object);
+	    			Debug.warn("start play");
+	    			myvideocontainer.v_output.play(streamid,-1);	
+	    		} else {
+	    			myvideocontainer.v_output.play(streamid,-1);
+	    			Debug.warn("start play");
+	    		}		  		
+		  		return myvideocontainer;
+			} else {
+				return null;
+			}
+		]]>
+	</method>
+	<!-- -1,false -->
+	
+	
+	<method name="addClientItem" args="connectedSince,isMod,streamid,username,userroom,formatedDate,position,color,object">
+		<![CDATA[
+		//Debug.write("initializeStreams addClientItem: ",connectedSince,isMod,streamid,username,userroom,formatedDate);
+		if (streamid!=canvas.streamid){
+            var myvideocontainer = this.getNewVideoObjectByPos();
+            //Debug.write("myvideocontainer: ",myvideocontainer.v_output);
+	  		myvideocontainer.v_output._stream=null;
+	  		myvideocontainer.parent.parent.clientVars = object;
+	  		myvideocontainer.parent.parent.setAttribute('chatpartnername',object.firstname+' '+object.lastname);
+	  		myvideocontainer.parent.parent.setAttribute('uniqueid',streamid);
+	  		myvideocontainer.parent.parent.setAttribute('isremote',true);	
+    		if (object.avsettings=="n" || object.avsettings=="a"){
+    			myvideocontainer.parent.parent.setVideouserProfilePic(value[i]);
+    		}
+    		myvideocontainer.parent.parent.updateAVSettingsSymbol(object);	  		
+		}
+		]]>
+	</method>
+		
+	<method name="startStream" args="searchid,userpos">
+		//Debug.write("startStream: ",searchid,userpos);
+		<![CDATA[
+			//Debug.write("startStream: ",this.subviews[userpos],searchid,userpos);
+			this._video1._chatvideoinner._videoview.setAttribute('visible',true);
+			this._video1._chatvideoinner._videoview.v_output.play(searchid,-1);
+			return this._video1.getVideoReference();
+		]]>
+	</method>
+
+	
+	<!-- 
+		This method returns a free Video-View to show
+		a Stream or yourself, if there is no free view 
+		availible it will return null
+	 -->
+	<method name="getNewVideoObject">
+		<![CDATA[
+        Debug.write("getNewVideoObject");
+		//Get a Free VideoView Slot
+		if (!this._video1.isassigned){
+			//A free Slot has been found
+			//return the Reference to the VideoView it and mark it as used
+			this._video1.setAttribute('isassigned',true);
+			canvas.currentusercolor = this._video1.usercolor;
+			canvas.currentuserpos = this._video1.userposition;
+			this._video1.isremote = false;
+			
+			this._video1._chatvideoinner.setResourceNumber(1);
+			this._video1._chatvideoinner._videoview.setAttribute('visible',true);
+			//Debug.write("canvas.currentusercolor : ",canvas.currentusercolor);
+			canvas.currentuserpos=1;
+			canvas.thishib.setAudienceModus.doCall();
+			//canvas.thishib.testMethod.doCall();
+			return this._video1.getVideoReference();
+		}
+
+		return null;
+		]]>
+	</method>
+	<method name="getNewVideoObjectByPos" >
+		<![CDATA[
+		//Get a Free VideoView Slot by Position
+		//Debug.write("getNewVideoObjectByPos: ");
+		if (!this._video1.isassigned){
+			//A free Slot has been found
+			//return the Reference to the VideoView it and mark it as used
+			this._video1._chatvideoinner.setResourceNumber(1);
+			//this._video1._chatvideoinner._videoview.setAttribute('visible',true);
+			this._video1.setAttribute('isassigned',true);
+			return this._video1.getVideoReference();
+		}
+		return null;
+		]]>
+	</method>
+	
+	<!-- 
+		Remove the current VideoReference, cause the moderator has been changed
+	 -->
+	<method name="clearAllVideoRefernces">
+		//Debug.write("clearAllVideoRefernces");
+	    this._video1._chatvideoinner._videoview.microphoneRef.setAttribute('capturing',false);
+        this._video1._chatvideoinner._videoview.cameraRef.setAttribute('show',false);		
+		this._video1._chatvideoinner._videoview.setAttribute('visible',false);
+		this._video1.setAttribute('isassigned',false);
+		this._video1._chatvideoinner.setResourceNumber(5);
+		this._video1.resetValues();
+	</method>
+	
+	<!-- 
+		Method makes this View free for a new Client
+		by the partnerid
+		Returns the new free VideoView or null if no VideoView can be found with this partnerid
+		@param int partnerid
+	 -->
+	<method name="closeStreamClient" args="searchid,userpos">
+		//Debug.write("closeStreamclient: ",searchid,userpos);
+		<![CDATA[
+
+		//Debug.write("closeStreamClient: ",this._video1,searchid,userpos);
+		if (this._video1.uniqueid == searchid){
+			//VideoView with Partner has been found
+            //remove Stream from view
+            //Debug.write("Found client to closeStream");
+			this._video1._chatvideoinner._videoview.setAttribute('visible',false);
+			return this._video1.getVideoReference();
+		}
+		return null;
+		]]>
+	</method>
+	<method name="disconnectclient" args="searchid,userpos">
+		//Debug.write("disconnectclient: ",searchid,userpos);
+		<![CDATA[
+		//Debug.write("disconnectclient: ",this._video1,searchid,userpos);
+		if (this._video1.uniqueid == searchid){
+			//VideoView with Partner has been found
+            //mark this view as free
+            //Debug.write("Found client to disconnect");
+			this._video1.setAttribute('isassigned',false);
+			this._video1._chatvideoinner.setResourceNumber(5);
+			this._video1._chatvideoinner._videoview.setAttribute('visible',false);
+			this._video1.resetValues();
+			return this._video1.getVideoReference();
+		}
+		return null;
+		]]>
+	</method>	
+
+	<method name="setSpeakingByPos" args="pos,bool">
+		<![CDATA[
+			if (bool){
+				this._video1._loudness.loudness.setAttribute('opacity',1);
+			} else {
+				this._video1._loudness.loudness.setAttribute('opacity',0.2);
+			}
+		]]>
+	</method>	
+	
+	<videoobjectaudience name="_video1" x="0" y="0" />
+
+</class>
+
+</library>

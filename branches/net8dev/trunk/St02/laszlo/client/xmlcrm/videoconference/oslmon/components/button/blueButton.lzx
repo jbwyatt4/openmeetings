@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<library>
+	
+	<resource name="blue_btn_rsc" >
+		<frame src="resources/button_no.png" />
+		<frame src="resources/button_mo.png" />
+		<frame src="resources/button_dn.png" />
+	</resource>
+
+
+<class name="bluebutton" extends="basecomponent" width="200" height="18" bgcolor="0x879CBC" focusable="true">
+	<attribute name="text" value="defaulttext" type="string" />
+	<method name="setText" args="txt">
+		this.setAttribute('text',txt);
+	</method>
+	<view layout="axis:x" name="_bg" x="1.5" y="1.5">
+		<view name="_b2" resource="blue_btn_rsc" stretches="both" width="${ this.parent.parent.width-3 }" height="${ this.parent.parent.height-3 }" />
+	</view>
+	<text name="_text" x="${ this.parent.width/2-this.width/2 }" fontsize="10" fgcolor="0x333333" 
+		y="1" text="${ this.parent.text }" resize="true" />
+	
+	<method event="onmouseover">
+		this._bg._b2.setResourceNumber(2);
+	</method>
+	<method event="onmouseout">
+		this._bg._b2.setResourceNumber(1);
+	</method>
+	<method event="onmousedown">
+		this._bg._b2.setResourceNumber(3);
+	</method>
+	<method event="onmouseup">
+		this._bg._b2.setResourceNumber(1);
+	</method>		
+</class>
+</library>
