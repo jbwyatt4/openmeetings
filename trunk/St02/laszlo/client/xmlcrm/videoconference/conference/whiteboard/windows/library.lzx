@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<library>
-
-	<include href="choosedrawareaobjectwindow.lzx" />
-	<include href="saveaswmlwindow.lzx" />
-	<include href="loadwhiteboardwindow.lzx" />
-	
-
-</library>

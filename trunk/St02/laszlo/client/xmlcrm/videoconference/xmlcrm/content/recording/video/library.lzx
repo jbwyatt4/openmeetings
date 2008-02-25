@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<library>
-
-	<include href="videoobjectplay.lzx" />
-    <include href="videocontainerstream.lzx" />
-    <include href="videoobjectaudienceplay.lzx" />
-    <include href="videoeventcontainerstream.lzx" />   
-    
-</library>
