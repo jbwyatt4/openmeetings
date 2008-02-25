@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<library>
+
+<method name="doActionmenu" args="stringSub">
+    <![CDATA[
+        if (canvas._conferencemenu.visibility == 'visible'){
+            Debug.write("doActionmenu: ",stringSub);
+            if (stringSub=='createPoll') {
+                new createpollwin(canvas.main_content._content.inner);
+            } else if (stringSub=='pollResults') {
+                this.getVotes.doCall();
+            } else if (stringSub=='checkPollVoted') {
+                this.checkHasVoted.doCall();
+            } else if (stringSub=='importFile') {
+                new uploadwindow(canvas.main_content._content.inner,{x:60,uploadmodule:canvas.uploadmoduleimg,isOnlyImage:true});
+            } else if (stringSub=='applyForMod') {
+                new applyformoderation(canvas.main_content._content.inner);
+            } else if (stringSub=='editCamMicSettings') {
+                new changedevice(canvas.main_content._content.inner);
+            } else if (stringSub=='editBoardSettings') {
+                new editwhiteboarddefault(canvas.main_content._content.inner);
+            } else if (stringSub=='quit') {
+                Debug.write(canvas.thishib.modus,canvas.thishib.roomtype);
+                if (canvas.thishib.modus=='audience' && canvas.thishib.roomtype=='public'){
+                    var t = new Array();
+                    t.action = 'publicevents';
+                } else if (canvas.thishib.modus=='audience' && canvas.thishib.roomtype=='private'){
+                    var t = new Array();
+                    t.action = 'privateevents';
+                } else if (canvas.thishib.modus=='conference' && canvas.thishib.roomtype=='public'){
+                    var t = new Array();
+                    t.action = 'publicmeetings';
+                } else if (canvas.thishib.modus=='conference' && canvas.thishib.roomtype=='private'){
+                    var t = new Array();
+                    t.action = 'privatemeetings';
+                }
+                Debug.write(t);
+                loadContent(t);
+            }
+        }
+    ]]>
+</method>    
+
+    <netremotecallhib name="getVotes" funcname="dokeosService.getVotes" remotecontext="$once{ canvas.thishib }" >
+        <handler name="ondata" args="value">
+            <![CDATA[
+                //Debug.write("getVotes : ",value);
+                if (value!=null){
+                    new resultpollwin(canvas.main_content._content.inner,{createdBy:value.createdBy.username,pollDate:value.pollDate,pollQuestion:value.pollQuestion,pollTypeId:value.pollTypeId,roomPollAnswerList:value.roomPollAnswerList,roomPollId:value.roomPollId,roomScopeName:value.roomScopeName});
+                } else {
+                    new messagewin(canvas.main_content._content.inner,{labeliderror:41});
+                }
+            ]]>
+        </handler>   
+    </netremotecallhib>  
+    
+        <netremotecallhib name="checkHasVoted" funcname="dokeosService.checkHasVoted" 
+            remotecontext="$once{ canvas.thishib }" >
+            <handler name="ondata" args="value">
+                <![CDATA[
+                    //Debug.write("checkHasVoted : ",value);
+                    if (value==1){
+                        parent.getPoll.doCall();
+                    } else if (value==-1){
+                        new messagewin(canvas.main_content._content.inner,{labeliderror:31});
+                    } else if (value==-2){
+                        new messagewin(canvas.main_content._content.inner,{labeliderror:41});
+                    }
+                ]]>
+            </handler>   
+        </netremotecallhib> 
+
+        <netremotecallhib name="getPoll" funcname="dokeosService.getPoll"
+            remotecontext="$once{ canvas.thishib }" >
+            <handler name="ondata" args="value">
+                <![CDATA[
+                    //Debug.write("checkHasVoted : ",value);
+                    if (value!=null){
+                        new answerpoll(canvas.main_content._content.inner,{createdBy:value.createdBy.username,pollDate:value.pollDate,pollQuestion:value.pollQuestion,pollTypeId:value.pollTypeId,roomPollAnswerList:value.roomPollAnswerList,roomPollId:value.roomPollId,roomScopeName:value.roomScopeName});
+                    }
+                ]]>
+            </handler>   
+        </netremotecallhib>      
+    
+<command id="cmd_applyforMod" onselect="canvas.doActionmenu('applyForMod')"
+        key="['ALT','Shift','M']"/>
+     
+<command id="cmd_createPoll" onselect="canvas.doActionmenu('createPoll')"
+        key="['ALT','Shift','P']"/> 
+<command id="cmd_pollResults" onselect="canvas.doActionmenu('pollResults')"
+        key="['ALT','Shift','R']"/> 
+<command id="cmd_checkPollVoted" onselect="canvas.doActionmenu('checkPollVoted')"
+        key="['ALT','Shift','V']"/> 
+    
+<command id="cmd_importFile" onselect="canvas.doActionmenu('importFile')"
+        key="['ALT','Shift','I']"/> 
+    
+<command id="cmd_editCamMicSettings" onselect="canvas.doActionmenu('editCamMicSettings')"
+        key="['ALT','Shift','1']"/> 
+<command id="cmd_editBoardSettings" onselect="canvas.doActionmenu('editBoardSettings')"
+        key="['ALT','Shift','2']"/>         
+    
+<command id="cmd_quit" onselect="canvas.doActionmenu('quit')"
+        key="['ALT','Shift','E']"/> 
+    
+<class name="labelmenuitem" extends="menuitem" text="labelmenulabelmenulabelmenu">
+	<attribute name="labelid" type="number" setter="setLabelId(labelid)" />
+	<method name="setLabelId" args="_labelid" >
+		this.labelid = _labelid;
+		this.setAttribute('text',canvas.getLabelName(this.labelid));
+	</method>
+</class>    
+    
+<class name="labelmenu" extends="menu" text="labelmenulabelmenulabelmenu">
+	<attribute name="labelid" type="number" setter="setLabelId(labelid)" />
+	<method name="setLabelId" args="_labelid" >
+		this.labelid = _labelid;
+		this.setAttribute('text',canvas.getLabelName(this.labelid));
+	</method>
+</class>  
+    
+<class name="conferencemenubar" extends="menubar" height="28">
+    <labelmenu labelid="308" width="250">
+        <labelmenuitem labelid="309" command="cmd_quit" />
+    </labelmenu>
+    <labelmenu labelid="301" width="250">
+        <labelmenuitem labelid="302" command="cmd_applyforMod" />
+    </labelmenu>
+    <labelmenu labelid="245" width="250">
+        <labelmenuitem labelid="15" command="cmd_importFile" />
+    </labelmenu>    
+    <labelmenu labelid="305" width="250">
+        <labelmenuitem labelid="306" command="cmd_editCamMicSettings" />
+        <labelmenuitem labelid="307" command="cmd_editBoardSettings" />
+    </labelmenu>    
+    <labelmenu labelid="303" width="250">
+        <labelmenuitem width="250" labelid="24" command="cmd_createPoll" enabled="${ canvas.ismoderator }" />
+        <labelmenuitem width="250" labelid="37" command="cmd_pollResults" enabled="${ canvas.ismoderator }" />
+        <labelmenuitem width="250" labelid="42" command="cmd_checkPollVoted" />
+    </labelmenu>    
+</class>    
+    
+</library>
