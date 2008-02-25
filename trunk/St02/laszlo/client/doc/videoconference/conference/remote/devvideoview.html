@@ -1,0 +1,625 @@
+<html xmlns:exslt="http://exslt.org/common">
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>devvideoview</title>
+    <link href="../../../styles.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <a name="element" shape="rect"></a>
+    <div class="head">
+      <div class="left">
+        <h1>&lt;devvideoview&gt;</h1>
+        <p class="summary">
+        Video view.
+
+        @START_CODE
+            <videoview/>
+        @END_CODE
+    </p>
+        
+        <p class="externaldoc"><doc>
+   	Flash Videoを再生するためのクラスです。再生画面のインスタンス生成を行っています。表示するビデオはURLで指定され、”URL”attributeに外部から設定されます。
+   </doc></p>
+        
+      </div>
+      <div class="right">
+        <div>
+          
+        </div>
+      </div>
+    </div>
+    <div class="wrapper-description">
+    </div>
+    
+    <a name="attributes" shape="rect"></a>
+    <table summary="" width="100%" border="0" cellspacing="2" cellpadding="2">
+      <tr bgcolor="#5B607C">
+        <td colspan="6" rowspan="1"><span class="docTableTitle"><a href="info-attributes.html" shape="rect">Attributes</a></span></td>
+      </tr>
+      <tr bgcolor="#e6e6e6">
+        <td rowspan="1" colspan="1"><span class="docTableColHeading"><a href="info-attribinfo.html#name" shape="rect">Name</a></span></td>
+        <td rowspan="1" colspan="1"><span class="docTableColHeading"><a href="info-attribinfo.html#usage" shape="rect">Usage</a></span></td>
+        <td rowspan="1" colspan="1"><span class="docTableColHeading"><a href="info-attribinfo.html#typetag" shape="rect">Type (Tag)</a></span></td>
+        <td rowspan="1" colspan="1"><span class="docTableColHeading"><a href="info-attribinfo.html#typejs" shape="rect">Type (JS)</a></span></td>
+        <td rowspan="1" colspan="1"><span class="docTableColHeading"><a href="info-attribinfo.html#typejs" shape="rect">Default</a></span></td>
+        <td rowspan="1" colspan="1"><span class="docTableColHeading"><a href="info-attribinfo.html#category" shape="rect">Category</a></span></td>
+      </tr>
+      
+      
+      <tr>
+        <td rowspan="1" colspan="1"><span class="docParam"><a name="attr-name" shape="rect"></a>url</span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"></span></td>
+        <td rowspan="1" colspan="1"><span class="smaller">string</span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"></span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"></span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"><a href="info-attributes.html#final" shape="rect"></a></span></td>
+      </tr>
+      <tr>
+        <td rowspan="1" colspan="1">&nbsp;</td>
+        <td colspan="5" rowspan="1"><span class="smaller">
+            <p> The url of the mediastream, maybe a relative URL, 
+              for example: "http://localhost/myvideo.flv", or simply "myvideo.flv".
+              When type="rtmp", the url is always relative the the rtmpconnection.
+              (Use only when you are not explicitly declaring the mediastream.) </p>
+        </span></td>
+      </tr>
+      <tr>
+        <td colspan="6" rowspan="1">
+          <hr size="1" bgcolor="#e5e5e5">
+        </td>
+      </tr>
+      
+      
+      
+      <tr>
+        <td rowspan="1" colspan="1"><span class="docParam"><a name="attr-name" shape="rect"></a>type</span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"></span></td>
+        <td rowspan="1" colspan="1"><span class="smaller">string</span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"></span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"></span>http</td>
+        <td rowspan="1" colspan="1"><span class="smaller"><a href="info-attributes.html#final" shape="rect"></a></span></td>
+      </tr>
+      <tr>
+        <td rowspan="1" colspan="1">&nbsp;</td>
+        <td colspan="5" rowspan="1"><span class="smaller">
+            <p> Protocol "rtmp" or "http". Default: http. </p>
+        </span></td>
+      </tr>
+      <tr>
+        <td colspan="6" rowspan="1">
+          <hr size="1" bgcolor="#e5e5e5">
+        </td>
+      </tr>
+      
+      
+      
+      <tr>
+        <td rowspan="1" colspan="1"><span class="docParam"><a name="attr-name" shape="rect"></a>autoplay</span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"></span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"></span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"></span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"></span>false</td>
+        <td rowspan="1" colspan="1"><span class="smaller"><a href="info-attributes.html#final" shape="rect"></a></span></td>
+      </tr>
+      <tr>
+        <td rowspan="1" colspan="1">&nbsp;</td>
+        <td colspan="5" rowspan="1"><span class="smaller">
+            <p> If true, video will start playing as soon as url is set.
+              Default: false. </p>
+        </span></td>
+      </tr>
+      <tr>
+        <td colspan="6" rowspan="1">
+          <hr size="1" bgcolor="#e5e5e5">
+        </td>
+      </tr>
+      
+      
+      
+      <tr>
+        <td rowspan="1" colspan="1"><span class="docParam"><a name="attr-name" shape="rect"></a>debug</span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"></span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"></span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"></span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"></span>false</td>
+        <td rowspan="1" colspan="1"><span class="smaller"><a href="info-attributes.html#final" shape="rect"></a></span></td>
+      </tr>
+      <tr>
+        <td rowspan="1" colspan="1">&nbsp;</td>
+        <td colspan="5" rowspan="1"><span class="smaller">
+            <p> If true, Debug.write extra stuff (this may go away). </p>
+        </span></td>
+      </tr>
+      <tr>
+        <td colspan="6" rowspan="1">
+          <hr size="1" bgcolor="#e5e5e5">
+        </td>
+      </tr>
+      
+      
+      
+      
+      
+      <tr>
+        <td rowspan="1" colspan="1"><span class="docParam"><a name="attr-name" shape="rect"></a>cam</span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"></span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"></span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"></span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"></span>null</td>
+        <td rowspan="1" colspan="1"><span class="smaller"><a href="info-attributes.html#final" shape="rect"></a></span></td>
+      </tr>
+      <tr>
+        <td rowspan="1" colspan="1">&nbsp;</td>
+        <td colspan="5" rowspan="1"><span class="smaller">
+            <p> The camera object. 
+              @keywords readonly </p>
+        </span></td>
+      </tr>
+      <tr>
+        <td colspan="6" rowspan="1">
+          <hr size="1" bgcolor="#e5e5e5">
+        </td>
+      </tr>
+      
+      
+      
+      <tr>
+        <td rowspan="1" colspan="1"><span class="docParam"><a name="attr-name" shape="rect"></a>mic</span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"></span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"></span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"></span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"></span>null</td>
+        <td rowspan="1" colspan="1"><span class="smaller"><a href="info-attributes.html#final" shape="rect"></a></span></td>
+      </tr>
+      <tr>
+        <td rowspan="1" colspan="1">&nbsp;</td>
+        <td colspan="5" rowspan="1"><span class="smaller">
+            <p> The microphone object. 
+              @keywords readonly </p>
+        </span></td>
+      </tr>
+      <tr>
+        <td colspan="6" rowspan="1">
+          <hr size="1" bgcolor="#e5e5e5">
+        </td>
+      </tr>
+      
+      
+      
+      <tr>
+        <td rowspan="1" colspan="1"><span class="docParam"><a name="attr-name" shape="rect"></a>stream</span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"></span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"></span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"></span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"></span>null</td>
+        <td rowspan="1" colspan="1"><span class="smaller"><a href="info-attributes.html#final" shape="rect"></a></span></td>
+      </tr>
+      <tr>
+        <td rowspan="1" colspan="1">&nbsp;</td>
+        <td colspan="5" rowspan="1"><span class="smaller">
+            <p> The mediastream object. </p>
+        </span></td>
+      </tr>
+      <tr>
+        <td colspan="6" rowspan="1">
+          <hr size="1" bgcolor="#e5e5e5">
+        </td>
+      </tr>
+      
+      
+      
+      <tr>
+        <td rowspan="1" colspan="1"><span class="docParam"><a name="attr-name" shape="rect"></a>playvolume</span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"></span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"></span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"></span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"></span>1.0</td>
+        <td rowspan="1" colspan="1"><span class="smaller"><a href="info-attributes.html#final" shape="rect"></a></span></td>
+      </tr>
+      <tr>
+        <td rowspan="1" colspan="1">&nbsp;</td>
+        <td colspan="5" rowspan="1"><span class="smaller">
+            <p> The volume for video playback, a float from 0 to 1. Default 1. </p>
+        </span></td>
+      </tr>
+      <tr>
+        <td colspan="6" rowspan="1">
+          <hr size="1" bgcolor="#e5e5e5">
+        </td>
+      </tr>
+      
+      
+      
+      
+      
+      
+      
+      
+    </table>
+    <br clear="none">
+    
+    
+    
+    <a name="methods" shape="rect"></a>
+    <h3>Methods</h3>
+    
+    <a name="init" shape="rect"></a>
+    <table summary="" width="100%" border="0" cellspacing="2" cellpadding="2">
+      <tr bgcolor="#e5e5e5">
+        <td colspan="3" rowspan="1"><span class="docTableTitleGray">init</span></td>
+      </tr>
+      <tr>
+        <td colspan="3" rowspan="1">
+          <span class="docPrototype"><span class="classname">devvideoview</span>.<span class="methodname">init</span></span>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="3" rowspan="1">
+          <p class="smaller"> Initialize the videoview. 
+              @keywords private </p>
+        </td>
+      </tr>
+      
+      <tr>
+        <td colspan="3" rowspan="1">
+          <hr size="1" bgcolor="#e5e5e5">
+        </td>
+      </tr>
+    </table>
+    <br clear="none">
+    
+    
+    <a name="_setPlayStream" shape="rect"></a>
+    <table summary="" width="100%" border="0" cellspacing="2" cellpadding="2">
+      <tr bgcolor="#e5e5e5">
+        <td colspan="3" rowspan="1"><span class="docTableTitleGray">_setPlayStream</span></td>
+      </tr>
+      <tr>
+        <td colspan="3" rowspan="1">
+          <span class="docPrototype"><span class="classname">devvideoview</span>.<span class="methodname">_setPlayStream</span></span>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="3" rowspan="1">
+          <p class="smaller"> Set the play stream. 
+              @keywords private </p>
+        </td>
+      </tr>
+      
+      <tr>
+        <td colspan="3" rowspan="1">
+          <hr size="1" bgcolor="#e5e5e5">
+        </td>
+      </tr>
+    </table>
+    <br clear="none">
+    
+    
+    <a name="_getflashvideo" shape="rect"></a>
+    <table summary="" width="100%" border="0" cellspacing="2" cellpadding="2">
+      <tr bgcolor="#e5e5e5">
+        <td colspan="3" rowspan="1"><span class="docTableTitleGray">_getflashvideo</span></td>
+      </tr>
+      <tr>
+        <td colspan="3" rowspan="1">
+          <span class="docPrototype"><span class="classname">devvideoview</span>.<span class="methodname">_getflashvideo</span></span>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="3" rowspan="1">
+          <p class="smaller"> Return the Flash video object. 
+              @keywords private </p>
+        </td>
+      </tr>
+      
+      <tr>
+        <td colspan="3" rowspan="1">
+          <hr size="1" bgcolor="#e5e5e5">
+        </td>
+      </tr>
+    </table>
+    <br clear="none">
+    
+    
+    <a name="setWidth" shape="rect"></a>
+    <table summary="" width="100%" border="0" cellspacing="2" cellpadding="2">
+      <tr bgcolor="#e5e5e5">
+        <td colspan="3" rowspan="1"><span class="docTableTitleGray">setWidth</span></td>
+      </tr>
+      <tr>
+        <td colspan="3" rowspan="1">
+          <span class="docPrototype"><span class="classname">devvideoview</span>.<span class="methodname">setWidth</span></span>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="3" rowspan="1">
+          <p class="smaller"> Set the videoview width. 
+              @keywords private </p>
+        </td>
+      </tr>
+      
+      
+      
+      <tr>
+        <td colspan="3" rowspan="1">
+          <hr size="1" bgcolor="#e5e5e5">
+        </td>
+      </tr>
+    </table>
+    <br clear="none">
+    
+    
+    <a name="setHeight" shape="rect"></a>
+    <table summary="" width="100%" border="0" cellspacing="2" cellpadding="2">
+      <tr bgcolor="#e5e5e5">
+        <td colspan="3" rowspan="1"><span class="docTableTitleGray">setHeight</span></td>
+      </tr>
+      <tr>
+        <td colspan="3" rowspan="1">
+          <span class="docPrototype"><span class="classname">devvideoview</span>.<span class="methodname">setHeight</span></span>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="3" rowspan="1">
+          <p class="smaller"> Set the videoview height. 
+              @keywords private </p>
+        </td>
+      </tr>
+      
+      
+      
+      <tr>
+        <td colspan="3" rowspan="1">
+          <hr size="1" bgcolor="#e5e5e5">
+        </td>
+      </tr>
+    </table>
+    <br clear="none">
+    
+    
+    <a name="_setPlayVolume" shape="rect"></a>
+    <table summary="" width="100%" border="0" cellspacing="2" cellpadding="2">
+      <tr bgcolor="#e5e5e5">
+        <td colspan="3" rowspan="1"><span class="docTableTitleGray">_setPlayVolume</span></td>
+      </tr>
+      <tr>
+        <td colspan="3" rowspan="1">
+          <span class="docPrototype"><span class="classname">devvideoview</span>.<span class="methodname">_setPlayVolume</span></span>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="3" rowspan="1">
+          <p class="smaller"> Setter for the "playvolume" attribute. 
+              Sets the video playback volume. 
+              @keywords private </p>
+        </td>
+      </tr>
+      
+      
+      
+      <tr>
+        <td colspan="3" rowspan="1">
+          <hr size="1" bgcolor="#e5e5e5">
+        </td>
+      </tr>
+    </table>
+    <br clear="none">
+    
+    
+    <a name="_setUrl" shape="rect"></a>
+    <table summary="" width="100%" border="0" cellspacing="2" cellpadding="2">
+      <tr bgcolor="#e5e5e5">
+        <td colspan="3" rowspan="1"><span class="docTableTitleGray">_setUrl</span></td>
+      </tr>
+      <tr>
+        <td colspan="3" rowspan="1">
+          <span class="docPrototype"><span class="classname">devvideoview</span>.<span class="methodname">_setUrl</span></span>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="3" rowspan="1">
+          <p class="smaller"> Setter for the "url" attribute. 
+              @keywords private </p>
+        </td>
+      </tr>
+      
+      
+      
+      <tr>
+        <td colspan="3" rowspan="1">
+          <hr size="1" bgcolor="#e5e5e5">
+        </td>
+      </tr>
+    </table>
+    <br clear="none">
+    
+    
+    <a name="_setType" shape="rect"></a>
+    <table summary="" width="100%" border="0" cellspacing="2" cellpadding="2">
+      <tr bgcolor="#e5e5e5">
+        <td colspan="3" rowspan="1"><span class="docTableTitleGray">_setType</span></td>
+      </tr>
+      <tr>
+        <td colspan="3" rowspan="1">
+          <span class="docPrototype"><span class="classname">devvideoview</span>.<span class="methodname">_setType</span></span>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="3" rowspan="1">
+          <p class="smaller"> Setter for the "type" attribute. 
+              @keywords private </p>
+        </td>
+      </tr>
+      
+      
+      
+      <tr>
+        <td colspan="3" rowspan="1">
+          <hr size="1" bgcolor="#e5e5e5">
+        </td>
+      </tr>
+    </table>
+    <br clear="none">
+    
+    
+    <a name="_setAutoplay" shape="rect"></a>
+    <table summary="" width="100%" border="0" cellspacing="2" cellpadding="2">
+      <tr bgcolor="#e5e5e5">
+        <td colspan="3" rowspan="1"><span class="docTableTitleGray">_setAutoplay</span></td>
+      </tr>
+      <tr>
+        <td colspan="3" rowspan="1">
+          <span class="docPrototype"><span class="classname">devvideoview</span>.<span class="methodname">_setAutoplay</span></span>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="3" rowspan="1">
+          <p class="smaller"> Setter for the "autoplay" attribute. 
+              @keywords private </p>
+        </td>
+      </tr>
+      
+      
+      
+      <tr>
+        <td colspan="3" rowspan="1">
+          <hr size="1" bgcolor="#e5e5e5">
+        </td>
+      </tr>
+    </table>
+    <br clear="none">
+    
+    
+    <a name="_setStream" shape="rect"></a>
+    <table summary="" width="100%" border="0" cellspacing="2" cellpadding="2">
+      <tr bgcolor="#e5e5e5">
+        <td colspan="3" rowspan="1"><span class="docTableTitleGray">_setStream</span></td>
+      </tr>
+      <tr>
+        <td colspan="3" rowspan="1">
+          <span class="docPrototype"><span class="classname">devvideoview</span>.<span class="methodname">_setStream</span></span>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="3" rowspan="1">
+          <p class="smaller"> Called by the stream to tell the videoview about the stream. 
+              @keywords private </p>
+        </td>
+      </tr>
+      
+      
+      
+      <tr>
+        <td colspan="3" rowspan="1">
+          <hr size="1" bgcolor="#e5e5e5">
+        </td>
+      </tr>
+    </table>
+    <br clear="none">
+    
+    
+    <a name="_setCam" shape="rect"></a>
+    <table summary="" width="100%" border="0" cellspacing="2" cellpadding="2">
+      <tr bgcolor="#e5e5e5">
+        <td colspan="3" rowspan="1"><span class="docTableTitleGray">_setCam</span></td>
+      </tr>
+      <tr>
+        <td colspan="3" rowspan="1">
+          <span class="docPrototype"><span class="classname">devvideoview</span>.<span class="methodname">_setCam</span></span>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="3" rowspan="1">
+          <p class="smaller"> Called by the camera to tell the videoview about the camera. 
+              @keywords private </p>
+        </td>
+      </tr>
+      
+      
+      
+      <tr>
+        <td colspan="3" rowspan="1">
+          <hr size="1" bgcolor="#e5e5e5">
+        </td>
+      </tr>
+    </table>
+    <br clear="none">
+    
+    
+    <a name="_setMic" shape="rect"></a>
+    <table summary="" width="100%" border="0" cellspacing="2" cellpadding="2">
+      <tr bgcolor="#e5e5e5">
+        <td colspan="3" rowspan="1"><span class="docTableTitleGray">_setMic</span></td>
+      </tr>
+      <tr>
+        <td colspan="3" rowspan="1">
+          <span class="docPrototype"><span class="classname">devvideoview</span>.<span class="methodname">_setMic</span></span>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="3" rowspan="1">
+          <p class="smaller"> Called by the microphone to tell the videoview about the microphone. 
+              @keywords private </p>
+        </td>
+      </tr>
+      
+      
+      
+      <tr>
+        <td colspan="3" rowspan="1">
+          <hr size="1" bgcolor="#e5e5e5">
+        </td>
+      </tr>
+    </table>
+    <br clear="none">
+    
+    
+    <a name="stop" shape="rect"></a>
+    <table summary="" width="100%" border="0" cellspacing="2" cellpadding="2">
+      <tr bgcolor="#e5e5e5">
+        <td colspan="3" rowspan="1"><span class="docTableTitleGray">stop</span></td>
+      </tr>
+      <tr>
+        <td colspan="3" rowspan="1">
+          <span class="docPrototype"><span class="classname">devvideoview</span>.<span class="methodname">stop</span></span>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="3" rowspan="1">
+          <p class="smaller"></p>
+        </td>
+      </tr>
+      
+      <tr>
+        <td colspan="3" rowspan="1">
+          <hr size="1" bgcolor="#e5e5e5">
+        </td>
+      </tr>
+    </table>
+    <br clear="none">
+    
+    
+    
+    
+    <a name="events" shape="rect"></a>
+    <hr/>
+    <table summary="" width="100%" border="0" cellspacing="2" cellpadding="2">
+      <tr bgcolor="#5B607C">
+        <td colspan="2" rowspan="1"><span class="docTableTitle">Events</span></td>
+      </tr>
+      <tr bgcolor="#e6e6e6">
+        <td rowspan="1" colspan="1"><span class="docTableColHeading">Name</span></td>
+        <td rowspan="1" colspan="1"><span class="docTableColHeading">Description</span></td>
+      </tr>
+      
+      
+      
+    </table>
+    <br clear="none">
+    
+    <br clear="none">
+    
+    
+    <p class="copyright">Copyright &copy;</p>
+  </body>
+</html>

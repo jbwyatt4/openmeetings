@@ -1,0 +1,410 @@
+<html xmlns:exslt="http://exslt.org/common">
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>rtmpconnection</title>
+    <link href="../../styles.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <a name="element" shape="rect"></a>
+    <div class="head">
+      <div class="left">
+        <h1>&lt;rtmpconnection&gt;</h1>
+        <p class="summary"></p>
+        
+      </div>
+      <div class="right">
+        <div>
+          
+          <i>Extends</i><a href="#"> node</a>
+          
+        </div>
+      </div>
+    </div>
+    <div class="wrapper-description">
+    </div>
+    
+    <a name="attributes" shape="rect"></a>
+    <table summary="" width="100%" border="0" cellspacing="2" cellpadding="2">
+      <tr bgcolor="#5B607C">
+        <td colspan="6" rowspan="1"><span class="docTableTitle"><a href="info-attributes.html" shape="rect">Attributes</a></span></td>
+      </tr>
+      <tr bgcolor="#e6e6e6">
+        <td rowspan="1" colspan="1"><span class="docTableColHeading"><a href="info-attribinfo.html#name" shape="rect">Name</a></span></td>
+        <td rowspan="1" colspan="1"><span class="docTableColHeading"><a href="info-attribinfo.html#usage" shape="rect">Usage</a></span></td>
+        <td rowspan="1" colspan="1"><span class="docTableColHeading"><a href="info-attribinfo.html#typetag" shape="rect">Type (Tag)</a></span></td>
+        <td rowspan="1" colspan="1"><span class="docTableColHeading"><a href="info-attribinfo.html#typejs" shape="rect">Type (JS)</a></span></td>
+        <td rowspan="1" colspan="1"><span class="docTableColHeading"><a href="info-attribinfo.html#typejs" shape="rect">Default</a></span></td>
+        <td rowspan="1" colspan="1"><span class="docTableColHeading"><a href="info-attribinfo.html#category" shape="rect">Category</a></span></td>
+      </tr>
+      
+      
+      <tr>
+        <td rowspan="1" colspan="1"><span class="docParam"><a name="attr-name" shape="rect"></a>autoconnect</span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"></span></td>
+        <td rowspan="1" colspan="1"><span class="smaller">boolean</span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"></span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"></span>true</td>
+        <td rowspan="1" colspan="1"><span class="smaller"><a href="info-attributes.html#final" shape="rect"></a></span></td>
+      </tr>
+      <tr>
+        <td rowspan="1" colspan="1">&nbsp;</td>
+        <td colspan="5" rowspan="1"><span class="smaller">
+            <p> Connect automatically during init. If false, you need to explicitly
+          call connect(). Default is true. </p>
+        </span></td>
+      </tr>
+      <tr>
+        <td colspan="6" rowspan="1">
+          <hr size="1" bgcolor="#e5e5e5">
+        </td>
+      </tr>
+      
+      
+      
+      <tr>
+        <td rowspan="1" colspan="1"><span class="docParam"><a name="attr-name" shape="rect"></a>status</span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"></span></td>
+        <td rowspan="1" colspan="1"><span class="smaller">string</span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"></span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"></span>disconnected</td>
+        <td rowspan="1" colspan="1"><span class="smaller"><a href="info-attributes.html#final" shape="rect"></a></span></td>
+      </tr>
+      <tr>
+        <td rowspan="1" colspan="1">&nbsp;</td>
+        <td colspan="5" rowspan="1"><span class="smaller">
+            <p> string to indicate connection status </p>
+        </span></td>
+      </tr>
+      <tr>
+        <td colspan="6" rowspan="1">
+          <hr size="1" bgcolor="#e5e5e5">
+        </td>
+      </tr>
+      
+      
+      
+      <tr>
+        <td rowspan="1" colspan="1"><span class="docParam"><a name="attr-name" shape="rect"></a>stage</span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"></span></td>
+        <td rowspan="1" colspan="1"><span class="smaller">number</span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"></span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"></span>0</td>
+        <td rowspan="1" colspan="1"><span class="smaller"><a href="info-attributes.html#final" shape="rect"></a></span></td>
+      </tr>
+      <tr>
+        <td rowspan="1" colspan="1">&nbsp;</td>
+        <td colspan="5" rowspan="1"><span class="smaller">
+            <p> number to ind icate what stage of connection we're on
+        0: disconnected, 1: connecting, 2: connected</p>
+        </span></td>
+      </tr>
+      <tr>
+        <td colspan="6" rowspan="1">
+          <hr size="1" bgcolor="#e5e5e5">
+        </td>
+      </tr>
+      
+      
+      
+      
+      
+      <tr>
+        <td rowspan="1" colspan="1"><span class="docParam"><a name="attr-name" shape="rect"></a>src</span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"></span></td>
+        <td rowspan="1" colspan="1"><span class="smaller">string</span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"></span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"></span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"><a href="info-attributes.html#final" shape="rect"></a></span></td>
+      </tr>
+      <tr>
+        <td rowspan="1" colspan="1">&nbsp;</td>
+        <td colspan="5" rowspan="1"><span class="smaller">
+            <p> application url
+        for example : rtmp:/appname or rtmp://myserver.com/myapp/  </p>
+        </span></td>
+      </tr>
+      <tr>
+        <td colspan="6" rowspan="1">
+          <hr size="1" bgcolor="#e5e5e5">
+        </td>
+      </tr>
+      
+      
+      
+      <tr>
+        <td rowspan="1" colspan="1"><span class="docParam"><a name="attr-name" shape="rect"></a>debug</span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"></span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"></span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"></span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"></span>false</td>
+        <td rowspan="1" colspan="1"><span class="smaller"><a href="info-attributes.html#final" shape="rect"></a></span></td>
+      </tr>
+      <tr>
+        <td rowspan="1" colspan="1">&nbsp;</td>
+        <td colspan="5" rowspan="1"><span class="smaller">
+            <p> turn on for verbose debugger output </p>
+        </span></td>
+      </tr>
+      <tr>
+        <td colspan="6" rowspan="1">
+          <hr size="1" bgcolor="#e5e5e5">
+        </td>
+      </tr>
+      
+      
+    </table>
+    <br clear="none">
+    
+    
+    
+    <a name="methods" shape="rect"></a>
+    <h3>Methods</h3>
+    
+    <a name="init" shape="rect"></a>
+    <table summary="" width="100%" border="0" cellspacing="2" cellpadding="2">
+      <tr bgcolor="#e5e5e5">
+        <td colspan="3" rowspan="1"><span class="docTableTitleGray">init</span></td>
+      </tr>
+      <tr>
+        <td colspan="3" rowspan="1">
+          <span class="docPrototype"><span class="classname">rtmpconnection</span>.<span class="methodname">init</span></span>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="3" rowspan="1">
+          <p class="smaller"></p>
+        </td>
+      </tr>
+      
+      <tr>
+        <td colspan="3" rowspan="1">
+          <hr size="1" bgcolor="#e5e5e5">
+        </td>
+      </tr>
+    </table>
+    <br clear="none">
+    
+    
+    <a name="registerMethods" shape="rect"></a>
+    <table summary="" width="100%" border="0" cellspacing="2" cellpadding="2">
+      <tr bgcolor="#e5e5e5">
+        <td colspan="3" rowspan="1"><span class="docTableTitleGray">registerMethods</span></td>
+      </tr>
+      <tr>
+        <td colspan="3" rowspan="1">
+          <span class="docPrototype"><span class="classname">rtmpconnection</span>.<span class="methodname">registerMethods</span></span>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="3" rowspan="1">
+          <p class="smaller"> 
+        With this function all methods are registered to the NetConnection
+        A server can invoke this Method with a call for it from the Client
+        Only subnodes of rtmpconnections which are a instance of netremotecall
+        are registered, to add dynamically methods to the remotefunction you will
+        have to invoke this method once again
+        -swagner
+     </p>
+        </td>
+      </tr>
+      
+      <tr>
+        <td colspan="3" rowspan="1">
+          <hr size="1" bgcolor="#e5e5e5">
+        </td>
+      </tr>
+    </table>
+    <br clear="none">
+    
+    
+    <a name="remoteCallMethod" shape="rect"></a>
+    <table summary="" width="100%" border="0" cellspacing="2" cellpadding="2">
+      <tr bgcolor="#e5e5e5">
+        <td colspan="3" rowspan="1"><span class="docTableTitleGray">remoteCallMethod</span></td>
+      </tr>
+      <tr>
+        <td colspan="3" rowspan="1">
+          <span class="docPrototype"><span class="classname">rtmpconnection</span>.<span class="methodname">remoteCallMethod</span></span>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="3" rowspan="1">
+          <p class="smaller"> 
+        Process the RemoteCall to the Right Funtion
+        -swagner
+     </p>
+        </td>
+      </tr>
+      
+      
+      <tr bgcolor="#e6e6e6">
+        <td colspan="3" rowspan="1"><span class="docTableSubTitle">Parameters</span></td>
+      </tr>
+      <tr bgcolor="#e6e6e6">
+        <td rowspan="1" colspan="1"><span class="docTableColHeading">Name</span></td>
+        <td rowspan="1" colspan="1"><span class="docTableColHeading">Type</span></td>
+        <td rowspan="1" colspan="1"><span class="docTableColHeading">Desc</span></td>
+      </tr>
+      
+      <tr>
+        <td rowspan="1" colspan="1"><span class="docParam">callee</span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"></span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"></span></td>
+      </tr>
+      
+      <tr>
+        <td rowspan="1" colspan="1"><span class="docParam">args</span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"></span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"></span></td>
+      </tr>
+      
+      
+      
+      <tr>
+        <td colspan="3" rowspan="1">
+          <hr size="1" bgcolor="#e5e5e5">
+        </td>
+      </tr>
+    </table>
+    <br clear="none">
+    
+    
+    <a name="callFuntion" shape="rect"></a>
+    <table summary="" width="100%" border="0" cellspacing="2" cellpadding="2">
+      <tr bgcolor="#e5e5e5">
+        <td colspan="3" rowspan="1"><span class="docTableTitleGray">callFuntion</span></td>
+      </tr>
+      <tr>
+        <td colspan="3" rowspan="1">
+          <span class="docPrototype"><span class="classname">rtmpconnection</span>.<span class="methodname">callFuntion</span></span>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="3" rowspan="1">
+          <p class="smaller"> 
+        Map the Function to a netremotecall
+        -swagner
+     </p>
+        </td>
+      </tr>
+      
+      
+      <tr bgcolor="#e6e6e6">
+        <td colspan="3" rowspan="1"><span class="docTableSubTitle">Parameters</span></td>
+      </tr>
+      <tr bgcolor="#e6e6e6">
+        <td rowspan="1" colspan="1"><span class="docTableColHeading">Name</span></td>
+        <td rowspan="1" colspan="1"><span class="docTableColHeading">Type</span></td>
+        <td rowspan="1" colspan="1"><span class="docTableColHeading">Desc</span></td>
+      </tr>
+      
+      <tr>
+        <td rowspan="1" colspan="1"><span class="docParam">funcname</span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"></span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"></span></td>
+      </tr>
+      
+      <tr>
+        <td rowspan="1" colspan="1"><span class="docParam">args</span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"></span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"></span></td>
+      </tr>
+      
+      
+      
+      <tr>
+        <td colspan="3" rowspan="1">
+          <hr size="1" bgcolor="#e5e5e5">
+        </td>
+      </tr>
+    </table>
+    <br clear="none">
+    
+    
+    <a name="connect" shape="rect"></a>
+    <table summary="" width="100%" border="0" cellspacing="2" cellpadding="2">
+      <tr bgcolor="#e5e5e5">
+        <td colspan="3" rowspan="1"><span class="docTableTitleGray">connect</span></td>
+      </tr>
+      <tr>
+        <td colspan="3" rowspan="1">
+          <span class="docPrototype"><span class="classname">rtmpconnection</span>.<span class="methodname">connect</span></span>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="3" rowspan="1">
+          <p class="smaller"></p>
+        </td>
+      </tr>
+      
+      <tr>
+        <td colspan="3" rowspan="1">
+          <hr size="1" bgcolor="#e5e5e5">
+        </td>
+      </tr>
+    </table>
+    <br clear="none">
+    
+    
+    <a name="call" shape="rect"></a>
+    <table summary="" width="100%" border="0" cellspacing="2" cellpadding="2">
+      <tr bgcolor="#e5e5e5">
+        <td colspan="3" rowspan="1"><span class="docTableTitleGray">call</span></td>
+      </tr>
+      <tr>
+        <td colspan="3" rowspan="1">
+          <span class="docPrototype"><span class="classname">rtmpconnection</span>.<span class="methodname">call</span></span>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="3" rowspan="1">
+          <p class="smaller"> make a remote call to the rtmp server 
+        todo: we probably don't want to expost the Flash callback object</p>
+        </td>
+      </tr>
+      
+      
+      <tr bgcolor="#e6e6e6">
+        <td colspan="3" rowspan="1"><span class="docTableSubTitle">Parameters</span></td>
+      </tr>
+      <tr bgcolor="#e6e6e6">
+        <td rowspan="1" colspan="1"><span class="docTableColHeading">Name</span></td>
+        <td rowspan="1" colspan="1"><span class="docTableColHeading">Type</span></td>
+        <td rowspan="1" colspan="1"><span class="docTableColHeading">Desc</span></td>
+      </tr>
+      
+      <tr>
+        <td rowspan="1" colspan="1"><span class="docParam">func</span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"></span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"></span></td>
+      </tr>
+      
+      <tr>
+        <td rowspan="1" colspan="1"><span class="docParam"> obj</span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"></span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"></span></td>
+      </tr>
+      
+      <tr>
+        <td rowspan="1" colspan="1"><span class="docParam"> params</span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"></span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"></span></td>
+      </tr>
+      
+      
+      
+      <tr>
+        <td colspan="3" rowspan="1">
+          <hr size="1" bgcolor="#e5e5e5">
+        </td>
+      </tr>
+    </table>
+    <br clear="none">
+    
+    
+    
+    
+    
+    <p class="copyright">Copyright &copy;</p>
+  </body>
+</html>
