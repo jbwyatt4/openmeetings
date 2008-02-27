@@ -1349,5 +1349,23 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   </string>
   <string id="446" name="chat_emot_win">
     <value>Emoticons</value>
-  </string>	
+  </string>
+  <string id="447" name="choose_video_settings">
+    <value>Choose Published Devices</value>
+  </string>
+  <string id="448" name="choose_video_settings_combo">
+    <value>Audio and Video</value>
+  </string>
+  <string id="449" name="choose_video_settings_combo">
+    <value>Audio only</value>
+  </string>
+  <string id="450" name="choose_video_settings_combo">
+    <value>Video only</value>
+  </string>
+  <string id="451" name="choose_video_settings_combo">
+    <value>no Audio/Video (static Image)</value>
+  </string>
+  <string id="452" name="choose_video_settings_info_text">
+    <value>No Audio/Video from your PC will be published, instead of that a picture from your profile will be shown. Choose these settings if you have problems with your bandwidth or a very slow Internet connection.</value>
+  </string>
 </language>
