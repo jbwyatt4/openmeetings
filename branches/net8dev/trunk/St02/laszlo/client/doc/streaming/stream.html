@@ -1,0 +1,753 @@
+<html xmlns:exslt="http://exslt.org/common">
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>stream</title>
+    <link href="../styles.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <a name="element" shape="rect"></a>
+    <div class="head">
+      <div class="left">
+        <h1>&lt;stream&gt;</h1>
+        <p class="summary"></p>
+        
+      </div>
+      <div class="right">
+        <div>
+          
+          <i>Extends</i><a href="#"> node</a>
+          
+        </div>
+      </div>
+    </div>
+    <div class="wrapper-description">
+    </div>
+    
+    <a name="attributes" shape="rect"></a>
+    <table summary="" width="100%" border="0" cellspacing="2" cellpadding="2">
+      <tr bgcolor="#5B607C">
+        <td colspan="6" rowspan="1"><span class="docTableTitle"><a href="info-attributes.html" shape="rect">Attributes</a></span></td>
+      </tr>
+      <tr bgcolor="#e6e6e6">
+        <td rowspan="1" colspan="1"><span class="docTableColHeading"><a href="info-attribinfo.html#name" shape="rect">Name</a></span></td>
+        <td rowspan="1" colspan="1"><span class="docTableColHeading"><a href="info-attribinfo.html#usage" shape="rect">Usage</a></span></td>
+        <td rowspan="1" colspan="1"><span class="docTableColHeading"><a href="info-attribinfo.html#typetag" shape="rect">Type (Tag)</a></span></td>
+        <td rowspan="1" colspan="1"><span class="docTableColHeading"><a href="info-attribinfo.html#typejs" shape="rect">Type (JS)</a></span></td>
+        <td rowspan="1" colspan="1"><span class="docTableColHeading"><a href="info-attribinfo.html#typejs" shape="rect">Default</a></span></td>
+        <td rowspan="1" colspan="1"><span class="docTableColHeading"><a href="info-attribinfo.html#category" shape="rect">Category</a></span></td>
+      </tr>
+      
+      
+      <tr>
+        <td rowspan="1" colspan="1"><span class="docParam"><a name="attr-name" shape="rect"></a>url</span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"></span></td>
+        <td rowspan="1" colspan="1"><span class="smaller">string</span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"></span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"></span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"><a href="info-attributes.html#final" shape="rect"></a></span></td>
+      </tr>
+      <tr>
+        <td rowspan="1" colspan="1">&nbsp;</td>
+        <td colspan="5" rowspan="1"><span class="smaller">
+            <p> the url of the stream, maybe be relative URL, 
+          for example: http://localhost/myvideo.flv, or simply myvideo.flv
+          when type="rtmp" the url is always relative the the rtmpconnection </p>
+        </span></td>
+      </tr>
+      <tr>
+        <td colspan="6" rowspan="1">
+          <hr size="1" bgcolor="#e5e5e5">
+        </td>
+      </tr>
+      
+      
+      
+      <tr>
+        <td rowspan="1" colspan="1"><span class="docParam"><a name="attr-name" shape="rect"></a>type</span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"></span></td>
+        <td rowspan="1" colspan="1"><span class="smaller">string</span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"></span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"></span>http</td>
+        <td rowspan="1" colspan="1"><span class="smaller"><a href="info-attributes.html#final" shape="rect"></a></span></td>
+      </tr>
+      <tr>
+        <td rowspan="1" colspan="1">&nbsp;</td>
+        <td colspan="5" rowspan="1"><span class="smaller">
+            <p> protocol "rtmp" or "http" (default: http)</p>
+        </span></td>
+      </tr>
+      <tr>
+        <td colspan="6" rowspan="1">
+          <hr size="1" bgcolor="#e5e5e5">
+        </td>
+      </tr>
+      
+      
+      
+      <tr>
+        <td rowspan="1" colspan="1"><span class="docParam"><a name="attr-name" shape="rect"></a>totaltime</span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"></span></td>
+        <td rowspan="1" colspan="1"><span class="smaller">number</span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"></span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"></span>0</td>
+        <td rowspan="1" colspan="1"><span class="smaller"><a href="info-attributes.html#final" shape="rect"></a></span></td>
+      </tr>
+      <tr>
+        <td rowspan="1" colspan="1">&nbsp;</td>
+        <td colspan="5" rowspan="1"><span class="smaller">
+            <p> total length (in seconds) of stream currently playing </p>
+        </span></td>
+      </tr>
+      <tr>
+        <td colspan="6" rowspan="1">
+          <hr size="1" bgcolor="#e5e5e5">
+        </td>
+      </tr>
+      
+      
+      
+      <tr>
+        <td rowspan="1" colspan="1"><span class="docParam"><a name="attr-name" shape="rect"></a>playtime</span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"></span></td>
+        <td rowspan="1" colspan="1"><span class="smaller">number</span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"></span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"></span>0</td>
+        <td rowspan="1" colspan="1"><span class="smaller"><a href="info-attributes.html#final" shape="rect"></a></span></td>
+      </tr>
+      <tr>
+        <td rowspan="1" colspan="1">&nbsp;</td>
+        <td colspan="5" rowspan="1"><span class="smaller">
+            <p> current time of stream currently playing (in seconds) </p>
+        </span></td>
+      </tr>
+      <tr>
+        <td colspan="6" rowspan="1">
+          <hr size="1" bgcolor="#e5e5e5">
+        </td>
+      </tr>
+      
+      
+      
+      <tr>
+        <td rowspan="1" colspan="1"><span class="docParam"><a name="attr-name" shape="rect"></a>fps</span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"></span></td>
+        <td rowspan="1" colspan="1"><span class="smaller">number</span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"></span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"></span>0</td>
+        <td rowspan="1" colspan="1"><span class="smaller"><a href="info-attributes.html#final" shape="rect"></a></span></td>
+      </tr>
+      <tr>
+        <td rowspan="1" colspan="1">&nbsp;</td>
+        <td colspan="5" rowspan="1"><span class="smaller">
+            <p> the current frames per second for playing video </p>
+        </span></td>
+      </tr>
+      <tr>
+        <td colspan="6" rowspan="1">
+          <hr size="1" bgcolor="#e5e5e5">
+        </td>
+      </tr>
+      
+      
+      
+      <tr>
+        <td rowspan="1" colspan="1"><span class="docParam"><a name="attr-name" shape="rect"></a>playing</span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"></span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"></span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"></span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"></span>false</td>
+        <td rowspan="1" colspan="1"><span class="smaller"><a href="info-attributes.html#final" shape="rect"></a></span></td>
+      </tr>
+      <tr>
+        <td rowspan="1" colspan="1">&nbsp;</td>
+        <td colspan="5" rowspan="1"><span class="smaller">
+            <p> true if playing, false if paused or not started yet </p>
+        </span></td>
+      </tr>
+      <tr>
+        <td colspan="6" rowspan="1">
+          <hr size="1" bgcolor="#e5e5e5">
+        </td>
+      </tr>
+      
+      
+      
+      <tr>
+        <td rowspan="1" colspan="1"><span class="docParam"><a name="attr-name" shape="rect"></a>recordtime</span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"></span></td>
+        <td rowspan="1" colspan="1"><span class="smaller">number</span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"></span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"></span>0</td>
+        <td rowspan="1" colspan="1"><span class="smaller"><a href="info-attributes.html#final" shape="rect"></a></span></td>
+      </tr>
+      <tr>
+        <td rowspan="1" colspan="1">&nbsp;</td>
+        <td colspan="5" rowspan="1"><span class="smaller">
+            <p> current time of stream being recorded (in seconds) </p>
+        </span></td>
+      </tr>
+      <tr>
+        <td colspan="6" rowspan="1">
+          <hr size="1" bgcolor="#e5e5e5">
+        </td>
+      </tr>
+      
+      
+      
+      <tr>
+        <td rowspan="1" colspan="1"><span class="docParam"><a name="attr-name" shape="rect"></a>mode</span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"></span></td>
+        <td rowspan="1" colspan="1"><span class="smaller">string</span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"></span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"></span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"><a href="info-attributes.html#final" shape="rect"></a></span></td>
+      </tr>
+      <tr>
+        <td rowspan="1" colspan="1">&nbsp;</td>
+        <td colspan="5" rowspan="1"><span class="smaller">
+            <p> mode: 'playback' or 'record' </p>
+        </span></td>
+      </tr>
+      <tr>
+        <td colspan="6" rowspan="1">
+          <hr size="1" bgcolor="#e5e5e5">
+        </td>
+      </tr>
+      
+      
+      
+      <tr>
+        <td rowspan="1" colspan="1"><span class="docParam"><a name="attr-name" shape="rect"></a>debug</span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"></span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"></span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"></span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"></span>false</td>
+        <td rowspan="1" colspan="1"><span class="smaller"><a href="info-attributes.html#final" shape="rect"></a></span></td>
+      </tr>
+      <tr>
+        <td rowspan="1" colspan="1">&nbsp;</td>
+        <td colspan="5" rowspan="1"><span class="smaller">
+            <p> when true, print extra info to the debugger </p>
+        </span></td>
+      </tr>
+      <tr>
+        <td colspan="6" rowspan="1">
+          <hr size="1" bgcolor="#e5e5e5">
+        </td>
+      </tr>
+      
+      
+      
+      <tr>
+        <td rowspan="1" colspan="1"><span class="docParam"><a name="attr-name" shape="rect"></a>streamname</span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"></span></td>
+        <td rowspan="1" colspan="1"><span class="smaller">string</span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"></span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"></span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"><a href="info-attributes.html#final" shape="rect"></a></span></td>
+      </tr>
+      <tr>
+        <td rowspan="1" colspan="1">&nbsp;</td>
+        <td colspan="5" rowspan="1"><span class="smaller">
+            <p> rtmp streamname (without .flv suffix) </p>
+        </span></td>
+      </tr>
+      <tr>
+        <td colspan="6" rowspan="1">
+          <hr size="1" bgcolor="#e5e5e5">
+        </td>
+      </tr>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <tr>
+        <td rowspan="1" colspan="1"><span class="docParam"><a name="attr-name" shape="rect"></a>onstart</span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"></span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"></span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"></span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"></span>null</td>
+        <td rowspan="1" colspan="1"><span class="smaller"><a href="info-attributes.html#final" shape="rect"></a></span></td>
+      </tr>
+      <tr>
+        <td rowspan="1" colspan="1">&nbsp;</td>
+        <td colspan="5" rowspan="1"><span class="smaller">
+            <p> </p>
+        </span></td>
+      </tr>
+      <tr>
+        <td colspan="6" rowspan="1">
+          <hr size="1" bgcolor="#e5e5e5">
+        </td>
+      </tr>
+      
+      
+      
+      <tr>
+        <td rowspan="1" colspan="1"><span class="docParam"><a name="attr-name" shape="rect"></a>onend</span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"></span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"></span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"></span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"></span>null</td>
+        <td rowspan="1" colspan="1"><span class="smaller"><a href="info-attributes.html#final" shape="rect"></a></span></td>
+      </tr>
+      <tr>
+        <td rowspan="1" colspan="1">&nbsp;</td>
+        <td colspan="5" rowspan="1"><span class="smaller">
+            <p> </p>
+        </span></td>
+      </tr>
+      <tr>
+        <td colspan="6" rowspan="1">
+          <hr size="1" bgcolor="#e5e5e5">
+        </td>
+      </tr>
+      
+      
+    </table>
+    <br clear="none">
+    
+    
+    
+    <a name="methods" shape="rect"></a>
+    <h3>Methods</h3>
+    
+    <a name="_publishSetup" shape="rect"></a>
+    <table summary="" width="100%" border="0" cellspacing="2" cellpadding="2">
+      <tr bgcolor="#e5e5e5">
+        <td colspan="3" rowspan="1"><span class="docTableTitleGray">_publishSetup</span></td>
+      </tr>
+      <tr>
+        <td colspan="3" rowspan="1">
+          <span class="docPrototype"><span class="classname">stream</span>.<span class="methodname">_publishSetup</span></span>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="3" rowspan="1">
+          <p class="smaller"> set up to publish a stream, type: "record" or "publish"
+        @keywords private </p>
+        </td>
+      </tr>
+      
+      
+      
+      <tr>
+        <td colspan="3" rowspan="1">
+          <hr size="1" bgcolor="#e5e5e5">
+        </td>
+      </tr>
+    </table>
+    <br clear="none">
+    
+    
+    <a name="broadcast" shape="rect"></a>
+    <table summary="" width="100%" border="0" cellspacing="2" cellpadding="2">
+      <tr bgcolor="#e5e5e5">
+        <td colspan="3" rowspan="1"><span class="docTableTitleGray">broadcast</span></td>
+      </tr>
+      <tr>
+        <td colspan="3" rowspan="1">
+          <span class="docPrototype"><span class="classname">stream</span>.<span class="methodname">broadcast</span></span>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="3" rowspan="1">
+          <p class="smaller"> start sending a live stream to the server </p>
+        </td>
+      </tr>
+      
+      <tr>
+        <td colspan="3" rowspan="1">
+          <hr size="1" bgcolor="#e5e5e5">
+        </td>
+      </tr>
+    </table>
+    <br clear="none">
+    
+    
+    <a name="record" shape="rect"></a>
+    <table summary="" width="100%" border="0" cellspacing="2" cellpadding="2">
+      <tr bgcolor="#e5e5e5">
+        <td colspan="3" rowspan="1"><span class="docTableTitleGray">record</span></td>
+      </tr>
+      <tr>
+        <td colspan="3" rowspan="1">
+          <span class="docPrototype"><span class="classname">stream</span>.<span class="methodname">record</span></span>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="3" rowspan="1">
+          <p class="smaller"> start recording </p>
+        </td>
+      </tr>
+      
+      <tr>
+        <td colspan="3" rowspan="1">
+          <hr size="1" bgcolor="#e5e5e5">
+        </td>
+      </tr>
+    </table>
+    <br clear="none">
+    
+    
+    <a name="_updateRecordTime" shape="rect"></a>
+    <table summary="" width="100%" border="0" cellspacing="2" cellpadding="2">
+      <tr bgcolor="#e5e5e5">
+        <td colspan="3" rowspan="1"><span class="docTableTitleGray">_updateRecordTime</span></td>
+      </tr>
+      <tr>
+        <td colspan="3" rowspan="1">
+          <span class="docPrototype"><span class="classname">stream</span>.<span class="methodname">_updateRecordTime</span></span>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="3" rowspan="1">
+          <p class="smaller"> @keywords private </p>
+        </td>
+      </tr>
+      
+      <tr>
+        <td colspan="3" rowspan="1">
+          <hr size="1" bgcolor="#e5e5e5">
+        </td>
+      </tr>
+    </table>
+    <br clear="none">
+    
+    
+    <a name="stop" shape="rect"></a>
+    <table summary="" width="100%" border="0" cellspacing="2" cellpadding="2">
+      <tr bgcolor="#e5e5e5">
+        <td colspan="3" rowspan="1"><span class="docTableTitleGray">stop</span></td>
+      </tr>
+      <tr>
+        <td colspan="3" rowspan="1">
+          <span class="docPrototype"><span class="classname">stream</span>.<span class="methodname">stop</span></span>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="3" rowspan="1">
+          <p class="smaller"> TODO: do we really want both stop and pause? </p>
+        </td>
+      </tr>
+      
+      <tr>
+        <td colspan="3" rowspan="1">
+          <hr size="1" bgcolor="#e5e5e5">
+        </td>
+      </tr>
+    </table>
+    <br clear="none">
+    
+    
+    <a name="_findnc" shape="rect"></a>
+    <table summary="" width="100%" border="0" cellspacing="2" cellpadding="2">
+      <tr bgcolor="#e5e5e5">
+        <td colspan="3" rowspan="1"><span class="docTableTitleGray">_findnc</span></td>
+      </tr>
+      <tr>
+        <td colspan="3" rowspan="1">
+          <span class="docPrototype"><span class="classname">stream</span>.<span class="methodname">_findnc</span></span>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="3" rowspan="1">
+          <p class="smaller"> find or create the Flash NetConnection object
+          @keywords private </p>
+        </td>
+      </tr>
+      
+      <tr>
+        <td colspan="3" rowspan="1">
+          <hr size="1" bgcolor="#e5e5e5">
+        </td>
+      </tr>
+    </table>
+    <br clear="none">
+    
+    
+    <a name="_createStream" shape="rect"></a>
+    <table summary="" width="100%" border="0" cellspacing="2" cellpadding="2">
+      <tr bgcolor="#e5e5e5">
+        <td colspan="3" rowspan="1"><span class="docTableTitleGray">_createStream</span></td>
+      </tr>
+      <tr>
+        <td colspan="3" rowspan="1">
+          <span class="docPrototype"><span class="classname">stream</span>.<span class="methodname">_createStream</span></span>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="3" rowspan="1">
+          <p class="smaller"> create Flash NetStream object
+          @keywords private </p>
+        </td>
+      </tr>
+      
+      <tr>
+        <td colspan="3" rowspan="1">
+          <hr size="1" bgcolor="#e5e5e5">
+        </td>
+      </tr>
+    </table>
+    <br clear="none">
+    
+    
+    <a name="play" shape="rect"></a>
+    <table summary="" width="100%" border="0" cellspacing="2" cellpadding="2">
+      <tr bgcolor="#e5e5e5">
+        <td colspan="3" rowspan="1"><span class="docTableTitleGray">play</span></td>
+      </tr>
+      <tr>
+        <td colspan="3" rowspan="1">
+          <span class="docPrototype"><span class="classname">stream</span>.<span class="methodname">play</span></span>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="3" rowspan="1">
+          <p class="smaller"> play stream at this.url  </p>
+        </td>
+      </tr>
+      
+      
+      <tr bgcolor="#e6e6e6">
+        <td colspan="3" rowspan="1"><span class="docTableSubTitle">Parameters</span></td>
+      </tr>
+      <tr bgcolor="#e6e6e6">
+        <td rowspan="1" colspan="1"><span class="docTableColHeading">Name</span></td>
+        <td rowspan="1" colspan="1"><span class="docTableColHeading">Type</span></td>
+        <td rowspan="1" colspan="1"><span class="docTableColHeading">Desc</span></td>
+      </tr>
+      
+      <tr>
+        <td rowspan="1" colspan="1"><span class="docParam">start</span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"></span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"></span></td>
+      </tr>
+      
+      <tr>
+        <td rowspan="1" colspan="1"><span class="docParam"> pause</span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"></span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"></span></td>
+      </tr>
+      
+      
+      
+      <tr>
+        <td colspan="3" rowspan="1">
+          <hr size="1" bgcolor="#e5e5e5">
+        </td>
+      </tr>
+    </table>
+    <br clear="none">
+    
+    
+    <a name="_updatePlayTime" shape="rect"></a>
+    <table summary="" width="100%" border="0" cellspacing="2" cellpadding="2">
+      <tr bgcolor="#e5e5e5">
+        <td colspan="3" rowspan="1"><span class="docTableTitleGray">_updatePlayTime</span></td>
+      </tr>
+      <tr>
+        <td colspan="3" rowspan="1">
+          <span class="docPrototype"><span class="classname">stream</span>.<span class="methodname">_updatePlayTime</span></span>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="3" rowspan="1">
+          <p class="smaller"> @keywords private </p>
+        </td>
+      </tr>
+      
+      <tr>
+        <td colspan="3" rowspan="1">
+          <hr size="1" bgcolor="#e5e5e5">
+        </td>
+      </tr>
+    </table>
+    <br clear="none">
+    
+    
+    <a name="pause" shape="rect"></a>
+    <table summary="" width="100%" border="0" cellspacing="2" cellpadding="2">
+      <tr bgcolor="#e5e5e5">
+        <td colspan="3" rowspan="1"><span class="docTableTitleGray">pause</span></td>
+      </tr>
+      <tr>
+        <td colspan="3" rowspan="1">
+          <span class="docPrototype"><span class="classname">stream</span>.<span class="methodname">pause</span></span>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="3" rowspan="1">
+          <p class="smaller"> pause video (calling while paused will toggle to play) 
+          this does nothing when you record </p>
+        </td>
+      </tr>
+      
+      <tr>
+        <td colspan="3" rowspan="1">
+          <hr size="1" bgcolor="#e5e5e5">
+        </td>
+      </tr>
+    </table>
+    <br clear="none">
+    
+    
+    <a name="init" shape="rect"></a>
+    <table summary="" width="100%" border="0" cellspacing="2" cellpadding="2">
+      <tr bgcolor="#e5e5e5">
+        <td colspan="3" rowspan="1"><span class="docTableTitleGray">init</span></td>
+      </tr>
+      <tr>
+        <td colspan="3" rowspan="1">
+          <span class="docPrototype"><span class="classname">stream</span>.<span class="methodname">init</span></span>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="3" rowspan="1">
+          <p class="smaller"></p>
+        </td>
+      </tr>
+      
+      <tr>
+        <td colspan="3" rowspan="1">
+          <hr size="1" bgcolor="#e5e5e5">
+        </td>
+      </tr>
+    </table>
+    <br clear="none">
+    
+    
+    <a name="_namefromurl" shape="rect"></a>
+    <table summary="" width="100%" border="0" cellspacing="2" cellpadding="2">
+      <tr bgcolor="#e5e5e5">
+        <td colspan="3" rowspan="1"><span class="docTableTitleGray">_namefromurl</span></td>
+      </tr>
+      <tr>
+        <td colspan="3" rowspan="1">
+          <span class="docPrototype"><span class="classname">stream</span>.<span class="methodname">_namefromurl</span></span>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="3" rowspan="1">
+          <p class="smaller"> if type is rtmp then
+          return the url w/o the .flv suffix if there was one 
+         @keywords private </p>
+        </td>
+      </tr>
+      
+      
+      
+      <tr>
+        <td colspan="3" rowspan="1">
+          <hr size="1" bgcolor="#e5e5e5">
+        </td>
+      </tr>
+    </table>
+    <br clear="none">
+    
+    
+    <a name="_setUrl" shape="rect"></a>
+    <table summary="" width="100%" border="0" cellspacing="2" cellpadding="2">
+      <tr bgcolor="#e5e5e5">
+        <td colspan="3" rowspan="1"><span class="docTableTitleGray">_setUrl</span></td>
+      </tr>
+      <tr>
+        <td colspan="3" rowspan="1">
+          <span class="docPrototype"><span class="classname">stream</span>.<span class="methodname">_setUrl</span></span>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="3" rowspan="1">
+          <p class="smaller"> do whatever necessary setup for a new url
+          based on the value of this.url
+        @keywords private </p>
+        </td>
+      </tr>
+      
+      <tr>
+        <td colspan="3" rowspan="1">
+          <hr size="1" bgcolor="#e5e5e5">
+        </td>
+      </tr>
+    </table>
+    <br clear="none">
+    
+    
+    <a name="setUrl" shape="rect"></a>
+    <table summary="" width="100%" border="0" cellspacing="2" cellpadding="2">
+      <tr bgcolor="#e5e5e5">
+        <td colspan="3" rowspan="1"><span class="docTableTitleGray">setUrl</span></td>
+      </tr>
+      <tr>
+        <td colspan="3" rowspan="1">
+          <span class="docPrototype"><span class="classname">stream</span>.<span class="methodname">setUrl</span></span>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="3" rowspan="1">
+          <p class="smaller"> setter for 'url' attribute </p>
+        </td>
+      </tr>
+      
+      
+      <tr bgcolor="#e6e6e6">
+        <td colspan="3" rowspan="1"><span class="docTableSubTitle">Parameters</span></td>
+      </tr>
+      <tr bgcolor="#e6e6e6">
+        <td rowspan="1" colspan="1"><span class="docTableColHeading">Name</span></td>
+        <td rowspan="1" colspan="1"><span class="docTableColHeading">Type</span></td>
+        <td rowspan="1" colspan="1"><span class="docTableColHeading">Desc</span></td>
+      </tr>
+      
+      <tr>
+        <td rowspan="1" colspan="1"><span class="docParam">newurl</span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"></span></td>
+        <td rowspan="1" colspan="1"><span class="smaller"></span></td>
+      </tr>
+      
+      
+      
+      <tr>
+        <td colspan="3" rowspan="1">
+          <hr size="1" bgcolor="#e5e5e5">
+        </td>
+      </tr>
+    </table>
+    <br clear="none">
+    
+    
+    
+    
+    <a name="events" shape="rect"></a>
+    <hr/>
+    <table summary="" width="100%" border="0" cellspacing="2" cellpadding="2">
+      <tr bgcolor="#5B607C">
+        <td colspan="2" rowspan="1"><span class="docTableTitle">Events</span></td>
+      </tr>
+      <tr bgcolor="#e6e6e6">
+        <td rowspan="1" colspan="1"><span class="docTableColHeading">Name</span></td>
+        <td rowspan="1" colspan="1"><span class="docTableColHeading">Description</span></td>
+      </tr>
+      
+      
+      
+    </table>
+    <br clear="none">
+    
+    <br clear="none">
+    
+    
+    <p class="copyright">Copyright &copy;</p>
+  </body>
+</html>
