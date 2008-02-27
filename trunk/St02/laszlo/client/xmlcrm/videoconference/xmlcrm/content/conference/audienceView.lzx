@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<library>
+    
+<class name="videoBoardAudience" extends="guiPresenter" x="2" y="2"
+    width="266" height="280" closable="false" title="Video and Audio"
+    resizeable="false">
+    <videoContainerAudience name="_videocontainer" x="2" y="22" />
+</class>   
+    
+<class name="audienceView" extends="baseContentView" destroyByMethod="true" >
+
+    <handler name="oninit">
+        canvas._mainbgcontentNavi.setAttribute('height',0);
+        canvas.setAttribute('naviHeightDelta',28);
+        new conferencemenubar(canvas._conferencemenu);
+        new moderationpanel(canvas._conferencemenu,{x:400});
+        canvas._conferencemenu.setAttribute('visibility','visible');
+        
+        new videoboardaudience(this);
+        new whiteboardpanel(this);
+        new filespanel(this);
+    </handler>
+
+	<handler name="ontabcontentleave">
+        Debug.write("ontabcontentleave:",this);
+        canvas._videocontainer._video1.resetValues();
+        canvas._videocontainer = null;
+        canvas._chartcontent = null;
+        canvas._mymod = null;       
+        if (_drawarea.letterObjectIsActive){
+        	_drawarea.currentletterObj.destroy();
+        }
+		this.logicalRoomLeave.doCall();
+        Debug.write("this.logicalRoomLeave ",this.logicalRoomLeave);
+	</handler>
+	
+	<netRemoteCallHib name="logicalRoomLeave" funcname="logicalRoomLeave" remotecontext="$once{ canvas.thishib }" >      
+    	<handler name="ondata" args="value">
+    		//Debug.write("logicalRoomLeave: ",value);
+    		//this.parent.destroy();
+            canvas.thishib.reconnectAfterRoomleft = true;
+            canvas.thishib.reconnectedRoomInstance = this.parent;
+            canvas.thishib.disconnect();
+            canvas._mainbgcontentNavi.setAttribute('height',canvas.naviHeight);
+            canvas.setAttribute('naviHeightDelta',canvas.naviHeight);
+            canvas._conferencemenu.removeAll();
+            canvas._conferencemenu.setAttribute('visibility','hidden');        
+    	</handler>
+    </netRemoteCallHib>
+
+</class>
+
+</library>
