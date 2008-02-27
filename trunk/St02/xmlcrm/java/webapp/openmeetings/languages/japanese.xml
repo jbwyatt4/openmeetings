@@ -82,7 +82,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>キャンセル</value>
   </string>
   <string id="26" name="yesno">
-    <value>Yes/No</value>
+    <value>はい/いいえ</value>
   </string>
   <string id="27" name="numeric">
     <value>1～10の数字</value>
@@ -106,10 +106,10 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>あなたの回答:</value>
   </string>
   <string id="34" name="yes">
-    <value>Yes</value>
+    <value>はい</value>
   </string>
   <string id="35" name="no">
-    <value>No</value>
+    <value>いいえ</value>
   </string>
   <string id="36" name="questionwant">
     <value>質問内容:</value>
@@ -184,7 +184,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>言語:</value>
   </string>
   <string id="60" name="ok2">
-    <value>ok</value>
+    <value>OK</value>
   </string>
   <string id="61" name="cancel3">
     <value>キャンセル</value>
@@ -271,7 +271,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>待機中</value>
   </string>
   <string id="89" name="applyMessage">
-    <value>モデレーション適用希望のユーザ:</value>
+    <value>モデレータ希望のユーザ:</value>
   </string>
   <string id="90" name="accept">
     <value>許可</value>
@@ -301,7 +301,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>モデレータ:</value>
   </string>
   <string id="99" name="roomfullmessage">
-    <value>この部屋は満員です。</value>
+    <value>この会議室は満室です。</value>
   </string>
   <string id="100" name="elllipse">
     <value>楕円</value>
@@ -991,7 +991,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>新しいパスワード</value>
   </string>
   <string id="329" name="resetpass">
-    <value>re-enter Password</value>
+    <value>パスワード再入力</value>
   </string>
   <string id="330" name="resetpass">
     <value>パスワードが合っていません。</value>
@@ -1036,7 +1036,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>User added but you need to assign this User to an Organisation, otherwise he won't be able to sign-in.</value>
   </string>
   <string id="344" name="adminforms">
-    <value>New Record</value>
+    <value>新しい録画</value>
   </string>
   <string id="345" name="languageseditor">
     <value>No Field found with this FieldId.</value>
@@ -1247,7 +1247,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>日付:</value>
   </string>
   <string id="412" name="record">
-    <value>再生中! 画面上では何も変更できません。これは録画ファイルです。</value>
+    <value>再生中です。画面上では何も変更できません。これは録画ファイルです。</value>
   </string>
   <string id="413" name="record">
     <value>録画ファイルの再生</value>
@@ -1265,16 +1265,16 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>録画:</value>
   </string>	
   <string id="418" name="record_error_msg">
-    <value>There is already somebody recording at the moment:</value>
+    <value>現在、他に人が録画中です。</value>
   </string>
   <string id="419" name="record_message">
-    <value>録画中!  実行ユーザ:</value>
+    <value>録画中です。実行ユーザは:</value>
   </string>
   <string id="420" name="record_cancel">
     <value>キャンセル</value>
   </string>
   <string id="421" name="record_cancal_tooltip">
-    <value>Recording will be canceled and not saved.</value>
+    <value>録画はキャンセルされ、保存されません。</value>
   </string>
   <string id="422" name="cancel_dialog_resume">
     <value>resume</value>
@@ -1350,5 +1350,23 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   </string>
   <string id="446" name="chat_emot_win">
     <value>顔文字</value>
+  </string>	
+  <string id="447" name="choose_video_settings">
+    <value>デバイスの選択</value>
+  </string>
+  <string id="448" name="choose_video_settings_combo">
+    <value>音声/映像</value>
+  </string>
+  <string id="449" name="choose_video_settings_combo">
+    <value>音声のみ</value>
+  </string>
+  <string id="450" name="choose_video_settings_combo">
+    <value>映像のみ</value>
+  </string>
+  <string id="451" name="choose_video_settings_combo">
+    <value>音声/映像なし(静止画像)</value>
+  </string>
+  <string id="452" name="choose_video_settings_info_text">
+    <value>このPCから音声も映像も送信されません。代わりにユーザプロファイルの画像が表示されます。    このオプションは、ネットワーク帯域に問題がある場合や、インターネット接続が著しく遅い場合に選択してください。</value>
   </string>	
 </language>
