@@ -34,7 +34,12 @@ def convert_class_from_lzx(lzxfile_path)
     @convert_classes.each_pair do |before, after|
       if line.include?(before)
         #line.gsub!(Regexp.new("(#{before})( |>|/)"), "#{after}\2") #if line.index(/( src=)/).nil?
-        line.gsub!(Regexp.new("(<|</|name=\"|extends=\")#{before}(\W)"), '\1' + after + '\2')
+
+        #<class name="classname" extends="classname"></classname>
+        line.gsub!(Regexp.new("(<|</|name=\"|extends=\")#{before}(\"|/|>| )"), '\1' + after + '\2')
+
+        #classname.method
+        line.gsub!(Regexp.new("(\s)#{before}(\.)"), '\1' + after + '\2')
         line.gsub!(Regexp.new("(.*)#{before}\.lzx"), '\1' + after + '.lzx') if line.include?("href=")
       end
     end
