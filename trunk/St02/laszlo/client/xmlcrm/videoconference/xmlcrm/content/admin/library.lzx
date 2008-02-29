@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<library>
-
-    <include href="userAdmin.lzx" />
-	<include href="configureUsersListItem.lzx" />
-	<include href="userValueForm.lzx" />
-	<include href="chooseOrganisationWindow.lzx" />
-
-</library>
