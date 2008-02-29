@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<library>
+
+<class name="infosPanel" extends="guiPresenter" resizeable="false"
+    width="400" height="224" closable="true" labelid="374" y="10">
+	<view y="20" bgcolor="white" x="1" width="$once{ parent.width-2 }" 
+		  height="$once{ parent.height-21 }" >
+    <handler name="oninit">
+        <![CDATA[
+            this.homepage.setText("<u><FONT color='#0000CC'>"+canvas.getLabelName(286)+"</FONT></u>");
+            this.homepage.setAttribute('link',canvas.getLabelName(282));
+            this.mailing.setText("<u><FONT color='#0000CC'>"+canvas.getLabelName(287)+"</FONT></u>");
+            this.mailing.setAttribute('link',canvas.getLabelName(283));
+        ]]>
+    </handler>
+    <labelText fontstyle="bold" y="10" labelid="278" x="10" />
+    
+        <simpleLabelButton y="40" labelid="279" x="30"
+            onclick="quicklink('meetings')" />
+        <simpleLabelButton y="70" labelid="280" x="30" 
+            onclick="quicklink('events')" />    
+            
+    <labelText fontstyle="bold" x="10" y="110" labelid="281" />
+    
+        <labelText name="homepage" x="30" y="140" width="340" multiline="true" >
+            <attribute name="link" type="string" value="" />
+            <handler name="onclick">
+                LzBrowser.loadURL(this.link,"_blank");
+            </handler>            
+        </labelText>    
+        <labelText name="mailing" x="30" y="170" width="340" multiline="true" >
+            <attribute name="link" type="string" value="" />
+            <handler name="onclick">
+                LzBrowser.loadURL(this.link,"_blank");
+            </handler>            
+        </labelText>   
+           
+	</view>
+</class> 
+
+</library>
