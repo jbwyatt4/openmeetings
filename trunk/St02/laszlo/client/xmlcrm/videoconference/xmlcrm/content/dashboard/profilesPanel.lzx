@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<library>
+
+<class name="profilesPanel" extends="guiPresenter" resizeable="false"
+    width="400" height="224" y="10" closable="true" labelid="375" >
+	<view y="20" bgcolor="white" x="1" width="$once{ parent.width-2 }" 
+		  height="$once{ parent.height-21 }" >
+    <handler name="oninit">
+        <![CDATA[
+			this.getUserSelf.doCall();
+        ]]>
+    </handler>
+    <method name="sendRefresh">
+    	this.getUserSelf.doCall();
+    </method>
+  	<netRemoteCallHib name="getUserSelf" funcname="userservice.getUserSelf" 
+  		remotecontext="$once{ canvas.thishib }" > 
+  		<netparam><method name="getValue"> return canvas.sessionId; </method></netparam>
+    	<handler name="ondata" args="value">
+    		<![CDATA[
+				Debug.write("getUserSelf: ",value);
+				parent._username.setText(canvas.getLabelName(376)+value.login);
+				if (value.pictureuri==null || value.pictureuri.length==0){
+					value.pictureuri = "d.jpg";
+				} else {
+					value.pictureuri = "_profile_"+value.pictureuri;
+				}
+		        var downloadurl = 'http://'+canvas.rtmphostlocal+':'+canvas.red5httpport
+		        		+'/'+canvas.webAppRootKey+'/DownloadHandler?fileName='+value.pictureuri
+		        		+'&moduleName=userprofile&parentPath=&room=&domain='
+		        		+'&sid='+canvas.sessionId;
+		        Debug.write("downloadurl "+downloadurl);
+		        parent._userpic.setAttribute('src',downloadurl);	
+	        ]]>
+    	</handler>
+  	</netRemoteCallHib>	    
+  	
+    <labelText name="_username" fontstyle="bold" y="10" labelid="376" x="10" />
+    <!--
+    <labelText name="_newmessages" y="40" labelid="378" x="10" />
+     -->
+    <image y="40" x="10" name="_userpic" />
+    
+    <simpleLabelButton y="50" labelid="379" x="150"
+        onclick="new uploadWindow(canvas.main_content._content.inner,{x:300,uploadmodule:'userprofile',isOnlyProfile:true,isdefaultreturn:false,returnObj:this.parent});" />  
+        
+    <simpleLabelButton y="80" labelid="377" x="150"
+        onclick="quicklinkAct('usersettings')" />  
+             
+           
+	</view>
+</class> 
+
+</library>
