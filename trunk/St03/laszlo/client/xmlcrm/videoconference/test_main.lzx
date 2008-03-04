@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<canvas debug="false" width="1000" height="700">
+
+
+<debug fontsize="14" oninit="Debug.showInternalProperties = true" />
+
+<class name="baseDraw" extends="drawview" >
+  	
+
+	<!-- ############
+		init
+	 -->
+	<handler name="oninit">
+        //Debug.write("********** this oninit: ",this);
+	</handler>
+             
+	<handler name="onmousedown" >
+		//Debug.write("onmousedown this.drawmodus: ",this.drawmodus);
+	</handler>
+
+	<handler name="onmouseup" >
+        //Debug.write("onmouseup this.drawmodus: ",this.drawmodus);
+	</handler>  
+    
+    <handler name="onclick" args="obj">
+        //Debug.write("click on whiteBoard ",obj);
+    </handler>
+
+
+
+  
+</class>
+
+
+	<baseDraw width="642" height="488" y="68" bgcolor="green" />
+
+
+</canvas>
+
+
