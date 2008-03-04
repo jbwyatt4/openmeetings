@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<library>
+
+<!-- ###################
+	Class charttab
+ -->
+<class name="chatTab" extends="simpleBaseTabpane" >
+
+	<view name="_chartoutputborder" height="${ parent.height-30 }"
+        bgcolor="$once{ canvas.basebgcolorizer }" width="260">
+		
+		<chatOutput name="_chatoutput" x="1" y="1" >
+			<handler name="oninit">
+				canvas._chartcontent = this;
+			</handler>
+		</chatOutput>
+
+	</view>
+	
+	<chatTabBottom name="_chattabbottom" 
+				   y="${ parent.height-28 }" x="0" width="254" />
+	
+</class>
+
+</library>

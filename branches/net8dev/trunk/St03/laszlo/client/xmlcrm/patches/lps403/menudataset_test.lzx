@@ -1,0 +1,46 @@
+<canvas debug="true">
+    
+    
+    
+<dataset name="myresultnavi2" >
+    <element>
+        <item>
+            <label>
+                <value>hans1</value>
+            </label>   
+             
+        </item>
+        <item>
+            <label>
+                <value>hans2</value>
+            </label>  
+        </item>
+        <item>
+            <label>
+                <value>hans3</value>
+            </label>  
+        </item>                
+    </element>
+</dataset>
+    
+<menubar name="mybar1" placement="menubar">
+    
+    <menu datapath="myresultnavi2:/element/item/" text="$path{ 'label/value/getText()' }" />
+    
+</menubar>    
+    
+<menubar name="mybar2" y="100" placement="menubar">
+    
+    <menu text="hans1" width="200">
+        <menuitem text="New..." command="cmd_new" />
+        <menuseparator/>
+        <menuitem text="Open..." command="cmd_open" />      
+    </menu>
+    <menu text="hans2" width="200" >
+        <menuitem text="New..." command="cmd_new" />
+    </menu>
+    <menu text="hans3" width="200" />
+    
+</menubar>  
+        
+</canvas>
