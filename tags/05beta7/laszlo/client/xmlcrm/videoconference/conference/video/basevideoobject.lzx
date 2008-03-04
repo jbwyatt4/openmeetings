@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<library>
+
+
+<!---
+	Base container for a video-view
+ -->
+    
+<class name="basevideoobject" extends="view" bgcolor="0x000000" width="132" height="120">
+	 
+	<!--- @keywords private -->
+	<attribute name="chatpartnername" value="" type="string" />
+	<!--- @keywords private -->
+	<attribute name="showUserProfilePic" type="boolean" value="false" />
+	
+	<!--- color of this user, this is the color the user will also use for his chat-color -->
+	<attribute name="usercolor" value="0" type="number" />
+		
+	<!--- current broadcastId -->
+	<attribute name="broadcastId" value="0" type="string" />
+	
+	<!--- @keywords private -->
+	<attribute name="isremote" value="true" type="boolean" />
+	
+	<!--- @keywords private -->
+	<attribute name="clientVars" value="null" />
+	
+	<handler name="onisremote" args="r">
+		this.isremote = r;
+		if (r) {
+			this.message.setAttribute('visibility','hidden');
+			this.showuser.setAttribute('visibility','visible');
+			this.mute.setAttribute('visibility','visible')
+		} else {
+			this.message.setAttribute('visibility','visible');
+			this.showuser.setAttribute('visibility','hidden');
+			this.mute.setAttribute('visibility','hidden')
+		}
+	</handler>
+	
+	<handler name="oninit">
+		this.clientVars = new Array();
+		this.clientVars['User']='No User Connected';
+	</handler>
+	
+	<!--- Get the reference to the videoview-Object -->
+	<method name="getVideoReference">
+		this._chatvideoinner._sendInvitation.setAttribute('visible',false);
+		return this._chatvideoinner._videoview;
+	</method>
+	
+	<!--- called by disconnected status -->
+	<method name="getVideoReferenceDis">
+		this._chatvideoinner._sendInvitation.setAttribute('visible',true);
+		return this._chatvideoinner._videoview;
+	</method>
+	
+	<method name="updateAVSettingsSymbol" args="rcl">
+		Debug.warn("updateAVSettingsSymbol TODO ",rcl);
+	</method>
+	
+	<!--- 
+		this is the current streamname for this video, wether you publish or play just a stream
+		@param string id the broadcastId, can be a id for playing or publishing
+	-->
+    <method name="setIdentifier" args="id">
+        //this.broadcastId = id;
+		this._chatvideoinner._sendInvitation.setAttribute('visible',false);
+    </method>
+    
+    <!--- resets all values and stops the streaming -->
+    <method name="resetValues">
+    	this.setAttribute('chatpartnername','');
+    	this.clientVars=null;
+    	if (this.showUserProfilePic){
+    		this._chatvideoinner.userProfilePic.destroy();
+    		this.showUserProfilePic = false;
+    	}
+    	if (this.isremote){
+    		this._chatvideoinner._videoview.stop();
+    	} else {
+    		this._chatvideoinner._videoview.stop();
+    		this._chatvideoinner._videoview.v_output.stop();
+    	}
+		this._chatvideoinner._sendInvitation.setAttribute('visible',true);
+    </method>
+    
+    <!--- @keywords private -->
+    <method name="setVideouserProfilePic" args="value">
+    	Debug.write("### setVideouserProfilePic ",value);
+    	new videouserProfilePic(this._chatvideoinner,{name:'userProfilePic',value:value});
+    	this.showUserProfilePic = true;
+    </method>
+	
+	<view name="_innertop" width="130" height="18" x="1" y="1" bgcolor="$once{ canvas.basebgcolorizer }">
+  		<text text="${ parent.parent.chatpartnername }" width="166" fgcolor="white"
+  			fontsize="9" />
+	</view>	
+
+</class>
+
+
+</library>
