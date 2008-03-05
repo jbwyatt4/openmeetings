@@ -77,19 +77,20 @@ public class MainService implements IPendingServiceCallback {
 	}
 	
 	/**
-	 * This Method is jsut for testing
+	 * This Method is just for testing
 	 * you can find the corresponding
-	 * CLietn Function in
+	 * CLient Function in
 	 * xmlcrm/auth/checkLoginData.lzx
+	 * @deprecated
 	 * @param myObject2
 	 * @return
 	 */
 	public int testObject(Object myObject2){
 		try {
 			LinkedHashMap myObject = (LinkedHashMap) myObject2;
-			log.error("testObject "+myObject.size());
-			log.error("testObject "+myObject.get(1));
-			log.error("testObject "+myObject.get("stringObj"));
+			//log.error("testObject "+myObject.size());
+			//log.error("testObject "+myObject.get(1));
+			//log.error("testObject "+myObject.get("stringObj"));
 			return myObject.size();
 		} catch (Exception e){
 			log.error("ex: ", e);

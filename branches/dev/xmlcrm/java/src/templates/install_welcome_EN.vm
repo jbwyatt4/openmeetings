@@ -12,16 +12,16 @@
 - Necessary steps which should have already been done:<br/>
 1.)Install and configure a database<br/>
 2.)Edit hibernate.cfg.xml to fit your database authentification values<br/>
-hibernate.cfg.xml can be found in $RED5_HOME/webapps/xmlcrm/install/hibernate.cfg.xml<br/>
+hibernate.cfg.xml can be found in $RED5_HOME/webapps/xmlcrm/conf/hibernate.cfg.xml<br/>
 You need to alter:<br/>
                         <property name="connection.username">postgres</property>        <br/>                                                                                      
-                        <property name="connection.password">67810</property>                <br/>                                                                                 
+                        <property name="connection.password">*****</property>                <br/>                                                                                 
                         <property name="connection.driver_class">org.postgresql.Driver</property> <br/>                                                                            
                         <property name="connection.url">jdbc:postgresql://localhost/xmlcrm</property>  <br/> 
-3.)Inport the SQL-skeleton (postgres_skeleton.sql)<BR/>
-for example with phppgadmin or www.pgadmin.org (postgres) or phpmyadmin<br/>
-3.)Install openoffice-service running on port 8100 in headless modus (<A HREF="http://code.google.com/p/openmeetings/wiki/OpenOfficeConverter">OpenOfficeConverter</A>)<BR/>
-4.)Install imagemagick and make it availible in your Classpath <BR/>
+
+for a more detailed Installation instructions see:<br/>
+<a href="http://code.google.com/p/openmeetings/">http://code.google.com/p/openmeetings/</a>
+<BR/>
 <UL>
 <LI>Linux distros: Imagemagick can be installed with your package system (apt-get,yast,..)</LI>
 <LI>MacOSX: Imagemagick can be installed from the <A HREF="http://www.imagemagick.org" TARGET="_BLANK">imagemagick projectpage<A> or using fink + apt-get</LI>

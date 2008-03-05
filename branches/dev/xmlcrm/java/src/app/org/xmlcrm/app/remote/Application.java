@@ -63,7 +63,7 @@ public class Application extends ApplicationAdapter implements
 	public static String webAppPath = "";
 	public static String configDirName = "conf";
 	
-	private static long broadCastCounter = -1;
+	private static long broadCastCounter = 1;
 	
 	private static Application instance = null;
 	
@@ -71,10 +71,15 @@ public class Application extends ApplicationAdapter implements
 		return instance;
 	}
 
+	
 	@Override
 	public boolean appStart(IScope scope) {
 		try {
-			webAppPath = scope.getResource("/").getFile().getAbsolutePath();			
+			
+			//PropertyConfigurator.configure(System.getProperties());
+
+			webAppPath = scope.getResource("/").getFile().getAbsolutePath();		
+	
 			scope.getResource("public/").getFile().getParentFile().getAbsolutePath();
 			String filePath = scope.getResource("public/").getFile().getAbsolutePath();
 			this.loadEmot(filePath);
