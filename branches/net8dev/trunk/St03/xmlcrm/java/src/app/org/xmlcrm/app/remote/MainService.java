@@ -105,14 +105,14 @@ public class MainService implements IPendingServiceCallback {
     public Sessiondata getsessiondata(){
         return Sessionmanagement.getInstance().startsession();
     }   
-    
+       
     /**
      * auth function, use the SID you get by getsessiondata
      * @param SID
      * @param Username
      * @param Userpass
      * @return a valid user account or an empty user with an error message and level -1
-     */
+     */ 
     public Object loginUser(String SID, String Username, String Userpass){
     	try {
         	log.debug("loginUser 111: "+SID+" "+Username);

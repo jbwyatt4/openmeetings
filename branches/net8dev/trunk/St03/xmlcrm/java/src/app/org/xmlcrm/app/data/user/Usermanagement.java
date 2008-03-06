@@ -218,7 +218,7 @@ public class Usermanagement {
 			Object idf = HibernateUtil.createSession();
 			Session session = HibernateUtil.getSession();
 			Transaction tx = session.beginTransaction();
-			MD5Calc md5 = new MD5Calc("MD5");
+			MD5Calc md5 = new MD5Calc();
 			Criteria crit = session.createCriteria(Users.class);
 			crit.add(Restrictions.eq("login", Username));
 			crit.add(Restrictions.eq("deleted", "false"));
@@ -431,7 +431,7 @@ public class Usermanagement {
 						us.setLevel_id(new Long(level_id));
 					if (password.length() != 0) {
 						if (password.length()>=4){
-							MD5Calc md5 = new MD5Calc("MD5");
+							MD5Calc md5 = new MD5Calc();
 							us.setPassword(md5.do_checksum(password));
 						} else {
 							return new Long(-7);
@@ -863,7 +863,7 @@ public class Usermanagement {
 			} else {
 				users.setLanguage_id(null);
 			}
-			MD5Calc md5 = new MD5Calc("MD5");
+			MD5Calc md5 = new MD5Calc();
 			users.setPassword(md5.do_checksum(Userpass));
 			users.setRegdate(new Date());
 			users.setDeleted("false");
@@ -976,7 +976,7 @@ public class Usermanagement {
 					savedUser.setLastname(user.getLastname());
 					savedUser.setTitle_id(user.getTitle_id());
 					if (user.getPassword().length()>3){
-						MD5Calc md5 = new MD5Calc("MD5");
+						MD5Calc md5 = new MD5Calc();
 						savedUser.setPassword(md5.do_checksum(user.getPassword()));
 					}
 					
@@ -1068,7 +1068,7 @@ public class Usermanagement {
 	
 	private void sendHashByUser(Users us, String appLink) throws Exception {
 		String loginData = us.getLogin()+new Date();
-		MD5Calc md5 = new MD5Calc("MD5");
+		MD5Calc md5 = new MD5Calc();
 		log.error("User: "+us.getLogin());
 		us.setResethash(md5.do_checksum(loginData));
 		this.updateUser(us);
@@ -1153,7 +1153,7 @@ public class Usermanagement {
 			Object u = this.getUserByHash(hash);
 			if (u instanceof Users) {
 				Users us = (Users) u;
-				MD5Calc md5 = new MD5Calc("MD5");
+				MD5Calc md5 = new MD5Calc();
 				us.setPassword(md5.do_checksum(pass));
 				us.setResethash("");
 				this.updateUser(us);
