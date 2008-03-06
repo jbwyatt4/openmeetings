@@ -1,2 +1,0 @@
-%1 -cp .:%4commons-cli-1.0.jar:%4commons-io-1.3.1.jar:%4jodconverter-2.2.0.jar:%4jodconverter-cli-2.2.0.jar:%4juh-2.2.0.jar:%4jurt-2.2.0.jar:%4ridl-2.2.0.jar:%4slf4j-api-1.4.0.jar:%4slf4j-jdk14-1.4.0.jar:%4unoil-2.2.0.jar:%4xstream-1.2.2.jar -jar %4jodconverter-cli-2.2.0.jar %2 %3
-exit
