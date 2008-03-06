@@ -169,7 +169,11 @@
 			}
 		]]>
 	</method>
-	<method name="loadToolsByModi" args="modi">
+	<method name="loadToolsByModi" args="modiLowerCase">
+		var firstChar = modiLowerCase.substring(0, 1);
+		var restChar = modiLowerCase.substring(1, modiLowerCase.length);
+		var modi = firstChar.toUpperCase()+restChar;
+		if ($debug) Debug.write("modi: "+modi);
 		if (global["draw"+modi+"Tools"]!=undefined) {
 			this.clearContent();
 			new global["draw"+modi+"Tools"](this);		

@@ -19,7 +19,7 @@
 	        var yVal = canvas.getMouse('y');
 			////Debug.write("mytext: ",this.mytext);
 			if (this.multiline && this.text.length!=0){
-				this.holder = new xmlCrmTooltipmulti(canvas,{text:this.text,holder:this});
+				this.holder = new xmlCrmTooltipMulti(canvas,{text:this.text,holder:this});
 			} else if (this.text.length!=0){
 				this.holder = new xmlCrmTooltip(canvas,{text:this.text,holder:this});
 			}

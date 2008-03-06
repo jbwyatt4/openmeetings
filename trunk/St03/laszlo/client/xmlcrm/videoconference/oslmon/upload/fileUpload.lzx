@@ -20,15 +20,20 @@
 			fr = new flash.net.FileReference();	
 			//Debug.write(fr);
     		fr.onHTTPError = function(fr, httpError){
-            	_root.Debug.write('onHTTPError invoked: ' + httpError);
+            	_root.Debug.write('onHTTPError function: ' + httpError);
             	new errorPopup(canvas,{error:'Err2: '+httpError});
 			}
 			fr.onIOError = function(fr){
-				_root.Debug.write.write('onIOError invoked');
+				_root.Debug.write.write('onIOError function');
+				new errorPopup(canvas,{error:'onIOError invoked '});
 			}
 			function callbackFunction ( e ) {
 				_root.Debug.write( e.data );
-			}			
+			}		
+			fr.onSecurityError = function(fr, errorString){
+				_root.Debug.write('onSecurityError function: ' + errorString);
+            	new errorPopup(canvas,{error:'Err2: '+errorString});
+			}
 			fr.addListener(invoker, callbackFunction);
 		]]>
 		</method>
