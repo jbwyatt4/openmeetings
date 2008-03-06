@@ -1,0 +1,1553 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<library>
+
+<class name="drawArrowWhiteBoard" resource="drawarrow_rsc" >
+	<method name="setTint" args="color, brightness">
+	    <![CDATA[
+	    if (color != "" && color != null){
+	        if (brightness == null) { brightness = 0; }
+	        var rgb = color;
+	        var red=(rgb >> 16) & 0xFF;
+	        var green=(rgb >> 8) & 0xFF;
+	        var blue=rgb & 0xFF;
+
+	        this.setColorTransform( { ra : red, ga : green, ba : blue,
+	                            		rb : 0, gb : 0, bb : 0 } );
+	    }
+	    ]]>
+	</method>
+</class>
+
+<class name="drawViewNew" extends="drawview" cachebitmap="false" x="-1" y="-1" >
+	
+	<attribute name="typeOfObject" value="paint" type="string" />
+
+    <attribute name="initwidth" value="0" type="number" />
+    <attribute name="initheight" value="0" type="number" />
+    
+    <handler name="oninit">
+        this.initwidth=this.width;
+        this.initheight=this.height;
+    </handler>
+    
+	<handler name="onwidth">
+        <![CDATA[
+        if(this.name.indexOf('line')>=0 || this.name.indexOf('uline')>=0 || (this.name.indexOf('drawarrow')>=0 && this.isinited) || this.name.indexOf('paint')>=0 || this.name.indexOf('rectangle')>=0 || this.name.indexOf('ellipse')>=0 ) {
+        	if (this.isinited) {
+        		this.getMCRef()._xscale = (this.width/this.initwidth)*100;
+        	}
+        }
+        ]]>
+    </handler>
+    
+    <handler name="onheight">
+    	<![CDATA[
+        if(this.name.indexOf('line')>=0 || this.name.indexOf('uline')>=0 || (this.name.indexOf('drawarrow')>=0 && this.isinited) || this.name.indexOf('paint')>=0  || this.name.indexOf('rectangle')>=0 || this.name.indexOf('ellipse')>=0 ) {
+        	if (this.isinited) {
+        		this.getMCRef()._yscale = (this.height/this.initheight)*100;  
+        	}
+        }
+        ]]>   
+    </handler>
+    <!-- 
+    <dragstate name="dragger" drag_axis="both"
+	    drag_min_x="0"
+	    drag_max_x="$once{parent.width - this.width}"
+	    drag_min_y="0"
+	    drag_max_y="$once{parent.height - this.height}">
+    </dragstate>
+     -->
+</class>
+
+<class name="baseDraw" extends="drawview" cachebitmap="false" clickable="true" >
+
+	<attribute name="currentlayer" value="null" />
+	<attribute name="layers" value="null" />
+	
+	<attribute name="redolayers" value="null" />
+
+  	<attribute name="mx" type="number" value="0"/>
+  	<attribute name="my" type="number" value="0"/>
+  	<attribute name="prevx" type="number" value="0"/>
+  	<attribute name="prevy" type="number" value="0"/>
+  	
+  	<!-- paint -->
+  	<attribute name="currentlayerstroke" value="0xFF6600" />
+  	<attribute name="currentlayerlineWidth" value="2" type="number" />
+  	
+  	<!-- for drawing line -->
+  	<attribute name="currentlinestroke" value="0xFF6600" />
+  	<attribute name="currentlinelineWidth" value="2" type="number" />  	
+  	
+  	<!-- for drawing uline -->
+  	<attribute name="currentulinestroke" value="0xFF6600" />
+  	<attribute name="currentulinelineWidth" value="2" type="number" />  
+  	
+  	<!-- for drawing drawarrow -->
+  	<attribute name="currentdrawarrowlinestroke" value="0xFF6600" />
+  	<attribute name="currentdrawarrowlinelineWidth" value="1" type="number" />    	
+  	
+  	<!--  
+  		for drawing rectangles the variable 
+  		with *Dis* indicates if the line/fil-color is active (+1/-1)
+  	 -->
+  	<attribute name="currentrectanglestroke" value="0xFF6600" />
+  	<attribute name="currentrectanglestrokeDis" value="1" type="number" />
+  	<attribute name="currentrectanglestrokeFill" value="0xFFFF33" />
+  	<attribute name="currentrectanglestrokeFillDis" value="1" type="number" />
+  	<attribute name="currentrectangleineWidth" value="4" type="number" />
+  	
+  	<!-- 
+	  	for drawing ellipse the variable 
+	  	with *Dis* indicates if the line/fil-color is active (+1/-1)
+  	 -->
+  	<attribute name="currentellipsestroke" value="0xFF6600" />
+  	<attribute name="currentellipsestrokeDis" value="1" type="number" />
+  	<attribute name="currentellipsestrokeFill" value="0xFFFF33" />
+  	<attribute name="currentellipsestrokeFillDis" value="1" type="number" />
+  	<attribute name="currentellipselineWidth" value="4" />
+  	
+  	<attribute name="painttrans" value="false" type="boolean" />
+  	
+  	<attribute name="startx" value="0" type="number" />
+  	<attribute name="starty" value="0" type="number" />
+  	<attribute name="endx" value="0" type="number" />
+  	<attribute name="endy" value="0" type="number" />
+  	
+  	<!-- This Counter just adds, it dosen't shows the absolute number of items
+  		(ask this.layers.length to get the number of drawings) -->
+  	<attribute name="counter" value="0" type="number" />
+
+  	<method name="getCounter">
+		//Debug.write("### getCounter :",this.counter);
+  		this.counter++;
+  		return this.counter;
+  	</method>
+	
+	<method name="compareAndSetCounter" args="c">
+		<![CDATA[
+			if (c>this.counter) this.counter = c;
+		]]>
+	</method>
+  	
+	<attribute name="mousetracker_del" value="$once{ new LzDelegate(this, 'trackmouse' )}" />
+	
+	<!-- 
+	This is the very basic decision what to do
+	the modus pointer is only  a temp modus which is inited while draging
+	a new selected object
+	 -->
+	<attribute name="drawmodus" value="hand" type="string" />
+	
+	<!-- This List holds all ActionObject
+		currently paintings
+				  letters -->
+	<attribute name="baseactionobjectList" value="null" />
+	<attribute name="baseredoactionobjectList" value="null" />
+	
+	<!-- This List hold a reference to all 
+		Array of Drawing Action, it is needed for coping the view and undo/redo -->
+	<attribute name="basetempactionobjectList" value="null" />
+	
+	<attribute name="basdrawredoView" value="null" />
+	
+	<attribute name="hasprevious" value="false" type="boolean" />
+	<attribute name="hasenext" value="false" type="boolean" />
+	
+	
+	<!-- For the dragging resizeing there is a bounding box -->
+	<attribute name="boundingIsActive" value="false" type="boolean" />
+	<attribute name="boundingref" value="null" />
+	
+	<!-- For sending messages in shared modus -->
+	<method name="onsharedMessage" args="action,obj" />
+	
+	<!-- this event must be triggered AFTER
+		the nesseccary room + domain for this conferenceView is set
+		-->
+	<handler name="onopenWhiteBoard" />
+	
+	<!-- ############
+		init
+	 -->
+	<handler name="oninit">
+        //Debug.write("********** this oninit: ",this);
+		this.basdrawredoView = new LzView(canvas,{visible:false,y:440});
+		this.layers = new Array();
+		this.redolayers = new Array();
+		this.baseactionobjectList = new Array();
+		this.baseredoactionobjectList = new Array();
+	</handler>
+	
+	<method name="clearAll">
+		<![CDATA[
+			if (this.boundingref!=null) this.boundingref.removeIt();
+			while (this.subviews.length > 0) {
+				this.subviews[0].destroy();
+			}
+			while (this.basdrawredoView.subviews.length > 0) {
+				this.basdrawredoView.subviews[0].destroy();
+			}			
+			this.layers = new Array();
+			this.redolayers = new Array();
+			this.baseactionobjectList = new Array();
+			this.baseredoactionobjectList = new Array();	
+			this.checkStepLayers();	
+			this.onsharedMessage('clear',null);	
+		]]>
+	</method>
+	
+	<method name="doAction" args="modi">
+		if (modi=='saveobj'){
+			if (this.sendObject) this.sendObject.sendEvent();
+		} else if (modi=='loadobj'){
+		
+		}
+	</method>
+	
+	<method name="setModus" args="modi">
+		//check if previous modi has been txt, which might not be saved to the board yet
+		if (this.drawmodus=='letter'){
+			if (this.letterObjectIsActive){
+				this.currentletterObj.drawtoArray();
+			}
+		}
+		this.setAttribute('drawmodus',modi);
+		if (modi=='plain'){
+			this.clearAll();
+		} else if (modi=='hand' || modi=='letter' || modi=='paint' || modi=='line' || modi=='uline' || modi=='rectangle' || modi=='ellipse' || modi=='drawarrow'){
+			if (this.boundingref!=null) this.boundingref.removeIt();
+		}
+	</method>
+	
+	<method name="getModusItems" args="modi">
+		<![CDATA[
+		//Debug.write("getModusItems: ",modi,this.baseactionobjectList);
+		if (modi=='pointer'){
+			return this.baseactionobjectList;
+		} else {
+			var tempList = new Array();
+			//Debug.write("this.baseactionobjectList: ",modi);
+			for (var eg=0;eg<this.baseactionobjectList.length;eg++){
+				//Debug.write("this.baseactionobjectList[eg][0]==modi",this.baseactionobjectList[eg][0],modi);
+				if (this.baseactionobjectList[eg][0]==modi) {
+					tempList.push(this.baseactionobjectList[eg]);
+				}
+			}		
+			return tempList;
+		}
+		]]>
+	</method>
+	
+	<method name="getObjectByName" args="objName">
+		return this[objName];
+	</method>
+	
+	<method name="deleteItemByName" args="objName">
+	<![CDATA[
+		this[objName].destroy();
+		if (this.boundingref!=null) this.boundingref.removeIt();
+		var pos = -1;
+		for (var eg=0;eg<this.layers.length;eg++){
+			if (this.layers[eg]['name']==objName) {
+				pos = eg;
+				//Debug.write("Found Object in Layer: ",eg);
+				this.layers[eg].destroy();
+			}
+		}	
+		if (pos!=-1) this.layers.splice(pos, 1);
+		//get Item Position
+		pos = -1;
+		for (var eg=0;eg<this.baseactionobjectList.length;eg++){
+			if (this.baseactionobjectList[eg][this.baseactionobjectList[eg].length-1]==objName) {
+				pos = eg;
+				//Debug.write("Found Object: ",eg);
+			}
+		}
+		var newA = this.baseactionobjectList[pos];
+		if (newA[0]=='paint') newA[1] = new Array();
+		this.onsharedMessage('delete',newA);	
+		if (pos!=-1) this.baseactionobjectList.splice(pos, 1);
+		//Debug.write("this.baseactionobjectList.length: ",this.baseactionobjectList.length);
+		//Debug.write("this.layers.length: ",this.layers.length);
+		this.checkStepLayers();
+	]]>
+	</method>
+	
+	<method name="UpdateByObject" args="objRef">
+		<![CDATA[
+		//Debug.write("UpdateByObject : ",objRef,objRef.name);
+		var objName = objRef.name;
+		//for (var eg=0;eg<this.layers.length;eg++){
+		//	if (this.layers[eg]['name']==objName) {
+		//		//Debug.write("Found Object in Layer: ",this.layers[eg]);
+		//	}
+		//}
+		for (var eg=0;eg<this.baseactionobjectList.length;eg++){
+			if (this.baseactionobjectList[eg][this.baseactionobjectList[eg].length-1]==objName) {
+				//Debug.write("Found Object: ",this.baseactionobjectList[eg]);
+				this.baseactionobjectList[eg][this.baseactionobjectList[eg].length-5] = objRef.x;
+				this.baseactionobjectList[eg][this.baseactionobjectList[eg].length-4] = objRef.y;
+				this.baseactionobjectList[eg][this.baseactionobjectList[eg].length-3] = objRef.width;
+				this.baseactionobjectList[eg][this.baseactionobjectList[eg].length-2] = objRef.height;
+				var newA = this.baseactionobjectList[eg];
+				if (newA[0]=='paint') newA[1] = new Array();				
+				this.onsharedMessage('size',newA);	
+			    break;
+			}
+		}	
+			
+		]]>
+	</method>
+	
+	<!-- ##############
+		undo/redo
+	 -->
+	<method name="doredo">
+		//Debug.write("redo");
+		<![CDATA[
+		if (this.redolayers.length>0){
+			if (this.boundingref!=null) this.boundingref.removeIt();
+			var lastelement = this.redolayers.pop();
+			var lastActionObject = this.baseredoactionobjectList.pop();
+			//Debug.write(lastActionObject);
+			//Redraw the View on the paintarea
+			if (lastActionObject[0]=='paint'){
+				this.paintactionHistory(lastActionObject,this);lineactionHistory
+			} else if (lastActionObject[0]=='line'){
+				this.lineactionHistory(lastActionObject,this);
+			} else if (lastActionObject[0]=='uline'){
+				this.ulineactionHistory(lastActionObject,this);
+			} else if (lastActionObject[0]=='drawarrow'){
+				this.drawarrowlineactionHistory(lastActionObject,this);
+			} else if(lastActionObject[0]=='letter'){
+				this.drawactionHistory(lastActionObject,this);
+			} else if(lastActionObject[0]=='image'){
+				this.addImageToLayerHistory(lastActionObject,this,false);
+			} else if(lastActionObject[0]=='swf'){
+				this.addSWFToLayerHistory(lastActionObject,this,false);
+			} else if(lastActionObject[0]=='rectangle'){
+				this.drawrectangleToHistory(lastActionObject,this);
+			} else if(lastActionObject[0]=='ellipse'){
+				this.drawellipseToHistory(lastActionObject,this);
+			}
+			//Push to redolayers,ObjectList
+			this.layers.push(this.currentlayer);
+			this.baseactionobjectList.push(lastActionObject);
+			//Remove this View
+			lastelement.destroy();
+			this.checkStepLayers();
+			this.onsharedMessage('redo',lastActionObject);
+		}
+		]]>
+	</method>
+	
+	<method name="undoredo">
+		<![CDATA[
+		if (this.layers.length>0){
+			if (this.boundingref!=null) this.boundingref.removeIt();
+			var lastelement = this.layers.pop();
+			var lastActionObject = this.baseactionobjectList.pop();
+			//Debug.write(lastActionObject);
+			//Redraw the View on the Invisible paintarea
+			if (lastActionObject[0]=='paint'){
+				//Debug.write("Undo Paint: ",lastActionObject);
+				this.paintactionHistory(lastActionObject,this.basdrawredoView);
+			} else if (lastActionObject[0]=='line'){
+				this.lineactionHistory(lastActionObject,this.basdrawredoView);
+			} else if (lastActionObject[0]=='uline'){
+				this.ulineactionHistory(lastActionObject,this.basdrawredoView);
+			} else if (lastActionObject[0]=='drawarrow'){
+				this.drawarrowlineactionHistory(lastActionObject,this.basdrawredoView);
+			} else if(lastActionObject[0]=='letter'){
+				this.drawactionHistory(lastActionObject,this.basdrawredoView);
+			} else if(lastActionObject[0]=='image'){
+				this.addImageToLayerHistory(lastActionObject,this.basdrawredoView,false);
+			} else if(lastActionObject[0]=='swf'){
+				this.addSWFToLayerHistory(lastActionObject,this.basdrawredoView,false);
+			} else if(lastActionObject[0]=='rectangle'){
+				this.drawrectangleToHistory(lastActionObject,this.basdrawredoView);
+			} else if(lastActionObject[0]=='ellipse'){
+				this.drawellipseToHistory(lastActionObject,this.basdrawredoView);
+			}
+			//Push to redolayers,redoObjectList
+			this.redolayers.push(this.currentlayer);
+			this.baseredoactionobjectList.push(lastActionObject);
+			//Remove this View
+			lastelement.destroy();
+			this.checkStepLayers();		
+			this.onsharedMessage('undo',lastActionObject);
+		}
+		]]>
+	</method>
+
+	
+	<method name="checkStepLayers">
+		if (this.layers.length==0){
+			this.setAttribute('hasprevious',false);
+		} else {
+			this.setAttribute('hasprevious',true);
+		}
+		if (this.redolayers.length==0){
+			this.setAttribute('hasenext',false);
+		} else {
+			this.setAttribute('hasenext',true);
+		}	
+		//this.setAttribute('drawmodus',this.getAttribute('drawmodus'));				
+	</method>
+             
+	<handler name="onmousedown" >
+		//Debug.write("onmousedown this.drawmodus: ",this.drawmodus);
+		if(this.drawmodus=="hand"){
+			this.doSetHandBodus();
+		} else if(this.drawmodus=="paint"){
+			this.startPaint();
+			mousetracker_del.register(LzIdle,'onidle');
+		} else if(this.drawmodus=="line"){
+			this.startLine();
+  	 		this.startx = currentlayer.getMouse('x');
+			this.starty = currentlayer.getMouse('y'); 			
+			mousetracker_del.register(LzIdle,'onidle');
+		} else if(this.drawmodus=="uline"){
+			this.startUline();
+  	 		this.startx = currentlayer.getMouse('x');
+			this.starty = currentlayer.getMouse('y'); 			
+			mousetracker_del.register(LzIdle,'onidle');
+		} else if(this.drawmodus=="drawarrow"){
+			this.startDrawarrowline();
+  	 		this.startx = currentlayer.getMouse('x');
+			this.starty = currentlayer.getMouse('y'); 			
+			mousetracker_del.register(LzIdle,'onidle');
+		} else if (this.drawmodus == 'rectangle') {
+			this.startRect();
+  	 		this.startx = currentlayer.getMouse('x');
+			this.starty = currentlayer.getMouse('y'); 				
+            mousetracker_del.register(LzIdle,'onidle');
+        } else if (this.drawmodus == 'ellipse') {
+			this.startEllipse();
+  	 		this.startx = currentlayer.getMouse('x');
+			this.starty = currentlayer.getMouse('y'); 				
+            mousetracker_del.register(LzIdle,'onidle');
+        }
+	</handler>
+
+	<handler name="onmouseup" >
+        //Debug.write("onmouseup this.drawmodus: ",this.drawmodus);
+		<![CDATA[	
+		var bool = false;
+		if (this.letterObjectIsActive){
+			this.currentletterObj.drawtoArray();
+			bool = true;
+		}	
+		if(this.drawmodus=="paint"){
+			this.endPaint();
+			mousetracker_del.unregisterAll();
+		} else if(this.drawmodus=="line"){
+			this.endLine();
+			mousetracker_del.unregisterAll();
+		} else if(this.drawmodus=="drawarrow"){
+			this.endDrawarrowline();
+			mousetracker_del.unregisterAll();
+		} else if(this.drawmodus=="uline"){
+			this.endUline();
+			mousetracker_del.unregisterAll();
+		} else if(this.drawmodus=="letter"){
+			if (!this.letterObjectIsActive && !bool){
+				this.currentletterObj = new baseDrawWords(canvas,{refObj:this,x:canvas.getMouse('x'),y:canvas.getMouse('y')});
+			}
+		} else if (this.drawmodus == 'rectangle') {
+			this.endRect();
+        	mousetracker_del.unregisterAll();
+        } else if (this.drawmodus == 'ellipse') {
+			this.endEllipse();
+        	mousetracker_del.unregisterAll();
+        } else if (this.drawmodus == 'pointer') {
+        	this.setAttribute('drawmodus','hand');
+			if (this.boundingIsActive){
+				this.boundingref._innerDrag.onmouseup.sendEvent();
+			}
+        }
+        ////Debug.write("onmouseup: ",this.letterObjectIsActive,this.currentletterObj);	        
+		this.checkStepLayers();
+		]]>
+	</handler>  
+    
+    <handler name="onclick" args="obj">
+        //Debug.write("click on whiteBoard ",obj);
+    </handler>
+
+  	<method name="trackmouse" >
+    	<![CDATA[
+
+    	this.mx = currentlayer.getMouse('x');
+    	this.my = currentlayer.getMouse('y');   
+	    	    	
+    	if (this.drawmodus=="paint"){	    	
+		    if (mx != prevx || my != prevy) {
+		        if (prevx == null) {
+		            prevx = mx;
+		        }
+		        if (prevy == null) {
+		            prevy = my;
+		        }
+	            var mmx = this.mx;
+	            var mmy = this.my;
+	            var px = this.prevx;
+	            var py = this.prevy;
+
+	            this.drawline(px, py, mmx, mmy);
+	            this.drawlineRegisterPaint(px, py, mmx, mmy);
+	            
+	            this.prevx  = this.mx;
+	            this.prevy = this.my;            
+	        } 
+	    } else if (this.drawmodus=="line"){	 
+	    	this.currentlayer.destroy();
+	    	this.startLine();
+			this.endx = this.mx;
+			this.endy = this.my;
+            this.drawline(this.startx, this.starty, this.endx, this.endy);
+	    } else if (this.drawmodus=="uline"){
+	    	this.currentlayer.destroy();
+	    	this.startUline();
+			this.endx = this.mx;
+			this.endy = this.my;
+            this.drawline(this.startx, this.starty, this.endx, this.endy);
+	    } else if (this.drawmodus=="drawarrow"){	
+	    	//Debug.write(" this.currentlayer.destroy ");
+	    	this.currentlayer.destroy();
+	    	this.startDrawarrowline();
+			this.endx = this.mx;
+			this.endy = this.my;
+	    } else if (this.drawmodus == 'rectangle') {
+	    	this.currentlayer.destroy();
+	    	this.startRect();
+			// stretchy rect mode
+			this.endx = this.mx;
+			this.endy = this.my;
+			this.drawrectangle (this.startx, this.starty, this.mx, this.my);
+		} else if (this.drawmodus == 'ellipse') {
+	    	this.currentlayer.destroy();
+	    	this.startEllipse();
+			// stretchy rect mode
+			this.endx = this.mx;
+			this.endy = this.my;
+			this.drawellipse (this.startx, this.starty, this.mx, this.my);			
+		}	
+    	]]>
+    </method>
+	
+	<!-- ####################
+		Handmodus
+	 -->
+	<method name="doSetHandBodus" >
+		<![CDATA[
+		////Debug.write("doSetHandBodus: ");
+		var objList = this.getObjectInBounds(this.getMouse('x'),this.getMouse('y'));
+		if(objList.length==1){
+			//this.parent._drawareaobjectcombobox.preselectedName=objList[0][objList[0].length-1];
+			this.setAttribute('drawmodus','pointer');
+			////Debug.write(objList[0][objList[0].length-1]);
+			this.doShowObjectBounds(objList[0][objList[0].length-1]);
+		} else if (objList.length>1){
+			//this.parent._drawareaobjectcombobox.preselectedName=objList[objList.length-1][objList[objList.length-1].length-1];
+			this.setAttribute('drawmodus','pointer');
+			////Debug.write(objList[objList.length-1][objList[objList.length-1].length-1]);
+			this.doShowObjectBounds(objList[objList.length-1][objList[objList.length-1].length-1]);
+			//new chooseDrawAreaObjectWindow(canvas,{x:300,y:200,refObj:this,listV:objList});
+		}	
+		]]>
+	</method>
+	
+    <method name="doShowObjectBounds" args="val">
+    <![CDATA[
+    	if (val !=null && val!=''){
+	    	this.ObjectByName = this.getObjectByName(val);
+               
+            var boundingDoUpdateOnInit = true;
+            if (this.ObjectByName instanceof swfResourceView){
+                //Debug.write("is swf Presentation");
+                boundingDoUpdateOnInit=false;
+            }
+                
+	    	var x = this.ObjectByName.getAttribute('x');
+	    	var y = this.ObjectByName.getAttribute('y');
+            //Debug.write("doShowObjectBounds: ",x,y);
+	    	var width = this.ObjectByName.width;
+	    	var height = this.ObjectByName.height;
+	    	if (this.boundingref!=null)this.boundingref.removeIt();
+	    	this.boundingref = new boundingBoxAll(this.parent.parent.boundboxesView,{whiteboardRef:this,
+                    objRef:this.ObjectByName,x:x-200,y:y-200,width:width+400,height:height+400,
+                    ex:x,ey:y,ewidth:width,eheight:height,boundingDoUpdateOnInit:boundingDoUpdateOnInit});
+	    	this.setAttribute('boundingIsActive',true);
+        
+            if (!boundingDoUpdateOnInit) {
+                this.boundingref._inner._inner.setAttribute('width',this.ObjectByName._swfView.width);
+                this.boundingref._inner._inner.setAttribute('height',this.ObjectByName._swfView.height);
+                //Debug.write(this.ObjectByName._swfView.width,this.ObjectByName._swfView.height);
+                this.boundingref._inner.setAttribute('visible',true);
+                parent.parent.changeMenu(2,true);
+                this.doUpdateDocumentToolBar();
+            } else {
+                parent.parent.changeMenu(1,true);
+            }
+             
+    	}
+    ]]>
+    </method>   
+	
+	<method name="updateObjectBounds">
+		if (this.boundingref!=null) this.boundingref.resetValues();
+	</method>
+    
+	<method name="getObjectInBounds" args="x,y">
+		<![CDATA[
+		var tempList = new Array();
+		////Debug.write("getObjectInBounds this.baseactionobjectList1: ",x,y,this.baseactionobjectList);
+		for (var eg=0;eg<this.baseactionobjectList.length;eg++){
+			if ( ( this.baseactionobjectList[eg][this.baseactionobjectList[eg].length-5]<x && ( (this.baseactionobjectList[eg][this.baseactionobjectList[eg].length-5]+this.baseactionobjectList[eg][this.baseactionobjectList[eg].length-3]) >=x ) ) && ( this.baseactionobjectList[eg][this.baseactionobjectList[eg].length-4]<y && ( this.baseactionobjectList[eg][this.baseactionobjectList[eg].length-4]+this.baseactionobjectList[eg][this.baseactionobjectList[eg].length-2] )>y  ) ) {
+				tempList.push(this.baseactionobjectList[eg]);
+				////Debug.write("found obj: ",this.baseactionobjectList[eg]);
+			}
+		}		
+		return tempList;
+		]]>
+	</method>
+	
+	
+	
+	
+	<!-- ##################
+		SharedModus
+		action => type of action
+		actionObject => necessary information to reproduce the event
+		isWmlLoader => true means this object is loaded through a stored wml-file
+		so do not spread any update-notifications to connected clients for each 
+		object cause the file loading will make a seperate notification
+	 -->
+	<method name="sendWatchObject" args="action,actionObject,isWmlLoader">
+		Debug.write("sendWatchObject: ",action,actionObject);
+		<![CDATA[
+		if (action=='draw' || action=='redo'){
+			var lastactionObject = actionObject;
+			
+			//Redraw the View on the paintarea
+			if (actionObject[0]=='paint'){
+				this.paintactionHistory(lastactionObject,this);
+			} else if (actionObject[0]=='line'){
+				this.lineactionHistory(lastactionObject,this);
+			} else if (actionObject[0]=='uline'){
+				this.ulineactionHistory(lastactionObject,this);
+			} else if (actionObject[0]=='drawarrow'){
+				this.drawarrowlineactionHistory(lastactionObject,this);
+			} else if(action,actionObject[0]=='letter'){
+				this.drawactionHistory(lastactionObject,this);
+			} else if(actionObject[0]=='image'){
+				//Image will send the onwmlLoaderSend later cause it has to be send
+				//once the image has been loaded completely
+				this.addImageToLayerHistory(lastactionObject,this,isWmlLoader);
+			} else if(actionObject[0]=='swf'){
+				//Image will send the onwmlLoaderSend later cause it has to be send
+				//once the image has been loaded completely
+				this.addSWFToLayerHistory(lastactionObject,this,isWmlLoader);
+			} else if(actionObject[0]=='rectangle'){
+				this.drawrectangleToHistory(lastactionObject,this);
+			} else if(actionObject[0]=='ellipse'){
+				this.drawellipseToHistory(lastactionObject,this);
+			}
+			//set counter to maximum otherwise trouble in naming conventions
+			//the 6th array index count from the end of each object is always the counter of the
+			//object
+			this.compareAndSetCounter(lastactionObject[lastactionObject.length-6]);
+			this.baseactionobjectList.push(lastactionObject);
+			
+			//Send a notifcation for the library loader sothat it can show progress
+			//and Browser does not hangUp and images can be proceed
+			//only send if type ain#t image cause image will send its own one after 
+			// it has been loaded completely
+			if (isWmlLoader && actionObject[0]!='image' && isWmlLoader && actionObject[0]!='swf') {
+				if (this.onwmlLoaderSend) this.onwmlLoaderSend.sendEvent(actionObject[0]);
+			}
+            
+		} else if(action=='clear'){
+			this.clearAll();
+		} else if(action=='delete' || action=='undo'){
+			var lastactionObject = actionObject;	
+			var obj = this.getObjectByName(lastactionObject[lastactionObject.length-1]);
+			obj.destroy();
+		} else if(action=='size'){
+			var lastactionObject = actionObject;	
+			var obj = this.getObjectByName(lastactionObject[lastactionObject.length-1]);
+			obj.setAttribute('x',lastactionObject[lastactionObject.length-5]);
+			obj.setAttribute('y',lastactionObject[lastactionObject.length-4]);
+			obj.setAttribute('width',lastactionObject[lastactionObject.length-3]);
+			obj.setAttribute('height',lastactionObject[lastactionObject.length-2]);
+		} else if (action=="loadwml"){
+			//Debug.write(actionObject,actionObject["wmlfileName"],actionObject["wmlroom"],actionObject["wmldomain"]);
+			this.remoteWmlLoader(actionObject["wmlfileName"],actionObject["wmlroom"],actionObject["wmldomain"]);
+		} else if (action=="editText"){
+			this.editTextByHistory(actionObject,this);
+		} else if (action=="initgetVars"){
+			//Debug.write("initUser isMod ",canvas.ismoderator,actionObject);
+			if (canvas.ismoderator){
+				//Debug.write("send all whiteBoard objects to new user");
+				var obj = new Array();
+			    obj[0] = 'whiteboard';
+			    obj[1] = 'inituser';
+			    obj[2] = this.baseactionobjectList;
+				this.oninitUser(actionObject,obj);
+			}
+		} else if (action=="swf"){
+			this.remoteObjectUpdate(actionObject);	
+		}
+		]]>
+	</method>
+	
+	
+	<method name="sendRecordedObject" args="action,actionObject,isWmlLoader">
+		//Debug.write("sendWatchObject: ",action,actionObject);
+		<![CDATA[
+		if (action=='draw' || action=='redo'){
+			var lastactionObject = actionObject;
+			
+			//Redraw the View on the paintarea
+			if (actionObject[0]=='paint'){
+				this.paintactionHistory(lastactionObject,this);
+			} else if (actionObject[0]=='line'){
+				this.lineactionHistory(lastactionObject,this);
+			} else if (actionObject[0]=='uline'){
+				this.ulineactionHistory(lastactionObject,this);
+			} else if (actionObject[0]=='drawarrow'){
+				this.drawarrowlineactionHistory(lastactionObject,this);
+			} else if(action,actionObject[0]=='letter'){
+				this.drawactionHistory(lastactionObject,this);
+			} else if(actionObject[0]=='image'){
+				//Image will send the onwmlLoaderSend later cause it has to be send
+				//once the image has been loaded completely
+				this.addImageToLayerHistoryRecorded(lastactionObject,this,isWmlLoader);
+			} else if(actionObject[0]=='swf'){
+				//Image will send the onwmlLoaderSend later cause it has to be send
+				//once the image has been loaded completely
+				this.addSWFToLayerHistoryRecording(lastactionObject,this,isWmlLoader);
+			} else if(actionObject[0]=='rectangle'){
+				this.drawrectangleToHistory(lastactionObject,this);
+			} else if(actionObject[0]=='ellipse'){
+				this.drawellipseToHistory(lastactionObject,this);
+			}
+			//set counter to maximum otherwise trouble in naming conventions
+			//the 6th array index count from the end of each object is always the counter of the
+			//object
+			this.compareAndSetCounter(lastactionObject[lastactionObject.length-6]);
+			this.baseactionobjectList.push(lastactionObject);
+			
+			//Send a notifcation for the library loader sothat it can show progress
+			//and Browser does not hangUp and images can be proceed
+			//only send if type ain#t image cause image will send its own one after 
+			// it has been loaded completely
+			if (isWmlLoader && actionObject[0]!='image' && isWmlLoader && actionObject[0]!='swf') {
+				if (this.onwmlLoaderSend) this.onwmlLoaderSend.sendEvent(actionObject[0]);
+			}
+            
+		} else if(action=='clear'){
+			this.clearAll();
+		} else if(action=='delete' || action=='undo'){
+			var lastactionObject = actionObject;	
+			var obj = this.getObjectByName(lastactionObject[lastactionObject.length-1]);
+			obj.destroy();
+		} else if(action=='size'){
+			var lastactionObject = actionObject;	
+			var obj = this.getObjectByName(lastactionObject[lastactionObject.length-1]);
+			obj.setAttribute('x',lastactionObject[lastactionObject.length-5]);
+			obj.setAttribute('y',lastactionObject[lastactionObject.length-4]);
+			obj.setAttribute('width',lastactionObject[lastactionObject.length-3]);
+			obj.setAttribute('height',lastactionObject[lastactionObject.length-2]);
+		} else if (action=="loadwml"){
+			//Debug.write(actionObject,actionObject["wmlfileName"],actionObject["wmlroom"],actionObject["wmldomain"]);
+			this.remoteWmlLoaderRecording(actionObject["wmlfileName"],actionObject["wmlroom"],actionObject["wmldomain"]);
+		} else if (action=="editText"){
+			this.editTextByHistory(actionObject,this);
+		} else if (action=="initgetVars"){
+			//Debug.write("initUser isMod ",canvas.ismoderator,actionObject);
+			if (canvas.ismoderator){
+				//Debug.write("send all whiteBoard objects to new user");
+				var obj = new Array();
+			    obj[0] = 'whiteboard';
+			    obj[1] = 'inituser';
+			    obj[2] = this.baseactionobjectList;
+				this.oninitUser(actionObject,obj);
+			}
+		} else if (action=="swf"){
+			this.remoteObjectUpdate(actionObject);	
+		}
+		]]>
+	</method>
+	
+	
+	<!-- #####################
+		Paint
+	 -->
+	
+  	<method name="drawline" args="x1,y1,x2,y2">
+	    <![CDATA[
+	    currentlayer.beginPath();
+	    currentlayer.moveTo(x1,y1);
+	    currentlayer.lineTo(x2,y2);
+	    currentlayer.stroke();
+	    ]]>
+	</method>
+	
+  	<method name="drawlineOnObject" args="obj,x1,y1,x2,y2">
+	    <![CDATA[
+	    obj.beginPath();
+	    obj.moveTo(x1,y1);
+	    obj.lineTo(x2,y2);
+	    obj.stroke();
+	    ]]>
+	</method>
+		
+	
+	<method name="drawlineRegisterPaint" args="x1,y1,x2,y2">
+	    var actionObject = new Array();
+	    actionObject[0] = 'point';
+	    actionObject[1] = x1;
+	    actionObject[2] = y1;
+	    actionObject[3] = x2;
+	    actionObject[4] = y2;
+	    this.basetempactionobjectList.push(actionObject);
+	</method>
+	
+  	<method name="startPaint">
+		//Debug.write("startPaint ",this.startx,this.starty);
+    	this.currentlayer = new drawViewNew(this,{name:'paint'+this.getCounter(),width:this.width+2,height:this.height+2});
+		this.drawlineOnObject(this.currentlayer,-1,-1,0,0);
+		this.drawlineOnObject(this.currentlayer,this.width,this.height,this.width+1,this.height+1);
+  	
+    	//Set previous to null
+    	this.prevx = null;
+    	this.prevy = null;  
+	    
+	    currentlayer.strokeStyle = this.currentlayerstroke;
+	    currentlayer.lineWidth = this.currentlayerlineWidth;
+	    currentlayer.fillstyle = '0x000000';
+	    
+	    this.basetempactionobjectList = new Array();
+	    
+	    //beginFill( the_colorpicker.selectedColor );
+  	</method>
+
+  	<method name="endPaint">
+  		////Debug.write("endPaint");
+		<![CDATA[
+		var tempName = this.currentlayer.name;
+		this.currentlayer.destroy();
+		
+		//GetBounds of that Object
+		var minx = this.width+2;
+		var miny = this.height+2;
+		var maxx = -2;
+		var maxy = -2;
+		
+		for (var eg=0;eg<this.basetempactionobjectList.length;eg++){
+			////Debug.write(this.basetempactionobjectList[eg][1],this.basetempactionobjectList[eg][3]);
+   			if (this.basetempactionobjectList[eg][1]<minx) minx=this.basetempactionobjectList[eg][1];
+   			if (this.basetempactionobjectList[eg][3]<minx) minx=this.basetempactionobjectList[eg][3];
+   			
+   			if (this.basetempactionobjectList[eg][1]>maxx) maxx=this.basetempactionobjectList[eg][1];
+   			if (this.basetempactionobjectList[eg][3]>maxx) maxx=this.basetempactionobjectList[eg][3];
+   			
+   			if (this.basetempactionobjectList[eg][2]<miny) miny=this.basetempactionobjectList[eg][2];
+   			if (this.basetempactionobjectList[eg][4]<miny) miny=this.basetempactionobjectList[eg][4];
+   			
+   			if (this.basetempactionobjectList[eg][2]>maxy) maxy=this.basetempactionobjectList[eg][2];
+   			if (this.basetempactionobjectList[eg][4]>maxy) maxy=this.basetempactionobjectList[eg][4];
+   		}
+   		var width = maxx-minx;
+   		var height = maxy-miny;
+   		////Debug.write("## 1 ## NEW x,y ",minx,miny," width,height: ",width,height);
+   		
+		this.currentlayer = new drawViewNew(this,{name:tempName,x:minx-1,y:miny-1,width:width,height:height});
+    	this.currentlayer.fillstyle = '0x000000';
+    	this.currentlayer.lineWidth = this.currentlayerlineWidth;
+   		this.currentlayer.strokeStyle = this.currentlayerstroke;
+   		
+   		for (var eg=0;eg<this.basetempactionobjectList.length;eg++) 
+   			this.drawline(this.basetempactionobjectList[eg][1]-minx,this.basetempactionobjectList[eg][2]-miny,this.basetempactionobjectList[eg][3]-minx,this.basetempactionobjectList[eg][4]-miny)
+   			
+   		//this.currentlayer.setAttribute('stretches','both');
+    	
+    	//Add Layer to global Layer  	
+	    this.layers.push(this.currentlayer);   		
+
+   		]]>
+   		
+   		this.registerFinal();
+  	</method>    
+
+  	<method name="registerFinal">
+		var actionObject = new Array();
+	    actionObject[0] = 'paint';
+	    actionObject[1] = this.basetempactionobjectList;
+	    actionObject[2] = currentlayer.fillstyle;
+	    actionObject[3] = currentlayer.lineWidth;
+	    actionObject[4] = currentlayer.strokeStyle;
+		actionObject[5] = this.counter;
+	    actionObject[6] = currentlayer.x;
+	    actionObject[7] = currentlayer.y;
+	    actionObject[8] = currentlayer.width;
+	    actionObject[9] = currentlayer.height;	   
+	    actionObject[10] = this.currentlayer.name;
+	    this.baseactionobjectList.push(actionObject);		
+	    this.onsharedMessage('draw',actionObject);
+  	</method>      
+	
+	
+	<method name="paintactionHistory" args="lastActionObject,parentView">
+		<![CDATA[
+		//Debug.write("## paintactionHistory",parentView," 2 ## NEW lastActionObject[5],lastActionObject[6] ",lastActionObject[5],lastActionObject[6]," width,height: ",lastActionObject[7],lastActionObject[8]);
+		
+		this.currentlayer = new drawViewNew(parentView,{name:lastActionObject[lastActionObject.length-1],x:lastActionObject[lastActionObject.length-5],y:lastActionObject[lastActionObject.length-4],width:lastActionObject[lastActionObject.length-3],height:lastActionObject[lastActionObject.length-2]});
+		
+    	this.currentlayer.fillstyle = lastActionObject[2];
+    	this.currentlayer.lineWidth = lastActionObject[3];
+   		this.currentlayer.strokeStyle = lastActionObject[4];
+   		
+   		for (var eg=0;eg<lastActionObject[1].length;eg++) 
+   			this.drawline(lastActionObject[1][eg][1]-this.currentlayer.x,lastActionObject[1][eg][2]-this.currentlayer.y,lastActionObject[1][eg][3]-this.currentlayer.x,lastActionObject[1][eg][4]-this.currentlayer.y);
+   		
+   		//this.currentlayer.setAttribute('stretches','both');
+   		]]>
+	</method>
+    
+    <!-- ###########################
+    Line
+     -->
+  	
+  	<method name="startLine">
+		//Debug.write("startLine ",this.startx,this.starty);
+    	this.currentlayer = new drawViewNew(this,{name:'line'+this.getCounter(),width:this.width+2,height:this.height+2});
+		this.drawlineOnObject(this.currentlayer,-1,-1,0,0);
+		this.drawlineOnObject(this.currentlayer,this.width,this.height,this.width+1,this.height+1);
+  	
+    	//Set previous to null
+    	this.prevx = null;
+    	this.prevy = null;  
+	    
+	    currentlayer.strokeStyle = this.currentlinestroke;
+	    currentlayer.lineWidth = this.currentlinelineWidth;
+	    currentlayer.fillstyle = '0x000000';
+
+  	</method>
+  	
+  	<method name="endLine">
+  		////Debug.write("endLine",this.startx,this.starty,this.endx,this.endy);
+		<![CDATA[
+		var tempName = this.currentlayer.name;
+		this.currentlayer.destroy();
+		
+		//GetBounds of that Object
+		var minx = this.width+2;
+		var miny = this.height+2;
+		var maxx = -2;
+		var maxy = -2;
+
+		if (this.startx<minx) minx=this.startx;
+		if (this.endx<minx) minx=this.endx;
+		
+		if (this.startx>maxx) maxx=this.startx;
+		if (this.endx>maxx) maxx=this.endx;
+		
+		if (this.starty<miny) miny=this.starty;
+		if (this.endy<miny) miny=this.endy;
+		
+		if (this.starty>maxy) maxy=this.starty;
+		if (this.endy>maxy) maxy=this.endy;
+		
+   		var width = maxx-minx;
+   		var height = maxy-miny;
+
+		this.currentlayer = new drawViewNew(this,{name:tempName,x:(minx-1-(this.currentlinelineWidth/2)),y:(miny-1-(this.currentlinelineWidth/2)),width:(width+this.currentlinelineWidth),height:(height+this.currentlinelineWidth)});
+    	this.currentlayer.fillstyle = '0x000000';
+    	this.currentlayer.lineWidth = this.currentlinelineWidth;
+   		this.currentlayer.strokeStyle = this.currentlinestroke;
+
+   		this.drawline((this.startx-minx+(this.currentlinelineWidth/2)),(this.starty-miny+(this.currentlinelineWidth/2)),(this.endx-minx+(this.currentlinelineWidth/2)),(this.endy-miny+(this.currentlinelineWidth/2)));
+
+    	//Add Layer to global Layer  	
+	    this.layers.push(this.currentlayer);  
+		]]>
+		this.lineregisterFinal();
+  	</method> 
+  	
+  	
+  	<method name="lineregisterFinal">
+		var actionObject = new Array();
+	    actionObject[0] = 'line';
+	    actionObject[1] = currentlayer.fillstyle;
+	    actionObject[2] = currentlayer.lineWidth;
+	    actionObject[3] = currentlayer.strokeStyle;
+	    actionObject[4] = this.startx;	
+	    actionObject[5] = this.starty;	
+	    actionObject[6] = this.endx;	
+	    actionObject[7] = this.endy;	
+		actionObject[8] = this.counter;    
+	    actionObject[9] = currentlayer.x;
+	    actionObject[10] = currentlayer.y;
+	    actionObject[11] = currentlayer.width;
+	    actionObject[12] = currentlayer.height;	 
+	    actionObject[13] = this.currentlayer.name;
+	    this.baseactionobjectList.push(actionObject);		
+	    this.onsharedMessage('draw',actionObject);
+  	</method>     	
+  	
+	
+	<method name="lineactionHistory" args="lastActionObject,parentView">
+		<![CDATA[
+		//Debug.write("## lineactionHistory",parentView," 2 ## NEW x,y ",lastActionObject[lastActionObject.length-5],lastActionObject[lastActionObject.length-4]," width,height: ",lastActionObject[lastActionObject.length-3],lastActionObject[lastActionObject.length-2]);
+		
+		this.currentlayer = new drawViewNew(parentView,{name:lastActionObject[lastActionObject.length-1],x:lastActionObject[lastActionObject.length-5],y:lastActionObject[lastActionObject.length-4],width:lastActionObject[lastActionObject.length-3],height:lastActionObject[lastActionObject.length-2]});
+		
+    	this.currentlayer.fillstyle = lastActionObject[1];
+    	this.currentlayer.lineWidth = lastActionObject[2];
+   		this.currentlayer.strokeStyle = lastActionObject[3];
+
+   		this.drawline(lastActionObject[4]-this.currentlayer.x,lastActionObject[5]-this.currentlayer.y,lastActionObject[6]-this.currentlayer.x,lastActionObject[7]-this.currentlayer.y);
+
+   		]]>
+	</method>
+	
+	<!-- ###########################
+	Underline
+	 -->
+    <method name="startUline">
+		//Debug.write("startUline ",this.startx,this.starty);
+    	this.currentlayer = new drawViewNew(this,{opacity:0.5,name:'uline'+this.getCounter(),width:this.width+2,height:this.height+2});
+		this.drawlineOnObject(this.currentlayer,-1,-1,0,0);
+		this.drawlineOnObject(this.currentlayer,this.width,this.height,this.width+1,this.height+1);
+  	
+    	//Set previous to null
+    	this.prevx = null;
+    	this.prevy = null;  
+	    
+	    currentlayer.strokeStyle = this.currentulinestroke;
+	    currentlayer.lineWidth = this.currentulinelineWidth;
+	    currentlayer.fillstyle = '0x000000';
+  	</method>  
+    
+  	<method name="endUline">
+  		//Debug.write("endUline",this.startx,this.starty,this.endx,this.endy);
+		<![CDATA[
+		var tempName = this.currentlayer.name;
+		//Debug.write("tempName: ",tempName);
+		this.currentlayer.destroy();
+		
+		//GetBounds of that Object
+		var minx = this.width+2;
+		var miny = this.height+2;
+		var maxx = -2;
+		var maxy = -2;
+
+		if (this.startx<minx) minx=this.startx;
+		if (this.endx<minx) minx=this.endx;
+		
+		if (this.startx>maxx) maxx=this.startx;
+		if (this.endx>maxx) maxx=this.endx;
+		
+		if (this.starty<miny) miny=this.starty;
+		if (this.endy<miny) miny=this.endy;
+		
+		if (this.starty>maxy) maxy=this.starty;
+		if (this.endy>maxy) maxy=this.endy;
+		
+   		var width = maxx-minx;
+   		var height = maxy-miny;
+   		
+   		//Debug.write("minx,miny,width,height: ",minx,miny,width,height);
+   		
+		this.currentlayer = new drawViewNew(this,{opacity:0.5,name:tempName,x:(minx-1-(this.currentulinelineWidth/2)),y:(miny-1-(this.currentulinelineWidth/2)),width:(width+this.currentulinelineWidth),height:(height+this.currentulinelineWidth)});
+    	this.currentlayer.fillstyle = '0x000000';
+    	this.currentlayer.lineWidth = this.currentulinelineWidth;
+   		this.currentlayer.strokeStyle = this.currentulinestroke;
+
+   		this.drawline((this.startx-minx+(this.currentulinelineWidth/2)),(this.starty-miny+(this.currentulinelineWidth/2)),(this.endx-minx+(this.currentulinelineWidth/2)),(this.endy-miny+(this.currentulinelineWidth/2)));
+
+    	
+    	//Add Layer to global Layer  	
+	    this.layers.push(this.currentlayer);  
+		]]>
+		this.ulineregisterFinal();
+  	</method> 
+  	
+  	
+  	<method name="ulineregisterFinal">
+		var actionObject = new Array();
+	    actionObject[0] = 'uline';
+	    actionObject[1] = currentlayer.fillstyle;
+	    actionObject[2] = currentlayer.lineWidth;
+	    actionObject[3] = currentlayer.strokeStyle;
+	    actionObject[4] = this.startx;	
+	    actionObject[5] = this.starty;	
+	    actionObject[6] = this.endx;	
+	    actionObject[7] = this.endy;	
+		actionObject[8] = this.counter;    
+	    actionObject[9] = currentlayer.x;
+	    actionObject[10] = currentlayer.y;
+	    actionObject[11] = currentlayer.width;
+	    actionObject[12] = currentlayer.height;	 
+	    actionObject[13] = this.currentlayer.name;
+	    this.baseactionobjectList.push(actionObject);		
+	    this.onsharedMessage('draw',actionObject);
+  	</method>     	
+  	
+	
+	<method name="ulineactionHistory" args="lastActionObject,parentView">
+		<![CDATA[
+		//Debug.write("## lineactionHistory",parentView," 2 ## NEW x,y ",lastActionObject[lastActionObject.length-5],lastActionObject[lastActionObject.length-4]," width,height: ",lastActionObject[lastActionObject.length-3],lastActionObject[lastActionObject.length-2]);
+		
+		this.currentlayer = new drawViewNew(parentView,{opacity:0.5,name:lastActionObject[lastActionObject.length-1],x:lastActionObject[lastActionObject.length-5],y:lastActionObject[lastActionObject.length-4],width:lastActionObject[lastActionObject.length-3],height:lastActionObject[lastActionObject.length-2]});
+		
+    	this.currentlayer.fillstyle = lastActionObject[1];
+    	this.currentlayer.lineWidth = lastActionObject[2];
+   		this.currentlayer.strokeStyle = lastActionObject[3];
+
+   		this.drawline(lastActionObject[4]-this.currentlayer.x,lastActionObject[5]-this.currentlayer.y,lastActionObject[6]-this.currentlayer.x,lastActionObject[7]-this.currentlayer.y);
+
+   		]]>
+	</method>
+	
+	<!-- ###########################
+	drawarrow
+	 -->
+    <method name="startDrawarrowline">
+    	<![CDATA[
+    	this.currentlayer = new drawViewNew(this,{name:'drawarrow'+this.getCounter(),width:this.width+2,height:this.height+2});
+		this.drawlineOnObject(this.currentlayer,-1,-1,0,0);
+		this.drawlineOnObject(this.currentlayer,this.width,this.height,this.width+1,this.height+1);
+  		
+  		//Add Resource
+  		var t = new drawArrowWhiteBoard(this.currentlayer,{x:this.startx,y:this.starty});
+  		
+  		//Color
+    	t.setTint(this.currentdrawarrowlinestroke,100);
+    	
+    	var tx = this.currentlayer.getMouse('x')-this.startx;
+    	var ty = this.currentlayer.getMouse('y')-this.starty;
+
+   		var gegenkathete = Math.abs(ty);
+   		var ankathete = Math.abs(tx); 
+   		var hypothenuse = Math.sqrt((ankathete*ankathete)+(gegenkathete*gegenkathete));
+   		var sinAlpha = (gegenkathete/hypothenuse);
+   		var alpha = Math.asin(sinAlpha);
+		alpha = alpha/(Math.PI/180);
+			
+    	if (tx>=0 && ty>=0){  	
+    		t.setAttribute('rotation',(alpha-45));
+    	} else if (tx<0 && ty>=0){
+    		t.setAttribute('rotation',(45+90-alpha));
+    	} else if (tx<0 && ty<0){
+    		t.setAttribute('rotation',(alpha+45+90));
+    	} else if (tx>0 && ty<=0){
+    		t.setAttribute('rotation',(45-alpha-90));
+    	}
+    	
+    	//Scaling
+    	var basicLength = Math.sqrt((t.width*t.width)+(t.width*t.width));
+    	t.getMCRef()._xscale = (hypothenuse/basicLength)*100;
+    	t.getMCRef()._yscale = (hypothenuse/basicLength)*100;
+    	
+
+    	//Set previous to null
+    	this.prevx = null;
+    	this.prevy = null;  
+	    
+	    currentlayer.strokeStyle = this.currentdrawarrowlinestroke;
+	    currentlayer.lineWidth = this.currentdrawarrowlinelineWidth;
+	    currentlayer.fillstyle = '0x000000';
+	    ]]>
+  	</method>  
+    
+  	<method name="endDrawarrowline">
+  		//Debug.write("endDrawarrowline",this.startx,this.starty,this.endx,this.endy);
+		<![CDATA[
+		var tempName = this.currentlayer.name;
+		//Debug.write("tempName: ",tempName);
+		this.currentlayer.destroy();
+		
+		//GetBounds of that Object
+		var minx = this.width+2;
+		var miny = this.height+2;
+		var maxx = -2;
+		var maxy = -2;
+
+		if (this.startx<minx) minx=this.startx;
+		if (this.endx<minx) minx=this.endx;
+		
+		if (this.startx>maxx) maxx=this.startx;
+		if (this.endx>maxx) maxx=this.endx;
+		
+		if (this.starty<miny) miny=this.starty;
+		if (this.endy<miny) miny=this.endy;
+		
+		if (this.starty>maxy) maxy=this.starty;
+		if (this.endy>maxy) maxy=this.endy;
+		
+   		var width = maxx-minx;
+   		var height = maxy-miny;
+   		
+   		//Debug.write("minx,miny,width,height: ",minx,miny,width,height);
+
+		this.currentlayer = new drawViewNew(this,{name:tempName,x:minx-1,y:miny-1,width:width,height:height});
+    	this.currentlayer.fillstyle = '0x000000';
+    	this.currentlayer.lineWidth = this.currentdrawarrowlinelineWidth;
+   		this.currentlayer.strokeStyle = this.currentdrawarrowlinestroke;
+   		
+   		//Debug.write("this.currentlayer: ",this.currentlayer);
+
+		var t = new drawArrowWhiteBoard(this.currentlayer,{x:0,y:0});
+
+  		//Color
+    	t.setTint(this.currentdrawarrowlinestroke,100);
+    	
+    	var tx = this.endx-this.startx;
+    	var ty = this.endy-this.starty;
+
+   		var gegenkathete = Math.abs(ty);
+   		var ankathete = Math.abs(tx); 
+   		var hypothenuse = Math.sqrt((ankathete*ankathete)+(gegenkathete*gegenkathete));
+   		var sinAlpha = (gegenkathete/hypothenuse);
+   		var alpha = Math.asin(sinAlpha);
+		alpha = alpha/(Math.PI/180);
+			
+		var newx = 0;
+		var newy = 0;
+    	if (tx>=0 && ty>=0){  	
+    		t.setAttribute('rotation',(alpha-45));
+    	} else if (tx<0 && ty>=0){
+    		newx = width;
+    		t.setAttribute('rotation',(45+90-alpha));
+    	} else if (tx<0 && ty<0){
+    		newy = height;
+    		newx = width;
+    		t.setAttribute('rotation',(alpha+45+90));
+    	} else if (tx>0 && ty<=0){
+    		newy = height;
+    		t.setAttribute('rotation',(45-alpha-90));
+    	}
+    	
+    	t.setAttribute('x',newx);
+    	t.setAttribute('y',newy);
+    	
+    	//Scaling
+    	var basicLength = Math.sqrt((t.width*t.width)+(t.width*t.width));
+    	t.getMCRef()._xscale = (hypothenuse/basicLength)*100;
+    	t.getMCRef()._yscale = (hypothenuse/basicLength)*100;
+    	
+
+    	//Set previous to null
+    	this.prevx = null;
+    	this.prevy = null;  
+    	
+    	//Add Layer to global Layer  	
+	    this.layers.push(this.currentlayer);  
+		]]>
+		this.drawarrowlineregisterFinal();
+		this.currentlayer = new LzView();
+		//Debug.write("t: ",t);
+  	</method> 
+  	
+  	
+  	<method name="drawarrowlineregisterFinal">
+		var actionObject = new Array();
+	    actionObject[0] = 'drawarrow';
+	    actionObject[1] = currentlayer.fillstyle;
+	    actionObject[2] = currentlayer.lineWidth;
+	    actionObject[3] = currentlayer.strokeStyle;
+	    actionObject[4] = this.startx;	
+	    actionObject[5] = this.starty;	
+	    actionObject[6] = this.endx;	
+	    actionObject[7] = this.endy;	 
+		actionObject[8] = this.counter;   
+	    actionObject[9] = currentlayer.x;
+	    actionObject[10] = currentlayer.y;
+	    actionObject[11] = currentlayer.width;
+	    actionObject[12] = currentlayer.height;	 
+	    actionObject[13] = this.currentlayer.name;
+	    this.baseactionobjectList.push(actionObject);		
+	    this.onsharedMessage('draw',actionObject);
+  	</method>     	
+  	
+	
+	<method name="drawarrowlineactionHistory" args="lastActionObject,parentView">
+		<![CDATA[
+			//Debug.write("## lineactionHistory",parentView," 2 ## NEW x,y ",lastActionObject[lastActionObject.length-5],lastActionObject[lastActionObject.length-4]," width,height: ",lastActionObject[lastActionObject.length-3],lastActionObject[lastActionObject.length-2]);
+			
+			this.currentlayer = new drawViewNew(parentView,{name:lastActionObject[lastActionObject.length-1],x:lastActionObject[lastActionObject.length-5],y:lastActionObject[lastActionObject.length-4],width:lastActionObject[lastActionObject.length-3],height:lastActionObject[lastActionObject.length-2]});
+			
+			var t = new drawArrowWhiteBoard(this.currentlayer,{x:0,y:0});
+			
+			t.setTint(lastActionObject[3],100);
+	    	
+	    	var tx = lastActionObject[6]-lastActionObject[4];
+	    	var ty = lastActionObject[7]-lastActionObject[5];
+	
+	   		var gegenkathete = Math.abs(ty);
+	   		var ankathete = Math.abs(tx); 
+	   		var hypothenuse = Math.sqrt((ankathete*ankathete)+(gegenkathete*gegenkathete));
+	   		var sinAlpha = (gegenkathete/hypothenuse);
+	   		var alpha = Math.asin(sinAlpha);
+			var alpha = alpha/(Math.PI/180);
+				
+			var newx = 0;
+			var newy = 0;
+	    	if (tx>=0 && ty>=0){  	
+	    		t.setAttribute('rotation',(alpha-45));
+	    	} else if (tx<0 && ty>=0){
+	    		newx = lastActionObject[lastActionObject.length-3];
+	    		t.setAttribute('rotation',(45+90-alpha));
+	    	} else if (tx<0 && ty<0){
+	    		newy = lastActionObject[lastActionObject.length-2];
+	    		newx = lastActionObject[lastActionObject.length-3];
+	    		t.setAttribute('rotation',(alpha+45+90));
+	    	} else if (tx>0 && ty<=0){
+	    		newy = lastActionObject[lastActionObject.length-2];
+	    		t.setAttribute('rotation',(45-alpha-90));
+	    	}
+	    	
+	    	t.setAttribute('x',newx);
+	    	t.setAttribute('y',newy);
+	    	
+	    	//Scaling
+	    	var basicLength = Math.sqrt((t.width*t.width)+(t.width*t.width));
+	    	t.getMCRef()._xscale = (hypothenuse/basicLength)*100;
+	    	t.getMCRef()._yscale = (hypothenuse/basicLength)*100;
+	    	
+	    	this.currentlayer.fillstyle = lastActionObject[1];
+	    	this.currentlayer.lineWidth = lastActionObject[2];
+	   		this.currentlayer.strokeStyle = lastActionObject[3];
+
+   		]]>
+	</method>
+    
+    
+    <!-- ###########################
+    Rectangle
+     -->
+    
+  	<method name="startRect">
+		//Debug.write("startRect");
+    	this.currentlayer = new drawViewNew(this,{name:'rectangle'+this.getCounter(),width:this.width+2,height:this.height+2});
+		this.drawlineOnObject(this.currentlayer,-1,-1,0,0);
+		this.drawlineOnObject(this.currentlayer,this.width,this.height,this.width+1,this.height+1);
+  	</method>  
+
+	<method name="endRect">
+		<![CDATA[
+			////Debug.write(" this.startx, this.starty , this.endx, this.endy ",this.startx, this.starty , this.endx, this.endy);
+			this.currentlayer.destroy();
+			var x = this.startx;
+			var width = this.endx - this.startx;
+			if (this.endx<this.startx){
+				x = this.endx;
+				width = Math.abs(width);
+			}
+			var y = this.starty;
+			var height = this.endy - this.starty;
+			if (this.endy<this.starty){
+				y = this.endy;
+				height = Math.abs(height);
+			}
+			
+			this.currentlayer = new drawViewNew(this,{name:'rectangle'+this.getCounter(),x:x,y:y,width:width,height:height});
+			this.drawrectangleHistory(this.currentlayer,0,0,width,height,this.currentrectanglestroke,this.currentrectangleineWidth,this.currentrectanglestrokeFill,this.currentrectanglestrokeDis,this.currentrectanglestrokeFillDis);
+			this.currentlayer.setAttribute('stretches','both');
+			this.drawrectregisterFinal(this.currentlayer.name,this.currentrectanglestroke,this.currentrectangleineWidth,this.currentrectanglestrokeFill,this.currentrectanglestrokeDis,this.currentrectanglestrokeFillDis,x,y,width,height);
+			this.checkStepLayers();
+		]]>
+	</method> 
+    
+  	<method name="drawrectangle" args="x1,y1,x2,y2">
+   		<![CDATA[
+    		
+    		currentlayer.lineWidth = this.currentrectangleineWidth;
+    		currentlayer.beginPath();
+    		currentlayer.moveTo(x1,y1);
+    		currentlayer.lineTo(x1,y2);
+    		currentlayer.lineTo(x2,y2);
+    		currentlayer.lineTo(x2,y1);
+    		currentlayer.lineTo (x1,y1);
+    		this.closePath();
+    		
+    		if (this.currentrectanglestrokeDis!=-1){
+	    		currentlayer.strokeStyle = this.currentrectanglestroke;
+	    		currentlayer.stroke();
+    		}
+
+    		if (this.currentrectanglestrokeFillDis!=-1){
+	    		currentlayer.fillStyle = this.currentrectanglestrokeFill;
+	    		currentlayer.fill();
+    		}
+    		
+    	]]>   
+  	</method>    
+  	
+  	<method name="drawrectangleToHistory" args="lastActionObject,parentView">
+		this.currentlayer = new drawViewNew(parentView,{name:lastActionObject[lastActionObject.length-1],x:lastActionObject[lastActionObject.length-5],y:lastActionObject[lastActionObject.length-4],width:lastActionObject[lastActionObject.length-3],height:lastActionObject[lastActionObject.length-2]});
+   		this.drawrectangleHistory(this.currentlayer,0,0,lastActionObject[lastActionObject.length-3],lastActionObject[lastActionObject.length-2],lastActionObject[1],lastActionObject[2],lastActionObject[3],lastActionObject[4],lastActionObject[5]);
+  	</method>
+    
+  	<method name="drawrectangleHistory" args="parentObj,x1,y1,x2,y2,stroke,line,fill,strokeDis,fillDis">
+   		<![CDATA[
+    		Debug.write("drawrectangleHistory",parentObj,x1,y1,x2,y2,stroke,line,fill,strokeDis,fillDis);
+    		parentObj.lineWidth = line;
+    		parentObj.beginPath();
+    		parentObj.moveTo(x1,y1);
+    		parentObj.lineTo(x1,y2);
+    		parentObj.lineTo(x2,y2);
+    		parentObj.lineTo(x2,y1);
+    		parentObj.lineTo (x1,y1);
+    		
+    		if (strokeDis!=-1){
+	    		parentObj.strokeStyle = stroke;
+	    		parentObj.stroke();
+    		}
+    		
+    		if (fillDis!=-1){
+	    		parentObj.fillStyle = fill;
+	    		parentObj.fill();
+    		}
+    	]]>   
+  	</method>  
+  	
+  	<method name="drawrectregisterFinal" args="newName,stroke,line,fill,strokeDis,fillDis,x,y,width,height" >
+  		Debug.write("drawrectregisterFinal",newName,stroke,line,fill,strokeDis,fillDis,x,y,width,height);
+		var actionObject = new Array();
+	    actionObject[0] = 'rectangle';
+	    actionObject[1] = stroke;
+	    actionObject[2] = line;
+	    actionObject[3] = fill;
+	    actionObject[4] = strokeDis;
+	    actionObject[5] = fillDis;
+		actionObject[6] = this.counter;
+	    actionObject[7] = x;
+	    actionObject[8] = y;
+	    actionObject[9] = width;
+	    actionObject[10] = height;	    
+	    actionObject[11] = newName;
+	    this.baseactionobjectList.push(actionObject);
+	    this.onsharedMessage('draw',actionObject);
+  	</method>
+  	
+  	
+  	<!-- ################
+  	Ellipse
+  	 -->
+  	<method name="startEllipse">
+		//Debug.write("startEllipse");
+    	this.currentlayer = new drawViewNew(this,{name:'ellipse'+this.getCounter(),width:this.width+2,height:this.height+2});
+		this.drawlineOnObject(this.currentlayer,-1,-1,0,0);
+		this.drawlineOnObject(this.currentlayer,this.width,this.height,this.width+1,this.height+1);
+  	</method>    
+  	
+  	<method name="endEllipse">
+  		<![CDATA[
+			////Debug.write(" this.startx, this.starty , this.endx, this.endy ",this.startx, this.starty , this.endx, this.endy);
+			this.currentlayer.destroy();
+			var x = this.startx;
+			var width = this.endx - this.startx;
+			if (this.endx<this.startx){
+				x = this.endx;
+				width = Math.abs(width);
+			}
+			var y = this.starty;
+			var height = this.endy - this.starty;
+			if (this.endy<this.starty){
+				y = this.endy;
+				height = Math.abs(height);
+			}
+			
+			this.currentlayer = new drawViewNew(this,{name:'ellipse'+this.getCounter(),x:x,y:y,width:width,height:height});
+			this.drawellipse(0,0,width,height);
+			//Debug.write("this.currentellipsestroke,this.currentellipselineWidth: ",this.currentellipsestroke,this.currentellipselineWidth);
+			this.drawellipseregisterFinal(this.currentlayer.name,this.currentellipsestroke,this.currentellipselineWidth,this.currentellipsestrokeFill,this.currentellipsestrokeDis,this.currentellipsestrokeFillDis,x,y,width,height);
+			this.layers.push(this.currentlayer);
+			this.checkStepLayers();
+		]]>
+  	</method>
+  	
+  	<method name="drawellipseToHistory"  args="lastActionObject,parentView">
+
+		this.currentlayer = new drawViewNew(parentView,{name:lastActionObject[lastActionObject.length-1],x:lastActionObject[lastActionObject.length-5],y:lastActionObject[lastActionObject.length-4],width:lastActionObject[lastActionObject.length-3],height:lastActionObject[lastActionObject.length-2]});
+   		//Debug.write("lastActionObject[1],lastActionObject[2]: ",lastActionObject[1],lastActionObject[2]);
+   		this.drawellipseHistory(this.currentlayer,0,0,lastActionObject[lastActionObject.length-3],lastActionObject[lastActionObject.length-2],lastActionObject[1],lastActionObject[2],lastActionObject[3],lastActionObject[4],lastActionObject[5]);
+
+  	</method>
+    
+  	<method name="drawellipseHistory" args="parentObj,x1,y1,x2,y2,stroke,line,fill,strokeDis,fillDis">
+   		<![CDATA[
+   			//Debug.write("stroke,line: ",stroke,line);
+	    	var rx = (x1+x2)/2;
+	    	var ry = (y1+y2)/2;
+	    	var xradius = Math.abs(rx-x1);
+	    	var yradius = Math.abs(ry-y1);
+	    	
+	    	parentObj.lineWidth = line;
+	    	parentObj.oval(rx,ry,xradius,yradius);
+	    	
+	    	if (strokeDis!=-1){
+		    	parentObj.strokeStyle = stroke;
+		    	parentObj.stroke();
+	    	}
+
+	    	if (fillDis!=-1){
+		    	parentObj.fillStyle = fill;
+		    	parentObj.fill();
+	    	}
+
+    	]]>   
+  	</method>  	
+  	 
+	<method name="drawellipse" args="x1,y1,x2,y2">
+   		<![CDATA[
+	   		//Debug.write("stroke,line: ",this.currentellipsestroke,this.currentellipselineWidth);
+	    	var rx = (x1+x2)/2;
+	    	var ry = (y1+y2)/2;
+	    	var xradius = Math.abs(rx-x1);
+	    	var yradius = Math.abs(ry-y1);
+	    	
+	    	currentlayer.lineWidth = this.currentellipselineWidth;
+	    	currentlayer.oval(rx,ry,xradius,yradius);
+	    	
+	    	if (this.currentellipsestrokeDis!=-1){
+		    	currentlayer.strokeStyle = this.currentellipsestroke;
+		    	currentlayer.stroke();
+	    	}
+	    	
+	    	if (this.currentellipsestrokeFillDis!=-1){
+		    	currentlayer.fillStyle = this.currentellipsestrokeFill;
+		    	currentlayer.fill(); 
+	    	}
+   	
+    	]]>   
+  	</method>
+  	
+  	<method name="drawellipseregisterFinal" args="newName,stroke,line,fill,strokeDis,fillDis,x,y,width,height" >
+		var actionObject = new Array();
+	    actionObject[0] = 'ellipse';
+	    actionObject[1] = stroke;
+	    actionObject[2] = line;
+	    actionObject[3] = fill;
+	    actionObject[4] = strokeDis;
+	    actionObject[5] = fillDis;
+		actionObject[6] = this.counter;
+	    actionObject[7] = x;
+	    actionObject[8] = y;
+	    actionObject[9] = width;
+	    actionObject[10] = height;	    
+	    actionObject[11] = newName;
+	    this.baseactionobjectList.push(actionObject);
+	    this.onsharedMessage('draw',actionObject);
+  	</method>  
+
+  
+</class>
+
+</library>
