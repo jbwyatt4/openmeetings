@@ -7,8 +7,8 @@ import java.util.Calendar;
 
 import org.xmlcrm.app.hibernate.beans.basic.Sessiondata;
 import org.xmlcrm.app.hibernate.utils.HibernateUtil;
+import org.xmlcrm.utils.crypt.ManageCryptStyle;
 import org.xmlcrm.utils.math.Calender;
-import org.xmlcrm.utils.math.MD5Calc;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 import org.apache.commons.logging.Log;
@@ -49,13 +49,9 @@ public class Sessionmanagement {
 	 */
 	public Sessiondata startsession() {
 		//log.error("startsession User: || ");
-		
-		MD5Calc md5 = new MD5Calc();
-
 		long thistime = new Date().getTime();
-		String chsum = md5.do_checksum(String.valueOf(thistime).toString());
 		Sessiondata sessiondata = new Sessiondata();
-		sessiondata.setSession_id(chsum);
+		sessiondata.setSession_id(ManageCryptStyle.getInstance().getInstanceOfCrypt().createPassPhrase(String.valueOf(thistime).toString()));
 		sessiondata.setRefresh_time(new Date());
 		sessiondata.setStarttermin_time(new Date());
 		sessiondata.setUser_id(null);

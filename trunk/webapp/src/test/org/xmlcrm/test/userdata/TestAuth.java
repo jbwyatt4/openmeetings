@@ -8,7 +8,7 @@ import org.hibernate.Transaction;
 import org.xmlcrm.app.hibernate.utils.HibernateUtil;
 import org.xmlcrm.app.hibernate.beans.basic.Sessiondata;
 import org.xmlcrm.app.remote.MainService;
-import org.xmlcrm.utils.math.MD5Calc;
+import org.xmlcrm.utils.crypt.ManageCryptStyle;
 
 public class TestAuth extends TestCase{
 
@@ -25,9 +25,7 @@ public class TestAuth extends TestCase{
 		
 		System.out.println("sessionData: "+sessionData.getSession_id());
 		
-		MD5Calc md5 = new MD5Calc();
-		
-		String tTemp = md5.do_checksum("test");
+		String tTemp = ManageCryptStyle.getInstance().getInstanceOfCrypt().createPassPhrase("test");
 		
 		System.out.println("tTemp: "+tTemp);
 		

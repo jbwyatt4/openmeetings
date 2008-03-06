@@ -113,7 +113,9 @@ public class Install extends VelocityViewServlet {
 					String swf_path = httpServletRequest.getParameter("swftools_path");
 					String im_path = httpServletRequest.getParameter("imagemagick_path");
 					
-					log.error("step 0+ start init with values. "+username+" "+userpass+" "+useremail+" "+orgname+" "+configdefault+" "+configreferer+" "+
+					String crypt_ClassName = httpServletRequest.getParameter("crypt_ClassName");
+					
+					log.error("step 0+ start init with values. "+username+" ***** "+useremail+" "+orgname+" "+configdefault+" "+configreferer+" "+
 						configsmtp+" "+configmailuser+" "+configmailpass+" "+configdefaultLang + " " +
 						swf_path+" "+im_path);
 					
@@ -126,7 +128,7 @@ public class Install extends VelocityViewServlet {
 					ImportInitvalues.getInstance().loadMainMenu();
 					ImportInitvalues.getInstance().loadErrorMappingsFromXML(filePath);	
 					ImportInitvalues.getInstance().loadSalutations();
-					ImportInitvalues.getInstance().loadConfiguration(configdefault, configsmtp, configsmtpport, 
+					ImportInitvalues.getInstance().loadConfiguration(crypt_ClassName, configdefault, configsmtp, configsmtpport, 
 									configreferer, configmailuser, configmailpass, configdefaultLang, swf_path, im_path, url_feed, url_feed2);
 					ImportInitvalues.getInstance().loadInitUserAndOrganisation(username, userpass, useremail, orgname);
 					ImportInitvalues.getInstance().loadDefaultRooms();
