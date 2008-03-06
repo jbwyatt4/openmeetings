@@ -33,6 +33,7 @@ Tips for Installation:
 == Documentation ==
  
   * CustomCryptMechanism - how to write Custom Encryption Styles
+  * CustomAuthentication - how to write a Custom Authentication for Single Sign-On
   * [Internationalisation]
   * BandwidthNetworkSettings
   * SimpleSampleApps  	
