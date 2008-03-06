@@ -1,0 +1,5 @@
+#summary implementing a diffenrent Style of authentification for SSO
+
+This page will describe how to write a custom-login for Single Sign-on
+
+Issue to solve: Issue345
