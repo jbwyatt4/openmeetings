@@ -15,7 +15,7 @@
 		<!-- Database Settings -->
 		<property name="connection.driver_class">org.postgresql.Driver</property>
 		<property name="dialect">org.hibernate.dialect.PostgreSQLDialect</property>
-		<property name="connection.url">jdbc:postgresql://localhost/xmlcrm</property>	
+		<property name="connection.url">jdbc:postgresql://localhost/openmetings</property>	
 		
 		<property name="hibernate.connection.CharSet">utf8</property>
 		<property name="hibernate.connection.characterEncoding">utf8</property>
