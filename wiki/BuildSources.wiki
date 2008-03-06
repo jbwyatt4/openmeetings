@@ -14,31 +14,28 @@ You need to compile two apps:
 
 = Openlaszlo Client (Client-Side) =
 
-SVN URL: http://openmeetings.googlecode.com/svn/branches/dev/laszlo/client/
+SVN URL: http://openmeetings.googlecode.com/svn/trunk/client/
 
-Browse in Code with Browser: http://code.google.com/p/openmeetings/source/browse/branches/dev/laszlo/client/
+Browse in Code with Browser: http://code.google.com/p/openmeetings/source/browse/trunk/client/
 
 for compiling the client you need to install the !OpenLaszlo-Server:
 http://www.openlaszlo.org
 
-place the content of 
-http://openmeetings.googlecode.com/svn/branches/dev/laszlo/client/xmlcrm/videoconference/
-
 Step-By-Step:
-  * Download and Install !OpenLaszlo 4.0.7 (Version > 4.0.5 is needed!)
-  * Checkout from the SVN using http://openmeetings.googlecode.com/svn/branches/dev/laszlo/client/ as root of your Project ($CLIENT_SOURCE_ROOT)
-  * Copy the directory videoconference of $CLIENT_SOURCE_ROOT/xmlcrm/ into your Openlaszlo -WebRoot ($LPS-HOME/Server/lps-4.0.7/) ... on Windows your Path if you're using the default one's will look like C:/Program Files/Openlaszlo Server 4.0.5/Server/lps-4.0.5/videoconference/... 
-  * alter the config.xml in videoconference/config.xml (for example C:/Program Files/Openlaszlo Server 4.0.5/Server/lps-4.0.5/videoconference/config.xml) ... _rtmphostlocal should match the IP/domain of your red5-streaming server (if its on the same IP like your Openlaszlo-Server you can leave it blank)
-  * Start OpenLaszlo Server and run: http://localhost($LPS-HOST):8080/lps-4.0.7/videoconference/maindebug.lzx?lzr=swf8&lzproxied=solo and http://localhost($LPS-HOST):8080/lps-4.0.7/videoconference/main.lzx?lzr=swf8&lzproxied=solo
+  * Download and Install !OpenLaszlo 4.0.10 (Version > 4.0.5 is needed!)
+  * create a directory *openmeetings* into your !OpenLaszlo-WebRoot directory ($LPS-HOME/Server/lps-4.0.x/) ... on Windows your Path if you're using the default one's will look like C:/Program Files/Openlaszlo Server 
+  * Checkout from the SVN using http://openmeetings.googlecode.com/svn/trunk/client/ as root of your Project ($CLIENT_SOURCE_ROOT) into the directory *openmeetings* you have created
+  * alter the config.xml in ($LPS-HOME/Server/lps-4.0.x/openmeetings/)config.xml (for example C:/Program Files/Openlaszlo Server 4.0.10/Server/lps-4.0.10/openmeetings/config.xml) ... _rtmphostlocal_ should match the IP/domain of your red5-streaming server (if its on the same IP like your Openlaszlo-Server you can leave it blank)
+  * Start OpenLaszlo Server and run (lps-4.0.x = lps-4.0.10 if this is your !Openlaszlo version: http://localhost($LPS-HOST):8080/lps-4.0.x/videoconference/maindebug.lzx?lzr=swf8&lzproxied=solo  (with debugger) and /or http://localhost($LPS-HOST):8080/lps-4.0.x/videoconference/main.lzx?lzr=swf8&lzproxied=solo
 
 = Java Webapp (Server-Side) =
 
   * Download (SVN - Checkout) from:
-http://openmeetings.googlecode.com/svn/branches/dev/xmlcrm/java/
+http://openmeetings.googlecode.com/svn/trunk/webapp/
   * change dir your local copy
   * Run: ant dist (JAVA_HOME must be set and point to a JDK >= 1.5)
 
-there is now a directory dist, inside of that directory there is a compiled red5-webapp.
+there is now a directory dist, inside of that directory there is a compiled red5-webapp with the name *openmeetings*
 You have to copy the Laszlo-Client from the Step-By-Step scenario into it.
 Since r897 the name of the folder *install* is *conf*!
 
