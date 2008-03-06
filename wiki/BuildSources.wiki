@@ -39,6 +39,8 @@ there is now a directory dist, inside of that directory there is a compiled red5
 You have to copy the Laszlo-Client from the Step-By-Step scenario into it.
 Since r897 the name of the folder *install* is *conf*!
 
+You need to run it again red5-0.6.3 OR you have to alter the web.xml and remove the reference to the log4j.properties as red5-0.7 has another Logging (slf4j).
+
 == Small howto to deploy/run the Sources == 
 Comment by kunthar,  Today (20 minutes ago) 10.01.2008
 
