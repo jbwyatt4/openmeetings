@@ -19,7 +19,7 @@ and extends the Adapter:
 org.xmlcrm.utils.CryptStringAdapter
 
 Example of an Implementation:
-`
+{{{
 package org.xmlcrm.utils.crypt;
 
 import java.security.NoSuchAlgorithmException;
@@ -43,8 +43,7 @@ public class MD5Implementation extends CryptStringAdapter implements CryptString
 	}
 	
 }
-
+}}}
 = Credits =
 
 credits goto Mika for sharing his Implementation of the MD5Crypt-Style
-`
