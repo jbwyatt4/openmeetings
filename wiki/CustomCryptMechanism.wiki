@@ -1,0 +1,50 @@
+#summary Using a custom encrypt Class / Method
+
+= Configuration of Custom Crypt-Style =
+
+You can use custom Crypt-Types, but you should decide during installation which Type of encryption you want to use.
+By default two type are available:
+
+  * org.xmlcrm.utils.crypt.MD5Implementation - this uses common MD5 Crypt like PHP does, this is the default one
+  * org.xmlcrm.utils.crypt.MD5CryptImplementation - does use BSD-Style of encryption using a salt
+
+You can edit the config-key during Installation or later in the Administration Panel. But if you change it using the Administration-Panel previous passwords might be not workign anymore ass they are encrypted with another algorithm.
+
+= Writing your own Crypt-Style = 
+
+To add your own crypt style you need to write a class which implements the interface:
+org.xmlcrm.utils.cryptCryptString
+
+and extends the Adapter:
+org.xmlcrm.utils.CryptStringAdapter
+
+Example of an Implementation:
+`
+package org.xmlcrm.utils.crypt;
+
+import java.security.NoSuchAlgorithmException;
+
+public class MD5Implementation extends CryptStringAdapter implements CryptString {
+
+	@Override
+	public String createPassPhrase(String userGivenPass) {
+		String passPhrase = null;
+		try {
+			passPhrase = MD5.do_checksum(userGivenPass);
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		}
+		return passPhrase;
+	}
+
+	@Override
+	public Boolean verifyPassword(String passGiven, String passwdFromDb) {
+		return (passwdFromDb.equals(createPassPhrase(passGiven)));
+	}
+	
+}
+
+= Credits =
+
+credits goto Mika for sharing his Implementation of the MD5Crypt-Style
+`
