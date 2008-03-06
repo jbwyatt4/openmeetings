@@ -46,7 +46,7 @@
             var usercolor = value[5];
             if ( usercolor==null || usercolor==0 || usercolor.length==0 )usercolor=0xCCCCCC;
             //new chatTabitem(this._cbtext,{cbtext:newmessage,user_id:value[8],usercolor:usercolor,username:username,usertime:value[1]});
-            new chatTabitememoticons(this._cbtext,{messageObj:messageObj,user_id:value[8],usercolor:usercolor,username:username,usertime:value[1]});
+            new chatTabItemEmoticons(this._cbtext,{messageObj:messageObj,user_id:value[8],usercolor:usercolor,username:username,usertime:value[1]});
             this.setScrollToMax();              
         ]]>
     </method>           

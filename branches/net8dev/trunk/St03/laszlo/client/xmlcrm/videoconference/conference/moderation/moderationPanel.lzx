@@ -100,9 +100,9 @@
 			if (parent.initial){
 				parent.initial = false;
 			} else if (value==null) {
-				new recordContentingStartWin(canvas.main_content._content.inner,{modpanel:parent});
+				new recordingStartWin(canvas.main_content._content.inner,{modpanel:parent});
 			} else {
-				new errorPopupuserinfo(canvas,{error:canvas.getLabelName(418),user:value});
+				new errorPopupUserInfo(canvas,{error:canvas.getLabelName(418),user:value});
 			}
 			parent.setMessage();
 		</handler>	

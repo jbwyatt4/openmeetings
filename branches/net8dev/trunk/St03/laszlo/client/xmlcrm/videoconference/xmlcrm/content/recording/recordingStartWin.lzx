@@ -51,7 +51,7 @@
 			if (value==null) {
 				this.parent.recordMeetingStream.doCall();
 			} else {
-				new errorPopupuserinfo(canvas,{error:canvas.getLabelName(418),user:value});
+				new errorPopupUserInfo(canvas,{error:canvas.getLabelName(418),user:value});
 			}
 		</handler>	
   	</netRemoteCallHib>   	

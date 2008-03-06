@@ -23,16 +23,16 @@
                 Debug.write(canvas.thishib.modus,canvas.thishib.roomtype);
                 if (canvas.thishib.modus=='audience' && canvas.thishib.roomtype=='public'){
                     var t = new Array();
-                    t.action = 'publicevents';
+                    t.action = 'publicEvents';
                 } else if (canvas.thishib.modus=='audience' && canvas.thishib.roomtype=='private'){
                     var t = new Array();
-                    t.action = 'privateevents';
+                    t.action = 'privateEvents';
                 } else if (canvas.thishib.modus=='conference' && canvas.thishib.roomtype=='public'){
                     var t = new Array();
-                    t.action = 'publicmeetings';
+                    t.action = 'publicMeetings';
                 } else if (canvas.thishib.modus=='conference' && canvas.thishib.roomtype=='private'){
                     var t = new Array();
-                    t.action = 'privatemeetings';
+                    t.action = 'privateMeetings';
                 }
                 Debug.write(t);
                 loadContent(t);

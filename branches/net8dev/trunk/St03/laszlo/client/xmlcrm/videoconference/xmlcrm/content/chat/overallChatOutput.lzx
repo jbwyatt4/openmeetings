@@ -41,7 +41,7 @@
             Debug.write("messageObj: ",messageObj);
             var usercolor = value[5];
             if ( usercolor==null || usercolor==0 || usercolor.length==0 )usercolor=0xCCCCCC;
-            new chatTabitememoticons(this._cbtext,{messageObj:messageObj,user_id:value[8],usercolor:usercolor,username:username,usertime:value[1]});
+            new chatTabItemEmoticons(this._cbtext,{messageObj:messageObj,user_id:value[8],usercolor:usercolor,username:username,usertime:value[1]});
             this.setScrollToMax();              
         ]]> 
     </method>           
