@@ -128,10 +128,11 @@ public class ImportInitvalues {
 
         }
 
-        public void loadConfiguration(String allowfrontendRegister, String smtpServer, String smtpPort,
+        public void loadConfiguration(String crypt_ClassName, String allowfrontendRegister, String smtpServer, String smtpPort,
                         String referer, String mailauthname, String mailauthpass, String default_lang,
                         String swf_path, String im_path, String url_feed, String url_feed2){
 
+        		Configurationmanagement.getInstance().addConfByKey(3, "crypt_ClassName", crypt_ClassName, null, "This Class is used for Authentification-Crypting. Be carefull what you do here! If you change it while running previous Pass of users will not be workign anymore! for more Information see http://code.google.com/p/openmeetings/wiki/CustomCryptMechanism");
                 //"1"
                 Configurationmanagement.getInstance().addConfByKey(3, "allow_frontend_register", allowfrontendRegister, null, "");
 

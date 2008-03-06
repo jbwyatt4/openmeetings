@@ -28,6 +28,7 @@ import org.xmlcrm.app.data.user.Organisationmanagement;
 import org.xmlcrm.utils.mappings.CastMapToObject;
 import org.xmlcrm.utils.math.*;
 import org.xmlcrm.utils.mail.MailHandler;
+import org.xmlcrm.utils.crypt.*;
 
 import org.red5.io.utils.ObjectMap;
 
@@ -213,18 +214,18 @@ public class Usermanagement {
 	 * @param Userpass
 	 * @return
 	 */
-	public Object loginUser(String SID, String Username, String Userpass, RoomClient currentClient) {
+	public Object loginUser(String SID, String username, String userpass, RoomClient currentClient) {
 		try {
 			Object idf = HibernateUtil.createSession();
 			Session session = HibernateUtil.getSession();
 			Transaction tx = session.beginTransaction();
-			MD5Calc md5 = new MD5Calc();
+			
 			Criteria crit = session.createCriteria(Users.class);
-			crit.add(Restrictions.eq("login", Username));
+			crit.add(Restrictions.eq("login", username));
 			crit.add(Restrictions.eq("deleted", "false"));
 			crit.add(Restrictions.eq("status", 1));
 			List ll = crit.list();
-			log.error("debug loginUser: " + Username);
+			log.error("debug loginUser: " + username);
 			tx.commit();
 			HibernateUtil.closeSession(idf);
 
@@ -234,8 +235,7 @@ public class Usermanagement {
 				return new Long(-10);
 			} else {
 				Users users = (Users) ll.get(0);
-				String chsum = md5.do_checksum(Userpass);
-				if (chsum.equals(users.getPassword())) {
+				if (ManageCryptStyle.getInstance().getInstanceOfCrypt().verifyPassword(userpass, users.getPassword())) {
 					log.error("chsum OK: "+ users.getUser_id());
 					Sessionmanagement.getInstance().updateUser(SID, users.getUser_id());
 					users.setUserlevel(getUserLevel(users.getLevel_id()));		
@@ -431,8 +431,7 @@ public class Usermanagement {
 						us.setLevel_id(new Long(level_id));
 					if (password.length() != 0) {
 						if (password.length()>=4){
-							MD5Calc md5 = new MD5Calc();
-							us.setPassword(md5.do_checksum(password));
+							us.setPassword(ManageCryptStyle.getInstance().getInstanceOfCrypt().createPassPhrase(password));
 						} else {
 							return new Long(-7);
 						}
@@ -841,7 +840,7 @@ public class Usermanagement {
 	 */
 	public Long addUser(long level_id, int availible, int status,
 			String firstname, String login, String lastname, long language_id,
-			String Userpass, long adress_id, Date age) {
+			String userpass, long adress_id, Date age) {
 		try {
 			Users users = new Users();
 			users.setFirstname(firstname);
@@ -863,8 +862,7 @@ public class Usermanagement {
 			} else {
 				users.setLanguage_id(null);
 			}
-			MD5Calc md5 = new MD5Calc();
-			users.setPassword(md5.do_checksum(Userpass));
+			users.setPassword(ManageCryptStyle.getInstance().getInstanceOfCrypt().createPassPhrase(userpass));
 			users.setRegdate(new Date());
 			users.setDeleted("false");
 
@@ -976,8 +974,7 @@ public class Usermanagement {
 					savedUser.setLastname(user.getLastname());
 					savedUser.setTitle_id(user.getTitle_id());
 					if (user.getPassword().length()>3){
-						MD5Calc md5 = new MD5Calc();
-						savedUser.setPassword(md5.do_checksum(user.getPassword()));
+						savedUser.setPassword(ManageCryptStyle.getInstance().getInstanceOfCrypt().createPassPhrase(user.getPassword()));
 					}
 					
 					
@@ -1068,9 +1065,8 @@ public class Usermanagement {
 	
 	private void sendHashByUser(Users us, String appLink) throws Exception {
 		String loginData = us.getLogin()+new Date();
-		MD5Calc md5 = new MD5Calc();
 		log.error("User: "+us.getLogin());
-		us.setResethash(md5.do_checksum(loginData));
+		us.setResethash(ManageCryptStyle.getInstance().getInstanceOfCrypt().createPassPhrase(loginData));
 		this.updateUser(us);
 		String reset_link = appLink+"?hash="+us.getResethash();
 		
@@ -1153,8 +1149,7 @@ public class Usermanagement {
 			Object u = this.getUserByHash(hash);
 			if (u instanceof Users) {
 				Users us = (Users) u;
-				MD5Calc md5 = new MD5Calc();
-				us.setPassword(md5.do_checksum(pass));
+				us.setPassword(ManageCryptStyle.getInstance().getInstanceOfCrypt().createPassPhrase(pass));
 				us.setResethash("");
 				this.updateUser(us);
 				return new Long(-8);

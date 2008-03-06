@@ -81,7 +81,26 @@
     	<input name="imagemagick_path" id="imagemagick_path" size="27" title="Enter the path to ImageMagick, leave blank if ImageMagick is successfully installed to system-path" type="text" />   	
     	<p>see also <a href="http://code.google.com/p/openmeetings/wiki/ConvertersInstallation" target="_blank">ConvertersInstallation</a></p>	
     	
+    </fieldset>      
+    
+    <fieldset>
+    
+		<legend>Crypt Type</legend>    
+    
+        <label for="crypt_ClassName">Crypt Class</label>
+    	<input name="crypt_ClassName" id="crypt_ClassName" size="27" type="text" 
+    		title="Enter the Class name of the Encryption Class. DO NOT ALTER THIS IF YOU ARE NOT SURE"
+    		value="org.xmlcrm.utils.crypt.MD5Implementation" />  	
+    	<p>
+	    	You can use this default crypt type which is equal to PHP-MD5 function or BSD-Style<BR/>
+	    	encryption by using:<b>org.xmlcrm.utils.crypt.MD5CryptImplementation</b><BR/>
+	    	for more information or to write your own Crypt-Style see:<BR/>
+			<a href="http://code.google.com/p/openmeetings/wiki/CustomCryptMechanism" target="_blank">CustomCryptMechanism</a><BR/>
+			You can edit this value later BUT previous created Users and Sessions might be not usable anymore<BR/>
+    	</p>
+        
     </fieldset>       
+        	  
         	
     <fieldset>
         <legend>Absenden</legend> 
