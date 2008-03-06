@@ -32,6 +32,7 @@ Tips for Installation:
 
 == Documentation ==
  
+  * CustomCryptMechanism - how to write Custom Encryption Styles
   * [Internationalisation]
   * BandwidthNetworkSettings
   * SimpleSampleApps  	
