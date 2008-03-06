@@ -25,7 +25,7 @@ public class TestAuth extends TestCase{
 		
 		System.out.println("sessionData: "+sessionData.getSession_id());
 		
-		MD5Calc md5 = new MD5Calc("MD5");
+		MD5Calc md5 = new MD5Calc();
 		
 		String tTemp = md5.do_checksum("test");
 		

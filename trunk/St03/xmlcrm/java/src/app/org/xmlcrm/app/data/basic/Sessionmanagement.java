@@ -50,7 +50,7 @@ public class Sessionmanagement {
 	public Sessiondata startsession() {
 		//log.error("startsession User: || ");
 		
-		MD5Calc md5 = new MD5Calc("MD5");
+		MD5Calc md5 = new MD5Calc();
 
 		long thistime = new Date().getTime();
 		String chsum = md5.do_checksum(String.valueOf(thistime).toString());

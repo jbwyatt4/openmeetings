@@ -6,13 +6,13 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.IOException;
 
-public class MD5Calc {
+public class MD5Calc implements AuthCryptInterface{
    private MessageDigest md5;
    private byte[] digest;
    
-   public MD5Calc(String algorithm) {
+   public MD5Calc() {
       try {
-         md5 = MessageDigest.getInstance(algorithm);
+         md5 = MessageDigest.getInstance("MD5");
       } catch(NoSuchAlgorithmException nsae) {
          nsae.printStackTrace();
       }
@@ -43,7 +43,7 @@ public class MD5Calc {
    
    public static void main(String[] args)
      {
-        MD5Calc md5 = new MD5Calc("MD5");
+        MD5Calc md5 = new MD5Calc();
        
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
       int num = 0;
