@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<library>
+
+    <include href="sharedObject.lzx" />
+    <include href="devMediaDevice.lzx" />
+	<include href="devMicrophone.lzx" />
+	<include href="devCamera.lzx" />
+	<include href="playVideoView.lzx" />
+	<include href="devRtmpConnection.lzx" />
+	<include href="simpleNetStream.lzx" />	
+	<include href="devVideoView.lzx" />	
+    
+</library>
