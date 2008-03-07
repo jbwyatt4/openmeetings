@@ -33,7 +33,7 @@ Step-By-Step:
   * Download (SVN - Checkout) from:
 http://openmeetings.googlecode.com/svn/trunk/webapp/
   * change dir your local copy
-  * Run: ant dist (JAVA_HOME must be set and point to a JDK >= 1.5)
+  * Run: ant dist (JAVA_HOME must be set and point to a JDK >= 1.5 and you need ant version >= 1.7)
 
 there is now a directory dist, inside of that directory there is a compiled red5-webapp with the name *openmeetings*
 You have to copy the Laszlo-Client from the Step-By-Step scenario into it.
