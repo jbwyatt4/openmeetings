@@ -15,7 +15,7 @@
 		<!-- Database Settings -->
 		<property name="connection.driver_class">com.mysql.jdbc.Driver</property>
 		<property name="dialect">org.hibernate.dialect.MySQLInnoDBDialect</property>
-		<property name="connection.url">jdbc:mysql://localhost/openmetings?useUnicode=true&amp;createDatabaseIfNotExist=true&amp;characterEncoding=utf-8</property>	
+		<property name="connection.url">jdbc:mysql://localhost/openmeetings?useUnicode=true&amp;createDatabaseIfNotExist=true&amp;characterEncoding=utf-8</property>	
 		
 		<property name="hibernate.connection.CharSet">utf8</property>
 		<property name="hibernate.connection.characterEncoding">utf8</property>
