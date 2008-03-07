@@ -1,0 +1,47 @@
+
+ BUILD OPENMEETINGS FROM SOURCE
+ ------------------------------
+ 
+ ABOUT CONTENTS:
+
+  * INSTALL: This file.
+  * /client: Client side OpenLaszlo LZX sources for swf.
+  * /webapp: Server side Java sources for red5 webapp.
+
+ STEP0: PREPARE
+ 
+  * Must install RDBMS(PostgreSQL or MySQL or so). 
+    also Must create database "openmeetings" encoding with "utf-8".
+  * Must install Red5-0.6.3.
+  * Must install OpenLaszlo-4.0.10.
+  * Install other required tools.
+
+
+ STEP1: BUILD RED5 WEBAPP
+
+  1) Change directory to "./webapp" where "build.xml" located.
+  2) Run "ant dist".
+     After runnning, you can see "dist/openmeetings" directory.
+     NOTE: JAVA_HOME must be JDK 1.5 or newer.
+  3) Copy the "openmeetings" directory into Red5 webapps.
+  4) Change directory to Red5 "webapps/openmeetings".
+  5) Create your "hibernate.cfg.xml" under the ".conf" directory.
+  6) Edit "config.xml" and change the value of <rtmphostlocal> 
+     to your Red5 server hostname.
+  7) Restart Red5.
+  8) Run "http://localhost:5080/openmeetings/install" on the browser.
+
+
+ STEP2: BUILD OPENLASZLO LZX
+
+  1) Copy "./client" directory into Openlaszlo webroot
+  2) Change directory to "client"
+  3) Edit "config.xml" and change the value of <rtmphostlocal> 
+     to your Red5 server hostname.
+  4) Run the below url on the browser.
+     http://localhost:***/openmeetings/client/maindebug.lzx?lzr=swf8&lzproxied=solo
+     http://localhost:***/openmeetings/client/main.lzx?lzr=swf8&lzproxied=solo
+
+
+ SEE ALSO:
+  http://code.google.com/p/openmeetings/wiki/BuildSources
