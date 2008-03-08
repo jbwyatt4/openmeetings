@@ -46,6 +46,7 @@ Tips for Installation:
   * AdminScreenshots
   * QualityAssurance
   * CodingGuidelines - Client-Side Coding Guidelines
+  * ContributingPlayRules - Some info regarding the Contribution of code to SVN
 
 == Community == 
 
