@@ -1,6 +1,8 @@
-#summary Some info regarding the Contribution of code to SVN
+#summary Some info regarding the Contribution
 
-= General =
+= Contribute to SVN =
+
+Information how to add and edit code in Branches and Trunk.
 
   * If you make deeper modifications work in a separate branch
   * All Issues and work should be mentioned in the Issue tracker
@@ -11,6 +13,8 @@
   * code should fit into the CodingGuidelines
 
 = Creating Patches =
+
+If you have no SVN-Access but would like to participate, you can create a Patch and send it to the developer-mailing-list or add it to the Issue tracker.
 
 There are two Repo's available, one for the Webapp and one for the Client. These are two projects.
   * Project A:
