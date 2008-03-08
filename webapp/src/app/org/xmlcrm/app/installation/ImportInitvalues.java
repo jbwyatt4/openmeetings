@@ -60,7 +60,7 @@ public class ImportInitvalues {
                 Navimanagement.getInstance().addMainStructure("personalContent", 6, 299, true, true, 1, "personalContent", 2);
 
                 Navimanagement.getInstance().addGlobalStructure("record", 3, 395, false, true, 1, "record","false");
-                Navimanagement.getInstance().addMainStructure("record", 7, 395, true, true, 1, "record", 3);
+                Navimanagement.getInstance().addMainStructure("recordContent", 7, 395, true, true, 1, "recordContent", 3);
                 Navimanagement.getInstance().addMainStructure("recordingsViewer", 8, 396, true, true, 1, "recordingsViewer", 3);
 
                 Navimanagement.getInstance().addGlobalStructure("meetings", 4, 2, false, true, 1, "meetings","false");
