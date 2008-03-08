@@ -1,19 +1,55 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library>
 
-<class name="calendarWindow" extends="view" bgcolor="$once{ canvas.basebgcolorizer }">
+<class name="calendarWindow" extends="view"  clickable="true" 
+	   bgcolor="$once{ canvas.basebgcolorizer }">	
 
 	<attribute name="fieldRef" value="null" />
 	
-	<view x="${ this.parent.width-19 }" y="1" resource="explorer_button_rsc"
-		onmouseover="this.setResourceNumber(2)"
-		onmouseout="this.setResourceNumber(1)"
-		onmousedown="this.setResourceNumber(3)">
-		<handler name="onmouseup">
-			this.setResourceNumber(1);
-			this.parent.destroy();
-		</handler>									
-	</view>	
+	<handler name="oninit">
+		LzModeManager.makeModal(this);
+	</handler>
+	<method name="close">
+		LzModeManager.release(this);
+		this.destroy();
+	</method>	
+	
+    <!--- @keywords private -->
+    <method name="passModeEvent" args="eventStr,view" > 
+        <![CDATA[
+            if ( eventStr == "onmousedown"  ){
+                if ( view != null ) {
+                   if ( !view.childOf(this) ) {
+                        this.close();
+                   }
+                } else {
+                    this.close();
+                }
+            }
+            if (view && view.childOf(this)) {
+                if (view[ eventStr ]) {
+                    view[ eventStr ].sendEvent( view );
+                }
+                return false;
+            }
+            return true;
+        ]]> 
+    </method> 	
+	
+	<labelText fgcolor="0xFFFFFF" fontstyle="bold" labelid="481" x="1" y="1" />
+	
+    <view name="_close" x="${ this.parent.width-19 }" y="1" 
+        resource="btn_presenter_close"
+        onmouseover="this.setResourceNumber(2)"
+        onmouseout="this.setResourceNumber(1)"
+        onmousedown="this.setResourceNumber(3)"
+        onmouseup="this.setResourceNumber(1)" >
+        <handler name="onclick">
+            this.setResourceNumber(2);
+            this.parent.close();
+        </handler>
+        <labelTooltip labelid="430" />
+    </view>  	
 
 	<dateSelector y="20" name="_dateselector">
 		<handler name="oninit">
@@ -28,7 +64,7 @@
 		</handler>
 		<handler name="ondoubleselect" args="d">
 			parent.fieldRef.setText(parseDateToString(d));
-			this.parent.destroy();
+			this.parent.close();
 		</handler>
 	</dateSelector>	
 
