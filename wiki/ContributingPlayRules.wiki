@@ -12,12 +12,11 @@
 
 = Creating Patches =
 
-There are two Repo's available, one for the Webapp and one for the Client.
-These are two projects.
-Project A:
-http://openmeetings.googlecode.com/svn/trunk/client/
-Project B:
-http://openmeetings.googlecode.com/svn/trunk/webapp/
+There are two Repo's available, one for the Webapp and one for the Client. These are two projects.
+  * Project A:
+  http://openmeetings.googlecode.com/svn/trunk/client/
+  * Project B:
+  http://openmeetings.googlecode.com/svn/trunk/webapp/
 
 Please do create a Patch for _each_ Project separated. So if your patch only concerns the Client side, please make a patch, where 
 http://openmeetings.googlecode.com/svn/trunk/client/
