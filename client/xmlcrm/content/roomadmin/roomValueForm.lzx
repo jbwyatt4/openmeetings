@@ -19,8 +19,9 @@
 	<handler name="onnew">
 		this.rooms_id=0;
         this.roomname.setText('');
-		this.comment.setText('');
+		this.comment.setAttribute('text','');
 		this.ispublic.setValue(false);
+		this.numberOfParticipants.selectItem('4');
 		this._organisationslist.clearList();
 	</handler>
 	
@@ -41,9 +42,11 @@
     
     <method name="initFields" args="obj">
     	<![CDATA[
+    		if ($debug) Debug.write("initFields: ",obj);
 			this.roomname.setText(obj.name);
-			this.comment.setText(obj.comment);
+			this.comment.setAttribute('text',obj.comment);
 			this.ispublic.setValue(obj.ispublic);
+			this.numberOfParticipants.selectItem(String(obj.numberOfPartizipants));
 			this.roomtype.selectItem(String(obj.roomtype.roomtypes_id));
         ]]>
     </method>
@@ -52,6 +55,7 @@
 		<![CDATA[
 			this._organisationslist.clearList();
 			for (var i=0;i<obj.length;i++){
+				//if ($debug) Debug.write("initOrganisations: ",obj[i]);
 				this._organisationslist.addItem(obj[i].organisation.name,obj[i].organisation.organisation_id);
 			}
 		]]>
@@ -103,7 +107,7 @@
 			this.sendObject["roomtypes_id"] = Number(this.parent.roomtype.getValue());
   			this.sendObject["comment"] = this.parent.comment.getText();
   			this.sendObject["ispublic"] = this.parent.ispublic.getValue();
-
+			this.sendObject["numberOfPartizipants"] = Number(this.parent.numberOfParticipants.getValue());
   			this.sendObject["organisations"] = this.parent._organisationslist.getAllItems();
 
   			//Debug.write("prepareCall: ",this.sendObject);
@@ -130,9 +134,26 @@
     
     <labelText labelid="193" width="200" y="70" resize="false" x="2"/>
         <customEdittext name="roomname" y="70" x="120" width="270" text="" />   
-	
-    <labelText labelid="194" width="200" y="100" resize="false" x="2"/>  
-        <combobox name="roomtype" width="270" y="100" x="120" editable="false" fontsize="12">
+    
+    <labelText labelid="482" width="200" y="100" resize="false" x="2"/>
+        <combobox name="numberOfParticipants" width="270" y="100" x="120" editable="false" fontsize="12">
+	        <handler name="oninit" >
+	            <![CDATA[
+	            	this.addItem(2,2);
+	            	this.addItem(4,4);
+	            	this.addItem(6,6);
+	            	this.addItem(8,8);
+	            	this.addItem(10,10);
+	            	this.addItem(12,12);
+	            	this.addItem(14,14);
+	            	this.addItem(16,16);
+	            	this.selectItemAt(1);
+	            ]]>
+	        </handler> 
+        </combobox> 
+        
+    <labelText labelid="194" width="200" y="130" resize="false" x="2"/>  
+        <combobox name="roomtype" width="270" y="130" x="120" editable="false" fontsize="12">
 	        <handler name="oninit" >
 	            <![CDATA[
 	            for (var i=0;i<canvas.roomTypesInitValues.length;i++){
@@ -143,23 +164,23 @@
 	        </handler> 
         </combobox> 	                  
 
-    <labelText labelid="195" width="200" y="130" resize="false" x="2"/>  
-        <checkbox name="ispublic" width="270" y="130" x="120" fontsize="12" />
+    <labelText labelid="195" width="200" y="160" resize="false" x="2"/>  
+        <checkbox name="ispublic" width="270" y="160" x="120" fontsize="12" />
 	
-	<labelText labelid="196" width="200" y="160" resize="false" x="2"/> 
-        <customScrollEdittext name="comment" y="160" x="120" width="270" 
+	<labelText labelid="196" width="200" y="190" resize="false" x="2"/> 
+        <customScrollEdittext name="comment" y="190" x="120" width="270" 
             height="100" text="" />	
 	
-    <labelText labelid="191" width="200" y="270" resize="false" x="2"/>     
-    <simpleValueList name="_organisationslist" y="270" x="120" width="270" height="160" 
+    <labelText labelid="191" width="200" y="300" resize="false" x="2"/>     
+    <simpleValueList name="_organisationslist" y="300" x="120" width="270" height="160" 
 		multiselect="true" />
 	
-	<baseChooseIcon resourceN="edit_add_rsc" labelid="172" y="270" x="400"
+	<baseChooseIcon resourceN="edit_add_rsc" labelid="172" y="300" x="400"
 		onclick="this.parent.addOrganisationToUser()" />		
 	<method name="addOrganisationToUser">
 			new chooseOrganisationWindow(canvas.main_content._content.inner,{refObj:this,item_id:this.rooms_id});
 	</method>	
-	<baseChooseIcon resourceN="button_cancel_rsc" labelid="176" y="270" x="430"
+	<baseChooseIcon resourceN="button_cancel_rsc" labelid="176" y="300" x="430"
 		onclick="new confirmDeleteWindow(canvas.main_content._content.inner,{refObj:this});" >		
 		<method name="confirmDelete">
 			if (this.parent._organisationslist._selected!=null)
