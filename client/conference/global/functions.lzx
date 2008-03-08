@@ -89,29 +89,50 @@ function calcLineWidthByTextField(maxsizeText,textForCalcing,fontsize, fontname)
 	return textObject;
 }
 
-function measureLine(){		
-	//Debug.write("restString: ",textFieldtext);
-	for (var i=textFieldtext.length;i>0;i--){
-		var testTxt = textFieldtext.slice(startIndex, i);
-		var metrics = myTextFormat.getTextExtent(testTxt, 100000);
-		//Debug.write("metrics: ",testTxt,startIndex,metrics.width);
-		if (metrics.width<=maxsize){
+function measureLine(){
+	var remainingLength = textFieldtext.length;
 
-			testTxt = textFieldtext.slice(startIndex, i-1);
+    //if ($debug) Debug.write("chat Message: ", textFieldtext);
+    //if ($debug) Debug.write("length of chat Message: ", remainingLength);
+	while (remainingLength > 0) {
+		var testTxt = textFieldtext.slice(startIndex, remainingLength);
+		//if ($debug) Debug.write("part of chat message being treated: ", testTxt);
+		//if ($debug) Debug.write("length of this part: ", remainingLength);
+
+		var metrics = myTextFormat.getTextExtent(testTxt, 100000);
+
+		if (metrics.width <= maxsize){
 			textObject[currentLine] = new Array();
 			textObject[currentLine]["text"] = testTxt;
-			textFieldtext = textFieldtext.slice(i-1, textFieldtext.length);
-			
-			if (textFieldtext.length==1){
-				textObject[currentLine]["text"]+=textFieldtext;
-				return;
-			} else {
-				currentLine+=1;
-				return measureLine();
+
+			if (remainingLength == textFieldtext.length) {
+			    // everything was printed
+			    return;
 			}
+
+			textFieldtext = textFieldtext.slice(remainingLength, textFieldtext.length);
+			if (textFieldtext.indexOf(" ") == 0 && textFieldtext.length > 1) {
+			    textFieldtext = textFieldtext.slice(1, textFieldtext.length);
+			}
+			if (textFieldtext.indexOf(" ") == 0 && textFieldtext.length == 1) {
+			    // only one character is remaining, and it is a space => do not print it
+			    return;
+			}
+			remainingLength = textFieldtext.length;
+			
+            currentLine += 1;
+		} else {
+		    //if ($debug) Debug.write("this part of chat message is too long.");
+            if (testTxt.lastIndexOf(" ") != -1) {
+                //if ($debug) Debug.write("removing last word from this part");
+                remainingLength = testTxt.lastIndexOf(" ");
+            } else {
+                //if ($debug) Debug.write("removing last letter from this part");
+                remainingLength = testTxt.length - 1;
+            }
 		}
 	}		
-}  
+}
 
 function getLineHeight(){
 	return lineHeight;
