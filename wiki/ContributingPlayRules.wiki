@@ -1,4 +1,4 @@
-#summary Some info regarding the Contributing of code to SVN
+#summary Some info regarding the Contribution of code to SVN
 
   * If you make deeper modifications work in a separate branch
   * All Issues and work should be mentioned in the Issue tracker
