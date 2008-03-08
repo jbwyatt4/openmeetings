@@ -145,8 +145,8 @@
 	    	<![CDATA[
 	    	this.clearList();
 	    	for (var i=0;i<records.length;i++){
-                var v = recordContents[i].login+' ['+records[i].lastname+', '+records[i].firstname+']';
-	    		new recordContentListItem(this._innerlist._inn._inn,{valueName:v,value:records[i].user_id});
+                var v = records[i].login+' ['+records[i].lastname+', '+records[i].firstname+']';
+	    		new recordListItem(this._innerlist._inn._inn,{valueName:v,value:records[i].user_id});
 	    	}
 	    	]]>
 	    </method>

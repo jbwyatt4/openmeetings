@@ -28,7 +28,7 @@
 	
 	<attribute name="multiselect" value="false" type="boolean" />
     
-    <attribute name="itemclassname" type="string" value="simplelistItem" />
+    <attribute name="itemclassname" type="string" value="simpleListItem" />
 	
 	<handler name="onselect" args="obj" />
 	
