@@ -129,12 +129,13 @@ public class ConferenceService {
 	 * @param SID
 	 * @param name
 	 * @param roomtypes_id
+	 * @deprecated
 	 * @return
 	 */
 	public Long addRoomPublic(String SID, String name, long roomtypes_id){
         Long users_id = Sessionmanagement.getInstance().checkSession(SID);
         Long User_level = Usermanagement.getInstance().getUserLevelByID(users_id);
-        return Roommanagement.getInstance().addRoom(User_level, name, roomtypes_id,"", true,null);
+        return Roommanagement.getInstance().addRoom(User_level, name, roomtypes_id,"", new Long(4), true,null);
 	}
 	
 	/**
@@ -144,12 +145,13 @@ public class ConferenceService {
 	 * @param name
 	 * @param roomtypes_id
 	 * @param ispublic
+	 * @deprecated
 	 * @return
 	 */
 	public Long addRoomOrganisation(String SID, long organisation_id, String name, long roomtypes_id, boolean ispublic){
         Long users_id = Sessionmanagement.getInstance().checkSession(SID);
         long User_level = Usermanagement.getInstance().getUserLevelByID(users_id);
-        Long rooms_id = Roommanagement.getInstance().addRoom(User_level, name, roomtypes_id,"", ispublic, null);
+        Long rooms_id = Roommanagement.getInstance().addRoom(User_level, name, roomtypes_id,"", new Long(4), ispublic, null);
         return Roommanagement.getInstance().addRoomToOrganisation(User_level, rooms_id, organisation_id);
 	}
 	
@@ -170,13 +172,14 @@ public class ConferenceService {
 	        if (rooms_id==0){
 	        	return Roommanagement.getInstance().addRoom(User_level, argObjectMap.get("name").toString(), 
 	        			Long.valueOf(argObjectMap.get("roomtypes_id").toString()).longValue(),
-	        			argObjectMap.get("comment").toString(),
+	        			argObjectMap.get("comment").toString(), Long.valueOf(argObjectMap.get("numberOfPartizipants").toString()).longValue(),
 	        			Boolean.valueOf(argObjectMap.get("ispublic").toString()),organisations);
 	        } else if (rooms_id>0){
 	        	return Roommanagement.getInstance().updateRoom(User_level, rooms_id, 
 	        			Long.valueOf(argObjectMap.get("roomtypes_id").toString()).longValue(), 
 	        			argObjectMap.get("name").toString(), Boolean.valueOf(argObjectMap.get("ispublic").toString()),
-	        			argObjectMap.get("comment").toString(),organisations);
+	        			argObjectMap.get("comment").toString(),
+	        			Long.valueOf(argObjectMap.get("numberOfPartizipants").toString()).longValue(),organisations);
 	        }
 		} catch (Exception e){
 			log.error("saveOrUpdateRoom",e);

@@ -376,7 +376,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Not a member?</value>
   </string>
   <string id="124" name="dashboard">
-    <value>home</value>
+    <value>Home</value>
   </string>
   <string id="125" name="useradmin">
     <value>Users</value>
@@ -394,7 +394,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>public</value>
   </string>
   <string id="130" name="head_org">
-    <value>organisation</value>
+    <value>Organisation</value>
   </string>
   <string id="131" name="btn_enterroom">
     <value>enter</value>
@@ -445,13 +445,13 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>USER-ID</value>
   </string>
   <string id="147" name="admin_userlist_login">
-    <value>login</value>
+    <value>Login</value>
   </string>
   <string id="148" name="admin_userlist_firstnam">
-    <value>firstname</value>
+    <value>Firstname</value>
   </string>
   <string id="149" name="admin_userlist_lastname">
-    <value>lastname</value>
+    <value>Lastname</value>
   </string>
   <string id="150" name="turnoverlist_next">
     <value>show next</value>
@@ -487,7 +487,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>enabled</value>
   </string>
   <string id="161" name="useralter_admin_organisation">
-    <value>organisations</value>
+    <value>Organisations</value>
   </string>
   <string id="162" name="calendar_iconlabel">
     <value>calendar</value>
@@ -499,22 +499,22 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Organisation-ID</value>
   </string>
   <string id="165" name="organisationtablelist_namerow">
-    <value>name</value>
+    <value>Name</value>
   </string>
   <string id="166" name="uservalue_levelid1">
-    <value>user</value>
+    <value>User</value>
   </string>
   <string id="167" name="uservalue_levelid2">
-    <value>mod</value>
+    <value>Moderator</value>
   </string>
   <string id="168" name="uservalue_levelid3">
-    <value>admin</value>
+    <value>Admin</value>
   </string>
   <string id="169" name="uservalue_levellabel">
     <value>userlevel</value>
   </string>
   <string id="170" name="orgvalue_header">
-    <value>organisation</value>
+    <value>Organisation</value>
   </string>
   <string id="171" name="orgvalue_orgname">
     <value>name</value>
@@ -556,13 +556,13 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>user</value>
   </string>
   <string id="184" name="loginwin_chooseorganisation">
-    <value>organisation</value>
+    <value>Organisation</value>
   </string>
   <string id="185" name="loginwin_chooseorganisationbtn">
     <value>enter</value>
   </string>
   <string id="186" name="navi_roomadmin">
-    <value>conferencerooms</value>
+    <value>Conferencerooms</value>
   </string>
   <string id="187" name="roomadmin_header">
     <value>Conferencerooms</value>
@@ -577,22 +577,22 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>public</value>
   </string>
   <string id="191" name="roomadmin_header">
-    <value>organisations</value>
+    <value>Organisations</value>
   </string>
   <string id="192" name="roomadmin_header">
     <value>Meetingrooms</value>
   </string>
   <string id="193" name="roomvalue_name">
-    <value>name</value>
+    <value>Name</value>
   </string>
   <string id="194" name="roomvalue_type">
-    <value>type</value>
+    <value>Type</value>
   </string>
   <string id="195" name="roomvalue_ispublic">
-    <value>public</value>
+    <value>Public</value>
   </string>
   <string id="196" name="roomvalue_comment">
-    <value>comment</value>
+    <value>Comment</value>
   </string>
   <string id="197" name="whiteboard_saveicon">
     <value>save</value>
@@ -604,7 +604,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>save as</value>
   </string>
   <string id="200" name="whiteboard_saveaswintext">
-    <value>filename</value>
+    <value>Filename</value>
   </string>
   <string id="201" name="files">
     <value>filename</value>
@@ -673,19 +673,19 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Your nickname for this conference</value>
   </string>
   <string id="223" name="invited_userwin_login">
-    <value>nick</value>
+    <value>Nick</value>
   </string>
   <string id="224" name="invited_userwin_firstname">
-    <value>firstname</value>
+    <value>Firstname</value>
   </string>
   <string id="225" name="invited_userwin_lastname">
-    <value>lastname</value>
+    <value>Lastname</value>
   </string>
   <string id="226" name="invited_userwin_mail">
-    <value>email</value>
+    <value>Email</value>
   </string>
   <string id="227" name="invited_userwin_lang">
-    <value>language</value>
+    <value>Language</value>
   </string>
   <string id="228" name="invited_userwin_enter">
     <value>enter</value>
@@ -817,7 +817,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>comment</value>
   </string>
   <string id="271" name="confadminform_labelkey">
-    <value>key</value>
+    <value>Value</value>
   </string>
   <string id="272" name="turnoverlist_maxresults">
     <value>of</value>
@@ -1383,7 +1383,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   <string id="459" name="calendar_dayname_sunday">
     <value>SU</value>
   </string>
-  <string id="460" name="calendar_dayname_MondayLabel">
+  <string id="460" name="calendar_dayname_monday">
     <value>Monday</value>
   </string>
   <string id="461" name="calendar_dayname_TuesdayLabel">
@@ -1448,5 +1448,8 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   </string>
   <string id="481" name="calendarwin_header">
     <value>Calendar</value>
+  </string>
+  <string id="482" name="roomadmin_labelNumberOfParticipants">
+    <value>Participants</value>
   </string>
 </language>

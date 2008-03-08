@@ -354,7 +354,7 @@ public class Roommanagement {
 	 * @param ispublic
 	 * @return id of the newly created room or NULL
 	 */
-	public Long addRoom(long user_level,String name, long roomtypes_id, String comment,
+	public Long addRoom(long user_level,String name, long roomtypes_id, String comment, Long numberOfPartizipants,
 			boolean ispublic, LinkedHashMap organisations){
 		try {
 			if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)){
@@ -362,6 +362,7 @@ public class Roommanagement {
 				r.setName(name);
 				r.setComment(comment);
 				r.setStarttime(new Date());
+				r.setNumberOfPartizipants(numberOfPartizipants);
 				r.setRoomtype(this.getRoomTypesById(roomtypes_id));
 				r.setIspublic(ispublic);
 				r.setDeleted("false");
@@ -729,12 +730,14 @@ public class Roommanagement {
 	 * @return
 	 */
 	public Long updateRoom(long user_level, long rooms_id, long roomtypes_id, String name,
-			boolean ispublic, String comment, LinkedHashMap organisations){
+			boolean ispublic, String comment, Long numberOfPartizipants, LinkedHashMap organisations){
 		try {
+			log.debug("*** updateRoom numberOfPartizipants: "+numberOfPartizipants);
 			if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)){
 				Rooms r = this.getRoomById(rooms_id);
 				r.setComment(comment);
 				r.setIspublic(ispublic);
+				r.setNumberOfPartizipants(numberOfPartizipants);
 				r.setName(name);
 				r.setRoomtype(this.getRoomTypesById(roomtypes_id));
 				r.setUpdatetime(new Date());
