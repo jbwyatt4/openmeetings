@@ -90,6 +90,14 @@ of the red5-servlet
     between 0 and 1
  -->
 <showWindowEffect>y</showWindowEffect>    
+	
+<!--
+	First day in the Week used by the Calendar
+	0 means Sunday
+	1 means Monday
+	this is the way how the Celendar inits a week
+-->
+<firstdayinweek>1</firstdayinweek>	
 
         
 </config>

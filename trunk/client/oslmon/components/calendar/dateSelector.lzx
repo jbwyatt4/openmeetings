@@ -3,12 +3,7 @@
 
 <class name="baseDateSelectorComponent" extends="view">
 
-	<attribute name="daynames" value="['SO','MO','DI','MI','DO','FR','SA']" />
 	<attribute name="daynumbers" value="[0,1,2,3,4,5,6]" />
-
-    <attribute name="monthnames" value="['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember']"/> 
-
-    <attribute name="daysinmonth" value="[ 31,28,31,30,31,30,31,31,30,31,30,31 ]"/> 
 
 	<attribute name="showingdate" type="string" value="" />
 	
@@ -54,19 +49,37 @@
 	
 	<method name="init">
 		<![CDATA[
-        super.init();
-      	this._date.setText(daynames[( (daynumber>6) ? (daynumber-7) : daynumber )]);
+	        super.init();
+	        var dateRoot = parent.parent.parent.parent;
+	        //if ($debug) Debug.write("daynumber",this,dateRoot);
+	        this._date.setText(canvas.getLabelName(dateRoot.dayNamesLabelIds[( (daynumber>6) ? (daynumber-7) : daynumber )]));
+	        this._date._tip.setAttribute('labelid',dateRoot.dayLabelNamesLabelIds[( (daynumber>6) ? (daynumber-7) : daynumber )]); 
         ]]>
 	</method>
 	
-	<text fgcolor="white" name="_date" fontsize="10" align="center" resize="true" />
+	<text fgcolor="white" name="_date" fontsize="10" align="center" resize="true"
+		  onmouseover="" onmouseout="">
+		<labelTooltip name="_tip" />
+	</text>
 
 </class>
 
 <class name="dateSelectorWeekNumber" extends="view" width="24" bgcolor="$once{ canvas.basebgcolorizer }">
 
 	<attribute name="weeknumber" value="0" type="number" />	
-	<text name="_date" fgcolor="white" fontsize="10" text="$once{ parent.weeknumber }" align="center" resize="true" />
+	<text name="_date" fgcolor="white" fontsize="10" text="$once{ parent.weeknumber }" 
+		  align="center" resize="true" />
+
+</class>
+
+<class name="dateSelectorWeekNumberHeader" extends="view" width="24" bgcolor="$once{ canvas.basebgcolorizer }">
+
+	<attribute name="labelWeekHeader" value="" type="string" />	
+	<text name="_date" fgcolor="white" fontsize="10" text="$once{ parent.labelWeekHeader }" 
+		  align="center" resize="true" 
+		  onmouseover="" onmouseout="">
+		<labelTooltip name="_tip" labelid="468" />
+	</text>
 
 </class>
 
@@ -95,10 +108,12 @@
 	<method name="init">
         <![CDATA[ 
         super.init();
-        this.setAttribute('currentMonthName',this.monthnames[month]); 
-        new dateSelectorWeekNumber(this.weekheader,{weeknumber:'KW',bgcolor:canvas.basebgcolorizer});
+        var dateRoot = parent.parent;
+        //if ($debug) Debug.write("dateRoot: ",dateRoot);
+        this.setAttribute('currentMonthName',dateRoot.monthnames[month]); 
+        new dateSelectorWeekNumberHeader(this.weekheader,{labelWeekHeader:canvas.getLabelName(467),bgcolor:canvas.basebgcolorizer});
         for( var i = 0 ; i < 6 ; i++ ) new weekclass(this.content,{firstweekddaydate:new Date(this.showingdate.getTime()+(604800000*i)),dayclass:dayclass,month:month});  
-        for( var i = 0 ; i < 7 ; i++ ) new dateSelectordayheader(this.weekheader,{daynumber:(this.showingdate.getDay()+i)});  
+        for( var i = 0 ; i < 7 ; i++ ) new dateSelectorDayHeader(this.weekheader,{daynumber:(this.showingdate.getDay()+i)});  
         for( var i = 0 ; i < 6 ; i++ ) new dateSelectorWeekNumber(this.weekNumber,{weeknumber:( (this.firstweekNumber+i<54) ? (this.firstweekNumber+i) : ((this.firstweekNumber+i)-53) )});
 		]]>
 	</method> 
@@ -143,8 +158,13 @@
 </class>
 
 <class name="baseDateSelector" extends="baseDateSelectorComponent" >
+	
+	<attribute name="dayNamesLabelIds" value="null" />
+	<attribute name="dayLabelNamesLabelIds" value="null" />
+	<attribute name="monthnames" value="['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember']"/> 
 
-	<attribute name="firstdayinweek" value="1" type="number" />
+
+	<attribute name="firstdayinweek" value="$once{ canvas.firstdayinweek }" type="number" />
 	<attribute name="year" value="" type="string" />
 	<attribute name="selecteddate" value="null" />
 	<attribute name="selected" value="null" />
@@ -155,20 +175,36 @@
 	<handler name="onmonthSel" args="month" />
 	<handler name="onyearSel" args="year" />
 	
+	<handler name="oninit">
+		<![CDATA[
+			this.dayNamesLabelIds = [459,453,454,455,456,457,458];
+			this.dayLabelNamesLabelIds = [466,460,461,462,463,464,465];
+			this.monthnames = [canvas.getLabelName(469),canvas.getLabelName(470),
+								canvas.getLabelName(471),canvas.getLabelName(472),
+								canvas.getLabelName(473),canvas.getLabelName(474),
+								canvas.getLabelName(475),canvas.getLabelName(476),
+								canvas.getLabelName(477),canvas.getLabelName(478),
+								canvas.getLabelName(479),canvas.getLabelName(480)]
+			//460
+			//454
+		]]>
+	</handler>	
+	
 	<method name="init">
         <![CDATA[ 
-        super.init();
-        
-        if (this.showingdate==""){
-        	this.showingdate = new Date();
-        }
-        this.setAttribute('year',this.showingdate.getFullYear());
-        this.selecteddate = this.showingdate;
-        var firstdayDate = this.getDateFirstDayInMonth();
-        new dateSelectormonth(this.content,{name:'content',firstweekNumber:this.getWeekNumber(firstdayDate.getTime()),month:this.selecteddate.getMonth(),showingdate:firstdayDate,dayclass:dayclass,weekclass:weekclass,showcalenderweek:showcalenderweek,showcalendermonth:showcalendermonth});
-        this.hiliteDate(this.showingdate);
-        this.onselect.sendEvent(this.selecteddate);
-        this.checkToday();
+	        super.init();
+	        
+	        if (this.showingdate==""){
+	        	this.showingdate = new Date();
+	        }
+	        this.setAttribute('year',this.showingdate.getFullYear());
+	        this.selecteddate = this.showingdate;
+	        var firstdayDate = this.getDateFirstDayInMonth();
+	        this.content.content.destroy();
+	        new dateSelectorMonth(this.content,{name:'content',firstweekNumber:this.getWeekNumber(firstdayDate.getTime()),month:this.selecteddate.getMonth(),showingdate:firstdayDate,dayclass:dayclass,weekclass:weekclass,showcalenderweek:showcalenderweek,showcalendermonth:showcalendermonth});
+	        this.hiliteDate(this.showingdate);
+	        this.onselect.sendEvent(this.selecteddate);
+	        this.checkToday();
 		]]>
 	</method>
 	
@@ -260,13 +296,19 @@
 		]]>
 	</method>
 	
+	<method name="getDaysInMonth" args="iYear,iMonth" >
+		<![CDATA[
+			return 32 - new Date(iYear, iMonth, 32).getDate();
+		]]>
+	</method>
+	
 	<method name="getWeekNumber" args="DateInMilliseconds" >
 		<![CDATA[
 		var d = new Date(DateInMilliseconds);
 		var NumerOfDaysIn = d.getDate();
 		
 		for (var i=0;i<d.getMonth();i++) 
-			NumerOfDaysIn+=daysinmonth[i];
+			NumerOfDaysIn+=this.getDaysInMonth(d.getFullYear(),d.getMonth());
 			
 		var days = this.isoWeekDays(NumerOfDaysIn,d.getDay());
 		if (days < 0) {
@@ -352,12 +394,14 @@
 		]]>
 	</method>
 	
-	<view name="content" />
+	<view name="content">
+		<view name="content" />
+	</view>
 
 </class>
 
 <class name="dateSelector" extends="baseDateSelector"
-	weekclass="dateselectorweek" dayclass="dateselectorday" monthclass="dateselectormonth" >
+	weekclass="dateSelectorWeek" dayclass="dateSelectorDay" monthclass="dateSelectorMonth" >
 
 </class>
 
