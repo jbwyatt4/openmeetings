@@ -122,8 +122,8 @@ public class StreamService implements IPendingServiceCallback {
 							String streamName = generateFileName(rcl.getStreamid());
 							
 							//if the user does publish av, a, v
-							if (!rcl.getAvsettings().equals("n")){								
-								recordShow(conn, rcl.getStreamid(), streamName);
+							if (!rcl.getAvsettings().equals("n")){	
+								recordShow(conn, rcl.getBroadCastID(), streamName);
 							} 
 							
 							roomStream.put("streamName", streamName);
@@ -300,15 +300,15 @@ public class StreamService implements IPendingServiceCallback {
 	 *
 	 * @param conn
 	 */
-	private static void recordShow(IConnection conn, String streamid, String streamName) throws Exception {
+	private static void recordShow(IConnection conn, long broadcastid, String streamName) throws Exception {
 		log.error("Recording show for: " + conn.getScope().getContextPath());
-		log.error("Name of CLient and Stream to be recorded: "+streamid);		
+		log.error("Name of CLient and Stream to be recorded: "+broadcastid);		
 		log.error("Application.getInstance()"+Application.getInstance());
 		log.error("Scope "+conn);
 		log.error("Scope "+conn.getScope());
 		// Get a reference to the current broadcast stream.
 		ClientBroadcastStream stream = (ClientBroadcastStream) Application.getInstance()
-				.getBroadcastStream(conn.getScope(), streamid);
+				.getBroadcastStream(conn.getScope(), Long.valueOf(broadcastid).toString());
 		try {
 			// Save the stream to disk.
 			stream.saveAs(streamName, false);
@@ -488,7 +488,7 @@ public class StreamService implements IPendingServiceCallback {
 				
 				//if the user does publish av, a, v
 				if (!rcl.getAvsettings().equals("n")){
-					recordShow(conn, rcl.getStreamid(), streamName);
+					recordShow(conn, rcl.getBroadCastID(), streamName);
 				}
 				
 				roomStream.put("streamName", streamName);
