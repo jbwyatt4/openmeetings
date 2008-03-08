@@ -1367,4 +1367,91 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   <string id="452" name="choose_video_settings_info_text">
     <value>No Audio/Video from your PC will be published, instead of that a picture from your profile will be shown. Choose these settings if you have problems with your bandwidth or a very slow Internet connection.</value>
   </string>	
+  <string id="453" name="calendar_dayname_monday">
+    <value>MO</value>
+  </string>
+  <string id="454" name="calendar_dayname_tuesday">
+    <value>TU</value>
+  </string>
+  <string id="455" name="calendar_dayname_wednesday">
+    <value>WE</value>
+  </string>
+  <string id="456" name="calendar_dayname_thursday">
+    <value>TH</value>
+  </string>
+  <string id="457" name="calendar_dayname_friday">
+    <value>FR</value>
+  </string>
+  <string id="458" name="calendar_dayname_saturday">
+    <value>SA</value>
+  </string>
+  <string id="459" name="calendar_dayname_sunday">
+    <value>SU</value>
+  </string>
+  <string id="460" name="calendar_dayname_MondayLabel">
+    <value>Monday</value>
+  </string>
+  <string id="461" name="calendar_dayname_TuesdayLabel">
+    <value>Tuesday</value>
+  </string>
+  <string id="462" name="calendar_dayname_WednesdayLabel">
+    <value>Wednesday</value>
+  </string>
+  <string id="463" name="calendar_dayname_ThursdayLabel">
+    <value>Thursday</value>
+  </string>
+  <string id="464" name="calendar_dayname_FridayLabel">
+    <value>Friday</value>
+  </string>
+  <string id="465" name="calendar_dayname_SaturdayLabel">
+    <value>Saturday</value>
+  </string>
+  <string id="466" name="calendar_dayname_SundayLabel">
+    <value>Sunday</value>
+  </string>
+  <string id="467" name="calendar_weeknumber_header">
+    <value>CW</value>
+  </string>
+  <string id="468" name="calendar_weeknumber_headerTooltip">
+    <value>Calendar week</value>
+  </string>
+  <string id="469" name="calendar_monthnames">
+    <value>January</value>
+  </string>
+  <string id="470" name="calendar_monthnames">
+    <value>February</value>
+  </string>
+  <string id="471" name="calendar_monthnames">
+    <value>March</value>
+  </string>
+  <string id="472" name="calendar_monthnames">
+    <value>April</value>
+  </string>
+  <string id="473" name="calendar_monthnames">
+    <value>May</value>
+  </string>
+  <string id="474" name="calendar_monthnames">
+    <value>June</value>
+  </string>
+  <string id="475" name="calendar_monthnames">
+    <value>July</value>
+  </string>
+  <string id="476" name="calendar_monthnames">
+    <value>August</value>
+  </string>
+  <string id="477" name="calendar_monthnames">
+    <value>September</value>
+  </string>
+  <string id="478" name="calendar_monthnames">
+    <value>October</value>
+  </string>
+  <string id="479" name="calendar_monthnames">
+    <value>November</value>
+  </string>
+  <string id="480" name="calendar_monthnames">
+    <value>December</value>
+  </string>
+  <string id="481" name="calendarwin_header">
+    <value>Calendar</value>
+  </string>	
 </language>
