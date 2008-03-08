@@ -43,7 +43,7 @@
 	    	<![CDATA[
 	    	this.clearList();
 	    	for (var i=0;i<records.length;i++){
-	    		new confAdminlistitem(this._innerlist._inn._inn,{obj:records[i],configuration_id:records[i].configuration_id,conf_key:records[i].conf_key});
+	    		new confAdminListItem(this._innerlist._inn._inn,{obj:records[i],configuration_id:records[i].configuration_id,conf_key:records[i].conf_key});
 	    	}
 	    	]]>
 	    </method>
