@@ -1,0 +1,140 @@
+From 4a6740a77da0a123221f3dcb61a30a47e9aa9309 Mon Sep 17 00:00:00 2001
+From: Cedric Cabessa <cedric.cabessa@uperto.com>
+Date: Thu, 6 Mar 2008 13:33:46 +0100
+Subject: [PATCH 1/1] Fix timestamp bug (339 on openmeetings issues)
+
+Now chat timestamps are server based
+---
+ .../conference/tabcontent/chat/chatTabBottom.lzx   |    4 +-
+ .../tabcontent/chat/chatTabBottomRoomList.lzx      |    4 +-
+ .../xmlcrm/content/chat/overallchatTabBottom.lzx   |    4 +-
+ client/xmlcrm/navi/navifunctions.lzx               |    8 ------
+ .../src/app/org/xmlcrm/app/remote/ChatService.java |   27 ++++++++++++++++++++
+ 5 files changed, 33 insertions(+), 14 deletions(-)
+
+diff --git a/client/conference/tabcontent/chat/chatTabBottom.lzx b/client/conference/tabcontent/chat/chatTabBottom.lzx
+index d7f7613..91c9d46 100644
+--- a/client/conference/tabcontent/chat/chatTabBottom.lzx
++++ b/client/conference/tabcontent/chat/chatTabBottom.lzx
+@@ -30,8 +30,8 @@
+ 		  	<handler name="onclick">
+ 		  		parent.objMessage = new Array ();
+ 		  		parent.objMessage[0] = 'chat';
+-		  		var datumsString = parseDateAsTimeString();
+-		  		parent.objMessage[1] = datumsString;
++		  		//The server side will put time here
++		  		parent.objMessage[1] = "";
+ 	  			//Debug.write("Setting Message");
+ 	  			parent.objMessage[2] = 'newtextmessage';
+ 	  			parent.objMessage[3] = hib.userobject.login;
+diff --git a/client/conference/tabcontent/chat/chatTabBottomRoomList.lzx b/client/conference/tabcontent/chat/chatTabBottomRoomList.lzx
+index 5d3bcaf..f657202 100644
+--- a/client/conference/tabcontent/chat/chatTabBottomRoomList.lzx
++++ b/client/conference/tabcontent/chat/chatTabBottomRoomList.lzx
+@@ -30,8 +30,8 @@
+ 		  	<handler name="onclick">
+ 		  		parent.objMessage = new Array ();
+ 		  		parent.objMessage[0] = 'chat';
+-		  		var datumsString = parseDateAsTimeString();
+-		  		parent.objMessage[1] = datumsString;
++		  		//The server side will put time here
++		  		parent.objMessage[1] = "";
+ 	  			//Debug.write("Setting Message");
+ 	  			parent.objMessage[2] = 'newtextmessage';
+ 	  			parent.objMessage[3] = hib.userobject.login;
+diff --git a/client/xmlcrm/content/chat/overallchatTabBottom.lzx b/client/xmlcrm/content/chat/overallchatTabBottom.lzx
+index d24848c..10af426 100644
+--- a/client/xmlcrm/content/chat/overallchatTabBottom.lzx
++++ b/client/xmlcrm/content/chat/overallchatTabBottom.lzx
+@@ -30,8 +30,8 @@
+ 		  	<handler name="onclick">
+ 		  		parent.objMessage = new Array ();
+ 		  		parent.objMessage[0] = 'chat';
+-		  		var datumsString = parseDateAsTimeString();
+-		  		parent.objMessage[1] = datumsString;
++		  		//The server side will put time here
++		  		parent.objMessage[1] = "";
+ 	  			//Debug.write("Setting Message");
+ 	  			parent.objMessage[2] = 'newtextmessage';
+ 	  			parent.objMessage[3] = hib.userobject.login;
+diff --git a/client/xmlcrm/navi/navifunctions.lzx b/client/xmlcrm/navi/navifunctions.lzx
+index 27878d4..6005fff 100644
+--- a/client/xmlcrm/navi/navifunctions.lzx
++++ b/client/xmlcrm/navi/navifunctions.lzx
+@@ -88,14 +88,6 @@ function getLabelNameXMLCRM(labelid){
+ 	}
+ 	
+ }
+-function parseDateAsTimeString(){
+-	var dateObj = new Date();
+-	var h = dateObj.getHours();
+-	if (h<10) h = "0"+h;	
+-	var m = dateObj.getMinutes();
+-	if (m<10) m = "0"+m;		
+-	return h+':'+m;
+-}
+ 
+ function parseDateToString(dateObj){
+ 	if (dateObj==null) return "";
+diff --git a/webapp/src/app/org/xmlcrm/app/remote/ChatService.java b/webapp/src/app/org/xmlcrm/app/remote/ChatService.java
+index 1cf9998..efe67de 100644
+--- a/webapp/src/app/org/xmlcrm/app/remote/ChatService.java
++++ b/webapp/src/app/org/xmlcrm/app/remote/ChatService.java
+@@ -6,6 +6,8 @@ import java.util.HashMap;
+ import java.util.List;
+ import java.util.LinkedHashMap;
+ import java.util.LinkedList;
++import java.util.Calendar;
++import java.lang.Integer;
+ 
+ import org.apache.commons.logging.Log;
+ import org.apache.commons.logging.LogFactory;
+@@ -34,6 +36,27 @@ public class ChatService implements IPendingServiceCallback {
+ 	
+ 	private static LinkedHashMap<String,List<HashMap<String,Object>>> myChats = new LinkedHashMap<String,List<HashMap<String,Object>>>();
+ 	
++
++	private String parseDateAsTimeString() {
++		Calendar cal=Calendar.getInstance();
++		
++		int h = cal.get(Calendar.HOUR_OF_DAY);
++		int m = cal.get(Calendar.MINUTE);
++
++		String str_h,str_m;
++		if (h<10) 
++			str_h = "0"+Integer.toString(h);
++		else
++			str_h = Integer.toString(h);
++
++		if (m<10) 
++			str_m = "0"+Integer.toString(m);
++		else
++			str_m = Integer.toString(m);
++		
++		return str_h+':'+str_m;
++	}
++
+ 	/**
+ 	 * sends a Chat-Message
+ 	 * to all members of the Chatroom
+@@ -58,6 +81,8 @@ public class ChatService implements IPendingServiceCallback {
+ 			//adding delimiter space, cause otherwise an emoticon in the last string would not be found
+ 			String messageText = messageMap.get(4).toString()+" ";
+ 			//log.error("messageText"+messageText);
++			//add server time
++			messageMap.put(1,parseDateAsTimeString());
+ 			LinkedList<String[]> parsedStringObjects = ChatString.getInstance().parseChatString(messageText);
+ 			//log.error("parsedStringObjects"+parsedStringObjects.size());
+ 			messageMap.put(9, parsedStringObjects);
+@@ -241,6 +266,8 @@ public class ChatService implements IPendingServiceCallback {
+ 			//adding delimiter space, cause otherwise an emoticon in the last string would not be found
+ 			String messageText = messageMap.get(4).toString()+" ";
+ 			//log.error("messageText"+messageText);
++			//add server time
++			messageMap.put(1,parseDateAsTimeString());
+ 			LinkedList<String[]> parsedStringObjects = ChatString.getInstance().parseChatString(messageText);
+ 			//log.error("parsedStringObjects"+parsedStringObjects.size());
+ 			messageMap.put(9, parsedStringObjects);
+-- 
+1.5.4.1
+
