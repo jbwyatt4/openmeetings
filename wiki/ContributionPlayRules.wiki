@@ -1,0 +1,9 @@
+#summary Some info regarding the Contribution of code to SVN
+
+  * If you make deeper modifications work in a separate branch
+  * All Issues and work should be mentioned in the Issue tracker
+  * If you merge a code to trunk ping the Developer-List about it
+  * If you work on any Issue in the Issue tracker change the Status of the Issue to *Started*
+  * if you finished an Issue change the Status to Fixed OR change it to Review and give it to the Review Person. In case of doubts give it to Sebastian for reviewing.
+  * Issues which are fixed should have a revision-Number in the comment, to see at which revision you have fixed it finally.
+  * code should fit into the CodingGuidelines
