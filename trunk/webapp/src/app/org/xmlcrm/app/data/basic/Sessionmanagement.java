@@ -8,13 +8,11 @@ import java.util.Calendar;
 import org.xmlcrm.app.hibernate.beans.basic.Sessiondata;
 import org.xmlcrm.app.hibernate.utils.HibernateUtil;
 import org.xmlcrm.utils.crypt.ManageCryptStyle;
-import org.xmlcrm.utils.math.Calender;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.HibernateException;
-import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -81,7 +79,7 @@ public class Sessionmanagement {
 	 */
 	public Long checkSession(String SID) {
 		try {
-			log.debug("checkSession User: || "+SID);
+			//log.debug("checkSession User: || "+SID);
 			Object idf = HibernateUtil.createSession();
 			Session session = HibernateUtil.getSession();
 			Transaction tx = session.beginTransaction();
@@ -125,7 +123,7 @@ public class Sessionmanagement {
 	 */
 	public void updateUser(String SID, long USER_ID) {
 		try {
-			log.debug("updateUser User: "+USER_ID+" || "+SID);
+			//log.debug("updateUser User: "+USER_ID+" || "+SID);
 			
 			Object idf = HibernateUtil.createSession();
 			Session session = HibernateUtil.getSession();
@@ -145,7 +143,7 @@ public class Sessionmanagement {
 			HibernateUtil.closeSession(idf);
 			
 			Sessiondata sd = (Sessiondata) fullList.get(0);
-			log.debug("Found session to update: "+sd.getSession_id()+ " userId: "+USER_ID);
+			//log.debug("Found session to update: "+sd.getSession_id()+ " userId: "+USER_ID);
 			
 			idf = HibernateUtil.createSession();
 			session = HibernateUtil.getSession();
@@ -159,7 +157,7 @@ public class Sessionmanagement {
 			tx.commit();
 			HibernateUtil.closeSession(idf);
 			
-			log.debug("session updated User: "+USER_ID);
+			//log.debug("session updated User: "+USER_ID);
 
 		} catch (HibernateException ex) {
 			log.error("[updateUser]: " ,ex);
@@ -174,7 +172,7 @@ public class Sessionmanagement {
 	 */
 	private void updatesession(String SID) {
 		try {
-			log.debug("****** updatesession: "+SID);
+			//log.debug("****** updatesession: "+SID);
 			Object idf = HibernateUtil.createSession();
 			Session session = HibernateUtil.getSession();
 			Transaction tx = session.beginTransaction();
@@ -187,9 +185,9 @@ public class Sessionmanagement {
 				log.error("Found NO session to updateSession: ");
 
 			} else {
-				log.debug("Found session to updateSession: ");
+				//log.debug("Found session to updateSession: ");
 				Sessiondata sd = (Sessiondata) fullList.iterator().next();
-				log.debug("Found session to updateSession sd "+sd.getUser_id()+" "+sd.getSession_id());
+				//log.debug("Found session to updateSession sd "+sd.getUser_id()+" "+sd.getSession_id());
 				sd.setRefresh_time(new Date());
 				
 				Object idf2 = HibernateUtil.createSession();
@@ -215,7 +213,7 @@ public class Sessionmanagement {
 	 */
 	private List getSessionToDelete(Date date){
 		try {
-			log.debug("****** sessionToDelete: "+date);
+			//log.debug("****** sessionToDelete: "+date);
 			Object idf = HibernateUtil.createSession();
 			Session session = HibernateUtil.getSession();
 			Transaction tx = session.beginTransaction();
@@ -239,11 +237,11 @@ public class Sessionmanagement {
 	 */
 	public void clearSessionTable(){
 		try {
-			log.debug("****** clearSessionTable: ");
+			//log.debug("****** clearSessionTable: ");
 			Calendar rightNow = Calendar.getInstance();
 			rightNow.setTimeInMillis(rightNow.getTimeInMillis()-1800000);
 		    List l = this.getSessionToDelete(rightNow.getTime());
-		    log.debug("clearSessionTable: "+l.size());
+		    //log.debug("clearSessionTable: "+l.size());
 		    for (Iterator it = l.iterator();it.hasNext();){
 				Object idf = HibernateUtil.createSession();
 				Session session = HibernateUtil.getSession();

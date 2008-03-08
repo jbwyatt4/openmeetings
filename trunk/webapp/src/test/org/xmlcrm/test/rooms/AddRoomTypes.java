@@ -22,10 +22,10 @@ public class AddRoomTypes extends TestCase {
 //		long audience_Id = Roommanagement.getInstance().addRoomType("audience");
 //		log.error("audience_Id: "+audience_Id);
 		
-		long room = Roommanagement.getInstance().addRoom(3,"public Audience Room", 2,"", false, null);
+		long room = Roommanagement.getInstance().addRoom(3,"public Audience Room", 2,"", new Long(4), false, null);
 		Roommanagement.getInstance().addRoomToOrganisation(3,room, 1);
 		
-		long room2 = Roommanagement.getInstance().addRoom(3,"private Audience Room", 2,"", true, null);
+		long room2 = Roommanagement.getInstance().addRoom(3,"private Audience Room", 2,"", new Long(4), true, null);
 		Roommanagement.getInstance().addRoomToOrganisation(3,room2, 1);
 		
 	}

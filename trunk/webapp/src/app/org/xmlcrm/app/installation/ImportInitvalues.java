@@ -166,24 +166,24 @@ public class ImportInitvalues {
 
         }
 
-        public void loadDefaultRooms(){
-
-                long conference_Id = Roommanagement.getInstance().addRoomType("conference");
-                log.error("conference_Id: "+conference_Id);
-                long audience_Id = Roommanagement.getInstance().addRoomType("audience");
-                log.error("audience_Id: "+audience_Id);
-
-                Roommanagement.getInstance().addRoom(3,"public Conference Room", 1,"", true,null);
-
-                long room2 = Roommanagement.getInstance().addRoom(3,"private Conference Room", 1,"", false, null);
-                Roommanagement.getInstance().addRoomToOrganisation(3,room2, 1);
-
-                Roommanagement.getInstance().addRoom(3,"public Audience Room", 2,"", true, null);
-
-                long room4 = Roommanagement.getInstance().addRoom(3,"private Audience Room", 2,"", false, null);
-                Roommanagement.getInstance().addRoomToOrganisation(3,room4, 1);
-
-        }
+    	public void loadDefaultRooms(){
+    		
+    		long conference_Id = Roommanagement.getInstance().addRoomType("conference");
+    		log.error("conference_Id: "+conference_Id);
+    		long audience_Id = Roommanagement.getInstance().addRoomType("audience");
+    		log.error("audience_Id: "+audience_Id);
+    		
+    		Roommanagement.getInstance().addRoom(3,"public Conference Room", 1,"", new Long(4), true,null);
+    		
+    		long room2 = Roommanagement.getInstance().addRoom(3,"private Conference Room", 1,"", new Long(4), false, null);
+    		Roommanagement.getInstance().addRoomToOrganisation(3,room2, 1);
+    		
+    		Roommanagement.getInstance().addRoom(3,"public Audience Room", 2,"", new Long(4), true, null);
+    		
+    		long room4 = Roommanagement.getInstance().addRoom(3,"private Audience Room", 2,"", new Long(4), false, null);
+    		Roommanagement.getInstance().addRoomToOrganisation(3,room4, 1);
+    		
+    	}
 
         public void loadInitUserAndOrganisation(String username, String userpass, String email, String defaultOrganisationName) {
                 //Add user
