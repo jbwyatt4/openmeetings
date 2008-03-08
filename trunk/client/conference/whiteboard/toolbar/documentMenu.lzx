@@ -9,13 +9,13 @@
     <drawChooseSeperator y="4" />
 	
     <drawDocumentItem y="4" name="b3" modi="doc_first" resourceN="doc_first" 
-        labelid="254" />		
+        labelid="255" />		
     <drawDocumentItem y="4" name="b4" modi="doc_pre" resourceN="doc_pre" 
-        labelid="255" />			
+        labelid="256" />			
     <drawDocumentItem y="4" name="b5" modi="doc_next" resourceN="doc_next" 
-        labelid="256" />		
-    <drawDocumentItem y="4" name="b6" modi="doc_last" resourceN="doc_last" 
         labelid="257" />		
+    <drawDocumentItem y="4" name="b6" modi="doc_last" resourceN="doc_last" 
+        labelid="258" />		
     <view width="4" />
     <customEdittext name="_currentSlideNo" y="4" width="40" />	 
     <labelText y="6" labelid="254" />	  
