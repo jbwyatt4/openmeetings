@@ -46,7 +46,7 @@ public class MD5Implementation extends CryptStringAdapter implements CryptString
 }}}
 
 To add your own Encryption-Class you need to add your class to the !OpenMeetings-Webapp (make it available to the webapp-classpath) and use your custom-class-name instead of 
-org.xmlcrm.utils.crypt.MD5Implementation during the Installation or at runtime by editing the config-key *crypt_ClassName* 
+org.xmlcrm.utils.crypt.MD5Implementation during the Installation or at runtime by editing the config-key `crypt_ClassName`
 
 = Credits =
 
