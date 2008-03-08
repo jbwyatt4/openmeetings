@@ -109,9 +109,9 @@
 	
 	<method name="initRecordingComponents">
 		new videoBoardStreamPlaceHolder(this,{name:'_videoboardstream'});
-		new whiteBoardPanelrecord(this,{name:'_whiteboardpanelrecord'});
+		new whiteBoardPanelRecord(this,{name:'_whiteboardpanelrecord'});
 		new filesPanel(this,{name:'_filespanel'});
-		new recordContenterClickMask(this,{name:'_recorderClickMask'});
+		new recorderClickMask(this,{name:'_recorderClickMask'});
         canvas.thishib.reconnectionAction = true;
         canvas.thishib.reconnectObjRef = this;
         canvas.thishib.disconnect();
@@ -126,7 +126,7 @@
 	
 	<method name="showStartPlaybackBtn">
 		Debug.write("INIT showStartPlaybackBtn",this);
-		new recordContentPlayerBG(this,{name:'_recordplayerBG'});
+		new recordPlayerBG(this,{name:'_recordplayerBG'});
 	</method>
 	
 	<method name="clearComponents">
@@ -147,9 +147,9 @@
 		} else {
 			new videoBoardStreamEvent(this,{name:'_videoboardstream'});
 		}
-		new recordContenterClickMask(this,{name:'_recorderClickMask'});
+		new recordClickMask(this,{name:'_recorderClickMask'});
 		//new recordContentPlayerBG(this,{name:'_recordplayerBG'});
-		new recordContenterProgressBar(this,{name:'progress'});		
+		new recorderProgressBar(this,{name:'progress'});		
 	</method>
 	
 	<!--

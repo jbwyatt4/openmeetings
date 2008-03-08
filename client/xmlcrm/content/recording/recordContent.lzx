@@ -94,7 +94,7 @@
 	  					<handler name="ondblclick">
 	  						canvas.currentrecorder_id = Number(this.datapath.xpathQuery('recording_id/text()'));
 	  						Debug.write("canvas.currentrecorder_id: ",canvas.currentrecorder_id);
-	  						quicklinkAct('recordingsviewer');
+	  						quicklinkAct('recordingsViewer');
 	  					</handler>	
 	  					
 	  					<view resource="_recording_play_rsc" onmouseover="" onmouseout="" 
