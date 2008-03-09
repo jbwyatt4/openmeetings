@@ -163,6 +163,9 @@ public class MainService implements IPendingServiceCallback {
      */
     public Long logoutUser(String SID){
     	Long users_id = Sessionmanagement.getInstance().checkSession(SID);
+    	IConnection current = Red5.getConnectionLocal();
+		RoomClient currentClient = Application.getClientList().get(current.getClient().getId());	
+		currentClient.setUserObject(null, null, null, null);
     	return Usermanagement.getInstance().logout(SID,users_id);
     }
     
