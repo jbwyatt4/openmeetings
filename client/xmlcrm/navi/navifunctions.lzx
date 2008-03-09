@@ -63,9 +63,7 @@ function loadContentByTempActionForNavi(){
 	} else {
         canvas._mainbgcontentNavi.navi.destroy();
         canvas._mainbgcontentNavi.help.destroy();
-        canvas.thishib.initlanguageLoaded = false;
-        canvas.thishib.getLanguageByIdAndMax.start = 0;
-        canvas.thishib.getLanguageByIdAndMax.doCall();
+        canvas.thishib.logoutUser.doCall();
     }
 }    
 
