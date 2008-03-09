@@ -26,7 +26,7 @@
 	                for(var eg=0;eg<value.length;eg++){
 	                    //Debug.write(value[eg]);
 	                    var time = value[eg].starttime.getHours()+':'+value[eg].starttime.getMinutes()+' '+value[eg].starttime.getDate()+'.'+(value[eg].starttime.getMonth()+1)+'.'+value[eg].starttime.getFullYear();
-	                    new roomListItem(parent.inn.inn.inn,{currentusers:value[eg].currentusers,maxUsers:100,roomClassName:'audience',isaudience:true,obj:value[eg],ispublic:true,roomid:value[eg].rooms_id,starttime:time,roomname:value[eg].name});
+	                    new roomListItem(parent.inn.inn.inn,{currentusers:value[eg].currentusers,maxUsers:100,roomClassName:'audienceView',isaudience:true,obj:value[eg],ispublic:true,roomid:value[eg].rooms_id,starttime:time,roomname:value[eg].name});
 	                }
                 }
                 ]]>	        	          				

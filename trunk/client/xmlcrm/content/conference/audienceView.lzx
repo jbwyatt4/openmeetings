@@ -16,7 +16,7 @@
         new moderationPanel(canvas._conferencemenu,{x:400});
         canvas._conferencemenu.setAttribute('visibility','visible');
 
-        new videoBoardaudience(this);
+        new videoBoardAudience(this);
         new whiteBoardPanel(this);
         new filesPanel(this);
     </handler>
