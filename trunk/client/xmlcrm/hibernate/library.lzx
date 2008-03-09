@@ -2,6 +2,6 @@
 <library>
 
 	<include href="netRemoteCallHib.lzx" />
-	<include href="rtmphib.lzx" />
+	<include href="hibRtmpConnection.lzx" />
 
 </library>
