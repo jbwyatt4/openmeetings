@@ -96,9 +96,9 @@
 	    		} else if (object.avsettings=="a"){
 	    			myvideocontainer.parent.parent.setVideouserProfilePic(object);
 	    			Debug.warn("start play");
-	    			myvideocontainer.v_output.play(streamid,-1);	
+	    			myvideocontainer.v_output.play(object.broadCastID,-1);	
 	    		} else {
-	    			myvideocontainer.v_output.play(streamid,-1);
+	    			myvideocontainer.v_output.play(object.broadCastID,-1);
 	    			Debug.warn("start play");
 	    		}		  		
 		  		return myvideocontainer;

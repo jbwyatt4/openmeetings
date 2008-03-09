@@ -305,12 +305,18 @@
 	<method name="getWeekNumber" args="DateInMilliseconds" >
 		<![CDATA[
 		var d = new Date(DateInMilliseconds);
+		if ($debug) Debug.write("getWeekNumber: ",d);
 		var NumerOfDaysIn = d.getDate();
 		
-		for (var i=0;i<d.getMonth();i++) 
-			NumerOfDaysIn+=this.getDaysInMonth(d.getFullYear(),d.getMonth());
-			
+		for (var i=0;i<d.getMonth();i++) {
+			var monthDays = this.getDaysInMonth(d.getFullYear(),d.getMonth());
+			NumerOfDaysIn+=monthDays;
+		}
+		if ($debug) Debug.write("NumerOfDaysIn,month: ",NumerOfDaysIn,d.getMonth());
+		
 		var days = this.isoWeekDays(NumerOfDaysIn,d.getDay());
+		if ($debug) Debug.write("days: ",days);
+		
 		if (days < 0) {
 			NumerOfDaysIn += 365 + isLeapYear(--NumerOfDaysIn);
 			days = this.isoWeekDays(NumerOfDaysIn, d.getDay());
@@ -321,8 +327,10 @@
 				days = d2;
 			}
 		}
+
+		if ($debug) Debug.write("days: ",days);
 		
-		return (Math.round((days / 7) + 1));
+		return (Math.floor((days / 7)));
 		]]>
 	</method>
 	
