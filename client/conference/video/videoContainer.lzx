@@ -226,7 +226,6 @@
 	<view width="$once{ parent.width-18 }" name="_videoviewcontent">
 		<wrappinglayout axis="x" spacing="2" />
 	</view>
-	<vscrollbar />
 	
 </class>
 
