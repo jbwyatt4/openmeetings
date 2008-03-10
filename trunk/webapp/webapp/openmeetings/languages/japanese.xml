@@ -1036,7 +1036,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>User added but you need to assign this User to an Organisation, otherwise he won't be able to sign-in.</value>
   </string>
   <string id="344" name="adminforms">
-    <value>新しい録画</value>
+    <value>新規作成</value>
   </string>
   <string id="345" name="languageseditor">
     <value>No Field found with this FieldId.</value>
@@ -1370,46 +1370,46 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>このPCから音声も映像も送信されません。代わりにユーザプロファイルの画像が表示されます。    このオプションは、ネットワーク帯域に問題がある場合や、インターネット接続が著しく遅い場合に選択してください。</value>
   </string>	
   <string id="453" name="calendar_dayname_monday">
-    <value>MO</value>
+    <value>月</value>
   </string>
   <string id="454" name="calendar_dayname_tuesday">
-    <value>TU</value>
+    <value>火</value>
   </string>
   <string id="455" name="calendar_dayname_wednesday">
-    <value>WE</value>
+    <value>水</value>
   </string>
   <string id="456" name="calendar_dayname_thursday">
-    <value>TH</value>
+    <value>木</value>
   </string>
   <string id="457" name="calendar_dayname_friday">
-    <value>FR</value>
+    <value>金</value>
   </string>
   <string id="458" name="calendar_dayname_saturday">
-    <value>SA</value>
+    <value>土</value>
   </string>
   <string id="459" name="calendar_dayname_sunday">
-    <value>SU</value>
+    <value>日</value>
   </string>
   <string id="460" name="calendar_dayname_MondayLabel">
-    <value>Monday</value>
+    <value>月曜</value>
   </string>
   <string id="461" name="calendar_dayname_TuesdayLabel">
-    <value>Tuesday</value>
+    <value>火曜</value>
   </string>
   <string id="462" name="calendar_dayname_WednesdayLabel">
-    <value>Wednesday</value>
+    <value>水曜</value>
   </string>
   <string id="463" name="calendar_dayname_ThursdayLabel">
-    <value>Thursday</value>
+    <value>木曜</value>
   </string>
   <string id="464" name="calendar_dayname_FridayLabel">
-    <value>Friday</value>
+    <value>金曜</value>
   </string>
   <string id="465" name="calendar_dayname_SaturdayLabel">
-    <value>Saturday</value>
+    <value>土曜</value>
   </string>
   <string id="466" name="calendar_dayname_SundayLabel">
-    <value>Sunday</value>
+    <value>日曜</value>
   </string>
   <string id="467" name="calendar_weeknumber_header">
     <value>CW</value>
@@ -1418,45 +1418,45 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Calendar week</value>
   </string>
   <string id="469" name="calendar_monthnames">
-    <value>January</value>
+    <value>1月</value>
   </string>
   <string id="470" name="calendar_monthnames">
-    <value>February</value>
+    <value>2月</value>
   </string>
   <string id="471" name="calendar_monthnames">
-    <value>March</value>
+    <value>3月</value>
   </string>
   <string id="472" name="calendar_monthnames">
-    <value>April</value>
+    <value>4月</value>
   </string>
   <string id="473" name="calendar_monthnames">
-    <value>May</value>
+    <value>5月</value>
   </string>
   <string id="474" name="calendar_monthnames">
-    <value>June</value>
+    <value>6月</value>
   </string>
   <string id="475" name="calendar_monthnames">
-    <value>July</value>
+    <value>7月</value>
   </string>
   <string id="476" name="calendar_monthnames">
-    <value>August</value>
+    <value>8月</value>
   </string>
   <string id="477" name="calendar_monthnames">
-    <value>September</value>
+    <value>9月</value>
   </string>
   <string id="478" name="calendar_monthnames">
-    <value>October</value>
+    <value>10月</value>
   </string>
   <string id="479" name="calendar_monthnames">
-    <value>November</value>
+    <value>11月</value>
   </string>
   <string id="480" name="calendar_monthnames">
-    <value>December</value>
+    <value>12月</value>
   </string>
   <string id="481" name="calendarwin_header">
-    <value>Calendar</value>
+    <value>カレンダー</value>
   </string>	
   <string id="482" name="roomadmin_labelNumberOfParticipants">
-    <value>Participants</value>
+    <value>利用者</value>
   </string>	
 </language>
