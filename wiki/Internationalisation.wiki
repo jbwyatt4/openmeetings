@@ -4,7 +4,7 @@
 = Where to find language files =
 You can find all current language files here:
 
-http://openmeetings.googlecode.com/svn/branches/dev/xmlcrm/java/webapp/xmlcrm/languages/
+http://openmeetings.googlecode.com/svn/trunk/webapp/webapp/openmeetings/languages/
 
 Just take one file and translate it to your language.
 
@@ -16,6 +16,6 @@ Just take one file and translate it to your language.
 = How to add it as installation option =
 
 Once you have finished the translation you can add a new node to:
-http://openmeetings.googlecode.com/svn/branches/dev/xmlcrm/java/webapp/xmlcrm/languages/languages.xml
+http://openmeetings.googlecode.com/svn/trunk/webapp/webapp/openmeetings/languages/languages.xml
 
 the name of the language should match the name of the file. Once this is done the Language file will automatically be imported during installation and will be an option at login.
