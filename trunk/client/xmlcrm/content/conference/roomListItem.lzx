@@ -20,21 +20,22 @@
 
   <handler name="oninit">
     <![CDATA[
-      this._users.setAttribute('text',canvas.getLabelName(398)+this.currentusers.length + " / " + this.maxUsers );
-      var tString = canvas.getLabelName(401) + "<br/>";
-      for (var i = 0;i<this.currentusers.length;i++){
-        tString += this.currentusers[i].firstname + " "
-            + this.currentusers[i].lastname
-            + " (" + this.currentusers[i].username + ") "
-            + canvas.getLabelName(399) + parseDateToStringTime(this.currentusers[i].roomEnter) +" <br/>";
-      }
-      this._labeltooltip.setAttribute('text',tString);
-    ]]>
+    	this.maxUsers = obj.numberOfPartizipants;
+      	this._users.setAttribute('text',canvas.getLabelName(398)+this.currentusers.length + " / " + this.maxUsers );
+      	var tString = canvas.getLabelName(401) + "<br/>";
+     	 for (var i = 0;i<this.currentusers.length;i++){
+        	tString += this.currentusers[i].firstname + " "
+            	+ this.currentusers[i].lastname
+            	+ " (" + this.currentusers[i].username + ") "
+            	+ canvas.getLabelName(399) + parseDateToStringTime(this.currentusers[i].roomEnter) +" <br/>";
+      	}
+      	this._labeltooltip.setAttribute('text',tString);
+	]]>
   </handler>
 
   <handler name="onclick">
     var connectedIsAudience = '';
-        hib.currentroomid = this.obj.rooms_id;
+   	hib.currentroomid = this.obj.rooms_id;
     canvas.isConference = !this.isaudience;
     if (this.isaudience) connectedIsAudience = '_'+'audi';
         if (this.ispublic){
