@@ -1452,4 +1452,46 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   <string id="482" name="roomadmin_labelNumberOfParticipants">
     <value>Participants</value>
   </string>	
+  <string id="483" name="roomValue_advancedSettings">
+    <value>Show Layout Settings</value>
+  </string>
+  <string id="484" name="roomAdmin_layout_videoX">
+    <value>X | Y</value>
+  </string>
+  <string id="485" name="roomAdmin_layout_videoY">
+    <value>Width | Height</value>
+  </string>
+  <string id="486" name="roomAdmin_layout">
+    <value>Video-Container</value>
+  </string>
+  <string id="487" name="roomAdmin_layout_mod">
+    <value>Moderation-Container</value>
+  </string>
+  <string id="488" name="roomAdmin_layout_mod_pos">
+    <value>X</value>
+  </string>
+  <string id="489" name="roomAdmin_layout_whiteboard">
+    <value>Whiteboard-Container</value>
+  </string>
+  <string id="490" name="roomAdmin_layout_whiteboard_show">
+    <value>Enabled</value>
+  </string>
+  <string id="491" name="roomAdmin_layout_whiteboard_pos">
+    <value>X | Y</value>
+  </string>
+  <string id="492" name="roomAdmin_layout_whiteboard">
+    <value>Width | Height</value>
+  </string>
+  <string id="493" name="roomAdmin_layout_files">
+    <value>Files,Chat,Partizipants - Container</value>
+  </string>
+  <string id="494" name="roomAdmin_layout_files_show">
+    <value>Enabled</value>
+  </string>
+  <string id="495" name="roomAdmin_layout_files_pos">
+    <value>X |Y</value>
+  </string>
+  <string id="496" name="roomAdmin_layout_files">
+    <value>Width | Height</value>
+  </string>	
 </language>

@@ -23,6 +23,28 @@ public class Rooms {
 	private Boolean ispublic;
 	private Long numberOfPartizipants = new Long(4);
 	
+	/**
+	 * Layout of Room
+	 */
+	private Integer videoPodWidth = new Integer(290);
+	private Integer videoPodHeight = new Integer(280);
+	private Integer videoPodXPosition = new Integer(2);
+	private Integer videoPodYPosition = new Integer(2);
+	
+	private Integer moderationPanelXPosition = new Integer(400);
+	
+	private Boolean showWhiteBoard = new Boolean(true);
+	private Integer whiteBoardPanelXPosition = new Integer(296);
+	private Integer whiteBoardPanelYPosition = new Integer(2);
+	private Integer whiteBoardPanelHeight = new Integer(592);
+	private Integer whiteBoardPanelWidth = new Integer(660);
+	
+	private Boolean showFilesPanel = new Boolean(true);
+	private Integer filesPanelXPosition = new Integer(2);
+	private Integer filesPanelYPosition = new Integer(284);
+	private Integer filesPanelHeight = new Integer(310);
+	private Integer filesPanelWidth = new Integer(290);	
+	
 	private List<RoomClient> currentusers;
     
     /**
@@ -144,5 +166,188 @@ public class Rooms {
 	public void setNumberOfPartizipants(Long numberOfPartizipants) {
 		this.numberOfPartizipants = numberOfPartizipants;
 	}
+	
+	
+	/**
+     * @hibernate.property
+     *  column="videopodwidth"
+     *  type="integer"
+     */		
+	public Integer getVideoPodWidth() {
+		return videoPodWidth;
+	}
+	public void setVideoPodWidth(Integer videoPodWidth) {
+		this.videoPodWidth = videoPodWidth;
+	}
+	
+	/**
+     * @hibernate.property
+     *  column="videopodheight"
+     *  type="integer"
+     */		
+	public Integer getVideoPodHeight() {
+		return videoPodHeight;
+	}
+	public void setVideoPodHeight(Integer videoPodHeight) {
+		this.videoPodHeight = videoPodHeight;
+	}	
+	
+	/**
+     * @hibernate.property
+     *  column="videopodxposition"
+     *  type="integer"
+     */			
+	public Integer getVideoPodXPosition() {
+		return videoPodXPosition;
+	}
+	public void setVideoPodXPosition(Integer videoPodXPosition) {
+		this.videoPodXPosition = videoPodXPosition;
+	}
+	
+	/**
+     * @hibernate.property
+     *  column="videopodyposition"
+     *  type="integer"
+     */			
+	public Integer getVideoPodYPosition() {
+		return videoPodYPosition;
+	}
+	public void setVideoPodYPosition(Integer videoPodYPosition) {
+		this.videoPodYPosition = videoPodYPosition;
+	}
+	
+	/**
+     * @hibernate.property
+     *  column="moderationpanelxposition"
+     *  type="integer"
+     */		
+	public Integer getModerationPanelXPosition() {
+		return moderationPanelXPosition;
+	}
+	public void setModerationPanelXPosition(Integer moderationPanelXPosition) {
+		this.moderationPanelXPosition = moderationPanelXPosition;
+	}
+	
+	/**
+     * @hibernate.property
+     *  column="showwhiteboard"
+     *  type="boolean"
+     */		
+	public Boolean getShowWhiteBoard() {
+		return showWhiteBoard;
+	}
+	public void setShowWhiteBoard(Boolean showWhiteBoard) {
+		this.showWhiteBoard = showWhiteBoard;
+	}
+	
+	/**
+     * @hibernate.property
+     *  column="whiteboardpanelxposition"
+     *  type="integer"
+     */		
+	public Integer getWhiteBoardPanelXPosition() {
+		return whiteBoardPanelXPosition;
+	}
+	public void setWhiteBoardPanelXPosition(Integer whiteBoardPanelXPosition) {
+		this.whiteBoardPanelXPosition = whiteBoardPanelXPosition;
+	}
+	
+	/**
+     * @hibernate.property
+     *  column="whiteboardpanelyposition"
+     *  type="integer"
+     */		
+	public Integer getWhiteBoardPanelYPosition() {
+		return whiteBoardPanelYPosition;
+	}
+	public void setWhiteBoardPanelYPosition(Integer whiteBoardPanelYPosition) {
+		this.whiteBoardPanelYPosition = whiteBoardPanelYPosition;
+	}
+	
+	/**
+     * @hibernate.property
+     *  column="whiteboardpanelheight"
+     *  type="integer"
+     */		
+	public Integer getWhiteBoardPanelHeight() {
+		return whiteBoardPanelHeight;
+	}
+	public void setWhiteBoardPanelHeight(Integer whiteBoardPanelHeight) {
+		this.whiteBoardPanelHeight = whiteBoardPanelHeight;
+	}
+	
+	/**
+     * @hibernate.property
+     *  column="whiteboardpanelwidth"
+     *  type="integer"
+     */		
+	public Integer getWhiteBoardPanelWidth() {
+		return whiteBoardPanelWidth;
+	}
+	public void setWhiteBoardPanelWidth(Integer whiteBoardPanelWidth) {
+		this.whiteBoardPanelWidth = whiteBoardPanelWidth;
+	}
+	
+	/**
+     * @hibernate.property
+     *  column="showfilespanel"
+     *  type="boolean"
+     */			
+	public Boolean getShowFilesPanel() {
+		return showFilesPanel;
+	}
+	public void setShowFilesPanel(Boolean showFilesPanel) {
+		this.showFilesPanel = showFilesPanel;
+	}
+	
+	/**
+     * @hibernate.property
+     *  column="filespanelxposition"
+     *  type="integer"
+     */		
+	public Integer getFilesPanelXPosition() {
+		return filesPanelXPosition;
+	}
+	public void setFilesPanelXPosition(Integer filesPanelXPosition) {
+		this.filesPanelXPosition = filesPanelXPosition;
+	}
+	
+	/**
+     * @hibernate.property
+     *  column="filespanelyposition"
+     *  type="integer"
+     */		
+	public Integer getFilesPanelYPosition() {
+		return filesPanelYPosition;
+	}
+	public void setFilesPanelYPosition(Integer filesPanelYPosition) {
+		this.filesPanelYPosition = filesPanelYPosition;
+	}
+	
+	/**
+     * @hibernate.property
+     *  column="filespanelheight"
+     *  type="integer"
+     */		
+	public Integer getFilesPanelHeight() {
+		return filesPanelHeight;
+	}
+	public void setFilesPanelHeight(Integer filesPanelHeight) {
+		this.filesPanelHeight = filesPanelHeight;
+	}
+	
+	/**
+     * @hibernate.property
+     *  column="filespanelwidth"
+     *  type="integer"
+     */	
+	public Integer getFilesPanelWidth() {
+		return filesPanelWidth;
+	}
+	public void setFilesPanelWidth(Integer filesPanelWidth) {
+		this.filesPanelWidth = filesPanelWidth;
+	}
+	
+	
 	
 }

@@ -355,7 +355,22 @@ public class Roommanagement {
 	 * @return id of the newly created room or NULL
 	 */
 	public Long addRoom(long user_level,String name, long roomtypes_id, String comment, Long numberOfPartizipants,
-			boolean ispublic, LinkedHashMap organisations){
+			boolean ispublic, LinkedHashMap organisations,
+			Integer videoPodWidth, 
+			Integer videoPodHeight,
+			Integer videoPodXPosition,
+			Integer videoPodYPosition,
+			Integer moderationPanelXPosition,
+			Boolean showWhiteBoard,
+			Integer whiteBoardPanelXPosition,
+			Integer whiteBoardPanelYPosition,
+			Integer whiteBoardPanelHeight,
+			Integer whiteBoardPanelWidth,
+			Boolean showFilesPanel,
+			Integer filesPanelXPosition,
+			Integer filesPanelYPosition,
+			Integer filesPanelHeight,
+			Integer filesPanelWidth){
 		try {
 			if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)){
 				Rooms r = new Rooms();
@@ -365,6 +380,24 @@ public class Roommanagement {
 				r.setNumberOfPartizipants(numberOfPartizipants);
 				r.setRoomtype(this.getRoomTypesById(roomtypes_id));
 				r.setIspublic(ispublic);
+				
+				r.setVideoPodWidth(videoPodWidth);
+				r.setVideoPodHeight(videoPodHeight);
+				r.setVideoPodXPosition(videoPodXPosition);
+				r.setVideoPodYPosition(videoPodYPosition);
+				r.setModerationPanelXPosition(moderationPanelXPosition);
+				r.setShowWhiteBoard(showWhiteBoard);
+				r.setWhiteBoardPanelHeight(whiteBoardPanelHeight);
+				r.setWhiteBoardPanelWidth(whiteBoardPanelWidth);
+				r.setWhiteBoardPanelXPosition(whiteBoardPanelXPosition);
+				r.setWhiteBoardPanelYPosition(whiteBoardPanelYPosition);
+				r.setShowFilesPanel(showFilesPanel);
+				r.setFilesPanelWidth(filesPanelWidth);
+				r.setFilesPanelHeight(filesPanelHeight);
+				r.setFilesPanelXPosition(filesPanelXPosition);
+				r.setFilesPanelYPosition(filesPanelYPosition);
+				
+				
 				r.setDeleted("false");
 				Object idf = HibernateUtil.createSession();
 				Session session = HibernateUtil.getSession();
@@ -730,12 +763,44 @@ public class Roommanagement {
 	 * @return
 	 */
 	public Long updateRoom(long user_level, long rooms_id, long roomtypes_id, String name,
-			boolean ispublic, String comment, Long numberOfPartizipants, LinkedHashMap organisations){
+			boolean ispublic, String comment, Long numberOfPartizipants, LinkedHashMap organisations,
+			Integer videoPodWidth, 
+			Integer videoPodHeight,
+			Integer videoPodXPosition,
+			Integer videoPodYPosition,
+			Integer moderationPanelXPosition,
+			Boolean showWhiteBoard,
+			Integer whiteBoardPanelXPosition,
+			Integer whiteBoardPanelYPosition,
+			Integer whiteBoardPanelHeight,
+			Integer whiteBoardPanelWidth,
+			Boolean showFilesPanel,
+			Integer filesPanelXPosition,
+			Integer filesPanelYPosition,
+			Integer filesPanelHeight,
+			Integer filesPanelWidth){
 		try {
 			log.debug("*** updateRoom numberOfPartizipants: "+numberOfPartizipants);
 			if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)){
 				Rooms r = this.getRoomById(rooms_id);
 				r.setComment(comment);
+				
+				r.setVideoPodWidth(videoPodWidth);
+				r.setVideoPodHeight(videoPodHeight);
+				r.setVideoPodXPosition(videoPodXPosition);
+				r.setVideoPodYPosition(videoPodYPosition);
+				r.setModerationPanelXPosition(moderationPanelXPosition);
+				r.setShowWhiteBoard(showWhiteBoard);
+				r.setWhiteBoardPanelHeight(whiteBoardPanelHeight);
+				r.setWhiteBoardPanelWidth(whiteBoardPanelWidth);
+				r.setWhiteBoardPanelXPosition(whiteBoardPanelXPosition);
+				r.setWhiteBoardPanelYPosition(whiteBoardPanelYPosition);
+				r.setShowFilesPanel(showFilesPanel);
+				r.setFilesPanelWidth(filesPanelWidth);
+				r.setFilesPanelHeight(filesPanelHeight);
+				r.setFilesPanelXPosition(filesPanelXPosition);
+				r.setFilesPanelYPosition(filesPanelYPosition);
+				
 				r.setIspublic(ispublic);
 				r.setNumberOfPartizipants(numberOfPartizipants);
 				r.setName(name);
