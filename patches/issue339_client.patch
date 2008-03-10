@@ -1,0 +1,64 @@
+Index: xmlcrm/content/chat/overallchatTabBottom.lzx
+===================================================================
+--- xmlcrm/content/chat/overallchatTabBottom.lzx	(revision 1067)
++++ xmlcrm/content/chat/overallchatTabBottom.lzx	(working copy)
+@@ -30,8 +30,8 @@
+ 		  	<handler name="onclick">
+ 		  		parent.objMessage = new Array ();
+ 		  		parent.objMessage[0] = 'chat';
+-		  		var datumsString = parseDateAsTimeString();
+-		  		parent.objMessage[1] = datumsString;
++		  		//The server side will put time here
++		  		parent.objMessage[1] = "";
+ 	  			//Debug.write("Setting Message");
+ 	  			parent.objMessage[2] = 'newtextmessage';
+ 	  			parent.objMessage[3] = hib.userobject.login;
+Index: xmlcrm/navi/navifunctions.lzx
+===================================================================
+--- xmlcrm/navi/navifunctions.lzx	(revision 1067)
++++ xmlcrm/navi/navifunctions.lzx	(working copy)
+@@ -86,14 +86,6 @@
+ 	}
+ 	
+ }
+-function parseDateAsTimeString(){
+-	var dateObj = new Date();
+-	var h = dateObj.getHours();
+-	if (h<10) h = "0"+h;	
+-	var m = dateObj.getMinutes();
+-	if (m<10) m = "0"+m;		
+-	return h+':'+m;
+-}
+ 
+ function parseDateToString(dateObj){
+ 	if (dateObj==null) return "";
+Index: conference/tabcontent/chat/chatTabBottomRoomList.lzx
+===================================================================
+--- conference/tabcontent/chat/chatTabBottomRoomList.lzx	(revision 1067)
++++ conference/tabcontent/chat/chatTabBottomRoomList.lzx	(working copy)
+@@ -30,8 +30,8 @@
+ 		  	<handler name="onclick">
+ 		  		parent.objMessage = new Array ();
+ 		  		parent.objMessage[0] = 'chat';
+-		  		var datumsString = parseDateAsTimeString();
+-		  		parent.objMessage[1] = datumsString;
++		  		//The server side will put time here
++		  		parent.objMessage[1] = "";
+ 	  			//Debug.write("Setting Message");
+ 	  			parent.objMessage[2] = 'newtextmessage';
+ 	  			parent.objMessage[3] = hib.userobject.login;
+Index: conference/tabcontent/chat/chatTabBottom.lzx
+===================================================================
+--- conference/tabcontent/chat/chatTabBottom.lzx	(revision 1067)
++++ conference/tabcontent/chat/chatTabBottom.lzx	(working copy)
+@@ -30,8 +30,8 @@
+ 		  	<handler name="onclick">
+ 		  		parent.objMessage = new Array ();
+ 		  		parent.objMessage[0] = 'chat';
+-		  		var datumsString = parseDateAsTimeString();
+-		  		parent.objMessage[1] = datumsString;
++		  		//The server side will put time here
++		  		parent.objMessage[1] = "";
+ 	  			//Debug.write("Setting Message");
+ 	  			parent.objMessage[2] = 'newtextmessage';
+ 	  			parent.objMessage[3] = hib.userobject.login;
