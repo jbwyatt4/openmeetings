@@ -30,8 +30,8 @@
 		  	<handler name="onclick">
 		  		parent.objMessage = new Array ();
 		  		parent.objMessage[0] = 'chat';
-		  		var datumsString = parseDateAsTimeString();
-		  		parent.objMessage[1] = datumsString;
+		  		//The server side will put time here
+		  		parent.objMessage[1] = "";
 	  			//Debug.write("Setting Message");
 	  			parent.objMessage[2] = 'newtextmessage';
 	  			parent.objMessage[3] = hib.userobject.login;

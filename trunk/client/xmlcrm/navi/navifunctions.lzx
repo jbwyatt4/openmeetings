@@ -86,14 +86,6 @@ function getLabelNameXMLCRM(labelid){
 	}
 	
 }
-function parseDateAsTimeString(){
-	var dateObj = new Date();
-	var h = dateObj.getHours();
-	if (h<10) h = "0"+h;	
-	var m = dateObj.getMinutes();
-	if (m<10) m = "0"+m;		
-	return h+':'+m;
-}
 
 function parseDateToString(dateObj){
 	if (dateObj==null) return "";
