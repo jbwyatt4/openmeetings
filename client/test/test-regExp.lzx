@@ -1,36 +1,12 @@
 <canvas debug="true" >
   
-  <switch>
-    <when runtime="dhtml" >
-      <script when="immediate" >
-        class LzRegExp extends Instance{
-          function initialize( regexp, mod ){
-            super.initialize( this, arguments );
-            #pragma "passThrough=true"
-            this.re = new RegExp( regexp, mod );
-          }
-          
-          function test( s ){
-            return this.re.test( s );
-          }
-          
-          function exec( s ){
-            return this.re.exec( s );
-          }
-          
-          function destroy(){
-            delete this.re;
-          }
-        }
-      </script>
-    </when>
-    <otherwise>
+
       <script when="immediate" >        
         class LzRegExp extends Instance{
           static var regexp_cnt = 0;
           
           static function initialize(){
-            if( $swf8 ){
+
               /* if this was in the html-wrapper, would early instantiations be successful? */
               LzBrowser.loadJS( "window.__lzregexp={};" + 
                 "window.__createRegExp=function(id,re,mod){window.__lzregexp[id]=new RegExp(re,mod);return true};" +
@@ -38,45 +14,34 @@
                 "window.__execRegExp=function(id,s){return window.__lzregexp[id].exec(s)};" +
                 "window.__deleteRegExp=function(id){delete window.__lzregexp[id]};" 
               );
-            }
+
           }
           
           function initialize( regexp, mod ){
             super.initialize( this, arguments );
-            
-            if( $swf8 ){
+
               this.regexp_id = LzRegExp.regexp_cnt++;
-              this.__isready = false;
+              this.__isready = true;
               
               var me = this;
               LzBrowser.callJS( "window.__createRegExp", function(res){me.__isready = res == true}, this.regexp_id, regexp, mod );
-            } else {
-              Debug.warn( "not implemented" );
-            }
+
           }
           
           function test( s ){
-            if( $swf8 ){
               if( this.__isready ){
                 return flash.external.ExternalInterface.call.apply( flash.external.ExternalInterface, ["window.__testRegExp", this.regexp_id, s] );
               } else {
                 Debug.format( "called %w too early", arguments.callee.name );
               }
-            } else {
-              return void(0);
-            }
           }
           
           function exec( s ){
-            if( $swf8 ){
               if( this.__isready ){
                 return flash.external.ExternalInterface.call.apply( flash.external.ExternalInterface, ["window.__execRegExp", this.regexp_id, s] );
               } else {
                 Debug.format( "called %w too early", arguments.callee.name );
               }
-            } else {
-              return void(0);
-            }
           }
           
           function destroy(){
@@ -84,9 +49,7 @@
           }
         }
       </script>
-    </otherwise>
-  </switch>
-  
+
   <button name="btn" text="test" />
   
   <handler name="oninit" reference="canvas" method="testRegExp" />
