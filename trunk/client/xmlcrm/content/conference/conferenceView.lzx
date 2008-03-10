@@ -4,7 +4,9 @@
 <class name="videoBoard" extends="guiPresenter" x="2" y="2"
     width="290" height="280" closable="false" title="Video and Audio"
     resizeable="false">
-    <videoContainer name="_videocontainer" x="1" y="22" />
+    <videoContainer name="_videocontainer" x="1" y="22" 
+    				width="$once{ parent.width-2 }"
+    				height="$once{ parent.height-22 }" />
 </class>
 
 <class name="whiteBoardPanel" extends="guiPresenter" x="296" y="2"
