@@ -6,7 +6,7 @@ inno02.fh-pforzheim.de macbook 192.168.2.103
 192.168.2.102 bxlug.homelinux.org 213.219.160.72
     if this value is empty it will try to connect to the 
     domain-name it has been loading from  
-    inno02.fh-pforzheim.de  
+    inno02.fh-pforzheim.de  192.168.254.180
     -->
 <rtmphostlocal></rtmphostlocal>
 

@@ -10,9 +10,13 @@
 	<handler name="oninit">		
 		canvas._videocontainer=this;
 	</handler>
+	
+	<method name="enterRoom" args="object">
+		Debug.write("enterRoom: ",object);
+	</method>
 		
-	<method name="startStream" args="flv,userpos,object">
-		Debug.write("startStream: ",flv,userpos,object);
+	<method name="startStream" args="flv,object">
+		Debug.write("startStream: ",flv,object);
 	  	this.subviews[0].clientVars = object;
 	  	this.subviews[0].setAttribute('chatpartnername',object.firstname+' '+object.lastname);
 	  	this.subviews[0].setAttribute('uniqueid',flv);
@@ -26,20 +30,20 @@
 			Debug.warn("start play");
 			this.subviews[0]._chatvideoinner._videoview.playStream(flv);
 		} else {
-			myvideocontainer.v_output.play(streamid,-1);
 			this.subviews[0]._chatvideoinner._videoview.playStream(flv);
 		}	  	
 		
 		return this.subviews[0].getVideoReference();
 	</method>
 
-	<method name="disconnectclient" args="userpos">
+	<method name="disconnectclient" >
 		////Debug.write("disconnectclient: ",searchid,userpos);
-		this.subviews[0].setAttribute('isassigned',false);
-		this.subviews[0]._chatvideoinner.setResourceNumber(5);
-		this.subviews[0].resetValues();
-		this.subviews[0]._chatvideoinner._videoview.setAttribute('visible',false);
-		return this.subviews[0].getVideoReferenceDis();
+		if (this.subviews.length!=0){
+			this.subviews[0].setAttribute('isassigned',false);
+			this.subviews[0]._chatvideoinner.setResourceNumber(5);
+			this.subviews[0].resetValues();
+			this.subviews[0]._chatvideoinner._videoview.setAttribute('visible',false);
+		}
 	</method>	
 	
 	<method name="stopVideos">
