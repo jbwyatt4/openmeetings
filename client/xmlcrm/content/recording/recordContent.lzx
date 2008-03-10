@@ -87,8 +87,8 @@
 		  						if (deltaSeconds<10) deltaSeconds="0"+deltaSeconds;
 		  						var dateStr = this.datapath.xpathQuery('starttimeAsString/text()');
 		  						var recordContentedby = this.datapath.xpathQuery('recordedby/login/text()');
-		  						if (recordedby==null) recordContentedby=canvas.getLabelName(433);
-		  						this._text.text = canvas.getLabelName(411)+dateStr+" "+canvas.getLabelName(410)+minutes+":"+deltaSeconds+" "+canvas.getLabelName(434)+""+recordedby;
+		  						if (recordContentedby==null) recordContentedby=canvas.getLabelName(433);
+		  						this._text.text = canvas.getLabelName(411)+dateStr+" "+canvas.getLabelName(410)+minutes+":"+deltaSeconds+" "+canvas.getLabelName(434)+""+recordContentedby;
 	  						]]>
 	  					</handler>
 	  					<handler name="ondblclick">
