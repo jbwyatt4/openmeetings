@@ -89,11 +89,12 @@ public class StreamService implements IPendingServiceCallback {
 			String orgdomain = currentClient.getDomain();
 			String recordingName = generateFileName(currentClient.getStreamid());
 			currentClient.setIsRecording(true);
-			currentClient.setRoomRecordingName(recordingName);
+			currentClient.setRoomRecordingName(recordingName);			
 			Application.getClientList().put(current.getClient().getId(), currentClient);
 			
 			LinkedHashMap<String,Object> roomRecording = new LinkedHashMap<String,Object>();
 			roomRecording.put("conferenceType", conferenceType);
+			roomRecording.put("room_setup", Roommanagement.getInstance().getRoomById(currentClient.getRoom_id()));
 			roomRecording.put("roomRecordingsTableString", roomRecordingsTableString);
 			roomRecording.put("comment", comment);
 			
