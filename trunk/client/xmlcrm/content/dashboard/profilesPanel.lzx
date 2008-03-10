@@ -45,7 +45,7 @@
         onclick="new uploadWindow(canvas.main_content._content.inner,{x:300,uploadmodule:'userprofile',isOnlyProfile:true,isdefaultreturn:false,returnObj:this.parent});" />  
         
     <simpleLabelButton y="80" labelid="377" x="150"
-        onclick="quicklinkAct('usersettings')" />  
+        onclick="quicklinkAct('userSettings')" />  
              
            
 	</view>
