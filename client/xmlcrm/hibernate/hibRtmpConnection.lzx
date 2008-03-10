@@ -370,8 +370,10 @@
                 if (canvas._videocontainer!=null){
 	                canvas._videocontainer.disconnectclient(value.broadCastID); 
 					//remove that client from sync list of wmlFileLoader/image if present
-					_drawarea.sendCompleteWmlLoadedRClient(value);
-					_drawarea.sendCompleteImageLoadedRClient(value);
+					if (_drawarea!=null){
+						_drawarea.sendCompleteWmlLoadedRClient(value);
+						_drawarea.sendCompleteImageLoadedRClient(value);
+					}
 	                if (canvas.currentModApply!=null) canvas.currentModApply.rejectUser(value);
 	                //parent.getClientListScope.doCall();  
 	                if (value.isRecording) {

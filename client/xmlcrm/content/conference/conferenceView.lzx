@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library>
 
-<class name="videoBoard" extends="guiPresenter" x="2" y="2"
-    width="290" height="280" closable="false" title="Video and Audio"
+<class name="videoBoard" extends="guiPresenter" closable="false" title="Video and Audio"
     resizeable="false">
     <videoContainer name="_videocontainer" x="1" y="22" 
     				width="$once{ parent.width-2 }"
@@ -49,29 +48,51 @@
 
 
 <class name="conferenceView" extends="baseContentView" destroyByMethod="true" >
+	
+	<attribute name="roomobj" value="null" />
 
     <handler name="oninit">
+    	
+		if ($debug) Debug.write("roomobj: ",this.roomobj);
         canvas._mainbgcontentNavi.setAttribute('height',0);
         canvas.setAttribute('naviHeightDelta',28);
         new conferenceMenubar(canvas._conferencemenu);
-        new moderationPanel(canvas._conferencemenu,{x:400});
+        new moderationPanel(canvas._conferencemenu,{x:this.roomobj.moderationPanelXPosition});
         canvas._conferencemenu.setAttribute('visibility','visible');
 
-        new videoBoard(this);
-        new filesPanel(this);
-
-        new whiteBoardPanel(this);
+        new videoBoard(this,{x:this.roomobj.videoPodXPosition,
+        	y:this.roomobj.videoPodYPosition,
+        	width:this.roomobj.videoPodWidth,
+        	height:this.roomobj.videoPodHeight});
+        
+        if (this.roomobj.showFilesPanel){
+        	new filesPanel(this,{x:this.roomobj.filesPanelXPosition,
+        		y:this.roomobj.filesPanelYPosition,
+        		width:this.roomobj.filesPanelWidth,
+        		height:this.roomobj.filesPanelHeight});
+        }
+		
+       	if (this.roomobj.showWhiteBoard){
+       		new whiteBoardPanel(this,{x:this.roomobj.whiteBoardPanelXPosition,
+        		y:this.roomobj.whiteBoardPanelYPosition,
+        		width:this.roomobj.whiteBoardPanelWidth,
+        		height:this.roomobj.whiteBoardPanelHeight});
+        }
     </handler>
 
   <handler name="ontabcontentleave">
         Debug.write("ontabcontentleave:",this);
-        canvas._videocontainer._video1.resetValues();
-        canvas._videocontainer._video2.resetValues();
-        canvas._videocontainer._video3.resetValues();
-        canvas._videocontainer._video4.resetValues();
-        canvas._videocontainer = null;
-        canvas._chartcontent = null;
-        canvas._mymod = null;
+        if (canvas._videocontainer!=null){
+	        canvas._videocontainer.resetAllValues();
+	        canvas._videocontainer = null;
+        }
+        if (canvas._chartcontent!=null){
+        	canvas._chartcontent = null;
+        }
+        if (canvas._mymod!=null){
+        	canvas._mymod = null;
+        }
+        
         if (_drawarea.letterObjectIsActive){
           _drawarea.currentletterObj.destroy();
         }

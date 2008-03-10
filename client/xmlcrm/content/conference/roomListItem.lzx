@@ -76,7 +76,7 @@
         }
         //Debug.write("hib.conferencedomain: ",hib.conferencedomain);
         clearStageContent();
-        new global[this.roomClassName](canvas.main_content._content.inner);
+        new global[this.roomClassName](canvas.main_content._content.inner,{roomobj:this.obj});
   </method>
 
   <netRemoteCallHib name="getRoomClientsListByRoomId" funcname="conferenceservice.getRoomClientsListByRoomId"

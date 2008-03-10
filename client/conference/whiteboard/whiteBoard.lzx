@@ -42,14 +42,14 @@
 <resource name="reload_small_rsc" src="resources/reload_small.png" />
 
 <resource name="folder_top_rsc" src="resources/top.png" />
-	
+    
 <resource name="doc_next" src="resources/go-next.png" />
 <resource name="doc_pre" src="resources/go-previous.png" />
 <resource name="doc_first" src="resources/go-first.png" />
-<resource name="doc_last" src="resources/go-last.png" />	
+<resource name="doc_last" src="resources/go-last.png" />    
     
-<resource name="doc_zoom_plus" src="resources/xmag_plus2.png" />	 
-<resource name="doc_zoom_minus" src="resources/xmag_plus.png" />	       			
+<resource name="doc_zoom_plus" src="resources/xmag_plus2.png" />     
+<resource name="doc_zoom_minus" src="resources/xmag_plus.png" />                    
 
 <resource name="filedelete_rsc" src="resources/delete.png" />
     
@@ -67,37 +67,37 @@
 <!-- 
 ############################
 
-	Class whiteBoard
-	
+    Class whiteBoard
+    
  -->
 
 
 <class name="whiteBoard" extends="view" >
-	
-	<attribute name="baseurl" value="" type="string" />
-	<attribute name="fileName" value="" type="string" />
-	<attribute name="moduleName" value="" type="string" />
-	<attribute name="parentPath" value="" type="string" />
-	<attribute name="room" value="" type="string" />
-	<attribute name="domain" value="" type="string" />
-	
-	<attribute name="downloadurl" value="" type="string" />
-	<attribute name="iamgex" value="" type="string" />
-	<attribute name="imagey" value="" type="string" />
+    
+    <attribute name="baseurl" value="" type="string" />
+    <attribute name="fileName" value="" type="string" />
+    <attribute name="moduleName" value="" type="string" />
+    <attribute name="parentPath" value="" type="string" />
+    <attribute name="room" value="" type="string" />
+    <attribute name="domain" value="" type="string" />
+    
+    <attribute name="downloadurl" value="" type="string" />
+    <attribute name="iamgex" value="" type="string" />
+    <attribute name="imagey" value="" type="string" />
     
     <handler name="onsharedMessage" args="obj" />
-	
-	<attribute name="sendObject" value="null" />
-	<attribute name="sendObjectToClientID" value="0" type="number"  />
+    
+    <attribute name="sendObject" value="null" />
+    <attribute name="sendObjectToClientID" value="0" type="number"  />
     
     <attribute name="confirmdialog" value="null" />
     
     <attribute name="documentmenuIsInited" value="false" type="boolean" />
-	
-	<method name="sendConfirmation" args="yesno,askagain" >
-		
-		////Debug.write("clear yesno,askagain: ",yesno,askagain);
-	
+    
+    <method name="sendConfirmation" args="yesno,askagain" >
+        
+        ////Debug.write("clear yesno,askagain: ",yesno,askagain);
+    
          var t = new sharedObject();
          t.getLocal('userdata');
          var g = t.getData('userdata');
@@ -106,36 +106,36 @@
          g["image"]["clearField"]=yesno;
          g["image"]["askagainclear"]=!askagain;
          t.setData('userdata',g);
-         t.flush(); 	
+         t.flush();     
 
          if (yesno){
-         	////Debug.write("clear field!!");
-			_drawarea.setModus('plain');
-			_drawarea.addNewImage(this.downloadurl,this.x,this.y,this.baseurl,this.fileName,this.moduleName,this.parentPath,this.room,this.domain);
+            ////Debug.write("clear field!!");
+            _drawarea.setModus('plain');
+            _drawarea.addNewImage(this.downloadurl,this.x,this.y,this.baseurl,this.fileName,this.moduleName,this.parentPath,this.room,this.domain);
          } else {
-         	////Debug.write("don't clear field!!");
-         	_drawarea.addNewImage(this.downloadurl,this.x,this.y,this.baseurl,this.fileName,this.moduleName,this.parentPath,this.room,this.domain);
+            ////Debug.write("don't clear field!!");
+            _drawarea.addNewImage(this.downloadurl,this.x,this.y,this.baseurl,this.fileName,this.moduleName,this.parentPath,this.room,this.domain);
          }
          this.confirmdialog.close();
-	</method>
-	
-	<method name="getconfirmationscode">
+    </method>
+    
+    <method name="getconfirmationscode">
         var t = new sharedObject();
         t.getLocal('userdata');
         var g = t.getData('userdata');
         if (g==null) g = new Array();
         if (g["image"]==null) {
-         	g["image"]=new Array();
-         	g["image"]["clearField"]=false;
-         	g["image"]["askagainclear"]=true;
+            g["image"]=new Array();
+            g["image"]["clearField"]=false;
+            g["image"]["askagainclear"]=true;
             t.setData('userdata',g);
-            t.flush();          	
+            t.flush();              
         }
         return g["image"];
     </method>
-	
-	<method name="resetDefaultConfirmations">
-		var t = new sharedObject();
+    
+    <method name="resetDefaultConfirmations">
+        var t = new sharedObject();
         t.getLocal('userdata');
         var g = t.getData('userdata');
         if (g==null) g = new Array();
@@ -143,49 +143,51 @@
         g["image"]["clearField"]=false;
         g["image"]["askagainclear"]=true;
         t.setData('userdata',g);
-        t.flush();          	
-	</method>	
-	
-	<method name="clearAreaAndAddImage" args="downloadurlVal,xVal,yVal,baseurl,fileName,moduleName,parentPath,room,domain">
-		<![CDATA[
-		////Debug.write("clearAreaAndAddImage: ",downloadurlVal,xVal,yVal,baseurl,fileName,moduleName,parentPath,room,domain);
-		this.downloadurl=downloadurlVal;
-		this.iamgex=xVal;
-		this.imagey=yVal;	
-		this.baseurl=baseurl;
-		this.fileName=fileName;
-		this.moduleName=moduleName;
-		this.parentPath=parentPath;
-		this.room=room;
-		this.domain=domain;
-		var storedImageDate = this.getconfirmationscode();
-		////Debug.write(" g[image] ",storedImageDate);
-		if (storedImageDate["clearField"] && !storedImageDate["askagainclear"]){
-			_drawarea.setModus('plain');
-			Debug.write(" _drawarea.addNewImage 1 ",this.downloadurl,this.x,this.y);
-			_drawarea.addNewImage(this.downloadurl,this.x,this.y,this.baseurl,this.fileName,this.moduleName,this.parentPath,this.room,this.domain);
-		} else if (!storedImageDate["askagainclear"] && !storedImageDate["clearField"]){
-			_drawarea.addNewImage(this.downloadurl,this.x,this.y,this.baseurl,this.fileName,this.moduleName,this.parentPath,this.room,this.domain);
-			Debug.write(" _drawarea.addNewImage 2 ",this.downloadurl,this.x,this.y);
-		} else if (storedImageDate["askagainclear"]){
-			this.confirmdialog = new confirmationBox(canvas.main_content._content.inner,{labelid:62,labeliderror:63,refObj:this});
-		} else {
-			this.confirmdialog = new confirmationBox(canvas.main_content._content.inner,{labelid:62,labeliderror:63,refObj:this});
-		}
-		]]>	
-	</method>
-	
-	<handler name="isloadingImage" args="val" />
-	<handler name="isloadedImage" args="val" />
+        t.flush();              
+    </method>   
+    
+    <method name="clearAreaAndAddImage" args="downloadurlVal,xVal,yVal,baseurl,fileName,moduleName,parentPath,room,domain">
+        <![CDATA[
+        ////Debug.write("clearAreaAndAddImage: ",downloadurlVal,xVal,yVal,baseurl,fileName,moduleName,parentPath,room,domain);
+        this.downloadurl=downloadurlVal;
+        this.iamgex=xVal;
+        this.imagey=yVal;   
+        this.baseurl=baseurl;
+        this.fileName=fileName;
+        this.moduleName=moduleName;
+        this.parentPath=parentPath;
+        this.room=room;
+        this.domain=domain;
+        var storedImageDate = this.getconfirmationscode();
+        ////Debug.write(" g[image] ",storedImageDate);
+        if (storedImageDate["clearField"] && !storedImageDate["askagainclear"]){
+            _drawarea.setModus('plain');
+            Debug.write(" _drawarea.addNewImage 1 ",this.downloadurl,this.x,this.y);
+            _drawarea.addNewImage(this.downloadurl,this.x,this.y,this.baseurl,this.fileName,this.moduleName,this.parentPath,this.room,this.domain);
+        } else if (!storedImageDate["askagainclear"] && !storedImageDate["clearField"]){
+            _drawarea.addNewImage(this.downloadurl,this.x,this.y,this.baseurl,this.fileName,this.moduleName,this.parentPath,this.room,this.domain);
+            Debug.write(" _drawarea.addNewImage 2 ",this.downloadurl,this.x,this.y);
+        } else if (storedImageDate["askagainclear"]){
+            this.confirmdialog = new confirmationBox(canvas.main_content._content.inner,{labelid:62,labeliderror:63,refObj:this});
+        } else {
+            this.confirmdialog = new confirmationBox(canvas.main_content._content.inner,{labelid:62,labeliderror:63,refObj:this});
+        }
+        ]]> 
+    </method>
+    
+    <handler name="isloadingImage" args="val" />
+    <handler name="isloadedImage" args="val" />
     
     
     <text fontsize="12" x="10" y="2" 
         name="_sharingClientName" fontstyle="bold" />    
     
-    <simpleLabelButton labelid="239" height="24" name="_doShare" width="200" x="450" y="2" enabled="${  canvas.ismoderator }">
-    	<handler name="onclick">
+    <simpleLabelButton labelid="239" height="24" name="_doShare" width="200" 
+    				   x="$once{ parent.parent.width-210 }" y="2" 
+    				   enabled="${  canvas.ismoderator }">
+        <handler name="onclick">
             this.parent.checkForApplyScreen();
-    	</handler>
+        </handler>
         <view y="1" x="2" resource="background_screenview_rsc" />
         
     </simpleLabelButton>  
@@ -200,8 +202,8 @@
                     +'&sid='+canvas.sessionId
                     +'&red5httpport='+canvas.red5httpport;
 
-                //Debug.write(downloadurl);	
-                LzBrowser.loadURL(downloadurl,'_blank');	
+                //Debug.write(downloadurl); 
+                LzBrowser.loadURL(downloadurl,'_blank');    
             ]]>        
     </method> 
     
@@ -218,9 +220,9 @@
             this._paintmenu.setAttribute('visible',false);
             this._painttoolsPalette.setAttribute('visible',false);
             if (!this.documentmenuIsInited){
-            	new documentMenu(this,{name:'_documentmenu',x:0,y:38,visible:false});
-            	this._documentmenu.sendInFrontOf(this._paintmenu);
-            	this.documentmenuIsInited = true;
+                new documentMenu(this,{name:'_documentmenu',x:0,y:38,visible:false});
+                this._documentmenu.sendInFrontOf(this._paintmenu);
+                this.documentmenuIsInited = true;
             }
             this._documentmenu.setAttribute('visible',true);
             //this._documenttoolsPalette.setAttribute('visible',true);            
@@ -228,17 +230,18 @@
         }
     </method>
     
-	<!-- 
-		Menubar with tool-icons
-	 -->
+    <!-- 
+        Menubar with tool-icons
+     -->
 
-	<paintMenu name="_paintmenu" x="0" y="38" visible="true" />
+    <paintMenu name="_paintmenu" x="0" y="38" visible="true" />
     
-	<!-- 
-		The Content Area    
-	 -->
-    <view width="654" height="492" y="68" name="_drawareaMask" clip="true" bgcolor="white" >
-	    <baseDrawSave y="0" name="_drawarea" id="_drawarea" width="654" height="492" >
+    <!-- 
+        The Content Area    
+     -->
+    <view width="$once{ parent.parent.width-6 }" height="$once{ parent.parent.height-100 }" 
+    	  y="68" name="_drawareaMask" clip="true" bgcolor="white" >
+        <baseDrawSave y="0" name="_drawarea" id="_drawarea" width="654" height="492" >
             <handler name="onprogress" args="perc">
                 //Debug.write("onprogress: ",perc);
                 this.parent.parent._progress.setProgress(perc);
@@ -247,8 +250,8 @@
                 
             </handler>
             <handler name="ondrawmodus" args="d">
-            	this.drawmodus = d;
-            	parent.parent._painttoolsPalette.loadToolsByModi(d);
+                this.drawmodus = d;
+                parent.parent._painttoolsPalette.loadToolsByModi(d);
             </handler>
             <handler name="setNewScreenUserName" args="value">
                 this.parent.parent._sharingClientName.setText(value);
@@ -285,10 +288,10 @@
                 this.parent.parent.sendMessageWithClientById.doCall();
             </method>
         </baseDrawSave>  
-	</view>
+    </view>
     
         <netRemoteCallHib name="sendMessageWithClientById" funcname="sendMessageWithClientById"
-			remotecontext="$once{ canvas.thishib }" >
+            remotecontext="$once{ canvas.thishib }" >
             <netparam><method name="getValue">return parent.parent.sendObject;</method></netparam>
             <netparam><method name="getValue">return parent.parent.sendObjectToClientID;</method></netparam>
             <handler name="ondata" args="value">
@@ -298,72 +301,73 @@
                 
                 ]]>
             </handler>   
-        </netRemoteCallHib>  	
-	
-	<!-- 
-		Container for the bounding Box (selection Box)
-	 -->
-	<view name="boundboxesView" width="654" height="492" y="68" />
+        </netRemoteCallHib>     
+    
+    <!-- 
+        Container for the bounding Box (selection Box)
+     -->
+    <view name="boundboxesView" width="$once{ parent.parent.width-6 }" 
+    	  height="$once{ parent.parent.height-100 }" y="68" />
 
-	<!-- Context sensitive stuff -->
-	<paintToolsPalette name="_painttoolsPalette" />
+    <!-- Context sensitive stuff -->
+    <paintToolsPalette name="_painttoolsPalette" />
     
     
-	<!-- Context sensitive stuff
-	not needed for the moment
-	<documentToolsPalette name="_documenttoolsPalette" />
-	 -->
+    <!-- Context sensitive stuff
+    not needed for the moment
+    <documentToolsPalette name="_documenttoolsPalette" />
+     -->
     
 </class>
     
     
     
 
-	<!-- 
+    <!-- 
 
-		<button height="20" y="2" text="JPEG" width="40" >
-			<handler name="onclick">
-				this.parent.parent._drawarea.catchSnapshot();
-			</handler>
-		</button>		      
+        <button height="20" y="2" text="JPEG" width="40" >
+            <handler name="onclick">
+                this.parent.parent._drawarea.catchSnapshot();
+            </handler>
+        </button>             
         
-	<drawChooseModir name="b8" modi="image" resourceN="imageIcon" labelText="Image" />
+    <drawChooseModir name="b8" modi="image" resourceN="imageIcon" labelText="Image" />
 
-	 -->
-	
-	<!-- Context sensitive Area top Stuff
-	<text x="40" y="10" text="Choose Element" resize="true" fontsize="10" />
-	visible="${ ( ( this.parent._drawarea.drawmodus=='pointer' ) ? true : false ) }"
-	
-	<drawAreaObjectCombobox x="300" y="4" name="_drawareaobjectcombobox"  visible="${ ( ( this.parent._drawarea.drawmodus=='pointer' ) ? true : false ) }"/>
-	<drawAreaAlterPosition x="140" y="540" name="_drawareaalterposition"  />
-	<basedrawchoose resourceN="deleteIcon" x="430" y="4" labelText="delete choosen Item" width="22" height="22" visible="${ ( ( this.parent._drawarea.drawmodus=='pointer' ) ? true : false ) }">
-		<handler name="onclick">
-			//Debug.write("this.parent._drawareaalterposition.objName: ",this.parent._drawareaalterposition.objName);
-			this.parent._drawarea.deleteItemByName(this.parent._drawareaalterposition.objName);
-		</handler>
-	</basedrawchoose>
-	-->
-	
-	<!-- 
-	
+     -->
+    
+    <!-- Context sensitive Area top Stuff
+    <text x="40" y="10" text="Choose Element" resize="true" fontsize="10" />
+    visible="${ ( ( this.parent._drawarea.drawmodus=='pointer' ) ? true : false ) }"
+    
+    <drawAreaObjectCombobox x="300" y="4" name="_drawareaobjectcombobox"  visible="${ ( ( this.parent._drawarea.drawmodus=='pointer' ) ? true : false ) }"/>
+    <drawAreaAlterPosition x="140" y="540" name="_drawareaalterposition"  />
+    <basedrawchoose resourceN="deleteIcon" x="430" y="4" labelText="delete choosen Item" width="22" height="22" visible="${ ( ( this.parent._drawarea.drawmodus=='pointer' ) ? true : false ) }">
+        <handler name="onclick">
+            //Debug.write("this.parent._drawareaalterposition.objName: ",this.parent._drawareaalterposition.objName);
+            this.parent._drawarea.deleteItemByName(this.parent._drawareaalterposition.objName);
+        </handler>
+    </basedrawchoose>
+    -->
+    
+    <!-- 
+    
 
-	 -->
-	<!-- 
+     -->
+    <!-- 
 
-	export -->
-	<!-- 
-	<view name="_progress" bgcolor="black" width="120" x="312" height="18" y="30">
-		<method name="setProgress" args="perc">
-			var percentWidth = ((this.width-2)/100)*perc;
-			this._i2.setWidth(percentWidth);
-		</method>
-		<view x="1" y="1" name="_i" bgcolor="white" width="${ parent.width-2 }" height="${ parent.height-2 }" />
-		<view x="1" y="1" name="_i2" bgcolor="gray" width="0" height="${ parent.height-2 }" />	
-	</view>
-	
-	 
-	<text x="14" y="540" text="${ 'Modus: '+this.parent._drawarea.drawmodus }" resize="true" fontsize="12" />
-	 -->
+    export -->
+    <!-- 
+    <view name="_progress" bgcolor="black" width="120" x="312" height="18" y="30">
+        <method name="setProgress" args="perc">
+            var percentWidth = ((this.width-2)/100)*perc;
+            this._i2.setWidth(percentWidth);
+        </method>
+        <view x="1" y="1" name="_i" bgcolor="white" width="${ parent.width-2 }" height="${ parent.height-2 }" />
+        <view x="1" y="1" name="_i2" bgcolor="gray" width="0" height="${ parent.height-2 }" />  
+    </view>
+    
+     
+    <text x="14" y="540" text="${ 'Modus: '+this.parent._drawarea.drawmodus }" resize="true" fontsize="12" />
+     -->
 
 </library>

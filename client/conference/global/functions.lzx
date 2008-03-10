@@ -10,6 +10,16 @@ String.prototype.startsWith = function(prefix) {
 
 var _labelObject = new Array();
 
+var RegExpTooltiplist = null;
+
+function disablesTooltips(obj){
+  if(RegExpTooltiplist!=null){
+    RegExpTooltiplist.destroy();
+    RegExpTooltiplist=null;
+  }
+  RegExpTooltiplist = obj;
+}
+
 //Set some value to get it running
 var labelRef = new Array();
 labelRef.push('1');

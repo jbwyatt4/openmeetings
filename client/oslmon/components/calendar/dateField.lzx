@@ -36,7 +36,8 @@
     
 	<attribute name="text" value="" type="string" />
 
-	<customEdittext name="_text" width="$once{ parent.width-20 }" align="left" text="${ parent.text }" />
+	<customEdittext name="_text" width="$once{ parent.width-20 }" regexpType="date" 
+					align="left" text="${ parent.text }" />
 
 	<view resource="date_icon_rsc" align="right" onmouseover="" onmouseout="">
 		<handler name="onclick">

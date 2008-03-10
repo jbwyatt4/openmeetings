@@ -5,6 +5,7 @@
 
 	<!-- recordContent-id -->
 	<attribute name="rooms_id" value="0" type="number" />
+	<attribute name="roomsObj" value="null" />
 	
 	<!--handlers -->
 
@@ -23,6 +24,9 @@
 		this.ispublic.setValue(false);
 		this.numberOfParticipants.selectItem('4');
 		this._organisationslist.clearList();
+		if (this._showAdvancedRoomSettings.getValue()){
+			this._advancedRoomSettings.oninit.sendEvent();
+		}		
 	</handler>
 	
     <handler name="ondelete" >
@@ -42,12 +46,16 @@
     
     <method name="initFields" args="obj">
     	<![CDATA[
+    		this.roomsObj = obj;
     		if ($debug) Debug.write("initFields: ",obj);
 			this.roomname.setText(obj.name);
 			this.comment.setAttribute('text',obj.comment);
 			this.ispublic.setValue(obj.ispublic);
 			this.numberOfParticipants.selectItem(String(obj.numberOfPartizipants));
 			this.roomtype.selectItem(String(obj.roomtype.roomtypes_id));
+			if (this._showAdvancedRoomSettings.getValue()){
+				this._advancedRoomSettings.oninit.sendEvent();
+			}
         ]]>
     </method>
 	
@@ -110,7 +118,72 @@
 			this.sendObject["numberOfPartizipants"] = Number(this.parent.numberOfParticipants.getValue());
   			this.sendObject["organisations"] = this.parent._organisationslist.getAllItems();
 
-  			//Debug.write("prepareCall: ",this.sendObject);
+  			if (parent._showAdvancedRoomSettings.getValue()){
+  				
+				this.sendObject["videoPodHeight"] = Number(parent._advancedRoomSettings._videoPodHeight.getText());
+				this.sendObject["videoPodWidth"] = Number(parent._advancedRoomSettings._videoPodWidth.getText());
+				this.sendObject["videoPodXPosition"] = Number(parent._advancedRoomSettings._videoPodXPosition.getText());
+				this.sendObject["videoPodYPosition"] = Number(parent._advancedRoomSettings._videoPodYPosition.getText());
+				
+				this.sendObject["moderationPanelXPosition"] = Number(parent._advancedRoomSettings._moderationPanelXPosition.getText());
+				this.sendObject["showWhiteBoard"] = parent._advancedRoomSettings._showWhiteBoard.getValue();
+				
+				this.sendObject["whiteBoardPanelXPosition"] = Number(parent._advancedRoomSettings._whiteBoardPanelXPosition.getText());
+				this.sendObject["whiteBoardPanelYPosition"] = Number(parent._advancedRoomSettings._whiteBoardPanelYPosition.getText());
+				this.sendObject["whiteBoardPanelWidth"] = Number(parent._advancedRoomSettings._whiteBoardPanelWidth.getText());
+				this.sendObject["whiteBoardPanelHeight"] = Number(parent._advancedRoomSettings._whiteBoardPanelHeight.getText());
+				
+				this.sendObject["showFilesPanel"] = parent._advancedRoomSettings._showFilesPanel.getValue();
+				
+				this.sendObject["filesPanelXPosition"] = Number(parent._advancedRoomSettings._filesPanelXPosition.getText());
+				this.sendObject["filesPanelYPosition"] = Number(parent._advancedRoomSettings._filesPanelYPosition.getText());
+				this.sendObject["filesPanelWidth"] = Number(parent._advancedRoomSettings._filesPanelWidth.getText());
+				this.sendObject["filesPanelHeight"] = Number(parent._advancedRoomSettings._filesPanelHeight.getText());
+  			} else {
+  				if (this.parent.rooms_id==0){
+  					//default values
+	  				this.sendObject["videoPodHeight"] = 280;
+					this.sendObject["videoPodWidth"] = 290;
+					this.sendObject["videoPodXPosition"] = 2;
+					this.sendObject["videoPodYPosition"] = 2;
+					
+					this.sendObject["moderationPanelXPosition"] = 400;
+					this.sendObject["showWhiteBoard"] = true;
+					
+					this.sendObject["whiteBoardPanelXPosition"] = 296;
+					this.sendObject["whiteBoardPanelYPosition"] = 2;
+					this.sendObject["whiteBoardPanelWidth"] = 660;
+					this.sendObject["whiteBoardPanelHeight"] = 592;
+					
+					this.sendObject["showFilesPanel"] = true;
+					
+					this.sendObject["filesPanelXPosition"] = 2;
+					this.sendObject["filesPanelYPosition"] = 284;
+					this.sendObject["filesPanelWidth"] = 290;
+					this.sendObject["filesPanelHeight"] = 310;
+  				} else {
+	  				this.sendObject["videoPodHeight"] = parent.roomsObj.videoPodHeight;
+					this.sendObject["videoPodWidth"] = parent.roomsObj.videoPodWidth;
+					this.sendObject["videoPodXPosition"] = parent.roomsObj.videoPodXPosition;
+					this.sendObject["videoPodYPosition"] = parent.roomsObj.videoPodYPosition;
+					
+					this.sendObject["moderationPanelXPosition"] = parent.roomsObj.moderationPanelXPosition;
+					this.sendObject["showWhiteBoard"] = parent.roomsObj.showWhiteBoard;
+					
+					this.sendObject["whiteBoardPanelXPosition"] = parent.roomsObj.whiteBoardPanelXPosition;
+					this.sendObject["whiteBoardPanelYPosition"] = parent.roomsObj.whiteBoardPanelYPosition;
+					this.sendObject["whiteBoardPanelWidth"] = parent.roomsObj.whiteBoardPanelWidth;
+					this.sendObject["whiteBoardPanelHeight"] = parent.roomsObj.whiteBoardPanelHeight;
+					
+					this.sendObject["showFilesPanel"] = parent.roomsObj.showFilesPanel;
+					
+					this.sendObject["filesPanelXPosition"] = parent.roomsObj.filesPanelXPosition;
+					this.sendObject["filesPanelYPosition"] = parent.roomsObj.filesPanelYPosition;
+					this.sendObject["filesPanelWidth"] = parent.roomsObj.filesPanelWidth;
+					this.sendObject["filesPanelHeight"] = parent.roomsObj.filesPanelHeight;
+  				}
+  			}
+  			Debug.write("prepareCall: ",this.sendObject);
   		</method>
   		<netparam><method name="getValue"> return canvas.sessionId; </method></netparam>
     	<netparam><method name="getValue">return parent.sendObject;</method></netparam>	  		
@@ -187,8 +260,114 @@
 				for (var i in this.parent._organisationslist._selected)	this.parent._organisationslist.removeItem(this.parent._organisationslist._selected[i].value);
 		</method>
 	</baseChooseIcon>
-
+	
+	<labelCheckbox x="0" y="470" fontsize="12"
+        name="_showAdvancedRoomSettings" labelid="483" >
+        <handler name="onvalue" args="v">
+			if (v) {
+				new advancedRoomSettings(parent,{name:'_advancedRoomSettings'});
+			} else {
+				parent._advancedRoomSettings.destroy();
+			}
+        </handler>
+    </labelCheckbox>  
         
+</class>
+
+<class name="advancedRoomSettings" extends="view" y="500">
+	
+	<handler name="oninit">
+		<![CDATA[
+			if (parent.rooms_id!=0){
+				this._videoPodHeight.setText(parent.roomsObj.videoPodHeight);
+				this._videoPodWidth.setText(parent.roomsObj.videoPodWidth);
+				this._videoPodXPosition.setText(parent.roomsObj.videoPodXPosition);
+				this._videoPodYPosition.setText(parent.roomsObj.videoPodYPosition);
+				
+				this._moderationPanelXPosition.setText(parent.roomsObj.moderationPanelXPosition);
+				this._showWhiteBoard.setValue(parent.roomsObj.showWhiteBoard);
+				
+				this._whiteBoardPanelXPosition.setText(parent.roomsObj.whiteBoardPanelXPosition);
+				this._whiteBoardPanelYPosition.setText(parent.roomsObj.whiteBoardPanelYPosition);
+				this._whiteBoardPanelWidth.setText(parent.roomsObj.whiteBoardPanelWidth);
+				this._whiteBoardPanelHeight.setText(parent.roomsObj.whiteBoardPanelHeight);
+				
+				this._showFilesPanel.setValue(parent.roomsObj.showFilesPanel);
+				
+				this._filesPanelXPosition.setText(parent.roomsObj.filesPanelXPosition);
+				this._filesPanelYPosition.setText(parent.roomsObj.filesPanelYPosition);
+				this._filesPanelWidth.setText(parent.roomsObj.filesPanelWidth);
+				this._filesPanelHeight.setText(parent.roomsObj.filesPanelHeight);
+			} else {
+				this._videoPodHeight.setText(280);
+				this._videoPodWidth.setText(290);
+				this._videoPodXPosition.setText(2);
+				this._videoPodYPosition.setText(2);
+				
+				this._moderationPanelXPosition.setText(400);
+				this._showWhiteBoard.setValue(true);
+				
+				this._whiteBoardPanelXPosition.setText(296);
+				this._whiteBoardPanelYPosition.setText(2);
+				this._whiteBoardPanelWidth.setText(660);
+				this._whiteBoardPanelHeight.setText(592);
+				
+				this._showFilesPanel.setValue(true);
+				
+				this._filesPanelXPosition.setText(2);
+				this._filesPanelYPosition.setText(284);
+				this._filesPanelWidth.setText(290);
+				this._filesPanelHeight.setText(310);
+			}
+		]]>
+	</handler>
+    
+    <labelText labelid="486" fontstyle="bold" 
+    		   y="0" resize="true" x="2" />
+    
+    <labelText labelid="484" width="120" y="30" resize="false" x="2"/>
+    <customEdittext name="_videoPodXPosition" y="30" x="120" width="100" text="" /> 
+    <customEdittext name="_videoPodYPosition" y="30" x="230" width="100" text="" /> 
+    
+    <labelText labelid="485" width="200" y="60" resize="false" x="2"/>
+    <customEdittext name="_videoPodWidth" y="60" x="120" width="100" text="" /> 
+    <customEdittext name="_videoPodHeight" y="60" x="230" width="100" text="" /> 
+    
+    <labelText labelid="487" fontstyle="bold" 
+    		   y="90" resize="true" x="2" />
+    		   
+    <labelText labelid="488" width="200" y="120" resize="false" x="2" />
+    <customEdittext name="_moderationPanelXPosition" y="120" 
+    				x="120" width="100" text="" />    
+    
+    <labelText labelid="489" fontstyle="bold" 
+    		   y="150" resize="true" x="2" />
+    		   
+    <labelText labelid="490" width="200" y="180" resize="false" x="2"/>
+    <checkbox name="_showWhiteBoard" width="100" y="180" x="120" fontsize="12" />
+    
+    <labelText labelid="491" width="200" y="210" resize="false" x="2"/>
+    <customEdittext name="_whiteBoardPanelXPosition" y="210" x="120" width="100" text="" />  
+    <customEdittext name="_whiteBoardPanelYPosition" y="210" x="230" width="100" text="" /> 
+    
+    <labelText labelid="492" width="200" y="240" resize="false" x="2"/>
+    <customEdittext name="_whiteBoardPanelWidth" y="240" x="120" width="100" text="" />  
+    <customEdittext name="_whiteBoardPanelHeight" y="240" x="230" width="100" text="" />  
+    
+    <labelText labelid="493" fontstyle="bold" 
+    		   y="270" resize="true" x="2" />
+    		   
+    <labelText labelid="494" width="200" y="300" resize="false" x="2"/>
+    <checkbox name="_showFilesPanel" width="100" y="300" x="120" fontsize="12" />
+    
+    <labelText labelid="495" width="200" y="330" resize="false" x="2"/>
+    <customEdittext name="_filesPanelXPosition" y="330" x="120" width="100" text="" />  
+    <customEdittext name="_filesPanelYPosition" y="330" x="230" width="100" text="" />
+    
+    <labelText labelid="496" width="200" y="360" resize="false" x="2"/>
+    <customEdittext name="_filesPanelWidth" y="360" x="120" width="100" text="" />
+    <customEdittext name="_filesPanelHeight" y="360" x="230" width="100" text="" />  
+
 </class>
 
 </library>

@@ -4,13 +4,17 @@
 <class name="videoBoardStream" extends="guiPresenter" x="2" y="2"
     width="270" height="280" closable="false" title="Video and Audio"
     resizeable="false">
-    <videoContainerStream name="_videocontainer" x="2" y="22" />
+    <videoContainerStream name="_videocontainer" x="1" y="22" 
+    				width="$once{ parent.width-2 }"
+    				height="$once{ parent.height-22 }" />
 </class>  
 
 <class name="videoBoardStreamEvent" extends="guiPresenter" x="2" y="2"
     width="270" height="280" closable="false" title="Video and Audio"
     resizeable="false">
-    <videoEventContainerStream name="_videocontainer" x="2" y="22" />
+    <videoEventContainerStream name="_videocontainer" x="1" y="22" 
+    				width="$once{ parent.width-2 }"
+    				height="$once{ parent.height-22 }" />
 </class>  
 
 <class name="videoBoardStreamPlaceHolder" extends="guiPresenter" x="2" y="2"
@@ -95,6 +99,7 @@
 	<attribute name="currentTime" value="-500" type="number" />
 	<attribute name="recordingValue" value="null" />
 	<attribute name="timeStepSyncing" value="500" type="number" />
+	<attribute name="roomobj" value="null" />
 	
 	<attribute name="initObjectCount" value="0" type="number" />
 
@@ -108,9 +113,6 @@
 	</handler>
 	
 	<method name="initRecordingComponents">
-		new videoBoardStreamPlaceHolder(this,{name:'_videoboardstream'});
-		new whiteBoardPanelRecord(this,{name:'_whiteboardpanelrecord'});
-		new filesPanel(this,{name:'_filespanel'});
 		new recorderClickMask(this,{name:'_recorderClickMask'});
         canvas.thishib.reconnectionAction = true;
         canvas.thishib.reconnectObjRef = this;
@@ -119,7 +121,7 @@
         canvas.thishib.connect();
         //this.reconnectSuccess();
 	</method>
-	
+
 	<method name="reconnectSuccess">
 		this.showStartPlaybackBtn();
 	</method>
@@ -135,19 +137,49 @@
 			while (this.subviews.length > 0) {
 				this.subviews[0].destroy();
 			}
+			new LzView(this,{name:'_videoboardstream'});
 		]]>
 	</method>
 	
 	<method name="initRecordingsViewByType">
+		this.roomobj = this.recordingValue.roomRecording.room_setup;
 		this._videoboardstream.destroy();
 		this._recorderClickMask.destroy();
 		this._recordplayerBG.destroy();
+
+       	if (this.roomobj.showWhiteBoard){
+       		new whiteBoardPanelRecord(this,{name:'_whiteboardpanelrecord',
+       			x:this.roomobj.whiteBoardPanelXPosition,
+        		y:this.roomobj.whiteBoardPanelYPosition,
+        		width:this.roomobj.whiteBoardPanelWidth,
+        		height:this.roomobj.whiteBoardPanelHeight});
+        	_drawarea.isinitRecordingLoad = true;
+        }
+
+        if (this.roomobj.showFilesPanel){
+        	new filesPanel(this,{name:'_filespanel',
+        		x:this.roomobj.filesPanelXPosition,
+        		y:this.roomobj.filesPanelYPosition,
+        		width:this.roomobj.filesPanelWidth,
+        		height:this.roomobj.filesPanelHeight});
+        }
+        
 		if (this.recordingValue.roomRecording.conferenceType=="conference"){
-			new videoBoardStream(this,{name:'_videoboardstream'});
+			new videoBoardStream(this,{name:'_videoboardstream',
+				x:this.roomobj.videoPodXPosition,
+	        	y:this.roomobj.videoPodYPosition,
+	        	width:this.roomobj.videoPodWidth,
+	        	height:this.roomobj.videoPodHeight});
+        
 		} else {
-			new videoBoardStreamEvent(this,{name:'_videoboardstream'});
+			new videoBoardStreamEvent(this,{name:'_videoboardstream',
+				x:this.roomobj.videoPodXPosition,
+	        	y:this.roomobj.videoPodYPosition,
+	        	width:this.roomobj.videoPodWidth,
+	        	height:this.roomobj.videoPodHeight});
 		}
-		new recordClickMask(this,{name:'_recorderClickMask'});
+		
+		new recorderClickMask(this,{name:'_recorderClickMask'});
 		//new recordContentPlayerBG(this,{name:'_recordplayerBG'});
 		new recorderProgressBar(this,{name:'progress'});		
 	</method>
@@ -163,11 +195,11 @@
         <handler name="ondata" args="value">	
             <![CDATA[
             	parent.recordingValue = value;
-            	Debug.write(parent.recordingValue.roomRecording.streamlist);
-            	Debug.write(parent.recordingValue.roomRecording.roomclients);
-            	Debug.write("getRecordingById",parent.recordingValue.roomRecording);
+            	if ($debug) Debug.write(parent.recordingValue.roomRecording.streamlist);
+            	if ($debug) Debug.write(parent.recordingValue.roomRecording.roomclients);
+            	if ($debug) Debug.write("getRecordingById",parent.recordingValue.roomRecording);
             	parent.timerDel = new LzDelegate( parent, "timeLineAction" );
-            	_drawarea.isinitRecordingLoad = true;
+            	if ($debug) Debug.write("value.room_setup: ",value.roomRecording.room_setup);
             	parent.initRecordingsViewByType();
             	if (parent.recordingValue.roomRecording.initwhiteboardvars!=null && parent.recordingValue.roomRecording.initwhiteboardvars.length>0){
             		_drawarea.loadwmlObjectToStage(parent.recordingValue.roomRecording.initwhiteboardvars,"","","",true,true);
@@ -205,11 +237,11 @@
         			if (roomclients[i].roomenter){
         				var userpos = roomclients[i].rcl.userpos;
         				Debug.write("Found ROOM User Enter",starttime,userpos);
-        				canvas._videocontainer.enterRoom(userpos,this.recordingValue.roomRecording.streamlist[i].rcl);
+        				canvas._videocontainer.enterRoom(this.recordingValue.roomRecording.streamlist[i].rcl);
         			} else {
-		        		var userpos = roomclients[i].rcl.userpos;
+		        		//var userpos = roomclients[i].rcl.userpos;
 		        		Debug.write("Found ROOM User Left",starttime,userpos);
-		        		canvas._videocontainer.disconnectclient(userpos);
+		        		canvas._videocontainer.disconnectclient(roomclients[i].rcl.broadCastID);
         			}
         		}
 			}
@@ -229,26 +261,26 @@
         		if (starttime == this.currentTime){
         			Debug.write("Found User Event: ",streamList[i]);
         			if (streamList[i].streamstart && streamList[i].avset){
-        				var userpos = streamList[i].rcl.userpos;
+        				//var userpos = streamList[i].rcl.userpos;
 		        		var streamname = streamList[i].streamName+".flv";
-        				Debug.write("Found User Entered To Start Stream! - ",starttime,userpos,streamname);
-        				canvas._videocontainer.startStream(streamname,userpos,this.recordingValue.roomRecording.streamlist[i].rcl);
+        				Debug.write("Found User Entered To Start Stream! - ",starttime,streamname);
+        				canvas._videocontainer.startStream(streamname,this.recordingValue.roomRecording.streamlist[i].rcl);
         			} else if (streamList[i].streamstart && !streamList[i].avset){
-		        		var userpos = streamList[i].rcl.userpos;
+		        		//var userpos = streamList[i].rcl.userpos;
 		        		var streamname = streamList[i].streamName+".flv";
-		        		Debug.write("Found - INIT",starttime,userpos,streamname);
-		        		canvas._videocontainer.startStream(streamname,userpos,this.recordingValue.roomRecording.streamlist[i].rcl);
+		        		Debug.write("Found - INIT",starttime,streamname);
+		        		canvas._videocontainer.startStream(streamname,this.recordingValue.roomRecording.streamlist[i].rcl);
         			} else if (!streamList[i].streamstart && !streamList[i].avset) {
-        				var userpos = streamList[i].rcl.userpos;
+        				//var userpos = streamList[i].rcl.userpos;
 		        		var streamname = streamList[i].streamName+".flv";
-        				Debug.write("Found Stream To END! - ",starttime,userpos,streamname);
+        				Debug.write("Found Stream To END! - ",starttime,streamname);
         				//Todo: In future releases people will be ale to stop/start streaming
         				//while the application is running
         			} else if (!streamList[i].streamstart && streamList[i].avset) {
-        				var userpos = streamList[i].rcl.userpos;
+        				//var userpos = streamList[i].rcl.userpos;
         				var avsettings = streamList[i].rcl.avsettings;
         				Debug.write("Found AVEvent! - ",starttime,userpos);
-        				canvas._videocontainer.setAVOnlyStream(userpos,streamList[i].rcl);
+        				canvas._videocontainer.setAVOnlyStream(streamList[i].rcl);
         			}
         		}
         	}
@@ -284,6 +316,8 @@
         	}
         ]]>
     </method>
+    
+    <view name="_videoboardstream" />
 	
 </class>
 
