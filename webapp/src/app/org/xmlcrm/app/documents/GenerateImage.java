@@ -25,32 +25,31 @@ public class GenerateImage {
 	}
 
 
-	public HashMap<String,HashMap> convertImage(String current_dir, String fileNameExt, String roomName,
-			String fileNameShort, boolean fullProcessing) throws Exception {
+
+	public HashMap<String,HashMap> convertImage(String current_dir, String fileName, String fileExt, 
+						    String roomName, String fileNameShort, 
+						    boolean fullProcessing) throws Exception {
 		
 		HashMap<String,HashMap> returnMap = new HashMap<String,HashMap>();
 
 		String working_imgdir = current_dir + "upload" + File.separatorChar + roomName + File.separatorChar;
 		String working_pptdir = current_dir + "uploadtemp" + File.separatorChar + roomName + File.separatorChar;
 
-		String fileFullPath = working_pptdir + fileNameExt;
-		String newFileName = fileNameExt.substring(0, fileNameExt.length() - 4);
-		String newFileNameExtensionOnly = fileNameExt.substring(fileNameExt
-				.length() - 4, fileNameExt.length());
+		String fileFullPath = working_pptdir + fileName+ fileExt;
 
-		File f = new File(working_imgdir + newFileName + newFileNameExtensionOnly);
+		File f = new File(working_imgdir + fileName + fileExt);
 		if (f.exists()) {
 			int recursiveNumber = 0;
-			String tempd = newFileName + "_" + recursiveNumber;
+			String tempd = fileName + "_" + recursiveNumber;
 			while (f.exists()) {
 				recursiveNumber++;
-				tempd = newFileName + "_" + recursiveNumber;
-				f = new File(working_imgdir + tempd + newFileNameExtensionOnly);
+				tempd = fileName + "_" + recursiveNumber;
+				f = new File(working_imgdir + tempd + fileExt);
 			}
-			newFileName = tempd;
+			fileName = tempd;
 		}
 
-		String destinationFile = working_imgdir + newFileName;
+		String destinationFile = working_imgdir + fileName;
 		HashMap processJPG = this.convertSingleJpg(current_dir, fileFullPath, destinationFile);
 		HashMap processThumb = GenerateThumbs.getInstance().generateThumb("_thumb_", current_dir, destinationFile, 50);
 		
@@ -64,7 +63,7 @@ public class GenerateImage {
 		return returnMap;
 	}
 
-	public HashMap<String,HashMap> convertImageUserProfile(String current_dir, String fileNameExt, Long users_id, 
+	public HashMap<String,HashMap> convertImageUserProfile(String current_dir, String fileName, String fileExt, Long users_id, 
 			String fileNameShort, boolean fullProcessing) throws Exception {
 		
 		HashMap<String,HashMap> returnMap = new HashMap<String,HashMap>();
@@ -72,24 +71,21 @@ public class GenerateImage {
 		String working_imgdir = current_dir + "upload" + File.separatorChar + "profiles" + File.separatorChar + "profile_"+users_id + File.separatorChar;
 		String working_pptdir = current_dir + "uploadtemp" + File.separatorChar + "profiles" + File.separatorChar + "profile_"+users_id + File.separatorChar;
 
-		String fileFullPath = working_pptdir + fileNameExt;
-		String newFileName = fileNameExt.substring(0, fileNameExt.length() - 4);
-		String newFileNameExtensionOnly = fileNameExt.substring(fileNameExt
-				.length() - 4, fileNameExt.length());
+		String fileFullPath = working_pptdir + fileName+fileExt;
 
-		File f = new File(working_imgdir + newFileName + newFileNameExtensionOnly);
+		File f = new File(working_imgdir + fileName + fileExt);
 		if (f.exists()) {
 			int recursiveNumber = 0;
-			String tempd = newFileName + "_" + recursiveNumber;
+			String tempd = fileName + "_" + recursiveNumber;
 			while (f.exists()) {
 				recursiveNumber++;
-				tempd = newFileName + "_" + recursiveNumber;
-				f = new File(working_imgdir + tempd + newFileNameExtensionOnly);
+				tempd = fileName + "_" + recursiveNumber;
+				f = new File(working_imgdir + tempd + fileExt);
 			}
-			newFileName = tempd;
+			fileName = tempd;
 		}
 
-		String destinationFile = working_imgdir + newFileName;
+		String destinationFile = working_imgdir + fileName;
 		HashMap<String,Object> processJPG = this.convertSingleJpg(current_dir, fileFullPath, destinationFile);
 		
 		HashMap<String,Object> processThumb1 = GenerateThumbs.getInstance().generateThumb("_chat_", current_dir, destinationFile, 40);

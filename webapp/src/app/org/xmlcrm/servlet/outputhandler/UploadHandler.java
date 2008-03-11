@@ -57,8 +57,10 @@ public class UploadHandler extends HttpServlet {
 		fileExtensions.put("ext12", ".sxi");
 
 		pdfExtensions.put("ext1", ".pdf");
+		pdfExtensions.put("ext2", ".ps"); //PostScript
 
 		jpgExtensions.put("ext1", ".jpg");
+
 
 		imageExtensions.put("ext1", ".png");
 		imageExtensions.put("ext2", ".gif");
@@ -67,17 +69,16 @@ public class UploadHandler extends HttpServlet {
 		imageExtensions.put("ext5", ".exr"); //EXR
 		imageExtensions.put("ext6", ".pcd"); //PhotoCD
 		imageExtensions.put("ext7", ".pcds"); //PhotoCD
-		imageExtensions.put("ext8", ".ps"); //PostScript
-		imageExtensions.put("ext9", ".psd"); //Adobe Photoshop bitmap file
-		imageExtensions.put("ext10", ".tiff"); //Tagged Image File Format
-		imageExtensions.put("ext11", ".ttf"); //TrueType font file
-		imageExtensions.put("ext12", ".xcf"); //GIMP imag
-		imageExtensions.put("ext13", ".wpg"); //Word Perfect Graphics File
-		imageExtensions.put("ext14", ".txt"); //Raw text file
-		imageExtensions.put("ext15", ".bmp");
-		imageExtensions.put("ext16", ".ico"); //Microsoft Icon File
-		imageExtensions.put("ext17", ".tga"); //Truevision Targa image
-
+		imageExtensions.put("ext8", ".psd"); //Adobe Photoshop bitmap file
+		imageExtensions.put("ext9", ".tiff"); //Tagged Image File Format
+		imageExtensions.put("ext10", ".ttf"); //TrueType font file
+		imageExtensions.put("ext11", ".xcf"); //GIMP imag
+		imageExtensions.put("ext12", ".wpg"); //Word Perfect Graphics File
+		imageExtensions.put("ext13", ".txt"); //Raw text file
+		imageExtensions.put("ext14", ".bmp");
+		imageExtensions.put("ext15", ".ico"); //Microsoft Icon File
+		imageExtensions.put("ext16", ".tga"); //Truevision Targa image
+		imageExtensions.put("ext17", ".jpeg");
 	}
 
 	/* (non-Javadoc)
@@ -169,12 +170,13 @@ public class UploadHandler extends HttpServlet {
 						//trim whitespace
 						String fileSystemName = StringUtils.deleteWhitespace(upload.getFileSystemName("Filedata"));
 
+						int dotidx=fileSystemName.lastIndexOf('.');
 						String newFileSystemName = StringComparer.getInstance()
 								.compareForRealPaths(
 										fileSystemName.substring(0,
-												fileSystemName.length() - 4));
+												dotidx));
 						String newFileSystemExtName = fileSystemName.substring(
-								fileSystemName.length() - 4,
+								dotidx,
 								fileSystemName.length()).toLowerCase();
 
 						//trim long names cause cannot output that
@@ -265,26 +267,20 @@ public class UploadHandler extends HttpServlet {
 
 						if (canBeConverted) {
 							//convert to pdf, thumbs, swf and xml-description
-							returnError = GeneratePDF.getInstance().convertPDF(current_dir,
-									newFileSystemName + newFileSystemExtName, roomName, 
-									newFileSystemName, true, completeName, newFileSystemExtName);
+							returnError = GeneratePDF.getInstance().convertPDF(current_dir, newFileSystemName , newFileSystemExtName, roomName, true, completeName);
 						} else if (isPDF) {
 							//convert to thumbs, swf and xml-description
-							returnError = GeneratePDF.getInstance().convertPDF(current_dir, 
-									newFileSystemName + newFileSystemExtName, roomName, 
-									newFileSystemName, false, completeName, newFileSystemExtName);						
+							returnError = GeneratePDF.getInstance().convertPDF(current_dir, newFileSystemName , newFileSystemExtName, roomName, false, completeName);						
 						} else if (isImage) {
 							if (resize) {
 								//User Profile Update
 								this.deleteUserProfileFiles(current_dir, users_id);
 								//convert it to JPG
-					 			returnError = GenerateImage.getInstance().convertImageUserProfile(current_dir,
-										newFileSystemName+ newFileSystemExtName,
-										users_id, newFileSystemName, false);
+					 			returnError = GenerateImage.getInstance().convertImageUserProfile(current_dir, newFileSystemName, newFileSystemExtName, users_id, newFileSystemName, false);
 							} else {
 								//convert it to JPG
 					 			returnError = GenerateImage.getInstance().convertImage(current_dir, 
-										newFileSystemName+ newFileSystemExtName, 
+														       newFileSystemName, newFileSystemExtName, 
 										roomName,newFileSystemName, false);
 							}
 						} else if (isJpg) {
@@ -378,7 +374,7 @@ public class UploadHandler extends HttpServlet {
 	}
 
 	private boolean checkForJpg(String fileExtension) throws Exception {
-		Iterator<String> extensionIt = pdfExtensions.keySet().iterator();
+		Iterator<String> extensionIt = jpgExtensions.keySet().iterator();
 		while (extensionIt.hasNext()) {
 			String fileExt = jpgExtensions.get(extensionIt.next());
 			if (fileExtension.equals(fileExt)) {
@@ -389,7 +385,7 @@ public class UploadHandler extends HttpServlet {
 	}
 
 	private boolean checkForImage(String fileExtension) throws Exception {
-		Iterator<String> extensionIt = pdfExtensions.keySet().iterator();
+		Iterator<String> extensionIt = imageExtensions.keySet().iterator();
 		while (extensionIt.hasNext()) {
 			String fileExt = imageExtensions.get(extensionIt.next());
 			if (fileExtension.equals(fileExt)) {
