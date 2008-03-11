@@ -2,7 +2,7 @@
 
 There are multiple Session variables:
 
-|| Client Side name || Server Side name || description  || init-time / place ||
+|| *Client Side name* || *Server Side name* || *description*  || *init-time / place* ||
 || canvas.streamid  || IConnection.getClient.getID() and org.xmlcrm.app.conference.videobeans.RoomClient.streamid || this is unique key for every rtmpconnection || invoked by Red5-Event: org.xmlcrm.app.remote.Application.roomJoin ||
 || conference.video.editRecordStream.broadcastId || org.xmlcrm.app.remote.Application.broadCastCounter || this is a unique key for every netstream/rtmpStream || org.xmlcrm.app.remote.Application.getBroadCastId invoked by editRecordStream.lzx Line 41 getBroadCastId.doCall() ||
 || canvas.sessionId || No Name stored in Database || The security Token || org.xmlcrm.app.remote.MainService.getsessiondata() by xmlcrm.hibernate.hibRtmpConnection.lzx Line 70 ||
