@@ -169,9 +169,9 @@ public class ImportInitvalues {
     	public void loadDefaultRooms(){
     		
     		long conference_Id = Roommanagement.getInstance().addRoomType("conference");
-    		log.error("conference_Id: "+conference_Id);
+    		log.debug("conference_Id: "+conference_Id);
     		long audience_Id = Roommanagement.getInstance().addRoomType("audience");
-    		log.error("audience_Id: "+audience_Id);
+    		log.debug("audience_Id: "+audience_Id);
     		
     		Roommanagement.getInstance().addRoom(3,"public Conference Room", 1,"", new Long(4), true,null,
     				290, 280, 2, 2,
@@ -266,7 +266,7 @@ public class ImportInitvalues {
                 languages.add(country);
 
         }
-        log.error("Countries ADDED ");
+        log.debug("Countries ADDED ");
         return languages;
 
         }
@@ -289,7 +289,7 @@ public class ImportInitvalues {
                 {
                         String lang = itLang.next();
 
-                        log.error("loadInitLanguages lang: "+lang);
+                        log.debug("loadInitLanguages lang: "+lang);
 
                         Long languages_id = Languagemanagement.getInstance().addLanguage(lang);
 
@@ -319,7 +319,7 @@ public class ImportInitvalues {
                         Fieldmanagment.getInstance().addFieldValueByFieldAndLanguage(id,languages_id,value);
 
                 }
-                log.error("Lang ADDED: "+lang);
+                log.debug("Lang ADDED: "+lang);
                 if(!langFieldIdIsInited) langFieldIdIsInited=true;
                 }
 

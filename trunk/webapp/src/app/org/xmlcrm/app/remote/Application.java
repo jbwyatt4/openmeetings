@@ -30,6 +30,7 @@ import org.red5.server.api.stream.ISubscriberStream;
 import org.xmlcrm.app.conference.configutils.BandwidthConfigFactory;
 import org.xmlcrm.app.conference.configutils.UserConfigFactory;
 import org.xmlcrm.app.quartz.scheduler.QuartzSessionClear;
+import org.xmlcrm.utils.crypt.ManageCryptStyle;
 import org.xmlcrm.utils.stringhandlers.ChatString;
 import org.xmlcrm.app.conference.videobeans.RoomClient;
 import org.xmlcrm.app.data.user.Usermanagement;
@@ -146,6 +147,8 @@ public class Application extends ApplicationAdapter implements
 			rcm.setConnectedSince(new Date());
 			rcm.setStreamid(client.getId());
 			rcm.setUserroom("");
+			long thistime = new Date().getTime();
+			rcm.setPublicSID(ManageCryptStyle.getInstance().getInstanceOfCrypt().createPassPhrase(String.valueOf(thistime).toString()));
 			
 			rcm.setUserport(conn.getRemotePort());
 			rcm.setUserip(conn.getRemoteAddress());
@@ -164,6 +167,27 @@ public class Application extends ApplicationAdapter implements
 			log.error("roomJoin",err);
 		}		
 		return true;
+	}
+	
+	/**
+	 * this function is invoked directly after initial connecting
+	 * @return
+	 */
+	public String getPublicSID() {
+		IConnection current = Red5.getConnectionLocal();
+		RoomClient currentClient = ClientList.get(current.getClient().getId());	
+		return currentClient.getPublicSID();
+	}
+	
+	/**
+	 * this function is invoked after a reconnect
+	 * @param newPublicSID
+	 */
+	public void overwritePublicSID(String newPublicSID) {
+		IConnection current = Red5.getConnectionLocal();
+		RoomClient currentClient = ClientList.get(current.getClient().getId());	
+		currentClient.setPublicSID(newPublicSID);
+		ClientList.put(current.getClient().getId(), currentClient);
 	}
 	
 	/**
@@ -808,14 +832,15 @@ public class Application extends ApplicationAdapter implements
 					RoomClient rcl = ClientList.get(conn.getClient().getId());
 					//Check if the Client is in the same room and same domain 
 					if(roomname.equals(rcl.getUserroom()) && orgdomain.equals(rcl.getDomain())){	
-						log.debug("setUserObjectOneFour Found Client to " + conn);
-						log.debug("setUserObjectOneFour Found Client to " + conn.getClient());
+						log.debug("*** setAudienceModus Found Client to " + conn);
+						log.debug("*** setAudienceModus Found Client to " + conn.getClient());
 						if (conn instanceof IServiceCapableConnection) {
 							((IServiceCapableConnection) conn).invoke("setAudienceModusClient",new Object[] { currentClient }, this);
-							log.debug("sending setUserObjectNewOneFour to " + conn);
+							log.debug("sending setAudienceModusClient to " + conn);
 							//if any user in this room is recording add this client to the list
 							if (rcl.getIsRecording()) {
-								StreamService.addRoomClientEnterEvent(currentClient, rcl.getRoomRecordingName(), rcl.getUserip(), true);
+								log.debug("currentClient "+currentClient.getPublicSID());
+								StreamService.addRoomClientEnterEventFunc(currentClient, rcl.getRoomRecordingName(), currentClient.getUserip(), true);
 							}							
 						}
 					}
