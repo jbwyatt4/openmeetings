@@ -81,13 +81,14 @@ public class StreamService implements IPendingServiceCallback {
 	 * @param comment
 	 * @return
 	 */
-	public String recordMeetingStream(String conferenceType, Object initwhiteboardvars, String roomRecordingsTableString, String comment){
+	public String recordMeetingStream(String conferenceType, Object initwhiteboardvars, 
+			String roomRecordingsTableString, String comment){
 		try {
 			IConnection current = Red5.getConnectionLocal();
 			RoomClient currentClient = Application.getClientList().get(current.getClient().getId());
 			String roomname = currentClient.getUserroom();
 			String orgdomain = currentClient.getDomain();
-			String recordingName = generateFileName(currentClient.getStreamid());
+			String recordingName = generateFileName(Long.valueOf(currentClient.getBroadCastID()).toString());
 			currentClient.setIsRecording(true);
 			currentClient.setRoomRecordingName(recordingName);			
 			Application.getClientList().put(current.getClient().getId(), currentClient);
@@ -120,7 +121,7 @@ public class StreamService implements IPendingServiceCallback {
 						if (!conferenceType.equals("audience") || rcl.getIsMod()){
 							LinkedHashMap<String,Object> roomStream = new LinkedHashMap<String,Object>();
 							
-							String streamName = generateFileName(rcl.getStreamid());
+							String streamName = generateFileName(Long.valueOf(rcl.getBroadCastID()).toString());
 							
 							//if the user does publish av, a, v
 							if (!rcl.getAvsettings().equals("n")){	
@@ -199,7 +200,7 @@ public class StreamService implements IPendingServiceCallback {
 				IConnection conn = it.next();
 				if (conn instanceof IServiceCapableConnection) {
 					RoomClient rcl = Application.getClientList().get(conn.getClient().getId());
-					log.error("is this users still alive? :"+rcl);
+					log.debug("is this users still alive? :"+rcl);
 					//Check if the Client is in the same room and same domain 
 					if(roomname.equals(rcl.getUserroom()) && orgdomain.equals(rcl.getDomain())){
 						((IServiceCapableConnection) conn).invoke("stopedRecording",new Object[] { currentClient }, this);
@@ -267,7 +268,7 @@ public class StreamService implements IPendingServiceCallback {
 			xStream.setMode(XStream.NO_REFERENCES);
 			String xmlString = xStream.toXML(roomRecording);
 			
-			log.error(xmlString);
+			//log.error(xmlString);
 			
 			//make persistent
 			Long recording_id = Recordingmanagement.getInstance().addRecording(newRecordFileName, duration, "", currentClient.getRoom_id(), us, comment);
@@ -286,6 +287,22 @@ public class StreamService implements IPendingServiceCallback {
 		    pw.println(xmlString);
 		    pw.flush();
 		    pw.close();
+//		    
+//		    List<LinkedHashMap<String,Object>> roomClients = (List<LinkedHashMap<String,Object>>)roomRecording.get("roomclients");
+//		    for (Iterator<LinkedHashMap<String,Object>> iter = roomClients.iterator();iter.hasNext();){
+//		    	LinkedHashMap<String,Object> roomClient = iter.next();
+//		    	
+//		    	log.debug("###### NEW RRR1: "+roomClient.get("roomenter"));
+//				log.debug("###### NEW RRR2: "+roomClient.get("startdate"));
+//				log.debug("###### NEW RRR3: "+roomClient.get("starttime"));
+//				RoomClient rcl = (RoomClient) roomClient.get("rcl");
+//				log.debug("###### NEW RRR4: "+rcl.getBroadCastID());
+//				log.debug("###### NEW RRR5: "+rcl.getConnectedSince());
+//				log.debug("###### NEW RRR6: "+rcl.getPublicSID());
+//				log.debug("###### NEW RRR7: "+rcl.getUserip());   
+//				
+//		    }
+		    
 			//remove recording from Temp - List
 			roomRecordingList.remove(roomrecordingName);
 			
@@ -302,11 +319,11 @@ public class StreamService implements IPendingServiceCallback {
 	 * @param conn
 	 */
 	private static void recordShow(IConnection conn, long broadcastid, String streamName) throws Exception {
-		log.error("Recording show for: " + conn.getScope().getContextPath());
-		log.error("Name of CLient and Stream to be recorded: "+broadcastid);		
-		log.error("Application.getInstance()"+Application.getInstance());
-		log.error("Scope "+conn);
-		log.error("Scope "+conn.getScope());
+		log.debug("Recording show for: " + conn.getScope().getContextPath());
+		log.debug("Name of CLient and Stream to be recorded: "+broadcastid);		
+		log.debug("Application.getInstance()"+Application.getInstance());
+		log.debug("Scope "+conn);
+		log.debug("Scope "+conn.getScope());
 		// Get a reference to the current broadcast stream.
 		ClientBroadcastStream stream = (ClientBroadcastStream) Application.getInstance()
 				.getBroadcastStream(conn.getScope(), Long.valueOf(broadcastid).toString());
@@ -328,7 +345,7 @@ public class StreamService implements IPendingServiceCallback {
 	public static void stopRecordingShowForClient(IConnection conn, RoomClient rcl, 
 			String roomrecordingName, boolean doStopStream) {
 		try {
-			StreamService.addRoomClientEnterEvent(rcl, roomrecordingName, rcl.getUserip(), false);
+			StreamService.addRoomClientEnterEventFunc(rcl, roomrecordingName, rcl.getUserip(), false);
 			log.error("### stopRecordingShowForClient: "+rcl.getIsRecording()+","+rcl.getUsername()+","+rcl.getUserip());
 			
 			LinkedHashMap<String,Object> roomRecording = roomRecordingList.get(roomrecordingName);
@@ -353,11 +370,11 @@ public class StreamService implements IPendingServiceCallback {
 
 			if ((rcl.getAvsettings().equals("a") || rcl.getAvsettings().equals("v") 
 					|| rcl.getAvsettings().equals("av")) && doStopStream){
-				stopRecordingShow(conn,rcl.getStreamid());
+				stopRecordingShow(conn,rcl.getBroadCastID());
 			}
 			
 		} catch (Exception err) {
-			log.error("[stopRecordingShowByClient]",err);
+			log.error("[stopRecordingShowForClient]",err);
 		}
 	}
 
@@ -367,11 +384,11 @@ public class StreamService implements IPendingServiceCallback {
 	 *
 	 * @param conn
 	 */
-	public static void stopRecordingShow(IConnection conn, String streamid) throws Exception {
-		log.error("** stopRecordingShow: "+conn);
-		log.error("### Stop recording show for streamid: "+ streamid + " || " + conn.getScope().getContextPath());
+	public static void stopRecordingShow(IConnection conn, long broadcastId) throws Exception {
+		log.debug("** stopRecordingShow: "+conn);
+		log.debug("### Stop recording show for broadcastId: "+ broadcastId + " || " + conn.getScope().getContextPath());
 		ClientBroadcastStream stream = (ClientBroadcastStream) Application.getInstance().
-												getBroadcastStream(conn.getScope(), streamid);
+												getBroadcastStream(conn.getScope(), Long.valueOf(broadcastId).toString());
 		// Stop recording.
 		stream.stopRecording();
 	}
@@ -471,7 +488,8 @@ public class StreamService implements IPendingServiceCallback {
 		return null;
 	}
 	
-	public static void addRecordingByStreamId(IConnection conn, String streamId, RoomClient rcl, String roomrecordingName) {
+	public static void addRecordingByStreamId(IConnection conn, String streamId, 
+			RoomClient rcl, String roomrecordingName) {
 		try {
 			LinkedHashMap<String,Object> roomRecording = roomRecordingList.get(roomrecordingName);
 			List<LinkedHashMap<String,Object>> roomStreams = (List<LinkedHashMap<String,Object>>)roomRecording.get("streamlist");
@@ -484,7 +502,7 @@ public class StreamService implements IPendingServiceCallback {
 				
 				LinkedHashMap<String,Object> roomStream = new LinkedHashMap<String,Object>();
 				
-				String streamName = generateFileName(rcl.getStreamid());
+				String streamName = generateFileName(Long.valueOf(rcl.getBroadCastID()).toString());
 				String remoteAdress = conn.getRemoteAddress();
 				
 				//if the user does publish av, a, v
@@ -559,7 +577,8 @@ public class StreamService implements IPendingServiceCallback {
 	}
 	
 	
-	public static void addRoomClientAVSetEvent(RoomClient rcl, String roomrecordingName, String remoteAdress) {
+	public static void addRoomClientAVSetEvent(RoomClient rcl, String roomrecordingName, 
+			String remoteAdress) {
 		try {
 			LinkedHashMap<String,Object> roomRecording = roomRecordingList.get(roomrecordingName);
 			Date recordingsStartTime = (Date) roomRecording.get("starttime");
@@ -585,7 +604,7 @@ public class StreamService implements IPendingServiceCallback {
 		}	
 	}	
 	
-	public static void addRoomClientEnterEvent(RoomClient rcl, String roomrecordingName, 
+	public static void addRoomClientEnterEventFunc(RoomClient rcl, String roomrecordingName, 
 				String remoteAdress, boolean enter) {
 		try {
 			LinkedHashMap<String,Object> roomRecording = roomRecordingList.get(roomrecordingName);
@@ -598,6 +617,13 @@ public class StreamService implements IPendingServiceCallback {
 			roomClient.put("roomenter", enter);
 			roomClient.put("startdate",currentDate);
 			roomClient.put("starttime",currentDate.getTime()-recordingsStartTime.getTime());
+//			
+//			if (!enter) {
+//				log.debug("###### NEW USER1: "+rcl.getBroadCastID());
+//				log.debug("###### NEW USER2: "+rcl.getConnectedSince());
+//				log.debug("###### NEW USER3: "+rcl.getPublicSID());
+//				log.debug("###### NEW USER4: "+rcl.getUserip());
+//			}
 			roomClient.put("rcl", rcl);
 			
 			roomClients.add(roomClient);
@@ -631,14 +657,14 @@ public class StreamService implements IPendingServiceCallback {
 				IConnection conn = it.next();
 				if (conn instanceof IServiceCapableConnection) {
 					RoomClient rcl = Application.getClientList().get(conn.getClient().getId());
-					log.error("is this users still alive? :"+rcl);
+					log.debug("is this users still alive? :"+rcl);
 					//Check if the Client is in the same room and same domain 
 					if(roomname.equals(rcl.getUserroom()) && orgdomain.equals(rcl.getDomain())){
 						((IServiceCapableConnection) conn).invoke("stopedRecording",new Object[] { currentClient }, this);
 						if (!conferenceType.equals("audience") || rcl.getIsMod()){
 							//if the user does publish av, a, v
 							if (!rcl.getAvsettings().equals("n")){
-								stopRecordingShow(conn,rcl.getStreamid());
+								stopRecordingShow(conn,rcl.getBroadCastID());
 							}
 						}
 					}
@@ -666,10 +692,10 @@ public class StreamService implements IPendingServiceCallback {
 			Iterator<IConnection> it = current.getScope().getConnections();
 			while (it.hasNext()) {
 				IConnection cons = it.next();
-				log.error("cons Host: "+cons);
+				log.debug("cons Host: "+cons);
 				if (cons instanceof IServiceCapableConnection) {
 					if (!cons.equals(current)){
-						log.error("sending roomDisconnect to " + cons);
+						log.debug("sending roomDisconnect to " + cons);
 						RoomClient rcl = Application.getClientList().get(cons.getClient().getId());
 						//Check if the Client is in the same room and same domain except its the current one
 						if(roomname.equals(rcl.getUserroom()) && orgdomain.equals(rcl.getDomain())){					
@@ -689,7 +715,7 @@ public class StreamService implements IPendingServiceCallback {
 
 	public void resultReceived(IPendingServiceCall arg0) {
 		// TODO Auto-generated method stub
-		log.error("resultReceived"+arg0);
+		log.debug("resultReceived"+arg0);
 	}
 	
 	public Long deleteRecordedFile(String SID, Long recording_id){
