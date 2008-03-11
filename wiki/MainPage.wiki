@@ -34,6 +34,7 @@ Tips for Installation:
  
   * CustomCryptMechanism - how to write Custom Encryption Styles
   * CustomAuthentication - how to write a Custom Authentication for Single Sign-On
+  * SessionVariables  	- Documentation how Session-Variables are handled
   * [Internationalisation]
   * BandwidthNetworkSettings
   * SimpleSampleApps  	
