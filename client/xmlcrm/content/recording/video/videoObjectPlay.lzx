@@ -27,6 +27,8 @@
 	<attribute name="uniqueid" value="-2" type="string" />
 	
 	<attribute name="isremote" value="true" type="boolean" />
+	<attribute name="publicSID" value="" type="string" />
+	<attribute name="broadcastId" value="" type="string" />
 	
 	<handler name="onisremote" args="r">
 		this.isremote = r;
