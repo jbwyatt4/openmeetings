@@ -21,9 +21,8 @@ public class GeneratePDF {
 		return instance;
 	}
 	
-	public HashMap<String,HashMap> convertPDF(String current_dir, String fileNameExt,
-			String roomName, String fileNameShort, boolean fullProcessing,
-			String completeName, String newFileSystemExtName)
+	public HashMap<String,HashMap> convertPDF(String current_dir, String fileName, String fileExt,
+			String roomName, boolean fullProcessing, String completeName)
 			throws Exception {
 		
 		HashMap<String,HashMap> returnError = new HashMap<String,HashMap>();
@@ -36,9 +35,8 @@ public class GeneratePDF {
 		String working_pptdir = current_dir + "uploadtemp" + File.separatorChar
 				+ roomName + File.separatorChar;
 
-		String fileFullPath = working_pptdir + fileNameExt;
-		String newFolderName = fileNameExt.substring(0,fileNameExt.length() - 4);
-		String destinationFolder = working_imgdir + newFolderName;
+		String fileFullPath = working_pptdir + fileName + fileExt;
+		String destinationFolder = working_imgdir + fileName;
 
 		File f = new File(destinationFolder + File.separatorChar);
 		if (f.exists()) {
@@ -66,30 +64,30 @@ public class GeneratePDF {
 		destinationFolder = destinationFolder + File.separatorChar;
 
 		if (fullProcessing) {
-			HashMap<String,Object> processOpenOffice = this.doConvertExec(current_dir, fileFullPath, destinationFolder,fileNameShort);
+			HashMap<String,Object> processOpenOffice = this.doConvertExec(current_dir, fileFullPath, destinationFolder,fileName);
 			returnError.put("processOpenOffice", processOpenOffice);
-			HashMap<String,Object> processThumb = GenerateThumbs.getInstance().generateBatchThumb(current_dir, destinationFolder + fileNameShort + ".pdf", destinationFolder, 80);
+			HashMap<String,Object> processThumb = GenerateThumbs.getInstance().generateBatchThumb(current_dir, destinationFolder + fileName + ".pdf", destinationFolder, 80);
 			returnError.put("processThumb", processThumb);		
-			HashMap<String,Object> processSWF = GenerateSWF.getInstance().generateSWF(current_dir, destinationFolder, destinationFolder, fileNameShort);
+			HashMap<String,Object> processSWF = GenerateSWF.getInstance().generateSWF(current_dir, destinationFolder, destinationFolder, fileName);
 			returnError.put("processSWF", processSWF);	
 		} else {
 			HashMap<String,Object> processThumb = GenerateThumbs.getInstance().generateBatchThumb(current_dir, fileFullPath, destinationFolder, 80);
 			returnError.put("processThumb", processThumb);
-			HashMap<String,Object> processSWF = GenerateSWF.getInstance().generateSWF(current_dir, (new File(fileFullPath)).getParentFile().getAbsolutePath()+File.separatorChar , destinationFolder, fileNameShort);
+			HashMap<String,Object> processSWF = GenerateSWF.getInstance().generateSWF(current_dir, (new File(fileFullPath)).getParentFile().getAbsolutePath()+File.separatorChar , destinationFolder, fileName);
 			returnError.put("processSWF", processSWF);				
 		}
 				
 		//now it should be completed so copy that file to the expected location
-		File fileToBeMoved = new File(completeName + newFileSystemExtName);
-		File fileWhereToMove = new File(outputfolder+ fileNameShort + newFileSystemExtName);
+		File fileToBeMoved = new File(completeName + fileExt);
+		File fileWhereToMove = new File(outputfolder+ fileName + fileExt);
 		fileWhereToMove.createNewFile();
 		FileHelper.moveRec(fileToBeMoved, fileWhereToMove);
 		
 		if (fullProcessing) {
-			HashMap<String,Object> processXML = CreateLibraryPresentation.getInstance().generateXMLDocument(outputfolder, fileNameShort + newFileSystemExtName, fileNameShort + ".pdf", fileNameShort + ".swf");
+			HashMap<String,Object> processXML = CreateLibraryPresentation.getInstance().generateXMLDocument(outputfolder, fileName + fileExt, fileName + ".pdf", fileName + ".swf");
 			returnError.put("processXML", processXML);	
 		} else {
-			HashMap<String,Object> processXML = CreateLibraryPresentation.getInstance().generateXMLDocument(outputfolder, fileNameShort + newFileSystemExtName, null, fileNameShort + ".swf");
+			HashMap<String,Object> processXML = CreateLibraryPresentation.getInstance().generateXMLDocument(outputfolder, fileName + fileExt, null, fileName + ".swf");
 			returnError.put("processXML", processXML);
 		}
 		
