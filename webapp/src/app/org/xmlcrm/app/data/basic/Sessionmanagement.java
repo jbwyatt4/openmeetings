@@ -98,7 +98,7 @@ public class Sessionmanagement {
 			session.flush();
 			tx.commit();
 			HibernateUtil.closeSession(idf);
-			if (sessiondata!=null) log.error("checkSession USER_ID: "+sessiondata.getUser_id());
+			//if (sessiondata!=null) log.debug("checkSession USER_ID: "+sessiondata.getUser_id());
 				
 			if (sessiondata!=null) updatesession(SID);
 			if (sessiondata==null || count == 0 || sessiondata.equals(null) ||
@@ -137,7 +137,7 @@ public class Sessionmanagement {
 				log.error("Could not find session to update: "+SID);
 				return;
 			} else {
-				log.error("Found session to update: "+SID);
+				//log.error("Found session to update: "+SID);
 			}
 			tx.commit();
 			HibernateUtil.closeSession(idf);
