@@ -16,6 +16,18 @@ public class RoomClient {
 	String streamid = "";
 	
 	/*
+	 * an unique PUBLIC id,
+	 * this ID is needed as people can reconnect and will get a new 
+	 * streamid, but we need to know if this is still the same user
+	 * this Public ID can be changing also if the user does change the 
+	 * security token (private SID)
+	 * the private  Session ID is not written to the RoomClient-Class
+	 * as every instance of the RoomClient is send to all connected users
+	 * 
+	 */
+	String publicSID = "";
+	
+	/*
 	 * this indicated if two people are in the same room
 	 * if they have the same userroom _and_ domain
 	 * in public rooms the domain == 'public'
@@ -410,6 +422,13 @@ public class RoomClient {
 
 	public void setBroadCastID(long broadCastID) {
 		this.broadCastID = broadCastID;
+	}
+
+	public String getPublicSID() {
+		return publicSID;
+	}
+	public void setPublicSID(String publicSID) {
+		this.publicSID = publicSID;
 	}
 
 }

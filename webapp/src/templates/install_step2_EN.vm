@@ -9,7 +9,7 @@
 <body>
 <b>OpenMeetings - Installation</b><br />
 Installation complete<br/>
-<a href="/xmlcrm/">Enter the Application</a><br/><br/>
+<a href="/openmeetings/">Enter the Application</a><br/><br/>
 If your Red5-Server runs on a different Port or on a different domain<br/>
 <a href="../config.xml">alter the config values of the client</a>
 </body>
