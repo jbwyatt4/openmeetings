@@ -7,3 +7,6 @@ There are multiple Session variables:
 || conference.video.editRecordStream.broadcastId || org.xmlcrm.app.remote.Application.broadCastCounter || this is a unique key for every netstream/rtmpStream || org.xmlcrm.app.remote.Application.getBroadCastId invoked by editRecordStream.lzx Line 41 getBroadCastId.doCall() ||
 || canvas.sessionId || No Name stored in Database || The security Token || org.xmlcrm.app.remote.MainService.getsessiondata() by xmlcrm.hibernate.hibRtmpConnection.lzx Line 70 ||
 || canvas.publicSID || org.xmlcrm.app.conference.videobeans.RoomClient.publicSID || unique public SID, shared through RTMP-Reconnects, and Server-Side stored in RoomClient-Object, so this will be also send to all connected users, you cannot use the User_id here cause Guests have no User_id || org.xmlcrm.app.remote.Application.getPublicSID and overwritePublicSID (invoked after reconnecting) both invoked by the client in hibRtmpConnection ||
+
+Issues to solve:
+  * Issue 361
