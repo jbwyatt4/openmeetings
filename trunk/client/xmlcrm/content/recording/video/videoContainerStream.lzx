@@ -17,6 +17,7 @@
 			chatpartnername:object.firstname+' '+object.lastname,
 			uniqueid:object.streamid,
 			broadcastId:object.broadCastID,
+			publicSID:object.publicSID,
 			isremote:true
 			});
 	  	objRef.setIdentifier(object.streamid);
@@ -37,9 +38,10 @@
 	</method>
 		
 	<method name="startStream" args="flv,object">
-		if ($debug) Debug.write("startStream: ",flv,userpos,object);
-		var objRef = this.getVideoObjectByBroadCastId(object.broadCastID);
+		if ($debug) Debug.write("startStream: ",flv,object);
+		var objRef = this.getVideoObjectByPublicSID(object.publicSID);
 		objRef.clientVars = object;
+		if ($debug) Debug.write("objRef: ",objRef);
 		if (object.avsettings=="a"){
 			objRef.setVideouserProfilePic(object);
 			objRef._chatvideoinner._videoview.playStream(flv);
@@ -50,9 +52,9 @@
 		return objRef.getVideoReference();
 	</method>	
 
-	<method name="disconnectclient" args="broadcastId">
-		if ($debug) Debug.write("disconnectclient: ",broadcastId);
-		var vidRef = this.getVideoObjectByBroadCastId(broadcastId);
+	<method name="disconnectclient" args="publicSID">
+		if ($debug) Debug.write("disconnectclient: ",publicSID);
+		var vidRef = this.getVideoObjectByPublicSID(publicSID);
 		if (vidRef!=null){
 			vidRef.setAttribute('isassigned',false);
 			vidRef._chatvideoinner.r.setResourceNumber(5);
@@ -70,22 +72,22 @@
 		}		
 	</method>
 	
-    <method name="getVideoObjectByBroadCastId" args="broadcastId">
+    <method name="getVideoObjectByPublicSID" args="publicSID">
     	<![CDATA[
-    		if ($debug) Debug.write("getVideoObjectByBroadCastId1 SEARCH: ",broadcastId);
+    		if ($debug) Debug.write("getVideoObjectByPublicSID1 SEARCH: ",publicSID);
     		
     		//for (var i=0;i<this._videoviewcontent.subviews.length;i++){
     		//	if ($debug) Debug.write("getVideoObjectByBroadCastId6 broadcastId: ",this._videoviewcontent.subviews[i].broadcastId);
     		//	if ($debug) Debug.write("getVideoObjectByBroadCastId7 streamid,user_id: ",this._videoviewcontent.subviews[i].clientVars.streamid,this._videoviewcontent.subviews[i].clientVars.user_id);
     		//}
-    		if ($debug) Debug.write("this.",this.subviews.length);
+    		if ($debug) Debug.write("subviews length ",this.subviews.length);
     		if (this.subviews.length>0){
 	    		for (var i=0;i<this._videoviewcontent.subviews.length;i++){
-	    			//if ($debug) Debug.write("getVideoObjectByBroadCastId2 broadcastId VIEW: ",this._videoviewcontent.subviews[i].broadcastId);
-	    			//if ($debug) Debug.write("getVideoObjectByBroadCastId3 broadcastId SEARCH: ",broadcastId);
-	    			//if ($debug) Debug.write("getVideoObjectByBroadCastId4 obj: ",this._videoviewcontent.subviews[i]);
+	    			if ($debug) Debug.write("getVideoObjectByBroadCastId2 broadcastId VIEW: ",this._videoviewcontent.subviews[i].publicSID);
+	    			if ($debug) Debug.write("getVideoObjectByBroadCastId3 broadcastId SEARCH: ",publicSID);
+	    			if ($debug) Debug.write("getVideoObjectByBroadCastId4 obj: ",this._videoviewcontent.subviews[i]);
 	    			//if ($debug) Debug.write("getVideoObjectByBroadCastId5 streamid,user_id: ",this._videoviewcontent.subviews[i].clientVars.streamid,this._videoviewcontent.subviews[i].clientVars.user_id);
-	    			if (this._videoviewcontent.subviews[i].broadcastId==String(broadcastId)){
+	    			if (this._videoviewcontent.subviews[i].publicSID==publicSID){
 	    				return this._videoviewcontent.subviews[i];
 	    			}
 	    		}

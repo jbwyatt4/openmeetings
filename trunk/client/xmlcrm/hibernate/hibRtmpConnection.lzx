@@ -57,12 +57,14 @@
      <handler name="onconnect">
         Debug.write("connected");
         if (this.reconnectionAction){
-        	this.reconnectObjRef.reconnectSuccess();
         	this.reconnectionAction = false;
+        	this.overwritePublicSID.doCall();
         	this.setUsernameReconnect.doCall();
+        	this.reconnectObjRef.reconnectSuccess();
         } else if (this.reconnectAfterRoomleft) {
             //Return to content after reconnect
             canvas.thishib.reconnectedRoomInstance.destroy();
+            this.overwritePublicSID.doCall();
             this.setUsernameReconnect.doCall();
             loadContentByTempActionForNavi();
         } else {
@@ -98,18 +100,36 @@
                 canvas.thishib.loaderVar.src.setText(src);
             }
         ]]>
-    </handler>        
-     
+    </handler>       
+      
     <netRemoteCallHib name="getsessiondata" funcname="xmlcrm.getsessiondata" >      
         <handler name="ondata" args="value">
             //The onResult-Handler will be called be the rtmpconnection
-            Debug.write("getsessiondata: ",value);
+            if ($debug) Debug.write("getsessiondata: ",value);
             canvas.sessionObject = value;
             canvas.sessionId = value.session_id;     
+            canvas.thishib.loaderVar.setProgress();
+            parent.getPublicSID.doCall();
+        </handler>  
+    </netRemoteCallHib>
+     
+    <netRemoteCallHib name="getPublicSID" funcname="getPublicSID" >      
+        <handler name="ondata" args="value">
+            //The onResult-Handler will be called be the rtmpconnection
+            if ($debug) Debug.write("getPublicSID: ",value);
+            canvas.publicSID = value;     
             canvas.thishib.loaderVar.setProgress();
             parent.getLanguages.doCall();
         </handler>  
     </netRemoteCallHib>
+     
+    <netRemoteCallHib name="overwritePublicSID" funcname="overwritePublicSID" >     
+    	<netparam><method name="getValue"> return canvas.publicSID;</method></netparam>
+        <handler name="ondata" args="value">
+            //The onResult-Handler will be called be the rtmpconnection
+            if ($debug) Debug.write("overwritePublicSID: ",value);
+        </handler>  
+    </netRemoteCallHib>    
     
     <netRemoteCallHib name="getLanguages" funcname="languageservice.getLanguages" 
     				  dataobject="languagesSet" >      
@@ -124,7 +144,7 @@
     <netRemoteCallHib name="logoutUser" funcname="xmlcrm.logoutUser"
         remotecontext="$once{ canvas.thishib }" activeErrorHandler="true" 
         isCallBackHandler="true">
-        <netparam><method name="getValue"> return canvas.sessionId; </method></netparam>
+        <netparam><method name="getValue"> return canvas.sessionId;</method></netparam>
         <handler name="sendCallBack">
             //The onResult-Handler will be called be the rtmpconnection
             Debug.write("sendCallBack logoutUser: ",value);    

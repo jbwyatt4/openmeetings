@@ -186,6 +186,8 @@ these properties will be overwritten by config.xml -->
 
 <attribute name="sessionObject" value="null" />
 <attribute name="sessionId" value="" type="string" />
+
+<attribute name="publicSID" value="" type="string" />
 	
 <!-- attributes for direct room access -->
 <attribute name="initroomid" value="0" type="number" />
