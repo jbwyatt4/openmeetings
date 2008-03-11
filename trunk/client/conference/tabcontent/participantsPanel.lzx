@@ -45,7 +45,7 @@
 
 	<method name="addItem" args="object">
 		//Debug.write(object);
-		new userTagView(this._table.innerlist,{user_id:object.user_id,firstname:object.firstname,lastname:object.lastname,refObj:object,connectedSince:object.connectedSince,isMod:object.isMod,streamid:object.streamid,username:object.username,userroom:object.userroom,formatedDate:object.formatedDate});
+		new userTagView(this._table.innerList,{user_id:object.user_id,firstname:object.firstname,lastname:object.lastname,refObj:object,connectedSince:object.connectedSince,isMod:object.isMod,streamid:object.streamid,username:object.username,userroom:object.userroom,formatedDate:object.formatedDate});
 	</method>
 	
 	<method name="clearList">
