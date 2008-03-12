@@ -25,6 +25,7 @@
             <handler name="ondata" args="value">	
                 <![CDATA[
                     if (value!=null){
+                    	//if ($debug) Debug.write("getRoomsByOrganisationAndType: ",value);
                         for(var eg=0;eg<value.length;eg++){
                             new roomListItem(parent.inn.inn.inn,{currentusers:value[eg].room.currentusers,obj:value[eg],ispublic:false,roomid:value[eg].room.rooms_id,starttime:parseDateToStringTime(value[eg].room.starttime),roomname:value[eg].room.name});
                         }

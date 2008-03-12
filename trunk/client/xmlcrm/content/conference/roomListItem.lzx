@@ -20,7 +20,12 @@
 
   <handler name="oninit">
     <![CDATA[
-    	this.maxUsers = obj.numberOfPartizipants;
+    	//if ($debug) Debug.write("obj: ",obj);
+    	if (this.ispublic){
+    		this.maxUsers = obj.numberOfPartizipants;
+    	} else {
+    		this.maxUsers = obj.room.numberOfPartizipants;
+    	}
       	this._users.setAttribute('text',canvas.getLabelName(398)+this.currentusers.length + " / " + this.maxUsers );
       	var tString = canvas.getLabelName(401) + "<br/>";
      	 for (var i = 0;i<this.currentusers.length;i++){
@@ -66,18 +71,20 @@
     canvas.isConference = !this.isaudience;
     if (this.isaudience) connectedIsAudience = '_'+'audi';
     hib.currentroomid = this.obj.rooms_id;
-        if (this.ispublic){
-            hib.connectedroom = this.obj.rooms_id+connectedIsAudience;
-            hib.conferencedomain="public";
-            //Debug.write("ispublic");
-        } else {
-            hib.connectedroom = this.obj.room.rooms_id+connectedIsAudience;
-            hib.conferencedomain = this.obj.organisation.organisation_id;
-            //Debug.write("non ispublic");
-        }
-        //Debug.write("hib.conferencedomain: ",hib.conferencedomain);
-        clearStageContent();
-        new global[this.roomClassName](canvas.main_content._content.inner,{roomobj:this.obj});
+    if (this.ispublic){
+    	var roomObj = this.obj;
+        hib.connectedroom = this.obj.rooms_id+connectedIsAudience;
+        hib.conferencedomain="public";
+        //Debug.write("ispublic");
+    } else {
+    	var roomObj = this.obj.room;
+        hib.connectedroom = this.obj.room.rooms_id+connectedIsAudience;
+        hib.conferencedomain = this.obj.organisation.organisation_id;
+        //Debug.write("non ispublic");
+    }
+    //Debug.write("hib.conferencedomain: ",hib.conferencedomain);
+    clearStageContent();
+    new global[this.roomClassName](canvas.main_content._content.inner,{roomobj:roomObj});
   </method>
 
   <netRemoteCallHib name="getRoomClientsListByRoomId" funcname="conferenceservice.getRoomClientsListByRoomId"
