@@ -1507,6 +1507,6 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>The Moderator has left the Room. No one is presenting at the Moment. You could apply for Moderation or wait.</value>
   </string>
   <string id="498" name="moderator_message_event_no_mod">
-    <value>There is no Moderator in this Room, but there are some Partizipants. You have to apply for Moderation or wait.</value>
+    <value>There is no Moderator in this Room, but there are some Participants. You have to apply for Moderation or wait.</value>
   </string>	
 </language>
