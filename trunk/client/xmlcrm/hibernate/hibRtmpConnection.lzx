@@ -201,21 +201,36 @@
 			]]>
         </handler>  
     </netRemoteCallHib>
-	
+         
     <netRemoteCallHib name="markSessionAsLogedIn" funcname="xmlcrm.markSessionAsLogedIn" >
 		<netparam><method name="getValue">return canvas.sessionId;</method></netparam>
         <handler name="ondata" args="value">
             //The onResult-Handler will be called be the rtmpconnection
-            Debug.write("markSessionAsLogedIn ",value);
+            Debug.write("markSessionAsLogedIn1 ",value);
+            Debug.write("markSessionAsLogedIn2 ",canvas.sessionId);
+            Debug.write("markSessionAsLogedIn3 ",canvas.initroomid);
+            parent.getRoomById.doCall();      
+        </handler>  
+    </netRemoteCallHib> 
+    
+    <netRemoteCallHib name="getRoomById" funcname="conferenceservice.getRoomById" >
+		<netparam><method name="getValue">return canvas.sessionId;</method></netparam>
+		<netparam><method name="getValue">return canvas.initroomid;</method></netparam>
+        <handler name="ondata" args="value">
+            //The onResult-Handler will be called be the rtmpconnection
+            Debug.write("getRoomById ",value);
+            canvas.isinitRoomObject = value;
             canvas.thishib.loaderVar.close();
 			if (canvas.mail == undefined) {
 			    new invitationUserWin(canvas.main_content._content.inner);
 			} else {		
 				//not used for the moment
                 new invitationQuickLoader(canvas.main_content._content.inner);
-			}                 
+			}             
         </handler>  
-    </netRemoteCallHib>    
+    </netRemoteCallHib>   
+    
+   
     
     <netRemoteCallHib name="getStates" funcname="xmlcrm.getStates" >
         <handler name="ondata" args="value">

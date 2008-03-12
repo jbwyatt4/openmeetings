@@ -196,6 +196,7 @@ these properties will be overwritten by config.xml -->
 <attribute name="initdomainid" value="" type="string" />
 <attribute name="initlangid" value="1" type="number" />
 <attribute name="isinitRoomDirect" value="false" type="boolean" />
+<attribute name="isinitRoomObject" value="null" /> 
 	
 <attribute name="isResetUsername" value="false" type="boolean" />
 <attribute name="resetHash" value="" type="string" />

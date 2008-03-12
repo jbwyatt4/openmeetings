@@ -3,6 +3,21 @@
 
 <class name="videoBoard" extends="guiPresenter" closable="false" title="Video and Audio"
     resizeable="false">
+	<simpleLabelButton y="${ parent.height-19 }" x="${ parent.width-this.width-1 }" 
+					   height="18" labelid="213" >
+		<handler name="onclick">
+			new inviteMainWindow(canvas.main_content._content.inner);
+		</handler>
+	</simpleLabelButton>
+	<!--
+	<view name="_sendInvitation" visible="true" x="1" y="1" >
+		<handler name="onclick">
+			new inviteMainWindow(canvas.main_content._content.inner);
+		</handler>
+		<labelText multiline="false" resize="true" labelid="213" 
+			fgcolor="white" fontstyle="bold" />
+	</view>	
+     -->
     <videoContainer name="_videocontainer" x="1" y="22" 
     				width="$once{ parent.width-2 }"
     				height="$once{ parent.height-22 }" />

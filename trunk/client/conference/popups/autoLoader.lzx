@@ -136,9 +136,9 @@
             clearStageContent();		
             parent.close();
 			if (canvas.initroomtype=="conference"){
-				new conferenceView(canvas.main_content._content.inner); 
+				new conferenceView(canvas.main_content._content.inner,{roomobj:canvas.isinitRoomObject}); 
 			} else {
-				new audienceView(canvas.main_content._content.inner); 
+				new audienceView(canvas.main_content._content.inner,{roomobj:canvas.isinitRoomObject}); 
 			}                 
         </handler>  
     </netRemoteCallHib>      
