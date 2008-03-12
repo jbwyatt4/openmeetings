@@ -132,7 +132,7 @@ public class Roommanagement {
 	 */
 	public Rooms getRoomById(long user_level, long rooms_id){
 		try {
-			if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)){
+			if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)){
 				return this.getRoomById(rooms_id);
 			}
 		} catch (Exception ex2) {
