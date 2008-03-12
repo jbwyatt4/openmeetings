@@ -192,7 +192,7 @@ public class ImportInitvalues {
     				false, 2, 284, 310, 270);    		
     		
     		long room2 = Roommanagement.getInstance().addRoom(3,"private Conference Room", 1,"", new Long(4), false, null,
-    				290, 280, 2, 2,
+    				270, 280, 2, 2,
     				400,
     				true, 276, 2, 592, 660,
     				true, 2, 284, 310, 270);

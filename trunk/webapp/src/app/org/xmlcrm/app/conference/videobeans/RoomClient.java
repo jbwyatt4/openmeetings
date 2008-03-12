@@ -77,8 +77,9 @@ public class RoomClient {
 	
 	/*
 	 * this is the id this user is currently using to broadcast a stream
+	 * default value is -2 cause otherwise this can due to disconnect
 	 */
-	long broadCastID = 0;
+	long broadCastID = -2;
 	
 	/*
 	 * some vars _not_ directly connected to the user-record from the database
