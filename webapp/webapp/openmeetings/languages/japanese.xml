@@ -1460,7 +1460,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>利用者</value>
   </string>	
   <string id="483" name="roomValue_advancedSettings">
-    <value>Show Layout Settings</value>
+    <value>レイアウト設定の表示</value>
   </string>
   <string id="484" name="roomAdmin_layout_videoX">
     <value>X | Y</value>
@@ -1469,19 +1469,19 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Width | Height</value>
   </string>
   <string id="486" name="roomAdmin_layout">
-    <value>Video-Container</value>
+    <value>ビデオコンテナ</value>
   </string>
   <string id="487" name="roomAdmin_layout_mod">
-    <value>Moderation-Container</value>
+    <value>モデレータコンテナ</value>
   </string>
   <string id="488" name="roomAdmin_layout_mod_pos">
     <value>X</value>
   </string>
   <string id="489" name="roomAdmin_layout_whiteboard">
-    <value>Whiteboard-Container</value>
+    <value>ホワイトボードコンテナ</value>
   </string>
   <string id="490" name="roomAdmin_layout_whiteboard_show">
-    <value>Enabled</value>
+    <value>有効</value>
   </string>
   <string id="491" name="roomAdmin_layout_whiteboard_pos">
     <value>X | Y</value>
@@ -1490,10 +1490,10 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Width | Height</value>
   </string>
   <string id="493" name="roomAdmin_layout_files">
-    <value>Files,Chat,Partizipants - Container</value>
+    <value>ファイル、チャット、参加者コンテナ</value>
   </string>
   <string id="494" name="roomAdmin_layout_files_show">
-    <value>Enabled</value>
+    <value>有効</value>
   </string>
   <string id="495" name="roomAdmin_layout_files_pos">
     <value>X |Y</value>
