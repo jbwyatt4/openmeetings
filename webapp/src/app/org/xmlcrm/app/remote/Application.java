@@ -64,7 +64,7 @@ public class Application extends ApplicationAdapter implements
 	public static String webAppPath = "";
 	public static String configDirName = "conf";
 	
-	private static long broadCastCounter = -1;
+	private static long broadCastCounter = 0;
 	
 	private static Application instance = null;
 	
