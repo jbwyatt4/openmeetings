@@ -53,6 +53,9 @@
 	
 	<attribute name="isremote" value="true" type="boolean" />
 	<attribute name="clientVars" value="null" />
+		
+	<!--- current broadcastId -->
+	<attribute name="broadcastId" value="0" type="string" />	
 	
 	<handler name="onisremote" args="r">
 		this.isremote = r;

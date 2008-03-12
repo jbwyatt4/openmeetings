@@ -62,15 +62,15 @@
       <handler name="ondata" args="value">
         //Debug.write("logicalRoomLeave: ",value);
         //this.parent.destroy();
-            canvas.thishib.reconnectAfterRoomleft = true;
-            canvas.thishib.reconnectedRoomInstance = this.parent;
-            canvas.thishib.disconnect();
-            canvas._mainbgcontentNavi.setAttribute('height',canvas.naviHeight);
-            canvas.setAttribute('naviHeightDelta',canvas.naviHeight);
-            canvas._conferencemenu.removeAll();
-            canvas._conferencemenu.setAttribute('visibility','hidden');
+        canvas.thishib.reconnectAfterRoomleft = true;
+        canvas.thishib.reconnectedRoomInstance = this.parent;
+        canvas.thishib.disconnect();
+        canvas._mainbgcontentNavi.setAttribute('height',canvas.naviHeight);
+        canvas.setAttribute('naviHeightDelta',canvas.naviHeight);
+        canvas._conferencemenu.removeAll();
+        canvas._conferencemenu.setAttribute('visibility','hidden');
       </handler>
-    </netRemoteCallHib>
+  </netRemoteCallHib>
 
 </class>
 
