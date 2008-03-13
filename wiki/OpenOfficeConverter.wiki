@@ -33,7 +33,7 @@ add the following after the node *<node oor:name="Office">                      
 {{{
                 <prop oor:name="ooSetupConnectionURL">                                                                                                                               
                         <value>                                                                                                                                                      
-                            socket,host=localhost,port=2002;urp;StarOffice.ServiceManager                                                                                            
+                            socket,host=localhost,port=8100;urp;StarOffice.ServiceManager                                                                                            
                         </value>                                                                                                                                                     
                 </prop>  
 }}}
