@@ -19,6 +19,7 @@ Tips for Installation:
   * [Logging]
   * [http://code.google.com/p/openmeetings/source/browse browse SVN source]
   * [http://code.google.com/p/openmeetings/source/list SVN change history]
+  * [DebugServer HowTo: Debugging the server-side code of openmeetings]
 
 == Modules ==
 
