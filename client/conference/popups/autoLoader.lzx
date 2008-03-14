@@ -17,10 +17,10 @@
 	
 	<method name="setProgress">
 		this.currentsteps += 1;
-		Debug.write("setProgress ",this.currentsteps);
+		if($debug) Debug.write("autoLoader/setProgress ===== ",this.currentsteps);
 		var w = Math.round(((this.maxwidth-2)/this.maxsteps)*this.currentsteps);
 		this.loadingbar.setAttribute('visibility','visible');
-		Debug.write("setResourceNumber ",w);
+		if($debug) Debug.write("autoLoader/setResourceNumber == ",w);
 		this.loadingbar.setAttribute('frame',w);
 	</method>
     
