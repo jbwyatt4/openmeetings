@@ -111,14 +111,28 @@ public class Fieldmanagment {
 			Object idf = HibernateUtil.createSession();
 			Session session = HibernateUtil.getSession();
 			Transaction tx = session.beginTransaction();
+			
+			String sql = "select f from Fieldlanguagesvalues f WHERE f.language_id = :language_id " +
+					"AND f.fieldvalues_id >= :start AND f.fieldvalues_id <  :max";
+//			log.debug("getAllFieldsByLanguage sql: "+sql);
+//			log.debug("getAllFieldsByLanguage language_id: "+language_id);
+//			log.debug("getAllFieldsByLanguage start: "+start);
+//			log.debug("getAllFieldsByLanguage max: "+max);
 
-			Query query = session.createQuery("select f from Fieldlanguagesvalues f WHERE f.language_id = :language_id ");
+			Query query = session.createQuery(sql);
 			query.setLong("language_id", language_id);
-			query.setMaxResults(max);
-			query.setFirstResult(start);
+			query.setLong("start", start);
+			query.setLong("max", start+max);
+			
 			List<Fieldlanguagesvalues> returnList = query.list();
 			tx.commit();
 			HibernateUtil.closeSession(idf);
+//			
+//			for (Iterator<Fieldlanguagesvalues> iter = returnList.iterator();iter.hasNext();){
+//				Fieldlanguagesvalues flang = iter.next();
+//				log.debug("IDs: "+flang.getFieldlanguagesvalues_id()+" "+flang.getFieldvalues_id());
+//				
+//			}
 
 			return returnList;
 		} catch (HibernateException ex) {
