@@ -8,16 +8,18 @@
   * /client: Client side OpenLaszlo LZX sources for swf.
   * /webapp: Server side Java sources for red5 webapp.
 
- STEP0: PREPARE
+ STEP-0: PREPARE
  
   * Must install RDBMS(PostgreSQL or MySQL or so). 
     also Must create database "openmeetings" encoding with "utf-8".
-  * Must install Red5-0.6.3.
-  * Must install OpenLaszlo-4.0.10.
+  * Must install JDK-1.5 or newer.
+  * Must install ANT-1.7 or newer.
+  * Must install Red5-0.6.3 or newer.
+  * Must install OpenLaszlo-4.0.10 or newer.
   * Install other required tools.
 
 
- STEP1: BUILD RED5 WEBAPP
+ STEP-1: BUILD RED5 WEBAPP
 
   1) Change directory to "./webapp" where "build.xml" located.
   2) Run "ant dist".
@@ -29,18 +31,20 @@
   6) Edit "config.xml" and change the value of <rtmphostlocal> 
      to your Red5 server hostname.
   7) Restart Red5.
-  8) Run "http://localhost:5080/openmeetings/install" on the browser.
+  8) Run installer on the browser.
+     ex) http://localhost:5080/openmeetings/install 
 
 
- STEP2: BUILD OPENLASZLO LZX
+ STEP-2: BUILD OPENLASZLO LZX
 
   1) Copy "./client" directory into Openlaszlo webroot
   2) Change directory to "client"
   3) Edit "config.xml" and change the value of <rtmphostlocal> 
      to your Red5 server hostname.
   4) Run the below url on the browser.
-     http://localhost:***/openmeetings/client/maindebug.lzx?lzr=swf8&lzproxied=solo
-     http://localhost:***/openmeetings/client/main.lzx?lzr=swf8&lzproxied=solo
+     ex)
+     http://localhost:8080/lps-4.0.10/client/maindebug.lzx?lzr=swf8&lzproxied=solo
+     http://localhost:8080/lps-4.0.10/client/main.lzx?lzr=swf8&lzproxied=solo
 
 
  SEE ALSO:
