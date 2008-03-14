@@ -71,7 +71,7 @@
         	canvas.currentNC = null;
             this._nc.close();
         </method>
-    <!-- 
+    <!--- 
         With this function all methods are registered to the NetConnection
         A server can invoke this Method with a call for it from the Client
         Only subnodes of rtmpconnections which are a instance of netRemoteCallHib
