@@ -43,6 +43,7 @@ Tips for Installation:
   * TechnologyPortfolio
   * TipsImprovePerformance
   * [wml]
+  * asdasd
   * TestingBusinessLogic
   * AdminScreenshots
   * QualityAssurance
