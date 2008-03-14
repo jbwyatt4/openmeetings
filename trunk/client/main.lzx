@@ -327,8 +327,8 @@ and some more references to temp-objects
  -->
 <view name="main_content" y="${ canvas.naviHeightDelta }" width="${canvas.width}" 
     height="${canvas.height-canvas.naviHeightDelta}" visibility="hidden">
-    <view x="0" name="_content" layout="axis:y;spacing:2">
-        <view name="inner" />
+    <view name="_content" x="0" width="${parent.width}" height="${parent.height}" layout="axis:y;spacing:2">
+        <view name="inner" width="${parent.width}" height="${parent.height}" />
         
         <method name="clearAll">
         	<![CDATA[
