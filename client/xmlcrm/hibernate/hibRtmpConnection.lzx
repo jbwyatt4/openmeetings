@@ -193,7 +193,7 @@
 		            	    parent.getStates.doCall();
 					    } else {
 					    	canvas.thishib.loaderVar.setProgress();
-					        Debug.write("canvas.isinitRoomDirect is true");
+					        if($debug) Debug.write("canvas.isinitRoomDirect is true");
 					        parent.markSessionAsLogedIn.doCall();
 					    }
 		            }
