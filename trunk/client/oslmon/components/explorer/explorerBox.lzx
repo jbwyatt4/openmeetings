@@ -6,9 +6,9 @@
 	onmousedown="this._startDragState(this)" onmouseup="this._removeDragState(this)" >
 
     <handler name="oninit">
-    	Debug.write("showWindowEffect? ",canvas.showWindowEffect);
+    	if($debug) Debug.write("explorerBox/oninit showWindowEffect? ",canvas.showWindowEffect);
     	if (canvas.showWindowEffect=="y"){
-    		Debug.write("showWindowEffect ? YES");
+    		if($debug) Debug.write("explorerBox/showWindowEffect == YES");
     		new boxInitEffect(parent,{x:this.x+(this.width/2)-50,y:this.y+(this.height/2)-10,zielx:this.x,ziely:this.y,zielwidth:this.width,zielheight:this.height,objRef:this});
     	} else {
     		this.sendAnniComplete();
@@ -318,9 +318,8 @@
 			        this.setColorTransform( { ra : red, ga : green, ba : blue,
 			                            		rb : 0, gb : 0, bb : 0 } );
 			                            		
-			        Debug.write(this);
-			        Debug.write( { ra : red, ga : green, ba : blue,
-			                            		rb : 0, gb : 0, bb : 0 } );
+			        if($debug) Debug.write("explorerBox/setTintRGB",this);
+			        if($debug) Debug.write("explorerBox/setTintRGB", { ra : red, ga : green, ba : blue, rb : 0, gb : 0, bb : 0 } );
 			    }
 			    ]]>
 			</method>            

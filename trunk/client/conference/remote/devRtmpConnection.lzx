@@ -27,7 +27,7 @@
                 this.t._onStatus(info);
             }
             
-    		Debug.write("registerMethods");
+    		if($debug) Debug.write("devRtmpConnection/registerMethods()");
 			//Register Methods
 			this.registerMethods();    	            
 		</method>

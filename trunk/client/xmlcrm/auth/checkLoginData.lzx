@@ -34,7 +34,7 @@
                 var t = new sharedObject();
                 t.getLocal('userdata');
                 var g = t.getData('userdata');
-                Debug.write("g: ",g);
+                if($debug) Debug.write("checkLoginData/g: ",g);
                 if(g!=null) if (g["username"]!=null) this.setText(g["username"]);
             </handler>             
         </customEdittext>    
@@ -58,7 +58,7 @@
                 var t = new sharedObject();
                 t.getLocal('userdata');
                 var g = t.getData('userdata');
-                Debug.write("g: ",g);
+                if($debug) Debug.write("checkLoginData/g: ",g);
                 if(g!=null) {
                 	if (g["userlang"]!=null) {
                 		this.selectItem(g["userlang"]);
@@ -85,7 +85,7 @@
                 var t = new sharedObject();
                 t.getLocal('userdata');
                 var g = t.getData('userdata');
-                Debug.write("g: ",g);
+                if($debug) Debug.write("checkLoginData/g: ",g);
                 if(g!=null) {
                 	if (g["userlang"]!=null) {
                 		this.selectItem(g["usercolor"]);
@@ -140,7 +140,7 @@
                 var t = new sharedObject();
                 t.getLocal('userdata');
                 var g = t.getData('userdata');
-                Debug.write("g: ",g);
+                if($debug) Debug.write("checkLoginData/g: ",g);
                 if(g!=null) {
                 	if (g["userlang"]!=null) {
                 		this.selectItem(g["userquality"]);
@@ -322,12 +322,12 @@
         name="_savelogindata" labelid="288" >
         <handler name="oninit">
             var t = new sharedObject();
-            Debug.write("t: ",t);
+            if($debug) Debug.write("checkLoginData/t: ",t);
             t.getLocal('userdata');
             var g = t.getData('userdata');
-            Debug.write("g: ",g);
+            if($debug) Debug.write("checkLoginData/g: ",g);
             var save = g["saveuserdata"];
-            Debug.write("save: ",save);
+            if($debug) Debug.write("checkLoginData/save: ",save);
             if(save) this.setValue(true);
         </handler>
     </labelCheckbox>        
