@@ -87,9 +87,9 @@ public class MainService implements IPendingServiceCallback {
 	public int testObject(Object myObject2){
 		try {
 			LinkedHashMap myObject = (LinkedHashMap) myObject2;
-			log.error("testObject "+myObject.size());
-			log.error("testObject "+myObject.get(1));
-			log.error("testObject "+myObject.get("stringObj"));
+			log.debug("testObject "+myObject.size());
+			log.debug("testObject "+myObject.get(1));
+			log.debug("testObject "+myObject.get("stringObj"));
 			return myObject.size();
 		} catch (Exception e){
 			log.error("ex: ", e);
@@ -336,7 +336,7 @@ public class MainService implements IPendingServiceCallback {
 
 	public void resultReceived(IPendingServiceCall arg0) {
 		// TODO Auto-generated method stub
-		log.error("[resultReceived]"+arg0);
+		log.debug("[resultReceived]"+arg0);
 	}
 
     

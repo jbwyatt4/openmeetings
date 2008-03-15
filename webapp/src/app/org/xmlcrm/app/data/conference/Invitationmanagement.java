@@ -4,6 +4,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.xmlcrm.app.templates.InvitationTemplate;
 import org.xmlcrm.app.data.basic.AuthLevelmanagement;
+import org.xmlcrm.app.data.basic.Configurationmanagement;
 import org.xmlcrm.utils.mail.MailHandler;
 
 /**
@@ -33,7 +34,10 @@ public class Invitationmanagement {
 				
 				String invitation_link = baseurl+"?lzr=swf8&lzt=swf&domain="+domain+"&room="+room+"&roomtype="+roomtype+"&email="+email+"&roomid="+room_id;
 				
-				String template = InvitationTemplate.getInstance().getRegisterInvitationTemplate(username, message, invitation_link);
+				Long default_lang_id = Long.valueOf(Configurationmanagement.getInstance().
+		        		getConfKey(3,"default_lang_id").getConf_value()).longValue();
+				
+				String template = InvitationTemplate.getInstance().getRegisterInvitationTemplate(username, message, invitation_link, default_lang_id);
 			
 				return MailHandler.sendMail(email, subject, template);
 

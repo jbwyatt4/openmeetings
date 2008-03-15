@@ -39,15 +39,15 @@ public class ErrorService {
         //long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
 
         if (errorid<0){
-        	log.error("errorid,language_id: "+errorid+"|"+language_id);
+//        	log.debug("errorid,language_id: "+errorid+"|"+language_id);
         	ErrorValues eValues = ErrorManagement.getInstance().getErrorValuesById(errorid*(-1));
 	        if (eValues!=null){
-	        	log.error(eValues.getFieldvalues());
-	        	log.error(eValues.getFieldvalues().getFieldvalues_id());
-	        	log.error(eValues.getErrorType());
-	        	log.error(eValues.getErrorType().getErrortype_id());
-	        	log.error(eValues.getErrorType().getFieldvalues());
-	        	log.error(eValues.getErrorType().getFieldvalues().getFieldvalues_id());
+//	        	log.debug(eValues.getFieldvalues());
+//	        	log.debug(eValues.getFieldvalues().getFieldvalues_id());
+//	        	log.debug(eValues.getErrorType());
+//	        	log.debug(eValues.getErrorType().getErrortype_id());
+//	        	log.debug(eValues.getErrorType().getFieldvalues());
+//	        	log.debug(eValues.getErrorType().getFieldvalues().getFieldvalues_id());
 	        	Fieldlanguagesvalues errorValue = Fieldmanagment.getInstance().getFieldByIdAndLanguage(eValues.getFieldvalues().getFieldvalues_id(),language_id);
 	        	Fieldlanguagesvalues typeValue = Fieldmanagment.getInstance().getFieldByIdAndLanguage(eValues.getErrorType().getFieldvalues().getFieldvalues_id(),language_id);
 	        	if (errorValue!=null) {

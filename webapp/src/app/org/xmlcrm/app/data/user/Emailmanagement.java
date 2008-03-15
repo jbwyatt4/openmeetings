@@ -12,11 +12,13 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import org.xmlcrm.app.data.basic.Configurationmanagement;
+import org.xmlcrm.app.data.basic.Fieldmanagment;
 import org.xmlcrm.app.hibernate.beans.adresses.Emails;
 import org.xmlcrm.app.hibernate.utils.HibernateUtil;
 import org.xmlcrm.utils.mail.MailHandler;
 import org.xmlcrm.app.hibernate.beans.adresses.Adresses_Emails;
 import org.xmlcrm.app.hibernate.beans.domain.Organisation;
+import org.xmlcrm.app.hibernate.beans.lang.Fieldlanguagesvalues;
 import org.xmlcrm.app.templates.RegisterUserTemplate;
 
 public class Emailmanagement {
@@ -217,10 +219,24 @@ public class Emailmanagement {
 	 */
 	public String sendMail(String Username, String Userpass, String EMail) {
 		String succ = "valid email";
-		String template = RegisterUserTemplate.getInstance().getRegisterUserTemplate(Username,Userpass,EMail);
-		succ = MailHandler.sendMail(EMail, Configurationmanagement.getInstance().getConfKey(3,"register_mail_subject").getConf_value(), template);
-
-		return succ;
+		
+		
+		Integer sendEmailAtRegister = Integer.valueOf(Configurationmanagement.getInstance().
+				getConfKey(3,"sendEmailAtRegister").getConf_value()).intValue();
+		
+		if (sendEmailAtRegister==1){
+			
+			Long default_lang_id = Long.valueOf(Configurationmanagement.getInstance().
+	        		getConfKey(3,"default_lang_id").getConf_value()).longValue();
+			
+			String template = RegisterUserTemplate.getInstance().getRegisterUserTemplate(Username,Userpass,EMail,default_lang_id);
+			Fieldlanguagesvalues label = Fieldmanagment.getInstance().getFieldByIdAndLanguage(new Long(512), default_lang_id);
+			
+			succ = MailHandler.sendMail(EMail, label.getValue(), template);
+			return succ;
+		} else {
+			return "success";
+		}
 	}
 
 	public String addEmailCon(String EMail, int CONTACT_ID) {

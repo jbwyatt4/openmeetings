@@ -1500,4 +1500,61 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   <string id="498" name="moderator_message_event_no_mod">
     <value>There is no Moderator in this Room, but there are some Participants. You have to apply for Moderation or wait.</value>
   </string>
+  <string id="499" name="feedback_template_subject">
+    <value>Feedback OpenMeetings</value>
+  </string>
+  <string id="500" name="invitation_template_head">
+    <value>OpenMeetings - Invitation</value>
+  </string>
+  <string id="501" name="invitation_text_from">
+    <value>Message from User:</value>
+  </string>
+  <string id="502" name="invitation_text_message">
+    <value>Message:</value>
+  </string>
+  <string id="503" name="invitation_text_click_text">
+    <value>Click this link to participate in the Meetings:</value>
+  </string>
+  <string id="504" name="invitation_text_click_text_link">
+    <value>Click here to enter room</value>
+  </string>
+  <string id="505" name="invitation_text_click_text_help">
+    <value>if you have problems with the link, please copy and paste this to your browser:</value>
+  </string>
+  <string id="506" name="registering_mail_text_head">
+    <value>OpenMeetings SignUp</value>
+  </string>
+  <string id="507" name="registering_mail_text_head2">
+    <value>Your userdata:</value>
+  </string>
+  <string id="508" name="registering_mail_text_username">
+    <value>Login:</value>
+  </string>
+  <string id="509" name="registering_mail_text_pass">
+    <value>Pass:</value>
+  </string>
+  <string id="510" name="registering_mail_text_mail">
+    <value>EMail:</value>
+  </string>
+  <string id="511" name="registering_mail_text_bye">
+    <value>OpenMeetings-Team</value>
+  </string>
+  <string id="512" name="register_mail_subject">
+    <value>OpenMeetings Sign-Up</value>
+  </string>
+  <string id="513" name="reset_password_template_head">
+    <value>OpenMeetings - Reset Password</value>
+  </string>
+  <string id="514" name="reset_password_template_test_link">
+    <value>Click on this link to enter a new password:</value>
+  </string>
+  <string id="515" name="reset_password_template_text2_link">
+    <value>Click here to enter a new Password</value>
+  </string>
+  <string id="516" name="reset_password_template_text3_link">
+    <value>if you have problems with the link, please copy and paste this to your browser:</value>
+  </string>
+  <string id="517" name="reset_password_mail_subject">
+    <value>OpenMeetings Password Reset</value>
+  </string>
 </language>

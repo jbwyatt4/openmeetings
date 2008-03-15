@@ -15,6 +15,7 @@ import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.criterion.Order;
 
+import org.xmlcrm.app.hibernate.beans.lang.Fieldlanguagesvalues;
 import org.xmlcrm.app.hibernate.beans.user.*;
 import org.xmlcrm.app.hibernate.beans.adresses.Adresses_Emails;
 import org.xmlcrm.app.hibernate.beans.adresses.Emails;
@@ -23,6 +24,7 @@ import org.xmlcrm.app.templates.ResetPasswordTemplate;
 import org.xmlcrm.app.conference.videobeans.RoomClient;
 import org.xmlcrm.app.data.basic.AuthLevelmanagement;
 import org.xmlcrm.app.data.basic.Configurationmanagement;
+import org.xmlcrm.app.data.basic.Fieldmanagment;
 import org.xmlcrm.app.data.beans.basic.SearchResult;
 import org.xmlcrm.app.data.user.Organisationmanagement;
 import org.xmlcrm.utils.mappings.CastMapToObject;
@@ -1065,15 +1067,21 @@ public class Usermanagement {
 	
 	private void sendHashByUser(Users us, String appLink) throws Exception {
 		String loginData = us.getLogin()+new Date();
-		log.error("User: "+us.getLogin());
+		log.debug("User: "+us.getLogin());
 		us.setResethash(ManageCryptStyle.getInstance().getInstanceOfCrypt().createPassPhrase(loginData));
 		this.updateUser(us);
 		String reset_link = appLink+"?hash="+us.getResethash();
 		
 		Adresses_Emails addrE = (Adresses_Emails) us.getAdresses().getEmails().iterator().next();
-		String template = ResetPasswordTemplate.getInstance().getResetPasswordTemplate(reset_link);
 		
-		MailHandler.sendMail(addrE.getMail().getEmail(), "RESET PASS", template);
+		Long default_lang_id = Long.valueOf(Configurationmanagement.getInstance().
+        		getConfKey(3,"default_lang_id").getConf_value()).longValue();
+		
+		String template = ResetPasswordTemplate.getInstance().getResetPasswordTemplate(reset_link, default_lang_id);
+		
+		Fieldlanguagesvalues labelid517 = Fieldmanagment.getInstance().getFieldByIdAndLanguage(new Long(517), default_lang_id);
+    	
+		MailHandler.sendMail(addrE.getMail().getEmail(), labelid517.getValue(), template);
 	}
 	
 	private Users getUserByName(String login) {
