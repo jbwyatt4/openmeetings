@@ -11,7 +11,7 @@
 Necessary steps which should have already been done:<br/>
 1.)Install and configure a database<br/>
 2.)Edit hibernate.cfg.xml to fit your database authentification values<br/>
-hibernate.cfg.xml can be found in $RED5_HOME/webapps/openmeetings/install/hibernate.cfg.xml<br/>
+hibernate.cfg.xml can be found in $RED5-HOME/webapps/openmeetings/install/hibernate.cfg.xml<br/>
 You need to alter:<br/>
                         <property name="connection.username">postgres</property>        <br/>                                                                                      
                         <property name="connection.password">*****</property>                <br/>                                                                                 

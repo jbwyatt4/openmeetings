@@ -10,7 +10,7 @@ import org.xmlcrm.app.data.basic.Configurationmanagement;
 
 public class ResetPasswordTemplate extends VelocityLoader{
 	
-	private static final String tamplateName = "resetPass_";
+	private static final String tamplateName = "resetPass.vm";
 
 	private static final Log log = LogFactory.getLog(FeedbackTemplate.class);
 
@@ -40,9 +40,9 @@ public class ResetPasswordTemplate extends VelocityLoader{
 	
 	        StringWriter w = new StringWriter();
 	        
-	        String template = tamplateName+Configurationmanagement.getInstance().getConfKey(3,"default_lang").getConf_value()+".vm";
+	        String default_lang_id = tamplateName+Configurationmanagement.getInstance().getConfKey(3,"default_lang_id").getConf_value();
 	        
-            Velocity.mergeTemplate(template, "UTF-8", context, w );
+            Velocity.mergeTemplate(tamplateName, "UTF-8", context, w );
             
             return w.toString();         
             

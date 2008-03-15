@@ -1,4 +1,4 @@
-<project name="openmeetings" basedir="./" default="build project">
+<project name="openmeetings" basedir="./" default="dist">
 
 	<!-- Sources and output dirs -->
 	<property name="main.src.dir" value="${basedir}/src/app"/>

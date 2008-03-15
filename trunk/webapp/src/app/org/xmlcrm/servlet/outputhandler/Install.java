@@ -1,13 +1,16 @@
 package org.xmlcrm.servlet.outputhandler;
 
+import java.util.LinkedHashMap;
 import java.io.File;
 import java.io.IOException;
+import java.io.StringWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.velocity.Template;
+import org.apache.velocity.VelocityContext;
 import org.apache.velocity.context.Context; 
 import org.apache.velocity.tools.view.servlet.VelocityViewServlet;
 
@@ -69,7 +72,15 @@ public class Install extends VelocityViewServlet {
 				} else {
 					int i = InstallationDocumentHandler.getInstance().getCurrentStepNumber(working_dir);
 					if (i == 0){
-						return getVelocityEngine().getTemplate("install_step1_"+lang+".vm");
+						String filePath = getServletContext().getRealPath("/")+ImportInitvalues.languageFolderName;
+						LinkedHashMap<Integer,String> allLanguages = ImportInitvalues.getInstance().getLanguageFiles(filePath);
+						
+						Template tpl = super.getTemplate ("install_step1_"+lang+".vm");
+						ctx.put("allLanguages", allLanguages);
+						StringWriter writer = new StringWriter(); 
+						tpl.merge(ctx, writer);
+						
+						return tpl;
 					} else {
 						return getVelocityEngine().getTemplate("install_step2_"+lang+".vm");
 					}
@@ -85,8 +96,16 @@ public class Install extends VelocityViewServlet {
 					//update to next step
 					//InstallationDocumentHandler.getInstance().createDocument(working_dir+InstallationDocumentHandler.installFileName,1);
 					
-					//return getVelocityEngine().getTemplate("install_complete_"+lang+".vm");
-					return getVelocityEngine().getTemplate("install_step1_"+lang+".vm");
+					String filePath = getServletContext().getRealPath("/")+ImportInitvalues.languageFolderName;
+					LinkedHashMap<Integer,String> allLanguages = ImportInitvalues.getInstance().getLanguageFiles(filePath);
+					
+					Template tpl = super.getTemplate ("install_step1_"+lang+".vm");
+					ctx.put("allLanguages", allLanguages);
+					StringWriter writer = new StringWriter(); 
+					tpl.merge(ctx, writer);
+					
+					return tpl;
+					
 				} else {
 					ctx.put("error", "This Step of the installation has already been done. continue with step 2 <A HREF='?command=step2'>continue with step 2</A>");
 					return getVelocityEngine().getTemplate("install_exception_"+lang+".vm");
@@ -112,6 +131,8 @@ public class Install extends VelocityViewServlet {
 					String configdefaultLang = httpServletRequest.getParameter("configdefaultLang");
 					String swf_path = httpServletRequest.getParameter("swftools_path");
 					String im_path = httpServletRequest.getParameter("imagemagick_path");
+					String sendEmailAtRegister = httpServletRequest.getParameter("sendEmailAtRegister");
+					String sendEmailWithVerficationCode = httpServletRequest.getParameter("sendEmailWithVerficationCode");
 					
 					String crypt_ClassName = httpServletRequest.getParameter("crypt_ClassName");
 					
@@ -129,7 +150,9 @@ public class Install extends VelocityViewServlet {
 					ImportInitvalues.getInstance().loadErrorMappingsFromXML(filePath);	
 					ImportInitvalues.getInstance().loadSalutations();
 					ImportInitvalues.getInstance().loadConfiguration(crypt_ClassName, configdefault, configsmtp, configsmtpport, 
-									configreferer, configmailuser, configmailpass, configdefaultLang, swf_path, im_path, url_feed, url_feed2);
+									configreferer, configmailuser, configmailpass, configdefaultLang, 
+									swf_path, im_path, url_feed, url_feed2,
+									sendEmailAtRegister, sendEmailWithVerficationCode);
 					ImportInitvalues.getInstance().loadInitUserAndOrganisation(username, userpass, useremail, orgname);
 					ImportInitvalues.getInstance().loadDefaultRooms();
 					
