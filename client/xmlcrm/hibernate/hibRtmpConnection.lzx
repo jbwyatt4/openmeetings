@@ -260,6 +260,7 @@
             canvas.salutationsInitValues = value;
 			//check for password reset
 			if (canvas.isResetUsername){
+				canvas.thishib.loaderVar.close();
 				new resetPassword(canvas.main_content._content.inner);
 			} else {
 				canvas.thishib.loaderVar.close();

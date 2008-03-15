@@ -6,9 +6,9 @@
 	onmousedown="this._startDragState(this)" onmouseup="this._removeDragState(this)" >
 
     <handler name="oninit">
-    	if($debug) Debug.write("explorerBox/oninit showWindowEffect? ",canvas.showWindowEffect);
+    	//if($debug) Debug.write("explorerBox/oninit showWindowEffect? ",canvas.showWindowEffect);
     	if (canvas.showWindowEffect=="y"){
-    		if($debug) Debug.write("explorerBox/showWindowEffect == YES");
+    		//if($debug) Debug.write("explorerBox/showWindowEffect == YES");
     		new boxInitEffect(parent,{x:this.x+(this.width/2)-50,y:this.y+(this.height/2)-10,zielx:this.x,ziely:this.y,zielwidth:this.width,zielheight:this.height,objRef:this});
     	} else {
     		this.sendAnniComplete();
@@ -16,8 +16,9 @@
     </handler>
     
     <method name="sendAnniComplete">
+    	//if($debug) Debug.write("sendAnniComplete");
     	this.setAttribute('visibility','visible');
-    	this.setShadow();
+    	this.setShadow(); 	
     </method>
 
     <method name="setShadow" args="bool">
