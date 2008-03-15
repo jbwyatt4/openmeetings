@@ -64,7 +64,7 @@ public class MailHandler {
 			String subject, String body) {
 		try {
 
-			System.out.println("Message sending in progress");
+			log.debug("Message sending in progress");
 
 			Properties props = System.getProperties();
 

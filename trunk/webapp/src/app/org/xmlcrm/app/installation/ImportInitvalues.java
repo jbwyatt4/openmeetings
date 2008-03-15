@@ -203,11 +203,7 @@ public class ImportInitvalues {
 				mailauthpass, null, "System auth email password");
 		//"EN"
 		Configurationmanagement.getInstance().addConfByKey(3, "default_lang_id",
-				default_lang_id, null, "Default System Language for tamplates");
-
-		Configurationmanagement.getInstance().addConfByKey(3,
-				"register_mail_subject", "SignUp", null,
-				"The Subject for Mails sended at registration");
+				default_lang_id, null, "Default System Language ID see language.xml");
 
 		Configurationmanagement.getInstance().addConfByKey(3, "swftools_path",
 				swf_path, null, "Path To SWF-Tools");

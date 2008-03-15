@@ -7,6 +7,8 @@ import org.apache.commons.logging.LogFactory;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.Velocity;
 import org.xmlcrm.app.data.basic.Configurationmanagement;
+import org.xmlcrm.app.data.basic.Fieldmanagment;
+import org.xmlcrm.app.hibernate.beans.lang.Fieldlanguagesvalues;
 
 public class FeedbackTemplate extends VelocityLoader{
 	
@@ -27,8 +29,12 @@ public class FeedbackTemplate extends VelocityLoader{
 		return instance;
 	}
 
-	public String getFeedBackTemplate(String username, String email, String message){
+	public String getFeedBackTemplate(String username, String email, String message, Integer default_lang_id){
         try {
+        	
+        	//TODO: Finish Feedback - Template
+        	//Fieldlanguagesvalues fValue = Fieldmanagment.getInstance().getFieldByIdAndLanguage(new Long(499), new Long(default_lang_id));
+        	
 	        /* lets make a Context and put data into it */
 	
 	        VelocityContext context = new VelocityContext();
@@ -40,9 +46,6 @@ public class FeedbackTemplate extends VelocityLoader{
 	        /* lets render a template */
 	
 	        StringWriter w = new StringWriter();
-	        
-	        String default_lang_id = Configurationmanagement.getInstance().getConfKey(3,"default_lang_id").getConf_value();
-	        
             Velocity.mergeTemplate(tamplateName, "UTF-8", context, w );
             
             return w.toString();         
