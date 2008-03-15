@@ -65,10 +65,10 @@
                 	if (g["userlang"]!=null) {
                 		this.selectItem(g["userlang"]);
                 	} else {
-                		this.selectItemAt(0);
+                		this.selectItem(String(canvas.thishib.userlang));
                 	}
                 } else {
-            		this.selectItemAt(0);
+            		this.selectItem(String(canvas.thishib.userlang));
             	}
             </handler>                 
         </combobox>
