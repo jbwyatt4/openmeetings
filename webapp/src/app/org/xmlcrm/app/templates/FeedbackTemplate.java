@@ -10,7 +10,7 @@ import org.xmlcrm.app.data.basic.Configurationmanagement;
 
 public class FeedbackTemplate extends VelocityLoader{
 	
-	private static final String tamplateName = "feedback_";
+	private static final String tamplateName = "feedback.vm";
 
 	private static final Log log = LogFactory.getLog(FeedbackTemplate.class);
 
@@ -41,9 +41,9 @@ public class FeedbackTemplate extends VelocityLoader{
 	
 	        StringWriter w = new StringWriter();
 	        
-	        String template = tamplateName+Configurationmanagement.getInstance().getConfKey(3,"default_lang").getConf_value()+".vm";
+	        String default_lang_id = Configurationmanagement.getInstance().getConfKey(3,"default_lang_id").getConf_value();
 	        
-            Velocity.mergeTemplate(template, "UTF-8", context, w );
+            Velocity.mergeTemplate(tamplateName, "UTF-8", context, w );
             
             return w.toString();         
             

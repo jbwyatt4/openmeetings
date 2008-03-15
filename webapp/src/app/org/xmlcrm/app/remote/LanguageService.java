@@ -6,6 +6,7 @@ import java.util.LinkedHashMap;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.xmlcrm.app.data.basic.AuthLevelmanagement;
+import org.xmlcrm.app.data.basic.Configurationmanagement;
 import org.xmlcrm.app.data.basic.Languagemanagement;
 import org.xmlcrm.app.data.basic.Sessionmanagement;
 import org.xmlcrm.app.data.user.Usermanagement;
@@ -39,6 +40,11 @@ public class LanguageService {
 	 */
 	public List<Fieldlanguagesvalues> getLanguageById(Long language_id){
 		return Fieldmanagment.getInstance().getAllFieldsByLanguage(language_id);
+	}
+	
+	public Integer getDefaultLanguage() {
+		return Integer.valueOf(Configurationmanagement.getInstance().
+				getConfKey(3,"default_lang_id").getConf_value()).intValue();
 	}
 	
 	

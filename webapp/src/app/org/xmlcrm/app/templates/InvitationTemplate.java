@@ -10,7 +10,7 @@ import org.xmlcrm.app.data.basic.Configurationmanagement;
 
 public class InvitationTemplate extends VelocityLoader{
 	
-	private static final String tamplateName = "invitation_";
+	private static final String tamplateName = "invitation.vm";
 
 	private static final Log log = LogFactory.getLog(InvitationTemplate.class);
 
@@ -42,9 +42,9 @@ public class InvitationTemplate extends VelocityLoader{
 	
 	        StringWriter w = new StringWriter();
 	        
-	        String template = tamplateName+Configurationmanagement.getInstance().getConfKey(3,"default_lang").getConf_value()+".vm";
+	        String default_lang_id = Configurationmanagement.getInstance().getConfKey(3,"default_lang_id").getConf_value();
 	        
-            Velocity.mergeTemplate(template, "UTF-8", context, w );
+            Velocity.mergeTemplate(tamplateName, "UTF-8", context, w );
             
             return w.toString();         
             

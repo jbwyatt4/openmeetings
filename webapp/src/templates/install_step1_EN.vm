@@ -39,30 +39,44 @@
     
 		<legend>Configuration</legend>    
     
-        <label for="configdefault">Allow self-registering</label>
+        <label for="configdefault">Allow self-registering (allow_frontend_register)</label>
     	<select name="configdefault" id="configdefault" size="1">
 	      	<option value="1" selected>Yes</option>
 	        <option value="0">No</option>
 	    </select><br />
 	    
-	    <label for="configreferer">Mail-Referer</label>
+        <label for="sendEmailAtRegister">Send Email to new registered Users (sendEmailAtRegister)</label>
+    	<select name="sendEmailAtRegister" id="sendEmailAtRegister" size="1">
+	      	<option value="1" selected>Yes</option>
+	        <option value="0">No</option>
+	    </select><br />	 
+
+        <label for="sendEmailWithVerficationCode">New Users need to verify their EMail (sendEmailWithVerficationCode)</label>
+    	<select name="sendEmailWithVerficationCode" id="sendEmailWithVerficationCode" size="1">
+	      	<option value="1">Yes</option>
+	        <option value="0" selected>No</option>
+	    </select><br />	 	       
+	    
+	    <label for="configreferer">Mail-Referer (system_email_addr)</label>
     	<input name="configreferer" id="configreferer" size="27" title="Enter a Referer" type="text" /><br />
     	
-        <label for="configsmtp">SMTP-Server</label>
+        <label for="configsmtp">SMTP-Server (smtp_server)</label>
     	<input name="configsmtp" id="configsmtp" size="27" title="Enter a SMTP-Server" type="text" /><br/>
     	
-    	<label for="configsmtp">SMTP-Server Port(default Smtp-Server Port is 25)</label>
+    	<label for="configsmtp">SMTP-Server Port(default Smtp-Server Port is 25) (smtp_port)</label>
     	<input name="configsmtpport" id="configsmtpport" size="27" title="Enter a SMTP-Server.Port normally 25" type="text" /><br/>
     	
-    	<label for="configmailuser">SMTP-Username</label>
+    	<label for="configmailuser">SMTP-Username (email_userpass)</label>
     	<input name="configmailuser" id="configmailuser" size="27" title="Enter the mail-username" type="text" /><br />
     	
-    	<label for="configmailpass">SMTP-Userpass</label>
+    	<label for="configmailpass">SMTP-Userpass (email_userpass)</label>
     	<input name="configmailpass" id="configmailpass" size="27" title="Enter the mail-userpass" type="text" /><br/>
     	 
     	<label for="configdefaultLang">Default Language</label>
     	<select name="configdefaultLang" id="configdefaultLang" size="1">
-	      	<option value="EN" selected>english</option>
+			#foreach( $key in $allLanguages.keySet() )
+			    <option value="$key">$allLanguages.get($key)</option>
+			#end	
 	    </select><br/>
 	    	       	
     </fieldset>  

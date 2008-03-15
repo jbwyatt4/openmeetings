@@ -10,7 +10,7 @@ import org.xmlcrm.app.data.basic.Configurationmanagement;
 
 public class ScreenCastTemplate extends VelocityLoader{
 	
-	private static final String tamplateName = "screencast_template";
+	private static final String tamplateName = "screencast_template.vm";
 
 	private static final Log log = LogFactory.getLog(ScreenCastTemplate.class);
 
@@ -54,9 +54,7 @@ public class ScreenCastTemplate extends VelocityLoader{
 	
 	        StringWriter w = new StringWriter();
 	        
-	        String template = tamplateName+".vm";
-	        
-            Velocity.mergeTemplate(template, "UTF-8", context, w );
+            Velocity.mergeTemplate(tamplateName, "UTF-8", context, w );
             
             return w.toString();         
             
