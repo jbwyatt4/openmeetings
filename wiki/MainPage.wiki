@@ -43,6 +43,7 @@ Tips for Installation:
   * TechnologyPortfolio
   * TipsImprovePerformance
   * [wml]
+  * DebugServer - Debugging the server-side code of OpenMeetings.
   * TestingBusinessLogic
   * AdminScreenshots
   * QualityAssurance
