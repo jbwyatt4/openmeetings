@@ -327,10 +327,10 @@ and some more references to temp-objects
         <view name="inner" width="${parent.width}" height="${parent.height}" />
         <method name="clearAll">
         	<![CDATA[
-	            Debug.write("clearAll this.inner: ",this.inner,this.inner.subviews.length);
-	            var baseContent = this.inner.subviews[0].close();
+	            if($debug) Debug.write("main.lzx/clearAll() this.inner: ",this.inner,this.inner.subviews.length);
+	            if (this.inner.subviews.length!=0) var baseContent = this.inner.subviews[0].close();
 	            for (var eg in this.inner.subviews) {
-	                Debug.write("clearAll this.inner.subviews: ",this.inner.subviews[eg]);
+	                if($debug) Debug.write("clearAll this.inner.subviews: ",this.inner.subviews[eg]);
 	                if (eg!=0) this.inner.subviews[eg].close();               
 	            }
 	            return baseContent;
