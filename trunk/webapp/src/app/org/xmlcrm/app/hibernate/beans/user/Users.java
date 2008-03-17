@@ -78,6 +78,8 @@ public class Users {
 		return age;
 	}
 	public void setAge(Date age) {
+		if(age==null)
+			age=new Date();
 		this.age = age;
 	}
     
