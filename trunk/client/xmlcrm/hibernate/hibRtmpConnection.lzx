@@ -33,6 +33,10 @@
      <!-- This domain is the orgdomain used in the video-conference -->
      <attribute name="conferencedomain" value="public" type="string" />
      
+     <!-- if this connection is used for testing the app
+     see test-setup.lzx -->
+     <attribute name="testAppLoading" value="false" type="boolean" />
+     
      <!-- 
      	the real ROOM_ID
      -->
@@ -262,9 +266,14 @@
 			if (canvas.isResetUsername){
 				canvas.thishib.loaderVar.close();
 				new resetPassword(canvas.main_content._content.inner);
-			} else {
+			} else { 
 				canvas.thishib.loaderVar.close();
-				new checkLoginData(canvas.main_content._content.inner);
+				//do not show loggin-PopUp for the test-Application
+				if (parent.testAppLoading){ 
+					canvas.loadNextStepTestApp();
+				} else {
+					new checkLoginData(canvas.main_content._content.inner);
+				}
 			}
         </handler>  
     </netRemoteCallHib>   

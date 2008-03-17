@@ -111,7 +111,7 @@
 	        this.myvideocontainer.parent.parent.setIdentifier(canvas.streamid);
 			
 			//camera.setMode(width, height, fps[, favorsize])
-			this.myvideocontainer.cameraRef.setMode(this.myvideocontainer.width,this.myvideocontainer.height,30);
+			this.myvideocontainer.cameraRef.setMode(this.myvideocontainer.width,this.myvideocontainer.height,12);
 			//camera.setQuality(bandwidth, picturequality)
 			Debug.write("this.myvideocontainer.cameraRef.bandwidth: ",this.myvideocontainer.cameraRef.bandwidth);
 			this.myvideocontainer.cameraRef.setQuality(this.myvideocontainer.cameraRef.bandwidth,0.9);
