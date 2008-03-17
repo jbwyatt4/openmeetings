@@ -127,7 +127,7 @@ you can add it. To do so, click Project -> Properties -> Builders ->
 New -> Ant builder. Give it the name you want and fill the required
 fields as specified on the screen capture below.
 
-http://code.google.com/p/openmeetings/wiki/AntBuilder.png
+http://openmeetings.googlecode.com/svn/wiki/AntBuilder.png
 
 After validating, Eclipse should build your project.
 
@@ -138,7 +138,7 @@ Choose a name for your debugging connection and then specify the Red5
 server IP in the "Host" field as well as the port you specified as a
 parameter to the JVM (I used 1044 above). Your set up is now complete.
 
-http://code.google.com/p/openmeetings/wiki/Debug.png
+http://openmeetings.googlecode.com/svn/wiki/Debug.png
 
 When you click "Debug", the configuration will be saved and Eclipse
 will open the debugging connection.
