@@ -1,5 +1,7 @@
 = New Structure (beta)=
 
+Regarding [http://code.google.com/p/openmeetings/issues/detail?id=353 Issue 353]
+
 
 {{{
 TOP
