@@ -16,14 +16,14 @@ To this port the default server lookup is done
 
 You can find all this configuraiton in your red5-Config in: $RED5_HOME/conf/red5.properties
  -->
-<rmptport>1935</rmptport>
+<rtmpport>1935</rtmpport>
 
 <!-- 
 Port to use for the Server
 To this port the fallback is done once the default rtmport failed
 this should workaround 99% of all firewalls
  -->
-<rmptTunnelport>8088</rmptTunnelport>
+<rtmpTunnelport>8088</rtmpTunnelport>
 
 <!-- 
 Port to use for the Server

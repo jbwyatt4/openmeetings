@@ -184,7 +184,7 @@ function getLineHeight(){
 
 <!-- Data Source Definition -->
 <dataset name="getSessionVarsData" request="false" proxied="false"
-	querytype="POST" src="${ 'http://'+canvas.rmpthost+'/webrooms/checksession.php' }" 
+	querytype="POST" src="${ 'http://'+canvas.rtmphost+'/webrooms/checksession.php' }" 
 	type="http" >
 	<handler name="ondata" args="value">
 	
@@ -230,7 +230,7 @@ function getLineHeight(){
 		if (!canvas.isConference){
 			addIt='meet'
 		}
-		canvas.setAttribute('currentcourse',canvas.rmpthost+canvas.currentcourse+addIt);
+		canvas.setAttribute('currentcourse',canvas.rtmphost+canvas.currentcourse+addIt);
 		canvas.setAttribute('currentuser',value.childNodes[0].childNodes[1].childNodes[5].childNodes[0].data);
 		
 		canvas.setAttribute('loadingmessage','loading language data');
