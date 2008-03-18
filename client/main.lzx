@@ -19,14 +19,14 @@ these properties will be overwritten by config.xml -->
 	
 	You can find all this configuraiton in your red5-Config in: $RED5_HOME/conf/red5.properties
  -->
-<attribute name="rmptport" value="1935" type="string" />
+<attribute name="rtmpport" value="1935" type="string" />
 
 <!-- 
 	Port to use for the Server
 	To this port the fallback is done once the default rtmport failed
 	this should workaround 99% of all firewalls
  -->
-<attribute name="rmptTunnelport" value="8088" type="string" />
+<attribute name="rtmpTunnelport" value="8088" type="string" />
 
 <!-- 
 	Port to use for the Server
@@ -95,7 +95,7 @@ these properties will be overwritten by config.xml -->
 <resource name="mainbackroundmenu_rsc" src="resources/mainbackroundmenu.png" />
         
 <!-- URL/IP to use for the Server -->
-<attribute name="rmpthost" value="" type="string" />
+<attribute name="rtmphost" value="" type="string" />
 
 <!-- Username/Nickname -->
 <attribute name="currentuser" value="" type="string" />
@@ -240,8 +240,8 @@ and some more references to temp-objects
 	if($debug) Debug.write("main.lzx/config.xml ondata",this);
 	//Set Config-values by config.xml, see comments on config.xml
 	this.setAttribute('rtmphostlocal',canvas.myConfigSet.getPointer().xpathQuery('config/rtmphostlocal/text()'));   
-	this.setAttribute('rmptport',Number(canvas.myConfigSet.getPointer().xpathQuery('config/rmptport/text()')));  
-	this.setAttribute('rmptTunnelport',Number(canvas.myConfigSet.getPointer().xpathQuery('config/rmptTunnelport/text()')));  
+	this.setAttribute('rtmpport',Number(canvas.myConfigSet.getPointer().xpathQuery('config/rtmpport/text()')));  
+	this.setAttribute('rtmpTunnelport',Number(canvas.myConfigSet.getPointer().xpathQuery('config/rtmpTunnelport/text()')));  
 	this.setAttribute('red5httpport',Number(canvas.myConfigSet.getPointer().xpathQuery('config/red5httpport/text()')));  
 	this.setAttribute('basebgcolorizer',canvas.myConfigSet.getPointer().xpathQuery('config/basebgcolorizer/text()'));  
 	this.setAttribute('baseMousecolorizer',canvas.myConfigSet.getPointer().xpathQuery('config/baseMousecolorizer/text()'));  
@@ -273,7 +273,7 @@ and some more references to temp-objects
 	
 	//Debug.write("this zielnr: ",this,server);
 	
-	this.setAttribute('rmpthost',server);
+	this.setAttribute('rtmphost',server);
 	if (this.rtmphostlocal.length==0){
 	    this.setAttribute('rtmphostlocal',server);
 	}
@@ -306,9 +306,9 @@ and some more references to temp-objects
 		canvas.resetHash = hash;		
 	}
 
-	//Debug.write("rtmphostlocal,rmpthost: ",canvas.rtmphostlocal,canvas.rmpthost);	
+	//Debug.write("rtmphostlocal,rtmphost: ",canvas.rtmphostlocal,canvas.rtmphost);	
 	
-	var src = 'rtmp://'+canvas.rtmphostlocal+':'+canvas.rmptport+'/'+canvas.webAppRootKey+'/hibernate';
+	var src = 'rtmp://'+canvas.rtmphostlocal+':'+canvas.rtmpport+'/'+canvas.webAppRootKey+'/hibernate';
 	canvas.thishib.setAttribute('src',src);
 	canvas.thishib.loaderVar = new autoLoader(canvas);
 	canvas.thishib.loaderVar.src.setText(src);
