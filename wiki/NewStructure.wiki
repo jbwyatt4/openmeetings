@@ -1,0 +1,44 @@
+= New Structure (beta)=
+
+
+{{{
+TOP
+|-- main.lzx         <== main lzx
+|-- maindebug.lzx    <== main lzx with debug-true
+|-- index.jsp        <== jsp file
+|-- config.xml       <== configuration file
+|-- test_*.*         <== test files
+|-- *.swf            <== swf files
+|-- swfobject.js     <== js library
+|
+|-- /doc        <== lzxdoc directory
+|
+|-- /test       <== test files directory
+|
+|-- /resources  <== resource files directory
+|    |-- *.jpg
+|    |-- *.gif
+|    |-- *.png
+|    |-- *.swf
+| 
+|-- /base                <== Minimum requirement/base-classes for all
+|    |-- datasets.lzx    <== global <dataset>
+|    |-- attributes.lzx  <== global <attribute>
+|    |-- scripts.lzx     <== global <script> and <method>
+|    |-- /auth
+|    |-- /net
+|    |-- /button
+|    |-- etc,etc,etc,....
+| 
+|-- /modules
+     |-- /admin
+     |-- /backup
+     |-- /chat
+     |-- /navi
+     |-- /recording
+     |-- /upload
+     |-- etc,etc,etc,....
+}}}   
+||main.lzx ||All <attribute>,<script>,<method>,<dataset> is in another lzx. main.lzx only include them. main.lzx has basic <view> and <handler>. ||
+||/base||Minimum requirement for Openmeetings. All base-class files. ||
+||/modules||Pluggable modules. A new module must be in the modules directory. Every module directory structure does not have any restriction. ||
