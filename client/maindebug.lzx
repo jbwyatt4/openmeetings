@@ -188,7 +188,7 @@ these properties will be overwritten by config.xml -->
 <attribute name="sessionId" value="" type="string" />
 
 <attribute name="publicSID" value="" type="string" />
-	
+
 <!-- attributes for direct room access -->
 <attribute name="initroomid" value="0" type="number" />
 <attribute name="initroomStr" value="" type="string" />
@@ -197,7 +197,7 @@ these properties will be overwritten by config.xml -->
 <attribute name="initlangid" value="1" type="number" />
 <attribute name="isinitRoomDirect" value="false" type="boolean" />
 <attribute name="isinitRoomObject" value="null" /> 
-	
+
 <attribute name="isResetUsername" value="false" type="boolean" />
 <attribute name="resetHash" value="" type="string" />
     
@@ -230,7 +230,7 @@ and some more references to temp-objects
     //var item1 = cmenu.makeMenuItem('MedCast', new LzDelegate(this,"openMeetingsMenuItemHandler"));
     //cmenu.addItem(item1);
 
-    Debug.write("oninit: ",this);
+	if($debug) Debug.write("main.lzx/oninit:",this);
 </handler>
     
 <method name="openMeetingsMenuItemHandler">
@@ -242,83 +242,83 @@ and some more references to temp-objects
 			
 <method name="myinit">
 	<![CDATA[
+	if($debug) Debug.write("main.lzx/config.xml ondata",this);
 	//Set Config-values by config.xml, see comments on config.xml
-	    this.setAttribute('rtmphostlocal',canvas.myConfigSet.getPointer().xpathQuery('config/rtmphostlocal/text()'));   
-	    this.setAttribute('rtmpport',Number(canvas.myConfigSet.getPointer().xpathQuery('config/rtmpport/text()')));  
-	    this.setAttribute('rtmpTunnelport',Number(canvas.myConfigSet.getPointer().xpathQuery('config/rtmpTunnelport/text()')));  
-	    this.setAttribute('red5httpport',Number(canvas.myConfigSet.getPointer().xpathQuery('config/red5httpport/text()')));  
-	    this.setAttribute('basebgcolorizer',canvas.myConfigSet.getPointer().xpathQuery('config/basebgcolorizer/text()'));  
-	    this.setAttribute('baseMousecolorizer',canvas.myConfigSet.getPointer().xpathQuery('config/baseMousecolorizer/text()'));  
-	    this.setAttribute('baseMouseOvercolorizer',canvas.myConfigSet.getPointer().xpathQuery('config/baseMouseOvercolorizer/text()'));  
-	    this.setAttribute('currentappversion',canvas.myConfigSet.getPointer().xpathQuery('config/currentappversion/text()'));  
-	    this.setAttribute('currentappname',canvas.myConfigSet.getPointer().xpathQuery('config/currentappname/text()'));  
-	    this.setAttribute('currentappnameurl',canvas.myConfigSet.getPointer().xpathQuery('config/currentappnameurl/text()'));  
-	    this.setAttribute('currentappnamebugurl',canvas.myConfigSet.getPointer().xpathQuery('config/currentappnamebugurl/text()'));
-	    this.setAttribute('loudnessAcitviation',canvas.myConfigSet.getPointer().xpathQuery('config/loudnessAcitviation/text()'));
-		this.setAttribute('webAppRootKey',canvas.myConfigSet.getPointer().xpathQuery('config/webAppRootKey/text()'));
-		this.setAttribute('showWindowEffect',canvas.myConfigSet.getPointer().xpathQuery('config/showWindowEffect/text()'));
-		this.setAttribute('firstdayinweek',canvas.myConfigSet.getPointer().xpathQuery('config/firstdayinweek/text()'));
+	this.setAttribute('rtmphostlocal',canvas.myConfigSet.getPointer().xpathQuery('config/rtmphostlocal/text()'));   
+	this.setAttribute('rtmpport',Number(canvas.myConfigSet.getPointer().xpathQuery('config/rtmpport/text()')));  
+	this.setAttribute('rtmpTunnelport',Number(canvas.myConfigSet.getPointer().xpathQuery('config/rtmpTunnelport/text()')));  
+	this.setAttribute('red5httpport',Number(canvas.myConfigSet.getPointer().xpathQuery('config/red5httpport/text()')));  
+	this.setAttribute('basebgcolorizer',canvas.myConfigSet.getPointer().xpathQuery('config/basebgcolorizer/text()'));  
+	this.setAttribute('baseMousecolorizer',canvas.myConfigSet.getPointer().xpathQuery('config/baseMousecolorizer/text()'));  
+	this.setAttribute('baseMouseOvercolorizer',canvas.myConfigSet.getPointer().xpathQuery('config/baseMouseOvercolorizer/text()'));  
+	this.setAttribute('currentappversion',canvas.myConfigSet.getPointer().xpathQuery('config/currentappversion/text()'));  
+	this.setAttribute('currentappname',canvas.myConfigSet.getPointer().xpathQuery('config/currentappname/text()'));  
+	this.setAttribute('currentappnameurl',canvas.myConfigSet.getPointer().xpathQuery('config/currentappnameurl/text()'));  
+	this.setAttribute('currentappnamebugurl',canvas.myConfigSet.getPointer().xpathQuery('config/currentappnamebugurl/text()'));
+	this.setAttribute('loudnessAcitviation',canvas.myConfigSet.getPointer().xpathQuery('config/loudnessAcitviation/text()'));
+	this.setAttribute('webAppRootKey',canvas.myConfigSet.getPointer().xpathQuery('config/webAppRootKey/text()'));
+	this.setAttribute('showWindowEffect',canvas.myConfigSet.getPointer().xpathQuery('config/showWindowEffect/text()'));
+	this.setAttribute('firstdayinweek',canvas.myConfigSet.getPointer().xpathQuery('config/firstdayinweek/text()'));
 
-		mainBaseText.setText(canvas.currentappname);
-	    mainBaseText.setShadow();
-	    mainBaseTextLabel.setAttribute('text',canvas.currentappnameurl);  
-	        
-		this.chathistory=new Array();
-		
-		var doubleSlash = _url.indexOf("//");
-	    var isNotPort80 = _url.indexOf(":", doubleSlash+2);
-	    //Debug.write("isNotPort80: ",isNotPort80);
-	    if (isNotPort80!=-1){
-	        //Debug.write("isNotPort80: ",doubleSlash+2, _url.indexOf(":", doubleSlash+2)-doubleSlash-2);
-	        var server = _url.substr(doubleSlash+2, _url.indexOf(":", doubleSlash+2)-doubleSlash-2); 
-	    } else {
-	        var server = _url.substr(doubleSlash+2, _url.indexOf("/", doubleSlash+2)-doubleSlash-2); 
-	    }
-		
-		//Debug.write("this zielnr: ",this,server);
-		
-		this.setAttribute('rtmphost',server);
-	        
-	    if (this.rtmphostlocal.length==0){
-	        this.setAttribute('rtmphostlocal',server);
-	    }
-		
-		//Check for Invitation
-		var domain = LzBrowser.getInitArg('domain');
-		var room = LzBrowser.getInitArg('room');
-		var roomid = LzBrowser.getInitArg('roomid');
-		var roomtype = LzBrowser.getInitArg('roomtype');
-		var emailGuest = LzBrowser.getInitArg('email');
-			
-		//Debug.write("domain: ",domain);
+	mainBaseText.setText(canvas.currentappname);
+	mainBaseText.setShadow();
+	mainBaseTextLabel.setAttribute('text',canvas.currentappnameurl);  
+
+	this.chathistory=new Array();
 	
-		if (domain!=undefined && room!=undefined && roomtype!=undefined 
-				&& roomid!=undefined && emailGuest != undefined){
-			canvas.initroomid = Number(roomid);
-			canvas.initroomStr = room;
-			canvas.initroomtype = roomtype;
-			canvas.initdomainid = domain;
-			canvas.isinitRoomDirect = true;
-			canvas.firstName = emailGuest;
-			canvas.mail = emailGuest;
+	var doubleSlash = _url.indexOf("//");
+	var isNotPort80 = _url.indexOf(":", doubleSlash+2);
+	//Debug.write("isNotPort80: ",isNotPort80);
+	if (isNotPort80!=-1){
+	    //Debug.write("isNotPort80: ",doubleSlash+2, _url.indexOf(":", doubleSlash+2)-doubleSlash-2);
+	    var server = _url.substr(doubleSlash+2, _url.indexOf(":", doubleSlash+2)-doubleSlash-2); 
+	} else {
+	    var server = _url.substr(doubleSlash+2, _url.indexOf("/", doubleSlash+2)-doubleSlash-2); 
+	}
 	
-		}
-			
-		//check for reset password
-		var hash = LzBrowser.getInitArg('hash');
-			
-		if (hash!=undefined){
-			canvas.isResetUsername = true;
-			canvas.resetHash = hash;		
-		}
-		
-		//Debug.write("rtmphostlocal,rtmphost: ",canvas.rtmphostlocal,canvas.rtmphost);	
+	//Debug.write("this zielnr: ",this,server);
 	
-	    var src = 'rtmp://'+canvas.rtmphostlocal+':'+canvas.rtmpport+'/'+canvas.webAppRootKey+'/hibernate';
-	    canvas.thishib.setAttribute('src',src);
-	    canvas.thishib.loaderVar = new autoLoader(canvas);
-	    canvas.thishib.loaderVar.src.setText(src);
-	    canvas.thishib.connect();
+	this.setAttribute('rtmphost',server);
+
+	if (this.rtmphostlocal.length==0){
+	    this.setAttribute('rtmphostlocal',server);
+	}
+	
+	//Check for Invitation
+	var domain = LzBrowser.getInitArg('domain');
+	var room = LzBrowser.getInitArg('room');
+	var roomid = LzBrowser.getInitArg('roomid');
+	var roomtype = LzBrowser.getInitArg('roomtype');
+	var emailGuest = LzBrowser.getInitArg('email');
+
+	//Debug.write("domain: ",domain);
+
+	if (domain!=undefined && room!=undefined && roomtype!=undefined 
+			&& roomid!=undefined && emailGuest != undefined){
+		canvas.initroomid = Number(roomid);
+		canvas.initroomStr = room;
+		canvas.initroomtype = roomtype;
+		canvas.initdomainid = domain;
+		canvas.isinitRoomDirect = true;
+		canvas.firstName = emailGuest;
+		canvas.mail = emailGuest;
+	}
+
+	//check for reset password
+	var hash = LzBrowser.getInitArg('hash');
+
+	if (hash!=undefined){
+		canvas.isResetUsername = true;
+		canvas.resetHash = hash;		
+	}
+
+	//Debug.write("rtmphostlocal,rtmphost: ",canvas.rtmphostlocal,canvas.rtmphost);	
+	
+	var src = 'rtmp://'+canvas.rtmphostlocal+':'+canvas.rtmpport+'/'+canvas.webAppRootKey+'/hibernate';
+	canvas.thishib.setAttribute('src',src);
+	canvas.thishib.loaderVar = new autoLoader(canvas);
+	canvas.thishib.loaderVar.src.setText(src);
+	canvas.thishib.connect();
 	]]>
 </method>
 
@@ -326,20 +326,17 @@ and some more references to temp-objects
 	return getLabelTag(id);
 </method>
 
-<!-- 
-    Into this view alle Windows will be loaded
- -->
+<!-- View for Contents. All Windows will be loaded on this view. -->
 <view name="main_content" y="${ canvas.naviHeightDelta }" width="${canvas.width}" 
     height="${canvas.height-canvas.naviHeightDelta}" visibility="hidden">
-    <view x="0" name="_content" layout="axis:y;spacing:2">
-        <view name="inner" />
-        
+    <view name="_content" x="0" width="${parent.width}" height="${parent.height}" layout="axis:y;spacing:2">
+        <view name="inner" width="${parent.width}" height="${parent.height}" />
         <method name="clearAll">
         	<![CDATA[
-	            Debug.write("clearAll this.inner: ",this.inner,this.inner.subviews.length);
-	            var baseContent = this.inner.subviews[0].close();
+	            if($debug) Debug.write("main.lzx/clearAll() this.inner: ",this.inner,this.inner.subviews.length);
+	            if (this.inner.subviews.length!=0) var baseContent = this.inner.subviews[0].close();
 	            for (var eg in this.inner.subviews) {
-	                Debug.write("clearAll this.inner.subviews: ",this.inner.subviews[eg]);
+	                if($debug) Debug.write("clearAll this.inner.subviews: ",this.inner.subviews[eg]);
 	                if (eg!=0) this.inner.subviews[eg].close();               
 	            }
 	            return baseContent;
@@ -349,11 +346,8 @@ and some more references to temp-objects
     <vscrollbar />
 </view>  
   
-<!-- 
-	Navigation
- -->
-
-<view name="_mainbgcontentNavi" y="0" x="0" bgcolor="${ canvas.baseMousecolorizer }" clip="true"
+<!-- View for Navigation-bar and App-name -->
+<view name="_mainbgcontentNavi" x="0" y="0" bgcolor="${ canvas.baseMousecolorizer }" clip="true"
     width="100%" height="$once{ canvas.naviHeight }" visibility="hidden">
     <text id="mainBaseText" x="10" y="10"
         fgcolor="white" fontsize="20" fontstyle="bold">
@@ -361,7 +355,7 @@ and some more references to temp-objects
             <![CDATA[
             if (this.isinited){
                 this.normalMC = this.getMCRef();
-                   this.displacementMap = new flash.filters.DropShadowFilter();
+                this.displacementMap = new flash.filters.DropShadowFilter();
                 this.normalMC.filters = [this.displacementMap];
             }
             ]]>              
@@ -378,7 +372,8 @@ and some more references to temp-objects
     </handler>     
 </view>
 
-<view name="_conferencemenu" y="0" x="0" height="20" width="100%" 
+<!-- View for Conference menu bar at the top side. Visible on conference -->
+<view name="_conferencemenu" y="0" x="0" width="100%" height="20"
     bgcolor="$once{ canvas.baseMousecolorizer }" visibility="hidden" > 
     <method name="removeAll">
 		<![CDATA[
@@ -389,6 +384,7 @@ and some more references to temp-objects
     </method>
 </view>   
     
+<!-- View for "Loading" -->
 <view name="_loadingAll" visible="false" opacity="0.5" 
     width="${ canvas.width }" height="${ canvas.height }" 
     bgcolor="0xFFFFFF" clickable="true" >
