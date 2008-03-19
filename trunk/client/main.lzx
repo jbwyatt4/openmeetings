@@ -1,68 +1,24 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
 <canvas debug="false" width="100%" height="100%" >
-  
-  
-  
-<!-- 
-##########################################################
-these properties will be overwritten by config.xml -->  
     
-<!-- URL/IP to use for the Server 192.168.178.28 
-	inno02.fh-pforzheim.de macbook 192.168.2.103
-	192.168.2.102 bxlug.homelinux.org 213.219.160.72
-	    if this value is empty it will try to connect to the 
-    domain-name it has been loading from
-    -->
-<attribute name="rtmphostlocal" value="" type="string" />
- 
-<!--  
-	Port to use for the Server
-	To this port the default server lookup is done
-	
-	You can find all this configuraiton in your red5-Config in: $RED5_HOME/conf/red5.properties
- -->
-<attribute name="rtmpport" value="1935" type="string" />
+    <debug fontsize="12" oninit="Debug.showInternalProperties = true" />
+     
 
-<!-- 
-	Port to use for the Server
-	To this port the fallback is done once the default rtmport failed
-	this should workaround 99% of all firewalls
- -->
-<attribute name="rtmpTunnelport" value="8088" type="string" />
+<include href="incubator/lzcombobox.lzx" />
+<include href="incubator/shadowbox.lzx" />
 
-<!-- 
-	Port to use for the Server
-	This port is used to connec to the http-servlet
-	of the red5-servlet
- -->
-<attribute name="red5httpport" value="5080" type="string" />
-	
+
 <!--
-	These colors are the main colors and style the hole application
- -->
-<attribute name="basebgcolorizer" value="0xB0C4DE" type="string" />	
-<attribute name="baseMousecolorizer" value="0xC4D5E6" type="string" />	
-<attribute name="baseMouseOvercolorizer" value="0xC4D5E6" type="string" />  	
+attributes,methods,datasets,views are moved into /base
+-->
+<include href="base/" />
 
-<attribute name="currentappversion" value="" type="string" />
 
-<attribute name="webAppRootKey" value="" type="string" />
+<include href="oslmon/" /> 
+<include href="resources/" />
+<include href="conference/" /> 
+<include href="xmlcrm/" /> 
 
-<!-- Name of the Application -->
-<attribute name="currentappname" value="OpenMeetings" type="string" />   
-<attribute name="currentappnameurl" value="OpenMeetings" type="string" />   
-<attribute name="currentappnamebugurl" value="OpenMeetings" type="string" /> 
-
-<!-- Video Settings -->
-<attribute name="loudnessAcitviation" value="10" type="number" />
-<attribute name="showWindowEffect" value="y" type="string" /> 
-
-<!-- Calendar Settings -->
-<attribute name="firstdayinweek" value="1" type="number" />
-
-<!-- END OF config.xml attributes
-##########################################################
- -->
 
 <silverstyle name="defaultstyle" isdefault="true" basecolor="${ canvas.basebgcolorizer }"
 	canvascolor="white" />
@@ -73,13 +29,6 @@ these properties will be overwritten by config.xml -->
 	<view center="true" ratio="1" resource="splash_defaultvalues.swf" />
 </splash>
 
-<include href="incubator/lzcombobox.lzx" />
-<include href="incubator/shadowbox.lzx" />
-
-<include href="oslmon/" /> 
-<include href="resources/" />
-<include href="conference/" /> 
-<include href="xmlcrm/" /> 
 
 
 <!-- main colors:
@@ -88,136 +37,11 @@ these properties will be overwritten by config.xml -->
   
 
 
-<attribute name="chathistory" value="null" />
-<attribute name="userHistory" value="null" />
-<attribute name="browserTabHistory" value="null" />
 
 <resource name="configure_vidrsc" src="resources/configure.png" />
 
 <resource name="mainbackroundmenu_rsc" src="resources/mainbackroundmenu.png" />
         
-<!-- URL/IP to use for the Server -->
-<attribute name="rtmphost" value="" type="string" />
-
-<!-- Username/Nickname -->
-<attribute name="currentuser" value="" type="string" />
-
-<!-- Roomname internaly Scope -->
-<attribute name="currentcourse" value="" type="string" />
-
-<!-- Roomname/Coursename -->
-<attribute name="currentcourseName" value="" type="string" />
-
-<!-- 
-    The Reference for a Streaming Object
-    This should be removed later when the OpenLaszlo API handles
-    the broadcast better
-    -swagner
- -->
-<attribute name="_nc" value="null" />
-	
-<attribute name="vaquality" value="best" type="string" />
-	
-<attribute name="moderatorStreamID" value="" type="string" />
-<attribute name="moderatorationObject" value="" type="string" />
-<attribute name="moderatorName" type="string" setter="this.setModeratorName(moderatorName)" />
-
-<attribute name="ismoderator" value="false" type="boolean" />
-
-<attribute name="loadingmessage" value="" type="string" />
-<!-- 
-	The state of the Application
-	At the beginning you should choose how many users are allowed to
-	login simultaniously
- -->
-<attribute name="islogedin" value="false" type="boolean" />
-   
-<attribute name="htmlframeisloaded" value="false" type="boolean" />
-<attribute name="createIFrameDone_attr" value="false" type="boolean" />
-
-
-<attribute name="uploadmoduleppt" value="videoconf1ppt" type="string" />
-<attribute name="uploadmoduleimg" value="videoconf1" type="string" />
-<attribute name="foldersequence" value="null" />
-<attribute name="uploadmoduleimgfolder" value="" type="string" />
-<!-- 
-	Can be either 2 or 4
-	But theoretically there is no limit
- -->
-<attribute name="numberofallowedpartners" value="0" type="number" />
-
-<!-- Number of currently connected Users -->
-<attribute name="numberofpartners" value="0" type="number" />
-
-<!-- unique ID of this Stream -->
-<attribute name="streamid" value="0" type="string" />
-
-<!-- id of the current Mod in this room -->
-<attribute name="currentmodid" value="0" type="string" />
-
-<attribute name="currentlanguage" value="english" type="string" />
-
-<attribute name="objWhiteboard" value="null" />
-<attribute name="objMessage" value="null" />
-<attribute name="VarsModeratorGeneral" value="null" />
-
-<attribute name="isConference" value="false" type="boolean" />
-
-<attribute name="statesInitValues" value="null" />
-<attribute name="salutationsInitValues" value="null" />
-<attribute name="roomTypesInitValues" value="null" />
-
-<!-- Username of current user -->
-<attribute name="currentusename" value="defaultname" type="string" />
-<attribute name="user_id" value="0" type="number" />
-<attribute name="firstName" value="" type="string" />
-<attribute name="lastName" value="" type="string" />
-<attribute name="mail" value="" type="string" />
-<attribute name="lastLogin" value="" type="string" />
-<attribute name="official_code" value="" type="string" />
-<attribute name="picture_uri" value="" type="string" />
-<attribute name="language" value="" type="string" />
-
-<!-- User porperties -->
-<attribute name="currentusercolor" value="0" type="number" />
-<attribute name="currentuserpos" value="0" type="number" />
-	
-<attribute name="currentModApply" value="null" />	
-
-<attribute name="sessionObject" value="null" />
-<attribute name="sessionId" value="" type="string" />
-
-<attribute name="publicSID" value="" type="string" />
-
-<!-- attributes for direct room access -->
-<attribute name="initroomid" value="0" type="number" />
-<attribute name="initroomStr" value="" type="string" />
-<attribute name="initroomtype" value="" type="string" />
-<attribute name="initdomainid" value="" type="string" />
-<attribute name="initlangid" value="1" type="number" />
-<attribute name="isinitRoomDirect" value="false" type="boolean" />
-<attribute name="isinitRoomObject" value="null" /> 
-
-<attribute name="isResetUsername" value="false" type="boolean" />
-<attribute name="resetHash" value="" type="string" />
-    
-<attribute name="naviHeight" value="110" type="number" />    
-<attribute name="naviHeightDelta" value="110" type="number" />  
-
-<attribute name="currentrecorder_id" value="0" type="number" /> 
-
-<!-- 
-Holds a refernce to the current VideoCOntainer Object
-containing the VideoViews
-and some more references to temp-objects
- -->
-<attribute name="_videocontainer" value="null" />
-<attribute name="_chartcontent" value="null" />
-<attribute name="_chartcontentRPC" value="null" />
-<attribute name="_overallchartcontent" value="null" />
-<attribute name="_mymod" value="null" />
-
-<attribute name="isrtl" value="false" type="boolean" />    
     
 <handler name="oninit">
 	//this.setAttribute('framerate',12);
