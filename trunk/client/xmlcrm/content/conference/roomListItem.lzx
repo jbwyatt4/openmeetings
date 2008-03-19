@@ -40,16 +40,17 @@
 
   <handler name="onclick">
     var connectedIsAudience = '';
-   	hib.currentroomid = this.obj.rooms_id;
     canvas.isConference = !this.isaudience;
     if (this.isaudience) connectedIsAudience = '_'+'audi';
         if (this.ispublic){
             hib.connectedroom = this.obj.rooms_id+connectedIsAudience;
             hib.conferencedomain="public";
+   	        hib.currentroomid = this.obj.rooms_id;
             //Debug.write("ispublic");
         } else {
             hib.connectedroom= this.obj.room.rooms_id+connectedIsAudience;
             hib.conferencedomain = this.obj.organisation.organisation_id;
+   	        hib.currentroomid = this.obj.room.rooms_id;
             //Debug.write("non ispublic");
         }
         Debug.write("onclick",this);
@@ -70,16 +71,17 @@
     var connectedIsAudience = '';
     canvas.isConference = !this.isaudience;
     if (this.isaudience) connectedIsAudience = '_'+'audi';
-    hib.currentroomid = this.obj.rooms_id;
     if (this.ispublic){
     	var roomObj = this.obj;
         hib.connectedroom = this.obj.rooms_id+connectedIsAudience;
         hib.conferencedomain="public";
+        hib.currentroomid = this.obj.rooms_id;
         //Debug.write("ispublic");
     } else {
     	var roomObj = this.obj.room;
         hib.connectedroom = this.obj.room.rooms_id+connectedIsAudience;
         hib.conferencedomain = this.obj.organisation.organisation_id;
+        hib.currentroomid = this.obj.room.rooms_id;
         //Debug.write("non ispublic");
     }
     //Debug.write("hib.conferencedomain: ",hib.conferencedomain);
