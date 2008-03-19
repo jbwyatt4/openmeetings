@@ -153,23 +153,44 @@ attributes,methods,datasets,views are moved into /base
 <!-- View for Contents. All Windows will be loaded on this view. -->
 <view name="main_content" y="${ canvas.naviHeightDelta }" width="${canvas.width}" 
     height="${canvas.height-canvas.naviHeightDelta}" visibility="hidden">
-    <view name="_content" x="0" width="${parent.width}" height="${parent.height}" layout="axis:y;spacing:2">
-        <view name="inner" width="${parent.width}" height="${parent.height}" />
+    <view x="0" name="_content" layout="axis:y;spacing:2">
+        <view name="inner" />
         <method name="clearAll">
         	<![CDATA[
-	            if($debug) Debug.write("main.lzx/clearAll() this.inner: ",this.inner,this.inner.subviews.length);
-	            if (this.inner.subviews.length!=0) var baseContent = this.inner.subviews[0].close();
+	            Debug.write("clearAll this.inner: ",this.inner,this.inner.subviews.length);
+	            var baseContent = this.inner.subviews[0].close();
 	            for (var eg in this.inner.subviews) {
-	                if($debug) Debug.write("clearAll this.inner.subviews: ",this.inner.subviews[eg]);
+	                Debug.write("clearAll this.inner.subviews: ",this.inner.subviews[eg]);
 	                if (eg!=0) this.inner.subviews[eg].close();               
 	            }
 	            return baseContent;
             ]]>
         </method>
     </view>
+		<!-- Whats the reason for adding constraints here?
+		You cannot set the inner to strict height values, cause otherwise the scrollbar
+		won't be showing any difference, no matter if the content of *inner* is
+		bigger then the container view *main_content*
+		
+		-swagner 19.03.2008
+		
+	    <view name="_content" x="0" width="${parent.width}" height="${parent.height}" layout="axis:y;spacing:2">
+	        <view name="inner" width="${parent.width}" height="${parent.height}" />
+	        <method name="clearAll">
+	        	<![CDATA[
+		            if($debug) Debug.write("main.lzx/clearAll() this.inner: ",this.inner,this.inner.subviews.length);
+		            if (this.inner.subviews.length!=0) var baseContent = this.inner.subviews[0].close();
+		            for (var eg in this.inner.subviews) {
+		                if($debug) Debug.write("clearAll this.inner.subviews: ",this.inner.subviews[eg]);
+		                if (eg!=0) this.inner.subviews[eg].close();               
+		            }
+		            return baseContent;
+	            ]]>
+	        </method>
+	    </view>
+    	    -->
     <vscrollbar />
 </view>  
-  
 <!-- View for Navigation-bar and App-name -->
 <view name="_mainbgcontentNavi" x="0" y="0" bgcolor="${ canvas.baseMousecolorizer }" clip="true"
     width="100%" height="$once{ canvas.naviHeight }" visibility="hidden">
