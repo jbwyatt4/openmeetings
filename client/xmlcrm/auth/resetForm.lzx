@@ -18,7 +18,7 @@
     <labelText name="resetByMailLabel" 
         visibility="${ ( (parent.chooseTextType.value==1) ? 'visible' : 'hidden' ) }"
         labelid="315" y="60" x="2"/>
-    <customEdittext name="resetByMail" y="60" 
+    <customEdittext name="resetByMail" y="60" regexpType="email"
         visibility="${ ( (parent.chooseTextType.value==1) ? 'visible' : 'hidden' ) }"
         password="false" x="120" width="170" />
     
