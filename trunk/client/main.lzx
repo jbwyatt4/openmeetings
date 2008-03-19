@@ -1,6 +1,8 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
 <canvas debug="false" width="100%" height="100%" >
   
+  
+  
 <!-- 
 ##########################################################
 these properties will be overwritten by config.xml -->  
@@ -184,7 +186,9 @@ these properties will be overwritten by config.xml -->
 
 <attribute name="sessionObject" value="null" />
 <attribute name="sessionId" value="" type="string" />
-	
+
+<attribute name="publicSID" value="" type="string" />
+
 <!-- attributes for direct room access -->
 <attribute name="initroomid" value="0" type="number" />
 <attribute name="initroomStr" value="" type="string" />
@@ -192,7 +196,8 @@ these properties will be overwritten by config.xml -->
 <attribute name="initdomainid" value="" type="string" />
 <attribute name="initlangid" value="1" type="number" />
 <attribute name="isinitRoomDirect" value="false" type="boolean" />
-	
+<attribute name="isinitRoomObject" value="null" /> 
+
 <attribute name="isResetUsername" value="false" type="boolean" />
 <attribute name="resetHash" value="" type="string" />
     
@@ -258,7 +263,7 @@ and some more references to temp-objects
 	mainBaseText.setText(canvas.currentappname);
 	mainBaseText.setShadow();
 	mainBaseTextLabel.setAttribute('text',canvas.currentappnameurl);  
-	        
+
 	this.chathistory=new Array();
 	
 	var doubleSlash = _url.indexOf("//");
@@ -274,21 +279,22 @@ and some more references to temp-objects
 	//Debug.write("this zielnr: ",this,server);
 	
 	this.setAttribute('rtmphost',server);
+
 	if (this.rtmphostlocal.length==0){
 	    this.setAttribute('rtmphostlocal',server);
 	}
 	
-	  //Check for Invitation
-	  var domain = LzBrowser.getInitArg('domain');
+	//Check for Invitation
+	var domain = LzBrowser.getInitArg('domain');
 	var room = LzBrowser.getInitArg('room');
 	var roomid = LzBrowser.getInitArg('roomid');
 	var roomtype = LzBrowser.getInitArg('roomtype');
 	var emailGuest = LzBrowser.getInitArg('email');
-	
+
 	//Debug.write("domain: ",domain);
 
 	if (domain!=undefined && room!=undefined && roomtype!=undefined 
-		  	&& roomid!=undefined && emailGuest != undefined){
+			&& roomid!=undefined && emailGuest != undefined){
 		canvas.initroomid = Number(roomid);
 		canvas.initroomStr = room;
 		canvas.initroomtype = roomtype;
@@ -296,7 +302,7 @@ and some more references to temp-objects
 		canvas.isinitRoomDirect = true;
 		canvas.firstName = emailGuest;
 		canvas.mail = emailGuest;
-  	}
+	}
 
 	//check for reset password
 	var hash = LzBrowser.getInitArg('hash');
@@ -343,7 +349,8 @@ and some more references to temp-objects
 <!-- View for Navigation-bar and App-name -->
 <view name="_mainbgcontentNavi" x="0" y="0" bgcolor="${ canvas.baseMousecolorizer }" clip="true"
     width="100%" height="$once{ canvas.naviHeight }" visibility="hidden">
-    <text id="mainBaseText" x="10" y="10" fgcolor="white" fontsize="20" fontstyle="bold">
+    <text id="mainBaseText" x="10" y="10"
+        fgcolor="white" fontsize="20" fontstyle="bold">
         <method name="setShadow" >
             <![CDATA[
             if (this.isinited){
@@ -366,7 +373,7 @@ and some more references to temp-objects
 </view>
 
 <!-- View for Conference menu bar at the top side. Visible on conference -->
-<view name="_conferencemenu" y="0" x="0" width="100%" height="20" 
+<view name="_conferencemenu" y="0" x="0" width="100%" height="20"
     bgcolor="$once{ canvas.baseMousecolorizer }" visibility="hidden" > 
     <method name="removeAll">
 		<![CDATA[
