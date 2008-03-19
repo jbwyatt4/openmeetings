@@ -1563,4 +1563,22 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   <string id="517" name="reset_password_mail_subject">
     <value>OpenMeetings Password Reset</value>
   </string>	
+  <string id="518" name="dateRegExpError">
+    <value>Bitte geben Sie ein Datum im Format dd.mm.yyyy an, zum Beispiel: 24.12.2001</value>
+  </string>
+  <string id="519" name="emailRegExpError">
+    <value>Bitte geben Sie ein gültiges Datum an, zum Beispiel beispiel@domain.de</value>
+  </string>
+  <string id="520" name="floatRegExpError">
+    <value>Bitte geben Sie eine Fließkommazahl an, zum Beispiel 1.00</value>
+  </string>
+  <string id="521" name="numberRegExpError">
+    <value>Bitte geben Sie eine Ganzzahl an, zum Beispiel 100</value>
+  </string>
+  <string id="522" name="phoneRegExpError">
+    <value>Bitte geben Sie eine Telefonnumer an, zum Beispiel ++49 0123 123123</value>
+  </string>
+  <string id="523" name="timeRegExpError">
+    <value>Bitte geben sie eine gültige Uhrzeit an, zum Beispiel 12:23 (hh:mm)</value>
+  </string>	
 </language>
