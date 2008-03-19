@@ -34,7 +34,8 @@
         <customEdittext name="lastname" y="162" x="120" width="270" text="" />                
 
     <labelText labelid="119" width="200" y="192" resize="false" x="2"/>
-        <customEdittext name="email" y="192" x="120" width="270" text="" />
+        <customEdittext name="email" y="192" x="120" regexpType="email" 
+        				width="270" text="" />
          
     <labelText labelid="120" width="200" y="222" resize="false" x="2"/>  
 

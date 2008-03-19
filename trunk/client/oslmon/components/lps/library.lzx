@@ -15,5 +15,6 @@
     <include href="fillColorChoose.lzx" />
     <include href="changeWidthSlider.lzx" />
     <include href="changeWidthLetterSlider.lzx" />
+    <include href="regexptip.lzx" />
     
 </library>

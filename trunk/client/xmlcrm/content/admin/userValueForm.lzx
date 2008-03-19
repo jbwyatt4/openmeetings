@@ -180,7 +180,8 @@
         <customEdittext name="lastname" y="160" x="120" width="270" text="" />                
 
     <labelText labelid="137" width="200" y="190" resize="false" x="2"/>
-        <customEdittext name="email" y="190" x="120" width="270" text="" />
+        <customEdittext name="email" y="190" x="120" width="270" regexpType="email" 
+        				text="" />
         
     <labelText labelid="138" width="200" y="220" resize="false" x="2"/>
         <dateField name="age" y="220" x="120" width="270" text="" />

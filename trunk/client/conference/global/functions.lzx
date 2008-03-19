@@ -20,14 +20,6 @@ function disablesTooltips(obj){
   RegExpTooltiplist = obj;
 }
 
-//Set some value to get it running
-var labelRef = new Array();
-labelRef.push('1');
-labelRef.push('Camera');
-labelRef.push('tooltip');
-_labelObject.push(labelRef);
-
-
 function setLabelObject(lableObj){
 	_labelObject = lableObj;
 }
