@@ -24,15 +24,16 @@ TOP
 |    |-- *.swf
 | 
 |-- /base                <== Minimum requirement/base-classes for all
-|    |-- mainDatasets.lzx    <== global <dataset>
-|    |-- mainAttributes.lzx  <== global <attribute>
-|    |-- mainMethods.lzx     <== global <script> and <method>
-|    |-- /auth
-|    |-- /net
-|    |-- /button
+|    |-- /components         <== common base components for all modules
 |    |-- etc,etc,etc,....
+|    |--
+|    |-- mainAttributes.lzx  <== global <attribute>
+|    |-- mainDatasets.lzx    <== global <dataset>
+|    |-- mainMethods.lzx     <== global <script> and <method>
 | 
-|-- /modules
+|-- /modules                 <== "modules" mean plugable app-modules.
+     |-- /conference         <== conference specific modules
+     |-- /auth
      |-- /admin
      |-- /backup
      |-- /chat
