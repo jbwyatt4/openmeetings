@@ -2,7 +2,6 @@
 <library>
 	<include href="conference/" />
 
-	<include href="contentviews/" />
 	<include href="chat/" />
 	<include href="settings/" />
 	<include href="admin/" />
