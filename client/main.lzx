@@ -3,10 +3,11 @@
     <debug fontsize="12" oninit="Debug.showInternalProperties = true" />
 <include href="incubator/lzcombobox.lzx" />
 <include href="incubator/shadowbox.lzx" />
-<include href="base/" /><!-- attributes,methods,datasets,views are moved into /base -->
-<include href="modules/" /> 
+
 <include href="resources/" />
-<include href="xmlcrm/" />
+<include href="base/" /><!-- attributes,methods,datasets,are moved into /base -->
+<include href="modules/" /> 
+
 <silverstyle name="defaultstyle" isdefault="true" basecolor="${ canvas.basebgcolorizer }" canvascolor="white" />
 <resource name="currentsplash" src="splash_defaultvalues.swf" />
 <resource name="configure_vidrsc" src="resources/configure.png" />
