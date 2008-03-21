@@ -4,7 +4,6 @@
 <include href="incubator/lzcombobox.lzx" />
 <include href="incubator/shadowbox.lzx" />
 <include href="base/" /><!-- attributes,methods,datasets,views are moved into /base -->
-<include href="conference/" /> 
 <include href="modules/" /> 
 <include href="resources/" />
 <include href="xmlcrm/" />
