@@ -24,25 +24,35 @@ TOP
 |    |-- *.swf
 | 
 |-- /base
-|    |
 |    |-- /auth
 |    |-- /components         <== common base components for all modules
-|    |-- etc,etc,etc,....
-|    |--
+|    |-- /contentviews
+|    |-- /hibernate
+|    |-- /navi
+|    |-- /remote
+|    |-- /tabbar  <== exists but not used any more?  
+|    |-- /usermanage
 |    |-- mainAttributes.lzx  <== global <attribute>
 |    |-- mainDatasets.lzx    <== global <dataset>
 |    |-- mainMethods.lzx     <== global <script> and <method>
 | 
 |-- /modules
-     |
-     |-- /conference         <== conference specific modules
      |-- /admin
      |-- /backup
      |-- /chat
-     |-- /navi
+     |-- /confadmin
+     |-- /conference         <== conference specific modules
+     |-- /dashboard
+     |-- /events
+     |-- /invitation
+     |-- /issuetracker
+     |-- /languageseditor
+     |-- /meetings
+     |-- /orgadmin
      |-- /recording
-     |-- /upload
-     |-- etc,etc,etc,....
+     |-- /roomadmin
+     |-- /settings
+     |-- /wizard
 }}}   
 ||main.lzx ||All <attribute>,<script>,<method>,<dataset> is in another lzx. main.lzx only include them. main.lzx has basic <view> and <handler>. ||
 ||/base||Minimum requirement for Openmeetings, as it means, /base is Openmeetings Core. Includes base-classes, common components and libraries for modules.||
