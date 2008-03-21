@@ -25,6 +25,7 @@ TOP
 | 
 |-- /base
 |    |
+|    |-- /auth
 |    |-- /components         <== common base components for all modules
 |    |-- etc,etc,etc,....
 |    |--
@@ -35,7 +36,6 @@ TOP
 |-- /modules
      |
      |-- /conference         <== conference specific modules
-     |-- /auth
      |-- /admin
      |-- /backup
      |-- /chat
