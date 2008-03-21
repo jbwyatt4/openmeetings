@@ -1,4 +1,97 @@
 <?xml version="1.0" encoding="UTF-8" ?>
+
+<!-- methods for main.lzx -->
+
 <library>
+
+<method name="openMeetingsMenuItemHandler">
+    LzBrowser.loadURL("http://code.google.com/p/openmeetings/", "Openmeetings Homepage");  
+</method>    
+
+<method name="myinit">
+	<![CDATA[
+	if($debug) Debug.write("main.lzx/config.xml ondata",this);
+	//Set Config-values by config.xml, see comments on config.xml
+	this.setAttribute('rtmphostlocal',canvas.myConfigSet.getPointer().xpathQuery('config/rtmphostlocal/text()'));   
+	this.setAttribute('rtmpport',Number(canvas.myConfigSet.getPointer().xpathQuery('config/rtmpport/text()')));  
+	this.setAttribute('rtmpTunnelport',Number(canvas.myConfigSet.getPointer().xpathQuery('config/rtmpTunnelport/text()')));  
+	this.setAttribute('red5httpport',Number(canvas.myConfigSet.getPointer().xpathQuery('config/red5httpport/text()')));  
+	this.setAttribute('basebgcolorizer',canvas.myConfigSet.getPointer().xpathQuery('config/basebgcolorizer/text()'));  
+	this.setAttribute('baseMousecolorizer',canvas.myConfigSet.getPointer().xpathQuery('config/baseMousecolorizer/text()'));  
+	this.setAttribute('baseMouseOvercolorizer',canvas.myConfigSet.getPointer().xpathQuery('config/baseMouseOvercolorizer/text()'));  
+	this.setAttribute('currentappversion',canvas.myConfigSet.getPointer().xpathQuery('config/currentappversion/text()'));  
+	this.setAttribute('currentappname',canvas.myConfigSet.getPointer().xpathQuery('config/currentappname/text()'));  
+	this.setAttribute('currentappnameurl',canvas.myConfigSet.getPointer().xpathQuery('config/currentappnameurl/text()'));  
+	this.setAttribute('currentappnamebugurl',canvas.myConfigSet.getPointer().xpathQuery('config/currentappnamebugurl/text()'));
+	this.setAttribute('loudnessAcitviation',canvas.myConfigSet.getPointer().xpathQuery('config/loudnessAcitviation/text()'));
+	this.setAttribute('webAppRootKey',canvas.myConfigSet.getPointer().xpathQuery('config/webAppRootKey/text()'));
+	this.setAttribute('showWindowEffect',canvas.myConfigSet.getPointer().xpathQuery('config/showWindowEffect/text()'));
+	this.setAttribute('firstdayinweek',canvas.myConfigSet.getPointer().xpathQuery('config/firstdayinweek/text()'));
+
+	mainBaseText.setText(canvas.currentappname);
+	mainBaseText.setShadow();
+	mainBaseTextLabel.setAttribute('text',canvas.currentappnameurl);  
+
+	this.chathistory=new Array();
+	
+	var doubleSlash = _url.indexOf("//");
+	var isNotPort80 = _url.indexOf(":", doubleSlash+2);
+	//Debug.write("isNotPort80: ",isNotPort80);
+	if (isNotPort80!=-1){
+	    //Debug.write("isNotPort80: ",doubleSlash+2, _url.indexOf(":", doubleSlash+2)-doubleSlash-2);
+	    var server = _url.substr(doubleSlash+2, _url.indexOf(":", doubleSlash+2)-doubleSlash-2); 
+	} else {
+	    var server = _url.substr(doubleSlash+2, _url.indexOf("/", doubleSlash+2)-doubleSlash-2); 
+	}
+	
+	//Debug.write("this zielnr: ",this,server);
+	
+	this.setAttribute('rtmphost',server);
+
+	if (this.rtmphostlocal.length==0){
+	    this.setAttribute('rtmphostlocal',server);
+	}
+	
+	//Check for Invitation
+	var domain = LzBrowser.getInitArg('domain');
+	var room = LzBrowser.getInitArg('room');
+	var roomid = LzBrowser.getInitArg('roomid');
+	var roomtype = LzBrowser.getInitArg('roomtype');
+	var emailGuest = LzBrowser.getInitArg('email');
+
+	//Debug.write("domain: ",domain);
+
+	if (domain!=undefined && room!=undefined && roomtype!=undefined 
+			&& roomid!=undefined && emailGuest != undefined){
+		canvas.initroomid = Number(roomid);
+		canvas.initroomStr = room;
+		canvas.initroomtype = roomtype;
+		canvas.initdomainid = domain;
+		canvas.isinitRoomDirect = true;
+		canvas.firstName = emailGuest;
+		canvas.mail = emailGuest;
+	}
+
+	//check for reset password
+	var hash = LzBrowser.getInitArg('hash');
+
+	if (hash!=undefined){
+		canvas.isResetUsername = true;
+		canvas.resetHash = hash;		
+	}
+
+	//Debug.write("rtmphostlocal,rtmphost: ",canvas.rtmphostlocal,canvas.rtmphost);	
+	
+	var src = 'rtmp://'+canvas.rtmphostlocal+':'+canvas.rtmpport+'/'+canvas.webAppRootKey+'/hibernate';
+	canvas.thishib.setAttribute('src',src);
+	canvas.thishib.loaderVar = new autoLoader(canvas);
+	canvas.thishib.loaderVar.src.setText(src);
+	canvas.thishib.connect();
+	]]>
+</method>
+
+<method name="getLabelName" args="id">
+	return getLabelTag(id);
+</method>
 
 </library>
