@@ -3,7 +3,7 @@
 
 
 	<include href="whiteboard/whiteBoard.lzx" /> 
-    <include href="remote/" />
+<!-- <include href="remote/" />-->
     <include href="tabbar/" />
     <include href="tabcontent/" />
     <include href="popups/" />
