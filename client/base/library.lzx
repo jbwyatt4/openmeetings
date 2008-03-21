@@ -4,6 +4,7 @@
     <include href="remote/" />
     <include href="hibernate/" />
     <include href="components/" /> 
+    <include href="contentviews/" />
     <include href="usermanage/" />
     <include href="navi/" />
 
