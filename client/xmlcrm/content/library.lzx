@@ -1,22 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library>
     
-    <include href="contentviews/" />
-    <include href="chat/" />
     <include href="conference/" />
-    <include href="settings/" />
-    <include href="admin/" />
-	<include href="orgadmin/" />
-	<include href="roomadmin/" />
-	<include href="invitation/" />
-	<include href="wizard/" />
-	<include href="dashboard/" />
-	<include href="issuetracker/" />
-    <include href="confadmin/" />
-    <include href="meetings/" />
-    <include href="events/" />
-	<include href="languageseditor/" />
-	<include href="backup/" />
-	<include href="recording/" />
+
 
 </library>
