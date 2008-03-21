@@ -6,7 +6,7 @@ Regarding [http://code.google.com/p/openmeetings/issues/detail?id=353 Issue 353]
 {{{
 TOP
 |-- main.lzx         <== main lzx
-|-- maindebug.lzx    <== main lzx with debug-true
+|-- maindebug.lzx    <== main lzx with debug=true
 |-- index.jsp        <== jsp file
 |-- config.xml       <== configuration file
 |-- test_*.*         <== test files
@@ -24,9 +24,9 @@ TOP
 |    |-- *.swf
 | 
 |-- /base                <== Minimum requirement/base-classes for all
-|    |-- datasets.lzx    <== global <dataset>
-|    |-- attributes.lzx  <== global <attribute>
-|    |-- scripts.lzx     <== global <script> and <method>
+|    |-- mainDatasets.lzx    <== global <dataset>
+|    |-- mainAttributes.lzx  <== global <attribute>
+|    |-- mainMethods.lzx     <== global <script> and <method>
 |    |-- /auth
 |    |-- /net
 |    |-- /button
