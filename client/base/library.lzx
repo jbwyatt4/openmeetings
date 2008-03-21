@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library>
+
+    <include href="components/" /> 
+
+
+	<!-- for main.lzx -->
 	<include href="mainAttributes.lzx" /> 
 	<include href="mainDatasets.lzx" /> 
 	<include href="mainMethods.lzx" /> 
 	<include href="mainViews.lzx" /> 
+
 </library>
