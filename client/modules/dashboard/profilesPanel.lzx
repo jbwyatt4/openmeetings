@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <library>
 
+<!--- Logged-in User Profile Panel on the dashboard -->
 <class name="profilesPanel" extends="guiPresenter" resizeable="false"
     width="400" height="224" y="10" closable="true" labelid="375" >
 	<view y="20" bgcolor="white" x="1" width="$once{ parent.width-2 }" 
@@ -18,7 +19,7 @@
   		<netparam><method name="getValue"> return canvas.sessionId; </method></netparam>
     	<handler name="ondata" args="value">
     		<![CDATA[
-				Debug.write("getUserSelf: ",value);
+				if($debug) Debug.write("dashboard/getUserSelf: ",value);
 				parent._username.setText(canvas.getLabelName(376)+value.login);
 				if (value.pictureuri==null || value.pictureuri.length==0){
 					value.pictureuri = "d.jpg";
@@ -29,7 +30,7 @@
 		        		+'/'+canvas.webAppRootKey+'/DownloadHandler?fileName='+value.pictureuri
 		        		+'&moduleName=userprofile&parentPath=&room=&domain='
 		        		+'&sid='+canvas.sessionId;
-		        Debug.write("downloadurl "+downloadurl);
+		        if($debug) Debug.write("dashboard/downloadurl "+downloadurl);
 		        parent._userpic.setAttribute('src',downloadurl);	
 	        ]]>
     	</handler>
