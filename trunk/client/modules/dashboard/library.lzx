@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library>
 	
+	<!--
+	is this resource necessary?
+	-swagner
 	<include href="resources/" />
+	 -->
 	<include href="infosPanel.lzx" />
 	<include href="profilesPanel.lzx" />
 	<include href="rssPanel.lzx" />
