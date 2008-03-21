@@ -23,7 +23,7 @@ TOP
 |    |-- *.png
 |    |-- *.swf
 | 
-|-- /base       <== Openmeetings Core/base-classes,common components and libraries for modules
+|-- /base
 |    |
 |    |-- /components         <== common base components for all modules
 |    |-- etc,etc,etc,....
@@ -32,7 +32,7 @@ TOP
 |    |-- mainDatasets.lzx    <== global <dataset>
 |    |-- mainMethods.lzx     <== global <script> and <method>
 | 
-|-- /modules    <== "modules" mean plugable app-modules. like plug-ins.
+|-- /modules
      |
      |-- /conference         <== conference specific modules
      |-- /auth
@@ -45,5 +45,5 @@ TOP
      |-- etc,etc,etc,....
 }}}   
 ||main.lzx ||All <attribute>,<script>,<method>,<dataset> is in another lzx. main.lzx only include them. main.lzx has basic <view> and <handler>. ||
-||/base||Minimum requirement for Openmeetings. All base-class files. ||
-||/modules||Pluggable modules. A new module must be in the modules directory. Every module directory structure does not have any restriction. ||
+||/base||Minimum requirement for Openmeetings, as it means, /base is Openmeetings Core. Includes base-classes, common components and libraries for modules.||
+||/modules||Pluggable modules.(=plugins). A new module must be in the modules directory. Every module directory structure does not have any restriction. To select modules, rewrite include statements by admin tools(in the future release).||
