@@ -57,3 +57,14 @@ TOP
 ||main.lzx ||All <attribute>,<script>,<method>,<dataset> is in another lzx. main.lzx only include them. main.lzx has basic <view> and <handler>. ||
 ||/base||Minimum requirement for Openmeetings, as it means, /base is Openmeetings Core. Includes base-classes, common components and libraries for modules.||
 ||/modules||Pluggable modules.(=plugins). A new module must be in the modules directory. Every module directory structure does not have any restriction. To select modules, rewrite include statements by admin tools(in the future release).||
+
+
+
+
+----
+----
+----
+= I think the Module Developer's Guideline is necessary =
+
+[http://code.google.com/p/openmeetings/wiki/ModuleDevelopersGuideline?updated=ModuleDevelopersGuideline&ts=1206084170]
+comming soon..
