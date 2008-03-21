@@ -23,7 +23,8 @@ TOP
 |    |-- *.png
 |    |-- *.swf
 | 
-|-- /base                <== Minimum requirement/base-classes for all
+|-- /base       <== Openmeetings Core/base-classes,common components and libraries for modules
+|    |
 |    |-- /components         <== common base components for all modules
 |    |-- etc,etc,etc,....
 |    |--
@@ -31,7 +32,8 @@ TOP
 |    |-- mainDatasets.lzx    <== global <dataset>
 |    |-- mainMethods.lzx     <== global <script> and <method>
 | 
-|-- /modules                 <== "modules" mean plugable app-modules.
+|-- /modules    <== "modules" mean plugable app-modules. like plug-ins.
+     |
      |-- /conference         <== conference specific modules
      |-- /auth
      |-- /admin
