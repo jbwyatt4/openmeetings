@@ -1,4 +1,4 @@
-= New Structure (beta)=
+= New Structure =
 
 Regarding [http://code.google.com/p/openmeetings/issues/detail?id=353 Issue 353]
 
