@@ -10,6 +10,7 @@ import java.io.InputStreamReader;
 import org.xmlcrm.app.data.basic.Configurationmanagement;
 import org.xmlcrm.app.data.user.Usermanagement;
 import org.xmlcrm.app.hibernate.beans.user.Users;
+import org.xmlcrm.app.remote.Application;
 
 public class GenerateImage {
 
@@ -106,7 +107,9 @@ public class GenerateImage {
 		Users us = Usermanagement.getInstance().getUser(users_id);
 		us.setUpdatetime(new java.util.Date());
 		us.setPictureuri(pictureuri);
-		Usermanagement.getInstance().updateUser(us);		
+		Usermanagement.getInstance().updateUser(us);	
+		
+		Application.getInstance().updateUserSessionObject(users_id,pictureuri);
 
 		return returnMap;
 	}
