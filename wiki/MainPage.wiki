@@ -29,14 +29,8 @@ Tips for Installation:
   * [SWFPresentationViewer]
   * ScreenViewer  
 
+== General Documentation ==
 
-== Documentation ==
- 
-  * CustomCryptMechanism - how to write Custom Encryption Styles
-  * CustomAuthentication - how to write a Custom Authentication for Single Sign-On
-  * SessionVariables  	- Documentation how Session-Variables are handled
-  * ModuleDevelopersGuideline  	- Module Developer's Guideline (alpha)
-  * NewStructure  - NewStructure of the OpenLaszlo-LZX-Source Files
   * [Internationalisation]
   * BandwidthNetworkSettings
   * SimpleSampleApps  	
@@ -45,12 +39,21 @@ Tips for Installation:
   * TechnologyPortfolio
   * TipsImprovePerformance
   * [wml]
-  * DebugServer - Debugging the server-side code of OpenMeetings.
-  * TestingBusinessLogic
   * AdminScreenshots
   * QualityAssurance
+
+== Developer-Documentation ==
+ 
   * CodingGuidelines - Client-Side Coding Guidelines
+  * NewStructure  - NewStructure of the OpenLaszlo-LZX-Source Files
+  * SessionVariables  	- Documentation how Session-Variables are handled
+  * CustomCryptMechanism - how to write Custom Encryption Styles
+  * CustomAuthentication - how to write a Custom Authentication for Single Sign-On
+  * ModuleDevelopersGuideline  	- Module Developer's Guideline (alpha)
+  * DebugServer - Debugging the server-side code of OpenMeetings.
+  * TestingBusinessLogic
   * ContributingPlayRules - Some info regarding the Contribution of code
+  * SWF9_Conversion - Documentation of SWF9 Conversion of OpenMeetings Client
 
 == Community == 
 
