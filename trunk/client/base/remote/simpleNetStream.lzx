@@ -394,7 +394,7 @@
         <!--- This is called when a media stream hits the end and stops playing.
               @keywords private -->
         <method name="_onInsufficientBandwidth"><![CDATA[
-        	if ($debug) Debu.write("oninsufficientbandwidth THROWN");
+        	if ($debug) Debug.write("oninsufficientbandwidth THROWN");
             if (this.oninsufficientbandwidth) {
                 this.oninsufficientbandwidth.sendEvent();
             }
