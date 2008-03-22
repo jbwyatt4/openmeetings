@@ -48,19 +48,37 @@
 	
 	<!-- invoked if another client logs into the room 
 	after choosing devices -->     
-    <method name="setAVSettingsToClient" args="userposition,rcl">
-    	Debug.write("addNoAVClient ",userposition,rcl);
-		if (rcl.avsettings=="n"){
-			this.subviews[userposition].setVideouserProfilePic(rcl);
-		} else if (rcl.avsettings=="a"){
-			this.subviews[userposition].setVideouserProfilePic(rcl);
-		} else {
-			this.subviews[userposition].deleteVideoConfProfilePic();
-		}
-    	this.subviews[userposition].updateAVSettingsSymbol(rcl);
+    <method name="setAVSettingsToClient" args="rcl">
+    	Debug.write("addNoAVClient ",rcl);
+    	var obj = this.getVideoObjectByBroadCastId(rcl.broadCastID);
+    	if (obj!=null){
+			if (rcl.avsettings=="n"){
+				obj.setVideouserProfilePic(rcl);
+			} else if (rcl.avsettings=="a"){
+				obj.setVideouserProfilePic(rcl);
+			} else {
+				obj.deleteVideoConfProfilePic();
+			}
+	    	obj.updateAVSettingsSymbol(rcl);
+    	} else {
+    		if ($debug) Debug.warn("No Video Obj for this AVSettings Event, rcl: ",rcl);
+    	}
     </method>    
     
-    	
+    <!--- get a baseVideoObject by its broadcastId
+    	@param string broadcastId broadcastId, can be also a number
+     --> 
+    <method name="getVideoObjectByBroadCastId" args="broadcastId">
+    	<![CDATA[
+    		//if ($debug) Debug.write("getVideoObjectByBroadCastId1 SEARCH: ",broadcastId);
+    		if (this._video1.broadcastId == broadcastId){
+    			return this._video1
+    		} else {
+    			return null;
+    		}
+    		
+    	]]>
+    </method>   	
 
   	<netRemoteCallHib name="setRoomValues" funcname="setRoomValues" remotecontext="$once{ canvas.thishib }" >   
     	<netparam><method name="getValue">return hib.connectedroom;</method></netparam>	 
