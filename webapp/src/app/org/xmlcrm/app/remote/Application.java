@@ -1181,24 +1181,18 @@ public class Application extends ApplicationAdapter implements
 	 * @param users_id
 	 */
 	public void updateUserSessionObject(Long users_id, String pictureuri){
-		try {
-			log.debug("updateUserSessionObject 1: "+users_id);
-			log.debug("updateUserSessionObject 2: "+pictureuri);
-			
+		try {			
 			Users us = Usermanagement.getInstance().getUser(users_id);
 			for (Iterator<String> itList = ClientList.keySet().iterator();itList.hasNext();) {
 				String red5Id  = itList.next();
 				RoomClient rcl = ClientList.get(red5Id);
 				
-				log.debug("updateUserSessionObject rcl1: "+rcl.getUser_id());
 				if (rcl.getUser_id().equals(users_id)){
-					log.debug("updateUserSessionObject #### FOUND USER rcl1: "+rcl.getUser_id()+ " NEW PIC: "+pictureuri);
-					
+					log.info("updateUserSessionObject #### FOUND USER rcl1: "+rcl.getUser_id()+ " NEW PIC: "+pictureuri);
 					rcl.setPicture_uri(pictureuri);
 					rcl.setUsername(us.getLogin());
 					rcl.setFirstname(us.getFirstname());
 					rcl.setLastname(us.getLastname());
-
 					ClientList.put(red5Id, rcl);
 				}
 			}
