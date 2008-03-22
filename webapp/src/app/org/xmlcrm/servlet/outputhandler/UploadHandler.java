@@ -1,6 +1,5 @@
 package org.xmlcrm.servlet.outputhandler;
 
-import http.utils.multipartrequest.MultipartRequest;
 import http.utils.multipartrequest.ServletMultipartRequest;
 
 import java.io.*;
@@ -17,7 +16,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import org.apache.commons.transaction.util.FileHelper;
 import org.apache.commons.lang.StringUtils;
 import org.xmlcrm.app.data.basic.Sessionmanagement;
 import org.xmlcrm.app.data.user.Usermanagement;
@@ -87,7 +85,7 @@ public class UploadHandler extends HttpServlet {
 	protected void service(HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) throws ServletException,
 			IOException {
-		boolean resize = false;
+		boolean userProfilePic = false;
 		try {
 
 			if (httpServletRequest.getContentLength() > 0) {
@@ -158,7 +156,7 @@ public class UploadHandler extends HttpServlet {
 						localFolderppt.mkdir();
 					}
 
-					System.out.println("#### UploadHandler working_dir: "+ working_dir);
+					log.debug("#### UploadHandler working_dir: "+ working_dir);
 
 					if (!moduleName.equals("nomodule")) {
 						//Check variable to see if this file is a presentation
@@ -204,7 +202,7 @@ public class UploadHandler extends HttpServlet {
 								boolean c = f.mkdir();
 								if (!c) {
 									log.error("cannot write to directory");
-									System.out.println("cannot write to directory");
+									//System.out.println("cannot write to directory");
 								}
 							}
 							completeName += "profile_"+users_id + File.separatorChar;
@@ -213,22 +211,22 @@ public class UploadHandler extends HttpServlet {
 								boolean c = f2.mkdir();
 								if (!c) {
 									log.error("cannot write to directory");
-									System.out.println("cannot write to directory");
+									//System.out.println("cannot write to directory");
 								}
 							}
-							resize = true;
+							userProfilePic = true;
 						}						
 						//if it is a presenation it will be copied to another place
 						if (canBeConverted || isPDF || isImage) {
 							//check if this is a room file or UserProfile
 							if (moduleName.equals("userprofile")) {
-								resize = true;
+								userProfilePic = true;
 							}
 							completeName = working_dirppt + newFileSystemName;
 						} else if (isJpg) {
 							//check if this is a room file or UserProfile
 							if (moduleName.equals("userprofile")) {
-								resize = true;
+								userProfilePic = true;
 								completeName += newFileSystemName;
 							} else {
 								completeName = working_dir + newFileSystemName;
@@ -272,7 +270,7 @@ public class UploadHandler extends HttpServlet {
 							//convert to thumbs, swf and xml-description
 							returnError = GeneratePDF.getInstance().convertPDF(current_dir, newFileSystemName , newFileSystemExtName, roomName, false, completeName);						
 						} else if (isImage) {
-							if (resize) {
+							if (userProfilePic) {
 								//User Profile Update
 								this.deleteUserProfileFiles(current_dir, users_id);
 								//convert it to JPG
@@ -284,7 +282,7 @@ public class UploadHandler extends HttpServlet {
 										roomName,newFileSystemName, false);
 							}
 						} else if (isJpg) {
-							if (resize) {
+							if (userProfilePic) {
 								//User Profile Update
 								this.deleteUserProfileFiles(current_dir, users_id);
 								//is UserProfile Picture
@@ -301,6 +299,8 @@ public class UploadHandler extends HttpServlet {
 								us.setUpdatetime(new java.util.Date());
 								us.setPictureuri(pictureuri);
 								Usermanagement.getInstance().updateUser(us);
+								
+								Application.getInstance().updateUserSessionObject(users_id,pictureuri);
 							} else {
 								HashMap<String,Object> processThumb = GenerateThumbs.getInstance().generateThumb("_thumb_", current_dir, completeName, 50);
 								returnError.put("processThumb", processThumb);
@@ -316,7 +316,7 @@ public class UploadHandler extends HttpServlet {
 						hs.put("error", returnError);
 						hs.put("fileName", completeName);	
 						
-						if(!moduleName.equals("userprofile")) {
+						if (!moduleName.equals("userprofile")) {
 							Application.getInstance().sendMessageWithClientByUserId(hs,users_id.toString());
 						}
 						

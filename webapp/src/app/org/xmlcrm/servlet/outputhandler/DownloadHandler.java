@@ -23,6 +23,7 @@ public class DownloadHandler extends HttpServlet {
 	
 	private static final String defaultImageName = "deleted.jpg";
 	private static final String defaultProfileImageName = "profile_pic.jpg";
+	private static final String defaultProfileImageNameBig = "_big_profile_pic.jpg";
 	private static final String defaultChatImageName = "_chat_profile_pic.jpg";
 	private static final String defaultSWFName = "deleted.swf";
 	private static final String defaultPDFName = "deleted.pdf";
@@ -43,7 +44,7 @@ public class DownloadHandler extends HttpServlet {
 			if (sid == null) {
 				sid = "default";
 			}
-			System.out.println("sid: " + sid);
+			log.debug("sid: " + sid);
 
 			Long users_id = Sessionmanagement.getInstance().checkSession(sid);
 			Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
@@ -81,11 +82,8 @@ public class DownloadHandler extends HttpServlet {
 				//Get the current User-Directory
 				
 				String current_dir = getServletContext().getRealPath("/");
-//				System.out.println("Current_dir: "+current_dir);
 
 				String working_dir = "";
-//
-//				System.out.println("#### moduleName: " + moduleName);
 
 				working_dir = current_dir+"upload"+File.separatorChar;
 				
@@ -109,7 +107,6 @@ public class DownloadHandler extends HttpServlet {
 						boolean c = f.mkdir();
 						if (!c) {
 							log.error("cannot write to directory");
-							System.out.println("cannot write to directory");
 						}
 					}
 					
@@ -119,7 +116,6 @@ public class DownloadHandler extends HttpServlet {
 						boolean c = f2.mkdir();
 						if (!c) {
 							log.error("cannot write to directory");
-							System.out.println("cannot write to directory");
 						}
 					}
 				} else if (moduleName.equals("remoteuserprofile")){
@@ -129,7 +125,6 @@ public class DownloadHandler extends HttpServlet {
 						boolean c = f.mkdir();
 						if (!c) {
 							log.error("cannot write to directory");
-							System.out.println("cannot write to directory");
 						}
 					}
 					
@@ -144,7 +139,6 @@ public class DownloadHandler extends HttpServlet {
 						boolean c = f2.mkdir();
 						if (!c) {
 							log.error("cannot write to directory");
-							System.out.println("cannot write to directory");
 						}
 					}
 					
@@ -155,7 +149,6 @@ public class DownloadHandler extends HttpServlet {
 						boolean c = f.mkdir();
 						if (!c) {
 							log.error("cannot write to directory");
-							System.out.println("cannot write to directory");
 						}
 					}
 					
@@ -170,7 +163,6 @@ public class DownloadHandler extends HttpServlet {
 						boolean c = f2.mkdir();
 						if (!c) {
 							log.error("cannot write to directory");
-							System.out.println("cannot write to directory");
 						}
 					}
 					
@@ -184,7 +176,6 @@ public class DownloadHandler extends HttpServlet {
 						boolean c = f.mkdir();
 						if (!c) {
 							log.error("cannot write to directory");
-							System.out.println("cannot write to directory");
 						}
 					}
 					
@@ -199,7 +190,6 @@ public class DownloadHandler extends HttpServlet {
 						boolean c = f2.mkdir();
 						if (!c) {
 							log.error("cannot write to directory");
-							System.out.println("cannot write to directory");
 						}
 					}
 					
@@ -212,23 +202,31 @@ public class DownloadHandler extends HttpServlet {
 				if (!moduleName.equals("nomodule")) {
 
 					
-					System.out.println("requestedFile: " + requestedFile + " current_dir: "+working_dir);
+					log.debug("requestedFile: " + requestedFile + " current_dir: "+working_dir);
 
 					String full_path = working_dir + requestedFile;
 					
 					File f = new File(full_path);
 					if (!f.exists() || !f.canRead()) {
 						if (!f.canRead()){
-							log.error("ERROR DownloadHandler: The request file does not exist / has already been deleted");
-							System.out.println("ERROR DownloadHandler: The request file does not exist / has already been deleted");
+							log.debug("LOG DownloadHandler: The request file is not readable");
 						} else {
-							log.error("ERROR DownloadHandler: The request file does not exist / has already been deleted");
-							System.out.println("ERROR DownloadHandler: The request file does not exist / has already been deleted");
+							log.debug("LOG DownloadHandler: The request file does not exist / has already been deleted");
 						}
+						log.debug("LOG ERROR requestedFile: "+requestedFile);
 						//replace the path with the default picture/document
+						
 						if (requestedFile.endsWith(".jpg")){
+							log.debug("LOG endsWith d.jpg");
+							
+							log.debug("LOG moduleName: "+moduleName);
+
 							requestedFile = DownloadHandler.defaultImageName;
-							if (moduleName.equals("userprofile")) {
+							if (moduleName.equals("remoteuserprofile")) {
+								requestedFile = DownloadHandler.defaultProfileImageName;
+							} else if (moduleName.equals("remoteuserprofilebig")) {
+								requestedFile = DownloadHandler.defaultProfileImageNameBig;
+							} else if (moduleName.equals("userprofile")) {
 								requestedFile = DownloadHandler.defaultProfileImageName;
 							} else if (moduleName.equals("chat")) {
 								requestedFile = DownloadHandler.defaultChatImageName;
@@ -249,14 +247,14 @@ public class DownloadHandler extends HttpServlet {
 						}
 					}
 					
+					log.debug("full_path: "+full_path);
+					
 					File f2 = new File(full_path);
 					if (!f2.exists() || !f2.canRead()) {
 						if (!f2.canRead()){
-							log.error("ERROR DownloadHandler: The request DEFAULT-file does not exist / has already been deleted");
-							System.out.println("ERROR DownloadHandler: The request  DEFAULT-file does not exist / has already been deleted");
+							log.debug("DownloadHandler: The request DEFAULT-file does not exist / has already been deleted");
 						} else {
-							log.error("ERROR DownloadHandler: The request DEFAULT-file does not exist / has already been deleted");
-							System.out.println("ERROR DownloadHandler: The request DEFAULT-file does not exist / has already been deleted");
+							log.debug("DownloadHandler: The request DEFAULT-file does not exist / has already been deleted");
 						}
 						//no file to handle abort processing
 						return;

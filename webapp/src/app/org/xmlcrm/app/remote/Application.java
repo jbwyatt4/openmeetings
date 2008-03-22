@@ -262,7 +262,7 @@ public class Application extends ApplicationAdapter implements
 			
 			//stop and save any recordings
 			if (currentClient.getIsRecording()) {
-				log.error("*** roomLeave Current Client is Recording - stop that");
+				log.debug("*** roomLeave Current Client is Recording - stop that");
 				StreamService.stopRecordAndSave(current, currentClient.getRoomRecordingName(), currentClient);
 				
 				//set to true and overwrite the default one cause otherwise no notification is send
@@ -298,7 +298,7 @@ public class Application extends ApplicationAdapter implements
 							//add Notification if another user is recording
 							log.debug("###########[roomLeave]");
 							if (rcl.getIsRecording()){
-								log.error("*** roomLeave Any Client is Recording - stop that");
+								log.debug("*** roomLeave Any Client is Recording - stop that");
 								StreamService.stopRecordingShowForClient(cons, currentClient, rcl.getRoomRecordingName(), false);
 							}
 						}
@@ -359,7 +359,7 @@ public class Application extends ApplicationAdapter implements
 							
 							//add Notification if another user is recording in this room
 							if (rcl.getIsRecording()){
-								log.error("*** logicalRoomLeave Any Client is Recording - stop that");
+								log.debug("*** logicalRoomLeave Any Client is Recording - stop that");
 								StreamService.stopRecordingShowForClient(cons, currentClient, rcl.getRoomRecordingName(), true);
 							}
 						}
@@ -417,7 +417,7 @@ public class Application extends ApplicationAdapter implements
 		String roomname = currentClient.getUserroom();
 		String orgdomain = currentClient.getDomain();			
 		// Notify all the clients that the stream had been started
-		log.error("start streamPublishStart broadcast start: "+ stream.getPublishedName() + "CONN " + current);
+		log.debug("start streamPublishStart broadcast start: "+ stream.getPublishedName() + "CONN " + current);
 		
 		Iterator<IConnection> it = current.getScope().getConnections();
 		while (it.hasNext()) {
@@ -509,7 +509,7 @@ public class Application extends ApplicationAdapter implements
 
 							//if this close stream event then stop the recording of this stream
 							if (clientFunction.equals("closeStream") && rcl.getIsRecording()){
-								log.error("*** sendClientBroadcastNotifications Any Client is Recording - stop that");
+								log.debug("*** sendClientBroadcastNotifications Any Client is Recording - stop that");
 								StreamService.stopRecordingShowForClient(conn, currentClient, rcl.getRoomRecordingName(), false);
 							}
 						}
@@ -1176,6 +1176,36 @@ public class Application extends ApplicationAdapter implements
 		return 1;
 	}
 	
+	/**
+	 * update the Session Object after changing the user-record
+	 * @param users_id
+	 */
+	public void updateUserSessionObject(Long users_id, String pictureuri){
+		try {
+			log.debug("updateUserSessionObject 1: "+users_id);
+			log.debug("updateUserSessionObject 2: "+pictureuri);
+			
+			Users us = Usermanagement.getInstance().getUser(users_id);
+			for (Iterator<String> itList = ClientList.keySet().iterator();itList.hasNext();) {
+				String red5Id  = itList.next();
+				RoomClient rcl = ClientList.get(red5Id);
+				
+				log.debug("updateUserSessionObject rcl1: "+rcl.getUser_id());
+				if (rcl.getUser_id().equals(users_id)){
+					log.debug("updateUserSessionObject #### FOUND USER rcl1: "+rcl.getUser_id()+ " NEW PIC: "+pictureuri);
+					
+					rcl.setPicture_uri(pictureuri);
+					rcl.setUsername(us.getLogin());
+					rcl.setFirstname(us.getFirstname());
+					rcl.setLastname(us.getLastname());
+
+					ClientList.put(red5Id, rcl);
+				}
+			}
+		} catch (Exception err) {
+			log.error("[updateUserSessionObject]",err);
+		}
+	}
 
 	public void sendMessageWithClientByUserId(Object message, String userId) {
 		try {
