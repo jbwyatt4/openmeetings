@@ -35,6 +35,8 @@ Tips for Installation:
   * CustomCryptMechanism - how to write Custom Encryption Styles
   * CustomAuthentication - how to write a Custom Authentication for Single Sign-On
   * SessionVariables  	- Documentation how Session-Variables are handled
+  * ModuleDevelopersGuideline  	- Module Developer's Guideline (alpha)
+  * NewStructure  - NewStructure of the OpenLaszlo-LZX-Source Files
   * [Internationalisation]
   * BandwidthNetworkSettings
   * SimpleSampleApps  	
