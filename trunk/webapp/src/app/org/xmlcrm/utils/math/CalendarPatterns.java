@@ -12,9 +12,9 @@ import org.apache.commons.logging.LogFactory;
  * 27.08.2005 - 19:24:25
  *
  */
-public class Calender {
+public class CalendarPatterns {
 	
-	private static final Log log = LogFactory.getLog(Calender.class);
+	private static final Log log = LogFactory.getLog(CalendarPatterns.class);
 	
 	public static SimpleDateFormat dateFormat__ddMMyyyyHHmmss = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
 	public static SimpleDateFormat dateFormat__ddMMyyyy = new SimpleDateFormat("dd.MM.yyyy");

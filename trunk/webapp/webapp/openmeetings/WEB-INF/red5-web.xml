@@ -84,5 +84,10 @@
     <bean id="streamservice.service" 
 	    class="org.xmlcrm.app.remote.StreamService" 
 		singleton="true" />	
+	
+	<!-- Class for Methods which can be invoked by the client -->
+    <bean id="invitationservice.service" 
+	    class="org.xmlcrm.app.remote.InvitationService" 
+		singleton="true" />		
 					
 </beans>

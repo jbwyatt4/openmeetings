@@ -44,7 +44,7 @@ public class HibernateUtil {
 	   * will be executed only if the session is actually created
 	   * by this owner.  
 	   */
-	  public static void closeSession(Object ownership) throws Exception{
+	  public synchronized static void closeSession(Object ownership) throws Exception{
 	    if(((Owner)ownership).identity){
 	      //System.out.println("Identity is accepted. Now closing the session");
 	      Session session = (Session)currentSession.get();
@@ -58,14 +58,14 @@ public class HibernateUtil {
 	  /**
 	   * returns the current session
 	   */
-	  public static Session getSession() throws HibernateException{
+	  public synchronized static Session getSession() throws HibernateException{
 	    return (Session)currentSession.get();
 	  } 
 	  
 	  /** 
 	   * Creating a session factory , if not already loaded
 	   */
-	  private static SessionFactory getSessionFactory() {
+	  private synchronized static SessionFactory getSessionFactory() {
 		try {
 			if (sessionFactory == null) {
 				if (isLife){

@@ -20,13 +20,18 @@ public class Invitations {
 	private Date updatetime;
 	private String deleted;
 	
-	private Rooms roomid;
+	private Rooms room;
 	
 	//the hash for the link
 	private String hash;
 	private String invitedname;
 	private String invitedEMail;
+	private Boolean isPasswordProtected;
 	private String invitationpass;
+	
+	//this is necessary as a room can be shared between multiple domains
+	//is eithter *public* or an organisation_ID
+	private String conferencedomain;
 	
 	//Invitations by Time are only valid between the validFrom validTo TimeStamp
 	private Boolean isValidByTime = false;
@@ -64,11 +69,11 @@ public class Invitations {
 	 *  not-null="false"
 	 *  outer-join="true"
 	 */
-	public Rooms getRoomid() {
-		return roomid;
+	public Rooms getRoom() {
+		return room;
 	}
-	public void setRoomid(Rooms roomid) {
-		this.roomid = roomid;
+	public void setRoom(Rooms room) {
+		this.room = room;
 	}
 
 
@@ -160,8 +165,21 @@ public class Invitations {
 	public void setInvitedEMail(String invitedEMail) {
 		this.invitedEMail = invitedEMail;
 	}
-
+	
     /**
+     * @hibernate.property
+     *  column="ispasswordprotected"
+     *  type="boolean"
+     */ 
+    public Boolean getIsPasswordProtected() {
+		return isPasswordProtected;
+	}
+	public void setIsPasswordProtected(Boolean isPasswordProtected) {
+		this.isPasswordProtected = isPasswordProtected;
+	}
+
+
+	/**
      * @hibernate.property
      *  column="invitationpass"
      *  type="string"
@@ -173,7 +191,21 @@ public class Invitations {
 		this.invitationpass = invitationpass;
 	}
 
-    /**
+	
+	/**
+     * @hibernate.property
+     *  column="conferencedomain"
+     *  type="string"
+     */ 
+    public String getConferencedomain() {
+		return conferencedomain;
+	}
+	public void setConferencedomain(String conferencedomain) {
+		this.conferencedomain = conferencedomain;
+	}
+
+
+	/**
      * @hibernate.property
      *  column="validFrom"
      *  type="java.util.Date"

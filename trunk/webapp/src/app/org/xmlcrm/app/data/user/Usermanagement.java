@@ -133,7 +133,7 @@ public class Usermanagement {
 			List ll = query.list();
 			tx.commit();
 			HibernateUtil.closeSession(idf);
-			log.error((Long)ll.get(0));
+			log.info((Long)ll.get(0));
 			return (Long)ll.get(0);				
 		} catch (HibernateException ex) {
 			log.error("[selectMaxFromUsers] "+ex);
@@ -227,18 +227,18 @@ public class Usermanagement {
 			crit.add(Restrictions.eq("deleted", "false"));
 			crit.add(Restrictions.eq("status", 1));
 			List ll = crit.list();
-			log.error("debug loginUser: " + username);
+			log.info("debug loginUser: " + username);
 			tx.commit();
 			HibernateUtil.closeSession(idf);
 
-			log.error("debug SIZE: " + ll.size());
+			log.info("debug SIZE: " + ll.size());
 			
 			if (ll.size()==0) {
 				return new Long(-10);
 			} else {
 				Users users = (Users) ll.get(0);
 				if (ManageCryptStyle.getInstance().getInstanceOfCrypt().verifyPassword(userpass, users.getPassword())) {
-					log.error("chsum OK: "+ users.getUser_id());
+					log.info("chsum OK: "+ users.getUser_id());
 					Sessionmanagement.getInstance().updateUser(SID, users.getUser_id());
 					users.setUserlevel(getUserLevel(users.getLevel_id()));		
 					updateLastLogin(users);

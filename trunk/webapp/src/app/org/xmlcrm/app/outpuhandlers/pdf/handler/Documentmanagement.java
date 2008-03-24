@@ -29,20 +29,20 @@ import com.lowagie.text.pdf.BaseFont;
 
 import org.xmlcrm.app.outpuhandlers.pdf.pdfobjects.pdfobject;
 import org.xmlcrm.app.outpuhandlers.utils.HtmlHandler;
-import org.xmlcrm.utils.math.Calender;
+import org.xmlcrm.utils.math.CalendarPatterns;
 
 import com.lowagie.text.Chunk;
 
 public class Documentmanagement {
     XMLReader xmlReader = null;
-    private Calender CalenderI;
+    private CalendarPatterns CalenderI;
  
     private HtmlHandler HtmlHandler;
     public Documentmanagement() {
         super();
         // TODO Auto-generated constructor stub
 
-        CalenderI = new Calender();
+        CalenderI = new CalendarPatterns();
         HtmlHandler = new HtmlHandler(this);
         try {
             SAXParserFactory spfactory =

@@ -25,7 +25,7 @@ import org.xmlcrm.app.data.user.Usermanagement;
 import org.xmlcrm.app.xmlimport.LanguageImport;
 import org.xmlcrm.app.xmlimport.UserImport;
 import org.xmlcrm.app.hibernate.beans.user.*;
-import org.xmlcrm.utils.math.Calender;
+import org.xmlcrm.utils.math.CalendarPatterns;
 
 public class Import extends HttpServlet {
 

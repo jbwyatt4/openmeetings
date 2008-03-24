@@ -13,7 +13,7 @@ import org.xmlcrm.app.data.user.Emailmanagement;
 import org.xmlcrm.app.data.user.Organisationmanagement;
 import org.xmlcrm.app.data.user.Usermanagement;
 import org.xmlcrm.app.hibernate.beans.user.Users;
-import org.xmlcrm.utils.math.Calender;
+import org.xmlcrm.utils.math.CalendarPatterns;
 
 public class UserImport {
 	
@@ -54,7 +54,7 @@ public class UserImport {
             
             Users us = new Users();
 
-            us.setAge(Calender.parseDate(itemUsers.element("age").getText()));
+            us.setAge(CalendarPatterns.parseDate(itemUsers.element("age").getText()));
             us.setAvailible(Integer.valueOf(itemUsers.element("availible").getText()).intValue());
 			us.setDeleted(itemUsers.element("deleted").getText());
 			us.setFirstname(itemUsers.element("firstname").getText());
@@ -67,7 +67,7 @@ public class UserImport {
 				us.setLanguage_id(Long.valueOf(itemUsers.element("language_id").getText()).longValue());
 				
 			us.setStatus(Integer.valueOf(itemUsers.element("status").getText()).intValue());
-			us.setRegdate(Calender.parseDate(itemUsers.element("regdate").getText()));
+			us.setRegdate(CalendarPatterns.parseDate(itemUsers.element("regdate").getText()));
 			us.setTitle_id(Integer.valueOf(itemUsers.element("title_id").getText()).intValue());
 			us.setLevel_id(Long.valueOf(itemUsers.element("level_id").getText()).longValue());
 			

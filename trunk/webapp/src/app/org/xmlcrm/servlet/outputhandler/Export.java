@@ -18,7 +18,7 @@ import org.dom4j.DocumentHelper;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
 
-import org.xmlcrm.utils.math.Calender;
+import org.xmlcrm.utils.math.CalendarPatterns;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.xmlcrm.app.data.basic.Sessionmanagement;
@@ -142,7 +142,7 @@ public class Export extends HttpServlet {
 
 			Element user = users.addElement("user");
 
-			user.addElement("age").setText(Calender.getDateByMiliSeconds(u.getAge()));
+			user.addElement("age").setText(CalendarPatterns.getDateByMiliSeconds(u.getAge()));
 			user.addElement("availible").setText(u.getAvailible().toString());
 			user.addElement("deleted").setText(u.getDeleted());
 			user.addElement("firstname").setText(u.getFirstname());
@@ -158,7 +158,7 @@ public class Export extends HttpServlet {
 			else user.addElement("language_id").setText("");
 				
 			user.addElement("status").setText(u.getStatus().toString());
-			user.addElement("regdate").setText(Calender.getDateWithTimeByMiliSeconds(u.getRegdate()));
+			user.addElement("regdate").setText(CalendarPatterns.getDateWithTimeByMiliSeconds(u.getRegdate()));
 			user.addElement("title_id").setText(u.getTitle_id().toString());
 			user.addElement("level_id").setText(u.getLevel_id().toString());
 			
