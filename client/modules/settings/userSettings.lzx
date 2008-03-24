@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library>
 
-
+<!--- User Profile Setting Panel -->
 <class name="userSettings" extends="baseContentSaveView"
-		addIsVisible="false" deleteIsVisible="false" >
+		addIsVisible="false" deleteIsVisible="false">
 
 	<!-- recordContent-id -->
 	<attribute name="user_id" value="0" type="number" />
@@ -23,12 +23,12 @@
 		this.getUserSelf.doCall();
     </handler>
     
+    <!-- methods -->
+    
     <method name="sendRefresh">
     	this.getUserSelf.doCall();
     </method>    
 	
-	<!-- methods -->
-    
     <method name="initFields" args="obj">
     	<![CDATA[
             this.userObj = obj;
@@ -111,14 +111,18 @@
 	
 	<!-- content -->	
     
+    <!-- 143:userdata -->
     <labelText labelid="143" width="200" y="40" resize="false" fontstyle="bold" />
 
+    <!-- 133:Password -->
     <labelText labelid="133" width="200" y="70" resize="false" x="2"/>
         <customEdittext name="userpass1" y="70" password="true" x="120" width="270" text="" />
         
+    <!-- 134:Retype -->
     <labelText labelid="134" width="200" y="100" resize="false" x="2"/>
         <customEdittext name="userpass2" y="100" password="true" x="120" width="270" text="" />   
     
+    <!-- 135:Firstname -->
     <labelText labelid="135" width="200" y="130" resize="false" x="2"/>
         <combobox name="salutation" width="100" y="130" x="120" editable="false" fontsize="12">
 	        <handler name="oninit" >
@@ -132,39 +136,48 @@
         </combobox> 	
         <customEdittext name="firstname" y="130" x="230" width="160" text="" />
         
+    <!-- 136:Lastname -->
     <labelText labelid="136" width="200" y="160" resize="false" x="2"/>
         <customEdittext name="lastname" y="160" x="120" width="270" text="" />                
 
+    <!-- 137:Mail -->
     <labelText labelid="137" width="200" y="190" resize="false" x="2"/>
         <customEdittext name="email" y="190" x="120" width="270" text="" />
         
+    <!-- 138:Birthday -->
     <labelText labelid="138" width="200" y="220" resize="false" x="2"/>
         <dateField name="age" y="220" x="120" width="270" text="" />
         
+    <!-- 139:Street/No -->
     <labelText labelid="139" width="200" y="250" resize="false" x="2"/>
         <customEdittext name="street" y="250" x="120" width="220" text="" />
         <customEdittext name="house" y="250" x="350" width="40" text="" />
         
+    <!-- 140:ZIP/Town -->
     <labelText labelid="140" width="280" y="280" resize="false" x="2"/>
         <customEdittext name="zip" y="280" x="120" width="70" text="" />   
         <customEdittext name="town" y="280" x="200" width="190" text="" />                        
          
+    <!-- 141:Country -->
     <labelText labelid="141" width="200" y="310" resize="false" x="2"/>  
 		<validText name="state" width="270" y="310" x="120" fontsize="12" 
             shownitems="7" validate_method="$once{ canvas.validateCountry }" 
             resultId="state_id" resultName="name" />
 			
 	 
+    <!-- 142:Adress-Info -->
     <labelText labelid="142" width="200" y="340" resize="false" x="2"/>
         <customEdittext name="adress_comment" y="340" x="120" width="270" 
             height="100" text="" multiline="true"/>
        
+    <!-- 161:Organisations -->
     <labelText labelid="161" width="200" y="480" resize="false" x="2"/>     
     <simpleValueList name="_organisationslist" y="480" x="120" width="270" height="100" 
 		multiselect="true" />
 		
     <image y="40" x="410" name="_userpic" />
     
+    <!-- 379:Upload new Image -->
     <simpleLabelButton y="50" labelid="379" x="550"
         onclick="new uploadWindow(canvas.main_content._content.inner,{x:300,uploadmodule:'userprofile',isOnlyProfile:true,isdefaultreturn:false,returnObj:this.parent});" /> 		
      
