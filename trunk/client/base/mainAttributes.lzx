@@ -7,7 +7,7 @@
 ##########################################################
 these properties will be overwritten by config.xml -->  
     
-<!-- URL/IP to use for the Server 192.168.178.28 
+<!--- URL/IP to use for the Server 192.168.178.28 
 	inno02.fh-pforzheim.de macbook 192.168.2.103
 	192.168.2.102 bxlug.homelinux.org 213.219.160.72
 	    if this value is empty it will try to connect to the 
@@ -15,7 +15,7 @@ these properties will be overwritten by config.xml -->
     -->
 <attribute name="rtmphostlocal" value="" type="string" />
  
-<!--  
+<!---  
 	Port to use for the Server
 	To this port the default server lookup is done
 	
@@ -23,21 +23,21 @@ these properties will be overwritten by config.xml -->
  -->
 <attribute name="rtmpport" value="1935" type="string" />
 
-<!-- 
+<!--- 
 	Port to use for the Server
 	To this port the fallback is done once the default rtmport failed
 	this should workaround 99% of all firewalls
  -->
 <attribute name="rtmpTunnelport" value="8088" type="string" />
 
-<!-- 
+<!--- 
 	Port to use for the Server
 	This port is used to connec to the http-servlet
 	of the red5-servlet
  -->
 <attribute name="red5httpport" value="5080" type="string" />
 	
-<!--
+<!---
 	These colors are the main colors and style the hole application
  -->
 <attribute name="basebgcolorizer" value="0xB0C4DE" type="string" />	
@@ -48,16 +48,16 @@ these properties will be overwritten by config.xml -->
 
 <attribute name="webAppRootKey" value="" type="string" />
 
-<!-- Name of the Application -->
+<!--- Name of the Application -->
 <attribute name="currentappname" value="OpenMeetings" type="string" />   
 <attribute name="currentappnameurl" value="OpenMeetings" type="string" />   
 <attribute name="currentappnamebugurl" value="OpenMeetings" type="string" /> 
 
-<!-- Video Settings -->
+<!--- Video Settings -->
 <attribute name="loudnessAcitviation" value="10" type="number" />
 <attribute name="showWindowEffect" value="y" type="string" /> 
 
-<!-- Calendar Settings -->
+<!--- Calendar Settings -->
 <attribute name="firstdayinweek" value="1" type="number" />
 
 <!-- END OF config.xml attributes
@@ -72,19 +72,19 @@ these properties will be overwritten by config.xml -->
 
 
 
-<!-- URL/IP to use for the Server -->
+<!--- URL/IP to use for the Server -->
 <attribute name="rtmphost" value="" type="string" />
 
-<!-- Username/Nickname -->
+<!--- Username/Nickname -->
 <attribute name="currentuser" value="" type="string" />
 
-<!-- Roomname internaly Scope -->
+<!--- Roomname internaly Scope -->
 <attribute name="currentcourse" value="" type="string" />
 
-<!-- Roomname/Coursename -->
+<!--- Roomname/Coursename -->
 <attribute name="currentcourseName" value="" type="string" />
 
-<!-- 
+<!--- 
     The Reference for a Streaming Object
     This should be removed later when the OpenLaszlo API handles
     the broadcast better
@@ -101,7 +101,7 @@ these properties will be overwritten by config.xml -->
 <attribute name="ismoderator" value="false" type="boolean" />
 
 <attribute name="loadingmessage" value="" type="string" />
-<!-- 
+<!--- 
 	The state of the Application
 	At the beginning you should choose how many users are allowed to
 	login simultaniously
@@ -116,19 +116,19 @@ these properties will be overwritten by config.xml -->
 <attribute name="uploadmoduleimg" value="videoconf1" type="string" />
 <attribute name="foldersequence" value="null" />
 <attribute name="uploadmoduleimgfolder" value="" type="string" />
-<!-- 
+<!---
 	Can be either 2 or 4
 	But theoretically there is no limit
  -->
 <attribute name="numberofallowedpartners" value="0" type="number" />
 
-<!-- Number of currently connected Users -->
+<!--- Number of currently connected Users -->
 <attribute name="numberofpartners" value="0" type="number" />
 
-<!-- unique ID of this Stream -->
+<!--- unique ID of this Stream -->
 <attribute name="streamid" value="0" type="string" />
 
-<!-- id of the current Mod in this room -->
+<!--- id of the current Mod in this room -->
 <attribute name="currentmodid" value="0" type="string" />
 
 <attribute name="currentlanguage" value="english" type="string" />
@@ -143,7 +143,7 @@ these properties will be overwritten by config.xml -->
 <attribute name="salutationsInitValues" value="null" />
 <attribute name="roomTypesInitValues" value="null" />
 
-<!-- Username of current user -->
+<!--- Username of current user -->
 <attribute name="currentusename" value="defaultname" type="string" />
 <attribute name="user_id" value="0" type="number" />
 <attribute name="firstName" value="" type="string" />
@@ -154,7 +154,7 @@ these properties will be overwritten by config.xml -->
 <attribute name="picture_uri" value="" type="string" />
 <attribute name="language" value="" type="string" />
 
-<!-- User porperties -->
+<!--- User porperties -->
 <attribute name="currentusercolor" value="0" type="number" />
 <attribute name="currentuserpos" value="0" type="number" />
 	
@@ -165,7 +165,7 @@ these properties will be overwritten by config.xml -->
 
 <attribute name="publicSID" value="" type="string" />
 
-<!-- attributes for direct room access -->
+<!--- attributes for direct room access -->
 <attribute name="initroomid" value="0" type="number" />
 <attribute name="initroomStr" value="" type="string" />
 <attribute name="initroomtype" value="" type="string" />
@@ -182,7 +182,7 @@ these properties will be overwritten by config.xml -->
 
 <attribute name="currentrecorder_id" value="0" type="number" /> 
 
-<!-- 
+<!--- 
 Holds a refernce to the current VideoCOntainer Object
 containing the VideoViews
 and some more references to temp-objects

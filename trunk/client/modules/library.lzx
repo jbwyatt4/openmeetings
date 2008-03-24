@@ -10,9 +10,9 @@ because it was renamed to useradmin
 H.kuze 2008/3/24
 -->
 
-	<include href="useradmin/" />
-	<include href="orgadmin/" />
-	<include href="roomadmin/" />
+	<include href="useradmin/" /><!-- admin module-->
+	<include href="orgadmin/" /><!-- admin module-->
+	<include href="roomadmin/" /><!-- admin module-->
 	<include href="invitation/" />
 
 <!--
@@ -24,11 +24,11 @@ H.Kuze 2008/3/24
 
 	<include href="dashboard/" />
 	<include href="issuetracker/" />
-	<include href="confadmin/" />
+	<include href="confadmin/" /><!-- admin module-->
 	<include href="meetings/" />
 	<include href="events/" />
-	<include href="languageseditor/" />
-	<include href="backup/" />
+	<include href="languageseditor/" /><!-- admin module-->
+	<include href="backup/" /><!-- admin module-->
 	<include href="recording/" />
 
 </library>

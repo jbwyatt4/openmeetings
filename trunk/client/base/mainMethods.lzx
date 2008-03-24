@@ -91,6 +91,7 @@
 </method>
 
 <method name="getLabelName" args="id">
+	if($debug) Debug.write("main.lzx/getLabelName()",id);
 	return getLabelTag(id);
 </method>
 
