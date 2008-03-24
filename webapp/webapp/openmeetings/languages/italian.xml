@@ -1574,5 +1574,50 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   </string>
   <string id="523" name="timeRegExpError">
     <value>Please enter a valid time, for example 12:23 (hh:mm)</value>
-  </string>	
+  </string>
+  <string id="524" name="invitation_window">
+    <value>Passwort protected</value>
+  </string>
+  <string id="525" name="invitation_window_passwordLabel">
+    <value>Password</value>
+  </string>
+  <string id="526" name="invitation_window_validLabel">
+    <value>Validity period</value>
+  </string>
+  <string id="527" name="invitation_window_valid">
+    <value>Endless</value>
+  </string>
+  <string id="528" name="invitation_window_valid">
+    <value>Period</value>
+  </string>
+  <string id="529" name="invitation_window_valid">
+    <value>One-Time</value>
+  </string>
+  <string id="530" name="invitation_window_validFromLabel">
+    <value>Valid From:</value>
+  </string>
+  <string id="531" name="invitation_window_validToLabel">
+    <value>Valid to:</value>
+  </string>
+  <string id="532" name="invitation_window_MailSubject">
+    <value>Invitation To OpenMeetings</value>
+  </string>
+  <string id="533" name="invitation_error">
+    <value>Not Invitation availible for this Invitation-Code</value>
+  </string>
+  <string id="534" name="invitation_error">
+    <value>The Invitation was already used. This type of Invitation cannot be re-used.</value>
+  </string>
+  <string id="535" name="invitation_error">
+    <value>This Invitation-Code is not valid.</value>
+  </string>
+  <string id="536" name="invitation_pass">
+    <value>Password:</value>
+  </string>
+  <string id="537" name="invitation_pass_btn">
+    <value>Check Password</value>
+  </string>
+  <string id="538" name="invitation_pass_error">
+    <value>Invalid Password!</value>
+  </string>
 </language>

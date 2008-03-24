@@ -937,31 +937,31 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Logout</value>
   </string>
   <string id="311" name="loginwindow">
-    <value>Desktop Viewer</value>
+    <value>Passwort zurücksetzten?</value>
   </string>
   <string id="312" name="loginwindow">
-    <value>starte Desktop Viewer</value>
+    <value>Passwort zurücksetzen</value>
   </string>
   <string id="313" name="loginwindow">
-    <value>Video und Audio</value>
+    <value>Bei EMail</value>
   </string>
   <string id="314" name="loginwindow">
-    <value>Chat</value>
+    <value>Bei Login</value>
   </string>
   <string id="315" name="loginwindow">
-    <value>zeichenbrett</value>
+    <value>EMail</value>
   </string>
   <string id="316" name="loginwindow">
-    <value>Moderation</value>
+    <value>Login</value>
   </string>
   <string id="317" name="loginwindow">
     <value>Dateien</value>
   </string>
   <string id="318" name="loginwindow">
-    <value>Benutzer</value>
+    <value>Email mit Reset-Link versenden</value>
   </string>
   <string id="319" name="loginwindow">
-    <value>Umfragen</value>
+    <value>Geben Sie bitte entweder eine EMail oder einen Login an.</value>
   </string>
   <string id="320" name="loginwindow">
     <value>There is no User connected to this Username</value>
@@ -1168,16 +1168,10 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>import</value>
   </string>
   <string id="388" name="languageseditor">
-    <value>Export to XML - These files can be used to: 
-		- Contribute to the project 
-		- Import into another System 
-		- Backup 
-		- Customization 
-		- Put it into the language-directory for your next installation</value>
+    <value>Export to XML - These files can be used to: - Contribute to the project - Import into another System - Backup - Customization - Put it into the language-directory for your next installation</value>
   </string>
   <string id="389" name="languageseditor">
-    <value>Choose a language file to import. Choose the right Langauge from the Combobox! 
-		No matter what the name of the file is, it will be imported into this language!</value>
+    <value>Choose a language file to import. Choose the right Langauge from the Combobox! No matter what the name of the file is, it will be imported into this language!</value>
   </string>
   <string id="390" name="importwindow">
     <value>import - choose file</value>
@@ -1235,7 +1229,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   </string>
   <string id="408" name="roomslist">
     <value>since:</value>
-  </string>	
+  </string>
   <string id="409" name="record">
     <value>play recording</value>
   </string>
@@ -1262,7 +1256,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   </string>
   <string id="417" name="record">
     <value>Recording:</value>
-  </string>	
+  </string>
   <string id="418" name="record_error_msg">
     <value>There is already somebody recording at the moment:</value>
   </string>
@@ -1304,7 +1298,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   </string>
   <string id="431" name="paint_tool_letter">
     <value>change Fontsize</value>
-  </string>	
+  </string>
   <string id="432" name="recordingslist_delete">
     <value>Delete Recording</value>
   </string>
@@ -1367,7 +1361,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   </string>
   <string id="452" name="choose_video_settings_info_text">
     <value>No Audio/Video from your PC will be published, instead of that a picture from your profile will be shown. Choose these settings if you have problems with your bandwidth or a very slow Internet connection.</value>
-  </string>	
+  </string>
   <string id="453" name="calendar_dayname_monday">
     <value>MO</value>
   </string>
@@ -1389,7 +1383,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   <string id="459" name="calendar_dayname_sunday">
     <value>SO</value>
   </string>
-  <string id="460" name="calendar_dayname_MondayLabel">
+  <string id="460" name="calendar_dayname_monday">
     <value>Montag</value>
   </string>
   <string id="461" name="calendar_dayname_TuesdayLabel">
@@ -1454,10 +1448,10 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   </string>
   <string id="481" name="calendarwin_header">
     <value>Kalender</value>
-  </string>	
+  </string>
   <string id="482" name="roomadmin_labelNumberOfParticipants">
     <value>Teilnehmerzahl</value>
-  </string>	
+  </string>
   <string id="483" name="roomValue_advancedSettings">
     <value>Show Layout Settings</value>
   </string>
@@ -1499,13 +1493,13 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   </string>
   <string id="496" name="roomAdmin_layout_files">
     <value>Breite | Höhe</value>
-  </string>	
+  </string>
   <string id="497" name="moderator_gone_message">
     <value>Der Moderator hat den Raum verlassen. Sie müssen die Moderation beantragen wenn Sie auf das Zeichenbrett zeichnen wollen.</value>
   </string>
   <string id="498" name="moderator_message_event_no_mod">
     <value>Es gibt momentan keinen Moderator in diesen Raum. Sie müssen die Moderation beantragen oder warten.</value>
-  </string>	
+  </string>
   <string id="499" name="feedback_template_subject">
     <value>Feedback OpenMeetings</value>
   </string>
@@ -1562,23 +1556,68 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   </string>
   <string id="517" name="reset_password_mail_subject">
     <value>OpenMeetings Password Reset</value>
-  </string>	
+  </string>
   <string id="518" name="dateRegExpError">
-    <value>Bitte geben Sie ein Datum im Format dd.mm.yyyy an, zum Beispiel: 24.12.2001</value>
+    <value>Please enter a valid Date, for example 24.12.2001 (dd.mm.yyyy)</value>
   </string>
   <string id="519" name="emailRegExpError">
-    <value>Bitte geben Sie ein gültiges Datum an, zum Beispiel beispiel@domain.de</value>
+    <value>Please enter a valid EMail, for example name@mail.com</value>
   </string>
   <string id="520" name="floatRegExpError">
-    <value>Bitte geben Sie eine Fließkommazahl an, zum Beispiel 1.00</value>
+    <value>Please enter a Float-Number, for example 1.00</value>
   </string>
   <string id="521" name="numberRegExpError">
-    <value>Bitte geben Sie eine Ganzzahl an, zum Beispiel 100</value>
+    <value>Please enter a Number (Integer), for example 100</value>
   </string>
   <string id="522" name="phoneRegExpError">
-    <value>Bitte geben Sie eine Telefonnumer an, zum Beispiel ++49 0123 123123</value>
+    <value>Please enter a valid Phone number, for example ++49 0123 123123</value>
   </string>
   <string id="523" name="timeRegExpError">
-    <value>Bitte geben sie eine gültige Uhrzeit an, zum Beispiel 12:23 (hh:mm)</value>
-  </string>	
+    <value>Please enter a valid time, for example 12:23 (hh:mm)</value>
+  </string>
+  <string id="524" name="invitation_window">
+    <value>Passwort protected</value>
+  </string>
+  <string id="525" name="invitation_window_passwordLabel">
+    <value>Password</value>
+  </string>
+  <string id="526" name="invitation_window_validLabel">
+    <value>Validity period</value>
+  </string>
+  <string id="527" name="invitation_window_valid">
+    <value>Endless</value>
+  </string>
+  <string id="528" name="invitation_window_valid">
+    <value>Period</value>
+  </string>
+  <string id="529" name="invitation_window_valid">
+    <value>One-Time</value>
+  </string>
+  <string id="530" name="invitation_window_validFromLabel">
+    <value>Valid From:</value>
+  </string>
+  <string id="531" name="invitation_window_validToLabel">
+    <value>Valid to:</value>
+  </string>
+  <string id="532" name="invitation_window_MailSubject">
+    <value>Invitation To OpenMeetings</value>
+  </string>
+  <string id="533" name="invitation_error">
+    <value>Not Invitation availible for this Invitation-Code</value>
+  </string>
+  <string id="534" name="invitation_error">
+    <value>The Invitation was already used. This type of Invitation cannot be re-used.</value>
+  </string>
+  <string id="535" name="invitation_error">
+    <value>This Invitation-Code is not valid.</value>
+  </string>
+  <string id="536" name="invitation_pass">
+    <value>Password:</value>
+  </string>
+  <string id="537" name="invitation_pass_btn">
+    <value>Check Password</value>
+  </string>
+  <string id="538" name="invitation_pass_error">
+    <value>Invalid Password!</value>
+  </string>
 </language>

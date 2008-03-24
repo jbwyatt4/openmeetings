@@ -253,17 +253,29 @@ public class MainService implements IPendingServiceCallback {
     		return new Long(-10);
     	}
     }
-
-    /*
-     * send an invitation to another user
-     * 
+    
+    /**
+     * send an invitation to another user by Mail
+     * @deprecated
+     * @param SID
+     * @param username
+     * @param message
+     * @param domain
+     * @param room
+     * @param roomtype
+     * @param baseurl
+     * @param email
+     * @param subject
+     * @param room_id
+     * @return
      */
-    public String sendInvitation(String SID, String username, String message, String domain, String room, String roomtype, String baseurl, String email, String subject, Long room_id){
+    public String sendInvitation(String SID, String username, String message, String domain, 
+    		String room, String roomtype, String baseurl, String email, String subject, Long room_id){
     	Long users_id = Sessionmanagement.getInstance().checkSession(SID);
     	Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
     	return Invitationmanagement.getInstance().sendInvitionLink(user_level, username, message, domain, room, roomtype, baseurl, email, subject, room_id);
     }
-    
+
     /**
      * send some feedback, this will only work for the online demo-version
      * @param SID

@@ -30,7 +30,7 @@ import org.xmlcrm.app.conference.videobeans.RoomClient;
 import org.xmlcrm.app.data.basic.AuthLevelmanagement;
 import org.xmlcrm.app.data.basic.Sessionmanagement;
 import org.xmlcrm.app.data.user.Usermanagement;
-import org.xmlcrm.utils.math.Calender;
+import org.xmlcrm.utils.math.CalendarPatterns;
 import org.xmlcrm.app.hibernate.beans.user.Users;
 import org.xmlcrm.app.hibernate.beans.domain.Organisation_Users;
 import org.xmlcrm.app.data.conference.Roommanagement;
@@ -394,7 +394,7 @@ public class StreamService implements IPendingServiceCallback {
 	}
 	
 	public static String generateFileName(String streamid) throws Exception{
-		String dateString = Calender.getTimeForStreamId(new java.util.Date());
+		String dateString = CalendarPatterns.getTimeForStreamId(new java.util.Date());
 		return streamid+"_"+dateString;
 		
 	}
@@ -439,7 +439,7 @@ public class StreamService implements IPendingServiceCallback {
 				
 				for (Iterator<Recording> iter = rList.iterator();iter.hasNext();) {
 					Recording rec = iter.next();
-					rec.setStarttimeAsString(Calender.getDateWithTimeByMiliSeconds(rec.getStarttime()));
+					rec.setStarttimeAsString(CalendarPatterns.getDateWithTimeByMiliSeconds(rec.getStarttime()));
 				}
 				
 				return rList;

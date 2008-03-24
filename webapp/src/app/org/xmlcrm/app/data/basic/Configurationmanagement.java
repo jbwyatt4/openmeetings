@@ -21,7 +21,7 @@ import org.xmlcrm.app.data.beans.basic.SearchResult;
 import org.xmlcrm.app.data.user.Usermanagement;
 import org.xmlcrm.app.hibernate.beans.basic.Configuration;
 import org.xmlcrm.app.hibernate.utils.HibernateUtil;
-import org.xmlcrm.utils.math.Calender;
+import org.xmlcrm.utils.math.CalendarPatterns;
 import org.xmlcrm.utils.mappings.CastMapToObject;
 
 public class Configurationmanagement {
