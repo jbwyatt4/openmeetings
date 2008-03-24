@@ -1,4 +1,4 @@
-= New Structure of Openmeetings =
+= New Structure of Openmeetings (but may be changed daily) =
 
 Regarding [http://code.google.com/p/openmeetings/issues/detail?id=353 Issue 353]
 
