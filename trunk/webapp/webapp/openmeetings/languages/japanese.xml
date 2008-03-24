@@ -1006,7 +1006,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>OK</value>
   </string>
   <string id="334" name="rpcgeneralerror">
-    <value>Unkown Error. Please report this to your Service-Team.</value>
+    <value>未知のエラーです。管理者に報告してください。</value>
   </string>
   <string id="335" name="loginwindow">
     <value>ユーザ名が見つかりません。</value>
@@ -1030,7 +1030,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>ファイル名が短すぎます。</value>
   </string>
   <string id="342" name="filebrowser">
-    <value>Could not save Address</value>
+    <value>アドレスが保存できませんでした。</value>
   </string>
   <string id="343" name="useradmin">
     <value>ユーザは追加されました。このユーザは少なくとも一つの組織に所属させる必要があります。</value>
@@ -1039,10 +1039,10 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>新規作成</value>
   </string>
   <string id="345" name="languageseditor">
-    <value>No Field found with this FieldId.</value>
+    <value>このフィールドIDのフィールドが見つかりません。</value>
   </string>
   <string id="346" name="languageseditor">
-    <value>No Label found for that Field.</value>
+    <value>このフィールドのラベルが見つかりません。</value>
   </string>
   <string id="347" name="errormessage">
     <value>管理者権限が必要です。</value>
@@ -1174,7 +1174,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
 		- 他のシステムへのインポート 
 		- バックアップ 
 		- カスタマイズ
-		- languageディレクトリにコピーすれば、次のインストール時に適用</value>
+		- languagesディレクトリにコピーすれば、次のインストール時に適用</value>
   </string>
   <string id="389" name="languageseditor">
     <value>インポート先の言語ファイルを選択してください。 ファイル名に関わらず選択した言語にインポートされます。
@@ -1466,7 +1466,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>X | Y</value>
   </string>
   <string id="485" name="roomAdmin_layout_videoY">
-    <value>Width | Height</value>
+    <value>幅 | 高さ</value>
   </string>
   <string id="486" name="roomAdmin_layout">
     <value>ビデオコンテナ</value>
@@ -1487,7 +1487,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>X | Y</value>
   </string>
   <string id="492" name="roomAdmin_layout_whiteboard">
-    <value>Width | Height</value>
+    <value>幅 | 高さ</value>
   </string>
   <string id="493" name="roomAdmin_layout_files">
     <value>ファイル、チャット、参加者コンテナ</value>
@@ -1499,13 +1499,13 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>X |Y</value>
   </string>
   <string id="496" name="roomAdmin_layout_files">
-    <value>Width | Height</value>
+    <value>幅 | 高さ</value>
   </string>	
   <string id="497" name="moderator_gone_message">
-    <value>The Moderator has left the Room. No one is presenting at the Moment. You could apply for Moderation or wait.</value>
+    <value>モデレータは退室しましたので主催者が不在です。モデレータになるか他の人がモデレータになるのをお待ちください。</value>
   </string>
   <string id="498" name="moderator_message_event_no_mod">
-    <value>There is no Moderator in this Room, but there are some Participants. You have to apply for Moderation or wait.</value>
+    <value>この部屋にモデレータはいませんが参加者がいます。モデレータになるか他の人がモデレータになるのをお待ちください。</value>
   </string>	
   <string id="499" name="feedback_template_subject">
     <value>フィードバック</value>
@@ -1565,66 +1565,66 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>パスワードリセット</value>
   </string>	
   <string id="518" name="dateRegExpError">
-    <value>Please enter a valid Date, for example 24.12.2001 (dd.mm.yyyy)</value>
+    <value>正しいフォーマットで日付を入力してください。（例）24.12.2001 (日.月.年)</value>
   </string>
   <string id="519" name="emailRegExpError">
-    <value>Please enter a valid EMail, for example name@mail.com</value>
+    <value>正しいメールアドレスを入力してください。(例) name@mail.com</value>
   </string>
   <string id="520" name="floatRegExpError">
-    <value>Please enter a Float-Number, for example 1.00</value>
+    <value>実数を入力してください。(例) 1.00</value>
   </string>
   <string id="521" name="numberRegExpError">
-    <value>Please enter a Number (Integer), for example 100</value>
+    <value>整数を入力してください。(例) 100</value>
   </string>
   <string id="522" name="phoneRegExpError">
-    <value>Please enter a valid Phone number, for example ++49 0123 123123</value>
+    <value>正しい電話番号を入力してください。(例) ++81 0123 123123</value>
   </string>
   <string id="523" name="timeRegExpError">
-    <value>Please enter a valid time, for example 12:23 (hh:mm)</value>
+    <value>正しい時刻を入力してください。(例)12:23 (時:分)</value>
   </string>
   <string id="524" name="invitation_window">
-    <value>Passwort protected</value>
+    <value>保護パスワード</value>
   </string>
   <string id="525" name="invitation_window_passwordLabel">
-    <value>Password</value>
+    <value>パスワード</value>
   </string>
   <string id="526" name="invitation_window_validLabel">
     <value>Validity period</value>
   </string>
   <string id="527" name="invitation_window_valid">
-    <value>Endless</value>
+    <value>エンドレス</value>
   </string>
   <string id="528" name="invitation_window_valid">
     <value>Period</value>
   </string>
   <string id="529" name="invitation_window_valid">
-    <value>One-Time</value>
+    <value>ワンタイム</value>
   </string>
   <string id="530" name="invitation_window_validFromLabel">
-    <value>Valid From:</value>
+    <value>送信者:</value>
   </string>
   <string id="531" name="invitation_window_validToLabel">
-    <value>Valid to:</value>
+    <value>宛先:</value>
   </string>
   <string id="532" name="invitation_window_MailSubject">
-    <value>Invitation To OpenMeetings</value>
+    <value>Openmeetingsご招待</value>
   </string>
   <string id="533" name="invitation_error">
-    <value>Not Invitation availible for this Invitation-Code</value>
+    <value>この招待コードで利用可能な招待はありません。</value>
   </string>
   <string id="534" name="invitation_error">
-    <value>The Invitation was already used. This type of Invitation cannot be re-used.</value>
+    <value>その招待はすでに使われています。このタイプの招待は再利用ができません。</value>
   </string>
   <string id="535" name="invitation_error">
-    <value>This Invitation-Code is not valid.</value>
+    <value>この招待コードは無効です。</value>
   </string>
   <string id="536" name="invitation_pass">
-    <value>Password:</value>
+    <value>パスワード:</value>
   </string>
   <string id="537" name="invitation_pass_btn">
-    <value>Check Password</value>
+    <value>パスワードチェック</value>
   </string>
   <string id="538" name="invitation_pass_error">
-    <value>Invalid Password!</value>
+    <value>パスワードが間違っています。</value>
   </string>
 </language>
