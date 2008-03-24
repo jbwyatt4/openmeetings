@@ -41,14 +41,13 @@
      	the real ROOM_ID
      -->
      <attribute name="currentroomid" value="0" type="number" />
-     <!-- the room of the current conferenceView
-     	this is ROOM_ID [+ "_audi"]
-      -->
-     <attribute name="connectedroom" value="" type="string" />
      
      <!-- This is the current domain the user has logged-in -->
      <attribute name="currentdomain" value="domain1" type="string" />
      <attribute name="currentdomainObj" value="domain1" type="string" />
+     
+     <!--- the current Invitation-Object -->
+     <attribute name="currentInvitation" value="null" />
 	
 	<!-- shows what kind of conferenceView it is at the moment
 		wether its conferenceView or audienceView -->
@@ -177,8 +176,26 @@
             parent.userlang = value;
             parent.getLanguageByIdAndMax.doCall();
         </handler>  
-    </netRemoteCallHib>            
+    </netRemoteCallHib>      
     
+    <netRemoteCallHib name="getInvitationByHash" activeErrorHandler="true" 
+    	funcname="invitationservice.getInvitationByHash" >          
+    	<netparam name="invitationHash"><method name="getValue">return canvas.invitationHash;</method></netparam>
+        <handler name="ondata" args="value">
+        	<![CDATA[
+        		canvas.thishib.loaderVar.close();
+            	//The onResult-Handler will be called be the rtmpconnection
+				if ($debug) Debug.write("getInvitationByHash: ",value);
+				if (value<0){
+					
+				} else {
+					parent.currentInvitation = value;
+					new invitationQuickLoader(canvas.main_content._content.inner);
+				}
+            ]]>
+        </handler>   
+    </netRemoteCallHib>  
+        
     <netRemoteCallHib name="getLanguageByIdAndMax" funcname="languageservice.getLanguageByIdAndMax" >
     	<attribute name="start" value="0" type="number" />
     	<attribute name="step" value="100" type="number" /> 
@@ -222,10 +239,11 @@
             Debug.write("markSessionAsLogedIn1 ",value);
             Debug.write("markSessionAsLogedIn2 ",canvas.sessionId);
             Debug.write("markSessionAsLogedIn3 ",canvas.initroomid);
-            parent.getRoomById.doCall();      
+            parent.getInvitationByHash.doCall();      
         </handler>  
     </netRemoteCallHib> 
     
+    <!--
     <netRemoteCallHib name="getRoomById" funcname="conferenceservice.getRoomById" >
 		<netparam><method name="getValue">return canvas.sessionId;</method></netparam>
 		<netparam><method name="getValue">return canvas.initroomid;</method></netparam>
@@ -242,8 +260,7 @@
 			}             
         </handler>  
     </netRemoteCallHib>   
-    
-   
+     -->   
     
     <netRemoteCallHib name="getStates" funcname="xmlcrm.getStates" >
         <handler name="ondata" args="value">

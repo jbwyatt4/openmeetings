@@ -53,28 +53,14 @@
 	}
 	
 	//Check for Invitation
-	var domain = LzBrowser.getInitArg('domain');
-	var room = LzBrowser.getInitArg('room');
-	var roomid = LzBrowser.getInitArg('roomid');
-	var roomtype = LzBrowser.getInitArg('roomtype');
-	var emailGuest = LzBrowser.getInitArg('email');
-
-	//Debug.write("domain: ",domain);
-
-	if (domain!=undefined && room!=undefined && roomtype!=undefined 
-			&& roomid!=undefined && emailGuest != undefined){
-		canvas.initroomid = Number(roomid);
-		canvas.initroomStr = room;
-		canvas.initroomtype = roomtype;
-		canvas.initdomainid = domain;
+	var invitationHash = LzBrowser.getInitArg('invitationHash');
+	if (invitationHash != undefined){
 		canvas.isinitRoomDirect = true;
-		canvas.firstName = emailGuest;
-		canvas.mail = emailGuest;
+		canvas.invitationHash = invitationHash;
 	}
 
 	//check for reset password
 	var hash = LzBrowser.getInitArg('hash');
-
 	if (hash!=undefined){
 		canvas.isResetUsername = true;
 		canvas.resetHash = hash;		
@@ -91,7 +77,7 @@
 </method>
 
 <method name="getLabelName" args="id">
-	if($debug) Debug.write("main.lzx/getLabelName()",id);
+	//if($debug) Debug.write("main.lzx/getLabelName()",id);
 	return getLabelTag(id);
 </method>
 

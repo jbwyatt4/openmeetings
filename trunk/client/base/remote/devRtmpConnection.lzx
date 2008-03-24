@@ -160,6 +160,22 @@
 			    this._nc.call(func, obj,params[0],params[1],params[2],params[3],params[4],params[5],params[6],params[7],params[8],params[9],params[10]);
 			} else if (params.length==12){
 			    this._nc.call(func, obj,params[0],params[1],params[2],params[3],params[4],params[5],params[6],params[7],params[8],params[9],params[10],params[11]);
+			} else if (params.length==13){
+			    this._nc.call(func, obj,params[0],params[1],params[2],params[3],params[4],params[5],params[6],params[7],params[8],params[9],params[10],params[11],params[12]);
+			} else if (params.length==14){
+			    this._nc.call(func, obj,params[0],params[1],params[2],params[3],params[4],params[5],params[6],params[7],params[8],params[9],params[10],params[11],params[12],params[13]);
+			} else if (params.length==15){
+			    this._nc.call(func, obj,params[0],params[1],params[2],params[3],params[4],params[5],params[6],params[7],params[8],params[9],params[10],params[11],params[12],params[13],params[14]);
+			} else if (params.length==16){
+			    this._nc.call(func, obj,params[0],params[1],params[2],params[3],params[4],params[5],params[6],params[7],params[8],params[9],params[10],params[11],params[12],params[13],params[14],params[15]);
+			} else if (params.length==17){
+			    this._nc.call(func, obj,params[0],params[1],params[2],params[3],params[4],params[5],params[6],params[7],params[8],params[9],params[10],params[11],params[12],params[13],params[14],params[15],params[16]);
+			} else if (params.length==18){
+			    this._nc.call(func, obj,params[0],params[1],params[2],params[3],params[4],params[5],params[6],params[7],params[8],params[9],params[10],params[11],params[12],params[13],params[14],params[15],params[16],params[17]);
+			} else if (params.length==19){
+			    this._nc.call(func, obj,params[0],params[1],params[2],params[3],params[4],params[5],params[6],params[7],params[8],params[9],params[10],params[11],params[12],params[13],params[14],params[15],params[16],params[17],params[18]);
+			} else if (params.length==20){
+			    this._nc.call(func, obj,params[0],params[1],params[2],params[3],params[4],params[5],params[6],params[7],params[8],params[9],params[10],params[11],params[12],params[13],params[14],params[15],params[16],params[17],params[18],params[19]);
 			}	    	 
         } else {
             this._nc.call(func, obj);

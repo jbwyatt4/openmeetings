@@ -46,10 +46,10 @@
 	
 	<method name="setProgress">
 		this.currentsteps += 1;
-		Debug.write("setProgress ",this.currentsteps);
+		if ($debug) Debug.write("setProgress ",this.currentsteps);
 		var w = Math.round(((this.maxwidth-2)/this.maxsteps)*this.currentsteps);
 		this.loadingbar.setAttribute('visibility','visible');
-		Debug.write("setResourceNumber ",w);
+		if ($debug) Debug.write("setResourceNumber ",w);
 		this.loadingbar.setAttribute('frame',w);
 	</method>
         
@@ -66,7 +66,7 @@
         <netparam><method name="getValue">return parent.step;</method></netparam> 
         <handler name="ondata" args="value">
         	<![CDATA[
-        		Debug.write("getLanguageByIdAndMax: ",value);
+        		if ($debug) Debug.write("getLanguageByIdAndMax: ",value);
         		setLabelObjectByHundred(this.start,value);
 	            //The onResult-Handler will be called be the rtmpconnection
 	            if (this.start <= max){
@@ -85,7 +85,7 @@
 		remotecontext="$once{ canvas.thishib }" >  
         <handler name="ondata" args="value">
             //The onResult-Handler will be called be the rtmpconnection
-            Debug.write("getStates: ",value);
+            if ($debug) Debug.write("getStates: ",value);
             canvas.statesInitValues = value;
             parent.setProgress();
             parent.getUserSalutations.doCall();
@@ -98,7 +98,7 @@
         <netparam><method name="getValue"> return hib.userlang; </method></netparam> 
         <handler name="ondata" args="value">
             //The onResult-Handler will be called be the rtmpconnection
-            Debug.write("getUserSalutations ",value);
+            if ($debug) Debug.write("getUserSalutations ",value);
             canvas.salutationsInitValues = value;
             parent.setProgress();
             parent.getRoomTypes.doCall();
@@ -110,7 +110,7 @@
 		<netparam><method name="getValue">return canvas.sessionId;</method></netparam>
         <handler name="ondata" args="value">
             //The onResult-Handler will be called be the rtmpconnection
-            Debug.write("getRoomTypes ",value);
+            if ($debug) Debug.write("getRoomTypes ",value);
             canvas.roomTypesInitValues = value;
             parent.setProgress();
             parent.setUsername.doCall();
@@ -122,26 +122,19 @@
         <netparam><method name="getValue">return canvas.currentuser;</method></netparam>
         <netparam><method name="getValue">return canvas.firstName;</method></netparam>
         <netparam><method name="getValue">return canvas.lastName;</method></netparam>      
-        <netparam><method name="getValue">return canvas.initdomainid;</method></netparam>
+        <netparam><method name="getValue">return canvas.thishib.currentdomain;</method></netparam>
         <handler name="ondata" args="value">
-        	
-			//TODO: set currentroomid
             //The onResult-Handler will be called be the rtmpconnection
-            Debug.write("setUsername: ",value);
-            hib.currentroomid = canvas.initroomid;
-	        hib.connectedroom = canvas.initroomStr;
-            hib.conferencedomain = canvas.initdomainid;
-
-            Debug.write("hib.conferencedomain: ",hib.conferencedomain);
+            if ($debug) Debug.write("setUsername: ",value);
             clearStageContent();		
             parent.close();
-			if (canvas.initroomtype=="conference"){
-				new conferenceView(canvas.main_content._content.inner,{roomobj:canvas.isinitRoomObject}); 
+			if (canvas.thishib.currentInvitation.room.roomtype.roomtypes_id==1){
+				new conferenceView(canvas.main_content._content.inner,{roomobj:canvas.thishib.currentInvitation.room}); 
 			} else {
-				new audienceView(canvas.main_content._content.inner,{roomobj:canvas.isinitRoomObject}); 
+				new audienceView(canvas.main_content._content.inner,{roomobj:canvas.thishib.currentInvitation.room}); 
 			}                 
         </handler>  
-    </netRemoteCallHib>      
+    </netRemoteCallHib>     
           
 </class>
 

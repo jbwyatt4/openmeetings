@@ -17,7 +17,8 @@
     </handler>	
 	
 	<labelText labelid="216" y="24" />
-	<customEdittext name="_recipient" width="340" x="120" y="22" />
+	<customEdittext name="_recipient" width="340" regexpType="email" 
+					x="120" y="22" />
 	
 	<labelText labelid="215" y="52" />
 	<customEdittext name="_subject" labelid="532" width="340" enabled="false"
@@ -46,13 +47,13 @@
 		<dateField x="120" y="282" name="_valid_from" setDefaultToday="true"
 				   enabled="${ ((parent._valid.value==2) ? true : false ) }" />
 		<customEdittext name="_timeFrom" enabled="${ ((parent._valid.value==2) ? true : false ) }"
-					width="50" x="232" y="282" text="12:00" regexpType="time" />	   
+					width="50" x="232" y="282" text="$once{ getStringTime() }" regexpType="time" />	   
 					
 	<labelText x="4" labelid="531" y="314" fgcolor="${ ((parent._valid.value==2) ? 0x000000 : 0xCCCCCC ) }" />
-		<dateField x="120" y="314" name="_valid_to" setDefaultToday="true"
+		<dateField x="120" y="314" name="_valid_to" setDefaultToday="true" additionalDay="1"
 				   enabled="${ ((parent._valid.value==2) ? true : false ) }" />		
 		<customEdittext name="_timeTo" enabled="${ ((parent._valid.value==2) ? true : false ) }"
-					width="50" x="232" y="314" text="12:00" regexpType="time" />				   
+					width="50" x="232" y="314" text="$once{ getStringTime() }" regexpType="time" />				   
 	
 	<simpleLabelButton labelid="218" x="$once{ parent.width-260 }" 
 					   width="120" y="$once{ parent.height-26 }">
@@ -63,7 +64,7 @@
 			if (!canvas.isConference){
 				parent.roomType = "audience";
 			}
-			parent.sendInvitation.doCall();
+			parent.sendInvitationHash.doCall();
 		</handler>
 	</simpleLabelButton>
 	
@@ -73,18 +74,17 @@
 			parent.close();
 		</handler>
 	</simpleLabelButton>
-	
-        <netRemoteCallHib name="sendInvitationHash" funcname="xmlcrm.sendInvitationHash" 
+	   
+        <netRemoteCallHib name="sendInvitationHash" funcname="invitationservice.sendInvitationHash" 
 			remotecontext="$once{ canvas.thishib }" >    
         	<netparam name="sid"><method name="getValue">return canvas.sessionId;</method></netparam>
-			<netparam name="usernmae"><method name="getValue">return hib.userobject.firstname+' '+hib.userobject.lastname</method></netparam>
+			<netparam name="username"><method name="getValue">return hib.userobject.firstname+' '+hib.userobject.lastname</method></netparam>
             <netparam name="message"><method name="getValue">return this.parent.parent._message.getText();</method></netparam>
-            <netparam name="domain"><method name="getValue">return hib.conferencedomain;</method></netparam>
-			<netparam name="room"><method name="getValue">return hib.connectedroom;</method></netparam>
-			<netparam name="roomType"><method name="getValue">return parent.parent.roomType;</method></netparam>
             <netparam name="baseurl"><method name="getValue">return parent.parent.baseUrl;</method></netparam>
             <netparam name="email"><method name="getValue">return this.parent.parent._recipient.getText();</method></netparam>
             <netparam name="subject"><method name="getValue">return this.parent.parent._subject.getText();</method></netparam>
+            <netparam name="roomid"><method name="getValue">return hib.currentroomid;</method></netparam>
+            <netparam name="conferencedomain"><method name="getValue">return hib.conferencedomain;</method></netparam>
             <netparam name="ispasswordProtected"><method name="getValue">return parent.parent._ispasswordProtected.value;</method></netparam>
             <netparam name="password"><method name="getValue">return parent.parent._password.getText();</method></netparam>
             <netparam name="valid"><method name="getValue">return parent.parent._valid.value;</method></netparam>

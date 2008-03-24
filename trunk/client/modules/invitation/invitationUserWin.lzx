@@ -172,7 +172,7 @@
         <handler name="ondata" args="value">
             //The onResult-Handler will be called be the rtmpconnection
             //Debug.write("setUsername: ",value);
-	        hib.connectedroom=canvas.initroomid;
+	        hib.currentroomid=canvas.initroomid;
             hib.conferencedomain = canvas.initdomainid;
 
             //Debug.write("hib.conferencedomain: ",hib.conferencedomain);
