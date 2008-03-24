@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library>
 
+<!--- User Profile edit panel in the useradmin leftblock. Private class only for useradmin -->
 <class name="userValueForm" extends="baseContentSaveView">
 
 	<!-- recordContent-id -->

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library>
 
+<!--- User administration module for ADMIN.-->
 <class name="userAdmin" extends="baseContentView">
 
 	<turnOverList name="_turnoverlist" width="440" height="600" x="2" y="0" 
