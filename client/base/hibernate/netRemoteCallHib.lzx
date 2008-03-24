@@ -52,9 +52,9 @@
                 if (Number(value)<0){
                     Debug.warn("Received Error ID: ",value);
 					if (this.isCallBackHandler) {
-						new callbackRpcErrorDialog(canvas.main_content._content.inner,{callBackObject:this,errorid:Number(value)});
+						new callbackRpcErrorDialog(canvas,{callBackObject:this,errorid:Number(value)});
 					} else {
-						new rpcErrorDialog(canvas.main_content._content.inner,{errorid:Number(value)});
+						new rpcErrorDialog(canvas,{errorid:Number(value)});
 					}
                 }
             }			

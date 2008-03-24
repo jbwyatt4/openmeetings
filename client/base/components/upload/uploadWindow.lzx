@@ -105,8 +105,8 @@
 	<button name="upload" x="10" y="100" text="Upload" width="200" enabled="false" height="20">
 		<handler name="onclick">
 			<![CDATA[
-			var uploadurl = 'http://'+canvas.rtmphostlocal+':'+canvas.red5httpport+'/'+canvas.webAppRootKey+'/UploadHandler?moduleName='+this.parent.uploadmodule+'&room='+hib.connectedroom+'&domain='+hib.conferencedomain+'&sid='+canvas.sessionId;
-            Debug.write("uploadurl: ",uploadurl);
+			var uploadurl = 'http://'+canvas.rtmphostlocal+':'+canvas.red5httpport+'/'+canvas.webAppRootKey+'/UploadHandler?moduleName='+this.parent.uploadmodule+'&room='+hib.currentroomid+'&domain='+hib.conferencedomain+'&sid='+canvas.sessionId;
+            if ($debug) Debug.write("uploadurl: ",uploadurl);
 			parent.myFileUpload.upload(uploadurl);
 			]]>
 		</handler>

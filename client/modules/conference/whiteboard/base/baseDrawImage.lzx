@@ -91,7 +91,7 @@
                 this.isScreenImageLoading = true;
                 var downloadurl = 'http://'+canvas.rtmphostlocal+':'+canvas.red5httpport+'/'+canvas.webAppRootKey+'/ScreenViewHandler?'
                     +'fileName='+value.fileName
-                    +'&room='+hib.connectedroom
+                    +'&room='+hib.currentroomid
                     +'&domain='+hib.conferencedomain
                     +'&sid='+canvas.sessionId;
             

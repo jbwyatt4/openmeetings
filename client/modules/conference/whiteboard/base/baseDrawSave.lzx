@@ -152,7 +152,7 @@
     
 	  	<netRemoteCallHib name="saveAsObject" funcname="fileservice.saveAsObject" remotecontext="$once{ canvas.thishib }" >   
 	  		<netparam><method name="getValue"> return canvas.sessionId; </method></netparam>
-			<netparam><method name="getValue">return hib.connectedroom;</method></netparam>        	
+			<netparam><method name="getValue">return hib.currentroomid;</method></netparam>        	
 			<netparam><method name="getValue">return hib.conferencedomain;</method></netparam> 			  
 			<netparam><method name="getValue"> return parent.parent.savefileName; </method></netparam>
 			<netparam><method name="getValue"> return parent.parent.fileData;</method></netparam>
@@ -298,7 +298,7 @@
 	        <handler name="ondata" args="value">	
 				<![CDATA[
 					////Debug.write("  loadWmlObject ",value); 
-					parent.loadwmlObjectToStage(value,this.String1,hib.connectedroom,hib.conferencedomain,false);
+					parent.loadwmlObjectToStage(value,this.String1,hib.currentroomid,hib.conferencedomain,false);
 				]]>       	     				
 	        </handler>	
 	  	</netRemoteCallHib> 

@@ -13,13 +13,13 @@
     
     <handler name="oninit">
         <![CDATA[
-        var downloadurl = 'http://'+canvas.rtmphostlocal+':'+canvas.red5httpport+'/'+canvas.webAppRootKey+'/DownloadHandler?fileName=_thumb_'+this.filename+'&moduleName='+this.uploadmodul+'&parentPath='+canvas.uploadmoduleimgfolder+'/'+'&room='+hib.connectedroom+'&domain='+hib.conferencedomain+'&sid='+canvas.sessionId;
+        var downloadurl = 'http://'+canvas.rtmphostlocal+':'+canvas.red5httpport+'/'+canvas.webAppRootKey+'/DownloadHandler?fileName=_thumb_'+this.filename+'&moduleName='+this.uploadmodul+'&parentPath='+canvas.uploadmoduleimgfolder+'/'+'&room='+hib.currentroomid+'&domain='+hib.conferencedomain+'&sid='+canvas.sessionId;
         this._thumb.setAttribute('src',downloadurl);
         ]]>
     </handler>
     <handler name="onmousedown">
         //this.oninit.sendEvent();
-       	new dragView(canvas,{filename:this.filename,filesid:1,refObj:this,uploadmodul:this.uploadmodul,baseurl:'http://'+canvas.rtmphostlocal+':'+canvas.red5httpport+'/'+canvas.webAppRootKey+'/DownloadHandler',fileName:this.filename,moduleName:this.uploadmodul,parentPath:canvas.uploadmoduleimgfolder+'/',room:hib.connectedroom,domain:hib.conferencedomain});
+       	new dragView(canvas,{filename:this.filename,filesid:1,refObj:this,uploadmodul:this.uploadmodul,baseurl:'http://'+canvas.rtmphostlocal+':'+canvas.red5httpport+'/'+canvas.webAppRootKey+'/DownloadHandler',fileName:this.filename,moduleName:this.uploadmodul,parentPath:canvas.uploadmoduleimgfolder+'/',room:hib.currentroomid,domain:hib.conferencedomain});
         LzModeManager.globalLockMouseEvents();
         this.onmouseout.sendEvent();     
         this.parent.parent.parent.highlightItem(this);
@@ -38,7 +38,7 @@
 		<![CDATA[
 		//Debug.write("Download File ",this);
 
-		var downloadurl = 'http://'+canvas.rtmphostlocal+':'+canvas.red5httpport+'/'+canvas.webAppRootKey+'/DownloadHandler?fileName='+this.filename+'&moduleName='+this.uploadmodul+'&parentPath='+canvas.uploadmoduleimgfolder+'/'+'&room='+hib.connectedroom+'&domain='+hib.conferencedomain+'&sid='+canvas.sessionId;
+		var downloadurl = 'http://'+canvas.rtmphostlocal+':'+canvas.red5httpport+'/'+canvas.webAppRootKey+'/DownloadHandler?fileName='+this.filename+'&moduleName='+this.uploadmodul+'&parentPath='+canvas.uploadmoduleimgfolder+'/'+'&room='+hib.currentroomid+'&domain='+hib.conferencedomain+'&sid='+canvas.sessionId;
 
         //Debug.write(downloadurl);	
 		LzBrowser.loadURL(downloadurl,'_parent');	
@@ -54,12 +54,12 @@
   
 	<method name="__LZFileAddDirect">
 		<![CDATA[
-        var downloadurl = 'http://'+canvas.rtmphostlocal+':'+canvas.red5httpport+'/'+canvas.webAppRootKey+'/DownloadHandler?fileName='+this.filename+'&moduleName='+this.uploadmodul+'&parentPath='+canvas.uploadmoduleimgfolder+'/'+'&room='+hib.connectedroom+'&domain='+hib.conferencedomain+'&sid='+canvas.sessionId;
+        var downloadurl = 'http://'+canvas.rtmphostlocal+':'+canvas.red5httpport+'/'+canvas.webAppRootKey+'/DownloadHandler?fileName='+this.filename+'&moduleName='+this.uploadmodul+'&parentPath='+canvas.uploadmoduleimgfolder+'/'+'&room='+hib.currentroomid+'&domain='+hib.conferencedomain+'&sid='+canvas.sessionId;
 		//Debug.write(downloadurl);  
 		//Debug.write("__LZFileAddDirect");   
-		//Debug.write(downloadurl,0,0,'http://'+canvas.rtmphostlocal+':'+canvas.red5httpport+'/'+canvas.webAppRootKey+'/DownloadHandler',this.filename,this.uploadmodul,canvas.uploadmoduleimgfolder+'/',hib.connectedroom,hib.conferencedomain);
+		//Debug.write(downloadurl,0,0,'http://'+canvas.rtmphostlocal+':'+canvas.red5httpport+'/'+canvas.webAppRootKey+'/DownloadHandler',this.filename,this.uploadmodul,canvas.uploadmoduleimgfolder+'/',hib.currentroomid,hib.conferencedomain);
         
-        _drawarea.parent.parent.clearAreaAndAddImage(downloadurl,0,0,'http://'+canvas.rtmphostlocal+':'+canvas.red5httpport+'/'+canvas.webAppRootKey+'/DownloadHandler',this.filename,this.uploadmodul,canvas.uploadmoduleimgfolder+'/',hib.connectedroom,hib.conferencedomain);
+        _drawarea.parent.parent.clearAreaAndAddImage(downloadurl,0,0,'http://'+canvas.rtmphostlocal+':'+canvas.red5httpport+'/'+canvas.webAppRootKey+'/DownloadHandler',this.filename,this.uploadmodul,canvas.uploadmoduleimgfolder+'/',hib.currentroomid,hib.conferencedomain);
         this.parent.parent.parent.highlightItem(this);
         ]]>
 	</method>

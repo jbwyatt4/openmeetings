@@ -39,21 +39,18 @@
   </handler>
 
   <handler name="onclick">
-    var connectedIsAudience = '';
     canvas.isConference = !this.isaudience;
     if (this.isaudience) connectedIsAudience = '_'+'audi';
-        if (this.ispublic){
-            hib.connectedroom = this.obj.rooms_id+connectedIsAudience;
-            hib.conferencedomain="public";
-   	        hib.currentroomid = this.obj.rooms_id;
-            //Debug.write("ispublic");
-        } else {
-            hib.connectedroom= this.obj.room.rooms_id+connectedIsAudience;
-            hib.conferencedomain = this.obj.organisation.organisation_id;
-   	        hib.currentroomid = this.obj.room.rooms_id;
-            //Debug.write("non ispublic");
-        }
-        Debug.write("onclick",this);
+    if (this.ispublic){
+        hib.conferencedomain="public";
+        hib.currentroomid = this.obj.rooms_id;
+        //Debug.write("ispublic");
+    } else {
+        hib.conferencedomain = this.obj.organisation.organisation_id;
+        hib.currentroomid = this.obj.room.rooms_id;
+        //Debug.write("non ispublic");
+    }
+    if ($debug) Debug.write("onclick",this);
     parent.parent.parent.parent.parent._roomlistdetails.doinit(this.currentusers,this.roomid,this.roomname);
   </handler>
 
@@ -68,18 +65,15 @@
   </method>
 
   <method name="enterRoom">
-    var connectedIsAudience = '';
     canvas.isConference = !this.isaudience;
     if (this.isaudience) connectedIsAudience = '_'+'audi';
     if (this.ispublic){
     	var roomObj = this.obj;
-        hib.connectedroom = this.obj.rooms_id+connectedIsAudience;
         hib.conferencedomain="public";
         hib.currentroomid = this.obj.rooms_id;
         //Debug.write("ispublic");
     } else {
     	var roomObj = this.obj.room;
-        hib.connectedroom = this.obj.room.rooms_id+connectedIsAudience;
         hib.conferencedomain = this.obj.organisation.organisation_id;
         hib.currentroomid = this.obj.room.rooms_id;
         //Debug.write("non ispublic");
