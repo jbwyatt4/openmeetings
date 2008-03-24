@@ -33,10 +33,10 @@
         <view name="inner" />
         <method name="clearAll">
         	<![CDATA[
-	            Debug.write("clearAll this.inner: ",this.inner,this.inner.subviews.length);
+	            if($debug) Debug.write("main.lzx/main_content._content.inner.clearAll(): ",this.inner,this.inner.subviews.length);
 	            var baseContent = this.inner.subviews[0].close();
 	            for (var eg in this.inner.subviews) {
-	                Debug.write("clearAll this.inner.subviews: ",this.inner.subviews[eg]);
+	                if($debug) Debug.write("main.lzx/main_content._content.inner.clearAll()-subviews: ",this.inner.subviews[eg]);
 	                if (eg!=0) this.inner.subviews[eg].close();               
 	            }
 	            return baseContent;
@@ -99,6 +99,7 @@
     bgcolor="$once{ canvas.baseMousecolorizer }" visibility="hidden" > 
     <method name="removeAll">
 		<![CDATA[
+            if($debug) Debug.write("main.lzx/_coferencemenu.removeAll(): ");
 			while (this.subviews.length > 0) {
 				this.subviews[0].destroy();
 			}

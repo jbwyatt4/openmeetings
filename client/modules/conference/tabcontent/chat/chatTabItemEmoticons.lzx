@@ -13,7 +13,7 @@
 	
 	<handler name="oninit">
 		<![CDATA[
-			Debug.write("WIDTH: "+this.width);
+			if($debug) Debug.write("chatTabItemEmoticons/WIDTH: "+this.width);
 	        var downloadurl = 'http://'+canvas.rtmphostlocal+':'+canvas.red5httpport
 	        		+'/'+canvas.webAppRootKey+'/DownloadHandler?fileName=CHAT'
 	        		+'&moduleName=chat&parentPath=&room=&domain='
@@ -41,7 +41,7 @@
 		<handler name="oninit">
 			<![CDATA[
 				this.sprite.__LZtextclip.wordWrap = false;
-				Debug.write(this);
+				if($debug) Debug.write(this);
 				//Debug.write(this.sprite.getTextFormat());
 				tFormat = this.sprite.__LZtextclip.getTextFormat();
 				//Debug.write(this.sprite.__LZtextclip.getTextFormat());

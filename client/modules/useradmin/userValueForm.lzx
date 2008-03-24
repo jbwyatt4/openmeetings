@@ -84,7 +84,7 @@
   		<netparam><method name="getValue"> return canvas.sessionId; </method></netparam>
     	<netparam><method name="getValue">return parent.parent.user_id;</method></netparam>
     	<handler name="ondata" args="value">
-			Debug.write("getUserById: ",value);
+			if($debug) Debug.write("[admin]userValueForm/getUserById: ",value);
     		parent.initFields(value);
     	</handler>
   	</netRemoteCallHib>

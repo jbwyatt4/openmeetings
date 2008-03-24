@@ -1033,7 +1033,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Could not save Address</value>
   </string>
   <string id="343" name="useradmin">
-    <value>User added but you need to assign this User to an Organisation, otherwise he won't be able to sign-in.</value>
+    <value>ユーザは追加されました。このユーザは少なくとも一つの組織に所属させる必要があります。</value>
   </string>
   <string id="344" name="adminforms">
     <value>新規作成</value>
