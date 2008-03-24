@@ -4,81 +4,171 @@
 
 <library>
 
-<method name="openMeetingsMenuItemHandler">
-    LzBrowser.loadURL("http://code.google.com/p/openmeetings/", "Openmeetings Homepage");  
-</method>    
-
-<method name="myinit">
-	<![CDATA[
-	if($debug) Debug.write("main.lzx/config.xml ondata",this);
-	//Set Config-values by config.xml, see comments on config.xml
-	this.setAttribute('rtmphostlocal',canvas.myConfigSet.getPointer().xpathQuery('config/rtmphostlocal/text()'));   
-	this.setAttribute('rtmpport',Number(canvas.myConfigSet.getPointer().xpathQuery('config/rtmpport/text()')));  
-	this.setAttribute('rtmpTunnelport',Number(canvas.myConfigSet.getPointer().xpathQuery('config/rtmpTunnelport/text()')));  
-	this.setAttribute('red5httpport',Number(canvas.myConfigSet.getPointer().xpathQuery('config/red5httpport/text()')));  
-	this.setAttribute('basebgcolorizer',canvas.myConfigSet.getPointer().xpathQuery('config/basebgcolorizer/text()'));  
-	this.setAttribute('baseMousecolorizer',canvas.myConfigSet.getPointer().xpathQuery('config/baseMousecolorizer/text()'));  
-	this.setAttribute('baseMouseOvercolorizer',canvas.myConfigSet.getPointer().xpathQuery('config/baseMouseOvercolorizer/text()'));  
-	this.setAttribute('currentappversion',canvas.myConfigSet.getPointer().xpathQuery('config/currentappversion/text()'));  
-	this.setAttribute('currentappname',canvas.myConfigSet.getPointer().xpathQuery('config/currentappname/text()'));  
-	this.setAttribute('currentappnameurl',canvas.myConfigSet.getPointer().xpathQuery('config/currentappnameurl/text()'));  
-	this.setAttribute('currentappnamebugurl',canvas.myConfigSet.getPointer().xpathQuery('config/currentappnamebugurl/text()'));
-	this.setAttribute('loudnessAcitviation',canvas.myConfigSet.getPointer().xpathQuery('config/loudnessAcitviation/text()'));
-	this.setAttribute('webAppRootKey',canvas.myConfigSet.getPointer().xpathQuery('config/webAppRootKey/text()'));
-	this.setAttribute('showWindowEffect',canvas.myConfigSet.getPointer().xpathQuery('config/showWindowEffect/text()'));
-	this.setAttribute('firstdayinweek',canvas.myConfigSet.getPointer().xpathQuery('config/firstdayinweek/text()'));
-
-	mainBaseText.setText(canvas.currentappname);
-	mainBaseText.setShadow();
-	mainBaseTextLabel.setAttribute('text',canvas.currentappnameurl);  
-
-	this.chathistory=new Array();
+	<method name="openMeetingsMenuItemHandler">
+	    LzBrowser.loadURL("http://code.google.com/p/openmeetings/", "Openmeetings Homepage");  
+	</method>    
 	
-	var doubleSlash = _url.indexOf("//");
-	var isNotPort80 = _url.indexOf(":", doubleSlash+2);
-	//Debug.write("isNotPort80: ",isNotPort80);
-	if (isNotPort80!=-1){
-	    //Debug.write("isNotPort80: ",doubleSlash+2, _url.indexOf(":", doubleSlash+2)-doubleSlash-2);
-	    var server = _url.substr(doubleSlash+2, _url.indexOf(":", doubleSlash+2)-doubleSlash-2); 
-	} else {
-	    var server = _url.substr(doubleSlash+2, _url.indexOf("/", doubleSlash+2)-doubleSlash-2); 
-	}
+	<method name="myinit">
+		<![CDATA[
+		if($debug) Debug.write("main.lzx/config.xml ondata",this);
+		//Set Config-values by config.xml, see comments on config.xml
+		this.setAttribute('rtmphostlocal',canvas.myConfigSet.getPointer().xpathQuery('config/rtmphostlocal/text()'));   
+		this.setAttribute('rtmpport',Number(canvas.myConfigSet.getPointer().xpathQuery('config/rtmpport/text()')));  
+		this.setAttribute('rtmpTunnelport',Number(canvas.myConfigSet.getPointer().xpathQuery('config/rtmpTunnelport/text()')));  
+		this.setAttribute('red5httpport',Number(canvas.myConfigSet.getPointer().xpathQuery('config/red5httpport/text()')));  
+		this.setAttribute('basebgcolorizer',canvas.myConfigSet.getPointer().xpathQuery('config/basebgcolorizer/text()'));  
+		this.setAttribute('baseMousecolorizer',canvas.myConfigSet.getPointer().xpathQuery('config/baseMousecolorizer/text()'));  
+		this.setAttribute('baseMouseOvercolorizer',canvas.myConfigSet.getPointer().xpathQuery('config/baseMouseOvercolorizer/text()'));  
+		this.setAttribute('currentappversion',canvas.myConfigSet.getPointer().xpathQuery('config/currentappversion/text()'));  
+		this.setAttribute('currentappname',canvas.myConfigSet.getPointer().xpathQuery('config/currentappname/text()'));  
+		this.setAttribute('currentappnameurl',canvas.myConfigSet.getPointer().xpathQuery('config/currentappnameurl/text()'));  
+		this.setAttribute('currentappnamebugurl',canvas.myConfigSet.getPointer().xpathQuery('config/currentappnamebugurl/text()'));
+		this.setAttribute('loudnessAcitviation',canvas.myConfigSet.getPointer().xpathQuery('config/loudnessAcitviation/text()'));
+		this.setAttribute('webAppRootKey',canvas.myConfigSet.getPointer().xpathQuery('config/webAppRootKey/text()'));
+		this.setAttribute('showWindowEffect',canvas.myConfigSet.getPointer().xpathQuery('config/showWindowEffect/text()'));
+		this.setAttribute('firstdayinweek',canvas.myConfigSet.getPointer().xpathQuery('config/firstdayinweek/text()'));
 	
-	//Debug.write("this zielnr: ",this,server);
+		mainBaseText.setText(canvas.currentappname);
+		mainBaseText.setShadow();
+		mainBaseTextLabel.setAttribute('text',canvas.currentappnameurl);  
 	
-	this.setAttribute('rtmphost',server);
-
-	if (this.rtmphostlocal.length==0){
-	    this.setAttribute('rtmphostlocal',server);
-	}
+		this.chathistory=new Array();
+		
+		var doubleSlash = _url.indexOf("//");
+		var isNotPort80 = _url.indexOf(":", doubleSlash+2);
+		//Debug.write("isNotPort80: ",isNotPort80);
+		if (isNotPort80!=-1){
+		    //Debug.write("isNotPort80: ",doubleSlash+2, _url.indexOf(":", doubleSlash+2)-doubleSlash-2);
+		    var server = _url.substr(doubleSlash+2, _url.indexOf(":", doubleSlash+2)-doubleSlash-2); 
+		} else {
+		    var server = _url.substr(doubleSlash+2, _url.indexOf("/", doubleSlash+2)-doubleSlash-2); 
+		}
+		
+		//Debug.write("this zielnr: ",this,server);
+		
+		this.setAttribute('rtmphost',server);
 	
-	//Check for Invitation
-	var invitationHash = LzBrowser.getInitArg('invitationHash');
-	if (invitationHash != undefined){
-		canvas.isinitRoomDirect = true;
-		canvas.invitationHash = invitationHash;
-	}
-
-	//check for reset password
-	var hash = LzBrowser.getInitArg('hash');
-	if (hash!=undefined){
-		canvas.isResetUsername = true;
-		canvas.resetHash = hash;		
-	}
-
-	//Debug.write("rtmphostlocal,rtmphost: ",canvas.rtmphostlocal,canvas.rtmphost);	
+		if (this.rtmphostlocal.length==0){
+		    this.setAttribute('rtmphostlocal',server);
+		}
+		
+		//Check for Invitation
+		var invitationHash = LzBrowser.getInitArg('invitationHash');
+		if (invitationHash != undefined){
+			canvas.isinitRoomDirect = true;
+			canvas.invitationHash = invitationHash;
+		}
 	
-	var src = 'rtmp://'+canvas.rtmphostlocal+':'+canvas.rtmpport+'/'+canvas.webAppRootKey+'/hibernate';
-	canvas.thishib.setAttribute('src',src);
-	canvas.thishib.loaderVar = new autoLoader(canvas);
-	canvas.thishib.loaderVar.src.setText(src);
-	canvas.thishib.connect();
-	]]>
-</method>
+		//check for reset password
+		var hash = LzBrowser.getInitArg('hash');
+		if (hash!=undefined){
+			canvas.isResetUsername = true;
+			canvas.resetHash = hash;		
+		}
+	
+		//Debug.write("rtmphostlocal,rtmphost: ",canvas.rtmphostlocal,canvas.rtmphost);	
+		
+		var src = 'rtmp://'+canvas.rtmphostlocal+':'+canvas.rtmpport+'/'+canvas.webAppRootKey+'/hibernate';
+		canvas.thishib.setAttribute('src',src);
+		canvas.thishib.loaderVar = new autoLoader(canvas);
+		canvas.thishib.loaderVar.src.setText(src);
+		canvas.thishib.connect();
+		]]>
+	</method>
+	
+	<method name="getLabelName" args="id">
+		//if($debug) Debug.write("main.lzx/getLabelName()",id);
+		return getLabelTag(id);
+	</method>
 
-<method name="getLabelName" args="id">
-	//if($debug) Debug.write("main.lzx/getLabelName()",id);
-	return getLabelTag(id);
-</method>
+	<!-- you can delete this comment. It was just memo.
+			Mar 24 2008 onokeiji@gmail.com
+		 moved from modules/conference/conference/conferenceMenubar.lzx
+	-->
+	<method name="doActionmenu" args="stringSub">
+	    <![CDATA[
+	        if($debug) Debug.write("doActionmenu: ",stringSub);
+	        if (canvas._conferencemenu.visibility == 'visible'){
+	            if (stringSub=='createPoll') {
+	                new createPollWin(canvas.main_content._content.inner);
+	            } else if (stringSub=='pollResults') {
+	                this.getVotes.doCall();
+	            } else if (stringSub=='checkPollVoted') {
+	                this.checkHasVoted.doCall();
+	            } else if (stringSub=='importFile') {
+	                new uploadWindow(canvas.main_content._content.inner,{x:60,uploadmodule:canvas.uploadmoduleimg,isOnlyImage:true});
+	            } else if (stringSub=='applyForMod') {
+	                new applyForModeration(canvas.main_content._content.inner);
+	            } else if (stringSub=='editCamMicSettings') {
+	                new changeDevice(canvas.main_content._content.inner);
+	            } else if (stringSub=='editBoardSettings') {
+	                new editWhiteboardDefault(canvas.main_content._content.inner);
+	            } else if (stringSub=='quit') {
+	                if($debug) Debug.write(canvas.thishib.modus,canvas.thishib.roomtype);
+	                if (canvas.thishib.modus=='audience' && canvas.thishib.roomtype=='public'){
+	                    var t = new Array();
+	                    t.action = 'publicEvents';
+	                } else if (canvas.thishib.modus=='audience' && canvas.thishib.roomtype=='private'){
+	                    var t = new Array();
+	                    t.action = 'privateEvents';
+	                } else if (canvas.thishib.modus=='conference' && canvas.thishib.roomtype=='public'){
+	                    var t = new Array();
+	                    t.action = 'publicMeetings';
+	                } else if (canvas.thishib.modus=='conference' && canvas.thishib.roomtype=='private'){
+	                    var t = new Array();
+	                    t.action = 'privateMeetings';
+	           }
+	
+				if($debug) Debug.write( 'conferenceMenubar: doActionMenu(): ' , t);
+	                	loadContent(t);
+	         }
+	      }
+	    ]]>
+	</method>    
+	
+	<netRemoteCallHib name="getVotes" funcname="dokeosService.getVotes" remotecontext="$once{ canvas.thishib }" >
+		<handler name="ondata" args="value">
+	            <![CDATA[
+	                if (value!=null){
+	                    new resultPollWin(canvas.main_content._content.inner,{createdBy:value.createdBy.username,pollDate:value.pollDate,pollQuestion:value.pollQuestion,pollTypeId:value.pollTypeId,roomPollAnswerList:value.roomPollAnswerList,roomPollId:value.roomPollId,roomScopeName:value.roomScopeName});
+	                } else {
+	                    new messageWin(canvas.main_content._content.inner,{labeliderror:41});
+	           }
+	        ]]>
+	      </handler>   
+	</netRemoteCallHib>  
+	    
+	<netRemoteCallHib name="checkHasVoted" funcname="dokeosService.checkHasVoted" remotecontext="$once{ canvas.thishib }" >
+		<handler name="ondata" args="value">
+	      	<![CDATA[
+	                  if (value==1){
+	                  	parent.getPoll.doCall();
+	                  } else if (value==-1){
+	                  	new messageWin(canvas.main_content._content.inner,{labeliderror:31});
+	                  } else if (value==-2){
+	                        new messageWin(canvas.main_content._content.inner,{labeliderror:41});
+	            }
+	    	]]>
+		</handler>   
+	</netRemoteCallHib> 
+	
+	<netRemoteCallHib name="getPoll" funcname="dokeosService.getPoll" remotecontext="$once{ canvas.thishib }" >
+		<handler name="ondata" args="value">
+	      	<![CDATA[
+	                  if (value!=null){
+	                  	new answerPoll(canvas.main_content._content.inner,{createdBy:value.createdBy.username,pollDate:value.pollDate,pollQuestion:value.pollQuestion,pollTypeId:value.pollTypeId,roomPollAnswerList:value.roomPollAnswerList,roomPollId:value.roomPollId,roomScopeName:value.roomScopeName});
+	            }
+	        ]]>
+		</handler>
+	</netRemoteCallHib>      
+	    
+	<command id="cmd_applyforMod" onselect="canvas.doActionmenu('applyForMod')" key="['ALT','Shift','M']"/>
+	<command id="cmd_createPoll" onselect="canvas.doActionmenu('createPoll')" key="['ALT','Shift','P']"/> 
+	<command id="cmd_pollResults" onselect="canvas.doActionmenu('pollResults')" key="['ALT','Shift','R']"/> 
+	<command id="cmd_checkPollVoted" onselect="canvas.doActionmenu('checkPollVoted')" key="['ALT','Shift','V']"/> 
+	<command id="cmd_importFile" onselect="canvas.doActionmenu('importFile')" key="['ALT','Shift','I']"/> 
+	<command id="cmd_editCamMicSettings" onselect="canvas.doActionmenu('editCamMicSettings')" key="['ALT','Shift','1']"/> 
+	<command id="cmd_editBoardSettings" onselect="canvas.doActionmenu('editBoardSettings')" key="['ALT','Shift','2']"/>   
+	<command id="cmd_quit" onselect="canvas.doActionmenu('quit')" key="['ALT','Shift','E']"/> 
 
 </library>
