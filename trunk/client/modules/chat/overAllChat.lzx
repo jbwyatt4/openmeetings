@@ -8,7 +8,7 @@
     width="810" height="280" y="240" x="10" closable="true" labelid="443" >
 	
 	<handler name="onclose">
-		Debug.write("close: ",this);
+		if($debug) Debug.write("overAllChat/close(): ",this);
 		canvas._overallchartcontent=null;
 	</handler>
 	
@@ -71,7 +71,7 @@
 	<attribute name="username" value="" type="string" />	
 	<handler name="oninit">
 		<![CDATA[
-			Debug.write("WIDTH: "+this.width);
+			if($debug) Debug.write("chatParticipants/WIDTH: "+this.width);
 	        var downloadurl = 'http://'+canvas.rtmphostlocal+':'+canvas.red5httpport
 	        		+'/'+canvas.webAppRootKey+'/DownloadHandler?fileName=CHAT'
 	        		+'&moduleName=chat&parentPath=&room=&domain='

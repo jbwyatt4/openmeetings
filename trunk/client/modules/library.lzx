@@ -3,14 +3,22 @@
 	<include href="conference/" />
 	<include href="chat/" />
 	<include href="settings/" />
-	<include href="admin/" />
+<!--
+TO BE DELETED
+<include href="admin/" />
+because it was renamed to useradmin
+H.kuze 2008/3/24
+-->
+
+	<include href="useradmin/" />
 	<include href="orgadmin/" />
 	<include href="roomadmin/" />
 	<include href="invitation/" />
 
-<!-- <include href="wizard/" />  
-It seems that it is not used at all. it was replaced by "chooseUserWindow". 
-It must be deleted some day.
+<!--
+TO BE DELETED
+<include href="wizard/" />  
+It seems that it is not used at all. it was already replaced by "chooseUserWindow". 
 H.Kuze 2008/3/24 
 -->
 
