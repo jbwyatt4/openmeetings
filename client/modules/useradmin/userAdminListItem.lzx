@@ -2,7 +2,7 @@
 <library>
 
 <!--- Existing user list. used by userAdmin only -->
-<class name="configureUsersListItem" extends="baseContentListItem"> 
+<class name="userAdminListItem" extends="baseContentListItem"> 
     
 	<attribute name="user_id" value="0" type="number" />
 	<attribute name="login" value="" type="string" />

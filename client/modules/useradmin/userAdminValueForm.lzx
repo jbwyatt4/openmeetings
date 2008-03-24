@@ -2,9 +2,9 @@
 <library>
 
 <!--- User Profile edit panel in the useradmin leftblock. Private class only for useradmin -->
-<class name="userValueForm" extends="baseContentSaveView">
+<class name="userAdminValueForm" extends="baseContentSaveView">
 
-	<!-- recordContent-id -->
+	<!--- recordContent-id -->
 	<attribute name="user_id" value="0" type="number" />
 	
 	<!--handlers -->
