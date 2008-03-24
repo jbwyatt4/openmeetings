@@ -11,14 +11,16 @@ var tempActionForNavi = '';
 var labels = new Array();
 
 function setLabelObjectByHundred(no,obj){
+	if($debug) Debug.write("FUNC/setLabelObjectByHundred");
     if(no!=0) no = Math.floor(no/100);
     //Debug.write("SetLabelObject: ",no,obj);
 	labels[no] = obj;
 }
 
 function getLabelTag(labelid){
-  var no = Math.floor(labelid/100);
-  return getLabelTagByNo(no,labelid);
+	if($debug) Debug.write("FUNC/getLabelTag",labelid);
+	var no = Math.floor(labelid/100);
+	return getLabelTagByNo(no,labelid);
 }
 
 function getLabelTagByNo(no,labelid){
@@ -27,6 +29,7 @@ function getLabelTagByNo(no,labelid){
 	//Debug.write("Search label tag in: ",labelid,labels[no]);
     for (var eg=0;eg<=l.length;eg++){
 	    if (l[eg].fieldvalues_id==labelid){
+			if($debug) Debug.write("FUNC/getLabelTagByNo",no,labelid,l[eg].value);
 		    return l[eg].value;
 	    }
     }
@@ -34,18 +37,19 @@ function getLabelTagByNo(no,labelid){
 }
 
 function quicklink(action){
+	if($debug) Debug.write("FUNC/quicklink",action);
     mainmenuList.doAction(action);
 }   
     
 function quicklinkAct(action){
+	if($debug) Debug.write("FUNC/quicklinkAct",action);
     var t = new Array();
     t.action = action;
     loadContent(t,null,null);
 }            
 
 function loadContent(obj,parentobj,preparentobj){
-	
-	Debug.write("loadContent: ",obj.action);
+	if($debug) Debug.write("FUNC/loadContent: ",obj.action);
     
 	tempActionForNavi = obj.action;
 
@@ -56,9 +60,10 @@ function loadContent(obj,parentobj,preparentobj){
 }
     
 function loadContentByTempActionForNavi(){
-	
+	if($debug) Debug.write("FUNC/loadContentByTempActionForNavi");
+
     if (tempActionForNavi!="logout"){
-        Debug.write("loadContentByString ",tempActionForNavi);
+        if($debug) Debug.write("FUNC/loadContentByString ",tempActionForNavi);
         new global[tempActionForNavi](canvas.main_content._content.inner);
 	} else {
         canvas._mainbgcontentNavi.navi.destroy();
@@ -68,17 +73,19 @@ function loadContentByTempActionForNavi(){
 }    
 
 function clearStageContent(obj){
-    Debug.write("clearStageContent: ",obj);
+    if($debug) Debug.write("FUNC/clearStageContent: ",obj);
     //can be called with zero arguments
     //if (arguments.length!=0) obj.parent.parent.clearAllSubItemLists();  
     
     return canvas.main_content._content.clearAll();
 }
 function setLabelObject(labelObjRef){
+	if($debug) Debug.write("FUNC/setLabelObject",labelObjRef);
 	labelObj = labelObjRef;
 }
 
 function getLabelNameXMLCRM(labelid){
+	if($debug) Debug.write("FUNC/getLabelNameXMLCRM",labelid);
 	for (var i=0;i<labelObj.length;i++){
 		if (labelid==labelObj[i].fieldvalues_id){
 			return labelObj[i].value;
@@ -88,6 +95,7 @@ function getLabelNameXMLCRM(labelid){
 }
 
 function parseDateToString(dateObj){
+	if($debug) Debug.write("FUNC/parseDateToString",dateObj);
 	if (dateObj==null) return "";
 	var d = dateObj.getDate();
 	if (d<10) d = "0"+d;
@@ -99,6 +107,7 @@ function parseDateToString(dateObj){
 }
 
 function parseDateToStringTime(dateObj){
+	if($debug) Debug.write("FUNC/parseDateToStringTime",dateObj);
 	if (dateObj==null) return "";
 	var d = dateObj.getDate();
 	if (d<10) d = "0"+d;
@@ -113,6 +122,7 @@ function parseDateToStringTime(dateObj){
 	return d+'.'+mo+'.'+y+' '+h+':'+m;
 }
 function parseStringToDate(t){
+	if($debug) Debug.write("FUNC/parseStringToDate",t);
 	if (t.length==10){
 		var d = Number(t.substring(0, 2));
 		var m = Number(t.substring(3, 5));
@@ -128,6 +138,7 @@ function parseStringToDate(t){
 }
 
 function getStringDateFileSave(){
+	if($debug) Debug.write("FUNC/getStringDateFileSave");
 	var dateObj = new Date();
 	var hours = dateObj.getHours();
 	if (hours<10) hours="0"+hours;
