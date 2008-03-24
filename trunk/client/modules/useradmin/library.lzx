@@ -2,8 +2,8 @@
 <library>
 
     <include href="userAdmin.lzx" />
-	<include href="configureUsersListItem.lzx" />
-	<include href="userValueForm.lzx" />
+	<include href="userAdminListItem.lzx" />
+	<include href="userAdminValueForm.lzx" />
 	<include href="chooseOrganisationWindow.lzx" />
 
 </library>

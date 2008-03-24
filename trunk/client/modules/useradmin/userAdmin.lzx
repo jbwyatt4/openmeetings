@@ -25,7 +25,7 @@
 		
 		<handler name="onclickedItem" args="obj">
 			//Debug.write("onclickedItem",obj,obj.obj);
-			parent._uservalueform.initValueFieldsByObject(obj.obj);
+			parent._useradminvalueform.initValueFieldsByObject(obj.obj);
 		</handler>
 		
 		<netRemoteCallHib name="getUserList" funcname="userservice.getUserList" remotecontext="$once{ canvas.thishib }" >      
@@ -46,14 +46,14 @@
 	    	<![CDATA[
 	    	this.clearList();
 	    	for (var i=0;i<records.length;i++){
-	    		new configureUsersListItem(this._innerlist._inn._inn,{obj:records[i],user_id:records[i].user_id,login:records[i].login,firstname:records[i].firstname,lastname:records[i].lastname});
+	    		new userAdminListItem(this._innerlist._inn._inn,{obj:records[i],user_id:records[i].user_id,login:records[i].login,firstname:records[i].firstname,lastname:records[i].lastname});
 	    	}
 	    	]]>
 	    </method>
 
 	</turnOverList>
 	
-	<userValueForm name="_uservalueform" x="460" />
+	<userAdminValueForm name="_useradminvalueform" x="460" />
 
 </class>
 
