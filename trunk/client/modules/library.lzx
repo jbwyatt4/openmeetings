@@ -1,14 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library>
 	<include href="conference/" />
-
 	<include href="chat/" />
 	<include href="settings/" />
 	<include href="admin/" />
 	<include href="orgadmin/" />
 	<include href="roomadmin/" />
 	<include href="invitation/" />
-	<include href="wizard/" />
+
+<!-- <include href="wizard/" />  
+It seems that it is not used at all. it was replaced by "chooseUserWindow". 
+It must be deleted some day.
+H.Kuze 2008/3/24 
+-->
+
 	<include href="dashboard/" />
 	<include href="issuetracker/" />
 	<include href="confadmin/" />
