@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rlzxdoc>
-<class name="privateMeetings">
+<class name="publicMeetings">
    <doc>
    	入室可能なパブリック会議室のリストと、それら会議室の情報を表示する画面viewクラスです。<br/>
    	全体画面の上側にあるメニューリストの”パブリック会議室”をクリックして表示されます。<br/>
