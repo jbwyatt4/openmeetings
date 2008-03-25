@@ -8,9 +8,11 @@
 	<resource name="_recording_delete" src="resources/button_cancel.png" />
 	
 	<include href="video/" />
-    <include href="recordingSaveWin.lzx" />
-    <include href="recordContent.lzx" />
-    <include href="recordingsViewer.lzx" />
-    <include href="recordingStartWin.lzx" />
+    	<include href="recordContent.lzx" />
+    	<include href="recordingsViewer.lzx" />
 
+<!--
+    	<include href="recordingSaveWin.lzx" />
+    	<include href="recordingStartWin.lzx" />
+-->
 </library>
