@@ -54,7 +54,9 @@
   <moderationPanel y="22" />
 </class>
 
-
+<!-- caution: this class is not private class. It is used in modules/recordings/recordingsViewer.lzx, for example.
+		May 26 2008 commented by onokeiji@gmail.com
+ -->
 <class name="filesPanel" extends="guiPresenter" x="2" y="284"
     width="290" height="310" closable="false" title="Chat Files User"
     resizeable="false">

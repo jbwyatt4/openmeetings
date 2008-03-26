@@ -13,7 +13,7 @@
 	
 	       	<handler name="ondata" args="value">	
                 		<![CDATA[
-                			if( $debug ) Debug.write("getAllRecordingsForUser",value);
+                			if( $debug ) Debug.write("recordContent.ondata(): getAllRecordingsForUser",value);
                 ]]>	        	          				
 	        	</handler>	
 	  	</netRemoteCallHib>   
@@ -110,7 +110,7 @@
 		  					
 		  					<handler name="ondblclick">
 		  						canvas.currentrecorder_id = Number(this.datapath.xpathQuery('recording_id/text()'));
-		  						if( $debug ) Debug.write("canvas.currentrecorder_id: ",canvas.currentrecorder_id);
+		  						if( $debug ) Debug.write("recordContent.ondblclick(): canvas.currentrecorder_id: ",canvas.currentrecorder_id);
 		  						quicklinkAct('recordingsViewer');
 		  					</handler>	
 		  					
