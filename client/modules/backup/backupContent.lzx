@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library>
 
-
+<!--- Backup module for admin. It can export or import user account data as xml-file. -->
 <class name="backupContent" extends="baseContentView">
 	
+	<!-- 380:Userdata - Export -->
 	<labelText labelid="380" y="2" x="2" fontstyle="bold" />  
 	
+	<!-- 382:start export -->
     <simpleLabelButton labelid="382" width="160" x="2" y="32">
     	<handler name="onclick">
     		<![CDATA[
@@ -13,14 +15,16 @@
 	    				+'/'+canvas.webAppRootKey+'/Export?organisation='+0
 	    				+'&moduleName=users'
 	    				+'&sid='+canvas.sessionId;
-	    		Debug.write("exporturl "+exporturl);
+	    		if($debug) Debug.write("BACKUP/exporturl "+exporturl);
 	            LzBrowser.loadURL(exporturl,"_parent");
             ]]>
     	</handler>
     </simpleLabelButton>   
     
+    <!-- 381:All organisations must be already existing! -->
     <labelText labelid="381" y="32" x="200"/>  
 	
+	<!-- 383:By organisation -->
 	<labelText labelid="383" y="62" x="2"/>  
 	
     <combobox name="organistations" width="170" y="62" x="120" editable="false" >
@@ -32,7 +36,7 @@
 			<netparam><method name="getValue"> return canvas.sessionId; </method></netparam>
 	    	<handler name="ondata" args="value">
 	    		<![CDATA[
-		    		Debug.write("getAllOrganisations ",value);
+		    		if($debug) Debug.write("BACKUP/getAllOrganisations ",value);
 		    		for (var i=0;i<value.length;i++) {
 		    			this.parent.addItem(value[i].name,value[i].organisation_id);
 		    		}
@@ -42,6 +46,7 @@
 	    </netRemoteCallHib>	                
     </combobox>
     
+	<!-- 384:start export -->
     <simpleLabelButton labelid="384" x="300" y="62">
     	<handler name="onclick">
     		<![CDATA[
@@ -49,15 +54,17 @@
 	    				+'/'+canvas.webAppRootKey+'/Export?organisation='+parent.organistations.getValue()
 	    				+'&moduleName=userorganisations'
 	    				+'&sid='+canvas.sessionId;
-	    		Debug.write("exporturl "+exporturl);
+	    		if($debug) Debug.write("BACKUP/exporturl "+exporturl);
 	            LzBrowser.loadURL(exporturl,"_parent");
             ]]>
     	</handler>
     </simpleLabelButton>   
 	
-	<labelText labelid="385" y="92" x="2" fontstyle="bold" />  
+	<!-- 385:Userdata - Import -->
+	<labelText labelid="385" y="112" x="2" fontstyle="bold" />  
 	
-    <simpleLabelButton labelid="386" x="2" y="122">
+	<!-- 386:choose users.xml -->
+    <simpleLabelButton labelid="386" x="2" y="142">
 	    <handler name="onclick">
 	        new importWindow(canvas.main_content._content.inner,{x:60,y:60,uploadmodule:'users'});
 	    </handler>
