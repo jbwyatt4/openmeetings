@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library>
 
+<!--- configure value for roomadmin module -->
 <class name="roomValueFormMod" extends="baseContentSaveView" 
 	saveIsVisible="false" deleteIsVisible="false" >
 
@@ -127,11 +128,14 @@
 	
 	<!-- content -->
     
+    <!-- 187:Conferencerooms -->
     <labelText labelid="187" width="200" y="40" resize="false" fontstyle="bold" />
     
+    <!-- 193:Name -->
     <labelText labelid="193" width="200" y="70" resize="false" x="2"/>
         <customEdittext name="roomname" y="70" x="120" width="270" text="" />   
 	
+	<!-- 194:Type -->
     <labelText labelid="194" width="200" y="100" resize="false" x="2"/>  
         <combobox name="roomtype" width="270" y="100" x="120" editable="false" fontsize="12">
 	        <handler name="oninit" >
@@ -144,13 +148,16 @@
 	        </handler> 
         </combobox> 	                  
 
+	<!-- 195:Public -->
     <labelText labelid="195" width="200" y="130" resize="false" x="2"/>  
         <checkbox name="ispublic" width="270" y="130" x="120" fontsize="12" />
 	
+	<!-- 196:Comment -->
 	<labelText labelid="196" width="200" y="160" resize="false" x="2"/> 
         <customScrollEdittext name="comment" y="160" x="120" width="270" 
             height="100" text="" />	
 	
+	<!-- 191:organisations -->
     <labelText labelid="191" width="200" y="270" resize="false" x="2"/>     
     <simpleValueList name="_organisationslist" y="270" x="120" width="270" height="160" 
 		multiselect="true" />

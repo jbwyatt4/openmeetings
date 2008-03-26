@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library>
 
+<!--- list of conference/audience rooms -->
 <class name="roomAdminListItem" extends="baseContentListItem">
     
 	<attribute name="rooms_id" value="0" type="number" />

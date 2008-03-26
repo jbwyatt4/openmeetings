@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library>
 
+<!--- configure value for roomadmin module -->
 <class name="roomValueForm" extends="baseContentSaveView">
 
 	<!-- recordContent-id -->
@@ -203,11 +204,14 @@
 	
 	<!-- content -->
     
+    <!-- 187:Conferencerooms -->
     <labelText labelid="187" width="200" y="40" resize="false" fontstyle="bold" />
     
+    <!-- 193:Name -->
     <labelText labelid="193" width="200" y="70" resize="false" x="2"/>
         <customEdittext name="roomname" y="70" x="120" width="270" text="" />   
     
+    <!-- 482:Participants -->
     <labelText labelid="482" width="200" y="100" resize="false" x="2"/>
         <combobox name="numberOfParticipants" width="270" y="100" x="120" editable="false" fontsize="12">
 	        <handler name="oninit" >
@@ -224,7 +228,8 @@
 	            ]]>
 	        </handler> 
         </combobox> 
-        
+
+	<!-- 194:Type -->
     <labelText labelid="194" width="200" y="130" resize="false" x="2"/>  
         <combobox name="roomtype" width="270" y="130" x="120" editable="false" fontsize="12">
 	        <handler name="oninit" >
@@ -237,22 +242,28 @@
 	        </handler> 
         </combobox> 	                  
 
+	<!-- 195:Public -->
     <labelText labelid="195" width="200" y="160" resize="false" x="2"/>  
         <checkbox name="ispublic" width="270" y="160" x="120" fontsize="12" />
 	
+	<!-- 196:Comment -->
 	<labelText labelid="196" width="200" y="190" resize="false" x="2"/> 
         <customScrollEdittext name="comment" y="190" x="120" width="270" 
             height="100" text="" />	
 	
+	<!-- 191:organisations -->
     <labelText labelid="191" width="200" y="300" resize="false" x="2"/>     
     <simpleValueList name="_organisationslist" y="300" x="120" width="270" height="160" 
 		multiselect="true" />
 	
+	<!-- 172:add organisation -->
 	<baseChooseIcon resourceN="edit_add_rsc" labelid="172" y="300" x="400"
 		onclick="this.parent.addOrganisationToUser()" />		
 	<method name="addOrganisationToUser">
 			new chooseOrganisationWindow(canvas.main_content._content.inner,{refObj:this,item_id:this.rooms_id});
 	</method>	
+
+	<!-- 176:remove organisation -->
 	<baseChooseIcon resourceN="button_cancel_rsc" labelid="176" y="300" x="430"
 		onclick="new confirmDeleteWindow(canvas.main_content._content.inner,{refObj:this});" >		
 		<method name="confirmDelete">
@@ -261,6 +272,7 @@
 		</method>
 	</baseChooseIcon>
 	
+	<!-- 483:Show Layout Settings -->
 	<labelCheckbox x="0" y="470" fontsize="12"
         name="_showAdvancedRoomSettings" labelid="483" >
         <handler name="onvalue" args="v">

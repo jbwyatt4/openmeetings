@@ -388,7 +388,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>組織</value>
   </string>
   <string id="128" name="headconf">
-    <value>会議室</value>
+    <value>会議室一覧</value>
   </string>
   <string id="129" name="conf_pub">
     <value>公開</value>
@@ -928,10 +928,10 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>ホワイトボード設定</value>
   </string>
   <string id="308" name="conferencebar">
-    <value>退室</value>
+    <value>退室する</value>
   </string>
   <string id="309" name="conferencebar">
-    <value>戻る</value>
+    <value>会議室一覧に戻る</value>
   </string>
   <string id="310" name="conferencebar">
     <value>ログアウト</value>
@@ -1457,46 +1457,46 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>カレンダー</value>
   </string>	
   <string id="482" name="roomadmin_labelNumberOfParticipants">
-    <value>利用者</value>
+    <value>定員</value>
   </string>	
   <string id="483" name="roomValue_advancedSettings">
     <value>レイアウト設定の表示</value>
   </string>
   <string id="484" name="roomAdmin_layout_videoX">
-    <value>X | Y</value>
+    <value>横位置(x) | 縦位置(y)</value>
   </string>
   <string id="485" name="roomAdmin_layout_videoY">
     <value>幅 | 高さ</value>
   </string>
   <string id="486" name="roomAdmin_layout">
-    <value>ビデオコンテナ</value>
+    <value>動画画面ブロック</value>
   </string>
   <string id="487" name="roomAdmin_layout_mod">
-    <value>モデレータコンテナ</value>
+    <value>モデレータブロック</value>
   </string>
   <string id="488" name="roomAdmin_layout_mod_pos">
     <value>X</value>
   </string>
   <string id="489" name="roomAdmin_layout_whiteboard">
-    <value>ホワイトボードコンテナ</value>
+    <value>ホワイトボードブロック</value>
   </string>
   <string id="490" name="roomAdmin_layout_whiteboard_show">
     <value>有効</value>
   </string>
   <string id="491" name="roomAdmin_layout_whiteboard_pos">
-    <value>X | Y</value>
+    <value>横位置(x) | 縦位置(y)</value>
   </string>
   <string id="492" name="roomAdmin_layout_whiteboard">
     <value>幅 | 高さ</value>
   </string>
   <string id="493" name="roomAdmin_layout_files">
-    <value>ファイル、チャット、参加者コンテナ</value>
+    <value>チャット、ファイル、メンバーブロック</value>
   </string>
   <string id="494" name="roomAdmin_layout_files_show">
     <value>有効</value>
   </string>
   <string id="495" name="roomAdmin_layout_files_pos">
-    <value>X |Y</value>
+    <value>横位置(x) | 縦位置(y)</value>
   </string>
   <string id="496" name="roomAdmin_layout_files">
     <value>幅 | 高さ</value>
