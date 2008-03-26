@@ -1145,25 +1145,25 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>画像アップロード</value>
   </string>
   <string id="380" name="backuppanel">
-    <value>ユーザデータ - エクスポート</value>
+    <value>ユーザのエクスポート</value>
   </string>
   <string id="381" name="backuppanel">
-    <value>組織はすべて存在している必要があります。</value>
+    <value>すべてのユーザをエクスポートします。</value>
   </string>
   <string id="382" name="backuppanel">
-    <value>エクスポート開始</value>
+    <value>全ユーザエクスポート</value>
   </string>
   <string id="383" name="backuppanel">
-    <value>組織を選択:</value>
+    <value>ユーザを組織ごとにエクスポートします:</value>
   </string>
   <string id="384" name="backuppanel">
-    <value>エクスポート開始</value>
+    <value>組織別ユーザのエクスポート</value>
   </string>
   <string id="385" name="backuppanel">
-    <value>ユーザデータ - インポート</value>
+    <value>ユーザのインポート</value>
   </string>
   <string id="386" name="backuppanel">
-    <value>users.xmlの選択</value>
+    <value>インポートファイル(users.xml)の選択</value>
   </string>
   <string id="387" name="languageseditor">
     <value>インポート</value>
