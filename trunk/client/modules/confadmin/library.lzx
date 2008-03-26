@@ -3,6 +3,6 @@
 
 	<include href="confAdmin.lzx" />
     <include href="confAdminListItem.lzx" />
-    <include href="confValueForm.lzx" />
+    <include href="confAdminValueForm.lzx" />
 
 </library>

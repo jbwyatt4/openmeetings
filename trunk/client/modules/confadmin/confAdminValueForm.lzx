@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library>
 
-<class name="confValueForm" extends="baseContentSaveView">
+<!--- configuration edit panel. -->
+<class name="confAdminValueForm" extends="baseContentSaveView">
 
 	<!-- recordContent-id -->
 	<attribute name="configuration_id" value="0" type="number" />

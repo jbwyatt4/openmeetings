@@ -817,7 +817,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>コメント</value>
   </string>
   <string id="271" name="confadminform_labelkey">
-    <value>キー</value>
+    <value>キー値</value>
   </string>
   <string id="272" name="turnoverlist_maxresults">
     <value>of</value>

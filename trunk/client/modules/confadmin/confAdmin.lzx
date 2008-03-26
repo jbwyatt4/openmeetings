@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library>
 
+<!--- Configuration module for ADMIN -->
 <class name="confAdmin" extends="baseContentView">
 
     <turnOverList name="_turnoverlist" width="260" height="600" x="2" y="0" 
@@ -50,7 +51,7 @@
 
 	</turnOverList>
     
-    <confValueForm name="_confvalueform" x="280" />
+    <confAdminValueForm name="_confvalueform" x="280" />
 
         
 </class>
