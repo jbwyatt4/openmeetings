@@ -27,7 +27,7 @@
 	<!-- 383:By organisation -->
 	<labelText labelid="383" y="62" x="2"/>  
 	
-    <combobox name="organistations" width="170" y="62" x="120" editable="false" >
+    <combobox name="organistations" width="170" y="62" x="230" editable="false" >
     	<handler name="oninit">
     		this.getAllOrganisations.doCall();
     	</handler>
@@ -47,7 +47,7 @@
     </combobox>
     
 	<!-- 384:start export -->
-    <simpleLabelButton labelid="384" x="300" y="62">
+    <simpleLabelButton labelid="384" x="410" y="62">
     	<handler name="onclick">
     		<![CDATA[
 	    		var exporturl = 'http://'+canvas.rtmphostlocal+':'+canvas.red5httpport

@@ -1463,7 +1463,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>レイアウト設定の表示</value>
   </string>
   <string id="484" name="roomAdmin_layout_videoX">
-    <value>横位置(x) | 縦位置(y)</value>
+    <value>横(x) | 縦(y)</value>
   </string>
   <string id="485" name="roomAdmin_layout_videoY">
     <value>幅 | 高さ</value>
@@ -1484,7 +1484,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>有効</value>
   </string>
   <string id="491" name="roomAdmin_layout_whiteboard_pos">
-    <value>横位置(x) | 縦位置(y)</value>
+    <value>横(x) | 縦(y)</value>
   </string>
   <string id="492" name="roomAdmin_layout_whiteboard">
     <value>幅 | 高さ</value>
@@ -1496,7 +1496,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>有効</value>
   </string>
   <string id="495" name="roomAdmin_layout_files_pos">
-    <value>横位置(x) | 縦位置(y)</value>
+    <value>横(x) | 縦(y)</value>
   </string>
   <string id="496" name="roomAdmin_layout_files">
     <value>幅 | 高さ</value>
