@@ -379,13 +379,13 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>ホーム</value>
   </string>
   <string id="125" name="useradmin">
-    <value>ユーザ</value>
+    <value>ユーザ管理</value>
   </string>
   <string id="126" name="groupadmin">
     <value>グループ</value>
   </string>
   <string id="127" name="orgadmin">
-    <value>組織</value>
+    <value>組織管理</value>
   </string>
   <string id="128" name="headconf">
     <value>会議室一覧</value>
@@ -562,7 +562,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>入室</value>
   </string>
   <string id="186" name="navi_roomadmin">
-    <value>会議室</value>
+    <value>会議室管理</value>
   </string>
   <string id="187" name="roomadmin_header">
     <value>会議室</value>
@@ -793,7 +793,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>女性</value>
   </string>
   <string id="263" name="navimain_confadmin">
-    <value>設定</value>
+    <value>環境設定</value>
   </string>
   <string id="264" name="conftable_headerId">
     <value>ID</value>
