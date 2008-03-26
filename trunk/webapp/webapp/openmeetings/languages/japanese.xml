@@ -1205,7 +1205,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>パブリック/プライベート会議室の録画ファイル</value>
   </string>
   <string id="398" name="roomslist">
-    <value>利用中ユーザ数:</value>
+    <value>入室者数:</value>
   </string>
   <string id="399" name="roomslist">
     <value>Joined:</value>
