@@ -23,7 +23,12 @@ H.Kuze 2008/3/24
 -->
 
 	<include href="dashboard/" />
+<!--
+TO BE DELETED
 	<include href="issuetracker/" />
+It seems that it si not used at all.
+Mar 28 2008 commented by onokeiji@gmail.com
+-->
 	<include href="confadmin/" /><!-- admin module-->
 	<include href="meetings/" />
 	<include href="events/" />
