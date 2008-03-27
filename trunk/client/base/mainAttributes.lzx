@@ -188,9 +188,9 @@ containing the VideoViews
 and some more references to temp-objects
  -->
 <attribute name="_videocontainer" value="null" />
-<attribute name="_chartcontent" value="null" />
-<attribute name="_chartcontentRPC" value="null" />
-<attribute name="_overallchartcontent" value="null" />
+<attribute name="_chatcontent" value="null" />
+<attribute name="_chatcontentRPC" value="null" />
+<attribute name="_overallchatcontent" value="null" />
 <attribute name="_mymod" value="null" />
 
 <attribute name="isrtl" value="false" type="boolean" />    

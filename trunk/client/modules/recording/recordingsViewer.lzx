@@ -192,7 +192,7 @@
 	        			var starttime =  (Math.round(chatValues[i].starttime/this.timeStepSyncing))*this.timeStepSyncing;
 	        			if (starttime == this.currentTime){
 	        				var action = chatValues[i].action;
-	        				canvas._chartcontent.addChatHistory(action.message,action.client);
+	        				canvas._chatcontent.addChatHistory(action.message,action.client);
 	        		}
 	        	}
 	

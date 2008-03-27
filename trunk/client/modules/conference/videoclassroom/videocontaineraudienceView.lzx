@@ -100,7 +100,7 @@
             }
             canvas.thishib.getCurrentModerator.doCall(); 
             canvas._mymod.checkForRecording.doCall();
-            canvas._chartcontent.doInit();		
+            canvas._chatcontent.doInit();		
 		</handler>	
   	</netRemoteCallHib>		  	
 	  	

@@ -438,8 +438,8 @@
             <handler name="ondata" args="value">
                 //The onResult-Handler will be called be the rtmpconnection
                 //Debug.write("roomDisconnect: ",value);
-                if (canvas._overallchartcontent!=null){
-                	var parentObj = canvas._overallchartcontent.parent.parent.parent._chatparticipants;
+                if (canvas._overallchatcontent!=null){
+                	var parentObj = canvas._overallchatcontent.parent.parent.parent._chatparticipants;
                 	parentObj.removeItemById(value.user_id);
                 }
                 if (canvas._videocontainer!=null){
@@ -576,8 +576,8 @@
                 } else if (value.message[0]=='applyModAnswer'){
                     canvas.currentModApply.setUserAnswer(value);
                 } else if (value.message[0]=='chat'){
-                    if (canvas._chartcontent) canvas._chartcontent.addChatHistory(value.message,value.client);
-                    if (canvas._chartcontentRPC) canvas._chartcontentRPC.addChatHistory(value.message,value.client);
+                    if (canvas._chatcontent) canvas._chatcontent.addChatHistory(value.message,value.client);
+                    if (canvas._chatcontentRPC) canvas._chatcontentRPC.addChatHistory(value.message,value.client);
                 } else if (value.message[0]=='avsettings'){
                     canvas._videocontainer.setAVSettingsToClient(value.client);
                 } else if (value.message[0]=='whiteboard'){
@@ -702,8 +702,8 @@
 	<netRemoteCallHib name="sendVarsToOverallChat" funcname="sendVarsToOverallChat" >      
     	<handler name="ondata" args="value">
     		Debug.write("sendVarsToOverallChat: ",value);
-    		if (canvas._overallchartcontent!=null){
-    			canvas._overallchartcontent.addChatHistory(value.message,value.client);
+    		if (canvas._overallchatcontent!=null){
+    			canvas._overallchatcontent.addChatHistory(value.message,value.client);
     		}
     	</handler>
     </netRemoteCallHib>
@@ -711,8 +711,8 @@
 	<netRemoteCallHib name="roomConnect" funcname="roomConnect" >      
     	<handler name="ondata" args="value">
     		Debug.write("roomConnect: ",value);
-    		if (canvas._overallchartcontent!=null){
-    			var parentObj = canvas._overallchartcontent.parent.parent.parent._chatparticipants._list;
+    		if (canvas._overallchatcontent!=null){
+    			var parentObj = canvas._overallchatcontent.parent.parent.parent._chatparticipants._list;
     			new chatParticipants(parentObj,{user_id:value.user_id,username:value.firstname+", "+value.lastname});				
     		}
     	</handler>

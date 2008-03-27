@@ -2,16 +2,16 @@
 <library>
 
 <!-- ###################
-	Class charttab
+	Class chattab
  -->
 <class name="chatTab" extends="simpleBaseTabpane" >
 
-	<view name="_chartoutputborder" height="${ parent.height-30 }"
+	<view name="_chatoutputborder" height="${ parent.height-30 }"
         bgcolor="$once{ canvas.basebgcolorizer }" width="260">
 		
 		<chatOutput name="_chatoutput" x="1" y="1" >
 			<handler name="oninit">
-				canvas._chartcontent = this;
+				canvas._chatcontent = this;
 			</handler>
 		</chatOutput>
 

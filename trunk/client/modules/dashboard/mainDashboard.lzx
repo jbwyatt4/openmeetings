@@ -21,7 +21,7 @@
     </handler>
     
     <handler name="ontabcontentleave">
-    	canvas._overallchartcontent = null;
+    	canvas._overallchatcontent = null;
     </handler>
     
     <netRemoteCallHib name="getRssFeeds" funcname="xmlcrm.getRssFeeds" 
