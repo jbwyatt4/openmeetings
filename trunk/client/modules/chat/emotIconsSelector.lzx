@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library>
 	
+<!--- view to select emoticons. size is 160x140 -->
 <class name="emotIconsSelector" extends="closableView" bgcolor="$once{ canvas.basebgcolorizer }" 
     clickable="true" width="160" height="140" >
 
@@ -37,14 +38,14 @@
             <handler name="ondata" args="value">
             	<![CDATA[
                 	//The onResult-Handler will be called be the rtmpconnection
-					Debug.write("getAllPublicEmoticons : ",value);
+					if($debug) Debug.write("emotIconsSelector/getAllPublicEmoticons : ",value);
 					for (var i=0;i<value.length;i++){
 						var swfurl = 'http://'+canvas.rtmphostlocal+':'+canvas.red5httpport+'/'+canvas.webAppRootKey+'/public/emoticons/'+value[i][0];
 						iconlabel = value[i][1];
 						if (value[i].length>4){
 							iconlabel += ", "+value[i][2];							
 						}
-						var m = new chatInnerSmilyIcon(parent.inn.inn,{iconvalue:value[i][1],iconlabel:iconlabel});
+						var m = new _chatInnerSmilyIcon(parent.inn.inn,{iconvalue:value[i][1],iconlabel:iconlabel});
 						m.setSource(swfurl);						
 					}
                 ]]>
@@ -54,7 +55,7 @@
     <view bgcolor="$once{ canvas.baseMousecolorizer }" width="$once{ parent.width-2 }" 
     	  height="$once{ parent.height-2 }" x="1" y="1" />
     	  
-    <labelText x="1" y="1" labelid="446" />
+    <labelText x="1" y="1" labelid="446" /><!-- 446:Emoticons -->
 	<view name="inn" width="158" height="118" x="0" y="20" clip="true">
 		<view name="inn" width="$once{ parent.height }" >
 			<wrappinglayout axis="x" spacing="2" />
@@ -72,12 +73,13 @@
             this.setResourceNumber(2);
             this.parent.close();
         </handler>
-        <labelTooltip labelid="430" />
+        <labelTooltip labelid="430" /><!-- 430:close -->
     </view>    
 	
 </class>	
 
-<class name="chatInnerSmilyIcon" extends="view" onmouseover="" onmouseout="">
+<!--- private class of emotIconsSelector.class. resource view of chat smily icons. it shows icons and label tooltips.-->
+<class name="_chatInnerSmilyIcon" extends="view" onmouseover="" onmouseout="">
 	<attribute name="iconlabel" value="" type="string" />
 	<attribute name="iconvalue" value="" type="string" />
 	<handler name="onclick">

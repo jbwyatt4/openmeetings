@@ -1,36 +1,39 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library>
 
-<!-- ###################
-	Class charttab
- -->
+<!--- Chat module of the dashboard. The fixed size is 810x280 -->
 <class name="overAllChat" extends="guiPresenter" resizeable="false"
     width="810" height="280" y="240" x="10" closable="true" labelid="443" >
+	<!-- 443:Chat -->
 	
 	<handler name="onclose">
 		if($debug) Debug.write("overAllChat/close(): ",this);
 		canvas._overallchartcontent=null;
 	</handler>
 	
+	<!-- background area. all of the chat contents are putted on this view. -->
 	<view y="20" bgcolor="white" x="1" width="$once{ parent.width-2 }" 
 		  height="$once{ parent.height-21 }" />
 	
+	<!-- message and buttons area-->
 	<view y="22" bgcolor="white" x="4" height="$once{ parent.height-25 }" >
 		<view name="_chartoutputborder" height="$once{ parent.height-30 }"
 	        bgcolor="$once{ canvas.basebgcolorizer }" width="604">
-			<overallChatOutput name="_chatoutput" x="1" y="1" >
+			<overAllChatOutput name="_chatoutput" x="1" y="1" >
 				<handler name="oninit">
 					if (canvas._overallchartcontent!=null) canvas._overallchartcontent.parent.parent.parent.close();
 					canvas._overallchartcontent = this;
 				</handler>
-			</overallChatOutput>
+			</overAllChatOutput>
 		</view>
-		<overallChatTabBottom name="_chattabbottom" 
+		<overAllChatTabBottom name="_chattabbottom" 
 					   y="$once{ parent.height-28 }" x="0" width="254" />
 	</view>
 	
+	<!-- background of chat participant area -->
 	<view x="610" y="22" name="_chatparticipantsBorder" height="$once{ parent.height-22 }" width="1" />
 	
+	<!-- chat participants area -->
 	<view x="612" y="22" name="_chatparticipants" height="$once{ parent.height-24 }" 
 	        width="190" clip="true" >
 	    <handler name="oninit">
@@ -66,27 +69,5 @@
 	
 </class>
 
-<class name="chatParticipants" extends="view" width="$once{ parent.width }" >
-	<attribute name="user_id" value="0" type="number" />
-	<attribute name="username" value="" type="string" />	
-	<handler name="oninit">
-		<![CDATA[
-			if($debug) Debug.write("chatParticipants/WIDTH: "+this.width);
-	        var downloadurl = 'http://'+canvas.rtmphostlocal+':'+canvas.red5httpport
-	        		+'/'+canvas.webAppRootKey+'/DownloadHandler?fileName=CHAT'
-	        		+'&moduleName=chat&parentPath=&room=&domain='
-	        		+'&remoteUserid='+this.user_id
-	        		+'&sid='+canvas.sessionId;
-	        //Debug.write("downloadurl "+downloadurl);
-	        this._userpic.setAttribute('src',downloadurl);	
-	        
-	        //Debug.write("TIME: "+this.usertime);
-        ]]>
-	</handler>
-	<image name="_userpic" />
-	<text text="$once{ parent.username }" x="40" resize="false"
-		  width="$once{ parent.width - 40 }" bgcolor="0xCCCCCC"
-		  selectable="true" />	
-</class>
 
 </library>
