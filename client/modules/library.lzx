@@ -10,9 +10,6 @@ because it was renamed to useradmin
 H.kuze 2008/3/24
 -->
 
-	<include href="useradmin/" /><!-- admin module-->
-	<include href="orgadmin/" /><!-- admin module-->
-	<include href="roomadmin/" /><!-- admin module-->
 	<include href="invitation/" />
 
 <!--
@@ -26,14 +23,19 @@ H.Kuze 2008/3/24
 <!--
 TO BE DELETED
 	<include href="issuetracker/" />
-It seems that it si not used at all.
+It seems that it is not used at all.
 Mar 28 2008 commented by onokeiji@gmail.com
 -->
-	<include href="confadmin/" /><!-- admin module-->
 	<include href="meetings/" />
 	<include href="events/" />
+	<include href="recording/" />
+
+
+	<include href="useradmin/" /><!-- admin module-->
+	<include href="orgadmin/" /><!-- admin module-->
+	<include href="roomadmin/" /><!-- admin module-->
+	<include href="confadmin/" /><!-- admin module-->
 	<include href="languageseditor/" /><!-- admin module-->
 	<include href="backup/" /><!-- admin module-->
-	<include href="recording/" />
 
 </library>
