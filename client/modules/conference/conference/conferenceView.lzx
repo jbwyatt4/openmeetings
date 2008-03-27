@@ -103,8 +103,8 @@
 	        canvas._videocontainer.resetAllValues();
 	        canvas._videocontainer = null;
         }
-        if (canvas._chartcontent!=null){
-        	canvas._chartcontent = null;
+        if (canvas._chatcontent!=null){
+        	canvas._chatcontent = null;
         }
         if (canvas._mymod!=null){
         	canvas._mymod = null;

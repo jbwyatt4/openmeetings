@@ -8,7 +8,7 @@
 	-->
 	<class name="publicEvents" extends="baseContentView">	
 		<handler name="ontabcontentleave">
-			canvas._chartcontentRPC = null;
+			canvas._chatcontentRPC = null;
 			canvas.thishib.removeClientFromChatNotification.doCall();
 		</handler>
 	   

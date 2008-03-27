@@ -8,7 +8,7 @@
 	
 	<handler name="onclose">
 		if($debug) Debug.write("overAllChat/close(): ",this);
-		canvas._overallchartcontent=null;
+		canvas._overallchatcontent=null;
 	</handler>
 	
 	<!-- background area. all of the chat contents are putted on this view. -->
@@ -17,12 +17,12 @@
 	
 	<!-- message and buttons area-->
 	<view y="22" bgcolor="white" x="4" height="$once{ parent.height-25 }" >
-		<view name="_chartoutputborder" height="$once{ parent.height-30 }"
+		<view name="_chatoutputborder" height="$once{ parent.height-30 }"
 	        bgcolor="$once{ canvas.basebgcolorizer }" width="604">
 			<overAllChatOutput name="_chatoutput" x="1" y="1" >
 				<handler name="oninit">
-					if (canvas._overallchartcontent!=null) canvas._overallchartcontent.parent.parent.parent.close();
-					canvas._overallchartcontent = this;
+					if (canvas._overallchatcontent!=null) canvas._overallchatcontent.parent.parent.parent.close();
+					canvas._overallchatcontent = this;
 				</handler>
 			</overAllChatOutput>
 		</view>

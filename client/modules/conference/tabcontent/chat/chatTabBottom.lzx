@@ -79,7 +79,7 @@
             	<![CDATA[
                 	//The onResult-Handler will be called be the rtmpconnection
 					Debug.write("clearChat : ",value);
-					canvas._chartcontent.doInit();	
+					canvas._chatcontent.doInit();	
                 ]]>
             </handler>   
         </netRemoteCallHib>		
