@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library>
 
-<class name="overallChatTabBottom" extends="view" layout="axis:x;spacing:2" >
+<!--- View of the buttom area of chat. It contains buttons of message,emoticons,clear. -->
+<class name="overAllChatTabBottom" extends="view" layout="axis:x;spacing:2" >
 
+		<!-- inputtext view to input chat message. -->
 		<view height="20" width="485" name="message" 
 			  bgcolor="$once{ canvas.basebgcolorizer }">
 			<attribute name="curserpos" value="0" type="number" />
@@ -26,6 +28,7 @@
 		</view>
 
 	  	<attribute name="objMessage" value="null" />
+		<!-- 220:send-->
 	  	<simpleLabelButton labelid="220" name="_button" width="70" > 
 		  	<handler name="onclick">
 		  		parent.objMessage = new Array ();
@@ -48,9 +51,10 @@
 			  		this.parent.message.setText('');
 		  		}
 		  	</handler>
-		  	<labelTooltip labelid="444" />
+		  	<labelTooltip labelid="444" /><!--444:send message -->
 		</simpleLabelButton>
 
+		<!-- emoticons button -->
 		<simpleLabelButton name="_show_emots">
 			<handler name="onclick">
 				//parent.clearOverallChat.doCall();
@@ -63,15 +67,16 @@
 					this.setSource(swfurl);
 				</handler>
 			</view>
-			<labelTooltip labelid="445" />
+			<labelTooltip labelid="445" /><!-- 445:Emoticons-->
 		</simpleLabelButton>			
 		  
+		<!-- clear button -->
 		<simpleLabelButton name="_delete_chat_log">
 			<handler name="onclick">
 				parent.clearOverallChat.doCall();
 			</handler>
 			<view x="3" y="2" resource="delete_chat_log_rsc" />
-			<labelTooltip labelid="442" />
+			<labelTooltip labelid="442" /><!-- Delete Server-Chatlog -->
 		</simpleLabelButton>
 		
         <netRemoteCallHib name="clearOverallChat" funcname="chatservice.clearOverallChat" 
