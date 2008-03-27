@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library>
-	
-    <include href="invitationQuickLoader.lzx" />
+
 	<include href="inviteMainWindow.lzx" />
-	<include href="invitationUserWin.lzx" />
 
 </library>
