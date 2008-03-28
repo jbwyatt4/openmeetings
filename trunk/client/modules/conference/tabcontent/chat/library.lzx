@@ -4,7 +4,7 @@
 	<resource name="delete_chat_log_rsc" src="resources/cancel.png" />
 
 	<include href="chatTabBottomRoomList.lzx" />
-	<include href="chatoutputRoomsList.lzx" />
+	<include href="chatOutputRoomsList.lzx" />
 	<include href="chatTabItem.lzx" />
 	<include href="chatTabItemEmoticons.lzx" />
 	<include href="chatOutput.lzx" />

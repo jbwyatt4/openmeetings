@@ -66,7 +66,7 @@ these properties will be overwritten by config.xml -->
 
 
 
-<attribute name="chathistory" value="null" />
+
 <attribute name="userHistory" value="null" />
 <attribute name="browserTabHistory" value="null" />
 
@@ -188,9 +188,6 @@ containing the VideoViews
 and some more references to temp-objects
  -->
 <attribute name="_videocontainer" value="null" />
-<attribute name="_chatcontent" value="null" />
-<attribute name="_chatcontentRPC" value="null" />
-<attribute name="_overallchatcontent" value="null" />
 <attribute name="_mymod" value="null" />
 
 <attribute name="isrtl" value="false" type="boolean" />    
