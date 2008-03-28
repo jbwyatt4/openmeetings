@@ -9,7 +9,9 @@
 <resource name="ksirc_rsc2" src="resources/ksirc.png" />
 <resource name="kuser_rsc2" src="resources/kuser.png" />   
 <resource name="library2" src="resources/folder.png" />  
-    
+
+
+<!--- Tabpane. it used by chat. -->
 <class name="simpleBaseTabpane" extends="view" height="$once{ parent.height-20 }" 
 	   width="$once{ parent.width }" y="24" x="2" >
 	
