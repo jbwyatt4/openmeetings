@@ -19,7 +19,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Paramètres</value>
   </string>
   <string id="5" name="benutzer">
-    <value>Profile</value>
+    <value>Profil</value>
   </string>
   <string id="6" name="admin">
     <value>Administration</value>
@@ -49,7 +49,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Video Conférence</value>
   </string>
   <string id="15" name="import">
-    <value>Importer une présentation</value>
+    <value>Nouvelle présentation</value>
   </string>
   <string id="16" name="refreshfiles">
     <value>charger à nouveau la liste</value>
@@ -112,7 +112,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Non</value>
   </string>
   <string id="36" name="questionwant">
-    <value>poser une question :</value>
+    <value>Question posée :</value>
   </string>
   <string id="37" name="pollresults">
     <value>Résultats de l'enquête</value>
@@ -268,7 +268,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>gras</value>
   </string>
   <string id="88" name="waiting">
-    <value>ATTENDRE</value>
+    <value>En attente...</value>
   </string>
   <string id="89" name="applyMessage">
     <value>Un utilisateur souhaite devenir modérateur :</value>
@@ -328,7 +328,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Erreur système, merci de contacter l'administrateur.</value>
   </string>
   <string id="108" name="Authlogin">
-    <value>Login</value>
+    <value>Connexion</value>
   </string>
   <string id="109" name="Authuser">
     <value>Utilisateur :</value>
@@ -373,7 +373,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Annuler</value>
   </string>
   <string id="123" name="Authbtn2">
-    <value>Pas encore membre ?</value>
+    <value>Inscription</value>
   </string>
   <string id="124" name="dashboard">
     <value>Accueil</value>
@@ -388,19 +388,19 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Organisations</value>
   </string>
   <string id="128" name="headconf">
-    <value>Salle de Conférence</value>
+    <value>Salles de Conférences</value>
   </string>
   <string id="129" name="conf_pub">
     <value>publique</value>
   </string>
   <string id="130" name="head_org">
-    <value>organisation</value>
+    <value>Organisation</value>
   </string>
   <string id="131" name="btn_enterroom">
-    <value>entrer</value>
+    <value>Entrer</value>
   </string>
   <string id="132" name="useralterself_login">
-    <value>Login</value>
+    <value>Identifiant</value>
   </string>
   <string id="133" name="useralterself_pass">
     <value>Mot de passe</value>
@@ -430,7 +430,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Pays</value>
   </string>
   <string id="142" name="useralterself_adresscomment">
-    <value>Information complémentaire sur l'adresse</value>
+    <value>Commentaires</value>
   </string>
   <string id="143" name="useralterself_header">
     <value>Détails sur l'utilisateur</value>
@@ -868,7 +868,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Mailing List utilisateur (groups.google.com/group/openmeetings-user)</value>
   </string>
   <string id="288" name="login_rememberuser">
-    <value>Se souvenir du login</value>
+    <value>Se souvenir de moi</value>
   </string>
   <string id="289" name="main_navi">
     <value>Contenu</value>
@@ -883,10 +883,10 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Mes conférences programmées</value>
   </string>
   <string id="293" name="subnavi">
-    <value>réunions publiques</value>
+    <value>Réunions publiques</value>
   </string>
   <string id="294" name="subnavi">
-    <value>réunions privés</value>
+    <value>Réunions privées</value>
   </string>
   <string id="295" name="subnavi">
     <value>Conférences publiques</value>
@@ -1027,10 +1027,10 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Nom de fichier identique, veuillez choisir un autre nom de fichier</value>
   </string>
   <string id="341" name="filebrowser">
-    <value>nom de fichier trop court</value>
+    <value>Nom de fichier trop court</value>
   </string>
   <string id="342" name="filebrowser">
-    <value>impossible de sauvegarder l'adresse</value>
+    <value>Impossible de sauvegarder l'adresse</value>
   </string>
   <string id="343" name="useradmin">
     <value>Utilisateur ajouté, mais vous devez l'assigner à une organisation, sinon il ne pourra pas se connecter.</value>
@@ -1203,7 +1203,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Enregistrement des salles privées et publiques</value>
   </string>
   <string id="398" name="roomslist">
-    <value>Utilisateurs :</value>
+    <value>Utilisateurs : </value>
   </string>
   <string id="399" name="roomslist">
     <value>Inscrits :</value>
@@ -1215,19 +1215,19 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Utilisateur dans la salle :</value>
   </string>
   <string id="402" name="roomslist">
-    <value>rafraichir</value>
+    <value>Rafraichir</value>
   </string>
   <string id="403" name="roomslist">
     <value>Cette salle est pleine. Réessayez dans quelques minutes.</value>
   </string>
   <string id="404" name="roomsList">
-    <value>cliquez sur une salle pour plus de détails</value>
+    <value>Cliquez sur une salle pour plus de détails</value>
   </string>
   <string id="405" name="roomslist">
     <value>Discutez avec les utilisateurs de cette salle :</value>
   </string>
   <string id="406" name="roomslist">
-    <value>Salle :</value>
+    <value>Salle : </value>
   </string>
   <string id="407" name="roomslist">
     <value>Utilisateurs dans cette salle :</value>
@@ -1335,7 +1335,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Date</value>
   </string>
   <string id="442" name="chat_clear_history">
-    <value>Effacer le chat serveur</value>
+    <value>Effacer l'historique du chat</value>
   </string>
   <string id="443" name="chat_overall_header">
     <value>Chat</value>
@@ -1344,285 +1344,285 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>envoyer message</value>
   </string>
   <string id="445" name="chat_emot_btn">
-    <value>Emoticons</value>
+    <value>Emoticones</value>
   </string>
   <string id="446" name="chat_emot_win">
     <value>Emoticons</value>
   </string>
   <string id="447" name="choose_video_settings">
-    <value>Choose Published Devices</value>
+    <value>Choisissez le périphérique</value>
   </string>
   <string id="448" name="choose_video_settings_combo">
-    <value>Audio and Video</value>
+    <value>Audio et Video</value>
   </string>
   <string id="449" name="choose_video_settings_combo">
-    <value>Audio only</value>
+    <value>Audio seulement</value>
   </string>
   <string id="450" name="choose_video_settings_combo">
-    <value>Video only</value>
+    <value>Video seulement</value>
   </string>
   <string id="451" name="choose_video_settings_combo">
-    <value>no Audio/Video (static Image)</value>
+    <value>pas d'audio ni de video (image statique)</value>
   </string>
   <string id="452" name="choose_video_settings_info_text">
-    <value>No Audio/Video from your PC will be published, instead of that a picture from your profile will be shown. Choose these settings if you have problems with your bandwidth or a very slow Internet connection.</value>
+    <value>Aucun flux Audio/Video ne seront émis, à la place l'image de votre profil sera montrée. Choisissez cette configuration en cas de problèmes de bande passante ou si votre connexion internet est lente.</value>
   </string>	
   <string id="453" name="calendar_dayname_monday">
-    <value>MO</value>
+    <value>LU</value>
   </string>
   <string id="454" name="calendar_dayname_tuesday">
-    <value>TU</value>
+    <value>MA</value>
   </string>
   <string id="455" name="calendar_dayname_wednesday">
-    <value>WE</value>
+    <value>ME</value>
   </string>
   <string id="456" name="calendar_dayname_thursday">
-    <value>TH</value>
+    <value>JE</value>
   </string>
   <string id="457" name="calendar_dayname_friday">
-    <value>FR</value>
+    <value>VE</value>
   </string>
   <string id="458" name="calendar_dayname_saturday">
     <value>SA</value>
   </string>
   <string id="459" name="calendar_dayname_sunday">
-    <value>SU</value>
+    <value>DI</value>
   </string>
   <string id="460" name="calendar_dayname_MondayLabel">
-    <value>Monday</value>
+    <value>lundi</value>
   </string>
   <string id="461" name="calendar_dayname_TuesdayLabel">
-    <value>Tuesday</value>
+    <value>mardi</value>
   </string>
   <string id="462" name="calendar_dayname_WednesdayLabel">
-    <value>Wednesday</value>
+    <value>mercredi</value>
   </string>
   <string id="463" name="calendar_dayname_ThursdayLabel">
-    <value>Thursday</value>
+    <value>jeudi</value>
   </string>
   <string id="464" name="calendar_dayname_FridayLabel">
-    <value>Friday</value>
+    <value>vendredi</value>
   </string>
   <string id="465" name="calendar_dayname_SaturdayLabel">
-    <value>Saturday</value>
+    <value>samedi</value>
   </string>
   <string id="466" name="calendar_dayname_SundayLabel">
-    <value>Sunday</value>
+    <value>dimance</value>
   </string>
   <string id="467" name="calendar_weeknumber_header">
-    <value>CW</value>
+    <value>CS</value>
   </string>
   <string id="468" name="calendar_weeknumber_headerTooltip">
-    <value>Calendar week</value>
+    <value>Calendrier semaine</value>
   </string>
   <string id="469" name="calendar_monthnames">
-    <value>January</value>
+    <value>janvier</value>
   </string>
   <string id="470" name="calendar_monthnames">
-    <value>February</value>
+    <value>fevrier</value>
   </string>
   <string id="471" name="calendar_monthnames">
-    <value>March</value>
+    <value>mars</value>
   </string>
   <string id="472" name="calendar_monthnames">
-    <value>April</value>
+    <value>avril</value>
   </string>
   <string id="473" name="calendar_monthnames">
-    <value>May</value>
+    <value>mai</value>
   </string>
   <string id="474" name="calendar_monthnames">
-    <value>June</value>
+    <value>juin</value>
   </string>
   <string id="475" name="calendar_monthnames">
-    <value>July</value>
+    <value>juillet</value>
   </string>
   <string id="476" name="calendar_monthnames">
-    <value>August</value>
+    <value>aout</value>
   </string>
   <string id="477" name="calendar_monthnames">
-    <value>September</value>
+    <value>septembre</value>
   </string>
   <string id="478" name="calendar_monthnames">
-    <value>October</value>
+    <value>octobre</value>
   </string>
   <string id="479" name="calendar_monthnames">
-    <value>November</value>
+    <value>novembre</value>
   </string>
   <string id="480" name="calendar_monthnames">
-    <value>December</value>
+    <value>decembre</value>
   </string>
   <string id="481" name="calendarwin_header">
-    <value>Calendar</value>
+    <value>Calendrier</value>
   </string>	
   <string id="482" name="roomadmin_labelNumberOfParticipants">
     <value>Participants</value>
   </string>	
   <string id="483" name="roomValue_advancedSettings">
-    <value>Show Layout Settings</value>
+    <value>Montrer la disposition</value>
   </string>
   <string id="484" name="roomAdmin_layout_videoX">
     <value>X | Y</value>
   </string>
   <string id="485" name="roomAdmin_layout_videoY">
-    <value>Width | Height</value>
+    <value>Largeur | Hauteur</value>
   </string>
   <string id="486" name="roomAdmin_layout">
-    <value>Video-Container</value>
+    <value>Conteneur-video</value>
   </string>
   <string id="487" name="roomAdmin_layout_mod">
-    <value>Moderation-Container</value>
+    <value>Conteneur-moderation</value>
   </string>
   <string id="488" name="roomAdmin_layout_mod_pos">
     <value>X</value>
   </string>
   <string id="489" name="roomAdmin_layout_whiteboard">
-    <value>Whiteboard-Container</value>
+    <value>Conteneur-tableau blanc</value>
   </string>
   <string id="490" name="roomAdmin_layout_whiteboard_show">
-    <value>Enabled</value>
+    <value>Activé</value>
   </string>
   <string id="491" name="roomAdmin_layout_whiteboard_pos">
     <value>X | Y</value>
   </string>
   <string id="492" name="roomAdmin_layout_whiteboard">
-    <value>Width | Height</value>
+    <value>Largeur | Hauteur</value>
   </string>
   <string id="493" name="roomAdmin_layout_files">
-    <value>Files,Chat,Partizipants - Container</value>
+    <value>Conteneur Fichier,chat,participants</value>
   </string>
   <string id="494" name="roomAdmin_layout_files_show">
-    <value>Enabled</value>
+    <value>Activé</value>
   </string>
   <string id="495" name="roomAdmin_layout_files_pos">
     <value>X |Y</value>
   </string>
   <string id="496" name="roomAdmin_layout_files">
-    <value>Width | Height</value>
+    <value>Largeur | Hauteur</value>
   </string>	
   <string id="497" name="moderator_gone_message">
-    <value>The Moderator has left the Room. No one is presenting at the Moment. You could apply for Moderation or wait.</value>
+    <value>Le Moderateur a quitté la salle. Personne n'est présent actuellement. Vous pouvez demander la modération ou attendre.</value>
   </string>
   <string id="498" name="moderator_message_event_no_mod">
-    <value>There is no Moderator in this Room, but there are some Participants. You have to apply for Moderation or wait.</value>
+    <value>Il n'y a pas de modérateur dans cette salle, mais il reste des participants. Vous pouvez demander la modération ou attendre.</value>
   </string>	
   <string id="499" name="feedback_template_subject">
-    <value>Feedback OpenMeetings</value>
+    <value>Sentiments sur OpenMeetings</value>
   </string>
   <string id="500" name="invitation_template_head">
     <value>OpenMeetings - Invitation</value>
   </string>
   <string id="501" name="invitation_text_from">
-    <value>Message from User:</value>
+    <value>Message pour :</value>
   </string>
   <string id="502" name="invitation_text_message">
-    <value>Message:</value>
+    <value>Message :</value>
   </string>
   <string id="503" name="invitation_text_click_text">
-    <value>Click this link to participate in the Meetings:</value>
+    <value>Clickez sur le lien pour participer au meeting s:</value>
   </string>
   <string id="504" name="invitation_text_click_text_link">
-    <value>Click here to enter room</value>
+    <value>Clickez pour entrer dans la salle</value>
   </string>
   <string id="505" name="invitation_text_click_text_help">
-    <value>if you have problems with the link, please copy and paste this to your browser:</value>
+    <value>Si ce lien ne fonctionne pas, copier/coller le dans votre navigateur.</value>
   </string>
   <string id="506" name="registering_mail_text_head">
-    <value>OpenMeetings SignUp</value>
+    <value>Inscription OpenMeetings</value>
   </string>
   <string id="507" name="registering_mail_text_head2">
-    <value>Your userdata:</value>
+    <value>Vos données utilisateur :</value>
   </string>
   <string id="508" name="registering_mail_text_username">
     <value>Login:</value>
   </string>
   <string id="509" name="registering_mail_text_pass">
-    <value>Pass:</value>
+    <value>Mot de passe :</value>
   </string>
   <string id="510" name="registering_mail_text_mail">
-    <value>EMail:</value>
+    <value>EMail :</value>
   </string>
   <string id="511" name="registering_mail_text_bye">
-    <value>OpenMeetings-Team</value>
+    <value>Equipe-OpenMeetings</value>
   </string>
   <string id="512" name="register_mail_subject">
-    <value>OpenMeetings Sign-Up</value>
+    <value>Inscription OpenMeetings</value>
   </string>
   <string id="513" name="reset_password_template_head">
     <value>OpenMeetings - Reset Password</value>
   </string>
   <string id="514" name="reset_password_template_test_link">
-    <value>Click on this link to enter a new password:</value>
+    <value>Clickez sur le lien pour saisir un nouveau mot de passe :</value>
   </string>
   <string id="515" name="reset_password_template_text2_link">
-    <value>Click here to enter a new Password</value>
+    <value>Clickez ici pour saisir un nouveau mot de passe</value>
   </string>
   <string id="516" name="reset_password_template_text3_link">
-    <value>if you have problems with the link, please copy and paste this to your browser:</value>
+    <value>Si ce lien ne fonctionne pas, copier/coller le dans votre navigateur.</value>
   </string>
   <string id="517" name="reset_password_mail_subject">
-    <value>OpenMeetings Password Reset</value>
+    <value>OpenMeetings nouveau mot de passe</value>
   </string>	
   <string id="518" name="dateRegExpError">
-    <value>Please enter a valid Date, for example 24.12.2001 (dd.mm.yyyy)</value>
+    <value>Entrez une date valide, par exemple 24.12.2001 (jj.mm.aaaa)</value>
   </string>
   <string id="519" name="emailRegExpError">
-    <value>Please enter a valid EMail, for example name@mail.com</value>
+    <value>Entrez un mail valide, par exemple name@mail.com</value>
   </string>
   <string id="520" name="floatRegExpError">
-    <value>Please enter a Float-Number, for example 1.00</value>
+    <value>Entrez un nombre décimal valide, par exemple 1.00</value>
   </string>
   <string id="521" name="numberRegExpError">
-    <value>Please enter a Number (Integer), for example 100</value>
+    <value>Entrez un entier valide, par exemple 100</value>
   </string>
   <string id="522" name="phoneRegExpError">
-    <value>Please enter a valid Phone number, for example ++49 0123 123123</value>
+    <value>Entrez un numéro de téléphone valide, par exemple ++49 0123 123123</value>
   </string>
   <string id="523" name="timeRegExpError">
-    <value>Please enter a valid time, for example 12:23 (hh:mm)</value>
+    <value>Entrez une heure valide, par exemple 12:23 (hh:mm)</value>
   </string>
   <string id="524" name="invitation_window">
-    <value>Passwort protected</value>
+    <value>Mot de passe protégé</value>
   </string>
   <string id="525" name="invitation_window_passwordLabel">
-    <value>Password</value>
+    <value>Mot de passe</value>
   </string>
   <string id="526" name="invitation_window_validLabel">
-    <value>Validity period</value>
+    <value>Periode de validité</value>
   </string>
   <string id="527" name="invitation_window_valid">
-    <value>Endless</value>
+    <value>Infini</value>
   </string>
   <string id="528" name="invitation_window_valid">
-    <value>Period</value>
+    <value>Periode</value>
   </string>
   <string id="529" name="invitation_window_valid">
-    <value>One-Time</value>
+    <value>Une fois</value>
   </string>
   <string id="530" name="invitation_window_validFromLabel">
-    <value>Valid From:</value>
+    <value>Valide à partir de :</value>
   </string>
   <string id="531" name="invitation_window_validToLabel">
-    <value>Valid to:</value>
+    <value>Valide jusqu'a :</value>
   </string>
   <string id="532" name="invitation_window_MailSubject">
-    <value>Invitation To OpenMeetings</value>
+    <value>Invitation à OpenMeetings</value>
   </string>
   <string id="533" name="invitation_error">
-    <value>Not Invitation availible for this Invitation-Code</value>
+    <value>Pas d'invitation disponible pour ce code</value>
   </string>
   <string id="534" name="invitation_error">
-    <value>The Invitation was already used. This type of Invitation cannot be re-used.</value>
+    <value>L'invitation est déjà utilisé. Ce type d'invitation ne peux être réutilisée.</value>
   </string>
   <string id="535" name="invitation_error">
-    <value>This Invitation-Code is not valid.</value>
+    <value>Ce code d'invitation n'est pas valide.</value>
   </string>
   <string id="536" name="invitation_pass">
-    <value>Password:</value>
+    <value>Mot de passe:</value>
   </string>
   <string id="537" name="invitation_pass_btn">
-    <value>Check Password</value>
+    <value>Verification du mot de passe</value>
   </string>
   <string id="538" name="invitation_pass_error">
-    <value>Invalid Password!</value>
+    <value>Mot de passe invalide !</value>
   </string>
 </language>
