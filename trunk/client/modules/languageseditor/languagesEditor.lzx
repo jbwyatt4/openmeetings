@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library>
-	<include href="fieldValueForm.lzx" />
 
+<!--- Language editor module. You can edit the label for your language. -->
 <class name="languagesEditor" extends="baseContentView">
 	
     <method name="doDeleteEvent">
@@ -24,7 +24,7 @@
         <netparam><method name="getValue"> return parent.language_id;</method></netparam>  
         <handler name="ondata" args="value">
             //The onResult-Handler will be called be the rtmpconnection
-			Debug.write("deleteLanguage",value);
+			if($debug) Debug.write("deleteLanguage",value);
 			parent.languages.getLanguages.doCall();
         </handler>  
     </netRemoteCallHib>	         
@@ -35,12 +35,17 @@
     
     <view name="_savecontentbar" layout="axis:x;spacing:2;inset:2" x="2" height="28" width="$once{ parent.width }"
         bgcolor="$once{ canvas.baseMousecolorizer }">
+
+        <!-- 362:Add new language -->
         <baseChooseIcon resourceN="edit_add_rsc" labelid="362" y="2" 
         	onclick="this.parent.parent.doAddEvent()" />  
+
+        <!-- 363:delete language -->
         <baseChooseIcon resourceN="button_cancel_rsc" labelid="363" y="2" 
         	onclick="this.parent.parent.doDeleteEvent()" />
 	</view>
 	
+	<!-- 349:Language -->
     <labelText name="n3" labelid="349" y="32" resize="true" x="2"/>  
         
         <resetCombobox name="languages" width="170" y="32" x="120" editable="false" >
@@ -52,7 +57,7 @@
 		        <handler name="ondata" args="value">
 		        	<![CDATA[
 			            //The onResult-Handler will be called be the rtmpconnection
-			            Debug.write("getLanguages: ",value);
+			            if($debug) Debug.write("getLanguages: ",value);
 			            this.parent.reset();
 		            	for (var i=0;i<value.length;i++){
 		            		this.parent.addItem(value[i].name,value[i].language_id);
@@ -68,6 +73,7 @@
             </handler>
         </resetCombobox>
     
+    <!-- 360:export -->
     <simpleLabelButton name="b2" labelid="360" width="75" x="300" y="32">
     	<handler name="onclick">
     		<![CDATA[
@@ -80,6 +86,7 @@
     	<labelTooltip multiline="true" labelid="388" />
     </simpleLabelButton>      
     
+    <!-- 387:import -->
     <simpleLabelButton labelid="387" x="387" y="32" width="75">
 	    <handler name="onclick">
 	        new importWindow(canvas.main_content._content.inner,{x:60,secondid:parent.languages.getValue(),uploadmodule:'language'});
@@ -108,7 +115,7 @@
 		</handler>
 		
 		<handler name="onclickedItem" args="obj">
-			//Debug.write("onclickedItem",obj,obj.obj);
+			//if($debug) Debug.write("onclickedItem",obj,obj.obj);
 			parent._fieldvalueform.initValueFieldsByObject(obj.obj);
 		</handler>
 		
@@ -121,7 +128,7 @@
 			<netparam><method name="getValue"> return parent.parent.asc; </method></netparam>
             <netparam><method name="getValue"> return parent.parent.language_id; </method></netparam>
 	    	<handler name="ondata" args="value">
-	    		Debug.write("getFieldsByLanguage ",value);
+	    		if($debug) Debug.write("getFieldsByLanguage ",value);
 	    		//this.parent.destroy();
 	    		this.parent.initValues(value.records);
 	    		this.parent.renderContent(value.result);
@@ -139,6 +146,7 @@
 
 	</turnOverList>
 	
+    <!-- 361:You need to logout to see any changes. -->
 	<labelText x="470" labelid="361" y="2" resize="true" />  
 	
 	<fieldValueForm name="_fieldvalueform" x="470" y="60" />

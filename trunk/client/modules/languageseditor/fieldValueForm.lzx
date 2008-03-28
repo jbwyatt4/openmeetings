@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library>
 
+<!--- right block of the LanguageEditor. you can edit the label.-->
 <class name="fieldValueForm" extends="baseContentSaveView">
 	
 	<dataset name="fieldvalues" />
@@ -55,9 +56,9 @@
     	<netparam><method name="getValue">return parent.parent.fieldvalues_id;</method></netparam>
     	<netparam><method name="getValue">return parent.parent.parent._turnoverlist.language_id;</method></netparam>
     	<handler name="ondata" args="value">
-    		Debug.write("getFieldvalueById ",value);
-    		Debug.write(parent.fieldvalues_id);
-    		Debug.write(parent.parent._turnoverlist.language_id);
+    		if($debug) Debug.write("getFieldvalueById ",value);
+    		if($debug) Debug.write(parent.fieldvalues_id);
+    		if($debug) Debug.write(parent.parent._turnoverlist.language_id);
     		parent.initValueFieldsByObject(value);
     	</handler>
   	</netRemoteCallHib>	
@@ -67,7 +68,7 @@
 		<netparam><method name="getValue"> return canvas.sessionId; </method></netparam>
 		<netparam><method name="getValue"> return parent.parent.fieldlanguagesvalues_id; </method></netparam>
 		<handler name="ondata" args="value">
-			Debug.write("deleteFieldlanguagesvaluesById ",value);
+			if($debug) Debug.write("deleteFieldlanguagesvaluesById ",value);
 			this.parent.parent._turnoverlist.oncallnext.sendEvent();
 			this.parent.getFieldvalueById.doCall();
 		</handler>
@@ -85,15 +86,15 @@
   			this.sendObject["name"] = this.parent._output.fieldname.getText();
   			this.sendObject["value"] = this.parent._output.fieldvalue.getText();
 
-  			Debug.write("prepareCall: ",this.sendObject);
+  			if($debug) Debug.write("prepareCall: ",this.sendObject);
   		</method>
   		<netparam><method name="getValue"> return canvas.sessionId; </method></netparam>
     	<netparam><method name="getValue">return parent.sendObject;</method></netparam>	  		
     	<handler name="ondata" args="val">
 			<![CDATA[
-	    		Debug.write("saveOrUpdateOrganisation: ",val);
+	    		if($debug) Debug.write("saveOrUpdateOrganisation: ",val);
 				if (val>0){
-					Debug.write("saveOrUpdateUser val greater 0: ",val);
+					if($debug) Debug.write("saveOrUpdateUser val greater 0: ",val);
 					parent.fieldvalues_id = val;
 					parent.getFieldvalueById.doCall();
 				}
