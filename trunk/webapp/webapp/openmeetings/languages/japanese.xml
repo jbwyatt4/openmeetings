@@ -754,7 +754,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>プレゼンテーションをホワイトボードにロード</value>
   </string>
   <string id="250" name="navimain_config">
-    <value>環境設定</value>
+    <value>グローバル設定</value>
   </string>
   <string id="251" name="whiteboard_boundingbox_drag">
     <value>ドラッグ</value>
@@ -793,7 +793,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>女性</value>
   </string>
   <string id="263" name="navimain_confadmin">
-    <value>環境設定</value>
+    <value>グローバル設定</value>
   </string>
   <string id="264" name="conftable_headerId">
     <value>ID</value>
@@ -841,10 +841,10 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>リンク</value>
   </string>
   <string id="279" name="dashboard_quicklinkConf">
-    <value>会議室に入室</value>
+    <value>会議室リスト</value>
   </string>
   <string id="280" name="dashboard_quicklinkAudit">
-    <value>講演室に入室</value>
+    <value>講演室リスト</value>
   </string>
   <string id="281" name="dashboard_quicklinksupport">
     <value>ヘルプ・サポート</value>
