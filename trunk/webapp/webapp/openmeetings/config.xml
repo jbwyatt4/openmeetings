@@ -6,9 +6,9 @@ inno02.fh-pforzheim.de macbook 192.168.2.103
 192.168.2.102 bxlug.homelinux.org 213.219.160.72
     if this value is empty it will try to connect to the 
     domain-name it has been loading from  
-    inno02.fh-pforzheim.de  
+    inno02.fh-pforzheim.de  192.168.254.180
     -->
-<rtmphostlocal>localhost</rtmphostlocal>
+<rtmphostlocal>192.168.2.102</rtmphostlocal>
 
 <!--  
 Port to use for the Server
@@ -16,14 +16,14 @@ To this port the default server lookup is done
 
 You can find all this configuraiton in your red5-Config in: $RED5_HOME/conf/red5.properties
  -->
-<rmptport>1935</rmptport>
+<rtmpport>1935</rtmpport>
 
 <!-- 
 Port to use for the Server
 To this port the fallback is done once the default rtmport failed
 this should workaround 99% of all firewalls
  -->
-<rmptTunnelport>8088</rmptTunnelport>
+<rtmpTunnelport>8088</rtmpTunnelport>
 
 <!-- 
 Port to use for the Server
@@ -90,6 +90,14 @@ of the red5-servlet
     between 0 and 1
  -->
 <showWindowEffect>y</showWindowEffect>    
+	
+<!--
+	First day in the Week used by the Calendar
+	0 means Sunday
+	1 means Monday
+	this is the way how the Celendar inits a week
+-->
+<firstdayinweek>1</firstdayinweek>	
 
         
 </config>
