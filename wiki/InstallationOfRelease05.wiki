@@ -63,4 +63,4 @@ After Running the Installer all basics are installed. Now login and go to the Me
 = Tips and Tricks =
 
   * Use the Debug-Application: Enter in your browser http://$RED-HOST:$RED5-PORT/xmlcrm/maindebug.lzx.lzr=swf8.swf for example http://localhost:5080/xmlcrm/maindebug.lzx.lzr=swf8.swf
-  * If you have Problems with conversion-jobs check your Red5-Log output. There will be error Messages which help you. You must install Open-Office and `ImageMagick` and `GhostScript` to run all conversion-Jobs correctly.
+  * If you have Problems with conversion-jobs check your Red5-Log output. There will be error Messages which help you. You must install !OpenOffice, !ImageMagick, !GhostScript and SWFTools to run all conversion-Jobs correctly.
