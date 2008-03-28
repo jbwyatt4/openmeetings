@@ -1483,7 +1483,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Width | Height</value>
   </string>
   <string id="493" name="roomAdmin_layout_files">
-    <value>Files,Chat,Partizipants - Container</value>
+    <value>Files,Chat,Participants - Container</value>
   </string>
   <string id="494" name="roomAdmin_layout_files_show">
     <value>Enabled</value>
@@ -1576,7 +1576,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Please enter a valid time, for example 12:23 (hh:mm)</value>
   </string>
   <string id="524" name="invitation_window">
-    <value>Passwort protected</value>
+    <value>Password protected</value>
   </string>
   <string id="525" name="invitation_window_passwordLabel">
     <value>Password</value>
