@@ -1088,7 +1088,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>エクスポート</value>
   </string>
   <string id="361" name="languageseditor">
-    <value>変更を有効にするには再ログインが必要です。</value>
+    <value>変更結果を反映するには再ログインが必要です。</value>
   </string>
   <string id="362" name="languageseditor">
     <value>新しい言語の追加</value>
@@ -1169,15 +1169,17 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>インポート</value>
   </string>
   <string id="388" name="languageseditor">
-    <value>XMLファイルにエクスポート - 主な用途: 
-		- プロジェクトへのコントリビュート 
-		- 他のシステムへのインポート 
-		- バックアップ 
-		- カスタマイズ
-		- languagesディレクトリにコピーすれば、次のインストール時に適用</value>
+    <value>XMLファイルにエクスポート
+ 主な用途: 
+   - プロジェクトへのコントリビュート 
+   - 他のシステムへのインポート 
+   - バックアップ 
+   - カスタマイズ
+languagesディレクトリにコピーして、
+再インストールした後に反映されます</value>
   </string>
   <string id="389" name="languageseditor">
-    <value>インポート先の言語ファイルを選択してください。 ファイル名に関わらず選択した言語にインポートされます。
+    <value>インポートする言語ファイルを選択してください。 ファイル名に関わらず選択したものがインポートされます。
 </value>
   </string>
   <string id="390" name="importwindow">
