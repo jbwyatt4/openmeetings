@@ -32,7 +32,6 @@
 		mainBaseText.setShadow();
 		mainBaseTextLabel.setAttribute('text',canvas.currentappnameurl);  
 	
-		this.chathistory=new Array();
 		
 		var doubleSlash = _url.indexOf("//");
 		var isNotPort80 = _url.indexOf(":", doubleSlash+2);
