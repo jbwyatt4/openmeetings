@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rlzxdoc>
- <class name="">
+ <class name="chatTab">
    <doc>
+会議室にあるタブのチャットタブ部分のクラス。
+単なるviewのsimpleBaseTabpaneを継承して、chatOutputとchatTabBottomを擁しています。
 
 
 

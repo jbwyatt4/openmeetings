@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library>
 
-<!-- ###################
-	Class chattab
- -->
+<!---
+Chat tabpane class. It contains chatOutput-class and catTabBottom-class.
+This is used in the conference.
+-->
 <class name="chatTab" extends="simpleBaseTabpane" >
 
 	<view name="_chatoutputborder" height="${ parent.height-30 }"

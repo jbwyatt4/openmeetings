@@ -85,8 +85,8 @@
             	<![CDATA[
                 	//The onResult-Handler will be called be the rtmpconnection
 					Debug.write("clearChat : ",value);
-					canvas._overallchartcontent._cbtext.clearChatOutput();
-					canvas._overallchartcontent.getOverallChatHistory.doCall();
+					canvas._overallchatcontent._cbtext.clearChatOutput();
+					canvas._overallchatcontent.getOverallChatHistory.doCall();
                 ]]>
             </handler>   
         </netRemoteCallHib>		

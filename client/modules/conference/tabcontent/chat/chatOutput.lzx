@@ -2,11 +2,12 @@
 <library>
 
 
+<!--- chat output specialized for video-conference -->
 <class name="chatOutput" extends="view" height="${ parent.height-2 }" 
             clip="true" bgcolor="0xFFFFFF" width="${ parent.width-2 }" >
 
-<!--
-    Invoked from VideoContainer cause domain/room must be set first
+<!---
+ Invoked from VideoContainer cause domain/room must be set first
  -->
     <method name="doInit">
         //Debug.write("oninit");
@@ -21,9 +22,9 @@
         <handler name="ondata" args="value">
             <![CDATA[
                 //The onResult-Handler will be called be the rtmpconnection
-                Debug.write("getRoomChatHistory: ",value);
+                if($debug) Debug.write("chatOutput/getRoomChatHistory: ",value);
                 for (var i=0;i<value.length;i++){
-                    Debug.write(value[i].message,value[i].client);
+                    if($debug) Debug.write(value[i].message,value[i].client);
                     parent.addChatHistory(value[i].message,value[i].client);
                 }
             ]]>
@@ -32,7 +33,7 @@
     
     <method name="addChatHistory" args="value,client">
         <![CDATA[
-            Debug.write("addChatHistory: ",value,client);
+            if($debug) Debug.write("chatOutput/addChatHistory: ",value,client);
             //is Right To Left ? not checked for the moment
             if (value[7]){
                 var username = client.firstname+" "+client.lastname;
