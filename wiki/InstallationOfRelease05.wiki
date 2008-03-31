@@ -1,8 +1,5 @@
 #summary Installation of 05 Final Release
 
-_this Page is not officially released yet just preparing_
-
-
 = Requirements =
 
   * Database available (MySQL,Postgres,... MSSQL,Oracle,DB2 see [http://www.hibernate.org/hib_docs/reference/en/html/session-configuration.html#configuration-optional-dialects   full-list]) I recommend to make/use an empty database/scheme
