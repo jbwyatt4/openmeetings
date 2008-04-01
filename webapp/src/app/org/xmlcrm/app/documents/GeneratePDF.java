@@ -1,12 +1,17 @@
 package org.xmlcrm.app.documents;
 
-import java.io.BufferedReader;
+//import java.io.BufferedReader;
 import java.io.File;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+//import java.io.InputStream;
+//import java.io.InputStreamReader;
 import java.util.HashMap;
 
 import org.apache.commons.transaction.util.FileHelper;
+
+import com.artofsolving.jodconverter.DocumentConverter;
+import com.artofsolving.jodconverter.openoffice.connection.OpenOfficeConnection;
+import com.artofsolving.jodconverter.openoffice.connection.SocketOpenOfficeConnection;
+import com.artofsolving.jodconverter.openoffice.converter.OpenOfficeDocumentConverter;
 
 public class GeneratePDF {
 	
@@ -108,32 +113,45 @@ public class GeneratePDF {
 		returnMap.put("process", "doConvertExec");				
 		try {
 			
-			String runtimeFile = "jodconverter.bat";
-			String command = "cmd.exe /c start "+current_dir + "jod" + File.separatorChar
-				+ runtimeFile + " java " + fileFullPath + " "
-				+ destinationFolder + outputfile + ".pdf " + current_dir
-				+ "jod" + File.separatorChar;
+			File inputFile = new File(fileFullPath);
+			File outputFile = new File(destinationFolder + outputfile + ".pdf");
 			
-			if (System.getProperty("os.name").toUpperCase().indexOf("WINDOWS") == -1) {
-				runtimeFile = "jodconverter.sh";
-				command = current_dir + "jod" + File.separatorChar
-					+ runtimeFile + " java " + fileFullPath + " "
-					+ destinationFolder + outputfile + ".pdf " + current_dir
-					+ "jod" + File.separatorChar;				
-			}
-			Runtime rt = Runtime.getRuntime();
-			returnMap.put("command",command);
-			Process proc = rt.exec(command);
-			InputStream stderr = proc.getErrorStream();
-			InputStreamReader isr = new InputStreamReader(stderr);
-			BufferedReader br = new BufferedReader(isr);
-			String line = null;
-			String error = "";
-			while ((line = br.readLine()) != null)
-				error += line;
-			returnMap.put("error", error);
-			int exitVal = proc.waitFor();
-			returnMap.put("exitValue", exitVal);
+			OpenOfficeConnection connection = new SocketOpenOfficeConnection(8100);
+			connection.connect();
+
+			DocumentConverter converter = new OpenOfficeDocumentConverter(connection);
+			converter.convert(inputFile, outputFile);
+
+			connection.disconnect();
+
+//			String runtimeFile = "jodconverter.bat";
+//			String command = "cmd.exe /c start "+current_dir + "jod" + File.separatorChar
+//				+ runtimeFile + " java " + fileFullPath + " "
+//				+ destinationFolder + outputfile + ".pdf " + current_dir
+//				+ "jod" + File.separatorChar;
+//			
+//			if (System.getProperty("os.name").toUpperCase().indexOf("WINDOWS") == -1) {
+//				runtimeFile = "jodconverter.sh";
+//				command = current_dir + "jod" + File.separatorChar
+//					+ runtimeFile + " java " + fileFullPath + " "
+//					+ destinationFolder + outputfile + ".pdf " + current_dir
+//					+ "jod" + File.separatorChar;				
+//			}
+//			Runtime rt = Runtime.getRuntime();
+//			returnMap.put("command",command);
+//			Process proc = rt.exec(command);
+//			InputStream stderr = proc.getErrorStream();
+//			InputStreamReader isr = new InputStreamReader(stderr);
+//			BufferedReader br = new BufferedReader(isr);
+//			String line = null;
+//			String error = "";
+//			while ((line = br.readLine()) != null)
+//				error += line;
+//			returnMap.put("error", error);
+//			int exitVal = proc.waitFor();
+//			returnMap.put("exitValue", exitVal);
+
+			returnMap.put("exitValue", 0);
 			return returnMap;
 		} catch (Throwable t) {
 			t.printStackTrace();

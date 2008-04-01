@@ -131,11 +131,21 @@ public class GenerateImage {
 			Runtime rt = Runtime.getRuntime();
 
 			String pathToIMagick = Configurationmanagement.getInstance().getConfKey(3,"imagemagick_path").getConf_value();
+			if(!pathToIMagick.endsWith(File.separator)){
+				pathToIMagick = pathToIMagick + File.separator;
+			}
 			
-			String command = current_dir + "jod" + File.separatorChar
-					+ runtimeFile + " " + inputFile + " " 
-					+ outputfile + ".jpg" + " "
-					+ pathToIMagick;
+//			String command = current_dir + "jod" + File.separatorChar
+//					+ runtimeFile + " " + inputFile + " " 
+//					+ outputfile + ".jpg" + " "
+//					+ pathToIMagick;
+
+			String[] command = new String[4];
+			command[0] = current_dir + "jod" + File.separatorChar + runtimeFile;
+			command[1] = inputFile;
+			command[2] = outputfile + ".jpg";
+			command[3] = pathToIMagick;
+
 			returnMap.put("command", command);
 			Process proc = rt.exec(command);
 			InputStream stderr = proc.getErrorStream();
