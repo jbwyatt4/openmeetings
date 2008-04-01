@@ -135,5 +135,7 @@
 	<classpathentry kind="lib" path="lib/xstream/xstream-benchmark-SNAPSHOT.jar"/>
 	<classpathentry kind="lib" path="lib/xstream/xstream-SNAPSHOT.jar"/>
 	<classpathentry kind="lib" path="lib/red5/red5.jar"/>
+	<classpathentry kind="lib" path="lib/jodconverter-2.2.0.jar"/>
+	<classpathentry kind="lib" path="lib/ridl-2.2.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
