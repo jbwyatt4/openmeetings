@@ -26,8 +26,8 @@
 
 		<property name="connection.url">jdbc:mysql://YOUR_HOSTNAME/YOUR_DATABASE</property>	
      }}}
-    If you have problems in connecting your database, a common error is that the Database does not listen to TCP/IP Connection, or you properly need to replace the jdbc-driver with the one for your mysql-version, see http://www.mysql.com/products/connector/j/ for drivers and replace the mysql-connector-java-3.1.14-bin.jar in xmlcrm/WEB-INF/lib with the one you have downloaded. If your mysql server is not located in localhost make sure the mysql-server is listening on that network-interface.
-    Of course you must alter `YOUR_HOSTNAME/YOUR_DATABASE` to fit your needs for example to:`jdbc:mysql://localhost/xmlcrm`
+    If you have problems in connecting your database, a common error is that the Database does not listen to TCP/IP Connection, or you properly need to replace the jdbc-driver with the one for your mysql-version, see http://www.mysql.com/products/connector/j/ for drivers and replace the mysql-connector-java-3.1.14-bin.jar in openmeetings/WEB-INF/lib with the one you have downloaded. If your mysql server is not located in localhost make sure the mysql-server is listening on that network-interface.
+    Of course you must alter `YOUR_HOSTNAME/YOUR_DATABASE` to fit your needs for example to:`jdbc:mysql://localhost/openmeetings`
     * Postgres-Database-Users: Rename `postgres_hibernate.cfg.xml` to `hibernate.cfg.xml` and alter following config values in (`postgres_`)`hibernate.cfg.xml`
     {{{
 		<!-- User  / Password -->
@@ -36,7 +36,7 @@
 		
 		<property name="connection.url">jdbc:postgresql://YOUR_HOSTNAME/YOUR_DATABASE</property>	
     }}}
-    If you go problems in connecting your database you properly need to replace the jdbc-driver with the one for your postgres-version, see http://jdbc.postgresql.org/download.html for drivers and replace the postgresql-8.2-504.jdbc2.jar in xmlcrm/WEB-INF/lib with the one you have downloaded. Don't forget that the encoding of the database must be UTF8!
+    If you go problems in connecting your database you properly need to replace the jdbc-driver with the one for your postgres-version, see http://jdbc.postgresql.org/download.html for drivers and replace the postgresql-8.2-504.jdbc2.jar in openmeetings/WEB-INF/lib with the one you have downloaded. Don't forget that the encoding of the database must be UTF8!
     Of course you must alter `YOUR_HOSTNAME/YOUR_DATABASE` to fit your needs for example to:`jdbc:postgresql://localhost/openmeetings`
     * Any-Database-Users: Rename `any_hibernate.cfg.xml` to hibernate.cfg.xml. 
     Alter the following config values to fit your needs:
@@ -55,12 +55,12 @@
   # (Re)start Red5 (The table's and default database scheme will be automatically created by hibernate if there is something wrong with your database values you will see errors in Red5 logfile, you can reduce Error log output by switching _$RED5-HOME/conf/log4j.properties_ from DEBUG to ERROR to see only relevant value's)
   # on Linux/OSX: Mage the converting-scripts writeable:
   change directory to $OPENMEETINGS-HOME/jod, and do a: chmod +x *.sh
-  # go to the Installer by accessing it via browser: http://$rmpthostlocal/xmlcrm/install and follow the instructions 
+  # go to the Installer by accessing it via browser: http://$rmpthostlocal/openmeetings/install and follow the instructions 
 
 After Running the Installer all basics are installed. Now login and go to the Meeting-Rooms and check all features. You possibly will have some difficulties uploading files. Check if OpenOffice is really running, swftool, ImageMagick (including GhostScript) is available on  your System-Path (or your customize the path in the Configuration). On Linux your possibly will have to make some shell-Script executable, you find them in $Openmeetings-Home/jod/*.sh.
 
 
 = Tips and Tricks =
 
-  * Use the Debug-Application: Enter in your browser http://$RED-HOST:$RED5-PORT/xmlcrm/maindebug.lzx.lzr=swf8.swf for example http://localhost:5080/xmlcrm/maindebug.lzx.lzr=swf8.swf
+  * Use the Debug-Application: Enter in your browser http://$RED-HOST:$RED5-PORT/openmeetings/maindebug.lzx.lzr=swf8.swf for example http://localhost:5080/openmeetings/maindebug.lzx.lzr=swf8.swf
   * If you have Problems with conversion-jobs check your Red5-Log output. There will be error Messages which help you. You must install !OpenOffice, !ImageMagick, !GhostScript and SWFTools to run all conversion-Jobs correctly.
