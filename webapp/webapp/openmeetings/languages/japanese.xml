@@ -55,7 +55,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>ファイルリスト表示更新</value>
   </string>
   <string id="17" name="tomainfile">
-    <value>トップへ</value>
+    <value>ファイルリストへ</value>
   </string>
   <string id="18" name="newpoll">
     <value>新規投票</value>
@@ -133,10 +133,10 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>投票</value>
   </string>
   <string id="43" name="meeting">
-    <value>ミーティング (最大4席)</value>
+    <value>ミーティング</value>
   </string>
   <string id="44" name="conference">
-    <value>会議 (最大50席)</value>
+    <value>会議</value>
   </string>
   <string id="45" name="type">
     <value>タイプ</value>
@@ -643,10 +643,10 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>ファイルロード前の確認</value>
   </string>
   <string id="213" name="send_invitation_btn">
-    <value>招待を送信</value>
+    <value>招待メールを送信</value>
   </string>
   <string id="214" name="send_invitationwin_header">
-    <value>招待を送信</value>
+    <value>招待メールを送信</value>
   </string>
   <string id="215" name="send_invitationwin_subject">
     <value>件名</value>
@@ -766,16 +766,16 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>%</value>
   </string>
   <string id="254" name="whiteboard_documenttoolbar_slide">
-    <value>最初へ</value>
+    <value>/</value>
   </string>
   <string id="255" name="whiteboard_documenttoolbar_firstslide">
-    <value>前へ</value>
+    <value>最初へ</value>
   </string>
   <string id="256" name="whiteboard_documenttoolbar_preslide">
-    <value>次へ</value>
+    <value>前へ</value>
   </string>
   <string id="257" name="whiteboard_documenttoolbar_nextslide">
-    <value>最後へ</value>
+    <value>次へ</value>
   </string>
   <string id="258" name="whiteboard_documenttoolbar_lastslide">
     <value>最後へ</value>
@@ -820,7 +820,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>キー値</value>
   </string>
   <string id="272" name="turnoverlist_maxresults">
-    <value>of</value>
+    <value>/</value>
   </string>
   <string id="273" name="organisation_usersheader">
     <value>ユーザ</value>
@@ -1585,31 +1585,31 @@ languagesディレクトリにコピーして、
     <value>正しい時刻を入力してください。(例)12:23 (時:分)</value>
   </string>
   <string id="524" name="invitation_window">
-    <value>保護パスワード</value>
+    <value>パスワード保護する</value>
   </string>
   <string id="525" name="invitation_window_passwordLabel">
     <value>パスワード</value>
   </string>
   <string id="526" name="invitation_window_validLabel">
-    <value>Validity period</value>
+    <value>利用期間</value>
   </string>
   <string id="527" name="invitation_window_valid">
     <value>エンドレス</value>
   </string>
   <string id="528" name="invitation_window_valid">
-    <value>Period</value>
+    <value>期間指定</value>
   </string>
   <string id="529" name="invitation_window_valid">
     <value>ワンタイム</value>
   </string>
   <string id="530" name="invitation_window_validFromLabel">
-    <value>送信者:</value>
+    <value>開始:</value>
   </string>
   <string id="531" name="invitation_window_validToLabel">
-    <value>宛先:</value>
+    <value>終了:</value>
   </string>
   <string id="532" name="invitation_window_MailSubject">
-    <value>Openmeetingsご招待</value>
+    <value>Openmeetings</value>
   </string>
   <string id="533" name="invitation_error">
     <value>この招待コードで利用可能な招待はありません。</value>
