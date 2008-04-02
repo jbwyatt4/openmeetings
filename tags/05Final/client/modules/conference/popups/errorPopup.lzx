@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<library>
+
+<class name="errorPopup" extends="labelExplorerBox" labelid="204"
+	docking="true" resizeable="false" closable="true" 
+    width="224" x="300" height="230">
+
+	<attribute name="error" value="" type="string" />
+
+	<view y="24" width="218" height="200" x="2" clip="true">
+		<text y="30" fontsize="10" fontstyle="bold" text="${ parent.parent.error }"
+			multiline="true" width="190" />
+		<vscrollbar />
+	</view>
+
+</class>
+
+</library>
