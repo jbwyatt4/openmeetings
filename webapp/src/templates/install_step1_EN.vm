@@ -110,7 +110,7 @@ form.cmxform fieldset fieldset label {
 </style>
 </head>
 <body>
-<h1>Openmeetings - Installation</h1>
+<b>OpenMeetings - Installation</b><br />
 
 <form name="cmxform" id="form1" class="cmxform" method="post" action="?command=step2">
 

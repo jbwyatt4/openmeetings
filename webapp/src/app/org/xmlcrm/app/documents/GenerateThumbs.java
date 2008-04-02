@@ -37,15 +37,9 @@ public class GenerateThumbs {
 			String name = f.getName();
 			String folder = f.getParentFile().getAbsolutePath()+File.separatorChar;
 			
-//			String command = current_dir + "jod" + File.separatorChar
-//					+ runtimeFile + " " + filepath + ".jpg " + folder
-//					+ pre+name+".jpg "+thumbSize;
-			String[] command = new String[4];
-			command[0] = current_dir + "jod" + File.separatorChar + runtimeFile;
-			command[1] = filepath + ".jpg";
-			command[2] = folder	+ pre+name+".jpg";
-			command[3] = String.valueOf(thumbSize);
-
+			String command = current_dir + "jod" + File.separatorChar
+					+ runtimeFile + " " + filepath + ".jpg " + folder
+					+ pre+name+".jpg "+thumbSize;
 			returnMap.put("command", command);
 			Process proc = rt.exec(command);
 			InputStream stderr = proc.getErrorStream();
@@ -79,22 +73,11 @@ public class GenerateThumbs {
 			Runtime rt = Runtime.getRuntime();
 
 			String pathToIMagick = Configurationmanagement.getInstance().getConfKey(3,"imagemagick_path").getConf_value();
-			if(!pathToIMagick.endsWith(File.separator)){
-				pathToIMagick = pathToIMagick + File.separator;
-			}
 			
-//			String command = current_dir + "jod" + File.separatorChar
-//					+ runtimeFile + " " + inputfile + " " + outputpath
-//					+ "_thumb_pages-%03d.jpg "+thumbSize + " "
-//					+ pathToIMagick;
-			
-			String[] command = new String[5];
-			command[0] = current_dir + "jod" + File.separatorChar + runtimeFile;
-			command[1] = inputfile;
-			command[2] = outputpath	+ "_thumb_pages-%03d.jpg";
-			command[3] = String.valueOf(thumbSize);
-			command[4] = pathToIMagick;
-			
+			String command = current_dir + "jod" + File.separatorChar
+					+ runtimeFile + " " + inputfile + " " + outputpath
+					+ "_thumb_pages-%03d.jpg "+thumbSize + " "
+					+ pathToIMagick;
 			returnMap.put("command",command);
 			Process proc = rt.exec(command);
 			InputStream stderr = proc.getErrorStream();
