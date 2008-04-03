@@ -1,4 +1,4 @@
-= Openmeetings LZX Coding Guidelines (Beta)=
+= Openmeetings LZX Coding Guidelines =
 
 
 == (1) Naming Convention ==
