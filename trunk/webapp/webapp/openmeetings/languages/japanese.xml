@@ -355,10 +355,10 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>パスワード再入力:</value>
   </string>
   <string id="117" name="regformfirstname">
-    <value>名:</value>
+    <value>姓:</value>
   </string>
   <string id="118" name="regformlastname">
-    <value>姓:</value>
+    <value>名:</value>
   </string>
   <string id="119" name="regformmail">
     <value>メールアドレス:</value>
@@ -409,10 +409,10 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>パスワード再入力</value>
   </string>
   <string id="135" name="useralterself_firstname">
-    <value>名</value>
+    <value>姓</value>
   </string>
   <string id="136" name="useralterself_lastname">
-    <value>姓</value>
+    <value>名</value>
   </string>
   <string id="137" name="useralterself_email">
     <value>メールアドレス</value>
@@ -448,10 +448,10 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>ログイン名</value>
   </string>
   <string id="148" name="admin_userlist_firstnam">
-    <value>名</value>
+    <value>姓</value>
   </string>
   <string id="149" name="admin_userlist_lastname">
-    <value>姓</value>
+    <value>名</value>
   </string>
   <string id="150" name="turnoverlist_next">
     <value>次</value>
@@ -676,10 +676,10 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>別名</value>
   </string>
   <string id="224" name="invited_userwin_firstname">
-    <value>名</value>
+    <value>姓</value>
   </string>
   <string id="225" name="invited_userwin_lastname">
-    <value>姓</value>
+    <value>名</value>
   </string>
   <string id="226" name="invited_userwin_mail">
     <value>メールアドレス</value>
