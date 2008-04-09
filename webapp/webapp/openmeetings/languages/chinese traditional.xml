@@ -1626,4 +1626,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   <string id="538" name="invitation_pass_error">
     <value>密碼無效！</value>
   </string>	
+  <string id="539" name="Browser">
+    <value>Browser</value>
+  </string>
 </language>

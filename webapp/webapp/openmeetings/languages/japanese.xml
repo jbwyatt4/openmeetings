@@ -1629,4 +1629,7 @@ languagesディレクトリにコピーして、
   <string id="538" name="invitation_pass_error">
     <value>パスワードが間違っています。</value>
   </string>
+  <string id="539" name="Browser">
+    <value>ブラウザ</value>
+  </string>
 </language>
