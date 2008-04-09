@@ -19,6 +19,12 @@
 	    <_labelMenu labelid="245" width="250">
 	        <_labelMenuItem labelid="15" command="cmd_importFile" />
 	    </_labelMenu>    
+
+	    <!-- browser menu -->
+	    <_labelMenu labelid="539" width="250">
+	        <_labelMenuItem labelid="539" command="cmd_browser" />
+	    </_labelMenu>    
+
 	   <!-- setteings menu --> 
 	    <_labelMenu labelid="305" width="250">
 	        <_labelMenuItem labelid="306" command="cmd_editCamMicSettings" />

@@ -1,11 +1,32 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   
+      <link rel="SHORTCUT ICON" href="http://www.laszlosystems.com/favicon.ico">
+      <title>OpenMeetings</title>
+	<script type="text/javascript" src="<%= request.getContextPath() %>/lps/includes/embed-compressed.js"></script>
+	</head>
+   	<body>
+	    <script type="text/javascript">
+              Lz.swfEmbed({url: 'main.lzx?lzt=swf', bgcolor: '#ffffff', width: '100%', height: '100%', id: 'lzapp', accessible: 'false', wmode: 'transparent'});
+            </script>
+   </body>
+</html>
+
+
+
+<!-- 
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<title>OpenMeetings</title>
+ 
 	<script type="text/javascript" src="swfobject.js"></script>
+
 	<style type="text/css">
 		
 		/* hide from ie on mac \*/
@@ -27,10 +48,12 @@
 		}
 	
 	</style>
-	<link rel="shortcut icon" href="favicon.ico"> 
-</head>
-<body align="center" valign="middle" align="center" onLoad="focusSWF()">
 
+	<link rel="shortcut icon" href="favicon.ico"> 
+
+</head>
+
+<body align="center" valign="middle" align="center" onLoad="focusSWF()">
 
 	<div id="flashcontent">
 		<strong>You need to upgrade your Flash Player</strong>
@@ -39,7 +62,7 @@
 		Javascript turned off will see this. Content here allows you to leave out <code>noscript</code> 
 		tags.
 	</div>
-	
+
 	<script type="text/javascript">
 		// <![CDATA[
 		
@@ -48,6 +71,7 @@
 		so.addParam("id", "lzapp");
 		so.addParam("allowScriptAccess", "always");
 		so.addParam("scale", "noscale");
+		so.addParam("vmode", "transparent" );
 		so.write("flashcontent");
 		
 		function focusSWF(){
@@ -61,6 +85,6 @@
 		// ]]>
 	</script>	
 
-
 </body>
 </html>
+-->
