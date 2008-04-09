@@ -1,0 +1,11 @@
+#summary Openmeetings uml diagrams.
+
+= All services =
+
+All services which defined in red5-web.xml
+
+http://openmeetings.googlecode.com/svn/docs/uml/images/openmeetings/diagram/remote%20services.jpg
+
+
+= Service details =
+[conferenceservice]
