@@ -1,0 +1,21 @@
+#summary fileservice sequence diagrams.
+
+{{{
+service name  : fileservice
+service class : org.xmlcrm.app.remote.ConferenceLibrary
+}}}
+
+deleteFile
+http://openmeetings.googlecode.com/svn/docs/uml/images/openmeetings/diagram/fileservice/deleteFile.jpg
+
+getListOfFiles
+http://openmeetings.googlecode.com/svn/docs/uml/images/openmeetings/diagram/fileservice/getListOfFiles.jpg
+
+loadWmlObject
+http://openmeetings.googlecode.com/svn/docs/uml/images/openmeetings/diagram/fileservice/loadWmlObject.jpg
+
+saveAsImage
+http://openmeetings.googlecode.com/svn/docs/uml/images/openmeetings/diagram/fileservice/saveAsImage.jpg
+
+saveAsObject
+http://openmeetings.googlecode.com/svn/docs/uml/images/openmeetings/diagram/fileservice/saveAsObject.jpg
