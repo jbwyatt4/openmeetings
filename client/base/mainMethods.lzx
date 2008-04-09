@@ -103,24 +103,30 @@
 	            } else if (stringSub=='editBoardSettings') {
 	                new editWhiteboardDefault(canvas.main_content._content.inner);
 	            } else if (stringSub=='quit') {
-	                if($debug) Debug.write(canvas.thishib.modus,canvas.thishib.roomtype);
-	                if (canvas.thishib.modus=='audience' && canvas.thishib.roomtype=='public'){
-	                    var t = new Array();
-	                    t.action = 'publicEvents';
-	                } else if (canvas.thishib.modus=='audience' && canvas.thishib.roomtype=='private'){
-	                    var t = new Array();
-	                    t.action = 'privateEvents';
-	                } else if (canvas.thishib.modus=='conference' && canvas.thishib.roomtype=='public'){
-	                    var t = new Array();
-	                    t.action = 'publicMeetings';
-	                } else if (canvas.thishib.modus=='conference' && canvas.thishib.roomtype=='private'){
-	                    var t = new Array();
-	                    t.action = 'privateMeetings';
-	           }
+	            	if($debug) Debug.write(canvas.thishib.modus,canvas.thishib.roomtype);
+	                	if (canvas.thishib.modus=='audience' && canvas.thishib.roomtype=='public'){
+	                  	var t = new Array();
+	                    	t.action = 'publicEvents';
+	                	} else if (canvas.thishib.modus=='audience' && canvas.thishib.roomtype=='private'){
+	                    	var t = new Array();
+	                    	t.action = 'privateEvents';
+	               	} else if (canvas.thishib.modus=='conference' && canvas.thishib.roomtype=='public'){
+	                  	var t = new Array();
+	                    	t.action = 'publicMeetings';
+	                	} else if (canvas.thishib.modus=='conference' && canvas.thishib.roomtype=='private'){
+	                    	var t = new Array();
+	                    	t.action = 'privateMeetings';
+	           	}
 	
 				if($debug) Debug.write( 'conferenceMenubar: doActionMenu(): ' , t);
 	                	loadContent(t);
-	         }
+	         	} else if( stringSub == "browser" ){
+	         		var browserPanelWidth  = canvas.browserPanelWidth;
+	         		var browserPanelHeight = canvas.browserPanelHeight;
+		        	new conferenceBrowser( canvas.main_content._content.inner,
+		        							{x:canvas.main_content._content.inner.width/2,y:50,
+		        							 width:browserPanelWidth, height:browserPanelHeight} );
+			}
 	      }
 	    ]]>
 	</method>    
@@ -169,5 +175,6 @@
 	<command id="cmd_editCamMicSettings" onselect="canvas.doActionmenu('editCamMicSettings')" key="['ALT','Shift','1']"/> 
 	<command id="cmd_editBoardSettings" onselect="canvas.doActionmenu('editBoardSettings')" key="['ALT','Shift','2']"/>   
 	<command id="cmd_quit" onselect="canvas.doActionmenu('quit')" key="['ALT','Shift','E']"/> 
+	<command id="cmd_browser" onselect="canvas.doActionmenu('browser')" key="['ALT','Shift','B']"/>   
 
 </library>

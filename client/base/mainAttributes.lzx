@@ -192,4 +192,12 @@ and some more references to temp-objects
 
 <attribute name="isrtl" value="false" type="boolean" />    
 
+<!---
+	Attributes for browser panel size.
+	Those attributes are used to determine size of browser class (modules/conference/browser/conferenecBrowser.lzx)
+	in base/mainMethods.lzx.
+		2008 Apr 9 commented by onokeiji@gmail.com
+-->
+<attribute name="browserPanelWidth" value="600"/>
+<attribute name="browserPanelHeight" value="500"/>
 </library>
