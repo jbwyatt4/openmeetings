@@ -5,6 +5,12 @@ service name  : conferenceservice
 service class : org.xmlcrm.app.remote.ConferenceService
 }}}
 
+addRoomOrganisation
+http://openmeetings.googlecode.com/svn/docs/uml/images/openmeetings/diagram/conferenceservice/addRoomOrganisation.jpg
+
+addRoomPublic
+http://openmeetings.googlecode.com/svn/docs/uml/images/openmeetings/diagram/conferenceservice/addRoomPublic.jpg
+
 deleteRoom
 http://openmeetings.googlecode.com/svn/docs/uml/images/openmeetings/diagram/conferenceservice/deleteRoom.jpg
 
