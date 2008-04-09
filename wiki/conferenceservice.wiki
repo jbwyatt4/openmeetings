@@ -1,7 +1,5 @@
 #summary conferenceservice sequence diagrams.
 
-= conferenceservice =
-
 {{{
 service name  : conferenceservice
 service class : org.xmlcrm.app.remote.ConferenceService
