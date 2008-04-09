@@ -8,6 +8,7 @@ http://openmeetings.googlecode.com/svn/docs/uml/images/openmeetings/diagram/remo
 
 
 = Service details =
+{{{
 [conferenceservice]
 [configservice]
 [errorservice]
@@ -16,3 +17,4 @@ http://openmeetings.googlecode.com/svn/docs/uml/images/openmeetings/diagram/remo
 [organisationservice]
 [userservice]
 [xmlcrm]
+}}}
