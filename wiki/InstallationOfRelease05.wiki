@@ -64,3 +64,4 @@ After Running the Installer all basics are installed. Now login and go to the Me
 
   * Use the Debug-Application: Enter in your browser http://$RED-HOST:$RED5-PORT/openmeetings/maindebug.lzx.lzr=swf8.swf for example http://localhost:5080/openmeetings/maindebug.lzx.lzr=swf8.swf
   * If you have Problems with conversion-jobs check your Red5-Log output. There will be error Messages which help you. You must install !OpenOffice, !ImageMagick, !GhostScript and SWFTools to run all conversion-Jobs correctly.
+  * Under windows, you may experience problems during conversion (The system cannot find the file C:\Program.) try to install red5 in c:\red5
