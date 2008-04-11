@@ -1,0 +1,5 @@
+#summary One-sentence summary of this page.
+
+Big picture:
+
+[http://openmeetings.googlecode.com/svn/docs/uml/images/openmeetings/diagram/ModerationChangeClientSideBig.jpg  http://openmeetings.googlecode.com/svn/docs/uml/images/openmeetings/diagram/ModerationChangeClientSide.jpg]
