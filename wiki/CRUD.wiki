@@ -8,4 +8,4 @@ D: delete
 
 }}}
 
-http://openmeetings.googlecode.com/svn/docs/uml/CRUD/CRUD.xls
+http://openmeetings.googlecode.com/svn/docs/CRUD/CRUD.xls
