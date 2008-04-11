@@ -1,0 +1,5 @@
+#summary Some Information about Client Side Diagrams
+
+= available Diagrams =
+
+  * ModerationLogicDiagram
