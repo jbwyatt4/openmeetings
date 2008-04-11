@@ -54,8 +54,9 @@ Tips for Installation:
   * TestingBusinessLogic
   * ContributingPlayRules - Some info regarding the Contribution of code
   * SWF9_Conversion - Documentation of SWF9 Conversion of OpenMeetings Client
-  * [UML]
+  * [UML] - ServerSide
   * [CRUD]
+  * ClientSideDiagrams - Some Graphs about the Client side Logic
 
 == Community == 
 
