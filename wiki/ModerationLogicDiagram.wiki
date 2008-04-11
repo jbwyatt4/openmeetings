@@ -2,4 +2,4 @@
 
 Click for Big picture:
 
-[http://www.gliffy.com/publish/1407521/  http://openmeetings.googlecode.com/svn/docs/uml/images/openmeetings/diagram/ModerationChangeClientSide.jpg]
+[http://www.gliffy.com/publish/1407521/  http://openmeetings.googlecode.com/svn/docs/uml/images/openmeetings/diagram/ModerationChangeClientSideBig.jpg]
