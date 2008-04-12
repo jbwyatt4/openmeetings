@@ -2,8 +2,7 @@
 
 == Installation ==
 
-Current Version Beta7, installation instructions are the same as Beta6:
-
+Current Version Final:
 [InstallationOfRelease05]
 
 Tips for Installation:
