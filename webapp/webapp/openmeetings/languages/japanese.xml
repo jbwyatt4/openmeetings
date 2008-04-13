@@ -1632,4 +1632,7 @@ languagesディレクトリにコピーして、
   <string id="539" name="Browser">
     <value>ブラウザ</value>
   </string>
+  <string id="540" name="Browser">
+    <value>Syncronize Audio/Video</value>
+  </string>	
 </language>

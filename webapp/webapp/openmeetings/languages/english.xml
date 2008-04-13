@@ -1623,4 +1623,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   <string id="539" name="Browser">
     <value>Browser</value>
   </string>
+  <string id="540" name="Browser">
+    <value>Syncronize Audio/Video</value>
+  </string>
 </language>
