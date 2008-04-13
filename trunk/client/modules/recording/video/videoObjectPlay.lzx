@@ -47,18 +47,6 @@
 			this.clientVars['User']='No User Connected';
 		</handler>
 		
-		<!-- Get the reference to the videoview-Object -->
-		<method name="getVideoReference">
-			this._chatvideoinner._sendInvitation.setAttribute('visible',false);
-			return this._chatvideoinner._videoview;
-		</method>
-		
-		<!-- called by disconnected status -->
-		<method name="getVideoReferenceDis">
-			this._chatvideoinner._sendInvitation.setAttribute('visible',true);
-			return this._chatvideoinner._videoview;
-		</method>
-		
 	    	<method name="setIdentifier" args="id">
 	    		//for development replace this by the real name later after authentification
 	    		//this.setAttribute('chatpartnername',('StreamID: '+id));
@@ -101,13 +89,6 @@
 			
 			<playVideoView name="_videoview" visible="false" x="1" y="2" width="128" height="96" />		
 			
-			<view name="_sendInvitation" visible="true" x="1" y="2" width="128" height="96" >
-				<handler name="onclick">
-					new inviteMainWindow(canvas.main_content._content.inner);
-				</handler>
-				
-				<labelText multiline="true" width="100" y="20" x="24" labelid="213" 	fgcolor="white" fontstyle="bold" />
-			</view>
 		</view>
 	
 		<view name="_loudness" x="1" width="126" height="18" y="$once{ parent.height-18 }" >

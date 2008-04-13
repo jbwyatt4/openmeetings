@@ -6,64 +6,70 @@
 	contains microphone and camera for broadcasting,
 	this class is used only in Meetings-Modus
  -->
-    
+   
+   
+<class name="videoViewBroadCast" extends="devVideoView" x="1" y="2" width="128" height="96" >	
+	<simpleNetStream name="v_output" buffertime="0">
+		<handler name="onstatus" args="info">
+			if ($debug) Debug.write("simplenetstream onstatus",info.code, info);
+		</handler>
+    </simpleNetStream>
+    <devCamera name="cameraRef" show="false" width="128" height="96" fps="22" bandwidth="8192" />
+    <devMicrophone name="microphoneRef" capturing="false">     
+    	<attribute name="isgreater" value="false" type="boolean" />       
+    	<handler name="onlevel">
+    		<![CDATA[
+        		//this.parent.parent.parent._loudness.loudness.setAttribute('text',this.level);
+				if (this.level>canvas.loudnessAcitviation) {
+					if (!this.isgreater) {
+						this.isgreater = true;
+						this.sendNotification();
+					}
+				} else {
+					if (this.isgreater) {
+						this.isgreater = false;
+						this.sendNotification();
+					}
+				}
+    		]]>
+    	</handler>    
+    	<method name="sendNotification">
+    		//Debug.write("Level sendNotification ",this.isgreater);
+	  		parent.objMessage = new Array ();
+	  		parent.objMessage[0] = 'audioActivity';
+	  		parent.objMessage[1] = this.isgreater;
+	  		parent.objMessage[2] = parent.parent.parent.publicSID;
+		  	parent.sendMessage.doCall();
+    	</method>    	
+    </devMicrophone>
+    <attribute name="objMessage" value="null" />
+    <netRemoteCallHib name="sendMessage" funcname="sendMessage" 
+		remotecontext="$once{ canvas.thishib }" showLoading="false" > 
+    	<netparam><method name="getValue"> return parent.parent.objMessage; </method></netparam>
+    </netRemoteCallHib>
+</class>    
+
 <class name="videoObjectBroadcast" extends="baseVideoObject" isremote="false">
+	
+	<method name="initVideoViewBroadCast">
+		new videoViewBroadCast(this._chatvideoinner,{name:'_videoview'});
+	</method>
+	<method name="removeVideoViewBroadCast">
+		this._chatvideoinner._videoview.destroy();
+	</method>
 	
 	<view name="_chatvideoinner" x="1" y="20" width="130" height="100" >
 		
-		<view name="r" resource="chatbgitem" x="1" y="2" stretches="both" width="128" height="96" />
+		<view name="r" resource="chatbgitem" x="1" y="2" stretches="both" 
+			  width="128" height="96" />
 		<handler name="oninit">
 			this.r.setResourceNumber(5);
 		</handler>
 		
-		<!-- This is the videoview -->
-		<devVideoView name="_videoview" visible="false" x="1" y="2" width="128" height="96" >		
-	        <simpleNetStream name="v_output" buffertime="0">
-				<handler name="onstatus" args="info">
-					Debug.write("simplenetstream onstatus",info.code, info);
-				</handler>
-	        </simpleNetStream>
-            <devCamera name="cameraRef" show="false" width="128" height="96" fps="22" bandwidth="8192" />
-            <devMicrophone name="microphoneRef" capturing="false">     
-            	<attribute name="isgreater" value="false" type="boolean" />       
-            	<handler name="onlevel">
-            		<![CDATA[
-	            		//this.parent.parent.parent._loudness.loudness.setAttribute('text',this.level);
-						if (this.level>canvas.loudnessAcitviation) {
-							if (!this.isgreater) {
-								this.isgreater = true;
-								this.sendNotification();
-							}
-						} else {
-							if (this.isgreater) {
-								this.isgreater = false;
-								this.sendNotification();
-							}
-						}
-            		]]>
-            	</handler>    
-            	<method name="sendNotification">
-            		//Debug.write("Level sendNotification ",this.isgreater);
-			  		parent.objMessage = new Array ();
-			  		parent.objMessage[0] = 'audioActivity';
-			  		parent.objMessage[1] = this.isgreater;
-			  		parent.objMessage[2] = parent.parent.parent.broadcastId;
-				  	parent.sendMessage.doCall();
-            	</method>    	
-            </devMicrophone>
-            <attribute name="objMessage" value="null" />
-	        <netRemoteCallHib name="sendMessage" funcname="sendMessage" 
-				remotecontext="$once{ canvas.thishib }" showLoading="false" > 
-	        	<netparam><method name="getValue"> return parent.parent.objMessage; </method></netparam>
-	        </netRemoteCallHib>  
-		</devVideoView>		
-		<view name="_sendInvitation" visible="true" x="1" y="2" width="128" height="96" >
-			<handler name="onclick">
-				new inviteMainWindow(canvas.main_content._content.inner);
-			</handler>
-			<labelText multiline="true" width="100" y="20" x="24" labelid="213" 
-				fgcolor="white" fontstyle="bold" />
-		</view>
+		<!-- 
+		<videoViewBroadCast name="_videoview" />
+		This is the videoview -->
+		
 	</view>
 
 	<view name="_loudness" x="1" width="126" height="18" y="$once{ parent.height-18 }" >
@@ -105,6 +111,21 @@
 		</handler>
 		<labelTooltip inittwice="true" labelid="68" />
 	</view>
+	
+	<view name="syncuser" x="$once{ parent.width-20 }" y="$once{ parent.height-20 }"
+		onmouseover="" onmouseup="" resource="resyncuser_rsc">
+		<handler name="onclick">
+			//new videoInfoStuff(parent);
+			//if ($debug) Debug.write(this);
+			parent.resetValues();
+			parent._chatvideoinner._videoview.cameraRef.setAttribute('show',false);
+			parent._chatvideoinner._videoview.microphoneRef.setAttribute('capturing',false);
+			parent.removeVideoViewBroadCast();
+			new editRecordStream(canvas.main_content._content.inner,{isSyncUpdate:true});	
+		</handler>
+		<labelTooltip labelid="540" />
+	</view>
+	
 	
 </class>
 

@@ -6,7 +6,6 @@
     <include href="loginWeb.lzx" />
     <include href="errorPopup.lzx" />
     <include href="messageWin.lzx" />
-    <include href="changeDevice.lzx" />
     <include href="headerMenu.lzx" />
     <include href="confirmationBox.lzx" />
     <include href="editWhiteboardDefault.lzx" />

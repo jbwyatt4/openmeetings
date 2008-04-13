@@ -23,7 +23,7 @@
 	</handler>	
 	<method name="doCall">
         if (this.showLoading) canvas._loadingAll.setAttribute('visible',true);
-		if($debug) Debug.write("netRemoteCallHib/doCall: [ " , this.funcname , " ]");
+		//if($debug) Debug.write("netRemoteCallHib/doCall: [ " , this.funcname , " ]");
 		this.callRPC();
 	</method>
 	

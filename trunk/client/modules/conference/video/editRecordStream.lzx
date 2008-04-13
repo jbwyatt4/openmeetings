@@ -22,24 +22,26 @@
     <attribute name="chosenMic" value="null" />
     <attribute name="chosenSetting" value="null" />
     <attribute name="currentClient" value="null" />
-    	
+
 	<handler name="oninit">
-		if ($debug) Debug.write("this.myvideocontainer ",this.myvideocontainer);			
-		if ($debug) Debug.write("editrecordstream ###################### ");
-        var t = new sharedObject();
-        t.getLocal('userdata');
-        var g = t.getData('userdata');
-        var save = g["savecamdata"];
-        //Debug.write("save: ",save,g["cam"],g["mic"]);
-        if(save) {
-        	this.chosenCam = g["cam"];
-        	this.chosenMic = g["mic"];
-        	this.chosenSetting = g["avstored"];
-			this.remoteMessage = new Array();
-			this.remoteMessage[0] = 'avsettings';
-			this.remoteMessage[2] = this.chosenSetting;        	
-        	this.getBroadCastId.doCall();		
-        }
+		<![CDATA[
+			if ($debug) Debug.write("this.myvideocontainer ",this.myvideocontainer);			
+			if ($debug) Debug.write("editrecordstream ###################### ");
+	        var t = new sharedObject();
+	        t.getLocal('userdata');
+	        var g = t.getData('userdata');
+	        var save = g["savecamdata"];
+	        //Debug.write("save: ",save,g["cam"],g["mic"]);
+	        if(save) {
+	        	this.chosenCam = g["cam"];
+	        	this.chosenMic = g["mic"];
+	        	this.chosenSetting = g["avstored"];
+				this.remoteMessage = new Array();
+				this.remoteMessage[0] = 'avsettings';
+				this.remoteMessage[2] = this.chosenSetting;        	
+	        	this.getBroadCastId.doCall();		
+	        }
+        ]]>
 	</handler>
     
     <method name="storelocaldata">
@@ -75,8 +77,8 @@
     				  remotecontext="$once{ canvas.thishib }" >  
     	<handler name="ondata" args="value">
         	<![CDATA[
-        		if ($debug) Debug.write("getBroadCastId",value);
-        		parent.myvideocontainer = canvas._videocontainer.getNewVideoObject(value);
+        		if ($debug) Debug.write("getBroadCastId",value,canvas.publicSID);
+        		parent.myvideocontainer = canvas._videocontainer.getNewVideoObject(canvas.publicSID);
         		parent.setUserAVSettings.doCall();
             ]]>
         </handler>   
@@ -100,43 +102,42 @@
     		var valCam = this.chosenCam;
 			var valMic = this.chosenMic;
 			var settings = this.chosenSetting;
+			this.myvideocontainer.initVideoViewBroadCast();
+			var videoview = this.myvideocontainer._chatvideoinner._videoview;
 	    	if ($debug) Debug.write("this.myvideocontainer: ",this.myvideocontainer);
 	    	if ($debug) Debug.write(valCam,valMic,settings);
-	        this.myvideocontainer.cameraRef.setAttribute('deviceindex',valCam);
-	        this.myvideocontainer.microphoneRef.setAttribute('deviceindex',valMic);
-	
-			this.myvideocontainer.parent.parent.setAttribute('isremote',false);
-	        
-	        this.myvideocontainer.parent.parent.setIdentifier(canvas.streamid);
+	        videoview.cameraRef.setAttribute('deviceindex',valCam);
+	        videoview.microphoneRef.setAttribute('deviceindex',valMic);
+			this.myvideocontainer.setAttribute('isremote',false);
 			
 			//camera.setMode(width, height, fps[, favorsize])
-			this.myvideocontainer.cameraRef.setMode(this.myvideocontainer.width,this.myvideocontainer.height,12);
+			videoview.cameraRef.setMode(this.myvideocontainer.width,this.myvideocontainer.height,12);
 			//camera.setQuality(bandwidth, picturequality)
-			if ($debug) Debug.write("this.myvideocontainer.cameraRef.bandwidth: ",this.myvideocontainer.cameraRef.bandwidth);
-			this.myvideocontainer.cameraRef.setQuality(this.myvideocontainer.cameraRef.bandwidth,0.9);
+			if ($debug) Debug.write("this.myvideocontainer.cameraRef.bandwidth: ",videoview.cameraRef.bandwidth);
+			videoview.cameraRef.setQuality(videoview.cameraRef.bandwidth,0.9);
 			//Microphone.set
 			if (canvas.vaquality=="best") {
-				this.myvideocontainer.microphoneRef.setRate(44);
+				videoview.microphoneRef.setRate(44);
 			} else {
-				this.myvideocontainer.microphoneRef.setRate(22);
+				videoview.microphoneRef.setRate(22);
 			}
 			
 			//Microphone setUseEchoSupression(bool)
-		    this.myvideocontainer.microphoneRef.setUseEchoSupression(true);
-			this.myvideocontainer.v_output.setBufferTime(0);
+		    videoview.microphoneRef.setUseEchoSupression(true);
+			videoview.v_output.setBufferTime(0);
 	    	switch (settings){
 	    		case "av":
-	    			this.myvideocontainer.cameraRef.setAttribute('show',true);
-	    			this.myvideocontainer.microphoneRef.setAttribute('capturing',true);
-	    			this.myvideocontainer.v_output.broadcast(this.currentClient.broadCastID,this.myvideocontainer.cameraRef,this.myvideocontainer.microphoneRef);
+	    			videoview.cameraRef.setAttribute('show',true);
+	    			videoview.microphoneRef.setAttribute('capturing',true);
+	    			videoview.v_output.broadcast(this.currentClient.broadCastID,videoview.cameraRef,videoview.microphoneRef);
 	    			break;
 	    		case "a":
-	    			this.myvideocontainer.microphoneRef.setAttribute('capturing',true);
-	    			this.myvideocontainer.v_output.broadcast(this.currentClient.broadCastID,null,this.myvideocontainer.microphoneRef);
+	    			videoview.microphoneRef.setAttribute('capturing',true);
+	    			videoview.v_output.broadcast(this.currentClient.broadCastID,null,videoview.microphoneRef);
 	    			break;	 
 	    		case "v":
-	    			this.myvideocontainer.cameraRef.setAttribute('show',true);
-	    			this.myvideocontainer.v_output.broadcast(this.currentClient.broadCastID,this.myvideocontainer.cameraRef,null);
+	    			videoview.cameraRef.setAttribute('show',true);
+	    			videoview.v_output.broadcast(this.currentClient.broadCastID,videoview.cameraRef,null);
 	    			break;	
 	    		case "n":
 	    			if ($debug) Debug.write("Do not Publish A/V");
@@ -146,7 +147,7 @@
 	    			break;
 	    	}
 
-	        this.myvideocontainer.parent.parent.setAttribute('chatpartnername',canvas.firstName+' '+canvas.lastName);
+	        this.myvideocontainer.setAttribute('chatpartnername',canvas.firstName+' '+canvas.lastName);
 	        
 	        this.close();
         ]]>

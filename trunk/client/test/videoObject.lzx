@@ -60,6 +60,12 @@
 	
 	<attribute name="isremote" value="true" type="boolean" />
 	
+	<attribute name="clientVars" value="null" />
+    
+	<!-- Attribute shows if an Video-Stream has been assigned to this videoview 
+		if it has been assigned one then no other can connect -->
+	<attribute name="isassigned" value="false" type="boolean" />
+	
 	<handler name="onisremote" args="r">
 		this.isremote = r;
 		if (r) {
@@ -72,9 +78,7 @@
 			this.mute.setAttribute('visibility','hidden')
 		}
 	</handler>
-	
-	<attribute name="clientVars" value="null" />
-	
+
 	<handler name="oninit">
 		this.clientVars = new Array();
 		this.clientVars['User']='No User Connected';
@@ -120,10 +124,6 @@
     	new videoUserProfilePic(this._chatvideoinner,{name:'userProfilePic',value:value});
     	this.showUserProfilePic = true;
     </method>
-    
-	<!-- Attribute shows if an Video-Stream has been assigned to this videoview 
-		if it has been assigned one then no other can connect -->
-	<attribute name="isassigned" value="false" type="boolean" />
 		
 	<view name="_innertop" width="130" height="18" x="1" y="1" bgcolor="$once{ canvas.basebgcolorizer }">
   		<text text="${ parent.parent.chatpartnername }" width="166" fgcolor="white"
