@@ -54,8 +54,16 @@
 	<attribute name="isremote" value="true" type="boolean" />
 	<attribute name="clientVars" value="null" />
 		
-	<!--- current broadcastId -->
-	<attribute name="broadcastId" value="0" type="string" />	
+	<!--- current publicSID -->
+	<attribute name="publicSID" value="" type="string" />	
+	
+	<method name="initVideoViewBroadCast">
+		//called before starting to stream
+		this._chatvideoinner._videoview.setAttribute('visible',true);
+	</method>
+	<method name="removeVideoViewBroadCast">
+		//called when the stream will be synced
+	</method>	
 	
 	<handler name="onisremote" args="r">
 		this.isremote = r;

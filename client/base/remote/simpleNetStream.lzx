@@ -103,7 +103,8 @@
             if (this._flashstream == null) {
                  return;
             }
-
+			if ($debug) Debug.write("this._flashstream, ",this._flashstream);
+			if ($debug) Debug.write("this.mode, ",this.mode);
             switch (this.mode) {
 
                 case "recording":
@@ -177,13 +178,13 @@
                     if (mic!=null) this._flashstream.attachAudio(mic._dev);
                 
                     this.streamname = streamname;
-                    Debug.write("publish", this.streamname);
-                    Debug.write("this._flashstream", this._flashstream);
-                
+                    if ($debug) Debug.write("publish", this.streamname);
+                    if ($debug) Debug.write("this._flashstream", this._flashstream);
+                	this.mode = "broadcasting";
                     this._flashstream.publish(this.streamname,"live");
 
                 } else {
-                    Debug.warn("Cant create Stream without valid rtmp-connection");
+                    if ($debug) Debug.warn("Cant create Stream without valid rtmp-connection");
                 }
             ]]>
         </method>       

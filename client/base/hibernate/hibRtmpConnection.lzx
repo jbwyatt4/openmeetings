@@ -414,7 +414,7 @@
             <handler name="ondata" args="value">
                 //The onResult-Handler will be called be the rtmpconnection
                 Debug.write("newStream: ",value);
-                canvas._videocontainer.startStream(value.broadCastID); 
+                canvas._videocontainer.startStream(value.publicSID,value.broadCastID); 
             </handler>   
         </netRemoteCallHib>    
         <netRemoteCallHib name="closeStream" funcname="closeStream">
@@ -422,7 +422,7 @@
                 //The onResult-Handler will be called be the rtmpconnection
                 //Debug.write("closeStream: ",value);
                 //free the VideoContainer
-                canvas._videocontainer.closeStreamClient(value.broadCastID); 
+                canvas._videocontainer.closeStreamClient(value.publicSID); 
                 canvas.setAttribute('numberofpartners',canvas.getAttribute('numberofpartners')-1);       
                 //TODO:check first current tab
             </handler>   
@@ -443,7 +443,7 @@
                 	parentObj.removeItemById(value.user_id);
                 }
                 if (canvas._videocontainer!=null){
-	                canvas._videocontainer.disconnectclient(value.broadCastID); 
+	                canvas._videocontainer.disconnectclient(value.publicSID); 
 					//remove that client from sync list of wmlFileLoader/image if present
 					if (_drawarea!=null){
 						_drawarea.sendCompleteWmlLoadedRClient(value);
