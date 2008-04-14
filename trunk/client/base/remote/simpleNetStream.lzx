@@ -76,7 +76,7 @@
                     this._flashstream.setBufferTime(this.buffertime);
                 
                     if (start!=0){
-                    	this.mode = "broadcasting";
+                    	this.mode = "playing";
                     	this._flashstream.play(this.streamname,start);
                     }else {
                     	this.mode = "playing";

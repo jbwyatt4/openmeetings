@@ -245,8 +245,11 @@
 		if (this._video1.publicSID == publicSID){
 			//VideoView with Partner has been found
             //remove Stream from view
-            //Debug.write("Found client to closeStream");
-			this._video1._chatvideoinner._videoview.setAttribute('visible',false);
+            if ($debug) Debug.write("Found client to closeStream");
+			//this._video1._chatvideoinner._videoview.setAttribute('visible',false);
+			this._video1._chatvideoinner._videoview.v_output.close();
+			this._video1._chatvideoinner._videoview.stop();
+			
 			return this._video1.getVideoReference();
 		}
 		return null;
