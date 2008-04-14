@@ -57,11 +57,12 @@
     		this._chatvideoinner.userProfilePic.destroy();
     		this.showUserProfilePic = false;
     	}
+    	if ($debug) Debug.write("resetValues: ",this.isremote);
     	if (this.isremote){
     		this._chatvideoinner._videoview.stop();
     	} else {
     		this._chatvideoinner._videoview.stop();
-    		this._chatvideoinner._videoview.v_output.stop();
+    		this._chatvideoinner._videoview.v_output.close();
     	}
     </method>
     

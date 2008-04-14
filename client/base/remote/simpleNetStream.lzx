@@ -103,8 +103,8 @@
             if (this._flashstream == null) {
                  return;
             }
-			if ($debug) Debug.write("this._flashstream, ",this._flashstream);
-			if ($debug) Debug.write("this.mode, ",this.mode);
+			if ($debug) Debug.write("SIMPLENETSTREAM stop this._flashstream, ",this._flashstream);
+			if ($debug) Debug.write("SIMPLENETSTREAM stop this.mode, ",this.mode);
             switch (this.mode) {
 
                 case "recording":
@@ -113,6 +113,7 @@
 
                 case "broadcasting":
                     this._flashstream.publish(false);
+                    //this.close();
                     break;
 
                 case "playing":
@@ -250,19 +251,23 @@
             this._flashstream.t = this;  
 
             this._flashstream.onStatus = function(info) {
+            	_root.Debug.write("simpleNetStream onStatus",info);
                 this.t._onStatus(info);
             };
 
             this._flashstream.onCuePoint = function(info) {
+            	_root.Debug.write("simpleNetStream onCuePoint",info);
                 this.t._onCuePoint(info);
             };
 
 
             this._flashstream.onPlayStatus = function(info) {
+            	_root.Debug.write("simpleNetStream onPlayStatus",info);
                 this.t._onPlayStatus(info);
             };
 
             this._flashstream.onMetaData = function(info) {
+            	_root.Debug.write("simpleNetStream onMetaData",info);
                 this.t._onMetaData(info);
             };
 

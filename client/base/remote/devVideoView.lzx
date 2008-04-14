@@ -121,28 +121,8 @@
                     this, "_setPlayStream",
                     stream, "onplaying");
 
-            if (this.cam) {
-                stream._setCam(this.cam);
-            }
-
-            if (this.mic) {
-                stream._setMic(this.mic);
-            }
-
-            //Debug.write("videoview handleAutoplay", this, "autoplay", stream.autoplay, "url", this.stream.url, "stream", this.stream);
-            stream._handleAutoplay();
-
             this._initcomplete = true;
 
-            // FIXME
-            // Camera needs to be displayed after _initcomplete = true
-            var cam = this.cam;
-            if (cam && 
-                cam.show) {
-                this.cam.setAttribute("show", true);
-            }
-
-            //Debug.write("videoview init END", this);
           ]]>
         </method>
 
@@ -292,6 +272,7 @@
         </method>
         
         <method name="stop">
+        	if ($debug) Debug.write("STOP DEVVIDEOVIEW");
         	this.__LZmovieClipRef.clear();
         </method>
 
