@@ -241,6 +241,7 @@ public class StreamService implements IPendingServiceCallback {
 						if (!conferenceType.equals("audience") || rcl.getIsMod()){
 							//stop the recorded flv and add the event to the notifications
 							log.error("*** sendClientBroadcastNotifications Any Client is Recording - stop that");
+							StreamService.addRoomClientEnterEventFunc(rcl, roomrecordingName, rcl.getUserip(), false);
 							stopRecordingShowForClient(conn, rcl, roomrecordingName, true);
 						}
 					}
@@ -345,7 +346,9 @@ public class StreamService implements IPendingServiceCallback {
 	public static void stopRecordingShowForClient(IConnection conn, RoomClient rcl, 
 			String roomrecordingName, boolean doStopStream) {
 		try {
-			StreamService.addRoomClientEnterEventFunc(rcl, roomrecordingName, rcl.getUserip(), false);
+			//this cannot be handled here, as to stop a stream and to leave a room is not
+			//the same type of event.
+			//StreamService.addRoomClientEnterEventFunc(rcl, roomrecordingName, rcl.getUserip(), false);
 			log.error("### stopRecordingShowForClient: "+rcl.getIsRecording()+","+rcl.getUsername()+","+rcl.getUserip());
 			
 			LinkedHashMap<String,Object> roomRecording = roomRecordingList.get(roomrecordingName);
@@ -496,7 +499,12 @@ public class StreamService implements IPendingServiceCallback {
 			
 			String conferenceType = (String) roomRecording.get("conferenceType");
 			
+			//log.debug("addRecordingByStreamId "+conferenceType+" MOD: "+rcl.getIsMod());
+			
 			if (!conferenceType.equals("audience") || rcl.getIsMod()){
+				
+				//log.debug("AV-Settings: "+rcl.getAvsettings());
+				
 				Date recordingsStartTime = (Date) roomRecording.get("starttime");
 				Date currentDate = new Date();
 				
@@ -507,6 +515,7 @@ public class StreamService implements IPendingServiceCallback {
 				
 				//if the user does publish av, a, v
 				if (!rcl.getAvsettings().equals("n")){
+					//log.debug("Record Show");
 					recordShow(conn, rcl.getBroadCastID(), streamName);
 				}
 				
