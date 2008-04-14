@@ -30,15 +30,16 @@
     <method name="playStream" args="flv">
     	if (this._ns!=null){
     		this._ns.pause();
+    		this._ns.stop();
     		this._ns.close();
     	}
     	this._ns = new NetStream(canvas.currentNC);
     	var t = this;
     	this._ns.onStatus = function(info){
-    		_root.Debug.write("onStatus",info);
+    		_root.Debug.write("playVideoView onStatus",info);
     	}
     	this._ns.onMetaData = function(info){
-    		_root.Debug.write("onMetaData",info);
+    		_root.Debug.write("playVideoView onMetaData",info);
     	}
     	this.__LZmovieClipRef.__lzvideo.attachVideo(this._ns);
     	this._ns.setBufferTime(this.buffertime);
@@ -52,10 +53,10 @@
     	this._ns = new NetStream(canvas.currentNC);
     	var t = this;
     	this._ns.onStatus = function(info){
-    		_root.Debug.write("onStatus",info);
+    		_root.Debug.write("playVideoView onStatus",info);
     	}
     	this._ns.onMetaData = function(info){
-    		_root.Debug.write("onMetaData",info);
+    		_root.Debug.write("playVideoView onMetaData",info);
     	}
     	this.__LZmovieClipRef.__lzvideo.attachVideo(this._ns);
     	this._ns.setBufferTime(this.buffertime);
