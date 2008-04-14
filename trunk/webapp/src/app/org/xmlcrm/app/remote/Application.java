@@ -299,6 +299,7 @@ public class Application extends ApplicationAdapter implements
 							log.debug("###########[roomLeave]");
 							if (rcl.getIsRecording()){
 								log.debug("*** roomLeave Any Client is Recording - stop that");
+								StreamService.addRoomClientEnterEventFunc(rcl, rcl.getRoomRecordingName(), rcl.getUserip(), false);
 								StreamService.stopRecordingShowForClient(cons, currentClient, rcl.getRoomRecordingName(), false);
 							}
 						}
@@ -360,6 +361,7 @@ public class Application extends ApplicationAdapter implements
 							//add Notification if another user is recording in this room
 							if (rcl.getIsRecording()){
 								log.debug("*** logicalRoomLeave Any Client is Recording - stop that");
+								StreamService.addRoomClientEnterEventFunc(rcl, rcl.getRoomRecordingName(), rcl.getUserip(), false);
 								StreamService.stopRecordingShowForClient(cons, currentClient, rcl.getRoomRecordingName(), true);
 							}
 						}
@@ -423,17 +425,20 @@ public class Application extends ApplicationAdapter implements
 		while (it.hasNext()) {
 			IConnection conn = it.next();
 			if (conn.equals(current)){
+				RoomClient rcl = ClientList.get(conn.getClient().getId());
+				if (rcl.getIsRecording()){
+					StreamService.addRecordingByStreamId(current, streamid, currentClient, rcl.getRoomRecordingName());
+				}
 				continue;
 			} else {
 				if (conn instanceof IServiceCapableConnection) {
 					RoomClient rcl = ClientList.get(conn.getClient().getId());
-					log.debug("is this users still alive? :"+rcl);
+					//log.debug("is this users still alive? :"+rcl);
 					//Check if the Client is in the same room and same domain 
 					if(roomname.equals(rcl.getUserroom()) && orgdomain.equals(rcl.getDomain())){
 						IServiceCapableConnection iStream = (IServiceCapableConnection) conn;
 //							log.info("IServiceCapableConnection ID " + iStream.getClient().getId());
 						iStream.invoke("newStream",new Object[] { currentClient }, this);
-						log.debug("sending notification to " + conn+" ID: ");
 						if (rcl.getIsRecording()){
 							StreamService.addRecordingByStreamId(current, streamid, currentClient, rcl.getRoomRecordingName());
 						}
@@ -491,6 +496,11 @@ public class Application extends ApplicationAdapter implements
 				if (conn.equals(current)){
 					//there is a Bug in the current implementation of the appDisconnect
 					if (clientFunction.equals("closeStream")){
+						RoomClient rcl = ClientList.get(conn.getClient().getId());
+						if (clientFunction.equals("closeStream") && rcl.getIsRecording()){
+							log.debug("*** sendClientBroadcastNotifications Any Client is Recording - stop that");
+							StreamService.stopRecordingShowForClient(conn, currentClient, rcl.getRoomRecordingName(), false);
+						}
 						// Don't notify current client
 						current.ping();
 					}
