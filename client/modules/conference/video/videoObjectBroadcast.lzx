@@ -96,14 +96,6 @@
 		<labelTooltip inittwice="true" labelid="373" />
 	</view>
 	
-	<view name="message" x="$once{ parent.width-20 }" y="2" resource="messagebox_info_rsc" 
-		onmouseover="" onmouseup="" visibility="hidden">
-		<handler name="onclick">
-			new changeDevice(canvas.main_content._content.inner);
-		</handler>
-		<labelTooltip inittwice="true" labelid="57" />
-	</view>
-	
 	<view name="showuser" x="$once{ parent.width-20 }" y="2"
 		onmouseover="" onmouseup="" resource="showusercontext">
 		<handler name="onclick">

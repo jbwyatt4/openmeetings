@@ -68,11 +68,11 @@
 	<handler name="onisremote" args="r">
 		this.isremote = r;
 		if (r) {
-			this.message.setAttribute('visibility','hidden');
+			this.syncuser.setAttribute('visibility','hidden');
 			this.showuser.setAttribute('visibility','visible');
 			this.mute.setAttribute('visibility','visible')
 		} else {
-			this.message.setAttribute('visibility','visible');
+			this.syncuser.setAttribute('visibility','visible');
 			this.showuser.setAttribute('visibility','hidden');
 			this.mute.setAttribute('visibility','hidden')
 		}
@@ -203,14 +203,6 @@
 		</handler>
 		<labelTooltip inittwice="true" labelid="373" />
 	</view>	
-
-	<view x="$once{ parent.width-20 }" y="2" resource="messagebox_info_rsc" 
-		onmouseover="" onmouseup="" name="message">
-		<handler name="onclick">
-			new changeDevice(canvas.main_content._content.inner);
-		</handler>
-		<labelTooltip inittwice="true" labelid="57" />
-	</view>
 	
 	<view x="$once{ parent.width-20 }" y="2" name="showuser" resource="showusercontextau"
 		onmouseover="" onmouseup="">
@@ -225,6 +217,21 @@
 			new inviteMainWindow(canvas.main_content._content.inner);
 		</handler>
 	</simpleLabelButton>
+	
+	
+	<view name="syncuser" x="$once{ parent.width-20 }" y="208"
+		onmouseover="" onmouseup="" resource="resyncuser_rsc">
+		<handler name="onclick">
+			//new videoInfoStuff(parent);
+			//if ($debug) Debug.write(this);
+			parent.resetValues();
+			parent._chatvideoinner._videoview.cameraRef.setAttribute('show',false);
+			parent._chatvideoinner._videoview.microphoneRef.setAttribute('capturing',false);
+			parent.removeVideoViewBroadCast();
+			new editRecordStream(canvas.main_content._content.inner,{isSyncUpdate:true});	
+		</handler>
+		<labelTooltip labelid="540" />
+	</view>	
     
 </class>
 
