@@ -46,7 +46,7 @@
         <view name="arrow_down_slider" resource="arrow_down_slider_rsc" 
             x="4" y="3" />
             <handler name="onclick">
-                var pick = new changeWidthLetterSliderwin(canvas,{initialNumber:parent.numericValue.tempValue,btnRef:this.parent,x:(parent.getAttributeRelative('x',canvas)),y:(parent.getAttributeRelative('y',canvas))});
+                var pick = new changeWidthLetterSliderWin(canvas,{initialNumber:parent.numericValue.tempValue,btnRef:this.parent,x:(parent.getAttributeRelative('x',canvas)),y:(parent.getAttributeRelative('y',canvas))});
                 LzModeManager.makeModal( pick );
             </handler>
         <labelTooltip labelid="431" />
