@@ -111,7 +111,7 @@
 	<text fontstyle="bold" text="Connection - Settings (user for both BroadCasting and Subscribing)" />
 	<view width="450">
 		<text text="URL:" />
-		<edittext align="right" width="350" id="url" text="rtmp://192.168.2.102:1935/openmeetings/testscope" />
+		<edittext align="right" width="350" id="url" text="rtmp://127.0.0.1:1935/openmeetings/testscope" />
 	</view>
 	<button align="right" width="200" text="connectRtmpConnection" onclick="canvas.connectRtmpConnection()" />
 </view>
@@ -119,6 +119,7 @@
 <text fontstyle="italic" y="0" width="450" multiline="true" x="450">
 	You can test all Settings of Audio and Video Streamings which are currently used in
 	OpenMeetings here.<br/>
+	Change the URL sothat 127.0.0.1 points to your Red5-Installation!<br/>
 	You first need to <b>connect</b> to a stream before you start to <b>broadcast</b>!<br/>
 	You first need <b>broadcast</b> a stream with a name before you try to <b>subscribe</b> to it!<br/>
 	If somebody already uses that streamname you get an NetStream *Bad.StreamName*, you can take an StreamName you like,
