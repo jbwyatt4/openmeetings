@@ -21,7 +21,7 @@ _this application could be extended to test muting, !activityMeter, Simple !VoIP
 = !HowTo use = 
 
   * Change the URL sothat 127.0.0.1 points to your Red5-Installation!
-  * You first need to *connect* to a stream before you start to *broadcast*!
+  * You first need to *connect* to a Red5-host before you start to *broadcast*!
   * You first need *broadcast* a stream with a name before you try to *subscribe* to it!
   * If somebody already uses that streamname you get an !NetStream "Bad.!StreamName", you can take an !StreamName you like, but of course you have to tell the *player* that it will need to use that !StreamName!
 
