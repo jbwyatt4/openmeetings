@@ -46,6 +46,7 @@ Tips for Installation:
   * CodingGuidelines - Client-Side Coding Guidelines
   * NewStructure  - NewStructure of the OpenLaszlo-LZX-Source Files
   * SessionVariables  	- Documentation how Session-Variables are handled
+  * AudioVideoTestingApplication - Test Application to test and see all Settings of Audio/Video/Streaming
   * CustomCryptMechanism - how to write Custom Encryption Styles
   * CustomAuthentication - how to write a Custom Authentication for Single Sign-On
   * ModuleDevelopersGuideline  	- Module Developer's Guideline (alpha)
