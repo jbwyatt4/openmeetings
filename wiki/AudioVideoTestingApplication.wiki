@@ -2,7 +2,7 @@
 
 = Description =
 
-  # You can test all Audio, Video and Streaming Settings used in !OpenMeetings. You can test, specify optimal settings. Please think about that this Application uses a video of width 320 and height 240. If you change the width and height, also the Video-Settings might be different to get a superior result.
+  # You can test all Audio, Video and Streaming Settings used in !OpenMeetings. You can test, specify optimize settings. Please think about that this Application uses a video of width 320 and height 240. If you change the width and height, also the Video-Settings might be different to get a superior result.
   # With this application you can also test how the !NetStream/Streaming behaves if the Bandwidth is Bad. For example where and which Events are thrown.
   # You can test how the Microphone quality changes if you change the rate. (Echo et cetera)
   # You can change how the client behaves if you re-sync the !NetStream (Stop/Resume Broadcasting)
