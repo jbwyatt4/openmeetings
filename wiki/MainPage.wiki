@@ -30,7 +30,6 @@ Tips for Installation:
 
 == General Documentation ==
 
-  * TechnologyPortfolio
   * [Internationalisation]
   * BandwidthNetworkSettings
   * SimpleSampleApps  	
