@@ -22,7 +22,7 @@ _this application could be extended to test muting, !activityMeter, Simple !VoIP
   * URL (LPS-Verison 4.0.10 used here, of course if you use lps-4.x.xx then you have to replace that!): http://$YOPENLASZLO_HOST:8080/lps-4.0.10/videoconference/test-setup.lzx?lzr=swf8&lzproxied=solo
 
 
-= HowTo use = 
+= !HowTo use = 
 
   * Change the URL sothat 127.0.0.1 points to your Red5-Installation!
   * You first need to *connect* to a stream before you start to *broadcast*!
