@@ -1,0 +1,105 @@
+<library>
+
+<!---
+	extends the Video-View with Streaming functions
+ -->
+
+<class name="baseVideoStream" extends="baseVideoView">
+	
+	<attribute name="_ns" value="null" />
+	<attribute name="mode" value="play" type="string" />
+	
+	<attribute name="bufferTime" value="0" type="number" />
+	
+	<!--- @keywords private -->
+	<method name="createStream">
+		this._ns =  new NetStream(this._findnc());
+		this._ns.onStatus = function(info) {
+	    	_root.Debug.write("simpleNetStream onStatus",info);
+	    };
+	    this._ns.onCuePoint = function(info) {
+	    	_root.Debug.write("simpleNetStream onCuePoint",info);
+	    };
+	    this._ns.onPlayStatus = function(info) {
+	    	_root.Debug.write("simpleNetStream onPlayStatus",info);
+	    };
+	    this._ns.onMetaData = function(info) {
+	    	_root.Debug.write("simpleNetStream onMetaData",info);
+	    };		
+	</method>
+	
+    <!--- Find the Flash NetConnection object.
+          @keywords private -->
+    <method name="_findnc">
+        return canvas.currentNC;
+    </method>	
+	
+	<!--- 
+		Plays a Video Stream, makes a new Instance of a NetStream, if previous NetStream 
+		is still open it will first close that, used to subscribe to a live-stream
+		@param string streamName the streamname to play
+	 -->
+	<method name="play" args="streamName">
+		if (this._ns!=null){
+			this.stop();
+		}
+		this.mode = "play";
+		this.createStream();
+		//invokes Method in baseVideoView
+		this.attachVideo(this._ns);
+		this._ns.play(streamname.getText(),-1);
+	</method>
+	
+	<!---
+		BroadCasts a Stream
+		@param string streamName the streamname to broadcast
+		@param camera camReference a reference to the Camera-Object to stream
+		@param micropone micReference a reference to the Micropohne Object to stream
+	 -->
+	<method name="broadcast" args="streamName,camReference,micReference">
+		if (this._ns!=null){
+			this.stop();
+		}
+		this.mode = "broadcast";
+		this.createStream();		
+		if (camReference!=null) this._ns.attachVideo(camReference);
+	    if (micReference!=null) this._ns.attachAudio(micReference);
+	    this._ns.publish(streamName,"live");
+	</method>
+	
+	<!--- 
+		Stops playing or broadcasting a Stream and clears the Video-Object
+	 -->
+	<method name="stop">
+		//remove NetStream from Video-Object
+		this.clear();
+		//Stop NetStream
+		if (this.mode == "play") {
+			this._ns.pause();
+			this._ns.close();
+		} else if (this.mode == "broadcast") {
+			this._ns.publish(false);
+			this._ns.close();
+		} else {
+			if ($debug) Debug.warn("Not known Mode: ",this.mode,this);
+		}
+	</method>
+	
+	<!---
+		bufferTime : Number [read-only]
+		The number of seconds assigned to the buffer by NetStream.setBufferTime(). 
+		The default value is .1(one-tenth of a second). 
+		To determine the number of seconds currently in the buffer, use NetStream.bufferLength.
+	-->
+	<method name="setBuffer" args="time">
+		if(this._ns!=null){
+			this._ns.setBufferTime(time); 
+		} else {
+			if ($debug) Debug.warn("setBuffer but no NetStream inited",this);	
+		}		
+	</method>
+	
+</class>
+
+
+</library>
