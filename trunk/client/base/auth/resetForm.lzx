@@ -55,6 +55,10 @@
             ]]>
         </handler>  
     </netRemoteCallHib>    
+
+    <method name="reset">
+            this.sendBtn.onclick.sendEvent();
+    </method>
     
 </class>    
     

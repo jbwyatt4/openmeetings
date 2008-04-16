@@ -10,13 +10,20 @@
     <handler name="oninit">
         var defaultstate = canvas.getCountryRecord(1);
         this.state.addAndSelectItem(defaultstate.name,defaultstate.state_id);        
+        var pressEnter = new LzDelegate(this, "register");
+        LzKeys.callOnKeyCombo(pressEnter, ["enter"]);
     </handler>
     
     <handler name="onclose">
     	this.refObj._register.setAttribute('visible',true);
+        LzKeys.callOnKeyCombo(refObj.pressEnter, ["enter"]);
     	this.refObj.doreset.doStart();
     </handler>
     
+
+    <method name="register">
+        this.registerB.onclick.sendEvent();
+    </method>
     <labelText labelid="114" width="200" y="42" resize="false" x="2"/>
         <customEdittext name="username" y="42" x="120" width="270" text="" />
 
@@ -63,7 +70,7 @@
             </netRemoteCallHib>
         </combobox>       
          -->   
-    <simpleLabelButton labelid="121" width="120" x="140" y="332">
+    <simpleLabelButton name="registerB" labelid="121" width="120" x="140" y="332">
     	<handler name="onclick">
             <![CDATA[
                 var pwd1 = this.parent.userpass1.getText();
