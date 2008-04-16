@@ -12,8 +12,8 @@
     </handler>
     
     <handler name="oninit">
-        var pressEnter = new LzDelegate(this, "login");
-        LzKeys.callOnKeyCombo(pressEnter, ["enter"]);
+        this.pressEnter = new LzDelegate(this, "login");
+        LzKeys.callOnKeyCombo(this.pressEnter, ["enter"]);
         LzFocus.setFocus(this.username,true);
 	</handler>  
     
@@ -29,6 +29,8 @@
     <attribute name="childObj" value="null" />
     
     <attribute name="labeliderror" value="0" type="number" />
+    
+    <attribute name="pressEnter" value="null" />
     
     <labelText name="n1" labelid="109" width="200" y="24" resize="false" x="2"/>
         <customEdittext name="username" y="24" x="120" width="170" >
@@ -166,7 +168,8 @@
     	<handler name="onclick">
 	    	this.parent._register.setAttribute('visible',false);
 	    	this.parent.childObj = new registerNewUser(canvas.main_content._content.inner,{refObj:this.parent});    	
-    		parent.showRegForm.doStart();
+    		LzKeys.removeKeyComboCall(this.parent.pressEnter, ["enter"]);
+		parent.showRegForm.doStart();
     	</handler>
     </simpleLabelButton>          
         
@@ -364,14 +367,27 @@
     	</handler>       
     </labelText>        
     
+    <method name="createReset" args="value">
+       var resetF=new resetForm(value,{name:'_resetForm'});
+       LzKeys.removeKeyComboCall(this.pressEnter, ["enter"]);
+       this.pressEnter = new LzDelegate(resetF, "reset");
+       LzKeys.callOnKeyCombo(this.pressEnter, ["enter"]);
+    </method>
+    <method name="destroyReset" args="value">
+       value._resetForm.destroy();
+       LzKeys.removeKeyComboCall(this.pressEnter, ["enter"]);
+       this.pressEnter = new LzDelegate(value, "login");
+       LzKeys.callOnKeyCombo(this.pressEnter, ["enter"]);
+    </method>
+
     <animator name="showRegForm" attribute="x" to="20" duration="1000" start="false" />
     <animator name="doreset" attribute="x" to="$once{ canvas.width/2 - parent.width/2 }" 
     		  duration="1000" start="false" />
     
     <animator name="showResetForm" attribute="height" to="400" duration="1000" 
-        onstop="new resetForm(parent,{name:'_resetForm'})" start="false" />
+        onstop="parent.createReset(parent)" start="false" />
     <animator name="disableResetForm" attribute="height" to="260" duration="1000" 
-        onstart="parent._resetForm.destroy();" start="false" />    
+        onstart="parent.destroyReset(parent);" start="false" />    
 
 </class>
     
