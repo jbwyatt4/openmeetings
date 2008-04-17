@@ -27,6 +27,19 @@ _this application could be extended to test muting, !activityMeter, Simple !VoIP
 
   * For all Audio-Video related settings I've added the Description to the various values, there are also links in the Sources to the Livedocs of Adobe about the Methods invoked inside the Flash-Player-API (all Actionscript 2)
 
+= Tips and Tricks =
+
+  * If you edit the width/height of the Video it should be always in relation to 640x480 and no Float-Numbers, as it seems like the Flash-Plugin does not accept that and round it to the  next acceptable small number.
+  * you should always keep the same logic in using the app: 
+  # Connect-Broadcaster
+  # connect-Player
+  # start-streaming-broadcasting
+  # start-subscribing to Live-Stream
+  # stop-subscribing to Live-Stream
+  # stop-Broadcasting
+  => and then you can start again at *start-streaming-broadcasting*, if you mix this up the result will be not equal, for example if you subscribe to the stream while it has not been started, you will see nothing!
+
+
 = Sample Screen =
 
 http://openmeetings.googlecode.com/svn/docs/test_application_audio_video.png
