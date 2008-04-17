@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <config>
 
-<!-- URL/IP to use for the Server 192.168.178.28 
-inno02.fh-pforzheim.de macbook 192.168.2.103
-192.168.2.102 bxlug.homelinux.org 213.219.160.72
+<!-- URL/IP to use for the Server
     if this value is empty it will try to connect to the 
-    domain-name it has been loading from  
-    inno02.fh-pforzheim.de  192.168.254.180
+    domain-name the OpenMeetings-Client has been loading from  
     -->
-<rtmphostlocal>192.168.2.102</rtmphostlocal>
+<rtmphostlocal></rtmphostlocal>
 
 <!--  
 Port to use for the Server
