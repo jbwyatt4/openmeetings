@@ -37,7 +37,7 @@ _this application could be extended to test muting, !activityMeter, Simple !VoIP
   # start-subscribing to Live-Stream
   # stop-subscribing to Live-Stream
   # stop-Broadcasting
-  => and then you can start again at *start-streaming-broadcasting*, if you mix this up the result will be not equal, for example if you subscribe to the stream while it has not been started, you will see nothing!
+  => and then you can start again at "3. start-streaming-broadcasting", if you mix this up the result will be not equal, for example if you subscribe to the stream while it has not been started, you will see nothing!
 
 
 = Sample Screen =
