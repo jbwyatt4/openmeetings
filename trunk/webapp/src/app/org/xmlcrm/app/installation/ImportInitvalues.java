@@ -255,13 +255,14 @@ public class ImportInitvalues {
 				270);
 		Roommanagement.getInstance().addRoomToOrganisation(3, room2, 1);
 
-		Roommanagement.getInstance().addRoom(3, "public Audience Room", 2, "",
-				new Long(4), true, null, 270, 280, 2, 2, 400, true, 276, 2,
-				592, 660, true, 2, 284, 310, 270);
+		Roommanagement.getInstance().addRoom(3, 
+				"public Audience Room", 2, "", new Long(4), true, null, 326, 
+				310, 2, 2, 400, true, 332, 2, 622, 660, true, 2, 314, 310, 270);
 
 		long room4 = Roommanagement.getInstance().addRoom(3,
-				"private Audience Room", 2, "", new Long(4), false, null, 270,
-				280, 2, 2, 400, true, 276, 2, 592, 660, true, 2, 284, 310, 270);
+				"private Audience Room", 2, "", new Long(4), false, null, 326,
+				310, 2, 2, 400, true, 332, 2, 622, 660, true, 2, 314, 310, 270);
+		
 		Roommanagement.getInstance().addRoomToOrganisation(3, room4, 1);
 
 	}
