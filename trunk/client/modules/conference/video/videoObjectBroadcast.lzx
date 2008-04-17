@@ -7,7 +7,7 @@
 	this class is used only in Meetings-Modus
  -->
    
-   
+<!--
 <class name="videoViewBroadCast" extends="devVideoView" x="1" y="2" width="128" height="96" >	
 	<simpleNetStream name="v_output" buffertime="0">
 		<handler name="onstatus" args="info">
@@ -48,15 +48,9 @@
     	<netparam><method name="getValue"> return parent.parent.objMessage; </method></netparam>
     </netRemoteCallHib>
 </class>    
-
+ -->
+ 
 <class name="videoObjectBroadcast" extends="baseVideoObject" isremote="false">
-	
-	<method name="initVideoViewBroadCast">
-		new videoViewBroadCast(this._chatvideoinner,{name:'_videoview'});
-	</method>
-	<method name="removeVideoViewBroadCast">
-		this._chatvideoinner._videoview.destroy();
-	</method>
 	
 	<view name="_chatvideoinner" x="1" y="20" width="130" height="100" >
 		
@@ -66,10 +60,8 @@
 			this.r.setResourceNumber(5);
 		</handler>
 		
-		<!-- 
-		<videoViewBroadCast name="_videoview" />
-		This is the videoview -->
-		
+		<baseVideoStream name="_videostream" mode="broadcast"
+						 x="1" y="2" width="128" height="96" bgcolor="black" />
 	</view>
 
 	<view name="_loudness" x="1" width="126" height="18" y="$once{ parent.height-18 }" >
@@ -110,9 +102,6 @@
 			//new videoInfoStuff(parent);
 			//if ($debug) Debug.write(this);
 			parent.resetValues();
-			parent._chatvideoinner._videoview.cameraRef.setAttribute('show',false);
-			parent._chatvideoinner._videoview.microphoneRef.setAttribute('capturing',false);
-			parent.removeVideoViewBroadCast();
 			new editRecordStream(canvas.main_content._content.inner,{isSyncUpdate:true});	
 		</handler>
 		<labelTooltip labelid="540" />

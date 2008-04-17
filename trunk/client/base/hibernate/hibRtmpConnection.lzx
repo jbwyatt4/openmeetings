@@ -6,7 +6,7 @@
 <dataset name="languagesSet" />        
 
 
-<class name="hibRtmpConnection" extends="devRtmpConnection" debug="false"
+<class name="hibRtmpConnection" extends="rtmpConnection" debug="false"
     src="$once{ this.protocollName+'://'+canvas.rtmphostlocal+':'+this.protocollPort+'/'+canvas.webAppRootKey+'/hibernate' }" >
 
 	<attribute name="protocollName" type="string" value="rtmp" />

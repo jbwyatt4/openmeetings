@@ -77,27 +77,31 @@
 
 
 <method name="playBroadCast">
+	<![CDATA[
+		//attaches the Camera to the View
 	
-	//attaches the Camera to the View
-
-	this._nsPlay =  new NetStream(this._nc);
-	this._nsPlay.onStatus = function(info) {
-    	_root.Debug.write("simpleNetStream onStatus",info);
-    };
-    this._nsPlay.onCuePoint = function(info) {
-    	_root.Debug.write("simpleNetStream onCuePoint",info);
-    };
-    this._nsPlay.onPlayStatus = function(info) {
-    	_root.Debug.write("simpleNetStream onPlayStatus",info);
-    };
-    this._nsPlay.onMetaData = function(info) {
-    	_root.Debug.write("simpleNetStream onMetaData",info);
-    };
-
-    this._nsPlay.hasOwnProperty(Number(this.streambuffer.getText())); 
-	playVideo.attachVideo(this._nsPlay);
-    
-    this._nsPlay.play(streamname.getText(),-1);
+		this._nsPlay =  new NetStream(this._nc);
+		this._nsPlay.onStatus = function(info) {
+	    	_root.Debug.write("simpleNetStream onStatus",info);
+	    };
+	    this._nsPlay.onCuePoint = function(info) {
+	    	_root.Debug.write("simpleNetStream onCuePoint",info);
+	    };
+	    this._nsPlay.onPlayStatus = function(info) {
+	    	_root.Debug.write("simpleNetStream onPlayStatus",info);
+	    };
+	    this._nsPlay.onMetaData = function(info) {
+	    	_root.Debug.write("simpleNetStream onMetaData",info);
+	    };
+	
+	    //sets the Buffer for the Playing
+	    //see: http://livedocs.adobe.com/flash/8/main/wwhelp/wwhimpl/common/html/wwhelp.htm?context=LiveDocs_Parts&file=00002567.html#wp393038
+	    //this._nsPlay.setBufferTime(Number(this.streambuffer.getText())); 
+	    //=> disabled, cause this leads to Buffer-Full-Buffer-Empty-Events after re-syncing
+		playVideo.attachVideo(this._nsPlay);
+	    
+	    this._nsPlay.play(streamname.getText(),-1);
+    ]]>
 </method>
 
 <method name="stopPlayBroadCast">
@@ -126,10 +130,33 @@
 	but of course you have to tell the *player* that it will need to use that StreamName!<br/>
 </text>
 
-<view bgcolor="black" width="${ canvas.width }" height="2" y="120" />
+<checkbox name="modus" y="120" 
+		  text="Event Modus (320x240) or Conference Modus (128x96)" value="true" >
+	<handler name="onvalue" args="v">
+		if (canvas.isinited) {
+			if (v){
+				broadCastVideo.setAttribute('width',320);
+				broadCastVideo.setAttribute('height',240);
+				broadCastVideo.applySizeToVid();
+				playVideo.setAttribute('width',320);
+				playVideo.setAttribute('height',240);	
+				playVideo.applySizeToVid();
+			} else {
+				broadCastVideo.setAttribute('width',128);
+				broadCastVideo.setAttribute('height',96);
+				broadCastVideo.applySizeToVid();
+				playVideo.setAttribute('width',128);
+				playVideo.setAttribute('height',96);
+				playVideo.applySizeToVid();
+			}
+		}
+	</handler>
+</checkbox>
+
+<view bgcolor="black" width="${ canvas.width }" height="2" y="140" />
 
 <!-- two columns left BroadCast, right Subscribe a Stream -->
-<view y="124" height="$once{ canvas.height-this.y }" clip="true">
+<view y="144" height="$once{ canvas.height-this.y }" clip="true">
 	<!--- ScrollArea -->
 	<view layout="axis:x;spacing:10" >
 		<!--- BroadCasting Area -->
@@ -145,9 +172,13 @@
 			        var vid = this._getflashvideo();
 			        vid._x = 0;
 			        vid._y = 0;
-			        vid._width = this.width;
-			        vid._height = this.height;
+			        this.applySizeToVid();
 			        if ($debug) Debug.write("init");
+				</method>
+				<method name="applySizeToVid">
+					var vid = this._getflashvideo();
+					vid._width = this.width;
+			        vid._height = this.height;
 				</method>
 				<method name="_getflashvideo">
 					<![CDATA[
@@ -196,7 +227,7 @@
 			<!--- Width -->
 			<view width="450">
 				<text text="Width:" />
-				<edittext align="right" width="150" id="streamwidth" text="$once { broadCastVideo.width }" />
+				<edittext align="right" width="150" id="streamwidth" text="$ { broadCastVideo.width }" />
 				<text fontstyle="italic" y="26" width="450" multiline="true">
 					width:Number [optional] - The requested capture width, in pixels. The default value is 160.
 				</text>
@@ -204,7 +235,7 @@
 			<!--- Height -->
 			<view width="450">
 				<text text="Height:" />
-				<edittext align="right" width="150" id="streamheight" text="$once { broadCastVideo.height }" />
+				<edittext align="right" width="150" id="streamheight" text="$ { broadCastVideo.height }" />
 				<text fontstyle="italic" y="26" width="450" multiline="true">
 					height:Number [optional] - The requested capture height, in pixels. The default value is 120.
 				</text>
@@ -289,9 +320,13 @@
 			        var vid = this._getflashvideo();
 			        vid._x = 0;
 			        vid._y = 0;
-			        vid._width = this.width;
-			        vid._height = this.height;
+			        this.applySizeToVid();
 			        if ($debug) Debug.write("init");
+				</method>
+				<method name="applySizeToVid">
+					var vid = this._getflashvideo();
+					vid._width = this.width;
+			        vid._height = this.height;
 				</method>
 				<method name="_getflashvideo">
 					<![CDATA[

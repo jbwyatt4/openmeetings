@@ -7,33 +7,24 @@
 	subscribe to a video or live-stream
 
  -->
- 
-<class name="playerViewInner" extends="playVideoView" buffertime="0.2"
-					   x="1" y="2" width="128" height="96" />
 					   
 <class name="videoObjectPlayBroadcast" extends="baseVideoObject" isremote="true">
 	
-	<!--- Inits the Video-Area, this is done by script as a sync event can
-		break the netStream/stopingand resuming does not work
-	-->
-	<method name="initVideoArea">
-		return new playerViewInner(this._chatvideoinner,{name:'_videoview'});
-	</method>
-	
-	<method name="removeVideoArea">
-		this._chatvideoinner._videoview.destroy();
-	</method>
-		
+    <!--- @keywords private -->
+    <method name="setVideouserProfilePic" args="value">
+    	if ($debug) Debug.write("### setVideouserProfilePic ",value);
+    	new videoUserProfilePic(this._chatvideoinner,{name:'userProfilePic',value:value});
+    	this.showUserProfilePic = true;
+    </method>	
+
 	<view name="_chatvideoinner" x="1" y="20" width="130" height="100" >
 		<view name="r" resource="chatbgitem" x="1" y="2" 
 			  stretches="both" width="128" height="96" />
 		<handler name="oninit">
 			this.r.setResourceNumber(5);
 		</handler>
-		<!--
-		<playVideoView name="_videoview" visible="false" buffertime="0.2"
-					   x="1" y="2" width="128" height="96" />
-		-->
+		<baseVideoStream name="_videostream" 
+						 x="1" y="2" width="128" height="96" bgcolor="black" />
 	</view>
 
 	<view name="_loudness" x="1" width="126" height="18" y="$once{ parent.height-18 }" >
@@ -63,7 +54,7 @@
 	<view name="showuser" x="$once{ parent.width-20 }" y="2"
 		onmouseover="" onmouseup="" resource="showusercontext">
 		<handler name="onclick">
-			new videoInfoStuff(parent);
+			new remoteUserDetails(parent);
 		</handler>
 		<labelTooltip inittwice="true" labelid="68" />
 	</view>

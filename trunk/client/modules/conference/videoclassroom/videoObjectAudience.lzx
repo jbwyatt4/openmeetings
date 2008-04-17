@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<library>
+	
+<!-- This is the videoview  
+		<devVideoView name="_videoview" visible="false" width="250" height="187.5">
+	        <simpleNetStream name="v_output" buffertime="0.3">
+				<handler name="onstatus" args="info">
+					Debug.write("simplenetstream onstatus",info.code, info);
+				</handler>
+	        </simpleNetStream>
+            <devCamera name="cameraRef" show="false" width="250" height="187.5" fps="22" bandwidth="16384" />
+            <devMicrophone name="microphoneRef" capturing="false">     
+            	<attribute name="isgreater" value="false" type="boolean" />       
+            	<handler name="onlevel">
+            		<![CDATA[
+	            		if (this.level>canvas.loudnessAcitviation) {
+							if (!this.isgreater) {
+								this.isgreater = true;
+								this.sendNotification();
+							}
+						} else {
+							if (this.isgreater) {
+								this.isgreater = false;
+								this.sendNotification();
+							}
+						}
+            		]]>
+            	</handler>    
+            	<method name="sendNotification">
+            		//Debug.write("Level sendNotification ",this.isgreater);
+			  		parent.objMessage = new Array ();
+			  		parent.objMessage[0] = 'audioActivity';
+			  		parent.objMessage[1] = this.isgreater;
+			  		parent.objMessage[2] = 0;
+				  	parent.sendMessage.doCall();
+            	</method>    	
+            </devMicrophone>
+            <attribute name="objMessage" value="null" />
+	        <netRemoteCallHib name="sendMessage" funcname="sendMessage" 
+				remotecontext="$once{ canvas.thishib }" showLoading="false" > 
+	        	<netparam><method name="getValue"> return parent.parent.objMessage; </method></netparam>
+	        </netRemoteCallHib>              
+		</devVideoView>
+		-->
+		
+		
+<resource name="chatbgitemau" src="resources/bgitemvideochat.swf" />
+
+<resource name="showusercontextcloseau" src="resources/error.png" />
+<resource name="showusercontextau" src="resources/1downarrow.png" />
+	
+<class name="videoUserProfilePicBig" extends="view" width="320" height="240" 
+	   clip="true" bgcolor="white">
+	<attribute name="value" value="null" />
+	<handler name="oninit">
+		<![CDATA[
+			if (this.value.picture_uri==null || this.value.picture_uri.length==0){
+				this.value.picture_uri = "d.jpg";
+			} else {
+				this.value.picture_uri = "_profile_"+value.picture_uri;
+			}
+	        var downloadurl = 'http://'+canvas.rtmphostlocal+':'+canvas.red5httpport
+	        		+'/'+canvas.webAppRootKey+'/DownloadHandler?fileName='+value.picture_uri
+	        		+'&moduleName=remoteuserprofilebig&parentPath=&room=&domain='
+	        		+'&remoteUserid='+this.value.user_id
+	        		+'&sid='+canvas.sessionId;
+	        this._userpic.setAttribute('src',downloadurl);	
+        ]]>
+	</handler>	
+	<image name="_userpic" />
+</class>
+<!-- #################
+	Class videoObject
+	
+	Constructor: non
+	
+	Attributes:
+	String chatpartnername
+	int chatpartnername
+ -->
+    
+<class name="videoObjectAudience" extends="baseVideoObject" width="322" height="284" >
+	
+	<attribute name="isAssigned" value="false" type="boolean" />
+
+    <method name="setVideouserProfilePic" args="value">
+    	if ($debug) Debug.write("### setVideouserProfilePic ",value);
+    	new videoUserProfilePicBig(this._chatvideoinner,{name:'userProfilePic',value:value});
+    	this.showUserProfilePic = true;
+    </method>    
+    
+    <method name="deleteVideoConfProfilePic" args="value">
+    	if ($debug) Debug.write("### deleteVideoConfProfilePic ",value);
+    	if (this.showUserProfilePic){
+    		this._chatvideoinner.userProfilePic.destroy();
+    	}
+    </method>     
+    
+    <view name="_bg" bgcolor="white" x="1" y="21" width="$once{ parent.width-2}" 
+    	  height="$once{ parent.height-22}" />   
+
+	<view name="_chatvideoinner" x="1" y="20" width="320"
+		  resource="chatbgitemau" height="240" >
+		<handler name="oninit">
+			this.setResourceNumber(5);
+		</handler>
+		<baseVideoStream name="_videostream" x="0" y="0"
+						 width="320" height="240" bgcolor="black" />
+	</view>
+	
+	
+	
+	<view name="_loudness" x="1" y="242">
+		<view x="2" y="2" name="loudness" resource="speaking" opacity="0.2"
+			  onmouseover="" onmouseout="" >		
+			<labelTooltip inittwice="true" labelid="372" />
+		</view>
+	</view>
+	
+	<view name="mute" x="$once{ parent.width-20 }" y="242" 
+		onmouseover="" onmouseup="" resource="mute_btn_rsc" >
+		<attribute name="isload" value="true" type="boolean" />
+		<handler name="onclick">
+			if (this.isload){
+				parent._chatvideoinner._videoview.v_output.setVolume(0);
+				this.setResourceNumber(2);
+				this.isload = false;
+			} else {
+				parent._chatvideoinner._videoview.v_output.setVolume(100);
+				this.setResourceNumber(1);
+				this.isload = true;
+			}
+		</handler>
+		<labelTooltip inittwice="true" labelid="373" />
+	</view>	
+	
+	<view x="$once{ parent.width-20 }" y="2" name="showuser" resource="showusercontextau"
+		onmouseover="" onmouseup="">
+		<handler name="onclick">
+			new remoteUserDetails(parent);
+		</handler>
+		<labelTooltip inittwice="true" labelid="68" />
+	</view>
+	
+	<simpleLabelButton name="_sendInvitation" x="2" y="262" width="200" labelid="213" >
+		<handler name="onclick">
+			new inviteMainWindow(canvas.main_content._content.inner);
+		</handler>
+	</simpleLabelButton>
+	
+	
+	<view name="syncuser" x="$once{ parent.width-20 }" y="242"
+		onmouseover="" onmouseup="" resource="resyncuser_rsc">
+		<handler name="onclick">
+			//new videoInfoStuff(parent);
+			//if ($debug) Debug.write(this);
+			parent.resetValues();
+			new editRecordStream(canvas.main_content._content.inner,{isSyncUpdate:true});	
+		</handler>
+		<labelTooltip labelid="540" />
+	</view>	
+    
+</class>
+
+<!--
+<class name="infoStuffAudience"	extends="view" width="$once{ parent.width-2 }" visibility="hidden"
+		height="$once{ parent.height-41 }" y="20" x="1" bgcolor="white">
+		<method name="initUserObject">
+			<![CDATA[
+			var tString = '';
+			Debug.write("initUserObject *** clientVars: ",parent.clientVars);
+			for (var eg in parent.clientVars){
+				if (eg!='userip'){
+					tString += eg+': <BR/>'+parent.clientVars[eg]+'<BR />';
+				} else {
+					tString += eg+': <BR/>'+parent.clientVars[eg]+'<BR />';
+					tString += 'WHOIS:<BR/>';
+					tString += '<A HREF="http://www.networksolutions.com/whois/results.jsp?whoistoken='+parent.clientVars[eg]+'" TARGET="_BLANK">'+parent.clientVars[eg]+'</A><BR/><BR/>';
+				}
+			}
+			//Debug.write("tString: ",tString);
+			this.inner._usertext.setText(tString);
+			]]>
+		</method>
+		<view x="$once{ parent.width-20 }" y="2" name="infoview" resource="showusercontextcloseau">
+			<handler name="onclick">
+				parent.desotry();
+			</handler>
+			<labelTooltip inittwice="true" labelid="85" />
+		</view>	
+		<view name="inner" width="$once{ parent.width }" 
+			height="$once{ parent.height-20 }" y="20" clip="true">
+			<text name="_usertext" width="$once{ parent.width }" multiline="true" />
+			<vscrollbar />
+		</view>
+</class>
+ -->
+ 
+</library>

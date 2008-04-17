@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library>
     
-    <include href="videoobjectaudienceView.lzx" />
-    <include href="videocontaineraudienceView.lzx" />
+    <include href="videoContainerAudience.lzx" />
+    <include href="videoObjectAudience.lzx" />
     
 </library>

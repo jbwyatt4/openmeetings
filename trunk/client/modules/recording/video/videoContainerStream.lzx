@@ -12,17 +12,16 @@
 		
 		<method name="enterRoom" args="object">
 			if( $debug ) Debug.write("videoContainerStream.enterRoom(): ",object);
-			var objRef = new videoObjectPlay(this._videoviewcontent,{clientVars:object,
+			var objRef = new videoObjectPlayBroadcast(this._videoviewcontent,{clientVars:object,
 																		chatpartnername:object.firstname+' '+object.lastname,
 																		uniqueid:object.streamid,
 																		broadcastId:object.broadCastID,
 																		publicSID:object.publicSID,
 																		isremote:true});
-		  	objRef.setIdentifier(object.streamid);
-		  	objRef._chatvideoinner._videoview.setAttribute('visible',true);
 		</method>
 		
 		<method name="setAVOnlyStream" args="userpos,object">		
+			//FIXME: Check if this is still necessary
 		</method>
 		
 		<method name="setAVOnlyStream2" args="userpos,object">
@@ -40,13 +39,11 @@
 			if ($debug) Debug.write("videoContainerStream..startStream() objRef: ",objRef);
 			if (object.avsettings=="a"){
 				objRef.setVideouserProfilePic(object);
-				objRef._chatvideoinner._videoview.playStream(flv);
+				objRef._chatvideoinner._videostream.playStream(flv,0);
 			} else {
-				objRef._chatvideoinner._videoview.playStream(flv);
+				objRef._chatvideoinner._videostream.playStream(flv,0);
 			}
-			
 			objRef.updateAVSettingsSymbol(object);	  	
-			return objRef.getVideoReference();
 		</method>	
 	
 		<method name="disconnectclient" args="publicSID">
@@ -55,9 +52,7 @@
 			if (vidRef!=null){
 				vidRef.setAttribute('isassigned',false);
 				vidRef._chatvideoinner.r.setResourceNumber(5);
-				vidRef._chatvideoinner._videoview.stop();
 				vidRef.resetValues();
-				vidRef._chatvideoinner._videoview.setAttribute('visible',false);
 				vidRef.destroy();
 			}
 		</method>	
@@ -65,7 +60,7 @@
 		<method name="stopVideos">
 			if( $debug ) Debug.write("videoContainerStream.stopVideos()");
 			for (var eg in this._videoviewcontent.subviews){
-				this._videoviewcontent.subviews[eg]._videoview.stop();
+				this._videoviewcontent.subviews[eg].resetValues();
 			}		
 		</method>
 		

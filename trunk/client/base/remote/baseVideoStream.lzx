@@ -6,9 +6,16 @@
 
 <class name="baseVideoStream" extends="baseVideoView">
 	
+	<!--- the NetStream Object
+              @keywords final-->
 	<attribute name="_ns" value="null" />
+	
+	<!--- This value does indicate if this stream play or broadcasts
+              @keywords readonly -->
 	<attribute name="mode" value="play" type="string" />
 	
+	<!--- This is the current buffer used, in Live Streaming this MUST be 0
+              @keywords readonly -->
 	<attribute name="bufferTime" value="0" type="number" />
 	
 	<!--- @keywords private -->
@@ -38,16 +45,20 @@
 		Plays a Video Stream, makes a new Instance of a NetStream, if previous NetStream 
 		is still open it will first close that, used to subscribe to a live-stream
 		@param string streamName the streamname to play
+		@param number delay The time it should seek, for Live-Streams this value should be -1
 	 -->
-	<method name="play" args="streamName">
+	<method name="playStream" args="streamName,delay">
 		if (this._ns!=null){
 			this.stop();
 		}
 		this.mode = "play";
 		this.createStream();
-		//invokes Method in baseVideoView
+		//invokes Method in baseVideoView which shows the stream
 		this.attachVideo(this._ns);
-		this._ns.play(streamname.getText(),-1);
+		//FIXME: Commented out, cause this leads to Buffer-Full/Buffer-Empty Events
+		//after re-syncing the stream
+		//this.setBuffer(0.1);
+		this._ns.play(streamName,delay);
 	</method>
 	
 	<!---
@@ -62,8 +73,13 @@
 		}
 		this.mode = "broadcast";
 		this.createStream();		
-		if (camReference!=null) this._ns.attachVideo(camReference);
+		if (camReference!=null) {
+			this._ns.attachVideo(camReference);
+			//invokes Method in baseVideoView which shows the cam
+			this.attachVideo(camReference);
+		}
 	    if (micReference!=null) this._ns.attachAudio(micReference);
+	    
 	    this._ns.publish(streamName,"live");
 	</method>
 	
@@ -71,14 +87,18 @@
 		Stops playing or broadcasting a Stream and clears the Video-Object
 	 -->
 	<method name="stop">
-		//remove NetStream from Video-Object
-		this.clear();
+		if ($debug) Debug.write("STOP: ",this.mode,this._ns);
 		//Stop NetStream
+		if (this._ns==null) return;
 		if (this.mode == "play") {
 			this._ns.pause();
 			this._ns.close();
+			//remove NetStream from Video-Object
+			this.clear();
 		} else if (this.mode == "broadcast") {
 			this._ns.publish(false);
+			//remove NetStream from Video-Object
+			this.clear();
 			this._ns.close();
 		} else {
 			if ($debug) Debug.warn("Not known Mode: ",this.mode,this);
@@ -93,6 +113,7 @@
 	-->
 	<method name="setBuffer" args="time">
 		if(this._ns!=null){
+			this.bufferTime = time;
 			this._ns.setBufferTime(time); 
 		} else {
 			if ($debug) Debug.warn("setBuffer but no NetStream inited",this);	

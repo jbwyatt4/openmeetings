@@ -5,7 +5,7 @@
     if this value is empty it will try to connect to the 
     domain-name the OpenMeetings-Client has been loading from  
     -->
-<rtmphostlocal></rtmphostlocal>
+<rtmphostlocal>192.168.254.180</rtmphostlocal>
 
 <!--  
 Port to use for the Server

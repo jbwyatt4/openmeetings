@@ -104,11 +104,9 @@
     		} else if (object.avsettings=="a"){
     			myvideocontainer.setVideouserProfilePic(object);
     			if ($debug) Debug.warn("start play");
-    			var videoview = myvideocontainer.initVideoArea();
-    			videoview.subscribeStream(object.broadCastID,-1);	
+    			myvideocontainer._chatvideoinner._videostream.playStream(object.broadCastID,-1);	
     		} else {
-    			var videoview = myvideocontainer.initVideoArea();
-    			videoview.subscribeStream(object.broadCastID,-1);
+    			myvideocontainer._chatvideoinner._videostream.playStream(object.broadCastID,-1);	
     			if ($debug) Debug.warn("start play");
     		}
     		myvideocontainer.updateAVSettingsSymbol(object);
@@ -123,13 +121,13 @@
 		if ($debug) Debug.write("initializeStreams addClientItem: ",connectedSince,isMod,streamid,username,userroom,formatedDate);
 		if (streamid!=canvas.streamid){
             var myvideocontainer = this.getNewVideoObjectByPos(object.publicSID);
-	  		myvideocontainer.parent.parent.clientVars = object;
-	  		myvideocontainer.parent.parent.setAttribute('chatpartnername',object.firstname+' '+object.lastname);
+	  		myvideocontainer.clientVars = object;
+	  		myvideocontainer.setAttribute('chatpartnername',object.firstname+' '+object.lastname);
 	  		if ($debug) Debug.write("addClientItem avsettings: ",object.avsettings);
     		if (object.avsettings=="n" || object.avsettings=="a"){
-    			myvideocontainer.parent.parent.setVideouserProfilePic(object);
+    			myvideocontainer.setVideouserProfilePic(object);
     		}
-    		myvideocontainer.parent.parent.updateAVSettingsSymbol(object);
+    		myvideocontainer.updateAVSettingsSymbol(object);
 		}
 		]]>
 	</method>
@@ -140,8 +138,7 @@
 			var obj = this.getVideoObjectByPublicSID(publicSID);
 			//if ($debug) Debug.write("startStream obj: ",obj);
 			if (obj != null ){
-				var videoview = obj.initVideoArea();
-				videoview.subscribeStream(broadcastId,-1);
+				obj._chatvideoinner._videostream.playStream(broadcastId,-1);
 			}
 		]]>
 	</method>
@@ -208,7 +205,6 @@
 			if ($debug) Debug.write("closeStreamclient obj: ",obj);
 			if (obj != null){
 				obj.resetValues();
-				obj.removeVideoArea();
 			}
 		]]>
 	</method>

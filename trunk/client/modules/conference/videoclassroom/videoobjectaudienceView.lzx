@@ -207,7 +207,7 @@
 	<view x="$once{ parent.width-20 }" y="2" name="showuser" resource="showusercontextau"
 		onmouseover="" onmouseup="">
 		<handler name="onclick">
-			new infoStuffAudience(parent);
+			new remoteUserDetails(parent);
 		</handler>
 		<labelTooltip inittwice="true" labelid="68" />
 	</view>
@@ -225,9 +225,6 @@
 			//new videoInfoStuff(parent);
 			//if ($debug) Debug.write(this);
 			parent.resetValues();
-			parent._chatvideoinner._videoview.cameraRef.setAttribute('show',false);
-			parent._chatvideoinner._videoview.microphoneRef.setAttribute('capturing',false);
-			parent.removeVideoViewBroadCast();
 			new editRecordStream(canvas.main_content._content.inner,{isSyncUpdate:true});	
 		</handler>
 		<labelTooltip labelid="540" />
@@ -235,6 +232,7 @@
     
 </class>
 
+<!--
 <class name="infoStuffAudience"	extends="view" width="$once{ parent.width-2 }" visibility="hidden"
 		height="$once{ parent.height-41 }" y="20" x="1" bgcolor="white">
 		<method name="initUserObject">
@@ -266,5 +264,6 @@
 			<vscrollbar />
 		</view>
 </class>
-
+ -->
+ 
 </library>
