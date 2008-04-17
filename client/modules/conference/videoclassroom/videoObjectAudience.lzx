@@ -104,7 +104,7 @@
 		<handler name="oninit">
 			this.setResourceNumber(5);
 		</handler>
-		<baseVideoStream name="_videostream" x="0" y="0"
+		<baseVideoStreamDevice name="_videostream" x="0" y="0"
 						 width="320" height="240" bgcolor="black" />
 	</view>
 	
