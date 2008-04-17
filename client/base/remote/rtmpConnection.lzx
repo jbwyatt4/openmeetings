@@ -1,7 +1,7 @@
 <library>
 
 
-<class name="devRtmpConnection" extends="node">
+<class name="rtmpConnection" extends="node">
     	
     	<attribute name="debug" value="false" type="boolean" />
     	
@@ -240,9 +240,9 @@
 
             ////Debug.write("call", this, this.parent, this.parent.status);
             var rtmpObject = null;
-            if (this.parent instanceof devRtmpConnection){
+            if (this.parent instanceof rtmpConnection){
         	    rtmpObject = this.parent;
-            } else if(this.remotecontext  instanceof devRtmpConnection){
+            } else if(this.remotecontext  instanceof rtmpConnection){
         	    rtmpObject = this.remotecontext;
             } else {
         	    Debug.warn("ERROR: no remotecontext availible abort call");

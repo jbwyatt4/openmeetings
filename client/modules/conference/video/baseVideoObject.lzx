@@ -3,7 +3,9 @@
 
 
 <!---
-	Base container for a video-view
+	Base container for a client, can be either:
+	a remote-video (subscribing/playing a video)
+	or a self-video (broadcasting a cam/mic)
  -->
     
 <class name="baseVideoObject" extends="view" bgcolor="0x000000" width="132" height="120">
@@ -16,9 +18,7 @@
 	<!--- color of this user, this is the color the user will also use for his chat-color -->
 	<attribute name="usercolor" value="0" type="number" />
 		
-	<!--- current broadcastId
-	<attribute name="broadcastId" value="0" type="string" />
-	 -->
+	<!--- publicSID is a hash-value to identify a user -->
 	<attribute name="publicSID" value="" type="string" />
 	
 	<!--- @keywords private -->
@@ -30,11 +30,11 @@
 	<handler name="onisremote" args="r">
 		this.isremote = r;
 		if (r) {
-			this.message.setAttribute('visibility','hidden');
+			//this.message.setAttribute('visibility','hidden');
 			this.showuser.setAttribute('visibility','visible');
 			this.mute.setAttribute('visibility','visible')
 		} else {
-			this.message.setAttribute('visibility','visible');
+			//this.message.setAttribute('visibility','visible');
 			this.showuser.setAttribute('visibility','hidden');
 			this.mute.setAttribute('visibility','hidden')
 		}
@@ -46,6 +46,7 @@
 	</handler>
 	
 	<method name="updateAVSettingsSymbol" args="rcl">
+		//FIXME: Set a Symbol wether this Client is Audio(only)/Video(only), both or Profile Picture 
 		if ($debug) Debug.warn("updateAVSettingsSymbol TODO ",rcl);
 	</method>
     
@@ -59,22 +60,16 @@
     	}
     	if ($debug) Debug.write("resetValues: ",this.isremote);
     	if (this.isremote){
-    		this._chatvideoinner._videoview.stop();
+    		this._chatvideoinner._videostream.stop();
     	} else {
-    		this._chatvideoinner._videoview.stop();
-    		this._chatvideoinner._videoview.v_output.close();
+    		this._chatvideoinner._videostream.stop();
     	}
     </method>
-    
-    <!--- @keywords private -->
-    <method name="setVideouserProfilePic" args="value">
-    	if ($debug) Debug.write("### setVideouserProfilePic ",value);
-    	new videoUserProfilePic(this._chatvideoinner,{name:'userProfilePic',value:value});
-    	this.showUserProfilePic = true;
-    </method>
 	
-	<view name="_innertop" width="130" height="18" x="1" y="1" bgcolor="$once{ canvas.basebgcolorizer }">
-  		<text text="${ parent.parent.chatpartnername }" width="166" fgcolor="white"
+	<view name="_innertop" width="$once{ parent.width-2 }" 
+		  height="18" x="1" y="1" bgcolor="$once{ canvas.basebgcolorizer }">
+  		<text text="${ parent.parent.chatpartnername }" 
+  			  width="$once{ parent.width-2 }" fgcolor="white"
   			fontsize="9" />
 	</view>	
 

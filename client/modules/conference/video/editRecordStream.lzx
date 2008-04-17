@@ -102,42 +102,39 @@
     		var valCam = this.chosenCam;
 			var valMic = this.chosenMic;
 			var settings = this.chosenSetting;
-			this.myvideocontainer.initVideoViewBroadCast();
-			var videoview = this.myvideocontainer._chatvideoinner._videoview;
+			var videoview = this.myvideocontainer._chatvideoinner._videostream;
 	    	if ($debug) Debug.write("this.myvideocontainer: ",this.myvideocontainer);
 	    	if ($debug) Debug.write(valCam,valMic,settings);
-	        videoview.cameraRef.setAttribute('deviceindex',valCam);
-	        videoview.microphoneRef.setAttribute('deviceindex',valMic);
 			this.myvideocontainer.setAttribute('isremote',false);
 			
-			//camera.setMode(width, height, fps[, favorsize])
-			videoview.cameraRef.setMode(this.myvideocontainer.width,this.myvideocontainer.height,12);
-			//camera.setQuality(bandwidth, picturequality)
-			if ($debug) Debug.write("this.myvideocontainer.cameraRef.bandwidth: ",videoview.cameraRef.bandwidth);
-			videoview.cameraRef.setQuality(videoview.cameraRef.bandwidth,0.9);
+			var _micro = Microphone.get(valMic);
+			var _camera = Camera.get(valCam);
+			if ($debug) Debug.write("_camera.setMode: ",videoview.width,videoview.height,30,true);
+			_camera.setMode(videoview.width,videoview.height,30,true);
+			
 			//Microphone.set
 			if (canvas.vaquality=="best") {
-				videoview.microphoneRef.setRate(44);
+				_micro.setRate(44);
+				if ($debug) Debug.write("_camera.setQuality BEST: ",32768,75);
+				_camera.setQuality(32768,75);
 			} else {
-				videoview.microphoneRef.setRate(22);
+				_micro.setRate(22);
+				if ($debug) Debug.write("_camera.setQuality NORMAL: ",16384,75);
+				_camera.setQuality(16384,75);
 			}
 			
 			//Microphone setUseEchoSupression(bool)
-		    videoview.microphoneRef.setUseEchoSupression(true);
-			videoview.v_output.setBufferTime(0);
+		    _micro.setUseEchoSuppression(true);
+
 	    	switch (settings){
 	    		case "av":
-	    			videoview.cameraRef.setAttribute('show',true);
-	    			videoview.microphoneRef.setAttribute('capturing',true);
-	    			videoview.v_output.broadcast(this.currentClient.broadCastID,videoview.cameraRef,videoview.microphoneRef);
+	    			videoview.broadcast(this.currentClient.broadCastID,_camera,_micro);
 	    			break;
 	    		case "a":
-	    			videoview.microphoneRef.setAttribute('capturing',true);
-	    			videoview.v_output.broadcast(this.currentClient.broadCastID,null,videoview.microphoneRef);
+	    			videoview.broadcast(this.currentClient.broadCastID,null,_micro);
 	    			break;	 
 	    		case "v":
-	    			videoview.cameraRef.setAttribute('show',true);
-	    			videoview.v_output.broadcast(this.currentClient.broadCastID,videoview.cameraRef,null);
+	    			videoview.broadcast(this.currentClient.broadCastID,_camera,null);
 	    			break;	
 	    		case "n":
 	    			if ($debug) Debug.write("Do not Publish A/V");

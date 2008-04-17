@@ -19,37 +19,29 @@
 			if( $debug ) Debug.write("videoEventContainerStream.startStream(): ",flv,object);
 		  	this.subviews[0].clientVars = object;
 		  	this.subviews[0].setAttribute('chatpartnername',object.firstname+' '+object.lastname);
-		  	this.subviews[0].setAttribute('uniqueid',flv);
-		  	this.subviews[0].setAttribute('isremote',true);
-		  	this.subviews[0]._chatvideoinner._videoview.setAttribute('visible',true);
-		  	
 	  		if (object.avsettings=="n"){
 				this.subviews[0].setVideouserProfilePic(object);
 			} else if (object.avsettings=="a"){
 				this.subviews[0].setVideouserProfilePic(object);
 				if( $debug ) Debug.warn("videoEventContainerStream.startStream() start play");
-				this.subviews[0]._chatvideoinner._videoview.playStream(flv);
+				this.subviews[0]._chatvideoinner._videostream.playStream(flv,0);
 			} else {
-				this.subviews[0]._chatvideoinner._videoview.playStream(flv);
+				this.subviews[0]._chatvideoinner._videostream.playStream(flv,0);
 			}	  	
-			
-			return this.subviews[0].getVideoReference();
 		</method>
 	
 		<method name="disconnectclient" >
 			////Debug.write("disconnectclient: ",searchid,userpos);
 			if (this.subviews.length!=0){
-				this.subviews[0].setAttribute('isassigned',false);
 				this.subviews[0]._chatvideoinner.setResourceNumber(5);
 				this.subviews[0].resetValues();
-				this.subviews[0]._chatvideoinner._videoview.setAttribute('visible',false);
 			}
 		</method>	
 		
 		<method name="stopVideos">
-			this._video1._chatvideoinner._videoview.stop();
+			this.subviews[0].resetValues();
 		</method>	
 	
-		<videoObjectAudiencePlay name="_video1" x="0" y="0" />
+		<videoObjectAudience name="_video1" x="0" y="0" />
 	</class>
 </library>
