@@ -173,6 +173,10 @@
 	 -->
 	<method name="getNewVideoObjectByPos" args="publicSID">
 		<![CDATA[
+			var obj = this.getVideoObjectByPublicSID(publicSID);
+			if (obj!=null){
+				return obj;
+			}
 			return new videoObjectPlayBroadcast(this._videoviewcontent,{publicSID:publicSID});
 		]]>
 	</method>
