@@ -143,6 +143,18 @@ these properties will be overwritten by config.xml -->
 <attribute name="salutationsInitValues" value="null" />
 <attribute name="roomTypesInitValues" value="null" />
 
+<!--- Audio-Video Quality Settings
+	overwritten by values from the config.xml 
+ -->
+<attribute name="framesPerSecond" value="30" type="number" />
+<attribute name="bandwidthNeededNormal" value="16384" type="number" />
+<attribute name="bandwidthNeededBest" value="32768" type="number" />
+<attribute name="camQualityNormal" value="75" type="number" />
+<attribute name="camQualityBest" value="75" type="number" />
+<attribute name="microphoneRateNormal" value="22" type="number" /> 
+<attribute name="microphoneRateBest" value="44" type="number" /> 
+		
+
 <!--- Username of current user -->
 <attribute name="currentusename" value="defaultname" type="string" />
 <attribute name="user_id" value="0" type="number" />

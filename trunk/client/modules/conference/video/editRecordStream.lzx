@@ -109,18 +109,18 @@
 			
 			var _micro = Microphone.get(valMic);
 			var _camera = Camera.get(valCam);
-			if ($debug) Debug.write("_camera.setMode: ",videoview.width,videoview.height,30,true);
-			_camera.setMode(videoview.width,videoview.height,30,true);
+			if ($debug) Debug.write("_camera.setMode: ",videoview.width,videoview.height,canvas.framesPerSecond,true);
+			_camera.setMode(videoview.width,videoview.height,canvas.framesPerSecond,true);
 			
 			//Microphone.set
 			if (canvas.vaquality=="best") {
-				_micro.setRate(44);
-				if ($debug) Debug.write("_camera.setQuality BEST: ",32768,75);
-				_camera.setQuality(32768,75);
+				_micro.setRate(canvas.microphoneRateBest);
+				if ($debug) Debug.write("_camera.setQuality BEST: ",canvas.bandwidthNeededBest,canvas.camQualityBest);
+				_camera.setQuality(canvas.bandwidthNeededBest,canvas.camQualityBest);
 			} else {
-				_micro.setRate(22);
-				if ($debug) Debug.write("_camera.setQuality NORMAL: ",16384,75);
-				_camera.setQuality(16384,75);
+				_micro.setRate(canvas.microphoneRateNormal);
+				if ($debug) Debug.write("_camera.setQuality NORMAL: ",canvas.bandwidthNeededNormal,canvas.camQualityNormal);
+				_camera.setQuality(canvas.bandwidthNeededNormal,canvas.camQualityNormal);
 			}
 			
 			//Microphone setUseEchoSupression(bool)

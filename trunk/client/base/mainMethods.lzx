@@ -28,6 +28,16 @@
 		this.setAttribute('showWindowEffect',canvas.myConfigSet.getPointer().xpathQuery('config/showWindowEffect/text()'));
 		this.setAttribute('firstdayinweek',canvas.myConfigSet.getPointer().xpathQuery('config/firstdayinweek/text()'));
 	
+		//Audio-Video-Settings
+		this.setAttribute('framesPerSecond',Number(canvas.myConfigSet.getPointer().xpathQuery('config/framesPerSecond/text()')));  
+		this.setAttribute('bandwidthNeededNormal',Number(canvas.myConfigSet.getPointer().xpathQuery('config/bandwidthNeededNormal/text()')));  
+		this.setAttribute('bandwidthNeededBest',Number(canvas.myConfigSet.getPointer().xpathQuery('config/bandwidthNeededBest/text()')));  
+		this.setAttribute('camQualityNormal',Number(canvas.myConfigSet.getPointer().xpathQuery('config/camQualityNormal/text()')));  
+		this.setAttribute('camQualityBest',Number(canvas.myConfigSet.getPointer().xpathQuery('config/camQualityBest/text()')));  
+		this.setAttribute('microphoneRateNormal',Number(canvas.myConfigSet.getPointer().xpathQuery('config/microphoneRateNormal/text()')));  
+		this.setAttribute('microphoneRateBest',Number(canvas.myConfigSet.getPointer().xpathQuery('config/microphoneRateBest/text()')));  
+		
+		
 		mainBaseText.setText(canvas.currentappname);
 		mainBaseText.setShadow();
 		mainBaseTextLabel.setAttribute('text',canvas.currentappnameurl);  

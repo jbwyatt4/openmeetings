@@ -10,7 +10,7 @@
 					   
 <class name="videoObjectPlayBroadcast" extends="baseVideoObject" isremote="true">
 	
-    <!--- @keywords private -->
+    <!--- sets the Profile Picture -->
     <method name="setVideouserProfilePic" args="value">
     	if ($debug) Debug.write("### setVideouserProfilePic ",value);
     	new videoUserProfilePic(this._chatvideoinner,{name:'userProfilePic',value:value});
