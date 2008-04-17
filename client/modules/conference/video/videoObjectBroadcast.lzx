@@ -52,6 +52,13 @@
  
 <class name="videoObjectBroadcast" extends="baseVideoObject" isremote="false">
 	
+    <!--- sets the Profile Picture -->
+    <method name="setVideouserProfilePic" args="value">
+    	if ($debug) Debug.write("### setVideouserProfilePic ",value);
+    	new videoUserProfilePic(this._chatvideoinner,{name:'userProfilePic',value:value});
+    	this.showUserProfilePic = true;
+    </method>	
+	
 	<view name="_chatvideoinner" x="1" y="20" width="130" height="100" >
 		
 		<view name="r" resource="chatbgitem" x="1" y="2" stretches="both" 

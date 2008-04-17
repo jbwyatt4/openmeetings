@@ -50,8 +50,8 @@ function measureLine(){
     var firstSpaceIndex = 0;
     var isFirstWord = true;
 
-    if ($debug) Debug.write("FUNC/chat Message: ", textFieldtext);
-    if ($debug) Debug.write("FUNC/length of chat Message: ", remainingLength);
+    //if ($debug) Debug.write("FUNC/chat Message: ", textFieldtext);
+    //if ($debug) Debug.write("FUNC/length of chat Message: ", remainingLength);
 
     while (remainingLength > 0) {
         testTxt = "";
@@ -60,13 +60,13 @@ function measureLine(){
         metrics = myTextFormat.getTextExtent(textFieldtext2, 100000);
         isFirstWord = true;
         
-        if ($debug) Debug.write("size of the current part: ", metrics.width);
+        //if ($debug) Debug.write("size of the current part: ", metrics.width);
         do {
             firstSpaceIndex = textFieldtext2.indexOf(" ");
             testTxt2 = testTxt;
 
             if (firstSpaceIndex != -1) {
-                if ($debug) Debug.write("the first space is at position: ", firstSpaceIndex);
+                //if ($debug) Debug.write("the first space is at position: ", firstSpaceIndex);
                 if (isFirstWord) {
                     testTxt = textFieldtext2.slice(startIndex, firstSpaceIndex);
                     isFirstWord = false;
@@ -77,7 +77,7 @@ function measureLine(){
                 metrics = myTextFormat.getTextExtent(testTxt, 100000);
             } else {
                 // this is the last word
-                if ($debug) Debug.write("this is the last word!");
+                //if ($debug) Debug.write("this is the last word!");
                 testTxt = testTxt + " " + textFieldtext2;
                 metrics = myTextFormat.getTextExtent(testTxt, 100000);
                 if (isFirstWord && metrics.width < maxsize) {
@@ -94,7 +94,7 @@ function measureLine(){
 
         if (testTxt2.length == 0) {
             // the first word is already too long
-            if ($debug) Debug.write("the first word is already too long!");
+            //if ($debug) Debug.write("the first word is already too long!");
             testTxt = "";
             textFieldtext2 = textFieldtext;
             metrics = myTextFormat.getTextExtent(testTxt, 100000);
@@ -114,7 +114,7 @@ function measureLine(){
         metrics2 = myTextFormat.getTextExtent(textObject[currentLine]["text"], 100000);
         textObject[currentLine]["lineWidth"] = metrics2.width;
         currentLine += 1;
-        if ($debug) Debug.write("new line: ", textObject[currentLine]["text"]);
+        //if ($debug) Debug.write("new line: ", textObject[currentLine]["text"]);
                
         textFieldtext = textFieldtext.slice(testTxt2.length, textFieldtext.length)
         if (textFieldtext.indexOf(" ") == 0) {
@@ -122,7 +122,7 @@ function measureLine(){
         }
         remainingLength = textFieldtext.length;
 
-        if ($debug) Debug.write("remaining text: ", textFieldtext);
+        //if ($debug) Debug.write("remaining text: ", textFieldtext);
     }
 }
 
