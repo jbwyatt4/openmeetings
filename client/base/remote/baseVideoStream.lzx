@@ -7,7 +7,7 @@
 <class name="baseVideoStream" extends="baseVideoView">
 	
 	<!--- the NetStream Object
-              @keywords final-->
+              @keywords final -->
 	<attribute name="_ns" value="null" />
 	
 	<!--- This value does indicate if this stream play or broadcasts
@@ -25,6 +25,13 @@
 	<!--- This is a reference to the current camara, only set if broadcasting
               @keywords readonly -->
 	<attribute name="camera" value="null" />
+		
+	<!--- Reference To the Sound Object
+		@keywords final -->
+	<attribute name="soundRef" value="null" />
+	<!--- Reference To the Sound MovieClip
+		@keywords final -->
+	<attribute name="soundRefMC" value="null" />
 	
 	<!--- @keywords private -->
 	<method name="createStream">
@@ -56,17 +63,26 @@
 		@param number delay The time it should seek, for Live-Streams this value should be -1
 	 -->
 	<method name="playStream" args="streamName,delay">
-		if (this._ns!=null){
-			this.stop();
-		}
-		this.mode = "play";
-		this.createStream();
-		//invokes Method in baseVideoView which shows the stream
-		this.attachVideo(this._ns);
-		//FIXME: Commented out, cause this leads to Buffer-Full/Buffer-Empty Events
-		//after re-syncing the stream
-		//this.setBuffer(0.1);
-		this._ns.play(streamName,delay);
+		<![CDATA[
+			if (this._ns!=null){
+				this.stop();
+			}
+			this.mode = "play";
+			this.createStream();
+			//invokes Method in baseVideoView which shows the stream
+			this.attachVideo(this._ns);
+			//FIXME: Commented out, cause this leads to Buffer-Full/Buffer-Empty Events
+			//after re-syncing the stream
+			//this.setBuffer(0.1);		
+			this._ns.play(streamName,delay);
+			
+			//create Sound Reference
+			var t = _root.getNextHighestDepth();
+			_root.createEmptyMovieClip("vSound"+t,t);
+			this.soundRefMC = _root["vSound"+t];
+			this.soundRefMC.attachAudio(this._ns);
+			this.soundRef = new Sound(this.soundRefMC);
+		]]>
 	</method>
 	
 	<!---
@@ -105,6 +121,8 @@
 		this.camera = null;
 		this.micro = null;
 		if (this.mode == "play") {
+			this.soundRefMC.attachAudio(null);
+			this.soundRef = null;
 			this._ns.pause();
 			this._ns.close();
 			//remove NetStream from Video-Object
@@ -133,6 +151,14 @@
 			if ($debug) Debug.warn("setBuffer but no NetStream inited",this);	
 		}		
 	</method>
+	
+	<!--- sets the Volume of the VideoStream
+		@param number volume Number between 0 and 100
+	 -->
+    <method name="setVolume" args="volume">
+        if ($debug) Debug.write(this.soundRef,volume,this.soundRef.getVolume());
+        this.soundRef.setVolume(volume);
+    </method>	
 	
 </class>
 
