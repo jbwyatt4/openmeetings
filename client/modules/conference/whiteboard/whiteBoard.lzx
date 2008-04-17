@@ -186,6 +186,7 @@
     				   x="$once{ parent.parent.width-210 }" y="2" 
     				   enabled="${  canvas.ismoderator }">
         <handler name="onclick">
+	    _drawarea.setModus('plain');          
             this.parent.checkForApplyScreen();
         </handler>
         <view y="1" x="2" resource="background_screenview_rsc" />

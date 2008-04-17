@@ -20,6 +20,7 @@
 	<handler name="onload">
         this.refObj.layers.push(this);	
         this.refObj.isScreenImageLoading=false;
+	this.sendToBack();
         this.refObj.toggleVisibleScreenSharing();
 	</handler>
 	<handler name="onerror" args="error">
