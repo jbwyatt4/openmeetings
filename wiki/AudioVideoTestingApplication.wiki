@@ -10,7 +10,7 @@
 
 _this application could be extended to test muting, !activityMeter, Simple !VoIP integration and Flix Live (third Party Publishing Tools)_
 
-  * To change the Default Audio-Video Settings in OpenMeetings see: ChangingAudioVideoSettings
+  * To change the Default Audio-Video Settings in !OpenMeetings see: ChangingAudioVideoSettings
 
 = Where to find =
 
