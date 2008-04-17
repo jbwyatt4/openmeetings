@@ -8,7 +8,7 @@
       <title>OpenMeetings</title>
 	<script type="text/javascript" src="<%= request.getContextPath() %>/lps/includes/embed-compressed.js"></script>
 	</head>
-   	<body>
+   	<body onbeforeunload="return 'You will leave the meeting if you continue'">
 	    <script type="text/javascript">
               Lz.swfEmbed({url: 'main.lzx?lzt=swf', bgcolor: '#ffffff', width: '100%', height: '100%', id: 'lzapp', accessible: 'false', wmode: 'transparent'});
             </script>
