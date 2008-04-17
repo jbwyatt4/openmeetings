@@ -18,6 +18,14 @@
               @keywords readonly -->
 	<attribute name="bufferTime" value="0" type="number" />
 	
+	<!--- This is a reference to the current microphone, only set if broadcasting
+              @keywords readonly -->
+	<attribute name="micro" value="null" />
+	
+	<!--- This is a reference to the current camara, only set if broadcasting
+              @keywords readonly -->
+	<attribute name="camera" value="null" />
+	
 	<!--- @keywords private -->
 	<method name="createStream">
 		this._ns =  new NetStream(this._findnc());
@@ -74,11 +82,15 @@
 		this.mode = "broadcast";
 		this.createStream();		
 		if (camReference!=null) {
+			this.setAttribute('camera',camReference);
 			this._ns.attachVideo(camReference);
 			//invokes Method in baseVideoView which shows the cam
 			this.attachVideo(camReference);
 		}
-	    if (micReference!=null) this._ns.attachAudio(micReference);
+	    if (micReference!=null) {
+	    	this.setAttribute('micro',micReference);
+	    	this._ns.attachAudio(micReference);
+	    }
 	    
 	    this._ns.publish(streamName,"live");
 	</method>
@@ -90,6 +102,8 @@
 		if ($debug) Debug.write("STOP: ",this.mode,this._ns);
 		//Stop NetStream
 		if (this._ns==null) return;
+		this.camera = null;
+		this.micro = null;
 		if (this.mode == "play") {
 			this._ns.pause();
 			this._ns.close();

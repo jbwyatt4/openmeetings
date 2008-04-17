@@ -6,49 +6,7 @@
 	contains microphone and camera for broadcasting,
 	this class is used only in Meetings-Modus
  -->
-   
-<!--
-<class name="videoViewBroadCast" extends="devVideoView" x="1" y="2" width="128" height="96" >	
-	<simpleNetStream name="v_output" buffertime="0">
-		<handler name="onstatus" args="info">
-			if ($debug) Debug.write("simplenetstream onstatus",info.code, info);
-		</handler>
-    </simpleNetStream>
-    <devCamera name="cameraRef" show="false" width="128" height="96" fps="22" bandwidth="8192" />
-    <devMicrophone name="microphoneRef" capturing="false">     
-    	<attribute name="isgreater" value="false" type="boolean" />       
-    	<handler name="onlevel">
-    		<![CDATA[
-        		//this.parent.parent.parent._loudness.loudness.setAttribute('text',this.level);
-				if (this.level>canvas.loudnessAcitviation) {
-					if (!this.isgreater) {
-						this.isgreater = true;
-						this.sendNotification();
-					}
-				} else {
-					if (this.isgreater) {
-						this.isgreater = false;
-						this.sendNotification();
-					}
-				}
-    		]]>
-    	</handler>    
-    	<method name="sendNotification">
-    		//Debug.write("Level sendNotification ",this.isgreater);
-	  		parent.objMessage = new Array ();
-	  		parent.objMessage[0] = 'audioActivity';
-	  		parent.objMessage[1] = this.isgreater;
-	  		parent.objMessage[2] = parent.parent.parent.publicSID;
-		  	parent.sendMessage.doCall();
-    	</method>    	
-    </devMicrophone>
-    <attribute name="objMessage" value="null" />
-    <netRemoteCallHib name="sendMessage" funcname="sendMessage" 
-		remotecontext="$once{ canvas.thishib }" showLoading="false" > 
-    	<netparam><method name="getValue"> return parent.parent.objMessage; </method></netparam>
-    </netRemoteCallHib>
-</class>    
- -->
+
  
 <class name="videoObjectBroadcast" extends="baseVideoObject" isremote="false">
 	
@@ -67,8 +25,9 @@
 			this.r.setResourceNumber(5);
 		</handler>
 		
-		<baseVideoStream name="_videostream" mode="broadcast"
+		<baseVideoStreamDevice name="_videostream" mode="broadcast"
 						 x="1" y="2" width="128" height="96" bgcolor="black" />
+
 	</view>
 
 	<view name="_loudness" x="1" width="126" height="18" y="$once{ parent.height-18 }" >
