@@ -2,9 +2,14 @@
     pageEncoding="UTF-8"%>
 <html>
    <head>
+   
+<!-- THIS FILE WILL NOT WORK on the Life System, there is no
+lps/includes/embed-compressed.js
+on the Life System/Distributed Binary
+ -->
       <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
    
-      <link rel="SHORTCUT ICON" href="http://www.laszlosystems.com/favicon.ico">
+      <link rel="SHORTCUT ICON" href="favicon.ico">
       <title>OpenMeetings</title>
 	<script type="text/javascript" src="<%= request.getContextPath() %>/lps/includes/embed-compressed.js"></script>
 	</head>
