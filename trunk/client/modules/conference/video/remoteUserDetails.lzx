@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library>
 
-<class name="videoInfoStuff" extends="view" width="$once{ parent.width-2 }" 
+<class name="remoteUserDetails" extends="view" width="$once{ parent.width-2 }" 
 		height="$once{ parent.height-21 }" y="20" x="1" bgcolor="white">
 		<handler name="oninit">
 			<![CDATA[

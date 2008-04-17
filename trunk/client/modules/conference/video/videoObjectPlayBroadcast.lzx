@@ -39,11 +39,11 @@
 		<attribute name="isload" value="true" type="boolean" />
 		<handler name="onclick">
 			if (this.isload){
-				parent._chatvideoinner._videoview.v_output.setVolume(0);
+				parent._chatvideoinner._videostream.setVolume(0);
 				this.setResourceNumber(2);
 				this.isload = false;
 			} else {
-				parent._chatvideoinner._videoview.v_output.setVolume(100);
+				parent._chatvideoinner._videostream.setVolume(100);
 				this.setResourceNumber(1);
 				this.isload = true;
 			}

@@ -82,6 +82,17 @@
 <class name="videoObjectAudience" extends="baseVideoObject" width="322" height="284" >
 	
 	<attribute name="isAssigned" value="false" type="boolean" />
+	
+	<handler name="onisremote" args="r">
+		this.isremote = r;
+		if (r){
+			this.mute.setAttribute('visibility','visible');
+			this.syncuser.setAttribute('visibility','hidden');
+		} else {
+			this.mute.setAttribute('visibility','hidden');
+			this.syncuser.setAttribute('visibility','visible');
+		}
+	</handler>
 
     <method name="setVideouserProfilePic" args="value">
     	if ($debug) Debug.write("### setVideouserProfilePic ",value);
@@ -117,16 +128,16 @@
 		</view>
 	</view>
 	
-	<view name="mute" x="$once{ parent.width-20 }" y="242" 
+	<view name="mute" x="$once{ parent.width-20 }" y="242" visibility="hidden"
 		onmouseover="" onmouseup="" resource="mute_btn_rsc" >
 		<attribute name="isload" value="true" type="boolean" />
 		<handler name="onclick">
 			if (this.isload){
-				parent._chatvideoinner._videoview.v_output.setVolume(0);
+				parent._chatvideoinner._videostream.setVolume(0);
 				this.setResourceNumber(2);
 				this.isload = false;
 			} else {
-				parent._chatvideoinner._videoview.v_output.setVolume(100);
+				parent._chatvideoinner._videostream.setVolume(100);
 				this.setResourceNumber(1);
 				this.isload = true;
 			}
@@ -149,7 +160,7 @@
 	</simpleLabelButton>
 	
 	
-	<view name="syncuser" x="$once{ parent.width-20 }" y="242"
+	<view name="syncuser" x="$once{ parent.width-20 }" y="242" visibility="hidden"
 		onmouseover="" onmouseup="" resource="resyncuser_rsc">
 		<handler name="onclick">
 			//new videoInfoStuff(parent);
