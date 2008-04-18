@@ -30,31 +30,17 @@ public class GenerateSWF {
 			String pathToSWFTools = Configurationmanagement.getInstance().getConfKey(3,"swftools_path").getConf_value();
 			
 			String runtimeFile = "swfconverter.bat";
-//			String command = "cmd.exe /c start "+current_dir + "jod" + File.separatorChar + runtimeFile + " " 
-//				+ originalFolder + fileNamePure + ".pdf "
-//				+ destinationFolder + fileNamePure+".swf" + " "
-//				+ pathToSWFTools;
-
-			String[] command = new String[7];
-			command[0] = "cmd.exe";
-			command[1] = "/c";
-			command[2] = "start";
-			command[3] = current_dir + "jod" + File.separatorChar + runtimeFile;
-			command[4] = originalFolder + fileNamePure + ".pdf";
-			command[5] = destinationFolder + fileNamePure+".swf";
-			command[6] = pathToSWFTools;
-
+			String command = "cmd.exe /c start "+current_dir + "jod" + File.separatorChar + runtimeFile + " " 
+				+ originalFolder + fileNamePure + ".pdf "
+				+ destinationFolder + fileNamePure+".swf" + " "
+				+ pathToSWFTools;
+			
 			if (System.getProperty("os.name").toUpperCase().indexOf("WINDOWS") == -1) {
 				runtimeFile = "swfconverter.sh";
-//				command = current_dir + "jod" + File.separatorChar + runtimeFile + " " 
-//					+ originalFolder + fileNamePure + ".pdf "
-//					+ destinationFolder + fileNamePure+".swf" + " "
-//					+ pathToSWFTools;
-				command = new String[4];
-				command[0] = current_dir + "jod" + File.separatorChar + runtimeFile;
-				command[1] = originalFolder + fileNamePure + ".pdf";
-				command[2] = destinationFolder + fileNamePure+".swf";
-				command[3] = pathToSWFTools;
+				command = current_dir + "jod" + File.separatorChar + runtimeFile + " " 
+					+ originalFolder + fileNamePure + ".pdf "
+					+ destinationFolder + fileNamePure+".swf" + " "
+					+ pathToSWFTools;
 			}
 			System.out.println("generateSWF command: "+command);
 			
