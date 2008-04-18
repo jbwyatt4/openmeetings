@@ -7,12 +7,17 @@ import java.io.File;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.xmlcrm.app.data.basic.Configurationmanagement;
 import org.xmlcrm.app.data.user.Usermanagement;
 import org.xmlcrm.app.hibernate.beans.user.Users;
 import org.xmlcrm.app.remote.Application;
 
 public class GenerateImage {
+	
+
+	private static final Log log = LogFactory.getLog(GenerateImage.class);
 
 	private static GenerateImage instance;
 
@@ -51,6 +56,9 @@ public class GenerateImage {
 		}
 
 		String destinationFile = working_imgdir + fileName;
+		
+		log.debug("##### convertImage destinationFile: "+destinationFile);
+		
 		HashMap processJPG = this.convertSingleJpg(current_dir, fileFullPath, destinationFile);
 		HashMap processThumb = GenerateThumbs.getInstance().generateThumb("_thumb_", current_dir, destinationFile, 50);
 		
@@ -124,6 +132,8 @@ public class GenerateImage {
 		returnMap.put("process", "convertSingleJpg");
 		try {
 
+			log.debug("##### convertSingleJpg pngconverter: ");
+			
 			String runtimeFile = "pngconverter.bat";
 			if (System.getProperty("os.name").toUpperCase().indexOf("WINDOWS") == -1) {
 				runtimeFile = "pngconverter.sh";
@@ -132,10 +142,33 @@ public class GenerateImage {
 
 			String pathToIMagick = Configurationmanagement.getInstance().getConfKey(3,"imagemagick_path").getConf_value();
 			
+			//This will not work if the path to ImageMagick is in the System PATH, caue then this value needs to be 
+			//blank
+			//TODO: We should fix it that way that both is possible
+//			if(!pathToIMagick.endsWith(File.separator)){
+//				pathToIMagick = pathToIMagick + File.separator;
+//			}
+			
+//			String command = current_dir + "jod" + File.separatorChar
+//					+ runtimeFile + " " + inputFile + " " 
+//					+ outputfile + ".jpg" + " "
+//					+ pathToIMagick;
+			
+			log.debug("##### convertSingleJpg command: "+current_dir + "jod" + File.separatorChar + runtimeFile);
+
+//			String[] command = new String[4];
+//			command[0] = current_dir + "jod" + File.separatorChar + runtimeFile;
+//			command[1] = inputFile;
+//			command[2] = outputfile + ".jpg";
+//			command[3] = pathToIMagick;
+			
 			String command = current_dir + "jod" + File.separatorChar
 					+ runtimeFile + " " + inputFile + " " 
 					+ outputfile + ".jpg" + " "
 					+ pathToIMagick;
+			
+			log.debug("command: "+command);
+					
 			returnMap.put("command", command);
 			Process proc = rt.exec(command);
 			InputStream stderr = proc.getErrorStream();
@@ -149,6 +182,8 @@ public class GenerateImage {
 			int exitVal = proc.waitFor();
 			returnMap.put("exitValue", exitVal);
 
+			log.debug("ERROR: "+error);
+			
 			return returnMap;
 		} catch (Throwable t) {
 			t.printStackTrace();

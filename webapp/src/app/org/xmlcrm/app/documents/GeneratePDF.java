@@ -108,6 +108,8 @@ public class GeneratePDF {
 		returnMap.put("process", "doConvertExec");				
 		try {
 			
+			
+			//TODO: Fix Paths with spaces
 			String runtimeFile = "jodconverter.bat";
 			String command = "cmd.exe /c start "+current_dir + "jod" + File.separatorChar
 				+ runtimeFile + " java " + fileFullPath + " "
