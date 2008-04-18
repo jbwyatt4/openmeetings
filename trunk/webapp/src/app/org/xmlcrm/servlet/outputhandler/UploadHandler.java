@@ -90,6 +90,8 @@ public class UploadHandler extends HttpServlet {
 
 			if (httpServletRequest.getContentLength() > 0) {
 				
+				log.debug("uploading........ ");
+				
 				HashMap<String,HashMap> returnError = new HashMap<String,HashMap>();
 
 				String sid = httpServletRequest.getParameter("sid");
@@ -97,10 +99,15 @@ public class UploadHandler extends HttpServlet {
 					sid = "default";
 				}
 
+				log.debug("uploading........ sid: "+sid);
+				
 				Long users_id = Sessionmanagement.getInstance().checkSession(sid);
 				Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
 
 				if (user_level > 0) {
+					
+					log.debug("uploading........ user_level: "+user_level);
+					
 					String room = httpServletRequest.getParameter("room");
 					if (room == null) {
 						room = "default";
@@ -248,7 +255,7 @@ public class UploadHandler extends HttpServlet {
 							completeName = tempd;
 						}
 						
-						//System.out.println("WRITE FILE TO: "+completeName + newFileSystemExtName);
+						log.debug("##### WRITE FILE TO: "+completeName + newFileSystemExtName);
 
 						FileOutputStream fos = new FileOutputStream(completeName + newFileSystemExtName);
 						byte[] buffer = new byte[1024];
@@ -270,6 +277,9 @@ public class UploadHandler extends HttpServlet {
 							//convert to thumbs, swf and xml-description
 							returnError = GeneratePDF.getInstance().convertPDF(current_dir, newFileSystemName , newFileSystemExtName, roomName, false, completeName);						
 						} else if (isImage) {
+							
+							log.debug("##### isImage! userProfilePic: "+userProfilePic);
+							
 							if (userProfilePic) {
 								//User Profile Update
 								this.deleteUserProfileFiles(current_dir, users_id);
@@ -277,6 +287,7 @@ public class UploadHandler extends HttpServlet {
 					 			returnError = GenerateImage.getInstance().convertImageUserProfile(current_dir, newFileSystemName, newFileSystemExtName, users_id, newFileSystemName, false);
 							} else {
 								//convert it to JPG
+								log.debug("##### convert it to JPG: "+userProfilePic);
 					 			returnError = GenerateImage.getInstance().convertImage(current_dir, 
 														       newFileSystemName, newFileSystemExtName, 
 										roomName,newFileSystemName, false);
