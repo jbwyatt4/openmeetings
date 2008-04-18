@@ -4,8 +4,18 @@
 
 == Red5 Version < or equal 0.6.3 ==
 
-since !OpenMeetings SVN Version r926 and newer
-comment out (meaning remove <!--- --->) this part in $!OpenMeetings-Home/WEB-INF/web.xml
+no need to change Logging in red5-0.6.3.
+You can edit the Logging settings of OpenMeetings in:
+
+$!OpenMeetings-Home/WEB-INF/log4j.properties
+
+(this enables webapp-specific logging, you can change the logging in the log4j.properties of the !OpenMeetings-webapp)
+
+== Red5 Version > 0.6.3 (Latest Trunk) ==
+
+Todo: Issue 323
+
+comment out this part of $!OpenMeetings-Home/WEB-INF/web.xml. Otherwise Red5-0.7 will not start correctly.
 
 {{{
 	<context-param>
@@ -14,24 +24,9 @@ comment out (meaning remove <!--- --->) this part in $!OpenMeetings-Home/WEB-INF
 	</context-param>
 }}}
 
-(this enables webapp-specific logging, you can change the logging in the log4j.properties of the !OpenMeetings-webapp)
+see also:
+http://jira.red5.org/confluence/display/docs/Logging+Setup
 
-*!OpenMeetings Beta7* and versions before simply change the overall debug level to ERROR:
-
-goto: $RED5-HOME/conf/log4j.properties and change 
-{{{
-log4j.rootCategory=DEBUG, CONSOLE
-}}}
-to
-{{{
-log4j.rootCategory=ERROR, CONSOLE
-}}}
-
-this reduces the number of debug-info-logs, in particular hibernate + c3p0 throw thousands of log statements.
-
-== Red5 Version > 0.6.3 (Latest Trunk) ==
-
-Todo: Issue 323
 
 == !OpenLaszlo Client Log ==
 
