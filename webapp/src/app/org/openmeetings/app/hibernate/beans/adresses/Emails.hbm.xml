@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+  <class table="emails" lazy="false" name="org.openmeetings.app.hibernate.beans.adresses.Emails">
+    <id column="mail_id" name="mail_id">
+      <generator class="increment"/>
+    </id>
+    <property name="comment" type="string" column="comment"/>
+    <property name="email" type="string" column="email"/>
+    <property name="starttime" type="java.util.Date" column="startdate"/>
+    <property name="updatetime" type="java.util.Date" column="updatedate"/>
+    <property name="deleted" type="string" column="deleted"/>
+  </class>
+</hibernate-mapping>
