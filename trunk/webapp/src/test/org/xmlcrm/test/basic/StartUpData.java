@@ -1,13 +1,13 @@
-package org.xmlcrm.test.basic;
+package org.openmeetings.test.basic;
 
-import org.xmlcrm.app.data.basic.Configurationmanagement;
-import org.xmlcrm.app.data.basic.Fieldmanagment;
-import org.xmlcrm.app.data.basic.Languagemanagement;
-import org.xmlcrm.app.data.basic.Navimanagement;
-import org.xmlcrm.app.data.user.Organisationmanagement;
-import org.xmlcrm.app.data.user.Statemanagement;
-import org.xmlcrm.app.data.user.Salutationmanagement;
-import org.xmlcrm.app.data.user.Usermanagement;
+import org.openmeetings.app.data.basic.Configurationmanagement;
+import org.openmeetings.app.data.basic.Fieldmanagment;
+import org.openmeetings.app.data.basic.Languagemanagement;
+import org.openmeetings.app.data.basic.Navimanagement;
+import org.openmeetings.app.data.user.Organisationmanagement;
+import org.openmeetings.app.data.user.Statemanagement;
+import org.openmeetings.app.data.user.Salutationmanagement;
+import org.openmeetings.app.data.user.Usermanagement;
 
 import junit.framework.TestCase;
 

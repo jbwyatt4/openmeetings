@@ -1,4 +1,4 @@
-package org.xmlcrm.utils.mail;
+package org.openmeetings.utils.mail;
 
 import java.io.*;
 import javax.activation.*;

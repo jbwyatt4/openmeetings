@@ -1,4 +1,4 @@
-package org.xmlcrm.app.remote;
+package org.openmeetings.app.remote;
 
 
 import org.apache.commons.logging.Log;

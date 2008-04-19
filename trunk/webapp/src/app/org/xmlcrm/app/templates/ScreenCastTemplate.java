@@ -1,4 +1,4 @@
-package org.xmlcrm.app.templates;
+package org.openmeetings.app.templates;
 
 import java.io.StringWriter;
 
@@ -6,7 +6,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.Velocity;
-import org.xmlcrm.app.data.basic.Configurationmanagement;
+import org.openmeetings.app.data.basic.Configurationmanagement;
 
 public class ScreenCastTemplate extends VelocityLoader{
 	

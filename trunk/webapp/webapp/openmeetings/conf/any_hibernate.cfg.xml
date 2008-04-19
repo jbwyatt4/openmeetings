@@ -43,35 +43,35 @@
 		<property name="c3p0.timeout">3600</property>
 
 		<!-- mapping files -->
-		<mapping resource="org/xmlcrm/app/hibernate/beans/adresses/Adresses.hbm.xml"/>
-		<mapping resource="org/xmlcrm/app/hibernate/beans/adresses/Adresses_Emails.hbm.xml"/>
-		<mapping resource="org/xmlcrm/app/hibernate/beans/adresses/Adresses_Phones.hbm.xml"/>
-		<mapping resource="org/xmlcrm/app/hibernate/beans/adresses/Emails.hbm.xml"/>
-		<mapping resource="org/xmlcrm/app/hibernate/beans/adresses/Phones.hbm.xml"/>
-		<mapping resource="org/xmlcrm/app/hibernate/beans/adresses/States.hbm.xml"/>
-		<mapping resource="org/xmlcrm/app/hibernate/beans/basic/Configuration.hbm.xml"/>
-		<mapping resource="org/xmlcrm/app/hibernate/beans/basic/ErrorType.hbm.xml"/>
-		<mapping resource="org/xmlcrm/app/hibernate/beans/basic/ErrorValues.hbm.xml"/>
-		<mapping resource="org/xmlcrm/app/hibernate/beans/basic/Naviglobal.hbm.xml"/>
-		<mapping resource="org/xmlcrm/app/hibernate/beans/basic/Navimain.hbm.xml"/>
-		<mapping resource="org/xmlcrm/app/hibernate/beans/basic/Navisub.hbm.xml"/>
-		<mapping resource="org/xmlcrm/app/hibernate/beans/basic/Sessiondata.hbm.xml"/>
-		<mapping resource="org/xmlcrm/app/hibernate/beans/domain/Organisation.hbm.xml"/>
-		<mapping resource="org/xmlcrm/app/hibernate/beans/domain/Organisation_Users.hbm.xml"/>
-		<mapping resource="org/xmlcrm/app/hibernate/beans/invitation/Invitations.hbm.xml"/>
-		<mapping resource="org/xmlcrm/app/hibernate/beans/lang/FieldLanguage.hbm.xml"/>
-		<mapping resource="org/xmlcrm/app/hibernate/beans/lang/Fieldlanguagesvalues.hbm.xml"/>
-		<mapping resource="org/xmlcrm/app/hibernate/beans/lang/Fieldvalues.hbm.xml"/>
-		<mapping resource="org/xmlcrm/app/hibernate/beans/recording/Recording.hbm.xml"/>
-		<mapping resource="org/xmlcrm/app/hibernate/beans/rooms/RoomTypes.hbm.xml"/>
-		<mapping resource="org/xmlcrm/app/hibernate/beans/rooms/Rooms.hbm.xml"/>
-		<mapping resource="org/xmlcrm/app/hibernate/beans/rooms/Rooms_Organisation.hbm.xml"/>
-		<mapping resource="org/xmlcrm/app/hibernate/beans/user/Salutations.hbm.xml"/>
-		<mapping resource="org/xmlcrm/app/hibernate/beans/user/Userdata.hbm.xml"/>
-		<mapping resource="org/xmlcrm/app/hibernate/beans/user/Usergroups.hbm.xml"/>
-		<mapping resource="org/xmlcrm/app/hibernate/beans/user/Userlevel.hbm.xml"/>
-		<mapping resource="org/xmlcrm/app/hibernate/beans/user/Users.hbm.xml"/>
-		<mapping resource="org/xmlcrm/app/hibernate/beans/user/Users_Usergroups.hbm.xml"/>
+		<mapping resource="org/openmeetings/app/hibernate/beans/adresses/Adresses.hbm.xml"/>
+		<mapping resource="org/openmeetings/app/hibernate/beans/adresses/Adresses_Emails.hbm.xml"/>
+		<mapping resource="org/openmeetings/app/hibernate/beans/adresses/Adresses_Phones.hbm.xml"/>
+		<mapping resource="org/openmeetings/app/hibernate/beans/adresses/Emails.hbm.xml"/>
+		<mapping resource="org/openmeetings/app/hibernate/beans/adresses/Phones.hbm.xml"/>
+		<mapping resource="org/openmeetings/app/hibernate/beans/adresses/States.hbm.xml"/>
+		<mapping resource="org/openmeetings/app/hibernate/beans/basic/Configuration.hbm.xml"/>
+		<mapping resource="org/openmeetings/app/hibernate/beans/basic/ErrorType.hbm.xml"/>
+		<mapping resource="org/openmeetings/app/hibernate/beans/basic/ErrorValues.hbm.xml"/>
+		<mapping resource="org/openmeetings/app/hibernate/beans/basic/Naviglobal.hbm.xml"/>
+		<mapping resource="org/openmeetings/app/hibernate/beans/basic/Navimain.hbm.xml"/>
+		<mapping resource="org/openmeetings/app/hibernate/beans/basic/Navisub.hbm.xml"/>
+		<mapping resource="org/openmeetings/app/hibernate/beans/basic/Sessiondata.hbm.xml"/>
+		<mapping resource="org/openmeetings/app/hibernate/beans/domain/Organisation.hbm.xml"/>
+		<mapping resource="org/openmeetings/app/hibernate/beans/domain/Organisation_Users.hbm.xml"/>
+		<mapping resource="org/openmeetings/app/hibernate/beans/invitation/Invitations.hbm.xml"/>
+		<mapping resource="org/openmeetings/app/hibernate/beans/lang/FieldLanguage.hbm.xml"/>
+		<mapping resource="org/openmeetings/app/hibernate/beans/lang/Fieldlanguagesvalues.hbm.xml"/>
+		<mapping resource="org/openmeetings/app/hibernate/beans/lang/Fieldvalues.hbm.xml"/>
+		<mapping resource="org/openmeetings/app/hibernate/beans/recording/Recording.hbm.xml"/>
+		<mapping resource="org/openmeetings/app/hibernate/beans/rooms/RoomTypes.hbm.xml"/>
+		<mapping resource="org/openmeetings/app/hibernate/beans/rooms/Rooms.hbm.xml"/>
+		<mapping resource="org/openmeetings/app/hibernate/beans/rooms/Rooms_Organisation.hbm.xml"/>
+		<mapping resource="org/openmeetings/app/hibernate/beans/user/Salutations.hbm.xml"/>
+		<mapping resource="org/openmeetings/app/hibernate/beans/user/Userdata.hbm.xml"/>
+		<mapping resource="org/openmeetings/app/hibernate/beans/user/Usergroups.hbm.xml"/>
+		<mapping resource="org/openmeetings/app/hibernate/beans/user/Userlevel.hbm.xml"/>
+		<mapping resource="org/openmeetings/app/hibernate/beans/user/Users.hbm.xml"/>
+		<mapping resource="org/openmeetings/app/hibernate/beans/user/Users_Usergroups.hbm.xml"/>
 	</session-factory>
 
 </hibernate-configuration>

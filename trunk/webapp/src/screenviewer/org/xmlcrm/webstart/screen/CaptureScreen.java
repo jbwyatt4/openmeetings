@@ -1,4 +1,4 @@
-package org.xmlcrm.webstart.screen;
+package org.openmeetings.webstart.screen;
 
 import java.awt.*;
 import java.io.*;
@@ -12,9 +12,9 @@ import com.sun.image.codec.jpeg.JPEGEncodeParam;
 import com.sun.image.codec.jpeg.JPEGImageEncoder;
 import com.sun.image.codec.jpeg.JPEGCodec;
 
-import org.xmlcrm.webstart.beans.ConnectionBean;
-import org.xmlcrm.webstart.beans.VirtualScreenBean;
-import org.xmlcrm.webstart.gui.StartScreen;
+import org.openmeetings.webstart.beans.ConnectionBean;
+import org.openmeetings.webstart.beans.VirtualScreenBean;
+import org.openmeetings.webstart.gui.StartScreen;
 
 public class CaptureScreen {
 	

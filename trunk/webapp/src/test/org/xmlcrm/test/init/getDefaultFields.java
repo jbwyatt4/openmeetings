@@ -1,12 +1,12 @@
-package org.xmlcrm.test.init;
+package org.openmeetings.test.init;
 
 import java.util.Iterator;
 import java.util.List;
 
-import org.xmlcrm.app.data.basic.Fieldmanagment;
-import org.xmlcrm.app.hibernate.beans.lang.Fieldlanguagesvalues;
-import org.xmlcrm.app.hibernate.beans.lang.Fieldvalues;
-import org.xmlcrm.app.remote.MainService;
+import org.openmeetings.app.data.basic.Fieldmanagment;
+import org.openmeetings.app.hibernate.beans.lang.Fieldlanguagesvalues;
+import org.openmeetings.app.hibernate.beans.lang.Fieldvalues;
+import org.openmeetings.app.remote.MainService;
 
 import junit.framework.TestCase;
 

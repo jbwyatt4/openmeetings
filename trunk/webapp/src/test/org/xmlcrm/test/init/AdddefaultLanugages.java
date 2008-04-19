@@ -1,8 +1,8 @@
-package org.xmlcrm.test.init;
+package org.openmeetings.test.init;
 
 import junit.framework.TestCase;
 
-import org.xmlcrm.app.data.basic.Languagemanagement;
+import org.openmeetings.app.data.basic.Languagemanagement;
 
 public class AdddefaultLanugages extends TestCase {
 

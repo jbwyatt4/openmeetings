@@ -1,4 +1,4 @@
-package org.xmlcrm.app.data.basic;
+package org.openmeetings.app.data.basic;
 
 import java.util.List;
 import java.util.Date;
@@ -9,9 +9,9 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.xmlcrm.app.hibernate.utils.HibernateUtil;
+import org.openmeetings.app.hibernate.utils.HibernateUtil;
 
-import org.xmlcrm.app.hibernate.beans.lang.FieldLanguage;
+import org.openmeetings.app.hibernate.beans.lang.FieldLanguage;
 
 /**
  * 

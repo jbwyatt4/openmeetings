@@ -1,4 +1,4 @@
-package org.xmlcrm.app.outpuhandlers.pdf.pdfobjects;
+package org.openmeetings.app.outpuhandlers.pdf.pdfobjects;
 
 public class pdfobject {
     private String cellname;

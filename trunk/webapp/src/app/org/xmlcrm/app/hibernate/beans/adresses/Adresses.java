@@ -1,4 +1,4 @@
-package org.xmlcrm.app.hibernate.beans.adresses;
+package org.openmeetings.app.hibernate.beans.adresses;
 
 import java.util.Date;
 import java.util.Set;
@@ -96,7 +96,7 @@ public class Adresses {
      *  cascade="none"
      *  column="state_id"
      *  lazy="false"
-     *  class="org.xmlcrm.app.hibernate.beans.adresses.States"
+     *  class="org.openmeetings.app.hibernate.beans.adresses.States"
      *  not-null="false"
      *  outer-join="true"
      */   
@@ -174,7 +174,7 @@ public class Adresses {
      * cascade = "none"
      * lazy="false"
      * @hibernate.one-to-many 
-     * class = "org.xmlcrm.app.hibernate.beans.adresses.Adresses_Emails"
+     * class = "org.openmeetings.app.hibernate.beans.adresses.Adresses_Emails"
      * @hibernate.key 
      * column = "adresses_id"
      */		

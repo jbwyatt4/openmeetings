@@ -1,10 +1,10 @@
-package org.xmlcrm.app.hibernate.beans.user;
+package org.openmeetings.app.hibernate.beans.user;
 
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
-import org.xmlcrm.app.hibernate.beans.adresses.Adresses;
+import org.openmeetings.app.hibernate.beans.adresses.Adresses;
 
 /**
  * 
@@ -55,7 +55,7 @@ public class Users {
     /**
 	 * @hibernate.many-to-one
 	 * column = "adresses_id"
-	 * class = "org.xmlcrm.app.hibernate.beans.adresses.Adresses"
+	 * class = "org.openmeetings.app.hibernate.beans.adresses.Adresses"
 	 * insert="true"
 	 * update="true"
 	 * outer-join="true"
@@ -327,7 +327,7 @@ public class Users {
      * lazy = "false"
      * cascade = "none"
      * @hibernate.one-to-many 
-     * class = "org.xmlcrm.app.hibernate.beans.domain.Organisation_Users"
+     * class = "org.openmeetings.app.hibernate.beans.domain.Organisation_Users"
      * @hibernate.key 
      * column = "user_id"
      */	

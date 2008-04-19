@@ -1,8 +1,8 @@
-package org.xmlcrm.app.conference.videobeans;
+package org.openmeetings.app.conference.videobeans;
 
 import java.util.List;
 import java.util.Date;
-import org.xmlcrm.app.conference.videobeans.RoomClient;
+import org.openmeetings.app.conference.videobeans.RoomClient;
 
 public class RoomPoll {
 	

@@ -1,8 +1,8 @@
-package org.xmlcrm.test.init;
+package org.openmeetings.test.init;
 
 import junit.framework.TestCase;
 
-import org.xmlcrm.app.data.user.Usermanagement;
+import org.openmeetings.app.data.user.Usermanagement;
 
 public class AddUserLevels extends TestCase {
 	

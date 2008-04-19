@@ -1,4 +1,4 @@
-package org.xmlcrm.emotes;
+package org.openmeetings.emotes;
 
 import java.util.LinkedList;
 import java.io.File;

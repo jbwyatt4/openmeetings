@@ -1,4 +1,4 @@
-package org.xmlcrm.utils.stringhandlers;
+package org.openmeetings.utils.stringhandlers;
 
 public class StringComparer {
 	

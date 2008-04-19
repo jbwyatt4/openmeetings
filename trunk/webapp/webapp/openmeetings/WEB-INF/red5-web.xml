@@ -22,72 +22,72 @@
     
 	<!-- Class for the Streaming Handlers -->
 	<bean id="web.handler" 
-	    class="org.xmlcrm.app.remote.Application"
+	    class="org.openmeetings.app.remote.Application"
 		singleton="true" />
 
 	<!-- Class for Methods which can be invoked by the client -->
     <bean id="fileservice.service" 
-	    class="org.xmlcrm.app.remote.ConferenceLibrary" 
+	    class="org.openmeetings.app.remote.ConferenceLibrary" 
 		singleton="true" />
 		
 	<!-- Class for Methods which can be invoked by the client -->
     <bean id="conferenceservice.service" 
-	    class="org.xmlcrm.app.remote.ConferenceService" 
+	    class="org.openmeetings.app.remote.ConferenceService" 
 		singleton="true" />		
 		
 	<!-- Class for Methods which can be invoked by the client -->
     <bean id="userservice.service" 
-	    class="org.xmlcrm.app.remote.UserService" 
+	    class="org.openmeetings.app.remote.UserService" 
 		singleton="true" />		
 
 	<!-- Class for Methods which can be invoked by the client -->
     <bean id="organisationservice.service" 
-	    class="org.xmlcrm.app.remote.OrganisationService" 
+	    class="org.openmeetings.app.remote.OrganisationService" 
 		singleton="true" />		
 		
 	<!-- Class for Methods which can be invoked by the client -->
     <bean id="configservice.service" 
-	    class="org.xmlcrm.app.remote.ConfigurationService" 
+	    class="org.openmeetings.app.remote.ConfigurationService" 
 		singleton="true" />	
 		
 	<!-- Class for Methods which can be invoked by the client -->
     <bean id="errorservice.service" 
-	    class="org.xmlcrm.app.remote.ErrorService" 
+	    class="org.openmeetings.app.remote.ErrorService" 
 		singleton="true" />			
 				
 	<!-- Class for Methods which can be invoked by the client -->
     <bean id="dokeosService.service" 
-	    class="org.xmlcrm.app.remote.RemoteService" 
+	    class="org.openmeetings.app.remote.RemoteService" 
 		singleton="true" />		
 
 	<!-- Class for Methods which can be invoked by the client -->
     <bean id="xmlcrm.service" 
-	    class="org.xmlcrm.app.remote.MainService" 
+	    class="org.openmeetings.app.remote.MainService" 
 		singleton="true" />
 	
 	<!-- Class for Methods which can be invoked by the client -->
     <bean id="issueservice.service" 
-	    class="org.xmlcrm.app.remote.IssueService" 
+	    class="org.openmeetings.app.remote.IssueService" 
 		singleton="true" />		
 	
 	<!-- Class for Methods which can be invoked by the client -->
     <bean id="languageservice.service" 
-	    class="org.xmlcrm.app.remote.LanguageService" 
+	    class="org.openmeetings.app.remote.LanguageService" 
 		singleton="true" />	
 	
 	<!-- Class for Methods which can be invoked by the client -->
     <bean id="chatservice.service" 
-	    class="org.xmlcrm.app.remote.ChatService" 
+	    class="org.openmeetings.app.remote.ChatService" 
 		singleton="true" />	
 	
 	<!-- Class for Methods which can be invoked by the client -->
     <bean id="streamservice.service" 
-	    class="org.xmlcrm.app.remote.StreamService" 
+	    class="org.openmeetings.app.remote.StreamService" 
 		singleton="true" />	
 	
 	<!-- Class for Methods which can be invoked by the client -->
     <bean id="invitationservice.service" 
-	    class="org.xmlcrm.app.remote.InvitationService" 
+	    class="org.openmeetings.app.remote.InvitationService" 
 		singleton="true" />		
 					
 </beans>

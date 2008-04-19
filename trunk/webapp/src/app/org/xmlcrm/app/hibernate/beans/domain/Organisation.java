@@ -1,4 +1,4 @@
-package org.xmlcrm.app.hibernate.beans.domain;
+package org.openmeetings.app.hibernate.beans.domain;
 
 import java.util.Date;
 

@@ -1,4 +1,4 @@
-package org.xmlcrm.utils.math;
+package org.openmeetings.utils.math;
 
 import java.util.Date;
 import java.util.Locale;

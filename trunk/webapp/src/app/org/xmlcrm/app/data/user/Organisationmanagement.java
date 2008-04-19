@@ -1,4 +1,4 @@
-package org.xmlcrm.app.data.user;
+package org.openmeetings.app.data.user;
 
 import java.util.Comparator;
 import java.util.Date;
@@ -20,12 +20,12 @@ import org.hibernate.Transaction;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.ProjectionList;
-import org.xmlcrm.app.data.beans.basic.SearchResult;
-import org.xmlcrm.app.data.basic.AuthLevelmanagement;
-import org.xmlcrm.app.hibernate.beans.domain.Organisation;
-import org.xmlcrm.app.hibernate.beans.domain.Organisation_Users;
-import org.xmlcrm.app.hibernate.beans.user.Users;
-import org.xmlcrm.app.hibernate.utils.HibernateUtil;
+import org.openmeetings.app.data.beans.basic.SearchResult;
+import org.openmeetings.app.data.basic.AuthLevelmanagement;
+import org.openmeetings.app.hibernate.beans.domain.Organisation;
+import org.openmeetings.app.hibernate.beans.domain.Organisation_Users;
+import org.openmeetings.app.hibernate.beans.user.Users;
+import org.openmeetings.app.hibernate.utils.HibernateUtil;
 
 /**
  * 

@@ -1,11 +1,11 @@
-package org.xmlcrm.webstart.screen;
+package org.openmeetings.webstart.screen;
 
 import org.quartz.Job;
 import org.quartz.JobExecutionException;
 import org.quartz.JobExecutionContext;
 
-import org.xmlcrm.webstart.beans.ConnectionBean;
-import org.xmlcrm.webstart.gui.StartScreen;
+import org.openmeetings.webstart.beans.ConnectionBean;
+import org.openmeetings.webstart.gui.StartScreen;
 
 public class ScreenJob implements Job {
 	

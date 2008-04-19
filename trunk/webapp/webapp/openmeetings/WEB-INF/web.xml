@@ -5,7 +5,6 @@
    xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd" 
    version="2.4"> 
 
-	
 	<display-name>Openmeetings</display-name>
 
 	<context-param>
@@ -46,7 +45,7 @@
 	
 	<listener>
 	    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-	</listener>
+	</listener>	
 
     <!-- remove the following servlet tags if you want to disable remoting for this application -->    
         
@@ -57,7 +56,7 @@
 
     <servlet>
     	<servlet-name>DownloadHandler</servlet-name>
-    	<servlet-class>org.xmlcrm.servlet.outputhandler.DownloadHandler</servlet-class>
+    	<servlet-class>org.openmeetings.servlet.outputhandler.DownloadHandler</servlet-class>
     </servlet>
     
     <servlet-mapping>
@@ -67,7 +66,7 @@
 
     <servlet>
     	<servlet-name>Install</servlet-name>
-    	<servlet-class>org.xmlcrm.servlet.outputhandler.Install</servlet-class>
+    	<servlet-class>org.openmeetings.servlet.outputhandler.Install</servlet-class>
     </servlet>
     
     <servlet-mapping>
@@ -82,7 +81,7 @@
     
     <servlet>
     	<servlet-name>UploadHandler</servlet-name>
-    	<servlet-class>org.xmlcrm.servlet.outputhandler.UploadHandler</servlet-class>
+    	<servlet-class>org.openmeetings.servlet.outputhandler.UploadHandler</servlet-class>
     </servlet>
     
     <servlet-mapping>
@@ -92,7 +91,7 @@
 
     <servlet>
     	<servlet-name>ScreenServlet</servlet-name>
-    	<servlet-class>org.xmlcrm.servlet.outputhandler.ScreenServlet</servlet-class>
+    	<servlet-class>org.openmeetings.servlet.outputhandler.ScreenServlet</servlet-class>
     </servlet>
     
     <servlet-mapping>
@@ -102,7 +101,7 @@
 	
     <servlet>
     	<servlet-name>ScreenViewHandler</servlet-name>
-    	<servlet-class>org.xmlcrm.servlet.outputhandler.ScreenViewHandler</servlet-class>
+    	<servlet-class>org.openmeetings.servlet.outputhandler.ScreenViewHandler</servlet-class>
     </servlet>
     
     <servlet-mapping>
@@ -112,7 +111,7 @@
 	
 	<servlet>
     	<servlet-name>ScreenRequestHandler</servlet-name>
-    	<servlet-class>org.xmlcrm.servlet.outputhandler.ScreenRequestHandler</servlet-class>
+    	<servlet-class>org.openmeetings.servlet.outputhandler.ScreenRequestHandler</servlet-class>
     </servlet>
     
     <servlet-mapping>
@@ -122,7 +121,7 @@
 	
 	<servlet>
     	<servlet-name>LangExport</servlet-name>
-    	<servlet-class>org.xmlcrm.servlet.outputhandler.LangExport</servlet-class>
+    	<servlet-class>org.openmeetings.servlet.outputhandler.LangExport</servlet-class>
     </servlet>
     
     <servlet-mapping>
@@ -132,7 +131,7 @@
 	
 	<servlet>
     	<servlet-name>Export</servlet-name>
-    	<servlet-class>org.xmlcrm.servlet.outputhandler.Export</servlet-class>
+    	<servlet-class>org.openmeetings.servlet.outputhandler.Export</servlet-class>
     </servlet>
     
     <servlet-mapping>
@@ -142,13 +141,69 @@
 	
 	<servlet>
     	<servlet-name>Import</servlet-name>
-    	<servlet-class>org.xmlcrm.servlet.outputhandler.Import</servlet-class>
+    	<servlet-class>org.openmeetings.servlet.outputhandler.Import</servlet-class>
     </servlet>
     
     <servlet-mapping>
     	<servlet-name>Import</servlet-name>
     	<url-pattern>/Import</url-pattern>
     </servlet-mapping>
+
+    <!-- Axis Settings -->
+    <servlet>
+        <servlet-name>AxisServlet</servlet-name>
+        <servlet-class>org.apache.axis2.transport.http.AxisServlet</servlet-class>
+        <!--<init-param>-->
+        <!--<param-name>axis2.xml.path</param-name>-->
+        <!--<param-value>/WEB-INF/conf/axis2.xml</param-value>-->
+        <!--<param-name>axis2.xml.url</param-name>-->
+        <!--<param-value>http://localhot/myrepo/axis2.xml</param-value>-->
+        <!--<param-name>axis2.repository.path</param-name>-->
+        <!--<param-value>/WEB-INF</param-value>-->
+        <!--<param-name>axis2.repository.url</param-name>-->
+        <!--<param-value>http://localhot/myrepo</param-value>-->
+        <!--</init-param>-->
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet>
+        <servlet-name>AxisAdminServlet</servlet-name>
+        <servlet-class>
+            org.apache.axis2.transport.http.AxisAdminServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AxisServlet</servlet-name>
+        <url-pattern>/servlet/AxisServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>AxisServlet</servlet-name>
+        <url-pattern>*.jws</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>AxisServlet</servlet-name>
+        <url-pattern>/services/*</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>AxisAdminServlet</servlet-name>
+        <url-pattern>/axis2-admin/*</url-pattern>
+    </servlet-mapping>
+
+    <mime-mapping>
+        <extension>inc</extension>
+        <mime-type>text/plain</mime-type>
+    </mime-mapping>
+
+    <error-page>
+      <error-code>404</error-code>
+      <location>/axis2-web/Error/error404.jsp</location>
+    </error-page>
+
+    <error-page>
+        <error-code>500</error-code>
+        <location>/axis2-web/Error/error500.jsp</location>
+    </error-page>
 		
     <security-constraint>
         <web-resource-collection>

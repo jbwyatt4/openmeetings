@@ -1,4 +1,4 @@
-package org.xmlcrm.app.data.user;
+package org.openmeetings.app.data.user;
 
 import java.util.Date;
 import java.util.List;
@@ -10,8 +10,8 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import org.xmlcrm.app.hibernate.beans.adresses.States;
-import org.xmlcrm.app.hibernate.utils.HibernateUtil;
+import org.openmeetings.app.hibernate.beans.adresses.States;
+import org.openmeetings.app.hibernate.utils.HibernateUtil;
 
 /**
  * 

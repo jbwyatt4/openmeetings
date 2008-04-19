@@ -1,11 +1,11 @@
-package org.xmlcrm.webstart.gui;
+package org.openmeetings.webstart.gui;
 
 import java.awt.Cursor;
 import java.awt.event.MouseEvent;
 
 import javax.swing.event.MouseInputAdapter;
 
-import org.xmlcrm.webstart.beans.VirtualScreenBean;
+import org.openmeetings.webstart.beans.VirtualScreenBean;
 
 public class VirtualScreenHeightMouseListener extends MouseInputAdapter  {
 

@@ -1,4 +1,4 @@
-package org.xmlcrm.app.conference.configutils;
+package org.openmeetings.app.conference.configutils;
 
 import org.red5.server.api.stream.support.SimpleBandwidthConfigure;
 

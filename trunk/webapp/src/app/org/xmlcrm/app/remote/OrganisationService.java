@@ -1,15 +1,15 @@
-package org.xmlcrm.app.remote;
+package org.openmeetings.app.remote;
 
 import java.util.LinkedHashMap;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.xmlcrm.app.data.basic.Sessionmanagement;
-import org.xmlcrm.app.data.beans.basic.SearchResult;
-import org.xmlcrm.app.data.user.Usermanagement;
-import org.xmlcrm.app.data.user.Organisationmanagement;
-import org.xmlcrm.app.hibernate.beans.domain.Organisation;
+import org.openmeetings.app.data.basic.Sessionmanagement;
+import org.openmeetings.app.data.beans.basic.SearchResult;
+import org.openmeetings.app.data.user.Usermanagement;
+import org.openmeetings.app.data.user.Organisationmanagement;
+import org.openmeetings.app.hibernate.beans.domain.Organisation;
 
 /**
  * 

@@ -1,9 +1,9 @@
-package org.xmlcrm.app.hibernate.beans.rooms;
+package org.openmeetings.app.hibernate.beans.rooms;
 
 import java.util.Date;
 import java.util.List;
 
-import org.xmlcrm.app.conference.videobeans.RoomClient;
+import org.openmeetings.app.conference.videobeans.RoomClient;
 
 /**
  * 
@@ -89,7 +89,7 @@ public class Rooms {
      *  cascade="none"
      *  column="roomtypes_id"
      *  lazy="false"
-     *  class="org.xmlcrm.app.hibernate.beans.rooms.RoomTypes"
+     *  class="org.openmeetings.app.hibernate.beans.rooms.RoomTypes"
      *  not-null="false"
      *  outer-join="true"
      */ 

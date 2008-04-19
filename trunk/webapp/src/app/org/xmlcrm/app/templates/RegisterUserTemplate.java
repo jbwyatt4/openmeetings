@@ -1,4 +1,4 @@
-package org.xmlcrm.app.templates;
+package org.openmeetings.app.templates;
 
 import java.io.StringWriter;
 import java.util.Properties;
@@ -12,9 +12,9 @@ import org.apache.velocity.exception.ParseErrorException;
 import org.apache.velocity.exception.MethodInvocationException;
 import org.red5.server.api.IScope;
 import org.red5.server.api.Red5;
-import org.xmlcrm.app.data.basic.Configurationmanagement;
-import org.xmlcrm.app.data.basic.Fieldmanagment;
-import org.xmlcrm.app.hibernate.beans.lang.Fieldlanguagesvalues;
+import org.openmeetings.app.data.basic.Configurationmanagement;
+import org.openmeetings.app.data.basic.Fieldmanagment;
+import org.openmeetings.app.hibernate.beans.lang.Fieldlanguagesvalues;
 
 
 public class RegisterUserTemplate extends VelocityLoader{

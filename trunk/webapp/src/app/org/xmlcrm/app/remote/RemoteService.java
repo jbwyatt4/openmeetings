@@ -1,4 +1,4 @@
-package org.xmlcrm.app.remote;
+package org.openmeetings.app.remote;
 
 import java.util.HashMap;
 import java.util.Date;
@@ -14,12 +14,12 @@ import org.red5.server.api.IConnection;
 //import org.red5.server.api.IScope;
 import org.red5.server.api.Red5;
 import org.red5.server.api.service.IServiceCapableConnection;
-import org.xmlcrm.app.conference.configutils.CustomBandwidth;
+import org.openmeetings.app.conference.configutils.CustomBandwidth;
 
-import org.xmlcrm.app.conference.videobeans.RoomClient;
-import org.xmlcrm.app.conference.videobeans.RoomPoll;
-import org.xmlcrm.app.conference.videobeans.RoomPollAnswers;
-import org.xmlcrm.app.conference.videobeans.PollType;
+import org.openmeetings.app.conference.videobeans.RoomClient;
+import org.openmeetings.app.conference.videobeans.RoomPoll;
+import org.openmeetings.app.conference.videobeans.RoomPollAnswers;
+import org.openmeetings.app.conference.videobeans.PollType;
 
 /**
  * 

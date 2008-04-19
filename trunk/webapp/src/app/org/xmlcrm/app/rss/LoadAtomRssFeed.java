@@ -1,4 +1,4 @@
-package org.xmlcrm.app.rss;
+package org.openmeetings.app.rss;
 
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -11,8 +11,8 @@ import org.dom4j.Document;
 import org.dom4j.Element;
 import org.dom4j.Attribute;
 import org.dom4j.io.SAXReader;
-import org.xmlcrm.app.data.basic.AuthLevelmanagement;
-import org.xmlcrm.app.data.basic.Configurationmanagement;
+import org.openmeetings.app.data.basic.AuthLevelmanagement;
+import org.openmeetings.app.data.basic.Configurationmanagement;
 
 public class LoadAtomRssFeed {
 	

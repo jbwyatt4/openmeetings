@@ -1,4 +1,4 @@
-package org.xmlcrm.app.remote;
+package org.openmeetings.app.remote;
 
 import java.io.File;
 import java.io.FilenameFilter;
@@ -16,13 +16,13 @@ import org.red5.server.api.IScope;
 import org.red5.server.api.Red5;
 
 import org.apache.commons.lang.StringUtils;
-import org.xmlcrm.app.data.basic.AuthLevelmanagement;
-import org.xmlcrm.app.data.basic.Sessionmanagement;
-import org.xmlcrm.app.data.user.Usermanagement;
-import org.xmlcrm.app.documents.LibraryDocumentConverter;
-import org.xmlcrm.app.documents.LibraryWmlLoader;
-import org.xmlcrm.app.documents.LoadLibraryPresentation;
-import org.xmlcrm.app.documents.CreateLibraryPresentation;
+import org.openmeetings.app.data.basic.AuthLevelmanagement;
+import org.openmeetings.app.data.basic.Sessionmanagement;
+import org.openmeetings.app.data.user.Usermanagement;
+import org.openmeetings.app.documents.LibraryDocumentConverter;
+import org.openmeetings.app.documents.LibraryWmlLoader;
+import org.openmeetings.app.documents.LoadLibraryPresentation;
+import org.openmeetings.app.documents.CreateLibraryPresentation;
 
 /**
  * 

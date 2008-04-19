@@ -2,7 +2,7 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-  <class table="users_usergroups" lazy="false" name="org.xmlcrm.app.hibernate.beans.user.Users_Usergroups">
+  <class table="users_usergroups" lazy="false" name="org.openmeetings.app.hibernate.beans.user.Users_Usergroups">
     <id column="users_usergroups_id" name="users_usergroups_id">
       <generator class="increment"/>
     </id>

@@ -1,4 +1,4 @@
-package org.xmlcrm.app.remote;
+package org.openmeetings.app.remote;
 
  
 import java.io.BufferedReader;
@@ -27,14 +27,14 @@ import org.red5.server.api.stream.IPlayItem;
 import org.red5.server.api.stream.IPlaylistSubscriberStream;
 import org.red5.server.api.stream.IStreamAwareScopeHandler;
 import org.red5.server.api.stream.ISubscriberStream;
-import org.xmlcrm.app.conference.configutils.BandwidthConfigFactory;
-import org.xmlcrm.app.conference.configutils.UserConfigFactory;
-import org.xmlcrm.app.quartz.scheduler.QuartzSessionClear;
-import org.xmlcrm.utils.crypt.ManageCryptStyle;
-import org.xmlcrm.utils.stringhandlers.ChatString;
-import org.xmlcrm.app.conference.videobeans.RoomClient;
-import org.xmlcrm.app.data.user.Usermanagement;
-import org.xmlcrm.app.hibernate.beans.user.Users;
+import org.openmeetings.app.conference.configutils.BandwidthConfigFactory;
+import org.openmeetings.app.conference.configutils.UserConfigFactory;
+import org.openmeetings.app.quartz.scheduler.QuartzSessionClear;
+import org.openmeetings.utils.crypt.ManageCryptStyle;
+import org.openmeetings.utils.stringhandlers.ChatString;
+import org.openmeetings.app.conference.videobeans.RoomClient;
+import org.openmeetings.app.data.user.Usermanagement;
+import org.openmeetings.app.hibernate.beans.user.Users;
 
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.XppDriver;

@@ -1,8 +1,8 @@
-package org.xmlcrm.test.library;
+package org.openmeetings.test.library;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.xmlcrm.app.documents.LibraryWmlLoader;
+import org.openmeetings.app.documents.LibraryWmlLoader;
 
 import junit.framework.TestCase;
 

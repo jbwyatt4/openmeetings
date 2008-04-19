@@ -1,8 +1,8 @@
-package org.xmlcrm.app.hibernate.beans.rooms;
+package org.openmeetings.app.hibernate.beans.rooms;
 
 import java.util.Date;
 
-import org.xmlcrm.app.hibernate.beans.domain.Organisation;
+import org.openmeetings.app.hibernate.beans.domain.Organisation;
 
 /**
  * 
@@ -24,7 +24,7 @@ public class Rooms_Organisation {
      *  cascade="none"
      *  column="organisation_id"
      *  lazy="false"
-     *  class="org.xmlcrm.app.hibernate.beans.domain.Organisation"
+     *  class="org.openmeetings.app.hibernate.beans.domain.Organisation"
      *  not-null="false"
      *  outer-join="true"
      */		
@@ -40,7 +40,7 @@ public class Rooms_Organisation {
      *  cascade="none"
      *  column="rooms_id"
      *  lazy="false"
-     *  class="org.xmlcrm.app.hibernate.beans.rooms.Rooms"
+     *  class="org.openmeetings.app.hibernate.beans.rooms.Rooms"
      *  not-null="false"
      *  outer-join="true"
      */	

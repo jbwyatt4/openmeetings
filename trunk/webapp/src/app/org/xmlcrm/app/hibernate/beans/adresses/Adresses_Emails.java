@@ -1,4 +1,4 @@
-package org.xmlcrm.app.hibernate.beans.adresses;
+package org.openmeetings.app.hibernate.beans.adresses;
 
 import java.util.Date;
 
@@ -50,7 +50,7 @@ public class Adresses_Emails {
     /**
 	 * @hibernate.many-to-one
 	 * column = "mail_id"
-	 * class = "org.xmlcrm.app.hibernate.beans.adresses.Emails"
+	 * class = "org.openmeetings.app.hibernate.beans.adresses.Emails"
 	 * insert="true"
 	 * update="true"
 	 * outer-join="true"

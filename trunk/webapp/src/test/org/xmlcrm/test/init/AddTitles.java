@@ -1,8 +1,8 @@
-package org.xmlcrm.test.init;
+package org.openmeetings.test.init;
 
 import junit.framework.TestCase;
 
-import org.xmlcrm.app.data.user.Salutationmanagement;
+import org.openmeetings.app.data.user.Salutationmanagement;
 
 public class AddTitles extends TestCase {
 	

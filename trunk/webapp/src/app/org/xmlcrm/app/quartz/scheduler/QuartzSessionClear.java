@@ -1,11 +1,11 @@
-package org.xmlcrm.app.quartz.scheduler;
+package org.openmeetings.app.quartz.scheduler;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import org.red5.server.api.scheduling.IScheduledJob;
 import org.red5.server.api.scheduling.ISchedulingService;
-import org.xmlcrm.app.data.basic.Sessionmanagement;
+import org.openmeetings.app.data.basic.Sessionmanagement;
  
 public class QuartzSessionClear implements IScheduledJob {
 

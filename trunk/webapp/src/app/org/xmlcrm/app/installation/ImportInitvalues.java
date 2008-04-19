@@ -1,4 +1,4 @@
-package org.xmlcrm.app.installation;
+package org.openmeetings.app.installation;
 
 import java.util.List;
 import java.util.LinkedList;
@@ -10,16 +10,16 @@ import org.apache.commons.logging.LogFactory;
 import org.dom4j.io.SAXReader;
 import org.dom4j.Element;
 import org.dom4j.Document;
-import org.xmlcrm.app.data.basic.Configurationmanagement;
-import org.xmlcrm.app.data.basic.ErrorManagement;
-import org.xmlcrm.app.data.basic.Fieldmanagment;
-import org.xmlcrm.app.data.basic.Languagemanagement;
-import org.xmlcrm.app.data.basic.Navimanagement;
-import org.xmlcrm.app.data.conference.Roommanagement;
-import org.xmlcrm.app.data.user.Organisationmanagement;
-import org.xmlcrm.app.data.user.Salutationmanagement;
-import org.xmlcrm.app.data.user.Statemanagement;
-import org.xmlcrm.app.data.user.Usermanagement;
+import org.openmeetings.app.data.basic.Configurationmanagement;
+import org.openmeetings.app.data.basic.ErrorManagement;
+import org.openmeetings.app.data.basic.Fieldmanagment;
+import org.openmeetings.app.data.basic.Languagemanagement;
+import org.openmeetings.app.data.basic.Navimanagement;
+import org.openmeetings.app.data.conference.Roommanagement;
+import org.openmeetings.app.data.user.Organisationmanagement;
+import org.openmeetings.app.data.user.Salutationmanagement;
+import org.openmeetings.app.data.user.Statemanagement;
+import org.openmeetings.app.data.user.Usermanagement;
 
 public class ImportInitvalues {
 

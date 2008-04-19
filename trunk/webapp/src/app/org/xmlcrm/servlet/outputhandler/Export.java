@@ -1,4 +1,4 @@
-package org.xmlcrm.servlet.outputhandler;
+package org.openmeetings.servlet.outputhandler;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -18,16 +18,16 @@ import org.dom4j.DocumentHelper;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
 
-import org.xmlcrm.utils.math.CalendarPatterns;
+import org.openmeetings.utils.math.CalendarPatterns;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.xmlcrm.app.data.basic.Sessionmanagement;
-import org.xmlcrm.app.data.user.Usermanagement;
-import org.xmlcrm.app.data.user.Organisationmanagement;
-import org.xmlcrm.app.hibernate.beans.adresses.Adresses_Emails;
-import org.xmlcrm.app.hibernate.beans.domain.Organisation;
-import org.xmlcrm.app.hibernate.beans.domain.Organisation_Users;
-import org.xmlcrm.app.hibernate.beans.user.*;
+import org.openmeetings.app.data.basic.Sessionmanagement;
+import org.openmeetings.app.data.user.Usermanagement;
+import org.openmeetings.app.data.user.Organisationmanagement;
+import org.openmeetings.app.hibernate.beans.adresses.Adresses_Emails;
+import org.openmeetings.app.hibernate.beans.domain.Organisation;
+import org.openmeetings.app.hibernate.beans.domain.Organisation_Users;
+import org.openmeetings.app.hibernate.beans.user.*;
 
 /**
  * 

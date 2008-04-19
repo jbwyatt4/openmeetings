@@ -1,4 +1,4 @@
-package org.xmlcrm.app.conference.videobeans;
+package org.openmeetings.app.conference.videobeans;
 
 import java.util.Date;
 import java.util.LinkedList;

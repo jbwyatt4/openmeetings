@@ -1,4 +1,4 @@
-package org.xmlcrm.utils.math;
+package org.openmeetings.utils.math;
 
 public interface AuthCryptInterface {
 	

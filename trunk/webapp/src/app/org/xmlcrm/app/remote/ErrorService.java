@@ -1,4 +1,4 @@
-package org.xmlcrm.app.remote;
+package org.openmeetings.app.remote;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -8,12 +8,12 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 
-import org.xmlcrm.app.data.basic.Fieldmanagment;
-import org.xmlcrm.app.data.beans.basic.ErrorResult;
-import org.xmlcrm.app.data.basic.ErrorManagement;
-import org.xmlcrm.app.hibernate.beans.basic.ErrorValues;
-import org.xmlcrm.app.hibernate.beans.lang.Fieldlanguagesvalues;
-import org.xmlcrm.app.hibernate.utils.HibernateUtil;
+import org.openmeetings.app.data.basic.Fieldmanagment;
+import org.openmeetings.app.data.beans.basic.ErrorResult;
+import org.openmeetings.app.data.basic.ErrorManagement;
+import org.openmeetings.app.hibernate.beans.basic.ErrorValues;
+import org.openmeetings.app.hibernate.beans.lang.Fieldlanguagesvalues;
+import org.openmeetings.app.hibernate.utils.HibernateUtil;
 
 /**
  * 

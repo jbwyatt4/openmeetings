@@ -1,4 +1,4 @@
-package org.xmlcrm.app.documents;
+package org.openmeetings.app.documents;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -18,7 +18,7 @@ import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Text;
-import org.xmlcrm.utils.stringhandlers.StringComparer;
+import org.openmeetings.utils.stringhandlers.StringComparer;
 
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.XppDriver;

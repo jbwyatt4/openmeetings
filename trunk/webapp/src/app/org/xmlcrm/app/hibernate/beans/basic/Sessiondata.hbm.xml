@@ -2,7 +2,7 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-  <class table="sessiondata" name="org.xmlcrm.app.hibernate.beans.basic.Sessiondata">
+  <class table="sessiondata" name="org.openmeetings.app.hibernate.beans.basic.Sessiondata">
     <id column="id" name="id">
       <generator class="increment"/>
     </id>

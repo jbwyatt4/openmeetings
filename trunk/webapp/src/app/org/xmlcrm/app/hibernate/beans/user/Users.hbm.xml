@@ -2,11 +2,11 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-  <class table="users" lazy="false" name="org.xmlcrm.app.hibernate.beans.user.Users">
+  <class table="users" lazy="false" name="org.openmeetings.app.hibernate.beans.user.Users">
     <id column="user_id" name="user_id">
       <generator class="increment"/>
     </id>
-    <many-to-one outer-join="true" insert="true" column="adresses_id" lazy="false" update="true" name="adresses" class="org.xmlcrm.app.hibernate.beans.adresses.Adresses"/>
+    <many-to-one outer-join="true" insert="true" column="adresses_id" lazy="false" update="true" name="adresses" class="org.openmeetings.app.hibernate.beans.adresses.Adresses"/>
     <property name="age" type="java.util.Date" column="age"/>
     <property name="availible" type="int" column="availible"/>
     <property name="firstname" type="string" column="firstname"/>
@@ -26,7 +26,7 @@
     <property name="language_id" type="long" column="language_id"/>
     <set table="organisation_users" lazy="false" inverse="true" cascade="none" name="organisation_users" where="deleted = 'false'">
       <key column="user_id"/>
-      <one-to-many class="org.xmlcrm.app.hibernate.beans.domain.Organisation_Users"/>
+      <one-to-many class="org.openmeetings.app.hibernate.beans.domain.Organisation_Users"/>
     </set>
     <property name="resethash" type="string" column="resethash"/>
   </class>

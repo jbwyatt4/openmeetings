@@ -1,4 +1,4 @@
-package org.xmlcrm.app.outpuhandlers.pdf.handler;
+package org.openmeetings.app.outpuhandlers.pdf.handler;
 
 import java.io.OutputStream;
 import java.io.IOException;
@@ -27,9 +27,9 @@ import com.lowagie.text.pdf.PdfPageEventHelper;
 import com.lowagie.text.Phrase;
 import com.lowagie.text.pdf.BaseFont;
 
-import org.xmlcrm.app.outpuhandlers.pdf.pdfobjects.pdfobject;
-import org.xmlcrm.app.outpuhandlers.utils.HtmlHandler;
-import org.xmlcrm.utils.math.CalendarPatterns;
+import org.openmeetings.app.outpuhandlers.pdf.pdfobjects.pdfobject;
+import org.openmeetings.app.outpuhandlers.utils.HtmlHandler;
+import org.openmeetings.utils.math.CalendarPatterns;
 
 import com.lowagie.text.Chunk;
 

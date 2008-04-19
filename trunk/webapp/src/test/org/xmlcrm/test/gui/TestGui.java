@@ -1,8 +1,8 @@
-package org.xmlcrm.test.gui;
+package org.openmeetings.test.gui;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.xmlcrm.webstart.gui.StartScreen;
+import org.openmeetings.webstart.gui.StartScreen;
 
 
 public class TestGui{

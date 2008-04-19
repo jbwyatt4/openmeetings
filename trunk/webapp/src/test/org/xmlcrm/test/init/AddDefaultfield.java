@@ -1,9 +1,9 @@
-package org.xmlcrm.test.init;
+package org.openmeetings.test.init;
 
 import junit.framework.TestCase;
 
-import org.xmlcrm.app.data.basic.Fieldmanagment;
-import org.xmlcrm.app.data.basic.Navimanagement;
+import org.openmeetings.app.data.basic.Fieldmanagment;
+import org.openmeetings.app.data.basic.Navimanagement;
 
 public class AddDefaultfield extends TestCase {
 	

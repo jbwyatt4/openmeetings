@@ -1,14 +1,14 @@
-package org.xmlcrm.test.domain;
+package org.openmeetings.test.domain;
 
 import java.util.Iterator;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.xmlcrm.app.data.user.Organisationmanagement;
-import org.xmlcrm.app.data.user.Usermanagement;
-import org.xmlcrm.app.hibernate.beans.user.Users;
-import org.xmlcrm.app.hibernate.beans.adresses.Adresses_Emails;
-import org.xmlcrm.app.hibernate.beans.domain.Organisation_Users;
+import org.openmeetings.app.data.user.Organisationmanagement;
+import org.openmeetings.app.data.user.Usermanagement;
+import org.openmeetings.app.hibernate.beans.user.Users;
+import org.openmeetings.app.hibernate.beans.adresses.Adresses_Emails;
+import org.openmeetings.app.hibernate.beans.domain.Organisation_Users;
 
 import junit.framework.TestCase;
 

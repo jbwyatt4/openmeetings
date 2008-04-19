@@ -1,4 +1,4 @@
-package org.xmlcrm.app.data.beans.basic;
+package org.openmeetings.app.data.beans.basic;
 
 public class ErrorResult {
 	

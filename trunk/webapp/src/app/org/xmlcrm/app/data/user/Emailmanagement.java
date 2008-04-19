@@ -1,4 +1,4 @@
-package org.xmlcrm.app.data.user;
+package org.openmeetings.app.data.user;
 
 import java.util.Date;
 import java.util.List;
@@ -11,15 +11,15 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import org.xmlcrm.app.data.basic.Configurationmanagement;
-import org.xmlcrm.app.data.basic.Fieldmanagment;
-import org.xmlcrm.app.hibernate.beans.adresses.Emails;
-import org.xmlcrm.app.hibernate.utils.HibernateUtil;
-import org.xmlcrm.utils.mail.MailHandler;
-import org.xmlcrm.app.hibernate.beans.adresses.Adresses_Emails;
-import org.xmlcrm.app.hibernate.beans.domain.Organisation;
-import org.xmlcrm.app.hibernate.beans.lang.Fieldlanguagesvalues;
-import org.xmlcrm.app.templates.RegisterUserTemplate;
+import org.openmeetings.app.data.basic.Configurationmanagement;
+import org.openmeetings.app.data.basic.Fieldmanagment;
+import org.openmeetings.app.hibernate.beans.adresses.Emails;
+import org.openmeetings.app.hibernate.utils.HibernateUtil;
+import org.openmeetings.utils.mail.MailHandler;
+import org.openmeetings.app.hibernate.beans.adresses.Adresses_Emails;
+import org.openmeetings.app.hibernate.beans.domain.Organisation;
+import org.openmeetings.app.hibernate.beans.lang.Fieldlanguagesvalues;
+import org.openmeetings.app.templates.RegisterUserTemplate;
 
 public class Emailmanagement {
 

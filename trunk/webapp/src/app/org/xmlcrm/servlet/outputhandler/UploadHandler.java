@@ -1,4 +1,4 @@
-package org.xmlcrm.servlet.outputhandler;
+package org.openmeetings.servlet.outputhandler;
 
 import http.utils.multipartrequest.ServletMultipartRequest;
 
@@ -17,14 +17,14 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import org.apache.commons.lang.StringUtils;
-import org.xmlcrm.app.data.basic.Sessionmanagement;
-import org.xmlcrm.app.data.user.Usermanagement;
-import org.xmlcrm.utils.stringhandlers.StringComparer;
-import org.xmlcrm.app.documents.GenerateThumbs;
-import org.xmlcrm.app.documents.GeneratePDF;
-import org.xmlcrm.app.documents.GenerateImage;
-import org.xmlcrm.app.remote.Application;
-import org.xmlcrm.app.hibernate.beans.user.Users;
+import org.openmeetings.app.data.basic.Sessionmanagement;
+import org.openmeetings.app.data.user.Usermanagement;
+import org.openmeetings.utils.stringhandlers.StringComparer;
+import org.openmeetings.app.documents.GenerateThumbs;
+import org.openmeetings.app.documents.GeneratePDF;
+import org.openmeetings.app.documents.GenerateImage;
+import org.openmeetings.app.remote.Application;
+import org.openmeetings.app.hibernate.beans.user.Users;
 
 public class UploadHandler extends HttpServlet {
 

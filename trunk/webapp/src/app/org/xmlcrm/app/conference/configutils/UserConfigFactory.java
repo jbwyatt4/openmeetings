@@ -1,4 +1,4 @@
-package org.xmlcrm.app.conference.configutils;
+package org.openmeetings.app.conference.configutils;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -11,7 +11,7 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import org.xmlcrm.app.conference.videobeans.UserSecurity;
+import org.openmeetings.app.conference.videobeans.UserSecurity;
 
 public class UserConfigFactory {
  

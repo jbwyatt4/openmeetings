@@ -1,4 +1,4 @@
-package org.xmlcrm.app.hibernate.beans.domain;
+package org.openmeetings.app.hibernate.beans.domain;
 
 import java.util.Date;
 
@@ -25,7 +25,7 @@ public class Organisation_Users {
     /**
 	 * @hibernate.many-to-one
 	 * column = "organisation_id"
-	 * class = "org.xmlcrm.app.hibernate.beans.domain.Organisation"
+	 * class = "org.openmeetings.app.hibernate.beans.domain.Organisation"
 	 * insert="true"
 	 * update="true"
 	 * outer-join="true"
