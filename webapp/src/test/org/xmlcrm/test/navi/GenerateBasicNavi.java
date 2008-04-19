@@ -1,8 +1,8 @@
-package org.xmlcrm.test.navi;
+package org.openmeetings.test.navi;
 
 import junit.framework.TestCase;
 
-import org.xmlcrm.app.data.basic.Navimanagement;
+import org.openmeetings.app.data.basic.Navimanagement;
 
 public class GenerateBasicNavi extends TestCase {
 	

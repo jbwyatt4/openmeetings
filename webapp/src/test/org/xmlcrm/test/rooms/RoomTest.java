@@ -1,11 +1,11 @@
-package org.xmlcrm.test.rooms;
+package org.openmeetings.test.rooms;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import junit.framework.TestCase;
 
-import org.xmlcrm.app.data.conference.Roommanagement;
+import org.openmeetings.app.data.conference.Roommanagement;
 
 public class RoomTest extends TestCase {
 	

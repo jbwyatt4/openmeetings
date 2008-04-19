@@ -1,10 +1,10 @@
-package org.xmlcrm.remote;
+package org.openmeetings.remote;
 
 
 import static org.junit.Assert.*;
 
 import org.junit.Test;
-import org.xmlcrm.app.remote.IssueService;
+import org.openmeetings.app.remote.IssueService;
 
 public class IssueServiceTest {
 

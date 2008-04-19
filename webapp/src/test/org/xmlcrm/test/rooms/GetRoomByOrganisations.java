@@ -1,4 +1,4 @@
-package org.xmlcrm.test.rooms;
+package org.openmeetings.test.rooms;
 
 import junit.framework.TestCase;
 import java.util.List;
@@ -6,8 +6,8 @@ import java.util.Iterator;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.xmlcrm.app.data.conference.Roommanagement;
-import org.xmlcrm.app.hibernate.beans.rooms.*;
+import org.openmeetings.app.data.conference.Roommanagement;
+import org.openmeetings.app.hibernate.beans.rooms.*;
 
 public class GetRoomByOrganisations extends TestCase {
 	

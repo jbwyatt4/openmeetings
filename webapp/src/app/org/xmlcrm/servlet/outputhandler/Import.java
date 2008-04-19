@@ -1,4 +1,4 @@
-package org.xmlcrm.servlet.outputhandler;
+package org.openmeetings.servlet.outputhandler;
 
 import http.utils.multipartrequest.ServletMultipartRequest;
 
@@ -17,15 +17,15 @@ import org.apache.commons.logging.LogFactory;
 import org.dom4j.Document;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
-import org.xmlcrm.app.data.basic.Sessionmanagement;
-import org.xmlcrm.app.data.user.Addressmanagement;
-import org.xmlcrm.app.data.user.Emailmanagement;
-import org.xmlcrm.app.data.user.Organisationmanagement;
-import org.xmlcrm.app.data.user.Usermanagement;
-import org.xmlcrm.app.xmlimport.LanguageImport;
-import org.xmlcrm.app.xmlimport.UserImport;
-import org.xmlcrm.app.hibernate.beans.user.*;
-import org.xmlcrm.utils.math.CalendarPatterns;
+import org.openmeetings.app.data.basic.Sessionmanagement;
+import org.openmeetings.app.data.user.Addressmanagement;
+import org.openmeetings.app.data.user.Emailmanagement;
+import org.openmeetings.app.data.user.Organisationmanagement;
+import org.openmeetings.app.data.user.Usermanagement;
+import org.openmeetings.app.xmlimport.LanguageImport;
+import org.openmeetings.app.xmlimport.UserImport;
+import org.openmeetings.app.hibernate.beans.user.*;
+import org.openmeetings.utils.math.CalendarPatterns;
 
 public class Import extends HttpServlet {
 

@@ -1,8 +1,8 @@
-package org.xmlcrm.utils.crypt;
+package org.openmeetings.utils.crypt;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.xmlcrm.app.data.basic.Configurationmanagement;
+import org.openmeetings.app.data.basic.Configurationmanagement;
 
 public class ManageCryptStyle {
 	
@@ -21,7 +21,7 @@ public class ManageCryptStyle {
 	
 	public CryptStringAdapter getInstanceOfCrypt() {
 		try {
-			//String configKeyCryptClassName = "org.xmlcrm.utils.crypt.MD5Implementation";
+			//String configKeyCryptClassName = "org.openmeetings.utils.crypt.MD5Implementation";
 			String configKeyCryptClassName = Configurationmanagement.getInstance().getConfKey(3,"crypt_ClassName").getConf_value();
 			
 			CryptStringAdapter t = (CryptStringAdapter) Class.forName(configKeyCryptClassName).newInstance();

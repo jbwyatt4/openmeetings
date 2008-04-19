@@ -2,7 +2,7 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-  <class table="emails" lazy="false" name="org.xmlcrm.app.hibernate.beans.adresses.Emails">
+  <class table="emails" lazy="false" name="org.openmeetings.app.hibernate.beans.adresses.Emails">
     <id column="mail_id" name="mail_id">
       <generator class="increment"/>
     </id>

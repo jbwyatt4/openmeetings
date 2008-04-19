@@ -1,4 +1,4 @@
-package org.xmlcrm.app.data.user;
+package org.openmeetings.app.data.user;
 
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -15,26 +15,26 @@ import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.criterion.Order;
 
-import org.xmlcrm.app.hibernate.beans.lang.Fieldlanguagesvalues;
-import org.xmlcrm.app.hibernate.beans.user.*;
-import org.xmlcrm.app.hibernate.beans.adresses.Adresses_Emails;
-import org.xmlcrm.app.hibernate.beans.adresses.Emails;
-import org.xmlcrm.app.hibernate.utils.HibernateUtil;
-import org.xmlcrm.app.templates.ResetPasswordTemplate;
-import org.xmlcrm.app.conference.videobeans.RoomClient;
-import org.xmlcrm.app.data.basic.AuthLevelmanagement;
-import org.xmlcrm.app.data.basic.Configurationmanagement;
-import org.xmlcrm.app.data.basic.Fieldmanagment;
-import org.xmlcrm.app.data.beans.basic.SearchResult;
-import org.xmlcrm.app.data.user.Organisationmanagement;
-import org.xmlcrm.utils.mappings.CastMapToObject;
-import org.xmlcrm.utils.math.*;
-import org.xmlcrm.utils.mail.MailHandler;
-import org.xmlcrm.utils.crypt.*;
+import org.openmeetings.app.hibernate.beans.lang.Fieldlanguagesvalues;
+import org.openmeetings.app.hibernate.beans.user.*;
+import org.openmeetings.app.hibernate.beans.adresses.Adresses_Emails;
+import org.openmeetings.app.hibernate.beans.adresses.Emails;
+import org.openmeetings.app.hibernate.utils.HibernateUtil;
+import org.openmeetings.app.templates.ResetPasswordTemplate;
+import org.openmeetings.app.conference.videobeans.RoomClient;
+import org.openmeetings.app.data.basic.AuthLevelmanagement;
+import org.openmeetings.app.data.basic.Configurationmanagement;
+import org.openmeetings.app.data.basic.Fieldmanagment;
+import org.openmeetings.app.data.beans.basic.SearchResult;
+import org.openmeetings.app.data.user.Organisationmanagement;
+import org.openmeetings.utils.mappings.CastMapToObject;
+import org.openmeetings.utils.math.*;
+import org.openmeetings.utils.mail.MailHandler;
+import org.openmeetings.utils.crypt.*;
 
 import org.red5.io.utils.ObjectMap;
 
-import org.xmlcrm.app.data.basic.*;
+import org.openmeetings.app.data.basic.*;
 
 /**
  * 

@@ -1,8 +1,8 @@
-package org.xmlcrm.app.hibernate.beans.basic;
+package org.openmeetings.app.hibernate.beans.basic;
 
 import java.util.Set;
 import java.util.Date;
-import org.xmlcrm.app.hibernate.beans.lang.Fieldlanguagesvalues;
+import org.openmeetings.app.hibernate.beans.lang.Fieldlanguagesvalues;
 
 /**
  * 
@@ -187,7 +187,7 @@ public class Naviglobal {
      * order-by = "naviorder"
      * lazy="false"
      * @hibernate.one-to-many 
-     * class = "org.xmlcrm.app.hibernate.beans.basic.Navimain"
+     * class = "org.openmeetings.app.hibernate.beans.basic.Navimain"
      * @hibernate.key 
      * column = "global_id"
      */

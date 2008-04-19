@@ -1,4 +1,4 @@
-package org.xmlcrm.app.conference.configutils;
+package org.openmeetings.app.conference.configutils;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -7,7 +7,7 @@ import org.red5.server.api.IConnection;
 import org.red5.server.api.scheduling.IScheduledJob;
 import org.red5.server.api.scheduling.ISchedulingService;
 
-import org.xmlcrm.app.remote.Application;
+import org.openmeetings.app.remote.Application;
 
 public class BandWidthHelper implements IScheduledJob {
 

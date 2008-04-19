@@ -1,10 +1,10 @@
-package org.xmlcrm.utils;
+package org.openmeetings.utils;
 
 import java.util.LinkedHashMap;
 
 import junit.framework.TestCase;
 
-import org.xmlcrm.utils.mappings.CastMapToObject;
+import org.openmeetings.utils.mappings.CastMapToObject;
 
 
 public class TestReflectionApi extends TestCase {

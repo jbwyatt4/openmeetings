@@ -1,4 +1,4 @@
-package org.xmlcrm.webstart.gui;
+package org.openmeetings.webstart.gui;
 
 import javax.imageio.ImageIO;
 import java.awt.Color;
@@ -16,8 +16,8 @@ import javax.swing.SpinnerNumberModel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import org.xmlcrm.webstart.beans.VirtualScreenBean;
-import org.xmlcrm.webstart.screen.BlankArea;
+import org.openmeetings.webstart.beans.VirtualScreenBean;
+import org.openmeetings.webstart.screen.BlankArea;
 
 public class VirtualScreen {
 	

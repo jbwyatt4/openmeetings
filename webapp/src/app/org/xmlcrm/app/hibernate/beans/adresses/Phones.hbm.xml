@@ -2,7 +2,7 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-  <class table="phones" name="org.xmlcrm.app.hibernate.beans.adresses.Phones">
+  <class table="phones" name="org.openmeetings.app.hibernate.beans.adresses.Phones">
     <id column="phone_id" name="phone_id">
       <generator class="increment"/>
     </id>

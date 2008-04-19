@@ -1,4 +1,4 @@
-package org.xmlcrm.servlet.outputhandler;
+package org.openmeetings.servlet.outputhandler;
 
 import java.util.LinkedHashMap;
 
@@ -16,11 +16,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
-import org.xmlcrm.app.data.basic.Sessionmanagement;
-import org.xmlcrm.app.data.user.Usermanagement;
-import org.xmlcrm.utils.stringhandlers.StringComparer;
+import org.openmeetings.app.data.basic.Sessionmanagement;
+import org.openmeetings.app.data.user.Usermanagement;
+import org.openmeetings.utils.stringhandlers.StringComparer;
 
-import org.xmlcrm.app.remote.Application;
+import org.openmeetings.app.remote.Application;
 
 public class ScreenServlet extends HttpServlet {
 

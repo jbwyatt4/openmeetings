@@ -1,11 +1,11 @@
-package org.xmlcrm.rss;
+package org.openmeetings.rss;
 
 import junit.framework.TestCase;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import org.xmlcrm.app.rss.LoadAtomRssFeed;
+import org.openmeetings.app.rss.LoadAtomRssFeed;
 
 public class TestRssLoader extends TestCase {
 	

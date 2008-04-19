@@ -1,4 +1,4 @@
-package org.xmlcrm.utils.crypt;
+package org.openmeetings.utils.crypt;
 
 /**
  * interface for Encryption-Class

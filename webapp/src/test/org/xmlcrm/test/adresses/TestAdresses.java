@@ -1,11 +1,11 @@
-package org.xmlcrm.test.adresses;
+package org.openmeetings.test.adresses;
 
 import junit.framework.TestCase;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.xmlcrm.app.data.user.Statemanagement;
-import org.xmlcrm.app.data.user.Addressmanagement;
+import org.openmeetings.app.data.user.Statemanagement;
+import org.openmeetings.app.data.user.Addressmanagement;
 
 public class TestAdresses extends TestCase {
 	

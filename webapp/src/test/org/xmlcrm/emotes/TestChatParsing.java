@@ -1,12 +1,12 @@
-package org.xmlcrm.emotes;
+package org.openmeetings.emotes;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.util.LinkedList;
 
-import org.xmlcrm.app.remote.Application;
-import org.xmlcrm.utils.stringhandlers.ChatString;
+import org.openmeetings.app.remote.Application;
+import org.openmeetings.utils.stringhandlers.ChatString;
 
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.XppDriver;

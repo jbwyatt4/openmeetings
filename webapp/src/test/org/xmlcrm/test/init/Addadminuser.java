@@ -1,12 +1,12 @@
-package org.xmlcrm.test.init;
+package org.openmeetings.test.init;
 
 import junit.framework.TestCase;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.xmlcrm.app.data.user.Usermanagement;
-import org.xmlcrm.app.data.user.Statemanagement;
-import org.xmlcrm.test.adresses.TestAddEmailToAdress;
+import org.openmeetings.app.data.user.Usermanagement;
+import org.openmeetings.app.data.user.Statemanagement;
+import org.openmeetings.test.adresses.TestAddEmailToAdress;
 
 public class Addadminuser extends TestCase{
 	

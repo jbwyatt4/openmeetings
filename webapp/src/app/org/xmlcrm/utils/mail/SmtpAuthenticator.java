@@ -1,9 +1,9 @@
-package org.xmlcrm.utils.mail;
+package org.openmeetings.utils.mail;
 
 import javax.mail.Authenticator;
 import javax.mail.PasswordAuthentication;
 
-import org.xmlcrm.app.data.basic.Configurationmanagement;
+import org.openmeetings.app.data.basic.Configurationmanagement;
 
 /**
  * 

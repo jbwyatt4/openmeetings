@@ -1,4 +1,4 @@
-package org.xmlcrm.app.remote;
+package org.openmeetings.app.remote;
 
 import java.util.Date;
 import java.util.List;
@@ -13,22 +13,22 @@ import org.red5.server.api.Red5;
 import org.red5.server.api.service.IPendingServiceCall;
 import org.red5.server.api.service.IPendingServiceCallback;
 import org.red5.server.api.service.IServiceCapableConnection;
-import org.xmlcrm.app.hibernate.beans.basic.Configuration;
-import org.xmlcrm.app.hibernate.beans.basic.Sessiondata;
+import org.openmeetings.app.hibernate.beans.basic.Configuration;
+import org.openmeetings.app.hibernate.beans.basic.Sessiondata;
 
-import org.xmlcrm.app.hibernate.beans.user.Users;
-import org.xmlcrm.app.hibernate.beans.user.Userdata;
+import org.openmeetings.app.hibernate.beans.user.Users;
+import org.openmeetings.app.hibernate.beans.user.Userdata;
 
-import org.xmlcrm.app.data.basic.*;
-import org.xmlcrm.app.data.user.Usermanagement;
-import org.xmlcrm.app.data.user.Statemanagement;
+import org.openmeetings.app.data.basic.*;
+import org.openmeetings.app.data.user.Usermanagement;
+import org.openmeetings.app.data.user.Statemanagement;
 
-import org.xmlcrm.app.data.conference.Invitationmanagement;
-import org.xmlcrm.app.data.conference.Feedbackmanagement;
-import org.xmlcrm.app.data.basic.AuthLevelmanagement;
-import org.xmlcrm.app.rss.LoadAtomRssFeed;
+import org.openmeetings.app.data.conference.Invitationmanagement;
+import org.openmeetings.app.data.conference.Feedbackmanagement;
+import org.openmeetings.app.data.basic.AuthLevelmanagement;
+import org.openmeetings.app.rss.LoadAtomRssFeed;
 
-import org.xmlcrm.app.conference.videobeans.RoomClient;
+import org.openmeetings.app.conference.videobeans.RoomClient;
 
 /**
  * 

@@ -1,12 +1,12 @@
-package org.xmlcrm.app.remote;
+package org.openmeetings.app.remote;
 
 import java.util.LinkedHashMap;
 
-import org.xmlcrm.app.data.basic.Configurationmanagement;
-import org.xmlcrm.app.data.basic.Sessionmanagement;
-import org.xmlcrm.app.data.beans.basic.SearchResult;
-import org.xmlcrm.app.data.user.Usermanagement;
-import org.xmlcrm.app.hibernate.beans.basic.Configuration;
+import org.openmeetings.app.data.basic.Configurationmanagement;
+import org.openmeetings.app.data.basic.Sessionmanagement;
+import org.openmeetings.app.data.beans.basic.SearchResult;
+import org.openmeetings.app.data.user.Usermanagement;
+import org.openmeetings.app.hibernate.beans.basic.Configuration;
 
 /**
  * 

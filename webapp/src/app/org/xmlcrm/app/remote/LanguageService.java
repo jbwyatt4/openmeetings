@@ -1,19 +1,19 @@
-package org.xmlcrm.app.remote;
+package org.openmeetings.app.remote;
 
 import java.util.List;
 import java.util.LinkedHashMap;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.xmlcrm.app.data.basic.AuthLevelmanagement;
-import org.xmlcrm.app.data.basic.Configurationmanagement;
-import org.xmlcrm.app.data.basic.Languagemanagement;
-import org.xmlcrm.app.data.basic.Sessionmanagement;
-import org.xmlcrm.app.data.user.Usermanagement;
-import org.xmlcrm.app.data.basic.Fieldmanagment;
-import org.xmlcrm.app.data.beans.basic.SearchResult;
-import org.xmlcrm.app.hibernate.beans.lang.Fieldlanguagesvalues;
-import org.xmlcrm.app.hibernate.beans.lang.Fieldvalues;
+import org.openmeetings.app.data.basic.AuthLevelmanagement;
+import org.openmeetings.app.data.basic.Configurationmanagement;
+import org.openmeetings.app.data.basic.Languagemanagement;
+import org.openmeetings.app.data.basic.Sessionmanagement;
+import org.openmeetings.app.data.user.Usermanagement;
+import org.openmeetings.app.data.basic.Fieldmanagment;
+import org.openmeetings.app.data.beans.basic.SearchResult;
+import org.openmeetings.app.hibernate.beans.lang.Fieldlanguagesvalues;
+import org.openmeetings.app.hibernate.beans.lang.Fieldvalues;
 
 /**
  * 

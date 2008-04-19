@@ -1,4 +1,4 @@
-package org.xmlcrm.webstart.screen;
+package org.openmeetings.webstart.screen;
 
 import javax.swing.*;
 import java.awt.Dimension;

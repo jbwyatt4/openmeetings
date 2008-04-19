@@ -1,4 +1,4 @@
-package org.xmlcrm.utils.crypt;
+package org.openmeetings.utils.crypt;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;

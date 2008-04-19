@@ -1,13 +1,13 @@
-package org.xmlcrm.test.navi;
+package org.openmeetings.test.navi;
 
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-import org.xmlcrm.app.hibernate.beans.basic.Sessiondata;
-import org.xmlcrm.app.hibernate.beans.user.Users;
-import org.xmlcrm.app.remote.MainService;
-import org.xmlcrm.app.hibernate.beans.basic.*;
+import org.openmeetings.app.hibernate.beans.basic.Sessiondata;
+import org.openmeetings.app.hibernate.beans.user.Users;
+import org.openmeetings.app.remote.MainService;
+import org.openmeetings.app.hibernate.beans.basic.*;
 
 import junit.framework.TestCase;
 

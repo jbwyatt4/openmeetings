@@ -1,4 +1,4 @@
-package org.xmlcrm.app.hibernate.beans.lang;
+package org.openmeetings.app.hibernate.beans.lang;
 
 import java.util.Date;
 import java.util.Set;
@@ -92,7 +92,7 @@ public class Fieldvalues {
      * cascade = "none"
      * lazy = "false"
      * @hibernate.one-to-many 
-     * class = "org.xmlcrm.app.hibernate.beans.lang.Fieldlanguagesvalues"
+     * class = "org.openmeetings.app.hibernate.beans.lang.Fieldlanguagesvalues"
      * @hibernate.key 
      * column = "fieldvalues_id"
      */	

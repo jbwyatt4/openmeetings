@@ -1,4 +1,4 @@
-package org.xmlcrm.utils;
+package org.openmeetings.utils;
 
 import java.util.Date;
 

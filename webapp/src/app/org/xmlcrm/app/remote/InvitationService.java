@@ -1,4 +1,4 @@
-package org.xmlcrm.app.remote;
+package org.openmeetings.app.remote;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -7,11 +7,11 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.red5.server.api.service.IPendingServiceCall;
 import org.red5.server.api.service.IPendingServiceCallback;
-import org.xmlcrm.app.data.basic.Sessionmanagement;
-import org.xmlcrm.app.data.conference.Invitationmanagement;
-import org.xmlcrm.app.data.user.Usermanagement;
-import org.xmlcrm.app.hibernate.beans.invitation.Invitations;
-import org.xmlcrm.utils.math.CalendarPatterns;
+import org.openmeetings.app.data.basic.Sessionmanagement;
+import org.openmeetings.app.data.conference.Invitationmanagement;
+import org.openmeetings.app.data.user.Usermanagement;
+import org.openmeetings.app.hibernate.beans.invitation.Invitations;
+import org.openmeetings.utils.math.CalendarPatterns;
 
 public class InvitationService implements IPendingServiceCallback {
 	

@@ -1,4 +1,4 @@
-package org.xmlcrm.servlet.outputhandler;
+package org.openmeetings.servlet.outputhandler;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -9,9 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
-import org.xmlcrm.app.data.basic.Sessionmanagement;
-import org.xmlcrm.app.data.user.Usermanagement;
-import org.xmlcrm.app.templates.ScreenCastTemplate;
+import org.openmeetings.app.data.basic.Sessionmanagement;
+import org.openmeetings.app.data.user.Usermanagement;
+import org.openmeetings.app.templates.ScreenCastTemplate;
 
 public class ScreenRequestHandler extends HttpServlet {
 	/*

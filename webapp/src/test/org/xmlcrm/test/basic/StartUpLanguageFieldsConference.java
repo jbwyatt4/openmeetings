@@ -1,7 +1,7 @@
-package org.xmlcrm.test.basic;
+package org.openmeetings.test.basic;
 
-import org.xmlcrm.app.data.basic.Fieldmanagment;
-import org.xmlcrm.app.data.basic.Languagemanagement;
+import org.openmeetings.app.data.basic.Fieldmanagment;
+import org.openmeetings.app.data.basic.Languagemanagement;
 
 import junit.framework.TestCase;
 

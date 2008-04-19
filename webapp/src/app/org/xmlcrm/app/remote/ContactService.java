@@ -1,6 +1,6 @@
-package org.xmlcrm.app.remote;
+package org.openmeetings.app.remote;
 
-import org.xmlcrm.app.hibernate.beans.user.Users;
+import org.openmeetings.app.hibernate.beans.user.Users;
 
 /**
  * 

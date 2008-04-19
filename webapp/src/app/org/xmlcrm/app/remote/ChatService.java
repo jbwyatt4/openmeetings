@@ -1,4 +1,4 @@
-package org.xmlcrm.app.remote;
+package org.openmeetings.app.remote;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -16,8 +16,8 @@ import org.red5.server.api.Red5;
 import org.red5.server.api.service.IPendingServiceCall;
 import org.red5.server.api.service.IPendingServiceCallback;
 import org.red5.server.api.service.IServiceCapableConnection;
-import org.xmlcrm.app.conference.videobeans.RoomClient;
-import org.xmlcrm.utils.stringhandlers.ChatString;
+import org.openmeetings.app.conference.videobeans.RoomClient;
+import org.openmeetings.utils.stringhandlers.ChatString;
 
 /**
  * 

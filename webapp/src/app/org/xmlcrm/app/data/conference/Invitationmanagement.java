@@ -1,4 +1,4 @@
-package org.xmlcrm.app.data.conference;
+package org.openmeetings.app.data.conference;
 
 import java.util.Date;
 import java.util.List;
@@ -9,17 +9,17 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.xmlcrm.app.templates.InvitationTemplate;
-import org.xmlcrm.app.data.basic.AuthLevelmanagement;
-import org.xmlcrm.app.data.conference.Roommanagement;
-import org.xmlcrm.app.data.user.Usermanagement;
-import org.xmlcrm.app.data.basic.Configurationmanagement;
-import org.xmlcrm.app.hibernate.beans.user.Users;
-import org.xmlcrm.app.hibernate.beans.invitation.Invitations;
-import org.xmlcrm.app.hibernate.utils.HibernateUtil;
-import org.xmlcrm.utils.crypt.MD5;
-import org.xmlcrm.utils.crypt.ManageCryptStyle;
-import org.xmlcrm.utils.mail.MailHandler;
+import org.openmeetings.app.templates.InvitationTemplate;
+import org.openmeetings.app.data.basic.AuthLevelmanagement;
+import org.openmeetings.app.data.conference.Roommanagement;
+import org.openmeetings.app.data.user.Usermanagement;
+import org.openmeetings.app.data.basic.Configurationmanagement;
+import org.openmeetings.app.hibernate.beans.user.Users;
+import org.openmeetings.app.hibernate.beans.invitation.Invitations;
+import org.openmeetings.app.hibernate.utils.HibernateUtil;
+import org.openmeetings.utils.crypt.MD5;
+import org.openmeetings.utils.crypt.ManageCryptStyle;
+import org.openmeetings.utils.mail.MailHandler;
 
 /**
  * 

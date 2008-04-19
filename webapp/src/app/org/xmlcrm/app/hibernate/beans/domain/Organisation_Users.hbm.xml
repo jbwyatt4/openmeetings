@@ -2,11 +2,11 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-  <class table="organisation_users" lazy="false" name="org.xmlcrm.app.hibernate.beans.domain.Organisation_Users">
+  <class table="organisation_users" lazy="false" name="org.openmeetings.app.hibernate.beans.domain.Organisation_Users">
     <id column="organisation_users_id" name="organisation_users_id">
       <generator class="increment"/>
     </id>
-    <many-to-one outer-join="true" insert="true" column="organisation_id" lazy="false" update="true" name="organisation" class="org.xmlcrm.app.hibernate.beans.domain.Organisation"/>
+    <many-to-one outer-join="true" insert="true" column="organisation_id" lazy="false" update="true" name="organisation" class="org.openmeetings.app.hibernate.beans.domain.Organisation"/>
     <property name="user_id" type="long" column="user_id"/>
     <property name="starttime" type="java.util.Date" column="starttime"/>
     <property name="updatetime" type="java.util.Date" column="updatetime"/>

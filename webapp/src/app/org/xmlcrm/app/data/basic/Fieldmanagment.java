@@ -1,4 +1,4 @@
-package org.xmlcrm.app.data.basic;
+package org.openmeetings.app.data.basic;
 
 import java.util.Date;
 import java.util.List;
@@ -13,11 +13,11 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
-import org.xmlcrm.app.data.beans.basic.SearchResult;
-import org.xmlcrm.app.hibernate.beans.lang.FieldLanguage;
-import org.xmlcrm.app.hibernate.beans.lang.Fieldlanguagesvalues;
-import org.xmlcrm.app.hibernate.beans.lang.Fieldvalues;
-import org.xmlcrm.app.hibernate.utils.HibernateUtil;
+import org.openmeetings.app.data.beans.basic.SearchResult;
+import org.openmeetings.app.hibernate.beans.lang.FieldLanguage;
+import org.openmeetings.app.hibernate.beans.lang.Fieldlanguagesvalues;
+import org.openmeetings.app.hibernate.beans.lang.Fieldvalues;
+import org.openmeetings.app.hibernate.utils.HibernateUtil;
 
 /**
  * 

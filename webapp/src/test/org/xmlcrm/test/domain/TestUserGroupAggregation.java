@@ -1,4 +1,4 @@
-package org.xmlcrm.test.domain;
+package org.openmeetings.test.domain;
 
 import java.util.Iterator;
 import java.util.List;
@@ -7,8 +7,8 @@ import junit.framework.TestCase;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.xmlcrm.app.data.user.Organisationmanagement;
-import org.xmlcrm.app.hibernate.beans.domain.Organisation;;
+import org.openmeetings.app.data.user.Organisationmanagement;
+import org.openmeetings.app.hibernate.beans.domain.Organisation;;
 
 public class TestUserGroupAggregation extends TestCase {
 	

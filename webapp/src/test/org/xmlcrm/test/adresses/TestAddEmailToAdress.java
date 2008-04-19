@@ -1,9 +1,9 @@
-package org.xmlcrm.test.adresses;
+package org.openmeetings.test.adresses;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.xmlcrm.app.data.user.Emailmanagement;
-import org.xmlcrm.app.hibernate.beans.adresses.Adresses;
+import org.openmeetings.app.data.user.Emailmanagement;
+import org.openmeetings.app.hibernate.beans.adresses.Adresses;
 
 import junit.framework.TestCase;
 

@@ -1,4 +1,4 @@
-package org.xmlcrm.app.data.user;
+package org.openmeetings.app.data.user;
 
 import java.util.Date;
 import java.util.Iterator;
@@ -10,11 +10,11 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.Criteria;
-import org.xmlcrm.app.hibernate.beans.user.Salutations;
-import org.xmlcrm.app.hibernate.utils.HibernateUtil;
+import org.openmeetings.app.hibernate.beans.user.Salutations;
+import org.openmeetings.app.hibernate.utils.HibernateUtil;
 
-import org.xmlcrm.app.data.basic.AuthLevelmanagement;
-import org.xmlcrm.app.data.basic.Fieldmanagment;
+import org.openmeetings.app.data.basic.AuthLevelmanagement;
+import org.openmeetings.app.data.basic.Fieldmanagment;
 
 /**
  * 

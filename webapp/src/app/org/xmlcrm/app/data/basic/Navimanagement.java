@@ -1,4 +1,4 @@
-package org.xmlcrm.app.data.basic;
+package org.openmeetings.app.data.basic;
 
 import java.util.Iterator;
 import java.util.List;
@@ -12,10 +12,10 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import org.xmlcrm.app.hibernate.beans.basic.Naviglobal;
-import org.xmlcrm.app.hibernate.beans.basic.Navimain;
-import org.xmlcrm.app.hibernate.beans.basic.Navisub;
-import org.xmlcrm.app.hibernate.utils.HibernateUtil;
+import org.openmeetings.app.hibernate.beans.basic.Naviglobal;
+import org.openmeetings.app.hibernate.beans.basic.Navimain;
+import org.openmeetings.app.hibernate.beans.basic.Navisub;
+import org.openmeetings.app.hibernate.utils.HibernateUtil;
 
 public class Navimanagement {
 

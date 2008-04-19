@@ -1,12 +1,12 @@
-package org.xmlcrm.app.data.conference;
+package org.openmeetings.app.data.conference;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.xmlcrm.app.hibernate.beans.lang.Fieldlanguagesvalues;
-import org.xmlcrm.app.data.basic.Configurationmanagement;
-import org.xmlcrm.app.data.basic.Fieldmanagment;
-import org.xmlcrm.app.templates.FeedbackTemplate;
-import org.xmlcrm.utils.mail.MailHandler;
+import org.openmeetings.app.hibernate.beans.lang.Fieldlanguagesvalues;
+import org.openmeetings.app.data.basic.Configurationmanagement;
+import org.openmeetings.app.data.basic.Fieldmanagment;
+import org.openmeetings.app.templates.FeedbackTemplate;
+import org.openmeetings.utils.mail.MailHandler;
 
 public class Feedbackmanagement {
 	private static final Log log = LogFactory.getLog(Feedbackmanagement.class);

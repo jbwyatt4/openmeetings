@@ -1,4 +1,4 @@
-package org.xmlcrm.webstart.gui;
+package org.openmeetings.webstart.gui;
 
 import java.util.Date;
 
@@ -18,9 +18,9 @@ import org.quartz.Trigger;
 import org.quartz.TriggerUtils;
 import org.quartz.JobDetail;
 
-import org.xmlcrm.webstart.beans.ConnectionBean;
-import org.xmlcrm.webstart.screen.ScreenJob;
-import org.xmlcrm.webstart.screen.BlankArea;
+import org.openmeetings.webstart.beans.ConnectionBean;
+import org.openmeetings.webstart.screen.ScreenJob;
+import org.openmeetings.webstart.screen.BlankArea;
 
 public class StartScreen {
 

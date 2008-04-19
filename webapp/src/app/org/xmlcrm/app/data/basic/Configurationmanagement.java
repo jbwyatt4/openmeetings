@@ -1,4 +1,4 @@
-package org.xmlcrm.app.data.basic;
+package org.openmeetings.app.data.basic;
 
 import java.util.Iterator;
 import java.util.Date;
@@ -15,14 +15,14 @@ import org.hibernate.Transaction;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
-import org.xmlcrm.app.data.basic.AuthLevelmanagement;
-import org.xmlcrm.app.data.user.Usermanagement;
-import org.xmlcrm.app.data.beans.basic.SearchResult;
-import org.xmlcrm.app.data.user.Usermanagement;
-import org.xmlcrm.app.hibernate.beans.basic.Configuration;
-import org.xmlcrm.app.hibernate.utils.HibernateUtil;
-import org.xmlcrm.utils.math.CalendarPatterns;
-import org.xmlcrm.utils.mappings.CastMapToObject;
+import org.openmeetings.app.data.basic.AuthLevelmanagement;
+import org.openmeetings.app.data.user.Usermanagement;
+import org.openmeetings.app.data.beans.basic.SearchResult;
+import org.openmeetings.app.data.user.Usermanagement;
+import org.openmeetings.app.hibernate.beans.basic.Configuration;
+import org.openmeetings.app.hibernate.utils.HibernateUtil;
+import org.openmeetings.utils.math.CalendarPatterns;
+import org.openmeetings.utils.mappings.CastMapToObject;
 
 public class Configurationmanagement {
 

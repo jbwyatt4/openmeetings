@@ -1,4 +1,4 @@
-package org.xmlcrm.utils.mail;
+package org.openmeetings.utils.mail;
 
 import javax.mail.*;
 import javax.mail.internet.*;
@@ -9,7 +9,7 @@ import javax.activation.*;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.xmlcrm.app.data.basic.Configurationmanagement;
+import org.openmeetings.app.data.basic.Configurationmanagement;
 
 /**
  * 

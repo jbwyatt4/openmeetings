@@ -1,4 +1,4 @@
-package org.xmlcrm.app.data.basic;
+package org.openmeetings.app.data.basic;
 
 import java.util.Date;
 import java.util.List;
@@ -9,9 +9,9 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.xmlcrm.app.hibernate.beans.basic.ErrorType;
-import org.xmlcrm.app.hibernate.beans.basic.ErrorValues;
-import org.xmlcrm.app.hibernate.utils.HibernateUtil;
+import org.openmeetings.app.hibernate.beans.basic.ErrorType;
+import org.openmeetings.app.hibernate.beans.basic.ErrorValues;
+import org.openmeetings.app.hibernate.utils.HibernateUtil;
 
 public class ErrorManagement {
 	private static final Log log = LogFactory.getLog(ErrorManagement.class);

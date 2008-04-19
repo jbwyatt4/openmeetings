@@ -1,4 +1,4 @@
-package org.xmlcrm.app.remote;
+package org.openmeetings.app.remote;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -8,13 +8,13 @@ import java.util.LinkedList;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.xmlcrm.app.data.basic.Sessionmanagement;
-import org.xmlcrm.app.data.beans.basic.SearchResult;
-import org.xmlcrm.app.data.user.Usermanagement;
-import org.xmlcrm.app.data.conference.Roommanagement;
-import org.xmlcrm.app.hibernate.beans.rooms.Rooms;
-import org.xmlcrm.app.hibernate.beans.rooms.Rooms_Organisation;
-import org.xmlcrm.app.conference.videobeans.RoomClient;
+import org.openmeetings.app.data.basic.Sessionmanagement;
+import org.openmeetings.app.data.beans.basic.SearchResult;
+import org.openmeetings.app.data.user.Usermanagement;
+import org.openmeetings.app.data.conference.Roommanagement;
+import org.openmeetings.app.hibernate.beans.rooms.Rooms;
+import org.openmeetings.app.hibernate.beans.rooms.Rooms_Organisation;
+import org.openmeetings.app.conference.videobeans.RoomClient;
 
 /**
  * 

@@ -2,7 +2,7 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-  <class table="navimain" name="org.xmlcrm.app.hibernate.beans.basic.Navimain">
+  <class table="navimain" name="org.openmeetings.app.hibernate.beans.basic.Navimain">
     <id column="main_id" name="main_id">
       <generator class="increment"/>
     </id>
@@ -18,7 +18,7 @@
     <property name="deleted" type="string" column="deleted"/>
     <set table="navisub" lazy="false" inverse="true" cascade="all" name="subnavi" where="deleted='false'">
       <key column="main_id"/>
-      <one-to-many class="org.xmlcrm.app.hibernate.beans.basic.Navisub"/>
+      <one-to-many class="org.openmeetings.app.hibernate.beans.basic.Navisub"/>
     </set>
     <property name="name" type="string" column="name"/>
     <property name="naviorder" type="int" column="naviorder"/>

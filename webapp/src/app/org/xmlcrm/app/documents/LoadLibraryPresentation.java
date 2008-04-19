@@ -1,4 +1,4 @@
-package org.xmlcrm.app.documents;
+package org.openmeetings.app.documents;
 
 import java.util.Iterator;
 import java.util.LinkedHashMap;

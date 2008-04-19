@@ -1,4 +1,4 @@
-package org.xmlcrm.utils.stringhandlers;
+package org.openmeetings.utils.stringhandlers;
 
 import java.util.Iterator;
 import java.text.CharacterIterator;
@@ -6,7 +6,7 @@ import java.text.StringCharacterIterator;
 import java.util.LinkedList;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.xmlcrm.app.remote.Application;
+import org.openmeetings.app.remote.Application;
 
 public class ChatString {
 	

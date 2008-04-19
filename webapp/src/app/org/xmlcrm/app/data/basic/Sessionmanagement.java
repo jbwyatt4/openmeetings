@@ -1,13 +1,13 @@
-package org.xmlcrm.app.data.basic;
+package org.openmeetings.app.data.basic;
 
 import java.util.Iterator;
 import java.util.List;
 import java.util.Date;
 import java.util.Calendar;
 
-import org.xmlcrm.app.hibernate.beans.basic.Sessiondata;
-import org.xmlcrm.app.hibernate.utils.HibernateUtil;
-import org.xmlcrm.utils.crypt.ManageCryptStyle;
+import org.openmeetings.app.hibernate.beans.basic.Sessiondata;
+import org.openmeetings.app.hibernate.utils.HibernateUtil;
+import org.openmeetings.utils.crypt.ManageCryptStyle;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 import org.apache.commons.logging.Log;

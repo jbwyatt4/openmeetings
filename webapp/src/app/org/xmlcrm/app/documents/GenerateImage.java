@@ -1,4 +1,4 @@
-package org.xmlcrm.app.documents;
+package org.openmeetings.app.documents;
 
 import java.util.HashMap;
 
@@ -9,10 +9,10 @@ import java.io.InputStreamReader;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.xmlcrm.app.data.basic.Configurationmanagement;
-import org.xmlcrm.app.data.user.Usermanagement;
-import org.xmlcrm.app.hibernate.beans.user.Users;
-import org.xmlcrm.app.remote.Application;
+import org.openmeetings.app.data.basic.Configurationmanagement;
+import org.openmeetings.app.data.user.Usermanagement;
+import org.openmeetings.app.hibernate.beans.user.Users;
+import org.openmeetings.app.remote.Application;
 
 public class GenerateImage {
 	

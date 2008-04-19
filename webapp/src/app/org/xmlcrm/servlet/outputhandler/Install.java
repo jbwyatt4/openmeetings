@@ -1,4 +1,4 @@
-package org.xmlcrm.servlet.outputhandler;
+package org.openmeetings.servlet.outputhandler;
 
 import java.util.LinkedHashMap;
 import java.io.File;
@@ -16,9 +16,9 @@ import org.apache.velocity.tools.view.servlet.VelocityViewServlet;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.xmlcrm.app.documents.InstallationDocumentHandler;
-import org.xmlcrm.app.installation.ImportInitvalues;
-import org.xmlcrm.app.remote.Application;
+import org.openmeetings.app.documents.InstallationDocumentHandler;
+import org.openmeetings.app.installation.ImportInitvalues;
+import org.openmeetings.app.remote.Application;
 
 public class Install extends VelocityViewServlet {
 

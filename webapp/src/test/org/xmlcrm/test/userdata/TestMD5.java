@@ -1,7 +1,7 @@
-package org.xmlcrm.test.userdata;
+package org.openmeetings.test.userdata;
 
 import org.hibernate.Session;
-import org.xmlcrm.app.hibernate.utils.HibernateUtil;
+import org.openmeetings.app.hibernate.utils.HibernateUtil;
 
 import junit.framework.TestCase;
 

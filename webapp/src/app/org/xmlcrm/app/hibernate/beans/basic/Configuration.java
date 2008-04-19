@@ -1,7 +1,7 @@
-package org.xmlcrm.app.hibernate.beans.basic;
+package org.openmeetings.app.hibernate.beans.basic;
 
 import java.util.Date;
-import org.xmlcrm.app.hibernate.beans.user.Users;
+import org.openmeetings.app.hibernate.beans.user.Users;
 
 /**
  * 
@@ -129,7 +129,7 @@ public class Configuration {
 //     *  cascade="none"
 //     *  column="user_id"
 //     *  lazy="false"
-//     *  class="org.xmlcrm.app.hibernate.beans.user.Users"
+//     *  class="org.openmeetings.app.hibernate.beans.user.Users"
 //     *  not-null="false"
 //     *  outer-join="true"
 //     */     

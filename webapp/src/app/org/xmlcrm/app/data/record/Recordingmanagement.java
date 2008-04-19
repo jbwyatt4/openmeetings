@@ -1,4 +1,4 @@
-package org.xmlcrm.app.data.record;
+package org.openmeetings.app.data.record;
 
 import java.util.List;
 
@@ -8,11 +8,11 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.xmlcrm.app.data.conference.Roommanagement;
-import org.xmlcrm.app.hibernate.beans.recording.Recording;
-import org.xmlcrm.app.hibernate.beans.rooms.Rooms;
-import org.xmlcrm.app.hibernate.beans.user.Users;
-import org.xmlcrm.app.hibernate.utils.HibernateUtil;
+import org.openmeetings.app.data.conference.Roommanagement;
+import org.openmeetings.app.hibernate.beans.recording.Recording;
+import org.openmeetings.app.hibernate.beans.rooms.Rooms;
+import org.openmeetings.app.hibernate.beans.user.Users;
+import org.openmeetings.app.hibernate.utils.HibernateUtil;
 
 public class Recordingmanagement {
 

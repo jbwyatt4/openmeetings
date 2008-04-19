@@ -1,4 +1,4 @@
-package org.xmlcrm.utils.mappings;
+package org.openmeetings.utils.mappings;
 
 import java.util.LinkedList;
 

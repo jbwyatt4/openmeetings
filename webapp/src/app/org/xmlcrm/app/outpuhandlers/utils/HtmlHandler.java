@@ -1,4 +1,4 @@
-package org.xmlcrm.app.outpuhandlers.utils;
+package org.openmeetings.app.outpuhandlers.utils;
 
 import java.io.FileOutputStream;
 import java.util.ArrayList;
@@ -18,7 +18,7 @@ import com.lowagie.text.pdf.BaseFont;
 import com.lowagie.text.pdf.PdfWriter;
 import com.lowagie.text.pdf.BaseFont;
 
-import org.xmlcrm.app.outpuhandlers.pdf.handler.Documentmanagement;
+import org.openmeetings.app.outpuhandlers.pdf.handler.Documentmanagement;
 
 public class HtmlHandler implements ContentHandler {
     private Documentmanagement DocumentmanagementI;

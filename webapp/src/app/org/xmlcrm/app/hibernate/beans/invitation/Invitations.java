@@ -1,9 +1,9 @@
-package org.xmlcrm.app.hibernate.beans.invitation;
+package org.openmeetings.app.hibernate.beans.invitation;
 
 import java.util.Date;
 
-import org.xmlcrm.app.hibernate.beans.rooms.Rooms;
-import org.xmlcrm.app.hibernate.beans.user.Users;
+import org.openmeetings.app.hibernate.beans.rooms.Rooms;
+import org.openmeetings.app.hibernate.beans.user.Users;
 
 /**
  * 
@@ -65,7 +65,7 @@ public class Invitations {
 	 *  cascade="none"
 	 *  column="roomid"
 	 *  lazy="false"
-	 *  class="org.xmlcrm.app.hibernate.beans.rooms.Rooms"
+	 *  class="org.openmeetings.app.hibernate.beans.rooms.Rooms"
 	 *  not-null="false"
 	 *  outer-join="true"
 	 */
@@ -82,7 +82,7 @@ public class Invitations {
 	 *  cascade="none"
 	 *  column="invitedBy"
 	 *  lazy="false"
-	 *  class="org.xmlcrm.app.hibernate.beans.user.Users"
+	 *  class="org.openmeetings.app.hibernate.beans.user.Users"
 	 *  not-null="false"
 	 *  outer-join="true"
 	 */

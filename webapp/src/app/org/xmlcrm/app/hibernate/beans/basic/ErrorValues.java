@@ -1,8 +1,8 @@
-package org.xmlcrm.app.hibernate.beans.basic;
+package org.openmeetings.app.hibernate.beans.basic;
 
 import java.util.Date;
 
-import org.xmlcrm.app.hibernate.beans.lang.Fieldvalues;
+import org.openmeetings.app.hibernate.beans.lang.Fieldvalues;
 
 /**
  * 
@@ -73,7 +73,7 @@ public class ErrorValues {
     /**
 	 * @hibernate.many-to-one
 	 * column = "fieldvalues_id"
-	 * class = "org.xmlcrm.app.hibernate.beans.lang.Fieldvalues"
+	 * class = "org.openmeetings.app.hibernate.beans.lang.Fieldvalues"
 	 * insert="false"
 	 * update="false"
 	 * outer-join="true"
@@ -89,7 +89,7 @@ public class ErrorValues {
     /**
 	 * @hibernate.many-to-one
 	 * column = "errortype_id"
-	 * class = "org.xmlcrm.app.hibernate.beans.basic.ErrorType"
+	 * class = "org.openmeetings.app.hibernate.beans.basic.ErrorType"
 	 * insert="false"
 	 * update="false"
 	 * outer-join="true"

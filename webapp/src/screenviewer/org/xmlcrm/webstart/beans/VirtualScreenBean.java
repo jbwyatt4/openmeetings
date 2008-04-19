@@ -1,4 +1,4 @@
-package org.xmlcrm.webstart.beans;
+package org.openmeetings.webstart.beans;
 
 import java.awt.Robot;
 

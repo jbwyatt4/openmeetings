@@ -1,4 +1,4 @@
-package org.xmlcrm.servlet.outputhandler;
+package org.openmeetings.servlet.outputhandler;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -20,12 +20,12 @@ import org.dom4j.Element;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.xmlcrm.app.data.basic.Sessionmanagement;
-import org.xmlcrm.app.data.user.Usermanagement;
-import org.xmlcrm.app.data.basic.Languagemanagement;
-import org.xmlcrm.app.hibernate.beans.lang.FieldLanguage;
-import org.xmlcrm.app.hibernate.beans.lang.Fieldvalues;
-import org.xmlcrm.app.data.basic.Fieldmanagment;
+import org.openmeetings.app.data.basic.Sessionmanagement;
+import org.openmeetings.app.data.user.Usermanagement;
+import org.openmeetings.app.data.basic.Languagemanagement;
+import org.openmeetings.app.hibernate.beans.lang.FieldLanguage;
+import org.openmeetings.app.hibernate.beans.lang.Fieldvalues;
+import org.openmeetings.app.data.basic.Fieldmanagment;
 
 /**
  * 

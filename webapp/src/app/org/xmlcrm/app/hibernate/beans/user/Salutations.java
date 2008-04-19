@@ -1,8 +1,8 @@
-package org.xmlcrm.app.hibernate.beans.user;
+package org.openmeetings.app.hibernate.beans.user;
 
 import java.util.Date;
 
-import org.xmlcrm.app.hibernate.beans.lang.Fieldlanguagesvalues;
+import org.openmeetings.app.hibernate.beans.lang.Fieldlanguagesvalues;
 
 /**
  * 

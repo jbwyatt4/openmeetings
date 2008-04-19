@@ -1,4 +1,4 @@
-package org.xmlcrm.app.xmlimport;
+package org.openmeetings.app.xmlimport;
 
 import java.io.InputStream;
 import java.util.Iterator;
@@ -9,11 +9,11 @@ import org.dom4j.Document;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
-import org.xmlcrm.app.data.basic.Fieldmanagment;
-import org.xmlcrm.app.data.basic.Languagemanagement;
-import org.xmlcrm.app.hibernate.beans.lang.FieldLanguage;
-import org.xmlcrm.app.hibernate.beans.lang.Fieldvalues;
-import org.xmlcrm.app.hibernate.beans.lang.Fieldlanguagesvalues;
+import org.openmeetings.app.data.basic.Fieldmanagment;
+import org.openmeetings.app.data.basic.Languagemanagement;
+import org.openmeetings.app.hibernate.beans.lang.FieldLanguage;
+import org.openmeetings.app.hibernate.beans.lang.Fieldvalues;
+import org.openmeetings.app.hibernate.beans.lang.Fieldlanguagesvalues;
 
 public class LanguageImport {
 	private static final Log log = LogFactory.getLog(LanguageImport.class);

@@ -1,4 +1,4 @@
-package org.xmlcrm.app.xmlimport;
+package org.openmeetings.app.xmlimport;
 
 import java.io.InputStream;
 import java.util.Iterator;
@@ -8,12 +8,12 @@ import org.apache.commons.logging.LogFactory;
 import org.dom4j.Document;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
-import org.xmlcrm.app.data.user.Addressmanagement;
-import org.xmlcrm.app.data.user.Emailmanagement;
-import org.xmlcrm.app.data.user.Organisationmanagement;
-import org.xmlcrm.app.data.user.Usermanagement;
-import org.xmlcrm.app.hibernate.beans.user.Users;
-import org.xmlcrm.utils.math.CalendarPatterns;
+import org.openmeetings.app.data.user.Addressmanagement;
+import org.openmeetings.app.data.user.Emailmanagement;
+import org.openmeetings.app.data.user.Organisationmanagement;
+import org.openmeetings.app.data.user.Usermanagement;
+import org.openmeetings.app.hibernate.beans.user.Users;
+import org.openmeetings.utils.math.CalendarPatterns;
 
 public class UserImport {
 	

@@ -1,4 +1,4 @@
-package org.xmlcrm.app.data.basic;
+package org.openmeetings.app.data.basic;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

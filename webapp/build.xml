@@ -4,6 +4,7 @@
 	<property name="main.src.dir" value="${basedir}/src/app"/>
 	<property name="webstart.src.dir" value="${basedir}/src/screenviewer"/>
 	<property name="templates.src.dir" value="${basedir}/src/templates"/>
+	<property name="fileservice.src.dir" value="${basedir}/src/fileservice"/>
 	<property name="test.src.dir" value="${basedir}/src/test"/>
 	<property name="main.out.dir" value="${basedir}/bin"/>
 	
@@ -39,6 +40,8 @@
 	<property name="upload.lib" value="${project.lib}/upload" />
 	<property name="xstream.lib" value="${project.lib}/xstream" />
 	<property name="web.lib" value="${project.lib}" />
+	<!-- Axis2 -->
+	<property name="axis2.lib" value="${project.lib}/axis2-1.3" />
 	
 	<!-- compile classpath -->
 	<path id="compile.classpath">
@@ -51,6 +54,7 @@
 		<fileset dir="${upload.lib}" includes="*.jar"/>
 		<fileset dir="${xstream.lib}" includes="*.jar"/>
 		<fileset dir="${web.lib}" includes="*.jar"/>
+		<fileset dir="${axis2.lib}" includes="*.jar"/>
 	</path>
 
 	<!-- xDoclet classpath -->
@@ -60,7 +64,6 @@
 		<fileset dir="${database.lib}" includes="*.jar" />
 		<fileset dir="${jakarta.common.lib}" includes="*.jar"/>
 		<fileset dir="${log4j.lib}" includes="*.jar"/>
-
 	</path>
 
 	<!-- Schema export classpath -->
@@ -70,7 +73,6 @@
 		<fileset dir="${jakarta.common.lib}" includes="*.jar" />
 		<fileset dir="${database.lib}" includes="*.jar" />
 		<fileset dir="${project.lib}" includes="*.jar" />
-		
 		<pathelement path="${main.out.dir}"/>
 	</path>
 
@@ -263,7 +265,15 @@
 				<attribute name="Built-On" value="${build.TODAY}"/>
 				<attribute name="Class-Path" value="conf/ ${jar.classpath}"/>
 			</manifest>
-		</jar>		
+		</jar>	
+		<jar destfile="${dist.dir}/${project.distname}/WEB-INF/services/FileService.aar">
+			<fileset dir="${fileservice.src.dir}/">
+				<include name="META-INF/**"/>
+			</fileset>
+			<fileset dir="${classes.dir}">
+				<include name="org/openmeetings/axis/services/FileService.class"/>
+			</fileset>
+		</jar>			
 	</target>
 	
 	<target name="signWebStartJars">
@@ -304,6 +314,9 @@
 			<classpath refid="compile.classpath"/>
 		</javac>
 		<javac srcdir="${test.src.dir}" destdir="${main.out.dir}" >
+			<classpath refid="compile.classpath"/>
+		</javac>	
+		<javac srcdir="${fileservice.src.dir}" destdir="${main.out.dir}" >
 			<classpath refid="compile.classpath"/>
 		</javac>		
 	</target>

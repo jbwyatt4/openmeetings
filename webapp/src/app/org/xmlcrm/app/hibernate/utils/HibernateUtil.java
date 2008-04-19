@@ -1,4 +1,4 @@
-package org.xmlcrm.app.hibernate.utils;
+package org.openmeetings.app.hibernate.utils;
 
 import java.io.File;
 
@@ -7,7 +7,7 @@ import org.apache.commons.logging.LogFactory;
 import org.hibernate.*;
 import org.hibernate.cfg.*;
 
-import org.xmlcrm.app.remote.Application;
+import org.openmeetings.app.remote.Application;
 
 public class HibernateUtil {
 	

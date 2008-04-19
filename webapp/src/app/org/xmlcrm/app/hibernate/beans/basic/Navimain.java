@@ -1,9 +1,9 @@
-package org.xmlcrm.app.hibernate.beans.basic;
+package org.openmeetings.app.hibernate.beans.basic;
 
 import java.util.Set;
 import java.util.Date;
 
-import org.xmlcrm.app.hibernate.beans.lang.Fieldlanguagesvalues;
+import org.openmeetings.app.hibernate.beans.lang.Fieldlanguagesvalues;
 
 /**
  * 
@@ -180,7 +180,7 @@ public class Navimain {
      * where = "deleted='false'";
      * order-by = "naviorder"
      * @hibernate.one-to-many 
-     * class = "org.xmlcrm.app.hibernate.beans.basic.Navisub"
+     * class = "org.openmeetings.app.hibernate.beans.basic.Navisub"
      * @hibernate.key 
      * column = "main_id"
      */
