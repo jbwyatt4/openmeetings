@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+  <class table="adresses_phones" name="org.openmeetings.app.hibernate.beans.adresses.Adresses_Phones">
+    <id column="adresses_phone_id" name="adresses_phone_id">
+      <generator class="increment"/>
+    </id>
+    <property name="adresses_id" type="long" column="adresses_id"/>
+    <property name="phone_id" type="long" column="phone_id"/>
+    <property name="starttime" type="java.util.Date" column="starttime"/>
+    <property name="updatetime" type="java.util.Date" column="updatetime"/>
+    <property name="deleted" type="string" column="deleted"/>
+  </class>
+</hibernate-mapping>
