@@ -35,7 +35,6 @@
 	<property name="jakarta.common.lib" value="${project.lib}/jakarta-commons" />
 	<!--JDBC Drivers-->
 	<property name="database.lib" value="${project.lib}/database" />
-	<property name="quartz.lib" value="${project.lib}/quartz" />
 	<property name="red5.lib" value="${project.lib}/red5" />
 	<property name="upload.lib" value="${project.lib}/upload" />
 	<property name="xstream.lib" value="${project.lib}/xstream" />
@@ -49,7 +48,6 @@
 		<fileset dir="${hibernate.lib}" includes="*.jar"/>
 		<fileset dir="${project.lib}" includes="*.jar"/>
 		<fileset dir="${jakarta.common.lib}" includes="*.jar"/>
-		<fileset dir="${quartz.lib}" includes="*.jar"/>
 		<fileset dir="${red5.lib}" includes="*.jar"/>
 		<fileset dir="${upload.lib}" includes="*.jar"/>
 		<fileset dir="${xstream.lib}" includes="*.jar"/>
@@ -192,6 +190,14 @@
 		<copy todir="${dist.dir}/openmeetings/WEB-INF/lib">
 			<fileset dir="${axis2.lib}">
 			</fileset>
+			<fileset dir="${hibernate.lib}">
+			</fileset>	
+			<fileset dir="${upload.lib}">
+			</fileset>	
+			<fileset dir="${xstream.lib}">
+			</fileset>	
+			<fileset dir="${database.lib}">
+			</fileset>	
 		</copy>
 		<tstamp/>
 	</target>
