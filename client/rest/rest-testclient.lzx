@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<canvas debug="true" height="100%" title="Audio-Video Test-Application">
+	
+<debug width="450" x="460" y="600" height="100" />
+  
+<include href="incubator/lzcombobox.lzx" />
+
+<attribute name="_baseUrlRestTestGate" value="" type="string" />
+
+<method name="setBaseUrlGateway" args="txt">
+	this.setAttribute("_baseUrlRestTestGate",txt);
+</method>
+
+<view layout="axis:y;spacing:4" width="450" x="0">
+	<text fontstyle="bold" text="Connection - Settings (user for both BroadCasting and Subscribing)" />
+	<view width="450">
+		<text text="BaseURL:" />
+		<edittext align="right" width="350" id="url" text="http://127.0.0.1/openmeetings/services" />
+	</view>
+	<button align="right" width="200" text="connectRtmpConnection" 
+			onclick="canvas.setBaseUrlGateway(this.text)" />
+</view>
+
+
+<!-- some description -->
+<text fontstyle="italic" y="0" width="450" multiline="true" x="450">
+	Test-Client for Testing the WebService-Gateway (Axis2)<br/>
+	This uses the REST-Gateway, not the SOAP Gateway as OpenLaszlo does not<br/>
+	Understand/speak SOAP 1.2<br/>
+</text>
+
+
+</canvas>
