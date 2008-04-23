@@ -32,6 +32,11 @@
 			<netparam><method name="getValue">return hib.conferencedomain;</method></netparam>  
 	        <handler name="ondata" args="value">	
 				Debug.write("getListOfFiles: ",value);
+				Debug.write("getListOfFiles: ",canvas.sessionId);
+				Debug.write("getListOfFiles: ",canvas.uploadmoduleimg);
+				Debug.write("getListOfFiles: ",canvas.uploadmoduleimgfolder);
+				Debug.write("getListOfFiles: ",hib.currentroomid);
+				Debug.write("getListOfFiles: ",hib.conferencedomain);
                 parent.currentFilesValue = value;  
                 parent.renderResult();
 	        </handler>	
