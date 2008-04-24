@@ -1,8 +1,16 @@
 <service name="FileService">
 	<!-- Axis Description -->
     <description>
-        This is a sample Web Service with two operations,echo and ping.
+        File Service, to get all Files of a certain room
     </description>
+    <messageReceivers>
+        <messageReceiver 
+            mep="http://www.w3.org/2004/08/wsdl/in-only"
+			class="org.apache.axis2.rpc.receivers.RPCInOnlyMessageReceiver"/>
+        <messageReceiver
+            mep="http://www.w3.org/2004/08/wsdl/in-out"
+			class="org.apache.axis2.rpc.receivers.RPCMessageReceiver"/>
+    </messageReceivers>		
     <parameter name="ServiceClass">org.openmeetings.axis.services.FileService</parameter>
     <operation name="echo">
         <messageReceiver class="org.apache.axis2.receivers.RawXMLINOutMessageReceiver"/>
@@ -11,5 +19,5 @@
     <operation name="ping">
         <messageReceiver class="org.apache.axis2.receivers.RawXMLINOnlyMessageReceiver"/>
         <actionMapping>urn:ping</actionMapping>
-    </operation>
+    </operation>	
 </service>

@@ -270,6 +270,7 @@ public class UploadHandler extends HttpServlet {
 						fos.close();
 						is.close();
 
+						log.debug("canBeConverted: "+canBeConverted);
 						if (canBeConverted) {
 							//convert to pdf, thumbs, swf and xml-description
 							returnError = GeneratePDF.getInstance().convertPDF(current_dir, newFileSystemName , newFileSystemExtName, roomName, true, completeName);

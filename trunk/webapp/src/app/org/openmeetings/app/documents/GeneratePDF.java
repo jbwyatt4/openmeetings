@@ -6,9 +6,13 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.HashMap;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.commons.transaction.util.FileHelper;
 
 public class GeneratePDF {
+	
+	private static final Log log = LogFactory.getLog(GeneratePDF.class);
 	
 	private static GeneratePDF instance;
 
@@ -63,6 +67,7 @@ public class GeneratePDF {
 		String outputfolder = destinationFolder + File.separatorChar;
 		destinationFolder = destinationFolder + File.separatorChar;
 
+		log.debug("fullProcessing: "+fullProcessing);
 		if (fullProcessing) {
 			HashMap<String,Object> processOpenOffice = this.doConvertExec(current_dir, fileFullPath, destinationFolder,fileName);
 			returnError.put("processOpenOffice", processOpenOffice);
@@ -123,6 +128,9 @@ public class GeneratePDF {
 					+ destinationFolder + outputfile + ".pdf " + current_dir
 					+ "jod" + File.separatorChar;				
 			}
+			
+			log.debug("command: "+command);
+			
 			Runtime rt = Runtime.getRuntime();
 			returnMap.put("command",command);
 			Process proc = rt.exec(command);
