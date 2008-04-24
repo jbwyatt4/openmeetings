@@ -40,6 +40,10 @@ Tips for Installation:
   * [wml]
   * AdminScreenshots
   * QualityAssurance
+  
+== Integration Guide ==
+
+  * SoapMethods - Available SOAP-Services to login directly/embedding !OpenMeetings
 
 == Developer-Documentation ==
  

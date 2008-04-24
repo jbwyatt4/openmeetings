@@ -1,0 +1,5 @@
+#summary Available SOAP-Services to login directly/embedding OpenMeetings
+#labels Phase-Design,Phase-Implementation
+
+== Available Services == 
+http://openmeetings.googlecode.com/svn/docs/OpenMeetingsSOAPGateway.png
