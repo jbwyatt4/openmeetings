@@ -8,8 +8,9 @@ import java.util.LinkedList;
 
 public class LiberaryObject {
 	
-	//These Objects here are into Sub-Items cause two LinkedList in one 
-	//Object cannot be Serialized by Axis2!
+	//These Objects here should only be initialized if needed, 
+	//an empty LinkedList thorws a ServiceInvokationTarget-Exception (makes no sense to me but it
+	//is the way in Axis2 1.3
 	private LinkedList<FilesObject> filesList;
 	private LinkedList<FoldersObject> foldersList;
 	private PresentationObject presentationObject;
