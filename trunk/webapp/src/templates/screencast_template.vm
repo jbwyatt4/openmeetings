@@ -24,7 +24,7 @@
         <jar href="kunststoff.jar"/>
         <jar href="jta.jar"/> 
     </resources> 
-    <application-desc main-class="org.xmlcrm.webstart.gui.StartScreen">
+    <application-desc main-class="org.openmeetings.webstart.gui.StartScreen">
     	<argument>http://$rtmphostlocal:$red5httpport/$webAppRootKey/ScreenServlet</argument> 
     	<argument>$SID</argument> 
     	<argument>$ROOM</argument> 
