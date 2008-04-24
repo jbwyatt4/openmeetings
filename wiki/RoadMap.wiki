@@ -16,6 +16,7 @@ _released at 03.04.2007_
   # _Beta4 released at 21.08.2007_ [05Beta4Changes] 
   # _Beta5 released at 07.10.2007_ [05Beta5Changes] 
   # _Beta7 released at 06.12.2007_ [05Beta6Changes] 
+  # _Final released at 31.03.2007_
 
   * Reworked Conference and Audience Application with Panels (done)
   * Initial Support for users authentification and administration of users in their organisations

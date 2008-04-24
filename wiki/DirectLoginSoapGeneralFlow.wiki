@@ -4,10 +4,10 @@
 == Description ==
 
 The Application Logic of the environment holds an ID of the Room and manages the Room.
-If the ID is created the Room will be created into OpenMeetings using the SOAP-Gateway.
+If the ID is created the Room will be created into !OpenMeetings using the SOAP-Gateway.
 If a user wants to directly login into that room he does that in two basic steps (Phase 2 and Phase 3 in the Graph):
   # Sets the User session (getSession, loginUser, setUserObject)
-  # Login into the Room, by adding the RoomId and the SID to the URL
+  # Login into the Room, by adding the !RoomId and the SID to the URL
   
 If the Room needs Password Protection, then this must be implemented in the Application-Logic while 
 managing the Room (Application Logic of the environment). Also this environment has to take care that
