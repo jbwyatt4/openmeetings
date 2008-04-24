@@ -3,10 +3,11 @@
   * Client !OpenLaszlo http://www.openlaszlo.org
   * Server (Remoting and Streaming) Red5 http://www.osflash.org/red5
   * Persistent Layer: Hibernate http://www.hibernate.org
-  * Database: !MySQL or Postgres
-  * !DocumentConverter: !OpenOffice http://www.openoffice.org and JOD 
-    (http://www.artofsolving.com/opensource/jodconverter)
+  * Database: !MySQL or Postgres, or any other with a Hibernate-Dialect ([http://www.hibernate.org/hib_docs/reference/en/html/session-configuration.html#configuration-optional-dialects   full-list])
+  * !DocumentConverter: !OpenOffice http://www.openoffice.org and JOD (http://www.artofsolving.com/opensource/jodconverter), 
+    for help in installing see: OpenOfficeConverter
   * !ImageConverter: http://www.imagemagick.org
+  * Axis2, see available/planned Services at SoapMethods
 
 Openmeetings Graph:
 
