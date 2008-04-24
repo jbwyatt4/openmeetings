@@ -1,0 +1,20 @@
+#summary General Flow of Direct-Login/Managing Rooms with SOAP-Gateway
+#labels Phase-Design,Phase-Implementation
+
+== Description ==
+
+The Application Logic of the environment holds an ID of the Room and manages the Room.
+If the ID is created the Room will be created into OpenMeetings using the SOAP-Gateway.
+If a user wants to directly login into that room he does that in two basic steps (Phase 2 and Phase 3 in the Graph):
+  # Sets the User session (getSession, loginUser, setUserObject)
+  # Login into the Room, by adding the RoomId and the SID to the URL
+  
+If the Room needs Password Protection, then this must be implemented in the Application-Logic while 
+managing the Room (Application Logic of the environment). Also this environment has to take care that
+the room will be deleted if it is not needed anymore.
+Additional features on the RoadMap: Access-Log for each room and limit set an overall Room Limit. For example that
+the SOAP-Client is forced to delete old rooms cause he has expired his maximum. This could be used to control 
+the Maximum User per Server.
+
+== General Flow Graph == 
+http://openmeetings.googlecode.com/svn/docs/SOAPFlowDirectLogin.png
