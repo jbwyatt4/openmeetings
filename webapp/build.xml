@@ -4,9 +4,12 @@
 	<property name="main.src.dir" value="${basedir}/src/app"/>
 	<property name="webstart.src.dir" value="${basedir}/src/screenviewer"/>
 	<property name="templates.src.dir" value="${basedir}/src/templates"/>
-	<property name="fileservice.src.dir" value="${basedir}/src/fileservice"/>
 	<property name="test.src.dir" value="${basedir}/src/test"/>
 	<property name="main.out.dir" value="${basedir}/bin"/>
+	
+	<!-- Axis2 Services -->
+	<property name="fileservice.src.dir" value="${basedir}/src/fileservice"/>
+	<property name="roomservice.src.dir" value="${basedir}/src/roomservice"/>
 	
 	<property name="classes.dir" value="${basedir}/bin"/>
 	
@@ -294,7 +297,15 @@
 			<fileset dir="${classes.dir}">
 				<include name="org/openmeetings/axis/services/FileService.class"/>
 			</fileset>
-		</jar>			
+		</jar>	
+		<jar destfile="${dist.dir}/${project.distname}/WEB-INF/services/RoomService.aar">
+			<fileset dir="${roomservice.src.dir}/">
+				<include name="META-INF/**"/>
+			</fileset>
+			<fileset dir="${classes.dir}">
+				<include name="org/openmeetings/axis/services/RoomService.class"/>
+			</fileset>
+		</jar>		
 	</target>
 	
 	<target name="signWebStartJars">
@@ -338,6 +349,9 @@
 			<classpath refid="compile.classpath"/>
 		</javac>	
 		<javac srcdir="${fileservice.src.dir}" destdir="${main.out.dir}" >
+			<classpath refid="compile.classpath"/>
+		</javac>
+		<javac srcdir="${roomservice.src.dir}" destdir="${main.out.dir}" >
 			<classpath refid="compile.classpath"/>
 		</javac>		
 	</target>
