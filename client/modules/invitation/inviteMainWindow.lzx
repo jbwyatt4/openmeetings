@@ -74,7 +74,7 @@
 					} else {
 						var port = 80;
 					}
-					parent.baseUrl = urlObject.protocol+"://"+urlObject.host+":"+urlObject.port+urlObject.path+urlObject.file;
+					parent.baseUrl = urlObject.protocol+"://"+urlObject.host+":"+port+urlObject.path+urlObject.file;
 					if( $debug ) Debug.write("parent.baseUrl: ",parent.baseUrl);
 					if (!canvas.isConference){
 						parent.roomType = "audience";
