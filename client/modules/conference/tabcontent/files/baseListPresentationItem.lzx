@@ -15,8 +15,7 @@
                 'fileName=' + filename +
                 '&moduleName=' + this.uploadmodul + 
                 '&parentPath=' + canvas.uploadmoduleimgfolder + '/' +
-                '&room='+hib.currentroomid + 
-                '&domain='+hib.conferencedomain + 
+                '&room_id='+hib.currentroomid + 
                 '&sid='+canvas.sessionId;
             ////Debug.write("downloadurl: ",downloadurl);
             return downloadurl;

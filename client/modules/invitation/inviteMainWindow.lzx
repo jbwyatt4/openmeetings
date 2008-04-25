@@ -67,6 +67,12 @@
 		<simpleLabelButton labelid="218" x="$once{ parent.width-260 }" width="120" y="$once{ parent.height-26 }">
 			<handler name="onclick">
 				var urlObject =  LzBrowser.getBaseURL();
+				//If Port is Null or undefinied use port 80
+				if (urlObject.port>0){
+					var port = urlObject.port;
+				} else {
+					var port = 80;
+				}
 				parent.baseUrl = urlObject.protocol+"://"+urlObject.host+":"+urlObject.port+urlObject.path+urlObject.file;
 				if( $debug ) Debug.write("parent.baseUrl: ",parent.baseUrl);
 				if (!canvas.isConference){

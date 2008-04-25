@@ -27,15 +27,21 @@
 		y="1" onclick="parent.__LZFileDownload()" />
 	<view resource="filedelete_rsc" x="$once{ parent.parent.parent.width -34 }" y="1" 
 		onclick="parent.__LZFileDelete()" />
+		
+    <method name="generateFileLink" args="file">
+    	<![CDATA[
+        	return 'http://'+canvas.rtmphostlocal+':'+canvas.red5httpport+'/'+canvas.webAppRootKey+'/DownloadHandler?fileName='+file +
+	        '&moduleName='+this.uploadmodul +
+	        '&parentPath='+canvas.uploadmoduleimgfolder+'/' +
+	        '&room_id='+hib.currentroomid +
+	        '&sid='+canvas.sessionId; 
+	    ]]>
+    </method>			
 	
 	<method name="__LZFileDownload">
 		<![CDATA[
-		//Debug.write("Download File ",this);
-
-		var downloadurl = 'http://'+canvas.rtmphostlocal+':'+canvas.red5httpport+'/'+canvas.webAppRootKey+'/DownloadHandler?fileName='+this.filename+'&moduleName='+this.uploadmodul+'&parentPath='+canvas.uploadmoduleimgfolder+'/'+'&room='+hib.currentroomid+'&domain='+hib.conferencedomain+'&sid='+canvas.sessionId;
-
         //Debug.write(downloadurl);	
-		LzBrowser.loadURL(downloadurl,'_parent');	
+		LzBrowser.loadURL(this.generateFileLink(this.filename),'_parent');	
 		]]>
 	</method>
 	<method name="__LZFileDelete">

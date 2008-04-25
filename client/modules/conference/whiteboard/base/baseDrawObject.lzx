@@ -44,8 +44,7 @@
                     'fileName=' + fileName +
                     '&moduleName=' + moduleName + 
                     '&parentPath=' + parentPath +
-                    '&room='+room + 
-                    '&domain='+domain + 
+                    '&room_id='+room + 
                     '&sid='+canvas.sessionId;
             var width= this.width;
             var height = this.height;
@@ -79,8 +78,7 @@
                     'fileName=' + fileName +
                     '&moduleName=' + moduleName + 
                     '&parentPath=' + parentPath +
-                    '&room='+room + 
-                    '&domain='+domain + 
+                    '&room_id='+room + 
                     '&sid='+canvas.sessionId;
             var width= this.width;
             var height = this.height;
