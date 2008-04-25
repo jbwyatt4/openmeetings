@@ -61,7 +61,7 @@
 			}
 	        var downloadurl = 'http://'+canvas.rtmphostlocal+':'+canvas.red5httpport
 	        		+'/'+canvas.webAppRootKey+'/DownloadHandler?fileName='+value.picture_uri
-	        		+'&moduleName=remoteuserprofilebig&parentPath=&room=&domain='
+	        		+'&moduleName=remoteuserprofilebig&parentPath=&room_id='
 	        		+'&remoteUserid='+this.value.user_id
 	        		+'&sid='+canvas.sessionId;
 	        this._userpic.setAttribute('src',downloadurl);	

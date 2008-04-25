@@ -28,7 +28,7 @@
 				}
 		        var downloadurl = 'http://'+canvas.rtmphostlocal+':'+canvas.red5httpport
 		        		+'/'+canvas.webAppRootKey+'/DownloadHandler?fileName='+value.pictureuri
-		        		+'&moduleName=userprofile&parentPath=&room=&domain='
+		        		+'&moduleName=userprofile&parentPath=&room_id='
 		        		+'&sid='+canvas.sessionId;
 		        if($debug) Debug.write("dashboard/downloadurl "+downloadurl);
 		        parent._userpic.setAttribute('src',downloadurl);	

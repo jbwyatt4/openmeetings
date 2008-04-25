@@ -29,7 +29,6 @@
         	<netparam><method name="getValue">return canvas.uploadmoduleimg;</method></netparam>
 			<netparam><method name="getValue">return canvas.uploadmoduleimgfolder;</method></netparam>
 			<netparam><method name="getValue">return hib.currentroomid;</method></netparam>        	
-			<netparam><method name="getValue">return hib.conferencedomain;</method></netparam>  
 	        <handler name="ondata" args="value">	
 				Debug.write("getListOfFiles: ",value);
 				Debug.write("getListOfFiles: ",canvas.sessionId);

@@ -23,7 +23,7 @@
 		<![CDATA[
 	        var downloadurl = 'http://'+canvas.rtmphostlocal+':'+canvas.red5httpport
 	        		+'/'+canvas.webAppRootKey+'/DownloadHandler?fileName=CHAT'
-	        		+'&moduleName=chat&parentPath=&room=&domain='
+	        		+'&moduleName=chat&parentPath=&room_id='
 	        		+'&remoteUserid='+this.user_id
 	        		+'&sid='+canvas.sessionId;
 	        this._userpic.setAttribute('src',downloadurl);	
