@@ -1,6 +1,8 @@
 #summary Available SOAP-Services to login directly/embedding OpenMeetings
 #labels Phase-Design,Phase-Implementation
 
+_This Feature will be added in Version 0.5.1_
+
 == Description ==
 
 All Services here. You can see the recommended flow of embedding for example Rooms into your application at 
