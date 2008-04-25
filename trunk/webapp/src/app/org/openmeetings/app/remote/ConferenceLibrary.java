@@ -63,19 +63,6 @@ public class ConferenceLibrary {
 		fileExtensions.put("ext14", ".swf");
 	}
 	
-	public LinkedHashMap<String,Object> getListOfFiles(String SID, String moduleName,
-			String parentFolder, String room, String domain ) {
-		try {
-			IScope scope = Red5.getConnectionLocal().getScope().getParent();
-			String current_dir = scope.getResource("upload/").getFile().getAbsolutePath();
-			return this.getListOfFilesByAbsolutePath(SID, moduleName, parentFolder, room, domain, current_dir);
-		} catch (Exception err) {
-			log.error("[getListOfFiles]",err);
-			
-		}
-		return null;
-	}
-	
 	/**
 	 * @deprecated use getListOfFilesObjectByAbsolutePath instead
 	 * @param SID
@@ -86,8 +73,8 @@ public class ConferenceLibrary {
 	 * @param current_dir
 	 * @return
 	 */
-	public LinkedHashMap<String,Object> getListOfFilesByAbsolutePath(String SID, String moduleName,
-			String parentFolder, String room, String domain, String current_dir ) {
+	public LinkedHashMap<String,Object> getListOfFiles(String SID, String moduleName,
+			String parentFolder, Long room_id ) {
 		
 		LinkedHashMap<String,Object> returnMap = new LinkedHashMap<String,Object>();
 		
@@ -105,14 +92,9 @@ public class ConferenceLibrary {
 	        
 	        if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)){
 	        	
-				String roomName = domain+"_"+room;
-				//trim whitespaces cause it is a directory name
-				roomName = StringUtils.deleteWhitespace(roomName);
-				//System.out.println("roomname parentFolder"+roomName+" "+parentFolder);
+				String roomName = room_id.toString();
 				
-				//Servlet.getServletRequest().getRealPath("/");
-				
-				
+				String current_dir = Application.webAppPath+"/upload";
 				String working_dir = current_dir + File.separatorChar + roomName + parentFolder;
 				log.debug("#############working_dir : "+working_dir);
 
@@ -218,16 +200,13 @@ public class ConferenceLibrary {
 	 * @param parentFolder
 	 * @param room
 	 * @param domain
-	 * @param current_dir
 	 * @return
 	 */
 	public LiberaryObject getListOfFilesObjectByAbsolutePath(String SID, String moduleName,
-			String parentFolder, String room, String domain, String current_dir ) {
-		
+			String parentFolder, Long room_id) {
 		LiberaryObject returnMap = new LiberaryObject();
-		
 		try {
-			
+			String current_dir = Application.webAppPath+"/upload";
 			
 			LinkedHashMap<String,LinkedHashMap> presentationObject = null;
 						
@@ -239,19 +218,11 @@ public class ConferenceLibrary {
 	        
 	        if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)){
 	        	
-				String roomName = domain+"_"+room;
-				//trim whitespaces cause it is a directory name
-				roomName = StringUtils.deleteWhitespace(roomName);
-				//System.out.println("roomname parentFolder"+roomName+" "+parentFolder);
-				
-				//Servlet.getServletRequest().getRealPath("/");
-				
-				
+				String roomName = room_id.toString();
 				String working_dir = current_dir + File.separatorChar + roomName + parentFolder;
 				log.debug("#############working_dir : "+working_dir);
 
 				File dir = new File(working_dir);
-				
 				//First get all Directories of this Folder
 				FilenameFilter ff = new FilenameFilter() {
 				     public boolean accept(File b, String name) {
@@ -295,7 +266,10 @@ public class ConferenceLibrary {
 				if(allfiles!=null && allfiles.length!=0){
 					
 					boolean isPresentation = false;
-					
+					//We need to split this up into 2 different process
+					//because Axis cannot serialize the empty
+					//LinkedList and also it makes no sense to iterate through
+					//all files if it is a Presentation-File which is handled different
 					for(int i=0; i<allfiles.length; i++){
 						File file = new File(working_dir+File.separatorChar+allfiles[i]);
 						
@@ -305,7 +279,6 @@ public class ConferenceLibrary {
 						} else {
 							//String lastModified = formatDate(new Date(file.lastModified()));
 							String fileName = allfiles[i];
-							
 							
 							if (fileName.equals(CreateLibraryPresentation.libraryFileName)){
 								isPresentation = true;
@@ -330,9 +303,7 @@ public class ConferenceLibrary {
 								String lastModified = formatDate(new Date(file.lastModified()));
 								String fileName = allfiles[i];
 								String fileBytes = new Long(file.length()).toString();
-								
 								FilesObject fileInfo = new FilesObject();
-								
 								String fileNamePure = fileName.substring(0, fileName.length()-4);
 								String fileNameExt = fileName.substring(fileName.length()-4,fileName.length());
 								String isimage = "y";
@@ -344,13 +315,7 @@ public class ConferenceLibrary {
 								fileInfo.setLastModified(lastModified);
 								fileInfo.setFileBytes(fileBytes);
 								fileInfo.setIsimage(isimage);
-								returnMap.getFilesList().add(fileInfo);
-								
-								if (fileName.equals(CreateLibraryPresentation.libraryFileName)){
-									//returnMap.setPresentationObject(new PresentationObject());
-									//returnMap.setPresentationObject(LoadLibraryPresentationToObject.getInstance().parseLibraryFileToObject(file.getAbsolutePath()));
-								}
-									
+								returnMap.getFilesList().add(fileInfo);									
 							}
 						}
 					}
@@ -381,69 +346,51 @@ public class ConferenceLibrary {
 		formatter = new SimpleDateFormat(pattern, locale);
 		return formatter.format(date);
 	}
-	
-	public boolean deleteFile(String SID, String fileName, String moduleName, String parentFolder, String room, String domain){
-		boolean returnVal = false;
-        Long users_id = Sessionmanagement.getInstance().checkSession(SID);
-        long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);  
-        if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)){		
-			try {
-				
-				//Servlet.getServletRequest().getRealPath("/");
-				IScope scope = Red5.getConnectionLocal().getScope().getParent();
-				
-				String current_dir = scope.getResource("upload/").getFile().getAbsolutePath();			
-				
-				String roomName = domain+"_"+room;
-				
-				//trim whitespaces cause it is a directory name
-				roomName = StringUtils.deleteWhitespace(roomName);
-				
-				String working_dir = "";
-				
-				System.out.println("#### moduleName: "+moduleName);
-	
-				working_dir = current_dir+File.separatorChar+roomName+parentFolder;
-				
-				System.out.println("working_dir+fileName: "+working_dir+File.separatorChar+fileName);
+
+	public Boolean deleteFile(String SID, String fileName, String moduleName, String parentFolder, Long room_id){
+		try {		
+			Long users_id = Sessionmanagement.getInstance().checkSession(SID);
+	        Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);  
+	        if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)){		
+						
+				String current_dir = Application.webAppPath+"/upload";
+				String roomName = room_id.toString();
+				String working_dir = current_dir+File.separatorChar+roomName+parentFolder;
+				log.debug("working_dir+fileName: "+working_dir+File.separatorChar+fileName);
 				File dir = new File(working_dir+File.separatorChar+fileName);
 				
 				File thumb = new File(working_dir+File.separatorChar+"_thumb_"+fileName);
 				if (thumb.exists()) thumb.delete();
 				
-				returnVal = dir.delete();
+				boolean returnVal = dir.delete();
+				log.debug("delete file: "+working_dir+File.separatorChar+fileName);
 				
-				System.out.println("delete file: "+working_dir+File.separatorChar+fileName);
-			
+				//Iterate through the Files if it is a directory
 				if (!returnVal && dir.isDirectory()){
 					String[] listOfFiles = dir.list();
-					
 					for (int i=0;i<listOfFiles.length;i++){
-						System.out.println("Deleting recursive: "+working_dir+File.separatorChar+fileName+File.separatorChar+listOfFiles[i]);
+						log.debug("Deleting recursive: "+working_dir+File.separatorChar+fileName+File.separatorChar+listOfFiles[i]);
 						File d2 = new File(working_dir+File.separatorChar+fileName+File.separatorChar+listOfFiles[i]);
 						d2.delete();
 						File thumb2 = new File(working_dir+File.separatorChar+fileName+File.separatorChar+"_thumb_"+listOfFiles[i]);
 						if (thumb2.exists()) thumb2.delete();
 					}
 					dir.delete();
-					
 				}
-				
-			} catch (Exception e) {
-				System.out.println("Exception: "+e);
-				e.printStackTrace();
-			}
-        }
-		return returnVal;		
+				return returnVal;
+	        }
+		} catch (Exception e) {
+			log.error("[deleteFile]: ",e);
+		}
+		return false;		
 	}
 	
 	private boolean checkForPresention (String fileExtension) throws Exception{
-
-		//System.out.println("sys fileExtensions.size(): "+fileExtensions.size());
+		//log.debug("sys fileExtensions.size(): "+fileExtensions.size());
 		Iterator<String> extensionIt = fileExtensions.keySet().iterator();
 		while (extensionIt.hasNext()) {
 			String fileExt = fileExtensions.get(extensionIt.next());
-			//System.out.println("sys fileExt: "+fileExt);
+			//log.debug("sys fileExt: "+fileExt);
 			if(fileExtension.equals(fileExt)){
 				return true;
 			}
@@ -460,55 +407,41 @@ public class ConferenceLibrary {
 		return null;
 	}	
 	
-	public Long saveAsObject(String SID, String room, String domain, String fileName, Object t){
-        Long users_id = Sessionmanagement.getInstance().checkSession(SID);
-        long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);  
-        if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)){		
-			try {
+	public Long saveAsObject(String SID, Long room_id, String fileName, Object t){
+		try {
+	        Long users_id = Sessionmanagement.getInstance().checkSession(SID);
+	        Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);  
+	        if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)){		
 				LinkedHashMap tObject = (LinkedHashMap)t;
-				log.error(tObject.size());
+				log.debug(tObject.size());
 				
-				String roomName = domain+"_"+room;
-				
-//				trim whitespaces cause it is a directory name
-				roomName = StringUtils.deleteWhitespace(roomName);
-				
-				IScope scope = Red5.getConnectionLocal().getScope().getParent();
-				
-				String current_dir = scope.getResource("upload/").getFile().getAbsolutePath()+File.separatorChar+roomName+File.separatorChar;
+				String roomName = room_id.toString();				
+				String current_dir = Application.webAppPath+"/upload"+File.separatorChar+roomName+File.separatorChar;
 
 				log.error("### this is my working directory: "+current_dir);
 				
 				return LibraryDocumentConverter.getInstance().writeToLocalFolder(current_dir, fileName, tObject);
-			} catch (Exception err){
-				log.error("[saveAsImage] "+err);
-			}
-        }
+	        }
+		} catch (Exception err){
+			log.error("[saveAsImage] "+err);
+		}	        
 		return null;
 	}
 	
-	public LinkedHashMap loadWmlObject(String SID, String room, String domain, String fileName){
-        Long users_id = Sessionmanagement.getInstance().checkSession(SID);
-        long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);  
-        if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)){		
-			try {
-				
-				String roomName = domain+"_"+room;
-				
-//				trim whitespaces cause it is a directory name
-				roomName = StringUtils.deleteWhitespace(roomName);
-				
-				IScope scope = Red5.getConnectionLocal().getScope().getParent();
-				
-				String current_dir = scope.getResource("upload/").getFile().getAbsolutePath()+File.separatorChar+roomName+File.separatorChar;
-
-				log.error("### this is my working directory: "+current_dir);
+	public LinkedHashMap loadWmlObject(String SID, Long room_id, String fileName){
+		try {
+	        Long users_id = Sessionmanagement.getInstance().checkSession(SID);
+	        Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);  
+	        if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)){		
+				String roomName = room_id.toString();
+				String current_dir = Application.webAppPath+"/upload"+File.separatorChar+roomName+File.separatorChar;
+				log.debug("### this is my working directory: "+current_dir);
 				
 				return LibraryWmlLoader.getInstance().loadWmlFile(current_dir, fileName);
-			} catch (Exception err){
-				log.error("[saveAsImage] "+err);
-			}
-        }
+	        }
+		} catch (Exception err){
+			log.error("[saveAsImage] "+err);
+		}
 		return null;
 	}
 	

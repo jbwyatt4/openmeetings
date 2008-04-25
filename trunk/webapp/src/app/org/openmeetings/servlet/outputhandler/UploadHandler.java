@@ -108,13 +108,9 @@ public class UploadHandler extends HttpServlet {
 					
 					log.debug("uploading........ user_level: "+user_level);
 					
-					String room = httpServletRequest.getParameter("room");
-					if (room == null) {
-						room = "default";
-					}
-					String domain = httpServletRequest.getParameter("domain");
-					if (domain == null) {
-						domain = "default";
+					String room_id = httpServletRequest.getParameter("room_id");
+					if (room_id == null) {
+						room_id = "default";
 					}
 
 					String moduleName = httpServletRequest.getParameter("moduleName");
@@ -124,7 +120,7 @@ public class UploadHandler extends HttpServlet {
 					
 					//System.out.println("MODUL-NAME: "+moduleName);
 					//make a complete name out of domain(organisation) + roomname
-					String roomName = domain + "_" + room;
+					String roomName = room_id;
 					//trim whitespaces cause it is a directory name
 					roomName = StringUtils.deleteWhitespace(roomName);
 
