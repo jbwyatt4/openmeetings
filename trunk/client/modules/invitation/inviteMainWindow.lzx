@@ -68,7 +68,7 @@
 			<handler name="onclick">
 				var urlObject =  LzBrowser.getBaseURL();
 				//If Port is Null or undefinied use port 80
-				if (urlObject.port>0){
+				if (urlObject.port!=null && urlObject.port!=undefined){
 					var port = urlObject.port;
 				} else {
 					var port = 80;
