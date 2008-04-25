@@ -20,22 +20,24 @@ http://localhost:5080/openmeetings/services/FileService?wsdl
 (http://$RED5_HOST:$RED5_HTTP_HOST/openmeetings/services/FileService?wsdl)
 
 Services:
-  * public !LiberaryObject getListOfFiles(String SID, String moduleName,String parentFolder, Long room_id ) 
-	Description: Returns a Library Object. The Library-Object contains a Folders and a Fileslist OR
-	it contains a !PresentationObject. A !PresentationObject is a List of thumbnails + the reference to the
-	converted SWF, PDF and the Original Document (The original Document is only included if it is not also a PDF)
-	
-	Params:
+
+==== public !LiberaryObject getListOfFiles(String SID, String moduleName,String parentFolder, Long room_id ) ====
+Description: Returns a Library Object. The Library-Object contains a Folders and a Fileslist OR
+it contains a !PresentationObject. A !PresentationObject is a List of thumbnails + the reference to the
+converted SWF, PDF and the Original Document (The original Document is only included if it is not also a PDF)
+
+Params:
 || *type* || *name* || *description* ||
 || String || SID || The SID of the User. This SID must be marked as Loggedin ||
 || String || moduleName || Modulename, the Value is 'videoconf1' ||
 || String ||parentFolder || Parent Folder, for the Root of every Room it is blank not '/' ||
 || Long || room_id || the room_id you would like to get the Files ||
 	 
-  * public Boolean deleteFile(String SID, String fileName, String moduleName, String parentFolder, Long room_id)
-  	Description: Deletes a file or folder
-  	
-  	Params:
+==== public Boolean deleteFile(String SID, String fileName, String moduleName, String parentFolder, Long room_id) ====
+
+Description: Deletes a file or folder
+
+Params:
 || *type* || *name* || *description* ||
 || String || SID || The SID of the User. This SID must be marked as Loggedin ||
 || String || fileName || The File or Folder you would like to delete ||
@@ -43,12 +45,7 @@ Services:
 || String || parentFolder || Parent Folder, for the Root of every Room it is blank not '/' ||
 || Long || room_id || the room_id of the file  ||
 
-|| *Year* || *Temperature (low)* || *Temperature (high)* ||
-|| 1900 || -10 || 25 ||
-|| 1910 || -15 || 30 ||
-|| 1920 || -10 || 32 ||
-|| 1930 || _N/A_ || _N/A_ ||
-|| 1940 || -2 || 40 ||
+
 
 --------
 	
