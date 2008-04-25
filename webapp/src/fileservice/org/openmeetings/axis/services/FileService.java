@@ -10,7 +10,6 @@ import org.apache.commons.logging.LogFactory;
 import org.openmeetings.app.data.basic.Sessionmanagement;
 import org.openmeetings.app.data.basic.files.*;
 import org.openmeetings.app.remote.ConferenceLibrary;
-import org.openmeetings.app.remote.Application;
 import javax.xml.stream.XMLStreamException;
 
 public class FileService {
@@ -29,25 +28,29 @@ public class FileService {
 	 * @return
 	 */
 	public LiberaryObject getListOfFiles(String SID, String moduleName,
-			String parentFolder, String room, String domain ) {
+			String parentFolder, Long room_id ) {
 		try {
-			log.debug("#############current_dir : "+"");
-			
-			String current_dir = Application.webAppPath+"/upload";
-			
+			log.debug("#############current_dir : "+"");			
 			
 			log.debug("#############SID : "+SID);
 	        log.debug("#############moduleName : "+moduleName);
 	        log.debug("#############parentFolder : "+parentFolder);
-	        log.debug("#############room : "+room);
-	        log.debug("#############domain : "+domain);
-	        log.debug("#############current_dir : "+current_dir);
+	        log.debug("#############room_id : "+room_id);
 	        
-	        return ConferenceLibrary.getInstance().getListOfFilesObjectByAbsolutePath(SID, moduleName, parentFolder, room, domain, current_dir);
+	        return ConferenceLibrary.getInstance().getListOfFilesObjectByAbsolutePath(SID, moduleName, parentFolder, room_id);
 		
 	        
 		} catch (Exception err) {
 			log.error("[getListOfFiles]",err);
+		}
+		return null;
+	}
+	
+	public Boolean deleteFile(String SID, String fileName, String moduleName, String parentFolder, Long room_id){
+		try {
+			return ConferenceLibrary.getInstance().deleteFile(SID, fileName, moduleName, parentFolder, room_id);
+		} catch (Exception err) {
+			log.error("[deleteFile]",err);
 		}
 		return null;
 	}

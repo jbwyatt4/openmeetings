@@ -50,14 +50,10 @@ public class DownloadHandler extends HttpServlet {
 			Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
 
 			if (user_level!=null && user_level > 0) {
-				String room = httpServletRequest.getParameter("room");
-				if(room == null){
-					room = "default";
-				}
-				String domain = httpServletRequest.getParameter("domain");
-				if(domain == null){
-					domain = "default";
-				}		
+				String room_id = httpServletRequest.getParameter("room_id");
+				if(room_id == null){
+					room_id = "default";
+				}	
 				
 				String moduleName = httpServletRequest.getParameter("moduleName");
 				if (moduleName == null) {
@@ -75,7 +71,7 @@ public class DownloadHandler extends HttpServlet {
 				}
 				
 				//make a complete name out of domain(organisation) + roomname
-				String roomName = domain+"_"+room;
+				String roomName = room_id;
 				//trim whitespaces cause it is a directory name
 				roomName = StringUtils.deleteWhitespace(roomName);
 
