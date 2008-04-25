@@ -24,6 +24,7 @@ Services:
 	Description: Returns a Library Object. The Library-Object contains a Folders and a Fileslist OR
 	it contains a !PresentationObject. A !PresentationObject is a List of thumbnails + the reference to the
 	converted SWF, PDF and the Original Document (The original Document is only included if it is not also a PDF)
+	
 	Params:
 	 # String SID - The SID of the User. This SID must be marked as Loggedin
 	 # String moduleName - Modulename, the Value is 'videoconf1'
@@ -32,6 +33,7 @@ Services:
 	 
   * public Boolean deleteFile(String SID, String fileName, String moduleName, String parentFolder, Long room_id)
   	Description: Deletes a file or folder
+  	
   	Params:
   	 # String SID - The SID of the User. This SID must be marked as Loggedin
   	 # String fileName - The File or Foldername you would like to delete
