@@ -31,8 +31,8 @@ Params:
 || String || moduleName || Modulename, the Value is 'videoconf1' ||
 || String ||parentFolder || Parent Folder, for the Root of every Room it is blank not '/' ||
 || Long || room_id || the room_id you would like to get the Files ||
-	 
-	 
+
+
 ==== public Boolean deleteFile(String SID, String fileName, String moduleName, String parentFolder, Long room_id) ====
 
 Description: Deletes a file or folder
@@ -45,8 +45,4 @@ Params:
 || String || parentFolder || Parent Folder, for the Root of every Room it is blank not '/' ||
 || Long || room_id || the room_id of the file  ||
 
-
-
 --------
-	
-
