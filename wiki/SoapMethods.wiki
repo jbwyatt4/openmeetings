@@ -36,7 +36,7 @@ Services:
   	
   	Params:
   	 # String SID - The SID of the User. This SID must be marked as Loggedin
-  	 # String fileName - The File or Foldername you would like to delete
+  	 # String fileName - The File or Foldername you would like to delete 
 	 # String moduleName - Modulename, the Value is 'videoconf1'
 	 # String parentFolder - Parent Folder, for the Root of every Room it is blank not '/'
 	 # Long room_id - the Roomid where the file is into
