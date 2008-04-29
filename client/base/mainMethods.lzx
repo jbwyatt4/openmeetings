@@ -67,6 +67,14 @@
 			canvas.isinitRoomDirect = true;
 			canvas.invitationHash = invitationHash;
 		}
+		
+		var sid = LzBrowser.getInitArg('sid');
+		var initroomid = LzBrowser.getInitArg('roomid');
+		if (sid != undefined && initroomid != undefined){
+			canvas.remoteUserLogin = true;
+			canvas.initroomid = initroomid;
+			canvas.remoteUserSid = sid;
+		}
 	
 		//check for reset password
 		var hash = LzBrowser.getInitArg('hash');
@@ -175,7 +183,17 @@
 	            }
 	        ]]>
 		</handler>
-	</netRemoteCallHib>      
+	</netRemoteCallHib> 
+	
+	<method name="setRoomValues" args="roomTypeId,roomId">
+		if (roomTypeId==1){
+	    		canvas.isConference = true;
+	    	} else {
+	    		canvas.isConference = false;
+	    }
+    	hib.currentroomid = roomId;
+	</method>
+			     
 	    
 	<command id="cmd_applyforMod" onselect="canvas.doActionmenu('applyForMod')" key="['ALT','Shift','M']"/>
 	<command id="cmd_createPoll" onselect="canvas.doActionmenu('createPoll')" key="['ALT','Shift','P']"/> 

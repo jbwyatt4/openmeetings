@@ -195,6 +195,23 @@
             ]]>
         </handler>   
     </netRemoteCallHib>  
+    
+    <netRemoteCallHib name="loginUserByRemote" activeErrorHandler="true" 
+    	funcname="xmlcrm.loginUserByRemote" >          
+    	<netparam name="remoteSessionId"><method name="getValue">return canvas.remoteUserSid;</method></netparam>
+        <handler name="ondata" args="value">
+        	<![CDATA[
+        		canvas.thishib.loaderVar.close();
+            	//The onResult-Handler will be called be the rtmpconnection
+				if ($debug) Debug.write("getInvitationByHash: ",value);
+				if (value<0){
+					
+				} else {
+					
+				}
+            ]]>
+        </handler>   
+    </netRemoteCallHib>  
         
     <netRemoteCallHib name="getLanguageByIdAndMax" funcname="languageservice.getLanguageByIdAndMax" >
     	<attribute name="start" value="0" type="number" />
@@ -218,13 +235,13 @@
 		            	parent.getRoomTypes.doCall();
 		            } else {
 		            	parent.initlanguageLoaded=true;
-					    if(!canvas.isinitRoomDirect){
+					    if (canvas.isinitRoomDirect || canvas.remoteUserLogin){
 					    	canvas.thishib.loaderVar.setProgress();
-		            	    parent.getStates.doCall();
+					        if($debug) Debug.write("isinitRoomDirect or remoteUserLogin is true");
+					        parent.markSessionAsLogedIn.doCall();
 					    } else {
 					    	canvas.thishib.loaderVar.setProgress();
-					        if($debug) Debug.write("canvas.isinitRoomDirect is true");
-					        parent.markSessionAsLogedIn.doCall();
+		            	    parent.getStates.doCall();
 					    }
 		            }
 				}
@@ -239,7 +256,11 @@
             Debug.write("markSessionAsLogedIn1 ",value);
             Debug.write("markSessionAsLogedIn2 ",canvas.sessionId);
             Debug.write("markSessionAsLogedIn3 ",canvas.initroomid);
-            parent.getInvitationByHash.doCall();      
+            if (canvas.isinitRoomDirect){
+            	parent.getInvitationByHash.doCall();   
+            } else if (canvas.remoteUserLogin) {
+            	parent.loginUserByRemote.doCall();   
+            }
         </handler>  
     </netRemoteCallHib> 
     
@@ -365,7 +386,7 @@
             <handler name="ondata" args="value">
                 //The onResult-Handler will be called be the rtmpconnection
                 Debug.write("setAudienceModusClient: ",value);    
-                canvas._videocontainer.addClientItem(value.connectedSince,value.isMod,value.streamid,value.username,value.userroom,value.formatedDate,value.userpos,value.usercolor,value); 
+                canvas._videocontainer.addClientItem(value.connectedSince,value.isMod,value.streamid,value.room_id,value.userroom,value.formatedDate,value.userpos,value.usercolor,value); 
                 canvas.setAttribute('numberofpartners',canvas.getAttribute('numberofpartners')+1);                              
             </handler>  
         </netRemoteCallHib>      

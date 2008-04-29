@@ -58,8 +58,6 @@
 		    }
 	
 		    	var roomObj = canvas.thishib.currentInvitation.room;
-	        	hib.conferencedomain = canvas.thishib.currentInvitation.conferencedomain;
-	        	hib.currentdomain = canvas.thishib.currentInvitation.conferencedomain;
 	        	hib.currentroomid = canvas.thishib.currentInvitation.room.rooms_id;
 		</method>
 		

@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<library>
+
+
+<!-- 
+
+NOTICE:
+All contents regarding "chat" are moved to /modules/chat/globalMethods.lzx
+Issue353. 2008.3.28 H.kuze(minamotonoason)
+
+-->
+
+
+<script>
+<![CDATA[
+	
+String.prototype.startsWith = function(prefix) {
+    return (this.indexOf(prefix) === 0);
+};	
+
+var _labelObject = new Array();
+
+var RegExpTooltiplist = null;
+
+function disablesTooltips(obj){
+  if(RegExpTooltiplist!=null){
+    RegExpTooltiplist.destroy();
+    RegExpTooltiplist=null;
+  }
+  RegExpTooltiplist = obj;
+}
+
+function setLabelObject(lableObj){
+	_labelObject = lableObj;
+}
+
+function getLabelObjectById(labelid){
+	for (var i=0;i<_labelObject.length;i++){
+		if (Number(_labelObject[i]['labelid'])==labelid){
+			return _labelObject[i];
+		}
+	}
+}
+
+function getLabelNameGlob(labelid){
+	for (var i=0;i<_labelObject.length;i++){
+		if (Number(_labelObject[i]['labelid'])==labelid){
+			return _labelObject[i]['labelvalue'];
+		}
+	}
+}
+//Debug.write("end init");
+    
+var currentMouseWheelObject = null;
+    
+function setCurrentMouseWheelObject(obj) {
+    currentMouseWheelObject=obj;
+}    
+function getCurrentMouseWheelObject(obj) {
+    return currentMouseWheelObject;
+}  
+function disableCurrentMouseWheelObject() {
+    currentMouseWheelObject=null;
+}  
+
+
+
+]]>
+</script>
+
+
+
+
+<dataset type="http" name="languageData" request="false" 
+	src="${ canvas.currentlanguage+'.xml' }" proxied="false">
+	<handler name="ondata" args="value">
+		parent.parseLanugageObject(value);
+	</handler>
+</dataset>
+
+<method name="parseLanugageObject" args="obj">
+
+	////Debug.write('parseLanugageObject: ',obj);
+	////Debug.write('parseLanugageObject: ',obj.childNodes);
+	<![CDATA[
+	var t = new Array();
+	for (var i=0;i<obj.childNodes.length;i++){
+		for (var k=0;k<obj.childNodes[i].childNodes.length;k++){
+			////Debug.write(obj.childNodes[i].childNodes[k]);
+			var t2 = new Array();
+			t2[obj.childNodes[i].childNodes[k].childNodes[0].nodeName]=obj.childNodes[i].childNodes[k].childNodes[0].childNodes[0].data;
+			t2[obj.childNodes[i].childNodes[k].childNodes[1].nodeName]=obj.childNodes[i].childNodes[k].childNodes[1].childNodes[0].data;
+			t.push(t2);
+		}
+	}
+	setLabelObject(t);
+	canvas.initScreen();
+	//Debug.write(t);
+	]]>
+</method>
+
+<!-- Data Source Definition -->
+<dataset name="getSessionVarsData" request="false" proxied="false"
+	querytype="POST" src="${ 'http://'+canvas.rtmphost+'/webrooms/checksession.php' }" 
+	type="http" >
+	<handler name="ondata" args="value">
+	
+		//Debug.write(value);
+		canvas.setAttribute('currentcourse',value.childNodes[0].childNodes[0].childNodes[0].childNodes[0].data);
+		canvas.setAttribute('currentcourseName',canvas.currentcourse);
+		canvas.setAttribute('currentcourseNameLong',value.childNodes[0].childNodes[0].childNodes[1].childNodes[0].data);
+		canvas.setAttribute('currentlanguage',value.childNodes[0].childNodes[0].childNodes[8].childNodes[0].data);
+
+		canvas.setAttribute('currentusename',value.childNodes[0].childNodes[1].childNodes[2].childNodes[0].data+' '+value.childNodes[0].childNodes[1].childNodes[1].childNodes[0].data);
+		
+		canvas.setAttribute('user_id',value.childNodes[0].childNodes[1].childNodes[0].childNodes[0].data);
+		canvas.setAttribute('firstName',value.childNodes[0].childNodes[1].childNodes[1].childNodes[0].data);
+		canvas.setAttribute('lastName',value.childNodes[0].childNodes[1].childNodes[2].childNodes[0].data);
+		canvas.setAttribute('mail',value.childNodes[0].childNodes[1].childNodes[3].childNodes[0].data);
+		canvas.setAttribute('lastLogin','');
+		canvas.setAttribute('official_code',value.childNodes[0].childNodes[1].childNodes[5].childNodes[0].data);
+		canvas.setAttribute('picture_uri','');
+		canvas.setAttribute('language',value.childNodes[0].childNodes[1].childNodes[7].childNodes[0].data);
+
+		//Debug.write(value.childNodes[0].childNodes[1].childNodes[0].childNodes[0].data);
+		//Debug.write(value.childNodes[0].childNodes[1].childNodes[1].childNodes[0].data);
+		//Debug.write(value.childNodes[0].childNodes[1].childNodes[2].childNodes[0].data);
+		//Debug.write(value.childNodes[0].childNodes[1].childNodes[3].childNodes[0].data);
+		//Debug.write(value.childNodes[0].childNodes[1].childNodes[4].childNodes[0].data);
+		//Debug.write(value.childNodes[0].childNodes[1].childNodes[5].childNodes[0].data);
+		//Debug.write(value.childNodes[0].childNodes[1].childNodes[6].childNodes[0].data);
+		//Debug.write(value.childNodes[0].childNodes[1].childNodes[7].childNodes[0].data);
+		
+		switch (canvas.currentlanguage){
+			case 'english':
+			break;
+			case 'german':
+			break;
+			case 'french':
+			break;			
+			default:
+			canvas.setAttribute('currentlanguage','english');
+			break;
+		}
+		
+		var addIt='conf';
+		if (!canvas.isConference){
+			addIt='meet'
+		}
+		canvas.setAttribute('currentcourse',canvas.rtmphost+canvas.currentcourse+addIt);
+		canvas.setAttribute('currentuser',value.childNodes[0].childNodes[1].childNodes[5].childNodes[0].data);
+		
+		canvas.setAttribute('loadingmessage','loading language data');
+		canvas.languageData.doRequest();
+	</handler>
+</dataset>
+
+
+<method name="getSessionVars" args="">
+	canvas.setAttribute('loadingmessage','loading session data');
+	var d=getSessionVarsData;
+	d.doRequest();
+</method>
+
+
+<method name="addBroswerTabHistory" args="value">
+  	<![CDATA[
+  	//Debug.write("addBroswerTabHistory: ",value);
+  	_browserhistory.addItem(value);
+  	this.browserTabHistory.push(value);
+  	]]>
+</method>
+  
+
+
+<method name="setModeratorName" args="mod">
+	<![CDATA[
+	this.moderatorName = mod;
+	canvas._mymod.mymodText.setText(canvas.getLabelName(98)+' '+this.moderatorName);
+	//Debug.write("canvas.moderatorStreamID==canvas.streamid",canvas.moderatorStreamID==canvas.streamid);
+	if (canvas.moderatorStreamID==canvas.streamid){
+		this.setAttribute('ismoderator',true);
+	} else {
+		this.setAttribute('ismoderator',false);
+	}
+	]]>
+</method>
+
+<method name="addFolderSequence" args="foldername">
+	<![CDATA[
+	this.uploadmoduleimgfolder = '/';
+	this.uploadmoduleimgfolder += foldername;
+	this.setAttribute('uploadmoduleimgfolder',this.uploadmoduleimgfolder);
+	]]>
+</method>
+	
+	
+<!-- country validation -->
+<method name="validateCountry" args="str">
+	////Debug.write("validateCountry: ",str);
+    str = str.toLowerCase();
+	<![CDATA[
+		if (str.length!=0){
+			var a = new Array();
+			for (var i=0;i<canvas.statesInitValues.length;i++){
+                var st = canvas.statesInitValues[i].name.toLowerCase();
+				if (st.startsWith(str))a.push(canvas.statesInitValues[i]);
+				//this.addItem(canvas.statesInitValues[i].name,canvas.statesInitValues[i].state_id);
+			}
+			return a;
+		}
+	]]>	
+</method>
+    
+<method name="getCountryRecord" args="id">
+    return canvas.statesInitValues[id];
+</method>
+    
+<method event="onmousewheeldelta" reference="LzKeys" args="d">
+    var obj = getCurrentMouseWheelObject();
+    ////Debug.write("onmousewheeldelta 12: ",d,obj);
+    <![CDATA[
+        if (obj!=null) {
+            obj.step(-d);
+        }
+    ]]>
+</method>     
+    
+<method name="reverseWords" args="str">
+    <![CDATA[
+        if ( str == "" || str == null ) return ""; // undefined
+        // first char indicates the main directive of str (rtl/ltr)
+        if ( isLTR( str.charCodeAt( 0 ) ) ) return str; // english or number
+        var words_arr = str.split( "" ); // an array of chars
+        for ( var i = 0, str = ""; i < words_arr.length; i++ ) // reverse their order
+            str += words_arr[ words_arr.length - i - 1 ];
+        return str;
+    ]]>
+</method>
+    
+<method name="isLTR" args="c">
+    <![CDATA[
+        return ( c >= 48 && c <= 57 || c >= 65 && c <= 90 || c >= 97 && c <= 122 );
+    ]]>
+</method>
+
+<method name="isHEB" args="c">
+    <![CDATA[
+        return ( c >= 224 && c <= 250 );
+    ]]>
+</method>    
+
+<method name="setTextAlign" args="obj,type">
+    switch ( type ) {
+        case "left" :
+            obj.setX( 0 );
+        break;
+        case "center" :
+            obj.setX( this.parent.width / 2 - this.getTextWidth() / 2 );
+        break;
+        case "right" :
+            obj.setX( this.parent.width - this.getTextWidth() );
+        break;
+    }
+</method>         
+
+<!--
+
+ -->
+		
+</library>
