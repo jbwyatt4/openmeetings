@@ -22,6 +22,7 @@ import org.openmeetings.app.hibernate.beans.user.Userdata;
 import org.openmeetings.app.data.basic.*;
 import org.openmeetings.app.data.user.Usermanagement;
 import org.openmeetings.app.data.user.Statemanagement;
+import org.openmeetings.app.hibernate.beans.basic.RemoteSessionObject;
 
 import org.openmeetings.app.data.conference.Invitationmanagement;
 import org.openmeetings.app.data.conference.Feedbackmanagement;
@@ -30,14 +31,25 @@ import org.openmeetings.app.rss.LoadAtomRssFeed;
 
 import org.openmeetings.app.conference.videobeans.RoomClient;
 
+import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.io.xml.XppDriver;
+
 /**
  * 
  * @author swagner
  *
- */
+ */ 
 public class MainService implements IPendingServiceCallback {
 	
 	private static final Log log = LogFactory.getLog(MainService.class);
+	private static MainService instance;
+
+	public static synchronized MainService getInstance() {
+		if (instance == null) {
+			instance = new MainService();
+		}
+		return instance;
+	}	
    
 	/**
 	 * get Navigation
@@ -147,6 +159,44 @@ public class MainService implements IPendingServiceCallback {
     	}
     	return null;
     } 
+    
+    /**
+     * Attention! This SID is NOT the default session id! its the Session id retrieved in the call
+     * from the SOAP Gateway!
+     * @param SID
+     * @return
+     */
+    public Long loginUserByRemote(String SID){
+    	try {
+        	Long users_id = Sessionmanagement.getInstance().checkSession(SID);
+        	Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
+        	if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)){
+        		
+        		Sessiondata sd = Sessionmanagement.getInstance().getSessionByHash(SID);
+        		if (sd == null || sd.getSessionXml() == null) {
+        			return new Long(-37);
+        		} else {
+        			
+        			XStream xStream = new XStream(new XppDriver());
+        			xStream.setMode(XStream.NO_REFERENCES);
+        			
+        			String xmlString = sd.getSessionXml();
+        			RemoteSessionObject userObject = (RemoteSessionObject) xStream.fromXML(xmlString);
+        			
+        			IConnection current = Red5.getConnectionLocal();
+        			String streamId = current.getClient().getId();
+        			RoomClient currentClient = Application.getClientList().get(streamId);	
+        			currentClient.setUserObject(userObject.getUsername(), userObject.getFirstname(), userObject.getLastname());
+        			currentClient.setPicture_uri(userObject.getPictureUrl());
+        			currentClient.setMail(userObject.getEmail());
+        			Application.getClientList().put(streamId, currentClient);
+        		}
+        	}
+    	} catch (Exception err) {
+    		log.error("[loginUserByRemote] ",err);
+    	}
+    	return new Long(-1);
+    }
     
     /**
      * this function logs a user into if he enteres the app directly into a room
@@ -327,6 +377,12 @@ public class MainService implements IPendingServiceCallback {
     	}
     }
     
+    /**
+     * TODO: Is this function in usage?
+     * @param SID
+     * @param domain
+     * @return
+     */
 	public LinkedHashMap<Integer,RoomClient> getUsersByDomain(String SID, String domain) {
     	Long users_id = Sessionmanagement.getInstance().checkSession(SID);
     	Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
@@ -335,10 +391,10 @@ public class MainService implements IPendingServiceCallback {
     		Integer counter = 0;
     		for (Iterator<String> it = Application.getClientList().keySet().iterator();it.hasNext();) {
     			RoomClient rc = Application.getClientList().get(it.next());
-    			if (rc.getDomain().equals(domain)) {
+    			//if (rc.getDomain().equals(domain)) {
     				lMap.put(counter, rc);
     				counter++;
-    			}
+    			//}
     		}
     		return lMap;
     	} else {

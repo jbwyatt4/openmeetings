@@ -27,14 +27,14 @@ import org.openmeetings.utils.stringhandlers.ChatString;
 public class ChatService implements IPendingServiceCallback {
 
 	//the overall chatroom is jsut another room
-	private static final String overallChatRoomName = "overall";
+	private static final Long overallChatRoomName = new Long(-1);
 	
 	//number of items in the Chatroom history
 	private static final int chatRoomHistory = 50;
 	
 	private static final Log log = LogFactory.getLog(ChatService.class);
 	
-	private static LinkedHashMap<String,List<HashMap<String,Object>>> myChats = new LinkedHashMap<String,List<HashMap<String,Object>>>();
+	private static LinkedHashMap<Long,List<HashMap<String,Object>>> myChats = new LinkedHashMap<Long,List<HashMap<String,Object>>>();
 	
 
 	private String parseDateAsTimeString() {
@@ -68,12 +68,10 @@ public class ChatService implements IPendingServiceCallback {
 		try {
 			IConnection current = Red5.getConnectionLocal();
 			RoomClient currentClient = Application.getClientList().get(current.getClient().getId());
-			String roomname = currentClient.getUserroom();
-			String orgdomain = currentClient.getDomain();	
+			Long room_id = currentClient.getRoom_id();
 			
 			if (currentClient.getIsChatNotification()){
-				roomname = currentClient.getChatUserroom();
-				orgdomain = currentClient.getChatDomain();
+				room_id = currentClient.getRoom_id();
 			}
 			
 			//log.error(newMessage.getClass().getName());
@@ -92,16 +90,14 @@ public class ChatService implements IPendingServiceCallback {
 			hsm.put("client", currentClient);
 			hsm.put("message", newMessage);
 			
-			String chatroom = "_"+roomname+"_"+orgdomain;
-			
-			List<HashMap<String,Object>> myChatList = myChats.get(chatroom);
+			List<HashMap<String,Object>> myChatList = myChats.get(room_id);
 			if (myChatList==null) myChatList = new LinkedList<HashMap<String,Object>>();
 			
 			if (myChatList.size()==chatRoomHistory) myChatList.remove(0);
 			myChatList.add(hsm);
-			myChats.put(chatroom,myChatList);
+			myChats.put(room_id,myChatList);
 			
-			log.debug("SET CHATROOM: "+chatroom);
+			log.debug("SET CHATROOM: "+room_id);
 			
 			//broadcast to everybody in the room/domain
 			Iterator<IConnection> it = current.getScope().getConnections();
@@ -109,16 +105,16 @@ public class ChatService implements IPendingServiceCallback {
 				IConnection conn = it.next();
 				if (conn instanceof IServiceCapableConnection) {
 					RoomClient rcl = Application.getClientList().get(conn.getClient().getId());
-					log.debug("*..*idremote: " + rcl.getStreamid());
-					log.debug("*..*my idstreamid: " + currentClient.getStreamid());
-					if (roomname.equals(rcl.getUserroom()) && orgdomain.equals(rcl.getDomain())) {
+					log.debug("*..*idremote room_id: " + room_id);
+					log.debug("*..*my idstreamid room_id: " + rcl.getRoom_id());
+					if (rcl.getRoom_id() == room_id && room_id != null) {
 						((IServiceCapableConnection) conn).invoke("sendVarsToMessageWithClient",new Object[] { hsm }, this);
 						log.debug("sending sendVarsToMessageWithClient to " + conn);
 						if (rcl.getIsRecording()){
 							StreamService.addChatEvent(rcl.getRoomRecordingName(),hsm);
 						}							
 					} else if (rcl.getIsChatNotification()) {
-						if (roomname.equals(rcl.getChatUserroom()) && orgdomain.equals(rcl.getChatDomain())) {
+						if (room_id.equals(rcl.getChatUserRoomId()) && room_id != null) {
 							((IServiceCapableConnection) conn).invoke("sendVarsToMessageWithClient",new Object[] { hsm }, this);
 						}
 					}
@@ -135,10 +131,9 @@ public class ChatService implements IPendingServiceCallback {
 		try {
 			IConnection current = Red5.getConnectionLocal();
 			RoomClient currentClient = Application.getClientList().get(current.getClient().getId());
-			String roomname = currentClient.getUserroom();
-			String orgdomain = currentClient.getDomain();
+			Long room_id = currentClient.getRoom_id();
 			
-			String chatroom = "_"+roomname+"_"+orgdomain;
+			Long chatroom = room_id;
 			log.error("GET CHATROOM: "+chatroom);
 			
 			List<HashMap<String,Object>> myChatList = myChats.get(chatroom);
@@ -158,10 +153,9 @@ public class ChatService implements IPendingServiceCallback {
 		try {
 			IConnection current = Red5.getConnectionLocal();
 			RoomClient currentClient = Application.getClientList().get(current.getClient().getId());
-			String roomname = currentClient.getUserroom();
-			String orgdomain = currentClient.getDomain();
+			Long room_id = currentClient.getRoom_id();
 			
-			String chatroom = "_"+roomname+"_"+orgdomain;
+			Long chatroom = room_id;
 			log.debug("GET CHATROOM: "+chatroom);
 			
 			List<HashMap<String,Object>> myChatList = myChats.get(chatroom);
@@ -176,14 +170,15 @@ public class ChatService implements IPendingServiceCallback {
 	
 	/**
 	 * gets the chat history by string for non-conference-clients
+	 * TODO: Fix function check
 	 * @param roomname
 	 * @param orgdomain
 	 * @return
 	 */
-	public List<HashMap<String,Object>> getRoomChatHistoryByString(String roomname, String orgdomain) {
+	public List<HashMap<String,Object>> getRoomChatHistoryByString(Long room_id) {
 		try {
 			
-			String chatroom = "_"+roomname+"_"+orgdomain;
+			Long chatroom = room_id;
 			log.debug("GET CHATROOM: "+chatroom);
 			
 			List<HashMap<String,Object>> myChatList = myChats.get(chatroom);
@@ -198,20 +193,20 @@ public class ChatService implements IPendingServiceCallback {
 	
 	/**
 	 * adds a Client to the additional List of Users to Chat
+	 * TODO: FIxme in CLient Application
 	 * @param userroom
 	 * @param room_id
 	 * @param orgdomain
 	 * @return
 	 */
-	public Long addClientToChatNotification(String userroom, Long room_id, String orgdomain){
+	public Long addClientToChatNotification(Long room_id){
 		try {
 			IConnection current = Red5.getConnectionLocal();
 			RoomClient currentClient = Application.getClientList().get(current.getClient().getId());					
 			String streamid = currentClient.getStreamid();
 			
 			currentClient.setIsChatNotification(true);
-			currentClient.setChatDomain(orgdomain);
-			currentClient.setChatUserroom(userroom);
+			currentClient.setChatUserRoomId(room_id);
 			
 			Application.getClientList().put(streamid, currentClient);
 		} catch (Exception err) {
@@ -234,8 +229,7 @@ public class ChatService implements IPendingServiceCallback {
 			String streamid = currentClient.getStreamid();
 			
 			currentClient.setIsChatNotification(false);
-			currentClient.setChatDomain("");
-			currentClient.setChatUserroom("");
+			currentClient.setChatUserRoomId(null);
 			
 			Application.getClientList().put(streamid, currentClient);
 		} catch (Exception err) {

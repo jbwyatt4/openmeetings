@@ -86,8 +86,8 @@ public class StreamService implements IPendingServiceCallback {
 		try {
 			IConnection current = Red5.getConnectionLocal();
 			RoomClient currentClient = Application.getClientList().get(current.getClient().getId());
-			String roomname = currentClient.getUserroom();
-			String orgdomain = currentClient.getDomain();
+			Long room_id = currentClient.getRoom_id();
+
 			String recordingName = generateFileName(Long.valueOf(currentClient.getBroadCastID()).toString());
 			currentClient.setIsRecording(true);
 			currentClient.setRoomRecordingName(recordingName);			
@@ -110,7 +110,7 @@ public class StreamService implements IPendingServiceCallback {
 					RoomClient rcl = Application.getClientList().get(conn.getClient().getId());
 					log.error("is this users still alive? :"+rcl);
 					//Check if the Client is in the same room and same domain 
-					if(roomname.equals(rcl.getUserroom()) && orgdomain.equals(rcl.getDomain())){
+					if(room_id.equals(rcl.getRoom_id()) && room_id!=null){
 						
 						((IServiceCapableConnection) conn).invoke("startedRecording",new Object[] { currentClient }, this);
 						
@@ -188,8 +188,7 @@ public class StreamService implements IPendingServiceCallback {
 			RoomClient currentClient = Application.getClientList().get(current.getClient().getId());
 
 			LinkedHashMap<String,Object> roomRecording = roomRecordingList.get(roomrecordingName);
-			String roomname = currentClient.getUserroom();
-			String orgdomain = currentClient.getDomain();	
+			Long room_id = currentClient.getRoom_id();	
 
 			String conferenceType = (String) roomRecording.get("conferenceType");
 			
@@ -202,7 +201,7 @@ public class StreamService implements IPendingServiceCallback {
 					RoomClient rcl = Application.getClientList().get(conn.getClient().getId());
 					log.debug("is this users still alive? :"+rcl);
 					//Check if the Client is in the same room and same domain 
-					if(roomname.equals(rcl.getUserroom()) && orgdomain.equals(rcl.getDomain())){
+					if(room_id.equals(rcl.getRoom_id()) && room_id!=null){
 						((IServiceCapableConnection) conn).invoke("stopedRecording",new Object[] { currentClient }, this);
 					}
 				}
@@ -219,8 +218,7 @@ public class StreamService implements IPendingServiceCallback {
 			log.error("stopRecordAndSave "+currentClient.getUsername()+","+currentClient.getUserip());
 			LinkedHashMap<String,Object> roomRecording = roomRecordingList.get(roomrecordingName);
 			
-			String roomname = currentClient.getUserroom();
-			String orgdomain = currentClient.getDomain();	
+			Long room_id = currentClient.getRoom_id();
 			currentClient.setIsRecording(false);
 			currentClient.setRoomRecordingName("");
 			Application.getClientList().put(current.getClient().getId(), currentClient);
@@ -237,7 +235,7 @@ public class StreamService implements IPendingServiceCallback {
 					RoomClient rcl = Application.getClientList().get(conn.getClient().getId());
 					log.error("is this users still alive? :"+rcl);
 					//Check if the Client is in the same room and same domain 
-					if(roomname.equals(rcl.getUserroom()) && orgdomain.equals(rcl.getDomain())){
+					if(room_id.equals(rcl.getRoom_id()) && room_id!=null){
 						if (!conferenceType.equals("audience") || rcl.getIsMod()){
 							//stop the recorded flv and add the event to the notifications
 							log.error("*** sendClientBroadcastNotifications Any Client is Recording - stop that");
@@ -650,8 +648,7 @@ public class StreamService implements IPendingServiceCallback {
 			IConnection current = Red5.getConnectionLocal();
 			RoomClient currentClient = Application.getClientList().get(current.getClient().getId());
 			Long rooms_id = currentClient.getRoom_id();
-			String roomname = currentClient.getUserroom();
-			String orgdomain = currentClient.getDomain();	
+			Long room_id = currentClient.getRoom_id();
 			currentClient.setIsRecording(false);
 			currentClient.setRoomRecordingName("");
 			Application.getClientList().put(current.getClient().getId(), currentClient);
@@ -668,7 +665,7 @@ public class StreamService implements IPendingServiceCallback {
 					RoomClient rcl = Application.getClientList().get(conn.getClient().getId());
 					log.debug("is this users still alive? :"+rcl);
 					//Check if the Client is in the same room and same domain 
-					if(roomname.equals(rcl.getUserroom()) && orgdomain.equals(rcl.getDomain())){
+					if(room_id.equals(rcl.getRoom_id()) && room_id!=null){
 						((IServiceCapableConnection) conn).invoke("stopedRecording",new Object[] { currentClient }, this);
 						if (!conferenceType.equals("audience") || rcl.getIsMod()){
 							//if the user does publish av, a, v
@@ -693,8 +690,7 @@ public class StreamService implements IPendingServiceCallback {
 		try {
 			IConnection current = Red5.getConnectionLocal();
 			RoomClient currentClient = Application.getClientList().get(current.getClient().getId());
-			String roomname = currentClient.getUserroom();
-			String orgdomain = currentClient.getDomain();	
+			Long room_id = currentClient.getRoom_id();
 			
 			//Check if any client in the same room is recording at the moment
 			
@@ -707,7 +703,7 @@ public class StreamService implements IPendingServiceCallback {
 						log.debug("sending roomDisconnect to " + cons);
 						RoomClient rcl = Application.getClientList().get(cons.getClient().getId());
 						//Check if the Client is in the same room and same domain except its the current one
-						if(roomname.equals(rcl.getUserroom()) && orgdomain.equals(rcl.getDomain())){					
+						if(room_id.equals(rcl.getRoom_id()) && room_id!=null){					
 							if (rcl.getIsRecording()){
 								return rcl;
 							}

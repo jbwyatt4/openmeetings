@@ -7,10 +7,9 @@ import org.openmeetings.app.conference.videobeans.RoomClient;
 public class RoomPoll {
 	
 	Long roomPollId;
-	String roomScopeName;
 	RoomClient createdBy;
 	String pollQuestion;
-	String clientdomain;
+	Long room_id;
 	List<RoomPollAnswers> roomPollAnswerList;
 	Date pollDate;
 	Integer pollTypeId;
@@ -75,35 +74,20 @@ public class RoomPoll {
 		this.roomPollId = roomPollId;
 	}
 	/**
-	 * @return the roomScopeName
-	 */
-	public String getRoomScopeName() {
-		return roomScopeName;
-	}
-	/**
-	 * @param roomScopeName the roomScopeName to set
-	 */
-	public void setRoomScopeName(String roomScopeName) {
-		this.roomScopeName = roomScopeName;
-	}
-	/**
 	 * @return the pollTypeId
 	 */
 	public Integer getPollTypeId() {
 		return pollTypeId;
 	}
-	/**
-	 * @param pollTypeId the pollTypeId to set
-	 */
+	public Long getRoom_id() {
+		return room_id;
+	}
+	public void setRoom_id(Long room_id) {
+		this.room_id = room_id;
+	}
 	public void setPollTypeId(Integer pollTypeId) {
 		this.pollTypeId = pollTypeId;
 	}
-	public String getClientdomain() {
-		return clientdomain;
-	}
-	public void setClientdomain(String clientdomain) {
-		this.clientdomain = clientdomain;
-	}
-		
+	
 
 }
