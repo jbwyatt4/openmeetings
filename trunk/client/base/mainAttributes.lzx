@@ -186,6 +186,10 @@ these properties will be overwritten by config.xml -->
 <attribute name="isinitRoomDirect" value="false" type="boolean" />
 <attribute name="isinitRoomObject" value="null" /> 
 
+<!--- attributes for direct room access via remoteUser -->
+<attribute name="remoteUserLogin" value="false" type="boolean" />
+<attribute name="remoteUserSid" value="" type="string" />
+
 <attribute name="isResetUsername" value="false" type="boolean" />
 <attribute name="resetHash" value="" type="string" />
     

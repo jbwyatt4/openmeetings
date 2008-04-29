@@ -9,7 +9,6 @@
 	<include href="video/" />
     	<include href="polls/" />
 	<include href="videoclassroom/" />
-    	<include href="global/functions.lzx" />
     	<include href="conference/" />
 	<include href="browser/"/>   
 </library>

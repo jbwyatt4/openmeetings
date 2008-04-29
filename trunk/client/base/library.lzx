@@ -14,6 +14,7 @@
     <include href="tabbar/" />
 -->
 	<!-- for main.lzx -->
+    <include href="functions.lzx" />	
 	<include href="mainAttributes.lzx" /> 
 	<include href="mainDatasets.lzx" /> 
 	<include href="mainMethods.lzx" /> 

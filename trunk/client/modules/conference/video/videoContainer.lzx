@@ -26,9 +26,7 @@
 	</handler>
 
   	<netRemoteCallHib name="setRoomValues" funcname="setRoomValues" remotecontext="$once{ canvas.thishib }" >   
-    	<netparam><method name="getValue">return hib.currentroomid;</method></netparam>	 
     	<netparam><method name="getValue">return hib.currentroomid;</method></netparam>
-    	<netparam><method name="getValue">return hib.conferencedomain;</method></netparam>  	
 		<handler name="ondata" args="value">
 			//The onResult-Handler will be called be the rtmpconnection
 			if ($debug) Debug.write("setRoomValues1: ",value);
@@ -116,9 +114,9 @@
 	</method>
 	
 	
-	<method name="addClientItem" args="connectedSince,isMod,streamid,username,userroom,formatedDate,position,color,object">
+	<method name="addClientItem" args="connectedSince,isMod,streamid,username,room_id,formatedDate,position,color,object">
 		<![CDATA[
-		if ($debug) Debug.write("initializeStreams addClientItem: ",connectedSince,isMod,streamid,username,userroom,formatedDate);
+		if ($debug) Debug.write("initializeStreams addClientItem: ",connectedSince,isMod,streamid,username,room_id,formatedDate);
 		if (streamid!=canvas.streamid){
             var myvideocontainer = this.getNewVideoObjectByPos(object.publicSID);
 	  		myvideocontainer.clientVars = object;
