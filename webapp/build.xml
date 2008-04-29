@@ -10,6 +10,7 @@
 	<!-- Axis2 Services -->
 	<property name="fileservice.src.dir" value="${basedir}/src/fileservice"/>
 	<property name="roomservice.src.dir" value="${basedir}/src/roomservice"/>
+	<property name="userservice.src.dir" value="${basedir}/src/userservice"/>
 	
 	<property name="classes.dir" value="${basedir}/bin"/>
 	
@@ -305,7 +306,15 @@
 			<fileset dir="${classes.dir}">
 				<include name="org/openmeetings/axis/services/RoomService.class"/>
 			</fileset>
-		</jar>		
+		</jar>	
+		<jar destfile="${dist.dir}/${project.distname}/WEB-INF/services/UserService.aar">
+			<fileset dir="${userservice.src.dir}/">
+				<include name="META-INF/**"/>
+			</fileset>
+			<fileset dir="${classes.dir}">
+				<include name="org/openmeetings/axis/services/UserService.class"/>
+			</fileset>
+		</jar>
 	</target>
 	
 	<target name="signWebStartJars">
@@ -352,6 +361,9 @@
 			<classpath refid="compile.classpath"/>
 		</javac>
 		<javac srcdir="${roomservice.src.dir}" destdir="${main.out.dir}" >
+			<classpath refid="compile.classpath"/>
+		</javac>
+		<javac srcdir="${userservice.src.dir}" destdir="${main.out.dir}" >
 			<classpath refid="compile.classpath"/>
 		</javac>		
 	</target>

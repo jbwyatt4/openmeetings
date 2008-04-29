@@ -71,6 +71,38 @@ public class Sessionmanagement {
 
 		return sessiondata;
 	}
+	
+	public Sessiondata getSessionByHash(String SID) {
+		try {
+			//log.debug("updateUser User: "+USER_ID+" || "+SID);
+			
+			Object idf = HibernateUtil.createSession();
+			Session session = HibernateUtil.getSession();
+			Transaction tx = session.beginTransaction();
+			session.flush();
+			Criteria crit = session.createCriteria(Sessiondata.class);
+			crit.add(Restrictions.eq("session_id", SID));
+
+			List fullList = crit.list();
+			if (fullList.size() == 0){
+				log.error("Could not find session to update: "+SID);
+				return null;
+			} else {
+				//log.error("Found session to update: "+SID);
+			}
+			tx.commit();
+			HibernateUtil.closeSession(idf);
+			
+			Sessiondata sd = (Sessiondata) fullList.get(0);
+			
+			return sd;
+		} catch (HibernateException ex) {
+			log.error("[updateUser]: " ,ex);
+		} catch (Exception ex2) {
+			log.error("[updateUser]: " ,ex2);
+		}
+		return null;
+	}	
 
 	/**
 	 * check if a given sessionID is loged in
@@ -121,7 +153,7 @@ public class Sessionmanagement {
 	 * @param SID
 	 * @param USER_ID
 	 */
-	public void updateUser(String SID, long USER_ID) {
+	public Boolean updateUser(String SID, long USER_ID) {
 		try {
 			//log.debug("updateUser User: "+USER_ID+" || "+SID);
 			
@@ -135,7 +167,7 @@ public class Sessionmanagement {
 			List fullList = crit.list();
 			if (fullList.size() == 0){
 				log.error("Could not find session to update: "+SID);
-				return;
+				return false;
 			} else {
 				//log.error("Found session to update: "+SID);
 			}
@@ -158,12 +190,59 @@ public class Sessionmanagement {
 			HibernateUtil.closeSession(idf);
 			
 			//log.debug("session updated User: "+USER_ID);
-
+			return true;
 		} catch (HibernateException ex) {
 			log.error("[updateUser]: " ,ex);
 		} catch (Exception ex2) {
 			log.error("[updateUser]: " ,ex2);
 		}
+		return null;
+	}
+	
+	public Boolean updateUserRemoteSession(String SID, String sessionXml) {
+		try {
+			//log.debug("updateUser User: "+USER_ID+" || "+SID);
+			
+			Object idf = HibernateUtil.createSession();
+			Session session = HibernateUtil.getSession();
+			Transaction tx = session.beginTransaction();
+			session.flush();
+			Criteria crit = session.createCriteria(Sessiondata.class);
+			crit.add(Restrictions.eq("session_id", SID));
+
+			List fullList = crit.list();
+			if (fullList.size() == 0){
+				log.error("Could not find session to update: "+SID);
+				return false;
+			} else {
+				//log.error("Found session to update: "+SID);
+			}
+			tx.commit();
+			HibernateUtil.closeSession(idf);
+			
+			Sessiondata sd = (Sessiondata) fullList.get(0);
+			//log.debug("Found session to update: "+sd.getSession_id()+ " userId: "+USER_ID);
+			
+			idf = HibernateUtil.createSession();
+			session = HibernateUtil.getSession();
+			tx = session.beginTransaction();
+			sd.setRefresh_time(new Date());
+			session.refresh(sd);
+			sd.setSessionXml(sessionXml);
+			session.flush();
+			session.update(sd);
+			session.flush();
+			tx.commit();
+			HibernateUtil.closeSession(idf);
+			
+			//log.debug("session updated User: "+USER_ID);
+			return true;
+		} catch (HibernateException ex) {
+			log.error("[updateUserRemoteSession]: " ,ex);
+		} catch (Exception ex2) {
+			log.error("[updateUserRemoteSession]: " ,ex2);
+		}
+		return null;
 	}
 
 	/**

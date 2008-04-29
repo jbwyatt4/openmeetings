@@ -239,10 +239,20 @@ public class Usermanagement {
 				Users users = (Users) ll.get(0);
 				if (ManageCryptStyle.getInstance().getInstanceOfCrypt().verifyPassword(userpass, users.getPassword())) {
 					log.info("chsum OK: "+ users.getUser_id());
-					Sessionmanagement.getInstance().updateUser(SID, users.getUser_id());
+					Boolean bool = Sessionmanagement.getInstance().updateUser(SID, users.getUser_id());
+					if (bool==null){
+						//Exception
+						return new Long(-1);
+					} else if (!bool) {
+						//invalid Session-Object
+						return new Long(-35);
+					}
 					users.setUserlevel(getUserLevel(users.getLevel_id()));		
 					updateLastLogin(users);
-					currentClient.setUser_id(users.getUser_id());
+					//If invoked via SOAP this is NULL
+					if (currentClient!=null){
+						currentClient.setUser_id(users.getUser_id());
+					}
 					return users;
 				} else {
 					return new Long(-11);

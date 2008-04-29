@@ -10,5 +10,6 @@
     <property name="session_id" type="string" column="session_id"/>
     <property name="starttermin_time" type="java.util.Date" column="starttermin_time"/>
     <property name="user_id" type="long" column="user_id"/>
+    <property name="sessionXml" type="text" column="sessionXml"/>
   </class>
 </hibernate-mapping>

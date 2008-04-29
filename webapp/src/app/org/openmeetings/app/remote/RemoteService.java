@@ -111,7 +111,7 @@ public class RemoteService {
 			HashMap<String,RoomClient> ClientList = Application.getClientList();
 			RoomClient rc = ClientList.get(currentcon.getClient().getId());
 			
-			String uniqueRoomPollName = rc.getUserroom()+rc.getDomain();
+			String uniqueRoomPollName = rc.getRoom_id().toString();
 			
 			log.debug("rc: "+rc.getStreamid()+" "+rc.getUsername()+" "+rc.getIsMod());
 			
@@ -122,8 +122,7 @@ public class RemoteService {
 				roomP.setPollDate(new Date());
 				roomP.setPollQuestion(pollQuestion);
 				roomP.setPollTypeId(pollTypeId);
-				roomP.setRoomScopeName(rc.getUserroom());
-				roomP.setClientdomain(rc.getDomain());
+				roomP.setRoom_id(rc.getRoom_id());
 				List<RoomPollAnswers> rpA = new LinkedList<RoomPollAnswers>();
 				roomP.setRoomPollAnswerList(rpA);
 				
@@ -143,11 +142,11 @@ public class RemoteService {
 		return returnValue;
 	}	
 
-	public static void clearRoomPollList(String roomname, String domainName){
+	public static void clearRoomPollList(Long room_id){
 		try {
-			log.debug("clearRoomPollList: "+roomname+domainName);
-			if(pollList.get(roomname+domainName)!=null){
-				pollList.remove(roomname+domainName);
+			log.debug("clearRoomPollList: "+room_id);
+			if(pollList.get(room_id)!=null){
+				pollList.remove(room_id);
 			}
 		} catch (Exception err){
 			log.error(err);
@@ -162,7 +161,7 @@ public class RemoteService {
 			IConnection conn = it.next();
 			if (conn instanceof IServiceCapableConnection) {
 				RoomClient rcl = Application.getClientList().get(conn.getClient().getId());
-				if (rcl.getUserroom().equals(rc.getUserroom()) && rcl.getDomain().equals(rc.getDomain())){
+				if (rcl.getRoom_id().equals(rc.getRoom_id()) && rcl.getRoom_id()!=null){
 					((IServiceCapableConnection) conn).invoke(clientFunction,obj,Application.getInstance());
 					log.debug("sending "+clientFunction+" to " + conn+" "+conn.getClient().getId());
 				}
@@ -199,7 +198,7 @@ public class RemoteService {
 			RoomClient rc = Application.getClientList().get(current.getClient().getId());
 			
 			//get Poll
-			RoomPoll roomP = pollList.get(rc.getUserroom()+rc.getDomain());
+			RoomPoll roomP = pollList.get(rc.getRoom_id());
 			
 			log.debug("vote: "+pollvalue+" "+pollTypeId+" "+roomP.getPollQuestion());
 			
@@ -253,7 +252,7 @@ public class RemoteService {
 		RoomClient rc = Application.getClientList().get(current.getClient().getId());
 		
 		//get Poll
-		return pollList.get(rc.getUserroom()+rc.getDomain());
+		return pollList.get(rc.getRoom_id());
 
 	}
 	
@@ -262,7 +261,7 @@ public class RemoteService {
 		RoomClient rc = Application.getClientList().get(current.getClient().getId());
 		
 		//get Poll
-		return pollList.get(rc.getUserroom()+rc.getDomain());
+		return pollList.get(rc.getRoom_id());
 	}
 	
 	public int checkHasVoted(){
@@ -271,7 +270,7 @@ public class RemoteService {
 			RoomClient rc = Application.getClientList().get(current.getClient().getId());
 			
 			//get Poll
-			RoomPoll roomP = pollList.get(rc.getUserroom()+rc.getDomain());
+			RoomPoll roomP = pollList.get(rc.getRoom_id());
 			
 			if (roomP!=null){
 				log.debug("checkHasVoted: "+roomP.getPollQuestion());

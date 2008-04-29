@@ -28,18 +28,6 @@ public class RoomClient {
 	String publicSID = "";
 	
 	/*
-	 * this indicated if two people are in the same room
-	 * if they have the same userroom _and_ domain
-	 * in public rooms the domain == 'public'
-	 * in private rooms the domain is the organisation_id
-	 * its necessary to check both cause otherwise its theoretically possible
-	 * to make a room private _and_ public, then the room would have the same ID but a different domain
-	 * 
-	 */
-	String userroom = "";
-	String domain = "";
-	
-	/*
 	 * true indicates that this user is Moderating
 	 * in Events rooms (only 1 Video) this means that this user is currently 
 	 * sharing its video/audio
@@ -101,8 +89,7 @@ public class RoomClient {
 	 * conference to outside of the conference room
 	 */
 	Boolean isChatNotification = false;
-	String chatUserroom = "";
-	String chatDomain = "";
+	Long chatUserRoomId = null;
 	
 	/*
 	 * avsettings can be:
@@ -123,6 +110,12 @@ public class RoomClient {
 	
 	public void setUserObject(Long user_id, String username, String firstname, String lastname) {
 		this.user_id = user_id;
+		this.username = username;
+		this.firstname = firstname;
+		this.lastname = lastname;
+	}
+	
+	public void setUserObject(String username, String firstname, String lastname) {
 		this.username = username;
 		this.firstname = firstname;
 		this.lastname = lastname;
@@ -163,18 +156,6 @@ public class RoomClient {
 	 */
 	public void setUsername(String username) {
 		this.username = username;
-	}
-	/**
-	 * @return the userroom
-	 */
-	public String getUserroom() {
-		return userroom;
-	}
-	/**
-	 * @param userroom the userroom to set
-	 */
-	public void setUserroom(String userroom) {
-		this.userroom = userroom;
 	}
 	/**
 	 * @return the streamid
@@ -354,13 +335,6 @@ public class RoomClient {
 		this.user_id = user_id;
 	}
 
-	public String getDomain() {
-		return domain;
-	}
-	public void setDomain(String domain) {
-		this.domain = domain;
-	}
-
 	public Long getRoom_id() {
 		return room_id;
 	}
@@ -380,20 +354,13 @@ public class RoomClient {
 	}
 	public void setIsChatNotification(Boolean isChatNotification) {
 		this.isChatNotification = isChatNotification;
-	}
+	} 
 
-	public String getChatUserroom() {
-		return chatUserroom;
+	public Long getChatUserRoomId() {
+		return chatUserRoomId;
 	}
-	public void setChatUserroom(String chatUserroom) {
-		this.chatUserroom = chatUserroom;
-	}
-
-	public String getChatDomain() {
-		return chatDomain;
-	}
-	public void setChatDomain(String chatDomain) {
-		this.chatDomain = chatDomain;
+	public void setChatUserRoomId(Long chatUserRoomId) {
+		this.chatUserRoomId = chatUserRoomId;
 	}
 
 	public Boolean getIsRecording() {

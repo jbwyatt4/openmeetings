@@ -13,6 +13,7 @@ public class Sessiondata {
 	private String session_id;
 	private Date starttermin_time;
 	private Date refresh_time;
+	private String sessionXml;
 	public Sessiondata() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -79,5 +80,16 @@ public class Sessiondata {
         this.user_id = user_id;
     }
 
+    /**
+     * @hibernate.property
+     *  column="sessionXml"
+     *  type="text"
+     */ 
+	public String getSessionXml() {
+		return sessionXml;
+	}
+	public void setSessionXml(String sessionXml) {
+		this.sessionXml = sessionXml;
+	}
 	
 }
