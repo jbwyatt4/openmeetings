@@ -18,7 +18,6 @@
     <netRemoteCallHib name="getRoomChatHistoryByString" funcname="chatservice.getRoomChatHistoryByString" 
 		remotecontext="$once{ canvas.thishib }" > 
 		<netparam><method name="getValue">return hib.currentroomid;</method></netparam>
-		<netparam><method name="getValue">return hib.conferencedomain;</method></netparam>
         <handler name="ondata" args="value">
         	<![CDATA[
                 //The onResult-Handler will be called be the rtmpconnection

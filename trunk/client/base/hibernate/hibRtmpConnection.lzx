@@ -162,7 +162,6 @@
             <netparam><method name="getValue">return canvas.currentuser;</method></netparam>
             <netparam><method name="getValue">return canvas.firstName;</method></netparam>
             <netparam><method name="getValue">return canvas.lastName;</method></netparam>      
-            <netparam><method name="getValue">return parent.parent.currentdomain;</method></netparam>
             <handler name="ondata" args="value">
                 //The onResult-Handler will be called be the rtmpconnection
                 if ($debug) Debug.write("setUsername: ",value);                    
@@ -203,15 +202,44 @@
         	<![CDATA[
         		canvas.thishib.loaderVar.close();
             	//The onResult-Handler will be called be the rtmpconnection
-				if ($debug) Debug.write("getInvitationByHash: ",value);
+				if ($debug) Debug.write("loginUserByRemote: ",value);
 				if (value<0){
 					
 				} else {
-					
+					parent.getCurrentRoomClient.doCall();
 				}
             ]]>
         </handler>   
     </netRemoteCallHib>  
+    
+    <netRemoteCallHib name="getCurrentRoomClient" funcname="xmlcrm.getCurrentRoomClient" >          
+    	<netparam name="sessionId"><method name="getValue">return canvas.sessionId;</method></netparam>
+        <handler name="ondata" args="value">
+        	<![CDATA[
+            	//The onResult-Handler will be called be the rtmpconnection
+				if ($debug) Debug.write("getCurrentRoomClient: ",value);
+				if (value!=null){
+					canvas.firstName = value.firstname;
+					canvas.lastName = value.lastname;
+					parent.getRoomById.doCall();
+				}
+            ]]>
+        </handler>   
+    </netRemoteCallHib>
+    
+    <netRemoteCallHib name="getRoomById" funcname="conferenceservice.getRoomById" >          
+    	<netparam name="sessionId"><method name="getValue">return canvas.sessionId;</method></netparam>
+        <netparam name="roomId"><method name="getValue">return canvas.initroomid;</method></netparam>
+        <handler name="ondata" args="value">
+        	<![CDATA[
+            	//The onResult-Handler will be called be the rtmpconnection
+				if ($debug) Debug.write("getRoomById: ",value);
+				if (value!=null){
+					canvas.setRoomValues(value.roomtype.roomtypes_id,value.rooms_id,value);
+				}
+            ]]>
+        </handler>   
+    </netRemoteCallHib>
         
     <netRemoteCallHib name="getLanguageByIdAndMax" funcname="languageservice.getLanguageByIdAndMax" >
     	<attribute name="start" value="0" type="number" />
@@ -256,6 +284,8 @@
             Debug.write("markSessionAsLogedIn1 ",value);
             Debug.write("markSessionAsLogedIn2 ",canvas.sessionId);
             Debug.write("markSessionAsLogedIn3 ",canvas.initroomid);
+            Debug.write("markSessionAsLogedIn4 ",canvas.isinitRoomDirect);
+            Debug.write("markSessionAsLogedIn5 ",canvas.remoteUserLogin);
             if (canvas.isinitRoomDirect){
             	parent.getInvitationByHash.doCall();   
             } else if (canvas.remoteUserLogin) {
@@ -352,7 +382,6 @@
             <netparam><method name="getValue">return canvas.currentuser;</method></netparam>
             <netparam><method name="getValue">return canvas.firstName;</method></netparam>
             <netparam><method name="getValue">return canvas.lastName;</method></netparam>      
-            <netparam><method name="getValue">return parent.parent.currentdomain;</method></netparam>
             <handler name="ondata" args="value">
                 //The onResult-Handler will be called be the rtmpconnection
                 //Debug.write("setUsername: ",value);
@@ -435,7 +464,7 @@
             <handler name="ondata" args="value">
                 //The onResult-Handler will be called be the rtmpconnection
                 Debug.write("newStream: ",value);
-                canvas._videocontainer.startStream(value.publicSID,value.broadCastID); 
+                canvas._videocontainer.startStream(value.publicSID,value.broadCastID,value.firstname,value.lastname); 
             </handler>   
         </netRemoteCallHib>    
         <netRemoteCallHib name="closeStream" funcname="closeStream">

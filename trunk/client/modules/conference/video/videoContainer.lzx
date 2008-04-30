@@ -31,8 +31,6 @@
 			//The onResult-Handler will be called be the rtmpconnection
 			if ($debug) Debug.write("setRoomValues1: ",value);
 			if ($debug) Debug.write("setRoomValues2: ",hib.currentroomid);
-			if ($debug) Debug.write("setRoomValues3: ",hib.currentroomid);
-			if ($debug) Debug.write("setRoomValues4: ",hib.conferencedomain);
 			
             if ($debug) Debug.write("+++++++++++++++++ getClientListScope : ",value);
             for (var i in value){
@@ -130,13 +128,14 @@
 		]]>
 	</method>
 		
-	<method name="startStream" args="publicSID,broadcastId">
+	<method name="startStream" args="publicSID,broadcastId,firstname,lastname">
 		<![CDATA[
 			//if ($debug) Debug.write("startStream broadcastId: ",broadcastId);
 			var obj = this.getVideoObjectByPublicSID(publicSID);
 			//if ($debug) Debug.write("startStream obj: ",obj);
 			if (obj != null ){
 				obj._chatvideoinner._videostream.playStream(broadcastId,-1);
+				obj.setAttribute('chatpartnername',firstname+' '+lastname);
 			}
 		]]>
 	</method>

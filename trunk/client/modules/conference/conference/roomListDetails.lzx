@@ -61,8 +61,6 @@
 	<netRemoteCallHib name="addClientToChatNotification" remotecontext="$once{ canvas.thishib }" 
 		funcname="chatservice.addClientToChatNotification" >   
 		<netparam><method name="getValue">return parent.parent.roomid;</method></netparam>
-		<netparam><method name="getValue">return parent.parent.roomid;</method></netparam>
-		<netparam><method name="getValue">return hib.conferencedomain;</method></netparam>
 		<handler name="ondata" args="value">	
 		    <![CDATA[
 		    	Debug.write("addClientToChatNotification: ",value);

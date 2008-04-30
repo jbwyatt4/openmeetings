@@ -9,6 +9,13 @@
 	<class name="conferenceMenubar" extends="menubar" height="28">
 	   <!-- exit room -->
 	    <_labelMenu labelid="308" width="250">
+        	<handler name="oninit">
+        		<![CDATA[
+        			if (canvas.isinitRoomDirect || canvas.remoteUserLogin) {
+        				this.parent.mbarcontent.subviews[0].destroy();
+        			}
+        		]]>
+        	</handler>	    	
 	        <_labelMenuItem labelid="309" command="cmd_quit" />
 	    </_labelMenu>
 	    <!-- moderator menu -->
