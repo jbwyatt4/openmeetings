@@ -70,8 +70,10 @@ public class ChatService implements IPendingServiceCallback {
 			RoomClient currentClient = Application.getClientList().get(current.getClient().getId());
 			Long room_id = currentClient.getRoom_id();
 			
+			log.debug("room_id: "+room_id);
+			log.debug("currentClient.getIsChatNotification(): "+currentClient.getIsChatNotification());
 			if (currentClient.getIsChatNotification()){
-				room_id = currentClient.getRoom_id();
+				room_id = currentClient.getChatUserRoomId();
 			}
 			
 			//log.error(newMessage.getClass().getName());
@@ -170,7 +172,6 @@ public class ChatService implements IPendingServiceCallback {
 	
 	/**
 	 * gets the chat history by string for non-conference-clients
-	 * TODO: Fix function check
 	 * @param roomname
 	 * @param orgdomain
 	 * @return
@@ -193,7 +194,6 @@ public class ChatService implements IPendingServiceCallback {
 	
 	/**
 	 * adds a Client to the additional List of Users to Chat
-	 * TODO: FIxme in CLient Application
 	 * @param userroom
 	 * @param room_id
 	 * @param orgdomain

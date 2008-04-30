@@ -88,6 +88,19 @@ public class MainService implements IPendingServiceCallback {
 		return users;
 	}
 	
+	
+	public RoomClient getCurrentRoomClient(String SID){
+		try {
+			IConnection current = Red5.getConnectionLocal();
+			String streamid = current.getClient().getId();
+			RoomClient currentClient = Application.getClientList().get(streamid);
+			return currentClient;
+		} catch (Exception err){
+			log.error("[getCurrentRoomClient]",err);
+		}
+		return null;
+	}	
+	
 	/**
 	 * This Method is jsut for testing
 	 * you can find the corresponding
@@ -190,6 +203,8 @@ public class MainService implements IPendingServiceCallback {
         			currentClient.setPicture_uri(userObject.getPictureUrl());
         			currentClient.setMail(userObject.getEmail());
         			Application.getClientList().put(streamId, currentClient);
+        			
+        			return new Long(1);
         		}
         	}
     	} catch (Exception err) {
@@ -379,6 +394,7 @@ public class MainService implements IPendingServiceCallback {
     
     /**
      * TODO: Is this function in usage?
+     * @deprecated
      * @param SID
      * @param domain
      * @return

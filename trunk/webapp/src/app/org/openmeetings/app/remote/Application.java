@@ -682,12 +682,11 @@ public class Application extends ApplicationAdapter implements
 			while (iter.hasNext()) {
 				String key = (String) iter.next();
 				RoomClient rcl = ClientList.get(key);
-//				log.debug("#+#+#+#+##+## logicalRoomEnter ClientList key: "+rcl.getStreamid());
-//				log.debug("#+#+#+#+##+## logicalRoomEnter ClientList key: "+rcl.getUserroom());
+				log.debug("#+#+#+#+##+## logicalRoomEnter ClientList key: "+rcl.getRoom_id()+" "+room_id);
 				//Check if the Client is in the same room and same domain 
 				//and is not the same like we have just declared to be moderating this room
 				if(room_id==rcl.getRoom_id() && room_id!=null && !streamid.equals(rcl.getStreamid())){
-//					log.debug("set to ++ for client: "+rcl.getStreamid()+" "+roomcount);
+					log.debug("set to ++ for client: "+rcl.getStreamid()+" "+roomcount);
 					roomcount++;
 					roomClientList.put(key, rcl);
 				}				
@@ -745,7 +744,6 @@ public class Application extends ApplicationAdapter implements
 	
 	/**
 	 * this is set initial directly after login/loading language
-	 * it will set the domain which is essential for entering a conference-room
 	 * @param userId
 	 * @param username
 	 * @param firstname
@@ -753,7 +751,7 @@ public class Application extends ApplicationAdapter implements
 	 * @param orgdomain
 	 * @return
 	 */
-	public RoomClient setUsername(Long userId, String username, String firstname, String lastname, String orgdomain){
+	public RoomClient setUsername(Long userId, String username, String firstname, String lastname){
 		try {
 			//log.debug("#*#*#*#*#*#*# setUsername userId: "+userId+" username: "+username+" firstname: "+firstname+" lastname: "+lastname);
 			IConnection current = Red5.getConnectionLocal();			
@@ -905,7 +903,8 @@ public class Application extends ApplicationAdapter implements
 	}
 	
 	/**
-	 * TODO: The Function must be fixed in the Remote-Chat Module
+	 * TODO: Check if needed and remove
+	 * @deprecated
 	 * @param room_id
 	 * @param message
 	 * @return

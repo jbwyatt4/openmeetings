@@ -13,6 +13,7 @@ import org.openmeetings.app.data.beans.basic.SearchResult;
 import org.openmeetings.app.data.user.Usermanagement;
 import org.openmeetings.app.data.conference.Roommanagement;
 import org.openmeetings.app.hibernate.beans.rooms.Rooms;
+import org.openmeetings.app.hibernate.beans.rooms.RoomTypes;
 import org.openmeetings.app.hibernate.beans.rooms.Rooms_Organisation;
 import org.openmeetings.app.conference.videobeans.RoomClient;
 
@@ -24,7 +25,15 @@ import org.openmeetings.app.conference.videobeans.RoomClient;
 public class ConferenceService {
 	
 	private static final Log log = LogFactory.getLog(ConferenceService.class);
-	
+	private static ConferenceService instance;
+
+	public static synchronized ConferenceService getInstance() {
+		if (instance == null) {
+			instance = new ConferenceService();
+		}
+		return instance;
+	}	
+   
 	/**
 	 * get a List of all availible Rooms of this organisation
 	 * @param SID
@@ -61,7 +70,7 @@ public class ConferenceService {
 	 * @param organisation_id
 	 * @return
 	 */
-	public List getRoomsPublic(String SID, Long roomtypes_id){
+	public List<Rooms> getRoomsPublic(String SID, Long roomtypes_id){
         Long users_id = Sessionmanagement.getInstance().checkSession(SID);
         Long User_level = Usermanagement.getInstance().getUserLevelByID(users_id);
         log.error("getRoomsPublic user_level: "+User_level);
@@ -78,7 +87,7 @@ public class ConferenceService {
 	 * @param SID
 	 * @return
 	 */
-	public List getRoomTypes(String SID){
+	public List<RoomTypes> getRoomTypes(String SID){
         Long users_id = Sessionmanagement.getInstance().checkSession(SID);
         Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
         return Roommanagement.getInstance().getAllRoomTypes(user_level);
@@ -117,7 +126,7 @@ public class ConferenceService {
 	 * @param rooms_id
 	 * @return
 	 */
-	public List getOrganisationByRoom(String SID,long rooms_id){
+	public List<Rooms_Organisation> getOrganisationByRoom(String SID,long rooms_id){
         Long users_id = Sessionmanagement.getInstance().checkSession(SID);
         Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
         return Roommanagement.getInstance().getOrganisationsByRoom(user_level, rooms_id);
