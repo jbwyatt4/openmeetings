@@ -31,7 +31,7 @@ public class ScreenServlet extends HttpServlet {
 
 	/* (non-Javadoc)
 	 * @see javax.servlet.http.HttpServlet#doPost(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
-	 */
+	 */ 
 	protected void service(HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) throws ServletException,
 			IOException {
@@ -135,7 +135,7 @@ public class ScreenServlet extends HttpServlet {
 					hs.put("action", "newSlide");
 					hs.put("fileName", newFileSystemName+"_"+sid+newFileSystemExtName);
 					
-					Application.getInstance().sendMessageByRoomAndDomain(room,domain,hs);
+					Application.getInstance().sendMessageByRoomAndDomain(Long.valueOf(room).longValue(),hs);
 	
 				} else {
 					System.out.println("user not logged in");
