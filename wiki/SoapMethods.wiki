@@ -48,7 +48,7 @@ Params: no params
 Method: _public Long loginUser(String SID, String username, String userpass)_
 
 Description: auth function, use the SID you get by getSession, 
-return positive means logged-in, if negative its an ErrorCode, you have to invoke the Method
+return positive means logged-in, if negative its an !ErrorCode, you have to invoke the Method
 getErrorByCode to get the Text-Description of that !ErrorCode
 
 Params:
