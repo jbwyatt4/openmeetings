@@ -37,7 +37,7 @@ public class UserService {
      * @return positive means Loggedin, if negativ its an ErrorCode, you have to invoke the Method
      * getErrorByCode to get the Text-Description of that ErrorCode
      */  
-    public Object loginUser(String SID, String username, String userpass){
+    public Long loginUser(String SID, String username, String userpass){
     	try {
     		Object obj = Usermanagement.getInstance().loginUser(SID,username,userpass, null);
     		if (obj==null){
@@ -46,7 +46,7 @@ public class UserService {
     		String objName = obj.getClass().getName();
     		log.debug("objName: "+objName);
     		if (objName.equals("java.lang.Long")){
-    			return obj;
+    			return (Long) obj;
     		} else {
     			return new Long(1);
     		}
