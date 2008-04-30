@@ -11,8 +11,16 @@ DirectLoginSoapGeneralFlow
 == Availible Services ==
 
   * [http://code.google.com/p/openmeetings/wiki/SoapMethods#UserService UserService] - manage Users, Session and Errors
+  Methods:
+  # [http://code.google.com/p/openmeetings/wiki/SoapMethods#getSession getSession] 
+  # [http://code.google.com/p/openmeetings/wiki/SoapMethods#loginUser loginUser] 
+  # [http://code.google.com/p/openmeetings/wiki/SoapMethods#getErrorByCode getErrorByCode] 
+  # [http://code.google.com/p/openmeetings/wiki/SoapMethods#setUserObject setUserObject] 
+  
   * [http://code.google.com/p/openmeetings/wiki/SoapMethods#FileService FileService] - browse and edit Files of a Conference-Room
-
+  # [http://code.google.com/p/openmeetings/wiki/SoapMethods#getListOfFiles getListOfFiles] 
+  # [http://code.google.com/p/openmeetings/wiki/SoapMethods#deleteFile deleteFile]
+  
 == Overview of Services == 
 http://openmeetings.googlecode.com/svn/docs/OpenMeetingsSOAPGateway.png
 
@@ -23,15 +31,17 @@ Service-Endpoint:
 http://localhost:5080/openmeetings/services/UserService?wsdl
 (http://$RED5_HOST:$RED5_HTTP_HOST/openmeetings/services/UserService?wsdl)
 
-==== public Sessiondata getSession() ====
+==== getSession ====
 
+Method: public Sessiondata getSession()
 Description: load this session id before doing anything else
 Returns an Object of Type Sessiondata, this contains a sessionId, use that sessionId in all Methods
 
 Params: no params
 
-==== public Long loginUser(String SID, String username, String userpass) ====
+==== loginUser ====
 
+Method: public Long loginUser(String SID, String username, String userpass)
 Description: auth function, use the SID you get by getSession, 
 return positive means logged-in, if negative its an ErrorCode, you have to invoke the Method
 getErrorByCode to get the Text-Description of that ErrorCode
@@ -42,8 +52,9 @@ Params:
 || String || username || Username from OpenMeetings, the user has to have Admin-rights ||
 || String || userpass || Userpass from OpenMeetings ||
 
-==== public ErrorResult getErrorByCode(String SID, Long errorid, Long language_id) ====
+==== getErrorByCode ====
 
+Method: public !ErrorResult getErrorByCode(String SID, Long errorid, Long language_id)
 Description: loads an Error-Object, if a Method returns a negative Result, then its an Error-id,
 it needs a language_id to specify in which language you want to display/read the error-message.
 English has the Language-ID one, for different one see the [http://openmeetings.googlecode.com/svn/trunk/webapp/webapp/openmeetings/languages/languages.xml list of languages]
@@ -54,9 +65,9 @@ Params:
 || Long || errorid || the errorid (negative Value here!) ||
 || Long || language_id || The id of the language  ||
 
-==== public Long setUserObject(String SID, String username, String firstname, String lastname, 
-			String profilePictureUrl, String email) ====
+==== setUserObject ====
 
+Method: public Long setUserObject(String SID, String username, String firstname, String lastname, String profilePictureUrl, String email)
 Description: sets the SessionObject for a certain SID, after setting this Session-Object you can use the 
 SID + a RoomId to enter any Room.
 
@@ -77,8 +88,9 @@ Service-Endpoint:
 http://localhost:5080/openmeetings/services/FileService?wsdl
 (http://$RED5_HOST:$RED5_HTTP_HOST/openmeetings/services/FileService?wsdl)
 
-==== public !LiberaryObject getListOfFiles(String SID, String moduleName,String parentFolder, Long room_id ) ====
+==== getListOfFiles ====
 
+Method: public !LiberaryObject getListOfFiles(String SID, String moduleName,String parentFolder, Long room_id )
 Description: Returns a Library Object. The Library-Object contains a Folders and a Fileslist OR
 it contains a !PresentationObject. A !PresentationObject is a List of thumbnails + the reference to the
 converted SWF, PDF and the Original Document (The original Document is only included if it is not also a PDF)
@@ -91,8 +103,9 @@ Params:
 || Long || room_id || the room_id you would like to get the Files ||
 
 
-==== public Boolean deleteFile(String SID, String fileName, String moduleName, String parentFolder, Long room_id) ====
+==== deleteFile ====
 
+Method: public Boolean deleteFile(String SID, String fileName, String moduleName, String parentFolder, Long room_id)
 Description: Deletes a file or folder
 
 Params:
