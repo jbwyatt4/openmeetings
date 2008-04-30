@@ -38,7 +38,7 @@ http://localhost:5080/openmeetings/services/UserService?wsdl
 Method: _public Sessiondata getSession()_
 
 Description: load this session id before doing anything else
-Returns an Object of Type Sessiondata, this contains a sessionId, use that sessionId in all Methods
+Returns an Object of Type [http://openmeetings.googlecode.com/svn/trunk/webapp/src/app/org/openmeetings/app/hibernate/beans/basic/Sessiondata.java Sessiondata], this contains a sessionId, use that sessionId in all Methods
 
 Params: no params
 
@@ -62,7 +62,7 @@ Params:
 
 Method: _public !ErrorResult getErrorByCode(String SID, Long errorid, Long language_id)_
 
-Description: loads an Error-Object, if a Method returns a negative Result, then its an Error-id,
+Description: loads an [http://openmeetings.googlecode.com/svn/trunk/webapp/src/app/org/openmeetings/app/data/beans/basic/ErrorResult.java Error-Object]. If a Method returns a negative Result, its an Error-id,
 it needs a language_id to specify in which language you want to display/read the error-message.
 English has the Language-ID one, for different one see the [http://openmeetings.googlecode.com/svn/trunk/webapp/webapp/openmeetings/languages/languages.xml list of languages]
 
