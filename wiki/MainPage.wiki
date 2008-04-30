@@ -50,7 +50,7 @@ Tips for Installation:
 
   * Getting Started with !OpenLaszlo?, checkout [http://www.openlaszlo.org/lps4/laszlo-explorer/index.jsp?lzr=swf8 Laszlo-in-10-Minutes] and the [http://www.openlaszlo.org/lps4/docs/ Application Developer's Guide] 
   * CodingGuidelines - Client-Side Coding Guidelines
-  * NewStructure  - NewStructure of the OpenLaszlo-LZX-Source Files
+  * NewStructure  - NewStructure of the !OpenLaszlo-LZX-Source Files
   * SessionVariables  	- Documentation how Session-Variables are handled
   * AudioVideoTestingApplication - Test Application to test and see all Settings of Audio/Video/Streaming
   * ChangingAudioVideoSettings - how to change the Audio/Video Settings
