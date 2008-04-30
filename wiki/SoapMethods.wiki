@@ -10,10 +10,66 @@ DirectLoginSoapGeneralFlow
 
 == Availible Services ==
 
-  * SoapMethods#FileService
+  * [http://code.google.com/p/openmeetings/wiki/SoapMethods#UserService UserService] - manage Users, Session and Errors
+  * [http://code.google.com/p/openmeetings/wiki/SoapMethods#FileService FileService] - browse and edit Files of a Conference-Room
 
 == Overview of Services == 
 http://openmeetings.googlecode.com/svn/docs/OpenMeetingsSOAPGateway.png
+
+
+=== !UserService ===
+
+Service-Endpoint:
+http://localhost:5080/openmeetings/services/UserService?wsdl
+(http://$RED5_HOST:$RED5_HTTP_HOST/openmeetings/services/UserService?wsdl)
+
+==== public Sessiondata getSession() ====
+
+Description: load this session id before doing anything else
+Returns an Object of Type Sessiondata, this contains a sessionId, use that sessionId in all Methods
+
+Params: no params
+
+==== public Long loginUser(String SID, String username, String userpass) ====
+
+Description: auth function, use the SID you get by getSession, 
+return positive means logged-in, if negative its an ErrorCode, you have to invoke the Method
+getErrorByCode to get the Text-Description of that ErrorCode
+
+Params:
+|| *type* || *name* || *description* ||
+|| String || SID || The SID from getSession ||
+|| String || username || Username from OpenMeetings, the user has to have Admin-rights ||
+|| String || userpass || Userpass from OpenMeetings ||
+
+==== public ErrorResult getErrorByCode(String SID, Long errorid, Long language_id) ====
+
+Description: loads an Error-Object, if a Method returns a negative Result, then its an Error-id,
+it needs a language_id to specify in which language you want to display/read the error-message.
+English has the Language-ID one, for different one see the [http://openmeetings.googlecode.com/svn/trunk/webapp/webapp/openmeetings/languages/languages.xml list of languages]
+
+Params:
+|| *type* || *name* || *description* ||
+|| String || SID || The SID from getSession ||
+|| Long || errorid || the errorid (negative Value here!) ||
+|| Long || language_id || The id of the language  ||
+
+==== public Long setUserObject(String SID, String username, String firstname, String lastname, 
+			String profilePictureUrl, String email) ====
+
+Description: sets the SessionObject for a certain SID, after setting this Session-Object you can use the 
+SID + a RoomId to enter any Room.
+
+Params:
+|| *type* || *name* || *description* ||
+|| String || SID || The SID from getSession ||
+|| String || username || any username ||
+|| String || firstname || any firstname ||
+|| String || lastname || any lastname ||
+|| String || profilePictureUrl || any profilePictureUrl ||
+|| String || email || any email ||
+
+--------
 
 === !FileService ===
 
