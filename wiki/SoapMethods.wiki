@@ -78,7 +78,7 @@ Params:
 Method: _public Long setUserObject(String SID, String username, String firstname, String lastname, String profilePictureUrl, String email)_
 
 Description: sets the !SessionObject for a certain SID, after setting this Session-Object you can use the 
-SID + a RoomId to enter any Room.
+SID + a !RoomId to enter any Room.
 
 Params:
 || *type* || *name* || *description* ||
