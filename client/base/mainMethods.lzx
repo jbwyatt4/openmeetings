@@ -68,6 +68,7 @@
 			canvas.invitationHash = invitationHash;
 		}
 		
+		//sid=fe9ea55284e0b23991b1c1089b2c8f64&roomid=1
 		var sid = LzBrowser.getInitArg('sid');
 		var initroomid = LzBrowser.getInitArg('roomid');
 		if (sid != undefined && initroomid != undefined){
@@ -185,13 +186,20 @@
 		</handler>
 	</netRemoteCallHib> 
 	
-	<method name="setRoomValues" args="roomTypeId,roomId">
+	<method name="setRoomValues" args="roomTypeId,roomId,roomObj">
 		if (roomTypeId==1){
 	    		canvas.isConference = true;
 	    	} else {
 	    		canvas.isConference = false;
 	    }
     	hib.currentroomid = roomId;
+    	if (roomObj!=null){
+			if (roomTypeId==1){
+				new conferenceView(canvas.main_content._content.inner,{roomobj:roomObj}); 
+			} else {
+				new audienceView(canvas.main_content._content.inner,{roomobj:roomObj}); 
+			}   
+    	}
 	</method>
 			     
 	    
