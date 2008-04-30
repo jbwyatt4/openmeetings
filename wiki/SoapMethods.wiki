@@ -32,6 +32,7 @@ Service-Endpoint:
 http://localhost:5080/openmeetings/services/UserService?wsdl
 (http://$RED5_HOST:$RED5_HTTP_HOST/openmeetings/services/UserService?wsdl)
 
+
 ==== getSession ====
 
 Method: _public Sessiondata getSession()_
@@ -40,6 +41,7 @@ Description: load this session id before doing anything else
 Returns an Object of Type Sessiondata, this contains a sessionId, use that sessionId in all Methods
 
 Params: no params
+
 
 ==== loginUser ====
 
@@ -55,6 +57,7 @@ Params:
 || String || username || Username from !OpenMeetings, the user has to have Admin-rights ||
 || String || userpass || Userpass from !OpenMeetings ||
 
+
 ==== getErrorByCode ====
 
 Method: _public !ErrorResult getErrorByCode(String SID, Long errorid, Long language_id)_
@@ -68,6 +71,7 @@ Params:
 || String || SID || The SID from getSession ||
 || Long || errorid || the errorid (negative Value here!) ||
 || Long || language_id || The id of the language  ||
+
 
 ==== setUserObject ====
 
@@ -92,6 +96,7 @@ Params:
 Service-Endpoint:
 http://localhost:5080/openmeetings/services/FileService?wsdl
 (http://$RED5_HOST:$RED5_HTTP_HOST/openmeetings/services/FileService?wsdl)
+
 
 ==== getListOfFiles ====
 
