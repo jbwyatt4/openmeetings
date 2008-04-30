@@ -1,12 +1,16 @@
 package org.openmeetings.axis.services;
 
 import java.util.List;
+import java.util.Iterator;
+import java.util.LinkedList;
 
+import org.apache.axis2.AxisFault;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import org.openmeetings.app.conference.videobeans.RoomClient;
 import org.openmeetings.app.data.basic.Sessionmanagement;
+import org.openmeetings.app.data.basic.rooms.RoomsList;
 import org.openmeetings.app.data.beans.basic.SearchResult;
 import org.openmeetings.app.data.conference.Roommanagement;
 import org.openmeetings.app.data.user.Usermanagement;
@@ -23,8 +27,19 @@ public class RoomService {
 		return ConferenceService.getInstance().getRoomsByOrganisationAndType(SID, organisation_id, roomtypes_id);
 	}
 	
-	public List<Rooms> getRoomsPublic(String SID, Long roomtypes_id){
-		return ConferenceService.getInstance().getRoomsPublic(SID, roomtypes_id);
+	public RoomsList getRoomsPublic(String SID, Long roomtypes_id) throws AxisFault{
+		try {
+			List<Rooms> roomList = ConferenceService.getInstance().getRoomsPublic(SID, roomtypes_id);
+			RoomsList roomsListObject = new RoomsList();
+			if (roomList!=null && roomList.size()!=0) {
+				roomsListObject.setRoomList(roomList);
+			}
+			log.debug("roomList SIZE: "+roomList.size());
+			return roomsListObject;
+		} catch (Exception err) {
+			log.error("[getRoomsPublic] ",err);
+			throw new AxisFault(err.getMessage());
+		}
 	}
 	
 	public List<RoomTypes> getRoomTypes(String SID){
