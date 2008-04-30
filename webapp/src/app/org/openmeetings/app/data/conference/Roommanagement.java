@@ -76,7 +76,7 @@ public class Roommanagement {
 	 * get all availible RoomTypes
 	 * @return List of RoomTypes
 	 */
-	public List getAllRoomTypes(Long user_level){
+	public List<RoomTypes> getAllRoomTypes(Long user_level){
 		try {
 			if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)){
 				Object idf = HibernateUtil.createSession();
@@ -84,7 +84,7 @@ public class Roommanagement {
 				Transaction tx = session.beginTransaction();
 				Query query = session.createQuery("select c from RoomTypes as c where c.deleted != :deleted");
 				query.setString("deleted", "true");
-				List ll = query.list();
+				List<RoomTypes> ll = query.list();
 				tx.commit();
 				HibernateUtil.closeSession(idf);
 				return ll;
@@ -237,7 +237,7 @@ public class Roommanagement {
 		return null;
 	}
 	
-	public List getOrganisationsByRoom(long user_level, long rooms_id){
+	public List<Rooms_Organisation> getOrganisationsByRoom(long user_level, long rooms_id){
 		try {
 			if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)){
 				Object idf = HibernateUtil.createSession();
@@ -247,7 +247,7 @@ public class Roommanagement {
 				crit.add(Restrictions.ne("deleted", "true"));
 				Criteria subcrit = crit.createCriteria("room");
 				subcrit.add(Restrictions.eq("rooms_id", rooms_id));
-				List ll = crit.list();
+				List<Rooms_Organisation> ll = crit.list();
 				tx.commit();
 				HibernateUtil.closeSession(idf);
 				return ll;
