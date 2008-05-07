@@ -21,6 +21,16 @@ DirectLoginSoapGeneralFlow
   Methods:
     * [http://code.google.com/p/openmeetings/wiki/SoapMethods#getListOfFiles getListOfFiles] 
     * [http://code.google.com/p/openmeetings/wiki/SoapMethods#deleteFile deleteFile]
+    
+  * [http://code.google.com/p/openmeetings/wiki/SoapMethods#RoomService RoomService] - manage Conference Rooms
+  Methods:
+    * [http://code.google.com/p/openmeetings/wiki/SoapMethods#getRoomsPublic getRoomsPublic]  
+    * [http://code.google.com/p/openmeetings/wiki/SoapMethods#getRoomTypes getRoomTypes]  
+    * [http://code.google.com/p/openmeetings/wiki/SoapMethods#getRoomById getRoomById]  
+    * [http://code.google.com/p/openmeetings/wiki/SoapMethods#getRooms getRooms]  
+    * [http://code.google.com/p/openmeetings/wiki/SoapMethods#addRoom addRoom] 
+    * [http://code.google.com/p/openmeetings/wiki/SoapMethods#updateRoom updateRoom]
+    * [http://code.google.com/p/openmeetings/wiki/SoapMethods#deleteRoom deleteRoom]
   
 == Overview of Services == 
 http://openmeetings.googlecode.com/svn/docs/OpenMeetingsSOAPGateway.png
@@ -129,3 +139,135 @@ Params:
 || Long || room_id || the room_id of the file  ||
 
 --------
+
+=== !RoomService ===
+
+Service-Endpoint:
+http://localhost:5080/openmeetings/services/RoomService?wsdl
+(http://$RED5_HOST:$RED5_HTTP_HOST/openmeetings/services/RoomService?wsdl)
+
+==== getRoomsPublic ====
+
+Method: _public RoomsList getRoomsPublic(String SID, Long roomtypes_id)_
+
+Description: Returns an Object of Type [http://openmeetings.googlecode.com/svn/trunk/webapp/src/app/org/openmeetings/app/data/basic/rooms/RoomsList.java RoomsList] which contains a list of Room-Objects.
+Every [http://openmeetings.googlecode.com/svn/trunk/webapp/src/app/org/openmeetings/app/hibernate/beans/rooms/Rooms.java Room-Object] contains a Roomtype and all informations about that Room. The List of 
+current-users in the room is Null if you get them via SOAP.
+The Roomtype can be 1 for conference rooms or 2 for audience rooms.
+
+Params:
+|| *type* || *name* || *description* ||
+|| String || SID || The SID of the User. This SID must be marked as Loggedin ||
+|| Long || roomtypes_id || The type of Rooms you want to get ||
+
+==== getRoomTypes ====
+
+Method: _public List<RoomTypes> getRoomTypes(String SID)_
+
+Description: Returns a List of Objects of [http://openmeetings.googlecode.com/svn/trunk/webapp/src/app/org/openmeetings/app/hibernate/beans/rooms/RoomTypes.java RoomsType]
+
+Params:
+|| *type* || *name* || *description* ||
+|| String || SID || The SID of the User. This SID must be marked as Loggedin ||
+
+==== getRoomById ====
+
+Method: _public Rooms getRoomById(String SID, long rooms_id)_
+
+Description: Returns an Object of [http://openmeetings.googlecode.com/svn/trunk/webapp/src/app/org/openmeetings/app/hibernate/beans/rooms/Rooms.java Rooms]
+
+Params:
+|| *type* || *name* || *description* ||
+|| String || SID || The SID of the User. This SID must be marked as Loggedin ||
+|| Long || rooms_id || The Roomid you want to get ||
+
+==== getRooms ====
+
+Method: _public SearchResult getRooms(String SID, int start, int max, String orderby, boolean asc)_
+
+Description: Returns a List of Objects of [http://openmeetings.googlecode.com/svn/trunk/webapp/src/app/org/openmeetings/app/hibernate/beans/rooms/Rooms.java Rooms]
+You can use "name" as value for orderby or rooms_id
+
+Params:
+|| *type* || *name* || *description* ||
+|| String || SID || The SID of the User. This SID must be marked as Loggedin ||
+|| int || start || The id you want to start ||
+|| int || max || The maximum you want to get ||
+|| String || orderby || The column it will be ordered ||
+|| Boolean || asc || Asc or Desc sort ordering ||
+
+==== addRoom ====
+
+Method: _public Long addRoom(String SID, .... see list of Params)_
+
+Description: Create an Objects of [http://openmeetings.googlecode.com/svn/trunk/webapp/src/app/org/openmeetings/app/hibernate/beans/rooms/Rooms.java Rooms]
+
+
+Params:
+|| *type* || *name* || *description* ||
+|| String || SID || The SID of the User. This SID must be marked as Loggedin ||
+|| String || name || Name of the Room ||
+|| Long || roomtypes_id || Type of that room (1 = Conference, 2 = Audience) ||
+|| String || comment || any comment ||
+|| Long || numberOfPartizipants || the maximum users allowed in this room ||
+|| Boolean || ispublic || If this room is public (use true if you don't deal with different Organizations) ||
+|| Integer || videoPodWidth || the PodWidth ||
+|| Integer || videoPodHeight || the videoPodHeight || 
+|| Integer || videoPodXPosition || the videoPodXPosition ||
+|| Integer || videoPodYPosition || the videoPodYPosition ||
+|| Integer || moderationPanelXPosition || the moderationPanelXPosition ||
+|| Boolean || showWhiteBoard || the showWhiteBoard ||
+|| Integer || whiteBoardPanelXPosition || the whiteBoardPanelXPosition ||
+|| Integer || whiteBoardPanelYPosition || the whiteBoardPanelYPosition ||
+|| Integer || whiteBoardPanelHeight || the whiteBoardPanelHeight ||
+|| Integer || whiteBoardPanelWidth || the whiteBoardPanelWidth ||
+|| Boolean || showFilesPanel || the showFilesPanel ||
+|| Integer || filesPanelXPosition || the filesPanelXPosition ||
+|| Integer || filesPanelYPosition || the filesPanelYPosition ||
+|| Integer || filesPanelHeight || the filesPanelHeight ||
+|| Integer || filesPanelWidth || the filesPanelWidth ||
+
+
+==== updateRoom ====
+
+Method: _public Long updateRoom(String SID, .... see list of Params)_
+
+Description: Update an Objects of [http://openmeetings.googlecode.com/svn/trunk/webapp/src/app/org/openmeetings/app/hibernate/beans/rooms/Rooms.java Rooms]
+
+
+Params:
+|| *type* || *name* || *description* ||
+|| String || SID || The SID of the User. This SID must be marked as Loggedin ||
+|| Long || rooms_id || Roomid to update ||
+|| String || name || Name of the Room ||
+|| Long || roomtypes_id || Type of that room (1 = Conference, 2 = Audience) ||
+|| String || comment || any comment ||
+|| Long || numberOfPartizipants || the maximum users allowed in this room ||
+|| Boolean || ispublic || If this room is public (use true if you don't deal with different Organizations) ||
+|| Integer || videoPodWidth || the PodWidth ||
+|| Integer || videoPodHeight || the videoPodHeight || 
+|| Integer || videoPodXPosition || the videoPodXPosition ||
+|| Integer || videoPodYPosition || the videoPodYPosition ||
+|| Integer || moderationPanelXPosition || the moderationPanelXPosition ||
+|| Boolean || showWhiteBoard || the showWhiteBoard ||
+|| Integer || whiteBoardPanelXPosition || the whiteBoardPanelXPosition ||
+|| Integer || whiteBoardPanelYPosition || the whiteBoardPanelYPosition ||
+|| Integer || whiteBoardPanelHeight || the whiteBoardPanelHeight ||
+|| Integer || whiteBoardPanelWidth || the whiteBoardPanelWidth ||
+|| Boolean || showFilesPanel || the showFilesPanel ||
+|| Integer || filesPanelXPosition || the filesPanelXPosition ||
+|| Integer || filesPanelYPosition || the filesPanelYPosition ||
+|| Integer || filesPanelHeight || the filesPanelHeight ||
+|| Integer || filesPanelWidth || the filesPanelWidth ||
+
+==== deleteRoom ====
+
+Method: _public Long deleteRoom(String SID, long rooms_id)_
+
+Description: Delete an Objects of [http://openmeetings.googlecode.com/svn/trunk/webapp/src/app/org/openmeetings/app/hibernate/beans/rooms/Rooms.java Rooms]
+
+
+Params:
+|| *type* || *name* || *description* ||
+|| String || SID || The SID of the User. This SID must be marked as Loggedin ||
+|| Long || rooms_id || Roomid to delete ||
