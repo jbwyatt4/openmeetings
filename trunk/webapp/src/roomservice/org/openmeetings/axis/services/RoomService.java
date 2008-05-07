@@ -23,9 +23,10 @@ public class RoomService {
 	
 	private static final Log log = LogFactory.getLog(RoomService.class);
 	
-	public List<Rooms_Organisation> getRoomsByOrganisationAndType(String SID, long organisation_id, long roomtypes_id) {
-		return ConferenceService.getInstance().getRoomsByOrganisationAndType(SID, organisation_id, roomtypes_id);
-	}
+	//TODO: Not implemented yet
+//	public List<Rooms_Organisation> getRoomsByOrganisationAndType(String SID, long organisation_id, long roomtypes_id) {
+//		return ConferenceService.getInstance().getRoomsByOrganisationAndType(SID, organisation_id, roomtypes_id);
+//	}
 	
 	public RoomsList getRoomsPublic(String SID, Long roomtypes_id) throws AxisFault{
 		try {
@@ -72,7 +73,7 @@ public class RoomService {
 //	}
 	
 	/**
-	 * Fix Organization Issue
+	 * TODO: Fix Organization Issue
 	 * @param SID
 	 * @param name
 	 * @param roomtypes_id
