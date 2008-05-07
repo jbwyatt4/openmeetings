@@ -1,17 +1,17 @@
 package org.openmeetings.app.data.basic.rooms;
 
-import java.util.List;
+import java.util.LinkedList;
 
 import org.openmeetings.app.hibernate.beans.rooms.Rooms;
 
 public class RoomsList {
 	
-	List<Rooms> roomList = null;
+	LinkedList<Rooms> roomList = null;
 
-	public List<Rooms> getRoomList() {
+	public LinkedList<Rooms> getRoomList() {
 		return roomList;
 	}
-	public void setRoomList(List<Rooms> roomList) {
+	public void setRoomList(LinkedList<Rooms> roomList) {
 		this.roomList = roomList;
 	}
 

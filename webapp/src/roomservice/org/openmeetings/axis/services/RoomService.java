@@ -31,8 +31,15 @@ public class RoomService {
 		try {
 			List<Rooms> roomList = ConferenceService.getInstance().getRoomsPublic(SID, roomtypes_id);
 			RoomsList roomsListObject = new RoomsList();
+			//We need to re-marshal the Rooms object cause Axis2 cannot use our objects
 			if (roomList!=null && roomList.size()!=0) {
-				roomsListObject.setRoomList(roomList);
+				//roomsListObject.setRoomList(roomList);
+				roomsListObject.setRoomList(new LinkedList<Rooms>());
+				for (Iterator<Rooms>it = roomList.iterator();it.hasNext();){
+					Rooms room = it.next();
+					room.setCurrentusers(null);
+					roomsListObject.getRoomList().add(room);
+				}
 			}
 			log.debug("roomList SIZE: "+roomList.size());
 			return roomsListObject;
@@ -54,13 +61,15 @@ public class RoomService {
 		return ConferenceService.getInstance().getRooms(SID, start, max, orderby, asc);
 	}
 	
-	public List<Rooms_Organisation> getOrganisationByRoom(String SID,long rooms_id){
-		return ConferenceService.getInstance().getOrganisationByRoom(SID, rooms_id);
-	}
+	//TODO: Add functions to get Users of a Room
 	
-	public List<RoomClient> getRoomClientsListByRoomId(Long room_id){
-		return ConferenceService.getInstance().getRoomClientsListByRoomId(room_id);
-	}
+//	public List<Rooms_Organisation> getOrganisationByRoom(String SID,long rooms_id){
+//		return ConferenceService.getInstance().getOrganisationByRoom(SID, rooms_id);
+//	}
+//	
+//	public List<RoomClient> getRoomClientsListByRoomId(Long room_id){
+//		return ConferenceService.getInstance().getRoomClientsListByRoomId(room_id);
+//	}
 	
 	/**
 	 * Fix Organization Issue
