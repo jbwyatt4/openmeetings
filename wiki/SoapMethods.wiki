@@ -31,10 +31,8 @@ DirectLoginSoapGeneralFlow
     * [http://code.google.com/p/openmeetings/wiki/SoapMethods#addRoom addRoom] 
     * [http://code.google.com/p/openmeetings/wiki/SoapMethods#updateRoom updateRoom]
     * [http://code.google.com/p/openmeetings/wiki/SoapMethods#deleteRoom deleteRoom]
-  
-== Overview of Services == 
-http://openmeetings.googlecode.com/svn/docs/OpenMeetingsSOAPGateway.png
-
+ 
+-----
 
 === !UserService ===
 
