@@ -33,10 +33,7 @@
 
 	<div id="flashcontent">
 		<strong>You need to upgrade your Flash Player</strong>
-		This is replaced by the Flash content. 
-		Place your alternate content here and users without the Flash plugin or with 
-		Javascript turned off will see this. Content here allows you to leave out <code>noscript</code> 
-		tags.
+		<p><a href="http://www.macromedia.com/go/getflashplayer/">Get the latest Flash Player</a></p>
 	</div>
 	
 	<script type="text/javascript">
