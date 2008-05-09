@@ -9,7 +9,7 @@
         @END_CODE	
  -->
 
-<class name="baseVideoView" width="160" height="120">
+<class name="baseVideoView" width="${parent.width}" height="${parent.height}">
 	<method name="init">
 		super.init();
 		var mc = immediateparent.sprite.attachResourceToChildView("__LZvideo", this.sprite);
