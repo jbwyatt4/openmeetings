@@ -32,6 +32,9 @@ DirectLoginSoapGeneralFlow
     * [http://code.google.com/p/openmeetings/wiki/SoapMethods#updateRoom updateRoom]
     * [http://code.google.com/p/openmeetings/wiki/SoapMethods#deleteRoom deleteRoom]
  
+
+URL for direct Room access: (sid=6c280410c96e91ea05d25e0b28b10a87 MUST be replaced with a valid SID you create using the SOAP Gateway) http://$YOUR_RED5_HOST:$YOUR_RED5_HTTP_PORT/openmeetings/main.lzx.lzr=swf8.swf?roomid=1&sid=6c280410c96e91ea05d25e0b28b10a87&language=4 or http://$YOUR_RED5_HOST:$YOUR_RED5_HTTP_PORT/openmeetings/main.lzx.lzr=swf8.swf?roomid=1&sid=6c280410c96e91ea05d25e0b28b10a87 (see the missing language_id, in this case it will use the default_language_id from the configuration section)
+
 -----
 
 === !UserService ===
