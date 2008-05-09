@@ -13,5 +13,6 @@
     <include href="autoLoader.lzx" />
     <include href="converterPopup.lzx" />
     <include href="errorModeratorPopup.lzx" />
+    <include href="changeDevice.lzx" />
     
 </library>
