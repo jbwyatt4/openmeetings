@@ -32,12 +32,14 @@
 	            ]]>	        	          				
 	        	</handler>	
 	  	</netRemoteCallHib>
+	  	
+	  	<labelText x="2" y="10" fontstyle="bold" labelid="544" />
 
 		<!-- label: stored files for public/private conference -->	
-		<labelText x="2" y="10" labelid="397" />
+		<labelText x="2" y="40" labelid="397" />
 	
 		<!-- recordings list viewer -->
-		<view y="30" x="2">
+		<view y="80" x="2">
 			<handler name="oninit">
 				classroot.getAllRecordingsForUser.doCall();
 			</handler>
