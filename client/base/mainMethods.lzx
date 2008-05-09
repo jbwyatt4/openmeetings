@@ -76,6 +76,11 @@
 			canvas.initroomid = initroomid;
 			canvas.remoteUserSid = sid;
 		}
+		
+		var language = LzBrowser.getInitArg('language');
+		if (language != undefined) {
+			canvas.language_id = Number(language);
+		}
 	
 		//check for reset password
 		var hash = LzBrowser.getInitArg('hash');

@@ -172,7 +172,11 @@
         <handler name="ondata" args="value">
             //The onResult-Handler will be called be the rtmpconnection
             if ($debug) Debug.write("getDefaultLanguage: ",value);
-            parent.userlang = value;
+            if (canvas.language_id==0){
+            	parent.userlang = value;
+            } else {
+            	parent.userlang = canvas.language_id;
+            }
             parent.getLanguageByIdAndMax.doCall();
         </handler>  
     </netRemoteCallHib>      
