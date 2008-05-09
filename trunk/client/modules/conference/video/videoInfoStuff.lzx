@@ -26,7 +26,7 @@
 			</handler>
 			<labelTooltip inittwice="true" labelid="85" />
 		</view>	
-		<view name="inner" width="$once{ parent.width }" 
+		<view name="inner" width="${parent.width}" 
 			height="$once{ parent.height-20 }" y="20" clip="true">
 			<text name="_usertext" width="$once{ parent.width }" multiline="true" />
 			<vscrollbar />

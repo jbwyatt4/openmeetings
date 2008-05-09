@@ -5,7 +5,7 @@
 	Class videocontainer
  -->
  
-<class name="videoContainerAudience" extends="view" >
+<class name="videoContainerAudience" width="${parent.width}" height="${parent.height}" extends="view" >
 	
 	<!-- 
 		Attribute stores all Initial Streams
