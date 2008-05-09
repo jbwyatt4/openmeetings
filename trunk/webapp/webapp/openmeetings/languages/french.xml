@@ -1631,4 +1631,16 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   <string id="540" name="Browser">
     <value>Syncronize Audio/Video</value>
   </string>	
+  <string id="541" name="errorCode_invalidSession">
+    <value>Login was correct, but the Session you tried is not active or stored on the Server. You have to get a new SessionId and retry login.</value>
+  </string>
+  <string id="542" name="errorcode_setUserObject">
+    <value>The SessionId is not loggedin or has no Admin rights. The SOAP Gateway needs an User with Admin-Rights to embed new Users.</value>
+  </string>
+  <string id="543" name="errorcode_loginByRemoteUser">
+    <value>This Session has no Remoteuser-Data connected. Wether you did not call the SOAP-Gateway before accessing the Application or you are usnig a wrong Session-ID</value>
+  </string>
+  <string id="544" name="debug_message_recording">
+    <value>The recorder is currently Beta!</value>
+  </string>	
 </language>
