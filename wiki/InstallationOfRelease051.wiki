@@ -56,11 +56,9 @@
     }}}
     You can see a list of available _dialect_'s here [http://www.hibernate.org/hib_docs/reference/en/html/session-configuration.html#configuration-optional-dialects hibernate-SQL-dialects]. You must download the driver for your database and copy it to _$OPENMEETINGS-HOME/WEB-INF/lib_
   # (Re)start Red5 (The table's and default database scheme will be automatically created by hibernate if there is something wrong with your database values you will see errors in Red5 logfile, you can reduce Error log output by switching _$RED5-HOME/conf/log4j.properties_ from DEBUG to ERROR to see only relevant value's)
-  # on Linux/OSX: Mage the converting-scripts writeable:
-  change directory to $OPENMEETINGS-HOME/jod, and do a: chmod +x *.sh
   # go to the Installer by accessing it via browser: http://$rmpthostlocal/openmeetings/install and follow the instructions 
 
-After Running the Installer all basics are installed. Now login and go to the Meeting-Rooms and check all features. You possibly will have some difficulties uploading files. Check if OpenOffice is really running, swftool, ImageMagick (including GhostScript) is available on  your System-Path (or your customize the path in the Configuration).
+After Running the Installer all basics are installed. Now login and go to the Meeting-Rooms and check all features. You possibly will have some difficulties uploading files. Check if !OpenOffice is really running, swftool, !ImageMagick (including !GhostScript) is available on  your System-Path (or your customize the path in the Configuration).
 
 
 = Tips and Tricks =
