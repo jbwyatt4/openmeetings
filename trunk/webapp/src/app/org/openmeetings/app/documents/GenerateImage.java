@@ -169,29 +169,6 @@ public class GenerateImage {
 			
 			Runtime rt = Runtime.getRuntime();
 			
-//			String command = current_dir + "jod" + File.separatorChar
-//					+ runtimeFile + " " + inputFile + " " 
-//					+ outputfile + ".jpg" + " "
-//					+ pathToIMagick;
-			
-//			cmd = new String[7];
-//			cmd[0] = "cmd.exe";
-//			cmd[1] = "/C";
-//			cmd[2] = "start";			
-//			cmd[3] = current_dir + "jod" + File.separatorChar + runtimeFile;
-//			cmd[4] = inputFile;
-//			cmd[5] = outputfile + ".jpg";
-//			cmd[6] = pathToIMagick;
-//			
-//			if (System.getProperty("os.name").toUpperCase().indexOf("WINDOWS") == -1) {
-//				runtimeFile = "pngconverter.sh";
-//				cmd = new String[4];
-//				cmd[0] = current_dir + "jod" + File.separatorChar + runtimeFile;
-//				cmd[1] = inputFile;
-//				cmd[2] = outputfile + ".jpg";
-//				cmd[3] = pathToIMagick;
-//			}			
-			
 			log.debug("cmd: "+cmd);
 
 			//Create the Content of the Converter Script (.bat or .sh File)
