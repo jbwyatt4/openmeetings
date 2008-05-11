@@ -21,3 +21,5 @@ Besides Issues connected to the SOAP-Gateway, additional fixed Issues:
   * Issue 414: Multiple Videoview in Conference
   * Issue 421: rename package-name from xmlcrm to openmeetings
   * Issue 425: remove duplicated JARs and rewrite ANT-Script
+
+For installation see: InstallationOfRelease051
