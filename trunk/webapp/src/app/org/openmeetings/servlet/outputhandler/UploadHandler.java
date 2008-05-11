@@ -29,7 +29,7 @@ import org.openmeetings.app.hibernate.beans.user.Users;
 public class UploadHandler extends HttpServlet {
 
 	private static final Log log = LogFactory.getLog(UploadHandler.class);
-	
+	 
 	private String filesString[] = null;
 
 	protected HashMap<String, String> fileExtensions = new HashMap<String, String>();
@@ -87,7 +87,7 @@ public class UploadHandler extends HttpServlet {
 			IOException {
 		boolean userProfilePic = false;
 		try {
-
+      
 			if (httpServletRequest.getContentLength() > 0) {
 				
 				log.debug("uploading........ ");

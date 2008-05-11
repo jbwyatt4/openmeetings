@@ -1,15 +1,23 @@
 package org.openmeetings.app.documents;
 
+import java.util.Date;
 import java.util.HashMap;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.openmeetings.app.data.basic.Configurationmanagement;
+import org.openmeetings.app.remote.Application;
+import org.openmeetings.utils.math.CalendarPatterns;
 
 public class GenerateSWF {
+	
+	private static final Log log = LogFactory.getLog(GenerateSWF.class);
 
 	private static GenerateSWF instance;
 
@@ -27,27 +35,62 @@ public class GenerateSWF {
 		returnMap.put("process", "generateSWF");		
 		try {
 			
+			//Init variables
+			String[] cmd;
+			String executable_fileName = "";	
 			String pathToSWFTools = Configurationmanagement.getInstance().getConfKey(3,"swftools_path").getConf_value();
-			
-			String runtimeFile = "swfconverter.bat";
-			String command = "cmd.exe /c start "+current_dir + "jod" + File.separatorChar + runtimeFile + " " 
-				+ originalFolder + fileNamePure + ".pdf "
-				+ destinationFolder + fileNamePure+".swf" + " "
-				+ pathToSWFTools;
-			
-			if (System.getProperty("os.name").toUpperCase().indexOf("WINDOWS") == -1) {
-				runtimeFile = "swfconverter.sh";
-				command = current_dir + "jod" + File.separatorChar + runtimeFile + " " 
-					+ originalFolder + fileNamePure + ".pdf "
-					+ destinationFolder + fileNamePure+".swf" + " "
-					+ pathToSWFTools;
+			//If SWFTools Path is not blank a File.seperator at the end of the path is needed
+			if(!pathToSWFTools.equals("") && !pathToSWFTools.endsWith(File.separator)){
+				pathToSWFTools = pathToSWFTools + File.separator;
 			}
-			System.out.println("generateSWF command: "+command);
+			
+
+			//If no Windows Platform
+			if (System.getProperty("os.name").toUpperCase().indexOf("WINDOWS") == -1) {
+				String runtimeFile = "swfconverter.sh";
+				executable_fileName = Application.batchFileFir+"SWFCONVERT_" 
+						+ CalendarPatterns.getTimeForStreamId(new Date()) +"_"+ runtimeFile;
+		
+				cmd = new String[1];
+				cmd[0] = executable_fileName;
+			} else {
+				String runtimeFile = "swfconverter.bat";
+				executable_fileName = Application.batchFileFir+"SWFCONVERT_" 
+						+ CalendarPatterns.getTimeForStreamId(new Date()) +"_"+ runtimeFile;
+				
+				cmd = new String[4];
+				cmd[0] = "cmd.exe";
+				cmd[1] = "/C";
+				cmd[2] = "start";
+				cmd[3] = executable_fileName;
+			}
+			log.debug("executable_fileName: "+executable_fileName);
+			
+			//Create the Content of the Converter Script (.bat or .sh File)
+			String fileContent = pathToSWFTools + "pdf2swf"
+					+ " " + "\"" + originalFolder + fileNamePure + ".pdf\""
+					+ " " + "\"" + destinationFolder + fileNamePure+".swf\""
+					+ Application.lineSeperator + "exit";
+				
+			//execute the Script
+			FileOutputStream fos = new FileOutputStream(executable_fileName);
+			fos.write(fileContent.getBytes());
+			fos.close();
+			
+			//make new shell script executable
+			//in JAVA6 this can be done directly through the api
+			if (System.getProperty("os.name").toUpperCase().indexOf("WINDOWS") == -1) {
+				MakeExectuable.getInstance().setExecutable(executable_fileName);
+			}
 			
 			Runtime rt = Runtime.getRuntime();			
 			
-			returnMap.put("command", command);
-			Process proc = rt.exec(command);
+			for (int i=0;i<cmd.length;i++){
+				log.debug("cmd: "+cmd[i]);
+			}
+			
+			returnMap.put("command", cmd.toString());
+			Process proc = rt.exec(cmd);
 			InputStream stderr = proc.getErrorStream();
 			InputStreamReader isr = new InputStreamReader(stderr);
 			BufferedReader br = new BufferedReader(isr);
