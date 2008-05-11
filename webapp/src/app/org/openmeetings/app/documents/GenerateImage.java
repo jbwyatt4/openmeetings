@@ -1,9 +1,11 @@
 package org.openmeetings.app.documents;
 
+import java.util.Date;
 import java.util.HashMap;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
@@ -13,6 +15,7 @@ import org.openmeetings.app.data.basic.Configurationmanagement;
 import org.openmeetings.app.data.user.Usermanagement;
 import org.openmeetings.app.hibernate.beans.user.Users;
 import org.openmeetings.app.remote.Application;
+import org.openmeetings.utils.math.CalendarPatterns;
 
 public class GenerateImage {
 	
@@ -132,45 +135,88 @@ public class GenerateImage {
 		returnMap.put("process", "convertSingleJpg");
 		try {
 
-			log.debug("##### convertSingleJpg pngconverter: ");
-			
-			String runtimeFile = "pngconverter.bat";
-			if (System.getProperty("os.name").toUpperCase().indexOf("WINDOWS") == -1) {
-				runtimeFile = "pngconverter.sh";
-			}
-			Runtime rt = Runtime.getRuntime();
-
+			//Init variables
+			String[] cmd;
+			String executable_fileName = "";	
 			String pathToIMagick = Configurationmanagement.getInstance().getConfKey(3,"imagemagick_path").getConf_value();
+			if(!pathToIMagick.equals("") && !pathToIMagick.endsWith(File.separator)){
+				pathToIMagick = pathToIMagick + File.separator;
+			}
 			
-			//This will not work if the path to ImageMagick is in the System PATH, caue then this value needs to be 
-			//blank
-			//TODO: We should fix it that way that both is possible
-//			if(!pathToIMagick.endsWith(File.separator)){
-//				pathToIMagick = pathToIMagick + File.separator;
-//			}
+			log.debug("##### convertSingleJpg pngconverter: ");
+		
+			
+			//If no Windows Platform
+			if (System.getProperty("os.name").toUpperCase().indexOf("WINDOWS") == -1) {
+				String runtimeFile = "thumbnail.sh";
+				executable_fileName = Application.batchFileFir+"THUMB_" 
+						+ CalendarPatterns.getTimeForStreamId(new Date()) +"_"+ runtimeFile;
+		
+				cmd = new String[1];
+				cmd[0] = executable_fileName;
+			} else {
+				String runtimeFile = "thumbnail.bat";
+				executable_fileName = Application.batchFileFir+"THUMB_" 
+						+ CalendarPatterns.getTimeForStreamId(new Date()) +"_"+ runtimeFile;
+				
+				cmd = new String[4];
+				cmd[0] = "cmd.exe";
+				cmd[1] = "/C";
+				cmd[2] = "start";
+				cmd[3] = executable_fileName;
+			}
+			log.debug("executable_fileName: "+executable_fileName);
+			
+			Runtime rt = Runtime.getRuntime();
 			
 //			String command = current_dir + "jod" + File.separatorChar
 //					+ runtimeFile + " " + inputFile + " " 
 //					+ outputfile + ".jpg" + " "
 //					+ pathToIMagick;
 			
-			log.debug("##### convertSingleJpg command: "+current_dir + "jod" + File.separatorChar + runtimeFile);
+//			cmd = new String[7];
+//			cmd[0] = "cmd.exe";
+//			cmd[1] = "/C";
+//			cmd[2] = "start";			
+//			cmd[3] = current_dir + "jod" + File.separatorChar + runtimeFile;
+//			cmd[4] = inputFile;
+//			cmd[5] = outputfile + ".jpg";
+//			cmd[6] = pathToIMagick;
+//			
+//			if (System.getProperty("os.name").toUpperCase().indexOf("WINDOWS") == -1) {
+//				runtimeFile = "pngconverter.sh";
+//				cmd = new String[4];
+//				cmd[0] = current_dir + "jod" + File.separatorChar + runtimeFile;
+//				cmd[1] = inputFile;
+//				cmd[2] = outputfile + ".jpg";
+//				cmd[3] = pathToIMagick;
+//			}			
+			
+			log.debug("cmd: "+cmd);
 
-//			String[] command = new String[4];
-//			command[0] = current_dir + "jod" + File.separatorChar + runtimeFile;
-//			command[1] = inputFile;
-//			command[2] = outputfile + ".jpg";
-//			command[3] = pathToIMagick;
+			//Create the Content of the Converter Script (.bat or .sh File)
+			String fileContent = pathToIMagick + "convert " +
+					" " + "\"" + inputFile + "\"" +
+					" " + "\"" + outputfile+".jpg\"" +
+					Application.lineSeperator + "exit";
+				
+			//execute the Script
+			FileOutputStream fos = new FileOutputStream(executable_fileName);
+			fos.write(fileContent.getBytes());
+			fos.close();
 			
-			String command = current_dir + "jod" + File.separatorChar
-					+ runtimeFile + " " + inputFile + " " 
-					+ outputfile + ".jpg" + " "
-					+ pathToIMagick;
+			//make new shell script executable
+			//in JAVA6 this can be done directly through the api
+			if (System.getProperty("os.name").toUpperCase().indexOf("WINDOWS") == -1) {
+				MakeExectuable.getInstance().setExecutable(executable_fileName);
+			}
 			
-			log.debug("command: "+command);
+			for (int i=0;i<cmd.length;i++){
+				log.debug("cmd: "+cmd[i]);
+			}
 					
-			returnMap.put("command", command);
-			Process proc = rt.exec(command);
+			returnMap.put("command", cmd.toString());
+			Process proc = rt.exec(cmd);
 			InputStream stderr = proc.getErrorStream();
 			InputStreamReader isr = new InputStreamReader(stderr);
 			BufferedReader br = new BufferedReader(isr);

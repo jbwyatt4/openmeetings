@@ -60,6 +60,13 @@ public class Application extends ApplicationAdapter implements
 	private static BandwidthConfigFactory bwFactory = null;
 	private static UserConfigFactory userFactory = null;
 	
+	//This is the Folder where all executables are written
+	//TODO:fix hardcoded name of webapp
+	public static String batchFileFir = "webapps"+File.separatorChar
+									+"openmeetings"+File.separatorChar
+									+"jod" + File.separatorChar;
+	public static String lineSeperator = System.getProperty("line.separator");
+	
 	//The Global WebApp Path
 	public static String webAppPath = "";
 	public static String configDirName = "conf";
