@@ -3,7 +3,7 @@
 == Installation ==
 
 Current Version Final:
-[InstallationOfRelease051]
+[InstallationOfRelease051] , Changelog: [Release051]
 
 Tips for Installation:
 
