@@ -1,5 +1,4 @@
 #summary Installation of 05 Final Release
-#labels Featured
 
 = Requirements =
 
