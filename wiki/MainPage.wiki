@@ -46,6 +46,10 @@ Tips for Installation:
   * SoapMethods - Available SOAP-Services to login directly/embedding !OpenMeetings
   * DirectLoginSoapGeneralFlow - Directly Login into a Room, General Flow of embedding !OpenMeetings
 
+== Plugins == 
+
+  * MoodlePlugins
+
 == Developer-Documentation ==
 
   * Getting Started with !OpenLaszlo?, checkout [http://www.openlaszlo.org/lps4/laszlo-explorer/index.jsp?lzr=swf8 Laszlo-in-10-Minutes] and the [http://www.openlaszlo.org/lps4/docs/ Application Developer's Guide] 
