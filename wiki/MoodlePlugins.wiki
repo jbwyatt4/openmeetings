@@ -2,10 +2,12 @@
 
 = Plugin Types =
 
-  * Conference-Plugin (4x4) 
-  * Audience-Plugin (1:n)
+  * [http://code.google.com/p/openmeetings/wiki/MoodlePlugins#Conference-Plugin Conference-Plugin] (4x4) [http://openmeetings.googlecode.com/files/openmeetings_moodle_plugin_v02.zip download]
+  * [http://code.google.com/p/openmeetings/wiki/MoodlePlugins#Audience-Plugin Audience-Plugin] (1:n) [http://openmeetings.googlecode.com/files/openmeetingsaudience_moodle_plugin_v02.zip download]
+  * [http://code.google.com/p/openmeetings/wiki/MoodlePlugins#Technical-Review Technical-Review]
+  * Demo: http://inno02.fh-pforzheim.de:5080/moodle/ (You can login as Guest)
 
-== Conference-Plugin ==
+= Conference-Plugin =
 
 === Installation ===
 
@@ -36,7 +38,7 @@ Future Features:
   * Advanced Error Handlers
   * Add Recordings of Meetings to Course-Page
 
-== Audience-Plugin ==
+= Audience-Plugin =
 
 === Installation ===
 
@@ -61,3 +63,7 @@ The Plugin does not use all customization and configuration values of OpenMeetin
 
 Future Features:
   * see features of Conference-Plugin
+
+= Technical-Review =
+
+The Plugins are build using the SoapMethods.
