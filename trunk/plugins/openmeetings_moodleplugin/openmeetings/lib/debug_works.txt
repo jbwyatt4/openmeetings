@@ -1,0 +1,40 @@
+use WSDL for operation
+in serializeRPCParameters: operation=loginUser, direction=input, XMLSchemaVersion=http://www.w3.org/2001/XMLSchema, bindingType=soap
+Array ( [SID] => 93e7e34036e1b0a243a481c12bd4fb7d [username] => SebastianWagner [userpass] => asdasd )
+serializing part parameters of type http://services.axis.openmeetings.org:loginUser^
+array SECOND
+PARAMS: Array ( [SID] => 93e7e34036e1b0a243a481c12bd4fb7d [username] => SebastianWagner [userpass] => asdasd )
+in serializeType: name=parameters, type=http://services.axis.openmeetings.org:loginUser^, use=literal, encodingStyle=, unqualified=qualified
+SerialieType: http://services.axis.openmeetings.org:loginUser^
+FIRST ### uqType: loginUser^
+NameSpace: http://services.axis.openmeetings.org
+in serializeType: name=SID, type=http://www.w3.org/2001/XMLSchema:string, use=literal, encodingStyle=, unqualified=qualified
+SerialieType: http://www.w3.org/2001/XMLSchema:string
+FIRST ### uqType: string
+NameSpace: http://www.w3.org/2001/XMLSchema
+uqType: string
+in serializeType: name=username, type=http://www.w3.org/2001/XMLSchema:string, use=literal, encodingStyle=, unqualified=qualified
+SerialieType: http://www.w3.org/2001/XMLSchema:string
+FIRST ### uqType: string
+NameSpace: http://www.w3.org/2001/XMLSchema
+uqType: string
+in serializeType: name=userpass, type=http://www.w3.org/2001/XMLSchema:string, use=literal, encodingStyle=, unqualified=qualified
+SerialieType: http://www.w3.org/2001/XMLSchema:string
+FIRST ### uqType: string
+NameSpace: http://www.w3.org/2001/XMLSchema
+uqType: string
+PART XML: <loginUser xmlns="http://services.axis.openmeetings.org"><SID>93e7e34036e1b0a243a481c12bd4fb7d</SID><username>SebastianWagner</username><userpass>asdasd</userpass></loginUser>
+
+serializeRPCParameters returning: <loginUser xmlns="http://services.axis.openmeetings.org"><SID>93e7e34036e1b0a243a481c12bd4fb7d</SID><username>SebastianWagner</username><userpass>asdasd</userpass></loginUser>
+#####PAYLOAD 2 ####
+<loginUser xmlns="http://services.axis.openmeetings.org"><SID>93e7e34036e1b0a243a481c12bd4fb7d</SID><username>SebastianWagner</username><userpass>asdasd</userpass></loginUser>
+#####PAYLOAD 2 ####
+#####PAYLOAD 1 ####
+<loginUser xmlns="http://services.axis.openmeetings.org"><SID>93e7e34036e1b0a243a481c12bd4fb7d</SID><username>SebastianWagner</username><userpass>asdasd</userpass></loginUser>
+#####PAYLOAD 1 ####
+#####PAYLOAD####
+<loginUser xmlns="http://services.axis.openmeetings.org"><SID>93e7e34036e1b0a243a481c12bd4fb7d</SID><username>SebastianWagner</username><userpass>asdasd</userpass></loginUser>
+#####PAYLOAD####
+####
+93e7e34036e1b0a243a481c12bd4fb7dSebastianWagnerasdasd
+####

@@ -1,0 +1,37 @@
+use WSDL for operation
+in serializeRPCParameters: operation=loginUser, direction=input, XMLSchemaVersion=http://www.w3.org/2001/XMLSchema, bindingType=soap
+Array ( [SID] => 3a8d6373997bec83aea934d16e6c1e25 [username] => swagner [userpass] => asdasd )
+serializing part parameters of type http://services.axis.openmeetings.org:loginUser^
+array THIRD
+PARAMS: Array ( [SID] => 3a8d6373997bec83aea934d16e6c1e25 [username] => swagner [userpass] => asdasd )
+in serializeType: name=parameters, type=http://services.axis.openmeetings.org:loginUser^, use=literal, encodingStyle=, unqualified=qualified
+SerialieType: http://services.axis.openmeetings.org:loginUser^
+FIRST ### uqType: loginUser^
+NameSpace: http://services.axis.openmeetings.org
+in serializeType: name=param0, type=http://www.w3.org/2001/XMLSchema:string, use=literal, encodingStyle=, unqualified=qualified
+SerialieType: http://www.w3.org/2001/XMLSchema:string
+FIRST ### uqType: string
+NameSpace: http://www.w3.org/2001/XMLSchema
+in serializeType: name=param1, type=http://www.w3.org/2001/XMLSchema:string, use=literal, encodingStyle=, unqualified=qualified
+SerialieType: http://www.w3.org/2001/XMLSchema:string
+FIRST ### uqType: string
+NameSpace: http://www.w3.org/2001/XMLSchema
+in serializeType: name=param2, type=http://www.w3.org/2001/XMLSchema:string, use=literal, encodingStyle=, unqualified=qualified
+SerialieType: http://www.w3.org/2001/XMLSchema:string
+FIRST ### uqType: string
+NameSpace: http://www.w3.org/2001/XMLSchema
+PART XML: <loginUser xmlns="http://services.axis.openmeetings.org"><param0/><param1/><param2/></loginUser>
+
+serializeRPCParameters returning: <loginUser xmlns="http://services.axis.openmeetings.org"><param0/><param1/><param2/></loginUser>
+#####PAYLOAD 2 ####
+<loginUser xmlns="http://services.axis.openmeetings.org"><param0/><param1/><param2/></loginUser>
+#####PAYLOAD 2 ####
+#####PAYLOAD 1 ####
+<loginUser xmlns="http://services.axis.openmeetings.org"><param0/><param1/><param2/></loginUser>
+#####PAYLOAD 1 ####
+#####PAYLOAD####
+<loginUser xmlns="http://services.axis.openmeetings.org"><param0/><param1/><param2/></loginUser>
+#####PAYLOAD####
+####
+
+####
