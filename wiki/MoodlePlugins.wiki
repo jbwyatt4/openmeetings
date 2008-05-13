@@ -67,3 +67,4 @@ Future Features:
 = Technical-Review =
 
 The Plugins are build using the SoapMethods.
+You can also use these rooms directly from inside OpenMeetings.
