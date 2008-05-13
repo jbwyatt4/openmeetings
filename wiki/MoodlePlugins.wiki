@@ -22,7 +22,7 @@ http://openmeetings.googlecode.com/svn/docs/moodle_plugin_conference.png
 
   * Create/Goto a Course
   * Turn editing on
-  * Add a new Activitie *OpenMeetings*, give it a name and store/access the Room
+  * Add a new Activity "!OpenMeetings", give it a name and store/access the Room
 
 === Additional Information ===
 
@@ -53,7 +53,7 @@ http://openmeetings.googlecode.com/svn/docs/moodle_plugin_audience.png
 
   * Create/Goto a Course
   * Turn editing on
-  * Add a new Activitie *OpenMeetingsaudience*, give it a name and store/access the Room
+  * Add a new Activity "!OpenMeetingsaudience", give it a name and store/access the Room
 
 === Additional Information ===
 
