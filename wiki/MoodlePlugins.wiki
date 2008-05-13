@@ -1,0 +1,63 @@
+#summary Moodle Plugin Description
+
+= Plugin Types =
+
+  * Conference-Plugin (4x4) 
+  * Audience-Plugin (1:n)
+
+== Conference-Plugin ==
+
+=== Installation ===
+
+  * You need at least OpenMeetings 0.5.1 installed and running.
+  * The Moodle Plugin is build against Moodle 1.9.x
+  * Download http://openmeetings.googlecode.com/files/openmeetings_moodle_plugin_v02.zip
+  * Unpack the content into $MOODLE_ROOT/mod/
+  * goto http://$YOUR_MOODLE_HOST/$MOODLE_WWW_ROOT/admin => watch the Table populated
+  * Goto the Admin-Panel of the Plugin (Module->Activities->!OpenMeetings) and alter the Settings, see:
+
+http://openmeetings.googlecode.com/svn/docs/moodle_plugin_conference.png
+
+=== Usage ===
+
+  * Create/Goto a Course
+  * Turn editing on
+  * Add a new Activitie *OpenMeetings*, give it a name and store/access the Room
+
+=== Additional Information ===
+
+The Plugin does not use all customization and configuration values of OpenMeetings. Its currently limited to 4x4 Users and the Language is set global, the Color-Theme is the Default one configured in !OpenMeetings. This might change in the future.
+
+Future Features:
+  * Access Files of Conference Rooms from outside the Meeting room (Upload view Files before the meeting/preparing)
+  * Manage all available Rooms through the admin interface
+  * Configurable number of Participants
+  * Auto load language from Course/Portal Settings
+  * Advanced Error Handlers
+  * Add Recordings of Meetings to Course-Page
+
+== Audience-Plugin ==
+
+=== Installation ===
+
+  * You need at least OpenMeetings 0.5.1 installed and running.
+  * The Moodle Plugin is build against Moodle 1.9.x
+  * Download http://openmeetings.googlecode.com/files/openmeetingsaudience_moodle_plugin_v02.zip
+  * Unpack the content into $MOODLE_ROOT/mod/
+  * goto http://$YOUR_MOODLE_HOST/$MOODLE_WWW_ROOT/admin => watch the Table populated
+  * Goto the Admin-Panel of the Plugin (Module->Activities->!OpenMeetingsaudience) and alter the Settings, see:
+
+http://openmeetings.googlecode.com/svn/docs/moodle_plugin_audience.png
+
+=== Usage ===
+
+  * Create/Goto a Course
+  * Turn editing on
+  * Add a new Activitie *OpenMeetingsaudience*, give it a name and store/access the Room
+
+=== Additional Information ===
+
+The Plugin does not use all customization and configuration values of OpenMeetings. Its currently limited to 20 Users and the Language is set global, the Color-Theme is the Default one configured in !OpenMeetings. This might change in the future.
+
+Future Features:
+  * see features of Conference-Plugin
