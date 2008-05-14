@@ -6,6 +6,7 @@
   * [http://code.google.com/p/openmeetings/wiki/MoodlePlugins#Audience-Plugin Audience-Plugin] (1:n Participants, like Teacher Modus) [http://openmeetings.googlecode.com/files/openmeetingsaudience_moodle_plugin_v02.zip download]
   * [http://code.google.com/p/openmeetings/wiki/MoodlePlugins#Technical-Review Technical-Review]
   * Demo: http://inno02.fh-pforzheim.de:5080/moodle/ (You can login as Guest)
+  * Source-Locations
 
 = Conference-Plugin =
 
@@ -69,3 +70,8 @@ Future Features:
   * The Plugins are build using the SoapMethods.
   * You can also use these rooms directly from inside !OpenMeetings.
   * The nusoap-php-library is NOT the original one. It is modified in the the Serialization of Param (The SOAP Body is for some reason I don't understand empty if you connect to a Axis2-Method on a Linux Host)
+
+= Source-Locations =
+
+  * The Sources of the the Conference-Plugin can be found [http://openmeetings.googlecode.com/svn/trunk/plugins/openmeetings_moodleplugin/openmeetings/ here]
+  * The Sources of the Audience-Plugin can be found [http://openmeetings.googlecode.com/svn/trunk/plugins/openmeetings_moodleplugin/openmeetingsaudience/ here]
