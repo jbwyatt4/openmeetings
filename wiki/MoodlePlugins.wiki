@@ -6,7 +6,7 @@
   * [http://code.google.com/p/openmeetings/wiki/MoodlePlugins#Audience-Plugin Audience-Plugin] (1:n Participants, like Teacher Modus) [http://openmeetings.googlecode.com/files/openmeetingsaudience_moodle_plugin_v02.zip download]
   * [http://code.google.com/p/openmeetings/wiki/MoodlePlugins#Technical-Review Technical-Review]
   * Demo: http://inno02.fh-pforzheim.de:5080/moodle/ (You can login as Guest)
-  * Source-Locations
+  * [http://code.google.com/p/openmeetings/wiki/MoodlePlugins#Source-Locations Source-Locations]
 
 = Conference-Plugin =
 
