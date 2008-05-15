@@ -1,0 +1,13 @@
+#summary class diagram for client classes
+
+= Introduction =
+
+Try to make clarification about classes organization
+
+= Details =
+
+Video classes
+r1406
+
+Some refactoring should be done to avoid code duplication.
+[http://openmeetings.googlecode.com/svn/docs/uml/images/openmeetings/diagram/VideoClass.png] 
