@@ -68,6 +68,7 @@ Tips for Installation:
   * [UML] - ServerSide
   * [CRUD]
   * ClientSideDiagrams - Some Graphs about the Client side Logic
+  * ClassDiagram
 
 == Community == 
 
