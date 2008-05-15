@@ -82,7 +82,9 @@ public class Application extends ApplicationAdapter implements
 	@Override
 	public boolean appStart(IScope scope) {
 		try {
-			webAppPath = scope.getResource("/").getFile().getAbsolutePath();			
+			webAppPath = scope.getResource("/").getFile().getAbsolutePath();
+			log.debug("webAppPath : "+webAppPath);
+			batchFileFir = webAppPath + File.separatorChar + "jod" + File.separatorChar;
 			scope.getResource("public/").getFile().getParentFile().getAbsolutePath();
 			String filePath = scope.getResource("public/").getFile().getAbsolutePath();
 			this.loadEmot(filePath);
