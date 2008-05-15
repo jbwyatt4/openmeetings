@@ -19,6 +19,9 @@
   * you can get the Version 0.6.3 of Red5 from: http://www.osflash.org
   * configure Red5, the default ports Red5 is listening are also the default ports !OpenMeetings application will try to connect. However you will find the exact port settings in _$RED5-HOME/conf/red5.properties_ (or follow the installation of red5)
 
+  * Windows Version of Red5 please use this script for starting Red5: http://openmeetings.googlecode.com/svn/trunk/webapp/webapp/openmeetings/Red5.bat
+  * Howto: Download it into your Red5-installation ($RED5_HOME, next to the red5.jar) and double click on it for starting Red5.
+
 = Install !OpenMeetings =
   # Download !OpenMeetings 0.5 Final from [ http://code.google.com/p/openmeetings/downloads/list !OpenMeetings-Download-Page] (Please make sure that you use an up-to-date unzip-software)
   # Unpack it to _$RED5-HOME/webapps/_ your new folder structure will be _$RED5-HOME/webapps/openmeetings/_ this is the base directory of !OpenMeetings (following $OPENMEETINGS-HOME)
