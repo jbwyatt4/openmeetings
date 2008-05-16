@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library>
 
-<class name="videoUserProfilePic" extends="view" x="1" y="2" width="128" height="96" 
+<class name="videoUserProfilePic" extends="view" x="1" y="2" width="${parent.width}" height="${parent.height}" 
 	   clip="true" bgcolor="black">
 	<attribute name="value" value="null" />
 	<handler name="oninit">
@@ -20,7 +20,22 @@
 	        this._userpic.setAttribute('src',downloadurl);	
         ]]>
 	</handler>	
-	<image name="_userpic" />
+	<image name="_userpic" stretches="both">
+	  <handler name="oninit">	   
+	    var f = function () { 
+	      this.setAttribute("width", this.parent.height*this.unstretchedwidth/this.unstretchedheight);
+	      this.setAttribute("height", this.parent.height);  
+	      myVideoBoardAudience.bringToFront();
+	    }
+	    var d = [this.parent, "width"];
+	    var e = [this.parent, "height"];
+	    this.applyConstraint("width", f, d);
+	    this.applyConstraint("height", f, e);
+
+	    this.setAttribute("width", this.parent.height*this.unstretchedwidth/this.unstretchedheight);
+	    this.setAttribute("height", this.parent.height);
+	  </handler>
+	</image>
 </class>
 
 </library>

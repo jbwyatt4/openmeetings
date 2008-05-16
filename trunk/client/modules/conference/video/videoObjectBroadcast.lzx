@@ -9,7 +9,25 @@
 
  
 <class name="videoObjectBroadcast" extends="baseVideoObject" isremote="false">
-	
+  <attribute name="ratioW" value="1" />
+  <attribute name="ratioH" value="1" />
+  <handler name="oninit">
+     <![CDATA[
+      this.setAttribute("ratioW",this.width / myconferenceView.initW);;
+      this.setAttribute("ratioH",this.height / myconferenceView.initH);
+
+      this.setAttribute("width",myconferenceView.width * this.ratioW);
+      this.setAttribute("height",myconferenceView.height * this.ratioH);
+
+      var f = function () {
+          this.setAttribute("width",myconferenceView.width * this.ratioW);
+          this.setAttribute("height",myconferenceView.height * this.ratioH);
+      }
+      var prop = [this.parent, "width"];
+      this.applyConstraint("width", f, prop);
+     ]]>
+  </handler>
+
     <!--- sets the Profile Picture -->
     <method name="setVideouserProfilePic" args="value">
     	if ($debug) Debug.write("### setVideouserProfilePic ",value);
@@ -17,27 +35,35 @@
     	this.showUserProfilePic = true;
     </method>	
 	
-	<view name="_chatvideoinner" x="1" y="20" width="130" height="100" >
-		
+	<view name="_chatvideoinner" x="1" y="20" height="${parent.height-20}" width="${parent.width-2}">
 		<view name="r" resource="chatbgitem" x="1" y="2" stretches="both" 
-			  width="128" height="96" />
+			  width="${parent.width}" height="${parent.height}" />
 		<handler name="oninit">
 			this.r.setResourceNumber(5);
 		</handler>
 		
 		<baseVideoStreamDevice name="_videostream" mode="broadcast"
-						 x="1" y="2" width="128" height="96" bgcolor="black" />
+						 width="${parent.width}" height="${parent.height}" bgcolor="black" >
 
+		  <handler name="oninit">
+		    var f = function () {
+                      this.applySizeToVid();		     
+		    }
+		    var prop1 = [this, "width"];
+		    this.applyConstraint("width", f, prop1);
+		  </handler> 
+		</baseVideoStreamDevice>
+		
 	</view>
 
-	<view name="_loudness" x="1" width="126" height="18" y="$once{ parent.height-18 }" >
+	<view name="_loudness" x="1" width="126" height="18" y="${ parent.height-18 }" >
 		<view x="2" y="2" name="loudness" resource="speaking" opacity="0.2"
 			  onmouseover="" onmouseout="" >		
 			<labelTooltip inittwice="true" labelid="372" />
 		</view>
 	</view>
 	
-	<view name="mute" x="$once{ parent.width-20 }" y="$once{ parent.height-18 }" 
+	<view name="mute" x="${ parent.width-20 }" y="${ parent.height-18 }" 
 		onmouseover="" onmouseup="" resource="mute_btn_rsc" >
 		<attribute name="isload" value="true" type="boolean" />
 		<handler name="onclick">
@@ -54,7 +80,7 @@
 		<labelTooltip inittwice="true" labelid="373" />
 	</view>
 	
-	<view name="showuser" x="$once{ parent.width-20 }" y="2"
+	<view name="showuser" x="${ parent.width-20 }" y="2"
 		onmouseover="" onmouseup="" resource="showusercontext">
 		<handler name="onclick">
 			new videoInfoStuff(parent);
@@ -62,7 +88,7 @@
 		<labelTooltip inittwice="true" labelid="68" />
 	</view>
 	
-	<view name="syncuser" x="$once{ parent.width-20 }" y="$once{ parent.height-20 }"
+	<view name="syncuser" x="${ parent.width-20 }" y="${ parent.height-20 }"
 		onmouseover="" onmouseup="" resource="resyncuser_rsc">
 		<handler name="onclick">
 			//new videoInfoStuff(parent);

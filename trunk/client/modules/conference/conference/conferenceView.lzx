@@ -1,9 +1,33 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library>
 
-<class name="videoBoard" extends="guiPresenter" closable="false" title="Video and Audio"
-    resizeable="false">
-	<simpleLabelButton y="${ parent.height-19 }" x="${ parent.width-this.width-1 }" 
+<class name="videoBoard" id="myconferenceView" extends="guiPresenter" closable="false" title="Video and Audio"
+    resizeable="true">
+  
+	<attribute name="initH" />
+	<attribute name="initW" />
+
+	<handler name="oninit">
+	  <![CDATA[
+	  this.setAttribute("initH",this.height);
+	  this.setAttribute("initW",this.width);
+	  var f=function() {
+              var w=this.height * this.initW/this.initH;
+              w=((w < this.initW ) ? initW : w);
+              var h=this.width * this.initH/this.initW;
+              h=((h < this.initH ) ? initH : h);
+
+              this.setWidth(w);
+              this.setHeight(h);
+	  }
+          var prop1 = [this, "width"];
+          var prop2 = [this, "height"];
+          this.applyConstraint("width", f, prop1);
+          this.applyConstraint("height", f, prop2);
+        ]]>
+	</handler>
+
+        <simpleLabelButton y="${ parent.height-19 }" x="${ parent.width-this.width-1 }" 
 					   height="18" labelid="213" >
 		<handler name="onclick">
 			new inviteMainWindow(canvas.main_content._content.inner);
@@ -19,8 +43,8 @@
 	</view>	
      -->
     <videoContainer name="_videocontainer" x="1" y="22" 
-    				width="$once{ parent.width-2 }"
-    				height="$once{ parent.height-22 }" />
+    				width="${ parent.width-2 }"
+    				height="${ parent.height-22 }" />
 </class>
 
 <class name="whiteBoardPanel" extends="guiPresenter" x="296" y="2"
