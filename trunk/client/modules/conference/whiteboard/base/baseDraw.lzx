@@ -1360,6 +1360,7 @@
 			this.drawrectangleHistory(this.currentlayer,0,0,width,height,this.currentrectanglestroke,this.currentrectangleineWidth,this.currentrectanglestrokeFill,this.currentrectanglestrokeDis,this.currentrectanglestrokeFillDis);
 			this.currentlayer.setAttribute('stretches','both');
 			this.drawrectregisterFinal(this.currentlayer.name,this.currentrectanglestroke,this.currentrectangleineWidth,this.currentrectanglestrokeFill,this.currentrectanglestrokeDis,this.currentrectanglestrokeFillDis,x,y,width,height);
+			this.layers.push(this.currentlayer);
 			this.checkStepLayers();
 		]]>
 	</method> 
