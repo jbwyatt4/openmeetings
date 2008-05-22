@@ -34,7 +34,7 @@
 </class>
 
 <!-- drawarrow -->
-<class name="drawArrowTools" extends="view" x="340" layout="axis:x;spacing:2">
+<class name="drawDrawarrowTools" extends="view" x="340" layout="axis:x;spacing:2">
 	<lineOnlyColorChoose y="42" name="lineColor" 
 		selectedColor="$once{ this.parent.parent.parent._drawareaMask._drawarea.currentdrawarrowlinestroke }" >
 		<handler name="onselectedColor" args="sel">

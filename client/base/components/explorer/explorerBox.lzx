@@ -370,10 +370,30 @@
 		////Debug.write("onaddsubview",v);
 		if (v.parent.subviews.length>2) this._resizeview.bringToFront();
     </handler>
-    <view visible="${ this.parent.resizeable }" name="_resizeview" x="${ this.parent.width - 17 }" y="${ this.parent.height - 17 }" 
+    <view visible="${ this.parent.resizeable }" name="_resizeview" 
+    	  x="${ this.parent.width - 17 }" y="${ this.parent.height - 17 }" 
         resource="explorer_resize_rsc" cursor="explorer_resizemouse_rsc" 
         onmousedown="this.parent.rs.apply()"
         onmouseup="this.parent.rs.remove()" >
+    	<handler name="oninit">
+    		if ($debug) Debug.write("setTint");
+    		this.setColor(canvas.baseMousecolorizer);
+    	</handler>
+		<method name="setTint" args="color, brightness">
+		    <![CDATA[
+		    if (color != "" && color != null){
+		        if (brightness == null) { brightness = 0; }
+		        var rgb = color;
+		        var red=(rgb >> 16) & 0xFF;
+		        var green=(rgb >> 8) & 0xFF;
+		        var blue=rgb & 0xFF;
+				if ($debug) Debug.write("setColorTransform: ",{ ra : red, ga : green, ba : blue,
+		                            		rb : 0, gb : 0, bb : 0 });
+		        this.setColorTransform( { ra : red, ga : green, ba : blue,
+		                            		rb : 0, gb : 0, bb : 0 } );
+		    }
+		    ]]>
+		</method>    	
     </view>
     <resizestate name="rs"/>
 </class>

@@ -49,7 +49,28 @@
 
 <class name="whiteBoardPanel" extends="guiPresenter" x="296" y="2"
     width="660" height="592" closable="false" title="Whiteboard"
-    resizeable="false">
+    resizeable="true">
+  <attribute name="initH"/>
+  <attribute name="initW"/>
+  <handler name="oninit">
+    <![CDATA[
+       this.setAttribute("initH",this.height);
+       this.setAttribute("initW",this.width);
+       var f=function() {
+         var w=this.height * this.initW/this.initH;
+         w=((w < this.initW ) ? initW : w);
+         var h=this.width * this.initH/this.initW;
+         h=((h < this.initH ) ? initH : h);
+
+         this.setWidth(w);
+         this.setHeight(h);
+       }
+       var prop1 = [this, "width"];
+       var prop2 = [this, "height"];
+       this.applyConstraint("width", f, prop1);
+       this.applyConstraint("height", f, prop2);
+      ]]>
+	</handler>
    <whiteBoard name="_whiteboard" y="22" x="4">
         <handler name="onsharedMessage" args="obj">
             //Debug.write("send: ",obj);

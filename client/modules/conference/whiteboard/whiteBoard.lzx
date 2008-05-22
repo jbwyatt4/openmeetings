@@ -240,9 +240,12 @@
     <!-- 
         The Content Area    
      -->
-    <view width="$once{ parent.parent.width-6 }" height="$once{ parent.parent.height-100 }" 
+    <view width="${ parent.parent.width-6 }" height="${ parent.parent.height-100 }" 
     	  y="68" name="_drawareaMask" clip="true" bgcolor="white" >
-        <baseDrawSave y="0" name="_drawarea" id="_drawarea" width="654" height="492" >
+        <baseDrawSave y="0" name="_drawarea" id="_drawarea" width="${parent.width}" height="${parent.height}" >
+            <attribute name="initH"/>
+            <attribute name="initW"/>
+
             <handler name="onprogress" args="perc">
                 //Debug.write("onprogress: ",perc);
                 this.parent.parent._progress.setProgress(perc);
