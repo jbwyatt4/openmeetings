@@ -2,7 +2,7 @@
 <library>
     
 <class name="baseToolbarMenu" extends="view" layout="axis:x;spacing:2;inset:2" 
-    height="30" width="$once{ parent.parent.width-6 }" 
+    height="30" width="${ parent.parent.width-6 }" 
     bgcolor="$once{canvas.baseMousecolorizer}"  >
     <attribute name="selectedButton" value="null" />
     <method name="selectButton" args="obj,bool">		

@@ -21,7 +21,7 @@
 	<frame src="explorbar_maximize_dn.png" />
 </resource>
 
-<resource name="explorer_resize_rsc" src="resizer.png" />
+<resource name="explorer_resize_rsc" src="resizer.swf" />
 
 <resource name="explorer_resizemouse_rsc" src="resizemouse.png" />
 

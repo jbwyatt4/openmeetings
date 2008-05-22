@@ -2,6 +2,8 @@
 <library>
 
 <class name="drawArrowWhiteBoard" resource="drawarrow_rsc" >
+	
+	<!-- Not needed anymore, use LzView.setColor instead
 	<method name="setTint" args="color, brightness">
 	    <![CDATA[
 	    if (color != "" && color != null){
@@ -12,10 +14,12 @@
 	        var blue=rgb & 0xFF;
 
 	        this.setColorTransform( { ra : red, ga : green, ba : blue,
-	                            		rb : 0, gb : 0, bb : 0 } );
+	                            		rb : 0, gb : 0, bb : 100 } );
 	    }
 	    ]]>
 	</method>
+	 -->
+	 
 </class>
 
 <class name="drawViewNew" extends="drawview" cachebitmap="false" x="-1" y="-1" >
@@ -215,7 +219,9 @@
 		this.setAttribute('drawmodus',modi);
 		if (modi=='plain'){
 			this.clearAll();
-		} else if (modi=='hand' || modi=='letter' || modi=='paint' || modi=='line' || modi=='uline' || modi=='rectangle' || modi=='ellipse' || modi=='drawarrow'){
+		} else if (modi=='hand' || modi=='letter' 
+			|| modi=='paint' || modi=='line' || modi=='uline' 
+			|| modi=='rectangle' || modi=='ellipse' || modi=='drawarrow'){
 			if (this.boundingref!=null) this.boundingref.removeIt();
 		}
 	</method>
@@ -453,7 +459,8 @@
 			mousetracker_del.unregisterAll();
 		} else if(this.drawmodus=="letter"){
 			if (!this.letterObjectIsActive && !bool){
-				this.currentletterObj = new baseDrawWords(canvas,{refObj:this,x:canvas.getMouse('x'),y:canvas.getMouse('y')});
+				this.currentletterObj = new baseDrawWords(canvas,{refObj:this,x:canvas.getMouse('x'),
+					y:canvas.getMouse('y')});
 			}
 		} else if (this.drawmodus == 'rectangle') {
 			this.endRect();
@@ -605,7 +612,10 @@
 		var tempList = new Array();
 		////Debug.write("getObjectInBounds this.baseactionobjectList1: ",x,y,this.baseactionobjectList);
 		for (var eg=0;eg<this.baseactionobjectList.length;eg++){
-			if ( ( this.baseactionobjectList[eg][this.baseactionobjectList[eg].length-5]<x && ( (this.baseactionobjectList[eg][this.baseactionobjectList[eg].length-5]+this.baseactionobjectList[eg][this.baseactionobjectList[eg].length-3]) >=x ) ) && ( this.baseactionobjectList[eg][this.baseactionobjectList[eg].length-4]<y && ( this.baseactionobjectList[eg][this.baseactionobjectList[eg].length-4]+this.baseactionobjectList[eg][this.baseactionobjectList[eg].length-2] )>y  ) ) {
+			if ( ( this.baseactionobjectList[eg][this.baseactionobjectList[eg].length-5]<x 
+				&& ( (this.baseactionobjectList[eg][this.baseactionobjectList[eg].length-5]+this.baseactionobjectList[eg][this.baseactionobjectList[eg].length-3]) >=x ) ) 
+				&& ( this.baseactionobjectList[eg][this.baseactionobjectList[eg].length-4]<y 
+				&& ( this.baseactionobjectList[eg][this.baseactionobjectList[eg].length-4]+this.baseactionobjectList[eg][this.baseactionobjectList[eg].length-2] )>y  ) ) {
 				tempList.push(this.baseactionobjectList[eg]);
 				////Debug.write("found obj: ",this.baseactionobjectList[eg]);
 			}
@@ -1127,8 +1137,9 @@
   		var t = new drawArrowWhiteBoard(this.currentlayer,{x:this.startx,y:this.starty});
   		
   		//Color
-    	t.setTint(this.currentdrawarrowlinestroke,100);
-    	
+    	//t.setTint(this.currentdrawarrowlinestroke,60);
+    	t.setColor(this.currentdrawarrowlinestroke);
+  		
     	var tx = this.currentlayer.getMouse('x')-this.startx;
     	var ty = this.currentlayer.getMouse('y')-this.starty;
 
@@ -1205,8 +1216,9 @@
 		var t = new drawArrowWhiteBoard(this.currentlayer,{x:0,y:0});
 
   		//Color
-    	t.setTint(this.currentdrawarrowlinestroke,100);
-    	
+    	//t.setTint(this.currentdrawarrowlinestroke,60);
+    	t.setColor(this.currentdrawarrowlinestroke);
+		
     	var tx = this.endx-this.startx;
     	var ty = this.endy-this.starty;
 
@@ -1284,8 +1296,9 @@
 			
 			var t = new drawArrowWhiteBoard(this.currentlayer,{x:0,y:0});
 			
-			t.setTint(lastActionObject[3],100);
-	    	
+			//t.setTint(lastActionObject[3],60);
+	    	t.setColor(lastActionObject[3]);
+			
 	    	var tx = lastActionObject[6]-lastActionObject[4];
 	    	var ty = lastActionObject[7]-lastActionObject[5];
 	
