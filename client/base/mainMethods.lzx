@@ -155,7 +155,7 @@
 	    ]]>
 	</method>    
 	
-	<netRemoteCallHib name="getVotes" funcname="dokeosService.getVotes" remotecontext="$once{ canvas.thishib }" >
+	<netRemoteCallHib name="getVotes" funcname="pollservice.getVotes" remotecontext="$once{ canvas.thishib }" >
 		<handler name="ondata" args="value">
 	            <![CDATA[
 	                if (value!=null){
@@ -167,7 +167,7 @@
 	      </handler>   
 	</netRemoteCallHib>  
 	    
-	<netRemoteCallHib name="checkHasVoted" funcname="dokeosService.checkHasVoted" remotecontext="$once{ canvas.thishib }" >
+	<netRemoteCallHib name="checkHasVoted" funcname="pollservice.checkHasVoted" remotecontext="$once{ canvas.thishib }" >
 		<handler name="ondata" args="value">
 	      	<![CDATA[
 	                  if (value==1){
@@ -181,7 +181,7 @@
 		</handler>   
 	</netRemoteCallHib> 
 	
-	<netRemoteCallHib name="getPoll" funcname="dokeosService.getPoll" remotecontext="$once{ canvas.thishib }" >
+	<netRemoteCallHib name="getPoll" funcname="pollservice.getPoll" remotecontext="$once{ canvas.thishib }" >
 		<handler name="ondata" args="value">
 	      	<![CDATA[
 	                  if (value!=null){

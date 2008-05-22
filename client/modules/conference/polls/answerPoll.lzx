@@ -61,7 +61,7 @@
     	</handler>
     </simpleLabelButton>
     
-        <netRemoteCallHib name="vote" funcname="dokeosService.vote" remotecontext="$once{ canvas.thishib }" >
+        <netRemoteCallHib name="vote" funcname="pollservice.vote" remotecontext="$once{ canvas.thishib }" >
             <attribute name="pollvalue" type="number" value="0" />
             <attribute name="pollTypesId" type="number" value="0" />
             <netparam><method name="getValue">return parent.pollvalue;</method></netparam>

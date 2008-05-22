@@ -103,7 +103,7 @@
 		<handler name="onclick">
 			this.getVotes.doCall();
 		</handler>
-        <netRemoteCallHib name="getVotes" funcname="dokeosService.getVotes" remotecontext="$once{ canvas.thishib }" >
+        <netRemoteCallHib name="getVotes" funcname="pollservice.getVotes" remotecontext="$once{ canvas.thishib }" >
             <handler name="ondata" args="value">
                 <![CDATA[
                 //The onResult-Handler will be called be the rtmpconnection
@@ -123,7 +123,7 @@
 		<handler name="onclick">
 			this.checkHasVoted.doCall();
 		</handler>
-        <netRemoteCallHib name="checkHasVoted" funcname="dokeosService.checkHasVoted" 
+        <netRemoteCallHib name="checkHasVoted" funcname="pollservice.checkHasVoted" 
             remotecontext="$once{ canvas.thishib }" >
             <handler name="ondata" args="value">
                 <![CDATA[
@@ -140,7 +140,7 @@
             </handler>   
         </netRemoteCallHib> 
 
-        <netRemoteCallHib name="getPoll" funcname="dokeosService.getPoll"
+        <netRemoteCallHib name="getPoll" funcname="pollservice.getPoll"
             remotecontext="$once{ canvas.thishib }" >
             <handler name="ondata" args="value">
                 <![CDATA[

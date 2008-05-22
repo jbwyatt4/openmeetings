@@ -11,7 +11,7 @@
     <labelText labelid="20" y="42" />
     <customEdittext name="_question" multiline="true" width="390" x="100" y="42" height="60" />
      
-        <netRemoteCallHib name="getPollTypeList" funcname="dokeosService.getPollTypeList"
+        <netRemoteCallHib name="getPollTypeList" funcname="pollservice.getPollTypeList"
             remotecontext="$once{ canvas.thishib }" > 
             <method name="setReferenceObj" args="obj">
                 this.refObj = obj;
@@ -53,7 +53,7 @@
     
     <labelText fgcolor="red" labelid="23" y="170" width="480" multiline="true" resize="false"/>
      
-        <netRemoteCallHib name="createPoll" funcname="dokeosService.createPoll"
+        <netRemoteCallHib name="createPoll" funcname="pollservice.createPoll"
             remotecontext="$once{ canvas.thishib }" >
             <attribute name="pollquestion" value="" type="string" />
             <attribute name="polltypesid" value="0" type="number" />
@@ -62,7 +62,7 @@
             <handler name="ondata" args="value">
                 <![CDATA[
                     //The onResult-Handler will be called be the rtmpconnection
-                    //Debug.write("createPoll : ",value);
+                    if ($debug) Debug.write("createPoll : ",value);
                     this.parent.close();
                 ]]>
             </handler>   
