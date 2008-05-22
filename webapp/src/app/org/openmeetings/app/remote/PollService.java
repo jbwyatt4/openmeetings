@@ -26,12 +26,18 @@ import org.openmeetings.app.conference.videobeans.PollType;
  * @author swagner
  *
  */
-public class RemoteService {
+public class PollService {
 	
-	private static final Log log = LogFactory.getLog(RemoteService.class);
+	private static final Log log = LogFactory.getLog(PollService.class);
 	
-	private static HashMap<String,RoomPoll> pollList = new HashMap<String,RoomPoll>();
-	
+	private static HashMap<Long,RoomPoll> pollList = new HashMap<Long,RoomPoll>();
+
+	/**
+	 * @deprecated
+	 * @param userName
+	 * @param userPass
+	 * @return
+	 */
 	public String loginUser(String userName,String userPass){
 		try {
 			if (Red5.getConnectionLocal().getScope().getName().equals("admin")){
@@ -46,11 +52,19 @@ public class RemoteService {
 		return "no";
 	}
 	
+	/**
+	 * @deprecated
+	 * @return
+	 */
 	public String getUserScope(){
 		log.debug("getUserScope");
 		return Red5.getConnectionLocal().getScope().getName();
 	}
 	
+	/**
+	 * @deprecated
+	 * @return
+	 */
 	public HashMap<String,CustomBandwidth> getBandwidthConfig(){
 		IClient myclient = Red5.getConnectionLocal().getClient();
 		log.debug("getBandwidthConfig: "+myclient.getAttribute("role"));
@@ -63,10 +77,11 @@ public class RemoteService {
 	}
 	
 	/**
-	 * Save a new ServerSide Bandiwdth File
+	 * Save a new ServerSide Bandwidth File
 	 * This server side configuration is disabled cause of bad audio-effects
 	 * @param config
 	 * @return
+	 * @deprecated
 	 */
 	public String saveBandwidthConfig(HashMap config){
 		IClient myclient = Red5.getConnectionLocal().getClient();
@@ -111,11 +126,11 @@ public class RemoteService {
 			HashMap<String,RoomClient> ClientList = Application.getClientList();
 			RoomClient rc = ClientList.get(currentcon.getClient().getId());
 			
-			String uniqueRoomPollName = rc.getRoom_id().toString();
+			Long uniqueRoomPollName = rc.getRoom_id();
 			
 			log.debug("rc: "+rc.getStreamid()+" "+rc.getUsername()+" "+rc.getIsMod());
 			
-			if (rc.getIsMod().booleanValue()){
+			if (rc.getIsMod()){
 				RoomPoll roomP = new RoomPoll();
 				
 				roomP.setCreatedBy(rc);
@@ -137,7 +152,7 @@ public class RemoteService {
 			
 		} catch (Exception err){
 			returnValue="203";
-			log.error(err);
+			log.error("[createPoll]",err);
 		}
 		return returnValue;
 	}	
@@ -149,7 +164,7 @@ public class RemoteService {
 				pollList.remove(room_id);
 			}
 		} catch (Exception err){
-			log.error(err);
+			log.error("[clearRoomPollList]",err);
 		}
 	}
 	
@@ -186,7 +201,7 @@ public class RemoteService {
 			pollTypesList.add(pt);
 			
 		} catch (Exception err){
-			log.error(err);
+			log.error("[getPollTypeList]",err);
 		}
 		return pollTypesList;
 	}
@@ -197,8 +212,17 @@ public class RemoteService {
 			IConnection current = Red5.getConnectionLocal();
 			RoomClient rc = Application.getClientList().get(current.getClient().getId());
 			
+			if (rc==null){
+				log.error("RoomClient IS NULL for ClientID: "+current.getClient().getId());
+				return -1;
+			}
 			//get Poll
 			RoomPoll roomP = pollList.get(rc.getRoom_id());
+			
+			if (roomP==null){
+				log.error("POLL IS NULL for RoomId: "+rc.getRoom_id());
+				return -1;
+			}
 			
 			log.debug("vote: "+pollvalue+" "+pollTypeId+" "+roomP.getPollQuestion());
 			
@@ -228,7 +252,7 @@ public class RemoteService {
 			}		
 		} catch (Exception err){
 			log.error("vote");
-			log.error(err);
+			log.error("[vote]",err);
 		}
 		return returnVal;
 	}
@@ -248,20 +272,29 @@ public class RemoteService {
 	}
 	
 	public RoomPoll getVotes(){
-		IConnection current = Red5.getConnectionLocal();
-		RoomClient rc = Application.getClientList().get(current.getClient().getId());
-		
-		//get Poll
-		return pollList.get(rc.getRoom_id());
-
+		try {
+			IConnection current = Red5.getConnectionLocal();
+			RoomClient rc = Application.getClientList().get(current.getClient().getId());
+			
+			//get Poll
+			return pollList.get(rc.getRoom_id());	
+		} catch (Exception err) {
+			log.error("[getVotes]",err);
+		}
+		return null;
 	}
 	
 	public RoomPoll getPoll(){
-		IConnection current = Red5.getConnectionLocal();
-		RoomClient rc = Application.getClientList().get(current.getClient().getId());
-		
-		//get Poll
-		return pollList.get(rc.getRoom_id());
+		try {
+			IConnection current = Red5.getConnectionLocal();
+			RoomClient rc = Application.getClientList().get(current.getClient().getId());
+			
+			//get Poll
+			return pollList.get(rc.getRoom_id());
+		} catch (Exception err) {
+			log.error("[getPoll]",err);
+		}
+		return null;
 	}
 	
 	public int checkHasVoted(){
@@ -285,7 +318,7 @@ public class RemoteService {
 			}
 		} catch (Exception err){
 			log.error("checkHasVoted");
-			log.error(err);
+			log.error("[checkHasVoted]",err);
 		}
 		return 0;
 	}

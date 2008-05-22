@@ -56,8 +56,8 @@
 		singleton="true" />			
 				
 	<!-- Class for Methods which can be invoked by the client -->
-    <bean id="dokeosService.service" 
-	    class="org.openmeetings.app.remote.RemoteService" 
+    <bean id="pollservice.service" 
+	    class="org.openmeetings.app.remote.PollService" 
 		singleton="true" />		
 
 	<!-- Class for Methods which can be invoked by the client -->
