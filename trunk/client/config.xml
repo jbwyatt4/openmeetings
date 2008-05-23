@@ -35,11 +35,6 @@ of the red5-servlet
 <basebgcolorizer>0xB0C4DE</basebgcolorizer>
 <baseMousecolorizer>0xC4D5E6</baseMousecolorizer>
 <baseMouseOvercolorizer>0xC4D5E6</baseMouseOvercolorizer>
-	
-<!-- 
-	Version number of this distro
- -->
-<currentappversion>Version 0.5 Beta7</currentappversion>
     
 <!--
     Name of the Application

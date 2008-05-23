@@ -19,7 +19,6 @@
 		this.setAttribute('basebgcolorizer',canvas.myConfigSet.getPointer().xpathQuery('config/basebgcolorizer/text()'));  
 		this.setAttribute('baseMousecolorizer',canvas.myConfigSet.getPointer().xpathQuery('config/baseMousecolorizer/text()'));  
 		this.setAttribute('baseMouseOvercolorizer',canvas.myConfigSet.getPointer().xpathQuery('config/baseMouseOvercolorizer/text()'));  
-		this.setAttribute('currentappversion',canvas.myConfigSet.getPointer().xpathQuery('config/currentappversion/text()'));  
 		this.setAttribute('currentappname',canvas.myConfigSet.getPointer().xpathQuery('config/currentappname/text()'));  
 		this.setAttribute('currentappnameurl',canvas.myConfigSet.getPointer().xpathQuery('config/currentappnameurl/text()'));  
 		this.setAttribute('currentappnamebugurl',canvas.myConfigSet.getPointer().xpathQuery('config/currentappnamebugurl/text()'));

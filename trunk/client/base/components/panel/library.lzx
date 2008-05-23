@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<library>
+
+	<include href="resources/" />
+	
+	<include href="basePanel.lzx" />
+	<include href="panelBoundBox.lzx" />
+	<include href="labelPanel.lzx" />
+
+    
+</library>
