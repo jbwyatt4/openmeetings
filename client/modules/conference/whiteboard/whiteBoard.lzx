@@ -63,6 +63,7 @@
 <include href="helper/" />
 <include href="toolbar/" />
 
+<include href="panels/" />
 
 <!-- 
 ############################
@@ -321,7 +322,10 @@
     not needed for the moment
     <documentToolsPalette name="_documenttoolsPalette" />
      -->
-    
+     
+    <!--
+    <mainToolsPanel name="_mainToolsPanel" />
+     -->
 </class>
     
     
