@@ -1,26 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library>
 
-<class name="explorerBox" extends="view" width="250" y="100" visibility="hidden"
+<class name="basePanel" extends="view" width="250" y="100"
     height="400" bgcolor="$once{ canvas.basebgcolorizer }" 
 	onmousedown="this._startDragState(this)" onmouseup="this._removeDragState(this)" >
 
     <handler name="oninit">
-    	//if($debug) Debug.write("explorerBox/oninit showWindowEffect? ",canvas.showWindowEffect);
-    	if (canvas.showWindowEffect=="y"){
-    		//if($debug) Debug.write("explorerBox/showWindowEffect == YES");
-    		new boxInitEffect(parent,{x:this.x+(this.width/2)-50,y:this.y+(this.height/2)-10,zielx:this.x,ziely:this.y,zielwidth:this.width,zielheight:this.height,objRef:this});
-    	} else {
-    		this.sendAnniComplete();
-    	}
+    	this.setShadow(); 
     </handler>
     
-    <method name="sendAnniComplete">
-    	//if($debug) Debug.write("sendAnniComplete");
-    	this.setAttribute('visibility','visible');
-    	this.setShadow(); 	
-    </method>
-
     <method name="setShadow" args="bool">
         this.hasshadow = bool;
         <![CDATA[
@@ -53,6 +41,8 @@
 		the "docking" effect will be there -->
 	<attribute name="dockingbarrier" value="15" type="number" />
 	
+	<attribute name="boundingbarrier" value="2" type="number" />
+	
 	<!--- the Event will be thrown if you close the Box -->
 	<handler name="onclose" />
 	
@@ -71,8 +61,21 @@
 	<!--- @keywords private is the Box minimized  -->
 	<attribute name="open" value="true" type="boolean" />	
 	
+	<attribute name="currentBoundingBox" value="null" />
+	
+	<attribute name="verticalClassActive" value="false" type="boolean" />
+	<attribute name="activationClassBounding" value="" type="string" />
+	<attribute name="activationVClassBounding" value="" type="string" />
+	
+	<attribute name="hWidth" value="0" type="number" />
+	<attribute name="hHeight" value="0" type="number" />
+	<attribute name="vWidth" value="0" type="number" />
+	<attribute name="vHeight" value="0" type="number" />
+	
 	<!--- @keywords private  -->
 	<attribute name="initheight" value="0" type="number" />
+	
+	<attribute name="mousetracker_del" value="$once{ new LzDelegate(this, 'checkStaticBorders' )}" />
 	
 	<!--- @keywords private store initial height so toggleopen can reset height  -->
 	<method event="oninit">
@@ -150,7 +153,7 @@
 	
 	<!--- @keywords private  -->
 	<method name="_removeDragState" args="obj">
-		//It's important to remove the dragger and do docking stuff before you check for conencted Boxes
+		//It's important to remove the dragger and do docking stuff before you check for connencted Boxes
 		dragger.remove();
 		if (obj==this){
 			if (docking) arrangePosition();
@@ -164,7 +167,21 @@
 				this.dockinglist[eg]._removeDragState(this);
 			}
 		}
-
+		mousetracker_del.unregisterAll();
+		if (this.currentBoundingBox!=null) {
+			
+			if(this.currentBoundingBox.width>this.currentBoundingBox.height){
+				new global[this.activationVClassBounding](parent,{
+					x:this.currentBoundingBox.x,y:this.currentBoundingBox.y
+				});
+			} else {
+				new global[this.activationClassBounding](parent,{
+					x:this.currentBoundingBox.x,y:this.currentBoundingBox.y
+				});
+			}
+			this.currentBoundingBox.destroy();
+			this.destroy();
+		}
 	</method>
 
 	
@@ -184,6 +201,109 @@
 			storeAdjustmentToParent(obj.x,obj.y);
 		}
 		dragger.apply();
+		mousetracker_del.register(LzIdle,'onidle');
+	</method>
+	
+	<!--- arranges the Box to be build into any border -->
+	<method name="checkStaticBorders">
+		<![CDATA[
+			if (!this.verticalClassActive){
+				//if ($debug) Debug.write("checkStaticBorders");
+				if (this.x<this.boundingbarrier){
+					this.setAttribute('visibility','hidden');
+					if (this.y<this.boundingbarrier){
+						//if ($debug) Debug.write("a1");
+						this.drawCurrentBoundingBox(0,0,this.height,this.width);
+					} else if ( (this.parent.height-(this.y+this.height))<this.boundingbarrier){
+						//if ($debug) Debug.write("a2");
+						this.drawCurrentBoundingBox(0,parent.height-this.width,this.height,this.width);
+					} else {
+						//if ($debug) Debug.write("a3");
+						this.drawCurrentBoundingBox(0,this.y,this.width,this.height);
+					}
+				} else if (this.y<this.boundingbarrier){
+					this.setAttribute('visibility','hidden');
+					if ( (this.parent.width-(this.x+this.height))<this.boundingbarrier){
+						//if ($debug) Debug.write("b1");
+						this.drawCurrentBoundingBox((this.parent.width-this.height),0,this.height,this.width);
+					} else {
+						//if ($debug) Debug.write("b2");
+						this.drawCurrentBoundingBox(this.x,0,this.height,this.width);
+					}
+				} else if ( (this.parent.width-(this.x+this.width))<this.boundingbarrier){
+					this.setAttribute('visibility','hidden');
+					//if ($debug) Debug.write("c");
+					if ( (this.parent.height-(this.y+this.height))<this.boundingbarrier){
+						this.drawCurrentBoundingBox(parent.width-this.height,parent.height-this.width,this.height,this.width);
+					} else {
+						this.drawCurrentBoundingBox(parent.width-this.width,this.y,this.width,this.height);
+					}
+				} else if ( (this.parent.height-(this.y+this.height))<this.boundingbarrier){
+					
+					this.setAttribute('visibility','hidden');
+					if ( (this.parent.width-(this.x+this.height))<this.boundingbarrier){
+						//if ($debug) Debug.write("d1");
+						this.drawCurrentBoundingBox(parent.width-this.height,parent.height-this.width,this.height,this.width);
+					} else {
+						//if ($debug) Debug.write("d2");
+						this.drawCurrentBoundingBox(this.x,parent.height-this.width,this.height,this.width);
+					}
+				} else {
+					//if ($debug) Debug.write("d");
+					this.setAttribute('visibility','visible');
+					if (this.currentBoundingBox!=null) {
+						this.currentBoundingBox.destroy();
+						this.currentBoundingBox = null;
+					}
+				}
+			} else {
+				if (this.x<this.boundingbarrier){
+					//if ($debug) Debug.write("a",(this.parent.height-(this.y+this.width)));
+					this.setAttribute('visibility','hidden');
+					if (this.y<this.boundingbarrier){
+						//if ($debug) Debug.write("a1");
+						this.drawCurrentBoundingBox(0,0,this.width,this.height);
+					} else if ( (this.parent.height-(this.y+this.width))<this.boundingbarrier){
+						//if ($debug) Debug.write("a2");
+						this.drawCurrentBoundingBox(0,parent.height-this.height,this.width,this.height);
+					} else {
+						//if ($debug) Debug.write("a3");
+						this.drawCurrentBoundingBox(0,this.y,this.height,this.width);
+					}
+				} else if (this.y<this.boundingbarrier){
+					//if ($debug) Debug.write("b");
+					this.setAttribute('visibility','hidden');
+					if ( (this.parent.width-(this.x+this.width))<this.boundingbarrier){
+						this.drawCurrentBoundingBox(this.parent.width-this.width,0,this.width,this.height);
+					} else {
+						this.drawCurrentBoundingBox(this.x,0,this.width,this.height);
+					}
+				} else if ( (this.parent.width-(this.x+this.width))<this.boundingbarrier){
+					this.setAttribute('visibility','hidden');
+					if ( (this.parent.height-(this.y+this.width))<this.boundingbarrier){
+						this.drawCurrentBoundingBox(this.parent.width-this.width,parent.height-this.height,this.width,this.height);
+					} else {
+						this.drawCurrentBoundingBox(parent.width-this.height,this.y,this.height,this.width);
+					}
+				} else if ( (this.parent.height-(this.y+this.height))<this.boundingbarrier){
+					this.setAttribute('visibility','hidden');
+					this.drawCurrentBoundingBox(this.x,parent.height-this.height,this.width,this.height);
+				} else {
+					//if ($debug) Debug.write("d");
+					this.setAttribute('visibility','visible');
+					if (this.currentBoundingBox!=null) {
+						this.currentBoundingBox.destroy();
+						this.currentBoundingBox = null;
+					}
+				}
+			}			
+		]]>
+	</method>
+	
+	<method name="drawCurrentBoundingBox" args="x,y,width,height">
+		if (this.currentBoundingBox!=null) this.currentBoundingBox.destroy();
+		this.currentBoundingBox = new panelBoundBox(parent,{x:x,y:y,
+			width:width,height:height});
 	</method>
 	
 	<!--- Calc the List of Boxes which will be dragged and setposition if this Box
@@ -263,6 +383,7 @@
 		//set position
 		this.setAttribute('x',newx);
 		this.setAttribute('y',newy);
+		if ($debug) Debug.write("Position: ",newx,newy);
 		]]>
 	</method>
 	
@@ -303,7 +424,8 @@
             resource="presenter_thumb_rsc" >
             <handler name="oninit">
             	<![CDATA[
-            		this.setTintRGB(canvas.basebgcolorizer,90);
+            		//this.setTintRGB(canvas.basebgcolorizer,90);
+            		this.setColor(canvas.basebgcolorizer);
             	]]>
             </handler>
 			<method name="setTintRGB" args="color, brightness">
@@ -325,7 +447,7 @@
 			    ]]>
 			</method>            
         </view>
-        <text fontsize="11" height="17" x="10" y="1" text="${ this.parent.parent.title }" 
+        <text fontsize="11" height="17" x="16" y="1" text="${ this.parent.parent.title }" 
 			fgcolor="0xFFFFFF" resize="true" fontstyle="bold" />
 		<button visible="${ this.parent.parent.closable }" x="${ this.parent.parent.width-23 }" 
 			y="1" text="X" height="18" width="20" >
@@ -333,7 +455,6 @@
 				this.parent.parent.close();
 			</handler>									
 		</button>
-		<!-- 
 		<view visible="${ !this.parent.parent.isopen }" x="2" y="3" resource="explorer_button_min_rsc">
 			<handler name="onmouseover">
 				this.setResourceNumber(2);
@@ -364,25 +485,7 @@
 				this.parent.parent.toggleopen();
 			</handler>									
 		</view>
-		 -->
 	</view>
-    <handler name="onaddsubview" args="v">
-		////Debug.write("onaddsubview",v);
-		if (v.parent.subviews.length>2) this._resizeview.bringToFront();
-    </handler>
-    <view visible="${ this.parent.resizeable }" name="_resizeview" 
-    	  x="${ this.parent.width - 17 }" y="${ this.parent.height - 17 }" 
-        resource="explorer_resize_rsc" cursor="explorer_resizemouse_rsc" 
-        onmousedown="this.parent.rs.apply()"
-        onmouseup="this.parent.rs.remove()" >
-    	<handler name="oninit">
-    		//if ($debug) Debug.write("setTint");
-    		//TODO: Fix this, does not work at the moment
-    		//http://code.google.com/p/openmeetings/issues/detail?id=470
-    		this.setColor(canvas.baseMousecolorizer);
-    	</handler>  	
-    </view>
-    <resizestate name="rs"/>
 </class>
 
 </library>

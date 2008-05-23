@@ -321,10 +321,10 @@
     <!-- Context sensitive stuff
     not needed for the moment
     <documentToolsPalette name="_documenttoolsPalette" />
-     -->
+    
      
-    <!--
     <mainToolsPanel name="_mainToolsPanel" />
+    
      -->
 </class>
     

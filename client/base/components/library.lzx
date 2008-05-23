@@ -11,7 +11,8 @@
     <include href="text/" />
     <include href="button/" />
     <include href="clickbox/" />   
-    <include href="explorer/" />     
+    <include href="explorer/" />    
+    <include href="panel/" />  
     <include href="list/" />
     <include href="turnoverlist/" />
     <include href="calendar/" />

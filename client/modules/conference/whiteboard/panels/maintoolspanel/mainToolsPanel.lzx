@@ -1,8 +1,27 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library>
+	
     
-<class name="mainToolsPanel" extends="view" 
-	   width="62" height="422" >
+<class name="mainToolsVPanel" extends="labelPanel" 
+	   width="250" height="78" title="Tools" docking="true"
+	   activationClassBounding="mainToolsPanel"
+	   activationVClassBounding="mainToolsVPanel"
+	   verticalClassActive="true"
+	   hWidth="62" hHeight="250">
+	
+	<view name="_area" height="62" y="22" x="4">
+		<wrappinglayout axis="y" spacing="2" />
+		<mainToolsPanelItem name="plain" modi="plain" labelid="69" resoureceItem="plain" />
+		<mainToolsPanelItem name="saveobj" modi="saveobj" labelid="197" resoureceItem="saveobj" />
+    </view>	
+</class>
+    
+<class name="mainToolsPanel" extends="labelPanel" 
+	   width="62" height="250" title="Tools" docking="true" 
+	   activationClassBounding="mainToolsPanel"
+	   activationVClassBounding="mainToolsVPanel"
+	   verticalClassActive="false"
+	   vWidth="250" vHeight="78">
 	
 	<view name="_area" width="62" y="22" x="4">
 		<wrappinglayout axis="x" spacing="2" />
