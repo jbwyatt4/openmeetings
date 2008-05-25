@@ -28,6 +28,10 @@
 		<!-- -->
   <inputtext name="field" fontsize="10" text="${ this.parent.text }" x="1" y="1" bgcolor="0xFFFFFF" 
   	multiline="$once{parent.multiline}" width="${ this.parent.width-2 }" height="${ this.parent.height-2 }" >
+  		<attribute name="preText" value="" type="string" />
+  		<handler name="onfocus">
+  			this.preText = this.getText();
+  		</handler>
       	<handler name="onblur">
       		var t = this.getText();
       		if (this.parent.checkIsNumber){
@@ -35,7 +39,7 @@
       				if (this.parent.checkIsDouble){
       					t="0.00";
       				} else {
-      					t="0";
+      					t=this.preText;
       				}
       				this.setText(t);
       			}

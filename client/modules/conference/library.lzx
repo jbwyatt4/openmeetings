@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library>
-	<include href="whiteboard/whiteBoard.lzx" /> 
+	<include href="whiteboard/" /> 
 <!-- <include href="remote/" />-->
  	<include href="tabbar/" />
     	<include href="tabcontent/" />

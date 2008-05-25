@@ -9,6 +9,8 @@
 	<attribute name="regexpType" value="none" type="string" />
 	<attribute name="regexpLabelid" type="number" />
 	<attribute name="preText" value="" type="string" />
+	
+	<event name="onafterCheck" />
 
 	<handler name="onfocus">
     	this.preText = this.getText();
@@ -65,6 +67,7 @@
               	}
               	parent.setAttribute('isvalidInput',true);
             }
+            parent.onafterCheck.sendEvent();
         </method>
     </browserjavascriptcallback>    	
 

@@ -1,44 +1,108 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library>
 	
+<class name="verticalMenuIconBar" extends="view" y="22" x="4">
+	<simplelayout axis="y" spacing="2" />
+	<mainToolsPanelItem name="plain" modi="plain" labelid="69" resoureceItem="plain" />
+	<mainToolsPanelItem name="saveobj" modi="saveobj" labelid="197" resoureceItem="saveobj" />
+	<mainToolsHPanelSeperator />
+	<redoUndoToolsPanelItem name="revert" doredo="false" labelid="70" resoureceItem="revert" />
+	<redoUndoToolsPanelItem name="next" doredo="true" labelid="71" resoureceItem="next" />
+	<mainToolsHPanelSeperator />
+	<mainToolsPanelItem name="hand" modi="hand" labelid="72" resoureceItem="menupointer_rsc" />
+	<mainToolsPanelItem name="letter" modi="letter" labelid="73" resoureceItem="letter" />
+	<mainToolsPanelItem name="paint" modi="paint" labelid="74" resoureceItem="paint" />
+	<mainToolsPanelItem name="line" modi="line" labelid="75" resoureceItem="line_rsc" />
+	<mainToolsPanelItem name="uline" modi="uline" labelid="76" resoureceItem="uline_rsc" />
+	<mainToolsPanelItem name="rectangle" modi="rectangle" labelid="77" resoureceItem="rectangle" />
+	<mainToolsPanelItem name="ellipse" modi="ellipse" labelid="78" resoureceItem="ellipse" />
+	<mainToolsPanelItem name="drawarrow" modi="drawarrow" labelid="78" resoureceItem="drawarrowicon_rsc" />
+</class>
+
+<class name="horizontalMenuIconBar" extends="view" y="22" x="4">
+	<simplelayout axis="x" spacing="2" />
+	<mainToolsPanelItem name="plain" modi="plain" labelid="69" resoureceItem="plain" />
+	<mainToolsPanelItem name="saveobj" modi="saveobj" labelid="197" resoureceItem="saveobj" />
+	<mainToolsVPanelSeperator />
+	<redoUndoToolsPanelItem name="revert" doredo="false" labelid="70" resoureceItem="revert" />
+	<redoUndoToolsPanelItem name="next" doredo="true" labelid="71" resoureceItem="next" />
+	<mainToolsVPanelSeperator />	
+	<mainToolsPanelItem name="hand" modi="hand" labelid="72" resoureceItem="menupointer_rsc" />
+	<mainToolsPanelItem name="letter" modi="letter" labelid="73" resoureceItem="letter" />
+	<mainToolsPanelItem name="paint" modi="paint" labelid="74" resoureceItem="paint" />
+	<mainToolsPanelItem name="line" modi="line" labelid="75" resoureceItem="line_rsc" />
+	<mainToolsPanelItem name="uline" modi="uline" labelid="76" resoureceItem="uline_rsc" />
+	<mainToolsPanelItem name="rectangle" modi="rectangle" labelid="77" resoureceItem="rectangle" />
+	<mainToolsPanelItem name="ellipse" modi="ellipse" labelid="78" resoureceItem="ellipse" />
+	<mainToolsPanelItem name="drawarrow" modi="drawarrow" labelid="78" resoureceItem="drawarrowicon_rsc" />
+</class>
+	
+<class name="mainToolsTopPanel" extends="baseTopPanel" 
+	   width="366" height="32" title="" docking="true"
+	   activationClassBounding="mainToolsLeftPanel"
+	   activationVClassBounding="mainToolsTopPanel"
+	   leftClassPanel="mainToolsLeftPanel"
+	   topClassPanel="mainToolsTopPanel"
+	   bottomClassPanel="mainToolsTopPanel"
+	   rightClassPanel="mainToolsLeftPanel"
+	   verticalClassActive="true"
+	   hWidth="32" hHeight="366">
+	
+	<horizontalMenuIconBar x="20" y="4" />
+</class>	
+	
+<class name="mainToolsLeftPanel" extends="baseLeftPanel" 
+	   width="32" height="366" title="" docking="true"
+	   activationClassBounding="mainToolsLeftPanel"
+	   activationVClassBounding="mainToolsTopPanel"
+	   topClassPanel="mainToolsTopPanel"
+	   bottomClassPanel="mainToolsTopPanel"
+	   leftClassPanel="mainToolsLeftPanel"
+	   rightClassPanel="mainToolsLeftPanel"
+	   verticalClassActive="false"
+	   vWidth="366" vHeight="32">
+	
+	<verticalMenuIconBar x="2" y="20" />
+</class>	
     
-<class name="mainToolsVPanel" extends="labelPanel" 
-	   width="250" height="78" title="Tools" docking="true"
+<class name="mainToolsVPanel" extends="basePanel" 
+	   width="348" height="50" title="" docking="true"
 	   activationClassBounding="mainToolsPanel"
 	   activationVClassBounding="mainToolsVPanel"
+	   topClassPanel="mainToolsTopPanel"
+	   bottomClassPanel="mainToolsTopPanel"
+	   leftClassPanel="mainToolsLeftPanel"
+	   rightClassPanel="mainToolsLeftPanel"
 	   verticalClassActive="true"
-	   hWidth="62" hHeight="250">
+	   hWidth="32" hHeight="366">
 	
-	<view name="_area" height="62" y="22" x="4">
-		<wrappinglayout axis="y" spacing="2" />
-		<mainToolsPanelItem name="plain" modi="plain" labelid="69" resoureceItem="plain" />
-		<mainToolsPanelItem name="saveobj" modi="saveobj" labelid="197" resoureceItem="saveobj" />
-    </view>	
+	<horizontalMenuIconBar />
 </class>
     
-<class name="mainToolsPanel" extends="labelPanel" 
-	   width="62" height="250" title="Tools" docking="true" 
+<class name="mainToolsPanel" extends="basePanel" 
+	   width="34" height="366" title="" docking="true" 
 	   activationClassBounding="mainToolsPanel"
 	   activationVClassBounding="mainToolsVPanel"
+	   topClassPanel="mainToolsTopPanel"
+	   bottomClassPanel="mainToolsTopPanel"
+	   leftClassPanel="mainToolsLeftPanel"
+	   rightClassPanel="mainToolsLeftPanel"
 	   verticalClassActive="false"
-	   vWidth="250" vHeight="78">
+	   vWidth="366" vHeight="32">
 	
-	<view name="_area" width="62" y="22" x="4">
-		<wrappinglayout axis="x" spacing="2" />
-		<mainToolsPanelItem name="plain" modi="plain" labelid="69" resoureceItem="plain" />
-		<mainToolsPanelItem name="saveobj" modi="saveobj" labelid="197" resoureceItem="saveobj" />
-    </view>
-    
-    <!--
+	<verticalMenuIconBar />
+</class>  
+
+	<!--
     <drawChooseModirPlain y="4" name="b3" modi="plain" resourceN="plain" labelid="69" />
     <drawSimpleClick y="4" name="b13" modi="saveobj" resourceN="saveobj" labelid="197" />
     
     <drawChooseSeperator y="4" />
     
     <drawDoAndUndo y="4" name="b4" doredo="false" resourceN="revert" 
-        enabled="${ parent.parent._drawareaMask._drawarea.hasprevious }" labelid="70" />
+        enabled="${ parent.parent.canvas._drawareaMask.canvas._drawarea.hasprevious }" labelid="70" />
     <drawDoAndUndo y="4" name="b5" resourceN="next" 
-        enabled="${ parent.parent._drawareaMask._drawarea.hasenext }" labelid="71" />
+        enabled="${ parent.parent.canvas._drawareaMask.canvas._drawarea.hasenext }" labelid="71" />
     
     <drawChooseSeperator y="4" />
     
@@ -62,6 +126,5 @@
     <drawChooseSeperator y="4" />
      -->
      
-</class>  
     
 </library>

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<library>
+    
+<class name="propertyPanel" extends="basePropertyPanel" 
+	   width="${ parent.parent.width-1 }" height="100" title="Properties" >
+	
+	<method name="setObjectBounds" args="x,y,width,height">
+		if ($debug) Debug.write("setObjectBounds: ",x,y,width,height);
+		this._xvalue.setText(x);
+		this._yvalue.setText(y);
+		this._widthvalue.setText(width);
+		this._heightvalue.setText(height);
+	</method>
+	
+	<method name="onUpdateBoundByText">
+		if (canvas._drawarea.boundingref!=null){
+			if ($debug) Debug.write("onUpdateBoundByText boundingref: ",canvas._drawarea.boundingref);
+			//canvas._drawarea.boundingref.setAttribute('x',Number(this._xvalue.getText()));
+			//canvas._drawarea.boundingref.setAttribute('y',Number(this._yvalue.getText()));
+			//canvas._drawarea.boundingref.setAttribute('width',Number(this._widthvalue.getText()));
+			//canvas._drawarea.boundingref.setAttribute('height',Number(this._heightvalue.getText()));
+		}
+	</method>
+
+	<labelTextWidthTooltip name="_xvalueLabel" x="4" y="24"
+		labelid="545" labelLabelid="546" /> 
+	<customEdittext name="_xvalue" x="24" y="24" regexpType="number" 
+		width="40" text="0" height="24"
+		onafterCheck="parent.onUpdateBoundByText()" />
+	
+	<labelTextWidthTooltip name="_yvalueLabel" x="4" y="54"
+		labelid="547" labelLabelid="548" /> 
+	<customEdittext name="_yvalue" x="24" y="54" regexpType="number"
+		width="40" text="0" height="24"
+		onafterCheck="parent.onUpdateBoundByText()" />
+	
+	<labelTextWidthTooltip name="_widthvalueLabel" x="68" y="24"
+		labelid="549" labelLabelid="550" /> 
+	<customEdittext name="_widthvalue" x="88" y="24" regexpType="number" 
+		width="40" text="0" height="24"
+		onafterCheck="parent.onUpdateBoundByText()" />
+	
+	<labelTextWidthTooltip name="_heightvalueLabel" x="68" y="54"
+		labelid="551" labelLabelid="552" /> 
+	<customEdittext name="_heightvalue" x="88" y="54" regexpType="number"
+		width="40" text="0" height="24"
+		onafterCheck="parent.onUpdateBoundByText()" />
+		
+		
+	<lineColorChoose x="132" y="24" name="lineColorChoose">
+		<handler name="onselectedColor" args="sel">
+			if ($debug) Debug.write("lineColorChoose sel: ",sel);
+			if (sel==-1){
+				//this.parent.parent.parent._drawareaMask._drawarea.setAttribute('currentellipsestrokeDis',-1);
+			} else if (!this.inInitColorSelection){
+				//this.parent.parent.parent._drawareaMask._drawarea.setAttribute('currentellipsestrokeDis',1);
+				//this.parent.parent.parent._drawareaMask._drawarea.setAttribute('currentellipsestroke',sel);
+			} else {
+				this.inInitColorSelection = false;
+			}				
+		</handler>
+	</lineColorChoose>
+	
+	<fillColorChoose x="132" y="54" name="fillColorChoose">
+		<handler name="onselectedColor" args="sel">
+			if ($debug) Debug.write("fillColorChoose sel: ",sel);
+		</handler>
+	</fillColorChoose>
+	
+	<changeWidthSlider x="222" y="24" name="changeWidthSlider" 
+		initialNumber="2" >
+		<handler name="oninitialNumber" args="i">
+			//this.parent.parent.parent._drawareaMask._drawarea.setAttribute('currentlayersize',i);
+			if ($debug) Debug.write("changeWidthSlider oninitialNumber sel: ",i);
+		</handler>
+	</changeWidthSlider> 
+	
+	<changeWidthSlider x="222" y="54" name="changeOpacitySlider" labelid="553"
+		initialNumber="100" >
+		<handler name="oninitialNumber" args="i">
+			//this.parent.parent.parent._drawareaMask._drawarea.setAttribute('currentlayersize',i);
+			if ($debug) Debug.write("changeOpacitySlider oninitialNumber sel: ",i);
+		</handler>
+	</changeWidthSlider> 
+
+</class>
+     
+    
+</library>

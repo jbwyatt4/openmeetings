@@ -38,7 +38,7 @@
 
 	<method name="drawtoArray">
 		<![CDATA[
-		//Debug.write("drawtoArray");
+		if ($debug) Debug.write("drawtoArray");
 		if (this._textview._textview.getText().length!=0 && this.inittext.length==0){
 		    var y = this.getAttributeRelative('y',this.refObj)-this.refObj.y+1;
 			//Debug.write("this.x-this.refObj.x-this.refObj.parent.x ",y);
@@ -51,7 +51,7 @@
 			var x = this.getAttributeRelative('x',this.refObj)-this.refObj.x+1;
         	this.refObj.setTextFieldByName(this.initTextName,this._textview._textview.getText(),this._textview._textview.width,x,y,this._textview._textview.height);
         } else {
-			//Debug.write("text smaller then 0",this._textview._textview.getText());
+			if ($debug) Debug.write("text smaller then 0",this._textview._textview.getText());
 		}
         this.giveup();
 		]]>

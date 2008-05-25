@@ -93,6 +93,52 @@
   </view>
 </class>
 
+<class name="modernWhiteBoardPanel" extends="guiPresenter" x="296" y="2"
+    width="660" height="592" closable="false" title="Whiteboard"
+    resizeable="true">
+  <attribute name="initH"/>
+  <attribute name="initW"/>
+  <handler name="oninit">
+    <![CDATA[
+       this.setAttribute("initH",this.height);
+       this.setAttribute("initW",this.width);
+       var f=function() {
+         var w=this.height * this.initW/this.initH;
+         w=((w < this.initW ) ? initW : w);
+         var h=this.width * this.initH/this.initW;
+         h=((h < this.initH ) ? initH : h);
+
+         this.setWidth(w);
+         this.setHeight(h);
+       }
+       var prop1 = [this, "width"];
+       var prop2 = [this, "height"];
+       this.applyConstraint("width", f, prop1);
+       this.applyConstraint("height", f, prop2);
+      ]]>
+	</handler>
+   <newWhiteBoard name="_whiteboard" y="22" x="1">
+        <handler name="onsharedMessage" args="obj">
+            //Debug.write("send: ",obj);
+            canvas.objWhiteboard = obj;
+            hib.sendVars.doCall();
+        </handler>
+
+    <handler name="isloadingImage" args="val" >
+      if ($debug) Debug.write("isloadingImage: ",val);
+    </handler>
+    <handler name="isloadedImage" args="val" >
+      if ($debug) Debug.write("isloadedImage: ",val);
+    </handler>
+   </newWhiteBoard>
+  <view name="currentmainobjectisMod" visible="${ !canvas.ismoderator }"
+    x="0" y="22" height="$once{ parent.height-22 }" width="$once{ parent.width }" >
+    <handler name="onclick">
+      new errorModeratorPopup(canvas,{error:canvas.getLabelName(97)});
+    </handler>
+  </view>
+</class>
+
 <class name="modPanel" extends="guiPresenter" x="2" y="284"
     width="266" height="46" closable="false" labelid="316"
     resizeable="false">
@@ -135,10 +181,17 @@
         }
 		
        	if (this.roomobj.showWhiteBoard){
-       		new whiteBoardPanel(this,{x:this.roomobj.whiteBoardPanelXPosition,
-        		y:this.roomobj.whiteBoardPanelYPosition,
-        		width:this.roomobj.whiteBoardPanelWidth,
-        		height:this.roomobj.whiteBoardPanelHeight});
+       		if (canvas.showmodernWhiteBoard=="y"){
+	       		new modernWhiteBoardPanel(this,{x:this.roomobj.whiteBoardPanelXPosition,
+	        		y:this.roomobj.whiteBoardPanelYPosition,
+	        		width:this.roomobj.whiteBoardPanelWidth,
+	        		height:this.roomobj.whiteBoardPanelHeight});
+       		} else {
+	       		new whiteBoardPanel(this,{x:this.roomobj.whiteBoardPanelXPosition,
+	        		y:this.roomobj.whiteBoardPanelYPosition,
+	        		width:this.roomobj.whiteBoardPanelWidth,
+	        		height:this.roomobj.whiteBoardPanelHeight});
+       		}
         }
     </handler>
 
@@ -155,8 +208,8 @@
         	canvas._mymod = null;
         }
         
-        if (_drawarea.letterObjectIsActive){
-          _drawarea.currentletterObj.destroy();
+        if (canvas._drawarea.letterObjectIsActive){
+          canvas._drawarea.currentletterObj.destroy();
         }
     this.logicalRoomLeave.doCall();
         Debug.write("this.logicalRoomLeave ",this.logicalRoomLeave);

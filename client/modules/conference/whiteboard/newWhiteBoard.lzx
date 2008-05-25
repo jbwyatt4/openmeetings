@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library>
-<!--  -->
-
 
 <!-- 
 ############################
 
-    Class whiteBoard
+    Class newWhiteBoard
     
  -->
 
 
-<class name="whiteBoard" extends="view" >
+<class name="newWhiteBoard" extends="view" >
     
     <attribute name="baseurl" value="" type="string" />
     <attribute name="fileName" value="" type="string" />
@@ -125,7 +123,7 @@
     				   x="$once{ parent.parent.width-210 }" y="2" 
     				   enabled="${  canvas.ismoderator }">
         <handler name="onclick">
-	        canvas._drawarea.setModus('plain');          
+	    canvas._drawarea.setModus('plain');          
             this.parent.checkForApplyScreen();
         </handler>
         <view y="1" x="2" resource="background_screenview_rsc" />
@@ -147,47 +145,18 @@
             ]]>        
     </method> 
     
-    <toolbarTabList name="_toolbarTabList" x="2" y="16" />
-    
-    <method name="changeMenu" args="menuId,bool">
-        if (menuId==1){
-            this._paintmenu.setAttribute('visible',true);
-            this._painttoolsPalette.setAttribute('visible',true);
-            if (this.documentmenuIsInited) this._documentmenu.setAttribute('visible',false);
-            //this._documenttoolsPalette.setAttribute('visible',false);
-            if (bool) this._toolbarTabList.setSelection(this._toolbarTabList.b_paint);
-        } else if (menuId==2){
-            this._paintmenu.setAttribute('visible',false);
-            this._painttoolsPalette.setAttribute('visible',false);
-            if (!this.documentmenuIsInited){
-                new documentMenu(this,{name:'_documentmenu',x:0,y:38,visible:false});
-                this._documentmenu.sendInFrontOf(this._paintmenu);
-                this.documentmenuIsInited = true;
-            }
-            this._documentmenu.setAttribute('visible',true);
-            //this._documenttoolsPalette.setAttribute('visible',true);            
-            if (bool) this._toolbarTabList.setSelection(this._toolbarTabList.b_doc);
-        }
-    </method>
-    
-    <!-- 
-        Menubar with tool-icons
-     -->
-
-    <paintMenu name="_paintmenu" x="0" y="38" visible="true" />
-    
     <!-- 
         The Content Area    
      -->
-    <view width="${ parent.parent.width-6 }" height="${ parent.parent.height-100 }" 
-    	  y="68" name="_drawareaMask" clip="true" bgcolor="white" >
+    <view width="${ parent.parent.width-2 }" height="${ parent.parent.height-23 }" 
+    	  y="0" name="_drawareaMask" clip="true" bgcolor="white" >
         <baseDrawSave y="0" name="_drawarea" width="${parent.width}" height="${parent.height}" >
             <attribute name="initH"/>
             <attribute name="initW"/>
-            <handler name="oninit">
+			<handler name="oninit">
             	canvas._drawarea = this;
             </handler>
-
+            
             <handler name="onprogress" args="perc">
                 //Debug.write("onprogress: ",perc);
                 this.parent.parent._progress.setProgress(perc);
@@ -233,6 +202,26 @@
                 this.parent.parent.sendObject = objectList;
                 this.parent.parent.sendMessageWithClientById.doCall();
             </method>
+            
+            <handler name="onboundingIsActive" args="b">
+            	if ($debug) Debug.write("boundingIsActive: ",b);
+            	if (b){
+            		var boundingDoUpdateOnInit = true;
+		            if (this.ObjectByName instanceof swfResourceView){
+		                //Debug.write("is swf Presentation");
+		                boundingDoUpdateOnInit=false;
+		            }
+            		if (!boundingDoUpdateOnInit) {
+		                parent.parent._propertyPanel.setObjectBounds(
+		                	this.ObjectByName.x,this.ObjectByName.y,
+		                	this.ObjectByName._swfView.width,this.ObjectByName._swfView.height);
+		            } else {
+		                parent.parent._propertyPanel.setObjectBounds(
+		                	this.ObjectByName.x,this.ObjectByName.y,
+		                	this.ObjectByName.width,this.ObjectByName.height);
+		            }
+            	}
+            </handler>
         </baseDrawSave>  
     </view>
     
@@ -252,67 +241,75 @@
     <!-- 
         Container for the bounding Box (selection Box)
      -->
-    <view name="boundboxesView" width="$once{ parent.parent.width-6 }" 
-    	  height="$once{ parent.parent.height-100 }" y="68" />
-
-    <!-- Context sensitive stuff -->
-    <paintToolsPalette name="_painttoolsPalette" />
-    
-    
-    <!-- Context sensitive stuff
-    not needed for the moment
-    <documentToolsPalette name="_documenttoolsPalette" />
-     -->
-</class>
-    
-    
-    
-
-    <!-- 
-
-        <button height="20" y="2" text="JPEG" width="40" >
-            <handler name="onclick">
-                this.parent.parent.canvas._drawarea.catchSnapshot();
-            </handler>
-        </button>             
-        
-    <drawChooseModir name="b8" modi="image" resourceN="imageIcon" labelText="Image" />
-
-     -->
-    
-    <!-- Context sensitive Area top Stuff
-    <text x="40" y="10" text="Choose Element" resize="true" fontsize="10" />
-    visible="${ ( ( this.parent.canvas._drawarea.drawmodus=='pointer' ) ? true : false ) }"
-    
-    <drawAreaObjectCombobox x="300" y="4" name="canvas._drawareaobjectcombobox"  visible="${ ( ( this.parent.canvas._drawarea.drawmodus=='pointer' ) ? true : false ) }"/>
-    <drawAreaAlterPosition x="140" y="540" name="canvas._drawareaalterposition"  />
-    <basedrawchoose resourceN="deleteIcon" x="430" y="4" labelText="delete choosen Item" width="22" height="22" visible="${ ( ( this.parent.canvas._drawarea.drawmodus=='pointer' ) ? true : false ) }">
-        <handler name="onclick">
-            //Debug.write("this.parent.canvas._drawareaalterposition.objName: ",this.parent.canvas._drawareaalterposition.objName);
-            this.parent.canvas._drawarea.deleteItemByName(this.parent.canvas._drawareaalterposition.objName);
-        </handler>
-    </basedrawchoose>
-    -->
-    
-    <!-- 
-    
-
-     -->
-    <!-- 
-
-    export -->
-    <!-- 
-    <view name="_progress" bgcolor="black" width="120" x="312" height="18" y="30">
-        <method name="setProgress" args="perc">
-            var percentWidth = ((this.width-2)/100)*perc;
-            this._i2.setWidth(percentWidth);
-        </method>
-        <view x="1" y="1" name="_i" bgcolor="white" width="${ parent.width-2 }" height="${ parent.height-2 }" />
-        <view x="1" y="1" name="_i2" bgcolor="gray" width="0" height="${ parent.height-2 }" />  
+    <view name="boundboxesView" width="${ parent.parent.width-1 }" 
+    	  height="${ parent.parent.height-23 }" y="0">
+    	<handler name="onBoundingBox" args="boundingBoxRef">
+    		var boundingDoUpdateOnInit = true;
+			if (boundingBoxRef.objRef instanceof swfResourceView){
+                //Debug.write("is swf Presentation");
+                boundingDoUpdateOnInit=false;
+            }
+    		if (!boundingDoUpdateOnInit) {
+                parent._propertyPanel.setObjectBounds(
+                	boundingBoxRef.objRef.x,boundingBoxRef.objRef.y,
+                	boundingBoxRef.objRef._swfView.width,boundingBoxRef.objRef._swfView.height);
+            } else {
+                parent._propertyPanel.setObjectBounds(
+                	boundingBoxRef.objRef.x,boundingBoxRef.objRef.y,
+                	boundingBoxRef.objRef.width,boundingBoxRef.objRef.height);
+            }
+    	</handler>
     </view>
     
+    <view name="panelArea" width="${ parent.parent.width }" 
+    	  height="${ parent.parent.height-21-parent._propertyPanel.height }">
+    	
+    	<attribute name="objectRef" value="null" />
+    	
+		<method name="setSelection" args="obj">
+			parent._drawareaMask._drawarea.removeObjectBounds();
+			if (obj.setSelectionToItem){			
+				if (this.objectRef!=null){
+					this.objectRef._isselected = false;
+					this.objectRef._area.setBGColor(0xFFFFFF);
+				}
+				this.objectRef = obj;
+				this.objectRef._isselected = true;
+				this.objectRef._area.setBGColor(canvas.baseMousecolorizer);
+				parent._drawareaMask._drawarea.setModus(this.objectRef.modi);
+			}
+		</method>
+		
+		<method name="sendNewPropertyHeight" args="objRef">
+			<![CDATA[
+				if (this.subviews[0] instanceof mainToolsTopPanel) {
+					if (objRef.height<=22){
+						if (this.subviews[0].y+this.subviews[0].height+5>=parent.parent.height-objRef.initheight-21){
+							if ($debug) Debug.write("mainToolsTopPanel");
+							this.subviews[0].setAttribute('y',objRef.y-this.subviews[0].height);
+						}
+					} else {
+						if (this.subviews[0].y+this.subviews[0].height+5>=objRef.y){
+							if ($debug) Debug.write("mainToolsTopPanel");
+							this.subviews[0].setAttribute('y',objRef.y-this.subviews[0].height);
+						}
+					}
+				}
+			]]>
+		</method>
+    	
+    	<mainToolsLeftPanel y="20" />	
+   
+    </view> 
+    
+    <propertyPanel name="_propertyPanel" x="0" y="${ parent.parent.height-this.height-21 }" >
+   		<handler name="onheight" args="h">
+   			this.height = h;
+   			if ($debug) Debug.write("onheight: ",h);
+   			parent.panelArea.sendNewPropertyHeight(this);
+   		</handler>
+    </propertyPanel>
      
-    <text x="14" y="540" text="${ 'Modus: '+this.parent.canvas._drawarea.drawmodus }" resize="true" fontsize="12" />
-     -->
+</class>
 
 </library>

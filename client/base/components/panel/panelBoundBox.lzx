@@ -42,7 +42,7 @@
 
 	<method name="drawDottedLine" args="targetObj,startx,starty,endx,endy,stroke,lineWidth">
     	<![CDATA[
-    		var drawObj = new drawview(targetObj,{width:this.width,height:this.height});	    
+    		//var drawObj = new drawview(targetObj,{width:this.width,height:this.height});	    
     		//if ($debug) Debug.write("drawDottedLine: ",targetObj,startx,starty,endx,endy,stroke,lineWidth);
 	    	Math.linearTween = function (t, b, c, d) {
 			    return c*t/d + b;
@@ -65,12 +65,12 @@
 	            gap = !gap;    //abwechselnd lücke/nichtlücke
 	            if(!gap) {
 	            	//if($debug)  Debug.write(csx,csy,"|",ctx,cty);
-    				drawObj.strokeStyle = stroke;
-    				drawObj.lineWidth = lineWidth;
-    				drawObj.beginPath();    			            	
-	               	drawObj.moveTo(csx,csy);
-	                drawObj.lineTo(ctx,cty);
-	                drawObj.stroke();
+    				targetObj.strokeStyle = stroke;
+    				targetObj.lineWidth = lineWidth;
+    				targetObj.beginPath();    			            	
+	               	targetObj.moveTo(csx,csy);
+	                targetObj.lineTo(ctx,cty);
+	                targetObj.stroke();
 	            }
 	            csx =ctx;
 	            csy = cty;

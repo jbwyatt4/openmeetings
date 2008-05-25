@@ -25,7 +25,7 @@
 			this.widthval.setText('');
 			this.obj=null;
 		} else {
-			this.obj = _drawarea.getObjectByName(objName);
+			this.obj = canvas._drawarea.getObjectByName(objName);
 			//Debug.write("this.obj: ",this.obj);
 			this.xval.setText(this.obj.x);
 			this.yval.setText(this.obj.y);

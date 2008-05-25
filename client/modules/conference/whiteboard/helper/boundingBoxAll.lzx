@@ -10,7 +10,7 @@
 <class name="boundingBoxAll" extends="view">
 <!-- 
 	<method name="removeIt">
-		_drawarea.setAttribute('boundingIsActive',true);
+		canvas._drawarea.setAttribute('boundingIsActive',true);
 	</method>
  -->	
 	<method name="removeIt">
@@ -125,9 +125,10 @@
 		if (this.startdragX != this.x || this.startdragY != this.y || this.startdragWidth != this.width || this.startdragHeight != this.height){
 			//Debug.write("value changed 1");
 			this.objRef.parent.UpdateByObject(this.objRef);
-			//this.whiteboardRef.parent._drawareaalterposition.updateVal(this.objRef.name);
+			//this.whiteboardRef.parent.canvas._drawareaalterposition.updateVal(this.objRef.name);
 			this.setStartValues();
 		}
+		if (parent.onBoundingBox) parent.onBoundingBox.sendEvent(this);
 			
 		]]>
     </method>
@@ -145,9 +146,10 @@
     	if (this.startdragX != this.x || this.startdragY != this.y || this.startdragWidth != this.width || this.startdragHeight != this.height){
 			//Debug.write("value changed 2");
 			this.objRef.parent.UpdateByObject(this.objRef);
-			//this.whiteboardRef.parent._drawareaalterposition.updateVal(this.objRef.name);
+			//this.whiteboardRef.parent.canvas._drawareaalterposition.updateVal(this.objRef.name);
 			this.setStartValues();
 		}
+		if (parent.onBoundingBox) parent.onBoundingBox.sendEvent(this);
 		
 		]]>			
     </method>

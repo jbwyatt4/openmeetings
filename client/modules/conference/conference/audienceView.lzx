@@ -43,10 +43,18 @@
         }
 		
        	if (this.roomobj.showWhiteBoard){
-       		new whiteBoardPanel(this,{x:this.roomobj.whiteBoardPanelXPosition,
-        		y:this.roomobj.whiteBoardPanelYPosition,
-        		width:this.roomobj.whiteBoardPanelWidth,
-        		height:this.roomobj.whiteBoardPanelHeight});
+       		if (canvas.showmodernWhiteBoard=="y"){
+	       		new modernWhiteBoardPanel(this,{x:this.roomobj.whiteBoardPanelXPosition,
+	        		y:this.roomobj.whiteBoardPanelYPosition,
+	        		width:this.roomobj.whiteBoardPanelWidth,
+	        		height:this.roomobj.whiteBoardPanelHeight});
+       		} else {
+	       		new whiteBoardPanel(this,{x:this.roomobj.whiteBoardPanelXPosition,
+	        		y:this.roomobj.whiteBoardPanelYPosition,
+	        		width:this.roomobj.whiteBoardPanelWidth,
+	        		height:this.roomobj.whiteBoardPanelHeight});       			
+       		}
+
         }
         
     </handler>
@@ -64,8 +72,8 @@
         if (canvas._mymod!=null){
         	canvas._mymod = null;
         }
-        if (_drawarea.letterObjectIsActive){
-          _drawarea.currentletterObj.destroy();
+        if (canvas._drawarea.letterObjectIsActive){
+          canvas._drawarea.currentletterObj.destroy();
         }
     this.logicalRoomLeave.doCall();
         Debug.write("this.logicalRoomLeave ",this.logicalRoomLeave);

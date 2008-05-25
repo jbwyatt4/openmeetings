@@ -15,13 +15,14 @@
 	
 	<method name="letterObjectFree" args="obj">
 		this.setAttribute('letterObjectIsActive',false);
+		this.setModus('hand');
 	</method>
 	<method name="letterObjectClose" args="obj">
 		this.setAttribute('letterObjectIsActive',true);
 	</method>
 	
     <!-- The Color of the letter Object  -->
-  	<attribute name="currentlayerletter" value="0xFF6600" setter="this.setNewLayerLetter(currentlayerletter)" />
+  	<attribute name="currentlayerletter" value="0x000000" setter="this.setNewLayerLetter(currentlayerletter)" />
     
     <!-- The Size of the Letter Object -->
   	<attribute name="currentlayersize" value="12" type="number" setter="this.setNewLayerSize(currentlayersize)" />
@@ -97,8 +98,8 @@
 	
 	<!-- editModus -->
 	<method name="setTextFieldByName" args="txtName,textforfield,width,x,y,height" >
-		//Debug.write("drawTextFieldByName ",txtName,textforfield,width,x,y);
-		this.checkForChanges(txtName,textforfield,width,x,y,height);
+		if ($debug) Debug.write("drawTextFieldByName ",txtName,textforfield,width,x,y);
+		//this.checkForChanges(txtName,textforfield,width,x,y,height);
 		this.edittextLetterObject.setText(textforfield);
 		this.edittextLetterObject.setAttribute('width',width);
 		this.edittextLetterObject.setAttribute('height',height);
@@ -108,18 +109,18 @@
 		this.edittextLetterObject.setAttribute('fontstyle',this.currentlayerstyle);
 		this.updateObjectBounds();
 		this.updateByEditLetterObject();
-		this.setModus('hand');
+		//this.setModus('hand');
 	</method>	
 	
 	
 	<method name="updateByEditLetterObject" >
 		<![CDATA[
-		//Debug.write("UpdateByObject : ",this.edittextLetterObject,this.edittextLetterObject.name);
+		if ($debug) Debug.write("UpdateByObject : ",this.edittextLetterObject,this.edittextLetterObject.name);
 		var objName = this.edittextLetterObject.name;
 
 		for (var eg=0;eg<this.baseactionobjectList.length;eg++){
 			if (this.baseactionobjectList[eg][this.baseactionobjectList[eg].length-1]==objName) {
-				//Debug.write("Found Object: ",this.baseactionobjectList[eg]);
+				if ($debug) Debug.write("Found Object: ",this.baseactionobjectList[eg]);
 			    this.baseactionobjectList[eg][1] = this.edittextLetterObject.text;
 			    this.baseactionobjectList[eg][2] = this.edittextLetterObject.fgcolor;
 			    this.baseactionobjectList[eg][3] = this.edittextLetterObject.fontsize;

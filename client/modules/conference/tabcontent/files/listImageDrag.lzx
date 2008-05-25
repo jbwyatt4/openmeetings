@@ -61,7 +61,7 @@
   
 	<method name="__LZFileAddDirect">
 		<![CDATA[
-        _drawarea.parent.parent.clearAreaAndAddImage(this.generateFileLink(this.filename),0,0,'http://'+canvas.rtmphostlocal+':'+canvas.red5httpport+'/'+canvas.webAppRootKey+'/DownloadHandler',this.filename,this.uploadmodul,canvas.uploadmoduleimgfolder+'/',hib.currentroomid,hib.conferencedomain);
+        canvas._drawarea.parent.parent.clearAreaAndAddImage(this.generateFileLink(this.filename),0,0,'http://'+canvas.rtmphostlocal+':'+canvas.red5httpport+'/'+canvas.webAppRootKey+'/DownloadHandler',this.filename,this.uploadmodul,canvas.uploadmoduleimgfolder+'/',hib.currentroomid,hib.conferencedomain);
         this.parent.parent.parent.highlightItem(this);
         ]]>
 	</method>
