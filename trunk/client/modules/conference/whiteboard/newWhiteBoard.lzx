@@ -30,7 +30,7 @@
     <attribute name="confirmdialog" value="null" />
     
     <attribute name="documentmenuIsInited" value="false" type="boolean" />
-    
+
     <method name="sendConfirmation" args="yesno,askagain" >
         
         ////Debug.write("clear yesno,askagain: ",yesno,askagain);
@@ -166,7 +166,7 @@
             </handler>
             <handler name="ondrawmodus" args="d">
                 this.drawmodus = d;
-                parent.parent._painttoolsPalette.loadToolsByModi(d);
+                parent.parent._propertyPanel.loadPanelByModus(this);
             </handler>
             <handler name="setNewScreenUserName" args="value">
                 this.parent.parent._sharingClientName.setText(value);
@@ -266,7 +266,8 @@
     	
     	<attribute name="objectRef" value="null" />
     	
-		<method name="setSelection" args="obj">
+    	<!--- @deprecated -->
+		<method name="_setSelection" args="obj">
 			parent._drawareaMask._drawarea.removeObjectBounds();
 			if (obj.setSelectionToItem){			
 				if (this.objectRef!=null){
@@ -275,9 +276,23 @@
 				}
 				this.objectRef = obj;
 				this.objectRef._isselected = true;
-				this.objectRef._area.setBGColor(canvas.baseMousecolorizer);
+				this.objectRef._area.setBGColor(canvas.basebgcolorizer);
 				parent._drawareaMask._drawarea.setModus(this.objectRef.modi);
 			}
+		</method>
+		
+		<method name="setSelection" args="obj">
+			parent._drawareaMask._drawarea.removeObjectBounds();
+			if (obj.setSelectionToItem){			
+				if (this.objectRef!=null){
+					this.objectRef._isselected = false;
+					this.objectRef.setAttribute('enabled',true);
+				}
+				this.objectRef = obj;
+				this.objectRef._isselected = true;
+				this.objectRef.setAttribute('enabled',false);
+			}
+			parent._drawareaMask._drawarea.setModus(obj.modi);
 		</method>
 		
 		<method name="sendNewPropertyHeight" args="objRef">

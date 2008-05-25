@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library>
  
-<class name="mainToolsPanelItem" extends="view" bgcolor="$once{ canvas.basebgcolorizer }" 
+<class name="mainToolsPanelItem" extends="button" 
 	   width="26" height="26">
 	
 	<attribute name="resoureceItem" value="" type="string" />
@@ -11,8 +11,14 @@
 	<attribute name="setSelectionToItem" value="true" type="boolean" />
 	<attribute name="_isselected" value="false" type="boolean" />
 	
+	<handler name="oninit">
+		if (this._isselected) parent.parent.parent.setSelection(this);
+	</handler>
+	
+	<!--
 	<view x="1" y="1" width="24" name="_area" 
 		  height="24" bgcolor="0xFFFFFF" />
+     -->
 	<view x="2" y="2" height="22" width="22" 
 		  resource="$once{ parent.resoureceItem }" />
 	
@@ -23,15 +29,15 @@
 		
 	</handler>
 	<handler name="onmouseup">
-		if (!this._isselected) this.setBGColor(canvas.baseMousecolorizer);
-		this.__labeltooltip.destroyLabel();
-		if ($debug) Debug.write("parent.parent.parent",parent.parent.parent);
+		//if (!this._isselected) this.setBGColor(canvas.baseMousecolorizer);
+		//this.__labeltooltip.destroyLabel();
+		//if ($debug) Debug.write("parent.parent.parent",parent.parent.parent);
 		parent.parent.parent.setSelection(this);
 	</handler>
 	<labelTooltip name="__labeltooltip" labelid="$once{ parent.labelid }" />
 </class>
 
-<class name="redoUndoToolsPanelItem" extends="mainToolsPanelItem">
+<class name="redoUndoToolsPanelItem" extends="mainToolsPanelItem" setSelectionToItem="false">
 	<attribute name="doredo" value="true" type="boolean" />
 </class>
 

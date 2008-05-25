@@ -4,6 +4,8 @@
 <class name="propertyPanel" extends="basePropertyPanel" 
 	   width="${ parent.parent.width-1 }" height="100" title="Properties" >
 	
+	<attribute name="ignoreUpdates" value="false" type="boolean" />
+	
 	<method name="setObjectBounds" args="x,y,width,height">
 		if ($debug) Debug.write("setObjectBounds: ",x,y,width,height);
 		this._xvalue.setText(x);
@@ -15,10 +17,88 @@
 	<method name="onUpdateBoundByText">
 		if (canvas._drawarea.boundingref!=null){
 			if ($debug) Debug.write("onUpdateBoundByText boundingref: ",canvas._drawarea.boundingref);
-			//canvas._drawarea.boundingref.setAttribute('x',Number(this._xvalue.getText()));
-			//canvas._drawarea.boundingref.setAttribute('y',Number(this._yvalue.getText()));
-			//canvas._drawarea.boundingref.setAttribute('width',Number(this._widthvalue.getText()));
-			//canvas._drawarea.boundingref.setAttribute('height',Number(this._heightvalue.getText()));
+			canvas._drawarea.boundingref.setAttribute('x',Number(this._xvalue.getText()));
+			canvas._drawarea.boundingref.setAttribute('y',Number(this._yvalue.getText()));
+			canvas._drawarea.boundingref.setAttribute('width',Number(this._widthvalue.getText()));
+			canvas._drawarea.boundingref.setAttribute('height',Number(this._heightvalue.getText()));
+		}
+	</method>
+	
+	<method name="loadPanelByModus" args="drawArea">
+		if ($debug) Debug.write("loadPanelByModus drawmodus: ",drawArea.drawmodus);
+		this.ignoreUpdates = true;
+		if (drawArea.drawmodus == 'paint') {
+			this.lineColorChoose.setSelectedColor(drawArea.currentlayerstroke);
+			this.changeWidthSlider.setSliderValue(drawArea.currentlayerlineWidth);
+			this.fillColorChoose.setEnabled(false);
+			this.changeOpacitySlider.setEnabled(false);
+		} else if (drawArea.drawmodus == 'line') {
+			this.lineColorChoose.setSelectedColor(drawArea.currentlinestroke);
+			this.changeWidthSlider.setSliderValue(drawArea.currentlinelineWidth);
+			this.fillColorChoose.setEnabled(false);
+			this.changeOpacitySlider.setEnabled(false);
+		} else if (drawArea.drawmodus == 'uline') {
+			this.lineColorChoose.setSelectedColor(drawArea.currentulinestroke);
+			this.changeWidthSlider.setSliderValue(drawArea.currentulinelineWidth);
+			this.fillColorChoose.setEnabled(false);
+			this.changeOpacitySlider.setEnabled(false);
+		} else if (drawArea.drawmodus == 'drawarrow') {
+			this.lineColorChoose.setEnabled(false);
+			this.changeWidthSlider.setEnabled(false);
+			this.fillColorChoose.setSelectedColor(drawArea.currentdrawarrowlinestroke);
+			this.changeOpacitySlider.setEnabled(false);
+		} else if (drawArea.drawmodus == 'rectangle') {
+			this.lineColorChoose.setSelectedColorWithDis(drawArea.currentrectanglestroke,
+				drawArea.currentrectanglestrokeDis);
+			this.fillColorChoose.setSelectedColorWithDis(drawArea.currentrectanglestrokeFill,
+				drawArea.currentrectanglestrokeFillDis);
+			this.changeWidthSlider.setSliderValue(drawArea.currentrectangleineWidth);
+			this.changeOpacitySlider.setEnabled(false);
+		} else if (drawArea.drawmodus == 'ellipse') {
+			this.lineColorChoose.setSelectedColorWithDis(drawArea.currentellipsestroke,
+				drawArea.currentellipsestrokeDis);
+			this.fillColorChoose.setSelectedColorWithDis(drawArea.currentellipsestrokeFill,
+				drawArea.currentellipsestrokeFillDis);
+			this.changeWidthSlider.setSliderValue(drawArea.currentellipselineWidth);
+			this.changeOpacitySlider.setEnabled(false);
+		} else {
+			if ($debug) Debug.warn("Not known drawmodus",drawArea.drawmodus);
+			this.lineColorChoose.setEnabled(false);
+			this.changeWidthSlider.setEnabled(false);
+			this.fillColorChoose.setEnabled(false);
+			this.changeOpacitySlider.setEnabled(false);
+		}
+		this.ignoreUpdates = false;
+	</method>
+	
+	<method name="updateProperties">
+		if (!this.ignoreUpdates){
+			if (canvas._drawarea.drawmodus == 'paint'){
+				canvas._drawarea.currentlayerstroke = this.lineColorChoose.selectedColor;
+				canvas._drawarea.currentlayerlineWidth = this.changeWidthSlider.initialNumber;
+			} else if (canvas._drawarea.drawmodus == 'line'){
+				canvas._drawarea.currentlinestroke = this.lineColorChoose.selectedColor;
+				canvas._drawarea.currentlinelineWidth = this.changeWidthSlider.initialNumber;
+			} else if (canvas._drawarea.drawmodus == 'uline'){
+				canvas._drawarea.currentulinestroke = this.lineColorChoose.selectedColor;
+				canvas._drawarea.currentulinelineWidth = this.changeWidthSlider.initialNumber;
+			} else if (canvas._drawarea.drawmodus == 'drawarrow'){
+				canvas._drawarea.currentdrawarrowlinestroke = this.fillColorChoose.selectedColor;
+			} else if (canvas._drawarea.drawmodus == 'rectangle'){
+				canvas._drawarea.currentrectanglestroke = this.lineColorChoose.selectedColor;
+				canvas._drawarea.currentrectanglestrokeDis = this.lineColorChoose.selectedColorDis;
+				canvas._drawarea.currentrectanglestrokeFill = this.fillColorChoose.selectedColor;
+				canvas._drawarea.currentrectanglestrokeFillDis = this.fillColorChoose.selectedColorDis;
+				canvas._drawarea.currentrectangleineWidth = this.changeWidthSlider.initialNumber;
+			} else if (canvas._drawarea.drawmodus == 'ellipse'){
+				canvas._drawarea.currentellipsestroke = this.lineColorChoose.selectedColor;
+				canvas._drawarea.currentellipsestrokeDis = this.lineColorChoose.selectedColorDis;
+				canvas._drawarea.currentellipsestrokeFill = this.fillColorChoose.selectedColor;
+				canvas._drawarea.currentellipsestrokeFillDis = this.fillColorChoose.selectedColorDis;
+				canvas._drawarea.currentellipselineWidth = this.changeWidthSlider.initialNumber;
+			} else {
+				if ($debug) Debug.warn("Not known drawmodus",canvas._drawarea.drawmodus);
+			}
 		}
 	</method>
 
@@ -47,39 +127,35 @@
 		onafterCheck="parent.onUpdateBoundByText()" />
 		
 		
-	<lineColorChoose x="132" y="24" name="lineColorChoose">
+	<lineColorChoose x="132" y="24" name="lineColorChoose" boxPosition="up">
 		<handler name="onselectedColor" args="sel">
 			if ($debug) Debug.write("lineColorChoose sel: ",sel);
-			if (sel==-1){
-				//this.parent.parent.parent._drawareaMask._drawarea.setAttribute('currentellipsestrokeDis',-1);
-			} else if (!this.inInitColorSelection){
-				//this.parent.parent.parent._drawareaMask._drawarea.setAttribute('currentellipsestrokeDis',1);
-				//this.parent.parent.parent._drawareaMask._drawarea.setAttribute('currentellipsestroke',sel);
-			} else {
-				this.inInitColorSelection = false;
-			}				
+			parent.updateProperties();			
 		</handler>
 	</lineColorChoose>
 	
-	<fillColorChoose x="132" y="54" name="fillColorChoose">
+	<fillColorChoose x="132" y="54" name="fillColorChoose" boxPosition="up">
 		<handler name="onselectedColor" args="sel">
 			if ($debug) Debug.write("fillColorChoose sel: ",sel);
+			parent.updateProperties();	
 		</handler>
 	</fillColorChoose>
 	
-	<changeWidthSlider x="222" y="24" name="changeWidthSlider" 
+	<changeWidthSlider x="222" y="24" name="changeWidthSlider" boxPosition="up" 
 		initialNumber="2" >
 		<handler name="oninitialNumber" args="i">
 			//this.parent.parent.parent._drawareaMask._drawarea.setAttribute('currentlayersize',i);
 			if ($debug) Debug.write("changeWidthSlider oninitialNumber sel: ",i);
+			parent.updateProperties();	
 		</handler>
 	</changeWidthSlider> 
 	
-	<changeWidthSlider x="222" y="54" name="changeOpacitySlider" labelid="553"
+	<changeWidthSlider x="222" y="54" name="changeOpacitySlider" labelid="553" boxPosition="up"
 		initialNumber="100" >
 		<handler name="oninitialNumber" args="i">
 			//this.parent.parent.parent._drawareaMask._drawarea.setAttribute('currentlayersize',i);
 			if ($debug) Debug.write("changeOpacitySlider oninitialNumber sel: ",i);
+			parent.updateProperties();	
 		</handler>
 	</changeWidthSlider> 
 

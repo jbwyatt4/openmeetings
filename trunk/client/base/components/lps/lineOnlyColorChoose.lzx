@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library>
 
-<class name="lineOnlyColorChoose" extends="view"
+<class name="lineOnlyColorChoose" extends="basePropertySelector"
     bgcolor="white" width="56" height="24">
     
     <attribute name="isopen" value="false" type="boolean" />
