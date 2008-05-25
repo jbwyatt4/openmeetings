@@ -25,13 +25,21 @@
 	<handler name="onmouseup">
 		if (!this._isselected) this.setBGColor(canvas.baseMousecolorizer);
 		this.__labeltooltip.destroyLabel();
-		parent.parent.setSelection(this);
+		if ($debug) Debug.write("parent.parent.parent",parent.parent.parent);
+		parent.parent.parent.setSelection(this);
 	</handler>
 	<labelTooltip name="__labeltooltip" labelid="$once{ parent.labelid }" />
 </class>
 
-<class name="mainToolsPanelSeperator" extends="view" bgcolor="0xCCCCCC"
-	   width="54" height="1" ></class>
+<class name="redoUndoToolsPanelItem" extends="mainToolsPanelItem">
+	<attribute name="doredo" value="true" type="boolean" />
+</class>
+
+<class name="mainToolsHPanelSeperator" extends="view" bgcolor="0xCCCCCC"
+	   width="26" height="2" ></class>
+	   
+<class name="mainToolsVPanelSeperator" extends="view" bgcolor="0xCCCCCC"
+	   width="2" height="26" ></class>
 
     
 </library>

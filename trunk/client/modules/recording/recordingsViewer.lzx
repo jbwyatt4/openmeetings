@@ -67,7 +67,7 @@
 										        		y:this.roomobj.whiteBoardPanelYPosition,
 										        		width:this.roomobj.whiteBoardPanelWidth,
 										        		height:this.roomobj.whiteBoardPanelHeight});
-	 	       	_drawarea.isinitRecordingLoad = true;
+	 	       	canvas._drawarea.isinitRecordingLoad = true;
 	        }
 	
 	        	if (this.roomobj.showFilesPanel){
@@ -113,7 +113,7 @@
 		            	if ($debug) Debug.write("value.room_setup: ",value.roomRecording.room_setup);
 		            	parent.initRecordingsViewByType();
 		            	if (parent.recordingValue.roomRecording.initwhiteboardvars!=null && parent.recordingValue.roomRecording.initwhiteboardvars.length>0){
-		            		_drawarea.loadwmlObjectToStage(parent.recordingValue.roomRecording.initwhiteboardvars,"","","",true,true);
+		            		canvas._drawarea.loadwmlObjectToStage(parent.recordingValue.roomRecording.initwhiteboardvars,"","","",true,true);
 		            	} else {
 		            		parent.timeLineAction();
 	            	}
@@ -183,7 +183,7 @@
 	        			var starttime =  (Math.round(whiteBoard[i].starttime/this.timeStepSyncing))*this.timeStepSyncing;
 		        		if (starttime == this.currentTime){
 	      	  			var action = whiteBoard[i].action;
-	        				_drawarea.sendRecordedObject(action[2],action[3],false);
+	        				canvas._drawarea.sendRecordedObject(action[2],action[3],false);
 	        		}
 	        	}
 	        	

@@ -58,6 +58,8 @@ these properties will be overwritten by config.xml -->
 <!--- Calendar Settings -->
 <attribute name="firstdayinweek" value="1" type="number" />
 
+<attribute name="showmodernWhiteBoard" value="y" type="string" />
+
 <!-- END OF config.xml attributes
 ##########################################################
  -->
@@ -152,6 +154,8 @@ these properties will be overwritten by config.xml -->
 <attribute name="microphoneRateNormal" value="22" type="number" /> 
 <attribute name="microphoneRateBest" value="44" type="number" /> 
 		
+<!--- Reference to the current active drawarea -->
+<attribute name="_drawarea" value="null" /> 
 
 <!--- Username of current user -->
 <attribute name="currentusename" value="defaultname" type="string" />

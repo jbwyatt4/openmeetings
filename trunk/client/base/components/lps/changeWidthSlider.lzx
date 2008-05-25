@@ -10,6 +10,8 @@
     <attribute name="initialNumberInit" value="1" type="number"/>
     <attribute name="initialNumber" value="3" type="number"/>
     
+    <attribute name="labelid" value="429" type="number"/>
+    
     <handler name="onplus" />
     <handler name="onminus" />
     
@@ -50,7 +52,7 @@
                 var pick = new changeWidthSliderWin(canvas,{initialNumber:parent.numericValue.tempValue,btnRef:this.parent,x:(parent.getAttributeRelative('x',canvas)),y:(parent.getAttributeRelative('y',canvas))});
                 LzModeManager.makeModal( pick );
             </handler>
-        <labelTooltip labelid="429" />
+        <labelTooltip labelid="$once{ parent.parent.labelid }" />
     </button>
     
 </class>

@@ -3,9 +3,12 @@
 
 	<include href="resources/" />
 	
+	<include href="baseBoundingBorderView.lzx" />
 	<include href="basePanel.lzx" />
+	<include href="baseTopPanel.lzx" />
+	<include href="baseLeftPanel.lzx" />
 	<include href="panelBoundBox.lzx" />
-	<include href="labelPanel.lzx" />
+	<include href="basePropertyPanel.lzx" />
 
     
 </library>

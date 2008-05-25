@@ -7,14 +7,14 @@
     <attribute name="ObjectByName" value="null" />
     <attribute name="preselectedName" value="" type="string" />
     
-	<attribute name="modus" type="string" value="${ this.parent._drawarea.drawmodus }" />
+	<attribute name="modus" type="string" value="${ this.parent.canvas._drawarea.drawmodus }" />
 	<handler name="onmodus">
 		if (this.modus=='pointer'){
 			//Debug.write("modus",this.modus);
 			this.reset();
 			this.clearSelection();
-			this.parent._drawareaalterposition.updateVal(null);
-			var list = this.parent._drawarea.getModusItems(this.modus);
+			this.parent.canvas._drawareaalterposition.updateVal(null);
+			var list = this.parent.canvas._drawarea.getModusItems(this.modus);
 			<![CDATA[
 			var itemName = '';
 			var selectItemPre = '';
@@ -44,9 +44,9 @@
     </method>
     <!-- 
     <handler name="onselect">
-    	if (this.parent._drawareaalterposition){
+    	if (this.parent.canvas._drawareaalterposition){
 	    	//Debug.write("this.getValue: ",this.getValue());
-	    	this.parent._drawareaalterposition.updateVal(this.getValue());
+	    	this.parent.canvas._drawareaalterposition.updateVal(this.getValue());
 	    	this.doShowObjectBounds(this.getValue());
     	}
     </handler>
@@ -54,21 +54,21 @@
     <method name="doShowObjectBounds" args="val">
     <![CDATA[
     	if (val !=null && val!=''){
-	    	this.ObjectByName = this.parent._drawarea.getObjectByName(val);
+	    	this.ObjectByName = this.parent.canvas._drawarea.getObjectByName(val);
 	    	//Debug.write("this.ObjectByName");
-	    	this.parent._drawarea.setAttribute('boundingIsActive',true);
+	    	this.parent.canvas._drawarea.setAttribute('boundingIsActive',true);
 	    	//Debug.write("this.ObjectByName.getAttribute('x'): ",this.ObjectByName.getAttribute('x'));
 	    	//Debug.write("this.ObjectByName.getAttribute('y'): ",this.ObjectByName.getAttribute('y'));
-	    	//Debug.write("parent _drawarea x: ",this.parent._drawarea.x);
-	    	//Debug.write("parent _drawarea y: ",this.parent._drawarea.y);
+	    	//Debug.write("parent canvas._drawarea x: ",this.parent.canvas._drawarea.x);
+	    	//Debug.write("parent canvas._drawarea y: ",this.parent.canvas._drawarea.y);
 	    	var x = this.ObjectByName.getAttribute('x');
 	    	var y = this.ObjectByName.getAttribute('y');
 	    	var width = this.ObjectByName.width;
 	    	var height = this.ObjectByName.height;
-	    	if (this.parent._drawarea.boundingref!=null)this.parent._drawarea.boundingref.removeIt();
+	    	if (this.parent.canvas._drawarea.boundingref!=null)this.parent.canvas._drawarea.boundingref.removeIt();
 	    	//Debug.write("inital bounding box");
-	    	this.parent._drawarea.boundingref = new boundingBoxAll(this.parent.boundboxesView,{objRef:this.ObjectByName,x:x-200,y:y-200,width:width+400,height:height+400,ex:x,ey:y,ewidth:width,eheight:height});
-	    	//this.parent._drawarea.boundingref.sendToBack();
+	    	this.parent.canvas._drawarea.boundingref = new boundingBoxAll(this.parent.boundboxesView,{objRef:this.ObjectByName,x:x-200,y:y-200,width:width+400,height:height+400,ex:x,ey:y,ewidth:width,eheight:height});
+	    	//this.parent.canvas._drawarea.boundingref.sendToBack();
     	}
     ]]>
     </method>

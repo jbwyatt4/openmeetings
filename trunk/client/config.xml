@@ -81,7 +81,13 @@ of the red5-servlet
     showWindowEffectOpacity-values
     between 0 and 1
  -->
-<showWindowEffect>y</showWindowEffect>    
+<showWindowEffect>y</showWindowEffect> 
+	
+	
+<!--
+	To enable the modern whiteboard Panel you need to switch this to y
+ -->
+<showmodernWhiteBoard>n</showmodernWhiteBoard>    
 	
 <!--
 	First day in the Week used by the Calendar

@@ -32,19 +32,19 @@
     <handler name="onmouseup" reference="LzGlobalMouse" args="who">
     	<![CDATA[
 	        LzModeManager.globalUnlockMouseEvents();
-	        var x = _drawarea.getMouse('x');
-	        var y = _drawarea.getMouse('y');
-	        if (x>=0 && y>=0 && x<=_drawarea.width && y<=_drawarea.height){
+	        var x = canvas._drawarea.getMouse('x');
+	        var y = canvas._drawarea.getMouse('y');
+	        if (x>=0 && y>=0 && x<=canvas._drawarea.width && y<=canvas._drawarea.height){
 		        var downloadurl = 'http://'+canvas.rtmphostlocal+':'+canvas.red5httpport+'/'+canvas.webAppRootKey+'/DownloadHandler?fileName='+this.filename
 			        +'&moduleName='+this.uploadmodul
 			        +'&parentPath='+canvas.uploadmoduleimgfolder+'/'
 			        +'&room_id='+hib.currentroomid
 			        +'&sid='+canvas.sessionId;
 
-		        Debug.write(_drawarea);        
+		        Debug.write(canvas._drawarea);        
 		        //Debug.write(downloadurl,x,y,this.baseurl,this.fileName,this.moduleName,this.parentPath,this.room,this.domain);
 			
-		        _drawarea.parent.parent.clearAreaAndAddImage(downloadurl,x,y,this.baseurl,this.fileName,this.moduleName,this.parentPath,this.room,this.domain);
+		        canvas._drawarea.parent.parent.clearAreaAndAddImage(downloadurl,x,y,this.baseurl,this.fileName,this.moduleName,this.parentPath,this.room,this.domain);
 		        
 		        this.dragger.remove();     
 		        this.doStop();

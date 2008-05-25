@@ -459,7 +459,7 @@
 				            }							
 						}					
 					} else {
-						_drawarea.onopenWhiteBoard.sendEvent();
+						canvas._drawarea.onopenWhiteBoard.sendEvent();
 					}
 				]]>
             </handler>  
@@ -499,9 +499,9 @@
                 if (canvas._videocontainer!=null){
 	                canvas._videocontainer.disconnectclient(value.publicSID); 
 					//remove that client from sync list of wmlFileLoader/image if present
-					if (_drawarea!=null){
-						_drawarea.sendCompleteWmlLoadedRClient(value);
-						_drawarea.sendCompleteImageLoadedRClient(value);
+					if (canvas._drawarea!=null){
+						canvas._drawarea.sendCompleteWmlLoadedRClient(value);
+						canvas._drawarea.sendCompleteImageLoadedRClient(value);
 					}
 	                if (canvas.currentModApply!=null) canvas.currentModApply.rejectUser(value);
 	                //parent.getClientListScope.doCall();  
@@ -518,8 +518,8 @@
 	    		Debug.write("logicalRoomLeaveDis: ",value);
 	    		canvas._videocontainer.disconnectclient(value.broadCastID); 
 				//remove that client from sync list of wmlFileLoader/image if present
-				_drawarea.sendCompleteWmlLoadedRClient(value);
-				_drawarea.sendCompleteImageLoadedRClient(value);
+				canvas._drawarea.sendCompleteWmlLoadedRClient(value);
+				canvas._drawarea.sendCompleteImageLoadedRClient(value);
 	    		if (canvas.currentModApply!=null) canvas.currentModApply.rejectUser(value);
                	if (value.isRecording) {
 		    		canvas._mymod.recordingUser = null;
@@ -542,8 +542,8 @@
             <handler name="ondata" args="value">
                 <![CDATA[
                 //The onResult-Handler will be called be the rtmpconnection
-	                Debug.write("sendVarsToWhiteboard : ",value);
-	                _drawarea.sendWatchObject(value[2],value[3],false);
+	                if ($debug) Debug.write("sendVarsToWhiteboard : ",value);
+	                canvas._drawarea.sendWatchObject(value[2],value[3],false);
                 ]]>
             </handler>   
         </netRemoteCallHib>   
@@ -636,37 +636,37 @@
                     canvas._videocontainer.setAVSettingsToClient(value.client);
                 } else if (value.message[0]=='whiteboard'){
 					if (value.message[1]=='wmlloadcomplete'){
-						_drawarea.sendCompleteWmlLoadedRClient(value.client);
+						canvas._drawarea.sendCompleteWmlLoadedRClient(value.client);
 					} else if (value.message[1]=='wmlsynccomplete'){
-						_drawarea.sendCompleteWmlSync(value.client);
+						canvas._drawarea.sendCompleteWmlSync(value.client);
 					} else if (value.message[1]=='imageloadcomplete'){
-						_drawarea.sendCompleteImageLoadedRClient(value.client);
+						canvas._drawarea.sendCompleteImageLoadedRClient(value.client);
 					} else if (value.message[1]=='imagesynccomplete'){
-						_drawarea.sendCompleteImageSync(value.client);
+						canvas._drawarea.sendCompleteImageSync(value.client);
 					} else if (value.message[1]=='imageloaderror'){
-						_drawarea.sendCompleteImageLoadedRClient(value.client);
+						canvas._drawarea.sendCompleteImageLoadedRClient(value.client);
 					} else if (value.message[1]=='imageloadtimeout'){
-						_drawarea.sendCompleteImageLoadedRClient(value.client);
+						canvas._drawarea.sendCompleteImageLoadedRClient(value.client);
 					} else if (value.message[1]=='swfloadcomplete'){
-						_drawarea.sendCompleteSWFLoadedRClient(value.client);
+						canvas._drawarea.sendCompleteSWFLoadedRClient(value.client);
 					} else if (value.message[1]=='swfsynccomplete'){
-						_drawarea.sendCompleteSWFSync(value.client);
+						canvas._drawarea.sendCompleteSWFSync(value.client);
 					} else if (value.message[1]=='swfloaderror'){
-						_drawarea.sendCompleteSWFLoadedRClient(value.client);
+						canvas._drawarea.sendCompleteSWFLoadedRClient(value.client);
 					} else if (value.message[1]=='swfloadtimeout'){
-						_drawarea.sendCompleteSWFLoadedRClient(value.client);
+						canvas._drawarea.sendCompleteSWFLoadedRClient(value.client);
 					} else if (value.message[1]=='inituser'){
-						//_drawarea.sendCompleteImageSync(value.client);
+						//canvas._drawarea.sendCompleteImageSync(value.client);
 					    Debug.write("inituser loadwmlObjectToStage: ",value.message[2]);
-					    if (!canvas.ismoderator) _drawarea.loadwmlObjectToStage(value.message[2],"","","",true,true);
+					    if (!canvas.ismoderator) canvas._drawarea.loadwmlObjectToStage(value.message[2],"","","",true,true);
 					} else if (value.message[1]=='initgetVars'){
-						//_drawarea.sendCompleteImageSync(value.client);
+						//canvas._drawarea.sendCompleteImageSync(value.client);
 					    //Debug.write("initgetVars sendVarsToMessageWithClient: ",value.message[2]);
-					    _drawarea.sendWatchObject(value.message[1],value.message[2],false);
+					    canvas._drawarea.sendWatchObject(value.message[1],value.message[2],false);
 					} else if (value.message[1]=='syncinitLoader'){
-						//_drawarea.sendCompleteImageSync(value.client);
+						//canvas._drawarea.sendCompleteImageSync(value.client);
 					    //Debug.write("syncinitLoader sendVarsToMessageWithClient: ",value.message[2]);
-						if (value.client.streamid!=canvas.streamid) _drawarea.remoteSyncLoader();
+						if (value.client.streamid!=canvas.streamid) canvas._drawarea.remoteSyncLoader();
 					}
                 }
                 ]]>
@@ -679,7 +679,7 @@
                 //Debug.write("newMessageByRoomAndDomain: ",value);    
                 <![CDATA[
                     if (value.message=='desktop'){
-                        _drawarea.incomingScreenSharing(value);
+                        canvas._drawarea.incomingScreenSharing(value);
                     } else if (value.message=='library'){
                         var error = false;
                         for (var eg in value.error){
