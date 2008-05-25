@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library>
 
-<class name="lineColorChoose" extends="view"
+<class name="lineColorChoose" extends="basePropertySelector"
     bgcolor="white" width="80" height="24">
     
     <attribute name="isopen" value="false" type="boolean" />
@@ -28,6 +28,34 @@
     	this.setTransformedStringColor();
     </handler>
     
+    <method name="setSelectedColor" args="c">
+    	this.setEnabled(true);
+		this.setAttribute('selectedColor',c);
+		this.setTransformedStringColor();
+    </method>
+    
+    <method name="setSelectedColorWithDis" args="c,d">
+    	this.setEnabled(true);
+		this.setAttribute('selectedColor',c);
+		this.setTransformedStringColor();
+		this.selectedColorDis = d;
+		if (this.selectedColorDis==-1){
+    		if ($debug) Debug.write("FillColor Disabled");
+    		this._currentcolor.setAttribute('clickable',false);
+    		this._currentcolor.setAttribute('opacity',0.3);
+    		this.rgt.setAttribute('opacity',0.3);
+    		this.rgt.setAttribute('enabled',false);
+    		this.colorIsEnabled = false;
+    	} else {
+			this._currentcolor.setAttribute('clickable',true);
+    		this._currentcolor.setAttribute('opacity',1);
+    		this.rgt.setAttribute('opacity',1);
+    		this.rgt.setAttribute('enabled',true);
+    		this.onselectedColor.sendEvent(this.selectedColor);
+    		this.colorIsEnabled = true;
+    	}
+    </method>
+    
     <method name="getValue">
         return this.selectedColor;
     </method>    
@@ -36,7 +64,16 @@
         var t = _root.createEmptyMovieClip('hans',10);
         var myColor = new Color(t);
         myColor.setRGB(selectedColor);
-        this.colorPickRef = new colorpicker(canvas,{btnRef:this,x:(this.getAttributeRelative('x',canvas)-(250-this.width)),y:(this.getAttributeRelative('y',canvas))});
+        if (this.boxPosition=="up"){
+	        this.colorPickRef = new colorpicker(canvas,{btnRef:this,
+	        	x:(this.getAttributeRelative('x',canvas)-(250-this.width)),
+	        	y:(this.getAttributeRelative('y',canvas)-154+this.height)});
+        } else {
+	        this.colorPickRef = new colorpicker(canvas,{btnRef:this,
+	        	x:(this.getAttributeRelative('x',canvas)-(250-this.width)),
+	        	y:(this.getAttributeRelative('y',canvas))});
+        }
+
         this.colorPickRef.doDefaultColor(myColor);
         LzModeManager.makeModal( this.colorPickRef );
     </method>
@@ -102,6 +139,7 @@
 	    		parent._currentcolor.setAttribute('opacity',0.3);
 	    		parent.rgt.setAttribute('opacity',0.3);
 	    		parent.rgt.setAttribute('enabled',false);
+	    		parent.selectedColorDis = -1;
 	    		parent.onselectedColor.sendEvent(-1);
 	    		parent.colorIsEnabled = false;
     		} else {
@@ -109,6 +147,7 @@
 	    		parent._currentcolor.setAttribute('opacity',1);
 	    		parent.rgt.setAttribute('opacity',1);
 	    		parent.rgt.setAttribute('enabled',true);
+	    		parent.selectedColorDis = 1;
 	    		parent.onselectedColor.sendEvent(parent.selectedColor);
 	    		parent.colorIsEnabled = true;
     		}

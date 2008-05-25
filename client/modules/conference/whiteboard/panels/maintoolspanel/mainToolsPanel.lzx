@@ -3,38 +3,40 @@
 	
 <class name="verticalMenuIconBar" extends="view" y="22" x="4">
 	<simplelayout axis="y" spacing="2" />
-	<mainToolsPanelItem name="plain" modi="plain" labelid="69" resoureceItem="plain" />
-	<mainToolsPanelItem name="saveobj" modi="saveobj" labelid="197" resoureceItem="saveobj" />
+	<mainToolsPanelItem name="plain" modi="plain" labelid="69" resoureceItem="plain" setSelectionToItem="false" />
+	<mainToolsPanelItem name="saveobj" modi="saveobj" labelid="197" resoureceItem="saveobj" setSelectionToItem="false" />
 	<mainToolsHPanelSeperator />
 	<redoUndoToolsPanelItem name="revert" doredo="false" labelid="70" resoureceItem="revert" />
 	<redoUndoToolsPanelItem name="next" doredo="true" labelid="71" resoureceItem="next" />
 	<mainToolsHPanelSeperator />
-	<mainToolsPanelItem name="hand" modi="hand" labelid="72" resoureceItem="menupointer_rsc" />
+	<mainToolsPanelItem name="hand" modi="hand" labelid="72" _isselected="true" 
+						resoureceItem="menupointer_rsc" />
 	<mainToolsPanelItem name="letter" modi="letter" labelid="73" resoureceItem="letter" />
 	<mainToolsPanelItem name="paint" modi="paint" labelid="74" resoureceItem="paint" />
 	<mainToolsPanelItem name="line" modi="line" labelid="75" resoureceItem="line_rsc" />
 	<mainToolsPanelItem name="uline" modi="uline" labelid="76" resoureceItem="uline_rsc" />
 	<mainToolsPanelItem name="rectangle" modi="rectangle" labelid="77" resoureceItem="rectangle" />
 	<mainToolsPanelItem name="ellipse" modi="ellipse" labelid="78" resoureceItem="ellipse" />
-	<mainToolsPanelItem name="drawarrow" modi="drawarrow" labelid="78" resoureceItem="drawarrowicon_rsc" />
+	<mainToolsPanelItem name="drawarrow" modi="drawarrow" labelid="79" resoureceItem="drawarrowicon_rsc" />
 </class>
 
 <class name="horizontalMenuIconBar" extends="view" y="22" x="4">
 	<simplelayout axis="x" spacing="2" />
-	<mainToolsPanelItem name="plain" modi="plain" labelid="69" resoureceItem="plain" />
-	<mainToolsPanelItem name="saveobj" modi="saveobj" labelid="197" resoureceItem="saveobj" />
+	<mainToolsPanelItem name="plain" modi="plain" labelid="69" resoureceItem="plain" setSelectionToItem="false" />
+	<mainToolsPanelItem name="saveobj" modi="saveobj" labelid="197" resoureceItem="saveobj" setSelectionToItem="false" />
 	<mainToolsVPanelSeperator />
 	<redoUndoToolsPanelItem name="revert" doredo="false" labelid="70" resoureceItem="revert" />
 	<redoUndoToolsPanelItem name="next" doredo="true" labelid="71" resoureceItem="next" />
 	<mainToolsVPanelSeperator />	
-	<mainToolsPanelItem name="hand" modi="hand" labelid="72" resoureceItem="menupointer_rsc" />
+	<mainToolsPanelItem name="hand" modi="hand" labelid="72" _isselected="true" 
+						resoureceItem="menupointer_rsc" />
 	<mainToolsPanelItem name="letter" modi="letter" labelid="73" resoureceItem="letter" />
 	<mainToolsPanelItem name="paint" modi="paint" labelid="74" resoureceItem="paint" />
 	<mainToolsPanelItem name="line" modi="line" labelid="75" resoureceItem="line_rsc" />
 	<mainToolsPanelItem name="uline" modi="uline" labelid="76" resoureceItem="uline_rsc" />
 	<mainToolsPanelItem name="rectangle" modi="rectangle" labelid="77" resoureceItem="rectangle" />
 	<mainToolsPanelItem name="ellipse" modi="ellipse" labelid="78" resoureceItem="ellipse" />
-	<mainToolsPanelItem name="drawarrow" modi="drawarrow" labelid="78" resoureceItem="drawarrowicon_rsc" />
+	<mainToolsPanelItem name="drawarrow" modi="drawarrow" labelid="79" resoureceItem="drawarrowicon_rsc" />
 </class>
 	
 <class name="mainToolsTopPanel" extends="baseTopPanel" 

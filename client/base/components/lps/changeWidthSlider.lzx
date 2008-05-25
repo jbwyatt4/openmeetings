@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library>  
 
-<class name="changeWidthSlider" extends="view" bgcolor="white" width="60" height="24">
+<class name="changeWidthSlider" extends="basePropertySelector" bgcolor="white" width="60" height="24">
 
     <attribute name="numberAlign" value="right" type="string"/>
     <attribute name="minimum" type="number" value="1" />
@@ -22,7 +22,12 @@
     <method name="getValue">
         return this.initialNumber;
     </method>
-
+    
+    <method name="setSliderValue" args="v">
+    	this.initialNumber = v;
+    	this.numericValue.setText(this.initialNumber);
+    	this.setEnabled(true);
+    </method>
 
     <edittext name="numericValue" width="34" height="24" text="$once{ parent.initialNumber }" >
         <attribute name="tempValue" value="$once{ parent.initialNumber }" type="number" />
@@ -49,7 +54,15 @@
         <view name="arrow_down_slider" resource="arrow_down_slider_rsc" 
             x="4" y="3" />
             <handler name="onclick">
-                var pick = new changeWidthSliderWin(canvas,{initialNumber:parent.numericValue.tempValue,btnRef:this.parent,x:(parent.getAttributeRelative('x',canvas)),y:(parent.getAttributeRelative('y',canvas))});
+            	if (this.parent.boxPosition=="up"){
+            		var pick = new changeWidthSliderWin(canvas,{initialNumber:parent.numericValue.tempValue,
+            			btnRef:this.parent,x:(parent.getAttributeRelative('x',canvas)),
+            			y:(parent.getAttributeRelative('y',canvas)-140+parent.height)});
+            	} else {
+            		var pick = new changeWidthSliderWin(canvas,{initialNumber:parent.numericValue.tempValue,
+            			btnRef:this.parent,x:(parent.getAttributeRelative('x',canvas)),
+            			y:(parent.getAttributeRelative('y',canvas))});
+            	}
                 LzModeManager.makeModal( pick );
             </handler>
         <labelTooltip labelid="$once{ parent.parent.labelid }" />

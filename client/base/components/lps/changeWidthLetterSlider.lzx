@@ -1,6 +1,6 @@
 <library>  
 
-<class name="changeWidthLetterSlider" extends="view" bgcolor="white" width="60" height="24">
+<class name="changeWidthLetterSlider" extends="basePropertySelector" bgcolor="white" width="60" height="24">
 
     <attribute name="numberAlign" value="right" type="string"/>
     <attribute name="minimum" type="number" value="4" />
@@ -15,6 +15,12 @@
     <handler name="oninit">
         this.initialNumberInit=initialNumber;
     </handler>
+    
+    <method name="setSliderValue" args="v">
+    	this.initialNumber = v;
+    	this.numericValue.setText(this.initialNumber);
+    	this.setEnabled(true);
+    </method>
     
     <method name="getValue">
         return this.initialNumber;
