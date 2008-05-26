@@ -103,38 +103,38 @@
 	</method>
 
 	<labelTextWidthTooltip name="_xvalueLabel" x="4" y="24"
-		labelid="545" labelLabelid="546" /> 
+		labelid="545" labelLabelid="546" visible="${this.parent.isopen}" /> 
 	<customEdittext name="_xvalue" x="24" y="24" regexpType="number" 
 		width="40" text="0" height="24"
-		onafterCheck="parent.onUpdateBoundByText()" />
+		onafterCheck="parent.onUpdateBoundByText()" visible="${this.parent.isopen}" />
 	
 	<labelTextWidthTooltip name="_yvalueLabel" x="4" y="54"
-		labelid="547" labelLabelid="548" /> 
+		labelid="547" labelLabelid="548" visible="${this.parent.isopen}" /> 
 	<customEdittext name="_yvalue" x="24" y="54" regexpType="number"
 		width="40" text="0" height="24"
-		onafterCheck="parent.onUpdateBoundByText()" />
+		onafterCheck="parent.onUpdateBoundByText()" visible="${this.parent.isopen}" />
 	
 	<labelTextWidthTooltip name="_widthvalueLabel" x="68" y="24"
-		labelid="549" labelLabelid="550" /> 
+		labelid="549" labelLabelid="550" visible="${this.parent.isopen}" /> 
 	<customEdittext name="_widthvalue" x="88" y="24" regexpType="number" 
 		width="40" text="0" height="24"
-		onafterCheck="parent.onUpdateBoundByText()" />
+		onafterCheck="parent.onUpdateBoundByText()" visible="${this.parent.isopen}" />
 	
 	<labelTextWidthTooltip name="_heightvalueLabel" x="68" y="54"
-		labelid="551" labelLabelid="552" /> 
+		labelid="551" labelLabelid="552" visible="${this.parent.isopen}" /> 
 	<customEdittext name="_heightvalue" x="88" y="54" regexpType="number"
 		width="40" text="0" height="24"
-		onafterCheck="parent.onUpdateBoundByText()" />
+		onafterCheck="parent.onUpdateBoundByText()" visible="${this.parent.isopen}" />
 		
 		
-	<lineColorChoose x="132" y="24" name="lineColorChoose" boxPosition="up">
+	<lineColorChoose x="132" y="24" name="lineColorChoose" boxPosition="up" visible="${this.parent.isopen}">
 		<handler name="onselectedColor" args="sel">
 			if ($debug) Debug.write("lineColorChoose sel: ",sel);
 			parent.updateProperties();			
 		</handler>
 	</lineColorChoose>
 	
-	<fillColorChoose x="132" y="54" name="fillColorChoose" boxPosition="up">
+	<fillColorChoose x="132" y="54" name="fillColorChoose" boxPosition="up" visible="${this.parent.isopen}">
 		<handler name="onselectedColor" args="sel">
 			if ($debug) Debug.write("fillColorChoose sel: ",sel);
 			parent.updateProperties();	
@@ -142,7 +142,7 @@
 	</fillColorChoose>
 	
 	<changeWidthSlider x="222" y="24" name="changeWidthSlider" boxPosition="up" 
-		initialNumber="2" >
+		initialNumber="2" visible="${this.parent.isopen}">
 		<handler name="oninitialNumber" args="i">
 			//this.parent.parent.parent._drawareaMask._drawarea.setAttribute('currentlayersize',i);
 			if ($debug) Debug.write("changeWidthSlider oninitialNumber sel: ",i);
@@ -151,7 +151,7 @@
 	</changeWidthSlider> 
 	
 	<changeWidthSlider x="222" y="54" name="changeOpacitySlider" labelid="553" boxPosition="up"
-		initialNumber="100" >
+		initialNumber="100" visible="${this.parent.isopen}" >
 		<handler name="oninitialNumber" args="i">
 			//this.parent.parent.parent._drawareaMask._drawarea.setAttribute('currentlayersize',i);
 			if ($debug) Debug.write("changeOpacitySlider oninitialNumber sel: ",i);

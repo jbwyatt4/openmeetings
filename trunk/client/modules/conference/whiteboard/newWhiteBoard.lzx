@@ -153,8 +153,23 @@
         <baseDrawSave y="0" name="_drawarea" width="${parent.width}" height="${parent.height}" >
             <attribute name="initH"/>
             <attribute name="initW"/>
-			<handler name="oninit">
+            <handler name="oninit">
+             <![CDATA[
             	canvas._drawarea = this;
+                this.setAttribute("initH",this.height);
+                this.setAttribute("initW",this.width);
+                var f=function() {
+                 this.width=( (this.width < this.initW ) ? initW : this.width);
+                 this.height=( (this.height < this.initH ) ? initH : this.height);
+                 var mc = this.getMCRef();
+                 // scale computed only on width, it is OK for a keepratio resize
+                 var scale= this.width / this.initW *100;
+                 mc._xscale = scale;
+                 mc._yscale = scale;
+                }
+                var prop1 = [this, "width"];
+                this.applyConstraint("width", f, prop1);
+             ]]>
             </handler>
             
             <handler name="onprogress" args="perc">
@@ -324,7 +339,17 @@
    			parent.panelArea.sendNewPropertyHeight(this);
    		</handler>
     </propertyPanel>
-     
+    <view name="resetSize" x="${parent.width - 20}" width="10" height="10" bgcolor="red">
+      <handler name="onclick">
+	  this.parent.parent.setAttribute("width",this.parent.parent.initW); 
+	  this.parent.parent.setAttribute("height",this.parent.parent.initH);
+
+	  this.parent.parent.onheight.sendEvent();
+	  this.parent.parent.onwidth.sendEvent();
+
+	  this.setAttribute("x",this.parent.parent.initW - 20);
+      </handler>
+    </view>
 </class>
 
 </library>
