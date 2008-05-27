@@ -39,6 +39,13 @@
 
 <class name="redoUndoToolsPanelItem" extends="mainToolsPanelItem" setSelectionToItem="false">
 	<attribute name="doredo" value="true" type="boolean" />
+	<handler name="onclick">	  
+          if(this.doredo){
+            this.parent.parent.parent.parent._drawareaMask._drawarea.doredo();
+          } else {
+            this.parent.parent.parent.parent._drawareaMask._drawarea.undoredo();
+          }
+        </handler>
 </class>
 
 <class name="mainToolsHPanelSeperator" extends="view" bgcolor="0xCCCCCC"
