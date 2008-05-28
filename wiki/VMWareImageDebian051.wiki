@@ -2,7 +2,7 @@
 
 Package: http://webbase-design.de/projekte/Debian4.0r2-OpenMeetings0.5.1.zip
 
-!Debian4.0r2-OpenMeetings0.5.1.zip
+Debian4.0r2-!OpenMeetings0.5.1.zip
 
 MD5: 165a78cb62cf61539d8a318dd1b1df80
 
