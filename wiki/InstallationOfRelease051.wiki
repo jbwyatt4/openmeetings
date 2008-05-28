@@ -23,7 +23,7 @@
   * Howto: Download it into your Red5-installation ($RED5_HOME, next to the red5.jar) and double click on it for starting Red5.
 
 = Install !OpenMeetings =
-  # Download !OpenMeetings 0.5 Final from [ http://code.google.com/p/openmeetings/downloads/list !OpenMeetings-Download-Page] (Please make sure that you use an up-to-date unzip-software)
+  # Download !OpenMeetings 0.5.1 from [ http://code.google.com/p/openmeetings/downloads/list !OpenMeetings-Download-Page] (Please make sure that you use an up-to-date unzip-software)
   # Unpack it to _$RED5-HOME/webapps/_ your new folder structure will be _$RED5-HOME/webapps/openmeetings/_ this is the base directory of !OpenMeetings (following $OPENMEETINGS-HOME)
   # Prepare Database Settings - go to $OPENMEETINGS-HOME/conf there are two pre-configured files for MySQL and Postgres: mysql_hibernate.cfg.xml and postgres_hibernate.cfg.xml. Following explains it for MySQL-Database-Users, Postgres-Database-Users and Any-Database-Users. Choose Your One!! Of course the database must already exist! Meaning if you want to use  `jdbc:mysql://localhost/openmeetings` then the database `openmeetings` must be already an existing empty database (with character encoding utf8)!!
     * MySQL-Database-User: Rename `mysql_hibernate.cfg.xml` to `hibernate.cfg.xml` and alter following config values in (`mysql_`)`hibernate.cfg.xml`
