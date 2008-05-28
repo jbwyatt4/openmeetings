@@ -66,8 +66,7 @@
 	    	var width = this.ObjectByName.width;
 	    	var height = this.ObjectByName.height;
 	    	if (this.parent.canvas._drawarea.boundingref!=null)this.parent.canvas._drawarea.boundingref.removeIt();
-	    	//Debug.write("inital bounding box");
-	    	this.parent.canvas._drawarea.boundingref = new boundingBoxAll(this.parent.boundboxesView,{objRef:this.ObjectByName,x:x-200,y:y-200,width:width+400,height:height+400,ex:x,ey:y,ewidth:width,eheight:height});
+	    	this.parent.canvas._drawarea.boundingref = new boundingBoxAll(this.parent._drawareaMask._drawarea,{objRef:this.ObjectByName,x:x-200,y:y-200,width:width+400,height:height+400,ex:x,ey:y,ewidth:width,eheight:height});
 	    	//this.parent.canvas._drawarea.boundingref.sendToBack();
     	}
     ]]>

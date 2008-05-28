@@ -38,8 +38,7 @@
 	    	var width = this.ObjectByName.width;
 	    	var height = this.ObjectByName.height;
 	    	if (this.refObj.boundingref!=null)this.refObj.boundingref.removeIt();
-	    	//Debug.write("inital bounding box");
-	    	this.refObj.boundingref = new boundingBoxAll(this.refObj.parent.boundboxesView,{objRef:this.ObjectByName,x:x-200,y:y-200,width:width+400,height:height+400,ex:x,ey:y,ewidth:width,eheight:height});
+	    	this.refObj.boundingref = new boundingBoxAll(this.refObj.parent._drawareaMask._drawarea,{objRef:this.ObjectByName,x:x-200,y:y-200,width:width+400,height:height+400,ex:x,ey:y,ewidth:width,eheight:height});
 	    	this.refObj.parent.canvas._drawareaobjectcombobox.preselectedName=val;
 	    	//this.refObj.boundingref.sendToBack();
 	    	this.bringToFront();
