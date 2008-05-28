@@ -237,6 +237,23 @@
 		            }
             	}
             </handler>
+	    <!--  bounding Box (selection Box) -->
+    	    <handler name="onBoundingBox" args="boundingBoxRef">
+    	      var boundingDoUpdateOnInit = true;
+	      if (boundingBoxRef.objRef instanceof swfResourceView){
+              //Debug.write("is swf Presentation");
+                boundingDoUpdateOnInit=false;
+              }
+    	      if (!boundingDoUpdateOnInit) {
+                 parent.parent._propertyPanel.setObjectBounds(
+                 boundingBoxRef.objRef.x,boundingBoxRef.objRef.y,
+                 boundingBoxRef.objRef._swfView.width,boundingBoxRef.objRef._swfView.height);
+              } else {
+                 parent.parent._propertyPanel.setObjectBounds(
+                        boundingBoxRef.objRef.x,boundingBoxRef.objRef.y,
+                        boundingBoxRef.objRef.width,boundingBoxRef.objRef.height);
+              }
+    	    </handler>
         </baseDrawSave>  
     </view>
     
@@ -252,30 +269,7 @@
                 ]]>
             </handler>   
         </netRemoteCallHib>     
-    
-    <!-- 
-        Container for the bounding Box (selection Box)
-     -->
-    <view name="boundboxesView" width="${ parent.parent.width-1 }" 
-    	  height="${ parent.parent.height-23 }" y="0">
-    	<handler name="onBoundingBox" args="boundingBoxRef">
-    		var boundingDoUpdateOnInit = true;
-			if (boundingBoxRef.objRef instanceof swfResourceView){
-                //Debug.write("is swf Presentation");
-                boundingDoUpdateOnInit=false;
-            }
-    		if (!boundingDoUpdateOnInit) {
-                parent._propertyPanel.setObjectBounds(
-                	boundingBoxRef.objRef.x,boundingBoxRef.objRef.y,
-                	boundingBoxRef.objRef._swfView.width,boundingBoxRef.objRef._swfView.height);
-            } else {
-                parent._propertyPanel.setObjectBounds(
-                	boundingBoxRef.objRef.x,boundingBoxRef.objRef.y,
-                	boundingBoxRef.objRef.width,boundingBoxRef.objRef.height);
-            }
-    	</handler>
-    </view>
-    
+        
     <view name="panelArea" width="${ parent.parent.width }" 
     	  height="${ parent.parent.height-21-parent._propertyPanel.height }">
     	

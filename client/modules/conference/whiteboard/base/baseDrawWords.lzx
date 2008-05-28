@@ -40,15 +40,17 @@
 		<![CDATA[
 		if ($debug) Debug.write("drawtoArray");
 		if (this._textview._textview.getText().length!=0 && this.inittext.length==0){
-		    var y = this.getAttributeRelative('y',this.refObj)-this.refObj.y+1;
-			//Debug.write("this.x-this.refObj.x-this.refObj.parent.x ",y);
-			var x = this.getAttributeRelative('x',this.refObj)-this.refObj.x+1;
+                    var scale= this.parent._drawarea.width / this.parent._drawarea.initW;
+		    var y = ( this.getAttributeRelative('y',this.refObj)-this.refObj.y+1 ) / scale;
+                    Debug.write("this.refObj.y ",this.refObj.y);
+			Debug.write("this.x-this.refObj.x-this.refObj.parent.x ",y);
+			var x = ( this.getAttributeRelative('x',this.refObj)-this.refObj.x+1 ) / scale;
         	this.refObj.drawTextField(this._textview._textview.getText(),this._textview._textview.width,this._textview._textview.height,x,y);
         } else if (this._textview._textview.getText().length!=0 && this.inittext.length!=0){
-        	//Debug.write("edit modi ",this.initTextName);
-		    var y = this.getAttributeRelative('y',this.refObj)-this.refObj.y+1;
-			//Debug.write("this.x-this.refObj.x-this.refObj.parent.x ",y);
-			var x = this.getAttributeRelative('x',this.refObj)-this.refObj.x+1;
+        	Debug.write("edit modi ",this.initTextName);
+		    var y = (this.getAttributeRelative('y',this.refObj)-this.refObj.y+1) /scale;
+			Debug.write("this.x-this.refObj.x-this.refObj.parent.x ",y);
+			var x = (this.getAttributeRelative('x',this.refObj)-this.refObj.x+1) / scale;
         	this.refObj.setTextFieldByName(this.initTextName,this._textview._textview.getText(),this._textview._textview.width,x,y,this._textview._textview.height);
         } else {
 			if ($debug) Debug.write("text smaller then 0",this._textview._textview.getText());
