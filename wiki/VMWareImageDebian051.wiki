@@ -1,4 +1,4 @@
-#summary Debian VMWare Image
+#summary Debian VMWare Image contributed by Federico Tomasczik
 
 Package: http://webbase-design.de/projekte/Debian4.0r2-OpenMeetings0.5.1.zip
 
