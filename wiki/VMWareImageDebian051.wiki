@@ -2,7 +2,7 @@
 
 Package: http://webbase-design.de/projekte/Debian4.0r2-OpenMeetings0.5.1.zip
 
-Debian4.0r2-OpenMeetings0.5.1.zip
+!Debian4.0r2-OpenMeetings0.5.1.zip
 
 MD5: 165a78cb62cf61539d8a318dd1b1df80
 
@@ -44,17 +44,17 @@ Password: openmeetings
 
 Notes:
 
-Below are pre-requisites for running the OpenMeetings with VMWare.
+Below are pre-requisites for running the !OpenMeetings with VMWare.
 
 1) You need to download VMWare Player:
 http://www.vmware.com/products/player/
 
-2) In order to run the OpenMeetings VMWare Image you would need to be
-either on a DHCP Network so the OpenMeetings VMWare Image can acquire an
+2) In order to run the !OpenMeetings VMWare Image you would need to be
+either on a DHCP Network so the !OpenMeetings VMWare Image can acquire an
 IP Address or you need to have a static IP Address which can be assigned to
-the OpenMeetings VMWare Image.
+the !OpenMeetings VMWare Image.
 
-If your network is a DHCP Enabled Network the OpenMeetings VMWare Image
+If your network is a DHCP Enabled Network the !OpenMeetings VMWare Image
 would automatically be assigned an IP Address at the time of loading,
 once the VMWare Image is loaded please login to the VMImage and follow the
 below steps.
@@ -82,10 +82,10 @@ eth0      Link encap:Ethernet  direcciónHW 00:16:d4:99:24:51
 The IP address for the above example is 10.2.1.181
 
 You can go to this URL http://<YouIPAddress>:5080/openmeetings/ to
-start/join the OpenMeetings Web
+start/join the !OpenMeetings Web
 Meeting.
 
-You can login to OpenMeetings using following data:
+You can login to !OpenMeetings using following data:
 
     Username : openmeetings
     Password : openmeetings
