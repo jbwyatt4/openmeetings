@@ -11,6 +11,7 @@ Tips for Installation:
   * ConvertersInstallation
   * OpenOfficeConverter
   * [qosTips]
+  * [VMWareImageDebian051]
 
 == Source Build ==
 
