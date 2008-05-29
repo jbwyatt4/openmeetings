@@ -40,6 +40,8 @@
 				} else if (this.regexpType=="time"){
 					var regExpV = "([01][0-9]|2[0-3]):[0-5][0-9]";
 					this.regexpLabelid = 523;
+				} else {
+					if ($debug) Debug.warn("Unkown Regexp Type: ",this.regexpType);
 				}
 				//if ($debug) Debug.write("regExpV: ",regExpV);
 		  	    var fieldValue = this.getText();

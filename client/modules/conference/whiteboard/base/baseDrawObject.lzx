@@ -5,6 +5,8 @@
     
     <!-- it uses some of the attribute's defined in baseDrawImage -->
     <attribute name="newSlideNumber" value="1" type="number" />
+    
+    <attribute name="modernToolbar" value="false" type="boolean" />
 
     <!-- Loads a SWFPresenation to the whiteBoard -->
     <method name="loadSWFPresentation" args="url,fileName,moduleName,parentPath,room,domain,slideNumber">
@@ -312,9 +314,16 @@
     </method>
     
     <method name="doUpdateDocumentToolBar">
-        this.parent.parent._documentmenu._currentSlideNo.setText(this.ObjectByName._swfView.frame);
-        this.parent.parent._documentmenu._totalSlideNo.setText(this.ObjectByName._swfView.totalframes);
-        this.parent.parent._documentmenu._zoom.setText(this.ObjectByName.currentzoomFactor);
+    	if (this.modernToolbar) {
+	        this.parent.parent._documentmenu._currentSlideNo.setText(this.ObjectByName._swfView.frame);
+	        this.parent.parent._documentmenu._totalSlideNo.setText(this.ObjectByName._swfView.totalframes);
+	        this.parent.parent._documentmenu._zoom.setText(this.ObjectByName.currentzoomFactor);
+    	} else {
+    		var docToolbar = this.getDocumentToolBar();
+	        docToolbar._currentSlideNo.setText(this.ObjectByName._swfView.frame);
+	        docToolbar._totalSlideNo.setText(this.ObjectByName._swfView.totalframes);
+	        docToolbar._zoom.setText(this.ObjectByName.currentzoomFactor);
+    	}
     </method>
     
     <method name="sendCurrentSWFObject" args="objRef">

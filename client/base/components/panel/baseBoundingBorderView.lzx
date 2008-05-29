@@ -18,6 +18,10 @@
 	<!--- the Event will be thrown if you close the Box -->
 	<handler name="onclose" />
 	
+	<!--- extra Event for this kind of view
+		will be thrown before the view inits new -->
+	<handler name="preclose" />
+	
 	<!---@keywords private the list of connected views -->
 	<attribute name="dockinglist" value="null" />
 	
@@ -164,6 +168,7 @@
 			}
 		}
 		mousetracker_del.unregisterAll();
+		this.preclose.sendEvent();
 		if (this.currentBoundingBox!=null) {
 			
 			if(this.currentBoundingBox.width>this.currentBoundingBox.height){
@@ -225,14 +230,14 @@
 				}
 			}
 			this.currentBoundingBox.destroy();
-			this.destroy();
+			this.close();
 		} else {
 			if(this.width>this.height){
 				new global[this.activationVClassBounding](parent,{x:this.x,y:this.y});
 			} else {
 				new global[this.activationClassBounding](parent,{x:this.x,y:this.y});
 			}
-			this.destroy();
+			this.close();
 		}
 	</method>
 
