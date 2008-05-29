@@ -181,6 +181,7 @@
             </handler>
             <handler name="ondrawmodus" args="d">
                 this.drawmodus = d;
+                //change Enabled Status of Toolbar Menu Button
                 parent.parent._propertyPanel.loadPanelByModus(this);
             </handler>
             <handler name="setNewScreenUserName" args="value">
@@ -254,6 +255,10 @@
                         boundingBoxRef.objRef.width,boundingBoxRef.objRef.height);
               }
     	    </handler>
+    	    
+    	    <method name="getDocumentToolBar">
+    	    	return parent.parent.panelArea.getDocumentsToolbar();
+    	    </method>
         </baseDrawSave>  
     </view>
     
@@ -304,25 +309,49 @@
 			parent._drawareaMask._drawarea.setModus(obj.modi);
 		</method>
 		
+		<!--
+								
+		 -->
+		 
 		<method name="sendNewPropertyHeight" args="objRef">
 			<![CDATA[
-				if (this.subviews[0] instanceof mainToolsTopPanel) {
-					if (objRef.height<=22){
-						if (this.subviews[0].y+this.subviews[0].height+5>=parent.parent.height-objRef.initheight-21){
-							if ($debug) Debug.write("mainToolsTopPanel");
-							this.subviews[0].setAttribute('y',objRef.y-this.subviews[0].height);
-						}
-					} else {
-						if (this.subviews[0].y+this.subviews[0].height+5>=objRef.y){
-							if ($debug) Debug.write("mainToolsTopPanel");
-							this.subviews[0].setAttribute('y',objRef.y-this.subviews[0].height);
-						}
+				for (var i=0;i<this.subviews.length;i++) {
+					if (this.subviews[i].y != 0) {
+						if (this.subviews[i] instanceof mainToolsTopPanel
+							|| this.subviews[i] instanceof documentIconTopPanel) {
+							if (objRef.height<=22){
+								if (this.subviews[i].y+this.subviews[i].height+5>=parent.parent.height-objRef.initheight-21){
+									if ($debug) Debug.write("mainToolsTopPanel");
+									this.subviews[i].setAttribute('y',objRef.y-this.subviews[i].height);
+								}
+							} else {
+								if (this.subviews[i].y+this.subviews[i].height+5>=objRef.y){
+									if ($debug) Debug.write("mainToolsTopPanel");
+									this.subviews[i].setAttribute('y',objRef.y-this.subviews[i].height);
+								}
+							}
+						}	
+					}
+				}
+			]]>
+		</method>
+		
+		<method name="getDocumentsToolbar">
+			<![CDATA[
+				for (var i=0;i<this.subviews.length;i++) {
+					if (this.subviews[i] instanceof documentIconTopPanel
+						|| this.subviews[i] instanceof documentIconLeftPanel) {
+						//this.subviews[i].setAttribute('visibility','visible');
+						return this.subviews[i]._inner;
 					}
 				}
 			]]>
 		</method>
     	
-    	<mainToolsLeftPanel y="20" />	
+    	<mainToolsLeftPanel y="20" name="_mainToolsPanel" />	
+    	
+    	<documentIconTopPanel x="100" y="0" name="_documentPanel"
+			visibility="visible" />
    
     </view> 
     
@@ -334,15 +363,15 @@
    		</handler>
     </propertyPanel>
     <view name="resetSize" x="${parent.width - 20}" width="10" height="10" bgcolor="red">
-      <handler name="onclick">
-	  this.parent.parent.setAttribute("width",this.parent.parent.initW); 
-	  this.parent.parent.setAttribute("height",this.parent.parent.initH);
-
-	  this.parent.parent.onheight.sendEvent();
-	  this.parent.parent.onwidth.sendEvent();
-
-	  this.setAttribute("x",this.parent.parent.initW - 20);
-      </handler>
+		<handler name="onclick">
+			this.parent.parent.setAttribute("width",this.parent.parent.initW); 
+			this.parent.parent.setAttribute("height",this.parent.parent.initH);
+			
+			this.parent.parent.onheight.sendEvent();
+			this.parent.parent.onwidth.sendEvent();
+			
+			this.setAttribute("x",this.parent.parent.initW - 20);
+		</handler>
     </view>
 </class>
 

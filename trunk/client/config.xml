@@ -87,7 +87,7 @@ of the red5-servlet
 <!--
 	To enable the modern whiteboard Panel you need to switch this to y
  -->
-<showmodernWhiteBoard>n</showmodernWhiteBoard>    
+<showmodernWhiteBoard>y</showmodernWhiteBoard>    
 	
 <!--
 	First day in the Week used by the Calendar

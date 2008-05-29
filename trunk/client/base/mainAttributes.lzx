@@ -221,4 +221,10 @@ and some more references to temp-objects
 -->
 <attribute name="browserPanelWidth" value="600"/>
 <attribute name="browserPanelHeight" value="500"/>
+
+<attribute name="currentSlideNo" value="0" type="number" />
+<attribute name="currentSlideTotal" value="0" type="number" />
+<attribute name="currentSlideZoom" value="0" type="number" />
+
+
 </library>
