@@ -348,10 +348,10 @@
 			]]>
 		</method>
     	
-    	<mainToolsLeftPanel y="20" name="_mainToolsPanel" />	
+    	<mainToolsLeftPanel y="20" name="_mainToolsPanel" visible="${canvas.ismoderator}"/>	
     	
     	<documentIconTopPanel x="100" y="0" name="_documentPanel"
-			visibility="visible" />
+			 visible="${canvas.ismoderator}" />
    
     </view> 
     
