@@ -14,6 +14,11 @@
   <attribute name="ratioH" value="1" />
   <handler name="oninit">
      <![CDATA[
+      //Display widget defined in mother class
+      this.syncuser.bringToFront()
+      this._loudness.bringToFront();
+      this.showuser.bringToFront();
+
       this.setAttribute("ratioW",this.width / myconferenceView.initW);;
       this.setAttribute("ratioH",this.height / myconferenceView.initH);
 
@@ -28,13 +33,6 @@
       this.applyConstraint("width", f, prop);
      ]]>
    </handler>
-
-    <!--- sets the Profile Picture -->
-    <method name="setVideouserProfilePic" args="value">
-    	if ($debug) Debug.write("### setVideouserProfilePic ",value);
-    	new videoUserProfilePic(this._chatvideoinner,{name:'userProfilePic',value:value});
-    	this.showUserProfilePic = true;
-    </method>	
 
 	<view name="_chatvideoinner" x="1" y="20" width="${parent.width-2}" height="${parent.height-20}" >
 		<view name="r" resource="chatbgitem" x="1" y="2" 
@@ -55,14 +53,7 @@
 		</baseVideoStream>
 	</view>
 
-	<view name="_loudness" x="1" width="126" height="18" y="${ parent.height-18 }" >
-		<view x="2" y="2" name="loudness" resource="speaking" opacity="0.2"
-			  onmouseover="" onmouseout="" >		
-			<labelTooltip inittwice="true" labelid="372" />
-		</view>
-	</view>
-	
-	<view name="mute" x="${ parent.width-20 }" y="${ parent.height-18 }" 
+	<view name="mute" x="3" y="${ parent.height-30 }" 
 		onmouseover="" onmouseup="" resource="mute_btn_rsc" >
 		<attribute name="isload" value="true" type="boolean" />
 		<handler name="onclick">
@@ -77,14 +68,6 @@
 			}
 		</handler>
 		<labelTooltip inittwice="true" labelid="373" />
-	</view>
-	
-	<view name="showuser" x="${ parent.width-20 }" y="2"
-		onmouseover="" onmouseup="" resource="showusercontext">
-		<handler name="onclick">
-			new remoteUserDetails(parent);
-		</handler>
-		<labelTooltip inittwice="true" labelid="68" />
 	</view>
 
 </class>

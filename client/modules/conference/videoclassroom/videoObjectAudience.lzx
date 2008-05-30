@@ -49,41 +49,7 @@
 <resource name="showusercontextcloseau" src="resources/error.png" />
 <resource name="showusercontextau" src="resources/1downarrow.png" />
 	
-<class name="videoUserProfilePicBig" extends="view" width="${parent.width}" height="${parent.height}" 
-	   clip="true" bgcolor="white">
-	<attribute name="value" value="null" />
-	<handler name="oninit">
-		<![CDATA[
-			if (this.value.picture_uri==null || this.value.picture_uri.length==0){
-				this.value.picture_uri = "d.jpg";
-			} else {
-				this.value.picture_uri = "_profile_"+value.picture_uri;
-			}
-	        var downloadurl = 'http://'+canvas.rtmphostlocal+':'+canvas.red5httpport
-	        		+'/'+canvas.webAppRootKey+'/DownloadHandler?fileName='+value.picture_uri
-	        		+'&moduleName=remoteuserprofilebig&parentPath=&room_id='
-	        		+'&remoteUserid='+this.value.user_id
-	        		+'&sid='+canvas.sessionId;
-	        this._userpic.setAttribute('src',downloadurl);	
-        ]]>
-	</handler>	
-	<image name="_userpic" stretches="both">
-	  <handler name="oninit">	   
-	    var f = function () { 
-	      this.setAttribute("width", this.parent.height*this.unstretchedwidth/this.unstretchedheight);
-	      this.setAttribute("height", this.parent.height);  
-	      myVideoBoardAudience.bringToFront();
-	    }
-	    var d = [this.parent, "width"];
-	    var e = [this.parent, "height"];
-	    this.applyConstraint("width", f, d);
-	    this.applyConstraint("height", f, e);
 
-	    this.setAttribute("width", this.parent.height*this.unstretchedwidth/this.unstretchedheight);
-	    this.setAttribute("height", this.parent.height);
-	  </handler>
-	</image>
-</class>
 <!-- #################
 	Class videoObject
 	
@@ -98,29 +64,21 @@
 	
 	<attribute name="isAssigned" value="false" type="boolean" />
 	
+	<handler name="oninit">
+          //Display widget defined in mother class
+	  this.syncuser.bringToFront();
+	  this._loudness.bringToFront();
+	  this.showuser.bringToFront();
+	</handler>
 	<handler name="onisremote" args="r">
 		this.isremote = r;
 		if (r){
 			this.mute.setAttribute('visibility','visible');
-			this.syncuser.setAttribute('visibility','hidden');
 		} else {
 			this.mute.setAttribute('visibility','hidden');
-			this.syncuser.setAttribute('visibility','visible');
 		}
 	</handler>
 
-    <method name="setVideouserProfilePic" args="value">
-    	if ($debug) Debug.write("### setVideouserProfilePic ",value);
-    	new videoUserProfilePicBig(this._chatvideoinner,{name:'userProfilePic',value:value});
-    	this.showUserProfilePic = true;
-    </method>    
-    
-    <method name="deleteVideoConfProfilePic" args="value">
-    	if ($debug) Debug.write("### deleteVideoConfProfilePic ",value);
-    	if (this.showUserProfilePic){
-    		this._chatvideoinner.userProfilePic.destroy();
-    	}
-    </method>     
     
     <view name="_bg" bgcolor="white" x="1" y="21" width="${ parent.width-2}" 
     	  height="${ parent.height-22}" />   
@@ -147,15 +105,7 @@
 	</view>
 	
 	
-	
-	<view name="_loudness" x="1" y="${parent.height-62}">
-		<view x="2" y="2" name="loudness" resource="speaking" opacity="0.2"
-			  onmouseover="" onmouseout="" >		
-			<labelTooltip inittwice="true" labelid="372" />
-		</view>
-	</view>
-	
-	<view name="mute" x="${parent.width-20 }" y="${parent.height-62}" visibility="hidden"
+	<view name="mute" x="3" y="${parent.height-62}" visibility="hidden"
 		onmouseover="" onmouseup="" resource="mute_btn_rsc" >
 		<attribute name="isload" value="true" type="boolean" />
 		<handler name="onclick">
@@ -172,31 +122,12 @@
 		<labelTooltip inittwice="true" labelid="373" />
 	</view>	
 	
-	<view x="${ parent.width-20 }" y="2" name="showuser" resource="showusercontextau"
-		onmouseover="" onmouseup="">
-		<handler name="onclick">
-			new remoteUserDetails(parent);
-		</handler>
-		<labelTooltip inittwice="true" labelid="68" />
-	</view>
-	
 	<simpleLabelButton name="_sendInvitation" x="2" y="${parent.height-22}" width="200" labelid="213" >
 		<handler name="onclick">
 			new inviteMainWindow(canvas.main_content._content.inner);
 		</handler>
 	</simpleLabelButton>
 	
-	
-	<view name="syncuser" x="${ parent.width-20 }" y="${parent.height-62}" visibility="hidden"
-		onmouseover="" onmouseup="" resource="resyncuser_rsc">
-		<handler name="onclick">
-			//new videoInfoStuff(parent);
-			//if ($debug) Debug.write(this);
-			parent.resetValues();
-			new editRecordStream(canvas.main_content._content.inner,{isSyncUpdate:true});	
-		</handler>
-		<labelTooltip labelid="540" />
-	</view>	
     
 </class>
 

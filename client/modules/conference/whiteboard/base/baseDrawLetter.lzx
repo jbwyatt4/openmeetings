@@ -15,7 +15,6 @@
 	
 	<method name="letterObjectFree" args="obj">
 		this.setAttribute('letterObjectIsActive',false);
-		this.setModus('hand');
 	</method>
 	<method name="letterObjectClose" args="obj">
 		this.setAttribute('letterObjectIsActive',true);

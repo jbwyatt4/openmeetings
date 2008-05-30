@@ -2,7 +2,7 @@
 <library>
 
 <class name="videoUserProfilePic" extends="view" x="1" y="2" width="${parent.width}" height="${parent.height}" 
-	   clip="true" bgcolor="black">
+	   clip="true" bgcolor="white">
 	<attribute name="value" value="null" />
 	<handler name="oninit">
 		<![CDATA[
@@ -25,14 +25,12 @@
 	    var f = function () { 
 	      this.setAttribute("width", this.parent.height*this.unstretchedwidth/this.unstretchedheight);
 	      this.setAttribute("height", this.parent.height);  
-	      myVideoBoardAudience.bringToFront();
 	    }
 	    var d = [this.parent, "width"];
 	    var e = [this.parent, "height"];
 	    this.applyConstraint("width", f, d);
 	    this.applyConstraint("height", f, e);
-
-	    this.setAttribute("width", this.parent.height*this.unstretchedwidth/this.unstretchedheight);
+	    this.setAttribute("width", this.parent.width);
 	    this.setAttribute("height", this.parent.height);
 	  </handler>
 	</image>
