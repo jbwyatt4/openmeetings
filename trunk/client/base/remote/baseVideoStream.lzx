@@ -33,6 +33,9 @@
 		@keywords final -->
 	<attribute name="soundRefMC" value="null" />
 	
+	<!-- save value for restart -->
+        <attribute name="streamName" />
+        <attribute name="delay" />
 	<!--- @keywords private -->
 	<method name="createStream">
 		this._ns =  new NetStream(this._findnc());
@@ -64,6 +67,8 @@
 	 -->
 	<method name="playStream" args="streamName,delay">
 		<![CDATA[
+			this.streamName=streamName;
+			this.delay=delay;
 			if (this._ns!=null){
 				this.stop();
 			}
@@ -137,6 +142,10 @@
 		}
 	</method>
 	
+	<method name="restart">
+	     this.stop();
+	     this.playStream(this.streamName ,this.delay);
+	</method>
 	<!---
 		bufferTime : Number [read-only]
 		The number of seconds assigned to the buffer by NetStream.setBufferTime(). 

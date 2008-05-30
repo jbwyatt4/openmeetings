@@ -474,7 +474,7 @@
         <netRemoteCallHib name="closeStream" funcname="closeStream">
             <handler name="ondata" args="value">
                 //The onResult-Handler will be called be the rtmpconnection
-                //Debug.write("closeStream: ",value);
+                Debug.write("**** closeStream: ",value);
                 //free the VideoContainer
                 canvas._videocontainer.closeStreamClient(value.publicSID); 
                 canvas.setAttribute('numberofpartners',canvas.getAttribute('numberofpartners')-1);       

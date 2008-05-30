@@ -29,6 +29,7 @@
 	
 	<handler name="onisremote" args="r">
 		this.isremote = r;
+                //the mute attribute may not exist
 		if (r) {
 			//this.message.setAttribute('visibility','hidden');
 			this.showuser.setAttribute('visibility','visible');
@@ -52,19 +53,35 @@
     
     <!--- resets all values and stops the streaming -->
     <method name="resetValues">
-    	this.setAttribute('chatpartnername','');
+      <![CDATA[
     	this.clientVars=null;
-    	if (this.showUserProfilePic){
+    	if (this.showUserProfilePic && !this.isremote){
     		this._chatvideoinner.userProfilePic.destroy();
     		this.showUserProfilePic = false;
     	}
     	if ($debug) Debug.write("resetValues: ",this.isremote);
     	if (this.isremote){
-    		this._chatvideoinner._videostream.stop();
+    		this._chatvideoinner._videostream.restart();
     	} else {
     		this._chatvideoinner._videostream.stop();
     	}
+     ]]>
     </method>
+    <method name="setVideouserProfilePic" args="value">
+    	if ($debug) Debug.write("### setVideouserProfilePic ",value);
+    	this.deleteVideoConfProfilePic(value);
+    	new videoUserProfilePic(this._chatvideoinner,{name:'userProfilePic',value:value});
+    	this.showUserProfilePic = true;
+    </method>    
+    <method name="deleteVideoConfProfilePic" args="value">
+    	if ($debug) Debug.write("### deleteVideoConfProfilePic ",value);
+        Debug.write("delete ",this.showUserProfilePic);
+    	if (this.showUserProfilePic){
+    		this._chatvideoinner.userProfilePic.destroy();
+    		this.showUserProfilePic = false;
+    	}
+    </method>     
+
 	
 	<view name="_innertop" width="${parent.width-2 }" 
 		  height="18" x="1" y="1" bgcolor="$once{ canvas.basebgcolorizer }">
@@ -72,6 +89,31 @@
   			  width="$once{ parent.width-2 }" fgcolor="white"
   			fontsize="9" />
 	</view>	
+	<view name="syncuser" x="${ parent.width-20 }" y="${parent.height*0.85}"
+		onmouseover="" onmouseup="" resource="resyncuser_rsc">
+		<handler name="onclick">
+			parent.resetValues();
+			if(!this.parent.isremote) {
+		           new editRecordStream(canvas.main_content._content.inner,{isSyncUpdate:true});
+		        }
+		</handler>
+		<labelTooltip labelid="540" />
+	</view>	
+	<view name="_loudness" x="1" y="${parent.height*0.85}">
+		<view x="2" y="2" name="loudness" resource="speaking" opacity="0.2"
+			  onmouseover="" onmouseout="" >		
+			<labelTooltip inittwice="true" labelid="372" />
+		</view>
+	</view>
+
+	<view name="showuser" x="${ parent.width-20 }" y="2"
+		onmouseover="" onmouseup="" resource="showusercontext">
+		<handler name="onclick">
+			new remoteUserDetails(parent);
+		</handler>
+		<labelTooltip inittwice="true" labelid="68" />
+	</view>
+
 
 </class>
 
