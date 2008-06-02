@@ -4,17 +4,57 @@
 = Linux (Debian,Ubuntu) =
 
 = Open Office 2.4 Debian, Ubuntu= 
-Ther are some improvements related to Openoffice 2.4 version. If you have to run old versions of Openoffice for any reason, please find the old section below.
+There are some improvements related to Openoffice 2.4 version. If you have to run old versions of Openoffice for any reason, please find the old section below. With 2.4, no more xvfb framebuffer needed.
 
-Installation steps (based on Etch 4.0 i386);
-#Set backports for packages
-*Check your Debian version, find suitable backport source*
-vi(or nano or pico or your very favorite editor) /etc/apt/sources.list
-add this line
-deb http://www.backports.org/debian etch-backports main contrib non-fre
-apt-get update
+===Installation steps (based on Etch 4.0 i386)===
+  # Set backports for packages
+  * Check your Debian version, find suitable backport source
+  * vi(or nano or pico or your very favorite editor) /etc/apt/sources.list
+  * add this line
+  * deb http://www.backports.org/debian etch-backports main contrib non-free
+  * run apt-get update
 
-#
+  # Install packages
+  * Be sure all packages tagged with 2.4.0-4~bpo40+1
+  * openoffice.org-headless, 
+  * openoffice.org-writer, openoffice.org-calc, openoffice.org-impress, openoffice.org-draw, openoffice.org-math, openoffice.org-filter-mobiledev, openoffice.org-filter-binfilter, msttcorefonts, pstoedit, libpaper-utils, ttf-dejavu
+
+  # Write startup script for test
+  * vi ooo.sh
+  
+{{{ 
+unset DISPLAY
+sudo -H -u userx /usr/lib/openoffice/program/soffice "-accept=socket,host=localhost,port=8100;urp;StarOffice.ServiceManager" -nologo -headless -nofirststartwizard
+}}}
+  * chmod +x ooo.sh
+
+  # Run the oOo server
+  * sh ooo.sh
+  * Check if server started with `netstat -an | grep 8100`
+  * Should seem like `tcp        0      0 127.0.0.1:8100          0.0.0.0:*               LISTEN`
+
+  # Test the conversion from command line 
+  * cd  /usr/lib/red5/webapps/openmeetings/jod/
+  * cp /home/userx/testme.ppt . (figure out the copy ppt file to your server, winscp?)
+  * java -jar jodconverter-cli-2.2.0.jar -f pdf testme.ppt
+
+{{{
+com.artofsolving.jodconverter.openoffice.connection.AbstractOpenOfficeConnection connect
+INFO: connected
+com.artofsolving.jodconverter.openoffice.connection.AbstractOpenOfficeConnection disposing
+INFO: disconnected
+}}}
+
+  # Login to openmeetings and check the conversion from there too.
+  * 
+
+
+
+    
+
+
+
+  
 
 
 
