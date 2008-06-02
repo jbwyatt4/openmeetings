@@ -8,5 +8,5 @@ _you can send new entries to the Mailing-List, please add a short description ab
 
 _you can send new entries to the Mailing-List, please add a short description about yourself_
 
-  * Jai Gupta, contact: htto://www.jaigupta.com,
+  * Jai Gupta, contact: http://www.jaigupta.com,
   I also have 3 year experience in e-learning including 2 year experience on Moodle.
