@@ -259,6 +259,7 @@
 				<exclude name="**/*.png"/>
 				<exclude name="**/*.vm"/>
 				<exclude name="hibernate.cfg.xml"/>
+				<exclude name="log4j.properties"/>
 			</fileset>
 			<manifest>
 				<attribute name="Built-By" value="OpenMeetings - http://openmeetings.googlecode.com"/>
