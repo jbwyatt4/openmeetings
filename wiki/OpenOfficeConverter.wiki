@@ -1,7 +1,30 @@
 #summary OpenOffice Converter Installation instructions
-#labels Phase-Support
+#labels Phase-Documentation,Installation
 
 = Linux (Debian,Ubuntu) =
+
+= Open Office 2.4 Debian, Ubuntu= 
+Ther are some improvements related to Openoffice 2.4 version. If you have to run old versions of Openoffice for any reason, please find the old section below.
+
+Installation steps (based on Etch 4.0 i386);
+#Set backports for packages
+*Check your Debian version, find suitable backport source*
+vi(or nano or pico or your very favorite editor) /etc/apt/sources.list
+add this line
+deb http://www.backports.org/debian etch-backports main contrib non-fre
+apt-get update
+
+#
+
+
+
+
+
+
+
+
+
+
 
 = Install Open Office Service on Debian/(K)Ubuntu =
   # Install OpenOffice
