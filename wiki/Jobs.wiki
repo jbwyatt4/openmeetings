@@ -1,4 +1,4 @@
-#summary People who offer or who search OpenMeetings Jobs
+#summary People who offer or who search Jobs around OpenMeetings
 
 = Job offers =
 
