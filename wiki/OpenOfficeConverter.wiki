@@ -1,6 +1,8 @@
 #summary OpenOffice Converter Installation instructions
 #labels Phase-Documentation,Installation
 
+=This howto is still in progress adn unfinished =
+
 = Linux (Debian,Ubuntu) =
 
 = Open Office 2.4 Debian, Ubuntu= 
