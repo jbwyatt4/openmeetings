@@ -13,4 +13,7 @@
         <level value="DEBUG" />
         <appender-ref ref="FILE" />
     </root>
+   <logger name="org.hibernate">
+		<level value="OFF"/>
+   </logger>	
 </configuration>
