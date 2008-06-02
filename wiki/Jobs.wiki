@@ -1,0 +1,9 @@
+#summary People who offer or who search OpenMeetings Jobs
+
+= Job offers =
+
+_you can send new entries to the Mailing-List, please add a short description about your project_
+
+= Job seekers =
+
+_you can send new entries to the Mailing-List, please add a short description about yourself_
