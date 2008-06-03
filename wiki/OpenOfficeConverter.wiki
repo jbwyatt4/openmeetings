@@ -1,12 +1,10 @@
 #summary OpenOffice Converter Installation instructions
 #labels Phase-Documentation,Installation
 
-=This howto is still in progress adn unfinished =
-
 = Linux (Debian,Ubuntu) =
 
-= Open Office 2.4 Debian, Ubuntu= 
-There are some improvements related to Openoffice 2.4 version. If you have to run old versions of Openoffice for any reason, please find the old section below. With 2.4, no more xvfb framebuffer needed.
+== Open Office 2.4 Debian, Ubuntu ==
+There are some improvements related to Openoffice 2.4 version. If you have to run old versions of Openoffice for any reason, *please find the old section below*. With 2.4, no more xvfb framebuffer needed.
 
 ===Installation steps (based on Etch 4.0 i386)===
   # Set backports for packages
@@ -19,27 +17,28 @@ There are some improvements related to Openoffice 2.4 version. If you have to ru
   # Install packages
   * Be sure all packages tagged with 2.4.0-4~bpo40+1
   * openoffice.org-headless, 
-  * openoffice.org-writer, openoffice.org-calc, openoffice.org-impress, openoffice.org-draw, openoffice.org-math, openoffice.org-filter-mobiledev, openoffice.org-filter-binfilter, msttcorefonts, pstoedit, libpaper-utils, ttf-dejavu
+  * openoffice.org-base, openoffice.org-writer, openoffice.org-calc, openoffice.org-impress, openoffice.org-draw, openoffice.org-math, openoffice.org-filter-mobiledev, openoffice.org-filter-binfilter, msttcorefonts, pstoedit, libpaper-utils, ttf-dejavu
 
   # Write startup script for test
   * vi ooo.sh
   
 {{{ 
 unset DISPLAY
-sudo -H -u userx /usr/lib/openoffice/program/soffice "-accept=socket,host=localhost,port=8100;urp;StarOffice.ServiceManager" -nologo -headless -nofirststartwizard
+/usr/lib/openoffice/program/soffice "-accept=socket,host=localhost,port=8100;urp;StarOffice.ServiceManager" -nologo -headless -nofirststartwizard
 }}}
   * chmod +x ooo.sh
 
-  # Run the oOo server
+  # Run the oOo server as root.
   * sh ooo.sh
   * Check if server started with `netstat -an | grep 8100`
-  * Should seem like `tcp        0      0 127.0.0.1:8100          0.0.0.0:*               LISTEN`
+  * Should seem like `tcp 0 0 127.0.0.1:8100    0.0.0.0:*    LISTEN`
+  * Check you have soffice process running `ps aux | grep soffice`
 
   # Test the conversion from command line 
   * cd  /usr/lib/red5/webapps/openmeetings/jod/
   * cp /home/userx/testme.ppt . (figure out the copy ppt file to your server, winscp?)
   * java -jar jodconverter-cli-2.2.0.jar -f pdf testme.ppt
-
+  * The result normally should be like below
 {{{
 com.artofsolving.jodconverter.openoffice.connection.AbstractOpenOfficeConnection connect
 INFO: connected
@@ -48,27 +47,31 @@ INFO: disconnected
 }}}
 
   # Login to openmeetings and check the conversion from there too.
-  * 
+  * Be sure that you select correct file type to convert. For example, pdf files NOT converted by OO but with swftools pdf2swf. Check available file formats from http://www.artofsolving.com/opensource/jodconverter
+
+  ===Check List, Pay ATTENTION to this List!!!===
+  * run ooo.sh as root otherwise converted document cant be written.
+  * Dont mess with directory permissions of upload, uploadtemp and jod. DO NOT left any file world writable on your behind.
+  * If your app name is other then "openmeetings" you should find 
+webapp/src/app/org/openmeetings/app/remote/Application.java line 66 and change to your context (will be fixed in svn)
+  * check webapps/openmeetings/jod/ dir. You'll see 
+    * BATCHTHUMB_date_time_stamp_thumbnail.sh
+    * PDFCONVERT_date_time_stamp_jodconverter.sh
+    * SWFCONVERT_date_time_stamp_swfconverter.sh
+    * THUMB_date_time_stamp_thumbnail.sh
+  * Those files created *on the fly*. Do not attempt to play with jodconverter2.sh
+  * Check command line error codes;
+    * com.sun.star.task.ErrorCodeIOException; Be sure all packages installed, check ooo.sh run by root.
+    * com.sun.star.lang.IllegalArgumentException: URL seems to be an unsupported one; Be sure all packages installed.
+  * Always watch openmeetings.log to see what really goes on. `tail -f  /usr/lib/red5/openmeetings.log` from your console.
 
 
-
-    
-
-
-
-  
+  ===Todo List===
+  * Create Debian init script for safe oOo operation
+  * Understand this, why numbered list and bullet item couldnt be used together and always you have repeated number one in wiki :)
 
 
-
-
-
-
-
-
-
-
-
-= Install Open Office Service on Debian/(K)Ubuntu =
+= Install Open Office Service on Debian/(K)Ubuntu Old Versions prior to 2.3 =
   # Install OpenOffice
 {{{
 sudo apt-get install xvfb openoffice.org
@@ -132,3 +135,5 @@ http://www.artofsolving.com/node/11
 = Links =
   * http://www.artofsolving.com/node/10
   * http://wiki.conzul.de/index.php/OpenOffice2.x
+  * http://www.artofsolving.com/opensource/jodconverter
+  * http://packages.debian.org/etch-backports/openoffice.org
