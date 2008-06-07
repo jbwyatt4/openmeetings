@@ -1,68 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library>
 
-<class name="drawArrowWhiteBoard" resource="drawarrow_rsc" >
-	
-	<!-- Not needed anymore, use LzView.setColor instead
-	<method name="setTint" args="color, brightness">
-	    <![CDATA[
-	    if (color != "" && color != null){
-	        if (brightness == null) { brightness = 0; }
-	        var rgb = color;
-	        var red=(rgb >> 16) & 0xFF;
-	        var green=(rgb >> 8) & 0xFF;
-	        var blue=rgb & 0xFF;
-
-	        this.setColorTransform( { ra : red, ga : green, ba : blue,
-	                            		rb : 0, gb : 0, bb : 100 } );
-	    }
-	    ]]>
-	</method>
-	 -->
-	 
-</class>
-
-<class name="drawViewNew" extends="drawview" cachebitmap="false" x="-1" y="-1" >
-	
-	<attribute name="typeOfObject" value="paint" type="string" />
-
-    <attribute name="initwidth" value="0" type="number" />
-    <attribute name="initheight" value="0" type="number" />
-    
-    <handler name="oninit">
-        this.initwidth=this.width;
-        this.initheight=this.height;
-    </handler>
-    
-	<handler name="onwidth">
-        <![CDATA[
-        if(this.name.indexOf('line')>=0 || this.name.indexOf('uline')>=0 || (this.name.indexOf('drawarrow')>=0 && this.isinited) || this.name.indexOf('paint')>=0 || this.name.indexOf('rectangle')>=0 || this.name.indexOf('ellipse')>=0 ) {
-        	if (this.isinited) {
-        		this.getMCRef()._xscale = (this.width/this.initwidth)*100;
-        	}
-        }
-        ]]>
-    </handler>
-    
-    <handler name="onheight">
-    	<![CDATA[
-        if(this.name.indexOf('line')>=0 || this.name.indexOf('uline')>=0 || (this.name.indexOf('drawarrow')>=0 && this.isinited) || this.name.indexOf('paint')>=0  || this.name.indexOf('rectangle')>=0 || this.name.indexOf('ellipse')>=0 ) {
-        	if (this.isinited) {
-        		this.getMCRef()._yscale = (this.height/this.initheight)*100;  
-        	}
-        }
-        ]]>   
-    </handler>
-    <!-- 
-    <dragstate name="dragger" drag_axis="both"
-	    drag_min_x="0"
-	    drag_max_x="$once{parent.width - this.width}"
-	    drag_min_y="0"
-	    drag_max_y="$once{parent.height - this.height}">
-    </dragstate>
-     -->
-</class>
-
 <class name="baseDraw" extends="drawview" cachebitmap="false" clickable="true" >
 
 	<attribute name="currentlayer" value="null" />
@@ -406,6 +344,12 @@
              
 	<handler name="onmousedown" >
 		//Debug.write("onmousedown this.drawmodus: ",this.drawmodus);
+		
+		if (this.letterObjectIsActive){
+			this.currentletterObj.drawtoArray();
+			//bool = true;
+		}	
+		
 		if(this.drawmodus=="hand"){
 			this.doSetHandBodus();
 		} else if(this.drawmodus=="paint"){
@@ -436,17 +380,19 @@
   	 		this.startx = currentlayer.getMouse('x');
 			this.starty = currentlayer.getMouse('y'); 				
             mousetracker_del.register(LzIdle,'onidle');
+        } else if (this.drawmodus == 'letter') {
+			this.startLetter();
+  	 		this.startx = currentlayer.getMouse('x');
+			this.starty = currentlayer.getMouse('y'); 				
+            mousetracker_del.register(LzIdle,'onidle');
         }
 	</handler>
 
 	<handler name="onmouseup" >
         if ($debug) Debug.write("onmouseup this.drawmodus: ",this.drawmodus);
 		<![CDATA[	
-		var bool = false;
-		if (this.letterObjectIsActive){
-			this.currentletterObj.drawtoArray();
-			bool = true;
-		}	
+		//var bool = false;
+		
 		if(this.drawmodus=="paint"){
 			this.endPaint();
 			mousetracker_del.unregisterAll();
@@ -460,10 +406,12 @@
 			this.endUline();
 			mousetracker_del.unregisterAll();
 		} else if(this.drawmodus=="letter"){
-			if (!this.letterObjectIsActive && !bool){
-				this.currentletterObj = new baseDrawWords(canvas,{refObj:this,x:canvas.getMouse('x'),
-					y:canvas.getMouse('y')});
-			}
+			//if (!this.letterObjectIsActive && !bool){
+			//	this.currentletterObj = new baseDrawWords(canvas,{refObj:this,x:canvas.getMouse('x'),
+			//		y:canvas.getMouse('y')});
+			//}
+			this.endLetter();
+			mousetracker_del.unregisterAll();
 		} else if (this.drawmodus == 'rectangle') {
 			this.endRect();
         	mousetracker_del.unregisterAll();
@@ -542,6 +490,13 @@
 			this.endx = this.mx;
 			this.endy = this.my;
 			this.drawellipse (this.startx, this.starty, this.mx, this.my);			
+		} else if (this.drawmodus == 'letter') {
+	    	this.currentlayer.destroy();
+	    	this.startLetter();
+			// stretchy rect mode
+			this.endx = this.mx;
+			this.endy = this.my;
+			this.drawletterBoundingBox (this.startx, this.starty, this.mx, this.my);			
 		}	
     	]]>
     </method>

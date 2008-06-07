@@ -13,8 +13,14 @@
 	
 	<attribute name="edittextLetterObject" value="null" />
 	
+	<attribute name="edittextLetter" value="false" type="boolean" />
+	
 	<method name="letterObjectFree" args="obj">
 		this.setAttribute('letterObjectIsActive',false);
+		if (this.edittextLetter){
+			this.edittextLetter = false;
+			this.setModus('hand');
+		}
 	</method>
 	<method name="letterObjectClose" args="obj">
 		this.setAttribute('letterObjectIsActive',true);
@@ -83,7 +89,9 @@
 			if (!this.letterObjectIsActive){
 			    //Debug.write("editTextByValues",height);
 			    this.edittextLetterObject = obj;
-				this.currentletterObj = new baseDrawWords(canvas,{refObj:this,x:x,y:y,initTextName:txtName,inittext:txt,width:width,height:height});
+				this.currentletterObj = new baseDrawWords(canvas,{refObj:this,x:x,y:y,
+					initTextName:txtName,inittext:txt,width:width,height:height});
+				this.edittextLetter = true;
 			}	
 		]]>
 	</method>
@@ -110,6 +118,55 @@
 		this.updateByEditLetterObject();
 		//this.setModus('hand');
 	</method>	
+	
+	<method name="startLetter">
+    	this.currentlayer = new drawViewNew(this,{name:'letterTemp'+this.getCounter(),width:this.width+2,height:this.height+2});
+	</method>
+	
+	<method name="drawletterBoundingBox" args="x1,y1,x2,y2">
+   		<![CDATA[
+    		
+    		currentlayer.lineWidth = 1;
+    		currentlayer.beginPath();
+    		currentlayer.moveTo(x1,y1);
+    		currentlayer.lineTo(x1,y2);
+    		currentlayer.lineTo(x2,y2);
+    		currentlayer.lineTo(x2,y1);
+    		currentlayer.lineTo (x1,y1);
+    		currentlayer.closePath();
+    		
+    		currentlayer.strokeStyle = 0x000000;
+    		currentlayer.stroke();
+    		
+    	]]>   
+  	</method>    
+  	
+  	<method name="endLetter">
+  		<![CDATA[
+	  		if ($debug) Debug.write("endLetter: ",this.currentlayer);
+	  		this.currentlayer.destroy();
+	  		var xProp = this.getAttributeRelative('x',canvas);
+	  		var yProp = this.getAttributeRelative('y',canvas);
+	  		if (this.startx <= this.endx){
+	  			var stx = this.startx;
+	  		} else {
+	  			var stx = this.endx;
+	  		}
+	  		if (this.starty <= this.endy){
+	  			var sty = this.starty;
+	  		} else {
+	  			var sty = this.endy;
+	  		}
+	  		var width = Math.abs(this.startx-this.endx);
+	  		var height = Math.abs(this.starty-this.endy);
+	  		if (width < 20 && height < 20){
+	  			width = 160;
+	  			height = 30;
+	  		}
+			this.currentletterObj = new baseDrawWords(canvas,{refObj:this,x:xProp+stx,
+					y:yProp+sty,width:width,height:height});
+		]]>
+  	</method>
 	
 	
 	<method name="updateByEditLetterObject" >
