@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library>
 
+	<include href="drawViewNew.lzx" />
 	<include href="baseDraw.lzx" />
 	<include href="swfResourceView.lzx" />
 	<include href="baseDrawObject.lzx" />
