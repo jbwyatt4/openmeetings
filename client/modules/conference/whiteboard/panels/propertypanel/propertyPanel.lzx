@@ -28,45 +28,45 @@
 		if ($debug) Debug.write("loadPanelByModus drawmodus: ",drawArea.drawmodus);
 		this.ignoreUpdates = true;
 		if (drawArea.drawmodus == 'paint') {
-			this.lineColorChoose.setSelectedColor(drawArea.currentlayerstroke);
-			this.changeWidthSlider.setSliderValue(drawArea.currentlayerlineWidth);
-			this.fillColorChoose.setEnabled(false);
-			this.changeOpacitySlider.setEnabled(false);
+			this._content.lineColorChoose.setSelectedColor(drawArea.currentlayerstroke);
+			this._content.changeWidthSlider.setSliderValue(drawArea.currentlayerlineWidth);
+			this._content.fillColorChoose.setEnabled(false);
+			this._content.changeOpacitySlider.setEnabled(false);
 		} else if (drawArea.drawmodus == 'line') {
-			this.lineColorChoose.setSelectedColor(drawArea.currentlinestroke);
-			this.changeWidthSlider.setSliderValue(drawArea.currentlinelineWidth);
-			this.fillColorChoose.setEnabled(false);
-			this.changeOpacitySlider.setEnabled(false);
+			this._content.lineColorChoose.setSelectedColor(drawArea.currentlinestroke);
+			this._content.changeWidthSlider.setSliderValue(drawArea.currentlinelineWidth);
+			this._content.fillColorChoose.setEnabled(false);
+			this._content.changeOpacitySlider.setEnabled(false);
 		} else if (drawArea.drawmodus == 'uline') {
-			this.lineColorChoose.setSelectedColor(drawArea.currentulinestroke);
-			this.changeWidthSlider.setSliderValue(drawArea.currentulinelineWidth);
-			this.fillColorChoose.setEnabled(false);
-			this.changeOpacitySlider.setEnabled(false);
+			this._content.lineColorChoose.setSelectedColor(drawArea.currentulinestroke);
+			this._content.changeWidthSlider.setSliderValue(drawArea.currentulinelineWidth);
+			this._content.fillColorChoose.setEnabled(false);
+			this._content.changeOpacitySlider.setEnabled(false);
 		} else if (drawArea.drawmodus == 'drawarrow') {
-			this.lineColorChoose.setEnabled(false);
-			this.changeWidthSlider.setEnabled(false);
-			this.fillColorChoose.setSelectedColor(drawArea.currentdrawarrowlinestroke);
-			this.changeOpacitySlider.setEnabled(false);
+			this._content.lineColorChoose.setEnabled(false);
+			this._content.changeWidthSlider.setEnabled(false);
+			this._content.fillColorChoose.setSelectedColor(drawArea.currentdrawarrowlinestroke);
+			this._content.changeOpacitySlider.setEnabled(false);
 		} else if (drawArea.drawmodus == 'rectangle') {
-			this.lineColorChoose.setSelectedColorWithDis(drawArea.currentrectanglestroke,
+			this._content.lineColorChoose.setSelectedColorWithDis(drawArea.currentrectanglestroke,
 				drawArea.currentrectanglestrokeDis);
-			this.fillColorChoose.setSelectedColorWithDis(drawArea.currentrectanglestrokeFill,
+			this._content.fillColorChoose.setSelectedColorWithDis(drawArea.currentrectanglestrokeFill,
 				drawArea.currentrectanglestrokeFillDis);
-			this.changeWidthSlider.setSliderValue(drawArea.currentrectangleineWidth);
-			this.changeOpacitySlider.setEnabled(false);
+			this._content.changeWidthSlider.setSliderValue(drawArea.currentrectangleineWidth);
+			this._content.changeOpacitySlider.setEnabled(false);
 		} else if (drawArea.drawmodus == 'ellipse') {
-			this.lineColorChoose.setSelectedColorWithDis(drawArea.currentellipsestroke,
+			this._content.lineColorChoose.setSelectedColorWithDis(drawArea.currentellipsestroke,
 				drawArea.currentellipsestrokeDis);
-			this.fillColorChoose.setSelectedColorWithDis(drawArea.currentellipsestrokeFill,
+			this._content.fillColorChoose.setSelectedColorWithDis(drawArea.currentellipsestrokeFill,
 				drawArea.currentellipsestrokeFillDis);
-			this.changeWidthSlider.setSliderValue(drawArea.currentellipselineWidth);
-			this.changeOpacitySlider.setEnabled(false);
+			this._content.changeWidthSlider.setSliderValue(drawArea.currentellipselineWidth);
+			this._content.changeOpacitySlider.setEnabled(false);
 		} else {
 			if ($debug) Debug.warn("Not known drawmodus",drawArea.drawmodus);
-			this.lineColorChoose.setEnabled(false);
-			this.changeWidthSlider.setEnabled(false);
-			this.fillColorChoose.setEnabled(false);
-			this.changeOpacitySlider.setEnabled(false);
+			this._content.lineColorChoose.setEnabled(false);
+			this._content.changeWidthSlider.setEnabled(false);
+			this._content.fillColorChoose.setEnabled(false);
+			this._content.changeOpacitySlider.setEnabled(false);
 		}
 		this.ignoreUpdates = false;
 	</method>
@@ -74,90 +74,94 @@
 	<method name="updateProperties">
 		if (!this.ignoreUpdates){
 			if (canvas._drawarea.drawmodus == 'paint'){
-				canvas._drawarea.currentlayerstroke = this.lineColorChoose.selectedColor;
-				canvas._drawarea.currentlayerlineWidth = this.changeWidthSlider.initialNumber;
+				canvas._drawarea.currentlayerstroke = this._content.lineColorChoose.selectedColor;
+				canvas._drawarea.currentlayerlineWidth = this._content.changeWidthSlider.initialNumber;
 			} else if (canvas._drawarea.drawmodus == 'line'){
-				canvas._drawarea.currentlinestroke = this.lineColorChoose.selectedColor;
-				canvas._drawarea.currentlinelineWidth = this.changeWidthSlider.initialNumber;
+				canvas._drawarea.currentlinestroke = this._content.lineColorChoose.selectedColor;
+				canvas._drawarea.currentlinelineWidth = this._content.changeWidthSlider.initialNumber;
 			} else if (canvas._drawarea.drawmodus == 'uline'){
-				canvas._drawarea.currentulinestroke = this.lineColorChoose.selectedColor;
-				canvas._drawarea.currentulinelineWidth = this.changeWidthSlider.initialNumber;
+				canvas._drawarea.currentulinestroke = this._content.lineColorChoose.selectedColor;
+				canvas._drawarea.currentulinelineWidth = this._content.changeWidthSlider.initialNumber;
 			} else if (canvas._drawarea.drawmodus == 'drawarrow'){
-				canvas._drawarea.currentdrawarrowlinestroke = this.fillColorChoose.selectedColor;
+				canvas._drawarea.currentdrawarrowlinestroke = this._content.fillColorChoose.selectedColor;
 			} else if (canvas._drawarea.drawmodus == 'rectangle'){
-				canvas._drawarea.currentrectanglestroke = this.lineColorChoose.selectedColor;
-				canvas._drawarea.currentrectanglestrokeDis = this.lineColorChoose.selectedColorDis;
-				canvas._drawarea.currentrectanglestrokeFill = this.fillColorChoose.selectedColor;
-				canvas._drawarea.currentrectanglestrokeFillDis = this.fillColorChoose.selectedColorDis;
-				canvas._drawarea.currentrectangleineWidth = this.changeWidthSlider.initialNumber;
+				canvas._drawarea.currentrectanglestroke = this._content.lineColorChoose.selectedColor;
+				canvas._drawarea.currentrectanglestrokeDis = this._content.lineColorChoose.selectedColorDis;
+				canvas._drawarea.currentrectanglestrokeFill = this._content.fillColorChoose.selectedColor;
+				canvas._drawarea.currentrectanglestrokeFillDis = this._content.fillColorChoose.selectedColorDis;
+				canvas._drawarea.currentrectangleineWidth = this._content.changeWidthSlider.initialNumber;
 			} else if (canvas._drawarea.drawmodus == 'ellipse'){
-				canvas._drawarea.currentellipsestroke = this.lineColorChoose.selectedColor;
-				canvas._drawarea.currentellipsestrokeDis = this.lineColorChoose.selectedColorDis;
-				canvas._drawarea.currentellipsestrokeFill = this.fillColorChoose.selectedColor;
-				canvas._drawarea.currentellipsestrokeFillDis = this.fillColorChoose.selectedColorDis;
-				canvas._drawarea.currentellipselineWidth = this.changeWidthSlider.initialNumber;
+				canvas._drawarea.currentellipsestroke = this._content.lineColorChoose.selectedColor;
+				canvas._drawarea.currentellipsestrokeDis = this._content.lineColorChoose.selectedColorDis;
+				canvas._drawarea.currentellipsestrokeFill = this._content.fillColorChoose.selectedColor;
+				canvas._drawarea.currentellipsestrokeFillDis = this._content.fillColorChoose.selectedColorDis;
+				canvas._drawarea.currentellipselineWidth = this._content.changeWidthSlider.initialNumber;
 			} else {
 				if ($debug) Debug.warn("Not known drawmodus",canvas._drawarea.drawmodus);
 			}
 		}
 	</method>
 
-	<labelTextWidthTooltip name="_xvalueLabel" x="4" y="24"
-		labelid="545" labelLabelid="546" visible="${this.parent.isopen}" /> 
-	<customEdittext name="_xvalue" x="24" y="24" regexpType="number" 
-		width="40" text="0" height="24"
-		onafterCheck="parent.onUpdateBoundByText()" visible="${this.parent.isopen}" />
-	
-	<labelTextWidthTooltip name="_yvalueLabel" x="4" y="54"
-		labelid="547" labelLabelid="548" visible="${this.parent.isopen}" /> 
-	<customEdittext name="_yvalue" x="24" y="54" regexpType="number"
-		width="40" text="0" height="24"
-		onafterCheck="parent.onUpdateBoundByText()" visible="${this.parent.isopen}" />
-	
-	<labelTextWidthTooltip name="_widthvalueLabel" x="68" y="24"
-		labelid="549" labelLabelid="550" visible="${this.parent.isopen}" /> 
-	<customEdittext name="_widthvalue" x="88" y="24" regexpType="number" 
-		width="40" text="0" height="24"
-		onafterCheck="parent.onUpdateBoundByText()" visible="${this.parent.isopen}" />
-	
-	<labelTextWidthTooltip name="_heightvalueLabel" x="68" y="54"
-		labelid="551" labelLabelid="552" visible="${this.parent.isopen}" /> 
-	<customEdittext name="_heightvalue" x="88" y="54" regexpType="number"
-		width="40" text="0" height="24"
-		onafterCheck="parent.onUpdateBoundByText()" visible="${this.parent.isopen}" />
+	<view name="_content" visible="${this.parent.isopen}" >
 		
+		<labelTextWidthTooltip name="_xvalueLabel" x="4" y="24"
+			labelid="545" labelLabelid="546"  /> 
+		<customEdittext name="_xvalue" x="24" y="24" regexpType="number" 
+			width="40" text="0" height="24"
+			onafterCheck="parent.parent.onUpdateBoundByText()" />
 		
-	<lineColorChoose x="132" y="24" name="lineColorChoose" boxPosition="up" visible="${this.parent.isopen}">
-		<handler name="onselectedColor" args="sel">
-			if ($debug) Debug.write("lineColorChoose sel: ",sel);
-			parent.updateProperties();			
-		</handler>
-	</lineColorChoose>
-	
-	<fillColorChoose x="132" y="54" name="fillColorChoose" boxPosition="up" visible="${this.parent.isopen}">
-		<handler name="onselectedColor" args="sel">
-			if ($debug) Debug.write("fillColorChoose sel: ",sel);
-			parent.updateProperties();	
-		</handler>
-	</fillColorChoose>
-	
-	<changeWidthSlider x="222" y="24" name="changeWidthSlider" boxPosition="up" 
-		initialNumber="2" visible="${this.parent.isopen}">
-		<handler name="oninitialNumber" args="i">
-			//this.parent.parent.parent._drawareaMask._drawarea.setAttribute('currentlayersize',i);
-			if ($debug) Debug.write("changeWidthSlider oninitialNumber sel: ",i);
-			parent.updateProperties();	
-		</handler>
-	</changeWidthSlider> 
-	
-	<changeWidthSlider x="222" y="54" name="changeOpacitySlider" labelid="553" boxPosition="up"
-		initialNumber="100" visible="${this.parent.isopen}" >
-		<handler name="oninitialNumber" args="i">
-			//this.parent.parent.parent._drawareaMask._drawarea.setAttribute('currentlayersize',i);
-			if ($debug) Debug.write("changeOpacitySlider oninitialNumber sel: ",i);
-			parent.updateProperties();	
-		</handler>
-	</changeWidthSlider> 
+		<labelTextWidthTooltip name="_yvalueLabel" x="4" y="54"
+			labelid="547" labelLabelid="548"  /> 
+		<customEdittext name="_yvalue" x="24" y="54" regexpType="number"
+			width="40" text="0" height="24"
+			onafterCheck="parent.parent.onUpdateBoundByText()" />
+		
+		<labelTextWidthTooltip name="_widthvalueLabel" x="68" y="24"
+			labelid="549" labelLabelid="550" /> 
+		<customEdittext name="_widthvalue" x="88" y="24" regexpType="number" 
+			width="40" text="0" height="24"
+			onafterCheck="parent.parent.onUpdateBoundByText()" />
+		
+		<labelTextWidthTooltip name="_heightvalueLabel" x="68" y="54"
+			labelid="551" labelLabelid="552" /> 
+		<customEdittext name="_heightvalue" x="88" y="54" regexpType="number"
+			width="40" text="0" height="24"
+			onafterCheck="parent.parent.onUpdateBoundByText()" />
+			
+			
+		<lineColorChoose x="132" y="24" name="lineColorChoose" boxPosition="up" >
+			<handler name="onselectedColor" args="sel">
+				if ($debug) Debug.write("lineColorChoose sel: ",sel);
+				parent.parent.updateProperties();			
+			</handler>
+		</lineColorChoose>
+		
+		<fillColorChoose x="132" y="54" name="fillColorChoose" boxPosition="up" >
+			<handler name="onselectedColor" args="sel">
+				if ($debug) Debug.write("fillColorChoose sel: ",sel);
+				parent.parent.updateProperties();	
+			</handler>
+		</fillColorChoose>
+		
+		<changeWidthSlider x="222" y="24" name="changeWidthSlider" boxPosition="up" 
+			initialNumber="2" >
+			<handler name="oninitialNumber" args="i">
+				//this.parent.parent.parent._drawareaMask._drawarea.setAttribute('currentlayersize',i);
+				if ($debug) Debug.write("changeWidthSlider oninitialNumber sel: ",i);
+				parent.parent.updateProperties();	
+			</handler>
+		</changeWidthSlider> 
+		
+		<changeWidthSlider x="222" y="54" name="changeOpacitySlider" labelid="553" boxPosition="up"
+			initialNumber="100" >
+			<handler name="oninitialNumber" args="i">
+				//this.parent.parent.parent._drawareaMask._drawarea.setAttribute('currentlayersize',i);
+				if ($debug) Debug.write("changeOpacitySlider oninitialNumber sel: ",i);
+				parent.parent.updateProperties();	
+			</handler>
+		</changeWidthSlider> 
+		
+	</view>
 
 </class>
      
