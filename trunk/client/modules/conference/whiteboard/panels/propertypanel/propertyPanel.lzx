@@ -8,10 +8,10 @@
 	
 	<method name="setObjectBounds" args="x,y,width,height">
 		if ($debug) Debug.write("setObjectBounds: ",x,y,width,height);
-		this._xvalue.setText(x);
-		this._yvalue.setText(y);
-		this._widthvalue.setText(width);
-		this._heightvalue.setText(height);
+		this._content._xvalue.setText(x);
+		this._content._yvalue.setText(y);
+		this._content._widthvalue.setText(width);
+		this._content._heightvalue.setText(height);
 	</method>
 	
 	<method name="onUpdateBoundByText">
@@ -61,6 +61,13 @@
 				drawArea.currentellipsestrokeFillDis);
 			this._content.changeWidthSlider.setSliderValue(drawArea.currentellipselineWidth);
 			this._content.changeOpacitySlider.setEnabled(false);
+		} else if (drawArea.drawmodus == 'letter') {
+			this._content.lineColorChoose.setSelectedColor(drawArea.currentlayerletter);
+			this._content.fillColorChoose.setEnabled(false);
+			this._content.changeWidthSlider.setSliderValue(drawArea.currentlayersize);
+			this._content.changeOpacitySlider.setEnabled(false);
+			this._content._italic.setValue(canvas._drawarea.italic);
+			this._content._bold.setValue(canvas._drawarea.bold);
 		} else {
 			if ($debug) Debug.warn("Not known drawmodus",drawArea.drawmodus);
 			this._content.lineColorChoose.setEnabled(false);
@@ -68,6 +75,15 @@
 			this._content.fillColorChoose.setEnabled(false);
 			this._content.changeOpacitySlider.setEnabled(false);
 		}
+		
+		if (drawArea.drawmodus == 'letter'){
+			this._content._italic.setAttribute('visibility','visible');
+			this._content._bold.setAttribute('visibility','visible');			
+		} else {
+			this._content._italic.setAttribute('visibility','hidden');
+			this._content._bold.setAttribute('visibility','hidden');
+		}
+		
 		this.ignoreUpdates = false;
 	</method>
 	
@@ -96,6 +112,12 @@
 				canvas._drawarea.currentellipsestrokeFill = this._content.fillColorChoose.selectedColor;
 				canvas._drawarea.currentellipsestrokeFillDis = this._content.fillColorChoose.selectedColorDis;
 				canvas._drawarea.currentellipselineWidth = this._content.changeWidthSlider.initialNumber;
+			} else if (canvas._drawarea.drawmodus == 'letter'){
+				canvas._drawarea.setAttribute('currentlayerletter',this._content.lineColorChoose.selectedColor);
+				canvas._drawarea.setAttribute('currentlayersize',this._content.changeWidthSlider.initialNumber);
+				canvas._drawarea.italic = this._content._italic.getValue();
+				canvas._drawarea.bold = this._content._bold.getValue();
+				canvas._drawarea.doalterStyle();
 			} else {
 				if ($debug) Debug.warn("Not known drawmodus",canvas._drawarea.drawmodus);
 			}
@@ -160,6 +182,10 @@
 				parent.parent.updateProperties();	
 			</handler>
 		</changeWidthSlider> 
+
+	    <propertyPanelLetterButton name="_italic" x="286" y="24" itemResourceName="italic" />
+	    
+	    <propertyPanelLetterButton name="_bold" x="312" y="24" itemResourceName="bold" />
 		
 	</view>
 
