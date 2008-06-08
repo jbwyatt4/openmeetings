@@ -150,7 +150,8 @@
      -->
     <view width="${ parent.parent.width-2 }" height="${ parent.parent.height-23 }" 
     	  y="0" name="_drawareaMask" clip="true" bgcolor="white" >
-        <baseDrawSave y="0" name="_drawarea" width="${parent.width}" height="${parent.height}" >
+        <baseDrawSave y="0" name="_drawarea" isRemoteOID="true"
+        			  width="${parent.width}" height="${parent.height}" >
             <attribute name="initH"/>
             <attribute name="initW"/>
             <handler name="oninit">
