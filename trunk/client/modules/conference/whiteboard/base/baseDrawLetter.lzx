@@ -119,8 +119,11 @@
 		//this.setModus('hand');
 	</method>	
 	
-	<method name="startLetter">
-    	this.currentlayer = new drawViewNew(this,{name:'letterTemp'+this.getCounter(),width:this.width+2,height:this.height+2});
+	<method name="startLetter" args="oid_name">
+		if (oid_name == null) {
+			oid_name = 'letterTemp'+this.getCounter();
+		}		
+    	this.currentlayer = new drawViewNew(this,{name:oid_name,width:this.width+2,height:this.height+2});
 	</method>
 	
 	<method name="drawletterBoundingBox" args="x1,y1,x2,y2">

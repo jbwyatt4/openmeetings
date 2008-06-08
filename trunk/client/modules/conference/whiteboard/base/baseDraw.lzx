@@ -377,27 +377,27 @@
 			this.startPaint();
 			mousetracker_del.register(LzIdle,'onidle');
 		} else if(this.drawmodus=="line"){
-			this.startLine();
+			this.startLine(null);
   	 		this.startx = currentlayer.getMouse('x');
 			this.starty = currentlayer.getMouse('y'); 			
 			mousetracker_del.register(LzIdle,'onidle');
 		} else if(this.drawmodus=="uline"){
-			this.startUline();
+			this.startUline(null);
   	 		this.startx = currentlayer.getMouse('x');
 			this.starty = currentlayer.getMouse('y'); 			
 			mousetracker_del.register(LzIdle,'onidle');
 		} else if(this.drawmodus=="drawarrow"){
-			this.startDrawarrowline();
+			this.startDrawarrowline(null);
   	 		this.startx = currentlayer.getMouse('x');
 			this.starty = currentlayer.getMouse('y'); 			
 			mousetracker_del.register(LzIdle,'onidle');
 		} else if (this.drawmodus == 'rectangle') {
-			this.startRect();
+			this.startRect(null);
   	 		this.startx = currentlayer.getMouse('x');
 			this.starty = currentlayer.getMouse('y'); 				
             mousetracker_del.register(LzIdle,'onidle');
         } else if (this.drawmodus == 'ellipse') {
-			this.startEllipse();
+			this.startEllipse(null);
   	 		this.startx = currentlayer.getMouse('x');
 			this.starty = currentlayer.getMouse('y'); 				
             mousetracker_del.register(LzIdle,'onidle');
@@ -480,40 +480,45 @@
 	            this.prevy = this.my;            
 	        } 
 	    } else if (this.drawmodus=="line"){	 
+	    	var oid_name = this.currentlayer.name;
 	    	this.currentlayer.destroy();
-	    	this.startLine();
+	    	this.startLine(oid_name);
 			this.endx = this.mx;
 			this.endy = this.my;
             this.drawline(this.startx, this.starty, this.endx, this.endy);
 	    } else if (this.drawmodus=="uline"){
+	    	var oid_name = this.currentlayer.name;
 	    	this.currentlayer.destroy();
-	    	this.startUline();
+	    	this.startUline(oid_name);
 			this.endx = this.mx;
 			this.endy = this.my;
             this.drawline(this.startx, this.starty, this.endx, this.endy);
 	    } else if (this.drawmodus=="drawarrow"){	
-	    	//Debug.write(" this.currentlayer.destroy ");
+	    	var oid_name = this.currentlayer.name;
 	    	this.currentlayer.destroy();
-	    	this.startDrawarrowline();
+	    	this.startDrawarrowline(oid_name);
 			this.endx = this.mx;
 			this.endy = this.my;
 	    } else if (this.drawmodus == 'rectangle') {
+	    	var oid_name = this.currentlayer.name;
 	    	this.currentlayer.destroy();
-	    	this.startRect();
+	    	this.startRect(oid_name);
 			// stretchy rect mode
 			this.endx = this.mx;
 			this.endy = this.my;
 			this.drawrectangle (this.startx, this.starty, this.mx, this.my);
 		} else if (this.drawmodus == 'ellipse') {
+			var oid_name = this.currentlayer.name;
 	    	this.currentlayer.destroy();
-	    	this.startEllipse();
+	    	this.startEllipse(oid_name);
 			// stretchy rect mode
 			this.endx = this.mx;
 			this.endy = this.my;
 			this.drawellipse (this.startx, this.starty, this.mx, this.my);			
 		} else if (this.drawmodus == 'letter') {
+			var oid_name = this.currentlayer.name;
 	    	this.currentlayer.destroy();
-	    	this.startLetter();
+	    	this.startLetter(oid_name);
 			// stretchy rect mode
 			this.endx = this.mx;
 			this.endy = this.my;
@@ -916,9 +921,12 @@
     Line
      -->
   	
-  	<method name="startLine">
+  	<method name="startLine" args="oid_name">
 		//Debug.write("startLine ",this.startx,this.starty);
-    	this.currentlayer = new drawViewNew(this,{name:'line'+this.getCounter(),width:this.width+2,height:this.height+2});
+		if (oid_name==null) {
+			oid_name = 'line'+this.getCounter()
+		}
+    	this.currentlayer = new drawViewNew(this,{name:oid_name,width:this.width+2,height:this.height+2});
 		this.drawlineOnObject(this.currentlayer,-1,-1,0,0);
 		this.drawlineOnObject(this.currentlayer,this.width,this.height,this.width+1,this.height+1);
   	
@@ -1012,9 +1020,12 @@
 	<!-- ###########################
 	Underline
 	 -->
-    <method name="startUline">
+    <method name="startUline" args="oid_name">
+    	if (oid_name == null){
+    		oid_name = 'uline'+this.getCounter();
+    	}
 		//Debug.write("startUline ",this.startx,this.starty);
-    	this.currentlayer = new drawViewNew(this,{opacity:0.5,name:'uline'+this.getCounter(),width:this.width+2,height:this.height+2});
+    	this.currentlayer = new drawViewNew(this,{opacity:0.5,name:oid_name,width:this.width+2,height:this.height+2});
 		this.drawlineOnObject(this.currentlayer,-1,-1,0,0);
 		this.drawlineOnObject(this.currentlayer,this.width,this.height,this.width+1,this.height+1);
   	
@@ -1111,9 +1122,12 @@
 	<!-- ###########################
 	drawarrow
 	 -->
-    <method name="startDrawarrowline">
+    <method name="startDrawarrowline" args="oid_name">
     	<![CDATA[
-    	this.currentlayer = new drawViewNew(this,{name:'drawarrow'+this.getCounter(),width:this.width+2,height:this.height+2});
+    	if (oid_name == null) {
+    		oid_name = 'drawarrow'+this.getCounter();
+    	}
+    	this.currentlayer = new drawViewNew(this,{name:oid_name,width:this.width+2,height:this.height+2});
 		this.drawlineOnObject(this.currentlayer,-1,-1,0,0);
 		this.drawlineOnObject(this.currentlayer,this.width,this.height,this.width+1,this.height+1);
   		
@@ -1329,9 +1343,12 @@
     Rectangle
      -->
     
-  	<method name="startRect">
+  	<method name="startRect" args="oid_name">
+  		if (oid_name == null){
+  			oid_name = 'rectangle'+this.getCounter();
+  		}
 		//Debug.write("startRect");
-    	this.currentlayer = new drawViewNew(this,{name:'rectangle'+this.getCounter(),width:this.width+2,height:this.height+2});
+    	this.currentlayer = new drawViewNew(this,{name:oid_name,width:this.width+2,height:this.height+2});
 		this.drawlineOnObject(this.currentlayer,-1,-1,0,0);
 		this.drawlineOnObject(this.currentlayer,this.width,this.height,this.width+1,this.height+1);
   	</method>  
@@ -1339,6 +1356,7 @@
 	<method name="endRect">
 		<![CDATA[
 			////Debug.write(" this.startx, this.starty , this.endx, this.endy ",this.startx, this.starty , this.endx, this.endy);
+			var tmpName = this.currentlayer.name;
 			this.currentlayer.destroy();
 			var x = this.startx;
 			var width = this.endx - this.startx;
@@ -1353,7 +1371,7 @@
 				height = Math.abs(height);
 			}
 			
-			this.currentlayer = new drawViewNew(this,{name:'rectangle'+this.getCounter(),x:x,y:y,width:width,height:height});
+			this.currentlayer = new drawViewNew(this,{name:tmpName,x:x,y:y,width:width,height:height});
 			this.drawrectangleHistory(this.currentlayer,0,0,width,height,this.currentrectanglestroke,this.currentrectangleineWidth,this.currentrectanglestrokeFill,this.currentrectanglestrokeDis,this.currentrectanglestrokeFillDis);
 			this.currentlayer.setAttribute('stretches','both');
 			this.drawrectregisterFinal(this.currentlayer.name,this.currentrectanglestroke,this.currentrectangleineWidth,this.currentrectanglestrokeFill,this.currentrectanglestrokeDis,this.currentrectanglestrokeFillDis,x,y,width,height);
@@ -1438,9 +1456,12 @@
   	<!-- ################
   	Ellipse
   	 -->
-  	<method name="startEllipse">
+  	<method name="startEllipse" args="oid_name">
 		//Debug.write("startEllipse");
-    	this.currentlayer = new drawViewNew(this,{name:'ellipse'+this.getCounter(),width:this.width+2,height:this.height+2});
+		if (oid_name == null) {
+			oid_name = 'ellipse'+this.getCounter();
+		}
+    	this.currentlayer = new drawViewNew(this,{name:oid_name,width:this.width+2,height:this.height+2});
 		this.drawlineOnObject(this.currentlayer,-1,-1,0,0);
 		this.drawlineOnObject(this.currentlayer,this.width,this.height,this.width+1,this.height+1);
   	</method>    
@@ -1448,6 +1469,7 @@
   	<method name="endEllipse">
   		<![CDATA[
 			////Debug.write(" this.startx, this.starty , this.endx, this.endy ",this.startx, this.starty , this.endx, this.endy);
+			var tmpName = this.currentlayer.name;
 			this.currentlayer.destroy();
 			var x = this.startx;
 			var width = this.endx - this.startx;
@@ -1462,7 +1484,7 @@
 				height = Math.abs(height);
 			}
 			
-			this.currentlayer = new drawViewNew(this,{name:'ellipse'+this.getCounter(),x:x,y:y,width:width,height:height});
+			this.currentlayer = new drawViewNew(this,{name:tmpName,x:x,y:y,width:width,height:height});
 			this.drawellipse(0,0,width,height);
 			//Debug.write("this.currentellipsestroke,this.currentellipselineWidth: ",this.currentellipsestroke,this.currentellipselineWidth);
 			this.drawellipseregisterFinal(this.currentlayer.name,this.currentellipsestroke,this.currentellipselineWidth,this.currentellipsestrokeFill,this.currentellipsestrokeDis,this.currentellipsestrokeFillDis,x,y,width,height);
