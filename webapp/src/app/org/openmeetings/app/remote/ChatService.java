@@ -342,7 +342,7 @@ public class ChatService implements IPendingServiceCallback {
 	public LinkedList<LinkedList<String>> getAllPublicEmoticons(){
 		try {
 			LinkedList<LinkedList<String>> publicemotes = new LinkedList<LinkedList<String>>();
-			LinkedList<LinkedList<String>> allEmotes = Application.emotfilesList;
+			LinkedList<LinkedList<String>> allEmotes = Application.getEmotfilesList();
 			for (Iterator<LinkedList<String>> iter = allEmotes.iterator();iter.hasNext();){
 				LinkedList<String> emot = iter.next();
 				LinkedList<String> emotPub = new LinkedList<String>();

@@ -53,12 +53,12 @@ public class Application extends ApplicationAdapter implements
 	private Long objectIdentifier = new Long(0);
 	private static HashMap<String,RoomClient> ClientList = new HashMap<String,RoomClient>();
 	
-	public static HashMap<Long,HashMap<Object,Object>> whiteBoardObjectList = new HashMap<Long,HashMap<Object,Object>>();
+	private static HashMap<Long,HashMap<Object,Object>> whiteBoardObjectList = new HashMap<Long,HashMap<Object,Object>>();
 	
 	/*
 	 * EMoticons FileList
 	 */
-	public static LinkedList<LinkedList<String>> emotfilesList = new LinkedList<LinkedList<String>>();
+	private static LinkedList<LinkedList<String>> emotfilesList = new LinkedList<LinkedList<String>>();
 	
 	private static BandwidthConfigFactory bwFactory = null;
 	private static UserConfigFactory userFactory = null;
@@ -1355,8 +1355,15 @@ public class Application extends ApplicationAdapter implements
 	/**
 	 * @return the clientList
 	 */
-	public static HashMap<String, RoomClient> getClientList() {
+	public static synchronized HashMap<String, RoomClient> getClientList() {
 		return ClientList;
+	}
+	
+	public static synchronized LinkedList<LinkedList<String>> getEmotfilesList() {
+		return emotfilesList;
+	}
+	public static synchronized void setEmotfilesList(LinkedList<LinkedList<String>> emotfilesListNew) {
+		emotfilesList = emotfilesListNew;
 	}
 	
 	public void disconnectUser(RoomClient rcl){

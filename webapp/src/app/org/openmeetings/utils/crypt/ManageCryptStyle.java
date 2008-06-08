@@ -21,8 +21,15 @@ public class ManageCryptStyle {
 	
 	public CryptStringAdapter getInstanceOfCrypt() {
 		try {
+			
+			log.debug("getInstanceOfCrypt: "+this);
+			
+			log.debug("getInstanceOfCrypt: "+Configurationmanagement.getInstance());
+			
 			//String configKeyCryptClassName = "org.openmeetings.utils.crypt.MD5Implementation";
 			String configKeyCryptClassName = Configurationmanagement.getInstance().getConfKey(3,"crypt_ClassName").getConf_value();
+			
+			log.debug("configKeyCryptClassName: "+configKeyCryptClassName);
 			
 			CryptStringAdapter t = (CryptStringAdapter) Class.forName(configKeyCryptClassName).newInstance();
 			//t.getTime();

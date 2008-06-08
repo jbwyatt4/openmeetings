@@ -28,11 +28,12 @@
 	</context-param>
 	
 	<!-- This will only work for Red5-0.6.3 !!
-		in 0.7 this throws an Error and the App will not start -->
+		in 0.7 this throws an Error and the App will not start
 	<context-param>
 	    <param-name>log4jConfigLocation</param-name>
 	    <param-value>/WEB-INF/log4j.properties</param-value>
 	</context-param>
+	 -->
 
 	<context-param>
 		<param-name>webAppRootKey</param-name>

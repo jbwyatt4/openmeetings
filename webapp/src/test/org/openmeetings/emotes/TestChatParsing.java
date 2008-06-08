@@ -39,7 +39,7 @@ public class TestChatParsing extends TestCase {
 		    while (reader.ready()) {
 		    	xmlString += reader.readLine();
 		    }
-		    Application.emotfilesList = (LinkedList<LinkedList<String>>) xStream.fromXML(xmlString);
+		    Application.setEmotfilesList((LinkedList<LinkedList<String>>) xStream.fromXML(xmlString));
 		    ChatString.getInstance().replaceAllRegExp();
 		    String messageText = "Hi :) how are you? whats going on B) today (T_T) ? with you ?";
 		    //messageText = ":) Hi :) how :( are :) you :( today >:O going on? :)";
