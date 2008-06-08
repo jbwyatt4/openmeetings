@@ -13,6 +13,9 @@
   	<attribute name="prevx" type="number" value="0"/>
   	<attribute name="prevy" type="number" value="0"/>
   	
+  	<!--- If true it will try to load the ObjectIdentifier Extension from the Server -->
+  	<attribute name="isRemoteOID" value="false" type="boolean" />
+  	
   	<!-- paint -->
   	<attribute name="currentlayerstroke" value="0xFF6600" />
   	<attribute name="currentlayerlineWidth" value="2" type="number" />
@@ -62,9 +65,24 @@
 
   	<method name="getCounter">
 		//Debug.write("### getCounter :",this.counter);
-  		this.counter++;
-  		return this.counter;
+		if (this.isRemoteOID){
+			this.getOID.doCall();
+		} else {
+	  		this.counter++;
+		}
+		return this.counter;
   	</method>
+  	
+    <netRemoteCallHib name="getOID" funcname="getOID" showLoading="false"
+    				  remotecontext="$once{ canvas.thishib }" > 
+        <handler name="ondata" args="value">
+            <![CDATA[
+                //The onResult-Handler will be called be the rtmpconnection
+                if($debug) Debug.write("getOID: ",value);
+                parent.counter = value;
+            ]]>
+        </handler>   
+    </netRemoteCallHib>     
 	
 	<method name="compareAndSetCounter" args="c">
 		<![CDATA[
@@ -113,6 +131,9 @@
 		init
 	 -->
 	<handler name="oninit">
+		if (this.isRemoteOID){
+			this.getOID.doCall();
+		}
         //Debug.write("********** this oninit: ",this);
 		this.basdrawredoView = new LzView(canvas,{visible:false,y:440});
 		this.layers = new Array();
