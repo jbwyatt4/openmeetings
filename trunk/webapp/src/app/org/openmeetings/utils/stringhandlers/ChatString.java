@@ -49,7 +49,7 @@ public class ChatString {
 			String[] messageStr = {"text",message};
 			list.add(messageStr);
 			
-			for (Iterator<LinkedList<String>> iter = Application.emotfilesList.iterator();iter.hasNext();){
+			for (Iterator<LinkedList<String>> iter = Application.getEmotfilesList().iterator();iter.hasNext();){
 				LinkedList<String> emot = iter.next();
 				
 				//log.error("CHECK EMOT: "+ emot.get(0) + emot.get(1) + emot.size());
@@ -111,7 +111,7 @@ public class ChatString {
 	
 	public void replaceAllRegExp(){
 		try {
-			LinkedList<LinkedList<String>> emotfilesList = Application.emotfilesList;
+			LinkedList<LinkedList<String>> emotfilesList = Application.getEmotfilesList();
 			LinkedList<LinkedList<String>> emotfilesListNew = new LinkedList<LinkedList<String>>();
 			for (Iterator<LinkedList<String>> iter = emotfilesList.iterator();iter.hasNext();){
 				LinkedList<String> emot = iter.next();
@@ -127,7 +127,7 @@ public class ChatString {
 				}
 				emotfilesListNew.add(emot);
 			}
-			Application.emotfilesList = emotfilesListNew;
+			Application.setEmotfilesList(emotfilesListNew);
 		} catch (Exception err) {
 			log.error("[replaceAllRegExp]",err);
 		}
