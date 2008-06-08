@@ -50,7 +50,10 @@ public class Application extends ApplicationAdapter implements
 
 	private static final Log log = LogFactory.getLog(Application.class);
 
+	private Long objectIdentifier = new Long(0);
 	private static HashMap<String,RoomClient> ClientList = new HashMap<String,RoomClient>();
+	
+	public static HashMap<Long,HashMap<Object,Object>> whiteBoardObjectList = new HashMap<Long,HashMap<Object,Object>>();
 	
 	/*
 	 * EMoticons FileList
@@ -82,6 +85,7 @@ public class Application extends ApplicationAdapter implements
 	@Override
 	public boolean appStart(IScope scope) {
 		try {
+			whiteBoardObjectList = new HashMap<Long,HashMap<Object,Object>>();
 			webAppPath = scope.getResource("/").getFile().getAbsolutePath();
 			log.debug("webAppPath : "+webAppPath);
 			//batchFileFir = webAppPath + File.separatorChar + "jod" + File.separatorChar;
@@ -553,7 +557,7 @@ public class Application extends ApplicationAdapter implements
 			log.debug("*..*setModerator id: " + id);
 			
 			IConnection current = Red5.getConnectionLocal();
-			String streamid = current.getClient().getId();
+			//String streamid = current.getClient().getId();
 			
 			RoomClient rlc = ClientList.get(id);
 			Long room_id = rlc.getRoom_id();
@@ -1021,6 +1025,8 @@ public class Application extends ApplicationAdapter implements
 			IConnection current = Red5.getConnectionLocal();
 			RoomClient currentClient = ClientList.get(current.getClient().getId());
 			Long room_id = currentClient.getRoom_id();	
+			
+			
 				
 			log.debug("***** id: " + currentClient.getStreamid());
 			
@@ -1235,6 +1241,13 @@ public class Application extends ApplicationAdapter implements
 		}		
 	}	
 	
+	/**
+	 * returns a new Object Identifier for the Whiteboard
+	 * @return
+	 */
+	public Long getOID(){
+		return objectIdentifier++;
+	}
 	
 	public void streamBroadcastStart(IBroadcastStream stream) {
 		log.debug("### streamBroadcastStart Name: " + stream.getName());
