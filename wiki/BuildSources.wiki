@@ -30,16 +30,41 @@ Step-By-Step:
 
 = Java Webapp (Server-Side) =
 
+*These instructions refer to the Sources of OpenMeetings starting with r1479*
+*That means we use red5-0.7.x here*
+*It is recommended to use Java 6 for running red5 cause it is starting faster*
+
+  * Install red5-r2822 from the snapshot dir of red5: http://red5.googlecode.com/svn/trunk/snapshots/
+  * Install it
+  * add the following line's into the logback.xml of $RED5_HOME/conf/logback.xml:
+
+  {{{
+	<logger name="org.hibernate">
+		<level value="ERROR" />
+	</logger>
+	<logger name="com.mchange.v2">
+		<level value="ERROR" />
+	</logger>
+	<logger name="org.apache.axis2">
+		<level value="ERROR" />
+	</logger>
+	<logger name="org.apache.axiom">
+		<level value="ERROR" />
+	</logger>
+  }}}
+  or replace with this one: http://openmeetings.googlecode.com/svn/trunk/patches/logback.xml
+
   * Download (SVN - Checkout) from:
 http://openmeetings.googlecode.com/svn/trunk/webapp/
   * change dir your local copy
   * Run: ant dist (JAVA_HOME must be set and point to a JDK >= 1.5 and you need ant version >= 1.7)
+  * there is now a directory dist, inside of that directory there is a compiled openmeetings-webapp with the name *openmeetings*
+  * use the compiled openmeetings-webapp and copy it to $RED5_HOME/webapps
+  * do the usual install process of openmeetings
 
-there is now a directory dist, inside of that directory there is a compiled red5-webapp with the name *openmeetings*
-You have to copy the Laszlo-Client from the Step-By-Step scenario into it.
-Since r897 the name of the folder *install* is *conf*!
-
-You need to run it again red5-0.6.3 OR you have to alter the web.xml and remove the reference to the log4j.properties as red5-0.7 has another Logging (slf4j).
+Additional Notes:
+  # You have to copy the Laszlo-Client from the Step-By-Step scenario into it to make a complete Binary, but you can also run it from inside OpenLaszlo Server. You only need to place a *crossdomain.xml* into $RED5_HOME/webapps/root, otherwise the Flash-Security-Sandbox will not allow Up- or Downloads.
+  # If you want to keep the previous installation and only change some Java code but no Database structure it is enough if you just copy/overwrite the folder *WEB-INF* and restart red5.
 
 == Small howto to deploy/run the Sources == 
 Comment by kunthar,  Today (20 minutes ago) 10.01.2008
