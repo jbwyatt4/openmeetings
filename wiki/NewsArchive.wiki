@@ -14,6 +14,7 @@
   * new Module added (r651) see: [BackupPanel] at 28.11.2007
   * new Module added (r643) see: [LanguageEditor] at 27.11.2007
   * Meet me at Open-Laszlo-Conference in Amsterdam at 17.11.2007: [http://groups.google.co
+m/group/openlaszlo-europe/web/europan-openlaszlo-developers-meeting OpenLaszlo-Conference]
   * Demo Portal Update to r607 at 06.11.2007
   * Demo Portal Update to r587 at 22.10.2007 (fixes, updates and arabic language added(Issue177))
   * 0.5 RC5 (Beta5) released at 07.10.2007 [InstallationOf05RC5Beta5] [05Beta5Changes]
