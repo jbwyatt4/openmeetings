@@ -36,7 +36,7 @@ Step-By-Step:
 
   * Install red5-r2822 from the snapshot dir of red5: http://red5.googlecode.com/svn/trunk/snapshots/
   * Install it
-  * add the following line's into the logback.xml of $RED5_HOME/conf/logback.xml:
+  * there is an error in red5's configuration of Log-Files, so you need to add the following line's into the global logback.xml of $RED5_HOME/conf/logback.xml:
 
   {{{
 	<logger name="org.hibernate">
