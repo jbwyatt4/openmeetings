@@ -1,5 +1,19 @@
 #summary former news
 
+  * 0.5 Final Release at 31.03.2008 [InstallationOfRelease05]
+  * new Source Locations see [BuildSources]with the new converted naming convention according to [CodingGuidelines] at 06.03.2008
+  * !OpenMeetings compatible with red5-latest sources since r897 see [http://groups.google.com/group/openmeetings-user/browse_thread/thread/1e0b91bd2a57584d Group-News] at 24.01.2008
+  * Demo-Portal Update at 14.01.2008 with new [ChatModul], bug fixes and some design mods
+  * !OpenLaszlo Japan published a site about !OpenMeetings see: [http://www.openlaszlo.jp/openmeetings/ OpenMeetings-Japan] at 10.01.2008
+  * Updated Demo Portal at 09.01.2008 with new/completed Languages (Indonesian/Italian thx to CDono and ereti), recording conferences added first Version (see: [RecordingsViewer] for a Screen), Updated Whiteboard-Toolbar, extended paint-tools, performances fixes, ratio fix for Video, Updated Video API for Player
+  * ant-task to generate binary package from source added, see: [BuildSources] at 04.01.2008
+  * 0.5 RC7 (Beta7) released at 06.12.2007 [InstallationOf05RC6Beta6] [05Beta6Changes]
+  _RC6 had a minor bug, anyway i fixed it and made a new package, Changes are the same as RC6_
+  * Demo Portal Update to r667 at 06.12.2007
+  * new Module added (r667) see: [ChatModul] at 05.12.2007
+  * new Module added (r651) see: [BackupPanel] at 28.11.2007
+  * new Module added (r643) see: [LanguageEditor] at 27.11.2007
+  * Meet me at Open-Laszlo-Conference in Amsterdam at 17.11.2007: [http://groups.google.co
   * Demo Portal Update to r607 at 06.11.2007
   * Demo Portal Update to r587 at 22.10.2007 (fixes, updates and arabic language added(Issue177))
   * 0.5 RC5 (Beta5) released at 07.10.2007 [InstallationOf05RC5Beta5] [05Beta5Changes]
