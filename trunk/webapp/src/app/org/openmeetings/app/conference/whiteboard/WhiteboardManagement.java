@@ -41,10 +41,7 @@ public class WhiteboardManagement {
 			log.debug("action: "+action);
 			
 			if (action.equals("draw") || action.equals("redo")){
-				HashMap<String,Map> roomList = Application.getWhiteBoardObjectList().get(room_id);
-				if (roomList == null) {
-					roomList = new HashMap<String,Map>();
-				}
+				HashMap<String,Map> roomList = Application.getWhiteBoardObjectListByRoomId(room_id);
 				
 				//log.debug(actionObject);
 				//log.debug(actionObject.size()-1);
@@ -55,23 +52,17 @@ public class WhiteboardManagement {
 				roomList.put(objectOID, actionObject);
 				Application.setWhiteBoardObjectListRoomObj(room_id, roomList);
 			} else if (action.equals("clear")) {
-				HashMap<String,Map> roomList = Application.getWhiteBoardObjectList().get(room_id);
+				HashMap<String,Map> roomList = Application.getWhiteBoardObjectListByRoomId(room_id);
 				roomList = new HashMap<String,Map>();
 				Application.setWhiteBoardObjectListRoomObj(room_id, roomList);
 			} else if (action.equals("delete") && action.equals("undo")) {
-				HashMap<String,Map> roomList = Application.getWhiteBoardObjectList().get(room_id);
-				if (roomList == null) {
-					roomList = new HashMap<String,Map>();
-				}
+				HashMap<String,Map> roomList = Application.getWhiteBoardObjectListByRoomId(room_id);
 				String objectOID = actionObject.get(actionObject.size()-1).toString();
 				roomList.remove(objectOID);
 				Application.setWhiteBoardObjectListRoomObj(room_id, roomList);
 			} else if (action.equals("size") || action.equals("editProp") 
 					|| action.equals("editText")) {
-				HashMap<String,Map> roomList = Application.getWhiteBoardObjectList().get(room_id);
-				if (roomList == null) {
-					roomList = new HashMap<String,Map>();
-				}
+				HashMap<String,Map> roomList = Application.getWhiteBoardObjectListByRoomId(room_id);
 				String objectOID = actionObject.get(actionObject.size()-1).toString();
 				Map roomItem = roomList.get(objectOID);
 				roomList.put(objectOID, actionObject);

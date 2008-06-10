@@ -1249,6 +1249,30 @@ public class Application extends ApplicationAdapter implements
 	}	
 	
 	/**
+	 * Loading the List of Objects on the whiteboard
+	 * @return HashMap<String,Map>
+	 */
+	public LinkedList<Map> getRoomItems(){
+		try {
+			IConnection current = Red5.getConnectionLocal();
+			RoomClient currentClient = ClientList.get(current.getClient().getId());
+			Long room_id = currentClient.getRoom_id();
+			
+			log.debug("getRoomItems: "+room_id);
+			HashMap<String,Map> roomItems = getWhiteBoardObjectListByRoomId(room_id);
+			
+			LinkedList<Map> itemList = new LinkedList<Map>();
+			for (Iterator<String> it = roomItems.keySet().iterator();it.hasNext();){
+				itemList.add(roomItems.get(it.next()));
+			}
+			return itemList;
+		} catch (Exception err) {
+			log.error("[getRoomItems]",err);
+		}
+		return null;
+	}
+	
+	/**
 	 * returns a new Object Identifier for the Whiteboard
 	 * @return
 	 */
@@ -1371,6 +1395,14 @@ public class Application extends ApplicationAdapter implements
 	}
 	public static synchronized void setEmotfilesList(LinkedList<LinkedList<String>> emotfilesListNew) {
 		emotfilesList = emotfilesListNew;
+	}
+	
+	public static synchronized HashMap<String,Map> getWhiteBoardObjectListByRoomId(Long room_id){
+		HashMap<String,Map> roomList = whiteBoardObjectList.get(room_id);
+		if (roomList == null) {
+			roomList = new HashMap<String,Map>();
+		}
+		return roomList;
 	}
 	
 	public static synchronized HashMap<Long,HashMap<String,Map>> getWhiteBoardObjectList(){
