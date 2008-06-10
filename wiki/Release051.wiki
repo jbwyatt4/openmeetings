@@ -1,7 +1,5 @@
 #summary About the Release 0.5.1
 
-_not official just preparing_
-
 The Release 0.5.1 is a development snapshot to enable developers and Administrators to use the new SOAP-Gateway to embed !OpenMeetings into their existing environment.
 The SOAP-Gateway uses Axis2 to generate WSDL-Files and provide Methods, see: SoapMethods.
 Besides the SOAP-Gateway some Issue's have been fixed, including a reworked Video-API.
