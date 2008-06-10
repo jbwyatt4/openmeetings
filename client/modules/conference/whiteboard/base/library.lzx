@@ -11,6 +11,7 @@
 	<include href="baseDrawImage.lzx" />
 	<include href="baseDrawSave.lzx" />
 	<include href="baseDrawWords.lzx" />
+	<include href="remoteWhiteboard.lzx" />
 	
 
 </library>

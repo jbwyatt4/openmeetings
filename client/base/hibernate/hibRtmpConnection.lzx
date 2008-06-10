@@ -439,27 +439,50 @@
 						canvas.setAttribute('moderatorName',"");
 					}
 					
-					Debug.write("throw event to drawarea: ",canvas.moderatorStreamID,canvas.ismoderator);
-					if (canvas.ismoderator){
-						Debug.write("############## editRecordStream 3");
-						new editRecordStream(canvas.main_content._content.inner);
-					} else if (value==null){
-						Debug.write("############   value IS NULL: ",this.parent.modus);
-						//no moderator availible
-						//check if this is conferenceViewmodus
-						if (this.parent.modus == "conference"){
-							Debug.write("############## editRecordStream 4");
+					if (canvas.showmodernWhiteBoard=="y"){
+						if (canvas.ismoderator){
+							Debug.write("############## editRecordStream 3");
 							new editRecordStream(canvas.main_content._content.inner);
-						} else {
-							// in audienceView modus you get no notification
-							// cause you are not able to register your stream
-							// as non moderator
-							if (!canvas._videocontainer.modLoaded){
-				            	new errorModeratorPopup(canvas,{error:canvas.getLabelName(498)});
-				            }							
-						}					
-					} else {
+						} else if (value==null){
+							Debug.write("############   value IS NULL: ",this.parent.modus);
+							//no moderator availible
+							//check if this is conferenceViewmodus
+							if (this.parent.modus == "conference"){
+								Debug.write("############## editRecordStream 4");
+								new editRecordStream(canvas.main_content._content.inner);
+							} else {
+								// in audienceView modus you get no notification
+								// cause you are not able to register your stream
+								// as non moderator
+								if (!canvas._videocontainer.modLoaded){
+					            	new errorModeratorPopup(canvas,{error:canvas.getLabelName(498)});
+					            }							
+							}					
+						} 
 						canvas._drawarea.onopenWhiteBoard.sendEvent();
+					} else {
+						Debug.write("throw event to drawarea: ",canvas.moderatorStreamID,canvas.ismoderator);
+						if (canvas.ismoderator){
+							Debug.write("############## editRecordStream 3");
+							new editRecordStream(canvas.main_content._content.inner);
+						} else if (value==null){
+							Debug.write("############   value IS NULL: ",this.parent.modus);
+							//no moderator availible
+							//check if this is conferenceViewmodus
+							if (this.parent.modus == "conference"){
+								Debug.write("############## editRecordStream 4");
+								new editRecordStream(canvas.main_content._content.inner);
+							} else {
+								// in audienceView modus you get no notification
+								// cause you are not able to register your stream
+								// as non moderator
+								if (!canvas._videocontainer.modLoaded){
+					            	new errorModeratorPopup(canvas,{error:canvas.getLabelName(498)});
+					            }							
+							}					
+						} else {
+							canvas._drawarea.onopenWhiteBoard.sendEvent();
+						}
 					}
 				]]>
             </handler>  
@@ -512,6 +535,12 @@
                 }
             </handler>   
         </netRemoteCallHib>
+        
+        <netRemoteCallHib name="setSyncFlag" funcname="setSyncFlag" >      
+	    	<handler name="ondata" args="value">
+	    		if ($debug) Debug.write("setSyncFlag: ",value);
+	    	</handler>
+	    </netRemoteCallHib>   
              
 		<netRemoteCallHib name="logicalRoomLeaveDis" funcname="logicalRoomLeaveDis" >      
 	    	<handler name="ondata" args="value">
