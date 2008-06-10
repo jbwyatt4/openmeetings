@@ -307,7 +307,11 @@
 				this.objectRef._isselected = true;
 				this.objectRef.setAttribute('enabled',false);
 			}
-			parent._drawareaMask._drawarea.setModus(obj.modi);
+			if (obj.modi=="saveobj"){
+				parent._drawareaMask._drawarea.doAction(obj.modi);
+			} else {
+				parent._drawareaMask._drawarea.setModus(obj.modi);
+			}
 		</method>
 		
 		<!--
