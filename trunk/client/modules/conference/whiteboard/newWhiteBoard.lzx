@@ -150,7 +150,7 @@
      -->
     <view width="${ parent.parent.width-2 }" height="${ parent.parent.height-23 }" 
     	  y="0" name="_drawareaMask" clip="true" bgcolor="white" >
-        <baseDrawSave y="0" name="_drawarea" isRemoteOID="true"
+        <remoteWhiteboard y="0" name="_drawarea" isRemoteOID="true"
         			  width="${parent.width}" height="${parent.height}" >
             <attribute name="initH"/>
             <attribute name="initW"/>
@@ -200,6 +200,8 @@
                      
                 parent.parent.onsharedMessage.sendEvent(tempSendArray);
             </method>
+            
+            <!--
             <handler name="onopenWhiteBoard" >
                 var obj = new Array();
                 obj[0] = 'whiteboard';
@@ -213,6 +215,12 @@
                      
                 this.parent.parent.sendMessageWithClientById.doCall();
             </handler>
+             -->
+             
+            <handler name="onopenWhiteBoard" >
+            	parent.parent.getRoomItems.doCall();
+            </handler>
+            
             <!-- clientid  = streamid of the user -->
             <method name="oninitUser" args="clientid,objectList">
                 this.parent.parent.sendObjectToClientID = clientid;
@@ -239,29 +247,33 @@
 		            }
             	}
             </handler>
-	    <!--  bounding Box (selection Box) -->
+            
+	    	<!--  bounding Box (selection Box) -->
     	    <handler name="onBoundingBox" args="boundingBoxRef">
-    	      var boundingDoUpdateOnInit = true;
-	      if (boundingBoxRef.objRef instanceof swfResourceView){
-              //Debug.write("is swf Presentation");
-                boundingDoUpdateOnInit=false;
-              }
-    	      if (!boundingDoUpdateOnInit) {
-                 parent.parent._propertyPanel.setObjectBounds(
-                 boundingBoxRef.objRef.x,boundingBoxRef.objRef.y,
-                 boundingBoxRef.objRef._swfView.width,boundingBoxRef.objRef._swfView.height);
-              } else {
-                 parent.parent._propertyPanel.setObjectBounds(
-                        boundingBoxRef.objRef.x,boundingBoxRef.objRef.y,
-                        boundingBoxRef.objRef.width,boundingBoxRef.objRef.height);
-              }
+				var boundingDoUpdateOnInit = true;
+	      		if (boundingBoxRef.objRef instanceof swfResourceView){
+                //Debug.write("is swf Presentation");
+                	boundingDoUpdateOnInit=false;
+                }
+    	      	if (!boundingDoUpdateOnInit) {
+                    parent.parent._propertyPanel.setObjectBounds(
+                 	boundingBoxRef.objRef.x,boundingBoxRef.objRef.y,
+                 	boundingBoxRef.objRef._swfView.width,boundingBoxRef.objRef._swfView.height);
+              	} else {
+                 	parent.parent._propertyPanel.setObjectBounds(
+                    boundingBoxRef.objRef.x,boundingBoxRef.objRef.y,
+                    boundingBoxRef.objRef.width,boundingBoxRef.objRef.height);
+              	}
     	    </handler>
     	    
     	    <method name="getDocumentToolBar">
     	    	return parent.parent.panelArea.getDocumentsToolbar();
     	    </method>
-        </baseDrawSave>  
+    	    
+        </remoteWhiteboard>  
     </view>
+    
+    
     
         <netRemoteCallHib name="sendMessageWithClientById" funcname="sendMessageWithClientById"
             remotecontext="$once{ canvas.thishib }" >
@@ -269,9 +281,19 @@
             <netparam><method name="getValue">return parent.parent.sendObjectToClientID;</method></netparam>
             <handler name="ondata" args="value">
                 <![CDATA[
-                //The onResult-Handler will be called be the rtmpconnection
-                //Debug.write("sendMessageWithClientById : ",value);
-                
+	                //The onResult-Handler will be called be the rtmpconnection
+	                //Debug.write("sendMessageWithClientById : ",value);
+                ]]>
+            </handler>   
+        </netRemoteCallHib>     
+    
+        <netRemoteCallHib name="getRoomItems" funcname="getRoomItems"
+            remotecontext="$once{ canvas.thishib }" >
+            <handler name="ondata" args="value">
+                <![CDATA[
+                	//The onResult-Handler will be called be the rtmpconnection
+                	if ($debug) Debug.write("getRoomItems : ",value);
+                	canvas._drawarea.loadObjectList(value);
                 ]]>
             </handler>   
         </netRemoteCallHib>     
