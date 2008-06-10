@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.LinkedList;
+import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.logging.Log;
@@ -33,6 +34,7 @@ import org.openmeetings.app.quartz.scheduler.QuartzSessionClear;
 import org.openmeetings.utils.crypt.ManageCryptStyle;
 import org.openmeetings.utils.stringhandlers.ChatString;
 import org.openmeetings.app.conference.videobeans.RoomClient;
+import org.openmeetings.app.conference.whiteboard.WhiteboardManagement;
 import org.openmeetings.app.data.user.Usermanagement;
 import org.openmeetings.app.hibernate.beans.user.Users;
 
@@ -53,7 +55,7 @@ public class Application extends ApplicationAdapter implements
 	private Long objectIdentifier = new Long(0);
 	private static HashMap<String,RoomClient> ClientList = new HashMap<String,RoomClient>();
 	
-	private static HashMap<Long,HashMap<Object,Object>> whiteBoardObjectList = new HashMap<Long,HashMap<Object,Object>>();
+	private static HashMap<Long,HashMap<String,Map>> whiteBoardObjectList = new HashMap<Long,HashMap<String,Map>>();
 	
 	/*
 	 * EMoticons FileList
@@ -85,7 +87,7 @@ public class Application extends ApplicationAdapter implements
 	@Override
 	public boolean appStart(IScope scope) {
 		try {
-			whiteBoardObjectList = new HashMap<Long,HashMap<Object,Object>>();
+			whiteBoardObjectList = new HashMap<Long,HashMap<String,Map>>();
 			webAppPath = scope.getResource("/").getFile().getAbsolutePath();
 			log.debug("webAppPath : "+webAppPath);
 			//batchFileFir = webAppPath + File.separatorChar + "jod" + File.separatorChar;
@@ -1018,46 +1020,51 @@ public class Application extends ApplicationAdapter implements
 		return currentModStreamid;
 	}
 	
-	public int sendVars(Object vars) {
-		log.debug("*..*sendVars: " + vars);
+	public int sendVars(HashMap whiteboardObj) {
+		//log.debug("*..*sendVars: " + whiteboardObj);
 		try {
 			// Check if this User is the Mod:
 			IConnection current = Red5.getConnectionLocal();
 			RoomClient currentClient = ClientList.get(current.getClient().getId());
 			Long room_id = currentClient.getRoom_id();	
-			
-			
 				
-			log.debug("***** id: " + currentClient.getStreamid());
+			log.debug("***** sendVars: " + whiteboardObj);
 			
-			boolean ismod = currentClient.getIsMod();
+			WhiteboardManagement.getInstance().addWhiteBoardObject(room_id, whiteboardObj);
 			
-			log.debug("*..*ismod: " + ismod);
+			int numberOfUsers = 0;
+			
+			//This is no longer necessary
+			//boolean ismod = currentClient.getIsMod();
+			
+			//log.debug("*..*ismod: " + ismod);
 	
-			if (ismod) {
-				Iterator<IConnection> it = current.getScope().getConnections();
-				while (it.hasNext()) {
-					IConnection conn = it.next();
-					if (conn instanceof IServiceCapableConnection) {
-						RoomClient rcl = ClientList.get(conn.getClient().getId());
-						log.debug("*..*idremote: " + rcl.getStreamid());
-						log.debug("*..*my idstreamid: " + currentClient.getStreamid());
-						if (room_id == rcl.getRoom_id() && room_id!=null) {
-							if (!currentClient.getStreamid().equals(rcl.getStreamid())) {
-								((IServiceCapableConnection) conn).invoke("sendVarsToWhiteboard", new Object[] { vars },this);
-							}
-							log.debug("sending sendVarsToWhiteboard to " + conn);
-							if (rcl.getIsRecording()){
-								StreamService.addWhiteBoardEvent(rcl.getRoomRecordingName(),vars);
-							}								
+			//if (ismod) {
+			Iterator<IConnection> it = current.getScope().getConnections();
+			while (it.hasNext()) {
+				IConnection conn = it.next();
+				if (conn instanceof IServiceCapableConnection) {
+					RoomClient rcl = ClientList.get(conn.getClient().getId());
+					//log.debug("*..*idremote: " + rcl.getStreamid());
+					//log.debug("*..*my idstreamid: " + currentClient.getStreamid());
+					if (room_id!=null && room_id == rcl.getRoom_id()) {
+						if (!currentClient.getStreamid().equals(rcl.getStreamid())) {
+							((IServiceCapableConnection) conn).invoke("sendVarsToWhiteboard", new Object[] { whiteboardObj },this);
+							numberOfUsers++;
 						}
+						//log.debug("sending sendVarsToWhiteboard to " + conn);
+						if (rcl.getIsRecording()){
+							StreamService.addWhiteBoardEvent(rcl.getRoomRecordingName(),whiteboardObj);
+						}								
 					}
-				}				
-				return 1;
-			} else {
-				// log.debug("*..*you are not allowed to send: "+ismod);
-				return -1;
-			}
+				}
+			}			
+			
+			return numberOfUsers;
+			//} else {
+			//	// log.debug("*..*you are not allowed to send: "+ismod);
+			//	return -1;
+			//}
 		} catch (Exception err) {
 			log.error("[sendVars]",err);
 		}
@@ -1364,6 +1371,16 @@ public class Application extends ApplicationAdapter implements
 	}
 	public static synchronized void setEmotfilesList(LinkedList<LinkedList<String>> emotfilesListNew) {
 		emotfilesList = emotfilesListNew;
+	}
+	
+	public static synchronized HashMap<Long,HashMap<String,Map>> getWhiteBoardObjectList(){
+		return whiteBoardObjectList;
+	}
+	public static synchronized void setWhiteBoardObjectList(HashMap<Long,HashMap<String,Map>> whiteBoardObjectListNew){
+		whiteBoardObjectList = whiteBoardObjectListNew;
+	}
+	public static synchronized void setWhiteBoardObjectListRoomObj(Long room_id, HashMap<String,Map> roomList){
+		whiteBoardObjectList.put(room_id, roomList);
 	}
 	
 	public void disconnectUser(RoomClient rcl){
