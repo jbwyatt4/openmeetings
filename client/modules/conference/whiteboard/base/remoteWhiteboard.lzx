@@ -12,16 +12,51 @@
 		<![CDATA[
 			this.loadingObjectList = objList;
 			this.loadingObjectListId = 0;
-			this.loadObjectDelegate = new LzDelegate( this, "loadRemoteObject" );
-			if (this.loadingObjectList.length != 0){
-				LzTimer.addTimer( this.loadObjectDelegate, 250 );
-			}
+			//this.loadObjectDelegate = new LzDelegate( this, "loadRemoteObject" );
+			//if (this.loadingObjectList.length != 0){
+			//	LzTimer.addTimer( this.loadObjectDelegate, 250 );
+			//}
 			//for (var i=0;i<this.loadingObjectList.length;i++){
 			//	if ($debug) Debug.write("i this.loadingObjectList[i] ",i,this.loadingObjectList[i]);
 			//}
-		
+			if (this.loadingObjectList != null && this.loadingObjectList.length != 0){
+				this.startNewSyncprocess.doCall();
+			}
 		]]>
 	</method>
+	
+    <netRemoteCallHib name="startNewSyncprocess" funcname="whiteboardservice.startNewSyncprocess"
+        remotecontext="$once{ canvas.thishib }" >
+        <handler name="ondata" args="value">
+            <![CDATA[
+            	//The onResult-Handler will be called be the rtmpconnection
+            	if ($debug) Debug.write("startNewSyncprocess: ",value);
+            	if (value.roomclient.publicSID == canvas.publicSID){
+            		if ($debug) Debug.write("currentLoadingItem IS mine");
+            		if (value.currentLoadingItem){
+            			parent.startInitialLoadinProcess();
+            		}
+            	}
+            ]]>
+        </handler>   
+    </netRemoteCallHib> 
+    
+    <netRemoteCallHib name="sendCompletedSyncEvent" funcname="whiteboardservice.sendCompletedSyncEvent"
+        remotecontext="$once{ canvas.thishib }" >
+        <handler name="ondata" args="value">
+            <![CDATA[
+            	//The onResult-Handler will be called be the rtmpconnection
+            	if ($debug) Debug.write("sendCompletedSyncEvent: ",value);
+            ]]>
+        </handler>   
+    </netRemoteCallHib>     	
+    
+    <method name="startInitialLoadinProcess">
+		this.loadObjectDelegate = new LzDelegate( this, "loadRemoteObject" );
+		if (this.loadingObjectList.length != 0){
+			LzTimer.addTimer( this.loadObjectDelegate, 250 );
+		}
+    </method>
 	
 	<method name="loadRemoteObject">
 		<![CDATA[
@@ -29,6 +64,8 @@
 			this.loadingObjectListId++;
 			if (this.loadingObjectListId < this.loadingObjectList.length){
 				LzTimer.addTimer( this.loadObjectDelegate, 250 );
+			} else {
+				this.sendCompletedSyncEvent.doCall();
 			}
 		]]>
 	</method>

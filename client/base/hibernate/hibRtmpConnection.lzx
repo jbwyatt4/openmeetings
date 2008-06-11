@@ -800,6 +800,32 @@
     		}
     	</handler>
     </netRemoteCallHib>
+    
+    
+    <!-- Whiteboard sync Events -->
+	<netRemoteCallHib name="sendSyncFlag" funcname="sendSyncFlag">
+        <handler name="ondata" args="value">
+            <![CDATA[
+            	//The onResult-Handler will be called be the rtmpconnection
+            	if ($debug) Debug.write("sendSyncFlag: ",value);
+            	if (canvas.syncWindow == null) {
+            		canvas.syncWindow = new syncWin(canvas.main_content._content.inner,{labeliderror:554});
+            	}
+            ]]>
+        </handler>   
+    </netRemoteCallHib>     
+    
+    <netRemoteCallHib name="sendSyncCompleteFlag" funcname="sendSyncCompleteFlag">
+        <handler name="ondata" args="value">
+            <![CDATA[
+            	//The onResult-Handler will be called be the rtmpconnection
+            	if ($debug) Debug.write("sendSyncCompleteFlag: ",value);
+            	if (canvas.syncWindow != null) {
+            		canvas.syncWindow.close();
+            	}
+            ]]>
+        </handler>   
+    </netRemoteCallHib>  
      
 </class>
 
