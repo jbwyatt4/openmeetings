@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library>
 	
-<class name="verticalMenuIconBar" extends="view" y="22" x="4">
+<class name="verticalMenuIconBar" extends="view" y="22" x="4" clickable="true">
 	<simplelayout axis="y" spacing="2" />
 	<mainToolsPanelItem name="plain" modi="plain" labelid="69" resoureceItem="plain" setSelectionToItem="false" />
 	<mainToolsPanelItem name="saveobj" modi="saveobj" labelid="197" resoureceItem="saveobj" setSelectionToItem="false" />
@@ -20,7 +20,7 @@
 	<mainToolsPanelItem name="drawarrow" modi="drawarrow" labelid="79" resoureceItem="drawarrowicon_rsc" />
 </class>
 
-<class name="horizontalMenuIconBar" extends="view" y="22" x="4">
+<class name="horizontalMenuIconBar" extends="view" y="22" x="4" clickable="true">
 	<simplelayout axis="x" spacing="2" />
 	<mainToolsPanelItem name="plain" modi="plain" labelid="69" resoureceItem="plain" setSelectionToItem="false" />
 	<mainToolsPanelItem name="saveobj" modi="saveobj" labelid="197" resoureceItem="saveobj" setSelectionToItem="false" />
