@@ -34,6 +34,9 @@
 	        LzModeManager.globalUnlockMouseEvents();
 	        var x = canvas._drawarea.getMouse('x');
 	        var y = canvas._drawarea.getMouse('y');
+	        
+	        if ($debug) Debug.write("onmouseup LzModeManager globalUnlockMouseEvents ",x,y);
+	        
 	        if (x>=0 && y>=0 && x<=canvas._drawarea.width && y<=canvas._drawarea.height){
 		        var downloadurl = 'http://'+canvas.rtmphostlocal+':'+canvas.red5httpport+'/'+canvas.webAppRootKey+'/DownloadHandler?fileName='+this.filename
 			        +'&moduleName='+this.uploadmodul
@@ -41,8 +44,8 @@
 			        +'&room_id='+hib.currentroomid
 			        +'&sid='+canvas.sessionId;
 
-		        Debug.write(canvas._drawarea);        
-		        //Debug.write(downloadurl,x,y,this.baseurl,this.fileName,this.moduleName,this.parentPath,this.room,this.domain);
+		        if ($debug) Debug.write(canvas._drawarea);        
+		        if ($debug) Debug.write("clearAreaAndAddImage2: ",downloadurl,x,y,this.baseurl,this.fileName,this.moduleName,this.parentPath,this.room,this.domain);
 			
 		        canvas._drawarea.parent.parent.clearAreaAndAddImage(downloadurl,x,y,this.baseurl,this.fileName,this.moduleName,this.parentPath,this.room,this.domain);
 		        

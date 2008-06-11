@@ -14,5 +14,6 @@
     <include href="converterPopup.lzx" />
     <include href="errorModeratorPopup.lzx" />
     <include href="changeDevice.lzx" />
+    <include href="syncWin.lzx" />
     
 </library>

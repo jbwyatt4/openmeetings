@@ -48,10 +48,10 @@
          if (yesno){
             ////Debug.write("clear field!!");
             canvas._drawarea.setModus('plain');
-            canvas._drawarea.addNewImage(this.downloadurl,this.x,this.y,this.baseurl,this.fileName,this.moduleName,this.parentPath,this.room,this.domain);
+            canvas._drawarea.addNewSyncImage(this.downloadurl,this.x,this.y,this.baseurl,this.fileName,this.moduleName,this.parentPath,this.room,this.domain);
          } else {
             ////Debug.write("don't clear field!!");
-            canvas._drawarea.addNewImage(this.downloadurl,this.x,this.y,this.baseurl,this.fileName,this.moduleName,this.parentPath,this.room,this.domain);
+            canvas._drawarea.addNewSyncImage(this.downloadurl,this.x,this.y,this.baseurl,this.fileName,this.moduleName,this.parentPath,this.room,this.domain);
          }
          this.confirmdialog.close();
     </method>
@@ -287,7 +287,7 @@
             </handler>   
         </netRemoteCallHib>     
     
-        <netRemoteCallHib name="getRoomItems" funcname="getRoomItems"
+        <netRemoteCallHib name="getRoomItems" funcname="whiteboardservice.getRoomItems"
             remotecontext="$once{ canvas.thishib }" >
             <handler name="ondata" args="value">
                 <![CDATA[

@@ -177,6 +177,7 @@ these properties will be overwritten by config.xml -->
 <attribute name="sessionObject" value="null" />
 <attribute name="sessionId" value="" type="string" />
 
+<attribute name="syncWindow" value="null" />
 <attribute name="publicSID" value="" type="string" />
 
 <!--- attributes for direct room access -->
