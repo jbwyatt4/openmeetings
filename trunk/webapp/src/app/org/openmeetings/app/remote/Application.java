@@ -35,6 +35,7 @@ import org.openmeetings.utils.crypt.ManageCryptStyle;
 import org.openmeetings.utils.stringhandlers.ChatString;
 import org.openmeetings.app.conference.videobeans.RoomClient;
 import org.openmeetings.app.conference.whiteboard.WhiteboardManagement;
+import org.openmeetings.app.conference.whiteboard.WhiteboardSyncLockObject;
 import org.openmeetings.app.data.user.Usermanagement;
 import org.openmeetings.app.hibernate.beans.user.Users;
 
@@ -56,6 +57,7 @@ public class Application extends ApplicationAdapter implements
 	private static HashMap<String,RoomClient> ClientList = new HashMap<String,RoomClient>();
 	
 	private static HashMap<Long,HashMap<String,Map>> whiteBoardObjectList = new HashMap<Long,HashMap<String,Map>>();
+	private static HashMap<Long,Map<String,WhiteboardSyncLockObject>> whiteBoardSyncList = new HashMap<Long,Map<String,WhiteboardSyncLockObject>>();
 	
 	/*
 	 * EMoticons FileList
@@ -1248,29 +1250,7 @@ public class Application extends ApplicationAdapter implements
 		}		
 	}	
 	
-	/**
-	 * Loading the List of Objects on the whiteboard
-	 * @return HashMap<String,Map>
-	 */
-	public LinkedList<Map> getRoomItems(){
-		try {
-			IConnection current = Red5.getConnectionLocal();
-			RoomClient currentClient = ClientList.get(current.getClient().getId());
-			Long room_id = currentClient.getRoom_id();
-			
-			log.debug("getRoomItems: "+room_id);
-			HashMap<String,Map> roomItems = getWhiteBoardObjectListByRoomId(room_id);
-			
-			LinkedList<Map> itemList = new LinkedList<Map>();
-			for (Iterator<String> it = roomItems.keySet().iterator();it.hasNext();){
-				itemList.add(roomItems.get(it.next()));
-			}
-			return itemList;
-		} catch (Exception err) {
-			log.error("[getRoomItems]",err);
-		}
-		return null;
-	}
+
 	
 	/**
 	 * returns a new Object Identifier for the Whiteboard
@@ -1404,7 +1384,16 @@ public class Application extends ApplicationAdapter implements
 		}
 		return roomList;
 	}
-	
+	public static synchronized void setWhiteBoardSyncListByRoomid(Long room_id, Map<String,WhiteboardSyncLockObject> mapObject ){
+		whiteBoardSyncList.put(room_id, mapObject);
+	}
+	public static synchronized Map<String,WhiteboardSyncLockObject> getWhiteBoardSyncListByRoomid(Long room_id){
+		Map<String,WhiteboardSyncLockObject> roomList = whiteBoardSyncList.get(room_id);
+		if (roomList == null) {
+			roomList = new HashMap<String,WhiteboardSyncLockObject>();
+		}
+		return roomList;
+	}
 	public static synchronized HashMap<Long,HashMap<String,Map>> getWhiteBoardObjectList(){
 		return whiteBoardObjectList;
 	}
