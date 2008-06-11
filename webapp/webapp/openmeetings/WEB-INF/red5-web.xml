@@ -89,5 +89,10 @@
     <bean id="invitationservice.service" 
 	    class="org.openmeetings.app.remote.InvitationService" 
 		singleton="true" />		
+		
+	<!-- Class for Methods which can be invoked by the client -->
+    <bean id="whiteboardservice.service" 
+	    class="org.openmeetings.app.remote.WhiteBoardService" 
+		singleton="true" />			
 					
 </beans>
