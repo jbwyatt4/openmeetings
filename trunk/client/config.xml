@@ -5,7 +5,7 @@
     if this value is empty it will try to connect to the 
     domain-name the OpenMeetings-Client has been loading from  
     -->
-<rtmphostlocal>192.168.254.180</rtmphostlocal>
+<rtmphostlocal></rtmphostlocal>
 
 <!--  
 Port to use for the Server
@@ -85,9 +85,12 @@ of the red5-servlet
 	
 	
 <!--
+    
 	To enable the modern whiteboard Panel you need to switch this to y
- -->
+    old menu bar is not active any more
+    
 <showmodernWhiteBoard>y</showmodernWhiteBoard>    
+ -->    
 	
 <!--
 	First day in the Week used by the Calendar

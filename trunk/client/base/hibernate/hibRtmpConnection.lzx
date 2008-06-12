@@ -439,51 +439,32 @@
 						canvas.setAttribute('moderatorName',"");
 					}
 					
-					if (canvas.showmodernWhiteBoard=="y"){
-						if (canvas.ismoderator){
-							Debug.write("############## editRecordStream 3");
+					if ($debug) Debug.write("throw event to drawarea: ",canvas.moderatorStreamID,canvas.ismoderator);
+					if (canvas.ismoderator){
+						if ($debug) Debug.write("############## editRecordStream 3");
+						new editRecordStream(canvas.main_content._content.inner);
+					} else if (value==null){
+						Debug.write("############   value IS NULL: ",this.parent.modus);
+						//no moderator availible
+						//check if this is conferenceViewmodus
+						if (this.parent.modus == "conference"){
+							if ($debug) Debug.write("############## editRecordStream 4");
 							new editRecordStream(canvas.main_content._content.inner);
-						} else if (value==null){
-							Debug.write("############   value IS NULL: ",this.parent.modus);
-							//no moderator availible
-							//check if this is conferenceViewmodus
-							if (this.parent.modus == "conference"){
-								Debug.write("############## editRecordStream 4");
-								new editRecordStream(canvas.main_content._content.inner);
-							} else {
-								// in audienceView modus you get no notification
-								// cause you are not able to register your stream
-								// as non moderator
-								if (!canvas._videocontainer.modLoaded){
-					            	new errorModeratorPopup(canvas,{error:canvas.getLabelName(498)});
-					            }							
-							}					
-						} 
-						canvas._drawarea.onopenWhiteBoard.sendEvent();
-					} else {
-						Debug.write("throw event to drawarea: ",canvas.moderatorStreamID,canvas.ismoderator);
-						if (canvas.ismoderator){
-							Debug.write("############## editRecordStream 3");
-							new editRecordStream(canvas.main_content._content.inner);
-						} else if (value==null){
-							Debug.write("############   value IS NULL: ",this.parent.modus);
-							//no moderator availible
-							//check if this is conferenceViewmodus
-							if (this.parent.modus == "conference"){
-								Debug.write("############## editRecordStream 4");
-								new editRecordStream(canvas.main_content._content.inner);
-							} else {
-								// in audienceView modus you get no notification
-								// cause you are not able to register your stream
-								// as non moderator
-								if (!canvas._videocontainer.modLoaded){
-					            	new errorModeratorPopup(canvas,{error:canvas.getLabelName(498)});
-					            }							
-							}					
 						} else {
-							canvas._drawarea.onopenWhiteBoard.sendEvent();
+							// in audienceView modus you get no notification
+							// cause you are not able to register your stream
+							// as non moderator
+							if (!canvas._videocontainer.modLoaded){
+				            	new errorModeratorPopup(canvas,{error:canvas.getLabelName(498)});
+				            }							
+						}		
+					} else {
+						if (this.parent.modus == "conference"){
+							if ($debug) Debug.write("############## editRecordStream 1a");
+							new editRecordStream(canvas.main_content._content.inner);
 						}
 					}
+					canvas._drawarea.onopenWhiteBoard.sendEvent();
 				]]>
             </handler>  
         </netRemoteCallHib>        
@@ -685,6 +666,9 @@
 					} else if (value.message[1]=='swfloadtimeout'){
 						canvas._drawarea.sendCompleteSWFLoadedRClient(value.client);
 					} else if (value.message[1]=='inituser'){
+						
+						//this message is deprecated and can be removed!
+						//swagner 12.06.2008
 						//canvas._drawarea.sendCompleteImageSync(value.client);
 					    Debug.write("inituser loadwmlObjectToStage: ",value.message[2]);
 					    if (!canvas.ismoderator) canvas._drawarea.loadwmlObjectToStage(value.message[2],"","","",true,true);
@@ -826,6 +810,31 @@
             ]]>
         </handler>   
     </netRemoteCallHib>  
+    
+	<netRemoteCallHib name="sendImagesSyncFlag" funcname="sendImagesSyncFlag">
+        <handler name="ondata" args="value">
+            <![CDATA[
+            	//The onResult-Handler will be called be the rtmpconnection
+            	if ($debug) Debug.write("sendImagesSyncFlag: ",value);
+            	if (canvas.syncImageWindow == null) {
+            		canvas.syncImageWindow = new syncWin(canvas.main_content._content.inner,{labeliderror:556});
+            	}
+            ]]>
+        </handler>   
+    </netRemoteCallHib>     
+    
+    <netRemoteCallHib name="sendImagesSyncCompleteFlag" funcname="sendImagesSyncCompleteFlag">
+        <handler name="ondata" args="value">
+            <![CDATA[
+            	//The onResult-Handler will be called be the rtmpconnection
+            	if ($debug) Debug.write("sendImagesSyncCompleteFlag: ",value);
+            	if (canvas.syncImageWindow != null) {
+            		canvas.syncImageWindow.close();
+            	}
+            ]]>
+        </handler>   
+    </netRemoteCallHib>  
+         
      
 </class>
 

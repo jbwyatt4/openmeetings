@@ -166,6 +166,23 @@
 		]]>
 	</method>
 	
+	<method name="clearRemote">
+		<![CDATA[
+			if (this.boundingref!=null) this.boundingref.removeIt();
+			while (this.subviews.length > 0) {
+				this.subviews[0].destroy();
+			}
+			while (this.basdrawredoView.subviews.length > 0) {
+				this.basdrawredoView.subviews[0].destroy();
+			}			
+			this.layers = new Array();
+			this.redolayers = new Array();
+			this.baseactionobjectList = new Array();
+			this.baseredoactionobjectList = new Array();	
+			this.checkStepLayers();	
+		]]>
+	</method>
+	
 	<method name="doAction" args="modi">
 		if (modi=='saveobj'){
 			if (this.sendObject) this.sendObject.sendEvent();
@@ -675,7 +692,7 @@
 			}
             
 		} else if(action=='clear'){
-			this.clearAll();
+			this.clearRemote();
 		} else if(action=='delete' || action=='undo'){
 			var lastactionObject = actionObject;	
 			var obj = this.getObjectByName(lastactionObject[lastactionObject.length-1]);

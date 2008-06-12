@@ -26,7 +26,9 @@
 		this.setAttribute('webAppRootKey',canvas.myConfigSet.getPointer().xpathQuery('config/webAppRootKey/text()'));
 		this.setAttribute('showWindowEffect',canvas.myConfigSet.getPointer().xpathQuery('config/showWindowEffect/text()'));
 		this.setAttribute('firstdayinweek',canvas.myConfigSet.getPointer().xpathQuery('config/firstdayinweek/text()'));
-		this.setAttribute('showmodernWhiteBoard',canvas.myConfigSet.getPointer().xpathQuery('config/showmodernWhiteBoard/text()'));
+		
+		//old menubar is not active anymore
+		//this.setAttribute('showmodernWhiteBoard',canvas.myConfigSet.getPointer().xpathQuery('config/showmodernWhiteBoard/text()'));
 		
 		//Audio-Video-Settings
 		this.setAttribute('framesPerSecond',Number(canvas.myConfigSet.getPointer().xpathQuery('config/framesPerSecond/text()')));  

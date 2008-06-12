@@ -16,6 +16,9 @@
 	<attribute name="room" value="" type="string" />
 	<attribute name="domain" value="" type="string" />
 	
+	<attribute name="remotewidth" value="0" type="number" />
+	<attribute name="remoteheight" value="0" type="number" />
+	
 	<attribute name="typeOfObject" value="image" type="string" />
 		<!--
 			if (this.width>this.refObj.width){
@@ -42,25 +45,30 @@
 		<![CDATA[
 			//Debug.write("image loaded");
 			//this.refObj.parent._loading.setAttribute('visible',false);
-            
-			if (this.width>this.refObj.width){
-				var height = this.height/(this.width/this.refObj.width)
-				this.setAttribute('width',this.refObj.width);
-				this.setAttribute('height',height);
-				this.setAttribute('x',0);
+			
+			if (this.remotewidth != 0 && this.remoteheight != 0){
+				this.setAttribute('width',this.remotewidth);
+				this.setAttribute('height',this.remoteheight);
+			} else {
+				if (this.width>this.refObj.width){
+					var height = this.height/(this.width/this.refObj.width)
+					this.setAttribute('width',this.refObj.width);
+					this.setAttribute('height',height);
+					this.setAttribute('x',0);
+				}
+				if (this.height>this.refObj.height){
+					var width = this.width/(this.height/this.refObj.height)
+					this.setAttribute('height',this.refObj.height);
+					this.setAttribute('width',width);
+					this.setAttribute('y',0);
+				}
+				if(this.y+this.height>this.refObj.height){
+					this.setAttribute('y',0);
+				}
+				if(this.x+this.width>this.refObj.width){
+					this.setAttribute('x',0);
+				}	
 			}
-			if (this.height>this.refObj.height){
-				var width = this.width/(this.height/this.refObj.height)
-				this.setAttribute('height',this.refObj.height);
-				this.setAttribute('width',width);
-				this.setAttribute('y',0);
-			}
-			if(this.y+this.height>this.refObj.height){
-				this.setAttribute('y',0);
-			}
-			if(this.x+this.width>this.refObj.width){
-				this.setAttribute('x',0);
-			}	
 	
 			//only send syncCommand if alterModus is true (meaning that this is the Moderator)
 			//otherwise just send a notification to moderator that this image has been loaded
@@ -75,7 +83,9 @@
 			this.refObj.layers.push(this);			
 			
 			this.oninit.sendEvent();
-			this.refObj.parent.parent.isloadedImage.sendEvent(this);
+			
+			//This is not needed anymore as it sync's against the server sid, swagner, 11.06.2008
+			//this.refObj.parent.parent.isloadedImage.sendEvent(this);
 			
 			//send notification to wml-loader
 			//this is send later then in normal objects cause it needs to be send after the image
@@ -92,7 +102,9 @@
 		//Debug.write("onerror "+error);
 			//only send syncCommand if alterModus is true (meaning that this is the Moderator)
 			//otherwise just send a notification to moderator that this iamge has been loaded
-			if (this.alterModus){
+			if (this.recorderModus) {
+				this.refObj.storeTempValsAndLoadSyncListRecording(this);
+			} else if (this.alterModus){
 				this.refObj.storeTempValsAndLoadSyncList(this);
 			} else {
 				this.refObj.sendLoadNotificationImage("imageloaderror");
@@ -100,6 +112,8 @@
 			this.refObj.layers.push(this);			
 			
 			this.oninit.sendEvent();
+			
+			//This is not needed anymore as it sync's against the server sid, swagner, 11.06.2008
 			this.refObj.parent.parent.isloadedImage.sendEvent(this);
 			
 			//send notification to wml-loader
@@ -116,7 +130,9 @@
 		//Debug.write("ontimeout "+error);
 			//only send syncCommand if alterModus is true (meaning that this is the Moderator)
 			//otherwise just send a notification to moderator that this iamge has been loaded
-			if (this.alterModus){
+			if (this.recorderModus) {
+				this.refObj.storeTempValsAndLoadSyncListRecording(this);
+			} else if (this.alterModus){
 				this.refObj.storeTempValsAndLoadSyncList(this);
 			} else {
 				this.refObj.sendLoadNotificationImage("imageloadtimeout");
@@ -124,6 +140,8 @@
 			this.refObj.layers.push(this);			
 			
 			this.oninit.sendEvent();
+			
+			//This is not needed anymore as it sync's against the server sid, swagner, 11.06.2008
 			this.refObj.parent.parent.isloadedImage.sendEvent(this);
 			
 			//send notification to wml-loader
