@@ -9,6 +9,7 @@ public class WhiteboardSyncLockObject {
 	private RoomClient roomclient;
 	private boolean isInitialLoaded = false;
 	private boolean isImageLoader = false;
+	private boolean isSWFLoader = false;
 	private boolean isWmlLoader = false;
 	private boolean isCurrentLoadingItem = false;
 	
@@ -71,5 +72,12 @@ public class WhiteboardSyncLockObject {
 		this.addtime = addtime;
 	}
 
-	
+	public boolean isSWFLoader() {
+		return isSWFLoader;
+	}
+
+	public void setSWFLoader(boolean isSWFLoader) {
+		this.isSWFLoader = isSWFLoader;
+	}
+
 }
