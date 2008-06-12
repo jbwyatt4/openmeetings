@@ -834,7 +834,30 @@
             ]]>
         </handler>   
     </netRemoteCallHib>  
-         
+    
+	<netRemoteCallHib name="sendSWFSyncFlag" funcname="sendWMLSyncFlag">
+        <handler name="ondata" args="value">
+            <![CDATA[
+            	//The onResult-Handler will be called be the rtmpconnection
+            	if ($debug) Debug.write("sendImagesSyncFlag: ",value);
+            	if (canvas.syncSWFWindow == null) {
+            		canvas.syncSWFWindow = new syncWin(canvas.main_content._content.inner,{labeliderror:557});
+            	}
+            ]]>
+        </handler>   
+    </netRemoteCallHib>     
+    
+    <netRemoteCallHib name="sendSWFSyncCompleteFlag" funcname="sendWMLSyncCompleteFlag">
+        <handler name="ondata" args="value">
+            <![CDATA[
+            	//The onResult-Handler will be called be the rtmpconnection
+            	if ($debug) Debug.write("sendWMLSyncCompleteFlag: ",value);
+            	if (canvas.syncSWFWindow != null) {
+            		canvas.syncSWFWindow.close();
+            	}
+            ]]>
+        </handler>   
+    </netRemoteCallHib>     
      
 </class>
 

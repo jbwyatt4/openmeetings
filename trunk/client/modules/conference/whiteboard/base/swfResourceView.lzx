@@ -81,15 +81,15 @@
                 this.parent.refObj.layers.push(this.parent);			
                 
                 this.oninit.sendEvent();
-                this.parent.refObj.parent.parent.isloadedImage.sendEvent(this);
+                //this.parent.refObj.parent.parent.isloadedImage.sendEvent(this);
                 
                 //send notification to wml-loader
                 //this is send later then in normal objects cause it needs to be send after the image
                 //has been loaded completely
-                if (this.parent.refObj.isWmlLoaderImage){
-                    this.parent.refObj.isWmlLoaderImage=false;
-                    if (this.parent.refObj.onwmlLoaderSend) this.parent.refObj.onwmlLoaderSend.sendEvent('swf');
-                }
+                //if (this.parent.refObj.isWmlLoaderImage){
+                //    this.parent.refObj.isWmlLoaderImage=false;
+                //    if (this.parent.refObj.onwmlLoaderSend) this.parent.refObj.onwmlLoaderSend.sendEvent('swf');
+                //}
             ]]>
         </handler>
         <handler name="onerror" args="error">
@@ -101,7 +101,9 @@
                                 
                 //only send syncCommand if alterModus is true (meaning that this is the Moderator)
                 //otherwise just send a notification to moderator that this iamge has been loaded
-                if (this.parent.alterModus){
+                if (this.parent.recorderModus) {
+					this.parent.refObj.storeTempValsAndLoadSyncListSWFRecording(this.parent);
+				} else if (this.parent.alterModus){
                     this.parent.refObj.storeTempValsAndLoadSyncListSWF(this.parent);
                 } else {
                     this.parent.refObj.sendLoadNotificationSWF("swfloaderror");
@@ -109,7 +111,7 @@
                 this.parent.refObj.layers.push(this.parent);			
                 
                 this.oninit.sendEvent();
-                this.parent.refObj.parent.parent.isloadedImage.sendEvent(this.parent);
+                //this.parent.refObj.parent.parent.isloadedImage.sendEvent(this.parent);
                 
                 //send notification to wml-loader
                 //this is send later then in normal objects cause it needs to be send after the image
@@ -129,7 +131,9 @@
                                 
                 //only send syncCommand if alterModus is true (meaning that this is the Moderator)
                 //otherwise just send a notification to moderator that this iamge has been loaded
-                if (this.parent.alterModus){
+                if (this.parent.recorderModus) {
+					this.parent.refObj.storeTempValsAndLoadSyncListSWFRecording(this.parent);
+				} else if (this.parent.alterModus){
                     this.parent.refObj.storeTempValsAndLoadSyncListSWF(this.parent);
                 } else {
                     this.parent.refObj.sendLoadNotificationSWF("swfloadtimeout");
@@ -137,7 +141,7 @@
                 this.parent.refObj.layers.push(this.parent);			
                 
                 this.oninit.sendEvent();
-                this.parent.refObj.parent.parent.isloadedImage.sendEvent(this.parent);
+                //this.parent.refObj.parent.parent.isloadedImage.sendEvent(this.parent);
                 
                 //send notification to wml-loader
                 //this is send later then in normal objects cause it needs to be send after the image
