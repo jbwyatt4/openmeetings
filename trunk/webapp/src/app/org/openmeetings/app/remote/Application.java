@@ -131,18 +131,30 @@ public class Application extends ApplicationAdapter implements
 
 	@Override
 	public boolean roomConnect(IConnection conn, Object[] params) {
-		log.debug("roomConnect    : " + conn.getHost() + " "+ conn.getClient() + " " + conn.getClient().getId());
+		try {
+			log.debug("roomConnect    : " + conn.getHost() + " "+ conn.getClient() + " " + conn.getClient().getId());
+		} catch (Exception err) {
+			log.error("[roomStart]",err);
+		}
 		return true;
 	}
 
 	@Override
 	public void roomDisconnect(IConnection conn) {
-		log.debug("roomDisconnect: " + conn.getHost() + " "+ conn.getClient() + " " + conn.getClient().getId());
+		try {
+			log.debug("roomDisconnect: " + conn.getHost() + " "+ conn.getClient() + " " + conn.getClient().getId());
+		} catch (Exception err) {
+			log.error("[roomStart]",err);
+		}
 	}
 
 	@Override
 	public boolean roomStart(IScope room) {
-		log.debug("roomStart " + room + room.getClients().size() + " "+ room.getContextPath() + " " + room.getName());
+		try {
+			log.debug("roomStart " + room + room.getClients().size() + " "+ room.getContextPath() + " " + room.getName());
+		} catch (Exception err) {
+			log.error("[roomStart]",err);
+		}
 		return true;
 	}
 
@@ -270,8 +282,9 @@ public class Application extends ApplicationAdapter implements
 			RoomClient currentClient = ClientList.get(current.getClient().getId());
 			Long room_id = currentClient.getRoom_id();
 			
+			//Remove User from Sync List's
 			if (room_id != null) {
-				
+				WhiteBoardService.getInstance().removeUserFromAllLists(current, currentClient);
 			}
 
 			//String streamid = currentClient.getStreamid();
@@ -344,6 +357,11 @@ public class Application extends ApplicationAdapter implements
 			IConnection current = Red5.getConnectionLocal();
 			RoomClient currentClient = ClientList.get(current.getClient().getId());
 			Long room_id = currentClient.getRoom_id();	
+			
+			//Remove User from Sync List's
+			if (room_id != null) {
+				WhiteBoardService.getInstance().removeUserFromAllLists(current, currentClient);
+			}
 			
 			//stop and save any recordings if this user is recording
 			if (currentClient.getIsRecording()) {
