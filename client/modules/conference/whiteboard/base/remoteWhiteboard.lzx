@@ -71,7 +71,7 @@
 	</method>
 	
 	<method name="sendRemoteWatchObject" args="actionObject">
-		if ($debug) Debug.write("sendWatchObject: ",actionObject);
+		if ($debug) Debug.write("sendRemoteWatchObject: ",actionObject);
 		<![CDATA[
 			
 			//Redraw the View on the paintarea
@@ -83,12 +83,12 @@
 				this.ulineactionHistory(actionObject,this);
 			} else if (actionObject[0]=='drawarrow'){
 				this.drawarrowlineactionHistory(actionObject,this);
-			} else if(action,actionObject[0]=='letter'){
+			} else if(actionObject[0]=='letter'){
 				this.drawactionHistory(actionObject,this);
 			} else if(actionObject[0]=='image'){
-				this.addImageToLayerHistory(actionObject,this,false);
+				this.addImageToLayerHistory(actionObject,this);
 			} else if(actionObject[0]=='swf'){
-				this.addSWFToLayerHistory(actionObject,this,false);
+				this.addSWFToLayerHistory(actionObject,this);
 			} else if(actionObject[0]=='rectangle'){
 				this.drawrectangleToHistory(actionObject,this);
 			} else if(actionObject[0]=='ellipse'){
