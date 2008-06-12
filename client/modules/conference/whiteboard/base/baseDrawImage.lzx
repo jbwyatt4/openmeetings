@@ -186,7 +186,7 @@
   		this.addImageToLayerRecorded(refObj,actionObject[actionObject.length-1],actionObject[1],actionObject[actionObject.length-5],actionObject[actionObject.length-4],actionObject[actionObject.length-3],actionObject[actionObject.length-2],false,actionObject[2],actionObject[3],actionObject[4],actionObject[5],actionObject[6],actionObject[7]);
   	</method>
   	
-  	<method name="registerNewImage" args="urlname,posx,posy,width,height,baseurl,fileName,moduleName,parentPath,room,domain">
+  	<method name="registerNewImage" args="urlname,posx,posy,width,height,baseurl,fileName,moduleName,parentPath,room,domain,doCallUpdate">
 		if ($debug) Debug.write("registerNewImage: ",urlname,posx,posy,width,height,baseurl,fileName,moduleName,parentPath,room,domain);
 		var actionObject = new Array();
 	    actionObject.push('image');
@@ -205,21 +205,23 @@
 	    actionObject.push(this.currentlayer.name);
 	    this.baseactionobjectList.push(actionObject);	
 	    this.checkStepLayers();
-	    this.onsharedMessage('draw',actionObject);	
+	    if (doCallUpdate) this.onsharedMessage('draw',actionObject);	
   	</method>
 	
 	<method name="storeTempValsAndLoadSyncList" args="objRef">
 		if ($debug) Debug.write("storeTempValsAndLoadSyncList: ",objRef);
 		this.syncImageRefObj = objRef;
 		
+		this.sendCompletedImagesSyncEvent.doCall();
+		
 		this.registerNewImage(this.syncImageRefObj.src,
 			this.syncImageRefObj.x,this.syncImageRefObj.y,
 			this.syncImageRefObj.width,this.syncImageRefObj.height,
 			this.syncImageRefObj.baseurl,this.syncImageRefObj.fileName,
 			this.syncImageRefObj.moduleName,this.syncImageRefObj.parentPath,
-			this.syncImageRefObj.room,this.syncImageRefObj.domain);		
-			
-		this.sendCompletedImagesSyncEvent.doCall();
+			this.syncImageRefObj.room,this.syncImageRefObj.domain,
+			true);		
+	
 	</method>
 	
 	<method name="storeTempValsAndLoadSyncListRecording" args="objRef">
@@ -229,8 +231,16 @@
 		this.sendCompleteImageSync();
 	</method>
 	
-	<method name="sendLoadNotificationImage" args="message" >
-		
+	<method name="sendLoadNotificationImage" args="objRef" >
+		this.syncImageRefObj = objRef;
+		this.registerNewImage(this.syncImageRefObj.src,
+			this.syncImageRefObj.x,this.syncImageRefObj.y,
+			this.syncImageRefObj.width,this.syncImageRefObj.height,
+			this.syncImageRefObj.baseurl,this.syncImageRefObj.fileName,
+			this.syncImageRefObj.moduleName,this.syncImageRefObj.parentPath,
+			this.syncImageRefObj.room,this.syncImageRefObj.domain,
+			false);			
+		this.sendCompletedImagesSyncEvent.doCall();
 	</method>
 	
     <netRemoteCallHib name="startNewImagesSyncprocess" funcname="whiteboardservice.startNewImagesSyncprocess"
