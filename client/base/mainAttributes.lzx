@@ -179,6 +179,7 @@ these properties will be overwritten by config.xml -->
 
 <attribute name="syncWindow" value="null" />
 <attribute name="syncImageWindow" value="null" />
+<attribute name="syncSWFWindow" value="null" />
 <attribute name="publicSID" value="" type="string" />
 
 <!--- attributes for direct room access -->

@@ -68,7 +68,11 @@
 			
         	if ($debug) Debug.write("addImageToLayer ",obj,nameing,urlname,posx,posy,width,height,alterModus,baseurl,fileName,moduleName,parentPath,room,domain);
 			
-			var src = baseurl+'?fileName='+fileName+'&moduleName='+moduleName+'&parentPath='+parentPath+'&room_id='+room+'&sid='+canvas.sessionId;
+			var src = baseurl+'?fileName=' + fileName + 
+				'&moduleName=' + moduleName +
+				'&parentPath=' + parentPath +
+				'&room_id=' + room + 
+				'&sid=' + canvas.sessionId;
 	
 			if ($debug) Debug.write("alterModus: ",alterModus);
 			
@@ -155,9 +159,10 @@
 		isWmlLoader => (true)is loaded as part of wml-object
 		
 		-->
-  	<method name="addImageToLayerHistory" args="actionObject,refObj,isWmlLoader">
-  		if ($debug) Debug.write("addImageToLayerHistory: ",actionObject,refObj,isWmlLoader);
-		this.isWmlLoaderImage = isWmlLoader;
+		
+  	<method name="addImageToLayerHistorySynced" args="actionObject,refObj">
+  		if ($debug) Debug.write("addImageToLayerHistory: ",actionObject,refObj);
+  		this.startNewImagesSyncprocess.doCall();
   		this.addImageToLayer(refObj,actionObject[actionObject.length-1],actionObject[1],
 		  		actionObject[actionObject.length-5],actionObject[actionObject.length-4],
 		  		actionObject[actionObject.length-3],actionObject[actionObject.length-2],
@@ -165,10 +170,9 @@
 		  		actionObject[2],actionObject[3],actionObject[4],actionObject[5],
 		  		actionObject[6],actionObject[7]);
   	</method>
-  	
-  	<method name="addImageToLayerRemote" args="actionObject,refObj,isWmlLoader">
+  			
+  	<method name="addImageToLayerHistory" args="actionObject,refObj,isWmlLoader">
   		if ($debug) Debug.write("addImageToLayerHistory: ",actionObject,refObj,isWmlLoader);
-		this.isWmlLoaderImage = isWmlLoader;
   		this.addImageToLayer(refObj,actionObject[actionObject.length-1],actionObject[1],
 		  		actionObject[actionObject.length-5],actionObject[actionObject.length-4],
 		  		actionObject[actionObject.length-3],actionObject[actionObject.length-2],
