@@ -58,6 +58,7 @@ public class Application extends ApplicationAdapter implements
 	
 	private static HashMap<Long,HashMap<String,Map>> whiteBoardObjectList = new HashMap<Long,HashMap<String,Map>>();
 	private static HashMap<Long,Map<String,WhiteboardSyncLockObject>> whiteBoardSyncList = new HashMap<Long,Map<String,WhiteboardSyncLockObject>>();
+	private static HashMap<Long,Map<String,WhiteboardSyncLockObject>> whiteBoardImagesSyncList = new HashMap<Long,Map<String,WhiteboardSyncLockObject>>();
 	
 	/*
 	 * EMoticons FileList
@@ -267,6 +268,10 @@ public class Application extends ApplicationAdapter implements
 			IConnection current = Red5.getConnectionLocal();
 			RoomClient currentClient = ClientList.get(current.getClient().getId());
 			Long room_id = currentClient.getRoom_id();
+			
+			if (room_id != null) {
+				
+			}
 
 			//String streamid = currentClient.getStreamid();
 			
@@ -1394,6 +1399,18 @@ public class Application extends ApplicationAdapter implements
 		}
 		return roomList;
 	}
+	
+	public static synchronized void setWhiteBoardImagesSyncListByRoomid(Long room_id, Map<String,WhiteboardSyncLockObject> mapObject ){
+		whiteBoardImagesSyncList.put(room_id, mapObject);
+	}
+	public static synchronized Map<String,WhiteboardSyncLockObject> getWhiteBoardImagesSyncListByRoomid(Long room_id){
+		Map<String,WhiteboardSyncLockObject> roomList = whiteBoardImagesSyncList.get(room_id);
+		if (roomList == null) {
+			roomList = new HashMap<String,WhiteboardSyncLockObject>();
+		}
+		return roomList;
+	}
+	
 	public static synchronized HashMap<Long,HashMap<String,Map>> getWhiteBoardObjectList(){
 		return whiteBoardObjectList;
 	}
