@@ -806,6 +806,7 @@
             	if ($debug) Debug.write("sendSyncCompleteFlag: ",value);
             	if (canvas.syncWindow != null) {
             		canvas.syncWindow.close();
+            		canvas.syncWindow = null;
             	}
             ]]>
         </handler>   
@@ -830,6 +831,7 @@
             	if ($debug) Debug.write("sendImagesSyncCompleteFlag: ",value);
             	if (canvas.syncImageWindow != null) {
             		canvas.syncImageWindow.close();
+            		canvas.syncImageWindow = null;
             	}
             ]]>
         </handler>   
@@ -854,6 +856,7 @@
             	if ($debug) Debug.write("sendWMLSyncCompleteFlag: ",value);
             	if (canvas.syncSWFWindow != null) {
             		canvas.syncSWFWindow.close();
+            		canvas.syncSWFWindow == null;
             	}
             ]]>
         </handler>   

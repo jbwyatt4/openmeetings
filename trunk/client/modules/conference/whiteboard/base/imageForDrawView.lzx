@@ -78,7 +78,7 @@
 			} else if (this.alterModus){
 				this.refObj.storeTempValsAndLoadSyncList(this);
 			} else {
-				this.refObj.sendLoadNotificationImage("imageloadcomplete");
+				this.refObj.sendLoadNotificationImage(this);
 			}
 			this.refObj.layers.push(this);			
 			
@@ -107,7 +107,7 @@
 			} else if (this.alterModus){
 				this.refObj.storeTempValsAndLoadSyncList(this);
 			} else {
-				this.refObj.sendLoadNotificationImage("imageloaderror");
+				this.refObj.sendLoadNotificationImage(this);
 			}
 			this.refObj.layers.push(this);			
 			
@@ -135,7 +135,7 @@
 			} else if (this.alterModus){
 				this.refObj.storeTempValsAndLoadSyncList(this);
 			} else {
-				this.refObj.sendLoadNotificationImage("imageloadtimeout");
+				this.refObj.sendLoadNotificationImage(this);
 			}
 			this.refObj.layers.push(this);			
 			
