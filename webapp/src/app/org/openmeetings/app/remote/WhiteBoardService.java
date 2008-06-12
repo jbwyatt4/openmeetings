@@ -125,11 +125,9 @@ public class WhiteBoardService implements IPendingServiceCallback {
 						IConnection conn = it.next();
 						if (conn instanceof IServiceCapableConnection) {
 							RoomClient rcl = Application.getClientList().get(conn.getClient().getId());
-							if (rcl.getPublicSID().equals(currentClient.getPublicSID())){
-								if (room_id!=null && room_id == rcl.getRoom_id()) {
-									returnVal++;
-									((IServiceCapableConnection) conn).invoke("sendSyncCompleteFlag", new Object[] { wSyncLockObject },this);
-								}
+							if (room_id!=null && room_id == rcl.getRoom_id()) {
+								returnVal++;
+								((IServiceCapableConnection) conn).invoke("sendSyncCompleteFlag", new Object[] { wSyncLockObject },this);
 							}
 						}
 					}	
@@ -157,6 +155,190 @@ public class WhiteBoardService implements IPendingServiceCallback {
 		return number;
 	}
 
+	/*
+	 * Image Sync Sequence
+	 * 
+	 */
+	
+	public WhiteboardSyncLockObject startNewImagesSyncprocess(){
+		try {
+			
+			IConnection current = Red5.getConnectionLocal();
+			String streamid = current.getClient().getId();
+			RoomClient currentClient = Application.getClientList().get(streamid);
+			Long room_id = currentClient.getRoom_id();
+			
+			WhiteboardSyncLockObject wSyncLockObject = new WhiteboardSyncLockObject();
+			wSyncLockObject.setAddtime(new Date());
+			wSyncLockObject.setRoomclient(currentClient);
+			wSyncLockObject.setImageLoader(true);
+			
+			Map<String,WhiteboardSyncLockObject> syncListRoom = Application.getWhiteBoardImagesSyncListByRoomid(room_id);
+			
+
+			wSyncLockObject.setCurrentLoadingItem(true);
+			wSyncLockObject.setStarttime(new Date());
+		
+			syncListRoom.put(currentClient.getPublicSID(), wSyncLockObject);
+			Application.setWhiteBoardImagesSyncListByRoomid(room_id, syncListRoom);
+			
+			Iterator<IConnection> it = current.getScope().getConnections();
+			while (it.hasNext()) {
+				IConnection conn = it.next();
+				if (conn instanceof IServiceCapableConnection) {
+					RoomClient rcl = Application.getClientList().get(conn.getClient().getId());
+					if (room_id!=null && room_id == rcl.getRoom_id()) {
+						((IServiceCapableConnection) conn).invoke("sendImagesSyncFlag", new Object[] { wSyncLockObject },this);
+					}
+				}
+			}	
+			
+			return wSyncLockObject;
+			
+			
+		} catch (Exception err) {
+			log.error("[startNewImagesSyncprocess]",err);
+		}
+		return null;
+	}
+	
+	public int sendCompletedImagesSyncEvent() {
+		try {
+			
+			IConnection current = Red5.getConnectionLocal();
+			String streamid = current.getClient().getId();
+			RoomClient currentClient = Application.getClientList().get(streamid);
+			Long room_id = currentClient.getRoom_id();
+			
+			Map<String,WhiteboardSyncLockObject> syncListRoom = Application.getWhiteBoardImagesSyncListByRoomid(room_id);
+
+			WhiteboardSyncLockObject wSyncLockObject = syncListRoom.get(currentClient.getPublicSID());
+			
+			if (wSyncLockObject == null) {
+				log.error("WhiteboardSyncLockObject not found for this Client "+syncListRoom);
+				return -2;
+			} else if (!wSyncLockObject.isCurrentLoadingItem()) {
+				log.warn("WhiteboardSyncLockObject was not started yet "+syncListRoom);
+				return -3;
+			} else {
+				syncListRoom.remove(currentClient.getPublicSID());
+				Application.setWhiteBoardImagesSyncListByRoomid(room_id, syncListRoom);
+				
+				int numberOfInitial = this.getNumberOfImageLoaders(syncListRoom);
+				
+				if (numberOfInitial==0){
+					int returnVal = 0;
+					Iterator<IConnection> it = current.getScope().getConnections();
+					while (it.hasNext()) {
+						IConnection conn = it.next();
+						if (conn instanceof IServiceCapableConnection) {
+							RoomClient rcl = Application.getClientList().get(conn.getClient().getId());
+							if (room_id!=null && room_id == rcl.getRoom_id()) {
+								returnVal++;
+								((IServiceCapableConnection) conn).invoke("sendImagesSyncCompleteFlag", new Object[] { wSyncLockObject },this);
+							}
+						}
+					}	
+					return returnVal;
+				} else {
+					return -4;
+				}
+			}
+			
+			
+		} catch (Exception err) {
+			log.error("[sendCompletedImagesSyncEvent]",err);
+		}
+		return -1;
+	}
+	
+	
+	private int getNumberOfImageLoaders(Map<String,WhiteboardSyncLockObject> syncListRoom) throws Exception {
+		int number = 0;
+		for (Iterator<String> iter = syncListRoom.keySet().iterator();iter.hasNext();) {
+			WhiteboardSyncLockObject lockObject = syncListRoom.get(iter.next());
+			if (lockObject.isImageLoader()){
+				number++;
+			}
+		}
+		return number;
+	}	
+	
+	
+	public void removeUserFromAllLists(IConnection current, RoomClient currentClient){
+		try {
+			
+			Long room_id = currentClient.getRoom_id();
+			
+			//TODO: Maybe we should also check all rooms, independent from the current
+			//room_id if there is any user registered
+			if (room_id != null) {
+				
+				
+				//Check Initial Loaders
+				Map<String,WhiteboardSyncLockObject> syncListRoom = Application.getWhiteBoardSyncListByRoomid(room_id);
+				
+				WhiteboardSyncLockObject wSyncLockObject = syncListRoom.get(currentClient.getPublicSID());
+				
+				if (wSyncLockObject != null) {
+					syncListRoom.remove(currentClient.getPublicSID());
+				}
+				Application.setWhiteBoardSyncListByRoomid(room_id, syncListRoom);
+				
+				int numberOfInitial = this.getNumberOfInitialLoaders(syncListRoom);
+				
+				if (numberOfInitial==0){
+					int returnVal = 0;
+					Iterator<IConnection> it = current.getScope().getConnections();
+					while (it.hasNext()) {
+						IConnection conn = it.next();
+						if (conn instanceof IServiceCapableConnection) {
+							RoomClient rcl = Application.getClientList().get(conn.getClient().getId());
+							if (room_id!=null && room_id == rcl.getRoom_id()) {
+								returnVal++;
+								((IServiceCapableConnection) conn).invoke("sendSyncCompleteFlag", new Object[] { wSyncLockObject },this);
+							}
+						}
+					}	
+				}
+				
+				
+				//Check Image Loaders
+				Map<String,WhiteboardSyncLockObject> syncListImages = Application.getWhiteBoardImagesSyncListByRoomid(room_id);
+				
+				WhiteboardSyncLockObject wImagesSyncLockObject = syncListImages.get(currentClient.getPublicSID());
+				
+				if (wImagesSyncLockObject != null) {
+					syncListImages.remove(currentClient.getPublicSID());
+				}
+				Application.setWhiteBoardImagesSyncListByRoomid(room_id, syncListImages);
+				
+				int numberOfImageLoaders = this.getNumberOfImageLoaders(syncListImages);
+				
+				if (numberOfImageLoaders==0){
+					int returnVal = 0;
+					Iterator<IConnection> it = current.getScope().getConnections();
+					while (it.hasNext()) {
+						IConnection conn = it.next();
+						if (conn instanceof IServiceCapableConnection) {
+							RoomClient rcl = Application.getClientList().get(conn.getClient().getId());
+							if (room_id!=null && room_id == rcl.getRoom_id()) {
+								returnVal++;
+								((IServiceCapableConnection) conn).invoke("sendImagesSyncCompleteFlag", new Object[] { wImagesSyncLockObject },this);
+							}
+						}
+					}	
+				}
+				
+				
+				//TODO: Check WML Loaders
+			}
+			
+		} catch (Exception err) {
+			log.error("[removeUserFromAllLists]",err);
+		}
+	}
+	
 	public void resultReceived(IPendingServiceCall arg0) {
 		// TODO Auto-generated method stub
 		log.debug("resultReceived: "+arg0);
