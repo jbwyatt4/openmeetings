@@ -9,6 +9,7 @@ import java.util.Map;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openmeetings.app.conference.videobeans.RoomClient;
+import org.openmeetings.app.conference.whiteboard.WhiteboardManagement;
 import org.openmeetings.app.conference.whiteboard.WhiteboardSyncLockObject;
 import org.red5.server.api.IConnection;
 import org.red5.server.api.Red5;
@@ -24,7 +25,18 @@ import org.red5.server.api.service.IServiceCapableConnection;
 public class WhiteBoardService implements IPendingServiceCallback {
 	
 	private static final Log log = LogFactory.getLog(WhiteBoardService.class);	
-
+	
+	private WhiteBoardService() {}
+	
+	private static WhiteBoardService instance = null;
+	
+	public static synchronized WhiteBoardService getInstance() {
+		if (instance == null) {
+			instance = new WhiteBoardService();
+		}
+		return instance;
+	}
+	
 	/**
 	 * Loading the List of Objects on the whiteboard
 	 * @return HashMap<String,Map>
@@ -163,6 +175,8 @@ public class WhiteBoardService implements IPendingServiceCallback {
 	public WhiteboardSyncLockObject startNewImagesSyncprocess(){
 		try {
 			
+			log.debug("startNewImagesSyncprocess");
+			
 			IConnection current = Red5.getConnectionLocal();
 			String streamid = current.getClient().getId();
 			RoomClient currentClient = Application.getClientList().get(streamid);
@@ -172,13 +186,10 @@ public class WhiteBoardService implements IPendingServiceCallback {
 			wSyncLockObject.setAddtime(new Date());
 			wSyncLockObject.setRoomclient(currentClient);
 			wSyncLockObject.setImageLoader(true);
-			
-			Map<String,WhiteboardSyncLockObject> syncListRoom = Application.getWhiteBoardImagesSyncListByRoomid(room_id);
-			
-
 			wSyncLockObject.setCurrentLoadingItem(true);
 			wSyncLockObject.setStarttime(new Date());
-		
+			
+			Map<String,WhiteboardSyncLockObject> syncListRoom = Application.getWhiteBoardImagesSyncListByRoomid(room_id);
 			syncListRoom.put(currentClient.getPublicSID(), wSyncLockObject);
 			Application.setWhiteBoardImagesSyncListByRoomid(room_id, syncListRoom);
 			
@@ -187,7 +198,9 @@ public class WhiteBoardService implements IPendingServiceCallback {
 				IConnection conn = it.next();
 				if (conn instanceof IServiceCapableConnection) {
 					RoomClient rcl = Application.getClientList().get(conn.getClient().getId());
+					log.debug("sending :"+rcl);
 					if (room_id!=null && room_id == rcl.getRoom_id()) {
+						log.debug("sendImagesSyncFlag :"+rcl);
 						((IServiceCapableConnection) conn).invoke("sendImagesSyncFlag", new Object[] { wSyncLockObject },this);
 					}
 				}
@@ -397,15 +410,16 @@ public class WhiteBoardService implements IPendingServiceCallback {
 				int numberOfInitial = this.getNumberOfInitialLoaders(syncListRoom);
 				
 				if (numberOfInitial==0){
-					int returnVal = 0;
 					Iterator<IConnection> it = current.getScope().getConnections();
 					while (it.hasNext()) {
 						IConnection conn = it.next();
 						if (conn instanceof IServiceCapableConnection) {
 							RoomClient rcl = Application.getClientList().get(conn.getClient().getId());
 							if (room_id!=null && room_id == rcl.getRoom_id()) {
-								returnVal++;
-								((IServiceCapableConnection) conn).invoke("sendSyncCompleteFlag", new Object[] { wSyncLockObject },this);
+								//do not send to current
+								if (!rcl.getPublicSID().equals(currentClient.getPublicSID())) {
+									((IServiceCapableConnection) conn).invoke("sendSyncCompleteFlag", new Object[] { wSyncLockObject },this);
+								}
 							}
 						}
 					}	
@@ -425,15 +439,16 @@ public class WhiteBoardService implements IPendingServiceCallback {
 				int numberOfImageLoaders = this.getNumberOfImageLoaders(syncListImages);
 				
 				if (numberOfImageLoaders==0){
-					int returnVal = 0;
 					Iterator<IConnection> it = current.getScope().getConnections();
 					while (it.hasNext()) {
 						IConnection conn = it.next();
 						if (conn instanceof IServiceCapableConnection) {
 							RoomClient rcl = Application.getClientList().get(conn.getClient().getId());
 							if (room_id!=null && room_id == rcl.getRoom_id()) {
-								returnVal++;
-								((IServiceCapableConnection) conn).invoke("sendImagesSyncCompleteFlag", new Object[] { wImagesSyncLockObject },this);
+								//do not send to current
+								if (!rcl.getPublicSID().equals(currentClient.getPublicSID())) {
+									((IServiceCapableConnection) conn).invoke("sendImagesSyncCompleteFlag", new Object[] { wImagesSyncLockObject },this);
+								}
 							}
 						}
 					}	
@@ -453,15 +468,16 @@ public class WhiteBoardService implements IPendingServiceCallback {
 				int numberOfSWFLoaders = this.getNumberOfSWFLoaders(syncListImages);
 				
 				if (numberOfSWFLoaders==0){
-					int returnVal = 0;
 					Iterator<IConnection> it = current.getScope().getConnections();
 					while (it.hasNext()) {
 						IConnection conn = it.next();
 						if (conn instanceof IServiceCapableConnection) {
 							RoomClient rcl = Application.getClientList().get(conn.getClient().getId());
 							if (room_id!=null && room_id == rcl.getRoom_id()) {
-								returnVal++;
-								((IServiceCapableConnection) conn).invoke("sendSWFSyncCompleteFlag", new Object[] { wSWFSyncLockObject },this);
+								//do not send to current
+								if (!rcl.getPublicSID().equals(currentClient.getPublicSID())) {
+									((IServiceCapableConnection) conn).invoke("sendSWFSyncCompleteFlag", new Object[] { wSWFSyncLockObject },this);
+								}
 							}
 						}
 					}	
