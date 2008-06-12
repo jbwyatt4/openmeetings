@@ -59,6 +59,7 @@ public class Application extends ApplicationAdapter implements
 	private static HashMap<Long,HashMap<String,Map>> whiteBoardObjectList = new HashMap<Long,HashMap<String,Map>>();
 	private static HashMap<Long,Map<String,WhiteboardSyncLockObject>> whiteBoardSyncList = new HashMap<Long,Map<String,WhiteboardSyncLockObject>>();
 	private static HashMap<Long,Map<String,WhiteboardSyncLockObject>> whiteBoardImagesSyncList = new HashMap<Long,Map<String,WhiteboardSyncLockObject>>();
+	private static HashMap<Long,Map<String,WhiteboardSyncLockObject>> whiteBoardSWFSyncList = new HashMap<Long,Map<String,WhiteboardSyncLockObject>>();
 	
 	/*
 	 * EMoticons FileList
@@ -1405,6 +1406,17 @@ public class Application extends ApplicationAdapter implements
 	}
 	public static synchronized Map<String,WhiteboardSyncLockObject> getWhiteBoardImagesSyncListByRoomid(Long room_id){
 		Map<String,WhiteboardSyncLockObject> roomList = whiteBoardImagesSyncList.get(room_id);
+		if (roomList == null) {
+			roomList = new HashMap<String,WhiteboardSyncLockObject>();
+		}
+		return roomList;
+	}
+	
+	public static synchronized void setWhiteBoardSWFSyncListByRoomid(Long room_id, Map<String,WhiteboardSyncLockObject> mapObject ){
+		whiteBoardSWFSyncList.put(room_id, mapObject);
+	}
+	public static synchronized Map<String,WhiteboardSyncLockObject> getWhiteBoardSWFSyncListByRoomid(Long room_id){
+		Map<String,WhiteboardSyncLockObject> roomList = whiteBoardSWFSyncList.get(room_id);
 		if (roomList == null) {
 			roomList = new HashMap<String,WhiteboardSyncLockObject>();
 		}
