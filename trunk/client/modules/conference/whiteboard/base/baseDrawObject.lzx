@@ -8,10 +8,21 @@
     
     <attribute name="modernToolbar" value="false" type="boolean" />
 
-    <!-- Loads a SWFPresenation to the whiteBoard -->
-    <method name="loadSWFPresentation" args="url,fileName,moduleName,parentPath,room,domain,slideNumber">
-        this.startNewSWFSyncprocess.doCall();
-        this.addPresentationToLayer(this,url,'swfpresentationobject'+this.getCounter(),0,0,0,0,true,url,fileName,moduleName,parentPath,room,domain,slideNumber);
+    <!-- 
+    	Invoked by the Library directly
+    	Loads a SWFPresenation to the whiteBoard
+     -->
+    <method name="loadSWFPresentationSynced" args="url,fileName,moduleName,parentPath,room,domain,slideNumber">
+  		var now = new Date();
+  		//This invokes a Method which is in the remoteWhiteboard.lzx
+  		this.startNewObjectSyncProcess.uniqueImageSyncName = fileName + now.getTime();
+  		this.startNewObjectSyncProcess.doCall();
+        this.addPresentationToLayer(this,url,'swfpresentationobject'+this.getCounter(),
+        	0,0,0,0,
+        	true,
+        	url,fileName,moduleName,parentPath,room,domain,slideNumber,
+        	100,0,0,0,0,
+        	this.startNewObjectSyncProcess.uniqueImageSyncName );
     </method>
     
     <method name="checkSWFPresentation" args="url,fileName,moduleName,parentPath,room,domain,slideNumber">
@@ -35,7 +46,7 @@
 	<!--
 		alterModus => this is added by the mod not remotely
 	 -->
-  	<method name="addPresentationToLayer" args="obj,urlName,nameing,posx,posy,width,height,alterModus,baseurl,fileName,moduleName,parentPath,room,domain,slideNumber,currentzoom,innerwidth,innerheight,innerx,innery">
+  	<method name="addPresentationToLayer" args="obj,urlName,nameing,posx,posy,width,height,alterModus,baseurl,fileName,moduleName,parentPath,room,domain,slideNumber,currentzoom,innerwidth,innerheight,innerx,innery,uniqueIdentifier">
         <![CDATA[
             //Debug.write("addPresentationToLayer",obj,nameing,posx,posy,width,height,alterModus,baseurl,fileName,moduleName,parentPath,room,domain,slideNumber);
             //only show if it is not part of wml-file-object
@@ -60,17 +71,13 @@
             	room:room,domain:domain,slideNumber:slideNumber,
             	width:width,height:height,currentzoom:currentzoom,
             	innerwidth:innerwidth,innerheight:innerheight,
-            	innerx:innerx,innery:innery});
+            	innerx:innerx,innery:innery,
+            	uniqueImageSyncName:uniqueImageSyncName});
 
-            this.parent.parent.isloadingImage.sendEvent(this.currentlayer);
+            //this.parent.parent.isloadingImage.sendEvent(this.currentlayer);
             ////Debug.write("downloadurl. ",downloadurl);
             this.currentlayer._swfView.setSource(downloadurl);
     
-            ////Debug.write(this.currentlayer);
-            //this.parent.parent.isloadingImage.sendEvent(this.currentlayer);
-            //this.parent._loading.setAttribute('visible',true);
-            //Add Layer to global Layer  	
-            return this.currentlayer;
 		]]>
   	</method>
   	
@@ -120,7 +127,7 @@
   		this.addPresentationToLayerRecording(refObj,actionObject[1],actionObject[actionObject.length-1],actionObject[actionObject.length-5],actionObject[actionObject.length-4],actionObject[actionObject.length-3],actionObject[actionObject.length-2],false,actionObject[2],actionObject[3],actionObject[4],actionObject[5],actionObject[6],actionObject[7],actionObject[8],actionObject[16],actionObject[11],actionObject[12],actionObject[9],actionObject[10]);
   	</method>
   	
-  	<method name="registerNewSWF" args="urlname,posx,posy,width,height,baseurl,fileName,moduleName,parentPath,room,domain,slideNumber,innerx,innery,innerwidth,innerheight,zoomlevel,currentzoom,initwidth,initheight">
+  	<method name="registerNewSWF" args="urlname,posx,posy,width,height,baseurl,fileName,moduleName,parentPath,room,domain,slideNumber,innerx,innery,innerwidth,innerheight,zoomlevel,currentzoom,initwidth,initheight,uniqueImageSyncName">
 		var actionObject = new Array();
 	    actionObject.push('swf');//0
 	    actionObject.push(urlname);//1
@@ -139,6 +146,7 @@
         actionObject.push(initwidth);//14
         actionObject.push(initheight);//15
         actionObject.push(currentzoom);//16
+        actionObject.push(uniqueImageSyncName);//17
 		actionObject.push(this.counter);
 	    actionObject.push(posx);
 	    actionObject.push(posy);
@@ -156,39 +164,22 @@
 		//this.getSWFClientListScope.doCall();
 	</method>    
 	
+	<!-- Invoked after successfully loadin an Image,
+	and Invokes an Update Event -->
 	<method name="storeTempValsAndLoadSyncListSWFRecording" args="objRef">
 		this.syncImageRefObj = objRef;
 		//this.doRegisterNewSwf();
 		//this.sendCompleteSWFSync();
-		
+		//This invokes a Method which is in the remoteWhiteboard.lzx
+		this.sendCompletedObjectSyncEvent.uniqueImageSyncName = this.syncImageRefObj.uniqueImageSyncName;
+		this.sendCompletedObjectSyncEvent.doCall();
 	</method>    
     
 	<method name="sendLoadNotificationSWF" args="message" >
 		//this.sendMessageWithClientSWF.doCall();
 		
 	</method>
-	
-	
-    <netRemoteCallHib name="startNewSWFSyncprocess" funcname="whiteboardservice.startNewSWFSyncprocess"
-        remotecontext="$once{ canvas.thishib }" >
-        <handler name="ondata" args="value">
-            <![CDATA[
-            	//The onResult-Handler will be called be the rtmpconnection
-            	if ($debug) Debug.write("startNewWMLSyncprocess: ",value);
-            ]]>
-        </handler>   
-    </netRemoteCallHib> 
-    
-    <netRemoteCallHib name="sendCompletedSWFSyncEvent" funcname="whiteboardservice.sendCompletedSWFSyncEvent"
-        remotecontext="$once{ canvas.thishib }" >
-        <handler name="ondata" args="value">
-            <![CDATA[
-            	//The onResult-Handler will be called be the rtmpconnection
-            	if ($debug) Debug.write("sendCompletedWMLSyncEvent: ",value);
-            ]]>
-        </handler>   
-    </netRemoteCallHib>   	
-	
+
 	<!-- sending messages/notifications of sync process
 		syncing is now on server side implemented, swagner 12.06.2008
 	<netRemoteCallHib name="sendMessageWithClientSWF" funcname="sendMessageWithClient" remotecontext="$once{ canvas.thishib }" >   
@@ -226,8 +217,7 @@
     </netRemoteCallHib>
     	-->
     
-    <method name="doRegisterNewSwf">
-		this.imageSyncMessageText = canvas.getLabelName(this.imageSyncMessageId);
+    <method name="doRegisterNewSwf" args="throwUpdateEvent">
 		//now send notifications to connected clients
 		this.setAttribute('drawmodus','hand');
         
@@ -240,7 +230,8 @@
                 this.syncImageRefObj._swfView.x,this.syncImageRefObj._swfView.y,
                 this.syncImageRefObj._swfView.width,this.syncImageRefObj._swfView.height,
                 this.syncImageRefObj.zoomlevel,this.syncImageRefObj.currentzoomFactor,
-                this.syncImageRefObj.initwidth,this.syncImageRefObj.initheight);
+                this.syncImageRefObj.initwidth,this.syncImageRefObj.initheight,
+                this.syncImageRefObj.uniqueImageSyncName);
         
 		//set modus to hand so users can directly select that image
 		this.setModus('swf');

@@ -812,11 +812,12 @@
         </handler>   
     </netRemoteCallHib>  
     
-	<netRemoteCallHib name="sendImagesSyncFlag" funcname="sendImagesSyncFlag">
+    <!-- Whiteboard Object Sync Process -->
+	<netRemoteCallHib name="sendObjectSyncFlag" funcname="sendObjectSyncFlag">
         <handler name="ondata" args="value">
             <![CDATA[
             	//The onResult-Handler will be called be the rtmpconnection
-            	if ($debug) Debug.write("sendImagesSyncFlag: ",value);
+            	if ($debug) Debug.write("sendObjectSyncFlag: ",value);
             	if (canvas.syncImageWindow == null) {
             		canvas.syncImageWindow = new syncWin(canvas.main_content._content.inner,{labeliderror:556});
             	}
@@ -824,39 +825,14 @@
         </handler>   
     </netRemoteCallHib>     
     
-    <netRemoteCallHib name="sendImagesSyncCompleteFlag" funcname="sendImagesSyncCompleteFlag">
+    <netRemoteCallHib name="sendObjectSyncCompleteFlag" funcname="sendObjectSyncCompleteFlag">
         <handler name="ondata" args="value">
             <![CDATA[
             	//The onResult-Handler will be called be the rtmpconnection
-            	if ($debug) Debug.write("sendImagesSyncCompleteFlag: ",value);
+            	if ($debug) Debug.write("sendObjectSyncCompleteFlag: ",value);
             	if (canvas.syncImageWindow != null) {
             		canvas.syncImageWindow.close();
             		canvas.syncImageWindow = null;
-            	}
-            ]]>
-        </handler>   
-    </netRemoteCallHib>  
-    
-	<netRemoteCallHib name="sendSWFSyncFlag" funcname="sendWMLSyncFlag">
-        <handler name="ondata" args="value">
-            <![CDATA[
-            	//The onResult-Handler will be called be the rtmpconnection
-            	if ($debug) Debug.write("sendImagesSyncFlag: ",value);
-            	if (canvas.syncSWFWindow == null) {
-            		canvas.syncSWFWindow = new syncWin(canvas.main_content._content.inner,{labeliderror:557});
-            	}
-            ]]>
-        </handler>   
-    </netRemoteCallHib>     
-    
-    <netRemoteCallHib name="sendSWFSyncCompleteFlag" funcname="sendWMLSyncCompleteFlag">
-        <handler name="ondata" args="value">
-            <![CDATA[
-            	//The onResult-Handler will be called be the rtmpconnection
-            	if ($debug) Debug.write("sendWMLSyncCompleteFlag: ",value);
-            	if (canvas.syncSWFWindow != null) {
-            		canvas.syncSWFWindow.close();
-            		canvas.syncSWFWindow == null;
             	}
             ]]>
         </handler>   

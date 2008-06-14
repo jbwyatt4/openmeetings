@@ -99,7 +99,30 @@
 		]]>
 	</method>	
 	
-	
+	<!-- methods for syncing events -->
+    <netRemoteCallHib name="startNewObjectSyncProcess" funcname="whiteboardservice.startNewObjectSyncProcess"
+        remotecontext="$once{ canvas.thishib }" >
+    	<attribute name="uniqueImageSyncName" value="" type="string" />
+    	<netparam><method name="getValue">return parent.uniqueImageSyncName;</method></netparam>
+        <handler name="ondata" args="value">
+            <![CDATA[
+            	//The onResult-Handler will be called be the rtmpconnection
+            	if ($debug) Debug.write("startNewImagesSyncprocess: ",value);
+            ]]>
+        </handler>   
+    </netRemoteCallHib> 
+    
+    <netRemoteCallHib name="sendCompletedObjectSyncEvent" funcname="whiteboardservice.sendCompletedObjectSyncEvent"
+        remotecontext="$once{ canvas.thishib }" >
+    	<attribute name="uniqueImageSyncName" value="" type="string" />
+    	<netparam><method name="getValue">return parent.uniqueImageSyncName;</method></netparam>
+        <handler name="ondata" args="value">
+            <![CDATA[
+            	//The onResult-Handler will be called be the rtmpconnection
+            	if ($debug) Debug.write("sendCompletedImagesSyncEvent: ",value);
+            ]]>
+        </handler>   
+    </netRemoteCallHib>   
 	
 </class>
 

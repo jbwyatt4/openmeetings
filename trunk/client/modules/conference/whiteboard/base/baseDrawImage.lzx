@@ -15,11 +15,19 @@
     <attribute name="screenImageRef1" value="null" />
     <attribute name="screenImageRef2" value="null" />
 	
-	<!-- reference to the current loading bar -->
-	<attribute name="loadimageDataWinRef" value="null" />
+	<!-- reference to the current loading bar
 	
-	<!-- labelid of the message seen while waiting for loading -->
+	syncing is now on server side implemented, swagner 11.06.2008
+	
+	<attribute name="loadimageDataWinRef" value="null" />
+	 -->
+	
+	<!-- labelid of the message seen while waiting for loading
+	
+	syncing is now on server side implemented, swagner 11.06.2008
+	
 	<attribute name="imageLoadMessageId" value="208" type="number" />
+	 -->
 	
 	<!-- labelid of the message seen while waiting for syncing
 	
@@ -48,11 +56,12 @@
   	<method name="addNewSyncImage" args="urlname,posx,posy,baseurl,fileName,moduleName,parentPath,room,domain">
   		if ($debug) Debug.write("urlname: ",urlname);
   		var now = new Date();
-  		this.startNewImagesSyncprocess.uniqueImageSyncName = fileName + now.getTime();
-  		this.startNewImagesSyncprocess.doCall();
+  		//This invokes a Method which is in the remoteWhiteboard.lzx
+  		this.startNewObjectSyncProcess.uniqueImageSyncName = fileName + now.getTime();
+  		this.startNewObjectSyncProcess.doCall();
   		this.addNewImage(urlname,posx,posy,baseurl,fileName,
   			moduleName,parentPath,room,domain,
-  			this.startNewImagesSyncprocess.uniqueImageSyncName);
+  			this.startNewObjectSyncProcess.uniqueImageSyncName);
   	</method>
   	
   	<!-- standard add Function -->
@@ -181,8 +190,9 @@
   	<method name="addImageToLayerHistorySynced" args="actionObject,refObj">
   		if ($debug) Debug.write("addImageToLayerHistory: ",actionObject,refObj);
   		//start sync process using the remote uniqueImageSyncName as identifier
-  		this.startNewImagesSyncprocess.uniqueImageSyncName = actionObject[8];
-  		this.startNewImagesSyncprocess.doCall();
+  		//This invokes a Method which is in the remoteWhiteboard.lzx
+  		this.startNewObjectSyncProcess.uniqueImageSyncName = actionObject[8];
+  		this.startNewObjectSyncProcess.doCall();
   		this.addImageToLayer(refObj,actionObject[actionObject.length-1],actionObject[1],
 		  		actionObject[actionObject.length-5],actionObject[actionObject.length-4],
 		  		actionObject[actionObject.length-3],actionObject[actionObject.length-2],
@@ -191,8 +201,9 @@
 		  		actionObject[6],actionObject[7],actionObject[8]);
   	</method>
   			
-  	<!--- @keywords deprecated
-  	TODO: uniqueImageSyncName missing
+  	<!--- 
+		invoke by the initial Loading process in remoteWhiteboard.lzx, 
+		does not invoke any Update Handler
   	 -->
   	<method name="addImageToLayerHistory" args="actionObject,refObj,isWmlLoader">
   		if ($debug) Debug.write("addImageToLayerHistory: ",actionObject,refObj,isWmlLoader);
@@ -201,7 +212,7 @@
 		  		actionObject[actionObject.length-3],actionObject[actionObject.length-2],
 		  		false,
 		  		actionObject[2],actionObject[3],actionObject[4],actionObject[5],
-		  		actionObject[6],actionObject[7]);
+		  		actionObject[6],actionObject[7],actionObject[8]);
   	</method>
   	
   	<!--- @keywords deprecated
@@ -250,8 +261,9 @@
 		if ($debug) Debug.write("storeTempValsAndLoadSyncList: ",objRef);
 		this.syncImageRefObj = objRef;
 		
-		this.sendCompletedImagesSyncEvent.uniqueImageSyncName = this.syncImageRefObj.uniqueImageSyncName;
-		this.sendCompletedImagesSyncEvent.doCall();
+		//This invokes a Method which is in the remoteWhiteboard.lzx
+		this.sendCompletedObjectSyncEvent.uniqueImageSyncName = this.syncImageRefObj.uniqueImageSyncName;
+		this.sendCompletedObjectSyncEvent.doCall();
 		
 		this.registerNewImage(this.syncImageRefObj.src,
 			this.syncImageRefObj.x,this.syncImageRefObj.y,
@@ -282,33 +294,11 @@
 			this.syncImageRefObj.moduleName,this.syncImageRefObj.parentPath,
 			this.syncImageRefObj.room,this.syncImageRefObj.domain,
 			false,this.syncImageRefObj.uniqueImageSyncName);	
-		this.sendCompletedImagesSyncEvent.uniqueImageSyncName = this.syncImageRefObj.uniqueImageSyncName;
-		this.sendCompletedImagesSyncEvent.doCall();
+		//This invokes a Method which is in the remoteWhiteboard.lzx
+		this.sendCompletedObjectSyncEvent.uniqueImageSyncName = this.syncImageRefObj.uniqueImageSyncName;
+		this.sendCompletedObjectSyncEvent.doCall();
 	</method>
 	
-    <netRemoteCallHib name="startNewImagesSyncprocess" funcname="whiteboardservice.startNewImagesSyncprocess"
-        remotecontext="$once{ canvas.thishib }" >
-    	<attribute name="uniqueImageSyncName" value="" type="string" />
-    	<netparam><method name="getValue">return parent.uniqueImageSyncName;</method></netparam>
-        <handler name="ondata" args="value">
-            <![CDATA[
-            	//The onResult-Handler will be called be the rtmpconnection
-            	if ($debug) Debug.write("startNewImagesSyncprocess: ",value);
-            ]]>
-        </handler>   
-    </netRemoteCallHib> 
-    
-    <netRemoteCallHib name="sendCompletedImagesSyncEvent" funcname="whiteboardservice.sendCompletedImagesSyncEvent"
-        remotecontext="$once{ canvas.thishib }" >
-    	<attribute name="uniqueImageSyncName" value="" type="string" />
-    	<netparam><method name="getValue">return parent.uniqueImageSyncName;</method></netparam>
-        <handler name="ondata" args="value">
-            <![CDATA[
-            	//The onResult-Handler will be called be the rtmpconnection
-            	if ($debug) Debug.write("sendCompletedImagesSyncEvent: ",value);
-            ]]>
-        </handler>   
-    </netRemoteCallHib>   	
 	
 	<!-- sending messages/notifications of sync process
 	
