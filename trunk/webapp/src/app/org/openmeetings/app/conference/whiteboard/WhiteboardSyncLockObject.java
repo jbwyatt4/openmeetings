@@ -8,9 +8,6 @@ public class WhiteboardSyncLockObject {
 	
 	private RoomClient roomclient;
 	private boolean isInitialLoaded = false;
-	private boolean isImageLoader = false;
-	private boolean isSWFLoader = false;
-	private boolean isWmlLoader = false;
 	private boolean isCurrentLoadingItem = false;
 	
 	private Date addtime;
@@ -30,22 +27,6 @@ public class WhiteboardSyncLockObject {
 
 	public void setInitialLoaded(boolean isInitialLoaded) {
 		this.isInitialLoaded = isInitialLoaded;
-	}
-
-	public boolean isImageLoader() {
-		return isImageLoader;
-	}
-
-	public void setImageLoader(boolean isImageLoader) {
-		this.isImageLoader = isImageLoader;
-	}
-
-	public boolean isWmlLoader() {
-		return isWmlLoader;
-	}
-
-	public void setWmlLoader(boolean isWmlLoader) {
-		this.isWmlLoader = isWmlLoader;
 	}
 
 	public Date getStarttime() {
@@ -70,14 +51,6 @@ public class WhiteboardSyncLockObject {
 
 	public void setAddtime(Date addtime) {
 		this.addtime = addtime;
-	}
-
-	public boolean isSWFLoader() {
-		return isSWFLoader;
-	}
-
-	public void setSWFLoader(boolean isSWFLoader) {
-		this.isSWFLoader = isSWFLoader;
 	}
 
 }

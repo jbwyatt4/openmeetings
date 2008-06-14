@@ -58,8 +58,10 @@ public class Application extends ApplicationAdapter implements
 	
 	private static HashMap<Long,HashMap<String,Map>> whiteBoardObjectList = new HashMap<Long,HashMap<String,Map>>();
 	private static HashMap<Long,Map<String,WhiteboardSyncLockObject>> whiteBoardSyncList = new HashMap<Long,Map<String,WhiteboardSyncLockObject>>();
-	private static HashMap<Long,Map<String,Map<String,WhiteboardSyncLockObject>>> whiteBoardImagesSyncList = new HashMap<Long,Map<String,Map<String,WhiteboardSyncLockObject>>>();
-	private static HashMap<Long,Map<String,WhiteboardSyncLockObject>> whiteBoardSWFSyncList = new HashMap<Long,Map<String,WhiteboardSyncLockObject>>();
+	
+	
+	private static HashMap<Long,Map<String,Map<String,WhiteboardSyncLockObject>>> whiteBoardObjectSyncList = new HashMap<Long,Map<String,Map<String,WhiteboardSyncLockObject>>>();
+//	private static HashMap<Long,Map<String,Map<String,WhiteboardSyncLockObject>>> whiteBoardSWFSyncList = new HashMap<Long,Map<String,Map<String,WhiteboardSyncLockObject>>>();
 	
 	/*
 	 * EMoticons FileList
@@ -1431,40 +1433,41 @@ public class Application extends ApplicationAdapter implements
 	 * Image Sync Process
 	 */
 	public static synchronized void setWhiteBoardImagesSyncListByRoomid(Long room_id, Map<String,Map<String,WhiteboardSyncLockObject>> mapObject ){
-		whiteBoardImagesSyncList.put(room_id, mapObject);
+		whiteBoardObjectSyncList.put(room_id, mapObject);
 	}
-	public static synchronized void setWhiteBoardImagesSyncListByRoomAndImageid(Long room_id, 
-			String image_id,Map<String,WhiteboardSyncLockObject> imageSyncList){
-		Map<String,Map<String,WhiteboardSyncLockObject>> roomList = whiteBoardImagesSyncList.get(room_id);
+	public static synchronized void setWhiteBoardImagesSyncListByRoomAndObjectId(Long room_id, 
+			String object_id,Map<String,WhiteboardSyncLockObject> imageSyncList){
+		Map<String,Map<String,WhiteboardSyncLockObject>> roomList = whiteBoardObjectSyncList.get(room_id);
 		if (roomList == null) {
 			roomList = new HashMap<String,Map<String,WhiteboardSyncLockObject>>();
 		}
 		if (imageSyncList.size() == 0) {
-			roomList.remove(image_id);
+			roomList.remove(object_id);
 		} else {
-			roomList.put(image_id, imageSyncList);
+			roomList.put(object_id, imageSyncList);
 		}
 		setWhiteBoardImagesSyncListByRoomid(room_id,roomList);
 	}
-	public static synchronized Map<String,Map<String,WhiteboardSyncLockObject>> getWhiteBoardImagesSyncListByRoomid(Long room_id){
-		Map<String,Map<String,WhiteboardSyncLockObject>> roomList = whiteBoardImagesSyncList.get(room_id);
+	public static synchronized Map<String,Map<String,WhiteboardSyncLockObject>> getWhiteBoardObjectSyncListByRoomid(Long room_id){
+		Map<String,Map<String,WhiteboardSyncLockObject>> roomList = whiteBoardObjectSyncList.get(room_id);
 		if (roomList == null) {
 			roomList = new HashMap<String,Map<String,WhiteboardSyncLockObject>>();
 		}
 		return roomList;
 	}
-	public static synchronized Map<String,WhiteboardSyncLockObject> getWhiteBoardImagesSyncListByRoomAndImageid(Long room_id, String image_id){
+	public static synchronized Map<String,WhiteboardSyncLockObject> getWhiteBoardObjectSyncListByRoomAndObjectId(Long room_id, 
+			String object_id){
 		log.debug("getWhiteBoardImagesSyncListByRoomAndImageid room_id: "+room_id);
-		Map<String,Map<String,WhiteboardSyncLockObject>> roomList = whiteBoardImagesSyncList.get(room_id);
+		Map<String,Map<String,WhiteboardSyncLockObject>> roomList = whiteBoardObjectSyncList.get(room_id);
 		if (roomList == null) {
 			roomList = new HashMap<String,Map<String,WhiteboardSyncLockObject>>();
 		}
 		log.debug("getWhiteBoardImagesSyncListByRoomAndImageid roomList: "+roomList);
-		log.debug("getWhiteBoardImagesSyncListByRoomAndImageid image_id: "+image_id);
+		log.debug("getWhiteBoardImagesSyncListByRoomAndImageid object_id: "+object_id);
 		if (roomList.size() == 1) {
 			log.debug("getWhiteBoardImagesSyncListByRoomAndImageid roomList Key image_id: "+roomList.keySet().iterator().next());
 		}
-		Map<String,WhiteboardSyncLockObject> imageSyncList = roomList.get(image_id);
+		Map<String,WhiteboardSyncLockObject> imageSyncList = roomList.get(object_id);
 		if (imageSyncList == null) {
 			imageSyncList = new HashMap<String,WhiteboardSyncLockObject>();
 		}
@@ -1474,17 +1477,54 @@ public class Application extends ApplicationAdapter implements
 	/*
 	 * SWF Sync Process
 	 */
-	public static synchronized void setWhiteBoardSWFSyncListByRoomid(Long room_id, Map<String,WhiteboardSyncLockObject> mapObject ){
-		whiteBoardSWFSyncList.put(room_id, mapObject);
-	}
-	public static synchronized Map<String,WhiteboardSyncLockObject> getWhiteBoardSWFSyncListByRoomid(Long room_id){
-		Map<String,WhiteboardSyncLockObject> roomList = whiteBoardSWFSyncList.get(room_id);
-		if (roomList == null) {
-			roomList = new HashMap<String,WhiteboardSyncLockObject>();
-		}
-		return roomList;
-	}
+//	public static synchronized void setWhiteBoardSWFSyncListByRoomid(Long room_id, Map<String,
+//			Map<String,WhiteboardSyncLockObject>> mapObject ){
+//		whiteBoardSWFSyncList.put(room_id, mapObject);
+//	}
+//	public static synchronized void setWhiteBoardSWFSyncListByRoomAndImageid(Long room_id, 
+//			String swf_id,Map<String,WhiteboardSyncLockObject> swfSyncList){
+//		Map<String,Map<String,WhiteboardSyncLockObject>> roomList = whiteBoardSWFSyncList.get(room_id);
+//		if (roomList == null) {
+//			roomList = new HashMap<String,Map<String,WhiteboardSyncLockObject>>();
+//		}
+//		if (swfSyncList.size() == 0) {
+//			roomList.remove(swf_id);
+//		} else {
+//			roomList.put(swf_id, swfSyncList);
+//		}
+//		setWhiteBoardSWFSyncListByRoomid(room_id,roomList);
+//	}
+//	public static synchronized Map<String,Map<String,WhiteboardSyncLockObject>> getWhiteBoardSWFSyncListByRoomid(Long room_id){
+//		Map<String,Map<String,WhiteboardSyncLockObject>> roomList = whiteBoardSWFSyncList.get(room_id);
+//		if (roomList == null) {
+//			roomList = new HashMap<String,Map<String,WhiteboardSyncLockObject>>();
+//		}
+//		return roomList;
+//	}
+//	public static synchronized Map<String,WhiteboardSyncLockObject> getWhiteBoardImagesSyncListByRoomAndSWFid(Long room_id, 
+//			String swf_id){
+//		log.debug("getWhiteBoardImagesSyncListByRoomAndSWFid room_id: "+room_id);
+//		Map<String,Map<String,WhiteboardSyncLockObject>> roomList = whiteBoardSWFSyncList.get(room_id);
+//		if (roomList == null) {
+//			roomList = new HashMap<String,Map<String,WhiteboardSyncLockObject>>();
+//		}
+//		log.debug("getWhiteBoardImagesSyncListByRoomAndSWFid roomList: "+roomList);
+//		log.debug("getWhiteBoardImagesSyncListByRoomAndSWFid swf_id: "+swf_id);
+//		if (roomList.size() == 1) {
+//			log.debug("getWhiteBoardImagesSyncListByRoomAndSWFid roomList Key image_id: "+roomList.keySet().iterator().next());
+//		}
+//		Map<String,WhiteboardSyncLockObject> swfSyncList = roomList.get(swf_id);
+//		if (swfSyncList == null) {
+//			swfSyncList = new HashMap<String,WhiteboardSyncLockObject>();
+//		}
+//		return swfSyncList;
+//	}	
 	
+	
+	/*
+	 * Whiteboard Object List
+	 * 
+	 */
 	public static synchronized HashMap<Long,HashMap<String,Map>> getWhiteBoardObjectList(){
 		return whiteBoardObjectList;
 	}
