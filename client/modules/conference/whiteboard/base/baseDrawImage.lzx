@@ -43,21 +43,32 @@
     
     <handler name="setNewScreenUserName" args="val" />
   	
+  	<!-- invoked by clicking on the confirmation dialog after 
+  		clicking on an image in the Library -->
   	<method name="addNewSyncImage" args="urlname,posx,posy,baseurl,fileName,moduleName,parentPath,room,domain">
   		if ($debug) Debug.write("urlname: ",urlname);
+  		var now = new Date();
+  		this.startNewImagesSyncprocess.uniqueImageSyncName = fileName + now.getTime();
   		this.startNewImagesSyncprocess.doCall();
-  		this.addNewImage(urlname,posx,posy,baseurl,fileName,moduleName,parentPath,room,domain);
+  		this.addNewImage(urlname,posx,posy,baseurl,fileName,
+  			moduleName,parentPath,room,domain,
+  			this.startNewImagesSyncprocess.uniqueImageSyncName);
   	</method>
   	
-  	<method name="addNewImage" args="urlname,posx,posy,baseurl,fileName,moduleName,parentPath,room,domain">
+  	<!-- standard add Function -->
+  	<method name="addNewImage" args="urlname,posx,posy,baseurl,fileName,moduleName,parentPath,room,domain,uniqueImageSyncName">
   		if ($debug) Debug.write("urlname: ",urlname);
-  		this.addImageToLayer(this,'image'+this.getCounter(),urlname,posx,posy,0,0,true,baseurl,fileName,moduleName,parentPath,room,domain);
+  		this.addImageToLayer(this,'image'+this.getCounter(),urlname,
+  			posx,posy,0,0,
+  			true,
+  			baseurl,fileName,moduleName,parentPath,room,domain,uniqueImageSyncName);
   	</method>
   	
 	<!--
 		alterModus => this is added by the mod not remotely
+		
 	 -->
-  	<method name="addImageToLayer" args="obj,nameing,urlname,posx,posy,width,height,alterModus,baseurl,fileName,moduleName,parentPath,room,domain">
+  	<method name="addImageToLayer" args="obj,nameing,urlname,posx,posy,width,height,alterModus,baseurl,fileName,moduleName,parentPath,room,domain,uniqueImageSyncName">
         <![CDATA[
 			//only show if it is not part of wml-file-object
 			//do not show at all as this is handled via the remote Object
@@ -81,7 +92,8 @@
 	  			remotewidth:width,remoteheight:height,
 	  			downloadurl:urlname,alterModus:alterModus,
 	  			baseurl:baseurl,fileName:fileName,moduleName:moduleName,
-	  			parentPath:parentPath,room:room,domain:domain});	
+	  			parentPath:parentPath,room:room,domain:domain,
+	  			uniqueImageSyncName:uniqueImageSyncName});	
 			
 			//this.parent.parent.isloadingImage.sendEvent(this.currentlayer);
 			//this.parent._loading.setAttribute('visible',true);
@@ -142,6 +154,9 @@
 		]]>
   	</method>   
     
+    <!--
+    TODO: Make new Base Class including the Screen sharing Functions
+     -->
     <method name="toggleVisibleScreenSharing">
         if (this.screenImageRefNumber==1){
             if (this.screenImageRef1) this.screenImageRef1.destroy();
@@ -160,17 +175,25 @@
 		
 		-->
 		
+	<!-- method adds a new Image to the Layer,
+	but without making an Update-Event, 
+	Image added by remote host -->	
   	<method name="addImageToLayerHistorySynced" args="actionObject,refObj">
   		if ($debug) Debug.write("addImageToLayerHistory: ",actionObject,refObj);
+  		//start sync process using the remote uniqueImageSyncName as identifier
+  		this.startNewImagesSyncprocess.uniqueImageSyncName = actionObject[8];
   		this.startNewImagesSyncprocess.doCall();
   		this.addImageToLayer(refObj,actionObject[actionObject.length-1],actionObject[1],
 		  		actionObject[actionObject.length-5],actionObject[actionObject.length-4],
 		  		actionObject[actionObject.length-3],actionObject[actionObject.length-2],
 		  		false,
 		  		actionObject[2],actionObject[3],actionObject[4],actionObject[5],
-		  		actionObject[6],actionObject[7]);
+		  		actionObject[6],actionObject[7],actionObject[8]);
   	</method>
   			
+  	<!--- @keywords deprecated
+  	TODO: uniqueImageSyncName missing
+  	 -->
   	<method name="addImageToLayerHistory" args="actionObject,refObj,isWmlLoader">
   		if ($debug) Debug.write("addImageToLayerHistory: ",actionObject,refObj,isWmlLoader);
   		this.addImageToLayer(refObj,actionObject[actionObject.length-1],actionObject[1],
@@ -181,12 +204,21 @@
 		  		actionObject[6],actionObject[7]);
   	</method>
   	
+  	<!--- @keywords deprecated
+  	TODO: uniqueImageSyncName missing
+  	 -->
   	<method name="addImageToLayerHistoryRecorded" args="actionObject,refObj,isWmlLoader">
 		this.isWmlLoaderImage = isWmlLoader;
-  		this.addImageToLayerRecorded(refObj,actionObject[actionObject.length-1],actionObject[1],actionObject[actionObject.length-5],actionObject[actionObject.length-4],actionObject[actionObject.length-3],actionObject[actionObject.length-2],false,actionObject[2],actionObject[3],actionObject[4],actionObject[5],actionObject[6],actionObject[7]);
+  		this.addImageToLayerRecorded(refObj,
+  			actionObject[actionObject.length-1],actionObject[1],
+  			actionObject[actionObject.length-5],actionObject[actionObject.length-4],
+  			actionObject[actionObject.length-3],actionObject[actionObject.length-2],
+  			false,
+  			actionObject[2],actionObject[3],actionObject[4],actionObject[5],
+  			actionObject[6],actionObject[7]);
   	</method>
   	
-  	<method name="registerNewImage" args="urlname,posx,posy,width,height,baseurl,fileName,moduleName,parentPath,room,domain,doCallUpdate">
+  	<method name="registerNewImage" args="urlname,posx,posy,width,height,baseurl,fileName,moduleName,parentPath,room,domain,doCallUpdate,uniqueImageSyncName">
 		if ($debug) Debug.write("registerNewImage: ",urlname,posx,posy,width,height,baseurl,fileName,moduleName,parentPath,room,domain);
 		var actionObject = new Array();
 	    actionObject.push('image');
@@ -197,6 +229,7 @@
 		actionObject.push(parentPath);
 		actionObject.push(room);
 		actionObject.push(domain);
+		actionObject.push(uniqueImageSyncName);
 		actionObject.push(this.counter);
 	    actionObject.push(posx);
 	    actionObject.push(posy);
@@ -208,10 +241,16 @@
 	    if (doCallUpdate) this.onsharedMessage('draw',actionObject);	
   	</method>
 	
+	<!-- 
+		adds the Image to the Layers and throws a onsharedMessage,
+		this can only happen _after_ loading the Image cause you do not know its 
+		width and height 
+	-->
 	<method name="storeTempValsAndLoadSyncList" args="objRef">
 		if ($debug) Debug.write("storeTempValsAndLoadSyncList: ",objRef);
 		this.syncImageRefObj = objRef;
 		
+		this.sendCompletedImagesSyncEvent.uniqueImageSyncName = this.syncImageRefObj.uniqueImageSyncName;
 		this.sendCompletedImagesSyncEvent.doCall();
 		
 		this.registerNewImage(this.syncImageRefObj.src,
@@ -220,10 +259,13 @@
 			this.syncImageRefObj.baseurl,this.syncImageRefObj.fileName,
 			this.syncImageRefObj.moduleName,this.syncImageRefObj.parentPath,
 			this.syncImageRefObj.room,this.syncImageRefObj.domain,
-			true);		
+			true,this.syncImageRefObj.uniqueImageSyncName);		
 	
 	</method>
 	
+	<!--- @keywords deprecated
+  	TODO: check Recorder Modus
+  	 -->
 	<method name="storeTempValsAndLoadSyncListRecording" args="objRef">
 		if ($debug) Debug.write("########### storeTempValsAndLoadSyncListRecording: ",objRef);
 		this.syncImageRefObj = objRef;
@@ -239,12 +281,15 @@
 			this.syncImageRefObj.baseurl,this.syncImageRefObj.fileName,
 			this.syncImageRefObj.moduleName,this.syncImageRefObj.parentPath,
 			this.syncImageRefObj.room,this.syncImageRefObj.domain,
-			false);			
+			false,this.syncImageRefObj.uniqueImageSyncName);	
+		this.sendCompletedImagesSyncEvent.uniqueImageSyncName = this.syncImageRefObj.uniqueImageSyncName;
 		this.sendCompletedImagesSyncEvent.doCall();
 	</method>
 	
     <netRemoteCallHib name="startNewImagesSyncprocess" funcname="whiteboardservice.startNewImagesSyncprocess"
         remotecontext="$once{ canvas.thishib }" >
+    	<attribute name="uniqueImageSyncName" value="" type="string" />
+    	<netparam><method name="getValue">return parent.uniqueImageSyncName;</method></netparam>
         <handler name="ondata" args="value">
             <![CDATA[
             	//The onResult-Handler will be called be the rtmpconnection
@@ -255,6 +300,8 @@
     
     <netRemoteCallHib name="sendCompletedImagesSyncEvent" funcname="whiteboardservice.sendCompletedImagesSyncEvent"
         remotecontext="$once{ canvas.thishib }" >
+    	<attribute name="uniqueImageSyncName" value="" type="string" />
+    	<netparam><method name="getValue">return parent.uniqueImageSyncName;</method></netparam>
         <handler name="ondata" args="value">
             <![CDATA[
             	//The onResult-Handler will be called be the rtmpconnection
@@ -305,6 +352,9 @@
     </netRemoteCallHib>
     	-->
     
+    <!--- @keywords deprecated
+    TODO: Check recorder Modus
+     -->
     <method name="doRegisterAfterLoadingOrRecording">
     	if ($debug) Debug.write("########### doRegisterAfterLoadingOrRecording");
 		this.imageSyncMessageText = canvas.getLabelName(this.imageSyncMessageId);

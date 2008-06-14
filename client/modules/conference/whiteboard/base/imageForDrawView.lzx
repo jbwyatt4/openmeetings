@@ -20,6 +20,10 @@
 	<attribute name="remoteheight" value="0" type="number" />
 	
 	<attribute name="typeOfObject" value="image" type="string" />
+	
+	<!-- holds the reference to the SyncProcess -->
+	<attribute name="uniqueImageSyncName" value="" type="string" />
+	
 		<!--
 			if (this.width>this.refObj.width){
 				var height = this.height/(this.width/this.refObj.width)
