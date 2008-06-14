@@ -86,7 +86,7 @@
 			} else if(actionObject[0]=='letter'){
 				this.drawactionHistory(actionObject,this);
 			} else if(actionObject[0]=='image'){
-				this.addImageToLayerHistory(actionObject,this);
+				this.addImageToLayerHistoryToLocal(actionObject,this);
 			} else if(actionObject[0]=='swf'){
 				this.addSWFToLayerHistory(actionObject,this);
 			} else if(actionObject[0]=='rectangle'){
@@ -102,8 +102,8 @@
 	<!-- methods for syncing events -->
     <netRemoteCallHib name="startNewObjectSyncProcess" funcname="whiteboardservice.startNewObjectSyncProcess"
         remotecontext="$once{ canvas.thishib }" >
-    	<attribute name="uniqueImageSyncName" value="" type="string" />
-    	<netparam><method name="getValue">return parent.uniqueImageSyncName;</method></netparam>
+    	<attribute name="uniqueObjectSyncName" value="" type="string" />
+    	<netparam><method name="getValue">return parent.uniqueObjectSyncName;</method></netparam>
         <handler name="ondata" args="value">
             <![CDATA[
             	//The onResult-Handler will be called be the rtmpconnection
@@ -114,8 +114,8 @@
     
     <netRemoteCallHib name="sendCompletedObjectSyncEvent" funcname="whiteboardservice.sendCompletedObjectSyncEvent"
         remotecontext="$once{ canvas.thishib }" >
-    	<attribute name="uniqueImageSyncName" value="" type="string" />
-    	<netparam><method name="getValue">return parent.uniqueImageSyncName;</method></netparam>
+    	<attribute name="uniqueObjectSyncName" value="" type="string" />
+    	<netparam><method name="getValue">return parent.uniqueObjectSyncName;</method></netparam>
         <handler name="ondata" args="value">
             <![CDATA[
             	//The onResult-Handler will be called be the rtmpconnection
