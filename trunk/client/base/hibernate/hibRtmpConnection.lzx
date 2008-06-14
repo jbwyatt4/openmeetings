@@ -502,11 +502,6 @@
                 }
                 if (canvas._videocontainer!=null){
 	                canvas._videocontainer.disconnectclient(value.publicSID); 
-					//remove that client from sync list of wmlFileLoader/image if present
-					if (canvas._drawarea!=null){
-						canvas._drawarea.sendCompleteWmlLoadedRClient(value);
-						canvas._drawarea.sendCompleteImageLoadedRClient(value);
-					}
 	                if (canvas.currentModApply!=null) canvas.currentModApply.rejectUser(value);
 	                //parent.getClientListScope.doCall();  
 	                if (value.isRecording) {
@@ -528,8 +523,6 @@
 	    		Debug.write("logicalRoomLeaveDis: ",value);
 	    		canvas._videocontainer.disconnectclient(value.broadCastID); 
 				//remove that client from sync list of wmlFileLoader/image if present
-				canvas._drawarea.sendCompleteWmlLoadedRClient(value);
-				canvas._drawarea.sendCompleteImageLoadedRClient(value);
 	    		if (canvas.currentModApply!=null) canvas.currentModApply.rejectUser(value);
                	if (value.isRecording) {
 		    		canvas._mymod.recordingUser = null;

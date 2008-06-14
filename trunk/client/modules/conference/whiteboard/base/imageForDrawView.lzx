@@ -6,6 +6,7 @@
 	<attribute name="downloadurl" value="" type="string" />
 		
 	<attribute name="alterModus" value="true" type="boolean" />
+	<attribute name="isLocalSync" value="false" type="boolean" />
 	
 	<attribute name="recorderModus" value="false" type="boolean" />
 	
@@ -22,7 +23,7 @@
 	<attribute name="typeOfObject" value="image" type="string" />
 	
 	<!-- holds the reference_id to the SyncProcess -->
-	<attribute name="uniqueImageSyncName" value="" type="string" />
+	<attribute name="uniqueObjectSyncName" value="" type="string" />
 	
 		<!--
 			if (this.width>this.refObj.width){
@@ -81,6 +82,8 @@
 				this.refObj.storeTempValsAndLoadSyncListRecording(this);
 			} else if (this.alterModus){
 				this.refObj.storeTempValsAndLoadSyncList(this);
+			} else if (this.isLocalSync){
+				this.refObj.storeTempValsAndLoadSyncList(this);
 			} else {
 				this.refObj.sendLoadNotificationImage(this);
 			}
@@ -110,6 +113,8 @@
 				this.refObj.storeTempValsAndLoadSyncListRecording(this);
 			} else if (this.alterModus){
 				this.refObj.storeTempValsAndLoadSyncList(this);
+			} else if (this.isLocalSync){
+				this.refObj.storeTempValsAndLoadSyncList(this);
 			} else {
 				this.refObj.sendLoadNotificationImage(this);
 			}
@@ -137,6 +142,8 @@
 			if (this.recorderModus) {
 				this.refObj.storeTempValsAndLoadSyncListRecording(this);
 			} else if (this.alterModus){
+				this.refObj.storeTempValsAndLoadSyncList(this);
+			} else if (this.isLocalSync){
 				this.refObj.storeTempValsAndLoadSyncList(this);
 			} else {
 				this.refObj.sendLoadNotificationImage(this);

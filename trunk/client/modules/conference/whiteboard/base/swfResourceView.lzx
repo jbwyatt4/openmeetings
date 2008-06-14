@@ -34,7 +34,7 @@
     <attribute name="typeOfObject" value="swf" type="string" />
     
 	<!-- holds the reference_id to the SyncProcess -->
-	<attribute name="uniqueImageSyncName" value="" type="string" />    
+	<attribute name="uniqueObjectSyncName" value="" type="string" />    
     
     <view name="_swfView" play="false" stretches="both">
         <handler name="onframe" args="i">

@@ -15,14 +15,14 @@
     <method name="loadSWFPresentationSynced" args="url,fileName,moduleName,parentPath,room,domain,slideNumber">
   		var now = new Date();
   		//This invokes a Method which is in the remoteWhiteboard.lzx
-  		this.startNewObjectSyncProcess.uniqueImageSyncName = fileName + now.getTime();
+  		this.startNewObjectSyncProcess.uniqueObjectSyncName = fileName + now.getTime();
   		this.startNewObjectSyncProcess.doCall();
         this.addPresentationToLayer(this,url,'swfpresentationobject'+this.getCounter(),
         	0,0,0,0,
         	true,
         	url,fileName,moduleName,parentPath,room,domain,slideNumber,
         	100,0,0,0,0,
-        	this.startNewObjectSyncProcess.uniqueImageSyncName );
+        	this.startNewObjectSyncProcess.uniqueObjectSyncName );
     </method>
     
     <method name="checkSWFPresentation" args="url,fileName,moduleName,parentPath,room,domain,slideNumber">
@@ -45,8 +45,10 @@
     
 	<!--
 		alterModus => this is added by the mod not remotely
+		
+		adds the SWF-Object to the Layer
 	 -->
-  	<method name="addPresentationToLayer" args="obj,urlName,nameing,posx,posy,width,height,alterModus,baseurl,fileName,moduleName,parentPath,room,domain,slideNumber,currentzoom,innerwidth,innerheight,innerx,innery,uniqueIdentifier">
+  	<method name="addPresentationToLayer" args="obj,urlName,nameing,posx,posy,width,height,alterModus,baseurl,fileName,moduleName,parentPath,room,domain,slideNumber,currentzoom,innerwidth,innerheight,innerx,innery,uniqueObjectSyncName">
         <![CDATA[
             //Debug.write("addPresentationToLayer",obj,nameing,posx,posy,width,height,alterModus,baseurl,fileName,moduleName,parentPath,room,domain,slideNumber);
             //only show if it is not part of wml-file-object
@@ -54,6 +56,8 @@
             //    this.loadimageDataWinRef = new loadWhiteboardWindow(canvas.main_content._content.inner,{refObj:this});
             //    this.loadimageDataWinRef.setMessage(canvas.getLabelName(this.imageLoadMessageId));
             //}
+            
+        	if ($debug) Debug.write("addPresentationToLayer uniqueObjectSyncName:",uniqueObjectSyncName);
             
             var downloadurl = 'http://'+canvas.rtmphostlocal+':'+canvas.red5httpport+'/'+canvas.webAppRootKey+'/DownloadHandler?' +
                     'fileName=' + fileName +
@@ -72,7 +76,7 @@
             	width:width,height:height,currentzoom:currentzoom,
             	innerwidth:innerwidth,innerheight:innerheight,
             	innerx:innerx,innery:innery,
-            	uniqueImageSyncName:uniqueImageSyncName});
+            	uniqueObjectSyncName:uniqueObjectSyncName});
 
             //this.parent.parent.isloadingImage.sendEvent(this.currentlayer);
             ////Debug.write("downloadurl. ",downloadurl);
@@ -81,6 +85,9 @@
 		]]>
   	</method>
   	
+  	<!--
+  		TODO: check Recording
+  	-->
   	<method name="addPresentationToLayerRecording" args="obj,urlName,nameing,posx,posy,width,height,alterModus,baseurl,fileName,moduleName,parentPath,room,domain,slideNumber,currentzoom,innerwidth,innerheight,innerx,innery">
         <![CDATA[
             //Debug.write("addPresentationToLayer",obj,nameing,posx,posy,width,height,alterModus,baseurl,fileName,moduleName,parentPath,room,domain,slideNumber);
@@ -115,19 +122,49 @@
 		]]>
   	</method>  	
     
-  	<method name="addSWFToLayerHistory" args="actionObject,refObj,isWmlLoader">
-		this.isWmlLoaderImage = isWmlLoader;
+    <!-- 
+    	Invoked by the remote Host, see sendWatchObject in baseDraw.lzx
+     -->
+    <method name="addSWFToLayerHistorySynced" args="actionObject,refObj">
         this.baseactionobjectList.push(actionObject);	
-  		this.addPresentationToLayer(refObj,actionObject[1],actionObject[actionObject.length-1],actionObject[actionObject.length-5],actionObject[actionObject.length-4],actionObject[actionObject.length-3],actionObject[actionObject.length-2],false,actionObject[2],actionObject[3],actionObject[4],actionObject[5],actionObject[6],actionObject[7],actionObject[8],actionObject[16],actionObject[11],actionObject[12],actionObject[9],actionObject[10]);
+  		this.startNewObjectSyncProcess.uniqueObjectSyncName = actionObject[17];
+  		this.startNewObjectSyncProcess.doCall();        
+   		this.addPresentationToLayer(refObj,actionObject[1],actionObject[actionObject.length-1],
+  			actionObject[actionObject.length-5],actionObject[actionObject.length-4],
+  			actionObject[actionObject.length-3],actionObject[actionObject.length-2],
+  			false,
+  			actionObject[2],actionObject[3],actionObject[4],actionObject[5],actionObject[6],
+  			actionObject[7],actionObject[8],actionObject[16],actionObject[11],actionObject[12],
+  			actionObject[9],actionObject[10],actionObject[17]);
   	</method>
   	
+	<!--- 
+		invoke by the initial Loading process in remoteWhiteboard.lzx, 
+		does not invoke any Update Handler
+		once this object is loaded, it will throw an Update event of kind
+		addSWFToLayerHistoryToLocalLoaded
+  	 -->
+  	<method name="addSWFToLayerHistoryToLocal" args="actionObject,refObj">
+        this.baseactionobjectList.push(actionObject);	
+  		this.addPresentationToLayer(refObj,actionObject[1],actionObject[actionObject.length-1],
+  			actionObject[actionObject.length-5],actionObject[actionObject.length-4],
+  			actionObject[actionObject.length-3],actionObject[actionObject.length-2],
+  			false,
+  			actionObject[2],actionObject[3],actionObject[4],actionObject[5],actionObject[6],
+  			actionObject[7],actionObject[8],actionObject[16],actionObject[11],actionObject[12],
+  			actionObject[9],actionObject[10],actionObject[17]);
+  	</method>
+  	
+  	<!--
+  		TODO: Check Recording Process
+  	 -->
   	<method name="addSWFToLayerHistoryRecording" args="actionObject,refObj,isWmlLoader">
 		this.isWmlLoaderImage = isWmlLoader;
         this.baseactionobjectList.push(actionObject);	
   		this.addPresentationToLayerRecording(refObj,actionObject[1],actionObject[actionObject.length-1],actionObject[actionObject.length-5],actionObject[actionObject.length-4],actionObject[actionObject.length-3],actionObject[actionObject.length-2],false,actionObject[2],actionObject[3],actionObject[4],actionObject[5],actionObject[6],actionObject[7],actionObject[8],actionObject[16],actionObject[11],actionObject[12],actionObject[9],actionObject[10]);
   	</method>
   	
-  	<method name="registerNewSWF" args="urlname,posx,posy,width,height,baseurl,fileName,moduleName,parentPath,room,domain,slideNumber,innerx,innery,innerwidth,innerheight,zoomlevel,currentzoom,initwidth,initheight,uniqueImageSyncName">
+  	<method name="registerNewSWF" args="urlname,posx,posy,width,height,baseurl,fileName,moduleName,parentPath,room,domain,slideNumber,innerx,innery,innerwidth,innerheight,zoomlevel,currentzoom,initwidth,initheight,uniquObjectSyncName,doUpdateMessage">
 		var actionObject = new Array();
 	    actionObject.push('swf');//0
 	    actionObject.push(urlname);//1
@@ -146,7 +183,7 @@
         actionObject.push(initwidth);//14
         actionObject.push(initheight);//15
         actionObject.push(currentzoom);//16
-        actionObject.push(uniqueImageSyncName);//17
+        actionObject.push(uniquObjectSyncName);//17
 		actionObject.push(this.counter);
 	    actionObject.push(posx);
 	    actionObject.push(posy);
@@ -155,30 +192,44 @@
 	    actionObject.push(this.currentlayer.name);
 	    this.baseactionobjectList.push(actionObject);	
 	    this.checkStepLayers();
-	    this.onsharedMessage('draw',actionObject);	
+	    if (doUpdateMessage) this.onsharedMessage('draw',actionObject);	
   	</method>    
     
-	
+	<!--
+		Invoked by the swfResource, if the alterModus = true,
+		throws an Update-Event to all connected Clients
+	 -->
 	<method name="storeTempValsAndLoadSyncListSWF" args="objRef">
 		this.syncImageRefObj = objRef;
-		//this.getSWFClientListScope.doCall();
+		this.doRegisterNewSwf(true);
+		this.sendCompletedObjectSyncEvent.uniqueObjectSyncName = this.syncImageRefObj.uniqueObjectSyncName;
+		this.sendCompletedObjectSyncEvent.doCall();
 	</method>    
 	
-	<!-- Invoked after successfully loadin an Image,
-	and Invokes an Update Event -->
+	<!--
+		Invoked by the swfResource, if the alterModus = false,
+		throws NO Update-Event to all connected Clients
+	 -->
+	<method name="sendLoadNotificationSWF" args="objRef" >
+		this.syncImageRefObj = objRef;
+		this.doRegisterNewSwf(false);
+		this.sendCompletedObjectSyncEvent.uniqueObjectSyncName = this.syncImageRefObj.uniqueObjectSyncName;
+		this.sendCompletedObjectSyncEvent.doCall();
+	</method>
+	
+	<!-- 
+		TODO: Check Recording
+	-->
 	<method name="storeTempValsAndLoadSyncListSWFRecording" args="objRef">
 		this.syncImageRefObj = objRef;
 		//this.doRegisterNewSwf();
 		//this.sendCompleteSWFSync();
 		//This invokes a Method which is in the remoteWhiteboard.lzx
-		this.sendCompletedObjectSyncEvent.uniqueImageSyncName = this.syncImageRefObj.uniqueImageSyncName;
+		this.sendCompletedObjectSyncEvent.uniqueObjectSyncName = this.syncImageRefObj.uniqueObjectSyncName;
 		this.sendCompletedObjectSyncEvent.doCall();
 	</method>    
     
-	<method name="sendLoadNotificationSWF" args="message" >
-		//this.sendMessageWithClientSWF.doCall();
-		
-	</method>
+	
 
 	<!-- sending messages/notifications of sync process
 		syncing is now on server side implemented, swagner 12.06.2008
@@ -217,7 +268,7 @@
     </netRemoteCallHib>
     	-->
     
-    <method name="doRegisterNewSwf" args="throwUpdateEvent">
+    <method name="doRegisterNewSwf" args="doUpdateMessage">
 		//now send notifications to connected clients
 		this.setAttribute('drawmodus','hand');
         
@@ -231,7 +282,7 @@
                 this.syncImageRefObj._swfView.width,this.syncImageRefObj._swfView.height,
                 this.syncImageRefObj.zoomlevel,this.syncImageRefObj.currentzoomFactor,
                 this.syncImageRefObj.initwidth,this.syncImageRefObj.initheight,
-                this.syncImageRefObj.uniqueImageSyncName);
+                this.syncImageRefObj.uniqueObjectSyncName,doUpdateMessage);
         
 		//set modus to hand so users can directly select that image
 		this.setModus('swf');

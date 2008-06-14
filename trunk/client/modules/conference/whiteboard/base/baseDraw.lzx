@@ -667,7 +667,7 @@
 			} else if(actionObject[0]=='swf'){
 				//Image will send the onwmlLoaderSend later cause it has to be send
 				//once the image has been loaded completely
-				this.addSWFToLayerHistory(lastactionObject,this,isWmlLoader);
+				this.addSWFToLayerHistorySynced(lastactionObject,this);
 			} else if(actionObject[0]=='rectangle'){
 				this.drawrectangleToHistory(lastactionObject,this);
 			} else if(actionObject[0]=='ellipse'){

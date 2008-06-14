@@ -57,27 +57,27 @@
   		if ($debug) Debug.write("urlname: ",urlname);
   		var now = new Date();
   		//This invokes a Method which is in the remoteWhiteboard.lzx
-  		this.startNewObjectSyncProcess.uniqueImageSyncName = fileName + now.getTime();
+  		this.startNewObjectSyncProcess.uniqueObjectSyncName = fileName + now.getTime();
   		this.startNewObjectSyncProcess.doCall();
   		this.addNewImage(urlname,posx,posy,baseurl,fileName,
   			moduleName,parentPath,room,domain,
-  			this.startNewObjectSyncProcess.uniqueImageSyncName);
+  			this.startNewObjectSyncProcess.uniqueObjectSyncName,false);
   	</method>
   	
   	<!-- standard add Function -->
-  	<method name="addNewImage" args="urlname,posx,posy,baseurl,fileName,moduleName,parentPath,room,domain,uniqueImageSyncName">
+  	<method name="addNewImage" args="urlname,posx,posy,baseurl,fileName,moduleName,parentPath,room,domain,uniqueObjectSyncName,isLocalSync">
   		if ($debug) Debug.write("urlname: ",urlname);
   		this.addImageToLayer(this,'image'+this.getCounter(),urlname,
   			posx,posy,0,0,
   			true,
-  			baseurl,fileName,moduleName,parentPath,room,domain,uniqueImageSyncName);
+  			baseurl,fileName,moduleName,parentPath,room,domain,uniqueObjectSyncName,isLocalSync);
   	</method>
   	
 	<!--
 		alterModus => this is added by the mod not remotely
 		
 	 -->
-  	<method name="addImageToLayer" args="obj,nameing,urlname,posx,posy,width,height,alterModus,baseurl,fileName,moduleName,parentPath,room,domain,uniqueImageSyncName">
+  	<method name="addImageToLayer" args="obj,nameing,urlname,posx,posy,width,height,alterModus,baseurl,fileName,moduleName,parentPath,room,domain,uniqueObjectSyncName,isLocalSync">
         <![CDATA[
 			//only show if it is not part of wml-file-object
 			//do not show at all as this is handled via the remote Object
@@ -102,7 +102,8 @@
 	  			downloadurl:urlname,alterModus:alterModus,
 	  			baseurl:baseurl,fileName:fileName,moduleName:moduleName,
 	  			parentPath:parentPath,room:room,domain:domain,
-	  			uniqueImageSyncName:uniqueImageSyncName});	
+	  			uniqueObjectSyncName:uniqueObjectSyncName,
+	  			isLocalSync:isLocalSync});	
 			
 			//this.parent.parent.isloadingImage.sendEvent(this.currentlayer);
 			//this.parent._loading.setAttribute('visible',true);
@@ -189,34 +190,56 @@
 	Image added by remote host -->	
   	<method name="addImageToLayerHistorySynced" args="actionObject,refObj">
   		if ($debug) Debug.write("addImageToLayerHistory: ",actionObject,refObj);
-  		//start sync process using the remote uniqueImageSyncName as identifier
+  		//start sync process using the remote uniqueObjectSyncName as identifier
   		//This invokes a Method which is in the remoteWhiteboard.lzx
-  		this.startNewObjectSyncProcess.uniqueImageSyncName = actionObject[8];
+  		this.startNewObjectSyncProcess.uniqueObjectSyncName = actionObject[8];
   		this.startNewObjectSyncProcess.doCall();
   		this.addImageToLayer(refObj,actionObject[actionObject.length-1],actionObject[1],
 		  		actionObject[actionObject.length-5],actionObject[actionObject.length-4],
 		  		actionObject[actionObject.length-3],actionObject[actionObject.length-2],
 		  		false,
 		  		actionObject[2],actionObject[3],actionObject[4],actionObject[5],
-		  		actionObject[6],actionObject[7],actionObject[8]);
+		  		actionObject[6],actionObject[7],actionObject[8],false);
   	</method>
   			
   	<!--- 
 		invoke by the initial Loading process in remoteWhiteboard.lzx, 
 		does not invoke any Update Handler
+		once this object is loaded, it will throw an Update event of kind
+		addImageToLayerHistoryToLocalLoaded		
   	 -->
-  	<method name="addImageToLayerHistory" args="actionObject,refObj,isWmlLoader">
-  		if ($debug) Debug.write("addImageToLayerHistory: ",actionObject,refObj,isWmlLoader);
+  	<method name="addImageToLayerHistoryToLocal" args="actionObject,refObj">
+  		if ($debug) Debug.write("addImageToLayerHistoryToLocal: ",actionObject,refObj);
   		this.addImageToLayer(refObj,actionObject[actionObject.length-1],actionObject[1],
 		  		actionObject[actionObject.length-5],actionObject[actionObject.length-4],
 		  		actionObject[actionObject.length-3],actionObject[actionObject.length-2],
 		  		false,
 		  		actionObject[2],actionObject[3],actionObject[4],actionObject[5],
-		  		actionObject[6],actionObject[7],actionObject[8]);
+		  		actionObject[6],actionObject[7],actionObject[8],true);
   	</method>
   	
+  	<!-- 
+  		this handler is implemented also in remoteWhiteboard.lzx to sync a Local Object list
+  		but throws NO Update Event, cause its only needed Locally, the hole Sync Process
+  		has a different Sync-Object for Loading the complete Object List from the Sever.
+  		Each Object is loaded Locally, once all Objects are loaded the Complete-Event is broadcasted
+  		to the server, but every Item on the List is only controlled locally
+  	-->
+  	<handler name="addImageToLayerHistoryToLocalLoaded" args="objRef">
+  		if ($debug) Debug.write("addImageToLayerHistoryToLocal: ",actionObject,refObj);
+		this.syncImageRefObj = objRef;
+		
+		this.registerNewImage(this.syncImageRefObj.src,
+			this.syncImageRefObj.x,this.syncImageRefObj.y,
+			this.syncImageRefObj.width,this.syncImageRefObj.height,
+			this.syncImageRefObj.baseurl,this.syncImageRefObj.fileName,
+			this.syncImageRefObj.moduleName,this.syncImageRefObj.parentPath,
+			this.syncImageRefObj.room,this.syncImageRefObj.domain,
+			false,this.syncImageRefObj.uniqueObjectSyncName);
+  	</handler>
+  	
   	<!--- @keywords deprecated
-  	TODO: uniqueImageSyncName missing
+  	TODO: uniqueObjectSyncName missing
   	 -->
   	<method name="addImageToLayerHistoryRecorded" args="actionObject,refObj,isWmlLoader">
 		this.isWmlLoaderImage = isWmlLoader;
@@ -229,7 +252,7 @@
   			actionObject[6],actionObject[7]);
   	</method>
   	
-  	<method name="registerNewImage" args="urlname,posx,posy,width,height,baseurl,fileName,moduleName,parentPath,room,domain,doCallUpdate,uniqueImageSyncName">
+  	<method name="registerNewImage" args="urlname,posx,posy,width,height,baseurl,fileName,moduleName,parentPath,room,domain,doCallUpdate,uniqueObjectSyncName">
 		if ($debug) Debug.write("registerNewImage: ",urlname,posx,posy,width,height,baseurl,fileName,moduleName,parentPath,room,domain);
 		var actionObject = new Array();
 	    actionObject.push('image');
@@ -240,7 +263,7 @@
 		actionObject.push(parentPath);
 		actionObject.push(room);
 		actionObject.push(domain);
-		actionObject.push(uniqueImageSyncName);
+		actionObject.push(uniqueObjectSyncName);
 		actionObject.push(this.counter);
 	    actionObject.push(posx);
 	    actionObject.push(posy);
@@ -262,7 +285,7 @@
 		this.syncImageRefObj = objRef;
 		
 		//This invokes a Method which is in the remoteWhiteboard.lzx
-		this.sendCompletedObjectSyncEvent.uniqueImageSyncName = this.syncImageRefObj.uniqueImageSyncName;
+		this.sendCompletedObjectSyncEvent.uniqueObjectSyncName = this.syncImageRefObj.uniqueObjectSyncName;
 		this.sendCompletedObjectSyncEvent.doCall();
 		
 		this.registerNewImage(this.syncImageRefObj.src,
@@ -271,7 +294,7 @@
 			this.syncImageRefObj.baseurl,this.syncImageRefObj.fileName,
 			this.syncImageRefObj.moduleName,this.syncImageRefObj.parentPath,
 			this.syncImageRefObj.room,this.syncImageRefObj.domain,
-			true,this.syncImageRefObj.uniqueImageSyncName);		
+			true,this.syncImageRefObj.uniqueObjectSyncName);		
 	
 	</method>
 	
@@ -286,6 +309,7 @@
 	</method>
 	
 	<method name="sendLoadNotificationImage" args="objRef" >
+		if ($debug) Debug.write("sendLoadNotificationImage: ",objRef);
 		this.syncImageRefObj = objRef;
 		this.registerNewImage(this.syncImageRefObj.src,
 			this.syncImageRefObj.x,this.syncImageRefObj.y,
@@ -293,9 +317,9 @@
 			this.syncImageRefObj.baseurl,this.syncImageRefObj.fileName,
 			this.syncImageRefObj.moduleName,this.syncImageRefObj.parentPath,
 			this.syncImageRefObj.room,this.syncImageRefObj.domain,
-			false,this.syncImageRefObj.uniqueImageSyncName);	
+			false,this.syncImageRefObj.uniqueObjectSyncName);	
 		//This invokes a Method which is in the remoteWhiteboard.lzx
-		this.sendCompletedObjectSyncEvent.uniqueImageSyncName = this.syncImageRefObj.uniqueImageSyncName;
+		this.sendCompletedObjectSyncEvent.uniqueObjectSyncName = this.syncImageRefObj.uniqueObjectSyncName;
 		this.sendCompletedObjectSyncEvent.doCall();
 	</method>
 	
