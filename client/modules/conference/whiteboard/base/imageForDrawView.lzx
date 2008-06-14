@@ -21,7 +21,7 @@
 	
 	<attribute name="typeOfObject" value="image" type="string" />
 	
-	<!-- holds the reference to the SyncProcess -->
+	<!-- holds the reference_id to the SyncProcess -->
 	<attribute name="uniqueImageSyncName" value="" type="string" />
 	
 		<!--
