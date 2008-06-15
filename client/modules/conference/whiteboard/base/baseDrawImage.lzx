@@ -226,7 +226,7 @@
   		to the server, but every Item on the List is only controlled locally
   	-->
   	<handler name="addImageToLayerHistoryToLocalLoaded" args="objRef">
-  		if ($debug) Debug.write("addImageToLayerHistoryToLocal: ",actionObject,refObj);
+  		if ($debug) Debug.write("addImageToLayerHistoryToLocal: ",objRef);
 		this.syncImageRefObj = objRef;
 		
 		this.registerNewImage(this.syncImageRefObj.src,
@@ -253,7 +253,7 @@
   	</method>
   	
   	<method name="registerNewImage" args="urlname,posx,posy,width,height,baseurl,fileName,moduleName,parentPath,room,domain,doCallUpdate,uniqueObjectSyncName">
-		if ($debug) Debug.write("registerNewImage: ",urlname,posx,posy,width,height,baseurl,fileName,moduleName,parentPath,room,domain);
+		if ($debug) Debug.write("registerNewImage doCallUpdate: ",doCallUpdate);
 		var actionObject = new Array();
 	    actionObject.push('image');
 	    actionObject.push(urlname);

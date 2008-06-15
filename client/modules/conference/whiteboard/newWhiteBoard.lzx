@@ -190,6 +190,8 @@
             </handler>
             <!-- @overwrite -->
             <method name="onsharedMessage" args="action,obj">
+            	
+            	if ($debug) Debug.write("###### onsharedMessage",action,obj);
     
                 var tempSendArray = new Array ();
                 tempSendArray[0] = 'whiteboard';
