@@ -83,7 +83,7 @@
 			} else if (this.alterModus){
 				this.refObj.storeTempValsAndLoadSyncList(this);
 			} else if (this.isLocalSync){
-				this.refObj.storeTempValsAndLoadSyncList(this);
+				this.refObj.addImageToLayerHistoryToLocalLoaded.sendEvent(this);
 			} else {
 				this.refObj.sendLoadNotificationImage(this);
 			}
@@ -114,7 +114,7 @@
 			} else if (this.alterModus){
 				this.refObj.storeTempValsAndLoadSyncList(this);
 			} else if (this.isLocalSync){
-				this.refObj.storeTempValsAndLoadSyncList(this);
+				this.refObj.addImageToLayerHistoryToLocalLoaded.sendEvent(this);
 			} else {
 				this.refObj.sendLoadNotificationImage(this);
 			}
@@ -144,7 +144,7 @@
 			} else if (this.alterModus){
 				this.refObj.storeTempValsAndLoadSyncList(this);
 			} else if (this.isLocalSync){
-				this.refObj.storeTempValsAndLoadSyncList(this);
+				this.refObj.addImageToLayerHistoryToLocalLoaded.sendEvent(this);
 			} else {
 				this.refObj.sendLoadNotificationImage(this);
 			}
