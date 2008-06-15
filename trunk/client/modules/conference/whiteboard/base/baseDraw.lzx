@@ -71,10 +71,12 @@
 
   	<method name="getCounter">
 		//Debug.write("### getCounter :",this.counter);
-		this.getOID.doCall();
-		return this.counter;
+		var now = new Date();
+		return "_"+now.getTime();
   	</method>
   	
+  	<!--
+  	 not needed anymore, Issue 507
     <netRemoteCallHib name="getOID" funcname="getOID" showLoading="false"
     				  remotecontext="$once{ canvas.thishib }" > 
         <handler name="ondata" args="value">
@@ -85,6 +87,7 @@
             ]]>
         </handler>   
     </netRemoteCallHib>     
+     -->
 	
 	<method name="compareAndSetCounter" args="c">
 		<![CDATA[
