@@ -55,9 +55,10 @@ public class WhiteboardManagement {
 				HashMap<String,Map> roomList = Application.getWhiteBoardObjectListByRoomId(room_id);
 				roomList = new HashMap<String,Map>();
 				Application.setWhiteBoardObjectListRoomObj(room_id, roomList);
-			} else if (action.equals("delete") && action.equals("undo")) {
+			} else if (action.equals("delete") || action.equals("undo")) {
 				HashMap<String,Map> roomList = Application.getWhiteBoardObjectListByRoomId(room_id);
 				String objectOID = actionObject.get(actionObject.size()-1).toString();
+				log.debug("removal of objectOID: "+objectOID);
 				roomList.remove(objectOID);
 				Application.setWhiteBoardObjectListRoomObj(room_id, roomList);
 			} else if (action.equals("size") || action.equals("editProp") 
