@@ -1632,46 +1632,52 @@ languagesディレクトリにコピーして、
   <string id="539" name="Browser">
     <value>ブラウザ</value>
   </string>
-  <string id="540" name="Browser">
-    <value>Syncronize Audio/Video</value>
+  <string id="540" name="audio_video">
+    <value>音声/ビデオの同期処理</value>
   </string>	
   <string id="541" name="errorCode_invalidSession">
-    <value>Login was correct, but the Session you tried is not active or stored on the Server. You have to get a new SessionId and retry login.</value>
+    <value>ログインには成功しましたが、セッションの取得に失敗しました。新しいセッションを取得するために再度ログインしてください。</value>
   </string>
   <string id="542" name="errorcode_setUserObject">
-    <value>The SessionId is not loggedin or has no Admin rights. The SOAP Gateway needs an User with Admin-Rights to embed new Users.</value>
+    <value>このセッションでは操作できません。SOAP Gatewayはアドミン権限が必要です。</value>
   </string>
   <string id="543" name="errorcode_loginByRemoteUser">
-    <value>This Session has no Remoteuser-Data connected. Wether you did not call the SOAP-Gateway before accessing the Application or you are usnig a wrong Session-ID</value>
+    <value>このセッションはもう有効ではありません。アプリケーションにアクセスする前にSOAP-Gatewayを呼び出したか、使っているセッションIDが正しくないようです。</value>
   </string>
   <string id="544" name="debug_message_recording">
-    <value>The recorder is currently Beta!</value>
+    <value>この機能はベータ版です</value>
   </string>	
   <string id="545" name="propertyPanelXValue">
     <value>x</value>
   </string>
   <string id="546" name="propertyPanelXValueLabel">
-    <value>x-axis</value>
+    <value>x軸</value>
   </string>
   <string id="547" name="propertyPanelYValue">
     <value>y</value>
   </string>
   <string id="548" name="propertyPanelYValueLabel">
-    <value>y-axis</value>
+    <value>y軸</value>
   </string>
   <string id="549" name="propertyPanelWidthValue">
     <value>w</value>
   </string>
   <string id="550" name="propertyPanelWidthValueLabel">
-    <value>width</value>
+    <value>幅</value>
   </string>
   <string id="551" name="propertyPanelHeightValue">
     <value>h</value>
   </string>
   <string id="552" name="propertyPanelHeightValueLabel">
-    <value>height</value>
+    <value>高さ</value>
   </string>
   <string id="553" name="propertyOpacitySlider">
-    <value>Change Transparency</value>
+    <value>透過率変更</value>
+  </string>	
+  <string id="554" name="browserOpen">
+    <value>ブラウザ開く</value>
+  </string>	
+  <string id="555" name="browserClose">
+    <value>ブラウザ閉じる</value>
   </string>	
 </language>
