@@ -1302,7 +1302,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   <string id="518" name="dateRegExpError">
     <value>Kérlek adj meg egy érvényes dátumot, például 24.12.2001 (nn.hh.éééé)</value>
   </string>
-  <string id="540" name="Browser">
+  <string id="540" name="audio_video">
     <value>Hang/kép szinkronizáció</value>
   </string>
   <string id="544" name="debug_message_recording">
@@ -1664,5 +1664,11 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   </string>
   <string id="553" name="propertyOpacitySlider">
     <value>Change Transparency</value>
+  </string>	
+  <string id="554" name="browserOpen">
+    <value>Browser Open</value>
+  </string>	
+  <string id="555" name="browserClose">
+    <value>Browser Close</value>
   </string>	
 </language>
