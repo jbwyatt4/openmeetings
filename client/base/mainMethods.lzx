@@ -146,13 +146,33 @@
 	
 				if($debug) Debug.write( 'conferenceMenubar: doActionMenu(): ' , t);
 	                	loadContent(t);
-	         	} else if( stringSub == "browser" ){
+	         	} else if( stringSub == "browser_open" ){
 	         		var browserPanelWidth  = canvas.browserPanelWidth;
 	         		var browserPanelHeight = canvas.browserPanelHeight;
-		        	new conferenceBrowser( canvas.main_content._content.inner,
-		        							{x:canvas.main_content._content.inner.width/2,y:50,
-		        							 width:browserPanelWidth, height:browserPanelHeight} );
-			}
+
+	         		Debug.write( "is browser[open] ? ", canvas.main_content._content.inner.conferenceBrowser );
+
+	         	//ブラウザのインスタンスを確認して、あれば開く。なければ作成する
+	         		if( canvas.main_content._content.inner.conferenceBrowser == undefined ){Debug.write( "if this" );
+		        		new conferenceBrowser( canvas.main_content._content.inner,
+		        								{name:'conferenceBrowser',x:canvas.main_content._content.inner.width/2,y:50,
+		        								 width:browserPanelWidth, height:browserPanelHeight} );
+         			}else{Debug.write( "else this" );
+					with( canvas.main_content._content.inner ){
+	        				conferenceBrowser.htmlviewer.setVisible( true );
+	        				conferenceBrowser.setVisible( true );
+					}
+         		}
+			 } else if( stringSub == "browser_close" ){
+	         	// 開いているブラウザをアニメーションで移動する　hieght=0	
+			 	Debug.write( "is browser[close] ? ", canvas.main_content._content.inner.conferenceBrowser );
+				with( canvas.main_content._content.inner ){
+				 	if( conferenceBrowser  != undefined ){
+	        				conferenceBrowser.htmlviewer.setVisible( false );
+	        				conferenceBrowser.setVisible( false );
+					}
+         		}
+		    }
 	      }
 	    ]]>
 	</method>    
@@ -218,6 +238,7 @@
 	<command id="cmd_editCamMicSettings" onselect="canvas.doActionmenu('editCamMicSettings')" key="['ALT','Shift','1']"/> 
 	<command id="cmd_editBoardSettings" onselect="canvas.doActionmenu('editBoardSettings')" key="['ALT','Shift','2']"/>   
 	<command id="cmd_quit" onselect="canvas.doActionmenu('quit')" key="['ALT','Shift','E']"/> 
-	<command id="cmd_browser" onselect="canvas.doActionmenu('browser')" key="['ALT','Shift','B']"/>   
+	<command id="cmd_browser_open" onselect="canvas.doActionmenu('browser_open')" key="['ALT','Shift','B']"/>   
+	<command id="cmd_browser_close" onselect="canvas.doActionmenu('browser_close')" key="['ALT','Shift','b']"/>   
 
 </library>

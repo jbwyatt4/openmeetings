@@ -29,7 +29,8 @@
 
 	    <!-- browser menu -->
 	    <_labelMenu labelid="539" width="250">
-	        <_labelMenuItem labelid="539" command="cmd_browser" />
+	        <_labelMenuItem labelid="554" command="cmd_browser_open" />
+	        <_labelMenuItem labelid="555" command="cmd_browser_close" />
 	    </_labelMenu>    
 
 	   <!-- setteings menu --> 
