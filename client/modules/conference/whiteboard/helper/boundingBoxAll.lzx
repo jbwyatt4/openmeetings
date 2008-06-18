@@ -35,7 +35,7 @@
 	<attribute name="whiteboardRef" value="null" />
 	<attribute name="doHandlerUpdates" value="false" type="boolean" />	
     <attribute name="boundingDoUpdateOnInit" value="true" type="boolean" />	 
-
+    
     <!--- Minimum width for the windowy, default: 60.
           @keywords final -->
     <attribute name="minwidth" value="2"/>
@@ -49,12 +49,41 @@
 	</method>
 	
 	<handler name="oninit">
-		this.setAttribute('x',this.ex);
-		this.setAttribute('y',this.ey);
-		this.setAttribute('width',this.ewidth);
-		this.setAttribute('height',this.eheight);	
-		this.setStartValues();				
-		this.doUpdateAction();
+		<![CDATA[
+			this.setAttribute('x',this.ex);
+			this.setAttribute('y',this.ey);
+			this.setAttribute('width',this.ewidth);
+			this.setAttribute('height',this.eheight);	
+			this.setStartValues();		
+			if ($debug) Debug.write("Update Property Panel Settings to Object Properties ",this.objRef.name);
+			if (this.objRef.name.indexOf('rectangle') >= 0){
+				if ($debug) Debug.write("this.objRef._innerRect ",this.objRef._innerRect);
+				
+				if ($debug) Debug.write("strokeStyle: ",this.objRef._innerRect.strokeStyle);
+				if (this.objRef._innerRect.strokeStyle == '#000000') {
+					if ($debug) Debug.write("strokeStyle EMPTY ");
+					this.whiteboardRef.currentrectanglestrokeDis = -1;
+				} else {
+					this.whiteboardRef.currentrectanglestroke = this.objRef._innerRect.strokeStyle;
+					this.whiteboardRef.currentrectanglestrokeDis = 1;
+				}
+				
+				if ($debug) Debug.write("fillStyle: ",this.objRef._innerRect.fillStyle);
+				if (this.objRef._innerRect.fillStyle == '#000000') {
+					if ($debug) Debug.write("fillStyle EMPTY ");
+					this.whiteboardRef.currentrectanglestrokeFillDis = -1;
+				} else {
+					this.whiteboardRef.currentrectanglestrokeFill = this.objRef._innerRect.fillStyle;
+					this.whiteboardRef.currentrectanglestrokeFillDis = 1;
+				}
+				
+				if ($debug) Debug.write("lineWidth: ",this.objRef._innerRect.lineWidth);
+				this.whiteboardRef.currentrectangleineWidth = this.objRef._innerRect.lineWidth;
+				this.whiteboardRef.parent.parent._propertyPanel.loadPanelByModus(this.whiteboardRef,'rectangle');
+				
+			}
+			this.doUpdateAction();
+		]]>
 	</handler>
 	
 	<method name="resetValues">
@@ -171,7 +200,7 @@
         }
     </method>
         
-    <resizestatemin name="rs">
+    <resizestatemin name="rs"> 	
     	<text x="2" y="2" text="${ 'w: '+parent.width+' h: '+parent.height }" bgcolor="white"/>
     </resizestatemin>
     

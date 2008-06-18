@@ -22,6 +22,10 @@
 	 
 </class>
 
+<class name="drawViewInner" extends="drawview" x="0" y="0" >
+	
+</class>
+
 <class name="drawViewNew" extends="drawview" cachebitmap="false" x="-1" y="-1" >
 	
 	<attribute name="typeOfObject" value="paint" type="string" />
@@ -36,21 +40,35 @@
     
 	<handler name="onwidth">
         <![CDATA[
-        if(this.name.indexOf('line')>=0 || this.name.indexOf('uline')>=0 || (this.name.indexOf('drawarrow')>=0 && this.isinited) || this.name.indexOf('paint')>=0 || this.name.indexOf('rectangle')>=0 || this.name.indexOf('ellipse')>=0 ) {
-        	if (this.isinited) {
-        		this.getMCRef()._xscale = (this.width/this.initwidth)*100;
-        	}
-        }
+	        if (this.isinited) {
+		        if(this.name.indexOf('line')>=0 
+		        	|| this.name.indexOf('uline')>=0 
+		        	|| this.name.indexOf('drawarrow')>=0
+		        	|| this.name.indexOf('paint')>=0) {
+		        	this.getMCRef()._xscale = (this.width/this.initwidth)*100;
+		        } else if (this.name.indexOf('rectangle')>=0) {
+	        		parent.redrawRectItemByScaling(this);
+	        	} else if  (this.name.indexOf('ellipse')>=0) {
+	        		
+	        	}	        	
+	        }
         ]]>
     </handler>
     
     <handler name="onheight">
     	<![CDATA[
-        if(this.name.indexOf('line')>=0 || this.name.indexOf('uline')>=0 || (this.name.indexOf('drawarrow')>=0 && this.isinited) || this.name.indexOf('paint')>=0  || this.name.indexOf('rectangle')>=0 || this.name.indexOf('ellipse')>=0 ) {
-        	if (this.isinited) {
-        		this.getMCRef()._yscale = (this.height/this.initheight)*100;  
-        	}
-        }
+	        if (this.isinited) {
+		        if(this.name.indexOf('line')>=0 
+		        	|| this.name.indexOf('uline')>=0 
+		        	|| this.name.indexOf('drawarrow')>=0
+		        	|| this.name.indexOf('paint')>=0) {
+		        	this.getMCRef()._yscale = (this.height/this.initheight)*100;  
+		        } else if (this.name.indexOf('rectangle')>=0) {
+	        		parent.redrawRectItemByScaling(this);
+	        	} else if  (this.name.indexOf('ellipse')>=0) {
+	        		
+	        	}	
+	        }  	
         ]]>   
     </handler>
     <!-- 
