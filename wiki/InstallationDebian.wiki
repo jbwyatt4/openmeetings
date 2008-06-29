@@ -1,20 +1,20 @@
 #labels Installation
 = Installing Openmeetings on debian etch =
 
-In this how-to I'm going to descript way to install OpenMeetings on debian GNU/Linux Etch (4.0), Steps are following way:
+In this how-to I'm going to descript way to install !OpenMeetings on debian GNU/Linux Etch (4.0), Steps are following way:
  
  * What we need!
  * Install MySQL
- * Install xvfb and OpenOffice.org
- * Install ImageMagic & Ghostscript
- * Install SwfTools
+ * Install xvfb and !OpenOffice.org
+ * Install !ImageMagic & !Ghostscript
+ * Install !SwfTools
  * Install Java and red5
  * Download openlazslo
- * Install Openmeetings5
+ * Install !OpenMeetings
  * Installing must new version?
- * Configure OpenMeetings and place files
+ * Configure !OpenMeetings and place files
  *Start every thing
- *Troobleshooting
+ *!Troobleshooting
  *Author
  
  
