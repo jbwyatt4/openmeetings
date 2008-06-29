@@ -1,198 +1,295 @@
-#summary InstallationDebian openmeetings05Beta5
 #labels Installation
+= Installing Openmeetings on debian etch =
 
-= Contributed =
+In this how-to I'm going to descript way to install OpenMeetings on debian GNU/Linux Etch (4.0), Steps are following way:
+ 
+ * What we need!
+ * Install MySQL
+ * Install xvfb and OpenOffice.org
+ * Install ImageMagic & Ghostscript
+ * Install SwfTools
+ * Install Java and red5
+ * Download openlazslo
+ * Install Openmeetings5
+ * Installing must new version?
+ * Configure OpenMeetings and place files
+ *Start every thing
+ *Troobleshooting
+ *Author
+ 
+ 
+== What We Need ==
 
-Contributed by Roberto T.
+In this article I will use [http://en.wikipedia.org/wiki/Aptitude_(program) aptitude]  to install  packages, if you don't have apptitude please install it before going forward :
 
-Install OpenMeetings
-Roberto Torresani erreti@gmail.com
-
-
-
-
-Install the svn version on a linux debian
+{{{
+$su
+#apt-get update
+#apt-get install aptitude
+}}}
 
 
-    *  Install Mysql
+After aptitude we need  [http://www.debian.org/ Debian GNU/Linux], I use version 4.0 (code name Etch), befor installing any thing else I recommend you to create a directory and manage every thing from there:
 
+{{{
+#su
+#mkdir /root/tmpOpenMeetings/
+#cd  /root/tmpOpenMeetings/
+}}}
+
+==  Install MySQL==
+
+OpenMeetings can work with wide range of databases, I will install OpenMeetings with [http://en.wikipedia.org/wiki/MySQL MySQL], to  install MySQL server:
+
+{{{
 aptitude install mysql-server
+}}}
+
+It's better to creat database with hand, if your mysql installation is fresh as like what I executed, you can use this way to create new MySQL database, I will use "openmeetings" as database name:
+
+{{{
+#mysql -u root
+> create database openmeetings
+>\q
+}}}
 
 
-    *  Create database
+==  Install xvfb and OpenOffice ==
 
-      mysql
+If you would like exchange Presentation and Office documentation in OpenMeetings, you will nedd xvfb and [http://en.wikipedia.org/wiki/OpenOffice.org OpenOffice.org] 
 
-            create database <db_name>;
+{{{
+#aptitude install xvfb  openoffice.org
+}}}
 
-            \q
+Then edit Setup.xcu:  
 
+{{{
+#vim  /usr/lib/openoffice/share/registry/data/org/openoffice/Setup.xcu
+}}}
 
-    *  Install xvfb
+You should insert following lines after:  <node oor:name="Office">:
 
-      aptitude install xvfb
-
-
-    *  Install OpenOffice
-
-      aptitude install openoffice.org
-
-
-    *  Edit file
-
-      vi /usr/lib/openoffice/share/registry/data/org/openoffice/Setup.xcu
-
-            After <node oor:name="Office"> insert the following lines:
-
-            <prop oor:name="ooSetupConnectionURL" oor:type="xs:string">
-
-		<value>socket,host=localhost,port=8100;urp</value>
-	   </prop>
-
-    *  Install ImageMagick
-
-      aptitude install imagemagick
+{{{
+    <prop oor:name="ooSetupConnectionURL" oor:type="xs:string">
+        <value>socket,host=localhost,port=8100;urp</value>
+    </prop>
+}}}
 
 
-    *  Install Ghostscript
+==  Install ImageMagick and  Ghostscript ==
 
-      aptitude install gs-gpl
+[http://en.wikipedia.org/wiki/ImageMagic ImageMagick]  is a software suite for image manipulation and display, supporting close to 100 image formats. It is mainly used to perform various transformation and conversion operations on images and [http://ghostscript.com/awki Ghostscript] is a suite of software based on an interpreter for Adobe Systems' PostScript and Portable Document Format (PDF) page description languages.
+ To install this tools run:
+ 
+{{{
+ #aptitude install imagemagick  gs-gpl
+}}}
+ 
+==   Install SWFTools ==
+ 
+[http://www.swftools.org/ SWFTools] s a collection of SWF manipulation and creation utilities written by Rainer Böhme and Matthias Kramm. It is released under the GPL. 
+
+{{{
+#aptitude install swftools
+}}}
+
+If you get this message: "Couldn't find any package whose name or description matched "swftools" " please download swftools directly from web with running:
+
+{{{
+#wget   http://ftp.it.debian.org/debian/pool/main/s/swftools/swftools_0.8.1-1_i386.deb
+}}}
+
+befor installing this ackage should install "libart-2.0-2 " so run:
+
+{{{
+#aptitude install libart-2.0-2
+}}}
+
+and now install SWFTools:
+
+{{{
+#dpkg -i swftools_0.8.1-1_i386.deb
+}}}
 
 
-    * Install SwfTools
+== Install Java and Red5 ==
+[http://osflash.org/red5 red5]  is a Open Source Flash Server that OpenMeetings based on, so you should install it, and befor installing red5 should install Java Runtime Environment and Java development Kit run:
 
-      wget http://ftp.it.debian.org/debian/pool/main/s/swftools/swftools_0.8.1-1_i386.deb
+{{{
+#aptitude install sun-java5-bin
+#aptitude install  sun-java5-demo
+#
+}}}
 
-      aptitude install libart-2.0-2
+If aptitude gives you any error, please download all file with wget and then install
 
-      dpkg -i swftools_0.8.1-1_i386.deb
+{{{
+#wget http://ftp.tr.debian.org/debian/pool/non-free/s/sun-java5/sun-java5-demo_1.5.0-13-1_i386.deb
+#wget http://ftp.de.debian.org/debian/pool/non-free/s/sun-java5/sun-java5-jdk_1.5.0-14-1etch1_i386.deb
+# wget http://ftp.de.debian.org/debian/pool/non-free/s/sun-java5/sun-java5-bin_1.5.0-15-1_i386.deb
+#dpkg -i sun-java5-demo_1.5.0-13-1_i386.deb sun-java5-jdk_1.5.0-14-1etch1_i386.deb sun-java5-bin_1.5.0-15-1_i386.deb 
+}}}
 
-      rm swftools_0.8.1-1_i386.deb
+Now download red5 for Debian GNU/Linux and install it:
+
+{{{
+#wget http://dl.fancycode.com/red5/0.6.3/debian/red5_0.6.3-1_all.deb
+#dpkg -i red5_0.6.3-1_all.deb
+}}}
+
+== openlazslo ==
+
+[http://openlaszlo.org/ OpenLaszlo] is an open source platform for the development and delivery of rich Internet applications. to installing it, run:
+
+{{{
+#wget http://download.openlaszlo.org/4.0.6/openlaszlo-4.0.6-unix.tar.gz
+#tar -xvf openlaszlo-4.0.6-unix.tar.gz
+#mv lps-4.0.6/ /opt/
+}}}
 
 
-    *  Install Red5
+* Note: there is no need to install OpenLaszlo if you only use the application but don't want to modify it.
 
-      aptitude install sun-java5-bin
-
-      wget http://dl.fancycode.com/red5/0.6.3/debian/red5_0.6.3-1_all.deb
-
-      dpkg -i red5_0.6.3-1_all.deb
-
-      rm red5_0.6.3-1_all.deb
+* Note: you might would like to have a look at this shell script to start/stop/restart/status, if yes you can use [http://wiki.conzul.de/index.php/OpenOffice2.x this how-to].           
 
 
-    *  Instal java jdk
 
-      aptitude search sun-java5-demo
 
-      wget http://ftp.it.debian.org/debian/pool/non-free/s/sun-java5/sun-java5-demo_1.5.0-13-1_i386.deb
+== Installing OpenMeetings ==
 
-      dpkg -i sun-java5-demo_1.5.0-13-1_i386.deb
+Huraaa, making infrastructure is finished, now we are going to download latest OpenMeeting release and instaling it:
 
-      wget http://ftp.it.debian.org/debian/pool/non-free/s/sun-java5/sun-java5-jdk_1.5.0-13-1_i386.deb
 
-      dpkg -i sun-java5-jdk_1.5.0-13-1_i386.deb
+{{{
+#wget http://openmeetings.googlecode.com/files/openmeetings051.zip
+#unzip openmeetings051.zip
+}}}
 
-    *  Download openlazslo
+To installing OpenMeetings you should tell OM where is your DataBase server and as I use MySQL as my Server, steps are like this:
 
-      wget http://download.openlaszlo.org/4.0.6/openlaszlo-4.0.6-unix.tar.gz
+{{{
+#cp openmeetings/conf/mysql_hibernate.cfg.xml openmeetings/conf/hibernate.cfg.xml
+}}} 
 
-      tar -xvf openlaszlo-4.0.6-unix.tar.gz
+Now edit file and config your database:
 
-      mv lps-4.0.6/ /opt/
+{{{
+#vim openmeetings/conf/hibernate.cfg.xml
+}}}
 
-      rm openlaszlo-4.0.6-unix.tar.gz
+Now change :
 
-    *  Download Openmeetings5 Beta5
-
-      wget http://openmeetings.googlecode.com/files/openmeetings05Beta5.tar.gz
-
-      tar -xvf openmeetings05Beta5.tar.gz
-
-      rm openmeetings05Beta5.tar.gz
-
-    *  Config hibernate (mysql)
-
-      cd xmlcrm/install/
-
-      cp mysql_hibernate.cfg.xml hibernate.cfg.xml
-
-      vi hibernate.cfg.xml
+{{{
 
             <property name="connection.username"><DB_USER></property>
-
             <property name="connection.password"><DB_PASSWORD></property>
-
             <property name="connection.url">jdbc:mysql://<DB_HOST>/<DB_NAME></property>
+}}}
 
-      cd
+For example my config look likes:
 
+{{{
 
-    *  Install subversion
+ <!-- User  / Password -->
+                <property name="connection.username">root</property>
+                <property name="connection.password">dj76shwrsh16xsvak1</property>
 
-      aptitude install subversion
+                <!-- Database Settings -->
+                <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+                <property name="dialect">org.hibernate.dialect.MySQLInnoDBDialect</property>
+                <property name="connection.url">jdbc:mysql://localhost/openmeetings?useUnicode=true&amp;createDatabaseIfNotExist=true&amp;characterEncoding=utf-8</property>
 
-    *  Download svn Openmeetings
-
-      svn checkout http://openmeetings.googlecode.com/svn/branches/dev/
-
-
-    *  Copy videoconference in openlazslo
-
-      cp -r dev/laszlo/client/xmlcrm/videoconference /opt/lps-4.0.6/Server/lps-4.0.6/
-
-
-    *  Configure rtmp host
-
-      cd /opt/lps-4.0.6/Server/lps-4.0.6/videoconference/
-
-      vi config.xml
-
-            <rtmphostlocal><HOST></rtmphostlocal>
-
-      cd
+}}}
 
 
-    *  Configure xmlcrm
+== Installing Must new Version? == 
 
-      cp /root/dev/xmlcrm/java/outputjar/xmlcrm.jar /root/xmlcrm/WEB-INF/lib/xmlcrm.jar
+If you would like get must new version, I mean the version is under development, you should get a Snapshot from current source code, to do this follow this steps, if you don't like to have any thing more than OpenMeetings latest version or don't know what's snapshot, skip this step.
 
-      cp /root/dev/xmlcrm/java/webapp/xmlcrm/languages/* /root/xmlcrm/languages/
+ *Install Subversion if you don't have:
+ 
+{{{
+#aptitude install subversion
+}}}
 
-      cp -r /root/xmlcrm /usr/lib/red5/webapps/
+Get (checkout) OpenMeetings latest snapshot:
 
+{{{
+#svn checkout http://openmeetings.googlecode.com/svn/branches/dev/
+}}}
 
-    *  if necessary
+I will rename dev to OpenMeetingsFromSVN and then replace what updated in snapshot (from subversion) with what should be out of date in orginal openmeetings file downloaded from OpenMeetings and OpnLazslo:
 
-      dpkg-reconfigure locales
-      aptitude install xfonts-base
+{{{
+# mv dev/ OpenMeetingsFromSVN
+#cp -r OpenMeetingsFromSVN/laszlo/client/xmlcrm/videoconference/ /opt/lps-4.0.6/Server/lps-4.0.6/ 
+}}}
 
-    *  Start red5 server
+== Configure OpenMeetings ==
+Now, first I update my language files:
+{{{
+#cp OpenMeetingsFromSVN/xmlcrm/java/webapp/openmeetings/languages/*  openmeetings/languages/.
+}}}
 
-      /etc/init.d/red5 start
+Ok, It's time to place my OpenMeting in red5 document root to serving:
 
-    *  Start openoffice service
-
-      xvfb-run --server-args='-screen 0 800x600x16' -a /usr/lib/openoffice/program/soffice -headless -nologo -norestore
-
-    *  Start openlazslo
-
-      export JAVA_HOME=/usr/lib/jvm/java-1.5.0-sun
-
-      /opt/lps-4.0.6/Server/tomcat-5.0.24/bin/startup.sh
-
-
-    *  Set database
-
-      http://$YOUR_IP:5080/xmlcrm/Install
-
-    *  Access videoconference
-
-      http://$YOUR_IP:8080/lps-4.0.6/videoconference/
+{{{
+#cp -r openmeetings/ /usr/lib/red5/webapps/
+}}}
 
 
-== Comments ==
+== Start every thing==
 
-  *  there is no need to install OpenLaszlo if you only use the application but don't want to modify it.
-  *  you might would like to have a look at this shell script to start/stop/restart/status 
-    http://wiki.conzul.de/index.php/OpenOffice2.x
+Now time to start every thing we installed, I will start OpenOffice.org at first and then OpenLazslo and  will start red5 server:
+
+
+{{{
+#xvfb-run --server-args='-screen 0 800x600x16' -a /usr/lib/openoffice/program/soffice -headless -nologo -norestore & 
+#export JAVA_HOME=/usr/lib/jvm/java-1.5.0-sun
+#/opt/lps-4.0.6/Server/tomcat-5.0.24/bin/startup.sh
+#/etc/init.d/red5 start
+}}}
+
+
+The last part of instalation is web based, with your web browser (Firefox, Opera, IE, ...) and servers IP address and port 5080 (default):
+
+http://$YOUR_IP:5080/openmeetings/Install
+
+For example:  [http://127.0.0.1:5080/openmeetings/Install http://127.0.0.1:5080/openmeetings/Install]
+
+after putting information in forms, OpenMeetings will initial a DataBase (based on information that we gived to him) and now you can access OpenMeetings first page at:
+
+http://$YOUR_IP:8080/lps-4.0.6/videoconference/
+
+For example:  [http://127.0.0.1:5080/openmeetings/ http://127.0.0.1:5080/openmeetings/]
+
+      
+Congratulation, OpenMeetings is ready to use :)
+
+
+
+== Touble Shooting ==
+
+If you get any message about locales or fonts, you can use :
+
+{{{
+#dpkg-reconfigure locales
+#aptitude install xfonts-base
+}}}
+
+If you would like to change rtmp host, you can use:
+
+{{{
+vim  /opt/lps-4.0.6/Server/lps-4.0.6/videoconference/config.xml 
+}}}
+
+
+
+
+
+== Author ==
+
+Contributed by Roberto Torresani <erreti@gmail.com>
+
+Edited: Navid Abdi <navid@gnuiran.org>
