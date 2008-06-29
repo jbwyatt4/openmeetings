@@ -1,5 +1,5 @@
 #labels Installation
-= Installing Openmeetings on debian etch =
+= Installing !Openmeetings on debian etch =
 
 In this how-to I'm going to descript way to install !OpenMeetings on debian GNU/Linux Etch (4.0), Steps are following way:
  
@@ -37,9 +37,9 @@ After aptitude we need  [http://www.debian.org/ Debian GNU/Linux], I use version
 #cd  /root/tmpOpenMeetings/
 }}}
 
-==  Install MySQL==
+==  Install !MySQL==
 
-OpenMeetings can work with wide range of databases, I will install OpenMeetings with [http://en.wikipedia.org/wiki/MySQL MySQL], to  install MySQL server:
+!OpenMeetings can work with wide range of databases, I will install !OpenMeetings with [http://en.wikipedia.org/wiki/MySQL MySQL], to  install !MySQL server:
 
 {{{
 aptitude install mysql-server
@@ -54,9 +54,9 @@ It's better to creat database with hand, if your mysql installation is fresh as 
 }}}
 
 
-==  Install xvfb and OpenOffice ==
+==  Install xvfb and !OpenOffice ==
 
-If you would like exchange Presentation and Office documentation in OpenMeetings, you will nedd xvfb and [http://en.wikipedia.org/wiki/OpenOffice.org OpenOffice.org] 
+If you would like exchange Presentation and Office documentation in !OpenMeetings, you will nedd xvfb and [http://en.wikipedia.org/wiki/OpenOffice.org OpenOffice.org] 
 
 {{{
 #aptitude install xvfb  openoffice.org
@@ -114,7 +114,7 @@ and now install SWFTools:
 
 
 == Install Java and Red5 ==
-[http://osflash.org/red5 red5]  is a Open Source Flash Server that OpenMeetings based on, so you should install it, and befor installing red5 should install Java Runtime Environment and Java development Kit run:
+[http://osflash.org/red5 red5]  is a Open Source Flash Server that !OpenMeetings based on, so you should install it, and befor installing red5 should install Java Runtime Environment and Java development Kit run:
 
 {{{
 #aptitude install sun-java5-bin
@@ -156,7 +156,7 @@ Now download red5 for Debian GNU/Linux and install it:
 
 
 
-== Installing OpenMeetings ==
+== Installing !OpenMeetings ==
 
 Huraaa, making infrastructure is finished, now we are going to download latest OpenMeeting release and instaling it:
 
@@ -166,7 +166,7 @@ Huraaa, making infrastructure is finished, now we are going to download latest O
 #unzip openmeetings051.zip
 }}}
 
-To installing OpenMeetings you should tell OM where is your DataBase server and as I use MySQL as my Server, steps are like this:
+To installing !OpenMeetings you should tell OM where is your DataBase server and as I use MySQL as my Server, steps are like this:
 
 {{{
 #cp openmeetings/conf/mysql_hibernate.cfg.xml openmeetings/conf/hibernate.cfg.xml
@@ -205,7 +205,7 @@ For example my config look likes:
 
 == Installing Must new Version? == 
 
-If you would like get must new version, I mean the version is under development, you should get a Snapshot from current source code, to do this follow this steps, if you don't like to have any thing more than OpenMeetings latest version or don't know what's snapshot, skip this step.
+If you would like get must new version, I mean the version is under development, you should get a Snapshot from current source code, to do this follow this steps, if you don't like to have any thing more than !OpenMeetings latest version or don't know what's snapshot, skip this step.
 
  *Install Subversion if you don't have:
  
@@ -213,20 +213,20 @@ If you would like get must new version, I mean the version is under development,
 #aptitude install subversion
 }}}
 
-Get (checkout) OpenMeetings latest snapshot:
+Get (checkout) !OpenMeetings latest snapshot:
 
 {{{
 #svn checkout http://openmeetings.googlecode.com/svn/branches/dev/
 }}}
 
-I will rename dev to OpenMeetingsFromSVN and then replace what updated in snapshot (from subversion) with what should be out of date in orginal openmeetings file downloaded from OpenMeetings and OpnLazslo:
+I will rename dev to !OpenMeetingsFromSVN and then replace what updated in snapshot (from subversion) with what should be out of date in orginal openmeetings file downloaded from !OpenMeetings and OpnLazslo:
 
 {{{
 # mv dev/ OpenMeetingsFromSVN
 #cp -r OpenMeetingsFromSVN/laszlo/client/xmlcrm/videoconference/ /opt/lps-4.0.6/Server/lps-4.0.6/ 
 }}}
 
-== Configure OpenMeetings ==
+== Configure !OpenMeetings ==
 Now, first I update my language files:
 {{{
 #cp OpenMeetingsFromSVN/xmlcrm/java/webapp/openmeetings/languages/*  openmeetings/languages/.
@@ -241,7 +241,7 @@ Ok, It's time to place my OpenMeting in red5 document root to serving:
 
 == Start every thing==
 
-Now time to start every thing we installed, I will start OpenOffice.org at first and then OpenLazslo and  will start red5 server:
+Now time to start every thing we installed, I will start !OpenOffice.org at first and then OpenLazslo and  will start red5 server:
 
 
 {{{
@@ -258,14 +258,14 @@ http://$YOUR_IP:5080/openmeetings/Install
 
 For example:  [http://127.0.0.1:5080/openmeetings/Install http://127.0.0.1:5080/openmeetings/Install]
 
-after putting information in forms, OpenMeetings will initial a DataBase (based on information that we gived to him) and now you can access OpenMeetings first page at:
+after putting information in forms, !OpenMeetings will initial a DataBase (based on information that we gived to him) and now you can access !OpenMeetings first page at:
 
 http://$YOUR_IP:8080/lps-4.0.6/videoconference/
 
 For example:  [http://127.0.0.1:5080/openmeetings/ http://127.0.0.1:5080/openmeetings/]
 
       
-Congratulation, OpenMeetings is ready to use :)
+Congratulation, !OpenMeetings is ready to use :)
 
 
 
