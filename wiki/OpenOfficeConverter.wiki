@@ -70,6 +70,85 @@ webapp/src/app/org/openmeetings/app/remote/Application.java line 66 and change t
   * Create Debian init script for safe oOo operation
   * Understand this, why numbered list and bullet item couldnt be used together and always you have repeated number one in wiki :)
 
+= Install Open Office Service on Debian/(K)Ubuntu (versions > 2.3) =
+  # Install OpenOffice-Headless as root (through su, sudo, etc.):
+{{{
+sudo apt-get install openoffice.org-headless
+}}}
+  # Create and edit a file named openoffice.sh (for example) with you favorite editor over /etc/init.d:
+{{{
+vi /etc/init.d/openoffice.sh
+}}}
+{{{
+#!/bin/bash
+# openoffice.org  headless server script
+#
+# chkconfig: 2345 80 30
+# description: headless openoffice server script
+# processname: openoffice
+# 
+# Author: Vic Vijayakumar
+# Modified by Federico Ch. Tomasczik
+#
+OOo_HOME=/usr/bin
+SOFFICE_PATH=$OOo_HOME/soffice
+PIDFILE=/var/run/openoffice-server.pid
+
+set -e
+
+case "$1" in
+    start)
+    if [ -f $PIDFILE ]; then
+      echo "OpenOffice headless server has already started."
+      sleep 5
+      exit
+    fi
+      echo "Starting OpenOffice headless server"
+      $SOFFICE_PATH -headless -nologo -nofirststartwizard -accept="socket,host=127.0.0.1,port=8100;urp" & > /dev/null 2>&1
+      touch $PIDFILE
+    ;;
+    stop)
+    if [ -f $PIDFILE ]; then
+      echo "Stopping OpenOffice headless server."
+      killall -9 soffice && killall -9 soffice.bin
+      rm -f $PIDFILE
+      exit
+    fi
+      echo "Openoffice headless server is not running."
+      exit
+    ;;
+    *)
+    echo "Usage: $0 {start|stop}"
+    exit 1
+esac
+exit 0
+}}}
+  # Change the permssions to this file:
+{{{
+chmod 0755 /etc/init.d/openoffice.sh
+}}}
+  # Install openoffice.sh init script links:
+{{{
+update-rc.d openoffice.sh defaults
+}}}
+  # Start the service:
+{{{
+/etc/init.d/./openoffice.sh start
+}}}
+  # You can see if openofice is running with this command:
+{{{
+netstat -nap | grep office
+}}}
+You should get something like this:
+{{{
+tcp        0      0 127.0.0.1:8100          0.0.0.0:*
+LISTEN     2467/soffice.bin 
+}}}
+
+  * Service openoffice start automatically when you restart the next time your server.
+
+*Note:* This script is based on Vic Vijayakumar's script at http://little.bluethings.net/2008/05/30/automating-document-conversion-in-linux-using-jodconverterooo/
+
 
 = Install Open Office Service on Debian/(K)Ubuntu Old Versions prior to 2.3 =
   # Install OpenOffice
@@ -133,6 +212,8 @@ http://www.artofsolving.com/node/11
 
 
 = Links =
+
+
   * http://www.artofsolving.com/node/10
   * http://wiki.conzul.de/index.php/OpenOffice2.x
   * http://www.artofsolving.com/opensource/jodconverter
