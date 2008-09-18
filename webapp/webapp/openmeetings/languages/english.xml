@@ -616,7 +616,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>save</value>
   </string>
   <string id="204" name="rpcerrorwin_header">
-    <value>error</value>
+    <value>Error</value>
   </string>
   <string id="205" name="loadwml_header">
     <value>loading</value>
@@ -1667,8 +1667,11 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   </string>
   <string id="554" name="browserOpen">
     <value>Browser Open</value>
-  </string>	
+  </string>
   <string id="555" name="browserClose">
     <value>Browser Close</value>
-  </string>	
+  </string>
+  <string id="556" name="connectionLostMessage">
+    <value>The Connection to the Server is lost. You need to reload the Application or/and check your Network.</value>
+  </string>
 </language>

@@ -12,7 +12,13 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   <string id="2" name="meeting">
     <value>Találkozó</value>
   </string>
+  <string id="3" name="classroom">
+    <value>Előadás</value>
+  </string>
   <string id="4" name="settings">
+    <value>Beállítások</value>
+  </string>
+  <string id="5" name="benutzer">
     <value>Beállítások</value>
   </string>
   <string id="6" name="admin">
@@ -26,6 +32,9 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   </string>
   <string id="9" name="nofile">
     <value>Nincs elérhető fájl</value>
+  </string>
+  <string id="10" name="recordbyteacher">
+    <value>Felvétel az előadónál</value>
   </string>
   <string id="11" name="connectedusers">
     <value>Csatlakozott felhasználók:</value>
@@ -126,6 +135,9 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   <string id="43" name="meeting">
     <value>Találkozó (max. 4 ülőhely)</value>
   </string>
+  <string id="44" name="conference">
+    <value>Előadás (max. 50 ülőhely)</value>
+  </string>
   <string id="45" name="type">
     <value>Típus</value>
   </string>
@@ -134,6 +146,9 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   </string>
   <string id="47" name="alreadychosen">
     <value>Foglalt ülőhelyek</value>
+  </string>
+  <string id="48" name="enter">
+    <value>bevitel</value>
   </string>
   <string id="49" name="modleave">
     <value>A előadó elhagyta a találkozót.</value>
@@ -161,6 +176,9 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   </string>
   <string id="57" name="editsetup">
     <value>Beállítások módosítása.</value>
+  </string>
+  <string id="58" name="course">
+    <value>Téma:</value>
   </string>
   <string id="59" name="language">
     <value>Nyelv:</value>
@@ -321,6 +339,12 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   <string id="111" name="Authlang">
     <value>Nyelv</value>
   </string>
+  <string id="112" name="Authreg">
+    <value>Bejelentkezés</value>
+  </string>
+  <string id="113" name="regformhead">
+    <value>Bejelentkezni</value>
+  </string>
   <string id="114" name="regformuser">
     <value>Felhasználó:</value>
   </string>
@@ -348,6 +372,9 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   <string id="122" name="regformbtn2">
     <value>Mégse</value>
   </string>
+  <string id="123" name="Authbtn2">
+    <value>Regisztráció</value>
+  </string>
   <string id="124" name="dashboard">
     <value>Nyitó oldal</value>
   </string>
@@ -360,6 +387,9 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   <string id="127" name="orgadmin">
     <value>Szervezet</value>
   </string>
+  <string id="128" name="headconf">
+    <value>Előadás-szoba</value>
+  </string>
   <string id="129" name="conf_pub">
     <value>nyilvános</value>
   </string>
@@ -368,6 +398,9 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   </string>
   <string id="131" name="btn_enterroom">
     <value>belépés</value>
+  </string>
+  <string id="132" name="useralterself_login">
+    <value>Bejelentkezési név</value>
   </string>
   <string id="133" name="useralterself_pass">
     <value>Jelszó</value>
@@ -396,6 +429,9 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   <string id="141" name="useralterself_state">
     <value>Ország</value>
   </string>
+  <string id="142" name="useralterself_adresscomment">
+    <value>Megjegyzés</value>
+  </string>
   <string id="143" name="useralterself_header">
     <value>Felhasználói adatok</value>
   </string>
@@ -420,59 +456,11 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   <string id="150" name="turnoverlist_next">
     <value>következő mutatása</value>
   </string>
-  <string id="188" name="roomadmin_header">
-    <value>id</value>
-  </string>
-  <string id="226" name="invited_userwin_mail">
-    <value>Email</value>
-  </string>
-  <string id="253" name="whiteboard_documenttoolbar_zoom">
-    <value>%</value>
-  </string>
-  <string id="264" name="conftable_headerId">
-    <value>ID</value>
-  </string>
-  <string id="282" name="dashboard_quickhomepageurl">
-    <value>http://code.google.com/p/openmeetings/</value>
-  </string>
-  <string id="283" name="dashboard_quickmailinglisturl">
-    <value>http://groups.google.com/group/openmeetings-user</value>
-  </string>
-  <string id="300" name="subnavi">
-    <value></value>
-  </string>
-  <string id="345" name="languageseditor">
-    <value>No Field found with this FieldId.</value>
-  </string>
-  <string id="346" name="languageseditor">
-    <value>No Label found for that Field.</value>
-  </string>
-  <string id="400" name="roomslist">
-    <value></value>
-  </string>
-  <string id="445" name="chat_emot_btn">
-    <value>Emoticons</value>
-  </string>
-  <string id="446" name="chat_emot_win">
-    <value>Emoticons</value>
-  </string>
-  <string id="484" name="roomAdmin_layout_videoX">
-    <value>X | Y</value>
-  </string>
-  <string id="488" name="roomAdmin_layout_mod_pos">
-    <value>X</value>
-  </string>
-  <string id="491" name="roomAdmin_layout_whiteboard_pos">
-    <value>X | Y</value>
-  </string>
-  <string id="495" name="roomAdmin_layout_files_pos">
-    <value>X |Y</value>
-  </string>
-  <string id="510" name="registering_mail_text_mail">
-    <value>EMail:</value>
-  </string>
   <string id="151" name="turnoverlist_pre">
     <value>előző mutatása</value>
+  </string>
+  <string id="152" name="savecontent_confirm">
+    <value>bejegyzés törlése</value>
   </string>
   <string id="153" name="savecontent_confirm_cancel_btn">
     <value>mégse</value>
@@ -482,9 +470,6 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   </string>
   <string id="155" name="savemenubar_addlabel">
     <value>új bejegyzés</value>
-  </string>
-  <string id="152" name="savecontent_confirm">
-    <value>bejegyzés törlése</value>
   </string>
   <string id="156" name="savemenubar_reloadlabel">
     <value>bejegyzés frissítése</value>
@@ -510,6 +495,9 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   <string id="163" name="savewindow_btn">
     <value>bezár</value>
   </string>
+  <string id="164" name="organisationtablelist_idrow">
+    <value>Szervezet-ID</value>
+  </string>
   <string id="165" name="organisationtablelist_namerow">
     <value>Név</value>
   </string>
@@ -527,6 +515,9 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   </string>
   <string id="170" name="orgvalue_header">
     <value>Szervezet</value>
+  </string>
+  <string id="171" name="orgvalue_orgname">
+    <value>név</value>
   </string>
   <string id="172" name="orgvalue_orgname">
     <value>szervezet hozzáadása</value>
@@ -567,11 +558,17 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   <string id="184" name="loginwin_chooseorganisation">
     <value>Szervezet</value>
   </string>
+  <string id="185" name="loginwin_chooseorganisationbtn">
+    <value>Belépés</value>
+  </string>
   <string id="186" name="navi_roomadmin">
     <value>Konferenciatermek</value>
   </string>
   <string id="187" name="roomadmin_header">
     <value>Konferenciatermek</value>
+  </string>
+  <string id="188" name="roomadmin_header">
+    <value>id</value>
   </string>
   <string id="189" name="roomadmin_header">
     <value>Név</value>
@@ -612,8 +609,71 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   <string id="201" name="files">
     <value>fájlnév</value>
   </string>
+  <string id="202" name="whiteboard_saveaswinbtn1">
+    <value>mégse</value>
+  </string>
+  <string id="203" name="whiteboard_saveaswinbtn2">
+    <value>mentés</value>
+  </string>
+  <string id="204" name="rpcerrorwin_header">
+    <value>hiba</value>
+  </string>
+  <string id="205" name="loadwml_header">
+    <value>betöltés</value>
+  </string>
+  <string id="206" name="loadwml_messsload">
+    <value>objektum betöltve</value>
+  </string>
+  <string id="207" name="loadwml_messsync">
+    <value>kliensek szinkronizálása, várakozó kliensek:</value>
+  </string>
+  <string id="208" name="loadimage_messload">
+    <value>Képinformációk betöltése</value>
+  </string>
+  <string id="209" name="loadimage_messsync">
+    <value>kliensek szinkronizálása, várakozó kliensek:</value>
+  </string>
+  <string id="210" name="loadwml_confirmheader">
+    <value>rajzterület törlése</value>
+  </string>
+  <string id="211" name="loadwml_confirmmess">
+    <value>rajzterület törlése, a tábla adatai elvesznek</value>
+  </string>
+  <string id="212" name="loadwml_confirmmess2">
+    <value>Megerősítés mielőtt a fájlt betöltené</value>
+  </string>
+  <string id="213" name="send_invitation_btn">
+    <value>Meghívó küldése</value>
+  </string>
+  <string id="214" name="send_invitationwin_header">
+    <value>Meghívó küldése</value>
+  </string>
+  <string id="215" name="send_invitationwin_subject">
+    <value>Tárgy</value>
+  </string>
+  <string id="216" name="send_invitationwin_recipient">
+    <value>Címzett</value>
+  </string>
+  <string id="217" name="send_invitationwin_message">
+    <value>Üzenet</value>
+  </string>
+  <string id="218" name="send_invitationwin_btn_confirm">
+    <value>Elküld</value>
+  </string>
   <string id="219" name="send_invitationwin_btn_cancel">
     <value>mégse</value>
+  </string>
+  <string id="220" name="send_chat_text_btn">
+    <value>elküld</value>
+  </string>
+  <string id="221" name="invited_userwin_header">
+    <value>Felhasználói adat</value>
+  </string>
+  <string id="222" name="invited_userwin_subject">
+    <value>A beceneved ehhez a konferenciához</value>
+  </string>
+  <string id="223" name="invited_userwin_login">
+    <value>Becenév</value>
   </string>
   <string id="224" name="invited_userwin_firstname">
     <value>Keresztnév</value>
@@ -621,8 +681,26 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   <string id="225" name="invited_userwin_lastname">
     <value>Családnév</value>
   </string>
+  <string id="226" name="invited_userwin_mail">
+    <value>Email</value>
+  </string>
   <string id="227" name="invited_userwin_lang">
     <value>Nyelv</value>
+  </string>
+  <string id="228" name="invited_userwin_enter">
+    <value>bevitel</value>
+  </string>
+  <string id="229" name="invited_userwin_enter">
+    <value>Betöltés</value>
+  </string>
+  <string id="230" name="invited_userwin_enter">
+    <value>Adatok betöltése, kérlek várj!</value>
+  </string>
+  <string id="231" name="user_registerFalsePWD">
+    <value>Rossz jelszó</value>
+  </string>
+  <string id="232" name="user_registerFalsePWDHeader">
+    <value>Adj meg két megegyező legalább 4 karakter hosszú jelszót</value>
   </string>
   <string id="233" name="user_registerMailError">
     <value>Hibás e-mail</value>
@@ -630,23 +708,65 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   <string id="234" name="user_registerMailErrorHeader">
     <value>Hibás e-mail címet adtál meg</value>
   </string>
+  <string id="235" name="user_registerSuccess">
+    <value>A regisztráció megtörtént</value>
+  </string>
+  <string id="236" name="user_registerSuccessHeader">
+    <value>Az fiókod elkészült. Beléphetsz.</value>
+  </string>
+  <string id="237" name="user_sharing_message">
+    <value>A képernyődet nem oszthatod meg most. Valaki más már megosztotta az övét.</value>
+  </string>
   <string id="238" name="user_sharing_messageHeader">
     <value>Megosztás megtiltva</value>
+  </string>
+  <string id="239" name="user_doStartScreenViewer">
+    <value>Képernyőmegosztás</value>
+  </string>
+  <string id="240" name="screen_warnBandwidth">
+    <value>Hibás sávszélesség: Nem lehetett szinkronizálni a képenyődet. El lesznak dobva képkockák. Ha sokszor jelenik meg ez a figyelmeztetés, kérd meg a előadót, hogy a minőséget vegye vissza.</value>
   </string>
   <string id="241" name="screen_userlabel">
     <value>Képernyő:</value>
   </string>
+  <string id="242" name="whiteboard_tab_paint">
+    <value>Rajz</value>
+  </string>
+  <string id="243" name="whiteboard_tab_document">
+    <value>Dokumentum</value>
+  </string>
+  <string id="244" name="tabbar_chaticon">
+    <value>Csevej</value>
+  </string>
   <string id="245" name="tabbar_filesicon">
     <value>Fájlok</value>
   </string>
+  <string id="246" name="tabbar_participantsicon">
+    <value>Tagok</value>
+  </string>
   <string id="247" name="swfpresentation_listsaveorig">
     <value>Eredeti dokumentum letöltése</value>
+  </string>
+  <string id="248" name="swfpresentation_listsavepdf">
+    <value>pdf letöltése</value>
+  </string>
+  <string id="249" name="swfpresentation_listloadswf">
+    <value>Bemutató betöltése a táblára</value>
+  </string>
+  <string id="250" name="navimain_config">
+    <value>Beállítások</value>
   </string>
   <string id="251" name="whiteboard_boundingbox_drag">
     <value>Objektum mozgatása</value>
   </string>
   <string id="252" name="whiteboard_boundingbox_resize">
     <value>Objektum átméretezése</value>
+  </string>
+  <string id="253" name="whiteboard_documenttoolbar_zoom">
+    <value>%</value>
+  </string>
+  <string id="254" name="whiteboard_documenttoolbar_slide">
+    <value>-</value>
   </string>
   <string id="255" name="whiteboard_documenttoolbar_firstslide">
     <value>Ugrás az első oldalra</value>
@@ -657,17 +777,35 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   <string id="257" name="whiteboard_documenttoolbar_nextslide">
     <value>Ugrás a következő oldalra</value>
   </string>
+  <string id="258" name="whiteboard_documenttoolbar_lastslide">
+    <value>Ugrás az utolsó oldalra</value>
+  </string>
   <string id="259" name="whiteboard_documenttoolbar_zoomminus">
     <value>Kicsinyít --</value>
   </string>
   <string id="260" name="whiteboard_documenttoolbar_zoomplus">
     <value>Nagyít ++</value>
   </string>
+  <string id="261" name="salutation_mr">
+    <value>Úr</value>
+  </string>
   <string id="262" name="salutation_miss">
     <value>Hölgy</value>
   </string>
+  <string id="263" name="navimain_confadmin">
+    <value>Beállítás</value>
+  </string>
+  <string id="264" name="conftable_headerId">
+    <value>ID</value>
+  </string>
+  <string id="265" name="conftable_headerkey">
+    <value>Kulcs</value>
+  </string>
   <string id="266" name="confadminform_header">
     <value>Beállítás</value>
+  </string>
+  <string id="267" name="confadminform_labelkey">
+    <value>Kulcs</value>
   </string>
   <string id="268" name="confadminform_labelupdated">
     <value>utolsó módosítás</value>
@@ -675,11 +813,20 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   <string id="269" name="confadminform_labelupdatedby">
     <value>módosítva</value>
   </string>
+  <string id="270" name="confadminform_labelcomment">
+    <value>megjegyzés</value>
+  </string>
   <string id="271" name="confadminform_labelkey">
     <value>Érték</value>
   </string>
-  <string id="267" name="confadminform_labelkey">
-    <value>Kulcs</value>
+  <string id="272" name="turnoverlist_maxresults">
+    <value>-</value>
+  </string>
+  <string id="273" name="organisation_usersheader">
+    <value>Felhasználók</value>
+  </string>
+  <string id="274" name="organisation_usersicondelete">
+    <value>felhasználó törlése a szervezetből</value>
   </string>
   <string id="275" name="organisation_usersdeletedhead">
     <value>töröl</value>
@@ -687,11 +834,38 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   <string id="276" name="organisation_usersalreadadded">
     <value>Ez a felhasználó már tagja a szervezetnek.</value>
   </string>
+  <string id="277" name="dashboard_newsheader">
+    <value>Hírek</value>
+  </string>
   <string id="278" name="dashboard_quicklinksheader">
     <value>Gyorslinkek</value>
   </string>
+  <string id="279" name="dashboard_quicklinkConf">
+    <value>Konferenciára megyek</value>
+  </string>
+  <string id="280" name="dashboard_quicklinkAudit">
+    <value>Előadásra megyek</value>
+  </string>
   <string id="281" name="dashboard_quicklinksupport">
     <value>Segítség</value>
+  </string>
+  <string id="282" name="dashboard_quickhomepageurl">
+    <value>http://code.google.com/p/openmeetings/</value>
+  </string>
+  <string id="283" name="dashboard_quickmailinglisturl">
+    <value>http://groups.google.com/group/openmeetings-user</value>
+  </string>
+  <string id="284" name="dashboard_reportbugs">
+    <value>Hibabejel.!</value>
+  </string>
+  <string id="285" name="dashboard_rsslistitemlinktext">
+    <value>tovább</value>
+  </string>
+  <string id="286" name="dashboard_quicklinkhomepagelabel">
+    <value>Projekt weboldala (code.google.com/p/openmeetings/)</value>
+  </string>
+  <string id="287" name="dashboard_quicklinkmailinglistlabel">
+    <value>Felhasználói levelezőlista (groups.google.com/group/openmeetings-user)</value>
   </string>
   <string id="288" name="login_rememberuser">
     <value>Bejelentkezés megjegyzése</value>
@@ -702,11 +876,23 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   <string id="290" name="subnavi">
     <value>Kezdőoldalam</value>
   </string>
+  <string id="291" name="subnavi">
+    <value>Találkozóim</value>
+  </string>
+  <string id="292" name="subnavi">
+    <value>Eseményeim</value>
+  </string>
   <string id="293" name="subnavi">
     <value>Nyilvános találkozók</value>
   </string>
   <string id="294" name="subnavi">
     <value>Zártkörű találkozók</value>
+  </string>
+  <string id="295" name="subnavi">
+    <value>Nyilvános előadások</value>
+  </string>
+  <string id="296" name="subnavi">
+    <value>Zártkörű előadások</value>
   </string>
   <string id="297" name="subnavi">
     <value>Nyilvános tartalmak</value>
@@ -717,8 +903,23 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   <string id="299" name="subnavi">
     <value>Személyes tartalmak</value>
   </string>
+  <string id="300" name="subnavi">
+    <value></value>
+  </string>
+  <string id="301" name="conferencebar">
+    <value>Moderálás</value>
+  </string>
+  <string id="302" name="conferencebar">
+    <value>Jelentkezés előadónak</value>
+  </string>
+  <string id="303" name="conferencebar">
+    <value>Szavazás</value>
+  </string>
   <string id="304" name="conferencebar">
     <value>Fájl választás</value>
+  </string>
+  <string id="305" name="conferencebar">
+    <value>Beállítások</value>
   </string>
   <string id="306" name="conferencebar">
     <value>Kamera és mikrofon beállítások</value>
@@ -729,11 +930,29 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   <string id="308" name="conferencebar">
     <value>Kilép</value>
   </string>
+  <string id="309" name="conferencebar">
+    <value>Vissza a szobákhoz</value>
+  </string>
+  <string id="310" name="conferencebar">
+    <value>Kilépés</value>
+  </string>
+  <string id="311" name="loginwindow">
+    <value>Elfelejtetted a jelszavad?</value>
+  </string>
+  <string id="312" name="loginwindow">
+    <value>Jelszó törlése</value>
+  </string>
+  <string id="313" name="loginwindow">
+    <value>E-mail alapján</value>
+  </string>
   <string id="314" name="loginwindow">
     <value>Bejelentkezés alapján</value>
   </string>
   <string id="315" name="loginwindow">
     <value>Az e-mail címed</value>
+  </string>
+  <string id="316" name="loginwindow">
+    <value>A bejelentkező neved</value>
   </string>
   <string id="317" name="loginwindow">
     <value>Levél küldése (with reset link)</value>
@@ -753,8 +972,29 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   <string id="322" name="errortype">
     <value>Hiba</value>
   </string>
+  <string id="323" name="errortype">
+    <value>Üzenet</value>
+  </string>
+  <string id="324" name="resetpass">
+    <value>Rossz Hash. A felhasználható nem található.</value>
+  </string>
+  <string id="325" name="resetpass">
+    <value>Jelszó törlése</value>
+  </string>
+  <string id="326" name="resetpass">
+    <value>Bejelentkező név</value>
+  </string>
+  <string id="327" name="resetpass">
+    <value>Jelszóváltás</value>
+  </string>
   <string id="328" name="resetpass">
     <value>Új jelszó</value>
+  </string>
+  <string id="329" name="resetpass">
+    <value>Jelszó újra</value>
+  </string>
+  <string id="330" name="resetpass">
+    <value>A begépelt jelszavak nem egyeznek meg.</value>
   </string>
   <string id="331" name="resetpass">
     <value>4 vagy több karakter; kis/nagybetű számít!</value>
@@ -764,6 +1004,15 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   </string>
   <string id="333" name="rpccallback">
     <value>Rendben</value>
+  </string>
+  <string id="334" name="rpcgeneralerror">
+    <value>Ismeretlen hiba. Írd meg a fejlesztőknek.</value>
+  </string>
+  <string id="335" name="loginwindow">
+    <value>Felhasználónév nem található</value>
+  </string>
+  <string id="336" name="loginwindow">
+    <value>Hibás jelszó</value>
   </string>
   <string id="337" name="logout">
     <value>Sikeres kijelentkezés</value>
@@ -783,239 +1032,17 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   <string id="342" name="filebrowser">
     <value>Cím nem menthető</value>
   </string>
+  <string id="343" name="useradmin">
+    <value>Felhasználó hozzáadva de hozzá kell rendelni Szervezethez, különben nem fog tudni bejelentkezni.</value>
+  </string>
   <string id="344" name="adminforms">
     <value>Új bejegyzés</value>
   </string>
-  <string id="349" name="languageseditor">
-    <value>Nyelv</value>
-  </string>
-  <string id="132" name="useralterself_login">
-    <value>Bejelentkezési név</value>
-  </string>
-  <string id="295" name="subnavi">
-    <value>Nyilvános előadások</value>
-  </string>
-  <string id="280" name="dashboard_quicklinkAudit">
-    <value>Előadásra megyek</value>
-  </string>
-  <string id="202" name="whiteboard_saveaswinbtn1">
-    <value>mégse</value>
-  </string>
-  <string id="203" name="whiteboard_saveaswinbtn2">
-    <value>mentés</value>
-  </string>
-  <string id="204" name="rpcerrorwin_header">
-    <value>hiba</value>
-  </string>
-  <string id="205" name="loadwml_header">
-    <value>betöltés</value>
-  </string>
-  <string id="207" name="loadwml_messsync">
-    <value>kliensek szinkronizálása, várakozó kliensek:</value>
-  </string>
-  <string id="208" name="loadimage_messload">
-    <value>Képinformációk betöltése</value>
-  </string>
-  <string id="213" name="send_invitation_btn">
-    <value>Meghívó küldése</value>
-  </string>
-  <string id="214" name="send_invitationwin_header">
-    <value>Meghívó küldése</value>
-  </string>
-  <string id="215" name="send_invitationwin_subject">
-    <value>Tárgy</value>
-  </string>
-  <string id="220" name="send_chat_text_btn">
-    <value>elküld</value>
-  </string>
-  <string id="221" name="invited_userwin_header">
-    <value>Felhasználói adat</value>
-  </string>
-  <string id="222" name="invited_userwin_subject">
-    <value>A beceneved ehhez a konferenciához</value>
-  </string>
-  <string id="223" name="invited_userwin_login">
-    <value>Becenév</value>
-  </string>
-  <string id="229" name="invited_userwin_enter">
-    <value>Betöltés</value>
-  </string>
-  <string id="230" name="invited_userwin_enter">
-    <value>Adatok betöltése, kérlek várj!</value>
-  </string>
-  <string id="231" name="user_registerFalsePWD">
-    <value>Rossz jelszó</value>
-  </string>
-  <string id="232" name="user_registerFalsePWDHeader">
-    <value>Adj meg két megegyező legalább 4 karakter hosszú jelszót</value>
-  </string>
-  <string id="235" name="user_registerSuccess">
-    <value>A regisztráció megtörtént</value>
-  </string>
-  <string id="236" name="user_registerSuccessHeader">
-    <value>Az fiókod elkészült. Beléphetsz.</value>
-  </string>
-  <string id="237" name="user_sharing_message">
-    <value>A képernyődet nem oszthatod meg most. Valaki más már megosztotta az övét.</value>
-  </string>
-  <string id="240" name="screen_warnBandwidth">
-    <value>Hibás sávszélesség: Nem lehetett szinkronizálni a képenyődet. El lesznak dobva képkockák. Ha sokszor jelenik meg ez a figyelmeztetés, kérd meg a előadót, hogy a minőséget vegye vissza.</value>
-  </string>
-  <string id="242" name="whiteboard_tab_paint">
-    <value>Rajz</value>
-  </string>
-  <string id="243" name="whiteboard_tab_document">
-    <value>Dokumentum</value>
-  </string>
-  <string id="244" name="tabbar_chaticon">
-    <value>Csevej</value>
-  </string>
-  <string id="246" name="tabbar_participantsicon">
-    <value>Tagok</value>
-  </string>
-  <string id="248" name="swfpresentation_listsavepdf">
-    <value>pdf letöltése</value>
-  </string>
-  <string id="249" name="swfpresentation_listloadswf">
-    <value>Bemutató betöltése a táblára</value>
-  </string>
-  <string id="250" name="navimain_config">
-    <value>Beállítások</value>
-  </string>
-  <string id="258" name="whiteboard_documenttoolbar_lastslide">
-    <value>Ugrás az utolsó oldalra</value>
-  </string>
-  <string id="261" name="salutation_mr">
-    <value>Úr</value>
-  </string>
-  <string id="263" name="navimain_confadmin">
-    <value>Beállítás</value>
-  </string>
-  <string id="270" name="confadminform_labelcomment">
-    <value>megjegyzés</value>
-  </string>
-  <string id="273" name="organisation_usersheader">
-    <value>Felhasználók</value>
-  </string>
-  <string id="274" name="organisation_usersicondelete">
-    <value>felhasználó törlése a szervezetből</value>
-  </string>
-  <string id="303" name="conferencebar">
-    <value>Szavazás</value>
-  </string>
-  <string id="239" name="user_doStartScreenViewer">
-    <value>Képernyőmegosztás</value>
-  </string>
-  <string id="206" name="loadwml_messsload">
-    <value>objektum betöltve</value>
-  </string>
-  <string id="209" name="loadimage_messsync">
-    <value>kliensek szinkronizálása, várakozó kliensek:</value>
-  </string>
-  <string id="210" name="loadwml_confirmheader">
-    <value>rajzterület törlése</value>
-  </string>
-  <string id="211" name="loadwml_confirmmess">
-    <value>rajzterület törlése, a tábla adatai elvesznek</value>
-  </string>
-  <string id="212" name="loadwml_confirmmess2">
-    <value>Megerősítés mielőtt a fájlt betöltené</value>
-  </string>
-  <string id="216" name="send_invitationwin_recipient">
-    <value>Címzett</value>
-  </string>
-  <string id="217" name="send_invitationwin_message">
-    <value>Üzenet</value>
-  </string>
-  <string id="218" name="send_invitationwin_btn_confirm">
-    <value>Elküld</value>
-  </string>
-  <string id="58" name="course">
-    <value>Téma:</value>
-  </string>
-  <string id="112" name="Authreg">
-    <value>Bejelentkezés</value>
-  </string>
-  <string id="113" name="regformhead">
-    <value>Bejelentkezni</value>
-  </string>
-  <string id="277" name="dashboard_newsheader">
-    <value>Hírek</value>
-  </string>
-  <string id="279" name="dashboard_quicklinkConf">
-    <value>Konferenciára megyek</value>
-  </string>
-  <string id="285" name="dashboard_rsslistitemlinktext">
-    <value>tovább</value>
-  </string>
-  <string id="286" name="dashboard_quicklinkhomepagelabel">
-    <value>Projekt weboldala (code.google.com/p/openmeetings/)</value>
-  </string>
-  <string id="287" name="dashboard_quicklinkmailinglistlabel">
-    <value>Felhasználói levelezőlista (groups.google.com/group/openmeetings-user)</value>
-  </string>
-  <string id="291" name="subnavi">
-    <value>Találkozóim</value>
-  </string>
-  <string id="292" name="subnavi">
-    <value>Eseményeim</value>
-  </string>
-  <string id="301" name="conferencebar">
-    <value>Moderálás</value>
-  </string>
-  <string id="302" name="conferencebar">
-    <value>Jelentkezés előadónak</value>
-  </string>
-  <string id="305" name="conferencebar">
-    <value>Beállítások</value>
-  </string>
-  <string id="309" name="conferencebar">
-    <value>Vissza a szobákhoz</value>
-  </string>
-  <string id="311" name="loginwindow">
-    <value>Elfelejtetted a jelszavad?</value>
-  </string>
-  <string id="312" name="loginwindow">
-    <value>Jelszó törlése</value>
-  </string>
-  <string id="313" name="loginwindow">
-    <value>E-mail alapján</value>
-  </string>
-  <string id="316" name="loginwindow">
-    <value>A bejelentkező neved</value>
-  </string>
-  <string id="323" name="errortype">
-    <value>Üzenet</value>
-  </string>
-  <string id="324" name="resetpass">
-    <value>Rossz Hash. A felhasználható nem található.</value>
-  </string>
-  <string id="325" name="resetpass">
-    <value>Jelszó törlése</value>
-  </string>
-  <string id="326" name="resetpass">
-    <value>Bejelentkező név</value>
-  </string>
-  <string id="327" name="resetpass">
-    <value>Jelszóváltás</value>
-  </string>
-  <string id="329" name="resetpass">
-    <value>Jelszó újra</value>
-  </string>
-  <string id="330" name="resetpass">
-    <value>A begépelt jelszavak nem egyeznek meg.</value>
-  </string>
-  <string id="334" name="rpcgeneralerror">
-    <value>Ismeretlen hiba. Írd meg a fejlesztőknek.</value>
-  </string>
-  <string id="335" name="loginwindow">
-    <value>Felhasználónév nem található</value>
-  </string>
-  <string id="336" name="loginwindow">
-    <value>Hibás jelszó</value>
-  </string>
-  <string id="343" name="useradmin">
-    <value>Felhasználó hozzáadva de hozzá kell rendelni Szervezethez, különben nem fog tudni bejelentkezni.</value>
+  <string id="345" name="languageseditor">
+    <value>No Field found with this FieldId.</value>
+  </string>
+  <string id="346" name="languageseditor">
+    <value>No Label found for that Field.</value>
   </string>
   <string id="347" name="errormessage">
     <value>Adminisztrátori jog szükséges</value>
@@ -1023,38 +1050,17 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   <string id="348" name="mainnavi">
     <value>Nyelv-szerkesztő</value>
   </string>
-  <string id="185" name="loginwin_chooseorganisationbtn">
-    <value>Belépés</value>
+  <string id="349" name="languageseditor">
+    <value>Nyelv</value>
   </string>
-  <string id="48" name="enter">
-    <value>bevitel</value>
-  </string>
-  <string id="228" name="invited_userwin_enter">
-    <value>bevitel</value>
-  </string>
-  <string id="265" name="conftable_headerkey">
-    <value>Kulcs</value>
-  </string>
-  <string id="284" name="dashboard_reportbugs">
-    <value>Hibabejel.!</value>
+  <string id="350" name="languageseditor">
+    <value>Cimke-ID</value>
   </string>
   <string id="351" name="languageseditor">
     <value>Cimke-név</value>
   </string>
   <string id="352" name="languageseditor">
     <value>Érték</value>
-  </string>
-  <string id="350" name="languageseditor">
-    <value>Cimke-ID</value>
-  </string>
-  <string id="171" name="orgvalue_orgname">
-    <value>név</value>
-  </string>
-  <string id="164" name="organisationtablelist_idrow">
-    <value>Szervezet-ID</value>
-  </string>
-  <string id="142" name="useralterself_adresscomment">
-    <value>Megjegyzés</value>
   </string>
   <string id="353" name="languageseditor">
     <value>Mezőértékek</value>
@@ -1125,6 +1131,12 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   <string id="375" name="dashboard">
     <value>Beállításaid</value>
   </string>
+  <string id="376" name="dashboard">
+    <value>Üdv,</value>
+  </string>
+  <string id="377" name="dashboard">
+    <value>Személyes adatok szerkesztése</value>
+  </string>
   <string id="378" name="dashboard">
     <value>Új üzenetek:</value>
   </string>
@@ -1179,150 +1191,6 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   <string id="395" name="record">
     <value>Felvételek</value>
   </string>
-  <string id="539" name="Browser">
-    <value>Böngésző</value>
-  </string>
-  <string id="538" name="invitation_pass_error">
-    <value>Hibás jelszó!</value>
-  </string>
-  <string id="537" name="invitation_pass_btn">
-    <value>Jelszó ellenőrzés</value>
-  </string>
-  <string id="535" name="invitation_error">
-    <value>A meghívó kód nem érvényes.</value>
-  </string>
-  <string id="534" name="invitation_error">
-    <value>A meghívás már használva volt. Ez a típusú meghívás nem használható fel többször.</value>
-  </string>
-  <string id="532" name="invitation_window_MailSubject">
-    <value>Meghívás OpenMeetingre</value>
-  </string>
-  <string id="526" name="invitation_window_validLabel">
-    <value>Érvényességi periódus</value>
-  </string>
-  <string id="525" name="invitation_window_passwordLabel">
-    <value>Jelszó</value>
-  </string>
-  <string id="523" name="timeRegExpError">
-    <value>Kérlek érvényes időpontot adj meg, például 12:23 (óó:pp)</value>
-  </string>
-  <string id="521" name="numberRegExpError">
-    <value>Kérlek egész számoz adj meg, például 100</value>
-  </string>
-  <string id="497" name="moderator_gone_message">
-    <value>Az előadó elhagyta a szobát. Jelenleg nincs előadó. Jelentkezhetsz előadónak vagy várhatsz.</value>
-  </string>
-  <string id="498" name="moderator_message_event_no_mod">
-    <value>Nincs előadó a szobában, de vannak résztvevők. Jelentkezz előadónak vagy várj.</value>
-  </string>
-  <string id="500" name="invitation_template_head">
-    <value>OpenMeetings - Meghívó</value>
-  </string>
-  <string id="501" name="invitation_text_from">
-    <value>Üzenet ettől a felhasználótól:</value>
-  </string>
-  <string id="504" name="invitation_text_click_text_link">
-    <value>Kattints ide a szobába való belépéshez</value>
-  </string>
-  <string id="505" name="invitation_text_click_text_help">
-    <value>ha problémád adódik a linkkel akkor ezt másold a böngésző címsorába:</value>
-  </string>
-  <string id="507" name="registering_mail_text_head2">
-    <value>Felhasználói adataid:</value>
-  </string>
-  <string id="511" name="registering_mail_text_bye">
-    <value>OpenMeetings-Csapat</value>
-  </string>
-  <string id="506" name="registering_mail_text_head">
-    <value>OpenMeetings Regisztráció</value>
-  </string>
-  <string id="514" name="reset_password_template_test_link">
-    <value>Kattints erre a linkre a jelszó cseréhez:</value>
-  </string>
-  <string id="470" name="calendar_monthnames">
-    <value>február</value>
-  </string>
-  <string id="471" name="calendar_monthnames">
-    <value>március</value>
-  </string>
-  <string id="472" name="calendar_monthnames">
-    <value>április</value>
-  </string>
-  <string id="476" name="calendar_monthnames">
-    <value>augusztus</value>
-  </string>
-  <string id="477" name="calendar_monthnames">
-    <value>szeptember</value>
-  </string>
-  <string id="478" name="calendar_monthnames">
-    <value>október</value>
-  </string>
-  <string id="481" name="calendarwin_header">
-    <value>Naptár</value>
-  </string>
-  <string id="482" name="roomadmin_labelNumberOfParticipants">
-    <value>Résztvevők</value>
-  </string>
-  <string id="485" name="roomAdmin_layout_videoY">
-    <value>Szél. | Magasság</value>
-  </string>
-  <string id="483" name="roomValue_advancedSettings">
-    <value>Nézet beállítások megtekintése</value>
-  </string>
-  <string id="449" name="choose_video_settings_combo">
-    <value>Csak hang</value>
-  </string>
-  <string id="450" name="choose_video_settings_combo">
-    <value>Csak kép</value>
-  </string>
-  <string id="452" name="choose_video_settings_info_text">
-    <value>Sem hang sem kép nem kerül megosztásra a gépedről, hanem a felhasználói adataidból a feltöltött kép. Használd ezt, ha gondjaid vannak a sávszélességgel vagy nagyon lassú az Interneted.</value>
-  </string>
-  <string id="454" name="calendar_dayname_tuesday">
-    <value>k</value>
-  </string>
-  <string id="455" name="calendar_dayname_wednesday">
-    <value>sz</value>
-  </string>
-  <string id="456" name="calendar_dayname_thursday">
-    <value>cs</value>
-  </string>
-  <string id="457" name="calendar_dayname_friday">
-    <value>p</value>
-  </string>
-  <string id="494" name="roomAdmin_layout_files_show">
-    <value>Engedélyezett</value>
-  </string>
-  <string id="515" name="reset_password_template_text2_link">
-    <value>Kattints ide az új jelszó megadásához</value>
-  </string>
-  <string id="517" name="reset_password_mail_subject">
-    <value>OpenMeetings Jelszó váltás</value>
-  </string>
-  <string id="518" name="dateRegExpError">
-    <value>Kérlek adj meg egy érvényes dátumot, például 24.12.2001 (nn.hh.éééé)</value>
-  </string>
-  <string id="540" name="audio_video">
-    <value>Hang/kép szinkronizáció</value>
-  </string>
-  <string id="544" name="debug_message_recording">
-    <value>A felvételkészítő egyenlőre béta állapotú!</value>
-  </string>
-  <string id="465" name="calendar_dayname_SaturdayLabel">
-    <value>szombat</value>
-  </string>
-  <string id="466" name="calendar_dayname_SundayLabel">
-    <value>vasárnap</value>
-  </string>
-  <string id="467" name="calendar_weeknumber_header">
-    <value>hsz</value>
-  </string>
-  <string id="469" name="calendar_monthnames">
-    <value>január</value>
-  </string>
-  <string id="447" name="choose_video_settings">
-    <value>Válassz engedélyezett eszközt</value>
-  </string>
   <string id="396" name="recorder">
     <value>Felvételek megtekintése</value>
   </string>
@@ -1335,137 +1203,65 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   <string id="399" name="roomslist">
     <value>Csatlakozott:</value>
   </string>
-  <string id="536" name="invitation_pass">
-    <value>Jelszó:</value>
+  <string id="400" name="roomslist">
+    <value></value>
   </string>
-  <string id="533" name="invitation_error">
-    <value>Nincs meghívás ehhez a meghívó kódhoz.</value>
+  <string id="401" name="roomslist">
+    <value>Felhasználók ebben a szobában:</value>
   </string>
-  <string id="531" name="invitation_window_validToLabel">
-    <value>Eddig érvényes:</value>
+  <string id="402" name="roomslist">
+    <value>frissítés</value>
   </string>
-  <string id="530" name="invitation_window_validFromLabel">
-    <value>Ettől érvényes:</value>
+  <string id="403" name="roomslist">
+    <value>A szoba megtelt. Próbálkozz pár perc múlva.</value>
   </string>
-  <string id="529" name="invitation_window_valid">
-    <value>Egyszer használható</value>
+  <string id="404" name="roomsList">
+    <value>kattints a szobára az információkér</value>
   </string>
-  <string id="528" name="invitation_window_valid">
-    <value>Időszak</value>
+  <string id="405" name="roomslist">
+    <value>Csevegés a felhasználókkal a szobában:</value>
   </string>
-  <string id="527" name="invitation_window_valid">
-    <value>Végtelen</value>
+  <string id="406" name="roomslist">
+    <value>Szoba:</value>
   </string>
-  <string id="524" name="invitation_window">
-    <value>Jelszóval védve</value>
+  <string id="407" name="roomslist">
+    <value>Felhasználók a szobában:</value>
   </string>
-  <string id="522" name="phoneRegExpError">
-    <value>Kérlek érvényes telefonszámot adj meg, például ++49 0123 123123</value>
+  <string id="408" name="roomslist">
+    <value>innentől:</value>
   </string>
-  <string id="520" name="floatRegExpError">
-    <value>Kérlek adj meg egy számot, például 1.00</value>
+  <string id="409" name="record">
+    <value>felvétel lejátszása</value>
   </string>
-  <string id="496" name="roomAdmin_layout_files">
-    <value>Szél. | Magasság</value>
+  <string id="410" name="record">
+    <value>Hossz:</value>
   </string>
-  <string id="502" name="invitation_text_message">
-    <value>Üzenet:</value>
+  <string id="411" name="record">
+    <value>Dátum:</value>
   </string>
-  <string id="503" name="invitation_text_click_text">
-    <value>Kattints erre a linkre a találkozókon való részvételhez:</value>
+  <string id="412" name="record">
+    <value>Felvétel üzemmód! Nem változtatható meg egy érték sem, mert ez egy felvett fájl!</value>
   </string>
-  <string id="508" name="registering_mail_text_username">
-    <value>Bejel.név:</value>
+  <string id="413" name="record">
+    <value>A felvétel lejátszása</value>
   </string>
-  <string id="509" name="registering_mail_text_pass">
-    <value>Jelszó:</value>
+  <string id="414" name="record">
+    <value>Lejátszás / Megállítás</value>
   </string>
-  <string id="512" name="register_mail_subject">
-    <value>OpenMeetings Regisztráció</value>
+  <string id="415" name="record">
+    <value>Felvétel indítása</value>
   </string>
-  <string id="513" name="reset_password_template_head">
-    <value>OpenMeetings - Jelszó csere</value>
+  <string id="416" name="record">
+    <value>Felvétel megállítása</value>
   </string>
-  <string id="473" name="calendar_monthnames">
-    <value>május</value>
+  <string id="417" name="record">
+    <value>Felvétel:</value>
   </string>
-  <string id="474" name="calendar_monthnames">
-    <value>június</value>
+  <string id="418" name="record_error_msg">
+    <value>Már valaki felvételt készít:</value>
   </string>
-  <string id="475" name="calendar_monthnames">
-    <value>július</value>
-  </string>
-  <string id="479" name="calendar_monthnames">
-    <value>november</value>
-  </string>
-  <string id="480" name="calendar_monthnames">
-    <value>december</value>
-  </string>
-  <string id="486" name="roomAdmin_layout">
-    <value>Video-Ablak</value>
-  </string>
-  <string id="487" name="roomAdmin_layout_mod">
-    <value>Előadói-Ablak</value>
-  </string>
-  <string id="489" name="roomAdmin_layout_whiteboard">
-    <value>Tábla-Ablak</value>
-  </string>
-  <string id="448" name="choose_video_settings_combo">
-    <value>Hang és kép</value>
-  </string>
-  <string id="451" name="choose_video_settings_combo">
-    <value>Hang és kép nélkül (álló kép)</value>
-  </string>
-  <string id="453" name="calendar_dayname_monday">
-    <value>h</value>
-  </string>
-  <string id="458" name="calendar_dayname_saturday">
-    <value>szo</value>
-  </string>
-  <string id="459" name="calendar_dayname_sunday">
-    <value>v</value>
-  </string>
-  <string id="460" name="calendar_dayname_monday">
-    <value>hétfő</value>
-  </string>
-  <string id="461" name="calendar_dayname_TuesdayLabel">
-    <value>kedd</value>
-  </string>
-  <string id="462" name="calendar_dayname_WednesdayLabel">
-    <value>szerda</value>
-  </string>
-  <string id="463" name="calendar_dayname_ThursdayLabel">
-    <value>csütörtök</value>
-  </string>
-  <string id="464" name="calendar_dayname_FridayLabel">
-    <value>péntek</value>
-  </string>
-  <string id="490" name="roomAdmin_layout_whiteboard_show">
-    <value>Engedélyezett</value>
-  </string>
-  <string id="492" name="roomAdmin_layout_whiteboard">
-    <value>Szél. | Magasság</value>
-  </string>
-  <string id="493" name="roomAdmin_layout_files">
-    <value>Fájlok,csevegés,résztvevők - Ablak</value>
-  </string>
-  <string id="516" name="reset_password_template_text3_link">
-    <value>ha problémád adódna a linkkel, kérlek másold át ezt a böngésződ címsorába:</value>
-  </string>
-  <string id="519" name="emailRegExpError">
-    <value>Kérlek adj meg egy érvényes e-mail címet, például name@mail.com</value>
-  </string>
-  <string id="541" name="errorCode_invalidSession">
-    <value>A bejelentkezés helyes volt, de session vagy nem aktív vagy nincs a szerveren tárolva. Újra be kell jelentkezned.</value>
-  </string>
-  <string id="468" name="calendar_weeknumber_headerTooltip">
-    <value>Hetek száma</value>
-  </string>
-  <string id="542" name="errorcode_setUserObject">
-    <value>Ez a SessionId nincs bejelentkezve, vagy nincsen adminisztrátori joga. A SOAP átjárónak adminisztrátori jogokkal kell egy felhasználó új felhasználó beágyazásához.</value>
-  </string>
-  <string id="543" name="errorcode_loginByRemoteUser">
-    <value>Ehhez a Session-höz nincs Remoteuser-Data kapcsolat. Wether you did not call the SOAP-Gateway before accessing the Application or you are usnig a wrong Session-ID</value>
+  <string id="419" name="record_message">
+    <value>Felvétel! Felhasználó:</value>
   </string>
   <string id="420" name="record_cancel">
     <value>mégse</value>
@@ -1479,11 +1275,11 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   <string id="423" name="cancel_dialog_resume_tooltip">
     <value>Zárd be az ablakot és indítsd újra a felvételt.</value>
   </string>
-  <string id="425" name="colorpicker_head">
-    <value>Szin választás</value>
-  </string>
   <string id="424" name="painttools_ellipse_color">
     <value>Vonalszin változtatás</value>
+  </string>
+  <string id="425" name="colorpicker_head">
+    <value>Szin választás</value>
   </string>
   <string id="426" name="painttools_line_disable">
     <value>Ki / Bekapcsolja a vonalszint</value>
@@ -1542,101 +1338,305 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   <string id="444" name="chat_send_btn">
     <value>üzenet küldése</value>
   </string>
-  <string id="401" name="roomslist">
-    <value>Felhasználók ebben a szobában:</value>
+  <string id="445" name="chat_emot_btn">
+    <value>Emoticons</value>
   </string>
-  <string id="402" name="roomslist">
-    <value>frissítés</value>
+  <string id="446" name="chat_emot_win">
+    <value>Emoticons</value>
   </string>
-  <string id="403" name="roomslist">
-    <value>A szoba megtelt. Próbálkozz pár perc múlva.</value>
+  <string id="447" name="choose_video_settings">
+    <value>Válassz engedélyezett eszközt</value>
   </string>
-  <string id="404" name="roomsList">
-    <value>kattints a szobára az információkér</value>
+  <string id="448" name="choose_video_settings_combo">
+    <value>Hang és kép</value>
   </string>
-  <string id="405" name="roomslist">
-    <value>Csevegés a felhasználókkal a szobában:</value>
+  <string id="449" name="choose_video_settings_combo">
+    <value>Csak hang</value>
   </string>
-  <string id="406" name="roomslist">
-    <value>Szoba:</value>
+  <string id="450" name="choose_video_settings_combo">
+    <value>Csak kép</value>
   </string>
-  <string id="407" name="roomslist">
-    <value>Felhasználók a szobában:</value>
+  <string id="451" name="choose_video_settings_combo">
+    <value>Hang és kép nélkül (álló kép)</value>
   </string>
-  <string id="408" name="roomslist">
-    <value>innentől:</value>
+  <string id="452" name="choose_video_settings_info_text">
+    <value>Sem hang sem kép nem kerül megosztásra a gépedről, hanem a felhasználói adataidból a feltöltött kép. Használd ezt, ha gondjaid vannak a sávszélességgel vagy nagyon lassú az Interneted.</value>
   </string>
-  <string id="409" name="record">
-    <value>felvétel lejátszása</value>
+  <string id="453" name="calendar_dayname_monday">
+    <value>h</value>
   </string>
-  <string id="410" name="record">
-    <value>Hossz:</value>
+  <string id="454" name="calendar_dayname_tuesday">
+    <value>k</value>
   </string>
-  <string id="413" name="record">
-    <value>A felvétel lejátszása</value>
+  <string id="455" name="calendar_dayname_wednesday">
+    <value>sz</value>
   </string>
-  <string id="414" name="record">
-    <value>Lejátszás / Megállítás</value>
+  <string id="456" name="calendar_dayname_thursday">
+    <value>cs</value>
   </string>
-  <string id="418" name="record_error_msg">
-    <value>Már valaki felvételt készít:</value>
+  <string id="457" name="calendar_dayname_friday">
+    <value>p</value>
   </string>
-  <string id="419" name="record_message">
-    <value>Felvétel! Felhasználó:</value>
+  <string id="458" name="calendar_dayname_saturday">
+    <value>szo</value>
   </string>
-  <string id="5" name="benutzer">
-    <value>Beállítások</value>
+  <string id="459" name="calendar_dayname_sunday">
+    <value>v</value>
   </string>
-  <string id="411" name="record">
-    <value>Dátum:</value>
+  <string id="460" name="calendar_dayname_monday">
+    <value>hétfő</value>
   </string>
-  <string id="412" name="record">
-    <value>Felvétel üzemmód! Nem változtatható meg egy érték sem, mert ez egy felvett fájl!</value>
+  <string id="461" name="calendar_dayname_TuesdayLabel">
+    <value>kedd</value>
   </string>
-  <string id="415" name="record">
-    <value>Felvétel indítása</value>
+  <string id="462" name="calendar_dayname_WednesdayLabel">
+    <value>szerda</value>
   </string>
-  <string id="416" name="record">
-    <value>Felvétel megállítása</value>
+  <string id="463" name="calendar_dayname_ThursdayLabel">
+    <value>csütörtök</value>
   </string>
-  <string id="417" name="record">
-    <value>Felvétel:</value>
+  <string id="464" name="calendar_dayname_FridayLabel">
+    <value>péntek</value>
   </string>
-  <string id="376" name="dashboard">
-    <value>Üdv,</value>
+  <string id="465" name="calendar_dayname_SaturdayLabel">
+    <value>szombat</value>
   </string>
-  <string id="3" name="classroom">
-    <value>Előadás</value>
+  <string id="466" name="calendar_dayname_SundayLabel">
+    <value>vasárnap</value>
   </string>
-  <string id="10" name="recordbyteacher">
-    <value>Felvétel az előadónál</value>
+  <string id="467" name="calendar_weeknumber_header">
+    <value>hsz</value>
   </string>
-  <string id="44" name="conference">
-    <value>Előadás (max. 50 ülőhely)</value>
+  <string id="468" name="calendar_weeknumber_headerTooltip">
+    <value>Hetek száma</value>
   </string>
-  <string id="123" name="Authbtn2">
-    <value>Regisztráció</value>
+  <string id="469" name="calendar_monthnames">
+    <value>január</value>
   </string>
-  <string id="128" name="headconf">
-    <value>Előadás-szoba</value>
+  <string id="470" name="calendar_monthnames">
+    <value>február</value>
   </string>
-  <string id="272" name="turnoverlist_maxresults">
-    <value>-</value>
+  <string id="471" name="calendar_monthnames">
+    <value>március</value>
   </string>
-  <string id="254" name="whiteboard_documenttoolbar_slide">
-    <value>-</value>
+  <string id="472" name="calendar_monthnames">
+    <value>április</value>
   </string>
-  <string id="296" name="subnavi">
-    <value>Zártkörű előadások</value>
+  <string id="473" name="calendar_monthnames">
+    <value>május</value>
   </string>
-  <string id="377" name="dashboard">
-    <value>Személyes adatok szerkesztése</value>
+  <string id="474" name="calendar_monthnames">
+    <value>június</value>
+  </string>
+  <string id="475" name="calendar_monthnames">
+    <value>július</value>
+  </string>
+  <string id="476" name="calendar_monthnames">
+    <value>augusztus</value>
+  </string>
+  <string id="477" name="calendar_monthnames">
+    <value>szeptember</value>
+  </string>
+  <string id="478" name="calendar_monthnames">
+    <value>október</value>
+  </string>
+  <string id="479" name="calendar_monthnames">
+    <value>november</value>
+  </string>
+  <string id="480" name="calendar_monthnames">
+    <value>december</value>
+  </string>
+  <string id="481" name="calendarwin_header">
+    <value>Naptár</value>
+  </string>
+  <string id="482" name="roomadmin_labelNumberOfParticipants">
+    <value>Résztvevők</value>
+  </string>
+  <string id="483" name="roomValue_advancedSettings">
+    <value>Nézet beállítások megtekintése</value>
+  </string>
+  <string id="484" name="roomAdmin_layout_videoX">
+    <value>X | Y</value>
+  </string>
+  <string id="485" name="roomAdmin_layout_videoY">
+    <value>Szél. | Magasság</value>
+  </string>
+  <string id="486" name="roomAdmin_layout">
+    <value>Video-Ablak</value>
+  </string>
+  <string id="487" name="roomAdmin_layout_mod">
+    <value>Előadói-Ablak</value>
+  </string>
+  <string id="488" name="roomAdmin_layout_mod_pos">
+    <value>X</value>
+  </string>
+  <string id="489" name="roomAdmin_layout_whiteboard">
+    <value>Tábla-Ablak</value>
+  </string>
+  <string id="490" name="roomAdmin_layout_whiteboard_show">
+    <value>Engedélyezett</value>
+  </string>
+  <string id="491" name="roomAdmin_layout_whiteboard_pos">
+    <value>X | Y</value>
+  </string>
+  <string id="492" name="roomAdmin_layout_whiteboard">
+    <value>Szél. | Magasság</value>
+  </string>
+  <string id="493" name="roomAdmin_layout_files">
+    <value>Fájlok,csevegés,résztvevők - Ablak</value>
+  </string>
+  <string id="494" name="roomAdmin_layout_files_show">
+    <value>Engedélyezett</value>
+  </string>
+  <string id="495" name="roomAdmin_layout_files_pos">
+    <value>X |Y</value>
+  </string>
+  <string id="496" name="roomAdmin_layout_files">
+    <value>Szél. | Magasság</value>
+  </string>
+  <string id="497" name="moderator_gone_message">
+    <value>Az előadó elhagyta a szobát. Jelenleg nincs előadó. Jelentkezhetsz előadónak vagy várhatsz.</value>
+  </string>
+  <string id="498" name="moderator_message_event_no_mod">
+    <value>Nincs előadó a szobában, de vannak résztvevők. Jelentkezz előadónak vagy várj.</value>
   </string>
   <string id="499" name="feedback_template_subject">
     <value>OpenMeetings visszajelzés</value>
   </string>
-  <string id="310" name="conferencebar">
-    <value>Kilépés</value>
+  <string id="500" name="invitation_template_head">
+    <value>OpenMeetings - Meghívó</value>
+  </string>
+  <string id="501" name="invitation_text_from">
+    <value>Üzenet ettől a felhasználótól:</value>
+  </string>
+  <string id="502" name="invitation_text_message">
+    <value>Üzenet:</value>
+  </string>
+  <string id="503" name="invitation_text_click_text">
+    <value>Kattints erre a linkre a találkozókon való részvételhez:</value>
+  </string>
+  <string id="504" name="invitation_text_click_text_link">
+    <value>Kattints ide a szobába való belépéshez</value>
+  </string>
+  <string id="505" name="invitation_text_click_text_help">
+    <value>ha problémád adódik a linkkel akkor ezt másold a böngésző címsorába:</value>
+  </string>
+  <string id="506" name="registering_mail_text_head">
+    <value>OpenMeetings Regisztráció</value>
+  </string>
+  <string id="507" name="registering_mail_text_head2">
+    <value>Felhasználói adataid:</value>
+  </string>
+  <string id="508" name="registering_mail_text_username">
+    <value>Bejel.név:</value>
+  </string>
+  <string id="509" name="registering_mail_text_pass">
+    <value>Jelszó:</value>
+  </string>
+  <string id="510" name="registering_mail_text_mail">
+    <value>EMail:</value>
+  </string>
+  <string id="511" name="registering_mail_text_bye">
+    <value>OpenMeetings-Csapat</value>
+  </string>
+  <string id="512" name="register_mail_subject">
+    <value>OpenMeetings Regisztráció</value>
+  </string>
+  <string id="513" name="reset_password_template_head">
+    <value>OpenMeetings - Jelszó csere</value>
+  </string>
+  <string id="514" name="reset_password_template_test_link">
+    <value>Kattints erre a linkre a jelszó cseréhez:</value>
+  </string>
+  <string id="515" name="reset_password_template_text2_link">
+    <value>Kattints ide az új jelszó megadásához</value>
+  </string>
+  <string id="516" name="reset_password_template_text3_link">
+    <value>ha problémád adódna a linkkel, kérlek másold át ezt a böngésződ címsorába:</value>
+  </string>
+  <string id="517" name="reset_password_mail_subject">
+    <value>OpenMeetings Jelszó váltás</value>
+  </string>
+  <string id="518" name="dateRegExpError">
+    <value>Kérlek adj meg egy érvényes dátumot, például 24.12.2001 (nn.hh.éééé)</value>
+  </string>
+  <string id="519" name="emailRegExpError">
+    <value>Kérlek adj meg egy érvényes e-mail címet, például name@mail.com</value>
+  </string>
+  <string id="520" name="floatRegExpError">
+    <value>Kérlek adj meg egy számot, például 1.00</value>
+  </string>
+  <string id="521" name="numberRegExpError">
+    <value>Kérlek egész számoz adj meg, például 100</value>
+  </string>
+  <string id="522" name="phoneRegExpError">
+    <value>Kérlek érvényes telefonszámot adj meg, például ++49 0123 123123</value>
+  </string>
+  <string id="523" name="timeRegExpError">
+    <value>Kérlek érvényes időpontot adj meg, például 12:23 (óó:pp)</value>
+  </string>
+  <string id="524" name="invitation_window">
+    <value>Jelszóval védve</value>
+  </string>
+  <string id="525" name="invitation_window_passwordLabel">
+    <value>Jelszó</value>
+  </string>
+  <string id="526" name="invitation_window_validLabel">
+    <value>Érvényességi periódus</value>
+  </string>
+  <string id="527" name="invitation_window_valid">
+    <value>Végtelen</value>
+  </string>
+  <string id="528" name="invitation_window_valid">
+    <value>Időszak</value>
+  </string>
+  <string id="529" name="invitation_window_valid">
+    <value>Egyszer használható</value>
+  </string>
+  <string id="530" name="invitation_window_validFromLabel">
+    <value>Ettől érvényes:</value>
+  </string>
+  <string id="531" name="invitation_window_validToLabel">
+    <value>Eddig érvényes:</value>
+  </string>
+  <string id="532" name="invitation_window_MailSubject">
+    <value>Meghívás OpenMeetingre</value>
+  </string>
+  <string id="533" name="invitation_error">
+    <value>Nincs meghívás ehhez a meghívó kódhoz.</value>
+  </string>
+  <string id="534" name="invitation_error">
+    <value>A meghívás már használva volt. Ez a típusú meghívás nem használható fel többször.</value>
+  </string>
+  <string id="535" name="invitation_error">
+    <value>A meghívó kód nem érvényes.</value>
+  </string>
+  <string id="536" name="invitation_pass">
+    <value>Jelszó:</value>
+  </string>
+  <string id="537" name="invitation_pass_btn">
+    <value>Jelszó ellenőrzés</value>
+  </string>
+  <string id="538" name="invitation_pass_error">
+    <value>Hibás jelszó!</value>
+  </string>
+  <string id="539" name="Browser">
+    <value>Böngésző</value>
+  </string>
+  <string id="540" name="audio_video">
+    <value>Hang/kép szinkronizáció</value>
+  </string>
+  <string id="541" name="errorCode_invalidSession">
+    <value>A bejelentkezés helyes volt, de session vagy nem aktív vagy nincs a szerveren tárolva. Újra be kell jelentkezned.</value>
+  </string>
+  <string id="542" name="errorcode_setUserObject">
+    <value>Ez a SessionId nincs bejelentkezve, vagy nincsen adminisztrátori joga. A SOAP átjárónak adminisztrátori jogokkal kell egy felhasználó új felhasználó beágyazásához.</value>
+  </string>
+  <string id="543" name="errorcode_loginByRemoteUser">
+    <value>Ehhez a Session-höz nincs Remoteuser-Data kapcsolat. Wether you did not call the SOAP-Gateway before accessing the Application or you are usnig a wrong Session-ID</value>
+  </string>
+  <string id="544" name="debug_message_recording">
+    <value>A felvételkészítő egyenlőre béta állapotú!</value>
   </string>
   <string id="545" name="propertyPanelXValue">
     <value>x</value>
@@ -1664,11 +1664,14 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   </string>
   <string id="553" name="propertyOpacitySlider">
     <value>Change Transparency</value>
-  </string>	
+  </string>
   <string id="554" name="browserOpen">
     <value>Browser Open</value>
-  </string>	
+  </string>
   <string id="555" name="browserClose">
     <value>Browser Close</value>
-  </string>	
+  </string>
+  <string id="556" name="connectionLostMessage">
+    <value>The Connection to the Server is lost. You need to reload the Application or/and check your Network.</value>
+  </string>
 </language>
