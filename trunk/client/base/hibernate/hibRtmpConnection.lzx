@@ -99,6 +99,7 @@
                     //Debug.write("connection failed");
                     canvas.thishib.loaderVar.error.setText(this.status);
                     canvas.setAttribute('loadingmessage','connection failed');
+                    new labelerrorPopup(canvas,{errorlabelid:556});
                 }
                 canvas.thishib.loaderVar.src.setText(src);
             }

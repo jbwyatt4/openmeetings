@@ -2,8 +2,8 @@
 <library>
 
 <class name="errorPopup" extends="labelExplorerBox" labelid="204"
-	docking="true" resizeable="false" closable="true" 
-    width="224" x="300" height="230">
+	docking="true" resizeable="false" closable="true" y="100"
+    x="$once{ parent.width/2 - this.width/2 }" height="230" width="224">
 
 	<attribute name="error" value="" type="string" />
 
@@ -12,6 +12,18 @@
 			multiline="true" width="190" />
 		<vscrollbar />
 	</view>
+
+</class>
+
+<class name="labelerrorPopup" extends="errorPopup">
+
+    <attribute name="errorlabelid" type="number" setter="setErrorLabelId(errorlabelid)" />
+    <method name="setErrorLabelId" args="errorlabelid" >
+        this.errorlabelid = errorlabelid;
+        this.setAttribute("error",canvas.getLabelName(this.errorlabelid));
+        if ($debug) Debug.write("labelerrorPopup: ",canvas.getLabelName(this.errorlabelid));
+    </method>
+    
 
 </class>
 
