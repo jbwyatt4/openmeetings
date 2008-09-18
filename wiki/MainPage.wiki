@@ -46,6 +46,7 @@ Tips for Installation:
 
   * SoapMethods - Available SOAP-Services to login directly/embedding !OpenMeetings
   * DirectLoginSoapGeneralFlow - Directly Login into a Room, General Flow of embedding !OpenMeetings
+  * MethodGateway - a very simple way of passing variables to Methods without using SOAP
 
 == Plugins == 
 
