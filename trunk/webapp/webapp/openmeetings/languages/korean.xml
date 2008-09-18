@@ -1677,4 +1677,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   <string id="555" name="browserClose">
     <value>Browser Close</value>
   </string>	
+  <string id="556" name="connectionLostMessage">
+    <value>The Connection to the Server is lost. You need to reload the Application or/and check your Network.</value>
+  </string>  
 </language>
