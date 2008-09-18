@@ -5,9 +5,6 @@ You only need to pass the variables as Get-Values with the URL.
 
 You can de-serialize the XML to Objects again using XStram, but you need the openmeetings.jar in your classpath. 
 
-== Method getSession ==
-
-http://localhost:5080/openmeetings/MethodGateway?service=userservice&method=getSession
 
 == Method getSession ==
 
