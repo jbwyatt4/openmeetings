@@ -72,3 +72,7 @@ After Running the Installer all basics are installed. Now login and go to the Me
   * if you have problems in converting Files check the Batch-Scripts in $OPENMEETINGS_HOME/jod
   * If you want to use red5 as a service (without red5.bat), you need to move red5\wrapper\wrapper.exe to red5\wrapper.exe. Then change some path in conf\wrapper.conf (like ..\lib\foo.jar to lib\foo.jar). And finally change the register key in HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Red5\ImagePath to point to the new wrapper.
   * For connecting and running Apache + Red5 both on Port 80 see Nils Eckert's Tutorial about doing it (German) http://wiki.nils-eckert.de/red5/apache-proxy
+  * you can query a Mysql Database to get the schema_collection by using this query: 
+{{{
+SELECT Table_name, TABLE_COLLATION FROM information_schema.tables WHERE table_schema = 'portal' ORDER BY table_name DESC
+}}}
