@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<library>
+	<!---
+		This library contains browser components for conference and auditorium.
+		This class will be called in modules/conference/conference/conferenceMenubar.lzx, and
+		the command decreared in base/mainMethods.lzx.
+		You can change this size with browserPanelWidth/browserPanelHeight attributes in base/mainAttributes.lzx
+		at deriving it.
+				2008 Apr 9 commented by onokeiji@gmail.com 
+	-->
+	<!--- TODO:
+			inprement of history feature
+			add resize feature to labelExplorerBox component
+	-->
+	<include href="extensions/html.lzx"/>
+
+	<class name="conferenceBrowser" extends="labelExplorerBox" labelid="539">
+		<view name="browser" y="20">
+			<view name="navigation" layout="axis:x">
+		       	<edittext name="url" width="${classroot.width-parent.readStart.width}"> 
+					<handler name="onkeyup" args="key">
+						if ((key==27) || (key==13)) {
+                					this.parent.readStart.onclick.sendEvent();
+                		}
+	            		</handler>
+				</edittext>
+				
+		        	<basebutton name="readStart" resource="./resources/read.png" width="25" height="25">
+		        		<handler name="onclick">
+		            		<![CDATA[
+		            		var url = parent.url.getText();
+		            		if((url.indexOf( "http://")<0)&&(url.indexOf( "https://" )<0)){
+		            			url = "http://" + url;
+		            	}
+		            	
+		            		if( $debug ) Debug.write( "url: ", url );
+		            		with( parent.parent.parent ){
+		                			htmlviewer.setSrc( url );
+		                			htmlviewer.visible = true;
+		            	}
+		            	
+		            		parent.url.setText( url );
+		            	]]>
+	                		</handler>
+		        	</basebutton> 
+			</view>
+		</view>
+
+		<handler name="onclose">
+			this.htmlviewer.setVisible( false );
+		</handler>		
+		
+        	<html name="htmlviewer" xoffset="10" yoffset="${parent.browser.height+35}" widthoffset="${-this.xoffset}" heightoffset="${-this.yoffset}"/>
+ 	</class>
+</library>
