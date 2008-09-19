@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!-- all datasets for main.lzx -->
+
+<library>
+
+<!-- get values from config.xml -->
+<dataset type="http" name="myConfigSet" src="config.xml" request="true" ondata="canvas.myinit()" />
+
+</library>
