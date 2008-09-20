@@ -159,20 +159,21 @@ public class CaptureScreen {
 			
 			System.out.println("sendJpegToUrl complete ");
 			
+			StartScreen.instance.showBandwidthWarning("send complete ");
+			
 		    // read the output from the URL
-			try {
-				DataInputStream in = new DataInputStream(
-						new BufferedInputStream(c.getInputStream()));
-				String sIn = in.readLine();
-				while (sIn != null) {
-					if (sIn != null) {
-						System.out.println(sIn);
-					}
-					sIn = in.readLine();
+			DataInputStream in = new DataInputStream(
+					new BufferedInputStream(c.getInputStream()));
+			String sIn = in.readLine();
+			while (sIn != null) {
+				if (sIn != null) {
+					System.out.println(sIn);
 				}
-			} catch (Exception e) {
-				e.printStackTrace();
-			}	
+				sIn += in.readLine();
+			}
+			
+			StartScreen.instance.showBandwidthWarning("Input Stream: "+sIn);
+
 			Date endTime2 = new Date();
 			long timeInSeconds2 = (endTime2.getTime()-this.startDate.getTime())/1000;
 			
@@ -181,6 +182,7 @@ public class CaptureScreen {
 			ConnectionBean.isloading = false;
 
 		} catch (Exception e) {
+			StartScreen.instance.showBandwidthWarning("Exception: "+e.getMessage());
 			e.printStackTrace();
 		}
 	}
