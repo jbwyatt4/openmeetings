@@ -16,7 +16,8 @@ public class ScreenJob implements Job {
     	if (ConnectionBean.isloading){
     		StartScreen.instance.showBandwidthWarning("Your Bandwidth is bad. Frames have been droped. You can alter the Quality settings to reduce Bandwidth usage.");
     	} else {
-    		new CaptureScreen(ConnectionBean.connectionURL,ConnectionBean.SID,ConnectionBean.room,ConnectionBean.domain);
+    		StartScreen.instance.showBandwidthWarning("");
+    		new CaptureScreen(ConnectionBean.connectionURL,ConnectionBean.SID,ConnectionBean.room,ConnectionBean.domain,ConnectionBean.publicSID);
     	}
     }
 

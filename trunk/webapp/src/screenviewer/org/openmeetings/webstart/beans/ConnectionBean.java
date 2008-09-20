@@ -12,6 +12,8 @@ public class ConnectionBean {
 	
 	public static String domain = "public";
 	
+	public static String publicSID = "";
+	
 	/**Intervall Settings**/
 	
 	public static int intervallSeconds = 3;

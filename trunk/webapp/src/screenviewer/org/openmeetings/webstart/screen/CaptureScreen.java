@@ -21,16 +21,16 @@ public class CaptureScreen {
 	private Date startDate;
 
 	public static void main(String[] args) {
-		new CaptureScreen("http://192.168.2.103:5080/xmlcrm/ScreenServlet","2010","1","public");
+		new CaptureScreen("http://192.168.2.103:5080/xmlcrm/ScreenServlet","2010","1","public","");
 	}
 
-	public CaptureScreen(String url, String SID, String room, String domain) {
+	public CaptureScreen(String url, String SID, String room, String domain, String publicSID) {
 		try {
 			System.err.println("captureScreenStart");
 			this.startDate = new Date();
-//			StartScreen.instance.showBandwidthWarning("capture Start: "+url+(new java.util.Date()));
+			//StartScreen.instance.showBandwidthWarning("capture publicSID: "+publicSID);
 			ConnectionBean.isloading = true;
-			this.captureScreen(url+"?sid="+SID+"&room="+room+"&domain="+domain,"myscreenRemote.jpg");
+			this.captureScreen(url+"?sid="+SID+"&room="+room+"&domain="+domain+"&publicSID="+publicSID,"myscreenRemote.jpg");
 		} catch (Exception io) {
 			System.err.println(io);
 			System.out.println(io);

@@ -34,6 +34,7 @@ public class StartScreen {
 
 	JFrame t;
 	JLabel textArea;
+	JLabel textWarningArea;
 	JLabel textAreaQualy;
 	JButton startButton;
 	JButton stopButton;
@@ -83,7 +84,6 @@ public class StartScreen {
 			textArea.setText("This application will publish your screen");
 			textArea.setBounds(10, 0, 400,24);
 			
-			
 			startButton = new JButton( "start Sharing" );
 			startButton.addActionListener( new ActionListener(){
 				public void actionPerformed(ActionEvent arg0) {
@@ -124,6 +124,11 @@ public class StartScreen {
 			
 			//add the small screen thumb to the JFrame
 			new VirtualScreen();
+			
+			textWarningArea = new JLabel();
+			contentPane.add(textWarningArea);
+			textWarningArea.setBounds(10, 310, 400,54);
+			//textWarningArea.setBackground(Color.WHITE);
 			
 			exitButton = new JButton( "exit" );
 			exitButton.addActionListener( new ActionListener(){
@@ -168,7 +173,8 @@ public class StartScreen {
 	}
 	
 	public void showBandwidthWarning(String warning){
-		JOptionPane.showMessageDialog(t, warning);
+		textWarningArea.setText(warning);
+		//JOptionPane.showMessageDialog(t, warning);
 	}
 	
 	void captureScreenStart(){
@@ -206,13 +212,17 @@ public class StartScreen {
 		}
 	}
 	
-	public StartScreen(String url, String SID, String room, String domain){
+	public StartScreen(String url, String SID, String room, String domain, String publicSID){
 		System.out.println("captureScreenStop Exception: ");
 		System.err.println("captureScreenStop Exception: ");
+		
+		//JOptionPane.showMessageDialog(t, "publicSID: "+publicSID);
+		
 		ConnectionBean.connectionURL = url;
 		ConnectionBean.SID = SID;
 		ConnectionBean.room = room;
 		ConnectionBean.domain = domain;	
+		ConnectionBean.publicSID = publicSID;
 		instance=this;
 		//instance.showBandwidthWarning("StartScreen: "+SID+" "+room+" "+domain+" "+url);
 		this.initMainFrame();
@@ -223,7 +233,8 @@ public class StartScreen {
 		String SID = args[1]; 
 		String room = args[2];
 		String domain = args[3];
-		new StartScreen(url,SID,room,domain);
+		String publicSID = args[4];
+		new StartScreen(url,SID,room,domain,publicSID);
 	}
 
 }

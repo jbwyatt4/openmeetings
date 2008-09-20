@@ -1,5 +1,7 @@
 package org.openmeetings.servlet.outputhandler;
 
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 
 import http.utils.multipartrequest.MultipartRequest;
@@ -16,6 +18,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.openmeetings.app.conference.videobeans.RoomClient;
 import org.openmeetings.app.data.basic.Sessionmanagement;
 import org.openmeetings.app.data.user.Usermanagement;
 import org.openmeetings.utils.stringhandlers.StringComparer;
@@ -23,6 +28,8 @@ import org.openmeetings.utils.stringhandlers.StringComparer;
 import org.openmeetings.app.remote.Application;
 
 public class ScreenServlet extends HttpServlet {
+	
+	private static final Log log = LogFactory.getLog(ScreenServlet.class);
 
 	/**
 	 * 
@@ -45,24 +52,54 @@ public class ScreenServlet extends HttpServlet {
 				if (sid == null) {
 					sid = "default";
 				}
-				System.out.println("sid: " + sid);
+				log.debug("sid: " + sid);
+				
+				String publicSID = httpServletRequest.getParameter("publicSID");
+				if (publicSID == null) {
+					log.error("publicSID is empty: "+publicSID);
+					return;
+				}
+				log.debug("publicSID: " + publicSID);	
 				
 				String room = httpServletRequest.getParameter("room");
 				if (room == null) {
 					room = "default";
 				}
-				System.out.println("room: " + room);	
+				log.debug("room: " + room);	
 
 				String domain = httpServletRequest.getParameter("domain");
 				if (domain == null) {
 					domain = "default";
 				}
-				System.out.println("domain: " + domain);
+				log.debug("domain: " + domain);
 	
 				Long users_id = Sessionmanagement.getInstance().checkSession(sid);
 				Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
 				
 				if (user_level > 0) {
+					
+					//check if this Client is still inside the Room
+					boolean userIsInRoom = false;
+					
+					HashMap<String, RoomClient> clientList = Application.getClientList();
+					for (Iterator iter = clientList.keySet().iterator();iter.hasNext();) {
+						RoomClient rcl = clientList.get(iter.next());
+						if (rcl.getPublicSID().equals(publicSID)) {
+							log.debug("found RoomClient");
+							if (rcl.getRoom_id() != null && rcl.getRoom_id().toString().equals(room)) {
+								log.debug("User is inside Room");
+								userIsInRoom = true;
+							} else {
+								log.debug("User already left room, block Screen - logical Room Leave");
+								return;
+							}
+						}
+					}
+					
+					if (!userIsInRoom) {
+						log.debug("User already left room, block Screen - Browser Closed");
+						return;
+					}
 
 					//make a complete name out of domain(organisation) + roomname
 					String roomName = domain + "_" + room;
@@ -72,10 +109,10 @@ public class ScreenServlet extends HttpServlet {
 					//Get the current User-Directory
 
 					String current_dir = getServletContext().getRealPath("/");
-					System.out.println("Current_dir: " + current_dir);
+					log.debug("Current_dir: " + current_dir);
 
 					String working_dir = "";
-					System.out.println(MultipartRequest.MAX_READ_BYTES);
+					log.debug(MultipartRequest.MAX_READ_BYTES);
 
 					working_dir = current_dir + "desktop" + File.separatorChar + roomName + File.separatorChar;
 
@@ -85,7 +122,7 @@ public class ScreenServlet extends HttpServlet {
 						localFolder.mkdir();
 					}
 
-					System.out.println("#### UploadHandler working_dir: "+ working_dir);
+					log.debug("#### UploadHandler working_dir: "+ working_dir);
 					
 					ServletMultipartRequest upload = new ServletMultipartRequest(httpServletRequest, 104857600); // max 100 mb
 
@@ -114,7 +151,7 @@ public class ScreenServlet extends HttpServlet {
 						f.delete();
 					}
 
-					System.out.println("*****2 ***** completeName: "+ completeName + newFileSystemExtName);
+					log.debug("*****2 ***** completeName: "+ completeName + newFileSystemExtName);
 					FileOutputStream fos = new FileOutputStream(completeName + newFileSystemExtName);
 
 					byte[] buffer = new byte[1024];
@@ -138,12 +175,12 @@ public class ScreenServlet extends HttpServlet {
 					Application.getInstance().sendMessageByRoomAndDomain(Long.valueOf(room).longValue(),hs);
 	
 				} else {
-					System.out.println("user not logged in");
+					log.debug("user not logged in");
 				}
 
 			}
 		} catch (Exception e) {
-			System.out.println("ee " + e);
+			log.error("ee " + e);
 			e.printStackTrace();
 			throw new ServletException(e);
 		}

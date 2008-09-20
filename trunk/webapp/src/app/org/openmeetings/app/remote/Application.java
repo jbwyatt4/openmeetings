@@ -947,8 +947,7 @@ public class Application extends ApplicationAdapter implements
 	}
 	
 	/**
-	 * TODO: Check if needed and remove
-	 * @deprecated
+	 * used by the Screen-Sharing Servlet to trigger events
 	 * @param room_id
 	 * @param message
 	 * @return
