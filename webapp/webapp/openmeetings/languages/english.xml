@@ -1674,4 +1674,13 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   <string id="556" name="connectionLostMessage">
     <value>The Connection to the Server is lost. You need to reload the Application or/and check your Network.</value>
   </string>
+  <string id="557" name="557">
+    <value>Pointer</value>
+  </string>
+  <string id="558" name="sync message header">
+    <value>Synchronizing</value>
+  </string>
+  <string id="559" name="Synchronizing message">
+    <value>Synchronizing Users, please wait</value>
+  </string>
 </language>

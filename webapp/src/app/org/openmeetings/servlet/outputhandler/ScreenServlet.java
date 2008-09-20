@@ -11,6 +11,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -80,6 +81,7 @@ public class ScreenServlet extends HttpServlet {
 					
 					//check if this Client is still inside the Room
 					boolean userIsInRoom = false;
+					boolean doProcess = false;
 					
 					HashMap<String, RoomClient> clientList = Application.getClientList();
 					for (Iterator iter = clientList.keySet().iterator();iter.hasNext();) {
@@ -89,95 +91,113 @@ public class ScreenServlet extends HttpServlet {
 							if (rcl.getRoom_id() != null && rcl.getRoom_id().toString().equals(room)) {
 								log.debug("User is inside Room");
 								userIsInRoom = true;
+								doProcess = true;
 							} else {
 								log.debug("User already left room, block Screen - logical Room Leave");
-								return;
+								OutputStream out = httpServletResponse.getOutputStream();
+								String returnValue = "close";
+								out.write(returnValue.getBytes());
+								//return;
 							}
 						}
 					}
 					
 					if (!userIsInRoom) {
 						log.debug("User already left room, block Screen - Browser Closed");
-						return;
+						OutputStream out = httpServletResponse.getOutputStream();
+						String returnValue = "close";
+						out.write(returnValue.getBytes());
+						//return;
 					}
 
-					//make a complete name out of domain(organisation) + roomname
-					String roomName = domain + "_" + room;
-					//trim whitespaces cause it is a directory name
-					roomName = StringUtils.deleteWhitespace(roomName);
-
-					//Get the current User-Directory
-
-					String current_dir = getServletContext().getRealPath("/");
-					log.debug("Current_dir: " + current_dir);
-
-					String working_dir = "";
-					log.debug(MultipartRequest.MAX_READ_BYTES);
-
-					working_dir = current_dir + "desktop" + File.separatorChar + roomName + File.separatorChar;
-
-					//Add the Folder for the Room if it does not exist yet
-					File localFolder = new File(working_dir);
-					if (!localFolder.exists()) {
-						localFolder.mkdir();
+					if (doProcess) {
+						//make a complete name out of domain(organisation) + roomname
+						String roomName = domain + "_" + room;
+						//trim whitespaces cause it is a directory name
+						roomName = StringUtils.deleteWhitespace(roomName);
+	
+						//Get the current User-Directory
+	
+						String current_dir = getServletContext().getRealPath("/");
+						log.debug("Current_dir: " + current_dir);
+	
+						String working_dir = "";
+						log.debug(MultipartRequest.MAX_READ_BYTES);
+	
+						working_dir = current_dir + "desktop" + File.separatorChar + roomName + File.separatorChar;
+	
+						//Add the Folder for the Room if it does not exist yet
+						File localFolder = new File(working_dir);
+						if (!localFolder.exists()) {
+							localFolder.mkdir();
+						}
+	
+						log.debug("#### UploadHandler working_dir: "+ working_dir);
+						
+						ServletMultipartRequest upload = new ServletMultipartRequest(httpServletRequest, 104857600); // max 100 mb
+	
+						InputStream is = upload.getFileContents("Filedata");
+	
+						//trim whitespace
+						String fileSystemName = StringUtils.deleteWhitespace(upload.getFileSystemName("Filedata"));
+	
+						String newFileSystemName = StringComparer.getInstance()
+								.compareForRealPaths(
+										fileSystemName.substring(0,
+												fileSystemName.length() - 4));
+						String newFileSystemExtName = fileSystemName.substring(
+								fileSystemName.length() - 4,
+								fileSystemName.length()).toLowerCase();
+	
+						//trim long names cause cannot output that
+						if (newFileSystemName.length() >= 17) {
+							newFileSystemName = newFileSystemName.substring(0,16);
+						}
+						
+						String completeName = working_dir + newFileSystemName+"_"+sid;
+	
+						File f = new File(completeName + newFileSystemExtName);
+						if (f.exists()) {
+							f.delete();
+						}
+	
+						log.debug("*****2 ***** completeName: "+ completeName + newFileSystemExtName);
+						FileOutputStream fos = new FileOutputStream(completeName + newFileSystemExtName);
+	
+						byte[] buffer = new byte[1024];
+						int len = 0;
+						
+						while ( (len= is.read(buffer, 0, buffer.length)) >-1 ) {
+							fos.write(buffer, 0, len);
+						}
+	
+						fos.close();
+						is.close();	
+						
+						
+						
+						LinkedHashMap<String,Object> hs = new LinkedHashMap<String,Object>();
+						hs.put("user", Usermanagement.getInstance().getUser(users_id));
+						hs.put("message", "desktop");
+						hs.put("action", "newSlide");
+						hs.put("fileName", newFileSystemName+"_"+sid+newFileSystemExtName);
+						
+						
+						
+						Application.getInstance().sendMessageByRoomAndDomain(Long.valueOf(room).longValue(),hs);
+					
 					}
-
-					log.debug("#### UploadHandler working_dir: "+ working_dir);
-					
-					ServletMultipartRequest upload = new ServletMultipartRequest(httpServletRequest, 104857600); // max 100 mb
-
-					InputStream is = upload.getFileContents("Filedata");
-
-					//trim whitespace
-					String fileSystemName = StringUtils.deleteWhitespace(upload.getFileSystemName("Filedata"));
-
-					String newFileSystemName = StringComparer.getInstance()
-							.compareForRealPaths(
-									fileSystemName.substring(0,
-											fileSystemName.length() - 4));
-					String newFileSystemExtName = fileSystemName.substring(
-							fileSystemName.length() - 4,
-							fileSystemName.length()).toLowerCase();
-
-					//trim long names cause cannot output that
-					if (newFileSystemName.length() >= 17) {
-						newFileSystemName = newFileSystemName.substring(0,16);
-					}
-					
-					String completeName = working_dir + newFileSystemName+"_"+sid;
-
-					File f = new File(completeName + newFileSystemExtName);
-					if (f.exists()) {
-						f.delete();
-					}
-
-					log.debug("*****2 ***** completeName: "+ completeName + newFileSystemExtName);
-					FileOutputStream fos = new FileOutputStream(completeName + newFileSystemExtName);
-
-					byte[] buffer = new byte[1024];
-					int len = 0;
-					
-					while ( (len= is.read(buffer, 0, buffer.length)) >-1 ) {
-						fos.write(buffer, 0, len);
-					}
-
-					fos.close();
-					is.close();	
-					
-					
-					
-					LinkedHashMap<String,Object> hs = new LinkedHashMap<String,Object>();
-					hs.put("user", Usermanagement.getInstance().getUser(users_id));
-					hs.put("message", "desktop");
-					hs.put("action", "newSlide");
-					hs.put("fileName", newFileSystemName+"_"+sid+newFileSystemExtName);
-					
-					Application.getInstance().sendMessageByRoomAndDomain(Long.valueOf(room).longValue(),hs);
 	
 				} else {
 					log.debug("user not logged in");
 				}
 
+				
+				
+//				OutputStream out = httpServletResponse.getOutputStream();
+//				String returnValue = "ok";
+//				out.write(returnValue.getBytes());
+//				
 			}
 		} catch (Exception e) {
 			log.error("ee " + e);
