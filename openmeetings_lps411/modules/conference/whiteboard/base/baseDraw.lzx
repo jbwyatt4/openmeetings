@@ -137,7 +137,8 @@
 	 -->
 	<handler name="oninit">
 		if (this.isRemoteOID){
-			this.getOID.doCall();
+            //wrong reference, swagner 20.09.2008
+			//this.getOID.doCall();
 		}
         //Debug.write("********** this oninit: ",this);
 		this.basdrawredoView = new LzView(canvas,{visible:false,y:440});
