@@ -89,12 +89,14 @@
       Debug.write("isloadedImage: ",val);
     </handler>
    </whiteBoard>
+   <!--
   <view name="currentmainobjectisMod" visible="${ !canvas.ismoderator }"
     x="0" y="22" height="$once{ parent.height-22 }" width="$once{ parent.width }" >
     <handler name="onclick">
       new lz.errorModeratorPopup(canvas,{error:canvas.getLabelName(97)});
     </handler>
   </view>
+   -->
 </class>
 
 <class name="modernWhiteBoardPanel" extends="guiPresenter" x="296" y="2"

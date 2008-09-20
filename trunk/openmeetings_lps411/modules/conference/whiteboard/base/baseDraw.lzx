@@ -388,88 +388,96 @@
              
 	<handler name="onmousedown" >
 		//Debug.write("onmousedown this.drawmodus: ",this.drawmodus);
-		
-		if (this.letterObjectIsActive){
-			this.currentletterObj.drawtoArray();
-			//bool = true;
-		}	
-		
-		if(this.drawmodus=="hand"){
-			this.doSetHandBodus();
-		} else if(this.drawmodus=="paint"){
-			this.startPaint();
-			mousetracker_del.register(LzIdle,'onidle');
-		} else if(this.drawmodus=="line"){
-			this.startLine(null);
-  	 		this.startx = currentlayer.getMouse('x');
-			this.starty = currentlayer.getMouse('y'); 			
-			mousetracker_del.register(LzIdle,'onidle');
-		} else if(this.drawmodus=="uline"){
-			this.startUline(null);
-  	 		this.startx = currentlayer.getMouse('x');
-			this.starty = currentlayer.getMouse('y'); 			
-			mousetracker_del.register(LzIdle,'onidle');
-		} else if(this.drawmodus=="drawarrow"){
-			this.startDrawarrowline(null);
-  	 		this.startx = currentlayer.getMouse('x');
-			this.starty = currentlayer.getMouse('y'); 			
-			mousetracker_del.register(LzIdle,'onidle');
-		} else if (this.drawmodus == 'rectangle') {
-			this.startRect(null);
-  	 		this.startx = currentlayer.getMouse('x');
-			this.starty = currentlayer.getMouse('y'); 				
-            mousetracker_del.register(LzIdle,'onidle');
-        } else if (this.drawmodus == 'ellipse') {
-			this.startEllipse(null);
-  	 		this.startx = currentlayer.getMouse('x');
-			this.starty = currentlayer.getMouse('y'); 				
-            mousetracker_del.register(LzIdle,'onidle');
-        } else if (this.drawmodus == 'letter') {
-			this.startLetter();
-  	 		this.startx = currentlayer.getMouse('x');
-			this.starty = currentlayer.getMouse('y'); 				
-            mousetracker_del.register(LzIdle,'onidle');
+		if (canvas.ismoderator) {
+			if (this.letterObjectIsActive){
+				this.currentletterObj.drawtoArray();
+				//bool = true;
+			}	
+			
+			if(this.drawmodus=="hand"){
+				this.doSetHandBodus();
+			} else if(this.drawmodus=="paint"){
+				this.startPaint();
+				mousetracker_del.register(LzIdle,'onidle');
+			} else if(this.drawmodus=="line"){
+				this.startLine(null);
+	  	 		this.startx = currentlayer.getMouse('x');
+				this.starty = currentlayer.getMouse('y'); 			
+				mousetracker_del.register(LzIdle,'onidle');
+			} else if(this.drawmodus=="uline"){
+				this.startUline(null);
+	  	 		this.startx = currentlayer.getMouse('x');
+				this.starty = currentlayer.getMouse('y'); 			
+				mousetracker_del.register(LzIdle,'onidle');
+			} else if(this.drawmodus=="drawarrow"){
+				this.startDrawarrowline(null);
+	  	 		this.startx = currentlayer.getMouse('x');
+				this.starty = currentlayer.getMouse('y'); 			
+				mousetracker_del.register(LzIdle,'onidle');
+			} else if (this.drawmodus == 'rectangle') {
+				this.startRect(null);
+	  	 		this.startx = currentlayer.getMouse('x');
+				this.starty = currentlayer.getMouse('y'); 				
+	            mousetracker_del.register(LzIdle,'onidle');
+	        } else if (this.drawmodus == 'ellipse') {
+				this.startEllipse(null);
+	  	 		this.startx = currentlayer.getMouse('x');
+				this.starty = currentlayer.getMouse('y'); 				
+	            mousetracker_del.register(LzIdle,'onidle');
+	        } else if (this.drawmodus == 'letter') {
+				this.startLetter();
+	  	 		this.startx = currentlayer.getMouse('x');
+				this.starty = currentlayer.getMouse('y'); 				
+	            mousetracker_del.register(LzIdle,'onidle');
+	        }
         }
 	</handler>
 
 	<handler name="onmouseup" >
         if ($debug) Debug.write("onmouseup this.drawmodus: ",this.drawmodus);
 		<![CDATA[	
-		//var bool = false;
-		
-		if(this.drawmodus=="paint"){
-			this.endPaint();
-			mousetracker_del.unregisterAll();
-		} else if(this.drawmodus=="line"){
-			this.endLine();
-			mousetracker_del.unregisterAll();
-		} else if(this.drawmodus=="drawarrow"){
-			this.endDrawarrowline();
-			mousetracker_del.unregisterAll();
-		} else if(this.drawmodus=="uline"){
-			this.endUline();
-			mousetracker_del.unregisterAll();
-		} else if(this.drawmodus=="letter"){
-			//if (!this.letterObjectIsActive && !bool){
-			//	this.currentletterObj = new lz.baseDrawWords(canvas,{refObj:this,x:canvas.getMouse('x'),
-			//		y:canvas.getMouse('y')});
-			//}
-			this.endLetter();
-			mousetracker_del.unregisterAll();
-		} else if (this.drawmodus == 'rectangle') {
-			this.endRect();
-        	mousetracker_del.unregisterAll();
-        } else if (this.drawmodus == 'ellipse') {
-			this.endEllipse();
-        	mousetracker_del.unregisterAll();
-        } else if (this.drawmodus == 'pointer') {
-        	this.setAttribute('drawmodus','hand');
-			if (this.boundingIsActive){
-				this.boundingref._innerDrag.onmouseup.sendEvent();
-			}
-        }
-        ////Debug.write("onmouseup: ",this.letterObjectIsActive,this.currentletterObj);	        
-		this.checkStepLayers();
+	        if (canvas.ismoderator) {
+				//var bool = false;
+				
+				if(this.drawmodus=="paint"){
+					this.endPaint();
+					mousetracker_del.unregisterAll();
+				} else if(this.drawmodus=="line"){
+					this.endLine();
+					mousetracker_del.unregisterAll();
+				} else if(this.drawmodus=="drawarrow"){
+					this.endDrawarrowline();
+					mousetracker_del.unregisterAll();
+				} else if(this.drawmodus=="uline"){
+					this.endUline();
+					mousetracker_del.unregisterAll();
+				} else if(this.drawmodus=="letter"){
+					//if (!this.letterObjectIsActive && !bool){
+					//	this.currentletterObj = new lz.baseDrawWords(canvas,{refObj:this,x:canvas.getMouse('x'),
+					//		y:canvas.getMouse('y')});
+					//}
+					this.endLetter();
+					mousetracker_del.unregisterAll();
+				} else if (this.drawmodus == 'rectangle') {
+					this.endRect();
+		        	mousetracker_del.unregisterAll();
+		        } else if (this.drawmodus == 'ellipse') {
+					this.endEllipse();
+		        	mousetracker_del.unregisterAll();
+		        } else if (this.drawmodus == 'pointer') {
+		        	this.setAttribute('drawmodus','hand');
+					if (this.boundingIsActive){
+						this.boundingref._innerDrag.onmouseup.sendEvent();
+					}
+		        } else if (this.drawmodus == 'pointerWhiteboard') {
+                    if ($debug) Debug.write("pointerWhiteboard set New Point ");
+                    this.endPointerWhiteBoard();
+                }
+		        ////Debug.write("onmouseup: ",this.letterObjectIsActive,this.currentletterObj);	        
+				this.checkStepLayers();
+	        } else {
+                this.endPointerWhiteBoard();
+            }
 		]]>
 	</handler>  
     
@@ -676,7 +684,9 @@
 				this.drawrectangleToHistory(lastactionObject,this);
 			} else if(actionObject[0]=='ellipse'){
 				this.drawellipseToHistory(lastactionObject,this);
-			}
+			} else if(actionObject[0]=='pointerWhiteBoard'){
+                this.drawPointerToHistory(lastactionObject,this);
+            }
 			//set counter to maximum otherwise trouble in naming conventions
 			//the 6th array index count from the end of each object is always the counter of the
 			//object
@@ -1703,7 +1713,40 @@
 	    this.onsharedMessage('draw',actionObject);
   	</method>  
 
-  
+    <!-- Pointers -->
+    
+    <method name="endPointerWhiteBoard">
+        this.drawPointerWhiteBoardFinal(
+                "pointer"+this.getCounter(),
+                this.getMouse('x'),this.getMouse('y'),
+                0,0
+            )
+    </method>
+
+    <method name="drawPointerToHistory" args="actionObject,parentObj">
+        new lz.whiteBoardPointer(parentObj,{
+            x:actionObject[actionObject.length-5],
+            y:actionObject[actionObject.length-4],
+            userName:actionObject[1]
+        })
+    </method>
+
+    <method name="drawPointerWhiteBoardFinal" args="newName,x,y,width,height" >
+        var actionObject = new Array();
+        actionObject[0] = 'pointerWhiteBoard';
+        actionObject[1] = canvas.currentuser;
+        actionObject[2] = this.counter;
+        actionObject[3] = x;
+        actionObject[4] = y;
+        actionObject[5] = width;
+        actionObject[6] = height;
+        actionObject[7] = newName;
+        this.baseactionobjectList.push(actionObject);
+        this.onsharedMessage('draw',actionObject);
+        this.drawPointerToHistory(actionObject,this);
+    </method>
+    
+    
 </class>
 
 </library>

@@ -42,6 +42,9 @@
 <resource name="reload_small_rsc" src="resources/reload_small.png" />
 
 <resource name="folder_top_rsc" src="resources/top.png" />
+
+<resource name="pointer_whiteboard_rsc" src="resources/pointer.swf" />
+<resource name="pointer_whiteboard_menu_rsc" src="resources/pointerWhiteBoard_menu_rsc.swf" />
     
 <resource name="doc_next" src="resources/go-next.png" />
 <resource name="doc_pre" src="resources/go-previous.png" />
