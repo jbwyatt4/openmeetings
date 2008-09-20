@@ -378,13 +378,16 @@
 		</method>
     	
     	<mainToolsLeftPanel y="20" name="_mainToolsPanel" visible="${canvas.ismoderator}"/>	
+        
+        <mainToolsLeftPanelPointer y="20" name="_mainToolsLeftPanelPointer" visible="${!canvas.ismoderator}"/> 
     	
     	<documentIconTopPanel x="100" y="0" name="_documentPanel"
 			 visible="${canvas.ismoderator}" />
    
     </view> 
     
-    <propertyPanel name="_propertyPanel" x="0" y="${ parent.parent.height-this.height-21 }" >
+    <propertyPanel name="_propertyPanel" x="0" y="${ parent.parent.height-this.height-21 }" 
+                   visible="${canvas.ismoderator}">
    		<handler name="onheight" args="h">
    			this.height = h;
    			if ($debug) Debug.write("onheight: ",h);

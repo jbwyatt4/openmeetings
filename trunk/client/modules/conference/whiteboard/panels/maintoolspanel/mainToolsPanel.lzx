@@ -11,6 +11,8 @@
 	<mainToolsHPanelSeperator />
 	<mainToolsPanelItem name="hand" modi="hand" labelid="72" _isselected="true" 
 						resoureceItem="menupointer_rsc" />
+    <mainToolsPanelItem name="pointerWhiteboard" modi="pointerWhiteboard" labelid="557" 
+                        resoureceItem="pointer_whiteboard_menu_rsc" />
 	<mainToolsPanelItem name="letter" modi="letter" labelid="73" resoureceItem="letter" />
 	<mainToolsPanelItem name="paint" modi="paint" labelid="74" resoureceItem="paint" />
 	<mainToolsPanelItem name="line" modi="line" labelid="75" resoureceItem="line_rsc" />
@@ -30,6 +32,8 @@
 	<mainToolsVPanelSeperator />	
 	<mainToolsPanelItem name="hand" modi="hand" labelid="72" _isselected="true" 
 						resoureceItem="menupointer_rsc" />
+    <mainToolsPanelItem name="pointerWhiteboard" modi="pointerWhiteboard" labelid="557" 
+                        resoureceItem="pointer_whiteboard_menu_rsc" />
 	<mainToolsPanelItem name="letter" modi="letter" labelid="73" resoureceItem="letter" />
 	<mainToolsPanelItem name="paint" modi="paint" labelid="74" resoureceItem="paint" />
 	<mainToolsPanelItem name="line" modi="line" labelid="75" resoureceItem="line_rsc" />
@@ -40,7 +44,7 @@
 </class>
 	
 <class name="mainToolsTopPanel" extends="baseTopPanel" 
-	   width="366" height="32" title="" docking="true"
+	   width="390" height="32" title="" docking="true"
 	   activationClassBounding="mainToolsLeftPanel"
 	   activationVClassBounding="mainToolsTopPanel"
 	   leftClassPanel="mainToolsLeftPanel"
@@ -48,13 +52,13 @@
 	   bottomClassPanel="mainToolsTopPanel"
 	   rightClassPanel="mainToolsLeftPanel"
 	   verticalClassActive="true"
-	   hWidth="32" hHeight="366">
+	   hWidth="32" hHeight="390">
 	
 	<horizontalMenuIconBar x="20" y="4" />
 </class>	
 	
 <class name="mainToolsLeftPanel" extends="baseLeftPanel" 
-	   width="32" height="366" title="" docking="true"
+	   width="32" height="390" title="" docking="true"
 	   activationClassBounding="mainToolsLeftPanel"
 	   activationVClassBounding="mainToolsTopPanel"
 	   topClassPanel="mainToolsTopPanel"
@@ -62,9 +66,53 @@
 	   leftClassPanel="mainToolsLeftPanel"
 	   rightClassPanel="mainToolsLeftPanel"
 	   verticalClassActive="false"
-	   vWidth="366" vHeight="32">
+	   vWidth="390" vHeight="32">
 	
 	<verticalMenuIconBar x="2" y="20" />
+</class>
+
+<!-- ################
+    Non Moderator Tools
+-->
+
+<class name="verticalMenuIconBarPointer" extends="view" y="22" x="4" clickable="true">
+    <simplelayout axis="y" spacing="2" />
+    <mainToolsPanelItem name="pointerWhiteboard" modi="pointerWhiteboard" labelid="557" 
+                        resoureceItem="pointer_whiteboard_menu_rsc" />
+</class>
+
+<class name="horizontalMenuIconBarPointer" extends="view" y="22" x="4" clickable="true">
+    <simplelayout axis="x" spacing="2" />
+    <mainToolsPanelItem name="pointerWhiteboard" modi="pointerWhiteboard" labelid="557" 
+                        resoureceItem="pointer_whiteboard_menu_rsc" />
+</class>
+
+<class name="mainToolsTopPanelPointer" extends="baseTopPanel" 
+       width="52" height="32" title="" docking="true"
+       activationClassBounding="mainToolsLeftPanelPointer"
+       activationVClassBounding="mainToolsTopPanelPointer"
+       leftClassPanel="mainToolsLeftPanelPointer"
+       topClassPanel="mainToolsTopPanelPointer"
+       bottomClassPanel="mainToolsTopPanelPointer"
+       rightClassPanel="mainToolsLeftPanelPointer"
+       verticalClassActive="true"
+       hWidth="32" hHeight="52">
+    
+    <horizontalMenuIconBarPointer x="20" y="4" />
+</class>    
+
+<class name="mainToolsLeftPanelPointer" extends="baseLeftPanel" 
+       width="32" height="52" title="" docking="true"
+       activationClassBounding="mainToolsLeftPanelPointer"
+       activationVClassBounding="mainToolsTopPanelPointer"
+       topClassPanel="mainToolsTopPanelPointer"
+       bottomClassPanel="mainToolsTopPanelPointer"
+       leftClassPanel="mainToolsLeftPanelPointer"
+       rightClassPanel="mainToolsLeftPanelPointer"
+       verticalClassActive="false"
+       vWidth="52" vHeight="32">
+    
+    <verticalMenuIconBarPointer x="2" y="20" />
 </class>	
     
 <class name="mainToolsVPanel" extends="basePanel" 
