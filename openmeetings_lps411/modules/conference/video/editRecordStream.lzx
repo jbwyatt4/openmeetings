@@ -199,6 +199,7 @@
 	        			break;
 	        	}
     			this.parent.availibleCamsLabel.setAttribute("visibility",camVisible);
+                this.parent.availibleCamsLabel.bringToFront();
     			this.parent.availibleCams.setAttribute("visibility",camVisible);
     			this.parent.availibleMicsLabel.setAttribute("visibility",micVisible);
     			this.parent.availibleMics.setAttribute("visibility",micVisible);	   
@@ -208,6 +209,11 @@
     </combobox>    
      
     <labelText name="availibleCamsLabel" labelid="52" fontsize="12" x="10" y="80" />
+    <labelText name="availibleCamsLabel_2" labelid="52" fontsize="12" x="10" y="80" >
+        <handler name="oninit">
+            if ($debug) Debug.write("Bayovarisch Narrisch",this);
+        </handler>
+    </labelText>
 
     <combobox fontsize="12" name="availibleCams" x="10" y="100" width="280" editable="false">
         <handler name="oninit">
@@ -234,7 +240,7 @@
         </handler>
     </combobox>
     
-    <labelText name="availibleMicsLabel" labelid="53" fontsize="12" x="10" y="120" />
+    
 
     <combobox fontsize="12" name="availibleMics"  x="10" y="140" width="280" editable="false">
         <handler name="oninit">
@@ -263,6 +269,8 @@
     
     <labelText name="infoTextNoAV" labelid="452" multiline="true" width="280" 
     		   fontsize="12" x="10" y="80" visibility="hidden" />
+               
+    <labelText name="availibleMicsLabel" labelid="53" fontsize="12" x="10" y="120" />
     
     <!-- Remember Me -->    
     <checkbox name="holddatainSO" text="Do not ask again" x="10" y="210">

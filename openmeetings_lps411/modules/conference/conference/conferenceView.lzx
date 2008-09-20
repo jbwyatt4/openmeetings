@@ -137,12 +137,14 @@
       if ($debug) Debug.write("isloadedImage: ",val);
     </handler>
    </newWhiteBoard>
+   <!--
   <view name="currentmainobjectisMod" visible="${ !canvas.ismoderator }"
     x="0" y="22" height="$once{ parent.height-22 }" width="$once{ parent.width }" >
     <handler name="onclick">
       new lz.errorModeratorPopup(canvas,{error:canvas.getLabelName(97)});
     </handler>
   </view>
+    -->
 </class>
 
 <class name="modPanel" extends="guiPresenter" x="2" y="284"
