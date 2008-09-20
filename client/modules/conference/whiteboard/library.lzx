@@ -55,6 +55,9 @@
     
 <resource name="background_screenview_rsc" src="resources/background.png" />
 
+<resource name="pointer_whiteboard_rsc" src="resources/pointer.swf" />
+<resource name="pointer_whiteboard_menu_rsc" src="resources/pointerWhiteBoard_menu_rsc.swf" />
+
 
 <include href="incubator/lzcombobox.lzx"/> 
 <include href="base/" />

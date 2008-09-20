@@ -12,6 +12,20 @@
 	<include href="baseDrawSave.lzx" />
 	<include href="baseDrawWords.lzx" />
 	<include href="remoteWhiteboard.lzx" />
+    
+    <class name="whiteBoardPointer" extends="view" 
+           resource="pointer_whiteboard_rsc" width="20" height="20" >
+        <attribute name="userName" value="" type="string" />
+        <attribute name="fadeDelegate" value="null" />
+        <labelText x="20" text="$once{ parent.userName }" />
+        <handler name="oninit">
+            this.fadeDelegate = new LzDelegate( this, "fadeText" );
+            LzTimer.addTimer( this.fadeDelegate, 5000 );
+        </handler>
+        <method name="fadeText">
+            this.destroy();
+        </method>
+    </class>
 	
 
 </library>
