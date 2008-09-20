@@ -29,5 +29,6 @@
     	<argument>$SID</argument> 
     	<argument>$ROOM</argument> 
     	<argument>$DOMAIN</argument> 
+    	<argument>$PUBLIC_SID</argument> 
     </application-desc> 
 </jnlp> 

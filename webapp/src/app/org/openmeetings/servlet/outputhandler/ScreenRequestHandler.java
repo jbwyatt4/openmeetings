@@ -29,6 +29,9 @@ public class ScreenRequestHandler extends VelocityViewServlet {
 	 * @see javax.servlet.http.HttpServlet#doPost(javax.servlet.http.HttpServletRequest,
 	 *      javax.servlet.http.HttpServletResponse)
 	 */
+	
+	//Fix for red5-0.7.x
+	
 //	@Override
 //	protected void service(HttpServletRequest httpServletRequest,
 //			HttpServletResponse httpServletResponse) throws ServletException,
@@ -105,23 +108,39 @@ public class ScreenRequestHandler extends VelocityViewServlet {
 			if (sid == null) {
 				sid = "default";
 			}
-			System.out.println("sid: " + sid);
+			log.debug("sid: " + sid);
 
 			Long users_id = Sessionmanagement.getInstance().checkSession(sid);
 			Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
 
 			if (user_level > 0) {
+				
+				String publicSID = httpServletRequest.getParameter("publicSID");
+				if (publicSID == null) {
+					log.error("publicSID is empty: "+publicSID);
+					return null;
+				}
+				
 				String room = httpServletRequest.getParameter("room");
 				if(room == null) room = "default";
 
 				String domain = httpServletRequest.getParameter("domain");
-				if(domain == null) domain = "default";	
+				if(domain == null) {
+					log.error("domain is empty: "+domain);
+					return null;
+				}
 				
 				String rtmphostlocal = httpServletRequest.getParameter("rtmphostlocal");
-				if (rtmphostlocal == null) rtmphostlocal="default";
+				if (rtmphostlocal == null) {
+					log.error("rtmphostlocal is empty: "+rtmphostlocal);
+					return null;
+				}
 				
 				String red5httpport = httpServletRequest.getParameter("red5httpport");
-				if (red5httpport == null) red5httpport="default";
+				if (red5httpport == null) {
+					log.error("red5httpport is empty: "+red5httpport);
+					return null;
+				}
 				
 				//make a complete name out of domain(organisation) + roomname
 				String roomName = domain+"_"+room;
@@ -129,7 +148,7 @@ public class ScreenRequestHandler extends VelocityViewServlet {
 				roomName = StringUtils.deleteWhitespace(roomName);
 				
 				String current_dir = getServletContext().getRealPath("/");
-				System.out.println("Current_dir: "+current_dir);				
+				log.debug("Current_dir: "+current_dir);				
 				
 				//String jnlpString = ScreenCastTemplate.getInstance(current_dir).getScreenTemplate(rtmphostlocal, red5httpport, sid, room, domain);
 				
@@ -139,6 +158,7 @@ public class ScreenRequestHandler extends VelocityViewServlet {
 		        ctx.put("SID", sid);
 		        ctx.put("ROOM", room);
 		        ctx.put("DOMAIN", domain);
+		        ctx.put("PUBLIC_SID", publicSID);
 		        
 		        String requestedFile = roomName+".jnlp";
 				httpServletResponse.setContentType("application/x-java-jnlp-file");
