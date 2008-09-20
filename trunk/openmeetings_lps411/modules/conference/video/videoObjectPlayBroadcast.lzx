@@ -19,29 +19,31 @@
       this._loudness.bringToFront();
       this.showuser.bringToFront();
 
-      this.setAttribute("ratioW",this.width / myconferenceView.initW);;
-      this.setAttribute("ratioH",this.height / myconferenceView.initH);
+      //disabled cause it does not work in LPS-4.1.1
+      //  swagner 20.09.2008
+      //this.setAttribute("ratioW",this.width / myconferenceView.initW);;
+      //this.setAttribute("ratioH",this.height / myconferenceView.initH);
 
-      this.setAttribute("width",myconferenceView.width * this.ratioW);
-      this.setAttribute("height",myconferenceView.height * this.ratioH);
+      //this.setAttribute("width",myconferenceView.width * this.ratioW);
+      //this.setAttribute("height",myconferenceView.height * this.ratioH);
 
-      var f = function () {
-          this.setAttribute("width",myconferenceView.width * this.ratioW);
-          this.setAttribute("height",myconferenceView.height * this.ratioH);
-      }
-      var prop = [this.parent, "width"];
-      this.applyConstraint("width", f, prop);
+      //var f = function () {
+      //    this.setAttribute("width",myconferenceView.width * this.ratioW);
+      //    this.setAttribute("height",myconferenceView.height * this.ratioH);
+      //}
+      //var prop = [this.parent, "width"];
+      //this.applyConstraint("width", f, prop);
      ]]>
    </handler>
 
 	<view name="_chatvideoinner" x="1" y="20" width="${parent.width-2}" height="${parent.height-20}" >
 		<view name="r" resource="chatbgitem" x="1" y="2" 
-		      stretches="both" width="${parent.width}" height="${parent.height}" />
+		      stretches="both" width="$once{parent.width}" height="$once{parent.height}" />
 		<handler name="oninit">
 			this.r.setResourceNumber(5);
 		</handler>
 		<baseVideoStream name="_videostream" 
-						 width="${parent.width}" height="${parent.height}" bgcolor="black" >
+						 width="$once{parent.width}" height="$once{parent.height}" bgcolor="black" >
 		
 		  <handler name="oninit">
 		    var f = function () {

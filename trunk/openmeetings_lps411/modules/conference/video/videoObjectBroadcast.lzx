@@ -37,20 +37,22 @@
 
 	<view name="_chatvideoinner" x="1" y="20" height="${parent.height-20}" width="${parent.width-2}">
 		<view name="r" resource="chatbgitem" x="1" y="2" stretches="both" 
-			  width="${parent.width}" height="${parent.height}" />
+			  width="$once{parent.width}" height="$once{parent.height}" />
 		<handler name="oninit">
 			this.r.setResourceNumber(5);
 		</handler>
 		
 		<baseVideoStreamDevice name="_videostream" mode="broadcast"
-						 width="${parent.width}" height="${parent.height}" bgcolor="black" >
+						 width="$once{parent.width}" height="$once{parent.height}" bgcolor="black" >
 
 		  <handler name="oninit">
-		    var f = function () {
-                      this.applySizeToVid();		     
-		    }
-		    var prop1 = [this, "width"];
-		    this.applyConstraint("width", f, prop1);
+            //disabled cause it does not work in LPS-4.1.1
+            //  swagner 20.09.2008
+		    //var f = function () {
+            //          this.applySizeToVid();		     
+		    //}
+		    //var prop1 = [this, "width"];
+		    //this.applyConstraint("width", f, prop1);
 		  </handler> 
 		</baseVideoStreamDevice>
 		

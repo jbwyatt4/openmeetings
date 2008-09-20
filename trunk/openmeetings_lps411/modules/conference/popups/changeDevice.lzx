@@ -64,7 +64,7 @@
         </handler>
     </combobox>
     
-     <labelText labelid="53" fontsize="12" x="10" y="80" />
+    <labelText text="LABEL53" labelid="53" fontsize="12" x="10" y="80" />
 
     <combobox fontsize="12" id="availibleMics3"  x="10" y="100" width="280" editable="false">
         <handler name="oninit">
