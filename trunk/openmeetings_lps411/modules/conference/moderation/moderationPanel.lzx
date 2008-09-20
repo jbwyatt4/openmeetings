@@ -62,7 +62,8 @@
                     +'&room='+hib.currentroomid
                     +'&domain='+hib.conferencedomain
                     +'&sid='+canvas.sessionId
-                    +'&red5httpport='+canvas.red5httpport;
+                    +'&red5httpport='+canvas.red5httpport
+                    +'&publicSID='+canvas.publicSID;
 
                 //Debug.write(downloadurl); 
                 LzBrowser.loadURL(downloadurl,'_blank');    
