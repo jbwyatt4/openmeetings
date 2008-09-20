@@ -787,7 +787,8 @@
             	//The onResult-Handler will be called be the rtmpconnection
             	if ($debug) Debug.write("sendSyncFlag: ",value);
             	if (canvas.syncWindow == null) {
-            		canvas.syncWindow = new lz.syncWin(canvas.main_content._content.inner,{labeliderror:554});
+            		canvas.syncWindow = new lz.syncWin(canvas.main_content._content.inner,{
+                            labelid:558,labeliderror:559});
             	}
             ]]>
         </handler>   

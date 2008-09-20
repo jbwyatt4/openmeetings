@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library>
 
-<class name="syncWin" extends="labelExplorerBox" labelid="555"
-    docking="true" resizeable="false" closable="false" 
-    width="$once{ canvas.width/2 - this.width/2 }" x="100" height="240">
-	
+<class name="syncWin" extends="labelExplorerBox" labelid="558"
+        docking="true" resizeable="false" closable="false" width="250"
+        x="$once{ canvas.width/2 - this.width/2 }" height="240">
+    
 	<handler name="oninit">
 		LzModeManager.makeModal(this);
 	</handler>
