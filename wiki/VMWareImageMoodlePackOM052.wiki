@@ -15,11 +15,11 @@ It includes:
   * Debian 4.0
   * Apache 
   * MySQL
-  * phpMyAdmin
+  * !phpMyAdmin
   * Moodle 1.9.1
   * OpenMeetings_Moodle Integration v0.2
-  * Red5 with OpenMeetings 0.5.2
-  * OpenOffice 2.4 with all needed packages started in headless modus
+  * Red5 with !OpenMeetings 0.5.2
+  * !OpenOffice 2.4 with all needed packages started in headless modus
   * SWFTools
-  * ImageMagick
-  * GhostScript
+  * !ImageMagick
+  * !GhostScript
