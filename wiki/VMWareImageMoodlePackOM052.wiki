@@ -6,7 +6,7 @@ http://www.webbase-design.de/projekte/openmeetings_moodlepack_r1561.tgz
 
 You can login into Moodle with:
 User: admin Pass: admin
-Into OpenMeetings:
+Into !OpenMeetings:
 User: swagner Pass:asdasd
 
 To make it possible to test it via Network you have to add Network Drivers to the OS
@@ -17,7 +17,7 @@ It includes:
   * MySQL
   * !phpMyAdmin
   * Moodle 1.9.1
-  * OpenMeetings_Moodle Integration v0.2
+  * !OpenMeetings_Moodle Integration v0.2
   * Red5 with !OpenMeetings 0.5.2
   * !OpenOffice 2.4 with all needed packages started in headless modus
   * SWFTools
