@@ -23,3 +23,5 @@ It includes:
   * SWFTools
   * !ImageMagick
   * !GhostScript
+
+for details please contact Sascha
