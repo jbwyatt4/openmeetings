@@ -1,4 +1,4 @@
-#summary One-sentence summary of this page.
+#summary Release Notes of Version 0.5.2
 
 The Release 0.5.2 is a development snapshot 
 
