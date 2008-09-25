@@ -1,6 +1,6 @@
 #summary One-sentence summary of this page.
 
-The Release 0.5.1 is a development snapshot 
+The Release 0.5.2 is a development snapshot 
 
 Fixed Issues/new Features:
   * a Pointer Tool, also non Moderators can click on the Whiteboard and everybody will see that.
