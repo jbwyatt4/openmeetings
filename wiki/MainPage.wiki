@@ -2,8 +2,8 @@
 
 == Installation ==
 
-Current Version Final:
-[InstallationOfRelease051] , Changelog: [Release051]
+Current Version 0.5.2:
+[InstallationOfRelease051] (still valid for 0.5.2) , Changelog: [Release051],[Release052]
 
 Tips for Installation:
 
