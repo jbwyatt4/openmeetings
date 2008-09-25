@@ -9,5 +9,4 @@ Fixed Issues/new Features:
   * new Toolbars
   * new translation (Hungarian)
   * new Property Inspector
-  * some minor issues like removed browser feature, disabled recording button,
-changed window resizer 
+  * some minor issues like removed browser feature, disabled recording button, changed window resizer 
