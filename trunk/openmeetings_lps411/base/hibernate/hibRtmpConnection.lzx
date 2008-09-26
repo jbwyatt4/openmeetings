@@ -77,7 +77,7 @@
     </handler>
     <handler name="onerror" >
         <![CDATA[
-  	 	    Debug.write("error ",this.status,this.src);
+  	 	    Debug.write("error ",this.status,this.src,this.lastCalled);
   	 	    if (this.reconnectionAction){
                 this.connect();
   	 	    } else if (this.reconnectAfterRoomleft) {
