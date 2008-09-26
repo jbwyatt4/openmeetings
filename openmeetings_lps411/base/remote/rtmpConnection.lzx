@@ -7,6 +7,10 @@
     	
     	<event name="onconnect"/>
     	<event name="onerror"/>
+        
+        <!-- this attribute holds a reference to the current/last called netremoteCall,
+        in case of error you can debug that way which call did fail -->
+        <attribute name="lastCalled" value="null" />
     	
     	<attribute name="src" value="" type="string"/>
     	
@@ -250,6 +254,7 @@
         	//Debug.write('call', this, rtmpObject, rtmpObject.status);
         	//Debug.write('call', this.remotecontext);
             if (rtmpObject.debug) Debug.write('call', this, rtmpObject, rtmpObject.status);
+            rtmpObject.lastCalled = this;
             rtmpObject.callRPC(this.funcname, this, params);
 
           ]]>
