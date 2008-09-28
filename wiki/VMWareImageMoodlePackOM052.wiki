@@ -9,6 +9,10 @@ User: admin Pass: admin
 Into !OpenMeetings:
 User: swagner Pass:asdasd
 
+ssh:
+root pwd: root
+demo pwd: demo
+
 To make it possible to test it via Network you have to add Network Drivers to the OS
 
 It includes:
