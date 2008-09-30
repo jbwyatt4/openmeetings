@@ -20,4 +20,6 @@ http://openmeetings.googlecode.com/svn/docs/LanguageNavigationErrors.png
 
 = All Tables =
 
+_some tables are also missing here cause they have no Foreign Key to the Main Tables, for example *configuration*_
+
 http://openmeetings.googlecode.com/svn/docs/OpenmeetingsAllTables.png
