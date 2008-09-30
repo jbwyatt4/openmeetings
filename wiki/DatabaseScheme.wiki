@@ -1,5 +1,9 @@
 #summary Database Scheme
 
+= How To Read the ERD-Diagrams =
+
+These ERD-Diagrams are using the *Bachmann-Notationen*
+
 _some of the foreign keys are only logical, not inside the Database_
 
 = User-Addresses =
