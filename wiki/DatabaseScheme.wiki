@@ -2,7 +2,7 @@
 
 = How To Read the ERD-Diagrams =
 
-These ERD-Diagrams are using the *Bachmann-Notationen* see a [http://www.oleg-seifert.de/diplomarbeit/ch03.html#Notations_von_Kraehenfu%C3%9F_Diagrammen table of explanations of the signs]
+These ERD-Diagrams are using the *Bachmann-Notationen* see a [http://www.oleg-seifert.de/diplomarbeit/ch03.html#Notations_von_Kraehenfu%C3%9F_Diagrammen table of explanations of the signs / comparison of Bachmann to UML]
 
 _some of the foreign keys are only logical, not inside the Database_
 
