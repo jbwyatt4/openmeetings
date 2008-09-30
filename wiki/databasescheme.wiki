@@ -1,6 +1,8 @@
 #summary Database Schemes of project.
 #labels Phase-Design,Phase-Implementation
 
+*this is outdated, see: DatabaseScheme*
+
 == Files ==
 Availible files see: http://openmeetings.googlecode.com/svn/branches/dev/xmlcrm/java/conf/
   * mysql_skeleton.sql (MYSQL)
