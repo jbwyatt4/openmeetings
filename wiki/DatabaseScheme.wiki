@@ -1,0 +1,19 @@
+#summary Database Scheme
+
+_some of the foreign keys are only logical, not inside the Database_
+
+= User-Addresses =
+
+http://openmeetings.googlecode.com/svn/docs/UserDiagram.png
+
+= User-Groups-Organizations-Rooms =
+
+http://openmeetings.googlecode.com/svn/docs/UserGroupsOrganizationsAndRooms.png
+
+= Language-Navigation-Errors =
+
+http://openmeetings.googlecode.com/svn/docs/LanguageNavigationErrors.png
+
+= All Tables =
+
+http://openmeetings.googlecode.com/svn/docs/OpenmeetingsAllTables.png
