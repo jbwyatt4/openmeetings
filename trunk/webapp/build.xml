@@ -39,9 +39,10 @@
 	<property name="jakarta.common.lib" value="${project.lib}/jakarta-commons" />
 	<!--JDBC Drivers-->
 	<property name="database.lib" value="${project.lib}/database" />
-	<property name="red5.lib" value="${project.lib}/red5" />
+	<property name="red5.lib" value="${project.lib}/red5_08rc1" />
 	<property name="upload.lib" value="${project.lib}/upload" />
 	<property name="xstream.lib" value="${project.lib}/xstream" />
+	<property name="junit.lib" value="${project.lib}/junit" />
 	<property name="web.lib" value="${project.lib}" />
 	<!-- Axis2 -->
 	<property name="axis2.lib" value="${project.lib}/axis2-1.3" />
@@ -55,6 +56,7 @@
 		<fileset dir="${red5.lib}" includes="*.jar"/>
 		<fileset dir="${upload.lib}" includes="*.jar"/>
 		<fileset dir="${xstream.lib}" includes="*.jar"/>
+		<fileset dir="${junit.lib}" includes="*.jar"/>
 		<fileset dir="${web.lib}" includes="*.jar"/>
 		<fileset dir="${axis2.lib}" includes="*.jar"/>
 	</path>
