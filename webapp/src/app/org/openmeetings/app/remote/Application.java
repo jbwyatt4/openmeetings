@@ -248,7 +248,7 @@ public class Application extends ApplicationAdapter implements
 				
 				//Check if the Client is in the same room and same domain 
 				//and is not the same like we have just declared to be moderating this room
-				if(room_id == rcl.getRoom_id() && room_id!=null && !streamid.equals(rcl.getStreamid())){
+				if(room_id!=null && room_id.equals(rcl.getRoom_id()) && !streamid.equals(rcl.getStreamid())){
 					log.debug("set to ++ for client: "+rcl.getStreamid()+" "+roomcount);
 					roomcount++;
 				}				
@@ -330,7 +330,7 @@ public class Application extends ApplicationAdapter implements
 						((IServiceCapableConnection) cons).invoke("roomDisconnect",new Object[] { currentClient }, this);
 						log.debug("sending roomDisconnect to " + cons);
 						//only to the members of the current room
-						if(room_id == rcl.getRoom_id() && room_id!=null){			
+						if(room_id!=null && room_id.equals(rcl.getRoom_id())){			
 							//add Notification if another user is recording
 							log.debug("###########[roomLeave]");
 							if (rcl.getIsRecording()){
@@ -395,7 +395,7 @@ public class Application extends ApplicationAdapter implements
 						//log.debug("sending roomDisconnect to " + cons);
 						RoomClient rcl = ClientList.get(cons.getClient().getId());
 						//Check if the Client is in the same room and same domain except its the current one
-						if(room_id == rcl.getRoom_id() && room_id!=null){					
+						if(room_id!=null && room_id.equals(rcl.getRoom_id())){					
 							((IServiceCapableConnection) cons).invoke("logicalRoomLeaveDis",new Object[] { currentClient }, this);
 							log.debug("sending roomDisconnect to " + cons);
 							
@@ -475,7 +475,7 @@ public class Application extends ApplicationAdapter implements
 					RoomClient rcl = ClientList.get(conn.getClient().getId());
 					//log.debug("is this users still alive? :"+rcl);
 					//Check if the Client is in the same room and same domain 
-					if(room_id == rcl.getRoom_id() && room_id!=null){
+					if(room_id!=null && room_id.equals(rcl.getRoom_id())){
 						IServiceCapableConnection iStream = (IServiceCapableConnection) conn;
 //							log.info("IServiceCapableConnection ID " + iStream.getClient().getId());
 						iStream.invoke("newStream",new Object[] { currentClient }, this);
@@ -550,7 +550,7 @@ public class Application extends ApplicationAdapter implements
 						RoomClient rcl = ClientList.get(conn.getClient().getId());
 						log.debug("is this users still alive? :"+rcl);
 						//Check if the Client is in the same room and same domain 
-						if(room_id == rcl.getRoom_id() && room_id!=null){
+						if(room_id!=null && room_id.equals(rcl.getRoom_id())){
 							//conn.ping();
 							IServiceCapableConnection iStream = (IServiceCapableConnection) conn;
 	//							log.info("IServiceCapableConnection ID " + iStream.getClient().getId());
@@ -605,7 +605,7 @@ public class Application extends ApplicationAdapter implements
 				RoomClient rcl = ClientList.get(key);
 				//Check if the Client is in the same room and same domain 
 				//and is not the same like we have just declared to be moderating this room
-				if(room_id == rcl.getRoom_id() && room_id!=null && !id.equals(rcl.getStreamid())){
+				if(room_id!=null && room_id.equals(rcl.getRoom_id()) && !id.equals(rcl.getStreamid())){
 					log.debug("set to false for client: "+rcl);
 					rcl.setIsMod(new Boolean(false));
 					ClientList.put(key, rcl);
@@ -618,7 +618,7 @@ public class Application extends ApplicationAdapter implements
 				IConnection conn = it.next();
 				RoomClient rcl = ClientList.get(conn.getClient().getId());
 				//Check if the Client is in the same room and same domain 
-				if(room_id == rcl.getRoom_id() && room_id!=null){
+				if(room_id!=null && room_id.equals(rcl.getRoom_id())){
 					if (conn instanceof IServiceCapableConnection) {
 						((IServiceCapableConnection) conn).invoke("setNewModerator",new Object[] { rlc }, this);
 						log.debug("sending setNewModerator to " + conn);
@@ -683,7 +683,7 @@ public class Application extends ApplicationAdapter implements
 				IConnection conn = it.next();				
 				RoomClient rcl = ClientList.get(conn.getClient().getId());
 				//Check if the Client is in the same room and same domain 
-				if(room_id == rcl.getRoom_id()){	
+				if(room_id!=null && room_id.equals(rcl.getRoom_id())){	
 					log.debug("setUserObjectOneFour Found Client to " + conn);
 					log.debug("setUserObjectOneFour Found Client to " + conn.getClient());
 					if (conn instanceof IServiceCapableConnection) {
@@ -729,7 +729,7 @@ public class Application extends ApplicationAdapter implements
 				log.debug("#+#+#+#+##+## logicalRoomEnter ClientList key: "+rcl.getRoom_id()+" "+room_id);
 				//Check if the Client is in the same room and same domain 
 				//and is not the same like we have just declared to be moderating this room
-				if(room_id==rcl.getRoom_id() && room_id!=null && !streamid.equals(rcl.getStreamid())){
+				if(room_id!=null && room_id.equals(rcl.getRoom_id()) && !streamid.equals(rcl.getStreamid())){
 					log.debug("set to ++ for client: "+rcl.getStreamid()+" "+roomcount);
 					roomcount++;
 					roomClientList.put(key, rcl);
@@ -872,7 +872,7 @@ public class Application extends ApplicationAdapter implements
 				} else {				
 					RoomClient rcl = ClientList.get(conn.getClient().getId());
 					//Check if the Client is in the same room and same domain 
-					if(room_id == rcl.getRoom_id() && room_id!=null){	
+					if(room_id!=null && room_id.equals(rcl.getRoom_id())){	
 						log.debug("*** setAudienceModus Found Client to " + conn);
 						log.debug("*** setAudienceModus Found Client to " + conn.getClient());
 						if (conn instanceof IServiceCapableConnection) {
@@ -938,7 +938,7 @@ public class Application extends ApplicationAdapter implements
 				log.debug("getClientList key: "+key);
 				RoomClient rcl = ClientList.get(key);
 				//same room, same domain
-				if (room_id == rcl.getRoom_id() && room_id != null) roomClientList.put(key, rcl);
+				if (room_id!=null && room_id.equals(rcl.getRoom_id())) roomClientList.put(key, rcl);
 			}
 		} catch (Exception err) {
 			log.error("[getClientListBYRoomAndDomain]",err);
@@ -968,7 +968,7 @@ public class Application extends ApplicationAdapter implements
 						IConnection conn = it.next();				
 						RoomClient rcl = ClientList.get(conn.getClient().getId());
 						//Check if the Client is in the same room and same domain 
-						if(room_id == rcl.getRoom_id() && room_id!=null){					
+						if(room_id!=null && room_id.equals(rcl.getRoom_id())){					
 							if (conn instanceof IServiceCapableConnection) {
 								((IServiceCapableConnection) conn).invoke("newMessageByRoomAndDomain",new Object[] { message }, this);
 								log.debug("sending newMessageByRoomAndDomain to " + conn);
@@ -1040,7 +1040,7 @@ public class Application extends ApplicationAdapter implements
 			log.debug("*..*unsetModerator ClientList key: "+rcl.getStreamid());
 //			
 			//Check if the Client is in the same room
-			if(room_id == rcl.getRoom_id() && room_id!=null && rcl.getIsMod()){
+			if(room_id!=null && room_id.equals(rcl.getRoom_id()) && rcl.getIsMod()){
 				log.debug("found client who is the Moderator: "+rcl);
 				currentModStreamid = rcl;
 			}				
@@ -1074,10 +1074,12 @@ public class Application extends ApplicationAdapter implements
 				if (conn instanceof IServiceCapableConnection) {
 					RoomClient rcl = ClientList.get(conn.getClient().getId());
 					//log.debug("*..*idremote: " + rcl.getStreamid());
-					//log.debug("*..*my idstreamid: " + currentClient.getStreamid());
-					if (room_id!=null && room_id == rcl.getRoom_id()) {
+					log.debug("*..* sendVars room_id: " + room_id + " rcl.getRoom_id " +rcl.getRoom_id() + " is euqal? "+ (room_id.equals(rcl.getRoom_id())));
+					if (room_id!=null && room_id.equals(rcl.getRoom_id())) {
+						//log.debug("*..* sendVars room_id IS EQUAL: " + currentClient.getStreamid() + " asd " + rcl.getStreamid() + " IS eq? " +currentClient.getStreamid().equals(rcl.getStreamid()));
 						if (!currentClient.getStreamid().equals(rcl.getStreamid())) {
 							((IServiceCapableConnection) conn).invoke("sendVarsToWhiteboard", new Object[] { whiteboardObj },this);
+							log.debug("sending sendVarsToWhiteboard to " + conn + " rcl " + rcl);
 							numberOfUsers++;
 						}
 						//log.debug("sending sendVarsToWhiteboard to " + conn);
@@ -1119,9 +1121,9 @@ public class Application extends ApplicationAdapter implements
 						RoomClient rcl = ClientList.get(conn.getClient().getId());
 						log.debug("*..*idremote: " + rcl.getStreamid());
 						log.debug("*..*my idstreamid: " + currentClient.getStreamid());
-						if (!currentClient.getStreamid().equals(rcl.getStreamid()) && room_id == rcl.getRoom_id() && room_id!=null) {
+						if (!currentClient.getStreamid().equals(rcl.getStreamid()) && room_id!=null && room_id.equals(rcl.getRoom_id())) {
 							((IServiceCapableConnection) conn).invoke("sendVarsToModeratorGeneral",	new Object[] { vars }, this);
-							log.debug("sending sendVarsToWhiteboard to " + conn);
+							log.debug("sending sendVarsToModeratorGeneral to " + conn);
 						}
 					}
 				}
@@ -1149,7 +1151,7 @@ public class Application extends ApplicationAdapter implements
 					RoomClient rcl = ClientList.get(conn.getClient().getId());
 					log.debug("*..*idremote: " + rcl.getStreamid());
 					log.debug("*..*my idstreamid: " + currentClient.getStreamid());
-					if (room_id == rcl.getRoom_id() && room_id!=null) {
+					if (room_id!=null && room_id.equals(rcl.getRoom_id())) {
 						((IServiceCapableConnection) conn).invoke("sendVarsToMessage",new Object[] { newMessage }, this);
 						log.debug("sending sendVarsToMessage to " + conn);		
 					}
@@ -1181,7 +1183,7 @@ public class Application extends ApplicationAdapter implements
 					RoomClient rcl = ClientList.get(conn.getClient().getId());
 					log.debug("*..*idremote: " + rcl.getStreamid());
 					log.debug("*..*my idstreamid: " + currentClient.getStreamid());
-					if (room_id == rcl.getRoom_id() && room_id!=null) {
+					if (room_id!=null && room_id.equals(rcl.getRoom_id())) {
 						((IServiceCapableConnection) conn).invoke("sendVarsToMessageWithClient",new Object[] { hsm }, this);
 						log.debug("sending sendVarsToMessageWithClient to " + conn);
 					}
