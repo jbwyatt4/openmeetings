@@ -91,7 +91,7 @@ public class WhiteBoardService implements IPendingServiceCallback {
 				IConnection conn = it.next();
 				if (conn instanceof IServiceCapableConnection) {
 					RoomClient rcl = Application.getClientList().get(conn.getClient().getId());
-					if (room_id!=null && room_id == rcl.getRoom_id()) {
+					if (room_id!=null && room_id.equals(rcl.getRoom_id())) {
 						((IServiceCapableConnection) conn).invoke("sendSyncFlag", new Object[] { wSyncLockObject },this);
 					}
 				}
@@ -137,7 +137,7 @@ public class WhiteBoardService implements IPendingServiceCallback {
 						IConnection conn = it.next();
 						if (conn instanceof IServiceCapableConnection) {
 							RoomClient rcl = Application.getClientList().get(conn.getClient().getId());
-							if (room_id!=null && room_id == rcl.getRoom_id()) {
+							if (room_id!=null && room_id.equals(rcl.getRoom_id())) {
 								returnVal++;
 								((IServiceCapableConnection) conn).invoke("sendSyncCompleteFlag", new Object[] { wSyncLockObject },this);
 							}
@@ -197,7 +197,7 @@ public class WhiteBoardService implements IPendingServiceCallback {
 				if (conn instanceof IServiceCapableConnection) {
 					RoomClient rcl = Application.getClientList().get(conn.getClient().getId());
 					log.debug("sending :"+rcl);
-					if (room_id!=null && room_id == rcl.getRoom_id()) {
+					if (room_id!=null && room_id.equals(rcl.getRoom_id())) {
 						log.debug("sendObjectSyncFlag :"+rcl);
 						((IServiceCapableConnection) conn).invoke("sendObjectSyncFlag", new Object[] { wSyncLockObject },this);
 					}
@@ -252,7 +252,7 @@ public class WhiteBoardService implements IPendingServiceCallback {
 						IConnection conn = it.next();
 						if (conn instanceof IServiceCapableConnection) {
 							RoomClient rcl = Application.getClientList().get(conn.getClient().getId());
-							if (room_id!=null && room_id == rcl.getRoom_id()) {
+							if (room_id!=null && room_id.equals(rcl.getRoom_id())) {
 								returnVal++;
 								((IServiceCapableConnection) conn).invoke("sendObjectSyncCompleteFlag", new Object[] { wSyncLockObject },this);
 							}
@@ -421,7 +421,7 @@ public class WhiteBoardService implements IPendingServiceCallback {
 						IConnection conn = it.next();
 						if (conn instanceof IServiceCapableConnection) {
 							RoomClient rcl = Application.getClientList().get(conn.getClient().getId());
-							if (room_id!=null && room_id == rcl.getRoom_id()) {
+							if (room_id!=null && room_id.equals(rcl.getRoom_id())) {
 								//do not send to current
 								if (!rcl.getPublicSID().equals(currentClient.getPublicSID())) {
 									((IServiceCapableConnection) conn).invoke("sendSyncCompleteFlag", new Object[] { wSyncLockObject },this);
@@ -453,7 +453,7 @@ public class WhiteBoardService implements IPendingServiceCallback {
 						IConnection conn = it.next();
 						if (conn instanceof IServiceCapableConnection) {
 							RoomClient rcl = Application.getClientList().get(conn.getClient().getId());
-							if (room_id!=null && room_id == rcl.getRoom_id()) {
+							if (room_id!=null && room_id.equals(rcl.getRoom_id())) {
 								//do not send to current
 								if (!rcl.getPublicSID().equals(currentClient.getPublicSID())) {
 									((IServiceCapableConnection) conn).invoke("sendImagesSyncCompleteFlag", new Object[] { "remove" },this);
