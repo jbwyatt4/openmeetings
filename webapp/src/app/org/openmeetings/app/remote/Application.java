@@ -12,6 +12,9 @@ import java.util.LinkedList;
 import java.util.Map;
 import java.util.Set;
 
+import org.slf4j.LoggerFactory; 
+import org.slf4j.Logger;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -52,6 +55,8 @@ public class Application extends ApplicationAdapter implements
 		IPendingServiceCallback, IStreamAwareScopeHandler {
 
 	private static final Log log = LogFactory.getLog(Application.class);
+	
+	private static Logger log2 = LoggerFactory.getLogger(Application.class.getName());
 
 	private Long objectIdentifier = new Long(0);
 	private static HashMap<String,RoomClient> ClientList = new HashMap<String,RoomClient>();
@@ -93,6 +98,9 @@ public class Application extends ApplicationAdapter implements
 	@Override
 	public boolean appStart(IScope scope) {
 		try {
+			System.out.println("Custom Webapp start UP "+new Date());
+			log2.debug("Custom Webapp start UP "+new Date());
+			
 			whiteBoardObjectList = new HashMap<Long,HashMap<String,Map>>();
 			webAppPath = scope.getResource("/").getFile().getAbsolutePath();
 			log.debug("webAppPath : "+webAppPath);
@@ -104,7 +112,8 @@ public class Application extends ApplicationAdapter implements
 			// init your handler here
 			//System.out.println("################## appStart    ");
 			QuartzSessionClear bwHelp = new QuartzSessionClear();
-			String jobName = addScheduledJob(300000,bwHelp);
+			//String jobName = addScheduledJob(300000,bwHelp);
+			String jobName = addScheduledJob(1000,bwHelp);
 			log.debug("jobName: "+jobName);
 		} catch (Exception err) {
 			log.error("[appStart]",err);

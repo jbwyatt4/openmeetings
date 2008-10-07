@@ -8,7 +8,18 @@
 	<classpathentry kind="src" path="src/templates"/>
 	<classpathentry kind="src" path="src/test"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="lib/kunststoff.jar"/>
+	<classpathentry kind="lib" path="lib/hibernate_331/antlr-2.7.6.jar"/>
+	<classpathentry kind="lib" path="lib/hibernate_331/c3p0-0.9.1.jar"/>
+	<classpathentry kind="lib" path="lib/hibernate_331/commons-collections-3.1.jar"/>
+	<classpathentry kind="lib" path="lib/hibernate_331/dom4j-1.6.1.jar"/>
+	<classpathentry kind="lib" path="lib/hibernate_331/ehcache-1.2.3.jar"/>
+	<classpathentry kind="lib" path="lib/hibernate_331/hibernate-cglib-repack-2.1_3.jar"/>
+	<classpathentry kind="lib" path="lib/hibernate_331/hibernate-testing.jar"/>
+	<classpathentry kind="lib" path="lib/hibernate_331/hibernate3.jar"/>
+	<classpathentry kind="lib" path="lib/hibernate_331/javassist-3.4.GA.jar"/>
+	<classpathentry kind="lib" path="lib/hibernate_331/jta-1.1.jar"/>
+	<classpathentry kind="lib" path="lib/junit/junit-4.0.jar"/>
+	<classpathentry kind="lib" path="lib/junit/junit.jar"/>
 	<classpathentry kind="lib" path="lib/red5_08rc1/quartz-1.6.0.jar"/>
 	<classpathentry kind="lib" path="lib/red5_08rc1/red5.jar"/>
 	<classpathentry kind="lib" path="lib/red5_08rc1/servlet-api-2.5.jar"/>
@@ -19,6 +30,46 @@
 	<classpathentry kind="lib" path="lib/red5_08rc1/spring-core-2.5.5.jar"/>
 	<classpathentry kind="lib" path="lib/red5_08rc1/spring-orm-2.5.5.jar"/>
 	<classpathentry kind="lib" path="lib/red5_08rc1/spring-web-2.5.5.jar"/>
+	<classpathentry kind="lib" path="lib/kunststoff.jar"/>
+	<classpathentry kind="lib" path="lib/database/mysql-connector-java-5.0.7-bin.jar"/>
+	<classpathentry kind="lib" path="lib/database/postgresql-8.2-504.jdbc2.jar"/>
+	<classpathentry kind="lib" path="lib/slf4j/jcl-over-slf4j-1.5.3.jar"/>
+	<classpathentry kind="lib" path="lib/slf4j/log4j-over-slf4j-1.5.3.jar"/>
+	<classpathentry kind="lib" path="lib/slf4j/logback-classic-0.9.10-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="lib/slf4j/logback-core-0.9.10-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="lib/slf4j/slf4j-api-1.5.3.jar"/>
+	<classpathentry kind="lib" path="lib/upload/commons-digester-1.8.jar"/>
+	<classpathentry kind="lib" path="lib/upload/commons-lang-2.2.jar"/>
+	<classpathentry kind="lib" path="lib/upload/commons-transaction-1.1.jar"/>
+	<classpathentry kind="lib" path="lib/upload/itext-1.3.jar"/>
+	<classpathentry kind="lib" path="lib/upload/mail.jar"/>
+	<classpathentry kind="lib" path="lib/upload/multipartrequest.jar"/>
+	<classpathentry kind="lib" path="lib/upload/mysql-connector-java-5.0.7-bin.jar"/>
+	<classpathentry kind="lib" path="lib/upload/velocity-1.6-dev.jar"/>
+	<classpathentry kind="lib" path="lib/upload/velocity-tools-view-1.3.jar"/>
+	<classpathentry kind="lib" path="lib/xdoclet2/lib/commons-beanutils-1.7.0.jar"/>
+	<classpathentry kind="lib" path="lib/xdoclet2/lib/commons-collections-3.1.jar"/>
+	<classpathentry kind="lib" path="lib/xdoclet2/lib/commons-jelly-20050813.225330.jar"/>
+	<classpathentry kind="lib" path="lib/xdoclet2/lib/commons-jelly-tags-define-1.0.jar"/>
+	<classpathentry kind="lib" path="lib/xdoclet2/lib/commons-jelly-tags-jsl-1.0.jar"/>
+	<classpathentry kind="lib" path="lib/xdoclet2/lib/commons-jelly-tags-xml-20050823.222913.jar"/>
+	<classpathentry kind="lib" path="lib/xdoclet2/lib/commons-jexl-1.0.jar"/>
+	<classpathentry kind="lib" path="lib/xdoclet2/lib/commons-logging-1.0.4.jar"/>
+	<classpathentry kind="lib" path="lib/xdoclet2/lib/dom4j-1.6.jar"/>
+	<classpathentry kind="lib" path="lib/xdoclet2/lib/generama-1.2.1.jar"/>
+	<classpathentry kind="lib" path="lib/xdoclet2/lib/jaxen-1.1-beta-4.jar"/>
+	<classpathentry kind="lib" path="lib/xdoclet2/lib/nanocontainer-1.0-beta-3.jar"/>
+	<classpathentry kind="lib" path="lib/xdoclet2/lib/nanocontainer-ant-1.0-beta-3.jar"/>
+	<classpathentry kind="lib" path="lib/xdoclet2/lib/picocontainer-1.0.jar"/>
+	<classpathentry kind="lib" path="lib/xdoclet2/lib/qdox-20051211.114207.jar"/>
+	<classpathentry kind="lib" path="lib/xdoclet2/lib/saxpath-1.0-FCS.jar"/>
+	<classpathentry kind="lib" path="lib/xdoclet2/lib/velocity-1.4.jar"/>
+	<classpathentry kind="lib" path="lib/xdoclet2/lib/xdoclet-2.0.6.jar"/>
+	<classpathentry kind="lib" path="lib/xdoclet2/lib/xerces-2.4.0.jar"/>
+	<classpathentry kind="lib" path="lib/xdoclet2/plugins/xdoclet-plugin-hibernate-1.0.4-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="lib/xstream/xpp3_min-1.1.3.4.O.jar"/>
+	<classpathentry kind="lib" path="lib/xstream/xstream-benchmark-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="lib/xstream/xstream-SNAPSHOT.jar"/>
 	<classpathentry kind="lib" path="lib/axis2-1.3/activation-1.1.jar"/>
 	<classpathentry kind="lib" path="lib/axis2-1.3/annogen-0.1.0.jar"/>
 	<classpathentry kind="lib" path="lib/axis2-1.3/axiom-api-1.2.5.jar"/>
@@ -76,55 +127,5 @@
 	<classpathentry kind="lib" path="lib/axis2-1.3/xercesImpl-2.8.1.jar"/>
 	<classpathentry kind="lib" path="lib/axis2-1.3/xml-apis-1.3.03.jar"/>
 	<classpathentry kind="lib" path="lib/axis2-1.3/XmlSchema-1.3.2.jar"/>
-	<classpathentry kind="lib" path="lib/database/mysql-connector-java-5.0.7-bin.jar"/>
-	<classpathentry kind="lib" path="lib/database/postgresql-8.2-504.jdbc2.jar"/>
-	<classpathentry kind="lib" path="lib/hibernate3/ant-1.6.5.jar"/>
-	<classpathentry kind="lib" path="lib/hibernate3/ant-antlr-1.6.5.jar"/>
-	<classpathentry kind="lib" path="lib/hibernate3/ant-junit-1.6.5.jar"/>
-	<classpathentry kind="lib" path="lib/hibernate3/ant-launcher-1.6.5.jar"/>
-	<classpathentry kind="lib" path="lib/hibernate3/ant-swing-1.6.5.jar"/>
-	<classpathentry kind="lib" path="lib/hibernate3/antlr-2.7.6.jar"/>
-	<classpathentry kind="lib" path="lib/hibernate3/antlr-2.7.6rc1.jar"/>
-	<classpathentry kind="lib" path="lib/hibernate3/asm-attrs.jar"/>
-	<classpathentry kind="lib" path="lib/hibernate3/asm.jar"/>
-	<classpathentry kind="lib" path="lib/hibernate3/c3p0-0.9.0.jar"/>
-	<classpathentry kind="lib" path="lib/hibernate3/c3p0-0.9.1.jar"/>
-	<classpathentry kind="lib" path="lib/hibernate3/cglib-2.1.3.jar"/>
-	<classpathentry kind="lib" path="lib/hibernate3/checkstyle-all.jar"/>
-	<classpathentry kind="lib" path="lib/hibernate3/cleanimports.jar"/>
-	<classpathentry kind="lib" path="lib/hibernate3/commons-logging-1.0.4.jar"/>
-	<classpathentry kind="lib" path="lib/hibernate3/concurrent-1.3.2.jar"/>
-	<classpathentry kind="lib" path="lib/hibernate3/connector.jar"/>
-	<classpathentry kind="lib" path="lib/hibernate3/dom4j-1.6.1.jar"/>
-	<classpathentry kind="lib" path="lib/hibernate3/ehcache-1.1.jar"/>
-	<classpathentry kind="lib" path="lib/hibernate3/ehcache-1.2.3.jar"/>
-	<classpathentry kind="lib" path="lib/hibernate3/hibernate3.jar"/>
-	<classpathentry kind="lib" path="lib/hibernate3/jaas.jar"/>
-	<classpathentry kind="lib" path="lib/hibernate3/jacc-1_0-fr.jar"/>
-	<classpathentry kind="lib" path="lib/hibernate3/javassist.jar"/>
-	<classpathentry kind="lib" path="lib/hibernate3/jaxen-1.1-beta-7.jar"/>
-	<classpathentry kind="lib" path="lib/hibernate3/jdbc2_0-stdext.jar"/>
-	<classpathentry kind="lib" path="lib/hibernate3/jgroups-2.2.8.jar"/>
-	<classpathentry kind="lib" path="lib/hibernate3/oscache-2.1.jar"/>
-	<classpathentry kind="lib" path="lib/hibernate3/proxool-0.8.3.jar"/>
-	<classpathentry kind="lib" path="lib/hibernate3/swarmcache-1.0rc2.jar"/>
-	<classpathentry kind="lib" path="lib/hibernate3/syndiag2.jar"/>
-	<classpathentry kind="lib" path="lib/hibernate3/versioncheck.jar"/>
-	<classpathentry kind="lib" path="lib/hibernate3/xerces-2.6.2.jar"/>
-	<classpathentry kind="lib" path="lib/hibernate3/xml-apis.jar"/>
-	<classpathentry kind="lib" path="lib/junit/junit-4.0.jar"/>
-	<classpathentry kind="lib" path="lib/junit/junit.jar"/>
-	<classpathentry kind="lib" path="lib/upload/commons-digester-1.8.jar"/>
-	<classpathentry kind="lib" path="lib/upload/commons-lang-2.2.jar"/>
-	<classpathentry kind="lib" path="lib/upload/commons-transaction-1.1.jar"/>
-	<classpathentry kind="lib" path="lib/upload/itext-1.3.jar"/>
-	<classpathentry kind="lib" path="lib/upload/mail.jar"/>
-	<classpathentry kind="lib" path="lib/upload/multipartrequest.jar"/>
-	<classpathentry kind="lib" path="lib/upload/mysql-connector-java-5.0.7-bin.jar"/>
-	<classpathentry kind="lib" path="lib/upload/velocity-1.6-dev.jar"/>
-	<classpathentry kind="lib" path="lib/upload/velocity-tools-view-1.3.jar"/>
-	<classpathentry kind="lib" path="lib/xstream/xpp3_min-1.1.3.4.O.jar"/>
-	<classpathentry kind="lib" path="lib/xstream/xstream-benchmark-SNAPSHOT.jar"/>
-	<classpathentry kind="lib" path="lib/xstream/xstream-SNAPSHOT.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
