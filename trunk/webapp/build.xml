@@ -30,7 +30,7 @@
 	<property name="project.lib" value="./lib"/>
 
 	<!-- Hibernate -->
-	<property name="hibernate.lib" value="${project.lib}/hibernate3"/>
+	<property name="hibernate.lib" value="${project.lib}/hibernate_331"/>
 	<!-- Log4j -->
 	<property name="log4j.lib" value="${project.lib}/log4j" />
 	<!-- xDoclet -->
@@ -46,6 +46,8 @@
 	<property name="web.lib" value="${project.lib}" />
 	<!-- Axis2 -->
 	<property name="axis2.lib" value="${project.lib}/axis2-1.3" />
+	<!-- SLF4J -->
+	<property name="slf4j.lib" value="${project.lib}/slf4j" />
 	
 	<!-- compile classpath -->
 	<path id="compile.classpath">
@@ -58,6 +60,7 @@
 		<fileset dir="${xstream.lib}" includes="*.jar"/>
 		<fileset dir="${junit.lib}" includes="*.jar"/>
 		<fileset dir="${web.lib}" includes="*.jar"/>
+		<fileset dir="${slf4j.lib}" includes="*.jar"/>
 		<fileset dir="${axis2.lib}" includes="*.jar"/>
 	</path>
 
@@ -194,8 +197,14 @@
 			</fileset>
 		</copy>	
 		<copy todir="${dist.dir}/openmeetings/WEB-INF/lib">
+			<!--
 			<fileset dir="${axis2.lib}">
 			</fileset>
+			 -->
+			<!--
+			<fileset dir="${slf4j.lib}">
+			</fileset>
+			 -->
 			<fileset dir="${hibernate.lib}">
 			</fileset>	
 			<fileset dir="${upload.lib}">
@@ -384,6 +393,7 @@
 	<target name="clean" depends="cleanForBinary" 
 		description="Prepare for clean build">
 		<delete file="${main.out.dir}/**/*.hbm.xml"/>
+		<delete dir="${main.out.dir}"/>
 		<!--mkdir dir="${main.out.dir}"/-->
 	</target>
 	
