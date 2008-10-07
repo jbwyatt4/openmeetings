@@ -100,7 +100,7 @@
         <servlet-name>Import</servlet-name>
         <servlet-class>org.openmeetings.servlet.outputhandler.Import</servlet-class>
     </servlet>
-    <!-- Axis2 Settings
+    <!-- Axis2 Settings -->
     <servlet>
         <servlet-name>AxisServlet</servlet-name>
         <servlet-class>org.apache.axis2.transport.http.AxisServlet</servlet-class>
@@ -110,7 +110,7 @@
         <servlet-name>AxisAdminServlet</servlet-name>
         <servlet-class>org.apache.axis2.transport.http.AxisAdminServlet</servlet-class>
     </servlet>
-     -->
+    
     <servlet>
         <description>MethodGateway</description>
         <display-name>MethodGateway</display-name>
@@ -157,7 +157,7 @@
         <servlet-name>Import</servlet-name>
         <url-pattern>/Import</url-pattern>
     </servlet-mapping>
-    <!-- Axis2 
+    <!-- Axis2 -->
     <servlet-mapping>
         <servlet-name>AxisServlet</servlet-name>
         <url-pattern>/servlet/AxisServlet</url-pattern>
@@ -174,7 +174,7 @@
         <servlet-name>AxisAdminServlet</servlet-name>
         <url-pattern>/axis2-admin/*</url-pattern>
     </servlet-mapping>
-     -->
+     
     <servlet-mapping>
         <servlet-name>MethodGateway</servlet-name>
         <url-pattern>/MethodGateway</url-pattern>
@@ -183,7 +183,7 @@
         <extension>inc</extension>
         <mime-type>text/plain</mime-type>
     </mime-mapping>
-    <!-- Axis2 
+    <!-- Axis2 -->
     <error-page>
         <error-code>404</error-code>
         <location>/axis2-web/Error/error404.jsp</location>
@@ -192,7 +192,7 @@
         <error-code>500</error-code>
         <location>/axis2-web/Error/error500.jsp</location>
     </error-page>
-     -->
+     
     <security-constraint>
         <web-resource-collection>
             <web-resource-name>Forbidden</web-resource-name>
