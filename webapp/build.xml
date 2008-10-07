@@ -48,6 +48,8 @@
 	<property name="axis2.lib" value="${project.lib}/axis2-1.3" />
 	<!-- SLF4J -->
 	<property name="slf4j.lib" value="${project.lib}/slf4j" />
+	<!-- Velocity -->
+	<property name="velocity.lib" value="${project.lib}/velocity" />
 	
 	<!-- compile classpath -->
 	<path id="compile.classpath">
@@ -62,6 +64,7 @@
 		<fileset dir="${web.lib}" includes="*.jar"/>
 		<fileset dir="${slf4j.lib}" includes="*.jar"/>
 		<fileset dir="${axis2.lib}" includes="*.jar"/>
+		<fileset dir="${velocity.lib}" includes="*.jar"/>
 	</path>
 
 	<!-- xDoclet classpath -->
@@ -205,6 +208,8 @@
 			<fileset dir="${slf4j.lib}">
 			</fileset>
 			 -->
+			<fileset dir="${velocity.lib}">
+			</fileset>
 			<fileset dir="${hibernate.lib}">
 			</fileset>	
 			<fileset dir="${upload.lib}">
