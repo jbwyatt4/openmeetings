@@ -3,8 +3,8 @@ package org.openmeetings.app.data.user;
 import java.util.Iterator;
 import java.util.Date;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -22,7 +22,7 @@ import org.openmeetings.utils.math.CalendarPatterns;
  */
 public class Groupmanagement {
 
-	private static final Log log = LogFactory.getLog(Groupmanagement.class);
+	private static final Logger log = LoggerFactory.getLogger(Groupmanagement.class);
 
 	private static Groupmanagement instance;
 
@@ -71,9 +71,9 @@ public class Groupmanagement {
 			tx.commit();
 			HibernateUtil.closeSession(idf);
 		} catch (HibernateException ex) {
-			log.error(ex);
+			log.error("getUserGroups",ex);
 		} catch (Exception ex2) {
-			log.error(ex2);
+			log.error("getUserGroups",ex2);
 		}
 		return usersusergroups;
 	}
@@ -93,9 +93,9 @@ public class Groupmanagement {
 			tx.commit();
 			HibernateUtil.closeSession(idf);
 		} catch (HibernateException ex) {
-			log.error(ex);
+			log.error("getUserGroupsSingle",ex);
 		} catch (Exception ex2) {
-			log.error(ex2);
+			log.error("getUserGroupsSingle",ex2);
 		}
 		return usersusergroups;
 	}
@@ -121,9 +121,9 @@ public class Groupmanagement {
 				tx.commit();
 				HibernateUtil.closeSession(idf);
 			} catch (HibernateException ex) {
-				log.error(ex);
+				log.error("addUserToGroup",ex);
 			} catch (Exception ex2) {
-				log.error(ex2);
+				log.error("addUserToGroup",ex2);
 			}
 		} else {
 			res = "Error: Permission denied";
@@ -153,9 +153,9 @@ public class Groupmanagement {
 				tx.commit();
 				HibernateUtil.closeSession(idf);
 			} catch (HibernateException ex) {
-				log.error(ex);
+				log.error("updateUserGroup",ex);
 			} catch (Exception ex2) {
-				log.error(ex2);
+				log.error("updateUserGroup",ex2);
 			}
 		} else {
 			res = "Error: Permission denied";
@@ -178,9 +178,9 @@ public class Groupmanagement {
 				HibernateUtil.closeSession(idf);
 
 			} catch (HibernateException ex) {
-				log.error(ex);
+				log.error("deleteUserGroupByID",ex);
 			} catch (Exception ex2) {
-				log.error(ex2);
+				log.error("deleteUserGroupByID",ex2);
 			}
 		} else {
 			res = "Error: Permission denied";
@@ -201,9 +201,9 @@ public class Groupmanagement {
 			tx.commit();
 			HibernateUtil.closeSession(idf);
 		} catch (HibernateException ex) {
-			log.error(ex);
+			log.error("deleteUserFromAllGroups",ex);
 		} catch (Exception ex2) {
-			log.error(ex2);
+			log.error("deleteUserFromAllGroups",ex2);
 		}
 		return res;
 	}
@@ -222,9 +222,9 @@ public class Groupmanagement {
 			HibernateUtil.closeSession(idf);
 
 		} catch (HibernateException ex) {
-			log.error(ex);
+			log.error("deleteAllGroupUsers",ex);
 		} catch (Exception ex2) {
-			log.error(ex2);
+			log.error("deleteAllGroupUsers",ex2);
 		}
 		return res;
 	}
@@ -247,9 +247,9 @@ public class Groupmanagement {
 				//TODO: setzen der Usergroups einer Gruppe
 				//groups.setUsergroups(getUsergroupsUsers(GROUP_ID));
 			} catch (HibernateException ex) {
-				log.error(ex);
+				log.error("getGroupUsers",ex);
 			} catch (Exception ex2) {
-				log.error(ex2);
+				log.error("getGroupUsers",ex2);
 			}
 		} else {
 			groups.setComment("Error: Permission denied");
@@ -280,9 +280,9 @@ public class Groupmanagement {
 				//usergroups[vars].setUsers(ResHandler.getUsermanagement().getUserForGroup(usergroups[vars].getUSER_ID()));
 			}
 		} catch (HibernateException ex) {
-			log.error(ex);
+			log.error("getUsergroupsUsers",ex);
 		} catch (Exception ex2) {
-			log.error(ex2);
+			log.error("getUsergroupsUsers",ex2);
 		}
 		return usergroups;
 	}
@@ -309,9 +309,9 @@ public class Groupmanagement {
 					//groups[vars].setUsergroups(getUsergroupsUsers(groups[vars].getGROUP_ID()));
 				}
 			} catch (HibernateException ex) {
-				log.error(ex);
+				log.error("getAllGroupUsers",ex);
 			} catch (Exception ex2) {
-				log.error(ex2);
+				log.error("getAllGroupUsers",ex2);
 			}
 		} else {
 			usergroups[0] = new Usergroups();
@@ -335,9 +335,9 @@ public class Groupmanagement {
 			tx.commit();
 			HibernateUtil.closeSession(idf);
 		} catch (HibernateException ex) {
-			log.error(ex);
+			log.error("getGroup",ex);
 		} catch (Exception ex2) {
-			log.error(ex2);
+			log.error("getGroup",ex2);
 		}
 		return usergroups;
 	}
@@ -363,9 +363,9 @@ public class Groupmanagement {
 					//groups[vars].setUsers(ResHandler.getUsermanagement().getUser(groups[vars].getUSER_ID()));
 				}
 			} catch (HibernateException ex) {
-				log.error(ex);
+				log.error("getAllGroup",ex);
 			} catch (Exception ex2) {
-				log.error(ex2);
+				log.error("getAllGroup",ex2);
 			}
 		} else {
 			usergroups[0] = new Usergroups();
@@ -393,9 +393,9 @@ public class Groupmanagement {
 				//groups.setUsers(ResHandler.getUsermanagement().getUser(groups()));
 
 			} catch (HibernateException ex) {
-				log.error(ex);
+				log.error("getSingleGroup",ex);
 			} catch (Exception ex2) {
-				log.error(ex2);
+				log.error("getSingleGroup",ex2);
 			}
 		} else {
 			groups.setComment("Error: Permission denied");
@@ -427,9 +427,9 @@ public class Groupmanagement {
 				tx.commit();
 				HibernateUtil.closeSession(idf);
 			} catch (HibernateException ex) {
-				log.error(ex);
+				log.error("addGroup",ex);
 			} catch (Exception ex2) {
-				log.error(ex2);
+				log.error("addGroup",ex2);
 			}
 		} else {
 			res = "Error: Permission denied";
@@ -458,9 +458,9 @@ public class Groupmanagement {
 				tx.commit();
 				HibernateUtil.closeSession(idf);
 			} catch (HibernateException ex) {
-				log.error(ex);
+				log.error("updateGroup",ex);
 			} catch (Exception ex2) {
-				log.error(ex2);
+				log.error("updateGroup",ex2);
 			}
 		} else {
 			res = "Error: Permission denied";
@@ -484,9 +484,9 @@ public class Groupmanagement {
 				HibernateUtil.closeSession(idf);
 				deleteAllGroupUsers(usergroup_id);
 			} catch (HibernateException ex) {
-				log.error(ex);
+				log.error("deleteGroup",ex);
 			} catch (Exception ex2) {
-				log.error(ex2);
+				log.error("deleteGroup",ex2);
 			}
 		} else {
 			res = "Error: Permission denied";
@@ -517,9 +517,9 @@ public class Groupmanagement {
 					//groups[vars].setUsers(ResHandler.getUsermanagement().getUser(groups[vars].getUSER_ID()));
 				}
 			} catch (HibernateException ex) {
-				log.error(ex);
+				log.error("getAllGroupFree",ex);
 			} catch (Exception ex2) {
-				log.error(ex2);
+				log.error("getAllGroupFree",ex2);
 			}
 		} else {
 			groups[0] = new Usergroups();
@@ -548,9 +548,9 @@ public class Groupmanagement {
 				//groups.setUsers(ResHandler.getUsermanagement().getUser(groups.getUSER_ID()));
 
 			} catch (HibernateException ex) {
-				log.error(ex);
+				log.error("getSingleGroupFree",ex);
 			} catch (Exception ex2) {
-				log.error(ex2);
+				log.error("getSingleGroupFree",ex2);
 			}
 		} else {
 			groups.setComment("Error: Permission denied");

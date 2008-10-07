@@ -10,8 +10,8 @@ import java.util.LinkedList;
 import java.util.Locale;
 import java.util.LinkedHashMap;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.red5.server.api.IScope;
 import org.red5.server.api.Red5;
 
@@ -33,7 +33,7 @@ import org.openmeetings.app.documents.CreateLibraryPresentation;
  */
 public class ConferenceLibrary {
 
-	private static final Log log = LogFactory.getLog(ConferenceLibrary.class);
+	private static final Logger log = LoggerFactory.getLogger(ConferenceLibrary.class);
 	
 	private static ConferenceLibrary instance;
 
@@ -400,7 +400,7 @@ public class ConferenceLibrary {
 	
 	public String saveAsImage(Object t){
 		try {
-			log.error(t);
+			log.error("saveAsImage",t);
 		} catch (Exception err){
 			log.error("[saveAsImage] "+err);
 		}
@@ -413,7 +413,7 @@ public class ConferenceLibrary {
 	        Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);  
 	        if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)){		
 				LinkedHashMap tObject = (LinkedHashMap)t;
-				log.debug(tObject.size());
+				log.debug("saveAsObject",tObject.size());
 				
 				String roomName = room_id.toString();				
 				String current_dir = Application.webAppPath+"/upload"+File.separatorChar+roomName+File.separatorChar;

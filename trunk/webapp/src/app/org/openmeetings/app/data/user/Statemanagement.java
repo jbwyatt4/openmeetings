@@ -3,8 +3,8 @@ package org.openmeetings.app.data.user;
 import java.util.Date;
 import java.util.List;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -19,7 +19,7 @@ import org.openmeetings.app.hibernate.utils.HibernateUtil;
  *
  */
 public class Statemanagement {
-	private static final Log log = LogFactory.getLog(Statemanagement.class);
+	private static final Logger log = LoggerFactory.getLogger(Statemanagement.class);
 
 	private static Statemanagement instance = null;
 
@@ -55,9 +55,9 @@ public class Statemanagement {
 
 			return id;
 		} catch (HibernateException ex) {
-			log.error(ex);
+			log.error("addState",ex);
 		} catch (Exception ex2) {
-			log.error(ex2);
+			log.error("addState",ex2);
 		}
 		return null;
 	}
@@ -83,9 +83,9 @@ public class Statemanagement {
 				return (States) ll.get(0);
 			}
 		} catch (HibernateException ex) {
-			log.error(ex);
+			log.error("getStateById",ex);
 		} catch (Exception ex2) {
-			log.error(ex2);
+			log.error("getStateById",ex2);
 		}
 		return null;
 	}
@@ -107,9 +107,9 @@ public class Statemanagement {
 			HibernateUtil.closeSession(idf);
 			return ll;
 		} catch (HibernateException ex) {
-			log.error(ex);
+			log.error("getStates",ex);
 		} catch (Exception ex2) {
-			log.error(ex2);
+			log.error("getStates",ex2);
 		}
 		return null;
 	}

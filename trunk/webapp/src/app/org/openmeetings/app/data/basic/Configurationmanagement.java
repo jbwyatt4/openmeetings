@@ -5,8 +5,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.LinkedHashMap;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Criteria;
@@ -26,7 +26,7 @@ import org.openmeetings.utils.mappings.CastMapToObject;
 
 public class Configurationmanagement {
 
-	private static final Log log = LogFactory.getLog(Configurationmanagement.class);
+	private static final Logger log = LoggerFactory.getLogger(Configurationmanagement.class);
 
 	private Configurationmanagement() {
 	}
@@ -156,7 +156,7 @@ public class Configurationmanagement {
 			List ll = query.list();
 			tx.commit();
 			HibernateUtil.closeSession(idf);
-			log.error((Long)ll.get(0));
+			log.debug("selectMaxFromConfigurations",(Long)ll.get(0));
 			return (Long)ll.get(0);				
 		} catch (HibernateException ex) {
 			log.error("[selectMaxFromConfigurations] ",ex);

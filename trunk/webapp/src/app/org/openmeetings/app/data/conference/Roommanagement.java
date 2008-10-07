@@ -7,8 +7,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Set;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
@@ -33,7 +33,7 @@ import org.openmeetings.app.hibernate.beans.domain.Organisation_Users;
  */
 public class Roommanagement {
 
-	private static final Log log = LogFactory.getLog(Roommanagement.class);
+	private static final Logger log = LoggerFactory.getLogger(Roommanagement.class);
 
 	private static Roommanagement instance;
 
@@ -195,7 +195,7 @@ public class Roommanagement {
 			List ll = query.list();
 			tx.commit();
 			HibernateUtil.closeSession(idf);
-			log.error((Long)ll.get(0));
+			log.debug("err",(Long)ll.get(0));
 			return (Long)ll.get(0);				
 		} catch (HibernateException ex) {
 			log.error("[selectMaxFromRooms] ", ex);

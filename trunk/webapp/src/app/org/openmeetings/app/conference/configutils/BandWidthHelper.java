@@ -1,7 +1,7 @@
 package org.openmeetings.app.conference.configutils;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import org.red5.server.api.IConnection;
 import org.red5.server.api.scheduling.IScheduledJob;
@@ -21,7 +21,7 @@ public class BandWidthHelper implements IScheduledJob {
 	
 	private int maxI = 5;
 	
-	private static final Log log = LogFactory.getLog(BandWidthHelper.class);
+	private static final Logger log = LoggerFactory.getLogger(BandWidthHelper.class);
 	
 	private IConnection currentConnection = null;
 	

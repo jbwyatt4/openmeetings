@@ -1,12 +1,12 @@
 package org.openmeetings.utils.crypt;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.openmeetings.app.data.basic.Configurationmanagement;
 
 public class ManageCryptStyle {
 	
-	private static final Log log = LogFactory.getLog(ManageCryptStyle.class);
+	private static final Logger log = LoggerFactory.getLogger(ManageCryptStyle.class);
 	
 	private ManageCryptStyle() {}
 

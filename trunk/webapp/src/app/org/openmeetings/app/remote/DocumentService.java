@@ -2,8 +2,8 @@ package org.openmeetings.app.remote;
 
 import java.util.List;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 
@@ -12,7 +12,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class DocumentService {
 	
-	private static final Log log = LogFactory.getLog(DocumentService.class);
+	private static final Logger log = LoggerFactory.getLogger(DocumentService.class);
 	
 	public List getUserFiles(String SID, String parentFolder){
 		

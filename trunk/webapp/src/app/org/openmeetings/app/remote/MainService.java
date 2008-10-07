@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.LinkedHashMap;
 import java.util.Iterator;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import org.red5.server.api.IConnection;
 import org.red5.server.api.Red5;
@@ -41,7 +41,7 @@ import com.thoughtworks.xstream.io.xml.XppDriver;
  */ 
 public class MainService implements IPendingServiceCallback {
 	
-	private static final Log log = LogFactory.getLog(MainService.class);
+	private static final Logger log = LoggerFactory.getLogger(MainService.class);
 	private static MainService instance;
 
 	public static synchronized MainService getInstance() {

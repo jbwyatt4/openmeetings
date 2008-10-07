@@ -393,12 +393,12 @@
 	<target name="clean" depends="cleanForBinary" 
 		description="Prepare for clean build">
 		<delete file="${main.out.dir}/**/*.hbm.xml"/>
-		<delete dir="${main.out.dir}"/>
 		<!--mkdir dir="${main.out.dir}"/-->
 	</target>
 	
 	<target name="cleanForBinary" description="Clean For Binary">
 		<delete dir="${dist.dir}"/>
+		<delete dir="${main.out.dir}"/>
 		<delete file="filetest.keystore" />
 	</target>
 

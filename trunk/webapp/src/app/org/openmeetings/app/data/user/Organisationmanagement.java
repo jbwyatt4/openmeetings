@@ -9,8 +9,8 @@ import java.util.LinkedList;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.HibernateException;
@@ -33,8 +33,7 @@ import org.openmeetings.app.hibernate.utils.HibernateUtil;
  *
  */
 public class Organisationmanagement {
-	private static final Log log = LogFactory
-			.getLog(Organisationmanagement.class);
+	private static Logger log = LoggerFactory.getLogger(Organisationmanagement.class);
 
 	private static Organisationmanagement instance = null;
 
@@ -183,7 +182,7 @@ public class Organisationmanagement {
 			List ll = query.list();
 			tx.commit();
 			HibernateUtil.closeSession(idf);
-			log.error((Long)ll.get(0));
+			log.debug("selectMaxFromOrganisations",(Long)ll.get(0));
 			return (Long)ll.get(0);				
 		} catch (HibernateException ex) {
 			log.error("[selectMaxFromUsers] ",ex);
@@ -546,7 +545,7 @@ public class Organisationmanagement {
 			List ll = query.list();
 			tx.commit();
 			HibernateUtil.closeSession(idf);
-			log.error(ll.size());
+			log.debug("selectMaxUsersByOrganisationId",ll.size());
 			return new Long(ll.size());	
 			
 		} catch (HibernateException ex) {

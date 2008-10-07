@@ -5,8 +5,8 @@ import java.io.FileReader;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
@@ -18,7 +18,7 @@ import com.thoughtworks.xstream.io.xml.XppDriver;
 
 public class LibraryWmlLoader {
 	
-	private static final Log log = LogFactory.getLog(LibraryWmlLoader.class);
+	private static final Logger log = LoggerFactory.getLogger(LibraryWmlLoader.class);
 	
 	private static final String fileExt = ".wml";
 	
@@ -83,7 +83,7 @@ public class LibraryWmlLoader {
 				singlePoint.put(3, Integer.valueOf(pointElement.attribute("val3").getText()).intValue());
 				singlePoint.put(4, Integer.valueOf(pointElement.attribute("val4").getText()).intValue());
 				pointMap.put(k, singlePoint);
-				log.error(singlePoint);
+				log.debug("createListObjectPaintByNode",singlePoint);
 				k++;
 			}
 			subMap.put(1, pointMap);

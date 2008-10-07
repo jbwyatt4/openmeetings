@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.openmeetings.app.data.basic.AuthLevelmanagement;
 import org.openmeetings.app.data.basic.Sessionmanagement;
 import org.openmeetings.app.data.conference.Roommanagement;
@@ -24,7 +24,7 @@ import com.thoughtworks.xstream.io.xml.XppDriver;
 
 public class MethodGateway  extends HttpServlet {
 
-	private static final Log log = LogFactory.getLog(MethodGateway.class);
+	private static final Logger log = LoggerFactory.getLogger(MethodGateway.class);
 
 	/*
 	 * (non-Javadoc)

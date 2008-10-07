@@ -6,8 +6,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.LinkedList;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.openmeetings.app.data.basic.Sessionmanagement;
 import org.openmeetings.app.data.beans.basic.SearchResult;
 import org.openmeetings.app.data.user.Usermanagement;
@@ -24,7 +24,7 @@ import org.openmeetings.app.conference.videobeans.RoomClient;
  */
 public class ConferenceService {
 	
-	private static final Log log = LogFactory.getLog(ConferenceService.class);
+	private static final Logger log = LoggerFactory.getLogger(ConferenceService.class);
 	private static ConferenceService instance;
 
 	public static synchronized ConferenceService getInstance() {

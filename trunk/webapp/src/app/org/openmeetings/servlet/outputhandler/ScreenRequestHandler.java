@@ -13,15 +13,15 @@ import org.apache.velocity.context.Context;
 import org.apache.velocity.tools.view.servlet.VelocityViewServlet;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.openmeetings.app.data.basic.Sessionmanagement;
 import org.openmeetings.app.data.user.Usermanagement;
 import org.openmeetings.app.templates.ScreenCastTemplate;
 
 public class ScreenRequestHandler extends VelocityViewServlet {
 	
-	private static final Log log = LogFactory.getLog(ScreenRequestHandler.class);
+	private static final Logger log = LoggerFactory.getLogger(ScreenRequestHandler.class);
 	
 	/*
 	 * (non-Javadoc)

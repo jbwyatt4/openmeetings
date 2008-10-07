@@ -18,8 +18,8 @@ import org.dom4j.DocumentHelper;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.openmeetings.app.data.basic.Sessionmanagement;
 import org.openmeetings.app.data.user.Usermanagement;
 import org.openmeetings.app.data.basic.Languagemanagement;
@@ -34,7 +34,7 @@ import org.openmeetings.app.data.basic.Fieldmanagment;
  */
 public class LangExport extends HttpServlet {
 
-	private static final Log log = LogFactory.getLog(LangExport.class);
+	private static final Logger log = LoggerFactory.getLogger(LangExport.class);
 
 	/*
 	 * (non-Javadoc)

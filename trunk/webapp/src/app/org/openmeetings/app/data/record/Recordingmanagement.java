@@ -2,8 +2,8 @@ package org.openmeetings.app.data.record;
 
 import java.util.List;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -16,7 +16,7 @@ import org.openmeetings.app.hibernate.utils.HibernateUtil;
 
 public class Recordingmanagement {
 
-	private static final Log log = LogFactory.getLog(Recordingmanagement.class);
+	private static final Logger log = LoggerFactory.getLogger(Recordingmanagement.class);
 
 	private static Recordingmanagement instance;
 
@@ -72,9 +72,9 @@ public class Recordingmanagement {
 			HibernateUtil.closeSession(idf);
 			return ll;
 		} catch (HibernateException ex) {
-			log.error(ex);
+			log.error("getRecordings",ex);
 		} catch (Exception ex2) {
-			log.error(ex2);
+			log.error("getRecordings",ex2);
 		}
 		return null;
 	}
@@ -93,9 +93,9 @@ public class Recordingmanagement {
 			HibernateUtil.closeSession(idf);
 			return ll;
 		} catch (HibernateException ex) {
-			log.error(ex);
+			log.error("getRecordingsByRoom",ex);
 		} catch (Exception ex2) {
-			log.error(ex2);
+			log.error("getRecordingsByRoom",ex2);
 		}
 		return null;
 	}
@@ -114,9 +114,9 @@ public class Recordingmanagement {
 			HibernateUtil.closeSession(idf);
 			return ll;
 		} catch (HibernateException ex) {
-			log.error(ex);
+			log.error("getRecordingsByWhereClause",ex);
 		} catch (Exception ex2) {
-			log.error(ex2);
+			log.error("getRecordingsByWhereClause",ex2);
 		}
 		return null;
 	}
@@ -136,9 +136,9 @@ public class Recordingmanagement {
 			HibernateUtil.closeSession(idf);
 			return rec;
 		} catch (HibernateException ex) {
-			log.error(ex);
+			log.error("getRecordingById",ex);
 		} catch (Exception ex2) {
-			log.error(ex2);
+			log.error("getRecordingById",ex2);
 		}
 		return null;
 	}	
@@ -152,9 +152,9 @@ public class Recordingmanagement {
 			tx.commit();
 			HibernateUtil.closeSession(idf);
 		} catch (HibernateException ex) {
-			log.error(ex);
+			log.error("updateRecording",ex);
 		} catch (Exception ex2) {
-			log.error(ex2);
+			log.error("updateRecording",ex2);
 		}
 	}
 	

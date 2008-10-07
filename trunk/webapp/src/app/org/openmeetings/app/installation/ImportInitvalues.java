@@ -5,8 +5,8 @@ import java.util.LinkedList;
 import java.util.LinkedHashMap;
 import java.util.Iterator;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.dom4j.io.SAXReader;
 import org.dom4j.Element;
 import org.dom4j.Document;
@@ -23,7 +23,7 @@ import org.openmeetings.app.data.user.Usermanagement;
 
 public class ImportInitvalues {
 
-	private static final Log log = LogFactory.getLog(ImportInitvalues.class);
+	private static final Logger log = LoggerFactory.getLogger(ImportInitvalues.class);
 
 	public static final String languageFolderName = "languages/";
 

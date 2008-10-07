@@ -2,8 +2,8 @@ package org.openmeetings.test.domain;
 
 import java.util.Iterator;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.openmeetings.app.data.user.Organisationmanagement;
 import org.openmeetings.app.data.user.Usermanagement;
 import org.openmeetings.app.hibernate.beans.user.Users;
@@ -14,7 +14,7 @@ import junit.framework.TestCase;
 
 public class TestAddGroup extends TestCase {
 	
-	private static final Log log = LogFactory.getLog(TestAddGroup.class);
+	private static final Logger log = LoggerFactory.getLogger(TestAddGroup.class);
 	
 	public TestAddGroup(String testname){
 		super(testname);

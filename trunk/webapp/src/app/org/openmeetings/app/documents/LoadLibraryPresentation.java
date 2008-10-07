@@ -3,15 +3,15 @@ package org.openmeetings.app.documents;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.dom4j.Document;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
 public class LoadLibraryPresentation {
 	
-	private static final Log log = LogFactory.getLog(LoadLibraryPresentation.class);
+	private static final Logger log = LoggerFactory.getLogger(LoadLibraryPresentation.class);
 	
 	private static LoadLibraryPresentation instance;
 
@@ -50,7 +50,7 @@ public class LoadLibraryPresentation {
 					this.createListObjectLibraryByFileDocumentThumbs(item, subMap);
 				}
 	            
-				log.error(subMap);
+				log.debug("parseLibraryFileToObject",subMap);
 	            lMap.put(nodeVal, subMap);
 	            
 	            k++;
@@ -67,7 +67,7 @@ public class LoadLibraryPresentation {
 	public void createListObjectLibraryByFileDocument(Element fileElement, LinkedHashMap<String,Object> subMap){
 		try {
 			
-			log.info(fileElement);
+			log.info("createListObjectLibraryByFileDocument",fileElement);
 
 			subMap.put("filename", fileElement.getText());
 			subMap.put("lastmod", fileElement.attribute("lastmod").getText());
@@ -86,7 +86,7 @@ public class LoadLibraryPresentation {
 			
 			for ( Iterator i = fileElement.elementIterator(); i.hasNext(); ) {
 				Element thumbElement = (Element) i.next();
-				log.info(thumbElement);
+				log.info("createListObjectLibraryByFileDocumentThumbs",thumbElement);
 				LinkedHashMap<String,Object> singleThumb = new LinkedHashMap<String,Object>();
 				singleThumb.put("name", thumbElement.getName());
 				singleThumb.put("filename", thumbElement.getText());

@@ -3,8 +3,8 @@ package org.openmeetings.app.documents;
 import java.util.Iterator;
 import java.util.LinkedList;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.dom4j.Document;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
@@ -13,7 +13,7 @@ import org.openmeetings.app.data.basic.files.*;
 
 public class LoadLibraryPresentationToObject {
 	
-	private static final Log log = LogFactory.getLog(LoadLibraryPresentationToObject.class);
+	private static final Logger log = LoggerFactory.getLogger(LoadLibraryPresentationToObject.class);
 	
 	private static LoadLibraryPresentationToObject instance;
 
@@ -66,7 +66,7 @@ public class LoadLibraryPresentationToObject {
 	public FilesObject createListObjectLibraryByFileDocument(Element fileElement){
 		try {
 			
-			log.info(fileElement);
+			log.info("createListObjectLibraryByFileDocument",fileElement);
 			FilesObject fileObject = new FilesObject();
 			fileObject.setFileName(fileElement.getText());
 			fileObject.setLastModified(fileElement.attribute("lastmod").getText());
@@ -85,7 +85,7 @@ public class LoadLibraryPresentationToObject {
 			
 			for (Iterator<Element> i = fileElement.elementIterator(); i.hasNext(); ) {
 				Element thumbElement = i.next();
-				log.info(thumbElement);
+				log.info("createListObjectLibraryByFileDocumentThumbs",thumbElement);
 				FilesObject singleThumb = new FilesObject();
 				singleThumb.setFileName(thumbElement.getName());
 				singleThumb.setFileNamePure(thumbElement.getText());

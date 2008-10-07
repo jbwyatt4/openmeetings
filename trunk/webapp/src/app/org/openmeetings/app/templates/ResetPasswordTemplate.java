@@ -2,8 +2,8 @@ package org.openmeetings.app.templates;
 
 import java.io.StringWriter;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.Velocity;
 import org.openmeetings.app.data.basic.Configurationmanagement;
@@ -14,7 +14,7 @@ public class ResetPasswordTemplate extends VelocityLoader{
 	
 	private static final String tamplateName = "resetPass.vm";
 
-	private static final Log log = LogFactory.getLog(FeedbackTemplate.class);
+	private static final Logger log = LoggerFactory.getLogger(FeedbackTemplate.class);
 
 	private ResetPasswordTemplate() {
 		super();

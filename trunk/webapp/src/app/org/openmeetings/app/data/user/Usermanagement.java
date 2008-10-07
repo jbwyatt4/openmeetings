@@ -5,8 +5,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Date;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
@@ -43,7 +43,7 @@ import org.openmeetings.app.data.basic.*;
  */
 public class Usermanagement {
 
-	private static final Log log = LogFactory.getLog(Usermanagement.class);
+	private static final Logger log = LoggerFactory.getLogger(Usermanagement.class);
 
 	private static Usermanagement instance = null;
 
@@ -133,7 +133,7 @@ public class Usermanagement {
 			List ll = query.list();
 			tx.commit();
 			HibernateUtil.closeSession(idf);
-			log.info((Long)ll.get(0));
+			log.info("selectMaxFromUsers",(Long)ll.get(0));
 			return (Long)ll.get(0);				
 		} catch (HibernateException ex) {
 			log.error("[selectMaxFromUsers] "+ex);
@@ -180,9 +180,9 @@ public class Usermanagement {
 				// TODO: Add Usergroups to user
 				// users.setUsergroups(ResHandler.getGroupmanagement().getUserGroups(user_id));
 			} catch (HibernateException ex) {
-				log.error(ex);
+				log.error("getUser",ex);
 			} catch (Exception ex2) {
-				log.error(ex2);
+				log.error("getUser",ex2);
 			}
 		} else {
 			log.error("[getUser] "+"Error: No USER_ID given");
@@ -282,9 +282,9 @@ public class Usermanagement {
 			tx.commit();
 			HibernateUtil.closeSession(idf);
 		} catch (HibernateException ex) {
-			log.error(ex);
+			log.error("updateLastLogin",ex);
 		} catch (Exception ex2) {
-			log.error(ex2);
+			log.error("updateLastLogin",ex2);
 		}
 	}
 
@@ -314,9 +314,9 @@ public class Usermanagement {
 				HibernateUtil.closeSession(idf);
 				return contactsZ;
 			} catch (HibernateException ex) {
-				log.error(ex);
+				log.error("searchUser",ex);
 			} catch (Exception ex2) {
-				log.error(ex2);
+				log.error("searchUser",ex2);
 			}
 		}
 		return null;
@@ -336,9 +336,9 @@ public class Usermanagement {
 				HibernateUtil.closeSession(idf);
 				return ll;
 			} catch (HibernateException ex) {
-				log.error(ex);
+				log.error("getUserdataDashBoard",ex);
 			} catch (Exception ex2) {
-				log.error(ex2);
+				log.error("getUserdataDashBoard",ex2);
 			}
 		}
 		return null;
@@ -359,9 +359,9 @@ public class Usermanagement {
 				tx.commit();
 				HibernateUtil.closeSession(idf);
 			} catch (HibernateException ex) {
-				log.error(ex);
+				log.error("getUserdataNoByKey",ex);
 			} catch (Exception ex2) {
-				log.error(ex2);
+				log.error("getUserdataNoByKey",ex2);
 			}
 		} else {
 			System.out.println("Error: No USER_ID given");
@@ -386,9 +386,9 @@ public class Usermanagement {
 				tx.commit();
 				HibernateUtil.closeSession(idf);
 			} catch (HibernateException ex) {
-				log.error(ex);
+				log.error("getUserdataByKey",ex);
 			} catch (Exception ex2) {
-				log.error(ex2);
+				log.error("getUserdataByKey",ex2);
 			}
 		} else {
 			userdata.setComment("Error: No USER_ID given");
@@ -506,9 +506,9 @@ public class Usermanagement {
 			tx.commit();
 			HibernateUtil.closeSession(idf);
 		} catch (HibernateException ex) {
-			log.error(ex);
+			log.error("updateUserdata",ex);
 		} catch (Exception ex2) {
-			log.error(ex2);
+			log.error("updateUserdata",ex2);
 		}
 		return res;
 	}
@@ -531,9 +531,9 @@ public class Usermanagement {
 			tx.commit();
 			HibernateUtil.closeSession(idf);
 		} catch (HibernateException ex) {
-			log.error(ex);
+			log.error("updateUserdataByKey",ex);
 		} catch (Exception ex2) {
-			log.error(ex2);
+			log.error("updateUserdataByKey",ex2);
 		}
 		return res;
 	}
@@ -550,9 +550,9 @@ public class Usermanagement {
 			tx.commit();
 			HibernateUtil.closeSession(idf);
 		} catch (HibernateException ex) {
-			log.error(ex);
+			log.error("deleteUserdata",ex);
 		} catch (Exception ex2) {
-			log.error(ex2);
+			log.error("deleteUserdata",ex2);
 		}
 		return res;
 	}
@@ -571,9 +571,9 @@ public class Usermanagement {
 			tx.commit();
 			HibernateUtil.closeSession(idf);
 		} catch (HibernateException ex) {
-			log.error(ex);
+			log.error("deleteUserdataByUserAndKey",ex);
 		} catch (Exception ex2) {
-			log.error(ex2);
+			log.error("deleteUserdataByUserAndKey",ex2);
 		}
 		return res;
 	}
@@ -601,9 +601,9 @@ public class Usermanagement {
 			HibernateUtil.closeSession(idf);
 			ret = "success";
 		} catch (HibernateException ex) {
-			log.error(ex);
+			log.error("addUserdata",ex);
 		} catch (Exception ex2) {
-			log.error(ex2);
+			log.error("addUserdata",ex2);
 		}
 		return ret;
 	}

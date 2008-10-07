@@ -3,8 +3,8 @@ package org.openmeetings.app.data.user;
 import java.util.Date;
 import java.util.List;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -15,7 +15,7 @@ import org.openmeetings.app.hibernate.utils.HibernateUtil;
 
 public class Addressmanagement {
 
-	private static final Log log = LogFactory.getLog(Addressmanagement.class);
+	private static final Logger log = LoggerFactory.getLogger(Addressmanagement.class);
 
 	private static Addressmanagement instance = null;
 
@@ -65,9 +65,9 @@ public class Addressmanagement {
 
 			return id;
 		} catch (HibernateException ex) {
-			log.error(ex);
+			log.error("saveAddress",ex);
 		} catch (Exception ex2) {
-			log.error(ex2);
+			log.error("saveAddress",ex2);
 		}
 		return null;
 	}
@@ -90,9 +90,9 @@ public class Addressmanagement {
 			HibernateUtil.closeSession(idf);
 			return addr;
 		} catch (HibernateException ex) {
-			log.error(ex);
+			log.error("getAdressbyId",ex);
 		} catch (Exception ex2) {
-			log.error(ex2);
+			log.error("getAdressbyId",ex2);
 		}
 		return null;
 	}
@@ -136,9 +136,9 @@ public class Addressmanagement {
 
 			return adr;
 		} catch (HibernateException ex) {
-			log.error(ex);
+			log.error("updateAdress",ex);
 		} catch (Exception ex2) {
-			log.error(ex2);
+			log.error("updateAdress",ex2);
 		}
 		return null;
 	}
@@ -166,9 +166,9 @@ public class Addressmanagement {
 
 			return addr;
 		} catch (HibernateException ex) {
-			log.error(ex);
+			log.error("updateAdress",ex);
 		} catch (Exception ex2) {
-			log.error(ex2);
+			log.error("updateAdress",ex2);
 		}
 		return null;
 	}	

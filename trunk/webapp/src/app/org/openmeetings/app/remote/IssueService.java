@@ -1,8 +1,8 @@
 package org.openmeetings.app.remote;
 
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 
@@ -11,7 +11,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class IssueService {
 
-	private static final Log log = LogFactory.getLog(IssueService.class);
+	private static final Logger log = LoggerFactory.getLogger(IssueService.class);
 
 
 }

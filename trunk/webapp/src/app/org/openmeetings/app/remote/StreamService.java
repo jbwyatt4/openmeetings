@@ -12,8 +12,8 @@ import java.io.FileWriter;
 import java.io.BufferedReader;
 import java.io.FileReader;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.XppDriver;
@@ -50,7 +50,7 @@ public class StreamService implements IPendingServiceCallback {
 	private static String folderForRecordings = "recorded";
 	
 	
-	private static final Log log = LogFactory.getLog(StreamService.class);
+	private static final Logger log = LoggerFactory.getLogger(StreamService.class);
 	
 	private static LinkedHashMap<String,LinkedHashMap<String,Object>> roomRecordingList = new LinkedHashMap<String,LinkedHashMap<String,Object>>();
 	

@@ -2,8 +2,8 @@ package org.openmeetings.test.userdata;
 
 import java.util.List;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.openmeetings.app.hibernate.beans.basic.Sessiondata;
 import org.openmeetings.app.data.beans.basic.SearchResult;
 import org.openmeetings.app.hibernate.beans.user.Users;
@@ -14,7 +14,7 @@ import junit.framework.TestCase;
 
 public class UserManagement extends TestCase {
 	
-	private static final Log log = LogFactory.getLog(UserManagement.class);	
+	private static final Logger log = LoggerFactory.getLogger(UserManagement.class);	
 
 	public UserManagement(String testname){
 		super(testname);
