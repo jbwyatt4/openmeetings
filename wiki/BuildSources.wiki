@@ -24,7 +24,7 @@ http://www.openlaszlo.org
 Step-By-Step:
   * Download and Install !OpenLaszlo 4.1.1 (Version > 4.1.1 is needed!)
   * create a directory *openmeetings* into your !OpenLaszlo-WebRoot directory ($LPS-HOME/Server/lps-4.1.1/) ... on Windows your Path if you're using the default one's will look like C:/Program Files/Openlaszlo Server 
-  * Checkout from the SVN using http://openmeetings.googlecode.com/svn/trunk/client/ as root of your Project ($CLIENT_SOURCE_ROOT) into the directory *openmeetings* you have created
+  * Checkout from the SVN using http://code.google.com/p/openmeetings/source/browse/trunk/openmeetings_lps411/ as root of your Project ($CLIENT_SOURCE_ROOT) into the directory *openmeetings* you have created
   * alter the config.xml in ($LPS-HOME/Server/lps-4.1.1/openmeetings/)config.xml (for example C:/Program Files/Openlaszlo Server 4.1.1/Server/lps-4.1.1/openmeetings/config.xml) ... _rtmphostlocal_ should match the IP/domain of your red5-streaming server (if its on the same IP like your Openlaszlo-Server you can leave it blank)
   * Start OpenLaszlo Server and run (lps-4.1.1 = lps-4.1.1 if this is your !Openlaszlo version: http://localhost($LPS-HOST):8080/lps-4.1.1/videoconference/maindebug.lzx?lzr=swf8&lzproxied=solo  (with debugger) and /or http://localhost($LPS-HOST):8080/lps-4.1.1/videoconference/main.lzx?lzr=swf8&lzproxied=solo
 
