@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
+	<!-- Uncomment if you are using the logback plugin for eclipse
 	<consolePlugin/>
+	-->
 	<appender name="CONSOLE"
 		class="ch.qos.logback.core.ConsoleAppender">
 		<layout class="ch.qos.logback.classic.PatternLayout">
@@ -40,6 +42,9 @@
 	<logger name="org.red5.io">
 		<level value="INFO" />
 	</logger>
+    <logger name="org.red5.logging.DerbyLogInterceptor">
+        <level value="WARN" />
+    </logger>
 	<logger name="org.red5.server">
 		<level value="WARN" />
 	</logger>
@@ -167,9 +172,6 @@
 	<logger name="org.apache.catalina">
 		<level value="INFO" />
 	</logger>
-	<logger name="org.apache.catalina.authenticator">
-		<level value="INFO" />
-	</logger>
 	<logger name="org.apache.catalina.realm">
 		<level value="WARN" />
 	</logger>
@@ -178,6 +180,12 @@
 	</logger>
 	<logger name="org.apache.jasper">
 		<level value="INFO" />
+	</logger>
+	<logger name="org.apache.tomcat">
+		<level value="INFO" />
+	</logger>
+	<logger name="org.apache.tomcat.util.net">
+		<level value="WARN" />
 	</logger>
 	<!-- Jetty -->
 	<logger name="org.mortbay">
@@ -212,22 +220,43 @@
 	<logger name="net.sf.ehcache">
 		<level value="INFO" />
 	</logger>
-	<logger name="com.whirlycott.cache">
-		<level value="WARN" />
-	</logger>
-	<logger name="com.whirlycott.cache.policy">
-		<level value="WARN" />
-	</logger>
-	<logger name="org.hibernate">
-		<level value="ERROR" />
-	</logger>
-	<logger name="com.mchange.v2">
-		<level value="ERROR" />
-	</logger>
-	<logger name="org.apache.axis2">
-		<level value="ERROR" />
-	</logger>
-	<logger name="org.apache.axiom">
-		<level value="ERROR" />
-	</logger>
+
+
+  <logger name="org.apache.axis2">
+    <level value="ERROR"/>
+  </logger>
+  <logger name="com.mchange.v2">
+    <level value="ERROR"/>
+  </logger>
+  <logger name="org.hibernate.cache">
+    <level value="ERROR"/>
+  </logger>
+  <logger name="org.apache.axiom">
+    <level value="ERROR"/>
+  </logger>
+  <logger name="org.hibernate.jdbc">
+    <level value="ERROR"/>
+  </logger>
+  <logger name="org.hibernate.SQL">
+    <level value="ERROR"/>
+  </logger>
+  <logger name="org.apache.commons.httpclient">
+    <level value="ERROR"/>
+  </logger>
+  <logger name="org.hibernate.tool.hbm2ddl">
+    <level value="ERROR"/>
+  </logger>
+  <logger name="org.hibernate">
+    <level value="ERROR"/>
+  </logger>
+  <logger name="de.hunsicker.jalopy.io">
+    <level value="ERROR"/>
+  </logger>
+  <logger name="org.apache.axis2.enterprise">
+    <level value="ERROR"/>
+  </logger>
+  <logger name="httpclient.wire.header">
+    <level value="ERROR"/>
+  </logger>
+  
 </configuration>
