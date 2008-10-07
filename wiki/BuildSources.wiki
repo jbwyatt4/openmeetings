@@ -16,7 +16,7 @@ You need to compile two apps:
 
 SVN URL: http://openmeetings.googlecode.com/svn/trunk/openmeetings_lps411/
 
-Browse in Code with Browser: http://code.google.com/p/openmeetings/source/browse/trunk/client/
+Browse in Code with Browser: http://code.google.com/p/openmeetings/source/browse/trunk/openmeetings_lps411/
 
 for compiling the client you need to install the !OpenLaszlo-Server:
 http://www.openlaszlo.org
