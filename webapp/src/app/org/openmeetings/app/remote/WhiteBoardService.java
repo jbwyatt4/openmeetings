@@ -6,8 +6,8 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.openmeetings.app.conference.videobeans.RoomClient;
 import org.openmeetings.app.conference.whiteboard.WhiteboardManagement;
 import org.openmeetings.app.conference.whiteboard.WhiteboardSyncLockObject;
@@ -24,7 +24,7 @@ import org.red5.server.api.service.IServiceCapableConnection;
  */
 public class WhiteBoardService implements IPendingServiceCallback {
 	
-	private static final Log log = LogFactory.getLog(WhiteBoardService.class);	
+	private static final Logger log = LoggerFactory.getLogger(WhiteBoardService.class);	
 	
 	private WhiteBoardService() {}
 	

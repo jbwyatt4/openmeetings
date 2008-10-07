@@ -15,9 +15,6 @@ import java.util.Set;
 import org.slf4j.LoggerFactory; 
 import org.slf4j.Logger;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 import org.red5.server.adapter.ApplicationAdapter;
 import org.red5.server.api.IClient;
 import org.red5.server.api.IConnection;
@@ -54,10 +51,8 @@ import com.thoughtworks.xstream.io.xml.XppDriver;
 public class Application extends ApplicationAdapter implements
 		IPendingServiceCallback, IStreamAwareScopeHandler {
 
-	private static final Log log = LogFactory.getLog(Application.class);
+	private static final Logger log = LoggerFactory.getLogger(Application.class);
 	
-	private static Logger log2 = LoggerFactory.getLogger(Application.class.getName());
-
 	private Long objectIdentifier = new Long(0);
 	private static HashMap<String,RoomClient> ClientList = new HashMap<String,RoomClient>();
 	
@@ -99,7 +94,6 @@ public class Application extends ApplicationAdapter implements
 	public boolean appStart(IScope scope) {
 		try {
 			System.out.println("Custom Webapp start UP "+new Date());
-			log2.debug("Custom Webapp start UP "+new Date());
 			
 			whiteBoardObjectList = new HashMap<Long,HashMap<String,Map>>();
 			webAppPath = scope.getResource("/").getFile().getAbsolutePath();
@@ -112,8 +106,8 @@ public class Application extends ApplicationAdapter implements
 			// init your handler here
 			//System.out.println("################## appStart    ");
 			QuartzSessionClear bwHelp = new QuartzSessionClear();
-			//String jobName = addScheduledJob(300000,bwHelp);
-			String jobName = addScheduledJob(1000,bwHelp);
+			String jobName = addScheduledJob(300000,bwHelp);
+			//String jobName = addScheduledJob(1000,bwHelp);
 			log.debug("jobName: "+jobName);
 		} catch (Exception err) {
 			log.error("[appStart]",err);
@@ -779,7 +773,7 @@ public class Application extends ApplicationAdapter implements
 			IConnection current = Red5.getConnectionLocal();
 			log.debug("current: "+current.getScope().getName());
 			
-			log.debug(current.getClient());
+			log.debug("setUserDomain",current.getClient());
 			log.debug(current.getClient().getId());
 			String streamid = current.getClient().getId();
 			RoomClient currentClient = ClientList.get(streamid);
@@ -848,7 +842,7 @@ public class Application extends ApplicationAdapter implements
 			IConnection current = Red5.getConnectionLocal();
 			log.debug("current: "+current.getScope().getName());
 			
-			log.debug(current.getClient());
+			log.debug("setUserroom",current.getClient());
 			log.debug(current.getClient().getId());
 			String streamid = current.getClient().getId();
 			currentClient = ClientList.get(streamid);

@@ -7,8 +7,8 @@ import java.util.*;
 
 import javax.activation.*;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.openmeetings.app.data.basic.Configurationmanagement;
 
 /**
@@ -18,7 +18,7 @@ import org.openmeetings.app.data.basic.Configurationmanagement;
  */
 public class MailHandler {
 
-	private static final Log log = LogFactory.getLog(MailHandler.class);
+	private static final Logger log = LoggerFactory.getLogger(MailHandler.class);
 
 	public MailHandler() {
 	}

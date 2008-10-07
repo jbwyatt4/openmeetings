@@ -9,15 +9,15 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.openmeetings.app.data.basic.Configurationmanagement;
 import org.openmeetings.app.remote.Application;
 import org.openmeetings.utils.math.CalendarPatterns;
 
 public class GenerateSWF {
 	
-	private static final Log log = LogFactory.getLog(GenerateSWF.class);
+	private static final Logger log = LoggerFactory.getLogger(GenerateSWF.class);
 
 	private static GenerateSWF instance;
 

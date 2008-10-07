@@ -4,8 +4,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Iterator;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -23,7 +23,7 @@ import org.openmeetings.app.templates.RegisterUserTemplate;
 
 public class Emailmanagement {
 
-	private static final Log log = LogFactory.getLog(Emailmanagement.class);
+	private static final Logger log = LoggerFactory.getLogger(Emailmanagement.class);
 
 	public Emailmanagement() {
 	}
@@ -85,9 +85,9 @@ public class Emailmanagement {
 			HibernateUtil.closeSession(idf);
 			return lt;
 		} catch (HibernateException ex) {
-			log.error(ex);
+			log.error("getemails",ex);
 		} catch (Exception ex2) {
-			log.error(ex2);
+			log.error("getemails",ex2);
 		}
 		return null;
 	}
@@ -106,9 +106,9 @@ public class Emailmanagement {
 			HibernateUtil.closeSession(idf);
 			return e;
 		} catch (HibernateException ex) {
-			log.error(ex);
+			log.error("getAdresses_EmailsByMail",ex);
 		} catch (Exception ex2) {
-			log.error(ex2);
+			log.error("getAdresses_EmailsByMail",ex2);
 		}
 		return null;
 	}	
@@ -126,9 +126,9 @@ public class Emailmanagement {
 			HibernateUtil.closeSession(idf);
 			return lt;
 		} catch (HibernateException ex) {
-			log.error(ex);
+			log.error("getemailsCon",ex);
 		} catch (Exception ex2) {
-			log.error(ex2);
+			log.error("getemailsCon",ex2);
 		}
 		return null;
 	}
@@ -165,9 +165,9 @@ public class Emailmanagement {
 
 				return mail_id;
 			} catch (HibernateException ex) {
-				log.error("Error: " ,ex);
+				log.error("Error registerEmail: " ,ex);
 			} catch (Exception ex2) {
-				log.error("Error: " ,ex2);
+				log.error("Error registerEmail: " ,ex2);
 			}
 		}
 		return null;
@@ -200,9 +200,9 @@ public class Emailmanagement {
 			return email_id;
 
 		} catch (HibernateException ex) {
-			log.error("Error: " ,ex);
+			log.error("registerEmail: " ,ex);
 		} catch (Exception ex2) {
-			log.error("Error: " ,ex2);
+			log.error("registerEmail: " ,ex2);
 		}
 
 		return null;
@@ -279,9 +279,9 @@ public class Emailmanagement {
 			tx.commit();
 			HibernateUtil.closeSession(idf);
 		} catch (HibernateException ex) {
-			log.error(ex);
+			log.error("deleteEMailByID",ex);
 		} catch (Exception ex2) {
-			log.error(ex2);
+			log.error("deleteEMailByID",ex2);
 		}
 	}
 
@@ -301,9 +301,9 @@ public class Emailmanagement {
 			HibernateUtil.closeSession(idf);
 			result = "Erfolgreich" + deletedEntities;
 		} catch (HibernateException ex) {
-			log.error(ex);
+			log.error("deleteEMailByUserID",ex);
 		} catch (Exception ex2) {
-			log.error(ex2);
+			log.error("deleteEMailByUserID",ex2);
 		}
 		return result;
 	}
@@ -332,9 +332,9 @@ public class Emailmanagement {
 				return false;
 			}			
 		} catch (HibernateException ex) {
-			log.error("Error: " ,ex);
+			log.error("checkUserEMail: " ,ex);
 		} catch (Exception ex2) {
-			log.error("Error: " ,ex2);
+			log.error("checkUserEMail: " ,ex2);
 		}
 		return true;
 	}
@@ -382,9 +382,9 @@ public class Emailmanagement {
 			//            tx.commit();
 			//            HibernateUtil.closeSession(idf);
 		} catch (HibernateException ex) {
-			log.error(ex);
+			log.error("updateContactEmail",ex);
 		} catch (Exception ex2) {
-			log.error(ex2);
+			log.error("updateContactEmail",ex2);
 		}
 		return res;
 	}

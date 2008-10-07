@@ -6,8 +6,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.LinkedList;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 //import org.red5.server.adapter.ApplicationAdapter;
 import org.red5.server.api.IClient;
 import org.red5.server.api.IConnection;
@@ -28,7 +28,7 @@ import org.openmeetings.app.conference.videobeans.PollType;
  */
 public class PollService {
 	
-	private static final Log log = LogFactory.getLog(PollService.class);
+	private static final Logger log = LoggerFactory.getLogger(PollService.class);
 	
 	private static HashMap<Long,RoomPoll> pollList = new HashMap<Long,RoomPoll>();
 
@@ -88,7 +88,7 @@ public class PollService {
 		log.debug("getBandwidthConfig: "+myclient.getAttribute("role"));
 		if(myclient.getAttribute("role").equals("admin")){
 			log.debug("getBandwidthConfig"+config);
-			log.debug(config);
+			log.debug("saveBandwidthConfig",config);
 			
 			// {videoBandwidth=0, upstreamBandwidth=8192, overallBandwidth=2097152, minpingTime=500, maxpingTime=1000, maxBurst=8388608, groupName=Group 1, downstreamBandwidth=8192, description=This is for a bad Client Connection, burst=8388608, audioBandwidth=0, bandwidthName=badconnection}
 		    

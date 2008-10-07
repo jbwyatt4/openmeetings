@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.Date;
 import java.util.Set;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -19,7 +19,7 @@ import org.openmeetings.app.hibernate.utils.HibernateUtil;
 
 public class Navimanagement {
 
-	private static final Log log = LogFactory.getLog(Navimanagement.class);
+	private static final Logger log = LoggerFactory.getLogger(Navimanagement.class);
 
 	private static Navimanagement instance;
 
@@ -73,9 +73,9 @@ public class Navimanagement {
 			
 			return navi;
 		} catch (HibernateException ex) {
-			log.error(ex);
+			log.error("getMainMenu",ex);
 		} catch (Exception ex2) {
-			log.error(ex2);
+			log.error("getMainMenu",ex2);
 		}
 		return null;
 	}
@@ -108,9 +108,9 @@ public class Navimanagement {
 			HibernateUtil.closeSession(idf);
 
 		} catch (HibernateException ex) {
-			log.error(ex);
+			log.error("addGlobalStructure",ex);
 		} catch (Exception ex2) {
-			log.error(ex2);
+			log.error("addGlobalStructure",ex2);
 		}
 	}
 
@@ -143,9 +143,9 @@ public class Navimanagement {
 			HibernateUtil.closeSession(idf);
 
 		} catch (HibernateException ex) {
-			log.error(ex);
+			log.error("addMainStructure",ex);
 		} catch (Exception ex2) {
-			log.error(ex2);
+			log.error("addMainStructure",ex2);
 		}
 	}
 
@@ -178,9 +178,9 @@ public class Navimanagement {
 			HibernateUtil.closeSession(idf);
 
 		} catch (HibernateException ex) {
-			log.error(ex);
+			log.error("addSubStructure",ex);
 		} catch (Exception ex2) {
-			log.error(ex2);
+			log.error("addSubStructure",ex2);
 		}
 	}
 }

@@ -5,8 +5,8 @@ import java.util.Iterator;
 import java.util.LinkedList;
 
 import org.apache.axis2.AxisFault;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import org.openmeetings.app.conference.videobeans.RoomClient;
 import org.openmeetings.app.data.basic.Sessionmanagement;
@@ -21,7 +21,7 @@ import org.openmeetings.app.remote.ConferenceService;
 
 public class RoomService {
 	
-	private static final Log log = LogFactory.getLog(RoomService.class);
+	private static final Logger log = LoggerFactory.getLogger(RoomService.class);
 	
 	//TODO: Not implemented yet
 //	public List<Rooms_Organisation> getRoomsByOrganisationAndType(String SID, long organisation_id, long roomtypes_id) {

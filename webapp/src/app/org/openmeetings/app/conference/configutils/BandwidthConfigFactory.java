@@ -7,12 +7,12 @@ import org.w3c.dom.*;
 import org.w3c.dom.Document;
 import org.apache.xerces.parsers.DOMParser;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class BandwidthConfigFactory {
  
-	protected static Log log = LogFactory.getLog(BandwidthConfigFactory.class.getName());
+	protected static Logger log = LoggerFactory.getLogger(BandwidthConfigFactory.class.getName());
 
 	protected static String bandwidthonfigFileName = "WEB-INF/configbandwidth.xml";
 	

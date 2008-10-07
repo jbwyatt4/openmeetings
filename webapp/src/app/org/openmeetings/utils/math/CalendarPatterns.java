@@ -4,8 +4,8 @@ import java.util.Date;
 import java.util.Locale;
 import java.text.SimpleDateFormat;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author Sebastian Wagner
@@ -14,7 +14,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class CalendarPatterns {
 	
-	private static final Log log = LogFactory.getLog(CalendarPatterns.class);
+	private static final Logger log = LoggerFactory.getLogger(CalendarPatterns.class);
 	
 	public static SimpleDateFormat dateFormat__ddMMyyyyHHmmss = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
 	public static SimpleDateFormat dateFormat__ddMMyyyy = new SimpleDateFormat("dd.MM.yyyy");

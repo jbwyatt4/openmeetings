@@ -3,8 +3,8 @@ package org.openmeetings.app.conference.configutils;
 import java.util.HashMap;
 import java.util.Iterator;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.apache.xerces.parsers.DOMParser;
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
@@ -16,7 +16,7 @@ import org.openmeetings.app.conference.videobeans.UserSecurity;
 public class UserConfigFactory {
  
 
-	protected static Log log = LogFactory.getLog(UserConfigFactory.class.getName());
+	protected static Logger log = LoggerFactory.getLogger(UserConfigFactory.class.getName());
 
 	protected static String userconfigFileName = "WEB-INF/configbandwidth.xml";
 	

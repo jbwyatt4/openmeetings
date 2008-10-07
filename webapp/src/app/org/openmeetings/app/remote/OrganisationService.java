@@ -3,8 +3,8 @@ package org.openmeetings.app.remote;
 import java.util.LinkedHashMap;
 import java.util.List;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.openmeetings.app.data.basic.Sessionmanagement;
 import org.openmeetings.app.data.beans.basic.SearchResult;
 import org.openmeetings.app.data.user.Usermanagement;
@@ -18,7 +18,7 @@ import org.openmeetings.app.hibernate.beans.domain.Organisation;
  */
 public class OrganisationService {
 	
-	private static final Log log = LogFactory.getLog(OrganisationService.class);
+	private static final Logger log = LoggerFactory.getLogger(OrganisationService.class);
 	
 	/**
 	 * Loads a List of all availible Organisations (ADmin-role only)

@@ -3,8 +3,8 @@ package org.openmeetings.app.data.basic;
 import java.util.List;
 import java.util.Date;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -20,7 +20,7 @@ import org.openmeetings.app.hibernate.beans.lang.FieldLanguage;
  */
 public class Languagemanagement {
 
-	private static final Log log = LogFactory.getLog(Languagemanagement.class);
+	private static final Logger log = LoggerFactory.getLogger(Languagemanagement.class);
 
 	private Languagemanagement() {
 	}

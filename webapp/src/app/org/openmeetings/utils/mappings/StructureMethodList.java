@@ -4,13 +4,13 @@ import java.util.LinkedHashMap;
 import java.lang.reflect.Method;
 import java.lang.reflect.Field;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.apache.commons.lang.StringUtils;
 
 public class StructureMethodList {
 	
-	private static final Log log = LogFactory.getLog(StructureMethodList.class);
+	private static final Logger log = LoggerFactory.getLogger(StructureMethodList.class);
 	
 	private StructureMethodList() {}
 

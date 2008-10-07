@@ -4,8 +4,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.LinkedHashMap;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.openmeetings.app.data.basic.Sessionmanagement;
 import org.openmeetings.app.data.beans.basic.SearchResult;
 import org.openmeetings.app.data.user.Usermanagement;
@@ -22,7 +22,7 @@ import org.red5.io.utils.ObjectMap;
  */
 public class UserService {
 	
-	private static final Log log = LogFactory.getLog(UserService.class);	
+	private static final Logger log = LoggerFactory.getLogger(UserService.class);	
 	
 	/**
 	 * get your own user-object

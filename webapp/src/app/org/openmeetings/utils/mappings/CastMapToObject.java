@@ -10,8 +10,8 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Class to cast any LinkedHashMap to its JavaBean repraesentant
@@ -38,7 +38,7 @@ import org.apache.commons.logging.LogFactory;
 
 public class CastMapToObject {
 	
-	private static final Log log = LogFactory.getLog(CastMapToObject.class);
+	private static final Logger log = LoggerFactory.getLogger(CastMapToObject.class);
 	
 	private CastMapToObject() {}
 

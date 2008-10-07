@@ -1,7 +1,7 @@
 package org.openmeetings.test.adresses;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.openmeetings.app.hibernate.beans.adresses.Adresses;
 import org.openmeetings.app.data.user.Addressmanagement;
 
@@ -9,7 +9,7 @@ import junit.framework.TestCase;
 
 public class TestgetAdress extends TestCase {
 	
-	private static final Log log = LogFactory.getLog(TestgetAdress.class);
+	private static final Logger log = LoggerFactory.getLogger(TestgetAdress.class);
 	
 	public TestgetAdress(String testname){
 		super(testname);

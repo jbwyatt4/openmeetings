@@ -6,15 +6,15 @@ import java.io.FileWriter;
 import java.io.PrintWriter;
 
 import junit.framework.TestCase;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.XppDriver;
 
 public class ConvertGifs extends TestCase {
 	
-	private static final Log log = LogFactory.getLog(ConvertGifs.class);
+	private static final Logger log = LoggerFactory.getLogger(ConvertGifs.class);
 	
 	public ConvertGifs(String testname){
 		super(testname);

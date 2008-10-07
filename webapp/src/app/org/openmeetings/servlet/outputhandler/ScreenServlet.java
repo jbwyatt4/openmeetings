@@ -19,8 +19,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.openmeetings.app.conference.videobeans.RoomClient;
 import org.openmeetings.app.data.basic.Sessionmanagement;
 import org.openmeetings.app.data.user.Usermanagement;
@@ -30,7 +30,7 @@ import org.openmeetings.app.remote.Application;
 
 public class ScreenServlet extends HttpServlet {
 	
-	private static final Log log = LogFactory.getLog(ScreenServlet.class);
+	private static final Logger log = LoggerFactory.getLogger(ScreenServlet.class);
 
 	/**
 	 * 
@@ -122,7 +122,7 @@ public class ScreenServlet extends HttpServlet {
 						log.debug("Current_dir: " + current_dir);
 	
 						String working_dir = "";
-						log.debug(MultipartRequest.MAX_READ_BYTES);
+						log.debug("MAX_READ_BYTES",MultipartRequest.MAX_READ_BYTES);
 	
 						working_dir = current_dir + "desktop" + File.separatorChar + roomName + File.separatorChar;
 	

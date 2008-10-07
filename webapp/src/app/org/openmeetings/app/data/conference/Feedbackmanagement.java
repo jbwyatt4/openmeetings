@@ -1,7 +1,7 @@
 package org.openmeetings.app.data.conference;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.openmeetings.app.hibernate.beans.lang.Fieldlanguagesvalues;
 import org.openmeetings.app.data.basic.Configurationmanagement;
 import org.openmeetings.app.data.basic.Fieldmanagment;
@@ -9,7 +9,7 @@ import org.openmeetings.app.templates.FeedbackTemplate;
 import org.openmeetings.utils.mail.MailHandler;
 
 public class Feedbackmanagement {
-	private static final Log log = LogFactory.getLog(Feedbackmanagement.class);
+	private static final Logger log = LoggerFactory.getLogger(Feedbackmanagement.class);
 
 	private static Feedbackmanagement instance;
 

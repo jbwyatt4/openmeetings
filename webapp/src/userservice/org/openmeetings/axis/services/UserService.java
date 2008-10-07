@@ -1,7 +1,7 @@
 package org.openmeetings.axis.services;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.openmeetings.app.remote.MainService;
 import org.openmeetings.app.data.basic.AuthLevelmanagement;
 import org.openmeetings.app.data.basic.ErrorManagement;
@@ -19,7 +19,7 @@ import com.thoughtworks.xstream.io.xml.XppDriver;
 
 public class UserService {
 
-	private static final Log log = LogFactory.getLog(UserService.class);
+	private static final Logger log = LoggerFactory.getLogger(UserService.class);
 	
 	/**
 	 * load this session id before doing anything else
