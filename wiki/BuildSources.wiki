@@ -14,7 +14,7 @@ You need to compile two apps:
 
 = Openlaszlo Client (Client-Side) =
 
-SVN URL: http://openmeetings.googlecode.com/svn/trunk/client/
+SVN URL: http://openmeetings.googlecode.com/svn/trunk/openmeetings_lps411/
 
 Browse in Code with Browser: http://code.google.com/p/openmeetings/source/browse/trunk/client/
 
@@ -22,47 +22,70 @@ for compiling the client you need to install the !OpenLaszlo-Server:
 http://www.openlaszlo.org
 
 Step-By-Step:
-  * Download and Install !OpenLaszlo 4.0.10 (Version > 4.0.5 is needed!)
-  * create a directory *openmeetings* into your !OpenLaszlo-WebRoot directory ($LPS-HOME/Server/lps-4.0.x/) ... on Windows your Path if you're using the default one's will look like C:/Program Files/Openlaszlo Server 
+  * Download and Install !OpenLaszlo 4.1.1 (Version > 4.1.1 is needed!)
+  * create a directory *openmeetings* into your !OpenLaszlo-WebRoot directory ($LPS-HOME/Server/lps-4.1.1/) ... on Windows your Path if you're using the default one's will look like C:/Program Files/Openlaszlo Server 
   * Checkout from the SVN using http://openmeetings.googlecode.com/svn/trunk/client/ as root of your Project ($CLIENT_SOURCE_ROOT) into the directory *openmeetings* you have created
-  * alter the config.xml in ($LPS-HOME/Server/lps-4.0.x/openmeetings/)config.xml (for example C:/Program Files/Openlaszlo Server 4.0.10/Server/lps-4.0.10/openmeetings/config.xml) ... _rtmphostlocal_ should match the IP/domain of your red5-streaming server (if its on the same IP like your Openlaszlo-Server you can leave it blank)
-  * Start OpenLaszlo Server and run (lps-4.0.x = lps-4.0.10 if this is your !Openlaszlo version: http://localhost($LPS-HOST):8080/lps-4.0.x/videoconference/maindebug.lzx?lzr=swf8&lzproxied=solo  (with debugger) and /or http://localhost($LPS-HOST):8080/lps-4.0.x/videoconference/main.lzx?lzr=swf8&lzproxied=solo
+  * alter the config.xml in ($LPS-HOME/Server/lps-4.1.1/openmeetings/)config.xml (for example C:/Program Files/Openlaszlo Server 4.1.1/Server/lps-4.1.1/openmeetings/config.xml) ... _rtmphostlocal_ should match the IP/domain of your red5-streaming server (if its on the same IP like your Openlaszlo-Server you can leave it blank)
+  * Start OpenLaszlo Server and run (lps-4.1.1 = lps-4.1.1 if this is your !Openlaszlo version: http://localhost($LPS-HOST):8080/lps-4.1.1/videoconference/maindebug.lzx?lzr=swf8&lzproxied=solo  (with debugger) and /or http://localhost($LPS-HOST):8080/lps-4.1.1/videoconference/main.lzx?lzr=swf8&lzproxied=solo
 
 = Java Webapp (Server-Side) =
 
-*These instructions refer to the Sources of OpenMeetings starting with r1479*
-*That means we use red5-0.7.x here*
-*It is recommended to use Java 6 for running red5 cause it is starting faster*
+  * We use JDK5 + latest red5 from trunk (red5-0.8.x) for the current source in the SVN
 
-  * Install red5-r2822 from the snapshot dir of red5: http://red5.googlecode.com/svn/trunk/snapshots/
+  * Install red5 >= 0.8.0 from the snapshot dir of red5: http://red5.googlecode.com, you maybe will need to compile red5 from Source too!
   * Install it
   * there is an error in red5's configuration of Log-Files, so you need to add the following line's into the global logback.xml of $RED5_HOME/conf/logback.xml:
 
   {{{
-	<logger name="org.hibernate">
-		<level value="ERROR" />
-	</logger>
-	<logger name="com.mchange.v2">
-		<level value="ERROR" />
-	</logger>
-	<logger name="org.apache.axis2">
-		<level value="ERROR" />
-	</logger>
-	<logger name="org.apache.axiom">
-		<level value="ERROR" />
-	</logger>
+  <logger name="org.apache.axis2">
+    <level value="ERROR"/>
+  </logger>
+  <logger name="com.mchange.v2">
+    <level value="ERROR"/>
+  </logger>
+  <logger name="org.hibernate.cache">
+    <level value="ERROR"/>
+  </logger>
+  <logger name="org.apache.axiom">
+    <level value="ERROR"/>
+  </logger>
+  <logger name="org.hibernate.jdbc">
+    <level value="ERROR"/>
+  </logger>
+  <logger name="org.hibernate.SQL">
+    <level value="ERROR"/>
+  </logger>
+  <logger name="org.apache.commons.httpclient">
+    <level value="ERROR"/>
+  </logger>
+  <logger name="org.hibernate.tool.hbm2ddl">
+    <level value="ERROR"/>
+  </logger>
+  <logger name="org.hibernate">
+    <level value="ERROR"/>
+  </logger>
+  <logger name="de.hunsicker.jalopy.io">
+    <level value="ERROR"/>
+  </logger>
+  <logger name="org.apache.axis2.enterprise">
+    <level value="ERROR"/>
+  </logger>
+  <logger name="httpclient.wire.header">
+    <level value="ERROR"/>
+  </logger>
   }}}
   or replace with this one: http://openmeetings.googlecode.com/svn/trunk/patches/logback.xml
 
   * Download (SVN - Checkout) from:
 http://openmeetings.googlecode.com/svn/trunk/webapp/
   * change dir your local copy
-  * Run: ant dist (JAVA_HOME must be set and point to a JDK >= 1.5 and you need ant version >= 1.7)
+  * Run: ant dist (JAVA_HOME must be set and point to a JDK = 1.5 and you need ant version = 1.7)
   * there is now a directory dist, inside of that directory there is a compiled openmeetings-webapp with the name *openmeetings*
   * use the compiled openmeetings-webapp and copy it to $RED5_HOME/webapps
   * do the usual install process of openmeetings
 
 Additional Notes:
+  # there are some Issues with Logging and Exceptions in Red5, we try to fix them. For the moment you can ignore them
   # You have to copy the Laszlo-Client from the Step-By-Step scenario into it to make a complete Binary, but you can also run it from inside OpenLaszlo Server. You only need to place a *crossdomain.xml* into $RED5_HOME/webapps/root, otherwise the Flash-Security-Sandbox will not allow Up- or Downloads.
   # If you want to keep the previous installation and only change some Java code but no Database structure it is enough if you just copy/overwrite the folder *WEB-INF* and restart red5.
 
