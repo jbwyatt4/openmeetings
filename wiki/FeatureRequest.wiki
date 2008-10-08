@@ -13,6 +13,7 @@ User-List: http://groups.google.com/group/openmeetings-user
   * resizeable video-views at conference modus (see Issue194) (by c.kung)
   * support for right-to-left languages (see Issue177) (by M.Omr) 
   * only colorize chat-username not text (see Issue202) (by p...@steele.us) 
+  * shift sources to LPS-4.1.1 and latest red5 (0.5.3)
 
 = Release 0.6 =
 
