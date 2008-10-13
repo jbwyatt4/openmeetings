@@ -6,6 +6,7 @@
     
     <handler name="oninit">
     	LzModeManager.makeModal(this);
+        canvas.currentUploadWindow = this;
     </handler>
     
     <handler name="onclose">
@@ -30,9 +31,13 @@
  	<fileUpload name="myFileUpload" isOnlyImage="${ this.parent.isOnlyImage }" 
  		 isOnlyPpt="${ this.parent.isOnlyPpt }" isOnlyProfile="${ this.parent.isOnlyProfile }" 
  		 isOnlyXml="${ this.parent.isOnlyXml }">
-		<method name="onComplete" args="fr">
+        
+        <method name="onComplete" args="fr">
+            if ($debug) Debug.write("oncomplete ",fr);
+        </method>
+		<method name="onCompleteByRemote">
 			
-			Debug.write("oncomplete ",fr);
+			if ($debug) Debug.write("onCompleteByRemote ");
 			this.parent.progressBar.setValue(100);
 			this.parent.upload.setAttribute('enabled', false);
 			this.parent.upload.setAttribute("visible",false);
@@ -56,6 +61,7 @@
 				parent.returnObj.sendRefresh();
 			}
 			this.parent.close();
+            
 		</method>
 
 		<method name="onProgress" args="fr, bytesLoaded, bytesTotal"><![CDATA[
@@ -107,6 +113,7 @@
 			<![CDATA[
 			var uploadurl = 'http://'+canvas.rtmphostlocal+':'+canvas.red5httpport+'/'+canvas.webAppRootKey+'/UploadHandler?' +
 					'moduleName='+this.parent.uploadmodule +
+                    '&publicSID='+canvas.publicSID +
 					'&room_id='+hib.currentroomid +
 					'&sid='+canvas.sessionId;
             if ($debug) Debug.write("uploadurl: ",uploadurl);
