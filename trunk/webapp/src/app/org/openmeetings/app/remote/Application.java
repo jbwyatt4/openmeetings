@@ -177,7 +177,15 @@ public class Application extends ApplicationAdapter implements
 			log.debug("Client connected xmlcrmred5 jar " + client.getId() + " conn "+ client);
 			log.debug("Setting stream xmlcrmred5 xmlcrmred5 id: " + getClients().size()); // just a unique number
 			service.invoke("setId", new Object[] { client.getId() },this);
-	
+
+			IScope thisScope = scope.getScope(room.getName());
+			
+			log.debug("room.getName(): "+room.getName());
+			log.debug("thisScope: "+thisScope);
+			
+			IScope scopeHibernate = scope.getScope("hibernate");
+			log.debug("scopeHibernate "+scopeHibernate);
+			
 			//Store the Connection into a bean and add it to the HashMap
 			RoomClient rcm = new RoomClient();
 			rcm.setConnectedSince(new Date());
@@ -1255,20 +1263,25 @@ public class Application extends ApplicationAdapter implements
 		}
 	}
 
-	public void sendMessageWithClientByUserId(Object message, String userId) {
+	public synchronized void sendMessageWithClientByUserId(Object message, String userId) {
 		try {
 			
 			IScope scopeHibernate = scope.getScope("hibernate");
 			
+			log.debug("scopeHibernate "+scopeHibernate);
+			
 			if (scopeHibernate!=null){
 				//Notify the clients of the same scope (room) with user_id
 				Iterator<IConnection> it = scope.getScope("hibernate").getConnections();
+				log.debug("it "+it);
 				if (it!=null) {
 					while (it.hasNext()) {
-						IConnection conn = it.next();				
+						IConnection conn = it.next();		
+						log.debug("conn "+conn);
 						RoomClient rcl = ClientList.get(conn.getClient().getId());
 						if (rcl.getUser_id().equals(userId)){
 							((IServiceCapableConnection) conn).invoke("newMessageByRoomAndDomain",new Object[] { message }, this);
+							log.debug("newMessageByRoomAndDomain"+message);
 						}
 					}
 				}

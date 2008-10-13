@@ -324,7 +324,10 @@ public class UploadHandler extends HttpServlet {
 						hs.put("error", returnError);
 						hs.put("fileName", completeName);	
 						
+						log.debug("moduleName.equals(userprofile) ? "+moduleName);
+						
 						if (!moduleName.equals("userprofile")) {
+							log.debug("moduleName.equals(userprofile) ! ");
 							Application.getInstance().sendMessageWithClientByUserId(hs,users_id.toString());
 						}
 						
