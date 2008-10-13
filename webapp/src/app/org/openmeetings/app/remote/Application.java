@@ -14,6 +14,7 @@ import java.util.Set;
 
 import org.slf4j.LoggerFactory; 
 import org.slf4j.Logger;
+import org.springframework.context.ApplicationContext;
 
 import org.red5.server.adapter.ApplicationAdapter;
 import org.red5.server.api.IClient;
@@ -23,6 +24,7 @@ import org.red5.server.api.Red5;
 import org.red5.server.api.service.IPendingServiceCall;
 import org.red5.server.api.service.IPendingServiceCallback;
 import org.red5.server.api.service.IServiceCapableConnection;
+import org.red5.server.api.service.ServiceUtils;
 import org.red5.server.api.stream.IBroadcastStream;
 import org.red5.server.api.stream.IPlayItem;
 import org.red5.server.api.stream.IPlaylistSubscriberStream;
@@ -80,6 +82,7 @@ public class Application extends ApplicationAdapter implements
 	
 	//The Global WebApp Path
 	public static String webAppPath = "";
+	public static String webAppRootKey = "openmeetings";
 	public static String configDirName = "conf";
 	
 	private static long broadCastCounter = 0;
@@ -1263,25 +1266,35 @@ public class Application extends ApplicationAdapter implements
 		}
 	}
 
-	public synchronized void sendMessageWithClientByUserId(Object message, String userId) {
+	public synchronized void sendMessageWithClientByPublicSID(Object message, String publicSID) {
 		try {
+			//ApplicationContext appCtx = getContext().getApplicationContext();
 			
-			IScope scopeHibernate = scope.getScope("hibernate");
+			IScope globalScope = getContext().getGlobalScope();
 			
-			log.debug("scopeHibernate "+scopeHibernate);
+			IScope webAppKeyScope = globalScope.getScope(Application.webAppRootKey);
+			
+			//log.debug("webAppKeyScope "+webAppKeyScope);
+			
+			IScope scopeHibernate = webAppKeyScope.getScope("hibernate");
+			
+			//log.debug("scopeHibernate "+scopeHibernate);
 			
 			if (scopeHibernate!=null){
 				//Notify the clients of the same scope (room) with user_id
-				Iterator<IConnection> it = scope.getScope("hibernate").getConnections();
-				log.debug("it "+it);
+				Iterator<IConnection> it = webAppKeyScope.getScope("hibernate").getConnections();
+				//log.debug("it "+it);
 				if (it!=null) {
 					while (it.hasNext()) {
 						IConnection conn = it.next();		
-						log.debug("conn "+conn);
+						//log.debug("conn "+conn);
+						//log.debug("conn.getClient().getId() "+conn.getClient().getId());
 						RoomClient rcl = ClientList.get(conn.getClient().getId());
-						if (rcl.getUser_id().equals(userId)){
+						//log.debug("rcl "+rcl+" rcl.getUser_id(): "+rcl.getPublicSID()+" publicSID: "+publicSID+ " IS EQUAL? "+rcl.getPublicSID().equals(publicSID));
+						if (rcl.getPublicSID().equals(publicSID)){
+							//log.debug("IS EQUAL ");
 							((IServiceCapableConnection) conn).invoke("newMessageByRoomAndDomain",new Object[] { message }, this);
-							log.debug("newMessageByRoomAndDomain"+message);
+							log.debug("sendMessageWithClientByPublicSID RPC:newMessageByRoomAndDomain"+message);
 						}
 					}
 				}
