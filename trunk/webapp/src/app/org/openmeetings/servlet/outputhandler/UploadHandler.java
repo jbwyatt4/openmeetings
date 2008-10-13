@@ -103,6 +103,13 @@ public class UploadHandler extends HttpServlet {
 				
 				Long users_id = Sessionmanagement.getInstance().checkSession(sid);
 				Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
+				
+				
+				String publicSID = httpServletRequest.getParameter("publicSID");
+				if (publicSID == null) {
+					//Always ask for Public SID
+					return;
+				}
 
 				if (user_level > 0) {
 					
@@ -328,7 +335,8 @@ public class UploadHandler extends HttpServlet {
 						
 						if (!moduleName.equals("userprofile")) {
 							log.debug("moduleName.equals(userprofile) ! ");
-							Application.getInstance().sendMessageWithClientByUserId(hs,users_id.toString());
+							
+							Application.getInstance().sendMessageWithClientByPublicSID(hs,publicSID);
 						}
 						
 					}
@@ -339,7 +347,7 @@ public class UploadHandler extends HttpServlet {
 			e.printStackTrace();
 			throw new ServletException(e);
 		}
-
+		return;
 	}
 	
 	private void deleteUserProfileFilesStoreTemp(String current_dir, Long users_id) throws Exception{
