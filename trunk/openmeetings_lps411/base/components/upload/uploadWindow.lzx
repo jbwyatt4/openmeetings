@@ -31,32 +31,36 @@
  		 isOnlyPpt="${ this.parent.isOnlyPpt }" isOnlyProfile="${ this.parent.isOnlyProfile }" 
  		 isOnlyXml="${ this.parent.isOnlyXml }">
 		<method name="onComplete" args="fr">
-			
-			Debug.write("oncomplete ",fr);
-			this.parent.progressBar.setValue(100);
-			this.parent.upload.setAttribute('enabled', false);
-			this.parent.upload.setAttribute("visible",false);
-			this.parent.browse.setAttribute("visible",false);
-			this.parent.txtFile.setAttribute("visible",false);
+            if ($debug) Debug.write("oncomplete ",fr);
+        </method>
+        <method name="onCompleteByRemote">
+            
+            if ($debug) Debug.write("onCompleteByRemote ");
+            this.parent.progressBar.setValue(100);
+            this.parent.upload.setAttribute('enabled', false);
+            this.parent.upload.setAttribute("visible",false);
+            this.parent.browse.setAttribute("visible",false);
+            this.parent.txtFile.setAttribute("visible",false);
 
-			if (parent.isdefaultreturn) {
-	  		var tempSendArray = new Array ();
-	  		tempSendArray[0] = 'fileslist';
-	  		var nowTime = new Date();
-	  		var datumsString = nowTime.getHours()+':'+nowTime.getMinutes();
-	  		tempSendArray[1] = datumsString;
-  			//Debug.write("Setting Message");
-  			tempSendArray[2] = 'newfile';
-  			tempSendArray[3] = canvas.currentusename;
-	  		//Debug.write("send: ",tempSendArray);
-	  		canvas.objMessage = tempSendArray;
-	  		canvas.thishib.sendMessage.doCall();
+            if (parent.isdefaultreturn) {
+            var tempSendArray = new Array ();
+            tempSendArray[0] = 'fileslist';
+            var nowTime = new Date();
+            var datumsString = nowTime.getHours()+':'+nowTime.getMinutes();
+            tempSendArray[1] = datumsString;
+            //Debug.write("Setting Message");
+            tempSendArray[2] = 'newfile';
+            tempSendArray[3] = canvas.currentusename;
+            //Debug.write("send: ",tempSendArray);
+            canvas.objMessage = tempSendArray;
+            canvas.thishib.sendMessage.doCall();
 
-			} else {
-				parent.returnObj.sendRefresh();
-			}
-			this.parent.close();
-		</method>
+            } else {
+                parent.returnObj.sendRefresh();
+            }
+            this.parent.close();
+            
+        </method>
 
 		<method name="onProgress" args="fr, bytesLoaded, bytesTotal"><![CDATA[
 			this.parent.progressBar.setValue(bytesLoaded * 100 / bytesTotal);
