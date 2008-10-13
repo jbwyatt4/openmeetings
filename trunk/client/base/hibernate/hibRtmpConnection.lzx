@@ -683,7 +683,7 @@
         <netRemoteCallHib name="newMessageByRoomAndDomain" funcname="newMessageByRoomAndDomain">
             <handler name="ondata" args="value">
                 //The onResult-Handler will be called be the rtmpconnection
-                //Debug.write("newMessageByRoomAndDomain: ",value);    
+                if ($debug) Debug.write("newMessageByRoomAndDomain: ",value);    
                 <![CDATA[
                     if (value.message=='desktop'){
                         canvas._drawarea.incomingScreenSharing(value);
@@ -696,6 +696,7 @@
                                 error = true;
                             }
                         }
+                        canvas.currentUploadWindow.myFileUpload.onCompleteByRemote();
                         if (error) {
                             new converterPopup(canvas.main_content._content.inner,{error:value.error});
                         }

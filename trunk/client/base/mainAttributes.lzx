@@ -229,5 +229,7 @@ and some more references to temp-objects
 <attribute name="currentSlideTotal" value="0" type="number" />
 <attribute name="currentSlideZoom" value="0" type="number" />
 
+<attribute name="currentUploadWindow" value="null" />
+
 
 </library>
