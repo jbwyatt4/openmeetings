@@ -31,11 +31,12 @@
             <![CDATA[
             	//The onResult-Handler will be called be the rtmpconnection
             	if ($debug) Debug.write("startNewSyncprocess: ",value);
+                if ($debug) Debug.write("(value.roomclient.publicSID == canvas.publicSID)",value.roomclient.publicSID,canvas.publicSID);
             	if (value.roomclient.publicSID == canvas.publicSID){
-            		if ($debug) Debug.write("currentLoadingItem IS mine");
-            		if (value.currentLoadingItem){
+            		if ($debug) Debug.write("currentLoadingItem IS mine",value.currentLoadingItem);
+            		//if (value.currentLoadingItem){
             			parent.startInitialLoadinProcess();
-            		}
+            		//}
             	}
             ]]>
         </handler>   
@@ -52,6 +53,7 @@
     </netRemoteCallHib>     	
     
     <method name="startInitialLoadinProcess">
+        if ($debug) Debug.write("startInitialLoadinProcess");
 		this.loadObjectDelegate = new LzDelegate( this, "loadRemoteObject" );
 		if (this.loadingObjectList.length != 0){
 			LzTimer.addTimer( this.loadObjectDelegate, 250 );
