@@ -24,7 +24,8 @@ public class Recording {
 	private Date updatetime;
 	private String deleted;
 	
-	private LinkedHashMap<String,Object> roomRecording;
+	//filled by XStream
+	private RoomRecording roomRecording;
 	
 	private String starttimeAsString;
 	//this ID is not mapped as it can be null (Invited Users)
@@ -143,10 +144,10 @@ public class Recording {
 		this.xmlString = xmlString;
 	}
 	
-	public LinkedHashMap<String, Object> getRoomRecording() {
+	public RoomRecording getRoomRecording() {
 		return roomRecording;
 	}
-	public void setRoomRecording(LinkedHashMap<String, Object> roomRecording) {
+	public void setRoomRecording(RoomRecording roomRecording) {
 		this.roomRecording = roomRecording;
 	}
 	

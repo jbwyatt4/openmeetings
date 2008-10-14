@@ -45,7 +45,5 @@ public class RecordingClient {
 		this.rcl = rcl;
 	}
 	
-	
-	
 
 }

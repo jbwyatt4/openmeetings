@@ -5,6 +5,9 @@ public class WhiteBoardEvent {
 	private Long starttime;
 	private String action;
 	
+	//this is only Filled if send to client
+	private Object actionObj;
+	
 	public Long getStarttime() {
 		return starttime;
 	}
@@ -16,6 +19,12 @@ public class WhiteBoardEvent {
 	}
 	public void setAction(String action) {
 		this.action = action;
+	}
+	public Object getActionObj() {
+		return actionObj;
+	}
+	public void setActionObj(Object actionObj) {
+		this.actionObj = actionObj;
 	}
 	
 }
