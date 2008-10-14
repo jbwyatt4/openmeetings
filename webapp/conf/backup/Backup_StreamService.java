@@ -36,12 +36,7 @@ import org.openmeetings.app.hibernate.beans.domain.Organisation_Users;
 import org.openmeetings.app.data.conference.Roommanagement;
 import org.openmeetings.app.hibernate.beans.rooms.Rooms;
 import org.openmeetings.app.hibernate.beans.rooms.Rooms_Organisation;
-import org.openmeetings.app.hibernate.beans.recording.ChatvaluesEvent;
 import org.openmeetings.app.hibernate.beans.recording.Recording;
-import org.openmeetings.app.hibernate.beans.recording.RecordingClient;
-import org.openmeetings.app.hibernate.beans.recording.RoomRecording;
-import org.openmeetings.app.hibernate.beans.recording.RoomStream;
-import org.openmeetings.app.hibernate.beans.recording.WhiteBoardEvent;
 import org.openmeetings.app.data.record.Recordingmanagement;
 
 /**
@@ -49,15 +44,15 @@ import org.openmeetings.app.data.record.Recordingmanagement;
  * @author sebastianwagner
  *
  */
-public class StreamService implements IPendingServiceCallback {
+public class Backup_StreamService implements IPendingServiceCallback {
 	
 	private static String fileNameXML = "recording_";
 	private static String folderForRecordings = "recorded";
 	
 	
-	private static final Logger log = LoggerFactory.getLogger(StreamService.class);
+	private static final Logger log = LoggerFactory.getLogger(Backup_StreamService.class);
 	
-	private static LinkedHashMap<String,RoomRecording> roomRecordingList = new LinkedHashMap<String,RoomRecording>();
+	private static LinkedHashMap<String,LinkedHashMap<String,Object>> roomRecordingList = new LinkedHashMap<String,LinkedHashMap<String,Object>>();
 	
 	/**
 	 * this function starts recording a Conference (Meeting or Event)
@@ -98,11 +93,14 @@ public class StreamService implements IPendingServiceCallback {
 			currentClient.setRoomRecordingName(recordingName);			
 			Application.getClientList().put(current.getClient().getId(), currentClient);
 			
-			RoomRecording roomRecording = new RoomRecording();
-			roomRecording.setConferenceType(conferenceType);
-			roomRecording.setRoom_setup(Roommanagement.getInstance().getRoomById(currentClient.getRoom_id()));
-			roomRecording.setRoomRecordingsTableString(roomRecordingsTableString);
-			roomRecording.setComment(comment);
+			LinkedHashMap<String,Object> roomRecording = new LinkedHashMap<String,Object>();
+			roomRecording.put("conferenceType", conferenceType);
+			roomRecording.put("room_setup", Roommanagement.getInstance().getRoomById(currentClient.getRoom_id()));
+			roomRecording.put("roomRecordingsTableString", roomRecordingsTableString);
+			roomRecording.put("comment", comment);
+			
+			List<LinkedHashMap<String,Object>> roomStreams = new LinkedList<LinkedHashMap<String,Object>>();
+			List<LinkedHashMap<String,Object>> roomClients = new LinkedList<LinkedHashMap<String,Object>>();
 			
 			//get all stream and start recording them
 			Iterator<IConnection> it = current.getScope().getConnections();
@@ -121,8 +119,7 @@ public class StreamService implements IPendingServiceCallback {
 						
 						//add streamings to record File
 						if (!conferenceType.equals("audience") || rcl.getIsMod()){
-							
-							RoomStream roomStream = new RoomStream();
+							LinkedHashMap<String,Object> roomStream = new LinkedHashMap<String,Object>();
 							
 							String streamName = generateFileName(Long.valueOf(rcl.getBroadCastID()).toString());
 							
@@ -131,53 +128,50 @@ public class StreamService implements IPendingServiceCallback {
 								recordShow(conn, rcl.getBroadCastID(), streamName);
 							} 
 							
-							roomStream.setStreamName(streamName);
+							roomStream.put("streamName", streamName);
 							//stream starting
-							roomStream.setStreamstart(true);
+							roomStream.put("streamstart", true);
 							//is not only a avset-event
-							roomStream.setAvset(false);
-							roomStream.setRemoteAdress(remoteAdress);
-							roomStream.setStartdate(startDate);
-							roomStream.setStarttime(0L);
-							roomStream.setRcl(rcl);
+							roomStream.put("avset", false);
+							roomStream.put("remoteAdress", remoteAdress);
+							roomStream.put("startdate",startDate);
+							roomStream.put("starttime",0);
+							roomStream.put("rcl", rcl);
 							
-							if (roomRecording.getRoomStreams() == null) {
-								roomRecording.setRoomStreams(new LinkedList<RoomStream>());
-							}
-							roomRecording.getRoomStreams().add(roomStream);
+							roomStreams.add(roomStream);
 						} 
 
 						//add room Clients enter/leave Events to record File
-						RecordingClient roomClient = new RecordingClient();
-						roomClient.setRemoteAdress(remoteAdress);
-						roomClient.setRoomenter(true);
-						roomClient.setStartdate(startDate);
-						roomClient.setStarttime(0L);
-						roomClient.setRcl(rcl);
-						if (roomRecording.getRoomClients() == null) {
-							roomRecording.setRoomClients(new LinkedList<RecordingClient>());
-						}
-						roomRecording.getRoomClients().add(roomClient);
+						LinkedHashMap<String,Object> roomClient = new LinkedHashMap<String,Object>();						
+						roomClient.put("remoteAdress", remoteAdress);
+						roomClient.put("roomenter", true);
+						roomClient.put("startdate",startDate);
+						roomClient.put("starttime",0);
+						roomClient.put("rcl", rcl);
+						
+						roomClients.add(roomClient);
 					}
 				}
 			}
 			
-			roomRecording.setInitwhiteboardvars(initwhiteboardvars);
-			roomRecording.setRecordingName(recordingName);
-			roomRecording.setStarttime(new java.util.Date());
-			roomRecording.setStartedby(currentClient);
+			roomRecording.put("initwhiteboardvars", initwhiteboardvars);
+			roomRecording.put("recordingName", recordingName);
+			roomRecording.put("starttime", new java.util.Date());
+			roomRecording.put("startedby", currentClient);
 			
 			//add Room Client enter/leave events
-			//moved inside function - loop
+			roomRecording.put("roomclients", roomClients);
 			
 			//add Stream-Events
-			//moved inside function - loop
+			roomRecording.put("streamlist", roomStreams);
 			
 			//add Whiteboard-Events
-			roomRecording.setWhiteboard(new LinkedList<WhiteBoardEvent>());
+			LinkedList<Object> whiteBoardEvents = new LinkedList<Object>();
+			roomRecording.put("whiteboard", whiteBoardEvents);
 			
 			//add Chat-Events
-			roomRecording.setChatvalues(new LinkedList<ChatvaluesEvent>());
+			LinkedList<Object> chatvaluesEvents = new LinkedList<Object>();
+			roomRecording.put("chatvalues", chatvaluesEvents);
 			
 			roomRecordingList.put(recordingName, roomRecording);
 			
@@ -193,10 +187,10 @@ public class StreamService implements IPendingServiceCallback {
 			IConnection current = Red5.getConnectionLocal();
 			RoomClient currentClient = Application.getClientList().get(current.getClient().getId());
 
-			RoomRecording roomRecording = roomRecordingList.get(roomrecordingName);
+			LinkedHashMap<String,Object> roomRecording = roomRecordingList.get(roomrecordingName);
 			Long room_id = currentClient.getRoom_id();	
 
-			String conferenceType = roomRecording.getConferenceType();
+			String conferenceType = (String) roomRecording.get("conferenceType");
 			
 			//get all stream and stop recording them
 			//Todo: Check that nobody does Recording at the same time Issue 253
@@ -221,8 +215,8 @@ public class StreamService implements IPendingServiceCallback {
 	
 	public static Long stopRecordAndSave(IConnection current, String roomrecordingName, RoomClient currentClient){
 		try {
-			log.debug("stopRecordAndSave "+currentClient.getUsername()+","+currentClient.getUserip());
-			RoomRecording roomRecording = roomRecordingList.get(roomrecordingName);
+			log.error("stopRecordAndSave "+currentClient.getUsername()+","+currentClient.getUserip());
+			LinkedHashMap<String,Object> roomRecording = roomRecordingList.get(roomrecordingName);
 			
 			Long room_id = currentClient.getRoom_id();
 			currentClient.setIsRecording(false);
@@ -230,7 +224,7 @@ public class StreamService implements IPendingServiceCallback {
 			Application.getClientList().put(current.getClient().getId(), currentClient);
 			
 			
-			String conferenceType = roomRecording.getConferenceType();
+			String conferenceType = (String) roomRecording.get("conferenceType");
 			
 			//get all stream and stop recording them
 			//Todo: Check that nobody does Recording at the same time Issue 253
@@ -239,30 +233,30 @@ public class StreamService implements IPendingServiceCallback {
 				IConnection conn = it.next();
 				if (conn instanceof IServiceCapableConnection) {
 					RoomClient rcl = Application.getClientList().get(conn.getClient().getId());
-					log.debug("is this users still alive? :"+rcl);
+					log.error("is this users still alive? :"+rcl);
 					//Check if the Client is in the same room and same domain 
 					if(room_id.equals(rcl.getRoom_id()) && room_id!=null){
 						if (!conferenceType.equals("audience") || rcl.getIsMod()){
 							//stop the recorded flv and add the event to the notifications
-							log.debug("*** sendClientBroadcastNotifications Any Client is Recording - stop that");
-							StreamService.addRoomClientEnterEventFunc(rcl, roomrecordingName, rcl.getUserip(), false);
+							log.error("*** sendClientBroadcastNotifications Any Client is Recording - stop that");
+							Backup_StreamService.addRoomClientEnterEventFunc(rcl, roomrecordingName, rcl.getUserip(), false);
 							stopRecordingShowForClient(conn, rcl, roomrecordingName, true);
 						}
 					}
 				}
 			}				
 			
-			String newRecordFileName = roomRecording.getRoomRecordingsTableString();
-			String comment = roomRecording.getComment();
+			String newRecordFileName = (String) roomRecording.get("roomRecordingsTableString");
+			String comment = (String) roomRecording.get("comment");
 			
-			Date starttime = roomRecording.getStarttime();
+			Date starttime = (Date) roomRecording.get("starttime");
 			Date endtime =  new java.util.Date();
 			Long duration = endtime.getTime() - starttime.getTime();
-			roomRecording.setEndtime(endtime);
-			roomRecording.setEnduser(currentClient);
-			roomRecording.setRecordname(newRecordFileName);
+			roomRecording.put("endtime",endtime);
+			roomRecording.put("enduser", currentClient);
+			roomRecording.put("recordname", newRecordFileName);
 			
-			RoomClient startedClient = roomRecording.getStartedby();
+			RoomClient startedClient = (RoomClient) roomRecording.get("startedby");
 			Long recordedby = startedClient.getUser_id();
 			Users us = null;
 			if (recordedby!=null && recordedby>0){
@@ -355,20 +349,24 @@ public class StreamService implements IPendingServiceCallback {
 			//StreamService.addRoomClientEnterEventFunc(rcl, roomrecordingName, rcl.getUserip(), false);
 			log.error("### stopRecordingShowForClient: "+rcl.getIsRecording()+","+rcl.getUsername()+","+rcl.getUserip());
 			
-			RoomRecording roomRecording = roomRecordingList.get(roomrecordingName);
-			Date recordingsStartTime = roomRecording.getStarttime();
+			LinkedHashMap<String,Object> roomRecording = roomRecordingList.get(roomrecordingName);
+			Date recordingsStartTime = (Date) roomRecording.get("starttime");
 			Date currentDate = new Date();
+			List<LinkedHashMap<String,Object>> roomStreams = (List<LinkedHashMap<String,Object>>)roomRecording.get("streamlist");
 			
-			RoomStream roomStream = new RoomStream();
-			roomStream.setStreamName("");
-			roomStream.setStreamstart(false);
-			roomStream.setAvset(false);
-			roomStream.setRemoteAdress(conn.getRemoteAddress());
-			roomStream.setStartdate(currentDate);
-			roomStream.setStarttime(currentDate.getTime()-recordingsStartTime.getTime());
-			roomStream.setRcl(rcl);
+			LinkedHashMap<String,Object> roomStream = new LinkedHashMap<String,Object>();
 			
-			roomRecording.getRoomStreams().add(roomStream);
+			roomStream.put("streamName", "");
+			roomStream.put("streamstart", false);
+			roomStream.put("avset", false);
+			roomStream.put("remoteAdress", conn.getRemoteAddress());
+			roomStream.put("startdate",currentDate);
+			roomStream.put("starttime",currentDate.getTime()-recordingsStartTime.getTime());
+			roomStream.put("rcl", rcl);
+			
+			roomStreams.add(roomStream);
+			
+			roomRecording.put("streamlist",roomStreams);
 			roomRecordingList.put(roomrecordingName, roomRecording);
 
 			if ((rcl.getAvsettings().equals("a") || rcl.getAvsettings().equals("v") 
@@ -494,8 +492,10 @@ public class StreamService implements IPendingServiceCallback {
 	public static void addRecordingByStreamId(IConnection conn, String streamId, 
 			RoomClient rcl, String roomrecordingName) {
 		try {
-			RoomRecording roomRecording = roomRecordingList.get(roomrecordingName);
-			String conferenceType = roomRecording.getConferenceType();
+			LinkedHashMap<String,Object> roomRecording = roomRecordingList.get(roomrecordingName);
+			List<LinkedHashMap<String,Object>> roomStreams = (List<LinkedHashMap<String,Object>>)roomRecording.get("streamlist");
+			
+			String conferenceType = (String) roomRecording.get("conferenceType");
 			
 			//log.debug("addRecordingByStreamId "+conferenceType+" MOD: "+rcl.getIsMod());
 			
@@ -503,10 +503,10 @@ public class StreamService implements IPendingServiceCallback {
 				
 				//log.debug("AV-Settings: "+rcl.getAvsettings());
 				
-				Date recordingsStartTime = roomRecording.getStarttime();
+				Date recordingsStartTime = (Date) roomRecording.get("starttime");
 				Date currentDate = new Date();
 				
-				
+				LinkedHashMap<String,Object> roomStream = new LinkedHashMap<String,Object>();
 				
 				String streamName = generateFileName(Long.valueOf(rcl.getBroadCastID()).toString());
 				String remoteAdress = conn.getRemoteAddress();
@@ -517,18 +517,19 @@ public class StreamService implements IPendingServiceCallback {
 					recordShow(conn, rcl.getBroadCastID(), streamName);
 				}
 				
-				RoomStream roomStream = new RoomStream();
-				roomStream.setStreamName(streamName);
+				roomStream.put("streamName", streamName);
 				//this is a recording event
-				roomStream.setStreamstart(true);
+				roomStream.put("streamstart", true);
 				//this is not an av event
-				roomStream.setAvset(true);
-				roomStream.setRemoteAdress(remoteAdress);
-				roomStream.setStartdate(new java.util.Date());
-				roomStream.setStarttime(currentDate.getTime()-recordingsStartTime.getTime());
-				roomStream.setRcl(rcl);
+				roomStream.put("avset", true);
+				roomStream.put("remoteAdress", remoteAdress);
+				roomStream.put("startdate",new java.util.Date());
+				roomStream.put("starttime",currentDate.getTime()-recordingsStartTime.getTime());
+				roomStream.put("rcl", rcl);
 				
-				roomRecording.getRoomStreams().add(roomStream);
+				roomStreams.add(roomStream);
+				
+				roomRecording.put("streamlist",roomStreams);
 				roomRecordingList.put(roomrecordingName, roomRecording);
 			}
 		} catch (Exception err) {
@@ -539,52 +540,46 @@ public class StreamService implements IPendingServiceCallback {
 	public static void addWhiteBoardEvent(String roomrecordingName,Object vars) {
 		try {
 			
-			log.debug("addWhiteBoardEvent roomrecordingName: "+roomrecordingName);
-			RoomRecording roomRecording = roomRecordingList.get(roomrecordingName);
+			log.error("roomrecordingName: "+roomrecordingName);
+			LinkedHashMap<String,Object> roomRecording = roomRecordingList.get(roomrecordingName);
 			
-			Date recordingsStartTime = roomRecording.getStarttime();
+			Date recordingsStartTime = (Date) roomRecording.get("starttime");
 			Date currentDate = new Date();
 			
-			XStream xStream = new XStream(new XppDriver());
-			xStream.setMode(XStream.NO_REFERENCES);
-			String action = xStream.toXML(vars);
+			LinkedList<Object> whiteBoardEvents = (LinkedList<Object>) roomRecording.get("whiteboard");
 			
-			WhiteBoardEvent whiteBoardEvent = new WhiteBoardEvent();
-			whiteBoardEvent.setStarttime(currentDate.getTime()-recordingsStartTime.getTime());
-			whiteBoardEvent.setAction(action);
+			LinkedHashMap<String,Object> whiteBoardEvent = new LinkedHashMap<String,Object>();
+			whiteBoardEvent.put("starttime",currentDate.getTime()-recordingsStartTime.getTime());
+			whiteBoardEvent.put("action", vars);
 			
-			roomRecording.getWhiteboard().add(whiteBoardEvent);
-			
+			whiteBoardEvents.add(whiteBoardEvent);
+			roomRecording.put("whiteboard", whiteBoardEvents);
 			roomRecordingList.put(roomrecordingName, roomRecording);
 			
 		} catch (Exception err) {
-			log.error("[addWhiteBoardEvent]",err);
+			log.error("[addRecordingByStreamId]",err);
 		}	
 	}
 	
 	public static void addChatEvent(String roomrecordingName,Object vars) {
 		try {
+			LinkedHashMap<String,Object> roomRecording = roomRecordingList.get(roomrecordingName);
 			
-			log.debug("addChatEvent roomrecordingName: "+roomrecordingName);
-			RoomRecording roomRecording = roomRecordingList.get(roomrecordingName);
-			
-			Date recordingsStartTime = roomRecording.getStarttime();
+			Date recordingsStartTime = (Date) roomRecording.get("starttime");
 			Date currentDate = new Date();
 			
-			XStream xStream = new XStream(new XppDriver());
-			xStream.setMode(XStream.NO_REFERENCES);
-			String action = xStream.toXML(vars);
+			LinkedList<Object> chatvaluesEvents = (LinkedList<Object>) roomRecording.get("chatvalues");
 			
-			ChatvaluesEvent chatvaluesEvent = new ChatvaluesEvent();
-			chatvaluesEvent.setStarttime(currentDate.getTime()-recordingsStartTime.getTime());
-			chatvaluesEvent.setAction(action);
+			LinkedHashMap<String,Object> chatvaluesEvent = new LinkedHashMap<String,Object>();
+			chatvaluesEvent.put("starttime",currentDate.getTime()-recordingsStartTime.getTime());
+			chatvaluesEvent.put("action", vars);
 			
-			roomRecording.getChatvalues().add(chatvaluesEvent);
-			
+			chatvaluesEvents.add(chatvaluesEvent);
+			roomRecording.put("chatvalues", chatvaluesEvents);
 			roomRecordingList.put(roomrecordingName, roomRecording);
 			
 		} catch (Exception err) {
-			log.error("[addChatEvent]",err);
+			log.error("[addRecordingByStreamId]",err);
 		}	
 	}
 	
@@ -592,21 +587,24 @@ public class StreamService implements IPendingServiceCallback {
 	public static void addRoomClientAVSetEvent(RoomClient rcl, String roomrecordingName, 
 			String remoteAdress) {
 		try {
-			RoomRecording roomRecording = roomRecordingList.get(roomrecordingName);
-			Date recordingsStartTime = roomRecording.getStarttime();
+			LinkedHashMap<String,Object> roomRecording = roomRecordingList.get(roomrecordingName);
+			Date recordingsStartTime = (Date) roomRecording.get("starttime");
 			Date currentDate = new Date();
-			List<RoomStream> roomStreams = roomRecording.getRoomStreams();
+			List<LinkedHashMap<String,Object>> roomStreams = (List<LinkedHashMap<String,Object>>)roomRecording.get("streamlist");
 			
-			RoomStream roomStream = new RoomStream();
-			roomStream.setStreamName("");
-			roomStream.setStreamstart(false);
-			roomStream.setAvset(true);
-			roomStream.setRemoteAdress(remoteAdress);
-			roomStream.setStartdate(currentDate);
-			roomStream.setStarttime(currentDate.getTime()-recordingsStartTime.getTime());
-			roomStream.setRcl(rcl);
+			LinkedHashMap<String,Object> roomStream = new LinkedHashMap<String,Object>();
+						
+			roomStream.put("streamName", "");
+			roomStream.put("streamstart", false);
+			roomStream.put("avset", true);
+			roomStream.put("remoteAdress", remoteAdress);
+			roomStream.put("startdate",currentDate);
+			roomStream.put("starttime",currentDate.getTime()-recordingsStartTime.getTime());
+			roomStream.put("rcl", rcl);
 			
-			roomRecording.getRoomStreams().add(roomStream);
+			roomStreams.add(roomStream);
+			
+			roomRecording.put("streamlist",roomStreams);
 			roomRecordingList.put(roomrecordingName, roomRecording);			
 		} catch (Exception err) {
 			log.error("[addRoomClientAVSetEvent]",err);
@@ -616,15 +614,16 @@ public class StreamService implements IPendingServiceCallback {
 	public static void addRoomClientEnterEventFunc(RoomClient rcl, String roomrecordingName, 
 				String remoteAdress, boolean enter) {
 		try {
-			RoomRecording roomRecording = roomRecordingList.get(roomrecordingName);
-			Date recordingsStartTime = roomRecording.getStarttime();
+			LinkedHashMap<String,Object> roomRecording = roomRecordingList.get(roomrecordingName);
+			Date recordingsStartTime = (Date) roomRecording.get("starttime");
 			Date currentDate = new Date();
+			List<LinkedHashMap<String,Object>> roomClients = (List<LinkedHashMap<String,Object>>)roomRecording.get("roomclients");
 			
-			RecordingClient roomClient = new RecordingClient();						
-			roomClient.setRemoteAdress(remoteAdress);
-			roomClient.setRoomenter(enter);
-			roomClient.setStartdate(currentDate);
-			roomClient.setStarttime(currentDate.getTime()-recordingsStartTime.getTime());
+			LinkedHashMap<String,Object> roomClient = new LinkedHashMap<String,Object>();						
+			roomClient.put("remoteAdress", remoteAdress);
+			roomClient.put("roomenter", enter);
+			roomClient.put("startdate",currentDate);
+			roomClient.put("starttime",currentDate.getTime()-recordingsStartTime.getTime());
 //			
 //			if (!enter) {
 //				log.debug("###### NEW USER1: "+rcl.getBroadCastID());
@@ -632,9 +631,11 @@ public class StreamService implements IPendingServiceCallback {
 //				log.debug("###### NEW USER3: "+rcl.getPublicSID());
 //				log.debug("###### NEW USER4: "+rcl.getUserip());
 //			}
-			roomClient.setRcl(rcl);
+			roomClient.put("rcl", rcl);
 			
-			roomRecording.getRoomClients().add(roomClient);
+			roomClients.add(roomClient);
+			
+			roomRecording.put("roomclients",roomClients);
 			roomRecordingList.put(roomrecordingName, roomRecording);			
 		} catch (Exception err) {
 			log.error("[addRoomClientEnterEvent]",err);
@@ -652,8 +653,8 @@ public class StreamService implements IPendingServiceCallback {
 			currentClient.setRoomRecordingName("");
 			Application.getClientList().put(current.getClient().getId(), currentClient);
 			
-			RoomRecording roomRecording = roomRecordingList.get(roomrecordingName);
-			String conferenceType = roomRecording.getConferenceType();
+			LinkedHashMap<String,Object> roomRecording = roomRecordingList.get(roomrecordingName);
+			String conferenceType = (String) roomRecording.get("conferenceType");
 			
 			//get all stream and stop recording them
 			//Todo: Check that nobody does Recording at the same time Issue 253
