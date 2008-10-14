@@ -224,12 +224,12 @@ String.prototype.startsWith = function(prefix) {
                                         this.timerIsInited = true;
                                         this.timerDelegate = new LzDelegate( this, "validatedText" );
                                         //Debug.write("+++++++++++++++++ addTimer");
-                                        //Debug.write("+++++++++++++++++ removeTimer ",LzTimer.countTimers());
-                                        LzTimer.addTimer( this.timerDelegate, this.typetime );
+                                        //Debug.write("+++++++++++++++++ removeTimer ",lz.Timer.countTimers());
+                                        lz.Timer.addTimer( this.timerDelegate, this.typetime );
                                     } else {
                                         //Debug.write("############### resetTimer NO ADDING ");
-                                        //Debug.write("############### removeTimer ",LzTimer.countTimers());
-                                        //LzTimer.removeTimer( this.timerDelegate );
+                                        //Debug.write("############### removeTimer ",lz.Timer.countTimers());
+                                        //lz.Timer.removeTimer( this.timerDelegate );
                                     }
                                 } else {
                                     this.initSelect = false;
@@ -273,12 +273,12 @@ String.prototype.startsWith = function(prefix) {
                                 for (var i=0;i<t.length;i++){
                                     classroot.cblist.addItem(t[i].name,t[i].state_id);
                                 }
-                                //Debug.write("############### removeTimer ",LzTimer.countTimers());
-                                for (var eg in LzTimer){
-                                    //Debug.write("############### LzTimer ",eg,LzTimer[eg]);
+                                //Debug.write("############### removeTimer ",lz.Timer.countTimers());
+                                for (var eg in lz.Timer){
+                                    //Debug.write("############### lz.Timer ",eg,lz.Timer[eg]);
                                 }
-                                for (var eg in LzTimer.timerList){
-                                    //Debug.write("############### LzTimer.timerList ",eg,LzTimer.timerList[eg]);
+                                for (var eg in lz.Timer.timerList){
+                                    //Debug.write("############### lz.Timer.timerList ",eg,lz.Timer.timerList[eg]);
                                 }
 
                                 ////Debug.write("validateText: ",this.getText());
@@ -726,9 +726,9 @@ String.prototype.startsWith = function(prefix) {
 					this.timerIsInited = true;
 					this.timerDelegate = new LzDelegate( this, "validatedText" );
 					//Debug.write("############### addTimer");
-					LzTimer.addTimer( this.timerDelegate, this.typetime );
+					lz.Timer.addTimer( this.timerDelegate, this.typetime );
 				} else {
-					LzTimer.resetTimer( this.timerDelegate, this.typetime );
+					lz.Timer.resetTimer( this.timerDelegate, this.typetime );
 				}
 				]]>
 			</handler>
@@ -743,7 +743,7 @@ String.prototype.startsWith = function(prefix) {
 					for (var i=0;i<t.length;i++){
 						this._cblist.addItem(t[i].name,t[i].state_id);
 					}
-					LzTimer.removeTimer(this.timerDelegate);
+					lz.Timer.removeTimer(this.timerDelegate);
 					this.timerIsInited = false;
 					//Debug.write("validateText: ",this.getText());
 

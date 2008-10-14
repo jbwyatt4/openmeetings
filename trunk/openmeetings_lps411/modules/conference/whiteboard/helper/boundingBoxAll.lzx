@@ -267,9 +267,9 @@
                     this.parent.parent.objRef._swfView.setAttribute('x',x);
                     if (!this.timeisInited){
                         this.timeisInited=true;
-                        LzTimer.addTimer( this.sendObjectDel, 250 );
+                        lz.Timer.addTimer( this.sendObjectDel, 250 );
                     } else {
-                        LzTimer.resetTimer( this.sendObjectDel, 250 );
+                        lz.Timer.resetTimer( this.sendObjectDel, 250 );
                     }
                 }
             </handler>
@@ -278,9 +278,9 @@
                     this.parent.parent.objRef._swfView.setAttribute('y',y);
                     if (!this.timeisInited){
                         this.timeisInited=true;
-                        LzTimer.addTimer( this.sendObjectDel, 250 );
+                        lz.Timer.addTimer( this.sendObjectDel, 250 );
                     } else {
-                        LzTimer.resetTimer( this.sendObjectDel, 250 );
+                        lz.Timer.resetTimer( this.sendObjectDel, 250 );
                     }
                 }
             </handler>        

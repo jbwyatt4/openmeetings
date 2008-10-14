@@ -12,7 +12,7 @@
     <attribute name="fadeDelegate" value="null" />
     <handler name="oninit">
         this.fadeDelegate = new LzDelegate( this, "fadeText" );
-        LzTimer.addTimer( this.fadeDelegate, 5000 );
+        lz.Timer.addTimer( this.fadeDelegate, 5000 );
     </handler>
     <method name="fadeText">
         this.destroy();

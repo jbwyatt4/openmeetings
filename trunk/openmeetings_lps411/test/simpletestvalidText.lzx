@@ -142,12 +142,12 @@ String.prototype.startsWith = function(prefix) {
                             this.timerIsInited = true;
                             this.timerDelegate = new LzDelegate( this, "validatedText" );
                             ////Debug.write("+++++++++++++++++ addTimer");
-                            //Debug.write("+++++++++++++++++ removeTimer ",LzTimer.countTimers());
-                            LzTimer.addTimer( this.timerDelegate, this.typetime );
+                            //Debug.write("+++++++++++++++++ removeTimer ",lz.Timer.countTimers());
+                            lz.Timer.addTimer( this.timerDelegate, this.typetime );
                         } else {
                             ////Debug.write("############### resetTimer NO ADDING ");
-                            //Debug.write("############### resetTimer ",LzTimer.countTimers());
-                            LzTimer.resetTimer( this.timerDelegate, this.typetime );
+                            //Debug.write("############### resetTimer ",lz.Timer.countTimers());
+                            lz.Timer.resetTimer( this.timerDelegate, this.typetime );
                         }
                     } else {
                         this.initSelect = false;

@@ -169,7 +169,7 @@
             } else {
                 var dirty = false;
                 var c = this._cache;
-                for (i in c) {
+                for (var i in c) {
                     if (c[i] != this[i]) {
                         c[i] = this[i];
                         dirty = true;

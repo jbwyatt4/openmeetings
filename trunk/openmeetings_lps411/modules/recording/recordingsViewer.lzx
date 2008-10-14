@@ -199,7 +199,7 @@
                     }
         
                     if (perc<100){
-                        LzTimer.addTimer( this.timerDel, this.timeStepSyncing );
+                        lz.Timer.addTimer( this.timerDel, this.timeStepSyncing );
                         this.currentTime += this.timeStepSyncing;
                     } else {
                         this.currentTime = 0;

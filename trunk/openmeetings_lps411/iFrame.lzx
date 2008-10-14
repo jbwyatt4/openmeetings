@@ -136,7 +136,7 @@ Exemple :
       if(typeof this.createIFrame_callbackDelegate == 'undefined') {
          this.createIFrame_callbackDelegate = new LzDelegate( this, "createIFrame_callback" );
       }
-      LzTimer.resetTimer( this.createIFrame_callbackDelegate, callbackTimerDelay );
+      lz.Timer.resetTimer( this.createIFrame_callbackDelegate, callbackTimerDelay );
     </method>
     
     <!-- Iframe load state detection state and initialization -->
@@ -161,7 +161,7 @@ Exemple :
       if(!canvas.getAttribute(createIFrameDone_attr)) {
          if (this.createIFrame_callbackCounter * callbackTimerDelay &lt; createIFrame_callbackMax) {
             this.createIFrame_callbackCounter = this.createIFrame_callbackCounter + 1;
-            LzTimer.resetTimer( this.createIFrame_callbackDelegate, callbackTimerDelay );
+            lz.Timer.resetTimer( this.createIFrame_callbackDelegate, callbackTimerDelay );
          }
       } else {
          // creating iframeView moves listeners :
@@ -207,7 +207,7 @@ Exemple :
       if(typeof this.centerIframe_Delegate == 'undefined') {
          this.centerIframe_Delegate = new LzDelegate( this, "centerIframe_jsCall" );
       }
-      LzTimer.resetTimer( this.centerIframe_Delegate, 20 );
+      lz.Timer.resetTimer( this.centerIframe_Delegate, 20 );
     </method>
     
     <method  name="centerIframe_jsCall">

@@ -6,6 +6,7 @@
     
     <handler name="oninit">
     	LzModeManager.makeModal(this);
+        canvas.currentUploadWindow = this;
     </handler>
     
     <handler name="onclose">
@@ -111,6 +112,7 @@
 			<![CDATA[
 			var uploadurl = 'http://'+canvas.rtmphostlocal+':'+canvas.red5httpport+'/'+canvas.webAppRootKey+'/UploadHandler?' +
 					'moduleName='+this.parent.uploadmodule +
+                    '&publicSID='+canvas.publicSID +
 					'&room_id='+hib.currentroomid +
 					'&sid='+canvas.sessionId;
             if ($debug) Debug.write("uploadurl: ",uploadurl);
