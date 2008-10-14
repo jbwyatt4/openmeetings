@@ -23,7 +23,7 @@
             this.userToAccept.setText(dtString);
             
             this.userautoTimerDelegate = new LzDelegate( this, "autoResponse" );
-            LzTimer.addTimer( this.userautoTimerDelegate, 1000 );            
+            lz.Timer.addTimer( this.userautoTimerDelegate, 1000 );            
 		]]>
 	</handler>
 
@@ -31,7 +31,7 @@
         this.userautoTimerCounter--;
         if (this.userautoTimerCounter!=0){
             this._applyBtn.setAttribute('text',canvas.getLabelName(this._applyBtn.labelid)+" "+this.userautoTimerCounter);
-            LzTimer.addTimer( this.userautoTimerDelegate, 1000 );
+            lz.Timer.addTimer( this.userautoTimerDelegate, 1000 );
         } else {
             this._applyBtn.onclick.sendEvent();
         }

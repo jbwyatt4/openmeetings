@@ -299,7 +299,7 @@
 				var txt = this.imageSyncMessageText+' '+this._loadingUsersImageList.length;
 				this.loadimageDataWinRef.setMessage(txt);
 				this.loadImageObjectTimer = new LzDelegate( this, "startImgaesyncCheck" );
-				LzTimer.addTimer( this.loadImageObjectTimer, this.syncImageCheckTime );
+				lz.Timer.addTimer( this.loadImageObjectTimer, this.syncImageCheckTime );
 			}
 		]]>
 	</method>	

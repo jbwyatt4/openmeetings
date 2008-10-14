@@ -64,7 +64,7 @@
     global.regexpflag = global["regexpflag"] == true;
     if( !global.regexpflag ){
       global.regexpflag = true;
-      LzTimer.addTimer( new LzDelegate( canvas, "testRegExp" ), 500 );
+      lz.Timer.addTimer( new LzDelegate( canvas, "testRegExp" ), 500 );
     }
   </method>
   

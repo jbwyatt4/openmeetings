@@ -14,27 +14,33 @@
  		
  		<!-- Show only Images Files in FileBrowser -->
  		<attribute name="isOnlyProfile" value="false" type="boolean" />
+        
+        <attribute name="fr" value="null" />
  		 		
 		<handler name="oninit" args="invoker">
 		<![CDATA[
-			fr = new flash.net.FileReference();	
+			this.fr = new flash.net.FileReference();	
 			//Debug.write(fr);
-    		fr.onHTTPError = function(fr, httpError){
-            	_root.Debug.write('onHTTPError function: ' + httpError);
+    		this.fr.onHTTPError = function(fr, httpError){
+                var t = _root;
+            	t.Debug.write('onHTTPError function: ' + httpError);
             	new lz.errorPopup(canvas,{error:'Err2: '+httpError});
 			}
-			fr.onIOError = function(fr){
-				_root.Debug.write.write('onIOError function');
+			this.fr.onIOError = function(fr){
+				var t = _root;
+                t.Debug.write.write('onIOError function');
 				new lz.errorPopup(canvas,{error:'onIOError invoked '});
 			}
 			function callbackFunction ( e ) {
-				_root.Debug.write( e.data );
+				var t = _root;
+                t.Debug.write( e.data );
 			}		
-			fr.onSecurityError = function(fr, errorString){
-				_root.Debug.write('onSecurityError function: ' + errorString);
+			this.fr.onSecurityError = function(fr, errorString){
+				var t = _root;
+                t.Debug.write('onSecurityError function: ' + errorString);
             	new lz.errorPopup(canvas,{error:'Err2: '+errorString});
 			}
-			fr.addListener(invoker, callbackFunction);
+			this.fr.addListener(invoker, callbackFunction);
 		]]>
 		</handler>
 
@@ -75,13 +81,13 @@
 		</method>
 
 		<method name="getName"><![CDATA[
-			return fr.name;
+			return this.fr.name;
 		]]>
 		</method>
 
 		<method name="upload" args="url"><![CDATA[
-			Debug.write("url: ",url,fr);
-			fr.upload(url);
+			Debug.write("url: ",url,this.fr);
+			this.fr.upload(url);
 		]]>
 		</method>
 		

@@ -20,10 +20,10 @@
                 canvas.myText.setAttribute( "opacity", 1.0 );
                 this.timerDelegate = new LzDelegate( this, "fadeText" );
                 //Debug.write("+++++++++++++++++ addTimer");
-                LzTimer.addTimer( this.timerDelegate, this.typetime );
+                lz.Timer.addTimer( this.timerDelegate, this.typetime );
             } else {
                 //Debug.write("############### resetTimer NO ADDING ");
-                LzTimer.resetTimer( this.timerDelegate, this.typetime );
+                lz.Timer.resetTimer( this.timerDelegate, this.typetime );
             }
         </handler>
      

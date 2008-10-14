@@ -194,7 +194,7 @@
 				this.getClientListScope.doCall();
 			} else {
 				this.loadObjectTimer = new LzDelegate( this, "loadNextObjectFromList" );
-				LzTimer.addTimer( this.loadObjectTimer, 50 );
+				lz.Timer.addTimer( this.loadObjectTimer, 50 );
 			}
 		//check if this is syncing cause if init of new user
 		//no init-object so load directly
@@ -234,11 +234,11 @@
 				} else {
 				    parent.notifyClientInitSyncing();
 				}
-				//it is necessary to use LzTimer cause i want to make status updates
+				//it is necessary to use lz.Timer cause i want to make status updates
 				//after each loaded object
                 //Debug.write("loadNextObjectFromList 2 this.loadObjectTimer");
 				this.parent.loadObjectTimer = new LzDelegate( this.parent, "loadNextObjectFromList" );
-				LzTimer.addTimer( this.parent.loadObjectTimer, 50 );	
+				lz.Timer.addTimer( this.parent.loadObjectTimer, 50 );	
             ]]>
         </handler>   
     </netRemoteCallHib>
@@ -315,10 +315,10 @@
 	<handler name="onwmlLoaderSend" args="type">
 		//Debug.write("loadNextObjectFromList 3 this.loadObjectTimer ",type);
 		this.loadObjectTimer = new LzDelegate( this, "loadNextObjectFromList" );
-		LzTimer.addTimer( this.loadObjectTimer, 50 );
+		lz.Timer.addTimer( this.loadObjectTimer, 50 );
 	</handler>
 	
-	<!-- invoke by LzTimer
+	<!-- invoke by lz.Timer
 		checks if object is loaded completely once it is completely loaded it checks wether
 		the process was invoked by moderator, so this is a remoteClient or this client is 
 		really the moderator (this.wmlspreadNews=true)
@@ -385,7 +385,7 @@
 				var txt = this._loadmessageTxt+' '+this._loadingUsers.length;
 				this.loadfileDataWinRef.setMessage(txt);
 				this.loadObjectTimer = new LzDelegate( this, "startWmlsyncCheck" );
-				LzTimer.addTimer( this.loadObjectTimer, this.synccheckTime );
+				lz.Timer.addTimer( this.loadObjectTimer, this.synccheckTime );
 			}
 		]]>
 	</method>

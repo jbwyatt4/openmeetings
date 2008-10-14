@@ -10,11 +10,11 @@
      <method name="showText">
          this.myText.setAttribute( "opacity", 1.0 );
          this.fadeDelegate = new LzDelegate( this, "fadeText" );
-         LzTimer.addTimer( this.fadeDelegate, 3000 );
+         lz.Timer.addTimer( this.fadeDelegate, 3000 );
      </method>
  
      <method name="fadeText">
-		 //Debug.write("fadeText: ",LzTimer.countTimers(this.fadeDelegate));
+		 //Debug.write("fadeText: ",lz.Timer.countTimers(this.fadeDelegate));
          this.myText.animate( "opacity", 0.0, 1000 );
      </method>
  
