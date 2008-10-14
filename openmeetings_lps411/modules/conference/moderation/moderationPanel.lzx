@@ -80,7 +80,7 @@
 		<labelTooltip inittwice="true" labelid="84" />  	
   	</simpleLabelButton>
   	
-    <!--
+    <!-- --> 
 	<labelText labelid="417" y="4" />
 	
     <simpleLabelButton name="sta_btn" width="30" height="24" y="2">
@@ -98,7 +98,7 @@
 		<view resource="stop_recording_conf" x="7" y="4" />
 		<labelTooltip labelid="416" />
 	</simpleLabelButton>   
-     --> 	
+    	
 	
   	<netRemoteCallHib name="stopRecordMeetingStream" remotecontext="$once{ canvas.thishib }"
 		funcname="streamservice.stopRecordMeetingStream"  >
