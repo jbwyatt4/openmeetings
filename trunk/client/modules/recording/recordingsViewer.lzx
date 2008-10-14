@@ -106,8 +106,8 @@
 	        	<handler name="ondata" args="value">	
 	            	<![CDATA[
 	            		parent.recordingValue = value;
-		            	if ($debug) Debug.write(parent.recordingValue.roomRecording.streamlist);
-		            	if ($debug) Debug.write(parent.recordingValue.roomRecording.roomclients);
+		            	if ($debug) Debug.write(parent.recordingValue.roomRecording.roomStreams);
+		            	if ($debug) Debug.write(parent.recordingValue.roomRecording.roomClients);
 		            	if ($debug) Debug.write("getRecordingById",parent.recordingValue.roomRecording);
 		            	parent.timerDel = new LzDelegate( parent, "timeLineAction" );
 		            	if ($debug) Debug.write("value.room_setup: ",value.roomRecording.room_setup);
@@ -121,91 +121,93 @@
 	        </handler>	
 	  	</netRemoteCallHib>  
 	
-	    	<method name="timeLineAction">
-	    		<![CDATA[
-		   		var perc = Math.round((100/this.recordingValue.duration)*this.currentTime);
+            <method name="timeLineAction">
+                <![CDATA[
+		   		    var perc = Math.round((100/this.recordingValue.duration)*this.currentTime);
 		    		var newW = Math.round((this.progress.progressbar.width/100)*perc);
 	
 		    		this.progress.progressbar.thumb.setAttribute('x',newW);
 		        
-			      var restTime = this.recordingValue.duration-this.currentTime;
+			        var restTime = this.recordingValue.duration-this.currentTime;
 		        	if (restTime<0) restTime=0;
 		        	var seconds = Math.round(restTime/1000);
-				var minutes = Math.floor(seconds/60);
-				var deltaSeconds = seconds-(minutes*60);
-				if (deltaSeconds<10) deltaSeconds = "0"+deltaSeconds;
-				if (minutes<10) minutes = "0"+minutes;	
-				this.progress._currentTime._timetext.setAttribute('text',minutes+":"+deltaSeconds);
+					var minutes = Math.floor(seconds/60);
+					var deltaSeconds = seconds-(minutes*60);
+					if (deltaSeconds<10) deltaSeconds = "0"+deltaSeconds;
+					if (minutes<10) minutes = "0"+minutes;	
+					this.progress._currentTime._timetext.setAttribute('text',minutes+":"+deltaSeconds);
 		        
-				var roomclients = this.recordingValue.roomRecording.roomclients;
-				for (var i=0;i<roomclients.length;i++){
-		        		var starttime =  (Math.round(roomclients[i].starttime/this.timeStepSyncing))*this.timeStepSyncing;
-		       		if (starttime == this.currentTime){
-		        			if (roomclients[i].roomenter){
-	      	  				var userpos = roomclients[i].rcl.userpos;
-	        					if ($debug) Debug.write("Found ROOM User Enter",starttime,userpos);
-	        					canvas._videocontainer.enterRoom(roomclients[i].rcl);
-	        				} else {
-	        					if ($debug) Debug.write("Found ROOM User Left",starttime,userpos);
-			        			canvas._videocontainer.disconnectclient(roomclients[i].rcl.publicSID);
-	        			}
-	        		}
-				}
+					var roomClients = this.recordingValue.roomRecording.roomClients;
+					for (var i=0;i<roomClients.length;i++){
+			        		var starttime =  (Math.round(roomClients[i].starttime/this.timeStepSyncing))*this.timeStepSyncing;
+			       		if (starttime == this.currentTime){
+			        			if (roomClients[i].roomenter){
+		      	  				var userpos = roomClients[i].rcl.userpos;
+		        					if ($debug) Debug.write("Found ROOM User Enter",starttime,userpos);
+		        					canvas._videocontainer.enterRoom(roomClients[i].rcl);
+		        				} else {
+		        					if ($debug) Debug.write("Found ROOM User Left",starttime,userpos);
+				        			canvas._videocontainer.disconnectclient(roomClients[i].rcl.publicSID);
+		        			}
+		        		}
+					}
 				
-				var streamList = this.recordingValue.roomRecording.streamlist;
-				
+				    var streamList = this.recordingValue.roomRecording.roomStreams;
+					
 		        	for (var i=0;i<streamList.length;i++){
 		        		var starttime =  (Math.round(streamList[i].starttime/this.timeStepSyncing))*this.timeStepSyncing;
 		        		if (starttime == this.currentTime){
 	        				if( $debug ) Debug.write("recordingsViewer.timeLineAction(): Found User Event: ",streamList[i]);
-	
+		
 	        				if (streamList[i].streamstart && streamList[i].avset){
 			        			var streamname = streamList[i].streamName+".flv";
 	        					if ($debug) Debug.write("recordingsViewer.timeLineAction(): Found User Entered To Start Stream! - ",starttime,streamname);
-	        					canvas._videocontainer.startStream(streamname,this.recordingValue.roomRecording.streamlist[i].rcl);
+	        					canvas._videocontainer.startStream(streamname,this.recordingValue.roomRecording.roomStreams[i].rcl);
 	        				} else if (streamList[i].streamstart && !streamList[i].avset){
 				        		var streamname = streamList[i].streamName+".flv";
 				        		if ($debug) Debug.write("recordingsViewer.timeLineAction(): Found - INIT",starttime,streamname);
-				        		canvas._videocontainer.startStream(streamname,this.recordingValue.roomRecording.streamlist[i].rcl);
+				        		canvas._videocontainer.startStream(streamname,this.recordingValue.roomRecording.roomStreams[i].rcl);
 	        				} else if (!streamList[i].streamstart && !streamList[i].avset) {
 				        		var streamname = streamList[i].streamName+".flv";
-	      	  				if ($debug) Debug.write("recordingsViewer.timeLineAction(): Found Stream To END! - ",starttime,streamname);
+		      	  				if ($debug) Debug.write("recordingsViewer.timeLineAction(): Found Stream To END! - ",starttime,streamname);
 		        			} else if (!streamList[i].streamstart && streamList[i].avset) {
-		        				var avsettings = streamList[i].rcl.avsettings;
-	      	  				if ($debug) Debug.write("recordingsViewer.timeLineAction(): Found AVEvent! - ",starttime,streamList[i].rcl);
-	        					canvas._videocontainer.setAVOnlyStream(streamList[i].rcl);
-	        			}
-	        		}
-	        	}
-	        	
+			        			var avsettings = streamList[i].rcl.avsettings;
+		      	  		    	if ($debug) Debug.write("recordingsViewer.timeLineAction(): Found AVEvent! - ",starttime,streamList[i].rcl);
+		        				canvas._videocontainer.setAVOnlyStream(streamList[i].rcl);
+		        		    }
+		        	    }
+		        	}
+		        	
 		        	var whiteBoard = this.recordingValue.roomRecording.whiteboard;
-	      	  	for (var i=0;i<whiteBoard.length;i++){
+		      	  	for (var i=0;i<whiteBoard.length;i++){
 	        			var starttime =  (Math.round(whiteBoard[i].starttime/this.timeStepSyncing))*this.timeStepSyncing;
 		        		if (starttime == this.currentTime){
-	      	  			var action = whiteBoard[i].action;
+	                        if ($debug) Debug.write("found Whiteboard Action",whiteBoard[i].actionObj);
+		      	  		    var action = whiteBoard[i].actionObj;
 	        				canvas._drawarea.sendRecordedObject(action[2],action[3],false);
-	        		}
-	        	}
-	        	
-		        	var chatValues = this.recordingValue.roomRecording.chatvalues;
-	      	  	for (var i=0;i<chatValues.length;i++){
+	        		    }
+	        	    }
+		        	
+	                var chatValues = this.recordingValue.roomRecording.chatvalues;
+		      	  	for (var i=0;i<chatValues.length;i++){
 	        			var starttime =  (Math.round(chatValues[i].starttime/this.timeStepSyncing))*this.timeStepSyncing;
 	        			if (starttime == this.currentTime){
+                            if ($debug) Debug.write("found Chatbox Action",whiteBoard[i].actionObj);
 	        				var action = chatValues[i].action;
 	        				canvas._chatcontent.addChatHistory(action.message,action.client);
-	        		}
-	        	}
-	
+		        		}
+		        	}
+		
 	        		if (perc<100){
-			      	LzTimer.addTimer( this.timerDel, this.timeStepSyncing );
+				      	LzTimer.addTimer( this.timerDel, this.timeStepSyncing );
 			        	this.currentTime += this.timeStepSyncing;
 		        	} else {
-	      	  		this.currentTime = 0;
+		      	  		this.currentTime = 0;
 	        			this.clearComponents();
 	        			this.initRecordingComponents();
-	        	}
-	        ]]>
-	    </method>
+		        	}
+                ]]>
+            </method>
 	    
 	    <view name="_videoboardstream" />
 	</class>
