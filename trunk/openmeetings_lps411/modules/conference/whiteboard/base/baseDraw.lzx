@@ -398,37 +398,37 @@
 				this.doSetHandBodus();
 			} else if(this.drawmodus=="paint"){
 				this.startPaint();
-				mousetracker_del.register(LzIdle,'onidle');
+				mousetracker_del.register(LzIdleService.LzIdle,'onidle');
 			} else if(this.drawmodus=="line"){
 				this.startLine(null);
 	  	 		this.startx = currentlayer.getMouse('x');
 				this.starty = currentlayer.getMouse('y'); 			
-				mousetracker_del.register(LzIdle,'onidle');
+				mousetracker_del.register(LzIdleService.LzIdle,'onidle');
 			} else if(this.drawmodus=="uline"){
 				this.startUline(null);
 	  	 		this.startx = currentlayer.getMouse('x');
 				this.starty = currentlayer.getMouse('y'); 			
-				mousetracker_del.register(LzIdle,'onidle');
+				mousetracker_del.register(LzIdleService.LzIdle,'onidle');
 			} else if(this.drawmodus=="drawarrow"){
 				this.startDrawarrowline(null);
 	  	 		this.startx = currentlayer.getMouse('x');
 				this.starty = currentlayer.getMouse('y'); 			
-				mousetracker_del.register(LzIdle,'onidle');
+				mousetracker_del.register(LzIdleService.LzIdle,'onidle');
 			} else if (this.drawmodus == 'rectangle') {
 				this.startRect(null);
 	  	 		this.startx = currentlayer.getMouse('x');
 				this.starty = currentlayer.getMouse('y'); 				
-	            mousetracker_del.register(LzIdle,'onidle');
+	            mousetracker_del.register(LzIdleService.LzIdle,'onidle');
 	        } else if (this.drawmodus == 'ellipse') {
 				this.startEllipse(null);
 	  	 		this.startx = currentlayer.getMouse('x');
 				this.starty = currentlayer.getMouse('y'); 				
-	            mousetracker_del.register(LzIdle,'onidle');
+	            mousetracker_del.register(LzIdleService.LzIdle,'onidle');
 	        } else if (this.drawmodus == 'letter') {
 				this.startLetter();
 	  	 		this.startx = currentlayer.getMouse('x');
 				this.starty = currentlayer.getMouse('y'); 				
-	            mousetracker_del.register(LzIdle,'onidle');
+	            mousetracker_del.register(LzIdleService.LzIdle,'onidle');
 	        }
         }
 	</handler>
