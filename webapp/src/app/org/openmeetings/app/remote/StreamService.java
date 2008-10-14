@@ -464,8 +464,7 @@ public class StreamService implements IPendingServiceCallback {
 	        if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)){
 	        	Recording rec = Recordingmanagement.getInstance().getRecordingById(recording_id);
 	        	
-				XStream xStream = new XStream(new XppDriver());
-				xStream.setMode(XStream.NO_REFERENCES);
+				
 				
 				IScope scope = Red5.getConnectionLocal().getScope().getParent();
 				String current_dir = scope.getResource("upload/").getFile().getAbsolutePath();
@@ -481,7 +480,26 @@ public class StreamService implements IPendingServiceCallback {
 			    while (reader.ready()) {
 			    	xmlString += reader.readLine();
 			    }
-				rec.setRoomRecording((LinkedHashMap<String, Object>)xStream.fromXML(xmlString));
+			    
+			    XStream xStream = new XStream(new XppDriver());
+				xStream.setMode(XStream.NO_REFERENCES);
+			    RoomRecording roomRecording = (RoomRecording)xStream.fromXML(xmlString);
+			    
+			    for (Iterator<ChatvaluesEvent> iter = roomRecording.getChatvalues().iterator();iter.hasNext();) {
+			    	ChatvaluesEvent chatvaluesEvent = iter.next();
+			    	XStream xStream_chat = new XStream(new XppDriver());
+			    	xStream_chat.setMode(XStream.NO_REFERENCES);
+			    	chatvaluesEvent.setActionObj(xStream_chat.fromXML(chatvaluesEvent.getAction()));
+			    }
+			    
+			    for (Iterator<WhiteBoardEvent> iter = roomRecording.getWhiteboard().iterator();iter.hasNext();) {
+			    	WhiteBoardEvent whiteBoardEvent = iter.next();
+			    	XStream xStream_chat = new XStream(new XppDriver());
+			    	xStream_chat.setMode(XStream.NO_REFERENCES);
+			    	whiteBoardEvent.setActionObj(xStream_chat.fromXML(whiteBoardEvent.getAction()));
+			    }
+			    
+				rec.setRoomRecording(roomRecording);
 				
 				return rec;
 	        }
@@ -646,7 +664,6 @@ public class StreamService implements IPendingServiceCallback {
 			
 			IConnection current = Red5.getConnectionLocal();
 			RoomClient currentClient = Application.getClientList().get(current.getClient().getId());
-			Long rooms_id = currentClient.getRoom_id();
 			Long room_id = currentClient.getRoom_id();
 			currentClient.setIsRecording(false);
 			currentClient.setRoomRecordingName("");
