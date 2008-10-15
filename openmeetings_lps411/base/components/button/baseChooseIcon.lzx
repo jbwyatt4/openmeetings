@@ -22,7 +22,7 @@
     <handler name="oninit">
         if (this.isselected){
             this.onclick.sendEvent();
-            this.setResourceNumber(3);
+            this.setAttribute('frame',3);
         }
     </handler>          
     <labelTooltip labelid="$once{ parent.labelid }" inittwice="true" />

@@ -106,7 +106,7 @@
 		</handler>
 	</button>
 
-<!-- moduleName=videoconf1'; -->
+    <!-- moduleName=videoconf1'; -->
 	<button name="upload" x="10" y="100" text="Upload" width="200" enabled="false" height="20">
 		<handler name="onclick">
 			<![CDATA[
@@ -136,7 +136,7 @@
 	
 	<button name="_close" x="90" y="170" text="cancel" width="160" height="20">
 		<handler name="onclick">
-			Debug.write("this.parent: ",this.parent);
+			if ($debug) Debug.write("this.parent: ",this.parent);
 			this.parent.close();
 		</handler>
 	</button>

@@ -121,12 +121,12 @@
     
     <view name="_close" x="$once{ parent.width-this.width-2 }" y="2"
         resource="btn_presenter_close"
-        onmouseover="this.setResourceNumber(2)"
-        onmouseout="this.setResourceNumber(1)"
-        onmousedown="this.setResourceNumber(3)"
-        onmouseup="this.setResourceNumber(1)" >
+        onmouseover="this.setAttribute('frame',2)"
+        onmouseout="this.setAttribute('frame',1)"
+        onmousedown="this.setAttribute('frame',3)"
+        onmouseup="this.setAttribute('frame',1)" >
         <handler name="onclick">
-            this.setResourceNumber(2);
+            this.setAttribute('frame',2);
             this.parent.close();
         </handler>
         <labelTooltip labelid="430" />

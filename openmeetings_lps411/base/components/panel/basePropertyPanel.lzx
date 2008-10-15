@@ -80,31 +80,31 @@
 		</button>
 		<view visible="${ !this.parent.parent.isopen }" x="2" y="3" resource="explorer_button_min_rsc">
 			<handler name="onmouseover">
-				this.setResourceNumber(2);
+				this.setAttribute('frame',2);
 			</handler>
 			<handler name="onmouseout">
-				this.setResourceNumber(1);
+				this.setAttribute('frame',1);
 			</handler>
 			<handler name="onmousedown">
-				this.setResourceNumber(3);
+				this.setAttribute('frame',3);
 			</handler>	
 			<handler name="onmouseup">
-				this.setResourceNumber(1);
+				this.setAttribute('frame',1);
 				this.parent.parent.toggleopen();
 			</handler>									
 		</view>
 		<view visible="${ this.parent.parent.isopen }" x="2" y="3" resource="explorer_button_max_rsc">
 			<handler name="onmouseover">
-				this.setResourceNumber(2);
+				this.setAttribute('frame',2);
 			</handler>
 			<handler name="onmouseout">
-				this.setResourceNumber(1);
+				this.setAttribute('frame',1);
 			</handler>
 			<handler name="onmousedown">
-				this.setResourceNumber(3);
+				this.setAttribute('frame',3);
 			</handler>	
 			<handler name="onmouseup">
-				this.setResourceNumber(1);
+				this.setAttribute('frame',1);
 				this.parent.parent.toggleopen();
 			</handler>									
 		</view>

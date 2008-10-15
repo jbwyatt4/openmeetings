@@ -32,9 +32,9 @@
 	</handler>	
 	<method name="_togglestate">
 		if (this._value){
-			this.setResourceNumber(2);
+			this.setAttribute('frame',2);
 		} else {
-			this.setResourceNumber(1);
+			this.setAttribute('frame',1);
 		}
         if ( this.onvalue ) this.onvalue.sendEvent(this._value);
 	</method>

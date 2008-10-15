@@ -20,16 +20,16 @@
 		y="1" text="${ this.parent.text }" resize="true" />
 	
 	<handler name="onmouseover">
-		this._bg._b2.setResourceNumber(2);
+		this._bg._b2.setAttribute('frame',2);
 	</handler>
 	<handler name="onmouseout">
-		this._bg._b2.setResourceNumber(1);
+		this._bg._b2.setAttribute('frame',1);
 	</handler>
 	<handler name="onmousedown">
-		this._bg._b2.setResourceNumber(3);
+		this._bg._b2.setAttribute('frame',3);
 	</handler>
 	<handler name="onmouseup">
-		this._bg._b2.setResourceNumber(1);
+		this._bg._b2.setAttribute('frame',1);
 	</handler>		
 </class>
 </library>

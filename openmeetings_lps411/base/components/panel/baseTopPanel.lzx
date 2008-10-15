@@ -32,15 +32,15 @@
         	parent.onmousedown.sendEvent(parent);
         </handler>
         <handler name="onmouseup">
-        	LzCursor.unlock();
+        	lz.Cursor.unlock();
         	parent.onmouseup.sendEvent(parent);
         </handler>
         <handler name="onmouseover">
         	//cursor="arrow_draw_panel_cursor" 
-        	LzCursor.setCursorGlobal("arrow_draw_panel_cursor");
+        	lz.Cursor.setCursorGlobal("arrow_draw_panel_cursor");
         </handler>
         <handler name="onmouseout">
-        	LzCursor.unlock();
+        	lz.Cursor.unlock();
         </handler>
 		<view resource="draw_box_vertical_rsc" />
 	</view>
