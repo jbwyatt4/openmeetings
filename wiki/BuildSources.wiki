@@ -18,15 +18,15 @@ SVN URL: http://openmeetings.googlecode.com/svn/trunk/openmeetings_lps411/
 
 Browse in Code with Browser: http://code.google.com/p/openmeetings/source/browse/trunk/openmeetings_lps411/
 
-for compiling the client you need to install the !OpenLaszlo-Server:
+for compiling the client you need to install the !OpenLaszlo-Server 4.2.x:
 http://www.openlaszlo.org
 
 Step-By-Step:
-  * Download and Install !OpenLaszlo 4.1.1 (Version > 4.1.1 is needed!)
-  * create a directory *openmeetings* into your !OpenLaszlo-WebRoot directory ($LPS-HOME/Server/lps-4.1.1/) ... on Windows your Path if you're using the default one's will look like C:/Program Files/Openlaszlo Server 
+  * Download and Install !OpenLaszlo 4.2.x (Version > 4.2.x from http://download.openlaszlo.org/nightly/trunk/!)
+  * create a directory *openmeetings* into your !OpenLaszlo-WebRoot directory ($LPS-HOME/Server/lps-4.2.x/) ... on Windows your Path if you're using the default one's will look like C:/Program Files/Openlaszlo Server 
   * Checkout from the SVN using http://code.google.com/p/openmeetings/source/browse/trunk/openmeetings_lps411/ as root of your Project ($CLIENT_SOURCE_ROOT) into the directory *openmeetings* you have created
-  * alter the config.xml in ($LPS-HOME/Server/lps-4.1.1/openmeetings/)config.xml (for example C:/Program Files/Openlaszlo Server 4.1.1/Server/lps-4.1.1/openmeetings/config.xml) ... _rtmphostlocal_ should match the IP/domain of your red5-streaming server (if its on the same IP like your Openlaszlo-Server you can leave it blank)
-  * Start OpenLaszlo Server and run (lps-4.1.1 = lps-4.1.1 if this is your !Openlaszlo version: http://localhost($LPS-HOST):8080/lps-4.1.1/videoconference/maindebug.lzx?lzr=swf8&lzproxied=solo  (with debugger) and /or http://localhost($LPS-HOST):8080/lps-4.1.1/videoconference/main.lzx?lzr=swf8&lzproxied=solo
+  * alter the config.xml in ($LPS-HOME/Server/lps-4.2.x/openmeetings/)config.xml (for example C:/Program Files/Openlaszlo Server 4.1.1/Server/lps-4.2.x/openmeetings/config.xml) ... _rtmphostlocal_ should match the IP/domain of your red5-streaming server (if its on the same IP like your Openlaszlo-Server you can leave it blank)
+  * Start OpenLaszlo Server and run (lps-4.2.x = lps-4.2.x if this is your !Openlaszlo version: http://localhost($LPS-HOST):8080/lps-4.2.x/videoconference/maindebug.lzx?lzr=swf8&lzproxied=solo  (with debugger) and /or http://localhost($LPS-HOST):8080/lps-4.2.x/videoconference/main.lzx?lzr=swf8&lzproxied=solo
 
 = Java Webapp (Server-Side) =
 
