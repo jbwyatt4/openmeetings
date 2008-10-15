@@ -33,7 +33,7 @@
 		<method name="disconnectclient" >
 			////Debug.write("disconnectclient: ",searchid,userpos);
 			if (this.subviews.length!=0){
-				this.subviews[0]._chatvideoinner.setResourceNumber(5);
+				this.subviews[0]._chatvideoinner.setAttribute('frame',5);
 				this.subviews[0].resetValues();
 			}
 		</method>	

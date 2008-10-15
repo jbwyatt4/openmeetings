@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library>
 
-<class name="baseDrawObject" extends="baseDraw">
+<class name="baseDrawObject" extends="baseDrawPointer">
     
     <!-- it uses some of the attribute's defined in baseDrawImage -->
     <attribute name="newSlideNumber" value="1" type="number" />

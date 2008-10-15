@@ -84,7 +84,7 @@
 			<view name="r" resource="chatbgitem" x="1" y="2" stretches="both" width="128" height="96" />
 			
 			<handler name="oninit">
-				this.r.setResourceNumber(5);
+				this.r.setAttribute('frame',5);
 			</handler>
 			
 			<playVideoView name="_videoview" visible="false" x="1" y="2" width="128" height="96" />		
@@ -103,11 +103,11 @@
 			<handler name="onclick">
 				if (this.isload){
 					parent._chatvideoinner._videoview.v_output.setVolume(0);
-					this.setResourceNumber(2);
+					this.setAttribute('frame',2);
 					this.isload = false;
 				} else {
 					parent._chatvideoinner._videoview.v_output.setVolume(100);
-					this.setResourceNumber(1);
+					this.setAttribute('frame',1);
 					this.isload = true;
 				}
 			</handler>

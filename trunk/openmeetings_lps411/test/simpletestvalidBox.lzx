@@ -437,7 +437,7 @@ String.prototype.startsWith = function(prefix) {
 				if (lz.Focus.getFocus() == this.interior.cbtext) {
 					_fixseldel.start = 0;
 					_fixseldel.end = v.text.length;
-					LzIdle.callOnIdle( _fixseldel );
+					lz.Idle.callOnIdle( _fixseldel );
 	
 				}
 	
@@ -691,11 +691,11 @@ String.prototype.startsWith = function(prefix) {
         <method name="_showEnabled">
            super._showEnabled();
            if (_enabled) {
-				this.bkgnd.lft.setResourceNumber( 1 );
-				this.bkgnd.mid.setResourceNumber( 1 );
+				this.bkgnd.lft.setAttribute('frame', 1 );
+				this.bkgnd.mid.setAttribute('frame', 1 );
             } else {
-				this.bkgnd.lft.setResourceNumber( 3 );
-				this.bkgnd.mid.setResourceNumber( 3 );
+				this.bkgnd.lft.setAttribute('frame', 3 );
+				this.bkgnd.mid.setAttribute('frame', 3 );
             }
         </method>
 

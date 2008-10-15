@@ -5,6 +5,9 @@
 <!--
     The order of views is important in this class
     otherwise the scrollbar of the swfPresentation would be not visible or partly overlayed
+    
+    
+    this is the selection Box for all Whiteboard Objects
  -->
     
 <class name="boundingBoxAll" extends="view">
@@ -230,6 +233,7 @@
 		<labelTooltip labelid="252" />
 	</view>
 	
+    <!--
 	<view resource="_boundingBoxPointer" x="${ parent.width/2-this.width/2 }" y="${ parent.height/2-this.height/2 }"
 		onmousedown="parent._applyDragstateFromThis()" onmouseup="parent._removeDragstateFromThis()"
         onmouseover="this.parent.applyScrollbarToObject()" onmouseout="this.parent.removeScrollbarToObject()">		
@@ -241,7 +245,8 @@
             this.setContextMenu(newMenu);       
         </handler>               	
 		<labelTooltip labelid="251" />
-	</view>     
+	</view>    
+     --> 
     
 	<baseChooseIcon resourceN="deleteIcon" x="${ parent.width-this.width }" y="0" labelid="80" width="22" height="22">
 		<handler name="onclick">

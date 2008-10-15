@@ -26,6 +26,9 @@
 	
 </class>
 
+<!--
+    this is the Base Container for all Whiteboard Objects
+ -->
 <class name="drawViewNew" extends="drawview" cachebitmap="false" x="-1" y="-1" >
 	
 	<attribute name="typeOfObject" value="paint" type="string" />
@@ -49,7 +52,7 @@
 		        } else if (this.name.indexOf('rectangle')>=0) {
 	        		parent.redrawRectItemByScaling(this);
 	        	} else if  (this.name.indexOf('ellipse')>=0) {
-	        		
+	        		parent.redrawEllipseItemByScaling(this);
 	        	}	        	
 	        }
         ]]>
@@ -66,7 +69,7 @@
 		        } else if (this.name.indexOf('rectangle')>=0) {
 	        		parent.redrawRectItemByScaling(this);
 	        	} else if  (this.name.indexOf('ellipse')>=0) {
-	        		
+	        		parent.redrawEllipseItemByScaling(this);
 	        	}	
 	        }  	
         ]]>   

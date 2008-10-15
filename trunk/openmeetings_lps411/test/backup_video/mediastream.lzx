@@ -814,7 +814,7 @@
             }
 
             this._timedel.unregisterAll();
-            this._timedel.register(LzIdle, "onidle");
+            this._timedel.register(lz.Idle, "onidle");
           ]]>
         </method>
 

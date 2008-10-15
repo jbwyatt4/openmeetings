@@ -189,7 +189,7 @@
 			this._video1.isremote = false;
 			this._video1.publicSID = publicSID;
 			
-			this._video1._chatvideoinner.setResourceNumber(1);
+			this._video1._chatvideoinner.setAttribute('frame',1);
 			this._video1._chatvideoinner._videoview.setAttribute('visible',true);
 			//Debug.write("canvas.currentusercolor : ",canvas.currentusercolor);
 			canvas.currentuserpos=1;
@@ -209,7 +209,7 @@
 				//A free Slot has been found
 				//return the Reference to the VideoView it and mark it as used
 				this._video1.publicSID = publicSID;
-				this._video1._chatvideoinner.setResourceNumber(1);
+				this._video1._chatvideoinner.setAttribute('frame',1);
 				//this._video1._chatvideoinner._videoview.setAttribute('visible',true);
 				this._video1.setAttribute('isassigned',true);
 				return this._video1.getVideoReference();
@@ -227,7 +227,7 @@
         this._video1._chatvideoinner._videoview.cameraRef.setAttribute('show',false);		
 		this._video1._chatvideoinner._videoview.setAttribute('visible',false);
 		this._video1.setAttribute('isassigned',false);
-		this._video1._chatvideoinner.setResourceNumber(5);
+		this._video1._chatvideoinner.setAttribute('frame',5);
 		this._video1.resetValues();
 	</method>
 	
@@ -265,7 +265,7 @@
 	            //mark this view as free
 	            if ($debug) Debug.write("Found client to disconnect");
 				this._video1.setAttribute('isassigned',false);
-				this._video1._chatvideoinner.setResourceNumber(5);
+				this._video1._chatvideoinner.setAttribute('frame',5);
 				this._video1._chatvideoinner._videoview.setAttribute('visible',false);
 				this._video1.resetValues();
 				new lz.errorModeratorPopup(canvas,{error:canvas.getLabelName(497)});

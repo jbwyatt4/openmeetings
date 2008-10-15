@@ -51,7 +51,7 @@
 			var vidRef = this.getVideoObjectByPublicSID(publicSID);
 			if (vidRef!=null){
 				vidRef.setAttribute('isassigned',false);
-				vidRef._chatvideoinner.r.setResourceNumber(5);
+				vidRef._chatvideoinner.r.setAttribute('frame',5);
 				vidRef.resetValues();
 				vidRef.destroy();
 			}

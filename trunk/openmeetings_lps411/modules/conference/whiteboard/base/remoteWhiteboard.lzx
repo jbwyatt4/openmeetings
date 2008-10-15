@@ -33,9 +33,10 @@
             	if ($debug) Debug.write("startNewSyncprocess: ",value);
             	if (value.roomclient.publicSID == canvas.publicSID){
             		if ($debug) Debug.write("currentLoadingItem IS mine");
-            		if (value.currentLoadingItem){
+                    //TODO: Check usage of currentLoadingItem
+            		//if (value.currentLoadingItem){
             			parent.startInitialLoadinProcess();
-            		}
+            		//}
             	}
             ]]>
         </handler>   

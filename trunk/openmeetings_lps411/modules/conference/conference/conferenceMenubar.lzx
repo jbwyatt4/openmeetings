@@ -27,11 +27,12 @@
 	        <_labelMenuItem labelid="15" command="cmd_importFile" />
 	    </_labelMenu>    
 
-	    <!-- browser menu -->
+	    <!-- browser menu
 	    <_labelMenu labelid="539" width="250">
 	        <_labelMenuItem labelid="554" command="cmd_browser_open" />
 	        <_labelMenuItem labelid="555" command="cmd_browser_close" />
-	    </_labelMenu>    
+	    </_labelMenu> 
+         -->   
 
 	   <!-- setteings menu --> 
 	    <_labelMenu labelid="305" width="250">
