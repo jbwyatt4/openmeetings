@@ -13,8 +13,8 @@
     
     <handler name="oninit">
         this.pressEnter = new LzDelegate(this, "login");
-        LzKeys.callOnKeyCombo(this.pressEnter, ["enter"]);
-        LzFocus.setFocus(this.username,true);
+        lz.Keys.callOnKeyCombo(this.pressEnter, ["enter"]);
+        lz.Focus.setFocus(this.username,true);
 	</handler>  
     
     <method name="login">
@@ -39,7 +39,7 @@
                 t.getLocal('userdata');
                 var g = t.getData('userdata');
                 if($debug) Debug.write("checkLoginData/g: ",g);
-                if(g!=null) if (g["username"]!=null) this.setText(g["username"]);
+                if(g!=null) if (g["username"]!=null) this.setAttribute('text',g["username"]);
             </handler>             
         </customEdittext>    
 
@@ -49,7 +49,7 @@
                 var t = new lz.sharedObject();
                 t.getLocal('userdata');
                 var g = t.getData('userdata');
-                if(g!=null) if (g["userpass"]!=null) this.setText(g["userpass"]);
+                if(g!=null) if (g["userpass"]!=null) this.setAttribute('text',g["userpass"]);
             </handler>                
         </customEdittext>
     
@@ -168,14 +168,14 @@
     	<handler name="onclick">
 	    	this.parent._register.setAttribute('visible',false);
 	    	this.parent.childObj = new lz.registerNewUser(canvas.main_content._content.inner,{refObj:this.parent});    	
-    		LzKeys.removeKeyComboCall(this.parent.pressEnter, ["enter"]);
+    		lz.Keys.removeKeyComboCall(this.parent.pressEnter, ["enter"]);
 		parent.showRegForm.doStart();
     	</handler>
     </simpleLabelButton>          
         
     <simpleLabelButton name="b2" labelid="112" width="120" x="230" y="$once{ parent.height-40 }">
     	<handler name="onclick">
-            this.parent.errormess.setText('');
+            this.parent.errormess.setAttribute('text','');
     		this.parent.loginUser.doCall();
     	</handler>
     </simpleLabelButton>   
@@ -341,18 +341,18 @@
     <labelText align="right" resize="true" valign="bottom">
         <handler name="oninit">
             <![CDATA[
-                this.setText("<u><FONT color='#0000CC'>visit "+ canvas.currentappname +"</FONT></u>");
+                this.setAttribute('text',"<u><FONT color='#0000CC'>visit "+ canvas.currentappname +"</FONT></u>");
             ]]>
         </handler>
         <handler name="onclick">
-            LzBrowser.loadURL(canvas.currentappnameurl,"_blank");
+            lz.Browser.loadURL(canvas.currentappnameurl,"_blank");
         </handler>        
     </labelText>
     
     <labelText align="left" resize="true" valign="bottom">
         <handler name="oninit">
             <![CDATA[
-                this.setText("<u><FONT color='#0000CC'>"+ canvas.getLabelName(311) +"</FONT></u>");
+                this.setAttribute('text',"<u><FONT color='#0000CC'>"+ canvas.getLabelName(311) +"</FONT></u>");
             ]]>
         </handler>
         <attribute name="showResetBox" value="false" type="boolean" />
@@ -369,15 +369,15 @@
     
     <method name="createReset" args="value">
        var resetF=new lz.resetForm(value,{name:'_resetForm'});
-       LzKeys.removeKeyComboCall(this.pressEnter, ["enter"]);
+       lz.Keys.removeKeyComboCall(this.pressEnter, ["enter"]);
        this.pressEnter = new LzDelegate(resetF, "reset");
-       LzKeys.callOnKeyCombo(this.pressEnter, ["enter"]);
+       lz.Keys.callOnKeyCombo(this.pressEnter, ["enter"]);
     </method>
     <method name="destroyReset" args="value">
        value._resetForm.destroy();
-       LzKeys.removeKeyComboCall(this.pressEnter, ["enter"]);
+       lz.Keys.removeKeyComboCall(this.pressEnter, ["enter"]);
        this.pressEnter = new LzDelegate(value, "login");
-       LzKeys.callOnKeyCombo(this.pressEnter, ["enter"]);
+       lz.Keys.callOnKeyCombo(this.pressEnter, ["enter"]);
     </method>
 
     <animator name="showRegForm" attribute="x" to="20" duration="1000" start="false" />

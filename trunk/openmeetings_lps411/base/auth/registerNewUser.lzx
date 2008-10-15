@@ -11,12 +11,12 @@
         var defaultstate = canvas.getCountryRecord(1);
         this.state.addAndSelectItem(defaultstate.name,defaultstate.state_id);        
         var pressEnter = new LzDelegate(this, "register");
-        LzKeys.callOnKeyCombo(pressEnter, ["enter"]);
+        lz.Keys.callOnKeyCombo(pressEnter, ["enter"]);
     </handler>
     
     <handler name="onclose">
     	this.refObj._register.setAttribute('visible',true);
-        LzKeys.callOnKeyCombo(refObj.pressEnter, ["enter"]);
+        lz.Keys.callOnKeyCombo(refObj.pressEnter, ["enter"]);
     	this.refObj.doreset.doStart();
     </handler>
     
@@ -121,8 +121,8 @@
 			if (!(value<0)){
 				//Debug.write("successfully registered");
                  new lz.rpcErrorDialog(canvas.main_content._content.inner,{errorid:-18});
-                 this.parent.refObj.username.setText(this.parent.username.getText());
-                 this.parent.refObj.userpass.setText(this.parent.userpass1.getText());
+                 this.parent.refObj.username.setAttribute('text',this.parent.username.getText());
+                 this.parent.refObj.userpass.setAttribute('text',this.parent.userpass1.getText());
                  this.parent.close();
 			}
 			]]>

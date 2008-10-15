@@ -18,7 +18,7 @@ function setLabelObjectByHundred(no,obj){
 }
 
 function getLabelTag(labelid){
-	// if($debug) Debug.write("FUNC/getLabelTag",labelid);
+	//if($debug) Debug.write("FUNC/getLabelTag",labelid);
 	var no = Math.floor(labelid/100);
 	return getLabelTagByNo(no,labelid);
 }
@@ -26,7 +26,7 @@ function getLabelTag(labelid){
 function getLabelTagByNo(no,labelid){
 	var labeltag = "";
 	var l = labels[no]
-	//Debug.write("Search label tag in: ",labelid,labels[no]);
+	//if ($debug) Debug.write("Search label tag in: ",labelid,labels[no]);
     for (var eg=0;eg<=l.length;eg++){
 	    if (l[eg].fieldvalues_id==labelid){
 			// if($debug) Debug.write("FUNC/getLabelTagByNo",no,labelid,l[eg].value);

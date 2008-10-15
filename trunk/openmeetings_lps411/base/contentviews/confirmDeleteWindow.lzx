@@ -7,11 +7,11 @@
     <attribute name="refObj" value="null" />
     
     <handler name="oninit">
-        LzModeManager.makeModal(this);
+        lz.ModeManager.makeModal(this);
     </handler>
     
     <handler name="onclose">
-        LzModeManager.release(this);
+        lz.ModeManager.release(this);
     </handler>
     
     <labelText labelid="145" y="22" />

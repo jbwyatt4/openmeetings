@@ -5,12 +5,12 @@
     docking="true" closable="true" width="264" x="200" height="200">
     
     <handler name="oninit">
-    	LzModeManager.makeModal(this);
+    	lz.ModeManager.makeModal(this);
         canvas.currentUploadWindow = this;
     </handler>
     
     <handler name="onclose">
-    	LzModeManager.release(this);
+    	lz.ModeManager.release(this);
     </handler>
     
     <attribute name="winobj" value="null" />
@@ -93,7 +93,7 @@
     
 		<method name="onSelect" args="fr">
 			//Debug.write("onSelect: ",getName());
-			this.parent.txtFile.setText(getName());
+			this.parent.txtFile.setAttribute('text',getName());
 			this.parent.upload.setAttribute('enabled', true);
 		</method>
 	</fileUpload>
@@ -127,7 +127,7 @@
 		<method name="setValue" args="value">
 			<![CDATA[
                 status.setAttribute('width', value * 198 / 100);
-                percent.setText(Math.round(value) + '%');
+                percent.setAttribute('text',Math.round(value) + '%');
 			]]>
 		</method>
 		<text name="percent" align="center" resize="true" y="-18" fontstyle="bold" 

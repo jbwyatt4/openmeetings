@@ -18,7 +18,7 @@
     
     <method name="setSliderValue" args="v">
     	this.initialNumber = v;
-    	this.numericValue.setText(this.initialNumber);
+    	this.numericValue.setAttribute('text',this.initialNumber);
     	this.setEnabled(true);
     </method>
     
@@ -37,8 +37,8 @@
                 var t = parseInt(this.getText());
                 if (isNaN(t) || t > this.parent.maximum || t < this.parent.minimum){
                     t = this.tempValue;
-                    this.setText(t);
-                    LzFocus.setFocus(this);
+                    this.setAttribute('text',t);
+                    lz.Focus.setFocus(this);
                 } else {
                     this.tempValue = t;
                     parent.setAttribute('initialNumber',t);
@@ -53,7 +53,7 @@
             x="4" y="3" />
             <handler name="onclick">
                 var pick = new lz.changeWidthLetterSliderWin(canvas,{initialNumber:parent.numericValue.tempValue,btnRef:this.parent,x:(parent.getAttributeRelative('x',canvas)),y:(parent.getAttributeRelative('y',canvas))});
-                LzModeManager.makeModal( pick );
+                lz.ModeManager.makeModal( pick );
             </handler>
         <labelTooltip labelid="431" />
     </button>
@@ -62,7 +62,7 @@
     
 <class name="closableViewLetter" extends="view">
     <method name="close">
-        LzModeManager.release(this);
+        lz.ModeManager.release(this);
         this.destroy();
     </method>
 </class>    
@@ -101,7 +101,7 @@
         initvalue="$once{ parent.initialNumber }" showrange="false" >
         <handler name="onvalue" args="v">
             parent.btnRef.numericValue.tempValue = Number(v);
-            parent.btnRef.numericValue.setText(v);
+            parent.btnRef.numericValue.setAttribute('text',v);
             parent.btnRef.setAttribute('initialNumber',v);
         </handler>
         <handler name="onvalueChosenFinal">

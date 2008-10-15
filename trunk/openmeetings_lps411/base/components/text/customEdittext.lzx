@@ -76,7 +76,7 @@
     
     <method name="setLabelId" args="_labelid" >
         this.labelid = _labelid;
-        this.setText(canvas.getLabelName(this.labelid));
+        this.setAttribute('text',canvas.getLabelName(this.labelid));
     </method>
     
   	<method name="usePreContent">

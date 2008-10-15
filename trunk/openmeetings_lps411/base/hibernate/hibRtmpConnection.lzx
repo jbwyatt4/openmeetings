@@ -93,15 +93,15 @@
                 if (this.counterror<3){
                     this.counterror++;
 	  	 	        //Debug.write("try ",this.counterror,"one");
-                    canvas.thishib.loaderVar.error.setText("try "+this.counterror);
+                    canvas.thishib.loaderVar.error.setAttribute('text',"try "+this.counterror);
 	  	 	        this.connect();
                 } else {
                     //Debug.write("connection failed");
-                    canvas.thishib.loaderVar.error.setText(this.status);
+                    canvas.thishib.loaderVar.error.setAttribute('text',this.status);
                     canvas.setAttribute('loadingmessage','connection failed');
                     new lz.labelerrorPopup(canvas,{errorlabelid:556});
                 }
-                canvas.thishib.loaderVar._src.setText(src);
+                canvas.thishib.loaderVar._src.setAttribute('text',src);
             }
         ]]>
     </handler>       
@@ -729,7 +729,7 @@
                     }
                 } else if (value[0]=='sharewhiteside'){
                     if (canvas.htmlframeisloaded){      
-                        _htmlside.setText(value[2]);
+                        _htmlside.setAttribute('text',value[2]);
                         canvas.ifrm.setAttribute('isrc','http://'+value[2]);
                     }
                 }

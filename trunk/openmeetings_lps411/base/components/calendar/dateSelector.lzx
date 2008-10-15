@@ -33,9 +33,9 @@
 		<![CDATA[
         super.init();
         if (parent.parent.parent.parent.month!=daydate.getMonth())
-        	this._date.setText('<FONT COLOR="#CCCCCC">'+daydate.getDate()+'</FONT>');
+        	this._date.setAttribute('text','<FONT COLOR="#CCCCCC">'+daydate.getDate()+'</FONT>');
         else 
-        	this._date.setText(daydate.getDate());
+        	this._date.setAttribute('text',daydate.getDate());
         ]]>
 	</method>
 	
@@ -52,7 +52,7 @@
 	        super.init();
 	        var dateRoot = parent.parent.parent.parent;
 	        //if ($debug) Debug.write("daynumber",this,dateRoot);
-	        this._date.setText(canvas.getLabelName(dateRoot.dayNamesLabelIds[( (daynumber>6) ? (daynumber-7) : daynumber )]));
+	        this._date.setAttribute('text',canvas.getLabelName(dateRoot.dayNamesLabelIds[( (daynumber>6) ? (daynumber-7) : daynumber )]));
 	        this._date._tip.setAttribute('labelid',dateRoot.dayLabelNamesLabelIds[( (daynumber>6) ? (daynumber-7) : daynumber )]); 
         ]]>
 	</method>
@@ -119,7 +119,7 @@
 	</method> 
 	<view name="header" layout="axis:x" height="18" bgcolor="$once{ canvas.baseMouseOvercolorizer }">
 		<text width="20" fgcolor="white" height="18"
-			onmouseover="this.setBGColor(canvas.basebgcolorizer)" onmouseout="this.setBGColor(canvas.baseMouseOvercolorizer)">
+			onmouseover="this.setAttribute('bgcolor',canvas.basebgcolorizer)" onmouseout="this.setAttribute('bgcolor',canvas.baseMouseOvercolorizer)">
 			<handler name="oninit"><![CDATA[
 				this.setAttribute('text','&#60;');]]>
 			</handler>
@@ -128,7 +128,7 @@
 			</handler>
 		</text>
 		<text width="22" fgcolor="white" height="18"
-			onmouseover="this.setBGColor(canvas.basebgcolorizer)" onmouseout="this.setBGColor(canvas.baseMouseOvercolorizer)">
+			onmouseover="this.setAttribute('bgcolor',canvas.basebgcolorizer)" onmouseout="this.setAttribute('bgcolor',canvas.baseMouseOvercolorizer)">
 			<handler name="oninit"><![CDATA[
 				this.setAttribute('text','&#60;&#60;');]]>
 			</handler>			
@@ -140,13 +140,13 @@
 			<text fontsize="10" fgcolor="white" align="center" text="${ parent.parent.parent.currentMonthName+' '+parent.parent.parent.parent.parent.year }" resize="true" />
 		</view>
 		<text width="22" fgcolor="white" text=">>" height="18"
-			onmouseover="this.setBGColor(canvas.basebgcolorizer)" onmouseout="this.setBGColor(canvas.baseMouseOvercolorizer)">
+			onmouseover="this.setAttribute('bgcolor',canvas.basebgcolorizer)" onmouseout="this.setAttribute('bgcolor',canvas.baseMouseOvercolorizer)">
 			<handler name="onclick">
 				this.parent.parent.parent.parent.showNextYear();
 			</handler>
 		</text>
 		<text width="20" fgcolor="white" text="  >" height="18"
-			onmouseover="this.setBGColor(canvas.basebgcolorizer)" onmouseout="this.setBGColor(canvas.baseMouseOvercolorizer)">
+			onmouseover="this.setAttribute('bgcolor',canvas.basebgcolorizer)" onmouseout="this.setAttribute('bgcolor',canvas.baseMouseOvercolorizer)">
 			<handler name="onclick">
 				this.parent.parent.parent.parent.showNextMonth();
 			</handler>

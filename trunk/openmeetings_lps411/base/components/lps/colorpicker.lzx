@@ -54,7 +54,7 @@
     <attribute name="selectedColor" type="number" value="0x00aeef"/>
     
     <handler name="onclose">
-    	LzModeManager.release(this);
+    	lz.ModeManager.release(this);
         this.btnRef.closedColorPicker();
         this.btnRef.setAttribute('selectedColor', this.selectedColor);
         this.btnRef.setTransformedStringColor();        
