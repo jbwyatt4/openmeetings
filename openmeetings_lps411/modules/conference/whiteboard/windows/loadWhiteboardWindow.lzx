@@ -7,15 +7,15 @@
     <attribute name="refObj" value="null" />
     
     <handler name="oninit">
-    	LzModeManager.makeModal(this);
+    	lz.ModeManager.makeModal(this);
     </handler>
     
     <handler name="onclose">
-    	LzModeManager.release(this);
+    	lz.ModeManager.release(this);
     </handler>
 	
 	<method name="setMessage" args="mess">
-		this._loadMessage.setText(mess);
+		this._loadMessage.setAttribute('text',mess);
 	</method>
     
     <labelText y="22" name="_loadMessage" multiline="true" 

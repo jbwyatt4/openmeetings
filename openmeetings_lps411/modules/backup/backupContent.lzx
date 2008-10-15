@@ -5,7 +5,7 @@
 <class name="backupContent" extends="baseContentView">
 	
 	<!-- 380:Userdata - Export -->
-	<labelText labelid="380" y="2" x="2" fontstyle="bold" />  
+	<labelText labelid="380" y="2" x="2" fontstyle="bold" width="160" />  
 	
 	<!-- 382:start export -->
     <simpleLabelButton labelid="382" width="160" x="2" y="32">
@@ -16,16 +16,16 @@
 	    				+'&moduleName=users'
 	    				+'&sid='+canvas.sessionId;
 	    		if($debug) Debug.write("BACKUP/exporturl "+exporturl);
-	            LzBrowser.loadURL(exporturl,"_parent");
+	            lz.Browser.loadURL(exporturl,"_parent");
             ]]>
     	</handler>
     </simpleLabelButton>   
     
     <!-- 381:All organisations must be already existing! -->
-    <labelText labelid="381" y="32" x="200"/>  
+    <labelText labelid="381" y="32" x="200" width="300" />  
 	
 	<!-- 383:By organisation -->
-	<labelText labelid="383" y="62" x="2"/>  
+	<labelText labelid="383" y="62" x="2" width="160" />  
 	
     <combobox name="organistations" width="170" y="62" x="230" editable="false" >
     	<handler name="oninit">
@@ -55,13 +55,13 @@
 	    				+'&moduleName=userorganisations'
 	    				+'&sid='+canvas.sessionId;
 	    		if($debug) Debug.write("BACKUP/exporturl "+exporturl);
-	            LzBrowser.loadURL(exporturl,"_parent");
+	            lz.Browser.loadURL(exporturl,"_parent");
             ]]>
     	</handler>
     </simpleLabelButton>   
 	
 	<!-- 385:Userdata - Import -->
-	<labelText labelid="385" y="112" x="2" fontstyle="bold" />  
+	<labelText labelid="385" y="112" x="2" fontstyle="bold" width="160" />  
 	
 	<!-- 386:choose users.xml -->
     <simpleLabelButton labelid="386" x="2" y="142">

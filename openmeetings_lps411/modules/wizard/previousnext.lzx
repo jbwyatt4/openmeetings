@@ -8,11 +8,11 @@
     <attribute name="refObj" value="null" />
     
     <handler name="oninit">
-        LzModeManager.makeModal(this);
+        lz.ModeManager.makeModal(this);
     </handler>
     
     <handler name="onclose">
-        LzModeManager.release(this);
+        lz.ModeManager.release(this);
     </handler>
 	
 	<netRemoteCallHib name="searchUser" funcname="userservice.searchUser" remotecontext="$once{ canvas.thishib }" >      

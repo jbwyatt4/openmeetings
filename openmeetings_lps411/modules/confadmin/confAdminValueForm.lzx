@@ -21,10 +21,10 @@
 	<handler name="onnew">
 		this.configuration_id=0;
 		this.comment.setAttribute('text','');
-		this.conf_key.setText('');
-		this.conf_value.setText('');
-		this.updatetime.setText('');
-        this.users_login.setText('');
+		this.conf_key.setAttribute('text','');
+		this.conf_value.setAttribute('text','');
+		this.updatetime.setAttribute('text','');
+        this.users_login.setAttribute('text','');
 	</handler>
 	
     <handler name="ondelete" >
@@ -48,13 +48,13 @@
             //Debug.write("initFields: ",obj);
             this.confobj = obj;
 			this.comment.setAttribute('text',obj.comment);
-			this.conf_key.setText(obj.conf_key);
-			this.conf_value.setText(obj.conf_value);
-			this.updatetime.setText(obj.updatetime);
+			this.conf_key.setAttribute('text',obj.conf_key);
+			this.conf_value.setAttribute('text',obj.conf_value);
+			this.updatetime.setAttribute('text',obj.updatetime);
             if(obj.users!=null){
-			    this.users_login.setText(obj.users.login);
+			    this.users_login.setAttribute('text',obj.users.login);
             } else {
-                this.users_login.setText('');
+                this.users_login.setAttribute('text','');
             }
         ]]>
     </method>

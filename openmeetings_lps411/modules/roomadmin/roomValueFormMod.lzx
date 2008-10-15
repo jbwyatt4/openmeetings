@@ -20,8 +20,8 @@
 
 	<handler name="onnew">
 		this.rooms_id=0;
-        this.roomname.setText('');
-		this.comment.setText('');
+        this.roomname.setAttribute('text','');
+		this.comment.setAttribute('text','');
 		this.ispublic.setValue(false);
 		this._organisationslist.clearList();
 	</handler>
@@ -43,8 +43,8 @@
     
     <method name="initFields" args="obj">
     	<![CDATA[
-			this.roomname.setText(obj.name);
-			this.comment.setText(obj.comment);
+			this.roomname.setAttribute('text',obj.name);
+			this.comment.setAttribute('text',obj.comment);
 			this.ispublic.setValue(obj.ispublic);
 			this.roomtype.selectItem(String(obj.roomtype.roomtypes_id));
         ]]>

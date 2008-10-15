@@ -9,12 +9,12 @@
     <attribute name="refObj" value="null" />
     
     <handler name="oninit">
-        LzModeManager.makeModal(this);
+        lz.ModeManager.makeModal(this);
 		this.getOrganisations.doCall();
     </handler>
     
     <handler name="onclose">
-        LzModeManager.release(this);
+        lz.ModeManager.release(this);
     </handler>
 	
 	<netRemoteCallHib name="getOrganisations" funcname="organisationservice.getOrganisations" remotecontext="$once{ canvas.thishib }" >      

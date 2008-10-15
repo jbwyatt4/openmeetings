@@ -30,11 +30,11 @@
 <class name="errorDialog" extends="baseErrorDialog">
 
 	<handler name="oninit">
-		LzModeManager.makeModal(this);
+		lz.ModeManager.makeModal(this);
 		this.getErrorByCode.doCall();
 	</handler>
     <handler name="onclose">
-        LzModeManager.release(this);
+        lz.ModeManager.release(this);
     </handler>
 	
 </class>
@@ -47,13 +47,13 @@
 	<attribute name="errorid" value="0" type="number" />
     
     <handler name="oninit">
-        LzModeManager.makeModal(this);
+        lz.ModeManager.makeModal(this);
         Debug.write("contentsavewindow: ",errorid);
         this.startSave();
     </handler>
     
     <handler name="onclose">
-        LzModeManager.release(this);
+        lz.ModeManager.release(this);
     </handler>
     
     <method name="startSave">

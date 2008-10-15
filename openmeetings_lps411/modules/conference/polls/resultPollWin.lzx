@@ -32,7 +32,7 @@
 	<handler name="oninit">
 		<![CDATA[
 		//Debug.write("this.pollTypeId: ",this.pollTypeId);
-		this.head.setText("You "+canvas.getLabelName(36));
+		this.head.setAttribute('text',"You "+canvas.getLabelName(36));
 		this.totalVotes = this.roomPollAnswerList.length;
 		if (this.pollTypeId==1){
 			//Debug.write("yes/no");
@@ -53,7 +53,7 @@
 		}
 		
 		//Debug.write("this.votes: ",this);
-		this.voteResultNum.setText(this.totalVotes);
+		this.voteResultNum.setAttribute('text',this.totalVotes);
 		
 		if (this.pollTypeId==1){
 			if (this.positives==0) {

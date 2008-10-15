@@ -45,9 +45,12 @@
 	            <handler name="ondata" args="value">
 	            	<![CDATA[
 	                	//The onResult-Handler will be called be the rtmpconnection
-						Debug.write("getChatOverallUsers : ",value);
+						if ($debug) Debug.write("getChatOverallUsers : ",value);
 						for (var i=0;i<value.overallList.length;i++){
-							new lz.chatParticipants(this.parent._list,{user_id:value.overallList[i].user_id,username:value.overallList[i].firstname+" "+value.overallList[i].lastname});				
+							new lz.chatParticipants(this.parent._list,{
+                                    user_id:value.overallList[i].user_id,
+                                    username:value.overallList[i].firstname+" "+value.overallList[i].lastname
+                                });				
 						}
 	                ]]>
 	            </handler>   

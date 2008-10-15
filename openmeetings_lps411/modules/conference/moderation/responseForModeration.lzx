@@ -20,7 +20,7 @@
             dtString += 'Host: '+userobject['userip']+'<BR />';
             dtString += 'Time: '+userobject['connectedSince']+'<BR />';
             
-            this.userToAccept.setText(dtString);
+            this.userToAccept.setAttribute('text',dtString);
             
             this.userautoTimerDelegate = new LzDelegate( this, "autoResponse" );
             lz.Timer.addTimer( this.userautoTimerDelegate, 1000 );            

@@ -19,18 +19,18 @@
 		this.objName = objName;
 		//Debug.write("drawareaalterposition updateVal: ",objName);
 		if (objName==null || objName==''){
-			this.xval.setText('');
-			this.yval.setText('');
-			this.heigthval.setText('');
-			this.widthval.setText('');
+			this.xval.setAttribute('text','');
+			this.yval.setAttribute('text','');
+			this.heigthval.setAttribute('text','');
+			this.widthval.setAttribute('text','');
 			this.obj=null;
 		} else {
 			this.obj = canvas._drawarea.getObjectByName(objName);
 			//Debug.write("this.obj: ",this.obj);
-			this.xval.setText(this.obj.x);
-			this.yval.setText(this.obj.y);
-			this.heigthval.setText(this.obj.height);
-			this.widthval.setText(this.obj.width);
+			this.xval.setAttribute('text',this.obj.x);
+			this.yval.setAttribute('text',this.obj.y);
+			this.heigthval.setAttribute('text',this.obj.height);
+			this.widthval.setAttribute('text',this.obj.width);
 		}
 		]]>
 	</method>

@@ -8,8 +8,8 @@
 	<attribute name="answer" value="false" type="boolean" />
 	
 	<view name="inner" width="$once{ parent.width-2 }" height="$once{ parent.height-2 }" x="1" y="1"
-		onmouseover="this.setBGColor(canvas.baseMousecolorizer)"
-		onmouseout="this.setBGColor(0xFFFFFF)" bgcolor="0xFFFFFF">
+		onmouseover="this.setAttribute('bgcolor',canvas.baseMousecolorizer)"
+		onmouseout="this.setAttribute('bgcolor',0xFFFFFF)" bgcolor="0xFFFFFF">
 		<labelText text="$once{ parent.parent.streamid }" width="50" />
 		<labelText text="$once{ parent.parent.username }" x="50" width="300" />
 		<labelText name="answer" labelid="88" x="350" width="140" />
@@ -41,10 +41,10 @@
 		var answer = value.message[1];
 		//Debug.write("answer: ",answer);
 		if (answer=='ok'){
-			t.inner.answer.setText(canvas.getLabelName(94));
+			t.inner.answer.setAttribute('text',canvas.getLabelName(94));
 			t.answer = true;
 		} else {
-			t.inner.answer.setText(canvas.getLabelName(95));
+			t.inner.answer.setAttribute('text',canvas.getLabelName(95));
 			t.answer = false;
 		}
 		]]>

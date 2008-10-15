@@ -8,10 +8,10 @@
 	
 	<method name="setObjectBounds" args="x,y,width,height">
 		if ($debug) Debug.write("setObjectBounds: ",x,y,width,height);
-		this._content._xvalue.setText(x);
-		this._content._yvalue.setText(y);
-		this._content._widthvalue.setText(width);
-		this._content._heightvalue.setText(height);
+		this._content._xvalue.setAttribute('text',x);
+		this._content._yvalue.setAttribute('text',y);
+		this._content._widthvalue.setAttribute('text',width);
+		this._content._heightvalue.setAttribute('text',height);
 	</method>
 	
 	<method name="onUpdateBoundByText">

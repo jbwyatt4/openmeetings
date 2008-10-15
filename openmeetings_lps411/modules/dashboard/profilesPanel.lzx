@@ -20,7 +20,7 @@
     	<handler name="ondata" args="value">
     		<![CDATA[
 				if($debug) Debug.write("dashboard/getUserSelf: ",value);
-				parent._username.setText(canvas.getLabelName(376)+value.login);
+				parent._username.setAttribute('text',canvas.getLabelName(376)+value.login);
 				if (value.pictureuri==null || value.pictureuri.length==0){
 					value.pictureuri = "d.jpg";
 				} else {

@@ -21,9 +21,9 @@
 	</handler>	
 
 	<handler name="onnew">
-        this.initValueFieldsByObject(new Array());
+        this.initValueFieldsByObject(null);
 		this.setAttribute('fieldvalues_id',0);
-        this.fieldlanguagesvalues_id=0;        
+        this.fieldlanguagesvalues_id=0;   
 	</handler>
 	
     <handler name="ondelete" >
@@ -37,17 +37,27 @@
 	<!-- methods -->
 	
     <method name="initValueFieldsByObject" args="obj">
-		if (obj.fieldvalues_id!=null) {
-			this.setAttribute('fieldvalues_id',obj.fieldvalues_id);
-			this.onsavecompleted.sendEvent();
-		}
-    	if (obj.fieldlanguagesvalue!=null) {
-    		this.fieldlanguagesvalues_id = obj.fieldlanguagesvalue.fieldlanguagesvalues_id;
-    	} else {
-    		this.fieldlanguagesvalues_id = 0;
-    	}
-    	var element = LzDataElement.valueToElement(obj);
-		this.fieldvalues.setData(element.childNodes);
+        if (obj != null) {
+			if (obj.fieldvalues_id!=null) {
+				this.setAttribute('fieldvalues_id',obj.fieldvalues_id);
+				this.onsavecompleted.sendEvent();
+			}
+	    	if (obj.fieldlanguagesvalue!=null) {
+	    		this.fieldlanguagesvalues_id = obj.fieldlanguagesvalue.fieldlanguagesvalues_id;
+	    	} else {
+	    		this.fieldlanguagesvalues_id = 0;
+	    	}
+            this._output.labelid.setAttribute("text",obj.fieldvalues_id);
+            this._output.fieldname.setAttribute("text",obj.name);
+            this._output.fieldvalue.setAttribute("text",obj.fieldlanguagesvalue.value);
+        } else {
+            this._output.labelid.setAttribute("text","");
+            this._output.fieldname.setAttribute("text","");
+            this._output.fieldvalue.setAttribute("text","");
+        }
+        
+    	//var element = LzDataElement.valueToElement(obj);
+		//this.fieldvalues.setData(element.childNodes);
     </method>	
 
   	<netRemoteCallHib name="getFieldvalueById" funcname="languageservice.getFieldvalueById" 
@@ -109,16 +119,16 @@
 	    <labelText labelid="353" y="40" fontstyle="bold" />	
 	    
 	    <labelText labelid="356" width="200" y="70" resize="false" x="2"/>
-	        <labelText name="labelid" y="70" x="120" width="270" text="$path{ 'fieldvalues_id/text()' }" />
+	        <labelText name="labelid" y="70" x="120" width="270" text="" />
 	        
 	    <labelText labelid="354" width="200" y="100" resize="false" x="2"/>
 	        <customEdittext name="fieldname" y="100" x="120" width="270" 
 	        				enabled="${ ((parent.parent.fieldvalues_id==0) ? true : false ) }" 
-	        				text="$path{ 'name/text()' }" />	
+	        				text="" />	
 		
 	    <labelText labelid="355" width="200" y="130" resize="false" x="2"/>
 	        <customScrollEdittext name="fieldvalue" y="130" x="120" width="270" height="120"
-	        					  text="$path{ 'fieldlanguagesvalue/value/text()' }" />	
+	        					  text="" />	
 	</view>
 	
 </class>

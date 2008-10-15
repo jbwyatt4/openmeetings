@@ -402,14 +402,14 @@
     
     <method name="doUpdateDocumentToolBar">
     	if (this.modernToolbar) {
-	        this.parent.parent._documentmenu._currentSlideNo.setText(this.ObjectByName._swfView.frame);
-	        this.parent.parent._documentmenu._totalSlideNo.setText(this.ObjectByName._swfView.totalframes);
-	        this.parent.parent._documentmenu._zoom.setText(this.ObjectByName.currentzoomFactor);
+	        this.parent.parent._documentmenu._currentSlideNo.setAttribute('text',this.ObjectByName._swfView.frame);
+	        this.parent.parent._documentmenu._totalSlideNo.setAttribute('text',this.ObjectByName._swfView.totalframes);
+	        this.parent.parent._documentmenu._zoom.setAttribute('text',this.ObjectByName.currentzoomFactor);
     	} else {
     		var docToolbar = this.getDocumentToolBar();
-	        docToolbar._currentSlideNo.setText(this.ObjectByName._swfView.frame);
-	        docToolbar._totalSlideNo.setText(this.ObjectByName._swfView.totalframes);
-	        docToolbar._zoom.setText(this.ObjectByName.currentzoomFactor);
+	        docToolbar._currentSlideNo.setAttribute('text',this.ObjectByName._swfView.frame);
+	        docToolbar._totalSlideNo.setAttribute('text',this.ObjectByName._swfView.totalframes);
+	        docToolbar._zoom.setAttribute('text',this.ObjectByName.currentzoomFactor);
     	}
     </method>
     

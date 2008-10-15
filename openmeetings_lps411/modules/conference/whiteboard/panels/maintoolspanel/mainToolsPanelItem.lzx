@@ -29,7 +29,7 @@
 		if ($debug){};
 	</handler>
 	<handler name="onmouseup">
-		//if (!this._isselected) this.setBGColor(canvas.baseMousecolorizer);
+		//if (!this._isselected) this.setAttribute('bgcolor',canvas.baseMousecolorizer);
 		//this.__labeltooltip.destroyLabel();
 		//if ($debug) Debug.write("parent.parent.parent",parent.parent.parent);
 		parent.parent.parent.setSelection(this);

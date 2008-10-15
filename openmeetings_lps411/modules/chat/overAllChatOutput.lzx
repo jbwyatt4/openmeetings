@@ -41,7 +41,12 @@
             if($debug) Debug.write("overAllChatOutput/messageObj: ",messageObj);
             var usercolor = value[5];
             if ( usercolor==null || usercolor==0 || usercolor.length==0 )usercolor=0xCCCCCC;
-            new lz.chatTabItemEmoticons(this._cbtext,{messageObj:messageObj,user_id:value[8],usercolor:usercolor,username:username,usertime:value[1]});
+            new lz.chatTabItemEmoticons(this._cbtext,{
+	                messageObj:messageObj,user_id:value[8],
+	                usercolor:usercolor,
+	                username:username,
+	                usertime:value[1]
+                });
             this.setScrollToMax();              
         ]]> 
     </method>           

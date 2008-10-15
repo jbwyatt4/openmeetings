@@ -8,11 +8,11 @@
     <attribute name="refObj" value="null" />
     
     <handler name="oninit">
-    	LzModeManager.makeModal(this);
+    	lz.ModeManager.makeModal(this);
     </handler>
     
     <handler name="onclose">
-    	LzModeManager.release(this);
+    	lz.ModeManager.release(this);
     </handler>
     
     <text fontsize="12" text="There are several Object in this selection" y="22" />

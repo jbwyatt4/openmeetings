@@ -19,20 +19,20 @@
 
 	<handler name="onnew">
 		this.user_id=0;
-        this.username.setText('');
-        this.firstname.setText('');
-        this.lastname.setText('');
-        this.email.setText('');
-        this.age.setText('');
-        this.street.setText('');
-        this.house.setText('');
-        this.zip.setText('');
-        this.town.setText('');
-		this.userpass1.setText('');
-		this.userpass2.setText('');        
+        this.username.setAttribute('text','');
+        this.firstname.setAttribute('text','');
+        this.lastname.setAttribute('text','');
+        this.email.setAttribute('text','');
+        this.age.setAttribute('text','');
+        this.street.setAttribute('text','');
+        this.house.setAttribute('text','');
+        this.zip.setAttribute('text','');
+        this.town.setAttribute('text','');
+		this.userpass1.setAttribute('text','');
+		this.userpass2.setAttribute('text','');        
         var defaultstate = canvas.getCountryRecord(1);
         this.state.addAndSelectItem(defaultstate.name,defaultstate.state_id);
-        this.adress_comment.setText('');
+        this.adress_comment.setAttribute('text','');
         this.status.selectItem(String('1'));
         this._organisationslist.clearList();
 	</handler>
@@ -56,19 +56,19 @@
     <method name="initFields" args="obj">
     	<![CDATA[
 			this.level.selectItem(String(obj.level_id));
-			this.username.setText(obj.login);
-			this.firstname.setText(obj.firstname);
-			this.lastname.setText(obj.lastname);
-			this.userpass1.setText('');
-			this.userpass2.setText('');
-			this.email.setText(obj.adresses.emails[0].mail.email);
-			this.age.setText(parseDateToString(obj.age));
-			this.street.setText(obj.adresses.street);
-			this.house.setText(obj.adresses.additionalname);
-			this.zip.setText(obj.adresses.zip);
-			this.town.setText(obj.adresses.town);
+			this.username.setAttribute('text',obj.login);
+			this.firstname.setAttribute('text',obj.firstname);
+			this.lastname.setAttribute('text',obj.lastname);
+			this.userpass1.setAttribute('text','');
+			this.userpass2.setAttribute('text','');
+			this.email.setAttribute('text',obj.adresses.emails[0].mail.email);
+			this.age.setAttribute('text',parseDateToString(obj.age));
+			this.street.setAttribute('text',obj.adresses.street);
+			this.house.setAttribute('text',obj.adresses.additionalname);
+			this.zip.setAttribute('text',obj.adresses.zip);
+			this.town.setAttribute('text',obj.adresses.town);
             this.state.addAndSelectItem(obj.adresses.states.name,String(obj.adresses.states.state_id));
-			this.adress_comment.setText(obj.adresses.comment);
+			this.adress_comment.setAttribute('text',obj.adresses.comment);
 			this.status.selectItem(String(obj.status));
 			this.salutation.selectItem(String(obj.title_id));
 			this._organisationslist.clearList();
