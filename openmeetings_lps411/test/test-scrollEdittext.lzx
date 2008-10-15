@@ -6,5 +6,13 @@
 
     <scrolledittext name="_scrolledittext" y="130" x="120" width="270" height="120"
                                   text="" />
+                                  
+                                  
+    <view width="200" height="100" y="300" x="100" bgcolor="0xFFFFFF">
+        <inputtext multiline="true" width="${ parent.width - 14 }">
+            
+        </inputtext>
+        <vscrollbar />
+    </view>
 
 </canvas>

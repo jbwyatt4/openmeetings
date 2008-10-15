@@ -2,6 +2,12 @@
 
     <include href="incubator/baseedittext.lzx" />
     <include href="lz/vscrollbar.lzx"/>
+    
+    <class name="scrollvscrollbar" extends="vscrollbar"
+            x="${parent.width - this.width - parent.border + 1}"
+            stepsize="${scrolltarget.lineheight}" scrollmax="${scrolltarget.maxheight}">
+        
+    </class>
 
     <!--- Implements visual baseedittext with scrollbar. -->
     <class name="scrolledittext" extends="baseedittext" 
@@ -25,16 +31,20 @@
             <attribute name="maxheight" 
                        value="${this.height + this.maxtextheight}"/>
             <event name="onpos" />
+            
             <attribute name="pos" value="0" setter="this.setPos(pos)"/>
             
             <method name="setPos" args="p">
+                if ($debug) Debug.write("setPos ",p);
                 if (this.isinited) {
                     this.setScroll(Math.ceil(1 - (p / this.lineheight)));
                     this.pos = p;
                     if (this.onpos) this.onpos.sendEvent(p);
                 }
             </method>
+            
             <handler name="onscroll">
+                if ($debug) Debug.write("onscroll ");
                 this.setPos(-this.lineheight * (this.scroll - 1), true);
             </handler>
         </_newinternalinputtext>
@@ -58,7 +68,7 @@
 
         <!--- Name of class to instantiate for vertical scroll bar.
               @keywords public -->
-        <attribute name="vscrollbarclassname" type="string" value="vscrollbar"/>
+        <attribute name="vscrollbarclassname" type="string" value="scrollvscrollbar"/>
         
         <!--- Our vertical scrollbar
               @keywords private -->
@@ -72,18 +82,15 @@
                     classname = "vscrollbar";
                 }
                 if ($debug) {
-                    if (typeof(global[classname]) == "undefined") {
-                        Debug.write("scrollbarclassname undefined", this);
+                    if (typeof(lz[classname]) == "undefined") {
+                        if ($debug) Debug.write("scrollbarclassname undefined", this);
                     }
                 }
                 
                 this._vs = new lz[classname](this, 
                                              { axis: "y",
                                                scrollattr: "pos",
-                                               scrolltarget: this.inp,
-                                               x:"${parent.width - this.width - parent.border + 1}",
-                                               stepsize:"${scrolltarget.lineheight}",
-                                               scrollmax:"${scrolltarget.maxheight}"
+                                               scrolltarget: this.inp
                                                //init: vsinit
                                                });
 
