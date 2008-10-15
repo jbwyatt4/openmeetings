@@ -7,7 +7,7 @@
  -->
 <class name="panelBoundBox" extends="drawview" cachebitmap="false" >
 	
-	<handler name="oninit">
+	<handler name="oncontext">
 		var numberColor = this.stringRgbToInteger(canvas.basebgcolorizer);
 		var fillColor = this.stringRgbToInteger(canvas.baseMousecolorizer);
 		this.drawBody(this,0,0,this.width,this.height,fillColor,2);
