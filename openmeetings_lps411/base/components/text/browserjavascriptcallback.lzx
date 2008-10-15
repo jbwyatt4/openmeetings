@@ -14,7 +14,7 @@
 		
 		_browserjavascriptcallback = this.prevalue;
 		
-		LzBrowser.loadJS(s);
+		lz.Browser.loadJS(s);
 		
 		if(typeof this.callDelegate == 'undefined')
 		this.callDelegate = new LzDelegate( this, "callback" );

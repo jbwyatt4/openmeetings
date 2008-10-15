@@ -7,10 +7,10 @@
 	<attribute name="fieldRef" value="null" />
 	
 	<handler name="oninit">
-		LzModeManager.makeModal(this);
+		lz.ModeManager.makeModal(this);
 	</handler>
 	<method name="close">
-		LzModeManager.release(this);
+		lz.ModeManager.release(this);
 		this.destroy();
 	</method>	
 	
@@ -63,7 +63,7 @@
 			]]>
 		</handler>
 		<handler name="ondoubleselect" args="d">
-			parent.fieldRef.setText(parseDateToString(d));
+			parent.fieldRef.setAttribute('text',parseDateToString(d));
 			this.parent.close();
 		</handler>
 	</dateSelector>	

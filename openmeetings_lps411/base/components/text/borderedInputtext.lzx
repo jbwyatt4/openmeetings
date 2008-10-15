@@ -10,7 +10,7 @@
 	<attribute name="labelid" type="number" setter="setLabelId(labelid)" />
 	<method name="setLabelId" args="_labelid" >
 		this.labelid = _labelid;
-		this.setText(canvas.getLabelName(this.labelid));
+		this.setAttribute('text',canvas.getLabelName(this.labelid));
 	</method>
     <attribute name="checkIsNumber" value="false" type="boolean" />
     <attribute name="checkIsDouble" value="false" type="boolean" />
@@ -41,7 +41,7 @@
       				} else {
       					t=this.preText;
       				}
-      				this.setText(t);
+      				this.setAttribute('text',t);
       			}
       		}
             if (this.parent.sendchange) this.parent.parent.sendchange(this.parent,this.parent.tvalue,this.getText());
@@ -69,7 +69,7 @@
 	<attribute name="labelid" type="number" setter="setLabelId(labelid)" />
 	<method name="setLabelId" args="_labelid" >
 		this.labelid = _labelid;
-		this.setText(canvas.getLabelName(this.labelid));
+		this.setAttribute('text',canvas.getLabelName(this.labelid));
 	</method>
     <attribute name="checkIsNumber" value="false" type="boolean" />
     <attribute name="checkIsDouble" value="false" type="boolean" />
@@ -96,7 +96,7 @@
       				} else {
       					t="0";
       				}
-      				this.setText(t);
+      				this.setAttribute('text',t);
       			}
       		}
             if (this.parent.sendchange) this.parent.parent.sendchange(this.parent,this.parent.tvalue,this.getText());
@@ -127,7 +127,7 @@
 	<attribute name="labelid" type="number" setter="setLabelId(labelid)" />
 	<method name="setLabelId" args="_labelid" >
 		this.labelid = _labelid;
-		this.setText(canvas.getLabelName(this.labelid));
+		this.setAttribute('text',canvas.getLabelName(this.labelid));
 	</method>
     <attribute name="checkIsNumber" value="false" type="boolean" />
     <attribute name="checkIsDouble" value="false" type="boolean" />
@@ -154,7 +154,7 @@
       				} else {
       					t="0";
       				}
-      				this.setText(t);
+      				this.setAttribute('text',t);
       			}
       		}
             if (this.parent.sendchange) this.parent.parent.sendchange(this.parent,this.parent.tvalue,this.getText());

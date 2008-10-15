@@ -12,11 +12,11 @@
 	<handler name="oninit">
 		if (this.setDefaultToday){
 			if (this.additionalDay==0){
-				this._text.setText(parseDateToString(new Date()));
+				this._text.setAttribute('text',parseDateToString(new Date()));
 			} else {
 				var date = new Date();
 				date.setTime(date.getTime()+86400000);
-				this._text.setText(parseDateToString(date));
+				this._text.setAttribute('text',parseDateToString(date));
 			}
 		}
 	</handler>

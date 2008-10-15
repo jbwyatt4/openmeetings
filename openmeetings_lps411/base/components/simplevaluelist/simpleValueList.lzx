@@ -5,14 +5,14 @@
 	bgcolor="0xFFFFFF" onmouseup="this.parent.parent.parent.parent.toggleSelected(this)" >
 	<handler name="onmouseover">
 		<![CDATA[
-			if (this.selected) this.setBGColor(canvas.baseMouseOvercolorizer)
-			else this.setBGColor(canvas.baseMouseOvercolorizer);
+			if (this.selected) this.setAttribute('bgcolor',canvas.baseMouseOvercolorizer)
+			else this.setAttribute('bgcolor',canvas.baseMouseOvercolorizer);
 		]]>
 	</handler>
 	<handler name="onmouseout">
 		<![CDATA[
-			if (this.selected)  this.setBGColor(canvas.baseMouseOvercolorizer)
-			else this.setBGColor(0xFFFFFF);
+			if (this.selected)  this.setAttribute('bgcolor',canvas.baseMouseOvercolorizer)
+			else this.setAttribute('bgcolor',0xFFFFFF);
 		]]>
 	</handler>
 	<attribute name="selected" value="false" type="boolean"/>
@@ -34,7 +34,7 @@
 	
 	<method name="toggleSelected" args="obj">
 		<![CDATA[
-			var downkeys = LzKeys.downKeysArray;
+			var downkeys = lz.Keys.downKeysArray;
 			
 			//Select the Obj
 			
@@ -43,7 +43,7 @@
 				if (this._selected == null) this._selected = new Array();
 				if (this._checkForAlreadySelected(obj)) {
 					obj.setAttribute('selected',false);
-					obj.setBGColor(0xFFFFFF);
+					obj.setAttribute('bgcolor',0xFFFFFF);
 				} else {
 					obj.setAttribute('selected',true);
 					this._selected.push(obj);
@@ -56,7 +56,7 @@
 			} else if (!this.multiselect) {
 				if(this._selected!=null) {
 					this._selected.setAttribute('selected',false);
-					this._selected.setBGColor(0xFFFFFF);
+					this._selected.setAttribute('bgcolor',0xFFFFFF);
 				}
 				this._selected = obj;
 			    this._selected.setAttribute('selected',true);
@@ -83,7 +83,7 @@
 		<![CDATA[
 			for (var i=0;i<this._selected.length;i++){
 				this._selected[i].setAttribute('selected',false);
-				this._selected[i].setBGColor(0xFFFFFF);
+				this._selected[i].setAttribute('bgcolor',0xFFFFFF);
 			}
 			this._selected=new Array();
 		]]>

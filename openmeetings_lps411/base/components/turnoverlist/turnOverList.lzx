@@ -61,7 +61,7 @@
             } else {
                 this._pre2.setAttribute('enabled',false);
             }
-            this._records.setText(this.start + ' - ' +(this.start+this.step) + ' ' + canvas.getLabelName(272) + ' ' + this.records);
+            this._records.setAttribute('text',this.start + ' - ' +(this.start+this.step) + ' ' + canvas.getLabelName(272) + ' ' + this.records);
 		]]>
 	</method>
 	

@@ -33,11 +33,11 @@
         <attribute name="showResetBox" value="false" type="boolean" />
     	<handler name="onclick">
             if (parent.chooseTextType.value==1){
-                parent.resetByLogin.setText('');
+                parent.resetByLogin.setAttribute('text','');
             } else {
-                parent.resetByMail.setText('');
+                parent.resetByMail.setAttribute('text','');
             }
-            var urlObject =  LzBrowser.getBaseURL();
+            var urlObject =  lz.Browser.getBaseURL();
 			parent.baseUrl = urlObject.protocol+"://"+urlObject.host+":"+urlObject.port+urlObject.path+urlObject.file;
 			parent.resetUserPwd.doCall();
     	</handler>

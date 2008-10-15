@@ -75,7 +75,7 @@
         }
 
         this.colorPickRef.doDefaultColor(myColor);
-        LzModeManager.makeModal( this.colorPickRef );
+        lz.ModeManager.makeModal( this.colorPickRef );
     </method>
     
     <method name="setTransformedStringColor">
@@ -118,7 +118,7 @@
     </method>    
     
     <method name="closedColorPicker">
-        LzModeManager.release( this.colorPickRef );
+        lz.ModeManager.release( this.colorPickRef );
     </method>
     
     <view name="_currentcolor" x="1" y="1" onclick="parent.toggle()" 

@@ -5,7 +5,7 @@
 <library>
 
 	<method name="openMeetingsMenuItemHandler">
-	    LzBrowser.loadURL("http://code.google.com/p/openmeetings/", "Openmeetings Homepage");  
+	    lz.Browser.loadURL("http://code.google.com/p/openmeetings/", "Openmeetings Homepage");  
 	</method>    
 	
 	<method name="myinit">
@@ -40,7 +40,7 @@
 		this.setAttribute('microphoneRateBest',Number(canvas.myConfigSet.getPointer().xpathQuery('config/microphoneRateBest/text()')));  
 		
 		
-		mainBaseText.setText(canvas.currentappname);
+		mainBaseText.setAttribute('text',canvas.currentappname);
 		mainBaseText.setShadow();
 		mainBaseTextLabel.setAttribute('text',canvas.currentappnameurl);  
 	
@@ -64,28 +64,28 @@
 		}
 		
 		//Check for Invitation
-		var invitationHash = LzBrowser.getInitArg('invitationHash');
+		var invitationHash = lz.Browser.getInitArg('invitationHash');
 		if (invitationHash != undefined){
 			canvas.isinitRoomDirect = true;
 			canvas.invitationHash = invitationHash;
 		}
 		
 		//sid=fe9ea55284e0b23991b1c1089b2c8f64&roomid=1
-		var sid = LzBrowser.getInitArg('sid');
-		var initroomid = LzBrowser.getInitArg('roomid');
+		var sid = lz.Browser.getInitArg('sid');
+		var initroomid = lz.Browser.getInitArg('roomid');
 		if (sid != undefined && initroomid != undefined){
 			canvas.remoteUserLogin = true;
 			canvas.initroomid = initroomid;
 			canvas.remoteUserSid = sid;
 		}
 		
-		var language = LzBrowser.getInitArg('language');
+		var language = lz.Browser.getInitArg('language');
 		if (language != undefined) {
 			canvas.language_id = Number(language);
 		}
 	
 		//check for reset password
-		var hash = LzBrowser.getInitArg('hash');
+		var hash = lz.Browser.getInitArg('hash');
 		if (hash!=undefined){
 			canvas.isResetUsername = true;
 			canvas.resetHash = hash;		
@@ -96,7 +96,7 @@
 		var src = 'rtmp://'+canvas.rtmphostlocal+':'+canvas.rtmpport+'/'+canvas.webAppRootKey+'/hibernate';
 		canvas.thishib.setAttribute('src',src);
 		canvas.thishib.loaderVar = new lz.autoLoader(canvas);
-		canvas.thishib.loaderVar._src.setText(src);
+		canvas.thishib.loaderVar._src.setAttribute('text',src);
 		canvas.thishib.connect();
 		]]>
 	</method>

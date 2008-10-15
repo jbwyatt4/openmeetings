@@ -25,7 +25,7 @@
         <method name="clearselection">
             for (var eg in this._listItemView.subviews){
                 this._listItemView.subviews[eg]._sublistItem._selected=false;
-                this._listItemView.subviews[eg]._sublistItem.setBGColor(0xFFFFFF);
+                this._listItemView.subviews[eg]._sublistItem.setAttribute('bgcolor',0xFFFFFF);
             }
         </method>   
         	<monitorListItemView name="_listItemView" /> 
@@ -46,8 +46,8 @@
 	<attribute name="itemid" value="def" type="string" />
 	<attribute name="lableid" value="0" type="number" />
 	<view bgcolor="0xFFFFFF" x="1" y="1" width="398" height="18" name="_sublistItem" 
-	    onmouseover="( ( this._selected) ? this.setBGColor(0xE9ECF3) : this.setBGColor(0xBFCBDD) )" 
-	    onmouseout="( ( this._selected) ? this.setBGColor(0xE9ECF3) : this.setBGColor(0xFFFFFF) )" >
+	    onmouseover="( ( this._selected) ? this.setAttribute('bgcolor',0xE9ECF3) : this.setAttribute('bgcolor',0xBFCBDD) )" 
+	    onmouseout="( ( this._selected) ? this.setAttribute('bgcolor',0xE9ECF3) : this.setAttribute('bgcolor',0xFFFFFF) )" >
 	    <attribute name="_selected" value="false" type="boolean" />
 	    <text x="6" fontsize="10" resize="true" text="${ this.parent.parent.textitem }" />
 	    <handler name="onclick">
@@ -55,7 +55,7 @@
 	        this.parent.parent.parent.parent.selected=this;
 	        this.parent.parent.parent.parent.onselect.sendEvent();
 	        this._selected=true;
-	        this.setBGColor(0xE9ECF3);
+	        this.setAttribute('bgcolor',0xE9ECF3);
 	    </handler>
 	    <method name="getId">
 	        return this.parent.itemid;

@@ -6,7 +6,7 @@
 	<attribute name="labelid" type="number" setter="setLabelId(labelid)" />
 	<method name="setLabelId" args="_labelid" >
 		this.labelid = _labelid;
-		this.setText(canvas.getLabelName(this.labelid));
+		this.setAttribute('text',canvas.getLabelName(this.labelid));
 	</method>
 	
 </class>
@@ -21,7 +21,7 @@
 	<attribute name="labelid" type="number" setter="setLabelId(labelid)" />
 	<method name="setLabelId" args="_labelid" >
 		this.labelid = _labelid;
-		this.setText(canvas.getLabelName(this.labelid));
+		this.setAttribute('text',canvas.getLabelName(this.labelid));
 	</method>
 	
 	<labelTooltip name="_labelTooltip" labelid="$once{ parent.labelLabelid }" />
