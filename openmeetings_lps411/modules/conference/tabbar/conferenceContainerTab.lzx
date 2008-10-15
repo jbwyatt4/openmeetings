@@ -21,8 +21,9 @@
 	borderWidth="1" borderRadius="5" >
 	<attribute name="labelid" type="number" value="0" />
 	<attribute name="iconresourcename" value="" type="string" />
-	<view x="4" y="4" resource="$once{ parent.iconresourcename }" />
-	<labelText x="24" y="2" labelid="$once{parent.labelid }" />
+	<view x="1" y="0" resource="$once{ parent.iconresourcename }" />
+	<labelText x="18" y="-2" fgcolor="${ (parent.opacity==0.3) ? 0x999999 : 0x000000 }" 
+               labelid="$once{parent.labelid }" />
 </class>
 
 <class name="conferenceContainerTab" extends="view"
@@ -32,12 +33,12 @@
 	<attribute name="membersTapIsInited" value="false" type="boolean" />
 	
     <openmeetingsTabButton name="b1" iconresourcename="ksirc_rsc2" labelid="244" x="1" y="0" 
-    					   opacity="0.9">
+    					   opacity="0.3">
     	<handler name="onclick">
     		parent._chattab.setAttribute('visible',true);
     		if (parent.uploadTapIsInited) parent._uploadtab.setAttribute('visible',false);
     		if (parent.membersTapIsInited) parent._participants.setAttribute('visible',false);
-    		this.setAttribute('opacity',0.9);
+    		this.setAttribute('opacity',0.3);
     		parent.b2.setAttribute('opacity',1);
     		parent.b3.setAttribute('opacity',1);
     	</handler>
@@ -53,7 +54,7 @@
     			parent.uploadTapIsInited = true;
     		}
     		if (parent.membersTapIsInited) parent._participants.setAttribute('visible',false);
-    		this.setAttribute('opacity',0.9);
+    		this.setAttribute('opacity',0.3);
     		parent.b1.setAttribute('opacity',1);
     		parent.b3.setAttribute('opacity',1);    		
     	</handler>
@@ -69,7 +70,7 @@
     			t.onvisible.sendEvent();
     			parent.membersTapIsInited = true;
     		} 
-    		this.setAttribute('opacity',0.9);
+    		this.setAttribute('opacity',0.3);
     		parent.b2.setAttribute('opacity',1);
     		parent.b1.setAttribute('opacity',1);    		
     	</handler>

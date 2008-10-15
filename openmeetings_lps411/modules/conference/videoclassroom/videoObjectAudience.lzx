@@ -86,7 +86,7 @@
 	<view name="_chatvideoinner" x="1" y="20" width="${parent.width-2}"
 		  resource="chatbgitemau" height="${parent.height - 44}" >
 		<handler name="oninit">
-			this.setResourceNumber(5);
+			this.setAttribute('frame',5);
 		</handler>
 		<baseVideoStreamDevice name="_videostream" x="0" y="0"
 						 bgcolor="black" >
@@ -111,11 +111,11 @@
 		<handler name="onclick">
 			if (this.isload){
 				parent._chatvideoinner._videostream.setVolume(0);
-				this.setResourceNumber(2);
+				this.setAttribute('frame',2);
 				this.isload = false;
 			} else {
 				parent._chatvideoinner._videostream.setVolume(100);
-				this.setResourceNumber(1);
+				this.setAttribute('frame',1);
 				this.isload = true;
 			}
 		</handler>

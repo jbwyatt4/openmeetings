@@ -17,7 +17,7 @@
 	<attribute name="preButton" value="null" />
 
     <handler name="onvisible">
-        Debug.write("this.isinited",this.isinited);
+        if ($debug) Debug.write("this.isinited",this.isinited);
         if (this.isinited){
             this.getListOfFiles.doCall();
         }

@@ -3,6 +3,9 @@
 
 	<include href="drawViewNew.lzx" />
 	<include href="baseDraw.lzx" />
+    
+    <include href="tools/" /> <!-- extends basedraw with drawing Tools -->
+    
 	<include href="swfResourceView.lzx" />
 	<include href="baseDrawObject.lzx" />
 	<include href="baseDrawLetter.lzx" />

@@ -87,7 +87,7 @@
         this.a = 0;
         this.pixelArray = new Array();
         
-        //pixel_del.register(LzIdle,'onidle');
+        //pixel_del.register(lz.Idle,'onidle');
         this.saveAsImage.doCall();
         ]]>
     </method>
