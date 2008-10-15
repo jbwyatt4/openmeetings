@@ -39,7 +39,7 @@
 	var s = "document.getElementById('"+ lzappId + "').SetVariable('_browserjavascriptcallback', escape((" + t + ")));"
 
 	
-		LzBrowser.loadJS(s);
+		lz.Browser.loadJS(s);
 		
 		if(typeof this.callDelegate == 'undefined')
 		this.callDelegate = new LzDelegate( this, "callback" );

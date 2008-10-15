@@ -94,7 +94,7 @@
             ]]>              
         </method> 
         <handler name="onclick">
-            LzBrowser.loadURL(canvas.currentappnameurl,"_blank");
+            lz.Browser.loadURL(canvas.currentappnameurl,"_blank");
         </handler>  
         <labelTooltip id="mainBaseTextLabel" />      
     </text>

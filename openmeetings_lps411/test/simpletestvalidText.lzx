@@ -93,13 +93,13 @@ String.prototype.startsWith = function(prefix) {
         <method name="addAndSelectItem" args="txt,id">
             this.cblist.addItem(txt,id);
             this.currentValue = id;
-            this.setText(txt);
+            this.setAttribute('text',txt);
         </method>    
         
         <method name="setSelection" args="obj">
             this._selected = obj;
             this.currentValue = obj.value;
-            this.setText(obj.text);
+            this.setAttribute('text',obj.text);
             this.setOpen(false,true);
             this.onselect.sendEvent();
         </method>    
@@ -122,7 +122,7 @@ String.prototype.startsWith = function(prefix) {
                     if (!this.isopen) {
                         this.setOpen(true, true); // open, withKey
                     } else {
-                        LzFocus.setFocus(this.cblist, true);
+                        lz.Focus.setFocus(this.cblist, true);
                     }
                     // pass the key event on to the floatinglist
                     this.cblist.onkeydown.sendEvent(key);
@@ -130,7 +130,7 @@ String.prototype.startsWith = function(prefix) {
                     if (!this.isopen) {
                         this.setOpen(true, true); // open, withKey
                     } else {
-                        LzFocus.setFocus(this.cblist, true);
+                        lz.Focus.setFocus(this.cblist, true);
                     }
                     this.cblist.onkeydown.sendEvent(key);
                 } else if (key!=13 && key!=9){
@@ -205,8 +205,8 @@ String.prototype.startsWith = function(prefix) {
 
                 this.cblist.setVisible(false);
                 if (this['onisopen']) this.onisopen.sendEvent(false);
-                if ( LzFocus.getFocus() == this.cblist ) {
-                    LzFocus.setFocus(this, withkey);
+                if ( lz.Focus.getFocus() == this.cblist ) {
+                    lz.Focus.setFocus(this, withkey);
                 }
             }
         </method>           
