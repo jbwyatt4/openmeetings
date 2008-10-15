@@ -13,11 +13,11 @@
 		<attribute name="baseUrl" value="http://www.denic.de" type="string" />
 		
 	    	<handler name="oninit">
-	    		LzModeManager.makeModal(this);
+	    		lz.ModeManager.makeModal(this);
 	    	</handler>
 	    
 	    	<handler name="onclose">
-	    		LzModeManager.release(this);
+	    		lz.ModeManager.release(this);
 	    	</handler>	
 		
 		<!-- label: recipient -->
@@ -67,7 +67,7 @@
 		<simpleLabelButton labelid="218" x="$once{ parent.width-260 }" width="120" y="$once{ parent.height-26 }">
 			<handler name="onclick">
 				<![CDATA[
-					var urlObject =  LzBrowser.getBaseURL();
+					var urlObject =  lz.Browser.getBaseURL();
 					//If Port is Null or undefinied use port 80
 					if (urlObject.port!=null && urlObject.port!=undefined){
 						var port = urlObject.port;

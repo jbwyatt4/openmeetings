@@ -10,7 +10,7 @@
     <attribute name="swfName" value="null" />
     
     <method name="loadFileByName" args="filename">
-        LzBrowser.loadURL(this.formatURL(filename),'_parent');
+        lz.Browser.loadURL(this.formatURL(filename),'_parent');
     </method>
 
     <handler name="onclick">

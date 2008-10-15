@@ -29,10 +29,10 @@
 	<image name="_userpic" />
 	
 	
-	<text text="$once{ parent.username }" x="40" resize="false"
+	<text text="$once{ parent.username }" x="40" resize="false" fontsize="10"
 		  width="$once{ parent.width - 40 }" bgcolor="$once{ parent.usercolor }"
 		  selectable="true" />
-	<text text="$once{ parent.usertime }" align="right" selectable="true" />
+	<text text="$once{ parent.usertime }" align="right" fontsize="10" selectable="true" />
 	
 	
 	

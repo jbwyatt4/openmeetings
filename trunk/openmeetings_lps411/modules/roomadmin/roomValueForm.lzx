@@ -20,7 +20,7 @@
 
 	<handler name="onnew">
 		this.rooms_id=0;
-        this.roomname.setText('');
+        this.roomname.setAttribute('text','');
 		this.comment.setAttribute('text','');
 		this.ispublic.setValue(false);
 		this.numberOfParticipants.selectItem('4');
@@ -49,7 +49,7 @@
     	<![CDATA[
     		this.roomsObj = obj;
     		if ($debug) Debug.write("initFields: ",obj);
-			this.roomname.setText(obj.name);
+			this.roomname.setAttribute('text',obj.name);
 			this.comment.setAttribute('text',obj.comment);
 			this.ispublic.setValue(obj.ispublic);
 			this.numberOfParticipants.selectItem(String(obj.numberOfPartizipants));

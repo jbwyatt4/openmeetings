@@ -15,7 +15,7 @@
                 dtString += "Value: "+this.error[eg][eg2]+"\r\n";
             }
         }
-        this.errorView.errorView.setText(dtString);
+        this.errorView.errorView.setAttribute('text',dtString);
     </handler>
 
 	<view y="24" width="318" height="200" x="2" clip="true" name="errorView">

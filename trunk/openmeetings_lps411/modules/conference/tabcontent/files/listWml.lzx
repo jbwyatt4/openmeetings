@@ -2,7 +2,7 @@
 <library>
 	
 <class name="listWml" extends="text" height="18" width="280" resize="false"
-    onmouseover="this.setBGColor(0x799FCE)" onmouseout="this.setBGColor(white)" 
+    onmouseover="this.setAttribute('bgcolor',0x799FCE)" onmouseout="this.setAttribute('bgcolor',white)" 
     bgcolor="white" text="$once{ this.filenamePure }" fontsize="10" >
     <handler name="onmousedown">
         //this.oninit.sendEvent(); 
@@ -41,7 +41,7 @@
 	<method name="__LZFileDownload">
 		<![CDATA[
         //Debug.write(downloadurl);	
-		LzBrowser.loadURL(this.generateFileLink(this.filename),'_parent');	
+		lz.Browser.loadURL(this.generateFileLink(this.filename),'_parent');	
 		]]>
 	</method>
 	<method name="__LZFileDelete">

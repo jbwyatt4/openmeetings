@@ -143,7 +143,7 @@
                     +'&red5httpport='+canvas.red5httpport;
 
                 //Debug.write(downloadurl); 
-                LzBrowser.loadURL(downloadurl,'_blank');    
+                lz.Browser.loadURL(downloadurl,'_blank');    
             ]]>        
     </method> 
     
@@ -200,7 +200,7 @@
                 parent.parent._painttoolsPalette.loadToolsByModi(d);
             </handler>
             <handler name="setNewScreenUserName" args="value">
-                this.parent.parent._sharingClientName.setText(value);
+                this.parent.parent._sharingClientName.setAttribute('text',value);
             </handler>
             <!-- @overwrite -->
             <method name="onsharedMessage" args="action,obj">

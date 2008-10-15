@@ -33,10 +33,10 @@
 	        	</handler>	
 	  	</netRemoteCallHib>
 	  	
-	  	<labelText x="2" y="10" fontstyle="bold" labelid="544" />
+	  	<labelText x="2" y="10" fontstyle="bold" labelid="544" width="200" />
 
 		<!-- label: stored files for public/private conference -->	
-		<labelText x="2" y="40" labelid="397" />
+		<labelText x="2" y="40" labelid="397" width="300" />
 	
 		<!-- recordings list viewer -->
 		<view y="80" x="2">
@@ -89,8 +89,8 @@
 		  			<datapath name="_dPath" xpath="local:classroot.recordingsForUser:/"  pooling="true"/>
 		  			
 		  			<view name="inn" layout="axis:y;spacing:2" width="$once{ parent.width }" >
-		  				<view name="inn" datapath="item/" height="24" onmouseout="this.setBGColor(0xFFFFFF)" bgcolor="0xFFFFFF"
-		  					    onmouseover="this.setBGColor(canvas.baseMousecolorizer)" width="$once{ parent.width-14 }">
+		  				<view name="inn" datapath="item/" height="24" onmouseout="this.setAttribute('bgcolor',0xFFFFFF)" bgcolor="0xFFFFFF"
+		  					    onmouseover="this.setAttribute('bgcolor',canvas.baseMousecolorizer)" width="$once{ parent.width-14 }">
 		  					
 		  					<handler name="ondata">
 		  						<![CDATA[

@@ -31,11 +31,11 @@
     </handler>   
     <handler name="onmouseup" reference="LzGlobalMouse" args="who">
     	<![CDATA[
-	        LzModeManager.globalUnlockMouseEvents();
+	        lz.ModeManager.globalUnlockMouseEvents();
 	        var x = canvas._drawarea.getMouse('x');
 	        var y = canvas._drawarea.getMouse('y');
 	        
-	        if ($debug) Debug.write("onmouseup LzModeManager globalUnlockMouseEvents ",x,y);
+	        if ($debug) Debug.write("onmouseup lz.ModeManager globalUnlockMouseEvents ",x,y);
 	        
 	        if (x>=0 && y>=0 && x<=canvas._drawarea.width && y<=canvas._drawarea.height){
 		        var downloadurl = 'http://'+canvas.rtmphostlocal+':'+canvas.red5httpport+'/'+canvas.webAppRootKey+'/DownloadHandler?fileName='+this.filename

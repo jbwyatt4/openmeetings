@@ -55,8 +55,8 @@
 		//Debug.write("issuesid: ",this.issuesid);
 		issuecontentareaRoot.isnewitem = false;
 		issuecontentareaRoot.currentissuesId = this.issuesid;
-		issuecontentareaRoot.title_t.setText(this.objRef.title);
-		issuecontentareaRoot.content_t.messagebody.content.txt.setText(this.objRef.content);
+		issuecontentareaRoot.title_t.setAttribute('text',this.objRef.title);
+		issuecontentareaRoot.content_t.messagebody.content.txt.setAttribute('text',this.objRef.content);
 		//Debug.write("issuecontentareaRoot.content_t: ",issuecontentareaRoot.content_t.messagebody.content.txt);
 		this.getIssueById.doCall();
 	</handler>
@@ -141,7 +141,7 @@
 				for (var i=this.parrentNodes.length;i>0;i--){
 					this.path += this.parrentNodes[i-1];
 				}
-				this.currentPath.setText(this.path);
+				this.currentPath.setAttribute('text',this.path);
 			]]>
 		</method>
 		
@@ -160,8 +160,8 @@
 		
 		
 		<method name="doAddEvent">
-			this.title_t.setText('');
-			this.content_t.setText('');
+			this.title_t.setAttribute('text','');
+			this.content_t.setAttribute('text','');
 			this.isnewitem = true;
 		</method>		
 		

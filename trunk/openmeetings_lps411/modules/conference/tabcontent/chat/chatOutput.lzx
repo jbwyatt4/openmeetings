@@ -43,7 +43,7 @@
             var messageObj = value[9];
             //var newmessage = "<FONT COLOR='"+value[5]+"' size='11'>"+client.firstname+" "+client.lastname+"</FONT>:<FONT COLOR='0x000000' size='11'>"+value[4]+"</FONT><br />";
             //Debug.write("newmessage: ",newmessage);
-            //this._cbtext.setText(this._cbtext.text+newmessage);
+            //this._cbtext.setAttribute('text',this._cbtext.text+newmessage);
             var usercolor = value[5];
             if ( usercolor==null || usercolor==0 || usercolor.length==0 )usercolor=0xCCCCCC;
             //new lz.chatTabitem(this._cbtext,{cbtext:newmessage,user_id:value[8],usercolor:usercolor,username:username,usertime:value[1]});

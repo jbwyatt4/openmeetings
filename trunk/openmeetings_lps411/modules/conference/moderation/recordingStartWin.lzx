@@ -11,7 +11,7 @@
 		<attribute name="recordingsName" value="" type="string" />
 	 	
 	 	<handler name="oninit">
-	 		this.rName.setText("recording_"+getStringDateFileSave());
+	 		this.rName.setAttribute('text',"recording_"+getStringDateFileSave());
 	 	</handler>
 	 	
 	   	<!-- label: record name --> 

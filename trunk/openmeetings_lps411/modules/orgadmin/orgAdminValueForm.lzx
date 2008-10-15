@@ -21,7 +21,7 @@
 
 	<handler name="onnew">
 		this.organisation_id=0;
-        this.orgname.setText('');
+        this.orgname.setAttribute('text','');
 	</handler>
 	
     <handler name="ondelete" >
@@ -54,7 +54,7 @@
     <method name="initFields" args="obj">
     	<![CDATA[
     	this.organisation_id = obj.organisation_id;
-        this.orgname.setText(obj.name);
+        this.orgname.setAttribute('text',obj.name);
         ]]>
     </method>
 	

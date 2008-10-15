@@ -7,7 +7,7 @@
 	<attribute name="itemResourceName" value="" type="string" />
 	<attribute name="currentVal" value="false" type="boolean" />
 	<handler name="onmouseover">
-		this.setBGColor(0xFFFFFF);
+		this.setAttribute('bgcolor',0xFFFFFF);
 	</handler>
 	<handler name="onmouseout">
 		this.updateByVal();
@@ -26,9 +26,9 @@
     </method>
     <method name="updateByVal">
 		if (this.currentVal){
-    		this.setBGColor(canvas.basebgcolorizer);
+    		this.setAttribute('bgcolor',canvas.basebgcolorizer);
     	} else {
-    		this.setBGColor(canvas.baseMousecolorizer);
+    		this.setAttribute('bgcolor',canvas.baseMousecolorizer);
     	}    	
     </method>
     <view x="2" y="2" resource="$once{ parent.itemResourceName }" />

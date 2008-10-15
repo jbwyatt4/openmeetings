@@ -16,7 +16,7 @@
     
     <handler name="oninit">
         <![CDATA[
-            this.urlv.setText("<u><FONT color='#0000CC'>"+canvas.getLabelName(285)+"</FONT></u>");
+            this.urlv.setAttribute('text',"<u><FONT color='#0000CC'>"+canvas.getLabelName(285)+"</FONT></u>");
         ]]>
     </handler>
     
@@ -25,7 +25,7 @@
     <labelText fontsize="10" name="summaryv" text="$once{ parent.summary }"  multiline="true" width="$once{ parent.width }" />
     <labelText fontsize="10" name="urlv">
         <handler name="onclick">
-            LzBrowser.loadURL(parent.link,"_blank");
+            lz.Browser.loadURL(parent.link,"_blank");
         </handler>
     </labelText>
     <view height="1" width="$once{ parent.width }" bgcolor="$once{ canvas.basebgcolorizer }" />

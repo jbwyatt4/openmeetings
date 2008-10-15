@@ -107,7 +107,7 @@
 	<method name="setTextFieldByName" args="txtName,textforfield,width,x,y,height" >
 		if ($debug) Debug.write("drawTextFieldByName ",txtName,textforfield,width,x,y);
 		//this.checkForChanges(txtName,textforfield,width,x,y,height);
-		this.edittextLetterObject.setText(textforfield);
+		this.edittextLetterObject.setAttribute('text',textforfield);
 		this.edittextLetterObject.setAttribute('width',width);
 		this.edittextLetterObject.setAttribute('height',height);
 		this.edittextLetterObject.setAttribute('visible',true);
@@ -201,7 +201,7 @@
 	<method name="editTextByHistory" args="actionObject,obj">
 		var editObj = this.getObjectByName(actionObject[actionObject.length-1]);
 		//Debug.write("editTextByHistory: ",editObj,actionObject,actionObject.length);
-		editObj.setText(actionObject[1]);
+		editObj.setAttribute('text',actionObject[1]);
 		editObj.setAttribute('width',actionObject[actionObject.length-3]);
 		editObj.setAttribute('height',actionObject[actionObject.length-2]);
 		editObj.setAttribute('fontsize',actionObject[3]);

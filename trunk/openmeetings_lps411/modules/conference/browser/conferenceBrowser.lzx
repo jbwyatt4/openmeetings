@@ -39,7 +39,7 @@
 		                			htmlviewer.visible = true;
 		            	}
 		            	
-		            		parent.url.setText( url );
+		            		parent.url.setAttribute('text', url );
 		            	]]>
 	                		</handler>
 		        	</basebutton> 

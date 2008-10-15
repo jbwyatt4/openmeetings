@@ -6,45 +6,45 @@
 	<handler name="oninit">
 		<![CDATA[
 			if (parent.rooms_id!=0){
-				this._videoPodHeight.setText(parent.roomsObj.videoPodHeight);
-				this._videoPodWidth.setText(parent.roomsObj.videoPodWidth);
-				this._videoPodXPosition.setText(parent.roomsObj.videoPodXPosition);
-				this._videoPodYPosition.setText(parent.roomsObj.videoPodYPosition);
+				this._videoPodHeight.setAttribute('text',parent.roomsObj.videoPodHeight);
+				this._videoPodWidth.setAttribute('text',parent.roomsObj.videoPodWidth);
+				this._videoPodXPosition.setAttribute('text',parent.roomsObj.videoPodXPosition);
+				this._videoPodYPosition.setAttribute('text',parent.roomsObj.videoPodYPosition);
 				
-				this._moderationPanelXPosition.setText(parent.roomsObj.moderationPanelXPosition);
+				this._moderationPanelXPosition.setAttribute('text',parent.roomsObj.moderationPanelXPosition);
 				this._showWhiteBoard.setValue(parent.roomsObj.showWhiteBoard);
 				
-				this._whiteBoardPanelXPosition.setText(parent.roomsObj.whiteBoardPanelXPosition);
-				this._whiteBoardPanelYPosition.setText(parent.roomsObj.whiteBoardPanelYPosition);
-				this._whiteBoardPanelWidth.setText(parent.roomsObj.whiteBoardPanelWidth);
-				this._whiteBoardPanelHeight.setText(parent.roomsObj.whiteBoardPanelHeight);
+				this._whiteBoardPanelXPosition.setAttribute('text',parent.roomsObj.whiteBoardPanelXPosition);
+				this._whiteBoardPanelYPosition.setAttribute('text',parent.roomsObj.whiteBoardPanelYPosition);
+				this._whiteBoardPanelWidth.setAttribute('text',parent.roomsObj.whiteBoardPanelWidth);
+				this._whiteBoardPanelHeight.setAttribute('text',parent.roomsObj.whiteBoardPanelHeight);
 				
 				this._showFilesPanel.setValue(parent.roomsObj.showFilesPanel);
 				
-				this._filesPanelXPosition.setText(parent.roomsObj.filesPanelXPosition);
-				this._filesPanelYPosition.setText(parent.roomsObj.filesPanelYPosition);
-				this._filesPanelWidth.setText(parent.roomsObj.filesPanelWidth);
-				this._filesPanelHeight.setText(parent.roomsObj.filesPanelHeight);
+				this._filesPanelXPosition.setAttribute('text',parent.roomsObj.filesPanelXPosition);
+				this._filesPanelYPosition.setAttribute('text',parent.roomsObj.filesPanelYPosition);
+				this._filesPanelWidth.setAttribute('text',parent.roomsObj.filesPanelWidth);
+				this._filesPanelHeight.setAttribute('text',parent.roomsObj.filesPanelHeight);
 			} else {
-				this._videoPodHeight.setText(280);
-				this._videoPodWidth.setText(270);
-				this._videoPodXPosition.setText(2);
-				this._videoPodYPosition.setText(2);
+				this._videoPodHeight.setAttribute('text',280);
+				this._videoPodWidth.setAttribute('text',270);
+				this._videoPodXPosition.setAttribute('text',2);
+				this._videoPodYPosition.setAttribute('text',2);
 				
-				this._moderationPanelXPosition.setText(400);
+				this._moderationPanelXPosition.setAttribute('text',400);
 				this._showWhiteBoard.setValue(true);
 				
-				this._whiteBoardPanelXPosition.setText(276);
-				this._whiteBoardPanelYPosition.setText(2);
-				this._whiteBoardPanelWidth.setText(660);
-				this._whiteBoardPanelHeight.setText(592);
+				this._whiteBoardPanelXPosition.setAttribute('text',276);
+				this._whiteBoardPanelYPosition.setAttribute('text',2);
+				this._whiteBoardPanelWidth.setAttribute('text',660);
+				this._whiteBoardPanelHeight.setAttribute('text',592);
 				
 				this._showFilesPanel.setValue(true);
 				
-				this._filesPanelXPosition.setText(2);
-				this._filesPanelYPosition.setText(284);
-				this._filesPanelWidth.setText(270);
-				this._filesPanelHeight.setText(310);
+				this._filesPanelXPosition.setAttribute('text',2);
+				this._filesPanelYPosition.setAttribute('text',284);
+				this._filesPanelWidth.setAttribute('text',270);
+				this._filesPanelHeight.setAttribute('text',310);
 			}
 		]]>
 	</handler>

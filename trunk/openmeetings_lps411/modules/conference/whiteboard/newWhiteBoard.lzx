@@ -141,7 +141,7 @@
                     +'&red5httpport='+canvas.red5httpport;
 
                 //Debug.write(downloadurl); 
-                LzBrowser.loadURL(downloadurl,'_blank');    
+                lz.Browser.loadURL(downloadurl,'_blank');    
             ]]>        
     </method> 
     
@@ -186,7 +186,7 @@
                 parent.parent._propertyPanel.loadPanelByModus(this);
             </handler>
             <handler name="setNewScreenUserName" args="value">
-                this.parent.parent._sharingClientName.setText(value);
+                this.parent.parent._sharingClientName.setAttribute('text',value);
             </handler>
             <!-- @overwrite -->
             <method name="onsharedMessage" args="action,obj">
@@ -311,11 +311,11 @@
 			if (obj.setSelectionToItem){			
 				if (this.objectRef!=null){
 					this.objectRef._isselected = false;
-					this.objectRef._area.setBGColor(0xFFFFFF);
+					this.objectRef._area.setAttribute('bgcolor',0xFFFFFF);
 				}
 				this.objectRef = obj;
 				this.objectRef._isselected = true;
-				this.objectRef._area.setBGColor(canvas.basebgcolorizer);
+				this.objectRef._area.setAttribute('bgcolor',canvas.basebgcolorizer);
 				parent._drawareaMask._drawarea.setModus(this.objectRef.modi);
 			}
 		</method>

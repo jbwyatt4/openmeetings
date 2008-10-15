@@ -46,7 +46,7 @@
 	</view>
 	
 	<!-- 349:Language -->
-    <labelText name="n3" labelid="349" y="32" resize="true" x="2"/>  
+    <labelText name="n3" labelid="349" y="32" width="110" x="2"/>  
         
         <resetCombobox name="languages" width="170" y="32" x="120" editable="false" >
         	<handler name="oninit">
@@ -80,7 +80,7 @@
 	    		var exporturl = 'http://'+canvas.rtmphostlocal+':'+canvas.red5httpport
 	    				+'/'+canvas.webAppRootKey+'/LangExport?language='+parent.languages.getValue()
 	    				+'&sid='+canvas.sessionId;
-	            LzBrowser.loadURL(exporturl,"_parent");
+	            lz.Browser.loadURL(exporturl,"_parent");
             ]]>
     	</handler>
     	<labelTooltip multiline="true" labelid="388" />
@@ -139,7 +139,12 @@
 	    	<![CDATA[
                 this.clearList();
                 for (var i=0;i<records.length;i++){
-                    new lz.fieldValuesListItem(this._innerlist._inn._inn,{obj:records[i],fieldvalues_id:records[i].fieldvalues_id,fieldname:records[i].name,fieldvalue:records[i].fieldlanguagesvalue.value});
+                    new lz.fieldValuesListItem(this._innerlist._inn._inn,{
+	                        obj:records[i],
+	                        fieldvalues_id:records[i].fieldvalues_id,
+	                        fieldname:records[i].name,
+	                        fieldvalue:records[i].fieldlanguagesvalue.value
+                        });
                 }
 	    	]]>
 	    </method>

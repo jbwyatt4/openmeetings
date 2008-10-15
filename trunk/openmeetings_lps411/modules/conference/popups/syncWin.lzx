@@ -6,11 +6,11 @@
         x="$once{ canvas.width/2 - this.width/2 }" height="240">
     
 	<handler name="oninit">
-		LzModeManager.makeModal(this);
+		lz.ModeManager.makeModal(this);
 	</handler>
     
     <handler name="onclose">
-    	LzModeManager.release(this);
+    	lz.ModeManager.release(this);
     	canvas.syncWindow = null;
     </handler>
     

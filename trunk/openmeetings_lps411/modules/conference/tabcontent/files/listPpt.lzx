@@ -5,7 +5,7 @@
 <class name="listPpt" extends="text" fontsize="10" height="18" width="280" resize="false"
     bgcolor="white"
     text="$once{ '    '+this.filename }" >
-<!-- onmouseover="this.setBGColor(0x799FCE)" onmouseout="this.setBGColor(white)" -->
+<!-- onmouseover="this.setAttribute('bgcolor',0x799FCE)" onmouseout="this.setAttribute('bgcolor',white)" -->
     <attribute name="filename" value="" type="string" />
     <attribute name="filenamePure" value="" type="string" />
     <attribute name="ext" value="" type="string" />
@@ -32,7 +32,7 @@
 	<method name="__LZFileDownload">
 		<![CDATA[
         //Debug.write(downloadurl);	
-		LzBrowser.loadURL(this.generateFileLink(this.filename),'_parent');	
+		lz.Browser.loadURL(this.generateFileLink(this.filename),'_parent');	
 		]]>
 	</method>
 	<method name="__LZFileDelete">

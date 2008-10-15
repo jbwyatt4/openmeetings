@@ -7,14 +7,14 @@
 </class>
 
 <class name="colorRectChoose" extends="colorRectChoosebase" bgcolor="black" width="24" height="24"
-	onmouseover="this.setBGColor(0xEEEEEE)" onmouseout="this.setBGColor(0x000000)"
+	onmouseover="this.setAttribute('bgcolor',0xEEEEEE)" onmouseout="this.setAttribute('bgcolor',0x000000)"
 	onclick="parent.sendColor(this)">
 	<attribute name="colorchoose" value="null" />
 	<view width="22" height="22" bgcolor="${parent.colorchoose}" x="1" y="1"/>
 </class>
 
 <class name="colorRectChooseSmall" extends="colorRectChoosebase" bgcolor="black" width="12" height="12"
-	onmouseover="this.setBGColor(0xEEEEEE)" onmouseout="this.setBGColor(0x000000)"
+	onmouseover="this.setAttribute('bgcolor',0xEEEEEE)" onmouseout="this.setAttribute('bgcolor',0x000000)"
 	onclick="parent.parent.sendColor(this)">
 	<attribute name="defaultno" value="0" type="number" />
 	<handler name="oninit">

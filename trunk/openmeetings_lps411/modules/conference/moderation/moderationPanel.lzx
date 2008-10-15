@@ -15,7 +15,7 @@
 					+ user.username+"<BR/>" 
 					+ user.firstname + " " + user.lastname + "<BR/>"
 					+ parseDateToStringTime(user.roomEnter);
-			this.textInner._inner.setText(tString);
+			this.textInner._inner.setAttribute('text',tString);
 		]]>
 	</handler>
 
@@ -45,9 +45,9 @@
 						+ this.recordingUser.username+" " 
 						+ this.recordingUser.firstname + " " + this.recordingUser.lastname + " "
 						+ parseDateToStringTime(this.recordingUser.roomEnter);
-				this._inner.setText(tString);
+				this._inner.setAttribute('text',tString);
 			} else {
-				this._inner.setText("");
+				this._inner.setAttribute('text',"");
 				this.sta_btn.setAttribute('visibility','visible');
     			this.stp_btn.setAttribute('visibility','hidden');
 			}
@@ -66,7 +66,7 @@
                     +'&publicSID='+canvas.publicSID;
 
                 //Debug.write(downloadurl); 
-                LzBrowser.loadURL(downloadurl,'_blank');    
+                lz.Browser.loadURL(downloadurl,'_blank');    
             ]]>        
     </method> 	
 	

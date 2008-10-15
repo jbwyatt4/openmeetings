@@ -7,7 +7,7 @@
 	<attribute name="startAdjustHight" value="false" type="boolean" />
 	
 	<handler name="oninit">
-		LzFocus.setFocus(this);	
+		lz.Focus.setFocus(this);	
 	</handler>
 	<handler name="ontext">
 	<![CDATA[

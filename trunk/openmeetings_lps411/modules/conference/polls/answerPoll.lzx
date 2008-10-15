@@ -24,7 +24,7 @@
 			//Debug.write("Numeric Question");
 			this.pollnumeric.setAttribute('visible',true);
 		}
-		this.head.setText(this.createdBy+" "+canvas.getLabelName(36));
+		this.head.setAttribute('text',this.createdBy+" "+canvas.getLabelName(36));
 	</handler>
 	
 	<labelText y="102" labelid="33" />

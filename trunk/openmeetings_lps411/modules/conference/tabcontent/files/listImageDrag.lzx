@@ -2,7 +2,7 @@
 <library>
 	
 <class name="listImageDrag" extends="view" height="50" width="280"
-    onmouseover="this.setBGColor(0x799FCE)" onmouseout="this.setBGColor(white)" 
+    onmouseover="this.setAttribute('bgcolor',0x799FCE)" onmouseout="this.setAttribute('bgcolor',white)" 
     bgcolor="white" >
 
     <attribute name="filename" value="" type="string" />
@@ -29,7 +29,7 @@
     <handler name="onmousedown">
         //this.oninit.sendEvent();
        	new lz.dragView(canvas,{filename:this.filename,filesid:1,refObj:this,uploadmodul:this.uploadmodul,baseurl:'http://'+canvas.rtmphostlocal+':'+canvas.red5httpport+'/'+canvas.webAppRootKey+'/DownloadHandler',fileName:this.filename,moduleName:this.uploadmodul,parentPath:canvas.uploadmoduleimgfolder+'/',room:hib.currentroomid,domain:hib.conferencedomain});
-        LzModeManager.globalLockMouseEvents();
+        lz.ModeManager.globalLockMouseEvents();
         this.onmouseout.sendEvent();     
         this.parent.parent.parent.highlightItem(this);
     </handler>
@@ -48,7 +48,7 @@
 		//Debug.write("Download File ",this);
 		this._thumb.setAttribute('src',this.generateFileLink(this.filename));
         //Debug.write(downloadurl);	
-		LzBrowser.loadURL(downloadurl,'_parent');	
+		lz.Browser.loadURL(downloadurl,'_parent');	
 		]]>
 	</method>
 	<method name="__LZFileDelete">

@@ -5,8 +5,8 @@
 	width="258" bgcolor="$once{ canvas.basebgcolorizer }" />
 
 <class name="userTagView" extends="text" width="280" bgcolor="white"
-    onmouseover="this.setBGColor(canvas.baseMousecolorizer)" 
-    onmouseout="this.setBGColor(white)" >
+    onmouseover="this.setAttribute('bgcolor',canvas.baseMousecolorizer)" 
+    onmouseout="this.setAttribute('bgcolor',white)" >
 	
 	<attribute name="connectedSince" value="" type="string" />
 	<attribute name="isMod" value="" type="string" />
