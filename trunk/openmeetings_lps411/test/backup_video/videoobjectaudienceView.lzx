@@ -249,7 +249,7 @@
 				}
 			}
 			//Debug.write("tString: ",tString);
-			this.inner._usertext.setText(tString);
+			this.inner._usertext.setAttribute('text',tString);
 			]]>
 		</method>
 		<view x="$once{ parent.width-20 }" y="2" name="infoview" resource="showusercontextcloseau">

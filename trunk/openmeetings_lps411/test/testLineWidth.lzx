@@ -98,7 +98,7 @@
 			}
 			var tString = calcLineWidthByTextField(this.width, t,this.fontsize,"Verdana");
 			for (var k = 0;k<tString.length;k++){
-				this.setText(this.getText()+textObject[k]["text"]+"\r");
+				this.setAttribute('text',this.getText()+textObject[k]["text"]+"\r");
 				Debug.write("line,width,text: ",k,textObject[k]["lineWidth"],textObject[k]["text"]);
 			}			
 			

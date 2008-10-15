@@ -51,7 +51,7 @@
 	</method>
 		
 	<method name="applyData" args="rtl_str">
-		this.setText( reverseWords( rtl_str ) );
+		this.setAttribute('text', reverseWords( rtl_str ) );
 	</method>
 	
 	<handler name="ontext">

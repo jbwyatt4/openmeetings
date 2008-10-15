@@ -83,7 +83,7 @@ Exemple :
       var s = "javascript:document.getElementById('"
                         + iid 
                         + "').style.visibility='visible'";
-      LzBrowser.loadJS(s);
+      lz.Browser.loadJS(s);
     </method>
     
     <method name="hide">
@@ -91,7 +91,7 @@ Exemple :
                         + iid 
                         + "').style.visibility='hidden'";
       //Debug.write("on hide l'iframe",iid," :",s);
-      LzBrowser.loadJS(s);
+      lz.Browser.loadJS(s);
     </method>    
     
     <method name="setIsrc" args="s">
@@ -104,7 +104,7 @@ Exemple :
                         + "').src='"
                         + s
                         + "'";
-      LzBrowser.loadJS(s);
+      lz.Browser.loadJS(s);
     </method>
     
     <handler name="oninit" >
@@ -131,7 +131,7 @@ Exemple :
                         + "').style.visibility='visible'";
       s = s + ";lzSetCanvasAttribute('" + createIFrameDone_attr + "', true)";
       ////Debug.write("Calling createIFrame ; loadJS : " + s);//
-      LzBrowser.loadJS(s);
+      lz.Browser.loadJS(s);
       // initializing the scheduled check of this iFrame's load state
       if(typeof this.createIFrame_callbackDelegate == 'undefined') {
          this.createIFrame_callbackDelegate = new LzDelegate( this, "createIFrame_callback" );
@@ -175,7 +175,7 @@ Exemple :
          } else {
             ////Debug.write('createListeners.stacked '+this.iFrameJsStack);//
             // some javascript has been scheduled to be loaded, so let's do it :
-            LzBrowser.loadJS(this.iFrameJsStack);
+            lz.Browser.loadJS(this.iFrameJsStack);
          }
       }
     </method>
@@ -186,7 +186,7 @@ Exemple :
       ////Debug.write("executeJs", s);//
       if (canvas.getAttribute(createIFrameDone_attr)) {
          ////Debug.write("executeJs.direct", s);//
-         LzBrowser.loadJS(s); // iframeView is loaded, so direct execution
+         lz.Browser.loadJS(s); // iframeView is loaded, so direct execution
       } else {
          ////Debug.write("executeJs.stacked", s);//
          // else the iframeView has not yet been loaded, so let's stack it :

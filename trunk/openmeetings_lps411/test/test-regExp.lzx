@@ -8,7 +8,7 @@
           static function initialize(){
 
               /* if this was in the html-wrapper, would early instantiations be successful? */
-              LzBrowser.loadJS( "window.__lzregexp={};" + 
+              lz.Browser.loadJS( "window.__lzregexp={};" + 
                 "window.__createRegExp=function(id,re,mod){window.__lzregexp[id]=new RegExp(re,mod);return true};" +
                 "window.__testRegExp=function(id,s){return window.__lzregexp[id].test(s)};" +
                 "window.__execRegExp=function(id,s){return window.__lzregexp[id].exec(s)};" +
@@ -24,7 +24,7 @@
               this.__isready = true;
               
               var me = this;
-              LzBrowser.callJS( "window.__createRegExp", function(res){me.__isready = res == true}, this.regexp_id, regexp, mod );
+              lz.Browser.callJS( "window.__createRegExp", function(res){me.__isready = res == true}, this.regexp_id, regexp, mod );
 
           }
           
@@ -45,7 +45,7 @@
           }
           
           function destroy(){
-            LzBrowser.callJS( "window.__deleteRegExp", null, this.regexp_id );
+            lz.Browser.callJS( "window.__deleteRegExp", null, this.regexp_id );
           }
         }
       </script>

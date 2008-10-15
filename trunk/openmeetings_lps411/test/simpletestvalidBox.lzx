@@ -147,7 +147,7 @@ String.prototype.startsWith = function(prefix) {
             // we can change the focus. (focus is normally not allowed to escape from
             // a modal view).
             this.setOpen(false);
-            return LzFocus.getNext(interior.cbtext);
+            return lz.Focus.getNext(interior.cbtext);
         </method>
 
         <!--- since we are not focusable, this provides an api for asking what child to send focus
@@ -186,8 +186,8 @@ String.prototype.startsWith = function(prefix) {
                         txt = classroot.defaulttext;
                     }
                 }
-                if (this.cbtext) this.cbtext.setText( txt );
-                if (this._dsblfield) this._dsblfield.setText( txt );
+                if (this.cbtext) this.cbtext.setAttribute('text', txt );
+                if (this._dsblfield) this._dsblfield.setAttribute('text', txt );
                 parent._applystyle( parent.style );
             </method>
 
@@ -245,7 +245,7 @@ String.prototype.startsWith = function(prefix) {
                     <!-- pass up to component level so subclassers can catch -->
                     <handler name="onblur" args="v">
                         this.initSelect=true;
-                        classroot.setText( this.getText() );
+                        classroot.setAttribute('text', this.getText() );
                         if ( classroot['onblur'] ) classroot.onblur.sendEvent(v);
                     </handler>
                     <!-- pass up to component level so subclassers can catch -->
@@ -396,7 +396,7 @@ String.prototype.startsWith = function(prefix) {
 
         <!--- @keywords private -->
         <handler name="onblur" >
-           if ( LzFocus.getFocus() != this.interior.cbtext )
+           if ( lz.Focus.getFocus() != this.interior.cbtext )
                 this.setOpen(false);
         </handler>
 
@@ -433,8 +433,8 @@ String.prototype.startsWith = function(prefix) {
 	
 				// anItem has been selected so update the input text field
 				this.selected = v;
-				if (v) this.setText(v.text);
-				if (LzFocus.getFocus() == this.interior.cbtext) {
+				if (v) this.setAttribute('text',v.text);
+				if (lz.Focus.getFocus() == this.interior.cbtext) {
 					_fixseldel.start = 0;
 					_fixseldel.end = v.text.length;
 					LzIdle.callOnIdle( _fixseldel );
@@ -518,11 +518,11 @@ String.prototype.startsWith = function(prefix) {
             }
             if (open) { // open combox
                 if (this.isopen) return; // tends to get called more than once, esp when
-                LzModeManager.makeModal( this );
+                lz.ModeManager.makeModal( this );
 
                 this.cblist.bringToFront();
                 this.cblist.setVisible(true);
-                LzFocus.setFocus(this.cblist, withkey);
+                lz.Focus.setFocus(this.cblist, withkey);
 
                 this.isopen = true;
                 if (this['onisopen']) this.onisopen.sendEvent(true);
@@ -530,18 +530,18 @@ String.prototype.startsWith = function(prefix) {
                 if (!this['isopen']) return;
                 this.isopen = false;
 
-                LzModeManager.release( this );
+                lz.ModeManager.release( this );
                 this.cblist.setVisible(false);
                 if (this['onisopen']) this.onisopen.sendEvent(false);
-                if ( LzFocus.getFocus() == this.cblist ) {
-                    LzFocus.setFocus(interior.cbtext, withkey);
+                if ( lz.Focus.getFocus() == this.cblist ) {
+                    lz.Focus.setFocus(interior.cbtext, withkey);
                 }
             }
         </method>
 
         <!--- @keywords private -->
         <method name="applyData" args="d">
-            this.setText( d );
+            this.setAttribute('text', d );
         </method>
 
 
@@ -563,8 +563,8 @@ String.prototype.startsWith = function(prefix) {
               @param String t: the text to display. -->
         <method name="setText" args="t">
             this.text = t;
-            this.interior.cbtext.setText( t );
-            if (!this._enabled) interior._dsblfield.setText( t );
+            this.interior.cbtext.setAttribute('text', t );
+            if (!this._enabled) interior._dsblfield.setAttribute('text', t );
             if ( this.ontext ) this.ontext.sendEvent( t );
         </method>
 
@@ -640,7 +640,7 @@ String.prototype.startsWith = function(prefix) {
             text to an empty string -->
         <method name="clearSelection" >
             this.cblist.clearSelection();
-            this.setText("");
+            this.setAttribute('text',"");
         </method>
 
         <!--- @keywords private -->
@@ -664,7 +664,7 @@ String.prototype.startsWith = function(prefix) {
                 } else {
                    interior._dsblfield.setVisible(true);
                 }
-                interior._dsblfield.setText(this.getText());
+                interior._dsblfield.setAttribute('text',this.getText());
             } else {
                 if (interior._dsblfield) interior._dsblfield.setVisible(false);
             }
@@ -713,7 +713,7 @@ String.prototype.startsWith = function(prefix) {
 			<method name="getValue"> return this.id; </method>
 			<method name="setValued" args="txt,id"> 
 				//Debug.write("setValue:",txt,id); 
-				this.id = id; this.setText(txt); 
+				this.id = id; this.setAttribute('text',txt); 
 			</method>
 			
 			<handler name="onfocus"> //Debug.write("onfocus ",this.getText());
@@ -778,7 +778,7 @@ String.prototype.startsWith = function(prefix) {
 					//Debug.write("onselect:",item); 
 					//this.owner. 
 					this.setAttribute('visible',false);
-					LzFocus.setFocus(this.owner); 
+					lz.Focus.setFocus(this.owner); 
 				</handler>
 			</floatinglist>
 			
