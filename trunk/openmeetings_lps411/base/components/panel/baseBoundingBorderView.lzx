@@ -258,7 +258,7 @@
 			storeAdjustmentToParent(obj.x,obj.y);
 		}
 		dragger.apply();
-		mousetracker_del.register(LzIdle,'onidle');
+		mousetracker_del.register(lz.Idle,'onidle');
 	</method>
 	
 	<!--- arranges the Box to be build into any border -->

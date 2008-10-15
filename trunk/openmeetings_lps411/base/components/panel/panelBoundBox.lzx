@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library>
 
-<class name="panelBoundBox" extends="drawview" >
+<!--
+
+<class name="drawViewNew" extends="drawview" cachebitmap="false" x="-1" y="-1" >
+ -->
+<class name="panelBoundBox" extends="drawview" cachebitmap="false" >
 	
 	<handler name="oninit">
 		var numberColor = this.stringRgbToInteger(canvas.basebgcolorizer);
@@ -25,6 +29,8 @@
   	<method name="drawBody" args="targetObj,x1,y1,x2,y2,fill,lineWidth">
    		<![CDATA[
     		
+            if ($debug) Debug.write("drawBody: ",targetObj,lineWidth);
+        
     		targetObj.lineWidth = lineWidth;
     		targetObj.beginPath();
     		targetObj.moveTo(x1,y1);
