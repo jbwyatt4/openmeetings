@@ -164,7 +164,8 @@ public class ImportInitvalues {
 			String referer, String mailauthname, String mailauthpass,
 			String default_lang_id, String swf_path, String im_path,
 			String url_feed, String url_feed2,
-			String sendEmailAtRegister, String sendEmailWithVerficationCode) {
+			String sendEmailAtRegister, String sendEmailWithVerficationCode,
+			String default_export_font) {
 
 		Configurationmanagement
 				.getInstance()
@@ -226,6 +227,10 @@ public class ImportInitvalues {
 						"It makes no sense to make this(sendEmailWithVerficationCode) 1(Yes) while " +
 						"sendEmailAtRegister is 0(No) cause you need" +
 						"to send a EMail.");
+		Configurationmanagement.getInstance().addConfByKey(3, "default_export_font",
+				sendEmailAtRegister, null, "The Name of the Font used for exporting/render Images from Whiteboard" +
+						"The Font has to exist on the Server which runs Red5");
+		
 	}
 
 	public void loadDefaultRooms() {

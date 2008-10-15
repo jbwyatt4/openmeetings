@@ -194,6 +194,15 @@ form.cmxform fieldset fieldset label {
 			    <option value="$key">$allLanguages.get($key)</option>
 			#end	
 	    </select><br/>
+	    </li> 
+	    <li> 
+    	<label for="default_export_font">Default Font for Export [default_export_font]</label>
+    	<select name="default_export_font" id="default_export_font" 
+    		size="1">
+			#foreach( $key in $allFonts.keySet() )
+			    <option value="$key">$allFonts.get($key)</option>
+			#end	
+	    </select><br/>
 	    </li>      	
     </fieldset>  
     
