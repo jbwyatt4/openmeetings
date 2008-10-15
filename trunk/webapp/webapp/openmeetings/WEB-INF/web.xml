@@ -100,6 +100,10 @@
         <servlet-name>Import</servlet-name>
         <servlet-class>org.openmeetings.servlet.outputhandler.Import</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ExportToImageTest</servlet-name>
+        <servlet-class>org.openmeetings.servlet.outputhandler.ExportToImageTest</servlet-class>
+    </servlet>
     <!-- Axis2 Settings -->
     <servlet>
         <servlet-name>AxisServlet</servlet-name>
@@ -156,6 +160,10 @@
     <servlet-mapping>
         <servlet-name>Import</servlet-name>
         <url-pattern>/Import</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ExportToImageTest</servlet-name>
+        <url-pattern>/ExportToImageTest</url-pattern>
     </servlet-mapping>
     <!-- Axis2 -->
     <servlet-mapping>

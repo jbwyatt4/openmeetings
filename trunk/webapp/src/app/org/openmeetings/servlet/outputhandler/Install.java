@@ -75,8 +75,14 @@ public class Install extends VelocityViewServlet {
 						String filePath = getServletContext().getRealPath("/")+ImportInitvalues.languageFolderName;
 						LinkedHashMap<Integer,String> allLanguages = ImportInitvalues.getInstance().getLanguageFiles(filePath);
 						
+						LinkedHashMap<String,String> allFonts = new LinkedHashMap<String,String>();
+						allFonts.put("TimesNewRoman", "TimesNewRoman");
+						allFonts.put("Verdana", "Verdana");
+						allFonts.put("Arial", "Arial");
+							
 						Template tpl = super.getTemplate ("install_step1_"+lang+".vm");
 						ctx.put("allLanguages", allLanguages);
+						ctx.put("allFonts", allFonts);
 						StringWriter writer = new StringWriter(); 
 						tpl.merge(ctx, writer);
 						
@@ -116,7 +122,7 @@ public class Install extends VelocityViewServlet {
 				int i = InstallationDocumentHandler.getInstance().getCurrentStepNumber(working_dir);
 				if (i == 0){
 					
-					log.error("do init installation");
+					log.debug("do init installation");
 					
 					String username = httpServletRequest.getParameter("username");
 					String userpass = httpServletRequest.getParameter("userpass");
@@ -133,6 +139,8 @@ public class Install extends VelocityViewServlet {
 					String im_path = httpServletRequest.getParameter("imagemagick_path");
 					String sendEmailAtRegister = httpServletRequest.getParameter("sendEmailAtRegister");
 					String sendEmailWithVerficationCode = httpServletRequest.getParameter("sendEmailWithVerficationCode");
+					
+					String default_export_font = httpServletRequest.getParameter("default_export_font");
 					
 					String crypt_ClassName = httpServletRequest.getParameter("crypt_ClassName");
 					
@@ -152,7 +160,7 @@ public class Install extends VelocityViewServlet {
 					ImportInitvalues.getInstance().loadConfiguration(crypt_ClassName, configdefault, configsmtp, configsmtpport, 
 									configreferer, configmailuser, configmailpass, configdefaultLang, 
 									swf_path, im_path, url_feed, url_feed2,
-									sendEmailAtRegister, sendEmailWithVerficationCode);
+									sendEmailAtRegister, sendEmailWithVerficationCode, default_export_font);
 					ImportInitvalues.getInstance().loadInitUserAndOrganisation(username, userpass, useremail, orgname);
 					ImportInitvalues.getInstance().loadDefaultRooms();
 					

@@ -117,5 +117,32 @@
 	<classpathentry kind="lib" path="lib/velocity/jaxen-1.1.1.jar"/>
 	<classpathentry kind="lib" path="lib/velocity/velocity-1.6-dev.jar"/>
 	<classpathentry kind="lib" path="lib/velocity/velocity-tools-view-1.3.jar"/>
+	<classpathentry kind="lib" path="lib/batik_17/batik-anim.jar"/>
+	<classpathentry kind="lib" path="lib/batik_17/batik-awt-util.jar"/>
+	<classpathentry kind="lib" path="lib/batik_17/batik-bridge.jar"/>
+	<classpathentry kind="lib" path="lib/batik_17/batik-codec.jar"/>
+	<classpathentry kind="lib" path="lib/batik_17/batik-css.jar"/>
+	<classpathentry kind="lib" path="lib/batik_17/batik-dom.jar"/>
+	<classpathentry kind="lib" path="lib/batik_17/batik-ext.jar"/>
+	<classpathentry kind="lib" path="lib/batik_17/batik-extension.jar"/>
+	<classpathentry kind="lib" path="lib/batik_17/batik-gui-util.jar"/>
+	<classpathentry kind="lib" path="lib/batik_17/batik-gvt.jar"/>
+	<classpathentry kind="lib" path="lib/batik_17/batik-parser.jar"/>
+	<classpathentry kind="lib" path="lib/batik_17/batik-rasterizer.jar"/>
+	<classpathentry kind="lib" path="lib/batik_17/batik-script.jar"/>
+	<classpathentry kind="lib" path="lib/batik_17/batik-slideshow.jar"/>
+	<classpathentry kind="lib" path="lib/batik_17/batik-squiggle.jar"/>
+	<classpathentry kind="lib" path="lib/batik_17/batik-svg-dom.jar"/>
+	<classpathentry kind="lib" path="lib/batik_17/batik-svggen.jar"/>
+	<classpathentry kind="lib" path="lib/batik_17/batik-svgpp.jar"/>
+	<classpathentry kind="lib" path="lib/batik_17/batik-swing.jar"/>
+	<classpathentry kind="lib" path="lib/batik_17/batik-transcoder.jar"/>
+	<classpathentry kind="lib" path="lib/batik_17/batik-ttf2svg.jar"/>
+	<classpathentry kind="lib" path="lib/batik_17/batik-util.jar"/>
+	<classpathentry kind="lib" path="lib/batik_17/batik-xml.jar"/>
+	<classpathentry kind="lib" path="lib/batik_17/batik.jar"/>
+	<classpathentry kind="lib" path="lib/batik_17/js.jar"/>
+	<classpathentry kind="lib" path="lib/batik_17/pdf-transcoder.jar"/>
+	<classpathentry kind="lib" path="lib/batik_17/xml-apis-ext.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
