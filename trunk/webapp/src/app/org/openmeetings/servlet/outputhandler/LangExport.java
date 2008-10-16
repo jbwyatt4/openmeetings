@@ -52,20 +52,20 @@ public class LangExport extends HttpServlet {
 			if (sid == null) {
 				sid = "default";
 			}
-			System.out.println("sid: " + sid);
+			log.debug("sid: " + sid);
 			
 			String language = httpServletRequest.getParameter("language");
 			if (language == null) {
 				language = "0";
 			}
 			Long language_id = Long.valueOf(language).longValue();
-			System.out.println("language_id: " + language_id);
+			log.debug("language_id: " + language_id);
 
 			Long users_id = Sessionmanagement.getInstance().checkSession(sid);
 			Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
 
-			System.out.println("users_id: "+users_id);
-			System.out.println("user_level: "+user_level);
+			log.debug("users_id: "+users_id);
+			log.debug("user_level: "+user_level);
 			
 			if (user_level!=null && user_level > 0) {
 				FieldLanguage fl = Languagemanagement.getInstance().getFieldLanguageById(language_id);
@@ -90,7 +90,7 @@ public class LangExport extends HttpServlet {
 					out.close();
 				}
 			} else {
-				System.out.println("ERROR LangExport: not authorized FileDownload "+(new Date()));
+				log.debug("ERROR LangExport: not authorized FileDownload "+(new Date()));
 			}
 	
 		} catch (Exception er) {
