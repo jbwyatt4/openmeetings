@@ -57,7 +57,7 @@ public class AbstractBatikServlet extends HttpServlet {
 	public void paintEllipse2D(Graphics2D g2d, double x, double y, double width, double height, 
 			Color linecoler, int thickness, Color fillColor, float alpha) throws Exception {
 		
-		g2d.setStroke(new BasicStroke(thickness));
+		g2d.setStroke(new BasicStroke(thickness, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
 		
 		int[] rules = new int[8]; 
 		
@@ -90,7 +90,7 @@ public class AbstractBatikServlet extends HttpServlet {
 	public void paintRect2D(Graphics2D g2d, double x, double y, double width, double height, 
 			Color linecoler, int thickness, Color fillColor, float alpha) throws Exception {
 		
-		g2d.setStroke(new BasicStroke(thickness));
+		g2d.setStroke(new BasicStroke(thickness, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
 		
 		int[] rules = new int[8]; 
 		
