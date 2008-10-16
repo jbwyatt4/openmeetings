@@ -110,6 +110,7 @@
     <vslider name="_slider" height="120" y="10" x="10" minvalue="1" maxvalue="100" 
         initvalue="$once{ parent.initialNumber }" showrange="false" >
         <handler name="onvalue" args="v">
+            //if ($debug) Debug.write("onvalue",v);
             parent.btnRef.numericValue.tempValue = Number(v);
             parent.btnRef.numericValue.setAttribute('text',v);
             parent.btnRef.setAttribute('initialNumber',v);
