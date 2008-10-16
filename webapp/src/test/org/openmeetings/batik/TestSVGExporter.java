@@ -81,7 +81,7 @@ public class TestSVGExporter extends TestCase {
 	        point2.put(4, 200);
 	        pointsList.put(1, point2);
 	        
-	        exportToImageTest.drawPointsObject(svgGenerator1, pointsList, new Color(255,0,0), 3, 0, 0);
+	        exportToImageTest.drawPointsObject(svgGenerator1, pointsList, new Color(255,0,0), 3, 0, 0, new Float(0.2));
 	        
 	        //Draw a Rect without fill
 	        SVGGraphics2D svgGenerator3 = new SVGGraphics2D(svgGenerator);
