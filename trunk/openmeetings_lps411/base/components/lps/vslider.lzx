@@ -47,13 +47,14 @@
             return Math.round(valY);
         </method>
         
-        <method name="setY" args="v">
-            super.setY(v);
+        <handler name="ony" args="v">
+            //super.setY(v);
+            //if ($debug) Debug.write("setY: ",v);
 		    var thumbVal = getValueFromPos();
 		    if (thumbVal != parent.value) {
 		        this.parent.setValue(thumbVal);
 		    }               
-        </method>
+        </handler>
         
         <handler name="onclick">
         	parent.onvalueChosenFinal.sendEvent();
