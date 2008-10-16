@@ -5,13 +5,14 @@ import java.awt.Font;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.util.Date;
+import java.util.HashMap;
 
 import junit.framework.TestCase;
 
 import org.apache.batik.dom.GenericDOMImplementation;
 import org.apache.batik.dom.svg.SVGDOMImplementation;
 import org.apache.batik.svggen.SVGGraphics2D;
-import org.openmeetings.servlet.outputhandler.ExportToImageTest;
+import org.openmeetings.servlet.outputhandler.ExportToImage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.DOMImplementation;
@@ -26,7 +27,7 @@ public class TestSVGExporter extends TestCase {
 		try {
 			
 			
-			ExportToImageTest exportToImageTest = new ExportToImageTest();
+			ExportToImage exportToImageTest = new ExportToImage();
 			
 	        // Get a DOMImplementation.
 	        DOMImplementation domImpl =
@@ -58,6 +59,60 @@ public class TestSVGExporter extends TestCase {
 	        		"	dasdasdasda sdasdad a  das dasdas dasdasdasd Process 1 asd asd as dasas dasdasdasdasdasdad a  das dasd" +
 	        		"	asdasdasdasd Process 1 asd asd as dasasdasdasdasdasdasdad a  das dasdasdasdasdasd", Font.PLAIN, 11,
 	        		new Color(255,0,0));
+	        
+	        //Draw a Painting
+	        SVGGraphics2D svgGenerator1 = new SVGGraphics2D(svgGenerator);
+	        //SVGGraphics2D svgGenerator2 = new SVGGraphics2D(document);
+	        
+	        HashMap pointsList = new HashMap();
+	        HashMap point = new HashMap();
+	        point.put(0, "point");
+	        point.put(1, 10);
+	        point.put(2, 20);
+	        point.put(3, 40);
+	        point.put(4, 50);
+	        pointsList.put(0, point);
+	        
+	        HashMap point2 = new HashMap();
+	        point2.put(0, "point");
+	        point2.put(1, 40);
+	        point2.put(2, 50);
+	        point2.put(3, 10);
+	        point2.put(4, 200);
+	        pointsList.put(1, point2);
+	        
+	        exportToImageTest.drawPointsObject(svgGenerator1, pointsList, new Color(255,0,0), 3, 0, 0);
+	        
+	        //Draw a Rect without fill
+	        SVGGraphics2D svgGenerator3 = new SVGGraphics2D(svgGenerator);
+	        exportToImageTest.paintRect2D(svgGenerator3, 10, 300, 100, 40, new Color(255,0,0),1,null);
+	        //Draw rect without fill but with bigger border
+	        SVGGraphics2D svgGenerator4 = new SVGGraphics2D(svgGenerator);
+	        exportToImageTest.paintRect2D(svgGenerator4, 10, 350, 100, 40, new Color(0,255,0),5,null);
+	        
+	        //Draw rect with fill and thick border
+	        SVGGraphics2D svgGenerator5 = new SVGGraphics2D(svgGenerator);
+	        exportToImageTest.paintRect2D(svgGenerator5, 10, 400, 100, 40, new Color(0,255,0),5,new Color(0,0,255));
+	        
+	        //Draw rect with fill and without border
+	        SVGGraphics2D svgGenerator6 = new SVGGraphics2D(svgGenerator);
+	        exportToImageTest.paintRect2D(svgGenerator6, 10, 450, 100, 40, null,5,new Color(255,0,255));
+	        
+	        
+	        //Draw a Ellipse without fill
+	        SVGGraphics2D svgGenerator11 = new SVGGraphics2D(svgGenerator);
+	        exportToImageTest.paintEllipse2D(svgGenerator11, 110, 300, 100, 40, new Color(255,0,0),1,null);
+	        //Draw Ellipse without fill but with bigger border
+	        SVGGraphics2D svgGenerator12 = new SVGGraphics2D(svgGenerator);
+	        exportToImageTest.paintEllipse2D(svgGenerator12, 110, 350, 100, 40, new Color(0,255,0),5,null);
+	        
+	        //Draw Ellipse with fill and thick border
+	        SVGGraphics2D svgGenerator13 = new SVGGraphics2D(svgGenerator);
+	        exportToImageTest.paintEllipse2D(svgGenerator13, 110, 400, 100, 40, new Color(0,255,0),5,new Color(0,0,255));
+	        
+	        //Draw Ellipse with fill and without border
+	        SVGGraphics2D svgGenerator14 = new SVGGraphics2D(svgGenerator);
+	        exportToImageTest.paintEllipse2D(svgGenerator14, 110, 450, 100, 40, null,5,new Color(255,0,255));
 	        
 	        // Finally, stream out SVG to the standard output using
 	        // UTF-8 encoding.
