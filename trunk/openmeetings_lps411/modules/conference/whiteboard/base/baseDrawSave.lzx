@@ -140,7 +140,7 @@
 	<!-- saving all object on whiteBoard as wml-file -->
 	
 	<handler name="sendObject">
-		//Debug.write("sendObject: ",this.baseactionobjectList);
+		if ($debug) Debug.write("sendObject doSave: ",this.baseactionobjectList);
 		this.fileData = this.baseactionobjectList;
 		this.savefileDataWinRef = new lz.saveAsWmlWindow(canvas.main_content._content.inner,{refObj:this});
 	</handler>
@@ -165,7 +165,35 @@
 					}
 				]]>  	          				
 	        </handler>	
-	  	</netRemoteCallHib>  	
+	  	</netRemoteCallHib>  
+        
+        
+    <method name="confirmSaveAsImageExport" args="fileName">
+        this.savefileName = fileName;
+        this.fileData = this.baseactionobjectList;
+        this.addPrintList.doCall();
+    </method>	
+    
+        <netRemoteCallHib name="addPrintList" funcname="addPrintList" remotecontext="$once{ canvas.thishib }" >   
+            <netparam><method name="getValue">return canvas.sessionId; </method></netparam>
+            <!--             
+            <netparam><method name="getValue">return parent.parent.savefileName; </method></netparam>
+             -->
+            <netparam><method name="getValue">return parent.parent.fileData;</method></netparam>
+            <netparam><method name="getValue">return parent.parent.width;</method></netparam>
+            <netparam><method name="getValue">return parent.parent.height;</method></netparam>
+            <handler name="ondata" args="value">    
+                <![CDATA[
+                    if ($debug) Debug.write("addPrintList: ",value);   
+                    var downloadurl = 'http://'+canvas.rtmphostlocal+':'+canvas.red5httpport+'/'+canvas.webAppRootKey+'/ExportToImage?' +
+					                    'fileName=' + parent.savefileName +
+					                    '&hash='+value + 
+					                    '&sid='+canvas.sessionId;
+                                        
+                    lz.Browser.loadURL(downloadurl,"_BLANK");
+                ]]>                             
+            </handler>  
+        </netRemoteCallHib>     
     
 	<!-- Loading the wml Object from the library 
 		invoked wether directly (spreadNews=true) from the library
