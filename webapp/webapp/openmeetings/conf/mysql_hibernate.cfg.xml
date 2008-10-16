@@ -29,7 +29,7 @@
 		
 		<property name="show_sql">false</property>
 		<property name="use_outer_join">false</property>
-		<property name="hibernate.query.factory_class">org.hibernate.hql.classic.ClassicQueryTranslatorFactory</property>
+		<property name="hibernate.query.factory_class">org.hibernate.hql.ast.ASTQueryTranslatorFactory</property>
         <property name="connection.provider_class ">org.hibernate.connection.C3P0ConnectionProvider</property>
         <property name="cache.provider_class">org.hibernate.cache.NoCacheProvider </property>
         <property name="cache.use_query_cache">false </property>
