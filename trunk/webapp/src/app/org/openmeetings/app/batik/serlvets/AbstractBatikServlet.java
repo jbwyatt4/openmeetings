@@ -1,5 +1,6 @@
 package org.openmeetings.app.batik.serlvets;
 
+import java.awt.AlphaComposite;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
@@ -37,7 +38,8 @@ public class AbstractBatikServlet extends HttpServlet {
 
 	}
 	
-	public void drawPointsObject(Graphics2D g2d, Map pointsList, Color lineColor, int size, double xObj, double yObj) throws Exception {
+	public void drawPointsObject(Graphics2D g2d, Map pointsList, Color lineColor, int size, 
+			double xObj, double yObj, float alpha) throws Exception {
 		
 		for (Iterator iter = pointsList.keySet().iterator();iter.hasNext();) {
 			Map<Integer,Object> point = (Map<Integer,Object>) pointsList.get(iter.next());
@@ -46,7 +48,7 @@ public class AbstractBatikServlet extends HttpServlet {
 					Double.valueOf(point.get(2).toString()).doubleValue(), 
 					Double.valueOf(point.get(3).toString()).doubleValue(), 
 					Double.valueOf(point.get(4).toString()).doubleValue(),  
-					size, lineColor, xObj, yObj);
+					size, lineColor, xObj, yObj, alpha);
 		}
 		
 		
@@ -116,8 +118,22 @@ public class AbstractBatikServlet extends HttpServlet {
 	}
 	
 	public void drawThickLine2D(Graphics2D g2d, double x1, double y1, double x2, double y2, 
-			int width, Color c, double xObj, double yObj) throws Exception {
+			int width, Color c, double xObj, double yObj, float alpha) throws Exception {
 		g2d.setPaint(c);
+		
+		int[] rules = new int[8]; 
+		
+		//all possible Compositing Rules:
+		rules[0] = AlphaComposite.SRC_OVER;
+		rules[1] = AlphaComposite.DST_OVER;
+		rules[2] = AlphaComposite.CLEAR;
+		rules[3] = AlphaComposite.SRC;
+		rules[4] = AlphaComposite.SRC_IN;
+		rules[5] = AlphaComposite.DST_IN;
+		rules[6] = AlphaComposite.SRC_OUT;
+		rules[7] = AlphaComposite.DST_OUT;
+		
+		g2d.setComposite( AlphaComposite.getInstance( AlphaComposite.SRC,alpha));
 		g2d.setStroke(new BasicStroke(width, BasicStroke.CAP_ROUND, BasicStroke.JOIN_BEVEL));
 		Line2D line = new Line2D.Double(x1+xObj, y1+yObj, x2+xObj, y2+yObj);
 	    g2d.draw(line);

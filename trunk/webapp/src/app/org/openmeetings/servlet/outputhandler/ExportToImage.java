@@ -101,10 +101,7 @@ public class ExportToImage extends AbstractBatikServlet {
 		        // Create an instance of the SVG Generator.
 		        SVGGraphics2D svgGenerator = new SVGGraphics2D(document);
 
-		        SVGGraphics2D svgGenerator8 = new SVGGraphics2D(svgGenerator);
-		        //SVGGraphics2D svgGenerator2 = new SVGGraphics2D(document);
-		        
-		        
+		        //Whiteboard Objects
 		        Map whiteBoardMap = pBean.getMap();
 		        
 		        for (Iterator iter = whiteBoardMap.keySet().iterator();iter.hasNext();) {
@@ -119,6 +116,8 @@ public class ExportToImage extends AbstractBatikServlet {
 		        		Integer stroke = Integer.valueOf(graphObject.get(3).toString()).intValue();
 		        		Integer col = Integer.valueOf(graphObject.get(4).toString()).intValue();
 		        		
+		        		Float alpha = Float.valueOf(graphObject.get(5).toString()).floatValue();
+		        		
 		        		Double x = Double.valueOf(graphObject.get(graphObject.size()-5).toString()).doubleValue();
 		        		Double y = Double.valueOf(graphObject.get(graphObject.size()-4).toString()).doubleValue();
 		        		Double width = Double.valueOf(graphObject.get(graphObject.size()-3).toString()).doubleValue();
@@ -128,7 +127,7 @@ public class ExportToImage extends AbstractBatikServlet {
 		    	        SVGGraphics2D svgGenerator_temp = new SVGGraphics2D(svgGenerator);
 		    	        //SVGGraphics2D svgGenerator2 = new SVGGraphics2D(document);
 		    	        
-		    	        this.drawPointsObject(svgGenerator_temp, pointsList, new Color(col), stroke, x, y);
+		    	        this.drawPointsObject(svgGenerator_temp, pointsList, new Color(col), stroke, x, y, alpha);
 		    	        
 		        	}
 		        }
