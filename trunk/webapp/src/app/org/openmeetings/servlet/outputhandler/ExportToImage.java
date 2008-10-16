@@ -113,7 +113,7 @@ public class ExportToImage extends AbstractBatikServlet {
 		        		
 		        		Map pointsList = (Map) graphObject.get(1);
 		        		
-		        		Integer stroke = Integer.valueOf(graphObject.get(3).toString()).intValue();
+		        		Integer lineWidth = Integer.valueOf(graphObject.get(3).toString()).intValue();
 		        		Integer col = Integer.valueOf(graphObject.get(4).toString()).intValue();
 		        		
 		        		Float alpha = Float.valueOf(graphObject.get(5).toString()).floatValue();
@@ -127,8 +127,76 @@ public class ExportToImage extends AbstractBatikServlet {
 		    	        SVGGraphics2D svgGenerator_temp = new SVGGraphics2D(svgGenerator);
 		    	        //SVGGraphics2D svgGenerator2 = new SVGGraphics2D(document);
 		    	        
-		    	        this.drawPointsObject(svgGenerator_temp, pointsList, new Color(col), stroke, x, y, alpha);
+		    	        this.drawPointsObject(svgGenerator_temp, pointsList, new Color(col), lineWidth, x, y, alpha);
 		    	        
+		        	} else if (graphType.equals("rectangle")) {
+		        		
+		        		/*actionObject[0] = 'rectangle';
+				        actionObject[1] = stroke;
+				        actionObject[2] = line;
+				        actionObject[3] = fill;
+				        actionObject[4] = strokeDis;
+				        actionObject[5] = fillDis;
+				        actionObject[6] = this.currentrectangleOpacity;*/
+		        		
+		        		Integer lineWidth = Integer.valueOf(graphObject.get(2).toString()).intValue();
+		        		
+		        		Integer stroke = Integer.valueOf(graphObject.get(1).toString()).intValue();
+		        		Integer strokeDis= Integer.valueOf(graphObject.get(4).toString()).intValue();
+		        		
+		        		Color strokeColor = null;
+		        		if (strokeDis != -1) {
+		        			strokeColor = new Color(stroke);
+		        		}
+		        		
+		        		Integer fill = Integer.valueOf(graphObject.get(3).toString()).intValue();
+		        		Integer fillDis= Integer.valueOf(graphObject.get(5).toString()).intValue();
+		        		
+		        		Color fillColor = null;
+		        		if (fillDis != -1) {
+		        			fillColor = new Color(fill);
+		        		}
+		        		
+		        		Float alpha = Float.valueOf(graphObject.get(6).toString()).floatValue();
+		        		
+		        		Double x = Double.valueOf(graphObject.get(graphObject.size()-5).toString()).doubleValue();
+		        		Double y = Double.valueOf(graphObject.get(graphObject.size()-4).toString()).doubleValue();
+		        		Double width = Double.valueOf(graphObject.get(graphObject.size()-3).toString()).doubleValue();
+		        		Double height = Double.valueOf(graphObject.get(graphObject.size()-2).toString()).doubleValue();
+		        	
+		        		SVGGraphics2D svgGenerator_temp = new SVGGraphics2D(svgGenerator);
+		        		this.paintRect2D(svgGenerator_temp, x, y, width, height, strokeColor, lineWidth, fillColor, alpha);
+		        		
+		        	} else if (graphType.equals("ellipse")) {
+		        		
+		        		Integer lineWidth = Integer.valueOf(graphObject.get(2).toString()).intValue();
+		        		
+		        		Integer stroke = Integer.valueOf(graphObject.get(1).toString()).intValue();
+		        		Integer strokeDis= Integer.valueOf(graphObject.get(4).toString()).intValue();
+		        		
+		        		Color strokeColor = null;
+		        		if (strokeDis != -1) {
+		        			strokeColor = new Color(stroke);
+		        		}
+		        		
+		        		Integer fill = Integer.valueOf(graphObject.get(3).toString()).intValue();
+		        		Integer fillDis= Integer.valueOf(graphObject.get(5).toString()).intValue();
+		        		
+		        		Color fillColor = null;
+		        		if (fillDis != -1) {
+		        			fillColor = new Color(fill);
+		        		}
+		        		
+		        		Float alpha = Float.valueOf(graphObject.get(6).toString()).floatValue();
+		        		
+		        		Double x = Double.valueOf(graphObject.get(graphObject.size()-5).toString()).doubleValue();
+		        		Double y = Double.valueOf(graphObject.get(graphObject.size()-4).toString()).doubleValue();
+		        		Double width = Double.valueOf(graphObject.get(graphObject.size()-3).toString()).doubleValue();
+		        		Double height = Double.valueOf(graphObject.get(graphObject.size()-2).toString()).doubleValue();
+		        	
+		        		SVGGraphics2D svgGenerator_temp = new SVGGraphics2D(svgGenerator);
+		        		this.paintEllipse2D(svgGenerator_temp, x, y, width, height, strokeColor, lineWidth, fillColor, alpha);
+		        		
 		        	}
 		        }
 		        

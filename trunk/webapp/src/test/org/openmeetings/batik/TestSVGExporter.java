@@ -85,34 +85,34 @@ public class TestSVGExporter extends TestCase {
 	        
 	        //Draw a Rect without fill
 	        SVGGraphics2D svgGenerator3 = new SVGGraphics2D(svgGenerator);
-	        exportToImageTest.paintRect2D(svgGenerator3, 10, 300, 100, 40, new Color(255,0,0),1,null);
+	        exportToImageTest.paintRect2D(svgGenerator3, 10, 300, 100, 40, new Color(255,0,0),1,null,new Float(0.5));
 	        //Draw rect without fill but with bigger border
 	        SVGGraphics2D svgGenerator4 = new SVGGraphics2D(svgGenerator);
-	        exportToImageTest.paintRect2D(svgGenerator4, 10, 350, 100, 40, new Color(0,255,0),5,null);
+	        exportToImageTest.paintRect2D(svgGenerator4, 10, 350, 100, 40, new Color(0,255,0),5,null,new Float(0.5));
 	        
 	        //Draw rect with fill and thick border
 	        SVGGraphics2D svgGenerator5 = new SVGGraphics2D(svgGenerator);
-	        exportToImageTest.paintRect2D(svgGenerator5, 10, 400, 100, 40, new Color(0,255,0),5,new Color(0,0,255));
+	        exportToImageTest.paintRect2D(svgGenerator5, 10, 400, 100, 40, new Color(0,255,0),5,new Color(0,0,255),new Float(0.5));
 	        
 	        //Draw rect with fill and without border
 	        SVGGraphics2D svgGenerator6 = new SVGGraphics2D(svgGenerator);
-	        exportToImageTest.paintRect2D(svgGenerator6, 10, 450, 100, 40, null,5,new Color(255,0,255));
+	        exportToImageTest.paintRect2D(svgGenerator6, 10, 450, 100, 40, null,5,new Color(255,0,255),new Float(0.5));
 	        
 	        
 	        //Draw a Ellipse without fill
 	        SVGGraphics2D svgGenerator11 = new SVGGraphics2D(svgGenerator);
-	        exportToImageTest.paintEllipse2D(svgGenerator11, 110, 300, 100, 40, new Color(255,0,0),1,null);
+	        exportToImageTest.paintEllipse2D(svgGenerator11, 110, 300, 100, 40, new Color(255,0,0),1,null,new Float(0.5));
 	        //Draw Ellipse without fill but with bigger border
 	        SVGGraphics2D svgGenerator12 = new SVGGraphics2D(svgGenerator);
-	        exportToImageTest.paintEllipse2D(svgGenerator12, 110, 350, 100, 40, new Color(0,255,0),5,null);
+	        exportToImageTest.paintEllipse2D(svgGenerator12, 110, 350, 100, 40, new Color(0,255,0),5,null,new Float(0.5));
 	        
 	        //Draw Ellipse with fill and thick border
 	        SVGGraphics2D svgGenerator13 = new SVGGraphics2D(svgGenerator);
-	        exportToImageTest.paintEllipse2D(svgGenerator13, 110, 400, 100, 40, new Color(0,255,0),5,new Color(0,0,255));
+	        exportToImageTest.paintEllipse2D(svgGenerator13, 110, 400, 100, 40, new Color(0,255,0),5,new Color(0,0,255),new Float(0.5));
 	        
 	        //Draw Ellipse with fill and without border
 	        SVGGraphics2D svgGenerator14 = new SVGGraphics2D(svgGenerator);
-	        exportToImageTest.paintEllipse2D(svgGenerator14, 110, 450, 100, 40, null,5,new Color(255,0,255));
+	        exportToImageTest.paintEllipse2D(svgGenerator14, 110, 450, 100, 40, null,5,new Color(255,0,255),new Float(0.5));
 	        
 	        // Finally, stream out SVG to the standard output using
 	        // UTF-8 encoding.

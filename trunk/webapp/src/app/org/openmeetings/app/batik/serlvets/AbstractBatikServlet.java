@@ -55,9 +55,23 @@ public class AbstractBatikServlet extends HttpServlet {
 	}
 	
 	public void paintEllipse2D(Graphics2D g2d, double x, double y, double width, double height, 
-			Color linecoler, int thickness, Color fillColor) throws Exception {
+			Color linecoler, int thickness, Color fillColor, float alpha) throws Exception {
 		
 		g2d.setStroke(new BasicStroke(thickness));
+		
+		int[] rules = new int[8]; 
+		
+		//all possible Compositing Rules:
+		rules[0] = AlphaComposite.SRC_OVER;
+		rules[1] = AlphaComposite.DST_OVER;
+		rules[2] = AlphaComposite.CLEAR;
+		rules[3] = AlphaComposite.SRC;
+		rules[4] = AlphaComposite.SRC_IN;
+		rules[5] = AlphaComposite.DST_IN;
+		rules[6] = AlphaComposite.SRC_OUT;
+		rules[7] = AlphaComposite.DST_OUT;
+		
+		g2d.setComposite( AlphaComposite.getInstance( AlphaComposite.SRC,alpha));
 		
         //int x, int y, int width, int height
         
@@ -74,9 +88,23 @@ public class AbstractBatikServlet extends HttpServlet {
     }
 	
 	public void paintRect2D(Graphics2D g2d, double x, double y, double width, double height, 
-			Color linecoler, int thickness, Color fillColor) throws Exception {
+			Color linecoler, int thickness, Color fillColor, float alpha) throws Exception {
 		
 		g2d.setStroke(new BasicStroke(thickness));
+		
+		int[] rules = new int[8]; 
+		
+		//all possible Compositing Rules:
+		rules[0] = AlphaComposite.SRC_OVER;
+		rules[1] = AlphaComposite.DST_OVER;
+		rules[2] = AlphaComposite.CLEAR;
+		rules[3] = AlphaComposite.SRC;
+		rules[4] = AlphaComposite.SRC_IN;
+		rules[5] = AlphaComposite.DST_IN;
+		rules[6] = AlphaComposite.SRC_OUT;
+		rules[7] = AlphaComposite.DST_OUT;
+		
+		g2d.setComposite( AlphaComposite.getInstance( AlphaComposite.SRC,alpha));
 		
         //int x, int y, int width, int height
         
