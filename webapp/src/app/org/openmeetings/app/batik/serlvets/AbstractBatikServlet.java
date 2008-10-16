@@ -42,8 +42,11 @@ public class AbstractBatikServlet extends HttpServlet {
 		for (Iterator iter = pointsList.keySet().iterator();iter.hasNext();) {
 			Map<Integer,Object> point = (Map<Integer,Object>) pointsList.get(iter.next());
 			
-			this.drawThickLine2D(g2d, (Integer) point.get(1), (Integer) point.get(2), 
-					(Integer) point.get(3), (Integer) point.get(4), size, lineColor, xObj, yObj);
+			this.drawThickLine2D(g2d, Double.valueOf(point.get(1).toString()).doubleValue(), 
+					Double.valueOf(point.get(2).toString()).doubleValue(), 
+					Double.valueOf(point.get(3).toString()).doubleValue(), 
+					Double.valueOf(point.get(4).toString()).doubleValue(),  
+					size, lineColor, xObj, yObj);
 		}
 		
 		
@@ -115,14 +118,14 @@ public class AbstractBatikServlet extends HttpServlet {
 	public void drawThickLine2D(Graphics2D g2d, double x1, double y1, double x2, double y2, 
 			int width, Color c, double xObj, double yObj) throws Exception {
 		g2d.setPaint(c);
-		g2d.setStroke(new BasicStroke(width));
+		g2d.setStroke(new BasicStroke(width, BasicStroke.CAP_ROUND, BasicStroke.JOIN_BEVEL));
 		Line2D line = new Line2D.Double(x1+xObj, y1+yObj, x2+xObj, y2+yObj);
 	    g2d.draw(line);
 	}
 
 	public void drawThickLine(Graphics2D g2d, int x1, int y1, int x2, int y2, int width, Color c) throws Exception {
 		g2d.setPaint(c);
-		g2d.setStroke(new BasicStroke(width));
+		g2d.setStroke(new BasicStroke(width, BasicStroke.CAP_ROUND, BasicStroke.JOIN_BEVEL));
 	    g2d.drawLine(x1, y1, x2, y2);
 	}	
 
