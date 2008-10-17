@@ -55,9 +55,9 @@ public class TestSVGExporter extends TestCase {
 	        //SVGGraphics2D svgGenerator2 = new SVGGraphics2D(document);
 	        
 	        //NOTE: Font.ITALIC+Font.BOLD = Font AND Bold !
-	        exportToImageTest.paintDiagramText(svgGenerator8, 500, 300, 600, 360, "Process 1 asd asd as dasas " +
+	        exportToImageTest.paintTextByWidthHeight(svgGenerator8, 500, 300, 100, 200, "Process 1 asd asd as dasas " +
 	        		"	dasdasdasda sdasdad a  das dasdas dasdasdasd Process 1 asd asd as dasas dasdasdasdasdasdad a  das dasd" +
-	        		"	asdasdasdasd Process 1 asd asd as dasasdasdasdasdasdasdad a  das dasdasdasdasdasd", Font.PLAIN, 11,
+	        		"	asdasdasdasd Process 1 asd asd as dasasdasdasdasdasdasdad a  das dasdasdasdasdasd", Font.BOLD, 28,
 	        		new Color(255,0,0));
 	        
 	        //Draw a Painting

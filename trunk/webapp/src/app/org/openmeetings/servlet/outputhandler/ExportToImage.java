@@ -197,7 +197,62 @@ public class ExportToImage extends AbstractBatikServlet {
 		        		SVGGraphics2D svgGenerator_temp = new SVGGraphics2D(svgGenerator);
 		        		this.paintEllipse2D(svgGenerator_temp, x, y, width, height, strokeColor, lineWidth, fillColor, alpha);
 		        		
+		        	} else if (graphType.equals("letter")) {
+		        		
+		        		String text = graphObject.get(1).toString();
+		        		Color fontColor = new Color (Integer.valueOf(graphObject.get(2).toString()).intValue());
+		        		Integer fontSize = Integer.valueOf(graphObject.get(3).toString()).intValue();
+		        		
+		        		String fontStyle = graphObject.get(4).toString();
+		        		Integer style = null;
+		        		if (fontStyle.equals("plain")) {
+		        			style = Font.PLAIN;
+		        		} else if (fontStyle.equals("bold")) {
+		        			style = Font.BOLD;
+		        		} else if (fontStyle.equals("italic")) {
+		        			style = Font.ITALIC;
+		        		} else if (fontStyle.equals("bolditalic")) {
+		        			style = Font.ITALIC+Font.BOLD;
+		        		}
+		        		
+		        		log.debug("fontStyle,style "+style+" fs: "+fontStyle);
+		        		
+		        		Double x = Double.valueOf(graphObject.get(graphObject.size()-5).toString()).doubleValue();
+		        		Double y = Double.valueOf(graphObject.get(graphObject.size()-4).toString()).doubleValue();
+		        		Double width = Double.valueOf(graphObject.get(graphObject.size()-3).toString()).doubleValue();
+		        		Double height = Double.valueOf(graphObject.get(graphObject.size()-2).toString()).doubleValue();
+		        		
+		        		SVGGraphics2D svgGenerator_temp = new SVGGraphics2D(svgGenerator);
+		        		this.paintTextByWidthHeight(svgGenerator_temp, (int) Math.round(x), (int) Math.round(y), (int) Math.round(width), 
+		        					(int) Math.round(height), text, style, fontSize, fontColor);
 		        	}
+		        	
+//		        'bolditalic');
+//	  		} else if(!this.bold && this.italic){
+//	  			this.setAttribute('currentlayerstyle','italic');
+//	  		} else if(this.bold && !this.italic){
+//	  			this.setAttribute('currentlayerstyle','bold');
+//	  		} else if(!this.bold && !this.italic){
+//	  			this.setAttribute('currentlayerstyle','plain');
+//		        	
+		        	
+//		        	actionObject[0] = "letter";
+//		    	    actionObject[1] = textforfield;
+//		    	    actionObject[2] = fgcolor;
+//		    	    actionObject[3] = fontsize;
+//		    	    actionObject[4] = fontstyle;
+//		    		actionObject[5] = this.counter;
+//		    	    actionObject[6] = x;
+//		    	    actionObject[7] = y;
+//		    	    actionObject[8] = width;
+//		    	    actionObject[9] = height;
+//		    	    actionObject[10] = this.currentlayer.name);
+//		    	    
+		        	//NOTE: Font.ITALIC+Font.BOLD = Font AND Bold !
+//			        exportToImageTest.paintDiagramText(svgGenerator8, 500, 300, 600, 360, "Process 1 asd asd as dasas " +
+//			        		"	dasdasdasda sdasdad a  das dasdas dasdasdasd Process 1 asd asd as dasas dasdasdasdasdasdad a  das dasd" +
+//			        		"	asdasdasdasd Process 1 asd asd as dasasdasdasdasdasdasdad a  das dasdasdasdasdasd", Font.PLAIN, 11,
+//			        		new Color(255,0,0));
 		        }
 		        
 		        // Finally, stream out SVG to the standard output using

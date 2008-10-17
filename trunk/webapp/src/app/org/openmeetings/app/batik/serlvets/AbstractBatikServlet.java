@@ -16,25 +16,33 @@ import java.util.Iterator;
 import javax.servlet.http.HttpServlet;
 import javax.swing.JTextArea;
 
+import org.apache.batik.dom.svg.SVGDOMImplementation;
 import org.apache.batik.svggen.SVGGraphics2D;
 import org.openmeetings.app.data.basic.Configurationmanagement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 
 public class AbstractBatikServlet extends HttpServlet {
 	
 	private static final Logger log = LoggerFactory.getLogger(AbstractBatikServlet.class);
-	
-	public void paintDiagramText(Graphics2D g2d, int x1, int y1, int x2, int y2, 
+
+	public void paintTextByWidthHeight(SVGGraphics2D g2d, int x1, int y1, int width, int height,
 			String text, int style, int size, Color fontColor) throws Exception {
 
-		int width = x2-x1;
-		int height = y2-y1;
-		 
-		String default_export_font = Configurationmanagement.getInstance().getConfKey(3,"default_export_font").getConf_value();
+		//String default_export_font = Configurationmanagement.getInstance().getConfKey(3,"default_export_font").getConf_value();
 		
+		this.drawTextByString(g2d, x1, y1, width, height, text, "Verdana", style, size, fontColor);
+
+	}
+	
+	public void _paintTextByWidthHeight(SVGGraphics2D g2d, int x1, int y1, int width, int height,
+			String text, int style, int size, Color fontColor) throws Exception {
+
+		//String default_export_font = Configurationmanagement.getInstance().getConfKey(3,"default_export_font").getConf_value();
 		
-		this.drawText(g2d, x1+1, y1+1, width-2, height-2, text, default_export_font, style, size, fontColor);
+		this.drawTextByString(g2d, x1, y1, width, height, text, "Verdana", style, size, fontColor);
 
 	}
 	
@@ -172,9 +180,56 @@ public class AbstractBatikServlet extends HttpServlet {
 		g2d.setStroke(new BasicStroke(width, BasicStroke.CAP_ROUND, BasicStroke.JOIN_BEVEL));
 	    g2d.drawLine(x1, y1, x2, y2);
 	}	
+	
+	public void paintTextByWidthHeightAndDocument(SVGGraphics2D g2d, int x1, int y1, int width, int height,
+			String text, int style, int size, Color fontColor, Document document) throws Exception {
+
+		//String default_export_font = Configurationmanagement.getInstance().getConfKey(3,"default_export_font").getConf_value();
+		
+		this.drawText(g2d, x1, y1, width, height, text, "Verdana", style, size, fontColor, document);
+
+	}
+
+	public void drawText(SVGGraphics2D g2d, int x, int y, int width, int height, 
+			String text, String default_export_font, int style, int size, Color fontColor,
+			Document document) throws Exception {
+		
+//		g2d.setClip(x, y, width, height);
+//		g2d.setColor(Color.black);
+//		g2d.drawString(text, x, y+20);
+		
+		String svgNS = SVGDOMImplementation.SVG_NAMESPACE_URI;
+
+		// Get the root element (the 'svg' element).
+		Element svgRoot = document.getDocumentElement();
+
+		log.debug("svgNS DEBUG: "+svgNS);
+		
+		//Element textElement = g2d.getDOMFactory().createElementNS(svgNS,"text");
+		Element rectangle = document.createElementNS(svgNS, "rect");
+		rectangle.setAttributeNS(svgNS, "x", "10");
+		rectangle.setAttributeNS(svgNS, "y", "20");
+		rectangle.setAttributeNS(svgNS, "width", "100");
+		rectangle.setAttributeNS(svgNS, "height", "50");
+		rectangle.setAttributeNS(svgNS, "fill", "red");
+
+		// Attach the rectangle to the root 'svg' element.
+		svgRoot.appendChild(rectangle);
 
 
-	public void drawText(Graphics2D g2d, int x, int y, int width, int height, 
+	}
+	
+	public void drawTextByString(SVGGraphics2D g2d, int x, int y, int width, int height, 
+			String text, String default_export_font, int style, int size, Color fontColor) throws Exception {
+		
+		//g2d.setClip(x, y, width, height);
+		g2d.setColor(Color.black);
+		g2d.drawString(text, x, y);
+		
+		
+	}
+
+	public void _drawText(Graphics2D g2d, int x, int y, int width, int height, 
 			String text, String default_export_font, int style, int size, Color fontColor) throws Exception {
 		
 //		g2d.setClip(x, y, width, height);
@@ -182,7 +237,7 @@ public class AbstractBatikServlet extends HttpServlet {
 //		g2d.drawString(text, x, y+20);
 		
 		//Font font = new Font("Verdana", Font.PLAIN, 11);
-		Font font = new Font(default_export_font, Font.PLAIN, size);
+		Font font = new Font(default_export_font, style, size);
 
 		String[] stringsText = text.split("\r");
 		log.debug("TEXT: "+stringsText);
