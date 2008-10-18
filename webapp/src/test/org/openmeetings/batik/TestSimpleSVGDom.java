@@ -1,5 +1,7 @@
 package org.openmeetings.batik;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.util.Date;
@@ -28,22 +30,27 @@ public class TestSimpleSVGDom extends TestCase {
 			Document doc = impl.createDocument(svgNS, "svg", null);
 
 			// Get the root element (the 'svg' element).
-			Element svgRoot = doc.getDocumentElement();
+			Element svgRoot = doc.getDocumentElement(); 
+			
+			
 			
 			// Set the width and height attributes on the root 'svg' element.
-			svgRoot.setAttributeNS(null, "width", "400");
-			svgRoot.setAttributeNS(null, "height", "450");
+			svgRoot.setAttributeNS(svgNS, "width", "400");
+			svgRoot.setAttributeNS(svgNS, "height", "450");
 
 			// Create the rectangle.
 			Element rectangle = doc.createElementNS(svgNS, "text");
 			rectangle.setAttributeNS(svgNS, "x", "10");
 			rectangle.setAttributeNS(svgNS, "y", "20");
+			rectangle.setAttributeNS(svgNS, "text", "20");
 			rectangle.setAttributeNS(svgNS, "width", "100");
 			rectangle.setAttributeNS(svgNS, "height", "50");
 			rectangle.setAttributeNS(svgNS, "fill", "red");
+			rectangle.setTextContent("textFF");
 
 			// Attach the rectangle to the root 'svg' element.
 			svgRoot.appendChild(rectangle);
+			
 			
 			// Finally, stream out SVG to the standard output using
 	        // UTF-8 encoding.
@@ -66,5 +73,6 @@ public class TestSimpleSVGDom extends TestCase {
 			er.printStackTrace();
 		}
 	}
+	
 
 }

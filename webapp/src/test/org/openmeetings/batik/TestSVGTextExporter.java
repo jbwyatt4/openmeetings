@@ -3,6 +3,7 @@ package org.openmeetings.batik;
 import java.awt.Color;
 import java.awt.Font;
 import java.io.OutputStreamWriter;
+import java.io.StringWriter;
 import java.io.Writer;
 import java.util.Date;
 import java.util.HashMap;
@@ -55,10 +56,13 @@ public class TestSVGTextExporter extends TestCase {
 	        //SVGGraphics2D svgGenerator2 = new SVGGraphics2D(document);
 	        
 	        //NOTE: Font.ITALIC+Font.BOLD = Font AND Bold !
-	        exportToImageTest.paintTextByWidthHeightAndDocument(svgGenerator8, 500, 300, 100, 200, "Process 1 asd asd as dasas " +
-	        		"	dasdasdasda sdasdad a  das dasdas dasdasdasd Process 1 asd asd as dasas dasdasdasdasdasdad a  das dasd" +
-	        		"	asdasdasdasd Process 1 asd asd as dasasdasdasdasdasdasdad a  das dasdasdasdasdasd", Font.BOLD, 28,
-	        		new Color(255,0,0), document);
+	        exportToImageTest.paintTextByWidthHeight(svgGenerator8, 500, 300, 100, 200, "Process", Font.BOLD+Font.ITALIC, 28,
+	        		new Color(255,0,0));
+	        
+	        SVGGraphics2D svgGenerator11 = new SVGGraphics2D(svgGenerator);
+	        
+	        exportToImageTest.paintTextByWidthHeight(svgGenerator11, 100, 300, 100, 200, "Process", Font.BOLD+Font.ITALIC, 111,
+	        		new Color(255,0,0));
 	        
 	        SVGGraphics2D svgGenerator9 = new SVGGraphics2D(svgGenerator);
 	      //NOTE: Font.ITALIC+Font.BOLD = Font AND Bold !
@@ -78,9 +82,15 @@ public class TestSVGTextExporter extends TestCase {
 			//httpServletResponse.setHeader("Content-Disposition","attachment; filename=\"" + requestedFile + "\"");
 	        Writer out = new OutputStreamWriter(System.out, "UTF-8");
 
+	        //StringWriter out = new StringWriter();
 	        
 	        svgGenerator.stream(out, useCSS);
-
+	        String xmlDef = out.toString();
+	        
+	        
+	        //log.debug("String: "+xmlDef);
+	        
+	        
 			
 		} catch (Exception er) {
 			log.error("ERROR ", er);

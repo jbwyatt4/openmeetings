@@ -23,6 +23,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 public class AbstractBatikServlet extends HttpServlet {
 	
@@ -33,16 +36,16 @@ public class AbstractBatikServlet extends HttpServlet {
 
 		//String default_export_font = Configurationmanagement.getInstance().getConfKey(3,"default_export_font").getConf_value();
 		
-		this.drawTextByString(g2d, x1, y1, width, height, text, "Verdana", style, size, fontColor);
+		this.drawTextByJTextArea(g2d, x1, y1, width, height, text, "Verdana", style, size, fontColor);
 
 	}
 	
 	public void _paintTextByWidthHeight(SVGGraphics2D g2d, int x1, int y1, int width, int height,
 			String text, int style, int size, Color fontColor) throws Exception {
 
-		//String default_export_font = Configurationmanagement.getInstance().getConfKey(3,"default_export_font").getConf_value();
+		String default_export_font = Configurationmanagement.getInstance().getConfKey(3,"default_export_font").getConf_value();
 		
-		this.drawTextByString(g2d, x1, y1, width, height, text, "Verdana", style, size, fontColor);
+		this.drawTextByString(g2d, x1, y1, width, height, text, default_export_font, style, size, fontColor);
 
 	}
 	
@@ -229,7 +232,7 @@ public class AbstractBatikServlet extends HttpServlet {
 		
 	}
 
-	public void _drawText(Graphics2D g2d, int x, int y, int width, int height, 
+	public void drawTextByJTextArea(Graphics2D g2d, int x, int y, int width, int height, 
 			String text, String default_export_font, int style, int size, Color fontColor) throws Exception {
 		
 //		g2d.setClip(x, y, width, height);
@@ -240,8 +243,8 @@ public class AbstractBatikServlet extends HttpServlet {
 		Font font = new Font(default_export_font, style, size);
 
 		String[] stringsText = text.split("\r");
-		log.debug("TEXT: "+stringsText);
-		log.debug("TEXT: "+stringsText.length);
+		//log.debug("TEXT: "+stringsText);
+		//log.debug("TEXT: "+stringsText.length);
 		
 		String newText = "";
 		
@@ -258,23 +261,64 @@ public class AbstractBatikServlet extends HttpServlet {
 		n.setLineWrap( true );
 		n.setForeground( fontColor );
 		
-		log.debug("Text at: "+x+" "+y);
+		//log.debug("Text at: "+x+" "+y);
 			//int x, int y, int width, int height
 		n.setBounds( x, y , width, height );
 		n.setOpaque( false );
 		
 		//Text
 		SVGGraphics2D svgGenerator2 = (SVGGraphics2D) g2d.create(x, y, width, height);
-		svgGenerator2.setColor(fontColor);
-		svgGenerator2.setPaint(fontColor);
 
 		//svgGenerator2.create(x, y, width, height);
 		//svgGenerator2.draw(.dra)
 		n.paint( svgGenerator2 );
 		
-		//n.paintComponents(svgGenerator2);
-		//n.setBounds( x, y , width, height );
-
-		
 	}
+	
+	
+	public String workAroundPixelErrorInSVG(String xmlDef) throws Exception {
+		String resultingString = "";
+        
+        boolean byPassedFirst = false;
+        
+        while (xmlDef.indexOf("font-size:") != -1) {
+        	
+        	log.debug("xmlDef "+xmlDef);
+        	int i = xmlDef.indexOf("font-size:");
+        	
+        	log.debug("Found i "+i);
+        	if (byPassedFirst) {
+        		log.debug("byPassedFirst DO PROCESS ");
+	        	String start = xmlDef.substring(0, i+10);
+	        	xmlDef = xmlDef.substring(i+10, xmlDef.length());
+	        	log.debug("byPassedFirst FIRST PART Process "+start);
+	        	log.debug("byPassedFirst END PART Process "+xmlDef);
+	        	
+	        	int firstSemicolon = xmlDef.indexOf(";");
+	        	log.debug("firstSemicolon "+firstSemicolon);
+	        	String fontSize = xmlDef.substring(0, firstSemicolon);
+	        	log.debug("fontSize "+fontSize);
+	        	
+	        	xmlDef = xmlDef.substring(firstSemicolon, xmlDef.length());
+	        	
+	        	resultingString += start + fontSize + "px";
+        	} else {
+        		log.debug("byPassedFirst DO NOT PROCESS ");
+        		String start = xmlDef.substring(0, i+10);
+        		log.debug("byPassedFirst FIRST PART "+start);
+        		xmlDef = xmlDef.substring(i+10, xmlDef.length());
+        		log.debug("byPassedFirst END PART "+xmlDef);
+        		resultingString += start;
+        		byPassedFirst = true;
+        	}
+        }
+        
+        resultingString += xmlDef;
+        
+        log.debug("###################### ");
+        log.debug("resultingString "+resultingString);
+        
+        return resultingString;
+	}
+	
 }
