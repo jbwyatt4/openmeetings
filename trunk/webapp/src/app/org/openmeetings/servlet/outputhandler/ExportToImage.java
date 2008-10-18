@@ -2,7 +2,11 @@ package org.openmeetings.servlet.outputhandler;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStream;
+import java.io.RandomAccessFile;
 import java.io.Writer;
 import java.util.Date;
 import java.util.HashMap;
@@ -20,6 +24,7 @@ import org.openmeetings.app.batik.beans.PrintBean;
 import org.openmeetings.app.batik.serlvets.AbstractBatikServlet;
 import org.openmeetings.app.data.basic.Sessionmanagement;
 import org.openmeetings.app.data.user.Usermanagement;
+import org.openmeetings.app.documents.GenerateImage;
 import org.openmeetings.app.remote.Application;
 import org.openmeetings.utils.math.CalendarPatterns;
 import org.slf4j.Logger;
@@ -270,6 +275,60 @@ public class ExportToImage extends AbstractBatikServlet {
 			        Writer out = httpServletResponse.getWriter();
 			        
 			        svgGenerator.stream(out, useCSS);
+			        
+			        
+		        } else if (exportType.equals("png") || exportType.equals("jpg") 
+		        		|| exportType.equals("gif") || exportType.equals("tif")
+		        		|| exportType.equals("pdf")){
+		        	
+		        	String current_dir = getServletContext().getRealPath("/");
+		        	String working_dir = current_dir + "uploadtemp" + File.separatorChar;
+		        	
+		        	String requestedFileSVG = fileName+"_"+CalendarPatterns.getTimeForStreamId(new Date())+".svg";
+		        	String resultFileName = fileName+"_"+CalendarPatterns.getTimeForStreamId(new Date())+"."+exportType;
+		        	
+		        	log.debug("current_dir: "+current_dir);
+		        	log.debug("working_dir: "+working_dir);
+		        	log.debug("requestedFileSVG: "+requestedFileSVG);
+		        	log.debug("resultFileName: "+resultFileName);
+		        	
+		        	File svgFile = new File(working_dir + requestedFileSVG);
+		        	File resultFile = new File(working_dir + resultFileName);
+		        	
+		        	log.debug("svgFile: "+svgFile.getAbsolutePath());
+		        	log.debug("resultFile: "+resultFile.getAbsolutePath());
+		        	log.debug("svgFile P: "+svgFile.getPath());
+		        	log.debug("resultFile P: "+resultFile.getPath());
+		        	
+		        	FileWriter out = new FileWriter(svgFile);
+		        	svgGenerator.stream(out, useCSS);
+		        	
+		        	HashMap<String,Object> returnError = GenerateImage.getInstance().convertSingleImageByTypeAndSize(
+		        			svgFile.getAbsolutePath(), resultFile.getAbsolutePath(), 
+		        			pBean.getWidth(), pBean.getHeight());
+		        	
+		        	//Get file and handle download
+					RandomAccessFile rf = new RandomAccessFile(resultFile.getAbsoluteFile(), "r");
+
+					httpServletResponse.reset();
+					httpServletResponse.resetBuffer();
+					OutputStream outStream = httpServletResponse.getOutputStream();
+					httpServletResponse.setContentType("APPLICATION/OCTET-STREAM");
+					httpServletResponse.setHeader("Content-Disposition","attachment; filename=\"" + resultFileName + "\"");
+					httpServletResponse.setHeader("Content-Length", ""+ rf.length());
+
+					byte[] buffer = new byte[1024];
+					int readed = -1;
+
+					while ((readed = rf.read(buffer, 0, buffer.length)) > -1) {
+						outStream.write(buffer, 0, readed);
+					}
+
+					rf.close();
+
+					out.flush();
+					out.close();
+		        	
 		        }
 				
 			}

@@ -288,13 +288,13 @@ public class UploadHandler extends HttpServlet {
 								//User Profile Update
 								this.deleteUserProfileFiles(current_dir, users_id);
 								//convert it to JPG
-					 			returnError = GenerateImage.getInstance().convertImageUserProfile(current_dir, newFileSystemName, newFileSystemExtName, users_id, newFileSystemName, false);
+					 			returnError = GenerateImage.getInstance().convertImageUserProfile(current_dir, newFileSystemName, 
+					 								newFileSystemExtName, users_id, newFileSystemName, false);
 							} else {
 								//convert it to JPG
 								log.debug("##### convert it to JPG: "+userProfilePic);
-					 			returnError = GenerateImage.getInstance().convertImage(current_dir, 
-														       newFileSystemName, newFileSystemExtName, 
-										roomName,newFileSystemName, false);
+					 			returnError = GenerateImage.getInstance().convertImage(current_dir, newFileSystemName, 
+					 								newFileSystemExtName, roomName,newFileSystemName, false);
 							}
 						} else if (isJpg) {
 							if (userProfilePic) {
