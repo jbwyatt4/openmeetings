@@ -40,6 +40,9 @@
     <handler name="onmouseout" reference="this.parent">
         this.holder.destroy();
     </handler>
+    <handler name="onmouseup" reference="this.parent">
+        this.holder.destroy();
+    </handler>
     <handler name="onclick" reference="this.parent">
         this.holder.destroy();
     </handler>    
