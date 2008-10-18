@@ -1687,8 +1687,20 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   </string>
   <string id="559" name="Synchronizing message">
     <value>Synchronizing Users, please wait</value>
-  </string>  
+  </string>
   <string id="560" name="exportToSVG">
-    <value>&lt;u&gt;Download as SGV&lt;/u&gt;</value>
-  </string>  
+    <value>&lt;u&gt;Download as SVG&lt;/u&gt;</value>
+  </string>
+  <string id="561" name="exportToImage">
+    <value>&lt;u&gt;Download as PNG&lt;/u&gt;</value>
+  </string>
+  <string id="562" name="exportToImage">
+    <value>&lt;u&gt;Download as JPG&lt;/u&gt;</value>
+  </string>
+  <string id="563" name="exportToImage">
+    <value>&lt;u&gt;Download as PDF&lt;/u&gt;</value>
+  </string>
+  <string id="564" name="exportToImage">
+    <value>&lt;u&gt;Download as TIF&lt;/u&gt;</value>
+  </string>
 </language>
