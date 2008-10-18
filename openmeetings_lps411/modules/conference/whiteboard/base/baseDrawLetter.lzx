@@ -230,17 +230,17 @@
 	
 	<method name="drawTextFieldregister" args="textforfield,width,x,y,fontsize,fgcolor,fontstyle,height">
 		var actionObject = new Array();
-	    actionObject.push('letter');
-	    actionObject.push(textforfield);
-	    actionObject.push(fgcolor);
-	    actionObject.push(fontsize);
-	    actionObject.push(fontstyle);
-		actionObject.push(this.counter);
-	    actionObject.push(x);
-	    actionObject.push(y);
-	    actionObject.push(width);
-	    actionObject.push(height);
-	    actionObject.push(this.currentlayer.name);	    	    
+	    actionObject[0] = "letter";
+	    actionObject[1] = textforfield;
+	    actionObject[2] = fgcolor;
+	    actionObject[3] = fontsize;
+	    actionObject[4] = fontstyle;
+		actionObject[5] = this.counter;
+	    actionObject[6] = x;
+	    actionObject[7] = y;
+	    actionObject[8] = width;
+	    actionObject[9] = height;
+	    actionObject[10] = this.currentlayer.name;	    	    
 	    this.baseactionobjectList.push(actionObject);	
 	    this.checkStepLayers();
 	    this.onsharedMessage('draw',actionObject);	

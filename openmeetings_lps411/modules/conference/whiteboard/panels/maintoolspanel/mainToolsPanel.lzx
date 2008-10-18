@@ -44,7 +44,7 @@
 </class>
 	
 <class name="mainToolsTopPanel" extends="baseTopPanel" 
-	   width="390" height="32" title="" docking="true"
+	   width="400" height="32" title="" docking="true"
 	   activationClassBounding="mainToolsLeftPanel"
 	   activationVClassBounding="mainToolsTopPanel"
 	   leftClassPanel="mainToolsLeftPanel"
@@ -52,13 +52,13 @@
 	   bottomClassPanel="mainToolsTopPanel"
 	   rightClassPanel="mainToolsLeftPanel"
 	   verticalClassActive="true"
-	   hWidth="32" hHeight="390">
+	   hWidth="32" hHeight="400">
 	
 	<horizontalMenuIconBar x="20" y="4" />
 </class>	
 	
 <class name="mainToolsLeftPanel" extends="baseLeftPanel" 
-	   width="32" height="390" title="" docking="true"
+	   width="32" height="400" title="" docking="true"
 	   activationClassBounding="mainToolsLeftPanel"
 	   activationVClassBounding="mainToolsTopPanel"
 	   topClassPanel="mainToolsTopPanel"
@@ -66,7 +66,7 @@
 	   leftClassPanel="mainToolsLeftPanel"
 	   rightClassPanel="mainToolsLeftPanel"
 	   verticalClassActive="false"
-	   vWidth="390" vHeight="32">
+	   vWidth="400" vHeight="32">
 	
 	<verticalMenuIconBar x="2" y="20" />
 </class>
