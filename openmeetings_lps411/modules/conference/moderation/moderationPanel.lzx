@@ -81,9 +81,14 @@
   	</simpleLabelButton>
   	
     <!-- --> 
-	<labelText labelid="417" y="4" />
+	<labelText labelid="417" y="4" width="100" visibility="$once{ canvas.showRecording }" />
 	
-    <simpleLabelButton name="sta_btn" width="30" height="24" y="2">
+    <simpleLabelButton name="sta_btn" width="30" height="24" y="2" visibility="$once{ canvas.showRecording }">
+        <handler name="oninit">
+            if (canvas.showRecording == "hidden") {
+                this.destroy();
+            }
+        </handler>
     	<handler name="onclick">
     		this.parent.checkForRecording.doCall();   		
     	</handler>

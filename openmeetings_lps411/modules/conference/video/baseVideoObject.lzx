@@ -92,10 +92,10 @@
 	<view name="syncuser" x="${ parent.width-20 }" y="${parent.height*0.85}"
 		onmouseover="" onmouseup="" resource="resyncuser_rsc">
 		<handler name="onclick">
-			parent.resetValues();
+            parent.resetValues();
 			if(!this.parent.isremote) {
-		           new lz.editRecordStream(canvas.main_content._content.inner,{isSyncUpdate:true});
-		        }
+	            new lz.editRecordStream(canvas.main_content._content.inner,{isSyncUpdate:true});
+	        }
 		</handler>
 		<labelTooltip labelid="540" />
 	</view>	

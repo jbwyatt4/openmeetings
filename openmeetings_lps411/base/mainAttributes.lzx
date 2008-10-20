@@ -60,6 +60,8 @@ these properties will be overwritten by config.xml -->
 
 <attribute name="showmodernWhiteBoard" value="y" type="string" />
 
+<attribute name="showRecording" value="visible" type="string" />
+
 <!-- END OF config.xml attributes
 ##########################################################
  -->
