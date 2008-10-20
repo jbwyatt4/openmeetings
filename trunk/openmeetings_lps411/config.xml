@@ -82,8 +82,14 @@ of the red5-servlet
     between 0 and 1
  -->
 <showWindowEffect>y</showWindowEffect> 
-	
-	
+
+<!--
+    Show the recorder buttons in the Conference Rooms
+    visible = yes
+    hidden = no
+ -->	
+<showRecording>visible</showRecording>
+
 <!--
     
 	To enable the modern whiteboard Panel you need to switch this to y
@@ -99,7 +105,6 @@ of the red5-servlet
 	this is the way how the Celendar inits a week
 -->
 <firstdayinweek>1</firstdayinweek>	
-    
     
     
 <!--

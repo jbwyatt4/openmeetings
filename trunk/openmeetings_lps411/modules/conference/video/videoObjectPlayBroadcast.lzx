@@ -55,7 +55,7 @@
 		</baseVideoStream>
 	</view>
 
-	<view name="mute" x="3" y="${ parent.height-30 }" 
+	<view name="mute" x="20" y="${ parent.height *0.85}" 
 		onmouseover="" onmouseup="" resource="mute_btn_rsc" >
 		<attribute name="isload" value="true" type="boolean" />
 		<handler name="onclick">
