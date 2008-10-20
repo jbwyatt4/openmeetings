@@ -26,23 +26,80 @@
                labelid="$once{parent.labelid }" />
 </class>
 
+<class name="openmeetingsTabButtonBackground" extends="roundRectGradient" width="85" height="40"
+    borderWidth="1" borderRadius="5" backgroundStartColor="0x7CFC00" backgroundStopColor="0x7CFC00" >
+    
+</class>
+
 <class name="conferenceContainerTab" extends="view"
     width="262" height="286">
 	
 	<attribute name="uploadTapIsInited" value="false" type="boolean" />
 	<attribute name="membersTapIsInited" value="false" type="boolean" />
-	
+    
     <openmeetingsTabButton name="b1" iconresourcename="ksirc_rsc2" labelid="244" x="1" y="0" 
     					   opacity="1">
-    	<handler name="onclick">
+         
+        <handler name="oninit">
+            this.fadeDelegate = new LzDelegate( this, "showText" );
+        </handler>
+        
+        <attribute name="fadeDelegate" value="null" />
+        <attribute name="doBlink" value="false" type="boolean" />
+        
+        <method name="startBlink">
+            if ($debug) Debug.write("startBlink",this.opacity);
+            if (this.opacity != 1) {
+                if (this.doBlink) {
+                    if ($debug) Debug.write("doBlink already started !!!");
+                } else {
+	                if ($debug) Debug.write("doBlink");
+	                this.doBlink = true;
+                    parent._newMessage.setAttribute("visibility","visible");
+	                lz.Timer.addTimer( this.fadeDelegate , 1000 );
+                }
+            }
+	    </method>
+	
+	    <method name="showText">
+            if (this.doBlink) {
+                if ($debug) Debug.write("showText",parent._newMessage.opacity);
+                lz.Timer.addTimer( this.fadeDelegate , 1000 );
+                if (parent._newMessage.opacity == 0.3) {
+                    parent._newMessage.animate( "opacity", 1.0, 750 );
+                } else {
+                    parent._newMessage.animate( "opacity", 0.3, 750 );
+                }
+            } else {
+                this._newMessage.setAttribute("visibility","hidden");
+            }
+	    </method>
+    	
+        <handler name="onclick">
     		parent._chattab.setAttribute('visible',true);
     		if (parent.uploadTapIsInited) parent._uploadtab.setAttribute('visible',false);
     		if (parent.membersTapIsInited) parent._participants.setAttribute('visible',false);
+            lz.Timer.removeTimer( this.fadeDelegate );
+            parent._newMessage.setAttribute("visibility","hidden");
     		this.setAttribute('opacity',1);
     		parent.b2.setAttribute('opacity',0.5);
     		parent.b3.setAttribute('opacity',0.5);
+            this.doBlink = false;
     	</handler>
     </openmeetingsTabButton>
+        
+    <openmeetingsTabButtonBackground name="_newMessage" x="1" y="0" >
+        <handler name="oninit">
+            this.fadeDelegate = new LzDelegate( this, "showText" );
+            lz.Timer.addTimer( this.fadeDelegate , 50 );
+        </handler>
+        <method name="showText">
+            this.setAttribute("visibility","hidden");
+        </method>
+        <view x="1" y="0" resource="ksirc_rsc2" />
+        <labelText x="18" y="-2" fgcolor="0x000000" labelid="244" width="60" />
+    </openmeetingsTabButtonBackground>
+    
     <openmeetingsTabButton name="b2" iconresourcename="library2" labelid="245" x="88" y="0" 
                            opacity="0.5">
     	<handler name="onclick">
@@ -60,6 +117,7 @@
     		parent.b3.setAttribute('opacity',0.5);    		
     	</handler>
     </openmeetingsTabButton>	
+    
     <openmeetingsTabButton name="b3" iconresourcename="kuser_rsc2" labelid="246" x="175" y="0" 
                            opacity="0.5">
     	<handler name="onclick">
