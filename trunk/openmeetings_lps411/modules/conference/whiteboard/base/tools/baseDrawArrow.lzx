@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library>
-
+    
 <class name="baseDrawArrow" extends="baseDrawULine" >
       
     <!-- ###########################
     drawarrow
+     -->
+     
+     <!--
+        @keywords deprecated
      -->
     <method name="startDrawarrowline" args="oid_name">
         <![CDATA[
@@ -13,7 +17,7 @@
         }
         
         this.currentlayer = new lz.drawViewNew(this,{
-            name:oid_name,width:this.width+2,height:this.height+2,
+            name:oid_name,width:this.width,height:this.height,
             opacity:this.currentdrawarrowOpacity});
             
         this.drawlineOnObject(this.currentlayer,-1,-1,0,0);
@@ -60,7 +64,54 @@
         currentlayer.lineWidth = this.currentdrawarrowlinelineWidth;
         currentlayer.fillstyle = '0x000000';
         ]]>
-    </method>  
+    </method> 
+    
+    <!--
+        @keywords deprecated
+     -->
+    <method name="__startDrawarrowline" args="oid_name">
+        <![CDATA[
+        if (oid_name == null) {
+            oid_name = 'drawarrow'+this.getCounter();
+        }
+        
+        this.currentlayer = new lz.drawViewNew(this,{
+            name:oid_name,width:this.width+2,height:this.height+2,
+            opacity:this.currentdrawarrowOpacity});
+            
+        var distance_x = Math.abs(this.startx - this.endx);
+        var distance_y = Math.abs(this.starty - this.endy);
+        
+        var point_distance_x = Math.round( distance_x/10 );
+        var point_distance_y = Math.round( distance_y/10 );
+        
+        if (this.startx <= this.endx && this.starty >= this.endy) {
+            
+            currentlayer.lineWidth = this.currentrectangleineWidth;
+            currentlayer.beginPath();
+            currentlayer.moveTo(this.startx,this.starty); //1
+            currentlayer.lineTo(this.startx-point_distance_x,this.starty-point_distance_y); //2
+            currentlayer.lineTo(this.endx-point_distance_x*3,this.endy+point_distance_y); //3
+            currentlayer.lineTo(this.endx-point_distance_x*4,this.endy); //4
+            currentlayer.lineTo(this.endx,this.endy); //5
+            currentlayer.lineTo(this.endx,this.endy+point_distance_y*4); //6
+            currentlayer.lineTo(this.endx-point_distance_x,this.endy+point_distance_y*3); //7
+            currentlayer.lineTo(this.startx+point_distance_x,this.starty+point_distance_y); //8
+            currentlayer.lineTo(this.startx,this.starty); //9
+            this.closePath();
+            
+            currentlayer.strokeStyle = 0x000000;
+            currentlayer.stroke();
+
+            currentlayer.fillStyle = this.currentdrawarrowlinelineWidth;
+            currentlayer.fill();
+            
+        }
+        
+        ]]>
+    </method>
+    
+    
     
     <method name="endDrawarrowline">
         //Debug.write("endDrawarrowline",this.startx,this.starty,this.endx,this.endy);

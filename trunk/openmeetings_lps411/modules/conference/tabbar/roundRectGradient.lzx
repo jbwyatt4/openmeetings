@@ -24,6 +24,8 @@
         <attribute name="insetbottom" value="${null}" type="size"
             setter="setInsetBottom(insetbottom);" />
         <attribute name="oninsetbottom" value="null" />
+        
+        <event name="oncomplete" />
 
         <method name="setInset" args="v">
             <![CDATA[
@@ -234,12 +236,14 @@
                 g.addColorStop(1, c1);
                 this.fillStyle = g;
                 this.fill();
+                if ($debug) Debug.write("DO FILL: ",this);
             }
     
             this.strokeStyle = this.borderColor;
             this.lineWidth = this.borderWidth;
             this.globalAlpha = this.borderOpacity;
             this.stroke();
+            parent.oncomplete();
             ]]>
         </method>
         
