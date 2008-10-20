@@ -48,12 +48,12 @@
         <attribute name="doBlink" value="false" type="boolean" />
         
         <method name="startBlink">
-            if ($debug) Debug.write("startBlink",this.opacity);
+            //if ($debug) Debug.write("startBlink",this.opacity);
             if (this.opacity != 1) {
                 if (this.doBlink) {
-                    if ($debug) Debug.write("doBlink already started !!!");
+                    //if ($debug) Debug.write("doBlink already started !!!");
                 } else {
-	                if ($debug) Debug.write("doBlink");
+	                //if ($debug) Debug.write("doBlink");
 	                this.doBlink = true;
                     parent._newMessage.setAttribute("visibility","visible");
 	                lz.Timer.addTimer( this.fadeDelegate , 1000 );
@@ -63,7 +63,7 @@
 	
 	    <method name="showText">
             if (this.doBlink) {
-                if ($debug) Debug.write("showText",parent._newMessage.opacity);
+                //if ($debug) Debug.write("showText",parent._newMessage.opacity);
                 lz.Timer.addTimer( this.fadeDelegate , 1000 );
                 if (parent._newMessage.opacity == 0.3) {
                     parent._newMessage.animate( "opacity", 1.0, 750 );
