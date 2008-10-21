@@ -74,12 +74,20 @@ public class GeomPoint extends Point {
 
 		double m;
 		if (this.getX() == 0) {
-			m = this.getY();
+			//log.debug("Case 1");
+			if (this.getY() < 0) {
+				this.setLocation(0, newLength * -1);
+			} else {
+				this.setLocation(0, newLength);
+			}
+			return;
+			//m = this.getY();
 		} else {
 			m = this.getY() / this.getX();
+			//log.debug("Case 2");
 		}
 		
-		log.debug("m :"+m +" newLength "+newLength);
+		//log.debug("m :"+m +" newLength "+newLength);
 		
 		//Circle (x-x0)^2 + (y-y0)^2 = r^2
 		//		anyY = m * anyX;
@@ -95,7 +103,7 @@ public class GeomPoint extends Point {
 		double anyX = Math.sqrt( ( newLength * newLength ) / ( m*m + 1 ) );
 		double anyY = m * anyX;
 		
-		log.debug("anyX :"+anyX + " anyY: " + anyY);
+		//log.debug("anyX :"+anyX + " anyY: " + anyY);
 		
 		//translate to Flash point of origin
 		if (this.getX() < 0) {
@@ -123,29 +131,32 @@ public class GeomPoint extends Point {
 	public static GeomPoint getLineIntersection ( GeomPoint a1,GeomPoint a2,
 			GeomPoint b1,GeomPoint b2) {
 		
+		//log.debug("b1: "+b1);
+		//log.debug("b2: "+b2);
+		
 		double x,y,m1,m2;
 	
 		if ((a2.getX()-a1.getX()) == 0) {
 			
-			log.debug("k1 ^ 0");
+			//log.debug("k1 ^ 0");
 			
 			double k2 = (b2.getY()-b1.getY()) / (b2.getX()-b1.getX());
-			log.debug("k2: "+k2);
+			//log.debug("k2: "+k2);
 			double diff = (b2.getY()-b1.getY());
-			log.debug("diff: "+diff);
-			log.debug("b1.getY(): "+b1.getY());
-			log.debug("b2.getY(): "+b2.getY());
+			//log.debug("diff: "+diff);
+			//log.debug("b1.getY(): "+b1.getY());
+			//log.debug("b2.getY(): "+b2.getY());
 			// an infinite directional constant means the line is vertical
 			// so the intersection must be at the x coordinate of the line
 			x = a1.getX();
             m2 = b1.getY() - k2 * b1.getX();
-            log.debug("m2: "+m2);
+            //log.debug("m2: "+m2);
             y = k2 * x + m2;
-            log.debug("y: "+y);
+            //log.debug("y: "+y);
 			
 		} else if((b2.getX()-b1.getX()) == 0) {
 			
-			log.debug("k2 ^^ 0");
+			//log.debug("k2 ^^ 0");
 			
 			double k1 = (a2.getY()-a1.getY()) / (a2.getX()-a1.getX());
 			// same as above for line 2
@@ -163,7 +174,7 @@ public class GeomPoint extends Point {
 			// meaning there is no intersection point.
 			if( k1 == k2 ) return null;
 		
-//			log.debug("neither");
+			//log.debug("neither");
 //			log.debug("k1: "+k1);
 //			log.debug("k2: "+k2);
 			
