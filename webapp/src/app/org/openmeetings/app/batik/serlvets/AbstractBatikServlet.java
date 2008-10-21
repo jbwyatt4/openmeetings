@@ -8,7 +8,9 @@ import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.font.FontRenderContext;
 import java.awt.geom.Ellipse2D;
+import java.awt.geom.GeneralPath;
 import java.awt.geom.Line2D;
+import java.awt.geom.QuadCurve2D;
 import java.awt.geom.Rectangle2D;
 import java.util.Map;
 import java.util.Iterator;
@@ -19,6 +21,8 @@ import javax.swing.JTextArea;
 import org.apache.batik.dom.svg.SVGDOMImplementation;
 import org.apache.batik.svggen.SVGGraphics2D;
 import org.openmeetings.app.data.basic.Configurationmanagement;
+import org.openmeetings.utils.geom.ArrowStyle;
+import org.openmeetings.utils.geom.GeomPoint;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
@@ -274,6 +278,126 @@ public class AbstractBatikServlet extends HttpServlet {
 		n.paint( svgGenerator2 );
 		
 	}
+	
+
+	public void drawArrow(SVGGraphics2D g2d,
+			GeomPoint start, GeomPoint end, float thickness) {
+		
+		if (start.equals(end)) return;
+		
+		
+//		(double edgeControlPosition, double edgeControlSize,
+//				double headLength, double headWidth, double shaftControlPosition,
+//				double shaftControlSize, float shaftPosition, double shaftThickness)
+		ArrowStyle arrowStyle = new ArrowStyle(0.5, 0.5, thickness*5, 
+				thickness*5, 0.5, 0.5, 0, thickness);
+		
+		GeomPoint fullVect = end.subtract(start);
+		double halfWidth = (arrowStyle.headWidth != -1) ? arrowStyle.headWidth/2 : arrowStyle.headLength/2; 
+		
+		//Figure out the line start/end points
+		GeomPoint startNorm = new GeomPoint();
+		startNorm.setLocation(fullVect.getY(),-fullVect.getX());
+		startNorm.normalize(arrowStyle.shaftThickness/2);
+		GeomPoint start1 = start.add(startNorm);
+		GeomPoint start2 = start.subtract(startNorm);
+		GeomPoint end1 = end.add(startNorm);
+		GeomPoint end2 = end.subtract(startNorm);
+//		
+//		log.debug("startNorm: "+startNorm.toString());
+//        log.debug("start1: "+start1.toString());
+//        log.debug("start2: "+start2.toString());
+//        log.debug("end1: "+end1.toString());
+//        log.debug("end2: "+end2.toString());
+		
+		//figure out where the arrow head starts
+		GeomPoint headPnt = fullVect.clone();
+		log.debug("headPnt 1: "+headPnt.toString());
+		log.debug("headPnt.length 1: "+headPnt.length());
+		log.debug("arrowStyle.headLength 1: "+arrowStyle.headLength);
+		headPnt.normalize(headPnt.length()-arrowStyle.headLength);
+		log.debug("headPnt 2: "+headPnt.toString());
+		headPnt = headPnt.add(start);
+		log.debug("headPnt 3: "+headPnt.toString());
+		
+		//calculate the arrowhead corners
+		GeomPoint headPntNorm = startNorm.clone();
+//		log.debug("headPntNorm ^^: "+headPntNorm.toString());
+		log.debug("halfWidth ^^: "+halfWidth);
+		headPntNorm.normalize(halfWidth);
+//		log.debug("headPntNorm: "+headPntNorm.toString());
+		GeomPoint edge1 = headPnt.add(headPntNorm);
+		GeomPoint edge2 = headPnt.subtract(headPntNorm);
+		
+//		log.debug("edge1: "+edge1.toString());
+//        log.debug("edge2: "+edge2.toString());
+		
+		//Figure out where the arrow connects the the shaft, then calc the intersections
+		GeomPoint shaftCenter = GeomPoint.interpolate(end,headPnt,arrowStyle.shaftPosition);
+		log.debug("end"+end.toString());
+		log.debug("headPnt: "+headPnt.toString());
+		log.debug("arrowStyle.shaftPosition: "+arrowStyle.shaftPosition);
+		log.debug("shaftCenter: "+shaftCenter);
+		shaftCenter.setLocation(185.857864376269, 185.857864376269);
+		GeomPoint inter1 = GeomPoint.getLineIntersection(start1,end1,shaftCenter,edge1);
+		GeomPoint inter2 = GeomPoint.getLineIntersection(start2,end2,shaftCenter,edge2);
+		
+		log.debug("inter1: "+inter1.toString());
+        log.debug("inter2: "+inter2.toString());
+		
+		//Figure out the control points
+		GeomPoint edgeCenter = GeomPoint.interpolate(end,headPnt,(float) arrowStyle.edgeControlPosition);
+		GeomPoint edgeNorm = startNorm.clone();
+		edgeNorm.normalize(halfWidth*arrowStyle.edgeControlSize);
+		GeomPoint edgeCntrl1 = edgeCenter.add(edgeNorm);
+		GeomPoint edgeCntrl2 = edgeCenter.subtract(edgeNorm);
+		
+//		log.debug("edgeCntrl1: "+edgeCntrl1.toString());
+//        log.debug("edgeCntrl2: "+edgeCntrl2.toString());
+
+		g2d.setPaint(new Color(255,0,0));
+		
+//		graphics.moveTo(start1.x,start1.y);
+//		graphics.lineTo(inter1.x,inter1.y);
+//		graphics.lineTo(edge1.x,edge1.y);
+//		graphics.curveTo(edgeCntrl1.x,edgeCntrl1.y,end.x,end.y);
+//		graphics.curveTo(edgeCntrl2.x,edgeCntrl2.y,edge2.x,edge2.y);
+//		graphics.lineTo(inter2.x,inter2.y);
+//		graphics.lineTo(start2.x,start2.y);
+//		graphics.lineTo(start1.x,start1.y);
+		
+//		log.debug("moveTo"+start1.x+","+start1.y);
+//		log.debug("lineTo"+inter1.x+","+inter1.y);
+//		log.debug("lineTo"+edge1.x+","+edge1.y);
+//		log.debug("quadTo"+edgeCntrl1.x+","+edgeCntrl1.y+","+end.x+","+end.y);
+//		log.debug("quadTo"+edgeCntrl2.x+","+edgeCntrl2.y+","+edge2.x+","+edge2.y);
+//		log.debug("lineTo"+inter2.x+","+inter2.y);
+//		log.debug("lineTo"+start2.x+","+start2.y);
+//		log.debug("lineTo"+start1.x+","+start1.y);
+		
+		GeneralPath graphics = new GeneralPath();
+		graphics.moveTo(start1.x,start1.y);
+		graphics.lineTo(inter1.x,inter1.y);
+		graphics.lineTo(edge1.x,edge1.y);
+		graphics.quadTo(edgeCntrl1.x,edgeCntrl1.y,end.x,end.y);
+		graphics.quadTo(edgeCntrl2.x,edgeCntrl2.y,edge2.x,edge2.y);
+		graphics.lineTo(inter2.x,inter2.y);
+		graphics.lineTo(start2.x,start2.y);
+		graphics.lineTo(start1.x,start1.y);
+		graphics.closePath();
+		
+        g2d.setPaint(new Color(0,0,0));
+        g2d.draw(graphics);
+    
+    	g2d.setPaint(new Color(0,0,0));
+        g2d.fill(graphics);
+        
+	}
+	
+
+	
+	
+	
 	
 	
 	public String workAroundPixelErrorInSVG(String xmlDef) throws Exception {
