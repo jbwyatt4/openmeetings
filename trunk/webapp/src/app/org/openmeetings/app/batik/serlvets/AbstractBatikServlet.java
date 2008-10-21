@@ -303,57 +303,60 @@ public class AbstractBatikServlet extends HttpServlet {
 		GeomPoint start2 = start.subtract(startNorm);
 		GeomPoint end1 = end.add(startNorm);
 		GeomPoint end2 = end.subtract(startNorm);
-//		
-//		log.debug("startNorm: "+startNorm.toString());
-//        log.debug("start1: "+start1.toString());
-//        log.debug("start2: "+start2.toString());
-//        log.debug("end1: "+end1.toString());
-//        log.debug("end2: "+end2.toString());
+				
+		//log.debug("startNorm: "+startNorm.toString());
+        //log.debug("start1: "+start1.toString());
+        //log.debug("start2: "+start2.toString());
+        //log.debug("end1: "+end1.toString());
+        //log.debug("end2: "+end2.toString());
 		
 		//figure out where the arrow head starts
 		GeomPoint headPnt = fullVect.clone();
-		log.debug("headPnt 1: "+headPnt.toString());
-		log.debug("headPnt.length 1: "+headPnt.length());
-		log.debug("arrowStyle.headLength 1: "+arrowStyle.headLength);
+		//log.debug("headPnt 1: "+headPnt.toString());
+		//log.debug("headPnt.length 1: "+headPnt.length());
+		//log.debug("arrowStyle.headLength 1: "+arrowStyle.headLength);
 		headPnt.normalize(headPnt.length()-arrowStyle.headLength);
-		log.debug("headPnt 2: "+headPnt.toString());
+		//log.debug("headPnt 2: "+headPnt.toString());
 		headPnt = headPnt.add(start);
-		log.debug("headPnt 3: "+headPnt.toString());
+		//log.debug("headPnt 3: "+headPnt.toString());
 		
 		//calculate the arrowhead corners
 		GeomPoint headPntNorm = startNorm.clone();
-//		log.debug("headPntNorm ^^: "+headPntNorm.toString());
-		log.debug("halfWidth ^^: "+halfWidth);
+		//log.debug("headPntNorm ^^: "+headPntNorm.toString());
+		//log.debug("halfWidth ^^: "+halfWidth);
 		headPntNorm.normalize(halfWidth);
-//		log.debug("headPntNorm: "+headPntNorm.toString());
+		//log.debug("headPntNorm: "+headPntNorm.toString());
 		GeomPoint edge1 = headPnt.add(headPntNorm);
 		GeomPoint edge2 = headPnt.subtract(headPntNorm);
 		
-//		log.debug("edge1: "+edge1.toString());
-//        log.debug("edge2: "+edge2.toString());
+		//log.debug("edge1: "+edge1.toString());
+        //log.debug("edge2: "+edge2.toString());
 		
 		//Figure out where the arrow connects the the shaft, then calc the intersections
 		GeomPoint shaftCenter = GeomPoint.interpolate(end,headPnt,arrowStyle.shaftPosition);
-		log.debug("end"+end.toString());
-		log.debug("headPnt: "+headPnt.toString());
-		log.debug("arrowStyle.shaftPosition: "+arrowStyle.shaftPosition);
-		log.debug("shaftCenter: "+shaftCenter);
-		shaftCenter.setLocation(185.857864376269, 185.857864376269);
+		//log.debug("end"+end.toString());
+		//log.debug("headPnt: "+headPnt.toString());
+		//log.debug("arrowStyle.shaftPosition: "+arrowStyle.shaftPosition);
+		//log.debug("shaftCenter: "+shaftCenter);
+		//log.debug("edge1: "+edge1);
+		//shaftCenter.setLocation(185.857864376269, 185.857864376269);
 		GeomPoint inter1 = GeomPoint.getLineIntersection(start1,end1,shaftCenter,edge1);
 		GeomPoint inter2 = GeomPoint.getLineIntersection(start2,end2,shaftCenter,edge2);
 		
-		log.debug("inter1: "+inter1.toString());
-        log.debug("inter2: "+inter2.toString());
+		//log.debug("inter1: "+inter1.toString());
+        //log.debug("inter2: "+inter2.toString());
 		
 		//Figure out the control points
 		GeomPoint edgeCenter = GeomPoint.interpolate(end,headPnt,(float) arrowStyle.edgeControlPosition);
 		GeomPoint edgeNorm = startNorm.clone();
 		edgeNorm.normalize(halfWidth*arrowStyle.edgeControlSize);
+		//log.debug("halfWidth*arrowStyle.edgeControlSize: "+(halfWidth*arrowStyle.edgeControlSize));
+		//log.debug("edgeNorm: "+edgeNorm.toString());
 		GeomPoint edgeCntrl1 = edgeCenter.add(edgeNorm);
 		GeomPoint edgeCntrl2 = edgeCenter.subtract(edgeNorm);
 		
-//		log.debug("edgeCntrl1: "+edgeCntrl1.toString());
-//        log.debug("edgeCntrl2: "+edgeCntrl2.toString());
+		//log.debug("edgeCntrl1: "+edgeCntrl1.toString());
+        //log.debug("edgeCntrl2: "+edgeCntrl2.toString());
 
 		g2d.setPaint(new Color(255,0,0));
 		

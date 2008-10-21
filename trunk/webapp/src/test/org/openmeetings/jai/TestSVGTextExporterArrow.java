@@ -76,7 +76,7 @@ public class TestSVGTextExporterArrow extends TestCase {
 	        
 	        //NOTE: Font.ITALIC+Font.BOLD = Font AND Bold !
 	        GeomPoint start = new GeomPoint();
-	        start.setLocation(100,200);
+	        start.setLocation(200,200);
 	        GeomPoint end = new GeomPoint();
 	        end.setLocation(100,100);
 	        exportToImageTest.drawArrow(svgGenerator10, start, end, 4);
