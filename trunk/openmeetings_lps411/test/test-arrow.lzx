@@ -16,7 +16,7 @@
             //var pEnd = {'x':200,'y':200};
             
             var p = new flash.geom.Point(100,100);
-            var pEnd = new flash.geom.Point(200,200);
+            var pEnd = new flash.geom.Point(100,200);
             if ($debug) Debug.write("p",p);
             
             var normalizedPoint = new flash.geom.Point(-2, 4);
@@ -41,7 +41,7 @@
             if ($debug) Debug.write("##################");
             
             var pArrowStart = new flash.geom.Point(100,100);
-	        var pArrowEnd = new flash.geom.Point(100,200);
+	        var pArrowEnd = new flash.geom.Point(200,100);
 	        
 	        var obj = new lz.drawViewNew(canvas);
 	        
@@ -118,19 +118,19 @@
             
             //if ($debug) Debug.write("startNorm: ",startNorm.toString());
             //if ($debug) Debug.write("start1: ",start1.toString());
-           // if ($debug) Debug.write("start2: ",start2.toString());
-           // if ($debug) Debug.write("end1: ",end1.toString());
+            //if ($debug) Debug.write("start2: ",start2.toString());
+            //if ($debug) Debug.write("end1: ",end1.toString());
             //if ($debug) Debug.write("end2: ",end2.toString());
             
             //figure out where the arrow head starts
             var headPnt = fullVect.clone();
-            if ($debug) Debug.write("headPnt 1: ",headPnt.toString());
-            if ($debug) Debug.write("headPnt.length 1: ",headPnt.length);
-            if ($debug) Debug.write("arrowStyle.headLength 1: ",arrowStyle.headLength);
+            //if ($debug) Debug.write("headPnt 1: ",headPnt.toString());
+            //if ($debug) Debug.write("headPnt.length 1: ",headPnt.length);
+            //if ($debug) Debug.write("arrowStyle.headLength 1: ",arrowStyle.headLength);
             headPnt.normalize(headPnt.length-arrowStyle.headLength);
-            if ($debug) Debug.write("headPnt 2: ",headPnt.toString());
+            //if ($debug) Debug.write("headPnt 2: ",headPnt.toString());
             headPnt = headPnt.add(start);
-            if ($debug) Debug.write("headPnt 3: ",headPnt.toString());
+            //if ($debug) Debug.write("headPnt 3: ",headPnt.toString());
             
             //calculate the arrowhead corners
             var headPntNorm = startNorm.clone();
@@ -146,20 +146,22 @@
             
             //Figure out where the arrow connects the the shaft, then calc the intersections
             var shaftCenter = flash.geom.Point.interpolate(end,headPnt,arrowStyle.shaftPosition);
-            if ($debug) Debug.write("end: ",end.toString());
-            if ($debug) Debug.write("headPnt",headPnt.toString());
-            if ($debug) Debug.write("arrowStyle.shaftPosition: ",arrowStyle.shaftPosition);
-            if ($debug) Debug.write("shaftCenter",shaftCenter.toString());
+            //if ($debug) Debug.write("end: ",end.toString());
+            //if ($debug) Debug.write("headPnt",headPnt.toString());
+            //if ($debug) Debug.write("arrowStyle.shaftPosition: ",arrowStyle.shaftPosition);
+            //if ($debug) Debug.write("shaftCenter",shaftCenter.toString());
             var inter1 = this.getLineIntersection(start1,end1,shaftCenter,edge1);
             var inter2 = this.getLineIntersection(start2,end2,shaftCenter,edge2);
             
-            if ($debug) Debug.write("inter1: ",inter1.toString());
-            if ($debug) Debug.write("inter2: ",inter2.toString());
+            //if ($debug) Debug.write("inter1: ",inter1.toString());
+            //if ($debug) Debug.write("inter2: ",inter2.toString());
             
             //Figure out the control points
             var edgeCenter = flash.geom.Point.interpolate(end,headPnt,arrowStyle.edgeControlPosition);
             var edgeNorm = startNorm.clone();
             edgeNorm.normalize(halfWidth*arrowStyle.edgeControlSize);
+            //if ($debug) Debug.write("halfWidth*arrowStyle.edgeControlSize: "+(halfWidth*arrowStyle.edgeControlSize));
+            //if ($debug) Debug.write("edgeNorm: "+edgeNorm.toString());
             var edgeCntrl1 = edgeCenter.add(edgeNorm);
             var edgeCntrl2 = edgeCenter.subtract(edgeNorm);
 
@@ -208,27 +210,27 @@
             var m1 = 0;
             var m2 = 0;
             
-            if ($debug) Debug.write("k1",k1);
-            if ($debug) Debug.write("k2",k2);
+            //if ($debug) Debug.write("k1",k1);
+            //if ($debug) Debug.write("k2",k2);
             
             // an infinite directional constant means the line is vertical
             if( !isFinite(k1) ) {
                 
-                if ($debug) Debug.write("k1 ^^ 0");
-                if ($debug) Debug.write("k2",k2,(b2.y-b1.y));
-                if ($debug) Debug.write("b1.getY(): "+b1.y);
-                if ($debug) Debug.write("b2.getY(): "+b2.y);
+                //if ($debug) Debug.write("k1 ^^ 0");
+                //if ($debug) Debug.write("k2",k2,(b2.y-b1.y));
+                //if ($debug) Debug.write("b1.getY(): "+b1.y);
+                //if ($debug) Debug.write("b2.getY(): "+b2.y);
                 // so the intersection must be at the x coordinate of the line
                 x = a1.x;
                 m2 = b1.y - k2 * b1.x;
-                if ($debug) Debug.write("m2",m2);
+                //if ($debug) Debug.write("m2",m2);
                 y = k2 * x + m2;
-                if ($debug) Debug.write("y",y);
+                //if ($debug) Debug.write("y",y);
                 
             // same as above for line 2
             } else if ( !isFinite(k2) ) {
                 
-                if ($debug) Debug.write("k2 ^ 0");
+                //if ($debug) Debug.write("k2 ^ 0");
                 
                 m1 = a1.y - k1 * a1.x;
                 x = b1.x;
@@ -237,7 +239,7 @@
             // if neither of the lines are vertical
             } else {
                 
-                if ($debug) Debug.write("neither");
+                //if ($debug) Debug.write("neither");
             
                 m1 = a1.y - k1 * a1.x;
                 m2 = b1.y - k2 * b1.x;              
