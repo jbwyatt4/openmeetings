@@ -2,6 +2,17 @@
 <library>
 
 <class name="baseDrawEllipse" extends="baseDrawRect" >
+    
+    <!-- 
+        for drawing ellipse the variable 
+        with *Dis* indicates if the line/fil-color is active (+1/-1)
+     -->
+    <attribute name="currentellipsestroke" value="0xFF6600" />
+    <attribute name="currentellipsestrokeDis" value="1" type="number" />
+    <attribute name="currentellipsestrokeFill" value="0xFFFF33" />
+    <attribute name="currentellipsestrokeFillDis" value="1" type="number" />
+    <attribute name="currentellipselineWidth" value="4" />
+    <attribute name="currentellipseOpacity" value="1" type="number" />
       
     <!-- ################
     Ellipse

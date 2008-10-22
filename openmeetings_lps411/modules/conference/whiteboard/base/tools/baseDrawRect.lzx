@@ -2,6 +2,17 @@
 <library>
 
 <class name="baseDrawRect" extends="baseDrawArrow" >
+    
+    <!--  
+        for drawing rectangles the variable 
+        with *Dis* indicates if the line/fil-color is active (+1/-1)
+     -->
+    <attribute name="currentrectanglestroke" value="0xFF6600" />
+    <attribute name="currentrectanglestrokeDis" value="1" type="number" />
+    <attribute name="currentrectanglestrokeFill" value="0xFFFF33" />
+    <attribute name="currentrectanglestrokeFillDis" value="1" type="number" />
+    <attribute name="currentrectangleineWidth" value="4" type="number" />
+    <attribute name="currentrectangleOpacity" value="1" type="number" /> 
       
     <!-- ###########################
         Rectangle
