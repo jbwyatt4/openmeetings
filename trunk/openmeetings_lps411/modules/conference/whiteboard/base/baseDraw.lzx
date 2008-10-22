@@ -16,50 +16,6 @@
   	<!--- If true it will try to load the ObjectIdentifier Extension from the Server -->
   	<attribute name="isRemoteOID" value="false" type="boolean" />
   	
-  	<!-- paint -->
-  	<attribute name="currentlayerstroke" value="0xFF6600" />
-  	<attribute name="currentlayerlineWidth" value="2" type="number" />
-  	<attribute name="currentlayerOpacity" value="1" type="number" />
-  	
-  	<!-- for drawing line -->
-  	<attribute name="currentlinestroke" value="0xFF6600" />
-  	<attribute name="currentlinelineWidth" value="2" type="number" />  	
-  	<attribute name="currentlineOpacity" value="1" type="number" />
-  	
-  	<!-- for drawing uline -->
-  	<attribute name="currentulinestroke" value="0xFF6600" />
-  	<attribute name="currentulinelineWidth" value="20" type="number" />  
-  	<attribute name="currentulineOpacity" value="0.5" type="number" />
-  	
-  	<!-- for drawing drawarrow -->
-  	<attribute name="currentdrawarrowlinestroke" value="0xFF6600" />
-  	<attribute name="currentdrawarrowlinelineWidth" value="1" type="number" />   
-  	<attribute name="currentdrawarrowOpacity" value="1" type="number" /> 	
-  	
-  	<!--  
-  		for drawing rectangles the variable 
-  		with *Dis* indicates if the line/fil-color is active (+1/-1)
-  	 -->
-  	<attribute name="currentrectanglestroke" value="0xFF6600" />
-  	<attribute name="currentrectanglestrokeDis" value="1" type="number" />
-  	<attribute name="currentrectanglestrokeFill" value="0xFFFF33" />
-  	<attribute name="currentrectanglestrokeFillDis" value="1" type="number" />
-  	<attribute name="currentrectangleineWidth" value="4" type="number" />
-  	<attribute name="currentrectangleOpacity" value="1" type="number" /> 	
-  	
-  	<!-- 
-	  	for drawing ellipse the variable 
-	  	with *Dis* indicates if the line/fil-color is active (+1/-1)
-  	 -->
-  	<attribute name="currentellipsestroke" value="0xFF6600" />
-  	<attribute name="currentellipsestrokeDis" value="1" type="number" />
-  	<attribute name="currentellipsestrokeFill" value="0xFFFF33" />
-  	<attribute name="currentellipsestrokeFillDis" value="1" type="number" />
-  	<attribute name="currentellipselineWidth" value="4" />
-  	<attribute name="currentellipseOpacity" value="1" type="number" />
-  	
-  	<attribute name="painttrans" value="false" type="boolean" />
-  	
   	<attribute name="startx" value="0" type="number" />
   	<attribute name="starty" value="0" type="number" />
   	<attribute name="endx" value="0" type="number" />
@@ -193,6 +149,7 @@
 	
 	<method name="setModus" args="modi">
 		//check if previous modi has been txt, which might not be saved to the board yet
+        var previousModus = this.drawmodus;
 		if ($debug) Debug.write("setModus: ",modi);
 		if (this.drawmodus=='letter'){
 			if (this.letterObjectIsActive){
@@ -203,6 +160,8 @@
 		this.setAttribute('drawmodus',modi);
 		if (modi=='plain'){
 			this.clearAll();
+            if ($debug) Debug.write("clearAll and RESET Modus to",previousModus);
+            this.setAttribute('drawmodus',previousModus);
 		} else if (modi=='hand' || modi=='letter' 
 			|| modi=='paint' || modi=='line' || modi=='uline' 
 			|| modi=='rectangle' || modi=='ellipse' || modi=='drawarrow'){

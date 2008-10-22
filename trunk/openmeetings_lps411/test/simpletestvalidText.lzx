@@ -239,13 +239,13 @@ String.prototype.startsWith = function(prefix) {
             </handler>	            	
         </floatinglist>        
         
-         <handler name="onclick" reference="LzGlobalMouse" args="who">
+         <handler name="onclick" reference="lz.GlobalMouse" args="who">
            <![CDATA[ 
-               //need to use LzGlobalMouse, since we don't get clicks if we're
-               //checked. NB that LzGlobalMouse sends its events before the view
+               //need to use lz.GlobalMouse, since we don't get clicks if we're
+               //checked. NB that lz.GlobalMouse sends its events before the view
                //receives the events, so we can just unlock it here, and the
                //checkbox can do its normal onclick handling.
-               //Debug.write("onclick LzGlobalMouse",LzGlobalMouse,who);
+               //Debug.write("onclick lz.GlobalMouse",lz.GlobalMouse,who);
                //if (who != this.cblist && who.childOf(this.cblist)){
                //    this.setOpen(false,false);
                //} 

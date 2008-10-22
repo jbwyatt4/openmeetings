@@ -29,7 +29,7 @@
 
         this.dragger.apply();
     </handler>   
-    <handler name="onmouseup" reference="LzGlobalMouse" args="who">
+    <handler name="onmouseup" reference="lz.GlobalMouse" args="who">
     	<![CDATA[
 	        lz.ModeManager.globalUnlockMouseEvents();
 	        var x = canvas._drawarea.getMouse('x');
