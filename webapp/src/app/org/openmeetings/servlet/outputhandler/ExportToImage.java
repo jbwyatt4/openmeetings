@@ -2,6 +2,7 @@ package org.openmeetings.servlet.outputhandler;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Image;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -13,6 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Iterator;
 
+import javax.imageio.ImageIO;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -26,6 +28,7 @@ import org.openmeetings.app.data.basic.Sessionmanagement;
 import org.openmeetings.app.data.user.Usermanagement;
 import org.openmeetings.app.documents.GenerateImage;
 import org.openmeetings.app.remote.Application;
+import org.openmeetings.utils.geom.GeomPoint;
 import org.openmeetings.utils.math.CalendarPatterns;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -230,34 +233,124 @@ public class ExportToImage extends AbstractBatikServlet {
 		        		SVGGraphics2D svgGenerator_temp = new SVGGraphics2D(svgGenerator);
 		        		this.paintTextByWidthHeight(svgGenerator_temp, (int) Math.round(x), (int) Math.round(y), (int) Math.round(width), 
 		        					(int) Math.round(height), text, style, fontSize, fontColor);
+		        		
+		        	} else if (graphType.equals("drawarrow")) {
+		        		
+		        		Integer thickness = Integer.valueOf(graphObject.get(2).toString()).intValue();
+		        		
+		        		Integer stroke = Integer.valueOf(graphObject.get(1).toString()).intValue();
+		        		Integer strokeDis= Integer.valueOf(graphObject.get(4).toString()).intValue();
+		        		
+		        		Color strokeColor = null;
+		        		if (strokeDis != -1) {
+		        			strokeColor = new Color(stroke);
+		        		}
+		        		
+		        		Integer fill = Integer.valueOf(graphObject.get(3).toString()).intValue();
+		        		Integer fillDis= Integer.valueOf(graphObject.get(5).toString()).intValue();
+		        		
+		        		Color fillColor = null;
+		        		if (fillDis != -1) {
+		        			fillColor = new Color(fill);
+		        		}
+		        		
+		        		Float alpha = Float.valueOf(graphObject.get(6).toString()).floatValue();
+		        		
+		        		Double x = Double.valueOf(graphObject.get(graphObject.size()-5).toString()).doubleValue();
+		        		Double y = Double.valueOf(graphObject.get(graphObject.size()-4).toString()).doubleValue();
+		        		//Double width = Double.valueOf(graphObject.get(graphObject.size()-3).toString()).doubleValue();
+		        		//Double height = Double.valueOf(graphObject.get(graphObject.size()-2).toString()).doubleValue();
+		        		
+		        		Double x1 = Double.valueOf(graphObject.get(7).toString()).doubleValue();
+		        		Double y1 = Double.valueOf(graphObject.get(8).toString()).doubleValue();
+		        		Double x2 = Double.valueOf(graphObject.get(9).toString()).doubleValue();
+		        		Double y2 = Double.valueOf(graphObject.get(10).toString()).doubleValue();
+		        		
+		        		GeomPoint start = new GeomPoint();
+		    	        start.setLocation(x+x1,y+y1);
+		    	        GeomPoint end = new GeomPoint();
+		    	        end.setLocation(x+x2,y+y2);
+		    	        
+		    	        SVGGraphics2D svgGenerator_temp = new SVGGraphics2D(svgGenerator);
+		    	        this.drawArrow(svgGenerator_temp, start, end, thickness, alpha, strokeColor,fillColor);
+		        	} else if (graphType.equals("image")) {
+		        		
+		        		//log.debug("graphObject image "+graphObject);
+		        		//log.debug("",graphObject);
+		        		
+		        		String room = graphObject.get(6).toString();
+		        		String parentPath = graphObject.get(5).toString();
+		        		String fileItemName = graphObject.get(3).toString();
+		        		
+		        		String imageFilePath = Application.webAppPath + File.separatorChar +
+		        								"upload" + File.separatorChar + room + File.separatorChar;
+		        		
+		        		if (parentPath.length() > 1) {
+		        			imageFilePath += parentPath + File.separatorChar;
+		        		}
+		        		
+		        		//log.debug("fileItemName: "+fileItemName);
+		        		
+		        		String full_path = imageFilePath + fileItemName;
+		        		File myFile = new File(full_path);
+		        		
+		        		if (myFile.exists() && myFile.canRead()) {
+		        			
+		        			Image myImage = ImageIO.read(myFile);
+		        			
+		        			int x = (int) Math.round(Double.valueOf(graphObject.get(graphObject.size()-5).toString()).doubleValue());
+		        			int y = (int) Math.round(Double.valueOf(graphObject.get(graphObject.size()-4).toString()).doubleValue());
+		        			int width = (int) Math.round(Double.valueOf(graphObject.get(graphObject.size()-3).toString()).doubleValue());
+		        			int height = (int) Math.round(Double.valueOf(graphObject.get(graphObject.size()-2).toString()).doubleValue());
+			        		
+			        		SVGGraphics2D svgGenerator_temp = new SVGGraphics2D(svgGenerator);
+			        		svgGenerator_temp.drawImage(myImage, x, y, width, height, null);
+		        			
+		        		} else {
+		        			log.error("tried to inculde a non existing File into SVG/Image Export Path: "+full_path);
+		        		}
+		        		
+		        	} else if(graphType.equals("line") || graphType.equals("uline")) {
+		        		
+//		        		actionObject[0] = 'line';
+//		                actionObject[1] = stroke;
+//		                actionObject[2] = line;
+//		                actionObject[3] = opacity;
+//		                actionObject[4] = x1  
+//		                actionObject[5] = y1;  
+//		                actionObject[6] = x2;    
+//		                actionObject[7] = y2;    
+//		                actionObject[8] = this.counter; 
+//		                actionObject[9] = x;
+//		                actionObject[10] = y;
+//		                actionObject[11] = width;
+//		                actionObject[12] = height;  
+//		                actionObject[13] = newName;
+		        		
+	        			Integer lineWidth = Integer.valueOf(graphObject.get(2).toString()).intValue();
+		        		
+		        		Integer stroke = Integer.valueOf(graphObject.get(1).toString()).intValue();
+		        		Color strokeColor = new Color(stroke);
+		        		
+		        		Float alpha = Float.valueOf(graphObject.get(3).toString()).floatValue();
+		        		
+		        		Double x = Double.valueOf(graphObject.get(graphObject.size()-5).toString()).doubleValue();
+		        		Double y = Double.valueOf(graphObject.get(graphObject.size()-4).toString()).doubleValue();
+		        		//Double width = Double.valueOf(graphObject.get(graphObject.size()-3).toString()).doubleValue();
+		        		//Double height = Double.valueOf(graphObject.get(graphObject.size()-2).toString()).doubleValue();
+
+		        		Double x1 = Double.valueOf(graphObject.get(4).toString()).doubleValue();
+		        		Double y1 = Double.valueOf(graphObject.get(5).toString()).doubleValue();
+		        		Double x2 = Double.valueOf(graphObject.get(6).toString()).doubleValue();
+		        		Double y2 = Double.valueOf(graphObject.get(7).toString()).doubleValue();
+		        		
+		        		SVGGraphics2D svgGenerator_temp = new SVGGraphics2D(svgGenerator);
+		        		this.drawLine(svgGenerator_temp, x1, y1, x2, y2, strokeColor, lineWidth, x, y, alpha);
+		        		
+		        	} else {
+		        		log.error("tried to include a non supported Graph-Object graphType: "+graphType);
 		        	}
 		        	
-//		        'bolditalic');
-//	  		} else if(!this.bold && this.italic){
-//	  			this.setAttribute('currentlayerstyle','italic');
-//	  		} else if(this.bold && !this.italic){
-//	  			this.setAttribute('currentlayerstyle','bold');
-//	  		} else if(!this.bold && !this.italic){
-//	  			this.setAttribute('currentlayerstyle','plain');
-//		        	
-		        	
-//		        	actionObject[0] = "letter";
-//		    	    actionObject[1] = textforfield;
-//		    	    actionObject[2] = fgcolor;
-//		    	    actionObject[3] = fontsize;
-//		    	    actionObject[4] = fontstyle;
-//		    		actionObject[5] = this.counter;
-//		    	    actionObject[6] = x;
-//		    	    actionObject[7] = y;
-//		    	    actionObject[8] = width;
-//		    	    actionObject[9] = height;
-//		    	    actionObject[10] = this.currentlayer.name);
-//		    	    
-		        	//NOTE: Font.ITALIC+Font.BOLD = Font AND Bold !
-//			        exportToImageTest.paintDiagramText(svgGenerator8, 500, 300, 600, 360, "Process 1 asd asd as dasas " +
-//			        		"	dasdasdasda sdasdad a  das dasdas dasdasdasd Process 1 asd asd as dasas dasdasdasdasdasdad a  das dasd" +
-//			        		"	asdasdasdasd Process 1 asd asd as dasasdasdasdasdasdasdad a  das dasdasdasdasdasd", Font.PLAIN, 11,
-//			        		new Color(255,0,0));
 		        }
 		        
 		        // Finally, stream out SVG to the standard output using
