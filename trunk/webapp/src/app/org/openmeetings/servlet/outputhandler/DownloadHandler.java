@@ -203,6 +203,9 @@ public class DownloadHandler extends HttpServlet {
 					String full_path = working_dir + requestedFile;
 					
 					File f = new File(full_path);
+					
+					//If the File does not exist or is not readable show/load a place-holder picture
+					
 					if (!f.exists() || !f.canRead()) {
 						if (!f.canRead()){
 							log.debug("LOG DownloadHandler: The request file is not readable");
