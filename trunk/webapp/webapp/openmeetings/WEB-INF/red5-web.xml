@@ -24,7 +24,14 @@
         class="org.openmeetings.app.remote.Application"
         singleton="true" />
 
-    
+    <!-- DATABASE Connection via hibernate
+    <bean id="theSessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+        <property name="configLocation"
+            value="conf/hibernate.cfg.xml"/>
+    </bean>
+      -->
+  
+  
     <import resource="red5-services/fileservice.service.xml"/>  
     <import resource="red5-services/conferenceservice.service.xml"/>  
     <import resource="red5-services/userservice.service.xml"/>  
