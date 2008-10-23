@@ -206,6 +206,22 @@
             <web-resource-name>Forbidden</web-resource-name>
             <url-pattern>/streams/*</url-pattern>
         </web-resource-collection>
+        <web-resource-collection>
+            <web-resource-name>Forbidden</web-resource-name>
+            <url-pattern>/conf/*</url-pattern>
+        </web-resource-collection>
+        <web-resource-collection>
+            <web-resource-name>Forbidden</web-resource-name>
+            <url-pattern>/upload/*</url-pattern>
+        </web-resource-collection>
+        <web-resource-collection>
+            <web-resource-name>Forbidden</web-resource-name>
+            <url-pattern>/uploadtemp/*</url-pattern>
+        </web-resource-collection>
+        <web-resource-collection>
+            <web-resource-name>Forbidden</web-resource-name>
+            <url-pattern>/jod/*</url-pattern>
+        </web-resource-collection>
         <auth-constraint/>
     </security-constraint>
     <login-config>
