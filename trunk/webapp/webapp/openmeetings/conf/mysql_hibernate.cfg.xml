@@ -32,8 +32,8 @@
 		<property name="hibernate.query.factory_class">org.hibernate.hql.ast.ASTQueryTranslatorFactory</property>
         <property name="connection.provider_class ">org.hibernate.connection.C3P0ConnectionProvider</property>
         <property name="cache.provider_class">org.hibernate.cache.NoCacheProvider </property>
-        <property name="cache.use_query_cache">false </property>
-        <property name="cache.use_second_level_cache">false </property>
+        <property name="cache.use_query_cache">false</property>
+        <property name="cache.use_second_level_cache">false</property>
         <property name="generate_statistics">false</property>
         <property name="cache.use_structured_entries">false</property>
 
