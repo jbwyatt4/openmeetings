@@ -45,7 +45,7 @@
 	  			if (this.parent.message.getText().length!=0){
 			  		//Debug.write("send: ",this.parent.objMessage);
 			  		parent.sendMessageWithClient.doCall();
-			  		this.parent.message.setAttribute('text','');
+			  		this.parent.message.setText('');
 		  		}
 		  	</handler>
 		</simpleLabelButton>

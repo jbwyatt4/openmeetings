@@ -45,7 +45,7 @@
 	  			if (this.parent.message.getText().length!=0){
 			  		//Debug.write("send: ",this.parent.objMessage);
 			  		parent.sendMessageWithClient.doCall();
-			  		this.parent.message.setAttribute('text','');
+			  		this.parent.message.setText('');
 		  		}
 		  	</handler>
 		</simpleLabelButton>
@@ -53,15 +53,20 @@
 		<simpleLabelButton name="_show_emots">
 			<handler name="onclick">
 				//parent.clearOverallChat.doCall();
-				var pick = new lz.emotIconsSelector(canvas,{btnRef:this.parent,x:(this.getAttributeRelative('x',canvas)-140),y:(this.getAttributeRelative('y',canvas)-140)});
+				var pick = new lz.emotIconsSelector(canvas,{
+	                    btnRef:this.parent,
+	                    x:(this.getAttributeRelative('x',canvas)-140),
+	                    y:(this.getAttributeRelative('y',canvas)-140)
+                    });
 				lz.ModeManager.makeModal( pick );
 			</handler>
-			<view x="2" y="1">
-				<handler name="oninit">
-					var swfurl = 'http://'+canvas.rtmphostlocal+':'+canvas.red5httpport+'/'+canvas.webAppRootKey+'/public/emoticons/smile_btn.swf';
-					this.setSource(swfurl);
-				</handler>
-			</view>
+            <view x="2" y="1">
+                <handler name="oninit">
+                    var swfurl = 'http://'+canvas.rtmphostlocal+':'+canvas.red5httpport+'/'+canvas.webAppRootKey+'/public/emoticons/smile_btn.swf';
+                    this.setSource(swfurl);
+                    //if ($debug) Debug.write("CHAT SWFURL",swfurl);
+                </handler>
+            </view>
 			<labelTooltip labelid="445" />
 		</simpleLabelButton>	
 				

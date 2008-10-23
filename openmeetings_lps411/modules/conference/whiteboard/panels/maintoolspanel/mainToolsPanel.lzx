@@ -11,7 +11,8 @@
 	<mainToolsHPanelSeperator />
 	<mainToolsPanelItem name="hand" modi="hand" labelid="72" _isselected="true" 
 						resoureceItem="menupointer_rsc" />
-    <mainToolsPanelItem name="pointerWhiteboard" modi="pointerWhiteboard" labelid="557" 
+    <mainToolsPanelItem name="pointerWhiteboard" modi="pointerWhiteboard" 
+                        labelid="557" x_insetResource="1" y_insetResource="1"
                         resoureceItem="pointer_whiteboard_menu_rsc" />
 	<mainToolsPanelItem name="letter" modi="letter" labelid="73" resoureceItem="letter" />
 	<mainToolsPanelItem name="paint" modi="paint" labelid="74" resoureceItem="paint" />
@@ -32,7 +33,8 @@
 	<mainToolsVPanelSeperator />	
 	<mainToolsPanelItem name="hand" modi="hand" labelid="72" _isselected="true" 
 						resoureceItem="menupointer_rsc" />
-    <mainToolsPanelItem name="pointerWhiteboard" modi="pointerWhiteboard" labelid="557" 
+    <mainToolsPanelItem name="pointerWhiteboard" modi="pointerWhiteboard" 
+                        labelid="557" x_insetResource="1" y_insetResource="1"
                         resoureceItem="pointer_whiteboard_menu_rsc" />
 	<mainToolsPanelItem name="letter" modi="letter" labelid="73" resoureceItem="letter" />
 	<mainToolsPanelItem name="paint" modi="paint" labelid="74" resoureceItem="paint" />
@@ -44,7 +46,7 @@
 </class>
 	
 <class name="mainToolsTopPanel" extends="baseTopPanel" 
-	   width="392" height="32" title="" docking="true"
+	   width="393" height="33" title="" docking="true"
 	   activationClassBounding="mainToolsLeftPanel"
 	   activationVClassBounding="mainToolsTopPanel"
 	   leftClassPanel="mainToolsLeftPanel"
@@ -52,13 +54,13 @@
 	   bottomClassPanel="mainToolsTopPanel"
 	   rightClassPanel="mainToolsLeftPanel"
 	   verticalClassActive="true"
-	   hWidth="32" hHeight="392">
+	   hWidth="33" hHeight="393">
 	
 	<horizontalMenuIconBar x="20" y="4" />
 </class>	
 	
 <class name="mainToolsLeftPanel" extends="baseLeftPanel" 
-	   width="32" height="392" title="" docking="true"
+	   width="33" height="393" title="" docking="true"
 	   activationClassBounding="mainToolsLeftPanel"
 	   activationVClassBounding="mainToolsTopPanel"
 	   topClassPanel="mainToolsTopPanel"
@@ -66,9 +68,9 @@
 	   leftClassPanel="mainToolsLeftPanel"
 	   rightClassPanel="mainToolsLeftPanel"
 	   verticalClassActive="false"
-	   vWidth="392" vHeight="32">
+	   vWidth="393" vHeight="33">
 	
-	<verticalMenuIconBar x="2" y="20" />
+	<verticalMenuIconBar x="3" y="20" />
 </class>
 
 <!-- ################
