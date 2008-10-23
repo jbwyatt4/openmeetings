@@ -1,22 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library>
     
-<class name="drawDocumentPanelItem" extends="button" 
+<class name="drawDocumentPanelItem" extends="blueButton" 
 	   width="26" height="26">
 	
 	<attribute name="modi" value="" type="string" />
-	<attribute name="resoureceItem" value="" type="string" />
 	<attribute name="labelid" value="0" type="number" />
 	
 	<handler name="onclick">
-		if ($debug) Debug.write("parent.parent.parent.parent: ",parent.parent.parent.parent);
+		//if ($debug) Debug.write("parent.parent.parent.parent: ",parent.parent.parent.parent);
 		parent.parent.parent.parent._drawareaMask._drawarea.doDocumentAction(this.modi);
 	</handler>
 	
-	<view x="2" y="2" height="22" width="22" 
-		  resource="$once{ parent.resoureceItem }" />
-	
 	<labelTooltip name="__labeltooltip" labelid="$once{ parent.labelid }" />
+    
 </class>    
 
 <class name="documentPanelVPanelSeperator" extends="view" bgcolor="0xCCCCCC"
@@ -88,7 +85,7 @@
 </class>
 	
 <class name="documentIconTopPanel" extends="baseTopPanel" 
-	   width="366" height="32" title="" docking="true"
+	   width="276" height="33" title="" docking="true"
 	   activationClassBounding="documentIconTopPanel"
 	   activationVClassBounding="documentIconTopPanel"
 	   leftClassPanel="documentIconTopPanel"
@@ -96,7 +93,7 @@
 	   bottomClassPanel="documentIconTopPanel"
 	   rightClassPanel="documentIconTopPanel"
 	   verticalClassActive="true"
-	   hWidth="366" hHeight="32" >
+	   hWidth="276" hHeight="33" >
 	<handler name="oninit">
 		if ($debug) Debug.write("oninit: ",this);
 		_inner._currentSlideNo.setAttribute('text',canvas.currentSlideNo);
@@ -114,7 +111,7 @@
 	
 <!-- Not used for the Moment -->	
 <class name="documentIconLeftPanel" extends="baseLeftPanel" 
-	   width="32" height="366" title="" docking="true"
+	   width="33" height="306" title="" docking="true"
 	   activationClassBounding="documentIconLeftPanel"
 	   activationVClassBounding="documentIconTopPanel"
 	   topClassPanel="documentIconTopPanel"
@@ -122,9 +119,9 @@
 	   leftClassPanel="documentIconLeftPanel"
 	   rightClassPanel="documentIconLeftPanel"
 	   verticalClassActive="false"
-	   vWidth="366" vHeight="32">
+	   vWidth="306" vHeight="33">
 	
-	<verticalDocumentIconBar name="_inner" x="2" y="20" />
+	<verticalDocumentIconBar name="_inner" x="3" y="20" />
 </class>	     
     
 </library>
