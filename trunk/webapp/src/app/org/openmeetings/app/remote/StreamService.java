@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.LinkedHashMap;
 import java.io.File;
@@ -154,8 +155,11 @@ public class StreamService implements IPendingServiceCallback {
 						roomClient.setStartdate(startDate);
 						roomClient.setStarttime(0L);
 						roomClient.setRcl(rcl);
+						XStream xStream_temp = new XStream(new XppDriver());
+						xStream_temp.setMode(XStream.NO_REFERENCES);
+						roomClient.setRclInXml(xStream_temp.toXML(rcl));
 						if (roomRecording.getRoomClients() == null) {
-							roomRecording.setRoomClients(new LinkedList<RecordingClient>());
+							roomRecording.setRoomClients(new HashSet<RecordingClient>());
 						}
 						roomRecording.getRoomClients().add(roomClient);
 					}
@@ -163,9 +167,18 @@ public class StreamService implements IPendingServiceCallback {
 			}
 			
 			roomRecording.setInitwhiteboardvars(initwhiteboardvars);
+			XStream xStream_temp = new XStream(new XppDriver());
+			xStream_temp.setMode(XStream.NO_REFERENCES);
+			roomRecording.setInitwhiteboardvarsInXml(xStream_temp.toXML(initwhiteboardvars));
+			
 			roomRecording.setRecordingName(recordingName);
 			roomRecording.setStarttime(new java.util.Date());
+			
 			roomRecording.setStartedby(currentClient);
+			XStream xStream = new XStream(new XppDriver());
+			xStream.setMode(XStream.NO_REFERENCES);
+			roomRecording.setStartedbyInXml(xStream.toXML(currentClient));
+			
 			
 			//add Room Client enter/leave events
 			//moved inside function - loop
@@ -259,7 +272,12 @@ public class StreamService implements IPendingServiceCallback {
 			Date endtime =  new java.util.Date();
 			Long duration = endtime.getTime() - starttime.getTime();
 			roomRecording.setEndtime(endtime);
+			
 			roomRecording.setEnduser(currentClient);
+			XStream xStream_temp = new XStream(new XppDriver());
+			xStream_temp.setMode(XStream.NO_REFERENCES);
+			roomRecording.setEnduserInXml(xStream_temp.toXML(currentClient));
+			
 			roomRecording.setRecordname(newRecordFileName);
 			
 			RoomClient startedClient = roomRecording.getStartedby();
@@ -269,6 +287,8 @@ public class StreamService implements IPendingServiceCallback {
 				us = Usermanagement.getInstance().getUser(recordedby);
 			}
 			
+			
+			//TODO: Replace Persistence Logic with Database-DAO
 			XStream xStream = new XStream(new XppDriver());
 			xStream.setMode(XStream.NO_REFERENCES);
 			String xmlString = xStream.toXML(roomRecording);
@@ -651,6 +671,9 @@ public class StreamService implements IPendingServiceCallback {
 //				log.debug("###### NEW USER4: "+rcl.getUserip());
 //			}
 			roomClient.setRcl(rcl);
+			XStream xStream_temp = new XStream(new XppDriver());
+			xStream_temp.setMode(XStream.NO_REFERENCES);
+			roomClient.setRclInXml(xStream_temp.toXML(rcl));
 			
 			roomRecording.getRoomClients().add(roomClient);
 			roomRecordingList.put(roomrecordingName, roomRecording);			
