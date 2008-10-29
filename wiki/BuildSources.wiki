@@ -30,9 +30,7 @@ Step-By-Step:
 
 = Java Webapp (Server-Side) =
 
-  * We use JDK5 + latest red5 from trunk (red5-0.8.x) for the current source in the SVN
-
-  * Install red5 >= 0.8.0 from the snapshot dir of red5: http://red5.googlecode.com, you maybe will need to compile red5 from Source too!
+  * Install red5 from here: http://openmeetings.googlecode.com/files/red5_snapshot_r3200.zip (its build against JDK59
   * Install it
   * there is an error in red5's configuration of Log-Files, so you need to add the following line's into the global logback.xml of $RED5_HOME/conf/logback.xml:
 
