@@ -112,7 +112,7 @@ public class AppointmentDaoImpl {
 		return null;
 	}
 	
-	public void updateAppointment(Appointment appointment) {
+	public Long updateAppointment(Appointment appointment) {
 		if (appointment.getAppointmentId() > 0) {
 			try {
 				Object idf = HibernateUtil.createSession();
@@ -121,6 +121,7 @@ public class AppointmentDaoImpl {
 				session.update(appointment);
 				tx.commit();
 				HibernateUtil.closeSession(idf);
+				return appointment.getAppointmentId();
 			} catch (HibernateException ex) {
 				log.error("[updateAppointment] ",ex);
 			} catch (Exception ex2) {
@@ -129,12 +130,12 @@ public class AppointmentDaoImpl {
 		} else {
 			log.error("[updateAppointment] "+"Error: No AppointmentId given");
 		}
+		return null;
 	}
 	
-	public void updateAppointment(Long appointmentId, String appointmentName, Long userId, String appointmentDescription, 
+	public Long updateAppointment(Long appointmentId, String appointmentName, Long userId, String appointmentDescription, 
 			Date appointmentstart, Date appointmentend,
-			Boolean isDaily, Boolean isWeekly, Boolean isMonthly, Boolean isYearly, Long categoryId 
-			) {
+			Boolean isDaily, Boolean isWeekly, Boolean isMonthly, Boolean isYearly, Long categoryId ) {
 		try {
 			
 			
@@ -160,16 +161,17 @@ public class AppointmentDaoImpl {
 
 			tx.commit();
 			HibernateUtil.closeSession(idf);
-			
+			return appointmentId;
 		} catch (HibernateException ex) {
 			log.error("[updateAppointment]: ",ex);
 		} catch (Exception ex2) {
 			log.error("[updateAppointment]: ",ex2);
 		}
+		return null;
 		
 	}
 	
-	public void deleteAppointement(Long appointmentId) {
+	public Long deleteAppointement(Long appointmentId) {
 		try {
 			
 			Appointment app = this.getAppointmentById(appointmentId);
@@ -183,12 +185,13 @@ public class AppointmentDaoImpl {
 						
 			tx.commit();
 			HibernateUtil.closeSession(idf);
-			
+			return appointmentId;
 		} catch (HibernateException ex) {
 			log.error("[deleteAppointement]: " + ex);
 		} catch (Exception ex2) {
 			log.error("[deleteAppointement]: " + ex2);
 		}
+		return null;
 	}
 	
 	public List<Appointment> getAppointmentsByRange(Long userId, Date starttime, Date endtime) {

@@ -95,6 +95,129 @@ public class Usermanagement {
 		return null;
 	}
 	
+	public Long getAllUserMax(String search) {
+		try {
+			
+			String[] searchItems = search.split(" ");
+			
+			
+			log.debug("getUserContactsBySearch: "+ search);
+			//log.debug("getUserContactsBySearch: "+ userId);
+			
+			String hql = 	"select count(u) from  Users u "+					
+							"WHERE u.deleted = 'false' ";
+							
+			
+			hql +=		"AND ( ";
+			for(int i=0;i<searchItems.length; i++){
+				if (i != 0) {
+					hql +=	" OR ";
+				}
+				hql +=	"( " +
+							"lower(u.lastname) LIKE lower('%"+searchItems[i]+"%') OR lower(u.firstname) LIKE lower('%"+searchItems[i]+"%') " +
+							//"OR lower(u.username) LIKE lower('%"+searchItems[i]+"%') " +
+							//"OR lower(u.titel) LIKE lower('%"+searchItems[i]+"%') " +
+							//"OR lower(u.email) LIKE lower('%"+searchItems[i]+"%') " +
+							//"OR lower(u.firma) LIKE lower('%"+searchItems[i]+"%') " +
+						") ";
+								
+			}
+			hql += " )" ;
+			
+			log.debug("Show HQL: "+hql);						
+			
+			Object idf = HibernateUtil.createSession();
+			Session session = HibernateUtil.getSession();
+			Transaction tx = session.beginTransaction();
+			Query query = session.createQuery(hql);
+			
+			//log.debug("id: "+folderId);
+			
+			//query.setLong("macomUserId", userId);
+			//query.setLong("messageFolder", folderId);
+			//query
+						
+			List ll = query.list();
+			tx.commit();
+			HibernateUtil.closeSession(idf);
+			
+			
+			//log.error((Long)ll.get(0));
+			Long i = (Long)ll.get(0);
+			
+			return new Long(i);
+		} catch (HibernateException ex) {
+			log.error("[getAllUserMax]: " + ex);
+		} catch (Exception ex2) {
+			log.error("[getAllUserMax]: " + ex2);
+		}
+		return null;
+	}
+	
+	
+	
+	public SearchResult getAllUserByRange(String search, int start, int max, String orderby, boolean asc){
+		try {
+				SearchResult sresult = new SearchResult();
+				sresult.setObjectName(Users.class.getName());
+				sresult.setRecords(this.getAllUserMax(search));
+				
+				String[] searchItems = search.split(" ");
+				
+				
+				log.debug("getUserContactsBySearch: "+ search);
+				//log.debug("getUserContactsBySearch: "+ userId);
+				
+				String hql = 	"select u from  Users u "+				
+								"WHERE u.deleted = 'false' ";
+								
+				
+				hql +=		"AND ( ";
+				for(int i=0;i<searchItems.length; i++){
+					if (i != 0) {
+						hql +=	" OR ";
+					}
+					hql +=	"( " +
+								"lower(u.lastname) LIKE lower('%"+searchItems[i]+"%') OR lower(u.firstname) LIKE lower('%"+searchItems[i]+"%') " +
+								//"OR lower(u.username) LIKE lower('%"+searchItems[i]+"%') " +
+								//"OR lower(u.titel) LIKE lower('%"+searchItems[i]+"%') " +
+								//"OR lower(u.email) LIKE lower('%"+searchItems[i]+"%') " +
+								//"OR lower(u.firma) LIKE lower('%"+searchItems[i]+"%') " +
+							") ";
+									
+				}
+	
+				hql += " ) ORDER BY u.lastname ASC, u.firstname ASC";
+				
+				log.debug("Show HQL: "+hql);
+				
+				Object idf = HibernateUtil.createSession();
+				Session session = HibernateUtil.getSession();
+				Transaction tx = session.beginTransaction();
+				Query query = session.createQuery(hql);
+				//query.setLong("macomUserId", userId);
+				
+				//query
+				//if (asc) ((Criteria) query).addOrder(Order.asc(orderby));
+				//else ((Criteria) query).addOrder(Order.desc(orderby));
+				query.setFirstResult(start);
+				query.setMaxResults(max);			
+				List<Users> ll = query.list();
+				tx.commit();
+				HibernateUtil.closeSession(idf);
+				
+				sresult.setResult(ll);
+		
+				return sresult;		
+
+		} catch (HibernateException ex) {
+			log.error("[getAllUserByRange] "+ex);
+		} catch (Exception ex2) {
+			log.error("[getAllUserByRange] "+ex2);
+		}
+		return null;
+	}
+	
 	public List<Users> getAllUsers(){
 		try {
 			

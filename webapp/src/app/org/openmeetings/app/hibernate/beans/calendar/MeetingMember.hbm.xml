@@ -2,18 +2,16 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-  <class table="group_members" lazy="false" name="org.openmeetings.app.hibernate.beans.calendar.GroupMember">
-    <id column="group_member_id" name="groupMemberId">
+  <class table="meeting_members" lazy="false" name="org.openmeetings.app.hibernate.beans.calendar.MeetingMember">
+    <id column="meeting_member_id" name="meetingMemberId">
       <generator class="increment"/>
     </id>
+    <many-to-one outer-join="true" not-null="false" column="user_id" lazy="false" cascade="none" name="userid" class="org.openmeetings.app.hibernate.beans.user.Users"/>
+    <property name="email" type="string" column="email"/>
     <property name="firstname" type="string" column="firstname"/>
     <property name="lastname" type="string" column="lastname"/>
-    <property name="age" type="java.util.Date" column="age"/>
     <property name="memberStatus" type="string" column="member_status"/>
     <property name="appointmentStatus" type="string" column="appointment_status"/>
-    <property name="password" type="string" column="password"/>
-    <property name="languageId" type="string" column="language_id"/>
-    <many-to-one outer-join="true" not-null="false" column="adresses_id" lazy="false" cascade="none" name="addresses" class="org.openmeetings.app.hibernate.beans.adresses.Adresses"/>
     <many-to-one outer-join="true" not-null="false" column="appointment_id" lazy="false" cascade="none" name="appointment" class="org.openmeetings.app.hibernate.beans.calendar.Appointment"/>
     <property name="starttime" type="java.util.Date" column="starttime"/>
     <property name="updatetime" type="java.util.Date" column="updatetime"/>

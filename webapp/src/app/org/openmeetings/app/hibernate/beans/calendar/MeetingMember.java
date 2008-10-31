@@ -3,25 +3,25 @@ package org.openmeetings.app.hibernate.beans.calendar;
 import java.util.Date;
 
 import org.openmeetings.app.hibernate.beans.adresses.Adresses;
+import org.openmeetings.app.hibernate.beans.user.Users;
 
 /**
  * 
- * @hibernate.class table="group_members"
+ * @hibernate.class table="meeting_members"
  * lazy="false"
  *
  */
 
-public class GroupMember {
+public class MeetingMember {
 	
-	private Long groupMemberId;
+	private Long meetingMemberId;
+	private Users userid;
 	private String firstname;
 	private String lastname;
-	private Date age;
 	private String memberStatus; // internal, external.
 	private String appointmentStatus; //status of the appointment denial, acceptance, wait. 
-	private String password;
-	private Long languageId;
-	private Adresses addresses;
+	
+	private String email;
 	private Appointment appointment;
 		
 	private Date starttime;
@@ -32,15 +32,44 @@ public class GroupMember {
 	/**
      * 
      * @hibernate.id
-     *  column="group_member_id"
+     *  column="meeting_member_id"
      *  generator-class="increment"
      */  
-	public Long getGroupMemberId() {
-		return groupMemberId;
+	public Long getMeetingMemberId() {
+		return meetingMemberId;
 	}
-	public void setGroupMemberId(Long groupMemberId) {
-		this.groupMemberId = groupMemberId;
+	public void setMeetingMemberId(Long groupMemberId) {
+		this.meetingMemberId = groupMemberId;
 	}
+	
+	/**
+     * @hibernate.many-to-one
+     *  cascade="none"
+     *  column="user_id"
+     *  lazy="false"
+     *  class="org.openmeetings.app.hibernate.beans.user.Users"
+     *  not-null="false"
+     *  outer-join="true"
+     */ 
+	public Users getUserid() {
+		return userid;
+	}
+	public void setUserid(Users userid) {
+		this.userid = userid;
+	}
+	
+	/**
+     * @hibernate.property
+     *  column="email"
+     *  type="string"
+     */ 
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	
 	/**
      * @hibernate.property
      *  column="firstname"
@@ -64,17 +93,7 @@ public class GroupMember {
 	public void setLastname(String lastname) {
 		this.lastname = lastname;
 	}
-	/**
-     * @hibernate.property
-     *  column="age"
-     *  type="java.util.Date"
-     */ 
-	public Date getAge() {
-		return age;
-	}
-	public void setAge(Date age) {
-		this.age = age;
-	}
+	
 	/**
      * @hibernate.property
      *  column="member_status"
@@ -99,45 +118,6 @@ public class GroupMember {
 		this.appointmentStatus = appointmentStatus;
 	}
 	
-	/**
-     * @hibernate.property
-     *  column="password"
-     *  type="string"
-     */ 
-	public String getPassword() {
-		return password;
-	}
-	public void setPassword(String password) {
-		this.password = password;
-	}
-	
-	/**
-     * @hibernate.property
-     *  column="language_id"
-     *  type="string"
-     */ 
-	public Long getLanguageId() {
-		return languageId;
-	}
-	public void setLanguageId(Long languageId) {
-		this.languageId = languageId;
-	}
-	
-	/**
-     * @hibernate.many-to-one
-     *  cascade="none"
-     *  column="adresses_id"
-     *  lazy="false"
-     *  class="org.openmeetings.app.hibernate.beans.adresses.Adresses"
-     *  not-null="false"
-     *  outer-join="true"
-     */ 
-	public Adresses getAddresses() {
-		return addresses;
-	}
-	public void setAddresses(Adresses addresses) {
-		this.addresses = addresses;
-	}
 	
     /**
      * @hibernate.many-to-one

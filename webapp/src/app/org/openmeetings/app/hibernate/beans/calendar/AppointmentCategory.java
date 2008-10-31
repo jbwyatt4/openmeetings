@@ -2,6 +2,8 @@ package org.openmeetings.app.hibernate.beans.calendar;
 
 import java.util.Date;
 
+import org.openmeetings.app.hibernate.beans.user.Users;
+
 /**
  * 
  * @hibernate.class table="appointmentcategory"
@@ -13,6 +15,7 @@ public class AppointmentCategory {
 	
 	private Long categoryId;
 	private String name;
+	private Users user;
 	
 	private Date starttime;
 	private Date updatetime;
@@ -42,6 +45,22 @@ public class AppointmentCategory {
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	/**
+     * @hibernate.many-to-one
+     *  cascade="none"
+     *  column="user_id"
+     *  lazy="false"
+     *  class="org.openmeetings.app.hibernate.beans.user.Users"
+     *  not-null="false"
+     *  outer-join="true"
+     */ 
+	public Users getUser() {
+		return user;
+	}
+	public void setUser(Users user) {
+		this.user = user;
 	}
 	
 	/**

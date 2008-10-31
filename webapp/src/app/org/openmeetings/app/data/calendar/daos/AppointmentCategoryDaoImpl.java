@@ -1,6 +1,7 @@
 package org.openmeetings.app.data.calendar.daos;
 
 import java.util.Date;
+import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -9,6 +10,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.openmeetings.app.data.basic.Configurationmanagement;
+import org.openmeetings.app.data.user.Usermanagement;
 import org.openmeetings.app.hibernate.beans.calendar.Appointment;
 import org.openmeetings.app.hibernate.beans.calendar.AppointmentCategory;
 import org.openmeetings.app.hibernate.utils.HibernateUtil;
@@ -58,7 +60,7 @@ public class AppointmentCategoryDaoImpl {
 		return null;
 	}
 	
-	public void updateAppointmentCategory(Long categoryId, String name) {
+	public Long updateAppointmentCategory(Long categoryId, String name) {
 		try {
 			
 			
@@ -75,15 +77,16 @@ public class AppointmentCategoryDaoImpl {
 
 			tx.commit();
 			HibernateUtil.closeSession(idf);
-			
+			return categoryId;
 		} catch (HibernateException ex) {
 			log.error("[updateAppointmentCategory]: ",ex);
 		} catch (Exception ex2) {
 			log.error("[updateAppointmentCategory]: ",ex2);
 		}
+		return null;
 	}
 	
-	public Long addAppointmentCategory(String name) {
+	public Long addAppointmentCategory( Long user_id, String name, String comment) {
 		try {
 			
 			AppointmentCategory ac = new AppointmentCategory();
@@ -91,6 +94,8 @@ public class AppointmentCategoryDaoImpl {
 			ac.setName(name);
 			ac.setStarttime(new Date());
 			ac.setDeleted("false");
+			ac.setUser(Usermanagement.getInstance().getUser(user_id));
+			ac.setComment(comment);
 			
 			
 			Object idf = HibernateUtil.createSession();
@@ -111,7 +116,7 @@ public class AppointmentCategoryDaoImpl {
 		return null;
 	}
 	
-	public void deleteAppointementCategory(Long categoryId) {
+	public Long deleteAppointmentCategory(Long categoryId) {
 		try {
 			
 			AppointmentCategory ac = this.getAppointmentCategoryById(categoryId);
@@ -120,7 +125,7 @@ public class AppointmentCategoryDaoImpl {
 			
 			if (ac == null) {
 				log.debug("Already deleted / Could not find: "+categoryId);
-				return;
+				return categoryId;
 			}
 			ac.setUpdatetime(new Date());
 			ac.setDeleted("true");
@@ -132,12 +137,39 @@ public class AppointmentCategoryDaoImpl {
 						
 			tx.commit();
 			HibernateUtil.closeSession(idf);
-			
+			return categoryId;
 		} catch (HibernateException ex) {
-			log.error("[deleteAppointementCategory]: " + ex);
+			log.error("[deleteAppointmentCategory]: " + ex);
 		} catch (Exception ex2) {
-			log.error("[deleteAppointementCategory]: " + ex2);
+			log.error("[deleteAppointmentCategory]: " + ex2);
 		}
+		return null;
 	}
 
+	public List<AppointmentCategory> getAppointmentCategoryList(Long userId) {
+		try {
+			
+			String hql = "select a from AppointmentCategory a " +
+					"WHERE a.deleted != :deleted "+
+					"AND a.user = :userId";
+			
+			Object idf = HibernateUtil.createSession();
+			Session session = HibernateUtil.getSession();
+			Transaction tx = session.beginTransaction();
+			Query query = session.createQuery(hql);
+			query.setString("deleted", "true");
+			query.setLong("userId", userId);
+				
+			List<AppointmentCategory> listAppointmentCategory = query.list();
+			tx.commit();
+			HibernateUtil.closeSession(idf);
+			
+			return listAppointmentCategory;
+		} catch (HibernateException ex) {
+			log.error("[AppointmentCategory]: " + ex);
+		} catch (Exception ex2) {
+			log.error("[AppointmentCategory]: " + ex2);
+		}
+		return null;
+	}
 }

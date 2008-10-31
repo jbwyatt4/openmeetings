@@ -6,30 +6,36 @@ import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.openmeetings.app.data.calendar.daos.AppointmentCategoryDaoImpl;
 import org.openmeetings.app.data.calendar.daos.AppointmentDaoImpl;
 import org.openmeetings.app.hibernate.beans.calendar.Appointment;
+import org.openmeetings.app.hibernate.beans.calendar.AppointmentCategory;
 
-public class AppointmentLogic {
+public class AppointmentCategoryLogic {
 	
-	private static final Log log = LogFactory.getLog(AppointmentLogic.class);
-	private static AppointmentLogic instance = null;
+	private static final Log log = LogFactory.getLog(AppointmentCategoryLogic.class);
+	private static AppointmentCategoryLogic instance = null;
 
-	public static synchronized AppointmentLogic getInstance() {
+	public static synchronized AppointmentCategoryLogic getInstance() {
 		if (instance == null) {
-			instance = new AppointmentLogic();
+			instance = new AppointmentCategoryLogic();
 		}
 
 		return instance;
 	}
 	
-	public List<Appointment> getAppointmentByRange(Long userId ,Date starttime, Date endtime){
+	public List<AppointmentCategory> getAppointmentCategoryList(Long userId ){
 		try {	
-			return AppointmentDaoImpl.getInstance().getAppointmentsByRange(userId, starttime, endtime);
+			return AppointmentCategoryDaoImpl.getInstance().getAppointmentCategoryList(userId);
 		}catch(Exception err){
-			log.error("[getAppointmentByRange]",err);
+			log.error("[getAppointmentCategory]",err);
 		}
 		return null;
 	}
+	
+	
+	
+/*	
 	//next appointment to current date
 	public Appointment getNextAppointment(){
 		try{
@@ -49,42 +55,39 @@ public class AppointmentLogic {
 		return null;
 	}
 	
-	public Long saveAppointment(String appointmentName, Long userId, String appointmentLocation,String appointmentDescription, 
+	public void saveAppointment(String appointmentName, Long userId, String appointmentLocation,String appointmentDescription, 
 			Date appointmentstart, Date appointmentend, 
 			Boolean isDaily, Boolean isWeekly, Boolean isMonthly, Boolean isYearly, Long categoryId){
 		
 		try{
-		return AppointmentDaoImpl.getInstance().addAppointment(appointmentName, userId, appointmentLocation, appointmentDescription,
+		AppointmentDaoImpl.getInstance().addAppointment(appointmentName, userId, appointmentLocation, appointmentDescription,
 				appointmentstart, appointmentend, isDaily, isWeekly, isMonthly, isYearly, categoryId);
 		}catch(Exception err){
 			log.error("[saveAppointment]",err);
 		}
-		return null;
 	}
 	
-	public Long deleteAppointment(Long appointmentId){
+	public void deleteAppointment(Long appointmentId){
 		try{
 		AppointmentDaoImpl.getInstance().deleteAppointement(appointmentId);
-		return appointmentId;
 		}catch(Exception err){
 		log.error("[deleteAppointment]",err);	
 		}
-		return null;
 		
 	}
 	
-	public Long updateAppointment(Long appointmentId, String appointmentName,Long userId, String appointmentDescription, 
+	public void updateAppointment(Long appointmentId, String appointmentName,Long userId, String appointmentDescription, 
 			Date appointmentstart, Date appointmentend,
 			Boolean isDaily, Boolean isWeekly, Boolean isMonthly, Boolean isYearly, Long categoryId ){
 		
 		try {
-			return AppointmentDaoImpl.getInstance().updateAppointment(appointmentId,
+			AppointmentDaoImpl.getInstance().updateAppointment(appointmentId,
 					appointmentName, userId, appointmentDescription, appointmentstart,
 					appointmentend, isDaily, isWeekly, isMonthly, isYearly,
 					categoryId);
 		} catch (Exception err) {
 			log.error("[updateAppointment]",err);
 		}
-		return null;
-	}
+	} 
+	*/
 }

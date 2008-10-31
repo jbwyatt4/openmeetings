@@ -61,6 +61,7 @@ public class TestDatabaseStructureAppointment extends TestCase {
 			//AppointmentDaoImpl.getInstance().addAppointment("testap", "erster Test",Calendar.getInstance().getTime() , 
 			//		Calendar.getInstance().getTime(), true, false, false, false, new Long(1));
 			log.debug("Anzahl: "+listAppoints.size());
+			
 			for (Appointment appoints : listAppoints) {
 				log.debug("Termin: "+appoints.getAppointmentName()+" startDate: "+appoints.getAppointmentStarttime()+ " endDate: "+appoints.getAppointmentEndtime());
 			}
