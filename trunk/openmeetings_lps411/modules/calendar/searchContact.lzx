@@ -1,0 +1,25 @@
+<library>
+
+<class name="searchContact" extends="view" bgcolor="silver">
+		<simplelayout axis="x" spacing="2" />
+		<attribute name ="userId" value="0" type="number" /> 	
+		<attribute name ="vorname" value="" type="string" />
+		<attribute name ="nachname" value="" type="string" />
+		<attribute name ="email" value="null"/>		
+		
+		<attribute name ="refObj" value="null"/>		
+			 		
+		<view resource="edit_add">
+			<handler name="onclick">
+				//new selectKategoryStatus(canvas,{_contactId:parent.userId});
+				if ($debug) Debug.write("userId  search: ",parent.userId);
+			</handler>
+		</view>	
+		<text  text="$once{parent.userId }" width="20"/>		
+		<text name="_item3"  text="$once{ parent.vorname}" width="60" />
+		<text name="_item4"  text="$once{parent.nachname }" width="60" />
+		<text name="_item7"  text="$once{ parent.email}" width="135"/>  
+					 	
+ </class>
+ 
+</library>

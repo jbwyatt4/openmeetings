@@ -31,5 +31,6 @@ Mar 28 2008 commented by onokeiji@gmail.com
 	<include href="recording/" />
     
     <include href="admin/" />
+     <include href="calendar/" />
 
 </library>
