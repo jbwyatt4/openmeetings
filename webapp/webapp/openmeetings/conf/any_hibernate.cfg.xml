@@ -43,7 +43,7 @@
 		<property name="c3p0.timeout">3600</property>
 
 		<!-- mapping files -->
-		    <mapping resource="org/openmeetings/app/hibernate/beans/adresses/Adresses.hbm.xml"/>
+    <mapping resource="org/openmeetings/app/hibernate/beans/adresses/Adresses.hbm.xml"/>
     <mapping resource="org/openmeetings/app/hibernate/beans/adresses/Adresses_Emails.hbm.xml"/>
     <mapping resource="org/openmeetings/app/hibernate/beans/adresses/Adresses_Phones.hbm.xml"/>
     <mapping resource="org/openmeetings/app/hibernate/beans/adresses/Emails.hbm.xml"/>
@@ -65,6 +65,8 @@
     <mapping resource="org/openmeetings/app/hibernate/beans/lang/FieldLanguage.hbm.xml"/>
     <mapping resource="org/openmeetings/app/hibernate/beans/lang/Fieldlanguagesvalues.hbm.xml"/>
     <mapping resource="org/openmeetings/app/hibernate/beans/lang/Fieldvalues.hbm.xml"/>
+    <mapping resource="org/openmeetings/app/hibernate/beans/logs/ConferenceLog.hbm.xml"/>
+    <mapping resource="org/openmeetings/app/hibernate/beans/logs/ConferenceLogType.hbm.xml"/>
     <mapping resource="org/openmeetings/app/hibernate/beans/recording/Recording.hbm.xml"/>
     <mapping resource="org/openmeetings/app/hibernate/beans/recording/RecordingClient.hbm.xml"/>
     <mapping resource="org/openmeetings/app/hibernate/beans/recording/RoomRecording.hbm.xml"/>
