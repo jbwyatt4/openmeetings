@@ -42,6 +42,7 @@ import org.openmeetings.app.conference.whiteboard.WhiteboardManagement;
 import org.openmeetings.app.conference.whiteboard.WhiteboardSyncLockObject;
 import org.openmeetings.app.data.basic.AuthLevelmanagement;
 import org.openmeetings.app.data.basic.Sessionmanagement;
+import org.openmeetings.app.data.logs.ConferenceLogDaoImpl;
 import org.openmeetings.app.data.user.Usermanagement;
 import org.openmeetings.app.hibernate.beans.user.Users;
 
@@ -293,8 +294,13 @@ public class Application extends ApplicationAdapter implements
 		log.debug("roomLeave " + client.getId() + " "+ room.getClients().size() + " " + room.getContextPath() + " "+ room.getName());
 		try {
 			IConnection current = Red5.getConnectionLocal();
-			RoomClient currentClient = ClientList.get(current.getClient().getId());
+			String streamid = current.getClient().getId();
+			RoomClient currentClient = ClientList.get(streamid);
 			Long room_id = currentClient.getRoom_id();
+			
+			//Log the User
+			ConferenceLogDaoImpl.getInstance().addConferenceLog("roomLeave", currentClient.getUser_id(), streamid, room_id, currentClient.getUserip());
+			
 			
 			//Remove User from Sync List's
 			if (room_id != null) {
@@ -370,8 +376,13 @@ public class Application extends ApplicationAdapter implements
 		log.debug("logicalRoomLeave ");
 		try {
 			IConnection current = Red5.getConnectionLocal();
-			RoomClient currentClient = ClientList.get(current.getClient().getId());
+			String streamid = current.getClient().getId();
+			RoomClient currentClient = ClientList.get(streamid);
 			Long room_id = currentClient.getRoom_id();	
+			
+			//Log the User
+			ConferenceLogDaoImpl.getInstance().addConferenceLog("roomLeave", currentClient.getUser_id(), streamid, room_id, currentClient.getUserip());
+			
 			
 			//Remove User from Sync List's
 			if (room_id != null) {
@@ -716,7 +727,13 @@ public class Application extends ApplicationAdapter implements
 		}
 		return null;
 	}	
-	 
+	
+	/**
+	 * This function is called once a User enters a Room
+	 * 
+	 * @param room_id
+	 * @return
+	 */
 	public HashMap<String,RoomClient> setRoomValues(Long room_id){
 		try {
 
@@ -727,6 +744,10 @@ public class Application extends ApplicationAdapter implements
 			currentClient.setRoom_id(room_id);
 			currentClient.setRoomEnter(new Date());
 			ClientList.put(streamid, currentClient);
+			
+			
+			//Log the User
+			ConferenceLogDaoImpl.getInstance().addConferenceLog("roomEnter", currentClient.getUser_id(), streamid, room_id, currentClient.getUserip());
 			
 			log.debug("##### setRoomValues : " + currentClient.getUsername()+" "+currentClient.getStreamid()); // just a unique number
 
