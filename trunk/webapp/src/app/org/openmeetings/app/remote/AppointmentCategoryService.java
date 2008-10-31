@@ -7,37 +7,42 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openmeetings.app.data.basic.AuthLevelmanagement;
 import org.openmeetings.app.data.basic.Sessionmanagement;
+import org.openmeetings.app.data.calendar.management.AppointmentCategoryLogic;
 import org.openmeetings.app.data.calendar.management.AppointmentLogic;
 import org.openmeetings.app.data.user.Usermanagement;
 import org.openmeetings.app.hibernate.beans.calendar.Appointment;
+import org.openmeetings.app.hibernate.beans.calendar.AppointmentCategory;
 
-public class CalendarService {
+public class AppointmentCategoryService {
 	
-	private static final Log log = LogFactory.getLog(CalendarService.class);
+	private static final Log log = LogFactory.getLog(AppointmentCategoryService.class);
 	
-	private static CalendarService instance = null;
+	private static AppointmentCategoryService instance = null;
 
-	public static synchronized CalendarService getInstance() {
+	public static synchronized AppointmentCategoryService getInstance() {
 		if (instance == null) {
-			instance = new CalendarService();
+			instance = new AppointmentCategoryService();
 		}
 
 		return instance;
 	}
 
-	public List<Appointment> getAppointmentByRange(String SID, Date starttime, Date endtime) {
-		try {
+public List<AppointmentCategory> getAppointmentCategoryList(String SID, Long userId){
+		
+		try{
+			
 			Long users_id = Sessionmanagement.getInstance().checkSession(SID);
 	        Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
 	        if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
 					        	
-	        	return AppointmentLogic.getInstance().getAppointmentByRange(users_id ,starttime, endtime);
+	        	return AppointmentCategoryLogic.getInstance().getAppointmentCategoryList(userId);
 	        }
 		} catch (Exception err) {
-			log.error("[getAppointmentByRange]",err);
+			log.error("[getAppointmentCategory]",err);
 		}
 		return null;
-	}
+			
+		}
 	
 	public Appointment getNextAppointment(String SID){
 		
@@ -73,7 +78,7 @@ public class CalendarService {
 				
 			}
 	
-	public Long saveAppointment(String SID, String appointmentName,Long userId, String appointmentLocation,String appointmentDescription, 
+	public void saveAppointment(String SID, String appointmentName,Long userId, String appointmentLocation,String appointmentDescription, 
 			Date appointmentstart, Date appointmentend, 
 			Boolean isDaily, Boolean isWeekly, Boolean isMonthly, Boolean isYearly, Long categoryId){
 		
@@ -83,19 +88,18 @@ public class CalendarService {
 	        Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
 	        if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
 					        	
-	        return	 AppointmentLogic.getInstance().saveAppointment(appointmentName, userId, appointmentLocation, 
+	        	 AppointmentLogic.getInstance().saveAppointment(appointmentName, userId, appointmentLocation, 
 	        			appointmentDescription, appointmentstart, appointmentend, isDaily, isWeekly, isMonthly, 
 	        			isYearly, categoryId);
 	        }
 		} catch (Exception err) {
 			log.error("[saveAppointment]",err);
 		}
-		return null;
 		
 			
 		}
 	
-	public Long updateAppointment(String SID,Long appointmentId ,String appointmentName, Long userId, String appointmentLocation,String appointmentDescription, 
+	public void updateAppointment(String SID,Long appointmentId ,String appointmentName, Long userId, String appointmentLocation,String appointmentDescription, 
 			Date appointmentstart, Date appointmentend, 
 			Boolean isDaily, Boolean isWeekly, Boolean isMonthly, Boolean isYearly, Long categoryId){
 		
@@ -105,19 +109,18 @@ public class CalendarService {
 	        Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
 	        if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
 					        	
-	        	return AppointmentLogic.getInstance().updateAppointment(appointmentId, appointmentName, userId, 
+	        	 AppointmentLogic.getInstance().updateAppointment(appointmentId, appointmentName, userId, 
 	        			 appointmentDescription, appointmentstart, appointmentend, isDaily, isWeekly, isMonthly, 
 	        			 isYearly, categoryId);
 	        }
 		} catch (Exception err) {
 			log.error("[updateAppointment]",err);
 		}
-		return null;
 		
 			
 		}
 	
-	public Long deleteAppointment(String SID,Long appointmentId){
+	public void deleteAppointment(String SID,Long appointmentId){
 		
 		try{
 			
@@ -125,15 +128,14 @@ public class CalendarService {
 	        Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
 	        if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
 					        	
-	        	return AppointmentLogic.getInstance().deleteAppointment(appointmentId);
+	        	 AppointmentLogic.getInstance().deleteAppointment(appointmentId);
 	        }
 		} catch (Exception err) {
 			log.error("[deleteAppointment]",err);
 		}
-		return null;
 		
 			
 		}
-	
+		
 	
 	}

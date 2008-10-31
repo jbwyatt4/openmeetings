@@ -158,6 +158,21 @@ public class UserService {
     }
     
     /**
+     * gets a user-list by search criteria
+     * @param SID
+     * @param search
+     * @param start
+     * @param max
+     * @param orderby
+     * @return
+     */
+    public SearchResult getAllUserBySearchRange(String SID, String search, int start, int max, String orderby, boolean asc){
+        Long users_id = Sessionmanagement.getInstance().checkSession(SID);
+        Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
+        return Usermanagement.getInstance().getAllUserByRange(search, start, max, orderby, asc);
+    }
+    
+    /**
      * updates the user profile, every user can update his own profile
      * @param SID
      * @param argObject

@@ -11,102 +11,103 @@ import org.hibernate.Transaction;
 import org.openmeetings.app.data.basic.Configurationmanagement;
 import org.openmeetings.app.data.basic.Languagemanagement;
 import org.openmeetings.app.data.user.Addressmanagement;
+import org.openmeetings.app.data.user.Usermanagement;
 import org.openmeetings.app.hibernate.beans.adresses.Adresses;
 import org.openmeetings.app.hibernate.beans.calendar.Appointment;
 import org.openmeetings.app.hibernate.beans.calendar.AppointmentCategory;
-import org.openmeetings.app.hibernate.beans.calendar.GroupMember;
+import org.openmeetings.app.hibernate.beans.calendar.MeetingMember;
 import org.openmeetings.app.hibernate.utils.HibernateUtil;
 
-public class GroupMemberDaoImpl {
+public class MeetingMemberDaoImpl {
 	
 	private static final Log log = LogFactory.getLog(Configurationmanagement.class);
 
-	private GroupMemberDaoImpl() {
+	private MeetingMemberDaoImpl() {
 	}
 
-	private static GroupMemberDaoImpl instance = null;
+	private static MeetingMemberDaoImpl instance = null;
 
-	public static synchronized GroupMemberDaoImpl getInstance() {
+	public static synchronized MeetingMemberDaoImpl getInstance() {
 		if (instance == null) {
-			instance = new GroupMemberDaoImpl();
+			instance = new MeetingMemberDaoImpl();
 		}
 
 		return instance;
 	}
 	
-	public GroupMember getGroupMemberById(Long groupMemberId) {
+	public MeetingMember getMeetingMemberById(Long meetingMemberId) {
 		try {
-			log.debug("getAppointmentCategoryById: "+ groupMemberId);
+			log.debug("getAppointmentCategoryById: "+ meetingMemberId);
 			
-			String hql = "select app from GroupMember app " +
+			String hql = "select app from MeetingMember app " +
 					"WHERE app.deleted != :deleted " +
-					"AND app.groupMemberId = :groupMemberId";
+					"AND app.meetingMemberId = :meetingMemberId";
 			
 			Object idf = HibernateUtil.createSession();
 			Session session = HibernateUtil.getSession();
 			Transaction tx = session.beginTransaction();
 			Query query = session.createQuery(hql);
 			query.setString("deleted", "true");
-			query.setLong("groupMemberId",groupMemberId);
+			query.setLong("meetingMemberId",meetingMemberId);
 			
-			GroupMember groupMember = (GroupMember) query.uniqueResult();
+			MeetingMember meetingMember = (MeetingMember) query.uniqueResult();
 			tx.commit();
 			HibernateUtil.closeSession(idf);
 			
-			return groupMember;
+			return meetingMember;
 		} catch (HibernateException ex) {
-			log.error("[getGroupMemberById]: " + ex);
+			log.error("[getMeetingMemberById]: " + ex);
 		} catch (Exception ex2) {
-			log.error("[getGroupMemberById]: " + ex2);
+			log.error("[getMeetingMemberById]: " + ex2);
 		}
 		return null;
 	}
 	
-	public void updateGroupMember(GroupMember groupmember) {
-		if (groupmember.getGroupMemberId() > 0) {
+	public MeetingMember updateMeetingMember(MeetingMember meetingMember) {
+		if (meetingMember.getMeetingMemberId() > 0) {
 			try {
 				Object idf = HibernateUtil.createSession();
 				Session session = HibernateUtil.getSession();
 				Transaction tx = session.beginTransaction();
-				session.update(groupmember);
+				session.update(meetingMember);
 				tx.commit();
 				HibernateUtil.closeSession(idf);
+				return meetingMember;
 			} catch (HibernateException ex) {
-				log.error("[updateGroupMember] ",ex);
+				log.error("[updateMeetingMember] ",ex);
 			} catch (Exception ex2) {
-				log.error("[updateGroupMember] ",ex2);
+				log.error("[updateMeetingMember] ",ex2);
 			}
 		} else {
-			log.error("[updateUser] "+"Error: No GroupMemberId given");
+			log.error("[updateUser] "+"Error: No MeetingMemberId given");
 		}
+		return null;
 	}
 	
-	public void updateGroupMember(Long groupMemberId, String firstname, String lastname, 
-			Date age, String memberStatus,String appointmentStatus, String password, 
-			Long adresses_id, Long appointmentId) {
+	public Long updateMeetingMember(Long meetingMemberId, String firstname, String lastname, 
+			 String memberStatus, String appointmentStatus, 
+			 Long appointmentId, Long userid, String email) {
 		try {
 			
 			
-			GroupMember gm = this.getGroupMemberById(groupMemberId);
+			MeetingMember gm = this.getMeetingMemberById(meetingMemberId);
 			/*
 			if (gm == null) {
-				log.debug("ALERT Object with ID: "+ groupMemberId +" does not exist yet");
+				log.debug("ALERT Object with ID: "+ MeetingMemberId +" does not exist yet");
 				return null;
 			}*/
 									
 			gm.setFirstname(firstname);
 			gm.setLastname(lastname);
-			gm.setAge(age);
-			gm.setAddresses(Addressmanagement.getInstance().getAdressbyId(adresses_id));
+			
 			//gm.setLanguageId(Languagemanagement.getInstance().getFieldLanguageById(languageId));
 			gm.setMemberStatus(memberStatus);
 			gm.setAppointmentStatus(appointmentStatus);
-			gm.setAppointment(AppointmentDaoImpl.getInstance().getAppointmentById(appointmentId));
-			gm.setPassword(password);
-								
-			
+			gm.setAppointment(AppointmentDaoImpl.getInstance().getAppointmentById(appointmentId));	
 			gm.setDeleted("false");
 			gm.setUpdatetime(new Date());
+			gm.setUserid(Usermanagement.getInstance().getUser(userid));
+			gm.setEmail(email);
 			
 			Object idf = HibernateUtil.createSession();
 			Session session = HibernateUtil.getSession();
@@ -117,31 +118,28 @@ public class GroupMemberDaoImpl {
 			tx.commit();
 			HibernateUtil.closeSession(idf);
 			
-			
+			return meetingMemberId;
 		} catch (HibernateException ex) {
-			log.error("[updateGroupMember]: ",ex);
+			log.error("[updateMeetingMember]: ",ex);
 		} catch (Exception ex2) {
-			log.error("[updateGroupMember]: ",ex2);
+			log.error("[updateMeetingMember]: ",ex2);
 		}
-		
+		return null;
 	}
 	
-	public Long addGroupMember(String firstname, String lastname, 
-			Date age, String memberStatus,String appointmentStatus, String password, 
-			Long adresses_id, Long appointmentId) {
+	public Long addMeetingMember(String firstname, String lastname, String memberStatus,
+			String appointmentStatus, Long appointmentId, Long userid, String email) {
 		try {
 			
-			GroupMember gm = new GroupMember();
+			MeetingMember gm = new MeetingMember();
 			
 			gm.setFirstname(firstname);
 			gm.setLastname(lastname);
-			gm.setAge(age);
-			gm.setAddresses(Addressmanagement.getInstance().getAdressbyId(adresses_id));
-			//gm.setLanguageId(Languagemanagement.getInstance().getFieldLanguageById(languageId));
 			gm.setMemberStatus(memberStatus);
 			gm.setAppointmentStatus(appointmentStatus);
 			gm.setAppointment(AppointmentDaoImpl.getInstance().getAppointmentById(appointmentId));
-			gm.setPassword(password);
+			gm.setUserid(Usermanagement.getInstance().getUser(userid));
+			gm.setEmail(email);
 								
 			gm.setStarttime(new Date());
 			gm.setDeleted("false");
@@ -157,23 +155,23 @@ public class GroupMemberDaoImpl {
 			
 			return group_member_id;
 		} catch (HibernateException ex) {
-			log.error("[addGroupMember]: ",ex);
+			log.error("[addMeetingMember]: ",ex);
 		} catch (Exception ex2) {
-			log.error("[addGroupMember]: ",ex2);
+			log.error("[addMeetingMember]: ",ex2);
 		}
 		return null;
 	}
 	
-	public void deleteGroupMember(Long groupMemberId) {
+	public Long deleteMeetingMember(Long meetingMemberId) {
 		try {
 			
-			GroupMember gm = this.getGroupMemberById(groupMemberId);
+			MeetingMember gm = this.getMeetingMemberById(meetingMemberId);
 			
 			log.debug("ac: "+gm);
 			
 			if (gm == null) {
-				log.debug("Already deleted / Could not find: "+groupMemberId);
-				return;
+				log.debug("Already deleted / Could not find: "+meetingMemberId);
+				//return;
 			}
 			gm.setUpdatetime(new Date());
 			gm.setDeleted("true");
@@ -185,12 +183,13 @@ public class GroupMemberDaoImpl {
 						
 			tx.commit();
 			HibernateUtil.closeSession(idf);
-			
+			return meetingMemberId;
 		} catch (HibernateException ex) {
 			log.error("[deleteAppointementCategory]: " + ex);
 		} catch (Exception ex2) {
 			log.error("[deleteAppointementCategory]: " + ex2);
 		}
+		return null;
 	}
 
 }
