@@ -28,6 +28,11 @@
     <bean id="appointmentcategoryservice.service" 
 	    class="org.openmeetings.app.remote.AppointmentCategoryService" 
 		singleton="true" />
+		
+	<!-- Class for Methods which can be invoked by the client -->
+    <bean id="calendarservice.service" 
+	    class="org.openmeetings.app.remote.CalendarService" 
+		singleton="true" />
 
     <!-- DATABASE Connection via hibernate
     <bean id="theSessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
