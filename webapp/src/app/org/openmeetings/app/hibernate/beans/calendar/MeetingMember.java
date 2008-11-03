@@ -16,14 +16,13 @@ public class MeetingMember {
 	
 	private Long meetingMemberId;
 	private Users userid;
+	private Appointment appointment;
 	private String firstname;
 	private String lastname;
 	private String memberStatus; // internal, external.
 	private String appointmentStatus; //status of the appointment denial, acceptance, wait. 
-	
 	private String email;
-	private Appointment appointment;
-		
+			
 	private Date starttime;
 	private Date updatetime;
 	private String deleted;
