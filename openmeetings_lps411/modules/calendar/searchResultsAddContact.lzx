@@ -1,0 +1,21 @@
+<library>
+	
+<class name="contactSearchHead" extends="view" bgcolor="$once{ canvas.baseMacomBackground }" width="${parent.width}">
+		 <!--	<simplelayout axis="x" spacing="10"/> -->
+		 	<text fontsize="10"  x="15">ID</text>
+		 	<text fontsize="10" x="40">Vorname</text>
+		 	<text fontsize="10" x="100">Nachname</text>
+		 	<text fontsize="10" x="190">E-mail</text>
+</class>	
+
+<class name="searchResultsAddContact" extends="view" height="70"
+		   y="${parent.empfaenger.y+30}" x="2" >
+		<contactSearchHead name="_userSearchHead" />
+		<view name="_innerList" height="150" y="20" clip="true" >
+			<view name="_inner" layout="axis:y;spacing:2" clip="true" bgcolor="$once{ canvas.baseMacomBackground }" height="150"/>
+			<vscrollbar/>
+			<hscrollbar/>
+		</view>
+</class>
+	
+</library>

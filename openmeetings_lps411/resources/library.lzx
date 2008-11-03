@@ -7,6 +7,14 @@
 
 <resource name="edit_add" src="edit_add.png" />
 
+<!-- add for calendar -->
+<resource name="leftarrow_rsc" src="1leftarrow.png" />
+<resource name="rightarrow_rsc" src="1rightarrow.png" />
+
+<resource name="list_add_rsc" src="list-add.png" />
+<resource name="list_remove_rsc" src="list-remove.png" />
+<!-- add for calendar -->
+
 <resource name="filesave_rsc" src="filesave.png" />
 <resource name="button_cancel_rsc" src="button_cancel.png" />
 <resource name="edit_add_rsc" src="edit_add.png" />

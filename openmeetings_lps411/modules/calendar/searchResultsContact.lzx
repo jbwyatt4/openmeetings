@@ -14,7 +14,7 @@
 <class name="searchResultsContact" extends="view" height="70" x="2" >
 	<attribute name="refObj" value="null" />
 			
-			<userSearchHead name="_userSearchHead" x="10" width="${parent._innerList.width}">
+			<contactSearchHead name="_userSearchHead" x="10" width="${parent._innerList.width}">
 				<ordnerInhaltHead name="_ordnerInhaltHead" width="120" x="${parent.width - this.width}">
 				<handler name="oninit">
 					<![CDATA[
@@ -34,8 +34,8 @@
 						{
 					 this.nxpr.next.setAttribute('clickable', false);
 					}
-					if (this.nxpr.previos.clickable == false)  {this.nxpr.previos.setAttribute('opacity', 0.7)}
-					if (this.nxpr.next.clickable == false)  {this.nxpr.next.setAttribute('opacity', 0.7)}
+					if (this.nxpr.previos.clickable == false)  {this.nxpr.previos.setAttribute('opacity', 0.5)}
+					if (this.nxpr.next.clickable == false)  {this.nxpr.next.setAttribute('opacity', 0.5)}
 					]]>
 				</handler>	
 				
@@ -57,7 +57,7 @@
 				</method>
 			
 				
-		</userSearchHead>
+		</contactSearchHead>
 		<!--x="${(parent.width - this.width)/2}"-->
 		<view x="10" name="_innerList" height="200" width="${this._inner.width + 15}" y="20" clip="true" >
 			<view name="_inner" layout="axis:y;spacing:2"  bgcolor="$once{ canvas.baseMacomBackground }"/>

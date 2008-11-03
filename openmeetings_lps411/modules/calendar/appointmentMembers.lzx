@@ -3,6 +3,8 @@
 	<class name="appointmentMembers"  extends="windowpanel" 
 	 resizeable="false" closeable="true" width="524" x="$once{ parent.width/2-this.width/2 + 10 }" y="110" height="330" >
 	
+	<attribute name ="terminObjRef" value="null"/>
+	
 	<view name="_search" layout="axis:x;spacing:2" y="30" x="$once{ parent.width/2-this.width/2 - 20}">
 		<edittext name="_criteria" width="150" >
 			
