@@ -8,5 +8,9 @@
     <include href="liste.lzx"/>
     <include href="searchResultsContact.lzx"/>
     <include href="searchContact.lzx"/>
+    <include href="searchResultsAddContact.lzx" />
+    <include href="searchContactInCalendar.lzx" />
+    <include href="ordnerInhaltHead.lzx" />
+    <include href="alerts.lzx" />
       
 </library>

@@ -115,6 +115,25 @@ function parseDateToString(dateObj){
 	return d+'.'+m+'.'+y;
 }
 
+function parseTimeStringToDate(t){
+	// if($debug) Debug.write("FUNC/parseStringToTime",t);
+	if (t.length==5){
+		var d = 1;
+		var m = 1;
+		var y = 1970;
+		var std = Number(t.substring(0, 2));
+		var min = Number(t.substring(3, 5));
+		if (!isNaN(d) && !isNaN(m) && !isNaN(y)){
+			if ($debug) Debug.write("parseTimeStringToDate: ",new Date(y, m-1, d, std, min))
+			return new Date(y, m-1, d, std, min);
+		} else {
+			return new Date();
+		}
+	} else {
+		return new Date();
+	}
+}
+
 function parseDateToStringTime(dateObj){
 	// if($debug) Debug.write("FUNC/parseDateToStringTime",dateObj);
 	if (dateObj==null) return "";
@@ -138,6 +157,25 @@ function parseStringToDate(t){
 		var y = Number(t.substring(6, 10));
 		if (!isNaN(d) && !isNaN(m) && !isNaN(y)){
 			return new Date(y, m-1, d);
+		} else {
+			return new Date();
+		}
+	} else {
+		return new Date();
+	}
+}
+
+function parseStringToDateTime(t){
+	// if($debug) Debug.write("FUNC/parseStringToDate",t);
+	if (t.length==15){
+		var d = Number(t.substring(0, 2));
+		var m = Number(t.substring(3, 5));
+		var y = Number(t.substring(6, 10));
+		var h = Number(t.substring(10, 12));
+		var min = Number(t.substring(13, 15));
+		if (!isNaN(d) && !isNaN(m) && !isNaN(y)){
+			if ($debug) Debug.write("parseStringToDateTime+: ",new Date(y, m-1, d, h, min))
+			return new Date(y, m-1, d, h, min);
 		} else {
 			return new Date();
 		}

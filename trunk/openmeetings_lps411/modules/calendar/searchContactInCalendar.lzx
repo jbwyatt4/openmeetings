@@ -1,6 +1,6 @@
 <library>
 
-<class name="searchContact" extends="view" bgcolor="silver">
+<class name="searchContactInCalendar" extends="view" bgcolor="silver">
 		<simplelayout axis="x" spacing="5" />
 		<attribute name ="userId" value="0" type="number" /> 	
 		<attribute name ="vorname" value="" type="string" />
@@ -9,11 +9,11 @@
 		
 		<attribute name ="refObj" value="null"/>		
 			 		
-		<view resource="list_add_rsc">
+		<view resource="list_remove_rsc">
 			<handler name="onclick">
-				new lz.searchContactInCalendar(parent.refObj.terminObjRef._liste._innerlist,{userId:parent.userId, vorname:parent.vorname, nachname:parent.nachname, email:parent.email})
-				
-				parent.refObj.terminObjRef._liste.setAttribute("visible", true);
+				//new lz.searchContact(parent.refObj.terminObjRef._liste._innerlist,{userId:parent.userId, vorname:parent.vorname, nachname:parent.nachname, email:parent.email})
+				parent.destroy();
+				//parent.refObj.terminObjRef._liste.setAttribute("visible", true);
 				if ($debug) Debug.write("Visible: ",parent.refObj.terminObjRef._liste['visible']);
 				//parent.refObj.terminObjRef._liste;
 				//new selectKategoryStatus(canvas,{_contactId:parent.userId});
@@ -22,8 +22,8 @@
 		</view>	
 		<text  text="$once{parent.userId }" width="20"/>		
 		<text name="_item3"  text="$once{ parent.vorname}" width="60" />
-		<text name="_item4"  text="$once{ parent.nachname }" width="60" />
-		<text name="_item7"  text="$once{ parent.email}" width="200"/>  
+		<text name="_item4"  text="$once{parent.nachname }" width="60" />
+		<text name="_item7"  text="$once{ parent.email}" width="135"/>  
 					 	
  </class>
  

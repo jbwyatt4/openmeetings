@@ -5,15 +5,17 @@
 				
 		<handler name="onclick">
 			
-			this.terminObjRef.defaulttermindetails();
+			this.terminObjRef.defaulttermindetails({terminObjRef:this});
 			this.terminObjRef._termin._date._bzeit.setAttribute('text',this.getAttribute('text'));
 			this.terminObjRef._terminButton.onclick.sendEvent();
+		
 		</handler>
 	
 	</class>
 	
 	
 	<class name="calendar" height="300"> 
+	<attribute name ="terminObjRef" value="null"/>
 		<simplelayout axis="x" spacing="2"/>
 		
 		<handler name="oninit">		
@@ -21,6 +23,7 @@
 			this.getAppointmentCategoryList.doCall();
 			this._termindetails._date.bringToFront();
 			this._termindetails._erinnerungedit.selectItemAt(0);
+			this._termindetails._repetitionselect.selectItemAt(0);
 		</handler>
 		
 		<method name="setCalendarItem" args="stunden">
@@ -66,7 +69,12 @@
 		
 		<view name="_termindetails" bgcolor="blue" width="400">
 			<attribute name="_kategoryatr" value="0" type="number" />
-			<attribute name="_erinnerung" value="0" type="number" />  
+			<attribute name="_erinnerung" value="0" type="number" />
+			
+			<attribute name="_isDaily" value="false" type="boolean" />
+			<attribute name="_isWeekly" value="false" type="boolean" />  
+			<attribute name="_isMonthly" value="false" type="boolean" />
+			<attribute name="_isYearly" value="false" type="boolean" />    
 				
 			<text name="_kategory" y="10" x="35">Kategorie: </text>
 		 	<combobox name="_kategoryedit" x="${parent._kategory.width + parent._kategory.x + 30}" 
@@ -103,6 +111,27 @@
 		 	<!--textitmes-->
 		 	</combobox> 
 		 	
+		 	<text name="_repetition" y="${parent._kategory.height + parent._kategory.y + 40}" 
+		 			   x="35" text="Wiederholung:" width="120" />
+		 		
+		 	<combobox name="_repetitionselect" x="${parent._kategory.width + parent._kategory.x +30}" 
+		 			  width="220" editable="false" shownitems="5" y="${parent._repetition.y}">
+				<handler name="onvalue" args="v">						
+					parent._erinnerung = Number(this.getValue());												
+					if ($debug) Debug.write("_erinnerung: ",parent._erinnerung);
+				</handler>	
+				<textlistitem text="keine" value="0"/>
+				<textlistitem text="Täglich" value="1"/>
+             	<textlistitem text="Wochentlich" value="2"/>
+              	<textlistitem text="Monatlich" value="3"/> 
+              	<textlistitem text="Jährlich" value="4"/>            
+		 	<!--textitmes-->
+		 	</combobox> 
+		 	
+		 	<text name="_location" y="${parent._kategory.height + parent._kategory.y + 70}" x="35">Ort:</text>
+	    	<edittext name="_locationedit" x="${parent._kategory.width + parent._kategory.x + 30}" 
+	    		  y="${parent._location.y}" width="${parent._date.width}"></edittext>
+		 	
 		<!-- 	<view name="_checkb" y="${parent._kategory.height + parent._kategory.y + 10}" 
 		    	  x="${parent._kategoryedit.x}">
 			 	
@@ -119,7 +148,7 @@
 		    </view> -->
 		 	
 		 	
-		 	<view name="_date"  bgcolor="white" y="${parent._kategory.y + parent._kategory.height + 40}" 
+		 	<view name="_date"  bgcolor="white" y="${parent._kategory.y + parent._kategory.height + 100}" 
 		    	  width="${this.ezeit.x + this.ezeit.width + 5}" height="${this.ezeit.y + this.ezeit.height + 5}"
 		    	   x="${parent._kategoryedit.x}">	            	
 		    		<text x="${parent._beginn.width + parent._beginn.x + 5}">Datum:</text>
@@ -151,14 +180,22 @@
 			<view y="${parent._komentar.y + parent._komentar.height + 30}" x="35">
 				<simplelayout axis="x" spacing="2"/>
 				<handler name="onclick">
-					new lz.appointmentMembers();
+					new lz.appointmentMembers(parent.parent, {terminObjRef:parent});
 				</handler>
 				
 				<view resource="edit_add"></view>
 				<text>Teilnehmer einladen</text>
 			</view>
 			
-			<view name="_buttons"  width="$once{parent.width}" y="380">
+			<view name="_liste" y="${parent._komentar.y + parent._komentar.height + 60}" x="35" 
+				  clip="true" height="50" visible="false">
+				<view name="_innerlist" layout="axis:y;spacing:2">
+					
+				</view>
+				<vscrollbar/>
+			</view>
+			 
+			<view name="_buttons"  width="$once{parent.width}" y="${parent._liste.y + parent._liste.height +10}">
 				<simplelayout axis="x" spacing="0"/>		
 			    <button   width="$once{parent.width / 3}" enabled="true">
 			    	Löschen
@@ -188,15 +225,15 @@
 			    	  		
 			        	{
 			    			if ($debug) Debug.write("Error: ", "Ende liegt vor Beginn!");
-							new myalert(parent.parent,{text:"Terminende liegt vor Terminanfang!"})
+							new lz.myalert(parent.parent,{text:"Terminende liegt vor Terminanfang!"})
 			        	}
-			        	else if(!parent.parent._betreffedit.getAttribute('text')){
-			        		new myalert(parent.parent,{text:"Geben Sie bitte ein Betreff ein!"});
+			        	else if(!parent.parent._titeledit.getAttribute('text')){
+			        		new lz.myalert(parent.parent,{text:"Geben Sie bitte ein Betreff ein!"});
 			        	}
 			        	else{
 				        	if(parent.parent.parent.terminObjRef == null)
 				       		 	{
-			    				parent.parent.parent.addUserTermin.doCall();
+			    				parent.parent.parent.saveAppointment.doCall();
 				    			parent.parent.parent.defaulttermindetails();
 				    			}
 				    		else{
@@ -212,6 +249,23 @@
 		
 		
 		</view>
+		
+		<method name="defaulttermindetails">
+		this._termindetails._kategoryedit.selectItemAt(0); 
+		this._termindetails._erinnerungedit.selectItemAt(0); 
+		this._termindetails._locationedit.setAttribute('text', "");
+		//this._termindetails._guestedit.setAttribute('text',"");
+		this._termindetails._titeledit.setAttribute('text', "Neuer Termin");
+		this._termindetails._komentar.setAttribute('text', "");
+		this._termindetails._date._bdatum.setAttribute('text', parseDateToString(new Date()));
+		this._termindetails._date._bzeit.setAttribute('text', "08:00");
+		this._termindetails._date.edatum.setAttribute('text', parseDateToString(new Date()));
+		this._termindetails._date.ezeit.setAttribute('text', "17:00");
+		//this._termindetails._checkb._erinnerung.setAttribute('value', false);
+		//this._termindetails._checkb._ganztags.setAttribute('value', false);
+		//this._termindetails._checkb._online.setAttribute('value', false);
+		//save to update switch
+		</method> 
 		
 		<netRemoteCallHib name="getAppointmentCategoryList" funcname="appointmentcategoryservice.getAppointmentCategoryList" 
 							  remotecontext="$once{ canvas.thishib }" >
@@ -250,6 +304,88 @@
 		    		]]>
 		    	</handler>
 		    </netRemoteCallHib>	
+		    
+		 <!--  saveAppointment(String SID, String appointmentName,Long userId, String appointmentLocation,String appointmentDescription, 
+			Date appointmentstart, Date appointmentend, 
+			Boolean isDaily, Boolean isWeekly, Boolean isMonthly, Boolean isYearly, Long categoryId -->
+		   
+		    <netRemoteCallHib name="saveAppointment" funcname="calendarservice.saveAppointment" 
+							  remotecontext="$once{ canvas.thishib }" >     
+				<netparam><method name="getValue">return canvas.sessionId; </method></netparam>
+				<netparam><method name="getValue">return parent.parent._termindetails._titeledit['text'];</method></netparam>	
+				<netparam><method name="getValue">return canvas.thishib.UserID;</method></netparam>
+				<netparam><method name="getValue">return parent.parent._termindetails._locationedit['text'];</method></netparam>
+				<netparam><method name="getValue">return parent.parent._termindetails._komentar['text'];</method></netparam>
+				<netparam><method name="getValue">return parseStringToDateTime(parent.parent._termindetails._date._bdatum.getText() + parent.parent._termindetails._date._bzeit.getText());</method></netparam>
+				<netparam><method name="getValue">return parseStringToDateTime(parent.parent._termindetails._date.edatum.getText() + parent.parent._termindetails._date.ezeit.getText());</method></netparam>
+				<netparam><method name="getValue">return parent.parent._termindetails._isDaily;</method></netparam>
+				<netparam><method name="getValue">return parent.parent._termindetails._isMonthly;</method></netparam>
+				<netparam><method name="getValue">return parent.parent._termindetails._isWeekly;</method></netparam>
+				<netparam><method name="getValue">return parent.parent._termindetails._isYearly;</method></netparam>
+				<netparam><method name="getValue">return parent.parent._termindetails._kategoryatr;</method></netparam>
+				
+		    	<handler name="ondata" args="value">
+		    		<![CDATA[
+		    		parent._tagesansicht._list._outlist.clearContent();
+		    		parent.getUserAlleTermineByRange.doCall();
+		    		//parent.parent.parent._mitteilung.sendUserMessages.doCall();
+			    		if ($debug) Debug.write("addUserTermine: ",value);
+			    		//parent.parent.parent._mitteilung._terminid = value;
+			    		 //parent.parent.parent._mitteilung.addUserMessage.doCall();
+			     		//new lz.gespeichert(parent.parent,{
+			     			//});
+			    		
+		    		 ]]>
+		    	</handler>
+		    </netRemoteCallHib> 
+		    
+		    <netRemoteCallHib name="updateUserTermin" funcname="macomusertermineservice.updateUserTermine" 
+							  remotecontext="$once{ canvas.thishib }" >     
+				<netparam><method name="getValue">return canvas.sessionId; </method></netparam>
+				<netparam><method name="getValue">return parent.parent.terminObjRef.id;</method></netparam>
+				<netparam><method name="getValue">return parent.parent.terminObjRef.guest.id;</method></netparam>
+				<netparam><method name="getValue">return canvas.thishib.macomUserID;</method></netparam>
+				<netparam><method name="getValue">return parent.parent._termin._kategoryatr;</method></netparam>
+				<netparam><method name="getValue">return parseStringToDate(parent.parent._termin._date._bdatum.getText());</method></netparam>
+				<netparam><method name="getValue">return parseTimeStringToDate(parent.parent._termin._date._bzeit.getText()); </method></netparam>
+				<netparam><method name="getValue">return parseStringToDate(parent.parent._termin._date.edatum.getText());</method></netparam>
+				<netparam><method name="getValue">return parseTimeStringToDate(parent.parent._termin._date.ezeit.getText());</method></netparam>
+				<netparam><method name="getValue">return parent.parent._termin._betreffedit.getAttribute('text');</method></netparam>
+				<netparam><method name="getValue">return parent.parent._termin._anmerkedit.getAttribute('text');</method></netparam>
+				<netparam><method name="getValue">return parent.parent._termin._checkb._erinnerung.value;</method></netparam>
+				<netparam><method name="getValue">return parent.parent._termin._checkb._online.value;</method></netparam>
+				<netparam><method name="getValue">return parent.parent._termin._checkb._ganztags.value;</method></netparam>
+				<netparam><method name="getValue">return parent.parent._termin._ortedit.getAttribute('text');</method></netparam>
+				<netparam><method name="getValue">return 0;</method></netparam>
+		    	<handler name="ondata" args="value">
+		    		<![CDATA[
+		    			parent._tagesansicht._list._outlist.clearContent();
+		    			parent.getUserAlleTermineByRange.doCall();
+		    		//parent.parent.parent._mitteilung.sendUserMessages.doCall();
+			    		if ($debug) Debug.write("updateUserTermin: ",value);
+			    		//parent.parent.parent._mitteilung._terminid = value;
+			    		 //parent.parent.parent._mitteilung.addUserMessage.doCall();
+			     		//new lz.gespeichert(parent.parent,{
+			     			//});
+			    		
+		    		 ]]>
+		    	</handler>
+		    </netRemoteCallHib> 
+		    
+		    <netRemoteCallHib name="delTermin" funcname="macomusertermineservice.delTermin" 
+							  remotecontext="$once{ canvas.thishib }" >     
+				<netparam><method name="getValue">return canvas.sessionId; </method></netparam>
+				<netparam><method name="getValue">return parent.parent.terminObjRef.id;</method></netparam>
+		    	<handler name="ondata" args="value">
+		    		<![CDATA[
+		    			parent._tagesansicht._list._outlist.clearContent();
+		    			parent.getUserAlleTermineByRange.doCall();
+			    		if ($debug) Debug.write("deleteUserTermin: ",value);
+			    		if ($debug) Debug.write("Termin_id: ",parent.terminObjRef.id);
+			    		//parent.updateUserMessagesTerminIdToNull.doCall();
+		    		 ]]>
+		    	</handler>
+		    </netRemoteCallHib>
 	
 	
 	</class>
