@@ -289,7 +289,7 @@ public class Usermanagement {
 	 * @return
 	 */
 	public Users getUser(Long user_id) {
-		if (user_id > 0) {
+		if (user_id != null && user_id > 0) {
 			try {
 				Object idf = HibernateUtil.createSession();
 				Session session = HibernateUtil.getSession();

@@ -2,6 +2,7 @@ package org.openmeetings.calendar;
 
 
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
@@ -41,11 +42,25 @@ public class CopyOfTestDatabaseStructureAppointment extends TestCase {
 	
 
 	public void testAddingGroup(){
+		
 
 		try {
-		Appointment listAppoints = AppointmentLogic.getInstance().getNextAppointment();
-		if(listAppoints != null)
-		log.debug("Termin: "+listAppoints.getAppointmentName()+" startDate: "+listAppoints.getAppointmentStarttime()+ " endDate: "+listAppoints.getAppointmentEndtime());
+			SimpleDateFormat format = new SimpleDateFormat( "yyyy-MM-dd" );
+			Date date = format.parse( "2008-11-03" );
+			Date date2 = format.parse( "2008-11-05" );
+			
+			List<Appointment> listAppoints =  AppointmentDaoImpl.getInstance().getAppointmentsByRange(1l, date, date2); //AppointmentLogic.getInstance().getAppointmentByRange(1L, new Date(), new Date());
+			log.debug("Size:"+listAppoints.size());
+			if(listAppoints != null)
+			for (Appointment appoints : listAppoints) {
+				log.debug("Termin: "+appoints.getAppointmentName()+" startDate: "+appoints.getAppointmentStarttime()+ " endDate: "+appoints.getAppointmentEndtime());
+			}
+		
+		for (Iterator<Appointment> iter = listAppoints.iterator();iter.hasNext();) {
+			log.debug(iter.next());
+		}
+			
+			//log.debug("Termin: "+listAppoints.getAppointmentName()+" startDate: "+listAppoints.getAppointmentStarttime()+ " endDate: "+listAppoints.getAppointmentEndtime());
 			//AppointmentDaoImpl.getInstance().getNextAppointmentById(1L);
 			//AppointmentDaoImpl.getInstance().addAppointment("testap2", "Pforzheim", "zweiter",Calendar.getInstance().getTime() , 
 					//Calendar.getInstance().getTime(), null, true, null, null, 3L);
