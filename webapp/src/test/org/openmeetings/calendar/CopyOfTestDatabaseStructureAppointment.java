@@ -46,10 +46,15 @@ public class CopyOfTestDatabaseStructureAppointment extends TestCase {
 
 		try {
 			SimpleDateFormat format = new SimpleDateFormat( "yyyy-MM-dd" );
-			Date date = format.parse( "2008-11-03" );
-			Date date2 = format.parse( "2008-11-05" );
+			Date date = format.parse( "2008-11-05" );
+			Date date2 = format.parse( "2008-11-06" );
+			
+			
 			
 			List<Appointment> listAppoints =  AppointmentDaoImpl.getInstance().getAppointmentsByRange(1l, date, date2); //AppointmentLogic.getInstance().getAppointmentByRange(1L, new Date(), new Date());
+			
+			log.debug("date:"+date);
+			log.debug("date2:"+date2);
 			log.debug("Size:"+listAppoints.size());
 			if(listAppoints != null)
 			for (Appointment appoints : listAppoints) {

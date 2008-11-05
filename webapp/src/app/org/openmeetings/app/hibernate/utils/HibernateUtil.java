@@ -22,7 +22,7 @@ public class HibernateUtil {
 	  private static final Owner fakeOwner = new Owner(false); 
 	  
 	  /** set this to false to test with JUnit **/
-	  private static final boolean isLife = false;
+	  private static final boolean isLife = true;
 	  /**
 	   * get the hibernate session and set it on the thread local. Returns trueOwner if 
 	   * it actually opens a session
