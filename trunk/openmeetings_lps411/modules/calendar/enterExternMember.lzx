@@ -1,0 +1,49 @@
+<library>
+	
+	<class name="enterExternMember" extends="windowpanel" closeable="true">
+		
+		<attribute name ="refObj" value="null"/>	
+		
+		<view name="_mainView" x="10" y="10" layout="axis:y;spacing:2">
+			
+			<text>
+			Vorname			
+			</text>
+			<edittext name="vorname" width="${parent._buttons.width}"></edittext>
+			
+			<text>
+			Nachname
+			</text>
+			<edittext name="nachname" width="${parent._buttons.width}"></edittext>
+			
+			<text>
+			E-mail
+			</text>
+			<edittext width="${parent._buttons.width}" name="email"></edittext>
+			
+			<view name="_buttons" layout="axis:x;spacing:2">
+				<button text="OK" width="${parent._cancel.width}">
+					<handler name="onclick">
+						new lz.searchContactInCalendar(parent.parent.parent.refObj.terminObjRef._liste._innerlist,{userId:null, 
+						vorname:parent.parent.vorname["text"], nachname:parent.parent.nachname["text"], email:parent.parent.email["text"]});
+						//if ($debug) Debug.write("_innerlist: ", parent.parent.parent.refObj.terminObjRef._liste._innerlist);
+						parent.parent.parent.refObj.terminObjRef._liste.setAttribute("visible", true);
+			
+						//if ($debug) Debug.write("userId  search: ",parent.parent.parent.userId);
+					</handler>
+				</button>
+				
+				<button name="_cancel" text="Abbrechen" >
+					<handler name="onclick">
+						parent.parent.parent.close();
+					</handler>
+				</button>
+			</view>
+			
+			
+		</view>
+			
+		
+	</class>
+	
+</library>

@@ -1,0 +1,42 @@
+<library>
+	
+	<class name="terminarea" extends="view">
+	<attribute name ="terminObj" value="null"/>
+	<attribute name="countX" value="0" type="number" />	
+	<handler name="onclick">
+		if ($debug) Debug.write("this termin: ",this.terminObj);
+		parent.parent.parent.parent.terminObjRef = this.terminObj;
+		if ($debug) Debug.write("terminObjRef: ",parent.parent.parent.parent.terminObjRef);
+		parent.parent.parent.parent.showtermindetails();
+		parent.parent.parent.parent._terminButton.onclick.sendEvent();
+	</handler>
+	<handler name="oninit">
+		<![CDATA[
+		this.setAttribute('height',  this.terminObj.endTime.getHours()*22 + 1/3 * this.terminObj.endTime.getMinutes() - 
+			    (this.terminObj.startTime.getHours()*22 + 1/3 * this.terminObj.startTime.getMinutes()));	  
+		this.setAttribute("width", 100); 
+		this.setAttribute("bgcolor", green); 
+		this.setAttribute("x",this.countX);
+		this.setAttribute("y",this.terminObj.startTime.getHours()*22 + 1/3 * this.terminObj.startTime.getMinutes());
+		
+		if (this.terminObj.startDate < parent.parent.parent.parent._startDate && 
+			this.terminObj.endDate > parent.parent.parent.parent._startDate){
+			this.setAttribute('y', 0);
+			this.setAttribute('height', 22*24-2);
+			if ($debug) Debug.write("1. if startDate",this.terminObj.startDate, "_startDate", parent.parent.parent.parent._startDate);
+		}
+		else if(this.terminObj.endDate > parent.parent.parent.parent._startDate){
+			this.setAttribute('height', 22*24-2-this.terminObj.startTime.getHours() * 22);
+			if ($debug) Debug.write("2. if",this.terminObj.startDate, "_startDate", parent.parent.parent.parent._startDate);
+		}
+		else if(this.terminObj.startDate < parent.parent.parent.parent._startDate){
+			this.setAttribute('y', 0);
+			this.setAttribute('height', this.terminObj.endTime.getHours() * 22);
+			if ($debug) Debug.write("3. if",this.terminObj.startDate, "_startDate", parent.parent.parent.parent._startDate);
+		}
+		]]>
+	</handler>
+</class>
+ 
+	
+</library>

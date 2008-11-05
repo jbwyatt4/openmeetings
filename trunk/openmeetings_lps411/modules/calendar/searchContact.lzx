@@ -12,8 +12,9 @@
 		<view resource="list_add_rsc">
 			<handler name="onclick">
 				new lz.searchContactInCalendar(parent.refObj.terminObjRef._liste._innerlist,{userId:parent.userId, vorname:parent.vorname, nachname:parent.nachname, email:parent.email})
-				
+				if ($debug) Debug.write("_innerlist: ", parent.refObj.terminObjRef._liste._innerlist);
 				parent.refObj.terminObjRef._liste.setAttribute("visible", true);
+				parent.refObj.terminObjRef._liste.setAttribute('height', 50);
 				if ($debug) Debug.write("Visible: ",parent.refObj.terminObjRef._liste['visible']);
 				//parent.refObj.terminObjRef._liste;
 				//new selectKategoryStatus(canvas,{_contactId:parent.userId});

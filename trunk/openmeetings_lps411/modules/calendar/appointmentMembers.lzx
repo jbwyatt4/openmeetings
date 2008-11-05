@@ -10,10 +10,19 @@
 			
 		</edittext>
 		
-		<button text="suchen">
+		<button text="suchen intern">
 			<handler name="onclick">			
 			//parent.parent.getUserContactsBySearchByList.doCall();
 			parent.parent.getAllUserBySearchRange.doCall();
+			
+			</handler>
+		</button>
+		
+		<button text="Externe Teilnehmer engeben">
+			<handler name="onclick">			
+			//parent.parent.getUserContactsBySearchByList.doCall();
+			//parent.parent.getAllUserBySearchRange.doCall();
+			new lz.enterExternMember(parent.parent, {refObj:parent.parent});
 			</handler>
 		</button>
 	</view>
