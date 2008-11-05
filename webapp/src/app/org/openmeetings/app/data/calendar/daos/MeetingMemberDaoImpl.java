@@ -20,7 +20,7 @@ import org.openmeetings.app.hibernate.utils.HibernateUtil;
 
 public class MeetingMemberDaoImpl {
 	
-	private static final Log log = LogFactory.getLog(Configurationmanagement.class);
+	private static final Log log = LogFactory.getLog(MeetingMemberDaoImpl.class);
 
 	private MeetingMemberDaoImpl() {
 	}
