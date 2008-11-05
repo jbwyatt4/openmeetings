@@ -14,16 +14,24 @@
 	</class>
 	
 	
-	<class name="calendar" height="300"> 
-	<attribute name ="terminObjRef" value="null"/>
+	<class name="calendar" extends="view" > 
+		<attribute name ="terminObjRef" value="null"/>
+		<attribute name ="_startDate" value="null"/>	
+		
 		<simplelayout axis="x" spacing="2"/>
 		
-		<handler name="oninit">		
+		<handler name="oninit">	
+			var now = new Date();
+			//Objektname = new Date(Jahr, Monat, Tag, Stunden, Minuten, Sekunden);
+
+			this._startDate = new Date(now.getFullYear(),now.getMonth(),now.getDate(),0,0,0);
+			
 			this.setCalendarItem(24);
 			this.getAppointmentCategoryList.doCall();
 			this._termindetails._date.bringToFront();
 			this._termindetails._erinnerungedit.selectItemAt(0);
 			this._termindetails._repetitionselect.selectItemAt(0);
+			this.getAppointmentByRange.doCall();
 		</handler>
 		
 		<method name="setCalendarItem" args="stunden">
@@ -37,6 +45,8 @@
 			}
 			]]>
 		</method>
+		
+		
 		
 		<view name="_tagesansicht"  bgcolor="silver" clip="true" height="${ parent.height }" width="460">
  			
@@ -131,24 +141,8 @@
 		 	<text name="_location" y="${parent._kategory.height + parent._kategory.y + 70}" x="35">Ort:</text>
 	    	<edittext name="_locationedit" x="${parent._kategory.width + parent._kategory.x + 30}" 
 	    		  y="${parent._location.y}" width="${parent._date.width}"></edittext>
-		 	
-		<!-- 	<view name="_checkb" y="${parent._kategory.height + parent._kategory.y + 10}" 
-		    	  x="${parent._kategoryedit.x}">
-			 	
-			 	<simplelayout axis="x" spacing="2"/>
-			     <checkbox name="_erinnerung"  text="Erinnerung" value="false">
-			     	 <handler name="onvalue" args="v">
-					if (this.value == true){
-						
-						if ($debug) Debug.write("Erinnerung: ", this.value);
-					}				
-					</handler>	
-			     </checkbox>
-			   			     
-		    </view> -->
-		 	
-		 	
-		 	<view name="_date"  bgcolor="white" y="${parent._kategory.y + parent._kategory.height + 100}" 
+		 		 	
+		 	<view name="_date"  bgcolor="white" y="${parent._kategory.y + parent._kategory.height + 110}" 
 		    	  width="${this.ezeit.x + this.ezeit.width + 5}" height="${this.ezeit.y + this.ezeit.height + 5}"
 		    	   x="${parent._kategoryedit.x}">	            	
 		    		<text x="${parent._beginn.width + parent._beginn.x + 5}">Datum:</text>
@@ -171,16 +165,48 @@
 	    	<edittext name="_titeledit" x="${parent._kategory.width + parent._kategory.x + 30}" 
 	    		  y="${parent._titel.y}" width="${parent.width - this.x - 10}">Neuer Termin</edittext>
 	    		  
-	    	<text y="${parent._titel.height + parent._titel.y + 20}" x="35">Komentar:</text>
-		 	<scrolledittext name="_komentar" y="${parent._titel.height + parent._titel.y + 20}" 
-		    		  x="${parent._kategory.width + parent._kategory.x + 30}"  width="${parent._titeledit.width}" height="100">
-				<!--<scrollbar/>-->
+	    	<view y="${parent._titel.height + parent._titel.y + 20}" x="35">	
+	    		<simplelayout axis="x" spacing="2"/>
+	    		
+		    	<view resource="list_add_remuve_rsc" >
+		    		<attribute name="currentSelection" value="false" type="boolean"/>	
+		    		<handler name="onclick">
+		    
+						//parent.parent._komentar["viseble", true];
+												
+						//this.setAttribute("frame", 2)
+						if(this.currentSelection == true)
+							{
+							this.setAttribute("frame", 1);
+							parent.parent._komentar.setAttribute('visible', false); //["visible", false];
+							parent.parent._komentar.setAttribute('height', 0);
+							this.currentSelection = false;
+							if ($debug) Debug.write("currentSelection true: ", this.currentSelection);
+							}
+						else
+							{
+							this.setAttribute("frame", 2)
+							parent.parent._komentar.setAttribute('visible', true);//["visible", true];
+							parent.parent._komentar.setAttribute('height', 100);
+							this.currentSelection = true;
+							if ($debug) Debug.write("currentSelection false: ", this.currentSelection);
+							}
+		    		</handler> 
+		    	</view>
+		    	<text >Komentar:</text>
+	    	</view>	
+	    	
+		 	<!--scrolledittext-->
+		 	<scrolledittext name="_komentar" y="${parent._titel.height + parent._titel.y + 20}" visible="false" multiline="true"
+		    		  x="${parent._kategory.width + parent._kategory.x + 30}"  width="${parent._titeledit.width}" height="0">
+				<!--<vscrollbar/>-->
 			</scrolledittext>	
 			
 			<view y="${parent._komentar.y + parent._komentar.height + 30}" x="35">
 				<simplelayout axis="x" spacing="2"/>
 				<handler name="onclick">
 					new lz.appointmentMembers(parent.parent, {terminObjRef:parent});
+					//parent._liste.setAttribute('height', 50);
 				</handler>
 				
 				<view resource="edit_add"></view>
@@ -188,11 +214,15 @@
 			</view>
 			
 			<view name="_liste" y="${parent._komentar.y + parent._komentar.height + 60}" x="35" 
-				  clip="true" height="50" visible="false">
+				  clip="true"  visible="false">
 				<view name="_innerlist" layout="axis:y;spacing:2">
-					
+					<method name="clearContent">
+					for (var eg in this.subviews) {
+						this.subviews[eg].destroy();
+					}
+					</method>	
 				</view>
-				<vscrollbar/>
+				<vscrollbar name="_vscrol"/>
 			</view>
 			 
 			<view name="_buttons"  width="$once{parent.width}" y="${parent._liste.y + parent._liste.height +10}">
@@ -234,11 +264,11 @@
 				        	if(parent.parent.parent.terminObjRef == null)
 				       		 	{
 			    				parent.parent.parent.saveAppointment.doCall();
-				    			parent.parent.parent.defaulttermindetails();
+				    			//parent.parent.parent.defaulttermindetails();
 				    			}
 				    		else{
 					        	parent.parent.parent.updateUserTermin.doCall();
-					    		parent.parent.parent.defaulttermindetails();
+					    		//parent.parent.parent.defaulttermindetails();
 			        			}
 			        	}
 			        	]]>
@@ -250,10 +280,23 @@
 		
 		</view>
 		
+		<dateSelector name="_calendar"   y="10">
+ 			<handler name="ondoubleselect">
+	 			//if ($debug) Debug.write("##### dateselect ", this.selecteddate);
+	 			parent._startDate = this.selecteddate
+	 			//if ($debug) Debug.write("startDateValue",parent._startDate);
+	 			parent._tagesansicht._list._outlist.clearContent();
+	 			//parent._tagesansicht._list._innerlist.clearContent();
+	 			//parent._termin.setCalendarItem(24);
+	 			parent.getUserAlleTermineByRange.doCall();
+ 			</handler> 
+ 		</dateSelector> 
+		
 		<method name="defaulttermindetails">
 		this._termindetails._kategoryedit.selectItemAt(0); 
 		this._termindetails._erinnerungedit.selectItemAt(0); 
 		this._termindetails._locationedit.setAttribute('text', "");
+		this._termindetails._repetitionselect.selectItemAt(0);
 		//this._termindetails._guestedit.setAttribute('text',"");
 		this._termindetails._titeledit.setAttribute('text', "Neuer Termin");
 		this._termindetails._komentar.setAttribute('text', "");
@@ -261,10 +304,11 @@
 		this._termindetails._date._bzeit.setAttribute('text', "08:00");
 		this._termindetails._date.edatum.setAttribute('text', parseDateToString(new Date()));
 		this._termindetails._date.ezeit.setAttribute('text', "17:00");
-		//this._termindetails._checkb._erinnerung.setAttribute('value', false);
-		//this._termindetails._checkb._ganztags.setAttribute('value', false);
-		//this._termindetails._checkb._online.setAttribute('value', false);
-		//save to update switch
+		
+		this._termindetails._liste._innerlist.clearContent();
+		this._termindetails._liste["visible", false];
+		this._termindetails._liste._vscrol["visible", false];
+		this._termindetails._liste.setAttribute('height', 0);
 		</method> 
 		
 		<netRemoteCallHib name="getAppointmentCategoryList" funcname="appointmentcategoryservice.getAppointmentCategoryList" 
@@ -326,7 +370,8 @@
 				
 		    	<handler name="ondata" args="value">
 		    		<![CDATA[
-		    		parent._tagesansicht._list._outlist.clearContent();
+		    		parent.addMeetingMember.appointmentId = value;
+		    		//parent._tagesansicht._list._outlist.clearContent();
 		    		parent.getUserAlleTermineByRange.doCall();
 		    		//parent.parent.parent._mitteilung.sendUserMessages.doCall();
 			    		if ($debug) Debug.write("addUserTermine: ",value);
@@ -334,6 +379,59 @@
 			    		 //parent.parent.parent._mitteilung.addUserMessage.doCall();
 			     		//new lz.gespeichert(parent.parent,{
 			     			//});
+			     			//if(parent._termindetails._liste._innerlist.subviews.length != 0)
+			     			//for (var eg in parent._termindetails._liste._innerlist.subviews) {
+								 //var contact = parent._termindetails._liste._innerlist.subviews[eg];
+								// if ($debug) Debug.write("contact: ",contact);
+								 // if ($debug) Debug.write("userId: ",contact.userId);
+								 // if ($debug) Debug.write("vorname: ",contact.vorname);
+							//	}
+								
+								for (var i=0; i<parent._termindetails._liste._innerlist.subviews.length; i++) {
+								 var contact = parent._termindetails._liste._innerlist.subviews[i];
+								 if ($debug) Debug.write("contact: ",contact);
+								  if ($debug) Debug.write("userId: ",contact.userId);
+								  if ($debug) Debug.write("vorname: ",contact.vorname);
+								  if ($debug) Debug.write("nachname: ",contact.nachname);
+								  if ($debug) Debug.write("email: ",contact.email);
+								parent.addMeetingMember.contact = contact;
+								parent.addMeetingMember.doCall();
+								}
+			     			
+			    		parent.defaulttermindetails();
+		    		 ]]>
+		    	</handler>
+		    </netRemoteCallHib> 
+		    
+		   
+		  <!-- addMeetingMember(String SID, String firstname, String lastname, String memberStatus,
+			String appointmentStatus, Long appointmentId, Long userid, String email) -->
+		    <netRemoteCallHib name="addMeetingMember" funcname="calendarservice.addMeetingMember" 
+							  remotecontext="$once{ canvas.thishib }" >  
+				
+				<attribute name="contact" value="null" />
+			<!--	<attribute name="appointmentId" value="0" type="number" /> -->
+				<attribute name="appointmentId" value="null" />
+							     
+				
+				<netparam><method name="getValue">return canvas.sessionId; </method></netparam>
+				<netparam><method name="getValue">return parent.contact.vorname;</method></netparam>	
+				<netparam><method name="getValue">return parent.contact.nachname;</method></netparam>
+				<netparam><method name="getValue">return 0;</method></netparam>
+				<netparam><method name="getValue">return 0;</method></netparam>
+				<netparam><method name="getValue">return parent.appointmentId;</method></netparam>
+				<netparam><method name="getValue">return parent.contact.userId;</method></netparam>
+				<netparam><method name="getValue">return parent.contact.email;</method></netparam>
+				
+		    	<handler name="ondata" args="value">
+		    		<![CDATA[
+		    		//parent._termindetails._liste._innerlist.clearContent();
+		    		//parent._termindetails._liste["viseble", false];
+		    		//parent._termindetails._liste._vscrol["viseble", false];
+		    		//parent.getUserAlleTermineByRange.doCall();
+		    		
+			    		if ($debug) Debug.write("addMeetingMember: ",value);
+			    		
 			    		
 		    		 ]]>
 		    	</handler>
@@ -386,6 +484,52 @@
 		    		 ]]>
 		    	</handler>
 		    </netRemoteCallHib>
+		    
+		    
+	     	<netRemoteCallHib name="getAppointmentByRange" funcname="calendarservice.getAppointmentByRange" 
+						  remotecontext="$once{ canvas.thishib }" >     
+			<netparam><method name="getValue">return canvas.sessionId; </method></netparam>
+		<!--	<netparam><method name="getValue">return canvas.thishib.macomUserID;</method></netparam> -->
+			<netparam><method name="getValue">return parent.parent._startDate;</method></netparam>
+			<netparam><method name="getValue">return parent.parent._startDate;</method></netparam>
+	    	<handler name="ondata" args="value">
+	    		<![CDATA[
+	    			if ($debug) Debug.write("getUserAlleTermineByRange: ",value);
+		    		if(value[0] != null){
+		    		var countX = 45;
+		    		for (var i=0;i<value.length;i++){
+		    		
+		    		if ($debug) Debug.write("getUserAlleTermineByRange: ",value);
+		    		//if ($debug) Debug.write("startTime: ",value[i].startTime);
+		    		
+		    		//if ($debug) Debug.write("getHours: ",value[i].startTime.getHours());
+		    		//if ($debug) Debug.write("getMilliseconds(): ",value[i].startTime.getMilliseconds());
+		    		//if ($debug) Debug.write("getMinutes(): ",value[i].startTime.getMinutes());
+		    		
+		    		//if ($debug) Debug.write("endTime: ",value[i].endTime);
+		    		//if ($debug) Debug.write("endTime: ",value[i].betreff);
+		    		
+		    		//if ($debug) Debug.write("countX : ",countX);
+		    		new lz.terminarea(parent._tagesansicht._list._outlist, {name:"_terminarea"+i,
+		    							//height: value[i].endTime.getHours()*22 + 1/3 * value[i].endTime.getMinutes() - 
+		    							//(value[i].startTime.getHours()*22 + 1/3 * value[i].startTime.getMinutes()) , 
+		    							//width: 100, bgcolor: green, 
+		    							//x:countX, 
+		    							//y:value[i].startTime.getHours()*22 + 1/3 * value[i].startTime.getMinutes(),
+		    							terminObj:value[i],
+		    							countX:countX
+		    							});
+		    		new lz.text(parent._tagesansicht._list._outlist["_terminarea"+i],{text:value[i].betreff +" Terminstatus: "+ value[i].terminstatus,
+		    										 multiline:true
+		    										 
+		    										});
+		    		countX = countX + 102;
+		    		}
+		    		
+		    		}
+	    		 ]]>
+	    	</handler>
+	    </netRemoteCallHib> 	
 	
 	
 	</class>

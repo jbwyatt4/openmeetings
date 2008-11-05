@@ -112,7 +112,7 @@
         //if ($debug) Debug.write("dateRoot: ",dateRoot);
         this.setAttribute('currentMonthName',dateRoot.monthnames[month]); 
         new lz.dateSelectorWeekNumberHeader(this.weekheader,{labelWeekHeader:canvas.getLabelName(467),bgcolor:canvas.basebgcolorizer});
-        for( var i = 0 ; i < 6 ; i++ ) new weekclass(this.content,{firstweekddaydate:new Date(this.showingdate.getTime()+(604800000*i)),dayclass:dayclass,month:month});  
+        for( var i = 0 ; i < 6 ; i++ ) new lz.dateSelectorWeek(this.content,{firstweekddaydate:new Date(this.showingdate.getTime()+(604800000*i)),dayclass:dayclass,month:month});  
         for( var i = 0 ; i < 7 ; i++ ) new lz.dateSelectorDayHeader(this.weekheader,{daynumber:(this.showingdate.getDay()+i)});  
         for( var i = 0 ; i < 6 ; i++ ) new lz.dateSelectorWeekNumber(this.weekNumber,{weeknumber:( (this.firstweekNumber+i<54) ? (this.firstweekNumber+i) : ((this.firstweekNumber+i)-53) )});
 		]]>
@@ -201,7 +201,15 @@
 	        this.selecteddate = this.showingdate;
 	        var firstdayDate = this.getDateFirstDayInMonth();
 	        this.content.content.destroy();
-	        new lz.dateSelectorMonth(this.content,{name:'content',firstweekNumber:this.getWeekNumber(firstdayDate.getTime()),month:this.selecteddate.getMonth(),showingdate:firstdayDate,dayclass:dayclass,weekclass:weekclass,showcalenderweek:showcalenderweek,showcalendermonth:showcalendermonth});
+	        new lz.dateSelectorMonth(this.content,{name:'content',
+		        	firstweekNumber:this.getWeekNumber(firstdayDate.getTime()),
+		        	month:this.selecteddate.getMonth(),
+		        	showingdate:firstdayDate,
+		        	dayclass:dayclass,
+		        	weekclass:weekclass,
+		        	showcalenderweek:showcalenderweek,
+		        	showcalendermonth:showcalendermonth
+	        	});
 	        this.hiliteDate(this.showingdate);
 	        this.onselect.sendEvent(this.selecteddate);
 	        this.checkToday();
@@ -409,7 +417,7 @@
 </class>
 
 <class name="dateSelector" extends="baseDateSelector"
-	weekclass="dateSelectorWeek" dayclass="dateSelectorDay" monthclass="dateSelectorMonth" >
+	weekclass="lz.dateSelectorWeek" dayclass="lz.dateSelectorDay" monthclass="lz.dateSelectorMonth" >
 
 </class>
 

@@ -11,6 +11,11 @@
 <resource name="leftarrow_rsc" src="1leftarrow.png" />
 <resource name="rightarrow_rsc" src="1rightarrow.png" />
 
+<resource name="list_add_remuve_rsc">
+    <frame src="list-add.png" />
+    <frame src="list-remove.png" />   
+</resource>
+
 <resource name="list_add_rsc" src="list-add.png" />
 <resource name="list_remove_rsc" src="list-remove.png" />
 <!-- add for calendar -->

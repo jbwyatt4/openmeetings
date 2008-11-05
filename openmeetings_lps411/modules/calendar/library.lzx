@@ -12,5 +12,7 @@
     <include href="searchContactInCalendar.lzx" />
     <include href="ordnerInhaltHead.lzx" />
     <include href="alerts.lzx" />
+    <include href="enterExternMember.lzx" />
+    <include href="terminarea.lzx" />
       
 </library>
