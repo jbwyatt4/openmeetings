@@ -16,7 +16,8 @@
 	
 	<class name="calendar" extends="view" > 
 		<attribute name ="terminObjRef" value="null"/>
-		<attribute name ="_startDate" value="null"/>	
+		<attribute name ="_startDate" value="null"/>
+		<attribute name ="_endDate" value="null"/>	
 		
 		<simplelayout axis="x" spacing="2"/>
 		
@@ -24,7 +25,11 @@
 			var now = new Date();
 			//Objektname = new Date(Jahr, Monat, Tag, Stunden, Minuten, Sekunden);
 
-			this._startDate = new Date(now.getFullYear(),now.getMonth(),now.getDate(),0,0,0);
+			//this._startDate = new Date(now.getFullYear(),now.getMonth(),now.getDate(),1,1,59);
+			//this._endDate = new Date(now.getFullYear(),now.getMonth(),now.getDate(),23,59,59);
+			
+			this._startDate = new Date(now.getFullYear(),now.getMonth(),now.getDate() ,0,0,0);
+			this._endDate = new Date(now.getFullYear(),now.getMonth(),now.getDate()+1,0,0,0);
 			
 			this.setCalendarItem(24);
 			this.getAppointmentCategoryList.doCall();
@@ -65,13 +70,13 @@
 					}
 					</method>		
 		 		</view>
-		 	<!--	<view name="_outlist" clip="true">	 			
+		 		<view name="_outlist" clip="true">	 			
 		 			<method name="clearContent">
 					for (var eg in this.subviews) {
 						this.subviews[eg].destroy();
 					}
 					</method>
-		 		</view>		-->
+		 		</view>		
 	 		</view>
 	 		<hscrollbar />
 	 		<vscrollbar/>
@@ -282,13 +287,16 @@
 		
 		<dateSelector name="_calendar"   y="10">
  			<handler name="ondoubleselect">
+	 			var selectDate = new Date();
 	 			//if ($debug) Debug.write("##### dateselect ", this.selecteddate);
-	 			parent._startDate = this.selecteddate
+	 			parent._startDate = this.selecteddate;
+	 			//Date(now.getFullYear(),now.getMonth(),now.getDate()+1,0,0,0);
+	 			parent._endDate  = new Date(this.selecteddate.getFullYear(), this.selecteddate.getMonth(), this.selecteddate.getDate()+1,0,0,0);
 	 			//if ($debug) Debug.write("startDateValue",parent._startDate);
 	 			parent._tagesansicht._list._outlist.clearContent();
 	 			//parent._tagesansicht._list._innerlist.clearContent();
 	 			//parent._termin.setCalendarItem(24);
-	 			parent.getUserAlleTermineByRange.doCall();
+	 			parent.getAppointmentByRange.doCall();
  			</handler> 
  		</dateSelector> 
 		
@@ -370,23 +378,12 @@
 				
 		    	<handler name="ondata" args="value">
 		    		<![CDATA[
-		    		parent.addMeetingMember.appointmentId = value;
-		    		//parent._tagesansicht._list._outlist.clearContent();
+		    		parent.getAppointmentByRange.doCall()
+		    		parent.addMeetingMember.appointmentId = value;	
 		    		parent.getUserAlleTermineByRange.doCall();
-		    		//parent.parent.parent._mitteilung.sendUserMessages.doCall();
+		    		
 			    		if ($debug) Debug.write("addUserTermine: ",value);
-			    		//parent.parent.parent._mitteilung._terminid = value;
-			    		 //parent.parent.parent._mitteilung.addUserMessage.doCall();
-			     		//new lz.gespeichert(parent.parent,{
-			     			//});
-			     			//if(parent._termindetails._liste._innerlist.subviews.length != 0)
-			     			//for (var eg in parent._termindetails._liste._innerlist.subviews) {
-								 //var contact = parent._termindetails._liste._innerlist.subviews[eg];
-								// if ($debug) Debug.write("contact: ",contact);
-								 // if ($debug) Debug.write("userId: ",contact.userId);
-								 // if ($debug) Debug.write("vorname: ",contact.vorname);
-							//	}
-								
+			    		
 								for (var i=0; i<parent._termindetails._liste._innerlist.subviews.length; i++) {
 								 var contact = parent._termindetails._liste._innerlist.subviews[i];
 								 if ($debug) Debug.write("contact: ",contact);
@@ -428,7 +425,7 @@
 		    		//parent._termindetails._liste._innerlist.clearContent();
 		    		//parent._termindetails._liste["viseble", false];
 		    		//parent._termindetails._liste._vscrol["viseble", false];
-		    		//parent.getUserAlleTermineByRange.doCall();
+		    		
 		    		
 			    		if ($debug) Debug.write("addMeetingMember: ",value);
 			    		
@@ -470,20 +467,30 @@
 		    	</handler>
 		    </netRemoteCallHib> 
 		    
-		    <netRemoteCallHib name="delTermin" funcname="macomusertermineservice.delTermin" 
+		    <netRemoteCallHib name="deleteAppointment" funcname="calendarservice.deleteAppointment" 
 							  remotecontext="$once{ canvas.thishib }" >     
+				<attribute name ="terminObj" value="null"/>
+				<attribute name ="terminareaObjRef" value="null"/>
+				
 				<netparam><method name="getValue">return canvas.sessionId; </method></netparam>
-				<netparam><method name="getValue">return parent.parent.terminObjRef.id;</method></netparam>
+				<netparam><method name="getValue">return parent.terminObj.appointmentId;</method></netparam>
 		    	<handler name="ondata" args="value">
 		    		<![CDATA[
-		    			parent._tagesansicht._list._outlist.clearContent();
-		    			parent.getUserAlleTermineByRange.doCall();
-			    		if ($debug) Debug.write("deleteUserTermin: ",value);
-			    		if ($debug) Debug.write("Termin_id: ",parent.terminObjRef.id);
+		    			//parent._tagesansicht._list._outlist.clearContent();
+		    			parent.getAppointmentByRange.doCall();
+			    		if ($debug) Debug.write("deleteAppointment: ",value);
+			    		if ($debug) Debug.write("Appointment_id: ",this.terminObj.appointmentId);
+			    		if ($debug) Debug.write("terminObj: ",this.terminObj);
 			    		//parent.updateUserMessagesTerminIdToNull.doCall();
+			    		if(this.terminareaObjRef != null)
+			    			{
+			    			this.terminareaObjRef.destroy();
+			    			
+			    			}
+			    		
 		    		 ]]>
 		    	</handler>
-		    </netRemoteCallHib>
+			</netRemoteCallHib>
 		    
 		    
 	     	<netRemoteCallHib name="getAppointmentByRange" funcname="calendarservice.getAppointmentByRange" 
@@ -491,15 +498,17 @@
 			<netparam><method name="getValue">return canvas.sessionId; </method></netparam>
 		<!--	<netparam><method name="getValue">return canvas.thishib.macomUserID;</method></netparam> -->
 			<netparam><method name="getValue">return parent.parent._startDate;</method></netparam>
-			<netparam><method name="getValue">return parent.parent._startDate;</method></netparam>
+			<netparam><method name="getValue">return parent.parent._endDate;</method></netparam>
 	    	<handler name="ondata" args="value">
 	    		<![CDATA[
-	    			if ($debug) Debug.write("getUserAlleTermineByRange: ",value);
+	    			if ($debug) Debug.write("getAppointmentByRange: ",value);
+		    		if ($debug) Debug.write("_startdate: ",parent._startDate);
+		    		if ($debug) Debug.write("_enddate: ",parent._endDate);
 		    		if(value[0] != null){
 		    		var countX = 45;
 		    		for (var i=0;i<value.length;i++){
-		    		
-		    		if ($debug) Debug.write("getUserAlleTermineByRange: ",value);
+		    			
+		    		if ($debug) Debug.write("value: ",value[i]);	
 		    		//if ($debug) Debug.write("startTime: ",value[i].startTime);
 		    		
 		    		//if ($debug) Debug.write("getHours: ",value[i].startTime.getHours());
@@ -511,15 +520,11 @@
 		    		
 		    		//if ($debug) Debug.write("countX : ",countX);
 		    		new lz.terminarea(parent._tagesansicht._list._outlist, {name:"_terminarea"+i,
-		    							//height: value[i].endTime.getHours()*22 + 1/3 * value[i].endTime.getMinutes() - 
-		    							//(value[i].startTime.getHours()*22 + 1/3 * value[i].startTime.getMinutes()) , 
-		    							//width: 100, bgcolor: green, 
-		    							//x:countX, 
-		    							//y:value[i].startTime.getHours()*22 + 1/3 * value[i].startTime.getMinutes(),
+		    							calenderObjRef:parent,
 		    							terminObj:value[i],
 		    							countX:countX
 		    							});
-		    		new lz.text(parent._tagesansicht._list._outlist["_terminarea"+i],{text:value[i].betreff +" Terminstatus: "+ value[i].terminstatus,
+		    		new lz.text(parent._tagesansicht._list._outlist["_terminarea"+i],{text:value[i].appointmentName +" Beschreibung: "+ value[i].appointmentDescription,
 		    										 multiline:true
 		    										 
 		    										});

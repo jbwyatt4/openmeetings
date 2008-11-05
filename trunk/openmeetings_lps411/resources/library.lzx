@@ -10,6 +10,7 @@
 <!-- add for calendar -->
 <resource name="leftarrow_rsc" src="1leftarrow.png" />
 <resource name="rightarrow_rsc" src="1rightarrow.png" />
+<resource name="emblem_unreadable_rsc" src="emblem-unreadable.png" />
 
 <resource name="list_add_remuve_rsc">
     <frame src="list-add.png" />
