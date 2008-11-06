@@ -51,11 +51,11 @@ public class AppointmentLogic {
 	
 	public Long saveAppointment(String appointmentName, Long userId, String appointmentLocation,String appointmentDescription, 
 			Date appointmentstart, Date appointmentend, 
-			Boolean isDaily, Boolean isWeekly, Boolean isMonthly, Boolean isYearly, Long categoryId){
+			Boolean isDaily, Boolean isWeekly, Boolean isMonthly, Boolean isYearly, Long categoryId, Integer remind){
 		
 		try{
 		return AppointmentDaoImpl.getInstance().addAppointment(appointmentName, userId, appointmentLocation, appointmentDescription,
-				appointmentstart, appointmentend, isDaily, isWeekly, isMonthly, isYearly, categoryId);
+				appointmentstart, appointmentend, isDaily, isWeekly, isMonthly, isYearly, categoryId, remind);
 		}catch(Exception err){
 			log.error("[saveAppointment]",err);
 		}
@@ -75,13 +75,13 @@ public class AppointmentLogic {
 	
 	public Long updateAppointment(Long appointmentId, String appointmentName,Long userId, String appointmentDescription, 
 			Date appointmentstart, Date appointmentend,
-			Boolean isDaily, Boolean isWeekly, Boolean isMonthly, Boolean isYearly, Long categoryId ){
+			Boolean isDaily, Boolean isWeekly, Boolean isMonthly, Boolean isYearly, Long categoryId, Integer remind ){
 		
 		try {
 			return AppointmentDaoImpl.getInstance().updateAppointment(appointmentId,
 					appointmentName, userId, appointmentDescription, appointmentstart,
 					appointmentend, isDaily, isWeekly, isMonthly, isYearly,
-					categoryId);
+					categoryId, remind);
 		} catch (Exception err) {
 			log.error("[updateAppointment]",err);
 		}

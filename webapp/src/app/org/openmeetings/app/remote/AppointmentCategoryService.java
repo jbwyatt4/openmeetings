@@ -44,7 +44,7 @@ public List<AppointmentCategory> getAppointmentCategoryList(String SID, Long use
 			
 		}
 	
-	public Appointment getNextAppointment(String SID){
+/*	public Appointment getNextAppointment(String SID){
 		
 		try{
 			
@@ -137,5 +137,5 @@ public List<AppointmentCategory> getAppointmentCategoryList(String SID, Long use
 			
 		}
 		
-	
+	*/
 	}
