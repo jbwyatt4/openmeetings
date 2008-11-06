@@ -24,15 +24,15 @@ import org.openmeetings.app.hibernate.beans.calendar.Appointment;
 
 
 
-public class TestDatabaseStructureGroupMember extends TestCase {
+public class TestDatabaseStructureMeetingMember extends TestCase {
 
 	
 
-	private static final Log log = LogFactory.getLog(TestDatabaseStructureGroupMember.class);
+	private static final Log log = LogFactory.getLog(TestDatabaseStructureMeetingMember.class);
 
 	
 
-	public TestDatabaseStructureGroupMember(String testname){
+	public TestDatabaseStructureMeetingMember(String testname){
 
 		super(testname);
 

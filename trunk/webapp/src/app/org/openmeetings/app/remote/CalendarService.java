@@ -76,7 +76,7 @@ public class CalendarService {
 	
 	public Long saveAppointment(String SID, String appointmentName,Long userId, String appointmentLocation,String appointmentDescription, 
 			Date appointmentstart, Date appointmentend, 
-			Boolean isDaily, Boolean isWeekly, Boolean isMonthly, Boolean isYearly, Long categoryId){
+			Boolean isDaily, Boolean isWeekly, Boolean isMonthly, Boolean isYearly, Long categoryId, Integer remind){
 		
 		try{
 			
@@ -86,7 +86,7 @@ public class CalendarService {
 					        	
 	        return	 AppointmentLogic.getInstance().saveAppointment(appointmentName, userId, appointmentLocation, 
 	        			appointmentDescription, appointmentstart, appointmentend, isDaily, isWeekly, isMonthly, 
-	        			isYearly, categoryId);
+	        			isYearly, categoryId, remind);
 	        }
 		} catch (Exception err) {
 			log.error("[saveAppointment]",err);
@@ -98,7 +98,7 @@ public class CalendarService {
 	
 	public Long updateAppointment(String SID,Long appointmentId ,String appointmentName, Long userId, String appointmentLocation,String appointmentDescription, 
 			Date appointmentstart, Date appointmentend, 
-			Boolean isDaily, Boolean isWeekly, Boolean isMonthly, Boolean isYearly, Long categoryId){
+			Boolean isDaily, Boolean isWeekly, Boolean isMonthly, Boolean isYearly, Long categoryId, Integer remind){
 		
 		try{
 			
@@ -108,7 +108,7 @@ public class CalendarService {
 					        	
 	        	return AppointmentLogic.getInstance().updateAppointment(appointmentId, appointmentName, userId, 
 	        			 appointmentDescription, appointmentstart, appointmentend, isDaily, isWeekly, isMonthly, 
-	        			 isYearly, categoryId);
+	        			 isYearly, categoryId, remind);
 	        }
 		} catch (Exception err) {
 			log.error("[updateAppointment]",err);

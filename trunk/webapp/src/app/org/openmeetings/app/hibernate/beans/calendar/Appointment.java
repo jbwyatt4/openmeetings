@@ -3,6 +3,7 @@ package org.openmeetings.app.hibernate.beans.calendar;
 
 
 import java.util.Date;
+import java.util.List;
 
 import org.openmeetings.app.hibernate.beans.user.Users;
 
@@ -29,13 +30,14 @@ public class Appointment {
 	private Date updatetime;
 	private String deleted;
 	private String comment;
+	private Integer remind;
 	
 	private Boolean isDaily;
 	private Boolean isWeekly;
 	private Boolean isMonthly;
 	private Boolean isYearly;
 	
-
+	private List<MeetingMember> meetingMember;
 
 	/**
      * 
@@ -159,8 +161,18 @@ public class Appointment {
 		this.appointmentCategory = appointmentCategory;
 	}
 
-
-	 /**
+	/**
+     * @hibernate.property
+     *  column="remind"
+     *  type="java.util.Date"
+     */  
+	 public Integer getRemind() {
+		return remind;
+	}
+	public void setRemind(Integer remind) {
+		this.remind = remind;
+	}
+	/**
      * @hibernate.property
      *  column="starttime"
      *  type="java.util.Date"
@@ -270,6 +282,13 @@ public class Appointment {
 	public void setIsDaily(Boolean isDaily) {
 		this.isDaily = isDaily;
 	}
+	public List<MeetingMember> getMeetingMember() {
+		return meetingMember;
+	}
+	public void setMeetingMember(List<MeetingMember> meetingMember) {
+		this.meetingMember = meetingMember;
+	}
+	
 	
 	
 }
