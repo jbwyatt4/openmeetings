@@ -25,7 +25,7 @@
 			var now = new Date();
 			//Objektname = new Date(Jahr, Monat, Tag, Stunden, Minuten, Sekunden);
 
-			//this._startDate = new Date(now.getFullYear(),now.getMonth(),now.getDate(),1,1,59);
+			//this._startDate = new Date(now.getFullYear(),now.getMonth(),now.getDate(),0,0,0);
 			//this._endDate = new Date(now.getFullYear(),now.getMonth(),now.getDate(),23,59,59);
 			
 			this._startDate = new Date(now.getFullYear(),now.getMonth(),now.getDate() ,0,0,0);
@@ -97,7 +97,8 @@
 				<handler name="onvalue" args="v">						
 					parent._kategoryatr = Number(this.getValue());												
 					if ($debug) Debug.write("_kategoryatr: ",parent._kategoryatr);
-				</handler>	 
+				</handler>	
+				
 		 	<!--textitmes-->
 		 	</combobox> 
 		 	
@@ -116,7 +117,8 @@
 				<handler name="onvalue" args="v">						
 					parent._erinnerung = Number(this.getValue());												
 					if ($debug) Debug.write("_erinnerung: ",parent._erinnerung);
-				</handler>	
+				</handler> 
+				
 				<textlistitem text="keine" value="0"/>
 				<textlistitem text="5 min. vorher" value="1"/>
              	<textlistitem text="1 Stunde vorher" value="2"/>
@@ -131,10 +133,39 @@
 		 		
 		 	<combobox name="_repetitionselect" x="${parent._kategory.width + parent._kategory.x +30}" 
 		 			  width="220" editable="false" shownitems="5" y="${parent._repetition.y}">
-				<handler name="onvalue" args="v">						
+			<!--	<handler name="onvalue" args="v">						
 					parent._erinnerung = Number(this.getValue());												
 					if ($debug) Debug.write("_erinnerung: ",parent._erinnerung);
-				</handler>	
+				</handler>	-->
+				
+				<handler name="onselect">
+                        var repitechoice = this.getText();
+                        //canvas[colorchoice+'colors'].setAttribute("isdefault", true);
+                        
+                        switch (repitechoice) {
+							  case "Täglich":
+							  	parent._isDaily = true;
+							  	if ($debug) Debug.write("_isDaily: ",parent._isDaily);						    
+							    break;
+							  case "Wochentlich":
+							    parent._isWeekly = true;
+							    if ($debug) Debug.write("_isWeekly: ",parent._isWeekly);
+							    break;
+							  case "Monatlich":
+							    parent._isMonthly = true;
+							    if ($debug) Debug.write("_isMonthly: ",parent._isMonthly);
+							    break;
+							  case "Jährlich":
+							    parent._isYearly = true;
+							    if ($debug) Debug.write("_isYearly: ",parent._isYearly);
+							    break;
+							  default:
+							   if ($debug) Debug.write("repetition: ","keine");
+							    break;
+							}
+
+                </handler> 
+                					
 				<textlistitem text="keine" value="0"/>
 				<textlistitem text="Täglich" value="1"/>
              	<textlistitem text="Wochentlich" value="2"/>
@@ -219,7 +250,7 @@
 			</view>
 			
 			<view name="_liste" y="${parent._komentar.y + parent._komentar.height + 60}" x="35" 
-				  clip="true"  visible="false">
+				  clip="true"  visible="false" height="0">
 				<view name="_innerlist" layout="axis:y;spacing:2">
 					<method name="clearContent">
 					for (var eg in this.subviews) {
@@ -230,9 +261,55 @@
 				<vscrollbar name="_vscrol"/>
 			</view>
 			 
-			<view name="_buttons"  width="$once{parent.width}" y="${parent._liste.y + parent._liste.height +10}">
-				<simplelayout axis="x" spacing="0"/>		
-			    <button   width="$once{parent.width / 3}" enabled="true">
+			<view name="_buttons"   y="${parent._liste.y + parent._liste.height +10}" x="${parent.width/2 -this.width/2}">
+				<simplelayout axis="x" spacing="10"/>		
+			   <view resource="button_cancel_rsc"  opacity="0.7">
+			   		<handler name="onmouseover">
+			   			this.setAttribute('opacity', 1); //setOpacity(1)
+			   		</handler>
+			   		<handler name="onmouseout">
+			   			this.setAttribute('opacity', 0.7); //setOpacity(0.7)
+			   		</handler>
+			   		<handler name="onclick">
+			   		//parent.parent.parent.delTermin.doCall();
+			    	parent.parent.parent.defaulttermindetails();
+			    	</handler>
+			   </view>
+			   <view resource="filesave_rsc"  opacity="0.7">
+			   		<handler name="onmouseover">
+			   			this.setAttribute('opacity', 1); //setOpacity(1)
+			   		</handler>
+			   		<handler name="onmouseout">
+			   			this.setAttribute('opacity', 0.7); //setOpacity(0.7)
+			   		</handler>
+			   		<handler name="onclick">
+			    		<![CDATA[
+			    		if(parseStringToDate(parent.parent._date._bdatum.getText()) > parseStringToDate(parent.parent._date.edatum.getText()) ||  
+			    		parseTimeStringToDate(parent.parent._date._bzeit.getText()) >  parseTimeStringToDate(parent.parent._date.ezeit.getText()) )
+			    	  		
+			        	{
+			    			if ($debug) Debug.write("Error: ", "Ende liegt vor Beginn!");
+							new lz.myalert(parent.parent,{text:"Terminende liegt vor Terminanfang!"})
+			        	}
+			        	else if(!parent.parent._titeledit.getAttribute('text')){
+			        		new lz.myalert(parent.parent,{text:"Geben Sie bitte ein Betreff ein!"});
+			        	}
+			        	else{
+				        	if(parent.parent.parent.terminObjRef == null)
+				       		 	{
+			    				parent.parent.parent.saveAppointment.doCall();
+				    			//parent.parent.parent.defaulttermindetails();
+				    			}
+				    		else{
+					        	parent.parent.parent.updateUserTermin.doCall();
+					    		//parent.parent.parent.defaulttermindetails();
+			        			}
+			        	}
+			        	]]>
+			    	</handler>
+			   </view>
+			   
+			 <!--   <button   width="$once{parent.width / 3}" enabled="true">
 			    	Löschen
 			    	<handler name="onclick">
 			    	//parent.parent.parent._mitteilung._kategory = 0;
@@ -242,7 +319,7 @@
 			    	//parent.parent.parent.getUserAlleTermineByRange.doCall();
 			    	</handler>		    	
 			    	<view resource="icon_small_delete" x="5" y="$once{parent.height / 6}" />
-			    </button>
+			    </button> 
 			    		    
 			    <button   width="${immediateparent.width / 3}" text="Neuen Termin Anlegen" >
 			    	<handler name="onclick">	
@@ -252,6 +329,8 @@
 			    	</handler>
 			    	<view resource="icon_small_termin" x="5" y="${parent.height / 6}" />
 			    </button>
+			     
+			    
 			     <button   width="${immediateparent.width / 3}" text="Speichern" enabled="true">
 			    	<handler name="onclick">
 			    		<![CDATA[
@@ -279,7 +358,7 @@
 			        	]]>
 			    	</handler>
 			    	<view resource="icon_small_termin" x="5" y="${parent.height / 6}" />
-			    </button>
+			    </button>-->
 			</view>
 		
 		
@@ -318,6 +397,57 @@
 		this._termindetails._liste._vscrol["visible", false];
 		this._termindetails._liste.setAttribute('height', 0);
 		</method> 
+		
+		<method name="showtermindetails">
+			<![CDATA[
+		if ($debug) Debug.write("terminObjRef:", this.terminObjRef);
+		this._termindetails._kategoryedit.selectItem(this.terminObjRef.appointmentCategory.categoryId); //setAttribute('value',this.terminObjRef.kategorie.id);
+		this._termindetails._repetitionselect.selectItemAt(this.terminObjRef.appointmentCategory.categoryId);
+		this._termindetails._locationedit.setAttribute('text', this.terminObjRef.appointmentLocation);
+		//if(this.terminObjRef.guest != null)
+			//{
+			//this._termindetails._guestedit.setAttribute('text', this.terminObjRef.guest.vorname+" "+ this.terminObjRef.guest.nachname);
+			//}
+		//else{
+			//this._termindetails._guestedit.setAttribute('text',"");
+		//}	
+		this._termindetails._titeledit.setAttribute('text', this.terminObjRef.appointmentName);
+		this._termindetails._komentar.setAttribute('text', this.terminObjRef.appointmentDescription);
+		this._termindetails._date._bdatum.setAttribute('text', parseDateToString(this.terminObjRef.appointmentStarttime));
+		this._termindetails._date._bzeit.setAttribute('text', parseDateToStringTimeOnly(this.terminObjRef.appointmentStarttime));
+		this._termindetails._date.edatum.setAttribute('text', parseDateToString(this.terminObjRef.appointmentEndtime));
+		this._termindetails._date.ezeit.setAttribute('text', parseDateToStringTimeOnly(this.terminObjRef.appointmentEndtime));
+		
+		
+				]]>
+		</method> 
+		
+	<!--	for (var i=0;i<this.terminObjRef.length;i++) {
+						if ($debug) Debug.write("UserList",result[i]);
+						var id = result[i].user_id;
+						var vorname = result[i].firstname;
+						var nachname = result[i].lastname;
+						var email = result[i].adresses.emails[0].mail.email;
+						if ($debug) Debug.write("email",result[i].adresses.emails[0].mail.email);
+						if ($debug) Debug.write("Width_inerlist",parent._list._inner.width);
+						
+						//var userObj = this.result[i];					
+						if ($debug) Debug.write("id",id);
+						//if ($debug) Debug.write("Vorname: ",vorname);
+						//if ($debug) Debug.write("Nachname",nachname);
+						//if ($debug) Debug.write("messageId ", messageId);
+						//if ($debug) Debug.write("datumRead posteingang", datumRead);
+						//if ($debug) Debug.write("messageObj:", messageObj);
+						
+							new lz.searchContact(parent._list._innerList._inner, {
+										refObj:parent,
+				    					userId: id,
+				    					vorname:vorname,				    				
+				    					nachname:nachname,
+				    					email:email
+				    					});
+			    				
+				}-->
 		
 		<netRemoteCallHib name="getAppointmentCategoryList" funcname="appointmentcategoryservice.getAppointmentCategoryList" 
 							  remotecontext="$once{ canvas.thishib }" >
