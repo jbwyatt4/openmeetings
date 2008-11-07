@@ -74,7 +74,7 @@ public class AppointmentDaoImpl {
 	
 	public Long addAppointment(String appointmentName, Long userId, String appointmentLocation,String appointmentDescription, 
 			Date appointmentstart, Date appointmentend, 
-			Boolean isDaily, Boolean isWeekly, Boolean isMonthly, Boolean isYearly, Long categoryId, Integer remind) {
+			Boolean isDaily, Boolean isWeekly, Boolean isMonthly, Boolean isYearly, Long categoryId, Long remind) {
 		try {
 			
 			Appointment ap = new Appointment();
@@ -84,7 +84,7 @@ public class AppointmentDaoImpl {
 			ap.setAppointmentStarttime(appointmentstart);
 		 	ap.setAppointmentEndtime(appointmentend);
 			ap.setAppointmentDescription(appointmentDescription);
-			ap.setRemind(remind);
+			ap.setRemind(AppointmentReminderTypDaoImpl.getInstance().getAppointmentReminderTypById(remind));
 			ap.setStarttime(new Date());
 			ap.setDeleted("false");
 			ap.setIsDaily(isDaily);
@@ -136,7 +136,7 @@ public class AppointmentDaoImpl {
 	
 	public Long updateAppointment(Long appointmentId, String appointmentName, Long userId, String appointmentDescription, 
 			Date appointmentstart, Date appointmentend,
-			Boolean isDaily, Boolean isWeekly, Boolean isMonthly, Boolean isYearly, Long categoryId, Integer remind ) {
+			Boolean isDaily, Boolean isWeekly, Boolean isMonthly, Boolean isYearly, Long categoryId, Long remind ) {
 		try {
 			
 			
@@ -147,7 +147,7 @@ public class AppointmentDaoImpl {
 		 	ap.setAppointmentEndtime(appointmentend);
 			ap.setAppointmentDescription(appointmentDescription);			
 			ap.setUpdatetime(new Date());
-			ap.setRemind(remind);
+			ap.setRemind(AppointmentReminderTypDaoImpl.getInstance().getAppointmentReminderTypById(remind));
 			ap.setIsDaily(isDaily);
 			ap.setIsWeekly(isWeekly);
 			ap.setIsMonthly(isMonthly);

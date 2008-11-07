@@ -30,7 +30,7 @@ public class Appointment {
 	private Date updatetime;
 	private String deleted;
 	private String comment;
-	private Integer remind;
+	private AppointmentReminderTyps remind;
 	
 	private Boolean isDaily;
 	private Boolean isWeekly;
@@ -162,14 +162,18 @@ public class Appointment {
 	}
 
 	/**
-     * @hibernate.property
-     *  column="remind"
-     *  type="java.util.Date"
-     */  
-	 public Integer getRemind() {
+     * @hibernate.many-to-one
+     *  cascade="none"
+     *  column="remind_id"
+     *  lazy="false"
+     *  class="org.openmeetings.app.hibernate.beans.calendar.AppointmentReminderTyps"
+     *  not-null="false"
+     *  outer-join="true"
+     */ 
+	 public AppointmentReminderTyps getRemind() {
 		return remind;
 	}
-	public void setRemind(Integer remind) {
+	public void setRemind(AppointmentReminderTyps remind) {
 		this.remind = remind;
 	}
 	/**

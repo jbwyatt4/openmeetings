@@ -7,7 +7,9 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openmeetings.app.data.calendar.daos.AppointmentDaoImpl;
+import org.openmeetings.app.data.calendar.daos.AppointmentReminderTypDaoImpl;
 import org.openmeetings.app.hibernate.beans.calendar.Appointment;
+import org.openmeetings.app.hibernate.beans.calendar.AppointmentReminderTyps;
 
 public class AppointmentLogic {
 	
@@ -27,6 +29,15 @@ public class AppointmentLogic {
 			return AppointmentDaoImpl.getInstance().getAppointmentsByRange(userId, starttime, endtime);
 		}catch(Exception err){
 			log.error("[getAppointmentByRange]",err);
+		}
+		return null;
+	}
+	
+	public List<AppointmentReminderTyps> getAppointmentReminderTypList(Long userId){
+		try {	
+			return AppointmentReminderTypDaoImpl.getInstance().getAppointmentReminderTypList(userId);
+		}catch(Exception err){
+			log.error("[getAppointmentReminderTypList]",err);
 		}
 		return null;
 	}
@@ -51,7 +62,7 @@ public class AppointmentLogic {
 	
 	public Long saveAppointment(String appointmentName, Long userId, String appointmentLocation,String appointmentDescription, 
 			Date appointmentstart, Date appointmentend, 
-			Boolean isDaily, Boolean isWeekly, Boolean isMonthly, Boolean isYearly, Long categoryId, Integer remind){
+			Boolean isDaily, Boolean isWeekly, Boolean isMonthly, Boolean isYearly, Long categoryId, Long remind){
 		
 		try{
 		return AppointmentDaoImpl.getInstance().addAppointment(appointmentName, userId, appointmentLocation, appointmentDescription,
@@ -75,7 +86,7 @@ public class AppointmentLogic {
 	
 	public Long updateAppointment(Long appointmentId, String appointmentName,Long userId, String appointmentDescription, 
 			Date appointmentstart, Date appointmentend,
-			Boolean isDaily, Boolean isWeekly, Boolean isMonthly, Boolean isYearly, Long categoryId, Integer remind ){
+			Boolean isDaily, Boolean isWeekly, Boolean isMonthly, Boolean isYearly, Long categoryId, Long remind ){
 		
 		try {
 			return AppointmentDaoImpl.getInstance().updateAppointment(appointmentId,

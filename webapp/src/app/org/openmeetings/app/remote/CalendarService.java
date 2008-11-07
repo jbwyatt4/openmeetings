@@ -11,6 +11,7 @@ import org.openmeetings.app.data.calendar.management.AppointmentLogic;
 import org.openmeetings.app.data.calendar.management.MeetingMemberLogic;
 import org.openmeetings.app.data.user.Usermanagement;
 import org.openmeetings.app.hibernate.beans.calendar.Appointment;
+import org.openmeetings.app.hibernate.beans.calendar.AppointmentReminderTyps;
 
 public class CalendarService {
 	
@@ -36,6 +37,20 @@ public class CalendarService {
 	        }
 		} catch (Exception err) {
 			log.error("[getAppointmentByRange]",err);
+		}
+		return null;
+	}
+	
+	public List<AppointmentReminderTyps> getAppointmentReminderTypList(String SID, Long userId) {
+		try {
+			Long users_id = Sessionmanagement.getInstance().checkSession(SID);
+	        Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
+	        if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
+					        	
+	        	return AppointmentLogic.getInstance().getAppointmentReminderTypList(userId);
+	        }
+		} catch (Exception err) {
+			log.error("[getAppointmentReminderTypList]",err);
 		}
 		return null;
 	}
@@ -76,7 +91,7 @@ public class CalendarService {
 	
 	public Long saveAppointment(String SID, String appointmentName,Long userId, String appointmentLocation,String appointmentDescription, 
 			Date appointmentstart, Date appointmentend, 
-			Boolean isDaily, Boolean isWeekly, Boolean isMonthly, Boolean isYearly, Long categoryId, Integer remind){
+			Boolean isDaily, Boolean isWeekly, Boolean isMonthly, Boolean isYearly, Long categoryId, Long remind){
 		
 		try{
 			
@@ -98,7 +113,7 @@ public class CalendarService {
 	
 	public Long updateAppointment(String SID,Long appointmentId ,String appointmentName, Long userId, String appointmentLocation,String appointmentDescription, 
 			Date appointmentstart, Date appointmentend, 
-			Boolean isDaily, Boolean isWeekly, Boolean isMonthly, Boolean isYearly, Long categoryId, Integer remind){
+			Boolean isDaily, Boolean isWeekly, Boolean isMonthly, Boolean isYearly, Long categoryId, Long remind){
 		
 		try{
 			
