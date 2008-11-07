@@ -7,7 +7,7 @@
 			
 			this.terminObjRef.defaulttermindetails({terminObjRef:this});
 			this.terminObjRef._termin._date._bzeit.setAttribute('text',this.getAttribute('text'));
-			this.terminObjRef._terminButton.onclick.sendEvent();
+			//this.terminObjRef._terminButton.onclick.sendEvent();
 		
 		</handler>
 	
@@ -33,6 +33,8 @@
 			
 			this.setCalendarItem(24);
 			this.getAppointmentCategoryList.doCall();
+			this.getAppointmentReminderTypList.doCall();
+			
 			this._termindetails._date.bringToFront();
 			this._termindetails._erinnerungedit.selectItemAt(0);
 			this._termindetails._repetitionselect.selectItemAt(0);
@@ -84,7 +86,7 @@
 		
 		<view name="_termindetails" bgcolor="blue" width="400">
 			<attribute name="_kategoryatr" value="0" type="number" />
-			<attribute name="_erinnerung" value="0" type="number" />
+			<attribute name="_erinnerungatr" value="null"  />
 			
 			<attribute name="_isDaily" value="false" type="boolean" />
 			<attribute name="_isWeekly" value="false" type="boolean" />  
@@ -109,22 +111,26 @@
 		 	
 		 	<labelText name="_erinnerung" y="${parent._kategory.height + parent._kategory.y + 10}" 
 		 			   x="35" labelid="565" width="120" />
-		 	
-		 	
-		 	
+		 	 	
 		 	<combobox name="_erinnerungedit" x="${parent._kategory.width + parent._kategory.x +30}" 
 		 			  width="220" editable="false" shownitems="5" y="${parent._erinnerung.y}">
 				<handler name="onvalue" args="v">						
-					parent._erinnerung = Number(this.getValue());												
-					if ($debug) Debug.write("_erinnerung: ",parent._erinnerung);
+					if(this.getValue == 0 )
+						{
+						parent._erinnerungatr = null;
+						}
+					else{
+					parent._erinnerungatr = this.getValue();												
+					if ($debug) Debug.write("_erinnerungatr: ",parent._erinnerungatr);
+						}
 				</handler> 
 				
 				<textlistitem text="keine" value="0"/>
-				<textlistitem text="5 min. vorher" value="1"/>
+			<!--	<textlistitem text="5 min. vorher" value="1"/>
              	<textlistitem text="1 Stunde vorher" value="2"/>
               	<textlistitem text="1 Tag vorher" value="3"/> 
               	<textlistitem text="1 Woche vorher" value="4"/>
-              	<textlistitem text="1 Monat vorher" value="5"/>
+              	<textlistitem text="1 Monat vorher" value="5"/>-->
 		 	<!--textitmes-->
 		 	</combobox> 
 		 	
@@ -380,6 +386,11 @@
  		</dateSelector> 
 		
 		<method name="defaulttermindetails">
+		this._termindetails._isDaily = false;
+		this._termindetails._isMonthly = false;
+		this._termindetails._isWeekly = false;
+		this._termindetails._isYearly = false;
+		
 		this._termindetails._kategoryedit.selectItemAt(0); 
 		this._termindetails._erinnerungedit.selectItemAt(0); 
 		this._termindetails._locationedit.setAttribute('text', "");
@@ -418,7 +429,53 @@
 		this._termindetails._date.edatum.setAttribute('text', parseDateToString(this.terminObjRef.appointmentEndtime));
 		this._termindetails._date.ezeit.setAttribute('text', parseDateToStringTimeOnly(this.terminObjRef.appointmentEndtime));
 		
+		if ($debug) Debug.write("remind typId: ",this.terminObjRef.remind.typId);
+		this._termindetails._erinnerungedit.selectItemAt(this.terminObjRef.remind.typId);
 		
+		if(this.terminObjRef.isDaily = true)
+			{
+			this._termindetails._repetitionselect.selectItemAt(1);
+			}
+		else if(this.terminObjRef.isWeekly = true)
+			{
+			this._termindetails._repetitionselect.selectItemAt(2);
+			}
+		else if(this.terminObjRef.isMonthly = true)
+			{
+			this._termindetails._repetitionselect.selectItemAt(3);
+			}
+		else if(this.terminObjRef.isYeahrly = true)
+			{
+			this._termindetails._repetitionselect.selectItemAt(4);
+			}
+		
+			this._termindetails._liste.setAttribute('visible', true); //["visible", true]
+			this._termindetails._liste.setAttribute('height', 50);
+			this._termindetails._liste._innerlist.clearContent();
+			for (var i=0;i<this.terminObjRef.meetingMember.length;i++) {
+						var meetingMembers = this.terminObjRef.meetingMember;
+						
+						if ($debug) Debug.write("meetingMembers",meetingMembers[i]);
+						
+						
+						var id = meetingMembers[i].userid.user_id;
+						var vorname = meetingMembers[i].firstname;
+						var nachname = meetingMembers[i].lastname;
+						//var email = meetingMembers[i].adresses.emails[0].mail.email;
+						var email = meetingMembers[i].email;
+												
+						if ($debug) Debug.write("id",id);
+						//if ($debug) Debug.write("Vorname: ",vorname);
+						
+							
+							new lz.searchContactInCalendar(this._termindetails._liste._innerlist, {
+										refObj:parent,
+				    					userId: id,
+				    					vorname:vorname,				    				
+				    					nachname:nachname,
+				    					email:email
+				    					});
+			}
 				]]>
 		</method> 
 		
@@ -487,9 +544,47 @@
 		    	</handler>
 		    </netRemoteCallHib>	
 		    
+		    <netRemoteCallHib name="getAppointmentReminderTypList" funcname="calendarservice.getAppointmentReminderTypList" 
+							  remotecontext="$once{ canvas.thishib }" >
+		    	    
+				<netparam><method name="getValue">return canvas.sessionId;</method></netparam>
+				<netparam><method name="getValue">return canvas.thishib.UserID;</method></netparam>
+		    	<handler name="ondata" args="valueList">
+		    		<![CDATA[
+		    		if ($debug) Debug.write("getAppointmentReminderTypList-valueList: ", valueList);
+		    		if ($debug) Debug.write("userId: ", canvas.thishib.UserID);
+		    		
+		    		if (valueList.length == 0){
+		    			//if ($debug) Debug.write("if valueList: ", valueList);
+		    		//	new lz.userNotFound(parent,{
+			     		//	x:parent.width/2-this.width/2,
+			     			//y:parent.height-this.height-100});
+			     		
+			     		//new lz.alert(parent);	
+		    		
+		    		}
+		    		else{
+		    			//new combobox(parent.parent{name:_kategory,x:20})
+					    for (var i=0;i<valueList.length;i++) {
+							//if ($debug) Debug.write("UserList",valueList[i]);
+							var id = valueList[i].typId;
+							var titel = valueList[i].name;				
+							if ($debug) Debug.write("typID",id);
+							if ($debug) Debug.write("titel: ",titel);					
+							new lz.textlistitem(parent._termindetails._erinnerungedit, {
+					    					value : id,			    							    						    			
+					    					text:titel
+								
+				    				});		
+				    	    parent._termindetails._erinnerungedit.selectItemAt(0);
+					}}
+		    		]]>
+		    	</handler>
+		    </netRemoteCallHib>
+		    
 		 <!--  saveAppointment(String SID, String appointmentName,Long userId, String appointmentLocation,String appointmentDescription, 
 			Date appointmentstart, Date appointmentend, 
-			Boolean isDaily, Boolean isWeekly, Boolean isMonthly, Boolean isYearly, Long categoryId -->
+			Boolean isDaily, Boolean isWeekly, Boolean isMonthly, Boolean isYearly, Long categoryId, Long remind) -->
 		   
 		    <netRemoteCallHib name="saveAppointment" funcname="calendarservice.saveAppointment" 
 							  remotecontext="$once{ canvas.thishib }" >     
@@ -505,12 +600,13 @@
 				<netparam><method name="getValue">return parent.parent._termindetails._isWeekly;</method></netparam>
 				<netparam><method name="getValue">return parent.parent._termindetails._isYearly;</method></netparam>
 				<netparam><method name="getValue">return parent.parent._termindetails._kategoryatr;</method></netparam>
+				<netparam><method name="getValue">return parent.parent._termindetails._erinnerungatr;</method></netparam>
 				
 		    	<handler name="ondata" args="value">
 		    		<![CDATA[
-		    		parent.getAppointmentByRange.doCall()
+		    		
 		    		parent.addMeetingMember.appointmentId = value;	
-		    		parent.getUserAlleTermineByRange.doCall();
+		    		//parent.getUserAlleTermineByRange.doCall();
 		    		
 			    		if ($debug) Debug.write("addUserTermine: ",value);
 			    		
@@ -524,7 +620,10 @@
 								parent.addMeetingMember.contact = contact;
 								parent.addMeetingMember.doCall();
 								}
-			     			
+			     		if(parent._termindetails._liste._innerlist.subviews.length<1)
+			     			{
+							parent.getAppointmentByRange.doCall()
+							}
 			    		parent.defaulttermindetails();
 		    		 ]]>
 		    	</handler>
@@ -559,7 +658,7 @@
 		    		
 			    		if ($debug) Debug.write("addMeetingMember: ",value);
 			    		
-			    		
+			    		parent.getAppointmentByRange.doCall()
 		    		 ]]>
 		    	</handler>
 		    </netRemoteCallHib> 
@@ -607,16 +706,17 @@
 		    	<handler name="ondata" args="value">
 		    		<![CDATA[
 		    			//parent._tagesansicht._list._outlist.clearContent();
-		    			parent.getAppointmentByRange.doCall();
+		    			
 			    		if ($debug) Debug.write("deleteAppointment: ",value);
 			    		if ($debug) Debug.write("Appointment_id: ",this.terminObj.appointmentId);
 			    		if ($debug) Debug.write("terminObj: ",this.terminObj);
 			    		//parent.updateUserMessagesTerminIdToNull.doCall();
 			    		if(this.terminareaObjRef != null)
 			    			{
-			    			this.terminareaObjRef.destroy();
-			    			
+			    			this.terminareaObjRef.destroyThis();
 			    			}
+			    		
+			    		parent.getAppointmentByRange.doCall();
 			    		
 		    		 ]]>
 		    	</handler>
