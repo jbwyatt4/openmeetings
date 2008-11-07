@@ -11,7 +11,7 @@
 		parent.parent.parent.parent.terminObjRef = this.terminObj;
 		if ($debug) Debug.write("terminObjRef: ",parent.parent.parent.parent.terminObjRef);
 		parent.parent.parent.parent.showtermindetails();
-		parent.parent.parent.parent._terminButton.onclick.sendEvent();
+		//parent.parent.parent.parent._terminButton.onclick.sendEvent();
 	</handler>
 	<handler name="oninit">
 		<![CDATA[
@@ -48,6 +48,10 @@
 			//parent.deleteAppointment.doCall();
 		</handler>
 	</view>
+	<method name="destroyThis">
+		//parent.calenderObjRef.getAppointmentByRange.doCall();
+		this.destroy();
+	</method>
 	
 <!--	<netRemoteCallHib name="deleteAppointment" funcname="calendarservice.deleteAppointment" 
 							  remotecontext="$once{ canvas.thishib }" >     
