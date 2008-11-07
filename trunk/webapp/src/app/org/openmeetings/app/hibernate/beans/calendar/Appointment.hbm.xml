@@ -13,7 +13,7 @@
     <property name="appointmentEndtime" type="java.util.Date" column="appointment_endtime"/>
     <property name="appointmentDescription" type="string" column="description"/>
     <many-to-one outer-join="true" not-null="false" column="category_id" lazy="false" cascade="none" name="appointmentCategory" class="org.openmeetings.app.hibernate.beans.calendar.AppointmentCategory"/>
-    <property name="remind" type="java.util.Date" column="remind"/>
+    <many-to-one outer-join="true" not-null="false" column="remind_id" lazy="false" cascade="none" name="remind" class="org.openmeetings.app.hibernate.beans.calendar.AppointmentReminderTyps"/>
     <property name="starttime" type="java.util.Date" column="starttime"/>
     <property name="updatetime" type="java.util.Date" column="updatetime"/>
     <property name="deleted" type="string" column="deleted"/>
