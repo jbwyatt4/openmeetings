@@ -151,22 +151,4 @@ public class CalendarService {
 			
 		}
 	
-	public Long addMeetingMember(String SID, String firstname, String lastname, String memberStatus,
-			String appointmentStatus, Long appointmentId, Long userid, String email){
-		
-		try{
-			
-			Long users_id = Sessionmanagement.getInstance().checkSession(SID);
-	        Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
-	        if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
-					        	
-	        return	 MeetingMemberLogic.getInstance().addMeetingMember( firstname,  lastname,  memberStatus,
-	    			 appointmentStatus,  appointmentId,  userid,  email);
-	        }
-		} catch (Exception err) {
-			log.error("[addMeetingMember]",err);
-		}
-		return null;
-	
-	}
 }

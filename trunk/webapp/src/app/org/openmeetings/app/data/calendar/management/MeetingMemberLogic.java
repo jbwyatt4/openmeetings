@@ -35,6 +35,19 @@ public class MeetingMemberLogic {
 		return null;
 	}
 	
+	public Long updateMeetingMember(Long meetingMemberId, String firstname, String lastname, 
+			 String memberStatus, String appointmentStatus, 
+			 Long appointmentId, Long userid, String email ){
+		
+		try {
+			return MeetingMemberDaoImpl.getInstance().updateMeetingMember(meetingMemberId,
+					firstname, lastname, memberStatus, appointmentStatus, appointmentId, userid, email);
+		} catch (Exception err) {
+			log.error("[updateMeetingMember]",err);
+		}
+		return null;
+	}
+	
 /*	public List<Appointment> getAppointmentByRange(Long userId ,Date starttime, Date endtime){
 		try {	
 			return AppointmentDaoImpl.getInstance().getAppointmentsByRange(userId, starttime, endtime);
