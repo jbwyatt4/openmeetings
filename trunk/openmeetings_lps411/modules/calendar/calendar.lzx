@@ -305,10 +305,12 @@
 				       		 	{
 			    				parent.parent.parent.saveAppointment.doCall();
 				    			//parent.parent.parent.defaulttermindetails();
+				    			if ($debug) Debug.write("##### saveAppointment ", parent.parent.parent.terminObjRef);
 				    			}
 				    		else{
-					        	parent.parent.parent.updateUserTermin.doCall();
+					        	parent.parent.parent.updateAppointment.doCall();
 					    		//parent.parent.parent.defaulttermindetails();
+					    		if ($debug) Debug.write("##### updateAppointment ", parent.parent.parent.terminObjRef);
 			        			}
 			        	}
 			        	]]>
@@ -386,6 +388,9 @@
  		</dateSelector> 
 		
 		<method name="defaulttermindetails">
+			
+		this.terminObjRef = null;
+		
 		this._termindetails._isDaily = false;
 		this._termindetails._isMonthly = false;
 		this._termindetails._isWeekly = false;
@@ -632,7 +637,7 @@
 		   
 		  <!-- addMeetingMember(String SID, String firstname, String lastname, String memberStatus,
 			String appointmentStatus, Long appointmentId, Long userid, String email) -->
-		    <netRemoteCallHib name="addMeetingMember" funcname="calendarservice.addMeetingMember" 
+		    <netRemoteCallHib name="addMeetingMember" funcname="meetingmemberservice.addMeetingMember" 
 							  remotecontext="$once{ canvas.thishib }" >  
 				
 				<attribute name="contact" value="null" />
@@ -663,35 +668,33 @@
 		    	</handler>
 		    </netRemoteCallHib> 
 		    
-		    <netRemoteCallHib name="updateUserTermin" funcname="macomusertermineservice.updateUserTermine" 
+		 <!--   Long updateAppointment(String SID,Long appointmentId ,String appointmentName, Long userId, String appointmentLocation,String appointmentDescription, 
+			Date appointmentstart, Date appointmentend, 
+			Boolean isDaily, Boolean isWeekly, Boolean isMonthly, Boolean isYearly, Long categoryId, Long remind) -->
+		    
+		    <netRemoteCallHib name="updateAppointment" funcname="calendarservice.updateAppointment" 
 							  remotecontext="$once{ canvas.thishib }" >     
 				<netparam><method name="getValue">return canvas.sessionId; </method></netparam>
-				<netparam><method name="getValue">return parent.parent.terminObjRef.id;</method></netparam>
-				<netparam><method name="getValue">return parent.parent.terminObjRef.guest.id;</method></netparam>
-				<netparam><method name="getValue">return canvas.thishib.macomUserID;</method></netparam>
-				<netparam><method name="getValue">return parent.parent._termin._kategoryatr;</method></netparam>
-				<netparam><method name="getValue">return parseStringToDate(parent.parent._termin._date._bdatum.getText());</method></netparam>
-				<netparam><method name="getValue">return parseTimeStringToDate(parent.parent._termin._date._bzeit.getText()); </method></netparam>
-				<netparam><method name="getValue">return parseStringToDate(parent.parent._termin._date.edatum.getText());</method></netparam>
-				<netparam><method name="getValue">return parseTimeStringToDate(parent.parent._termin._date.ezeit.getText());</method></netparam>
-				<netparam><method name="getValue">return parent.parent._termin._betreffedit.getAttribute('text');</method></netparam>
-				<netparam><method name="getValue">return parent.parent._termin._anmerkedit.getAttribute('text');</method></netparam>
-				<netparam><method name="getValue">return parent.parent._termin._checkb._erinnerung.value;</method></netparam>
-				<netparam><method name="getValue">return parent.parent._termin._checkb._online.value;</method></netparam>
-				<netparam><method name="getValue">return parent.parent._termin._checkb._ganztags.value;</method></netparam>
-				<netparam><method name="getValue">return parent.parent._termin._ortedit.getAttribute('text');</method></netparam>
-				<netparam><method name="getValue">return 0;</method></netparam>
+				<netparam><method name="getValue">return parent.parent.terminObjRef.appointmentId;</method></netparam>
+				<netparam><method name="getValue">return parent.parent._termindetails._titeledit['text'];</method></netparam>
+				<netparam><method name="getValue">return canvas.thishib.UserID;</method></netparam>
+				<netparam><method name="getValue">return parent.parent._termindetails._locationedit['text'];</method></netparam>
+				<netparam><method name="getValue">return parent.parent._termindetails._komentar['text'];</method></netparam>
+				<netparam><method name="getValue">return parseStringToDateTime(parent.parent._termindetails._date._bdatum.getText() + parent.parent._termindetails._date._bzeit.getText());</method></netparam>
+				<netparam><method name="getValue">return parseStringToDateTime(parent.parent._termindetails._date.edatum.getText() + parent.parent._termindetails._date.ezeit.getText());</method></netparam>
+				<netparam><method name="getValue">return parent.parent._termindetails._isDaily;</method></netparam>
+				<netparam><method name="getValue">return parent.parent._termindetails._isMonthly;</method></netparam>
+				<netparam><method name="getValue">return parent.parent._termindetails._isWeekly;</method></netparam>
+				<netparam><method name="getValue">return parent.parent._termindetails._isYearly;</method></netparam>
+				<netparam><method name="getValue">return parent.parent._termindetails._kategoryatr;</method></netparam>
+				<netparam><method name="getValue">return parent.parent._termindetails._erinnerungatr;</method></netparam>
 		    	<handler name="ondata" args="value">
 		    		<![CDATA[
 		    			parent._tagesansicht._list._outlist.clearContent();
-		    			parent.getUserAlleTermineByRange.doCall();
-		    		//parent.parent.parent._mitteilung.sendUserMessages.doCall();
+		    			parent.getAppointmentByRange.doCall();
+		    		
 			    		if ($debug) Debug.write("updateUserTermin: ",value);
-			    		//parent.parent.parent._mitteilung._terminid = value;
-			    		 //parent.parent.parent._mitteilung.addUserMessage.doCall();
-			     		//new lz.gespeichert(parent.parent,{
-			     			//});
-			    		
+			    		parent.defaulttermindetails();
 		    		 ]]>
 		    	</handler>
 		    </netRemoteCallHib> 
