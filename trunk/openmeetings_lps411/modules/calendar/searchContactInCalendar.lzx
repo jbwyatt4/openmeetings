@@ -2,8 +2,7 @@
 
 <class name="searchContactInCalendar" extends="view" bgcolor="silver">
 		<simplelayout axis="x" spacing="5" />
-		<attribute name ="userId" value="0" type="number" /> 	
-		<attribute name ="vorname" value="" type="string" />
+		<attribute name ="userId" value="0" type="number" />
 		<attribute name ="nachname" value="" type="string" />
 		<attribute name ="email" value="null"/>		
 		
