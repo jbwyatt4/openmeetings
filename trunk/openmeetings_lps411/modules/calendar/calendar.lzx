@@ -54,12 +54,60 @@
 		</method>
 		
 		
-		<view> 
+	<!--	<view> 
 			<simplelayout axis="y" spacing="2"/>
-			<simpleLabelButton labelid="575" width="100"></simpleLabelButton>
+			
+			<simpleLabelButton labelid="575" width="100">	
+				<handler name="onclick">
+				//parent.parent._tagesansicht._list._innerlist.clearContent();
+				new lz.calendarMonthView(parent.parent);	
+				</handler>
+			</simpleLabelButton>
+			
 			<simpleLabelButton labelid="576" width="100"></simpleLabelButton>
+			
 			<simpleLabelButton labelid="577" width="100"> </simpleLabelButton>
-		</view>
+		</view> -->
+		
+		<tabslider  x="10" y="10" width="560" height="500" spacing="2" slideduration="300" name="_tabslider">
+		    
+		    <handler name="oninit">
+			    		parent.getAppointmentByRangeWeek.doCall();
+			 </handler>
+		    
+		    <tabelement text="day">
+		    	
+		    </tabelement>
+		    
+		    <tabelement text="week" name="_week">
+		    	<view  name="_weekView">
+			    	<simplelayout axis="x" spacing="2"/>
+			    	
+			    	
+			    	
+			    	<calendarWeekView name="_monday" height="350"></calendarWeekView>
+			    	<calendarWeekView name="_tuesday" height="350"></calendarWeekView>
+			    	<calendarWeekView name="_wednesday" height="350"></calendarWeekView>
+			    	<calendarWeekView name="_thursday" height="350"></calendarWeekView>
+			    	<calendarWeekView name="_friday" height="350"></calendarWeekView>
+			    	<calendarWeekView name="_saturday" height="350"></calendarWeekView>
+			    	<calendarWeekView name="_sunday" height="350"></calendarWeekView>	
+		    	</view>
+		    	<hscrollbar />
+		    </tabelement>
+		    
+		    <tabelement text="month">
+		    	<view name="_monthView">
+			    	<simplelayout axis="x" spacing="2"/>
+			    	<calendarMonthView height="200"></calendarMonthView>
+			    	<calendarMonthView height="200"></calendarMonthView>
+			    	<calendarMonthView height="200"></calendarMonthView>
+		    	</view>	
+		    	<hscrollbar />	
+		    </tabelement>
+		</tabslider>
+		
+	<!--	<calendarMonthView height="200"></calendarMonthView>-->
 		<view name="_tagesansicht"  bgcolor="silver" clip="true" height="${ parent.height }" width="460">
  			
  		<!--	<method name="clearContent">
@@ -782,6 +830,41 @@
 		    							countX:countX
 		    							});
 		    		new lz.text(parent._tagesansicht._list._outlist["_terminarea"+i],{text:value[i].appointmentName +" Beschreibung: "+ value[i].appointmentDescription,
+		    										 multiline:true
+		    										 
+		    										});
+		    		countX = countX + 102;
+		    		}
+		    		
+		    		}
+	    		 ]]>
+	    	</handler>
+	    </netRemoteCallHib> 	
+	    
+	    <netRemoteCallHib name="getAppointmentByRangeWeek" funcname="calendarservice.getAppointmentByRange" 
+						  remotecontext="$once{ canvas.thishib }" >     
+			<netparam><method name="getValue">return canvas.sessionId; </method></netparam>
+		<!--	<netparam><method name="getValue">return canvas.thishib.macomUserID;</method></netparam> -->
+			<netparam><method name="getValue">return parent.parent._startDate;</method></netparam>
+			<netparam><method name="getValue">return parent.parent._endDate;</method></netparam>
+	    	<handler name="ondata" args="value">
+	    		<![CDATA[
+	    			if ($debug) Debug.write("getAppointmentByRange: ",value);
+		    		if ($debug) Debug.write("_startdate: ",parent._startDate);
+		    		if ($debug) Debug.write("_enddate: ",parent._endDate);
+		    		if(value[0] != null){
+		    		var countX = 45;
+		    		for (var i=0;i<value.length;i++){
+		    			
+		    		if ($debug) Debug.write("value: ",value[i]);	
+		    		
+		    		//if ($debug) Debug.write("countX : ",countX);
+		    		new lz.terminarea(parent._tagesansicht._list._outlist, {name:"_terminarea"+i,
+		    							calenderObjRef:parent,
+		    							terminObj:value[i],
+		    							countX:countX
+		    							});
+		    		new lz.text(parent._tabslider._week._weekView._monday._tagesansicht._list._outlist["_terminarea"+i],{text:value[i].appointmentName +" Beschreibung: "+ value[i].appointmentDescription,
 		    										 multiline:true
 		    										 
 		    										});

@@ -14,5 +14,8 @@
     <include href="alerts.lzx" />
     <include href="enterExternMember.lzx" />
     <include href="terminarea.lzx" />
+    
+    <include href="calendarMonthView.lzx" />
+     <include href="calendarWeekView.lzx" />
       
 </library>
