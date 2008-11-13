@@ -1,6 +1,6 @@
 <library>
 	
-	<class name="terminarea" extends="view">
+	<class name="terminareaWeekView" extends="view">
 	
 	<attribute name ="terminObj" value="null"/>
 	<attribute name ="calenderObjRef" value="null"/>
@@ -8,33 +8,33 @@
 	
 	<handler name="onclick">
 		if ($debug) Debug.write("this termin: ",this.terminObj);
-		parent.parent.parent.parent.parent.parent.parent.terminObjRef = this.terminObj;
-		if ($debug) Debug.write("terminObjRef: ",parent.parent.parent.parent.parent.parent.parent.terminObjRef);
-		parent.parent.parent.parent.parent.parent.parent.showtermindetails();
+		parent.parent.parent.parent.parent.parent.parent.parent.terminObjRef = this.terminObj;
+		if ($debug) Debug.write("terminObjRef: ",parent.parent.parent.parent.parent.parent.parent.parent.terminObjRef);
+		parent.parent.parent.parent.parent.parent.parent.parent.showtermindetails();
 		//parent.parent.parent.parent._terminButton.onclick.sendEvent();
 	</handler>
 	<handler name="oninit">
 		<![CDATA[
-		this.setAttribute('height',  this.terminObj.appointmentEndtime.getHours()*22 + 1/3 * this.terminObj.appointmentEndtime.getMinutes() - 
-			    (this.terminObj.appointmentStarttime.getHours()*22 + 1/3 * this.terminObj.appointmentStarttime.getMinutes()));	  
+		this.setAttribute('height',  this.terminObj.appointmentEndtime.getHours()*17 + 1/3 * this.terminObj.appointmentEndtime.getMinutes() - 
+			    (this.terminObj.appointmentStarttime.getHours()*17 + 1/3 * this.terminObj.appointmentStarttime.getMinutes()));	  
 		this.setAttribute("width", 100); 
 		this.setAttribute("bgcolor", red); 
 		this.setAttribute("x",this.countX);
-		this.setAttribute("y",this.terminObj.appointmentStarttime.getHours()*22 + 1/3 * this.terminObj.appointmentStarttime.getMinutes());
+		this.setAttribute("y",this.terminObj.appointmentStarttime.getHours()*17 + 1/3 * this.terminObj.appointmentStarttime.getMinutes());
 		
 		if (this.terminObj.appointmentStarttime < parent.parent.parent.parent._startDate && 
 			this.terminObj.appointmentEndtime > parent.parent.parent.parent._endDate){
 			this.setAttribute('y', 0);
-			this.setAttribute('height', 22*24-2);
+			this.setAttribute('height', 17*24-2);
 			if ($debug) Debug.write("1. if appointmentStarttime",this.terminObj.appointmentStarttime, "_appointmentStarttime", parent.parent.parent.parent._startDate);
 		}
 		else if(this.terminObj.appointmentEndtime > parent.parent.parent.parent._endDate){
-			this.setAttribute('height', 22*24-2-this.terminObj.appointmentStarttime.getHours() * 22);
+			this.setAttribute('height', 17*24-2-this.terminObj.appointmentStarttime.getHours() * 22);
 			if ($debug) Debug.write("2. if",this.terminObj.appointmentStarttime, "_appointmentStarttime", parent.parent.parent.parent._startDate);
 		}
 		else if(this.terminObj.appointmentStarttime < parent.parent.parent.parent._startDate){
 			this.setAttribute('y', 0);
-			this.setAttribute('height', this.terminObj.appointmentEndtime.getHours() * 22);
+			this.setAttribute('height', this.terminObj.appointmentEndtime.getHours() * 17);
 			if ($debug) Debug.write("3. if",this.terminObj.appointmentStarttime, "_appointmentStarttime", parent.parent.parent.parent._startDate);
 		}
 		]]>

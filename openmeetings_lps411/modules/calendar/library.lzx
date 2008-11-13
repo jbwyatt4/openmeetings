@@ -16,6 +16,8 @@
     <include href="terminarea.lzx" />
     
     <include href="calendarMonthView.lzx" />
-     <include href="calendarWeekView.lzx" />
-      
+    <include href="calendarWeekView.lzx" />
+    <include href="terminareaWeekView.lzx" />
+    <include href="calendarDayView.lzx" />
+    
 </library>

@@ -1,5 +1,5 @@
 <library>
-	<class name="calendarWeekView" extends="view">
+	<class name="calendarDayView" extends="view">
 		<handler name="oninit">
 			this.setCalendarItem(24);
 			if ($debug) Debug.write("calendarMonthView: ",this);
@@ -9,7 +9,7 @@
 		<view name="weekday">
 			<text name="_weekday">Test MO</text>
 		</view>
-		<view name="_tagesansicht"  bgcolor="silver" clip="true" height="${ parent.height }" width="200">
+		<view name="_tagesansicht"  bgcolor="silver" clip="true" height="${ parent.height }" width="540">
 		 				 
 			 		<view name="_list">
 				 		<view name="_innerlist" clip="true">
@@ -39,7 +39,7 @@
 							{ 
 							var x = "0" + x.toString();					
 							}				
-						new lz.calenderlistitem(this._tagesansicht._list._innerlist,{text:x + ":00", fontsize:8, width:parent.width, height:15 , terminObjRef:parent});
+						new lz.calenderlistitem(this._tagesansicht._list._innerlist,{text:x + ":00", fontsize:8, width:parent.width, terminObjRef:parent});
 					if ($debug) Debug.write("setCalendarItem_method: ",this);
 					}
 					]]>
