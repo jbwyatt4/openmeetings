@@ -1,4 +1,5 @@
 <library>
+	<include href="../conference/polls/resultPollWin.lzx" />
 	
 	<class name="calenderlistitem" extends="textlistitem">
 		<attribute name ="terminObjRef" value="null"/>
@@ -31,7 +32,7 @@
 			this._startDate = new Date(now.getFullYear(),now.getMonth(),now.getDate() ,0,0,0);
 			this._endDate = new Date(now.getFullYear(),now.getMonth(),now.getDate()+1,0,0,0);
 			
-			this.setCalendarItem(24);
+			//this.setCalendarItem(24);
 			this.getAppointmentCategoryList.doCall();
 			this.getAppointmentReminderTypList.doCall();
 			
@@ -184,6 +185,7 @@
 		 	<combobox name="_erinnerungedit" x="${parent._kategory.width + parent._kategory.x +30}" 
 		 			  width="220" editable="false" shownitems="5" y="${parent._erinnerung.y}">
 				<handler name="onvalue" args="v">						
+					if ($debug) Debug.write("_erinnerungatr: ",parent._erinnerungatr);
 					if(this.getValue == 0 )
 						{
 						parent._erinnerungatr = null;
@@ -458,10 +460,16 @@
 	 			//Date(now.getFullYear(),now.getMonth(),now.getDate()+1,0,0,0);
 	 			parent._endDate  = new Date(this.selecteddate.getFullYear(), this.selecteddate.getMonth(), this.selecteddate.getDate()+1,0,0,0);
 	 			//if ($debug) Debug.write("startDateValue",parent._startDate);
-	 			parent._tagesansicht._list._outlist.clearContent();
+	 			parent._tabslider._daytab._dayview._tagesansicht._list._outlist.clearContent();
+	 			
+	 			//weekcontroll
+	 			parent._tabslider._week._weekView._monday._tagesansicht._list._outlist.clearContent();
+	 			parent._tabslider._week._weekView._monday.weekday._weekday.setAttribute('text',"MO "+ this.selecteddate.getDate())
+	 			parent.getAppointmentByRangeWeek.doCall();
 	 			//parent._tagesansicht._list._innerlist.clearContent();
 	 			//parent._termin.setCalendarItem(24);
 	 			parent.getAppointmentByRange.doCall();
+	 			
  			</handler> 
  		</dateSelector> 
 		
