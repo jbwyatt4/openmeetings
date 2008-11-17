@@ -17,6 +17,11 @@
     <frame src="list-remove.png" />   
 </resource>
 
+<resource name="edit_add_remuve_rsc">
+    <frame src="edit_add.png" />
+    <frame src="edit_remove.png" />   
+</resource>
+
 <resource name="list_add_rsc" src="list-add.png" />
 <resource name="list_remove_rsc" src="list-remove.png" />
 <!-- add for calendar -->
