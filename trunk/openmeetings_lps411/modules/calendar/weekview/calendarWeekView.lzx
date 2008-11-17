@@ -2,10 +2,10 @@
 	<class name="calendarWeekView" extends="view">
 		<handler name="oninit">
 			this.setCalendarItem(24);
-			if ($debug) Debug.write("calendarMonthView: ",this);
-			if ($debug) Debug.write("list.width: ",this._tagesansicht._list.width);
-			if ($debug) Debug.write("outlist.width: ",this._tagesansicht._list._outlist.width);
-			if ($debug) Debug.write("innerlist.width: ",this._tagesansicht._list._innerlist.width);
+			//if ($debug) Debug.write("calendarMonthView: ",this);
+			//if ($debug) Debug.write("list.width: ",this._tagesansicht._list.width);
+			//if ($debug) Debug.write("outlist.width: ",this._tagesansicht._list._outlist.width);
+			//if ($debug) Debug.write("innerlist.width: ",this._tagesansicht._list._innerlist.width);
 		</handler>
 		
 		<simplelayout axis="y" spacing="2"/>
@@ -43,8 +43,8 @@
 							var x = "0" + x.toString();					
 							}				
 						new lz.calenderlistitem(this._tagesansicht._list._innerlist,{text:x + ":00", fontsize:8, width:400, height:15 , terminObjRef:parent});
-					if ($debug) Debug.write("setCalendarItem_method: ",this);
-					if ($debug) Debug.write("setCalendar.widh: ",this.width)
+					//if ($debug) Debug.write("setCalendarItem_method: ",this);
+					//if ($debug) Debug.write("setCalendar.widh: ",this.width)
 					}
 					]]>
 		</method>

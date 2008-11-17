@@ -6,9 +6,7 @@
 		</handler>
 		
 		<view name="_tagesansicht"  bgcolor="silver" clip="true" height="${ parent.height }" width="200">
-		 			
-		 
-					 
+		 							 
 			 		<view name="_list">
 				 		<view name="_innerlist" clip="true">
 				 			<simplelayout axis="y" spacing="2"/>	

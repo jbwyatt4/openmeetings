@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library>
     
+    <include href="weekview/" />
     <include href="incubator/scrolledittext.lzx"/>
     <include href="calendar.lzx"/>
     <include href="myScheduledMeetings.lzx"/>
@@ -16,7 +17,6 @@
     <include href="terminarea.lzx" />
     
     <include href="calendarMonthView.lzx" />
-    <include href="calendarWeekView.lzx" />
     <include href="terminareaWeekView.lzx" />
     <include href="calendarDayView.lzx" />
     
