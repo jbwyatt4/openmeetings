@@ -7,9 +7,9 @@
 		
 		<simplelayout axis="y" spacing="2"/>
 		<view name="weekday">
-			<text name="_weekday">Test MO</text>
+			<text name="_weekday"></text>
 		</view>
-		<view name="_tagesansicht"  bgcolor="silver" clip="true" height="${ parent.height }" width="540">
+		<view name="_tagesansicht"  bgcolor="silver" clip="true" width="${parent.width}" height="${parent.height}">
 		 				 
 			 		<view name="_list">
 				 		<view name="_innerlist" clip="true">

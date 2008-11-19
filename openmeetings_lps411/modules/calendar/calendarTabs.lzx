@@ -1,0 +1,91 @@
+<library>
+
+<class name="calendarTabs" extends="tabslider" x="10" y="10" width="${canvas.width - parent._calendar.width-100}" height="500" spacing="2" slideduration="300">
+		    	    
+		    <tabelement text="day" name="_daytab" selected="true">
+		    	<calendarDayView name="_dayview" width="${parent.parent.width - 20}" height="${parent.height - 80}" ></calendarDayView>	
+		    </tabelement>
+		    
+		    <tabelement text="week" name="_week">
+		    	<handler name="onselect">
+		    		this._weekView.initWeekByDate(new Date());
+	 				this._weekView.getAppointmentByRangeWeek.doCall();
+		    	</handler>
+		    <!--	<simplelayout axis="x" spacing="0"/>
+		    	<view resource="timetable_weekview"   />-->
+		    	<weekView name="_weekView" />
+		    		
+		    	<hscrollbar />
+		    	<vscrollbar />
+		    </tabelement>
+		    
+		    <tabelement text="month">
+		    	<view name="_monthView">
+		    		<simplelayout axis="y" spacing="2"/>
+		    		<view>
+				    	<simplelayout axis="x" spacing="2"/>
+				    	<calendarMonthView height="200"></calendarMonthView>
+				    	<calendarMonthView height="200"></calendarMonthView>
+				    	<calendarMonthView height="200"></calendarMonthView>
+				    	<calendarMonthView height="200"></calendarMonthView>
+				    	<calendarMonthView height="200"></calendarMonthView>
+				    	<calendarMonthView height="200"></calendarMonthView>
+				    	<calendarMonthView height="200"></calendarMonthView>
+			    	</view>
+			    	<view>
+				    	<simplelayout axis="x" spacing="2"/>
+				    	<calendarMonthView height="200"></calendarMonthView>
+				    	<calendarMonthView height="200"></calendarMonthView>
+				    	<calendarMonthView height="200"></calendarMonthView>
+				    	<calendarMonthView height="200"></calendarMonthView>
+				    	<calendarMonthView height="200"></calendarMonthView>
+				    	<calendarMonthView height="200"></calendarMonthView>
+				    	<calendarMonthView height="200"></calendarMonthView>
+			    	</view>
+			    	<view>
+				    	<simplelayout axis="x" spacing="2"/>
+				    	<calendarMonthView height="200"></calendarMonthView>
+				    	<calendarMonthView height="200"></calendarMonthView>
+				    	<calendarMonthView height="200"></calendarMonthView>
+				    	<calendarMonthView height="200"></calendarMonthView>
+				    	<calendarMonthView height="200"></calendarMonthView>
+				    	<calendarMonthView height="200"></calendarMonthView>
+				    	<calendarMonthView height="200"></calendarMonthView>
+			    	</view>
+			    	<view>
+				    	<simplelayout axis="x" spacing="2"/>
+				    	<calendarMonthView height="200"></calendarMonthView>
+				    	<calendarMonthView height="200"></calendarMonthView>
+				    	<calendarMonthView height="200"></calendarMonthView>
+				    	<calendarMonthView height="200"></calendarMonthView>
+				    	<calendarMonthView height="200"></calendarMonthView>
+				    	<calendarMonthView height="200"></calendarMonthView>
+				    	<calendarMonthView height="200"></calendarMonthView>
+			    	</view>
+			    	<view>
+				    	<simplelayout axis="x" spacing="2"/>
+				    	<calendarMonthView height="200"></calendarMonthView>
+				    	<calendarMonthView height="200"></calendarMonthView>
+				    	<calendarMonthView height="200"></calendarMonthView>
+				    	<calendarMonthView height="200"></calendarMonthView>
+				    	<calendarMonthView height="200"></calendarMonthView>
+				    	<calendarMonthView height="200"></calendarMonthView>
+				    	<calendarMonthView height="200"></calendarMonthView>
+			    	</view>
+			    	<view>
+				    	<simplelayout axis="x" spacing="2"/>
+				    	<calendarMonthView height="200"></calendarMonthView>
+				    	<calendarMonthView height="200"></calendarMonthView>
+				    	<calendarMonthView height="200"></calendarMonthView>
+				    	<calendarMonthView height="200"></calendarMonthView>
+				    	<calendarMonthView height="200"></calendarMonthView>
+				    	<calendarMonthView height="200"></calendarMonthView>
+				    	<calendarMonthView height="200"></calendarMonthView>
+			    	</view>
+		    	</view>	
+		    	<hscrollbar />	
+		    </tabelement>	
+		   
+</class>
+		
+</library>		

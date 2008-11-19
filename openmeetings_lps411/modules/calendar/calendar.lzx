@@ -54,7 +54,30 @@
 			]]>
 		</method>
 		
+		<dateSelector name="_calendar" y="10">
+ 			<handler name="ondoubleselect">
+	 			//var selectDate = new Date();
+	 			//if ($debug) Debug.write("##### dateselect ", this.selecteddate);
+	 			parent._startDate = this.selecteddate;
+	 			//Date(now.getFullYear(),now.getMonth(),now.getDate()+1,0,0,0);
+	 			parent._endDate  = new Date(this.selecteddate.getFullYear(), this.selecteddate.getMonth(), this.selecteddate.getDate()+1,0,0,0);
+	 			//if ($debug) Debug.write("startDateValue",parent._startDate);
+	 			parent._tabslider._daytab._dayview._tagesansicht._list._outlist.clearContent();
+	 			
+	 			//weekcontroll
+	 			if(parent._tabslider._week.getAttribute('selected') == true){
+	 				//parent._tabslider._week._weekView._monday._tagesansicht._list._outlist.clearContent();
+	 				parent._tabslider._week._weekView.initWeekByDate(this.selecteddate);
+	 				parent._tabslider._week._weekView.getAppointmentByRangeWeek.doCall();
+	 			}
+	 			//parent._tagesansicht._list._innerlist.clearContent();
+	 			//parent._termin.setCalendarItem(24);
+	 			parent.getAppointmentByRange.doCall();
+	 			
+ 			</handler> 
+ 		</dateSelector> 
 		
+	<calendarTabs name="_tabslider"></calendarTabs>	
 	<!--	<view> 
 			<simplelayout axis="y" spacing="2"/>
 			
@@ -69,58 +92,6 @@
 			
 			<simpleLabelButton labelid="577" width="100"> </simpleLabelButton>
 		</view> -->
-		
-		<tabslider  x="10" y="10" width="560" height="500" spacing="2" slideduration="300" name="_tabslider" >
-		    	    
-		    <tabelement text="day" name="_daytab" selected="true">
-		    	<calendarDayView name="_dayview" height="${parent.height-80}" ></calendarDayView>	
-		   <!-- 	<view name="_tagesansicht"  bgcolor="silver" clip="true" height="${ parent.height }" width="460">
- 			
-			 
-		 		<view name="_list">
-			 		<view name="_innerlist" clip="true">
-			 			<simplelayout axis="y" spacing="2"/>	
-			 			<method name="clearContent">
-						for (var eg in this.subviews) {
-							this.subviews[eg].destroy();
-						}
-						</method>		
-			 		</view>
-			 		<view name="_outlist" clip="true">	 			
-			 			<method name="clearContent">
-						for (var eg in this.subviews) {
-							this.subviews[eg].destroy();
-						}
-						</method>
-			 		</view>		
-			 		</view>
-			 		<hscrollbar />
-			 		<vscrollbar/>
-	 			</view> -->
-		    	
-		    </tabelement>
-		    
-		    <tabelement text="week" name="_week">
-		    	<handler name="onselect">
-		    		this._weekView.initWeekByDate(new Date());
-	 				this._weekView.getAppointmentByRangeWeek.doCall();
-		    	</handler>
-		    
-		    	<weekView name="_weekView" />
-		    		
-		    	<hscrollbar />
-		    </tabelement>
-		    
-		    <tabelement text="month">
-		    	<view name="_monthView">
-			    	<simplelayout axis="x" spacing="2"/>
-			    	<calendarMonthView height="200"></calendarMonthView>
-			    	<calendarMonthView height="200"></calendarMonthView>
-			    	<calendarMonthView height="200"></calendarMonthView>
-		    	</view>	
-		    	<hscrollbar />	
-		    </tabelement>
-		</tabslider>
 		
 	<!--	<calendarMonthView height="200"></calendarMonthView>-->
 	<!--	<view name="_tagesansicht"  bgcolor="silver" clip="true" height="${ parent.height }" width="460">
@@ -146,7 +117,7 @@
 	 		<vscrollbar/>
  		</view>
 		-->
-		<view name="_termindetails" bgcolor="blue" width="400" x="10">
+		<view name="_termindetails" bgcolor="blue" width="400" x="10" visible="false">
 			<attribute name="_kategoryatr" value="0" type="number" />
 			<attribute name="_erinnerungatr" value="null"  />
 			
@@ -270,8 +241,7 @@
 		    		<attribute name="currentSelection" value="false" type="boolean"/>	
 		    		<handler name="onclick">
 		    
-						//parent.parent._komentar["viseble", true];
-												
+						//parent.parent._komentar["viseble", true];								
 						//this.setAttribute("frame", 2)
 						if(this.currentSelection == true)
 							{
@@ -349,6 +319,7 @@
 			   		</handler>
 			   		<handler name="onclick">
 			    		<![CDATA[
+			    		parent.parent.parent._termindetails.setAttribute('visible', false);
 			    		if(parseStringToDate(parent.parent._date._bdatum.getText()) > parseStringToDate(parent.parent._date.edatum.getText()) ||  
 			    		parseTimeStringToDate(parent.parent._date._bzeit.getText()) >  parseTimeStringToDate(parent.parent._date.ezeit.getText()) )
 			    	  		
@@ -430,30 +401,7 @@
 		
 		
 		</view>
-		
-		<dateSelector name="_calendar" y="10">
- 			<handler name="ondoubleselect">
-	 			//var selectDate = new Date();
-	 			//if ($debug) Debug.write("##### dateselect ", this.selecteddate);
-	 			parent._startDate = this.selecteddate;
-	 			//Date(now.getFullYear(),now.getMonth(),now.getDate()+1,0,0,0);
-	 			parent._endDate  = new Date(this.selecteddate.getFullYear(), this.selecteddate.getMonth(), this.selecteddate.getDate()+1,0,0,0);
-	 			//if ($debug) Debug.write("startDateValue",parent._startDate);
-	 			parent._tabslider._daytab._dayview._tagesansicht._list._outlist.clearContent();
-	 			
-	 			//weekcontroll
-	 			if(parent._tabslider._week.getAttribute('selected') == true){
-	 				//parent._tabslider._week._weekView._monday._tagesansicht._list._outlist.clearContent();
-	 				parent._tabslider._week._weekView.initWeekByDate(this.selecteddate);
-	 				parent._tabslider._week._weekView.getAppointmentByRangeWeek.doCall();
-	 			}
-	 			//parent._tagesansicht._list._innerlist.clearContent();
-	 			//parent._termin.setCalendarItem(24);
-	 			parent.getAppointmentByRange.doCall();
-	 			
- 			</handler> 
- 		</dateSelector> 
-		
+			
 		<method name="defaulttermindetails">
 			
 		this.terminObjRef = null;
@@ -820,7 +768,6 @@
 	     	<netRemoteCallHib name="getAppointmentByRange" funcname="calendarservice.getAppointmentByRange" 
 						  remotecontext="$once{ canvas.thishib }" >     
 			<netparam><method name="getValue">return canvas.sessionId; </method></netparam>
-		<!--	<netparam><method name="getValue">return canvas.thishib.macomUserID;</method></netparam> -->
 			<netparam><method name="getValue">return parent.parent._startDate;</method></netparam>
 			<netparam><method name="getValue">return parent.parent._endDate;</method></netparam>
 	    	<handler name="ondata" args="value">
