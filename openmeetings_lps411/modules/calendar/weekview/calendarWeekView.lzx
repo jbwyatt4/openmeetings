@@ -23,6 +23,10 @@
  					parent.parent.parent.parent.parent.parent._termindetails.setAttribute('y', 50);
  					if ($debug) Debug.write("balken_weekview: ",this);
  					if ($debug) Debug.write("balken_weekview: ",parent.parent.parent.parent.parent.parent);
+ 					
+ 					if ($debug) Debug.write("getMouse: ",parent.parent.parent.getMouse('x'));
+ 					if ($debug) Debug.write("getMouseCanvas: ",canvas.getMouse('x'));
+ 					if ($debug) Debug.write("getX: ",canvas.getAttribute('x'));
  				</handler>
  				
  			</view>

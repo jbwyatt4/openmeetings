@@ -28,17 +28,17 @@
 			this.terminObj.appointmentEndtime > parent.parent.parent.parent.parent.parent.parent._endDate){
 			this.setAttribute('y', 0);
 			this.setAttribute('height', 22*24-2);
-			if ($debug) Debug.write("1. if appointmentStarttime",this.terminObj.appointmentStarttime, "_appointmentStarttime", parent.parent.parent.parent._startDate);
+			if ($debug) Debug.write("1. if appointmentStarttime",this.terminObj.appointmentStarttime, "_appointmentStarttime", parent.parent.parent.parent.parent.parent.parent._startDate);
 			
 		}
 		else if(this.terminObj.appointmentEndtime > parent.parent.parent.parent.parent.parent.parent._endDate){
 			this.setAttribute('height', 22*24-2-this.terminObj.appointmentStarttime.getHours() * 22);
-			if ($debug) Debug.write("2. if",this.terminObj.appointmentStarttime, "_appointmentStarttime", parent.parent.parent.parent._startDate);
+			if ($debug) Debug.write("2. if",this.terminObj.appointmentStarttime, "_appointmentStarttime", parent.parent.parent.parent.parent.parent.parent._startDate);
 		}
 		else if(this.terminObj.appointmentStarttime < parent.parent.parent.parent.parent.parent.parent._startDate){
 			this.setAttribute('y', 0);
 			this.setAttribute('height', this.terminObj.appointmentEndtime.getHours() * 22);
-			if ($debug) Debug.write("3. if",this.terminObj.appointmentStarttime, "_appointmentStarttime", parent.parent.parent.parent._startDate);
+			if ($debug) Debug.write("3. if",this.terminObj.appointmentStarttime, "_appointmentStarttime", parent.parent.parent.parent.parent.parent.parent._startDate);
 		}
 		]]>
 	</handler>
