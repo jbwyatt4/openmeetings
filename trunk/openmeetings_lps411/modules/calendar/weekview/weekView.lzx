@@ -1,5 +1,7 @@
 <library>
-	
+
+<class name="myTestView" extends="view" 
+	   bgcolor="green" width="100" height="20"></class>	
 	    	
 <class name="weekView" extends="view" >
 	
@@ -38,7 +40,7 @@
 				var datecoutnt = new Date();
 				datecoutnt.setTime(monday.getTime() + (86400000*i));
 				if ($debug) Debug.write("datecoutnt: ",datecoutnt);
-				this["_day"+ i].weekday._weekday.setAttribute('text',Weekday[i]+" "+ datecoutnt.getDate());
+				this["_day"+ i].weekday._weekday.setAttribute('text',Weekday[i]+","+" "+ parseDateToString(datecoutnt));
 			}
 			
 			
@@ -56,51 +58,51 @@
     			if ($debug) Debug.write("getAppointmentByRangeWeek: ",value);
 	    		if ($debug) Debug.write("_monday: ",parent._monday);
 	    		if ($debug) Debug.write("_sunday: ",parent._sunday);
+	    		
+	    		parent._day0._tagesansicht._list.clearContent();
+	    		parent._day1._tagesansicht._list.clearContent();
+	    		parent._day2._tagesansicht._list.clearContent();
+	    		parent._day3._tagesansicht._list.clearContent();
+	    		parent._day4._tagesansicht._list.clearContent();
+	    		parent._day5._tagesansicht._list.clearContent();
+	    		parent._day6._tagesansicht._list.clearContent();
+	    		
+	    		//new lz.myTestView(parent._day0._tagesansicht,{y:136});
+	    		
 	    		if(value[0] != null){
-	    		var countX = 45;
 	    		    		
-	    		for (var i=0;i<value.length;i++){
-	    			
-		    		if ($debug) Debug.write("value: ",value[i]);	
-		    		if ($debug) Debug.write("value.appointmentStarttime.getDay(): ",value[i].appointmentStarttime.getDay());
-		    		                    
-		    		//termin.getDay()
-		    		if(value[i].appointmentStarttime.getDay() == 1){
-			    		var day = 0;	    		
-		    		} else if(value[i].appointmentStarttime.getDay() == 2){
-			    		var day = 1;
-			    		countX = 45;
-		    		} else if(value[i].appointmentStarttime.getDay() == 3){
-			    		var day = 2;
-			    		countX = 45;
-		    		} else if(value[i].appointmentStarttime.getDay() == 4){
-			    		var day = 3;
-			    		countX = 45;
-		    		} else if(value[i].appointmentStarttime.getDay() == 5){
-			    		var day = 4;
-			    		countX = 45;
-		    		} else if(value[i].appointmentStarttime.getDay() == 6){
-			    		var day = 5;
-			    		countX = 45;
-		    		} else if(value[i].appointmentStarttime.getDay() == 0) {
-			    		var day = 6;
-			    		countX = 45;
+		    		for (var i=0;i<value.length;i++){
+		    			
+			    		if ($debug) Debug.write("value: ",value[i]);	
+			    		if ($debug) Debug.write("value.appointmentStarttime.getDay(): ",value[i].appointmentStarttime.getDay());
+			    		                    
+			    		//termin.getDay()
+			    		if(value[i].appointmentStarttime.getDay() == 1){
+				    		var day = 0;	    		
+			    		} else if(value[i].appointmentStarttime.getDay() == 2){
+				    		var day = 1;
+			    		} else if(value[i].appointmentStarttime.getDay() == 3){
+				    		var day = 2;
+			    		} else if(value[i].appointmentStarttime.getDay() == 4){
+				    		var day = 3;
+			    		} else if(value[i].appointmentStarttime.getDay() == 5){
+				    		var day = 4;
+			    		} else if(value[i].appointmentStarttime.getDay() == 6){
+				    		var day = 5;
+			    		} else if(value[i].appointmentStarttime.getDay() == 0) {
+				    		var day = 6;
+			    		}
+			    		
+			    		//if ($debug) Debug.write("countX : ",countX);
+			    		new lz.terminareaWeekView(parent["_day"+day]._tagesansicht._list, {
+	    							name:"_terminarea"+i,
+	    							calenderObjRef:parent,
+	    							description:value[i].appointmentName +" Beschreibung: "+ value[i].appointmentDescription,
+	    							terminObj:value[i]
+								});
+	
 		    		}
 		    		
-		    		//if ($debug) Debug.write("countX : ",countX);
-		    		new lz.terminareaWeekView(parent["_day"+day]._tagesansicht._list._outlist, {
-    							name:"_terminarea"+i,
-    							calenderObjRef:parent,
-    							terminObj:value[i],
-    							countX:countX
-							});
-		    		new lz.text(parent["_day"+day]._tagesansicht._list._outlist["_terminarea"+i],{
-		    					text:value[i].appointmentName +" Beschreibung: "+ value[i].appointmentDescription,
-							 	multiline:true
-							});
-		    		countX = countX + 102;
-	    		}
-	    		
 	    		}
     		 ]]>
     	</handler>
@@ -116,8 +118,7 @@
 	<calendarWeekView name="_day5" height="350"></calendarWeekView>
 	<calendarWeekView name="_day6" height="350"></calendarWeekView>
 	
-		
-		    
+	
 	
 </class>
 	
