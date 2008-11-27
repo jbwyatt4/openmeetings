@@ -265,9 +265,17 @@ public class DownloadHandler extends HttpServlet {
 					httpServletResponse.reset();
 					httpServletResponse.resetBuffer();
 					OutputStream out = httpServletResponse.getOutputStream();
-					httpServletResponse.setContentType("APPLICATION/OCTET-STREAM");
-					httpServletResponse.setHeader("Content-Disposition","attachment; filename=\"" + requestedFile + "\"");
-					httpServletResponse.setHeader("Content-Length", ""+ rf.length());
+					
+					if (requestedFile.endsWith(".swf")) {
+						//trigger download to SWF => THIS is a workaround for Flash Player 10, FP 10 does not seem
+						//to accept SWF-Downloads with the Content-Disposition in the Header
+						httpServletResponse.setContentType("application/x-shockwave-flash");
+						httpServletResponse.setHeader("Content-Length", ""+ rf.length());
+					} else {
+						httpServletResponse.setContentType("APPLICATION/OCTET-STREAM");
+						httpServletResponse.setHeader("Content-Disposition","attachment; filename=\"" + requestedFile + "\"");
+						httpServletResponse.setHeader("Content-Length", ""+ rf.length());
+					}
 
 					byte[] buffer = new byte[1024];
 					int readed = -1;
