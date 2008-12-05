@@ -20,8 +20,8 @@
     
     <include href="calendarDayView.lzx" />
     
-     <include href="resources/" />
-      <include href="calendarTabs.lzx" />
-    
-    
+    <include href="resources/" />
+    <include href="calendarTabs.lzx" />
+    <include href="termindetails.lzx" />
+       
 </library>
