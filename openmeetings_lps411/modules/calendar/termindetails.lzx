@@ -1,0 +1,286 @@
+<library>
+	
+	<class name="termindetails" extends="windowpanel" bgcolor="blue" width="400" x="10" visible="false">
+			<attribute name="_kategoryatr" value="0" type="number" />
+			<attribute name="_erinnerungatr" value="null"  />
+			
+			<attribute name="_isDaily" value="false" type="boolean" />
+			<attribute name="_isWeekly" value="false" type="boolean" />  
+			<attribute name="_isMonthly" value="false" type="boolean" />
+			<attribute name="_isYearly" value="false" type="boolean" />    
+				
+			<!--<text name="_kategory" y="10" x="35">Kategorie: </text>-->
+			<labelText name="_kategory" y="10" x="35" labelid="566" width="80"/>
+		 	<combobox name="_kategoryedit" x="${parent._kategory.width + parent._kategory.x + 30}" 
+		 			  width="220" editable="false" shownitems="5" y="${parent._kategory.y}">
+				<handler name="onvalue" args="v">						
+					parent._kategoryatr = Number(this.getValue());												
+					if ($debug) Debug.write("_kategoryatr: ",parent._kategoryatr);
+				</handler>	
+				
+		 	<!--textitmes-->
+		 	</combobox> 
+		 	
+		 	<!--
+		 	<text name="_erinnerung" y="${parent._kategory.height + parent._kategory.y + 10}" 
+		 		x="35">Erinnernung: </text>
+		 	 -->
+		 	
+		 	<labelText name="_erinnerung" y="${parent._kategory.height + parent._kategory.y + 10}" 
+		 			   x="35" labelid="565" width="120" />
+		 	 	
+		 	<combobox name="_erinnerungedit" x="${parent._kategory.width + parent._kategory.x +30}" 
+		 			  width="220" editable="false" shownitems="5" y="${parent._erinnerung.y}">
+				<handler name="onvalue" args="v">						
+					if ($debug) Debug.write("_erinnerungatr: ",parent._erinnerungatr);
+					if(this.getValue == 0 )
+						{
+						parent._erinnerungatr = null;
+						}
+					else{
+					parent._erinnerungatr = this.getValue();												
+					if ($debug) Debug.write("_erinnerungatr: ",parent._erinnerungatr);
+						}
+				</handler> 
+				<handler name="oninit">
+					this.addItem(canvas.getLabelName(568),"0");
+					this.selectItem("0");				
+				</handler>
+		 	</combobox> 
+		 		
+		 	<labelText name="_repetition" y="${parent._kategory.height + parent._kategory.y + 40}" x="35" labelid="567" width="80"/>
+		 	<combobox name="_repetitionselect" x="${parent._kategory.width + parent._kategory.x +30}" 
+		 			  width="220" editable="false" shownitems="5" y="${parent._repetition.y}">
+				<handler name="onselect">
+                        var repitechoice = this.getText();
+                        //canvas[colorchoice+'colors'].setAttribute("isdefault", true);
+                        
+                        switch (repitechoice) {
+							  case "Täglich":
+							  	parent._isDaily = true;
+							  	if ($debug) Debug.write("_isDaily: ",parent._isDaily);						    
+							    break;
+							  case "Wochentlich":
+							    parent._isWeekly = true;
+							    if ($debug) Debug.write("_isWeekly: ",parent._isWeekly);
+							    break;
+							  case "Monatlich":
+							    parent._isMonthly = true;
+							    if ($debug) Debug.write("_isMonthly: ",parent._isMonthly);
+							    break;
+							  case "Jährlich":
+							    parent._isYearly = true;
+							    if ($debug) Debug.write("_isYearly: ",parent._isYearly);
+							    break;
+							  default:
+							   if ($debug) Debug.write("repetition: ","keine");
+							    break;
+							}
+
+                </handler> 
+                					
+				<textlistitem text="keine" value="0"/>
+				<textlistitem text="Täglich" value="1"/>
+             	<textlistitem text="Wochentlich" value="2"/>
+              	<textlistitem text="Monatlich" value="3"/> 
+              	<textlistitem text="Jährlich" value="4"/>            
+		 	<!--textitmes-->
+		 	</combobox> 
+		 	
+		 	<labelText name="_location" labelid="569" width="120" y="${parent._kategory.height + parent._kategory.y + 70}" x="35"/>
+	    	
+	    	<edittext name="_locationedit" x="${parent._kategory.width + parent._kategory.x + 30}" 
+	    		  y="${parent._location.y}" width="${parent._date.width}"></edittext>
+		 		 	
+		 	<view name="_date"  bgcolor="white" y="${parent._kategory.y + parent._kategory.height + 110}" 
+		    	  width="${this.ezeit.x + this.ezeit.width + 5}" height="${this.ezeit.y + this.ezeit.height + 5}"
+		    	   x="${parent._kategoryedit.x}">	            	
+		    	<!--	<text x="${parent._beginn.width + parent._beginn.x + 5}">Datum:</text>
+		    		<text x="${parent._bdatum.width + parent._bdatum.x + 5}">Uhrzeit:</text>-->
+		       	<text name="_beginn" y="20">Beginn:</text> 
+		       <!-- <labelText labelid="570" y="20" ></labelText>-->
+		        	<dateField name="_bdatum" y="20" x="${parent._beginn.width + parent._beginn.x + 5}" width="100" text="" setDefaultToday="true"/>
+		        	<customEdittext name="_bzeit" x="${parent._bdatum.width + parent._bdatum.x + 5}" y="20" width="50" regexpType="time">
+		        					08:00
+		        	</customEdittext>	            	   		
+		       	<text y="${parent.edatum.y}">Ende:</text> 
+		         <!--	<labelText labelid="571" y="${parent.edatum.y}" width="50"/>-->
+		        	<dateField name="edatum" y="${parent._bdatum.y + parent._bdatum.height + 10}" 
+		        			   x="${parent._beginn.width + parent._beginn.x + 5}" width="100" text=""  setDefaultToday="true"/> 	            	
+		        	<customEdittext name="ezeit" x="${parent._bdatum.width + parent._bdatum.x + 5}" 
+		        					y="${parent._bzeit.y + parent._bzeit.height + 10}" width="50" regexpType="time" >
+		        					17:00
+		        	</customEdittext>   	
+		    </view> 
+		    
+		    <text name="_titel" y="${parent._date.height + parent._date.y + 30}" x="35">Titel:</text>
+	    	<edittext name="_titeledit" x="${parent._kategory.width + parent._kategory.x + 30}" 
+	    		  y="${parent._titel.y}" width="${parent.width - this.x - 10}">Neuer Termin</edittext>
+	    		  
+	    	<view y="${parent._titel.height + parent._titel.y + 20}" x="35">	
+	    		<simplelayout axis="x" spacing="2"/>
+	    		
+		    	<view resource="edit_add_remuve_rsc" >
+		    		<attribute name="currentSelection" value="false" type="boolean"/>	
+		    		<handler name="onclick">
+		    
+						//parent.parent._komentar["viseble", true];								
+						//this.setAttribute("frame", 2)
+						if(this.currentSelection == true)
+							{
+							this.setAttribute("frame", 1);
+							parent.parent._komentar.setAttribute('visible', false); //["visible", false];
+							parent.parent._komentar.setAttribute('height', 0);
+							this.currentSelection = false;
+							if ($debug) Debug.write("currentSelection true: ", this.currentSelection);
+							}
+						else
+							{
+							this.setAttribute("frame", 2)
+							parent.parent._komentar.setAttribute('visible', true);//["visible", true];
+							parent.parent._komentar.setAttribute('height', 100);
+							this.currentSelection = true;
+							if ($debug) Debug.write("currentSelection false: ", this.currentSelection);
+							}
+		    		</handler> 
+		    	</view>
+		    <!--	<text >Komentar:</text> -->
+		    <labelText labelid="573" width="100"/>
+		    
+	    	</view>	
+	    	
+		 	<!--scrolledittext-->
+		 	<scrolledittext name="_komentar" y="${parent._titel.height + parent._titel.y + 20}" visible="false" multiline="true"
+		    		  x="${parent._kategory.width + parent._kategory.x + 30}"  width="${parent._titeledit.width}" height="0">
+				<!--<vscrollbar/>-->
+			</scrolledittext>	
+			
+			<view y="${parent._komentar.y + parent._komentar.height + 30}" x="35">
+				<simplelayout axis="x" spacing="2"/>
+				<handler name="onclick">
+					new lz.appointmentMembers(parent.parent, {terminObjRef:parent});
+					//parent._liste.setAttribute('height', 50);
+				</handler>
+				
+				<view resource="edit_add"></view>
+			<!--	<text>Teilnehmer einladen</text> -->
+			 <labelText labelid="574" width="100"/>
+			</view>
+			
+			<view name="_liste" y="${parent._komentar.y + parent._komentar.height + 60}" x="35" 
+				  clip="true"  visible="false" height="0">
+				<view name="_innerlist" layout="axis:y;spacing:2">
+					<method name="clearContent">
+					for (var eg in this.subviews) {
+						this.subviews[eg].destroy();
+					}
+					</method>	
+				</view>
+				<vscrollbar name="_vscrol"/>
+			</view>
+			 
+			<view name="_buttons"   y="${parent._liste.y + parent._liste.height +10}" x="${parent.width/2 -this.width/2}">
+				<simplelayout axis="x" spacing="10"/>		
+			   <view resource="button_cancel_rsc"  opacity="0.7">
+			   		<handler name="onmouseover">
+			   			this.setAttribute('opacity', 1); //setOpacity(1)
+			   		</handler>
+			   		<handler name="onmouseout">
+			   			this.setAttribute('opacity', 0.7); //setOpacity(0.7)
+			   		</handler>
+			   		<handler name="onclick">
+			   		//parent.parent.parent.delTermin.doCall();
+			    	parent.parent.parent.defaulttermindetails();
+			    	</handler>
+			   </view>
+			   <view resource="filesave_rsc"  opacity="0.7">
+			   		<handler name="onmouseover">
+			   			this.setAttribute('opacity', 1); //setOpacity(1)
+			   		</handler>
+			   		<handler name="onmouseout">
+			   			this.setAttribute('opacity', 0.7); //setOpacity(0.7)
+			   		</handler>
+			   		<handler name="onclick">
+			    		<![CDATA[
+			    		parent.parent.parent._termindetails.setAttribute('visible', false);
+			    		if(parseStringToDate(parent.parent._date._bdatum.getText()) > parseStringToDate(parent.parent._date.edatum.getText()) ||  
+			    		parseTimeStringToDate(parent.parent._date._bzeit.getText()) >  parseTimeStringToDate(parent.parent._date.ezeit.getText()) )
+			    	  		
+			        	{
+			    			if ($debug) Debug.write("Error: ", "Ende liegt vor Beginn!");
+							new lz.myalert(parent.parent,{text:"Terminende liegt vor Terminanfang!"})
+			        	}
+			        	else if(!parent.parent._titeledit.getAttribute('text')){
+			        		new lz.myalert(parent.parent,{text:"Geben Sie bitte ein Betreff ein!"});
+			        	}
+			        	else{
+				        	if(parent.parent.parent.terminObjRef == null)
+				       		 	{
+			    				parent.parent.parent.saveAppointment.doCall();
+				    			//parent.parent.parent.defaulttermindetails();
+				    			if ($debug) Debug.write("##### saveAppointment ", parent.parent.parent.terminObjRef);
+				    			}
+				    		else{
+					        	parent.parent.parent.updateAppointment.doCall();
+					    		//parent.parent.parent.defaulttermindetails();
+					    		if ($debug) Debug.write("##### updateAppointment ", parent.parent.parent.terminObjRef);
+			        			}
+			        	}
+			        	]]>
+			    	</handler>
+			   </view>
+			   
+			 <!--   <button   width="$once{parent.width / 3}" enabled="true">
+			    	Löschen
+			    	<handler name="onclick">
+			    	//parent.parent.parent._mitteilung._kategory = 0;
+			    	//parent.parent.closeItem();
+			    	parent.parent.parent.delTermin.doCall();
+			    	parent.parent.parent.defaulttermindetails();
+			    	//parent.parent.parent.getUserAlleTermineByRange.doCall();
+			    	</handler>		    	
+			    	<view resource="icon_small_delete" x="5" y="$once{parent.height / 6}" />
+			    </button> 
+			    		    
+			    <button   width="${immediateparent.width / 3}" text="Neuen Termin Anlegen" >
+			    	<handler name="onclick">	
+			    			if ($debug) Debug.write("terminObjRef: ", parent.parent.parent.terminObjRef);
+			    			parent.parent.parent.terminObjRef = null;
+			    			parent.parent.parent.defaulttermindetails();			    			
+			    	</handler>
+			    	<view resource="icon_small_termin" x="5" y="${parent.height / 6}" />
+			    </button>
+			     
+			    
+			     <button   width="${immediateparent.width / 3}" text="Speichern" enabled="true">
+			    	<handler name="onclick">
+			    		<![CDATA[
+			    		if(parseStringToDate(parent.parent._date._bdatum.getText()) > parseStringToDate(parent.parent._date.edatum.getText()) ||  
+			    		parseTimeStringToDate(parent.parent._date._bzeit.getText()) >  parseTimeStringToDate(parent.parent._date.ezeit.getText()) )
+			    	  		
+			        	{
+			    			if ($debug) Debug.write("Error: ", "Ende liegt vor Beginn!");
+							new lz.myalert(parent.parent,{text:"Terminende liegt vor Terminanfang!"})
+			        	}
+			        	else if(!parent.parent._titeledit.getAttribute('text')){
+			        		new lz.myalert(parent.parent,{text:"Geben Sie bitte ein Betreff ein!"});
+			        	}
+			        	else{
+				        	if(parent.parent.parent.terminObjRef == null)
+				       		 	{
+			    				parent.parent.parent.saveAppointment.doCall();
+				    			//parent.parent.parent.defaulttermindetails();
+				    			}
+				    		else{
+					        	parent.parent.parent.updateUserTermin.doCall();
+					    		//parent.parent.parent.defaulttermindetails();
+			        			}
+			        	}
+			        	]]>
+			    	</handler>
+			    	<view resource="icon_small_termin" x="5" y="${parent.height / 6}" />
+			    </button>-->
+			    </view>
+			</class>
+	
+</library>

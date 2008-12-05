@@ -78,6 +78,7 @@
  		</dateSelector> 
 		
 	<calendarTabs name="_tabslider"></calendarTabs>	
+	<termindetails name="_termindetails"></termindetails>
 	<!--	<view> 
 			<simplelayout axis="y" spacing="2"/>
 			
@@ -117,7 +118,7 @@
 	 		<vscrollbar/>
  		</view>
 		-->
-		<view name="_termindetails" bgcolor="blue" width="400" x="10" visible="false">
+	<!--	<view name="_termindetails" bgcolor="blue" width="400" x="10" visible="false">
 			<attribute name="_kategoryatr" value="0" type="number" />
 			<attribute name="_erinnerungatr" value="null"  />
 			
@@ -126,7 +127,7 @@
 			<attribute name="_isMonthly" value="false" type="boolean" />
 			<attribute name="_isYearly" value="false" type="boolean" />    
 				
-			<!--<text name="_kategory" y="10" x="35">Kategorie: </text>-->
+			
 			<labelText name="_kategory" y="10" x="35" labelid="566" width="80"/>
 		 	<combobox name="_kategoryedit" x="${parent._kategory.width + parent._kategory.x + 30}" 
 		 			  width="220" editable="false" shownitems="5" y="${parent._kategory.y}">
@@ -135,13 +136,10 @@
 					if ($debug) Debug.write("_kategoryatr: ",parent._kategoryatr);
 				</handler>	
 				
-		 	<!--textitmes-->
+		 	
 		 	</combobox> 
 		 	
-		 	<!--
-		 	<text name="_erinnerung" y="${parent._kategory.height + parent._kategory.y + 10}" 
-		 		x="35">Erinnernung: </text>
-		 	 -->
+		 	
 		 	
 		 	<labelText name="_erinnerung" y="${parent._kategory.height + parent._kategory.y + 10}" 
 		 			   x="35" labelid="565" width="120" />
@@ -201,7 +199,7 @@
              	<textlistitem text="Wochentlich" value="2"/>
               	<textlistitem text="Monatlich" value="3"/> 
               	<textlistitem text="Jährlich" value="4"/>            
-		 	<!--textitmes-->
+		 	
 		 	</combobox> 
 		 	
 		 	<labelText name="_location" labelid="569" width="120" y="${parent._kategory.height + parent._kategory.y + 70}" x="35"/>
@@ -212,16 +210,15 @@
 		 	<view name="_date"  bgcolor="white" y="${parent._kategory.y + parent._kategory.height + 110}" 
 		    	  width="${this.ezeit.x + this.ezeit.width + 5}" height="${this.ezeit.y + this.ezeit.height + 5}"
 		    	   x="${parent._kategoryedit.x}">	            	
-		    	<!--	<text x="${parent._beginn.width + parent._beginn.x + 5}">Datum:</text>
-		    		<text x="${parent._bdatum.width + parent._bdatum.x + 5}">Uhrzeit:</text>-->
+		    	
 		       	<text name="_beginn" y="20">Beginn:</text> 
-		       <!-- <labelText labelid="570" y="20" ></labelText>-->
+		      
 		        	<dateField name="_bdatum" y="20" x="${parent._beginn.width + parent._beginn.x + 5}" width="100" text="" setDefaultToday="true"/>
 		        	<customEdittext name="_bzeit" x="${parent._bdatum.width + parent._bdatum.x + 5}" y="20" width="50" regexpType="time">
 		        					08:00
 		        	</customEdittext>	            	   		
 		       	<text y="${parent.edatum.y}">Ende:</text> 
-		         <!--	<labelText labelid="571" y="${parent.edatum.y}" width="50"/>-->
+		         
 		        	<dateField name="edatum" y="${parent._bdatum.y + parent._bdatum.height + 10}" 
 		        			   x="${parent._beginn.width + parent._beginn.x + 5}" width="100" text=""  setDefaultToday="true"/> 	            	
 		        	<customEdittext name="ezeit" x="${parent._bdatum.width + parent._bdatum.x + 5}" 
@@ -261,15 +258,14 @@
 							}
 		    		</handler> 
 		    	</view>
-		    <!--	<text >Komentar:</text> -->
+		   
 		    <labelText labelid="573" width="100"/>
 		    
 	    	</view>	
 	    	
-		 	<!--scrolledittext-->
 		 	<scrolledittext name="_komentar" y="${parent._titel.height + parent._titel.y + 20}" visible="false" multiline="true"
 		    		  x="${parent._kategory.width + parent._kategory.x + 30}"  width="${parent._titeledit.width}" height="0">
-				<!--<vscrollbar/>-->
+				
 			</scrolledittext>	
 			
 			<view y="${parent._komentar.y + parent._komentar.height + 30}" x="35">
@@ -280,7 +276,7 @@
 				</handler>
 				
 				<view resource="edit_add"></view>
-			<!--	<text>Teilnehmer einladen</text> -->
+			
 			 <labelText labelid="574" width="100"/>
 			</view>
 			
@@ -347,7 +343,7 @@
 			    	</handler>
 			   </view>
 			   
-			 <!--   <button   width="$once{parent.width / 3}" enabled="true">
+			   <button   width="$once{parent.width / 3}" enabled="true">
 			    	Löschen
 			    	<handler name="onclick">
 			    	//parent.parent.parent._mitteilung._kategory = 0;
@@ -396,11 +392,11 @@
 			        	]]>
 			    	</handler>
 			    	<view resource="icon_small_termin" x="5" y="${parent.height / 6}" />
-			    </button>-->
+			    </button>
 			</view>
 		
 		
-		</view>
+		</view> -->
 			
 		<method name="defaulttermindetails">
 			
