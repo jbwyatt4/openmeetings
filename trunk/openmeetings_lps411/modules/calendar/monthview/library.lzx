@@ -2,5 +2,6 @@
 
  	<include href="calendarMonthView.lzx" />
  	<include href="monthView.lzx" />
+ 	<include href="cMonthView.lzx" />
 
 </library>

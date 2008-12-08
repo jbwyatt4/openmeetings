@@ -1,12 +1,14 @@
 <library>
 	<class name="calendarMonthView" extends="view">
 		<handler name="oninit">
-			this.setCalendarItem(24);
+			//this.setCalendarItem(24);
 			//if ($debug) Debug.write("calendarMonthView: ",this);
 		</handler>
 		
-		<view name="_tagesansicht"  bgcolor="silver" clip="true" height="${ parent.height }" width="200">
-	 		<view name="_list">
+		<view name="_tagesansicht"  bgcolor="silver" clip="true" height="$once{ parent.height }" width="200">
+	 	<view resource="timetable_weekview" />
+	 	<view resource="balken_weekview" x="40" stretches="width" width="200"/>
+	 	<!--	<view name="_list">
 		 		<view name="_innerlist" clip="true">
 		 			<simplelayout axis="y" spacing="2"/>	
 		 			<method name="clearContent">
@@ -21,8 +23,8 @@
 						this.subviews[eg].destroy();
 					}
 					</method>
-		 		</view>		
-	 		</view>
+		 		</view>	
+	 		</view> -->
 	 		<hscrollbar />
 	 		<vscrollbar/>
 		</view>

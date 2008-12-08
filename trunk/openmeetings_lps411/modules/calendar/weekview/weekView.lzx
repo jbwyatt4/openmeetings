@@ -117,9 +117,7 @@
 	<calendarWeekView name="_day4" height="350"></calendarWeekView>
 	<calendarWeekView name="_day5" height="350"></calendarWeekView>
 	<calendarWeekView name="_day6" height="350"></calendarWeekView>
-	
-	
-	
+		
 </class>
 	
 </library>
