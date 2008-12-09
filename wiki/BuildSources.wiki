@@ -22,7 +22,7 @@ for compiling the client you need to install the !OpenLaszlo-Server 4.2.x:
 http://www.openlaszlo.org
 
 Step-By-Step:
-  * Download and Install !OpenLaszlo 4.2.x (Version > 4.2.x from http://download.openlaszlo.org/nightly/trunk/!)
+  * Download and Install !OpenLaszlo 4.2.x (Version > 4.2.x from http://download.openlaszlo.org/nightly/trunk/!) ... i did compile r11439
   * create a directory *openmeetings* into your !OpenLaszlo-WebRoot directory ($LPS-HOME/Server/lps-4.2.x/) ... on Windows your Path if you're using the default one's will look like C:/Program Files/Openlaszlo Server 
   * Checkout from the SVN using http://code.google.com/p/openmeetings/source/browse/trunk/openmeetings_lps411/ as root of your Project ($CLIENT_SOURCE_ROOT) into the directory *openmeetings* you have created
   * alter the config.xml in ($LPS-HOME/Server/lps-4.2.x/openmeetings/)config.xml (for example C:/Program Files/Openlaszlo Server 4.2.x/Server/lps-4.2.x/openmeetings/config.xml) ... _rtmphostlocal_ should match the IP/domain of your red5-streaming server (if its on the same IP like your Openlaszlo-Server you can leave it blank)
