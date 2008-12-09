@@ -1,0 +1,8 @@
+<library>
+	
+	<class name="appiontmentMonth" extends="view" bgcolor="gray">
+		<attribute name ="terminObj" value="null"/>
+		<text name="appTitel" text="$once{parent.terminObj.appointmentName}" ></text>
+	</class>
+	
+</library>

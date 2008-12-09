@@ -2,11 +2,21 @@
 	
 	<class name="cMonthView" extends="view" height="65" width="135">
 		<attribute name="daydate" value="null" />
+		<attribute name="countsubwievs" value="null" />
 		<simplelayout axis="y" spacing="0"/>
 		<view name="_head" bgcolor="green" width="135">
 			<text name="_date" text="${parent.parent.daydate}"> Mo 31. Dez</text>
 		</view>
-		<view name="_appointemtList" bgcolor="blue" height="45" width="135"></view>
+		<view name="_appointemtList" bgcolor="blue" height="45" width="135" clip="true">
+			<view name="_innerList" layout="axis:y;spacing:1" >
+				<handler name="onaddsubview">
+					parent.parent.countsubwievs+1
+					
+					if(parent.parent.countsubwievs==2) new lz.vscrollbar(parent)
+				</handler>
+			</view>
+			<!--<vscrollbar></vscrollbar> -->
+		</view>
 		
 	</class>
 	
