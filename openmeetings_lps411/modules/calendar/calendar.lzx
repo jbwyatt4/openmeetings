@@ -18,7 +18,8 @@
 	<class name="calendar" extends="view" > 
 		<attribute name ="terminObjRef" value="null"/>
 		<attribute name ="_startDate" value="null"/>
-		<attribute name ="_endDate" value="null"/>	
+		<attribute name ="_endDate" value="null"/>
+		<attribute name ="selecteddate" value="null"/>	
 		
 		<simplelayout axis="x" spacing="2"/>
 		
@@ -445,8 +446,8 @@
 		this._termindetails._date.edatum.setAttribute('text', parseDateToString(this.terminObjRef.appointmentEndtime));
 		this._termindetails._date.ezeit.setAttribute('text', parseDateToStringTimeOnly(this.terminObjRef.appointmentEndtime));
 		
-		if ($debug) Debug.write("remind typId: ",this.terminObjRef.remind.typId);
-		this._termindetails._erinnerungedit.selectItemAt(this.terminObjRef.remind.typId);
+		//if ($debug) Debug.write("remind typId: ",this.terminObjRef.remind.typId);
+		//this._termindetails._erinnerungedit.selectItemAt(this.terminObjRef.remind.typId);
 		
 		if(this.terminObjRef.isDaily = true)
 			{
@@ -643,7 +644,7 @@
 							
 							if(parent._tabslider._week.getAttribute('selected') == true){
 				 				//parent._tabslider._week._weekView._monday._tagesansicht._list._outlist.clearContent();
-				 				parent._tabslider._week._weekView.initWeekByDate(this.selecteddate);
+				 				parent._tabslider._week._weekView.initWeekByDate(parent._startDate); // new Date() _startDate selecteddate
 				 				parent._tabslider._week._weekView.getAppointmentByRangeWeek.doCall();
 	 							}
 							

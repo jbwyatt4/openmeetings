@@ -11,6 +11,38 @@
 	<attribute name="_enddate" value="null" />
 		
 		<simplelayout axis="y" spacing="2"/>
+	<!--	<view name="_head" bgcolor="green">
+			<text>Dezember</text>
+			
+			<view name="previos" resource="leftarrow_rsc" x="100">
+	 		
+	 		<handler name="onclick">				 			
+	 			
+			</handler>
+	 		
+	 		<handler name="onmouseover">
+					this.animate('xoffset', +2, 200)
+					//if ($debug) Debug.write("this: ", this);
+			</handler>
+			<handler name="onmouseout">
+				this.animate('xoffset', 0, 200) //this.setX(this.x-5)							
+			</handler>
+			</view>
+					
+		 	<view name="next" resource="rightarrow_rsc" x="200">
+	 		<handler name="onmouseover">
+				this.animate('xoffset', -2, 200)	 //this.setX(this.x+5)
+				//if ($debug) Debug.write("this: ", this);
+			</handler>
+			<handler name="onmouseout">
+				this.animate('xoffset', 0, 200) //this.setX(this.x-5)
+			</handler>
+			
+			<handler name="onclick">
+							 	
+ 			</handler>			
+			</view>
+		</view>-->
 		<view name="week0"> 
 	    	<simplelayout axis="x" spacing="2"/>
 	    	<cMonthView></cMonthView>
