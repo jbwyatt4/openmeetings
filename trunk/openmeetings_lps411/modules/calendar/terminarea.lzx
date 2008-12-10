@@ -9,8 +9,8 @@
 	<handler name="onclick">
 		if ($debug) Debug.write("this termin: ",this.terminObj);
 		parent.parent.parent.parent.parent.parent.parent.terminObjRef = this.terminObj;
-		if ($debug) Debug.write("terminObjRef: ",parent.parent.parent.parent.parent.parent.parent.terminObjRef);
 		parent.parent.parent.parent.parent.parent.parent.showtermindetails();
+		parent.parent.parent.parent.parent.parent.parent._termindetails.setAttribute('visible', true);
 		//parent.parent.parent.parent._terminButton.onclick.sendEvent();
 	</handler>
 	<handler name="oninit">

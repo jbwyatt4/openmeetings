@@ -1,6 +1,6 @@
 <library>
 	
-	<class name="termindetails" extends="windowpanel" bgcolor="blue" width="400" x="10" visible="false">
+	<class name="termindetails" extends="windowpanel" bgcolor="blue" width="400" x="10" visible="false" closeable="true">
 			<attribute name="_kategoryatr" value="0" type="number" />
 			<attribute name="_erinnerungatr" value="null"  />
 			
@@ -105,12 +105,12 @@
 		        	</customEdittext>	            	   		
 		       	<text y="${parent.edatum.y}">Ende:</text> 
 		         <!--	<labelText labelid="571" y="${parent.edatum.y}" width="50"/>-->
-		        	<dateField name="edatum" y="${parent._bdatum.y + parent._bdatum.height + 10}" 
-		        			   x="${parent._beginn.width + parent._beginn.x + 5}" width="100" text=""  setDefaultToday="true"/> 	            	
-		        	<customEdittext name="ezeit" x="${parent._bdatum.width + parent._bdatum.x + 5}" 
-		        					y="${parent._bzeit.y + parent._bzeit.height + 10}" width="50" regexpType="time" >
-		        					17:00
-		        	</customEdittext>   	
+	        	<dateField name="edatum" y="${parent._bdatum.y + parent._bdatum.height + 10}" 
+	        			   x="${parent._beginn.width + parent._beginn.x + 5}" width="100" text=""  setDefaultToday="true"/> 	            	
+	        	<customEdittext name="ezeit" x="${parent._bdatum.width + parent._bdatum.x + 5}" 
+	        					y="${parent._bzeit.y + parent._bzeit.height + 10}" width="50" regexpType="time" >
+	        					17:00
+	        	</customEdittext>   	
 		    </view> 
 		    
 		    <text name="_titel" y="${parent._date.height + parent._date.y + 30}" x="35">Titel:</text>
@@ -202,7 +202,7 @@
 			   		</handler>
 			   		<handler name="onclick">
 			    		<![CDATA[
-			    		parent.parent.parent._termindetails.setAttribute('visible', false);
+			    		
 			    		if(parseStringToDate(parent.parent._date._bdatum.getText()) > parseStringToDate(parent.parent._date.edatum.getText()) ||  
 			    		parseTimeStringToDate(parent.parent._date._bzeit.getText()) >  parseTimeStringToDate(parent.parent._date.ezeit.getText()) )
 			    	  		
@@ -226,6 +226,7 @@
 					    		if ($debug) Debug.write("##### updateAppointment ", parent.parent.parent.terminObjRef);
 			        			}
 			        	}
+			        	parent.parent.parent._termindetails.setAttribute('visible', false);
 			        	]]>
 			    	</handler>
 			   </view>
