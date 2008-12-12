@@ -1,0 +1,16 @@
+<library>
+	
+	<class name="calenderlistitem" extends="textlistitem">
+		<attribute name ="terminObjRef" value="null"/>
+				
+		<handler name="onclick">
+			parent.parent.parent.parent.parent.parent.parent._termindetails.setAttribute('visible', true);
+			///this.terminObjRef.defaulttermindetails({terminObjRef:this});
+			parent.parent.parent.parent.parent.parent.parent._termindetails._date._bzeit.setAttribute('text',this['text']); //getAttribute('text')
+			//this.terminObjRef._terminButton.onclick.sendEvent();
+			if ($debug) Debug.write("calenderlistitem: ",this);
+		</handler>
+	
+	</class>
+	
+</library>

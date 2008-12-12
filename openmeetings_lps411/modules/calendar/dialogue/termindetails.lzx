@@ -1,6 +1,7 @@
 <library>
 	
 	<class name="termindetails" extends="windowpanel" bgcolor="blue" width="400" x="10" visible="false" closeable="true">
+			<attribute name ="terminObjRef" value="null"/>
 			<attribute name="_kategoryatr" value="0" type="number" />
 			<attribute name="_erinnerungatr" value="null"  />
 			
@@ -226,7 +227,7 @@
 					    		if ($debug) Debug.write("##### updateAppointment ", parent.parent.parent.terminObjRef);
 			        			}
 			        	}
-			        	parent.parent.parent._termindetails.setAttribute('visible', false);
+			        	parent.parent.setAttribute('visible', false);
 			        	]]>
 			    	</handler>
 			   </view>
@@ -282,6 +283,104 @@
 			    	<view resource="icon_small_termin" x="5" y="${parent.height / 6}" />
 			    </button>-->
 			    </view>
+			    
+	    		<method name="defaulttermindetails">
+	
+				this.terminObjRef = null;
+				
+				this._isDaily = false;
+				this._isMonthly = false;
+				this._isWeekly = false;
+				this._isYearly = false;
+				
+				this._kategoryedit.selectItemAt(0); 
+				this._erinnerungedit.selectItemAt(0); 
+				this._locationedit.setAttribute('text', "");
+				this._repetitionselect.selectItemAt(0);
+				//this._guestedit.setAttribute('text',"");
+				this._titeledit.setAttribute('text', "Neuer Termin");
+				this._komentar.setAttribute('text', "");
+				this._date._bdatum.setAttribute('text', parseDateToString(new Date()));
+				this._date._bzeit.setAttribute('text', "08:00");
+				this._date.edatum.setAttribute('text', parseDateToString(new Date()));
+				this._date.ezeit.setAttribute('text', "17:00");
+				
+				this._liste._innerlist.clearContent();
+				this._liste["visible", false];
+				this._liste._vscrol["visible", false];
+				this._liste.setAttribute('height', 0);
+				</method> 
+				
+				<method name="showtermindetails">
+					<![CDATA[
+				if ($debug) Debug.write("terminObjRef:", this.terminObjRef);
+				this._kategoryedit.selectItem(this.terminObjRef.appointmentCategory.categoryId); //setAttribute('value',this.terminObjRef.kategorie.id);
+				this._repetitionselect.selectItemAt(this.terminObjRef.appointmentCategory.categoryId);
+				this._locationedit.setAttribute('text', this.terminObjRef.appointmentLocation);
+				//if(this.terminObjRef.guest != null)
+					//{
+					//this._guestedit.setAttribute('text', this.terminObjRef.guest.vorname+" "+ this.terminObjRef.guest.nachname);
+					//}
+				//else{
+					//this._guestedit.setAttribute('text',"");
+				//}	
+				this._titeledit.setAttribute('text', this.terminObjRef.appointmentName);
+				this._komentar.setAttribute('text', this.terminObjRef.appointmentDescription);
+				this._date._bdatum.setAttribute('text', parseDateToString(this.terminObjRef.appointmentStarttime));
+				this._date._bzeit.setAttribute('text', parseDateToStringTimeOnly(this.terminObjRef.appointmentStarttime));
+				this._date.edatum.setAttribute('text', parseDateToString(this.terminObjRef.appointmentEndtime));
+				this._date.ezeit.setAttribute('text', parseDateToStringTimeOnly(this.terminObjRef.appointmentEndtime));
+				
+				//if ($debug) Debug.write("remind typId: ",this.terminObjRef.remind.typId);
+				//this._erinnerungedit.selectItemAt(this.terminObjRef.remind.typId);
+				
+				if(this.terminObjRef.isDaily = true)
+					{
+					this._repetitionselect.selectItemAt(1);
+					}
+				else if(this.terminObjRef.isWeekly = true)
+					{
+					this._repetitionselect.selectItemAt(2);
+					}
+				else if(this.terminObjRef.isMonthly = true)
+					{
+					this._repetitionselect.selectItemAt(3);
+					}
+				else if(this.terminObjRef.isYeahrly = true)
+					{
+					this._repetitionselect.selectItemAt(4);
+					}
+				
+					this._liste.setAttribute('visible', true); //["visible", true]
+					this._liste.setAttribute('height', 50);
+					this._liste._innerlist.clearContent();
+					
+					for (var i=0;i<this.terminObjRef.meetingMember.length;i++) {
+								var meetingMembers = this.terminObjRef.meetingMember;
+								
+								if ($debug) Debug.write("meetingMembers",meetingMembers[i]);
+								
+								
+								var id = meetingMembers[i].userid.user_id;
+								var vorname = meetingMembers[i].firstname;
+								var nachname = meetingMembers[i].lastname;
+								//var email = meetingMembers[i].adresses.emails[0].mail.email;
+								var email = meetingMembers[i].email;
+														
+								if ($debug) Debug.write("id",id);
+								//if ($debug) Debug.write("Vorname: ",vorname);
+								
+									
+									new lz.searchContactInCalendar(this._liste._innerlist, {
+												refObj:parent,
+						    					userId: id,
+						    					vorname:vorname,				    				
+						    					nachname:nachname,
+						    					email:email
+						    					});
+					}
+						]]>
+				</method> 
 			</class>
 	
 </library>
