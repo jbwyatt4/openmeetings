@@ -1,27 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library>
     
-    <include href="weekview/" />
-    <include href="monthview/" />
+    <include href="weekview/"/>
+    <include href="monthview/"/>
+    <include href="dayview/"/>
+    <include href="dialogue/"/>
+    <include href="resources/" />
+    
     <include href="incubator/scrolledittext.lzx"/>
     <include href="calendar.lzx"/>
+    <include href="calenderlistitem.lzx"/>
     <include href="myScheduledMeetings.lzx"/>
-    <include href="appointmentMembers.lzx"/>
+    
     <include href="liste.lzx"/>
-    <include href="searchResultsContact.lzx"/>
-    <include href="searchContact.lzx"/>
-    <include href="searchResultsAddContact.lzx" />
-    <include href="searchContactInCalendar.lzx" />
-    <include href="ordnerInhaltHead.lzx" />
-    <include href="alerts.lzx" />
-    <include href="enterExternMember.lzx" />
-    <include href="terminarea.lzx" />
-    
-    
-    <include href="calendarDayView.lzx" />
-    
-    <include href="resources/" />
     <include href="calendarTabs.lzx" />
-    <include href="termindetails.lzx" />
        
 </library>

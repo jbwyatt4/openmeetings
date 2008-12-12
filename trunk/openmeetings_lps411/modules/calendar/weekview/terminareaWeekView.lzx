@@ -10,10 +10,10 @@
 	<handler name="onclick">
 		if ($debug) Debug.write("this ",this);
 		//if ($debug) Debug.write("this termin: ",this.terminObj);
-		parent.parent.parent.parent.parent.parent.parent.terminObjRef = this.terminObj;
-		if ($debug) Debug.write("terminObjRef ",parent.parent.parent.parent.parent.parent.parent.terminObjRef);
+		parent.parent.parent.parent.parent.parent.parent._termindetails.terminObjRef = this.terminObj;
+		if ($debug) Debug.write("terminObjRef ",parent.parent.parent.parent.parent.parent.parent._termindetails.terminObjRef);
 		//if ($debug) Debug.write("terminObjRef: ",parent.parent.parent.parent.parent.parent.parent.parent.terminObjRef);
-		parent.parent.parent.parent.parent.parent.parent.showtermindetails();
+		parent.parent.parent.parent.parent.parent.parent._termindetails.showtermindetails();
 		parent.parent.parent.parent.parent.parent.parent._termindetails.setAttribute('visible', true);
 		//parent.parent.parent.parent._terminButton.onclick.sendEvent();
 	</handler>
@@ -29,7 +29,7 @@
 			if ($debug) Debug.write("Minutes",this.terminObj.appointmentStarttime.getMinutes());
 			
 			this.setAttribute("y",this.terminObj.appointmentStarttime.getHours()*17 + 1/4 * this.terminObj.appointmentStarttime.getMinutes());
-    		
+    		if ($debug) Debug.write("y:+++++",this.y);
 		
 			if(this.terminObj.appointmentStarttime.getDay() == 1){
 				
