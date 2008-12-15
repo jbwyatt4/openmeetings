@@ -25,7 +25,7 @@ public class MeetingMember {
 			
 	private Date starttime;
 	private Date updatetime;
-	private String deleted;
+	private Boolean deleted;
 	private String comment;
 	
 	/**
@@ -161,12 +161,12 @@ public class MeetingMember {
 	/**
      * @hibernate.property
      *  column="deleted"
-     *  type="string"
+     *  type="boolean"
      */ 
-	public String getDeleted() {
+	public Boolean getDeleted() {
 		return deleted;
 	}
-	public void setDeleted(String deleted) {
+	public void setDeleted(Boolean deleted) {
 		this.deleted = deleted;
 	}
 	

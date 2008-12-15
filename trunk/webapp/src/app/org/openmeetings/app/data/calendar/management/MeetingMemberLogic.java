@@ -48,6 +48,18 @@ public class MeetingMemberLogic {
 		return null;
 	}
 	
+	
+	
+	public Long deleteMeetingMember(Long meetingMemberId){
+		
+		try {
+			return MeetingMemberDaoImpl.getInstance().deleteMeetingMember(meetingMemberId);
+		} catch (Exception err) {
+			log.error("[deleteMeetingMember]",err);
+		}
+		return null;
+	}
+	
 /*	public List<Appointment> getAppointmentByRange(Long userId ,Date starttime, Date endtime){
 		try {	
 			return AppointmentDaoImpl.getInstance().getAppointmentsByRange(userId, starttime, endtime);

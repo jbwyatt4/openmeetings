@@ -178,10 +178,11 @@ public class MeetingMemberDaoImpl {
 			gm.setMemberStatus(memberStatus);
 			gm.setAppointmentStatus(appointmentStatus);
 			gm.setAppointment(AppointmentDaoImpl.getInstance().getAppointmentById(appointmentId));	
-			gm.setDeleted("false");
+			gm.setDeleted(false);
 			gm.setUpdatetime(new Date());
 			gm.setUserid(Usermanagement.getInstance().getUser(userid));
 			gm.setEmail(email);
+			
 			
 			Object idf = HibernateUtil.createSession();
 			Session session = HibernateUtil.getSession();
@@ -214,9 +215,9 @@ public class MeetingMemberDaoImpl {
 			gm.setAppointment(AppointmentDaoImpl.getInstance().getAppointmentById(appointmentId));
 			gm.setUserid(Usermanagement.getInstance().getUser(userid));
 			gm.setEmail(email);
-								
+							
 			gm.setStarttime(new Date());
-			gm.setDeleted("false");
+			gm.setDeleted(false);
 						
 			Object idf = HibernateUtil.createSession();
 			Session session = HibernateUtil.getSession();
@@ -248,7 +249,7 @@ public class MeetingMemberDaoImpl {
 				//return;
 			}
 			gm.setUpdatetime(new Date());
-			gm.setDeleted("true");
+			gm.setDeleted(true);
 			
 			Object idf = HibernateUtil.createSession();
 			Session session = HibernateUtil.getSession();
@@ -259,9 +260,9 @@ public class MeetingMemberDaoImpl {
 			HibernateUtil.closeSession(idf);
 			return meetingMemberId;
 		} catch (HibernateException ex) {
-			log.error("[deleteAppointementCategory]: " + ex);
+			log.error("[deleteMeetingMember]: ", ex);
 		} catch (Exception ex2) {
-			log.error("[deleteAppointementCategory]: " + ex2);
+			log.error("[deleteMeetingMember]: ", ex2);
 		}
 		return null;
 	}
