@@ -589,7 +589,7 @@
 		 <!--  saveAppointment(String SID, String appointmentName,Long userId, String appointmentLocation,String appointmentDescription, 
 			Date appointmentstart, Date appointmentend, 
 			Boolean isDaily, Boolean isWeekly, Boolean isMonthly, Boolean isYearly, Long categoryId, Long remind) -->
-		   
+		  <!-- 
 		    <netRemoteCallHib name="saveAppointment" funcname="calendarservice.saveAppointment" 
 							  remotecontext="$once{ canvas.thishib }" >     
 				<netparam><method name="getValue">return canvas.sessionId; </method></netparam>
@@ -635,22 +635,18 @@
 	 							}
 							
 							}
-			    		parent.defaulttermindetails();
+			    		parent._termindetails.defaulttermindetails();
 		    		 ]]>
 		    	</handler>
 		    </netRemoteCallHib> 
 		    
 		   
-		  <!-- addMeetingMember(String SID, String firstname, String lastname, String memberStatus,
-			String appointmentStatus, Long appointmentId, Long userid, String email) -->
-		    <netRemoteCallHib name="addMeetingMember" funcname="meetingmemberservice.addMeetingMember" 
+		<netRemoteCallHib name="addMeetingMember" funcname="meetingmemberservice.addMeetingMember" 
 							  remotecontext="$once{ canvas.thishib }" >  
 				
 				<attribute name="contact" value="null" />
-			<!--	<attribute name="appointmentId" value="0" type="number" /> -->
 				<attribute name="appointmentId" value="null" />
-							     
-				
+							     		
 				<netparam><method name="getValue">return canvas.sessionId; </method></netparam>
 				<netparam><method name="getValue">return parent.contact.vorname;</method></netparam>	
 				<netparam><method name="getValue">return parent.contact.nachname;</method></netparam>
@@ -674,9 +670,6 @@
 		    	</handler>
 		    </netRemoteCallHib> 
 		    
-		 <!--   Long updateAppointment(String SID,Long appointmentId ,String appointmentName, Long userId, String appointmentLocation,String appointmentDescription, 
-			Date appointmentstart, Date appointmentend, 
-			Boolean isDaily, Boolean isWeekly, Boolean isMonthly, Boolean isYearly, Long categoryId, Long remind) -->
 		    
 		    <netRemoteCallHib name="updateAppointment" funcname="calendarservice.updateAppointment" 
 							  remotecontext="$once{ canvas.thishib }" >     
@@ -696,7 +689,7 @@
 				<netparam><method name="getValue">return parent.parent._termindetails._erinnerungatr;</method></netparam>
 		    	<handler name="ondata" args="value">
 		    		<![CDATA[
-		    			parent._tagesansicht._list._outlist.clearContent();
+		    			parent._tabslider._daytab._dayview._tagesansicht._list._outlist.clearContent();
 		    			parent.getAppointmentByRange.doCall();
 		    			
 		    		for (var i=0; i<parent._termindetails._liste._innerlist.subviews.length; i++) {
@@ -746,6 +739,7 @@
 		    		 ]]>
 		    	</handler>
 			</netRemoteCallHib>
+			-->
 		    
 		    <!--return Appointments and MeetingMember-->
 	     	<netRemoteCallHib name="getAppointmentByRange" funcname="calendarservice.getAppointmentByRange" 

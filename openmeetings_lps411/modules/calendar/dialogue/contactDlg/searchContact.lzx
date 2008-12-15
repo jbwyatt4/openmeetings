@@ -24,7 +24,7 @@
 		<text  text="$once{parent.userId }" width="20"/>		
 		<text name="_item3"  text="$once{ parent.vorname}" width="60" />
 		<text name="_item4"  text="$once{ parent.nachname }" width="60" />
-		<text name="_item7"  text="$once{ parent.email}" width="200"/>  
+		<text name="_item7"  text="$once{ parent.email}" width="350"/>  
 					 	
  </class>
  

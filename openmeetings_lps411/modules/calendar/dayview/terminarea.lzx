@@ -44,10 +44,10 @@
 	</handler>
 	<view resource="emblem_unreadable_rsc" x="${parent.width - this.width}">
 		<handler name="onclick">
-			parent.calenderObjRef.deleteAppointment.terminObj = parent.terminObj;
-			parent.calenderObjRef.deleteAppointment.terminareaObjRef = parent;
+			parent.calenderObjRef._termindetails.deleteAppointment.terminObj = parent.terminObj;
+			parent.calenderObjRef._termindetails.deleteAppointment.terminareaObjRef = parent;
 			
-			parent.calenderObjRef.deleteAppointment.doCall();
+			parent.calenderObjRef._termindetails.deleteAppointment.doCall();
 			//parent.deleteAppointment.doCall();
 		</handler>
 	</view>

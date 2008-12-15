@@ -5,7 +5,7 @@
 	
 	<attribute name ="terminObjRef" value="null"/>
 	
-	<view name="_search" layout="axis:x;spacing:2" y="30" x="$once{ parent.width/2-this.width/2 - 20}">
+	<view name="_search" layout="axis:x;spacing:2" y="30" x="20">
 		<edittext name="_criteria" width="150" >
 			
 		</edittext>
@@ -22,7 +22,7 @@
 			<handler name="onclick">			
 			//parent.parent.getUserContactsBySearchByList.doCall();
 			//parent.parent.getAllUserBySearchRange.doCall();
-			new lz.enterExternMember(parent.parent, {refObj:parent.parent});
+			new lz.enterExternMember(parent.parent.parent, {refObj:parent.parent, x:parent.parent.x, y:parent.parent.y});
 			</handler>
 		</button>
 	</view>
@@ -63,7 +63,7 @@
 	    			if (parent._list){
 	    				parent._list.destroy();
 	    			}
-		    		new lz.searchResultsContact(parent,{name:'_list', y:70, width:520, refObj:this});
+		    		new lz.searchResultsContact(parent,{name:'_list', y:70, width:700, refObj:this});
 		    		//new userSearchHead(parent._list._inner);
 				    for (var i=0;i<result.length;i++) {
 						if ($debug) Debug.write("UserList",result[i]);
