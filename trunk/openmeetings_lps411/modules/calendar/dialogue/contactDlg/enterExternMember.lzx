@@ -28,7 +28,10 @@
 						vorname:parent.parent.vorname["text"], nachname:parent.parent.nachname["text"], email:parent.parent.email["text"]});
 						//if ($debug) Debug.write("_innerlist: ", parent.parent.parent.refObj.terminObjRef._liste._innerlist);
 						parent.parent.parent.refObj.terminObjRef._liste.setAttribute("visible", true);
-			
+						parent.parent.vorname="";
+						parent.parent.nachname="";
+						parent.parent.email="";
+						parent.parent.parent.close();
 						//if ($debug) Debug.write("userId  search: ",parent.parent.parent.userId);
 					</handler>
 				</button>

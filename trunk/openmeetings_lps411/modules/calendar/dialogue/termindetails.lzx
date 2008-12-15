@@ -1,6 +1,6 @@
 <library>
 	
-	<class name="termindetails" extends="windowpanel" bgcolor="blue" width="400" x="10" visible="false" closeable="true">
+	<class name="termindetails" extends="windowpanel" bgcolor="blue" width="400" x="10" visible="false" closeable="false">
 			<attribute name ="terminObjRef" value="null"/>
 			<attribute name="_kategoryatr" value="0" type="number" />
 			<attribute name="_erinnerungatr" value="null"  />
@@ -8,7 +8,12 @@
 			<attribute name="_isDaily" value="false" type="boolean" />
 			<attribute name="_isWeekly" value="false" type="boolean" />  
 			<attribute name="_isMonthly" value="false" type="boolean" />
-			<attribute name="_isYearly" value="false" type="boolean" />    
+			<attribute name="_isYearly" value="false" type="boolean" />   
+			
+		
+			<handler name="oninit">
+				if ($debug) Debug.write("terminObjRef: ",this.terminObjRef);
+			</handler>
 				
 			<!--<text name="_kategory" y="10" x="35">Kategorie: </text>-->
 			<labelText name="_kategory" y="10" x="35" labelid="566" width="80"/>
@@ -21,11 +26,6 @@
 				
 		 	<!--textitmes-->
 		 	</combobox> 
-		 	
-		 	<!--
-		 	<text name="_erinnerung" y="${parent._kategory.height + parent._kategory.y + 10}" 
-		 		x="35">Erinnernung: </text>
-		 	 -->
 		 	
 		 	<labelText name="_erinnerung" y="${parent._kategory.height + parent._kategory.y + 10}" 
 		 			   x="35" labelid="565" width="120" />
@@ -191,7 +191,8 @@
 			   		</handler>
 			   		<handler name="onclick">
 			   		//parent.parent.parent.delTermin.doCall();
-			    	parent.parent.parent.defaulttermindetails();
+			    	parent.parent.defaulttermindetails();
+			    	parent.parent.close();
 			    	</handler>
 			   </view>
 			   <view resource="filesave_rsc"  opacity="0.7">
@@ -215,16 +216,16 @@
 			        		new lz.myalert(parent.parent,{text:"Geben Sie bitte ein Betreff ein!"});
 			        	}
 			        	else{
-				        	if(parent.parent.parent.terminObjRef == null)
+				        	if(parent.parent.terminObjRef == null)
 				       		 	{
-			    				parent.parent.parent.saveAppointment.doCall();
+			    				parent.parent.saveAppointment.doCall();
 				    			//parent.parent.parent.defaulttermindetails();
-				    			if ($debug) Debug.write("##### saveAppointment ", parent.parent.parent.terminObjRef);
+				    			if ($debug) Debug.write("##### saveAppointment ", parent.parent.terminObjRef);
 				    			}
 				    		else{
-					        	parent.parent.parent.updateAppointment.doCall();
+					        	parent.parent.updateAppointment.doCall();
 					    		//parent.parent.parent.defaulttermindetails();
-					    		if ($debug) Debug.write("##### updateAppointment ", parent.parent.parent.terminObjRef);
+					    		if ($debug) Debug.write("##### updateAppointment ", parent.parent.terminObjRef);
 			        			}
 			        	}
 			        	parent.parent.setAttribute('visible', false);
@@ -350,11 +351,11 @@
 					{
 					this._repetitionselect.selectItemAt(4);
 					}
-				
+				if(this.terminObjRef.meetingMember.length>0){
 					this._liste.setAttribute('visible', true); //["visible", true]
 					this._liste.setAttribute('height', 50);
 					this._liste._innerlist.clearContent();
-					
+				
 					for (var i=0;i<this.terminObjRef.meetingMember.length;i++) {
 								var meetingMembers = this.terminObjRef.meetingMember;
 								
@@ -379,8 +380,195 @@
 						    					email:email
 						    					});
 					}
+					}
 						]]>
 				</method> 
-			</class>
+				
+				<netRemoteCallHib name="saveAppointment" funcname="calendarservice.saveAppointment" 
+							  remotecontext="$once{ canvas.thishib }" >     
+				<netparam><method name="getValue">return canvas.sessionId; </method></netparam>
+				<netparam><method name="getValue">return parent.parent._titeledit['text'];</method></netparam>	
+				<netparam><method name="getValue">return canvas.thishib.UserID;</method></netparam>
+				<netparam><method name="getValue">return parent.parent._locationedit['text'];</method></netparam>
+				<netparam><method name="getValue">return parent.parent._komentar['text'];</method></netparam>
+				<netparam><method name="getValue">return parseStringToDateTime(parent.parent._date._bdatum.getText() + parent.parent._date._bzeit.getText());</method></netparam>
+				<netparam><method name="getValue">return parseStringToDateTime(parent.parent._date.edatum.getText() + parent.parent._date.ezeit.getText());</method></netparam>
+				<netparam><method name="getValue">return parent.parent._isDaily;</method></netparam>
+				<netparam><method name="getValue">return parent.parent._isMonthly;</method></netparam>
+				<netparam><method name="getValue">return parent.parent._isWeekly;</method></netparam>
+				<netparam><method name="getValue">return parent.parent._isYearly;</method></netparam>
+				<netparam><method name="getValue">return parent.parent._kategoryatr;</method></netparam>
+				<netparam><method name="getValue">return parent.parent._erinnerungatr;</method></netparam>
+				
+		    	<handler name="ondata" args="value">
+		    		<![CDATA[
+		    		
+		    		parent.addMeetingMember.appointmentId = value;	
+		    		//parent.getUserAlleTermineByRange.doCall();
+		    		
+			    		if ($debug) Debug.write("addUserTermine: ",value);
+			    		
+								for (var i=0; i<parent._liste._innerlist.subviews.length; i++) {
+								 var contact = parent._liste._innerlist.subviews[i];
+								 //if ($debug) Debug.write("contact: ",contact);
+								  //if ($debug) Debug.write("userId: ",contact.userId);
+								  //if ($debug) Debug.write("vorname: ",contact.vorname);
+								  //if ($debug) Debug.write("nachname: ",contact.nachname);
+								  //if ($debug) Debug.write("email: ",contact.email);
+								parent.addMeetingMember.contact = contact;
+								parent.addMeetingMember.doCall();
+								}
+			     		if(parent._liste._innerlist.subviews.length<1){
+							
+							parent.parent.getAppointmentByRange.doCall()
+							
+							if(parent.parent._tabslider._week.getAttribute('selected') == true){
+				 				//parent._tabslider._week._weekView._monday._tagesansicht._list._outlist.clearContent();
+				 				parent.parent._tabslider._week._weekView.initWeekByDate(parent.parent._startDate); // new Date() _startDate selecteddate
+				 				parent.parent._tabslider._week._weekView.getAppointmentByRangeWeek.doCall();
+	 							}
+							
+							}
+			    		parent.defaulttermindetails();
+		    		 ]]>
+		    	</handler>
+		    </netRemoteCallHib> 
+		    
+		   
+		  <!-- addMeetingMember(String SID, String firstname, String lastname, String memberStatus,
+			String appointmentStatus, Long appointmentId, Long userid, String email) -->
+		    <netRemoteCallHib name="addMeetingMember" funcname="meetingmemberservice.addMeetingMember" 
+							  remotecontext="$once{ canvas.thishib }" >  
+				
+				<attribute name="contact" value="null" />
+				<attribute name="appointmentId" value="null" />
+							     	
+				<netparam><method name="getValue">return canvas.sessionId; </method></netparam>
+				<netparam><method name="getValue">return parent.contact.vorname;</method></netparam>	
+				<netparam><method name="getValue">return parent.contact.nachname;</method></netparam>
+				<netparam><method name="getValue">return 0;</method></netparam>
+				<netparam><method name="getValue">return 0;</method></netparam>
+				<netparam><method name="getValue">return parent.appointmentId;</method></netparam>
+				<netparam><method name="getValue">return parent.contact.userId;</method></netparam>
+				<netparam><method name="getValue">return parent.contact.email;</method></netparam>
+				
+		    	<handler name="ondata" args="value">
+		    		<![CDATA[
+		    		//parent._termindetails._liste._innerlist.clearContent();
+		    		//parent._termindetails._liste["viseble", false];
+		    		//parent._termindetails._liste._vscrol["viseble", false];
+		    		
+		    		
+			    		if ($debug) Debug.write("addMeetingMember: ",value);
+			    		
+			    		parent.parent.getAppointmentByRange.doCall()
+		    		 ]]>
+		    	</handler>
+		    </netRemoteCallHib> 
+		    
+		    <netRemoteCallHib name="deleteMeetingMember" funcname="meetingmemberservice.deleteMeetingMember" 
+							  remotecontext="$once{ canvas.thishib }" >  
+				
+				<attribute name="contact" value="null" />
+				<attribute name="appointmentId" value="null" />
+							     	
+				<netparam><method name="getValue">return canvas.sessionId; </method></netparam>
+				<netparam><method name="getValue">return canvas.meetingMemberId; </method></netparam>
+				
+		    	<handler name="ondata" args="value">
+		    		<![CDATA[
+		    		
+			    		if ($debug) Debug.write("deleteMeetingMember: ",value);
+			    		
+			    		//parent.parent.getAppointmentByRange.doCall()
+		    		 ]]>
+		    	</handler>
+		    </netRemoteCallHib> 
+		    
+		 <!--   Long updateAppointment(String SID,Long appointmentId ,String appointmentName, Long userId, String appointmentLocation,String appointmentDescription, 
+			Date appointmentstart, Date appointmentend, 
+			Boolean isDaily, Boolean isWeekly, Boolean isMonthly, Boolean isYearly, Long categoryId, Long remind) -->
+		    
+		    <netRemoteCallHib name="updateAppointment" funcname="calendarservice.updateAppointment" 
+							  remotecontext="$once{ canvas.thishib }" >     
+				<netparam><method name="getValue">return canvas.sessionId; </method></netparam>
+				<netparam><method name="getValue">return parent.parent.terminObjRef.appointmentId;</method></netparam>
+				<netparam><method name="getValue">return parent.parent._titeledit['text'];</method></netparam>
+				<netparam><method name="getValue">return canvas.thishib.UserID;</method></netparam>
+				<netparam><method name="getValue">return parent.parent._locationedit['text'];</method></netparam>
+				<netparam><method name="getValue">return parent.parent._komentar['text'];</method></netparam>
+				<netparam><method name="getValue">return parseStringToDateTime(parent.parent._date._bdatum.getText() + parent.parent._date._bzeit.getText());</method></netparam>
+				<netparam><method name="getValue">return parseStringToDateTime(parent.parent._date.edatum.getText() + parent.parent._date.ezeit.getText());</method></netparam>
+				<netparam><method name="getValue">return parent.parent._isDaily;</method></netparam>
+				<netparam><method name="getValue">return parent.parent._isMonthly;</method></netparam>
+				<netparam><method name="getValue">return parent.parent._isWeekly;</method></netparam>
+				<netparam><method name="getValue">return parent.parent._isYearly;</method></netparam>
+				<netparam><method name="getValue">return parent.parent._kategoryatr;</method></netparam>
+				<netparam><method name="getValue">return parent.parent._erinnerungatr;</method></netparam>
+		    	<handler name="ondata" args="value">
+		    		<![CDATA[
+		    			parent.parent._tabslider._daytab._dayview._tagesansicht._list._outlist.clearContent();
+		    			parent.parent.getAppointmentByRange.doCall();
+		    			
+		    		for (var i=0; i<parent._liste._innerlist.subviews.length; i++) {
+								var contact = parent._liste._innerlist.subviews[i];
+								if ($debug) Debug.write("terminObjRef if: ",parent.terminObjRef);
+								
+								//if(parent.terminObjRef.meetingMember.equals(contact)){
+								//if ($debug) Debug.write("contains : ",contact);
+								
+								}
+								
+								for(var j=0;j<parent.terminObjRef.meetingMember.length;j++){
+								
+								if (parent.terminObjRef.meetingMember[j].userid.user_id==contact.userId) 
+									 	{
+									 		if ($debug) Debug.write("contact if: ",contact);
+									 		
+									 	}else{
+											 if ($debug) Debug.write("contact: ",contact);
+											  //if ($debug) Debug.write("userId: ",contact.userId);
+											  //if ($debug) Debug.write("vorname: ",contact.vorname);
+											  //if ($debug) Debug.write("nachname: ",contact.nachname);
+											  //if ($debug) Debug.write("email: ",contact.email);
+											parent.addMeetingMember.appointmentId = parent.terminObjRef.appointmentId;
+											parent.addMeetingMember.contact = contact;
+											parent.addMeetingMember.doCall();
+									 	}
+								 	}
+								}
+		    		
+			    		if ($debug) Debug.write("updateUserTermin: ",value);
+			    		parent.defaulttermindetails();
+		    		 ]]>
+		    	</handler>
+		    </netRemoteCallHib> 
+		    
+		    <netRemoteCallHib name="deleteAppointment" funcname="calendarservice.deleteAppointment" 
+							  remotecontext="$once{ canvas.thishib }" >     
+				<attribute name ="terminObj" value="null"/>
+				<attribute name ="terminareaObjRef" value="null"/>
+				
+				<netparam><method name="getValue">return canvas.sessionId; </method></netparam>
+				<netparam><method name="getValue">return parent.terminObj.appointmentId;</method></netparam>
+		    	<handler name="ondata" args="value">
+		    		<![CDATA[
+		    			//parent._tagesansicht._list._outlist.clearContent();
+		    			
+			    		if ($debug) Debug.write("deleteAppointment: ",value);
+			    		if ($debug) Debug.write("Appointment_id: ",this.terminObj.appointmentId);
+			    		if ($debug) Debug.write("terminObj: ",this.terminObj);
+			    		//parent.updateUserMessagesTerminIdToNull.doCall();
+			    		if(this.terminareaObjRef != null)
+			    			{
+			    			this.terminareaObjRef.destroyThis();
+			    			}
+			    		
+			    		parent.parent.getAppointmentByRange.doCall();
+			    		
+		    		 ]]>
+		    	</handler>
+			</netRemoteCallHib>
+	</class>
 	
 </library>

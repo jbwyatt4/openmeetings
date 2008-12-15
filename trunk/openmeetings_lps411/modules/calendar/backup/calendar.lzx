@@ -369,7 +369,7 @@
 				    		else{
 					        	parent.parent.parent.updateAppointment.doCall();
 					    		//parent.parent.parent.defaulttermindetails();
-					    		if ($debug) Debug.write("##### updateAppointment ", parent.parent.parent.terminObjRef);
+					    		if ($debug) Debug.write("##### updateAppointment terminObjRef? null ", parent.parent.parent.terminObjRef);
 			        			}
 			        	}
 			        	]]>
