@@ -50,7 +50,7 @@ public class MeetingMemberLogic {
 	
 	
 	
-	public Long deleteMeetingMember(Long meetingMemberId){
+	public Long deleteMeetingMember(Long meetingMemberId ){
 		
 		try {
 			return MeetingMemberDaoImpl.getInstance().deleteMeetingMember(meetingMemberId);

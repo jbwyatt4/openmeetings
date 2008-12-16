@@ -14,6 +14,7 @@ import org.hibernate.criterion.Restrictions;
 import org.openmeetings.app.data.basic.Configurationmanagement;
 import org.openmeetings.app.data.user.Usermanagement;
 import org.openmeetings.app.hibernate.beans.calendar.Appointment;
+import org.openmeetings.app.hibernate.beans.calendar.MeetingMember;
 import org.openmeetings.app.hibernate.beans.lang.FieldLanguage;
 import org.openmeetings.app.hibernate.beans.lang.Fieldlanguagesvalues;
 import org.openmeetings.app.hibernate.beans.user.Users;
@@ -136,7 +137,7 @@ public class AppointmentDaoImpl {
 	
 	public Long updateAppointment(Long appointmentId, String appointmentName, Long userId, String appointmentDescription, 
 			Date appointmentstart, Date appointmentend,
-			Boolean isDaily, Boolean isWeekly, Boolean isMonthly, Boolean isYearly, Long categoryId, Long remind ) {
+			Boolean isDaily, Boolean isWeekly, Boolean isMonthly, Boolean isYearly, Long categoryId, Long remind, List<MeetingMember> mmClient) {
 		try {
 			
 			
@@ -162,8 +163,23 @@ public class AppointmentDaoImpl {
 			session.update(ap);
 
 			tx.commit();
-			HibernateUtil.closeSession(idf);
-			return appointmentId;
+		    HibernateUtil.closeSession(idf);
+		    
+		    List<MeetingMember>	mmServer = MeetingMemberDaoImpl.getInstance().getMeetingMemberByAppointmentId(appointmentId);
+			for(int i=0;i<mmClient.size();i++){
+				//Users ClientUserId = mmClient.get(i).getUserid();
+				MeetingMember clientMM = mmClient.get(i);
+				
+				if(mmServer.contains(clientMM)){
+					log.debug("MeetingMember alredy contains");
+				}else{
+					MeetingMemberDaoImpl.getInstance().addMeetingMember(clientMM.getFirstname(), 
+							clientMM.getLastname(), clientMM.getMemberStatus(), clientMM.getAppointmentStatus(), 
+							appointmentId, clientMM.getUserid().getUser_id(), clientMM.getEmail());
+				}
+			}
+		    
+		    return appointmentId;
 		} catch (HibernateException ex) {
 			log.error("[updateAppointment]: ",ex);
 		} catch (Exception ex2) {
