@@ -13,7 +13,7 @@
 				//new lz.searchContact(parent.refObj.terminObjRef._liste._innerlist,{userId:parent.userId, vorname:parent.vorname, nachname:parent.nachname, email:parent.email})
 				parent.destroy();
 				//parent.refObj.terminObjRef._liste.setAttribute("visible", true);
-				if ($debug) Debug.write("Visible: ",parent.refObj.terminObjRef._liste['visible']);
+				//if ($debug) Debug.write("Visible: ",parent.refObj.terminObjRef._liste['visible']);
 				//parent.refObj.terminObjRef._liste;
 				//new selectKategoryStatus(canvas,{_contactId:parent.userId});
 				if ($debug) Debug.write("userId  search: ",parent.userId);
