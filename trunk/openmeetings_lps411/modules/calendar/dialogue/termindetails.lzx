@@ -512,8 +512,8 @@
 		    			
 		    		for (var i=0; i<parent._liste._innerlist.subviews.length; i++) {
 								var contact = parent._liste._innerlist.subviews[i];
-								if ($debug) Debug.write("terminObjRef if: ",parent.terminObjRef);
-								if ($debug) Debug.write("contact if+++++: ",contact);
+								//if ($debug) Debug.write("terminObjRef: ",parent.terminObjRef);
+								//if ($debug) Debug.write("contact+++++: ",contact);
 								
 								//if(parent.terminObjRef.meetingMember.equals(contact)){
 								//if ($debug) Debug.write("contains : ",contact);
@@ -522,19 +522,21 @@
 								
 								for(var j=0;j<parent.terminObjRef.meetingMember.length;j++){
 								
-								if (parent.terminObjRef.meetingMember[j].userid.user_id==contact.userId) 
-									 	{
-									 		if ($debug) Debug.write("contact if: ",contact);
-									 		
-									 	}else{
-											 if ($debug) Debug.write("contact: ",contact);
-											  //if ($debug) Debug.write("userId: ",contact.userId);
-											  //if ($debug) Debug.write("vorname: ",contact.vorname);
-											  //if ($debug) Debug.write("nachname: ",contact.nachname);
-											  //if ($debug) Debug.write("email: ",contact.email);
-											parent.addMeetingMember.appointmentId = parent.terminObjRef.appointmentId;
-											parent.addMeetingMember.contact = contact;
-											parent.addMeetingMember.doCall();
+									if (parent.terminObjRef.meetingMember[j].userid.user_id==contact.userId) 
+										 	{
+										 		if ($debug) Debug.write("contact if: ",contact);
+										 		
+										 	}else{
+												 if ($debug) Debug.write("contact+++++: ",contact);
+												 if ($debug) Debug.write("user_id else: ",parent.terminObjRef.meetingMember[j].userid.user_id);
+												 if ($debug) Debug.write("contact.userId else: ",contact.userId);
+												 //if ($debug) Debug.write("userId: ",contact.userId);
+												  //if ($debug) Debug.write("vorname: ",contact.vorname);
+												  //if ($debug) Debug.write("nachname: ",contact.nachname);
+												  //if ($debug) Debug.write("email: ",contact.email);
+												parent.addMeetingMember.appointmentId = parent.terminObjRef.appointmentId;
+												parent.addMeetingMember.contact = contact;
+												parent.addMeetingMember.doCall();
 									 	}
 								 	
 								}
