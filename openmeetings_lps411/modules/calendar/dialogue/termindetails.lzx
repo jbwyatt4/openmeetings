@@ -10,7 +10,10 @@
 			<attribute name="_isMonthly" value="false" type="boolean" />
 			<attribute name="_isYearly" value="false" type="boolean" />   
 			
-		
+			<handler name="onclick">
+				if ($debug) Debug.write("_isDaily: ",this._isDaily);
+			</handler>
+			
 			<handler name="oninit">
 				if ($debug) Debug.write("terminObjRef: ",this.terminObjRef);
 			</handler>
@@ -59,21 +62,37 @@
                         switch (repitechoice) {
 							  case "Täglich":
 							  	parent._isDaily = true;
+							  	parent._isMonthly = false;
+							  	parent._isWeekly = false;
+							  	parent._isYearly = false;
 							  	if ($debug) Debug.write("_isDaily: ",parent._isDaily);						    
 							    break;
 							  case "Wochentlich":
 							    parent._isWeekly = true;
+							    parent._isDaily = false;
+							  	parent._isMonthly = false;
+							  	parent._isYearly = false;
 							    if ($debug) Debug.write("_isWeekly: ",parent._isWeekly);
 							    break;
 							  case "Monatlich":
 							    parent._isMonthly = true;
+							    parent._isDaily = false;
+							    parent._isWeekly = false;
+							  	parent._isYearly = false;
 							    if ($debug) Debug.write("_isMonthly: ",parent._isMonthly);
 							    break;
 							  case "Jährlich":
 							    parent._isYearly = true;
+							    parent._isMonthly = false;
+							    parent._isDaily = false;
+							    parent._isWeekly = false;
 							    if ($debug) Debug.write("_isYearly: ",parent._isYearly);
 							    break;
 							  default:
+							  	parent._isYearly = false;
+							    parent._isMonthly = false;
+							    parent._isDaily = false;
+							    parent._isWeekly = false;
 							   if ($debug) Debug.write("repetition: ","keine");
 							    break;
 							}
@@ -124,7 +143,6 @@
 		    	<view resource="edit_add_remuve_rsc" >
 		    		<attribute name="currentSelection" value="false" type="boolean"/>	
 		    		<handler name="onclick">
-		    
 						//parent.parent._komentar["viseble", true];								
 						//this.setAttribute("frame", 2)
 						if(this.currentSelection == true)
@@ -223,7 +241,8 @@
 				    			if ($debug) Debug.write("##### saveAppointment ", parent.parent.terminObjRef);
 				    			}
 				    		else{
-					        	parent.parent.updateAppointment.doCall();
+					        	//parent.parent.updateAppointment.doCall();
+					        	parent.parent.prepareUpdateCall();
 					    		//parent.parent.parent.defaulttermindetails();
 					    		if ($debug) Debug.write("##### updateAppointment ", parent.parent.terminObjRef);
 			        			}
@@ -316,7 +335,19 @@
 					<![CDATA[
 				if ($debug) Debug.write("terminObjRef:", this.terminObjRef);
 				this._kategoryedit.selectItem(this.terminObjRef.appointmentCategory.categoryId); //setAttribute('value',this.terminObjRef.kategorie.id);
-				this._repetitionselect.selectItemAt(this.terminObjRef.appointmentCategory.categoryId);
+				
+				if(this.terminObjRef.isDaily){
+					this._repetitionselect.selectItemAt(1);
+				}else if(this.terminObjRef.isWeekly){
+					this._repetitionselect.selectItemAt(3);
+				}else if(this.terminObjRef.isMonthly){
+					this._repetitionselect.selectItemAt(2);
+				}else if(this.terminObjRef.isYearly){
+					this._repetitionselect.selectItemAt(4);
+				}else{
+					this._repetitionselect.selectItemAt(0);
+				}
+				
 				this._locationedit.setAttribute('text', this.terminObjRef.appointmentLocation);
 				//if(this.terminObjRef.guest != null)
 					//{
@@ -335,22 +366,6 @@
 				//if ($debug) Debug.write("remind typId: ",this.terminObjRef.remind.typId);
 				//this._erinnerungedit.selectItemAt(this.terminObjRef.remind.typId);
 				
-				if(this.terminObjRef.isDaily = true)
-					{
-					this._repetitionselect.selectItemAt(1);
-					}
-				else if(this.terminObjRef.isWeekly = true)
-					{
-					this._repetitionselect.selectItemAt(2);
-					}
-				else if(this.terminObjRef.isMonthly = true)
-					{
-					this._repetitionselect.selectItemAt(3);
-					}
-				else if(this.terminObjRef.isYeahrly = true)
-					{
-					this._repetitionselect.selectItemAt(4);
-					}
 				if(this.terminObjRef.meetingMember.length>0){
 					this._liste.setAttribute('visible', true); //["visible", true]
 					this._liste.setAttribute('height', 50);
@@ -485,12 +500,32 @@
 		    	</handler>
 		    </netRemoteCallHib> 
 		    
+		    <method name="prepareUpdateCall">
+		    	<![CDATA[
+		    	var MeetingMember = new Array();
+		    	
+		    	for(var i=0;i<this._liste._innerlist.subviews.length;i++){
+		    		MeetingMember[i] = new Object();
+			    	MeetingMember[i] ["userId"]=this._liste._innerlist.subviews[i].userId;
+			    	MeetingMember[i] ["firstname"]=this._liste._innerlist.subviews[i].vorname;
+			    	MeetingMember[i] ["lastname"]=this._liste._innerlist.subviews[i].nachname;
+			    	MeetingMember[i] ["email"]=this._liste._innerlist.subviews[i].email;   	
+		    	}
+		    	
+		    	if ($debug) Debug.write("MeetingMember+++++: ",MeetingMember);
+		    	this.updateAppointment.arrayMeetingMember = MeetingMember;
+		    	this.updateAppointment.doCall();
+		    	 ]]>
+		    </method>
+		    
 		 <!--   Long updateAppointment(String SID,Long appointmentId ,String appointmentName, Long userId, String appointmentLocation,String appointmentDescription, 
 			Date appointmentstart, Date appointmentend, 
 			Boolean isDaily, Boolean isWeekly, Boolean isMonthly, Boolean isYearly, Long categoryId, Long remind) -->
 		    
 		    	<netRemoteCallHib name="updateAppointment" funcname="calendarservice.updateAppointment" 
-							  remotecontext="$once{ canvas.thishib }" >     
+							  remotecontext="$once{ canvas.thishib }" >  
+				<attribute name="arrayMeetingMember" value="null"/>	
+						     
 				<netparam><method name="getValue">return canvas.sessionId; </method></netparam>
 				<netparam><method name="getValue">return parent.parent.terminObjRef.appointmentId;</method></netparam>
 				<netparam><method name="getValue">return parent.parent._titeledit['text'];</method></netparam>
@@ -505,41 +540,43 @@
 				<netparam><method name="getValue">return parent.parent._isYearly;</method></netparam>
 				<netparam><method name="getValue">return parent.parent._kategoryatr;</method></netparam>
 				<netparam><method name="getValue">return parent.parent._erinnerungatr;</method></netparam>
+				
+				<netparam><method name="getValue">return parent.arrayMeetingMember;</method></netparam>
 		    	<handler name="ondata" args="value">
 		    		<![CDATA[
 		    			parent.parent._tabslider._daytab._dayview._tagesansicht._list._outlist.clearContent();
 		    			parent.parent.getAppointmentByRange.doCall();
 		    			
-		    		for (var i=0; i<parent._liste._innerlist.subviews.length; i++) {
-								var contact = parent._liste._innerlist.subviews[i];
+		    		//for (var i=0; i<parent._liste._innerlist.subviews.length; i++) {
+								//var contact = parent._liste._innerlist.subviews[i];
 								//if ($debug) Debug.write("terminObjRef: ",parent.terminObjRef);
 								//if ($debug) Debug.write("contact+++++: ",contact);
 								
 								//if(parent.terminObjRef.meetingMember.equals(contact)){
 								//if ($debug) Debug.write("contains : ",contact);
 								
-								}
+							//	}
 								
-								for(var j=0;j<parent.terminObjRef.meetingMember.length;j++){
+								//for(var j=0;j<parent.terminObjRef.meetingMember.length;j++){
 								
-									if (parent.terminObjRef.meetingMember[j].userid.user_id==contact.userId) 
-										 	{
-										 		if ($debug) Debug.write("contact if: ",contact);
+								//	if (parent.terminObjRef.meetingMember[j].userid.user_id==contact.userId) 
+										// 	{
+										 	//	if ($debug) Debug.write("contact if: ",contact);
 										 		
-										 	}else{
-												 if ($debug) Debug.write("contact+++++: ",contact);
-												 if ($debug) Debug.write("user_id else: ",parent.terminObjRef.meetingMember[j].userid.user_id);
-												 if ($debug) Debug.write("contact.userId else: ",contact.userId);
+										 //	}else{
+											//	 if ($debug) Debug.write("contact+++++: ",contact);
+											//	 if ($debug) Debug.write("user_id else: ",parent.terminObjRef.meetingMember[j].userid.user_id);
+												
 												 //if ($debug) Debug.write("userId: ",contact.userId);
 												  //if ($debug) Debug.write("vorname: ",contact.vorname);
 												  //if ($debug) Debug.write("nachname: ",contact.nachname);
 												  //if ($debug) Debug.write("email: ",contact.email);
-												parent.addMeetingMember.appointmentId = parent.terminObjRef.appointmentId;
-												parent.addMeetingMember.contact = contact;
-												parent.addMeetingMember.doCall();
-									 	}
+												//parent.addMeetingMember.appointmentId = parent.terminObjRef.appointmentId;
+												//parent.addMeetingMember.contact = contact;
+												//parent.addMeetingMember.doCall();
+									 //	}
 								 	
-								}
+								//}
 		    		
 			    		if ($debug) Debug.write("updateUserTermin: ",value);
 			    		parent.defaulttermindetails();
@@ -559,8 +596,8 @@
 		    			//parent._tagesansicht._list._outlist.clearContent();
 		    			
 			    		if ($debug) Debug.write("deleteAppointment: ",value);
-			    		if ($debug) Debug.write("Appointment_id: ",this.terminObj.appointmentId);
-			    		if ($debug) Debug.write("terminObj: ",this.terminObj);
+			    		//if ($debug) Debug.write("Appointment_id: ",this.terminObj.appointmentId);
+			    		//if ($debug) Debug.write("terminObj: ",this.terminObj);
 			    		//parent.updateUserMessagesTerminIdToNull.doCall();
 			    		if(this.terminareaObjRef != null)
 			    			{
