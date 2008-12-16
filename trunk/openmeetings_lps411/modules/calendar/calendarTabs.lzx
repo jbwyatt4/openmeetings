@@ -9,7 +9,7 @@
 		    <tabelement text="week" name="_week">
 		    	<handler name="onselect">
 		    		this._weekView.initWeekByDate(new Date());
-	 				this._weekView.getAppointmentByRangeWeek.doCall();
+					this._weekView.getAppointmentByRangeWeek.doCall();
 		    	</handler>
 		    <!--	<simplelayout axis="x" spacing="0"/>
 		    	<view resource="timetable_weekview"   />-->

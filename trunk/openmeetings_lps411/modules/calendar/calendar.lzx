@@ -753,22 +753,17 @@
 		    		if ($debug) Debug.write("_startdate: ",parent._startDate);
 		    		if ($debug) Debug.write("_enddate: ",parent._endDate);
 		    		if(value[0] != null){
-		    		var countX = 45;
-		    		for (var i=0;i<value.length;i++){
-		    			
-		    		if ($debug) Debug.write("value: ",value[i]);	
-		    		
-		    		//if ($debug) Debug.write("countX : ",countX);
-		    		new lz.terminarea(parent._tabslider._daytab._dayview._tagesansicht._list._outlist, {name:"_terminarea"+i,
-		    							calenderObjRef:parent,
-		    							terminObj:value[i],
-		    							countX:countX
-		    							});
-		    		new lz.text(parent._tabslider._daytab._dayview._tagesansicht._list._outlist["_terminarea"+i],{text:value[i].appointmentName +" Beschreibung: "+ value[i].appointmentDescription,
-		    										 multiline:true
-		    										 
-		    										});
-		    		countX = countX + 102;
+			    		parent._tabslider._daytab._dayview._tagesansicht._list._outlist.clearContent();	
+			    		for (var i=0;i<value.length;i++){	
+				    		if ($debug) Debug.write("value: ",value[i]);	
+				    		new lz.terminarea(parent._tabslider._daytab._dayview._tagesansicht._list._outlist, {name:"_terminarea"+i,
+				    							calenderObjRef:parent,
+				    							terminObj:value[i]
+			    							});
+			    		new lz.text(parent._tabslider._daytab._dayview._tagesansicht._list._outlist["_terminarea"+i],{text:value[i].appointmentName +" Beschreibung: "+ value[i].appointmentDescription,
+			    										 multiline:true
+			    										 
+			    										});
 		    		}
 		    		
 		    		}

@@ -2,7 +2,7 @@
 	<class name="calendarDayView" extends="view">
 		<handler name="oninit">
 			this.setCalendarItem(24);
-			if ($debug) Debug.write("calendarMonthView: ",this);
+			if ($debug) Debug.write("calendarDayView: ",this);
 		</handler>
 		
 		<simplelayout axis="y" spacing="2"/>
@@ -20,7 +20,8 @@
 							}
 							</method>		
 				 		</view>
-				 		<view name="_outlist" clip="true">	 			
+				 		<view name="_outlist" clip="true" x="45">	
+				 		<simplelayout axis="x" spacing="2"/> 			
 				 			<method name="clearContent">
 							for (var eg in this.subviews) {
 								this.subviews[eg].destroy();
