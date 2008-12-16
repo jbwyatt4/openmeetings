@@ -12,6 +12,7 @@ import org.openmeetings.app.data.calendar.management.MeetingMemberLogic;
 import org.openmeetings.app.data.user.Usermanagement;
 import org.openmeetings.app.hibernate.beans.calendar.Appointment;
 import org.openmeetings.app.hibernate.beans.calendar.AppointmentReminderTyps;
+import org.openmeetings.app.hibernate.beans.calendar.MeetingMember;
 
 public class MeetingMemberService {
 	
@@ -56,8 +57,8 @@ public class MeetingMemberService {
 	        Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
 	        if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
 					        	
-	        return	 MeetingMemberLogic.getInstance().updateMeetingMember(meetingMemberId, firstname, 
-	        		lastname, memberStatus, appointmentStatus, appointmentId, userid, email);
+	        return	 MeetingMemberLogic.getInstance().updateMeetingMember(meetingMemberId, 
+	        		firstname, lastname, memberStatus, appointmentStatus, appointmentId, userid, email);
 	        }
 		} catch (Exception err) {
 			log.error("[updateMeetingMember]",err);

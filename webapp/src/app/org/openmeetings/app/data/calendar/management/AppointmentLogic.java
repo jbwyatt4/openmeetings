@@ -10,6 +10,7 @@ import org.openmeetings.app.data.calendar.daos.AppointmentDaoImpl;
 import org.openmeetings.app.data.calendar.daos.AppointmentReminderTypDaoImpl;
 import org.openmeetings.app.hibernate.beans.calendar.Appointment;
 import org.openmeetings.app.hibernate.beans.calendar.AppointmentReminderTyps;
+import org.openmeetings.app.hibernate.beans.calendar.MeetingMember;
 
 public class AppointmentLogic {
 	
@@ -86,13 +87,13 @@ public class AppointmentLogic {
 	
 	public Long updateAppointment(Long appointmentId, String appointmentName,Long userId, String appointmentDescription, 
 			Date appointmentstart, Date appointmentend,
-			Boolean isDaily, Boolean isWeekly, Boolean isMonthly, Boolean isYearly, Long categoryId, Long remind ){
+			Boolean isDaily, Boolean isWeekly, Boolean isMonthly, Boolean isYearly, Long categoryId, Long remind, List<MeetingMember> mmClient ){
 		
 		try {
-			return AppointmentDaoImpl.getInstance().updateAppointment(appointmentId,
-					appointmentName, userId, appointmentDescription, appointmentstart,
-					appointmentend, isDaily, isWeekly, isMonthly, isYearly,
-					categoryId, remind);
+			return AppointmentDaoImpl.getInstance().updateAppointment(appointmentId, 
+					appointmentName, userId, appointmentDescription, appointmentstart, 
+					appointmentend, isDaily, isWeekly, isMonthly, isYearly, categoryId, remind, 
+					mmClient);
 		} catch (Exception err) {
 			log.error("[updateAppointment]",err);
 		}

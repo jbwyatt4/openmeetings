@@ -12,6 +12,7 @@ import org.openmeetings.app.data.calendar.management.MeetingMemberLogic;
 import org.openmeetings.app.data.user.Usermanagement;
 import org.openmeetings.app.hibernate.beans.calendar.Appointment;
 import org.openmeetings.app.hibernate.beans.calendar.AppointmentReminderTyps;
+import org.openmeetings.app.hibernate.beans.calendar.MeetingMember;
 
 public class CalendarService {
 	
@@ -113,7 +114,7 @@ public class CalendarService {
 	
 	public Long updateAppointment(String SID,Long appointmentId ,String appointmentName, Long userId, String appointmentLocation,String appointmentDescription, 
 			Date appointmentstart, Date appointmentend, 
-			Boolean isDaily, Boolean isWeekly, Boolean isMonthly, Boolean isYearly, Long categoryId, Long remind){
+			Boolean isDaily, Boolean isWeekly, Boolean isMonthly, Boolean isYearly, Long categoryId, Long remind, List<MeetingMember> mmClient){
 		
 		try{
 			
@@ -122,8 +123,8 @@ public class CalendarService {
 	        if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
 					        	
 	        	return AppointmentLogic.getInstance().updateAppointment(appointmentId, appointmentName, userId, 
-	        			 appointmentDescription, appointmentstart, appointmentend, isDaily, isWeekly, isMonthly, 
-	        			 isYearly, categoryId, remind);
+	        			appointmentDescription, appointmentstart, appointmentend, isDaily, isWeekly, isMonthly, 
+	        			isYearly, categoryId, remind, mmClient);
 	        }
 		} catch (Exception err) {
 			log.error("[updateAppointment]",err);
