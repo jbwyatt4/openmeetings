@@ -72,7 +72,6 @@
 						var nachname = result[i].lastname;
 						var email = result[i].adresses.emails[0].mail.email;
 						if ($debug) Debug.write("email",result[i].adresses.emails[0].mail.email);
-						if ($debug) Debug.write("Width_inerlist",parent._list._inner.width);
 						
 						//var userObj = this.result[i];					
 						if ($debug) Debug.write("id",id);
