@@ -793,61 +793,61 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>女士.</value>
   </string>
   <string id="263" name="navimain_confadmin">
-    <value>Configuration</value>
+    <value>配置信息</value>
   </string>
   <string id="264" name="conftable_headerId">
-    <value>ID</value>
+    <value>序号</value>
   </string>
   <string id="265" name="conftable_headerkey">
-    <value>Key</value>
+    <value>关键字</value>
   </string>
   <string id="266" name="confadminform_header">
-    <value>Configuration</value>
+    <value>配置信息</value>
   </string>
   <string id="267" name="confadminform_labelkey">
-    <value>Key</value>
+    <value>关键字</value>
   </string>
   <string id="268" name="confadminform_labelupdated">
-    <value>last update</value>
+    <value>最新更新</value>
   </string>
   <string id="269" name="confadminform_labelupdatedby">
-    <value>updatedby</value>
+    <value>更新者</value>
   </string>
   <string id="270" name="confadminform_labelcomment">
-    <value>comment</value>
+    <value>注释</value>
   </string>
   <string id="271" name="confadminform_labelkey">
-    <value>key</value>
+    <value>关键字</value>
   </string>
   <string id="272" name="turnoverlist_maxresults">
-    <value>of</value>
+    <value>的</value>
   </string>
   <string id="273" name="organisation_usersheader">
-    <value>Users</value>
+    <value>用户</value>
   </string>
   <string id="274" name="organisation_usersicondelete">
-    <value>delete user from organisation</value>
+    <value>从组织中删除用户</value>
   </string>
   <string id="275" name="organisation_usersdeletedhead">
-    <value>delete</value>
+    <value>删除</value>
   </string>
   <string id="276" name="organisation_usersalreadadded">
-    <value>This user is already member of this organisation.</value>
+    <value>此组织中已存在该用户.</value>
   </string>
   <string id="277" name="dashboard_newsheader">
-    <value>News</value>
+    <value>新闻</value>
   </string>
   <string id="278" name="dashboard_quicklinksheader">
-    <value>Quicklinks</value>
+    <value>快速链接</value>
   </string>
   <string id="279" name="dashboard_quicklinkConf">
-    <value>Goto Conference</value>
+    <value>会议室导航</value>
   </string>
   <string id="280" name="dashboard_quicklinkAudit">
-    <value>Goto Auditorium</value>
+    <value>观众室导航</value>
   </string>
   <string id="281" name="dashboard_quicklinksupport">
-    <value>Help and Support</value>
+    <value>服务与支持</value>
   </string>
   <string id="282" name="dashboard_quickhomepageurl">
     <value>http://code.google.com/p/openmeetings/</value>
@@ -856,10 +856,10 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>http://groups.google.com/group/openmeetings-user</value>
   </string>
   <string id="284" name="dashboard_reportbugs">
-    <value>Report a bug!</value>
+    <value>反馈bug!</value>
   </string>
   <string id="285" name="dashboard_rsslistitemlinktext">
-    <value>more</value>
+    <value>更多</value>
   </string>
   <string id="286" name="dashboard_quicklinkhomepagelabel">
     <value>Project Website (code.google.com/p/openmeetings/)</value>
@@ -868,175 +868,175 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>User Mailing List (groups.google.com/group/openmeetings-user)</value>
   </string>
   <string id="288" name="login_rememberuser">
-    <value>Remember Login</value>
+    <value>记录登录</value>
   </string>
   <string id="289" name="main_navi">
-    <value>Content</value>
+    <value>内容</value>
   </string>
   <string id="290" name="subnavi">
-    <value>My Home Page</value>
+    <value>我的主页</value>
   </string>
   <string id="291" name="subnavi">
-    <value>My Scheduled Meetings</value>
+    <value>我的会议日程</value>
   </string>
   <string id="292" name="subnavi">
-    <value>My Scheduled Events</value>
+    <value>我的事件日程</value>
   </string>
   <string id="293" name="subnavi">
-    <value>Public Meetings</value>
+    <value>开放会议</value>
   </string>
   <string id="294" name="subnavi">
-    <value>Private Meetings</value>
+    <value>私人会议</value>
   </string>
   <string id="295" name="subnavi">
-    <value>Public Events</value>
+    <value>开放事件</value>
   </string>
   <string id="296" name="subnavi">
-    <value>Private Events</value>
+    <value>私人事件</value>
   </string>
   <string id="297" name="subnavi">
-    <value>Public Content</value>
+    <value>开放内容</value>
   </string>
   <string id="298" name="subnavi">
-    <value>Private Content</value>
+    <value>私人内容</value>
   </string>
   <string id="299" name="subnavi">
-    <value>Personal Content</value>
+    <value>个人内容</value>
   </string>
   <string id="300" name="subnavi">
     <value></value>
   </string>
   <string id="301" name="conferencebar">
-    <value>Moderation</value>
+    <value>主持人</value>
   </string>
   <string id="302" name="conferencebar">
-    <value>Apply for Moderation</value>
+    <value>申请为主持人</value>
   </string>
   <string id="303" name="conferencebar">
-    <value>Polls</value>
+    <value>投票</value>
   </string>
   <string id="304" name="conferencebar">
-    <value>Choose a file</value>
+    <value>选择文件</value>
   </string>
   <string id="305" name="conferencebar">
-    <value>Settings</value>
+    <value>设置</value>
   </string>
   <string id="306" name="conferencebar">
-    <value>Cam and Mic Settings</value>
+    <value>视频音频设置</value>
   </string>
   <string id="307" name="conferencebar">
-    <value>Whiteboard Settings</value>
+    <value>白板设置</value>
   </string>
   <string id="308" name="conferencebar">
-    <value>Exit</value>
+    <value>退出</value>
   </string>
   <string id="309" name="conferencebar">
-    <value>Back to Rooms</value>
+    <value>回到房间</value>
   </string>
   <string id="310" name="conferencebar">
-    <value>Logout</value>
+    <value>注销</value>
   </string>
   <string id="311" name="loginwindow">
-    <value>Desktop Viewer</value>
+    <value>桌面查看器</value>
   </string>
   <string id="312" name="loginwindow">
-    <value>start Desktop Viewer</value>
+    <value>启动桌面查看器</value>
   </string>
   <string id="313" name="loginwindow">
-    <value>Video and Audio</value>
+    <value>视频和音频</value>
   </string>
   <string id="314" name="loginwindow">
-    <value>Chat</value>
+    <value>聊天</value>
   </string>
   <string id="315" name="loginwindow">
-    <value>Whiteboard</value>
+    <value>白板</value>
   </string>
   <string id="316" name="loginwindow">
-    <value>Moderation</value>
+    <value>主持人</value>
   </string>
   <string id="317" name="loginwindow">
-    <value>Files</value>
+    <value>文件</value>
   </string>
   <string id="318" name="loginwindow">
-    <value>Users</value>
+    <value>用户</value>
   </string>
   <string id="319" name="loginwindow">
-    <value>Polls</value>
+    <value>投票</value>
   </string>
   <string id="320" name="loginwindow">
-    <value>There is no User connected to this Username</value>
+    <value>没有此用户名</value>
   </string>
   <string id="321" name="loginwindow">
-    <value>The email containing a special link has been sent to your email address, please check your mailbox. If you still have not received a email, please adjust your email spam settings and resend confirmation email.</value>
+    <value>一封包含特殊链接的邮件已发送至你的信箱,请查收.如果没有收到,请检查和调整你的邮箱垃圾邮件设置,重新发送认证邮件.</value>
   </string>
   <string id="322" name="errortype">
-    <value>Error</value>
+    <value>错误</value>
   </string>
   <string id="323" name="errortype">
-    <value>Message</value>
+    <value>消息</value>
   </string>
   <string id="324" name="resetpass">
-    <value>Invalid Hash. No User found.</value>
+    <value>无效的哈希值,没有该用户.</value>
   </string>
   <string id="325" name="resetpass">
-    <value>Reset Your Password</value>
+    <value>重置你的密码</value>
   </string>
   <string id="326" name="resetpass">
-    <value>Login</value>
+    <value>登录</value>
   </string>
   <string id="327" name="resetpass">
-    <value>change Password</value>
+    <value>更改密码</value>
   </string>
   <string id="328" name="resetpass">
-    <value>new Password</value>
+    <value>新密码</value>
   </string>
   <string id="329" name="resetpass">
-    <value>re-enter Password</value>
+    <value>重新输入密码</value>
   </string>
   <string id="330" name="resetpass">
-    <value>The Passwords you entered weren't identical.</value>
+    <value>密码不一致.</value>
   </string>
   <string id="331" name="resetpass">
-    <value>4 or more characters; capitalization matters!</value>
+    <value>4个或更多的字符,注意大小写!</value>
   </string>
   <string id="332" name="resetpass">
-    <value>Password set. You can login now.</value>
+    <value>密码设置完毕,你可以登录.</value>
   </string>
   <string id="333" name="rpccallback">
-    <value>OK</value>
+    <value>完成</value>
   </string>
   <string id="334" name="rpcgeneralerror">
-    <value>Unkown Error. Please report this to your Service-Team.</value>
+    <value>未知错误. Please report this to your Service-Team.</value>
   </string>
   <string id="335" name="loginwindow">
-    <value>Username not found</value>
+    <value>未发现该用户名</value>
   </string>
   <string id="336" name="loginwindow">
-    <value>Invalid Password</value>
+    <value>无效密码</value>
   </string>
   <string id="337" name="logout">
-    <value>Successfully Logged out</value>
+    <value>注销成功</value>
   </string>
   <string id="338" name="registration">
-    <value>Frontend Registration disabled.</value>
+    <value>禁止前端注册.</value>
   </string>
   <string id="339" name="registration">
-    <value>Invalid EMail</value>
+    <value>无效邮件地址</value>
   </string>
   <string id="340" name="registration">
-    <value>duplicate filename, please choose another filename</value>
+    <value>文件名重复, 请选择另一文件名</value>
   </string>
   <string id="341" name="filebrowser">
-    <value>filename too short</value>
+    <value>文件名太短</value>
   </string>
   <string id="342" name="filebrowser">
-    <value>Could not save Address</value>
+    <value>无法保存地址</value>
   </string>
   <string id="343" name="useradmin">
-    <value>User added but you need to assign this User to an Organisation, otherwise he won't be able to sign-in.</value>
+    <value>用户已增加,但你必须将该用户与一个组织关联,否则他可能无法登录.</value>
   </string>
   <string id="344" name="adminforms">
-    <value>New Record</value>
+    <value>新纪录</value>
   </string>
   <string id="345" name="languageseditor">
     <value>No Field found with this FieldId.</value>
@@ -1045,13 +1045,13 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>No Label found for that Field.</value>
   </string>
   <string id="347" name="errormessage">
-    <value>Admin Authorization required</value>
+    <value>需要管理员权限</value>
   </string>
   <string id="348" name="mainnavi">
-    <value>Language-Editor</value>
+    <value>语言编辑器</value>
   </string>
   <string id="349" name="languageseditor">
-    <value>Language</value>
+    <value>语言</value>
   </string>
   <string id="350" name="languageseditor">
     <value>Label-ID</value>
@@ -1084,565 +1084,565 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>You cannot delete this Field. You can only delete Labels NOT Fields. There is no Label loaded at the moment, wether it is not selected any Field or there is no Label for this Language for that Field defined.</value>
   </string>
   <string id="360" name="languageseditor">
-    <value>export</value>
+    <value>导出</value>
   </string>
   <string id="361" name="languageseditor">
-    <value>You need to logout to see any changes.</value>
+    <value>你必须注销才能看到变化.</value>
   </string>
   <string id="362" name="languageseditor">
-    <value>Add new language</value>
+    <value>增加新的语言</value>
   </string>
   <string id="363" name="languageseditor">
-    <value>delete language</value>
+    <value>删除语言</value>
   </string>
   <string id="364" name="languageseditor">
-    <value>Add new language</value>
+    <value>增加新的语言</value>
   </string>
   <string id="365" name="languageseditor">
-    <value>Name</value>
+    <value>名称</value>
   </string>
   <string id="366" name="languageseditor">
-    <value>add language</value>
+    <value>增加语言</value>
   </string>
   <string id="367" name="languageseditor">
-    <value>Backup</value>
+    <value>备份</value>
   </string>
   <string id="368" name="turnoverlist">
-    <value>goto first</value>
+    <value>到首页</value>
   </string>
   <string id="369" name="turnoverlist">
-    <value>goto previous</value>
+    <value>到前一页</value>
   </string>
   <string id="370" name="turnoverlist">
-    <value>goto next</value>
+    <value>到下一页</value>
   </string>
   <string id="371" name="turnoverlist">
-    <value>goto last</value>
+    <value>到最后一页</value>
   </string>
   <string id="372" name="videobox">
-    <value>user speaks</value>
+    <value>用户发言</value>
   </string>
   <string id="373" name="videobox">
-    <value>turn sound on/off</value>
+    <value>声音 开/关</value>
   </string>
   <string id="374" name="dashboard">
-    <value>System</value>
+    <value>系统</value>
   </string>
   <string id="375" name="dashboard">
-    <value>Your Settings</value>
+    <value>你的设置</value>
   </string>
   <string id="376" name="dashboard">
-    <value>hi,</value>
+    <value>你好,</value>
   </string>
   <string id="377" name="dashboard">
-    <value>Edit your profile</value>
+    <value>编辑你的信息</value>
   </string>
   <string id="378" name="dashboard">
-    <value>New Messages:</value>
+    <value>新消息:</value>
   </string>
   <string id="379" name="dashboard">
-    <value>Upload new Image</value>
+    <value>上传新图片</value>
   </string>
   <string id="380" name="backuppanel">
-    <value>Userdata - Export</value>
+    <value>用户数据 - 导出</value>
   </string>
   <string id="381" name="backuppanel">
-    <value>All organisations must be already existing!</value>
+    <value>所有的组织必须事先存在!</value>
   </string>
   <string id="382" name="backuppanel">
-    <value>start export</value>
+    <value>开始导出</value>
   </string>
   <string id="383" name="backuppanel">
-    <value>By organisation</value>
+    <value>由组织</value>
   </string>
   <string id="384" name="backuppanel">
-    <value>start export</value>
+    <value>开始导出</value>
   </string>
   <string id="385" name="backuppanel">
-    <value>Userdata - Import</value>
+    <value>用户数据 - 导入</value>
   </string>
   <string id="386" name="backuppanel">
-    <value>choose users.xml</value>
+    <value>选择 users.xml</value>
   </string>
   <string id="387" name="languageseditor">
-    <value>import</value>
+    <value>导入</value>
   </string>
   <string id="388" name="languageseditor">
-    <value>Export to XML - These files can be used to: 
-		- Contribute to the project 
-		- Import into another System 
-		- Backup 
-		- Customization 
-		- Put it into the language-directory for your next installation</value>
+    <value>导出为 XML - 这些文件能用于: 
+		- 创建项目 
+		- 导入到另一个系统 
+		- 备份 
+		- 自定义 
+		- 放入language 目录,可以在下一次安装使用</value>
   </string>
   <string id="389" name="languageseditor">
-    <value>Choose a language file to import. Choose the right Langauge from the Combobox! 
-		No matter what the name of the file is, it will be imported into this language!</value>
+    <value>选择一个语言文件导入. 在下拉框中选择正确的语言! 
+		不管文件的名称是什么, 将覆盖当前的语言!</value>
   </string>
   <string id="390" name="importwindow">
-    <value>import - choose file</value>
+    <value>导入 - 选择文件</value>
   </string>
   <string id="391" name="recordingsavewin">
-    <value>Save as</value>
+    <value>另存为</value>
   </string>
   <string id="392" name="recordingsavewin">
-    <value>Name:</value>
+    <value>名称:</value>
   </string>
   <string id="393" name="recordingsavewin">
-    <value>Comment:</value>
+    <value>注释</value>
   </string>
   <string id="394" name="recordingsavewin">
-    <value>save</value>
+    <value>保存</value>
   </string>
   <string id="395" name="record">
-    <value>Recordings</value>
+    <value>记录</value>
   </string>
   <string id="396" name="recorder">
-    <value>Recordings Viewer</value>
+    <value>记录查看器</value>
   </string>
   <string id="397" name="record">
-    <value>Recordings of public and private Rooms</value>
+    <value>开放和私人房间记录</value>
   </string>
   <string id="398" name="roomslist">
-    <value>Users :</value>
+    <value>用户 :</value>
   </string>
   <string id="399" name="roomslist">
-    <value>Joined:</value>
+    <value>已参加:</value>
   </string>
   <string id="400" name="roomslist">
     <value></value>
   </string>
   <string id="401" name="roomslist">
-    <value>Users in this Room:</value>
+    <value>此房间的用户:</value>
   </string>
   <string id="402" name="roomslist">
-    <value>refresh</value>
+    <value>刷新</value>
   </string>
   <string id="403" name="roomslist">
-    <value>This Room is Full. Try again in a few minutes.</value>
+    <value>此房间已满. 请稍后再试.</value>
   </string>
   <string id="404" name="roomsList">
-    <value>click on a room to get details</value>
+    <value>点击房间获取详细信息</value>
   </string>
   <string id="405" name="roomslist">
-    <value>Chat with the users in this Room:</value>
+    <value>与此房间内的用户聊天:</value>
   </string>
   <string id="406" name="roomslist">
-    <value>Room:</value>
+    <value>房间:</value>
   </string>
   <string id="407" name="roomslist">
-    <value>Users in this room:</value>
+    <value>此房间内的用户:</value>
   </string>
   <string id="408" name="roomslist">
-    <value>since:</value>
+    <value>自从:</value>
   </string>	
   <string id="409" name="record">
-    <value>play recording</value>
+    <value>播放记录</value>
   </string>
   <string id="410" name="record">
-    <value>Length:</value>
+    <value>长度:</value>
   </string>
   <string id="411" name="record">
-    <value>Date:</value>
+    <value>日期:</value>
   </string>
   <string id="412" name="record">
-    <value>Recorder Mode! You cannot change any values, this is a recorded File!</value>
+    <value>记录模式! 你不能更改任何信息, 这是一个记录文件!</value>
   </string>
   <string id="413" name="record">
-    <value>Play this recording</value>
+    <value>播放此记录</value>
   </string>
   <string id="414" name="record">
-    <value>Play / Pause</value>
+    <value>播放 / 暂停</value>
   </string>
   <string id="415" name="record">
-    <value>Start recording</value>
+    <value>开始记录</value>
   </string>
   <string id="416" name="record">
-    <value>stop recording</value>
+    <value>停止记录</value>
   </string>
   <string id="417" name="record">
-    <value>Recording:</value>
+    <value>记录中:</value>
   </string>	
   <string id="418" name="record_error_msg">
-    <value>There is already somebody recording at the moment:</value>
+    <value>现在已经有人在记录:</value>
   </string>
   <string id="419" name="record_message">
-    <value>Recording! By User:</value>
+    <value>记录中! 记录用户:</value>
   </string>
   <string id="420" name="record_cancel">
-    <value>cancel</value>
+    <value>取消</value>
   </string>
   <string id="421" name="record_cancal_tooltip">
-    <value>Recording will be canceled and not saved.</value>
+    <value>记录将被取消且不被保存.</value>
   </string>
   <string id="422" name="cancel_dialog_resume">
-    <value>resume</value>
+    <value>继续</value>
   </string>
   <string id="423" name="cancel_dialog_resume_tooltip">
-    <value>Close this window and resume recording</value>
+    <value>关闭此窗口并且继续记录</value>
   </string>
   <string id="424" name="painttools_ellipse_color">
-    <value>change Linecolor</value>
+    <value>修改线条颜色</value>
   </string>
   <string id="425" name="colorpicker_head">
-    <value>Choose Color</value>
+    <value>选择颜色</value>
   </string>
   <string id="426" name="painttools_line_disable">
-    <value>Disable / Enable Linecolor</value>
+    <value>禁止 / 允许 线条颜色</value>
   </string>
   <string id="427" name="painttools_fill_disable">
-    <value>change Fillcolor</value>
+    <value>修改填充颜色</value>
   </string>
   <string id="428" name="painttools_line_disable">
-    <value>Disable / Enable Fillcolor</value>
+    <value>禁止 / 允许 填充颜色</value>
   </string>
   <string id="429" name="change_width_arrow_down_slider">
-    <value>Change Linewidth</value>
+    <value>修改 线宽</value>
   </string>
   <string id="430" name="close_small_popups">
-    <value>close</value>
+    <value>关闭</value>
   </string>
   <string id="431" name="paint_tool_letter">
-    <value>change Fontsize</value>
+    <value>修改 字体大小</value>
   </string>	
   <string id="432" name="recordingslist_delete">
-    <value>Delete Recording</value>
+    <value>删除记录</value>
   </string>
   <string id="433" name="recordingslist_recordedByGuest">
-    <value>Guest</value>
+    <value>客人</value>
   </string>
   <string id="434" name="recordingslist_recordedby">
-    <value>By:</value>
+    <value>由:</value>
   </string>
   <string id="435" name="recordings_table_head_name">
-    <value>Name</value>
+    <value>名称</value>
   </string>
   <string id="436" name="recordings_table_head_room">
-    <value>Room</value>
+    <value>房间</value>
   </string>
   <string id="437" name="recordings_table_head_date">
-    <value>Date</value>
+    <value>日期</value>
   </string>
   <string id="438" name="record_start_cancel">
-    <value>cancel</value>
+    <value>取消</value>
   </string>
   <string id="439" name="record_start_start">
-    <value>start</value>
+    <value>开始</value>
   </string>
   <string id="440" name="filesbrowser_table_head_name">
-    <value>Name</value>
+    <value>名称</value>
   </string>
   <string id="441" name="filesbrowser_table_head_date">
-    <value>Date</value>
+    <value>日期</value>
   </string>
   <string id="442" name="chat_clear_history">
-    <value>Delete Server-Chatlog</value>
+    <value>删除服务器端聊天记录</value>
   </string>
   <string id="443" name="chat_overall_header">
-    <value>Chat</value>
+    <value>聊天</value>
   </string>
   <string id="444" name="chat_send_btn">
-    <value>send message</value>
+    <value>发送消息</value>
   </string>
   <string id="445" name="chat_emot_btn">
-    <value>Emoticons</value>
+    <value>表情</value>
   </string>
   <string id="446" name="chat_emot_win">
-    <value>Emoticons</value>
+    <value>表情</value>
   </string>
   <string id="447" name="choose_video_settings">
-    <value>Choose Published Devices</value>
+    <value>选择发布设备</value>
   </string>
   <string id="448" name="choose_video_settings_combo">
-    <value>Audio and Video</value>
+    <value>音频和视频</value>
   </string>
   <string id="449" name="choose_video_settings_combo">
-    <value>Audio only</value>
+    <value>只有音频</value>
   </string>
   <string id="450" name="choose_video_settings_combo">
-    <value>Video only</value>
+    <value>只有视频</value>
   </string>
   <string id="451" name="choose_video_settings_combo">
-    <value>no Audio/Video (static Image)</value>
+    <value>无 音频/视频 (静态图片)</value>
   </string>
   <string id="452" name="choose_video_settings_info_text">
-    <value>No Audio/Video from your PC will be published, instead of that a picture from your profile will be shown. Choose these settings if you have problems with your bandwidth or a very slow Internet connection.</value>
+    <value>你的个人电脑上将不会有 音频/视频 发布, 而用你个人信息里的图片代替显示. 如果你遇到带宽问题或者速度过慢, 请选择这些设置.</value>
   </string>
   <string id="453" name="calendar_dayname_monday">
-    <value>MO</value>
+    <value>一</value>
   </string>
   <string id="454" name="calendar_dayname_tuesday">
-    <value>TU</value>
+    <value>二</value>
   </string>
   <string id="455" name="calendar_dayname_wednesday">
-    <value>WE</value>
+    <value>三</value>
   </string>
   <string id="456" name="calendar_dayname_thursday">
-    <value>TH</value>
+    <value>四</value>
   </string>
   <string id="457" name="calendar_dayname_friday">
-    <value>FR</value>
+    <value>五</value>
   </string>
   <string id="458" name="calendar_dayname_saturday">
-    <value>SA</value>
+    <value>六</value>
   </string>
   <string id="459" name="calendar_dayname_sunday">
-    <value>SU</value>
+    <value>日</value>
   </string>
   <string id="460" name="calendar_dayname_MondayLabel">
-    <value>Monday</value>
+    <value>星期一</value>
   </string>
   <string id="461" name="calendar_dayname_TuesdayLabel">
-    <value>Tuesday</value>
+    <value>星期二</value>
   </string>
   <string id="462" name="calendar_dayname_WednesdayLabel">
-    <value>Wednesday</value>
+    <value>星期三</value>
   </string>
   <string id="463" name="calendar_dayname_ThursdayLabel">
-    <value>Thursday</value>
+    <value>星期四</value>
   </string>
   <string id="464" name="calendar_dayname_FridayLabel">
-    <value>Friday</value>
+    <value>星期五</value>
   </string>
   <string id="465" name="calendar_dayname_SaturdayLabel">
-    <value>Saturday</value>
+    <value>星期六</value>
   </string>
   <string id="466" name="calendar_dayname_SundayLabel">
-    <value>Sunday</value>
+    <value>星期日</value>
   </string>
   <string id="467" name="calendar_weeknumber_header">
-    <value>CW</value>
+    <value>星期</value>
   </string>
   <string id="468" name="calendar_weeknumber_headerTooltip">
-    <value>Calendar week</value>
+    <value>星期日历</value>
   </string>
   <string id="469" name="calendar_monthnames">
-    <value>January</value>
+    <value>一月</value>
   </string>
   <string id="470" name="calendar_monthnames">
-    <value>February</value>
+    <value>二月</value>
   </string>
   <string id="471" name="calendar_monthnames">
-    <value>March</value>
+    <value>三月</value>
   </string>
   <string id="472" name="calendar_monthnames">
-    <value>April</value>
+    <value>四月</value>
   </string>
   <string id="473" name="calendar_monthnames">
-    <value>May</value>
+    <value>五月</value>
   </string>
   <string id="474" name="calendar_monthnames">
-    <value>June</value>
+    <value>六月</value>
   </string>
   <string id="475" name="calendar_monthnames">
-    <value>July</value>
+    <value>七月</value>
   </string>
   <string id="476" name="calendar_monthnames">
-    <value>August</value>
+    <value>八月</value>
   </string>
   <string id="477" name="calendar_monthnames">
-    <value>September</value>
+    <value>九月</value>
   </string>
   <string id="478" name="calendar_monthnames">
-    <value>October</value>
+    <value>十月</value>
   </string>
   <string id="479" name="calendar_monthnames">
-    <value>November</value>
+    <value>十一月</value>
   </string>
   <string id="480" name="calendar_monthnames">
-    <value>December</value>
+    <value>十二月</value>
   </string>
   <string id="481" name="calendarwin_header">
-    <value>Calendar</value>
+    <value>日历</value>
   </string>
   <string id="482" name="roomadmin_labelNumberOfParticipants">
-    <value>Participants</value>
+    <value>参与者</value>
   </string>	
   <string id="483" name="roomValue_advancedSettings">
-    <value>Show Layout Settings</value>
+    <value>显示布局设置</value>
   </string>
   <string id="484" name="roomAdmin_layout_videoX">
     <value>X | Y</value>
   </string>
   <string id="485" name="roomAdmin_layout_videoY">
-    <value>Width | Height</value>
+    <value>宽 | 高</value>
   </string>
   <string id="486" name="roomAdmin_layout">
-    <value>Video-Container</value>
+    <value>视频-容器</value>
   </string>
   <string id="487" name="roomAdmin_layout_mod">
-    <value>Moderation-Container</value>
+    <value>主持人-容器</value>
   </string>
   <string id="488" name="roomAdmin_layout_mod_pos">
     <value>X</value>
   </string>
   <string id="489" name="roomAdmin_layout_whiteboard">
-    <value>Whiteboard-Container</value>
+    <value>白板-容器</value>
   </string>
   <string id="490" name="roomAdmin_layout_whiteboard_show">
-    <value>Enabled</value>
+    <value>允许</value>
   </string>
   <string id="491" name="roomAdmin_layout_whiteboard_pos">
     <value>X | Y</value>
   </string>
   <string id="492" name="roomAdmin_layout_whiteboard">
-    <value>Width | Height</value>
+    <value>宽 | 高</value>
   </string>
   <string id="493" name="roomAdmin_layout_files">
-    <value>Files,Chat,Partizipants - Container</value>
+    <value>文件,聊天,参与者 - Container</value>
   </string>
   <string id="494" name="roomAdmin_layout_files_show">
-    <value>Enabled</value>
+    <value>允许</value>
   </string>
   <string id="495" name="roomAdmin_layout_files_pos">
     <value>X |Y</value>
   </string>
   <string id="496" name="roomAdmin_layout_files">
-    <value>Width | Height</value>
+    <value>宽 | 高</value>
   </string>	
   <string id="497" name="moderator_gone_message">
-    <value>The Moderator has left the Room. No one is presenting at the Moment. You could apply for Moderation or wait.</value>
+    <value>主持人已离开房间. 现在无人演示. 你可以申请为主持人或者等待.</value>
   </string>
   <string id="498" name="moderator_message_event_no_mod">
-    <value>There is no Moderator in this Room, but there are some Participants. You have to apply for Moderation or wait.</value>
+    <value>此房间没有主持人, 但是有参与者. 你可以申请为主持人或者等待.</value>
   </string>	
   <string id="499" name="feedback_template_subject">
-    <value>Feedback OpenMeetings</value>
+    <value>反馈 OpenMeetings</value>
   </string>
   <string id="500" name="invitation_template_head">
-    <value>OpenMeetings - Invitation</value>
+    <value>OpenMeetings - 邀请</value>
   </string>
   <string id="501" name="invitation_text_from">
-    <value>Message from User:</value>
+    <value>消息发自:</value>
   </string>
   <string id="502" name="invitation_text_message">
-    <value>Message:</value>
+    <value>消息:</value>
   </string>
   <string id="503" name="invitation_text_click_text">
-    <value>Click this link to participate in the Meetings:</value>
+    <value>点击此链接来参与会议:</value>
   </string>
   <string id="504" name="invitation_text_click_text_link">
-    <value>Click here to enter room</value>
+    <value>点击此处进入房间</value>
   </string>
   <string id="505" name="invitation_text_click_text_help">
-    <value>if you have problems with the link, please copy and paste this to your browser:</value>
+    <value>如果你在此链接遇到问题, 请拷贝并粘贴此链接到浏览器中:</value>
   </string>
   <string id="506" name="registering_mail_text_head">
-    <value>OpenMeetings SignUp</value>
+    <value>OpenMeetings 注册</value>
   </string>
   <string id="507" name="registering_mail_text_head2">
-    <value>Your userdata:</value>
+    <value>你的用户数据:</value>
   </string>
   <string id="508" name="registering_mail_text_username">
-    <value>Login:</value>
+    <value>登录:</value>
   </string>
   <string id="509" name="registering_mail_text_pass">
-    <value>Pass:</value>
+    <value>密码:</value>
   </string>
   <string id="510" name="registering_mail_text_mail">
-    <value>EMail:</value>
+    <value>邮件:</value>
   </string>
   <string id="511" name="registering_mail_text_bye">
-    <value>OpenMeetings-Team</value>
+    <value>OpenMeetings-团队</value>
   </string>
   <string id="512" name="register_mail_subject">
-    <value>OpenMeetings Sign-Up</value>
+    <value>OpenMeetings 注册</value>
   </string>
   <string id="513" name="reset_password_template_head">
-    <value>OpenMeetings - Reset Password</value>
+    <value>OpenMeetings - 重置密码</value>
   </string>
   <string id="514" name="reset_password_template_test_link">
-    <value>Click on this link to enter a new password:</value>
+    <value>点击此链接并键入新密码:</value>
   </string>
   <string id="515" name="reset_password_template_text2_link">
-    <value>Click here to enter a new Password</value>
+    <value>点击此处键入新密码</value>
   </string>
   <string id="516" name="reset_password_template_text3_link">
-    <value>if you have problems with the link, please copy and paste this to your browser:</value>
+    <value>如果你在此链接遇到问题, 请拷贝并粘贴此链接到浏览器中:</value>
   </string>
   <string id="517" name="reset_password_mail_subject">
-    <value>OpenMeetings Password Reset</value>
+    <value>OpenMeetings 重置密码</value>
   </string>	
   <string id="518" name="dateRegExpError">
-    <value>Please enter a valid Date, for example 24.12.2001 (dd.mm.yyyy)</value>
+    <value>请输入一个有效的日期, 比如 24.12.2001 (天.月.年)</value>
   </string>
   <string id="519" name="emailRegExpError">
-    <value>Please enter a valid EMail, for example name@mail.com</value>
+    <value>请输入一个有效的邮件地址, 比如 name@mail.com</value>
   </string>
   <string id="520" name="floatRegExpError">
-    <value>Please enter a Float-Number, for example 1.00</value>
+    <value>请输入一个浮点数, 比如 1.00</value>
   </string>
   <string id="521" name="numberRegExpError">
-    <value>Please enter a Number (Integer), for example 100</value>
+    <value>请输入一个整数, 比如 100</value>
   </string>
   <string id="522" name="phoneRegExpError">
-    <value>Please enter a valid Phone number, for example ++49 0123 123123</value>
+    <value>请输入一个有效的电话号码, 比如 ++49 0123 123123</value>
   </string>
   <string id="523" name="timeRegExpError">
-    <value>Please enter a valid time, for example 12:23 (hh:mm)</value>
+    <value>请输入一个有效的时间, 比如 12:23 (小时:分钟)</value>
   </string>
   <string id="524" name="invitation_window">
-    <value>Passwort protected</value>
+    <value>密码保护</value>
   </string>
   <string id="525" name="invitation_window_passwordLabel">
-    <value>Password</value>
+    <value>密码</value>
   </string>
   <string id="526" name="invitation_window_validLabel">
-    <value>Validity period</value>
+    <value>有效期</value>
   </string>
   <string id="527" name="invitation_window_valid">
-    <value>Endless</value>
+    <value>没有结束</value>
   </string>
   <string id="528" name="invitation_window_valid">
-    <value>Period</value>
+    <value>时期</value>
   </string>
   <string id="529" name="invitation_window_valid">
-    <value>One-Time</value>
+    <value>以前</value>
   </string>
   <string id="530" name="invitation_window_validFromLabel">
-    <value>Valid From:</value>
+    <value>从:</value>
   </string>
   <string id="531" name="invitation_window_validToLabel">
-    <value>Valid to:</value>
+    <value>到:</value>
   </string>
   <string id="532" name="invitation_window_MailSubject">
-    <value>Invitation To OpenMeetings</value>
+    <value>邀请至 OpenMeetings</value>
   </string>
   <string id="533" name="invitation_error">
-    <value>Not Invitation availible for this Invitation-Code</value>
+    <value>没有此邀请码对应的有效邀请</value>
   </string>
   <string id="534" name="invitation_error">
-    <value>The Invitation was already used. This type of Invitation cannot be re-used.</value>
+    <value>此邀请已被使用. 此种类型邀请不能重用.</value>
   </string>
   <string id="535" name="invitation_error">
-    <value>This Invitation-Code is not valid.</value>
+    <value>此邀请码无效.</value>
   </string>
   <string id="536" name="invitation_pass">
-    <value>Password:</value>
+    <value>密码:</value>
   </string>
   <string id="537" name="invitation_pass_btn">
-    <value>Check Password</value>
+    <value>检查密码</value>
   </string>
   <string id="538" name="invitation_pass_error">
-    <value>Invalid Password!</value>
+    <value>无效密码!</value>
   </string>
   <string id="539" name="Browser">
-    <value>Browser</value>
+    <value>浏览</value>
   </string>
   <string id="540" name="audio_video">
-    <value>Syncronize Audio/Video</value>
+    <value>同步 音频/视频</value>
   </string>	
   <string id="541" name="errorCode_invalidSession">
-    <value>Login was correct, but the Session you tried is not active or stored on the Server. You have to get a new SessionId and retry login.</value>
+    <value>登录有效, 但是会话没有激活或保存在服务器上. 你必须重新登录获取新的会话.</value>
   </string>
   <string id="542" name="errorcode_setUserObject">
-    <value>The SessionId is not loggedin or has no Admin rights. The SOAP Gateway needs an User with Admin-Rights to embed new Users.</value>
+    <value>SessionId 没有登录或没有Admin权限. SOAP Gateway 必须要有管理员权限才可以添加新用户.</value>
   </string>
   <string id="543" name="errorcode_loginByRemoteUser">
-    <value>This Session has no Remoteuser-Data connected. Wether you did not call the SOAP-Gateway before accessing the Application or you are usnig a wrong Session-ID</value>
+    <value>此会话没有Remoteuser-Data连接. 在访问应用程序之前你可能没有调用SOAP-Gateway或者你使用了错误的Session-ID</value>
   </string>
   <string id="544" name="debug_message_recording">
-    <value>The recorder is currently Beta!</value>
+    <value>记录功能处于Beta!</value>
   </string>	
   <string id="545" name="propertyPanelXValue">
     <value>x</value>
@@ -1660,48 +1660,48 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>w</value>
   </string>
   <string id="550" name="propertyPanelWidthValueLabel">
-    <value>width</value>
+    <value>宽</value>
   </string>
   <string id="551" name="propertyPanelHeightValue">
     <value>h</value>
   </string>
   <string id="552" name="propertyPanelHeightValueLabel">
-    <value>height</value>
+    <value>高</value>
   </string>
   <string id="553" name="propertyOpacitySlider">
-    <value>Change Transparency</value>
+    <value>改变透明度</value>
   </string>	
   <string id="554" name="browserOpen">
-    <value>Browser Open</value>
+    <value>浏览器打开</value>
   </string>	
   <string id="555" name="browserClose">
-    <value>Browser Close</value>
+    <value>浏览器关闭</value>
   </string>	
   <string id="556" name="connectionLostMessage">
-    <value>The Connection to the Server is lost. You need to reload the Application or/and check your Network.</value>
+    <value>与服务器的连接已丢失. 你需要重新载入程序或检查网络.</value>
   </string>  
   <string id="557" name="557">
-    <value>Pointer</value>
+    <value>指针</value>
   </string>
   <string id="558" name="sync message header">
-    <value>Synchronizing</value>
+    <value>同步</value>
   </string>
   <string id="559" name="Synchronizing message">
-    <value>Synchronizing Users, please wait</value>
+    <value>正在同步用户, 请等待</value>
   </string>
   <string id="560" name="exportToSVG">
-    <value>&lt;u&gt;Download as SVG&lt;/u&gt;</value>
+    <value>&lt;u&gt;下载为 SVG&lt;/u&gt;</value>
   </string>
   <string id="561" name="exportToImage">
-    <value>&lt;u&gt;Download as PNG&lt;/u&gt;</value>
+    <value>&lt;u&gt;下载为 PNG&lt;/u&gt;</value>
   </string>
   <string id="562" name="exportToImage">
-    <value>&lt;u&gt;Download as JPG&lt;/u&gt;</value>
+    <value>&lt;u&gt;下载为 JPG&lt;/u&gt;</value>
   </string>
   <string id="563" name="exportToImage">
-    <value>&lt;u&gt;Download as PDF&lt;/u&gt;</value>
+    <value>&lt;u&gt;下载为 PDF&lt;/u&gt;</value>
   </string>
   <string id="564" name="exportToImage">
-    <value>&lt;u&gt;Download as TIF&lt;/u&gt;</value>
+    <value>&lt;u&gt;下载为 TIF&lt;/u&gt;</value>
   </string>
 </language>
