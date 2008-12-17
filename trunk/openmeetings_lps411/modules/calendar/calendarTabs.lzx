@@ -5,8 +5,9 @@
 		    <tabelement text="day" name="_daytab" selected="true">
 		    	<calendarDayView name="_dayview" width="${parent.parent.width - 20}" height="${parent.height - 80}" ></calendarDayView>	
 		    </tabelement>
-		    
-		    <tabelement text="week" name="_week">
+		   
+		    <tabelement text="week" name="_week">		    	
+		    	
 		    	<handler name="onselect">
 		    		this._weekView.initWeekByDate(new Date());
 					this._weekView.getAppointmentByRangeWeek.doCall();
@@ -14,9 +15,10 @@
 		    <!--	<simplelayout axis="x" spacing="0"/>
 		    	<view resource="timetable_weekview"   />-->
 		    	<weekView name="_weekView" />
-		    		
+		    	
 		    	<hscrollbar />
-		    	<vscrollbar />
+				<vscrollbar/> 
+				<!--<scrollbar axis="y"></scrollbar>	-->	
 		    </tabelement>
 		    
 		    <tabelement text="month">
