@@ -9,15 +9,7 @@
 			<attribute name="_isWeekly" value="false" type="boolean" />  
 			<attribute name="_isMonthly" value="false" type="boolean" />
 			<attribute name="_isYearly" value="false" type="boolean" />   
-			
-			<handler name="onclick">
-				if ($debug) Debug.write("_isDaily: ",this._isDaily);
-			</handler>
-			
-			<handler name="oninit">
-				if ($debug) Debug.write("terminObjRef: ",this.terminObjRef);
-			</handler>
-				
+						
 			<!--<text name="_kategory" y="10" x="35">Kategorie: </text>-->
 			<labelText name="_kategory" y="10" x="35" labelid="566" width="80"/>
 		 	<combobox name="_kategoryedit" x="${parent._kategory.width + parent._kategory.x + 30}" 
@@ -388,6 +380,7 @@
 								
 									
 									new lz.searchContactInCalendar(this._liste._innerlist, {
+												meetingMemberId:meetingMembers[i].meetingMemberId,
 												refObj:parent,
 						    					userId: id,
 						    					vorname:vorname,				    				
@@ -506,6 +499,7 @@
 		    	
 		    	for(var i=0;i<this._liste._innerlist.subviews.length;i++){
 		    		MeetingMember[i] = new Object();
+		    		MeetingMember[i] ["meetingMemberId"]= this._liste._innerlist.subviews[i].meetingMemberId;
 			    	MeetingMember[i] ["userId"]=this._liste._innerlist.subviews[i].userId;
 			    	MeetingMember[i] ["firstname"]=this._liste._innerlist.subviews[i].vorname;
 			    	MeetingMember[i] ["lastname"]=this._liste._innerlist.subviews[i].nachname;

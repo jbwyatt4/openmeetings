@@ -16,7 +16,7 @@
 		</view>
 		<view name="_tagesansicht" bgcolor="silver" y="20" width="200">
 			
-			<view resource="timetable_weekview" />  
+			<view resource="timetable_weekview" /> 
  			<view resource="balken_weekview" x="40" stretches="width" width="200">
  				<handler name="onclick">
  						<![CDATA[

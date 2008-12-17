@@ -5,6 +5,7 @@
 		<attribute name ="userId" value="0" type="number" />
 		<attribute name ="nachname" value="" type="string" />
 		<attribute name ="email" value="null"/>		
+		<attribute name ="meetingMemberId" value="0" type="number" />
 		
 		<attribute name ="refObj" value="null"/>		
 			 		

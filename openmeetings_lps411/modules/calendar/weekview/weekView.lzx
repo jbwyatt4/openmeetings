@@ -14,6 +14,9 @@
 			if (date.getDay() > 1) {
 				var monday = new Date();
 				monday.setTime(date.getTime() - (86400000 * (date.getDay()-1)));
+				monday. setHours(00);
+				monday.setMinutes(00);
+				monday.setSeconds(00);
 				
 			} else if (date.getDay() == 0) {
 				var monday = new Date();
@@ -91,13 +94,25 @@
 				    		var day = 6;
 			    		}
 			    		
-			    		//if ($debug) Debug.write("countX : ",countX);
-			    		new lz.terminareaWeekView(parent["_day"+day]._tagesansicht._list, {
+			    		for(var j=0;j<7;j++){
+				    		if(value[i].appointmentEndtime.getTime()>parent._monday.getTime()+86400000*day){
+				    			
+				    			new lz.terminareaWeekView(parent["_day"+j]._tagesansicht._list, {
 	    							name:"_terminarea"+i,
 	    							calenderObjRef:parent,
 	    							description:value[i].appointmentName +" Beschreibung: "+ value[i].appointmentDescription,
 	    							terminObj:value[i]
 								});
+				    		
+				    		}
+			    		}
+			    		//if ($debug) Debug.write("countX : ",countX);
+			    		//new lz.terminareaWeekView(parent["_day"+day]._tagesansicht._list, {
+	    							//name:"_terminarea"+i,
+	    							//calenderObjRef:parent,
+	    							//description:value[i].appointmentName +" Beschreibung: "+ value[i].appointmentDescription,
+	    							//terminObj:value[i]
+								//});
 	
 		    		}
 		    		
@@ -108,13 +123,13 @@
 	
 	<simplelayout axis="x" spacing="2"/> 
 		
-	<calendarWeekView name="_day0" height="350"></calendarWeekView>	
-	<calendarWeekView name="_day1" height="350"></calendarWeekView>
-	<calendarWeekView name="_day2" height="350"></calendarWeekView>
-	<calendarWeekView name="_day3" height="350"></calendarWeekView>
-	<calendarWeekView name="_day4" height="350"></calendarWeekView>
-	<calendarWeekView name="_day5" height="350"></calendarWeekView>
-	<calendarWeekView name="_day6" height="350"></calendarWeekView>
+	<calendarWeekView name="_day0" ></calendarWeekView>	
+	<calendarWeekView name="_day1" ></calendarWeekView>
+	<calendarWeekView name="_day2" ></calendarWeekView>
+	<calendarWeekView name="_day3" ></calendarWeekView>
+	<calendarWeekView name="_day4" ></calendarWeekView>
+	<calendarWeekView name="_day5" ></calendarWeekView>
+	<calendarWeekView name="_day6" ></calendarWeekView>
 	
 		
 </class>
