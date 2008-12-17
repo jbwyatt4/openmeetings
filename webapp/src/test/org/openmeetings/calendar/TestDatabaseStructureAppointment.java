@@ -53,8 +53,8 @@ public class TestDatabaseStructureAppointment extends TestCase {
 				cal.getTime();
 				
 				SimpleDateFormat format = new SimpleDateFormat( "yyyy-MM-dd" );
-				Date date = format.parse( "2008-11-07" );
-				Date date2 = format.parse( "2008-11-08" );
+				Date date = format.parse( "2008-17-08" );
+				Date date2 = format.parse( "2008-18-08" );
 		
 				List<Appointment> listAppoints =	AppointmentDaoImpl.getInstance().getAppointmentsByRange(1L, date, date2);
 			//List<Appointment> listAppoints = AppointmentDaoImpl.getInstance().searchAppointmentsByName("%");

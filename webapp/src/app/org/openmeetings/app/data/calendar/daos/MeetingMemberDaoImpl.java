@@ -38,7 +38,7 @@ public class MeetingMemberDaoImpl {
 	
 	public MeetingMember getMeetingMemberById(Long meetingMemberId) {
 		try {
-			log.debug("getAppointmentCategoryById: "+ meetingMemberId);
+			log.debug("getMeetingMemberById: "+ meetingMemberId);
 			
 			String hql = "select app from MeetingMember app " +
 					"WHERE app.deleted != :deleted " +
@@ -76,7 +76,7 @@ public class MeetingMemberDaoImpl {
 			Session session = HibernateUtil.getSession();
 			Transaction tx = session.beginTransaction();
 			Query query = session.createQuery(hql);
-			query.setString("deleted", "true");
+			query.setBoolean("deleted", true);
 			query.setLong("appointmentId",appointmentId);
 			
 			List<MeetingMember> listmeetingMember = query.list();
@@ -246,7 +246,7 @@ public class MeetingMemberDaoImpl {
 			
 			if (gm == null) {
 				log.debug("Already deleted / Could not find: "+meetingMemberId);
-				//return;
+				return null;
 			}
 			gm.setUpdatetime(new Date());
 			gm.setDeleted(true);

@@ -1,7 +1,10 @@
 package org.openmeetings.app.data.calendar.daos;
 
+import java.lang.reflect.Array;
 import java.util.Date;
 import java.util.List;
+import java.util.Iterator;
+import java.util.Map;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -137,7 +140,7 @@ public class AppointmentDaoImpl {
 	
 	public Long updateAppointment(Long appointmentId, String appointmentName, Long userId, String appointmentDescription, 
 			Date appointmentstart, Date appointmentend,
-			Boolean isDaily, Boolean isWeekly, Boolean isMonthly, Boolean isYearly, Long categoryId, Long remind, List<MeetingMember> mmClient) {
+			Boolean isDaily, Boolean isWeekly, Boolean isMonthly, Boolean isYearly, Long categoryId, Long remind, Map mmClient) {
 		try {
 			
 			
@@ -165,19 +168,98 @@ public class AppointmentDaoImpl {
 			tx.commit();
 		    HibernateUtil.closeSession(idf);
 		    
-		    List<MeetingMember>	mmServer = MeetingMemberDaoImpl.getInstance().getMeetingMemberByAppointmentId(appointmentId);
-			for(int i=0;i<mmClient.size();i++){
-				//Users ClientUserId = mmClient.get(i).getUserid();
-				MeetingMember clientMM = mmClient.get(i);
-				
-				if(mmServer.contains(clientMM)){
-					log.debug("MeetingMember alredy contains");
-				}else{
-					MeetingMemberDaoImpl.getInstance().addMeetingMember(clientMM.getFirstname(), 
-							clientMM.getLastname(), clientMM.getMemberStatus(), clientMM.getAppointmentStatus(), 
-							appointmentId, clientMM.getUserid().getUser_id(), clientMM.getEmail());
-				}
-			}
+//		    List<MeetingMember>	mmServer = MeetingMemberDaoImpl.getInstance().getMeetingMemberByAppointmentId(appointmentId);
+//			for(int i=0;i<mmClient.size();i++){
+//		   
+//				//Users ClientUserId = mmClient.get(i).getUserid();
+//				Map clientMM = (Map) mmClient.get(i);
+//				
+//				if(mmServer.get(i).getMeetingMemberId().equals(clientMM.get("meetingMemberId").toString())){
+//					log.debug("MeetingMember alredy contains");
+//				}else{
+//					MeetingMemberDaoImpl.getInstance().addMeetingMember(clientMM.get("firstname").toString(), 
+//							clientMM.get("lastname").toString(), "0", "0", 
+//							appointmentId,Long.valueOf(clientMM.get("userId").toString()).longValue(), clientMM.get("email").toString());
+//				}
+//			}
+			
+		    
+		    List<MeetingMember> meetingsRemoteMembers = MeetingMemberDaoImpl.getInstance().getMeetingMemberByAppointmentId(ap.getAppointmentId());
+		    
+		    
+		    //LöschObjekte ermitteln und entfernen
+		    for (MeetingMember memberRemote : meetingsRemoteMembers) {
+		    	
+	    		boolean found = false;
+		    	
+		    	for (Iterator iter = mmClient.keySet().iterator();iter.hasNext();) {
+		    		Map clientMemeber = (Map) mmClient.get(iter.next());
+		    		Long meetingMemberId = Long.valueOf(clientMemeber.get("meetingMemberId").toString()).longValue();
+		    	
+		    		if (memberRemote.getMeetingMemberId().equals(meetingMemberId)) {
+		    			found = true;
+		    		}
+		    		
+		    	}
+		    	
+		    	if (!found) {
+		    		
+					//Not in List in client delete it
+		    		MeetingMemberDaoImpl.getInstance().deleteMeetingMember(memberRemote.getMeetingMemberId());
+		    	}
+		    }
+		    
+		    //Items ermitteln die hinzugefügt werden
+		    for (Iterator iter = mmClient.keySet().iterator();iter.hasNext();) {
+	    		Map clientMember = (Map) mmClient.get(iter.next());
+	    		Long meetingMemberId = Long.valueOf(clientMember.get("meetingMemberId").toString()).longValue();
+	    	
+	    		boolean found = false;
+	    		
+	    		for (MeetingMember memberRemote : meetingsRemoteMembers) {
+	    			if (memberRemote.getMeetingMemberId().equals(meetingMemberId)) {
+		    			found = true;
+		    		}
+	    		}
+	    		
+	    		if (!found) {
+	    			
+	    			//Not In Remote List available
+	    			MeetingMemberDaoImpl.getInstance().addMeetingMember(clientMember.get("firstname").toString(), 
+	    					clientMember.get("lastname").toString(), "0", "0", 
+							appointmentId,Long.valueOf(clientMember.get("userId").toString()).longValue(), clientMember.get("email").toString());
+	    			
+	    		}
+	    	}
+		    
+//		    for (Map memberClient : mmClient) {
+//		    	Map clientMM;
+//	    		boolean found = false;
+//		    	
+//		    	for (Iterator iter = mmClient.keySet().iterator();iter.hasNext();) {
+//		    		clientMM = (Map) mmClient.get(iter.next());
+//		    		meetingMemberId = Long.valueOf(clientMM.get("meetingMemberId").toString()).longValue();
+//		    	
+//		    		if (memberClient.getMeetingMemberId().equals(meetingMemberId)) {
+//		    			found = true;
+//		    		}
+//		    	}
+//		    	
+//		    	if (!found) {
+//		    		
+//					//Not in List in client delete it
+//		    		MeetingMemberDaoImpl.getInstance().addMeetingMember(clientMM.get("firstname").toString(), 
+//						clientMM.get("lastname").toString(), "0", "0", 
+//						appointmentId,Long.valueOf(clientMM.get("userId").toString()).longValue(), clientMM.get("email").toString());
+//		    	}
+//		    }
+		    
+		    
+		   //Überprüfen der umgekehrten shcleifen reihenfolge um die items 
+		    //zu ermitteln die nicht in der meetingsRemoteMembers liste sind
+		    //diese Items sind dann hinzuzufügen
+		    
+		    
 		    
 		    return appointmentId;
 		} catch (HibernateException ex) {
