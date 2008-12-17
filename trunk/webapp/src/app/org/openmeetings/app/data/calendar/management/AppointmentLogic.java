@@ -3,6 +3,7 @@ package org.openmeetings.app.data.calendar.management;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -87,7 +88,7 @@ public class AppointmentLogic {
 	
 	public Long updateAppointment(Long appointmentId, String appointmentName,Long userId, String appointmentDescription, 
 			Date appointmentstart, Date appointmentend,
-			Boolean isDaily, Boolean isWeekly, Boolean isMonthly, Boolean isYearly, Long categoryId, Long remind, List<MeetingMember> mmClient ){
+			Boolean isDaily, Boolean isWeekly, Boolean isMonthly, Boolean isYearly, Long categoryId, Long remind, Map mmClient ){
 		
 		try {
 			return AppointmentDaoImpl.getInstance().updateAppointment(appointmentId, 
