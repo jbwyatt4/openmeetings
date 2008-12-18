@@ -94,25 +94,72 @@
 				    		var day = 6;
 			    		}
 			    		
-			    		for(var j=0;j<7;j++){
-				    		if(value[i].appointmentEndtime.getTime()>parent._monday.getTime()+86400000*day){
+			    		//for(var j=0;j<7;j++){
+				    		//if(value[i].appointmentEndtime.getTime()>parent._monday.getTime()+86400000*day && value[i].appointmentStarttime.getTime()>parent._monday.getTime()+86400000*day){
 				    			
-				    			new lz.terminareaWeekView(parent["_day"+j]._tagesansicht._list, {
+				    			//new lz.terminareaWeekView(parent["_day"+day]._tagesansicht._list, {
+	    						//	name:"_terminarea"+i,
+	    						//	calenderObjRef:parent,
+	    						//	description:value[i].appointmentName +" Beschreibung: "+ value[i].appointmentDescription,
+	    						//	terminObj:value[i]
+								//});
+				    		
+				    	//	}
+			    		//}
+			    	
+			    		//if (termin_dauer über mehrere Tage)
+			    		//erster tag => Termin setzten von startzeitpunkt bis Mitternacht
+			    		
+			    		//für die folge-tage prüfen wie lange der Termin andauert
+			    		//angenommen der Termin ist am Dianstag
+			    		//ist zu prüfen ob Mi, Do, Fr, SA, SO komplett oder Teilweise 
+			    		//auch Termine sind und für jeden Tag ist dann 
+			    		//jeweils ein Termin Objekt zu initialisieren.
+			    		
+			    		var test = new Date(value[i].appointmentEndtime.getTime() - value[i].appointmentStarttime.getTime());
+			    		if ($debug) Debug.write("termin test: ",test.getDate());
+			    		if ($debug) Debug.write("termin über mehrere tage: ",value[i].appointmentEndtime.getTime() - value[i].appointmentStarttime.getTime());
+			    		if(test.getDate()>0){
+			    			for(var n=0;n<test.getDate();n++){
+				    			if(n==0){
+					    			//if ($debug) Debug.write("termin über mehrere tage :");	
+					    			new lz.terminareaWeekView(parent["_day"+day]._tagesansicht._list, {
+	    							y:value[i].appointmentStarttime.getHours()*17+value[i].appointmentStarttime.getMinutes()*1/4,
+	    							height:24*17-2-value[i].appointmentStarttime.getHours()*17+value[i].appointmentStarttime.getMinutes()*1/4,
+	    							name:"_terminarea"+i,
+	    							calenderObjRef:parent,
+	    							description:value[i].appointmentName +" Beschreibung: "+ value[i].appointmentDescription,
+	    							terminObj:value[i],
+	    							bgcolor:"red"
+					    			});
+				    			}else if(n==test.getDate()){
+				    				new lz.terminareaWeekView(parent["_day"+(day+n)]._tagesansicht._list, 
+				    				{name:"_terminarea"+i,
+				    				y:0, 
+				    				height:value[i].appointmentEndtime.getHours()*17+value[i].appointmentEndtime.getMinutes()*1/4,
+				    				terminObj:value[i],
+				    				bgcolor:"red"
+				    				});
+				    				
+				    			}else{
+				    			new lz.terminareaWeekView(parent["_day"+(day+n)]._tagesansicht._list, 
+				    				{y:0,
+				    				name:"_terminarea"+i,
+				    				height:389, //(24*17-2),
+				    				terminObj:value[i],
+				    				bgcolor:"red"
+				    				});
+				    				
+				    			}
+			    			}
+			    		}
+			    		
+			    		new lz.terminareaForWeekView(parent["_day"+day]._tagesansicht._list, {
 	    							name:"_terminarea"+i,
 	    							calenderObjRef:parent,
 	    							description:value[i].appointmentName +" Beschreibung: "+ value[i].appointmentDescription,
 	    							terminObj:value[i]
 								});
-				    		
-				    		}
-			    		}
-			    		//if ($debug) Debug.write("countX : ",countX);
-			    		//new lz.terminareaWeekView(parent["_day"+day]._tagesansicht._list, {
-	    							//name:"_terminarea"+i,
-	    							//calenderObjRef:parent,
-	    							//description:value[i].appointmentName +" Beschreibung: "+ value[i].appointmentDescription,
-	    							//terminObj:value[i]
-								//});
 	
 		    		}
 		    		

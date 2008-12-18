@@ -24,7 +24,7 @@
 			<view name="_buttons" layout="axis:x;spacing:2">
 				<button text="OK" width="${parent._cancel.width}">
 					<handler name="onclick">
-						new lz.searchContactInCalendar(parent.parent.parent.refObj.terminObjRef._liste._innerlist,{userId:null, 
+						new lz.searchContactInCalendar(parent.parent.parent.refObj.terminObjRef._liste._innerlist,{userId:0, 
 						vorname:parent.parent.vorname["text"], nachname:parent.parent.nachname["text"], email:parent.parent.email["text"]});
 						//if ($debug) Debug.write("_innerlist: ", parent.parent.parent.refObj.terminObjRef._liste._innerlist);
 						parent.parent.parent.refObj.terminObjRef._liste.setAttribute("visible", true);

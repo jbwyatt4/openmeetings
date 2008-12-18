@@ -2,10 +2,13 @@
 	
 	<class name="monthView" extends="view">
 		
-	<attribute name="monthnames" value="['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember']"/> 
+	<attribute name="monthnames" value="['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember']"/>
+	<attribute name="weekdaynames" value="['So.','Mo.','Di.','Mi.','Do.','Fr.','Sa.']"/>  
 	<attribute name="firstdayinweek" value="$once{ canvas.firstdayinweek }" type="number" />
 	<attribute name="year" value="" type="string" />
 	<attribute name="selecteddate" value="null" />
+	<attribute name="showingdate" type="string" value="" />
+	<attribute name="dayNamesLabelIds" value="null" />
 	
 	<attribute name="_startdate" value="null" />
 	<attribute name="_enddate" value="null" />
@@ -106,48 +109,87 @@
     	 
    <handler name="oninit">
    	    var	now = new Date();
-   	   	//now = now.getTime() - 86400000*now.getDay();
    	   	var end = new Date();
    	   	end.setMonth(01);
 
    	   if ($debug) Debug.write("now: ",now);
-   	   if ($debug) Debug.write("wochentag: ",now.getDay());
-   	   //this.week1.day1.setAttribute('daydate', now)
    	   this.init();
    	   this._startdate = now;
    	   this._enddate = end;
    	   this.getAppointmentByRangeMonth.doCall();
-   		
+   	   this.dayNamesLabelIds = [459,453,454,455,456,457,458];
+   	   if ($debug) Debug.write("this month: ",this);
+   	   if ($debug) Debug.write("this month _startDate: ",parent.parent.parent._startDate);
+   	   this.showingdate = parent.parent.parent._startDate;
    </handler>
    
    <method name="init">
         <![CDATA[ 
 	        super.init();
-	        
 	        if (this.showingdate==""){
 	        	this.showingdate = new Date();
-	        	this.showingdate.setFullYear(2007);
-	        	this.showingdate.setMonth(10);
-	        	this.showingdate.setDate(12);
+	        	this.showingdate.setFullYear(this.showingdate.getFullYear());
+	        	this.showingdate.setMonth(this.showingdate.getMonth());
+	        	this.showingdate.setDate(this.showingdate.getDate());
 	        }
-	        this.setAttribute('year',this.showingdate.getFullYear());
+	        //this.setAttribute('year',this.showingdate.getFullYear());
 	        this.selecteddate = this.showingdate;
 	        var firstdayDate = this.getDateFirstDayInMonth();
 	       
 	        var j=0;
 	        var t=0;
-	        for(var i=0;i<31;i++){
+	        for(var i=0;i<42;i++){
 	        	//this.week1.day[i].setAttribute('daydate', firstdayDate + i);
-	        	if(i==7||i==14||i==21||i==28){
-	        	j++
-	        	t=0;
+	        	if(i==7||i==14||i==21||i==28||i==35){
+		        	j++
+		        	t=0;
 	        	}
-	        	if(i==31){
-	        		for(var k=0;k<this["week"+ j].subviews[t].length;k++){
-	        		this["week"+ j].subviews[t].setAttribute('daydate', firstdayDate.getDate() + k+".");
-	        		}
+	        	var datecount = new Date(firstdayDate.getTime() +86400000*i);
+	        	this["week"+ j].subviews[t].setAttribute('daydate',  this.weekdaynames[datecount.getDay()]+" "
+	        	+datecount.getDate().toString()+". "+this.monthnames[datecount.getMonth()] ); 
+	        	t++
+	        }
+	        
+	        this.content.content.destroy();
+	        //new lz.dateSelectorMonth(this.content,{name:'content',
+		     //   	firstweekNumber:this.getWeekNumber(firstdayDate.getTime()),
+		        //	month:this.selecteddate.getMonth(),
+		        //	showingdate:firstdayDate,
+		        	//dayclass:dayclass,
+		        	//weekclass:weekclass,
+		        ///	showcalenderweek:showcalenderweek,
+		        	//showcalendermonth:showcalendermonth
+	        	//});
+	        //this.hiliteDate(this.showingdate);
+	        //this.onselect.sendEvent(this.selecteddate);
+	        //this.checkToday();
+		]]>
+	</method>
+	
+	<method name="initMonthByDate" args="selecdeddate">
+        <![CDATA[ 
+	        super.init();
+	        if (this.showingdate==""){
+	        	this.showingdate = new Date();
+	        	this.showingdate.setFullYear(this.showingdate.getFullYear());
+	        	this.showingdate.setMonth(this.showingdate.getMonth());
+	        	this.showingdate.setDate(this.showingdate.getDate());
+	        }
+	        //this.setAttribute('year',this.showingdate.getFullYear());
+	        this.selecteddate = this.showingdate;
+	        var firstdayDate = this.getDateFirstDayInMonth();
+	       
+	        var j=0;
+	        var t=0;
+	        for(var i=0;i<42;i++){
+	        	//this.week1.day[i].setAttribute('daydate', firstdayDate + i);
+	        	if(i==7||i==14||i==21||i==28||i==35){
+		        	j++
+		        	t=0;
 	        	}
-	        	this["week"+ j].subviews[t].setAttribute('daydate', firstdayDate.getDate() + i+".");
+	        	var datecount = new Date(firstdayDate.getTime() +86400000*i);
+	        	this["week"+ j].subviews[t].setAttribute('daydate',  this.weekdaynames[datecount.getDay()]+" "
+	        	+datecount.getDate().toString()+". "+this.monthnames[datecount.getMonth()] ); 
 	        	t++
 	        }
 	        
