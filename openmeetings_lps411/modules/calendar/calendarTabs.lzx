@@ -21,12 +21,12 @@
 				<!--<scrollbar axis="y"></scrollbar>	-->	
 		    </tabelement>
 		    
-		    <tabelement text="month">
+		    <tabelement text="month" name="_month">
 		    	<handler name="onselect">
-			    	if ($debug) Debug.write("setCalendarItem_method: ",this);
-			    	if ($debug) Debug.write("setCalendarItem_method: ",this.height);
-			    	if ($debug) Debug.write("setCalendarItem_method: ",this.width);
-			    	new lz.monthView(this);
+			    	//if ($debug) Debug.write("setCalendarItem_method: ",this);
+			    	//if ($debug) Debug.write("setCalendarItem_method: ",this.height);
+			    	//if ($debug) Debug.write("setCalendarItem_method: ",this.width);
+			    	new lz.monthView(this,{name:"_monthView"});
 		    	</handler>
 		    	
 		    </tabelement>	

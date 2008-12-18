@@ -1,11 +1,10 @@
 <library>
 	
-<class name="terminareaWeekView" extends="view">
+<class name="terminareaWeekView" extends="view" width="100">
 	
 	<attribute name="description" type="string" value="" />
 	<attribute name="terminObj" value="null"/>
 	<attribute name="calenderObjRef" value="null"/>
-	<attribute name="countX" value="0" type="number" />	
 	
 	<handler name="onclick">
 		if ($debug) Debug.write("this ",this);
@@ -17,69 +16,9 @@
 		parent.parent.parent.parent.parent.parent.parent._termindetails.setAttribute('visible', true);
 		//parent.parent.parent.parent._terminButton.onclick.sendEvent();
 	</handler>
-	<handler name="oninit">
-		<![CDATA[
-			this.setAttribute('height',  this.terminObj.appointmentEndtime.getHours()*17 + 1/3 * this.terminObj.appointmentEndtime.getMinutes() - 
-				    (this.terminObj.appointmentStarttime.getHours()*17 + 1/3 * this.terminObj.appointmentStarttime.getMinutes()));	  
-			this.setAttribute("width", 100); 
-			this.setAttribute("bgcolor", red); 
-			//this.setAttribute("x",this.countX);
-			
-			if ($debug) Debug.write("Hours",this.terminObj.appointmentStarttime.getHours());
-			if ($debug) Debug.write("Minutes",this.terminObj.appointmentStarttime.getMinutes());
-			
-			this.setAttribute("y",this.terminObj.appointmentStarttime.getHours()*17 + 1/3 * this.terminObj.appointmentStarttime.getMinutes());
-			
-			if (this.terminObj.appointmentStarttime < this.calenderObjRef._monday && 
-				this.terminObj.appointmentEndtime > this.calenderObjRef._sunday){
-				this.setAttribute('y', 0);
-				this.setAttribute('height', 17*24-2);
-				if ($debug) Debug.write("1. if week appointmentStarttime",this.terminObj.appointmentStarttime, "_appointmentStarttime", parent.parent.parent.parent._startDate);
-			}
-			else if(this.terminObj.appointmentEndtime.getTime() > (this.calenderObjRef._monday.getTime() + (86400000*2))){
-				this.setAttribute('height', 17*24-2-this.terminObj.appointmentStarttime.getHours() * 17);
-				if ($debug) Debug.write("2. if week",this.terminObj.appointmentStarttime, "_appointmentStarttime", parent.parent.parent.parent.parent.parent.parent._startDate);
-			}
-			else if(this.terminObj.appointmentStarttime < this.calenderObjRef._monday){
-				this.setAttribute('y', 0);
-				this.setAttribute('height', this.terminObj.appointmentEndtime.getHours() * 17);
-				if ($debug) Debug.write("3. if week",this.terminObj.appointmentStarttime, "_appointmentStarttime", parent.parent.parent.parent.parent.parent.parent._startDate);
-			}
-			
-			if ($debug) Debug.write("this.y",this.y);
-			
-		]]>
-	</handler>
 	
-<!--	this.setAttribute('height',  this.terminObj.appointmentEndtime.getHours()*17 + 1/3 * this.terminObj.appointmentEndtime.getMinutes() - 
-				    (this.terminObj.appointmentStarttime.getHours()*17 + 1/3 * this.terminObj.appointmentStarttime.getMinutes()));	  
-			this.setAttribute("width", 100); 
-			this.setAttribute("bgcolor", red); 
-			//this.setAttribute("x",this.countX);
-			
-			if ($debug) Debug.write("Hours",this.terminObj.appointmentStarttime.getHours());
-			if ($debug) Debug.write("Minutes",this.terminObj.appointmentStarttime.getMinutes());
-			
-			this.setAttribute("y",this.terminObj.appointmentStarttime.getHours()*17 + 1/3 * this.terminObj.appointmentStarttime.getMinutes());
-			
-			if (this.terminObj.appointmentStarttime < this.calenderObjRef._monday && 
-				this.terminObj.appointmentEndtime > this.calenderObjRef._sunday){
-				this.setAttribute('y', 0);
-				this.setAttribute('height', 17*24-2);
-				if ($debug) Debug.write("1. if week appointmentStarttime",this.terminObj.appointmentStarttime, "_appointmentStarttime", parent.parent.parent.parent._startDate);
-			}
-			else if(this.terminObj.appointmentEndtime.getTime() > (this.calenderObjRef._monday.getTime() + (86400000*2))){
-				this.setAttribute('height', 17*24-2-this.terminObj.appointmentStarttime.getHours() * 17);
-				if ($debug) Debug.write("2. if week",this.terminObj.appointmentStarttime, "_appointmentStarttime", parent.parent.parent.parent.parent.parent.parent._startDate);
-			}
-			else if(this.terminObj.appointmentStarttime < this.calenderObjRef._monday){
-				this.setAttribute('y', 0);
-				this.setAttribute('height', this.terminObj.appointmentEndtime.getHours() * 17);
-				if ($debug) Debug.write("3. if week",this.terminObj.appointmentStarttime, "_appointmentStarttime", parent.parent.parent.parent.parent.parent.parent._startDate);
-			}
-			
-			if ($debug) Debug.write("this.y",this.y); -->
 	
+
 	<text multiline="true" width="${ parent.width-2 }" x="1" 
 		  height="${ parent.height -2 }" y="1"
 		  text="${ parent.description }" />
