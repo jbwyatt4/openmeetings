@@ -27,7 +27,7 @@
 <class name="drawColorPicker" extends="view">
 	<colorRectChoose name="_basecolorObj" colorchoose="0x000000" />
 	<attribute name="defaultno" value="0" type="number" />
-	<event name="onnewcolor" args="c"/>
+	<event name="onnewcolor" />
 	<view x="26" layout="axis:y">
 		<method name="sendColor" args="obj">
 			this.parent._basecolorObj.setAttribute('colorchoose',obj.colorchoose);

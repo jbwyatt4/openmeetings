@@ -24,7 +24,7 @@
     <attribute name="iamgex" value="" type="string" />
     <attribute name="imagey" value="" type="string" />
     
-    <event name="onsharedMessage" args="obj" />
+    <event name="onsharedMessage" />
     
     <attribute name="sendObject" value="null" />
     <attribute name="sendObjectToClientID" value="0" type="number"  />
@@ -114,9 +114,8 @@
         ]]> 
     </method>
     
-    <event name="isloadingImage" args="val" />
-    <event name="isloadedImage" args="val" />
-    
+    <event name="isloadingImage" />
+    <event name="isloadedImage" />
     
     <text fontsize="12" x="10" y="2" 
         name="_sharingClientName" fontstyle="bold" />    

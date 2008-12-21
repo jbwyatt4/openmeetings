@@ -169,11 +169,11 @@
 	<attribute name="selecteddate" value="null" />
 	<attribute name="selected" value="null" />
 	
-	<event name="onselect" args="d" />
-	<event name="ondoubleselect" args="d" />
+	<event name="onselect" />
+	<event name="ondoubleselect" />
 	
-	<event name="onmonthSel" args="month" />
-	<event name="onyearSel" args="year" />
+	<event name="onmonthSel" />
+	<event name="onyearSel" />
 	
 	<handler name="oninit">
 		<![CDATA[
