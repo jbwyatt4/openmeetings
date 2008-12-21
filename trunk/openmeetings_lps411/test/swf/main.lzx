@@ -7,10 +7,10 @@
 <button text="load SWF">
     <handler name="onclick">
         <![CDATA[
-        Debug.write("load SWF");
-        //parent.myView._swfView.setAttribute("src","Google.swf");
-        parent.myView._swfView.setSource("http://localhost:5080/openmeetings/DownloadHandler?fileName=Google.swf&moduleName=videoconf1&parentPath=/Google&room_id=1&sid=a498726852b649da3cce4a5ee9cb3a9b");
-        //parent.myView._swfView.setSource("http://localhost:5080/openmeetings/Google.swf");
+	        if ($debug) Debug.write("load SWF");
+	        //parent.myView._swfView.setAttribute("src","Google.swf");
+	        parent.myView._swfView.setSource("http://localhost:5080/openmeetings/DownloadHandler?fileName=Google.swf&moduleName=videoconf1&parentPath=/Google&room_id=1&sid=a498726852b649da3cce4a5ee9cb3a9b");
+	        //parent.myView._swfView.setSource("http://localhost:5080/openmeetings/Google.swf");
         ]]>
     </handler>
 </button>
