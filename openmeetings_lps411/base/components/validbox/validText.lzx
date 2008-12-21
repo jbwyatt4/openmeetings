@@ -51,7 +51,7 @@
             this.onselect.sendEvent();
         </method>    
         
-        <event name="onselect" args="obj" />
+        <event name="onselect" />
         
         <method name="getValue">
             return this.currentValue;
@@ -131,7 +131,7 @@
         
         <attribute name="isopen" value="false" type="boolean" setter="this.setOpen(isopen)" />
         
-        <event name="onisopen" args="bool" />
+        <event name="onisopen" />
         
         <method name="setOpen" args="open, withkey" >
             if (!this.isinited) {

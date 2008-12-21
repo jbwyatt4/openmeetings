@@ -18,7 +18,7 @@
 	
 	<event name="oncallnext" />
 	<event name="oncallpre" />
-	<event name="onclickedItem" args="obj" />
+	<event name="onclickedItem" /><!-- args="obj" -->
 	
 	<method name="callfirst">
 		this.start = 0;

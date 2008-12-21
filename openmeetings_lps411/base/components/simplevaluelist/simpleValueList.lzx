@@ -30,7 +30,7 @@
     
     <attribute name="itemclassname" type="string" value="simpleListItem" />
 	
-	<event name="onselect" args="obj" />
+	<event name="onselect" />
 	
 	<method name="toggleSelected" args="obj">
 		<![CDATA[

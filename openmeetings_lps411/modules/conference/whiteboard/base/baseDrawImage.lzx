@@ -49,7 +49,7 @@
 	<attribute name="loadImageObjectTimer" value="null" />
 	 -->
     
-    <event name="setNewScreenUserName" args="val" />
+    <event name="setNewScreenUserName" />
   	
   	<!-- invoked by clicking on the confirmation dialog after 
   		clicking on an image in the Library -->

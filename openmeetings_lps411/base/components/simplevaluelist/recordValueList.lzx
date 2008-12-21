@@ -22,7 +22,7 @@
     
     <attribute name="itemToDelete" value="null" />
     
-    <event name="deleteItem" args="obj" />
+    <event name="deleteItem" />
     
 </class>
 

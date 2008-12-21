@@ -69,7 +69,7 @@
     	there can be a timeout -->
     <attribute name="sendURL" value="http://www.webbase-design.de/dokeos/videoconference/createimagefrombitmap.php" type="string" />
     
-    <event name="onprogress" args="perc" />
+    <event name="onprogress" />
     
     <method name="catchSnapshot">
         <![CDATA[
