@@ -32,7 +32,7 @@
   <property name="c3p0.max_statements">100</property>
   <property name="c3p0.timeout">3600</property>
   <!-- mapping files -->
-     <mapping resource="org/openmeetings/app/hibernate/beans/adresses/Adresses.hbm.xml"/>
+    <mapping resource="org/openmeetings/app/hibernate/beans/adresses/Adresses.hbm.xml"/>
     <mapping resource="org/openmeetings/app/hibernate/beans/adresses/Adresses_Emails.hbm.xml"/>
     <mapping resource="org/openmeetings/app/hibernate/beans/adresses/Adresses_Phones.hbm.xml"/>
     <mapping resource="org/openmeetings/app/hibernate/beans/adresses/Emails.hbm.xml"/>

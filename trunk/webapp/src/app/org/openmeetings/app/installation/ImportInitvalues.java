@@ -228,7 +228,7 @@ public class ImportInitvalues {
 						"sendEmailAtRegister is 0(No) cause you need" +
 						"to send a EMail.");
 		Configurationmanagement.getInstance().addConfByKey(3, "default_export_font",
-				sendEmailAtRegister, null, "The Name of the Font used for exporting/render Images from Whiteboard" +
+				default_export_font, null, "The Name of the Font used for exporting/render Images from Whiteboard" +
 						"The Font has to exist on the Server which runs Red5");
 		
 	}
