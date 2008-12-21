@@ -365,25 +365,25 @@
 	compiler="org.eclipse.jdt.core.JDTCompilerAdapter" -->
 	<target name="compile" depends="prepare, resources">
 		<echo message="${main.out.dir}"></echo>
-		<javac debug="on" srcdir="${main.src.dir}" destdir="${main.out.dir}" >
+		<javac debug="on" debuglevel="lines,vars,source" srcdir="${main.src.dir}" destdir="${main.out.dir}" >
 			<classpath refid="compile.classpath"/>
 		</javac>
-		<javac debug="on" srcdir="${webstart.src.dir}" destdir="${main.out.dir}" >
+		<javac debug="on" debuglevel="lines,vars,source" srcdir="${webstart.src.dir}" destdir="${main.out.dir}" >
 			<classpath refid="compile.classpath"/>
 		</javac>
-		<javac debug="on" srcdir="${templates.src.dir}" destdir="${main.out.dir}" >
+		<javac debug="on" debuglevel="lines,vars,source" srcdir="${templates.src.dir}" destdir="${main.out.dir}" >
 			<classpath refid="compile.classpath"/>
 		</javac>
-		<javac debug="on" srcdir="${test.src.dir}" destdir="${main.out.dir}" >
+		<javac debug="on" debuglevel="lines,vars,source" srcdir="${test.src.dir}" destdir="${main.out.dir}" >
 			<classpath refid="compile.classpath"/>
 		</javac>	
-		<javac debug="on" srcdir="${fileservice.src.dir}" destdir="${main.out.dir}" >
+		<javac debug="on" debuglevel="lines,vars,source" srcdir="${fileservice.src.dir}" destdir="${main.out.dir}" >
 			<classpath refid="compile.classpath"/>
 		</javac>
-		<javac debug="on" srcdir="${roomservice.src.dir}" destdir="${main.out.dir}" >
+		<javac debug="on" debuglevel="lines,vars,source" srcdir="${roomservice.src.dir}" destdir="${main.out.dir}" >
 			<classpath refid="compile.classpath"/>
 		</javac>
-		<javac debug="on" srcdir="${userservice.src.dir}" destdir="${main.out.dir}" >
+		<javac debug="on" debuglevel="lines,vars,source" srcdir="${userservice.src.dir}" destdir="${main.out.dir}" >
 			<classpath refid="compile.classpath"/>
 		</javac>		
 	</target>

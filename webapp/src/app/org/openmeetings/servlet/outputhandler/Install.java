@@ -105,8 +105,14 @@ public class Install extends VelocityViewServlet {
 					String filePath = getServletContext().getRealPath("/")+ImportInitvalues.languageFolderName;
 					LinkedHashMap<Integer,String> allLanguages = ImportInitvalues.getInstance().getLanguageFiles(filePath);
 					
+					LinkedHashMap<String,String> allFonts = new LinkedHashMap<String,String>();
+					allFonts.put("TimesNewRoman", "TimesNewRoman");
+					allFonts.put("Verdana", "Verdana");
+					allFonts.put("Arial", "Arial");
+						
 					Template tpl = super.getTemplate ("install_step1_"+lang+".vm");
 					ctx.put("allLanguages", allLanguages);
+					ctx.put("allFonts", allFonts);
 					StringWriter writer = new StringWriter(); 
 					tpl.merge(ctx, writer);
 					
