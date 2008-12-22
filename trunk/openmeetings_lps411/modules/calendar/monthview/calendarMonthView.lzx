@@ -1,14 +1,14 @@
 <library>
 	
-	<class name="calendarMonthView" extends="view" height="65" width="135">
+	<class name="calendarMonthView" extends="view" height="65" width="132">
 		<attribute name="daydate" value="null" />
 		<attribute name="fullDate" value="null"/>
 		<attribute name="countsubwievs" value="0" type="number"/>
 		<simplelayout axis="y" spacing="0"/>
-		<view name="_head" bgcolor="green" width="135">
+		<view name="_head" bgcolor="green" width="132">
 			<text name="_date" text="${parent.parent.daydate}"> Mo 31. Dez</text>
 		</view>
-		<view name="_appointemtList" bgcolor="blue" height="45" width="135" clip="true">
+		<view name="_appointemtList" bgcolor="blue" height="45" width="132" clip="true">
 			<view name="_innerList" layout="axis:y;spacing:1" >
 				<handler name="onaddsubview">
 					//parent.parent.countsubwievs=parent.parent.countsubwievs+1
