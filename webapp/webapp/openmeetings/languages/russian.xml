@@ -1704,4 +1704,43 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   <string id="564" name="exportToImage">
     <value>&lt;u&gt;Download as TIF&lt;/u&gt;</value>
   </string>
+  <string id="565" name="calendarLabel">
+    <value>Reminder:</value>
+  </string>
+  <string id="566" name="calendarLabel">
+    <value>Category:</value>
+  </string>
+  <string id="567" name="calendarLabel">
+    <value>Repetition:</value>
+  </string>
+  <string id="568" name="calendarLabel">
+    <value>none</value>
+  </string>
+  <string id="569" name="calendarLabel">
+    <value>Location:</value>
+  </string>
+  <string id="570" name="calendarLabel">
+    <value>Start</value>
+  </string>
+  <string id="571" name="calendarLabel">
+    <value>Ende</value>
+  </string>
+  <string id="572" name="calendarLabel">
+    <value>Titel:</value>
+  </string>
+  <string id="573" name="calendarLabel">
+    <value>Comment:</value>
+  </string>
+  <string id="574" name="calendarLabel">
+    <value>Invite Members</value>
+  </string>
+  <string id="575" name="calendarLabel">
+    <value>Daily</value>
+  </string>
+  <string id="576" name="calendarLabel">
+    <value>Monthly</value>
+  </string>
+  <string id="577" name="calendarLabel">
+    <value>Yeahrly</value>
+  </string>
 </language>
