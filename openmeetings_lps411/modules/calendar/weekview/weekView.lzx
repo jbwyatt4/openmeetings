@@ -93,19 +93,6 @@
 			    		} else if(value[i].appointmentStarttime.getDay() == 0) {
 				    		var day = 6;
 			    		}
-			    		
-			    		//for(var j=0;j<7;j++){
-				    		//if(value[i].appointmentEndtime.getTime()>parent._monday.getTime()+86400000*day && value[i].appointmentStarttime.getTime()>parent._monday.getTime()+86400000*day){
-				    			
-				    			//new lz.terminareaWeekView(parent["_day"+day]._tagesansicht._list, {
-	    						//	name:"_terminarea"+i,
-	    						//	calenderObjRef:parent,
-	    						//	description:value[i].appointmentName +" Beschreibung: "+ value[i].appointmentDescription,
-	    						//	terminObj:value[i]
-								//});
-				    		
-				    	//	}
-			    		//}
 			    	
 			    		//if (termin_dauer über mehrere Tage)
 			    		//erster tag => Termin setzten von startzeitpunkt bis Mitternacht
@@ -116,11 +103,12 @@
 			    		//auch Termine sind und für jeden Tag ist dann 
 			    		//jeweils ein Termin Objekt zu initialisieren.
 			    		
-			    		var test = new Date(value[i].appointmentEndtime.getTime() - value[i].appointmentStarttime.getTime());
+			    		var test = new Date(value[i].appointmentEndtime.getTime() - value[i].appointmentStarttime.getTime());//appointment over one day?
 			    		if ($debug) Debug.write("termin test: ",test.getDate());
 			    		if ($debug) Debug.write("termin über mehrere tage: ",value[i].appointmentEndtime.getTime() - value[i].appointmentStarttime.getTime());
-			    		if(test.getDate()>0){
+			    		if(test.getDate()>1){
 			    			for(var n=0;n<test.getDate();n++){
+				    			if ($debug) Debug.write("n:++ ",n);
 				    			if(n==0){
 					    			//if ($debug) Debug.write("termin über mehrere tage :");	
 					    			new lz.terminareaWeekView(parent["_day"+day]._tagesansicht._list, {
@@ -132,38 +120,51 @@
 	    							terminObj:value[i],
 	    							bgcolor:"red"
 					    			});
-				    			}else if(n==test.getDate()){
+				    			}else if((n+1)==test.getDate()){
 				    				new lz.terminareaWeekView(parent["_day"+(day+n)]._tagesansicht._list, 
 				    				{name:"_terminarea"+i,
 				    				y:0, 
 				    				height:value[i].appointmentEndtime.getHours()*17+value[i].appointmentEndtime.getMinutes()*1/4,
 				    				terminObj:value[i],
+				    				calenderObjRef:parent,
+				    				description:value[i].appointmentName +" Beschreibung: "+ value[i].appointmentDescription,
 				    				bgcolor:"red"
 				    				});
-				    				
+				    				if ($debug) Debug.write("appointmentEndtime.getHours():++ ",value[i].appointmentEndtime.getHours());
 				    			}else{
 				    			new lz.terminareaWeekView(parent["_day"+(day+n)]._tagesansicht._list, 
 				    				{y:0,
 				    				name:"_terminarea"+i,
 				    				height:389, //(24*17-2),
 				    				terminObj:value[i],
+				    				calenderObjRef:parent,
+				    				description:value[i].appointmentName +" Beschreibung: "+ value[i].appointmentDescription,
 				    				bgcolor:"red"
 				    				});
-				    				
+					    				
+					    			}
 				    			}
-			    			}
-			    		}
+	
+	    					}else{
+		    				new lz.terminareaForWeekView(parent["_day"+day]._tagesansicht._list, {
+    							name:"_terminarea"+i,
+    							calenderObjRef:parent,
+    							description:value[i].appointmentName +" Beschreibung: "+ value[i].appointmentDescription,
+    							terminObj:value[i]
+							});
+				    			}
+				    		}
 			    		
-			    		new lz.terminareaForWeekView(parent["_day"+day]._tagesansicht._list, {
-	    							name:"_terminarea"+i,
-	    							calenderObjRef:parent,
-	    							description:value[i].appointmentName +" Beschreibung: "+ value[i].appointmentDescription,
-	    							terminObj:value[i]
-								});
+			    		//new lz.terminareaForWeekView(parent["_day"+day]._tagesansicht._list, {
+	    							//name:"_terminarea"+i,
+	    							//calenderObjRef:parent,
+	    							//description:value[i].appointmentName +" Beschreibung: "+ value[i].appointmentDescription,
+	    							//terminObj:value[i]
+								//});
 	
 		    		}
 		    		
-	    		}
+	    		
     		 ]]>
     	</handler>
     </netRemoteCallHib> 			    		
