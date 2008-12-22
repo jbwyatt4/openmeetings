@@ -84,7 +84,8 @@
 	<attribute name="iconvalue" value="" type="string" />
 	<handler name="onclick">
 		var messageBox = parent.parent.parent.btnRef.message;
-		messageBox.setAttribute('text',messageBox.getText()+" "+iconvalue+"  ");
+		messageBox.setText(messageBox.getText()+" "+iconvalue+"  ");
+		if ($debug) Debug.write("messageBox TEXT: ",messageBox.text,messageBox);
 		lz.Focus.setFocus(messageBox._ctext);
 		messageBox._ctext.setSelection(messageBox.getText().length-1,messageBox.getText().length);
 		parent.parent.parent.close();
