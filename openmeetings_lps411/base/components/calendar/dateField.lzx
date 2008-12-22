@@ -3,7 +3,7 @@
 
 <resource name="date_icon_rsc" src="resources/date.png" />
 
-<class name="dateField" extends="view">
+<class name="dateField" extends="view" width="104">
 	
 	<attribute name="enabled" value="true" type="boolean" />
 	<attribute name="setDefaultToday" value="false" type="boolean" />

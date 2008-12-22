@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library>
+	<include href="../../base/components/text/customEdittext.lzx" />
 	<!---
 		This class shows a invitation window with clicking button which is located in video and audio panel.
 	-->
@@ -21,16 +22,20 @@
 	    	</handler>	
 		
 		<!-- label: recipient -->
-		<labelText labelid="216" y="24" />
+		<labelText labelid="216" y="24" width="120" />
 		<customEdittext name="_recipient" width="340" regexpType="email" x="120" y="22" />
 		
 		<!-- label: subject -->
-		<labelText labelid="215" y="52" />
+		<labelText labelid="215" y="52" width="120" />
 		<customEdittext name="_subject" labelid="532" width="340" enabled="false" x="120" y="52" />	
 		
 		<!-- label: message -->
-		<labelText labelid="217" y="82" />
+		<labelText labelid="217" y="82" width="120" />
+		<customEdittext name="_message" width="340" x="120" y="82" height="100" 
+						multiline="true" />
+		<!--
 		<customScrollEdittext name="_message" width="340" x="120" y="82" height="100" />	
+		 -->
 							  
 		<!-- label: password protected -->
 		<labelCheckbox name="_ispasswordProtected" y="192" fontsize="12" x="4" labelid="524"  />
