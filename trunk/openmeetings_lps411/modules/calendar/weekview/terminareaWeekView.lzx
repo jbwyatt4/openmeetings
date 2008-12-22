@@ -52,6 +52,7 @@
 			    		if ($debug) Debug.write("terminObj: ",parent.terminObj);
 			    		//parent.updateUserMessagesTerminIdToNull.doCall();
 			    		parent.destroy();
+			    		parent.calenderObjRef.getAppointmentByRangeWeek.doCall();
 		    		 ]]>
 		    	</handler>
 	</netRemoteCallHib>

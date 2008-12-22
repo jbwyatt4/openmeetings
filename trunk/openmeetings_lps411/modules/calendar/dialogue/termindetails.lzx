@@ -214,10 +214,30 @@
 			   		</handler>
 			   		<handler name="onclick">
 			    		<![CDATA[
+			    		var startDate = parseStringToDate(parent.parent._date._bdatum.getText());
+			    		var startTime = parseTimeStringToDate(parent.parent._date._bzeit.getText());
+			    		var endDate = parseStringToDate(parent.parent._date.edatum.getText());
+			    		var endTime = parseTimeStringToDate(parent.parent._date.ezeit.getText());
 			    		
-			    		if(parseStringToDate(parent.parent._date._bdatum.getText()) > parseStringToDate(parent.parent._date.edatum.getText()) ||  
-			    		parseTimeStringToDate(parent.parent._date._bzeit.getText()) >  parseTimeStringToDate(parent.parent._date.ezeit.getText()) )
-			    	  		
+			    		var startDateTime = new Date();
+			    		startDateTime.setDate(startDate.getDate());
+			    		startDateTime.setMonth(startDate.getMonth());
+			    		startDateTime.setFullYear(startDate.getFullYear());
+			    		startDateTime.setHours(startTime.getHours());
+			    		startDateTime.setMinutes(startTime.getMinutes)
+			    		
+			    		var endDateTime = new Date();
+			    		endDateTime.setDate(endDate.getDate());
+			    		endDateTime.setMonth(endDate.getMonth());
+			    		endDateTime.setFullYear(endDate.getFullYear());
+			    		endDateTime.setHours(endTime.getHours());
+			    		endDateTime.setMinutes(endTime.getMinutes);
+			    		
+			    		//if(parseStringToDate(parent.parent._date._bdatum.getText()) > parseStringToDate(parent.parent._date.edatum.getText()) ||  
+			    		//parseTimeStringToDate(parent.parent._date._bzeit.getText()) >  parseTimeStringToDate(parent.parent._date.ezeit.getText()) )
+			    	  	
+			    		if(startDateTime > endDateTime)
+			    		
 			        	{
 			    			if ($debug) Debug.write("Error: ", "Ende liegt vor Beginn!");
 							new lz.myalert(parent.parent,{text:"Terminende liegt vor Terminanfang!"})

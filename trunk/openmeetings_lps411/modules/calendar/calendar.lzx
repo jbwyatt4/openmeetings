@@ -57,7 +57,9 @@
 	 				parent._tabslider._week._weekView.initWeekByDate(this.selecteddate);
 	 				parent._tabslider._week._weekView.getAppointmentByRangeWeek.doCall();
 	 			}else if(parent._tabslider._month.getAttribute('selected') == true){
-	 				parent._tabslider._month._monthView.initMonthByDate(this.selecteddate);
+	 				parent._tabslider._month._monthView.showingdate = this.selecteddate;
+	 				//parent._tabslider._month._monthView.initMonthByDate(this.selecteddate);
+	 				parent._tabslider._month._monthView.init(this.selecteddate);
 	 				parent._tabslider._month._monthView.getAppointmentByRangeMonth.doCall();
 	 			}else {
 		 			//parent._tagesansicht._list._innerlist.clearContent();
