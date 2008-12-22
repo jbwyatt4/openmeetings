@@ -34,9 +34,7 @@
   <!-- mapping files -->
     <mapping resource="org/openmeetings/app/hibernate/beans/adresses/Adresses.hbm.xml"/>
     <mapping resource="org/openmeetings/app/hibernate/beans/adresses/Adresses_Emails.hbm.xml"/>
-    <mapping resource="org/openmeetings/app/hibernate/beans/adresses/Adresses_Phones.hbm.xml"/>
     <mapping resource="org/openmeetings/app/hibernate/beans/adresses/Emails.hbm.xml"/>
-    <mapping resource="org/openmeetings/app/hibernate/beans/adresses/Phones.hbm.xml"/>
     <mapping resource="org/openmeetings/app/hibernate/beans/adresses/States.hbm.xml"/>
     <mapping resource="org/openmeetings/app/hibernate/beans/basic/Configuration.hbm.xml"/>
     <mapping resource="org/openmeetings/app/hibernate/beans/basic/ErrorType.hbm.xml"/>
