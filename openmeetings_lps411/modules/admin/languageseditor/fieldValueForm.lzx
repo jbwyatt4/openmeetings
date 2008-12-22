@@ -127,8 +127,12 @@
 	        				text="" />	
 		
 	    <labelText labelid="355" width="200" y="130" resize="false" x="2"/>
+	    	<customEdittext name="fieldvalue" y="130" x="120" width="270" height="120"
+	        					  text="" multiline="true" />
+	        <!--
 	        <customScrollEdittext name="fieldvalue" y="130" x="120" width="270" height="120"
 	        					  text="" />	
+	         -->
 	</view>
 	
 </class>
