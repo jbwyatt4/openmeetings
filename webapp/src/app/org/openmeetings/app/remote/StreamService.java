@@ -27,7 +27,6 @@ import org.red5.server.api.service.IPendingServiceCall;
 import org.red5.server.api.service.IPendingServiceCallback;
 import org.red5.server.api.service.IServiceCapableConnection;
 
-import org.openmeetings.app.conference.videobeans.RoomClient;
 import org.openmeetings.app.data.basic.AuthLevelmanagement;
 import org.openmeetings.app.data.basic.Sessionmanagement;
 import org.openmeetings.app.data.user.Usermanagement;
@@ -40,10 +39,16 @@ import org.openmeetings.app.hibernate.beans.rooms.Rooms_Organisation;
 import org.openmeetings.app.hibernate.beans.recording.ChatvaluesEvent;
 import org.openmeetings.app.hibernate.beans.recording.Recording;
 import org.openmeetings.app.hibernate.beans.recording.RecordingClient;
+import org.openmeetings.app.hibernate.beans.recording.RoomClient;
 import org.openmeetings.app.hibernate.beans.recording.RoomRecording;
 import org.openmeetings.app.hibernate.beans.recording.RoomStream;
 import org.openmeetings.app.hibernate.beans.recording.WhiteBoardEvent;
 import org.openmeetings.app.data.record.Recordingmanagement;
+import org.openmeetings.app.data.record.dao.ChatvaluesEventDaoImpl;
+import org.openmeetings.app.data.record.dao.RecordingClientDaoImpl;
+import org.openmeetings.app.data.record.dao.RoomRecordingDaoImpl;
+import org.openmeetings.app.data.record.dao.RoomStreamDaoImpl;
+import org.openmeetings.app.data.record.dao.WhiteBoardEventDaoImpl;
 
 /**
  * 
@@ -99,10 +104,13 @@ public class StreamService implements IPendingServiceCallback {
 			currentClient.setRoomRecordingName(recordingName);			
 			Application.getClientList().put(current.getClient().getId(), currentClient);
 			
+			Date now = new Date();
+			
 			RoomRecording roomRecording = new RoomRecording();
 			roomRecording.setConferenceType(conferenceType);
 			roomRecording.setRoom_setup(Roommanagement.getInstance().getRoomById(currentClient.getRoom_id()));
 			roomRecording.setRoomRecordingsTableString(roomRecordingsTableString);
+			roomRecording.setStarttime(now);
 			roomRecording.setComment(comment);
 			
 			//get all stream and start recording them
@@ -155,9 +163,6 @@ public class StreamService implements IPendingServiceCallback {
 						roomClient.setStartdate(startDate);
 						roomClient.setStarttime(0L);
 						roomClient.setRcl(rcl);
-						XStream xStream_temp = new XStream(new XppDriver());
-						xStream_temp.setMode(XStream.NO_REFERENCES);
-						roomClient.setRclInXml(xStream_temp.toXML(rcl));
 						if (roomRecording.getRoomClients() == null) {
 							roomRecording.setRoomClients(new HashSet<RecordingClient>());
 						}
@@ -175,10 +180,6 @@ public class StreamService implements IPendingServiceCallback {
 			roomRecording.setStarttime(new java.util.Date());
 			
 			roomRecording.setStartedby(currentClient);
-			XStream xStream = new XStream(new XppDriver());
-			xStream.setMode(XStream.NO_REFERENCES);
-			roomRecording.setStartedbyInXml(xStream.toXML(currentClient));
-			
 			
 			//add Room Client enter/leave events
 			//moved inside function - loop
@@ -274,9 +275,6 @@ public class StreamService implements IPendingServiceCallback {
 			roomRecording.setEndtime(endtime);
 			
 			roomRecording.setEnduser(currentClient);
-			XStream xStream_temp = new XStream(new XppDriver());
-			xStream_temp.setMode(XStream.NO_REFERENCES);
-			roomRecording.setEnduserInXml(xStream_temp.toXML(currentClient));
 			
 			roomRecording.setRecordname(newRecordFileName);
 			
@@ -296,7 +294,7 @@ public class StreamService implements IPendingServiceCallback {
 			//log.error(xmlString);
 			
 			//make persistent
-			Long recording_id = Recordingmanagement.getInstance().addRecording(newRecordFileName, duration, "", currentClient.getRoom_id(), us, comment);
+			Long recording_id = Recordingmanagement.getInstance().addRecording(newRecordFileName, duration, "", currentClient.getRoom_id(), us, comment, null);
 			
 			//save XML to Disk
 			IScope scope = Red5.getConnectionLocal().getScope().getParent();
@@ -330,6 +328,44 @@ public class StreamService implements IPendingServiceCallback {
 		    
 			//remove recording from Temp - List
 			roomRecordingList.remove(roomrecordingName);
+			
+			
+			//Store to database
+			
+			//First Store the RoomRecording
+			Long roomRecordingId = RoomRecordingDaoImpl.getInstance().addRoomRecording(roomRecording);
+			RoomRecording roomRecordingRemote = RoomRecordingDaoImpl.getInstance().getRoomRecordingById(roomRecordingId);
+			
+			//Store all RoomRecordingClients
+			for (Iterator<RecordingClient> iter = roomRecording.getRoomClients().iterator();iter.hasNext();) {
+				RecordingClient recordingClient = iter.next();
+				recordingClient.setRoomRecordingId(roomRecordingId);
+				RecordingClientDaoImpl.getInstance().addRecordingClient(recordingClient);
+			}
+			
+			//Store all Whiteboard Events
+			for (WhiteBoardEvent whiteBoardEvent : roomRecording.getWhiteboard()) {
+				whiteBoardEvent.setRoomRecording(roomRecordingRemote);
+				WhiteBoardEventDaoImpl.getInstance().addWhiteBoardEvent(whiteBoardEvent);
+			}
+			
+			//Store all Chatbox Events
+			for (ChatvaluesEvent chatvaluesEvent : roomRecording.getChatvalues()) {
+				chatvaluesEvent.setRoomRecording(roomRecordingRemote);
+				ChatvaluesEventDaoImpl.getInstance().addChatvaluesEvent(chatvaluesEvent);
+			}
+			
+			//Store all Stream Events
+			for (RoomStream roomStream : roomRecording.getRoomStreams()) {
+				roomStream.setRoomRecording(roomRecordingRemote);
+				RoomStreamDaoImpl.getInstance().addRoomStream(roomStream);
+			}
+			
+			//roomRecording.getRoomStreams()
+			
+			//make persistent
+			Long recording_id_remote = Recordingmanagement.getInstance().addRecording(newRecordFileName, duration, "", currentClient.getRoom_id(), us, comment, roomRecordingRemote);
+			
 			
 			return recording_id;
 		} catch (Exception err) {
@@ -671,9 +707,6 @@ public class StreamService implements IPendingServiceCallback {
 //				log.debug("###### NEW USER4: "+rcl.getUserip());
 //			}
 			roomClient.setRcl(rcl);
-			XStream xStream_temp = new XStream(new XppDriver());
-			xStream_temp.setMode(XStream.NO_REFERENCES);
-			roomClient.setRclInXml(xStream_temp.toXML(rcl));
 			
 			roomRecording.getRoomClients().add(roomClient);
 			roomRecordingList.put(roomrecordingName, roomRecording);			

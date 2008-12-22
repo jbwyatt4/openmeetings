@@ -2,7 +2,7 @@ package org.openmeetings.app.conference.whiteboard;
 
 import java.util.Date;
 
-import org.openmeetings.app.conference.videobeans.RoomClient;
+import org.openmeetings.app.hibernate.beans.recording.RoomClient;
 
 public class WhiteboardSyncLockObject {
 	

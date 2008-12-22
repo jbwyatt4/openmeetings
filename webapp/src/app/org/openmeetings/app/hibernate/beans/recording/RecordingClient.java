@@ -2,7 +2,6 @@ package org.openmeetings.app.hibernate.beans.recording;
 
 import java.util.Date;
 
-import org.openmeetings.app.conference.videobeans.RoomClient;
 
 /**
  * 
@@ -13,12 +12,12 @@ import org.openmeetings.app.conference.videobeans.RoomClient;
 public class RecordingClient {
 	
 	private Long recordingclient_id;
+	private Long roomRecordingId;
 	private String remoteAdress;
 	private Boolean roomenter;
 	private Date startdate;
 	private Long starttime;
 	private RoomClient rcl;
-	private String rclInXml;
 	
 	
 	/**
@@ -32,6 +31,18 @@ public class RecordingClient {
 	}
 	public void setRecordingclient_id(Long recordingclient_id) {
 		this.recordingclient_id = recordingclient_id;
+	}
+	
+	/**
+     * @hibernate.property
+     *  column="roomrecording_id"
+     *  type="long"
+     */
+	public Long getRoomRecordingId() {
+		return roomRecordingId;
+	}
+	public void setRoomRecordingId(Long roomRecordingId) {
+		this.roomRecordingId = roomRecordingId;
 	}
 	
 	/**
@@ -82,6 +93,15 @@ public class RecordingClient {
 		this.starttime = starttime;
 	}
 	
+    /**
+	 * @hibernate.many-to-one
+	 * column = "roomclient_id"
+	 * class = "org.openmeetings.app.hibernate.beans.recording.RoomClient"
+	 * insert="true"
+	 * update="true"
+	 * outer-join="true"
+	 * lazy="false"
+     */	
 	public RoomClient getRcl() {
 		return rcl;
 	}
@@ -89,16 +109,5 @@ public class RecordingClient {
 		this.rcl = rcl;
 	}
 	
-	/**
-     * @hibernate.property
-     *  column="rcl_in_xml"
-     *  type="string"
-     */	
-	public String getRclInXml() {
-		return rclInXml;
-	}
-	public void setRclInXml(String rclInXml) {
-		this.rclInXml = rclInXml;
-	}
 
 }

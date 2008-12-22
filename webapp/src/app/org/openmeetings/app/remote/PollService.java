@@ -16,10 +16,10 @@ import org.red5.server.api.Red5;
 import org.red5.server.api.service.IServiceCapableConnection;
 import org.openmeetings.app.conference.configutils.CustomBandwidth;
 
-import org.openmeetings.app.conference.videobeans.RoomClient;
 import org.openmeetings.app.conference.videobeans.RoomPoll;
 import org.openmeetings.app.conference.videobeans.RoomPollAnswers;
 import org.openmeetings.app.conference.videobeans.PollType;
+import org.openmeetings.app.hibernate.beans.recording.RoomClient;
 
 /**
  * 

@@ -21,9 +21,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.openmeetings.app.conference.videobeans.RoomClient;
 import org.openmeetings.app.data.basic.Sessionmanagement;
 import org.openmeetings.app.data.user.Usermanagement;
+import org.openmeetings.app.hibernate.beans.recording.RoomClient;
 import org.openmeetings.utils.stringhandlers.StringComparer;
 
 import org.openmeetings.app.remote.Application;

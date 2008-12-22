@@ -16,12 +16,12 @@ import org.hibernate.criterion.Restrictions;
 import org.hibernate.criterion.Order;
 
 import org.openmeetings.app.hibernate.beans.lang.Fieldlanguagesvalues;
+import org.openmeetings.app.hibernate.beans.recording.RoomClient;
 import org.openmeetings.app.hibernate.beans.user.*;
 import org.openmeetings.app.hibernate.beans.adresses.Adresses_Emails;
 import org.openmeetings.app.hibernate.beans.adresses.Emails;
 import org.openmeetings.app.hibernate.utils.HibernateUtil;
 import org.openmeetings.app.templates.ResetPasswordTemplate;
-import org.openmeetings.app.conference.videobeans.RoomClient;
 import org.openmeetings.app.data.basic.AuthLevelmanagement;
 import org.openmeetings.app.data.basic.Configurationmanagement;
 import org.openmeetings.app.data.basic.Fieldmanagment;

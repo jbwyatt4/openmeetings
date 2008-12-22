@@ -10,6 +10,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.openmeetings.app.data.conference.Roommanagement;
 import org.openmeetings.app.hibernate.beans.recording.Recording;
+import org.openmeetings.app.hibernate.beans.recording.RoomRecording;
 import org.openmeetings.app.hibernate.beans.rooms.Rooms;
 import org.openmeetings.app.hibernate.beans.user.Users;
 import org.openmeetings.app.hibernate.utils.HibernateUtil;
@@ -29,7 +30,7 @@ public class Recordingmanagement {
 		return instance;
 	}
 	
-	public Long addRecording(String name, Long duration, String xmlString, Long rooms_id, Users recordedby, String  comment) throws Exception{
+	public Long addRecording(String name, Long duration, String xmlString, Long rooms_id, Users recordedby, String  comment, RoomRecording roomRecording) throws Exception{
 		Recording recording = new Recording();
 		recording.setDeleted("false");
 		recording.setDuration(duration);
@@ -39,6 +40,7 @@ public class Recordingmanagement {
 		recording.setXmlString(xmlString);
 		recording.setRooms(Roommanagement.getInstance().getRoomById(rooms_id));
 		recording.setStarttime(new java.util.Date());
+		recording.setRoomRecording(roomRecording);
 		return this.addRecording(recording);
 	}
 	

@@ -3,7 +3,7 @@ package org.openmeetings.app.hibernate.beans.rooms;
 import java.util.Date;
 import java.util.List;
 
-import org.openmeetings.app.conference.videobeans.RoomClient;
+import org.openmeetings.app.hibernate.beans.recording.RoomClient;
 
 /**
  * 

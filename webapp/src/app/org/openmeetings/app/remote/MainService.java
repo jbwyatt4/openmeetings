@@ -16,6 +16,7 @@ import org.red5.server.api.service.IServiceCapableConnection;
 import org.openmeetings.app.hibernate.beans.basic.Configuration;
 import org.openmeetings.app.hibernate.beans.basic.Sessiondata;
 
+import org.openmeetings.app.hibernate.beans.recording.RoomClient;
 import org.openmeetings.app.hibernate.beans.user.Users;
 import org.openmeetings.app.hibernate.beans.user.Userdata;
 
@@ -29,7 +30,6 @@ import org.openmeetings.app.data.conference.Feedbackmanagement;
 import org.openmeetings.app.data.basic.AuthLevelmanagement;
 import org.openmeetings.app.rss.LoadAtomRssFeed;
 
-import org.openmeetings.app.conference.videobeans.RoomClient;
 
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.XppDriver;
