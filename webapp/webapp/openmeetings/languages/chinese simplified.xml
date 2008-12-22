@@ -1704,4 +1704,10 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   <string id="564" name="exportToImage">
     <value>&lt;u&gt;下载为 TIF&lt;/u&gt;</value>
   </string>
+    <string id="578" name="alert">
+    <value>Appointmentend is behind of appointmentstart!</value>
+  </string>
+  <string id="579" name="alert">
+    <value>Please insert a appointemttitle!</value>
+  </string>
 </language>
