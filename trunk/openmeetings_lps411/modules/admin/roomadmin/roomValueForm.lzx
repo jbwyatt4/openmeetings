@@ -247,9 +247,13 @@
         <checkbox name="ispublic" width="270" y="160" x="120" fontsize="12" />
 	
 	<!-- 196:Comment -->
-	<labelText labelid="196" width="200" y="190" resize="false" x="2"/> 
+	<labelText labelid="196" width="200" y="190" resize="false" x="2"/>
+		<customEdittext name="comment" y="190" x="120" width="270" 
+            height="100" text="" multiline="true" />	
+		<!--
         <customScrollEdittext name="comment" y="190" x="120" width="270" 
             height="100" text="" />	
+         -->
 	
 	<!-- 191:organisations -->
     <labelText labelid="191" width="200" y="300" resize="false" x="2"/>     
