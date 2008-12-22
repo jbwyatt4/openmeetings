@@ -1,0 +1,100 @@
+package org.openmeetings.app.data.record.dao;
+
+import java.util.Set;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.hibernate.HibernateException;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+import org.openmeetings.app.hibernate.beans.calendar.AppointmentCategory;
+import org.openmeetings.app.hibernate.beans.recording.RecordingClient;
+import org.openmeetings.app.hibernate.beans.recording.RoomRecording;
+import org.openmeetings.app.hibernate.utils.HibernateUtil;
+
+public class RoomRecordingDaoImpl {
+
+	private static final Log log = LogFactory.getLog(RoomRecordingDaoImpl.class);
+
+	private RoomRecordingDaoImpl() {
+	}
+
+	private static RoomRecordingDaoImpl instance = null;
+
+	public static synchronized RoomRecordingDaoImpl getInstance() {
+		if (instance == null) {
+			instance = new RoomRecordingDaoImpl();
+		}
+
+		return instance;
+	}
+	
+	public RoomRecording getRoomRecordingById(Long roomrecordingId) {
+		try {
+			log.debug("getRoomRecordingById: "+ roomrecordingId);
+			
+			String hql = "select r from RoomRecording r " +
+					"WHERE r.roomrecordingId = :roomrecordingId ";
+			
+			Object idf = HibernateUtil.createSession();
+			Session session = HibernateUtil.getSession();
+			Transaction tx = session.beginTransaction();
+			Query query = session.createQuery(hql);
+			query.setLong("roomrecordingId",roomrecordingId);
+			
+			RoomRecording roomRecording = (RoomRecording) query.uniqueResult();
+			tx.commit();
+			HibernateUtil.closeSession(idf);
+			
+			return roomRecording;
+		} catch (HibernateException ex) {
+			log.error("[getRoomRecordingById]: " , ex);
+		} catch (Exception ex2) {
+			log.error("[getRoomRecordingById]: " , ex2);
+		}
+		return null;
+	}
+	
+	public Long addRoomRecording(RoomRecording roomRecording) {
+		try {
+			
+			//Fill and remove duplicated RoomClient Objects
+			if (roomRecording.getEnduser() != null) {
+				roomRecording.setEnduser(RoomClientDaoImpl.getInstance().getAndAddRoomClientByPublicSID(roomRecording.getEnduser()));
+			}
+		
+			if (roomRecording.getStartedby() != null) {
+				roomRecording.setStartedby(RoomClientDaoImpl.getInstance().getAndAddRoomClientByPublicSID(roomRecording.getStartedby()));
+			}
+			
+			log.debug("roomRecording.getRoom_setup(): "+roomRecording.getRoom_setup().getRooms_id());
+			
+			Set<RecordingClient> myClientList = roomRecording.getRoomClients();
+			
+			roomRecording.setRoomClients(null);
+			log.debug("roomRecording.getRoom_setup(): "+roomRecording.getRoomClients());
+			
+			log.debug("roomRecording.getEnduser().getRoomClientId(): "+roomRecording.getEnduser().getRoomClientId());
+			log.debug("roomRecording.getStartedby().getRoomClientId(): "+roomRecording.getStartedby().getRoomClientId());
+			
+			Object idf = HibernateUtil.createSession();
+			Session session = HibernateUtil.getSession();
+			Transaction tx = session.beginTransaction();
+			Long roomRecordingId = (Long) session.save(roomRecording);
+			
+			tx.commit();
+			HibernateUtil.closeSession(idf);
+			
+			roomRecording.setRoomClients(myClientList);
+			
+			return roomRecordingId;
+		} catch (HibernateException ex) {
+			log.error("[addRoomRecording]: " , ex);
+		} catch (Exception ex2) {
+			log.error("[addRoomRecording]: " , ex2);
+		}
+		return null;
+	}
+	
+}

@@ -1,19 +1,27 @@
-package org.openmeetings.app.conference.videobeans;
+package org.openmeetings.app.hibernate.beans.recording;
 
 import java.util.Date;
 import java.util.LinkedList;
 
+/**
+ * 
+ * @hibernate.class table="roomclient"
+ * lazy="false"
+ *
+ */
 public class RoomClient {
 	 
+	private Long roomClientId = null;
+	
 	/*
 	 * login name
 	 */
-	String username = "";
+	private String username = "";
 	
 	/*
 	 * a unique id
 	 */
-	String streamid = "";
+	private String streamid = "";
 	
 	/*
 	 * an unique PUBLIC id,
@@ -25,7 +33,7 @@ public class RoomClient {
 	 * as every instance of the RoomClient is send to all connected users
 	 * 
 	 */
-	String publicSID = "";
+	private String publicSID = "";
 	
 	/*
 	 * true indicates that this user is Moderating
@@ -33,41 +41,41 @@ public class RoomClient {
 	 * sharing its video/audio
 	 * 
 	 */
-	Boolean isMod = false;
-	Date connectedSince;
-	String formatedDate;
+	private Boolean isMod = false;
+	private Date connectedSince;
+	private String formatedDate;
 	
 	/*
 	 * the color of the user, only needed in 4x4 Conference, in these rooms each user has its own
 	 * color 
 	 */
-	String usercolor;
+	private String usercolor;
 	/*
 	 * no longer needed since broadCastId is now the new unique id
 	 * 
 	 * @deprecated
 	 */
-	Integer userpos;
+	private Integer userpos;
 	/*
 	 * client IP
 	 */
-	String userip;
+	private String userip;
 	/*
 	 * client Port
 	 */
-	int userport;
+	private int userport;
 	/*
 	 * current room idd while conferencing
 	 */
-	Long room_id;
+	private Long room_id;
 	
-	Date roomEnter = null;
+	private Date roomEnter = null;
 	
 	/*
 	 * this is the id this user is currently using to broadcast a stream
 	 * default value is -2 cause otherwise this can due to disconnect
 	 */
-	long broadCastID = -2;
+	private long broadCastID = -2;
 	
 	/*
 	 * some vars _not_ directly connected to the user-record from the database
@@ -75,21 +83,21 @@ public class RoomClient {
 	 * might be null or 0 even if somebody is already in a conference room
 	 * 
 	 */
-	Long user_id = null;
-	String firstname = "";
-	String lastname = "";
-	String mail;
-	String lastLogin;
-	String official_code;
-	String picture_uri;
-	String language = "";
+	private Long user_id = null;
+	private String firstname = "";
+	private String lastname = "";
+	private String mail;
+	private String lastLogin;
+	private String official_code;
+	private String picture_uri;
+	private String language = "";
 	
 	/*
 	 * these vars are necessary to send notifications from the chatroom of a 
 	 * conference to outside of the conference room
 	 */
-	Boolean isChatNotification = false;
-	Long chatUserRoomId = null;
+	private Boolean isChatNotification = false;
+	private Long chatUserRoomId = null;
 	
 	/*
 	 * avsettings can be:
@@ -98,11 +106,11 @@ public class RoomClient {
 	 * v - video only
 	 * n - no av only static Image
 	 */
-	String avsettings = "";
+	private String avsettings = "";
 	
-	String swfurl;
-	Boolean isRecording = false;
-	String roomRecordingName;
+	private String swfurl;
+	private Boolean isRecording = false;
+	private String roomRecordingName;
 	
 	public RoomClient() {
 		super();
@@ -120,221 +128,279 @@ public class RoomClient {
 		this.firstname = firstname;
 		this.lastname = lastname;
 	}
-
-	/**
-	 * @return the connectedSince
-	 */
-	public Date getConnectedSince() {
-		return connectedSince;
-	}
-	/**
-	 * @param connectedSince the connectedSince to set
-	 */
-	public void setConnectedSince(Date connectedSince) {
+	
+	public RoomClient(String avsettings, long broadCastID, Long chatUserRoomId,
+			Date connectedSince, String firstname, String formatedDate,
+			Boolean isChatNotification, Boolean isMod, Boolean isRecording,
+			String language, String lastLogin, String lastname, String mail,
+			String official_code, String picture_uri, String publicSID,
+			Date roomEnter, String roomRecordingName, Long room_id,
+			String streamid, String swfurl, Long user_id, String usercolor,
+			String userip, String username, int userport, Integer userpos) {
+		super();
+		this.avsettings = avsettings;
+		this.broadCastID = broadCastID;
+		this.chatUserRoomId = chatUserRoomId;
 		this.connectedSince = connectedSince;
-	}
-	/**
-	 * @return the isMod
-	 */
-	public Boolean getIsMod() {
-		return isMod;
-	}
-	/**
-	 * @param isMod the isMod to set
-	 */
-	public void setIsMod(Boolean isMod) {
+		this.firstname = firstname;
+		this.formatedDate = formatedDate;
+		this.isChatNotification = isChatNotification;
 		this.isMod = isMod;
-	}
-	/**
-	 * @return the username
-	 */
-	public String getUsername() {
-		return username;
-	}
-	/**
-	 * @param username the username to set
-	 */
-	public void setUsername(String username) {
-		this.username = username;
-	}
-	/**
-	 * @return the streamid
-	 */
-	public String getStreamid() {
-		return streamid;
-	}
-	/**
-	 * @param streamid the streamid to set
-	 */
-	public void setStreamid(String streamid) {
+		this.isRecording = isRecording;
+		this.language = language;
+		this.lastLogin = lastLogin;
+		this.lastname = lastname;
+		this.mail = mail;
+		this.official_code = official_code;
+		this.picture_uri = picture_uri;
+		this.publicSID = publicSID;
+		this.roomEnter = roomEnter;
+		this.roomRecordingName = roomRecordingName;
+		this.room_id = room_id;
 		this.streamid = streamid;
+		this.swfurl = swfurl;
+		this.user_id = user_id;
+		this.usercolor = usercolor;
+		this.userip = userip;
+		this.username = username;
+		this.userport = userport;
+		this.userpos = userpos;
 	}
 	
 	/**
-	 * @return the formatedDate
-	 */
+     * 
+     * @hibernate.id
+     *  column="roomclient_id"
+     *  generator-class="increment"
+     */
+	public Long getRoomClientId() {
+		return roomClientId;
+	}
+	public void setRoomClientId(Long roomClientId) {
+		this.roomClientId = roomClientId;
+	}
+
+	/**
+     * @hibernate.property
+     *  column="connected_since"
+     *  type="java.util.Date"
+     */
+	public Date getConnectedSince() {
+		return connectedSince;
+	}
+	public void setConnectedSince(Date connectedSince) {
+		this.connectedSince = connectedSince;
+	}
+	
+	/**
+     * @hibernate.property
+     *  column="is_mod"
+     *  type="boolean"
+     */
+	public Boolean getIsMod() {
+		return isMod;
+	}
+	public void setIsMod(Boolean isMod) {
+		this.isMod = isMod;
+	}
+	
+	/**
+     * @hibernate.property
+     *  column="username"
+     *  type="string"
+     */
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	/**
+     * @hibernate.property
+     *  column="streamid"
+     *  type="string"
+     */
+	public String getStreamid() {
+		return streamid;
+	}
+	public void setStreamid(String streamid) {
+		this.streamid = streamid;
+	}
+
+	/**
+     * @hibernate.property
+     *  column="formated_date"
+     *  type="string"
+     */
 	public String getFormatedDate() {
 		return formatedDate;
 	}
-	/**
-	 * @param formatedDate the formatedDate to set
-	 */
 	public void setFormatedDate(String formatedDate) {
 		this.formatedDate = formatedDate;
 	}
+
 	/**
-	 * @return the usercolor
-	 */
+     * @hibernate.property
+     *  column="usercolor"
+     *  type="string"
+     */
 	public String getUsercolor() {
 		return usercolor;
 	}
-	/**
-	 * @param usercolor the usercolor to set
-	 */
 	public void setUsercolor(String usercolor) {
 		this.usercolor = usercolor;
 	}
+
 	/**
-	 * @return the userpos
-	 */
+     * @hibernate.property
+     *  column="userpos"
+     *  type="int"
+     */
 	public Integer getUserpos() {
 		return userpos;
 	}
-	/**
-	 * @param userpos the userpos to set
-	 */
 	public void setUserpos(Integer userpos) {
 		this.userpos = userpos;
 	}
+
 	/**
-	 * @return the userip
-	 */
+     * @hibernate.property
+     *  column="userip"
+     *  type="string"
+     */
 	public String getUserip() {
 		return userip;
 	}
-	/**
-	 * @param userip the userip to set
-	 */
 	public void setUserip(String userip) {
 		this.userip = userip;
 	}
+
 	/**
-	 * @return the swfurl
-	 */
+     * @hibernate.property
+     *  column="swfurl"
+     *  type="string"
+     */
 	public String getSwfurl() {
 		return swfurl;
 	}
-	/**
-	 * @param swfurl the swfurl to set
-	 */
 	public void setSwfurl(String swfurl) {
 		this.swfurl = swfurl;
 	}
+	
 	/**
-	 * @return the userport
-	 */
+     * @hibernate.property
+     *  column="userport"
+     *  type="int"
+     */
 	public int getUserport() {
 		return userport;
 	}
-	/**
-	 * @param userport the userport to set
-	 */
 	public void setUserport(int userport) {
 		this.userport = userport;
 	}
+	
 	/**
-	 * @return the firstname
-	 */
+     * @hibernate.property
+     *  column="firstname"
+     *  type="string"
+     */
 	public String getFirstname() {
 		return firstname;
 	}
-	/**
-	 * @param firstname the firstname to set
-	 */
 	public void setFirstname(String firstname) {
 		this.firstname = firstname;
 	}
+
 	/**
-	 * @return the language
-	 */
+     * @hibernate.property
+     *  column="language"
+     *  type="string"
+     */
 	public String getLanguage() {
 		return language;
 	}
-	/**
-	 * @param language the language to set
-	 */
 	public void setLanguage(String language) {
 		this.language = language;
 	}
+
 	/**
-	 * @return the lastLogin
-	 */
+     * @hibernate.property
+     *  column="last_login"
+     *  type="string"
+     */
 	public String getLastLogin() {
 		return lastLogin;
 	}
-	/**
-	 * @param lastLogin the lastLogin to set
-	 */
 	public void setLastLogin(String lastLogin) {
 		this.lastLogin = lastLogin;
 	}
+
 	/**
-	 * @return the lastname
-	 */
+     * @hibernate.property
+     *  column="lastname"
+     *  type="string"
+     */
 	public String getLastname() {
 		return lastname;
 	}
-	/**
-	 * @param lastname the lastname to set
-	 */
 	public void setLastname(String lastname) {
 		this.lastname = lastname;
 	}
+
 	/**
-	 * @return the mail
-	 */
+     * @hibernate.property
+     *  column="mail"
+     *  type="string"
+     */
 	public String getMail() {
 		return mail;
 	}
-	/**
-	 * @param mail the mail to set
-	 */
 	public void setMail(String mail) {
 		this.mail = mail;
 	}
+
 	/**
-	 * @return the official_code
-	 */
+     * @hibernate.property
+     *  column="official_code"
+     *  type="string"
+     */
 	public String getOfficial_code() {
 		return official_code;
 	}
-	/**
-	 * @param official_code the official_code to set
-	 */
 	public void setOfficial_code(String official_code) {
 		this.official_code = official_code;
 	}
+
 	/**
-	 * @return the picture_uri
-	 */
+     * @hibernate.property
+     *  column="picture_uri"
+     *  type="string"
+     */
 	public String getPicture_uri() {
 		return picture_uri;
 	}
-	/**
-	 * @param picture_uri the picture_uri to set
-	 */
 	public void setPicture_uri(String picture_uri) {
 		this.picture_uri = picture_uri;
 	}
 
+	/**
+     * @hibernate.property
+     *  column="user_id"
+     *  type="long"
+     */
 	public Long getUser_id() {
 		return user_id;
 	}
-
 	public void setUser_id(Long user_id) {
 		this.user_id = user_id;
 	}
 
+	/**
+     * @hibernate.property
+     *  column="room_id"
+     *  type="long"
+     */
 	public Long getRoom_id() {
 		return room_id;
 	}
@@ -342,6 +408,11 @@ public class RoomClient {
 		this.room_id = room_id;
 	}
 
+	/**
+     * @hibernate.property
+     *  column="room_enter"
+     *  type="java.util.Date"
+     */
 	public Date getRoomEnter() {
 		return roomEnter;
 	}
@@ -349,6 +420,11 @@ public class RoomClient {
 		this.roomEnter = roomEnter;
 	}
 
+	/**
+     * @hibernate.property
+     *  column="is_chat_notification"
+     *  type="boolean"
+     */
 	public Boolean getIsChatNotification() {
 		return isChatNotification;
 	}
@@ -356,6 +432,11 @@ public class RoomClient {
 		this.isChatNotification = isChatNotification;
 	} 
 
+	/**
+     * @hibernate.property
+     *  column="chat_user_room_id"
+     *  type="long"
+     */
 	public Long getChatUserRoomId() {
 		return chatUserRoomId;
 	}
@@ -363,6 +444,11 @@ public class RoomClient {
 		this.chatUserRoomId = chatUserRoomId;
 	}
 
+	/**
+     * @hibernate.property
+     *  column="is_recording"
+     *  type="boolean"
+     */
 	public Boolean getIsRecording() {
 		return isRecording;
 	}
@@ -370,6 +456,11 @@ public class RoomClient {
 		this.isRecording = isRecording;
 	}
 
+	/**
+     * @hibernate.property
+     *  column="room_recording_name"
+     *  type="string"
+     */
 	public String getRoomRecordingName() {
 		return roomRecordingName;
 	}
@@ -377,6 +468,11 @@ public class RoomClient {
 		this.roomRecordingName = roomRecordingName;
 	}
 
+	/**
+     * @hibernate.property
+     *  column="avsettings"
+     *  type="string"
+     */
 	public String getAvsettings() {
 		return avsettings;
 	}
@@ -384,14 +480,23 @@ public class RoomClient {
 		this.avsettings = avsettings;
 	}
 
+	/**
+     * @hibernate.property
+     *  column="broadcast_id"
+     *  type="long"
+     */
 	public long getBroadCastID() {
 		return broadCastID;
 	}
-
 	public void setBroadCastID(long broadCastID) {
 		this.broadCastID = broadCastID;
 	}
 
+	/**
+     * @hibernate.property
+     *  column="public_sid"
+     *  type="string"
+     */
 	public String getPublicSID() {
 		return publicSID;
 	}

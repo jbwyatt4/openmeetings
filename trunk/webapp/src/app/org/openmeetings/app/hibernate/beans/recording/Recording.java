@@ -24,7 +24,6 @@ public class Recording {
 	private Date updatetime;
 	private String deleted;
 	
-	//filled by XStream
 	private RoomRecording roomRecording;
 	
 	private String starttimeAsString;
@@ -144,6 +143,15 @@ public class Recording {
 		this.xmlString = xmlString;
 	}
 	
+	/**
+     * @hibernate.many-to-one
+     *  cascade="none"
+     *  column="roomrecordingId"
+     *  lazy="false"
+     *  class="org.openmeetings.app.hibernate.beans.recording.RoomRecording"
+     *  not-null="false"
+     *  outer-join="true"
+     */	
 	public RoomRecording getRoomRecording() {
 		return roomRecording;
 	}

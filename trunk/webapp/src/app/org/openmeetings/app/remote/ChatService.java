@@ -16,7 +16,7 @@ import org.red5.server.api.Red5;
 import org.red5.server.api.service.IPendingServiceCall;
 import org.red5.server.api.service.IPendingServiceCallback;
 import org.red5.server.api.service.IServiceCapableConnection;
-import org.openmeetings.app.conference.videobeans.RoomClient;
+import org.openmeetings.app.hibernate.beans.recording.RoomClient;
 import org.openmeetings.utils.stringhandlers.ChatString;
 
 /**

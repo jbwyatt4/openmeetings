@@ -4,7 +4,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
-import org.openmeetings.app.conference.videobeans.RoomClient;
 import org.openmeetings.app.hibernate.beans.rooms.Rooms;
 
 /**
@@ -25,14 +24,12 @@ public class RoomRecording {
 	private String recordingName;
 	private Date starttime;
 	private RoomClient startedby;
-	private String startedbyInXml;
 	private Set<RecordingClient> roomClients;
 	private List<RoomStream> roomStreams;
 	private List<WhiteBoardEvent> whiteboard;
 	private List<ChatvaluesEvent> chatvalues;
 	private Date endtime;
 	private RoomClient enduser;
-	private String enduserInXml;
 	private String recordname;
 	
 	/**
@@ -152,27 +149,16 @@ public class RoomRecording {
 	}
 	
 	/**
-     * @hibernate.property
-     *  column="startedby_in_xml"
-     *  type="text"
-     */
-	public String getStartedbyInXml() {
-		return startedbyInXml;
-	}
-	public void setStartedbyInXml(String startedbyInXml) {
-		this.startedbyInXml = startedbyInXml;
-	}
-	
-	/**
      * @hibernate.set 
      * table = "recordingclient" 
      * inverse = "false" 
      * cascade = "none"
      * lazy="false"
+     * order-by="startdate"
      * @hibernate.one-to-many 
      * class = "org.openmeetings.app.hibernate.beans.recording.RecordingClient"
      * @hibernate.key 
-     * column = "recordingclient_id"
+     * column = "roomrecording_id"
      */
 	public Set<RecordingClient> getRoomClients() {
 		return roomClients;
@@ -214,23 +200,20 @@ public class RoomRecording {
 		this.endtime = endtime;
 	}
 	
+    /**
+	 * @hibernate.many-to-one
+	 * column = "enduser_roomclient_id"
+	 * class = "org.openmeetings.app.hibernate.beans.recording.RoomClient"
+	 * insert="true"
+	 * update="true"
+	 * outer-join="true"
+	 * lazy="false"
+     */	
 	public RoomClient getEnduser() {
 		return enduser;
 	}
 	public void setEnduser(RoomClient enduser) {
 		this.enduser = enduser;
-	}
-	
-	/**
-     * @hibernate.property
-     *  column="enduser_in_xml"
-     *  type="string"
-     */
-	public String getEnduserInXml() {
-		return enduserInXml;
-	}
-	public void setEnduserInXml(String enduserInXml) {
-		this.enduserInXml = enduserInXml;
 	}
 	
 	/**
