@@ -1759,4 +1759,10 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   <string id="577" name="calendarLabel">
     <value>Yeahrly</value>
   </string>
+  <string id="578" name="alert">
+    <value>Appointmentend is behind of appointmentstart!</value>
+  </string>
+  <string id="579" name="alert">
+    <value>Please insert a appointemttitle!</value>
+  </string>
 </language>
