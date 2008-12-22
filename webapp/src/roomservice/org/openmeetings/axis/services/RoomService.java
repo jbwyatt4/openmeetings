@@ -8,12 +8,12 @@ import org.apache.axis2.AxisFault;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import org.openmeetings.app.conference.videobeans.RoomClient;
 import org.openmeetings.app.data.basic.Sessionmanagement;
 import org.openmeetings.app.data.basic.rooms.RoomsList;
 import org.openmeetings.app.data.beans.basic.SearchResult;
 import org.openmeetings.app.data.conference.Roommanagement;
 import org.openmeetings.app.data.user.Usermanagement;
+import org.openmeetings.app.hibernate.beans.recording.RoomClient;
 import org.openmeetings.app.hibernate.beans.rooms.RoomTypes;
 import org.openmeetings.app.hibernate.beans.rooms.Rooms;
 import org.openmeetings.app.hibernate.beans.rooms.Rooms_Organisation;

@@ -1,12 +1,8 @@
 package org.openmeetings.test.init;
 
-import java.util.Iterator;
 import java.util.List;
 
 import org.openmeetings.app.data.basic.Fieldmanagment;
-import org.openmeetings.app.hibernate.beans.lang.Fieldlanguagesvalues;
-import org.openmeetings.app.hibernate.beans.lang.Fieldvalues;
-import org.openmeetings.app.remote.MainService;
 
 import junit.framework.TestCase;
 
@@ -18,7 +14,7 @@ public class getDefaultFields extends TestCase {
 	
 	public void testGetDefaultField(){
 		
-//		List ll = Fieldmanagment.getInstance().getFields(new Long(1));
+		List ll = Fieldmanagment.getInstance().getAllFieldsByLanguage(new Long(1));
 //		
 //		System.out.println("testGetDefaultField: "+ll.size());
 //		
