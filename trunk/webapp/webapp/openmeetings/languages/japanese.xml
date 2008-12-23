@@ -1726,16 +1726,22 @@ languagesディレクトリにコピーして、
     <value>Start</value>
   </string>
   <string id="571" name="calendarLabel">
-    <value>Ende</value>
+    <value>End</value>
   </string>
   <string id="572" name="calendarLabel">
-    <value>Titel:</value>
+    <value>Title:</value>
+  </string>
+  <string id="573" name="calendarLabel">
+    <value>Comment:</value>
+  </string>
+  <string id="572" name="calendarLabel">
+    <value>Title:</value>
   </string>
   <string id="573" name="calendarLabel">
     <value>Comment:</value>
   </string>
   <string id="574" name="calendarLabel">
-    <value>Invite Members</value>
+    <value>Invite People</value>
   </string>
   <string id="575" name="calendarLabel">
     <value>Daily</value>
@@ -1744,12 +1750,12 @@ languagesディレクトリにコピーして、
     <value>Monthly</value>
   </string>
   <string id="577" name="calendarLabel">
-    <value>Yeahrly</value>
+    <value>Yearly</value>
   </string>
   <string id="578" name="alert">
-    <value>Appointmentend is behind of appointmentstart!</value>
+    <value>Appointment-end is after of appointment-start!</value>
   </string>
   <string id="579" name="alert">
-    <value>Please insert a appointemttitle!</value>
+    <value>Please insert a title!</value>
   </string>
 </language>
