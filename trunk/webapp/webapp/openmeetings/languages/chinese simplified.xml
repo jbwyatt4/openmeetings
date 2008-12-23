@@ -1705,48 +1705,48 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>&lt;u&gt;下载为 TIF&lt;/u&gt;</value>
   </string>
   <string id="565" name="calendarLabel">
-    <value>Reminder:</value>
+    <value>提醒:</value>
   </string>
   <string id="566" name="calendarLabel">
-    <value>Category:</value>
+    <value>类别:</value>
   </string>
   <string id="567" name="calendarLabel">
-    <value>Repetition:</value>
+    <value>重复:</value>
   </string>
   <string id="568" name="calendarLabel">
-    <value>none</value>
+    <value>无</value>
   </string>
   <string id="569" name="calendarLabel">
-    <value>Location:</value>
+    <value>位置:</value>
   </string>
   <string id="570" name="calendarLabel">
-    <value>Start</value>
+    <value>开始</value>
   </string>
   <string id="571" name="calendarLabel">
-    <value>End</value>
+    <value>结束</value>
   </string>
   <string id="572" name="calendarLabel">
-    <value>Title:</value>
+    <value>标题:</value>
   </string>
   <string id="573" name="calendarLabel">
-    <value>Comment:</value>
+    <value>注释:</value>
   </string>
   <string id="574" name="calendarLabel">
-    <value>Invite People</value>
+    <value>邀请</value>
   </string>
   <string id="575" name="calendarLabel">
-    <value>Daily</value>
+    <value>每日</value>
   </string>
   <string id="576" name="calendarLabel">
-    <value>Monthly</value>
+    <value>每月</value>
   </string>
   <string id="577" name="calendarLabel">
-    <value>Yearly</value>
+    <value>每年</value>
   </string>
   <string id="578" name="alert">
-    <value>Appointment-end is after of appointment-start!</value>
+    <value>约会结束日期必须晚于开始日期!</value>
   </string>
   <string id="579" name="alert">
-    <value>Please insert a title!</value>
+    <value>请插入一个标题!</value>
   </string>
 </language>
