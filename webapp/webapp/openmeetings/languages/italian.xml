@@ -1717,13 +1717,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Start</value>
   </string>
   <string id="571" name="calendarLabel">
-    <value>Ende</value>
-  </string>
-  <string id="572" name="calendarLabel">
-    <value>Titel:</value>
-  </string>
-  <string id="573" name="calendarLabel">
-    <value>Comment:</value>
+    <value>End</value>
   </string>
   <string id="572" name="calendarLabel">
     <value>Title:</value>
