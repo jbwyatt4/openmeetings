@@ -1,4 +1,4 @@
-package org.openmeetings.app.data.record;
+package org.openmeetings.app.data.record.dao;
 
 import java.util.List;
 
@@ -15,17 +15,17 @@ import org.openmeetings.app.hibernate.beans.rooms.Rooms;
 import org.openmeetings.app.hibernate.beans.user.Users;
 import org.openmeetings.app.hibernate.utils.HibernateUtil;
 
-public class Recordingmanagement {
+public class RecordingDaoImpl {
 
-	private static final Logger log = LoggerFactory.getLogger(Recordingmanagement.class);
+	private static final Logger log = LoggerFactory.getLogger(RecordingDaoImpl.class);
 
-	private static Recordingmanagement instance;
+	private static RecordingDaoImpl instance;
 
-	private Recordingmanagement() {}
+	private RecordingDaoImpl() {}
 
-	public static synchronized Recordingmanagement getInstance() {
+	public static synchronized RecordingDaoImpl getInstance() {
 		if (instance == null) {
-			instance = new Recordingmanagement();
+			instance = new RecordingDaoImpl();
 		}
 		return instance;
 	}
@@ -38,6 +38,7 @@ public class Recordingmanagement {
 		recording.setRecordedby(recordedby);
 		recording.setName(name);
 		recording.setXmlString(xmlString);
+		recording.setWhiteBoardConverted(false);
 		recording.setRooms(Roommanagement.getInstance().getRoomById(rooms_id));
 		recording.setStarttime(new java.util.Date());
 		recording.setRoomRecording(roomRecording);
@@ -102,6 +103,29 @@ public class Recordingmanagement {
 		return null;
 	}
 	
+	public List<Recording> getRecordingWhiteboardToConvert(){
+		try {
+			String hql = "select c from Recording as c " +
+					"where c.whiteBoardConverted = :whiteBoardConverted " +
+					"AND c.deleted != :deleted";
+			Object idf = HibernateUtil.createSession();
+			Session session = HibernateUtil.getSession();
+			Transaction tx = session.beginTransaction();
+			Query query = session.createQuery(hql);
+			query.setBoolean("whiteBoardConverted", false);
+			query.setString("deleted", "true");
+			List<Recording> ll = query.list();
+			tx.commit();
+			HibernateUtil.closeSession(idf);
+			return ll;
+		} catch (HibernateException ex) {
+			log.error("getRecordingsByRoom",ex);
+		} catch (Exception ex2) {
+			log.error("getRecordingsByRoom",ex2);
+		}
+		return null;
+	}
+	
 	public List<Recording> getRecordingsByWhereClause(String where){
 		try {
 			String hql = "select c from Recording as c where " + where + " c.deleted != :deleted";
@@ -151,6 +175,7 @@ public class Recordingmanagement {
 			Session session = HibernateUtil.getSession();
 			Transaction tx = session.beginTransaction();
 			session.update(rec);
+			session.refresh(rec);
 			tx.commit();
 			HibernateUtil.closeSession(idf);
 		} catch (HibernateException ex) {

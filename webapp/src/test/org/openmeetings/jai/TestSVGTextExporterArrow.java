@@ -75,11 +75,11 @@ public class TestSVGTextExporterArrow extends TestCase {
 	        //SVGGraphics2D svgGenerator2 = new SVGGraphics2D(document);
 	        
 	        //NOTE: Font.ITALIC+Font.BOLD = Font AND Bold !
-	        GeomPoint start = new GeomPoint();
-	        start.setLocation(100,100);
-	        GeomPoint end = new GeomPoint();
-	        end.setLocation(300,600);
-	        exportToImageTest.drawArrow(svgGenerator10, start, end, 4, new Float(0.5),new Color(255,0,0),new Color(0,0,255));
+//	        GeomPoint start = new GeomPoint();
+//	        start.setLocation(100,100);
+//	        GeomPoint end = new GeomPoint();
+//	        end.setLocation(300,600);
+//	        exportToImageTest.drawArrow(svgGenerator10, start, end, 4, new Float(0.5),new Color(255,0,0),new Color(0,0,255));
 	        
 	        // Finally, stream out SVG to the standard output using
 	        // UTF-8 encoding.

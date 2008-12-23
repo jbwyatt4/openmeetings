@@ -1,4 +1,4 @@
-package org.openmeetings.app.batik.serlvets;
+package org.openmeetings.app.data.record;
 
 import java.awt.AlphaComposite;
 import java.awt.BasicStroke;
@@ -31,9 +31,9 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-public class AbstractBatikServlet extends HttpServlet {
+public class BatikMethods {
 	
-	private static final Logger log = LoggerFactory.getLogger(AbstractBatikServlet.class);
+	private static final Logger log = LoggerFactory.getLogger(BatikMethods.class);
 
 	public void paintTextByWidthHeight(SVGGraphics2D g2d, int x1, int y1, int width, int height,
 			String text, int style, int size, Color fontColor) throws Exception {

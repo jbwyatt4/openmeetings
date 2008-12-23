@@ -55,14 +55,14 @@ public class TestSVGTextExporter extends TestCase {
 	        SVGGraphics2D svgGenerator8 = new SVGGraphics2D(svgGenerator);
 	        //SVGGraphics2D svgGenerator2 = new SVGGraphics2D(document);
 	        
-	        //NOTE: Font.ITALIC+Font.BOLD = Font AND Bold !
-	        exportToImageTest.paintTextByWidthHeight(svgGenerator8, 500, 300, 100, 200, "Process", Font.BOLD+Font.ITALIC, 28,
-	        		new Color(255,0,0));
-	        
-	        SVGGraphics2D svgGenerator11 = new SVGGraphics2D(svgGenerator);
-	        
-	        exportToImageTest.paintTextByWidthHeight(svgGenerator11, 100, 300, 100, 200, "Process", Font.BOLD+Font.ITALIC, 111,
-	        		new Color(255,0,0));
+//	        //NOTE: Font.ITALIC+Font.BOLD = Font AND Bold !
+//	        exportToImageTest.paintTextByWidthHeight(svgGenerator8, 500, 300, 100, 200, "Process", Font.BOLD+Font.ITALIC, 28,
+//	        		new Color(255,0,0));
+//	        
+//	        SVGGraphics2D svgGenerator11 = new SVGGraphics2D(svgGenerator);
+//	        
+//	        exportToImageTest.paintTextByWidthHeight(svgGenerator11, 100, 300, 100, 200, "Process", Font.BOLD+Font.ITALIC, 111,
+//	        		new Color(255,0,0));
 	        
 	        SVGGraphics2D svgGenerator9 = new SVGGraphics2D(svgGenerator);
 	      //NOTE: Font.ITALIC+Font.BOLD = Font AND Bold !

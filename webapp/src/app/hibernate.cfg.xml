@@ -36,6 +36,7 @@
     <mapping resource="org/openmeetings/app/hibernate/beans/recording/ChatvaluesEvent.hbm.xml"/>
     <mapping resource="org/openmeetings/app/hibernate/beans/recording/Recording.hbm.xml"/>
     <mapping resource="org/openmeetings/app/hibernate/beans/recording/RecordingClient.hbm.xml"/>
+    <mapping resource="org/openmeetings/app/hibernate/beans/recording/RecordingConversionJob.hbm.xml"/>
     <mapping resource="org/openmeetings/app/hibernate/beans/recording/RoomClient.hbm.xml"/>
     <mapping resource="org/openmeetings/app/hibernate/beans/recording/RoomRecording.hbm.xml"/>
     <mapping resource="org/openmeetings/app/hibernate/beans/recording/RoomStream.hbm.xml"/>

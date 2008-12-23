@@ -33,6 +33,7 @@ import org.red5.server.api.stream.ISubscriberStream;
 import org.openmeetings.app.batik.beans.PrintBean;
 import org.openmeetings.app.conference.configutils.BandwidthConfigFactory;
 import org.openmeetings.app.conference.configutils.UserConfigFactory;
+import org.openmeetings.app.quartz.scheduler.QuartzRecordingJob;
 import org.openmeetings.app.quartz.scheduler.QuartzSessionClear;
 import org.openmeetings.utils.crypt.MD5;
 import org.openmeetings.utils.crypt.ManageCryptStyle;
@@ -116,7 +117,9 @@ public class Application extends ApplicationAdapter implements
 			// init your handler here
 			//System.out.println("################## appStart    ");
 			QuartzSessionClear bwHelp = new QuartzSessionClear();
+			QuartzRecordingJob recordingJob = new QuartzRecordingJob();
 			String jobName = addScheduledJob(300000,bwHelp);
+			//String jobName2 = addScheduledJob(3000,recordingJob);
 			//String jobName = addScheduledJob(1000,bwHelp);
 			log.debug("jobName: "+jobName);
 		} catch (Exception err) {
