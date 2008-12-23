@@ -17,8 +17,25 @@
 		//parent.parent.parent.parent._terminButton.onclick.sendEvent();
 	</handler>
 	
+	<view name="resize" y="${parent.height-this.height}" height="20" width="${parent.width}" bgcolor="blue">
+		<handler name="onclick">
+			if ($debug) Debug.write("getMouse y: ", parent.getMouse('y'));
+			this.getMouse('y')
+			//this.dragger.apply();
+		</handler>
+		<handler name="onmousedown">
+			this.dragger.apply();
+		</handler>
+		<handler name="onmouseup">
+			this.dragger.remove();
+		</handler>
+		<handler name="ony">
+			parent.setAttribute('height', parent.height-this.y/10)
+		</handler>
+		<dragstate name="dragger" drag_axis="y"/>
+	</view>
 	
-
+	
 	<text multiline="true" width="${ parent.width-2 }" x="1" 
 		  height="${ parent.height -2 }" y="1"
 		  text="${ parent.description }" />

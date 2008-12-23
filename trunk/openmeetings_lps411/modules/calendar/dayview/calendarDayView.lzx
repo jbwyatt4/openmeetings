@@ -41,7 +41,7 @@
 							var x = "0" + x.toString();					
 							}				
 						new lz.calenderlistitem(this._tagesansicht._list._innerlist,{text:x + ":00", fontsize:8, width:parent.width, terminObjRef:parent});
-					if ($debug) Debug.write("setCalendarItem_method: ",this);
+					
 					}
 					]]>
 		</method>

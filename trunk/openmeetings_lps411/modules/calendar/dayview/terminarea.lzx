@@ -5,6 +5,67 @@
 	<attribute name ="terminObj" value="null"/>
 	<attribute name ="calenderObjRef" value="null"/>
 	
+
+	<view name="resize_bottom" y="${parent.height-this.height}" height="20" width="${parent.width}" bgcolor="blue">
+		<attribute name="isActive" value="false" type="boolean" />
+		
+		<text name="_endtime"></text>
+		<handler name="onclick">
+			//parent.starty = this.y;
+			if ($debug) Debug.write("Appointment height: ", parent.height);
+			if ($debug) Debug.write("list height: ", parent.parent.height);
+			
+		</handler>
+		<handler name="onmousedown">
+			this.isActive = true;
+			this.dragger.apply();
+		</handler>
+		<handler name="onmouseup">
+			this.dragger.remove();
+			this.isActive = false;
+			
+		</handler>
+		<handler name="ony">
+			
+			if (this.isActive) {
+				parent.setAttribute('height', this.y+20);
+				this._endtime.setAttribute('text',(this.y+parent.y+22)/22)+":";
+				//if ($debug) Debug.write("this y: ",this.y);
+			}
+		</handler>
+		<dragstate name="dragger" drag_axis="y" drag_min_y="0" drag_max_y="${506-parent.y}"/>
+	</view>
+	
+	<view name="resize_head" y="0" height="20" width="${parent.width}" bgcolor="blue">
+		<attribute name="isActive" value="false" type="boolean" />
+		
+		<text name="_endtime"></text>
+		<handler name="onclick">
+			//parent.starty = this.y;
+			if ($debug) Debug.write("Appointment height: ", parent.height);
+			if ($debug) Debug.write("list height: ", parent.parent.height);
+			
+		</handler>
+		<handler name="onmousedown">
+			this.isActive = true;
+			this.dragger.apply();
+		</handler>
+		<handler name="onmouseup">
+			this.dragger.remove();
+			this.isActive = false;
+			
+		</handler>
+		<handler name="ony">	
+			if (this.isActive) {
+				parent.setAttribute('height', this.y);
+				parent.setAttribute('y', this.y);
+				this._endtime.setAttribute('text',(this.y+parent.y+22)/22)+":";
+				//if ($debug) Debug.write("this y: ",this.y);
+			}
+		</handler>
+		<dragstate name="dragger" drag_axis="y" drag_min_y="-parent.y-22" drag_max_y="${parent.y+parent.height}"/> 
+	</view>
+	
 	<handler name="onclick">
 		if ($debug) Debug.write("this termin: ",this.terminObj);
 		parent.parent.parent.parent.parent.parent.parent._termindetails.terminObjRef = this.terminObj;
@@ -53,6 +114,37 @@
 		//parent.calenderObjRef.getAppointmentByRange.doCall();
 		this.destroy();
 	</method>
+	
+	<netRemoteCallHib name="updateAppointment" funcname="calendarservice.updateAppointment" 
+							  remotecontext="$once{ canvas.thishib }" >  
+				<attribute name="arrayMeetingMember" value="null"/>	
+						     
+				<netparam><method name="getValue">return canvas.sessionId; </method></netparam>
+				<netparam><method name="getValue">return parent.parent.terminObj.appointmentId;</method></netparam>
+				<netparam><method name="getValue">return parent.parent.terminObj._titeledit['text'];</method></netparam>
+				<netparam><method name="getValue">return canvas.thishib.terminObj.UserID;</method></netparam>
+				<netparam><method name="getValue">return parent.parent.terminObj._locationedit['text'];</method></netparam>
+				<netparam><method name="getValue">return parent.parent.terminObj._komentar['text'];</method></netparam>
+				<netparam><method name="getValue">return parseStringToDateTime(parent.parent._date._bdatum.getText() + parent.parent._date._bzeit.getText());</method></netparam>
+				<netparam><method name="getValue">return parseStringToDateTime(parent.parent._date.edatum.getText() + parent.parent._date.ezeit.getText());</method></netparam>
+				<netparam><method name="getValue">return parent.parent.terminObj._isDaily;</method></netparam>
+				<netparam><method name="getValue">return parent.parent.terminObj._isMonthly;</method></netparam>
+				<netparam><method name="getValue">return parent.parent.terminObj._isWeekly;</method></netparam>
+				<netparam><method name="getValue">return parent.parent.terminObj._isYearly;</method></netparam>
+				<netparam><method name="getValue">return parent.parent.terminObj._kategoryatr;</method></netparam>
+				<netparam><method name="getValue">return parent.parent.terminObj._erinnerungatr;</method></netparam>
+				
+				<netparam><method name="getValue">return parent.parent.terminObj.arrayMeetingMember;</method></netparam>
+		    	<handler name="ondata" args="value">
+		    		<![CDATA[
+		    			
+		    			//parent.parent.getAppointmentByRange.doCall();
+		    	
+			    		if ($debug) Debug.write("updateUserTermin: ",value);
+			    	
+		    		 ]]>
+		    	</handler>
+		    </netRemoteCallHib> 
 	
 <!--	<netRemoteCallHib name="deleteAppointment" funcname="calendarservice.deleteAppointment" 
 							  remotecontext="$once{ canvas.thishib }" >     

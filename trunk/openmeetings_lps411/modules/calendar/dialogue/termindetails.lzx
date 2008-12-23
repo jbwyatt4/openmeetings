@@ -92,7 +92,7 @@
                 </handler> 
                 
            	<!--  <labelText name="_location" labelid="569" value="5"/>	-->				
-				<textlistitem text="keine" value="0"/>
+				<textlistitem text="none" value="0"/>
 				<textlistitem text="Daily" value="1"/>
              	<textlistitem text="Weekly" value="2"/>
               	<textlistitem text="Monthly" value="3"/> 

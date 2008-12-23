@@ -166,7 +166,7 @@
 			    						height:value[i].appointmentEndtime.getHours()*17 + 1/4 * value[i].appointmentEndtime.getMinutes()  
 						    					-(value[i].appointmentStarttime.getHours()*17+value[i].appointmentStarttime.getMinutes()*1/4),
 		    							calenderObjRef:parent,
-		    							bgcolor:"red",
+		    							bgcolor:"green",
 		    							description:value[i].appointmentName +" Beschreibung: "+ value[i].appointmentDescription,
 		    							terminObj:value[i]
 									});
