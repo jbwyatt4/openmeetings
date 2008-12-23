@@ -24,21 +24,6 @@
         class="org.openmeetings.app.remote.Application"
         singleton="true" />
         
-    <!-- Class for Methods which can be invoked by the client -->
-    <bean id="appointmentcategoryservice.service" 
-	    class="org.openmeetings.app.remote.AppointmentCategoryService" 
-		singleton="true" />
-		
-	<!-- Class for Methods which can be invoked by the client -->
-    <bean id="calendarservice.service" 
-	    class="org.openmeetings.app.remote.CalendarService" 
-		singleton="true" />
-		
-	<!-- Class for Methods which can be invoked by the client -->
-    <bean id="meetingmemberservice.service" 
-	    class="org.openmeetings.app.remote.MeetingMemberService" 
-		singleton="true" />
-
     <!-- DATABASE Connection via hibernate
     <bean id="theSessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
         <property name="configLocation"
@@ -46,7 +31,9 @@
     </bean>
       -->
   
-  
+    <import resource="red5-services/appointmentcategoryservice.service.xml"/> 
+    <import resource="red5-services/calendarservice.service.xml"/> 
+    <import resource="red5-services/meetingmemberservice.service.xml"/>  
     <import resource="red5-services/fileservice.service.xml"/>  
     <import resource="red5-services/conferenceservice.service.xml"/>  
     <import resource="red5-services/userservice.service.xml"/>  
