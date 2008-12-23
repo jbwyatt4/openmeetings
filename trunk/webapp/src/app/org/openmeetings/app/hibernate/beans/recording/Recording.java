@@ -29,6 +29,8 @@ public class Recording {
 	private String starttimeAsString;
 	//this ID is not mapped as it can be null (Invited Users)
 	private Users recordedby = null;
+	
+	private Boolean whiteBoardConverted;
 
 	/**
      * @hibernate.property
@@ -180,6 +182,18 @@ public class Recording {
 	}
 	public void setRecordedby(Users recordedby) {
 		this.recordedby = recordedby;
+	}
+
+    /**
+     * @hibernate.property
+     *  column="whiteboardconverted"
+     *  type="boolean"
+     */
+	public Boolean getWhiteBoardConverted() {
+		return whiteBoardConverted;
+	}
+	public void setWhiteBoardConverted(Boolean whiteBoardConverted) {
+		this.whiteBoardConverted = whiteBoardConverted;
 	}
 	
 }

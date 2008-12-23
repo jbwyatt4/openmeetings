@@ -43,9 +43,9 @@ import org.openmeetings.app.hibernate.beans.recording.RoomClient;
 import org.openmeetings.app.hibernate.beans.recording.RoomRecording;
 import org.openmeetings.app.hibernate.beans.recording.RoomStream;
 import org.openmeetings.app.hibernate.beans.recording.WhiteBoardEvent;
-import org.openmeetings.app.data.record.Recordingmanagement;
 import org.openmeetings.app.data.record.dao.ChatvaluesEventDaoImpl;
 import org.openmeetings.app.data.record.dao.RecordingClientDaoImpl;
+import org.openmeetings.app.data.record.dao.RecordingDaoImpl;
 import org.openmeetings.app.data.record.dao.RoomRecordingDaoImpl;
 import org.openmeetings.app.data.record.dao.RoomStreamDaoImpl;
 import org.openmeetings.app.data.record.dao.WhiteBoardEventDaoImpl;
@@ -57,8 +57,8 @@ import org.openmeetings.app.data.record.dao.WhiteBoardEventDaoImpl;
  */
 public class StreamService implements IPendingServiceCallback {
 	
-	private static String fileNameXML = "recording_";
-	private static String folderForRecordings = "recorded";
+	public static String fileNameXML = "recording_";
+	public static String folderForRecordings = "recorded";
 	
 	
 	private static final Logger log = LoggerFactory.getLogger(StreamService.class);
@@ -286,30 +286,30 @@ public class StreamService implements IPendingServiceCallback {
 			}
 			
 			
-			//TODO: Replace Persistence Logic with Database-DAO
-			XStream xStream = new XStream(new XppDriver());
-			xStream.setMode(XStream.NO_REFERENCES);
-			String xmlString = xStream.toXML(roomRecording);
-			
-			//log.error(xmlString);
-			
-			//make persistent
-			Long recording_id = Recordingmanagement.getInstance().addRecording(newRecordFileName, duration, "", currentClient.getRoom_id(), us, comment, null);
-			
-			//save XML to Disk
-			IScope scope = Red5.getConnectionLocal().getScope().getParent();
-			String current_dir = scope.getResource("upload/").getFile().getAbsolutePath();
-			//System.out.println(current_dir  + File.separatorChar + this.folderForRecordings);
-			File f = new File(current_dir  + File.separatorChar + folderForRecordings);
-			if (!f.exists()){
-				f.mkdir();
-			}
-			String fileName = f.getAbsolutePath() + File.separatorChar + fileNameXML+recording_id+".xml";
-			//System.out.println("fileName"+fileName);
-			PrintWriter pw = new PrintWriter(new FileWriter(fileName));
-		    pw.println(xmlString);
-		    pw.flush();
-		    pw.close();
+//			//TODO: Replace Persistence Logic with Database-DAO
+//			XStream xStream = new XStream(new XppDriver());
+//			xStream.setMode(XStream.NO_REFERENCES);
+//			String xmlString = xStream.toXML(roomRecording);
+//			
+//			//log.error(xmlString);
+//			
+//			//make persistent
+//			Long recording_id = RecordingDaoImpl.getInstance().addRecording(newRecordFileName, duration, "", currentClient.getRoom_id(), us, comment, null);
+//			
+//			//save XML to Disk
+//			IScope scope = Red5.getConnectionLocal().getScope().getParent();
+//			String current_dir = scope.getResource("upload/").getFile().getAbsolutePath();
+//			//System.out.println(current_dir  + File.separatorChar + this.folderForRecordings);
+//			File f = new File(current_dir  + File.separatorChar + folderForRecordings);
+//			if (!f.exists()){
+//				f.mkdir();
+//			}
+//			String fileName = f.getAbsolutePath() + File.separatorChar + fileNameXML+recording_id+".xml";
+//			//System.out.println("fileName"+fileName);
+//			PrintWriter pw = new PrintWriter(new FileWriter(fileName));
+//		    pw.println(xmlString);
+//		    pw.flush();
+//		    pw.close();
 //		    
 //		    List<LinkedHashMap<String,Object>> roomClients = (List<LinkedHashMap<String,Object>>)roomRecording.get("roomclients");
 //		    for (Iterator<LinkedHashMap<String,Object>> iter = roomClients.iterator();iter.hasNext();){
@@ -364,10 +364,10 @@ public class StreamService implements IPendingServiceCallback {
 			//roomRecording.getRoomStreams()
 			
 			//make persistent
-			Long recording_id_remote = Recordingmanagement.getInstance().addRecording(newRecordFileName, duration, "", currentClient.getRoom_id(), us, comment, roomRecordingRemote);
+			Long recording_id_remote = RecordingDaoImpl.getInstance().addRecording(newRecordFileName, duration, "", currentClient.getRoom_id(), us, comment, roomRecordingRemote);
 			
 			
-			return recording_id;
+			return recording_id_remote;
 		} catch (Exception err) {
 			log.error("[stopRecordAndSave]",err);
 		}
@@ -494,7 +494,7 @@ public class StreamService implements IPendingServiceCallback {
 					
 				}
 				if (whereClause.length()!=0) whereClause += ") AND ";
-				List<Recording> rList = Recordingmanagement.getInstance().getRecordingsByWhereClause(whereClause);
+				List<Recording> rList = RecordingDaoImpl.getInstance().getRecordingsByWhereClause(whereClause);
 				
 				for (Iterator<Recording> iter = rList.iterator();iter.hasNext();) {
 					Recording rec = iter.next();
@@ -518,7 +518,7 @@ public class StreamService implements IPendingServiceCallback {
 	        Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);  
 
 	        if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)){
-	        	Recording rec = Recordingmanagement.getInstance().getRecordingById(recording_id);
+	        	Recording rec = RecordingDaoImpl.getInstance().getRecordingById(recording_id);
 	        	
 				
 				
@@ -800,10 +800,10 @@ public class StreamService implements IPendingServiceCallback {
 	    	Long users_id = Sessionmanagement.getInstance().checkSession(SID);
 	    	Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
 	    	if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)){
-	    		Recording rec = Recordingmanagement.getInstance().getRecordingById(recording_id);
+	    		Recording rec = RecordingDaoImpl.getInstance().getRecordingById(recording_id);
 	    		if (rec!=null) {
 	    			rec.setDeleted("true");
-	    			Recordingmanagement.getInstance().updateRecording(rec);
+	    			RecordingDaoImpl.getInstance().updateRecording(rec);
 	    			return new Long(recording_id);
 	    		}
 	    	}
