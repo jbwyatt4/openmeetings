@@ -12,5 +12,8 @@
     <property name="ended" type="java.util.Date" column="ended"/>
     <property name="currentWhiteBoardAsXml" type="text" column="currentwhiteboardasxml"/>
     <property name="endTimeInMilliSeconds" type="long" column="endtimeinmilliseconds"/>
+    <property name="startedPngConverted" type="java.util.Date" column="startedpngconverted"/>
+    <property name="endPngConverted" type="java.util.Date" column="endpngconverted"/>
+    <property name="batchProcessCounter" type="long" column="batchprocesscounter"/>
   </class>
 </hibernate-mapping>

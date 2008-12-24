@@ -16,6 +16,7 @@ import org.apache.commons.logging.LogFactory;
 import org.openmeetings.app.data.record.dao.RecordingConversionJobDaoImpl;
 import org.openmeetings.app.data.record.dao.RecordingDaoImpl;
 import org.openmeetings.app.data.record.dao.WhiteBoardEventDaoImpl;
+import org.openmeetings.app.documents.GenerateImage;
 import org.openmeetings.app.hibernate.beans.recording.Recording;
 import org.openmeetings.app.hibernate.beans.recording.RecordingConversionJob;
 import org.openmeetings.app.hibernate.beans.recording.WhiteBoardEvent;
@@ -36,6 +37,9 @@ public class WhiteboardConvertionJobManager {
 	private static Long numberOfMilliseconds = 200L;
 	
 	private static boolean isRunning = false;
+	
+	//This is the 
+	private static boolean isDebug = false;
 
 	private static final Log log = LogFactory.getLog(WhiteboardConvertionJobManager.class);
 
@@ -78,9 +82,13 @@ public class WhiteboardConvertionJobManager {
 					
 				}
 				
+				//Do SVG Conversion for next 100 SVG Images, that should fill one Folder
+				for (int i=0;i<100;i++) {
+					this.processJobs();
+				}
 				
-				processJobs();
-				
+				//Do SVG to PNG Batch Conversion
+				this.processConvertionJobs();
 				
 				isRunning = false;
 			} else {
@@ -98,7 +106,7 @@ public class WhiteboardConvertionJobManager {
 			
 			List<RecordingConversionJob> listOfConversionJobs = RecordingConversionJobDaoImpl.getInstance().getRecordingConversionJobs();
 			
-			log.debug("processJobs: "+listOfConversionJobs.size());
+			//log.debug("processJobs: "+listOfConversionJobs.size());
 			
 			for (RecordingConversionJob recordingConversionJob : listOfConversionJobs) {
 				
@@ -194,6 +202,12 @@ public class WhiteboardConvertionJobManager {
 						
 						log.debug("THIS FILE IS PROCESSED: "+recordingConversionJob.getRecordingConversionJobId());
 						
+						//FIXME: this should happen only one time per conversion Job
+						
+						recordingConversionJob.setEnded(new Date());
+						recordingConversionJob.setBatchProcessCounter(0L);
+						RecordingConversionJobDaoImpl.getInstance().updateRecordingConversionJobs(recordingConversionJob);
+						
 					}
 				}
 				
@@ -201,6 +215,56 @@ public class WhiteboardConvertionJobManager {
 			
 		} catch (Exception err) {
 			log.error("[processJobs]",err);
+		}
+		
+	}
+	
+	public synchronized void processConvertionJobs() {
+		try {
+			
+			List<RecordingConversionJob> listOfConversionJobs = RecordingConversionJobDaoImpl.getInstance().getRecordingConversionBatchConversionJobs();
+			
+			//log.debug("processBatchJobs SIZE: "+listOfConversionJobs.size());
+			
+			for (RecordingConversionJob recordingConversionJob : listOfConversionJobs) {
+				
+				int maxFolder = Math.round(recordingConversionJob.getImageNumber() / 100);
+				
+				if (maxFolder >= recordingConversionJob.getBatchProcessCounter()) {
+					
+					Map<String,String> outputFileNames = null;
+					if (isDebug) {
+						outputFileNames = this.generateBatchFileDebug(recordingConversionJob.getRecordingConversionJobId(), 
+											recordingConversionJob.getBatchProcessCounter());
+					} else {
+						outputFileNames = this.generateBatchFile(recordingConversionJob.getRecordingConversionJobId(), 
+								recordingConversionJob.getBatchProcessCounter());
+					}
+					
+					
+					
+					GenerateImage.getInstance().convertImageByTypeAndSize(
+							outputFileNames.get("input"), 
+							outputFileNames.get("output"), 
+							660, 580);
+					
+					//Add Count For next Round
+					recordingConversionJob.setBatchProcessCounter(recordingConversionJob.getBatchProcessCounter()+1);
+					RecordingConversionJobDaoImpl.getInstance().updateRecordingConversionJobs(recordingConversionJob);
+					
+				} else {
+					
+					log.debug("Batch Processing Done");
+					
+					recordingConversionJob.setEndPngConverted(new Date());
+					RecordingConversionJobDaoImpl.getInstance().updateRecordingConversionJobs(recordingConversionJob);
+					
+				}
+				
+			}
+			
+		} catch (Exception err) {
+			log.error("[processConvertionJobs]",err);
 		}
 	}
 	
@@ -250,8 +314,19 @@ public class WhiteboardConvertionJobManager {
 //       
 //       log.debug("stringWriter"+stringWriter.toString());
 
-		String firstImageName = this.generateSVGFileDebug(recordingConversionJob.getRecordingConversionJobId(), recordingConversionJob.getImageNumber());
-		log.debug("Write File To: " + firstImageName);
+        String firstImageName = "";
+        
+        if (isDebug) {
+        	firstImageName = this.generateSVGFileDebug(
+        				recordingConversionJob.getRecordingConversionJobId(), 
+        				recordingConversionJob.getImageNumber());
+        } else {
+        	firstImageName = this.generateSVGFileName(
+    				recordingConversionJob.getRecordingConversionJobId(), 
+    				recordingConversionJob.getImageNumber());
+        }
+
+        log.debug("Write File To: " + firstImageName);
 
 		FileWriter fileWriter = new FileWriter(firstImageName);
 		svgGenerator.stream(fileWriter, useCSS);
@@ -283,20 +358,96 @@ public class WhiteboardConvertionJobManager {
        return batchFileSVGDir + File.separatorChar + imageNumber + ".svg";
 	}
 	
-	private String generateSVGFileName(Long conversionJobId, Long fileNumber) throws Exception {
-		String recordingRootDir = Application.webAppPath + File.separatorChar + "upload" + File.separatorChar + StreamService.folderForRecordings;
-       File recordingRootDirFolder = new File(recordingRootDir);
-       if (!recordingRootDirFolder.exists()) {
-    	   recordingRootDirFolder.mkdir();
-       }
-       
-       String recordingFileDir = recordingRootDir + File.separatorChar + conversionJobId;
-       File recordingFileDirFolder = new File(recordingFileDir);
-       if (!recordingFileDirFolder.exists()) {
-    	   recordingFileDirFolder.mkdir();
-       }
-       
-       return recordingFileDir + File.separatorChar + "record+" + fileNumber + ".svg";
+	/**
+	 * This won't work in Debug(=>means JUnit!) Modus as the batch File-Dir is relative to the Server-Path
+	 * 
+	 * @param conversionJobId
+	 * @param folderNumber
+	 * @return
+	 * @throws Exception
+	 */
+	private Map<String, String> generateBatchFileDebug(Long conversionJobId,
+			Long folderNumber) throws Exception {
+		String recordingRootDir = "/Users/swagner/Documents/work/red5_distros/red5_r3200_snapshot/webapps/openmeetings/test/";
+
+		// The Folders must already exist here otherwise no Image could exist
+		// here, so no need to
+		// check for existance
+		String recordingFileDir = recordingRootDir + File.separatorChar
+				+ conversionJobId;
+		String batchFileSVGDir = recordingFileDir + File.separatorChar
+				+ folderNumber;
+
+		String batchFilePNGDir = batchFileSVGDir + File.separatorChar + "PNG";
+		File recordingBatchFilePNGDirFolder = new File(batchFilePNGDir);
+		if (!recordingBatchFilePNGDirFolder.exists()) {
+			recordingBatchFilePNGDirFolder.mkdir();
+		}
+
+		Map<String, String> returnMap = new HashMap<String, String>();
+
+		returnMap.put("input", batchFileSVGDir + File.separatorChar + "*.svg");
+		returnMap
+				.put("output", batchFilePNGDir + File.separatorChar + "%d.png");
+
+		return returnMap;
+	}
+	
+	private Map<String, String> generateBatchFile(Long conversionJobId,
+			Long folderNumber) throws Exception {
+		
+		String recordingRootDir = Application.webAppPath + File.separatorChar
+				+ "upload" + File.separatorChar
+				+ StreamService.folderForRecordings;
+
+		// The Folders must already exist here otherwise no Image could exist
+		// here, so no need to
+		// check for existance
+		String recordingFileDir = recordingRootDir + File.separatorChar + conversionJobId;
+		String batchFileSVGDir = recordingFileDir + File.separatorChar + folderNumber;
+
+		String batchFilePNGDir = batchFileSVGDir + File.separatorChar + "PNG";
+		File recordingBatchFilePNGDirFolder = new File(batchFilePNGDir);
+		if (!recordingBatchFilePNGDirFolder.exists()) {
+			recordingBatchFilePNGDirFolder.mkdir();
+		}
+
+		Map<String, String> returnMap = new HashMap<String, String>();
+
+		returnMap.put("input", batchFileSVGDir + File.separatorChar + "*.svg");
+		returnMap
+				.put("output", batchFilePNGDir + File.separatorChar + "%d.png");
+
+		return returnMap;
+	}
+	
+	private String generateSVGFileName(Long conversionJobId, Long imageNumber)
+			throws Exception {
+		
+		String recordingRootDir = Application.webAppPath + File.separatorChar
+				+ "upload" + File.separatorChar
+				+ StreamService.folderForRecordings;
+		
+		File recordingRootDirFolder = new File(recordingRootDir);
+		if (!recordingRootDirFolder.exists()) {
+			recordingRootDirFolder.mkdir();
+		}
+		
+		String recordingFileDir = recordingRootDir + File.separatorChar + conversionJobId;
+		File recordingFileDirFolder = new File(recordingFileDir);
+		if (!recordingFileDirFolder.exists()) {
+			recordingFileDirFolder.mkdir();
+		}
+		Double numberOfFolder = Math.floor(imageNumber / 100);
+		String folderDir = "" + numberOfFolder.intValue();
+
+		String batchFileSVGDir = recordingFileDir + File.separatorChar + folderDir;
+		File recordingBatchFileDirFolder = new File(batchFileSVGDir);
+		if (!recordingBatchFileDirFolder.exists()) {
+			recordingBatchFileDirFolder.mkdir();
+		}
+
+		return batchFileSVGDir + File.separatorChar + imageNumber + ".svg";
 	}
 	
 }

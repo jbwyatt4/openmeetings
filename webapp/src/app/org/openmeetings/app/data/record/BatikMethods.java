@@ -59,7 +59,13 @@ public class BatikMethods {
 		for (Iterator iter = pointsList.keySet().iterator();iter.hasNext();) {
 			Map<Integer,Object> point = (Map<Integer,Object>) pointsList.get(iter.next());
 			
-			this.drawThickLine2D(g2d, Double.valueOf(point.get(1).toString()).doubleValue(), 
+			log.debug("POINT FROM TO :" +
+					Double.valueOf(point.get(1).toString()).doubleValue()+","+
+					Double.valueOf(point.get(2).toString()).doubleValue()+","+ 
+					Double.valueOf(point.get(3).toString()).doubleValue()+","+
+					Double.valueOf(point.get(4).toString()).doubleValue());
+			
+			this.drawThickLine2DPaint(g2d, Double.valueOf(point.get(1).toString()).doubleValue(), 
 					Double.valueOf(point.get(2).toString()).doubleValue(), 
 					Double.valueOf(point.get(3).toString()).doubleValue(), 
 					Double.valueOf(point.get(4).toString()).doubleValue(),  
@@ -167,6 +173,29 @@ public class BatikMethods {
 		g2d.setPaint(col);
 		g2d.drawLine(x1, y1, x2, y2);
 	}
+	
+	public void drawThickLine2DPaint(Graphics2D g2d, double x1, double y1, double x2, double y2, 
+			int width, Color c, double xObj, double yObj, float alpha) throws Exception {
+		g2d.setPaint(c);
+		
+		int[] rules = new int[8]; 
+		
+		//all possible Compositing Rules:
+		rules[0] = AlphaComposite.SRC_OVER;
+		rules[1] = AlphaComposite.DST_OVER;
+		rules[2] = AlphaComposite.CLEAR;
+		rules[3] = AlphaComposite.SRC;
+		rules[4] = AlphaComposite.SRC_IN;
+		rules[5] = AlphaComposite.DST_IN;
+		rules[6] = AlphaComposite.SRC_OUT;
+		rules[7] = AlphaComposite.DST_OUT;
+		
+		g2d.setComposite( AlphaComposite.getInstance( AlphaComposite.SRC,alpha));
+		g2d.setStroke(new BasicStroke(width, BasicStroke.CAP_ROUND, BasicStroke.JOIN_BEVEL));
+		Line2D line = new Line2D.Double(x1, y1, x2, y2);
+	    g2d.draw(line);
+	}
+
 	
 	public void drawThickLine2D(Graphics2D g2d, double x1, double y1, double x2, double y2, 
 			int width, Color c, double xObj, double yObj, float alpha) throws Exception {

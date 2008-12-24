@@ -53,11 +53,50 @@ public class RecordingConversionJobDaoImpl {
 		return null;
 	}
 	
+	/**
+	 * get all Conversion Jobs where END Time is not set for
+	 * the SVG Conversion
+	 * and the Batch process is not yet started
+	 * 
+	 * @return
+	 */
 	public List<RecordingConversionJob> getRecordingConversionJobs() {
 		try {
 			
 			String hql = "select c from RecordingConversionJob as c " +
-						"where c.ended IS NULL ";
+						"where c.ended IS NULL " +
+						"AND c.startedPngConverted IS NULL";
+			
+			Object idf = HibernateUtil.createSession();
+			Session session = HibernateUtil.getSession();
+			Transaction tx = session.beginTransaction();
+			Query query = session.createQuery(hql);
+			List<RecordingConversionJob> ll = query.list();
+			tx.commit();
+			HibernateUtil.closeSession(idf);
+			
+			return ll;
+	
+		} catch (HibernateException ex) {
+			log.error("[getRecordingConversionJobs]: " , ex);
+		} catch (Exception ex2) {
+			log.error("[getRecordingConversionJobs]: " , ex2);
+		}
+		return null;
+	}
+	
+	/**
+	 * Get all selected Conversion Jobs where SVG has 
+	 * finished but Batch Process not yet
+	 * 
+	 * @return
+	 */
+	public List<RecordingConversionJob> getRecordingConversionBatchConversionJobs() {
+		try {
+			
+			String hql = "select c from RecordingConversionJob as c " +
+						"where c.ended IS NOT NULL " +
+						"AND c.endPngConverted IS NULL";
 			
 			Object idf = HibernateUtil.createSession();
 			Session session = HibernateUtil.getSession();

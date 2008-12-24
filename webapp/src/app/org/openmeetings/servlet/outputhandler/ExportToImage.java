@@ -159,7 +159,7 @@ public class ExportToImage extends HttpServlet {
 		        	FileWriter out = new FileWriter(svgFile);
 		        	svgGenerator.stream(out, useCSS);
 		        	
-		        	HashMap<String,Object> returnError = GenerateImage.getInstance().convertSingleImageByTypeAndSize(
+		        	HashMap<String,Object> returnError = GenerateImage.getInstance().convertImageByTypeAndSize(
 		        			svgFile.getAbsolutePath(), resultFile.getAbsolutePath(), 
 		        			pBean.getWidth(), pBean.getHeight());
 		        	
