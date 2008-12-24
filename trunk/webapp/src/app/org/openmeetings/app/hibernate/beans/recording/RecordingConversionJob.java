@@ -14,9 +14,13 @@ public class RecordingConversionJob {
 	private Long imageNumber = 0L;
 	private Recording recording;
 	private Date started;
+	//this is only the end Date for the SVG Conversion
 	private Date ended;
 	private String currentWhiteBoardAsXml;
 	private Long endTimeInMilliSeconds;
+	private Date startedPngConverted;
+	private Date endPngConverted;
+	private Long batchProcessCounter = 0L;
 	
 	/**
      * 
@@ -105,6 +109,42 @@ public class RecordingConversionJob {
 	}
 	public void setEndTimeInMilliSeconds(Long endTimeInMilliSeconds) {
 		this.endTimeInMilliSeconds = endTimeInMilliSeconds;
+	}
+	
+	/**
+     * @hibernate.property
+     *  column="startedpngconverted"
+     *  type="java.util.Date"
+     */
+	public Date getStartedPngConverted() {
+		return startedPngConverted;
+	}
+	public void setStartedPngConverted(Date startedPngConverted) {
+		this.startedPngConverted = startedPngConverted;
+	}
+	
+	/**
+     * @hibernate.property
+     *  column="endpngconverted"
+     *  type="java.util.Date"
+     */
+	public Date getEndPngConverted() {
+		return endPngConverted;
+	}
+	public void setEndPngConverted(Date endPngConverted) {
+		this.endPngConverted = endPngConverted;
+	}
+	
+	/**
+     * @hibernate.property
+     *  column="batchprocesscounter"
+     *  type="long"
+     */
+	public Long getBatchProcessCounter() {
+		return batchProcessCounter;
+	}
+	public void setBatchProcessCounter(Long batchProcessCounter) {
+		this.batchProcessCounter = batchProcessCounter;
 	}
 	
 

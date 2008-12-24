@@ -205,7 +205,7 @@ public class GenerateImage {
 			int exitVal = proc.waitFor();
 			returnMap.put("exitValue", exitVal);
 
-			log.debug("ERROR: "+error);
+			log.debug("DEBUG: "+error);
 			
 			return returnMap;
 		} catch (Throwable t) {
@@ -216,7 +216,7 @@ public class GenerateImage {
 		}
 	}
 	
-	public HashMap<String,Object> convertSingleImageByTypeAndSize(String inputFile, String outputfile, 
+	public HashMap<String,Object> convertImageByTypeAndSize(String inputFile, String outputfile, 
 			int width, int height) {
 		HashMap<String,Object> returnMap = new HashMap<String,Object>();
 		returnMap.put("process", "convertSingleJpg");
@@ -293,7 +293,7 @@ public class GenerateImage {
 			int exitVal = proc.waitFor();
 			returnMap.put("exitValue", exitVal);
 
-			log.debug("ERROR: "+error);
+			log.debug("DEBUG: "+error);
 			
 			return returnMap;
 		} catch (Throwable t) {
@@ -303,6 +303,5 @@ public class GenerateImage {
 			return returnMap;
 		}
 	}
-
 	
 }
