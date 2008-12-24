@@ -34,10 +34,14 @@ public class WhiteboardMapToSVG extends BatikMethods {
 	
 	public SVGGraphics2D convertMapToSVG(SVGGraphics2D svgGenerator, Map whiteBoardMap) throws Exception {
 		
+		log.debug("convertMapToSVG: "+whiteBoardMap.size());
+		
         for (Iterator iter = whiteBoardMap.keySet().iterator();iter.hasNext();) {
         	Map graphObject = (Map) whiteBoardMap.get(iter.next());
         	
         	String graphType = graphObject.get(0).toString();
+        	
+        	log.debug("graphType: "+graphType);
         	
         	if (graphType.equals("paint")) {
         		

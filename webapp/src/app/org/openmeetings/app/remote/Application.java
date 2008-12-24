@@ -119,7 +119,7 @@ public class Application extends ApplicationAdapter implements
 			QuartzSessionClear bwHelp = new QuartzSessionClear();
 			QuartzRecordingJob recordingJob = new QuartzRecordingJob();
 			String jobName = addScheduledJob(300000,bwHelp);
-			//String jobName2 = addScheduledJob(3000,recordingJob);
+			String jobName2 = addScheduledJob(3000,recordingJob);
 			//String jobName = addScheduledJob(1000,bwHelp);
 			log.debug("jobName: "+jobName);
 		} catch (Exception err) {

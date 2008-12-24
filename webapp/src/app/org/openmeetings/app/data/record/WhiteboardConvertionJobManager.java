@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.StringWriter;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -14,8 +15,10 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openmeetings.app.data.record.dao.RecordingConversionJobDaoImpl;
 import org.openmeetings.app.data.record.dao.RecordingDaoImpl;
+import org.openmeetings.app.data.record.dao.WhiteBoardEventDaoImpl;
 import org.openmeetings.app.hibernate.beans.recording.Recording;
 import org.openmeetings.app.hibernate.beans.recording.RecordingConversionJob;
+import org.openmeetings.app.hibernate.beans.recording.WhiteBoardEvent;
 import org.openmeetings.app.remote.Application;
 import org.openmeetings.app.remote.StreamService;
 import org.openmeetings.utils.math.CalendarPatterns;
@@ -27,6 +30,10 @@ import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.XppDriver;
 
 public class WhiteboardConvertionJobManager {
+	
+	//This is the amount of time the Conversion Job will create an SVN
+	//So 200 Milliseconds == 5 Images per second
+	private static Long numberOfMilliseconds = 200L;
 	
 	private static boolean isRunning = false;
 
@@ -56,7 +63,7 @@ public class WhiteboardConvertionJobManager {
 					recording.setWhiteBoardConverted(true);
 					RecordingDaoImpl.getInstance().updateRecording(recording);
 				}
-				log.debug("initJobs: "+recordingsNonConversionStarted.size());
+				//log.debug("initJobs: "+recordingsNonConversionStarted.size());
 				
 				for (Recording recording : recordingsNonConversionStarted) {
 					
@@ -71,7 +78,7 @@ public class WhiteboardConvertionJobManager {
 				}
 				
 				
-				//processJobs();
+				processJobs();
 				
 				
 				isRunning = false;
@@ -94,7 +101,7 @@ public class WhiteboardConvertionJobManager {
 			
 			for (RecordingConversionJob recordingConversionJob : listOfConversionJobs) {
 				
-				log.debug("TIM INITIAL : "+recordingConversionJob.getEndTimeInMilliSeconds());
+				//log.debug("TIME INITIAL : "+recordingConversionJob.getEndTimeInMilliSeconds());
 				
 				if (recordingConversionJob.getEndTimeInMilliSeconds().equals(0L)) {
 					
@@ -103,65 +110,90 @@ public class WhiteboardConvertionJobManager {
 					XStream xStream_temp = new XStream(new XppDriver());
 					xStream_temp.setMode(XStream.NO_REFERENCES);
 					
-					Map initWhiteBoardObjects = (Map) xStream_temp.fromXML(recordingConversionJob.getRecording().
-															getRoomRecording().getInitwhiteboardvarsInXml());
+					String roomRecordingInXML = recordingConversionJob.getRecording().getRoomRecording().getInitwhiteboardvarsInXml();
 					
-					// Get a DOMImplementation.
-			        DOMImplementation domImpl =
-			            GenericDOMImplementation.getDOMImplementation();
-
-			        // Create an instance of org.w3c.dom.Document.
-			        //String svgNS = "http://www.w3.org/2000/svg";
-			        String svgNS = SVGDOMImplementation.SVG_NAMESPACE_URI;
-
-			        Document document = domImpl.createDocument(svgNS, "svg", null);
-			        
-			        // Get the root element (the 'svg' element).
-			        Element svgRoot = document.getDocumentElement();
-
-			        
-			        // Set the width and height attributes on the root 'svg' element.
-			        svgRoot.setAttributeNS(null, "width", ""+660);
-			        svgRoot.setAttributeNS(null, "height", ""+620);
-			        
-
-			        // Create an instance of the SVG Generator.
-			        SVGGraphics2D svgGenerator = new SVGGraphics2D(document);
-			        
-			        svgGenerator = WhiteboardMapToSVG.getInstance().convertMapToSVG(svgGenerator, initWhiteBoardObjects);
+					Map initWhiteBoardObjects = (Map) xStream_temp.fromXML(roomRecordingInXML);
 					
-			        // Finally, stream out SVG to the standard output using
-			        // UTF-8 encoding.
-			        boolean useCSS = true; // we want to use CSS style attributes
-			        //Writer out = new OutputStreamWriter(System.out, "UTF-8");
-			        
-			       //log.debug(out.toString());
-			       
-			       String recordingRootDir = Application.webAppPath + File.separatorChar + StreamService.folderForRecordings;
-			       File recordingRootDirFolder = new File(recordingRootDir);
-			       if (!recordingRootDirFolder.exists()) {
-			    	   recordingRootDirFolder.mkdir();
-			       }
-			       
-			       String recordingFileDir = recordingRootDir + File.separatorChar + recordingConversionJob.getRecordingConversionJobId();
-			       File recordingFileDirFolder = new File(recordingFileDir);
-			       if (!recordingFileDirFolder.exists()) {
-			    	   recordingFileDirFolder.mkdir();
-			       }
-			       
-			       String firstImageName = recordingFileDir + File.separatorChar + "record0.svg";
-			       FileWriter fileWriter = new FileWriter(firstImageName);
-			        
-			       svgGenerator.stream(fileWriter, useCSS);
-			       
-			       recordingConversionJob.setEndTimeInMilliSeconds(1000L);
-			       
-			       RecordingConversionJobDaoImpl.getInstance().updateRecordingConversionJobs(recordingConversionJob);
+					this.generateFileAsSVG(initWhiteBoardObjects, roomRecordingInXML, recordingConversionJob);
 			       
 				} else {
 					
+					log.debug("DRAW NEXT IMAGE");
 					
+					if (recordingConversionJob.getRecording().getDuration() >= recordingConversionJob.getEndTimeInMilliSeconds()) {
 					
+						List<WhiteBoardEvent> whiteBoardEventList = WhiteBoardEventDaoImpl.getInstance().
+								getWhiteboardEventsInRange(
+										recordingConversionJob.getEndTimeInMilliSeconds(), 
+										recordingConversionJob.getEndTimeInMilliSeconds()+(numberOfMilliseconds-1), 
+										recordingConversionJob.getRecording().getRoomRecording().getRoomrecordingId());
+						
+						
+						log.debug("whiteBoardEventList SIZE "+whiteBoardEventList.size());
+						
+						XStream xStream_temp = new XStream(new XppDriver());
+						xStream_temp.setMode(XStream.NO_REFERENCES);
+						
+						String roomRecordingInXML = recordingConversionJob.getCurrentWhiteBoardAsXml();
+						Map whiteBoardObjects = (Map) xStream_temp.fromXML(roomRecordingInXML);
+							
+						//Do simulate Whiteboard Events in Temp Object
+						
+						for (WhiteBoardEvent whiteBoardEvent : whiteBoardEventList) {
+							
+							log.debug("whiteBoardEvent: "+whiteBoardEvent.getStarttime());
+							
+							XStream xStream_temp_action = new XStream(new XppDriver());
+							xStream_temp_action.setMode(XStream.NO_REFERENCES);
+							
+							Map actionObj = (Map) xStream_temp_action.fromXML(whiteBoardEvent.getAction());
+							
+							log.debug("whiteBoardEvent: "+actionObj);
+							
+							Date dateOfEvent = (Date) actionObj.get(1);
+							String action = actionObj.get(2).toString();	
+							Map actionObject = (Map) actionObj.get(3);
+							
+							log.debug("action: "+action);
+							
+							if (action.equals("draw") || action.equals("redo")){
+								
+								//log.debug(actionObject);
+								//log.debug(actionObject.size()-1);
+								//log.debug(actionObject.get(actionObject.size()-1));
+								
+								String objectOID = actionObject.get(actionObject.size()-1).toString();
+								log.debug("objectOID: "+objectOID);
+								whiteBoardObjects.put(objectOID, actionObject);
+							} else if (action.equals("clear")) {
+								whiteBoardObjects = new HashMap<String,Map>();
+							} else if (action.equals("delete") || action.equals("undo")) {
+								String objectOID = actionObject.get(actionObject.size()-1).toString();
+								log.debug("removal of objectOID: "+objectOID);
+								whiteBoardObjects.remove(objectOID);
+							} else if (action.equals("size") || action.equals("editProp") 
+									|| action.equals("editText")) {
+								String objectOID = actionObject.get(actionObject.size()-1).toString();
+								//Map roomItem = (Map) whiteBoardObjects.get(objectOID);
+								whiteBoardObjects.put(objectOID, actionObject);
+								
+							} else {
+								log.warn("Unkown Type: "+action+" actionObject: "+actionObject);
+							}
+							
+						}
+						
+						XStream xStream_temp_store = new XStream(new XppDriver());
+						xStream_temp_store.setMode(XStream.NO_REFERENCES);
+						String roomRecordingInXMLToSave = xStream_temp_store.toXML(whiteBoardObjects);
+						
+						this.generateFileAsSVG(whiteBoardObjects, roomRecordingInXMLToSave, recordingConversionJob);
+					
+					} else {
+						
+						log.debug("THIS FILE IS PROCESSED: "+recordingConversionJob.getRecordingConversionJobId());
+						
+					}
 				}
 				
 			}
@@ -169,6 +201,95 @@ public class WhiteboardConvertionJobManager {
 		} catch (Exception err) {
 			log.error("[processJobs]",err);
 		}
+	}
+	
+	private void generateFileAsSVG(Map whiteBoardObjects, String roomRecordingInXML, RecordingConversionJob recordingConversionJob) throws Exception {
+		
+		// Get a DOMImplementation.
+        DOMImplementation domImpl =
+            GenericDOMImplementation.getDOMImplementation();
+
+        // Create an instance of org.w3c.dom.Document.
+        //String svgNS = "http://www.w3.org/2000/svg";
+        String svgNS = SVGDOMImplementation.SVG_NAMESPACE_URI;
+
+        Document document = domImpl.createDocument(svgNS, "svg", null);
+        
+        // Get the root element (the 'svg' element).
+        Element svgRoot = document.getDocumentElement();
+
+        
+        // Set the width and height attributes on the root 'svg' element.
+        svgRoot.setAttributeNS(null, "width", ""+660);
+        svgRoot.setAttributeNS(null, "height", ""+620);
+        
+
+        // Create an instance of the SVG Generator.
+        SVGGraphics2D svgGenerator = new SVGGraphics2D(document);
+        
+        svgGenerator = WhiteboardMapToSVG.getInstance().convertMapToSVG(svgGenerator, whiteBoardObjects);
+		
+        // Finally, stream out SVG to the standard output using
+        // UTF-8 encoding.
+        boolean useCSS = true; // we want to use CSS style attributes
+        //Writer out = new OutputStreamWriter(System.out, "UTF-8");
+        
+       //log.debug(out.toString());
+        
+       Long fileNumber = recordingConversionJob.getEndTimeInMilliSeconds();
+       
+//       String firstImageName = this.generateFileName(recordingConversionJob.getRecordingConversionJobId(), fileNumber);
+//       log.debug("Write File To: "+firstImageName);
+//       
+//       FileWriter fileWriter = new FileWriter(firstImageName);
+//       
+//       svgGenerator.stream(fileWriter, useCSS);
+       
+//       StringWriter stringWriter = new StringWriter();
+//       
+//       svgGenerator.stream(stringWriter, useCSS);
+//       
+//       log.debug("stringWriter"+stringWriter.toString());
+
+		String firstImageName = this.generateSVGFileDebug(recordingConversionJob.getRecordingConversionJobId(), fileNumber);
+		log.debug("Write File To: " + firstImageName);
+
+		FileWriter fileWriter = new FileWriter(firstImageName);
+		svgGenerator.stream(fileWriter, useCSS);
+
+		recordingConversionJob.setEndTimeInMilliSeconds(recordingConversionJob.getEndTimeInMilliSeconds() + numberOfMilliseconds);
+		recordingConversionJob.setCurrentWhiteBoardAsXml(roomRecordingInXML);
+
+		RecordingConversionJobDaoImpl.getInstance().updateRecordingConversionJobs(recordingConversionJob);
+       
+	}
+	
+	private String generateSVGFileDebug(Long conversionJobId, Long fileNumber) throws Exception {
+       String recordingRootDir  = "/Users/swagner/Documents/work/red5_distros/red5_r3200_snapshot/webapps/openmeetings/test/";
+       
+       String recordingFileDir = recordingRootDir + File.separatorChar + conversionJobId;
+       File recordingFileDirFolder = new File(recordingFileDir);
+       if (!recordingFileDirFolder.exists()) {
+    	   recordingFileDirFolder.mkdir();
+       }
+       
+       return recordingFileDir + File.separatorChar + fileNumber + ".svg";
+	}
+	
+	private String generateSVGFileName(Long conversionJobId, Long fileNumber) throws Exception {
+		String recordingRootDir = Application.webAppPath + File.separatorChar + "upload" + File.separatorChar + StreamService.folderForRecordings;
+       File recordingRootDirFolder = new File(recordingRootDir);
+       if (!recordingRootDirFolder.exists()) {
+    	   recordingRootDirFolder.mkdir();
+       }
+       
+       String recordingFileDir = recordingRootDir + File.separatorChar + conversionJobId;
+       File recordingFileDirFolder = new File(recordingFileDir);
+       if (!recordingFileDirFolder.exists()) {
+    	   recordingFileDirFolder.mkdir();
+       }
+       
+       return recordingFileDir + File.separatorChar + "record+" + fileNumber + ".svg";
 	}
 	
 }
