@@ -11,6 +11,7 @@ import java.util.Date;
 public class RecordingConversionJob {
 	
 	private long recordingConversionJobId;
+	private Long imageNumber = 0L;
 	private Recording recording;
 	private Date started;
 	private Date ended;
@@ -44,6 +45,18 @@ public class RecordingConversionJob {
 	}
 	public void setRecording(Recording recording) {
 		this.recording = recording;
+	}
+	
+	/**
+     * @hibernate.property
+     *  column="imagenumber"
+     *  type="long"
+     */
+	public Long getImageNumber() {
+		return imageNumber;
+	}
+	public void setImageNumber(Long imageNumber) {
+		this.imageNumber = imageNumber;
 	}
 	
 	/**

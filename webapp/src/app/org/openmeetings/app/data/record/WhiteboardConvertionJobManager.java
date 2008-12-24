@@ -71,6 +71,7 @@ public class WhiteboardConvertionJobManager {
 					recordingConversionJob.setRecording(recording);
 					recordingConversionJob.setStarted(new Date());
 					recordingConversionJob.setEndTimeInMilliSeconds(0L);
+					recordingConversionJob.setImageNumber(0L);
 					recordingConversionJob.setCurrentWhiteBoardAsXml("");
 					
 					RecordingConversionJobDaoImpl.getInstance().addRecordingConversionJob(recordingConversionJob);
@@ -236,8 +237,6 @@ public class WhiteboardConvertionJobManager {
         
        //log.debug(out.toString());
         
-       Long fileNumber = recordingConversionJob.getEndTimeInMilliSeconds();
-       
 //       String firstImageName = this.generateFileName(recordingConversionJob.getRecordingConversionJobId(), fileNumber);
 //       log.debug("Write File To: "+firstImageName);
 //       
@@ -251,7 +250,7 @@ public class WhiteboardConvertionJobManager {
 //       
 //       log.debug("stringWriter"+stringWriter.toString());
 
-		String firstImageName = this.generateSVGFileDebug(recordingConversionJob.getRecordingConversionJobId(), fileNumber);
+		String firstImageName = this.generateSVGFileDebug(recordingConversionJob.getRecordingConversionJobId(), recordingConversionJob.getImageNumber());
 		log.debug("Write File To: " + firstImageName);
 
 		FileWriter fileWriter = new FileWriter(firstImageName);
@@ -259,12 +258,12 @@ public class WhiteboardConvertionJobManager {
 
 		recordingConversionJob.setEndTimeInMilliSeconds(recordingConversionJob.getEndTimeInMilliSeconds() + numberOfMilliseconds);
 		recordingConversionJob.setCurrentWhiteBoardAsXml(roomRecordingInXML);
-
+		recordingConversionJob.setImageNumber(recordingConversionJob.getImageNumber()+1);
 		RecordingConversionJobDaoImpl.getInstance().updateRecordingConversionJobs(recordingConversionJob);
        
 	}
 	
-	private String generateSVGFileDebug(Long conversionJobId, Long fileNumber) throws Exception {
+	private String generateSVGFileDebug(Long conversionJobId, Long imageNumber) throws Exception {
        String recordingRootDir  = "/Users/swagner/Documents/work/red5_distros/red5_r3200_snapshot/webapps/openmeetings/test/";
        
        String recordingFileDir = recordingRootDir + File.separatorChar + conversionJobId;
@@ -272,8 +271,16 @@ public class WhiteboardConvertionJobManager {
        if (!recordingFileDirFolder.exists()) {
     	   recordingFileDirFolder.mkdir();
        }
+       Double numberOfFolder = Math.floor(imageNumber / 100);
+       String folderDir = ""+numberOfFolder.intValue();
        
-       return recordingFileDir + File.separatorChar + fileNumber + ".svg";
+       String batchFileSVGDir = recordingFileDir + File.separatorChar + folderDir;
+       File recordingBatchFileDirFolder = new File(batchFileSVGDir);
+       if (!recordingBatchFileDirFolder.exists()) {
+    	   recordingBatchFileDirFolder.mkdir();
+       } 
+       
+       return batchFileSVGDir + File.separatorChar + imageNumber + ".svg";
 	}
 	
 	private String generateSVGFileName(Long conversionJobId, Long fileNumber) throws Exception {
