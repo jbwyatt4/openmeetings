@@ -9,7 +9,7 @@
     <many-to-one outer-join="true" insert="true" column="recording_id" lazy="false" update="true" name="recording" class="org.openmeetings.app.hibernate.beans.recording.Recording"/>
     <property name="started" type="java.util.Date" column="started"/>
     <property name="ended" type="java.util.Date" column="ended"/>
-    <property name="currentWhiteBoardAsXml" type="string" column="currentwhiteboardasxml"/>
+    <property name="currentWhiteBoardAsXml" type="text" column="currentwhiteboardasxml"/>
     <property name="endTimeInMilliSeconds" type="long" column="endtimeinmilliseconds"/>
   </class>
 </hibernate-mapping>

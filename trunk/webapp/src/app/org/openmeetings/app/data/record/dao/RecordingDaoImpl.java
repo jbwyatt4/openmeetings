@@ -171,11 +171,14 @@ public class RecordingDaoImpl {
 	
 	public void updateRecording(Recording rec){
 		try {
+			
+			log.debug("updateRecording SET TO TRUE NOW!!! "+rec.getRecording_id()+" "+rec.getWhiteBoardConverted());
+			
 			Object idf = HibernateUtil.createSession();
 			Session session = HibernateUtil.getSession();
 			Transaction tx = session.beginTransaction();
 			session.update(rec);
-			session.refresh(rec);
+			//session.refresh(rec);
 			tx.commit();
 			HibernateUtil.closeSession(idf);
 		} catch (HibernateException ex) {

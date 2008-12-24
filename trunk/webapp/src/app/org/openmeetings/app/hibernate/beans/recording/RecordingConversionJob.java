@@ -73,7 +73,7 @@ public class RecordingConversionJob {
 	/**
      * @hibernate.property
      *  column="currentwhiteboardasxml"
-     *  type="string"
+     *  type="text"
      */	
 	public String getCurrentWhiteBoardAsXml() {
 		return currentWhiteBoardAsXml;

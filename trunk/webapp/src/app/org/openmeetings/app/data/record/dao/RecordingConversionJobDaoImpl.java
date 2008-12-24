@@ -32,6 +32,9 @@ public class RecordingConversionJobDaoImpl {
 	public Long addRecordingConversionJob(RecordingConversionJob recordingConversionJob) {
 		try {
 			
+			log.debug("[addRecordingConversionJob] RecordingConversionJobId "+recordingConversionJob.getRecordingConversionJobId());
+			log.debug("[addRecordingConversionJob] Recording_id "+recordingConversionJob.getRecording().getRecording_id());
+			
 			Object idf = HibernateUtil.createSession();
 			Session session = HibernateUtil.getSession();
 			Transaction tx = session.beginTransaction();
