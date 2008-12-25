@@ -151,7 +151,8 @@ public class GenerateSWF {
 			//Create the Content of the Converter Script (.bat or .sh File)
 			String fileContent = pathToSWFTools + "png2swf"
 					+ " -o " + "\"" + outputfile + "\""
-					+ " -r " + fps;
+					+ " -r " + fps
+					+ " -z ";
 			
 			for (Iterator<String> iter = images.iterator();iter.hasNext();) {
 				fileContent += " " + "\"" + iter.next() +"\"";
