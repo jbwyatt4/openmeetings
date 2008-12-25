@@ -21,6 +21,9 @@ public class RecordingConversionJob {
 	private Date startedPngConverted;
 	private Date endPngConverted;
 	private Long batchProcessCounter = 0L;
+	private Date startedSWFConverted;
+	private Date endSWFConverted;
+	
 	
 	/**
      * 
@@ -145,6 +148,30 @@ public class RecordingConversionJob {
 	}
 	public void setBatchProcessCounter(Long batchProcessCounter) {
 		this.batchProcessCounter = batchProcessCounter;
+	}
+	
+	/**
+     * @hibernate.property
+     *  column="startedswfconverted"
+     *  type="java.util.Date"
+     */
+	public Date getStartedSWFConverted() {
+		return startedSWFConverted;
+	}
+	public void setStartedSWFConverted(Date startedSWFConverted) {
+		this.startedSWFConverted = startedSWFConverted;
+	}
+	
+	/**
+     * @hibernate.property
+     *  column="endswfconverted"
+     *  type="java.util.Date"
+     */
+	public Date getEndSWFConverted() {
+		return endSWFConverted;
+	}
+	public void setEndSWFConverted(Date endSWFConverted) {
+		this.endSWFConverted = endSWFConverted;
 	}
 	
 

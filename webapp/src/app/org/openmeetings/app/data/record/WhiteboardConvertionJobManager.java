@@ -5,6 +5,7 @@ import java.io.FileWriter;
 import java.io.StringWriter;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -17,6 +18,7 @@ import org.openmeetings.app.data.record.dao.RecordingConversionJobDaoImpl;
 import org.openmeetings.app.data.record.dao.RecordingDaoImpl;
 import org.openmeetings.app.data.record.dao.WhiteBoardEventDaoImpl;
 import org.openmeetings.app.documents.GenerateImage;
+import org.openmeetings.app.documents.GenerateSWF;
 import org.openmeetings.app.hibernate.beans.recording.Recording;
 import org.openmeetings.app.hibernate.beans.recording.RecordingConversionJob;
 import org.openmeetings.app.hibernate.beans.recording.WhiteBoardEvent;
@@ -89,6 +91,9 @@ public class WhiteboardConvertionJobManager {
 				
 				//Do SVG to PNG Batch Conversion
 				this.processConvertionJobs();
+				
+				//Do PNG to SWF Conversion
+				this.processConvertionSWFJobs();
 				
 				isRunning = false;
 			} else {
@@ -228,7 +233,9 @@ public class WhiteboardConvertionJobManager {
 			
 			for (RecordingConversionJob recordingConversionJob : listOfConversionJobs) {
 				
-				int maxFolder = Math.round(recordingConversionJob.getImageNumber() / 100);
+				Double maxFolderDoub = Math.floor(recordingConversionJob.getImageNumber() / 100);
+				
+				int maxFolder = maxFolderDoub.intValue();
 				
 				if (maxFolder >= recordingConversionJob.getBatchProcessCounter()) {
 					
@@ -243,10 +250,10 @@ public class WhiteboardConvertionJobManager {
 					
 					
 					
-					GenerateImage.getInstance().convertImageByTypeAndSize(
+					GenerateImage.getInstance().convertImageByTypeAndSizeAndDepth(
 							outputFileNames.get("input"), 
 							outputFileNames.get("output"), 
-							660, 580);
+							660, 580, 8);
 					
 					//Add Count For next Round
 					recordingConversionJob.setBatchProcessCounter(recordingConversionJob.getBatchProcessCounter()+1);
@@ -257,6 +264,7 @@ public class WhiteboardConvertionJobManager {
 					log.debug("Batch Processing Done");
 					
 					recordingConversionJob.setEndPngConverted(new Date());
+					recordingConversionJob.setStartedSWFConverted(new Date());
 					RecordingConversionJobDaoImpl.getInstance().updateRecordingConversionJobs(recordingConversionJob);
 					
 				}
@@ -267,6 +275,63 @@ public class WhiteboardConvertionJobManager {
 			log.error("[processConvertionJobs]",err);
 		}
 	}
+	
+	public synchronized void processConvertionSWFJobs() {
+		try {
+			
+			List<RecordingConversionJob> listOfSWFConversionJobs = RecordingConversionJobDaoImpl.getInstance().getRecordingConversionSWFConversionJobs();
+			
+			log.debug("processSWFJobs SIZE: "+listOfSWFConversionJobs.size());
+			
+			for (RecordingConversionJob recordingConversionJob : listOfSWFConversionJobs) {
+				
+				//Get All Images
+				
+				Double maxFolderDoub = Math.floor(recordingConversionJob.getImageNumber() / 100);
+				long maxFolder = maxFolderDoub.longValue();
+				
+				List<String> images = new LinkedList<String>();
+				
+				for (long i=0;i<maxFolder;i++) {
+					
+					String folderName = this.getBatchFileFolder(recordingConversionJob.getRecordingConversionJobId(), i);	
+					
+					for (int k=0;k<100;k++) {
+						
+						images.add(folderName+k+".png");
+						
+					}
+					
+				}
+				
+				//restImages will be always smaller then 100
+				long restImages = recordingConversionJob.getImageNumber() - (maxFolder*100);
+				
+				log.debug("restImages: "+restImages);
+				
+				for (int k=0;k<restImages;k++) {
+					
+					String folderName = this.getBatchFileFolder(recordingConversionJob.getRecordingConversionJobId(), maxFolder);	
+					
+					images.add(folderName+k+".png");
+					
+				}
+				
+				log.debug("images: "+images); 
+				
+				String output = this.getSWFFileForResult(recordingConversionJob.getRecordingConversionJobId());
+				
+				GenerateSWF.getInstance().generateSWFByImages(images, output, 10);
+				
+				recordingConversionJob.setEndSWFConverted(new Date());
+				RecordingConversionJobDaoImpl.getInstance().updateRecordingConversionJobs(recordingConversionJob);
+				
+			}
+			
+		} catch (Exception err) {
+			log.error("[processConvertionSWFJobs]",err);
+		}
+	}	
 	
 	private void generateFileAsSVG(Map whiteBoardObjects, String roomRecordingInXML, RecordingConversionJob recordingConversionJob) throws Exception {
 		
@@ -415,14 +480,12 @@ public class WhiteboardConvertionJobManager {
 		Map<String, String> returnMap = new HashMap<String, String>();
 
 		returnMap.put("input", batchFileSVGDir + File.separatorChar + "*.svg");
-		returnMap
-				.put("output", batchFilePNGDir + File.separatorChar + "%d.png");
+		returnMap.put("output", batchFilePNGDir + File.separatorChar + "%d.png");
 
 		return returnMap;
 	}
 	
-	private String generateSVGFileName(Long conversionJobId, Long imageNumber)
-			throws Exception {
+	private String generateSVGFileName(Long conversionJobId, Long imageNumber) throws Exception {
 		
 		String recordingRootDir = Application.webAppPath + File.separatorChar
 				+ "upload" + File.separatorChar
@@ -448,6 +511,40 @@ public class WhiteboardConvertionJobManager {
 		}
 
 		return batchFileSVGDir + File.separatorChar + imageNumber + ".svg";
+	}
+	
+	private String getBatchFileFolder(Long conversionJobId,
+			Long folderNumber) throws Exception {
+		
+		String recordingRootDir = Application.webAppPath + File.separatorChar
+				+ "upload" + File.separatorChar
+				+ StreamService.folderForRecordings;
+
+		// The Folders must already exist here otherwise no Image could exist
+		// here, so no need to
+		// check for existance
+		String recordingFileDir = recordingRootDir + File.separatorChar + conversionJobId;
+		String batchFileSVGDir = recordingFileDir + File.separatorChar + folderNumber;
+		String batchFilePNGDir = batchFileSVGDir + File.separatorChar + "PNG" + File.separatorChar;
+
+		File f = new File(batchFilePNGDir);
+		return f.getAbsolutePath() + File.separatorChar;
+	}
+	
+	private String getSWFFileForResult(Long conversionJobId) throws Exception {
+		
+		String recordingRootDir = Application.webAppPath + File.separatorChar
+				+ "upload" + File.separatorChar
+				+ StreamService.folderForRecordings;
+
+		// The Folders must already exist here otherwise no Image could exist
+		// here, so no need to
+		// check for existance
+		String recordingFileDir = recordingRootDir + File.separatorChar + conversionJobId;
+		String recordingFileDirAbsolute = (new File(recordingFileDir)).getAbsolutePath();
+		
+		String swfFile = recordingFileDirAbsolute + File.separatorChar + "whiteboard.swf";
+		return swfFile;
 	}
 	
 }

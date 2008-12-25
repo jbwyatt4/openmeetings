@@ -57,7 +57,7 @@ public class WhiteboardMapToSVG extends BatikMethods {
         		Double width = Double.valueOf(graphObject.get(graphObject.size()-3).toString()).doubleValue();
         		Double height = Double.valueOf(graphObject.get(graphObject.size()-2).toString()).doubleValue();
         		
-        		log.debug("x,y,width,height: "+x+","+y+","+width+","+height);
+        		//log.debug("x,y,width,height: "+x+","+y+","+width+","+height);
         		
         		//Draw a Painting
     	        SVGGraphics2D svgGenerator_temp = new SVGGraphics2D(svgGenerator);

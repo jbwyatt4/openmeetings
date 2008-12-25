@@ -116,6 +116,32 @@ public class RecordingConversionJobDaoImpl {
 		return null;
 	}
 	
+	
+	public List<RecordingConversionJob> getRecordingConversionSWFConversionJobs() {
+		try {
+			
+			String hql = "select c from RecordingConversionJob as c " +
+						"where c.endPngConverted IS NOT NULL " +
+						"AND c.endSWFConverted IS NULL";
+			
+			Object idf = HibernateUtil.createSession();
+			Session session = HibernateUtil.getSession();
+			Transaction tx = session.beginTransaction();
+			Query query = session.createQuery(hql);
+			List<RecordingConversionJob> ll = query.list();
+			tx.commit();
+			HibernateUtil.closeSession(idf);
+			
+			return ll;
+	
+		} catch (HibernateException ex) {
+			log.error("[getRecordingConversionJobs]: " , ex);
+		} catch (Exception ex2) {
+			log.error("[getRecordingConversionJobs]: " , ex2);
+		}
+		return null;
+	}
+	
 	public void updateRecordingConversionJobs(RecordingConversionJob recordingConversionJob) {
 		try {
 			

@@ -15,5 +15,7 @@
     <property name="startedPngConverted" type="java.util.Date" column="startedpngconverted"/>
     <property name="endPngConverted" type="java.util.Date" column="endpngconverted"/>
     <property name="batchProcessCounter" type="long" column="batchprocesscounter"/>
+    <property name="startedSWFConverted" type="java.util.Date" column="startedswfconverted"/>
+    <property name="endSWFConverted" type="java.util.Date" column="endswfconverted"/>
   </class>
 </hibernate-mapping>
