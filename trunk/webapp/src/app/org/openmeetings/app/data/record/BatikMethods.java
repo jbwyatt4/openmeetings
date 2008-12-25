@@ -59,11 +59,11 @@ public class BatikMethods {
 		for (Iterator iter = pointsList.keySet().iterator();iter.hasNext();) {
 			Map<Integer,Object> point = (Map<Integer,Object>) pointsList.get(iter.next());
 			
-			log.debug("POINT FROM TO :" +
-					Double.valueOf(point.get(1).toString()).doubleValue()+","+
-					Double.valueOf(point.get(2).toString()).doubleValue()+","+ 
-					Double.valueOf(point.get(3).toString()).doubleValue()+","+
-					Double.valueOf(point.get(4).toString()).doubleValue());
+//			log.debug("POINT FROM TO :" +
+//					Double.valueOf(point.get(1).toString()).doubleValue()+","+
+//					Double.valueOf(point.get(2).toString()).doubleValue()+","+ 
+//					Double.valueOf(point.get(3).toString()).doubleValue()+","+
+//					Double.valueOf(point.get(4).toString()).doubleValue());
 			
 			this.drawThickLine2DPaint(g2d, Double.valueOf(point.get(1).toString()).doubleValue(), 
 					Double.valueOf(point.get(2).toString()).doubleValue(), 
