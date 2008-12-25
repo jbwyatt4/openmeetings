@@ -38,6 +38,11 @@ public class WhiteboardConvertionJobManager {
 	//So 200 Milliseconds == 5 Images per second
 	private static Long numberOfMilliseconds = 200L;
 	
+	//This is the number of Images of SVG Files per Folder
+	//Its rather small as ImageMagick seems to have problems in 
+	//processing bigger numbers
+	private static Long maxNumberOfBatchFolderSize = 10L;
+	
 	private static boolean isRunning = false;
 	
 	//This is the 
@@ -233,7 +238,7 @@ public class WhiteboardConvertionJobManager {
 			
 			for (RecordingConversionJob recordingConversionJob : listOfConversionJobs) {
 				
-				Double maxFolderDoub = Math.floor(recordingConversionJob.getImageNumber() / 100);
+				Double maxFolderDoub = Math.floor(recordingConversionJob.getImageNumber() / maxNumberOfBatchFolderSize);
 				
 				int maxFolder = maxFolderDoub.intValue();
 				
@@ -287,7 +292,7 @@ public class WhiteboardConvertionJobManager {
 				
 				//Get All Images
 				
-				Double maxFolderDoub = Math.floor(recordingConversionJob.getImageNumber() / 100);
+				Double maxFolderDoub = Math.floor(recordingConversionJob.getImageNumber() / maxNumberOfBatchFolderSize);
 				long maxFolder = maxFolderDoub.longValue();
 				
 				List<String> images = new LinkedList<String>();
@@ -296,7 +301,7 @@ public class WhiteboardConvertionJobManager {
 					
 					String folderName = this.getBatchFileFolder(recordingConversionJob.getRecordingConversionJobId(), i);	
 					
-					for (int k=0;k<100;k++) {
+					for (int k=0;k<maxNumberOfBatchFolderSize;k++) {
 						
 						images.add(folderName+k+".png");
 						
@@ -304,8 +309,8 @@ public class WhiteboardConvertionJobManager {
 					
 				}
 				
-				//restImages will be always smaller then 100
-				long restImages = recordingConversionJob.getImageNumber() - (maxFolder*100);
+				//restImages will be always smaller then maxNumberOfBatchFolderSize
+				long restImages = recordingConversionJob.getImageNumber() - (maxFolder*maxNumberOfBatchFolderSize);
 				
 				log.debug("restImages: "+restImages);
 				
@@ -411,7 +416,7 @@ public class WhiteboardConvertionJobManager {
        if (!recordingFileDirFolder.exists()) {
     	   recordingFileDirFolder.mkdir();
        }
-       Double numberOfFolder = Math.floor(imageNumber / 100);
+       Double numberOfFolder = Math.floor(imageNumber / maxNumberOfBatchFolderSize);
        String folderDir = ""+numberOfFolder.intValue();
        
        String batchFileSVGDir = recordingFileDir + File.separatorChar + folderDir;
@@ -501,7 +506,7 @@ public class WhiteboardConvertionJobManager {
 		if (!recordingFileDirFolder.exists()) {
 			recordingFileDirFolder.mkdir();
 		}
-		Double numberOfFolder = Math.floor(imageNumber / 100);
+		Double numberOfFolder = Math.floor(imageNumber / maxNumberOfBatchFolderSize);
 		String folderDir = "" + numberOfFolder.intValue();
 
 		String batchFileSVGDir = recordingFileDir + File.separatorChar + folderDir;
