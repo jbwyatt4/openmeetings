@@ -43,9 +43,20 @@ public class WhiteboardConvertionJobManager {
 	//processing bigger numbers
 	private static Long maxNumberOfBatchFolderSize = 10L;
 	
+	//This is the bpp (Bits per Pixel) BUT in this case its meant
+	//for each channel ... RGB each one 8Bit
+	//by default ImageMagick uses 16 buts it seems like SWFTools only can 
+	//take 8Bit
+	private static int depth = 8;
+	
+	//This is the number of SVGs that will be created in one
+	//quartz scheduler run
+	private static int svgBatchProcessByQuery = 100;
+	
 	private static boolean isRunning = false;
 	
-	//This is the 
+	//in JUnit tests you have to change that to true
+	//see also Methods on bottom to change the Default Out dir in JUnit
 	private static boolean isDebug = false;
 
 	private static final Log log = LogFactory.getLog(WhiteboardConvertionJobManager.class);
@@ -90,7 +101,7 @@ public class WhiteboardConvertionJobManager {
 				}
 				
 				//Do SVG Conversion for next 100 SVG Images, that should fill one Folder
-				for (int i=0;i<100;i++) {
+				for (int i=0;i<svgBatchProcessByQuery;i++) {
 					this.processJobs();
 				}
 				
@@ -258,7 +269,7 @@ public class WhiteboardConvertionJobManager {
 					GenerateImage.getInstance().convertImageByTypeAndSizeAndDepth(
 							outputFileNames.get("input"), 
 							outputFileNames.get("output"), 
-							660, 580, 8);
+							660, 580, depth);
 					
 					//Add Count For next Round
 					recordingConversionJob.setBatchProcessCounter(recordingConversionJob.getBatchProcessCounter()+1);
