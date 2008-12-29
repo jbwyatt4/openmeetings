@@ -2,7 +2,7 @@ package org.openmeetings.test.basic;
 
 import org.openmeetings.app.data.basic.Configurationmanagement;
 import org.openmeetings.app.data.basic.Fieldmanagment;
-import org.openmeetings.app.data.basic.Languagemanagement;
+import org.openmeetings.app.data.basic.FieldLanguageDaoImpl;
 import org.openmeetings.app.data.basic.Navimanagement;
 import org.openmeetings.app.data.user.Organisationmanagement;
 import org.openmeetings.app.data.user.Statemanagement;

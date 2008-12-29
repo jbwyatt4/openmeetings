@@ -1,6 +1,7 @@
 package org.openmeetings.app.data.basic;
 
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Iterator;
 
@@ -38,6 +39,52 @@ public class Fieldmanagment {
 			instance = new Fieldmanagment();
 		}
 		return instance;
+	}
+	
+	//Reflect the Reverse Order!!
+	public Fieldlanguagesvalues getFieldByIdAndLanguageByNavi(Long fieldvalues_id, Long language_id) {
+		try {
+			Object idf = HibernateUtil.createSession();
+			Session session = HibernateUtil.getSession();
+			Transaction tx = session.beginTransaction();
+			Query query = session.createQuery("select f from Fieldlanguagesvalues f WHERE f.language_id = :language_id AND f.fieldvalues_id = :fieldvalues_id");
+			query.setLong("fieldvalues_id", fieldvalues_id);
+			query.setLong("language_id", language_id);
+			Fieldlanguagesvalues flv = (Fieldlanguagesvalues) query.uniqueResult();
+			tx.commit();
+			HibernateUtil.closeSession(idf);
+			
+			FieldLanguage fieldLanguage = FieldLanguageDaoImpl.getInstance().getFieldLanguageById(language_id);
+
+			//Check for Right To Left Languages
+			if (fieldLanguage.getRtl()) {
+				Fieldlanguagesvalues remote = flv;
+				Fieldlanguagesvalues toAdd = new Fieldlanguagesvalues();
+				toAdd.setFieldlanguagesvalues_id(remote.getFieldlanguagesvalues_id());
+				toAdd.setFieldvalues_id(remote.getFieldvalues_id());
+				toAdd.setLanguage_id(remote.getLanguage_id());
+
+				String[] splitted = remote.getValue().split(" ");
+				String reverseOrder = "";
+				for (int i=splitted.length-1;i>=0;i--) {
+					reverseOrder += splitted[i];
+					if (splitted.length != 1) {
+						reverseOrder += " ";
+					}
+				}
+				toAdd.setValue(reverseOrder);
+				
+				return toAdd;
+			} else {
+				return flv;
+			}
+			
+		} catch (HibernateException ex) {
+			log.error("[getFieldByIdAndLanguage]: " + ex);
+		} catch (Exception ex2) {
+			log.error("[getFieldByIdAndLanguage]: " + ex2);
+		}
+		return null;
 	}
 
 	public Fieldlanguagesvalues getFieldByIdAndLanguage(Long fieldvalues_id, Long language_id) {
@@ -133,8 +180,42 @@ public class Fieldmanagment {
 //				log.debug("IDs: "+flang.getFieldlanguagesvalues_id()+" "+flang.getFieldvalues_id());
 //				
 //			}
+			
+			FieldLanguage fieldLanguage = FieldLanguageDaoImpl.getInstance().getFieldLanguageById(language_id);
 
-			return returnList;
+			//Check for Right To Left Languages
+			if (fieldLanguage.getRtl()) {
+				
+				List<Fieldlanguagesvalues> returnRtlList = new LinkedList<Fieldlanguagesvalues>();
+				
+				for (Iterator<Fieldlanguagesvalues> iter = returnList.iterator();iter.hasNext();) {
+					Fieldlanguagesvalues remote = iter.next();
+					Fieldlanguagesvalues toAdd = new Fieldlanguagesvalues();
+					toAdd.setFieldlanguagesvalues_id(remote.getFieldlanguagesvalues_id());
+					toAdd.setFieldvalues_id(remote.getFieldvalues_id());
+					toAdd.setLanguage_id(remote.getLanguage_id());
+
+					String[] splitted = remote.getValue().split(" ");
+					String reverseOrder = "";
+					for (int i=splitted.length-1;i>=0;i--) {
+						reverseOrder += splitted[i];
+						if (splitted.length != 1) {
+							reverseOrder += " ";
+						}
+					}
+					toAdd.setValue(reverseOrder);
+					
+					returnRtlList.add(toAdd);
+				}
+				
+				return returnRtlList;
+			} else {
+				
+				return returnList;
+				
+			}
+			
+			
 		} catch (HibernateException ex) {
 			log.error("[getConfKey]: " + ex);
 		} catch (Exception ex2) {

@@ -10,7 +10,7 @@ import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
 import org.openmeetings.app.data.basic.Fieldmanagment;
-import org.openmeetings.app.data.basic.Languagemanagement;
+import org.openmeetings.app.data.basic.FieldLanguageDaoImpl;
 import org.openmeetings.app.hibernate.beans.lang.FieldLanguage;
 import org.openmeetings.app.hibernate.beans.lang.Fieldvalues;
 import org.openmeetings.app.hibernate.beans.lang.Fieldlanguagesvalues;
@@ -32,7 +32,7 @@ public class LanguageImport {
 	public Long addLanguageByDocument(Long language_id, InputStream is) throws Exception {
 		
 		//return null if no language availible
-		if (Languagemanagement.getInstance().getFieldLanguageById(language_id)==null) {
+		if (FieldLanguageDaoImpl.getInstance().getFieldLanguageById(language_id)==null) {
 			return null;
 		}
 		

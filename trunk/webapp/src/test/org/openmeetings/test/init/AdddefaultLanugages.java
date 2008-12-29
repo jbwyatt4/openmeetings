@@ -2,7 +2,7 @@ package org.openmeetings.test.init;
 
 import junit.framework.TestCase;
 
-import org.openmeetings.app.data.basic.Languagemanagement;
+import org.openmeetings.app.data.basic.FieldLanguageDaoImpl;
 
 public class AdddefaultLanugages extends TestCase {
 
@@ -12,9 +12,9 @@ public class AdddefaultLanugages extends TestCase {
 	
 	public void testAdddefaultLanugages(){
 		
-		Languagemanagement.getInstance().addLanguage("deutsch",false);
-		Languagemanagement.getInstance().addLanguage("english",false);
-		Languagemanagement.getInstance().addLanguage("french",false);
+		FieldLanguageDaoImpl.getInstance().addLanguage("deutsch",false);
+		FieldLanguageDaoImpl.getInstance().addLanguage("english",false);
+		FieldLanguageDaoImpl.getInstance().addLanguage("french",false);
 		
 	}
 }

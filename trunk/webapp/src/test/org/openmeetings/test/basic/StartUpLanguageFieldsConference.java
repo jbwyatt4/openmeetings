@@ -1,7 +1,7 @@
 package org.openmeetings.test.basic;
 
 import org.openmeetings.app.data.basic.Fieldmanagment;
-import org.openmeetings.app.data.basic.Languagemanagement;
+import org.openmeetings.app.data.basic.FieldLanguageDaoImpl;
 
 import junit.framework.TestCase;
 
@@ -46,7 +46,7 @@ public class StartUpLanguageFieldsConference extends TestCase {
 		/** Read all languages files */
 		for (int i = 0; i < listLanguages.length ; i ++)
 		{
-			Languagemanagement.getInstance().addLanguage(listLanguages[i],false);
+			FieldLanguageDaoImpl.getInstance().addLanguage(listLanguages[i],false);
 			nodeListLanguages[i] = getLanguageXmlFile(listLanguages[i]);
 		}	
 		

@@ -7,7 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.openmeetings.app.data.basic.AuthLevelmanagement;
 import org.openmeetings.app.data.basic.Configurationmanagement;
-import org.openmeetings.app.data.basic.Languagemanagement;
+import org.openmeetings.app.data.basic.FieldLanguageDaoImpl;
 import org.openmeetings.app.data.basic.Sessionmanagement;
 import org.openmeetings.app.data.user.Usermanagement;
 import org.openmeetings.app.data.basic.Fieldmanagment;
@@ -29,7 +29,7 @@ public class LanguageService {
 	 * @return
 	 */
 	public List getLanguages(){
-		return Languagemanagement.getInstance().getLanguages();
+		return FieldLanguageDaoImpl.getInstance().getLanguages();
 	}
 	
 	/**
@@ -71,7 +71,7 @@ public class LanguageService {
         Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
         if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)) {
         	if (langName.length()==0) return new Long(-30);
-        	return Languagemanagement.getInstance().addLanguage(langName,false);
+        	return FieldLanguageDaoImpl.getInstance().addLanguage(langName,false);
         }
         return null;
 	}
@@ -81,7 +81,7 @@ public class LanguageService {
         Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
         if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)) {
         	if (langName.length()==0) return new Long(-30);
-        	return Languagemanagement.getInstance().updateFieldLanguage(language_id, langName, "false");
+        	return FieldLanguageDaoImpl.getInstance().updateFieldLanguage(language_id, langName, "false");
         }
         return null;
 	}
@@ -90,7 +90,7 @@ public class LanguageService {
         Long users_id = Sessionmanagement.getInstance().checkSession(SID);
         Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
         if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)) {
-        	return Languagemanagement.getInstance().updateFieldLanguage(language_id, "", "true");
+        	return FieldLanguageDaoImpl.getInstance().updateFieldLanguage(language_id, "", "true");
         }
         return null;
 	}
