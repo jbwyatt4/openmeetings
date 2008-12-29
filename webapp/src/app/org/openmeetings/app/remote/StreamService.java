@@ -45,6 +45,7 @@ import org.openmeetings.app.hibernate.beans.recording.RoomStream;
 import org.openmeetings.app.hibernate.beans.recording.WhiteBoardEvent;
 import org.openmeetings.app.data.record.dao.ChatvaluesEventDaoImpl;
 import org.openmeetings.app.data.record.dao.RecordingClientDaoImpl;
+import org.openmeetings.app.data.record.dao.RecordingConversionJobDaoImpl;
 import org.openmeetings.app.data.record.dao.RecordingDaoImpl;
 import org.openmeetings.app.data.record.dao.RoomRecordingDaoImpl;
 import org.openmeetings.app.data.record.dao.RoomStreamDaoImpl;
@@ -514,51 +515,28 @@ public class StreamService implements IPendingServiceCallback {
 	
 	public Recording getRecordingById(String SID, Long recording_id) {
 		try {
+			
 	        Long users_id = Sessionmanagement.getInstance().checkSession(SID);
 	        Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);  
 
 	        if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)){
 	        	Recording rec = RecordingDaoImpl.getInstance().getRecordingById(recording_id);
 	        	
-				
-				
-				IScope scope = Red5.getConnectionLocal().getScope().getParent();
-				String current_dir = scope.getResource("upload/").getFile().getAbsolutePath();
-				//System.out.println(current_dir  + File.separatorChar + this.folderForRecordings);
-				File f = new File(current_dir + File.separatorChar + folderForRecordings);
-				if (!f.exists()){
-					f.mkdir();
-				}
-				String fileName = f.getAbsolutePath() + File.separatorChar + fileNameXML+recording_id+".xml";
-				//System.out.println("fileName"+fileName);
-				BufferedReader reader = new BufferedReader(new FileReader(fileName));
-			    String xmlString = "";
-			    while (reader.ready()) {
-			    	xmlString += reader.readLine();
-			    }
-			    
-			    XStream xStream = new XStream(new XppDriver());
-				xStream.setMode(XStream.NO_REFERENCES);
-			    RoomRecording roomRecording = (RoomRecording)xStream.fromXML(xmlString);
-			    
-			    for (Iterator<ChatvaluesEvent> iter = roomRecording.getChatvalues().iterator();iter.hasNext();) {
-			    	ChatvaluesEvent chatvaluesEvent = iter.next();
-			    	XStream xStream_chat = new XStream(new XppDriver());
-			    	xStream_chat.setMode(XStream.NO_REFERENCES);
-			    	chatvaluesEvent.setActionObj(xStream_chat.fromXML(chatvaluesEvent.getAction()));
-			    }
-			    
-			    for (Iterator<WhiteBoardEvent> iter = roomRecording.getWhiteboard().iterator();iter.hasNext();) {
-			    	WhiteBoardEvent whiteBoardEvent = iter.next();
-			    	XStream xStream_chat = new XStream(new XppDriver());
-			    	xStream_chat.setMode(XStream.NO_REFERENCES);
-			    	whiteBoardEvent.setActionObj(xStream_chat.fromXML(whiteBoardEvent.getAction()));
-			    }
-			    
-				rec.setRoomRecording(roomRecording);
-				
+	        	rec.getRoomRecording().setChatvalues(
+	        			ChatvaluesEventDaoImpl.getInstance().getChatvaluesEventByRoomRecordingId(
+	        						rec.getRoomRecording().getRoomrecordingId()));
+	        	
+	        	rec.getRoomRecording().setRoomStreams(
+	        			RoomStreamDaoImpl.getInstance().getRoomStreamsByRoomRecordingId(
+	        					rec.getRoomRecording().getRoomrecordingId()));
+	        	
+				//Set Conversion Job Record
+	        	rec.setRecordingConversionJob(RecordingConversionJobDaoImpl.getInstance().
+	        			getRecordingConversionJobsByRecording(rec.getRecording_id()));
+	        	
 				return rec;
 	        }
+	        
 		} catch (Exception err) {
 			log.error("[getRecordingById]",err);
 		}		

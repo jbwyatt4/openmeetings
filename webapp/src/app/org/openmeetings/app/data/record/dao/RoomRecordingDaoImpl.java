@@ -97,4 +97,23 @@ public class RoomRecordingDaoImpl {
 		return null;
 	}
 	
+	public Long updateRoomRecording(RoomRecording roomRecording) {
+		try {
+			
+			Object idf = HibernateUtil.createSession();
+			Session session = HibernateUtil.getSession();
+			Transaction tx = session.beginTransaction();
+			session.update(roomRecording);
+			
+			tx.commit();
+			HibernateUtil.closeSession(idf);
+			
+		} catch (HibernateException ex) {
+			log.error("[updateRoomRecording]: " , ex);
+		} catch (Exception ex2) {
+			log.error("[updateRoomRecording]: " , ex2);
+		}
+		return null;
+	}
+	
 }
