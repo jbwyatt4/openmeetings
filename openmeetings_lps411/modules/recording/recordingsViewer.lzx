@@ -111,16 +111,20 @@
 		            	if ($debug) Debug.write("getRecordingById",parent.recordingValue.roomRecording);
 		            	parent.timerDel = new LzDelegate( parent, "timeLineAction" );
 		            	if ($debug) Debug.write("value.room_setup: ",value.roomRecording.room_setup);
-		            	parent.initRecordingsViewByType();
-		            	if (parent.recordingValue.roomRecording.initwhiteboardvars!=null && parent.recordingValue.roomRecording.initwhiteboardvars.length>0){
-		            		canvas._drawarea.loadwmlObjectToStage(parent.recordingValue.roomRecording.initwhiteboardvars,"","","",true,true);
-		            	} else {
-		            		parent.timeLineAction();
-	            	}
+		            	
 	            ]]>	        	          				
 	        </handler>	
 	  	</netRemoteCallHib>  
-	
+        
+        <!--
+        parent.initRecordingsViewByType();
+                        if (parent.recordingValue.roomRecording.initwhiteboardvars!=null && parent.recordingValue.roomRecording.initwhiteboardvars.length>0){
+                            canvas._drawarea.loadwmlObjectToStage(parent.recordingValue.roomRecording.initwhiteboardvars,"","","",true,true);
+                        } else {
+                            parent.timeLineAction();
+                    }
+	    -->
+        
             <method name="timeLineAction">
                 <![CDATA[
                     var perc = Math.round((100/this.recordingValue.duration)*this.currentTime);
