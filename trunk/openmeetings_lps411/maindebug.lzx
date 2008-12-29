@@ -15,7 +15,7 @@
 <include href="incubator/lzcombobox.lzx" />
 <include href="incubator/shadowbox.lzx" />
 
-<include href="resources/" />
+<include href="resources/" /> 
 <include href="base/" /><!-- attributes,methods,datasets,are moved into /base -->
 <include href="modules/" /> 
 

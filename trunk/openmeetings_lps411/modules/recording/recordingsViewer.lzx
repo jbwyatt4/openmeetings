@@ -16,6 +16,9 @@
 		<attribute name="timeStepSyncing" value="500" type="number" />
 		<attribute name="roomobj" value="null" />
 		<attribute name="initObjectCount" value="0" type="number" />
+		
+		
+		<attribute name="downloadUrlWhiteboard" value="" type="string" />
 	
 		<handler name="oninit">
 			canvas.thishib.modus = "recording";
@@ -67,7 +70,8 @@
 										        		y:this.roomobj.whiteBoardPanelYPosition,
 										        		width:this.roomobj.whiteBoardPanelWidth,
 										        		height:this.roomobj.whiteBoardPanelHeight});
-	 	       	canvas._drawarea.isinitRecordingLoad = true;
+										        		
+	 	       	this._whiteboardpanelrecord._whiteboard.setSource(this.downloadUrlWhiteboard);
 	        }
 	
 	        	if (this.roomobj.showFilesPanel){
@@ -96,7 +100,9 @@
 			}
 			
 			new lz._recorderClickMask(this,{name:'_recorderclickmask'});
-			new lz._recorderProgressBar(this,{name:'progress'});		
+			new lz._recorderProgressBar(this,{name:'progress'});	
+			
+			this.timeLineAction();
 		</method>
 		
 	  	<netRemoteCallHib name="getRecordingById" funcname="streamservice.getRecordingById" remotecontext="$once{ canvas.thishib }">   
@@ -106,15 +112,35 @@
 	        	<handler name="ondata" args="value">	
 	            	<![CDATA[
 	            		parent.recordingValue = value;
-		            	if ($debug) Debug.write(parent.recordingValue.roomRecording.streamlist);
-		            	if ($debug) Debug.write(parent.recordingValue.roomRecording.roomclients);
+	            		//Reset XML in Object to make it better readable
+	            		parent.recordingValue.recordingConversionJob.currentWhiteBoardAsXml = null;
+	            		parent.recordingValue.roomRecording.initwhiteboardvarsInXml = null;
+	            		
+		            	if ($debug) Debug.write(parent.recordingValue);
+		            	if ($debug) Debug.write(parent.recordingValue.recordingConversionJob);
+		            	
 		            	if ($debug) Debug.write("getRecordingById",parent.recordingValue.roomRecording);
 		            	parent.timerDel = new LzDelegate( parent, "timeLineAction" );
 		            	if ($debug) Debug.write("value.room_setup: ",value.roomRecording.room_setup);
 		            	
+		            	parent.downloadUrlWhiteboard = parent.generateFileLink(parent.recordingValue.recordingConversionJob.recordingConversionJobId);
+		            	
+		            	if ($debug) Debug.write("downloadUrl: ",parent.downloadUrlWhiteboard);
+		            	
+		            	parent.initRecordingsViewByType();
 	            ]]>	        	          				
 	        </handler>	
 	  	</netRemoteCallHib>  
+	  	
+	  	<method name="generateFileLink" args="recordingConversionJobId">
+	    	<![CDATA[
+	        	return 'http://'+canvas.rtmphostlocal+':'+canvas.red5httpport+'/'+canvas.webAppRootKey+'/DownloadHandler?fileName=whiteboard.swf' +
+		        '&moduleName=videoconf1' +
+		        '&parentPath='+recordingConversionJobId+'/' +
+		        '&room_id=recorded' +
+		        '&sid='+canvas.sessionId;    	
+		    ]]>
+	    </method>	
         
         <!--
         parent.initRecordingsViewByType();
@@ -182,16 +208,6 @@
                         }
                     }
                     
-                    var whiteBoard = this.recordingValue.roomRecording.whiteboard;
-                    for (var i=0;i<whiteBoard.length;i++){
-                        var starttime =  (Math.round(whiteBoard[i].starttime/this.timeStepSyncing))*this.timeStepSyncing;
-                        if (starttime == this.currentTime){
-                            if ($debug) Debug.write("found Whiteboard Action",whiteBoard[i].actionObj);
-                            var action = whiteBoard[i].actionObj;
-                            canvas._drawarea.sendRecordedObject(action[2],action[3],false);
-                        }
-                    }
-                    
                     var chatValues = this.recordingValue.roomRecording.chatvalues;
                     for (var i=0;i<chatValues.length;i++){
                         var starttime =  (Math.round(chatValues[i].starttime/this.timeStepSyncing))*this.timeStepSyncing;
@@ -233,19 +249,11 @@
 	<!-- this private class contains whiteBoad class which is declared in modules/conference/whiteBoad/whiteBoard.lzx -->
 	<class name="_whiteBoardPanelRecord" extends="guiPresenter" x="274" y="2"
 			width="660" height="592" closable="false" title="Whiteboard" resizeable="false">
-		<whiteBoard name="_whiteboard" y="22" x="4">
-	      	<handler name="onsharedMessage" args="obj"> 
-	            	if( $debug ) Debug.write("send: ",obj);
-	        	</handler>   
-			
-			<handler name="isloadingImage" args="val" >
-				if( $debug ) Debug.write("isloadingImage: ",val);
+		<view name="_whiteboard" y="22" x="4">
+			<handler name="onload">
+				if ($debug) Debug.write("Process Next after Buffering",this);
 			</handler>
-			
-			<handler name="isloadedImage" args="val" >        
-				if( $debug ) Debug.write("isloadedImage: ",val);
-			</handler>
-		</whiteBoard>    
+		</view>   
 	</class>  
 
 	<class name="_recorderClickMask" extends="view" width="${ parent.width }" height="${ parent.height }">
