@@ -14,6 +14,7 @@ public class FieldLanguage {
 	private Date starttime;
 	private Date updatetime;
 	private String deleted;
+	private Boolean rtl;
 	
     public FieldLanguage() {
 		super();
@@ -78,5 +79,21 @@ public class FieldLanguage {
 	}
 	public void setDeleted(String deleted) {
 		this.deleted = deleted;
-	}	
+	}
+
+	/**
+     * @hibernate.property
+     *  column="rtl"
+     *  type="boolean"
+     */	
+	public Boolean getRtl() {
+		return rtl;
+	}
+	public void setRtl(Boolean rtl) {
+		this.rtl = rtl;
+	}
+
+	
+	
+
 }

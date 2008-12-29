@@ -322,9 +322,9 @@ public class ImportInitvalues {
 	 * @return
 	 * @throws Exception
 	 */
-	public LinkedHashMap<Integer,String> getLanguageFiles(String filePath) throws Exception {
+	public LinkedHashMap<Integer,LinkedHashMap<String,Object>> getLanguageFiles(String filePath) throws Exception {
 
-		LinkedHashMap<Integer,String> languages = new LinkedHashMap<Integer,String>();
+		LinkedHashMap<Integer,LinkedHashMap<String,Object>> languages = new LinkedHashMap<Integer,LinkedHashMap<String,Object>>();
 
 		SAXReader reader = new SAXReader();
 		Document document = reader.read(filePath
@@ -337,9 +337,14 @@ public class ImportInitvalues {
 			Element item = it.next();
 			String country = item.getText();
 			Integer id = Integer.valueOf(item.attribute("id").getValue()).intValue();
+			Boolean rtl = Boolean.valueOf(item.attribute("rightToLeft").getValue()).booleanValue();
 
+			LinkedHashMap<String,Object> lang = new LinkedHashMap<String,Object>();
+			lang.put("id", id);
+			lang.put("name", country);
+			lang.put("rtl", rtl);
 			//log.error("getLanguageFiles "+country);
-			languages.put(id,country);
+			languages.put(id,lang);
 
 		}
 		log.debug("Countries ADDED ");
@@ -353,7 +358,7 @@ public class ImportInitvalues {
 
 		//String listLanguages[] = {"deutsch", "english", "french", "spanish"};
 
-		LinkedHashMap<Integer,String> listlanguages = this.getLanguageFiles(filePath);
+		LinkedHashMap<Integer,LinkedHashMap<String,Object>> listlanguages = this.getLanguageFiles(filePath);
 
 		// TODO empty tables before launch
 		//Languagemanagement.getInstance().emptyFieldLanguage();
@@ -364,13 +369,15 @@ public class ImportInitvalues {
 		for (Iterator<Integer> itLang = listlanguages.keySet().iterator(); itLang
 				.hasNext();) {
 			Integer langId = itLang.next();
-			String lang = listlanguages.get(langId);
+			LinkedHashMap<String,Object> lang = listlanguages.get(langId);
 			log.debug("loadInitLanguages lang: " + lang);
 
-			Long languages_id = Languagemanagement.getInstance().addLanguage(lang);
+			String langName = (String) lang.get("name");
+			Boolean langRtl = (Boolean) lang.get("rtl");
+			Long languages_id = Languagemanagement.getInstance().addLanguage(langName,langRtl);
 
 			SAXReader reader = new SAXReader();
-			Document document = reader.read(filePath + lang + ".xml");
+			Document document = reader.read(filePath + langName + ".xml");
 
 			Element root = document.getRootElement();
 

@@ -71,7 +71,7 @@ public class LanguageService {
         Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
         if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)) {
         	if (langName.length()==0) return new Long(-30);
-        	return Languagemanagement.getInstance().addLanguage(langName);
+        	return Languagemanagement.getInstance().addLanguage(langName,false);
         }
         return null;
 	}

@@ -35,7 +35,7 @@ public class Languagemanagement {
 	}
 	
 
-	public Long addLanguage(String langName) {
+	public Long addLanguage(String langName, Boolean langRtl) {
 		try {
 			Object idf = HibernateUtil.createSession();
 			Session session = HibernateUtil.getSession();
@@ -45,6 +45,7 @@ public class Languagemanagement {
 			fl.setStarttime(new Date());
 			fl.setDeleted("false");
 			fl.setName(langName);
+			fl.setRtl(langRtl);
 
 			Long languages_id = (Long)session.save(fl);
 
