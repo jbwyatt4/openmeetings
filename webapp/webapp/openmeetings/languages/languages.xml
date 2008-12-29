@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <language>
-	<lang id="1" >english</lang>
-	<lang id="2" >deutsch</lang>
-	<lang id="3" >french</lang>
-	<lang id="4" >italian</lang>
-	<lang id="5" >portugues</lang>
-	<lang id="6" >spanish</lang>
-	<lang id="7" >russian</lang>
-	<lang id="8" >swedish</lang>
-	<lang id="9" >chinese simplified</lang>
-	<lang id="10" >chinese traditional</lang>
-	<lang id="11" >korean</lang>
-	<lang id="12" >arabic</lang>
-	<lang id="13" >japanese</lang>
-	<lang id="14" >indonesian</lang>
-	<lang id="15" >hungarian</lang>
+	<lang id="1" rightToLeft="false">english</lang>
+	<lang id="2" rightToLeft="false">deutsch</lang>
+	<lang id="3" rightToLeft="false">french</lang>
+	<lang id="4" rightToLeft="false">italian</lang>
+	<lang id="5" rightToLeft="false">portugues</lang>
+	<lang id="6" rightToLeft="false">spanish</lang>
+	<lang id="7" rightToLeft="false">russian</lang>
+	<lang id="8" rightToLeft="false">swedish</lang>
+	<lang id="9" rightToLeft="false">chinese simplified</lang>
+	<lang id="10" rightToLeft="false">chinese traditional</lang>
+	<lang id="11" rightToLeft="false">korean</lang>
+	<lang id="12" rightToLeft="false">arabic</lang>
+	<lang id="13" rightToLeft="false">japanese</lang>
+	<lang id="14" rightToLeft="false">indonesian</lang>
+	<lang id="15" rightToLeft="false">hungarian</lang>
+    <lang id="16" rightToLeft="true">parsi</lang>
 </language>

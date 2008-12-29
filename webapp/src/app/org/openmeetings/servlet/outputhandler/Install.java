@@ -2,6 +2,7 @@ package org.openmeetings.servlet.outputhandler;
 
 import java.util.LinkedHashMap;
 import java.io.File;
+import java.util.Iterator;
 import java.io.IOException;
 import java.io.StringWriter;
 
@@ -73,7 +74,13 @@ public class Install extends VelocityViewServlet {
 					int i = InstallationDocumentHandler.getInstance().getCurrentStepNumber(working_dir);
 					if (i == 0){
 						String filePath = getServletContext().getRealPath("/")+ImportInitvalues.languageFolderName;
-						LinkedHashMap<Integer,String> allLanguages = ImportInitvalues.getInstance().getLanguageFiles(filePath);
+						LinkedHashMap<Integer,LinkedHashMap<String,Object>> allLanguagesAll = ImportInitvalues.getInstance().getLanguageFiles(filePath);
+						LinkedHashMap<Integer,String> allLanguages = new LinkedHashMap<Integer,String>();
+						for (Iterator<Integer> iter=allLanguagesAll.keySet().iterator();iter.hasNext();) {
+							Integer key = iter.next();
+							String langName = (String) allLanguagesAll.get(key).get("name");
+							allLanguages.put(key, langName);
+						}
 						
 						LinkedHashMap<String,String> allFonts = new LinkedHashMap<String,String>();
 						allFonts.put("TimesNewRoman", "TimesNewRoman");
@@ -103,7 +110,13 @@ public class Install extends VelocityViewServlet {
 					//InstallationDocumentHandler.getInstance().createDocument(working_dir+InstallationDocumentHandler.installFileName,1);
 					
 					String filePath = getServletContext().getRealPath("/")+ImportInitvalues.languageFolderName;
-					LinkedHashMap<Integer,String> allLanguages = ImportInitvalues.getInstance().getLanguageFiles(filePath);
+					LinkedHashMap<Integer,LinkedHashMap<String,Object>> allLanguagesAll = ImportInitvalues.getInstance().getLanguageFiles(filePath);
+					LinkedHashMap<Integer,String> allLanguages = new LinkedHashMap<Integer,String>();
+					for (Iterator<Integer> iter=allLanguagesAll.keySet().iterator();iter.hasNext();) {
+						Integer key = iter.next();
+						String langName = (String) allLanguagesAll.get(key).get("name");
+						allLanguages.put(key, langName);
+					}
 					
 					LinkedHashMap<String,String> allFonts = new LinkedHashMap<String,String>();
 					allFonts.put("TimesNewRoman", "TimesNewRoman");

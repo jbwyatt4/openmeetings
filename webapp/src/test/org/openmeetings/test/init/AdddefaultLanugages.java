@@ -12,9 +12,9 @@ public class AdddefaultLanugages extends TestCase {
 	
 	public void testAdddefaultLanugages(){
 		
-		Languagemanagement.getInstance().addLanguage("deutsch");
-		Languagemanagement.getInstance().addLanguage("english");
-		Languagemanagement.getInstance().addLanguage("french");
+		Languagemanagement.getInstance().addLanguage("deutsch",false);
+		Languagemanagement.getInstance().addLanguage("english",false);
+		Languagemanagement.getInstance().addLanguage("french",false);
 		
 	}
 }

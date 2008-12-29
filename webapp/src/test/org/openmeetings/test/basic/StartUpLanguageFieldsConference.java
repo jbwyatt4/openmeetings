@@ -46,7 +46,7 @@ public class StartUpLanguageFieldsConference extends TestCase {
 		/** Read all languages files */
 		for (int i = 0; i < listLanguages.length ; i ++)
 		{
-			Languagemanagement.getInstance().addLanguage(listLanguages[i]);
+			Languagemanagement.getInstance().addLanguage(listLanguages[i],false);
 			nodeListLanguages[i] = getLanguageXmlFile(listLanguages[i]);
 		}	
 		
