@@ -53,6 +53,31 @@ public class RecordingConversionJobDaoImpl {
 		return null;
 	}
 	
+	public RecordingConversionJob getRecordingConversionJobsByRecording(long recording_id) {
+		try {
+			
+			String hql = "select c from RecordingConversionJob as c " +
+						"where c.recording.recording_id = :recording_id ";
+			
+			Object idf = HibernateUtil.createSession();
+			Session session = HibernateUtil.getSession();
+			Transaction tx = session.beginTransaction();
+			Query query = session.createQuery(hql);
+			query.setLong("recording_id", recording_id);
+			RecordingConversionJob recordingConversionJob = (RecordingConversionJob) query.uniqueResult();
+			tx.commit();
+			HibernateUtil.closeSession(idf);
+			
+			return recordingConversionJob;
+	
+		} catch (HibernateException ex) {
+			log.error("[getRecordingConversionJobsByRecording]: " , ex);
+		} catch (Exception ex2) {
+			log.error("[getRecordingConversionJobsByRecording]: " , ex2);
+		}
+		return null;
+	}
+	
 	/**
 	 * get all Conversion Jobs where END Time is not set for
 	 * the SVG Conversion

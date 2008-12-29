@@ -32,6 +32,9 @@ public class Recording {
 	
 	private Boolean whiteBoardConverted;
 
+	//set through Logic not through Hibernate
+	private RecordingConversionJob recordingConversionJob;
+	
 	/**
      * @hibernate.property
      *  column="comment"
@@ -195,5 +198,15 @@ public class Recording {
 	public void setWhiteBoardConverted(Boolean whiteBoardConverted) {
 		this.whiteBoardConverted = whiteBoardConverted;
 	}
+	
+	
+	public RecordingConversionJob getRecordingConversionJob() {
+		return recordingConversionJob;
+	}
+	public void setRecordingConversionJob(
+			RecordingConversionJob recordingConversionJob) {
+		this.recordingConversionJob = recordingConversionJob;
+	}
+	
 	
 }

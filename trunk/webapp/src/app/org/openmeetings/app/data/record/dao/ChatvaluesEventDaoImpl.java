@@ -1,11 +1,15 @@
 package org.openmeetings.app.data.record.dao;
 
+import java.util.List;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.openmeetings.app.hibernate.beans.recording.ChatvaluesEvent;
+import org.openmeetings.app.hibernate.beans.recording.RecordingConversionJob;
 import org.openmeetings.app.hibernate.utils.HibernateUtil;
 
 public class ChatvaluesEventDaoImpl {
@@ -24,6 +28,32 @@ public class ChatvaluesEventDaoImpl {
 
 		return instance;
 	}
+	
+	public List<ChatvaluesEvent> getChatvaluesEventByRoomRecordingId(Long roomrecordingId) {
+		try {
+			
+			String hql = "select c from ChatvaluesEvent as c " +
+						"where c.roomRecording.roomrecordingId = :roomrecordingId";
+			
+			Object idf = HibernateUtil.createSession();
+			Session session = HibernateUtil.getSession();
+			Transaction tx = session.beginTransaction();
+			Query query = session.createQuery(hql);
+			query.setLong("roomrecordingId", roomrecordingId);
+			List<ChatvaluesEvent> ll = query.list();
+			tx.commit();
+			HibernateUtil.closeSession(idf);
+			
+			return ll;
+	
+		} catch (HibernateException ex) {
+			log.error("[getChatvaluesEventByRoomRecordingId]: " , ex);
+		} catch (Exception ex2) {
+			log.error("[getChatvaluesEventByRoomRecordingId]: " , ex2);
+		}
+		return null;
+	}
+	
 	
 	public Long addChatvaluesEvent(ChatvaluesEvent chatvaluesEvent) {
 		try {

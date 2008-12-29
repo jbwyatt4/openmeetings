@@ -112,6 +112,14 @@ public class GenerateSWF {
 		}
 	}
 	
+	/**
+	 * This Function generate a SWF but 3 times faster then the input fps
+	 * as the resulting SWF has  to have a FPS of 30
+	 * @param images
+	 * @param outputfile
+	 * @param fps
+	 * @return
+	 */
 	public HashMap<String,Object> generateSWFByImages(List<String> images, String outputfile, int fps) {
 		HashMap<String,Object> returnMap = new HashMap<String,Object>();
 		returnMap.put("process", "generateSWFByImages");		
@@ -151,11 +159,14 @@ public class GenerateSWF {
 			//Create the Content of the Converter Script (.bat or .sh File)
 			String fileContent = pathToSWFTools + "png2swf"
 					+ " -o " + "\"" + outputfile + "\""
-					+ " -r " + fps
+					+ " -r " + (fps*3)
 					+ " -z ";
 			
 			for (Iterator<String> iter = images.iterator();iter.hasNext();) {
-				fileContent += " " + "\"" + iter.next() +"\"";
+				String fileName = iter.next();
+				fileContent += " " + "\"" + fileName +"\"";
+				fileContent += " " + "\"" + fileName +"\"";
+				fileContent += " " + "\"" + fileName +"\"";
 			}
 			
 			fileContent += Application.lineSeperator + "exit";
