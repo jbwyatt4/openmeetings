@@ -18,18 +18,18 @@ import org.openmeetings.app.hibernate.beans.lang.FieldLanguage;
  * @author sebastianwagner
  *
  */
-public class Languagemanagement {
+public class FieldLanguageDaoImpl {
 
-	private static final Logger log = LoggerFactory.getLogger(Languagemanagement.class);
+	private static final Logger log = LoggerFactory.getLogger(FieldLanguageDaoImpl.class);
 
-	private Languagemanagement() {
+	private FieldLanguageDaoImpl() {
 	}
 
-	private static Languagemanagement instance = null;
+	private static FieldLanguageDaoImpl instance = null;
 
-	public static synchronized Languagemanagement getInstance() {
+	public static synchronized FieldLanguageDaoImpl getInstance() {
 		if (instance == null) {
-			instance = new Languagemanagement();
+			instance = new FieldLanguageDaoImpl();
 		}
 		return instance;
 	}

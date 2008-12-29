@@ -22,7 +22,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.openmeetings.app.data.basic.Sessionmanagement;
 import org.openmeetings.app.data.user.Usermanagement;
-import org.openmeetings.app.data.basic.Languagemanagement;
+import org.openmeetings.app.data.basic.FieldLanguageDaoImpl;
 import org.openmeetings.app.hibernate.beans.lang.FieldLanguage;
 import org.openmeetings.app.hibernate.beans.lang.Fieldvalues;
 import org.openmeetings.app.data.basic.Fieldmanagment;
@@ -68,7 +68,7 @@ public class LangExport extends HttpServlet {
 			log.debug("user_level: "+user_level);
 			
 			if (user_level!=null && user_level > 0) {
-				FieldLanguage fl = Languagemanagement.getInstance().getFieldLanguageById(language_id);
+				FieldLanguage fl = FieldLanguageDaoImpl.getInstance().getFieldLanguageById(language_id);
 
 				List<Fieldvalues> fvList = Fieldmanagment.getInstance().getMixedFieldValuesList(language_id);
 				

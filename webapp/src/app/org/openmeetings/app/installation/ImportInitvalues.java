@@ -13,7 +13,7 @@ import org.dom4j.Document;
 import org.openmeetings.app.data.basic.Configurationmanagement;
 import org.openmeetings.app.data.basic.ErrorManagement;
 import org.openmeetings.app.data.basic.Fieldmanagment;
-import org.openmeetings.app.data.basic.Languagemanagement;
+import org.openmeetings.app.data.basic.FieldLanguageDaoImpl;
 import org.openmeetings.app.data.basic.Navimanagement;
 import org.openmeetings.app.data.conference.Roommanagement;
 import org.openmeetings.app.data.user.Organisationmanagement;
@@ -374,7 +374,7 @@ public class ImportInitvalues {
 
 			String langName = (String) lang.get("name");
 			Boolean langRtl = (Boolean) lang.get("rtl");
-			Long languages_id = Languagemanagement.getInstance().addLanguage(langName,langRtl);
+			Long languages_id = FieldLanguageDaoImpl.getInstance().addLanguage(langName,langRtl);
 
 			SAXReader reader = new SAXReader();
 			Document document = reader.read(filePath + langName + ".xml");
