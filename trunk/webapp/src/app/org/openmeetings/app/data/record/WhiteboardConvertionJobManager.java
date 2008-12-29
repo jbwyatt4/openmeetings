@@ -316,8 +316,7 @@ public class WhiteboardConvertionJobManager {
 			
 			List<RecordingConversionJob> listOfSWFConversionJobs = RecordingConversionJobDaoImpl.getInstance().getRecordingConversionSWFConversionJobs();
 			
-
-			log.debug("processSWFJobs SIZE: "+listOfSWFConversionJobs.size());
+			//log.debug("processSWFJobs SIZE: "+listOfSWFConversionJobs.size());
 			
 			for (RecordingConversionJob recordingConversionJob : listOfSWFConversionJobs) {
 				
