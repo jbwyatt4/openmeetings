@@ -113,8 +113,7 @@ public class GenerateSWF {
 	}
 	
 	/**
-	 * This Function generate a SWF but 3 times faster then the input fps
-	 * as the resulting SWF has  to have a FPS of 30
+	 * This Function generate a SWF
 	 * @param images
 	 * @param outputfile
 	 * @param fps
@@ -159,13 +158,105 @@ public class GenerateSWF {
 			//Create the Content of the Converter Script (.bat or .sh File)
 			String fileContent = pathToSWFTools + "png2swf"
 					+ " -o " + "\"" + outputfile + "\""
-					+ " -r " + (fps*3)
+					+ " -r " + fps
 					+ " -z ";
 			
 			for (Iterator<String> iter = images.iterator();iter.hasNext();) {
 				String fileName = iter.next();
 				fileContent += " " + "\"" + fileName +"\"";
-				fileContent += " " + "\"" + fileName +"\"";
+			}
+			
+			fileContent += Application.lineSeperator + "exit";
+				
+			//execute the Script
+			FileOutputStream fos = new FileOutputStream(executable_fileName);
+			fos.write(fileContent.getBytes());
+			fos.close();
+			
+			//make new shell script executable
+			//in JAVA6 this can be done directly through the api
+			if (System.getProperty("os.name").toUpperCase().indexOf("WINDOWS") == -1) {
+				MakeExectuable.getInstance().setExecutable(executable_fileName);
+			}
+			
+			Runtime rt = Runtime.getRuntime();			
+			
+			for (int i=0;i<cmd.length;i++){
+				log.debug("cmd: "+cmd[i]);
+			}
+			
+			returnMap.put("command", cmd.toString());
+			Process proc = rt.exec(cmd);
+			InputStream stderr = proc.getErrorStream();
+			InputStreamReader isr = new InputStreamReader(stderr);
+			BufferedReader br = new BufferedReader(isr);
+			String line = null;
+			String error = "";
+			while ((line = br.readLine()) != null)
+				error += line;
+			returnMap.put("error", error);
+			int exitVal = proc.waitFor();
+			returnMap.put("exitValue", exitVal);
+			return returnMap;
+		} catch (Throwable t) {
+			t.printStackTrace();
+			returnMap.put("error", t.getMessage());
+			returnMap.put("exitValue", -1);
+			return returnMap;
+		}
+	}
+	
+	/**
+	 * Combines a bunch of SWFs to one swf by concatenate
+	 * @param swfs
+	 * @param outputswf
+	 * @param fps
+	 * @return
+	 */
+	public HashMap<String,Object> generateSWFByCombine(List<String> swfs, String outputswf, int fps) {
+		HashMap<String,Object> returnMap = new HashMap<String,Object>();
+		returnMap.put("process", "generateSWFByImages");		
+		try {
+			
+			//Init variables
+			String[] cmd;
+			String executable_fileName = "";	
+			String pathToSWFTools = Configurationmanagement.getInstance().getConfKey(3,"swftools_path").getConf_value();
+			//If SWFTools Path is not blank a File.seperator at the end of the path is needed
+			if(!pathToSWFTools.equals("") && !pathToSWFTools.endsWith(File.separator)){
+				pathToSWFTools = pathToSWFTools + File.separator;
+			}
+			
+
+			//If no Windows Platform
+			if (System.getProperty("os.name").toUpperCase().indexOf("WINDOWS") == -1) {
+				String runtimeFile = "swfconverter.sh";
+				executable_fileName = Application.batchFileFir+"SWFCOMBINE_" 
+						+ CalendarPatterns.getTimeForStreamId(new Date()) +"_"+ runtimeFile;
+		
+				cmd = new String[1];
+				cmd[0] = executable_fileName;
+			} else {
+				String runtimeFile = "swfconverter.bat";
+				executable_fileName = Application.batchFileFir+"SWFIMAGECONVERT_" 
+						+ CalendarPatterns.getTimeForStreamId(new Date()) +"_"+ runtimeFile;
+				
+				cmd = new String[4];
+				cmd[0] = "cmd.exe";
+				cmd[1] = "/C";
+				cmd[2] = "start";
+				cmd[3] = executable_fileName;
+			}
+			log.debug("executable_fileName: "+executable_fileName);
+			
+			//Create the Content of the Converter Script (.bat or .sh File)
+			String fileContent = pathToSWFTools + "swfcombine"
+					+ " -o " + "\"" + outputswf + "\""
+					+ " -r " + fps
+					+ " -z -a ";
+			
+			for (Iterator<String> iter = swfs.iterator();iter.hasNext();) {
+				String fileName = iter.next();
 				fileContent += " " + "\"" + fileName +"\"";
 			}
 			

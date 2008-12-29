@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Iterator;
 import java.util.Map;
 
 import org.apache.batik.dom.GenericDOMImplementation;
@@ -223,11 +224,12 @@ public class WhiteboardConvertionJobManager {
 					
 					} else {
 						
-						log.debug("THIS FILE IS PROCESSED: "+recordingConversionJob.getRecordingConversionJobId());
+						log.debug("THIS FILE IS PROCESSED UPDATE: "+recordingConversionJob.getRecordingConversionJobId());
 						
 						//FIXME: this should happen only one time per conversion Job
 						
 						recordingConversionJob.setEnded(new Date());
+						recordingConversionJob.setStartedPngConverted(new Date());
 						recordingConversionJob.setBatchProcessCounter(0L);
 						RecordingConversionJobDaoImpl.getInstance().updateRecordingConversionJobs(recordingConversionJob);
 						
@@ -274,16 +276,21 @@ public class WhiteboardConvertionJobManager {
 							660, 580, depth);
 					
 					//Add Count For next Round
-					recordingConversionJob.setBatchProcessCounter(recordingConversionJob.getBatchProcessCounter()+1);
-					RecordingConversionJobDaoImpl.getInstance().updateRecordingConversionJobs(recordingConversionJob);
+					RecordingConversionJob recordingConversionJobUpdate = RecordingConversionJobDaoImpl.getInstance().
+						getRecordingConversionJobsByRecordingConversionJobsId(recordingConversionJob.getRecordingConversionJobId());
+				
+					recordingConversionJobUpdate.setBatchProcessCounter(recordingConversionJob.getBatchProcessCounter()+1);
+					RecordingConversionJobDaoImpl.getInstance().updateRecordingConversionJobs(recordingConversionJobUpdate);
 					
 				} else {
 					
 					log.debug("Batch Processing Done");
+					RecordingConversionJob recordingConversionJobUpdate = RecordingConversionJobDaoImpl.getInstance().
+						getRecordingConversionJobsByRecordingConversionJobsId(recordingConversionJob.getRecordingConversionJobId());
 					
-					recordingConversionJob.setEndPngConverted(new Date());
-					recordingConversionJob.setStartedSWFConverted(new Date());
-					RecordingConversionJobDaoImpl.getInstance().updateRecordingConversionJobs(recordingConversionJob);
+					recordingConversionJobUpdate.setEndPngConverted(new Date());
+					recordingConversionJobUpdate.setStartedSWFConverted(new Date());
+					RecordingConversionJobDaoImpl.getInstance().updateRecordingConversionJobs(recordingConversionJobUpdate);
 					
 				}
 				
@@ -316,6 +323,10 @@ public class WhiteboardConvertionJobManager {
 					
 					for (int k=0;k<maxNumberOfBatchFolderSize;k++) {
 						
+						//three times to simulate a FPS of 30 while we only generate
+						//an image every 200 milliseconds (would be fps of 10)
+						images.add(folderName+k+".png");
+						images.add(folderName+k+".png");
 						images.add(folderName+k+".png");
 						
 					}
@@ -331,18 +342,69 @@ public class WhiteboardConvertionJobManager {
 					
 					String folderName = this.getBatchFileFolder(recordingConversionJob.getRecordingConversionJobId(), maxFolder);	
 					
+					//three times to simulate a FPS of 30 while we only generate
+					//an image every 200 milliseconds (would be fps of 10)
+					images.add(folderName+k+".png");
+					images.add(folderName+k+".png");
 					images.add(folderName+k+".png");
 					
 				}
 				
 				log.debug("images: "+images); 
+				log.debug("images: "+images.size()); 
 				
 				String output = this.getSWFFileForResult(recordingConversionJob.getRecordingConversionJobId());
 				
-				GenerateSWF.getInstance().generateSWFByImages(images, output, 10);
+				String outputFolder = this.getSWFFolderForResult(recordingConversionJob.getRecordingConversionJobId());
 				
-				recordingConversionJob.setEndSWFConverted(new Date());
-				RecordingConversionJobDaoImpl.getInstance().updateRecordingConversionJobs(recordingConversionJob);
+				//Generate that SWF only by 1000 Files as png2swf.c has a MAX_INPUT_FILE of 1024
+				
+				//This workaround is just to workaround the 1024 File LIMIT of SWFTools!!!
+				
+				List<String> outputfiles = new LinkedList<String>();
+				
+				int maxnumber = Double.valueOf(Math.floor(images.size() / 1000)).intValue();
+				
+				log.debug("maxnumber: "+maxnumber);
+				
+				if (maxnumber > 0) {
+					for (int i=0;i<=maxnumber;i++) {
+						
+						log.debug("Generate SWF for Items: "+i+" TO : "+(i*1000));
+						String fileName = outputFolder + File.separatorChar + "whiteboard"+i+".swf";
+						outputfiles.add(fileName);
+						
+						List<String> imageForConvert = new LinkedList<String>();
+						for (int k=0;k<1000;k++) {
+							int index = k+(i*1000);
+							log.debug("index Number "+index+" size: "+images.size());
+							if (index < images.size()) {
+								imageForConvert.add(images.get(index));
+							} else {
+								break;
+							}
+						}
+						
+						GenerateSWF.getInstance().generateSWFByImages(imageForConvert, fileName, 30);
+					}
+					
+					//Combine Resulting SWFs to one SWF
+					
+					//FIXME: IT SEEMS LIKE SWFCOMBINE DOES PRODUCE INVALID Files!!
+					GenerateSWF.getInstance().generateSWFByCombine(outputfiles, output, 30);
+					
+				} else {
+					
+					//Directly write to SWF
+					GenerateSWF.getInstance().generateSWFByImages(images, output, 30);
+					
+					
+				}
+				RecordingConversionJob recordingConversionJobUpdate = RecordingConversionJobDaoImpl.getInstance().
+					getRecordingConversionJobsByRecordingConversionJobsId(recordingConversionJob.getRecordingConversionJobId());
+		
+				recordingConversionJobUpdate.setEndSWFConverted(new Date());
+				RecordingConversionJobDaoImpl.getInstance().updateRecordingConversionJobs(recordingConversionJobUpdate);
 				
 			}
 			
@@ -413,11 +475,16 @@ public class WhiteboardConvertionJobManager {
 
 		FileWriter fileWriter = new FileWriter(firstImageName);
 		svgGenerator.stream(fileWriter, useCSS);
+		
+		RecordingConversionJob recordingConversionJobToStore = RecordingConversionJobDaoImpl.getInstance().getRecordingConversionJobsByRecordingConversionJobsId(
+				recordingConversionJob.getRecordingConversionJobId());
 
-		recordingConversionJob.setEndTimeInMilliSeconds(recordingConversionJob.getEndTimeInMilliSeconds() + numberOfMilliseconds);
-		recordingConversionJob.setCurrentWhiteBoardAsXml(roomRecordingInXML);
-		recordingConversionJob.setImageNumber(recordingConversionJob.getImageNumber()+1);
-		RecordingConversionJobDaoImpl.getInstance().updateRecordingConversionJobs(recordingConversionJob);
+		recordingConversionJobToStore.setEndTimeInMilliSeconds(recordingConversionJob.getEndTimeInMilliSeconds() + numberOfMilliseconds);
+		recordingConversionJobToStore.setCurrentWhiteBoardAsXml(roomRecordingInXML);
+		recordingConversionJobToStore.setImageNumber(recordingConversionJob.getImageNumber()+1);
+		
+		log.debug("updateRecordingConversionJobs: generateFileAsSVG");
+		RecordingConversionJobDaoImpl.getInstance().updateRecordingConversionJobs(recordingConversionJobToStore);
        
 	}
 	
@@ -547,6 +614,21 @@ public class WhiteboardConvertionJobManager {
 
 		File f = new File(batchFilePNGDir);
 		return f.getAbsolutePath() + File.separatorChar;
+	}
+	
+	private String getSWFFolderForResult(Long conversionJobId) throws Exception {
+		
+		String recordingRootDir = Application.webAppPath + File.separatorChar
+				+ "upload" + File.separatorChar
+				+ StreamService.folderForRecordings;
+
+		// The Folders must already exist here otherwise no Image could exist
+		// here, so no need to
+		// check for existance
+		String recordingFileDir = recordingRootDir + File.separatorChar + conversionJobId;
+		String recordingFileDirAbsolute = (new File(recordingFileDir)).getAbsolutePath();
+		
+		return recordingFileDirAbsolute + File.separatorChar;
 	}
 	
 	private String getSWFFileForResult(Long conversionJobId) throws Exception {

@@ -52,6 +52,31 @@ public class RecordingConversionJobDaoImpl {
 		}
 		return null;
 	}
+
+	public RecordingConversionJob getRecordingConversionJobsByRecordingConversionJobsId(long recordingConversionJobId) {
+		try {
+			
+			String hql = "select c from RecordingConversionJob as c " +
+						"where c.recordingConversionJobId = :recordingConversionJobId ";
+			
+			Object idf = HibernateUtil.createSession();
+			Session session = HibernateUtil.getSession();
+			Transaction tx = session.beginTransaction();
+			Query query = session.createQuery(hql);
+			query.setLong("recordingConversionJobId", recordingConversionJobId);
+			RecordingConversionJob recordingConversionJob = (RecordingConversionJob) query.uniqueResult();
+			tx.commit();
+			HibernateUtil.closeSession(idf);
+			
+			return recordingConversionJob;
+	
+		} catch (HibernateException ex) {
+			log.error("[getRecordingConversionJobsByRecordingConversionJobsId]: " , ex);
+		} catch (Exception ex2) {
+			log.error("[getRecordingConversionJobsByRecordingConversionJobsId]: " , ex2);
+		}
+		return null;
+	}
 	
 	public RecordingConversionJob getRecordingConversionJobsByRecording(long recording_id) {
 		try {
@@ -176,6 +201,7 @@ public class RecordingConversionJobDaoImpl {
 			Session session = HibernateUtil.getSession();
 			Transaction tx = session.beginTransaction();
 			session.update(recordingConversionJob);
+			
 			tx.commit();
 			HibernateUtil.closeSession(idf);
 			
