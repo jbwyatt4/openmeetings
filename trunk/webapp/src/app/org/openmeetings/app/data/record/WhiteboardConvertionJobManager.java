@@ -15,6 +15,7 @@ import org.apache.batik.dom.svg.SVGDOMImplementation;
 import org.apache.batik.svggen.SVGGraphics2D;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.commons.transaction.util.FileHelper;
 import org.openmeetings.app.data.record.dao.RecordingConversionJobDaoImpl;
 import org.openmeetings.app.data.record.dao.RecordingDaoImpl;
 import org.openmeetings.app.data.record.dao.RoomRecordingDaoImpl;
@@ -55,6 +56,9 @@ public class WhiteboardConvertionJobManager {
 	//This is the number of SVGs that will be created in one
 	//quartz scheduler run
 	private static int svgBatchProcessByQuery = 100;
+	
+	private static int defaultWidth = 660;
+	private static int defaultHeight = 620;
 	
 	private static boolean isRunning = false;
 	
@@ -105,14 +109,16 @@ public class WhiteboardConvertionJobManager {
 				
 				//Do SVG Conversion for next 100 SVG Images, that should fill one Folder
 				for (int i=0;i<svgBatchProcessByQuery;i++) {
-					this.processJobs();
+					if (!this.processJobs()) {
+						break;
+					}
 				}
 				
 				//Do SVG to PNG Batch Conversion
 				this.processConvertionJobs();
 				
-				//Do PNG to SWF Conversion
-				this.processConvertionSWFJobs();
+				//Do Batch FFMPEG Conversion
+				this.processFFmpegJob();
 				
 				isRunning = false;
 			} else {
@@ -125,7 +131,7 @@ public class WhiteboardConvertionJobManager {
 		}
 	}
 
-	public synchronized void processJobs() {
+	public synchronized boolean processJobs() {
 		try {
 			
 			List<RecordingConversionJob> listOfConversionJobs = RecordingConversionJobDaoImpl.getInstance().getRecordingConversionJobs();
@@ -222,6 +228,7 @@ public class WhiteboardConvertionJobManager {
 						
 						this.generateFileAsSVG(whiteBoardObjects, roomRecordingInXMLToSave, recordingConversionJob);
 					
+						return true;
 					} else {
 						
 						log.debug("THIS FILE IS PROCESSED UPDATE: "+recordingConversionJob.getRecordingConversionJobId());
@@ -233,6 +240,7 @@ public class WhiteboardConvertionJobManager {
 						recordingConversionJob.setBatchProcessCounter(0L);
 						RecordingConversionJobDaoImpl.getInstance().updateRecordingConversionJobs(recordingConversionJob);
 						
+						return false;
 					}
 				}
 				
@@ -240,8 +248,9 @@ public class WhiteboardConvertionJobManager {
 			
 		} catch (Exception err) {
 			log.error("[processJobs]",err);
+			return false;
 		}
-		
+		return false;
 	}
 	
 	public synchronized void processConvertionJobs() {
@@ -273,7 +282,7 @@ public class WhiteboardConvertionJobManager {
 					GenerateImage.getInstance().convertImageByTypeAndSizeAndDepth(
 							outputFileNames.get("input"), 
 							outputFileNames.get("output"), 
-							660, 580, depth);
+							defaultWidth, 580, depth);
 					
 					//Add Count For next Round
 					RecordingConversionJob recordingConversionJobUpdate = RecordingConversionJobDaoImpl.getInstance().
@@ -301,11 +310,13 @@ public class WhiteboardConvertionJobManager {
 		}
 	}
 	
-	public synchronized void processConvertionSWFJobs() {
+
+	private synchronized void processFFmpegJob() {
 		try {
 			
 			List<RecordingConversionJob> listOfSWFConversionJobs = RecordingConversionJobDaoImpl.getInstance().getRecordingConversionSWFConversionJobs();
 			
+
 			log.debug("processSWFJobs SIZE: "+listOfSWFConversionJobs.size());
 			
 			for (RecordingConversionJob recordingConversionJob : listOfSWFConversionJobs) {
@@ -326,9 +337,6 @@ public class WhiteboardConvertionJobManager {
 						//three times to simulate a FPS of 30 while we only generate
 						//an image every 200 milliseconds (would be fps of 10)
 						images.add(folderName+k+".png");
-						images.add(folderName+k+".png");
-						images.add(folderName+k+".png");
-						
 					}
 					
 				}
@@ -345,9 +353,6 @@ public class WhiteboardConvertionJobManager {
 					//three times to simulate a FPS of 30 while we only generate
 					//an image every 200 milliseconds (would be fps of 10)
 					images.add(folderName+k+".png");
-					images.add(folderName+k+".png");
-					images.add(folderName+k+".png");
-					
 				}
 				
 				log.debug("images: "+images); 
@@ -356,50 +361,52 @@ public class WhiteboardConvertionJobManager {
 				String output = this.getSWFFileForResult(recordingConversionJob.getRecordingConversionJobId());
 				
 				String outputFolder = this.getSWFFolderForResult(recordingConversionJob.getRecordingConversionJobId());
-				
-				//Generate that SWF only by 1000 Files as png2swf.c has a MAX_INPUT_FILE of 1024
-				
-				//This workaround is just to workaround the 1024 File LIMIT of SWFTools!!!
-				
-				List<String> outputfiles = new LinkedList<String>();
-				
-				int maxnumber = Double.valueOf(Math.floor(images.size() / 1000)).intValue();
-				
-				log.debug("maxnumber: "+maxnumber);
-				
-				if (maxnumber > 0) {
-					for (int i=0;i<=maxnumber;i++) {
-						
-						log.debug("Generate SWF for Items: "+i+" TO : "+(i*1000));
-						String fileName = outputFolder + File.separatorChar + "whiteboard"+i+".swf";
-						outputfiles.add(fileName);
-						
-						List<String> imageForConvert = new LinkedList<String>();
-						for (int k=0;k<1000;k++) {
-							int index = k+(i*1000);
-							log.debug("index Number "+index+" size: "+images.size());
-							if (index < images.size()) {
-								imageForConvert.add(images.get(index));
-							} else {
-								break;
-							}
-						}
-						
-						GenerateSWF.getInstance().generateSWFByImages(imageForConvert, fileName, 30);
-					}
-					
-					//Combine Resulting SWFs to one SWF
-					
-					//FIXME: IT SEEMS LIKE SWFCOMBINE DOES PRODUCE INVALID Files!!
-					GenerateSWF.getInstance().generateSWFByCombine(outputfiles, output, 30);
-					
-				} else {
-					
-					//Directly write to SWF
-					GenerateSWF.getInstance().generateSWFByImages(images, output, 30);
-					
-					
+				String pngOutputFolder = outputFolder + File.separatorChar + "PNG";
+				File pngFolder = new File(pngOutputFolder);
+				if (!pngFolder.exists()) {
+					pngFolder.mkdir();
 				}
+				
+				//Move Files to result folder and reflect that we need 30 FPS instead of 5 FPS in the initial Break Down
+				int i = 0;
+				for (Iterator<String> iter=images.iterator();iter.hasNext();) {
+					String fileToMove = iter.next();
+					log.debug("fileToMove: "+fileToMove);
+					File fileTo = new File(fileToMove);
+					log.debug("fileTo: "+fileTo);
+					if (fileTo.exists()) {
+						log.debug("InputFile Does exist");
+					}
+					FileHelper.copy(
+						new File(fileToMove), 
+						new File(pngOutputFolder + File.separatorChar + "" + i + ".png"));
+					i++;
+					FileHelper.copy(
+							new File(fileToMove), 
+							new File(pngOutputFolder + File.separatorChar + "" + i + ".png"));
+					i++;
+					FileHelper.copy(
+							new File(fileToMove), 
+							new File(pngOutputFolder + File.separatorChar + "" + i + ".png"));
+					i++;
+					FileHelper.copy(
+							new File(fileToMove), 
+							new File(pngOutputFolder + File.separatorChar + "" + i + ".png"));
+					i++;
+					FileHelper.copy(
+							new File(fileToMove), 
+							new File(pngOutputFolder + File.separatorChar + "" + i + ".png"));
+					i++;
+					FileHelper.copy(
+							new File(fileToMove), 
+							new File(pngOutputFolder + File.separatorChar + "" + i + ".png"));
+					i++;
+				}
+				
+				String pngOutputFolderWildCard = pngOutputFolder + File.separatorChar + "%d.png";
+				
+				GenerateSWF.getInstance().generateSWFByFFMpeg(pngOutputFolderWildCard, output, 30,defaultWidth,defaultHeight);
+				
 				RecordingConversionJob recordingConversionJobUpdate = RecordingConversionJobDaoImpl.getInstance().
 					getRecordingConversionJobsByRecordingConversionJobsId(recordingConversionJob.getRecordingConversionJobId());
 		
@@ -409,9 +416,9 @@ public class WhiteboardConvertionJobManager {
 			}
 			
 		} catch (Exception err) {
-			log.error("[processConvertionSWFJobs]",err);
+			log.error("[processFFmpegJob]",err);
 		}
-	}	
+	}
 	
 	private void generateFileAsSVG(Map whiteBoardObjects, String roomRecordingInXML, RecordingConversionJob recordingConversionJob) throws Exception {
 		
@@ -430,8 +437,8 @@ public class WhiteboardConvertionJobManager {
 
         
         // Set the width and height attributes on the root 'svg' element.
-        svgRoot.setAttributeNS(null, "width", ""+660);
-        svgRoot.setAttributeNS(null, "height", ""+620);
+        svgRoot.setAttributeNS(null, "width", ""+defaultWidth);
+        svgRoot.setAttributeNS(null, "height", ""+defaultHeight);
         
 
         // Create an instance of the SVG Generator.
@@ -483,7 +490,7 @@ public class WhiteboardConvertionJobManager {
 		recordingConversionJobToStore.setCurrentWhiteBoardAsXml(roomRecordingInXML);
 		recordingConversionJobToStore.setImageNumber(recordingConversionJob.getImageNumber()+1);
 		
-		log.debug("updateRecordingConversionJobs: generateFileAsSVG");
+		log.debug("updateRecordingConversionJobs: generateFileAsSVG: "+recordingConversionJobToStore.getEnded());
 		RecordingConversionJobDaoImpl.getInstance().updateRecordingConversionJobs(recordingConversionJobToStore);
        
 	}
