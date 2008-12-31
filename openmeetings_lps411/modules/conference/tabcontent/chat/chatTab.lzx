@@ -7,8 +7,12 @@ This is used in the conference.
 -->
 <class name="chatTab" extends="simpleBaseTabpane" >
 
-	<view name="_chatoutputborder" height="${ parent.height-30 }"
-        bgcolor="$once{ canvas.basebgcolorizer }" width="${ parent.width-2 }">
+    <!--
+    bgcolor="$once{ canvas.basebgcolorizer }" 
+     -->
+     
+	<view name="_chatoutputborder" height="${ parent.height-48 }"
+       bgcolor="$once{ canvas.basebgcolorizer }"  width="${ parent.width-2 }">
 		
 		<chatOutput name="_chatoutput" x="1" y="1" >
 			<handler name="oninit">
@@ -19,7 +23,7 @@ This is used in the conference.
 	</view>
 	
 	<chatTabBottom name="_chattabbottom" 
-				   y="${ parent.height-28 }" x="0" width="${ parent.width-2 }" />
+				   y="${ parent.height-46 }" x="0" width="${ parent.width-2 }" />
 	
 </class>
 

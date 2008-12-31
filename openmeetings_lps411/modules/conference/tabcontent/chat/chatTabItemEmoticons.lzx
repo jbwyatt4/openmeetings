@@ -36,7 +36,7 @@
 	<!-- space between each line of text -->
 	<attribute name="leading" value="5" type="number" />
 	
-	<text multiline="true" x="40" y="20" width="$once{ parent.width - 40 }" fontsize="12" selectable="false" >
+	<text multiline="true" x="40" y="20" width="$once{ parent.width - 40 }" fontsize="11" selectable="false" >
 		<handler name="oninit">
 			<![CDATA[
 				this.sprite.__LZtextclip.wordWrap = false;

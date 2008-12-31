@@ -14,7 +14,7 @@
 	-->
 	<include href="extensions/html.lzx"/>
 
-	<class name="conferenceBrowser" extends="labelExplorerBox" labelid="539">
+	<class name="conferenceBrowser" extends="labelExplorerBox" labelid="539" closable="true">
 		<view name="browser" y="20">
 			<view name="navigation" layout="axis:x">
 		       	<edittext name="url" width="${classroot.width-parent.readStart.width}"> 

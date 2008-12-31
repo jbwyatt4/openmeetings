@@ -36,7 +36,7 @@
 	
 	
 	
-	<text multiline="true" x="40" y="20" text="$once{ parent.cbtext }"
+	<text multiline="true" x="40" y="20" fontsize="10" text="$once{ parent.cbtext }"
 		  width="220" selectable="true" >
 	</text>
 
