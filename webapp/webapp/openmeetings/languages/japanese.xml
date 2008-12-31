@@ -1752,4 +1752,10 @@ languagesディレクトリにコピーして、
   <string id="579" name="alert">
     <value>Please insert a title!</value>
   </string>
+  <string id="580" name="580">
+    <value>RTL</value>
+  </string>
+  <string id="581" name="581">
+    <value>Active this if you write in a right to left language (inverse word order)</value>
+  </string>
 </language>
