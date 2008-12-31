@@ -135,15 +135,18 @@
     		parent.b1.setAttribute('opacity',0.5);    		
     	</handler>
     </openmeetingsTabButton>	
-    <view y="22" bgcolor="0x000000" x="1" width="$once{ parent.width-2 }" height="$once{ parent.height-23 }">
-    	<view y="1" bgcolor="$once{ canvas.basebgcolorizer }" 
-    		  width="$once{ parent.width }" height="$once{ parent.height-1 }" />
+    <view y="22" bgcolor="0x000000" x="1" width="$once{ parent.width-2 }" 
+          height="$once{ parent.height-23 }">
+    	<view y="1" bgcolor="0xFFFFFF" width="$once{ parent.width }" 
+              height="$once{ parent.height-1 }" />
     </view>
     <chatTab name="_chattab" />
+    
     <!--
     <uploadTab name="_uploadtab" visible="false" />
     <participantsPanel name="_participants" visible="false" />
      -->
+     
 </class>    
 
 </library>
