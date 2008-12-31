@@ -11,7 +11,7 @@
 	<lang id="9" rightToLeft="false">chinese simplified</lang>
 	<lang id="10" rightToLeft="false">chinese traditional</lang>
 	<lang id="11" rightToLeft="false">korean</lang>
-	<lang id="12" rightToLeft="false">arabic</lang>
+	<lang id="12" rightToLeft="true">arabic</lang>
 	<lang id="13" rightToLeft="false">japanese</lang>
 	<lang id="14" rightToLeft="false">indonesian</lang>
 	<lang id="15" rightToLeft="false">hungarian</lang>
