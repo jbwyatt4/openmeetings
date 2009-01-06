@@ -9,7 +9,7 @@
 		
 		<!-- Database Settings -->
 		<property name="connection.driver_class">com.mysql.jdbc.Driver</property>
-		<property name="dialect">org.hibernate.dialect.MySQLInnoDBDialect</property>
+		<property name="dialect">org.hibernate.dialect.MySQLMyISAMDialect</property>
 		<property name="connection.url">jdbc:mysql://localhost/openmeetings_cal?useUnicode=true&amp;createDatabaseIfNotExist=true&amp;characterEncoding=utf-8</property>	
 		
 		<property name="hibernate.connection.CharSet">utf8</property>

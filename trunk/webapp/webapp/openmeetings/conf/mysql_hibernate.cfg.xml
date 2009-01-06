@@ -14,7 +14,8 @@
 		
 		<!-- Database Settings -->
 		<property name="connection.driver_class">com.mysql.jdbc.Driver</property>
-		<property name="dialect">org.hibernate.dialect.MySQLInnoDBDialect</property>
+		<!--  for performance reasons changed to MyISAM from org.hibernate.dialect.MySQLInnoDBDialect -->
+		<property name="dialect">org.hibernate.dialect.MySQLMyISAMDialect</property>
 		<property name="connection.url">jdbc:mysql://localhost/openmeetings?useUnicode=true&amp;createDatabaseIfNotExist=true&amp;characterEncoding=utf-8</property>	
 		
 		<property name="hibernate.connection.CharSet">utf8</property>
