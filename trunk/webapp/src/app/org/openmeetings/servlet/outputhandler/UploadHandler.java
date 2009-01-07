@@ -19,6 +19,7 @@ import org.slf4j.LoggerFactory;
 import org.apache.commons.lang.StringUtils;
 import org.openmeetings.app.data.basic.Sessionmanagement;
 import org.openmeetings.app.data.user.Usermanagement;
+import org.openmeetings.app.data.user.dao.UsersDaoImpl;
 import org.openmeetings.utils.stringhandlers.StringComparer;
 import org.openmeetings.app.documents.GenerateThumbs;
 import org.openmeetings.app.documents.GeneratePDF;
@@ -310,10 +311,10 @@ public class UploadHandler extends HttpServlet {
 								
 								File fileNameToStore = new File(completeName+".jpg");
 								String pictureuri = fileNameToStore.getName();
-								Users us = Usermanagement.getInstance().getUser(users_id);
+								Users us = UsersDaoImpl.getInstance().getUser(users_id);
 								us.setUpdatetime(new java.util.Date());
 								us.setPictureuri(pictureuri);
-								Usermanagement.getInstance().updateUser(us);
+								UsersDaoImpl.getInstance().updateUser(us);
 								
 								Application.getInstance().updateUserSessionObject(users_id,pictureuri);
 							} else {
@@ -325,7 +326,7 @@ public class UploadHandler extends HttpServlet {
 						//Flash cannot read the response of an upload
 						//httpServletResponse.getWriter().print(returnError);
 						LinkedHashMap<String,Object> hs = new LinkedHashMap<String,Object>();
-						hs.put("user", Usermanagement.getInstance().getUser(users_id));
+						hs.put("user", UsersDaoImpl.getInstance().getUser(users_id));
 						hs.put("message", "library");
 						hs.put("action", "newFile");
 						hs.put("error", returnError);

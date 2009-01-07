@@ -23,5 +23,6 @@
     <property name="name" type="string" column="name"/>
     <property name="naviorder" type="int" column="naviorder"/>
     <property name="fieldvalues_id" type="long" column="fieldvalues_id"/>
+    <property name="tooltip_fieldvalues_id" type="long" column="tooltip_fieldvalues_id"/>
   </class>
 </hibernate-mapping>

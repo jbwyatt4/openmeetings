@@ -1,40 +1,37 @@
 package org.openmeetings.app.data.user;
 
+import java.util.Date;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Date;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.hibernate.criterion.Restrictions;
 import org.hibernate.criterion.Order;
-
-import org.openmeetings.app.hibernate.beans.lang.Fieldlanguagesvalues;
-import org.openmeetings.app.hibernate.beans.recording.RoomClient;
-import org.openmeetings.app.hibernate.beans.user.*;
-import org.openmeetings.app.hibernate.beans.adresses.Adresses_Emails;
-import org.openmeetings.app.hibernate.beans.adresses.Emails;
-import org.openmeetings.app.hibernate.utils.HibernateUtil;
-import org.openmeetings.app.templates.ResetPasswordTemplate;
+import org.hibernate.criterion.Restrictions;
 import org.openmeetings.app.data.basic.AuthLevelmanagement;
 import org.openmeetings.app.data.basic.Configurationmanagement;
 import org.openmeetings.app.data.basic.Fieldmanagment;
+import org.openmeetings.app.data.basic.Sessionmanagement;
 import org.openmeetings.app.data.beans.basic.SearchResult;
-import org.openmeetings.app.data.user.Organisationmanagement;
-import org.openmeetings.utils.mappings.CastMapToObject;
-import org.openmeetings.utils.math.*;
+import org.openmeetings.app.data.user.dao.UsersDaoImpl;
+import org.openmeetings.app.hibernate.beans.adresses.Adresses_Emails;
+import org.openmeetings.app.hibernate.beans.lang.Fieldlanguagesvalues;
+import org.openmeetings.app.hibernate.beans.recording.RoomClient;
+import org.openmeetings.app.hibernate.beans.user.Userdata;
+import org.openmeetings.app.hibernate.beans.user.Userlevel;
+import org.openmeetings.app.hibernate.beans.user.Users;
+import org.openmeetings.app.hibernate.utils.HibernateUtil;
+import org.openmeetings.app.templates.ResetPasswordTemplate;
+import org.openmeetings.utils.crypt.ManageCryptStyle;
 import org.openmeetings.utils.mail.MailHandler;
-import org.openmeetings.utils.crypt.*;
-
+import org.openmeetings.utils.mappings.CastMapToObject;
 import org.red5.io.utils.ObjectMap;
-
-import org.openmeetings.app.data.basic.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 
@@ -71,7 +68,8 @@ public class Usermanagement {
 			if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)){
 				SearchResult sresult = new SearchResult();
 				sresult.setObjectName(Users.class.getName());
-				sresult.setRecords(this.selectMaxFromUsers());
+				sresult.setRecords(UsersDaoImpl.getInstance().selectMaxFromUsers());
+				
 				//get all users
 				Object idf = HibernateUtil.createSession();
 				Session session = HibernateUtil.getSession();
@@ -95,64 +93,6 @@ public class Usermanagement {
 		return null;
 	}
 	
-	public Long getAllUserMax(String search) {
-		try {
-			
-			String[] searchItems = search.split(" ");
-			
-			
-			log.debug("getUserContactsBySearch: "+ search);
-			//log.debug("getUserContactsBySearch: "+ userId);
-			
-			String hql = 	"select count(u) from  Users u "+					
-							"WHERE u.deleted = 'false' ";
-							
-			
-			hql +=		"AND ( ";
-			for(int i=0;i<searchItems.length; i++){
-				if (i != 0) {
-					hql +=	" OR ";
-				}
-				hql +=	"( " +
-							"lower(u.lastname) LIKE lower('%"+searchItems[i]+"%') OR lower(u.firstname) LIKE lower('%"+searchItems[i]+"%') " +
-							//"OR lower(u.username) LIKE lower('%"+searchItems[i]+"%') " +
-							//"OR lower(u.titel) LIKE lower('%"+searchItems[i]+"%') " +
-							//"OR lower(u.email) LIKE lower('%"+searchItems[i]+"%') " +
-							//"OR lower(u.firma) LIKE lower('%"+searchItems[i]+"%') " +
-						") ";
-								
-			}
-			hql += " )" ;
-			
-			log.debug("Show HQL: "+hql);						
-			
-			Object idf = HibernateUtil.createSession();
-			Session session = HibernateUtil.getSession();
-			Transaction tx = session.beginTransaction();
-			Query query = session.createQuery(hql);
-			
-			//log.debug("id: "+folderId);
-			
-			//query.setLong("macomUserId", userId);
-			//query.setLong("messageFolder", folderId);
-			//query
-						
-			List ll = query.list();
-			tx.commit();
-			HibernateUtil.closeSession(idf);
-			
-			
-			//log.error((Long)ll.get(0));
-			Long i = (Long)ll.get(0);
-			
-			return new Long(i);
-		} catch (HibernateException ex) {
-			log.error("[getAllUserMax]: " + ex);
-		} catch (Exception ex2) {
-			log.error("[getAllUserMax]: " + ex2);
-		}
-		return null;
-	}
 	
 	
 	
@@ -160,7 +100,7 @@ public class Usermanagement {
 		try {
 				SearchResult sresult = new SearchResult();
 				sresult.setObjectName(Users.class.getName());
-				sresult.setRecords(this.getAllUserMax(search));
+				sresult.setRecords(UsersDaoImpl.getInstance().getAllUserMax(search));
 				
 				String[] searchItems = search.split(" ");
 				
@@ -218,53 +158,8 @@ public class Usermanagement {
 		return null;
 	}
 	
-	public List<Users> getAllUsers(){
-		try {
-			
-			//get all users
-			Object idf = HibernateUtil.createSession();
-			Session session = HibernateUtil.getSession();
-			Transaction tx = session.beginTransaction();
-			Criteria crit = session.createCriteria(Users.class);
-			crit.add(Restrictions.eq("deleted", "false"));
-
-			List<Users> ll = crit.list();
-			tx.commit();
-			HibernateUtil.closeSession(idf);
-			
-			return ll;				
-
-		} catch (HibernateException ex) {
-			log.error("[getAllUsers] "+ex);
-		} catch (Exception ex2) {
-			log.error("[getAllUsers] "+ex2);
-		}
-		return null;
-	}	
 	
-	/**
-	 * returns the maximum
-	 * @return
-	 */
-	public Long selectMaxFromUsers(){
-		try {
-			//get all users
-			Object idf = HibernateUtil.createSession();
-			Session session = HibernateUtil.getSession();
-			Transaction tx = session.beginTransaction();
-			Query query = session.createQuery("select max(c.user_id) from Users c where c.deleted = 'false'"); 
-			List ll = query.list();
-			tx.commit();
-			HibernateUtil.closeSession(idf);
-			log.info("selectMaxFromUsers",(Long)ll.get(0));
-			return (Long)ll.get(0);				
-		} catch (HibernateException ex) {
-			log.error("[selectMaxFromUsers] "+ex);
-		} catch (Exception ex2) {
-			log.error("[selectMaxFromUsers] "+ex2);
-		}
-		return null;
-	}
+	
 	
 	/**
 	 * 
@@ -274,7 +169,7 @@ public class Usermanagement {
 	 */
 	public Users checkAdmingetUserById(long user_level, long user_id){
 		if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)) {
-			return this.getUser(user_id);
+			return UsersDaoImpl.getInstance().getUser(user_id);
 		}
 		return null;
 	}
@@ -283,54 +178,7 @@ public class Usermanagement {
 		return null;
 	}
 
-	/**
-	 * 
-	 * @param user_id
-	 * @return
-	 */
-	public Users getUser(Long user_id) {
-		if (user_id != null && user_id > 0) {
-			try {
-				Object idf = HibernateUtil.createSession();
-				Session session = HibernateUtil.getSession();
-				Transaction tx = session.beginTransaction();
-				Query query = session.createQuery("select c from Users as c where c.user_id = :user_id");
-				query.setLong("user_id", user_id);
-				Users users = (Users) query.uniqueResult();
-				tx.commit();
-				HibernateUtil.closeSession(idf);
-				return users;
-				// TODO: Add Usergroups to user
-				// users.setUsergroups(ResHandler.getGroupmanagement().getUserGroups(user_id));
-			} catch (HibernateException ex) {
-				log.error("getUser",ex);
-			} catch (Exception ex2) {
-				log.error("getUser",ex2);
-			}
-		} else {
-			log.error("[getUser] "+"Error: No USER_ID given");
-		}
-		return null;
-	}
 	
-	public void updateUser(Users user) {
-		if (user.getUser_id() > 0) {
-			try {
-				Object idf = HibernateUtil.createSession();
-				Session session = HibernateUtil.getSession();
-				Transaction tx = session.beginTransaction();
-				session.update(user);
-				tx.commit();
-				HibernateUtil.closeSession(idf);
-			} catch (HibernateException ex) {
-				log.error("[updateUser] ",ex);
-			} catch (Exception ex2) {
-				log.error("[updateUser] ",ex2);
-			}
-		} else {
-			log.error("[updateUser] "+"Error: No USER_ID given");
-		}
-	}
 
 	/**
 	 * login logic
@@ -528,11 +376,11 @@ public class Usermanagement {
 
 		if (AuthLevelmanagement.getInstance().checkUserLevel(user_level) && user_id != 0) {
 			try {
-				Users us = this.getUser(user_id);
+				Users us = UsersDaoImpl.getInstance().getUser(user_id);
 				// Check for duplicates
 				boolean checkName = true;
 				if (!login.equals(us.getLogin())){
-					checkName = this.checkUserLogin(login);
+					checkName = UsersDaoImpl.getInstance().checkUserLogin(login);
 				}
 				boolean checkEmail = true;
 				Adresses_Emails mail = null;
@@ -731,41 +579,6 @@ public class Usermanagement {
 		return ret;
 	}
 
-	public Long deleteUserID(long USER_ID) {
-		try {
-			if (USER_ID != 0) {
-				Users us = this.getUser(USER_ID);
-				us.setDeleted("true");
-				us.setUpdatetime(new Date());
-				// result +=
-				// Groupmanagement.getInstance().deleteUserFromAllGroups(new
-				// Long(USER_ID));
-
-				Object idf = HibernateUtil.createSession();
-				Session session = HibernateUtil.getSession();
-				Transaction tx = session.beginTransaction();
-				session.update(us);
-				tx.commit();
-				HibernateUtil.closeSession(idf);
-				return us.getUser_id();
-				// result +=
-				// ResHandler.getBestellmanagement().deleteWarenkorbByUserID(USER_ID);
-				// result +=
-				// ResHandler.getEmailmanagement().deleteEMailByUserID(USER_ID);
-				// result +=
-				// ResHandler.getContactmanagement().deleteContactUsergroups(USER_ID);
-				// result +=
-				// ResHandler.getContactmanagement().deleteUserContact(USER_ID);
-
-			}
-		} catch (HibernateException ex) {
-			log.error("[deleteUserID]" ,ex);
-		} catch (Exception ex2) {
-			log.error("[deleteUserID]" ,ex2);
-		}
-		return null;
-	}
-
 	private Userlevel getUserLevel(Long level_id) {
 		Userlevel userlevel = new Userlevel();
 		try {
@@ -913,7 +726,7 @@ public class Usermanagement {
 			// Check for required data
 			if (login.length()>=4 && Userpass.length()>=4) {
 				// Check for duplicates
-				boolean checkName = this.checkUserLogin(login);
+				boolean checkName = UsersDaoImpl.getInstance().checkUserLogin(login);
 				boolean checkEmail = Emailmanagement.getInstance().checkUserEMail(email);
 				if (checkName && checkEmail) {
 					
@@ -1035,34 +848,6 @@ public class Usermanagement {
 		return null;
 	}
 	
-	/**
-	 * check for duplicates
-	 * @param DataValue
-	 * @return
-	 */
-	public boolean checkUserLogin(String DataValue) {
-		try {
-			Object idf = HibernateUtil.createSession();
-			Session session = HibernateUtil.getSession();
-			Transaction tx = session.beginTransaction();
-			Query query = session.createQuery("select c from Users as c where c.login = :DataValue AND deleted != :deleted");
-			query.setString("DataValue", DataValue);
-			query.setString("deleted", "true");
-			int count = query.list().size();
-
-			tx.commit();
-			HibernateUtil.closeSession(idf);
-			if (count != 0) {
-				return false;
-			}			
-		} catch (HibernateException ex) {
-			log.error("[checkUserData]" ,ex);
-		} catch (Exception ex2) {
-			log.error("[checkUserData]" ,ex2);
-		}
-		return true;
-	}
-
 	public void addUserLevel(String description, int myStatus) {
 		try {
 			Object idf = HibernateUtil.createSession();
@@ -1103,7 +888,7 @@ public class Usermanagement {
 				if (user.getUser_id() != null && user.getUser_id()>0) {					
 					
 					returnLong = user.getUser_id();
-					Users savedUser = this.getUser(user.getUser_id());
+					Users savedUser = UsersDaoImpl.getInstance().getUser(user.getUser_id());
 					savedUser.setAge(user.getAge());
 					savedUser.setFirstname(user.getFirstname());
 					savedUser.setLastname(user.getLastname());
@@ -1171,7 +956,7 @@ public class Usermanagement {
 				//log.debug("addr_e "+addr_e);
 				if (addr_e!=null) {
 					//log.debug("getAdresses_id "+addr_e.getAdresses_id());
-					Users us = this.getUserByAdressesId(addr_e.getAdresses_id());
+					Users us = UsersDaoImpl.getInstance().getUserByAdressesId(addr_e.getAdresses_id());
 					if (us!=null) {
 						this.sendHashByUser(us, appLink);
 						return new Long(-4);
@@ -1183,7 +968,7 @@ public class Usermanagement {
 				}
 			//check if username given
 			} else if (username.length()>0){
-				Users us = this.getUserByName(username);
+				Users us = UsersDaoImpl.getInstance().getUserByName(username);
 				if (us!=null) {
 					this.sendHashByUser(us, appLink);
 					return new Long(-4);
@@ -1202,7 +987,7 @@ public class Usermanagement {
 		String loginData = us.getLogin()+new Date();
 		log.debug("User: "+us.getLogin());
 		us.setResethash(ManageCryptStyle.getInstance().getInstanceOfCrypt().createPassPhrase(loginData));
-		this.updateUser(us);
+		UsersDaoImpl.getInstance().updateUser(us);
 		String reset_link = appLink+"?hash="+us.getResethash();
 		
 		Adresses_Emails addrE = (Adresses_Emails) us.getAdresses().getEmails().iterator().next();
@@ -1217,90 +1002,5 @@ public class Usermanagement {
 		MailHandler.sendMail(addrE.getMail().getEmail(), labelid517.getValue(), template);
 	}
 	
-	private Users getUserByName(String login) {
-		try {
-			String hql = "SELECT u FROM Users as u " +
-					" where u.login = :login" +
-					" AND deleted != :deleted";
-			Object idf = HibernateUtil.createSession();
-			Session session = HibernateUtil.getSession();
-			Transaction tx = session.beginTransaction();
-			Query query = session.createQuery(hql);
-			query.setString("login", login);
-			query.setString("deleted", "true");
-			Users us = (Users) query.uniqueResult();
-			tx.commit();
-			HibernateUtil.closeSession(idf);
-			return us;			
-		} catch (Exception e) {
-			log.error("[getUserByAdressesId]",e);
-		}
-		return null;
-	}
-	
-	private Users getUserByAdressesId(Long adresses_id) {
-		try {
-			String hql = "SELECT u FROM Users as u " +
-					" where u.adresses.adresses_id = :adresses_id" +
-					" AND deleted != :deleted";
-			Object idf = HibernateUtil.createSession();
-			Session session = HibernateUtil.getSession();
-			Transaction tx = session.beginTransaction();
-			Query query = session.createQuery(hql);
-			query.setLong("adresses_id", adresses_id);
-			query.setString("deleted", "true");
-			Users us = (Users) query.uniqueResult();
-			tx.commit();
-			HibernateUtil.closeSession(idf);
-			return us;			
-		} catch (Exception e) {
-			log.error("[getUserByAdressesId]",e);
-		}
-		return null;
-	}
-	
-	public Object getUserByHash (String hash) {
-		try {
-			if (hash.length()==0) return new Long(-5);
-			String hql = "SELECT u FROM Users as u " +
-					" where u.resethash = :resethash" +
-					" AND deleted != :deleted";
-			Object idf = HibernateUtil.createSession();
-			Session session = HibernateUtil.getSession();
-			Transaction tx = session.beginTransaction();
-			Query query = session.createQuery(hql);
-			query.setString("resethash", hash);
-			query.setString("deleted", "true");
-			Users us = (Users) query.uniqueResult();
-			tx.commit();
-			HibernateUtil.closeSession(idf);
-			if (us!=null) {
-				return us;		
-			} else {
-				return new Long(-5);
-			}
-		} catch (Exception e) {
-			log.error("[getUserByAdressesId]",e);
-		}
-		return new Long(-1);
-	}
-	
-	public Object resetPassByHash (String hash, String pass) {
-		try {
-			Object u = this.getUserByHash(hash);
-			if (u instanceof Users) {
-				Users us = (Users) u;
-				us.setPassword(ManageCryptStyle.getInstance().getInstanceOfCrypt().createPassPhrase(pass));
-				us.setResethash("");
-				this.updateUser(us);
-				return new Long(-8);
-			} else {
-				return u;
-			}
-		} catch (Exception e) {
-			log.error("[getUserByAdressesId]",e);
-		}
-		return new Long(-1);
-	}
 
 }

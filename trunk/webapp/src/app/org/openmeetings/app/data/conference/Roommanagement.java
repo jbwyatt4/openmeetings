@@ -24,6 +24,7 @@ import org.openmeetings.app.data.basic.AuthLevelmanagement;
 import org.openmeetings.app.data.beans.basic.SearchResult;
 import org.openmeetings.app.data.user.Organisationmanagement;
 import org.openmeetings.app.data.user.Usermanagement;
+import org.openmeetings.app.data.user.dao.UsersDaoImpl;
 import org.openmeetings.app.hibernate.beans.domain.Organisation_Users;
 
 /**
@@ -690,7 +691,7 @@ public class Roommanagement {
 	private boolean checkUserOrgRoom(long user_id, long rooms_id){
 		try {
 			
-			Users us = Usermanagement.getInstance().getUser(user_id);
+			Users us = UsersDaoImpl.getInstance().getUser(user_id);
 			Set s = us.getOrganisation_users();
 		
 			for (Iterator it = s.iterator(); it.hasNext();){

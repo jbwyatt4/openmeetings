@@ -5,6 +5,7 @@ import junit.framework.TestCase;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openmeetings.app.data.user.Usermanagement;
+import org.openmeetings.app.data.user.dao.UsersDaoImpl;
 
 
 
@@ -28,7 +29,7 @@ public class TestDatabaseStructureGetUserStart extends TestCase {
 
 		try {
 
-			Usermanagement.getInstance().getUser(new Long(1));
+			UsersDaoImpl.getInstance().getUser(new Long(1));
 
 		} catch (Exception err) {
 

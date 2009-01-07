@@ -13,6 +13,7 @@ import org.openmeetings.app.data.basic.Configurationmanagement;
 import org.openmeetings.app.data.basic.FieldLanguageDaoImpl;
 import org.openmeetings.app.data.user.Addressmanagement;
 import org.openmeetings.app.data.user.Usermanagement;
+import org.openmeetings.app.data.user.dao.UsersDaoImpl;
 import org.openmeetings.app.hibernate.beans.adresses.Adresses;
 import org.openmeetings.app.hibernate.beans.calendar.Appointment;
 import org.openmeetings.app.hibernate.beans.calendar.AppointmentCategory;
@@ -180,7 +181,7 @@ public class MeetingMemberDaoImpl {
 			gm.setAppointment(AppointmentDaoImpl.getInstance().getAppointmentById(appointmentId));	
 			gm.setDeleted(false);
 			gm.setUpdatetime(new Date());
-			gm.setUserid(Usermanagement.getInstance().getUser(userid));
+			gm.setUserid(UsersDaoImpl.getInstance().getUser(userid));
 			gm.setEmail(email);
 			
 			
@@ -213,7 +214,7 @@ public class MeetingMemberDaoImpl {
 			gm.setMemberStatus(memberStatus);
 			gm.setAppointmentStatus(appointmentStatus);
 			gm.setAppointment(AppointmentDaoImpl.getInstance().getAppointmentById(appointmentId));
-			gm.setUserid(Usermanagement.getInstance().getUser(userid));
+			gm.setUserid(UsersDaoImpl.getInstance().getUser(userid));
 			gm.setEmail(email);
 							
 			gm.setStarttime(new Date());

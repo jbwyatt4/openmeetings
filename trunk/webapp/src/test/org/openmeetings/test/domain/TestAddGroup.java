@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.openmeetings.app.data.user.Organisationmanagement;
 import org.openmeetings.app.data.user.Usermanagement;
+import org.openmeetings.app.data.user.dao.UsersDaoImpl;
 import org.openmeetings.app.hibernate.beans.user.Users;
 import org.openmeetings.app.hibernate.beans.adresses.Adresses_Emails;
 import org.openmeetings.app.hibernate.beans.domain.Organisation_Users;
@@ -30,7 +31,7 @@ public class TestAddGroup extends TestCase {
 		
 		log.error("new organisation_user: "+organisation_usersid);
 		
-		Users us = Usermanagement.getInstance().getUser(new Long(1));
+		Users us = UsersDaoImpl.getInstance().getUser(new Long(1));
 		
 		log.error(us.getLastname());
 		log.error(us.getAdresses().getTown());

@@ -30,6 +30,7 @@ import org.red5.server.api.service.IServiceCapableConnection;
 import org.openmeetings.app.data.basic.AuthLevelmanagement;
 import org.openmeetings.app.data.basic.Sessionmanagement;
 import org.openmeetings.app.data.user.Usermanagement;
+import org.openmeetings.app.data.user.dao.UsersDaoImpl;
 import org.openmeetings.utils.math.CalendarPatterns;
 import org.openmeetings.app.hibernate.beans.user.Users;
 import org.openmeetings.app.hibernate.beans.domain.Organisation_Users;
@@ -283,7 +284,7 @@ public class StreamService implements IPendingServiceCallback {
 			Long recordedby = startedClient.getUser_id();
 			Users us = null;
 			if (recordedby!=null && recordedby>0){
-				us = Usermanagement.getInstance().getUser(recordedby);
+				us = UsersDaoImpl.getInstance().getUser(recordedby);
 			}
 			
 			
@@ -478,7 +479,7 @@ public class StreamService implements IPendingServiceCallback {
 	        		i++;
 	        	}
 				
-				Users us = Usermanagement.getInstance().getUser(users_id);
+				Users us = UsersDaoImpl.getInstance().getUser(users_id);
 				
 				for (Iterator<Organisation_Users> iter = us.getOrganisation_users().iterator();iter.hasNext();) {
 					Organisation_Users orgUser = iter.next();

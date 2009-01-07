@@ -11,6 +11,7 @@ import org.openmeetings.app.data.beans.basic.SearchResult;
 import org.openmeetings.app.data.user.Usermanagement;
 import org.openmeetings.app.data.user.Salutationmanagement;
 import org.openmeetings.app.data.user.Organisationmanagement;
+import org.openmeetings.app.data.user.dao.UsersDaoImpl;
 import org.openmeetings.app.hibernate.beans.user.Users;
 
 import org.red5.io.utils.ObjectMap;
@@ -32,7 +33,7 @@ public class UserService {
 	 */
 	public Users getUserSelf(String SID){
         Long users_id = Sessionmanagement.getInstance().checkSession(SID);
-        return Usermanagement.getInstance().getUser(users_id);
+        return UsersDaoImpl.getInstance().getUser(users_id);
 	}
 	
 	public Long resetUserPwd(String SID, String email, String login, String applink){
@@ -42,12 +43,12 @@ public class UserService {
 	
 	public Object getUserByHash(String SID, String hash) {
 		Sessionmanagement.getInstance().checkSession(SID);
-		return Usermanagement.getInstance().getUserByHash(hash);
+		return UsersDaoImpl.getInstance().getUserByHash(hash);
 	}
 	
 	public Object resetPassByHash(String SID, String hash, String pass) {
 		Sessionmanagement.getInstance().checkSession(SID);
-		return Usermanagement.getInstance().resetPassByHash(hash,pass);
+		return UsersDaoImpl.getInstance().resetPassByHash(hash,pass);
 	}
 	
 	/**
@@ -272,7 +273,7 @@ public class UserService {
     	long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
     	if(user_level>=3){
     		if (users_id!=user_idClient){
-    		return Usermanagement.getInstance().deleteUserID(user_idClient);
+    		return UsersDaoImpl.getInstance().deleteUserID(user_idClient);
     		} else {
     			return new Long(-10);
     		}

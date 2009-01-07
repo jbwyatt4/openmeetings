@@ -28,6 +28,8 @@ public class Navimain {
 	private String deleted;
 	private Fieldlanguagesvalues label;
 	private Set subnavi;
+	private Fieldlanguagesvalues tooltip;
+	private Long tooltip_fieldvalues_id;
 
 	public Navimain() {
 	}
@@ -233,8 +235,27 @@ public class Navimain {
 	public Fieldlanguagesvalues getLabel() {
 		return label;
 	}
-
 	public void setLabel(Fieldlanguagesvalues label) {
 		this.label = label;
 	}	
+
+	/**
+     * @hibernate.property
+     *  column="tooltip_fieldvalues_id"
+     *  type="long"
+     */
+	public Long getTooltip_fieldvalues_id() {
+		return tooltip_fieldvalues_id;
+	}
+	public void setTooltip_fieldvalues_id(Long tooltip_fieldvalues_id) {
+		this.tooltip_fieldvalues_id = tooltip_fieldvalues_id;
+	}
+
+	public Fieldlanguagesvalues getTooltip() {
+		return tooltip;
+	}
+	public void setTooltip(Fieldlanguagesvalues tooltip) {
+		this.tooltip = tooltip;
+	}
+		
 }

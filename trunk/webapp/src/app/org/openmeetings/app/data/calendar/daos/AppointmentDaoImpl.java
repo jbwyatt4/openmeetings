@@ -16,6 +16,7 @@ import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 import org.openmeetings.app.data.basic.Configurationmanagement;
 import org.openmeetings.app.data.user.Usermanagement;
+import org.openmeetings.app.data.user.dao.UsersDaoImpl;
 import org.openmeetings.app.hibernate.beans.calendar.Appointment;
 import org.openmeetings.app.hibernate.beans.calendar.MeetingMember;
 import org.openmeetings.app.hibernate.beans.lang.FieldLanguage;
@@ -95,7 +96,7 @@ public class AppointmentDaoImpl {
 			ap.setIsWeekly(isWeekly);
 			ap.setIsMonthly(isMonthly);
 			ap.setIsYearly(isYearly);
-			ap.setUserId(Usermanagement.getInstance().getUser(userId));
+			ap.setUserId(UsersDaoImpl.getInstance().getUser(userId));
 			ap.setAppointmentCategory(AppointmentCategoryDaoImpl.getInstance().getAppointmentCategoryById(categoryId));
 			
 			
@@ -156,7 +157,7 @@ public class AppointmentDaoImpl {
 			ap.setIsWeekly(isWeekly);
 			ap.setIsMonthly(isMonthly);
 			ap.setIsYearly(isYearly);
-			ap.setUserId(Usermanagement.getInstance().getUser(userId));
+			ap.setUserId(UsersDaoImpl.getInstance().getUser(userId));
 			ap.setAppointmentCategory(AppointmentCategoryDaoImpl.getInstance().getAppointmentCategoryById(categoryId));
 						
 			Object idf = HibernateUtil.createSession();

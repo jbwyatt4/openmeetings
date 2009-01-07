@@ -11,23 +11,23 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.dom4j.Document;
-import org.dom4j.io.XMLWriter;
-import org.dom4j.io.OutputFormat;
-import org.dom4j.DocumentHelper;
-import org.dom4j.DocumentException;
-import org.dom4j.Element;
+import org.openmeetings.app.data.user.dao.UsersDaoImpl;
 
-import org.openmeetings.utils.math.CalendarPatterns;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.dom4j.Document;
+import org.dom4j.DocumentHelper;
+import org.dom4j.Element;
+import org.dom4j.io.OutputFormat;
+import org.dom4j.io.XMLWriter;
 import org.openmeetings.app.data.basic.Sessionmanagement;
-import org.openmeetings.app.data.user.Usermanagement;
 import org.openmeetings.app.data.user.Organisationmanagement;
+import org.openmeetings.app.data.user.Usermanagement;
 import org.openmeetings.app.hibernate.beans.adresses.Adresses_Emails;
 import org.openmeetings.app.hibernate.beans.domain.Organisation;
 import org.openmeetings.app.hibernate.beans.domain.Organisation_Users;
-import org.openmeetings.app.hibernate.beans.user.*;
+import org.openmeetings.app.hibernate.beans.user.Users;
+import org.openmeetings.utils.math.CalendarPatterns;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 
@@ -88,7 +88,7 @@ public class Export extends HttpServlet {
 						uList = Organisationmanagement.getInstance()
 							.getUsersByOrganisationId(organisation_id);
 					} else {
-						uList = Usermanagement.getInstance().getAllUsers();
+						uList = UsersDaoImpl.getInstance().getAllUsers();
 					}
 					
 					if (uList != null) {

@@ -13,6 +13,7 @@ import org.openmeetings.app.templates.InvitationTemplate;
 import org.openmeetings.app.data.basic.AuthLevelmanagement;
 import org.openmeetings.app.data.conference.Roommanagement;
 import org.openmeetings.app.data.user.Usermanagement;
+import org.openmeetings.app.data.user.dao.UsersDaoImpl;
 import org.openmeetings.app.data.basic.Configurationmanagement;
 import org.openmeetings.app.hibernate.beans.user.Users;
 import org.openmeetings.app.hibernate.beans.invitation.Invitations;
@@ -77,7 +78,7 @@ public class Invitationmanagement {
 				
 				invitation.setDeleted("false");
 				
-				Users us = Usermanagement.getInstance().getUser(createdBy);
+				Users us = UsersDaoImpl.getInstance().getUser(createdBy);
 				String hashRaw = us.getLogin()+us.getUser_id()+(new Date());
 				invitation.setHash(MD5.do_checksum(hashRaw));
 				

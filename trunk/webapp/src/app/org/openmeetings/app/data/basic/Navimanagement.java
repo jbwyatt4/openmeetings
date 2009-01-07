@@ -38,13 +38,16 @@ public class Navimanagement {
 		for (Iterator it2 = ll.iterator(); it2.hasNext();) {
 			Naviglobal navigl = (Naviglobal) it2.next();
 			navigl.setLabel(Fieldmanagment.getInstance().getFieldByIdAndLanguageByNavi(navigl.getFieldvalues_id(),language_id));
+			navigl.setTooltip(Fieldmanagment.getInstance().getFieldByIdAndLanguageByNavi(navigl.getTooltip_fieldvalues_id(),language_id));
 			Set s = navigl.getMainnavi();
 			for (Iterator it3 = s.iterator(); it3.hasNext();) {
 				Navimain navim = (Navimain) it3.next();
 				navim.setLabel(Fieldmanagment.getInstance().getFieldByIdAndLanguageByNavi(navim.getFieldvalues_id(),language_id));
+				navim.setTooltip(Fieldmanagment.getInstance().getFieldByIdAndLanguageByNavi(navim.getTooltip_fieldvalues_id(),language_id));
 				for (Iterator it4 = navim.getSubnavi().iterator(); it4.hasNext();) {
 					Navisub navis = (Navisub) it4.next();
 					navis.setLabel(Fieldmanagment.getInstance().getFieldByIdAndLanguageByNavi(navis.getFieldvalues_id(),language_id));
+					navis.setTooltip(Fieldmanagment.getInstance().getFieldByIdAndLanguageByNavi(navis.getTooltip_fieldvalues_id(),language_id));
 				}
 
 			}
