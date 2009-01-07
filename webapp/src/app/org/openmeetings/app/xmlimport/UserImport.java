@@ -12,6 +12,7 @@ import org.openmeetings.app.data.user.Addressmanagement;
 import org.openmeetings.app.data.user.Emailmanagement;
 import org.openmeetings.app.data.user.Organisationmanagement;
 import org.openmeetings.app.data.user.Usermanagement;
+import org.openmeetings.app.data.user.dao.UsersDaoImpl;
 import org.openmeetings.app.hibernate.beans.user.Users;
 import org.openmeetings.utils.math.CalendarPatterns;
 
@@ -95,7 +96,7 @@ public class UserImport {
 			}  			
 			
 			//check for duplicate Login or mail:
-			if (Usermanagement.getInstance().checkUserLogin(us.getLogin()) && mailCheck) {
+			if (UsersDaoImpl.getInstance().checkUserLogin(us.getLogin()) && mailCheck) {
 			
 				Long address_id = Addressmanagement.getInstance().saveAddress(street, zip, town, state_id, additionalname, "",fax);
 				

@@ -19,6 +19,7 @@ import org.openmeetings.app.data.basic.AuthLevelmanagement;
 import org.openmeetings.app.data.user.Usermanagement;
 import org.openmeetings.app.data.beans.basic.SearchResult;
 import org.openmeetings.app.data.user.Usermanagement;
+import org.openmeetings.app.data.user.dao.UsersDaoImpl;
 import org.openmeetings.app.hibernate.beans.basic.Configuration;
 import org.openmeetings.app.hibernate.utils.HibernateUtil;
 import org.openmeetings.utils.math.CalendarPatterns;
@@ -84,7 +85,7 @@ public class Configurationmanagement {
 				log.debug("getConfByConfigurationId4: "+configuration);
 				
 				if (configuration!=null && configuration.getUser_id()!=null) {
-					configuration.setUsers(Usermanagement.getInstance().getUser(configuration.getUser_id()));
+					configuration.setUsers(UsersDaoImpl.getInstance().getUser(configuration.getUser_id()));
 				}
 				return configuration;
 			} else {
@@ -265,7 +266,7 @@ public class Configurationmanagement {
 		try {	
 			if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)) {
 				Configuration conf = (Configuration) CastMapToObject.getInstance().castByGivenObject(values, Configuration.class);
-				conf.setUsers(Usermanagement.getInstance().getUser(users_id));
+				conf.setUsers(UsersDaoImpl.getInstance().getUser(users_id));
 				conf.setUpdatetime(new Date());
 				conf.setDeleted("true");
 				this.updateConfig(conf);

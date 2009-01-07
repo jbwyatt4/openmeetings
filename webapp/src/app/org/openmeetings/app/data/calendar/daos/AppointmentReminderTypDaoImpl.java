@@ -11,6 +11,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.openmeetings.app.data.basic.Configurationmanagement;
 import org.openmeetings.app.data.user.Usermanagement;
+import org.openmeetings.app.data.user.dao.UsersDaoImpl;
 import org.openmeetings.app.hibernate.beans.calendar.Appointment;
 import org.openmeetings.app.hibernate.beans.calendar.AppointmentCategory;
 import org.openmeetings.app.hibernate.beans.calendar.AppointmentReminderTyps;
@@ -95,7 +96,7 @@ public class AppointmentReminderTypDaoImpl {
 			ac.setName(name);
 			ac.setStarttime(new Date());
 			ac.setDeleted("false");
-			ac.setUser(Usermanagement.getInstance().getUser(user_id));
+			ac.setUser(UsersDaoImpl.getInstance().getUser(user_id));
 			ac.setComment(comment);
 			
 			

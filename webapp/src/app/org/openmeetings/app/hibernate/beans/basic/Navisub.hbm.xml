@@ -19,5 +19,6 @@
     <property name="updatetime" type="java.util.Date" column="updatetime"/>
     <property name="deleted" type="string" column="deleted"/>
     <property name="fieldvalues_id" type="long" column="fieldvalues_id"/>
+    <property name="tooltip_fieldvalues_id" type="long" column="tooltip_fieldvalues_id"/>
   </class>
 </hibernate-mapping>

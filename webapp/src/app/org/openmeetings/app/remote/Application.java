@@ -44,6 +44,7 @@ import org.openmeetings.app.data.basic.AuthLevelmanagement;
 import org.openmeetings.app.data.basic.Sessionmanagement;
 import org.openmeetings.app.data.logs.ConferenceLogDaoImpl;
 import org.openmeetings.app.data.user.Usermanagement;
+import org.openmeetings.app.data.user.dao.UsersDaoImpl;
 import org.openmeetings.app.hibernate.beans.recording.RoomClient;
 import org.openmeetings.app.hibernate.beans.user.Users;
 
@@ -844,7 +845,7 @@ public class Application extends ApplicationAdapter implements
 			//only fill this value from User-REcord
 			//cause invited users have non
 			//you cannot set the firstname,lastname from the UserRecord
-			Users us = Usermanagement.getInstance().getUser(userId);
+			Users us = UsersDaoImpl.getInstance().getUser(userId);
 			if (us!=null && us.getPictureuri()!=null){
 				//set Picture-URI
 				System.out.println("###### SET PICTURE URI");
@@ -1275,7 +1276,7 @@ public class Application extends ApplicationAdapter implements
 	 */
 	public void updateUserSessionObject(Long users_id, String pictureuri){
 		try {			
-			Users us = Usermanagement.getInstance().getUser(users_id);
+			Users us = UsersDaoImpl.getInstance().getUser(users_id);
 			for (Iterator<String> itList = ClientList.keySet().iterator();itList.hasNext();) {
 				String red5Id  = itList.next();
 				RoomClient rcl = ClientList.get(red5Id);

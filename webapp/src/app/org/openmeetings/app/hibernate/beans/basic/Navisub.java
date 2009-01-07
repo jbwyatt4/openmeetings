@@ -26,6 +26,8 @@ public class Navisub {
     private String deleted;
     private Long fieldvalues_id;
     private Fieldlanguagesvalues label;
+    private Fieldlanguagesvalues tooltip;
+	private Long tooltip_fieldvalues_id;
     
 	public Fieldlanguagesvalues getLabel() {
 		return label;
@@ -207,4 +209,24 @@ public class Navisub {
 	public void setFieldvalues_id(Long fieldvalues_id) {
 		this.fieldvalues_id = fieldvalues_id;
 	}	
+
+	/**
+     * @hibernate.property
+     *  column="tooltip_fieldvalues_id"
+     *  type="long"
+     */
+	public Long getTooltip_fieldvalues_id() {
+		return tooltip_fieldvalues_id;
+	}
+	public void setTooltip_fieldvalues_id(Long tooltip_fieldvalues_id) {
+		this.tooltip_fieldvalues_id = tooltip_fieldvalues_id;
+	}
+
+	public Fieldlanguagesvalues getTooltip() {
+		return tooltip;
+	}
+	public void setTooltip(Fieldlanguagesvalues tooltip) {
+		this.tooltip = tooltip;
+	}
+	
 }

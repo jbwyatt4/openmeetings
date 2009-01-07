@@ -22,6 +22,7 @@ import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.ProjectionList;
 import org.openmeetings.app.data.beans.basic.SearchResult;
 import org.openmeetings.app.data.basic.AuthLevelmanagement;
+import org.openmeetings.app.data.user.dao.UsersDaoImpl;
 import org.openmeetings.app.hibernate.beans.domain.Organisation;
 import org.openmeetings.app.hibernate.beans.domain.Organisation_Users;
 import org.openmeetings.app.hibernate.beans.user.Users;
@@ -500,7 +501,7 @@ public class Organisationmanagement {
 	
 	private boolean checkUserContainsOrganisation(long users_id, long organisation_id){
 		try {
-			Users us = Usermanagement.getInstance().getUser(users_id);
+			Users us = UsersDaoImpl.getInstance().getUser(users_id);
 			for (Iterator it = us.getOrganisation_users().iterator(); it.hasNext();){
 				Organisation_Users orguser = (Organisation_Users) it.next();
 				if (orguser.getOrganisation().getOrganisation_id()==organisation_id)
@@ -584,7 +585,7 @@ public class Organisationmanagement {
 				List<Users> userL = new LinkedList<Users>();
 				for (Iterator it = userOrg.iterator();it.hasNext();){
 					Organisation_Users us = (Organisation_Users) it.next();
-					userL.add(Usermanagement.getInstance().getUser(us.getUser_id()));
+					userL.add(UsersDaoImpl.getInstance().getUser(us.getUser_id()));
 				}
 				//Collections.sort(userL,new UsersFirstnameComperator());
 				return userL;
@@ -618,7 +619,7 @@ public class Organisationmanagement {
 			List<Users> userL = new LinkedList<Users>();
 			for (Iterator<Organisation_Users> it = userOrg.iterator();it.hasNext();){
 				Organisation_Users us = it.next();
-				userL.add(Usermanagement.getInstance().getUser(us.getUser_id()));
+				userL.add(UsersDaoImpl.getInstance().getUser(us.getUser_id()));
 			}
 			Collections.sort(userL,new UsersLoginComperator());
 			return userL;

@@ -22,5 +22,6 @@
       <one-to-many class="org.openmeetings.app.hibernate.beans.basic.Navimain"/>
     </set>
     <property name="fieldvalues_id" type="long" column="fieldvalues_id"/>
+    <property name="tooltip_fieldvalues_id" type="long" column="tooltip_fieldvalues_id"/>
   </class>
 </hibernate-mapping>

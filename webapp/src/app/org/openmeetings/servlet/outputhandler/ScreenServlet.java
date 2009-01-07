@@ -23,6 +23,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.openmeetings.app.data.basic.Sessionmanagement;
 import org.openmeetings.app.data.user.Usermanagement;
+import org.openmeetings.app.data.user.dao.UsersDaoImpl;
 import org.openmeetings.app.hibernate.beans.recording.RoomClient;
 import org.openmeetings.utils.stringhandlers.StringComparer;
 
@@ -177,7 +178,7 @@ public class ScreenServlet extends HttpServlet {
 						
 						
 						LinkedHashMap<String,Object> hs = new LinkedHashMap<String,Object>();
-						hs.put("user", Usermanagement.getInstance().getUser(users_id));
+						hs.put("user", UsersDaoImpl.getInstance().getUser(users_id));
 						hs.put("message", "desktop");
 						hs.put("action", "newSlide");
 						hs.put("fileName", newFileSystemName+"_"+sid+newFileSystemExtName);

@@ -23,6 +23,7 @@ import org.openmeetings.app.hibernate.beans.user.Userdata;
 import org.openmeetings.app.data.basic.*;
 import org.openmeetings.app.data.user.Usermanagement;
 import org.openmeetings.app.data.user.Statemanagement;
+import org.openmeetings.app.data.user.dao.UsersDaoImpl;
 import org.openmeetings.app.hibernate.beans.basic.RemoteSessionObject;
 
 import org.openmeetings.app.data.conference.Invitationmanagement;
@@ -81,7 +82,7 @@ public class MainService implements IPendingServiceCallback {
 		Long users_id = Sessionmanagement.getInstance().checkSession(SID);
 		long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
     	if(user_level>2){
-    		users = Usermanagement.getInstance().getUser(new Long(USER_ID));
+    		users = UsersDaoImpl.getInstance().getUser(new Long(USER_ID));
     	} else {
     		users.setFirstname("No rights to do this");
     	}
@@ -313,7 +314,7 @@ public class MainService implements IPendingServiceCallback {
     	long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
     	if(user_level>=1){
     		Usermanagement.getInstance().logout(SID,users_id);
-    		return Usermanagement.getInstance().deleteUserID(users_id);
+    		return UsersDaoImpl.getInstance().deleteUserID(users_id);
     	} else {
     		return new Long(-10);
     	}
