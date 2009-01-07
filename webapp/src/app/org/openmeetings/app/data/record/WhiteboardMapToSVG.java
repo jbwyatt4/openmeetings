@@ -12,7 +12,7 @@ import javax.imageio.ImageIO;
 import org.apache.batik.svggen.SVGGraphics2D;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.openmeetings.app.remote.Application;
+import org.openmeetings.app.remote.red5.Application;
 import org.openmeetings.utils.geom.GeomPoint;
 
 public class WhiteboardMapToSVG extends BatikMethods {

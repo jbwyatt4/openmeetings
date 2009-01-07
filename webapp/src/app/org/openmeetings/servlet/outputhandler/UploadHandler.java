@@ -24,7 +24,7 @@ import org.openmeetings.utils.stringhandlers.StringComparer;
 import org.openmeetings.app.documents.GenerateThumbs;
 import org.openmeetings.app.documents.GeneratePDF;
 import org.openmeetings.app.documents.GenerateImage;
-import org.openmeetings.app.remote.Application;
+import org.openmeetings.app.remote.red5.Application;
 import org.openmeetings.app.hibernate.beans.user.Users;
 
 public class UploadHandler extends HttpServlet {

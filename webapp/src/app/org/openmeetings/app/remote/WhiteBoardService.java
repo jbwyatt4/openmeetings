@@ -11,7 +11,9 @@ import org.slf4j.LoggerFactory;
 import org.openmeetings.app.conference.whiteboard.WhiteboardManagement;
 import org.openmeetings.app.conference.whiteboard.WhiteboardSyncLockObject;
 import org.openmeetings.app.hibernate.beans.recording.RoomClient;
+import org.openmeetings.app.remote.red5.Application;
 import org.red5.server.api.IConnection;
+import org.red5.server.api.IScope;
 import org.red5.server.api.Red5;
 import org.red5.server.api.service.IPendingServiceCall;
 import org.red5.server.api.service.IPendingServiceCallback;
@@ -393,7 +395,7 @@ public class WhiteBoardService implements IPendingServiceCallback {
 //		return number;
 //	}	
 //	
-	public void removeUserFromAllLists(IConnection current, RoomClient currentClient){
+	public void removeUserFromAllLists(IScope scope, RoomClient currentClient){
 		try {
 			
 			Long room_id = currentClient.getRoom_id();
@@ -416,7 +418,7 @@ public class WhiteBoardService implements IPendingServiceCallback {
 				int numberOfInitial = this.getNumberOfInitialLoaders(syncListRoom);
 				
 				if (numberOfInitial==0){
-					Iterator<IConnection> it = current.getScope().getConnections();
+					Iterator<IConnection> it = scope.getConnections();
 					while (it.hasNext()) {
 						IConnection conn = it.next();
 						if (conn instanceof IServiceCapableConnection) {
@@ -448,7 +450,7 @@ public class WhiteBoardService implements IPendingServiceCallback {
 				int numberOfImageLoaders = Application.getWhiteBoardObjectSyncListByRoomid(room_id).size();
 				
 				if (numberOfImageLoaders==0){
-					Iterator<IConnection> it = current.getScope().getConnections();
+					Iterator<IConnection> it = scope.getConnections();
 					while (it.hasNext()) {
 						IConnection conn = it.next();
 						if (conn instanceof IServiceCapableConnection) {

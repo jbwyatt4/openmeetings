@@ -19,7 +19,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.openmeetings.app.documents.InstallationDocumentHandler;
 import org.openmeetings.app.installation.ImportInitvalues;
-import org.openmeetings.app.remote.Application;
+import org.openmeetings.app.remote.red5.Application;
 
 public class Install extends VelocityViewServlet {
 

@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.hibernate.*;
 import org.hibernate.cfg.*;
 
-import org.openmeetings.app.remote.Application;
+import org.openmeetings.app.remote.red5.Application;
 
 public class HibernateUtil {
 	
