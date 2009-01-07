@@ -39,7 +39,7 @@ import com.thoughtworks.xstream.io.xml.XppDriver;
 /**
  * 
  * @author swagner
- *
+ * 
  */ 
 public class MainService implements IPendingServiceCallback {
 	

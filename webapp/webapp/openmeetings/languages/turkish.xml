@@ -1744,6 +1744,21 @@ Translated by Orcun Madran omadran@baskent.edu.tr
     <value>RTL</value>
   </string>
   <string id="581" name="581">
-    <value>Active this if you write in a right to left language (inverse word order)</value>
+    <value>Activate this if you write in a right to left language (inverse word order)</value>
   </string>
+  <string id="582" name="tooltip main-menu">
+    <value>Dashboard</value>
+  </string>
+  <string id="583" name="tooltip main-menu">
+    <value>Watch recorded Meetings or Events</value>
+  </string>
+  <string id="584" name="tooltip main-menu">
+    <value>Meeting - Make a conference with 4 (up to 16) Users&lt;br/&gt;everybody will have audio + video access</value>
+  </string>
+  <string id="585" name="tooltip main-menu">
+    <value>Event - Make a conference with up to 200 participents&lt;br/&gt;Only the Moderator will have audio/video</value>
+  </string>
+  <string id="586" name="tooltip main-menu">
+    <value>Create users, rooms, organizations&lt;br/&gt; + change configuration</value>
+  </string> 
 </language>

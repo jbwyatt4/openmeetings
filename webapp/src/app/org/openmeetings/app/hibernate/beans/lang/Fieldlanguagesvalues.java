@@ -99,7 +99,7 @@ public class Fieldlanguagesvalues {
     /**
      * @hibernate.property
      *  column="value"
-     *  type="string"
+     *  type="text"
      */
 	public String getValue() {
 		return value;

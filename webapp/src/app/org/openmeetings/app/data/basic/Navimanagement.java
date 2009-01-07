@@ -85,7 +85,7 @@ public class Navimanagement {
 
 	public void addGlobalStructure(String action, int naviorder,
 			long fieldvalues_id, boolean isleaf, boolean isopen, long level_id,
-			String name, String deleted) {
+			String name, String deleted, Long tooltip_fieldvalues_id) {
 		try {
 			Naviglobal ng = new Naviglobal();
 			ng.setAction(action);
@@ -99,6 +99,7 @@ public class Navimanagement {
 			ng.setLevel_id(level_id);
 			ng.setName(name);
 			ng.setStarttime(new Date());
+			ng.setTooltip_fieldvalues_id(tooltip_fieldvalues_id);
 
 			Object idf = HibernateUtil.createSession();
 			Session session = HibernateUtil.getSession();

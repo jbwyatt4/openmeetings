@@ -15,7 +15,9 @@
 	<lang id="13" rightToLeft="false">japanese</lang>
 	<lang id="14" rightToLeft="false">indonesian</lang>
 	<lang id="15" rightToLeft="false">hungarian</lang>
-    <lang id="16" rightToLeft="true">parsi</lang>
-    <lang id="17" rightToLeft="false">turkish</lang>
-    <lang id="18" rightToLeft="false">ukrainian</lang>
+    <lang id="16" rightToLeft="false">turkish</lang>
+    <lang id="17" rightToLeft="false">ukrainian</lang>
+    <!-- missing file
+    <lang id="18" rightToLeft="true">parsi</lang>
+     -->
 </language>

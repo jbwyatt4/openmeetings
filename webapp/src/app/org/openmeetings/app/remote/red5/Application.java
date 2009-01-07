@@ -59,7 +59,7 @@ import com.thoughtworks.xstream.io.xml.XppDriver;
  * 
  * @author swagner
  * 
- */
+ */    
 
 public class Application extends ApplicationAdapter implements
 		IPendingServiceCallback, IStreamAwareScopeHandler {
