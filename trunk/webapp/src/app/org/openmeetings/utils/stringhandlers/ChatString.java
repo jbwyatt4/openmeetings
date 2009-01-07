@@ -6,7 +6,7 @@ import java.text.StringCharacterIterator;
 import java.util.LinkedList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.openmeetings.app.remote.Application;
+import org.openmeetings.app.remote.red5.Application;
 
 public class ChatString {
 	

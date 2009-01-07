@@ -33,5 +33,6 @@
     <property name="avsettings" type="string" column="avsettings"/>
     <property name="broadCastID" type="long" column="broadcast_id"/>
     <property name="publicSID" type="string" column="public_sid"/>
+    <property name="zombieCheckFlag" type="boolean" column="zombieCheckFlag"/>
   </class>
 </hibernate-mapping>

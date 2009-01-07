@@ -21,7 +21,7 @@
     
     <!-- Class for the Streaming Handlers -->
     <bean id="web.handler" 
-        class="org.openmeetings.app.remote.Application"
+        class="org.openmeetings.app.remote.red5.Application"
         singleton="true" />
         
     <!-- DATABASE Connection via hibernate

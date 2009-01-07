@@ -112,6 +112,11 @@ public class RoomClient {
 	private Boolean isRecording = false;
 	private String roomRecordingName;
 	
+	/*
+	 * Zombie Flag
+	 */
+	private Boolean zombieCheckFlag = false;
+	
 	public RoomClient() {
 		super();
 	}
@@ -502,6 +507,18 @@ public class RoomClient {
 	}
 	public void setPublicSID(String publicSID) {
 		this.publicSID = publicSID;
+	}
+
+	/**
+     * @hibernate.property
+     *  column="zombieCheckFlag"
+     *  type="boolean"
+     */
+	public Boolean getZombieCheckFlag() {
+		return zombieCheckFlag;
+	}
+	public void setZombieCheckFlag(Boolean zombieCheckFlag) {
+		this.zombieCheckFlag = zombieCheckFlag;
 	}
 
 }

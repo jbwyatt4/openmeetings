@@ -20,6 +20,7 @@ import org.openmeetings.app.conference.videobeans.RoomPoll;
 import org.openmeetings.app.conference.videobeans.RoomPollAnswers;
 import org.openmeetings.app.conference.videobeans.PollType;
 import org.openmeetings.app.hibernate.beans.recording.RoomClient;
+import org.openmeetings.app.remote.red5.Application;
 
 /**
  * 

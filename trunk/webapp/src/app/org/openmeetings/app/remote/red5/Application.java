@@ -1,4 +1,4 @@
-package org.openmeetings.app.remote;
+package org.openmeetings.app.remote.red5;
 
  
 import java.io.BufferedReader;
@@ -35,6 +35,10 @@ import org.openmeetings.app.conference.configutils.BandwidthConfigFactory;
 import org.openmeetings.app.conference.configutils.UserConfigFactory;
 import org.openmeetings.app.quartz.scheduler.QuartzRecordingJob;
 import org.openmeetings.app.quartz.scheduler.QuartzSessionClear;
+import org.openmeetings.app.quartz.scheduler.QuartzZombieJob;
+import org.openmeetings.app.remote.PollService;
+import org.openmeetings.app.remote.StreamService;
+import org.openmeetings.app.remote.WhiteBoardService;
 import org.openmeetings.utils.crypt.MD5;
 import org.openmeetings.utils.crypt.ManageCryptStyle;
 import org.openmeetings.utils.stringhandlers.ChatString;
@@ -119,8 +123,10 @@ public class Application extends ApplicationAdapter implements
 			//System.out.println("################## appStart    ");
 			QuartzSessionClear bwHelp = new QuartzSessionClear();
 			QuartzRecordingJob recordingJob = new QuartzRecordingJob();
+			QuartzZombieJob quartzZombieJob = new QuartzZombieJob();
 			String jobName = addScheduledJob(300000,bwHelp);
 			String jobName2 = addScheduledJob(3000,recordingJob);
+			String jobName3 = addScheduledJob(2000,quartzZombieJob);
 			//String jobName = addScheduledJob(1000,bwHelp);
 			log.debug("jobName: "+jobName);
 		} catch (Exception err) {
@@ -300,28 +306,40 @@ public class Application extends ApplicationAdapter implements
 			IConnection current = Red5.getConnectionLocal();
 			String streamid = current.getClient().getId();
 			RoomClient currentClient = ClientList.get(streamid);
+			
+			IScope scope = current.getScope();
+			
+			this.roomLeaveByScope(currentClient, scope);
+			
+		} catch (Exception err){
+			log.error("[roomLeave]",err);
+		}		
+	}
+	
+	private void roomLeaveByScope(RoomClient currentClient, IScope currentScope) {
+		try {
+			
 			Long room_id = currentClient.getRoom_id();
 			
 			//Log the User
-			ConferenceLogDaoImpl.getInstance().addConferenceLog("roomLeave", currentClient.getUser_id(), streamid, room_id, currentClient.getUserip());
+			ConferenceLogDaoImpl.getInstance().addConferenceLog("roomLeave", currentClient.getUser_id(), 
+					currentClient.getStreamid(), room_id, currentClient.getUserip());
 			
 			
 			//Remove User from Sync List's
 			if (room_id != null) {
-				WhiteBoardService.getInstance().removeUserFromAllLists(current, currentClient);
+				WhiteBoardService.getInstance().removeUserFromAllLists(currentScope, currentClient);
 			}
 
 			//String streamid = currentClient.getStreamid();
 			
 			log.debug("##### roomLeave :. " + currentClient.getStreamid()); // just a unique number
-
-
 			log.debug("removing USername "+currentClient.getUsername()+" "+currentClient.getConnectedSince()+" streamid: "+currentClient.getStreamid());
 			
 			//stop and save any recordings
 			if (currentClient.getIsRecording()) {
 				log.debug("*** roomLeave Current Client is Recording - stop that");
-				StreamService.stopRecordAndSave(current, currentClient.getRoomRecordingName(), currentClient);
+				StreamService.stopRecordAndSave(currentScope, currentClient.getRoomRecordingName(), currentClient);
 				
 				//set to true and overwrite the default one cause otherwise no notification is send
 				currentClient.setIsRecording(true);
@@ -336,18 +354,20 @@ public class Application extends ApplicationAdapter implements
 //				log.debug("clearRoomPollList cleared");
 			}
 			
-			//Notify all clients of the same scope (room) with domain and room
+			//Notify all clients of the same currentScope (room) with domain and room
 			//except the current disconnected cause it could throw an exception
 			
-			Iterator<IConnection> it = current.getScope().getConnections();
+			Iterator<IConnection> it = currentScope.getConnections();
 			while (it.hasNext()) {
 				log.debug("hasNext == true");
 				IConnection cons = it.next();
 				log.debug("cons Host: "+cons);
 				if (cons instanceof IServiceCapableConnection) {
-					if (!cons.equals(current)){
-						log.debug("sending roomDisconnect to " + cons);
-						RoomClient rcl = ClientList.get(cons.getClient().getId());
+					
+					log.debug("sending roomDisconnect to " + cons);
+					RoomClient rcl = ClientList.get(cons.getClient().getId());
+					
+					if (!currentClient.getStreamid().equals(rcl.getStreamid())){
 						//Send to all connected users	
 						((IServiceCapableConnection) cons).invoke("roomDisconnect",new Object[] { currentClient }, this);
 						log.debug("sending roomDisconnect to " + cons);
@@ -364,10 +384,9 @@ public class Application extends ApplicationAdapter implements
 					}
 				}
 			}			
-			
-		} catch (Exception err){
-			log.error("[roomDisconnect]",err);
-		}		
+		} catch (Exception err) {
+			log.error("[roomLeaveByScope]",err);
+		}
 	}
 	
 	/**
@@ -382,66 +401,8 @@ public class Application extends ApplicationAdapter implements
 			IConnection current = Red5.getConnectionLocal();
 			String streamid = current.getClient().getId();
 			RoomClient currentClient = ClientList.get(streamid);
-			Long room_id = currentClient.getRoom_id();	
 			
-			//Log the User
-			ConferenceLogDaoImpl.getInstance().addConferenceLog("roomLeave", currentClient.getUser_id(), streamid, room_id, currentClient.getUserip());
-			
-			
-			//Remove User from Sync List's
-			if (room_id != null) {
-				WhiteBoardService.getInstance().removeUserFromAllLists(current, currentClient);
-			}
-			
-			//stop and save any recordings if this user is recording
-			if (currentClient.getIsRecording()) {
-				StreamService.stopRecordAndSave(current, currentClient.getRoomRecordingName(), currentClient);
-				
-				//set to true and overwrite the default one cause otherwise no notification is send
-				currentClient.setIsRecording(true);
-			}			
-			
-			log.debug("##### logicalRoomLeave :. " + currentClient.getStreamid()); // just a unique number
-			
-			//If this Room is empty clear the Room Poll List
-			HashMap<String,RoomClient> rcpList = this.getClientListByRoomAndDomain(room_id);
-			log.debug("logicalRoomLeave rcpList size: "+rcpList.size());
-			if (rcpList.size()==0){
-				PollService.clearRoomPollList(room_id);
-				log.debug("logicalRoomLeave clearRoomPollList cleared");
-			}
-			
-			//Notify all clients of the same scope (room) with domain and room
-			
-			Iterator<IConnection> it = current.getScope().getConnections();
-			while (it.hasNext()) {
-				IConnection cons = it.next();
-				//log.debug("cons Host: "+cons);
-				if (cons instanceof IServiceCapableConnection) {
-					if (!cons.equals(current)){
-						//log.debug("sending roomDisconnect to " + cons);
-						RoomClient rcl = ClientList.get(cons.getClient().getId());
-						//Check if the Client is in the same room and same domain except its the current one
-						if(room_id!=null && room_id.equals(rcl.getRoom_id())){					
-							((IServiceCapableConnection) cons).invoke("logicalRoomLeaveDis",new Object[] { currentClient }, this);
-							log.debug("sending roomDisconnect to " + cons);
-							
-							//add Notification if another user is recording in this room
-							if (rcl.getIsRecording()){
-								log.debug("*** logicalRoomLeave Any Client is Recording - stop that");
-								StreamService.addRoomClientEnterEventFunc(rcl, rcl.getRoomRecordingName(), rcl.getUserip(), false);
-								StreamService.stopRecordingShowForClient(cons, currentClient, rcl.getRoomRecordingName(), true);
-							}
-						}
-						
-					}
-				}
-			}	
-			currentClient.setRoom_id(null);			
-			currentClient.setIsRecording(false);
-			
-			log.debug("removing USername "+currentClient.getUsername()+" "+currentClient.getConnectedSince()+" streamid: "+currentClient.getStreamid());
-			ClientList.put(currentClient.getStreamid(),currentClient);
+			this.roomLeaveByScope(currentClient, current.getScope());
 			
 		} catch (Exception err){
 			log.error("[roomDisconnect]",err);
@@ -1531,6 +1492,61 @@ public class Application extends ApplicationAdapter implements
 			imageSyncList = new HashMap<String,WhiteboardSyncLockObject>();
 		}
 		return imageSyncList;
+	}
+	
+	/**
+	 * Remove all Zombies from all Connections
+	 */
+	public synchronized void clearZombiesFromAllConnection(){
+		try {
+			
+			IScope globalScope = getContext().getGlobalScope();
+			
+			IScope webAppKeyScope = globalScope.getScope(Application.webAppRootKey);
+			
+			//log.debug("clearZombiesFromAllConnection webAppKeyScope "+webAppKeyScope);
+			
+			IScope scopeHibernate = webAppKeyScope.getScope("hibernate");
+			
+			for (Iterator<String> iter = ClientList.keySet().iterator();iter.hasNext();) {
+				String key = iter.next();
+				RoomClient rcl = ClientList.get(key);
+				rcl.setZombieCheckFlag(false);
+				ClientList.put(key, rcl);
+			}
+			
+			if (scopeHibernate!=null){
+
+				//Notify all clients of the same scope (room)
+				Iterator<IConnection> it = webAppKeyScope.getScope("hibernate").getConnections();
+				
+				if (it!=null) {
+					while (it.hasNext()) {
+						IConnection conn = it.next();				
+						RoomClient rcl = ClientList.get(conn.getClient().getId());
+						rcl.setZombieCheckFlag(true);
+						ClientList.put(conn.getClient().getId(), rcl);
+					}
+				} else {
+					log.info("sendMessageByRoomAndDomain connections is empty ");
+				}
+			} else {
+				log.info("sendMessageByRoomAndDomain servlet not yet started ");
+			}
+			
+			//Remove Zombie users
+			for (Iterator<String> iter = ClientList.keySet().iterator();iter.hasNext();) {
+				String key = iter.next();
+				RoomClient rcl = ClientList.get(key);
+				if (!rcl.getZombieCheckFlag()) {
+					log.debug("######### Found Zombie and removed em ");
+					this.roomLeaveByScope(rcl, scopeHibernate);
+				}
+			}
+			
+		} catch (Exception err) {
+			log.error("[clearZombiesFromAllConnection]",err);
+		}
 	}
 	
 	/*

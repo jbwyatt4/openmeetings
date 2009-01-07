@@ -27,7 +27,7 @@ import org.openmeetings.app.data.user.dao.UsersDaoImpl;
 import org.openmeetings.app.hibernate.beans.recording.RoomClient;
 import org.openmeetings.utils.stringhandlers.StringComparer;
 
-import org.openmeetings.app.remote.Application;
+import org.openmeetings.app.remote.red5.Application;
 
 public class ScreenServlet extends HttpServlet {
 	

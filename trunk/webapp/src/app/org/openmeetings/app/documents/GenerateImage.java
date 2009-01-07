@@ -15,7 +15,7 @@ import org.openmeetings.app.data.basic.Configurationmanagement;
 import org.openmeetings.app.data.user.Usermanagement;
 import org.openmeetings.app.data.user.dao.UsersDaoImpl;
 import org.openmeetings.app.hibernate.beans.user.Users;
-import org.openmeetings.app.remote.Application;
+import org.openmeetings.app.remote.red5.Application;
 import org.openmeetings.utils.math.CalendarPatterns;
 
 public class GenerateImage {

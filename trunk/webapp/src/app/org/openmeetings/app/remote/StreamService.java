@@ -44,6 +44,7 @@ import org.openmeetings.app.hibernate.beans.recording.RoomClient;
 import org.openmeetings.app.hibernate.beans.recording.RoomRecording;
 import org.openmeetings.app.hibernate.beans.recording.RoomStream;
 import org.openmeetings.app.hibernate.beans.recording.WhiteBoardEvent;
+import org.openmeetings.app.remote.red5.Application;
 import org.openmeetings.app.data.record.dao.ChatvaluesEventDaoImpl;
 import org.openmeetings.app.data.record.dao.RecordingClientDaoImpl;
 import org.openmeetings.app.data.record.dao.RecordingConversionJobDaoImpl;
@@ -228,14 +229,14 @@ public class StreamService implements IPendingServiceCallback {
 					}
 				}
 			}
-			return stopRecordAndSave(current, roomrecordingName, currentClient);
+			return stopRecordAndSave(current.getScope(), roomrecordingName, currentClient);
 		} catch (Exception err) {
 			log.error("[stopRecordAndSave]",err);
 		}
 		return new Long(-1);
 	}
 	
-	public static Long stopRecordAndSave(IConnection current, String roomrecordingName, RoomClient currentClient){
+	public static Long stopRecordAndSave(IScope scope, String roomrecordingName, RoomClient currentClient){
 		try {
 			log.debug("stopRecordAndSave "+currentClient.getUsername()+","+currentClient.getUserip());
 			RoomRecording roomRecording = roomRecordingList.get(roomrecordingName);
@@ -243,14 +244,14 @@ public class StreamService implements IPendingServiceCallback {
 			Long room_id = currentClient.getRoom_id();
 			currentClient.setIsRecording(false);
 			currentClient.setRoomRecordingName("");
-			Application.getClientList().put(current.getClient().getId(), currentClient);
+			Application.getClientList().put(currentClient.getStreamid(), currentClient);
 			
 			
 			String conferenceType = roomRecording.getConferenceType();
 			
 			//get all stream and stop recording them
 			//Todo: Check that nobody does Recording at the same time Issue 253
-			Iterator<IConnection> it = current.getScope().getConnections();
+			Iterator<IConnection> it = scope.getConnections();
 			while (it.hasNext()) {
 				IConnection conn = it.next();
 				if (conn instanceof IServiceCapableConnection) {

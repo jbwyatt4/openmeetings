@@ -7,7 +7,7 @@ import org.red5.server.api.IConnection;
 import org.red5.server.api.scheduling.IScheduledJob;
 import org.red5.server.api.scheduling.ISchedulingService;
 
-import org.openmeetings.app.remote.Application;
+import org.openmeetings.app.remote.red5.Application;
 
 public class BandWidthHelper implements IScheduledJob {
 

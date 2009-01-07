@@ -25,6 +25,7 @@ import org.openmeetings.app.documents.LibraryWmlLoader;
 import org.openmeetings.app.documents.LoadLibraryPresentation;
 import org.openmeetings.app.documents.LoadLibraryPresentationToObject;
 import org.openmeetings.app.documents.CreateLibraryPresentation;
+import org.openmeetings.app.remote.red5.Application;
 
 /**
  * 

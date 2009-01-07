@@ -11,7 +11,7 @@ import java.util.HashMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.apache.commons.transaction.util.FileHelper;
-import org.openmeetings.app.remote.Application;
+import org.openmeetings.app.remote.red5.Application;
 import org.openmeetings.utils.math.CalendarPatterns;
 
 public class GeneratePDF {

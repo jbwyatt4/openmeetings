@@ -29,6 +29,7 @@ import org.openmeetings.app.hibernate.beans.basic.RemoteSessionObject;
 import org.openmeetings.app.data.conference.Invitationmanagement;
 import org.openmeetings.app.data.conference.Feedbackmanagement;
 import org.openmeetings.app.data.basic.AuthLevelmanagement;
+import org.openmeetings.app.remote.red5.Application;
 import org.openmeetings.app.rss.LoadAtomRssFeed;
 
 

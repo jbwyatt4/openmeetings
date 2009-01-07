@@ -5,7 +5,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.util.LinkedList;
 
-import org.openmeetings.app.remote.Application;
+import org.openmeetings.app.remote.red5.Application;
 import org.openmeetings.utils.stringhandlers.ChatString;
 
 import com.thoughtworks.xstream.XStream;
