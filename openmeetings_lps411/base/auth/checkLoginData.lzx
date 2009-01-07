@@ -136,7 +136,7 @@
 			</handler>
         </combobox>	
     
-    <labelText name="nlabelquality" text="Quality" y="144" x="2" visible="true" />     
+    <labelText name="nlabelquality" text="Quality" y="144" x="2" visible="true" width="140" />     
         <combobox name="ncomboquality" width="170" y="144" x="120" editable="false" >
 			<handler name="oninit">
 				this.addItem("best ~ 16KB upload","best");
@@ -192,7 +192,7 @@
     	</handler>
     </simpleLabelButton> 	
     
-     <text name="errormess" resize="true" y="168" x="2" fgcolor="red" fontsize="12"/>
+    <text name="errormess" resize="true" y="168" x="2" fgcolor="red" fontsize="12"/>
 
     <netRemoteCallHib name="loginUser" funcname="xmlcrm.loginUser" 
 		remotecontext="$once{ canvas.thishib }" activeErrorHandler="true" >      
@@ -295,31 +295,6 @@
         </handler>  
     </netRemoteCallHib>    
     
-    <!-- 
-    This method is just a test for returning Object Variables from Client to Server
-     -->
-    <netRemoteCallHib name="testObject" funcname="xmlcrm.testObject" 
-		remotecontext="$once{ canvas.thishib }" >      
-        <handler name="oninit">
-            this.doCall();
-        </handler>
-        <netparam>
-        	<method name="getValue"> 
-        		var t = new Array();
-        		t.push("as");
-        		t.push("ab");
-        		t["stringObj"]="myString1";
-        		return t; 
-        	</method>
-        </netparam>         
-        <handler name="ondata" args="value">
-            //The onResult-Handler will be called be the rtmpconnection
-            //Debug.write("testObject: ",value);
-        </handler>  
-    </netRemoteCallHib>              
-    
-
-    
     <labelCheckbox x="100" y="$once{ parent.height-66 }" fontsize="12"
         name="_savelogindata" labelid="288" >
         <handler name="oninit">
@@ -334,8 +309,7 @@
         </handler>
     </labelCheckbox>        
 
-
-    <labelText align="right" resize="true" valign="bottom">
+    <labelText align="right" resize="true" valign="bottom" >
         <handler name="oninit">
             <![CDATA[
                 this.setAttribute('text',"<u><FONT color='#0000CC'>visit "+ canvas.currentappname +"</FONT></u>");
