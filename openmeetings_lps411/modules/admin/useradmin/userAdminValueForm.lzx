@@ -60,7 +60,6 @@
 			this.firstname.setAttribute('text',obj.firstname);
 			this.lastname.setAttribute('text',obj.lastname);
 			this.userpass1.setAttribute('text','');
-			this.userpass2.setAttribute('text','');
 			this.email.setAttribute('text',obj.adresses.emails[0].mail.email);
 			this.age.setAttribute('text',parseDateToString(obj.age));
 			this.street.setAttribute('text',obj.adresses.street);
@@ -133,7 +132,7 @@
 			this.sendObject["title_id"] = Number(this.parent.salutation.getValue());
   			this.sendObject["organisations"] = this.parent._organisationslist.getAllItems();
 
-  			//Debug.write("prepareCall: ",this.sendObject);
+  			if ($debug) Debug.write("prepareCall: ",this.sendObject);
   		</method>
   		<netparam><method name="getValue"> return canvas.sessionId; </method></netparam>
     	<netparam><method name="getValue">return parent.sendObject;</method></netparam>	  		
