@@ -27,7 +27,7 @@
         	onclick="this.parent.parent.doReloadEvent()" visible="$once{ parent.parent.refreshIsVisible }" />        
         <baseChooseIcon resourceN="button_cancel_rsc" labelid="157" y="2" 
         	onclick="this.parent.parent.doDeleteEvent()" visible="$once{ parent.parent.deleteIsVisible }" />
-		<labelText name="_newRecord" visibility="hidden" labelid="344" fgcolor="green" />        	 	      	
+		<labelText name="_newRecord" visibility="hidden" labelid="344" fgcolor="green" width="150" />        	 	      	
     </view>
     
     <method name="addViewToObserver" args="obj">

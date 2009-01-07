@@ -14,7 +14,7 @@
         lz.ModeManager.release(this);
     </handler>
     
-    <labelText labelid="145" y="22" />
+    <labelText labelid="145" y="22" width="260" multiline="true"/>
     
     <simpleLabelButton labelid="153" width="100" x="40" y="170">
     	<handler name="onclick">

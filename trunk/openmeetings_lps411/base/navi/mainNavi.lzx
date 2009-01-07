@@ -48,6 +48,8 @@
         this.selected=true;
         parent.parent.parent.setSubItem(this);
     </handler>
+    
+    
 </class>
 
 <class name="mainMenuMeetingsItem" extends="view" height="30"
@@ -55,6 +57,7 @@
 
     <attribute name="action" value="" type="string" />
 
+    <attribute name="textToolTip" value="" type="string" />
     <attribute name="_menuRef" value="null" />
     <attribute name="isopen" value="false" type="boolean" />
     <attribute name="isleaf" value="false" type="boolean" />
@@ -101,6 +104,9 @@
         else this._menuRef.subviews[0].onclick.sendEvent();
     </handler>
 
+
+    <labelTooltip text="$once{ parent.textToolTip }" multiline="true" />
+    
 </class>
 
 
@@ -171,7 +177,13 @@
       <![CDATA[
             var value = this.naviObject;
             for (var i=0;i<value.length;i++){
-                var t1 = new lz.mainMenuMeetingsItem(this.itemlist,{textvalue:value[i].name,list:value[i].mainnavi,isleaf:value[i].isleaf,text:value[i].label.value,action:value[i].action});
+                var t1 = new lz.mainMenuMeetingsItem(this.itemlist,{
+	                    textvalue:value[i].name,list:value[i].mainnavi,
+	                    isleaf:value[i].isleaf,
+	                    text:value[i].label.value,
+                        textToolTip:value[i].tooltip.value,
+	                    action:value[i].action
+                    });
                 if (i==0) t1.onclick.sendEvent();
                 Debug.write("t1: ",t1);
             }
