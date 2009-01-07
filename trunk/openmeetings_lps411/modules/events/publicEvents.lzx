@@ -13,11 +13,8 @@
 		</handler>
 	   
 	      <!-- label: meeting rooms --> 
-		<labelText fontstyle="bold" y="10" labelid="128" />
+		<labelText fontstyle="bold" y="10" labelid="128" width="200" />
 			
-		<!-- label: public -->	
-		<labelText y="40" labelid="129" />
-		
 		<view y="60" x="20">
 			<handler name="oninit">
 				canvas.thishib.roomtype = "public";
