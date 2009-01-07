@@ -26,7 +26,7 @@ public class ImportInitvalues {
 	private static final Logger log = LoggerFactory.getLogger(ImportInitvalues.class);
 
 	public static final String languageFolderName = "languages/";
-
+ 
 	private static final String nameOfLanguageFile = "languages.xml";
 
 	private static final String nameOfCountriesFile = "countries.xml";
@@ -52,7 +52,7 @@ public class ImportInitvalues {
 		Usermanagement.getInstance().addUserLevel("Admin", 3);
 
 		Navimanagement.getInstance().addGlobalStructure("home", 1, 124, false,
-				true, 1, "home", "false");
+				true, 1, "home", "false", 582L);
 		Navimanagement.getInstance().addMainStructure("mainDashboard", 1, 290,
 				true, true, 1, "mainDashboard", 1);
 		Navimanagement.getInstance().addMainStructure("myScheduledMeetings", 2,
@@ -61,7 +61,7 @@ public class ImportInitvalues {
 				292, true, true, 1, "myScheduledEvents", 1);
 
 		Navimanagement.getInstance().addGlobalStructure("content", 2, 289,
-				false, true, 1, "content", "true");
+				false, true, 1, "content", "true", null);
 		Navimanagement.getInstance().addMainStructure("publicContent", 4, 297,
 				true, true, 1, "publicContent", 2);
 		Navimanagement.getInstance().addMainStructure("privateContent", 5, 298,
@@ -70,21 +70,21 @@ public class ImportInitvalues {
 				299, true, true, 1, "personalContent", 2);
 
 		Navimanagement.getInstance().addGlobalStructure("record", 3, 395,
-				false, true, 1, "record", "false");
+				false, true, 1, "record", "false", 583L);
 		Navimanagement.getInstance().addMainStructure("recordContent", 7, 395,
 				true, true, 1, "recordContent", 3);
 		Navimanagement.getInstance().addMainStructure("recordingsViewer", 8,
 				396, true, true, 1, "recordingsViewer", 3);
 
 		Navimanagement.getInstance().addGlobalStructure("meetings", 4, 2,
-				false, true, 1, "meetings", "false");
+				false, true, 1, "meetings", "false", 584L);
 		Navimanagement.getInstance().addMainStructure("publicMeetings", 9, 293,
 				true, true, 1, "publicMeetings", 4);
 		Navimanagement.getInstance().addMainStructure("privateMeetings", 10,
 				294, true, true, 1, "privateMeetings", 4);
 
 		Navimanagement.getInstance().addGlobalStructure("events", 5, 3, false,
-				true, 1, "events", "false");
+				true, 1, "events", "false", 585L);
 		Navimanagement.getInstance().addMainStructure("publicEvents", 11, 295,
 				true, true, 1, "publicEvents", 5);
 		Navimanagement.getInstance().addMainStructure("privateEvents", 12, 296,
@@ -95,7 +95,7 @@ public class ImportInitvalues {
 		//Navimanagement.getInstance().addMainStructure("roomconfiguremod", 2, 192, true, false, 1, "roomconfiguremod",3);
 
 		Navimanagement.getInstance().addGlobalStructure("admin", 6, 6, false,
-				true, 2, "admin", "false");
+				true, 2, "admin", "false", 586L);
 		Navimanagement.getInstance().addMainStructure("userAdmin", 13, 125,
 				true, false, 2, "userAdmin", 6);
 		//Navimanagement.getInstance().addMainStructure("groupadmin", 2, 126, true, false, 2, "groupadmin",4);
