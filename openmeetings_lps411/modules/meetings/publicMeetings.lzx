@@ -19,7 +19,7 @@
 	   	</netRemoteCallHib>
 	    
 		<!-- label: meeting room -->
-		<labelText fontstyle="bold" y="10" labelid="128" />
+		<labelText fontstyle="bold" y="10" labelid="128" resize="true" width="200" />
 	    
 		<view y="60" x="20">
 		      <handler name="oninit">

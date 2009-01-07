@@ -13,10 +13,7 @@
 		</handler>
 		
 	      <!-- label: meeting rooms --> 
-		<labelText fontstyle="bold" y="10" labelid="128" />
-	
-		<!-- label: organisation -->		
-		<labelText y="40" labelid="130" />
+		<labelText fontstyle="bold" y="10" labelid="128" width="200" />
 	
 		<view y="60" x="20">
 			<handler name="oninit">

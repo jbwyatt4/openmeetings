@@ -12,7 +12,7 @@
 		</handler>
 		
 	      <!-- label: meeting room -->
-		<labelText fontstyle="bold" y="10" labelid="128" />
+		<labelText fontstyle="bold" y="10" labelid="128" resize="true" width="200" />
 		
 		<!-- Declared conference rooms list -->
 		<view y="60" x="20">

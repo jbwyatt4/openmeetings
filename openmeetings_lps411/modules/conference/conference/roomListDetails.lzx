@@ -80,10 +80,10 @@
 		</handler>	
 	</netRemoteCallHib>   	
 	
-	<labelText labelid="404" fontstyle="italic" />
+	<labelText labelid="404" fontstyle="italic" width="200" />
 	
-	<labelText name="_roomname" labelid="406" y="20" />
-	<labelText labelid="407" y="40" />
+	<labelText name="_roomname" labelid="406" y="20" width="200" />
+	<labelText labelid="407" y="40" width="200" />
 	<view name="_users" bgcolor="$once{ canvas.basebgcolorizer }" 
 		  width="300" height="100" y="60" >
 		<method name="clearList">
