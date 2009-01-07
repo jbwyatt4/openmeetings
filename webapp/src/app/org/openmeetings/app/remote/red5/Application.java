@@ -1524,6 +1524,7 @@ public class Application extends ApplicationAdapter implements
 					while (it.hasNext()) {
 						IConnection conn = it.next();				
 						RoomClient rcl = ClientList.get(conn.getClient().getId());
+						conn.ping();
 						rcl.setZombieCheckFlag(true);
 						ClientList.put(conn.getClient().getId(), rcl);
 					}
