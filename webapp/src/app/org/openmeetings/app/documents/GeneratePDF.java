@@ -77,15 +77,15 @@ public class GeneratePDF {
 			returnError.put("processOpenOffice", processOpenOffice);
 			HashMap<String,Object> processThumb = GenerateThumbs.getInstance().generateBatchThumb(current_dir, destinationFolder + fileName + ".pdf", destinationFolder, 80, "thumb");
 			returnError.put("processThumb", processThumb);		
-			HashMap<String,Object> processBig = GenerateThumbs.getInstance().generateImageBatchByWidth(current_dir, destinationFolder + fileName + ".pdf", destinationFolder, 660, "big");
-			returnError.put("processBig", processBig);		
+//			HashMap<String,Object> processBig = GenerateThumbs.getInstance().generateImageBatchByWidth(current_dir, destinationFolder + fileName + ".pdf", destinationFolder, 660, "big");
+//			returnError.put("processBig", processBig);		
 			HashMap<String,Object> processSWF = GenerateSWF.getInstance().generateSWF(current_dir, destinationFolder, destinationFolder, fileName);
 			returnError.put("processSWF", processSWF);	
 		} else {
 			HashMap<String,Object> processThumb = GenerateThumbs.getInstance().generateBatchThumb(current_dir, fileFullPath, destinationFolder, 80, "thumb");
 			returnError.put("processThumb", processThumb);
-			HashMap<String,Object> processBig = GenerateThumbs.getInstance().generateImageBatchByWidth(current_dir, fileFullPath, destinationFolder, 660, "big");
-			returnError.put("processBig", processBig);	
+//			HashMap<String,Object> processBig = GenerateThumbs.getInstance().generateImageBatchByWidth(current_dir, fileFullPath, destinationFolder, 660, "big");
+//			returnError.put("processBig", processBig);	
 			HashMap<String,Object> processSWF = GenerateSWF.getInstance().generateSWF(current_dir, (new File(fileFullPath)).getParentFile().getAbsolutePath()+File.separatorChar , destinationFolder, fileName);
 			returnError.put("processSWF", processSWF);				
 		}
