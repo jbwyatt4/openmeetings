@@ -1,5 +1,5 @@
 #summary Roadmap of openmeeting
-#labels Phase-Requirements,Featured
+#labels Phase-Requirements
 
 _Open-Meetings is an active project so things may change here_
 
