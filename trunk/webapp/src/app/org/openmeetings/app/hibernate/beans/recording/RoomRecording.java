@@ -24,7 +24,7 @@ public class RoomRecording {
 	private String recordingName;
 	private Date starttime;
 	private RoomClient startedby;
-	private Set<RecordingClient> roomClients;
+	private List<RecordingClient> roomClients;
 	private List<RoomStream> roomStreams;
 	private List<WhiteBoardEvent> whiteboard;
 	private List<ChatvaluesEvent> chatvalues;
@@ -140,30 +140,26 @@ public class RoomRecording {
 		this.starttime = starttime;
 	}
 	
-	
+	/**
+	 * @hibernate.many-to-one
+	 * column = "startedby_roomclient_id"
+	 * class = "org.openmeetings.app.hibernate.beans.recording.RoomClient"
+	 * insert="true"
+	 * update="true"
+	 * outer-join="true"
+	 * lazy="false"
+     */
 	public RoomClient getStartedby() {
 		return startedby;
 	}
 	public void setStartedby(RoomClient startedby) {
 		this.startedby = startedby;
 	}
-	
-	/**
-     * @hibernate.set 
-     * table = "recordingclient" 
-     * inverse = "false" 
-     * cascade = "none"
-     * lazy="false"
-     * order-by="startdate"
-     * @hibernate.one-to-many 
-     * class = "org.openmeetings.app.hibernate.beans.recording.RecordingClient"
-     * @hibernate.key 
-     * column = "roomrecording_id"
-     */
-	public Set<RecordingClient> getRoomClients() {
+
+	public List<RecordingClient> getRoomClients() {
 		return roomClients;
 	}
-	public void setRoomClients(Set<RecordingClient> roomClients) {
+	public void setRoomClients(List<RecordingClient> roomClients) {
 		this.roomClients = roomClients;
 	}
 	
