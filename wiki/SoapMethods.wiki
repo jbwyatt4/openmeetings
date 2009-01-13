@@ -5,7 +5,7 @@ _This Feature will be added in Version 0.5.1_
 
 == Description ==
 
-All Services here. You can see the recommended flow of embedding for example Rooms into your application at 
+All Services here. You can see the recommended flow of embedding for example Rooms and SIngle Sign on into your application at 
 DirectLoginSoapGeneralFlow
 
 See also for a complete Service Overview and Guide the Axis2-Service-Browser:
