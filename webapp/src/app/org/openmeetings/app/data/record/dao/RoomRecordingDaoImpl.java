@@ -68,12 +68,7 @@ public class RoomRecordingDaoImpl {
 				roomRecording.setStartedby(RoomClientDaoImpl.getInstance().getAndAddRoomClientByPublicSID(roomRecording.getStartedby()));
 			}
 			
-			log.debug("roomRecording.getRoom_setup(): "+roomRecording.getRoom_setup().getRooms_id());
-			
-			Set<RecordingClient> myClientList = roomRecording.getRoomClients();
-			
-			roomRecording.setRoomClients(null);
-			log.debug("roomRecording.getRoom_setup(): "+roomRecording.getRoomClients());
+			log.debug("roomRecording.getRoom_setup() ID: "+roomRecording.getRoom_setup().getRooms_id());
 			
 			log.debug("roomRecording.getEnduser().getRoomClientId(): "+roomRecording.getEnduser().getRoomClientId());
 			log.debug("roomRecording.getStartedby().getRoomClientId(): "+roomRecording.getStartedby().getRoomClientId());
@@ -82,11 +77,8 @@ public class RoomRecordingDaoImpl {
 			Session session = HibernateUtil.getSession();
 			Transaction tx = session.beginTransaction();
 			Long roomRecordingId = (Long) session.save(roomRecording);
-			
 			tx.commit();
 			HibernateUtil.closeSession(idf);
-			
-			roomRecording.setRoomClients(myClientList);
 			
 			return roomRecordingId;
 		} catch (HibernateException ex) {

@@ -81,7 +81,7 @@ public class RoomClientDaoImpl {
 		}
 		return null;
 	}
-	
+
 	public RoomClient getRoomClientById(Long roomClientId) {
 		try {
 			log.debug("getRoomClientById: "+ roomClientId);

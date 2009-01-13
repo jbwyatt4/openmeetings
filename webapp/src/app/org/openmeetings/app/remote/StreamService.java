@@ -49,6 +49,7 @@ import org.openmeetings.app.data.record.dao.ChatvaluesEventDaoImpl;
 import org.openmeetings.app.data.record.dao.RecordingClientDaoImpl;
 import org.openmeetings.app.data.record.dao.RecordingConversionJobDaoImpl;
 import org.openmeetings.app.data.record.dao.RecordingDaoImpl;
+import org.openmeetings.app.data.record.dao.RoomClientDaoImpl;
 import org.openmeetings.app.data.record.dao.RoomRecordingDaoImpl;
 import org.openmeetings.app.data.record.dao.RoomStreamDaoImpl;
 import org.openmeetings.app.data.record.dao.WhiteBoardEventDaoImpl;
@@ -167,7 +168,7 @@ public class StreamService implements IPendingServiceCallback {
 						roomClient.setStarttime(0L);
 						roomClient.setRcl(rcl);
 						if (roomRecording.getRoomClients() == null) {
-							roomRecording.setRoomClients(new HashSet<RecordingClient>());
+							roomRecording.setRoomClients(new LinkedList<RecordingClient>());
 						}
 						roomRecording.getRoomClients().add(roomClient);
 					}
@@ -523,6 +524,10 @@ public class StreamService implements IPendingServiceCallback {
 
 	        if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)){
 	        	Recording rec = RecordingDaoImpl.getInstance().getRecordingById(recording_id);
+	        	
+	        	rec.getRoomRecording().setRoomClients(
+	        			RecordingClientDaoImpl.getInstance().getRecordingClientByroomRecordingId(
+	        					rec.getRoomRecording().getRoomrecordingId()));
 	        	
 	        	rec.getRoomRecording().setChatvalues(
 	        			ChatvaluesEventDaoImpl.getInstance().getChatvaluesEventByRoomRecordingId(

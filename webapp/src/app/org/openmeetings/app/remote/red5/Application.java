@@ -305,6 +305,10 @@ public class Application extends ApplicationAdapter implements
 		try {
 			IConnection current = Red5.getConnectionLocal();
 			String streamid = current.getClient().getId();
+			
+			log.debug("streamid "+streamid);
+			log.debug("ClientList.size() "+ClientList.size());
+			
 			RoomClient currentClient = ClientList.get(streamid);
 			
 			IScope scope = current.getScope();
@@ -318,6 +322,10 @@ public class Application extends ApplicationAdapter implements
 	
 	private void roomLeaveByScope(RoomClient currentClient, IScope currentScope) {
 		try {
+			
+			log.debug("currentClient "+currentClient);
+			log.debug("currentScope "+currentScope);
+			log.debug("currentClient "+currentClient.getRoom_id());
 			
 			Long room_id = currentClient.getRoom_id();
 			
@@ -356,6 +364,16 @@ public class Application extends ApplicationAdapter implements
 			
 			//Notify all clients of the same currentScope (room) with domain and room
 			//except the current disconnected cause it could throw an exception
+			
+			log.debug("currentScope "+currentScope);
+			
+			if (currentScope == null ) {
+				return;
+			}
+			log.debug("currentScope "+currentScope.getConnections());
+			if (currentScope.getConnections() == null ) {
+				return;
+			}
 			
 			Iterator<IConnection> it = currentScope.getConnections();
 			while (it.hasNext()) {
