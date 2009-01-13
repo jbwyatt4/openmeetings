@@ -1569,7 +1569,7 @@ public class Application extends ApplicationAdapter implements
 				String key = iter.next();
 				RoomClient rcl = ClientList.get(key);
 				if (!rcl.getZombieCheckFlag()) {
-					log.debug("######### Found Zombie and removed em ");
+					log.debug("######### Found Zombie and removed em "+rcl+" rcl: "+rcl.getStreamid());
 					this.roomLeaveByScope(rcl, scopeHibernate);
 				}
 			}

@@ -417,6 +417,8 @@ public class WhiteBoardService implements IPendingServiceCallback {
 				
 				int numberOfInitial = this.getNumberOfInitialLoaders(syncListRoom);
 				
+				log.debug("scope "+scope);
+				
 				if (numberOfInitial==0){
 					Iterator<IConnection> it = scope.getConnections();
 					while (it.hasNext()) {
