@@ -8,6 +8,12 @@ _This Feature will be added in Version 0.5.1_
 All Services here. You can see the recommended flow of embedding for example Rooms into your application at 
 DirectLoginSoapGeneralFlow
 
+See also for a complete Service Overview and Guide the Axis2-Service-Browser:
+http://demo.openmeetings.de:5080/openmeetings/axis2-web/
+=> this ships with every !OpenMeetings installation so goto:
+http://localhost:5080/openmeetings/axis2-web/
+
+
 == Availible Services ==
 
   * [http://code.google.com/p/openmeetings/wiki/SoapMethods#UserService UserService] - manage Users, Session and Errors
