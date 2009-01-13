@@ -1,5 +1,21 @@
 #summary former news
 
+
+  * Join the Planning for the [http://groups.google.com/group/openlaszlo-europe/browse_thread/thread/c8e658dc062a6daa OpenLaszlo Meeting 2008 in Europe] to meet me and other !OpenLaszlo devs (19.08.2008)
+  * Cleared Demo Server, at 28.07.2008
+  * Article (Section !NetAdmin) in French Linux Mag in July/August, see [http://groups.google.com/group/openmeetings-user/browse_thread/thread/4ea22a2cf81b1efc Group-News] and the [http://www.ed-diamond.com/feuille_lmag107/index.html screenshot of the mag] at 08.07.2008
+  * try the http://www.openlaszlo.org/getstarted Guide including the !ScreenCast to get a Contributor of !OpenMeetings!, at 26.06.2008
+  * Blog-Notes en français at [http://www.vu.auf.org/contact/spip.php?page=vu_article_actualite&id_article=205&lang=fr l'université Pierre Mendès France] at 11.06.2008 
+  * Updated Build Instructions for Server Side using latest red5-sources, see: BuildSources, at 09.06.2008
+  * Please add you Job offers and Services to the [http://code.google.com/p/openmeetings/wiki/Jobs Job Page], at 02.06.2008
+  * VMWare Image for Debian, contributed by Federico Tomasczik,see [VMWareImageDebian051], at 28.05.2008
+  * Moodle Plugin for !OpenMeetings released, see: MoodlePlugins, at 14.05.2008
+  * !OpenMeetings 0.5.1 released, InstallationOfRelease051, Changelog: [Release051], at 12.05.2008
+  * Completed List of Services for SOAP-Gateway see SoapMethods, at 07.05.2008
+  * !WebService-Gateway added (Axis2) for embedding !OpenMeetings, see overview at TechnologyPortfolio at 21.04.2008
+  * !ScreenCast availible! http://blip.tv/file/836696?filename=Kunthar-OpenmeetingsBasicInstallation696.flv contributed by Kunthar at 18.04.2008
+  * Updated Video API, changed Video-Sizes, see  Demo Portal or AudioVideoTestingApplication (at 18.04.2008)
+  * [http://liberamemoria.blogspot.com/2008/04/instalacin-de-openmeetings-en-debian.html Some Summary in Spanish] about Installation and Project (at 13.04.2008)
   * 0.5 Final Release at 31.03.2008 [InstallationOfRelease05]
   * new Source Locations see [BuildSources]with the new converted naming convention according to [CodingGuidelines] at 06.03.2008
   * !OpenMeetings compatible with red5-latest sources since r897 see [http://groups.google.com/group/openmeetings-user/browse_thread/thread/1e0b91bd2a57584d Group-News] at 24.01.2008
