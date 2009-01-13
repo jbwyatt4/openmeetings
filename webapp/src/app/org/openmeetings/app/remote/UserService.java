@@ -8,10 +8,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.openmeetings.app.data.basic.Sessionmanagement;
 import org.openmeetings.app.data.beans.basic.SearchResult;
+import org.openmeetings.app.data.user.Addressmanagement;
+import org.openmeetings.app.data.user.Emailmanagement;
 import org.openmeetings.app.data.user.Usermanagement;
 import org.openmeetings.app.data.user.Salutationmanagement;
 import org.openmeetings.app.data.user.Organisationmanagement;
 import org.openmeetings.app.data.user.dao.UsersDaoImpl;
+import org.openmeetings.app.hibernate.beans.adresses.Adresses;
+import org.openmeetings.app.hibernate.beans.adresses.Adresses_Emails;
+import org.openmeetings.app.hibernate.beans.adresses.Emails;
 import org.openmeetings.app.hibernate.beans.user.Users;
 
 import org.red5.io.utils.ObjectMap;
@@ -269,11 +274,46 @@ public class UserService {
      * @return
      */
     public Long deleteUserAdmin(String SID, int user_idClient){
+    	log.debug("deleteUserAdmin");
+    	
     	Long users_id = Sessionmanagement.getInstance().checkSession(SID);
+    	
     	long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
+    	
+    	
+    	// admins only
     	if(user_level>=3){
+    		// no self destruction ;-)
     		if (users_id!=user_idClient){
-    		return UsersDaoImpl.getInstance().deleteUserID(user_idClient);
+    			
+    			// Setting user deleted
+    			Long userId =  UsersDaoImpl.getInstance().deleteUserID(user_idClient);
+    			
+    			Users user = Usermanagement.getInstance().checkAdmingetUserById(user_level, users_id);
+    			
+    			// Updating address
+				Adresses ad = user.getAdresses();
+				
+				if(ad != null){
+					ad.setDeleted("true");
+					
+					Addressmanagement.getInstance().updateAdress(ad);
+					log.debug("deleteUserId : Address updated");
+				
+					Adresses_Emails ae = Emailmanagement.getInstance().getAdresses_EmailsByAddress(ad.getAdresses_id());
+					
+					if(ae != null){
+						Emails e = ae.getMail();
+						e.setDeleted("true");
+						
+						Emailmanagement.getInstance().updateEmail(e);
+					}
+					
+					log.debug("deleteUserId : mail updated");
+				}
+    			
+    			
+    			return userId;
     		} else {
     			return new Long(-10);
     		}

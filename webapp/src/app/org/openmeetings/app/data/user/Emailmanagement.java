@@ -112,6 +112,67 @@ public class Emailmanagement {
 		}
 		return null;
 	}	
+	
+	/**
+	 * 
+	 * @param address
+	 * @return
+	 */
+	//---------------------------------------------------------------------------
+	public Adresses_Emails getAdresses_EmailsByAddress(Long address) {
+		
+		log.debug("Emailmanagement.getAdresses_EmailsByAddress");
+		
+		try {
+			String hql = "select c from Adresses_Emails as c " +
+					" where c.adresses_id = :address ";
+			Object idf = HibernateUtil.createSession();
+			Session session = HibernateUtil.getSession();
+			Transaction tx = session.beginTransaction();
+			Query query = session.createQuery(hql);
+			query.setLong("address", address);
+			
+			Adresses_Emails e = (Adresses_Emails) query.uniqueResult();
+			tx.commit();
+			HibernateUtil.closeSession(idf);
+			return e;
+		} catch (HibernateException ex) {
+			log.error("getAdresses_EmailsByAddress",ex);
+		} catch (Exception ex2) {
+			log.error("getAdresses_EmailsByAddress",ex2);
+		}
+		
+		return null;
+	}
+	//---------------------------------------------------------------------------
+	
+	/**
+	 * @author becherer
+	 */
+	//--------------------------------------------------------------------------------
+	public void updateEmail(Emails mail){
+		
+		log.debug("Emailmanagement.updateEmail : " + mail.getEmail());
+		
+		try{
+			Object idf = HibernateUtil.createSession();
+			Session session = HibernateUtil.getSession();
+			Transaction tx = session.beginTransaction();
+		
+			session.update(mail);
+		
+			tx.commit();
+			
+			session.flush();
+			
+			HibernateUtil.closeSession(idf);
+		}catch(Exception e){ 
+			log.error("Emailmanagement.updateEmail : Error updating email : " + e.getMessage());
+		}
+		
+	}
+	//--------------------------------------------------------------------------------
+	
 
 	public List getemailsCon(int CONTACT_ID) {
 		try {
