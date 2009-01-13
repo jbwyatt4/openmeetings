@@ -309,6 +309,13 @@ public class Application extends ApplicationAdapter implements
 			log.debug("streamid "+streamid);
 			log.debug("ClientList.size() "+ClientList.size());
 			
+			for (Iterator<String> iter=ClientList.keySet().iterator();iter.hasNext();) {
+				String key = iter.next();
+				
+				RoomClient rcl = ClientList.get(key);
+				log.debug("RoomClient "+rcl.getStreamid()+ " "+key+" Username "+rcl.getUsername());
+			}
+			
 			RoomClient currentClient = ClientList.get(streamid);
 			
 			IScope scope = current.getScope();
@@ -353,14 +360,6 @@ public class Application extends ApplicationAdapter implements
 				currentClient.setIsRecording(true);
 			}
 
-			this.disconnectUser(currentClient);
-			//If this Room is empty clear the Room Poll List
-			HashMap<String,RoomClient> rcpList = this.getClientListByRoomAndDomain(room_id);
-			log.debug("roomLeave rcpList size: "+rcpList.size());
-			if (rcpList.size()==0){
-				PollService.clearRoomPollList(room_id);
-//				log.debug("clearRoomPollList cleared");
-			}
 			
 			//Notify all clients of the same currentScope (room) with domain and room
 			//except the current disconnected cause it could throw an exception
@@ -401,7 +400,19 @@ public class Application extends ApplicationAdapter implements
 						}
 					}
 				}
-			}			
+			}	
+			
+			
+			//Remove User AFTER cause otherwise the currentClient Object is NULL ?!
+			this.disconnectUser(currentClient);
+			//If this Room is empty clear the Room Poll List
+			HashMap<String,RoomClient> rcpList = this.getClientListByRoomAndDomain(room_id);
+			log.debug("roomLeave rcpList size: "+rcpList.size());
+			if (rcpList.size()==0){
+				PollService.clearRoomPollList(room_id);
+//				log.debug("clearRoomPollList cleared");
+			}
+			
 		} catch (Exception err) {
 			log.error("[roomLeaveByScope]",err);
 		}

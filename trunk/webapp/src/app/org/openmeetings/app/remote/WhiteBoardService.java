@@ -395,7 +395,7 @@ public class WhiteBoardService implements IPendingServiceCallback {
 //		return number;
 //	}	
 //	
-	public void removeUserFromAllLists(IScope scope, RoomClient currentClient){
+	public synchronized void removeUserFromAllLists(IScope scope, RoomClient currentClient){
 		try {
 			
 			Long room_id = currentClient.getRoom_id();
