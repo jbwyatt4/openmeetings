@@ -14,6 +14,7 @@
 
  * add overview in Administration which user is in which room
  * add option in Administration to kick users out of room (Issue 291)
+ * enable to configure each room another domain to enable a multi server scenario (some kind of clustering where one server is central and redirects each user to the correct room)
 
 == Version 0.8 == 
 
