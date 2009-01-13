@@ -1,7 +1,7 @@
 #summary General Flow of Direct-Login/Managing Rooms with SOAP-Gateway
 #labels Phase-Design,Phase-Implementation
 
-_This Feature will be added in Version 0.5.1_
+_This Feature will is available since Version 0.5.1_
 
 == Summary ==
 
