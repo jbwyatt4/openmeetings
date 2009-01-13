@@ -44,6 +44,10 @@ public class Fieldmanagment {
 	//Reflect the Reverse Order!!
 	public Fieldlanguagesvalues getFieldByIdAndLanguageByNavi(Long fieldvalues_id, Long language_id) {
 		try {
+			if (fieldvalues_id == null) {
+				return null;
+			}
+			
 			Object idf = HibernateUtil.createSession();
 			Session session = HibernateUtil.getSession();
 			Transaction tx = session.beginTransaction();
@@ -80,9 +84,9 @@ public class Fieldmanagment {
 			}
 			
 		} catch (HibernateException ex) {
-			log.error("[getFieldByIdAndLanguage]: " + ex);
+			log.error("[getFieldByIdAndLanguage]: " , ex);
 		} catch (Exception ex2) {
-			log.error("[getFieldByIdAndLanguage]: " + ex2);
+			log.error("[getFieldByIdAndLanguage]: " , ex2);
 		}
 		return null;
 	}
@@ -101,9 +105,9 @@ public class Fieldmanagment {
 			
 			return flv;
 		} catch (HibernateException ex) {
-			log.error("[getFieldByIdAndLanguage]: " + ex);
+			log.error("[getFieldByIdAndLanguage]: " , ex);
 		} catch (Exception ex2) {
-			log.error("[getFieldByIdAndLanguage]: " + ex2);
+			log.error("[getFieldByIdAndLanguage]: " , ex2);
 		}
 		return null;
 	}
@@ -124,9 +128,9 @@ public class Fieldmanagment {
 			
 			return new Long(-28);
 		} catch (HibernateException ex) {
-			log.error("[getFieldByIdAndLanguage]: " + ex);
+			log.error("[getFieldByIdAndLanguage]: " , ex);
 		} catch (Exception ex2) {
-			log.error("[getFieldByIdAndLanguage]: " + ex2);
+			log.error("[getFieldByIdAndLanguage]: " , ex2);
 		}
 		return new Long(-1);
 	}	
@@ -217,9 +221,9 @@ public class Fieldmanagment {
 			
 			
 		} catch (HibernateException ex) {
-			log.error("[getConfKey]: " + ex);
+			log.error("[getConfKey]: " , ex);
 		} catch (Exception ex2) {
-			log.error("[getConfKey]: " + ex2);
+			log.error("[getConfKey]: " , ex2);
 		}
 		return null;
 	}
