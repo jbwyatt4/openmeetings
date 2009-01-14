@@ -158,10 +158,13 @@ public class Addressmanagement {
 			Session session = HibernateUtil.getSession();
 			Transaction tx = session.beginTransaction();
 
+			System.out.println("ADDR : DELETED = " + addr.getDeleted());
+			
 			session.update(addr);
-			session.flush();
-
+			
 			tx.commit();
+			
+			
 			HibernateUtil.closeSession(idf);
 
 			return addr;

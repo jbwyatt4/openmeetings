@@ -96,6 +96,7 @@ public class Usermanagement {
 	
 	
 	
+	
 	public SearchResult getAllUserByRange(String search, int start, int max, String orderby, boolean asc){
 		try {
 				SearchResult sresult = new SearchResult();
@@ -1002,5 +1003,77 @@ public class Usermanagement {
 		MailHandler.sendMail(addrE.getMail().getEmail(), labelid517.getValue(), template);
 	}
 	
+	/**
+	 * 
+	 * Find User by Id
+	 */
+	//-----------------------------------------------------------------------------------------------------
+	public Users getUserById(Long id) throws Exception{
+		log.debug("Usermanagement.getUserById");
+		
+		Object idf = HibernateUtil.createSession();
+		Session session = HibernateUtil.getSession();
+		Transaction tx = session.beginTransaction();
+		
+		Criteria crit = session.createCriteria(Users.class);
+		crit.add(Restrictions.eq("user_id", id));
+		crit.add(Restrictions.eq("deleted", "false"));
+		//crit.add(Restrictions.eq("status", 1));
+		Users u = (Users)crit.uniqueResult();
+		
+		tx.commit();
+		HibernateUtil.closeSession(idf);
+		
+		return u;
+		
+	}
+	//-----------------------------------------------------------------------------------------------------
+	
+	/**
+	 * @author o.becherer
+	 * Find User by LoginName (test existence of a active user with login - name
+	 */
+	//-----------------------------------------------------------------------------------------------------
+	public Users getUserByLogin(String login) throws Exception{
+		log.debug("Usermanagement.getUserByLogin : " + login);
+		
+		Object idf = HibernateUtil.createSession();
+		Session session = HibernateUtil.getSession();
+		Transaction tx = session.beginTransaction();
+		
+		Criteria crit = session.createCriteria(Users.class);
+		crit.add(Restrictions.eq("login", login));
+		crit.add(Restrictions.eq("deleted", "false"));
+		//crit.add(Restrictions.eq("status", 1));
+		Users u = (Users)crit.uniqueResult();
+		
+		tx.commit();
+		HibernateUtil.closeSession(idf);
+		
+		return u;
+		
+	}
+	//-----------------------------------------------------------------------------------------------------
+	
+	
+	/**
+	 * @author o.becherer
+	 * Updating User Object
+	 */
+	//-----------------------------------------------------------------------------------------------------
+	public void updateUserObject(Users user, boolean encryptPasswd) throws Exception{
+		log.debug("Usermanagement.getUserByLogin");
+		
+		
+		if(encryptPasswd){
+			String encrypted = ManageCryptStyle.getInstance().getInstanceOfCrypt().createPassPhrase(user.getPassword());
+			user.setPassword(encrypted);
+		}
+		
+		UsersDaoImpl.getInstance().updateUser(user);		
+		
+		
+	}
+	//-----------------------------------------------------------------------------------------------------
 
 }

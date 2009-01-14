@@ -158,13 +158,9 @@ public class Emailmanagement {
 			Object idf = HibernateUtil.createSession();
 			Session session = HibernateUtil.getSession();
 			Transaction tx = session.beginTransaction();
-		
-			session.update(mail);
-		
+			
+			session.saveOrUpdate(mail);		
 			tx.commit();
-			
-			session.flush();
-			
 			HibernateUtil.closeSession(idf);
 		}catch(Exception e){ 
 			log.error("Emailmanagement.updateEmail : Error updating email : " + e.getMessage());
