@@ -101,6 +101,7 @@ public class UsersDaoImpl {
 				Transaction tx = session.beginTransaction();
 				session.update(us);
 				tx.commit();
+				
 				HibernateUtil.closeSession(idf);
 				return us.getUser_id();
 				// result +=

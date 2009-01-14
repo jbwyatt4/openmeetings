@@ -155,7 +155,7 @@ public class Sessionmanagement {
 	 */
 	public Boolean updateUser(String SID, long USER_ID) {
 		try {
-			//log.debug("updateUser User: "+USER_ID+" || "+SID);
+			log.debug("updateUser User: "+USER_ID+" || "+SID);
 			
 			Object idf = HibernateUtil.createSession();
 			Session session = HibernateUtil.getSession();

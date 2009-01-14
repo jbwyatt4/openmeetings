@@ -25,6 +25,7 @@ import org.openmeetings.app.data.user.Usermanagement;
 import org.openmeetings.app.data.user.Statemanagement;
 import org.openmeetings.app.data.user.dao.UsersDaoImpl;
 import org.openmeetings.app.hibernate.beans.basic.RemoteSessionObject;
+import org.openmeetings.app.ldap.LdapLoginManagement;
 
 import org.openmeetings.app.data.conference.Invitationmanagement;
 import org.openmeetings.app.data.conference.Feedbackmanagement;
@@ -141,6 +142,91 @@ public class MainService implements IPendingServiceCallback {
      * @return a valid user account or an empty user with an error message and level -1
      */ 
     public Object loginUser(String SID, String Username, String Userpass){
+    	
+    	// Check, whether LDAP - Login is required(Configuration has key ldap_config_path
+    	boolean withLdap = false;
+    	
+    	// Faking admin userlevel to retrieve ConfigVal for LDAP
+    	Configuration configVal = Configurationmanagement.getInstance().getConfKey(3, "ldap_config_path");
+		
+    	if(configVal != null && configVal.getConf_value() != null && configVal.getConf_value().length() > 0){
+    		log.debug("Ldap Config Key Found -> Login via LDAP");
+    		withLdap = true;
+    	}
+    	
+    	
+    	try {
+    		log.debug("loginUser 111: "+SID+" "+Username);
+    		
+    		// Prüfen, ob User bereits vorhanden ist
+    		Users user = Usermanagement.getInstance().getUserByLogin(Username);
+    		
+    		// AdminUser werden auf jeden Fall lokal authentifiziert
+    		if(user != null && user.getLevel_id() >=3){
+    			log.debug("User " + Username + " is admin -> local login");
+    			withLdap = false;
+    		}
+    		
+    		RoomClient currentClient;
+    		IConnection current = Red5.getConnectionLocal();
+    		
+    		Object o;
+    		
+    		if(withLdap){
+    			log.debug("Ldap Login");
+    			
+	        	currentClient = Application.getClientList().get(current.getClient().getId());
+	           
+	        	o =  LdapLoginManagement.getInstance().doLdapLogin(Username, Userpass, currentClient, SID);
+	        	
+    		}
+    		else{
+    			log.debug("default login");
+    			// User exists -> DefaultLogin
+	    		currentClient = Application.getClientList().get(current.getClient().getId());
+	            o = Usermanagement.getInstance().loginUser(SID,Username,Userpass, currentClient);
+	      	}
+    		
+    		if(o==null)
+    			return null;
+    		
+    		if(!o.getClass().isAssignableFrom(Users.class))
+    			return o;
+    		
+    		if (currentClient.getUser_id()!=null && currentClient.getUser_id()>0) {
+    			
+    				Users u = (Users)o;
+	            	currentClient.setFirstname(u.getFirstname());
+	            	currentClient.setLastname(u.getLastname());
+	    			Iterator<IConnection> it = current.getScope().getConnections();
+	    			while (it.hasNext()) {
+	    				
+	    				//log.error("hasNext == true");
+	    				IConnection cons = it.next();
+	    				//log.error("cons Host: "+cons);
+	    				if (cons instanceof IServiceCapableConnection) {
+	    					if (!cons.equals(current)){
+	    						//log.error("sending roomDisconnect to " + cons);
+	    						RoomClient rcl = Application.getClientList().get(cons.getClient().getId());
+	    						//Send to all connected users
+								((IServiceCapableConnection) cons).invoke("roomConnect",new Object[] { currentClient }, this);
+								//log.error("sending roomDisconnect to " + cons);
+	    					}
+	    				}
+	    			} 
+	            }
+	            
+	            return o;
+
+			
+    	} catch (Exception err) {
+    		log.error("loginUser : ",err);
+    	}
+    	
+    	return null;
+    	
+    	
+    	/*
     	try {
         	log.debug("loginUser 111: "+SID+" "+Username);
         	IConnection current = Red5.getConnectionLocal();
@@ -173,6 +259,7 @@ public class MainService implements IPendingServiceCallback {
     		log.error("loginUser",err);
     	}
     	return null;
+    	*/
     } 
     
     /**
