@@ -49,8 +49,9 @@ public class Configurationmanagement {
 				Object idf = HibernateUtil.createSession();
 				Session session = HibernateUtil.getSession();
 				Transaction tx = session.beginTransaction();
-				Query query = session.createQuery("select c from Configuration as c where c.conf_key = :conf_key");
+				Query query = session.createQuery("select c from Configuration as c where c.conf_key = :conf_key and c.deleted = :deleted");
 				query.setString("conf_key", CONF_KEY);
+				query.setString("deleted", "false");
 				for (Iterator it = query.iterate(); it.hasNext();) {
 					configuration = (Configuration) it.next();
 				}
