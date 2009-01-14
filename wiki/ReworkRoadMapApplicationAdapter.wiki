@@ -9,6 +9,7 @@
  * fix recorder (move recorded FLV to default scope so that record does not have to connect to each scope, only to default one
  * fix overall chat to be able to send message in every scope
  * fix screen sharing to add the scope-name to be able to send the Screen to the custom room-name
+ * fix session object after changing the user-record (Issue 594)
 
 == Version 0.7 ==
 
