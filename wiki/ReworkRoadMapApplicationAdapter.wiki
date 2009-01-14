@@ -2,7 +2,7 @@
 
 == Version 0.6 ==
 
- * new !ApplicationAdapter Class (keep old one, add new one and change red5-config)
+ * new !ApplicationAdapter Class (keep old one, add new one and change red5-config) (Issue 593)
  * reconnect Users to each Scope instead of general Scope when they enter a room. So you only need to iterate through the Users of a Room instead of all Users (BIg workload in this Issue! maybe this can be split up into severals) => this also includes a rework of the !RoomClient-List (Issue 589, Issue 364)
  * add some sort of graph that illustrates the event-model of the room-enter and room-leave events => this is important to have better control and overview of the logic of the !RoomClients! to prevent Zombies and other issues (Issue 592)
  * fix Zombie-Control Run (Zombies can be duplicated by VPN connections on OSx for example) (Issue 583)
