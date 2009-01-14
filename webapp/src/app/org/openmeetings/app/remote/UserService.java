@@ -18,6 +18,7 @@ import org.openmeetings.app.hibernate.beans.adresses.Adresses;
 import org.openmeetings.app.hibernate.beans.adresses.Adresses_Emails;
 import org.openmeetings.app.hibernate.beans.adresses.Emails;
 import org.openmeetings.app.hibernate.beans.user.Users;
+import org.openmeetings.app.xmlimport.UserImport;
 
 import org.red5.io.utils.ObjectMap;
 
@@ -280,7 +281,6 @@ public class UserService {
     	
     	long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
     	
-    	
     	// admins only
     	if(user_level>=3){
     		// no self destruction ;-)
@@ -289,7 +289,7 @@ public class UserService {
     			// Setting user deleted
     			Long userId =  UsersDaoImpl.getInstance().deleteUserID(user_idClient);
     			
-    			Users user = Usermanagement.getInstance().checkAdmingetUserById(user_level, users_id);
+    			Users user = Usermanagement.getInstance().checkAdmingetUserById(user_level, userId);
     			
     			// Updating address
 				Adresses ad = user.getAdresses();
