@@ -22,7 +22,24 @@
     <!-- Class for the Streaming Handlers -->
     <bean id="web.handler" 
         class="org.openmeetings.app.remote.red5.Application"
-        singleton="true" />
+        singleton="true">
+    </bean>
+    
+    <!-- New Class for the Streaming Handlers
+    <bean id="web.handler" 
+        class="org.openmeetings.app.remote.red5.ScopeApplicationAdapater"
+        singleton="true">
+        <property name="clientListManager" ref="openmeetings.ClientListManager" />
+    </bean>
+        
+    <bean id="openmeetings.ClientListManager" singleton="true" 
+        class="org.openmeetings.app.remote.red5.ClientListManager">
+    </bean> 
+    
+    <bean id="openmeetings.EmoticonsManager" singleton="true" 
+        class="org.openmeetings.app.remote.red5.EmoticonsManager">
+    </bean> 
+     -->
         
     <!-- DATABASE Connection via hibernate
     <bean id="theSessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">

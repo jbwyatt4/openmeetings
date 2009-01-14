@@ -338,7 +338,7 @@ public class Application extends ApplicationAdapter implements
 			
 			//Log the User
 			ConferenceLogDaoImpl.getInstance().addConferenceLog("roomLeave", currentClient.getUser_id(), 
-					currentClient.getStreamid(), room_id, currentClient.getUserip());
+					currentClient.getStreamid(), room_id, currentClient.getUserip(), "");
 			
 			
 			//Remove User from Sync List's
@@ -419,7 +419,7 @@ public class Application extends ApplicationAdapter implements
 	}
 	
 	/**
-	 * this means a user has left a room but only logically, he didn't leave the app he jusst left the room
+	 * this means a user has left a room but only logically, he didn't leave the app he just left the room
 	 * 
 	 * Exit Room by Application
 	 * 
@@ -741,7 +741,7 @@ public class Application extends ApplicationAdapter implements
 			
 			
 			//Log the User
-			ConferenceLogDaoImpl.getInstance().addConferenceLog("roomEnter", currentClient.getUser_id(), streamid, room_id, currentClient.getUserip());
+			ConferenceLogDaoImpl.getInstance().addConferenceLog("roomEnter", currentClient.getUser_id(), streamid, room_id, currentClient.getUserip(), "");
 			
 			log.debug("##### setRoomValues : " + currentClient.getUsername()+" "+currentClient.getStreamid()); // just a unique number
 
