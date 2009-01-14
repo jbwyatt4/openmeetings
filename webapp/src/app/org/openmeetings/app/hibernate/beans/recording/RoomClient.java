@@ -23,6 +23,8 @@ public class RoomClient {
 	 */
 	private String streamid = "";
 	
+	private String scope = "";
+	
 	/*
 	 * an unique PUBLIC id,
 	 * this ID is needed as people can reconnect and will get a new 
@@ -231,6 +233,18 @@ public class RoomClient {
 	}
 	public void setStreamid(String streamid) {
 		this.streamid = streamid;
+	}
+	
+	/**
+     * @hibernate.property
+     *  column="scope"
+     *  type="string"
+     */
+	public String getScope() {
+		return scope;
+	}
+	public void setScope(String scope) {
+		this.scope = scope;
 	}
 
 	/**
@@ -520,5 +534,6 @@ public class RoomClient {
 	public void setZombieCheckFlag(Boolean zombieCheckFlag) {
 		this.zombieCheckFlag = zombieCheckFlag;
 	}
+	
 
 }

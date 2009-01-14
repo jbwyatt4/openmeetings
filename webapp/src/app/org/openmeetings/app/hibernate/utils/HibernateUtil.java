@@ -8,6 +8,7 @@ import org.hibernate.*;
 import org.hibernate.cfg.*;
 
 import org.openmeetings.app.remote.red5.Application;
+import org.openmeetings.app.remote.red5.ScopeApplicationAdapater;
 
 public class HibernateUtil {
 	
@@ -69,7 +70,8 @@ public class HibernateUtil {
 		try {
 			if (sessionFactory == null) {
 				if (isLife){
-					String current_dir = Application.webAppPath+File.separatorChar+Application.configDirName+File.separatorChar+"hibernate.cfg.xml";
+					String current_dir = Application.webAppPath+File.separatorChar+
+								Application.configDirName+File.separatorChar+"hibernate.cfg.xml";
 					sessionFactory = new Configuration().configure(new File(current_dir)).buildSessionFactory();
 				} else {
 					sessionFactory = new Configuration().configure().buildSessionFactory();

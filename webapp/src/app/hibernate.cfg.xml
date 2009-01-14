@@ -3,43 +3,13 @@
 
 <hibernate-configuration>
   <session-factory>
-		
-		<!-- User  / Password -->
-		<property name="connection.username">root</property>
-		<property name="connection.password"></property>
-		
-		<!-- Database Settings -->
-		<property name="connection.driver_class">com.mysql.jdbc.Driver</property>
-		<!--  for performance reasons changed to MyISAM from org.hibernate.dialect.MySQLInnoDBDialect -->
-		<property name="dialect">org.hibernate.dialect.MySQLMyISAMDialect</property>
-		<property name="connection.url">jdbc:mysql://localhost/openmeetings?useUnicode=true&amp;createDatabaseIfNotExist=true&amp;characterEncoding=utf-8</property>	
-		
-		<property name="hibernate.connection.CharSet">utf8</property>
-		<property name="hibernate.connection.characterEncoding">utf8</property>
-		<property name="hibernate.connection.useUnicode">true</property>
-
-		
-		<!-- Database Scheme Auto Update -->
-		<property name="hbm2ddl.auto">update</property>			
-
-		<!-- properties -->
-		
-		<property name="show_sql">false</property>
-		<property name="use_outer_join">false</property>
-		<property name="hibernate.query.factory_class">org.hibernate.hql.ast.ASTQueryTranslatorFactory</property>
-        <property name="connection.provider_class ">org.hibernate.connection.C3P0ConnectionProvider</property>
-        <property name="cache.provider_class">org.hibernate.cache.NoCacheProvider </property>
-        <property name="cache.use_query_cache">false</property>
-        <property name="cache.use_second_level_cache">false</property>
-        <property name="generate_statistics">false</property>
-        <property name="cache.use_structured_entries">false</property>
-
-
-		<property name="c3p0.max_size">20</property>
-		<property name="c3p0.min_size">2</property>
-		<property name="c3p0.max_statements">100</property>
-		<property name="c3p0.timeout">3600</property>
-
+    <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+    <property name="hibernate.connection.url">jdbc:postgresql://localhost/xmlcrm</property>
+    <property name="hibernate.connection.username">postgres</property>
+    <property name="hibernate.connection.password">*****</property>
+    <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+    <property name="hibernate.show_sql">true</property>
+    <property name="hibernate.hbm2ddl.auto">update</property>
     <mapping resource="org/openmeetings/app/hibernate/beans/adresses/Adresses.hbm.xml"/>
     <mapping resource="org/openmeetings/app/hibernate/beans/adresses/Adresses_Emails.hbm.xml"/>
     <mapping resource="org/openmeetings/app/hibernate/beans/adresses/Emails.hbm.xml"/>

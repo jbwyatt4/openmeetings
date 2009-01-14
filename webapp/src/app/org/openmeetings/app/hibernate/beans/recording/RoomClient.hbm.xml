@@ -10,6 +10,7 @@
     <property name="isMod" type="boolean" column="is_mod"/>
     <property name="username" type="string" column="username"/>
     <property name="streamid" type="string" column="streamid"/>
+    <property name="scope" type="string" column="scope"/>
     <property name="formatedDate" type="string" column="formated_date"/>
     <property name="usercolor" type="string" column="usercolor"/>
     <property name="userpos" type="int" column="userpos"/>

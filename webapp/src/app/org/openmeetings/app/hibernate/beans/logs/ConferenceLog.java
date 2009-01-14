@@ -9,6 +9,7 @@ import java.util.Date;
  */
 public class ConferenceLog {
 	
+	
 	private long conferenceLogId;
 	private ConferenceLogType conferenceLogType;
 	private Date inserted;
@@ -19,6 +20,7 @@ public class ConferenceLog {
 	private String streamid;
 	private Long room_id;
 	private String userip;
+	private String scopeName;
 	
 	/**
      * 
@@ -121,5 +123,16 @@ public class ConferenceLog {
 		this.userip = userip;
 	}
 	
+	/**
+     * @hibernate.property
+     *  column="scopename"
+     *  type="string"
+     */
+	public String getScopeName() {
+		return scopeName;
+	}
+	public void setScopeName(String scopeName) {
+		this.scopeName = scopeName;
+	}
 	
 }

@@ -28,7 +28,7 @@ public class ConferenceLogDaoImpl {
 	}
 	
 
-	public Long addConferenceLog(String eventType, Long userId, String streamid, Long room_id, String userip) {
+	public Long addConferenceLog(String eventType, Long userId, String streamid, Long room_id, String userip, String scopeName) {
 		try {
 			
 			ConferenceLogType confLogType = ConferenceLogTypeDaoImpl.getInstance().getConferenceLogTypeByEventName(eventType);
