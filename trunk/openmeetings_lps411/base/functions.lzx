@@ -177,7 +177,9 @@ function disableCurrentMouseWheelObject() {
 	<![CDATA[
 	this.moderatorName = mod;
 	canvas._mymod.mymodText.setAttribute('text',canvas.getLabelName(98)+' '+this.moderatorName);
-	//Debug.write("canvas.moderatorStreamID==canvas.streamid",canvas.moderatorStreamID==canvas.streamid);
+	if ($debug) Debug.write("canvas.moderatorStreamID==canvas.streamid",
+                            (canvas.moderatorStreamID==canvas.streamid),
+                            canvas.moderatorStreamID,canvas.streamid);
 	if (canvas.moderatorStreamID==canvas.streamid){
 		this.setAttribute('ismoderator',true);
 	} else {
