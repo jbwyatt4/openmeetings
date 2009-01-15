@@ -10,6 +10,7 @@
  * fix overall chat to be able to send message in every scope
  * fix screen sharing to add the scope-name to be able to send the Screen to the custom room-name
  * fix session object after changing the user-record (Issue 594)
+ * add print Jobs to Print-Service instead of Application Adapter
 
 == Version 0.7 ==
 
