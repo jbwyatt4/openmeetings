@@ -379,7 +379,7 @@
         <netRemoteCallHib name="setId" funcname="setId">
             <handler name="ondata" args="value">
                 //The onResult-Handler will be called be the rtmpconnection
-                //Debug.write("################ setId: ",value);
+                if ($debug) Debug.write("################ setId: ",value);
                 canvas.setAttribute('streamid',value);   
             </handler>  
         </netRemoteCallHib> 
