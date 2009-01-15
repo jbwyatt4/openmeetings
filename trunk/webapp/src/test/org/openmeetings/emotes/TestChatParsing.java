@@ -5,7 +5,6 @@ import java.io.File;
 import java.io.FileReader;
 import java.util.LinkedList;
 
-import org.openmeetings.app.remote.red5.Application;
 import org.openmeetings.utils.stringhandlers.ChatString;
 
 import com.thoughtworks.xstream.XStream;
@@ -31,21 +30,21 @@ public class TestChatParsing extends TestCase {
 	
 	public void loadEmot(String filePath){
 		try {
-			String fileName = filePath + File.separatorChar + "emoticons" + File.separatorChar + "emotes.xml";
-			XStream xStream = new XStream(new XppDriver());
-			xStream.setMode(XStream.NO_REFERENCES);
-			BufferedReader reader = new BufferedReader(new FileReader(fileName));
-		    String xmlString = "";
-		    while (reader.ready()) {
-		    	xmlString += reader.readLine();
-		    }
-		    Application.setEmotfilesList((LinkedList<LinkedList<String>>) xStream.fromXML(xmlString));
-		    ChatString.getInstance().replaceAllRegExp();
-		    String messageText = "Hi :) how are you? whats going on B) today (T_T) ? with you ?";
-		    //messageText = ":) Hi :) how :( are :) you :( today >:O going on? :)";
-		    //messageText = "Hi :) how :( are :) you :( today :) ";
-		    //messageText = "Hi :) how";
-		    ChatString.getInstance().parseChatString(messageText);
+//			String fileName = filePath + File.separatorChar + "emoticons" + File.separatorChar + "emotes.xml";
+//			XStream xStream = new XStream(new XppDriver());
+//			xStream.setMode(XStream.NO_REFERENCES);
+//			BufferedReader reader = new BufferedReader(new FileReader(fileName));
+//		    String xmlString = "";
+//		    while (reader.ready()) {
+//		    	xmlString += reader.readLine();
+//		    }
+//		    Application.setEmotfilesList((LinkedList<LinkedList<String>>) xStream.fromXML(xmlString));
+//		    ChatString.getInstance().replaceAllRegExp();
+//		    String messageText = "Hi :) how are you? whats going on B) today (T_T) ? with you ?";
+//		    //messageText = ":) Hi :) how :( are :) you :( today >:O going on? :)";
+//		    //messageText = "Hi :) how :( are :) you :( today :) ";
+//		    //messageText = "Hi :) how";
+//		    ChatString.getInstance().parseChatString(messageText);
 		    
 		    System.out.println("loadEmot completed");
 		} catch (Exception err) {

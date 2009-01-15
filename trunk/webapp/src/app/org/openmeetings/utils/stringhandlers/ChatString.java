@@ -6,7 +6,7 @@ import java.text.StringCharacterIterator;
 import java.util.LinkedList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.openmeetings.app.remote.red5.Application;
+import org.openmeetings.app.remote.red5.EmoticonsManager;
 
 public class ChatString {
 	
@@ -49,7 +49,7 @@ public class ChatString {
 			String[] messageStr = {"text",message};
 			list.add(messageStr);
 			
-			for (Iterator<LinkedList<String>> iter = Application.getEmotfilesList().iterator();iter.hasNext();){
+			for (Iterator<LinkedList<String>> iter = EmoticonsManager.getEmotfilesList().iterator();iter.hasNext();){
 				LinkedList<String> emot = iter.next();
 				
 				//log.error("CHECK EMOT: "+ emot.get(0) + emot.get(1) + emot.size());
@@ -111,7 +111,7 @@ public class ChatString {
 	
 	public void replaceAllRegExp(){
 		try {
-			LinkedList<LinkedList<String>> emotfilesList = Application.getEmotfilesList();
+			LinkedList<LinkedList<String>> emotfilesList = EmoticonsManager.getEmotfilesList();
 			LinkedList<LinkedList<String>> emotfilesListNew = new LinkedList<LinkedList<String>>();
 			for (Iterator<LinkedList<String>> iter = emotfilesList.iterator();iter.hasNext();){
 				LinkedList<String> emot = iter.next();
@@ -127,7 +127,7 @@ public class ChatString {
 				}
 				emotfilesListNew.add(emot);
 			}
-			Application.setEmotfilesList(emotfilesListNew);
+			EmoticonsManager.setEmotfilesList(emotfilesListNew);
 		} catch (Exception err) {
 			log.error("[replaceAllRegExp]",err);
 		}

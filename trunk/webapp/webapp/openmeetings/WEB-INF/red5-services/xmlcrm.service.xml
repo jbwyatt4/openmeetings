@@ -9,7 +9,8 @@
 
     <!-- Class for Methods which can be invoked by the client -->
     <bean id="xmlcrm.service" 
-        class="org.openmeetings.app.remote.MainService" 
-        />
+        class="org.openmeetings.app.remote.MainService">
+        <property name="clientListManager" ref="openmeetings.ClientListManager" />
+    </bean>
     
 </beans>

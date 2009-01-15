@@ -6,26 +6,24 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.Locale;
-import java.util.LinkedHashMap;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.red5.server.api.IScope;
-import org.red5.server.api.Red5;
-
-import org.apache.commons.lang.StringUtils;
-import org.openmeetings.app.data.basic.files.*;
 import org.openmeetings.app.data.basic.AuthLevelmanagement;
 import org.openmeetings.app.data.basic.Sessionmanagement;
+import org.openmeetings.app.data.basic.files.FilesObject;
+import org.openmeetings.app.data.basic.files.FoldersObject;
+import org.openmeetings.app.data.basic.files.LiberaryObject;
 import org.openmeetings.app.data.user.Usermanagement;
+import org.openmeetings.app.documents.CreateLibraryPresentation;
 import org.openmeetings.app.documents.LibraryDocumentConverter;
 import org.openmeetings.app.documents.LibraryWmlLoader;
 import org.openmeetings.app.documents.LoadLibraryPresentation;
 import org.openmeetings.app.documents.LoadLibraryPresentationToObject;
-import org.openmeetings.app.documents.CreateLibraryPresentation;
-import org.openmeetings.app.remote.red5.Application;
+import org.openmeetings.app.remote.red5.ScopeApplicationAdapter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 
@@ -95,7 +93,7 @@ public class ConferenceLibrary {
 	        	
 				String roomName = room_id.toString();
 				
-				String current_dir = Application.webAppPath+"/upload";
+				String current_dir = ScopeApplicationAdapter.webAppPath+"/upload";
 				String working_dir = current_dir + File.separatorChar + roomName + parentFolder;
 				log.debug("#############working_dir : "+working_dir);
 
@@ -207,7 +205,7 @@ public class ConferenceLibrary {
 			String parentFolder, Long room_id) {
 		LiberaryObject returnMap = new LiberaryObject();
 		try {
-			String current_dir = Application.webAppPath+"/upload";
+			String current_dir = ScopeApplicationAdapter.webAppPath+"/upload";
 			
 			LinkedHashMap<String,LinkedHashMap> presentationObject = null;
 						
@@ -354,7 +352,7 @@ public class ConferenceLibrary {
 	        Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);  
 	        if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)){		
 						
-				String current_dir = Application.webAppPath+"/upload";
+				String current_dir = ScopeApplicationAdapter.webAppPath+"/upload";
 				String roomName = room_id.toString();
 				String working_dir = current_dir+File.separatorChar+roomName+parentFolder;
 				log.debug("working_dir+fileName: "+working_dir+File.separatorChar+fileName);
@@ -417,7 +415,7 @@ public class ConferenceLibrary {
 				log.debug("saveAsObject",tObject.size());
 				
 				String roomName = room_id.toString();				
-				String current_dir = Application.webAppPath+"/upload"+File.separatorChar+roomName+File.separatorChar;
+				String current_dir = ScopeApplicationAdapter.webAppPath+"/upload"+File.separatorChar+roomName+File.separatorChar;
 
 				log.error("### this is my working directory: "+current_dir);
 				
@@ -435,7 +433,7 @@ public class ConferenceLibrary {
 	        Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);  
 	        if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)){		
 				String roomName = room_id.toString();
-				String current_dir = Application.webAppPath+"/upload"+File.separatorChar+roomName+File.separatorChar;
+				String current_dir = ScopeApplicationAdapter.webAppPath+"/upload"+File.separatorChar+roomName+File.separatorChar;
 				log.debug("### this is my working directory: "+current_dir);
 				
 				return LibraryWmlLoader.getInstance().loadWmlFile(current_dir, fileName);

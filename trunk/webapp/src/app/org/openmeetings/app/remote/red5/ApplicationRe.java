@@ -56,15 +56,18 @@ import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.XppDriver;
 
 /**
+ * @deprecated
+ * 
+ * This Class is outdated and only for review reasons in the Package, please see ScopeApplicationAdapter
  * 
  * @author swagner
  * 
  */    
 
-public class Application extends ApplicationAdapter implements
+public class ApplicationRe extends ApplicationAdapter implements
 		IPendingServiceCallback, IStreamAwareScopeHandler {
 
-	private static final Logger log = LoggerFactory.getLogger(Application.class);
+	private static final Logger log = LoggerFactory.getLogger(ApplicationRe.class);
 	
 	private Long objectIdentifier = new Long(0);
 	private static HashMap<String,RoomClient> ClientList = new HashMap<String,RoomClient>();
@@ -100,9 +103,9 @@ public class Application extends ApplicationAdapter implements
 	
 	private static long broadCastCounter = 0;
 	
-	private static Application instance = null;
+	private static ApplicationRe instance = null;
 	
-	public static synchronized Application getInstance(){
+	public static synchronized ApplicationRe getInstance(){
 		return instance;
 	}
 
@@ -985,7 +988,7 @@ public class Application extends ApplicationAdapter implements
 			
 			IScope globalScope = getContext().getGlobalScope();
 			
-			IScope webAppKeyScope = globalScope.getScope(Application.webAppRootKey);
+			IScope webAppKeyScope = globalScope.getScope(ApplicationRe.webAppRootKey);
 			
 			//log.debug("webAppKeyScope "+webAppKeyScope);
 			
@@ -1291,7 +1294,7 @@ public class Application extends ApplicationAdapter implements
 			
 			IScope globalScope = getContext().getGlobalScope();
 			
-			IScope webAppKeyScope = globalScope.getScope(Application.webAppRootKey);
+			IScope webAppKeyScope = globalScope.getScope(ApplicationRe.webAppRootKey);
 			
 			//log.debug("webAppKeyScope "+webAppKeyScope);
 			
@@ -1531,7 +1534,7 @@ public class Application extends ApplicationAdapter implements
 			
 			IScope globalScope = getContext().getGlobalScope();
 			
-			IScope webAppKeyScope = globalScope.getScope(Application.webAppRootKey);
+			IScope webAppKeyScope = globalScope.getScope(ApplicationRe.webAppRootKey);
 			
 			//log.debug("clearZombiesFromAllConnection webAppKeyScope "+webAppKeyScope);
 			

@@ -11,7 +11,7 @@ import java.util.HashMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.apache.commons.transaction.util.FileHelper;
-import org.openmeetings.app.remote.red5.Application;
+import org.openmeetings.app.remote.red5.ScopeApplicationAdapter;
 import org.openmeetings.utils.math.CalendarPatterns;
 
 public class GeneratePDF {
@@ -128,14 +128,14 @@ public class GeneratePDF {
 			//If no Windows Platform
 			if (System.getProperty("os.name").toUpperCase().indexOf("WINDOWS") == -1) {
 				String runtimeFile = "jodconverter.sh";
-				executable_fileName = Application.batchFileFir+"PDFCONVERT_" 
+				executable_fileName = ScopeApplicationAdapter.batchFileFir+"PDFCONVERT_" 
 						+ CalendarPatterns.getTimeForStreamId(new Date()) +"_"+ runtimeFile;
 		
 				cmd = new String[1];
 				cmd[0] = executable_fileName;
 			} else {
 				String runtimeFile = "jodconverter.bat";
-				executable_fileName = Application.batchFileFir+"PDFCONVERT_" 
+				executable_fileName = ScopeApplicationAdapter.batchFileFir+"PDFCONVERT_" 
 						+ CalendarPatterns.getTimeForStreamId(new Date()) +"_"+ runtimeFile;
 				
 				cmd = new String[4];
@@ -182,7 +182,7 @@ public class GeneratePDF {
 					" " + "\"" + jodClassPathFolder +"jodconverter-cli-2.2.0.jar\"" +
 					" " + "\"" + fileFullPath + "\"" +
 					" " + "\"" + destinationFolder + outputfile + ".pdf\"" +
-					Application.lineSeperator + "exit";
+					ScopeApplicationAdapter.lineSeperator + "exit";
 			
 			
 			//execute the Script

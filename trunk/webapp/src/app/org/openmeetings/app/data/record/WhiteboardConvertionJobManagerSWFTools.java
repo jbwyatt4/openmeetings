@@ -26,7 +26,7 @@ import org.openmeetings.app.hibernate.beans.recording.RecordingConversionJob;
 import org.openmeetings.app.hibernate.beans.recording.RoomRecording;
 import org.openmeetings.app.hibernate.beans.recording.WhiteBoardEvent;
 import org.openmeetings.app.remote.StreamService;
-import org.openmeetings.app.remote.red5.Application;
+import org.openmeetings.app.remote.red5.ScopeApplicationAdapter;
 import org.openmeetings.utils.math.CalendarPatterns;
 import org.w3c.dom.DOMImplementation;
 import org.w3c.dom.Document;
@@ -546,7 +546,7 @@ public class WhiteboardConvertionJobManagerSWFTools {
 	private Map<String, String> generateBatchFile(Long conversionJobId,
 			Long folderNumber) throws Exception {
 		
-		String recordingRootDir = Application.webAppPath + File.separatorChar
+		String recordingRootDir = ScopeApplicationAdapter.webAppPath + File.separatorChar
 				+ "upload" + File.separatorChar
 				+ StreamService.folderForRecordings;
 
@@ -572,7 +572,7 @@ public class WhiteboardConvertionJobManagerSWFTools {
 	
 	private String generateSVGFileName(Long conversionJobId, Long imageNumber) throws Exception {
 		
-		String recordingRootDir = Application.webAppPath + File.separatorChar
+		String recordingRootDir = ScopeApplicationAdapter.webAppPath + File.separatorChar
 				+ "upload" + File.separatorChar
 				+ StreamService.folderForRecordings;
 		
@@ -601,7 +601,7 @@ public class WhiteboardConvertionJobManagerSWFTools {
 	private String getBatchFileFolder(Long conversionJobId,
 			Long folderNumber) throws Exception {
 		
-		String recordingRootDir = Application.webAppPath + File.separatorChar
+		String recordingRootDir = ScopeApplicationAdapter.webAppPath + File.separatorChar
 				+ "upload" + File.separatorChar
 				+ StreamService.folderForRecordings;
 
@@ -618,7 +618,7 @@ public class WhiteboardConvertionJobManagerSWFTools {
 	
 	private String getSWFFolderForResult(Long conversionJobId) throws Exception {
 		
-		String recordingRootDir = Application.webAppPath + File.separatorChar
+		String recordingRootDir = ScopeApplicationAdapter.webAppPath + File.separatorChar
 				+ "upload" + File.separatorChar
 				+ StreamService.folderForRecordings;
 
@@ -633,7 +633,7 @@ public class WhiteboardConvertionJobManagerSWFTools {
 	
 	private String getSWFFileForResult(Long conversionJobId) throws Exception {
 		
-		String recordingRootDir = Application.webAppPath + File.separatorChar
+		String recordingRootDir = ScopeApplicationAdapter.webAppPath + File.separatorChar
 				+ "upload" + File.separatorChar
 				+ StreamService.folderForRecordings;
 

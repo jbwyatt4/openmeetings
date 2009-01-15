@@ -57,4 +57,11 @@ public class EmoticonsManager {
 		}
 	}
 	
+	public static synchronized LinkedList<LinkedList<String>> getEmotfilesList() {
+		return emotfilesList;
+	}
+	public static synchronized void setEmotfilesList(LinkedList<LinkedList<String>> emotfilesListNew) {
+		emotfilesList = emotfilesListNew;
+	}
+	
 }

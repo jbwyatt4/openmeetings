@@ -12,9 +12,9 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import org.openmeetings.app.conference.videobeans.UserSecurity;
+import org.openmeetings.app.remote.red5.ClientListManager;
 
 public class UserConfigFactory {
- 
 
 	protected static Logger log = LoggerFactory.getLogger(UserConfigFactory.class.getName());
 

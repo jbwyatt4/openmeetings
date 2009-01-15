@@ -19,17 +19,13 @@
         <property name="virtualHosts" value="${webapp.virtualHosts}" />
     </bean>
     
-    <!-- Class for the Streaming Handlers -->
+    <!-- New Class for the Streaming Handlers -->
     <bean id="web.handler" 
-        class="org.openmeetings.app.remote.red5.Application"
-        singleton="true">
-    </bean>
-    
-    <!-- New Class for the Streaming Handlers
-    <bean id="web.handler" 
-        class="org.openmeetings.app.remote.red5.ScopeApplicationAdapater"
+        class="org.openmeetings.app.remote.red5.ScopeApplicationAdapter"
         singleton="true">
         <property name="clientListManager" ref="openmeetings.ClientListManager" />
+        <property name="emoticonsManager" ref="openmeetings.EmoticonsManager" />
+        <property name="whiteBoardService" ref="whiteboardservice.service" />
     </bean>
         
     <bean id="openmeetings.ClientListManager" singleton="true" 
@@ -39,7 +35,10 @@
     <bean id="openmeetings.EmoticonsManager" singleton="true" 
         class="org.openmeetings.app.remote.red5.EmoticonsManager">
     </bean> 
-     -->
+ 
+    <bean id="openmeetings.WhiteBoardObjectListManager" singleton="true" 
+        class="org.openmeetings.app.remote.red5.WhiteBoardObjectListManager">
+    </bean>        
         
     <!-- DATABASE Connection via hibernate
     <bean id="theSessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
@@ -65,6 +64,7 @@
     <import resource="red5-services/streamservice.service.xml"/>  
     <import resource="red5-services/invitationservice.service.xml"/>  
     <import resource="red5-services/whiteboardservice.service.xml"/>  
+    <import resource="red5-services/printservice.service.xml"/>  
 
            
 </beans>

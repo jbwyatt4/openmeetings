@@ -19,7 +19,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.openmeetings.app.documents.InstallationDocumentHandler;
 import org.openmeetings.app.installation.ImportInitvalues;
-import org.openmeetings.app.remote.red5.Application;
+import org.openmeetings.app.remote.red5.ScopeApplicationAdapter;
 
 public class Install extends VelocityViewServlet {
 
@@ -43,7 +43,7 @@ public class Install extends VelocityViewServlet {
 			String lang = httpServletRequest.getParameter("lang");
 			if (lang == null) lang = "EN";
 
-			String working_dir = getServletContext().getRealPath("/")+Application.configDirName+File.separatorChar;
+			String working_dir = getServletContext().getRealPath("/")+ScopeApplicationAdapter.configDirName+File.separatorChar;
 			
 			if (command == null){
 				log.error("command equals null");

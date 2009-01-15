@@ -1,30 +1,21 @@
 package org.openmeetings.app.remote.red5;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.Map;
 import java.util.Set;
 
-import org.openmeetings.app.batik.beans.PrintBean;
 import org.openmeetings.app.conference.whiteboard.WhiteboardManagement;
-import org.openmeetings.app.conference.whiteboard.WhiteboardSyncLockObject;
 import org.openmeetings.app.data.logs.ConferenceLogDaoImpl;
 import org.openmeetings.app.data.user.dao.UsersDaoImpl;
 import org.openmeetings.app.hibernate.beans.recording.RoomClient;
 import org.openmeetings.app.hibernate.beans.user.Users;
 import org.openmeetings.app.quartz.scheduler.QuartzRecordingJob;
 import org.openmeetings.app.quartz.scheduler.QuartzSessionClear;
-import org.openmeetings.app.quartz.scheduler.QuartzZombieJob;
 import org.openmeetings.app.remote.PollService;
 import org.openmeetings.app.remote.StreamService;
 import org.openmeetings.app.remote.WhiteBoardService;
-import org.openmeetings.utils.crypt.ManageCryptStyle;
-import org.openmeetings.utils.stringhandlers.ChatString;
 import org.red5.server.adapter.ApplicationAdapter;
 import org.red5.server.api.IClient;
 import org.red5.server.api.IConnection;
@@ -38,14 +29,15 @@ import org.red5.server.api.stream.IStreamAwareScopeHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class ScopeApplicationAdapater extends ApplicationAdapter implements
+public class ScopeApplicationAdapter extends ApplicationAdapter implements
 	IPendingServiceCallback, IStreamAwareScopeHandler {
 	
 	//Beans, see red5-web.xml
 	private ClientListManager clientListManager = null;
 	private EmoticonsManager emoticonsManager = null;
+	private WhiteBoardService whiteBoardService = null;
 	
-	private static final Logger log = LoggerFactory.getLogger(ScopeApplicationAdapater.class);
+	private static final Logger log = LoggerFactory.getLogger(ScopeApplicationAdapter.class);
 
 	//This is the Folder where all executables are written
 	//TODO:fix hardcoded name of webapp
@@ -61,9 +53,9 @@ public class ScopeApplicationAdapater extends ApplicationAdapter implements
 	
 	private static long broadCastCounter = 0;
 	
-	private static ScopeApplicationAdapater instance = null;
+	private static ScopeApplicationAdapter instance = null;
 	
-	public static synchronized ScopeApplicationAdapater getInstance(){
+	public static synchronized ScopeApplicationAdapter getInstance(){
 		return instance;
 	}
 	
@@ -80,7 +72,12 @@ public class ScopeApplicationAdapater extends ApplicationAdapter implements
 	public void setEmoticonsManager(EmoticonsManager emoticonsManager) {
 		this.emoticonsManager = emoticonsManager;
 	}
-	
+	public WhiteBoardService getWhiteBoardService() {
+		return whiteBoardService;
+	}
+	public void setWhiteBoardService(WhiteBoardService whiteBoardService) {
+		this.whiteBoardService = whiteBoardService;
+	}
 
 	public void resultReceived(IPendingServiceCall arg0) {
 		// TODO Auto-generated method stub
@@ -130,7 +127,7 @@ public class ScopeApplicationAdapater extends ApplicationAdapter implements
 					+ streamId + " scope "+ room.getName());
 			
 			//Set StreamId in Client
-			service.invoke("setId", new Object[] {  },this);
+			service.invoke("setId", new Object[] { streamId },this);
 
 			RoomClient rcm = this.clientListManager.addClientListItem(streamId, room.getName(), conn.getRemotePort(), 
 					conn.getRemoteAddress(), conn.getConnectParams().get("swfUrl").toString());
@@ -230,7 +227,7 @@ public class ScopeApplicationAdapater extends ApplicationAdapter implements
 			
 			//Remove User from Sync List's
 			if (room_id != null) {
-				WhiteBoardService.getInstance().removeUserFromAllLists(currentScope, currentClient);
+				this.whiteBoardService.removeUserFromAllLists(currentScope, currentClient);
 			}
 
 			log.debug("##### roomLeave :. " + currentClient.getStreamid()); // just a unique number
@@ -598,6 +595,8 @@ public class ScopeApplicationAdapater extends ApplicationAdapter implements
 				if(!streamid.equals(rcl.getStreamid())){
 					log.debug("set to ++ for client: "+rcl.getStreamid()+" "+roomcount);
 					roomcount++;
+					//Add user to List
+					roomClientList.put(key, rcl);
 				}				
 			}
 			
@@ -708,7 +707,7 @@ public class ScopeApplicationAdapater extends ApplicationAdapter implements
 			
 			IScope globalScope = getContext().getGlobalScope();
 			
-			IScope webAppKeyScope = globalScope.getScope(Application.webAppRootKey);
+			IScope webAppKeyScope = globalScope.getScope(ScopeApplicationAdapter.webAppRootKey);
 			
 			//log.debug("webAppKeyScope "+webAppKeyScope);
 			
@@ -980,7 +979,7 @@ public class ScopeApplicationAdapater extends ApplicationAdapter implements
 			
 			IScope globalScope = getContext().getGlobalScope();
 			
-			IScope webAppKeyScope = globalScope.getScope(Application.webAppRootKey);
+			IScope webAppKeyScope = globalScope.getScope(ScopeApplicationAdapter.webAppRootKey);
 			
 			//log.debug("webAppKeyScope "+webAppKeyScope);
 			
@@ -1013,6 +1012,28 @@ public class ScopeApplicationAdapater extends ApplicationAdapter implements
 			log.error("[sendMessageWithClient] ",err);
 			err.printStackTrace();
 		}		
-	}	
+	}
+	
+	/**
+	 * Get all ClientList Objects of that room and domain
+	 * Used in lz.applyForModeration.lzx
+	 * @return
+	 */
+	public HashMap<String,RoomClient> getClientListScope(){
+		HashMap <String,RoomClient> roomClientList = new HashMap<String,RoomClient>();
+		try {
+			IConnection current = Red5.getConnectionLocal();
+			RoomClient currentClient = this.clientListManager.getClientByStreamId(current.getClient().getId());
+			log.debug("xmlcrm getClientListScope: "+currentClient.getUsername());			
+			Long room_id = currentClient.getRoom_id();	
+							
+			return this.clientListManager.getClientListByRoom(room_id);
+			
+		} catch (Exception err) {
+			log.debug("[getClientListScope]",err);
+		}
+		return roomClientList;
+	}
+	
 	
 }

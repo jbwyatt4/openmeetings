@@ -4,9 +4,9 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.openmeetings.app.remote.red5.WhiteBoardObjectListManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.openmeetings.app.remote.red5.Application;
 
 public class WhiteboardManagement {
 	
@@ -41,7 +41,7 @@ public class WhiteboardManagement {
 			log.debug("action: "+action);
 			
 			if (action.equals("draw") || action.equals("redo")){
-				HashMap<String,Map> roomList = Application.getWhiteBoardObjectListByRoomId(room_id);
+				HashMap<String,Map> roomList = WhiteBoardObjectListManager.getInstance().getWhiteBoardObjectListByRoomId(room_id);
 				
 				//log.debug(actionObject);
 				//log.debug(actionObject.size()-1);
@@ -50,24 +50,24 @@ public class WhiteboardManagement {
 				String objectOID = actionObject.get(actionObject.size()-1).toString();
 				log.debug("objectOID: "+objectOID);
 				roomList.put(objectOID, actionObject);
-				Application.setWhiteBoardObjectListRoomObj(room_id, roomList);
+				WhiteBoardObjectListManager.getInstance().setWhiteBoardObjectListRoomObj(room_id, roomList);
 			} else if (action.equals("clear")) {
-				HashMap<String,Map> roomList = Application.getWhiteBoardObjectListByRoomId(room_id);
+				HashMap<String,Map> roomList = WhiteBoardObjectListManager.getInstance().getWhiteBoardObjectListByRoomId(room_id);
 				roomList = new HashMap<String,Map>();
-				Application.setWhiteBoardObjectListRoomObj(room_id, roomList);
+				WhiteBoardObjectListManager.getInstance().setWhiteBoardObjectListRoomObj(room_id, roomList);
 			} else if (action.equals("delete") || action.equals("undo")) {
-				HashMap<String,Map> roomList = Application.getWhiteBoardObjectListByRoomId(room_id);
+				HashMap<String,Map> roomList = WhiteBoardObjectListManager.getInstance().getWhiteBoardObjectListByRoomId(room_id);
 				String objectOID = actionObject.get(actionObject.size()-1).toString();
 				log.debug("removal of objectOID: "+objectOID);
 				roomList.remove(objectOID);
-				Application.setWhiteBoardObjectListRoomObj(room_id, roomList);
+				WhiteBoardObjectListManager.getInstance().setWhiteBoardObjectListRoomObj(room_id, roomList);
 			} else if (action.equals("size") || action.equals("editProp") 
 					|| action.equals("editText")) {
-				HashMap<String,Map> roomList = Application.getWhiteBoardObjectListByRoomId(room_id);
+				HashMap<String,Map> roomList = WhiteBoardObjectListManager.getInstance().getWhiteBoardObjectListByRoomId(room_id);
 				String objectOID = actionObject.get(actionObject.size()-1).toString();
 				Map roomItem = roomList.get(objectOID);
 				roomList.put(objectOID, actionObject);
-				Application.setWhiteBoardObjectListRoomObj(room_id, roomList);
+				WhiteBoardObjectListManager.getInstance().setWhiteBoardObjectListRoomObj(room_id, roomList);
 			} else {
 				log.warn("Unkown Type: "+action+" actionObject: "+actionObject);
 			}

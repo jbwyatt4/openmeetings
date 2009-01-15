@@ -12,10 +12,9 @@ import java.io.InputStreamReader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.openmeetings.app.data.basic.Configurationmanagement;
-import org.openmeetings.app.data.user.Usermanagement;
 import org.openmeetings.app.data.user.dao.UsersDaoImpl;
 import org.openmeetings.app.hibernate.beans.user.Users;
-import org.openmeetings.app.remote.red5.Application;
+import org.openmeetings.app.remote.red5.ScopeApplicationAdapter;
 import org.openmeetings.utils.math.CalendarPatterns;
 
 public class GenerateImage {
@@ -121,7 +120,7 @@ public class GenerateImage {
 		us.setPictureuri(pictureuri);
 		UsersDaoImpl.getInstance().updateUser(us);	
 		
-		Application.getInstance().updateUserSessionObject(users_id,pictureuri);
+		ScopeApplicationAdapter.getInstance().updateUserSessionObject(users_id,pictureuri);
 
 		return returnMap;
 	}
@@ -150,14 +149,14 @@ public class GenerateImage {
 			//If no Windows Platform
 			if (System.getProperty("os.name").toUpperCase().indexOf("WINDOWS") == -1) {
 				String runtimeFile = "thumbnail.sh";
-				executable_fileName = Application.batchFileFir+"THUMB_" 
+				executable_fileName = ScopeApplicationAdapter.batchFileFir+"THUMB_" 
 						+ CalendarPatterns.getTimeForStreamId(new Date()) +"_"+ runtimeFile;
 		
 				cmd = new String[1];
 				cmd[0] = executable_fileName;
 			} else {
 				String runtimeFile = "thumbnail.bat";
-				executable_fileName = Application.batchFileFir+"THUMB_" 
+				executable_fileName = ScopeApplicationAdapter.batchFileFir+"THUMB_" 
 						+ CalendarPatterns.getTimeForStreamId(new Date()) +"_"+ runtimeFile;
 				
 				cmd = new String[4];
@@ -176,7 +175,7 @@ public class GenerateImage {
 			String fileContent = pathToIMagick + "convert " +
 					" " + "\"" + inputFile + "\"" +
 					" " + "\"" + outputfile+".jpg\"" +
-					Application.lineSeperator + "exit";
+					ScopeApplicationAdapter.lineSeperator + "exit";
 				
 			//execute the Script
 			FileOutputStream fos = new FileOutputStream(executable_fileName);
@@ -237,14 +236,14 @@ public class GenerateImage {
 			//If no Windows Platform
 			if (System.getProperty("os.name").toUpperCase().indexOf("WINDOWS") == -1) {
 				String runtimeFile = "thumbnail.sh";
-				executable_fileName = Application.batchFileFir+"THUMB_" 
+				executable_fileName = ScopeApplicationAdapter.batchFileFir+"THUMB_" 
 						+ CalendarPatterns.getTimeForStreamId(new Date()) +"_"+ runtimeFile;
 		
 				cmd = new String[1];
 				cmd[0] = executable_fileName;
 			} else {
 				String runtimeFile = "thumbnail.bat";
-				executable_fileName = Application.batchFileFir+"THUMB_" 
+				executable_fileName = ScopeApplicationAdapter.batchFileFir+"THUMB_" 
 						+ CalendarPatterns.getTimeForStreamId(new Date()) +"_"+ runtimeFile;
 				
 				cmd = new String[4];
@@ -264,7 +263,7 @@ public class GenerateImage {
 					" " + "-size "+width+"x"+height+" " +
 					" " + "\"" + inputFile + "\"" +
 					" " + "\"" + outputfile+"\"" +
-					Application.lineSeperator + "exit";
+					ScopeApplicationAdapter.lineSeperator + "exit";
 				
 			//execute the Script
 			FileOutputStream fos = new FileOutputStream(executable_fileName);
@@ -326,14 +325,14 @@ public class GenerateImage {
 			//If no Windows Platform
 			if (System.getProperty("os.name").toUpperCase().indexOf("WINDOWS") == -1) {
 				String runtimeFile = "thumbnail.sh";
-				executable_fileName = Application.batchFileFir+"THUMB_" 
+				executable_fileName = ScopeApplicationAdapter.batchFileFir+"THUMB_" 
 						+ CalendarPatterns.getTimeForStreamId(new Date()) +"_"+ runtimeFile;
 		
 				cmd = new String[1];
 				cmd[0] = executable_fileName;
 			} else {
 				String runtimeFile = "thumbnail.bat";
-				executable_fileName = Application.batchFileFir+"THUMB_" 
+				executable_fileName = ScopeApplicationAdapter.batchFileFir+"THUMB_" 
 						+ CalendarPatterns.getTimeForStreamId(new Date()) +"_"+ runtimeFile;
 				
 				cmd = new String[4];
@@ -354,7 +353,7 @@ public class GenerateImage {
 					" " + "-depth "+depth+" " +
 					" " + "\"" + inputFile + "\"" +
 					" " + "\"" + outputfile+"\"" +
-					Application.lineSeperator + "exit";
+					ScopeApplicationAdapter.lineSeperator + "exit";
 				
 			//execute the Script
 			FileOutputStream fos = new FileOutputStream(executable_fileName);

@@ -24,7 +24,7 @@ import org.openmeetings.utils.stringhandlers.StringComparer;
 import org.openmeetings.app.documents.GenerateThumbs;
 import org.openmeetings.app.documents.GeneratePDF;
 import org.openmeetings.app.documents.GenerateImage;
-import org.openmeetings.app.remote.red5.Application;
+import org.openmeetings.app.remote.red5.ScopeApplicationAdapter;
 import org.openmeetings.app.hibernate.beans.user.Users;
 
 public class UploadHandler extends HttpServlet {
@@ -316,7 +316,7 @@ public class UploadHandler extends HttpServlet {
 								us.setPictureuri(pictureuri);
 								UsersDaoImpl.getInstance().updateUser(us);
 								
-								Application.getInstance().updateUserSessionObject(users_id,pictureuri);
+								ScopeApplicationAdapter.getInstance().updateUserSessionObject(users_id,pictureuri);
 							} else {
 								HashMap<String,Object> processThumb = GenerateThumbs.getInstance().generateThumb("_thumb_", current_dir, completeName, 50);
 								returnError.put("processThumb", processThumb);
@@ -337,7 +337,7 @@ public class UploadHandler extends HttpServlet {
 						if (!moduleName.equals("userprofile")) {
 							log.debug("moduleName.equals(userprofile) ! ");
 							
-							Application.getInstance().sendMessageWithClientByPublicSID(hs,publicSID);
+							ScopeApplicationAdapter.getInstance().sendMessageWithClientByPublicSID(hs,publicSID);
 						}
 						
 					}

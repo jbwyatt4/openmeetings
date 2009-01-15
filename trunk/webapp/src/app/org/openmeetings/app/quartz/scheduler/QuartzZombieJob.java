@@ -8,9 +8,6 @@ import org.slf4j.Logger;
 
 import org.red5.server.api.scheduling.IScheduledJob;
 import org.red5.server.api.scheduling.ISchedulingService;
-import org.openmeetings.app.data.basic.Sessionmanagement;
-import org.openmeetings.app.data.record.WhiteboardConvertionJobManager;
-import org.openmeetings.app.remote.red5.Application;
  
 public class QuartzZombieJob implements IScheduledJob {
 
@@ -21,9 +18,9 @@ public class QuartzZombieJob implements IScheduledJob {
 			
 			//cntxt.getScheduler().rescheduleJob("Income Session", "SessionClear Generation", cntxt.getTrigger());
 			
-			// TODO Check for Zombies
-			
-			Application.getInstance().clearZombiesFromAllConnection();
+			// FIXME: Check for Zombies Issue 583
+			//
+			//ScopeApplicationAdapter.getInstance().clearZombiesFromAllConnection();
 
 		} catch (Exception err){
 			log.error("execute",err);
