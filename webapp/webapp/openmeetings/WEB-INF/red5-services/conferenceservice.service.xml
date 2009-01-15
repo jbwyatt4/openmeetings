@@ -9,7 +9,8 @@
     
     <!-- Class for Methods which can be invoked by the client -->
     <bean id="conferenceservice.service" 
-        class="org.openmeetings.app.remote.ConferenceService" 
-        />      
+        class="org.openmeetings.app.remote.ConferenceService">
+        <property name="clientListManager" ref="openmeetings.ClientListManager" />
+    </bean>     
                     
 </beans>

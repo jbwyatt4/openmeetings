@@ -16,7 +16,7 @@ import org.openmeetings.app.hibernate.beans.recording.RoomClient;
 import org.openmeetings.app.hibernate.beans.rooms.Rooms;
 import org.openmeetings.app.hibernate.beans.rooms.RoomTypes;
 import org.openmeetings.app.hibernate.beans.rooms.Rooms_Organisation;
-import org.openmeetings.app.remote.red5.Application;
+import org.openmeetings.app.remote.red5.ClientListManager;
 
 /**
  * 
@@ -27,6 +27,9 @@ public class ConferenceService {
 	
 	private static final Logger log = LoggerFactory.getLogger(ConferenceService.class);
 	private static ConferenceService instance;
+	
+	//beans, see chaservice.service.xml
+	private ClientListManager clientListManager = null;
 
 	public static synchronized ConferenceService getInstance() {
 		if (instance == null) {
@@ -34,7 +37,14 @@ public class ConferenceService {
 		}
 		return instance;
 	}	
-   
+	
+	public ClientListManager getClientListManager() {
+		return clientListManager;
+	}
+	public void setClientListManager(ClientListManager clientListManager) {
+		this.clientListManager = clientListManager;
+	}
+
 	/**
 	 * get a List of all availible Rooms of this organisation
 	 * @param SID
@@ -256,11 +266,11 @@ public class ConferenceService {
 		try {
 			//log.error("getRoomClientsListByRoomId: "+room_id);
 			LinkedList<RoomClient> clients = new LinkedList<RoomClient>();
-			HashMap<String,RoomClient> clientList = Application.getClientList();
+			HashMap<String,RoomClient> clientList =this.clientListManager.getClientListByRoom(room_id);
 			for (Iterator<String> iter = clientList.keySet().iterator();iter.hasNext();) {
 				RoomClient rcl = clientList.get(iter.next());
 				//log.error("COMPARE: "+rcl.getRoom_id()+" || "+room_id);
-				if (rcl.getRoom_id()!=null && rcl.getRoom_id().equals(room_id)) clients.add(rcl);
+				clients.add(rcl);
 			}
 			return clients;
 		} catch (Exception err) {

@@ -29,7 +29,7 @@ import org.openmeetings.app.data.record.BatikMethods;
 import org.openmeetings.app.data.record.WhiteboardMapToSVG;
 import org.openmeetings.app.data.user.Usermanagement;
 import org.openmeetings.app.documents.GenerateImage;
-import org.openmeetings.app.remote.red5.Application;
+import org.openmeetings.app.remote.PrintService;
 import org.openmeetings.utils.geom.GeomPoint;
 import org.openmeetings.utils.math.CalendarPatterns;
 import org.slf4j.Logger;
@@ -87,7 +87,7 @@ public class ExportToImage extends HttpServlet {
 			if (user_level!=null && user_level > 0 && hash != "") {
 				
 				
-				PrintBean pBean = Application.getPrintItemByHash(hash);
+				PrintBean pBean = PrintService.getPrintItemByHash(hash);
 				
 				//Whiteboard Objects
 		        Map whiteBoardMap = pBean.getMap();

@@ -14,7 +14,7 @@ import java.io.InputStreamReader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.openmeetings.app.data.basic.Configurationmanagement;
-import org.openmeetings.app.remote.red5.Application;
+import org.openmeetings.app.remote.red5.ScopeApplicationAdapter;
 import org.openmeetings.utils.math.CalendarPatterns;
 
 public class GenerateSWF {
@@ -50,14 +50,14 @@ public class GenerateSWF {
 			//If no Windows Platform
 			if (System.getProperty("os.name").toUpperCase().indexOf("WINDOWS") == -1) {
 				String runtimeFile = "swfconverter.sh";
-				executable_fileName = Application.batchFileFir+"SWFCONVERT_" 
+				executable_fileName = ScopeApplicationAdapter.batchFileFir+"SWFCONVERT_" 
 						+ CalendarPatterns.getTimeForStreamId(new Date()) +"_"+ runtimeFile;
 		
 				cmd = new String[1];
 				cmd[0] = executable_fileName;
 			} else {
 				String runtimeFile = "swfconverter.bat";
-				executable_fileName = Application.batchFileFir+"SWFCONVERT_" 
+				executable_fileName = ScopeApplicationAdapter.batchFileFir+"SWFCONVERT_" 
 						+ CalendarPatterns.getTimeForStreamId(new Date()) +"_"+ runtimeFile;
 				
 				cmd = new String[4];
@@ -72,7 +72,7 @@ public class GenerateSWF {
 			String fileContent = pathToSWFTools + "pdf2swf"
 					+ " " + "\"" + originalFolder + fileNamePure + ".pdf\""
 					+ " " + "\"" + destinationFolder + fileNamePure+".swf\""
-					+ Application.lineSeperator + "exit";
+					+ ScopeApplicationAdapter.lineSeperator + "exit";
 				
 			//execute the Script
 			FileOutputStream fos = new FileOutputStream(executable_fileName);
@@ -137,14 +137,14 @@ public class GenerateSWF {
 			//If no Windows Platform
 			if (System.getProperty("os.name").toUpperCase().indexOf("WINDOWS") == -1) {
 				String runtimeFile = "swfconverter.sh";
-				executable_fileName = Application.batchFileFir+"SWFIMAGECONVERT_" 
+				executable_fileName = ScopeApplicationAdapter.batchFileFir+"SWFIMAGECONVERT_" 
 						+ CalendarPatterns.getTimeForStreamId(new Date()) +"_"+ runtimeFile;
 		
 				cmd = new String[1];
 				cmd[0] = executable_fileName;
 			} else {
 				String runtimeFile = "swfconverter.bat";
-				executable_fileName = Application.batchFileFir+"SWFIMAGECONVERT_" 
+				executable_fileName = ScopeApplicationAdapter.batchFileFir+"SWFIMAGECONVERT_" 
 						+ CalendarPatterns.getTimeForStreamId(new Date()) +"_"+ runtimeFile;
 				
 				cmd = new String[4];
@@ -166,7 +166,7 @@ public class GenerateSWF {
 				fileContent += " " + "\"" + fileName +"\"";
 			}
 			
-			fileContent += Application.lineSeperator + "exit";
+			fileContent += ScopeApplicationAdapter.lineSeperator + "exit";
 				
 			//execute the Script
 			FileOutputStream fos = new FileOutputStream(executable_fileName);
@@ -231,14 +231,14 @@ public class GenerateSWF {
 			//If no Windows Platform
 			if (System.getProperty("os.name").toUpperCase().indexOf("WINDOWS") == -1) {
 				String runtimeFile = "swfconverter.sh";
-				executable_fileName = Application.batchFileFir+"SWFCOMBINE_" 
+				executable_fileName = ScopeApplicationAdapter.batchFileFir+"SWFCOMBINE_" 
 						+ CalendarPatterns.getTimeForStreamId(new Date()) +"_"+ runtimeFile;
 		
 				cmd = new String[1];
 				cmd[0] = executable_fileName;
 			} else {
 				String runtimeFile = "swfconverter.bat";
-				executable_fileName = Application.batchFileFir+"SWFIMAGECONVERT_" 
+				executable_fileName = ScopeApplicationAdapter.batchFileFir+"SWFIMAGECONVERT_" 
 						+ CalendarPatterns.getTimeForStreamId(new Date()) +"_"+ runtimeFile;
 				
 				cmd = new String[4];
@@ -260,7 +260,7 @@ public class GenerateSWF {
 				fileContent += " " + "\"" + fileName +"\"";
 			}
 			
-			fileContent += Application.lineSeperator + "exit";
+			fileContent += ScopeApplicationAdapter.lineSeperator + "exit";
 				
 			//execute the Script
 			FileOutputStream fos = new FileOutputStream(executable_fileName);
@@ -319,14 +319,14 @@ public class GenerateSWF {
 			//If no Windows Platform
 			if (System.getProperty("os.name").toUpperCase().indexOf("WINDOWS") == -1) {
 				String runtimeFile = "swfconverter.sh";
-				executable_fileName = Application.batchFileFir+"FFMPEGSWF_" 
+				executable_fileName = ScopeApplicationAdapter.batchFileFir+"FFMPEGSWF_" 
 						+ CalendarPatterns.getTimeForStreamId(new Date()) +"_"+ runtimeFile;
 		
 				cmd = new String[1];
 				cmd[0] = executable_fileName;
 			} else {
 				String runtimeFile = "swfconverter.bat";
-				executable_fileName = Application.batchFileFir+"FFMPEGSWF_" 
+				executable_fileName = ScopeApplicationAdapter.batchFileFir+"FFMPEGSWF_" 
 						+ CalendarPatterns.getTimeForStreamId(new Date()) +"_"+ runtimeFile;
 				
 				cmd = new String[4];
@@ -346,7 +346,7 @@ public class GenerateSWF {
 					+ " -b 750k -ar 44100" 
 					+ " -y "+outputswf;
 			
-			fileContent += Application.lineSeperator + "exit";
+			fileContent += ScopeApplicationAdapter.lineSeperator + "exit";
 				
 			//execute the Script
 			FileOutputStream fos = new FileOutputStream(executable_fileName);

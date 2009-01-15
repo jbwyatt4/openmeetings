@@ -1,42 +1,24 @@
 package org.openmeetings.app.remote;
 
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
-import java.util.HashSet;
-import java.util.LinkedList;
 import java.util.LinkedHashMap;
-import java.io.File;
-import java.io.PrintWriter;
-import java.io.FileWriter;
-import java.io.BufferedReader;
-import java.io.FileReader;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import com.thoughtworks.xstream.XStream;
-import com.thoughtworks.xstream.io.xml.XppDriver;
-
-import org.red5.server.stream.ClientBroadcastStream;
-import org.red5.server.api.IConnection;
-import org.red5.server.api.IScope;
-import org.red5.server.api.Red5;
-import org.red5.server.api.service.IPendingServiceCall;
-import org.red5.server.api.service.IPendingServiceCallback;
-import org.red5.server.api.service.IServiceCapableConnection;
+import java.util.LinkedList;
+import java.util.List;
 
 import org.openmeetings.app.data.basic.AuthLevelmanagement;
 import org.openmeetings.app.data.basic.Sessionmanagement;
+import org.openmeetings.app.data.conference.Roommanagement;
+import org.openmeetings.app.data.record.dao.ChatvaluesEventDaoImpl;
+import org.openmeetings.app.data.record.dao.RecordingClientDaoImpl;
+import org.openmeetings.app.data.record.dao.RecordingConversionJobDaoImpl;
+import org.openmeetings.app.data.record.dao.RecordingDaoImpl;
+import org.openmeetings.app.data.record.dao.RoomRecordingDaoImpl;
+import org.openmeetings.app.data.record.dao.RoomStreamDaoImpl;
+import org.openmeetings.app.data.record.dao.WhiteBoardEventDaoImpl;
 import org.openmeetings.app.data.user.Usermanagement;
 import org.openmeetings.app.data.user.dao.UsersDaoImpl;
-import org.openmeetings.utils.math.CalendarPatterns;
-import org.openmeetings.app.hibernate.beans.user.Users;
 import org.openmeetings.app.hibernate.beans.domain.Organisation_Users;
-import org.openmeetings.app.data.conference.Roommanagement;
-import org.openmeetings.app.hibernate.beans.rooms.Rooms;
-import org.openmeetings.app.hibernate.beans.rooms.Rooms_Organisation;
 import org.openmeetings.app.hibernate.beans.recording.ChatvaluesEvent;
 import org.openmeetings.app.hibernate.beans.recording.Recording;
 import org.openmeetings.app.hibernate.beans.recording.RecordingClient;
@@ -44,15 +26,24 @@ import org.openmeetings.app.hibernate.beans.recording.RoomClient;
 import org.openmeetings.app.hibernate.beans.recording.RoomRecording;
 import org.openmeetings.app.hibernate.beans.recording.RoomStream;
 import org.openmeetings.app.hibernate.beans.recording.WhiteBoardEvent;
-import org.openmeetings.app.remote.red5.Application;
-import org.openmeetings.app.data.record.dao.ChatvaluesEventDaoImpl;
-import org.openmeetings.app.data.record.dao.RecordingClientDaoImpl;
-import org.openmeetings.app.data.record.dao.RecordingConversionJobDaoImpl;
-import org.openmeetings.app.data.record.dao.RecordingDaoImpl;
-import org.openmeetings.app.data.record.dao.RoomClientDaoImpl;
-import org.openmeetings.app.data.record.dao.RoomRecordingDaoImpl;
-import org.openmeetings.app.data.record.dao.RoomStreamDaoImpl;
-import org.openmeetings.app.data.record.dao.WhiteBoardEventDaoImpl;
+import org.openmeetings.app.hibernate.beans.rooms.Rooms;
+import org.openmeetings.app.hibernate.beans.rooms.Rooms_Organisation;
+import org.openmeetings.app.hibernate.beans.user.Users;
+import org.openmeetings.app.remote.red5.ClientListManager;
+import org.openmeetings.app.remote.red5.ScopeApplicationAdapter;
+import org.openmeetings.utils.math.CalendarPatterns;
+import org.red5.server.api.IConnection;
+import org.red5.server.api.IScope;
+import org.red5.server.api.Red5;
+import org.red5.server.api.service.IPendingServiceCall;
+import org.red5.server.api.service.IPendingServiceCallback;
+import org.red5.server.api.service.IServiceCapableConnection;
+import org.red5.server.stream.ClientBroadcastStream;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.io.xml.XppDriver;
 
 /**
  * 
@@ -64,11 +55,20 @@ public class StreamService implements IPendingServiceCallback {
 	public static String fileNameXML = "recording_";
 	public static String folderForRecordings = "recorded";
 	
+	//Beans, see red5-web.xml
+	private ClientListManager clientListManager = null;
 	
 	private static final Logger log = LoggerFactory.getLogger(StreamService.class);
 	
 	private static LinkedHashMap<String,RoomRecording> roomRecordingList = new LinkedHashMap<String,RoomRecording>();
 	
+	public ClientListManager getClientListManager() {
+		return clientListManager;
+	}
+	public void setClientListManager(ClientListManager clientListManager) {
+		this.clientListManager = clientListManager;
+	}
+
 	/**
 	 * this function starts recording a Conference (Meeting or Event)
 	 * 
@@ -100,13 +100,13 @@ public class StreamService implements IPendingServiceCallback {
 			String roomRecordingsTableString, String comment){
 		try {
 			IConnection current = Red5.getConnectionLocal();
-			RoomClient currentClient = Application.getClientList().get(current.getClient().getId());
+			RoomClient currentClient = this.clientListManager.getClientByStreamId(current.getClient().getId());
 			Long room_id = currentClient.getRoom_id();
 
 			String recordingName = generateFileName(Long.valueOf(currentClient.getBroadCastID()).toString());
 			currentClient.setIsRecording(true);
 			currentClient.setRoomRecordingName(recordingName);			
-			Application.getClientList().put(current.getClient().getId(), currentClient);
+			this.clientListManager.updateClientByStreamId(current.getClient().getId(), currentClient);
 			
 			Date now = new Date();
 			
@@ -122,7 +122,7 @@ public class StreamService implements IPendingServiceCallback {
 			while (it.hasNext()) {
 				IConnection conn = it.next();
 				if (conn instanceof IServiceCapableConnection) {
-					RoomClient rcl = Application.getClientList().get(conn.getClient().getId());
+					RoomClient rcl = this.clientListManager.getClientByStreamId(conn.getClient().getId());
 					log.error("is this users still alive? :"+rcl);
 					//Check if the Client is in the same room and same domain 
 					if(room_id.equals(rcl.getRoom_id()) && room_id!=null){
@@ -209,7 +209,7 @@ public class StreamService implements IPendingServiceCallback {
 	public Long stopRecordMeetingStream(String roomrecordingName){
 		try {
 			IConnection current = Red5.getConnectionLocal();
-			RoomClient currentClient = Application.getClientList().get(current.getClient().getId());
+			RoomClient currentClient = this.clientListManager.getClientByStreamId(current.getClient().getId());
 
 			RoomRecording roomRecording = roomRecordingList.get(roomrecordingName);
 			Long room_id = currentClient.getRoom_id();	
@@ -222,7 +222,7 @@ public class StreamService implements IPendingServiceCallback {
 			while (it.hasNext()) {
 				IConnection conn = it.next();
 				if (conn instanceof IServiceCapableConnection) {
-					RoomClient rcl = Application.getClientList().get(conn.getClient().getId());
+					RoomClient rcl = this.clientListManager.getClientByStreamId(conn.getClient().getId());
 					log.debug("is this users still alive? :"+rcl);
 					//Check if the Client is in the same room and same domain 
 					if(room_id.equals(rcl.getRoom_id()) && room_id!=null){
@@ -230,6 +230,7 @@ public class StreamService implements IPendingServiceCallback {
 					}
 				}
 			}
+			
 			return stopRecordAndSave(current.getScope(), roomrecordingName, currentClient);
 		} catch (Exception err) {
 			log.error("[stopRecordAndSave]",err);
@@ -245,7 +246,7 @@ public class StreamService implements IPendingServiceCallback {
 			Long room_id = currentClient.getRoom_id();
 			currentClient.setIsRecording(false);
 			currentClient.setRoomRecordingName("");
-			Application.getClientList().put(currentClient.getStreamid(), currentClient);
+			ClientListManager.getInstance().updateClientByStreamId(currentClient.getStreamid(), currentClient);
 			
 			
 			String conferenceType = roomRecording.getConferenceType();
@@ -256,7 +257,7 @@ public class StreamService implements IPendingServiceCallback {
 			while (it.hasNext()) {
 				IConnection conn = it.next();
 				if (conn instanceof IServiceCapableConnection) {
-					RoomClient rcl = Application.getClientList().get(conn.getClient().getId());
+					RoomClient rcl = ClientListManager.getInstance().getClientByStreamId(conn.getClient().getId());
 					log.debug("is this users still alive? :"+rcl);
 					//Check if the Client is in the same room and same domain 
 					if(room_id.equals(rcl.getRoom_id()) && room_id!=null){
@@ -386,11 +387,11 @@ public class StreamService implements IPendingServiceCallback {
 	private static void recordShow(IConnection conn, long broadcastid, String streamName) throws Exception {
 		log.debug("Recording show for: " + conn.getScope().getContextPath());
 		log.debug("Name of CLient and Stream to be recorded: "+broadcastid);		
-		log.debug("Application.getInstance()"+Application.getInstance());
+		//log.debug("Application.getInstance()"+Application.getInstance());
 		log.debug("Scope "+conn);
 		log.debug("Scope "+conn.getScope());
 		// Get a reference to the current broadcast stream.
-		ClientBroadcastStream stream = (ClientBroadcastStream) Application.getInstance()
+		ClientBroadcastStream stream = (ClientBroadcastStream) ScopeApplicationAdapter.getInstance()
 				.getBroadcastStream(conn.getScope(), Long.valueOf(broadcastid).toString());
 		try {
 			// Save the stream to disk.
@@ -450,7 +451,7 @@ public class StreamService implements IPendingServiceCallback {
 	public static void stopRecordingShow(IConnection conn, long broadcastId) throws Exception {
 		log.debug("** stopRecordingShow: "+conn);
 		log.debug("### Stop recording show for broadcastId: "+ broadcastId + " || " + conn.getScope().getContextPath());
-		ClientBroadcastStream stream = (ClientBroadcastStream) Application.getInstance().
+		ClientBroadcastStream stream = (ClientBroadcastStream) ScopeApplicationAdapter.getInstance().
 												getBroadcastStream(conn.getScope(), Long.valueOf(broadcastId).toString());
 		// Stop recording.
 		stream.stopRecording();
@@ -704,11 +705,11 @@ public class StreamService implements IPendingServiceCallback {
 		try {
 			
 			IConnection current = Red5.getConnectionLocal();
-			RoomClient currentClient = Application.getClientList().get(current.getClient().getId());
+			RoomClient currentClient = this.clientListManager.getClientByStreamId(current.getClient().getId());
 			Long room_id = currentClient.getRoom_id();
 			currentClient.setIsRecording(false);
 			currentClient.setRoomRecordingName("");
-			Application.getClientList().put(current.getClient().getId(), currentClient);
+			this.clientListManager.updateClientByStreamId(current.getClient().getId(), currentClient);
 			
 			RoomRecording roomRecording = roomRecordingList.get(roomrecordingName);
 			String conferenceType = roomRecording.getConferenceType();
@@ -719,7 +720,7 @@ public class StreamService implements IPendingServiceCallback {
 			while (it.hasNext()) {
 				IConnection conn = it.next();
 				if (conn instanceof IServiceCapableConnection) {
-					RoomClient rcl = Application.getClientList().get(conn.getClient().getId());
+					RoomClient rcl = this.clientListManager.getClientByStreamId(conn.getClient().getId());
 					log.debug("is this users still alive? :"+rcl);
 					//Check if the Client is in the same room and same domain 
 					if(room_id.equals(rcl.getRoom_id()) && room_id!=null){
@@ -746,7 +747,7 @@ public class StreamService implements IPendingServiceCallback {
 	public RoomClient checkForRecording(){
 		try {
 			IConnection current = Red5.getConnectionLocal();
-			RoomClient currentClient = Application.getClientList().get(current.getClient().getId());
+			RoomClient currentClient = this.clientListManager.getClientByStreamId(current.getClient().getId());
 			Long room_id = currentClient.getRoom_id();
 			
 			//Check if any client in the same room is recording at the moment
@@ -758,7 +759,7 @@ public class StreamService implements IPendingServiceCallback {
 				if (cons instanceof IServiceCapableConnection) {
 					if (!cons.equals(current)){
 						log.debug("sending roomDisconnect to " + cons);
-						RoomClient rcl = Application.getClientList().get(cons.getClient().getId());
+						RoomClient rcl = this.clientListManager.getClientByStreamId(cons.getClient().getId());
 						//Check if the Client is in the same room and same domain except its the current one
 						if(room_id.equals(rcl.getRoom_id()) && room_id!=null){					
 							if (rcl.getIsRecording()){

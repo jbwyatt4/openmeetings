@@ -12,7 +12,7 @@ import java.io.InputStreamReader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.openmeetings.app.data.basic.Configurationmanagement;
-import org.openmeetings.app.remote.red5.Application;
+import org.openmeetings.app.remote.red5.ScopeApplicationAdapter;
 import org.openmeetings.utils.math.CalendarPatterns;
 
 public class GenerateThumbs {
@@ -49,14 +49,14 @@ public class GenerateThumbs {
 			//If no Windows Platform
 			if (System.getProperty("os.name").toUpperCase().indexOf("WINDOWS") == -1) {
 				String runtimeFile = "thumbnail.sh";
-				executable_fileName = Application.batchFileFir+"THUMB_" 
+				executable_fileName = ScopeApplicationAdapter.batchFileFir+"THUMB_" 
 						+ CalendarPatterns.getTimeForStreamId(new Date()) +"_"+ runtimeFile;
 		
 				cmd = new String[1];
 				cmd[0] = executable_fileName;
 			} else {
 				String runtimeFile = "thumbnail.bat";
-				executable_fileName = Application.batchFileFir+"THUMB_" 
+				executable_fileName = ScopeApplicationAdapter.batchFileFir+"THUMB_" 
 						+ CalendarPatterns.getTimeForStreamId(new Date()) +"_"+ runtimeFile;
 				
 				cmd = new String[4];
@@ -71,7 +71,7 @@ public class GenerateThumbs {
 			String fileContent = pathToIMagick + "convert -thumbnail " + thumbSize +
 					" " + "\"" + filepath + ".jpg\"" +
 					" " + "\"" + folder + pre+name+".jpg\"" +
-					Application.lineSeperator + "exit";
+					ScopeApplicationAdapter.lineSeperator + "exit";
 				
 			//execute the Script
 			FileOutputStream fos = new FileOutputStream(executable_fileName);
@@ -126,14 +126,14 @@ public class GenerateThumbs {
 			//If no Windows Platform
 			if (System.getProperty("os.name").toUpperCase().indexOf("WINDOWS") == -1) {
 				String runtimeFile = "thumbnail.sh";
-				executable_fileName = Application.batchFileFir+"BATCHTHUMB_" 
+				executable_fileName = ScopeApplicationAdapter.batchFileFir+"BATCHTHUMB_" 
 						+ CalendarPatterns.getTimeForStreamId(new Date()) +"_"+ runtimeFile;
 		
 				cmd = new String[1];
 				cmd[0] = executable_fileName;
 			} else {
 				String runtimeFile = "thumbnail.bat";
-				executable_fileName = Application.batchFileFir+"BATCHTHUMB_" 
+				executable_fileName = ScopeApplicationAdapter.batchFileFir+"BATCHTHUMB_" 
 						+ CalendarPatterns.getTimeForStreamId(new Date()) +"_"+ runtimeFile;
 				
 				cmd = new String[4];
@@ -149,7 +149,7 @@ public class GenerateThumbs {
 			String fileContent = pathToIMagick + "convert -thumbnail " + thumbSize +
 					" " + "\"" + inputfile +"\"" +
 					" " + "\"" + outputpath+ "_"+ pre +"_page.jpg\"" +
-					Application.lineSeperator + "exit";
+					ScopeApplicationAdapter.lineSeperator + "exit";
 				
 			//execute the Script
 			FileOutputStream fos = new FileOutputStream(executable_fileName);
@@ -207,14 +207,14 @@ public class GenerateThumbs {
 			//If no Windows Platform
 			if (System.getProperty("os.name").toUpperCase().indexOf("WINDOWS") == -1) {
 				String runtimeFile = "thumbnail.sh";
-				executable_fileName = Application.batchFileFir+"BATCHTHUMB_" 
+				executable_fileName = ScopeApplicationAdapter.batchFileFir+"BATCHTHUMB_" 
 						+ CalendarPatterns.getTimeForStreamId(new Date()) +"_"+ runtimeFile;
 		
 				cmd = new String[1];
 				cmd[0] = executable_fileName;
 			} else {
 				String runtimeFile = "thumbnail.bat";
-				executable_fileName = Application.batchFileFir+"BATCHTHUMB_" 
+				executable_fileName = ScopeApplicationAdapter.batchFileFir+"BATCHTHUMB_" 
 						+ CalendarPatterns.getTimeForStreamId(new Date()) +"_"+ runtimeFile;
 				
 				cmd = new String[4];
@@ -230,7 +230,7 @@ public class GenerateThumbs {
 			String fileContent = pathToIMagick + "convert -resize " + thumbWidth +
 					" " + "\"" + inputfile +"\"" +
 					" " + "\"" + outputpath+ "_"+ pre +"_page.png\"" +
-					Application.lineSeperator + "exit";
+					ScopeApplicationAdapter.lineSeperator + "exit";
 				
 			//execute the Script
 			FileOutputStream fos = new FileOutputStream(executable_fileName);

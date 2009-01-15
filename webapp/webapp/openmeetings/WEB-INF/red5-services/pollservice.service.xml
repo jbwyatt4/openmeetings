@@ -10,7 +10,8 @@
                 
     <!-- Class for Methods which can be invoked by the client -->
     <bean id="pollservice.service" 
-        class="org.openmeetings.app.remote.PollService" 
-        />      
+        class="org.openmeetings.app.remote.PollService" >
+        <property name="clientListManager" ref="openmeetings.ClientListManager" />
+    </bean>     
 
 </beans>

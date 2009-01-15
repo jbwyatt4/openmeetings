@@ -12,7 +12,7 @@ import javax.imageio.ImageIO;
 import org.apache.batik.svggen.SVGGraphics2D;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.openmeetings.app.remote.red5.Application;
+import org.openmeetings.app.remote.red5.ScopeApplicationAdapter;
 import org.openmeetings.utils.geom.GeomPoint;
 
 public class WhiteboardMapToSVG extends BatikMethods {
@@ -210,7 +210,7 @@ public class WhiteboardMapToSVG extends BatikMethods {
         		String parentPath = graphObject.get(5).toString();
         		String fileItemName = graphObject.get(3).toString();
         		
-        		String imageFilePath = Application.webAppPath + File.separatorChar +
+        		String imageFilePath = ScopeApplicationAdapter.webAppPath + File.separatorChar +
         								"upload" + File.separatorChar + room + File.separatorChar;
         		
         		if (parentPath.length() > 1) {

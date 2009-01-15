@@ -27,7 +27,8 @@ import org.openmeetings.app.data.user.dao.UsersDaoImpl;
 import org.openmeetings.app.hibernate.beans.recording.RoomClient;
 import org.openmeetings.utils.stringhandlers.StringComparer;
 
-import org.openmeetings.app.remote.red5.Application;
+import org.openmeetings.app.remote.red5.ClientListManager;
+import org.openmeetings.app.remote.red5.ScopeApplicationAdapter;
 
 public class ScreenServlet extends HttpServlet {
 	
@@ -84,7 +85,7 @@ public class ScreenServlet extends HttpServlet {
 					boolean userIsInRoom = false;
 					boolean doProcess = false;
 					
-					HashMap<String, RoomClient> clientList = Application.getClientList();
+					HashMap<String, RoomClient> clientList = ClientListManager.getInstance().getClientList();
 					for (Iterator iter = clientList.keySet().iterator();iter.hasNext();) {
 						RoomClient rcl = clientList.get(iter.next());
 						if (rcl.getPublicSID().equals(publicSID)) {
@@ -185,7 +186,7 @@ public class ScreenServlet extends HttpServlet {
 						
 						
 						
-						Application.getInstance().sendMessageByRoomAndDomain(Long.valueOf(room).longValue(),hs);
+						ScopeApplicationAdapter.getInstance().sendMessageByRoomAndDomain(Long.valueOf(room).longValue(),hs);
 					
 					}
 	

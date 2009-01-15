@@ -12,7 +12,7 @@ import org.openmeetings.utils.crypt.ManageCryptStyle;
 
 public class ClientListManager {
 	
-	private static HashMap<String,RoomClient> ClientList = new HashMap<String,RoomClient>();
+	private static HashMap<String,RoomClient> clientList = new HashMap<String,RoomClient>();
 
 	private static final Log log = LogFactory.getLog(ClientListManager.class);
 
@@ -46,12 +46,12 @@ public class ClientListManager {
 			rcm.setSwfurl(swfUrl);			
 			rcm.setIsMod(new Boolean(false));
 			
-			if (ClientList.containsKey(streamId)){
+			if (clientList.containsKey(streamId)){
 				log.error("Tried to add an existing Client "+streamId);
 				return null;
 			}
 			
-			ClientList.put(rcm.getStreamid(),rcm);
+			clientList.put(rcm.getStreamid(),rcm);
 			
 			return rcm;
 		} catch (Exception err) {
@@ -60,13 +60,17 @@ public class ClientListManager {
 		return null;
 	}
 	
+	public synchronized HashMap<String,RoomClient> getClientList() {
+		return clientList;
+	}
+	
 	public synchronized RoomClient getClientByStreamId(String streamId) {
 		try {
-			if (!ClientList.containsKey(streamId)){
+			if (!clientList.containsKey(streamId)){
 				log.debug("Tried to get a non existing Client "+streamId);
 				return null;
 			}
-			return ClientList.get(streamId);
+			return clientList.get(streamId);
 		} catch (Exception err) {
 			log.error("[getClientByStreamId]",err);
 		}
@@ -75,8 +79,8 @@ public class ClientListManager {
 	
 	public synchronized Boolean updateClientByStreamId(String streamId, RoomClient rcm) {
 		try {
-			if (ClientList.containsKey(streamId)){
-				ClientList.put(streamId,rcm);
+			if (clientList.containsKey(streamId)){
+				clientList.put(streamId,rcm);
 				return true;
 			} else {
 				log.debug("Tried to update a non existing Client "+streamId);
@@ -90,8 +94,8 @@ public class ClientListManager {
 	
 	public synchronized Boolean removeClient(String streamId) {
 		try {
-			if (ClientList.containsKey(streamId)){
-				ClientList.remove(streamId);
+			if (clientList.containsKey(streamId)){
+				clientList.remove(streamId);
 				return true;
 			} else {
 				log.debug("Tried to remove a non existing Client "+streamId);
@@ -113,10 +117,10 @@ public class ClientListManager {
 	public synchronized HashMap<String,RoomClient> getClientListByRoom(Long room_id){
 		HashMap <String,RoomClient> roomClientList = new HashMap<String,RoomClient>();
 		try {			
-			for (Iterator<String> iter=ClientList.keySet().iterator();iter.hasNext();) {
+			for (Iterator<String> iter=clientList.keySet().iterator();iter.hasNext();) {
 				String key = (String) iter.next();
 				log.debug("getClientList key: "+key);
-				RoomClient rcl = ClientList.get(key);
+				RoomClient rcl = clientList.get(key);
 				//same room, same domain
 				if (room_id!=null && room_id.equals(rcl.getRoom_id())) roomClientList.put(key, rcl);
 			}
@@ -134,9 +138,9 @@ public class ClientListManager {
 	 */
 	public synchronized RoomClient getCurrentModeratorByRoom(Long room_id) throws Exception{
 		
-		for (Iterator<String> iter=ClientList.keySet().iterator();iter.hasNext();) {
+		for (Iterator<String> iter=clientList.keySet().iterator();iter.hasNext();) {
 			String key = (String) iter.next();
-			RoomClient rcl = ClientList.get(key);
+			RoomClient rcl = clientList.get(key);
 //			
 			log.debug("*..*unsetModerator ClientList key: "+rcl.getStreamid());
 //			

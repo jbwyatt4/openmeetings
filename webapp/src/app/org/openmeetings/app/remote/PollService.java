@@ -8,19 +8,16 @@ import java.util.LinkedList;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-//import org.red5.server.adapter.ApplicationAdapter;
-import org.red5.server.api.IClient;
 import org.red5.server.api.IConnection;
-//import org.red5.server.api.IScope;
 import org.red5.server.api.Red5;
 import org.red5.server.api.service.IServiceCapableConnection;
-import org.openmeetings.app.conference.configutils.CustomBandwidth;
 
 import org.openmeetings.app.conference.videobeans.RoomPoll;
 import org.openmeetings.app.conference.videobeans.RoomPollAnswers;
 import org.openmeetings.app.conference.videobeans.PollType;
 import org.openmeetings.app.hibernate.beans.recording.RoomClient;
-import org.openmeetings.app.remote.red5.Application;
+import org.openmeetings.app.remote.red5.ClientListManager;
+import org.openmeetings.app.remote.red5.ScopeApplicationAdapter;
 
 /**
  * 
@@ -32,90 +29,17 @@ public class PollService {
 	private static final Logger log = LoggerFactory.getLogger(PollService.class);
 	
 	private static HashMap<Long,RoomPoll> pollList = new HashMap<Long,RoomPoll>();
+	
+	//Beans, see red5-web.xml
+	private ClientListManager clientListManager = null;
+	
+	public ClientListManager getClientListManager() {
+		return clientListManager;
+	}
+	public void setClientListManager(ClientListManager clientListManager) {
+		this.clientListManager = clientListManager;
+	}
 
-	/**
-	 * @deprecated
-	 * @param userName
-	 * @param userPass
-	 * @return
-	 */
-	public String loginUser(String userName,String userPass){
-		try {
-			if (Red5.getConnectionLocal().getScope().getName().equals("admin")){
-				IClient myclient = Red5.getConnectionLocal().getClient();
-				String role = Application.getUserFactory().checkUser(userName, userPass);
-				myclient.setAttribute("role", role);
-				return role;
-			}
-		} catch (Exception err) {
-			log.error("Error: "+err);
-		}
-		return "no";
-	}
-	
-	/**
-	 * @deprecated
-	 * @return
-	 */
-	public String getUserScope(){
-		log.debug("getUserScope");
-		return Red5.getConnectionLocal().getScope().getName();
-	}
-	
-	/**
-	 * @deprecated
-	 * @return
-	 */
-	public HashMap<String,CustomBandwidth> getBandwidthConfig(){
-		IClient myclient = Red5.getConnectionLocal().getClient();
-		log.debug("getBandwidthConfig: "+myclient.getAttribute("role"));
-		if(myclient.getAttribute("role").equals("admin")){
-			log.debug("getBandwidthConfig");
-			HashMap<String,CustomBandwidth> bandWidthSzenario = Application.getBwFactory().getDokeosBandwidthConfig();
-			return bandWidthSzenario;
-		}
-		return null;
-	}
-	
-	/**
-	 * Save a new ServerSide Bandwidth File
-	 * This server side configuration is disabled cause of bad audio-effects
-	 * @param config
-	 * @return
-	 * @deprecated
-	 */
-	public String saveBandwidthConfig(HashMap config){
-		IClient myclient = Red5.getConnectionLocal().getClient();
-		log.debug("getBandwidthConfig: "+myclient.getAttribute("role"));
-		if(myclient.getAttribute("role").equals("admin")){
-			log.debug("getBandwidthConfig"+config);
-			log.debug("saveBandwidthConfig",config);
-			
-			// {videoBandwidth=0, upstreamBandwidth=8192, overallBandwidth=2097152, minpingTime=500, maxpingTime=1000, maxBurst=8388608, groupName=Group 1, downstreamBandwidth=8192, description=This is for a bad Client Connection, burst=8388608, audioBandwidth=0, bandwidthName=badconnection}
-		    
-			CustomBandwidth ctc = new CustomBandwidth();
-//			ctc.setAudioBandwidth(Long.parseLong(config.get("audioBandwidth").toString()));
-//			ctc.setBurst(Long.parseLong(config.get("burst").toString()));
-//			ctc.setDescription(config.get("description").toString());
-//			ctc.setDownstreamBandwidth(Long.parseLong(config.get("downstreamBandwidth").toString()));
-//			ctc.setGroupName(config.get("groupName").toString());
-//			ctc.setMaxBurst(Integer.parseInt(config.get("maxBurst").toString()));
-//			ctc.setMinpingTime(Integer.parseInt(config.get("minpingTime").toString()));
-//			ctc.setOverallBandwidth(Long.parseLong(config.get("overallBandwidth").toString()));
-//			ctc.setUpstreamBandwidth(Long.parseLong(config.get("upstreamBandwidth").toString()));
-//			ctc.setVideoBandwidth(Long.parseLong(config.get("videoBandwidth").toString()));
-			
-			HashMap<String,CustomBandwidth> bandWidthSzenario = Application.getBwFactory().getDokeosBandwidthConfig();
-			bandWidthSzenario.put(config.get("bandwidthName").toString(), ctc);
-			
-			Application.getBwFactory().setDokeosBandwidthConfig(bandWidthSzenario);
-			
-			return "";
-		}
-		return null;
-		
-	}
-	
 	public String createPoll(String pollQuestion,int pollTypeId){
 		String returnValue="";
 		try {
@@ -124,7 +48,7 @@ public class PollService {
 			IConnection currentcon = Red5.getConnectionLocal();
 
 			
-			HashMap<String,RoomClient> ClientList = Application.getClientList();
+			HashMap<String,RoomClient> ClientList = this.clientListManager.getClientList();
 			RoomClient rc = ClientList.get(currentcon.getClient().getId());
 			
 			Long uniqueRoomPollName = rc.getRoom_id();
@@ -171,14 +95,14 @@ public class PollService {
 	
 	public void sendNotification(IConnection current,String clientFunction, Object[]obj) throws Exception{
 		//Notify all clients of the same scope (room)
-		RoomClient rc = Application.getClientList().get(current.getClient().getId());
+		RoomClient rc = this.clientListManager.getClientByStreamId(current.getClient().getId());
 		Iterator<IConnection> it = current.getScope().getConnections();
 		while (it.hasNext()) {
 			IConnection conn = it.next();
 			if (conn instanceof IServiceCapableConnection) {
-				RoomClient rcl = Application.getClientList().get(conn.getClient().getId());
+				RoomClient rcl = this.clientListManager.getClientByStreamId(conn.getClient().getId());
 				if (rcl.getRoom_id().equals(rc.getRoom_id()) && rcl.getRoom_id()!=null){
-					((IServiceCapableConnection) conn).invoke(clientFunction,obj,Application.getInstance());
+					((IServiceCapableConnection) conn).invoke(clientFunction,obj,ScopeApplicationAdapter.getInstance());
 					log.debug("sending "+clientFunction+" to " + conn+" "+conn.getClient().getId());
 				}
 			}
@@ -211,7 +135,7 @@ public class PollService {
 		int returnVal=0;
 		try {
 			IConnection current = Red5.getConnectionLocal();
-			RoomClient rc = Application.getClientList().get(current.getClient().getId());
+			RoomClient rc = this.clientListManager.getClientByStreamId(current.getClient().getId());
 			
 			if (rc==null){
 				log.error("RoomClient IS NULL for ClientID: "+current.getClient().getId());
@@ -275,7 +199,7 @@ public class PollService {
 	public RoomPoll getVotes(){
 		try {
 			IConnection current = Red5.getConnectionLocal();
-			RoomClient rc = Application.getClientList().get(current.getClient().getId());
+			RoomClient rc =this.clientListManager.getClientByStreamId(current.getClient().getId());
 			
 			//get Poll
 			return pollList.get(rc.getRoom_id());	
@@ -288,7 +212,7 @@ public class PollService {
 	public RoomPoll getPoll(){
 		try {
 			IConnection current = Red5.getConnectionLocal();
-			RoomClient rc = Application.getClientList().get(current.getClient().getId());
+			RoomClient rc = this.clientListManager.getClientByStreamId(current.getClient().getId());
 			
 			//get Poll
 			return pollList.get(rc.getRoom_id());
@@ -301,7 +225,7 @@ public class PollService {
 	public int checkHasVoted(){
 		try {
 			IConnection current = Red5.getConnectionLocal();
-			RoomClient rc = Application.getClientList().get(current.getClient().getId());
+			RoomClient rc = this.clientListManager.getClientByStreamId(current.getClient().getId());
 			
 			//get Poll
 			RoomPoll roomP = pollList.get(rc.getRoom_id());
