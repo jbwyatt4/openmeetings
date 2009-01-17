@@ -175,7 +175,10 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 			
 			RoomClient currentClient = this.clientListManager.getClientByStreamId(current.getClient().getId());
 			
-			this.roomLeaveByScope(currentClient, room);
+			//The Room Client can be null if the Client left the room by using logicalRoomLeave
+			if (currentClient != null) {
+				this.roomLeaveByScope(currentClient, room);
+			}
 			
 		} catch (Exception err){
 			log.error("[roomLeave]",err);

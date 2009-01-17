@@ -149,10 +149,12 @@ public class Roommanagement {
 	 */
 	public Rooms getRoomById(long rooms_id){
 		try {
+			String hql = "select c from Rooms as c where c.rooms_id = :rooms_id AND c.deleted != :deleted";
+			
 			Object idf = HibernateUtil.createSession();
 			Session session = HibernateUtil.getSession();
 			Transaction tx = session.beginTransaction();
-			Query query = session.createQuery("select c from Rooms as c where c.rooms_id = :rooms_id AND c.deleted != :deleted");
+			Query query = session.createQuery(hql);
 			query.setLong("rooms_id", rooms_id);
 			query.setString("deleted", "true");
 			List ll = query.list();
@@ -188,15 +190,18 @@ public class Roommanagement {
 	
 	public Long selectMaxFromRooms(){
 		try {
+			String hql = "select count(c.rooms_id) from Rooms c " +
+						"where c.deleted <> 'true'";
+			
 			//get all users
 			Object idf = HibernateUtil.createSession();
 			Session session = HibernateUtil.getSession();
 			Transaction tx = session.beginTransaction();
-			Query query = session.createQuery("select max(c.rooms_id) from Rooms c where c.deleted <> 'true'"); 
+			Query query = session.createQuery(hql); 
 			List ll = query.list();
 			tx.commit();
 			HibernateUtil.closeSession(idf);
-			log.debug("err",(Long)ll.get(0));
+			log.debug("err"+(Long)ll.get(0));
 			return (Long)ll.get(0);				
 		} catch (HibernateException ex) {
 			log.error("[selectMaxFromRooms] ", ex);
