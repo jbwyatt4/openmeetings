@@ -1773,4 +1773,7 @@ Translated by Orcun Madran omadran@baskent.edu.tr
   <string id="590" name="room Administration roomclients list">
     <value>D</value>
   </string>  
+  <string id="591" name="swf sync message">
+    <value>Loading Document. Please wait untill all Client have been synchronized.</value>
+  </string>  
 </language>
