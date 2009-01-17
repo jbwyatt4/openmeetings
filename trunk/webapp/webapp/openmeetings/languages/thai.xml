@@ -1764,4 +1764,16 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   <string id="586" name="tooltip main-menu">
     <value>สร้างผู้ใช้ ห้อง องค์กร&lt;br/&gt; + เปลี่ยนการปรับแต่งค่า</value>
   </string> 
+  <string id="587" name="room Administration roomclients list">
+    <value>Users in this Room now</value>
+  </string>
+  <string id="588" name="room Administration roomclients list">
+    <value>ID</value>
+  </string>
+  <string id="589" name="room Administration roomclients list">
+    <value>Login</value>
+  </string>
+  <string id="590" name="room Administration roomclients list">
+    <value>D</value>
+  </string>  
 </language>
