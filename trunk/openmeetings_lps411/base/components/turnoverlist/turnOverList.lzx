@@ -105,6 +105,7 @@
     <combobox name="languages" width="100" x="$once{ parent.width-149 }" 
 			  editable="false" height="22" >
 		<attribute name="sendEventToReload" value="false" type="boolean" />
+        <textlistitem value="10" text="10" />
         <textlistitem value="25" text="25" />
         <textlistitem value="50" text="50" />
         <textlistitem value="75" text="75" />
@@ -137,8 +138,8 @@
 	<!-- =========  List Header area  =========-->
 
 	<view name="_innerlisthead" height="20" width="$once{ parent.width }" 
-		x="${ parent._innerlist.x }" y="22" clip="true">
-		<view name="_inn" layout="axis:x;spacing:0" />
+		 y="22" clip="true">
+		<view name="_inn" x="${ parent.parent._innerlist._inn.x }" layout="axis:x;spacing:0" />
 	</view>	
 	
 	<!-- =========  List Contents area  =========-->

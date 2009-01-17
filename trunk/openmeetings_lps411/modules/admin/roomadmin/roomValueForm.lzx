@@ -28,6 +28,7 @@
 		if (this._showAdvancedRoomSettings.getValue()){
 			this._advancedRoomSettings.oninit.sendEvent();
 		}		
+        this._turnoverlist.clearList();
 	</handler>
 	
     <handler name="ondelete" >
@@ -57,6 +58,8 @@
 			if (this._showAdvancedRoomSettings.getValue()){
 				this._advancedRoomSettings.oninit.sendEvent();
 			}
+            this._turnoverlist.clearList();
+            this._turnoverlist.getRoomClientsMapByRoomId.doCall();
         ]]>
     </method>
 	
@@ -287,7 +290,63 @@
 			}
         </handler>
     </labelCheckbox>  
+    
+    <!-- RoomClient List -->
+    <labelText labelid="587" width="200" y="40" resize="false" 
+               x="400" fontstyle="bold" /> 
+    
+    <simpleTurnOverList name="_turnoverlist" width="300" height="200" y="40" x="400">
+
+        <handler name="oninit">
+            this.addHeaderItem(588,30);
+            this.addHeaderItem(589,230);
+            this.addHeaderItem(590,22);
+        </handler>
         
+        <handler name="onclickedItem" args="obj">
+            if ($debug) Debug.write("onclickedItem",obj,obj.obj);
+        </handler>
+        
+        <netRemoteCallHib name="getRoomClientsMapByRoomId" funcname="conferenceservice.getRoomClientsMapByRoomId" 
+                          remotecontext="$once{ canvas.thishib }" >      
+            <netparam><method name="getValue"> return parent.parent.parent.rooms_id; </method></netparam>
+            <handler name="ondata" args="value">
+                if ($debug) Debug.write("getRoomClientsMapByRoomId: ",value);
+                //this.parent.destroy();
+                this.parent.renderContent(value);
+            </handler>
+        </netRemoteCallHib> 
+        
+        <method name="renderContent" args="records">
+            <![CDATA[
+            this.clearList();
+            for (var i in records){
+                new lz.roomAdminRoomClientListItem(this._innerlist._inn._inn,{
+                    obj:records[i],
+                    red5_id:i,
+                    login:records[i].username+"("+records[i].streamid+")"});
+            }
+            this.sendInitialWidthUpdate();
+            ]]>
+        </method>
+
+    </simpleTurnOverList>
+        
+</class>
+
+<!--- list of conference/audience rooms -->
+<class name="roomAdminRoomClientListItem" extends="baseContentListItem">
+    
+    <attribute name="red5_id" value="0" type="number" />
+    <attribute name="login" value="" type="string" />
+    <attribute name="ispublic" value="" type="string" />
+    
+    <turnOverTextItem text="$once{ parent.red5_id }" width="60" />
+    <turnOverTextItem text="$once{ parent.login }" width="200" />
+    <turnOverTextItem width="40" text="">
+        
+    </turnOverTextItem>
+    
 </class>
 
 </library>

@@ -49,7 +49,7 @@
 		]]>
 	</handler>
     
-    <labelText labelid="486" fontstyle="bold" 
+    <labelText labelid="486" fontstyle="bold" width="200" 
     		   y="0" resize="true" x="2" />
     
     <labelText labelid="484" width="120" y="30" resize="false" x="2"/>
@@ -64,7 +64,7 @@
     <customEdittext name="_videoPodHeight" y="60" x="230" width="100" 
     				regexpType="number" text="" /> 
     
-    <labelText labelid="487" fontstyle="bold" 
+    <labelText labelid="487" fontstyle="bold" width="200"  
     		   y="90" resize="true" x="2" />
     		   
     <labelText labelid="488" width="200" y="120" resize="false" x="2" />
@@ -72,7 +72,7 @@
     				x="120" width="100"  
     				regexpType="number" text="" />   
     
-    <labelText labelid="489" fontstyle="bold" 
+    <labelText labelid="489" fontstyle="bold" width="200"  
     		   y="150" resize="true" x="2" />
     		   
     <labelText labelid="490" width="200" y="180" resize="false" x="2"/>
@@ -90,7 +90,7 @@
     <customEdittext name="_whiteBoardPanelHeight" y="240" x="230" width="100"  
     				regexpType="number" text="" />  
     
-    <labelText labelid="493" fontstyle="bold" 
+    <labelText labelid="493" fontstyle="bold" width="200"  
     		   y="270" resize="true" x="2" />
     		   
     <labelText labelid="494" width="200" y="300" resize="false" x="2"/>

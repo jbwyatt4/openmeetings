@@ -2,6 +2,7 @@
 <library>
 
 	<include href="turnOverList.lzx" />
+    <include href="simpleTurnOverList.lzx" />
 	<include href="turnOverListHeaderItem.lzx" />
 	<include href="turnOverTextItem.lzx" />
     <include href="baseContentListItem.lzx" />
