@@ -94,7 +94,7 @@
 	
 		//Debug.write("rtmphostlocal,rtmphost: ",canvas.rtmphostlocal,canvas.rtmphost);	
 		
-		var src = 'rtmp://'+canvas.rtmphostlocal+':'+canvas.rtmpport+'/'+canvas.webAppRootKey+'/hibernate';
+		var src = 'rtmp://'+canvas.rtmphostlocal+':'+canvas.rtmpport+'/'+canvas.webAppRootKey+'/'+hib.userScope;
 		canvas.thishib.setAttribute('src',src);
 		canvas.thishib.loaderVar = new lz.autoLoader(canvas);
 		canvas.thishib.loaderVar._src.setAttribute('text',src);
