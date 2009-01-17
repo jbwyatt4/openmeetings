@@ -279,4 +279,14 @@ public class ConferenceService {
 		return null;
 	}
 	
+	public HashMap<String,RoomClient> getRoomClientsMapByRoomId(Long room_id) {
+		try {
+			//log.error("getRoomClientsListByRoomId: "+room_id);
+			return this.clientListManager.getClientListByRoom(room_id);
+		} catch (Exception err) {
+			log.error("[getRoomClientsMapByRoomId]",err);
+		}
+		return null;
+	}
+	
 }
