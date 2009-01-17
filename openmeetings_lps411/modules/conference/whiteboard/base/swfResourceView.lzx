@@ -55,7 +55,6 @@
                 ////Debug.write("onload: ",this.stop);
                 this.stop();
                 this.setAttribute('play',false);             
-                ////Debug.write("swf loaded");
                 
                 this.parent.initwidth = this.width;
                 this.parent.initheight = this.height;
@@ -73,7 +72,9 @@
                     this.parent.refObj.sendLoadNotificationSWF(this.parent);
                 }
                 
+                if ($debug) Debug.write("swf loaded ",this.parent.refObj.isWmlLoaderImage);
                 if (this.parent.refObj.isWmlLoaderImage){
+                    if ($debug) Debug.write("swf loaded ",this.parent.innerwidth,this.parent.innerheight);
                 	if (this.parent.innerwidth != 0 && this.parent.innerheight != 0) {
 	                    this.setAttribute('width',this.parent.innerwidth);
 	                    this.setAttribute('height',this.parent.innerheight);

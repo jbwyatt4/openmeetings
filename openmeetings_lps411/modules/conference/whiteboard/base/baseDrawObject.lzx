@@ -56,8 +56,7 @@
             //    this.loadimageDataWinRef = new lz.loadWhiteboardWindow(canvas.main_content._content.inner,{refObj:this});
             //    this.loadimageDataWinRef.setMessage(canvas.getLabelName(this.imageLoadMessageId));
             //}
-            
-        	if ($debug) Debug.write("addPresentationToLayer uniqueObjectSyncName:",uniqueObjectSyncName);
+        	if ($debug) Debug.write("addPresentationToLayer uniqueObjectSyncName:",uniqueObjectSyncName,innerwidth,innerheight);
             
             var downloadurl = 'http://'+canvas.rtmphostlocal+':'+canvas.red5httpport+'/'+canvas.webAppRootKey+'/DownloadHandler?' +
                     'fileName=' + fileName +
@@ -121,6 +120,17 @@
             return this.currentlayer;
 		]]>
   	</method>  	
+    
+    <method name="addSWFToLayerHistory" args="actionObject,refObj,isWmlLoader">
+        this.isWmlLoaderImage = isWmlLoader;
+        this.baseactionobjectList.push(actionObject);   
+        this.addPresentationToLayer(refObj,actionObject[1],actionObject[actionObject.length-1],
+            actionObject[actionObject.length-5],actionObject[actionObject.length-4],actionObject[actionObject.length-3],
+            actionObject[actionObject.length-2],false,actionObject[2],actionObject[3],actionObject[4],actionObject[5],
+            actionObject[6],actionObject[7],
+            actionObject[8],actionObject[16],actionObject[11],actionObject[12],actionObject[9],actionObject[10],
+            actionObject[17]);
+    </method>
     
     <!-- 
     	Invoked by the remote Host, see sendWatchObject in baseDraw.lzx

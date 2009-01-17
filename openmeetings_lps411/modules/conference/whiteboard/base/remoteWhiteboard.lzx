@@ -89,7 +89,7 @@
 			} else if(actionObject[0]=='image'){
 				this.addImageToLayerHistoryToLocal(actionObject,this);
 			} else if(actionObject[0]=='swf'){
-				this.addSWFToLayerHistory(actionObject,this);
+				this.addSWFToLayerHistory(actionObject,this,true);
 			} else if(actionObject[0]=='rectangle'){
 				this.drawrectangleToHistory(actionObject,this);
 			} else if(actionObject[0]=='ellipse'){
