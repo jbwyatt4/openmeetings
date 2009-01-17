@@ -62,7 +62,7 @@ public class WhiteboardManagement {
 				roomList.remove(objectOID);
 				WhiteBoardObjectListManager.getInstance().setWhiteBoardObjectListRoomObj(room_id, roomList);
 			} else if (action.equals("size") || action.equals("editProp") 
-					|| action.equals("editText")) {
+					|| action.equals("editText") || action.equals("swf")) {
 				HashMap<String,Map> roomList = WhiteBoardObjectListManager.getInstance().getWhiteBoardObjectListByRoomId(room_id);
 				String objectOID = actionObject.get(actionObject.size()-1).toString();
 				Map roomItem = roomList.get(objectOID);

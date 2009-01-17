@@ -759,7 +759,12 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 		return null;
 	}
 	
-
+	/**
+	 * This Function is triggered from the Whiteboard
+	 * 
+	 * @param whiteboardObj
+	 * @return
+	 */
 	public int sendVars(HashMap whiteboardObj) {
 		//log.debug("*..*sendVars: " + whiteboardObj);
 		try {
