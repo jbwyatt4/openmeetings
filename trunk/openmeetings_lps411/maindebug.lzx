@@ -39,7 +39,15 @@
 
 <!-- View for Contents. All Windows will be loaded on this view. -->
 <view name="main_content" y="${ canvas.naviHeightDelta }" width="${canvas.width}" 
-    height="${canvas.height-canvas.naviHeightDelta}" visibility="hidden">
+    height="${canvas.height-canvas.naviHeightDelta}" visibility="hidden" showhandcursor="false">
+    
+    <handler name="onmouseover">
+        setCurrentMouseWheelObject(this._scrollbar);
+    </handler>
+    <handler name="onmouseout">
+        disableCurrentMouseWheelObject();
+    </handler>
+    
     <view x="0" name="_content" layout="axis:y;spacing:2">
         <view name="inner" />
         <method name="clearAll">
@@ -76,7 +84,7 @@
 	        </method>
 	    </view>
     	    -->
-    <vscrollbar />
+    <vscrollbar name="_scrollbar" />
 </view>  
   
 <!-- View for Navigation-bar and App-name -->
