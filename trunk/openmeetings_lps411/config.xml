@@ -82,7 +82,7 @@ of the red5-servlet
     showWindowEffectOpacity-values
     between 0 and 1
  -->
-<showWindowEffect>y</showWindowEffect> 
+<showWindowEffect>n</showWindowEffect> 
 
 <!--
     Show the recorder buttons in the Conference Rooms

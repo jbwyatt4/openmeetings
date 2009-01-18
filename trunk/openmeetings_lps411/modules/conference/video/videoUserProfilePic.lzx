@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library>
 
-<class name="videoUserProfilePic" extends="view" x="1" y="2" width="${parent.width}" height="${parent.height}" 
+<class name="videoUserProfilePic" extends="view" x="1" y="2" width="${parent.width-2}" height="${parent.height-3}" 
 	   clip="true" bgcolor="white">
 	<attribute name="value" value="null" />
 	<handler name="oninit">
@@ -16,24 +16,11 @@
 	        		+'&moduleName=remoteuserprofile&parentPath=&room_id='
 	        		+'&remoteUserid='+this.value.user_id
 	        		+'&sid='+canvas.sessionId;
-	        Debug.write(downloadurl);
+	        if ($debug) Debug.write(downloadurl);
 	        this._userpic.setAttribute('src',downloadurl);	
         ]]>
 	</handler>	
-	<image name="_userpic" stretches="both">
-	  <handler name="oninit">	   
-	    var f = function () { 
-	      this.setAttribute("width", this.parent.height*this.unstretchedwidth/this.unstretchedheight);
-	      this.setAttribute("height", this.parent.height);  
-	    }
-	    var d = [this.parent, "width"];
-	    var e = [this.parent, "height"];
-	    this.applyConstraint("width", f, d);
-	    this.applyConstraint("height", f, e);
-	    this.setAttribute("width", this.parent.width);
-	    this.setAttribute("height", this.parent.height);
-	  </handler>
-	</image>
+	<image name="_userpic" stretches="both" width="${parent.width}" height="${parent.height}" />
 </class>
 
 </library>

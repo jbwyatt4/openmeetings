@@ -10,6 +10,5 @@
 
     <include href="helpAndBugs.lzx" />
     <include href="mainNavi.lzx" />
-    <include href="navifunctions.lzx" />
 
 </library>

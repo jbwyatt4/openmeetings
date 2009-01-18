@@ -23,6 +23,7 @@
     <attribute name="chosenSetting" value="null" />
     <attribute name="currentClient" value="null" />
 
+    <attribute name="isSyncUpdate" value="false" type="boolean" />
 	<handler name="oninit">
 		<![CDATA[
 			if ($debug) Debug.write("this.myvideocontainer ",this.myvideocontainer);			
@@ -32,7 +33,9 @@
 	        var g = t.getData('userdata');
 	        var save = g["savecamdata"];
 	        //Debug.write("save: ",save,g["cam"],g["mic"]);
-	        if(save) {
+            
+            //In case the user presses the Sync Button this box should not close automatically again
+	        if(save && !this.isSyncUpdate) {
 	        	this.chosenCam = g["cam"];
 	        	this.chosenMic = g["mic"];
 	        	this.chosenSetting = g["avstored"];
@@ -41,6 +44,7 @@
 				this.remoteMessage[2] = this.chosenSetting;        	
 	        	this.getBroadCastId.doCall();		
 	        }
+            
         ]]>
 	</handler>
     

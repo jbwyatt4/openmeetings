@@ -206,6 +206,7 @@ these properties will be overwritten by config.xml -->
 <attribute name="naviHeight" value="110" type="number" />    
 <attribute name="naviHeightDelta" value="110" type="number" />  
 
+<attribute name="currentrecorder" value="null" /> 
 <attribute name="currentrecorder_id" value="0" type="number" /> 
 
 <!--- 
