@@ -3,10 +3,12 @@ package org.openmeetings.app.remote.red5;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.Set;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.openmeetings.app.data.beans.basic.SearchResult;
 import org.openmeetings.app.hibernate.beans.recording.RoomClient;
 import org.openmeetings.utils.crypt.ManageCryptStyle;
 
@@ -166,6 +168,31 @@ public class ClientListManager {
 		}
 		
 		return null;
+	}
+
+	public synchronized SearchResult getListByStartAndMax(int start, int max, String orderby, boolean asc) throws Exception {
+		
+		SearchResult sResult = new SearchResult();
+		sResult.setObjectName(RoomClient.class.getName());
+		sResult.setRecords(Long.valueOf(clientList.size()).longValue());
+		LinkedList<RoomClient> myList = new LinkedList<RoomClient>();
+		
+		int i = 0;
+		// TODO Auto-generated method stub
+		Iterator<String> iter = clientList.keySet().iterator();
+		while (iter.hasNext()) {
+			String key = iter.next();
+			if (i >= start) {
+				myList.add(clientList.get(key));
+			}
+			if (i > max) {
+				break;
+			}
+			i++;
+		}
+		sResult.setResult(myList);
+		
+		return sResult;
 	}
 	
 }

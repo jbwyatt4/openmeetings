@@ -10,7 +10,7 @@ import java.util.LinkedList;
  *
  */
 public class RoomClient {
-	 
+	
 	private Long roomClientId = null;
 	
 	/*
@@ -136,42 +136,48 @@ public class RoomClient {
 		this.lastname = lastname;
 	}
 	
-	public RoomClient(String avsettings, long broadCastID, Long chatUserRoomId,
-			Date connectedSince, String firstname, String formatedDate,
-			Boolean isChatNotification, Boolean isMod, Boolean isRecording,
-			String language, String lastLogin, String lastname, String mail,
-			String official_code, String picture_uri, String publicSID,
-			Date roomEnter, String roomRecordingName, Long room_id,
-			String streamid, String swfurl, Long user_id, String usercolor,
-			String userip, String username, int userport, Integer userpos) {
+	 
+	public RoomClient(Long roomClientId, String username, String streamid,
+			String scope, String publicSID, Boolean isMod, Date connectedSince,
+			String formatedDate, String usercolor, Integer userpos,
+			String userip, int userport, Long room_id, Date roomEnter,
+			long broadCastID, Long user_id, String firstname, String lastname,
+			String mail, String lastLogin, String official_code,
+			String picture_uri, String language, Boolean isChatNotification,
+			Long chatUserRoomId, String avsettings, String swfurl,
+			Boolean isRecording, String roomRecordingName,
+			Boolean zombieCheckFlag) {
 		super();
-		this.avsettings = avsettings;
-		this.broadCastID = broadCastID;
-		this.chatUserRoomId = chatUserRoomId;
-		this.connectedSince = connectedSince;
-		this.firstname = firstname;
-		this.formatedDate = formatedDate;
-		this.isChatNotification = isChatNotification;
+		this.roomClientId = roomClientId;
+		this.username = username;
+		this.streamid = streamid;
+		this.scope = scope;
+		this.publicSID = publicSID;
 		this.isMod = isMod;
-		this.isRecording = isRecording;
-		this.language = language;
-		this.lastLogin = lastLogin;
+		this.connectedSince = connectedSince;
+		this.formatedDate = formatedDate;
+		this.usercolor = usercolor;
+		this.userpos = userpos;
+		this.userip = userip;
+		this.userport = userport;
+		this.room_id = room_id;
+		this.roomEnter = roomEnter;
+		this.broadCastID = broadCastID;
+		this.user_id = user_id;
+		this.firstname = firstname;
 		this.lastname = lastname;
 		this.mail = mail;
+		this.lastLogin = lastLogin;
 		this.official_code = official_code;
 		this.picture_uri = picture_uri;
-		this.publicSID = publicSID;
-		this.roomEnter = roomEnter;
-		this.roomRecordingName = roomRecordingName;
-		this.room_id = room_id;
-		this.streamid = streamid;
+		this.language = language;
+		this.isChatNotification = isChatNotification;
+		this.chatUserRoomId = chatUserRoomId;
+		this.avsettings = avsettings;
 		this.swfurl = swfurl;
-		this.user_id = user_id;
-		this.usercolor = usercolor;
-		this.userip = userip;
-		this.username = username;
-		this.userport = userport;
-		this.userpos = userpos;
+		this.isRecording = isRecording;
+		this.roomRecordingName = roomRecordingName;
+		this.zombieCheckFlag = zombieCheckFlag;
 	}
 	
 	/**

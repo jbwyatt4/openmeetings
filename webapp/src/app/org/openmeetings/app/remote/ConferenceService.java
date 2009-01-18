@@ -8,6 +8,7 @@ import java.util.LinkedList;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.openmeetings.app.data.basic.AuthLevelmanagement;
 import org.openmeetings.app.data.basic.Sessionmanagement;
 import org.openmeetings.app.data.beans.basic.SearchResult;
 import org.openmeetings.app.data.user.Usermanagement;
@@ -285,6 +286,19 @@ public class ConferenceService {
 			return this.clientListManager.getClientListByRoom(room_id);
 		} catch (Exception err) {
 			log.error("[getRoomClientsMapByRoomId]",err);
+		}
+		return null;
+	}
+	
+	public SearchResult getRoomClientsMap(String SID, int start ,int max, String orderby, boolean asc){
+		try {
+	        Long users_id = Sessionmanagement.getInstance().checkSession(SID);
+	        Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);  
+	        if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)) {
+	        	return this.clientListManager.getListByStartAndMax(start, max, orderby, asc);
+	        }
+		} catch (Exception err) {
+			log.error("[getRoomClientsMap]",err);
 		}
 		return null;
 	}

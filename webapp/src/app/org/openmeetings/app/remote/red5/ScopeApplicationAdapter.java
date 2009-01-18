@@ -223,7 +223,7 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 	 * @param currentClient
 	 * @param currentScope
 	 */
-	private void roomLeaveByScope(RoomClient currentClient, IScope currentScope) {
+	public void roomLeaveByScope(RoomClient currentClient, IScope currentScope) {
 		try {
 			
 			log.debug("currentClient "+currentClient);
@@ -253,7 +253,6 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 				//set to true and overwrite the default one cause otherwise no notification is send
 				currentClient.setIsRecording(true);
 			}
-
 			
 			//Notify all clients of the same currentScope (room) with domain and room
 			//except the current disconnected cause it could throw an exception
@@ -388,9 +387,16 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 			IConnection current = Red5.getConnectionLocal();
 			String streamid = current.getClient().getId();
 			RoomClient currentClient = this.clientListManager.getClientByStreamId(streamid);
-			Long room_id = currentClient.getRoom_id();	
 				
-			
+			if (currentClient == null) {
+				
+				//In case the client has already left(kicked) this message might be thrown later then the RoomLeave
+				//event and the currentClient is already gone
+				//The second Use-Case where the currentClient is maybe null is if we remove the client because its a Zombie/Ghost
+				
+				return;
+				
+			}
 			// Notify all the clients that the stream had been started
 			log.debug("sendClientBroadcastNotifications: "+ stream.getPublishedName());
 			log.debug("sendClientBroadcastNotifications : "+ currentClient+ " " + currentClient.getStreamid());
@@ -910,6 +916,42 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 		}
 		return 1;
 	}
+	
+	/**
+	 * Function is used to send the kick Trigger at the moment
+	 * 
+	 * @param newMessage
+	 * @param clientId
+	 * @return
+	 */
+	public int sendMessageById(Object newMessage, String clientId, IScope scope) {
+		try {
+			IConnection current = Red5.getConnectionLocal();
+			
+			log.debug("### sendMessageById ###"+clientId);
+			
+			HashMap<String,Object> hsm = new HashMap<String,Object>();
+			hsm.put("message", newMessage);
+			
+			//broadcast Message to specific user with id inside the same Scope
+			Iterator<IConnection> it = scope.getConnections();
+			while (it.hasNext()) {
+				IConnection conn = it.next();
+				if (conn instanceof IServiceCapableConnection) {
+					log.debug("### sendMessageById 1 ###"+clientId);
+					log.debug("### sendMessageById 2 ###"+conn.getClient().getId());
+					if (conn.getClient().getId().equals(clientId)){
+						((IServiceCapableConnection) conn).invoke("sendVarsToMessageWithClient",new Object[] { hsm }, this);
+						log.debug("sendingsendVarsToMessageWithClient ByID to " + conn);
+					}
+				}
+			}
+		} catch (Exception err) {
+			log.error("[sendMessageWithClient] ",err);
+			return -1;
+		}		
+		return 1;
+	}
 
 	public int sendMessageWithClientById(Object newMessage, String clientId) {
 		try {
@@ -968,6 +1010,27 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 		} catch (Exception err) {
 			log.error("[updateUserSessionObject]",err);
 		}
+	}
+	
+	public synchronized IScope getRoomScope(String room) {
+		try {
+			
+			IScope globalScope = getContext().getGlobalScope();
+			IScope webAppKeyScope = globalScope.getScope(ScopeApplicationAdapter.webAppRootKey);
+			
+			String scopeName = "hibernate";
+			//If set then its a NON default Scope
+			if (room.length() != 0) {
+				scopeName = room;
+			}
+			
+			IScope scopeHibernate = webAppKeyScope.getScope(scopeName);
+			
+			return scopeHibernate;
+		} catch (Exception err) {
+			log.error("[getRoomScope]",err);
+		}
+		return null;
 	}
 
 	public synchronized void sendMessageWithClientByPublicSID(Object message, String publicSID) {

@@ -334,11 +334,11 @@ public class UploadHandler extends HttpServlet {
 						
 						log.debug("moduleName.equals(userprofile) ? "+moduleName);
 						
-						if (!moduleName.equals("userprofile")) {
+						//if (!moduleName.equals("userprofile")) {
 							log.debug("moduleName.equals(userprofile) ! ");
 							
-							ScopeApplicationAdapter.getInstance().sendMessageWithClientByPublicSID(hs,publicSID);
-						}
+						ScopeApplicationAdapter.getInstance().sendMessageWithClientByPublicSID(hs,publicSID);
+						//}
 						
 					}
 				}
