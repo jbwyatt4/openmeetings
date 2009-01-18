@@ -60,7 +60,8 @@
 	int chatpartnername
  -->
     
-<class name="videoObjectAudience" extends="baseVideoObject"  width="${parent.width - 4}" height="${parent.height - 26}" visible="true" >
+<class name="videoObjectAudience" extends="baseVideoObject"  width="${parent.width - 4}" 
+       height="${parent.height - 26}" visible="true" >
 	
 	<attribute name="isAssigned" value="false" type="boolean" />
 	
@@ -105,7 +106,7 @@
 	</view>
 	
 	
-	<view name="mute" x="3" y="${parent.height-62}" visibility="hidden"
+	<view name="mute" x="3" y="${parent.height-42}" visibility="hidden"
 		onmouseover="" onmouseup="" resource="mute_btn_rsc" >
 		<attribute name="isload" value="true" type="boolean" />
 		<handler name="onclick">

@@ -17,6 +17,9 @@
     
     <attribute name="userScope" value="hibernate" type="string" />
     
+    <!-- refreshing the session regulary -->
+    <attribute name="refreshDelegate" value="null" />
+    
    <!-- UserId-->
     <attribute name="UserID" value="1" type="number" />
     <!-- reconnect after each conferenceView -->
@@ -60,6 +63,7 @@
     <!-- shows what kind of room the use is public or private -->
     <attribute name="roomtype" value="" type="string" />
         
+    <attribute name="showKickMessage" value="false" type="boolean"/>
          
      <handler name="onconnect">
 		if($debug) Debug.write("hibRtmpConnection/onconnect");
@@ -75,14 +79,19 @@
             this.setUsernameReconnect.doCall();
             loadContentByTempActionForNavi();
         } else {
+            this.refreshDelegate = new LzDelegate( this, "refreshSessionMeth" );
+            LzTimer.addTimer( this.refreshDelegate, 30000 );
 			canvas.thishib.loaderVar.setProgress();
             this.getsessiondata.callRPC();    
         }    
     </handler>
     <handler name="onerror" >
         <![CDATA[
-  	 	    Debug.write("error ",this.status,this.src,this.lastCalled);
-  	 	    if (this.reconnectionAction){
+  	 	    if ($debug) Debug.write("error ",this.status,this.src,this.lastCalled,this.showKickMessage);
+            if (this.showKickMessage) {
+                new lz.labelerrorPopup(canvas,{errorlabelid:606});
+                return;
+            } else if (this.reconnectionAction){
                 this.connect();
   	 	    } else if (this.reconnectAfterRoomleft) {
                 Debug.write("this.reconnectAfterRoomleft: ",this.reconnectAfterRoomleft);
@@ -108,7 +117,20 @@
                 canvas.thishib.loaderVar._src.setAttribute('text',src);
             }
         ]]>
-    </handler>       
+    </handler>    
+    
+    <method name="refreshSessionMeth">
+        this.refreshSession.doCall();
+    </method>
+    
+    <!-- This Function is just for refreshing the Session -->
+    <netRemoteCallHib name="refreshSession" funcname="userservice.refreshSession" showLoading="false" >    
+        <netparam><method name="getValue">return canvas.sessionId;</method></netparam>   
+        <handler name="ondata" args="value">
+            //if ($debug) Debug.write("hibRtmpConnection/refreshSession [",value,"]");
+            LzTimer.addTimer( parent.refreshDelegate, 30000 );
+        </handler>
+    </netRemoteCallHib>
       
     <netRemoteCallHib name="getsessiondata" funcname="xmlcrm.getsessiondata" >      
         <handler name="ondata" args="value">
@@ -632,8 +654,12 @@
             <handler name="ondata" args="value">
                 <![CDATA[
                 //The onResult-Handler will be called be the rtmpconnection
-                if ($debug) Debug.write("sendVarsToMessageWithClient : ",value,value.message,value.message[0],value.client);
-                if (value.message[0]=='applyforMod'){
+                if ($debug) Debug.write("sendVarsToMessageWithClient : ",value,value.message,value.message[0],value);
+                if (value.message[0]=='kick'){
+                    //canvas.currentModApply
+                    parent.showKickMessage = true;
+                    parent.disconnect();
+                } else if (value.message[0]=='applyforMod'){
                     //canvas.currentModApply
                     if (canvas.streamid!=value.client.streamid) new lz.responseForModeration(canvas.main_content._content.inner,{userobject:value.client,clientId:value.client.streamid});
                 } else if (value.message[0]=='applyModAnswer'){
@@ -820,7 +846,7 @@
             	//The onResult-Handler will be called be the rtmpconnection
             	if ($debug) Debug.write("sendObjectSyncFlag: ",value);
             	if (canvas.syncImageWindow == null) {
-            		canvas.syncImageWindow = new lz.syncWin(canvas.main_content._content.inner,{labeliderror:556});
+            		canvas.syncImageWindow = new lz.syncWin(canvas.main_content._content.inner,{labeliderror:591});
             	}
             ]]>
         </handler>   

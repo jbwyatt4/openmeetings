@@ -26,6 +26,12 @@
 		vid._width = this.width;
         vid._height = this.height;
 	</method>
+    <handler name="onwidth" args="w">
+         this.applySizeToVid();
+    </handler> 
+    <handler name="onheight" args="h">
+        this.applySizeToVid();
+    </handler>
 	<method name="_getflashvideo">
 		<![CDATA[
             return this.__LZmovieClipRef.__lzvideo;

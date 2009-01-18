@@ -14,48 +14,35 @@
   <attribute name="ratioH" value="1" />
   <handler name="oninit">
      <![CDATA[
-      //Display widget defined in mother class
-      this.syncuser.bringToFront()
-      this._loudness.bringToFront();
-      this.showuser.bringToFront();
-
-      //disabled cause it does not work in LPS-4.1.1
-      //  swagner 20.09.2008
-      //this.setAttribute("ratioW",this.width / myconferenceView.initW);;
-      //this.setAttribute("ratioH",this.height / myconferenceView.initH);
-
-      //this.setAttribute("width",myconferenceView.width * this.ratioW);
-      //this.setAttribute("height",myconferenceView.height * this.ratioH);
-
-      //var f = function () {
-      //    this.setAttribute("width",myconferenceView.width * this.ratioW);
-      //    this.setAttribute("height",myconferenceView.height * this.ratioH);
-      //}
-      //var prop = [this.parent, "width"];
-      //this.applyConstraint("width", f, prop);
+        //Display widget defined in mother class
+        this.syncuser.bringToFront()
+        this._loudness.bringToFront();
+        this.showuser.bringToFront();
+        this._resizeview.bringToFront();
      ]]>
    </handler>
 
-	<view name="_chatvideoinner" x="1" y="20" width="${parent.width-2}" height="${parent.height-20}" >
-		<view name="r" resource="chatbgitem" x="1" y="2" 
-		      stretches="both" width="$once{parent.width}" height="$once{parent.height}" />
-		<handler name="oninit">
-			this.r.setAttribute('frame',5);
-		</handler>
-		<baseVideoStream name="_videostream" 
-						 width="$once{parent.width}" height="$once{parent.height}" bgcolor="black" >
-		
-		  <handler name="oninit">
-		    var f = function () {
-                     this.applySizeToVid();
-		    }
-		    var prop1 = [this, "width"];
-		    this.applyConstraint("width", f, prop1);
-		  </handler> 
-		</baseVideoStream>
+	<view name="_chatvideoinner" x="1" y="20"  
+          width="${parent.width-2}" height="${parent.height-21}" >
+        
+        <attribute name="initH"/>
+        <attribute name="initW"/>
+        
+        <handler name="oninit">
+            this.r.setAttribute('frame',5);
+            this.initH = this.height;
+            this.initW = this.width;
+        </handler>
+        
+		<view name="r" resource="chatbgitem" width="${parent.width}" 
+            height="${parent.height}" />
+
+        <baseVideoStream name="_videostream" bgcolor="black" 
+              width="${parent.width}" height="${parent.height}" />
+        
 	</view>
 
-	<view name="mute" x="20" y="${ parent.height *0.85}" 
+	<view name="mute" x="20" y="${ parent.height - 20 }" 
 		onmouseover="" onmouseup="" resource="mute_btn_rsc" >
 		<attribute name="isload" value="true" type="boolean" />
 		<handler name="onclick">

@@ -8,5 +8,6 @@
 	<include href="confadmin/" /><!-- admin module-->
 	<include href="languageseditor/" /><!-- admin module-->
 	<include href="backup/" /><!-- admin module-->
+    <include href="connections/" /><!-- admin module-->
 
 </library>

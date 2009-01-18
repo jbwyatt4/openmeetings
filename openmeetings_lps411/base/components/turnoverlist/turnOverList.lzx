@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library>
 
-<resource name="step_back" src="resources/step_back.png" />
-<resource name="step_fwd" src="resources/step_fwd.png" />
-
 <!--- private class for turnOverList only. -->
 <class name="innerList" layout="axis:y;spacing:2" />
 	
@@ -68,6 +65,12 @@
 	<method name="addHeaderItem" args="labelid,width" >
 		new lz.turnOverListHeaderItem(this._innerlisthead._inn,{labelid:labelid,width:width,subviewsid:this._innerlisthead._inn.subviews.length});
 	</method>
+    
+    <method name="sendInitialWidthUpdate">
+        for (var eg in this._innerlisthead._inn.subviews) {
+            this._innerlisthead._inn.subviews[eg].onwidth.sendEvent(this._innerlisthead._inn.subviews[eg].width);
+        }
+    </method> 
 	
 	<method name="sendWidthUpdate" args="w,subviewsid" >
 		<![CDATA[
@@ -92,13 +95,13 @@
     <!-- 368:goto first -->
 	<simpleLabelButtonTooltip name="_pre1" x="$once{ parent.width-196 }" width="22" height="22" 
 		enabled="true" onclick="parent.callfirst()" tooltipId="368">
-		<view resource="step_back" />
+		<view resource="step_back_two_arrow" valign="middle" align="center" />
 	</simpleLabelButtonTooltip>
 
     <!-- 369:goto previous -->
 	<simpleLabelButtonTooltip name="_pre2" x="$once{ parent.width-172 }" width="22" height="22" 
 		enabled="false" onclick="parent.callpre()" tooltipId="369" >
-		<view resource="step_back" />
+		<view resource="step_back_arrow" valign="middle" align="center" />
 	</simpleLabelButtonTooltip>
 
     <!-- combobox to decide the step number -->
@@ -125,13 +128,13 @@
 	<!-- 370:goto next -->
 	<simpleLabelButtonTooltip name="_next1" x="$once{ parent.width-48 }" width="22" height="22" 
 		enabled="false" onclick="parent.callnext()" tooltipId="370">
-		<view resource="step_fwd" />
+		<view resource="step_fwd_arrow" valign="middle" align="center" />
 	</simpleLabelButtonTooltip>
 
     <!-- 371:goto last -->
 	<simpleLabelButtonTooltip name="_next2" x="$once{ parent.width-24 }" width="22" height="22" 
 		enabled="true" onclick="parent.calllast()" tooltipId="371">
-		<view resource="step_fwd" />
+		<view resource="step_fwd_two_arrow" valign="middle" align="center" />
 	</simpleLabelButtonTooltip>
 	
 	

@@ -1,23 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library>
 
-<class name="videoBoardAudience" id="myVideoBoardAudience" extends="guiPresenter" x="2" y="2"
-    width="266" height="280" closable="false" title="Video and Audio"
-    resizeable="true">
+<class name="videoBoardAudience" id="myVideoBoardAudience" extends="view" x="2" y="2"
+    width="266" height="280" >
+    
     <videoContainerAudience name="_videocontainer" x="2" y="22" />
-    <handler name="oninit">
-      <![CDATA[
-      var ratio = this.height / this.width;
-      var f = function () {   
-        this.setWidth((this.width < 280 ) ? 280 : this.width);
-        this.setHeight(this.width * ratio);
-      }
-      var prop1 = [this, "width"];
-      var prop2 = [this, "height"];
-      this.applyConstraint("width", f, prop1);
-      this.applyConstraint("height", f, prop2);
-      ]]>
-    </handler>
+
 </class>
 
 <class name="audienceView" extends="baseContentView" destroyByMethod="true" >
@@ -29,7 +17,9 @@
         new lz.moderationPanel(canvas._conferencemenu,{x:this.roomobj.moderationPanelXPosition});
         canvas._conferencemenu.setAttribute('visibility','visible');
 
-        new lz.videoBoardAudience(this,{x:this.roomobj.videoPodXPosition,
+        new lz.videoBoardAudience(this,{
+            name:'_videoView',
+            x:this.roomobj.videoPodXPosition,
         	y:this.roomobj.videoPodYPosition,
         	width:this.roomobj.videoPodWidth,
         	height:this.roomobj.videoPodHeight});
@@ -57,6 +47,7 @@
 
         }
         
+        this._videoView.bringToFront();
     </handler>
 
   <handler name="ontabcontentleave">

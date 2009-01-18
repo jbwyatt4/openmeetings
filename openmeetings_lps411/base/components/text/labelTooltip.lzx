@@ -7,8 +7,12 @@
     <attribute name="multiline" value="false" type="boolean" />
     <attribute name="ismenubuttonlabel" value="false" type="boolean" />
     <attribute name="holder" value="null" />
+    
+    <event name="setContent" />
+        
     <handler name="onmouseover" reference="this.parent">
     	<![CDATA[
+            this.setContent.sendEvent();
 	    	if (this.ismenubuttonlabel){
 	    		this.parent.setLabel();
 	    	}

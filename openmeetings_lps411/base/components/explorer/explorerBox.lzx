@@ -327,12 +327,16 @@
         </view>
         <text fontsize="11" height="17" x="10" y="1" text="${ this.parent.parent.title }" 
 			fgcolor="0xFFFFFF" resize="true" fontstyle="bold" />
-		<button visible="${ this.parent.parent.closable }" x="${ this.parent.parent.width-23 }" 
-			y="1" text="X" height="18" width="20" >
-			<handler name="onmouseup">
+		<view visible="${ this.parent.parent.closable }" x="${ this.parent.parent.width-20 }" 
+			y="2" resource="btn_presenter_close"
+                onmouseover="this.setAttribute('frame',2)"
+                onmouseout="this.setAttribute('frame',1)"
+                onmousedown="this.setAttribute('frame',3)"
+                onmouseup="this.setAttribute('frame',1)" >
+			<handler name="onclick">
 				this.parent.parent.close();
 			</handler>									
-		</button>
+		</view>
 		<!-- 
 		<view visible="${ !this.parent.parent.isopen }" x="2" y="3" resource="explorer_button_min_rsc">
 			<handler name="onmouseover">

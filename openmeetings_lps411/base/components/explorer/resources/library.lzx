@@ -3,6 +3,8 @@
 
 <resource src="explorerbar.png" name="explorer_thumb_rsc" />
 
+<resource src="cancel.png" name="close_explorer_window_new_rsc" />
+
 <resource name="explorer_button_rsc" >
 	<frame src="explorbar_close_no.png" />
 	<frame src="explorbar_close_mo.png" />

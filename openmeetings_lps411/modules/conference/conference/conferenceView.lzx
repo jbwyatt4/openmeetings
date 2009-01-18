@@ -1,42 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library>
 
-<class name="videoBoard" id="myconferenceView" extends="guiPresenter" closable="false" title="Video and Audio"
-    resizeable="true">
-  
-	<attribute name="initH" />
-	<attribute name="initW" />
-
-	<!--
-	disabled cause it does not work in LPS-4.1.1
-        swagner 20.09.2008
-	<handler name="oninit">
-	  <![CDATA[
-	      this.setAttribute("initH",this.height);
-	      this.setAttribute("initW",this.width);
-	      var f=function() {
-	              var w=this.height * this.initW/this.initH;
-	              w=((w < this.initW ) ? initW : w);
-	              var h=this.width * this.initH/this.initW;
-	              h=((h < this.initH ) ? initH : h);
-	
-	              this.setWidth(w);
-	              this.setHeight(h);
-	      }
-          var prop1 = [this, "width"];
-          var prop2 = [this, "height"];
-          this.applyConstraint("width", f, prop1);
-          this.applyConstraint("height", f, prop2);
-         
-        ]]>
-	</handler>
-     -->
-        <simpleLabelButton y="${ parent.height-19 }" x="${ parent.width-this.width-1 }" 
+<class name="videoBoard" id="myconferenceView" extends="view">
+    <!--
+    
+    <simpleLabelButton y="${ parent.height-19 }" x="${ parent.width-this.width-1 }" 
 					   height="18" labelid="213" >
 		<handler name="onclick">
 			new lz.inviteMainWindow(canvas.main_content._content.inner);
 		</handler>
 	</simpleLabelButton>
+    -->
+    
 	<!--
 	<view name="_sendInvitation" visible="true" x="1" y="1" >
 		<handler name="onclick">
@@ -46,9 +21,9 @@
 			fgcolor="white" fontstyle="bold" />
 	</view>	
      -->
-    <videoContainer name="_videocontainer" x="1" y="22" 
-    				width="${ parent.width-2 }"
-    				height="${ parent.height-22 }" />
+     
+    <videoContainer name="_videocontainer" />
+                    
 </class>
 
 <class name="whiteBoardPanel" extends="guiPresenter" x="296" y="2"
@@ -184,10 +159,13 @@
         new lz.moderationPanel(canvas._conferencemenu,{x:this.roomobj.moderationPanelXPosition});
         canvas._conferencemenu.setAttribute('visibility','visible');
 
-        new lz.videoBoard(this,{x:this.roomobj.videoPodXPosition,
-        	y:this.roomobj.videoPodYPosition,
-        	width:this.roomobj.videoPodWidth,
-        	height:this.roomobj.videoPodHeight});
+        new lz.videoBoard(this,{
+	            name:'_videosView',
+	            x:this.roomobj.videoPodXPosition,
+	        	y:this.roomobj.videoPodYPosition,
+	        	width:this.roomobj.videoPodWidth,
+        	   height:this.roomobj.videoPodHeight
+            });
         
         if (this.roomobj.showFilesPanel){
         	new lz.filesPanel(this,{x:this.roomobj.filesPanelXPosition,
@@ -209,6 +187,8 @@
 	        		height:this.roomobj.whiteBoardPanelHeight});
        		}
         }
+        
+        this._videosView.bringToFront();
     </handler>
 
   <handler name="ontabcontentleave">
