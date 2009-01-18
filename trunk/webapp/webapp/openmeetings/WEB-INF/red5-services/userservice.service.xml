@@ -9,7 +9,10 @@
 
     <!-- Class for Methods which can be invoked by the client -->
     <bean id="userservice.service" 
-        class="org.openmeetings.app.remote.UserService" 
-        />      
+        class="org.openmeetings.app.remote.UserService">
+        <property name="clientListManager" ref="openmeetings.ClientListManager" />
+        <property name="scopeApplicationAdapter" ref="web.handler" />
+    </bean>     
+                    
                     
 </beans>

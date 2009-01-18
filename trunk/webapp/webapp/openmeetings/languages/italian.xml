@@ -1779,4 +1779,49 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   <string id="591" name="swf sync message">
     <value>Loading Document. Please wait untill all Client have been synchronized.</value>
   </string>   
+  <string id="592" name="upload dialog">
+    <value>Upload complete, converting Document ...</value>
+  </string>
+  <string id="593" name="upload dialog">
+    <value>Start Upload</value>
+  </string>
+  <string id="594" name="upload dialog">
+    <value>Upload and Import Dialog. Please select a File from your Disk.</value>
+  </string>
+  <string id="595" name="upload Dialog">
+    <value>Cancel</value>
+  </string>
+  <string id="596" name="upload Dialog">
+    <value>Select File</value>
+  </string>
+  <string id="597" name="administration navigation">
+    <value>Connections</value>
+  </string>
+  <string id="598" name="confadmin value list">
+    <value>Value</value>
+  </string>  
+  <string id="599" name="connection administration panel">
+    <value>Streamid</value>
+  </string>
+  <string id="600" name="connection administration panel">
+    <value>Login</value>
+  </string>
+  <string id="601" name="connection administration panel">
+    <value>Connected since</value>
+  </string>
+  <string id="602" name="connection administration panel">
+    <value>Room / Scope</value>
+  </string>
+  <string id="603" name="connection administration panel">
+    <value>Kick User</value>
+  </string>
+  <string id="604" name="kick user confirmation dialog">
+    <value>Kick User</value>
+  </string>
+  <string id="605" name="kick user confirmation dialog">
+    <value>Do you really want to kick this Client from the Connection?&lt;br/&gt; This does only remove the Client from the current Room.The Client could re-login again.</value>
+  </string>
+  <string id="606" name="kick user message dialog">
+    <value>Your session has been closed by an Administrator or Moderator.</value>
+  </string>  
 </language>

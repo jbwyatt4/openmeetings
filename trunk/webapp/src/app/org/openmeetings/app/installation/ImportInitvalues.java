@@ -98,16 +98,18 @@ public class ImportInitvalues {
 				true, 2, "admin", "false", 586L);
 		Navimanagement.getInstance().addMainStructure("userAdmin", 13, 125,
 				true, false, 2, "userAdmin", 6);
+		Navimanagement.getInstance().addMainStructure("roomClient", 14, 597,
+				true, false, 3, "roomClient", 6);
 		//Navimanagement.getInstance().addMainStructure("groupadmin", 2, 126, true, false, 2, "groupadmin",4);
-		Navimanagement.getInstance().addMainStructure("orgAdmin", 14, 127,
+		Navimanagement.getInstance().addMainStructure("orgAdmin", 15, 127,
 				true, false, 3, "orgAdmin", 6);
-		Navimanagement.getInstance().addMainStructure("roomAdmin", 15, 186,
+		Navimanagement.getInstance().addMainStructure("roomAdmin", 16, 186,
 				true, false, 3, "roomAdmin", 6);
-		Navimanagement.getInstance().addMainStructure("confAdmin", 16, 263,
+		Navimanagement.getInstance().addMainStructure("confAdmin", 17, 263,
 				true, false, 3, "confAdmin", 6);
-		Navimanagement.getInstance().addMainStructure("languagesEditor", 17,
+		Navimanagement.getInstance().addMainStructure("languagesEditor", 18,
 				348, true, false, 3, "languagesEditor", 6);
-		Navimanagement.getInstance().addMainStructure("backupContent", 18, 367,
+		Navimanagement.getInstance().addMainStructure("backupContent", 19, 367,
 				true, false, 3, "backupContent", 6);
 
 		ErrorManagement.getInstance().addErrorType(new Long(1), new Long(322));

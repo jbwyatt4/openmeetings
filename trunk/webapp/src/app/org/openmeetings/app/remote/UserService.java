@@ -1,26 +1,30 @@
 package org.openmeetings.app.remote;
 
 import java.util.Date;
-import java.util.List;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.openmeetings.app.data.basic.AuthLevelmanagement;
 import org.openmeetings.app.data.basic.Sessionmanagement;
 import org.openmeetings.app.data.beans.basic.SearchResult;
 import org.openmeetings.app.data.user.Addressmanagement;
 import org.openmeetings.app.data.user.Emailmanagement;
-import org.openmeetings.app.data.user.Usermanagement;
-import org.openmeetings.app.data.user.Salutationmanagement;
 import org.openmeetings.app.data.user.Organisationmanagement;
+import org.openmeetings.app.data.user.Salutationmanagement;
+import org.openmeetings.app.data.user.Usermanagement;
 import org.openmeetings.app.data.user.dao.UsersDaoImpl;
 import org.openmeetings.app.hibernate.beans.adresses.Adresses;
 import org.openmeetings.app.hibernate.beans.adresses.Adresses_Emails;
 import org.openmeetings.app.hibernate.beans.adresses.Emails;
+import org.openmeetings.app.hibernate.beans.recording.RoomClient;
 import org.openmeetings.app.hibernate.beans.user.Users;
-import org.openmeetings.app.xmlimport.UserImport;
-
+import org.openmeetings.app.remote.red5.ClientListManager;
+import org.openmeetings.app.remote.red5.ScopeApplicationAdapter;
 import org.red5.io.utils.ObjectMap;
+import org.red5.server.api.IScope;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 
@@ -30,6 +34,24 @@ import org.red5.io.utils.ObjectMap;
 public class UserService {
 	
 	private static final Logger log = LoggerFactory.getLogger(UserService.class);	
+	
+	//Spring Beans
+	private ClientListManager clientListManager = null;
+	private ScopeApplicationAdapter scopeApplicationAdapter = null;
+	
+	public ClientListManager getClientListManager() {
+		return clientListManager;
+	}
+	public void setClientListManager(ClientListManager clientListManager) {
+		this.clientListManager = clientListManager;
+	}
+	public ScopeApplicationAdapter getScopeApplicationAdapter() {
+		return scopeApplicationAdapter;
+	}
+	public void setScopeApplicationAdapter(
+			ScopeApplicationAdapter scopeApplicationAdapter) {
+		this.scopeApplicationAdapter = scopeApplicationAdapter;
+	}
 	
 	/**
 	 * get your own user-object
@@ -67,6 +89,21 @@ public class UserService {
         Long users_id = Sessionmanagement.getInstance().checkSession(SID);
         Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
         return Usermanagement.getInstance().checkAdmingetUserById(user_level,user_id);
+	}
+
+	/**
+	 * refreshes the current SID
+	 * @param SID
+	 * @return
+	 */
+	public String refreshSession(String SID){
+		try {
+	        Sessionmanagement.getInstance().checkSession(SID);
+	        return "ok";
+		} catch (Exception err) {
+			log.error("[refreshSession]",err);
+		}
+		return "error";
 	}
 	
 	/**
@@ -274,55 +311,91 @@ public class UserService {
      * @param user_idClient
      * @return
      */
-    public Long deleteUserAdmin(String SID, int user_idClient){
-    	log.debug("deleteUserAdmin");
-    	
-    	Long users_id = Sessionmanagement.getInstance().checkSession(SID);
-    	
-    	long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
-    	
-    	// admins only
-    	if(user_level>=3){
-    		// no self destruction ;-)
-    		if (users_id!=user_idClient){
-    			
-    			// Setting user deleted
-    			Long userId =  UsersDaoImpl.getInstance().deleteUserID(user_idClient);
-    			
-    			Users user = Usermanagement.getInstance().checkAdmingetUserById(user_level, userId);
-    			
-    			// Updating address
-				Adresses ad = user.getAdresses();
-				
-				if(ad != null){
-					ad.setDeleted("true");
-					
-					Addressmanagement.getInstance().updateAdress(ad);
-					log.debug("deleteUserId : Address updated");
-				
-					Adresses_Emails ae = Emailmanagement.getInstance().getAdresses_EmailsByAddress(ad.getAdresses_id());
-					
-					if(ae != null){
-						Emails e = ae.getMail();
-						e.setDeleted("true");
-						
-						Emailmanagement.getInstance().updateEmail(e);
+    public Long deleteUserAdmin(String SID, int user_idClient) {
+		log.debug("deleteUserAdmin");
+		try {
+			Long users_id = Sessionmanagement.getInstance().checkSession(SID);
+			Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
+
+			// admins only
+			if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)) {
+				// no self destruction ;-)
+				if (users_id != user_idClient) {
+
+					// Setting user deleted
+					Long userId = UsersDaoImpl.getInstance().deleteUserID(
+							user_idClient);
+
+					Users user = Usermanagement.getInstance()
+							.checkAdmingetUserById(user_level, userId);
+
+					// Updating address
+					Adresses ad = user.getAdresses();
+
+					if (ad != null) {
+						ad.setDeleted("true");
+
+						Addressmanagement.getInstance().updateAdress(ad);
+						log.debug("deleteUserId : Address updated");
+
+						Adresses_Emails ae = Emailmanagement.getInstance()
+								.getAdresses_EmailsByAddress(
+										ad.getAdresses_id());
+
+						if (ae != null) {
+							Emails e = ae.getMail();
+							e.setDeleted("true");
+
+							Emailmanagement.getInstance().updateEmail(e);
+						}
+
+						log.debug("deleteUserId : mail updated");
 					}
-					
-					log.debug("deleteUserId : mail updated");
+
+					return userId;
+				} else {
+					return new Long(-10);
 				}
-    			
-    			
-    			return userId;
-    		} else {
-    			return new Long(-10);
-    		}
-    	} else {
-    		return new Long(-11);
-    	}
-    } 
+			} else {
+				return new Long(-11);
+			}
+		} catch (Exception err) {
+			log.error("[deleteUserAdmin]", err);
+		}
+		return null;
+	} 
     
-   
+   public Boolean kickUserByStreamId(String SID, String streamid) {
+	   try {
+		   Long users_id = Sessionmanagement.getInstance().checkSession(SID);
+		   Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
+		   // admins only
+		   if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)) {
+			   RoomClient rcl = this.clientListManager.getClientByStreamId(streamid);
+			   
+			   if (rcl == null) {
+				   return true;
+			   }
+			   String scopeName = "hibernate";
+			   if (rcl.getRoom_id() != null) {
+				   scopeName = rcl.getRoom_id().toString();
+			   }
+			   IScope currentScope = this.scopeApplicationAdapter.getRoomScope(scopeName);
+			   this.scopeApplicationAdapter.roomLeaveByScope(rcl, currentScope);
+			   
+			   
+			   HashMap<Integer,String> messageObj = new HashMap<Integer,String>();
+			   messageObj.put(0, "kick");
+			   this.scopeApplicationAdapter.sendMessageById(messageObj, streamid, currentScope);
+			   
+			   return true;
+		   }
+		   
+	   } catch (Exception err) {
+		   log.error("[kickUserByStreamId]",err);
+	   }
+	   return null;
+   }
     
     
 }
