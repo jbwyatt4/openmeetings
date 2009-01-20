@@ -80,7 +80,7 @@
             loadContentByTempActionForNavi();
         } else {
             this.refreshDelegate = new LzDelegate( this, "refreshSessionMeth" );
-            LzTimer.addTimer( this.refreshDelegate, 30000 );
+            lz.Timer.addTimer( this.refreshDelegate, 60000 );
 			canvas.thishib.loaderVar.setProgress();
             this.getsessiondata.callRPC();    
         }    
@@ -128,7 +128,7 @@
         <netparam><method name="getValue">return canvas.sessionId;</method></netparam>   
         <handler name="ondata" args="value">
             //if ($debug) Debug.write("hibRtmpConnection/refreshSession [",value,"]");
-            LzTimer.addTimer( parent.refreshDelegate, 30000 );
+            lz.Timer.addTimer( parent.refreshDelegate, 60000 );
         </handler>
     </netRemoteCallHib>
       
