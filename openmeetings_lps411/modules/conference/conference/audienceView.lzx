@@ -66,7 +66,7 @@
         if (canvas._drawarea.letterObjectIsActive){
           canvas._drawarea.currentletterObj.destroy();
         }
-    this.logicalRoomLeave.doCall();
+        this.logicalRoomLeave.doCall();
         Debug.write("this.logicalRoomLeave ",this.logicalRoomLeave);
   </handler>
 
@@ -76,6 +76,11 @@
         //this.parent.destroy();
         canvas.thishib.reconnectAfterRoomleft = true;
         canvas.thishib.reconnectedRoomInstance = this.parent;
+        
+        canvas.thishib.userScope = "hibernate";
+        var src = hib.protocollName+'://'+canvas.rtmphostlocal+':'+hib.protocollPort+'/'+canvas.webAppRootKey+'/'+hib.userScope;
+        canvas.thishib.setAttribute('src',src);
+        
         canvas.thishib.disconnect();
         canvas._mainbgcontentNavi.setAttribute('height',canvas.naviHeight);
         canvas.setAttribute('naviHeightDelta',canvas.naviHeight);

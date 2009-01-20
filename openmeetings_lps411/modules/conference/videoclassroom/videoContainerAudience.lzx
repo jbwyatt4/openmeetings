@@ -20,16 +20,30 @@
 		canvas._videocontainer=this;
 		this.allUsers = new Array();
 		this.streams = new Array();
-		this.initializeStreams();
+        
+        // Reconnect User to its Room Id
+        canvas.thishib.userScope = canvas.thishib.currentroomid;
+        var src = hib.protocollName+'://'+canvas.rtmphostlocal+':'+hib.protocollPort+'/'+canvas.webAppRootKey+'/'+hib.userScope;
+        canvas.thishib.setAttribute('src',src);
+        
+        if( $debug ) Debug.write("videoContainer: canvas.thishib: ",canvas.thishib.src,canvas.thishib);
+        
+        canvas.thishib.reconnectionAction = true;
+        canvas.thishib.reconnectObjRef = this;
+        canvas.thishib.disconnect();
+        
+		
 	</handler>
+    
+    <method name="reconnectSuccess">
+        if ($debug) Debug.write("User Reloged In");
+        //set default values and get already availible streams
+        this.setRoomValues.doCall();
+    </method>
 	
 	<method name="addUser" args="objectR">
 		this.allUsers.push(objectR);
 	</method>
-	
-	<method name="initializeStreams">
-		this.setRoomValues.doCall();
-	</method>  
 	
 	<!-- invoked if another client logs into the room 
 	after choosing devices -->     
