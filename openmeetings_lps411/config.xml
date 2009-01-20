@@ -23,6 +23,16 @@ this should workaround 99% of all firewalls
  -->
 <rtmpTunnelport>8088</rtmpTunnelport>
 
+<rtmpsslport>443</rtmpsslport>
+<!--
+Wether it should try to connect to rtmps first or not
+Valid values: yes / no
+
+NOTE: The OSx and Linux Flash Player are NOT able to connect via rtmps
+The support for Windows is experimental
+ -->
+<useSSL>yes</useSSL>
+
 <!-- 
 Port to use for the Server
 This port is used to connec to the http-servlet
