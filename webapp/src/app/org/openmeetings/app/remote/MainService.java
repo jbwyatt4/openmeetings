@@ -25,6 +25,7 @@ import org.openmeetings.app.data.user.Usermanagement;
 import org.openmeetings.app.data.user.Statemanagement;
 import org.openmeetings.app.data.user.dao.UsersDaoImpl;
 import org.openmeetings.app.hibernate.beans.basic.RemoteSessionObject;
+import org.openmeetings.app.ldap.LdapAuthBase;
 import org.openmeetings.app.ldap.LdapLoginManagement;
 
 import org.openmeetings.app.data.conference.Invitationmanagement;
@@ -158,11 +159,7 @@ public class MainService implements IPendingServiceCallback {
     	// Check, whether LDAP - Login is required(Configuration has key ldap_config_path
     	boolean withLdap = false;
     	
-    	// Faking admin userlevel to retrieve ConfigVal for LDAP
-    	Configuration configVal = Configurationmanagement.getInstance().getConfKey(3, "ldap_config_path");
-		
-    	if(configVal != null && configVal.getConf_value() != null && configVal.getConf_value().length() > 0){
-    		log.debug("Ldap Config Key Found -> Login via LDAP");
+    	if(LdapLoginManagement.getInstance().isLdapConfigured()){
     		withLdap = true;
     	}
     	

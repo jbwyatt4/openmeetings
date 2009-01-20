@@ -67,6 +67,33 @@ public class LdapLoginManagement {
 	
 	
 	/**
+	 * Ldap Login configured?
+	 */
+	//----------------------------------------------------------------------------------------
+	public boolean isLdapConfigured(){
+		log.debug("LdapLoginmanagement.isLdapConfigured");
+		
+		Configuration configVal = Configurationmanagement.getInstance().getConfKey(3, "ldap_config_path");
+		
+		if(configVal == null){
+			log.error("Error retrieving ConfigKey ldap_config_path!");
+			return false;
+		}
+		
+		File tester = new File(configVal.getConf_value());
+		
+		if(!tester.isFile()){
+			log.error("ConfigVal ldap_config_path not describes no valid File : " + configVal);
+			return false;
+		}
+		
+		
+		return true;
+		
+	}
+	//----------------------------------------------------------------------------------------
+	
+	/**
 	 * Retrieving LdapData from Config
 	 */
 	//----------------------------------------------------------------------------------------
