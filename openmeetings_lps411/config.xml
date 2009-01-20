@@ -31,7 +31,7 @@ Valid values: yes / no
 NOTE: The OSx and Linux Flash Player are NOT able to connect via rtmps
 The support for Windows is experimental
  -->
-<useSSL>yes</useSSL>
+<useSSL>no</useSSL>
 
 <!-- 
 Port to use for the Server
