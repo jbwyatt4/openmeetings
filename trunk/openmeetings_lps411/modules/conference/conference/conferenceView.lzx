@@ -207,7 +207,7 @@
         if (canvas._drawarea.letterObjectIsActive){
           canvas._drawarea.currentletterObj.destroy();
         }
-    this.logicalRoomLeave.doCall();
+        this.logicalRoomLeave.doCall();
         Debug.write("this.logicalRoomLeave ",this.logicalRoomLeave);
   </handler>
 
@@ -220,7 +220,7 @@
             
             // Reconnect User to default Scope
 	        canvas.thishib.userScope = "hibernate";
-	        var src = 'rtmp://'+canvas.rtmphostlocal+':'+canvas.rtmpport+'/'+canvas.webAppRootKey+'/'+canvas.thishib.userScope;
+	        var src = hib.protocollName+'://'+canvas.rtmphostlocal+':'+hib.protocollPort+'/'+canvas.webAppRootKey+'/'+hib.userScope;
 	        canvas.thishib.setAttribute('src',src);
             canvas.thishib.disconnect();
             canvas._mainbgcontentNavi.setAttribute('height',canvas.naviHeight);
