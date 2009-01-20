@@ -36,6 +36,9 @@ these properties will be overwritten by config.xml -->
 	of the red5-servlet
  -->
 <attribute name="red5httpport" value="5080" type="string" />
+
+<attribute name="useSSL" value="false" type="boolean" />
+<attribute name="rtmpsslport" value="443" type="string" />
 	
 <!---
 	These colors are the main colors and style the hole application
