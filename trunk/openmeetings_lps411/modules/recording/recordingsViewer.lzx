@@ -37,8 +37,8 @@
             
             // Reconnect User to its Room Id
 	        canvas.thishib.userScope = canvas.currentrecorder.rooms.rooms_id;
-	        var src = 'rtmp://'+canvas.rtmphostlocal+':'+canvas.rtmpport+'/'+canvas.webAppRootKey+'/'+canvas.thishib.userScope;
-	        canvas.thishib.setAttribute('src',src);
+	        var src = hib.protocollName+'://'+canvas.rtmphostlocal+':'+hib.protocollPort+'/'+canvas.webAppRootKey+'/'+hib.userScope;
+            canvas.thishib.setAttribute('src',src);canvas.thishib.setAttribute('src',src);
             canvas.thishib.disconnect();
 		</method>
 	

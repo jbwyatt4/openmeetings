@@ -99,13 +99,16 @@
 			canvas.isResetUsername = true;
 			canvas.resetHash = hash;		
 		}
-	
-		//Debug.write("rtmphostlocal,rtmphost: ",canvas.rtmphostlocal,canvas.rtmphost);	
-		var src = 'rtmp://'+canvas.rtmphostlocal+':'+canvas.rtmpport+'/'+canvas.webAppRootKey+'/'+hib.userScope;
+        
+        hib.protocollPort = canvas.rtmpport;
         
         if (canvas.useSSL) {
-            var src = 'rtmps://'+canvas.rtmphostlocal+':'+canvas.rtmpsslport+'/'+canvas.webAppRootKey+'/'+hib.userScope;
+            hib.protocollName = "rtmps";
+            hib.protocollPort = canvas.rtmpsslport;
         }
+	
+		//Debug.write("rtmphostlocal,rtmphost: ",canvas.rtmphostlocal,canvas.rtmphost);	
+		var src = hib.protocollName+'://'+canvas.rtmphostlocal+':'+hib.protocollPort+'/'+canvas.webAppRootKey+'/'+hib.userScope;
         
 		canvas.thishib.setAttribute('src',src);
 		canvas.thishib.loaderVar = new lz.autoLoader(canvas);

@@ -100,7 +100,7 @@
             } else {
   	 	        this.setAttribute('protocollName','rtmpt');
                 this.setAttribute('protocollPort',canvas.rtmpTunnelport);
-  	 	        var src = 'rtmpt://'+canvas.rtmphostlocal+':'+canvas.rtmpTunnelport+'/'+canvas.webAppRootKey+'/'+this.userScope;
+  	 	        var src = this.protocollName+'://'+canvas.rtmphostlocal+':'+this.protocollPort+'/'+canvas.webAppRootKey+'/'+this.userScope;
   	 	        this.setAttribute('src',src);
   	 	        //Debug.write("new src ",this.src);
                 if (this.counterror<3){
