@@ -5,9 +5,9 @@
 
 Starting with OO 3.0 you do not need Xvfb anymore you can just use this:
 
-  * for Linux: /path/to/openoffice/program/soffice.bin -headless -nofirststartwizard -accept="socket,host=localhost,port=8100;urp;StarOffice.Service"
-  * for Mac OS X: /path/to/openoffice.app/Contents/MacOS/soffice.bin -headless -nofirststartwizard -accept="socket,host=localhost,port=8100;urp;StarOffice.Service"
-  * for Windows: soffice.exe -headless -nofirststartwizard -accept="socket,host=localhost,port=8100;urp;StarOffice.Service"
+  * for Linux: /path/to/openoffice/program/soffice.bin -headless -nofirststartwizard -accept="socket,host=localhost,port=8100;urp;!StarOffice.Service"
+  * for Mac OS X: /path/to/openoffice.app/Contents/!MacOS/soffice.bin -headless -nofirststartwizard -accept="socket,host=localhost,port=8100;urp;!StarOffice.Service"
+  * for Windows: soffice.exe -headless -nofirststartwizard -accept="socket,host=localhost,port=8100;urp;!StarOffice.Service"
 
 
 = Linux (Debian,Ubuntu) =
