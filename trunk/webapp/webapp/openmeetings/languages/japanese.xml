@@ -1832,5 +1832,8 @@ languagesディレクトリにコピーして、
   </string>
   <string id="606" name="kick user message dialog">
     <value>Your session has been closed by an Administrator or Moderator.</value>
-  </string>  
+  </string> 
+  <string id="607" name="useralterself_phone">
+    <value>Phone</value>
+  </string> 
 </language>

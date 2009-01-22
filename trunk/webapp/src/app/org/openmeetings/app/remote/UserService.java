@@ -266,7 +266,11 @@ public class UserService {
 	        if (argObjectMap.get("userage") instanceof Date){
 	        	age = (Date) argObjectMap.get("userage");
 	        	log.error("saveOrUpdateUser7: "+age.getTimezoneOffset());
-	        }	        
+	        }	   
+	        
+	        
+	        System.out.println("Mail : " + argObjectMap.get("email").toString());
+	        System.out.println("Phone : " + argObjectMap.get("phone").toString());
 
 	        //log.error("saveOrUpdateUser6: "+age);
 	       
@@ -296,7 +300,7 @@ public class UserService {
 		        		Integer.valueOf(argObjectMap.get("status").toString()).intValue(),
 		        		organisations,
 		        		Integer.valueOf(argObjectMap.get("title_id").toString()).intValue(),
-		        		argObjectMap.get("email").toString()); 
+		        		argObjectMap.get("phone").toString()); 
     		}
     	} catch (Exception ex) {
     		log.error("[saveOrUpdateUser]: ",ex);
