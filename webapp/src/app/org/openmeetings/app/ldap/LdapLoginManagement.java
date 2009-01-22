@@ -223,6 +223,7 @@ public class LdapLoginManagement {
 			attributes.add(LDAP_KEY_ZIP); // ZIP
 			attributes.add(LDAP_KEY_COUNTRY); // Country
 			attributes.add(LDAP_KEY_TOWN); // Town
+			attributes.add(LDAP_KEY_PHONE); // Town
 			
 			
 			Vector<HashMap<String, String>> result = lAuth.getData(ldap_search_scope, ldap_search_filter, attributes);

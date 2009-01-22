@@ -46,6 +46,7 @@ public class ScreenServlet extends HttpServlet {
 			HttpServletResponse httpServletResponse) throws ServletException,
 			IOException {
 		try {
+			System.out.println("ScreenServlet Call");
 			
 			if (httpServletRequest.getContentLength() > 0) {
 			
