@@ -281,7 +281,7 @@ public class ImportInitvalues {
 			Long user_id = Usermanagement.getInstance().registerUserInit(
 					new Long(3), 3, 1, 1, username, userpass, "lastname",
 					"firstname", email, new java.util.Date(), "street", "no",
-					"fax", "zip", 1, "town", 0, false, null);
+					"fax", "zip", 1, "town", 0, false, null, "phone");
 
 			//Add default group
 			Long organisation_id = Organisationmanagement.getInstance()

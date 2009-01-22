@@ -18,7 +18,7 @@ import org.openmeetings.app.data.basic.Fieldmanagment;
 import org.openmeetings.app.data.basic.Sessionmanagement;
 import org.openmeetings.app.data.beans.basic.SearchResult;
 import org.openmeetings.app.data.user.dao.UsersDaoImpl;
-import org.openmeetings.app.hibernate.beans.adresses.Adresses_Emails;
+import org.openmeetings.app.hibernate.beans.adresses.Adresses;
 import org.openmeetings.app.hibernate.beans.lang.Fieldlanguagesvalues;
 import org.openmeetings.app.hibernate.beans.recording.RoomClient;
 import org.openmeetings.app.hibernate.beans.user.Userdata;
@@ -373,30 +373,23 @@ public class Usermanagement {
 			Date age, String street, String additionalname, String zip, long states_id, String town,
 			int availible, String telefon, String fax,
 			String mobil, String email, String comment, int status, LinkedHashMap organisations,
-			int title_id) {
+			int title_id, String phone) {
 
 		if (AuthLevelmanagement.getInstance().checkUserLevel(user_level) && user_id != 0) {
 			try {
 				Users us = UsersDaoImpl.getInstance().getUser(user_id);
 				// Check for duplicates
 				boolean checkName = true;
+				
 				if (!login.equals(us.getLogin())){
 					checkName = UsersDaoImpl.getInstance().checkUserLogin(login);
 				}
 				boolean checkEmail = true;
-				Adresses_Emails mail = null;
-//				log.error("mail 1 update User: "+us.getAdresses().getAdresses_id());
-//				log.error("mail 2 update User: "+us.getAdresses().getEmails().size());
-				Iterator it = us.getAdresses().getEmails().iterator();
-//				log.error("mail 3 update User: "+it);
-				if (it.hasNext()){
-//					log.error("mail 4 update User: has next");
-					mail = (Adresses_Emails) it.next();
-//					log.error("mail 5 update User naxt"+mail);
-				}				
-//				log.error("updateUser mail: "+mail);
-//				log.error("updateUser email: "+email);
-				if (!email.equals(mail.getMail().getEmail())){
+				
+				// Compare old address with new address
+				if (!email.equals(us.getAdresses().getEmail())){
+					
+					// Its a new one - check, whether another user already uses that one...
 					checkEmail = Emailmanagement.getInstance().checkUserEMail(email);
 				}
 				if (checkName && checkEmail) {
@@ -421,9 +414,9 @@ public class Usermanagement {
 						}
 					}					
 					
-					//Todo implement Phone
-					Addressmanagement.getInstance().updateAdress(us.getAdresses().getAdresses_id(), street, zip, town, states_id, additionalname, comment, fax);
-					Emailmanagement.getInstance().updateUserEmail(mail.getMail().getMail_id(),user_id, email);
+					
+					Addressmanagement.getInstance().updateAdress(us.getAdresses().getAdresses_id(), street, zip, town, states_id, additionalname, comment, fax, email, phone);
+					//Emailmanagement.getInstance().updateUserEmail(mail.getMail().getMail_id(),user_id, email);
 					
 					//add or delete organisations from this user
 					if (organisations!=null){
@@ -669,14 +662,14 @@ public class Usermanagement {
 	public Long registerUser(String login, String Userpass, String lastname,
 			String firstname, String email, Date age, String street,
 			String additionalname, String fax, String zip, long states_id,
-			String town, long language_id) {
+			String town, long language_id, String phone) {
 		try {
 			// Checks if FrontEndUsers can register
 			if (Configurationmanagement.getInstance().getConfKey(3,"allow_frontend_register").getConf_value().equals("1")) {
 				// TODO: add availible params sothat users have to verify their
 				// login-data
 				// TODO: add status from Configuration items
-				Long user_id = this.registerUserInit(3, 1, 0, 1, login, Userpass,lastname, firstname, email, age, street, additionalname,fax, zip, states_id, town, language_id, true, new LinkedHashMap());
+				Long user_id = this.registerUserInit(3, 1, 0, 1, login, Userpass,lastname, firstname, email, age, street, additionalname,fax, zip, states_id, town, language_id, true, new LinkedHashMap(), phone);
 				// Get the default organisation_id of registered users
 				if (user_id>0){
 					long organisation_id = Long.valueOf(Configurationmanagement.getInstance().getConfKey(3,"default_domain_id").getConf_value()).longValue();
@@ -710,6 +703,7 @@ public class Usermanagement {
 	 * @param states_id
 	 * @param town
 	 * @param language_id
+	 * @param phone
 	 * @return new users_id OR null if an exception, -1 if an error, -4 if mail
 	 *         already taken, -5 if username already taken, -3 if login or pass
 	 *         or mail is empty
@@ -718,7 +712,7 @@ public class Usermanagement {
 			int status, String login, String Userpass, String lastname,
 			String firstname, String email, Date age, String street,
 			String additionalname, String fax, String zip, long states_id,
-			String town, long language_id, boolean sendWelcomeMessage, LinkedHashMap organisations) throws Exception {
+			String town, long language_id, boolean sendWelcomeMessage, LinkedHashMap organisations, String phone) throws Exception {
 		//TODO: make phone number persistent
 		// User Level must be at least Admin
 		// Moderators will get a temp update of there UserLevel to add Users to
@@ -735,7 +729,7 @@ public class Usermanagement {
 						String sendMail = Emailmanagement.getInstance().sendMail(login, Userpass, email);
 						if (!sendMail.equals("success")) return new Long(-19);
 					}						
-					Long address_id = Addressmanagement.getInstance().saveAddress(street, zip, town, states_id, additionalname, "",fax);
+					Long address_id = Addressmanagement.getInstance().saveAddress(street, zip, town, states_id, additionalname, "",fax, phone, email);
 					if (address_id==null) {
 						return new Long(-22);
 					}
@@ -743,13 +737,17 @@ public class Usermanagement {
 					if (user_id==null) {
 						return new Long(-111);
 					}
+					
+					/*
 					Long adress_emails_id = Emailmanagement.getInstance().registerEmail(email, address_id,"");
 					if (adress_emails_id==null) {
 						return new Long(-112);
-					}					
+					}
+					*/
+					
 					Organisationmanagement.getInstance().addUserOrganisationsByHashMap(user_id, organisations);
 					
-					if (address_id > 0 && user_id > 0 && adress_emails_id > 0) {
+					if (address_id > 0 && user_id > 0 ) {
 						return user_id;
 					} else {
 						return new Long(-16);
@@ -901,22 +899,25 @@ public class Usermanagement {
 					
 					String email = values.get("email").toString();
 					
-					Adresses_Emails mail = null;
-					Iterator it = savedUser.getAdresses().getEmails().iterator();
-					if (it.hasNext()){
-						mail = (Adresses_Emails) it.next();
-					}	
+					System.out.println("Email from Object : " + email);
+					System.out.println("old email : " + savedUser.getAdresses().getEmail());
 					
-					if (!email.equals(mail.getMail().getEmail())){
+					if (!email.equals(savedUser.getAdresses().getEmail())){
 						boolean checkEmail = Emailmanagement.getInstance().checkUserEMail(email);
-						if (checkEmail) {
-							Emailmanagement.getInstance().updateUserEmail(mail.getMail().getMail_id(),savedUser.getUser_id(), email);
-						} else {
+						if (!checkEmail) {
+							// mail already used by another user!
 							returnLong = new Long(-11);
+						}
+						else{
+							user.getAdresses().setEmail(email);
+							savedUser.getAdresses().setEmail(email);
 						}
 					}					
 					
+					
 					Addressmanagement.getInstance().updateAdress(user.getAdresses());
+					
+					
 					savedUser.setAdresses(Addressmanagement.getInstance().getAdressbyId(user.getAdresses().getAdresses_id()));
 					
 					Object idf = HibernateUtil.createSession();
@@ -953,11 +954,11 @@ public class Usermanagement {
 		try {
 			//check if Mail given
 			if (email.length()>0){
-				Adresses_Emails addr_e = (Adresses_Emails) Emailmanagement.getInstance().getAdresses_EmailsByMail(email);
+				Adresses addr = Addressmanagement.getInstance().retrieveAddressByEmail(email);
 				//log.debug("addr_e "+addr_e);
-				if (addr_e!=null) {
+				if (addr!=null) {
 					//log.debug("getAdresses_id "+addr_e.getAdresses_id());
-					Users us = UsersDaoImpl.getInstance().getUserByAdressesId(addr_e.getAdresses_id());
+					Users us = UsersDaoImpl.getInstance().getUserByAdressesId(addr.getAdresses_id());
 					if (us!=null) {
 						this.sendHashByUser(us, appLink);
 						return new Long(-4);
@@ -991,7 +992,7 @@ public class Usermanagement {
 		UsersDaoImpl.getInstance().updateUser(us);
 		String reset_link = appLink+"?hash="+us.getResethash();
 		
-		Adresses_Emails addrE = (Adresses_Emails) us.getAdresses().getEmails().iterator().next();
+		String email = us.getAdresses().getEmail();
 		
 		Long default_lang_id = Long.valueOf(Configurationmanagement.getInstance().
         		getConfKey(3,"default_lang_id").getConf_value()).longValue();
@@ -1000,7 +1001,7 @@ public class Usermanagement {
 		
 		Fieldlanguagesvalues labelid517 = Fieldmanagment.getInstance().getFieldByIdAndLanguage(new Long(517), default_lang_id);
     	
-		MailHandler.sendMail(addrE.getMail().getEmail(), labelid517.getValue(), template);
+		MailHandler.sendMail(email, labelid517.getValue(), template);
 	}
 	
 	/**

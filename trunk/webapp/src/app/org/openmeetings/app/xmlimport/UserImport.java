@@ -84,6 +84,8 @@ public class UserImport {
 			String street = itemUsers.element("street").getText();
 			String town = itemUsers.element("town").getText();
 			String zip = itemUsers.element("zip").getText();
+			String phone = itemUsers.element("phone").getText();
+			String email = itemUsers.element("mail").getText();
 			
 			boolean mailCheck = true;
 			
@@ -98,17 +100,9 @@ public class UserImport {
 			//check for duplicate Login or mail:
 			if (UsersDaoImpl.getInstance().checkUserLogin(us.getLogin()) && mailCheck) {
 			
-				Long address_id = Addressmanagement.getInstance().saveAddress(street, zip, town, state_id, additionalname, "",fax);
+				Long address_id = Addressmanagement.getInstance().saveAddress(street, zip, town, state_id, additionalname, "",fax, phone, email);
 				
 				us.setAdresses(Addressmanagement.getInstance().getAdressbyId(address_id));
-				
-				for (Iterator itMail = itemUsers.elementIterator("emails");itMail.hasNext(); ){
-					Element itemElement = (Element) itMail.next();
-					for (Iterator mailIterator = itemElement.elementIterator("mail");mailIterator.hasNext(); ){
-						Element mailElement = (Element) mailIterator.next();
-						Long adress_emails_id = Emailmanagement.getInstance().registerEmail(mailElement.getText(), address_id,"");
-					}	
-				}   
 				
 				Long user_id = Usermanagement.getInstance().addUser(us);
 				

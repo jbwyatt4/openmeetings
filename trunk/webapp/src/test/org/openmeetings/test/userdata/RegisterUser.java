@@ -32,7 +32,7 @@ public class RegisterUser extends TestCase{
 		//registerUser(String SID, String Username, String Userpass, String lastname, String firstname, String email, int age, String adresse, String Zip, String state, String town)
 		Long user_id = mService.registerUser(sessionData.getSession_id(),"username3", "userpass", "lastname", 
 				"firstname", "email", new java.util.Date(), "street", "No 14", 
-				"faxno", "zip", 1, "town", 1);
+				"faxno", "zip", 1, "town", 1, "089/0815");
 		System.out.println("++++ user_id: "+user_id);
 		
 	}

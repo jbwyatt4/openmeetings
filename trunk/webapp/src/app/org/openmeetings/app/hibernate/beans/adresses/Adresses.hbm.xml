@@ -15,10 +15,9 @@
     <property name="town" type="string" column="town"/>
     <property name="updatetime" type="java.util.Date" column="updatetime"/>
     <property name="zip" type="string" column="zip"/>
+    <property name="email" type="string" column="email" not-null="true"/>
+    <property name="phone" type="string" column="phone" not-null="true"/>
     <property name="deleted" type="string" column="deleted"/>
-    <set table="adresses_emails" lazy="false" inverse="false" cascade="none" name="emails">
-      <key column="adresses_id"/>
-      <one-to-many class="org.openmeetings.app.hibernate.beans.adresses.Adresses_Emails"/>
-    </set>
+    
   </class>
 </hibernate-mapping>

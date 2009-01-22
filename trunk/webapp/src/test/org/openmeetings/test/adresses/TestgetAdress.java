@@ -20,7 +20,7 @@ public class TestgetAdress extends TestCase {
 		Adresses adresses = Addressmanagement.getInstance().getAdressbyId(1);
 		
 		log.error("Adresses: "+adresses.getStates().getName());
-		log.error("Adresses: "+adresses.getEmails().size());
+		log.error("Adresses: "+adresses.getEmail());
 		log.error("Adresses: "+adresses.getStreet());
 		log.error("Adresses: "+adresses.getTown());
 		

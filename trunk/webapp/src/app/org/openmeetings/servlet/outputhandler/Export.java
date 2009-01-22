@@ -21,7 +21,6 @@ import org.dom4j.io.XMLWriter;
 import org.openmeetings.app.data.basic.Sessionmanagement;
 import org.openmeetings.app.data.user.Organisationmanagement;
 import org.openmeetings.app.data.user.Usermanagement;
-import org.openmeetings.app.hibernate.beans.adresses.Adresses_Emails;
 import org.openmeetings.app.hibernate.beans.domain.Organisation;
 import org.openmeetings.app.hibernate.beans.domain.Organisation_Users;
 import org.openmeetings.app.hibernate.beans.user.Users;
@@ -173,11 +172,12 @@ public class Export extends HttpServlet {
 			user.addElement("town").setText(u.getAdresses().getTown());
 			user.addElement("zip").setText(u.getAdresses().getZip());
 			
-			Element user_emails = user.addElement("emails");
-			for (Iterator<Adresses_Emails> iterObj=u.getAdresses().getEmails().iterator();iterObj.hasNext();){
-				Adresses_Emails addrE = iterObj.next();
-				user_emails.addElement("mail").setText(addrE.getMail().getEmail());
-			}
+			// Email and Phone
+			user.addElement("mail").setText(u.getAdresses().getEmail());
+			user.addElement("phone").setText(u.getAdresses().getPhone());
+			
+			
+			
 			
 			Element user_organisations = user.addElement("organisations");
 			//List<String> organisations = new LinkedList();

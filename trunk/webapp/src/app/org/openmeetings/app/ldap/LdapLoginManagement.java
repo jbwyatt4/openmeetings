@@ -50,7 +50,8 @@ public class LdapLoginManagement {
 	public static final String LDAP_KEY_FAX = "facsimileTelephoneNumber"; 
 	public static final String LDAP_KEY_ZIP = "postalCode"; 
 	public static final String LDAP_KEY_COUNTRY = "co"; 
-	public static final String LDAP_KEY_TOWN = "l"; 
+	public static final String LDAP_KEY_TOWN = "l";
+	public static final String LDAP_KEY_PHONE = "telephoneNumber";
 	
 
 	private LdapLoginManagement() {
@@ -358,6 +359,10 @@ public class LdapLoginManagement {
 		if(userdata.containsKey(LDAP_KEY_COUNTRY) && userdata.get(LDAP_KEY_COUNTRY) != null)
 			state = userdata.get(LDAP_KEY_COUNTRY);
 		
+		String phone = "phone";
+		if(userdata.containsKey(LDAP_KEY_PHONE) && userdata.get(LDAP_KEY_PHONE) != null)
+			phone = userdata.get(LDAP_KEY_PHONE);
+		
 		long state_id = -1;
 		
 		if(state != null){
@@ -411,7 +416,8 @@ public class LdapLoginManagement {
 				town,
 				0,
 				false,
-				null);
+				null,
+				phone);
 		}catch(Exception e){
 			log.error("Error creating user : " + e.getMessage());
 		}

@@ -35,10 +35,12 @@ public class Addressmanagement {
 	 * @param additionalname
 	 * @param comment
 	 * @param fax
+	 * @param phone
+	 * @param email
 	 * @return id of generated Adress-Object or NULL
 	 */
 	public Long saveAddress(String street, String zip, String town,
-			long states_id, String additionalname, String comment, String fax) {
+			long states_id, String additionalname, String comment, String fax, String phone, String email) {
 		try {
 			States st = Statemanagement.getInstance().getStateById(states_id);
 
@@ -55,6 +57,8 @@ public class Addressmanagement {
 			adr.setTown(town);
 			adr.setZip(zip);
 			adr.setStates(st);
+			adr.setPhone(phone);
+			adr.setEmail(email);
 
 			Long id = (Long) session.save(adr);
 
@@ -98,6 +102,29 @@ public class Addressmanagement {
 	}
 	
 	/**
+	 * @author o.becherer
+	 * @param email
+	 * @return
+	 */
+	public Adresses retrieveAddressByEmail(String email) throws Exception{
+		log.debug("retrieveAddressByEmail : " + email);
+		
+		String hql = "select c from Adresses as c where c.email = :email and c.deleted = :deleted";
+		Object idf = HibernateUtil.createSession();
+		Session session = HibernateUtil.getSession();
+		Transaction tx = session.beginTransaction();
+		Query query = session.createQuery(hql);
+		query.setString("email", email);
+		query.setString("deleted", "false");
+		
+		Adresses addr = (Adresses) query.uniqueResult();
+		tx.commit();
+		HibernateUtil.closeSession(idf);
+	
+		return addr;
+	}
+	
+	/**
 	 * updates an Adress-Record by its given Id
 	 * @param adresses_id
 	 * @param street
@@ -110,7 +137,7 @@ public class Addressmanagement {
 	 * @return the updated Adress-Object or null
 	 */
 	public Adresses updateAdress(long adresses_id, String street, String zip, String town,
-			long states_id, String additionalname, String comment, String fax) {
+			long states_id, String additionalname, String comment, String fax, String phone, String email) {
 		try {
 			States st = Statemanagement.getInstance().getStateById(states_id);
 			
@@ -128,6 +155,8 @@ public class Addressmanagement {
 			adr.setTown(town);
 			adr.setZip(zip);
 			adr.setStates(st);
+			adr.setPhone(phone);
+			adr.setEmail(email);
 
 			session.update(adr);
 
@@ -149,22 +178,18 @@ public class Addressmanagement {
 	 * @return
 	 */
 	public Adresses updateAdress(Adresses addr) {
+		log.debug("updateAddress");
+		
 		try {
-			Adresses addrRemote = this.getAdressbyId(addr.getAdresses_id());
-			addr.setEmails(addrRemote.getEmails());
-			addr.setPhones(addrRemote.getPhones());
-			
+				
 			Object idf = HibernateUtil.createSession();
 			Session session = HibernateUtil.getSession();
 			Transaction tx = session.beginTransaction();
 
-			System.out.println("ADDR : DELETED = " + addr.getDeleted());
-			
 			session.update(addr);
 			
 			tx.commit();
-			
-			
+				
 			HibernateUtil.closeSession(idf);
 
 			return addr;
