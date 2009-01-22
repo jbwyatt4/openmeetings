@@ -23,6 +23,7 @@
         this.firstname.setAttribute('text','');
         this.lastname.setAttribute('text','');
         this.email.setAttribute('text','');
+        this.phone.setAttribute('phone','');
         this.age.setAttribute('text','');
         this.street.setAttribute('text','');
         this.house.setAttribute('text','');
@@ -61,6 +62,7 @@
 			this.lastname.setAttribute('text',obj.lastname);
 			this.userpass1.setAttribute('text','');
 			this.email.setAttribute('text',obj.adresses.email);
+			this.phone.setAttribute('text',obj.adresses.phone);
 			this.age.setAttribute('text',parseDateToString(obj.age));
 			this.street.setAttribute('text',obj.adresses.street);
 			this.house.setAttribute('text',obj.adresses.additionalname);
@@ -114,6 +116,7 @@
   			this.sendObject["firstname"] = this.parent.firstname.getText();
   			this.sendObject["lastname"] = this.parent.lastname.getText();
   			this.sendObject["email"] = this.parent.email.getText();
+  			this.sendObject["phone"] = this.parent.phone.getText();
   			this.sendObject["street"] = this.parent.street.getText();
   			this.sendObject["additionalname"] = this.parent.house.getText();
   			this.sendObject["zip"] = this.parent.zip.getText();
@@ -131,7 +134,7 @@
   			this.sendObject["level_id"] = Number(this.parent.level.getValue());
 			this.sendObject["title_id"] = Number(this.parent.salutation.getValue());
   			this.sendObject["organisations"] = this.parent._organisationslist.getAllItems();
-  			this.sendObject["phone"] = '';
+  			
 
   			if ($debug) Debug.write("prepareCall: ",this.sendObject);
   		</method>
@@ -183,25 +186,29 @@
     <labelText labelid="137" width="200" y="190" resize="false" x="2"/>
         <customEdittext name="email" y="190" x="120" width="270" regexpType="email" 
         				text="" />
+        				
+    <labelText labelid="607" width="200" y="220" resize="false" x="2"/>
+        <customEdittext name="phone" y="220" x="120" width="270"  
+        				text="" />
         
-    <labelText labelid="138" width="200" y="220" resize="false" x="2"/>
-        <dateField name="age" y="220" x="120" width="270" text="" />
+    <labelText labelid="138" width="200" y="250" resize="false" x="2"/>
+        <dateField name="age" y="250" x="120" width="270" text="" />
         
-    <labelText labelid="139" width="200" y="250" resize="false" x="2"/>
-        <customEdittext name="street" y="250" x="120" width="220" text="" />
-        <customEdittext name="house" y="250" x="350" width="40" text="" />
+    <labelText labelid="139" width="200" y="280" resize="false" x="2"/>
+        <customEdittext name="street" y="280" x="120" width="220" text="" />
+        <customEdittext name="house" y="280" x="350" width="40" text="" />
         
-    <labelText labelid="140" width="280" y="280" resize="false" x="2"/>
-        <customEdittext name="zip" y="280" x="120" width="70" text="" />   
-        <customEdittext name="town" y="280" x="200" width="190" text="" />                        
+    <labelText labelid="140" width="200" y="310" resize="false" x="2"/>
+        <customEdittext name="zip" y="310" x="120" width="70" text="" />   
+        <customEdittext name="town" y="310" x="200" width="190" text="" />                        
          
-    <labelText labelid="141" width="200" y="310" resize="false" x="2"/>  
-		<validText name="state" width="270" y="310" x="120" fontsize="12" 
+    <labelText labelid="141" width="200" y="370" resize="false" x="2"/>  
+		<validText name="state" width="270" y="370" x="120" fontsize="12" 
             shownitems="7" validate_method="$once{ canvas.validateCountry }" 
             resultId="state_id" resultName="name" />    
 
-    <labelText labelid="158" width="200" y="340" resize="false" x="2"/>  
-        <combobox name="status" width="270" y="340" x="120" editable="false" fontsize="12">
+    <labelText labelid="158" width="200" y="400" resize="false" x="2"/>  
+        <combobox name="status" width="200" y="400" x="120" editable="false" fontsize="12">
 	        <handler name="oninit" >
 	            <![CDATA[
 	            this.addItem(canvas.getLabelName(159),'0');
@@ -212,8 +219,8 @@
         </combobox> 
 
 
-    <labelText labelid="169" width="200" y="370" resize="false" x="2"/>  
-        <combobox name="level" width="270" y="370" x="120" editable="false" fontsize="12">
+    <labelText labelid="169" width="200" y="430" resize="false" x="2"/>  
+        <combobox name="level" width="200" y="430" x="120" editable="false" fontsize="12">
 	        <handler name="oninit" >
 	            <![CDATA[
 	            this.addItem(canvas.getLabelName(166),'1');
@@ -224,21 +231,21 @@
 	        </handler> 
         </combobox> 
 	
-    <labelText labelid="142" width="200" y="400" resize="false" x="2"/>
-        <customEdittext name="adress_comment" y="400" x="120" width="270" 
+    <labelText labelid="142" width="200" y="460" resize="false" x="2"/>
+        <customEdittext name="adress_comment" y="460" x="120" width="270" 
             height="70" text="" multiline="true"/>
        
-    <labelText labelid="161" width="200" y="480" resize="false" x="2"/>     
-    <simpleValueList name="_organisationslist" y="480" x="120" width="270" height="100" 
+    <labelText labelid="161" width="200" y="540" resize="false" x="2"/>     
+    <simpleValueList name="_organisationslist" y="540" x="120" width="270" height="100" 
 		multiselect="true" />
 	
-	<baseChooseIcon resourceN="edit_add_rsc" labelid="172" y="482" x="400"
+	<baseChooseIcon resourceN="edit_add_rsc" labelid="172" y="542" x="400"
 		onclick="this.parent.addOrganisationToUser()" />		
 	<method name="addOrganisationToUser">
 		//if (this.user_id!=0)
 			new lz.chooseOrganisationWindow(canvas.main_content._content.inner,{refObj:this,item_id:this.user_id});
 	</method>	
-	<baseChooseIcon resourceN="button_cancel_rsc" labelid="176" y="482" x="430"
+	<baseChooseIcon resourceN="button_cancel_rsc" labelid="176" y="542" x="430"
 		onclick="new lz.confirmDeleteWindow(canvas.main_content._content.inner,{refObj:this});" >		
 		<method name="confirmDelete">
 			if (this.parent._organisationslist._selected!=null)
