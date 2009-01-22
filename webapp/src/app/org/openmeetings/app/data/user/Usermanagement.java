@@ -899,8 +899,6 @@ public class Usermanagement {
 					
 					String email = values.get("email").toString();
 					
-					System.out.println("Email from Object : " + email);
-					System.out.println("old email : " + savedUser.getAdresses().getEmail());
 					
 					if (!email.equals(savedUser.getAdresses().getEmail())){
 						boolean checkEmail = Emailmanagement.getInstance().checkUserEMail(email);
@@ -912,7 +910,11 @@ public class Usermanagement {
 							user.getAdresses().setEmail(email);
 							savedUser.getAdresses().setEmail(email);
 						}
-					}					
+					}			
+					
+					String phone = values.get("phone").toString();
+					user.getAdresses().setPhone(phone);
+					savedUser.getAdresses().setPhone(phone);
 					
 					
 					Addressmanagement.getInstance().updateAdress(user.getAdresses());

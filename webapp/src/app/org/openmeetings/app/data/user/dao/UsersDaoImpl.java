@@ -52,6 +52,7 @@ public class UsersDaoImpl {
 				
 				//Somehow the Organizations are missing here o
 				
+				
 				return users;
 				// TODO: Add Usergroups to user
 				// users.setUsergroups(ResHandler.getGroupmanagement().getUserGroups(user_id));
