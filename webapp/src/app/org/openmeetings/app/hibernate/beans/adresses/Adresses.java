@@ -9,6 +9,7 @@ import java.util.Set;
  * lazy="false"
  *
  */
+
 public class Adresses {
     
     private Long adresses_id;
@@ -23,8 +24,9 @@ public class Adresses {
     private String zip;
     private String deleted;
     
-    private Set emails;
-    private Set phones;
+    private String email;
+    private String phone;
+    
     
     public Adresses() {
         // TODO Auto-generated constructor stub
@@ -166,31 +168,34 @@ public class Adresses {
 	public void setDeleted(String deleted) {
 		this.deleted = deleted;
 	}
-	
-    /**
-     * @hibernate.set 
-     * table = "adresses_emails" 
-     * inverse = "false" 
-     * cascade = "none"
-     * lazy="false"
-     * @hibernate.one-to-many 
-     * class = "org.openmeetings.app.hibernate.beans.adresses.Adresses_Emails"
-     * @hibernate.key 
-     * column = "adresses_id"
-     */		
-	public Set getEmails() {
-		return emails;
-	}
-	public void setEmails(Set emails) {
-		this.emails = emails;
+
+	 /**
+     * @hibernate.property
+     *  column="email"
+     *  type="string"
+     */	
+	public String getEmail() {
+		return email;
 	}
 
-	public Set getPhones() {
-		return phones;
+	public void setEmail(String email) {
+		this.email = email;
 	}
-	public void setPhones(Set phones) {
-		this.phones = phones;
+
+	/**
+     * @hibernate.property
+     *  column="phone"
+     *  type="string"
+     */	
+	public String getPhone() {
+		return phone;
 	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+	
+    
 
 
 }

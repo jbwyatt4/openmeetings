@@ -1,15 +1,12 @@
 package org.openmeetings.test.domain;
 
-import java.util.Iterator;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.openmeetings.app.data.user.Organisationmanagement;
-import org.openmeetings.app.data.user.Usermanagement;
 import org.openmeetings.app.data.user.dao.UsersDaoImpl;
 import org.openmeetings.app.hibernate.beans.user.Users;
-import org.openmeetings.app.hibernate.beans.adresses.Adresses_Emails;
-import org.openmeetings.app.hibernate.beans.domain.Organisation_Users;
+
 
 import junit.framework.TestCase;
 
@@ -35,6 +32,8 @@ public class TestAddGroup extends TestCase {
 		
 		log.error(us.getLastname());
 		log.error(us.getAdresses().getTown());
+		
+		/*
 		for (Iterator it = us.getAdresses().getEmails().iterator(); it.hasNext();){
 			Adresses_Emails addrMails = (Adresses_Emails) it.next();
 			log.error(addrMails.getMail().getEmail());
@@ -44,6 +43,7 @@ public class TestAddGroup extends TestCase {
 			Organisation_Users orgUsers = (Organisation_Users) it2.next();
 			log.error(orgUsers.getOrganisation().getName());
 		}
+		*/
 	}
 
 }

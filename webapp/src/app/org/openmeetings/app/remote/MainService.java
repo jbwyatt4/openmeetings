@@ -59,6 +59,9 @@ public class MainService implements IPendingServiceCallback {
 	
    
 	public ClientListManager getClientListManager() {
+		if(clientListManager == null)
+			clientListManager = ClientListManager.getInstance();
+		
 		return clientListManager;
 	}
 	public void setClientListManager(ClientListManager clientListManager) {
@@ -103,6 +106,7 @@ public class MainService implements IPendingServiceCallback {
     	}
 		return users;
 	}
+	
 	
 	
 	public RoomClient getCurrentRoomClient(String SID){
@@ -192,7 +196,10 @@ public class MainService implements IPendingServiceCallback {
     		else{
     			log.debug("default login");
     			// User exists -> DefaultLogin
+    			
+    			
 	    		currentClient = this.clientListManager.getClientByStreamId(current.getClient().getId());
+	    		
 	            o = Usermanagement.getInstance().loginUser(SID,Username,Userpass, currentClient);
 	      	}
     		
@@ -366,7 +373,7 @@ public class MainService implements IPendingServiceCallback {
         			new Date(), regObject.get("street").toString(), regObject.get("additionalname").toString(), 
         			regObject.get("fax").toString(), regObject.get("zip").toString(), 
         			Long.valueOf(regObject.get("states_id").toString()).longValue(), regObject.get("town").toString(), 
-        			Long.valueOf(regObject.get("language_id").toString()).longValue());
+        			Long.valueOf(regObject.get("language_id").toString()).longValue(), regObject.get("phone").toString());
     	} catch (Exception ex) {
     		log.error("registerUserByObject",ex);
     	}
@@ -396,9 +403,9 @@ public class MainService implements IPendingServiceCallback {
      */
 	public Long registerUser(String SID, String Username, String Userpass, String lastname, 
 				String firstname, String email, Date age, String street, String additionalname, 
-				String fax, String zip, long states_id, String town, long language_id){
+				String fax, String zip, long states_id, String town, long language_id, String phone){
     	return Usermanagement.getInstance().registerUser(Username, Userpass, lastname, firstname, email, 
-    			age, street, additionalname, fax, zip, states_id, town, language_id);
+    			age, street, additionalname, fax, zip, states_id, town, language_id, phone);
 	}	
 	
 	/**

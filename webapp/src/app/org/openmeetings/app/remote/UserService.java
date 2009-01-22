@@ -15,8 +15,6 @@ import org.openmeetings.app.data.user.Salutationmanagement;
 import org.openmeetings.app.data.user.Usermanagement;
 import org.openmeetings.app.data.user.dao.UsersDaoImpl;
 import org.openmeetings.app.hibernate.beans.adresses.Adresses;
-import org.openmeetings.app.hibernate.beans.adresses.Adresses_Emails;
-import org.openmeetings.app.hibernate.beans.adresses.Emails;
 import org.openmeetings.app.hibernate.beans.recording.RoomClient;
 import org.openmeetings.app.hibernate.beans.user.Users;
 import org.openmeetings.app.remote.red5.ClientListManager;
@@ -283,7 +281,7 @@ public class UserService {
 	        			argObjectMap.get("fax").toString(), argObjectMap.get("zip").toString(), 
 	        			Long.valueOf(argObjectMap.get("states_id").toString()).longValue(), argObjectMap.get("town").toString(), 
 	        			0,
-	        			false,organisations); 	
+	        			false,organisations, argObjectMap.get("phone").toString()); 	
     		} else {
 		        return Usermanagement.getInstance().updateUser(user_level,user_idClient, 
 		        		Long.valueOf(argObjectMap.get("level_id").toString()).longValue(), argObjectMap.get("login").toString(), 
@@ -297,7 +295,8 @@ public class UserService {
 		        		argObjectMap.get("email").toString(),argObjectMap.get("comment").toString(),
 		        		Integer.valueOf(argObjectMap.get("status").toString()).intValue(),
 		        		organisations,
-		        		Integer.valueOf(argObjectMap.get("title_id").toString()).intValue()); 
+		        		Integer.valueOf(argObjectMap.get("title_id").toString()).intValue(),
+		        		argObjectMap.get("email").toString()); 
     		}
     	} catch (Exception ex) {
     		log.error("[saveOrUpdateUser]: ",ex);
@@ -338,18 +337,7 @@ public class UserService {
 						Addressmanagement.getInstance().updateAdress(ad);
 						log.debug("deleteUserId : Address updated");
 
-						Adresses_Emails ae = Emailmanagement.getInstance()
-								.getAdresses_EmailsByAddress(
-										ad.getAdresses_id());
-
-						if (ae != null) {
-							Emails e = ae.getMail();
-							e.setDeleted("true");
-
-							Emailmanagement.getInstance().updateEmail(e);
-						}
-
-						log.debug("deleteUserId : mail updated");
+						
 					}
 
 					return userId;

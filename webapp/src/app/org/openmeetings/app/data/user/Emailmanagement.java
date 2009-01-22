@@ -1,9 +1,5 @@
 package org.openmeetings.app.data.user;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Iterator;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.hibernate.HibernateException;
@@ -13,11 +9,8 @@ import org.hibernate.Transaction;
 
 import org.openmeetings.app.data.basic.Configurationmanagement;
 import org.openmeetings.app.data.basic.Fieldmanagment;
-import org.openmeetings.app.hibernate.beans.adresses.Emails;
 import org.openmeetings.app.hibernate.utils.HibernateUtil;
 import org.openmeetings.utils.mail.MailHandler;
-import org.openmeetings.app.hibernate.beans.adresses.Adresses_Emails;
-import org.openmeetings.app.hibernate.beans.domain.Organisation;
 import org.openmeetings.app.hibernate.beans.lang.Fieldlanguagesvalues;
 import org.openmeetings.app.templates.RegisterUserTemplate;
 
@@ -50,6 +43,7 @@ public class Emailmanagement {
 	 * @param mail_id
 	 * @return
 	 */
+	/*
 	public Emails getEmailById(long mail_id) {
 		try {
 			Object idf = HibernateUtil.createSession();
@@ -70,8 +64,10 @@ public class Emailmanagement {
 			log.error("[getEmailById]" ,ex2);
 		}
 		return null;
-	}
+	}*/
 
+	
+	/*
 	public List getemails(Long USER_ID) {
 		try {
 			Object idf = HibernateUtil.createSession();
@@ -91,7 +87,9 @@ public class Emailmanagement {
 		}
 		return null;
 	}
+	*/
 	
+	/*
 	public Adresses_Emails getAdresses_EmailsByMail(String email) {
 		try {
 			String hql = "select c from Adresses_Emails as c " +
@@ -112,6 +110,8 @@ public class Emailmanagement {
 		}
 		return null;
 	}	
+	*/
+	
 	
 	/**
 	 * 
@@ -119,6 +119,7 @@ public class Emailmanagement {
 	 * @return
 	 */
 	//---------------------------------------------------------------------------
+	/*
 	public Adresses_Emails getAdresses_EmailsByAddress(Long address) {
 		
 		log.debug("Emailmanagement.getAdresses_EmailsByAddress");
@@ -144,12 +145,14 @@ public class Emailmanagement {
 		
 		return null;
 	}
+	*/
 	//---------------------------------------------------------------------------
 	
 	/**
 	 * @author becherer
 	 */
 	//--------------------------------------------------------------------------------
+	/*
 	public void updateEmail(Emails mail){
 		
 		log.debug("Emailmanagement.updateEmail : " + mail.getEmail());
@@ -167,9 +170,11 @@ public class Emailmanagement {
 		}
 		
 	}
+	*/
 	//--------------------------------------------------------------------------------
 	
 
+	/*
 	public List getemailsCon(int CONTACT_ID) {
 		try {
 			Object idf = HibernateUtil.createSession();
@@ -189,7 +194,8 @@ public class Emailmanagement {
 		}
 		return null;
 	}
-
+	*/
+	
 	/**
 	 * Adds a mail with its connection to the adress table
 	 * @param EMail
@@ -200,6 +206,7 @@ public class Emailmanagement {
 	 * @param sendWelcomeMail
 	 * @return the new mail_id or -1
 	 */
+	/*
 	public Long registerEmail(String EMail, long adresses_id, String comment) {
 		Long mail_id = this.registerEmail(EMail, comment);
 		if (mail_id != null) {
@@ -228,7 +235,7 @@ public class Emailmanagement {
 			}
 		}
 		return null;
-	}
+	}*/
 
 	/**
 	 * adds a mail-address to the mail table
@@ -238,6 +245,7 @@ public class Emailmanagement {
 	 * @param comment
 	 * @return
 	 */
+	/*
 	public Long registerEmail(String EMail,	String comment) {
 		try {
 			Emails emails = new Emails();
@@ -264,7 +272,7 @@ public class Emailmanagement {
 
 		return null;
 
-	}
+	}*/
 
 	/**
 	 * sends a mail adress to the user with his account data
@@ -326,6 +334,7 @@ public class Emailmanagement {
 	 * delete a Email-Object by a given Id
 	 * @param mail_id
 	 */
+	/*
 	public void deleteEMailByID(long mail_id) {
 		try {
 			Emails mail = this.getEmailById(mail_id);
@@ -341,8 +350,10 @@ public class Emailmanagement {
 			log.error("deleteEMailByID",ex2);
 		}
 	}
+	*/
 
 	//TODO: Change code sothat it doesn't usw HQL
+	/*
 	public String deleteEMailByUserID(int USER_ID) {
 		String result = "Fehler im Bestellvorgang";
 		try {
@@ -364,6 +375,7 @@ public class Emailmanagement {
 		}
 		return result;
 	}
+	*/
 
 	/**
 	 * Checks if a mail is already taken by someone else
@@ -377,7 +389,7 @@ public class Emailmanagement {
 			Object idf = HibernateUtil.createSession();
 			Session session = HibernateUtil.getSession();
 			Transaction tx = session.beginTransaction();
-			Query query = session.createQuery("select c from Emails as c where c.email = :email AND c.deleted != :deleted");
+			Query query = session.createQuery("select c from Adresses as c where c.email = :email AND c.deleted != :deleted");
 			query.setString("email", email);
 			query.setString("deleted", "true");
 			int count = query.list().size();
@@ -403,6 +415,7 @@ public class Emailmanagement {
 	 * @param email
 	 * @return
 	 */
+	/*
 	public Emails updateUserEmail(long mail_id, Long user_id, String email) {
 		try {
 			Emails mail = this.getEmailById(mail_id);
@@ -422,7 +435,9 @@ public class Emailmanagement {
 		}
 		return null;
 	}
+	*/
 
+	/*
 	public String updateContactEmail(int MAIL_ID, int Contact_ID, String email) {
 		String res = "Fehler beim Update";
 		try {
@@ -445,5 +460,6 @@ public class Emailmanagement {
 		}
 		return res;
 	}
+	*/
 
 }

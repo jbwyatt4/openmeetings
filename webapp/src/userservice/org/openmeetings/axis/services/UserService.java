@@ -38,6 +38,7 @@ public class UserService {
      * getErrorByCode to get the Text-Description of that ErrorCode
      */  
     public Long loginUser(String SID, String username, String userpass){
+    	log.debug("UserService.loginuser");
     	try {
     		Object obj = Usermanagement.getInstance().loginUser(SID,username,userpass, null);
     		if (obj==null){
@@ -64,6 +65,7 @@ public class UserService {
      * @return
      */
 	public ErrorResult getErrorByCode(String SID, Long errorid, Long language_id){
+		log.debug("UserService.getErrorbyCode");
         try {
             if (errorid<0){
             	ErrorValues eValues = ErrorManagement.getInstance().getErrorValuesById(errorid*(-1));
@@ -94,6 +96,8 @@ public class UserService {
 	 */
 	public Long setUserObject(String SID, String username, String firstname, String lastname, 
 			String profilePictureUrl, String email){
+		log.debug("UserService.setUserObject");
+	     
 		try {
 	    	Long users_id = Sessionmanagement.getInstance().checkSession(SID);
 	    	Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);			

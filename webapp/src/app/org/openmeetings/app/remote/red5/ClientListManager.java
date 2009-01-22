@@ -4,7 +4,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.Set;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -24,6 +23,7 @@ public class ClientListManager {
 	}
 
 	public static synchronized ClientListManager getInstance() {
+		
 		if (instance == null) {
 			instance = new ClientListManager();
 		}
