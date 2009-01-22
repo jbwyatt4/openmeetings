@@ -33,8 +33,6 @@
   <property name="c3p0.timeout">3600</property>
   <!-- mapping files -->
     <mapping resource="org/openmeetings/app/hibernate/beans/adresses/Adresses.hbm.xml"/>
-    <mapping resource="org/openmeetings/app/hibernate/beans/adresses/Adresses_Emails.hbm.xml"/>
-    <mapping resource="org/openmeetings/app/hibernate/beans/adresses/Emails.hbm.xml"/>
     <mapping resource="org/openmeetings/app/hibernate/beans/adresses/States.hbm.xml"/>
     <mapping resource="org/openmeetings/app/hibernate/beans/basic/Configuration.hbm.xml"/>
     <mapping resource="org/openmeetings/app/hibernate/beans/basic/ErrorType.hbm.xml"/>
