@@ -393,7 +393,7 @@
 								var id = meetingMembers[i].userid.user_id;
 								var vorname = meetingMembers[i].firstname;
 								var nachname = meetingMembers[i].lastname;
-								//var email = meetingMembers[i].adresses.emails[0].mail.email;
+								//var email = meetingMembers[i].adresses.email;
 								var email = meetingMembers[i].email;
 														
 								if ($debug) Debug.write("id",id);
