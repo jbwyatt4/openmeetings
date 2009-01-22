@@ -61,7 +61,7 @@
 			this.lastname.setText(obj.lastname);
 			this.userpass1.setText('');
 			this.userpass2.setText('');
-			this.email.setText(obj.adresses.emails[0].mail.email);
+			this.email.setText(obj.adresses.email);
 			this.age.setText(parseDateToString(obj.age));
 			this.street.setText(obj.adresses.street);
 			this.house.setText(obj.adresses.additionalname);
