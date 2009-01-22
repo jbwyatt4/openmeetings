@@ -37,6 +37,7 @@
 			this.firstname.setAttribute('text',obj.firstname);
 			this.lastname.setAttribute('text',obj.lastname);
 			this.email.setAttribute('text',obj.adresses.email);
+			this.phone.setAttribute('text', obj.adresses.phone);
 			this.age.setAttribute('text',parseDateToString(obj.age));
 			this.street.setAttribute('text',obj.adresses.street);
 			this.house.setAttribute('text',obj.adresses.additionalname);
@@ -90,6 +91,7 @@
   			this.parent.userObj.firstname = this.parent.firstname.getText();
   			this.parent.userObj.lastname = this.parent.lastname.getText();
   			this.parent.userObj.email = this.parent.email.getText();
+  			this.parent.userObj.phone = this.parent.phone.getText();
   			this.parent.userObj.adresses.street = this.parent.street.getText();
   			this.parent.userObj.adresses.additionalname = this.parent.house.getText();
   			this.parent.userObj.adresses.zip = this.parent.zip.getText();
@@ -143,36 +145,40 @@
     <!-- 137:Mail -->
     <labelText labelid="137" width="200" y="190" resize="false" x="2"/>
         <customEdittext name="email" y="190" x="120" width="270" text="" />
+    
+    <!-- 607:Phone -->
+    <labelText labelid="607" width="200" y="220" resize="false" x="2"/>
+        <customEdittext name="phone" y="220" x="120" width="270" text="" />
         
     <!-- 138:Birthday -->
-    <labelText labelid="138" width="200" y="220" resize="false" x="2"/>
-        <dateField name="age" y="220" x="120" width="270" text="" />
+    <labelText labelid="138" width="200" y="250" resize="false" x="2"/>
+        <dateField name="age" y="250" x="120" width="270" text="" />
         
     <!-- 139:Street/No -->
-    <labelText labelid="139" width="200" y="250" resize="false" x="2"/>
-        <customEdittext name="street" y="250" x="120" width="220" text="" />
-        <customEdittext name="house" y="250" x="350" width="40" text="" />
+    <labelText labelid="139" width="200" y="280" resize="false" x="2"/>
+        <customEdittext name="street" y="280" x="120" width="220" text="" />
+        <customEdittext name="house" y="280" x="350" width="40" text="" />
         
     <!-- 140:ZIP/Town -->
-    <labelText labelid="140" width="280" y="280" resize="false" x="2"/>
-        <customEdittext name="zip" y="280" x="120" width="70" text="" />   
-        <customEdittext name="town" y="280" x="200" width="190" text="" />                        
+    <labelText labelid="140" width="280" y="310" resize="false" x="2"/>
+        <customEdittext name="zip" y="310" x="120" width="70" text="" />   
+        <customEdittext name="town" y="310" x="200" width="190" text="" />                        
          
     <!-- 141:Country -->
-    <labelText labelid="141" width="200" y="310" resize="false" x="2"/>  
-		<validText name="state" width="270" y="310" x="120" fontsize="12" 
+    <labelText labelid="141" width="200" y="340" resize="false" x="2"/>  
+		<validText name="state" width="270" y="340" x="120" fontsize="12" 
             shownitems="7" validate_method="$once{ canvas.validateCountry }" 
             resultId="state_id" resultName="name" />
 			
 	 
     <!-- 142:Adress-Info -->
-    <labelText labelid="142" width="200" y="340" resize="false" x="2"/>
-        <customEdittext name="adress_comment" y="340" x="120" width="270" 
+    <labelText labelid="142" width="200" y="370" resize="false" x="2"/>
+        <customEdittext name="adress_comment" y="370" x="120" width="270" 
             height="100" text="" multiline="true"/>
        
     <!-- 161:Organisations -->
-    <labelText labelid="161" width="200" y="480" resize="false" x="2"/>     
-    <simpleValueList name="_organisationslist" y="480" x="120" width="270" height="100" 
+    <labelText labelid="161" width="200" y="510" resize="false" x="2"/>     
+    <simpleValueList name="_organisationslist" y="510" x="120" width="270" height="100" 
 		multiselect="true" />
 		
 		
