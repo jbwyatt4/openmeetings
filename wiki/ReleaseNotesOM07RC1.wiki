@@ -2,8 +2,8 @@
 
 = Major Changes =
 
-  * OpenMeetings and red5 are together in one zip to prevent users from choosing wrong red5 version
-  * updated to Red5 r3200 and !OpenLaszlo 4.2.0
+  * !OpenMeetings and red5 are together in one zip to prevent users from choosing wrong red5 version
+  * updated to Red5 Revision 3200 and !OpenLaszlo 4.2.0
   * changed UI for Whiteboard and Whiteboard Tools
   * improved Tools and replaced arrow-tool
   * Property editor
