@@ -60,7 +60,7 @@ After Running the Installer all basics are installed. Now login and go to the Me
 
   * rtmps (using of SSL) => you find in the config.xml some value to enable the client to first try to connect to rtmps (useSSL param) .. NOTE: Flash Player only on Windows have the rtmps feature and you will need to clear your browser cache to force a reload of the updated config.xml
   * disable recording in config.xml => the recording feature is quite beta. You can disable it in the config.xml
-  * if your resize your own video-pod in the conference much larger and then synchronize  the stream, all clients will get a better picture (it also needs more bandwidth, as it will take the actual new height / width numbers to publish your stream)
+  * if you resize your own video-pod in the conference much larger and then synchronize  the stream, all clients will get a better picture (it also needs more bandwidth, as it will take the actual new height / width numbers to publish your stream)
 
 = Tips and Tricks =
 
