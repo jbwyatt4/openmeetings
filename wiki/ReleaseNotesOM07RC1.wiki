@@ -1,5 +1,13 @@
 #summary Release Notes for OpenMeetings 0.7 RC1
 
+= Information =
+
+Starting with Release 0.7 !OpenMeetings uses a later version of Red5. We will work on updating to the very latest versions continuously to keep in track with the new features. Same for the Client side which is now build with !OpenLaszlo 4.2.0 (but still SWF8).
+
+!OpenMeetings will only run with the Red5 version recommended in our Instructions out of the box.
+
+Also still experimental recorder does now use FFMpeg to generate a whiteboard.swf for each recording.
+
 = Major Changes =
 
   * !OpenMeetings and red5 are together in one zip to prevent users from choosing wrong red5 version
