@@ -18,5 +18,6 @@
   * reworked Application Adapter to keep better control of Ghost-Connections and handle larger number of Users in each room
   * Possibility to kick User (Administration Panel > Connections), List of connected Users
   * experimental rtmps support
+  * fixes Bug to load Documents to Whiteboard with Flash Player 10
 
 ... and a lot more
