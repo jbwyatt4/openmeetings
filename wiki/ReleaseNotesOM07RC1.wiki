@@ -15,7 +15,8 @@
   * max clients in room changed (4,8,16,... 1000)
   * resize videos for Meeting and Event Modus
   * database scheme updates (recording features and phone number)
-  * reworked Application Adapter to keep better control of Ghost-Connections
+  * reworked Application Adapter to keep better control of Ghost-Connections and handle larger number of Users in each room
   * Possibility to kick User (Administration Panel > Connections), List of connected Users
+  * experimental rtmps support
 
 ... and a lot more
