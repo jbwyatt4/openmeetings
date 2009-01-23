@@ -14,7 +14,7 @@
   * MAC OSx / Linux Users => Get Flash Player 10 Beta!! It fixes the CPU Problem for Streaming Video => http://labs.adobe.com/technologies/flashplayer10/
 
 = Install !OpenMeetings =
-  # Download !OpenMeetings 0.7 RC1 from [ http://code.google.com/p/openmeetings/downloads/list !OpenMeetings-Download-Page] (Please make sure that you use an up-to-date unzip-software)
+  # Download !OpenMeetings including Red5 (Please make sure that you use an up-to-date unzip-software) or download the two packages separated [http://openmeetings.googlecode.com/files/openmeetings_0_7_rc1_webapp_only.zip !OpenMeetings Webapp only] and [http://openmeetings.googlecode.com/files/red5_snapshot_r3200.zip Red5 Snapshot]
   # Unpack it (but copy it somewhere in you system, do not start it from your Windows Desktop)
   # you have now a folder openmeetings_0_7_rc1
   # Prepare Database Settings - go to openmeetings_0_7_rc1/webapps/openmeetings/conf/hibernate.cfg.xml 
