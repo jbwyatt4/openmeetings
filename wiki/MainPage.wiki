@@ -76,7 +76,7 @@ Tips for Installation:
 
 == Community == 
 
-  <wiki:gadget url="http://markmail.org/gadgets/markmailmini.xqy?l=com.googlegroups.openmeetings-user%2C%20com.googlegroups.openmeetings-dev&r=90" height="400" border="0" /> 
+  <wiki:gadget url="http://markmail.org/gadgets/markmailmini.xqy?l=com.googlegroups.openmeetings-user%2C%20com.googlegroups.openmeetings-dev&r=90" height="260" width="300" border="0" /> 
 
   * FeatureRequest
   * RoadMap
