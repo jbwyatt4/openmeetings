@@ -27,5 +27,7 @@ Also still experimental recorder does now use FFMpeg to generate a whiteboard.sw
   * Possibility to kick User (Administration Panel > Connections), List of connected Users
   * experimental rtmps support
   * fixes Bug to load Documents to Whiteboard with Flash Player 10
+  * updated and added language files (thai,ukranian, turkish new)
+  * right to left languages
 
 ... and a lot more
