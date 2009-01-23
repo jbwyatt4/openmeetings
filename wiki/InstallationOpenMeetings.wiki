@@ -1,6 +1,6 @@
 #summary Installation of 0.7 RC1
 
-  * Release Notes => ReleaseNotesOM07RC1
+  * [ReleaseNotesOM07RC1 Release Notes]
 
 = Requirements =
 
