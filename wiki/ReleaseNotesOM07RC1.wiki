@@ -1,0 +1,21 @@
+#summary Release Notes for OpenMeetings 0.7 RC1
+
+= Major Changes =
+
+  * OpenMeetings and red5 are together in one zip to prevent users from choosing wrong red5 version
+  * updated to Red5 r3200 and !OpenLaszlo 4.2.0
+  * changed UI for Whiteboard and Whiteboard Tools
+  * improved Tools and replaced arrow-tool
+  * Property editor
+  * Reworked Recorder (still beta), will produce a whiteboard.swf using FFMpeg
+  * export whiteboard drawings (beta) does not include Presentation Files
+  * LDap auth configuration
+  * database changes to !MyISAM for performance
+  * changed video / audio settings
+  * max clients in room changed (4,8,16,... 1000)
+  * resize videos for Meeting and Event Modus
+  * database scheme updates (recording features and phone number)
+  * reworked Application Adapter to keep better control of Ghost-Connections
+  * Possibility to kick User (Administration Panel > Connections), List of connected Users
+
+... and a lot more
