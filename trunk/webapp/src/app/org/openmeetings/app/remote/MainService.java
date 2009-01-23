@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.LinkedHashMap;
 import java.util.Iterator;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -367,13 +368,25 @@ public class MainService implements IPendingServiceCallback {
      */
     public Long registerUserByObject(Object regObjectObj){
     	try {
-    		LinkedHashMap regObject = (LinkedHashMap) regObjectObj;
+    		Map regObject = (Map) regObjectObj;
+//    		regObject.get("Username").toString();
+//    		regObject.get("Userpass").toString();
+// 			regObject.get("lastname").toString();
+// 			regObject.get("firstname").toString();
+// 			regObject.get("email").toString();
+// 			new Date();regObject.get("street").toString();
+// 			regObject.get("additionalname").toString();
+// 			regObject.get("fax").toString();
+// 			regObject.get("zip").toString();
+// 			Long.valueOf(regObject.get("states_id").toString()).longValue();
+// 			regObject.get("town").toString();
+// 			Long.valueOf(regObject.get("language_id").toString()).longValue();
         	return Usermanagement.getInstance().registerUser(regObject.get("Username").toString(), regObject.get("Userpass").toString(), 
         			regObject.get("lastname").toString(), regObject.get("firstname").toString(), regObject.get("email").toString(), 
         			new Date(), regObject.get("street").toString(), regObject.get("additionalname").toString(), 
         			regObject.get("fax").toString(), regObject.get("zip").toString(), 
         			Long.valueOf(regObject.get("states_id").toString()).longValue(), regObject.get("town").toString(), 
-        			Long.valueOf(regObject.get("language_id").toString()).longValue(), regObject.get("phone").toString());
+        			Long.valueOf(regObject.get("language_id").toString()).longValue(), "");
     	} catch (Exception ex) {
     		log.error("registerUserByObject",ex);
     	}
