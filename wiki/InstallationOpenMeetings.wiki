@@ -6,7 +6,7 @@
 = System Requirements =
 
   * Minimalistic requirement (without Document Converters, Recorder and Upload feature)  1GHz CPU 1 GB RAM
-  * Recommended requirement 2x/4x 2GHz ++ CPU (32 or 64Bit) 4GB RAM. If you have a 64Bit Operating System check if there is a OpenOffice Version [http://download.openoffice.org/other.html#de available for your OS]
+  * Recommended requirement 2x/4x 2GHz ++ CPU (32 or 64Bit) 4GB RAM. If you have a 64Bit Operating System check if there is a !OpenOffice 64Bit Version [http://download.openoffice.org/other.html#de available for your OS]
 
 = Requirements =
 
