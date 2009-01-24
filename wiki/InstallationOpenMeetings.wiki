@@ -3,6 +3,11 @@
   * [ReleaseNotesOM07RC1 Release Notes]
   * VMWare Image (to be done)
 
+= System Requirements =
+
+  * Minimalistic requirement (without Document Converters, Recorder and Upload feature)  1GHz CPU 1 GB RAM
+  * Recommended requirement 2x/4x 2GHz ++ CPU (32 or 64Bit) 4GB RAM. If you have a 64Bit Operating System check if there is a OpenOffice Version [http://download.openoffice.org/other.html#de available for your OS]
+
 = Requirements =
 
   * Database available (MySQL,Postgres,... MSSQL,Oracle,DB2 see [http://www.hibernate.org/hib_docs/reference/en/html/configuration-optional.html#configuration-optional-dialects   full-list]) It is recommended to make/use an empty database/scheme
