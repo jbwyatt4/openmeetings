@@ -1624,20 +1624,20 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Browser</value>
   </string>
   <string id="540" name="audio_video">
-    <value>Syncronize Audio/Video</value>
-  </string>	
+    <value>Sincronizzazione Audio/video</value>
+  </string>
   <string id="541" name="errorCode_invalidSession">
-    <value>Login was correct, but the Session you tried is not active or stored on the Server. You have to get a new SessionId and retry login.</value>
+    <value>Accesso corretto, ma la sessione non è attiva o presente sul server. Sarà assegnato una nuova sessione e dovrà essere ripetuto l'accesso.</value>
   </string>
   <string id="542" name="errorcode_setUserObject">
-    <value>The SessionId is not loggedin or has no Admin rights. The SOAP Gateway needs an User with Admin-Rights to embed new Users.</value>
+    <value>La sessione non è collegata o non ha diritti di amministrazione. The SOAP Gateway necessita di un utente con diritti di amministrazione per creare un utente..</value>
   </string>
   <string id="543" name="errorcode_loginByRemoteUser">
-    <value>This Session has no Remoteuser-Data connected. Wether you did not call the SOAP-Gateway before accessing the Application or you are usnig a wrong Session-ID</value>
+    <value>La sessione non ha utenti remoti-dati connessi. Potrebbe esser stato chiamato il SOAP-Gateway prima di effettuare l'accesso all'applicazione o è stato utilizzato un id di sessione errato.</value>
   </string>
   <string id="544" name="debug_message_recording">
-    <value>The recorder is currently Beta!</value>
-  </string>	
+    <value>La registrazione è in fase beta!</value>
+  </string>
   <string id="545" name="propertyPanelXValue">
     <value>x</value>
   </string>
@@ -1654,118 +1654,118 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>w</value>
   </string>
   <string id="550" name="propertyPanelWidthValueLabel">
-    <value>width</value>
+    <value>larghezza</value>
   </string>
   <string id="551" name="propertyPanelHeightValue">
     <value>h</value>
   </string>
   <string id="552" name="propertyPanelHeightValueLabel">
-    <value>height</value>
+    <value>altezza</value>
   </string>
   <string id="553" name="propertyOpacitySlider">
-    <value>Change Transparency</value>
-  </string>	
+    <value>Cambia trasparenza</value>
+  </string>
   <string id="554" name="browserOpen">
-    <value>Browser Open</value>
-  </string>	
+    <value>Apri browser</value>
+  </string>
   <string id="555" name="browserClose">
-    <value>Browser Close</value>
-  </string>	
+    <value>Chiudi browser</value>
+  </string>
   <string id="556" name="connectionLostMessage">
-    <value>The Connection to the Server is lost. You need to reload the Application or/and check your Network.</value>
-  </string>  
+    <value>La connessione al serve è stata persa. E' necessario ricollegarsi all'applicazione e/o controllare la rete.</value>
+  </string>
   <string id="557" name="557">
-    <value>Pointer</value>
+    <value>Puntatore</value>
   </string>
   <string id="558" name="sync message header">
-    <value>Synchronizing</value>
+    <value>Sincronizzazione</value>
   </string>
   <string id="559" name="Synchronizing message">
-    <value>Synchronizing Users, please wait</value>
+    <value>Sincronizzazione utenti, attendere</value>
   </string>
   <string id="560" name="exportToSVG">
-    <value>&lt;u&gt;Download as SVG&lt;/u&gt;</value>
+    <value>Scarica come SVG</value>
   </string>
   <string id="561" name="exportToImage">
-    <value>&lt;u&gt;Download as PNG&lt;/u&gt;</value>
+    <value>Scarica come PNG</value>
   </string>
   <string id="562" name="exportToImage">
-    <value>&lt;u&gt;Download as JPG&lt;/u&gt;</value>
+    <value>Scarica come JPG</value>
   </string>
   <string id="563" name="exportToImage">
-    <value>&lt;u&gt;Download as PDF&lt;/u&gt;</value>
+    <value>Scarica come PDF</value>
   </string>
   <string id="564" name="exportToImage">
-    <value>&lt;u&gt;Download as TIF&lt;/u&gt;</value>
-  </string> 
+    <value>Scarica come TIF</value>
+  </string>
   <string id="565" name="calendarLabel">
-    <value>Reminder:</value>
+    <value>Promemoria:</value>
   </string>
   <string id="566" name="calendarLabel">
-    <value>Category:</value>
+    <value>Categoria:</value>
   </string>
   <string id="567" name="calendarLabel">
-    <value>Repetition:</value>
+    <value>Ripetizione:</value>
   </string>
   <string id="568" name="calendarLabel">
-    <value>none</value>
+    <value>niente</value>
   </string>
   <string id="569" name="calendarLabel">
-    <value>Location:</value>
+    <value>Località:</value>
   </string>
   <string id="570" name="calendarLabel">
-    <value>Start</value>
+    <value>Inizio</value>
   </string>
   <string id="571" name="calendarLabel">
-    <value>End</value>
+    <value>Fine</value>
   </string>
   <string id="572" name="calendarLabel">
-    <value>Title:</value>
+    <value>Titolo:</value>
   </string>
   <string id="573" name="calendarLabel">
-    <value>Comment:</value>
+    <value>Commento:</value>
   </string>
   <string id="574" name="calendarLabel">
-    <value>Invite People</value>
+    <value>Invita partecipanti</value>
   </string>
   <string id="575" name="calendarLabel">
-    <value>Daily</value>
+    <value>Giornaliero</value>
   </string>
   <string id="576" name="calendarLabel">
-    <value>Monthly</value>
+    <value>Mensile</value>
   </string>
   <string id="577" name="calendarLabel">
-    <value>Yearly</value>
+    <value>Annuale</value>
   </string>
   <string id="578" name="alert">
-    <value>Appointment-end is after of appointment-start!</value>
+    <value>La data di fine è dopo quella di inizio dell'appuntamento!</value>
   </string>
   <string id="579" name="alert">
-    <value>Please insert a title!</value>
+    <value>Inserisci un titolo!</value>
   </string>
   <string id="580" name="580">
     <value>RTL</value>
   </string>
   <string id="581" name="581">
-    <value>Activate this if you write in a right to left language (inverse word order)</value>
+    <value>Attiva le la scrittura del tuo linguaggio va da destra a sinistra (inverte ordine parole)</value>
   </string>
   <string id="582" name="tooltip main-menu">
-    <value>Dashboard</value>
+    <value>Cruscotto</value>
   </string>
   <string id="583" name="tooltip main-menu">
-    <value>Watch recorded Meetings or Events</value>
+    <value>Guarda eventi e conferenze registrate</value>
   </string>
   <string id="584" name="tooltip main-menu">
-    <value>Meeting - Make a conference with 4 (up to 16) Users&lt;br/&gt;everybody will have audio + video access</value>
+    <value>Conferenza - Conferenze con 4 (fino a 16) utenti; tutti hanno accesso a audio e video</value>
   </string>
   <string id="585" name="tooltip main-menu">
-    <value>Event - Make a conference with up to 200 participents&lt;br/&gt;Only the Moderator will have audio/video</value>
+    <value>Eventi - Conferenze fino a 200 utenti. Solo il moderatore ha audio e video</value>
   </string>
   <string id="586" name="tooltip main-menu">
-    <value>Create users, rooms, organizations&lt;br/&gt; + change configuration</value>
+    <value>Crea utenti, stanze, organizzazioni + cambia configurazione</value>
   </string>
   <string id="587" name="room Administration roomclients list">
-    <value>Users in this Room now</value>
+    <value>Utenti nella stanza ora</value>
   </string>
   <string id="588" name="room Administration roomclients list">
     <value>ID</value>
@@ -1775,31 +1775,31 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   </string>
   <string id="590" name="room Administration roomclients list">
     <value>D</value>
-  </string>  
+  </string>
   <string id="591" name="swf sync message">
-    <value>Loading Document. Please wait untill all Client have been synchronized.</value>
-  </string>   
+    <value>Caricamento documento. Aspettare finché i client sono sincronizzati.</value>
+  </string>
   <string id="592" name="upload dialog">
-    <value>Upload complete, converting Document ...</value>
+    <value>Caricamento completato, conversione del documento in corso ...</value>
   </string>
   <string id="593" name="upload dialog">
-    <value>Start Upload</value>
+    <value>Inizia caricamento</value>
   </string>
   <string id="594" name="upload dialog">
-    <value>Upload and Import Dialog. Please select a File from your Disk.</value>
+    <value>Carica e importa il dialogo. Scegli un file dal disco.</value>
   </string>
   <string id="595" name="upload Dialog">
-    <value>Cancel</value>
+    <value>Annulla</value>
   </string>
   <string id="596" name="upload Dialog">
-    <value>Select File</value>
+    <value>Scelta file</value>
   </string>
   <string id="597" name="administration navigation">
-    <value>Connections</value>
+    <value>Connessioni</value>
   </string>
   <string id="598" name="confadmin value list">
     <value>Value</value>
-  </string>  
+  </string>
   <string id="599" name="connection administration panel">
     <value>Streamid</value>
   </string>
@@ -1807,24 +1807,24 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Login</value>
   </string>
   <string id="601" name="connection administration panel">
-    <value>Connected since</value>
+    <value>Connesso da</value>
   </string>
   <string id="602" name="connection administration panel">
     <value>Room / Scope</value>
   </string>
   <string id="603" name="connection administration panel">
-    <value>Kick User</value>
+    <value>Caccia utente</value>
   </string>
   <string id="604" name="kick user confirmation dialog">
-    <value>Kick User</value>
+    <value>Caccia utente</value>
   </string>
   <string id="605" name="kick user confirmation dialog">
-    <value>Do you really want to kick this Client from the Connection?&lt;br/&gt; This does only remove the Client from the current Room.The Client could re-login again.</value>
+    <value>Sei sicuro di voler chiudere la connessione a questo client? Il client sarà solamente rimosso dalla stanza corrente. Il client potrà ricollegarsi.</value>
   </string>
   <string id="606" name="kick user message dialog">
-    <value>Your session has been closed by an Administrator or Moderator.</value>
-  </string> 
+    <value>La tua sessione è stata chiusa da un amministratore o moderatore</value>
+  </string>
   <string id="607" name="useralterself_phone">
     <value>Phone</value>
-  </string> 
+  </string>  
 </language>
