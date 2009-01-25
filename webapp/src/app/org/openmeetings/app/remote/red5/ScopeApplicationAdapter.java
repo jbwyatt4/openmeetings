@@ -178,14 +178,17 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 	 */
 	@Override
 	public void roomLeave(IClient client, IScope room) {
-		log.debug("roomLeave " + client.getId() + " "+ room.getClients().size() + " " + room.getContextPath() + " "+ room.getName());
 		try {
+			
+			log.debug("roomLeave " + client.getId() + " "+ room.getClients().size() + " " + room.getContextPath() + " "+ room.getName());
+			
 			IConnection current = Red5.getConnectionLocal();
 			
 			RoomClient currentClient = this.clientListManager.getClientByStreamId(current.getClient().getId());
 			
 			//The Room Client can be null if the Client left the room by using logicalRoomLeave
 			if (currentClient != null) {
+				log.debug("currentClient IS NOT NULL");
 				this.roomLeaveByScope(currentClient, room);
 			}
 			
