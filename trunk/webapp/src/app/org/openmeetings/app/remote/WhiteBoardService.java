@@ -441,7 +441,7 @@ public class WhiteBoardService implements IPendingServiceCallback {
 				
 				log.debug("scope "+scope);
 				
-				if (numberOfInitial==0){
+				if (numberOfInitial==0 && scope != null){
 					Iterator<IConnection> it = scope.getConnections();
 					while (it.hasNext()) {
 						IConnection conn = it.next();
@@ -474,7 +474,7 @@ public class WhiteBoardService implements IPendingServiceCallback {
 				
 				int numberOfImageLoaders = this.whiteBoardObjectListManager.getWhiteBoardObjectSyncListByRoomid(room_id).size();
 				
-				if (numberOfImageLoaders==0){
+				if (numberOfImageLoaders==0 && scope != null){
 					Iterator<IConnection> it = scope.getConnections();
 					while (it.hasNext()) {
 						IConnection conn = it.next();
@@ -533,5 +533,6 @@ public class WhiteBoardService implements IPendingServiceCallback {
 		// TODO Auto-generated method stub
 		log.debug("resultReceived: "+arg0);
 	}
+
 
 }
