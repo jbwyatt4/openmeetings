@@ -1,13 +1,135 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library>
+    
+<class name="participentList" extends="view"  width="$once{ parent.width }" height="$once{ parent.height }" 
+       bgcolor="$once{ canvas.basebgcolorizer }" >
+    <!-- clip="true" -->
+    
+    <view width="$once{ parent.width-2 }" height="$once{ parent.height-2 }" 
+        x="1" y="1" bgcolor="white" />
 
-<!---
-        Container view including all audio/video - views for a Meeting
-        
-        @keywords deprecated
+    <method name="addItem" args="object">
+        //Debug.write(object);
+        new lz.participentListItem(this._table.innerList,{
+	            user_id:object.user_id,
+	            firstname:object.firstname,
+	            lastname:object.lastname,
+                width:this.width-20,
+	            refObj:object,
+	            connectedSince:object.connectedSince,
+	            isMod:object.isMod,
+	            streamid:object.streamid,
+	            username:object.username,
+	            userroom:object.userroom,
+	            formatedDate:object.formatedDate
+            });
+    </method>
+    
+    <method name="clearList">
+        this._table.destroy();
+        new lz.participentsTable(this,{name:'_table'});
+    </method>
+
+    <usersTable name="_table" />
+
+</class>
+
+<class name="participentsTable" extends="view" height="$once{ parent.height-4 }" 
+    bgcolor="white" x="2" y="2" clip="true" width="$once{ parent.width-4 }" >
+        <innerlistView name="innerList" />
+    <vscrollbar />
+</class>
+
+<class name="miniIcons" extends="view" >
+    <handler name="onmouseover">
+        parent.parent.onmouseover.sendEvent();
+    </handler>
+    <handler name="onmouseout">
+        parent.parent.onmouseout.sendEvent();
+    </handler>
+</class>
+    
+<!-- 
+    The Width of each item is set in the participentList-Class
  -->
+<class name="participentListItem" extends="text" bgcolor="white" showhandcursor="false">
+    
+    <attribute name="connectedSince" value="" type="string" />
+    <attribute name="isMod" value="" type="string" />
+    <attribute name="streamid" value="" type="string" />
+    <attribute name="username" value="" type="string" />
+    <attribute name="userroom" value="" type="string" />
+    <attribute name="formatedDate" value="" type="string" />
+    <attribute name="firstname" value="" type="string" />
+    <attribute name="lastname" value="" type="string" />
+    <attribute name="user_id" value="0" type="number" />
+    <attribute name="refObj" value="null" />
+    
+    <handler name="oninit">
+        <![CDATA[
+            var downloadurl = 'http://'+canvas.rtmphostlocal+':'+canvas.red5httpport
+                    +'/'+canvas.webAppRootKey+'/DownloadHandler?fileName=CHAT'
+                    +'&moduleName=chat&parentPath=&room_id='
+                    +'&remoteUserid='+this.user_id
+                    +'&sid='+canvas.sessionId;
+            this._userpic.setAttribute('src',downloadurl); 
+            
+            if (this.isMod) {
+                this._miniIcons._isMod.setAttribute("visibility","visible");
+            } else {
+                this._miniIcons._isMod.setAttribute("visibility","hidden");
+            }
+            
+            if (canvas.publicSID == this.refObj.publicSID) {
+                this._miniIconsActions._restartDevice.setAttribute("visibility","visible");
+            } else {
+                this._miniIconsActions._restartDevice.setAttribute("visibility","hidden");
+            }
+            
+            this._miniIcons._canDraw.setAttribute("visibility","hidden");
+        ]]>
+    </handler>
+    
+    <handler name="onmouseover">
+        this.setAttribute('bgcolor',canvas.baseMousecolorizer);
+    </handler>
+    
+    <handler name="onmouseout">
+        this.setAttribute('bgcolor',0xFFFFFF);
+    </handler>
+    
+    <image name="_userpic" >
+        <handler name="onload">
+            parent.setAttribute('height',this.height);
+        </handler>
+    </image>
+    
+    <labelText x="40" text="$once{ parent.firstname+' '+parent.lastname }" />
+    
+    <view name="_miniIcons" x="42" valign="bottom" layout="axis:x;spacing:2" height="18">
+        <miniIcons name="_isMod" resource="participents_isMod_rsc" showhandcursor="false">
+            <labelTooltip labelid="608" />
+        </miniIcons>
+        <miniIcons name="_canDraw" resource="participents_isAllowedDrawing_rsc" showhandcursor="false">
+            <labelTooltip labelid="609" />
+        </miniIcons>
+    </view>
+    
+    <view name="_miniIconsActions" align="right" valign="bottom" layout="axis:x;spacing:2" height="18">
+        <miniIcons name="_restartDevice" resource="resyncuser_rsc" showhandcursor="true">
+            <handler name="onclick">
+                if ($debug) Debug.write("parent.parent.refObj.publicSID: ",parent.parent.refObj.publicSID);
+                var myvideocontainer = canvas._videocontainer.getNewVideoObject(parent.parent.refObj.publicSID);
+                myvideocontainer.resetValues();
+                new lz.editRecordStream(canvas.main_content._content.inner,{isSyncUpdate:true});
+            </handler>
+            <labelTooltip labelid="610" />
+        </miniIcons>
+    </view>
+</class>
+
  
-<class name="videoContainer" extends="view">
+<class name="participents" extends="view" width="$once{ parent.width }" height="$once{ parent.height }">
 
 	<!--- holds a references to the videoview which is broadcasting -->
 	<attribute name="broadCastViewRef" value="null" />
@@ -52,9 +174,7 @@
             if ($debug) Debug.write("+++++++++++++++++ getClientListScope : ",value);
             for (var i in value){
             	if ($debug) Debug.write("getClientListScope value: ",value[i]);
-            	if (value[i].username!=null){
-            		this.parent.addItem(value[i].connectedSince,value[i].isMod,value[i].streamid,value[i].username,value[i].userroom,value[i].formatedDate,value[i].userpos,value[i].usercolor,value[i]);
-            	}
+        		this.parent.addItem(value[i].connectedSince,value[i].isMod,value[i].streamid,value[i].username,value[i].userroom,value[i].formatedDate,value[i].userpos,value[i].usercolor,value[i]);
             }
             //this content must be inited _after_ setting the default values
             canvas.thishib.getCurrentModerator.doCall(); 
@@ -108,25 +228,30 @@
 
 	<method name="addItem" args="connectedSince,isMod,streamid,username,userroom,formatedDate,position,color,object">
 		<![CDATA[
-		if ($debug) Debug.write("initializeStreams addItem: ",connectedSince,isMod,streamid,username,userroom,formatedDate);
-		if (streamid!=canvas.streamid){
-            var myvideocontainer = this.getNewVideoObjectByPos(object.publicSID);
-	  		myvideocontainer.clientVars = object;
-	  		myvideocontainer.setAttribute('chatpartnername',object.firstname+' '+object.lastname);
-	  		if ($debug) Debug.write("object.avsettings: ",object.avsettings);
-	  		if (object.avsettings=="n"){
-    			myvideocontainer.setVideouserProfilePic(object);
-    		} else if (object.avsettings=="a"){
-    			myvideocontainer.setVideouserProfilePic(object);
-    			if ($debug) Debug.warn("start play");
-    			myvideocontainer._chatvideoinner._videostream.playStream(object.broadCastID,-1);	
-    		} else {
-    			myvideocontainer._chatvideoinner._videostream.playStream(object.broadCastID,-1);	
-    			if ($debug) Debug.warn("start play");
-    		}
-    		myvideocontainer.updateAVSettingsSymbol(object);
-	  		return myvideocontainer;
-		}
+			if ($debug) Debug.write("initializeStreams addItem: ",connectedSince,isMod,streamid,username,userroom,formatedDate);
+            
+            //Do init only in case this stream is NOT the same as we are
+			if (streamid!=canvas.streamid){
+	            var myvideocontainer = this.getNewVideoObjectByPos(object.publicSID);
+		  		myvideocontainer.clientVars = object;
+		  		myvideocontainer.setAttribute('chatpartnername',object.firstname+' '+object.lastname);
+		  		if ($debug) Debug.write("object.avsettings: ",object.avsettings);
+		  		if (object.avsettings=="n"){
+	    			myvideocontainer.setVideouserProfilePic(object);
+	    		} else if (object.avsettings=="a"){
+	    			myvideocontainer.setVideouserProfilePic(object);
+	    			if ($debug) Debug.warn("start play");
+	    			myvideocontainer._chatvideoinner._videostream.playStream(object.broadCastID,-1);	
+	    		} else {
+	    			myvideocontainer._chatvideoinner._videostream.playStream(object.broadCastID,-1);	
+	    			if ($debug) Debug.warn("start play");
+	    		}
+	    		myvideocontainer.updateAVSettingsSymbol(object);
+		  		return myvideocontainer;
+			}
+            
+            //do also init self
+            this._participents.addItem(object);
 		]]>
 	</method>
 	
@@ -144,6 +269,7 @@
     		}
     		myvideocontainer.updateAVSettingsSymbol(object);
 		}
+        this._participents.addItem(object);
 		]]>
 	</method>
 		
@@ -269,7 +395,9 @@
 			this._videoviewcontent.subviews[eg].resetValues();
 		}
 	</method>
-	
+    
+    <participentList name="_participents" />
+    
 	<view name="_videoviewcontent">
           
 	</view>

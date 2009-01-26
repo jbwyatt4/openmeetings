@@ -133,15 +133,19 @@
 	    	switch (settings){
 	    		case "av":
 	    			videoview.broadcast(this.currentClient.broadCastID,_camera,_micro);
+                    this.myvideocontainer.setAttribute("visibility","visible");
 	    			break;
 	    		case "a":
 	    			videoview.broadcast(this.currentClient.broadCastID,null,_micro);
+                    this.myvideocontainer.setAttribute("visibility","visible");
 	    			break;	 
 	    		case "v":
 	    			videoview.broadcast(this.currentClient.broadCastID,_camera,null);
+                    this.myvideocontainer.setAttribute("visibility","visible");
 	    			break;	
 	    		case "n":
 	    			if ($debug) Debug.write("Do not Publish A/V");
+                    this.myvideocontainer.setAttribute("visibility","hidden");
 	    			break;
 	    		default:
 	    			if ($debug) Debug.warn("no valid device Setup chosen");
