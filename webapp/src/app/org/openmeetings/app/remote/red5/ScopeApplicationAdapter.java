@@ -262,40 +262,33 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 			
 			log.debug("currentScope "+currentScope);
 			
-			if (currentScope == null ) {
-				return;
-			}
-			log.debug("currentScope "+currentScope.getConnections());
-			if (currentScope.getConnections() == null ) {
-				return;
-			}
-			
-			//Notify Users of the current Scope
-			Iterator<IConnection> it = currentScope.getConnections();
-			while (it.hasNext()) {
-				log.debug("hasNext == true");
-				IConnection cons = it.next();
-				log.debug("cons Host: "+cons);
-				if (cons instanceof IServiceCapableConnection) {
-					
-					log.debug("sending roomDisconnect to " + cons);
-					RoomClient rcl = this.clientListManager.getClientByStreamId(cons.getClient().getId());
-					
-					if (!currentClient.getStreamid().equals(rcl.getStreamid())){
-						//Send to all connected users	
-						((IServiceCapableConnection) cons).invoke("roomDisconnect",new Object[] { currentClient }, this);
+			if (currentScope != null && currentScope.getConnections() != null) {
+				//Notify Users of the current Scope
+				Iterator<IConnection> it = currentScope.getConnections();
+				while (it.hasNext()) {
+					log.debug("hasNext == true");
+					IConnection cons = it.next();
+					log.debug("cons Host: "+cons);
+					if (cons instanceof IServiceCapableConnection) {
+						
 						log.debug("sending roomDisconnect to " + cons);
-						//add Notification if another user is recording
-						log.debug("###########[roomLeave]");
-						if (rcl.getIsRecording()){
-							log.debug("*** roomLeave Any Client is Recording - stop that");
-							StreamService.addRoomClientEnterEventFunc(rcl, rcl.getRoomRecordingName(), rcl.getUserip(), false);
-							StreamService.stopRecordingShowForClient(cons, currentClient, rcl.getRoomRecordingName(), false);
+						RoomClient rcl = this.clientListManager.getClientByStreamId(cons.getClient().getId());
+						
+						if (!currentClient.getStreamid().equals(rcl.getStreamid())){
+							//Send to all connected users	
+							((IServiceCapableConnection) cons).invoke("roomDisconnect",new Object[] { currentClient }, this);
+							log.debug("sending roomDisconnect to " + cons);
+							//add Notification if another user is recording
+							log.debug("###########[roomLeave]");
+							if (rcl.getIsRecording()){
+								log.debug("*** roomLeave Any Client is Recording - stop that");
+								StreamService.addRoomClientEnterEventFunc(rcl, rcl.getRoomRecordingName(), rcl.getUserip(), false);
+								StreamService.stopRecordingShowForClient(cons, currentClient, rcl.getRoomRecordingName(), false);
+							}
 						}
 					}
-				}
-			}	
-			
+				}	
+			}
 			
 			//Remove User AFTER cause otherwise the currentClient Object is NULL ?!
 			this.clientListManager.removeClient(currentClient.getStreamid());
@@ -602,15 +595,15 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 				log.debug("#+#+#+#+##+## logicalRoomEnter ClientList key: "+rcl.getRoom_id()+" "+room_id);
 				//Check if the Client is in the same room and same domain 
 				//and is not the same like we have just declared to be moderating this room
-				if(!streamid.equals(rcl.getStreamid())){
+				//if(!streamid.equals(rcl.getStreamid())){
 					log.debug("set to ++ for client: "+rcl.getStreamid()+" "+roomcount);
 					roomcount++;
 					//Add user to List
 					roomClientList.put(key, rcl);
-				}				
+				//}				
 			}
 			
-			if (roomcount==0){
+			if (roomcount==1){
 				log.debug("Room is empty so set this user to be moderation role");
 				currentClient.setIsMod(true);
 				this.clientListManager.updateClientByStreamId(streamid, currentClient);

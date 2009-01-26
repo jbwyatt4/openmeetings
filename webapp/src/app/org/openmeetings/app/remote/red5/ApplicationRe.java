@@ -345,9 +345,9 @@ public class ApplicationRe extends ApplicationAdapter implements
 			
 			
 			//Remove User from Sync List's
-			if (room_id != null) {
-				WhiteBoardService.getInstance().removeUserFromAllLists(currentScope, currentClient);
-			}
+//			if (room_id != null) {
+//				WhiteBoardService.getInstance().removeUserFromAllLists(currentScope, currentClient);
+//			}
 
 			//String streamid = currentClient.getStreamid();
 			
