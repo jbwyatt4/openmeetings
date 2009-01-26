@@ -22,7 +22,7 @@
 	</view>	
      -->
      
-    <videoContainer name="_videocontainer" />
+    <participents name="_videocontainer" />
                     
 </class>
 
