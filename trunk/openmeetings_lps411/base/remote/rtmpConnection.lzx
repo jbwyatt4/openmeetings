@@ -92,7 +92,8 @@
 		            if (this.subnodes[i] instanceof lz.netRemoteCallHib){
 		                var t = hib;
 		                this._nc[this.subnodes[i].funcname] = function( args ){
-		                    return hib.remoteCallMethod(arguments.callee,args);
+                            return hib.remoteCallMethod(arguments.callee,arguments);
+		                    //return hib.remoteCallMethod(arguments.callee,args);
 		                }
 		            }
 		        }
@@ -110,8 +111,13 @@
                 if (this._nc[eg]==callee){
                     if (this.debug) {
                         //_root.Debug.write.write("DEBUG invoked a function remotely: ",eg,args);
-                    }                
-                    return this.callFuntion(eg,args);
+                    }    
+                    if (args.length == 1) {
+                        return this.callFuntion(eg,args[0]);
+                    } else {
+                        return this.callFuntion(eg,args);
+                    }
+                    //return this.callFuntion(eg,args);
                 }
             }
         ]]>
