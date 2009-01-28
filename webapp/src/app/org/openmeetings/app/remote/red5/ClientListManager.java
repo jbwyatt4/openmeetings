@@ -47,6 +47,7 @@ public class ClientListManager {
 			rcm.setUserip(remoteAddress);
 			rcm.setSwfurl(swfUrl);			
 			rcm.setIsMod(new Boolean(false));
+			rcm.setCanDraw(new Boolean(false));
 			
 			if (clientList.containsKey(streamId)){
 				log.error("Tried to add an existing Client "+streamId);

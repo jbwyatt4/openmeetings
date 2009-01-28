@@ -44,6 +44,7 @@ public class RoomClient {
 	 * 
 	 */
 	private Boolean isMod = false;
+	private Boolean canDraw = false;
 	private Date connectedSince;
 	private String formatedDate;
 	
@@ -134,50 +135,6 @@ public class RoomClient {
 		this.username = username;
 		this.firstname = firstname;
 		this.lastname = lastname;
-	}
-	
-	 
-	public RoomClient(Long roomClientId, String username, String streamid,
-			String scope, String publicSID, Boolean isMod, Date connectedSince,
-			String formatedDate, String usercolor, Integer userpos,
-			String userip, int userport, Long room_id, Date roomEnter,
-			long broadCastID, Long user_id, String firstname, String lastname,
-			String mail, String lastLogin, String official_code,
-			String picture_uri, String language, Boolean isChatNotification,
-			Long chatUserRoomId, String avsettings, String swfurl,
-			Boolean isRecording, String roomRecordingName,
-			Boolean zombieCheckFlag) {
-		super();
-		this.roomClientId = roomClientId;
-		this.username = username;
-		this.streamid = streamid;
-		this.scope = scope;
-		this.publicSID = publicSID;
-		this.isMod = isMod;
-		this.connectedSince = connectedSince;
-		this.formatedDate = formatedDate;
-		this.usercolor = usercolor;
-		this.userpos = userpos;
-		this.userip = userip;
-		this.userport = userport;
-		this.room_id = room_id;
-		this.roomEnter = roomEnter;
-		this.broadCastID = broadCastID;
-		this.user_id = user_id;
-		this.firstname = firstname;
-		this.lastname = lastname;
-		this.mail = mail;
-		this.lastLogin = lastLogin;
-		this.official_code = official_code;
-		this.picture_uri = picture_uri;
-		this.language = language;
-		this.isChatNotification = isChatNotification;
-		this.chatUserRoomId = chatUserRoomId;
-		this.avsettings = avsettings;
-		this.swfurl = swfurl;
-		this.isRecording = isRecording;
-		this.roomRecordingName = roomRecordingName;
-		this.zombieCheckFlag = zombieCheckFlag;
 	}
 	
 	/**
@@ -539,6 +496,18 @@ public class RoomClient {
 	}
 	public void setZombieCheckFlag(Boolean zombieCheckFlag) {
 		this.zombieCheckFlag = zombieCheckFlag;
+	}
+
+	/**
+     * @hibernate.property
+     *  column="canDraw"
+     *  type="boolean"
+     */
+	public Boolean getCanDraw() {
+		return canDraw;
+	}
+	public void setCanDraw(Boolean canDraw) {
+		this.canDraw = canDraw;
 	}
 	
 

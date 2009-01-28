@@ -35,5 +35,6 @@
     <property name="broadCastID" type="long" column="broadcast_id"/>
     <property name="publicSID" type="string" column="public_sid"/>
     <property name="zombieCheckFlag" type="boolean" column="zombieCheckFlag"/>
+    <property name="canDraw" type="boolean" column="canDraw"/>
   </class>
 </hibernate-mapping>
