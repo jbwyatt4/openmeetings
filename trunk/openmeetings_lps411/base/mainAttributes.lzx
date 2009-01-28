@@ -75,7 +75,14 @@ these properties will be overwritten by config.xml -->
 <attribute name="userHistory" value="null" />
 <attribute name="browserTabHistory" value="null" />
 
+<!-- this attribute holds an object of type RoomClient
+ the LAST RoomClient Object that has been changed the drawstatus
+ so ondrawAllowStatus = will trigger that the draw-status of ANYBODY has changed
+ and canvas.drawAllowStatus = is the RoomClient that has changed
+ and canvas.drawAllowStatus.canDraw = is the new Status of that RoomClient
+ -->
 
+<attribute name="drawAllowStatus" value="null"/>
 
 <!--- URL/IP to use for the Server -->
 <attribute name="rtmphost" value="" type="string" />

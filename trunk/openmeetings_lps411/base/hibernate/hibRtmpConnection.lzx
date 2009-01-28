@@ -706,6 +706,10 @@
 					    //Debug.write("syncinitLoader sendVarsToMessageWithClient: ",value.message[2]);
 						if (value.client.streamid!=canvas.streamid) canvas._drawarea.remoteSyncLoader();
 					}
+                } else if (value.message[0]=='updateDrawStatus'){
+                    canvas.setAttribute("drawAllowStatus",value.message[1]);
+                } else {
+                    if ($debug) Debug.write("sendVarsToMessageWithClient unkown message ",value);
                 }
                 ]]>
             </handler>   
