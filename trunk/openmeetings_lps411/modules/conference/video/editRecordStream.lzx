@@ -160,7 +160,7 @@
 
     <labelText labelid="447" fontsize="12" x="10" y="20" width="$once{ parent.width-20 }" />
     
-    <combobox fontsize="12" name="availibleSettings" x="10" y="40" width="280" editable="false">
+    <resetCombobox fontsize="12" name="availibleSettings" x="10" y="40" width="280" editable="false">
         <handler name="oninit">
             <![CDATA[
 				this.addItem(canvas.getLabelName(448),"av");
@@ -213,11 +213,11 @@
     			this.parent.infoTextNoAV.setAttribute("visibility",textVisible);
         	]]>
         </handler>
-    </combobox>    
+    </resetCombobox>    
      
     <labelText name="availibleCamsLabel" labelid="52" fontsize="12" x="10" y="80" width="$once{ parent.width-20 }" />
 
-    <combobox fontsize="12" name="availibleCams" x="10" y="100" width="280" editable="false">
+    <resetCombobox fontsize="12" name="availibleCams" x="10" y="100" width="280" editable="false">
         <handler name="oninit">
             <![CDATA[
 				//Get all availible Cam's
@@ -240,11 +240,11 @@
 
             ]]>
         </handler>
-    </combobox>
+    </resetCombobox>
     
     
 
-    <combobox fontsize="12" name="availibleMics"  x="10" y="140" width="280" editable="false">
+    <resetCombobox fontsize="12" name="availibleMics"  x="10" y="140" width="280" editable="false">
         <handler name="oninit">
             <![CDATA[
 	            //Get all availible Mic's
@@ -267,7 +267,7 @@
 				this.selectItem(String(mic));  
             ]]>
         </handler>
-    </combobox>
+    </resetCombobox>
     
     <labelText name="infoTextNoAV" labelid="452" multiline="true" width="280" 
     		   fontsize="12" x="10" y="80" visibility="hidden" />

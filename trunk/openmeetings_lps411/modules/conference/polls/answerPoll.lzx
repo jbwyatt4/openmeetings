@@ -34,7 +34,7 @@
 	  	<labelRadioButton value="2" labelid="35" />
 	</radiogroup>
 
-	<combobox name="pollnumeric" visible="false" width="160" x="100" y="102" editable="false" itemclassname="bigTextListItem" >
+	<resetCombobox name="pollnumeric" visible="false" width="160" x="100" y="102" editable="false" itemclassname="bigTextListItem" >
 		<handler name="oninit">
 			<![CDATA[
 			for (var i=1;i<11;i++){
@@ -43,7 +43,7 @@
 			this.selectItem('1');
 			]]>
 		</handler>
-	</combobox>
+	</resetCombobox>
 	
     <simpleLabelButton labelid="25" width="200" x="80" y="218" 
         onclick="this.parent.close();" />

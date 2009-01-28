@@ -52,7 +52,7 @@
 <!--
     <labelText text="Language: " width="200" y="252" resize="false" x="2"/>  
         
-        <combobox name="languages" width="270" y="252" x="120" editable="false">
+        <resetCombobox name="languages" width="270" y="252" x="120" editable="false">
             <netRemoteCallHib name="getLanguages" funcname="xmlcrm.getLanguages" remotecontext="$once{ canvas.thishib }" >      
                 <handler name="oninit">
                     this.doCall();
@@ -68,7 +68,7 @@
                     ]]>
                 </handler>  
             </netRemoteCallHib>
-        </combobox>       
+        </resetCombobox>       
          -->   
     <simpleLabelButton name="registerB" labelid="121" width="120" x="140" y="332">
     	<handler name="onclick">

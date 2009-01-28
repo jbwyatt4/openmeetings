@@ -216,7 +216,7 @@
     
     <!-- 482:Participants -->
     <labelText labelid="482" width="200" y="100" resize="false" x="2"/>
-        <combobox name="numberOfParticipants" width="270" y="100" x="120" editable="false" fontsize="12">
+        <resetCombobox name="numberOfParticipants" width="270" y="100" x="120" editable="false" fontsize="12">
 	        <handler name="oninit" >
 	            <![CDATA[
 	            	this.addItem(2,2);
@@ -234,11 +234,11 @@
 	            	this.selectItemAt(1);
 	            ]]>
 	        </handler> 
-        </combobox> 
+        </resetCombobox> 
 
 	<!-- 194:Type -->
     <labelText labelid="194" width="200" y="130" resize="false" x="2"/>  
-        <combobox name="roomtype" width="270" y="130" x="120" editable="false" fontsize="12">
+        <resetCombobox name="roomtype" width="270" y="130" x="120" editable="false" fontsize="12">
 	        <handler name="oninit" >
 	            <![CDATA[
 	            for (var i=0;i<canvas.roomTypesInitValues.length;i++){
@@ -247,7 +247,7 @@
 	            this.selectItem(String(canvas.roomTypesInitValues[0].roomtypes_id));
 	            ]]>
 	        </handler> 
-        </combobox> 	                  
+        </resetCombobox> 	                  
 
 	<!-- 195:Public -->
     <labelText labelid="195" width="200" y="160" resize="false" x="2"/>  

@@ -168,7 +168,7 @@
         <customEdittext name="userpass2" y="130" password="true" x="120" width="270" text="" />   
      -->
     <labelText labelid="135" width="200" y="130" resize="false" x="2"/>
-        <combobox name="salutation" width="100" y="130" x="120" editable="false" fontsize="12">
+        <resetCombobox name="salutation" width="100" y="130" x="120" editable="false" fontsize="12">
 	        <handler name="oninit" >
 	            <![CDATA[
 	            for (var i=0;i<canvas.salutationsInitValues.length;i++){
@@ -177,7 +177,7 @@
 	            this.selectItem(String(canvas.salutationsInitValues[0].salutations_id));
 	            ]]>
 	        </handler> 
-        </combobox> 
+        </resetCombobox> 
         <customEdittext name="firstname" y="130" x="230" width="160" text="" />
         
     <labelText labelid="136" width="200" y="160" resize="false" x="2"/>
@@ -208,7 +208,7 @@
             resultId="state_id" resultName="name" />    
 
     <labelText labelid="158" width="200" y="400" resize="false" x="2"/>  
-        <combobox name="status" width="200" y="400" x="120" editable="false" fontsize="12">
+        <resetCombobox name="status" width="200" y="400" x="120" editable="false" fontsize="12">
 	        <handler name="oninit" >
 	            <![CDATA[
 	            this.addItem(canvas.getLabelName(159),'0');
@@ -216,11 +216,11 @@
 	            this.selectItem('0');
 	            ]]>
 	        </handler> 
-        </combobox> 
+        </resetCombobox> 
 
 
     <labelText labelid="169" width="200" y="430" resize="false" x="2"/>  
-        <combobox name="level" width="200" y="430" x="120" editable="false" fontsize="12">
+        <resetCombobox name="level" width="200" y="430" x="120" editable="false" fontsize="12">
 	        <handler name="oninit" >
 	            <![CDATA[
 	            this.addItem(canvas.getLabelName(166),'1');
@@ -229,7 +229,7 @@
 	            this.selectItem('1');
 	            ]]>
 	        </handler> 
-        </combobox> 
+        </resetCombobox> 
 	
     <labelText labelid="142" width="200" y="460" resize="false" x="2"/>
         <customEdittext name="adress_comment" y="460" x="120" width="270" 

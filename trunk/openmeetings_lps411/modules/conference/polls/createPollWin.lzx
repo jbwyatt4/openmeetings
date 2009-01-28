@@ -29,14 +29,14 @@
         </netRemoteCallHib>        
     
     <labelText labelid="21" y="122" />
-    <combobox name="_polltypes" width="160" x="100" y="122" editable="false" itemclassname="bigTextListItem" >
+    <resetCombobox name="_polltypes" width="160" x="100" y="122" editable="false" itemclassname="bigTextListItem" >
     	<handler name="oninit">
     		<![CDATA[
     		    this.parent.getPollTypeList.setReferenceObj(this);
                 this.parent.getPollTypeList.doCall();
     		]]>
     	</handler>
-    </combobox>
+    </resetCombobox>
 
     <simpleLabelButton labelid="25" width="100" x="280" y="218" 
         onclick="this.parent.close();" />

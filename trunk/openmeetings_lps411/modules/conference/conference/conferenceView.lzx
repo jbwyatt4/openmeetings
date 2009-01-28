@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library>
 
-<class name="videoBoard" id="myconferenceView" extends="view">
+<class name="videoBoard" id="myconferenceView" extends="conferenceBox" >
     <!--
     
     <simpleLabelButton y="${ parent.height-19 }" x="${ parent.width-this.width-1 }" 
@@ -22,91 +22,13 @@
 	</view>	
      -->
      
-    <participents name="_videocontainer" />
+    <participents name="_videocontainer" y="34" />
                     
 </class>
 
-<class name="whiteBoardPanel" extends="guiPresenter" x="296" y="2"
-    width="660" height="592" closable="false" title="Whiteboard"
-    resizeable="true">
-  <attribute name="initH"/>
-  <attribute name="initW"/>
-  <handler name="oninit">
-    <![CDATA[
-       this.setAttribute("initH",this.height);
-       this.setAttribute("initW",this.width);
-       var f=function() {
-         var w=this.height * this.initW/this.initH;
-         w=((w < this.initW ) ? initW : w);
-         var h=this.width * this.initH/this.initW;
-         h=((h < this.initH ) ? initH : h);
-
-         this.setWidth(w);
-         this.setHeight(h);
-       }
-       var prop1 = [this, "width"];
-       var prop2 = [this, "height"];
-       this.applyConstraint("width", f, prop1);
-       this.applyConstraint("height", f, prop2);
-      ]]>
-	</handler>
-   <whiteBoard name="_whiteboard" y="22" x="4">
-        <handler name="onsharedMessage" args="obj">
-            //Debug.write("send: ",obj);
-            canvas.objWhiteboard = obj;
-            hib.sendVars.doCall();
-        </handler>
-
-    <handler name="isloadingImage" args="val" >
-      Debug.write("isloadingImage: ",val);
-    </handler>
-    <handler name="isloadedImage" args="val" >
-      Debug.write("isloadedImage: ",val);
-    </handler>
-   </whiteBoard>
-   <!--
-  <view name="currentmainobjectisMod" visible="${ !canvas.ismoderator }"
-    x="0" y="22" height="$once{ parent.height-22 }" width="$once{ parent.width }" >
-    <handler name="onclick">
-      new lz.errorModeratorPopup(canvas,{error:canvas.getLabelName(97)});
-    </handler>
-  </view>
-   -->
-</class>
-
-<class name="modernWhiteBoardPanel" extends="guiPresenter" x="296" y="2"
-    width="660" height="592" closable="false" title="Whiteboard"
-    resizeable="true">
+<class name="modernWhiteBoardPanel" extends="conferenceBox" >
     
-    <attribute name="initH"/>
-    <attribute name="initW"/>
-    
-    <handler name="oninit">
-        <![CDATA[
-            this.setAttribute("initH",this.height);
-            this.setAttribute("initW",this.width);
-            var prop1 = [this, "width"];
-            var prop2 = [this, "height"];
-            this.applyConstraintMethod("setItemContraints", prop1);
-            this.applyConstraintMethod("setItemContraints", prop2);
-        ]]>
-    </handler>
-        
-    <!-- respect ratio and keep minimum width / height -->
-    <method name="setItemContraints" args="w">
-        <![CDATA[
-            //if ($debug) Debug.write("setItemContraints",w)
-            var w=this.height * this.initW/this.initH;
-             w=((w < this.initW ) ? initW : w);
-             var h=this.width * this.initH/this.initW;
-             h=((h < this.initH ) ? initH : h);
-    
-             this.setAttribute("width",w);
-             this.setAttribute("height",h);
-        ]]>
-    </method>
-        
-    <newWhiteBoard name="_whiteboard" y="22" x="1">
+    <newWhiteBoard name="_whiteboard" y="34" x="1">
         <handler name="onsharedMessage" args="obj">
             //Debug.write("send: ",obj);
             canvas.objWhiteboard = obj;
@@ -120,14 +42,6 @@
         </handler>
     </newWhiteBoard>
     
-   <!--
-  <view name="currentmainobjectisMod" visible="${ !canvas.ismoderator }"
-    x="0" y="22" height="$once{ parent.height-22 }" width="$once{ parent.width }" >
-    <handler name="onclick">
-      new lz.errorModeratorPopup(canvas,{error:canvas.getLabelName(97)});
-    </handler>
-  </view>
-    -->
 </class>
 
 <class name="modPanel" extends="guiPresenter" x="2" y="284"
@@ -145,7 +59,13 @@
     <conferenceContainerTab x="1" y="22" name="_menubar" />
 </class>
 
+<class name="filesPanelStrict" extends="conferenceBox" >
+    
+    <uploadTab y="40" height="${ parent.height-40 }" />
+    
+</class>
 
+    
 <class name="conferenceView" extends="baseContentView" destroyByMethod="true" >
 	
 	<attribute name="roomobj" value="null" />
@@ -159,39 +79,38 @@
         new lz.moderationPanel(canvas._conferencemenu,{x:this.roomobj.moderationPanelXPosition});
         canvas._conferencemenu.setAttribute('visibility','visible');
 
-        new lz.videoBoard(this,{
-	            name:'_videosView',
-	            x:this.roomobj.videoPodXPosition,
-	        	y:this.roomobj.videoPodYPosition,
-	        	width:this.roomobj.videoPodWidth,
-        	   height:this.roomobj.videoPodHeight
+        this._videosView.bringToFront();
+    </handler>
+    
+    <!--
+    new lz.videoBoard(this,{
+                name:'_videosView',
+                x:this.roomobj.videoPodXPosition,
+                y:this.roomobj.videoPodYPosition,
+                width:this.roomobj.videoPodWidth
             });
         
         if (this.roomobj.showFilesPanel){
-        	new lz.filesPanel(this,{x:this.roomobj.filesPanelXPosition,
-        		y:this.roomobj.filesPanelYPosition,
-        		width:this.roomobj.filesPanelWidth,
-        		height:this.roomobj.filesPanelHeight});
+            new lz.filesPanelStrict(this,{
+                name:'_filesPanel',
+                width:this.roomobj.filesPanelWidth});
         }
-		
-       	if (this.roomobj.showWhiteBoard){
-       		if (canvas.showmodernWhiteBoard=="y"){
-	       		new lz.modernWhiteBoardPanel(this,{x:this.roomobj.whiteBoardPanelXPosition,
-	        		y:this.roomobj.whiteBoardPanelYPosition,
-	        		width:this.roomobj.whiteBoardPanelWidth,
-	        		height:this.roomobj.whiteBoardPanelHeight});
-       		} else {
-	       		new lz.whiteBoardPanel(this,{x:this.roomobj.whiteBoardPanelXPosition,
-	        		y:this.roomobj.whiteBoardPanelYPosition,
-	        		width:this.roomobj.whiteBoardPanelWidth,
-	        		height:this.roomobj.whiteBoardPanelHeight});
-       		}
+        
+        new lz.chatPanelStrict(this,{
+                name:'_chatPanel'
+            });
+        
+        if (this.roomobj.showWhiteBoard){
+            new lz.modernWhiteBoardPanel(this,{x:this.roomobj.whiteBoardPanelXPosition,
+                y:this.roomobj.whiteBoardPanelYPosition,
+                width:this.roomobj.whiteBoardPanelWidth,
+                height:this.roomobj.whiteBoardPanelHeight});
         }
         
         this._videosView.bringToFront();
-    </handler>
+        -->
 
-  <handler name="ontabcontentleave">
+    <handler name="ontabcontentleave">
         if ($debug) Debug.write("ontabcontentleave:",this);
         
         //reset the right to draw on WHiteboard as the RoomClient Object will be destroyed also
@@ -213,13 +132,13 @@
           canvas._drawarea.currentletterObj.destroy();
         }
         this.logicalRoomLeave.doCall();
-        Debug.write("this.logicalRoomLeave ",this.logicalRoomLeave);
-  </handler>
+        if ($debug) Debug.write("this.logicalRoomLeave ",this.logicalRoomLeave);
+    </handler>
 
-  <netRemoteCallHib name="logicalRoomLeave" funcname="logicalRoomLeave" remotecontext="$once{ canvas.thishib }" >
-      <handler name="ondata" args="value">
-        Debug.write("logicalRoomLeave: ",value);
-        //this.parent.destroy();
+    <netRemoteCallHib name="logicalRoomLeave" funcname="logicalRoomLeave" remotecontext="$once{ canvas.thishib }" >
+        <handler name="ondata" args="value">
+	        if ($debug) Debug.write("logicalRoomLeave: ",value);
+	        //this.parent.destroy();
             canvas.thishib.reconnectAfterRoomleft = true;
             canvas.thishib.reconnectedRoomInstance = this.parent;
             
@@ -232,8 +151,31 @@
             canvas.setAttribute('naviHeightDelta',canvas.naviHeight);
             canvas._conferencemenu.removeAll();
             canvas._conferencemenu.setAttribute('visibility','hidden');
-      </handler>
+        </handler>
     </netRemoteCallHib>
+    
+    <videoBoard height="300" name="_videosView" y="2" x="2" 
+                labelid="613" width="290"/>
+    
+    <filesPanelStrict name="_filesPanel" width="290" x="2" 
+                      labelid="614" y="304" height="${ canvas.height - 340 }" />
+    
+    <conferenceBox name="_chatPanelStrict" labelid="616"
+       height="200" x="${ parent._filesPanel.width+4 }"  
+       y="${ canvas.height - 230 }" 
+       width="${ canvas.width - 296 }">
+        <handler name="onwidth" args="w">
+            if ($debug) Debug.write("ON WIDTH",w);
+        </handler>
+        
+        <chatTab y="40" height="${ parent.height-40 }" width="${ parent.width }" />
+    </conferenceBox>
+       
+    <modernWhiteBoardPanel name="_whiteboard" labelid="615"
+        y="2" x="${ parent._filesPanel.width+4 }"
+        width="${ canvas.width - 296 }"
+        height="${ canvas.height - 236 }" />
+    
 </class>
 
 </library>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library>
 
-<class name="tableCombobox" extends="combobox" editable="false" fontsize="10">
+<class name="tableCombobox" extends="combobox" editable="false" fontsize="10" style="componentStyle">
     <attribute name="initvalue" type="string" />
     <attribute name="tvalue" type="string" />
     <attribute name="sendchange" value="false" type="boolean" />

@@ -67,7 +67,6 @@
 <include href="toolbar/" />
 
 <include href="panels/" />
-<include href="whiteBoard.lzx" />
 <include href="newWhiteBoard.lzx" />
 	
 </library>

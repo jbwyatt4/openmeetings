@@ -110,7 +110,7 @@
 		
 		<!-- label: language -->
 		<labelText name="labellanguages" labelid="227" visibility="hidden" width="200" y="30" resize="false" x="10" />     
-		<combobox name="languages" width="170" y="30" x="120" visibility="hidden" editable="false">
+		<resetCombobox name="languages" width="170" y="30" x="120" visibility="hidden" editable="false">
 	      	<netRemoteCallHib name="getLanguages" funcname="languageservice.getLanguages" remotecontext="$once{ canvas.thishib }" >      
 		            <handler name="oninit">
 		                 	this.doCall();
@@ -127,7 +127,7 @@
 		            ]]>
 				</handler>  
 			</netRemoteCallHib>
-		</combobox>		 
+		</resetCombobox>		 
 
 		<!-- label: loading -->	
 		<labelText name="labelloading" y="30" x="10" fontstyle="bold" labelid="229" visibility="hidden" />

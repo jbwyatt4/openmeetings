@@ -105,7 +105,7 @@
 	</simpleLabelButtonTooltip>
 
     <!-- combobox to decide the step number -->
-    <combobox name="languages" width="100" x="$once{ parent.width-149 }" 
+    <resetCombobox name="languages" width="100" x="$once{ parent.width-149 }" 
 			  editable="false" height="22" >
 		<attribute name="sendEventToReload" value="false" type="boolean" />
         <textlistitem value="10" text="10" />
@@ -123,7 +123,7 @@
         	this.selectItem(String(parent.step));
         	this.sendEventToReload = true;
         </handler>
-	</combobox>
+	</resetCombobox>
 	
 	<!-- 370:goto next -->
 	<simpleLabelButtonTooltip name="_next1" x="$once{ parent.width-48 }" width="22" height="22" 

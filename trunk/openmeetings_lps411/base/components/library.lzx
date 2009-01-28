@@ -21,5 +21,6 @@
     <include href="validbox/" />
     <include href="presenter/" />
     <include href="lps/" />
+    <include href="conferencebox/" />
 
 </library>

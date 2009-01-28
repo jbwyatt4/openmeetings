@@ -19,6 +19,9 @@
 <include href="modules/" /> 
 
 <silverstyle name="defaultstyle" isdefault="true" basecolor="${ canvas.basebgcolorizer }" canvascolor="white" />
+
+<silverstyle name="componentStyle" basecolor="0xFFFFFF" textcolor="0x000000" />
+
 <resource name="currentsplash" src="splash_defaultvalues.swf" />
 <resource name="configure_vidrsc" src="resources/configure.png" />
 <resource name="mainbackroundmenu_rsc" src="resources/mainbackroundmenu.png" />
@@ -38,7 +41,7 @@
 
 <!-- View for Contents. All Windows will be loaded on this view. -->
 <view name="main_content" y="${ canvas.naviHeightDelta }" width="${canvas.width}" 
-    height="${canvas.height-canvas.naviHeightDelta}" visibility="hidden" showhandcursor="false">
+    height="${ canvas.height-canvas.naviHeightDelta }" visibility="hidden" showhandcursor="false">
     
     <handler name="onmouseover">
         setCurrentMouseWheelObject(this._scrollbar);
@@ -47,7 +50,7 @@
         disableCurrentMouseWheelObject();
     </handler>
     
-    <view x="0" name="_content" layout="axis:y;spacing:2">
+    <view x="0" name="_content" >
         <view name="inner" />
         <method name="clearAll">
             <![CDATA[
@@ -82,13 +85,14 @@
                 ]]>
             </method>
         </view>
-            -->
+           
     <vscrollbar name="_scrollbar" />
+     -->
 </view>  
   
 <!-- View for Navigation-bar and App-name -->
 <view name="_mainbgcontentNavi" x="0" y="0" bgcolor="${ canvas.baseMousecolorizer }" clip="true"
-    width="100%" height="$once{ canvas.naviHeight }" visibility="hidden">
+    width="100%" height="${ canvas.naviHeight }" visibility="hidden">
     <text id="mainBaseText" x="10" y="10"
         fgcolor="white" fontsize="20" fontstyle="bold">
         <method name="setShadow" >

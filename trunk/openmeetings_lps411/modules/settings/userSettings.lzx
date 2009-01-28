@@ -126,7 +126,7 @@
     
     <!-- 135:Firstname -->
     <labelText labelid="135" width="200" y="130" resize="false" x="2"/>
-        <combobox name="salutation" width="100" y="130" x="120" editable="false" fontsize="12">
+        <resetCombobox name="salutation" width="100" y="130" x="120" editable="false" fontsize="12">
 	        <handler name="oninit" >
 	            <![CDATA[
 	            for (var i=0;i<canvas.salutationsInitValues.length;i++){
@@ -135,7 +135,7 @@
 	            this.selectItem(String(canvas.salutationsInitValues[0].salutations_id));
 	            ]]>
 	        </handler> 
-        </combobox> 	
+        </resetCombobox> 	
         <customEdittext name="firstname" y="130" x="230" width="160" text="" />
         
     <!-- 136:Lastname -->

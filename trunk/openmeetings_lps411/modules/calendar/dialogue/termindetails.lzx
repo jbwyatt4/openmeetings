@@ -12,7 +12,7 @@
 						
 			<!--<text name="_kategory" y="10" x="35">Kategorie: </text>-->
 			<labelText name="_kategory" y="10" x="35" labelid="566" width="80"/>
-		 	<combobox name="_kategoryedit" x="${parent._kategory.width + parent._kategory.x + 30}" 
+		 	<resetCombobox name="_kategoryedit" x="${parent._kategory.width + parent._kategory.x + 30}" 
 		 			  width="220" editable="false" shownitems="5" y="${parent._kategory.y}">
 				<handler name="onvalue" args="v">						
 					parent._kategoryatr = Number(this.getValue());												
@@ -20,12 +20,12 @@
 				</handler>	
 				
 		 	<!--textitmes-->
-		 	</combobox> 
+		 	</resetCombobox> 
 		 	
 		 	<labelText name="_erinnerung" y="${parent._kategory.height + parent._kategory.y + 10}" 
 		 			   x="35" labelid="565" width="120" />
 		 	 	
-		 	<combobox name="_erinnerungedit" x="${parent._kategory.width + parent._kategory.x +30}" 
+		 	<resetCombobox name="_erinnerungedit" x="${parent._kategory.width + parent._kategory.x +30}" 
 		 			  width="220" editable="false" shownitems="5" y="${parent._erinnerung.y}">
 				<handler name="onvalue" args="v">						
 					if ($debug) Debug.write("_erinnerungatr: ",parent._erinnerungatr);
@@ -42,10 +42,10 @@
 					this.addItem(canvas.getLabelName(568),"0");
 					this.selectItem("0");				
 				</handler>
-		 	</combobox> 
+		 	</resetCombobox> 
 		 		
 		 	<labelText name="_repetition" y="${parent._kategory.height + parent._kategory.y + 40}" x="35" labelid="567" width="80"/>
-		 	<combobox name="_repetitionselect" x="${parent._kategory.width + parent._kategory.x +30}" 
+		 	<resetCombobox name="_repetitionselect" x="${parent._kategory.width + parent._kategory.x +30}" 
 		 			  width="220" editable="false" shownitems="5" y="${parent._repetition.y}">
 				<handler name="onselect">
                         var repitechoice = this.getText();
@@ -98,7 +98,7 @@
               	<textlistitem text="Monthly" value="3"/> 
               	<textlistitem text="Yeahrly" value="4"/>            
 		 	<!--textitmes-->
-		 	</combobox> 
+		 	</resetCombobox> 
 		 	
 		 	<labelText name="_location" labelid="569" width="120" y="${parent._kategory.height + parent._kategory.y + 70}" x="35"/>
 	    	

@@ -174,12 +174,12 @@
 	<turnOverListHeaderItemSimple x="20" width="200" labelid="440" y="20" pathOrder="file" />
 	<simpleLabelButton x="220" width="40" y="20" />
 	
-	<imagesListdraw name="_imageslistdraw" x="0" y="40" height="$once{ parent.height-48 }" 
-		width="260" id="_imageslistdraw" uploadmodul="$once{ canvas.uploadmoduleimg }" />
+	<imagesListdraw name="_imageslistdraw" x="0" y="40" height="${ parent.height-48 }" 
+		width="${ parent.width }" id="_imageslistdraw" uploadmodul="$once{ canvas.uploadmoduleimg }" />
 		
 <!--  -->
 	<view name="currentmainobjectisMod" visible="${ !canvas.ismoderator }"
-		x="0" y="20" height="$once{ parent.height-28 }" width="250" >
+		x="0" y="20" height="${ parent.height-28 }" width="${ parent.width }" >
 		<handler name="onclick">
 			new lz.errorModeratorPopup(canvas,{error:canvas.getLabelName(97)});
 		</handler>

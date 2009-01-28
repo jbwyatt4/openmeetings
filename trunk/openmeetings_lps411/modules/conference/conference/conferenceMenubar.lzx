@@ -6,7 +6,7 @@
 		Those menu items are connected to each command that has been declared in base/mainMethods.lzx.
 			May 24 2008 commented by onokeiji@gmail.com
 	-->
-	<class name="conferenceMenubar" extends="menubar" height="28">
+	<class name="conferenceMenubar" extends="menubar" height="28" style="componentStyle">
 	   <!-- exit room -->
 	    <_labelMenu labelid="308" width="250">
         	<handler name="oninit">
