@@ -347,7 +347,7 @@
              
 	<handler name="onmousedown" >
 		//Debug.write("onmousedown this.drawmodus: ",this.drawmodus);
-		if (canvas.ismoderator) {
+		if (canvas.ismoderator || canvas.isAllowedToDraw) {
 			if (this.letterObjectIsActive){
 				this.currentletterObj.drawtoArray();
 				//bool = true;
@@ -395,7 +395,7 @@
 	<handler name="onmouseup" >
         if ($debug) Debug.write("onmouseup this.drawmodus: ",this.drawmodus);
 		<![CDATA[	
-	        if (canvas.ismoderator) {
+	        if (canvas.ismoderator || canvas.isAllowedToDraw) {
 				//var bool = false;
 				
 				if(this.drawmodus=="paint"){

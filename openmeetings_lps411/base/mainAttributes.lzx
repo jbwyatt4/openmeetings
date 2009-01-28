@@ -84,6 +84,13 @@ these properties will be overwritten by config.xml -->
 
 <attribute name="drawAllowStatus" value="null"/>
 
+<!--
+    this value indicates if this user is allowed to draw to the Whiteboard
+    If this user is currently Moderator => he ALWAYS can draw to whiteboard
+    even if this isAllowedToDraw == false
+ -->
+<attribute name="isAllowedToDraw" value="false" type="boolean" />
+
 <!--- URL/IP to use for the Server -->
 <attribute name="rtmphost" value="" type="string" />
 

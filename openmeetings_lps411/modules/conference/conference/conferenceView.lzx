@@ -192,7 +192,12 @@
     </handler>
 
   <handler name="ontabcontentleave">
-        Debug.write("ontabcontentleave:",this);
+        if ($debug) Debug.write("ontabcontentleave:",this);
+        
+        //reset the right to draw on WHiteboard as the RoomClient Object will be destroyed also
+        //on server-Side the canDraw status will be false again when you relogin the same room
+        canvas.isAllowedToDraw = true;
+        
         if (canvas._videocontainer!=null){
 	        canvas._videocontainer.resetAllValues();
 	        canvas._videocontainer = null;
