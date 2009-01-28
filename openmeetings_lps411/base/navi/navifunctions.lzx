@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library>
 
+<!--
+
+    @keywords deprecated => moved everything to ../functions.lzx 
+    
+    THIS CLASS WILL BE DELETED
+    
+ -->
 <script>
 <![CDATA[
 var labelObj;
