@@ -862,7 +862,6 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 		try {
 			IConnection current = Red5.getConnectionLocal();
 			RoomClient currentClient = this.clientListManager.getClientByStreamId(current.getClient().getId());
-			Long room_id = currentClient.getRoom_id();	
 				
 			//Send to all Clients of that Scope(Room)
 			Iterator<IConnection> it = current.getScope().getConnections();

@@ -7,8 +7,12 @@ import java.util.LinkedList;
 import java.util.Map;
 
 import org.openmeetings.app.conference.whiteboard.WhiteboardSyncLockObject;
+import org.openmeetings.app.data.basic.AuthLevelmanagement;
+import org.openmeetings.app.data.basic.Sessionmanagement;
+import org.openmeetings.app.data.user.Usermanagement;
 import org.openmeetings.app.hibernate.beans.recording.RoomClient;
 import org.openmeetings.app.remote.red5.ClientListManager;
+import org.openmeetings.app.remote.red5.ScopeApplicationAdapter;
 import org.openmeetings.app.remote.red5.WhiteBoardObjectListManager;
 import org.red5.server.api.IConnection;
 import org.red5.server.api.IScope;
@@ -33,6 +37,7 @@ public class WhiteBoardService implements IPendingServiceCallback {
 	private static WhiteBoardService instance = null;
 	
 	//Beans, see red5-web.xml
+	private ScopeApplicationAdapter scopeApplicationAdapter = null;
 	private ClientListManager clientListManager = null;
 	private WhiteBoardObjectListManager whiteBoardObjectListManager = null;
 	 
@@ -56,6 +61,13 @@ public class WhiteBoardService implements IPendingServiceCallback {
 	public void setWhiteBoardObjectListManager(
 			WhiteBoardObjectListManager whiteBoardObjectListManager) {
 		this.whiteBoardObjectListManager = whiteBoardObjectListManager;
+	}
+	public ScopeApplicationAdapter getScopeApplicationAdapter() {
+		return scopeApplicationAdapter;
+	}
+	public void setScopeApplicationAdapter(
+			ScopeApplicationAdapter scopeApplicationAdapter) {
+		this.scopeApplicationAdapter = scopeApplicationAdapter;
 	}
 
 	/**
@@ -81,6 +93,53 @@ public class WhiteBoardService implements IPendingServiceCallback {
 			return itemList;
 		} catch (Exception err) {
 			log.error("[getRoomItems]",err);
+		}
+		return null;
+	}
+	
+	/**
+	 * change the draw status of a user, allow disallow him to draw anybody besides the Moderator to
+	 * draw on the whiteboard, only a Moderator is allowed to trigger this function
+	 * 
+	 * @param SID
+	 * @param publicSID
+	 * @param canDraw
+	 * @return
+	 */
+	public Boolean setCanDraw(String SID, String publicSID, boolean canDraw) {
+		try {
+			
+			IConnection current = Red5.getConnectionLocal();
+			String streamid = current.getClient().getId();
+			RoomClient currentClient = this.clientListManager.getClientByStreamId(streamid);
+			
+			Long users_id = Sessionmanagement.getInstance().checkSession(SID);
+	        Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
+	        
+	        if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
+	        	
+	        	if (currentClient.getIsMod()) {
+	        		RoomClient rcl = this.clientListManager.getClientByPublicSID(publicSID);
+	        		
+	        		if (rcl != null) {
+	        			rcl.setCanDraw(canDraw);
+	        			this.clientListManager.updateClientByStreamId(rcl.getStreamid(), rcl);
+	        			
+	        			HashMap<Integer,Object> newMessage = new HashMap<Integer,Object>();
+	        			newMessage.put(0,"updateDrawStatus");
+	        			newMessage.put(1,rcl);
+	        			this.scopeApplicationAdapter.sendMessageWithClient(newMessage);
+	        			
+	        		} else {
+	        			return false;
+	        		}
+	        	} else {
+	        		return false;
+	        	}
+	        }
+			
+		} catch (Exception err) {
+			log.error("[setCanDraw]",err);
 		}
 		return null;
 	}
