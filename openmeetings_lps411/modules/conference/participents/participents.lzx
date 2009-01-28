@@ -318,7 +318,7 @@
 </class>
 
  
-<class name="participents" extends="view" width="$once{ parent.width }" height="$once{ parent.height }">
+<class name="participents" extends="view" width="$once{ parent.width }" height="$once{ parent.height-34 }">
 
 	<!--- holds a references to the videoview which is broadcasting -->
 	<attribute name="broadCastViewRef" value="null" />

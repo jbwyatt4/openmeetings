@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<library>     
+
+<class name="conferenceBox" extends="view" width="250" height="400" >
+    
+    <attribute name="labelid" type="number" setter="setLabelId(labelid)" />
+    <method name="setLabelId" args="_labelid" >
+        this.labelid = _labelid;
+        this.setAttribute('headerText',canvas.getLabelName(this.labelid));
+    </method>
+    
+    <attribute name="headerText" value="Users" type="string" />
+    
+    <view name="_head" x="0" y="0" width="${ parent.width }" height="34" >
+        
+        <view width="${ parent.width }" height="$once{ parent.height }" 
+              stretches="both" resource="presenter_thumb_rsc" >
+            <handler name="oninit">
+                <![CDATA[
+                    this.setTintRGB(canvas.basebgcolorizer,90);
+                ]]>
+            </handler>
+            <method name="setTintRGB" args="color, brightness">
+                <![CDATA[
+	                if (color != "" && color != null){
+	
+	                    if (brightness == null) { brightness = 0; }
+	                    var rgb = color;
+	                    var red=(rgb >> 16) & 0xFF;
+	                    var green=(rgb >> 8) & 0xFF;
+	                    var blue=rgb & 0xFF;
+	        
+	                    this.setColorTransform( { ra : red, ga : green, ba : blue,
+	                                                rb : 0, gb : 0, bb : 0 } );
+	                                                
+	                }
+                ]]>
+            </method>            
+        </view>
+        
+        <text x="10" fontstyle="bold" fontsize="14" fgcolor="0xFFFFFF" 
+              text="${ parent.parent.headerText }" valign="middle"></text>
+        
+    </view>  
+
+</class>
+
+</library>

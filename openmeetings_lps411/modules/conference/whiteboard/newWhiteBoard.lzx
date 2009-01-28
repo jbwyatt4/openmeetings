@@ -6,6 +6,9 @@
 
     Class newWhiteBoard
     
+    
+    @keywords deprecated
+    
  -->
 
 
@@ -119,16 +122,6 @@
     <text fontsize="12" x="10" y="2" 
         name="_sharingClientName" fontstyle="bold" />    
     
-    <simpleLabelButton labelid="239" height="24" name="_doShare" width="200" 
-    				   x="$once{ parent.parent.width-210 }" y="2" 
-    				   enabled="${  canvas.ismoderator }">
-        <handler name="onclick">
-	    canvas._drawarea.setModus('plain');          
-            this.parent.checkForApplyScreen();
-        </handler>
-        <view y="1" x="2" resource="background_screenview_rsc" />
-        
-    </simpleLabelButton>  
     
     <method name="checkForApplyScreen">
             <![CDATA[
@@ -148,29 +141,14 @@
     <!-- 
         The Content Area    
      -->
-    <view width="${ parent.parent.width-2 }" height="${ parent.parent.height-23 }" 
+    <view width="${ parent.parent.width-2 }" height="${ parent.parent.height-33 }" 
     	  y="0" name="_drawareaMask" clip="true" bgcolor="white" >
         <remoteWhiteboard y="0" name="_drawarea" isRemoteOID="true"
         			  width="${parent.width}" height="${parent.height}" >
             <attribute name="initH"/>
             <attribute name="initW"/>
             <handler name="oninit">
-             <![CDATA[
-            	canvas._drawarea = this;
-                this.setAttribute("initH",this.height);
-                this.setAttribute("initW",this.width);
-                var f=function() {
-                 this.width=( (this.width < this.initW ) ? initW : this.width);
-                 this.height=( (this.height < this.initH ) ? initH : this.height);
-                 var mc = this.getMCRef();
-                 // scale computed only on width, it is OK for a keepratio resize
-                 var scale= this.width / this.initW *100;
-                 mc._xscale = scale;
-                 mc._yscale = scale;
-                }
-                var prop1 = [this, "width"];
-                this.applyConstraint("width", f, prop1);
-             ]]>
+            	canvas._drawarea = this; 
             </handler>
             
             <handler name="onprogress" args="perc">
@@ -301,7 +279,7 @@
         </netRemoteCallHib>     
         
     <view name="panelArea" width="${ parent.parent.width }" 
-    	  height="${ parent.parent.height-21-parent._propertyPanel.height }">
+    	  height="${ parent.parent.height-33-parent._propertyPanel.height }">
     	
     	<attribute name="objectRef" value="null" />
     	
@@ -376,19 +354,19 @@
 				}
 			]]>
 		</method>
-    	
-    	<mainToolsLeftPanel y="20" name="_mainToolsPanel" 
-             visible="${ ((canvas.ismoderator) ? true : ((canvas.isAllowedToDraw) ? true : false )) }"/>	
         
+        <mainToolsTopPanel x="100" y="0" name="_mainToolsPanel" 
+             visible="${ ((canvas.ismoderator) ? true : ((canvas.isAllowedToDraw) ? true : false )) }"/>
+    	
         <mainToolsLeftPanelPointer y="20" name="_mainToolsLeftPanelPointer" 
              visible="${ ((canvas.ismoderator) ? false : ((canvas.isAllowedToDraw) ? false : true )) }"/>
     	
-    	<documentIconTopPanel x="100" y="0" name="_documentPanel"
+    	<documentIconTopPanel x="100" valign="bottom" name="_documentPanel"
 			 visible="${ ((canvas.ismoderator) ? true : ((canvas.isAllowedToDraw) ? true : false )) }" />
    
     </view> 
     
-    <propertyPanel name="_propertyPanel" x="0" y="${ parent.parent.height-this.height-21 }" 
+    <propertyPanel name="_propertyPanel" x="0" y="${ parent.parent.height-this.height-33 }" 
                     visible="${ ((canvas.ismoderator) ? true : ((canvas.isAllowedToDraw) ? true : false )) }">
    		<handler name="onheight" args="h">
    			this.height = h;
@@ -396,6 +374,8 @@
    			parent.panelArea.sendNewPropertyHeight(this);
    		</handler>
     </propertyPanel>
+    
+    <!--
     <view name="resetSize" x="${parent.width - 20}" width="10" height="10" >
 		<handler name="onclick">
 			this.parent.parent.setAttribute("width",this.parent.parent.initW); 
@@ -407,6 +387,7 @@
 			this.setAttribute("x",this.parent.parent.initW - 20);
 		</handler>
     </view>
+     -->
 </class>
 
 </library>

@@ -12,7 +12,7 @@
 			<method name="setText" args="txt">
 				this._ctext.setAttribute('text',txt);
 			</method>
-			<inputtext name="_ctext" width="$once{ parent.width-2 }" height="$once{ parent.height-2 }"
+			<inputtext name="_ctext" width="${ parent.width-2 }" height="$once{ parent.height-2 }"
 				x="1" y="1" bgcolor="white" >
 				<handler name="onkeyup" args="key">
 	                <![CDATA[
@@ -127,7 +127,7 @@
             <handler name="ondata" args="value">
                 <![CDATA[
                     //The onResult-Handler will be called be the rtmpconnection
-                    Debug.write("chatservice.sendMessageWithClient getValue : ",value);
+                    if ($debug) Debug.write("chatservice.sendMessageWithClient getValue : ",value);
                 ]]>
             </handler>   
         </netRemoteCallHib>

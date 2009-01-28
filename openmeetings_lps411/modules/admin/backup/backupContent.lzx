@@ -27,7 +27,7 @@
 	<!-- 383:By organisation -->
 	<labelText labelid="383" y="62" x="2" width="160" />  
 	
-    <combobox name="organistations" width="170" y="62" x="230" editable="false" >
+    <resetCombobox name="organistations" width="170" y="62" x="230" editable="false" >
     	<handler name="oninit">
     		this.getAllOrganisations.doCall();
     	</handler>
@@ -44,7 +44,7 @@
 	    		]]>
 	    	</handler>
 	    </netRemoteCallHib>	                
-    </combobox>
+    </resetCombobox>
     
 	<!-- 384:start export -->
     <simpleLabelButton labelid="384" x="410" y="62">

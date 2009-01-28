@@ -39,7 +39,7 @@
      
     <labelText labelid="52" fontsize="12" x="10" y="30" />
 
-    <combobox fontsize="12" id="availibleCams3" x="10" y="50" width="280" editable="false">
+    <resetCombobox fontsize="12" id="availibleCams3" x="10" y="50" width="280" editable="false">
         <handler name="oninit">
             <![CDATA[
             //Get all availible Cam's
@@ -62,11 +62,11 @@
             }
             ]]>
         </handler>
-    </combobox>
+    </resetCombobox>
     
     <labelText text="LABEL53" labelid="53" fontsize="12" x="10" y="80" />
 
-    <combobox fontsize="12" id="availibleMics3"  x="10" y="100" width="280" editable="false">
+    <resetCombobox fontsize="12" id="availibleMics3"  x="10" y="100" width="280" editable="false">
         <handler name="oninit">
             <![CDATA[
             //Get all availible Mic's
@@ -89,7 +89,7 @@
             }
             ]]>
         </handler>
-    </combobox>
+    </resetCombobox>
     
     <!-- Remember Me -->    
     <checkbox name="holddatainSO" text="Do not ask again" x="10" y="220">

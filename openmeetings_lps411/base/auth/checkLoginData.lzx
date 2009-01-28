@@ -55,7 +55,7 @@
     
     <labelText name="n3" labelid="111" width="200" y="84" resize="false" x="2"/>  
         
-        <combobox name="languages" width="170" y="84" x="120" editable="false" >
+        <resetCombobox name="languages" width="170" y="84" x="120" editable="false" >
             <textlistitem datapath="languagesSet:/item" text="$path{ 'name/text()' }" 
                 value="$path{ 'language_id/text()' }" />
             <handler name="oninit">
@@ -73,11 +73,11 @@
             		this.selectItem(String(canvas.thishib.userlang));
             	}
             </handler>                 
-        </combobox>
+        </resetCombobox>
 
     <labelText name="n5" text="Color-Style" width="200" y="114" resize="false" x="2"/>  
         
-        <combobox name="colors" width="170" y="114" x="120" editable="false">
+        <resetCombobox name="colors" width="170" y="114" x="120" editable="false">
 			<attribute name="initselect" value="true" type="boolean" />
             <handler name="oninit">
 				this.addItem('redorange','redorange');
@@ -134,10 +134,10 @@
 					new lz.checkLoginData(canvas.main_content._content.inner);
 				}
 			</handler>
-        </combobox>	
+        </resetCombobox>	
     
     <labelText name="nlabelquality" text="Quality" y="144" x="2" visible="true" width="140" />     
-        <combobox name="ncomboquality" width="170" y="144" x="120" editable="false" >
+        <resetCombobox name="ncomboquality" width="170" y="144" x="120" editable="false" >
 			<handler name="oninit">
 				this.addItem("best ~ 16KB upload","best");
 				this.addItem("medium ~ 10KB upload ","medium");
@@ -158,10 +158,10 @@
 			<handler name="onselect">
 				canvas.vaquality = this.getValue();
 			</handler>
-	    </combobox>
+	    </resetCombobox>
 
     <labelText name="n4" labelid="184" width="200" y="84" resize="false" x="2" visible="false" />     
-        <combobox name="organisation" width="170" y="84" x="120" editable="false" visible="false" />
+        <resetCombobox name="organisation" width="170" y="84" x="120" editable="false" visible="false" />
         
     <simpleLabelButton labelid="123" name="_register" width="120" y="$once{ parent.height-40 }" 
         visible="false" x="100">

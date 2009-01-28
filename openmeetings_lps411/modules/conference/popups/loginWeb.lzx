@@ -27,7 +27,7 @@
 		<customEdittext name="language" y="240" x="120" width="200" text="language" />
 
 	<text y="314" x="10" fontsize="10" text="roomname" />
-		<combobox name="_comobox" fontsize="10" x="120" width="200" y="314" editable="false" >
+		<resetCombobox name="_comobox" fontsize="10" x="120" width="200" y="314" editable="false" >
             <handler name="oninit">
             	this.addItem('room1','room1');
             	this.addItem('room2','room2');
@@ -36,7 +36,7 @@
             	this.addItem('room5','room5');
             	this.selectItem('room1');
             </handler>
-        </combobox>
+        </resetCombobox>
 		
 	<button name="connect" x="170" y="370" text="connect" width="120" height="20">
 		<handler name="onclick">

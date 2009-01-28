@@ -209,7 +209,7 @@
 			<!--- Settings -->
 			<view width="450">
 				<text text="Camera:" />
-				<combobox align="right" width="350" id="camDevices" editable="false">
+				<resetCombobox align="right" width="350" id="camDevices" editable="false">
 					<handler name="oninit">
 						<![CDATA[
 							//Get all availible Cam's
@@ -222,7 +222,7 @@
 							this.selectItem(String(r));  
 						]]>
 					</handler>
-				</combobox>
+				</resetCombobox>
 			</view>
 			<!--- Width -->
 			<view width="450">
@@ -274,7 +274,7 @@
 			<!--- Choose Microphone -->
 			<view width="450">
 				<text text="Microphone:" />
-				<combobox align="right" width="350" id="micDevices" editable="false">
+				<resetCombobox align="right" width="350" id="micDevices" editable="false">
 					<handler name="oninit">
 						<![CDATA[
 							//Get all availible Cam's
@@ -287,7 +287,7 @@
 							this.selectItem(String(r));  
 						]]>
 					</handler>
-				</combobox>
+				</resetCombobox>
 			</view>	
 			<!--- Audio-Rate -->
 			<view width="450">

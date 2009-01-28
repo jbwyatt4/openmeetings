@@ -31,7 +31,7 @@
 		 
 		<!-- lable: language -->
 		<labelText name="n3" labelid="227" width="200" y="200" resize="false" x="10" />     
-		<combobox name="languages" width="170" y="200" x="120" editable="false">
+		<resetCombobox name="languages" width="170" y="200" x="120" editable="false">
 	      	<netRemoteCallHib name="getLanguages" funcname="languageservice.getLanguages" remotecontext="$once{ canvas.thishib }" >      
 	            	<handler name="oninit">
 	                  	this.doCall();
@@ -49,10 +49,10 @@
 	            	]]>
 	                	</handler>
 			</netRemoteCallHib>
-		</combobox>	 
+		</resetCombobox>	 
 		 
 	    	<labelText name="n5" text="Color-Style" width="200" y="230" resize="false" x="2"/>  
-			<combobox name="colors" width="170" y="230" x="120" editable="false">
+			<resetCombobox name="colors" width="170" y="230" x="120" editable="false">
 				<attribute name="initselect" value="true" type="boolean" />
 	            	
 	            	<handler name="oninit">
@@ -95,7 +95,7 @@
 						new lz.checkLoginData(canvas.main_content._content);
 					}
 				</handler>
-		</combobox>		 
+		</resetCombobox>		 
 		
 		<!-- label: enter -->	
 		<simpleLabelButton name="connect" x="170" y="370" text="connect" labelid="228" width="120" height="20">

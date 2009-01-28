@@ -144,7 +144,7 @@
 				
 			<!--<text name="_kategory" y="10" x="35">Kategorie: </text>-->
 			<labelText name="_kategory" y="10" x="35" labelid="566" width="80"/>
-		 	<combobox name="_kategoryedit" x="${parent._kategory.width + parent._kategory.x + 30}" 
+		 	<resetCombobox name="_kategoryedit" x="${parent._kategory.width + parent._kategory.x + 30}" 
 		 			  width="220" editable="false" shownitems="5" y="${parent._kategory.y}">
 				<handler name="onvalue" args="v">						
 					parent._kategoryatr = Number(this.getValue());												
@@ -152,7 +152,7 @@
 				</handler>	
 				
 		 	<!--textitmes-->
-		 	</combobox> 
+		 	</resetCombobox> 
 		 	
 		 	<!--
 		 	<text name="_erinnerung" y="${parent._kategory.height + parent._kategory.y + 10}" 
@@ -162,7 +162,7 @@
 		 	<labelText name="_erinnerung" y="${parent._kategory.height + parent._kategory.y + 10}" 
 		 			   x="35" labelid="565" width="120" />
 		 	 	
-		 	<combobox name="_erinnerungedit" x="${parent._kategory.width + parent._kategory.x +30}" 
+		 	<resetCombobox name="_erinnerungedit" x="${parent._kategory.width + parent._kategory.x +30}" 
 		 			  width="220" editable="false" shownitems="5" y="${parent._erinnerung.y}">
 				<handler name="onvalue" args="v">						
 					if(this.getValue == 0 )
@@ -184,13 +184,13 @@
               	<textlistitem text="1 Woche vorher" value="4"/>
               	<textlistitem text="1 Monat vorher" value="5"/>-->
 		 	<!--textitmes-->
-		 	</combobox> 
+		 	</resetCombobox> 
 		 	
 		 	<!--<text name="_repetition" y="${parent._kategory.height + parent._kategory.y + 40}" 
 		 			   x="35" text="Wiederholung:" width="120" />-->
 		 		
 		 	<labelText name="_repetition" y="${parent._kategory.height + parent._kategory.y + 40}" x="35" labelid="567" width="80"/>
-		 	<combobox name="_repetitionselect" x="${parent._kategory.width + parent._kategory.x +30}" 
+		 	<resetCombobox name="_repetitionselect" x="${parent._kategory.width + parent._kategory.x +30}" 
 		 			  width="220" editable="false" shownitems="5" y="${parent._repetition.y}">
 			<!--	<handler name="onvalue" args="v">						
 					parent._erinnerung = Number(this.getValue());												
@@ -231,7 +231,7 @@
               	<textlistitem text="Monatlich" value="3"/> 
               	<textlistitem text="Jährlich" value="4"/>            
 		 	<!--textitmes-->
-		 	</combobox> 
+		 	</resetCombobox> 
 		 	
 		 	<labelText name="_location" labelid="569" width="120" y="${parent._kategory.height + parent._kategory.y + 70}" x="35"/>
 	    	

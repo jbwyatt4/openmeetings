@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <library>
 	
-<class name="imageListInnerTable" extends="view" width="$once{ parent.width-4 }" 
-    height="$once{ parent.height-4 }" 
+<class name="imageListInnerTable" extends="view" width="${ parent.width-4 }" 
+    height="${ parent.height-4 }" 
 	bgcolor="white" x="2" y="2" clip="true">
     
     <view name="_listcontent" bgcolor="$once{ canvas.basebgcolorizer }" width="$once{ parent.width }" >
