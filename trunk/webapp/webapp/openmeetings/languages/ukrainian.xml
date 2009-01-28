@@ -1828,4 +1828,31 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   <string id="607" name="useralterself_phone">
     <value>Phone</value>
   </string> 
+  <string id="608" name="participents panel">
+    <value>User is the Moderator of this Room</value>
+  </string>
+  <string id="609" name="participents panel">
+    <value>User is allowed to draw on the Whiteboard</value>
+  </string>
+  <string id="610" name="participents panel">
+    <value>(Re) Start Audio/Video or change Device Settings</value>
+  </string>
+  <string id="611" name="participents panel">
+    <value>Allow this User to draw on the Whiteboard</value>
+  </string>
+  <string id="612" name="participents panel">
+    <value>Remove ability to draw on whiteboard</value>
+  </string>
+  <string id="613" name="conferencePanels">
+    <value>Users</value>
+  </string>
+  <string id="614" name="conferencePanels">
+    <value>Files</value>
+  </string>
+  <string id="615" name="conferencePanels">
+    <value>Whiteboard</value>
+  </string>
+  <string id="616" name="conferencePanels">
+    <value>Chat</value>
+  </string>  
 </language>
