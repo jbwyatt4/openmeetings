@@ -2,8 +2,7 @@
 
 == Installation ==
 
-Current Version 0.5.2:
-[InstallationOfRelease051] (still valid for 0.5.2) , Changelog: [Release051],[Release052]
+Current Version !OpenMeetings 0.7 RC1: InstallationOpenMeetings, changes: [ReleaseNotesOM07RC1], at 27.01.2009
 
 Tips for Installation:
 
