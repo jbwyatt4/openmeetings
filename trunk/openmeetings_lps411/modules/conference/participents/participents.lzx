@@ -130,6 +130,10 @@
                     +'&sid='+canvas.sessionId;
             this._userpic.setAttribute('src',downloadurl); 
             
+            if (canvas.publicSID == this.refObj.publicSID) {
+                this._userName.setAttribute("fontstyle","bold");
+            }
+            
             this.updateIcons();
         ]]>
     </handler>
@@ -263,7 +267,7 @@
         </handler>
     </image>
     
-    <labelText x="40" text="$once{ parent.firstname+' '+parent.lastname }" />
+    <labelText name="_userName" fontsize="11" x="40" text="$once{ parent.firstname+' '+parent.lastname }" />
     
     <view name="_miniIcons" x="193" valign="bottom" height="18">
         

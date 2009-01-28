@@ -363,21 +363,26 @@
 
 <method name="setModeratorName" args="mod">
     <![CDATA[
-    this.moderatorName = mod;
-    canvas._mymod.mymodText.setAttribute('text',canvas.getLabelName(98)+' '+this.moderatorName);
-    if ($debug) Debug.write("canvas.moderatorStreamID==canvas.streamid",
-                            (canvas.moderatorStreamID==canvas.streamid),
-                            canvas.moderatorStreamID,canvas.streamid);
-    if (canvas.moderatorStreamID==canvas.streamid){
-        this.setAttribute('ismoderator',true);
-    } else {
-        this.setAttribute('ismoderator',false);
-    }
+	    this.moderatorName = mod;
+	    canvas._mymod.mymodText.setAttribute('text',canvas.getLabelName(98)+' '+this.moderatorName);
+	    if ($debug) Debug.write("canvas.moderatorStreamID==canvas.streamid",
+	                            (canvas.moderatorStreamID==canvas.streamid),
+	                            canvas.moderatorStreamID,canvas.streamid);
+	    if (canvas.moderatorStreamID==canvas.streamid){
+	        this.setAttribute('ismoderator',true);
+	    } else {
+	        this.setAttribute('ismoderator',false);
+	    }
     ]]>
 </method>
 
-<handler name="onismoderator">
-    if ($debug) Debug.write("ismoderator ###### ");
+<handler name="ondrawAllowStatus" args="drawObj">
+    <![CDATA[
+	    if ($debug) Debug.write("drawAllowStatus changes ###### ");
+	    if (drawObj.publicSID==canvas.publicSID) {
+            canvas.setAttribute("isAllowedToDraw",drawObj.canDraw);
+        }
+    ]]>
 </handler>
 
 <method name="addFolderSequence" args="foldername">
