@@ -224,7 +224,7 @@ public class MainService implements IPendingServiceCallback {
 	    				if (cons instanceof IServiceCapableConnection) {
 	    					if (!cons.equals(current)){
 	    						//log.error("sending roomDisconnect to " + cons);
-	    						RoomClient rcl = this.clientListManager.getClientByStreamId(cons.getClient().getId());
+	    						//RoomClient rcl = this.clientListManager.getClientByStreamId(cons.getClient().getId());
 	    						//Send to all connected users
 								((IServiceCapableConnection) cons).invoke("roomConnect",new Object[] { currentClient }, this);
 								//log.error("sending roomDisconnect to " + cons);
