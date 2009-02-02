@@ -44,18 +44,28 @@
 		<![CDATA[
 		if ($debug) Debug.write("drawtoArray");
 		if (this._textview._textview.getText().length!=0 && this.inittext.length==0){
-                    var scale= this.parent._drawarea.width / this.parent._drawarea.initW;
-		    var y = ( this.getAttributeRelative('y',this.refObj)-this.refObj.y+1 ) / scale;
-                    Debug.write("this.refObj.y ",this.refObj.y);
+            
+            //var scale = this.parent._drawarea.width / this.parent._drawarea.initW;
+		    var y = ( this.getAttributeRelative('y',this.refObj)-this.refObj.y+1 );
+            if ($debug) Debug.write("this.refObj.y ",this.refObj.y);
 			if ($debug) Debug.write("this.x-this.refObj.x-this.refObj.parent.x ",y);
-			var x = ( this.getAttributeRelative('x',this.refObj)-this.refObj.x+1 ) / scale;
-        	this.refObj.drawTextField(this._textview._textview.getText(),this._textview._textview.width,this._textview._textview.height,x,y);
+			var x = ( this.getAttributeRelative('x',this.refObj)-this.refObj.x+1 );
+        	this.refObj.drawTextField(this._textview._textview.getText(),
+                    this._textview._textview.width,
+                    this._textview._textview.height,x,y);
+                    
         } else if (this._textview._textview.getText().length!=0 && this.inittext.length!=0){
-        	Debug.write("edit modi ",this.initTextName);
-		    var y = (this.getAttributeRelative('y',this.refObj)-this.refObj.y+1) /scale;
+            
+        	if ($debug) Debug.write("edit modi ",this.initTextName);
+		    var y = (this.getAttributeRelative('y',this.refObj)-this.refObj.y+1);
 			if ($debug) Debug.write("this.x-this.refObj.x-this.refObj.parent.x ",y);
-			var x = (this.getAttributeRelative('x',this.refObj)-this.refObj.x+1) / scale;
-        	this.refObj.setTextFieldByName(this.initTextName,this._textview._textview.getText(),this._textview._textview.width,x,y,this._textview._textview.height);
+			var x = (this.getAttributeRelative('x',this.refObj)-this.refObj.x+1);
+            
+        	this.refObj.setTextFieldByName(this.initTextName,
+                this._textview._textview.getText(),
+                this._textview._textview.width,
+                x,y,this._textview._textview.height);
+                
         } else {
 			if ($debug) Debug.write("text smaller then 0",this._textview._textview.getText());
 		}
@@ -73,7 +83,12 @@
 		//Events would set the height to 
 		//text field default height
 		this.refObj.letterObjectClose(this);
-        var t = new lz.styleableInput(this._textview,{name:'_textview',text:this.inittext,fontstyle:this.refObj.currentlayerstyle,fontsize:this.refObj.currentlayersize,fgcolor:this.refObj.currentlayerletter});
+        var t = new lz.styleableInput(this._textview,{
+	                name:'_textview',text:this.inittext,
+	                fontstyle:this.refObj.currentlayerstyle,
+	                fontsize:this.refObj.currentlayersize,
+	                fgcolor:this.refObj.currentlayerletter
+                });
         //if ( this.inittext.length==0 ) this.setAttribute('height',40);
 		if ( this.inittext.length!=0 ) {
 		    this.refObj.edittextLetterObject.setAttribute('visible',false);
@@ -90,7 +105,12 @@
 		//Debug.write("callNew height-2");
         var h = this.getHeight();
 		this._textview._textview.destroy();
-		var t = new lz.styleableInput(this._textview,{name:'_textview',text:txxt,fontstyle:this.refObj.currentlayerstyle,fontsize:this.refObj.currentlayersize,fgcolor:this.refObj.currentlayerletter});
+		var t = new lz.styleableInput(this._textview,{
+                    name:'_textview',text:txxt,
+                    fontstyle:this.refObj.currentlayerstyle,
+                    fontsize:this.refObj.currentlayersize,
+                    fgcolor:this.refObj.currentlayerletter
+                });
         this.setHeight(h);
 	</method>
 	<method name="adjustHeight">
