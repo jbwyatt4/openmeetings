@@ -3,7 +3,7 @@
 
 	
 <class name="listPpt" extends="text" fontsize="10" height="18" width="280" resize="false"
-    bgcolor="white"
+    bgcolor="0xFFFFFF"
     text="$once{ '    '+this.filename }" >
 <!-- onmouseover="this.setAttribute('bgcolor',0x799FCE)" onmouseout="this.setAttribute('bgcolor',white)" -->
     <attribute name="filename" value="" type="string" />

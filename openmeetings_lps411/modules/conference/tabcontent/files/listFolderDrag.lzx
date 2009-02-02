@@ -4,8 +4,14 @@
 <resource name="folder_yellow_rsc" src="resources/folder.png" />
 	
 <class name="listFolderDrag" extends="text" height="18" width="294" resize="false"
-    onmouseover="this.setAttribute('bgcolor',0x799FCE)" text="$once{ '     '+this.foldername }" 
-    onmouseout="this.setAttribute('bgcolor',white)" bgcolor="white" >
+    text="$once{ '     '+this.foldername }" bgcolor="0xFFFFFF" >
+    
+    <handler name="onmouseover">
+        this.setAttribute('bgcolor',0x799FCE);
+    </handler>
+    <handler name="onmouseout">
+        this.setAttribute('bgcolor',0xFFFFFF)
+    </handler>
     
     <handler name="onmouseup">
         this.__LZFileOpenFolder();
@@ -30,7 +36,7 @@
   
 	<method name="__LZFileOpenFolder">
         canvas.addFolderSequence(this.foldername);
-        _imageslistdraw.parent.getListOfFiles.doCall();
+        canvas.currentImagesListdraw.parent.getListOfFiles.doCall();
 	</method>
 
 </class>
