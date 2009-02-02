@@ -262,6 +262,10 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 			
 			log.debug("currentScope "+currentScope);
 			
+			//Remove User AFTER cause otherwise the currentClient Object is NULL ?!
+			//OR before ?!?!
+			this.clientListManager.removeClient(currentClient.getStreamid());
+			
 			if (currentScope != null && currentScope.getConnections() != null) {
 				//Notify Users of the current Scope
 				Iterator<IConnection> it = currentScope.getConnections();
@@ -290,8 +294,7 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 				}	
 			}
 			
-			//Remove User AFTER cause otherwise the currentClient Object is NULL ?!
-			this.clientListManager.removeClient(currentClient.getStreamid());
+			
 			//If this Room is empty clear the Room Poll List
 			HashMap<String,RoomClient> rcpList = this.clientListManager.getClientListByRoom(room_id);
 			log.debug("roomLeave rcpList size: "+rcpList.size());
