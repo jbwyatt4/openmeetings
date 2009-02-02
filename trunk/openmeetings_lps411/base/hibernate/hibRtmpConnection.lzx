@@ -633,7 +633,7 @@
                 		Debug.warn("Not Used");
                         canvas.addChatHistory(value);
                     } else if(value[0]=='fileslist'){
-                        _imageslistdraw.parent.onvisible.sendEvent();
+                        canvas.currentImagesListdraw.parent.onvisible.sendEvent();
                     }
                 ]]>
             </handler>   

@@ -2,7 +2,7 @@
 <library>
 	
 <class name="baseListPresentationItem" extends="view" height="110" width="$once{ parent.width }" 
-    bgcolor="white" focusable="true">
+    bgcolor="0xFFFFFF" focusable="true">
     
     <attribute name="uploadmodul" value="" type="string"/>
     <attribute name="selectable" value="true" type="boolean" />
@@ -31,7 +31,7 @@
     <handler name="onmouseout">
         disableCurrentMouseWheelObject();
         if (!this.isselected){
-            this.setAttribute('bgcolor',white);
+            this.setAttribute('bgcolor',0xFFFFFF);
         }
     </handler>  
        

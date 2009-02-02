@@ -103,6 +103,8 @@ these properties will be overwritten by config.xml -->
 <!--- Roomname/Coursename -->
 <attribute name="currentcourseName" value="" type="string" />
 
+<attribute name="currentImagesListdraw" value="null" />
+
 <!--- 
     The Reference for a Streaming Object
     This should be removed later when the OpenLaszlo API handles

@@ -2,8 +2,14 @@
 <library>
 	
 <class name="listImageDrag" extends="view" height="50" width="280"
-    onmouseover="this.setAttribute('bgcolor',0x799FCE)" onmouseout="this.setAttribute('bgcolor',white)" 
-    bgcolor="white" >
+    bgcolor="0xFFFFFF" >
+    
+    <handler name="onmouseover">
+        this.setAttribute('bgcolor',0x799FCE);
+    </handler>
+    <handler name="onmouseout">
+        this.setAttribute('bgcolor',0xFFFFFF)
+    </handler>
 
     <attribute name="filename" value="" type="string" />
     <attribute name="filenamePure" value="" type="string" />

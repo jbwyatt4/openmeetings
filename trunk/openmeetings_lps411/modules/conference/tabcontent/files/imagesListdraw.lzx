@@ -2,10 +2,17 @@
 <library>
 <!--  -->
 
-<class name="imagesListdraw" extends="view" width="294" height="270" bgcolor="$once{ canvas.basebgcolorizer }">
+<class name="imagesListdraw" extends="view" 
+       x="0" y="40" height="${ parent.height-48 }" 
+        width="${ parent.width }" bgcolor="$once{ canvas.basebgcolorizer }">
+    
+    <handler name="oninit">
+        canvas.currentImagesListdraw = this;
+    </handler>
+    
 	<view width="${ parent.width-2 }" height="${ parent.height-2 }" x="1" y="1" bgcolor="white" />
 
-	<attribute name="uploadmodul" value="" type="string" />
+	<attribute name="uploadmodul" value="$once{ canvas.uploadmoduleimg }" type="string" />
 
     <method name="addFolder" args="foldername">
         //new lz.listFolderDrag(this._table._listcontent,{uploadmodul:this.uploadmodul,foldername:foldername});
