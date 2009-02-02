@@ -166,8 +166,11 @@
 	  			width = 160;
 	  			height = 30;
 	  		}
+            
 			this.currentletterObj = new lz.baseDrawWords(canvas,{refObj:this,x:xProp+stx,
 					y:yProp+sty,width:width,height:height});
+                    
+            if ($debug) Debug.write("currentletterObj: ",this.currentletterObj);
 		]]>
   	</method>
 	
