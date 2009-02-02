@@ -11,6 +11,27 @@
     
     <attribute name="headerText" value="Users" type="string" />
     
+    <attribute name="closeable" value="false" type="boolean" />
+    <attribute name="isopen" value="true" type="boolean" />
+    
+    <attribute name="textInset" value="10" type="number" />
+    
+    <handler name="oninit">
+        this.initHeight = this.height;
+    </handler>
+    
+    <method name="toggleopen">
+        if (this.isopen) {
+            this.setAttribute("isopen",false);
+            this.setAttribute("height",30);
+            this.content.setAttribute("visibility","hidden");
+        } else {
+            this.setAttribute("isopen",true);
+            this.setAttribute("height",this.initHeight);
+            this.content.setAttribute("visibility","visible");
+        }
+    </method>
+    
     <view name="_head" x="0" y="0" width="${ parent.width }" height="34" >
         
         <view width="${ parent.width }" height="$once{ parent.height }" 
@@ -38,7 +59,42 @@
             </method>            
         </view>
         
-        <text x="10" fontstyle="bold" fontsize="14" fgcolor="0xFFFFFF" 
+        <view x="10" y="8" visible="${ this.parent.parent.closeable }">
+            
+	        <view visible="${ !this.parent.parent.parent.isopen }" x="2" y="3" resource="explorer_button_min_rsc">
+	            <handler name="onmouseover">
+	                this.setAttribute('frame',2);
+	            </handler>
+	            <handler name="onmouseout">
+	                this.setAttribute('frame',1);
+	            </handler>
+	            <handler name="onmousedown">
+	                this.setAttribute('frame',3);
+	            </handler>  
+	            <handler name="onmouseup">
+	                this.setAttribute('frame',1);
+	                this.parent.parent.parent.toggleopen();
+	            </handler>                                  
+	        </view>
+	        <view visible="${ this.parent.parent.parent.isopen }" x="2" y="3" resource="explorer_button_max_rsc">
+	            <handler name="onmouseover">
+	                this.setAttribute('frame',2);
+	            </handler>
+	            <handler name="onmouseout">
+	                this.setAttribute('frame',1);
+	            </handler>
+	            <handler name="onmousedown">
+	                this.setAttribute('frame',3);
+	            </handler>  
+	            <handler name="onmouseup">
+	                this.setAttribute('frame',1);
+	                this.parent.parent.parent.toggleopen();
+	            </handler>                                  
+	        </view>
+            
+        </view>
+
+        <text x="$once{ parent.parent.textInset }" fontstyle="bold" fontsize="14" fgcolor="0xFFFFFF" 
               text="${ parent.parent.headerText }" valign="middle"></text>
         
     </view>  
