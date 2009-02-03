@@ -94,7 +94,9 @@
             </handler>
             <view x="2" y="1">
                 <handler name="oninit">
-                    var swfurl = 'http://'+canvas.rtmphostlocal+':'+canvas.red5httpport+'/'+canvas.webAppRootKey+'/public/emoticons/smile_btn.swf';
+                    var swfurl = 'http://'+canvas.rtmphostlocal+':'
+                            +canvas.red5httpport+'/'
+                            +canvas.webAppRootKey+'/public/emoticons/smile_btn.swf';
                     this.setSource(swfurl);
                     //if ($debug) Debug.write("CHAT SWFURL",swfurl);
                 </handler>
@@ -104,19 +106,19 @@
                 
         <simpleLabelButton x="20" y="0" name="_delete_chat_log">
             <handler name="onclick">
-                parent.clearChat.doCall();
+                parent.clearOverallChat.doCall();
             </handler>
             <view x="3" y="1" resource="delete_chat_log_rsc" />
             <labelTooltip labelid="442" />
         </simpleLabelButton>
         
-        <netRemoteCallHib name="clearChat" funcname="chatservice.clearChat" 
+        <netRemoteCallHib name="clearOverallChat" funcname="chatservice.clearOverallChat" 
             remotecontext="$once{ canvas.thishib }" > 
             <handler name="ondata" args="value">
                 <![CDATA[
                     //The onResult-Handler will be called be the rtmpconnection
-                    Debug.write("clearChat : ",value);
-                    canvas._chatcontent.doInit();   
+                    if ($debug) Debug.write("clearChat : ",value,canvas._overallchatcontent);
+                    canvas._overallchatcontent.loadContent();   
                 ]]>
             </handler>   
         </netRemoteCallHib>     
@@ -127,7 +129,7 @@
             <handler name="ondata" args="value">
                 <![CDATA[
                     //The onResult-Handler will be called be the rtmpconnection
-                    Debug.write("chatservice.sendMessageToOverallChat getValue : ",value);
+                    if ($debug) Debug.write("chatservice.sendMessageToOverallChat getValue: ",value);
                 ]]>
             </handler>   
         </netRemoteCallHib>

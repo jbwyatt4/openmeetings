@@ -7,11 +7,13 @@
 
     <handler name="oninit">
         if($debug) Debug.write("overAllChatOutput/oninit");
-        <![CDATA[
-        	this._cbtext.clearChatOutput();
-            this.getOverallChatHistory.doCall();
-        ]]>
+        this.loadContent();
     </handler>
+    
+    <method name="loadContent">
+        this._cbtext.clearChatOutput();
+        this.getOverallChatHistory.doCall();
+    </method>
     
     <netRemoteCallHib name="getOverallChatHistory" funcname="chatservice.getOverallChatHistory" 
         remotecontext="$once{ canvas.thishib }" > 

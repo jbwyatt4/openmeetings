@@ -1,13 +1,32 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library>
+    
+    <!-- private class for conferenceMenubar class -->
+    <class name="_labelMenuItem" extends="menuitem" text="labelmenulabelmenulabelmenu">
+        <attribute name="labelid" type="number" setter="setLabelId(labelid)" />
+        <method name="setLabelId" args="_labelid" >
+            this.labelid = _labelid;
+            this.setAttribute('text',canvas.getLabelName(this.labelid));
+        </method>
+    </class>    
+        
+    <!-- private class for conferenceMenubar class -->
+    <class name="_labelMenu" extends="menu" text="labelmenulabelmenulabelmenu">
+        <attribute name="labelid" type="number" setter="setLabelId(labelid)" />
+        <method name="setLabelId" args="_labelid" >
+            this.labelid = _labelid;
+            this.setAttribute('text',canvas.getLabelName(this.labelid));
+        </method>
+    </class>  
+    
 	<!---
 		Menu for public/private conference and audience room.
 		This class shows exit, moderator, file, setteings and poll menu.
 		Those menu items are connected to each command that has been declared in base/mainMethods.lzx.
 			May 24 2008 commented by onokeiji@gmail.com
-	-->
+	-->  
 	<class name="conferenceMenubar" extends="menubar" height="28" style="componentStyle">
-	   <!-- exit room -->
+	   <!-- exit room -->  
 	    <_labelMenu labelid="308" width="250">
         	<handler name="oninit">
         		<![CDATA[
@@ -47,22 +66,6 @@
 	    </_labelMenu>    
 	</class>    
 	
-	<!-- private class for conferenceMenubar class -->
-	<class name="_labelMenuItem" extends="menuitem" text="labelmenulabelmenulabelmenu">
-		<attribute name="labelid" type="number" setter="setLabelId(labelid)" />
-		<method name="setLabelId" args="_labelid" >
-			this.labelid = _labelid;
-			this.setAttribute('text',canvas.getLabelName(this.labelid));
-		</method>
-	</class>    
-	    
-	<!-- private class for conferenceMenubar class -->
-	<class name="_labelMenu" extends="menu" text="labelmenulabelmenulabelmenu">
-		<attribute name="labelid" type="number" setter="setLabelId(labelid)" />
-		<method name="setLabelId" args="_labelid" >
-			this.labelid = _labelid;
-			this.setAttribute('text',canvas.getLabelName(this.labelid));
-		</method>
-	</class>  
+	
     
 </library>
