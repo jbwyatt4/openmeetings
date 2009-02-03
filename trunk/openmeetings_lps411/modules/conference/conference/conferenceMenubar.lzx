@@ -2,7 +2,8 @@
 <library>
     
     <!-- private class for conferenceMenubar class -->
-    <class name="_labelMenuItem" extends="menuitem" text="labelmenulabelmenulabelmenu">
+    <class name="_labelMenuItem" extends="menuitem" text="labelmenulabelmenulabelmenu"
+           style="componentStyle">
         <attribute name="labelid" type="number" setter="setLabelId(labelid)" />
         <method name="setLabelId" args="_labelid" >
             this.labelid = _labelid;
@@ -11,7 +12,7 @@
     </class>    
         
     <!-- private class for conferenceMenubar class -->
-    <class name="_labelMenu" extends="menu" text="labelmenulabelmenulabelmenu">
+    <class name="_labelMenu" extends="menu" text="labelmenulabelmenulabelmenu" >
         <attribute name="labelid" type="number" setter="setLabelId(labelid)" />
         <method name="setLabelId" args="_labelid" >
             this.labelid = _labelid;
@@ -25,7 +26,7 @@
 		Those menu items are connected to each command that has been declared in base/mainMethods.lzx.
 			May 24 2008 commented by onokeiji@gmail.com
 	-->  
-	<class name="conferenceMenubar" extends="menubar" height="28" style="componentStyle">
+	<class name="conferenceMenubar" extends="menubar" height="28" style="itemStyle">
 	   <!-- exit room -->  
 	    <_labelMenu labelid="308" width="250">
         	<handler name="oninit">
