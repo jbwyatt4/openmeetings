@@ -23,6 +23,9 @@
 
 <silverstyle name="componentStyle" basecolor="0xFFFFFF" textcolor="0x000000" />
 
+<silverstyle name="itemStyle" basecolor="${ canvas.basebgcolorizer }" 
+             textcolor="0xFFFFFF" />
+
 <resource name="currentsplash" src="splash_defaultvalues.swf" />
 <resource name="configure_vidrsc" src="resources/configure.png" />
 <resource name="mainbackroundmenu_rsc" src="resources/mainbackroundmenu.png" />
