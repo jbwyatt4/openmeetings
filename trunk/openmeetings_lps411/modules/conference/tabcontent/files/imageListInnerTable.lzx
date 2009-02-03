@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <library>
 	
-<class name="imageListInnerTable" extends="view" width="${ parent.width-4 }" 
-    height="${ parent.height-4 }" 
-	bgcolor="white" x="2" y="2" clip="true">
+<class name="imageListInnerTable" extends="view" width="${ parent.width-2 }" 
+    height="${ parent.height-2 }" 
+	bgcolor="white" x="1" y="1" clip="true">
     
     <view name="_listcontent" bgcolor="$once{ canvas.basebgcolorizer }" width="$once{ parent.width }" >
         <simplelayout name="_layout" axis="y" spacing="2" inset="1" />
