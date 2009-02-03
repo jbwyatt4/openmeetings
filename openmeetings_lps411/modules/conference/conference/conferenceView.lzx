@@ -155,15 +155,15 @@
     </netRemoteCallHib>
     
     <videoBoard height="300" name="_videosView" y="2" x="2" 
-                labelid="613" width="290"/>
+                labelid="613" width="274"/>
       
-    <filesPanelStrict name="_filesPanel" width="290" x="2" 
+    <filesPanelStrict name="_filesPanel" width="274" x="2" 
                       labelid="614" y="304" height="${ canvas.height - 340 }" />
     
     <conferenceBox name="_chatPanelStrict" labelid="616" textInset="30" closeable="true" 
-       height="200" x="${ parent._filesPanel.width+4 }"  
+       height="200" x="${ parent._filesPanel.width+10 }"  
        y="${ canvas.height - (this.height+30) }" 
-       width="${ canvas.width - 296 }">
+       width="${ canvas.width - 290 }">
         <handler name="onwidth" args="w">
             if ($debug) Debug.write("ON WIDTH",w);
         </handler>
@@ -172,8 +172,8 @@
     </conferenceBox>
        
     <modernWhiteBoardPanel name="_whiteboard" labelid="615"
-        y="2" x="${ parent._filesPanel.width+4 }"
-        width="${ canvas.width - 296 }"
+        y="2" x="${ parent._filesPanel.width+10 }"
+        width="${ canvas.width - 290 }"
         height="${ canvas.height - (parent._chatPanelStrict.height+36) }" />
     
 </class>

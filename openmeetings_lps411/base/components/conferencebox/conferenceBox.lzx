@@ -23,7 +23,7 @@
     <method name="toggleopen">
         if (this.isopen) {
             this.setAttribute("isopen",false);
-            this.setAttribute("height",30);
+            this.setAttribute("height",40);
             this.content.setAttribute("visibility","hidden");
         } else {
             this.setAttribute("isopen",true);

@@ -3,7 +3,7 @@
 <!--  -->
 
 <class name="imagesListdraw" extends="view" 
-       x="0" y="40" height="${ parent.height-48 }" 
+       x="0" y="40" height="${ parent.height-40 }" 
         width="${ parent.width }" bgcolor="$once{ canvas.basebgcolorizer }">
     
     <handler name="oninit">
