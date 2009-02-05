@@ -155,7 +155,7 @@ public class ChatService implements IPendingServiceCallback {
 			Long room_id = currentClient.getRoom_id();
 			
 			Long chatroom = room_id;
-			log.error("GET CHATROOM: "+chatroom);
+			log.debug("### GET CHATROOM: "+chatroom);
 			
 			List<HashMap<String,Object>> myChatList = myChats.get(chatroom);
 			myChatList = new LinkedList<HashMap<String,Object>>();
