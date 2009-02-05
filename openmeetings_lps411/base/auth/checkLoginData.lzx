@@ -160,7 +160,10 @@
 			</handler>
 	    </resetCombobox>
 
-    <labelText name="n4" labelid="184" width="200" y="84" resize="false" x="2" visible="false" />     
+    <labelText name="organisation_label_info" labelid="617" width="350" 
+               multiline="true" y="22" resize="false" x="2" visible="false" />     
+    
+    <labelText name="organisation_label" labelid="184" width="200" y="84" resize="false" x="2" visible="false" />     
         <resetCombobox name="organisation" width="170" y="84" x="120" editable="false" visible="false" />
         
     <simpleLabelButton labelid="123" name="_register" width="120" y="$once{ parent.height-40 }" 
@@ -265,7 +268,8 @@
 						parent.colors.setAttribute('visible',false);
 						parent._register.setAttribute('visible',false);
 						parent.b2.setAttribute('visible',false);
-						parent.n4.setAttribute('visible',true);
+                        parent.organisation_label_info.setAttribute('visible',true);
+						parent.organisation_label.setAttribute('visible',true);
 						parent.organisation.setAttribute('visible',true);
 						parent.b3.setAttribute('visible',true);
 						parent.nlabelquality.setAttribute('visible',false);

@@ -37,6 +37,7 @@
         		]]>
         	</handler>	    	
 	        <_labelMenuItem labelid="309" command="cmd_quit" />
+            <_labelMenuItem labelid="213" command="cmd_invitation" />
 	    </_labelMenu>
 	    <!-- moderator menu -->
 	    <_labelMenu labelid="301" width="250">
