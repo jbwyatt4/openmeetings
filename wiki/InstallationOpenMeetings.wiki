@@ -1,10 +1,10 @@
-#summary Installation of 0.7 RC1
+#summary Installation of 0.7 RC2
 #labels Featured
 
-  * [ReleaseNotesOM07RC1 Release Notes]
-  * [http://openmeetings.googlecode.com/files/openmeetings_0_7_rc1.zip OpenMeetings incl. Red5]
-  * [http://openmeetings.googlecode.com/files/openmeetings_0_7_rc1_wo.zip OpenMeetings Webapp only]
-  * [http://download.openmeetings.de/vmware_openmeetings_moodlepack_r1852.tgz VMWare Image (incl. Moodle Integration)]
+  * [ReleaseNotesOM07RC2 Release Notes]
+  * [http://openmeetings.googlecode.com/files/openmeetings_0_7_rc2.zip OpenMeetings incl. Red5]
+  * [http://openmeetings.googlecode.com/files/openmeetings_07_rc2_wo.zip OpenMeetings Webapp only]
+  * [http://download.openmeetings.de/vmware_openmeetings_moodlepack_r1852.tgz VMWare Image (incl. Moodle Integration)] (it includes RC1 NOT RC2)
 
 = System Requirements =
 
@@ -23,7 +23,7 @@
   * MAC OSx / Linux Users => Get Flash Player 10 Beta!! It fixes the CPU Problem for Streaming Video => http://labs.adobe.com/technologies/flashplayer10/
 
 = Install !OpenMeetings =
-  # Download [http://openmeetings.googlecode.com/files/openmeetings_0_7_rc1.zip OpenMeetings including Red5] (recommended) or download the two packages separated [http://openmeetings.googlecode.com/files/openmeetings_0_7_rc1_wo.zip OpenMeetings Webapp only] and [http://openmeetings.googlecode.com/files/red5_snapshot_r3200.zip Red5 Snapshot]. If you download the two packages you have to place the !OpenMeetings webapp into the webapp-folder of Red5.
+  # Download [http://openmeetings.googlecode.com/files/openmeetings_0_7_rc2.zip OpenMeetings including Red5] (recommended) or download the two packages separated [http://openmeetings.googlecode.com/files/openmeetings_07_rc2_wo.zip OpenMeetings Webapp only] and [http://openmeetings.googlecode.com/files/red5_snapshot_r3200.zip Red5 Snapshot]. If you download the two packages you have to place the !OpenMeetings webapp into the webapp-folder of Red5.
   # Unpack it (Please make sure that you use an up-to-date unzip-software) (and copy it somewhere in you system, do not start it from your Windows Desktop)
   # you have now a folder openmeetings_0_7_rc1
   # Prepare Database Settings - go to openmeetings_0_7_rc1/webapps/openmeetings/conf/hibernate.cfg.xml 
