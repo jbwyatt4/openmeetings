@@ -1862,5 +1862,8 @@ languagesディレクトリにコピーして、
   </string>
   <string id="616" name="conferencePanels">
     <value>Chat</value>
-  </string>  
+  </string> 
+  <string id="617" name="organization choose info">
+    <value>Your account is assigned to multiple Organizations. Please choose one for this Session.</value>
+  </string>   
 </language>
