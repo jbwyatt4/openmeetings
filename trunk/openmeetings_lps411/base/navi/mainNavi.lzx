@@ -21,29 +21,27 @@
 
     <handler name="onmouseover">
         if (!this.selected){
-            this._ctext.destroy();
-            new lz.textBoxSubBlank(this,{name:'_ctext','fgcolor':'0x000000'});
+            this._bg.setAttribute("visibility","visible");
         }
     </handler>
     <handler name="onmouseout">
         if (!this.selected){
-            this._ctext.destroy();
-            new lz.textBoxSubBlank(this,{name:'_ctext'});
+            this._bg.setAttribute("visibility","hidden");
         }
     </handler>
 
     <method name="resetItem">
         this.selected = false;
-        this._ctext.destroy();
-        new lz.textBoxSubBlank(this,{name:'_ctext'});
+        this._bg.setAttribute("visibility","hidden");
     </method>
 
+    <view name="_bg" visibility="hidden" width="${ parent.width }" 
+          bgcolor="0xFFFFFF" opacity="0.2" height="30" />
     <view width="1" height="10" y="13" bgcolor="0xFFFFFF" x="${ parent.width-1 }" />
     <textBoxSubBlank name="_ctext" />
 
     <handler name="onclick">
-        this._ctext.destroy();
-        new lz.textBoxSubBlank(this,{'fgcolor':'0xFF3300'});
+        this._bg.setAttribute("visibility","visible");
         if (this.isleaf) loadContent(this,null,null);
         this.selected=true;
         parent.parent.parent.setSubItem(this);

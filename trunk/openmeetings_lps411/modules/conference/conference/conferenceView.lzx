@@ -26,7 +26,7 @@
                     
 </class>
 
-<class name="modernWhiteBoardPanel" extends="conferenceBox" >
+<class name="modernWhiteBoardPanel" extends="conferenceBox" labelid="615">
     
     <newWhiteBoard name="_whiteboard" y="34" x="1">
         <handler name="onsharedMessage" args="obj">

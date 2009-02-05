@@ -266,7 +266,13 @@
             	//The onResult-Handler will be called be the rtmpconnection
 				if ($debug) Debug.write("getRoomById: ",value);
 				if (value!=null){
-					canvas.setRoomValues(value.roomtype.roomtypes_id,value.rooms_id,value);
+                    if (canvas.directUserLogin) {
+                        canvas.directRoomObj = value;
+                        canvas.thishib.loaderVar.close();
+                        
+                    } else {
+					   canvas.setRoomValues(value.roomtype.roomtypes_id,value.rooms_id,value);
+                    }
 				}
             ]]>
         </handler>   
@@ -294,7 +300,7 @@
 		            	parent.getRoomTypes.doCall();
 		            } else {
 		            	parent.initlanguageLoaded=true;
-					    if (canvas.isinitRoomDirect || canvas.remoteUserLogin){
+					    if (canvas.isinitRoomDirect || canvas.remoteUserLogin || canvas.directUserLogin){
 					    	canvas.thishib.loaderVar.setProgress();
 					        if($debug) Debug.write("isinitRoomDirect or remoteUserLogin is true");
 					        parent.markSessionAsLogedIn.doCall();
@@ -312,15 +318,21 @@
 		<netparam><method name="getValue">return canvas.sessionId;</method></netparam>
         <handler name="ondata" args="value">
             //The onResult-Handler will be called be the rtmpconnection
-            Debug.write("markSessionAsLogedIn1 ",value);
-            Debug.write("markSessionAsLogedIn2 ",canvas.sessionId);
-            Debug.write("markSessionAsLogedIn3 ",canvas.initroomid);
-            Debug.write("markSessionAsLogedIn4 ",canvas.isinitRoomDirect);
-            Debug.write("markSessionAsLogedIn5 ",canvas.remoteUserLogin);
+            if ($debug) Debug.write("markSessionAsLogedIn1 ",value);
+            if ($debug) Debug.write("markSessionAsLogedIn2 ",canvas.sessionId);
+            if ($debug) Debug.write("markSessionAsLogedIn3 ",canvas.initroomid);
+            if ($debug) Debug.write("markSessionAsLogedIn4 ",canvas.isinitRoomDirect);
+            if ($debug) Debug.write("markSessionAsLogedIn5 ",canvas.remoteUserLogin);
+            if ($debug) Debug.write("markSessionAsLogedIn6 ",canvas.directUserLogin);
+            if ($debug) Debug.write("markSessionAsLogedIn7 ",canvas.directRoomId);
             if (canvas.isinitRoomDirect){
             	parent.getInvitationByHash.doCall();   
             } else if (canvas.remoteUserLogin) {
             	parent.loginUserByRemote.doCall();   
+            } else if (canvas.directUserLogin) {
+                //show Nick Name or Password Protection Dialog
+                canvas.initroomid = Number(canvas.directRoomId);
+                parent.getRoomById.doCall();
             }
         </handler>  
     </netRemoteCallHib> 
@@ -471,7 +483,7 @@
 						if ($debug) Debug.write("############## editRecordStream 3");
 						new lz.editRecordStream(canvas.main_content._content.inner);
 					} else if (value==null){
-						Debug.write("############   value IS NULL: ",this.parent.modus);
+						if ($debug) Debug.write("############   value IS NULL: ",this.parent.modus);
 						//no moderator availible
 						//check if this is conferenceViewmodus
 						if (this.parent.modus == "conference"){

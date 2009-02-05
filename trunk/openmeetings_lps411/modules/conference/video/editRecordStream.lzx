@@ -22,7 +22,7 @@
     <attribute name="chosenMic" value="null" />
     <attribute name="chosenSetting" value="null" />
     <attribute name="currentClient" value="null" />
-
+    
     <attribute name="isSyncUpdate" value="false" type="boolean" />
 	<handler name="oninit">
 		<![CDATA[
@@ -145,7 +145,10 @@
 	    			break;	
 	    		case "n":
 	    			if ($debug) Debug.write("Do not Publish A/V");
-                    this.myvideocontainer.setAttribute("visibility","hidden");
+                    //Prevent from Hiding the Box in Event Modus
+                    if (canvas.thishib.modus == "conference") {
+                        this.myvideocontainer.setAttribute("visibility","hidden");
+                    }
 	    			break;
 	    		default:
 	    			if ($debug) Debug.warn("no valid device Setup chosen");

@@ -13,7 +13,8 @@
     <command id="cmd_editBoardSettings" onselect="canvas.doActionmenu('editBoardSettings')" key="['ALT','Shift','2']"/>   
     <command id="cmd_quit" onselect="canvas.doActionmenu('quit')" key="['ALT','Shift','E']"/> 
     <command id="cmd_browser_open" onselect="canvas.doActionmenu('browser_open')" key="['ALT','Shift','B']"/>   
-    <command id="cmd_browser_close" onselect="canvas.doActionmenu('browser_close')" key="['ALT','Shift','b']"/>   
+    <command id="cmd_browser_close" onselect="canvas.doActionmenu('browser_close')" key="['ALT','Shift','b']"/> 
+    <command id="cmd_invitation" onselect="canvas.doAction('invitation')" /> 
 	    
 	<dataset type="http" name="languageData" request="false" 
 	    src="${ canvas.currentlanguage+'.xml' }" proxied="false">
@@ -105,6 +106,12 @@
 			canvas.initroomid = initroomid;
 			canvas.remoteUserSid = sid;
 		}
+        
+        var directRoomId = lz.Browser.getInitArg('directRoomId');
+        if (directRoomId != undefined) {
+            canvas.directUserLogin = true;
+            canvas.directRoomId = directRoomId;
+        }
 		
 		var language = lz.Browser.getInitArg('language');
 		if (language != undefined) {
@@ -374,6 +381,12 @@
 	        this.setAttribute('ismoderator',false);
 	    }
     ]]>
+</method>
+
+<method name="doAction" args="action">
+    if (action == "invitation") {
+        new lz.inviteMainWindow(canvas.main_content._content.inner);
+    }
 </method>
 
 <handler name="ondrawAllowStatus" args="drawObj">

@@ -95,7 +95,7 @@
 </view>  
   
 <!-- View for Navigation-bar and App-name -->
-<view name="_mainbgcontentNavi" x="0" y="0" bgcolor="${ canvas.baseMousecolorizer }" clip="true"
+<view name="_mainbgcontentNavi" x="0" y="0" bgcolor="${ canvas.basebgcolorizer }" clip="true"
     width="100%" height="${ canvas.naviHeight }" visibility="hidden">
     <text id="mainBaseText" x="10" y="10"
         fgcolor="white" fontsize="20" fontstyle="bold">

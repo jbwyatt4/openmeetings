@@ -212,6 +212,11 @@ these properties will be overwritten by config.xml -->
 <attribute name="isinitRoomDirect" value="false" type="boolean" />
 <attribute name="isinitRoomObject" value="null" /> 
 
+<!-- attributes for direct room access via direct link -->
+<attribute name="directUserLogin" value="false" type="boolean" />
+<attribute name="directRoomId" value="1" type="number" />
+<attribute name="directRoomObj" value="null" />
+
 <!--- attributes for direct room access via remoteUser -->
 <attribute name="remoteUserLogin" value="false" type="boolean" />
 <attribute name="remoteUserSid" value="" type="string" />
