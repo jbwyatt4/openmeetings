@@ -1,6 +1,22 @@
 #summary former news
 
-
+  * !OpenMeetings 0.7 RC1 released InstallationOpenMeetings, changes: [ReleaseNotesOM07RC1], at 27.01.2009
+  * dev-news ReworkRoadMapApplicationAdapter, at 13.01.2009
+  * new demo server, with new translation (Thai, Turkey, Ukranian) + better conversion performance, at 11.01.2008
+  * look how good we are [http://wagner-sebastian.com/wordpress/2009/01/08/personycom-is-using-openmeetings-screen-sharing-solution/ persony.com is using OpenMeetings] at 08.01.2009
+  * !OpenMeetings Demo server updated to r1751 at 31.12.2008 .. and fixed port settings on 05.01.2009 (probably need to clear your browser cache if you get 404errors or missing images) 
+  * !OpenMeetings integration into [http://www.cooperation-iws.eu Cooperation-iws 0.7.0.] by Olivier, at 08.12.2008
+  * !OpenMeetings at Didacta 2009 [http://wagner-sebastian.com/wordpress/2008/12/01/openmeetings-goes-didacta/ OpenMeetings goes Didacta], at 01.12.2008
+  * Demo Server updated to r1614, for fixing Issue 545, Issue 546, at 13.10.2008
+  * Demo Server updated to Red5 0.8.x (SVNr3211) and !OpenMeetings r1609, at 13.10.2008
+  * Sources Updated to Red5-08x and !OpenLaszlo 4.1.1, see [BuildSources], at 07.10.2008
+  * French version of Installation Instructions http://flash.54n.free.fr/?/Root/Debian/OpenMeetings-Installation, at 06.10.2008
+  * Up-To Date Diagrams for Database Scheme, see: DatabaseScheme, at 30.09.2008
+  * Added VMWare Image including Moodle and !OpenMeetings Plugin, see [VMWareImageMoodlePackOM052], at 25.09.2008
+  * Released !OpenMeetings 0.5.2, see [Release052], at 25.09.2008
+  * !OpenMeetings Demo Portal Updated, at 21.09.2008
+  * !OpenMeetings-Plugin for LMS [http://www.atutor.ca ATutor], at [http://www.atutor.ca/atutor/modules/index.php ATutor-Plugin Website], at 12.09.2008
+  * Flushed Demo Server, at 21.08.2008
   * Join the Planning for the [http://groups.google.com/group/openlaszlo-europe/browse_thread/thread/c8e658dc062a6daa OpenLaszlo Meeting 2008 in Europe] to meet me and other !OpenLaszlo devs (19.08.2008)
   * Cleared Demo Server, at 28.07.2008
   * Article (Section !NetAdmin) in French Linux Mag in July/August, see [http://groups.google.com/group/openmeetings-user/browse_thread/thread/4ea22a2cf81b1efc Group-News] and the [http://www.ed-diamond.com/feuille_lmag107/index.html screenshot of the mag] at 08.07.2008
