@@ -59,24 +59,6 @@ http://www.nusphere.com
  * 
  */
 
-/* load classes
-
-// necessary classes
-require_once('class.soapclient.php');
-require_once('class.soap_val.php');
-require_once('class.soap_parser.php');
-require_once('class.soap_fault.php');
-
-// transport classes
-require_once('class.soap_transport_http.php');
-
-// optional add-on classes
-require_once('class.xmlschema.php');
-require_once('class.wsdl.php');
-
-// server class
-require_once('class.soap_server.php');*/
-
 // class variable emulation
 // cf. http://www.webkreator.com/php/techniques/php-static-class-variables.html
 $GLOBALS['_transient']['static']['nusoap_base']->globalDebugLevel = 9;
@@ -1078,7 +1060,7 @@ class nusoap_fault_om extends nusoap_base_om {
 /**
  * Backward compatibility
  */
-class soap_fault extends nusoap_fault_om {
+class soap_fault_om extends nusoap_fault_om {
 }
 
 ?><?php
@@ -1094,7 +1076,7 @@ class soap_fault extends nusoap_fault_om {
 * @version  $Id: nusoap.php,v 1.114 2007/11/06 15:17:46 snichol Exp $
 * @access   public
 */
-class nusoap_xmlschema extends nusoap_base_om  {
+class nusoap_xmlschema_om extends nusoap_base_om  {
 	
 	// files
 	var $schema = '';
@@ -1133,7 +1115,7 @@ class nusoap_xmlschema extends nusoap_base_om  {
 	* @param	string $namespaces namespaces defined in enclosing XML
 	* @access   public
 	*/
-	function nusoap_xmlschema($schema='',$xml='',$namespaces=array()){
+	function nusoap_xmlschema_om($schema='',$xml='',$namespaces=array()){
 		parent::nusoap_base_om();
 		$this->debug('nusoap_xmlschema class instantiated, inside constructor');
 		// files
@@ -2013,7 +1995,7 @@ class nusoap_xmlschema extends nusoap_base_om  {
 /**
  * Backward compatibility
  */
-class XMLSchema extends nusoap_xmlschema {
+class XMLSchema_om extends nusoap_xmlschema_om {
 }
 
 ?><?php
@@ -2031,7 +2013,7 @@ class XMLSchema extends nusoap_xmlschema {
 * @version  $Id: nusoap.php,v 1.114 2007/11/06 15:17:46 snichol Exp $
 * @access   public
 */
-class soapval extends nusoap_base_om {
+class soapval_om extends nusoap_base_om {
 	/**
 	 * The XML element name
 	 *
@@ -2086,7 +2068,7 @@ class soapval extends nusoap_base_om {
 	* @param	mixed $attributes associative array of attributes to add to element serialization
 	* @access   public
 	*/
-  	function soapval($name='soapval',$type=false,$value=-1,$element_ns=false,$type_ns=false,$attributes=false) {
+  	function soapval_om($name='soapval',$type=false,$value=-1,$element_ns=false,$type_ns=false,$attributes=false) {
 		parent::nusoap_base_om();
 		$this->name = $name;
 		$this->type = $type;
@@ -2133,7 +2115,7 @@ class soapval extends nusoap_base_om {
 * @version  $Id: nusoap.php,v 1.114 2007/11/06 15:17:46 snichol Exp $
 * @access public
 */
-class soap_transport_http extends nusoap_base_om {
+class soap_transport_http_om extends nusoap_base_om {
 
 	var $url = '';
 	var $uri = '';
@@ -2178,7 +2160,7 @@ class soap_transport_http extends nusoap_base_om {
 	* @param boolean $use_curl Whether to try to force cURL use
 	* @access public
 	*/
-	function soap_transport_http($url, $curl_options = NULL, $use_curl = false){
+	function soap_transport_http_om($url, $curl_options = NULL, $use_curl = false){
 		parent::nusoap_base_om();
 		$this->debug("ctor url=$url use_curl=$use_curl curl_options:");
 		$this->appendDebug($this->varDump($curl_options));
@@ -3436,7 +3418,7 @@ class soap_transport_http extends nusoap_base_om {
 * @version  $Id: nusoap.php,v 1.114 2007/11/06 15:17:46 snichol Exp $
 * @access   public
 */
-class nusoap_server extends nusoap_base_om {
+class nusoap_server_om extends nusoap_base_om {
 	/**
 	 * HTTP headers of request
 	 * @var array
@@ -3593,7 +3575,7 @@ class nusoap_server extends nusoap_base_om {
     * @param mixed $wsdl file path or URL (string), or wsdl instance (object)
 	* @access   public
 	*/
-	function nusoap_server($wsdl=false){
+	function nusoap_server_om($wsdl=false){
 		parent::nusoap_base_om();
 		// turn on debugging?
 		global $debug;
@@ -4032,7 +4014,7 @@ class nusoap_server extends nusoap_base_om {
 	function serialize_return() {
 		$this->debug('Entering serialize_return methodname: ' . $this->methodname . ' methodURI: ' . $this->methodURI);
 		// if fault
-		if (isset($this->methodreturn) && ((get_class($this->methodreturn) == 'soap_fault') || (get_class($this->methodreturn) == 'nusoap_fault_om'))) {
+		if (isset($this->methodreturn) && ((get_class($this->methodreturn) == 'soap_fault_om') || (get_class($this->methodreturn) == 'nusoap_fault_om'))) {
 			$this->debug('got a fault object from method');
 			$this->fault = $this->methodreturn;
 			return;
@@ -4458,7 +4440,7 @@ class nusoap_server extends nusoap_base_om {
             $schemaTargetNamespace = $namespace;
         }
         
-		$this->wsdl = new wsdl;
+		$this->wsdl = new wsdl_om;
 		$this->wsdl->serviceName = $serviceName;
         $this->wsdl->endpoint = $endpoint;
 		$this->wsdl->namespaces['tns'] = $namespace;
@@ -4467,7 +4449,7 @@ class nusoap_server extends nusoap_base_om {
 		if ($schemaTargetNamespace != $namespace) {
 			$this->wsdl->namespaces['types'] = $schemaTargetNamespace;
 		}
-        $this->wsdl->schemas[$schemaTargetNamespace][0] = new nusoap_xmlschema('', '', $this->wsdl->namespaces);
+        $this->wsdl->schemas[$schemaTargetNamespace][0] = new nusoap_xmlschema_om('', '', $this->wsdl->namespaces);
         if ($style == 'document') {
 	        $this->wsdl->schemas[$schemaTargetNamespace][0]->schemaInfo['elementFormDefault'] = 'qualified';
         }
@@ -4489,7 +4471,7 @@ class nusoap_server extends nusoap_base_om {
 /**
  * Backward compatibility
  */
-class soap_server extends nusoap_server {
+class soap_server_om extends nusoap_server_om {
 }
 
 ?><?php
@@ -4505,7 +4487,7 @@ class soap_server extends nusoap_server {
 * @version  $Id: nusoap.php,v 1.114 2007/11/06 15:17:46 snichol Exp $
 * @access public 
 */
-class wsdl extends nusoap_base_om {
+class wsdl_om extends nusoap_base_om {
 	// URL or filename of the root of this WSDL
     var $wsdl; 
     // define internal arrays of bindings, ports, operations, messages, etc.
@@ -4562,7 +4544,7 @@ class wsdl extends nusoap_base_om {
 	 * @param boolean $use_curl try to use cURL
      * @access public 
      */
-    function wsdl($wsdl = '',$proxyhost=false,$proxyport=false,$proxyusername=false,$proxypassword=false,$timeout=0,$response_timeout=30,$curl_options=null,$use_curl=false){
+    function wsdl_om($wsdl = '',$proxyhost=false,$proxyport=false,$proxyusername=false,$proxypassword=false,$timeout=0,$response_timeout=30,$curl_options=null,$use_curl=false){
 		parent::nusoap_base_om();
 		$this->debug("ctor wsdl=$wsdl timeout=$timeout response_timeout=$response_timeout");
         $this->proxyhost = $proxyhost;
@@ -4700,7 +4682,7 @@ class wsdl extends nusoap_base_om {
         if (isset($wsdl_props['scheme']) && ($wsdl_props['scheme'] == 'http' || $wsdl_props['scheme'] == 'https')) {
             $this->debug('getting WSDL http(s) URL ' . $wsdl);
         	// get wsdl
-	        $tr = new soap_transport_http($wsdl, $this->curl_options, $this->use_curl);
+	        $tr = new soap_transport_http_om($wsdl, $this->curl_options, $this->use_curl);
 			$tr->request_method = 'GET';
 			$tr->useSOAPAction = false;
 			if($this->proxyhost && $this->proxyport){
@@ -4799,7 +4781,7 @@ class wsdl extends nusoap_base_om {
         	$this->debug('Parsing WSDL schema');
             // $this->debug("startElement for $name ($attrs[name]). status = $this->status (".$this->getLocalPart($name).")");
             $this->status = 'schema';
-            $this->currentSchema = new nusoap_xmlschema('', '', $this->namespaces);
+            $this->currentSchema = new nusoap_xmlschema_om('', '', $this->namespaces);
             $this->currentSchema->schemaStartElement($parser, $name, $attrs);
             $this->appendDebug($this->currentSchema->getDebug());
             $this->currentSchema->clearDebug();
@@ -7482,7 +7464,7 @@ class nusoap_client_om extends nusoap_base_om  {
 	 */
 	function loadWSDL() {
 		$this->debug('instantiating wsdl class with doc: '.$this->wsdlFile);
-		$this->wsdl =& new wsdl('',$this->proxyhost,$this->proxyport,$this->proxyusername,$this->proxypassword,$this->timeout,$this->response_timeout,$this->curl_options,$this->use_curl);
+		$this->wsdl =& new wsdl_om('',$this->proxyhost,$this->proxyport,$this->proxyusername,$this->proxypassword,$this->timeout,$this->response_timeout,$this->curl_options,$this->use_curl);
 		$this->wsdl->setCredentials($this->username, $this->password, $this->authtype, $this->certRequest);
 		$this->wsdl->fetchWSDL($this->wsdlFile);
 		$this->checkWSDL();
@@ -7531,7 +7513,7 @@ class nusoap_client_om extends nusoap_base_om  {
 				if($this->persistentConnection == true && is_object($this->persistentConnection)){
 					$http =& $this->persistentConnection;
 				} else {
-					$http = new soap_transport_http($this->endpoint, $this->curl_options, $this->use_curl);
+					$http = new soap_transport_http_om($this->endpoint, $this->curl_options, $this->use_curl);
 					if ($this->persistentConnection) {
 						$http->usePersistentConnection();
 					}
