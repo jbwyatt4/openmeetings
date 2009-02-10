@@ -163,9 +163,12 @@ public class Install extends VelocityViewServlet {
 					
 					String crypt_ClassName = httpServletRequest.getParameter("crypt_ClassName");
 					
+					String ldap_auth_path = httpServletRequest.getParameter("ldap_config_path");
+					String screen_viewer = httpServletRequest.getParameter("screen_viewer");
+					
 					log.error("step 0+ start init with values. "+username+" ***** "+useremail+" "+orgname+" "+configdefault+" "+configreferer+" "+
 						configsmtp+" "+configmailuser+" "+configmailpass+" "+configdefaultLang + " " +
-						swf_path+" "+im_path);
+						swf_path+" "+im_path + " " + ldap_auth_path + " " + screen_viewer);
 					
 					String filePath = getServletContext().getRealPath("/")+ImportInitvalues.languageFolderName;
 					
@@ -179,7 +182,7 @@ public class Install extends VelocityViewServlet {
 					ImportInitvalues.getInstance().loadConfiguration(crypt_ClassName, configdefault, configsmtp, configsmtpport, 
 									configreferer, configmailuser, configmailpass, configdefaultLang, 
 									swf_path, im_path, url_feed, url_feed2,
-									sendEmailAtRegister, sendEmailWithVerficationCode, default_export_font);
+									sendEmailAtRegister, sendEmailWithVerficationCode, default_export_font, ldap_auth_path, screen_viewer);
 					ImportInitvalues.getInstance().loadInitUserAndOrganisation(username, userpass, useremail, orgname);
 					ImportInitvalues.getInstance().loadDefaultRooms();
 					

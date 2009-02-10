@@ -1,5 +1,6 @@
 package org.openmeetings.servlet.outputhandler;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -7,12 +8,15 @@ import java.util.LinkedHashMap;
 import http.utils.multipartrequest.MultipartRequest;
 import http.utils.multipartrequest.ServletMultipartRequest;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+import javax.imageio.ImageIO;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -21,14 +25,21 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.openmeetings.app.data.basic.Configurationmanagement;
 import org.openmeetings.app.data.basic.Sessionmanagement;
 import org.openmeetings.app.data.user.Usermanagement;
 import org.openmeetings.app.data.user.dao.UsersDaoImpl;
+import org.openmeetings.app.hibernate.beans.basic.Configuration;
 import org.openmeetings.app.hibernate.beans.recording.RoomClient;
+import org.openmeetings.utils.image.ImageUtility;
+import org.openmeetings.utils.image.ZipUtility;
 import org.openmeetings.utils.stringhandlers.StringComparer;
 
 import org.openmeetings.app.remote.red5.ClientListManager;
 import org.openmeetings.app.remote.red5.ScopeApplicationAdapter;
+
+import com.sun.image.codec.jpeg.JPEGCodec;
+import com.sun.image.codec.jpeg.JPEGImageEncoder;
 
 public class ScreenServlet extends HttpServlet {
 	
@@ -45,8 +56,7 @@ public class ScreenServlet extends HttpServlet {
 	protected void service(HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) throws ServletException,
 			IOException {
-		try {
-			System.out.println("ScreenServlet Call");
+		
 			
 			if (httpServletRequest.getContentLength() > 0) {
 			
@@ -76,8 +86,32 @@ public class ScreenServlet extends HttpServlet {
 					domain = "default";
 				}
 				log.debug("domain: " + domain);
+				
+				ServletMultipartRequest upload = new ServletMultipartRequest(httpServletRequest, 104857600); // max 100 mb
 	
 				Long users_id = Sessionmanagement.getInstance().checkSession(sid);
+				Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
+			
+				// Switch between scharers
+				Configuration c = Configurationmanagement.getInstance().getConfKey(user_level, "screen_viewer");
+				
+				if(c == null || c.getConf_value().equals("0")){
+					doStandardSharing(sid, publicSID, room, domain, upload, httpServletResponse);
+				}
+				else{
+					doJrDeskTopSharing(sid, publicSID, room, domain, upload, httpServletResponse);
+				}
+					
+			}
+
+	}
+	
+	
+	private void doStandardSharing(String sid, String publicSID, String room, String domain, ServletMultipartRequest upload, HttpServletResponse httpServletResponse) throws ServletException,IOException{
+		
+		try {
+			System.out.println("ScreenServlet Call");
+			Long users_id = Sessionmanagement.getInstance().checkSession(sid);
 				Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
 				
 				if (user_level > 0) {
@@ -137,8 +171,7 @@ public class ScreenServlet extends HttpServlet {
 	
 						log.debug("#### UploadHandler working_dir: "+ working_dir);
 						
-						ServletMultipartRequest upload = new ServletMultipartRequest(httpServletRequest, 104857600); // max 100 mb
-	
+					
 						InputStream is = upload.getFileContents("Filedata");
 	
 						//trim whitespace
@@ -201,13 +234,159 @@ public class ScreenServlet extends HttpServlet {
 //				String returnValue = "ok";
 //				out.write(returnValue.getBytes());
 //				
-			}
+			
 		} catch (Exception e) {
 			log.error("ee " + e);
 			e.printStackTrace();
 			throw new ServletException(e);
 		}
 
+		
+	}
+	
+	
+	private void doJrDeskTopSharing(String sid, String publicSID, String room, String domain, ServletMultipartRequest upload, HttpServletResponse httpServletResponse) throws ServletException,IOException{
+		
+		try{
+			
+			Long users_id = Sessionmanagement.getInstance().checkSession(sid);
+			Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
+		
+			if (user_level > 0) {
+			
+				//check if this Client is still inside the Room
+				boolean userIsInRoom = false;
+				boolean doProcess = false;
+			
+				HashMap<String, RoomClient> clientList = ClientListManager.getInstance().getClientList();
+				for (Iterator iter = clientList.keySet().iterator();iter.hasNext();) {
+					RoomClient rcl = clientList.get(iter.next());
+					if (rcl.getPublicSID().equals(publicSID)) {
+						log.debug("found RoomClient");
+						if (rcl.getRoom_id() != null && rcl.getRoom_id().toString().equals(room)) {
+							log.debug("User is inside Room");
+							userIsInRoom = true;
+							doProcess = true;
+						} else {
+							log.debug("User already left room, block Screen - logical Room Leave");
+							OutputStream out = httpServletResponse.getOutputStream();
+							String returnValue = "close";
+							out.write(returnValue.getBytes());
+						
+						}
+					}
+				}
+			
+				if (!userIsInRoom) {
+					log.debug("User already left room, block Screen - Browser Closed");
+					OutputStream out = httpServletResponse.getOutputStream();
+					String returnValue = "close";
+					out.write(returnValue.getBytes());
+					//return;
+				}
+
+				if (doProcess) {
+					//make a complete name out of domain(organisation) + roomname
+					String roomName = domain + "_" + room;
+					//trim whitespaces cause it is a directory name
+					roomName = StringUtils.deleteWhitespace(roomName);
+
+					//Get the current User-Directory
+
+					String current_dir = getServletContext().getRealPath("/");
+					log.debug("Current_dir: " + current_dir);
+
+					String working_dir = "";
+					log.debug("MAX_READ_BYTES",MultipartRequest.MAX_READ_BYTES);
+
+					working_dir = current_dir + "desktop" + File.separatorChar + roomName + File.separatorChar;
+
+					//Add the Folder for the Room if it does not exist yet
+					File localFolder = new File(working_dir);
+					if (!localFolder.exists()) {
+						localFolder.mkdir();
+					}
+
+					log.debug("#### UploadHandler working_dir: "+ working_dir);
+				
+				
+
+					InputStream is = upload.getFileContents("Filedata");
+				
+				
+					ByteArrayOutputStream bos = new ByteArrayOutputStream(); 
+				
+					byte[] buffy = new byte[1024];
+					int leng = 0;
+				
+					while ( (leng= is.read(buffy, 0, buffy.length)) >-1 ) {
+						bos.write(buffy, 0, leng);
+					}
+				
+					byte[] ba = bos.toByteArray(); 
+				
+					if(ba.length < 59)
+						return;
+
+					// entzippen
+					Object o = ZipUtility.byteArraytoObject(ba);
+					ArrayList al = (ArrayList)o;
+				
+				
+					byte[] temps = (byte[]) al.get(0);
+				
+				
+					BufferedImage bi = ImageUtility.read(temps);
+				
+					//trim whitespace
+					String fileSystemName = StringUtils.deleteWhitespace(upload.getFileSystemName("Filedata"));
+
+					String newFileSystemName = StringComparer.getInstance()
+						.compareForRealPaths(
+								fileSystemName.substring(0,
+										fileSystemName.length() - 4));
+					String newFileSystemExtName = fileSystemName.substring(
+						fileSystemName.length() - 4,
+						fileSystemName.length()).toLowerCase();
+
+					//trim long names cause cannot output that
+					if (newFileSystemName.length() >= 17) {
+						newFileSystemName = newFileSystemName.substring(0,16);
+					}
+				
+					String completeName = working_dir + newFileSystemName+"_"+sid;
+
+				
+					File f = new File(completeName + newFileSystemExtName);
+					if (f.exists()) {
+						f.delete();
+					}
+				
+					ImageIO.write(bi,"jpg",new File(completeName + newFileSystemExtName));
+				
+				
+				
+					LinkedHashMap<String,Object> hs = new LinkedHashMap<String,Object>();
+					hs.put("user", UsersDaoImpl.getInstance().getUser(users_id));
+					hs.put("message", "desktop");
+					hs.put("action", "newSlide");
+					hs.put("fileName", newFileSystemName+"_"+sid+newFileSystemExtName);
+				
+				
+					ScopeApplicationAdapter.getInstance().sendMessageByRoomAndDomain(Long.valueOf(room).longValue(),hs);
+				
+				}
+
+		} else {
+			log.debug("user not logged in");
+		}
+	
+	
+		} catch (Exception e) {
+			log.error("ee " + e);
+			e.printStackTrace();
+			throw new ServletException(e);
+		}
 	}
 
 }

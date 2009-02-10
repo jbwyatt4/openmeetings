@@ -240,6 +240,44 @@ form.cmxform fieldset fieldset label {
 			You can edit this value later BUT previous created Users and Sessions might be not usable anymore<BR/>
     	</p>
         
+    </fieldset>
+    
+    <fieldset id="LdapConf">
+    
+		<legend>Authentication Type</legend>    
+		<li>
+        <label for="ldap_config_path">LDAP Config</label>
+    	<input name="ldap_config_path" id="ldap_config_path" size="27" 
+    		type="text" 
+    		title="Enter the absolute path to a valid ldap config (see om_ldap.cfg within installation directory)"
+    		value="" />  	
+		</li>
+    	<p>
+	    	Entering a path pointing to a valid LDAP Configuration File activates LDAP Authentification.<BR/>
+	    	Keep empty, if you want to keep the standard auth method.<BR/>
+	    	Admin users are always authenticated against local database, other user have to enter a valid LDAP password.
+    	</p>
+        
+    </fieldset>
+    
+    <fieldset id="ScreenViewer">
+    
+		<legend>Screen Viewer</legend>    
+		<li>
+        <label for="screen_viewer">Screenviewer Config</label>
+    	<select name="screen_viewer" id="screen_viewer" size="1" 
+    		>
+	      	<option value="0" selected>Standard Viewer</option>
+	        <option value="1">JRDesktop</option>
+	    </select><br />	
+		</li>
+    	<p>
+	    	The standard Screenviewer is optimized for low-bandwidth areas - You have the possibility of<BR/>
+	    	altering the quality of the screencapture,ie.<BR/>
+	    	The jrDesktop alternative starts immediately without GUI, just stoppable via SysTray Icon, but offers<BR/>
+	    	a higher speed tranferring the screencaptures to the whiteboard<BR/>
+    	</p>
+        
     </fieldset>       
         	  
         	

@@ -896,7 +896,6 @@ public class Usermanagement {
 						savedUser.setPassword(ManageCryptStyle.getInstance().getInstanceOfCrypt().createPassPhrase(user.getPassword()));
 					}
 					
-					
 					String email = values.get("email").toString();
 					
 					
