@@ -13,8 +13,10 @@ import org.apache.velocity.context.Context;
 import org.apache.velocity.tools.view.servlet.VelocityViewServlet;
 
 import org.apache.commons.lang.StringUtils;
+import org.hibernate.cfg.Configuration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.openmeetings.app.data.basic.Configurationmanagement;
 import org.openmeetings.app.data.basic.Sessionmanagement;
 import org.openmeetings.app.data.user.Usermanagement;
 import org.openmeetings.app.templates.ScreenCastTemplate;
@@ -148,7 +150,7 @@ public class ScreenRequestHandler extends VelocityViewServlet {
 				roomName = StringUtils.deleteWhitespace(roomName);
 				
 				String current_dir = getServletContext().getRealPath("/");
-				log.debug("Current_dir: "+current_dir);				
+				log.debug("Current_dir: "+current_dir);			
 				
 				//String jnlpString = ScreenCastTemplate.getInstance(current_dir).getScreenTemplate(rtmphostlocal, red5httpport, sid, room, domain);
 				
@@ -165,8 +167,27 @@ public class ScreenRequestHandler extends VelocityViewServlet {
 				httpServletResponse.setHeader("Content-Disposition","Inline; filename=\"" + requestedFile + "\"");
 		        
 		        
-				return getVelocityEngine().getTemplate("screencast_template.vm");
-			
+				// Check , which screenviewer is to be used
+				org.openmeetings.app.hibernate.beans.basic.Configuration conf = Configurationmanagement.getInstance().getConfKey(user_level, "screen_viewer");
+				
+				String template = "screencast_template.vm";
+				
+				if(conf != null){
+					String confVal = conf.getConf_value();
+					
+					try{
+						int conf_i = Integer.parseInt(confVal);
+						
+						if(conf_i > 0)
+							template = "screencast_jrdesktop.vm";
+					
+					}
+					catch(Exception e){
+						log.error("invalid configuration value for key screen_viewer!");
+					}
+				}
+				
+				return getVelocityEngine().getTemplate(template);
 			
 			}
 			

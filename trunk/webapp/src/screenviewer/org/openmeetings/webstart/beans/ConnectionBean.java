@@ -16,7 +16,7 @@ public class ConnectionBean {
 	
 	/**Intervall Settings**/
 	
-	public static int intervallSeconds = 3;
+	public static int intervallSeconds = 1;
 	
 	public static String quartzScreenJobName = "grabScreen";
 	

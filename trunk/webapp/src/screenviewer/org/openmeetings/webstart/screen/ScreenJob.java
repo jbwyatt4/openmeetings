@@ -1,4 +1,4 @@
-package org.openmeetings.webstart.screen;
+ package org.openmeetings.webstart.screen;
 
 import org.quartz.Job;
 import org.quartz.JobExecutionException;

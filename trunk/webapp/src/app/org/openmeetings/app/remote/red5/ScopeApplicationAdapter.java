@@ -712,14 +712,17 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 			
 			IScope webAppKeyScope = globalScope.getScope(ScopeApplicationAdapter.webAppRootKey);
 			
-			//log.debug("webAppKeyScope "+webAppKeyScope);
+			log.debug("webAppKeyScope "+webAppKeyScope);
 			
 			IScope scopeHibernate = webAppKeyScope.getScope(room_id.toString());
+			//IScope scopeHibernate = webAppKeyScope.getScope("hibernate");
+			
 			
 			if (scopeHibernate!=null){
 
 				//Notify all clients of the same scope (room)
 				Iterator<IConnection> it = webAppKeyScope.getScope(room_id.toString()).getConnections();
+				//Iterator<IConnection> it = webAppKeyScope.getScope("hibernate").getConnections();
 				
 				if (it!=null) {
 					while (it.hasNext()) {
@@ -734,7 +737,7 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 					log.debug("sendMessageByRoomAndDomain connections is empty ");
 				}
 			} else {
-				log.debug("sendMessageByRoomAndDomain servlet not yet started ");
+				log.debug("sendMessageByRoomAndDomain servlet not yet started  - roomID : '" + room_id + "'");
 			}
 			
 		} catch (Exception err) {
