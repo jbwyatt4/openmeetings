@@ -112,7 +112,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>No</value>
   </string>
   <string id="36" name="questionwant">
-    <value>will wissen:</value>
+    <value>wants to know:</value>
   </string>
   <string id="37" name="pollresults">
     <value>Poll results</value>
