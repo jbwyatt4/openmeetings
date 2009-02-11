@@ -282,9 +282,9 @@ form.cmxform fieldset fieldset label {
         	  
         	
     <fieldset>
-        <legend>Absenden</legend> 
+        <legend>Submit</legend> 
         <input name="Submit" value="INSTALL" 
-    		title="Formular absenden" type="submit" />
+    		title="Submit" type="submit" />
     </fieldset>	
 	
 </form>
