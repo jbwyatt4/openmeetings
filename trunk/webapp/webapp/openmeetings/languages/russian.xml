@@ -13,16 +13,16 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Митинг</value>
   </string>
   <string id="3" name="classroom">
-    <value>Аудитория</value>
+    <value>События</value>
   </string>
   <string id="4" name="settings">
     <value>Установки</value>
   </string>
   <string id="5" name="benutzer">
-    <value>Пользователь</value>
+    <value>Профиль</value>
   </string>
   <string id="6" name="admin">
-    <value>Администрация</value>
+    <value>Администрирование</value>
   </string>
   <string id="7" name="stop">
     <value>Пауза</value>
@@ -40,7 +40,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Связанный пользователь:</value>
   </string>
   <string id="12" name="startconf">
-    <value>Начало конференции</value>
+    <value>Начать конференцию</value>
   </string>
   <string id="13" name="myname">
     <value>Мое имя</value>
@@ -49,13 +49,13 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Видеоконференция</value>
   </string>
   <string id="15" name="import">
-    <value>Импортировать презентацию</value>
+    <value>Подгрузить файл</value>
   </string>
   <string id="16" name="refreshfiles">
     <value>Заново загрузить список</value>
   </string>
   <string id="17" name="tomainfile">
-    <value>К главному директорию</value>
+    <value>К главному файлу</value>
   </string>
   <string id="18" name="newpoll">
     <value>Новый опрос</value>
@@ -139,7 +139,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Конференция (макс. 50 мест)</value>
   </string>
   <string id="45" name="type">
-    <value>Модус</value>
+    <value>Тип</value>
   </string>
   <string id="46" name="remainingseats">
     <value>Оставшиеся места</value>
@@ -151,7 +151,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Вхождения</value>
   </string>
   <string id="49" name="modleave">
-    <value>Модератор/преподаватель этой комнаты покинул комнату.</value>
+    <value>Модератор/преподаватель этой комнаты покинул встречу.</value>
   </string>
   <string id="50" name="systemmessage">
     <value>Системное сообщение</value>
@@ -190,10 +190,10 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>прервать</value>
   </string>
   <string id="62" name="clearwhiteboard">
-    <value>Очистить планшет</value>
+    <value>Очистить доску</value>
   </string>
   <string id="63" name="clearwhiteboardquestion">
-    <value>Очистить планшет перед добавлением нового изображения?</value>
+    <value>Очистить доску перед добавлением нового изображения?</value>
   </string>
   <string id="64" name="dontaskagain">
     <value>Больше не спрашивать</value>
@@ -202,16 +202,16 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>нет</value>
   </string>
   <string id="66" name="editsetup2">
-    <value>Обработать установки</value>
+    <value>Редактировать установки</value>
   </string>
   <string id="67" name="needconfirmationwhiteboard">
-    <value>Запросить подтверждение перед очисткой планшета.</value>
+    <value>Запросить подтверждение перед очисткой доски.</value>
   </string>
   <string id="68" name="userinfo">
-    <value>Наша информация</value>
+    <value>Информация о пользователе</value>
   </string>
   <string id="69" name="cleardrawarea">
-    <value>Очистить Планшет</value>
+    <value>Очистить область рисования</value>
   </string>
   <string id="70" name="undo">
     <value>Отмена</value>
@@ -319,7 +319,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Пароль должен состоять минимум из 4 знаков</value>
   </string>
   <string id="105" name="usernametaken">
-    <value>Это имя пользователя уже присвоено</value>
+    <value>Это имя пользователя уже занято</value>
   </string>
   <string id="106" name="emailtaken">
     <value>Электронный адрес уже зарегистрирован</value>
@@ -367,7 +367,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Страна:</value>
   </string>
   <string id="121" name="regformbtn1">
-    <value>Зарегистрироваться</value>
+    <value>Регистрировать</value>
   </string>
   <string id="122" name="regformbtn2">
     <value>Прервать</value>
@@ -397,10 +397,10 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Организация</value>
   </string>
   <string id="131" name="btn_enterroom">
-    <value>Войти</value>
+    <value>Вход</value>
   </string>
   <string id="132" name="useralterself_login">
-    <value>Пользователь</value>
+    <value>Логин</value>
   </string>
   <string id="133" name="useralterself_pass">
     <value>Пароль</value>
@@ -580,7 +580,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Организации</value>
   </string>
   <string id="192" name="roomadmin_header">
-    <value>Комнаты для конференций</value>
+    <value>Комнаты для митингов</value>
   </string>
   <string id="193" name="roomvalue_name">
     <value>Имя</value>
@@ -634,10 +634,10 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Синхронизация клиентов. Оставшиеся клиенты:</value>
   </string>
   <string id="210" name="loadwml_confirmheader">
-    <value>Очистить планшет</value>
+    <value>Очистить область рисования</value>
   </string>
   <string id="211" name="loadwml_confirmmess">
-    <value>Очистить планшет, при этом все изменения будут утеряны!</value>
+    <value>Очистить областьрисования, при этом все изменения будут утеряны!</value>
   </string>
   <string id="212" name="loadwml_confirmmess2">
     <value>Перед загрузкой файла запросить подтверждение</value>
@@ -673,7 +673,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Ник для данной конференции</value>
   </string>
   <string id="223" name="invited_userwin_login">
-    <value>Прозвище/псевдоним</value>
+    <value>Ник/псевдоним</value>
   </string>
   <string id="224" name="invited_userwin_firstname">
     <value>Имя</value>
@@ -691,163 +691,163 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Отправить</value>
   </string>
   <string id="229" name="invited_userwin_enter">
-    <value>Loading</value>
+    <value>Загружается...</value>
   </string>
   <string id="230" name="invited_userwin_enter">
-    <value>Data loading, please wait!</value>
+    <value>Даные загружаются, подождите!</value>
   </string>
   <string id="231" name="user_registerFalsePWD">
-    <value>Wrong Password</value>
+    <value>Неверный пароль</value>
   </string>
   <string id="232" name="user_registerFalsePWDHeader">
-    <value>Please enter two identical passwords with at least 4 characters</value>
+    <value>Пожалуйста, введите два раза один и тот же пароль длиной не менее 4 символов</value>
   </string>
   <string id="233" name="user_registerMailError">
-    <value>Wrong Mail</value>
+    <value>Неверный E-Mail</value>
   </string>
   <string id="234" name="user_registerMailErrorHeader">
-    <value>You have entered an invalid Mail-Adress</value>
+    <value>Вы ввели неверный E-Mail</value>
   </string>
   <string id="235" name="user_registerSuccess">
-    <value>Registration Complete</value>
+    <value>Регистрация завершена</value>
   </string>
   <string id="236" name="user_registerSuccessHeader">
-    <value>Your account has been created. You can login now.</value>
+    <value>Ваш аккаунт создан. Теперь вы можете залогиниться.</value>
   </string>
   <string id="237" name="user_sharing_message">
-    <value>You cannot share your screen at the moment. Somebody else already share's its screen.</value>
+    <value>Сейчас вы не можете сделать ваш экран общим. Сейчас другой пользователь сделал свой экран общим.</value>
   </string>
   <string id="238" name="user_sharing_messageHeader">
-    <value>Sharing forbidden</value>
+    <value>Запрещено делать ваш экран общим</value>
   </string>
   <string id="239" name="user_doStartScreenViewer">
-    <value>Share your Screen</value>
+    <value>Сделать ваш экран общим</value>
   </string>
   <string id="240" name="screen_warnBandwidth">
-    <value>Bad Bandwidth: You have not been able to syncronize the Screen. Frames will be dropped. If this Warning is shown often you could ask the moderator to reduce the Quality.</value>
+    <value>Неверная ширина канала: невозможно синхронизовать экран. Некоторые кадры будут пропущены. Если это сообщение появляется слишком часто, Вы можете попросить модератора ухудшить качество соединения.</value>
   </string>
   <string id="241" name="screen_userlabel">
-    <value>Screen of:</value>
+    <value>Экран пользователя:</value>
   </string>
   <string id="242" name="whiteboard_tab_paint">
-    <value>Paint</value>
+    <value>Рисование</value>
   </string>
   <string id="243" name="whiteboard_tab_document">
-    <value>Document</value>
+    <value>Документ</value>
   </string>
   <string id="244" name="tabbar_chaticon">
-    <value>Chat</value>
+    <value>Чат</value>
   </string>
   <string id="245" name="tabbar_filesicon">
-    <value>Files</value>
+    <value>Файлы</value>
   </string>
   <string id="246" name="tabbar_participantsicon">
-    <value>Members</value>
+    <value>Участники</value>
   </string>
   <string id="247" name="swfpresentation_listsaveorig">
-    <value>Download original document</value>
+    <value>Загрузить первоначальный документ</value>
   </string>
   <string id="248" name="swfpresentation_listsavepdf">
-    <value>Download pdf document</value>
+    <value>Загрузить документ pdf</value>
   </string>
   <string id="249" name="swfpresentation_listloadswf">
-    <value>Load Presentation to whiteboard</value>
+    <value>Загрузить презентацию на доску</value>
   </string>
   <string id="250" name="navimain_config">
-    <value>Configuration</value>
+    <value>Конфигурация</value>
   </string>
   <string id="251" name="whiteboard_boundingbox_drag">
-    <value>Drag this Object</value>
+    <value>Перетащить этот объект</value>
   </string>
   <string id="252" name="whiteboard_boundingbox_resize">
-    <value>Resize this Object</value>
+    <value>Изменить размеры объекта</value>
   </string>
   <string id="253" name="whiteboard_documenttoolbar_zoom">
     <value>%</value>
   </string>
   <string id="254" name="whiteboard_documenttoolbar_slide">
-    <value>of</value>
+    <value>из</value>
   </string>
   <string id="255" name="whiteboard_documenttoolbar_firstslide">
-    <value>Go to first Page</value>
+    <value>На первую страницу</value>
   </string>
   <string id="256" name="whiteboard_documenttoolbar_preslide">
-    <value>Go to previous Page</value>
+    <value>На предыдущую страницу</value>
   </string>
   <string id="257" name="whiteboard_documenttoolbar_nextslide">
-    <value>Go to next Page</value>
+    <value>На следующую страницу</value>
   </string>
   <string id="258" name="whiteboard_documenttoolbar_lastslide">
-    <value>Go to last Page</value>
+    <value>На последнюю страницу</value>
   </string>
   <string id="259" name="whiteboard_documenttoolbar_zoomminus">
-    <value>Zoom --</value>
+    <value>Зум --</value>
   </string>
   <string id="260" name="whiteboard_documenttoolbar_zoomplus">
-    <value>Zoom ++</value>
+    <value>Зум ++</value>
   </string>
   <string id="261" name="salutation_mr">
-    <value>Mr.</value>
+    <value>Г-н</value>
   </string>
   <string id="262" name="salutation_miss">
-    <value>Ms.</value>
+    <value>Г-жа</value>
   </string>
   <string id="263" name="navimain_confadmin">
-    <value>Configuration</value>
+    <value>Конфигурация</value>
   </string>
   <string id="264" name="conftable_headerId">
     <value>ID</value>
   </string>
   <string id="265" name="conftable_headerkey">
-    <value>Key</value>
+    <value>Ключ</value>
   </string>
   <string id="266" name="confadminform_header">
-    <value>Configuration</value>
+    <value>Конфигурация</value>
   </string>
   <string id="267" name="confadminform_labelkey">
-    <value>Key</value>
+    <value>Ключ</value>
   </string>
   <string id="268" name="confadminform_labelupdated">
-    <value>last update</value>
+    <value>Последнее обновление</value>
   </string>
   <string id="269" name="confadminform_labelupdatedby">
-    <value>updatedby</value>
+    <value>Обновлено:</value>
   </string>
   <string id="270" name="confadminform_labelcomment">
-    <value>comment</value>
+    <value>комментарий</value>
   </string>
   <string id="271" name="confadminform_labelkey">
-    <value>key</value>
+    <value>ключ</value>
   </string>
   <string id="272" name="turnoverlist_maxresults">
-    <value>of</value>
+    <value>из</value>
   </string>
   <string id="273" name="organisation_usersheader">
-    <value>Users</value>
+    <value>Пользователи</value>
   </string>
   <string id="274" name="organisation_usersicondelete">
-    <value>delete user from organisation</value>
+    <value>Удалить пользователя из организации</value>
   </string>
   <string id="275" name="organisation_usersdeletedhead">
-    <value>delete</value>
+    <value>удалить</value>
   </string>
   <string id="276" name="organisation_usersalreadadded">
-    <value>This user is already member of this organisation.</value>
+    <value>Этот пользователь уже входит в эту организацию.</value>
   </string>
   <string id="277" name="dashboard_newsheader">
-    <value>News</value>
+    <value>Новости</value>
   </string>
   <string id="278" name="dashboard_quicklinksheader">
-    <value>Quicklinks</value>
+    <value>Быстрые ссылки</value>
   </string>
   <string id="279" name="dashboard_quicklinkConf">
-    <value>Goto Conference</value>
+    <value>Перейти к коференции</value>
   </string>
   <string id="280" name="dashboard_quicklinkAudit">
-    <value>Goto Auditorium</value>
+    <value>Перейти к аудитории</value>
   </string>
   <string id="281" name="dashboard_quicklinksupport">
-    <value>Help and Support</value>
+    <value>Помощь и поддержка</value>
   </string>
   <string id="282" name="dashboard_quickhomepageurl">
     <value>http://code.google.com/p/openmeetings/</value>
@@ -856,559 +856,558 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>http://groups.google.com/group/openmeetings-user</value>
   </string>
   <string id="284" name="dashboard_reportbugs">
-    <value>Report a bug!</value>
+    <value>Ошибка?</value>
   </string>
   <string id="285" name="dashboard_rsslistitemlinktext">
-    <value>more</value>
+    <value>еще</value>
   </string>
   <string id="286" name="dashboard_quicklinkhomepagelabel">
-    <value>Project Website (code.google.com/p/openmeetings/)</value>
+    <value>Вебсайт проекта (code.google.com/p/openmeetings/)</value>
   </string>
   <string id="287" name="dashboard_quicklinkmailinglistlabel">
-    <value>User Mailing List (groups.google.com/group/openmeetings-user)</value>
+    <value>Список электронных адресов пользователей (groups.google.com/group/openmeetings-user)</value>
   </string>
   <string id="288" name="login_rememberuser">
-    <value>Remember Login</value>
+    <value>Запомнить логин</value>
   </string>
   <string id="289" name="main_navi">
-    <value>Content</value>
+    <value>Контент</value>
   </string>
   <string id="290" name="subnavi">
-    <value>My Home Page</value>
+    <value>Моя домашняя страница</value>
   </string>
   <string id="291" name="subnavi">
-    <value>My Scheduled Meetings</value>
+    <value>Мои запланированные встречи</value>
   </string>
   <string id="292" name="subnavi">
-    <value>My Scheduled Events</value>
+    <value>Мои запланированные события</value>
   </string>
   <string id="293" name="subnavi">
-    <value>Public Meetings</value>
+    <value>Публичные встречи</value>
   </string>
   <string id="294" name="subnavi">
-    <value>Private Meetings</value>
+    <value>Личные встречи</value>
   </string>
   <string id="295" name="subnavi">
-    <value>Public Events</value>
+    <value>Публичные события</value>
   </string>
   <string id="296" name="subnavi">
-    <value>Private Events</value>
+    <value>Личные события</value>
   </string>
   <string id="297" name="subnavi">
-    <value>Public Content</value>
+    <value>Публичный контент</value>
   </string>
   <string id="298" name="subnavi">
-    <value>Private Content</value>
+    <value>Приватный контент</value>
   </string>
   <string id="299" name="subnavi">
-    <value>Personal Content</value>
+    <value>Персональный контент</value>
   </string>
   <string id="300" name="subnavi">
-    <value></value>
+    <value/>
   </string>
   <string id="301" name="conferencebar">
-    <value>Moderation</value>
+    <value>Модерация</value>
   </string>
   <string id="302" name="conferencebar">
-    <value>Apply for Moderation</value>
+    <value>Запросить функции модератора</value>
   </string>
   <string id="303" name="conferencebar">
-    <value>Polls</value>
+    <value>Опросы</value>
   </string>
   <string id="304" name="conferencebar">
-    <value>Choose a file</value>
+    <value>Выбрать файл</value>
   </string>
   <string id="305" name="conferencebar">
-    <value>Settings</value>
+    <value>Установки</value>
   </string>
   <string id="306" name="conferencebar">
-    <value>Cam and Mic Settings</value>
+    <value>Установки камеры и микрофона</value>
   </string>
   <string id="307" name="conferencebar">
-    <value>Whiteboard Settings</value>
+    <value>Установки доски</value>
   </string>
   <string id="308" name="conferencebar">
-    <value>Exit</value>
+    <value>Выход</value>
   </string>
   <string id="309" name="conferencebar">
-    <value>Back to Rooms</value>
+    <value>Назад к комнатам</value>
   </string>
   <string id="310" name="conferencebar">
     <value>Logout</value>
   </string>
   <string id="311" name="loginwindow">
-    <value>Desktop Viewer</value>
+    <value>Прсмотр рабочего стола</value>
   </string>
   <string id="312" name="loginwindow">
-    <value>start Desktop Viewer</value>
+    <value>запустить просмотр рабочего стола</value>
   </string>
   <string id="313" name="loginwindow">
-    <value>Video and Audio</value>
+    <value>Видео и аудио</value>
   </string>
   <string id="314" name="loginwindow">
-    <value>Chat</value>
+    <value>Чат</value>
   </string>
   <string id="315" name="loginwindow">
-    <value>Whiteboard</value>
+    <value>Доска</value>
   </string>
   <string id="316" name="loginwindow">
-    <value>Moderation</value>
+    <value>Модерация</value>
   </string>
   <string id="317" name="loginwindow">
-    <value>Files</value>
+    <value>Файлы</value>
   </string>
   <string id="318" name="loginwindow">
-    <value>Users</value>
+    <value>Пользователи</value>
   </string>
   <string id="319" name="loginwindow">
-    <value>Polls</value>
+    <value>Избератели</value>
   </string>
   <string id="320" name="loginwindow">
-    <value>There is no User connected to this Username</value>
+    <value>Никто больше не подключился с таким именем пользователя</value>
   </string>
   <string id="321" name="loginwindow">
-    <value>The email containing a special link has been sent to your email address, please check your mailbox. If you still have not received a email, please adjust your email spam settings and resend confirmation email.</value>
+    <value>Письмо, содержащее специальную ссылку, выслано на ваш EMail, пожалуйста, проверьте ваш почтовый ящик. Если вы все еще не получили письмо, проверьте анти-спам фильтры и пошлите еще раз подтверждающее письмо.</value>
   </string>
   <string id="322" name="errortype">
-    <value>Error</value>
+    <value>Ошибка</value>
   </string>
   <string id="323" name="errortype">
-    <value>Message</value>
+    <value>Сообщение</value>
   </string>
   <string id="324" name="resetpass">
-    <value>Invalid Hash. No User found.</value>
+    <value>Неверный хэш. Пользователь не найден.</value>
   </string>
   <string id="325" name="resetpass">
-    <value>Reset Your Password</value>
+    <value>Переустановить ваш пароль</value>
   </string>
   <string id="326" name="resetpass">
-    <value>Login</value>
+    <value>Логин</value>
   </string>
   <string id="327" name="resetpass">
-    <value>change Password</value>
+    <value>изменить пароль</value>
   </string>
   <string id="328" name="resetpass">
-    <value>new Password</value>
+    <value>новый пароль</value>
   </string>
   <string id="329" name="resetpass">
-    <value>re-enter Password</value>
+    <value>еще раз введите пароль</value>
   </string>
   <string id="330" name="resetpass">
-    <value>The Passwords you entered weren't identical.</value>
+    <value>Вы ввели неидентичные пароли.</value>
   </string>
   <string id="331" name="resetpass">
-    <value>4 or more characters; capitalization matters!</value>
+    <value>4 или более знаков. Регистр имеет значение!</value>
   </string>
   <string id="332" name="resetpass">
-    <value>Password set. You can login now.</value>
+    <value>Пароль установлен. Теперь можно логиниться.</value>
   </string>
   <string id="333" name="rpccallback">
     <value>OK</value>
   </string>
   <string id="334" name="rpcgeneralerror">
-    <value>Unkown Error. Please report this to your Service-Team.</value>
+    <value>Неизвестная ошибка. Пожалуйста, сообщите в вашу сервисную службу.</value>
   </string>
   <string id="335" name="loginwindow">
-    <value>Username not found</value>
+    <value>Имя пользователя не найдено</value>
   </string>
   <string id="336" name="loginwindow">
-    <value>Invalid Password</value>
+    <value>Неверный пароль</value>
   </string>
   <string id="337" name="logout">
-    <value>Successfully Logged out</value>
+    <value>Вы успешно вышли</value>
   </string>
   <string id="338" name="registration">
     <value>Frontend Registration disabled.</value>
   </string>
   <string id="339" name="registration">
-    <value>Invalid EMail</value>
+    <value>Неверный EMail</value>
   </string>
   <string id="340" name="registration">
-    <value>duplicate filename, please choose another filename</value>
+    <value>повторяющиеся имя файла, выберите другое имя файла</value>
   </string>
   <string id="341" name="filebrowser">
-    <value>filename too short</value>
+    <value>слишком короткое имя файла</value>
   </string>
   <string id="342" name="filebrowser">
-    <value>Could not save Address</value>
+    <value>Не могу сохранить Адрес</value>
   </string>
   <string id="343" name="useradmin">
-    <value>User added but you need to assign this User to an Organisation, otherwise he won't be able to sign-in.</value>
+    <value>Пользователь добавлен, но нужно назначить этому пользователю организацию, иначе он не сможет войти.</value>
   </string>
   <string id="344" name="adminforms">
-    <value>New Record</value>
+    <value>Новая запись</value>
   </string>
   <string id="345" name="languageseditor">
-    <value>No Field found with this FieldId.</value>
+    <value>Поле с таким ID не найдено.</value>
   </string>
   <string id="346" name="languageseditor">
-    <value>No Label found for that Field.</value>
+    <value>Метка для этого поля не найдена.</value>
   </string>
   <string id="347" name="errormessage">
-    <value>Admin Authorization required</value>
+    <value>Требуется авторизация администратора</value>
   </string>
   <string id="348" name="mainnavi">
-    <value>Language-Editor</value>
+    <value>Редактор языков</value>
   </string>
   <string id="349" name="languageseditor">
-    <value>Language</value>
+    <value>Язык</value>
   </string>
   <string id="350" name="languageseditor">
-    <value>Label-ID</value>
+    <value>ID метки</value>
   </string>
   <string id="351" name="languageseditor">
-    <value>Label-Name</value>
+    <value>Имя метки</value>
   </string>
   <string id="352" name="languageseditor">
-    <value>Value</value>
+    <value>Значение</value>
   </string>
   <string id="353" name="languageseditor">
-    <value>Fieldvalues</value>
+    <value>Значения полей</value>
   </string>
   <string id="354" name="languageseditor">
-    <value>LabelName</value>
+    <value>Имя метки</value>
   </string>
   <string id="355" name="languageseditor">
-    <value>LabelValue</value>
+    <value>Значение метки</value>
   </string>
   <string id="356" name="languageseditor">
-    <value>Label-ID</value>
+    <value>ID метки</value>
   </string>
   <string id="357" name="languageseditor">
-    <value>You did only delete the Label NOT the Field! You cannot delete the Field, it may has Labels in other Languages.</value>
+    <value>Вы можете лишь удалить метку, но не само поле! Нельзя удалить поле, у него могут быть метки на других языках.</value>
   </string>
   <string id="358" name="languageseditor">
-    <value>Invalid Labelid. The FieldLanguagesvalues_Id cannot be found in the database.</value>
+    <value>Неверный ID метки. Невозможно найти FieldLanguagesvalues_Id в базе данных.</value>
   </string>
   <string id="359" name="languageseditor">
-    <value>You cannot delete this Field. You can only delete Labels NOT Fields. There is no Label loaded at the moment, wether it is not selected any Field or there is no Label for this Language for that Field defined.</value>
+    <value>Нельзя удалить это поле! Можно лишь удалить метку, но не само поле Метка сейчас не загружена. Либо не выбрано ни одно поле, либо не определена метка на этом языке (для этого поля)</value>
   </string>
   <string id="360" name="languageseditor">
-    <value>export</value>
+    <value>Экспорт</value>
   </string>
   <string id="361" name="languageseditor">
-    <value>You need to logout to see any changes.</value>
+    <value>Вам нужно выйти, чтобы увидеть изменения.</value>
   </string>
   <string id="362" name="languageseditor">
-    <value>Add new language</value>
+    <value>Добавить новый язык</value>
   </string>
   <string id="363" name="languageseditor">
-    <value>delete language</value>
+    <value>удалить язык</value>
   </string>
   <string id="364" name="languageseditor">
-    <value>Add new language</value>
+    <value>Добавить новый язык</value>
   </string>
   <string id="365" name="languageseditor">
-    <value>Name</value>
+    <value>Имя</value>
   </string>
   <string id="366" name="languageseditor">
-    <value>add language</value>
+    <value>добавить язык</value>
   </string>
   <string id="367" name="languageseditor">
     <value>Backup</value>
   </string>
   <string id="368" name="turnoverlist">
-    <value>goto first</value>
+    <value>к первому</value>
   </string>
   <string id="369" name="turnoverlist">
-    <value>goto previous</value>
+    <value>к предыдущему</value>
   </string>
   <string id="370" name="turnoverlist">
-    <value>goto next</value>
+    <value>к следующему</value>
   </string>
   <string id="371" name="turnoverlist">
-    <value>goto last</value>
+    <value>к последнему</value>
   </string>
   <string id="372" name="videobox">
-    <value>user speaks</value>
+    <value>пользователь говорит</value>
   </string>
   <string id="373" name="videobox">
-    <value>turn sound on/off</value>
+    <value>ключить/выключит звук</value>
   </string>
   <string id="374" name="dashboard">
-    <value>System</value>
+    <value>Система</value>
   </string>
   <string id="375" name="dashboard">
-    <value>Your Settings</value>
+    <value>Ваши установки</value>
   </string>
   <string id="376" name="dashboard">
-    <value>hi,</value>
+    <value>привет,</value>
   </string>
   <string id="377" name="dashboard">
-    <value>Edit your profile</value>
+    <value>Редактировать ваши профиль</value>
   </string>
   <string id="378" name="dashboard">
-    <value>New Messages:</value>
+    <value>Новые сообщения:</value>
   </string>
   <string id="379" name="dashboard">
-    <value>Upload new Image</value>
+    <value>Подгрузить новое изображение:</value>
   </string>
   <string id="380" name="backuppanel">
-    <value>Userdata - Export</value>
+    <value>Экспорт пользовательских данных</value>
   </string>
   <string id="381" name="backuppanel">
-    <value>All organisations must be already existing!</value>
+    <value>Организации уже должны существовать!</value>
   </string>
   <string id="382" name="backuppanel">
-    <value>start export</value>
+    <value>начать экспорт</value>
   </string>
   <string id="383" name="backuppanel">
-    <value>By organisation</value>
+    <value>По организации</value>
   </string>
   <string id="384" name="backuppanel">
-    <value>start export</value>
+    <value>начать экспорт</value>
   </string>
   <string id="385" name="backuppanel">
-    <value>Userdata - Import</value>
+    <value>Пользовательские данные - импорт</value>
   </string>
   <string id="386" name="backuppanel">
-    <value>choose users.xml</value>
+    <value>выбрать users.xml</value>
   </string>
   <string id="387" name="languageseditor">
-    <value>import</value>
+    <value>импорт</value>
   </string>
   <string id="388" name="languageseditor">
-    <value>Export to XML - These files can be used to: 
-		- Contribute to the project 
-		- Import into another System 
-		- Backup 
-		- Customization 
-		- Put it into the language-directory for your next installation</value>
+    <value>Экспорт в XML - эти файлы можно использовать для:
+        - Внесения в проект
+        - Импорта в другую систему
+        - Резервного копирования
+        - Кастомизации
+        - Помещения в директорию "language" при следующей инсталляции </value>
   </string>
   <string id="389" name="languageseditor">
-    <value>Choose a language file to import. Choose the right Langauge from the Combobox! 
-		No matter what the name of the file is, it will be imported into this language!</value>
+    <value>Выберите какой файл языка импортировать. Выберите язык в Combobox.
+           Неважно, какое имя у этого файла, он будет импортирован в этот язык!</value>
   </string>
   <string id="390" name="importwindow">
-    <value>import - choose file</value>
+    <value>импотр - выберите файл</value>
   </string>
   <string id="391" name="recordingsavewin">
-    <value>Save as</value>
+    <value>Сохранить как</value>
   </string>
   <string id="392" name="recordingsavewin">
-    <value>Name:</value>
+    <value>Имя:</value>
   </string>
   <string id="393" name="recordingsavewin">
-    <value>Comment:</value>
+    <value>Комментарий:</value>
   </string>
   <string id="394" name="recordingsavewin">
-    <value>save</value>
+    <value>сохранить</value>
   </string>
   <string id="395" name="record">
-    <value>Recordings</value>
+    <value>Записи</value>
   </string>
   <string id="396" name="recorder">
-    <value>Recordings Viewer</value>
+    <value>Просмотр записей</value>
   </string>
   <string id="397" name="record">
-    <value>Recordings of public and private Rooms</value>
+    <value>Записи публичных и приватных комнат</value>
   </string>
   <string id="398" name="roomslist">
-    <value>Users :</value>
+    <value>Пользователи :</value>
   </string>
   <string id="399" name="roomslist">
-    <value>Joined:</value>
+    <value>Присоединившиеся:</value>
   </string>
   <string id="400" name="roomslist">
-    <value></value>
+    <value/>
   </string>
   <string id="401" name="roomslist">
-    <value>Users in this Room:</value>
+    <value>Пользователи в этой комнате:</value>
   </string>
   <string id="402" name="roomslist">
-    <value>refresh</value>
+    <value>обновить</value>
   </string>
   <string id="403" name="roomslist">
-    <value>This Room is Full. Try again in a few minutes.</value>
+    <value>Эта комната полна. Попробуйте через несколько минут.</value>
   </string>
   <string id="404" name="roomsList">
-    <value>click on a room to get details</value>
+    <value>клик на комнату для деталей</value>
   </string>
   <string id="405" name="roomslist">
-    <value>Chat with the users in this Room:</value>
+    <value>Чат с пользователями этой комнаты:</value>
   </string>
   <string id="406" name="roomslist">
-    <value>Room:</value>
+    <value>Комната:</value>
   </string>
   <string id="407" name="roomslist">
-    <value>Users in this room:</value>
+    <value>Пользователи в этой комнате:</value>
   </string>
   <string id="408" name="roomslist">
-    <value>since:</value>
+    <value>с:</value>
   </string>	
   <string id="409" name="record">
-    <value>play recording</value>
+    <value>проиграть записи</value>
   </string>
   <string id="410" name="record">
-    <value>Length:</value>
+    <value>Длина:</value>
   </string>
   <string id="411" name="record">
-    <value>Date:</value>
+    <value>Дата:</value>
   </string>
   <string id="412" name="record">
-    <value>Recorder Mode! You cannot change any values, this is a recorded File!</value>
+    <value>Режим записи! Вы не можете менять параметры.</value>
   </string>
   <string id="413" name="record">
-    <value>Play this recording</value>
+    <value>Проиграть эту запись</value>
   </string>
   <string id="414" name="record">
-    <value>Play / Pause</value>
+    <value>Играть / Пауза</value>
   </string>
   <string id="415" name="record">
-    <value>Start recording</value>
+    <value>Начать запись</value>
   </string>
   <string id="416" name="record">
-    <value>stop recording</value>
+    <value>остановить запись</value>
   </string>
   <string id="417" name="record">
-    <value>Recording:</value>
+    <value>Запись:</value>
   </string>	
   <string id="418" name="record_error_msg">
-    <value>There is already somebody recording at the moment:</value>
+    <value>Кто-то уже записывает в данный момент:</value>
   </string>
   <string id="419" name="record_message">
-    <value>Recording! By User:</value>
+    <value>Идет запись! Пользователь:</value>
   </string>
   <string id="420" name="record_cancel">
-    <value>cancel</value>
+    <value>отмена</value>
   </string>
   <string id="421" name="record_cancal_tooltip">
-    <value>Recording will be canceled and not saved.</value>
+    <value>Запись будет отменена и не будет записана.</value>
   </string>
   <string id="422" name="cancel_dialog_resume">
-    <value>resume</value>
+    <value>продолжить</value>
   </string>
   <string id="423" name="cancel_dialog_resume_tooltip">
-    <value>Close this window and resume recording</value>
+    <value>Закрыть окно и продолжить запись</value>
   </string>
   <string id="424" name="painttools_ellipse_color">
-    <value>change Linecolor</value>
+    <value>изменить цвет линий</value>
   </string>
   <string id="425" name="colorpicker_head">
-    <value>Choose Color</value>
+    <value>Выбор цвета</value>
   </string>
   <string id="426" name="painttools_line_disable">
-    <value>Disable / Enable Linecolor</value>
+    <value>Запретить / резрешить цвет линий</value>
   </string>
   <string id="427" name="painttools_fill_disable">
-    <value>change Fillcolor</value>
+    <value>изменить цвет заливки</value>
   </string>
   <string id="428" name="painttools_line_disable">
-    <value>Disable / Enable Fillcolor</value>
+    <value>Запретить / резрешить заливки</value>
   </string>
   <string id="429" name="change_width_arrow_down_slider">
-    <value>Change Linewidth</value>
+    <value>Изменить ширину линий</value>
   </string>
   <string id="430" name="close_small_popups">
-    <value>close</value>
+    <value>закрыть</value>
   </string>
   <string id="431" name="paint_tool_letter">
-    <value>change Fontsize</value>
+    <value>именить размер шрифта</value>
   </string>	
   <string id="432" name="recordingslist_delete">
-    <value>Delete Recording</value>
+    <value>Удалить запись</value>
   </string>
   <string id="433" name="recordingslist_recordedByGuest">
-    <value>Guest</value>
+    <value>Гость</value>
   </string>
   <string id="434" name="recordingslist_recordedby">
     <value>By:</value>
   </string>
   <string id="435" name="recordings_table_head_name">
-    <value>Name</value>
+    <value>Имя</value>
   </string>
   <string id="436" name="recordings_table_head_room">
-    <value>Room</value>
+    <value>Комната</value>
   </string>
   <string id="437" name="recordings_table_head_date">
-    <value>Date</value>
+    <value>Дата</value>
   </string>
   <string id="438" name="record_start_cancel">
-    <value>cancel</value>
+    <value>отменить</value>
   </string>
   <string id="439" name="record_start_start">
-    <value>start</value>
+    <value>старт</value>
   </string>
   <string id="440" name="filesbrowser_table_head_name">
-    <value>Name</value>
+    <value>Имя</value>
   </string>
   <string id="441" name="filesbrowser_table_head_date">
-    <value>Date</value>
+    <value>Дата</value>
   </string>
   <string id="442" name="chat_clear_history">
-    <value>Delete Server-Chatlog</value>
+    <value>Удалить Server-Chatlog</value>
   </string>
   <string id="443" name="chat_overall_header">
-    <value>Chat</value>
+    <value>Чат</value>
   </string>
   <string id="444" name="chat_send_btn">
-    <value>send message</value>
+    <value>послать сообщение</value>
   </string>
   <string id="445" name="chat_emot_btn">
-    <value>Emoticons</value>
+    <value>Иконки эмоций</value>
   </string>
   <string id="446" name="chat_emot_win">
-    <value>Emoticons</value>
+    <value>Иконки эмоций</value>
   </string>	
   <string id="447" name="choose_video_settings">
-    <value>Choose Published Devices</value>
+    <value>Изменить Published Devices</value>
   </string>
   <string id="448" name="choose_video_settings_combo">
-    <value>Audio and Video</value>
+    <value>Аудио и видео</value>
   </string>
   <string id="449" name="choose_video_settings_combo">
-    <value>Audio only</value>
+    <value>Только аудио</value>
   </string>
   <string id="450" name="choose_video_settings_combo">
-    <value>Video only</value>
+    <value>Только видео</value>
   </string>
   <string id="451" name="choose_video_settings_combo">
-    <value>no Audio/Video (static Image)</value>
+    <value>без аудио и видео (статическое изображение)</value>
   </string>
   <string id="452" name="choose_video_settings_info_text">
-    <value>No Audio/Video from your PC will be published, instead of that a picture from your profile will be shown. Choose these settings if you have problems with your bandwidth or a very slow Internet connection.</value>
-  </string>	
+    <value>Никакое аудио/видео с вашего PC не будет опубликовано, опубликована будет только картинка из вашего профиля. Выберите эту установку, если вы испытываете проблемы с шириной канала или если у вас медленное соединение с Интернетом</value>  </string>
   <string id="453" name="calendar_dayname_monday">
-    <value>MO</value>
+    <value>ПН</value>
   </string>
   <string id="454" name="calendar_dayname_tuesday">
-    <value>TU</value>
+    <value>ВТ</value>
   </string>
   <string id="455" name="calendar_dayname_wednesday">
-    <value>WE</value>
+    <value>СР</value>
   </string>
   <string id="456" name="calendar_dayname_thursday">
-    <value>TH</value>
+    <value>ЧТ</value>
   </string>
   <string id="457" name="calendar_dayname_friday">
-    <value>FR</value>
+    <value>ПТ</value>
   </string>
   <string id="458" name="calendar_dayname_saturday">
-    <value>SA</value>
+    <value>СБ</value>
   </string>
   <string id="459" name="calendar_dayname_sunday">
-    <value>SU</value>
+    <value>ВС</value>
   </string>
   <string id="460" name="calendar_dayname_MondayLabel">
-    <value>Monday</value>
+    <value>Понедельник</value>
   </string>
   <string id="461" name="calendar_dayname_TuesdayLabel">
-    <value>Tuesday</value>
+    <value>Вторник</value>
   </string>
   <string id="462" name="calendar_dayname_WednesdayLabel">
-    <value>Wednesday</value>
+    <value>Среда</value>
   </string>
   <string id="463" name="calendar_dayname_ThursdayLabel">
-    <value>Thursday</value>
+    <value>Четверг</value>
   </string>
   <string id="464" name="calendar_dayname_FridayLabel">
-    <value>Friday</value>
+    <value>Пятница</value>
   </string>
   <string id="465" name="calendar_dayname_SaturdayLabel">
-    <value>Saturday</value>
+    <value>Суббота</value>
   </string>
   <string id="466" name="calendar_dayname_SundayLabel">
-    <value>Sunday</value>
+    <value>Воскресенье</value>
   </string>
   <string id="467" name="calendar_weeknumber_header">
     <value>CW</value>
@@ -1417,450 +1416,453 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Calendar week</value>
   </string>
   <string id="469" name="calendar_monthnames">
-    <value>January</value>
+    <value>Январь</value>
   </string>
   <string id="470" name="calendar_monthnames">
-    <value>February</value>
+    <value>Февраль</value>
   </string>
   <string id="471" name="calendar_monthnames">
-    <value>March</value>
+    <value>Март</value>
   </string>
   <string id="472" name="calendar_monthnames">
-    <value>April</value>
+    <value>Апрель</value>
   </string>
   <string id="473" name="calendar_monthnames">
-    <value>May</value>
+    <value>Май</value>
   </string>
   <string id="474" name="calendar_monthnames">
-    <value>June</value>
+    <value>Июнь</value>
   </string>
   <string id="475" name="calendar_monthnames">
-    <value>July</value>
+    <value>Июль</value>
   </string>
   <string id="476" name="calendar_monthnames">
-    <value>August</value>
+    <value>Август</value>
   </string>
   <string id="477" name="calendar_monthnames">
-    <value>September</value>
+    <value>Сентябрь</value>
   </string>
   <string id="478" name="calendar_monthnames">
-    <value>October</value>
+    <value>Октябрь</value>
   </string>
   <string id="479" name="calendar_monthnames">
-    <value>November</value>
+    <value>Ноябрь</value>
   </string>
   <string id="480" name="calendar_monthnames">
-    <value>December</value>
+    <value>Декабрь</value>
   </string>
   <string id="481" name="calendarwin_header">
-    <value>Calendar</value>
+    <value>Календарь</value>
   </string>	
   <string id="482" name="roomadmin_labelNumberOfParticipants">
-    <value>Participants</value>
+    <value>Участники</value>
   </string>	
   <string id="483" name="roomValue_advancedSettings">
-    <value>Show Layout Settings</value>
+    <value>Показать установки Layout</value>
   </string>
   <string id="484" name="roomAdmin_layout_videoX">
     <value>X | Y</value>
   </string>
   <string id="485" name="roomAdmin_layout_videoY">
-    <value>Width | Height</value>
+    <value>Ширина | Высота</value>
   </string>
   <string id="486" name="roomAdmin_layout">
-    <value>Video-Container</value>
+    <value>Видео-контейнер</value>
   </string>
   <string id="487" name="roomAdmin_layout_mod">
-    <value>Moderation-Container</value>
+    <value>Модерация-контейнер</value>
   </string>
   <string id="488" name="roomAdmin_layout_mod_pos">
     <value>X</value>
   </string>
   <string id="489" name="roomAdmin_layout_whiteboard">
-    <value>Whiteboard-Container</value>
+    <value>Доска-контейнер</value>
   </string>
   <string id="490" name="roomAdmin_layout_whiteboard_show">
-    <value>Enabled</value>
+    <value>Разрешено</value>
   </string>
   <string id="491" name="roomAdmin_layout_whiteboard_pos">
     <value>X | Y</value>
   </string>
   <string id="492" name="roomAdmin_layout_whiteboard">
-    <value>Width | Height</value>
+    <value>Ширина | Высота</value>
   </string>
   <string id="493" name="roomAdmin_layout_files">
-    <value>Files,Chat,Partizipants - Container</value>
+    <value>файлы,чат,участники - контейнер</value>
   </string>
   <string id="494" name="roomAdmin_layout_files_show">
-    <value>Enabled</value>
+    <value>Разрешено</value>
   </string>
   <string id="495" name="roomAdmin_layout_files_pos">
     <value>X |Y</value>
   </string>
   <string id="496" name="roomAdmin_layout_files">
-    <value>Width | Height</value>
+    <value>Ширина | Высота</value>
   </string>	
   <string id="497" name="moderator_gone_message">
-    <value>The Moderator has left the Room. No one is presenting at the Moment. You could apply for Moderation or wait.</value>
+    <value>Модератор покинул комнату. Сейчас нет модераторов. Вы можете запросить функции модератора, либо подождать.</value>
   </string>
   <string id="498" name="moderator_message_event_no_mod">
-    <value>There is no Moderator in this Room, but there are some Participants. You have to apply for Moderation or wait.</value>
+    <value>В этой комнате нет модератора, но есть участники. Вы можете запросить функции модератора или подождать</value>
   </string>	
   <string id="499" name="feedback_template_subject">
-    <value>Feedback OpenMeetings</value>
+    <value>Обратная связь OpenMeetings</value>
   </string>
   <string id="500" name="invitation_template_head">
-    <value>OpenMeetings - Invitation</value>
+    <value>OpenMeetings - Приглашение</value>
   </string>
   <string id="501" name="invitation_text_from">
-    <value>Message from User:</value>
+    <value>Сообщение от пользователя:</value>
   </string>
   <string id="502" name="invitation_text_message">
-    <value>Message:</value>
+    <value>Сообщение:</value>
   </string>
   <string id="503" name="invitation_text_click_text">
-    <value>Click this link to participate in the Meetings:</value>
+    <value>Кликните на это сообщение, чтобы принять участие во встрече:</value>
   </string>
   <string id="504" name="invitation_text_click_text_link">
-    <value>Click here to enter room</value>
+    <value>Кликните здесь, чтобы войти в комнату</value>
   </string>
   <string id="505" name="invitation_text_click_text_help">
-    <value>if you have problems with the link, please copy and paste this to your browser:</value>
+    <value>если у Вы испытываете проблемы с ликом, скопируйте это в браузер:</value>
   </string>
   <string id="506" name="registering_mail_text_head">
     <value>OpenMeetings SignUp</value>
   </string>
   <string id="507" name="registering_mail_text_head2">
-    <value>Your userdata:</value>
+    <value>Ваши пользовательские данные:</value>
   </string>
   <string id="508" name="registering_mail_text_username">
-    <value>Login:</value>
+    <value>Логин:</value>
   </string>
   <string id="509" name="registering_mail_text_pass">
-    <value>Pass:</value>
+    <value>Пароль:</value>
   </string>
   <string id="510" name="registering_mail_text_mail">
     <value>EMail:</value>
   </string>
   <string id="511" name="registering_mail_text_bye">
-    <value>OpenMeetings-Team</value>
+    <value>OpenMeetings-Команда</value>
   </string>
   <string id="512" name="register_mail_subject">
     <value>OpenMeetings Sign-Up</value>
   </string>
   <string id="513" name="reset_password_template_head">
-    <value>OpenMeetings - Reset Password</value>
+    <value>OpenMeetings - Переустановить пароль</value>
   </string>
   <string id="514" name="reset_password_template_test_link">
-    <value>Click on this link to enter a new password:</value>
+    <value>Кликните на этот линк и введите новый пароль:</value>
   </string>
   <string id="515" name="reset_password_template_text2_link">
-    <value>Click here to enter a new Password</value>
+    <value>Кликните здесь, и введите новый пароль</value>
   </string>
   <string id="516" name="reset_password_template_text3_link">
-    <value>if you have problems with the link, please copy and paste this to your browser:</value>
+    <value>если у Вы испытываете проблемы с ликом, скопируйте это в браузер:</value>
   </string>
   <string id="517" name="reset_password_mail_subject">
-    <value>OpenMeetings Password Reset</value>
+    <value>Переустановка пароля OpenMeetings</value>
   </string>	
   <string id="518" name="dateRegExpError">
-    <value>Please enter a valid Date, for example 24.12.2001 (dd.mm.yyyy)</value>
+    <value>Пожалуйста, введите дату, например 24.12.2001 (dd.mm.yyyy)</value>
   </string>
   <string id="519" name="emailRegExpError">
-    <value>Please enter a valid EMail, for example name@mail.com</value>
+    <value>Пожалуйста, введите EMail, например name@mail.com</value>
   </string>
   <string id="520" name="floatRegExpError">
-    <value>Please enter a Float-Number, for example 1.00</value>
+    <value>Пожалуйста, введите вещественное число, например 1.00</value>
   </string>
   <string id="521" name="numberRegExpError">
-    <value>Please enter a Number (Integer), for example 100</value>
+    <value>Пожалуйста, введите целое число, например 100</value>
   </string>
   <string id="522" name="phoneRegExpError">
-    <value>Please enter a valid Phone number, for example ++49 0123 123123</value>
+    <value>Пожалуйста, введите телефонный номер, например ++49 0123 123123</value>
   </string>
   <string id="523" name="timeRegExpError">
-    <value>Please enter a valid time, for example 12:23 (hh:mm)</value>
+    <value>Пожалуйста, введите время, например 12:23 (hh:mm)</value>
   </string>
   <string id="524" name="invitation_window">
-    <value>Passwort protected</value>
+    <value>Защищенный Пароль</value>
   </string>
   <string id="525" name="invitation_window_passwordLabel">
-    <value>Password</value>
+    <value>Пароль</value>
   </string>
   <string id="526" name="invitation_window_validLabel">
-    <value>Validity period</value>
+    <value>Период действия</value>
   </string>
   <string id="527" name="invitation_window_valid">
-    <value>Endless</value>
+    <value>Бесконечно</value>
   </string>
   <string id="528" name="invitation_window_valid">
-    <value>Period</value>
+    <value>Период</value>
   </string>
   <string id="529" name="invitation_window_valid">
     <value>One-Time</value>
   </string>
   <string id="530" name="invitation_window_validFromLabel">
-    <value>Valid From:</value>
+    <value>Действует от:</value>
   </string>
   <string id="531" name="invitation_window_validToLabel">
-    <value>Valid to:</value>
+    <value>Действует до:</value>
   </string>
   <string id="532" name="invitation_window_MailSubject">
-    <value>Invitation To OpenMeetings</value>
+    <value>Приглашение в OpenMeetings</value>
   </string>
   <string id="533" name="invitation_error">
     <value>Not Invitation availible for this Invitation-Code</value>
   </string>
   <string id="534" name="invitation_error">
-    <value>The Invitation was already used. This type of Invitation cannot be re-used.</value>
+    <value>Это приглашение уже использовано. Приглашение этого типа не может быть переиспользовано.</value>
   </string>
   <string id="535" name="invitation_error">
-    <value>This Invitation-Code is not valid.</value>
+    <value>Этот код приглашения недействителен.</value>
   </string>
   <string id="536" name="invitation_pass">
-    <value>Password:</value>
+    <value>Пароль:</value>
   </string>
   <string id="537" name="invitation_pass_btn">
-    <value>Check Password</value>
+    <value>Проверить пароль</value>
   </string>
   <string id="538" name="invitation_pass_error">
-    <value>Invalid Password!</value>
+    <value>Неверный пароль!</value>
   </string>
   <string id="539" name="Browser">
-    <value>Browser</value>
+    <value>Браузер</value>
   </string>
   <string id="540" name="audio_video">
-    <value>Syncronize Audio/Video</value>
+    <value>Синхронизовать аудио/видео</value>
   </string>	
   <string id="541" name="errorCode_invalidSession">
-    <value>Login was correct, but the Session you tried is not active or stored on the Server. You have to get a new SessionId and retry login.</value>
+    <value>Корректный логин, но эта сессия неактивна или не записана на сервере. Вам нужно получит новый ID сессии и перелогиниться</value>
   </string>
   <string id="542" name="errorcode_setUserObject">
-    <value>The SessionId is not loggedin or has no Admin rights. The SOAP Gateway needs an User with Admin-Rights to embed new Users.</value>
+    <value> SessionId не залогинен или не имеет прав администратора . Чтобы встреивать новых пользователей, SOAP Gateway'ю нужен пользователь с правами администратора.</value>
   </string>
   <string id="543" name="errorcode_loginByRemoteUser">
-    <value>This Session has no Remoteuser-Data connected. Wether you did not call the SOAP-Gateway before accessing the Application or you are usnig a wrong Session-ID</value>
+    <value>У этой сессии нет connected Remoteuser-Data. Либо вы не вызвали SOAP-Gateway перед доступом к приложению, либо испольуете неверный ID сессии.</value>
   </string>
   <string id="544" name="debug_message_recording">
-    <value>The recorder is currently Beta!</value>
+    <value>У этого рекордера - Beta-версия!</value>
   </string>	
   <string id="545" name="propertyPanelXValue">
     <value>x</value>
   </string>
   <string id="546" name="propertyPanelXValueLabel">
-    <value>x-axis</value>
+    <value>ось x</value>
   </string>
   <string id="547" name="propertyPanelYValue">
     <value>y</value>
   </string>
   <string id="548" name="propertyPanelYValueLabel">
-    <value>y-axis</value>
+    <value>ось y</value>
   </string>
   <string id="549" name="propertyPanelWidthValue">
     <value>w</value>
   </string>
   <string id="550" name="propertyPanelWidthValueLabel">
-    <value>width</value>
+    <value>ширина</value>
   </string>
   <string id="551" name="propertyPanelHeightValue">
     <value>h</value>
   </string>
   <string id="552" name="propertyPanelHeightValueLabel">
-    <value>height</value>
+    <value>высота</value>
   </string>
   <string id="553" name="propertyOpacitySlider">
-    <value>Change Transparency</value>
+    <value>Изменить прозрачность</value>
   </string>	
   <string id="554" name="browserOpen">
-    <value>Browser Open</value>
+    <value>Browser открыть</value>
   </string>	
   <string id="555" name="browserClose">
-    <value>Browser Close</value>
+    <value>Browser закрыть</value>
   </string>	
   <string id="556" name="connectionLostMessage">
-    <value>The Connection to the Server is lost. You need to reload the Application or/and check your Network.</value>
+    <value>Потеряно соединение с сервером. Загрузите заново приложение, либо проверьте вашу сеть.</value>
   </string>  
   <string id="557" name="557">
-    <value>Pointer</value>
+    <value>Указатель</value>
   </string>
   <string id="558" name="sync message header">
-    <value>Synchronizing</value>
+    <value>Синхронизация</value>
   </string>
   <string id="559" name="Synchronizing message">
-    <value>Synchronizing Users, please wait</value>
+    <value>Синхронизация пользователь, подождите</value>
   </string>
   <string id="560" name="exportToSVG">
-    <value>&lt;u&gt;Download as SVG&lt;/u&gt;</value>
+    <value>&lt;u&gt;Загрузить как&lt;/u&gt;</value>
   </string>
   <string id="561" name="exportToImage">
-    <value>&lt;u&gt;Download as PNG&lt;/u&gt;</value>
+    <value>&lt;u&gt;Загрузить как PNG&lt;/u&gt;</value>
   </string>
   <string id="562" name="exportToImage">
-    <value>&lt;u&gt;Download as JPG&lt;/u&gt;</value>
+    <value>&lt;u&gt;Загрузить как JPG&lt;/u&gt;</value>
   </string>
   <string id="563" name="exportToImage">
-    <value>&lt;u&gt;Download as PDF&lt;/u&gt;</value>
+    <value>&lt;u&gt;Загрузить как PDF&lt;/u&gt;</value>
   </string>
   <string id="564" name="exportToImage">
-    <value>&lt;u&gt;Download as TIF&lt;/u&gt;</value>
+    <value>&lt;u&gt;Загрузить как TIF&lt;/u&gt;</value>
   </string>
   <string id="565" name="calendarLabel">
-    <value>Reminder:</value>
+    <value>Напоминатель:</value>
   </string>
   <string id="566" name="calendarLabel">
-    <value>Category:</value>
+    <value>Категория:</value>
   </string>
   <string id="567" name="calendarLabel">
-    <value>Repetition:</value>
+    <value>Повторение:</value>
   </string>
   <string id="568" name="calendarLabel">
     <value>none</value>
   </string>
   <string id="569" name="calendarLabel">
-    <value>Location:</value>
+    <value>Место:</value>
   </string>
   <string id="570" name="calendarLabel">
-    <value>Start</value>
+    <value>Начало</value>
   </string>
   <string id="571" name="calendarLabel">
-    <value>End</value>
+    <value>Конец</value>
   </string>
   <string id="572" name="calendarLabel">
     <value>Title:</value>
   </string>
   <string id="573" name="calendarLabel">
-    <value>Comment:</value>
+    <value>Комментарий:</value>
   </string>
   <string id="574" name="calendarLabel">
-    <value>Invite People</value>
+    <value>Пригласи людей</value>
   </string>
   <string id="575" name="calendarLabel">
-    <value>Daily</value>
+    <value>Ежедневно</value>
   </string>
   <string id="576" name="calendarLabel">
-    <value>Monthly</value>
+    <value>Ежемесячно</value>
   </string>
   <string id="577" name="calendarLabel">
-    <value>Yearly</value>
+    <value>Ежегодно</value>
   </string>
   <string id="578" name="alert">
-    <value>Appointment-end is after of appointment-start!</value>
+    <value>Конец встречи после начала встречи!</value>
   </string>
   <string id="579" name="alert">
-    <value>Please insert a title!</value>
+    <value>Пожалуйста, вставьте заголовок!</value>
   </string>
   <string id="580" name="580">
     <value>RTL</value>
   </string>
   <string id="581" name="581">
-    <value>Activate this if you write in a right to left language (inverse word order)</value>
+    <value>Активируйте это, если на вашем языке пишут справа налево</value>
   </string>
   <string id="582" name="tooltip main-menu">
-    <value>Dashboard</value>
+    <value>информационная панель</value>
   </string>
   <string id="583" name="tooltip main-menu">
-    <value>Watch recorded Meetings or Events</value>
+    <value>Посмотреть записанные встречи и события</value>
   </string>
   <string id="584" name="tooltip main-menu">
-    <value>Meeting - Make a conference with 4 (up to 16) Users&lt;br/&gt;everybody will have audio + video access</value>
+    <value>Встреча - проведите конференцию с 4 (до 16) пользователей&lt;br/&gt;у каждого будет аудио + видео доступ</value>
   </string>
   <string id="585" name="tooltip main-menu">
-    <value>Event - Make a conference with up to 200 participents&lt;br/&gt;Only the Moderator will have audio/video</value>
+    <value>Событие - Event - проведите конференцию с участниками, число которых - до 200&lt;br/&gt;Аудио/видео будет только у модератора</value>
   </string>
   <string id="586" name="tooltip main-menu">
-    <value>Create users, rooms, organizations&lt;br/&gt; + change configuration</value>
+    <value>Создать ползователей, комнаты, организации&lt;br/&gt; + изменить конфигурацию</value>
   </string> 
   <string id="587" name="room Administration roomclients list">
-    <value>Users in this Room now</value>
+    <value>Сейчас пользователи в этой комнате</value>
   </string>
   <string id="588" name="room Administration roomclients list">
     <value>ID</value>
   </string>
   <string id="589" name="room Administration roomclients list">
-    <value>Login</value>
+    <value>Логин</value>
   </string>
   <string id="590" name="room Administration roomclients list">
     <value>D</value>
   </string>  
   <string id="591" name="swf sync message">
-    <value>Loading Document. Please wait untill all Client have been synchronized.</value>
+    <value>Подгрузка документа. Подождите, пока клиент синхронизуется.</value>
   </string>  
   <string id="592" name="upload dialog">
-    <value>Upload complete, converting Document ...</value>
+    <value>Подгрузка завершена, ковертация документа ...</value>
   </string>
   <string id="593" name="upload dialog">
-    <value>Start Upload</value>
+    <value>Начать </value>
   </string>
   <string id="594" name="upload dialog">
-    <value>Upload and Import Dialog. Please select a File from your Disk.</value>
+    <value>Диалог подгрузки и иморта. Выберите файл на вашем диске.</value>
   </string>
   <string id="595" name="upload Dialog">
-    <value>Cancel</value>
+    <value>Отмена</value>
   </string>
   <string id="596" name="upload Dialog">
-    <value>Select File</value>
+    <value>Выбор файла</value>
   </string>
   <string id="597" name="administration navigation">
-    <value>Connections</value>
+    <value>Соединения</value>
   </string>
   <string id="598" name="confadmin value list">
-    <value>Value</value>
+    <value>Значение</value>
   </string>  
   <string id="599" name="connection administration panel">
-    <value>Streamid</value>
+    <value>ID потока</value>
   </string>
   <string id="600" name="connection administration panel">
-    <value>Login</value>
+    <value>Логин</value>
   </string>
   <string id="601" name="connection administration panel">
-    <value>Connected since</value>
+    <value>Соеденено с</value>
   </string>
   <string id="602" name="connection administration panel">
-    <value>Room / Scope</value>
+    <value>Комната / Scope</value>
   </string>
   <string id="603" name="connection administration panel">
-    <value>Kick User</value>
+    <value>Выбросить пользователя</value>
   </string>
   <string id="604" name="kick user confirmation dialog">
-    <value>Kick User</value>
+    <value>Выбросить пользователя</value>
   </string>
   <string id="605" name="kick user confirmation dialog">
-    <value>Do you really want to kick this Client from the Connection?&lt;br/&gt; This does only remove the Client from the current Room.The Client could re-login again.</value>
+    <value>Вы действительно хотите отключит этого клиента? Клиент может залогиниться вновь&lt;br/&gt;</value>
   </string>
   <string id="606" name="kick user message dialog">
-    <value>Your session has been closed by an Administrator or Moderator.</value>
+    <value>Ваша сессия завершена администратором или модератором.</value>
   </string>  
   <string id="607" name="useralterself_phone">
-    <value>Phone</value>
+    <value>Телефон</value>
   </string>
   <string id="608" name="participents panel">
-    <value>User is the Moderator of this Room</value>
+    <value>Этот пользователь - модератор в эотй комнате</value>
   </string>
   <string id="609" name="participents panel">
-    <value>User is allowed to draw on the Whiteboard</value>
+    <value>Ползователю разрешено рисовать на достке</value>
   </string>
   <string id="610" name="participents panel">
-    <value>(Re) Start Audio/Video or change Device Settings</value>
+    <value>(Ре)старт аудио/видео или изменение установок устройства</value>
   </string>
   <string id="611" name="participents panel">
-    <value>Allow this User to draw on the Whiteboard</value>
+    <value>Разрешить этому пользователю рисовать на доске</value>
   </string>
   <string id="612" name="participents panel">
-    <value>Remove ability to draw on whiteboard</value>
+    <value>Запретить рисовать на доске</value>
   </string>
   <string id="613" name="conferencePanels">
-    <value>Users</value>
+    <value>Пользователи</value>
   </string>
   <string id="614" name="conferencePanels">
-    <value>Files</value>
+    <value>Файлы</value>
   </string>
   <string id="615" name="conferencePanels">
-    <value>Whiteboard</value>
+    <value>Доска</value>
   </string>
   <string id="616" name="conferencePanels">
-    <value>Chat</value>
+    <value>Чат</value>
   </string>  
   <string id="617" name="organization choose info">
-    <value>Your account is assigned to multiple Organizations. Please choose one for this Session.</value>
+    <value>Вашему аккаунту приписано несколько организаций. Пожалуйста, выберите одну организацию для данной сессии.</value>
   </string>  
 </language>
+
+
+
