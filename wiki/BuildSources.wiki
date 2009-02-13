@@ -30,60 +30,17 @@ Step-By-Step:
 
 = Java Webapp (Server-Side) =
 
-  * Install red5 from here: http://openmeetings.googlecode.com/files/red5_snapshot_r3200.zip (its build against JDK59
-  * Install it
-  * there is an error in red5's configuration of Log-Files, so you need to add the following line's into the global logback.xml of $RED5_HOME/conf/logback.xml:
-
-  {{{
-  <logger name="org.apache.axis2">
-    <level value="ERROR"/>
-  </logger>
-  <logger name="com.mchange.v2">
-    <level value="ERROR"/>
-  </logger>
-  <logger name="org.hibernate.cache">
-    <level value="ERROR"/>
-  </logger>
-  <logger name="org.apache.axiom">
-    <level value="ERROR"/>
-  </logger>
-  <logger name="org.hibernate.jdbc">
-    <level value="ERROR"/>
-  </logger>
-  <logger name="org.hibernate.SQL">
-    <level value="ERROR"/>
-  </logger>
-  <logger name="org.apache.commons.httpclient">
-    <level value="ERROR"/>
-  </logger>
-  <logger name="org.hibernate.tool.hbm2ddl">
-    <level value="ERROR"/>
-  </logger>
-  <logger name="org.hibernate">
-    <level value="ERROR"/>
-  </logger>
-  <logger name="de.hunsicker.jalopy.io">
-    <level value="ERROR"/>
-  </logger>
-  <logger name="org.apache.axis2.enterprise">
-    <level value="ERROR"/>
-  </logger>
-  <logger name="httpclient.wire.header">
-    <level value="ERROR"/>
-  </logger>
-  }}}
-  or replace with this one: http://openmeetings.googlecode.com/svn/trunk/patches/logback.xml
-
+  * You need Java Version = 6 for running and compiling !OpenMeetings
+  * Install red5 from here: http://build.xuggle.com/view/Stable/job/red5_jdk6_stable/41/
   * Download (SVN - Checkout) from:
 http://openmeetings.googlecode.com/svn/trunk/webapp/
   * change dir your local copy
-  * Run: ant dist (JAVA_HOME must be set and point to a JDK = 1.5 and you need ant version = 1.7)
-  * there is now a directory dist, inside of that directory there is a compiled openmeetings-webapp with the name *openmeetings*
+  * Run: ant dist (JAVA_HOME must be set and point to a JDK = 1.6 and you need ant version = 1.7)
+  * there is now a directory *dist*, inside of that directory there is a compiled openmeetings-webapp with the name *openmeetings*
   * use the compiled openmeetings-webapp and copy it to $RED5_HOME/webapps
   * do the usual install process of openmeetings
 
 Additional Notes:
-  # there are some Issues with Logging and Exceptions in Red5, we try to fix them. For the moment you can ignore them
   # You have to copy the Laszlo-Client from the Step-By-Step scenario into it to make a complete Binary, but you can also run it from inside OpenLaszlo Server. You only need to place a *crossdomain.xml* into $RED5_HOME/webapps/root, otherwise the Flash-Security-Sandbox will not allow Up- or Downloads.
   # If you want to keep the previous installation and only change some Java code but no Database structure it is enough if you just copy/overwrite the folder *WEB-INF* and restart red5.
 
