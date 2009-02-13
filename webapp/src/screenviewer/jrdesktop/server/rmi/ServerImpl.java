@@ -21,12 +21,12 @@ public class ServerImpl extends UnicastRemoteObject implements ServerInterface {
         super(0, csf, ssf);
     }  */ 
     
-    @Override
+    //@Override
     public int startViewer(InetAddress inetAddress) throws RemoteException {
         return Server.addViewer(inetAddress);
     }
     
-    @Override
+    //@Override
     public void stopViewer(int index) throws RemoteException {
         Server.removeViewer(index);
     }
@@ -36,12 +36,12 @@ public class ServerImpl extends UnicastRemoteObject implements ServerInterface {
         Server.updateOptions(data, index);
     }*/
     
-    @Override
+    //@Override
     public void updateData(byte[] data, int index) {
        Server.updateData(data, index); 
     }
     
-    @Override
+    //@Override
     public byte[] updateData(int index) {
         return Server.updateData(index);
     }      
