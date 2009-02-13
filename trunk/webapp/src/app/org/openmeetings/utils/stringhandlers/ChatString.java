@@ -5,12 +5,12 @@ import java.text.CharacterIterator;
 import java.text.StringCharacterIterator;
 import java.util.LinkedList;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.red5.logging.Red5LoggerFactory;
 import org.openmeetings.app.remote.red5.EmoticonsManager;
 
 public class ChatString {
 	
-	private static final Logger log = LoggerFactory.getLogger(ChatString.class);
+	private static final Logger log = Red5LoggerFactory.getLogger(ChatString.class, "openmeetings");
 	
 	private static ChatString instance = null;
 	

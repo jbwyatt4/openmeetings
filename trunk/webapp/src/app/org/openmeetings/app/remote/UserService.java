@@ -22,7 +22,7 @@ import org.openmeetings.app.remote.red5.ScopeApplicationAdapter;
 import org.red5.io.utils.ObjectMap;
 import org.red5.server.api.IScope;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.red5.logging.Red5LoggerFactory;
 
 /**
  * 
@@ -31,7 +31,7 @@ import org.slf4j.LoggerFactory;
  */
 public class UserService {
 	
-	private static final Logger log = LoggerFactory.getLogger(UserService.class);	
+	private static final Logger log = Red5LoggerFactory.getLogger(UserService.class, "openmeetings");	
 	
 	//Spring Beans
 	private ClientListManager clientListManager = null;

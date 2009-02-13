@@ -1,13 +1,15 @@
 package org.openmeetings.app.remote;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.LinkedList;
+import java.util.Set;
 
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.red5.logging.Red5LoggerFactory;
 import org.red5.server.api.IConnection;
 import org.red5.server.api.Red5;
 import org.red5.server.api.service.IServiceCapableConnection;
@@ -26,7 +28,7 @@ import org.openmeetings.app.remote.red5.ScopeApplicationAdapter;
  */
 public class PollService {
 	
-	private static final Logger log = LoggerFactory.getLogger(PollService.class);
+	private static final Logger log = Red5LoggerFactory.getLogger(PollService.class, "openmeetings");
 	
 	private static HashMap<Long,RoomPoll> pollList = new HashMap<Long,RoomPoll>();
 	
@@ -96,15 +98,18 @@ public class PollService {
 	public void sendNotification(IConnection current,String clientFunction, Object[]obj) throws Exception{
 		//Notify all clients of the same scope (room)
 		RoomClient rc = this.clientListManager.getClientByStreamId(current.getClient().getId());
-		Iterator<IConnection> it = current.getScope().getConnections();
-		while (it.hasNext()) {
-			IConnection conn = it.next();
-			if (conn instanceof IServiceCapableConnection) {
-				RoomClient rcl = this.clientListManager.getClientByStreamId(conn.getClient().getId());
-				if (rcl.getRoom_id().equals(rc.getRoom_id()) && rcl.getRoom_id()!=null){
-					((IServiceCapableConnection) conn).invoke(clientFunction,obj,ScopeApplicationAdapter.getInstance());
-					log.debug("sending "+clientFunction+" to " + conn+" "+conn.getClient().getId());
-				}
+		Collection<Set<IConnection>> conCollection = current.getScope().getConnections();
+		for (Set<IConnection> conset : conCollection) {
+			for (IConnection conn : conset) {
+				if (conn != null) {
+					if (conn instanceof IServiceCapableConnection) {
+						RoomClient rcl = this.clientListManager.getClientByStreamId(conn.getClient().getId());
+						if (rcl.getRoom_id().equals(rc.getRoom_id()) && rcl.getRoom_id()!=null){
+							((IServiceCapableConnection) conn).invoke(clientFunction,obj,ScopeApplicationAdapter.getInstance());
+							log.debug("sending "+clientFunction+" to " + conn+" "+conn.getClient().getId());
+						}
+					}
+				}		
 			}
 		}
 	}

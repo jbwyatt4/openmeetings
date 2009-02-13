@@ -5,17 +5,16 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.red5.logging.Red5LoggerFactory;
 import org.openmeetings.app.data.calendar.daos.AppointmentDaoImpl;
 import org.openmeetings.app.data.calendar.daos.AppointmentReminderTypDaoImpl;
 import org.openmeetings.app.hibernate.beans.calendar.Appointment;
 import org.openmeetings.app.hibernate.beans.calendar.AppointmentReminderTyps;
-import org.openmeetings.app.hibernate.beans.calendar.MeetingMember;
 
 public class AppointmentLogic {
 	
-	private static final Log log = LogFactory.getLog(AppointmentLogic.class);
+	private static final Logger log = Red5LoggerFactory.getLogger(AppointmentLogic.class, "openmeetings");
 	private static AppointmentLogic instance = null;
 
 	public static synchronized AppointmentLogic getInstance() {

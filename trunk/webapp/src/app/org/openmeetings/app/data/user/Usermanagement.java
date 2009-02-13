@@ -31,7 +31,7 @@ import org.openmeetings.utils.mail.MailHandler;
 import org.openmeetings.utils.mappings.CastMapToObject;
 import org.red5.io.utils.ObjectMap;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.red5.logging.Red5LoggerFactory;
 
 /**
  * 
@@ -40,7 +40,7 @@ import org.slf4j.LoggerFactory;
  */
 public class Usermanagement {
 
-	private static final Logger log = LoggerFactory.getLogger(Usermanagement.class);
+	private static final Logger log = Red5LoggerFactory.getLogger(Usermanagement.class, "openmeetings");
 
 	private static Usermanagement instance = null;
 

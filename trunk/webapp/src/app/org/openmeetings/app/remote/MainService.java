@@ -1,13 +1,15 @@
 package org.openmeetings.app.remote;
 
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.LinkedHashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Set;
 
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.red5.logging.Red5LoggerFactory;
 
 import org.red5.server.api.IConnection;
 import org.red5.server.api.Red5;
@@ -46,7 +48,7 @@ import com.thoughtworks.xstream.io.xml.XppDriver;
  */ 
 public class MainService implements IPendingServiceCallback {
 	
-	private static final Logger log = LoggerFactory.getLogger(MainService.class);
+	private static final Logger log = Red5LoggerFactory.getLogger(MainService.class, "openmeetings");
 	private static MainService instance;
 	
 	private ClientListManager clientListManager = null;
@@ -215,22 +217,23 @@ public class MainService implements IPendingServiceCallback {
     				Users u = (Users)o;
 	            	currentClient.setFirstname(u.getFirstname());
 	            	currentClient.setLastname(u.getLastname());
-	    			Iterator<IConnection> it = current.getScope().getConnections();
-	    			while (it.hasNext()) {
-	    				
-	    				//log.error("hasNext == true");
-	    				IConnection cons = it.next();
-	    				//log.error("cons Host: "+cons);
-	    				if (cons instanceof IServiceCapableConnection) {
-	    					if (!cons.equals(current)){
-	    						//log.error("sending roomDisconnect to " + cons);
-	    						//RoomClient rcl = this.clientListManager.getClientByStreamId(cons.getClient().getId());
-	    						//Send to all connected users
-								((IServiceCapableConnection) cons).invoke("roomConnect",new Object[] { currentClient }, this);
-								//log.error("sending roomDisconnect to " + cons);
-	    					}
-	    				}
-	    			} 
+	    			
+	    			Collection<Set<IConnection>> conCollection = current.getScope().getConnections();
+	    			for (Set<IConnection> conset : conCollection) {
+		    			for (IConnection cons : conset) {
+		    				if (cons != null) {
+		    					if (cons instanceof IServiceCapableConnection) {
+			    					if (!cons.equals(current)){
+			    						//log.error("sending roomDisconnect to " + cons);
+			    						//RoomClient rcl = this.clientListManager.getClientByStreamId(cons.getClient().getId());
+			    						//Send to all connected users
+										((IServiceCapableConnection) cons).invoke("roomConnect",new Object[] { currentClient }, this);
+										//log.error("sending roomDisconnect to " + cons);
+			    					}
+			    				}
+		    			 	}
+		    			}
+	    			}
 	            }
 	            
 	            return o;

@@ -10,7 +10,7 @@ import java.util.Collections;
 import java.util.LinkedHashMap;
 
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.red5.logging.Red5LoggerFactory;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.HibernateException;
@@ -34,7 +34,7 @@ import org.openmeetings.app.hibernate.utils.HibernateUtil;
  *
  */
 public class Organisationmanagement {
-	private static Logger log = LoggerFactory.getLogger(Organisationmanagement.class);
+	private static Logger log = Red5LoggerFactory.getLogger(Organisationmanagement.class, "openmeetings");
 
 	private static Organisationmanagement instance = null;
 

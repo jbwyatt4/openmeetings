@@ -12,14 +12,14 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.red5.logging.Red5LoggerFactory;
 import org.openmeetings.app.data.basic.Configurationmanagement;
 import org.openmeetings.app.remote.red5.ScopeApplicationAdapter;
 import org.openmeetings.utils.math.CalendarPatterns;
 
 public class GenerateSWF {
 	
-	private static final Logger log = LoggerFactory.getLogger(GenerateSWF.class);
+	private static final Logger log = Red5LoggerFactory.getLogger(GenerateSWF.class, "openmeetings");
 
 	private static GenerateSWF instance;
 

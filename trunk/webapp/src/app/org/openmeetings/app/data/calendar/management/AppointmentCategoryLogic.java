@@ -1,19 +1,16 @@
 
 package org.openmeetings.app.data.calendar.management;
 
-import java.util.Date;
 import java.util.List;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.red5.logging.Red5LoggerFactory;
 import org.openmeetings.app.data.calendar.daos.AppointmentCategoryDaoImpl;
-import org.openmeetings.app.data.calendar.daos.AppointmentDaoImpl;
-import org.openmeetings.app.hibernate.beans.calendar.Appointment;
 import org.openmeetings.app.hibernate.beans.calendar.AppointmentCategory;
 
 public class AppointmentCategoryLogic {
 	
-	private static final Log log = LogFactory.getLog(AppointmentCategoryLogic.class);
+	private static final Logger log = Red5LoggerFactory.getLogger(AppointmentCategoryLogic.class, "openmeetings");
 	private static AppointmentCategoryLogic instance = null;
 
 	public static synchronized AppointmentCategoryLogic getInstance() {

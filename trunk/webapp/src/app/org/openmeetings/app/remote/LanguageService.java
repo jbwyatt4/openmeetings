@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.LinkedHashMap;
 
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.red5.logging.Red5LoggerFactory;
 import org.openmeetings.app.data.basic.AuthLevelmanagement;
 import org.openmeetings.app.data.basic.Configurationmanagement;
 import org.openmeetings.app.data.basic.FieldLanguageDaoImpl;
@@ -22,7 +22,7 @@ import org.openmeetings.app.hibernate.beans.lang.Fieldvalues;
  */
 public class LanguageService {
 	
-	private static final Logger log = LoggerFactory.getLogger(LanguageService.class);
+	private static final Logger log = Red5LoggerFactory.getLogger(LanguageService.class, "openmeetings");
 	
 	/**
 	 * get a List of all availible Languages

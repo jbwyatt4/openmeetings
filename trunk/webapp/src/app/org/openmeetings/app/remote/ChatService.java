@@ -1,16 +1,17 @@
 package org.openmeetings.app.remote;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.HashMap;
 import java.util.List;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.Calendar;
+import java.util.Set;
 import java.lang.Integer;
 
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.red5.logging.Red5LoggerFactory;
 import org.red5.server.api.IConnection;
 import org.red5.server.api.Red5;
 import org.red5.server.api.service.IPendingServiceCall;
@@ -34,7 +35,7 @@ public class ChatService implements IPendingServiceCallback {
 	//number of items in the Chatroom history
 	private static final int chatRoomHistory = 50;
 	
-	private static final Logger log = LoggerFactory.getLogger(ChatService.class);
+	private static final Logger log = Red5LoggerFactory.getLogger(ChatService.class, "openmeetings");
 	
 	private static LinkedHashMap<Long,List<HashMap<String,Object>>> myChats = new LinkedHashMap<Long,List<HashMap<String,Object>>>();
 	
@@ -121,26 +122,32 @@ public class ChatService implements IPendingServiceCallback {
 			log.debug("SET CHATROOM: "+room_id);
 			
 			//broadcast to everybody in the room/domain
-			Iterator<IConnection> it = current.getScope().getConnections();
-			while (it.hasNext()) {
-				IConnection conn = it.next();
-				if (conn instanceof IServiceCapableConnection) {
-					RoomClient rcl = this.clientListManager.getClientByStreamId(conn.getClient().getId());
-					log.debug("*..*idremote room_id: " + room_id);
-					log.debug("*..*my idstreamid room_id: " + rcl.getRoom_id());
-					if (room_id!=null && room_id.equals(rcl.getRoom_id())) {
-						((IServiceCapableConnection) conn).invoke("sendVarsToMessageWithClient",new Object[] { hsm }, this);
-						log.debug("sending sendVarsToMessageWithClient to " + conn);
-						if (rcl.getIsRecording()){
-							StreamService.addChatEvent(rcl.getRoomRecordingName(),hsm);
-						}							
-					} else if (rcl.getIsChatNotification()) {
-						if (room_id.equals(rcl.getChatUserRoomId()) && room_id != null) {
-							((IServiceCapableConnection) conn).invoke("sendVarsToMessageWithClient",new Object[] { hsm }, this);
-						}
-					}
-				}
+			Collection<Set<IConnection>> conCollection = current.getScope().getConnections();
+			for (Set<IConnection> conset : conCollection) {
+    			for (IConnection conn : conset) {
+    				if (conn != null) {
+    					if (conn instanceof IServiceCapableConnection) {
+    						
+    						RoomClient rcl = this.clientListManager.getClientByStreamId(conn.getClient().getId());
+    						log.debug("*..*idremote room_id: " + room_id);
+    						log.debug("*..*my idstreamid room_id: " + rcl.getRoom_id());
+    						if (room_id!=null && room_id.equals(rcl.getRoom_id())) {
+    							((IServiceCapableConnection) conn).invoke("sendVarsToMessageWithClient",new Object[] { hsm }, this);
+    							log.debug("sending sendVarsToMessageWithClient to " + conn);
+    							if (rcl.getIsRecording()){
+    								StreamService.addChatEvent(rcl.getRoomRecordingName(),hsm);
+    							}							
+    						} else if (rcl.getIsChatNotification()) {
+    							if (room_id.equals(rcl.getChatUserRoomId()) && room_id != null) {
+    								((IServiceCapableConnection) conn).invoke("sendVarsToMessageWithClient",new Object[] { hsm }, this);
+    							}
+    						}
+    						
+	    			 	}
+	    			}
+    			}
 			}
+    					
 		} catch (Exception err) {
 			log.error("[ChatService sendMessageWithClient] ",err);
 			return -1;
@@ -301,16 +308,22 @@ public class ChatService implements IPendingServiceCallback {
 			log.debug("SET CHATROOM: "+overallChatRoomName);
 			
 			//broadcast to everybody in the room/domain
-			Iterator<IConnection> it = current.getScope().getConnections();
-			while (it.hasNext()) {
-				IConnection conn = it.next();
-				if (conn instanceof IServiceCapableConnection) {
-					RoomClient rcl = this.clientListManager.getClientByStreamId(conn.getClient().getId());
-					log.debug("*..*idremote: " + rcl.getStreamid());
-					log.debug("*..*my idstreamid: " + currentClient.getStreamid());
-					((IServiceCapableConnection) conn).invoke("sendVarsToOverallChat",new Object[] { hsm }, this);
+			Collection<Set<IConnection>> conCollection = current.getScope().getConnections();
+			for (Set<IConnection> conset : conCollection) {
+    			for (IConnection conn : conset) {
+    				if (conn != null) {
+    					if (conn instanceof IServiceCapableConnection) {
+			
+    						RoomClient rcl = this.clientListManager.getClientByStreamId(conn.getClient().getId());
+    						log.debug("*..*idremote: " + rcl.getStreamid());
+    						log.debug("*..*my idstreamid: " + currentClient.getStreamid());
+    						((IServiceCapableConnection) conn).invoke("sendVarsToOverallChat",new Object[] { hsm }, this);
+    						
+    					}
+    				}
 				}
-			}
+			}		
+			
 		} catch (Exception err) {
 			log.error("[ChatService sendMessageToOverallChat] ",err);
 			return -1;

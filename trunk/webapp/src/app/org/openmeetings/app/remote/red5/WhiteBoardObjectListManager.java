@@ -1,20 +1,21 @@
 package org.openmeetings.app.remote.red5;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.red5.logging.Red5LoggerFactory;
 import org.openmeetings.app.conference.whiteboard.WhiteboardSyncLockObject;
 
 public class WhiteBoardObjectListManager {
 	
-	private static HashMap<Long,HashMap<String,Map>> whiteBoardObjectList = new HashMap<Long,HashMap<String,Map>>();
+	private static HashMap<Long,HashMap<String,List>> whiteBoardObjectList = new HashMap<Long,HashMap<String,List>>();
 	private static HashMap<Long,Map<String,WhiteboardSyncLockObject>> whiteBoardSyncList = new HashMap<Long,Map<String,WhiteboardSyncLockObject>>();
 	
 	private static HashMap<Long,Map<String,Map<String,WhiteboardSyncLockObject>>> whiteBoardObjectSyncList = new HashMap<Long,Map<String,Map<String,WhiteboardSyncLockObject>>>();
 
-	private static final Log log = LogFactory.getLog(WhiteBoardObjectListManager.class);
+	private static final Logger log = Red5LoggerFactory.getLogger(WhiteBoardObjectListManager.class, "openmeetings");
 
 	private static WhiteBoardObjectListManager instance = null;
 
@@ -31,10 +32,10 @@ public class WhiteBoardObjectListManager {
 	/*
 	 * Room items ‡ Whiteboard
 	 */
-	public synchronized HashMap<String,Map> getWhiteBoardObjectListByRoomId(Long room_id){
-		HashMap<String,Map> roomList = whiteBoardObjectList.get(room_id);
+	public synchronized HashMap<String,List> getWhiteBoardObjectListByRoomId(Long room_id){
+		HashMap<String,List> roomList = whiteBoardObjectList.get(room_id);
 		if (roomList == null) {
-			roomList = new HashMap<String,Map>();
+			roomList = new HashMap<String,List>();
 		}
 		return roomList;
 	}
@@ -102,13 +103,13 @@ public class WhiteBoardObjectListManager {
 	 * Whiteboard Object List
 	 * 
 	 */
-	public synchronized HashMap<Long,HashMap<String,Map>> getWhiteBoardObjectList(){
+	public synchronized HashMap<Long,HashMap<String,List>> getWhiteBoardObjectList(){
 		return whiteBoardObjectList;
 	}
-	public synchronized void setWhiteBoardObjectList(HashMap<Long,HashMap<String,Map>> whiteBoardObjectListNew){
+	public synchronized void setWhiteBoardObjectList(HashMap<Long,HashMap<String,List>> whiteBoardObjectListNew){
 		whiteBoardObjectList = whiteBoardObjectListNew;
 	}
-	public synchronized void setWhiteBoardObjectListRoomObj(Long room_id, HashMap<String,Map> roomList){
+	public synchronized void setWhiteBoardObjectListRoomObj(Long room_id, HashMap<String,List> roomList){
 		whiteBoardObjectList.put(room_id, roomList);
 	}
 

@@ -8,7 +8,7 @@ import java.util.*;
 import javax.activation.*;
 
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.red5.logging.Red5LoggerFactory;
 import org.openmeetings.app.data.basic.Configurationmanagement;
 
 /**
@@ -18,7 +18,7 @@ import org.openmeetings.app.data.basic.Configurationmanagement;
  */
 public class MailHandler {
 
-	private static final Logger log = LoggerFactory.getLogger(MailHandler.class);
+	private static final Logger log = Red5LoggerFactory.getLogger(MailHandler.class, "openmeetings");
 
 	public MailHandler() {
 	}

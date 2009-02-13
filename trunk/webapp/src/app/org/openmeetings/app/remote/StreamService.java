@@ -1,10 +1,12 @@
 package org.openmeetings.app.remote;
 
+import java.util.Collection;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 import org.openmeetings.app.data.basic.AuthLevelmanagement;
 import org.openmeetings.app.data.basic.Sessionmanagement;
@@ -40,7 +42,7 @@ import org.red5.server.api.service.IPendingServiceCallback;
 import org.red5.server.api.service.IServiceCapableConnection;
 import org.red5.server.stream.ClientBroadcastStream;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.red5.logging.Red5LoggerFactory;
 
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.XppDriver;
@@ -58,7 +60,7 @@ public class StreamService implements IPendingServiceCallback {
 	//Beans, see red5-web.xml
 	private ClientListManager clientListManager = null;
 	
-	private static final Logger log = LoggerFactory.getLogger(StreamService.class);
+	private static final Logger log = Red5LoggerFactory.getLogger(StreamService.class, "openmeetings");
 	
 	private static LinkedHashMap<String,RoomRecording> roomRecordingList = new LinkedHashMap<String,RoomRecording>();
 	
@@ -118,61 +120,64 @@ public class StreamService implements IPendingServiceCallback {
 			roomRecording.setComment(comment);
 			
 			//get all stream and start recording them
-			Iterator<IConnection> it = current.getScope().getConnections();
-			while (it.hasNext()) {
-				IConnection conn = it.next();
-				if (conn instanceof IServiceCapableConnection) {
-					RoomClient rcl = this.clientListManager.getClientByStreamId(conn.getClient().getId());
-					log.error("is this users still alive? :"+rcl);
-					//Check if the Client is in the same room and same domain 
-					if(room_id.equals(rcl.getRoom_id()) && room_id!=null){
-						
-						((IServiceCapableConnection) conn).invoke("startedRecording",new Object[] { currentClient }, this);
-						
-						String remoteAdress = conn.getRemoteAddress();
-						Date startDate = new Date();
-						
-						//add streamings to record File
-						if (!conferenceType.equals("audience") || rcl.getIsMod()){
-							
-							RoomStream roomStream = new RoomStream();
-							
-							String streamName = generateFileName(Long.valueOf(rcl.getBroadCastID()).toString());
-							
-							//if the user does publish av, a, v
-							if (!rcl.getAvsettings().equals("n")){	
-								recordShow(conn, rcl.getBroadCastID(), streamName);
-							} 
-							
-							roomStream.setStreamName(streamName);
-							//stream starting
-							roomStream.setStreamstart(true);
-							//is not only a avset-event
-							roomStream.setAvset(false);
-							roomStream.setRemoteAdress(remoteAdress);
-							roomStream.setStartdate(startDate);
-							roomStream.setStarttime(0L);
-							roomStream.setRcl(rcl);
-							
-							if (roomRecording.getRoomStreams() == null) {
-								roomRecording.setRoomStreams(new LinkedList<RoomStream>());
+			Collection<Set<IConnection>> conCollection = current.getScope().getConnections();
+			for (Set<IConnection> conset : conCollection) {
+				for (IConnection conn : conset) {
+					if (conn != null) {
+						if (conn instanceof IServiceCapableConnection) {
+							RoomClient rcl = this.clientListManager.getClientByStreamId(conn.getClient().getId());
+							log.error("is this users still alive? :"+rcl);
+							//Check if the Client is in the same room and same domain 
+							if(room_id.equals(rcl.getRoom_id()) && room_id!=null){
+								
+								((IServiceCapableConnection) conn).invoke("startedRecording",new Object[] { currentClient }, this);
+								
+								String remoteAdress = conn.getRemoteAddress();
+								Date startDate = new Date();
+								
+								//add streamings to record File
+								if (!conferenceType.equals("audience") || rcl.getIsMod()){
+									
+									RoomStream roomStream = new RoomStream();
+									
+									String streamName = generateFileName(Long.valueOf(rcl.getBroadCastID()).toString());
+									
+									//if the user does publish av, a, v
+									if (!rcl.getAvsettings().equals("n")){	
+										recordShow(conn, rcl.getBroadCastID(), streamName);
+									} 
+									
+									roomStream.setStreamName(streamName);
+									//stream starting
+									roomStream.setStreamstart(true);
+									//is not only a avset-event
+									roomStream.setAvset(false);
+									roomStream.setRemoteAdress(remoteAdress);
+									roomStream.setStartdate(startDate);
+									roomStream.setStarttime(0L);
+									roomStream.setRcl(rcl);
+									
+									if (roomRecording.getRoomStreams() == null) {
+										roomRecording.setRoomStreams(new LinkedList<RoomStream>());
+									}
+									roomRecording.getRoomStreams().add(roomStream);
+								} 
+		
+								//add room Clients enter/leave Events to record File
+								RecordingClient roomClient = new RecordingClient();
+								roomClient.setRemoteAdress(remoteAdress);
+								roomClient.setRoomenter(true);
+								roomClient.setStartdate(startDate);
+								roomClient.setStarttime(0L);
+								roomClient.setRcl(rcl);
+								if (roomRecording.getRoomClients() == null) {
+									roomRecording.setRoomClients(new LinkedList<RecordingClient>());
+								}
+								roomRecording.getRoomClients().add(roomClient);
 							}
-							roomRecording.getRoomStreams().add(roomStream);
-						} 
-
-						//add room Clients enter/leave Events to record File
-						RecordingClient roomClient = new RecordingClient();
-						roomClient.setRemoteAdress(remoteAdress);
-						roomClient.setRoomenter(true);
-						roomClient.setStartdate(startDate);
-						roomClient.setStarttime(0L);
-						roomClient.setRcl(rcl);
-						if (roomRecording.getRoomClients() == null) {
-							roomRecording.setRoomClients(new LinkedList<RecordingClient>());
 						}
-						roomRecording.getRoomClients().add(roomClient);
 					}
-				}
+				}		
 			}
 			
 			roomRecording.setInitwhiteboardvars(initwhiteboardvars);
@@ -218,16 +223,19 @@ public class StreamService implements IPendingServiceCallback {
 			
 			//get all stream and stop recording them
 			//Todo: Check that nobody does Recording at the same time Issue 253
-			Iterator<IConnection> it = current.getScope().getConnections();
-			while (it.hasNext()) {
-				IConnection conn = it.next();
-				if (conn instanceof IServiceCapableConnection) {
-					RoomClient rcl = this.clientListManager.getClientByStreamId(conn.getClient().getId());
-					log.debug("is this users still alive? :"+rcl);
-					//Check if the Client is in the same room and same domain 
-					if(room_id.equals(rcl.getRoom_id()) && room_id!=null){
-						((IServiceCapableConnection) conn).invoke("stopedRecording",new Object[] { currentClient }, this);
-					}
+			Collection<Set<IConnection>> conCollection = current.getScope().getConnections();
+			for (Set<IConnection> conset : conCollection) {
+				for (IConnection conn : conset) {
+					if (conn != null) {
+						if (conn instanceof IServiceCapableConnection) {
+							RoomClient rcl = this.clientListManager.getClientByStreamId(conn.getClient().getId());
+							log.debug("is this users still alive? :"+rcl);
+							//Check if the Client is in the same room and same domain 
+							if(room_id.equals(rcl.getRoom_id()) && room_id!=null){
+								((IServiceCapableConnection) conn).invoke("stopedRecording",new Object[] { currentClient }, this);
+							}
+						}
+					}		
 				}
 			}
 			
@@ -253,23 +261,29 @@ public class StreamService implements IPendingServiceCallback {
 			
 			//get all stream and stop recording them
 			//Todo: Check that nobody does Recording at the same time Issue 253
-			Iterator<IConnection> it = scope.getConnections();
-			while (it.hasNext()) {
-				IConnection conn = it.next();
-				if (conn instanceof IServiceCapableConnection) {
-					RoomClient rcl = ClientListManager.getInstance().getClientByStreamId(conn.getClient().getId());
-					log.debug("is this users still alive? :"+rcl);
-					//Check if the Client is in the same room and same domain 
-					if(room_id.equals(rcl.getRoom_id()) && room_id!=null){
-						if (!conferenceType.equals("audience") || rcl.getIsMod()){
-							//stop the recorded flv and add the event to the notifications
-							log.debug("*** sendClientBroadcastNotifications Any Client is Recording - stop that");
-							StreamService.addRoomClientEnterEventFunc(rcl, roomrecordingName, rcl.getUserip(), false);
-							stopRecordingShowForClient(conn, rcl, roomrecordingName, true);
+			Collection<Set<IConnection>> conCollection = scope.getConnections();
+			for (Set<IConnection> conset : conCollection) {
+				for (IConnection conn : conset) {
+					if (conn != null) {
+						if (conn instanceof IServiceCapableConnection) {
+							
+							RoomClient rcl = ClientListManager.getInstance().getClientByStreamId(conn.getClient().getId());
+							log.debug("is this users still alive? :"+rcl);
+							//Check if the Client is in the same room and same domain 
+							if(room_id.equals(rcl.getRoom_id()) && room_id!=null){
+								if (!conferenceType.equals("audience") || rcl.getIsMod()){
+									//stop the recorded flv and add the event to the notifications
+									log.debug("*** sendClientBroadcastNotifications Any Client is Recording - stop that");
+									StreamService.addRoomClientEnterEventFunc(rcl, roomrecordingName, rcl.getUserip(), false);
+									stopRecordingShowForClient(conn, rcl, roomrecordingName, true);
+								}
+							}
+							
 						}
 					}
 				}
 			}				
+			
 			
 			String newRecordFileName = roomRecording.getRoomRecordingsTableString();
 			String comment = roomRecording.getComment();
@@ -716,19 +730,22 @@ public class StreamService implements IPendingServiceCallback {
 			
 			//get all stream and stop recording them
 			//Todo: Check that nobody does Recording at the same time Issue 253
-			Iterator<IConnection> it = current.getScope().getConnections();
-			while (it.hasNext()) {
-				IConnection conn = it.next();
-				if (conn instanceof IServiceCapableConnection) {
-					RoomClient rcl = this.clientListManager.getClientByStreamId(conn.getClient().getId());
-					log.debug("is this users still alive? :"+rcl);
-					//Check if the Client is in the same room and same domain 
-					if(room_id.equals(rcl.getRoom_id()) && room_id!=null){
-						((IServiceCapableConnection) conn).invoke("stopedRecording",new Object[] { currentClient }, this);
-						if (!conferenceType.equals("audience") || rcl.getIsMod()){
-							//if the user does publish av, a, v
-							if (!rcl.getAvsettings().equals("n")){
-								stopRecordingShow(conn,rcl.getBroadCastID());
+			Collection<Set<IConnection>> conCollection = current.getScope().getConnections();
+			for (Set<IConnection> conset : conCollection) {
+				for (IConnection conn : conset) {
+					if (conn != null) {
+						if (conn instanceof IServiceCapableConnection) {
+							RoomClient rcl = this.clientListManager.getClientByStreamId(conn.getClient().getId());
+							log.debug("is this users still alive? :"+rcl);
+							//Check if the Client is in the same room and same domain 
+							if(room_id.equals(rcl.getRoom_id()) && room_id!=null){
+								((IServiceCapableConnection) conn).invoke("stopedRecording",new Object[] { currentClient }, this);
+								if (!conferenceType.equals("audience") || rcl.getIsMod()){
+									//if the user does publish av, a, v
+									if (!rcl.getAvsettings().equals("n")){
+										stopRecordingShow(conn,rcl.getBroadCastID());
+									}
+								}
 							}
 						}
 					}
@@ -752,21 +769,23 @@ public class StreamService implements IPendingServiceCallback {
 			
 			//Check if any client in the same room is recording at the moment
 			
-			Iterator<IConnection> it = current.getScope().getConnections();
-			while (it.hasNext()) {
-				IConnection cons = it.next();
-				log.debug("cons Host: "+cons);
-				if (cons instanceof IServiceCapableConnection) {
-					if (!cons.equals(current)){
-						log.debug("sending roomDisconnect to " + cons);
-						RoomClient rcl = this.clientListManager.getClientByStreamId(cons.getClient().getId());
-						//Check if the Client is in the same room and same domain except its the current one
-						if(room_id.equals(rcl.getRoom_id()) && room_id!=null){					
-							if (rcl.getIsRecording()){
-								return rcl;
+			Collection<Set<IConnection>> conCollection = current.getScope().getConnections();
+			for (Set<IConnection> conset : conCollection) {
+				for (IConnection cons : conset) {
+					if (cons != null) {
+						if (cons instanceof IServiceCapableConnection) {
+							if (!cons.equals(current)){
+								log.debug("sending roomDisconnect to " + cons);
+								RoomClient rcl = this.clientListManager.getClientByStreamId(cons.getClient().getId());
+								//Check if the Client is in the same room and same domain except its the current one
+								if(room_id.equals(rcl.getRoom_id()) && room_id!=null){					
+									if (rcl.getIsRecording()){
+										return rcl;
+									}
+								}
 							}
 						}
-					}
+					}		
 				}
 			}
 			

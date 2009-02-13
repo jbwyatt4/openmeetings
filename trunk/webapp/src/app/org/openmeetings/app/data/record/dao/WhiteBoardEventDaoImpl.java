@@ -2,19 +2,18 @@ package org.openmeetings.app.data.record.dao;
 
 import java.util.List;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.red5.logging.Red5LoggerFactory;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.openmeetings.app.hibernate.beans.recording.Recording;
 import org.openmeetings.app.hibernate.beans.recording.WhiteBoardEvent;
 import org.openmeetings.app.hibernate.utils.HibernateUtil;
 
 public class WhiteBoardEventDaoImpl {
 
-	private static final Log log = LogFactory.getLog(WhiteBoardEventDaoImpl.class);
+	private static final Logger log = Red5LoggerFactory.getLogger(WhiteBoardEventDaoImpl.class, "openmeetings");
 
 	private WhiteBoardEventDaoImpl() {
 	}

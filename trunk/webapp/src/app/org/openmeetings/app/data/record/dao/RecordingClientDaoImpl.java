@@ -2,19 +2,18 @@ package org.openmeetings.app.data.record.dao;
 
 import java.util.List;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.red5.logging.Red5LoggerFactory;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.openmeetings.app.hibernate.beans.recording.RecordingClient;
-import org.openmeetings.app.hibernate.beans.recording.RoomClient;
 import org.openmeetings.app.hibernate.utils.HibernateUtil;
 
 public class RecordingClientDaoImpl {
 
-	private static final Log log = LogFactory.getLog(RecordingClientDaoImpl.class);
+	private static final Logger log = Red5LoggerFactory.getLogger(RecordingClientDaoImpl.class, "openmeetings");
 
 	private RecordingClientDaoImpl() {
 	}

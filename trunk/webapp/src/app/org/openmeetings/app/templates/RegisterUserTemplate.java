@@ -4,7 +4,7 @@ import java.io.StringWriter;
 import java.util.Properties;
 
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.red5.logging.Red5LoggerFactory;
 import org.apache.velocity.app.Velocity;
 import org.apache.velocity.VelocityContext;
 
@@ -21,7 +21,7 @@ public class RegisterUserTemplate extends VelocityLoader{
 	
 	private static final String tamplateName = "register_mail.vm";
 
-	private static final Logger log = LoggerFactory.getLogger(RegisterUserTemplate.class);
+	private static final Logger log = Red5LoggerFactory.getLogger(RegisterUserTemplate.class, "openmeetings");
 
 	private RegisterUserTemplate() {
 		super();

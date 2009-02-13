@@ -4,20 +4,18 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.red5.logging.Red5LoggerFactory;
 import org.openmeetings.app.data.basic.AuthLevelmanagement;
 import org.openmeetings.app.data.basic.Sessionmanagement;
 import org.openmeetings.app.data.calendar.management.AppointmentLogic;
-import org.openmeetings.app.data.calendar.management.MeetingMemberLogic;
 import org.openmeetings.app.data.user.Usermanagement;
 import org.openmeetings.app.hibernate.beans.calendar.Appointment;
 import org.openmeetings.app.hibernate.beans.calendar.AppointmentReminderTyps;
-import org.openmeetings.app.hibernate.beans.calendar.MeetingMember;
 
 public class CalendarService {
 	
-	private static final Log log = LogFactory.getLog(CalendarService.class);
+	private static final Logger log = Red5LoggerFactory.getLogger(CalendarService.class, "openmeetings");
 	
 	private static CalendarService instance = null;
 

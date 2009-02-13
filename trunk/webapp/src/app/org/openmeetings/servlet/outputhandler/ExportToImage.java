@@ -33,14 +33,14 @@ import org.openmeetings.app.remote.PrintService;
 import org.openmeetings.utils.geom.GeomPoint;
 import org.openmeetings.utils.math.CalendarPatterns;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.red5.logging.Red5LoggerFactory;
 import org.w3c.dom.DOMImplementation;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 public class ExportToImage extends HttpServlet {
 	 
-	private static final Logger log = LoggerFactory.getLogger(ExportToImage.class);
+	private static final Logger log = Red5LoggerFactory.getLogger(ExportToImage.class, "openmeetings");
 
 	/*
 	 * (non-Javadoc)

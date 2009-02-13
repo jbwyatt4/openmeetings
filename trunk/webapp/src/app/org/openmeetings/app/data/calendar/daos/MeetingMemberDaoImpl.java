@@ -3,26 +3,19 @@ package org.openmeetings.app.data.calendar.daos;
 import java.util.Date;
 import java.util.List;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.red5.logging.Red5LoggerFactory;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.openmeetings.app.data.basic.Configurationmanagement;
-import org.openmeetings.app.data.basic.FieldLanguageDaoImpl;
-import org.openmeetings.app.data.user.Addressmanagement;
-import org.openmeetings.app.data.user.Usermanagement;
 import org.openmeetings.app.data.user.dao.UsersDaoImpl;
-import org.openmeetings.app.hibernate.beans.adresses.Adresses;
-import org.openmeetings.app.hibernate.beans.calendar.Appointment;
-import org.openmeetings.app.hibernate.beans.calendar.AppointmentCategory;
 import org.openmeetings.app.hibernate.beans.calendar.MeetingMember;
 import org.openmeetings.app.hibernate.utils.HibernateUtil;
 
 public class MeetingMemberDaoImpl {
 	
-	private static final Log log = LogFactory.getLog(MeetingMemberDaoImpl.class);
+	private static final Logger log = Red5LoggerFactory.getLogger(MeetingMemberDaoImpl.class, "openmeetings");
 
 	private MeetingMemberDaoImpl() {
 	}

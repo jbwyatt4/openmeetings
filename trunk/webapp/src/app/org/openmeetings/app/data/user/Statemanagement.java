@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.red5.logging.Red5LoggerFactory;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -19,7 +19,7 @@ import org.openmeetings.app.hibernate.utils.HibernateUtil;
  *
  */
 public class Statemanagement {
-	private static final Logger log = LoggerFactory.getLogger(Statemanagement.class);
+	private static final Logger log = Red5LoggerFactory.getLogger(Statemanagement.class, "openmeetings");
 
 	private static Statemanagement instance = null;
 
