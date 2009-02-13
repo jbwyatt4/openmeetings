@@ -3,14 +3,14 @@ package org.openmeetings.test.init;
 import junit.framework.TestCase;
 
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.red5.logging.Red5LoggerFactory;
 import org.openmeetings.app.data.user.Usermanagement;
 import org.openmeetings.app.data.user.Statemanagement;
 import org.openmeetings.test.adresses.TestAddEmailToAdress;
 
 public class Addadminuser extends TestCase{
 	
-	private static final Logger log = LoggerFactory.getLogger(Addadminuser.class);
+	private static final Logger log = Red5LoggerFactory.getLogger(Addadminuser.class, "openmeetings");
 	
 	public Addadminuser(String testname){
 		super(testname);

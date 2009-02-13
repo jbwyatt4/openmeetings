@@ -4,11 +4,11 @@ import junit.framework.TestCase;
 
 import org.openmeetings.app.data.record.WhiteboardConvertionJobManager;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.red5.logging.Red5LoggerFactory;
 
 public class BatchConversion extends TestCase {
 	
-	private static final Logger log = LoggerFactory.getLogger(BatchConversion.class);
+	private static final Logger log = Red5LoggerFactory.getLogger(BatchConversion.class, "openmeetings");
 	
 	public BatchConversion(String testname){
 		super(testname);

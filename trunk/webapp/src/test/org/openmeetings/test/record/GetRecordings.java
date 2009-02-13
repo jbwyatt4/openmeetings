@@ -16,11 +16,11 @@ import org.openmeetings.app.hibernate.beans.rooms.Rooms_Organisation;
 import org.openmeetings.app.hibernate.beans.user.Users;
 import org.openmeetings.utils.math.CalendarPatterns;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.red5.logging.Red5LoggerFactory;
 
 public class GetRecordings extends TestCase {
 	
-	private static final Logger log = LoggerFactory.getLogger(GetRecordings.class);
+	private static final Logger log = Red5LoggerFactory.getLogger(GetRecordings.class, "openmeetings");
 	
 	public GetRecordings(String testname){
 		super(testname);

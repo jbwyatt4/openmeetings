@@ -6,13 +6,13 @@ import java.util.List;
 import junit.framework.TestCase;
 
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.red5.logging.Red5LoggerFactory;
 import org.openmeetings.app.data.user.Organisationmanagement;
 import org.openmeetings.app.hibernate.beans.domain.Organisation;;
 
 public class TestUserGroupAggregation extends TestCase {
 	
-	private static final Logger log = LoggerFactory.getLogger(TestUserGroupAggregation.class);
+	private static final Logger log = Red5LoggerFactory.getLogger(TestUserGroupAggregation.class, "openmeetings");
 	
 	public TestUserGroupAggregation(String testname){
 		super(testname);

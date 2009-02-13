@@ -7,32 +7,23 @@ package org.openmeetings.calendar;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 
 import junit.framework.TestCase;
 
 
+import org.slf4j.Logger;
+import org.red5.logging.Red5LoggerFactory;
 
-import org.apache.commons.logging.Log;
-
-import org.apache.commons.logging.LogFactory;
-
-import org.openmeetings.app.data.calendar.daos.AppointmentCategoryDaoImpl;
-import org.openmeetings.app.data.calendar.daos.AppointmentDaoImpl;
 import org.openmeetings.app.data.calendar.daos.AppointmentReminderTypDaoImpl;
-import org.openmeetings.app.data.user.Usermanagement;
-import org.openmeetings.app.hibernate.beans.calendar.Appointment;
 import org.openmeetings.app.hibernate.beans.calendar.AppointmentReminderTyps;
-import org.openmeetings.app.remote.CalendarService;
-
 
 
 public class TestDatabaseStructureAppointmentReminderTyp extends TestCase {
 
 	
 
-	private static final Log log = LogFactory.getLog(TestDatabaseStructureAppointmentReminderTyp.class);
+	private static final Logger log = Red5LoggerFactory.getLogger(TestDatabaseStructureAppointmentReminderTyp.class, "openmeetings");
 
 	
 

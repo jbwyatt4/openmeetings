@@ -3,13 +3,13 @@ package org.openmeetings.test.adresses;
 import junit.framework.TestCase;
 
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.red5.logging.Red5LoggerFactory;
 import org.openmeetings.app.data.user.Statemanagement;
 import org.openmeetings.app.data.user.Addressmanagement;
 
 public class TestAdresses extends TestCase {
 	
-	private static final Logger log = LoggerFactory.getLogger(TestAdresses.class);
+	private static final Logger log = Red5LoggerFactory.getLogger(TestAdresses.class, "openmeetings");
 	
 	public TestAdresses (String testname) {
 		super(testname);

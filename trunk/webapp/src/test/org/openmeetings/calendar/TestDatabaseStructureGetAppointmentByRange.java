@@ -1,18 +1,12 @@
 package org.openmeetings.calendar;
 
-
-
 import java.util.Calendar;
 import java.util.Iterator;
 import java.util.List;
 
 import junit.framework.TestCase;
-
-
-
-import org.apache.commons.logging.Log;
-
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.red5.logging.Red5LoggerFactory;
 
 import org.openmeetings.app.data.calendar.daos.AppointmentDaoImpl;
 import org.openmeetings.app.data.user.Usermanagement;
@@ -23,11 +17,7 @@ import org.openmeetings.app.remote.CalendarService;
 
 public class TestDatabaseStructureGetAppointmentByRange extends TestCase {
 
-	
-
-	private static final Log log = LogFactory.getLog(TestDatabaseStructureGetAppointmentByRange.class);
-
-	
+	private static final Logger log = Red5LoggerFactory.getLogger(TestDatabaseStructureGetAppointmentByRange.class, "openmeetings");
 
 	public TestDatabaseStructureGetAppointmentByRange(String testname){
 
@@ -48,11 +38,11 @@ public class TestDatabaseStructureGetAppointmentByRange extends TestCase {
 			//List<Appointment> listAppoints = AppointmentDaoImpl.getInstance().getAppointmentsByRange(Calendar.getInstance().getTime(), Calendar.getInstance().getTime());
 			
 			for (Appointment appoints : listAppoints) {
-				log.debug(appoints);
+				log.debug(""+appoints);
 			}
 			
 			for (Iterator<Appointment> iter = listAppoints.iterator();iter.hasNext();) {
-				log.debug(iter.next());
+				log.debug(""+iter.next());
 			}
 
 		} catch (Exception err) {

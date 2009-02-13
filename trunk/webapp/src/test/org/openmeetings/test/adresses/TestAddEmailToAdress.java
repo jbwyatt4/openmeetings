@@ -1,7 +1,7 @@
 package org.openmeetings.test.adresses;
 
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.red5.logging.Red5LoggerFactory;
 import org.openmeetings.app.data.user.Emailmanagement;
 import org.openmeetings.app.hibernate.beans.adresses.Adresses;
 
@@ -9,7 +9,7 @@ import junit.framework.TestCase;
 
 public class TestAddEmailToAdress extends TestCase {
 	
-	private static final Logger log = LoggerFactory.getLogger(TestAddEmailToAdress.class);
+	private static final Logger log = Red5LoggerFactory.getLogger(TestAddEmailToAdress.class, "openmeetings");
 	
 	public TestAddEmailToAdress(String testname){
 		super(testname);

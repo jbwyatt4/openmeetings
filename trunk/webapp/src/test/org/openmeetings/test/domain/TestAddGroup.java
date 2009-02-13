@@ -2,7 +2,7 @@ package org.openmeetings.test.domain;
 
 
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.red5.logging.Red5LoggerFactory;
 import org.openmeetings.app.data.user.Organisationmanagement;
 import org.openmeetings.app.data.user.dao.UsersDaoImpl;
 import org.openmeetings.app.hibernate.beans.user.Users;
@@ -12,7 +12,7 @@ import junit.framework.TestCase;
 
 public class TestAddGroup extends TestCase {
 	
-	private static final Logger log = LoggerFactory.getLogger(TestAddGroup.class);
+	private static final Logger log = Red5LoggerFactory.getLogger(TestAddGroup.class, "openmeetings");
 	
 	public TestAddGroup(String testname){
 		super(testname);

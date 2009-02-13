@@ -14,14 +14,14 @@ import org.apache.batik.dom.svg.SVGDOMImplementation;
 import org.apache.batik.svggen.SVGGraphics2D;
 import org.openmeetings.servlet.outputhandler.ExportToImage;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.red5.logging.Red5LoggerFactory;
 import org.w3c.dom.DOMImplementation;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 public class TestSVGExporter extends TestCase {
 	
-	private static final Logger log = LoggerFactory.getLogger(TestSVGExporter.class);
+	private static final Logger log = Red5LoggerFactory.getLogger(TestSVGExporter.class);
 	
 	public void testGetDiagramList() {
 		try {

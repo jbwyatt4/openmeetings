@@ -1,7 +1,7 @@
 package org.openmeetings.test.library;
 
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.red5.logging.Red5LoggerFactory;
 import org.openmeetings.app.documents.LibraryWmlLoader;
 
 import junit.framework.TestCase;
@@ -9,7 +9,7 @@ import junit.framework.TestCase;
 
 public class TestFileParser extends TestCase {
 	
-	private static final Logger log = LoggerFactory.getLogger(TestFileParser.class);
+	private static final Logger log = Red5LoggerFactory.getLogger(TestFileParser.class, "openmeetings");
 	
 	public TestFileParser(String testname){
 		super(testname);
