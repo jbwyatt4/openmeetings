@@ -1,7 +1,7 @@
 package org.openmeetings.app.data.user;
 
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.red5.logging.Red5LoggerFactory;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -16,7 +16,7 @@ import org.openmeetings.app.templates.RegisterUserTemplate;
 
 public class Emailmanagement {
 
-	private static final Logger log = LoggerFactory.getLogger(Emailmanagement.class);
+	private static final Logger log = Red5LoggerFactory.getLogger(Emailmanagement.class, "openmeetings");
 
 	public Emailmanagement() {
 	}

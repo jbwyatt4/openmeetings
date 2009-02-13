@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.red5.logging.Red5LoggerFactory;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
@@ -34,7 +34,7 @@ import org.openmeetings.app.hibernate.beans.domain.Organisation_Users;
  */
 public class Roommanagement {
 
-	private static final Logger log = LoggerFactory.getLogger(Roommanagement.class);
+	private static final Logger log = Red5LoggerFactory.getLogger(Roommanagement.class);
 
 	private static Roommanagement instance;
 

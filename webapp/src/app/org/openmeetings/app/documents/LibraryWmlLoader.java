@@ -6,7 +6,7 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.red5.logging.Red5LoggerFactory;
 
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
@@ -18,7 +18,7 @@ import com.thoughtworks.xstream.io.xml.XppDriver;
 
 public class LibraryWmlLoader {
 	
-	private static final Logger log = LoggerFactory.getLogger(LibraryWmlLoader.class);
+	private static final Logger log = Red5LoggerFactory.getLogger(LibraryWmlLoader.class, "openmeetings");
 	
 	private static final String fileExt = ".wml";
 	

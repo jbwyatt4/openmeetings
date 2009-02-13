@@ -13,11 +13,11 @@ import org.openmeetings.app.hibernate.beans.user.Users;
 import org.openmeetings.app.hibernate.utils.HibernateUtil;
 import org.openmeetings.utils.crypt.ManageCryptStyle;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.red5.logging.Red5LoggerFactory;
 
 public class UsersDaoImpl {
 
-	private static final Logger log = LoggerFactory.getLogger(UsersDaoImpl.class);
+	private static final Logger log = Red5LoggerFactory.getLogger(UsersDaoImpl.class, "openmeetings");
 
 	private static UsersDaoImpl instance = null;
 

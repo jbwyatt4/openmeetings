@@ -19,7 +19,7 @@ import org.dom4j.DocumentException;
 import org.dom4j.Element;
 
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.red5.logging.Red5LoggerFactory;
 import org.openmeetings.app.data.basic.Sessionmanagement;
 import org.openmeetings.app.data.user.Usermanagement;
 import org.openmeetings.app.data.basic.FieldLanguageDaoImpl;
@@ -34,7 +34,7 @@ import org.openmeetings.app.data.basic.Fieldmanagment;
  */
 public class LangExport extends HttpServlet {
 
-	private static final Logger log = LoggerFactory.getLogger(LangExport.class);
+	private static final Logger log = Red5LoggerFactory.getLogger(LangExport.class, "openmeetings");
 
 	/*
 	 * (non-Javadoc)

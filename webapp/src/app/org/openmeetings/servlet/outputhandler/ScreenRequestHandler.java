@@ -15,7 +15,7 @@ import org.apache.velocity.tools.view.servlet.VelocityViewServlet;
 import org.apache.commons.lang.StringUtils;
 import org.hibernate.cfg.Configuration;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.red5.logging.Red5LoggerFactory;
 import org.openmeetings.app.data.basic.Configurationmanagement;
 import org.openmeetings.app.data.basic.Sessionmanagement;
 import org.openmeetings.app.data.user.Usermanagement;
@@ -23,7 +23,7 @@ import org.openmeetings.app.templates.ScreenCastTemplate;
 
 public class ScreenRequestHandler extends VelocityViewServlet {
 	
-	private static final Logger log = LoggerFactory.getLogger(ScreenRequestHandler.class);
+	private static final Logger log = Red5LoggerFactory.getLogger(ScreenRequestHandler.class, "openmeetings");
 	
 	/*
 	 * (non-Javadoc)

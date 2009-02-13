@@ -5,7 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.red5.logging.Red5LoggerFactory;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -23,8 +23,8 @@ import org.openmeetings.app.data.basic.Fieldmanagment;
  */
 public class Salutationmanagement {
 
-	private static final Logger log = LoggerFactory
-			.getLogger(Salutationmanagement.class);
+	private static final Logger log = Red5LoggerFactory
+			.getLogger(Salutationmanagement.class, "openmeetings");
 
 	private static Salutationmanagement instance = null;
 

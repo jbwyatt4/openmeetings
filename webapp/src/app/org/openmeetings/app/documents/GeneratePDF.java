@@ -9,14 +9,14 @@ import java.util.Date;
 import java.util.HashMap;
 
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.red5.logging.Red5LoggerFactory;
 import org.apache.commons.transaction.util.FileHelper;
 import org.openmeetings.app.remote.red5.ScopeApplicationAdapter;
 import org.openmeetings.utils.math.CalendarPatterns;
 
 public class GeneratePDF {
 	
-	private static final Logger log = LoggerFactory.getLogger(GeneratePDF.class);
+	private static final Logger log = Red5LoggerFactory.getLogger(GeneratePDF.class, "openmeetings");
 	
 	private static GeneratePDF instance;
 

@@ -8,11 +8,11 @@ import org.w3c.dom.Document;
 import org.apache.xerces.parsers.DOMParser;
 
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.red5.logging.Red5LoggerFactory;
 
 public class BandwidthConfigFactory {
  
-	protected static Logger log = LoggerFactory.getLogger(BandwidthConfigFactory.class.getName());
+	protected static Logger log = Red5LoggerFactory.getLogger(BandwidthConfigFactory.class, "openmeetings");
 
 	protected static String bandwidthonfigFileName = "WEB-INF/configbandwidth.xml";
 	

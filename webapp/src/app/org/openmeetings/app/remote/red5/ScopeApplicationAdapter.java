@@ -1,9 +1,12 @@
 package org.openmeetings.app.remote.red5;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.Set;
 
 import org.openmeetings.app.conference.whiteboard.WhiteboardManagement;
@@ -26,8 +29,9 @@ import org.red5.server.api.service.IPendingServiceCallback;
 import org.red5.server.api.service.IServiceCapableConnection;
 import org.red5.server.api.stream.IBroadcastStream;
 import org.red5.server.api.stream.IStreamAwareScopeHandler;
+
+import org.red5.logging.Red5LoggerFactory;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class ScopeApplicationAdapter extends ApplicationAdapter implements
 	IPendingServiceCallback, IStreamAwareScopeHandler {
@@ -37,7 +41,7 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 	private EmoticonsManager emoticonsManager = null;
 	private WhiteBoardService whiteBoardService = null;
 	
-	private static final Logger log = LoggerFactory.getLogger(ScopeApplicationAdapter.class);
+	private static final Logger log = Red5LoggerFactory.getLogger(ScopeApplicationAdapter.class, "openmeetings");
 
 	//This is the Folder where all executables are written
 	//TODO:fix hardcoded name of webapp
@@ -268,28 +272,29 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 			
 			if (currentScope != null && currentScope.getConnections() != null) {
 				//Notify Users of the current Scope
-				Iterator<IConnection> it = currentScope.getConnections();
-				while (it.hasNext()) {
-					log.debug("hasNext == true");
-					IConnection cons = it.next();
-					log.debug("cons Host: "+cons);
-					if (cons instanceof IServiceCapableConnection) {
+				Collection<Set<IConnection>> conCollection = currentScope.getConnections();
+				for (Set<IConnection> conset : conCollection) {
+					for (IConnection cons : conset) {
+						if (cons != null) {
+							if (cons instanceof IServiceCapableConnection) {
 						
-						log.debug("sending roomDisconnect to " + cons);
-						RoomClient rcl = this.clientListManager.getClientByStreamId(cons.getClient().getId());
-						
-						if (!currentClient.getStreamid().equals(rcl.getStreamid())){
-							//Send to all connected users	
-							((IServiceCapableConnection) cons).invoke("roomDisconnect",new Object[] { currentClient }, this);
-							log.debug("sending roomDisconnect to " + cons);
-							//add Notification if another user is recording
-							log.debug("###########[roomLeave]");
-							if (rcl.getIsRecording()){
-								log.debug("*** roomLeave Any Client is Recording - stop that");
-								StreamService.addRoomClientEnterEventFunc(rcl, rcl.getRoomRecordingName(), rcl.getUserip(), false);
-								StreamService.stopRecordingShowForClient(cons, currentClient, rcl.getRoomRecordingName(), false);
+								log.debug("sending roomDisconnect to " + cons);
+								RoomClient rcl = this.clientListManager.getClientByStreamId(cons.getClient().getId());
+								
+								if (!currentClient.getStreamid().equals(rcl.getStreamid())){
+									//Send to all connected users	
+									((IServiceCapableConnection) cons).invoke("roomDisconnect",new Object[] { currentClient }, this);
+									log.debug("sending roomDisconnect to " + cons);
+									//add Notification if another user is recording
+									log.debug("###########[roomLeave]");
+									if (rcl.getIsRecording()){
+										log.debug("*** roomLeave Any Client is Recording - stop that");
+										StreamService.addRoomClientEnterEventFunc(rcl, rcl.getRoomRecordingName(), rcl.getUserip(), false);
+										StreamService.stopRecordingShowForClient(cons, currentClient, rcl.getRoomRecordingName(), false);
+									}
+								}
 							}
-						}
+						}		
 					}
 				}	
 			}
@@ -327,25 +332,28 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 		log.debug("start streamPublishStart broadcast start: "+ stream.getPublishedName() + "CONN " + current);
 		
 		//Notify all users of the same Scope
-		Iterator<IConnection> it = current.getScope().getConnections();
-		while (it.hasNext()) {
-			IConnection conn = it.next();
-			if (conn.equals(current)){
-				RoomClient rcl = this.clientListManager.getClientByStreamId(conn.getClient().getId());
-				if (rcl.getIsRecording()){
-					StreamService.addRecordingByStreamId(current, streamid, currentClient, rcl.getRoomRecordingName());
-				}
-				continue;
-			} else {
-				if (conn instanceof IServiceCapableConnection) {
-					RoomClient rcl = this.clientListManager.getClientByStreamId(conn.getClient().getId());
-					//log.debug("is this users still alive? :"+rcl);
-					//Check if the Client is in the same room and same domain 
-					IServiceCapableConnection iStream = (IServiceCapableConnection) conn;
-					//log.info("IServiceCapableConnection ID " + iStream.getClient().getId());
-					iStream.invoke("newStream",new Object[] { currentClient }, this);
-					if (rcl.getIsRecording()){
-						StreamService.addRecordingByStreamId(current, streamid, currentClient, rcl.getRoomRecordingName());
+		Collection<Set<IConnection>> conCollection = current.getScope().getConnections();
+		for (Set<IConnection> conset : conCollection) {
+			for (IConnection conn : conset) {
+				if (conn != null) {
+					if (conn instanceof IServiceCapableConnection) {
+						if (conn.equals(current)){
+							RoomClient rcl = this.clientListManager.getClientByStreamId(conn.getClient().getId());
+							if (rcl.getIsRecording()){
+								StreamService.addRecordingByStreamId(current, streamid, currentClient, rcl.getRoomRecordingName());
+							}
+							continue;
+						} else {
+							RoomClient rcl = this.clientListManager.getClientByStreamId(conn.getClient().getId());
+							//log.debug("is this users still alive? :"+rcl);
+							//Check if the Client is in the same room and same domain 
+							IServiceCapableConnection iStream = (IServiceCapableConnection) conn;
+							//log.info("IServiceCapableConnection ID " + iStream.getClient().getId());
+							iStream.invoke("newStream",new Object[] { currentClient }, this);
+							if (rcl.getIsRecording()){
+								StreamService.addRecordingByStreamId(current, streamid, currentClient, rcl.getRoomRecordingName());
+							}
+						}
 					}
 				}
 			}
@@ -401,38 +409,41 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 			log.debug("sendClientBroadcastNotifications : "+ currentClient+ " " + currentClient.getStreamid());
 			
 			//Notify all clients of the same scope (room)
-			Iterator<IConnection> it = current.getScope().getConnections();
-			while (it.hasNext()) {
-				IConnection conn = it.next();
-				if (conn.equals(current)){
-					//there is a Bug in the current implementation of the appDisconnect
-					if (clientFunction.equals("closeStream")){
-						RoomClient rcl = this.clientListManager.getClientByStreamId(conn.getClient().getId());
-						if (clientFunction.equals("closeStream") && rcl.getIsRecording()){
-							log.debug("*** sendClientBroadcastNotifications Any Client is Recording - stop that");
-							StreamService.stopRecordingShowForClient(conn, currentClient, rcl.getRoomRecordingName(), false);
+			Collection<Set<IConnection>> conCollection = current.getScope().getConnections();
+			for (Set<IConnection> conset : conCollection) {
+				for (IConnection conn : conset) {
+					if (conn != null) {
+						if (conn instanceof IServiceCapableConnection) {
+							if (conn.equals(current)){
+								//there is a Bug in the current implementation of the appDisconnect
+								if (clientFunction.equals("closeStream")){
+									RoomClient rcl = this.clientListManager.getClientByStreamId(conn.getClient().getId());
+									if (clientFunction.equals("closeStream") && rcl.getIsRecording()){
+										log.debug("*** sendClientBroadcastNotifications Any Client is Recording - stop that");
+										StreamService.stopRecordingShowForClient(conn, currentClient, rcl.getRoomRecordingName(), false);
+									}
+									// Don't notify current client
+									current.ping();
+								}
+								continue;
+							} else {
+								RoomClient rcl = this.clientListManager.getClientByStreamId(conn.getClient().getId());
+								log.debug("is this users still alive? :"+rcl);
+								//conn.ping();
+								IServiceCapableConnection iStream = (IServiceCapableConnection) conn;
+								//log.info("IServiceCapableConnection ID " + iStream.getClient().getId());
+								iStream.invoke(clientFunction,new Object[] { rc }, this);
+								log.debug("sending notification to " + conn+" ID: ");
+		
+								//if this close stream event then stop the recording of this stream
+								if (clientFunction.equals("closeStream") && rcl.getIsRecording()){
+									log.debug("*** sendClientBroadcastNotifications Any Client is Recording - stop that");
+									StreamService.stopRecordingShowForClient(conn, currentClient, rcl.getRoomRecordingName(), false);
+								}
+							}
 						}
-						// Don't notify current client
-						current.ping();
 					}
-					continue;
-				} else {
-					if (conn instanceof IServiceCapableConnection) {
-						RoomClient rcl = this.clientListManager.getClientByStreamId(conn.getClient().getId());
-						log.debug("is this users still alive? :"+rcl);
-						//conn.ping();
-						IServiceCapableConnection iStream = (IServiceCapableConnection) conn;
-						//log.info("IServiceCapableConnection ID " + iStream.getClient().getId());
-						iStream.invoke(clientFunction,new Object[] { rc }, this);
-						log.debug("sending notification to " + conn+" ID: ");
-
-						//if this close stream event then stop the recording of this stream
-						if (clientFunction.equals("closeStream") && rcl.getIsRecording()){
-							log.debug("*** sendClientBroadcastNotifications Any Client is Recording - stop that");
-							StreamService.stopRecordingShowForClient(conn, currentClient, rcl.getRoomRecordingName(), false);
-						}
-					}
-				}
+				}	
 			}
 		} catch (Exception err) {
 			log.error("[sendClientBroadcastNotifications]" , err);
@@ -479,14 +490,17 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 			}
 	
 			//Notify all clients of the same scope (room)
-			Iterator<IConnection> it = current.getScope().getConnections();
-			while (it.hasNext()) {
-				IConnection conn = it.next();
-				RoomClient rcl = this.clientListManager.getClientByStreamId(conn.getClient().getId());
-				if (conn instanceof IServiceCapableConnection) {
-					((IServiceCapableConnection) conn).invoke("setNewModerator",new Object[] { currentClient }, this);
-					log.debug("sending setNewModerator to " + conn);
-				}
+			Collection<Set<IConnection>> conCollection = current.getScope().getConnections();
+			for (Set<IConnection> conset : conCollection) {
+				for (IConnection conn : conset) {
+					if (conn != null) {
+						RoomClient rcl = this.clientListManager.getClientByStreamId(conn.getClient().getId());
+						if (conn instanceof IServiceCapableConnection) {
+							((IServiceCapableConnection) conn).invoke("setNewModerator",new Object[] { currentClient }, this);
+							log.debug("sending setNewModerator to " + conn);
+						}
+					}
+				}	
 			}
 		} catch (Exception err){
 			log.error("[setModerator]",err);
@@ -541,23 +555,24 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 			hsm.put("client", currentClient);
 			hsm.put("message", newMessage);			
 			
-			//Notify all client of the same Scope
-			Iterator<IConnection> it = current.getScope().getConnections();
-			while (it.hasNext()) {
-				IConnection conn = it.next();				
-				RoomClient rcl = this.clientListManager.getClientByStreamId(conn.getClient().getId());
-				log.debug("setUserObjectOneFour Found Client to " + conn);
-				log.debug("setUserObjectOneFour Found Client to " + conn.getClient());
-				if (conn instanceof IServiceCapableConnection) {
-					((IServiceCapableConnection) conn).invoke("sendVarsToMessageWithClient",new Object[] { hsm }, this);
-					log.debug("sending setUserObjectNewOneFour to " + conn);
-					
-					//if somebody is recording in this room add the event
-					if (rcl.getIsRecording()) {
-						StreamService.addRoomClientAVSetEvent(currentClient, rcl.getRoomRecordingName(), conn.getRemoteAddress());
+			Collection<Set<IConnection>> conCollection = scope.getConnections();
+			for (Set<IConnection> conset : conCollection) {
+				for (IConnection conn : conset) {
+					if (conn != null) {
+						if (conn instanceof IServiceCapableConnection) {
+							RoomClient rcl = this.clientListManager.getClientByStreamId(conn.getClient().getId());
+							
+							((IServiceCapableConnection) conn).invoke("sendVarsToMessageWithClient",new Object[] { hsm }, this);
+							log.debug("sending setUserObjectNewOneFour to " + conn);
+							
+							//if somebody is recording in this room add the event
+							if (rcl.getIsRecording()) {
+								StreamService.addRoomClientAVSetEvent(currentClient, rcl.getRoomRecordingName(), conn.getRemoteAddress());
+							}
+						}
 					}
 				}
-			}
+			}	
 			
 			return currentClient;
 		} catch (Exception err){
@@ -672,26 +687,32 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 			Long room_id = currentClient.getRoom_id();	
 						
 			//Notify all clients of the same scope (room)
-			Iterator<IConnection> it = current.getScope().getConnections();
-			while (it.hasNext()) {
-				IConnection conn = it.next();
-				if (conn.equals(current)){
-					continue;
-				} else {				
-					RoomClient rcl = this.clientListManager.getClientByStreamId(conn.getClient().getId());
-					log.debug("*** setAudienceModus Found Client to " + conn);
-					log.debug("*** setAudienceModus Found Client to " + conn.getClient());
-					if (conn instanceof IServiceCapableConnection) {
-						((IServiceCapableConnection) conn).invoke("setAudienceModusClient",new Object[] { currentClient }, this);
-						log.debug("sending setAudienceModusClient to " + conn);
-						//if any user in this room is recording add this client to the list
-						if (rcl.getIsRecording()) {
-							log.debug("currentClient "+currentClient.getPublicSID());
-							StreamService.addRoomClientEnterEventFunc(currentClient, rcl.getRoomRecordingName(), currentClient.getUserip(), true);
-						}							
+			Collection<Set<IConnection>> conCollection = scope.getConnections();
+			for (Set<IConnection> conset : conCollection) {
+				for (IConnection conn : conset) {
+					if (conn != null) {
+						if (conn instanceof IServiceCapableConnection) {
+							if (conn.equals(current)){
+								continue;
+							} else {				
+								RoomClient rcl = this.clientListManager.getClientByStreamId(conn.getClient().getId());
+								log.debug("*** setAudienceModus Found Client to " + conn);
+								log.debug("*** setAudienceModus Found Client to " + conn.getClient());
+								if (conn instanceof IServiceCapableConnection) {
+									((IServiceCapableConnection) conn).invoke("setAudienceModusClient",new Object[] { currentClient }, this);
+									log.debug("sending setAudienceModusClient to " + conn);
+									//if any user in this room is recording add this client to the list
+									if (rcl.getIsRecording()) {
+										log.debug("currentClient "+currentClient.getPublicSID());
+										StreamService.addRoomClientEnterEventFunc(currentClient, rcl.getRoomRecordingName(), currentClient.getUserip(), true);
+									}							
+								}
+							}
+						}
 					}
 				}
-			}				
+			}
+			
 		} catch (Exception err) {
 			log.error("[setUserObjectOne2Four]",err);
 		}
@@ -719,23 +740,20 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 			
 			
 			if (scopeHibernate!=null){
-
-				//Notify all clients of the same scope (room)
-				Iterator<IConnection> it = webAppKeyScope.getScope(room_id.toString()).getConnections();
-				//Iterator<IConnection> it = webAppKeyScope.getScope("hibernate").getConnections();
 				
-				if (it!=null) {
-					while (it.hasNext()) {
-						IConnection conn = it.next();				
-						RoomClient rcl = this.clientListManager.getClientByStreamId(conn.getClient().getId());
-						if (conn instanceof IServiceCapableConnection) {
-							((IServiceCapableConnection) conn).invoke("newMessageByRoomAndDomain",new Object[] { message }, this);
-							log.debug("sending newMessageByRoomAndDomain to " + conn);
+				Collection<Set<IConnection>> conCollection = webAppKeyScope.getScope(room_id.toString()).getConnections();
+				for (Set<IConnection> conset : conCollection) {
+					for (IConnection conn : conset) {
+						if (conn != null) {
+							if (conn instanceof IServiceCapableConnection) {
+								//RoomClient rcl = this.clientListManager.getClientByStreamId(conn.getClient().getId());
+								((IServiceCapableConnection) conn).invoke("newMessageByRoomAndDomain",new Object[] { message }, this);
+								log.debug("sending newMessageByRoomAndDomain to " + conn);
+							}
 						}
 					}
-				} else {
-					log.debug("sendMessageByRoomAndDomain connections is empty ");
 				}
+				
 			} else {
 				log.debug("sendMessageByRoomAndDomain servlet not yet started  - roomID : '" + room_id + "'");
 			}
@@ -773,9 +791,28 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 	 * @param whiteboardObj
 	 * @return
 	 */
-	public int sendVars(HashMap whiteboardObj) {
-		//log.debug("*..*sendVars: " + whiteboardObj);
+	public int sendVars(ArrayList whiteboardObjParam) {
+		//
 		try {
+			
+			//In previous version this has been always a Map, now its a List
+			//so I re-wrapp that class to be a Map again.
+			//swagner 13.02.2009
+			log.debug("*..*sendVars1: " + whiteboardObjParam);
+			log.debug("*..*sendVars2: " + whiteboardObjParam.getClass());
+			log.debug("*..*sendVars3: " + whiteboardObjParam.getClass().getName());
+			
+			Map whiteboardObj = new HashMap();
+			int i = 0;
+			for (Iterator iter = whiteboardObjParam.iterator();iter.hasNext();) {
+				Object obj = iter.next();
+				log.debug("obj"+obj);
+				whiteboardObj.put(i, obj);
+				i++;
+			}
+			
+			//Map whiteboardObj = (Map) whiteboardObjParam;
+ 			
 			// Check if this User is the Mod:
 			IConnection current = Red5.getConnectionLocal();
 			RoomClient currentClient = this.clientListManager.getClientByStreamId(current.getClient().getId());
@@ -795,22 +832,25 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 			//if (ismod) {
 			
 			//Notify all Clients of that Scope (Room)
-			Iterator<IConnection> it = current.getScope().getConnections();
-			while (it.hasNext()) {
-				IConnection conn = it.next();
-				if (conn instanceof IServiceCapableConnection) {
-					RoomClient rcl = this.clientListManager.getClientByStreamId(conn.getClient().getId());
-					//log.debug("*..*idremote: " + rcl.getStreamid());
-					//log.debug("*..* sendVars room_id IS EQUAL: " + currentClient.getStreamid() + " asd " + rcl.getStreamid() + " IS eq? " +currentClient.getStreamid().equals(rcl.getStreamid()));
-					if (!currentClient.getStreamid().equals(rcl.getStreamid())) {
-						((IServiceCapableConnection) conn).invoke("sendVarsToWhiteboard", new Object[] { whiteboardObj },this);
-						log.debug("sending sendVarsToWhiteboard to " + conn + " rcl " + rcl);
-						numberOfUsers++;
-					}
-					//log.debug("sending sendVarsToWhiteboard to " + conn);
-					if (rcl.getIsRecording()){
-						StreamService.addWhiteBoardEvent(rcl.getRoomRecordingName(),whiteboardObj);
-					}								
+			Collection<Set<IConnection>> conCollection = current.getScope().getConnections();
+			for (Set<IConnection> conset : conCollection) {
+				for (IConnection conn : conset) {
+					if (conn != null) {
+						if (conn instanceof IServiceCapableConnection) {
+							RoomClient rcl = this.clientListManager.getClientByStreamId(conn.getClient().getId());
+							//log.debug("*..*idremote: " + rcl.getStreamid());
+							//log.debug("*..* sendVars room_id IS EQUAL: " + currentClient.getStreamid() + " asd " + rcl.getStreamid() + " IS eq? " +currentClient.getStreamid().equals(rcl.getStreamid()));
+							if (!currentClient.getStreamid().equals(rcl.getStreamid())) {
+								((IServiceCapableConnection) conn).invoke("sendVarsToWhiteboard", new Object[] { whiteboardObj },this);
+								log.debug("sending sendVarsToWhiteboard to " + conn + " rcl " + rcl);
+								numberOfUsers++;
+							}
+							//log.debug("sending sendVarsToWhiteboard to " + conn);
+							if (rcl.getIsRecording()){
+								StreamService.addWhiteBoardEvent(rcl.getRoomRecordingName(),whiteboardObj);
+							}	
+						}
+					}						
 				}
 			}			
 			
@@ -840,16 +880,19 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 			if (ismod) {
 				log.debug("CurrentScope :"+current.getScope().getName());
 				//Send to all Clients of the same Scope
-				Iterator<IConnection> it = current.getScope().getConnections();
-				while (it.hasNext()) {
-					IConnection conn = it.next();
-					if (conn instanceof IServiceCapableConnection) {
-						RoomClient rcl = this.clientListManager.getClientByStreamId(conn.getClient().getId());
-						log.debug("*..*idremote: " + rcl.getStreamid());
-						log.debug("*..*my idstreamid: " + currentClient.getStreamid());
-						if (!currentClient.getStreamid().equals(rcl.getStreamid())) {
-							((IServiceCapableConnection) conn).invoke("sendVarsToModeratorGeneral",	new Object[] { vars }, this);
-							log.debug("sending sendVarsToModeratorGeneral to " + conn);
+				Collection<Set<IConnection>> conCollection = current.getScope().getConnections();
+				for (Set<IConnection> conset : conCollection) {
+					for (IConnection conn : conset) {
+						if (conn != null) {
+							if (conn instanceof IServiceCapableConnection) {
+								RoomClient rcl = this.clientListManager.getClientByStreamId(conn.getClient().getId());
+								log.debug("*..*idremote: " + rcl.getStreamid());
+								log.debug("*..*my idstreamid: " + currentClient.getStreamid());
+								if (!currentClient.getStreamid().equals(rcl.getStreamid())) {
+									((IServiceCapableConnection) conn).invoke("sendVarsToModeratorGeneral",	new Object[] { vars }, this);
+									log.debug("sending sendVarsToModeratorGeneral to " + conn);
+								}
+							}
 						}
 					}
 				}
@@ -870,15 +913,18 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 			RoomClient currentClient = this.clientListManager.getClientByStreamId(current.getClient().getId());
 				
 			//Send to all Clients of that Scope(Room)
-			Iterator<IConnection> it = current.getScope().getConnections();
-			while (it.hasNext()) {
-				IConnection conn = it.next();
-				if (conn instanceof IServiceCapableConnection) {
-					RoomClient rcl = this.clientListManager.getClientByStreamId(conn.getClient().getId());
-					log.debug("*..*idremote: " + rcl.getStreamid());
-					log.debug("*..*my idstreamid: " + currentClient.getStreamid());
-					((IServiceCapableConnection) conn).invoke("sendVarsToMessage",new Object[] { newMessage }, this);
-					log.debug("sending sendVarsToMessage to " + conn);		
+			Collection<Set<IConnection>> conCollection = current.getScope().getConnections();
+			for (Set<IConnection> conset : conCollection) {
+				for (IConnection conn : conset) {
+					if (conn != null) {
+						if (conn instanceof IServiceCapableConnection) {
+							RoomClient rcl = this.clientListManager.getClientByStreamId(conn.getClient().getId());
+							log.debug("*..*idremote: " + rcl.getStreamid());
+							log.debug("*..*my idstreamid: " + currentClient.getStreamid());
+							((IServiceCapableConnection) conn).invoke("sendVarsToMessage",new Object[] { newMessage }, this);
+							log.debug("sending sendVarsToMessage to " + conn);		
+						}
+					}
 				}
 			}
 		} catch (Exception err) {
@@ -900,15 +946,18 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 			hsm.put("message", newMessage);
 			
 			//broadcast to everybody in the Scope (Room)
-			Iterator<IConnection> it = current.getScope().getConnections();
-			while (it.hasNext()) {
-				IConnection conn = it.next();
-				if (conn instanceof IServiceCapableConnection) {
-					RoomClient rcl = this.clientListManager.getClientByStreamId(conn.getClient().getId());
-					log.debug("*..*idremote: " + rcl.getStreamid());
-					log.debug("*..*my idstreamid: " + currentClient.getStreamid());
-					((IServiceCapableConnection) conn).invoke("sendVarsToMessageWithClient",new Object[] { hsm }, this);
-					log.debug("sending sendVarsToMessageWithClient to " + conn);
+			Collection<Set<IConnection>> conCollection = current.getScope().getConnections();
+			for (Set<IConnection> conset : conCollection) {
+				for (IConnection conn : conset) {
+					if (conn != null) {
+						if (conn instanceof IServiceCapableConnection) {
+							RoomClient rcl = this.clientListManager.getClientByStreamId(conn.getClient().getId());
+							log.debug("*..*idremote: " + rcl.getStreamid());
+							log.debug("*..*my idstreamid: " + currentClient.getStreamid());
+							((IServiceCapableConnection) conn).invoke("sendVarsToMessageWithClient",new Object[] { hsm }, this);
+							log.debug("sending sendVarsToMessageWithClient to " + conn);
+						}
+					}
 				}
 			}
 		} catch (Exception err) {
@@ -935,15 +984,18 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 			hsm.put("message", newMessage);
 			
 			//broadcast Message to specific user with id inside the same Scope
-			Iterator<IConnection> it = scope.getConnections();
-			while (it.hasNext()) {
-				IConnection conn = it.next();
-				if (conn instanceof IServiceCapableConnection) {
-					log.debug("### sendMessageById 1 ###"+clientId);
-					log.debug("### sendMessageById 2 ###"+conn.getClient().getId());
-					if (conn.getClient().getId().equals(clientId)){
-						((IServiceCapableConnection) conn).invoke("sendVarsToMessageWithClient",new Object[] { hsm }, this);
-						log.debug("sendingsendVarsToMessageWithClient ByID to " + conn);
+			Collection<Set<IConnection>> conCollection = scope.getConnections();
+			for (Set<IConnection> conset : conCollection) {
+				for (IConnection conn : conset) {
+					if (conn != null) {
+						if (conn instanceof IServiceCapableConnection) {
+							log.debug("### sendMessageById 1 ###"+clientId);
+							log.debug("### sendMessageById 2 ###"+conn.getClient().getId());
+							if (conn.getClient().getId().equals(clientId)){
+								((IServiceCapableConnection) conn).invoke("sendVarsToMessageWithClient",new Object[] { hsm }, this);
+								log.debug("sendingsendVarsToMessageWithClient ByID to " + conn);
+							}
+						}
 					}
 				}
 			}
@@ -966,15 +1018,18 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 			hsm.put("message", newMessage);
 			
 			//broadcast Message to specific user with id inside the same Scope
-			Iterator<IConnection> it = current.getScope().getConnections();
-			while (it.hasNext()) {
-				IConnection conn = it.next();
-				if (conn instanceof IServiceCapableConnection) {
-					log.debug("### sendMessageWithClientById 1 ###"+clientId);
-					log.debug("### sendMessageWithClientById 2 ###"+conn.getClient().getId());
-					if (conn.getClient().getId().equals(clientId)){
-						((IServiceCapableConnection) conn).invoke("sendVarsToMessageWithClient",new Object[] { hsm }, this);
-						log.debug("sendingsendVarsToMessageWithClient ByID to " + conn);
+			Collection<Set<IConnection>> conCollection = current.getScope().getConnections();
+			for (Set<IConnection> conset : conCollection) {
+				for (IConnection conn : conset) {
+					if (conn != null) {
+						if (conn instanceof IServiceCapableConnection) {
+							log.debug("### sendMessageWithClientById 1 ###"+clientId);
+							log.debug("### sendMessageWithClientById 2 ###"+conn.getClient().getId());
+							if (conn.getClient().getId().equals(clientId)){
+								((IServiceCapableConnection) conn).invoke("sendVarsToMessageWithClient",new Object[] { hsm }, this);
+								log.debug("sendingsendVarsToMessageWithClient ByID to " + conn);
+							}
+						}
 					}
 				}
 			}
@@ -1062,22 +1117,22 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 			
 			if (scopeHibernate!=null){
 				//Notify the clients of the same scope (room) with user_id
-				Iterator<IConnection> it = webAppKeyScope.getScope(scopeName).getConnections();
-				//log.debug("it "+it);
-				if (it!=null) {
-					while (it.hasNext()) {
-						IConnection conn = it.next();		
-						//log.debug("conn "+conn);
-						//log.debug("conn.getClient().getId() "+conn.getClient().getId());
-						RoomClient rcl = this.clientListManager.getClientByStreamId(conn.getClient().getId());
-						//log.debug("rcl "+rcl+" rcl.getUser_id(): "+rcl.getPublicSID()+" publicSID: "+publicSID+ " IS EQUAL? "+rcl.getPublicSID().equals(publicSID));
-						if (rcl.getPublicSID().equals(publicSID)){
-							//log.debug("IS EQUAL ");
-							((IServiceCapableConnection) conn).invoke("newMessageByRoomAndDomain",new Object[] { message }, this);
-							log.debug("sendMessageWithClientByPublicSID RPC:newMessageByRoomAndDomain"+message);
+				
+				Collection<Set<IConnection>> conCollection = webAppKeyScope.getScope(scopeName).getConnections();
+				for (Set<IConnection> conset : conCollection) {
+					for (IConnection conn : conset) {
+						if (conn != null) {
+							RoomClient rcl = this.clientListManager.getClientByStreamId(conn.getClient().getId());
+							//log.debug("rcl "+rcl+" rcl.getUser_id(): "+rcl.getPublicSID()+" publicSID: "+publicSID+ " IS EQUAL? "+rcl.getPublicSID().equals(publicSID));
+							if (rcl.getPublicSID().equals(publicSID)){
+								//log.debug("IS EQUAL ");
+								((IServiceCapableConnection) conn).invoke("newMessageByRoomAndDomain",new Object[] { message }, this);
+								log.debug("sendMessageWithClientByPublicSID RPC:newMessageByRoomAndDomain"+message);
+							}
 						}
 					}
 				}
+
 			} else {
 				//Scope not yet started
 			}

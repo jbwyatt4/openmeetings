@@ -14,7 +14,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import org.apache.xml.serialize.OutputFormat;
 import org.apache.xml.serialize.XMLSerializer;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.red5.logging.Red5LoggerFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Text;
@@ -27,7 +27,7 @@ import com.thoughtworks.xstream.io.xml.XppDriver;
 
 public class LibraryDocumentConverter {
 	
-	private static final Logger log = LoggerFactory.getLogger(LibraryDocumentConverter.class);
+	private static final Logger log = Red5LoggerFactory.getLogger(LibraryDocumentConverter.class, "openmeetings");
 	
 	private static final String fileExt = ".wml";
 	

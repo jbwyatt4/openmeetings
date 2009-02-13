@@ -5,8 +5,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.red5.logging.Red5LoggerFactory;
 import org.openmeetings.app.data.beans.basic.SearchResult;
 import org.openmeetings.app.hibernate.beans.recording.RoomClient;
 import org.openmeetings.utils.crypt.ManageCryptStyle;
@@ -15,7 +15,7 @@ public class ClientListManager {
 	
 	private static HashMap<String,RoomClient> clientList = new HashMap<String,RoomClient>();
 
-	private static final Log log = LogFactory.getLog(ClientListManager.class);
+	private static final Logger log = Red5LoggerFactory.getLogger(ClientListManager.class, "openmeetings");
 
 	private static ClientListManager instance = null;
 

@@ -4,7 +4,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.red5.logging.Red5LoggerFactory;
 import org.red5.server.api.service.IPendingServiceCall;
 import org.red5.server.api.service.IPendingServiceCallback;
 import org.openmeetings.app.data.basic.Sessionmanagement;
@@ -15,7 +15,7 @@ import org.openmeetings.utils.math.CalendarPatterns;
 
 public class InvitationService implements IPendingServiceCallback {
 	
-	private static final Logger log = LoggerFactory.getLogger(InvitationService.class);
+	private static final Logger log = Red5LoggerFactory.getLogger(InvitationService.class, "openmeetings");
 
 	public void resultReceived(IPendingServiceCall arg0) {
 		// TODO Auto-generated method stub

@@ -5,12 +5,12 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Field;
 
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.red5.logging.Red5LoggerFactory;
 import org.apache.commons.lang.StringUtils;
 
 public class StructureMethodList {
 	
-	private static final Logger log = LoggerFactory.getLogger(StructureMethodList.class);
+	private static final Logger log = Red5LoggerFactory.getLogger(StructureMethodList.class, "openmeetings");
 	
 	private StructureMethodList() {}
 

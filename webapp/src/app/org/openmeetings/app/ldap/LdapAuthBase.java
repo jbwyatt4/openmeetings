@@ -16,7 +16,7 @@ import javax.naming.directory.SearchResult;
 
 import org.openmeetings.app.data.user.Usermanagement;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.red5.logging.Red5LoggerFactory;
 
 
 /**
@@ -51,7 +51,7 @@ public class LdapAuthBase {
 	public static final String LDAP_AUTH_TYPE_SIMPLE = "simple";
 	public static final String LDAP_AUTH_TYPE_NONE = "none";
 	
-	private static final Logger log = LoggerFactory.getLogger(Usermanagement.class);
+	private static final Logger log = Red5LoggerFactory.getLogger(Usermanagement.class, "openmeetings");
 
 	
 	/**

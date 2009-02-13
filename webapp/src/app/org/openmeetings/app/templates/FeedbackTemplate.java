@@ -3,7 +3,7 @@ package org.openmeetings.app.templates;
 import java.io.StringWriter;
 
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.red5.logging.Red5LoggerFactory;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.Velocity;
 import org.openmeetings.app.data.basic.Configurationmanagement;
@@ -14,7 +14,7 @@ public class FeedbackTemplate extends VelocityLoader{
 	
 	private static final String tamplateName = "feedback.vm";
 
-	private static final Logger log = LoggerFactory.getLogger(FeedbackTemplate.class);
+	private static final Logger log = Red5LoggerFactory.getLogger(FeedbackTemplate.class, "openmeetings");
 
 	private FeedbackTemplate() {
 		super();

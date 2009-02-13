@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.LinkedHashMap;
 
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.red5.logging.Red5LoggerFactory;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Criteria;
@@ -27,7 +27,7 @@ import org.openmeetings.utils.mappings.CastMapToObject;
 
 public class Configurationmanagement {
 
-	private static final Logger log = LoggerFactory.getLogger(Configurationmanagement.class);
+	private static final Logger log = Red5LoggerFactory.getLogger(Configurationmanagement.class, "openmeetings");
 
 	private Configurationmanagement() {
 	}

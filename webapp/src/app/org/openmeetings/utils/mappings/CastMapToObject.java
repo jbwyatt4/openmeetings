@@ -11,7 +11,7 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.red5.logging.Red5LoggerFactory;
 
 /**
  * Class to cast any LinkedHashMap to its JavaBean repraesentant
@@ -38,7 +38,7 @@ import org.slf4j.LoggerFactory;
 
 public class CastMapToObject {
 	
-	private static final Logger log = LoggerFactory.getLogger(CastMapToObject.class);
+	private static final Logger log = Red5LoggerFactory.getLogger(CastMapToObject.class, "openmeetings");
 	
 	private CastMapToObject() {}
 

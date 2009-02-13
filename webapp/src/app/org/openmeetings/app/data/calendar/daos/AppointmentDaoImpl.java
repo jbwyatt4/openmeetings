@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.Iterator;
 import java.util.Map;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.red5.logging.Red5LoggerFactory;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
@@ -26,7 +26,7 @@ import org.openmeetings.app.hibernate.utils.HibernateUtil;
 
 public class AppointmentDaoImpl {
 
-	private static final Log log = LogFactory.getLog(AppointmentDaoImpl.class);
+	private static final Logger log = Red5LoggerFactory.getLogger(AppointmentDaoImpl.class, "openmeetings");
 
 	private AppointmentDaoImpl() {
 	}
@@ -303,7 +303,7 @@ public class AppointmentDaoImpl {
 			HibernateUtil.closeSession(idf);
 			
 			for (Appointment appointment : listAppoints) {
-				log.debug(appointment);
+				log.debug(""+appointment);
 				
 				appointment.setMeetingMember(MeetingMemberDaoImpl.getInstance().getMeetingMemberByAppointmentId(appointment.getAppointmentId()));	
 				
