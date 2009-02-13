@@ -7,14 +7,14 @@ import java.io.PrintWriter;
 
 import junit.framework.TestCase;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.red5.logging.Red5LoggerFactory;
 
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.XppDriver;
 
 public class ConvertGifs extends TestCase {
 	
-	private static final Logger log = LoggerFactory.getLogger(ConvertGifs.class);
+	private static final Logger log = Red5LoggerFactory.getLogger(ConvertGifs.class, "openmeetings");
 	
 	public ConvertGifs(String testname){
 		super(testname);

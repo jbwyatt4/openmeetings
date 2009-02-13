@@ -3,7 +3,7 @@ package org.openmeetings.test.userdata;
 import java.util.List;
 
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.red5.logging.Red5LoggerFactory;
 import org.openmeetings.app.hibernate.beans.basic.Sessiondata;
 import org.openmeetings.app.data.beans.basic.SearchResult;
 import org.openmeetings.app.hibernate.beans.user.Users;
@@ -14,7 +14,7 @@ import junit.framework.TestCase;
 
 public class UserManagement extends TestCase {
 	
-	private static final Logger log = LoggerFactory.getLogger(UserManagement.class);	
+	private static final Logger log = Red5LoggerFactory.getLogger(UserManagement.class, "openmeetings");	
 
 	public UserManagement(String testname){
 		super(testname);

@@ -9,7 +9,7 @@ import java.util.Date;
 import junit.framework.TestCase;
 
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.red5.logging.Red5LoggerFactory;
 
 import org.apache.batik.dom.svg.SVGDOMImplementation;
 import org.apache.batik.svggen.SVGGraphics2D;
@@ -20,7 +20,7 @@ import org.w3c.dom.Element;
 
 public class TestSimpleSVGDom extends TestCase {
 	
-	private static final Logger log = LoggerFactory.getLogger(TestSVGTextExporter.class);
+	private static final Logger log = Red5LoggerFactory.getLogger(TestSVGTextExporter.class);
 	
 	public void testGetDiagramList() {
 		try {

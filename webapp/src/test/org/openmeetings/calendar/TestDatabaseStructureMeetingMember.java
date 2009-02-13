@@ -1,36 +1,16 @@
 package org.openmeetings.calendar;
 
 
-
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
-
 import junit.framework.TestCase;
+import org.slf4j.Logger;
+import org.red5.logging.Red5LoggerFactory;
 
-
-
-import org.apache.commons.logging.Log;
-
-import org.apache.commons.logging.LogFactory;
-
-import org.openmeetings.app.data.calendar.daos.AppointmentCategoryDaoImpl;
-import org.openmeetings.app.data.calendar.daos.AppointmentDaoImpl;
 import org.openmeetings.app.data.calendar.daos.MeetingMemberDaoImpl;
-import org.openmeetings.app.data.user.Usermanagement;
-import org.openmeetings.app.hibernate.beans.adresses.Adresses;
-import org.openmeetings.app.hibernate.beans.calendar.Appointment;
-
 
 
 public class TestDatabaseStructureMeetingMember extends TestCase {
 
-	
-
-	private static final Log log = LogFactory.getLog(TestDatabaseStructureMeetingMember.class);
-
-	
+	private static final Logger log = Red5LoggerFactory.getLogger(TestDatabaseStructureMeetingMember.class, "openmeetings");
 
 	public TestDatabaseStructureMeetingMember(String testname){
 

@@ -16,14 +16,14 @@ import org.apache.batik.svggen.SVGGraphics2D;
 import org.openmeetings.servlet.outputhandler.ExportToImage;
 import org.openmeetings.utils.geom.GeomPoint;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.red5.logging.Red5LoggerFactory;
 import org.w3c.dom.DOMImplementation;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 public class TestSVGTextExporterArrow extends TestCase {
 	
-	private static final Logger log = LoggerFactory.getLogger(TestSVGTextExporterArrow.class);
+	private static final Logger log = Red5LoggerFactory.getLogger(TestSVGTextExporterArrow.class, "openmeetings");
 	
 	public void testGetDiagramList() {
 		try {

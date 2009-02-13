@@ -1,7 +1,7 @@
 package org.openmeetings.test.rooms;
 
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.red5.logging.Red5LoggerFactory;
 
 import junit.framework.TestCase;
 
@@ -9,7 +9,7 @@ import org.openmeetings.app.data.conference.Roommanagement;
 
 public class RoomTest extends TestCase {
 	
-	private static final Logger log = LoggerFactory.getLogger(RoomTest.class);
+	private static final Logger log = Red5LoggerFactory.getLogger(RoomTest.class, "openmeetings");
 	
 	public RoomTest(String testname){
 		super(testname);

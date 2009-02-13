@@ -2,18 +2,15 @@ package org.openmeetings.calendar;
 
 import junit.framework.TestCase;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.openmeetings.app.data.user.Usermanagement;
+import org.slf4j.Logger;
+import org.red5.logging.Red5LoggerFactory;
 import org.openmeetings.app.data.user.dao.UsersDaoImpl;
-
-
 
 public class TestDatabaseStructureGetUserStart extends TestCase {
 
 	
 
-	private static final Log log = LogFactory.getLog(TestDatabaseStructureGetUserStart.class);
+	private static final Logger log = Red5LoggerFactory.getLogger(TestDatabaseStructureGetUserStart.class, "openmeetings");
 
 	
 

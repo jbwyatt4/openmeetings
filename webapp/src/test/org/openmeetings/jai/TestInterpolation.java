@@ -7,11 +7,11 @@ import junit.framework.TestCase;
 
 import org.openmeetings.utils.geom.GeomPoint;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.red5.logging.Red5LoggerFactory;
 
 public class TestInterpolation extends TestCase {
 	
-	private static final Logger log = LoggerFactory.getLogger(TestInterpolation.class);
+	private static final Logger log = Red5LoggerFactory.getLogger(TestInterpolation.class, "openmeetings");
 	
 	public void testInterpolate() {
 		try {

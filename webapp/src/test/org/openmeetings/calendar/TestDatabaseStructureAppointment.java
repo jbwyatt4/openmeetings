@@ -14,9 +14,9 @@ import junit.framework.TestCase;
 
 
 
-import org.apache.commons.logging.Log;
+import org.slf4j.Logger;
 
-import org.apache.commons.logging.LogFactory;
+import org.red5.logging.Red5LoggerFactory;
 
 import org.openmeetings.app.data.calendar.daos.AppointmentCategoryDaoImpl;
 import org.openmeetings.app.data.calendar.daos.AppointmentDaoImpl;
@@ -31,7 +31,7 @@ public class TestDatabaseStructureAppointment extends TestCase {
 
 	
 
-	private static final Log log = LogFactory.getLog(TestDatabaseStructureAppointment.class);
+	private static final Logger log = Red5LoggerFactory.getLogger(TestDatabaseStructureAppointment.class, "openmeetings");
 
 	
 
@@ -72,7 +72,7 @@ public class TestDatabaseStructureAppointment extends TestCase {
 			}
 			
 			for (Iterator<Appointment> iter = listAppoints.iterator();iter.hasNext();) {
-				log.debug(iter.next());
+				log.debug(""+iter.next());
 			}
 			
 			//AppointmentDaoImpl.getInstance().updateAppointment(1L,"neu", "erster Test",Calendar.getInstance().getTime() , 

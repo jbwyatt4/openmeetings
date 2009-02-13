@@ -3,13 +3,13 @@ package org.openmeetings.test.rooms;
 import junit.framework.TestCase;
 
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.red5.logging.Red5LoggerFactory;
 import org.openmeetings.app.data.conference.Roommanagement;
 
 
 public class AddOrgRoom extends TestCase {
 	
-	private static final Logger log = LoggerFactory.getLogger(AddOrgRoom.class);
+	private static final Logger log = Red5LoggerFactory.getLogger(AddOrgRoom.class, "openmeetings");
 	
 	public AddOrgRoom(String testname){
 		super(testname);
