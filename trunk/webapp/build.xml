@@ -39,7 +39,7 @@
 	<property name="jakarta.common.lib" value="${project.lib}/jakarta-commons" />
 	<!--JDBC Drivers-->
 	<property name="database.lib" value="${project.lib}/database" />
-	<property name="red5.lib" value="${project.lib}/red5_08rc1" />
+	<property name="red5.lib" value="${project.lib}/red5_08rc3" />
 	<property name="upload.lib" value="${project.lib}/upload" />
 	<property name="xstream.lib" value="${project.lib}/xstream" />
 	<property name="junit.lib" value="${project.lib}/junit" />

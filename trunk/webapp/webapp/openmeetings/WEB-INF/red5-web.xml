@@ -21,22 +21,21 @@
     
     <!-- New Class for the Streaming Handlers -->
     <bean id="web.handler" 
-        class="org.openmeetings.app.remote.red5.ScopeApplicationAdapter"
-        singleton="true">
+        class="org.openmeetings.app.remote.red5.ScopeApplicationAdapter">
         <property name="clientListManager" ref="openmeetings.ClientListManager" />
         <property name="emoticonsManager" ref="openmeetings.EmoticonsManager" />
         <property name="whiteBoardService" ref="whiteboardservice.service" />
     </bean>
         
-    <bean id="openmeetings.ClientListManager" singleton="true" 
+    <bean id="openmeetings.ClientListManager"
         class="org.openmeetings.app.remote.red5.ClientListManager">
     </bean> 
     
-    <bean id="openmeetings.EmoticonsManager" singleton="true" 
+    <bean id="openmeetings.EmoticonsManager" 
         class="org.openmeetings.app.remote.red5.EmoticonsManager">
     </bean> 
  
-    <bean id="openmeetings.WhiteBoardObjectListManager" singleton="true" 
+    <bean id="openmeetings.WhiteBoardObjectListManager"
         class="org.openmeetings.app.remote.red5.WhiteBoardObjectListManager">
     </bean>        
         

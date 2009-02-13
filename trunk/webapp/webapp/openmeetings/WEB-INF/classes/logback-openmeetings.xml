@@ -1,15 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <configuration>
-  <appender name="FLOG2" class="ch.qos.logback.core.rolling.RollingFileAppender">
-    <Threshold>DEBUG</Threshold>
-    <File>openmeetings.log</File>
-    <layout class="ch.qos.logback.classic.PatternLayout">
-      <pattern>%5p %d{MM-dd HH:mm:ss.SSS } %F %r %L %c [%t] - %m%n</pattern>
-    </layout>
-    <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
-      <maxIndex>1</maxIndex>
-    </rollingPolicy>
+	<contextName>openmeetings</contextName>
+	
+	<jmxConfigurator contextName="openmeetings" />
+
+  <appender name="FLOG2" class="ch.qos.logback.core.FileAppender">
+		<File>log/openmeetings.log</File>
+		<Append>false</Append>
+		<Encoding>UTF-8</Encoding>
+		<BufferedIO>false</BufferedIO>
+		<ImmediateFlush>true</ImmediateFlush>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<Pattern>
+				%5p %d{MM-dd HH:mm:ss.SSS } %F %r %L %c [%t] - %m%n
+			</Pattern>
+		</layout>
   </appender>
   <appender name="CONSOLE2" class="ch.qos.logback.core.ConsoleAppender">
     <layout class="ch.qos.logback.classic.PatternLayout">
