@@ -13,7 +13,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.red5.logging.Red5LoggerFactory;
 
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.XppDriver;
@@ -50,7 +50,7 @@ public class Backup_StreamService implements IPendingServiceCallback {
 	private static String folderForRecordings = "recorded";
 	
 	
-	private static final Logger log = LoggerFactory.getLogger(Backup_StreamService.class);
+	private static final Logger log = Red5LoggerFactory.getLogger(Backup_StreamService.class);
 	
 	private static LinkedHashMap<String,LinkedHashMap<String,Object>> roomRecordingList = new LinkedHashMap<String,LinkedHashMap<String,Object>>();
 	
