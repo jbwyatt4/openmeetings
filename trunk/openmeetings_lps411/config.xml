@@ -67,12 +67,15 @@ of the red5-servlet
         
 <!--
     Video-Settings
+    
+    Number that specifies the amount of sound required to activate the microphone 
+	Acceptable values from 0 to 100.	
     this value is used in Audio_Streaming, at which the *activity-meter* will
     send a notification for all connected hosts of a conference
     the result of this notification is that you see the green-light highlighted if
     a remote user is speaking
  -->
-<loudnessAcitviation>7</loudnessAcitviation>   
+<loudnessAcitviation>7</loudnessAcitviation>  
     
 <!--
     OpenMeetings-Webapp Name

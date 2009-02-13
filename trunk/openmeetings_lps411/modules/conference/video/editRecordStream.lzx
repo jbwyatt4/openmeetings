@@ -123,6 +123,7 @@
 				_camera.setQuality(canvas.bandwidthNeededBest,canvas.camQualityBest);
 			} else {
 				_micro.setRate(canvas.microphoneRateNormal);
+				_micro.setSilenceLevel(canvas.loudnessAcitviation);
 				if ($debug) Debug.write("_camera.setQuality NORMAL: ",canvas.bandwidthNeededNormal,canvas.camQualityNormal);
 				_camera.setQuality(canvas.bandwidthNeededNormal,canvas.camQualityNormal);
 			}
