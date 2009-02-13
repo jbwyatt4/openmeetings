@@ -6,7 +6,7 @@ import java.util.LinkedList;
 
 import org.apache.axis2.AxisFault;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.red5.logging.Red5LoggerFactory;
 
 import org.openmeetings.app.data.basic.Sessionmanagement;
 import org.openmeetings.app.data.basic.rooms.RoomsList;
@@ -21,7 +21,7 @@ import org.openmeetings.app.remote.ConferenceService;
 
 public class RoomService {
 	
-	private static final Logger log = LoggerFactory.getLogger(RoomService.class);
+	private static final Logger log = Red5LoggerFactory.getLogger(RoomService.class, "openmeetings");
 	
 	//TODO: Not implemented yet
 //	public List<Rooms_Organisation> getRoomsByOrganisationAndType(String SID, long organisation_id, long roomtypes_id) {

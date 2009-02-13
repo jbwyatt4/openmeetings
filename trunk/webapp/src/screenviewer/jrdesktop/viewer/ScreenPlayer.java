@@ -50,7 +50,7 @@ public class ScreenPlayer extends JLabel {
         };
        
         mouseWheelListener = new MouseWheelListener() {
-            @Override
+            //@Override
             public void mouseWheelMoved(MouseWheelEvent e) {
                 ScreenPlayer.this.recorder.viewer.AddObject(e);
             }
