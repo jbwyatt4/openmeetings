@@ -5,7 +5,7 @@
 
 	<!-- this should be the contentSaveWindow -->
 	<attribute name="returnObj" value="null" />
-	
+	 
 	<!-- if true this object will register at the update-observer -->
 	<attribute name="registerObject" value="false" type="boolean" />
 	
