@@ -3,14 +3,13 @@
 
 <class name="errorPopup" extends="labelExplorerBox" labelid="204"
 	docking="true" resizeable="false" closable="true" y="100"
-    x="$once{ parent.width/2 - this.width/2 }" height="230" width="224">
+    x="$once{ parent.width/2 - this.width/2 }" height="160" width="324">
 
 	<attribute name="error" value="" type="string" />
 
-	<view y="24" width="218" height="200" x="2" clip="true">
-		<text y="30" fontsize="10" fontstyle="bold" text="${ parent.parent.error }"
-			multiline="true" width="190" />
-		<vscrollbar />
+	<view y="24" width="318" height="130" x="2" clip="true">
+		<text fontsize="10" fontstyle="bold" text="${ parent.parent.error }"
+			multiline="true" width="312" selectable="true" />
 	</view>
 
 </class>
