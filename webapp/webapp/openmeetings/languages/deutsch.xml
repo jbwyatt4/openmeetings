@@ -1291,52 +1291,52 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Füllfarbe de/aktivieren</value>
   </string>
   <string id="429" name="change_width_arrow_down_slider">
-    <value>Change Linewidth</value>
+    <value>Linienstärke ändern</value>
   </string>
   <string id="430" name="close_small_popups">
-    <value>close</value>
+    <value>Schließen</value>
   </string>
   <string id="431" name="paint_tool_letter">
-    <value>change Fontsize</value>
+    <value>Schriftgröße anpassen</value>
   </string>
   <string id="432" name="recordingslist_delete">
-    <value>Delete Recording</value>
+    <value>Aufnahme löschen</value>
   </string>
   <string id="433" name="recordingslist_recordedByGuest">
-    <value>Guest</value>
+    <value>Gäste</value>
   </string>
   <string id="434" name="recordingslist_recordedby">
-    <value>By:</value>
+    <value>Von:</value>
   </string>
   <string id="435" name="recordings_table_head_name">
     <value>Name</value>
   </string>
   <string id="436" name="recordings_table_head_room">
-    <value>Room</value>
+    <value>Raum</value>
   </string>
   <string id="437" name="recordings_table_head_date">
-    <value>Date</value>
+    <value>Datum</value>
   </string>
   <string id="438" name="record_start_cancel">
-    <value>cancel</value>
+    <value>Abbrechen</value>
   </string>
   <string id="439" name="record_start_start">
-    <value>start</value>
+    <value>Start</value>
   </string>
   <string id="440" name="filesbrowser_table_head_name">
     <value>Name</value>
   </string>
   <string id="441" name="filesbrowser_table_head_date">
-    <value>Date</value>
+    <value>Datum</value>
   </string>
   <string id="442" name="chat_clear_history">
-    <value>Delete Server-Chatlog</value>
+    <value>Chatlog Löschen</value>
   </string>
   <string id="443" name="chat_overall_header">
     <value>Chat</value>
   </string>
   <string id="444" name="chat_send_btn">
-    <value>send message</value>
+    <value>Nachricht abschicken</value>
   </string>
   <string id="445" name="chat_emot_btn">
     <value>Emoticons</value>
@@ -1345,22 +1345,22 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Emoticons</value>
   </string>
   <string id="447" name="choose_video_settings">
-    <value>Choose Published Devices</value>
+    <value>Wählen Sie die Geräte aus:</value>
   </string>
   <string id="448" name="choose_video_settings_combo">
-    <value>Audio and Video</value>
+    <value>Ton und Video</value>
   </string>
   <string id="449" name="choose_video_settings_combo">
-    <value>Audio only</value>
+    <value>nur Ton(Mikrophon)</value>
   </string>
   <string id="450" name="choose_video_settings_combo">
-    <value>Video only</value>
+    <value>nur Video(Webcam)</value>
   </string>
   <string id="451" name="choose_video_settings_combo">
-    <value>no Audio/Video (static Image)</value>
+    <value>kein Video/Ton (nur Profil-Bild)</value>
   </string>
   <string id="452" name="choose_video_settings_info_text">
-    <value>No Audio/Video from your PC will be published, instead of that a picture from your profile will be shown. Choose these settings if you have problems with your bandwidth or a very slow Internet connection.</value>
+    <value>Kein Video/Ton veröffentlichen. Wählen Sie diese Einstellung wenn die verfügbare Bandwbreite sehr niedrig ist.</value>
   </string>
   <string id="453" name="calendar_dayname_monday">
     <value>MO</value>
@@ -1558,61 +1558,61 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>OpenMeetings Password Reset</value>
   </string>
   <string id="518" name="dateRegExpError">
-    <value>Please enter a valid Date, for example 24.12.2001 (dd.mm.yyyy)</value>
+    <value>Bitte geben Sie ein gültiges Datum an, zum Beispiel 24.12.2001 (dd.mm.yyyy)</value>
   </string>
   <string id="519" name="emailRegExpError">
-    <value>Please enter a valid EMail, for example name@mail.com</value>
+    <value>Bitte geben Sie eine gültige EMail an, zum Beispiel name@mail.com</value>
   </string>
   <string id="520" name="floatRegExpError">
-    <value>Please enter a Float-Number, for example 1.00</value>
+    <value>Bitte geben Sie eine Fließkommazahl an, zum Beispiel 1.00</value>
   </string>
   <string id="521" name="numberRegExpError">
-    <value>Please enter a Number (Integer), for example 100</value>
+    <value>Bitte geben Sie eine Ganzzahl an, zum Beispiel 100</value>
   </string>
   <string id="522" name="phoneRegExpError">
-    <value>Please enter a valid Phone number, for example ++49 0123 123123</value>
+    <value>Bitte geben Sie eine gültige Telefon-Nummer an, zum Beispiel ++49 0123 123123</value>
   </string>
   <string id="523" name="timeRegExpError">
-    <value>Please enter a valid time, for example 12:23 (hh:mm)</value>
+    <value>Bitte geben Sie eine gültige Uhrzeit an, zum Beispiel 12:23 (hh:mm)</value>
   </string>
   <string id="524" name="invitation_window">
-    <value>Passwort protected</value>
+    <value>Passwort geschützt</value>
   </string>
   <string id="525" name="invitation_window_passwordLabel">
-    <value>Password</value>
+    <value>Passwort</value>
   </string>
   <string id="526" name="invitation_window_validLabel">
-    <value>Validity period</value>
+    <value>Gültigkeit</value>
   </string>
   <string id="527" name="invitation_window_valid">
-    <value>Endless</value>
+    <value>Immer</value>
   </string>
   <string id="528" name="invitation_window_valid">
-    <value>Period</value>
+    <value>Zeitspanne</value>
   </string>
   <string id="529" name="invitation_window_valid">
-    <value>One-Time</value>
+    <value>Einamlig</value>
   </string>
   <string id="530" name="invitation_window_validFromLabel">
-    <value>Valid From:</value>
+    <value>Gültig ab:</value>
   </string>
   <string id="531" name="invitation_window_validToLabel">
-    <value>Valid to:</value>
+    <value>Gültig bis:</value>
   </string>
   <string id="532" name="invitation_window_MailSubject">
-    <value>Invitation To OpenMeetings</value>
+    <value>Einladung für diese Konferenz</value>
   </string>
   <string id="533" name="invitation_error">
-    <value>Not Invitation availible for this Invitation-Code</value>
+    <value>Keine Einladung für diesen Code</value>
   </string>
   <string id="534" name="invitation_error">
-    <value>The Invitation was already used. This type of Invitation cannot be re-used.</value>
+    <value>Die Einladung ist nicht mehr gültig.</value>
   </string>
   <string id="535" name="invitation_error">
-    <value>This Invitation-Code is not valid.</value>
+    <value>Die Einladung ist nicht mehr gültig.</value>
   </string>
   <string id="536" name="invitation_pass">
-    <value>Password:</value>
+    <value>Passwort:</value>
   </string>
   <string id="537" name="invitation_pass_btn">
     <value>Check Password</value>
@@ -1624,10 +1624,10 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Browser</value>
   </string>
   <string id="540" name="audio_video">
-    <value>Syncronize Audio/Video</value>
+    <value>Ton/Video neu starten</value>
   </string>	
   <string id="541" name="errorCode_invalidSession">
-    <value>Login was correct, but the Session you tried is not active or stored on the Server. You have to get a new SessionId and retry login.</value>
+    <value>Session abgelaufen oder ungültig.</value>
   </string>
   <string id="542" name="errorcode_setUserObject">
     <value>The SessionId is not loggedin or has no Admin rights. The SOAP Gateway needs an User with Admin-Rights to embed new Users.</value>
@@ -1636,7 +1636,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>This Session has no Remoteuser-Data connected. Wether you did not call the SOAP-Gateway before accessing the Application or you are usnig a wrong Session-ID</value>
   </string>
   <string id="544" name="debug_message_recording">
-    <value>The recorder is currently Beta!</value>
+    <value>Die Aufnahme von Meetings ist noch Beta!</value>
   </string>	
   <string id="545" name="propertyPanelXValue">
     <value>x</value>
@@ -1654,16 +1654,16 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>w</value>
   </string>
   <string id="550" name="propertyPanelWidthValueLabel">
-    <value>width</value>
+    <value>Breite</value>
   </string>
   <string id="551" name="propertyPanelHeightValue">
     <value>h</value>
   </string>
   <string id="552" name="propertyPanelHeightValueLabel">
-    <value>height</value>
+    <value>Höhe</value>
   </string>
   <string id="553" name="propertyOpacitySlider">
-    <value>Change Transparency</value>
+    <value>Transparenz ändern</value>
   </string>	
   <string id="554" name="browserOpen">
     <value>Browser Open</value>
@@ -1672,16 +1672,16 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Browser Close</value>
   </string>	
   <string id="556" name="connectionLostMessage">
-    <value>The Connection to the Server is lost. You need to reload the Application or/and check your Network.</value>
+    <value>Die Verbindung zum Server ist abgebrochen. Prüfen Sie ihre Netzwerk-Verbindung und starten Sie die Anwendung neu.</value>
   </string> 
   <string id="557" name="557">
     <value>Pointer</value>
   </string>
   <string id="558" name="sync message header">
-    <value>Synchronizing</value>
+    <value>Synchronisiere</value>
   </string>
   <string id="559" name="Synchronizing message">
-    <value>Synchronizing Users, please wait</value>
+    <value>Synchroniziere Benutzer, bitte warten Sie</value>
   </string>
   <string id="560" name="exportToSVG">
     <value>&lt;u&gt;Download as SVG&lt;/u&gt;</value>
@@ -1699,19 +1699,19 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>&lt;u&gt;Download as TIF&lt;/u&gt;</value>
   </string>  
   <string id="565" name="calendarLabel">
-    <value>Reminder:</value>
+    <value>Errinnerung</value>
   </string>
   <string id="566" name="calendarLabel">
-    <value>Category:</value>
+    <value>Kategorie</value>
   </string>
   <string id="567" name="calendarLabel">
-    <value>Repetition:</value>
+    <value>Wiederholung</value>
   </string>
   <string id="568" name="calendarLabel">
-    <value>none</value>
+    <value>Keine</value>
   </string>
   <string id="569" name="calendarLabel">
-    <value>Location:</value>
+    <value>Ort:</value>
   </string>
   <string id="570" name="calendarLabel">
     <value>Start</value>
@@ -1729,43 +1729,43 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Invite People</value>
   </string>
   <string id="575" name="calendarLabel">
-    <value>Daily</value>
+    <value>Täglich</value>
   </string>
   <string id="576" name="calendarLabel">
-    <value>Monthly</value>
+    <value>Monatlich</value>
   </string>
   <string id="577" name="calendarLabel">
-    <value>Yearly</value>
+    <value>Yährlich</value>
   </string>
   <string id="578" name="alert">
     <value>Appointment-end is after of appointment-start!</value>
   </string>
   <string id="579" name="alert">
-    <value>Please insert a title!</value>
+    <value>Bitte geben Sie einen Titel an!</value>
   </string>
   <string id="580" name="580">
     <value>RTL</value>
   </string>
   <string id="581" name="581">
-    <value>Activate this if you write in a right to left language (inverse word order)</value>
+    <value>Aktivieren Sie die falls es sich um eine Eingabe einer Rechts-Nach-Links Sprache (arabisch, persich, hebräisch) handelt.</value>
   </string>
   <string id="582" name="tooltip main-menu">
-    <value>Dashboard</value>
+    <value>Start</value>
   </string>
   <string id="583" name="tooltip main-menu">
-    <value>Watch recorded Meetings or Events</value>
+    <value>Aufgenommene Konferenzen betrachten</value>
   </string>
   <string id="584" name="tooltip main-menu">
-    <value>Meeting - Make a conference with 4 (up to 16) Users&lt;br/&gt;everybody will have audio + video access</value>
+    <value>Meeting - Machen Sie eine Konferenz&lt;br/&gt;</value>
   </string>
   <string id="585" name="tooltip main-menu">
-    <value>Event - Make a conference with up to 200 participents&lt;br/&gt;Only the Moderator will have audio/video</value>
+    <value>Event</value>
   </string>
   <string id="586" name="tooltip main-menu">
-    <value>Create users, rooms, organizations&lt;br/&gt; + change configuration</value>
+    <value>Benutzer, Konfiguration und Verwaltung</value>
   </string>  
   <string id="587" name="room Administration roomclients list">
-    <value>Users in this Room now</value>
+    <value>Benutzer in diesem Raum</value>
   </string>
   <string id="588" name="room Administration roomclients list">
     <value>ID</value>
@@ -1777,28 +1777,28 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>D</value>
   </string>  
   <string id="591" name="swf sync message">
-    <value>Loading Document. Please wait untill all Client have been synchronized.</value>
+    <value>Lade Dokument. Bitte warten Sie bis alle Benutzer synchonisiert wurden.</value>
   </string>  
   <string id="592" name="upload dialog">
-    <value>Upload complete, converting Document ...</value>
+    <value>Dokument hochgeladen, Bitte warten Sie ab bis es importiert wurde ...</value>
   </string>
   <string id="593" name="upload dialog">
-    <value>Start Upload</value>
+    <value>Starte Upload</value>
   </string>
   <string id="594" name="upload dialog">
-    <value>Upload and Import Dialog. Please select a File from your Disk.</value>
+    <value>Upload und Import. Bitte wählen Sie eine Datei aus.</value>
   </string>
   <string id="595" name="upload Dialog">
-    <value>Cancel</value>
+    <value>Abbrechen</value>
   </string>
   <string id="596" name="upload Dialog">
-    <value>Select File</value>
+    <value>Datei auswählen</value>
   </string>
   <string id="597" name="administration navigation">
-    <value>Connections</value>
+    <value>Verbindungen</value>
   </string>
   <string id="598" name="confadmin value list">
-    <value>Value</value>
+    <value>Wert</value>
   </string>  
   <string id="599" name="connection administration panel">
     <value>Streamid</value>
@@ -1807,10 +1807,10 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Login</value>
   </string>
   <string id="601" name="connection administration panel">
-    <value>Connected since</value>
+    <value>Verbunden seit</value>
   </string>
   <string id="602" name="connection administration panel">
-    <value>Room / Scope</value>
+    <value>Raum / Scope</value>
   </string>
   <string id="603" name="connection administration panel">
     <value>Kick User</value>
@@ -1822,42 +1822,42 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Do you really want to kick this Client from the Connection?&lt;br/&gt; This does only remove the Client from the current Room.The Client could re-login again.</value>
   </string>
   <string id="606" name="kick user message dialog">
-    <value>Your session has been closed by an Administrator or Moderator.</value>
+    <value>Ihre Session wurde beenden.</value>
   </string>
   <string id="607" name="useralterself_phone">
     <value>Telefon</value>
   </string>  
   <string id="608" name="participents panel">
-    <value>User is the Moderator of this Room</value>
+    <value>Benutzer ist Moderator dieses Raumes.</value>
   </string>
   <string id="609" name="participents panel">
-    <value>User is allowed to draw on the Whiteboard</value>
+    <value>Benutzer darf nicht auf das Zeichenbrett zeichnen</value>
   </string>
   <string id="610" name="participents panel">
-    <value>(Re) Start Audio/Video or change Device Settings</value>
+    <value>Neu starten des Ton/Videaos oder Einstellungen ändern</value>
   </string>
   <string id="611" name="participents panel">
-    <value>Allow this User to draw on the Whiteboard</value>
+    <value>Diesem Benutzer den Zugang zum Zeichenbrett gewähren.</value>
   </string>
   <string id="612" name="participents panel">
-    <value>Remove ability to draw on whiteboard</value>
+    <value>Diesem Benutzer den Zugang zum Zeichenbrett verwehren.</value>
   </string>
   <string id="613" name="conferencePanels">
-    <value>Users</value>
+    <value>Benutzer</value>
   </string>
   <string id="614" name="conferencePanels">
-    <value>Files</value>
+    <value>Dateien</value>
   </string>
   <string id="615" name="conferencePanels">
-    <value>Whiteboard</value>
+    <value>Zeichenbrett</value>
   </string>
   <string id="616" name="conferencePanels">
     <value>Chat</value>
   </string>  
   <string id="617" name="organization choose info">
-    <value>Your account is assigned to multiple Organizations. Please choose one for this Session.</value>
+    <value>Ihr Benutzer-Profil ist Mitglied in mehreren Organisationen. Bitte wählen Sie eine für diese Session.</value>
   </string>  
   <string id="618" name="error message room full">
-    <value>This room is full at the moment. Please try again later.</value>
+    <value>Der Raum ist voll im Moment. Bitte versuchen Sie es später noch einmal.</value>
   </string>  
 </language>
