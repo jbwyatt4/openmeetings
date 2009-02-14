@@ -11,6 +11,7 @@ import java.io.RandomAccessFile;
 import java.io.Writer;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Iterator;
 
@@ -90,7 +91,7 @@ public class ExportToImage extends HttpServlet {
 				PrintBean pBean = PrintService.getPrintItemByHash(hash);
 				
 				//Whiteboard Objects
-		        Map whiteBoardMap = pBean.getMap();
+				List whiteBoardMap = pBean.getMap();
 				
 				// Get a DOMImplementation.
 		        DOMImplementation domImpl =
@@ -109,6 +110,8 @@ public class ExportToImage extends HttpServlet {
 		        // Set the width and height attributes on the root 'svg' element.
 		        svgRoot.setAttributeNS(null, "width", ""+pBean.getWidth());
 		        svgRoot.setAttributeNS(null, "height", ""+pBean.getHeight());
+		        
+		        log.debug("pBean.getWidth(),pBean.getHeight()"+pBean.getWidth()+","+pBean.getHeight());
 		        
 
 		        // Create an instance of the SVG Generator.

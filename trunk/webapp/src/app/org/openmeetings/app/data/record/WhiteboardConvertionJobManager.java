@@ -443,7 +443,8 @@ public class WhiteboardConvertionJobManager {
         // Create an instance of the SVG Generator.
         SVGGraphics2D svgGenerator = new SVGGraphics2D(document);
         
-        svgGenerator = WhiteboardMapToSVG.getInstance().convertMapToSVG(svgGenerator, whiteBoardObjects);
+        //FIXME: Fix Recorder
+        //svgGenerator = WhiteboardMapToSVG.getInstance().convertMapToSVG(svgGenerator, whiteBoardObjects);
 		
         // Finally, stream out SVG to the standard output using
         // UTF-8 encoding.

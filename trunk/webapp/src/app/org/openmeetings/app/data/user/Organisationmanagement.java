@@ -744,11 +744,11 @@ public class Organisationmanagement {
 	 * @return
 	 * @throws Exception
 	 */
-	private boolean checkOrgInList(Long orgId, LinkedHashMap org) throws Exception{
+	private boolean checkOrgInList(Long orgId, List org) throws Exception{
 //		log.error("checkOrgInList "+orgId);
-		for (Iterator it = org.keySet().iterator();it.hasNext();){
+		for (Iterator it = org.iterator();it.hasNext();){
 			Integer key = (Integer) it.next();
-			Long newOrgId = Long.valueOf(org.get(key).toString()).longValue();
+			Long newOrgId = key.longValue();
 //			log.error("[checkOrgInList 1]: newOrgId "+newOrgId);
 //			log.error("[checkOrgInList 2]: org "+orgId);
 			if (newOrgId.equals(orgId)) {
@@ -785,16 +785,16 @@ public class Organisationmanagement {
 	 * @param organisations
 	 * @return
 	 */
-	public Long updateUserOrganisationsByUser(Users us, LinkedHashMap organisations){
+	public Long updateUserOrganisationsByUser(Users us, List organisations){
 		try {
 			LinkedList<Long> orgIdsToAdd = new LinkedList<Long>();
 			LinkedList<Long> orgIdsToDelete = new LinkedList<Long>();
 			
 			if (us.getOrganisation_users()!=null){
 				
-				for (Iterator it = organisations.keySet().iterator();it.hasNext();){
+				for (Iterator it = organisations.iterator();it.hasNext();){
 					Integer key = (Integer) it.next();
-					Long orgIdToAdd = Long.valueOf(organisations.get(key).toString()).longValue();
+					Long orgIdToAdd = key.longValue();
 					boolean isAlreadyStored = this.checkOrgInStoredList(orgIdToAdd, us.getOrganisation_users());
 					if (!isAlreadyStored) orgIdsToAdd.add(orgIdToAdd);
 				}
@@ -831,12 +831,12 @@ public class Organisationmanagement {
 	 * @param org
 	 * @return
 	 */
-	public Long addUserOrganisationsByHashMap(long us, LinkedHashMap org){
+	public Long addUserOrganisationsByHashMap(long us, List org){
 		try {
 			if (org!=null){
-				for (Iterator it = org.keySet().iterator();it.hasNext();){
+				for (Iterator it = org.iterator();it.hasNext();){
 					Integer key = (Integer) it.next();
-					Long newOrgId = Long.valueOf(org.get(key).toString()).longValue();
+					Long newOrgId = key.longValue();
 					this.addUserToOrganisation(new Long(3), us, newOrgId, new Long(1), "");
 				}
 			}

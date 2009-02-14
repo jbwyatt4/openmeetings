@@ -2,6 +2,7 @@ package org.openmeetings.app.remote;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.openmeetings.app.batik.beans.PrintBean;
@@ -24,7 +25,7 @@ public class PrintService {
 	 * 
 	 */
 	
-	public String addPrintList(String SID, Map map, int width, int height) {
+	public String addPrintList(String SID, List map, int width, int height) {
 		try {
 			Long users_id = Sessionmanagement.getInstance().checkSession(SID);
 	        Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
@@ -48,7 +49,7 @@ public class PrintService {
 		return itemList;
 	}
 	
-	public static synchronized void addPrintItembyMap(String hash, Map map, int width, int height) throws Exception {
+	public static synchronized void addPrintItembyMap(String hash, List map, int width, int height) throws Exception {
 		PrintBean pBean = new PrintBean(hash, map, width, height);
 		currentExportList.put(hash, pBean);
 	}

@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.Image;
 import java.io.File;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import javax.imageio.ImageIO;
@@ -32,12 +33,13 @@ public class WhiteboardMapToSVG extends BatikMethods {
 		return instance;
 	}
 	
-	public SVGGraphics2D convertMapToSVG(SVGGraphics2D svgGenerator, Map whiteBoardMap) throws Exception {
+	public SVGGraphics2D convertMapToSVG(SVGGraphics2D svgGenerator, List whiteBoardMap) throws Exception {
 		
 		//log.debug("convertMapToSVG: "+whiteBoardMap.size());
 		
-        for (Iterator iter = whiteBoardMap.keySet().iterator();iter.hasNext();) {
-        	Map graphObject = (Map) whiteBoardMap.get(iter.next());
+        for (Iterator iter = whiteBoardMap.iterator();iter.hasNext();) {
+        	
+        	List graphObject = (List) iter.next();
         	
         	String graphType = graphObject.get(0).toString();
         	
@@ -45,7 +47,7 @@ public class WhiteboardMapToSVG extends BatikMethods {
         	
         	if (graphType.equals("paint")) {
         		
-        		Map pointsList = (Map) graphObject.get(1);
+        		List pointsList = (List) graphObject.get(1);
         		
         		Integer lineWidth = Integer.valueOf(graphObject.get(3).toString()).intValue();
         		Integer col = Integer.valueOf(graphObject.get(4).toString()).intValue();
@@ -62,7 +64,8 @@ public class WhiteboardMapToSVG extends BatikMethods {
         		//Draw a Painting
     	        SVGGraphics2D svgGenerator_temp = new SVGGraphics2D(svgGenerator);
     	        //SVGGraphics2D svgGenerator2 = new SVGGraphics2D(document);
-    	        
+    	         
+    	        log.debug("pointsList: "+pointsList);
     	        this.drawPointsObject(svgGenerator_temp, pointsList, new Color(col), lineWidth, x, y, alpha);
     	        
         	} else if (graphType.equals("rectangle")) {

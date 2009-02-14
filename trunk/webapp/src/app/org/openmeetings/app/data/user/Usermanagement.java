@@ -3,6 +3,7 @@ package org.openmeetings.app.data.user;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -372,7 +373,7 @@ public class Usermanagement {
 			String login, String password, String lastname, String firstname,
 			Date age, String street, String additionalname, String zip, long states_id, String town,
 			int availible, String telefon, String fax,
-			String mobil, String email, String comment, int status, LinkedHashMap organisations,
+			String mobil, String email, String comment, int status, List organisations,
 			int title_id, String phone) {
 
 		if (AuthLevelmanagement.getInstance().checkUserLevel(user_level) && user_id != 0) {
@@ -658,7 +659,7 @@ public class Usermanagement {
 	 * @param town
 	 * @param language_id
 	 * @return
-	 */
+	 */  
 	public Long registerUser(String login, String Userpass, String lastname,
 			String firstname, String email, Date age, String street,
 			String additionalname, String fax, String zip, long states_id,
@@ -669,7 +670,7 @@ public class Usermanagement {
 				// TODO: add availible params sothat users have to verify their
 				// login-data
 				// TODO: add status from Configuration items
-				Long user_id = this.registerUserInit(3, 1, 0, 1, login, Userpass,lastname, firstname, email, age, street, additionalname,fax, zip, states_id, town, language_id, true, new LinkedHashMap(), phone);
+				Long user_id = this.registerUserInit(3, 1, 0, 1, login, Userpass,lastname, firstname, email, age, street, additionalname,fax, zip, states_id, town, language_id, true, new LinkedList(), phone);
 				// Get the default organisation_id of registered users
 				if (user_id>0){
 					long organisation_id = Long.valueOf(Configurationmanagement.getInstance().getConfKey(3,"default_domain_id").getConf_value()).longValue();
@@ -712,7 +713,7 @@ public class Usermanagement {
 			int status, String login, String Userpass, String lastname,
 			String firstname, String email, Date age, String street,
 			String additionalname, String fax, String zip, long states_id,
-			String town, long language_id, boolean sendWelcomeMessage, LinkedHashMap organisations, String phone) throws Exception {
+			String town, long language_id, boolean sendWelcomeMessage, List organisations, String phone) throws Exception {
 		//TODO: make phone number persistent
 		// User Level must be at least Admin
 		// Moderators will get a temp update of there UserLevel to add Users to

@@ -1,5 +1,5 @@
 package org.openmeetings.app.remote;
-
+ 
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -194,8 +194,10 @@ public class ConferenceService {
 		try {
 	        Long users_id = Sessionmanagement.getInstance().checkSession(SID);
 	        long User_level = Usermanagement.getInstance().getUserLevelByID(users_id);
+	        log.debug("argObject: 1 - "+argObject.getClass().getName());
 	        LinkedHashMap argObjectMap = (LinkedHashMap) argObject;
-	        LinkedHashMap organisations = (LinkedHashMap) argObjectMap.get("organisations");
+	        log.debug("argObject: 2 - "+argObjectMap.get("organisations").getClass().getName());
+	        List organisations = (List) argObjectMap.get("organisations");
 	        Long rooms_id = Long.valueOf(argObjectMap.get("rooms_id").toString()).longValue();
 	        log.error("rooms_id "+rooms_id);
 	        if (rooms_id==0){

@@ -1,15 +1,16 @@
 package org.openmeetings.app.batik.beans;
 
+import java.util.List;
 import java.util.Map;
 
 public class PrintBean {
 	
 	public String hash;
-	public Map map;
+	public List map;
 	public int width;
 	public int height;
 	
-	public PrintBean(String hash, Map map, int width, int height) {
+	public PrintBean(String hash, List map, int width, int height) {
 		super();
 		this.hash = hash;
 		this.height = height;
@@ -22,10 +23,10 @@ public class PrintBean {
 	public void setHash(String hash) {
 		this.hash = hash;
 	}
-	public Map getMap() {
+	public List getMap() {
 		return map;
 	}
-	public void setMap(Map map) {
+	public void setMap(List map) {
 		this.map = map;
 	}
 	public int getWidth() {

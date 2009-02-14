@@ -261,7 +261,7 @@ public class UserService {
 	        //log.error("saveOrUpdateUser4: "+argObjectMap.get("userage"));
 	        //log.error("saveOrUpdateUser5: "+argObjectMap.get("userage").getClass());
 	        
-	        LinkedHashMap organisations = (LinkedHashMap) argObjectMap.get("organisations");
+	        List organisations = (List) argObjectMap.get("organisations");
 	        Date age = null;
 	        if (argObjectMap.get("userage") instanceof Date){
 	        	age = (Date) argObjectMap.get("userage");
