@@ -180,7 +180,13 @@ public class Viewer extends Thread {
             byte[] data = rmiServer.updateData(index);
             object = ZipUtility.byteArraytoObject(data);   
             
-            String endUrl = main.OPENMEETINGS_URL + "?sid="+main.OPENMEETINGS_SID+"&room="+main.OPENMEETINGS_ROOM+"&domain="+main.OPENMEETINGS_DOMAIN+"&publicSID="+main.OPENMEETINGS_PUBLICSID;
+            String endUrl = main.OPENMEETINGS_URL + "?" +
+            				"sid="+main.OPENMEETINGS_SID+"" +
+            				"&room="+main.OPENMEETINGS_ROOM+"" +
+            				"&domain="+main.OPENMEETINGS_DOMAIN+"" +
+    						"&publicSID="+main.OPENMEETINGS_PUBLICSID +
+    						"&record="+main.OPENMEETINGS_RECORDER;
+            
             String fileName = "myscreenRemote.jpg";
             
             System.out.println("sendJpegToUrl url  " +endUrl);

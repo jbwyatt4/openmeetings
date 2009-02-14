@@ -32,6 +32,7 @@ public class main {
     public static String OPENMEETINGS_ROOM;
     public static String OPENMEETINGS_DOMAIN;
     public static String OPENMEETINGS_PUBLICSID;
+    public static String OPENMEETINGS_RECORDER;
     
         
     public static void main (String args[]) {          
@@ -43,6 +44,7 @@ public class main {
         OPENMEETINGS_ROOM = args[2];
         OPENMEETINGS_DOMAIN = args[3];
         OPENMEETINGS_PUBLICSID = args[4];
+        OPENMEETINGS_RECORDER = args[5];
 
         CONFIG_FILE = getCurrentDirectory() + "config";
         SERVER_CONFIG_FILE = getCurrentDirectory() + "server.config";

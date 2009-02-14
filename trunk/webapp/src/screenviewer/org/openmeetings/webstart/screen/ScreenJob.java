@@ -18,7 +18,7 @@ public class ScreenJob implements Job {
     		ConnectionBean.isloading = false;
     	} else {
     		StartScreen.instance.showBandwidthWarning("sending");
-    		new CaptureScreen(ConnectionBean.connectionURL,ConnectionBean.SID,ConnectionBean.room,ConnectionBean.domain,ConnectionBean.publicSID);
+    		new CaptureScreen(ConnectionBean.connectionURL,ConnectionBean.SID,ConnectionBean.room,ConnectionBean.domain,ConnectionBean.publicSID,ConnectionBean.record);
     	}
     }
 
