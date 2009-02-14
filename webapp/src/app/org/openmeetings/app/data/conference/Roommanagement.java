@@ -361,7 +361,7 @@ public class Roommanagement {
 	 * @return id of the newly created room or NULL
 	 */
 	public Long addRoom(long user_level,String name, long roomtypes_id, String comment, Long numberOfPartizipants,
-			boolean ispublic, LinkedHashMap organisations,
+			boolean ispublic, List organisations,
 			Integer videoPodWidth, 
 			Integer videoPodHeight,
 			Integer videoPodXPosition,
@@ -769,7 +769,7 @@ public class Roommanagement {
 	 * @return
 	 */
 	public Long updateRoom(long user_level, long rooms_id, long roomtypes_id, String name,
-			boolean ispublic, String comment, Long numberOfPartizipants, LinkedHashMap organisations,
+			boolean ispublic, String comment, Long numberOfPartizipants, List organisations,
 			Integer videoPodWidth, 
 			Integer videoPodHeight,
 			Integer videoPodXPosition,
@@ -842,24 +842,24 @@ public class Roommanagement {
 		return false;
 	}
 	
-	private boolean checkRoomShouldByDeleted(long orgId, LinkedHashMap organisations) throws Exception{
-		for (Iterator it = organisations.keySet().iterator();it.hasNext();){
+	private boolean checkRoomShouldByDeleted(long orgId, List organisations) throws Exception{
+		for (Iterator it = organisations.iterator();it.hasNext();){
 			Integer key = (Integer) it.next();
-			Long storedOrgId = Long.valueOf(organisations.get(key).toString()).longValue();
+			Long storedOrgId = key.longValue();
 			if (storedOrgId.equals(orgId)) return true;
 		}
 		return false;
 	}
 	
-	private Long updateRoomOrganisations(LinkedHashMap organisations, Rooms room) throws Exception{
+	private Long updateRoomOrganisations(List organisations, Rooms room) throws Exception{
 		List roomOrganisations = this.getOrganisationsByRoom(3, room.getRooms_id());
 		
 		List<Long> roomsToAdd = new LinkedList<Long>();
 		List<Long> roomsToDel = new LinkedList<Long>();
 		
-		for (Iterator it = organisations.keySet().iterator();it.hasNext();){
+		for (Iterator it = organisations.iterator();it.hasNext();){
 			Integer key = (Integer) it.next();
-			Long orgIdToAdd = Long.valueOf(organisations.get(key).toString()).longValue();
+			Long orgIdToAdd = key.longValue();
 			if (!this.checkRoomAlreadyInOrg(orgIdToAdd, roomOrganisations)) roomsToAdd.add(orgIdToAdd);
 		}
 		

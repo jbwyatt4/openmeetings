@@ -590,7 +590,6 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 	public HashMap<String,RoomClient> setRoomValues(Long room_id){
 		try {
 
-			HashMap <String,RoomClient> roomClientList = new HashMap<String,RoomClient>();
 			IConnection current = Red5.getConnectionLocal();
 			String streamid = current.getClient().getId();
 			RoomClient currentClient = this.clientListManager.getClientByStreamId(streamid);
@@ -605,23 +604,9 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 
 			//Check for Moderation
 			//LogicalRoom ENTER
-			int roomcount = 0;
-			HashMap<String,RoomClient> clientListRoom = this.clientListManager.getClientListByRoom(room_id);
-			for (Iterator<String> iter=clientListRoom.keySet().iterator();iter.hasNext();) {
-				String key = (String) iter.next();
-				RoomClient rcl = this.clientListManager.getClientByStreamId(key);
-				log.debug("#+#+#+#+##+## logicalRoomEnter ClientList key: "+rcl.getRoom_id()+" "+room_id);
-				//Check if the Client is in the same room and same domain 
-				//and is not the same like we have just declared to be moderating this room
-				//if(!streamid.equals(rcl.getStreamid())){
-					log.debug("set to ++ for client: "+rcl.getStreamid()+" "+roomcount);
-					roomcount++;
-					//Add user to List
-					roomClientList.put(key, rcl);
-				//}				
-			}
+			HashMap<String,RoomClient> clientListRoom = this.getRoomClients(room_id);
 			
-			if (roomcount==1){
+			if (clientListRoom.size()==1){
 				log.debug("Room is empty so set this user to be moderation role");
 				currentClient.setIsMod(true);
 				this.clientListManager.updateClientByStreamId(streamid, currentClient);
@@ -631,12 +616,34 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 				this.clientListManager.updateClientByStreamId(streamid, currentClient);
 			}	
 			
-			return roomClientList;
+			return clientListRoom;
 		} catch (Exception err){
 			log.error("[setRoomValues]",err);
 		}
 		return null;
 	}	
+	
+	public HashMap<String,RoomClient> getRoomClients(Long room_id) {
+		try {
+
+			HashMap <String,RoomClient> roomClientList = new HashMap<String,RoomClient>();
+
+			HashMap<String,RoomClient> clientListRoom = this.clientListManager.getClientListByRoom(room_id);
+			for (Iterator<String> iter=clientListRoom.keySet().iterator();iter.hasNext();) {
+				String key = (String) iter.next();
+				RoomClient rcl = this.clientListManager.getClientByStreamId(key);
+				log.debug("#+#+#+#+##+## logicalRoomEnter ClientList key: "+rcl.getRoom_id()+" "+room_id);
+				log.debug("set to ++ for client: "+rcl.getStreamid());
+				//Add user to List
+				roomClientList.put(key, rcl);
+			}
+			
+			return roomClientList;
+		} catch (Exception err){
+			log.error("[setRoomValues]",err);
+		}
+		return null;
+	}
 	
 
 	/**

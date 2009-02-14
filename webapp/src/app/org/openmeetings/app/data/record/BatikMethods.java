@@ -12,6 +12,7 @@ import java.awt.geom.GeneralPath;
 import java.awt.geom.Line2D;
 import java.awt.geom.QuadCurve2D;
 import java.awt.geom.Rectangle2D;
+import java.util.List;
 import java.util.Map;
 import java.util.Iterator;
 
@@ -53,11 +54,11 @@ public class BatikMethods {
 
 	}
 	
-	public void drawPointsObject(Graphics2D g2d, Map pointsList, Color lineColor, int size, 
+	public void drawPointsObject(Graphics2D g2d, List pointsList, Color lineColor, int size, 
 			double xObj, double yObj, float alpha) throws Exception {
 		
-		for (Iterator iter = pointsList.keySet().iterator();iter.hasNext();) {
-			Map<Integer,Object> point = (Map<Integer,Object>) pointsList.get(iter.next());
+		for (Iterator iter = pointsList.iterator();iter.hasNext();) {
+			List point = (List) iter.next();
 			
 //			log.debug("POINT FROM TO :" +
 //					Double.valueOf(point.get(1).toString()).doubleValue()+","+
