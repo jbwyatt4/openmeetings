@@ -54,7 +54,7 @@
 		]]>
 	</method>  	
 	
-    <method name="checkForApplyScreen">
+    <method name="checkForApplyScreen" args="record">
             <![CDATA[
                 var downloadurl = 'http://'+canvas.rtmphostlocal+':'+canvas.red5httpport
                     +'/'+canvas.webAppRootKey+'/ScreenRequestHandler?'
@@ -63,7 +63,8 @@
                     +'&domain='+hib.conferencedomain
                     +'&sid='+canvas.sessionId
                     +'&red5httpport='+canvas.red5httpport
-                    +'&publicSID='+canvas.publicSID;
+                    +'&publicSID='+canvas.publicSID
+                    +'&record='+record;
 
                 //Debug.write(downloadurl); 
                 lz.Browser.loadURL(downloadurl,'_blank');    
@@ -135,15 +136,23 @@
   	</netRemoteCallHib>  
    
     <simpleLabelButton labelid="239" height="24" name="_doShare" style="itemStyle"
-                       width="200" y="2" enabled="${  canvas.ismoderator }">
+                       width="180" y="2" enabled="${  canvas.ismoderator }">
         <handler name="onclick">
 	        canvas._drawarea.setModus('plain');          
-            this.parent.checkForApplyScreen();
+            this.parent.checkForApplyScreen("no");
         </handler>
         <view y="1" x="2" resource="background_screenview_rsc" />
-        
     </simpleLabelButton>
-    	
+    
+    <simpleLabelButton labelid="415" height="24" name="_doRecord" style="itemStyle"
+                       width="180" y="2" enabled="${  canvas.ismoderator }">
+        <handler name="onclick">
+        	//Start Streen Grabbing Incl.-Recording
+            this.parent.checkForApplyScreen("yes");
+        </handler>
+        <view resource="start_recording_conf" x="3" y="1" />
+    </simpleLabelButton>
+    
 	<labelText name="_inner" fgcolor="0xFF3300" y="4" />
 	
 </class>
