@@ -1,6 +1,7 @@
 package org.openmeetings.servlet.outputhandler;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -87,6 +88,12 @@ public class ScreenServlet extends HttpServlet {
 				}
 				log.debug("domain: " + domain);
 				
+				String record = httpServletRequest.getParameter("record");
+				if (record == null) {
+					record = "no";
+				}
+				log.debug("record: " + record);
+				
 				ServletMultipartRequest upload = new ServletMultipartRequest(httpServletRequest, 104857600); // max 100 mb
 	
 				Long users_id = Sessionmanagement.getInstance().checkSession(sid);
@@ -96,10 +103,10 @@ public class ScreenServlet extends HttpServlet {
 				Configuration c = Configurationmanagement.getInstance().getConfKey(user_level, "screen_viewer");
 				
 				if(c == null || c.getConf_value().equals("0")){
-					doStandardSharing(sid, publicSID, room, domain, upload, httpServletResponse);
+					doStandardSharing(sid, publicSID, room, domain, upload, record, httpServletResponse);
 				}
 				else{
-					doJrDeskTopSharing(sid, publicSID, room, domain, upload, httpServletResponse);
+					doJrDeskTopSharing(sid, publicSID, room, domain, upload, record, httpServletResponse);
 				}
 					
 			}
@@ -107,7 +114,7 @@ public class ScreenServlet extends HttpServlet {
 	}
 	
 	
-	private void doStandardSharing(String sid, String publicSID, String room, String domain, ServletMultipartRequest upload, HttpServletResponse httpServletResponse) throws ServletException,IOException{
+	private void doStandardSharing(String sid, String publicSID, String room, String domain, ServletMultipartRequest upload, String record, HttpServletResponse httpServletResponse) throws ServletException,IOException{
 		
 		try {
 			System.out.println("ScreenServlet Call");
@@ -245,7 +252,7 @@ public class ScreenServlet extends HttpServlet {
 	}
 	
 	
-	private void doJrDeskTopSharing(String sid, String publicSID, String room, String domain, ServletMultipartRequest upload, HttpServletResponse httpServletResponse) throws ServletException,IOException{
+	private void doJrDeskTopSharing(String sid, String publicSID, String room, String domain, ServletMultipartRequest upload, String record, HttpServletResponse httpServletResponse) throws ServletException,IOException{
 		
 		try{
 			
@@ -307,15 +314,20 @@ public class ScreenServlet extends HttpServlet {
 						localFolder.mkdir();
 					}
 
+					if (record.equals("yes")) {
+						working_dir += "record" + File.separatorChar;
+						//Add the Folder for the Room-Recording if it does not exist yet
+						File localFolder2 = new File(working_dir);
+						if (!localFolder2.exists()) {
+							localFolder2.mkdir();
+						}
+					}
+					
 					log.debug("#### UploadHandler working_dir: "+ working_dir);
-				
-				
 
+					//Write Data To File
 					InputStream is = upload.getFileContents("Filedata");
-				
-				
 					ByteArrayOutputStream bos = new ByteArrayOutputStream(); 
-				
 					byte[] buffy = new byte[1024];
 					int leng = 0;
 				
@@ -334,8 +346,6 @@ public class ScreenServlet extends HttpServlet {
 				
 				
 					byte[] temps = (byte[]) al.get(0);
-				
-				
 					BufferedImage bi = ImageUtility.read(temps);
 				
 					//trim whitespace
@@ -357,24 +367,26 @@ public class ScreenServlet extends HttpServlet {
 					String completeName = working_dir + newFileSystemName+"_"+sid;
 
 				
-					File f = new File(completeName + newFileSystemExtName);
-					if (f.exists()) {
-						f.delete();
+					if (record.equals("yes")) {
+						Date d = new Date();
+						completeName += "_"+d.getTime();
+					} else {
+						File f = new File(completeName + newFileSystemExtName);
+						if (f.exists()) {
+							f.delete();
+						}
 					}
 				
 					ImageIO.write(bi,"jpg",new File(completeName + newFileSystemExtName));
 				
-				
-				
-					LinkedHashMap<String,Object> hs = new LinkedHashMap<String,Object>();
-					hs.put("user", UsersDaoImpl.getInstance().getUser(users_id));
-					hs.put("message", "desktop");
-					hs.put("action", "newSlide");
-					hs.put("fileName", newFileSystemName+"_"+sid+newFileSystemExtName);
-				
-				
-					ScopeApplicationAdapter.getInstance().sendMessageByRoomAndDomain(Long.valueOf(room).longValue(),hs);
-				
+					if (!record.equals("yes")) {
+						LinkedHashMap<String,Object> hs = new LinkedHashMap<String,Object>();
+						hs.put("user", UsersDaoImpl.getInstance().getUser(users_id));
+						hs.put("message", "desktop");
+						hs.put("action", "newSlide");
+						hs.put("fileName", newFileSystemName+"_"+sid+newFileSystemExtName);
+						ScopeApplicationAdapter.getInstance().sendMessageByRoomAndDomain(Long.valueOf(room).longValue(),hs);
+					}
 				}
 
 		} else {

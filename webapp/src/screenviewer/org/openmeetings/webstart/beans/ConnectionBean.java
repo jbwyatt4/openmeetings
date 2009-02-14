@@ -14,6 +14,8 @@ public class ConnectionBean {
 	
 	public static String publicSID = "";
 	
+	public static String record = "";
+	
 	/**Intervall Settings**/
 	
 	public static int intervallSeconds = 1;

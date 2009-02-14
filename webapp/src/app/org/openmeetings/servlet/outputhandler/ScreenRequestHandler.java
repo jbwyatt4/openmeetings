@@ -144,6 +144,12 @@ public class ScreenRequestHandler extends VelocityViewServlet {
 					return null;
 				}
 				
+				String record = httpServletRequest.getParameter("record");
+				if (record == null) {
+					log.error("recorder is empty: ");
+					record = "no";
+				}
+				
 				//make a complete name out of domain(organisation) + roomname
 				String roomName = domain+"_"+room;
 				//trim whitespaces cause it is a directory name
@@ -161,6 +167,7 @@ public class ScreenRequestHandler extends VelocityViewServlet {
 		        ctx.put("ROOM", room);
 		        ctx.put("DOMAIN", domain);
 		        ctx.put("PUBLIC_SID", publicSID);
+		        ctx.put("RECORDER", record);
 		        
 		        String requestedFile = roomName+".jnlp";
 				httpServletResponse.setContentType("application/x-java-jnlp-file");

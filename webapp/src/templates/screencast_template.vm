@@ -30,5 +30,6 @@
     	<argument>$ROOM</argument> 
     	<argument>$DOMAIN</argument> 
     	<argument>$PUBLIC_SID</argument> 
+    	<argument>$RECORDER</argument> 
     </application-desc> 
 </jnlp> 

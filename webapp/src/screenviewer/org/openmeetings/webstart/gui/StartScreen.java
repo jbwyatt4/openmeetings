@@ -212,7 +212,7 @@ public class StartScreen {
 		}
 	}
 	
-	public StartScreen(String url, String SID, String room, String domain, String publicSID){
+	public StartScreen(String url, String SID, String room, String domain, String publicSID, String record){
 		System.out.println("captureScreenStop Exception: ");
 		System.err.println("captureScreenStop Exception: ");
 		
@@ -223,6 +223,7 @@ public class StartScreen {
 		ConnectionBean.room = room;
 		ConnectionBean.domain = domain;	
 		ConnectionBean.publicSID = publicSID;
+		ConnectionBean.record = record;
 		instance=this;
 		//instance.showBandwidthWarning("StartScreen: "+SID+" "+room+" "+domain+" "+url);
 		this.initMainFrame();
@@ -234,7 +235,8 @@ public class StartScreen {
 		String room = args[2];
 		String domain = args[3];
 		String publicSID = args[4];
-		new StartScreen(url,SID,room,domain,publicSID);
+		String record = args[5];
+		new StartScreen(url,SID,room,domain,publicSID,record);
 	}
 
 }
