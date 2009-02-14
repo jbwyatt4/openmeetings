@@ -19,30 +19,35 @@
     
     <labelText x="4" y="72" labelid="561" width="200" fgcolor="0x0000FF">
         <handler name="onclick">
+        	this.parent.close();
             this.parent.refObj.confirmSaveAsImageTypeExport(this.parent._savefileName1.getText(),"png");
         </handler>
     </labelText>
     
     <labelText x="4" y="92" labelid="562" width="200" fgcolor="0x0000FF">
         <handler name="onclick">
+        	this.parent.close();
             this.parent.refObj.confirmSaveAsImageTypeExport(this.parent._savefileName1.getText(),"jpg");
         </handler>
     </labelText>
     
     <labelText x="4" y="112" labelid="563" width="200" fgcolor="0x0000FF">
         <handler name="onclick">
+        	this.parent.close();
             this.parent.refObj.confirmSaveAsImageTypeExport(this.parent._savefileName1.getText(),"pdf");
         </handler>
     </labelText>
     
     <labelText x="4" y="132" labelid="560" width="200" fgcolor="0x0000FF">
         <handler name="onclick">
+        	this.parent.close();
             this.parent.refObj.confirmSaveAsImageExport(this.parent._savefileName1.getText());
         </handler>
     </labelText>
     
     <labelText x="4" y="152" labelid="564" width="200" fgcolor="0x0000FF">
         <handler name="onclick">
+        	this.parent.close();
             this.parent.refObj.confirmSaveAsImageTypeExport(this.parent._savefileName1.getText(),"tif");
         </handler>
     </labelText>
