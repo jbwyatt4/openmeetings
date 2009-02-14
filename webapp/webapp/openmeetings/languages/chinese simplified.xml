@@ -1863,4 +1863,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   <string id="617" name="organization choose info">
     <value>你的帐号已与多个组织关联. 请为当前会话选择一个组织.</value>
   </string>  
+  <string id="618" name="error message room full">
+    <value>This room is full at the moment. Please try again later.</value>
+  </string>  
 </language>
