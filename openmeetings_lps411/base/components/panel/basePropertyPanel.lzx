@@ -47,8 +47,8 @@
             resource="presenter_thumb_rsc" >
             <handler name="oninit">
             	<![CDATA[
-            		//this.setTintRGB(canvas.basebgcolorizer,90);
-            		this.setColor(canvas.basebgcolorizer);
+            		this.setTintRGB(canvas.basebgcolorizer,90);
+            		//this.setColor(canvas.basebgcolorizer);
             	]]>
             </handler>
 			<method name="setTintRGB" args="color, brightness">
