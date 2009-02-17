@@ -40,7 +40,8 @@
 				</handler> 
 				<handler name="oninit">
 					this.addItem(canvas.getLabelName(568),"0");
-					this.selectItem("0");				
+					this.selectItem("0");
+					this.getAppointmentCategoryList();				
 				</handler>
 		 	</resetCombobox> 
 		 		
@@ -413,11 +414,50 @@
 						]]>
 				</method> 
 				
+				
+				
+				<netRemoteCallHib name="getAppointmentCategoryList" funcname="appointmentcategoryservice.getAppointmentCategoryList" 
+							  remotecontext="$once{ canvas.thishib }" >
+		    	    
+				<netparam><method name="getValue">return canvas.sessionId;</method></netparam>
+				<handler name="ondata" args="valueList">
+		    		<![CDATA[
+		    		if ($debug) Debug.write("valueList: ", valueList);
+		    		if ($debug) Debug.write("userId: ", canvas.thishib.UserID);
+		    		
+		    		if (valueList.length == 0){
+		    			//if ($debug) Debug.write("if valueList: ", valueList);
+		    		//	new lz.userNotFound(parent,{
+			     		//	x:parent.width/2-this.width/2,
+			     			//y:parent.height-this.height-100});
+			     		
+			     		//new lz.alert(parent);	
+		    		
+		    		}
+		    		else{
+		    			//new combobox(parent.parent{name:_kategory,x:20})
+					    for (var i=0;i<valueList.length;i++) {
+							//if ($debug) Debug.write("UserList",valueList[i]);
+							var id = valueList[i].categoryId;
+							var titel = valueList[i].name;				
+							//if ($debug) Debug.write("id",id);
+							//if ($debug) Debug.write("Vorname: ",titel);					
+							new lz.textlistitem(parent._termindetails._kategoryedit, {
+					    					value : id,			    							    						    			
+					    					text:titel
+								
+				    				});		
+				    	    parent._termindetails._kategoryedit.selectItemAt(0);
+					}}
+		    		]]>
+		    	</handler>
+		    </netRemoteCallHib>	
+				
+				
 				<netRemoteCallHib name="saveAppointment" funcname="calendarservice.saveAppointment" 
 							  remotecontext="$once{ canvas.thishib }" >     
 				<netparam><method name="getValue">return canvas.sessionId; </method></netparam>
 				<netparam><method name="getValue">return parent.parent._titeledit['text'];</method></netparam>	
-				<netparam><method name="getValue">return canvas.thishib.UserID;</method></netparam>
 				<netparam><method name="getValue">return parent.parent._locationedit['text'];</method></netparam>
 				<netparam><method name="getValue">return parent.parent._komentar['text'];</method></netparam>
 				<netparam><method name="getValue">return parseStringToDateTime(parent.parent._date._bdatum.getText() + parent.parent._date._bzeit.getText());</method></netparam>

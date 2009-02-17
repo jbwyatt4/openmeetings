@@ -1,3 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!DOCTYPE canvas PUBLIC "LZX" "http://www.laszlosystems.com/lps-3.3/tools/lzx.dtd">
+
 <library>
 	<include href="../conference/polls/resultPollWin.lzx" />
 	
@@ -519,8 +522,7 @@
 							  remotecontext="$once{ canvas.thishib }" >
 		    	    
 				<netparam><method name="getValue">return canvas.sessionId;</method></netparam>
-				<netparam><method name="getValue">return canvas.thishib.UserID;</method></netparam>
-		    	<handler name="ondata" args="valueList">
+				<handler name="ondata" args="valueList">
 		    		<![CDATA[
 		    		if ($debug) Debug.write("valueList: ", valueList);
 		    		if ($debug) Debug.write("userId: ", canvas.thishib.UserID);
@@ -553,11 +555,11 @@
 		    	</handler>
 		    </netRemoteCallHib>	
 		    
-		    <netRemoteCallHib name="getAppointmentReminderTypList" funcname="calendarservice.getAppointmentReminderTypList" 
+		    <netRemoteCallHib name="getAppointmentReminderTypList" funcname="appointmentreminderservice.getAppointmentReminderTypList" 
 							  remotecontext="$once{ canvas.thishib }" >
 		    	    
 				<netparam><method name="getValue">return canvas.sessionId;</method></netparam>
-				<netparam><method name="getValue">return canvas.thishib.UserID;</method></netparam>
+				
 		    	<handler name="ondata" args="valueList">
 		    		<![CDATA[
 		    		if ($debug) Debug.write("getAppointmentReminderTypList-valueList: ", valueList);
@@ -591,7 +593,7 @@
 		    	</handler>
 		    </netRemoteCallHib>
 		    
-		 <!--  saveAppointment(String SID, String appointmentName,Long userId, String appointmentLocation,String appointmentDescription, 
+		 <!--  saveAppointment(String SID, String appointmentName, String appointmentLocation,String appointmentDescription, 
 			Date appointmentstart, Date appointmentend, 
 			Boolean isDaily, Boolean isWeekly, Boolean isMonthly, Boolean isYearly, Long categoryId, Long remind) -->
 		  <!-- 
@@ -599,7 +601,6 @@
 							  remotecontext="$once{ canvas.thishib }" >     
 				<netparam><method name="getValue">return canvas.sessionId; </method></netparam>
 				<netparam><method name="getValue">return parent.parent._termindetails._titeledit['text'];</method></netparam>	
-				<netparam><method name="getValue">return canvas.thishib.UserID;</method></netparam>
 				<netparam><method name="getValue">return parent.parent._termindetails._locationedit['text'];</method></netparam>
 				<netparam><method name="getValue">return parent.parent._termindetails._komentar['text'];</method></netparam>
 				<netparam><method name="getValue">return parseStringToDateTime(parent.parent._termindetails._date._bdatum.getText() + parent.parent._termindetails._date._bzeit.getText());</method></netparam>
