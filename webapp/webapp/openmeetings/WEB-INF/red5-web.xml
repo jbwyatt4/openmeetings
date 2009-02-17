@@ -47,6 +47,7 @@
       -->
   
     <import resource="red5-services/appointmentcategoryservice.service.xml"/> 
+    <import resource="red5-services/appointmentreminderservice.service.xml"/>
     <import resource="red5-services/calendarservice.service.xml"/> 
     <import resource="red5-services/meetingmemberservice.service.xml"/>  
     <import resource="red5-services/fileservice.service.xml"/>  

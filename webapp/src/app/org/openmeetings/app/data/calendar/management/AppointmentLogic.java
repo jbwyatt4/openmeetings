@@ -64,9 +64,10 @@ public class AppointmentLogic {
 	public Long saveAppointment(String appointmentName, Long userId, String appointmentLocation,String appointmentDescription, 
 			Date appointmentstart, Date appointmentend, 
 			Boolean isDaily, Boolean isWeekly, Boolean isMonthly, Boolean isYearly, Long categoryId, Long remind){
+		log.debug("Appointmentlogic.saveAppointment");
 		
 		try{
-		return AppointmentDaoImpl.getInstance().addAppointment(appointmentName, userId, appointmentLocation, appointmentDescription,
+			return AppointmentDaoImpl.getInstance().addAppointment(appointmentName, userId, appointmentLocation, appointmentDescription,
 				appointmentstart, appointmentend, isDaily, isWeekly, isMonthly, isYearly, categoryId, remind);
 		}catch(Exception err){
 			log.error("[saveAppointment]",err);

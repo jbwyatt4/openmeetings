@@ -22,6 +22,7 @@ public class AppointmentCategoryLogic {
 	}
 	
 	public List<AppointmentCategory> getAppointmentCategoryList(Long userId ){
+		log.debug("AppointmentCategoryLogic.getAppointmentCategoryList");
 		try {	
 			return AppointmentCategoryDaoImpl.getInstance().getAppointmentCategoryList(userId);
 		}catch(Exception err){

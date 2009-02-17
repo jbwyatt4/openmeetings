@@ -24,15 +24,33 @@ public class AppointmentCategoryService {
 		return instance;
 	}
 
-public List<AppointmentCategory> getAppointmentCategoryList(String SID, Long userId){
+	public List<AppointmentCategory> getAppointmentCategoryList(String SID){
+		log.debug("AppointmenetCategoryService.getAppointmentCategoryList SID : " + SID);
 		
 		try{
 			
 			Long users_id = Sessionmanagement.getInstance().checkSession(SID);
 	        Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
+	        
 	        if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
-					        	
-	        	return AppointmentCategoryLogic.getInstance().getAppointmentCategoryList(userId);
+					
+	        	
+	        	List<AppointmentCategory> res =  AppointmentCategoryLogic.getInstance().getAppointmentCategoryList(users_id);
+	        	
+	        	if(res == null || res.size() < 1)
+	        		log.debug("no AppointmentCategories found");
+	        	else{
+	        		for(int i = 0; i < res.size(); i++){
+	        			AppointmentCategory ac = res.get(i);
+	        			log.debug("found appCategory : " + ac.getName());
+	        		}
+	        	}
+	        		
+	        	
+	        	return res;
+	        }
+	        else{
+	        	log.error("AppointmenetCategoryService.getAppointmentCategoryList : UserLevel Error");
 	        }
 		} catch (Exception err) {
 			log.error("[getAppointmentCategory]",err);

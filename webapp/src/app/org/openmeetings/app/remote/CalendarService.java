@@ -41,19 +41,7 @@ public class CalendarService {
 		return null;
 	}
 	
-	public List<AppointmentReminderTyps> getAppointmentReminderTypList(String SID, Long userId) {
-		try {
-			Long users_id = Sessionmanagement.getInstance().checkSession(SID);
-	        Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
-	        if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
-					        	
-	        	return AppointmentLogic.getInstance().getAppointmentReminderTypList(userId);
-	        }
-		} catch (Exception err) {
-			log.error("[getAppointmentReminderTypList]",err);
-		}
-		return null;
-	}
+	
 	
 	public Appointment getNextAppointment(String SID){
 		
@@ -89,19 +77,22 @@ public class CalendarService {
 				
 			}
 	
-	public Long saveAppointment(String SID, String appointmentName,Long userId, String appointmentLocation,String appointmentDescription, 
+	public Long saveAppointment(String SID, String appointmentName, String appointmentLocation,String appointmentDescription, 
 			Date appointmentstart, Date appointmentend, 
 			Boolean isDaily, Boolean isWeekly, Boolean isMonthly, Boolean isYearly, Long categoryId, Long remind){
 		
 		try{
-			
 			Long users_id = Sessionmanagement.getInstance().checkSession(SID);
 	        Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
+	        
 	        if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
 					        	
-	        return	 AppointmentLogic.getInstance().saveAppointment(appointmentName, userId, appointmentLocation, 
+	        	return	 AppointmentLogic.getInstance().saveAppointment(appointmentName, users_id, appointmentLocation, 
 	        			appointmentDescription, appointmentstart, appointmentend, isDaily, isWeekly, isMonthly, 
 	        			isYearly, categoryId, remind);
+	        }
+	        else{
+	        	log.error("saveAppointment : wrong user level");
 	        }
 		} catch (Exception err) {
 			log.error("[saveAppointment]",err);
