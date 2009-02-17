@@ -7088,7 +7088,7 @@ class nusoap_parser extends nusoap_base_om {
 /**
  * Backward compatibility
  */
-class soap_parser extends nusoap_parser {
+class soap_parser_om extends nusoap_parser {
 }
 
 ?><?php
