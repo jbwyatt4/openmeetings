@@ -47,6 +47,13 @@ private static final Logger log = Red5LoggerFactory.getLogger(Appointmentreminde
 	        	if(res == null || res.size() < 1){
 	        		log.debug("no remindertyps found!");
 	        	}
+	        	else{
+	        		for(int i = 0; i < res.size(); i++){
+	        			log.debug("found reminder " + res.get(i).getName());
+	        		}
+	        	}
+	        	
+	        	return res;
 	        }
 	        else
 	        	log.debug("getAppointmentReminderTypList  :error - wrong authlevel!");
