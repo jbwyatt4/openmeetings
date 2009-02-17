@@ -139,7 +139,7 @@ public class AppointmentDaoImpl {
 		return null;
 	}
 	
-	public Long updateAppointment(Long appointmentId, String appointmentName, Long userId, String appointmentDescription, 
+	public Long updateAppointment(Long appointmentId, String appointmentName, String appointmentDescription, 
 			Date appointmentstart, Date appointmentend,
 			Boolean isDaily, Boolean isWeekly, Boolean isMonthly, Boolean isYearly, Long categoryId, Long remind, Map mmClient) {
 		try {
@@ -157,7 +157,7 @@ public class AppointmentDaoImpl {
 			ap.setIsWeekly(isWeekly);
 			ap.setIsMonthly(isMonthly);
 			ap.setIsYearly(isYearly);
-			ap.setUserId(UsersDaoImpl.getInstance().getUser(userId));
+			//ap.setUserId(UsersDaoImpl.getInstance().getUser(userId));
 			ap.setAppointmentCategory(AppointmentCategoryDaoImpl.getInstance().getAppointmentCategoryById(categoryId));
 						
 			Object idf = HibernateUtil.createSession();
@@ -178,16 +178,19 @@ public class AppointmentDaoImpl {
 		    	
 	    		boolean found = false;
 		    	
-		    	for (Iterator iter = mmClient.keySet().iterator();iter.hasNext();) {
-		    		Map clientMemeber = (Map) mmClient.get(iter.next());
-		    		Long meetingMemberId = Long.valueOf(clientMemeber.get("meetingMemberId").toString()).longValue();
+	    		
+	    		if(mmClient != null){
+	    			for (Iterator iter = mmClient.keySet().iterator();iter.hasNext();) {
+	    				Map clientMemeber = (Map) mmClient.get(iter.next());
+	    				Long meetingMemberId = Long.valueOf(clientMemeber.get("meetingMemberId").toString()).longValue();
 		    	
-		    		if (memberRemote.getMeetingMemberId().equals(meetingMemberId)) {
-		    			found = true;
-		    		}
+	    				if (memberRemote.getMeetingMemberId().equals(meetingMemberId)) {
+	    					found = true;
+	    				}
 		    		
-		    	}
-		    	
+	    			}
+	    		}
+	    		
 		    	if (!found) {
 		    		
 					//Not in List in client delete it
@@ -196,39 +199,40 @@ public class AppointmentDaoImpl {
 		    }
 		    
 		    //Items ermitteln die hinzugefügt werden
-		    for (Iterator iter = mmClient.keySet().iterator();iter.hasNext();) {
-	    		Map clientMember = (Map) mmClient.get(iter.next());
-	    		
-	    		Long meetingMemberId = Long.valueOf(clientMember.get("meetingMemberId").toString()).longValue();
-	    	
-	    		boolean found = false;
-	    		
-	    		for (MeetingMember memberRemote : meetingsRemoteMembers) {
-	    			if (memberRemote.getMeetingMemberId().equals(meetingMemberId)) {
-		    			found = true;
+		    if(mmClient !=null){
+			    for (Iterator iter = mmClient.keySet().iterator();iter.hasNext();) {
+		    		Map clientMember = (Map) mmClient.get(iter.next());
+		    		
+		    		Long meetingMemberId = Long.valueOf(clientMember.get("meetingMemberId").toString()).longValue();
+		    	
+		    		boolean found = false;
+		    		
+		    		for (MeetingMember memberRemote : meetingsRemoteMembers) {
+		    			if (memberRemote.getMeetingMemberId().equals(meetingMemberId)) {
+			    			found = true;
+			    		}
 		    		}
-	    		}
-	    		
-	    		if (found == false && Long.valueOf(clientMember.get("userId").toString()).longValue()!=0) {
+		    		
+		    		if (found == false && Long.valueOf(clientMember.get("userId").toString()).longValue()!=0) {
+		    			
+		    			//Not In Remote List available
+		    			MeetingMemberDaoImpl.getInstance().addMeetingMember(clientMember.get("firstname").toString(), 
+		    					clientMember.get("lastname").toString(), "0", "0", 
+								appointmentId,Long.valueOf(clientMember.get("userId").toString()).longValue(), clientMember.get("email").toString());
+		    			
+		    		}
+		    		else if (!found) {
+		    			
+		    			//Not In Remote List available extern members
+		    			MeetingMemberDaoImpl.getInstance().addMeetingMember(clientMember.get("firstname").toString(), 
+		    					clientMember.get("lastname").toString(), "0", "0", 
+								appointmentId, null, clientMember.get("email").toString());
+		    			
+		    		}
+		    	
 	    			
-	    			//Not In Remote List available
-	    			MeetingMemberDaoImpl.getInstance().addMeetingMember(clientMember.get("firstname").toString(), 
-	    					clientMember.get("lastname").toString(), "0", "0", 
-							appointmentId,Long.valueOf(clientMember.get("userId").toString()).longValue(), clientMember.get("email").toString());
-	    			
-	    		}
-	    		else if (!found) {
-	    			
-	    			//Not In Remote List available extern members
-	    			MeetingMemberDaoImpl.getInstance().addMeetingMember(clientMember.get("firstname").toString(), 
-	    					clientMember.get("lastname").toString(), "0", "0", 
-							appointmentId, null, clientMember.get("email").toString());
-	    			
-	    		}
-	    	
-    			
-	    	}
-		    
+		    	}
+		    }
 		    
 		    return appointmentId;
 		} catch (HibernateException ex) {

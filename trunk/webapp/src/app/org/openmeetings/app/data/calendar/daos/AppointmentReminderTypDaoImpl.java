@@ -149,6 +149,7 @@ public class AppointmentReminderTypDaoImpl {
 	}
 
 	public List<AppointmentReminderTyps> getAppointmentReminderTypList(Long userId) {
+		log.debug("getAppointmenetReminderTypList : userid : " + userId);
 		try {
 			
 			String hql = "select a from AppointmentReminderTyps a " +
