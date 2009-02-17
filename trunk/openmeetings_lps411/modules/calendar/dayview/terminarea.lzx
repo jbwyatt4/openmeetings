@@ -78,7 +78,7 @@
 		this.setAttribute('height',  this.terminObj.appointmentEndtime.getHours()*22 + 1/3 * this.terminObj.appointmentEndtime.getMinutes() - 
 			    (this.terminObj.appointmentStarttime.getHours()*22 + 1/3 * this.terminObj.appointmentStarttime.getMinutes()));	  
 		this.setAttribute("width", 100); 
-		this.setAttribute("bgcolor", red); 
+		this.setAttribute("bgcolor", "white"); 
 		this.setAttribute("y",this.terminObj.appointmentStarttime.getHours()*22 + 1/3 * this.terminObj.appointmentStarttime.getMinutes());
 		
 		if ($debug) Debug.write("_startDate++++++", this);
