@@ -28,6 +28,7 @@ public class CalendarService {
 	}
 
 	public List<Appointment> getAppointmentByRange(String SID, Date starttime, Date endtime) {
+		log.debug("getAppointmentByRange : startdate - " + starttime + ", enddate - " + endtime);
 		try {
 			Long users_id = Sessionmanagement.getInstance().checkSession(SID);
 	        Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
@@ -81,8 +82,11 @@ public class CalendarService {
 			Date appointmentstart, Date appointmentend, 
 			Boolean isDaily, Boolean isWeekly, Boolean isMonthly, Boolean isYearly, Long categoryId, Long remind){
 		
+		log.debug("saveAppointMent SID:" + SID);
+		
 		try{
 			Long users_id = Sessionmanagement.getInstance().checkSession(SID);
+			log.debug("saveAppointMent users_id:" + users_id);
 	        Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
 	        
 	        if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
@@ -102,17 +106,28 @@ public class CalendarService {
 			
 		}
 	
-	public Long updateAppointment(String SID,Long appointmentId ,String appointmentName, Long userId, String appointmentLocation,String appointmentDescription, 
-			Date appointmentstart, Date appointmentend, 
-			Boolean isDaily, Boolean isWeekly, Boolean isMonthly, Boolean isYearly, Long categoryId, Long remind, Map mmClient){
-		
+	public Long updateAppointment(String SID,
+			Long appointmentId ,
+			String appointmentName,
+			String appointmentLocation,
+			String appointmentDescription, 
+			Date appointmentstart,
+			Date appointmentend, 
+			Boolean isDaily,
+			Boolean isWeekly,
+			Boolean isMonthly,
+			Boolean isYearly,
+			Long categoryId,
+			Long remind,
+			Map mmClient){
+		log.debug("updateAppointment");
 		try{
 			
 			Long users_id = Sessionmanagement.getInstance().checkSession(SID);
 	        Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
 	        if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
 					        	
-	        	return AppointmentLogic.getInstance().updateAppointment(appointmentId, appointmentName, userId, 
+	        	return AppointmentLogic.getInstance().updateAppointment(appointmentId, appointmentName, 
 	        			appointmentDescription, appointmentstart, appointmentend, isDaily, isWeekly, isMonthly, 
 	        			isYearly, categoryId, remind, mmClient);
 	        }
@@ -125,7 +140,7 @@ public class CalendarService {
 		}
 	
 	public Long deleteAppointment(String SID,Long appointmentId){
-		
+		log.debug("deleteAppointment");
 		try{
 			
 			Long users_id = Sessionmanagement.getInstance().checkSession(SID);
