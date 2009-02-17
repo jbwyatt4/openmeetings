@@ -314,6 +314,7 @@
 		<jar destfile="${dist.dir}/${project.distname}/screen/viewer.jar">
 			<fileset dir="${classes.dir}">
 				<include name="**/jrdesktop/**"/>
+				<include name="**/*png"/>
 			</fileset>
 			<manifest>
 				<attribute name="Built-By" value="OpenMeetings - http://openmeetings.googlecode.com"/>
