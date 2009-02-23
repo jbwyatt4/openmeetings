@@ -119,7 +119,7 @@ public class CalendarService {
 			Boolean isYearly,
 			Long categoryId,
 			Long remind,
-			Map mmClient){
+			List mmClient){
 		log.debug("updateAppointment");
 		try{
 			

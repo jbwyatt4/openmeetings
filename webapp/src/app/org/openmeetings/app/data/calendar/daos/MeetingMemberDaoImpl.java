@@ -42,7 +42,7 @@ public class MeetingMemberDaoImpl {
 			Session session = HibernateUtil.getSession();
 			Transaction tx = session.beginTransaction();
 			Query query = session.createQuery(hql);
-			query.setString("deleted", "true");
+			query.setBoolean("deleted", true);
 			query.setLong("meetingMemberId",meetingMemberId);
 			
 			MeetingMember meetingMember = (MeetingMember) query.uniqueResult();
@@ -232,6 +232,8 @@ public class MeetingMemberDaoImpl {
 	}
 	
 	public Long deleteMeetingMember(Long meetingMemberId) {
+		log.debug("MeetingMemnerDAoImpl.deleteMeetingMember : " + meetingMemberId);
+		
 		try {
 			
 			MeetingMember gm = this.getMeetingMemberById(meetingMemberId);
