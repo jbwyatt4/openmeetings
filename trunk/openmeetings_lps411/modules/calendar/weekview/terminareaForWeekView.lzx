@@ -80,7 +80,7 @@
 			
 			if ($debug) Debug.write("this.y",this.y); -->
 	
-	<text multiline="true" width="${ parent.width-2 }" x="1" 
+	<text multiline="true" width="${ parent.width-2 }" x="1" bgcolor="blue" 
 		  height="${ parent.height -2 }" y="1"
 		  text="${ parent.description }" />
 		  
