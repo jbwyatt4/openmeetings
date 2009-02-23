@@ -141,7 +141,9 @@ public class AppointmentDaoImpl {
 	
 	public Long updateAppointment(Long appointmentId, String appointmentName, String appointmentDescription, 
 			Date appointmentstart, Date appointmentend,
-			Boolean isDaily, Boolean isWeekly, Boolean isMonthly, Boolean isYearly, Long categoryId, Long remind, Map mmClient) {
+			Boolean isDaily, Boolean isWeekly, Boolean isMonthly, Boolean isYearly, Long categoryId, Long remind, List mmClient) {
+		
+			log.debug("AppointmentDAOImpl.updateAppointment");
 		try {
 			
 			
@@ -180,11 +182,12 @@ public class AppointmentDaoImpl {
 		    	
 	    		
 	    		if(mmClient != null){
-	    			for (Iterator iter = mmClient.keySet().iterator();iter.hasNext();) {
-	    				Map clientMemeber = (Map) mmClient.get(iter.next());
+	    			for (int i = 0; i < mmClient.size(); i++) {
+	    				Map clientMemeber = (Map) mmClient.get(i);
 	    				Long meetingMemberId = Long.valueOf(clientMemeber.get("meetingMemberId").toString()).longValue();
 		    	
 	    				if (memberRemote.getMeetingMemberId().equals(meetingMemberId)) {
+	    					log.debug("AppointMentDAOImpl.updateAppointment  - member " + meetingMemberId + " is to be removed!");
 	    					found = true;
 	    				}
 		    		
@@ -200,9 +203,11 @@ public class AppointmentDaoImpl {
 		    
 		    //Items ermitteln die hinzugefŸgt werden
 		    if(mmClient !=null){
-			    for (Iterator iter = mmClient.keySet().iterator();iter.hasNext();) {
-		    		Map clientMember = (Map) mmClient.get(iter.next());
+		    	
+			    for (int i = 0; i < mmClient.size(); i++) {
 		    		
+			    	Map clientMember = (Map)mmClient.get(i);
+			    	
 		    		Long meetingMemberId = Long.valueOf(clientMember.get("meetingMemberId").toString()).longValue();
 		    	
 		    		boolean found = false;
@@ -229,8 +234,7 @@ public class AppointmentDaoImpl {
 								appointmentId, null, clientMember.get("email").toString());
 		    			
 		    		}
-		    	
-	    			
+		   		
 		    	}
 		    }
 		    
