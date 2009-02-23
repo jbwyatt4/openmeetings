@@ -1,10 +1,11 @@
 <library>
 	
-<class name="terminareaWeekView" extends="view" width="100">
+<class name="terminareaWeekView" extends="view" width="100" >
 	
 	<attribute name="description" type="string" value="" />
 	<attribute name="terminObj" value="null"/>
 	<attribute name="calenderObjRef" value="null"/>
+	
 	
 	<handler name="onclick">
 		if ($debug) Debug.write("this ",this);
@@ -17,7 +18,7 @@
 		//parent.parent.parent.parent._terminButton.onclick.sendEvent();
 	</handler>
 	
-	<view name="resize" y="${parent.height-this.height}" height="20" width="${parent.width}" bgcolor="blue">
+	<view name="resize" y="${parent.height-this.height}" height="20" width="${parent.width}" bgcolor="blue" >
 		<handler name="onclick">
 			if ($debug) Debug.write("getMouse y: ", parent.getMouse('y'));
 			this.getMouse('y')
@@ -36,7 +37,7 @@
 	</view>
 	
 	
-	<text multiline="true" width="${ parent.width-2 }" x="1" 
+	<text multiline="true" width="${ parent.width-2 }" x="1" bgcolor="white" 
 		  height="${ parent.height -2 }" y="1"
 		  text="${ parent.description }" />
 		  
