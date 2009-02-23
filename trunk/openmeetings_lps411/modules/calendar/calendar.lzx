@@ -682,7 +682,6 @@
 				<netparam><method name="getValue">return canvas.sessionId; </method></netparam>
 				<netparam><method name="getValue">return parent.parent.terminObjRef.appointmentId;</method></netparam>
 				<netparam><method name="getValue">return parent.parent._termindetails._titeledit['text'];</method></netparam>
-				<netparam><method name="getValue">return canvas.thishib.UserID;</method></netparam>
 				<netparam><method name="getValue">return parent.parent._termindetails._locationedit['text'];</method></netparam>
 				<netparam><method name="getValue">return parent.parent._termindetails._komentar['text'];</method></netparam>
 				<netparam><method name="getValue">return parseStringToDateTime(parent.parent._termindetails._date._bdatum.getText() + parent.parent._termindetails._date._bzeit.getText());</method></netparam>

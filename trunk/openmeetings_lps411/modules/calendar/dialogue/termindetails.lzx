@@ -666,8 +666,29 @@
 									 //	}
 								 	
 								//}
-		    		
-			    		if ($debug) Debug.write("updateUserTermin: ",value);
+				    	if ($debug) Debug.write("SessionID: ",canvas.sessionId);
+						
+						if ($debug) Debug.write("AppointMentID: ", parent.terminObjRef.appointmentId);
+						if ($debug) Debug.write("AppointMentName: ",parent._titeledit['text']);
+						if ($debug) Debug.write("Location: ",parent._locationedit['text']);
+						if ($debug) Debug.write("Comment: ",parent._komentar['text']);
+						if ($debug) Debug.write("Start Time: ",parseStringToDateTime(parent._date._bdatum.getText() + parent._date._bzeit.getText()));
+						if ($debug) Debug.write("End Time: ",parseStringToDateTime(parent._date.edatum.getText() + parent._date.ezeit.getText()));
+						if ($debug) Debug.write("isDaily:",parent._isDaily);
+						if ($debug) Debug.write("isMonthly:",parent._isMonthly);
+						if ($debug) Debug.write("isMonthly:",parent._isWeekly);
+						if ($debug) Debug.write("isMonthly:",parent._isYearly);
+						if ($debug) Debug.write("category:",parent._kategoryatr);
+						if ($debug) Debug.write("remind:",parent._erinnerungatr);
+					     
+					    for(var i=0;i<arrayMeetingMember.length;i++){
+		    				var member = arrayMeetingMember[i];
+		    				if ($debug) Debug.write("member:",member);   	
+		    			}
+					    
+					    
+					    if ($debug) Debug.write("updateUserTermin: ",value);
+			    		
 			    		parent.defaulttermindetails();
 		    		 ]]>
 		    	</handler>
