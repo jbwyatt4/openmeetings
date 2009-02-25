@@ -213,7 +213,7 @@ public class MethodGateway  extends HttpServlet {
 									videoPodHeight, videoPodXPosition, videoPodYPosition, moderationPanelXPosition, 
 									showWhiteBoard, whiteBoardPanelXPosition, whiteBoardPanelYPosition, 
 									whiteBoardPanelHeight, whiteBoardPanelWidth, showFilesPanel, 
-									filesPanelXPosition, filesPanelYPosition, filesPanelHeight, filesPanelWidth);
+									filesPanelXPosition, filesPanelYPosition, filesPanelHeight, filesPanelWidth, false);
 					
 					XStream xStream = new XStream(new XppDriver());
 					xStream.setMode(XStream.NO_REFERENCES);

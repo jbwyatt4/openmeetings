@@ -254,30 +254,30 @@ public class ImportInitvalues {
 
 		Roommanagement.getInstance().addRoom(3, "public Conference Room", 1,
 				"", new Long(8), true, null, 270, 280, 2, 2, 400, true, 276, 2,
-				592, 660, true, 2, 284, 310, 270);
+				592, 660, true, 2, 284, 310, 270, false);
 
 		Roommanagement.getInstance().addRoom(3, "public Video Only Room", 1,
 				"", new Long(16), true, null, 270 * 2 + 3, 280 * 2 + 2, 2, 2,
-				400, false, 276, 2, 592, 660, false, 2, 284, 310, 270);
+				400, false, 276, 2, 592, 660, false, 2, 284, 310, 270, false);
 
 		Roommanagement.getInstance().addRoom(3,
 				"public Video And Whiteboard Room", 1, "", new Long(16), true,
 				null, 270, 280 * 2 + 2, 2, 2, 400, true, 276, 2, 280 * 2 + 2,
-				660, false, 2, 284, 310, 270);
+				660, false, 2, 284, 310, 270, false);
 
 		long room2 = Roommanagement.getInstance().addRoom(3,
 				"private Conference Room", 1, "", new Long(16), false, null,
 				270, 280, 2, 2, 400, true, 276, 2, 592, 660, true, 2, 284, 310,
-				270);
+				270, false);
 		Roommanagement.getInstance().addRoomToOrganisation(3, room2, 1);
 
 		Roommanagement.getInstance().addRoom(3, 
 				"public Audience Room", 2, "", new Long(32), true, null, 326, 
-				310, 2, 2, 400, true, 332, 2, 622, 660, true, 2, 314, 310, 270);
+				310, 2, 2, 400, true, 332, 2, 622, 660, true, 2, 314, 310, 270, false);
 
 		long room4 = Roommanagement.getInstance().addRoom(3,
 				"private Audience Room", 2, "", new Long(32), false, null, 326,
-				310, 2, 2, 400, true, 332, 2, 622, 660, true, 2, 314, 310, 270);
+				310, 2, 2, 400, true, 332, 2, 622, 660, true, 2, 314, 310, 270, false);
 		
 		Roommanagement.getInstance().addRoomToOrganisation(3, room4, 1);
 

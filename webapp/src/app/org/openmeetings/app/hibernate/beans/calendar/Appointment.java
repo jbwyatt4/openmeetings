@@ -5,6 +5,7 @@ package org.openmeetings.app.hibernate.beans.calendar;
 import java.util.Date;
 import java.util.List;
 
+import org.openmeetings.app.hibernate.beans.rooms.Rooms;
 import org.openmeetings.app.hibernate.beans.user.Users;
 
 /**
@@ -36,6 +37,8 @@ public class Appointment {
 	private Boolean isWeekly;
 	private Boolean isMonthly;
 	private Boolean isYearly;
+	
+	private Rooms room;
 	
 	private List<MeetingMember> meetingMember;
 
@@ -292,7 +295,12 @@ public class Appointment {
 	public void setMeetingMember(List<MeetingMember> meetingMember) {
 		this.meetingMember = meetingMember;
 	}
-	
+	public Rooms getRoom() {
+		return room;
+	}
+	public void setRoom(Rooms room) {
+		this.room = room;
+	}
 	
 	
 }
