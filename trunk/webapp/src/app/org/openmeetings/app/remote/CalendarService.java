@@ -80,7 +80,7 @@ public class CalendarService {
 	
 	public Long saveAppointment(String SID, String appointmentName, String appointmentLocation,String appointmentDescription, 
 			Date appointmentstart, Date appointmentend, 
-			Boolean isDaily, Boolean isWeekly, Boolean isMonthly, Boolean isYearly, Long categoryId, Long remind){
+			Boolean isDaily, Boolean isWeekly, Boolean isMonthly, Boolean isYearly, Long categoryId, Long remind, Long roomType){
 		
 		log.debug("saveAppointMent SID:" + SID);
 		
@@ -93,7 +93,7 @@ public class CalendarService {
 					        	
 	        	return	 AppointmentLogic.getInstance().saveAppointment(appointmentName, users_id, appointmentLocation, 
 	        			appointmentDescription, appointmentstart, appointmentend, isDaily, isWeekly, isMonthly, 
-	        			isYearly, categoryId, remind);
+	        			isYearly, categoryId, remind, roomType);
 	        }
 	        else{
 	        	log.error("saveAppointment : wrong user level");

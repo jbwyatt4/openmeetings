@@ -1868,5 +1868,8 @@ languagesディレクトリにコピーして、
   </string> 
   <string id="618" name="error message room full">
     <value>This room is full at the moment. Please try again later.</value>
-  </string>    
+  </string>  
+  <string id="619" name="roomtypes">
+    <value>Room Type</value>
+  </string>  
 </language>
