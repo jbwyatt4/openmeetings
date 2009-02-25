@@ -4,6 +4,7 @@
 			<attribute name ="terminObjRef" value="null"/>
 			<attribute name="_kategoryatr" value="0" type="number" />
 			<attribute name="_erinnerungatr" value="null"  />
+			<attribute name="roomtype" value="1" />
 			
 			<attribute name="_isDaily" value="false" type="boolean" />
 			<attribute name="_isWeekly" value="false" type="boolean" />  
@@ -131,8 +132,21 @@
 		    <text name="_titel" y="${parent._date.height + parent._date.y + 30}" x="35">Titel:</text>
 	    	<edittext name="_titeledit" x="${parent._kategory.width + parent._kategory.x + 30}" 
 	    		  y="${parent._titel.y}" width="${parent._date.width}">New title</edittext>
+	    		  
+	    	<labelText name="_roomtype" y="${parent._titeledit.height + parent._titeledit.y +30}" x="35" labelid="619" width="80"/>
+		 	<resetCombobox name="_roomtype_edit" x="${parent._roomtype.width + parent._roomtype.x + 30}" 
+		 			  width="220" editable="false" shownitems="2" y="${parent._roomtype.y}">
+				<handler name="onvalue" args="v">						
+					parent.roomtype = Number(this.getValue());												
+					if ($debug) Debug.write("roomtype: ",parent.roomtype);
+				</handler>	
+				
+		 	<!--textitmes-->
+		 	<textlistitem text="Conference" value="1"/>
+			<textlistitem text="Auditorium" value="2"/>
+		 	</resetCombobox> 
 	    	
-	    	<view y="${parent._titel.height + parent._titel.y + 20}" x="35">	
+	    	<view y="${parent._roomtype_edit.height + parent._roomtype_edit.y + 20}" x="35">	
 	    		<simplelayout axis="x" spacing="2"/>
 	    		
 		    	<view resource="edit_add_remuve_rsc" >
@@ -164,8 +178,8 @@
 	    	</view>	
 	    	
 		 	<!--scrolledittext-->
-		 	<scrolledittext name="_komentar" y="${parent._titel.height + parent._titel.y + 20}" visible="false" multiline="true"
-		    		  x="${parent._kategory.width + parent._kategory.x + 30}"  width="${parent._titeledit.width}" height="0">
+		 	<scrolledittext name="_komentar" y="${parent._roomtype_edit.height + parent._roomtype_edit.y + 20}" visible="false" multiline="true"
+		    		  x="${parent._kategory.width + parent._kategory.x + 30}"  width="${parent._roomtype_edit.width}" height="0">
 				<!--<vscrollbar/>-->
 			</scrolledittext>	
 			
@@ -502,6 +516,7 @@
 				<netparam><method name="getValue">return parent.parent._isYearly;</method></netparam>
 				<netparam><method name="getValue">return parent.parent._kategoryatr;</method></netparam>
 				<netparam><method name="getValue">return parent.parent._erinnerungatr;</method></netparam>
+				<netparam><method name="getValue">return parent.parent.roomtype;</method></netparam>
 				
 		    	<handler name="ondata" args="value">
 		    		<![CDATA[
