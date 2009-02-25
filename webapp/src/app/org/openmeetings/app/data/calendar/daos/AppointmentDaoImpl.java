@@ -21,6 +21,7 @@ import org.openmeetings.app.hibernate.beans.calendar.Appointment;
 import org.openmeetings.app.hibernate.beans.calendar.MeetingMember;
 import org.openmeetings.app.hibernate.beans.lang.FieldLanguage;
 import org.openmeetings.app.hibernate.beans.lang.Fieldlanguagesvalues;
+import org.openmeetings.app.hibernate.beans.rooms.Rooms;
 import org.openmeetings.app.hibernate.beans.user.Users;
 import org.openmeetings.app.hibernate.utils.HibernateUtil;
 
@@ -79,7 +80,7 @@ public class AppointmentDaoImpl {
 	
 	public Long addAppointment(String appointmentName, Long userId, String appointmentLocation,String appointmentDescription, 
 			Date appointmentstart, Date appointmentend, 
-			Boolean isDaily, Boolean isWeekly, Boolean isMonthly, Boolean isYearly, Long categoryId, Long remind) {
+			Boolean isDaily, Boolean isWeekly, Boolean isMonthly, Boolean isYearly, Long categoryId, Long remind, Rooms room) {
 		try {
 			
 			Appointment ap = new Appointment();
@@ -98,7 +99,7 @@ public class AppointmentDaoImpl {
 			ap.setIsYearly(isYearly);
 			ap.setUserId(UsersDaoImpl.getInstance().getUser(userId));
 			ap.setAppointmentCategory(AppointmentCategoryDaoImpl.getInstance().getAppointmentCategoryById(categoryId));
-			
+			ap.setRoom(room);
 			
 			Object idf = HibernateUtil.createSession();
 			Session session = HibernateUtil.getSession();
