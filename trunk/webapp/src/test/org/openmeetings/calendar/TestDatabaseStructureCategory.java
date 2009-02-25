@@ -36,7 +36,7 @@ public class TestDatabaseStructureCategory extends TestCase {
 			//AppointmentCategoryDaoImpl.getInstance().addAppointmentCategory("dritte");
 			//AppointmentCategoryDaoImpl.getInstance().updateAppointmentCategory(2L, "alt");
 			
-		List<AppointmentCategory> appointmentCategory = AppointmentCategoryDaoImpl.getInstance().getAppointmentCategoryList(1L);
+		List<AppointmentCategory> appointmentCategory = AppointmentCategoryDaoImpl.getInstance().getAppointmentCategoryList();
 		log.debug("Anzahl: "+appointmentCategory.size());
 		
 		

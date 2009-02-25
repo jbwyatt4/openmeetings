@@ -34,8 +34,7 @@ public class AppointmentCategoryService {
 	        
 	        if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
 					
-	        	
-	        	List<AppointmentCategory> res =  AppointmentCategoryLogic.getInstance().getAppointmentCategoryList(users_id);
+	        	List<AppointmentCategory> res =  AppointmentCategoryLogic.getInstance().getAppointmentCategoryList();
 	        	
 	        	if(res == null || res.size() < 1)
 	        		log.debug("no AppointmentCategories found");
@@ -45,7 +44,6 @@ public class AppointmentCategoryService {
 	        			log.debug("found appCategory : " + ac.getName());
 	        		}
 	        	}
-	        		
 	        	
 	        	return res;
 	        }

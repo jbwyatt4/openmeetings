@@ -46,7 +46,7 @@ public class ConferenceService {
 		this.clientListManager = clientListManager;
 	}
 
-	/**
+	/**(
 	 * get a List of all availible Rooms of this organisation
 	 * @param SID
 	 * @param organisation_id
