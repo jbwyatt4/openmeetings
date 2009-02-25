@@ -148,6 +148,7 @@ public class Roommanagement {
 	 * @return Rooms-Object or NULL
 	 */
 	public Rooms getRoomById(long rooms_id){
+		log.debug("getRoombyId : " + rooms_id);
 		try {
 			String hql = "select c from Rooms as c where c.rooms_id = :rooms_id AND c.deleted != :deleted";
 			
@@ -162,6 +163,9 @@ public class Roommanagement {
 			HibernateUtil.closeSession(idf);
 			if (ll.size()>0){
 				return (Rooms) ll.get(0);
+			}
+			else{
+				log.error("Could not find room " + rooms_id);
 			}
 		} catch (HibernateException ex) {
 			log.error("[getRoomById] ", ex);
@@ -378,6 +382,9 @@ public class Roommanagement {
 			Integer filesPanelHeight,
 			Integer filesPanelWidth,
 			Boolean appointment){
+		
+		log.debug("addRoom");
+		
 		try {
 			if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)){
 				Rooms r = new Rooms();

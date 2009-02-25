@@ -9,8 +9,11 @@ import org.slf4j.Logger;
 import org.red5.logging.Red5LoggerFactory;
 import org.openmeetings.app.data.calendar.daos.AppointmentDaoImpl;
 import org.openmeetings.app.data.calendar.daos.AppointmentReminderTypDaoImpl;
+import org.openmeetings.app.data.conference.Roommanagement;
 import org.openmeetings.app.hibernate.beans.calendar.Appointment;
 import org.openmeetings.app.hibernate.beans.calendar.AppointmentReminderTyps;
+import org.openmeetings.app.hibernate.beans.rooms.Rooms;
+
 
 public class AppointmentLogic {
 	
@@ -57,11 +60,47 @@ public class AppointmentLogic {
 	public Long saveAppointment(String appointmentName, Long userId, String appointmentLocation,String appointmentDescription, 
 			Date appointmentstart, Date appointmentend, 
 			Boolean isDaily, Boolean isWeekly, Boolean isMonthly, Boolean isYearly, Long categoryId, Long remind){
+		
 		log.debug("Appointmentlogic.saveAppointment");
+		
+		// create a Room
+		Long room_id = Roommanagement.getInstance().addRoom(
+				3,					// Userlevel
+				appointmentName,	// name	
+				1,					// RoomType	
+				"",					// Comment
+				new Long(8),		// Number of participants
+				true,				// public
+				null,				// Organisations
+				270,				// Video Width
+				280,				// Video height
+				2,					// Video X
+				2,					// Video Y
+				400,				// Modeartionpanel X
+				true,				// Whiteboard
+				276,				// Whiteboard x
+				2,					// Whiteboard y
+				592,				// WB height
+				660,				// WB width
+				true,				// Show Files Panel
+				2,					// Files X
+				284,				// Files Y
+				310,				// Files height
+				270,				// Files width
+				true);				// Appointment
+		
+		log.debug("Appointmentlogic.saveAppointment : Room - " + room_id);
+		
+		Rooms room = Roommanagement.getInstance().getRoomById(room_id);
+		
+		if(room == null)
+			log.error("Room " + room_id + " could not be found!");
+		else
+			log.debug("Room " + room_id + " ok!");
 		
 		try{
 			return AppointmentDaoImpl.getInstance().addAppointment(appointmentName, userId, appointmentLocation, appointmentDescription,
-				appointmentstart, appointmentend, isDaily, isWeekly, isMonthly, isYearly, categoryId, remind);
+				appointmentstart, appointmentend, isDaily, isWeekly, isMonthly, isYearly, categoryId, remind, room);
 		}catch(Exception err){
 			log.error("[saveAppointment]",err);
 		}
