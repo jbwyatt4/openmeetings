@@ -59,7 +59,7 @@ public class AppointmentLogic {
 	
 	public Long saveAppointment(String appointmentName, Long userId, String appointmentLocation,String appointmentDescription, 
 			Date appointmentstart, Date appointmentend, 
-			Boolean isDaily, Boolean isWeekly, Boolean isMonthly, Boolean isYearly, Long categoryId, Long remind){
+			Boolean isDaily, Boolean isWeekly, Boolean isMonthly, Boolean isYearly, Long categoryId, Long remind, Long roomType){
 		
 		log.debug("Appointmentlogic.saveAppointment");
 		
@@ -67,7 +67,7 @@ public class AppointmentLogic {
 		Long room_id = Roommanagement.getInstance().addRoom(
 				3,					// Userlevel
 				appointmentName,	// name	
-				1,					// RoomType	
+				roomType,					// RoomType	
 				"",					// Comment
 				new Long(8),		// Number of participants
 				true,				// public
