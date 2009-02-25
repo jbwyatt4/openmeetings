@@ -34,14 +34,7 @@ public class AppointmentLogic {
 		return null;
 	}
 	
-	public List<AppointmentReminderTyps> getAppointmentReminderTypList(Long userId){
-		try {	
-			return AppointmentReminderTypDaoImpl.getInstance().getAppointmentReminderTypList(userId);
-		}catch(Exception err){
-			log.error("[getAppointmentReminderTypList]",err);
-		}
-		return null;
-	}
+	
 	//next appointment to current date
 	public Appointment getNextAppointment(){
 		try{

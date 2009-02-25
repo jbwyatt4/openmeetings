@@ -147,19 +147,17 @@ public class AppointmentCategoryDaoImpl {
 		return null;
 	}
 
-	public List<AppointmentCategory> getAppointmentCategoryList(Long userId) {
+	public List<AppointmentCategory> getAppointmentCategoryList() {
 		try {
 			
 			String hql = "select a from AppointmentCategory a " +
-					"WHERE a.deleted != :deleted "+
-					"AND a.user = :userId";
+					"WHERE a.deleted != :deleted ";
 			
 			Object idf = HibernateUtil.createSession();
 			Session session = HibernateUtil.getSession();
 			Transaction tx = session.beginTransaction();
 			Query query = session.createQuery(hql);
 			query.setString("deleted", "true");
-			query.setLong("userId", userId);
 				
 			List<AppointmentCategory> listAppointmentCategory = query.list();
 			tx.commit();

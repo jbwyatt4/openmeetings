@@ -15,6 +15,9 @@ import org.openmeetings.app.data.basic.ErrorManagement;
 import org.openmeetings.app.data.basic.Fieldmanagment;
 import org.openmeetings.app.data.basic.FieldLanguageDaoImpl;
 import org.openmeetings.app.data.basic.Navimanagement;
+import org.openmeetings.app.data.calendar.management.AppointmentCategoryLogic;
+import org.openmeetings.app.data.calendar.management.AppointmentLogic;
+import org.openmeetings.app.data.calendar.management.AppointmentRemindertypeLogic;
 import org.openmeetings.app.data.conference.Roommanagement;
 import org.openmeetings.app.data.user.Organisationmanagement;
 import org.openmeetings.app.data.user.Salutationmanagement;
@@ -359,7 +362,46 @@ public class ImportInitvalues {
 		return languages;
 
 	}
-
+	
+	
+	/**
+	 * @author o.becherer
+	 * initial fillment of Appointmentcategories
+	 */
+	//------------------------------------------------------------------------------
+	public void loadInitAppointmentCategories(){
+		log.debug("ImportInitValues.loadInitAppointmentCategories");
+		
+		try{
+			AppointmentCategoryLogic.getInstance().createAppointmentCategory("default", "default", new Long(-1));
+		}catch(Exception e){
+			log.error("Could not create AppointMentcategories");
+			return;
+		}
+		
+		
+	}
+	//------------------------------------------------------------------------------
+	
+	
+	/**
+	 * @author o.becherer
+	 * initial fillment of AppointMentReminderTypes
+	 */
+	//------------------------------------------------------------------------------
+	public void loadInitAppointmentReminderTypes(){
+		
+		log.debug("ImportInitValues.loadInitAppointmentReminderTypes");
+		
+		try{
+			AppointmentRemindertypeLogic.getInstance().createAppointMentReminderType(-1L, "none", "no reminder");
+		}catch(Exception e){
+			log.error("Could not create ReminderType");
+			return;
+		}
+	}
+	//------------------------------------------------------------------------------
+	
 	public void loadInitLanguages(String filePath) throws Exception {
 
 		this.loadCountriesFiles(filePath);

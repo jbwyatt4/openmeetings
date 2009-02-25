@@ -1,12 +1,17 @@
 
 package org.openmeetings.app.data.calendar.management;
 
+import java.util.Date;
 import java.util.List;
 
 import org.slf4j.Logger;
 import org.red5.logging.Red5LoggerFactory;
 import org.openmeetings.app.data.calendar.daos.AppointmentCategoryDaoImpl;
+import org.openmeetings.app.data.user.Usermanagement;
 import org.openmeetings.app.hibernate.beans.calendar.AppointmentCategory;
+import org.openmeetings.app.hibernate.beans.user.Users;
+
+import com.sun.tools.xjc.reader.xmlschema.bindinfo.BIConversion.User;
 
 public class AppointmentCategoryLogic {
 	
@@ -21,15 +26,29 @@ public class AppointmentCategoryLogic {
 		return instance;
 	}
 	
-	public List<AppointmentCategory> getAppointmentCategoryList(Long userId ){
+	public List<AppointmentCategory> getAppointmentCategoryList( ){
 		log.debug("AppointmentCategoryLogic.getAppointmentCategoryList");
 		try {	
-			return AppointmentCategoryDaoImpl.getInstance().getAppointmentCategoryList(userId);
+			return AppointmentCategoryDaoImpl.getInstance().getAppointmentCategoryList();
 		}catch(Exception err){
 			log.error("[getAppointmentCategory]",err);
 		}
 		return null;
 	}
+	
+	
+	/**
+	 * 
+	 * Creating an AppointmentCategory
+	 */
+	//---------------------------------------------------------------------------------------------
+	public void createAppointmentCategory(String name, String comment, Long userid){
+		log.debug("AppointmentCategoryLogic.createAppointmentCategory");
+		
+		AppointmentCategoryDaoImpl.getInstance().addAppointmentCategory(userid, name, comment);
+		
+	}
+	//--------------------------------------------------------------------------------------------
 	
 	
 	

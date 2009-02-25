@@ -148,20 +148,20 @@ public class AppointmentReminderTypDaoImpl {
 		return null;
 	}
 
-	public List<AppointmentReminderTyps> getAppointmentReminderTypList(Long userId) {
-		log.debug("getAppointmenetReminderTypList : userid : " + userId);
+	public List<AppointmentReminderTyps> getAppointmentReminderTypList() {
+		log.debug("getAppointmenetReminderTypList");
+		
 		try {
 			
 			String hql = "select a from AppointmentReminderTyps a " +
-					"WHERE a.deleted != :deleted "+
-					"AND a.user = :userId";
+					"WHERE a.deleted != :deleted ";
 			
 			Object idf = HibernateUtil.createSession();
 			Session session = HibernateUtil.getSession();
 			Transaction tx = session.beginTransaction();
 			Query query = session.createQuery(hql);
 			query.setString("deleted", "true");
-			query.setLong("userId", userId);
+			
 				
 			List<AppointmentReminderTyps> listAppointmentReminderTyp = query.list();
 			tx.commit();

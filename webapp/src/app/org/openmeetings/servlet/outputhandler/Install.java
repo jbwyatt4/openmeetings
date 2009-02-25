@@ -186,6 +186,12 @@ public class Install extends VelocityViewServlet {
 					ImportInitvalues.getInstance().loadInitUserAndOrganisation(username, userpass, useremail, orgname);
 					ImportInitvalues.getInstance().loadDefaultRooms();
 					
+					// AppointMent Categories
+					ImportInitvalues.getInstance().loadInitAppointmentCategories();
+					
+					// Appointment Remindertypes
+					ImportInitvalues.getInstance().loadInitAppointmentReminderTypes();
+					
 					//update to next step
 					log.error("add level to install file");
 					InstallationDocumentHandler.getInstance().createDocument(working_dir+InstallationDocumentHandler.installFileName,1);

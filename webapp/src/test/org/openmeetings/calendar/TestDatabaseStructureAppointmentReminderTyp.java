@@ -49,7 +49,7 @@ public class TestDatabaseStructureAppointmentReminderTyp extends TestCase {
 				Date date2 = format.parse( "2008-11-08" );
 		
 				AppointmentReminderTypDaoImpl.getInstance().addAppointmentReminderTyps(1L, "test 5 min", "comment");
-				List<AppointmentReminderTyps> listAppoints =	AppointmentReminderTypDaoImpl.getInstance().getAppointmentReminderTypList(1L);
+				List<AppointmentReminderTyps> listAppoints =	AppointmentReminderTypDaoImpl.getInstance().getAppointmentReminderTypList();
 			
 			log.debug("Anzahl: "+listAppoints.size());
 			
