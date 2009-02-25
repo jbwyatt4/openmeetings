@@ -376,7 +376,8 @@ public class Roommanagement {
 			Integer filesPanelXPosition,
 			Integer filesPanelYPosition,
 			Integer filesPanelHeight,
-			Integer filesPanelWidth){
+			Integer filesPanelWidth,
+			Boolean appointment){
 		try {
 			if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)){
 				Rooms r = new Rooms();
@@ -402,7 +403,7 @@ public class Roommanagement {
 				r.setFilesPanelHeight(filesPanelHeight);
 				r.setFilesPanelXPosition(filesPanelXPosition);
 				r.setFilesPanelYPosition(filesPanelYPosition);
-				
+				r.setAppointment(appointment);
 				
 				r.setDeleted("false");
 				Object idf = HibernateUtil.createSession();

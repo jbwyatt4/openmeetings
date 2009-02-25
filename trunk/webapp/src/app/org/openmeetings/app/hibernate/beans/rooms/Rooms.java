@@ -23,6 +23,8 @@ public class Rooms {
 	private Boolean ispublic;
 	private Long numberOfPartizipants = new Long(4);
 	
+	private Boolean appointment;
+	
 	/**
 	 * Layout of Room
 	 */
@@ -347,6 +349,20 @@ public class Rooms {
 	public void setFilesPanelWidth(Integer filesPanelWidth) {
 		this.filesPanelWidth = filesPanelWidth;
 	}
+	
+	/**
+     * @hibernate.property
+     *  column="appointMent"
+     *  type="boolean"
+     */	
+	public Boolean getAppointment() {
+		return appointment;
+	}
+	public void setAppointment(Boolean appointment) {
+		this.appointment = appointment;
+	}
+	
+	
 	
 	
 	

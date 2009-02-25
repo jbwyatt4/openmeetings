@@ -21,7 +21,7 @@ public class AddOrgRoom extends TestCase {
 				290, 280, 2, 2,
 				400,
 				true, 296, 2, 592, 660,
-				true, 2, 284, 310, 290);
+				true, 2, 284, 310, 290, false);
 		Roommanagement.getInstance().addRoomToOrganisation(3,room, 1);
 		
 	}

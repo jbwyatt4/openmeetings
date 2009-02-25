@@ -124,7 +124,7 @@ public class RoomService {
 							videoPodHeight, videoPodXPosition, videoPodYPosition, moderationPanelXPosition, 
 							showWhiteBoard, whiteBoardPanelXPosition, whiteBoardPanelYPosition, 
 							whiteBoardPanelHeight, whiteBoardPanelWidth, showFilesPanel, 
-							filesPanelXPosition, filesPanelYPosition, filesPanelHeight, filesPanelWidth);
+							filesPanelXPosition, filesPanelYPosition, filesPanelHeight, filesPanelWidth, false);
 		} catch (Exception err) {
 			log.error("[addRoom] ",err);
 		}

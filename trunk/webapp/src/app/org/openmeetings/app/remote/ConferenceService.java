@@ -160,7 +160,7 @@ public class ConferenceService {
 				290, 280, 2, 2,
 				400,
 				true, 296, 2, 592, 660,
-				true, 2, 284, 310, 290);
+				true, 2, 284, 310, 290, false);
 	}
 	
 	/**
@@ -180,7 +180,7 @@ public class ConferenceService {
 				290, 280, 2, 2,
 				400,
 				true, 296, 2, 592, 660,
-				true, 2, 284, 310, 290);
+				true, 2, 284, 310, 290, false);
         return Roommanagement.getInstance().addRoomToOrganisation(User_level, rooms_id, organisation_id);
 	}
 	
@@ -219,7 +219,8 @@ public class ConferenceService {
 	        			Integer.valueOf(argObjectMap.get("filesPanelXPosition").toString()).intValue(),
 	        			Integer.valueOf(argObjectMap.get("filesPanelYPosition").toString()).intValue(),
 	        			Integer.valueOf(argObjectMap.get("filesPanelHeight").toString()).intValue(),
-	        			Integer.valueOf(argObjectMap.get("filesPanelWidth").toString()).intValue());
+	        			Integer.valueOf(argObjectMap.get("filesPanelWidth").toString()).intValue(),
+	        			false);
 	        } else if (rooms_id>0){
 	        	return Roommanagement.getInstance().updateRoom(User_level, rooms_id, 
 	        			Long.valueOf(argObjectMap.get("roomtypes_id").toString()).longValue(), 
