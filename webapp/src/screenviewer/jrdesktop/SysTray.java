@@ -124,7 +124,7 @@ public class SysTray {
                 trayIcon.addActionListener(new ActionListener() {
 
                     public void actionPerformed(ActionEvent e) {
-                        mainFrame.main(null);
+                       // mainFrame.main(null);
                     }
                 });
 
