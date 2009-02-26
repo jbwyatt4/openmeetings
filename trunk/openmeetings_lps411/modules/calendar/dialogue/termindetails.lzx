@@ -341,7 +341,7 @@
 				this._isMonthly = false;
 				this._isWeekly = false;
 				this._isYearly = false;
-				
+				this._roomtype_edit.selectItemAt(0);
 				this._kategoryedit.selectItemAt(0); 
 				this._erinnerungedit.selectItemAt(0); 
 				this._locationedit.setAttribute('text', "");
@@ -364,6 +364,8 @@
 					<![CDATA[
 				if ($debug) Debug.write("terminObjRef:", this.terminObjRef);
 				this._kategoryedit.selectItem(this.terminObjRef.appointmentCategory.categoryId); //setAttribute('value',this.terminObjRef.kategorie.id);
+				
+				this._roomtype_edit.selectItem(this.terminObjRef.room.roomtype.roomtypes_id);
 				
 				if(this.terminObjRef.isDaily){
 					this._repetitionselect.selectItemAt(1);
