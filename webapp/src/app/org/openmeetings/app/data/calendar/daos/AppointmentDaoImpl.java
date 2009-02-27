@@ -432,6 +432,60 @@ public class AppointmentDaoImpl {
 		return null;
 	}
 	
+	
+	public List<Appointment> getTodaysAppoitmentsbyRangeAndMember( Long userId){
+		log.debug("getAppoitmentbyRangeAndMember : UserID - " + userId);	
+		
+		String hql = "SELECT app from MeetingMember mm " + 
+		"JOIN mm.appointment as app " + 
+		"WHERE mm.userid=:userId " + 
+		"AND mm.deleted!=:mm_deleted " + 
+		"AND app.deleted!=:app_deleted ";
+		
+		/*
+		"AND ( " +
+				"(app.appointmentStarttime BETWEEN :starttime AND :endtime) "+
+			"OR " +
+				"(app.appointmentEndtime BETWEEN :starttime AND :endtime) "+
+			"OR " +
+				"(app.appointmentStarttime < :starttime AND app.appointmentEndtime > :endtime) " +
+		") ";
+		*/
+		
+		Date startDate = new Date();
+		startDate.setHours(0);
+		startDate.setMinutes(0);
+		startDate.setSeconds(0);
+		
+		Date endDate = new Date();
+		endDate.setHours(23);
+		endDate.setMinutes(59);
+		endDate.setSeconds(59);
+		
+		
+		try{
+		Object idf = HibernateUtil.createSession();
+		Session session = HibernateUtil.getSession();
+		Transaction tx = session.beginTransaction();
+		Query query = session.createQuery(hql);
+		
+		query.setBoolean("mm_deleted", true);
+		query.setString("app_deleted", "true");
+		query.setLong("userId", userId);
+		//query.setDate("starttime", startDate );
+		//query.setDate("endtime", endDate );
+		
+		List<Appointment> listAppoints = query.list();
+		tx.commit();
+		HibernateUtil.closeSession(idf);
+		
+		return listAppoints;
+		}catch(Exception e){
+			log.error("Error in getTodaysAppoitmentsbyRangeAndMember : " + e.getMessage());
+			return null;
+		}
+	}
+	
 }
 
 

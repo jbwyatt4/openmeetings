@@ -38,6 +38,19 @@ public class AppointmentLogic {
 	}
 	
 	
+	public List<Appointment> getTodaysAppointmentsForUser(Long userId){
+		log.debug("getTodaysAppointmentsForUser");
+		
+		
+		List<Appointment> points = AppointmentDaoImpl.getInstance().getTodaysAppoitmentsbyRangeAndMember(userId); 
+		
+		log.debug("Count Appointments for Today : " + points.size());
+		
+		return points;
+		
+	}
+	
+	
 	//next appointment to current date
 	public Appointment getNextAppointment(){
 		try{
