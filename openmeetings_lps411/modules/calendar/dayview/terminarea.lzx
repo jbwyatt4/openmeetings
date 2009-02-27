@@ -133,6 +133,7 @@
 				<netparam><method name="getValue">return parent.parent.terminObj._isYearly;</method></netparam>
 				<netparam><method name="getValue">return parent.parent.terminObj._kategoryatr;</method></netparam>
 				<netparam><method name="getValue">return parent.parent.terminObj._erinnerungatr;</method></netparam>
+				<netparam><method name="getValue">return parent.parent.terminObj.roomtype;</method></netparam>
 				
 				<netparam><method name="getValue">return parent.parent.terminObj.arrayMeetingMember;</method></netparam>
 		    	<handler name="ondata" args="value">

@@ -128,7 +128,7 @@
 		<view y="60" x="20">
 			<handler name="oninit">
 				canvas.thishib.roomtype = "public";
-				this.getRoomsPublic.doCall();
+				this.getAppointedRooms.doCall();
 			</handler>
 			
 		  	<netRemoteCallHib name="getAppointedRooms" funcname="conferenceservice.getAppointedMeetings" remotecontext="$once{ canvas.thishib }" >   

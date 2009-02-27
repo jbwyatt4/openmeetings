@@ -455,6 +455,7 @@
 		this._termindetails._isWeekly = false;
 		this._termindetails._isYearly = false;
 		
+		this._termindetails._roomtype_edit.selectItemAt(0);
 		this._termindetails._kategoryedit.selectItemAt(0); 
 		this._termindetails._erinnerungedit.selectItemAt(0); 
 		this._termindetails._locationedit.setAttribute('text', "");
@@ -486,6 +487,7 @@
 		//else{
 			//this._termindetails._guestedit.setAttribute('text',"");
 		//}	
+		this._termindetails._roomtype_edit.selectItemAt(this.terminObjRef.room.roomtype.roomtypes_id);
 		this._termindetails._titeledit.setAttribute('text', this.terminObjRef.appointmentName);
 		this._termindetails._komentar.setAttribute('text', this.terminObjRef.appointmentDescription);
 		this._termindetails._date._bdatum.setAttribute('text', parseDateToString(this.terminObjRef.appointmentStarttime));
@@ -747,6 +749,8 @@
 				<netparam><method name="getValue">return parent.parent._termindetails._isYearly;</method></netparam>
 				<netparam><method name="getValue">return parent.parent._termindetails._kategoryatr;</method></netparam>
 				<netparam><method name="getValue">return parent.parent._termindetails._erinnerungatr;</method></netparam>
+				<netparam><method name="getValue">return parent.parent._termindetails.roomtype;</method></netparam>
+		    	
 		    	<handler name="ondata" args="value">
 		    		<![CDATA[
 		    			parent._tagesansicht._list._outlist.clearContent();
