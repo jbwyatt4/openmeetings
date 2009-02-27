@@ -648,6 +648,7 @@
 				<netparam><method name="getValue">return parent.parent._erinnerungatr;</method></netparam>
 				
 				<netparam><method name="getValue">return parent.arrayMeetingMember;</method></netparam>
+				<netparam><method name="getValue">return parent.parent.roomtype</method></netparam>
 		    	<handler name="ondata" args="value">
 		    		<![CDATA[
 		    			parent.parent._tabslider._daytab._dayview._tagesansicht._list._outlist.clearContent();
