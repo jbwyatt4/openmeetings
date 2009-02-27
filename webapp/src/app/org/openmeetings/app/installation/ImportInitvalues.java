@@ -100,10 +100,17 @@ public class ImportInitvalues {
 
 		Navimanagement.getInstance().addGlobalStructure("events", 5, 3, false,
 				true, 1, "events", "false", 585L);
+		
+		/*
 		Navimanagement.getInstance().addMainStructure("publicEvents", 11, 295,
 				true, true, 1, "publicEvents", 5);
 		Navimanagement.getInstance().addMainStructure("privateEvents", 12, 296,
 				true, true, 1, "privateEvents", 5);
+		*/
+		Navimanagement.getInstance().addMainStructure("allEvents", 11, 3,
+				true, true, 1, "allEvents", 5);
+		
+		
 
 		//Navimanagement.getInstance().addGlobalStructure("settings", 4, 4, false, true, 1, "setings");
 		//Navimanagement.getInstance().addMainStructure("userself", 1, 5, true, false, 1, "userself",3);
