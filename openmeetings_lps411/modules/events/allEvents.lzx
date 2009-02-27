@@ -7,7 +7,7 @@
 	 <labelText fontstyle="bold" y="10" labelid="128" width="200" />
      
      <tabs>
-    		<tabpane text="Public Events" width="150" padding="0" >
+    		<tabpane text="Public Events" >
     			<view>
     				<handler name="ontabcontentleave">
 			canvas._chatcontentRPC = null;
@@ -64,7 +64,7 @@
     			</view>
     		</tabpane>
     		
-    		<tabpane text="Private Events" width="150" padding="0" >
+    		<tabpane text="Private Events" >
     			<handler name="ontabcontentleave">
 			canvas._chatcontentRPC = null;
 			canvas.thishib.removeClientFromChatNotification.doCall();
@@ -118,7 +118,7 @@
     			
     		</tabpane>
     		
-    		<tabpane text="myEvents" width="150" padding="0">
+    		<tabpane text="myEvents" >
     			<handler name="ontabcontentleave">
 			canvas._chatcontentRPC = null;
 			canvas.thishib.removeClientFromChatNotification.doCall();

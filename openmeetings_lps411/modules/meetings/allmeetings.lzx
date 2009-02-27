@@ -8,7 +8,7 @@
 		
 		<!-- public rooms -->
 		<tabs>
-    		<tabpane text="Public Meetings" width="150" padding="0" >
+    		<tabpane text="Public Meetings" >
     		<view padding="0">
       			<handler name="ontabcontentleave">
 			canvas._chatcontentRPC = null;
@@ -75,7 +75,7 @@
     			
     			
     		<!-- private Meetings -->	
-    		<tabpane text="Private Meetings" width="150" padding="0">
+    		<tabpane text="Private Meetings" >
       			<view>
 		<handler name="ontabcontentleave">
 			canvas._chatcontentRPC = null;
@@ -130,7 +130,7 @@
     		</tabpane>
     		
     		<!-- Appointed Meetings -->
-    		<tabpane text="My Meetings" width="150" padding="0">
+    		<tabpane text="My Meetings" >
     			<handler name="ontabcontentleave">
 			canvas._chatcontentRPC = null;
 			canvas.thishib.removeClientFromChatNotification.doCall();
