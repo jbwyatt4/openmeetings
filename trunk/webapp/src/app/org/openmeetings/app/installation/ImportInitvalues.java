@@ -85,6 +85,15 @@ public class ImportInitvalues {
 				true, true, 1, "publicMeetings", 4);
 		Navimanagement.getInstance().addMainStructure("privateMeetings", 10,
 				294, true, true, 1, "privateMeetings", 4);
+		
+		/*
+		String action, int naviorder,
+		long fieldvalues_id, boolean isleaf, boolean isopen, long level_id,
+		String name, long global_id
+		*/
+		Navimanagement.getInstance().addMainStructure("allmeetings", 13,
+				2, true, true, 1, "allmeetings", 4);
+		
 
 		Navimanagement.getInstance().addGlobalStructure("events", 5, 3, false,
 				true, 1, "events", "false", 585L);
@@ -99,20 +108,20 @@ public class ImportInitvalues {
 
 		Navimanagement.getInstance().addGlobalStructure("admin", 6, 6, false,
 				true, 2, "admin", "false", 586L);
-		Navimanagement.getInstance().addMainStructure("userAdmin", 13, 125,
+		Navimanagement.getInstance().addMainStructure("userAdmin", 14, 125,
 				true, false, 2, "userAdmin", 6);
-		Navimanagement.getInstance().addMainStructure("roomClient", 14, 597,
+		Navimanagement.getInstance().addMainStructure("roomClient", 15, 597,
 				true, false, 3, "roomClient", 6);
 		//Navimanagement.getInstance().addMainStructure("groupadmin", 2, 126, true, false, 2, "groupadmin",4);
-		Navimanagement.getInstance().addMainStructure("orgAdmin", 15, 127,
+		Navimanagement.getInstance().addMainStructure("orgAdmin", 16, 127,
 				true, false, 3, "orgAdmin", 6);
-		Navimanagement.getInstance().addMainStructure("roomAdmin", 16, 186,
+		Navimanagement.getInstance().addMainStructure("roomAdmin", 17, 186,
 				true, false, 3, "roomAdmin", 6);
-		Navimanagement.getInstance().addMainStructure("confAdmin", 17, 263,
+		Navimanagement.getInstance().addMainStructure("confAdmin", 18, 263,
 				true, false, 3, "confAdmin", 6);
-		Navimanagement.getInstance().addMainStructure("languagesEditor", 18,
+		Navimanagement.getInstance().addMainStructure("languagesEditor", 19,
 				348, true, false, 3, "languagesEditor", 6);
-		Navimanagement.getInstance().addMainStructure("backupContent", 19, 367,
+		Navimanagement.getInstance().addMainStructure("backupContent", 20, 367,
 				true, false, 3, "backupContent", 6);
 
 		ErrorManagement.getInstance().addErrorType(new Long(1), new Long(322));

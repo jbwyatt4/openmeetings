@@ -105,7 +105,6 @@ public class LdapAuthBase {
 	    	}
 	    }
 	    
-	    
 	    else{
 	    	log.debug("Connection to LDAP - Server start (without Server login)");
 	    	try{

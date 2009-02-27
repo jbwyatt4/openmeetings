@@ -314,6 +314,46 @@ public class Roommanagement {
 		return null;
 	}	
 	
+	
+	
+	/**
+	 * Get Appointed Meetings
+	 */
+	//---------------------------------------------------------------------------------------------
+	public List<Rooms> getAppointedMeetings(Long userid, Long user_level){
+		log.debug("Roommanagement.getAppointedMeetings");
+		
+		try {
+			if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)){
+				Object idf = HibernateUtil.createSession();
+				Session session = HibernateUtil.getSession();
+				Transaction tx = session.beginTransaction();
+				
+				String queryString = "SELECT r from Rooms r " +
+						"JOIN r.roomtype as rt " +
+						"WHERE " +
+						"r.deleted=:deleted and r.appointment=:appointed";
+				Query q = session.createQuery(queryString);
+				//
+				q.setBoolean("appointed", true);
+				q.setString("deleted", "false");
+				
+				List ll = q.list();
+				tx.commit();
+				HibernateUtil.closeSession(idf);
+				
+				return ll;
+			}
+		} catch (HibernateException ex) {
+			log.error("[getAppointedMeetings] ", ex);
+		} catch (Exception ex2) {
+			log.error("[getAppointedMeetings] ", ex2);
+		}
+		return null;
+		
+	}
+	//---------------------------------------------------------------------------------------------
+	
 	/**
 	 * get all rooms which are availible for public
 	 * @param user_level
