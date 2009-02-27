@@ -81,11 +81,14 @@ public class ImportInitvalues {
 
 		Navimanagement.getInstance().addGlobalStructure("meetings", 4, 2,
 				false, true, 1, "meetings", "false", 584L);
+		
+		
+		/**
 		Navimanagement.getInstance().addMainStructure("publicMeetings", 9, 293,
 				true, true, 1, "publicMeetings", 4);
 		Navimanagement.getInstance().addMainStructure("privateMeetings", 10,
 				294, true, true, 1, "privateMeetings", 4);
-		
+		*/
 		/*
 		String action, int naviorder,
 		long fieldvalues_id, boolean isleaf, boolean isopen, long level_id,
