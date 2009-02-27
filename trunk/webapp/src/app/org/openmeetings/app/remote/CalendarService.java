@@ -9,9 +9,12 @@ import org.red5.logging.Red5LoggerFactory;
 import org.openmeetings.app.data.basic.AuthLevelmanagement;
 import org.openmeetings.app.data.basic.Sessionmanagement;
 import org.openmeetings.app.data.calendar.management.AppointmentLogic;
+import org.openmeetings.app.data.conference.Roommanagement;
 import org.openmeetings.app.data.user.Usermanagement;
 import org.openmeetings.app.hibernate.beans.calendar.Appointment;
 import org.openmeetings.app.hibernate.beans.calendar.AppointmentReminderTyps;
+import org.openmeetings.app.hibernate.beans.rooms.RoomTypes;
+import org.openmeetings.app.hibernate.beans.rooms.Rooms;
 
 public class CalendarService {
 	
@@ -119,7 +122,8 @@ public class CalendarService {
 			Boolean isYearly,
 			Long categoryId,
 			Long remind,
-			List mmClient){
+			List mmClient,
+			Long roomType){
 		log.debug("updateAppointment");
 		try{
 			
@@ -127,6 +131,18 @@ public class CalendarService {
 	        Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
 	        if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
 					        	
+	        	
+	        	RoomTypes rt = Roommanagement.getInstance().getRoomTypesById(roomType);
+	        	
+	        	Appointment app = AppointmentLogic.getInstance().getAppointMentById(appointmentId);
+	        	Rooms room = app.getRoom();
+	        	
+	        	room.setComment(appointmentDescription);
+	        	room.setName(appointmentName);
+	        	room.setRoomtype(rt);
+	        	
+	        	Roommanagement.getInstance().updateRoomObject(room);
+	        	
 	        	return AppointmentLogic.getInstance().updateAppointment(appointmentId, appointmentName, 
 	        			appointmentDescription, appointmentstart, appointmentend, isDaily, isWeekly, isMonthly, 
 	        			isYearly, categoryId, remind, mmClient);
@@ -140,13 +156,18 @@ public class CalendarService {
 		}
 	
 	public Long deleteAppointment(String SID,Long appointmentId){
+		
 		log.debug("deleteAppointment");
+		
 		try{
 			
 			Long users_id = Sessionmanagement.getInstance().checkSession(SID);
 	        Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
 	        if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
 					        	
+	        	Appointment app = AppointmentLogic.getInstance().getAppointMentById(appointmentId);
+	        	Roommanagement.getInstance().deleteRoom(app.getRoom());
+	        	
 	        	return AppointmentLogic.getInstance().deleteAppointment(appointmentId);
 	        }
 		} catch (Exception err) {

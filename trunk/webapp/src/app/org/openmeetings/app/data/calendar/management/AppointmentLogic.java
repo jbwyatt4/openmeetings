@@ -131,6 +131,34 @@ public class AppointmentLogic {
 		
 	}
 	
+	/**
+	 * 
+	 */
+	//----------------------------------------------------------------------------------------------
+	public Appointment getAppointMentById(Long appointment){
+		log.debug("getAppointMentById");
+		
+		return AppointmentDaoImpl.getInstance().getAppointmentById(appointment);
+	}
+	//----------------------------------------------------------------------------------------------
+	
+	/**
+	 * 
+	 * @param appointmentId
+	 * @param appointmentName
+	 * @param appointmentDescription
+	 * @param appointmentstart
+	 * @param appointmentend
+	 * @param isDaily
+	 * @param isWeekly
+	 * @param isMonthly
+	 * @param isYearly
+	 * @param categoryId
+	 * @param remind
+	 * @param mmClient
+	 * @return
+	 */
+	
 	public Long updateAppointment(Long appointmentId, String appointmentName, String appointmentDescription, 
 			Date appointmentstart, Date appointmentend,
 			Boolean isDaily, Boolean isWeekly, Boolean isMonthly, Boolean isYearly, Long categoryId, Long remind, List mmClient ){

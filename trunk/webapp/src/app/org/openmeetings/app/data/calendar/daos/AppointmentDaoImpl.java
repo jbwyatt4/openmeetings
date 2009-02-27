@@ -440,27 +440,23 @@ public class AppointmentDaoImpl {
 		"JOIN mm.appointment as app " + 
 		"WHERE mm.userid=:userId " + 
 		"AND mm.deleted!=:mm_deleted " + 
-		"AND app.deleted!=:app_deleted ";
+		"AND app.deleted!=:app_deleted "+
 		
-		/*
-		"AND ( " +
-				"(app.appointmentStarttime BETWEEN :starttime AND :endtime) "+
-			"OR " +
-				"(app.appointmentEndtime BETWEEN :starttime AND :endtime) "+
-			"OR " +
-				"(app.appointmentStarttime < :starttime AND app.appointmentEndtime > :endtime) " +
-		") ";
-		*/
+		"AND  " +
+		"app.appointmentStarttime > :starttime " + 
+		"AND " + 
+		"app.appointmentStarttime < :endtime";
+		
 		
 		Date startDate = new Date();
 		startDate.setHours(0);
 		startDate.setMinutes(0);
-		startDate.setSeconds(0);
+		startDate.setSeconds(1);
 		
 		Date endDate = new Date();
-		endDate.setHours(23);
-		endDate.setMinutes(59);
-		endDate.setSeconds(59);
+		startDate.setHours(23);
+		startDate.setMinutes(59);
+		startDate.setSeconds(59);
 		
 		
 		try{
@@ -472,8 +468,8 @@ public class AppointmentDaoImpl {
 		query.setBoolean("mm_deleted", true);
 		query.setString("app_deleted", "true");
 		query.setLong("userId", userId);
-		//query.setDate("starttime", startDate );
-		//query.setDate("endtime", endDate );
+		query.setDate("starttime", startDate );
+		query.setDate("endtime", endDate );
 		
 		List<Appointment> listAppoints = query.list();
 		tx.commit();

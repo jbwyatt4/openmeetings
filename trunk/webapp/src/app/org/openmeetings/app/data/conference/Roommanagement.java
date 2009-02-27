@@ -1060,4 +1060,25 @@ public class Roommanagement {
 		return null;
 	}
 	
+	
+	/**
+	 * Update Room Object
+	 */
+	//--------------------------------------------------------------------------------------------
+	public void updateRoomObject(Rooms room){
+		log.debug("updateRoomObject");
+		
+		try{
+			Object idf = HibernateUtil.createSession();
+			Session session = HibernateUtil.getSession();
+			Transaction tx = session.beginTransaction();
+			session.update(room);
+			tx.commit();
+			HibernateUtil.closeSession(idf);
+		}catch(Exception e){
+			log.error("Error updateRoomObject : " + e.getMessage());
+		}
+	}
+	//--------------------------------------------------------------------------------------------
+	
 }
