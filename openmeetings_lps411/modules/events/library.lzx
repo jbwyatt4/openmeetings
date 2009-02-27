@@ -3,5 +3,6 @@
     
     <include href="privateEvents.lzx" />
     <include href="publicEvents.lzx" />
+    <include href="allEvents.lzx" />
     
 </library>
