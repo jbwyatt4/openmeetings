@@ -60,9 +60,11 @@ public class ImportInitvalues {
 				true, true, 1, "mainDashboard", 1);
 		Navimanagement.getInstance().addMainStructure("myScheduledMeetings", 2,
 				291, true, true, 1, "myScheduledMeetings", 1);
+		
+		/*
 		Navimanagement.getInstance().addMainStructure("myScheduledEvents", 3,
 				292, true, true, 1, "myScheduledEvents", 1);
-
+		 */
 		Navimanagement.getInstance().addGlobalStructure("content", 2, 289,
 				false, true, 1, "content", "true", null);
 		Navimanagement.getInstance().addMainStructure("publicContent", 4, 297,
