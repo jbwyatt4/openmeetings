@@ -23,6 +23,7 @@
         this.roomname.setAttribute('text','');
 		this.comment.setAttribute('text','');
 		this.ispublic.setValue(false);
+		this.isappointment.setValue(false);
 		this.numberOfParticipants.selectItem('4');
 		this._organisationslist.clearList();
 		if (this._showAdvancedRoomSettings.getValue()){
@@ -53,6 +54,8 @@
 			this.roomname.setAttribute('text',obj.name);
 			this.comment.setAttribute('text',obj.comment);
 			this.ispublic.setValue(obj.ispublic);
+			if ($debug) Debug.write("Appointment: ",obj.appointment);
+			this.isappointment.setValue(obj.appointment);
 			this.numberOfParticipants.selectItem(String(obj.numberOfPartizipants));
 			this.roomtype.selectItem(String(obj.roomtype.roomtypes_id));
 			if (this._showAdvancedRoomSettings.getValue()){
@@ -121,6 +124,7 @@
   			this.sendObject["ispublic"] = this.parent.ispublic.getValue();
 			this.sendObject["numberOfPartizipants"] = Number(this.parent.numberOfParticipants.getValue());
   			this.sendObject["organisations"] = this.parent._organisationslist.getAllItems();
+  			this.sendObject["appointment"] = this.parent.isappointment.getValue();
 
   			if (parent._showAdvancedRoomSettings.getValue()){
   				
@@ -143,6 +147,8 @@
 				this.sendObject["filesPanelYPosition"] = Number(parent._advancedRoomSettings._filesPanelYPosition.getText());
 				this.sendObject["filesPanelWidth"] = Number(parent._advancedRoomSettings._filesPanelWidth.getText());
 				this.sendObject["filesPanelHeight"] = Number(parent._advancedRoomSettings._filesPanelHeight.getText());
+				
+				
   			} else {
   				if (this.parent.rooms_id==0){
   					//default values
@@ -262,20 +268,27 @@
             height="100" text="" />	
          -->
 	
+	<!-- Appointment -->
+	<labelText labelid="620" width="200" y="300" resize="false" x="2"/>  
+        <checkbox name="isappointment" width="270" y="300" x="120" fontsize="12" />
+	
 	<!-- 191:organisations -->
-    <labelText labelid="191" width="200" y="300" resize="false" x="2"/>     
-    <simpleValueList name="_organisationslist" y="300" x="120" width="270" height="160" 
+    <labelText labelid="191" width="200" y="320" resize="false" x="2"/>     
+    <simpleValueList name="_organisationslist" y="320" x="120" width="270" height="160" 
 		multiselect="true" />
+		
+	
+	
 	
 	<!-- 172:add organisation -->
-	<baseChooseIcon resourceN="edit_add_rsc" labelid="172" y="300" x="400"
+	<baseChooseIcon resourceN="edit_add_rsc" labelid="172" y="320" x="400"
 		onclick="this.parent.addOrganisationToUser()" />		
 	<method name="addOrganisationToUser">
 			new lz.chooseOrganisationWindow(canvas.main_content._content.inner,{refObj:this,item_id:this.rooms_id});
 	</method>	
 
 	<!-- 176:remove organisation -->
-	<baseChooseIcon resourceN="button_cancel_rsc" labelid="176" y="300" x="430"
+	<baseChooseIcon resourceN="button_cancel_rsc" labelid="176" y="320" x="430"
 		onclick="new lz.confirmDeleteWindow(canvas.main_content._content.inner,{refObj:this});" >		
 		<method name="confirmDelete">
 			if (this.parent._organisationslist._selected!=null)
@@ -284,7 +297,7 @@
 	</baseChooseIcon>
 	
 	<!-- 483:Show Layout Settings -->
-	<labelCheckbox x="0" y="470" fontsize="12"
+	<labelCheckbox x="0" y="490" fontsize="12"
         name="_showAdvancedRoomSettings" labelid="483" >
         <handler name="onvalue" args="v">
 			if (v) {
