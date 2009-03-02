@@ -832,7 +832,7 @@ public class Roommanagement {
 			Integer filesPanelXPosition,
 			Integer filesPanelYPosition,
 			Integer filesPanelHeight,
-			Integer filesPanelWidth){
+			Integer filesPanelWidth, Boolean appointment){
 		try {
 			log.debug("*** updateRoom numberOfPartizipants: "+numberOfPartizipants);
 			if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)){
@@ -860,6 +860,9 @@ public class Roommanagement {
 				r.setName(name);
 				r.setRoomtype(this.getRoomTypesById(roomtypes_id));
 				r.setUpdatetime(new Date());
+				
+				r.setAppointment(appointment);
+				
 				Object idf = HibernateUtil.createSession();
 				Session session = HibernateUtil.getSession();
 				Transaction tx = session.beginTransaction();
