@@ -175,7 +175,7 @@ public class RoomService {
 			Integer filesPanelXPosition,
 			Integer filesPanelYPosition,
 			Integer filesPanelHeight,
-			Integer filesPanelWidth) {
+			Integer filesPanelWidth, Boolean appointment) {
 		try {
 			Long users_id = Sessionmanagement.getInstance().checkSession(SID);
 	        Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
@@ -183,7 +183,7 @@ public class RoomService {
 					comment, numberOfPartizipants, null, videoPodWidth, videoPodHeight, 
 					videoPodXPosition, videoPodYPosition, moderationPanelXPosition, showWhiteBoard, 
 					whiteBoardPanelXPosition, whiteBoardPanelYPosition, whiteBoardPanelHeight, whiteBoardPanelWidth, showFilesPanel, 
-						filesPanelXPosition, filesPanelYPosition, filesPanelHeight, filesPanelWidth);
+						filesPanelXPosition, filesPanelYPosition, filesPanelHeight, filesPanelWidth, appointment);
 		} catch (Exception err) {
 			log.error("[addRoom] ",err);
 		}

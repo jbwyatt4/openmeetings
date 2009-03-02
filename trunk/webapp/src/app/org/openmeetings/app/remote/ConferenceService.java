@@ -263,7 +263,10 @@ public class ConferenceService {
 	        log.debug("argObject: 2 - "+argObjectMap.get("organisations").getClass().getName());
 	        List organisations = (List) argObjectMap.get("organisations");
 	        Long rooms_id = Long.valueOf(argObjectMap.get("rooms_id").toString()).longValue();
-	        log.error("rooms_id "+rooms_id);
+	        log.debug("rooms_id "+rooms_id);
+	        
+	        
+	        
 	        if (rooms_id==0){
 	        	return Roommanagement.getInstance().addRoom(User_level, argObjectMap.get("name").toString(), 
 	        			Long.valueOf(argObjectMap.get("roomtypes_id").toString()).longValue(),
@@ -284,7 +287,7 @@ public class ConferenceService {
 	        			Integer.valueOf(argObjectMap.get("filesPanelYPosition").toString()).intValue(),
 	        			Integer.valueOf(argObjectMap.get("filesPanelHeight").toString()).intValue(),
 	        			Integer.valueOf(argObjectMap.get("filesPanelWidth").toString()).intValue(),
-	        			false);
+	        			Boolean.valueOf(argObjectMap.get("appointment").toString()));
 	        } else if (rooms_id>0){
 	        	return Roommanagement.getInstance().updateRoom(User_level, rooms_id, 
 	        			Long.valueOf(argObjectMap.get("roomtypes_id").toString()).longValue(), 
@@ -305,7 +308,8 @@ public class ConferenceService {
 	        			Integer.valueOf(argObjectMap.get("filesPanelXPosition").toString()).intValue(),
 	        			Integer.valueOf(argObjectMap.get("filesPanelYPosition").toString()).intValue(),
 	        			Integer.valueOf(argObjectMap.get("filesPanelHeight").toString()).intValue(),
-	        			Integer.valueOf(argObjectMap.get("filesPanelWidth").toString()).intValue());
+	        			Integer.valueOf(argObjectMap.get("filesPanelWidth").toString()).intValue(),
+	        			Boolean.valueOf(argObjectMap.get("appointment").toString()));
 	        }
 		} catch (Exception e){
 			log.error("saveOrUpdateRoom",e);

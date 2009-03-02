@@ -1859,5 +1859,8 @@ Translated by Orcun Madran omadran@baskent.edu.tr
   </string>
   <string id="619" name="roomtypes">
     <value>Room Type</value>
-  </string>  
+  </string> 
+  <string id="620" name="appointed_room">
+    <value>Appointment Room</value>
+  </string> 
 </language>
