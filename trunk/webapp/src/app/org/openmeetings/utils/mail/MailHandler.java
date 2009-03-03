@@ -3,6 +3,7 @@ package org.openmeetings.utils.mail;
 import javax.mail.*;
 import javax.mail.internet.*;
 
+import java.io.ByteArrayInputStream;
 import java.util.*;
 
 import javax.activation.*;
@@ -185,5 +186,64 @@ public class MailHandler {
 			return "Error" + ex;
 		}
 	}
+	
+	
+	/**
+	 * @author o.becherer
+	 * @param recipients (List of valid mail adresses)
+	 * @param subject mailSubject
+	 * @param iCalMimeBody byte[] containing Icaldata
+	 * Sending Ical Invitation 
+	 */
+	//---------------------------------------------------------------------------------------------
+	public static void sendIcalMessage(String recipients, String subject, byte[] iCalMimeBody) throws Exception{
+		log.debug("sendIcalMessage");
+		
+		
+		// Evaluating Configuration Data
+		String smtpServer = Configurationmanagement.getInstance().getConfKey(3, "smtp_server").getConf_value();
+		String smtpPort = Configurationmanagement.getInstance().getConfKey(3, "smtp_port").getConf_value();
+		// String from = "openmeetings@xmlcrm.org";
+		String from = Configurationmanagement.getInstance().getConfKey(3,"system_email_addr").getConf_value();
+		
+		String emailUsername = Configurationmanagement.getInstance().getConfKey(3, "email_username").getConf_value();
+		String emailUserpass = Configurationmanagement.getInstance().getConfKey(3, "email_userpass").getConf_value();
+
+		
+		Properties props = System.getProperties();
+
+		props.put("mail.smtp.host", smtpServer);
+		props.put("mail.smtp.port", smtpPort);
+		
+		// Check for Authentification
+		Session session = null;
+		if (emailUsername != null && emailUsername.length() > 0
+				&& emailUserpass != null && emailUserpass.length() > 0) {
+			//use SMTP Authentication
+			props.put("mail.smtp.auth", "true");
+			session = Session.getDefaultInstance(props,
+					new SmtpAuthenticator());
+		}else{
+			//not use SMTP Authentication
+			session = Session.getDefaultInstance(props, null);
+		}
+		
+		MimeMessage mimeMessage = new MimeMessage(session);
+		mimeMessage.setSubject(subject);
+		mimeMessage.setFrom(new InternetAddress(from));
+		
+		mimeMessage.addRecipients(Message.RecipientType.TO, InternetAddress.parse(recipients, false));
+		Multipart multipart = new MimeMultipart();
+		MimeBodyPart iCalAttachment = new MimeBodyPart();
+		iCalAttachment.setDataHandler(new DataHandler(new javax.mail.util.ByteArrayDataSource(new ByteArrayInputStream(iCalMimeBody), "text/calendar;method=REQUEST;charset=\"UTF-8\"")));
+		
+		multipart.addBodyPart(iCalAttachment);
+		mimeMessage.setContent(multipart);
+		
+		Transport trans = session.getTransport("smtp");
+		trans.send(mimeMessage);
+		
+	}
+	//---------------------------------------------------------------------------------------------
 	
 }
