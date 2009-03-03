@@ -112,8 +112,13 @@ public class AppointmentLogic {
 			log.debug("Room " + room_id + " ok!");
 		
 		try{
-			return AppointmentDaoImpl.getInstance().addAppointment(appointmentName, userId, appointmentLocation, appointmentDescription,
+			Long id =  AppointmentDaoImpl.getInstance().addAppointment(appointmentName, userId, appointmentLocation, appointmentDescription,
 				appointmentstart, appointmentend, isDaily, isWeekly, isMonthly, isYearly, categoryId, remind, room);
+		
+			
+			// Sending invitations
+			
+			return id;
 		}catch(Exception err){
 			log.error("[saveAppointment]",err);
 		}
@@ -132,7 +137,7 @@ public class AppointmentLogic {
 	}
 	
 	/**
-	 * 
+	 * Retrieving Appointment by ID
 	 */
 	//----------------------------------------------------------------------------------------------
 	public Appointment getAppointMentById(Long appointment){
@@ -141,6 +146,8 @@ public class AppointmentLogic {
 		return AppointmentDaoImpl.getInstance().getAppointmentById(appointment);
 	}
 	//----------------------------------------------------------------------------------------------
+	
+	
 	
 	/**
 	 * 
@@ -158,7 +165,6 @@ public class AppointmentLogic {
 	 * @param mmClient
 	 * @return
 	 */
-	
 	public Long updateAppointment(Long appointmentId, String appointmentName, String appointmentDescription, 
 			Date appointmentstart, Date appointmentend,
 			Boolean isDaily, Boolean isWeekly, Boolean isMonthly, Boolean isYearly, Long categoryId, Long remind, List mmClient ){

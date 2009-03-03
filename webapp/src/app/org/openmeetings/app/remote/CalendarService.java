@@ -94,9 +94,11 @@ public class CalendarService {
 	        
 	        if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
 					        	
-	        	return	 AppointmentLogic.getInstance().saveAppointment(appointmentName, users_id, appointmentLocation, 
+	        	Long id = AppointmentLogic.getInstance().saveAppointment(appointmentName, users_id, appointmentLocation, 
 	        			appointmentDescription, appointmentstart, appointmentend, isDaily, isWeekly, isMonthly, 
 	        			isYearly, categoryId, remind, roomType);
+	        	
+	        	return id;
 	        }
 	        else{
 	        	log.error("saveAppointment : wrong user level");

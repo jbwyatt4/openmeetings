@@ -87,6 +87,7 @@ public class InvitationService implements IPendingServiceCallback {
     	//return Invitationmanagement.getInstance().sendInvitionLink(user_level, username, message, domain, room, roomtype, baseurl, email, subject, room_id);
     }    
     
+	
 	public Object getInvitationByHash(String hashCode) {
 		return Invitationmanagement.getInstance().getInvitationByHashCode(hashCode,true);
 	}

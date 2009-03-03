@@ -24,15 +24,19 @@ public class MeetingMemberService {
 	
 	public Long addMeetingMember(String SID, String firstname, String lastname, String memberStatus,
 			String appointmentStatus, Long appointmentId, Long userid, String email){
-		
+			log.debug("addMeetingMember");
+			
 		try{
 			
 			Long users_id = Sessionmanagement.getInstance().checkSession(SID);
 	        Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
 	        if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
 					        	
-	        return	 MeetingMemberLogic.getInstance().addMeetingMember( firstname,  lastname,  memberStatus,
+	        Long id = 	 MeetingMemberLogic.getInstance().addMeetingMember( firstname,  lastname,  memberStatus,
 	    			 appointmentStatus,  appointmentId,  userid,  email);
+	        
+	        log.debug("addMeetingmember : newId : " + id);
+	        return id;
 	        }
 		} catch (Exception err) {
 			log.error("[addMeetingMember]",err);

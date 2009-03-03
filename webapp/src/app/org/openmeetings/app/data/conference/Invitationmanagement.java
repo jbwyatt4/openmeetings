@@ -89,7 +89,6 @@ public class Invitationmanagement {
 				invitation.setConferencedomain(conferencedomain);
 				invitation.setStarttime(new Date());
 				
-
 				Object idf = HibernateUtil.createSession();
 				Session session = HibernateUtil.getSession();
 				Transaction tx = session.beginTransaction();
