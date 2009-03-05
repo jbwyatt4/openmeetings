@@ -10,6 +10,8 @@
 			<attribute name="_isWeekly" value="false" type="boolean" />  
 			<attribute name="_isMonthly" value="false" type="boolean" />
 			<attribute name="_isYearly" value="false" type="boolean" />   
+			
+			<attribute name="baseUrl" value="null" />
 						
 			<!--<text name="_kategory" y="10" x="35">Kategorie: </text>-->
 			<labelText name="_kategory" y="10" x="35" labelid="566" width="80"/>
@@ -526,6 +528,10 @@
 		    		parent.addMeetingMember.appointmentId = value;	
 		    		//parent.getUserAlleTermineByRange.doCall();
 		    		
+		    		var url = 'http://'+canvas.rtmphostlocal+':'+canvas.red5httpport+'/'+canvas.webAppRootKey; 
+			    	parent.parent.baseUrl = url;			
+			    		
+		    		
 			    		if ($debug) Debug.write("addUserTermine: ",value);
 			    		
 								for (var i=0; i<parent._liste._innerlist.subviews.length; i++) {
@@ -571,6 +577,7 @@
 				<netparam><method name="getValue">return parent.appointmentId;</method></netparam>
 				<netparam><method name="getValue">return parent.contact.userId;</method></netparam>
 				<netparam><method name="getValue">return parent.contact.email;</method></netparam>
+				<netparam><method name="getValue">return parent.parent.parent.baseUrl;</method></netparam>
 				
 		    	<handler name="ondata" args="value">
 		    		<![CDATA[
