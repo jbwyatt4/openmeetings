@@ -196,9 +196,10 @@ public class MailHandler {
 	 * Sending Ical Invitation 
 	 */
 	//---------------------------------------------------------------------------------------------
-	public static void sendIcalMessage(String recipients, String subject, byte[] iCalMimeBody) throws Exception{
+	public static void sendIcalMessage(String recipients, String subject, byte[] iCalMimeBody, String htmlBody) throws Exception{
 		log.debug("sendIcalMessage");
 		
+		log.debug("HTMLBODY : " + htmlBody);
 		
 		// Evaluating Configuration Data
 		String smtpServer = Configurationmanagement.getInstance().getConfKey(3, "smtp_server").getConf_value();
@@ -209,7 +210,6 @@ public class MailHandler {
 		String emailUsername = Configurationmanagement.getInstance().getConfKey(3, "email_username").getConf_value();
 		String emailUserpass = Configurationmanagement.getInstance().getConfKey(3, "email_userpass").getConf_value();
 
-		
 		Properties props = System.getProperties();
 
 		props.put("mail.smtp.host", smtpServer);
@@ -228,16 +228,24 @@ public class MailHandler {
 			session = Session.getDefaultInstance(props, null);
 		}
 		
+		// Building MimeMessage
 		MimeMessage mimeMessage = new MimeMessage(session);
 		mimeMessage.setSubject(subject);
 		mimeMessage.setFrom(new InternetAddress(from));
-		
 		mimeMessage.addRecipients(Message.RecipientType.TO, InternetAddress.parse(recipients, false));
+		
+		// -- Create a new message --
+		BodyPart msg = new MimeBodyPart();
+		msg.setDataHandler(new DataHandler(new ByteArrayDataSource(htmlBody, "text/html")));
+		
 		Multipart multipart = new MimeMultipart();
-		MimeBodyPart iCalAttachment = new MimeBodyPart();
+		
+		BodyPart iCalAttachment = new MimeBodyPart();
 		iCalAttachment.setDataHandler(new DataHandler(new javax.mail.util.ByteArrayDataSource(new ByteArrayInputStream(iCalMimeBody), "text/calendar;method=REQUEST;charset=\"UTF-8\"")));
 		
 		multipart.addBodyPart(iCalAttachment);
+		multipart.addBodyPart(msg);
+		
 		mimeMessage.setContent(multipart);
 		
 		Transport trans = session.getTransport("smtp");

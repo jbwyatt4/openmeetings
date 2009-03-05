@@ -266,9 +266,7 @@ public class Invitationmanagement {
 			
 			String template = InvitationTemplate.getInstance().getRegisterInvitationTemplate(username, message, invitation_link, default_lang_id);
 		
-			
 			IcalHandler handler = new IcalHandler(IcalHandler.ICAL_METHOD_REQUEST);
-			
 			
 			Appointment point = AppointmentLogic.getInstance().getAppointMentById(appointMentId);
 			
@@ -284,19 +282,17 @@ public class Invitationmanagement {
 			
 			HashMap<String, String> oberDussel = handler.getAttendeeData(user.getAdresses().getEmail(), user.getLogin());
 			
-			
 			GregorianCalendar start = new GregorianCalendar();
 			start.setTime(point.getAppointmentStarttime());
 			
 			GregorianCalendar end = new GregorianCalendar();
 			end.setTime(point.getAppointmentEndtime());
 			
-			
 			handler.addNewMeeting(start, end, point.getAppointmentName(), atts, invitation_link, oberDussel);
 			
-			System.out.println(handler.getICalDataAsString());
+			log.debug(handler.getICalDataAsString());
 			
-			MailHandler.sendIcalMessage(email, subject, handler.getIcalAsByteArray());
+			MailHandler.sendIcalMessage(email, subject, handler.getIcalAsByteArray(), template);
 			
 			
 			return "success";
