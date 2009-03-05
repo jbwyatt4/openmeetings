@@ -87,10 +87,11 @@ public class IcalHandler {
 	 * @param name meeting name
 	 * @param attendees List of attendees (use getAttendeeData to retrieve valid records)
 	 * @param description containing the meeting description
+	 * @param uid (maybe null)
 	 * @return UID of Meeting
 	 */
 	//---------------------------------------------------------------------------------------
-	public String addNewMeeting(GregorianCalendar startDate, GregorianCalendar endDate, String name, Vector<HashMap<String, String>> attendees, String description, HashMap<String, String> organizer) throws Exception{
+	public String addNewMeeting(GregorianCalendar startDate, GregorianCalendar endDate, String name, Vector<HashMap<String, String>> attendees, String description, HashMap<String, String> organizer, String uid) throws Exception{
 		log.debug("add new Meeting");
 		
 		startDate.setTimeZone(timeZone);
@@ -106,13 +107,18 @@ public class IcalHandler {
 		
 		meeting.getProperties().add(new Description(description));
 		
-		// generate unique identifier..
-		UidGenerator ug = new UidGenerator("uidGen");
-		Uid uid = ug.generateUid();
-	
-		log.debug("Generating Meeting UID : " + uid.getValue());
+		// generate unique identifier (if not submitted)
+		Uid ui = null;
+		if(uid == null || uid.length() < 1){
+			ui = new UidGenerator("uidGen").generateUid();
+			log.debug("Generating Meeting UID : " + ui.getValue());
+		}
+		else{
+			ui = new Uid(uid);
+			log.debug("Using Meeting UID : " + ui.getValue());
+		}
 		
-		meeting.getProperties().add(uid);
+		meeting.getProperties().add(ui);
 		
 		for(int i = 0; i <attendees.size(); i++){
 			HashMap<String, String> oneAtt = attendees.get(i);
@@ -131,7 +137,7 @@ public class IcalHandler {
 	
 		icsCalendar.getComponents().add(meeting);
 		
-		return uid.getValue();
+		return ui.getValue();
 		
 	}
 	//---------------------------------------------------------------------------------------

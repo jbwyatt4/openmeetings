@@ -116,8 +116,6 @@ public class AppointmentLogic {
 				appointmentstart, appointmentend, isDaily, isWeekly, isMonthly, isYearly, categoryId, remind, room);
 		
 			
-			// Sending invitations
-			
 			return id;
 		}catch(Exception err){
 			log.error("[saveAppointment]",err);
@@ -179,4 +177,18 @@ public class AppointmentLogic {
 		}
 		return null;
 	}
+	
+	
+	
+	/**
+	 *Updating AppointMent object 
+	 */
+	//----------------------------------------------------------------------------------------------
+	public Long updateAppointMent(Appointment point){
+		log.debug("AppointmentLogic.updateAppointment");
+	
+		return AppointmentDaoImpl.getInstance().updateAppointment(point);
+	}
+	//----------------------------------------------------------------------------------------------
+	
 }

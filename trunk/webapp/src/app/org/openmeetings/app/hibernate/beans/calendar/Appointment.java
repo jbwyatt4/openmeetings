@@ -40,6 +40,8 @@ public class Appointment {
 	
 	private Rooms room;
 	
+	private String icalId;
+	
 	private List<MeetingMember> meetingMember;
 
 	/**
@@ -301,6 +303,20 @@ public class Appointment {
 	public void setRoom(Rooms room) {
 		this.room = room;
 	}
+	
+	/**
+	 * @hibernate.property
+	 * column="icalId"
+	 * type="string"
+	 */
+	public String getIcalId() {
+		return icalId;
+	}
+	public void setIcalId(String icalId) {
+		this.icalId = icalId;
+	}
+	
+	
 	
 	
 }
