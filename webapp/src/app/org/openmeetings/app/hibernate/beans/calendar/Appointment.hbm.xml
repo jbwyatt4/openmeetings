@@ -23,5 +23,6 @@
     <property name="isMonthly" type="boolean" column="ismonthly"/>
     <property name="isYearly" type="boolean" column="isyearly"/>
     <property name="isDaily" type="boolean" column="isdaily"/>
+    <property name="icalId" type="string" column="icalId" />
   </class>
 </hibernate-mapping>

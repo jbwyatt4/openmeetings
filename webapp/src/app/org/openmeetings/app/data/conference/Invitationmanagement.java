@@ -288,12 +288,18 @@ public class Invitationmanagement {
 			GregorianCalendar end = new GregorianCalendar();
 			end.setTime(point.getAppointmentEndtime());
 			
-			handler.addNewMeeting(start, end, point.getAppointmentName(), atts, invitation_link, oberDussel);
+			String meetingId = handler.addNewMeeting(start, end, point.getAppointmentName(), atts, invitation_link, oberDussel, point.getIcalId());
+			
+			// Writing back meetingUid
+			if(point.getIcalId() == null || point.getIcalId().length() < 1){
+				point.setIcalId(meetingId);
+				
+				AppointmentLogic.getInstance().updateAppointMent(point);
+			}
 			
 			log.debug(handler.getICalDataAsString());
 			
 			MailHandler.sendIcalMessage(email, subject, handler.getIcalAsByteArray(), template);
-			
 			
 			return "success";
 			//return MailHandler.sendMail(email, subject, template);
