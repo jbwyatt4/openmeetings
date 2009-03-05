@@ -221,6 +221,8 @@
 			<fileset dir="${xstream.lib}">
 			</fileset>	
 			<fileset dir="${database.lib}">
+			</fileset>
+			<fileset dir="${ical.lib}">
 			</fileset>	
 		</copy>
 		<tstamp/>

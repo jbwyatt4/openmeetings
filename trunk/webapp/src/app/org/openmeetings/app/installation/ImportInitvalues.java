@@ -416,6 +416,9 @@ public class ImportInitvalues {
 		
 		try{
 			AppointmentRemindertypeLogic.getInstance().createAppointMentReminderType(-1L, "none", "no reminder");
+			AppointmentRemindertypeLogic.getInstance().createAppointMentReminderType(-1L, "simple email", "simple email notification");
+			AppointmentRemindertypeLogic.getInstance().createAppointMentReminderType(-1L, "iCal email", "Ical notification");
+			
 		}catch(Exception e){
 			log.error("Could not create ReminderType");
 			return;

@@ -54,7 +54,6 @@ public class AppointmentDaoImpl {
 					"WHERE a.deleted != :deleted " +
 					"AND a.appointmentId = :appointmentId ";
 					
-			
 			Object idf = HibernateUtil.createSession();
 			Session session = HibernateUtil.getSession();
 			Transaction tx = session.beginTransaction();
