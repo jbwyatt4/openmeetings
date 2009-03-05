@@ -3,6 +3,7 @@ package org.openmeetings.app.hibernate.beans.calendar;
 import java.util.Date;
 
 import org.openmeetings.app.hibernate.beans.adresses.Adresses;
+import org.openmeetings.app.hibernate.beans.invitation.Invitations;
 import org.openmeetings.app.hibernate.beans.user.Users;
 
 /**
@@ -27,6 +28,9 @@ public class MeetingMember {
 	private Date updatetime;
 	private Boolean deleted;
 	private String comment;
+	
+	
+	private Invitations invitation;
 	
 	/**
      * 
@@ -134,6 +138,26 @@ public class MeetingMember {
 		this.appointment = appointment;
 	}
 	
+	
+	
+	
+	
+	/**
+	 * 
+	 * @hibernate.many-to-one
+	 * cascade="none"
+	 * column="invitation"
+	 * lazy="false"
+	 * class="org.openmeetings.app.hibernate.beans.invitation.Invitations"
+	 * not-null="false"
+	 * outer-join="true"
+	 */
+	public Invitations getInvitation() {
+		return invitation;
+	}
+	public void setInvitation(Invitations invitation) {
+		this.invitation = invitation;
+	}
 	/**
      * @hibernate.property
      *  column="starttime"

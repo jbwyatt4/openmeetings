@@ -9,6 +9,8 @@ import org.red5.logging.Red5LoggerFactory;
 import org.openmeetings.app.data.calendar.daos.MeetingMemberDaoImpl;
 import org.openmeetings.app.data.conference.Invitationmanagement;
 import org.openmeetings.app.hibernate.beans.calendar.Appointment;
+import org.openmeetings.app.hibernate.beans.calendar.MeetingMember;
+import org.openmeetings.app.hibernate.beans.invitation.Invitations;
 
 public class MeetingMemberLogic {
 	
@@ -34,14 +36,15 @@ public class MeetingMemberLogic {
 			// DefaultInvitation
 			Appointment point = AppointmentLogic.getInstance().getAppointMentById(appointmentId);
 			
+			Long invitationId = null;
+			
 			
 			if(point.getRemind().getTypId() == 1){
 				log.debug("no reminder required");
 			}
 			else if(point.getRemind().getTypId() == 2){
 				log.debug("Reminder for Appointment : simple email");
-				
-				Invitationmanagement.getInstance().addInvitationLink(
+				invitationId = Invitationmanagement.getInstance().addInvitationLink(
 						new Long(2), //userlevel
 						firstname + " " + lastname, //username
 						"Invitation to an openMeetings Event : " + point.getAppointmentName() + ", " + point.getAppointmentDescription() + ", Start : " + point.getAppointmentStarttime() + ", End : " + point.getAppointmentEndtime(), //message
@@ -62,7 +65,7 @@ public class MeetingMemberLogic {
 			else if(point.getRemind().getTypId() == 3){
 				log.debug("Reminder for Appointment : iCal mail");
 				
-				Invitationmanagement.getInstance().addInvitationIcalLink(new Long(2), //userlevel
+				invitationId = Invitationmanagement.getInstance().addInvitationIcalLink(new Long(2), //userlevel
 						firstname + " " + lastname, //username
 						"Invitation to an openMeetings Event : " + point.getAppointmentName() + ", " + point.getAppointmentDescription() + ", Start : " + point.getAppointmentStarttime() + ", End : " + point.getAppointmentEndtime(), //message
 						baseUrl, // baseURl
@@ -80,8 +83,17 @@ public class MeetingMemberLogic {
 					);
 			}
 			
+			// Setting InvitationId within MeetingMember
 			
-			//Invitationmanagement.getInstance().addInvitationLink(new Long(1), firstname + " " + lastname, "Invitation Link openMeeting", baseUrl, email, "InvitationLink OpenMeetings", point.getRoom().getRooms_id(), null, false, null, null, null, null, 1);
+			if(invitationId != null){
+				MeetingMember member = getMemberById(memberId);
+				Invitations invi = Invitationmanagement.getInstance().getInvitationbyId(invitationId);
+			
+				member.setInvitation(invi);
+				
+				updateMeetingMember(member);
+				
+			}
 			
 			return memberId;
 		
@@ -104,12 +116,58 @@ public class MeetingMemberLogic {
 		return null;
 	}
 	
+	/**
+	 * @author becherer
+	 * @param member
+	 * @return
+	 */
+	//--------------------------------------------------------------------------------------------
+	public Long updateMeetingMember(MeetingMember member){
+		log.debug("updateMeetingMember");
+		
+		return MeetingMemberDaoImpl.getInstance().updateMeetingMember(member).getMeetingMemberId();
+	}
+	//--------------------------------------------------------------------------------------------
+	
+	/**
+	 * @author becherer
+	 * @param memberId
+	 */
+	//--------------------------------------------------------------------------------------------
+	public MeetingMember getMemberById(Long memberId){
+		log.debug("getMemberById");
+		
+		return MeetingMemberDaoImpl.getInstance().getMeetingMemberById(memberId);
+	}
+	//--------------------------------------------------------------------------------------------
 	
 	
+	/**
+	 * 
+	 * @param meetingMemberId
+	 * @return
+	 */
 	public Long deleteMeetingMember(Long meetingMemberId ){
+		log.debug("meetingMemberLogic.deleteMeetingMember");
 		
 		try {
-			return MeetingMemberDaoImpl.getInstance().deleteMeetingMember(meetingMemberId);
+			
+			MeetingMember member = MeetingMemberDaoImpl.getInstance().getMeetingMemberById(meetingMemberId);
+			
+			if(member == null){
+				log.error("could not find meeting member!");
+				return null;
+			}
+			
+			Long returnValue =  MeetingMemberDaoImpl.getInstance().deleteMeetingMember(meetingMemberId);
+			
+			Appointment point = member.getAppointment();
+			
+			// cancel invitation
+			Invitationmanagement.getInstance().cancelInvitation(point, member);
+			
+			return returnValue;
+			
 		} catch (Exception err) {
 			log.error("[deleteMeetingMember]",err);
 		}

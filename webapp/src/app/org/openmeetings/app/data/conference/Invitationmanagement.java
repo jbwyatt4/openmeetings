@@ -67,7 +67,7 @@ public class Invitationmanagement {
 	 * @param createdBy
 	 * @return
 	 */
-	public String addInvitationLink(Long user_level, String username, String message,
+	public Long addInvitationLink(Long user_level, String username, String message,
 			String baseurl, String email, String subject, Long rooms_id, String conferencedomain,
 			Boolean isPasswordProtected, String invitationpass, Integer valid,
 			Date validFrom, Date validTo, Long createdBy
@@ -122,10 +122,10 @@ public class Invitationmanagement {
 				HibernateUtil.closeSession(idf);
 				
 				if (invitationId>0){
-					return this.sendInvitionLink(username, message, baseurl, email, subject, invitation.getHash());
-				} else {
-					return "Sys - Error";
+					this.sendInvitionLink(username, message, baseurl, email, subject, invitation.getHash());
+					return invitationId;
 				}
+				
 			}
 		} catch (HibernateException ex) {
 			log.error("[addInvitationLink] "+ex);
@@ -134,6 +134,37 @@ public class Invitationmanagement {
 		}
 		return null;
 	}
+	
+	
+	/**
+	 * @author becherer
+	 * @param ment
+	 * @param member
+	 */
+	//-----------------------------------------------------------------------------------------------
+	public void cancelInvitation(Appointment ment, MeetingMember member){
+		log.debug("cancelInvitation");
+		
+		// checking reminderType
+		if(ment.getRemind().getTypId() == 0){
+			// no reminder
+		}
+		else if(ment.getRemind().getTypId() == 1){
+			// simple mail
+		}
+		else if(ment.getRemind().getTypId() == 2){
+			// iCal notification
+		}
+		
+		// Deleting invitation
+		Invitations inv = member.getInvitation();
+		inv.setDeleted("true");
+		
+		updateInvitation(inv);
+		
+		
+	}
+	//-----------------------------------------------------------------------------------------------
 	
 	/**
 	 * @author o.becherer
@@ -154,7 +185,7 @@ public class Invitationmanagement {
 	 * @return
 	 */
 	//---------------------------------------------------------------------------------------------------------
-	public String addInvitationIcalLink(Long user_level, String username, String message,
+	public Long addInvitationIcalLink(Long user_level, String username, String message,
 			String baseurl, String email, String subject, Long rooms_id, String conferencedomain,
 			Boolean isPasswordProtected, String invitationpass, Integer valid,
 			Date validFrom, Date validTo, Long createdBy, Long appointMentId
@@ -211,9 +242,8 @@ public class Invitationmanagement {
 				HibernateUtil.closeSession(idf);
 				
 				if (invitationId>0){
-					return this.sendInvitionIcalLink(username, message, baseurl, email, subject, invitation.getHash(), appointMentId, createdBy);
-				} else {
-					return "Sys - Error";
+					 this.sendInvitionIcalLink(username, message, baseurl, email, subject, invitation.getHash(), appointMentId, createdBy);
+					 return invitationId;
 				}
 			}
 		} catch (HibernateException ex) {
@@ -329,6 +359,38 @@ public class Invitationmanagement {
 			log.error("sendInvitationLink",err);
 		}
 		return null;
+	}
+	
+	/**
+	 * @author becherer
+	 * @param invId
+	 * 
+	 */
+	public Invitations getInvitationbyId(Long invId){
+		log.debug("getInvitationbyId");
+		
+		
+		try{
+			String hql = "select invi from Invitations invi " +
+			"WHERE invi.deleted != :deleted " +
+			"AND invi.invitations_id = :invid";
+	
+			Object idf = HibernateUtil.createSession();
+			Session session = HibernateUtil.getSession();
+			Transaction tx = session.beginTransaction();
+			Query query = session.createQuery(hql);
+			query.setBoolean("deleted", true);
+			query.setLong("invid",invId);
+	
+			Invitations inv = (Invitations) query.uniqueResult();
+			tx.commit();
+			HibernateUtil.closeSession(idf);
+	
+			return inv;
+		}catch(Exception e){
+			log.error("getInvitationsbyId : " + e.getMessage());
+			return null;
+		}
 	}
 	
 	public Object getInvitationByHashCode(String hashCode, boolean hidePass) {

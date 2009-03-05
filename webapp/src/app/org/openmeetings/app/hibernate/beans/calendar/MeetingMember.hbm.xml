@@ -13,6 +13,7 @@
     <property name="memberStatus" type="string" column="member_status"/>
     <property name="appointmentStatus" type="string" column="appointment_status"/>
     <many-to-one outer-join="true" not-null="false" column="appointment_id" lazy="false" cascade="none" name="appointment" class="org.openmeetings.app.hibernate.beans.calendar.Appointment"/>
+    <many-to-one outer-join="true" not-null="false" column="invitation" lazy="false" cascade="none" name="invitation" class="org.openmeetings.app.hibernate.beans.invitation.Invitations"/>
     <property name="starttime" type="java.util.Date" column="starttime"/>
     <property name="updatetime" type="java.util.Date" column="updatetime"/>
     <property name="deleted" type="boolean" column="deleted"/>
