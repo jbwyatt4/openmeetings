@@ -9,7 +9,7 @@
 		<!-- public rooms -->
 		<tabs>
     		<tabpane text="Public Meetings" >
-    		<view padding="0">
+    		<view>
       			<handler name="ontabcontentleave">
 			canvas._chatcontentRPC = null;
 			canvas.thishib.removeClientFromChatNotification.doCall();
