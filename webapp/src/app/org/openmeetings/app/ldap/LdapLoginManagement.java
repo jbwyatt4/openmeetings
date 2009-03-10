@@ -40,6 +40,8 @@ public class LdapLoginManagement {
 	public static final String CONFIGKEY_LDAP_LOGIN_SCOPE = "ldap_login_base";
 	public static final String CONFIGKEY_LDAP_SEARCH_SCOPE = "ldap_search_base";
 	
+	public static final String CONFIGKEY_LDAP_FIELDNAME_USER_PRINCIPAL = "field_user_principal";
+	
 	
 	// LDAP KEYS
 	public static final String LDAP_KEY_LASTNAME = "sn";
@@ -102,7 +104,6 @@ public class LdapLoginManagement {
 		log.debug("LdapLoginmanagement.getLdapConfigData");
 		
 		// Retrieving Path to Config
-		//TODO : make configEntry configurable in Install Routiene
 		Configuration configVal = Configurationmanagement.getInstance().getConfKey(3, "ldap_config_path");
 		
 		if(configVal == null){
@@ -179,8 +180,14 @@ public class LdapLoginManagement {
 		// SearchScope for retrievment of userdata
 		String ldap_search_scope = configData.get(CONFIGKEY_LDAP_SEARCH_SCOPE);
 		
+		// FieldName for Users's Prinicipal Name
+		String ldap_fieldname_user_principal = configData.get(CONFIGKEY_LDAP_FIELDNAME_USER_PRINCIPAL);
+		
+		
 		// Filter for Search of UserData
-		String ldap_search_filter = "(userPrincipalName=" + user + ")";
+		String ldap_search_filter = "(" + ldap_fieldname_user_principal + "=" + user + ")";
+		
+		log.debug("Searching userdata with LDAP Search Filter :" + ldap_search_filter);
 		
 		// replace : -> in config = are replaced by : to be able to build valid key=value pairs
 		ldap_login_base = ldap_login_base.replaceAll(":", "=");
@@ -223,7 +230,7 @@ public class LdapLoginManagement {
 			attributes.add(LDAP_KEY_ZIP); // ZIP
 			attributes.add(LDAP_KEY_COUNTRY); // Country
 			attributes.add(LDAP_KEY_TOWN); // Town
-			attributes.add(LDAP_KEY_PHONE); // Town
+			attributes.add(LDAP_KEY_PHONE); // Phone
 			
 			
 			Vector<HashMap<String, String>> result = lAuth.getData(ldap_search_scope, ldap_search_filter, attributes);
@@ -302,6 +309,7 @@ public class LdapLoginManagement {
 			}
 			
 			// Update password (could have changed in LDAP)
+			
 			u.setPassword(passwd);
 			try{
 				Usermanagement.getInstance().updateUserObject(u,true );
