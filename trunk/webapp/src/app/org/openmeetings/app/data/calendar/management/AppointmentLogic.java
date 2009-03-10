@@ -165,13 +165,13 @@ public class AppointmentLogic {
 	 */
 	public Long updateAppointment(Long appointmentId, String appointmentName, String appointmentDescription, 
 			Date appointmentstart, Date appointmentend,
-			Boolean isDaily, Boolean isWeekly, Boolean isMonthly, Boolean isYearly, Long categoryId, Long remind, List mmClient ){
+			Boolean isDaily, Boolean isWeekly, Boolean isMonthly, Boolean isYearly, Long categoryId, Long remind, List mmClient , Long user_id){
 		
 		try {
 			return AppointmentDaoImpl.getInstance().updateAppointment(appointmentId, 
 					appointmentName, appointmentDescription, appointmentstart, 
 					appointmentend, isDaily, isWeekly, isMonthly, isYearly, categoryId, remind, 
-					mmClient);
+					mmClient, user_id);
 		} catch (Exception err) {
 			log.error("[updateAppointment]",err);
 		}

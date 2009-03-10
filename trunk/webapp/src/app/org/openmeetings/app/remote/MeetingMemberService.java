@@ -67,6 +67,7 @@ public class MeetingMemberService {
 	}
 	
 	public Long deleteMeetingMember(String SID,Long meetingMemberId){
+		log.debug("MeetingMemberService.deleteMeetingmember");
 		
 		try{
 			
@@ -74,7 +75,7 @@ public class MeetingMemberService {
 	        Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
 	        if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
 					        	
-	        return	 MeetingMemberLogic.getInstance().deleteMeetingMember(meetingMemberId);
+	        return	 MeetingMemberLogic.getInstance().deleteMeetingMember(meetingMemberId, users_id);
 	        }
 		} catch (Exception err) {
 			log.error("[deleteMeetingMember]",err);

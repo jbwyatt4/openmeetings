@@ -8,9 +8,11 @@ import org.slf4j.Logger;
 import org.red5.logging.Red5LoggerFactory;
 import org.openmeetings.app.data.calendar.daos.MeetingMemberDaoImpl;
 import org.openmeetings.app.data.conference.Invitationmanagement;
+import org.openmeetings.app.data.user.Usermanagement;
 import org.openmeetings.app.hibernate.beans.calendar.Appointment;
 import org.openmeetings.app.hibernate.beans.calendar.MeetingMember;
 import org.openmeetings.app.hibernate.beans.invitation.Invitations;
+import org.openmeetings.app.hibernate.beans.user.Users;
 
 public class MeetingMemberLogic {
 	
@@ -25,6 +27,20 @@ public class MeetingMemberLogic {
 		return instance;
 	}
 	
+	/**
+	 * @author becherer
+	 * @param firstname
+	 * @param lastname
+	 * @param memberStatus
+	 * @param appointmentStatus
+	 * @param appointmentId
+	 * @param userid
+	 * @param email
+	 * @param baseUrl
+	 * @param meeting_organizer
+	 * @return
+	 */
+	//------------------------------------------------------------------------------------------------------------------------------
 	public Long addMeetingMember(String firstname, String lastname, String memberStatus,
 			String appointmentStatus, Long appointmentId, Long userid, String email, String baseUrl, Long meeting_organizer){
 		
@@ -102,10 +118,29 @@ public class MeetingMemberLogic {
 		}
 		return null;
 	}
+	//------------------------------------------------------------------------------------------------------------------------------
 	
+	
+	
+	/**
+	 * 
+	 */
+	//------------------------------------------------------------------------------------------------------------------------------
 	public Long updateMeetingMember(Long meetingMemberId, String firstname, String lastname, 
 			 String memberStatus, String appointmentStatus, 
 			 Long appointmentId, Long userid, String email ){
+		
+		log.debug("MeetingMemberLogic.updateMeetingMember");
+		
+		MeetingMember member = MeetingMemberDaoImpl.getInstance().getMeetingMemberById(meetingMemberId);
+		
+		if(member == null){
+			log.error("Couldnt retrieve Member for ID " + meetingMemberId);
+			return null;
+		}
+		
+		Invitations invi = member.getInvitation();
+		
 		
 		try {
 			return MeetingMemberDaoImpl.getInstance().updateMeetingMember(meetingMemberId,
@@ -115,6 +150,8 @@ public class MeetingMemberLogic {
 		}
 		return null;
 	}
+	//------------------------------------------------------------------------------------------------------------------------------
+	
 	
 	/**
 	 * @author becherer
@@ -145,10 +182,12 @@ public class MeetingMemberLogic {
 	/**
 	 * 
 	 * @param meetingMemberId
+	 * @param users_id
 	 * @return
 	 */
-	public Long deleteMeetingMember(Long meetingMemberId ){
-		log.debug("meetingMemberLogic.deleteMeetingMember");
+	//--------------------------------------------------------------------------------------------
+	public Long deleteMeetingMember(Long meetingMemberId , Long users_id){
+		log.debug("meetingMemberLogic.deleteMeetingMember : " + meetingMemberId);
 		
 		try {
 			
@@ -159,12 +198,30 @@ public class MeetingMemberLogic {
 				return null;
 			}
 			
-			Long returnValue =  MeetingMemberDaoImpl.getInstance().deleteMeetingMember(meetingMemberId);
-			
 			Appointment point = member.getAppointment();
+			point = AppointmentLogic.getInstance().getAppointMentById(point.getAppointmentId());
+			
+			if(point == null){
+				log.error("could not retrieve appointment!");
+				return null;
+			}
+			
+			Users user = Usermanagement.getInstance().getUserById(users_id);
+			
+			if(user == null){
+				log.error("could not retrieve user!");
+				return null;
+			}
+			
+			log.debug("before sending cancelMail");
 			
 			// cancel invitation
-			Invitationmanagement.getInstance().cancelInvitation(point, member);
+			Invitationmanagement.getInstance().cancelInvitation(point, member, user.getAdresses().getEmail());
+			
+			log.debug("after sending cancelmail");
+			
+			
+			Long returnValue =  MeetingMemberDaoImpl.getInstance().deleteMeetingMember(meetingMemberId);
 			
 			return returnValue;
 			
@@ -173,8 +230,9 @@ public class MeetingMemberLogic {
 		}
 		return null;
 	}
-	
-/*	public List<Appointment> getAppointmentByRange(Long userId ,Date starttime, Date endtime){
+	//--------------------------------------------------------------------------------------------
+
+	/*	public List<Appointment> getAppointmentByRange(Long userId ,Date starttime, Date endtime){
 		try {	
 			return AppointmentDaoImpl.getInstance().getAppointmentsByRange(userId, starttime, endtime);
 		}catch(Exception err){

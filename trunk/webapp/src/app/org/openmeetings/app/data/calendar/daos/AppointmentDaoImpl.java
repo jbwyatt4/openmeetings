@@ -15,6 +15,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 import org.openmeetings.app.data.basic.Configurationmanagement;
+import org.openmeetings.app.data.calendar.management.MeetingMemberLogic;
 import org.openmeetings.app.data.user.Usermanagement;
 import org.openmeetings.app.data.user.dao.UsersDaoImpl;
 import org.openmeetings.app.hibernate.beans.calendar.Appointment;
@@ -139,9 +140,27 @@ public class AppointmentDaoImpl {
 		return null;
 	}
 	
+	/**
+	 * 
+	 * @param appointmentId
+	 * @param appointmentName
+	 * @param appointmentDescription
+	 * @param appointmentstart
+	 * @param appointmentend
+	 * @param isDaily
+	 * @param isWeekly
+	 * @param isMonthly
+	 * @param isYearly
+	 * @param categoryId
+	 * @param remind
+	 * @param mmClient
+	 * @param users_id
+	 * @return
+	 */
+	//----------------------------------------------------------------------------------------------------------
 	public Long updateAppointment(Long appointmentId, String appointmentName, String appointmentDescription, 
 			Date appointmentstart, Date appointmentend,
-			Boolean isDaily, Boolean isWeekly, Boolean isMonthly, Boolean isYearly, Long categoryId, Long remind, List mmClient) {
+			Boolean isDaily, Boolean isWeekly, Boolean isMonthly, Boolean isYearly, Long categoryId, Long remind, List mmClient, Long users_id) {
 		
 			log.debug("AppointmentDAOImpl.updateAppointment");
 		try {
@@ -175,12 +194,11 @@ public class AppointmentDaoImpl {
 		    List<MeetingMember> meetingsRemoteMembers = MeetingMemberDaoImpl.getInstance().getMeetingMemberByAppointmentId(ap.getAppointmentId());
 		    
 		    
-		    //LšschObjekte ermitteln und entfernen
+		    //to remove
 		    for (MeetingMember memberRemote : meetingsRemoteMembers) {
 		    	
 	    		boolean found = false;
 		    	
-	    		
 	    		if(mmClient != null){
 	    			for (int i = 0; i < mmClient.size(); i++) {
 	    				Map clientMemeber = (Map) mmClient.get(i);
@@ -197,11 +215,12 @@ public class AppointmentDaoImpl {
 		    	if (!found) {
 		    		
 					//Not in List in client delete it
-		    		MeetingMemberDaoImpl.getInstance().deleteMeetingMember(memberRemote.getMeetingMemberId());
+		    		MeetingMemberLogic.getInstance().deleteMeetingMember(memberRemote.getMeetingMemberId(), users_id);
+		    		//MeetingMemberDaoImpl.getInstance().deleteMeetingMember(memberRemote.getMeetingMemberId());
 		    	}
 		    }
 		    
-		    //Items ermitteln die hinzugefŸgt werden
+		    //add items
 		    if(mmClient !=null){
 		    	
 			    for (int i = 0; i < mmClient.size(); i++) {
@@ -247,6 +266,7 @@ public class AppointmentDaoImpl {
 		return null;
 		
 	}
+	//----------------------------------------------------------------------------------------------------------
 	
 	public Long deleteAppointement(Long appointmentId) {
 		try {

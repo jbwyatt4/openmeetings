@@ -15,6 +15,7 @@ import org.hibernate.Transaction;
 import org.openmeetings.app.templates.InvitationTemplate;
 import org.openmeetings.app.data.basic.AuthLevelmanagement;
 import org.openmeetings.app.data.calendar.management.AppointmentLogic;
+import org.openmeetings.app.data.calendar.management.MeetingMemberLogic;
 import org.openmeetings.app.data.conference.Roommanagement;
 import org.openmeetings.app.data.user.Usermanagement;
 import org.openmeetings.app.data.user.dao.UsersDaoImpl;
@@ -35,8 +36,8 @@ import org.openmeetings.utils.mail.MailHandler;
  *
  */
 public class Invitationmanagement {
-
-	private static final Logger log = Red5LoggerFactory.getLogger(Invitationmanagement.class);
+	
+	private static final Logger log = Red5LoggerFactory.getLogger(Invitationmanagement.class, "openmeetings");
 
 	private static Invitationmanagement instance;
 
@@ -142,17 +143,27 @@ public class Invitationmanagement {
 	 * @param member
 	 */
 	//-----------------------------------------------------------------------------------------------
-	public void cancelInvitation(Appointment ment, MeetingMember member){
+	public void cancelInvitation(Appointment ment, MeetingMember member, String canceling_user){
+		
 		log.debug("cancelInvitation");
 		
-		// checking reminderType
-		if(ment.getRemind().getTypId() == 0){
-			// no reminder
+		
+		if(ment.getRemind() == null ){
+			log.error("Appointment " + ment.getAppointmentName() + " has no ReminderType!");
+			return;
 		}
-		else if(ment.getRemind().getTypId() == 1){
-			// simple mail
+		
+		log.debug("Remindertype : " + ment.getRemind().getTypId());
+		
+		// checking reminderType
+		if(ment.getRemind().getTypId() == 1){
+			log.debug("no remindertype defined -> no cancel of invitation");
 		}
 		else if(ment.getRemind().getTypId() == 2){
+			log.debug("ReminderType simple mail -> sending simple mail...");
+			sendInvitationCancelMail(member.getEmail(), member.getAppointment(), canceling_user);
+		}
+		else if(ment.getRemind().getTypId() == 3){
 			// iCal notification
 		}
 		
@@ -274,6 +285,37 @@ public class Invitationmanagement {
 		}
 		return null;
 	}
+	
+	
+	/**
+	 * 
+	 * @param email
+	 * @param point
+	 * @param cancelling_person
+	 * @return
+	 */
+	//--------------------------------------------------------------------------------------------------------------
+	private String sendInvitationCancelMail(String email, Appointment point, String cancelling_person){
+		log.debug("sendInvitationCancelmail");
+		
+		String subject = "Cancelled OpenMeetings Appointment " + point.getAppointmentName();
+		
+		String message = "<html><body>Your Appointment " + point.getAppointmentName() + " has been cancelled by " + cancelling_person;
+		message += "<br><br>";
+		message += "Appointment : " + point.getAppointmentName() + "<br>";
+		message += "Start Time : " + point.getAppointmentStarttime() + "<br>";
+		message += "End Time : " + point.getAppointmentEndtime() + "<br>";
+		message += "</body></html>";
+		
+		try{
+			 return MailHandler.sendMail(email, subject, message);
+		}catch(Exception e){
+			log.error("sendInvitationCancelmail : " + e.getMessage());
+		}
+		
+		return null;
+	}
+	//--------------------------------------------------------------------------------------------------------------
 	
 	/**
 	 * 

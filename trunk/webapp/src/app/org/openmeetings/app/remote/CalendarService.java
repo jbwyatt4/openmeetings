@@ -147,7 +147,7 @@ public class CalendarService {
 	        	
 	        	return AppointmentLogic.getInstance().updateAppointment(appointmentId, appointmentName, 
 	        			appointmentDescription, appointmentstart, appointmentend, isDaily, isWeekly, isMonthly, 
-	        			isYearly, categoryId, remind, mmClient);
+	        			isYearly, categoryId, remind, mmClient, users_id);
 	        }
 		} catch (Exception err) {
 			log.error("[updateAppointment]",err);
