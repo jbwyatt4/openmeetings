@@ -25,6 +25,7 @@ import net.fortuna.ical4j.model.property.Description;
 import net.fortuna.ical4j.model.property.Method;
 import net.fortuna.ical4j.model.property.Organizer;
 import net.fortuna.ical4j.model.property.ProdId;
+import net.fortuna.ical4j.model.property.Sequence;
 import net.fortuna.ical4j.model.property.Uid;
 import net.fortuna.ical4j.model.property.Version;
 import net.fortuna.ical4j.util.UidGenerator;
@@ -106,6 +107,7 @@ public class IcalHandler {
 		meeting.getProperties().add(tz.getTimeZoneId());
 		
 		meeting.getProperties().add(new Description(description));
+		meeting.getProperties().add(new Sequence(1));
 		
 		// generate unique identifier (if not submitted)
 		Uid ui = null;

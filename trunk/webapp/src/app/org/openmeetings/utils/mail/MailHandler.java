@@ -199,7 +199,6 @@ public class MailHandler {
 	public static void sendIcalMessage(String recipients, String subject, byte[] iCalMimeBody, String htmlBody) throws Exception{
 		log.debug("sendIcalMessage");
 		
-		log.debug("HTMLBODY : " + htmlBody);
 		
 		// Evaluating Configuration Data
 		String smtpServer = Configurationmanagement.getInstance().getConfKey(3, "smtp_server").getConf_value();
