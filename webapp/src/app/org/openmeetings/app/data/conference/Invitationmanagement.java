@@ -68,6 +68,7 @@ public class Invitationmanagement {
 	 * @param createdBy
 	 * @return
 	 */
+	//---------------------------------------------------------------------------------------------------------
 	public Long addInvitationLink(Long user_level, String username, String message,
 			String baseurl, String email, String subject, Long rooms_id, String conferencedomain,
 			Boolean isPasswordProtected, String invitationpass, Integer valid,
@@ -135,7 +136,7 @@ public class Invitationmanagement {
 		}
 		return null;
 	}
-	
+	//----------------------------------------------------------------------------------------------------------------
 	
 	/**
 	 * @author becherer
@@ -143,10 +144,19 @@ public class Invitationmanagement {
 	 * @param member
 	 */
 	//-----------------------------------------------------------------------------------------------
-	public void cancelInvitation(Appointment ment, MeetingMember member, String canceling_user){
+	public void cancelInvitation(Appointment ment, MeetingMember member,Long canceling_user_id){
 		
 		log.debug("cancelInvitation");
 		
+		
+		Users user;
+		
+		try{
+			user= Usermanagement.getInstance().getUserById(canceling_user_id);
+		}catch(Exception e){
+			log.error("Cancelling user cant be retrieved");
+			return;
+		}
 		
 		if(ment.getRemind() == null ){
 			log.error("Appointment " + ment.getAppointmentName() + " has no ReminderType!");
@@ -161,10 +171,14 @@ public class Invitationmanagement {
 		}
 		else if(ment.getRemind().getTypId() == 2){
 			log.debug("ReminderType simple mail -> sending simple mail...");
-			sendInvitationCancelMail(member.getEmail(), member.getAppointment(), canceling_user);
+			sendInvitationCancelMail(member.getEmail(), member.getAppointment(), user.getAdresses().getEmail());
 		}
 		else if(ment.getRemind().getTypId() == 3){
-			// iCal notification
+			try{
+				sendInvitationIcalCancelMail(member.getEmail(), member.getFirstname() + " " + member.getLastname(), ment, canceling_user_id);
+			}catch(Exception e){
+				log.error("Error sending IcalCancelMail for User " + member.getEmail() + " : " + e.getMessage());
+			}
 		}
 		
 		// Deleting invitation
@@ -312,6 +326,62 @@ public class Invitationmanagement {
 		}catch(Exception e){
 			log.error("sendInvitationCancelmail : " + e.getMessage());
 		}
+		
+		return null;
+	}
+	//--------------------------------------------------------------------------------------------------------------
+	
+	/**
+	 * 
+	 * @param email
+	 * @param point
+	 * @param cancelling_person
+	 * @return
+	 */
+	//--------------------------------------------------------------------------------------------------------------
+	private String sendInvitationIcalCancelMail(String email, String userName, Appointment point, Long organizer_userId) throws Exception{
+		log.debug("sendInvitationIcalCancelMail");
+		
+		
+		// Defining Organizer
+		Users user = Usermanagement.getInstance().getUserById(organizer_userId);
+		
+		String subject = "Cancelled OpenMeetings Appointment " + point.getAppointmentName();
+		
+		String message = "<html><body>Your Appointment " + point.getAppointmentName() + " has been cancelled by " + user.getAdresses().getEmail();
+		message += "<br><br>";
+		message += "Appointment : " + point.getAppointmentName() + "<br>";
+		message += "Start Time : " + point.getAppointmentStarttime() + "<br>";
+		message += "End Time : " + point.getAppointmentEndtime() + "<br>";
+		message += "</body></html>";
+		
+		IcalHandler handler = new IcalHandler(IcalHandler.ICAL_METHOD_CANCEL);
+		
+		// refresh appointment
+		point = AppointmentLogic.getInstance().getAppointMentById(point.getAppointmentId());
+		
+		// Transforming Meeting Members
+		
+		HashMap<String, String> dusselInDerHashMap = handler.getAttendeeData(email, userName);
+		
+		Vector<HashMap<String, String>> atts = new Vector<HashMap<String,String>>();
+		atts.add(dusselInDerHashMap);
+		
+	
+		HashMap<String, String> oberDussel = handler.getAttendeeData(user.getAdresses().getEmail(), user.getLogin());
+		
+		GregorianCalendar start = new GregorianCalendar();
+		start.setTime(point.getAppointmentStarttime());
+		
+		GregorianCalendar end = new GregorianCalendar();
+		end.setTime(point.getAppointmentEndtime());
+		
+		String meetingId = handler.addNewMeeting(start, end, point.getAppointmentName(), atts, "Canceled OpenMeetings Appointment : " + point.getAppointmentName(), oberDussel, point.getIcalId());
+		
+		
+		log.debug(handler.getICalDataAsString());
+		
+		MailHandler.sendIcalMessage(email, subject, handler.getIcalAsByteArray(), message);
 		
 		return null;
 	}

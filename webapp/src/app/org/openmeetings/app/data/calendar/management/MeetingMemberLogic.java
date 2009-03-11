@@ -216,7 +216,7 @@ public class MeetingMemberLogic {
 			log.debug("before sending cancelMail");
 			
 			// cancel invitation
-			Invitationmanagement.getInstance().cancelInvitation(point, member, user.getAdresses().getEmail());
+			Invitationmanagement.getInstance().cancelInvitation(point, member, users_id);
 			
 			log.debug("after sending cancelmail");
 			
