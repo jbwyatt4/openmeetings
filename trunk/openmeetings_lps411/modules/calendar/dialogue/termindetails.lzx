@@ -42,8 +42,8 @@
 						}
 				</handler> 
 				<handler name="oninit">
-					this.addItem(canvas.getLabelName(568),"0");
-					this.selectItem("0");
+					//this.addItem(canvas.getLabelName(568),"0");
+					this.selectItemAt(0);
 					this.getAppointmentCategoryList();	
 					this.getAppointmentReminderTypList();			
 				</handler>
@@ -347,7 +347,7 @@
 				this._kategoryedit.selectItemAt(0); 
 				this._erinnerungedit.selectItemAt(0); 
 				this._locationedit.setAttribute('text', "");
-				this._repetitionselect.selectItemAt(0);
+				this._repetitionselect.selectItemAt(1);
 				//this._guestedit.setAttribute('text',"");
 				this._titeledit.setAttribute('text', "Neuer Termin");
 				this._komentar.setAttribute('text', "");
