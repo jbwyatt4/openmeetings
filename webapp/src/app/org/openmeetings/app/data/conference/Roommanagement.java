@@ -958,6 +958,7 @@ public class Roommanagement {
 	 * @param r
 	 */
 	public Long deleteRoom(Rooms r){
+		log.debug("deleteRoom");
 		try {			
 			r.setDeleted("true");
 			r.setUpdatetime(new Date());

@@ -34,7 +34,7 @@ public class MeetingMemberService {
 	        Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
 	        if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
 					        	
-	        Long id = 	 MeetingMemberLogic.getInstance().addMeetingMember( firstname,  lastname,  memberStatus,
+	        Long id = MeetingMemberLogic.getInstance().addMeetingMember( firstname,  lastname,  memberStatus,
 	    			 appointmentStatus,  appointmentId,  userid,  email, baseUrl, users_id);
 	        
 	        log.debug("addMeetingmember : newId : " + id);

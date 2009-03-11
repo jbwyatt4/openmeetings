@@ -77,7 +77,24 @@ public class AppointmentDaoImpl {
 	}
 	
 	
-	
+	/**
+	 * 
+	 * @param appointmentName
+	 * @param userId
+	 * @param appointmentLocation
+	 * @param appointmentDescription
+	 * @param appointmentstart
+	 * @param appointmentend
+	 * @param isDaily
+	 * @param isWeekly
+	 * @param isMonthly
+	 * @param isYearly
+	 * @param categoryId
+	 * @param remind
+	 * @param room
+	 * @return
+	 */
+	//----------------------------------------------------------------------------------------------------------------------------
 	public Long addAppointment(String appointmentName, Long userId, String appointmentLocation,String appointmentDescription, 
 			Date appointmentstart, Date appointmentend, 
 			Boolean isDaily, Boolean isWeekly, Boolean isMonthly, Boolean isYearly, Long categoryId, Long remind, Rooms room) {
@@ -118,6 +135,7 @@ public class AppointmentDaoImpl {
 		}
 		return null;
 	}
+	//----------------------------------------------------------------------------------------------------------------------------
 	
 	public Long updateAppointment(Appointment appointment) {
 		if (appointment.getAppointmentId() > 0) {
@@ -269,6 +287,7 @@ public class AppointmentDaoImpl {
 	//----------------------------------------------------------------------------------------------------------
 	
 	public Long deleteAppointement(Long appointmentId) {
+		log.debug("deleteAppointMent");
 		try {
 			
 			Appointment app = this.getAppointmentById(appointmentId);

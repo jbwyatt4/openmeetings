@@ -54,6 +54,10 @@ public class MeetingMemberLogic {
 			
 			Long invitationId = null;
 			
+			if(point.getRemind() == null){
+				log.error("Appointment has no assigned ReminderType!");
+				return null;
+			}
 			
 			if(point.getRemind().getTypId() == 1){
 				log.debug("no reminder required");
