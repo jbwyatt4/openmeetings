@@ -159,7 +159,7 @@ public class CalendarService {
 	
 	public Long deleteAppointment(String SID,Long appointmentId){
 		
-		log.debug("deleteAppointment");
+		log.debug("deleteAppointment : " + appointmentId);
 		
 		try{
 			
@@ -170,8 +170,9 @@ public class CalendarService {
 	        	Appointment app = AppointmentLogic.getInstance().getAppointMentById(appointmentId);
 	        	Roommanagement.getInstance().deleteRoom(app.getRoom());
 	        	
-	        	return AppointmentLogic.getInstance().deleteAppointment(appointmentId);
+	        	return AppointmentLogic.getInstance().deleteAppointment(appointmentId, users_id);
 	        }
+	        
 		} catch (Exception err) {
 			log.error("[deleteAppointment]",err);
 		}

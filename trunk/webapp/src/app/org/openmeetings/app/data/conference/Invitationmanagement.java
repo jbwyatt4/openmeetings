@@ -181,12 +181,13 @@ public class Invitationmanagement {
 			}
 		}
 		
-		// Deleting invitation
+		// Deleting invitation, if exists
 		Invitations inv = member.getInvitation();
-		inv.setDeleted("true");
 		
-		updateInvitation(inv);
-		
+		if(inv != null){
+			inv.setDeleted("true");
+			updateInvitation(inv);
+		}
 		
 	}
 	//-----------------------------------------------------------------------------------------------

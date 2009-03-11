@@ -9,9 +9,11 @@ import org.slf4j.Logger;
 import org.red5.logging.Red5LoggerFactory;
 import org.openmeetings.app.data.calendar.daos.AppointmentDaoImpl;
 import org.openmeetings.app.data.calendar.daos.AppointmentReminderTypDaoImpl;
+import org.openmeetings.app.data.calendar.daos.MeetingMemberDaoImpl;
 import org.openmeetings.app.data.conference.Roommanagement;
 import org.openmeetings.app.hibernate.beans.calendar.Appointment;
 import org.openmeetings.app.hibernate.beans.calendar.AppointmentReminderTyps;
+import org.openmeetings.app.hibernate.beans.calendar.MeetingMember;
 import org.openmeetings.app.hibernate.beans.rooms.Rooms;
 
 
@@ -103,6 +105,7 @@ public class AppointmentLogic {
 				true);				// Appointment
 		
 		log.debug("Appointmentlogic.saveAppointment : Room - " + room_id);
+		log.debug("Appointmentlogic.saveAppointment : Reminder - " + remind);
 		
 		Rooms room = Roommanagement.getInstance().getRoomById(room_id);
 		
@@ -123,16 +126,55 @@ public class AppointmentLogic {
 		return null;
 	}
 	
-	public Long deleteAppointment(Long appointmentId){
+	/**
+	 * 
+	 * @param appointmentId
+	 * @return
+	 */
+	//-------------------------------------------------------------------------------------
+	public Long deleteAppointment(Long appointmentId, Long users_id){
+		log.debug("deleteAppointment : " + appointmentId);
+		
 		try{
-		AppointmentDaoImpl.getInstance().deleteAppointement(appointmentId);
+			
+			Appointment point = getAppointMentById(appointmentId);
+			
+			if(point == null){
+				log.error("No appointment found for ID " + appointmentId);
+				return null;
+			}
+			
+			Rooms room = point.getRoom();
+			
+			// Deleting/Notifing Meetingmembers
+			List<MeetingMember> members = MeetingMemberDaoImpl.getInstance().getMeetingMemberByAppointmentId(appointmentId);
+		    
+			if(members == null)
+				log.debug("Appointment " + point.getAppointmentName() + " has no meeting members");
+			
+			if(members != null){
+				for(int i = 0; i < members.size(); i++){
+					log.debug("deleting member " + members.get(i).getEmail());
+					MeetingMemberLogic.getInstance().deleteMeetingMember(members.get(i).getMeetingMemberId(), users_id);
+				}
+			}
+			
+			// Deleting Appointment intself
+			AppointmentDaoImpl.getInstance().deleteAppointement(appointmentId);
+		
+			// Deleting Room
+			Roommanagement.getInstance().deleteRoom(room);
+			
 		return appointmentId;
+		
 		}catch(Exception err){
-		log.error("[deleteAppointment]",err);	
+			log.error("[deleteAppointment]",err);	
 		}
+		
 		return null;
 		
 	}
+	//-------------------------------------------------------------------------------------
 	
 	/**
 	 * Retrieving Appointment by ID
