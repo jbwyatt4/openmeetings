@@ -143,7 +143,6 @@ public class MeetingMemberLogic {
 			return null;
 		}
 		
-		Invitations invi = member.getInvitation();
 		
 		
 		try {
@@ -153,6 +152,31 @@ public class MeetingMemberLogic {
 			log.error("[updateMeetingMember]",err);
 		}
 		return null;
+	}
+	//------------------------------------------------------------------------------------------------------------------------------
+	
+	
+	
+	/**
+	 * 
+	 */
+	//------------------------------------------------------------------------------------------------------------------------------
+	public void updateMeetingMemberNotificatio(MeetingMember member, Long user_id){
+		log.debug("updateMeetingMemberNotification");
+		
+		Appointment ment = AppointmentLogic.getInstance().getAppointMentById(member.getAppointment().getAppointmentId());
+		
+		Long reminderType = ment.getRemind().getTypId();
+		
+		if(reminderType == 1){
+			log.debug("ReminderType none : no notification requirered");
+			return;
+		}
+		else if(reminderType == 2){
+			// Simple mail
+			
+		}
+		
 	}
 	//------------------------------------------------------------------------------------------------------------------------------
 	

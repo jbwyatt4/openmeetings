@@ -77,6 +77,8 @@ public class IcalHandler {
 			icsCalendar.getProperties().add(Method.CANCEL);
 		else
 			icsCalendar.getProperties().add(Method.REQUEST);
+		
+		ICAL_METHOD = methodType;
 			
 	}
 	
@@ -106,7 +108,9 @@ public class IcalHandler {
 		VTimeZone tz = timeZone.getVTimeZone();
 		meeting.getProperties().add(tz.getTimeZoneId());
 		
+		
 		meeting.getProperties().add(new Description(description));
+		
 		meeting.getProperties().add(new Sequence(1));
 		
 		// generate unique identifier (if not submitted)

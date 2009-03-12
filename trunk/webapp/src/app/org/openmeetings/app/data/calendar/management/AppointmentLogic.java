@@ -3,16 +3,14 @@ package org.openmeetings.app.data.calendar.management;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
+
 
 import org.slf4j.Logger;
 import org.red5.logging.Red5LoggerFactory;
 import org.openmeetings.app.data.calendar.daos.AppointmentDaoImpl;
-import org.openmeetings.app.data.calendar.daos.AppointmentReminderTypDaoImpl;
 import org.openmeetings.app.data.calendar.daos.MeetingMemberDaoImpl;
 import org.openmeetings.app.data.conference.Roommanagement;
 import org.openmeetings.app.hibernate.beans.calendar.Appointment;
-import org.openmeetings.app.hibernate.beans.calendar.AppointmentReminderTyps;
 import org.openmeetings.app.hibernate.beans.calendar.MeetingMember;
 import org.openmeetings.app.hibernate.beans.rooms.Rooms;
 
