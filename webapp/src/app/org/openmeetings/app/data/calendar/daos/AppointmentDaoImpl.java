@@ -16,6 +16,7 @@ import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 import org.openmeetings.app.data.basic.Configurationmanagement;
 import org.openmeetings.app.data.calendar.management.MeetingMemberLogic;
+import org.openmeetings.app.data.conference.Invitationmanagement;
 import org.openmeetings.app.data.user.Usermanagement;
 import org.openmeetings.app.data.user.dao.UsersDaoImpl;
 import org.openmeetings.app.hibernate.beans.calendar.Appointment;
@@ -224,6 +225,7 @@ public class AppointmentDaoImpl {
 		    	
 	    				if (memberRemote.getMeetingMemberId().equals(meetingMemberId)) {
 	    					log.debug("AppointMentDAOImpl.updateAppointment  - member " + meetingMemberId + " is to be removed!");
+	    					// Notifying Member for Update
 	    					found = true;
 	    				}
 		    		
@@ -235,6 +237,11 @@ public class AppointmentDaoImpl {
 					//Not in List in client delete it
 		    		MeetingMemberLogic.getInstance().deleteMeetingMember(memberRemote.getMeetingMemberId(), users_id);
 		    		//MeetingMemberDaoImpl.getInstance().deleteMeetingMember(memberRemote.getMeetingMemberId());
+		    	}
+		    	else{
+		    		// Notify member of changes
+		    		Invitationmanagement.getInstance().updateInvitation(ap, memberRemote, users_id);
+		    		
 		    	}
 		    }
 		    

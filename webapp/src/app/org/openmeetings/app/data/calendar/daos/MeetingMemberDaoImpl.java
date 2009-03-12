@@ -131,7 +131,12 @@ public class MeetingMemberDaoImpl {
 		return null;
 	}*/
 	
+	/**
+	 * Updating MeetingMember
+	 */
+	//-------------------------------------------------------------------------------
 	public MeetingMember updateMeetingMember(MeetingMember meetingMember) {
+		log.debug("");
 		if (meetingMember.getMeetingMemberId() > 0) {
 			try {
 				Object idf = HibernateUtil.createSession();
@@ -151,6 +156,7 @@ public class MeetingMemberDaoImpl {
 		}
 		return null;
 	}
+	//-------------------------------------------------------------------------------
 	
 	public Long updateMeetingMember(Long meetingMemberId, String firstname, String lastname, 
 			 String memberStatus, String appointmentStatus, 

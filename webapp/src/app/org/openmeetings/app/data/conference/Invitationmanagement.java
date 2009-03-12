@@ -192,6 +192,53 @@ public class Invitationmanagement {
 	}
 	//-----------------------------------------------------------------------------------------------
 	
+
+	/**
+	 * @author becherer
+	 * @param ment
+	 * @param member
+	 */
+	//-----------------------------------------------------------------------------------------------
+	public void updateInvitation(Appointment ment, MeetingMember member,Long canceling_user_id){
+		
+		log.debug("updateInvitation");
+		
+		Users user;
+		
+		try{
+			user= Usermanagement.getInstance().getUserById(canceling_user_id);
+		}catch(Exception e){
+			log.error("Cancelling user cant be retrieved");
+			return;
+		}
+		
+		if(ment.getRemind() == null ){
+			log.error("Appointment " + ment.getAppointmentName() + " has no ReminderType!");
+			return;
+		}
+		
+		log.debug("Remindertype : " + ment.getRemind().getTypId());
+		
+		// checking reminderType
+		if(ment.getRemind().getTypId() == 1){
+			log.debug("no remindertype defined -> no cancel of invitation");
+		}
+		else if(ment.getRemind().getTypId() == 2){
+			log.debug("ReminderType simple mail -> sending simple mail...");
+			sendInvitationUpdateMail(member.getEmail(), ment, user.getAdresses().getEmail());
+		}
+		else if(ment.getRemind().getTypId() == 3){
+			try{
+				sendInvitationIcalUpdateMail(member.getEmail(), member.getFirstname() + " " + member.getLastname(), ment, canceling_user_id);
+			}catch(Exception e){
+				log.error("Error sending IcalUpdateMail for User " + member.getEmail() + " : " + e.getMessage());
+			}
+		}
+		
+	}
+	//-----------------------------------------------------------------------------------------------
+	
+	
 	/**
 	 * @author o.becherer
 	 * @param user_level
@@ -282,6 +329,10 @@ public class Invitationmanagement {
 
 	//---------------------------------------------------------------------------------------------------------
 	
+	
+	/**
+	 * 
+	 */
 	private String sendInvitionLink(String username, String message, 
 			String baseurl, String email, String subject, String invitationsHash){
 		try {
@@ -326,6 +377,37 @@ public class Invitationmanagement {
 			 return MailHandler.sendMail(email, subject, message);
 		}catch(Exception e){
 			log.error("sendInvitationCancelmail : " + e.getMessage());
+		}
+		
+		return null;
+	}
+	//--------------------------------------------------------------------------------------------------------------
+	
+	/**
+	 * 
+	 * @param email
+	 * @param point
+	 * @param cancelling_person
+	 * @return
+	 */
+	//--------------------------------------------------------------------------------------------------------------
+	private String sendInvitationUpdateMail(String email, Appointment point, String cancelling_person){
+		log.debug("sendInvitationUpdateMail");
+		
+		String subject = "Update of OpenMeetings Appointment " + point.getAppointmentName();
+		
+		String message = "<html><body>Your Appointment " + point.getAppointmentName() + " has been updated by " + cancelling_person;
+		message += "<br><br>";
+		message += "<b>Appointment : " + point.getAppointmentName() + "</b><br>";
+		message += "Descrition : " + point.getAppointmentDescription() + "</br>";
+		message += "Start Time : " + point.getAppointmentStarttime() + "<br>";
+		message += "End Time : " + point.getAppointmentEndtime() + "<br>";
+		message += "</body></html>";
+		
+		try{
+			 return MailHandler.sendMail(email, subject, message);
+		}catch(Exception e){
+			log.error("sendInvitationUpdateMail : " + e.getMessage());
 		}
 		
 		return null;
@@ -387,6 +469,65 @@ public class Invitationmanagement {
 		return null;
 	}
 	//--------------------------------------------------------------------------------------------------------------
+	
+	
+	/**
+	 * 
+	 * @param email
+	 * @param point
+	 * @param cancelling_person
+	 * @return
+	 */
+	//--------------------------------------------------------------------------------------------------------------
+	private String sendInvitationIcalUpdateMail(String email, String userName, Appointment point, Long organizer_userId) throws Exception{
+		log.debug("sendInvitationIcalUpdateMail");
+		
+		
+		// Defining Organizer
+		Users user = Usermanagement.getInstance().getUserById(organizer_userId);
+		
+		String subject = "Update of OpenMeetings Appointment " + point.getAppointmentName();
+		
+		String message = "<html><body>Your Appointment " + point.getAppointmentName() + " has been updated by " + user.getAdresses().getEmail();
+		message += "<br><br>";
+		message += "<b>Appointment : " + point.getAppointmentName() + "</b><br>";
+		message += "Description : " + point.getAppointmentDescription() + "<br>";
+		message += "Start Time : " + point.getAppointmentStarttime() + "<br>";
+		message += "End Time : " + point.getAppointmentEndtime() + "<br>";
+		message += "</body></html>";
+		
+		IcalHandler handler = new IcalHandler(IcalHandler.ICAL_METHOD_REQUEST);
+		
+		// refresh appointment
+		point = AppointmentLogic.getInstance().getAppointMentById(point.getAppointmentId());
+		
+		// Transforming Meeting Members
+		
+		HashMap<String, String> dusselInDerHashMap = handler.getAttendeeData(email, userName);
+		
+		Vector<HashMap<String, String>> atts = new Vector<HashMap<String,String>>();
+		atts.add(dusselInDerHashMap);
+		
+	
+		HashMap<String, String> oberDussel = handler.getAttendeeData(user.getAdresses().getEmail(), user.getLogin());
+		
+		GregorianCalendar start = new GregorianCalendar();
+		start.setTime(point.getAppointmentStarttime());
+		
+		GregorianCalendar end = new GregorianCalendar();
+		end.setTime(point.getAppointmentEndtime());
+		
+		String meetingId = handler.addNewMeeting(start, end, point.getAppointmentName(), atts, "Update of OpenMeetings Appointment : " + point.getAppointmentName(), oberDussel, point.getIcalId());
+		
+		
+		log.debug(handler.getICalDataAsString());
+		
+		MailHandler.sendIcalMessage(email, subject, handler.getIcalAsByteArray(), message);
+		
+		return null;
+	}
+	//--------------------------------------------------------------------------------------------------------------
+	
 	
 	/**
 	 * 
