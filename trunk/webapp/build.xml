@@ -52,6 +52,7 @@
 	<property name="velocity.lib" value="${project.lib}/velocity" />
 	<!-- Apache Batik -->
 	<property name="batik.lib" value="${project.lib}/batik_17" />
+	<property name="java2swf.lib" value="${project.lib}/java2swf" />
 	
 	<!-- compile classpath -->
 	<path id="compile.classpath">
@@ -69,6 +70,7 @@
 		<fileset dir="${velocity.lib}" includes="*.jar"/>
 		<fileset dir="${batik.lib}" includes="*.jar"/>
 		<fileset dir="${ical.lib}" includes="*.jar"/>
+		<fileset dir="${java2swf.lib}" includes="*.jar"/>
 	</path>
 
 	<!-- xDoclet classpath -->
@@ -223,6 +225,8 @@
 			<fileset dir="${database.lib}">
 			</fileset>
 			<fileset dir="${ical.lib}">
+			</fileset>
+			<fileset dir="${java2swf.lib}">
 			</fileset>	
 		</copy>
 		<tstamp/>
