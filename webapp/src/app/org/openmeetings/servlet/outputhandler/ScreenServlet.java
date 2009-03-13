@@ -12,6 +12,7 @@ import http.utils.multipartrequest.ServletMultipartRequest;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -39,8 +40,16 @@ import org.openmeetings.utils.stringhandlers.StringComparer;
 import org.openmeetings.app.remote.red5.ClientListManager;
 import org.openmeetings.app.remote.red5.ScopeApplicationAdapter;
 
+import com.anotherbigidea.flash.movie.ImageUtil;
+import com.anotherbigidea.flash.movie.Movie;
+import com.anotherbigidea.flash.movie.Shape;
+import com.anotherbigidea.flash.readers.MovieBuilder;
+import com.anotherbigidea.flash.readers.SWFReader;
+import com.anotherbigidea.flash.readers.TagParser;
+import com.anotherbigidea.flash.writers.SWFWriter;
 import com.sun.image.codec.jpeg.JPEGCodec;
 import com.sun.image.codec.jpeg.JPEGImageEncoder;
+import com.sun.jmx.snmp.Timestamp;
 
 public class ScreenServlet extends HttpServlet {
 	
@@ -60,7 +69,7 @@ public class ScreenServlet extends HttpServlet {
 		
 			
 			if (httpServletRequest.getContentLength() > 0) {
-			
+				System.out.println("TIMEDEBUG : SERVLET START : "  + new java.sql.Timestamp(System.currentTimeMillis()));
 				System.out.println("service: " + httpServletRequest.getProtocol());
 	
 				String sid = httpServletRequest.getParameter("sid");
@@ -95,7 +104,9 @@ public class ScreenServlet extends HttpServlet {
 				log.debug("record: " + record);
 				
 				ServletMultipartRequest upload = new ServletMultipartRequest(httpServletRequest, 104857600); // max 100 mb
-	
+				
+				System.out.println("TIMEDEBUG : UPLOAD DONE : "  + new java.sql.Timestamp(System.currentTimeMillis()));
+				
 				Long users_id = Sessionmanagement.getInstance().checkSession(sid);
 				Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
 			
@@ -251,8 +262,82 @@ public class ScreenServlet extends HttpServlet {
 		
 	}
 	
+	/**
+	 * 
+	 * @param unzippedImageData
+	 */
+	private void writeSWFFile(String fileName) throws Exception{
+		log.debug("writeSWFFile");
+		
+		 	int[] size = new int[2];
+		 	//--open the JPEG
+	        FileInputStream jpegIn = new FileInputStream( fileName );
+	       
+		 	Shape image =  ImageUtil.shapeForImage( jpegIn, size );
+	        
+	        int width  = size[0];
+	        int height = size[1];
+	        jpegIn.close();
+	        
+	        //--Add a black border to the image shape (origin is in top left corner)
+	        image.defineLineStyle( 1, null );  //default color is black
+	        image.setLineStyle( 1 );
+	        image.line( width, 0 );
+	        image.line( width, height );
+	        image.line( 0, height );
+	        image.line( 0, 0 );        
+	        
+	        String outputFileName = "output.swf";
+	        FileInputStream movieOut = new FileInputStream( outputFileName );
+	        
+	        File file = new File(outputFileName);
+	        
+	        if(!file.exists()){
+		        Movie movie = new Movie( width+10, height+10, 12, 5, null );
+		        movie.appendFrame().placeSymbol( image, 5, 5 );
+		        
+		        movie.write( outputFileName);
+	        }
+	        else{
+	        	//Parse
+	        	MovieBuilder builder = new MovieBuilder();
+	        	
+	        	TagParser parser = new TagParser( builder );
+	        	SWFReader reader = new SWFReader( parser, movieOut );
+	        	
+	        	try{
+	        		reader.readFile();
+	        		movieOut.close();
+	        	}
+	        	catch(Exception e){System.out.println("ERROR : " + e.getMessage());}
+
+	        	Movie movie = builder.getMovie();
+	        	
+	        	movie.appendFrame().placeSymbol( image, 5, 5 );
+		        
+		        movie.write( outputFileName);
+	        	
+	        }
+	}
 	
+	
+	/**
+	 * 
+	 * @param sid
+	 * @param publicSID
+	 * @param room
+	 * @param domain
+	 * @param upload
+	 * @param record
+	 * @param httpServletResponse
+	 * @throws ServletException
+	 * @throws IOException
+	 */
+	//-------------------------------------------------------------------------------------------------------------------------------------
 	private void doJrDeskTopSharing(String sid, String publicSID, String room, String domain, ServletMultipartRequest upload, String record, HttpServletResponse httpServletResponse) throws ServletException,IOException{
+		
+		System.out.println("TIMEDEBUG : START doJrDeskTopSharing : " + new java.sql.Timestamp(System.currentTimeMillis()
+				));
 		
 		try{
 			
@@ -283,6 +368,9 @@ public class ScreenServlet extends HttpServlet {
 						}
 					}
 				}
+				
+				System.out.println("TIMEDEBUG : ClientListManager DONE : "  + new java.sql.Timestamp(System.currentTimeMillis()));
+				
 			
 				if (!userIsInRoom) {
 					log.debug("User already left room, block Screen - Browser Closed");
@@ -324,8 +412,12 @@ public class ScreenServlet extends HttpServlet {
 					}
 					
 					log.debug("#### UploadHandler working_dir: "+ working_dir);
-
+					
 					//Write Data To File
+					
+					System.out.println("TIMEDEBUG : FILEWRITING START : "  + new java.sql.Timestamp(System.currentTimeMillis()));
+					
+					
 					InputStream is = upload.getFileContents("Filedata");
 					ByteArrayOutputStream bos = new ByteArrayOutputStream(); 
 					byte[] buffy = new byte[1024];
@@ -376,16 +468,25 @@ public class ScreenServlet extends HttpServlet {
 							f.delete();
 						}
 					}
-				
-					ImageIO.write(bi,"jpg",new File(completeName + newFileSystemExtName));
-				
+					
+					String fileNameComplete = completeName + newFileSystemExtName;
+					ImageIO.write(bi,"jpg",new File(fileNameComplete));
+					
+					writeSWFFile(fileNameComplete);
+					
+					System.out.println("TIMEDEBUG : FILEWRITING END : " + new java.sql.Timestamp(System.currentTimeMillis()));
 					if (!record.equals("yes")) {
 						LinkedHashMap<String,Object> hs = new LinkedHashMap<String,Object>();
 						hs.put("user", UsersDaoImpl.getInstance().getUser(users_id));
 						hs.put("message", "desktop");
 						hs.put("action", "newSlide");
 						hs.put("fileName", newFileSystemName+"_"+sid+newFileSystemExtName);
+						System.out.println("TIMEDEBUG : sendMessageByRoomAndDomain START : " + new java.sql.Timestamp(System.currentTimeMillis()));
+						
 						ScopeApplicationAdapter.getInstance().sendMessageByRoomAndDomain(Long.valueOf(room).longValue(),hs);
+					
+						System.out.println("TIMEDEBUG : sendMessageByRoomAndDomain END : "  + new java.sql.Timestamp(System.currentTimeMillis()));
+						
 					}
 				}
 
@@ -401,4 +502,5 @@ public class ScreenServlet extends HttpServlet {
 		}
 	}
 
+	//-------------------------------------------------------------------------------------------------------------------------------------
 }

@@ -138,6 +138,7 @@ public class Invitationmanagement {
 	}
 	//----------------------------------------------------------------------------------------------------------------
 	
+	
 	/**
 	 * @author becherer
 	 * @param ment
@@ -147,7 +148,6 @@ public class Invitationmanagement {
 	public void cancelInvitation(Appointment ment, MeetingMember member,Long canceling_user_id){
 		
 		log.debug("cancelInvitation");
-		
 		
 		Users user;
 		
@@ -594,6 +594,20 @@ public class Invitationmanagement {
 		return null;
 	}
 	
+	/**
+	 * 
+	 * @param user_level
+	 * @param username
+	 * @param message
+	 * @param domain
+	 * @param room
+	 * @param roomtype
+	 * @param baseurl
+	 * @param email
+	 * @param subject
+	 * @param room_id
+	 * @return
+	 */
 	public String sendInvitionLink(Long user_level, String username, String message, String domain, String room, 
 			String roomtype, String baseurl, String email, String subject, Long room_id){
 		try {
@@ -647,6 +661,12 @@ public class Invitationmanagement {
 		}
 	}
 	
+	/**
+	 * 
+	 * @param hashCode
+	 * @param hidePass
+	 * @return
+	 */
 	public Object getInvitationByHashCode(String hashCode, boolean hidePass) {
 		try {
 			String hql = "select c from Invitations as c " +
@@ -712,6 +732,10 @@ public class Invitationmanagement {
 		return new Long(-1);
 	}
 	
+	/**
+	 * 
+	 * @param invitation
+	 */
 	private void updateInvitation(Invitations invitation){
 		try {
 			invitation.setUpdatetime(new Date());
@@ -727,7 +751,12 @@ public class Invitationmanagement {
 			log.error("[selectMaxFromUsers] "+ex2);
 		}
 	}
-	
+	/**
+	 * 
+	 * @param hashCode
+	 * @param pass
+	 * @return
+	 */
 	public Object checkInvitationPass(String hashCode, String pass){
 		try {
 			Object obj = this.getInvitationByHashCode(hashCode, false);
