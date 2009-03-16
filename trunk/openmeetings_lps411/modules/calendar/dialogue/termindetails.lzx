@@ -528,7 +528,7 @@
 		    		parent.addMeetingMember.appointmentId = value;	
 		    		//parent.getUserAlleTermineByRange.doCall();
 		    		
-		    		var url = 'http://'+canvas.rtmphostlocal+':'+canvas.red5httpport+'/'+canvas.webAppRootKey; 
+		    		var url = 'http://'+canvas.rtmphostlocal+':'+canvas.red5httpport+'/'+canvas.webAppRootKey + '/main.lzx.lzr=swf8.swf'; 
 			    	parent.parent.baseUrl = url;			
 			    		
 		    		
