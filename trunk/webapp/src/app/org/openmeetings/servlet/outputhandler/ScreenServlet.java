@@ -336,8 +336,6 @@ public class ScreenServlet extends HttpServlet {
 	//-------------------------------------------------------------------------------------------------------------------------------------
 	private void doJrDeskTopSharing(String sid, String publicSID, String room, String domain, ServletMultipartRequest upload, String record, HttpServletResponse httpServletResponse) throws ServletException,IOException{
 		
-		System.out.println("TIMEDEBUG : START doJrDeskTopSharing : " + new java.sql.Timestamp(System.currentTimeMillis()
-				));
 		
 		try{
 			
@@ -369,7 +367,6 @@ public class ScreenServlet extends HttpServlet {
 					}
 				}
 				
-				System.out.println("TIMEDEBUG : ClientListManager DONE : "  + new java.sql.Timestamp(System.currentTimeMillis()));
 				
 			
 				if (!userIsInRoom) {
@@ -415,7 +412,6 @@ public class ScreenServlet extends HttpServlet {
 					
 					//Write Data To File
 					
-					System.out.println("TIMEDEBUG : FILEWRITING START : "  + new java.sql.Timestamp(System.currentTimeMillis()));
 					
 					
 					InputStream is = upload.getFileContents("Filedata");
@@ -472,20 +468,17 @@ public class ScreenServlet extends HttpServlet {
 					String fileNameComplete = completeName + newFileSystemExtName;
 					ImageIO.write(bi,"jpg",new File(fileNameComplete));
 					
-					writeSWFFile(fileNameComplete);
+					//writeSWFFile(fileNameComplete);
 					
-					System.out.println("TIMEDEBUG : FILEWRITING END : " + new java.sql.Timestamp(System.currentTimeMillis()));
 					if (!record.equals("yes")) {
 						LinkedHashMap<String,Object> hs = new LinkedHashMap<String,Object>();
 						hs.put("user", UsersDaoImpl.getInstance().getUser(users_id));
 						hs.put("message", "desktop");
 						hs.put("action", "newSlide");
 						hs.put("fileName", newFileSystemName+"_"+sid+newFileSystemExtName);
-						System.out.println("TIMEDEBUG : sendMessageByRoomAndDomain START : " + new java.sql.Timestamp(System.currentTimeMillis()));
 						
 						ScopeApplicationAdapter.getInstance().sendMessageByRoomAndDomain(Long.valueOf(room).longValue(),hs);
 					
-						System.out.println("TIMEDEBUG : sendMessageByRoomAndDomain END : "  + new java.sql.Timestamp(System.currentTimeMillis()));
 						
 					}
 				}
