@@ -121,6 +121,8 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 	
 	@Override
 	public boolean roomJoin(IClient client, IScope room) {
+		log.debug("roomJoin : ");
+		
 		try {
 			
 			IConnection conn = Red5.getConnectionLocal();
@@ -462,6 +464,7 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 	 */
 
 	public String setModerator(String id) {
+		
 		String returnVal = "setModerator";
 		try {
 			log.debug("*..*setModerator id: " + id);

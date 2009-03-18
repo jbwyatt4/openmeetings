@@ -42,11 +42,11 @@ public class MeetingMemberLogic {
 	 */
 	//------------------------------------------------------------------------------------------------------------------------------
 	public Long addMeetingMember(String firstname, String lastname, String memberStatus,
-			String appointmentStatus, Long appointmentId, Long userid, String email, String baseUrl, Long meeting_organizer){
+			String appointmentStatus, Long appointmentId, Long userid, String email, String baseUrl, Long meeting_organizer, Boolean invitor){
 		
 		try{
 			Long memberId =  MeetingMemberDaoImpl.getInstance().addMeetingMember(firstname,  lastname,  memberStatus,
-				 appointmentStatus,  appointmentId,  userid,  email);
+				 appointmentStatus,  appointmentId,  userid,  email, invitor);
 		
 			
 			// DefaultInvitation

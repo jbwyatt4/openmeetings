@@ -203,7 +203,7 @@ public class MeetingMemberDaoImpl {
 	}
 	
 	public Long addMeetingMember(String firstname, String lastname, String memberStatus,
-			String appointmentStatus, Long appointmentId, Long userid, String email) {
+			String appointmentStatus, Long appointmentId, Long userid, String email, Boolean moderator) {
 		try {
 			
 			MeetingMember gm = new MeetingMember();
@@ -218,6 +218,7 @@ public class MeetingMemberDaoImpl {
 							
 			gm.setStarttime(new Date());
 			gm.setDeleted(false);
+			gm.setInvitor(moderator);
 						
 			Object idf = HibernateUtil.createSession();
 			Session session = HibernateUtil.getSession();

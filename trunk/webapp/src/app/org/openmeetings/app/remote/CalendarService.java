@@ -83,9 +83,9 @@ public class CalendarService {
 	
 	public Long saveAppointment(String SID, String appointmentName, String appointmentLocation,String appointmentDescription, 
 			Date appointmentstart, Date appointmentend, 
-			Boolean isDaily, Boolean isWeekly, Boolean isMonthly, Boolean isYearly, Long categoryId, Long remind, Long roomType){
+			Boolean isDaily, Boolean isWeekly, Boolean isMonthly, Boolean isYearly, Long categoryId, Long remind, Long roomType, String baseUrl){
 		
-		log.debug("saveAppointMent SID:" + SID);
+		log.debug("saveAppointMent SID:" + SID + ", baseUrl : " + baseUrl);
 		
 		try{
 			Long users_id = Sessionmanagement.getInstance().checkSession(SID);
@@ -96,7 +96,7 @@ public class CalendarService {
 					        	
 	        	Long id = AppointmentLogic.getInstance().saveAppointment(appointmentName, users_id, appointmentLocation, 
 	        			appointmentDescription, appointmentstart, appointmentend, isDaily, isWeekly, isMonthly, 
-	        			isYearly, categoryId, remind, roomType);
+	        			isYearly, categoryId, remind, roomType, baseUrl);
 	        	
 	        	return id;
 	        }

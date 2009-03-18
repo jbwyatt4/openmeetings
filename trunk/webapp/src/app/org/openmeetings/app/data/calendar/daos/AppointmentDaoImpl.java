@@ -268,17 +268,10 @@ public class AppointmentDaoImpl {
 		    			//Not In Remote List available
 		    			MeetingMemberDaoImpl.getInstance().addMeetingMember(clientMember.get("firstname").toString(), 
 		    					clientMember.get("lastname").toString(), "0", "0", 
-								appointmentId,Long.valueOf(clientMember.get("userId").toString()).longValue(), clientMember.get("email").toString());
+								appointmentId,Long.valueOf(clientMember.get("userId").toString()).longValue(), clientMember.get("email").toString(), new Boolean(false));
 		    			
 		    		}
-		    		else if (!found) {
-		    			
-		    			//Not In Remote List available extern members
-		    			MeetingMemberDaoImpl.getInstance().addMeetingMember(clientMember.get("firstname").toString(), 
-		    					clientMember.get("lastname").toString(), "0", "0", 
-								appointmentId, null, clientMember.get("email").toString());
-		    			
-		    		}
+		    		
 		   		
 		    	}
 		    }
