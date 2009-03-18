@@ -45,7 +45,11 @@
 					//this.addItem(canvas.getLabelName(568),"0");
 					this.selectItemAt(0);
 					this.getAppointmentCategoryList();	
-					this.getAppointmentReminderTypList();			
+					this.getAppointmentReminderTypList();	
+					
+					var url = 'http://'+canvas.rtmphostlocal+':'+canvas.red5httpport+'/'+canvas.webAppRootKey + '/main.lzx.lzr=swf8.swf'; 
+			    	parent.baseUrl = url;			
+			    			
 				</handler>
 		 	</resetCombobox> 
 		 		
@@ -521,6 +525,7 @@
 				<netparam><method name="getValue">return parent.parent._kategoryatr;</method></netparam>
 				<netparam><method name="getValue">return parent.parent._erinnerungatr;</method></netparam>
 				<netparam><method name="getValue">return parent.parent.roomtype;</method></netparam>
+				<netparam><method name="getValue">return parent.parent.baseUrl;</method></netparam>
 				
 		    	<handler name="ondata" args="value">
 		    		<![CDATA[
@@ -528,9 +533,7 @@
 		    		parent.addMeetingMember.appointmentId = value;	
 		    		//parent.getUserAlleTermineByRange.doCall();
 		    		
-		    		var url = 'http://'+canvas.rtmphostlocal+':'+canvas.red5httpport+'/'+canvas.webAppRootKey + '/main.lzx.lzr=swf8.swf'; 
-			    	parent.parent.baseUrl = url;			
-			    		
+		    			
 		    		
 			    		if ($debug) Debug.write("addUserTermine: ",value);
 			    		
