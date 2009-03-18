@@ -1,6 +1,7 @@
 package org.openmeetings.app.data.calendar.daos;
 
 import java.lang.reflect.Array;
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 import java.util.Iterator;
@@ -478,19 +479,26 @@ public class AppointmentDaoImpl {
 	}
 	
 	
+	/**
+	 * @author becherer
+	 * @param userId
+	 * @return
+	 */
 	public List<Appointment> getTodaysAppoitmentsbyRangeAndMember( Long userId){
 		log.debug("getAppoitmentbyRangeAndMember : UserID - " + userId);	
 		
 		String hql = "SELECT app from MeetingMember mm " + 
 		"JOIN mm.appointment as app " + 
-		"WHERE mm.userid=:userId " + 
-		"AND mm.deleted!=:mm_deleted " + 
-		"AND app.deleted!=:app_deleted "+
-		
+		"WHERE mm.userid= :userId " + 
+		"AND mm.deleted!= :mm_deleted " + 
+		"AND app.deleted!= :app_deleted "+
 		"AND  " +
-		"app.appointmentStarttime > :starttime " + 
+		"app.appointmentStarttime between :starttime " + 
 		"AND " + 
-		"app.appointmentStarttime < :endtime";
+		" :endtime";
+		
+		
+		
 		
 		
 		Date startDate = new Date();
@@ -499,9 +507,16 @@ public class AppointmentDaoImpl {
 		startDate.setSeconds(1);
 		
 		Date endDate = new Date();
-		startDate.setHours(23);
-		startDate.setMinutes(59);
-		startDate.setSeconds(59);
+		endDate.setHours(23);
+		endDate.setMinutes(59);
+		endDate.setSeconds(59);
+		
+		Timestamp startStamp = new Timestamp(startDate.getTime());
+		Timestamp stopStamp = new Timestamp(endDate.getTime());
+		
+		
+		System.out.println("StartTime : " + startDate);
+		System.out.println("EndTime : " + endDate);
 		
 		
 		try{
@@ -513,8 +528,11 @@ public class AppointmentDaoImpl {
 		query.setBoolean("mm_deleted", true);
 		query.setString("app_deleted", "true");
 		query.setLong("userId", userId);
-		query.setDate("starttime", startDate );
-		query.setDate("endtime", endDate );
+		
+		
+		query.setTimestamp("starttime", startStamp);
+		query.setTimestamp("endtime", stopStamp);
+		
 		
 		List<Appointment> listAppoints = query.list();
 		tx.commit();
