@@ -28,6 +28,7 @@ public class MeetingMember {
 	private Date updatetime;
 	private Boolean deleted;
 	private String comment;
+	private Boolean invitor;
 	
 	
 	private Invitations invitation;
@@ -139,9 +140,6 @@ public class MeetingMember {
 	}
 	
 	
-	
-	
-	
 	/**
 	 * 
 	 * @hibernate.many-to-one
@@ -206,6 +204,17 @@ public class MeetingMember {
 		this.comment = comment;
 	}
 	
+	/**
+     * @hibernate.property
+     *  column="invitor"
+     *  type="boolean"
+     */ 
+	public Boolean getInvitor() {
+		return invitor;
+	}
+	public void setInvitor(Boolean invitor) {
+		this.invitor = invitor;
+	}
 	
-
+	
 }

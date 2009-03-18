@@ -86,7 +86,7 @@ public class LdapLoginManagement {
 		File tester = new File(configVal.getConf_value());
 		
 		if(!tester.isFile()){
-			log.error("ConfigVal ldap_config_path not describes no valid File : " + configVal);
+			log.error("ConfigVal ldap_config_path not describes a valid File : " + configVal);
 			return false;
 		}
 		
