@@ -52,6 +52,27 @@ public class AppointmentLogic {
 		
 	}
 	
+	/**
+	 * @author o.becherer
+	 * @param room_id
+	 * @return
+	 */
+	//--------------------------------------------------------------------------------------------
+	public Appointment getAppointmentByRoom(Long room_id) throws Exception{
+		log.debug("getAppointmentByRoom");
+		
+		Rooms room = Roommanagement.getInstance().getRoomById(room_id);
+		
+		if(room == null)
+			throw new Exception("Room does not exist in database!");
+		
+		if(!room.getAppointment())
+			throw new Exception("Room " + room.getName() + " isnt part of an appointed meeting");
+		
+		return AppointmentDaoImpl.getInstance().getAppointmentByRoom(room_id);
+	}
+	//--------------------------------------------------------------------------------------------
+	
 	
 	//next appointment to current date
 	public Appointment getNextAppointment(){
@@ -165,7 +186,7 @@ public class AppointmentLogic {
 				}
 			}
 			
-			// Deleting Appointment intself
+			// Deleting Appointment itself
 			AppointmentDaoImpl.getInstance().deleteAppointement(appointmentId);
 		
 			// Deleting Room

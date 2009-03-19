@@ -50,6 +50,36 @@ public class AppointmentDaoImpl {
 	 */
 	
 	
+	
+	/**
+	 * @author o.becherer
+	 * Retrievment of Appointment for room
+	 */
+	//-----------------------------------------------------------------------------------------------
+	public Appointment getAppointmentByRoom(Long room_id) throws Exception{
+		log.debug("AppointMentDaoImpl.getAppointmentByRoom");
+		
+		String hql = "select a from Appointment a " +
+		"WHERE a.deleted != :deleted " +
+		"AND a.room.rooms_id = :room_id ";
+		
+		Object idf = HibernateUtil.createSession();
+		Session session = HibernateUtil.getSession();
+		Transaction tx = session.beginTransaction();
+		Query query = session.createQuery(hql);
+		query.setString("deleted", "true");
+		query.setLong("room_id",room_id);
+		
+		
+		Appointment appoint = (Appointment) query.uniqueResult();
+		tx.commit();
+		HibernateUtil.closeSession(idf);
+		
+		return appoint;
+
+	}
+	//-----------------------------------------------------------------------------------------------
+	
 	public Appointment getAppointmentById(Long appointmentId) {
 		try {
 			
@@ -263,6 +293,7 @@ public class AppointmentDaoImpl {
 			    		}
 		    		}
 		    		
+		    		/*
 		    		if (found == false && Long.valueOf(clientMember.get("userId").toString()).longValue()!=0) {
 		    			
 		    			//Not In Remote List available
@@ -270,8 +301,16 @@ public class AppointmentDaoImpl {
 		    					clientMember.get("lastname").toString(), "0", "0", 
 								appointmentId,Long.valueOf(clientMember.get("userId").toString()).longValue(), clientMember.get("email").toString(), new Boolean(false));
 		    			
-		    		}
+		    		}*/
 		    		
+		    		if (!found) {
+		    			
+		    			//Not In Remote List available extern members
+		    			MeetingMemberDaoImpl.getInstance().addMeetingMember(clientMember.get("firstname").toString(), 
+		    					clientMember.get("lastname").toString(), "0", "0", 
+								appointmentId, null, clientMember.get("email").toString(), false);
+		    			
+		    		}
 		   		
 		    	}
 		    }
