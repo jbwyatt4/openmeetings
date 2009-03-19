@@ -6,16 +6,27 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import org.openmeetings.app.conference.whiteboard.WhiteboardManagement;
+import org.openmeetings.app.data.calendar.daos.AppointmentDaoImpl;
+import org.openmeetings.app.data.calendar.daos.MeetingMemberDaoImpl;
+import org.openmeetings.app.data.calendar.management.AppointmentLogic;
+import org.openmeetings.app.data.calendar.management.MeetingMemberLogic;
+import org.openmeetings.app.data.conference.Roommanagement;
 import org.openmeetings.app.data.logs.ConferenceLogDaoImpl;
 import org.openmeetings.app.data.user.dao.UsersDaoImpl;
+import org.openmeetings.app.hibernate.beans.calendar.Appointment;
+import org.openmeetings.app.hibernate.beans.calendar.MeetingMember;
 import org.openmeetings.app.hibernate.beans.recording.RoomClient;
+import org.openmeetings.app.hibernate.beans.rooms.Rooms;
 import org.openmeetings.app.hibernate.beans.user.Users;
 import org.openmeetings.app.quartz.scheduler.QuartzRecordingJob;
 import org.openmeetings.app.quartz.scheduler.QuartzSessionClear;
+import org.openmeetings.app.remote.ConferenceService;
+import org.openmeetings.app.remote.MeetingMemberService;
 import org.openmeetings.app.remote.PollService;
 import org.openmeetings.app.remote.StreamService;
 import org.openmeetings.app.remote.WhiteBoardService;
@@ -609,15 +620,69 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 			//LogicalRoom ENTER
 			HashMap<String,RoomClient> clientListRoom = this.getRoomClients(room_id);
 			
-			if (clientListRoom.size()==1){
-				log.debug("Room is empty so set this user to be moderation role");
-				currentClient.setIsMod(true);
-				this.clientListManager.updateClientByStreamId(streamid, currentClient);
-			} else {
-				log.debug("Room is already somebody so set this user not to be moderation role");
-				currentClient.setIsMod(false);
-				this.clientListManager.updateClientByStreamId(streamid, currentClient);
-			}	
+			
+			// appointed meeting?
+			Rooms room = Roommanagement.getInstance().getRoomById(room_id);
+			
+			// not really
+			if(room.getAppointment() == false){
+				log.debug("setRoomValues : Room" + room_id + " not appointed! Moderator rules : first come, first draw ;-)" );
+				if (clientListRoom.size()==1){
+					log.debug("Room is empty so set this user to be moderation role");
+					currentClient.setIsMod(true);
+					this.clientListManager.updateClientByStreamId(streamid, currentClient);
+				} else {
+					log.debug("Room is already somebody so set this user not to be moderation role");
+					currentClient.setIsMod(false);
+					this.clientListManager.updateClientByStreamId(streamid, currentClient);
+				}	
+			}
+			else{
+				Appointment ment = AppointmentLogic.getInstance().getAppointmentByRoom(room_id);
+				
+				List<MeetingMember> members = MeetingMemberDaoImpl.getInstance().getMeetingMemberByAppointmentId(ment.getAppointmentId());
+				
+				Long userIdInRoomClient = currentClient.getUser_id();
+				
+				boolean found = false;
+				
+				// Check if current user is set to moderator
+				for(int i = 0; i< members.size(); i++){
+					MeetingMember member = members.get(i);
+					
+					log.debug("checking user " + member.getFirstname() + " for moderator role - ID : " + member.getUserid().getUser_id());
+					
+					// only persistent users can schedule a meeting
+					// userid is only set for registered users
+					if(member.getUserid() != null && member.getUserid().getUser_id().equals(userIdInRoomClient)){
+						
+						found = true;
+						
+						if(member.getInvitor()){
+							log.debug("User " + userIdInRoomClient + " is moderator due to flag in MeetingMember record");
+							currentClient.setIsMod(true);
+							this.clientListManager.updateClientByStreamId(streamid, currentClient);
+							break;
+						}
+						else{
+							log.debug("User " + userIdInRoomClient + " is NOT moderator due to flag in MeetingMember record");
+							currentClient.setIsMod(false);
+							this.clientListManager.updateClientByStreamId(streamid, currentClient);
+							break;
+						}
+							
+					}
+					
+				}
+				
+				if(!found){
+					log.debug("User " + userIdInRoomClient + " could not be found as MeetingMember -> definiteley no moderator");
+					currentClient.setIsMod(false);
+					this.clientListManager.updateClientByStreamId(streamid, currentClient);
+				}
+				
+			}
+			
 			
 			return clientListRoom;
 		} catch (Exception err){
