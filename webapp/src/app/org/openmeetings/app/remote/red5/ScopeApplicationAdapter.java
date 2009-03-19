@@ -624,7 +624,7 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 			// appointed meeting?
 			Rooms room = Roommanagement.getInstance().getRoomById(room_id);
 			
-			// not really
+			// not really - default logic
 			if(room.getAppointment() == false){
 				log.debug("setRoomValues : Room" + room_id + " not appointed! Moderator rules : first come, first draw ;-)" );
 				if (clientListRoom.size()==1){
@@ -645,6 +645,7 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 				Long userIdInRoomClient = currentClient.getUser_id();
 				
 				boolean found = false;
+				boolean moderator_set = false;
 				
 				// Check if current user is set to moderator
 				for(int i = 0; i< members.size(); i++){
@@ -661,6 +662,7 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 						if(member.getInvitor()){
 							log.debug("User " + userIdInRoomClient + " is moderator due to flag in MeetingMember record");
 							currentClient.setIsMod(true);
+							moderator_set = true;
 							this.clientListManager.updateClientByStreamId(streamid, currentClient);
 							break;
 						}
@@ -672,6 +674,10 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 						}
 							
 					}
+					else{
+						if(member.getInvitor())
+							moderator_set = true;
+					}
 					
 				}
 				
@@ -679,6 +685,14 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 					log.debug("User " + userIdInRoomClient + " could not be found as MeetingMember -> definiteley no moderator");
 					currentClient.setIsMod(false);
 					this.clientListManager.updateClientByStreamId(streamid, currentClient);
+				}
+				else{
+					// if current user is part of the memberlist, but moderator couldn't be retrieved : first come, first draw!
+					if (clientListRoom.size()==1 && moderator_set == false){
+						log.debug("");
+						currentClient.setIsMod(true);
+						this.clientListManager.updateClientByStreamId(streamid, currentClient);
+					}
 				}
 				
 			}
