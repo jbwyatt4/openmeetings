@@ -27,7 +27,7 @@
 			this.getAppointmentReminderTypList.doCall();
 			
 			this._termindetails._date.bringToFront();
-			this._termindetails._erinnerungedit.selectItemAt(0);
+			this._termindetails._erinnerungedit.selectItemAt(2);
 			this._termindetails._repetitionselect.selectItemAt(0);
 			this.getAppointmentByRange.doCall();		
 		</handler>
@@ -154,7 +154,7 @@
 				</handler> 
 				<handler name="oninit">
 					this.addItem(canvas.getLabelName(568),"0");
-					this.selectItem("0");				
+					this.selectItem("2");				
 				</handler>
 		 	</resetCombobox> 
 		 		
@@ -403,7 +403,7 @@
 		this._termindetails._isYearly = false;
 		
 		this._termindetails._kategoryedit.selectItemAt(0); 
-		this._termindetails._erinnerungedit.selectItemAt(0); 
+		this._termindetails._erinnerungedit.selectItemAt(2); 
 		this._termindetails._locationedit.setAttribute('text', "");
 		this._termindetails._repetitionselect.selectItemAt(0);
 		//this._termindetails._guestedit.setAttribute('text',"");
@@ -587,7 +587,7 @@
 					    					text:titel
 								
 				    				});		
-				    	    parent._termindetails._erinnerungedit.selectItemAt(0);
+				    	    parent._termindetails._erinnerungedit.selectItemAt(2);
 					}}
 		    		]]>
 		    	</handler>
