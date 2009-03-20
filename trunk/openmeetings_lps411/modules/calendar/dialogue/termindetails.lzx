@@ -43,7 +43,7 @@
 				</handler> 
 				<handler name="oninit">
 					//this.addItem(canvas.getLabelName(568),"0");
-					this.selectItemAt(0);
+					this.selectItemAt(2);
 					this.getAppointmentCategoryList();	
 					this.getAppointmentReminderTypList();	
 					
@@ -349,7 +349,7 @@
 				this._isYearly = false;
 				this._roomtype_edit.selectItemAt(0);
 				this._kategoryedit.selectItemAt(0); 
-				this._erinnerungedit.selectItemAt(0); 
+				this._erinnerungedit.selectItemAt(2); 
 				this._locationedit.setAttribute('text', "");
 				this._repetitionselect.selectItemAt(1);
 				//this._guestedit.setAttribute('text',"");
@@ -503,7 +503,7 @@
 					    					text:titel
 								
 				    				});		
-				    	    parent._termindetails._erinnerungedit.selectItemAt(0);
+				    	    parent._termindetails._erinnerungedit.selectItemAt(2);
 					}}
 		    		]]>
 		    	</handler>
