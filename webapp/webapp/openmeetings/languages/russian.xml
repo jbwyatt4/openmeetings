@@ -10,10 +10,10 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Конференция</value>
   </string>
   <string id="2" name="meeting">
-    <value>Митинг</value>
+    <value>Совещания</value>
   </string>
   <string id="3" name="classroom">
-    <value>События</value>
+    <value>Лекции</value>
   </string>
   <string id="4" name="settings">
     <value>Установки</value>
@@ -34,7 +34,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Нет данных</value>
   </string>
   <string id="10" name="recordbyteacher">
-    <value>Функция записи только для преподавателей</value>
+    <value>Функция записи только для лекторов</value>
   </string>
   <string id="11" name="connectedusers">
     <value>Связанный пользователь:</value>
@@ -49,13 +49,13 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Видеоконференция</value>
   </string>
   <string id="15" name="import">
-    <value>Подгрузить файл</value>
+    <value>Загрузить файл</value>
   </string>
   <string id="16" name="refreshfiles">
     <value>Заново загрузить список</value>
   </string>
   <string id="17" name="tomainfile">
-    <value>К главному файлу</value>
+    <value>К списку документов</value>
   </string>
   <string id="18" name="newpoll">
     <value>Новый опрос</value>
@@ -70,7 +70,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Вид опроса:</value>
   </string>
   <string id="22" name="create">
-    <value>создать</value>
+    <value>Создать</value>
   </string>
   <string id="23" name="infomessage">
     <value>Информация: каждый связанный пользователь получает сообщение с новым опросом.</value>
@@ -79,19 +79,19 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Создать опрос</value>
   </string>
   <string id="25" name="cancel">
-    <value>прервать</value>
+    <value>Отменить</value>
   </string>
   <string id="26" name="yesno">
     <value>Да/Нет</value>
   </string>
   <string id="27" name="numeric">
-    <value>В числовом порядке 1-10</value>
+    <value>Число 1 - 10</value>
   </string>
   <string id="28" name="poll">
     <value>Опрос</value>
   </string>
   <string id="29" name="moderation">
-    <value>Для создания опроса Вы должны быть модератором/преподавателем в этой комнате.</value>
+    <value>Для создания опроса Вы должны быть модератором/лектором в этой комнате.</value>
   </string>
   <string id="30" name="vote">
     <value>Вы проголосовали.</value>
@@ -133,7 +133,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Проголосовать!</value>
   </string>
   <string id="43" name="meeting">
-    <value>Митинг (макс. 4 места)</value>
+    <value>Совещание (макс. 4 места)</value>
   </string>
   <string id="44" name="conference">
     <value>Конференция (макс. 50 мест)</value>
@@ -151,7 +151,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Вхождения</value>
   </string>
   <string id="49" name="modleave">
-    <value>Модератор/преподаватель этой комнаты покинул встречу.</value>
+    <value>Модератор/лектор этой комнаты покинул совещание.</value>
   </string>
   <string id="50" name="systemmessage">
     <value>Системное сообщение</value>
@@ -169,10 +169,10 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>OK</value>
   </string>
   <string id="55" name="cancel2">
-    <value>прервать</value>
+    <value>Отменить</value>
   </string>
   <string id="56" name="reconeectneeded">
-    <value>Вы должны соединиться вновь, чтобы активировать изменения.</value>
+    <value>Вы должны войти заново, чтобы активировать изменения.</value>
   </string>
   <string id="57" name="editsetup">
     <value>Изменить установки.</value>
@@ -187,13 +187,13 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>OK</value>
   </string>
   <string id="61" name="cancel3">
-    <value>прервать</value>
+    <value>Отменить</value>
   </string>
   <string id="62" name="clearwhiteboard">
     <value>Очистить доску</value>
   </string>
   <string id="63" name="clearwhiteboardquestion">
-    <value>Очистить доску перед добавлением нового изображения?</value>
+    <value>Очистить доску перед добавлением нового изображения</value>
   </string>
   <string id="64" name="dontaskagain">
     <value>Больше не спрашивать</value>
@@ -205,7 +205,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Редактировать установки</value>
   </string>
   <string id="67" name="needconfirmationwhiteboard">
-    <value>Запросить подтверждение перед очисткой доски.</value>
+    <value>Запросить подтверждение перед очисткой доски</value>
   </string>
   <string id="68" name="userinfo">
     <value>Информация о пользователе</value>
@@ -256,7 +256,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Отменить</value>
   </string>
   <string id="84" name="mod">
-    <value>Получить функцию модератора</value>
+    <value>Запросить ф-ции модератора</value>
   </string>
   <string id="85" name="close">
     <value>Закрыть</value>
@@ -268,7 +268,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Жирный шрифт</value>
   </string>
   <string id="88" name="waiting">
-    <value>ОЖИДАНИЕ</value>
+    <value>Ожидание</value>
   </string>
   <string id="89" name="applyMessage">
     <value>Пользователь желает запросить функцию модератора:</value>
@@ -340,7 +340,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Язык</value>
   </string>
   <string id="112" name="Authreg">
-    <value>Логин</value>
+    <value>Войти</value>
   </string>
   <string id="113" name="regformhead">
     <value>Подписка</value>
@@ -370,16 +370,16 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Регистрировать</value>
   </string>
   <string id="122" name="regformbtn2">
-    <value>Прервать</value>
+    <value>Отменить</value>
   </string>
   <string id="123" name="Authbtn2">
-    <value>Регистр</value>
+    <value>Регистрация</value>
   </string>
   <string id="124" name="dashboard">
     <value>На главную</value>
   </string>
   <string id="125" name="useradmin">
-    <value>Пользователь</value>
+    <value>Пользователи</value>
   </string>
   <string id="126" name="groupadmin">
     <value>Группы</value>
@@ -388,7 +388,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Организации</value>
   </string>
   <string id="128" name="headconf">
-    <value>Комнаты для конференций</value>
+    <value>Комнаты совещаний</value>
   </string>
   <string id="129" name="conf_pub">
     <value>Публично</value>
@@ -424,13 +424,13 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Улица/№ дома</value>
   </string>
   <string id="140" name="useralterself_town">
-    <value>Индекс/населенный пункт</value>
+    <value>Индекс/город</value>
   </string>
   <string id="141" name="useralterself_state">
     <value>Страна</value>
   </string>
   <string id="142" name="useralterself_adresscomment">
-    <value>Адресная информация</value>
+    <value>Информация</value>
   </string>
   <string id="143" name="useralterself_header">
     <value>Данные пользователя</value>
@@ -463,7 +463,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Удалить запись</value>
   </string>
   <string id="153" name="savecontent_confirm_cancel_btn">
-    <value>Прервать</value>
+    <value>Отменить</value>
   </string>
   <string id="154" name="savecontent_confirm_confirm_btn">
     <value>Удалить</value>
@@ -511,7 +511,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Администратор</value>
   </string>
   <string id="169" name="uservalue_levellabel">
-    <value>Роль пользователя</value>
+    <value>Роль пользов-ля</value>
   </string>
   <string id="170" name="orgvalue_header">
     <value>Организация</value>
@@ -526,7 +526,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Добавить организацию</value>
   </string>
   <string id="174" name="orgvalue_userwin">
-    <value>Прервать</value>
+    <value>Отменить</value>
   </string>
   <string id="175" name="orgvalue_userwin">
     <value>Добавить</value>
@@ -562,10 +562,10 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Выбрать</value>
   </string>
   <string id="186" name="navi_roomadmin">
-    <value>Комнаты для конференций</value>
+    <value>Комнаты совещаний</value>
   </string>
   <string id="187" name="roomadmin_header">
-    <value>Комнаты для конференций</value>
+    <value>Комнаты совещаний</value>
   </string>
   <string id="188" name="roomadmin_header">
     <value>Идент. №</value>
@@ -580,7 +580,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Организации</value>
   </string>
   <string id="192" name="roomadmin_header">
-    <value>Комнаты для митингов</value>
+    <value>Комнаты совещаний</value>
   </string>
   <string id="193" name="roomvalue_name">
     <value>Имя</value>
@@ -610,7 +610,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Имя файла</value>
   </string>
   <string id="202" name="whiteboard_saveaswinbtn1">
-    <value>Прервать</value>
+    <value>Отменить</value>
   </string>
   <string id="203" name="whiteboard_saveaswinbtn2">
     <value>Сохранить</value>
@@ -637,7 +637,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Очистить область рисования</value>
   </string>
   <string id="211" name="loadwml_confirmmess">
-    <value>Очистить областьрисования, при этом все изменения будут утеряны!</value>
+    <value>Очистить область рисования, при этом все изменения будут утеряны!</value>
   </string>
   <string id="212" name="loadwml_confirmmess2">
     <value>Перед загрузкой файла запросить подтверждение</value>
@@ -661,7 +661,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Отправить</value>
   </string>
   <string id="219" name="send_invitationwin_btn_cancel">
-    <value>Прервать</value>
+    <value>Отменить</value>
   </string>
   <string id="220" name="send_chat_text_btn">
     <value>Отправить</value>
@@ -712,7 +712,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Регистрация завершена</value>
   </string>
   <string id="236" name="user_registerSuccessHeader">
-    <value>Ваш аккаунт создан. Теперь вы можете залогиниться.</value>
+    <value>Ваш аккаунт создан. Теперь вы можете войти под своим именем.</value>
   </string>
   <string id="237" name="user_sharing_message">
     <value>Сейчас вы не можете сделать ваш экран общим. Сейчас другой пользователь сделал свой экран общим.</value>
@@ -721,7 +721,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Запрещено делать ваш экран общим</value>
   </string>
   <string id="239" name="user_doStartScreenViewer">
-    <value>Сделать ваш экран общим</value>
+    <value>оооСделать ваш экран общим</value>
   </string>
   <string id="240" name="screen_warnBandwidth">
     <value>Неверная ширина канала: невозможно синхронизовать экран. Некоторые кадры будут пропущены. Если это сообщение появляется слишком часто, Вы можете попросить модератора ухудшить качество соединения.</value>
@@ -739,7 +739,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Чат</value>
   </string>
   <string id="245" name="tabbar_filesicon">
-    <value>Файлы</value>
+    <value>Документы</value>
   </string>
   <string id="246" name="tabbar_participantsicon">
     <value>Участники</value>
@@ -751,7 +751,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Загрузить документ pdf</value>
   </string>
   <string id="249" name="swfpresentation_listloadswf">
-    <value>Загрузить презентацию на доску</value>
+    <value>Поместить документ на доску</value>
   </string>
   <string id="250" name="navimain_config">
     <value>Конфигурация</value>
@@ -781,10 +781,10 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>На последнюю страницу</value>
   </string>
   <string id="259" name="whiteboard_documenttoolbar_zoomminus">
-    <value>Зум --</value>
+    <value>Уменьшение</value>
   </string>
   <string id="260" name="whiteboard_documenttoolbar_zoomplus">
-    <value>Зум ++</value>
+    <value>Увеличение</value>
   </string>
   <string id="261" name="salutation_mr">
     <value>Г-н</value>
@@ -805,19 +805,19 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Конфигурация</value>
   </string>
   <string id="267" name="confadminform_labelkey">
-    <value>Ключ</value>
+    <value>Ключ:</value>
   </string>
   <string id="268" name="confadminform_labelupdated">
-    <value>Последнее обновление</value>
+    <value>Дата обновления</value>
   </string>
   <string id="269" name="confadminform_labelupdatedby">
     <value>Обновлено:</value>
   </string>
   <string id="270" name="confadminform_labelcomment">
-    <value>комментарий</value>
+    <value>Комментарий:</value>
   </string>
   <string id="271" name="confadminform_labelkey">
-    <value>ключ</value>
+    <value>Значение</value>
   </string>
   <string id="272" name="turnoverlist_maxresults">
     <value>из</value>
@@ -829,7 +829,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Удалить пользователя из организации</value>
   </string>
   <string id="275" name="organisation_usersdeletedhead">
-    <value>удалить</value>
+    <value>Удалить</value>
   </string>
   <string id="276" name="organisation_usersalreadadded">
     <value>Этот пользователь уже входит в эту организацию.</value>
@@ -838,13 +838,13 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Новости</value>
   </string>
   <string id="278" name="dashboard_quicklinksheader">
-    <value>Быстрые ссылки</value>
+    <value>Быстрый переход</value>
   </string>
   <string id="279" name="dashboard_quicklinkConf">
-    <value>Перейти к коференции</value>
+    <value>Перейти к совещанию</value>
   </string>
   <string id="280" name="dashboard_quicklinkAudit">
-    <value>Перейти к аудитории</value>
+    <value>Перейти к лекции</value>
   </string>
   <string id="281" name="dashboard_quicklinksupport">
     <value>Помощь и поддержка</value>
@@ -868,7 +868,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Список электронных адресов пользователей (groups.google.com/group/openmeetings-user)</value>
   </string>
   <string id="288" name="login_rememberuser">
-    <value>Запомнить логин</value>
+    <value>Запомнить меня</value>
   </string>
   <string id="289" name="main_navi">
     <value>Контент</value>
@@ -877,22 +877,22 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Моя домашняя страница</value>
   </string>
   <string id="291" name="subnavi">
-    <value>Мои запланированные встречи</value>
+    <value>Мои запланированные совещания</value>
   </string>
   <string id="292" name="subnavi">
-    <value>Мои запланированные события</value>
+    <value>Мои запланированные лекции</value>
   </string>
   <string id="293" name="subnavi">
-    <value>Публичные встречи</value>
+    <value>Публичные совещания</value>
   </string>
   <string id="294" name="subnavi">
-    <value>Личные встречи</value>
+    <value>Личные совещания</value>
   </string>
   <string id="295" name="subnavi">
-    <value>Публичные события</value>
+    <value>Публичные лекции</value>
   </string>
   <string id="296" name="subnavi">
-    <value>Личные события</value>
+    <value>Личные лекции</value>
   </string>
   <string id="297" name="subnavi">
     <value>Публичный контент</value>
@@ -910,22 +910,22 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Модерация</value>
   </string>
   <string id="302" name="conferencebar">
-    <value>Запросить функции модератора</value>
+    <value>Запросить ф-ции модера</value>
   </string>
   <string id="303" name="conferencebar">
     <value>Опросы</value>
   </string>
   <string id="304" name="conferencebar">
-    <value>Выбрать файл</value>
+    <value>Выбор файла</value>
   </string>
   <string id="305" name="conferencebar">
     <value>Установки</value>
   </string>
   <string id="306" name="conferencebar">
-    <value>Установки камеры и микрофона</value>
+    <value>... камеры и микрофона</value>
   </string>
   <string id="307" name="conferencebar">
-    <value>Установки доски</value>
+    <value>... доски</value>
   </string>
   <string id="308" name="conferencebar">
     <value>Выход</value>
@@ -934,43 +934,43 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Назад к комнатам</value>
   </string>
   <string id="310" name="conferencebar">
-    <value>Logout</value>
+    <value>Выход</value>
   </string>
   <string id="311" name="loginwindow">
-    <value>Прсмотр рабочего стола</value>
+    <value>Забыли пароль?</value>
   </string>
   <string id="312" name="loginwindow">
-    <value>запустить просмотр рабочего стола</value>
+    <value>Восстановление пароля</value>
   </string>
   <string id="313" name="loginwindow">
-    <value>Видео и аудио</value>
+    <value>По e-mail</value>
   </string>
   <string id="314" name="loginwindow">
-    <value>Чат</value>
+    <value>По имени пользователя</value>
   </string>
   <string id="315" name="loginwindow">
-    <value>Доска</value>
+    <value>Ваша почта</value>
   </string>
   <string id="316" name="loginwindow">
-    <value>Модерация</value>
+    <value>Ваш логин</value>
   </string>
   <string id="317" name="loginwindow">
-    <value>Файлы</value>
+    <value>Послать линк на e-mail</value>
   </string>
   <string id="318" name="loginwindow">
-    <value>Пользователи</value>
+    <value>Такой e-mail не найден. Убедитесь, что вы ввели верный e-mail</value>
   </string>
   <string id="319" name="loginwindow">
-    <value>Избератели</value>
+    <value>Введите e-mail или имя пользователя</value>
   </string>
   <string id="320" name="loginwindow">
     <value>Никто больше не подключился с таким именем пользователя</value>
   </string>
   <string id="321" name="loginwindow">
-    <value>Письмо, содержащее специальную ссылку, выслано на ваш EMail, пожалуйста, проверьте ваш почтовый ящик. Если вы все еще не получили письмо, проверьте анти-спам фильтры и пошлите еще раз подтверждающее письмо.</value>
+    <value>Письмо, содержащее специальную ссылку, выслано на ваш e-mail, пожалуйста, проверьте ваш почтовый ящик. Если вы все еще не получили письмо, проверьте анти-спам фильтры и пошлите еще раз подтверждающее письмо.</value>
   </string>
   <string id="322" name="errortype">
-    <value>Ошибка</value>
+    <value>Информация</value>
   </string>
   <string id="323" name="errortype">
     <value>Сообщение</value>
@@ -1021,10 +1021,10 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Frontend Registration disabled.</value>
   </string>
   <string id="339" name="registration">
-    <value>Неверный EMail</value>
+    <value>Неверный e-mail</value>
   </string>
   <string id="340" name="registration">
-    <value>повторяющиеся имя файла, выберите другое имя файла</value>
+    <value>неуникальное имя файла, выберите другое имя файла</value>
   </string>
   <string id="341" name="filebrowser">
     <value>слишком короткое имя файла</value>
@@ -1120,10 +1120,10 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>к последнему</value>
   </string>
   <string id="372" name="videobox">
-    <value>пользователь говорит</value>
+    <value>Пользователь говорит</value>
   </string>
   <string id="373" name="videobox">
-    <value>ключить/выключит звук</value>
+    <value>Включить/выключить звук</value>
   </string>
   <string id="374" name="dashboard">
     <value>Система</value>
@@ -1141,7 +1141,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Новые сообщения:</value>
   </string>
   <string id="379" name="dashboard">
-    <value>Подгрузить новое изображение:</value>
+    <value>Загрузить новое изображение:</value>
   </string>
   <string id="380" name="backuppanel">
     <value>Экспорт пользовательских данных</value>
@@ -1159,13 +1159,13 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>начать экспорт</value>
   </string>
   <string id="385" name="backuppanel">
-    <value>Пользовательские данные - импорт</value>
+    <value>Польз. данные - импорт</value>
   </string>
   <string id="386" name="backuppanel">
     <value>выбрать users.xml</value>
   </string>
   <string id="387" name="languageseditor">
-    <value>импорт</value>
+    <value>Импорт</value>
   </string>
   <string id="388" name="languageseditor">
     <value>Экспорт в XML - эти файлы можно использовать для:
@@ -1180,7 +1180,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
            Неважно, какое имя у этого файла, он будет импортирован в этот язык!</value>
   </string>
   <string id="390" name="importwindow">
-    <value>импотр - выберите файл</value>
+    <value>импорт - выберите файл</value>
   </string>
   <string id="391" name="recordingsavewin">
     <value>Сохранить как</value>
@@ -1246,7 +1246,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Дата:</value>
   </string>
   <string id="412" name="record">
-    <value>Режим записи! Вы не можете менять параметры.</value>
+    <value>Режим воспроизведения! Вы не можете менять параметры.</value>
   </string>
   <string id="413" name="record">
     <value>Проиграть эту запись</value>
@@ -1288,13 +1288,13 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Выбор цвета</value>
   </string>
   <string id="426" name="painttools_line_disable">
-    <value>Запретить / резрешить цвет линий</value>
+    <value>Запретить/разрешить цвет линий</value>
   </string>
   <string id="427" name="painttools_fill_disable">
     <value>изменить цвет заливки</value>
   </string>
   <string id="428" name="painttools_line_disable">
-    <value>Запретить / резрешить заливки</value>
+    <value>Запретить/разрешить заливки</value>
   </string>
   <string id="429" name="change_width_arrow_down_slider">
     <value>Изменить ширину линий</value>
@@ -1303,7 +1303,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>закрыть</value>
   </string>
   <string id="431" name="paint_tool_letter">
-    <value>именить размер шрифта</value>
+    <value>изменить размер шрифта</value>
   </string>	
   <string id="432" name="recordingslist_delete">
     <value>Удалить запись</value>
@@ -1518,7 +1518,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Сообщение:</value>
   </string>
   <string id="503" name="invitation_text_click_text">
-    <value>Кликните на это сообщение, чтобы принять участие во встрече:</value>
+    <value>Кликните на это сообщение, чтобы принять участие в совещании:</value>
   </string>
   <string id="504" name="invitation_text_click_text_link">
     <value>Кликните здесь, чтобы войти в комнату</value>
@@ -1539,7 +1539,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Пароль:</value>
   </string>
   <string id="510" name="registering_mail_text_mail">
-    <value>EMail:</value>
+    <value>e-mail:</value>
   </string>
   <string id="511" name="registering_mail_text_bye">
     <value>OpenMeetings-Команда</value>
@@ -1566,7 +1566,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Пожалуйста, введите дату, например 24.12.2001 (dd.mm.yyyy)</value>
   </string>
   <string id="519" name="emailRegExpError">
-    <value>Пожалуйста, введите EMail, например name@mail.com</value>
+    <value>Пожалуйста, введите e-mail, например name@mail.com</value>
   </string>
   <string id="520" name="floatRegExpError">
     <value>Пожалуйста, введите вещественное число, например 1.00</value>
@@ -1581,7 +1581,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Пожалуйста, введите время, например 12:23 (hh:mm)</value>
   </string>
   <string id="524" name="invitation_window">
-    <value>Защищенный Пароль</value>
+    <value>Защитить паролем</value>
   </string>
   <string id="525" name="invitation_window_passwordLabel">
     <value>Пароль</value>
@@ -1635,10 +1635,10 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Корректный логин, но эта сессия неактивна или не записана на сервере. Вам нужно получит новый ID сессии и перелогиниться</value>
   </string>
   <string id="542" name="errorcode_setUserObject">
-    <value> SessionId не залогинен или не имеет прав администратора . Чтобы встреивать новых пользователей, SOAP Gateway'ю нужен пользователь с правами администратора.</value>
+    <value> SessionId не залогинен или не имеет прав администратора . Чтобы встраивать новых пользователей, SOAP Gateway'ю нужен пользователь с правами администратора.</value>
   </string>
   <string id="543" name="errorcode_loginByRemoteUser">
-    <value>У этой сессии нет connected Remoteuser-Data. Либо вы не вызвали SOAP-Gateway перед доступом к приложению, либо испольуете неверный ID сессии.</value>
+    <value>У этой сессии нет connected Remoteuser-Data. Либо вы не вызвали SOAP-Gateway перед доступом к приложению, либо используете неверный ID сессии.</value>
   </string>
   <string id="544" name="debug_message_recording">
     <value>У этого рекордера - Beta-версия!</value>
@@ -1686,7 +1686,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Синхронизация</value>
   </string>
   <string id="559" name="Synchronizing message">
-    <value>Синхронизация пользователь, подождите</value>
+    <value>Синхронизация пользователей, подождите</value>
   </string>
   <string id="560" name="exportToSVG">
     <value>&lt;u&gt;Загрузить как&lt;/u&gt;</value>
@@ -1743,7 +1743,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Ежегодно</value>
   </string>
   <string id="578" name="alert">
-    <value>Конец встречи после начала встречи!</value>
+    <value>Конец совещания после начала совещания!</value>
   </string>
   <string id="579" name="alert">
     <value>Пожалуйста, вставьте заголовок!</value>
@@ -1758,17 +1758,17 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>информационная панель</value>
   </string>
   <string id="583" name="tooltip main-menu">
-    <value>Посмотреть записанные встречи и события</value>
+    <value>Посмотреть записанные совещания и лекции</value>
   </string>
   <string id="584" name="tooltip main-menu">
-    <value>Встреча - проведите конференцию с 4 (до 16) пользователей&lt;br/&gt;у каждого будет аудио + видео доступ</value>
+    <value>Совещание - проведите конференцию с 4 участниками (число участником может доходить до 16)&lt;br/&gt;у каждого будет аудио/видео</value>
   </string>
   <string id="585" name="tooltip main-menu">
-    <value>Событие - Event - проведите конференцию с участниками, число которых - до 200&lt;br/&gt;Аудио/видео будет только у модератора</value>
+    <value>Лекция - проведите конференцию с участниками, число которых - до 200&lt;br/&gt;Аудио/видео будет только у модератора</value>
   </string>
   <string id="586" name="tooltip main-menu">
-    <value>Создать ползователей, комнаты, организации&lt;br/&gt; + изменить конфигурацию</value>
-  </string> 
+    <value>Создание пользователей, комнат, организаций&lt;br/&gt; + изменить конфигурацию</value>
+  </string>
   <string id="587" name="room Administration roomclients list">
     <value>Сейчас пользователи в этой комнате</value>
   </string>
@@ -1782,22 +1782,22 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>D</value>
   </string>  
   <string id="591" name="swf sync message">
-    <value>Подгрузка документа. Подождите, пока клиент синхронизуется.</value>
+    <value>Загрузка документа. Подождите, пока клиент синхронизируется.</value>
   </string>  
   <string id="592" name="upload dialog">
-    <value>Подгрузка завершена, ковертация документа ...</value>
+    <value>Загрузка завершена, конвертация документа ...</value>
   </string>
   <string id="593" name="upload dialog">
     <value>Начать </value>
   </string>
   <string id="594" name="upload dialog">
-    <value>Диалог подгрузки и иморта. Выберите файл на вашем диске.</value>
+    <value>Импорт файла. Выберите файл на вашем компьютере.</value>
   </string>
   <string id="595" name="upload Dialog">
     <value>Отмена</value>
   </string>
   <string id="596" name="upload Dialog">
-    <value>Выбор файла</value>
+    <value>Выбрать файл</value>
   </string>
   <string id="597" name="administration navigation">
     <value>Соединения</value>
@@ -1812,13 +1812,13 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Логин</value>
   </string>
   <string id="601" name="connection administration panel">
-    <value>Соеденено с</value>
+    <value>Соединено с</value>
   </string>
   <string id="602" name="connection administration panel">
     <value>Комната / Scope</value>
   </string>
   <string id="603" name="connection administration panel">
-    <value>Выбросить пользователя</value>
+    <value>Выбросить пользов-ля</value>
   </string>
   <string id="604" name="kick user confirmation dialog">
     <value>Выбросить пользователя</value>
@@ -1833,10 +1833,10 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Телефон</value>
   </string>
   <string id="608" name="participents panel">
-    <value>Этот пользователь - модератор в эотй комнате</value>
+    <value>Этот пользователь - модератор в этой комнате</value>
   </string>
   <string id="609" name="participents panel">
-    <value>Ползователю разрешено рисовать на достке</value>
+    <value>Пользователю разрешено рисовать на достке</value>
   </string>
   <string id="610" name="participents panel">
     <value>(Ре)старт аудио/видео или изменение установок устройства</value>
@@ -1851,7 +1851,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Пользователи</value>
   </string>
   <string id="614" name="conferencePanels">
-    <value>Файлы</value>
+    <value>Документы</value>
   </string>
   <string id="615" name="conferencePanels">
     <value>Доска</value>
@@ -1860,18 +1860,22 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Чат</value>
   </string>  
   <string id="617" name="organization choose info">
-    <value>Вашему аккаунту приписано несколько организаций. Пожалуйста, выберите одну организацию для данной сессии.</value>
+    <value>Вашей учетной записи соответствует несколько организаций. Пожалуйста, выберите одну организацию для данной сессии.</value>
   </string>  
   <string id="618" name="error message room full">
     <value>This room is full at the moment. Please try again later.</value>
-  </string>  
+  </string>
   <string id="619" name="roomtypes">
     <value>Room Type</value>
   </string>
   <string id="620" name="appointed_room">
     <value>Appointment Room</value>
-  </string>
+  </string>  
 </language>
+
+
+
+
 
 
 
