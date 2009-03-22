@@ -264,9 +264,11 @@ public class ScreenServlet extends HttpServlet {
 	
 	/**
 	 * 
+	 * I'll pass the swfFileName with the fileName, sothat every sharing-session has its own SWF
+	 * 
 	 * @param unzippedImageData
 	 */
-	private void writeSWFFile(String fileName) throws Exception{
+	private void writeSWFFile(String fileName, String swfFileName) throws Exception{
 		log.debug("writeSWFFile");
 		
 		 	int[] size = new int[2];
@@ -287,20 +289,21 @@ public class ScreenServlet extends HttpServlet {
 	        image.line( 0, height );
 	        image.line( 0, 0 );        
 	        
-	        String outputFileName = "output.swf";
-	        FileInputStream movieOut = new FileInputStream( outputFileName );
+	        //String outputFileName = "output.swf";
 	        
-	        File file = new File(outputFileName);
+	        
+	        File file = new File(swfFileName);
 	        
 	        if(!file.exists()){
 		        Movie movie = new Movie( width+10, height+10, 12, 5, null );
 		        movie.appendFrame().placeSymbol( image, 5, 5 );
 		        
-		        movie.write( outputFileName);
+		        movie.write( swfFileName);
 	        }
 	        else{
 	        	//Parse
 	        	MovieBuilder builder = new MovieBuilder();
+	        	FileInputStream movieOut = new FileInputStream( swfFileName );
 	        	
 	        	TagParser parser = new TagParser( builder );
 	        	SWFReader reader = new SWFReader( parser, movieOut );
@@ -315,7 +318,7 @@ public class ScreenServlet extends HttpServlet {
 	        	
 	        	movie.appendFrame().placeSymbol( image, 5, 5 );
 		        
-		        movie.write( outputFileName);
+		        movie.write( swfFileName);
 	        	
 	        }
 	}
@@ -468,7 +471,9 @@ public class ScreenServlet extends HttpServlet {
 					String fileNameComplete = completeName + newFileSystemExtName;
 					ImageIO.write(bi,"jpg",new File(fileNameComplete));
 					
-					//writeSWFFile(fileNameComplete);
+					String swfNameComplete = completeName + ".swf";
+					log.debug("swfNameComplete: "+swfNameComplete);
+					writeSWFFile(fileNameComplete,swfNameComplete);
 					
 					if (!record.equals("yes")) {
 						LinkedHashMap<String,Object> hs = new LinkedHashMap<String,Object>();
@@ -476,6 +481,7 @@ public class ScreenServlet extends HttpServlet {
 						hs.put("message", "desktop");
 						hs.put("action", "newSlide");
 						hs.put("fileName", newFileSystemName+"_"+sid+newFileSystemExtName);
+						hs.put("swffileName", newFileSystemName+"_"+sid+".swf");
 						
 						ScopeApplicationAdapter.getInstance().sendMessageByRoomAndDomain(Long.valueOf(room).longValue(),hs);
 					

@@ -142,5 +142,7 @@
 	<classpathentry kind="lib" path="lib/red5_08rc3/spring-context-support-2.5.6.jar"/>
 	<classpathentry kind="lib" path="lib/red5_08rc3/spring-core-2.5.6.jar"/>
 	<classpathentry kind="lib" path="lib/red5_08rc3/spring-web-2.5.6.jar"/>
+	<classpathentry kind="lib" path="lib/java2swf/java2swf.jar"/>
+	<classpathentry kind="lib" path="lib/ical4j/ical4j-1.0-rc1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
