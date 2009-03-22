@@ -22,7 +22,7 @@ for compiling the client you need to install the !OpenLaszlo-Server 4.2.0:
 http://www.openlaszlo.org
 
 Step-By-Step:
-  * Download and Install !OpenLaszlo 4.2.0 (Version = 4.2.0 from http://www.openlaszlo.org!)
+  * Download and Install !OpenLaszlo 4.2.0.2 from http://www.openlaszlo.org/download
   * create a directory *openmeetings* into your !OpenLaszlo-WebRoot directory ($LPS-HOME/Server/lps-4.2.x/) ... on Windows your Path if you're using the default one's will look like C:/Program Files/Openlaszlo Server 
   * Checkout from the SVN using http://code.google.com/p/openmeetings/source/browse/trunk/openmeetings_lps411/ as root of your Project ($CLIENT_SOURCE_ROOT) into the directory *openmeetings* you have created
   * alter the config.xml in ($LPS-HOME/Server/lps-4.2.x/openmeetings/)config.xml (for example C:/Program Files/Openlaszlo Server 4.2.x/Server/lps-4.2.x/openmeetings/config.xml) ... _rtmphostlocal_ should match the IP/domain of your red5-streaming server (if its on the same IP like your Openlaszlo-Server you can leave it blank)
@@ -31,7 +31,7 @@ Step-By-Step:
 = Java Webapp (Server-Side) =
 
   * You need Java Version = 6 for running and compiling !OpenMeetings
-  * Install red5 from here: http://build.xuggle.com/view/Stable/job/red5_jdk6_stable/41/
+  * Install red5 from http://build.xuggle.com/job/red5_jdk6_stable/
   * Download (SVN - Checkout) from:
 http://openmeetings.googlecode.com/svn/trunk/webapp/
   * change dir your local copy
