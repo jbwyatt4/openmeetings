@@ -350,6 +350,7 @@
 				this._roomtype_edit.selectItemAt(0);
 				this._kategoryedit.selectItemAt(0); 
 				this._erinnerungedit.selectItemAt(2); 
+				this._erinnerungsedit.setAttribute('enabled', 'true');
 				this._locationedit.setAttribute('text', "");
 				this._repetitionselect.selectItemAt(1);
 				//this._guestedit.setAttribute('text',"");
@@ -371,6 +372,7 @@
 				if ($debug) Debug.write("terminObjRef:", this.terminObjRef);
 				this._kategoryedit.selectItem(this.terminObjRef.appointmentCategory.categoryId); //setAttribute('value',this.terminObjRef.kategorie.id);
 				this._erinnerungedit.selectItem(this.terminObjRef.remind.typId);
+				this._erinnerungsedit.setAttribute('enabled', 'false');
 				this._roomtype_edit.selectItem(this.terminObjRef.room.roomtype.roomtypes_id);
 				
 				if(this.terminObjRef.isDaily){
@@ -659,6 +661,8 @@
 				
 				<netparam><method name="getValue">return parent.arrayMeetingMember;</method></netparam>
 				<netparam><method name="getValue">return parent.parent.roomtype</method></netparam>
+				<netparam><method name="getValue">return parent.parent.baseUrl;</method></netparam>
+				
 		    	<handler name="ondata" args="value">
 		    		<![CDATA[
 		    			parent.parent._tabslider._daytab._dayview._tagesansicht._list._outlist.clearContent();
