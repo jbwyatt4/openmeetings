@@ -175,7 +175,7 @@ public class Invitationmanagement {
 		}
 		else if(ment.getRemind().getTypId() == 3){
 			try{
-				sendInvitationIcalCancelMail(member.getEmail(), member.getFirstname() + " " + member.getLastname(), ment, canceling_user_id);
+				sendInvitationIcalCancelMail(member.getEmail(), member.getFirstname() + " " + member.getLastname(), ment, canceling_user_id, member.getInvitor());
 			}catch(Exception e){
 				log.error("Error sending IcalCancelMail for User " + member.getEmail() + " : " + e.getMessage());
 			}
@@ -229,7 +229,7 @@ public class Invitationmanagement {
 		}
 		else if(ment.getRemind().getTypId() == 3){
 			try{
-				sendInvitationIcalUpdateMail(member.getEmail(), member.getFirstname() + " " + member.getLastname(), ment, canceling_user_id);
+				sendInvitationIcalUpdateMail(member.getEmail(), member.getFirstname() + " " + member.getLastname(), ment, canceling_user_id, member.getInvitor());
 			}catch(Exception e){
 				log.error("Error sending IcalUpdateMail for User " + member.getEmail() + " : " + e.getMessage());
 			}
@@ -261,7 +261,7 @@ public class Invitationmanagement {
 	public Long addInvitationIcalLink(Long user_level, String username, String message,
 			String baseurl, String email, String subject, Long rooms_id, String conferencedomain,
 			Boolean isPasswordProtected, String invitationpass, Integer valid,
-			Date validFrom, Date validTo, Long createdBy, Long appointMentId
+			Date validFrom, Date validTo, Long createdBy, Long appointMentId, Boolean invitor
 			){
 			log.debug("addInvitationIcalLink");
 			
@@ -315,7 +315,7 @@ public class Invitationmanagement {
 				HibernateUtil.closeSession(idf);
 				
 				if (invitationId>0){
-					 this.sendInvitionIcalLink(username, message, baseurl, email, subject, invitation.getHash(), appointMentId, createdBy);
+					 this.sendInvitionIcalLink(username, message, baseurl, email, subject, invitation.getHash(), appointMentId, createdBy, invitor);
 					 return invitationId;
 				}
 			}
@@ -414,6 +414,7 @@ public class Invitationmanagement {
 	}
 	//--------------------------------------------------------------------------------------------------------------
 	
+	
 	/**
 	 * 
 	 * @param email
@@ -422,7 +423,7 @@ public class Invitationmanagement {
 	 * @return
 	 */
 	//--------------------------------------------------------------------------------------------------------------
-	private String sendInvitationIcalCancelMail(String email, String userName, Appointment point, Long organizer_userId) throws Exception{
+	private String sendInvitationIcalCancelMail(String email, String userName, Appointment point, Long organizer_userId, Boolean invitor) throws Exception{
 		log.debug("sendInvitationIcalCancelMail");
 		
 		
@@ -445,13 +446,13 @@ public class Invitationmanagement {
 		
 		// Transforming Meeting Members
 		
-		HashMap<String, String> dusselInDerHashMap = handler.getAttendeeData(email, userName);
+		HashMap<String, String> dusselInDerHashMap = handler.getAttendeeData(email, userName, invitor);
 		
 		Vector<HashMap<String, String>> atts = new Vector<HashMap<String,String>>();
 		atts.add(dusselInDerHashMap);
 		
 	
-		HashMap<String, String> oberDussel = handler.getAttendeeData(user.getAdresses().getEmail(), user.getLogin());
+		HashMap<String, String> oberDussel = handler.getAttendeeData(user.getAdresses().getEmail(), user.getLogin(), invitor);
 		
 		GregorianCalendar start = new GregorianCalendar();
 		start.setTime(point.getAppointmentStarttime());
@@ -479,7 +480,7 @@ public class Invitationmanagement {
 	 * @return
 	 */
 	//--------------------------------------------------------------------------------------------------------------
-	private String sendInvitationIcalUpdateMail(String email, String userName, Appointment point, Long organizer_userId) throws Exception{
+	private String sendInvitationIcalUpdateMail(String email, String userName, Appointment point, Long organizer_userId, Boolean invitor) throws Exception{
 		log.debug("sendInvitationIcalUpdateMail");
 		
 		
@@ -503,13 +504,13 @@ public class Invitationmanagement {
 		
 		// Transforming Meeting Members
 		
-		HashMap<String, String> dusselInDerHashMap = handler.getAttendeeData(email, userName);
+		HashMap<String, String> dusselInDerHashMap = handler.getAttendeeData(email, userName, invitor);
 		
 		Vector<HashMap<String, String>> atts = new Vector<HashMap<String,String>>();
 		atts.add(dusselInDerHashMap);
 		
 	
-		HashMap<String, String> oberDussel = handler.getAttendeeData(user.getAdresses().getEmail(), user.getLogin());
+		HashMap<String, String> oberDussel = handler.getAttendeeData(user.getAdresses().getEmail(), user.getLogin(), invitor);
 		
 		GregorianCalendar start = new GregorianCalendar();
 		start.setTime(point.getAppointmentStarttime());
@@ -540,7 +541,7 @@ public class Invitationmanagement {
 	 * @return
 	 */
 	private String sendInvitionIcalLink(String username, String message, 
-			String baseurl, String email, String subject, String invitationsHash, Long appointMentId, Long organizer_userId){
+			String baseurl, String email, String subject, String invitationsHash, Long appointMentId, Long organizer_userId, Boolean invitor){
 		try {
 				
 			String invitation_link = baseurl+"?lzr=swf8&lzt=swf&invitationHash="+invitationsHash;
@@ -556,7 +557,7 @@ public class Invitationmanagement {
 			
 			// Transforming Meeting Members
 			
-			HashMap<String, String> dusselInDerHashMap = handler.getAttendeeData(email, username);
+			HashMap<String, String> dusselInDerHashMap = handler.getAttendeeData(email, username, invitor);
 			
 			Vector<HashMap<String, String>> atts = new Vector<HashMap<String,String>>();
 			atts.add(dusselInDerHashMap);
@@ -564,7 +565,7 @@ public class Invitationmanagement {
 			// Defining Organizer
 			Users user = Usermanagement.getInstance().getUserById(organizer_userId);
 			
-			HashMap<String, String> oberDussel = handler.getAttendeeData(user.getAdresses().getEmail(), user.getLogin());
+			HashMap<String, String> oberDussel = handler.getAttendeeData(user.getAdresses().getEmail(), user.getLogin(), invitor);
 			
 			GregorianCalendar start = new GregorianCalendar();
 			start.setTime(point.getAppointmentStarttime());

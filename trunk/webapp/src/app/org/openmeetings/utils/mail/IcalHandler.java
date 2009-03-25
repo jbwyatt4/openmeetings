@@ -130,7 +130,14 @@ public class IcalHandler {
 			HashMap<String, String> oneAtt = attendees.get(i);
 			
 			Attendee uno = new Attendee(URI.create(oneAtt.get("uri")));
-			uno.getParameters().add(Role.REQ_PARTICIPANT);
+			
+			String chair = oneAtt.get("chair");
+			
+			if(chair.equals("0"))
+				uno.getParameters().add(Role.REQ_PARTICIPANT);
+			else
+				uno.getParameters().add(Role.CHAIR);
+			
 			
 			uno.getParameters().add(new Cn(oneAtt.get("cn")));
 			meeting.getProperties().add(uno);
@@ -153,11 +160,16 @@ public class IcalHandler {
 	 * Generate a Attendee
 	 */
 	//------------------------------------------------------------------------------------------
-	public HashMap<String, String> getAttendeeData(String emailAdress, String displayName){
+	public HashMap<String, String> getAttendeeData(String emailAdress, String displayName, Boolean chair){
 		
 		HashMap<String, String> oneRecord = new HashMap<String, String>();
 		oneRecord.put("uri", "mailto:" + emailAdress);
 		oneRecord.put("cn", displayName);
+		
+		if(chair)
+			oneRecord.put("chair", "1");
+		else
+			oneRecord.put("chair", "0");
 		
 		return oneRecord;
 		

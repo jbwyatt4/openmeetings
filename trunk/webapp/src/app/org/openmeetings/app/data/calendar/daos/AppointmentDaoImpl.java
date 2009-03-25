@@ -210,7 +210,7 @@ public class AppointmentDaoImpl {
 	//----------------------------------------------------------------------------------------------------------
 	public Long updateAppointment(Long appointmentId, String appointmentName, String appointmentDescription, 
 			Date appointmentstart, Date appointmentend,
-			Boolean isDaily, Boolean isWeekly, Boolean isMonthly, Boolean isYearly, Long categoryId, Long remind, List mmClient, Long users_id) {
+			Boolean isDaily, Boolean isWeekly, Boolean isMonthly, Boolean isYearly, Long categoryId, Long remind, List mmClient, Long users_id, String baseUrl) {
 		
 			log.debug("AppointmentDAOImpl.updateAppointment");
 		try {
@@ -293,22 +293,10 @@ public class AppointmentDaoImpl {
 			    		}
 		    		}
 		    		
-		    		/*
-		    		if (found == false && Long.valueOf(clientMember.get("userId").toString()).longValue()!=0) {
-		    			
-		    			//Not In Remote List available
-		    			MeetingMemberDaoImpl.getInstance().addMeetingMember(clientMember.get("firstname").toString(), 
-		    					clientMember.get("lastname").toString(), "0", "0", 
-								appointmentId,Long.valueOf(clientMember.get("userId").toString()).longValue(), clientMember.get("email").toString(), new Boolean(false));
-		    			
-		    		}*/
-		    		
 		    		if (!found) {
 		    			
-		    			//Not In Remote List available extern members
-		    			MeetingMemberDaoImpl.getInstance().addMeetingMember(clientMember.get("firstname").toString(), 
-		    					clientMember.get("lastname").toString(), "0", "0", 
-								appointmentId, null, clientMember.get("email").toString(), false);
+		    			//Not In Remote List available - extern user
+		    			MeetingMemberLogic.getInstance().addMeetingMember(clientMember.get("firstname").toString(), clientMember.get("lastname").toString(), "0", "0", appointmentId, null,  clientMember.get("email").toString(), baseUrl, users_id, new Boolean(false));
 		    			
 		    		}
 		   		
