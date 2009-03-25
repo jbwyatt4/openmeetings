@@ -125,7 +125,7 @@ public class CalendarService {
 			Long categoryId,
 			Long remind,
 			List mmClient,
-			Long roomType){
+			Long roomType, String baseurl){
 		log.debug("updateAppointment");
 		try{
 			
@@ -147,7 +147,7 @@ public class CalendarService {
 	        	
 	        	return AppointmentLogic.getInstance().updateAppointment(appointmentId, appointmentName, 
 	        			appointmentDescription, appointmentstart, appointmentend, isDaily, isWeekly, isMonthly, 
-	        			isYearly, categoryId, remind, mmClient, users_id);
+	        			isYearly, categoryId, remind, mmClient, users_id, baseurl);
 	        }
 		} catch (Exception err) {
 			log.error("[updateAppointment]",err);

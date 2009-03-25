@@ -234,13 +234,13 @@ public class AppointmentLogic {
 	 */
 	public Long updateAppointment(Long appointmentId, String appointmentName, String appointmentDescription, 
 			Date appointmentstart, Date appointmentend,
-			Boolean isDaily, Boolean isWeekly, Boolean isMonthly, Boolean isYearly, Long categoryId, Long remind, List mmClient , Long user_id){
+			Boolean isDaily, Boolean isWeekly, Boolean isMonthly, Boolean isYearly, Long categoryId, Long remind, List mmClient , Long user_id, String baseUrl){
 		
 		try {
 			return AppointmentDaoImpl.getInstance().updateAppointment(appointmentId, 
 					appointmentName, appointmentDescription, appointmentstart, 
 					appointmentend, isDaily, isWeekly, isMonthly, isYearly, categoryId, remind, 
-					mmClient, user_id);
+					mmClient, user_id, baseUrl);
 		} catch (Exception err) {
 			log.error("[updateAppointment]",err);
 		}

@@ -52,6 +52,8 @@ public class MeetingMemberLogic {
 			// DefaultInvitation
 			Appointment point = AppointmentLogic.getInstance().getAppointMentById(appointmentId);
 			
+			MeetingMember member = getMemberById(memberId);
+			
 			Long invitationId = null;
 			
 			if(point.getRemind() == null){
@@ -99,14 +101,15 @@ public class MeetingMemberLogic {
 						point.getAppointmentStarttime(), // valid from
 						point.getAppointmentEndtime(), // valid to
 						new Long(1), // created by
-						point.getAppointmentId()
+						point.getAppointmentId(),
+						member.getInvitor()
+						
 					);
 			}
 			
 			// Setting InvitationId within MeetingMember
 			
 			if(invitationId != null){
-				MeetingMember member = getMemberById(memberId);
 				Invitations invi = Invitationmanagement.getInstance().getInvitationbyId(invitationId);
 			
 				member.setInvitation(invi);
