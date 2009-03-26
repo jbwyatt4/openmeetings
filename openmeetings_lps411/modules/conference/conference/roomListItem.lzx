@@ -10,6 +10,7 @@
   <attribute name="roomid" value="0" type="number" />
   <attribute name="starttime" value="" type="string" />
   <attribute name="roomname" value="" type="string" />
+  
 
   <attribute name="roomClassName" value="conferenceView" type="string" />
   <attribute name="currentusers" value="null" />
