@@ -124,6 +124,34 @@ public class ConferenceService {
 	
 	/**
 	 * 
+	 * retrieving Appointment for Room
+	 * @author o.becherer
+	 *
+	 */
+	//--------------------------------------------------------------------------------------------
+	public Appointment getAppointMentDataForRoom(Long room_id){
+		log.debug("getAppointMentDataForRoom");
+		
+		Rooms room = Roommanagement.getInstance().getRoomById(room_id);
+		
+		if(room.getAppointment() == false)
+			return null;
+		
+		try{
+			Appointment ment = AppointmentLogic.getInstance().getAppointmentByRoom(room_id);
+			
+			
+			return ment;
+		}catch(Exception e){
+			log.error("getAppointMentDataForRoom " + e.getMessage());
+			return null;
+		}
+		
+	}
+	//--------------------------------------------------------------------------------------------
+	
+	/**
+	 * 
 	 */
 	//--------------------------------------------------------------------------------------------
 	public List<Rooms> getAppointedMeetings(String SID, Long room_types_id){
@@ -155,6 +183,7 @@ public class ConferenceService {
 	     
 	}
 	//--------------------------------------------------------------------------------------------
+	
 	
 	/**
 	 * 
