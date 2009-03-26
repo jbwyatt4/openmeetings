@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library>
 	<class name="allmeetings" extends="baseContentView"  bgcolor="white">
+		
+		<handler name="ontabcontentleave">
+            canvas._chatcontentRPC = null;
+            canvas.thishib.removeClientFromChatNotification.doCall();
+        </handler>
+        
 		<simplelayout axis="y" spacing="2" />	
 		<!-- label: meeting room -->
 		<labelText fontstyle="bold" y="10" labelid="128" resize="true" width="200" />

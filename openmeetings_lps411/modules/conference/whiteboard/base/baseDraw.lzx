@@ -167,6 +167,10 @@
 			|| modi=='rectangle' || modi=='ellipse' || modi=='drawarrow'){
 			if (this.boundingref!=null) this.boundingref.removeIt();
 		}
+		if (modi=='rectangle') {
+			//Open Up Recording
+			
+		}
 	</method>
 	
 	<method name="getModusItems" args="modi">
