@@ -20,6 +20,8 @@
 	        this._userpic.setAttribute('src',downloadurl);	
 	        
 	        Debug.write("TIME: "+this.usertime);
+	        
+	        
         ]]>
 	</handler>
 	
@@ -39,6 +41,7 @@
 	<attribute name="roomname" value="" type="string" />
 	<attribute name="currentusers" value="null" />
 	
+	
 	<method name="doinit" args="currentusers,roomid,roomname">
 		<![CDATA[
 			Debug.write("doinit",currentusers,roomid,roomname);
@@ -55,6 +58,8 @@
 			}
 			canvas._chatcontentRPC.doinit();
 			this.addClientToChatNotification.doCall();
+			this.getAppointmentData.doCall();
+			
 		]]>
 	</method>
 	
@@ -64,6 +69,49 @@
 		<handler name="ondata" args="value">	
 		    <![CDATA[
 		    	Debug.write("addClientToChatNotification: ",value);
+		    ]]>	        	          				
+		</handler>	
+	</netRemoteCallHib>
+	
+	<!-- Retrieving Appointmentdata for Meeting -->
+	<netRemoteCallHib name="getAppointmentData" remotecontext="$once{ canvas.thishib }" 
+		funcname="conferenceservice.getAppointMentDataForRoom" >   
+		<netparam><method name="getValue">return parent.parent.roomid;</method></netparam>
+		<handler name="ondata" args="value">	
+		    <![CDATA[
+		    	Debug.write("getAppointmentData: ",value);
+		    	
+		    	if(value!=null){
+		    		Debug.write("Appointment Name : " + value.appointmentName);
+		    		parent.bdatum.setAttribute('text',parseDateToString(value.appointmentStarttime));
+		    		parent.bzeit.setAttribute('text',parseDateToStringTimeOnly(value.appointmentStarttime));
+		    		parent.edatum.setAttribute('text',parseDateToString(value.appointmentEndtime));
+		    		parent.ezeit.setAttribute('text',parseDateToStringTimeOnly(value.appointmentEndtime));
+		    		
+		    		
+		    		parent.bdatum.setAttribute('visible', true);
+		    		parent.bzeit.setAttribute('visible', true);
+		    		parent.edatum.setAttribute('visible', true);
+		    		parent.ezeit.setAttribute('visible', true);
+		    		parent.l_bdatum.setAttribute('visible', true);
+		    		parent.l_edatum.setAttribute('visible', true);
+		    		
+		    		Debug.write("Appointment Start : " + value.appointmentStarttime);
+		    		Debug.write("Appointment End : " + value.appointmentEndtime);
+		    	}
+		    	else{
+		    		parent.bdatum.setAttribute('text','');
+		    		parent.bzeit.setAttribute('text','');
+		    		
+		    		parent.bdatum.setAttribute('visible', false);
+		    		parent.bzeit.setAttribute('visible', false);
+		    		parent.edatum.setAttribute('visible', false);
+		    		parent.ezeit.setAttribute('visible', false);
+		    		parent.l_bdatum.setAttribute('visible', false);
+		    		parent.l_edatum.setAttribute('visible', false);
+		    	}
+		    	
+		    	
 		    ]]>	        	          				
 		</handler>	
 	</netRemoteCallHib> 	
@@ -83,9 +131,19 @@
 	<labelText labelid="404" fontstyle="italic" width="200" />
 	
 	<labelText name="_roomname" labelid="406" y="20" width="200" />
-	<labelText labelid="407" y="40" width="200" />
+	
+	
+	<labelText name="l_bdatum" labelid="570" y="40" width="50" visible="false"/>
+	<customEdittext name="bdatum" y="40" x="75" width="100" text="" visible="false" /> 	            	
+	<customEdittext name="bzeit" x="200" y="40" width="50" regexpType="time" visible="false" />
+	
+	<labelText name="l_edatum" labelid="571" y="70" width="50" visible="false" />
+	<customEdittext name="edatum" y="70" x="75" width="100" text="" visible="false" /> 	            	
+	<customEdittext name="ezeit" x="200" y="70" width="50" regexpType="time" visible="false" />
+	
+	<labelText labelid="407" y="110" width="200" />
 	<view name="_users" bgcolor="$once{ canvas.basebgcolorizer }" 
-		  width="300" height="100" y="60" >
+		  width="300" height="100" y="130" >
 		<method name="clearList">
 			for (var eg in this._users._cbtext.subviews) 
 				this._users._cbtext.subviews[eg].destroy();
@@ -95,8 +153,8 @@
 			<vscrollbar />
 		</view>
 	</view>
-	<labelText y="170" labelid="405" />
-	<view name="_chat" y="190" height="320" >
+	<labelText y="240" labelid="405" />
+	<view name="_chat" y="250" height="270" >
 		<view name="_chatoutputborder" height="${ parent.height-48 }"
 	        bgcolor="$once{ canvas.basebgcolorizer }" width="300">
 			<chatOutputRoomsList name="_chatoutput" x="1" y="1" >
