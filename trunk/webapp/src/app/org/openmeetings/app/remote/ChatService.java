@@ -1,5 +1,6 @@
 package org.openmeetings.app.remote;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -97,15 +98,16 @@ public class ChatService implements IPendingServiceCallback {
 			}
 			
 			//log.error(newMessage.getClass().getName());
-			LinkedHashMap messageMap = (LinkedHashMap) newMessage;
+			ArrayList messageMap = (ArrayList) newMessage;
 			//adding delimiter space, cause otherwise an emoticon in the last string would not be found
 			String messageText = messageMap.get(4).toString()+" ";
 			//log.error("messageText"+messageText);
 			//add server time
-			messageMap.put(1,parseDateAsTimeString());
+			messageMap.set(1,parseDateAsTimeString());
 			LinkedList<String[]> parsedStringObjects = ChatString.getInstance().parseChatString(messageText);
 			//log.error("parsedStringObjects"+parsedStringObjects.size());
-			messageMap.put(9, parsedStringObjects);
+			log.debug("size:"+messageMap.size());
+			messageMap.add(parsedStringObjects);
 			newMessage = messageMap;			
 			
 			HashMap<String,Object> hsm = new HashMap<String,Object>();
@@ -282,15 +284,16 @@ public class ChatService implements IPendingServiceCallback {
 			RoomClient currentClient = this.clientListManager.getClientByStreamId(current.getClient().getId());
 			
 			//log.error(newMessage.getClass().getName());
-			LinkedHashMap messageMap = (LinkedHashMap) newMessage;
+			ArrayList messageMap = (ArrayList) newMessage;
 			//adding delimiter space, cause otherwise an emoticon in the last string would not be found
 			String messageText = messageMap.get(4).toString()+" ";
 			//log.error("messageText"+messageText);
 			//add server time
-			messageMap.put(1,parseDateAsTimeString());
+			messageMap.set(1,parseDateAsTimeString());
 			LinkedList<String[]> parsedStringObjects = ChatString.getInstance().parseChatString(messageText);
 			//log.error("parsedStringObjects"+parsedStringObjects.size());
-			messageMap.put(9, parsedStringObjects);
+			log.debug("size:" + messageMap.size());
+			messageMap.add(parsedStringObjects);
 			newMessage = messageMap;
 			
 			
