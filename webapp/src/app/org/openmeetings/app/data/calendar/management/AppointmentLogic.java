@@ -173,6 +173,9 @@ public class AppointmentLogic {
 			
 			Rooms room = point.getRoom();
 			
+			
+		
+			
 			// Deleting/Notifing Meetingmembers
 			List<MeetingMember> members = MeetingMemberDaoImpl.getInstance().getMeetingMemberByAppointmentId(appointmentId);
 		    
