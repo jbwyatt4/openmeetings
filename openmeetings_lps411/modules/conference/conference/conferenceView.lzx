@@ -65,6 +65,75 @@
     
 </class>
 
+<class name="winni" extends="window" bgcolor="white" textcolor="white">
+	<attribute name="roomobj" value="null" />
+	
+	<handler name="oninit" >
+		this.getAppointmentData.doCall();
+		this.getServerTime.doCall();
+		
+	</handler>
+	
+	<labelText name="appstartlabel" y="10" labelid="570" width="50"/>
+	<edittext name="_appstart" x="75" y="10" width="100"></edittext>
+	<customEdittext name="bzeit" x="200" y="10" width="50" regexpType="time" />
+	
+	<labelText name="l_edatum" labelid="571" y="40" width="50"  />
+	<edittext name="edatum" y="40" x="75" width="100" text=""  /> 	            	
+	<customEdittext name="ezeit" x="200" y="40" width="50" regexpType="time"  />
+	
+	<labelText name="l_sdatum" labelid="621" y="80" width="50"  />
+	<edittext name="sdatum" y="80" x="75" width="100" text=""  /> 	            	
+	<customEdittext name="szeit" x="200" y="80" width="50" regexpType="time"  />
+	
+	<!-- Retrieving Appointmentdata for Meeting -->
+	<netRemoteCallHib name="getAppointmentData" remotecontext="$once{ canvas.thishib }" 
+		funcname="conferenceservice.getAppointMentDataForRoom" >   
+		<netparam><method name="getValue">return parent.parent.roomobj.rooms_id;</method></netparam>
+		
+		<handler name="ondata" args="value">	
+		    <![CDATA[
+		    	Debug.write("getAppointmentData: ",value);
+		    	
+		    	if(value!=null){
+		    		Debug.write("Appointment Name : " + value.appointmentName);
+		    		
+		    		parent._appstart.setAttribute('text',parseDateToString(value.appointmentStarttime));
+		    		
+		    		parent.bzeit.setAttribute('text',parseDateToStringTimeOnly(value.appointmentStarttime));
+		    		parent.edatum.setAttribute('text',parseDateToString(value.appointmentEndtime));
+		    		parent.ezeit.setAttribute('text',parseDateToStringTimeOnly(value.appointmentEndtime));
+		    	
+		    		Debug.write("Appointment Start : " + value.appointmentStarttime);
+		    		Debug.write("Appointment End : " + value.appointmentEndtime);
+		    	}
+		    	
+		    	
+		    ]]>	        	          				
+		</handler>	
+	</netRemoteCallHib> 
+	
+	<!-- Retrieving Appointmentdata for Meeting -->
+	<netRemoteCallHib name="getServerTime" remotecontext="$once{ canvas.thishib }" 
+		funcname="conferenceservice.getServerTime" >   
+		
+		<handler name="ondata" args="value">	
+		    <![CDATA[
+		    	Debug.write("getServerTime: ",value);
+		    	
+		    	if(value!=null){
+		    		parent.sdatum.setAttribute('text',parseDateToString(value));
+		    		parent.szeit.setAttribute('text',parseDateToStringTimeOnly(value));
+		    		
+		    	}
+		    	
+		    	
+		    ]]>	        	          				
+		</handler>	
+	</netRemoteCallHib> 
+	
+</class>
+
     
 <class name="conferenceView" extends="baseContentView" destroyByMethod="true" >
 	
@@ -78,8 +147,21 @@
         new lz.conferenceMenubar(canvas._conferencemenu);
         new lz.moderationPanel(canvas._conferencemenu,{x:this.roomobj.moderationPanelXPosition});
         canvas._conferencemenu.setAttribute('visibility','visible');
-
+		
         this._videosView.bringToFront();
+        
+       
+        if(roomobj.appointment){
+        	new lz.winni(canvas.conferenceView,{ name:'appDetail',
+                    width:350, height:160, resizable:true, closeable:true, x:300,y:200, roomobj:this.roomobj });	
+        }
+        else{
+        	if ($debug) Debug.write("no appointed meeting");
+        }
+        
+        
+                    
+        
     </handler>
     
     <!--
