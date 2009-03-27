@@ -1866,4 +1866,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   <string id="620" name="appointed_room">
     <value>Termin Raum</value>
   </string>
+  <string id="621" name="servertime">
+    <value>Server Zeit</value>
+  </string>
 </language>

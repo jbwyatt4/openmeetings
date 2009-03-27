@@ -1874,5 +1874,8 @@ languagesディレクトリにコピーして、
   </string> 
   <string id="620" name="appointed_room">
     <value>Appointment Room</value>
+  </string>
+  <string id="621" name="servertime">
+    <value>Server Time</value>
   </string> 
 </language>

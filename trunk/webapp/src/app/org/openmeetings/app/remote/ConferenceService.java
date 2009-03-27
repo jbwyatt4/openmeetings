@@ -1,6 +1,7 @@
 package org.openmeetings.app.remote;
  
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -120,6 +121,20 @@ public class ConferenceService {
         
         return filtered;
 	}
+	
+	
+	/**
+	 * retrieving ServerTime
+	 * @return
+	 */
+	//--------------------------------------------------------------------------------------------
+	public Date getServerTime(){
+		log.debug("getServerTime");
+	
+		return new Date(System.currentTimeMillis());
+	
+	}
+	//--------------------------------------------------------------------------------------------
 	
 	
 	/**
