@@ -23,6 +23,7 @@ import org.openmeetings.app.hibernate.beans.calendar.MeetingMember;
 import org.openmeetings.app.hibernate.beans.recording.RoomClient;
 import org.openmeetings.app.hibernate.beans.rooms.Rooms;
 import org.openmeetings.app.hibernate.beans.user.Users;
+import org.openmeetings.app.quartz.scheduler.QuartzMeetingReminderJob;
 import org.openmeetings.app.quartz.scheduler.QuartzRecordingJob;
 import org.openmeetings.app.quartz.scheduler.QuartzSessionClear;
 import org.openmeetings.app.remote.ConferenceService;
@@ -114,9 +115,13 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 			// init your handler here
 			QuartzSessionClear quartzSessionClear = new QuartzSessionClear();
 			QuartzRecordingJob quartzRecordingJob = new QuartzRecordingJob();
+			QuartzMeetingReminderJob reminderJob = new QuartzMeetingReminderJob();
+			
 			//QuartzZombieJob quartzZombieJob = new QuartzZombieJob();
 			addScheduledJob(300000,quartzSessionClear);
 			addScheduledJob(3000,quartzRecordingJob);
+			addScheduledJob(100000, reminderJob);
+			
 			//addScheduledJob(2000,quartzZombieJob);
 			
 			//Spring Definition does not work here, its too early, Instance is not set yet

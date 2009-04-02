@@ -83,7 +83,7 @@ public class InvitationService implements IPendingServiceCallback {
     	Long invitationId =  Invitationmanagement.getInstance().addInvitationLink(user_level, username, message, 
     			baseurl, email, subject, room_id, conferencedomain,
     			isPasswordProtected, invitationpass, 
-    			valid, dFrom, dTo, users_id);
+    			valid, dFrom, dTo, users_id, baseurl);
     	
     	if(invitationId != null)
     		return "success";

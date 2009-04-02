@@ -9,10 +9,12 @@ import org.slf4j.Logger;
 import org.red5.logging.Red5LoggerFactory;
 import org.openmeetings.app.data.calendar.daos.AppointmentDaoImpl;
 import org.openmeetings.app.data.calendar.daos.MeetingMemberDaoImpl;
+import org.openmeetings.app.data.conference.Invitationmanagement;
 import org.openmeetings.app.data.conference.Roommanagement;
 import org.openmeetings.app.data.user.Usermanagement;
 import org.openmeetings.app.hibernate.beans.calendar.Appointment;
 import org.openmeetings.app.hibernate.beans.calendar.MeetingMember;
+import org.openmeetings.app.hibernate.beans.invitation.Invitations;
 import org.openmeetings.app.hibernate.beans.rooms.Rooms;
 import org.openmeetings.app.hibernate.beans.user.Users;
 
@@ -174,8 +176,6 @@ public class AppointmentLogic {
 			Rooms room = point.getRoom();
 			
 			
-		
-			
 			// Deleting/Notifing Meetingmembers
 			List<MeetingMember> members = MeetingMemberDaoImpl.getInstance().getMeetingMemberByAppointmentId(appointmentId);
 		    
@@ -217,6 +217,91 @@ public class AppointmentLogic {
 	}
 	//----------------------------------------------------------------------------------------------
 	
+	
+	/**
+	 * Sending Reminder in Simple mail format hour before Meeting begin
+	 */
+	//----------------------------------------------------------------------------------------------
+	public void doScheduledMeetingReminder(){
+		log.debug("doScheduledMeetingReminder");
+		
+		
+		List<Appointment> points = AppointmentDaoImpl.getInstance().getTodaysAppoitmentsForAllUsers();
+		
+		if(points==null || points.size() < 1){
+			log.debug("doScheduledMeetingReminder : no Appointments today");
+			return;
+		}
+		
+		for(int i = 0; i < points.size(); i++){
+			Appointment ment = points.get(i);
+			
+			// Checking ReminderType - only ReminderType simple mail is concerned!
+			if(ment.getRemind().getTypId() == 2){
+				log.debug("doScheduledMeetingReminder : Found appointment " +  ment.getAppointmentName());
+				
+				// Check right time
+				Date now = new Date(System.currentTimeMillis());
+				
+				Date appStart = ment.getAppointmentStarttime();
+				Date oneHourBeforeAppStart = new Date(System.currentTimeMillis());
+				oneHourBeforeAppStart.setTime(appStart.getTime());
+				oneHourBeforeAppStart.setHours(appStart.getHours() -1);
+				
+				if(now.before(appStart) && now.after(oneHourBeforeAppStart)){
+					log.debug("Meeting " +  ment.getAppointmentName() + " is in reminder range...");
+					
+					List<MeetingMember> members = MeetingMemberDaoImpl.getInstance().getMeetingMemberByAppointmentId(ment.getAppointmentId());
+					
+					
+					if(members == null || members.size() < 1){
+						log.debug("doScheduledMeetingReminder : no members in meeting!");
+						continue;
+					}
+					
+					String message = "Meeting : " + ment.getAppointmentName() + "<br>";
+					if(ment.getAppointmentDescription() != null && ment.getAppointmentDescription().length() > 0)
+						message += "(" + ment.getAppointmentDescription() + ")<br>";
+					message += "Start : " + ment.getAppointmentStarttime().toLocaleString() + "<br>";
+					
+					
+					String subject = "OpenMeetings Meeting Reminder";
+					
+					for(int y =0; y < members.size(); y++){
+						MeetingMember mm = members.get(y);
+						
+						log.debug("doScheduledMeetingReminder : Member " + mm.getEmail());
+						
+						Invitations inv = mm.getInvitation();
+						
+						// Check if Invitation was updated last time
+						Date updateTime = inv.getUpdatetime();
+						
+						if(updateTime !=null && updateTime.after(oneHourBeforeAppStart)){
+							log.debug("Member has been informed within one hour before Meeting start");
+							continue;
+						}
+						
+						if(inv==null)
+							log.error("Error retrieving Invitation for member " + mm.getEmail() + " in Appointment " + ment.getAppointmentName());
+						
+						if(inv.getBaseUrl() == null  || inv.getBaseUrl().length() < 1){
+							log.error("Error retrieving baseUrl from Invitation ID : " + inv.getInvitations_id());
+							continue;
+						}
+						
+						Invitationmanagement.getInstance().sendInvitationReminderLink("OpenMeetings", message, inv.getBaseUrl(), mm.getEmail(), subject, inv.getHash());
+						
+						inv.setUpdatetime(now);
+						Invitationmanagement.getInstance().updateInvitation(inv);
+					}
+				}
+				else
+					log.debug("Meeting is not in Reminder Range!");
+			}
+		}
+	}
+	//----------------------------------------------------------------------------------------------
 	
 	
 	/**
