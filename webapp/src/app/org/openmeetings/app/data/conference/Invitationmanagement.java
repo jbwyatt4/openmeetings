@@ -72,7 +72,7 @@ public class Invitationmanagement {
 	public Long addInvitationLink(Long user_level, String username, String message,
 			String baseurl, String email, String subject, Long rooms_id, String conferencedomain,
 			Boolean isPasswordProtected, String invitationpass, Integer valid,
-			Date validFrom, Date validTo, Long createdBy
+			Date validFrom, Date validTo, Long createdBy, String baseUrl
 			){
 		try {
 			if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)){
@@ -84,6 +84,7 @@ public class Invitationmanagement {
 				}
 				
 				invitation.setInvitationWasUsed(false);
+				invitation.setBaseUrl(baseUrl);
 				
 				//valid period of Invitation
 				if (valid == 1) {
@@ -351,6 +352,47 @@ public class Invitationmanagement {
 		}
 		return null;
 	}
+	
+	
+	
+	/**
+	 * @author o.becherer
+	 * @param userName
+	 * @param message
+	 * @param baseUrl
+	 * @param email
+	 * @param subject
+	 * @param invitationHash
+	 * @return
+	 */
+	//----------------------------------------------------------------------------------------------------
+	public String sendInvitationReminderLink(String userName, String message, String baseUrl, String email, String subject, String invitationHash){
+		log.debug("sendInvitationReminderLink");
+		
+		try{
+			String invitation_link = baseUrl+"?lzr=swf8&lzt=swf&invitationHash="+invitationHash;
+			
+			Long default_lang_id = Long.valueOf(Configurationmanagement.getInstance().getConfKey(3,"default_lang_id").getConf_value()).longValue();
+			
+			//String template = InvitationTemplate.getInstance().getReminderInvitationTemplate(userName, message, invitation_link, default_lang_id);
+			//TODO Velocity Template cant be found when running from QuartzJob
+			
+			String template = "";
+			template +="<html>";
+			template += "<body>";
+			template +="<b>OpenMeetings Meeting Reminder</b><br><br>";
+			template +=message + "<br><br>";
+			template += "<a href='" + invitation_link + "'>Click here to enter room</a>";
+			
+			
+			return MailHandler.sendMail(email, subject, template);
+		}catch(Exception e){
+			log.error("sendInvitationReminderLink",e);
+		}
+		
+		return null;
+	}
+	//----------------------------------------------------------------------------------------------------
 	
 	
 	/**
@@ -737,7 +779,7 @@ public class Invitationmanagement {
 	 * 
 	 * @param invitation
 	 */
-	private void updateInvitation(Invitations invitation){
+	public void updateInvitation(Invitations invitation){
 		try {
 			invitation.setUpdatetime(new Date());
 			Object idf = HibernateUtil.createSession();

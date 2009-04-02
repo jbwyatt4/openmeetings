@@ -41,6 +41,9 @@ public class Invitations {
 	private Boolean canBeUsedOnlyOneTime = false;
 	private Boolean invitationWasUsed = false;
 	
+	// BaseuRL defined at creation of InvitationLink - used for chronological reminders on serverside (updates)
+	private String baseUrl;
+	
 	public Invitations() {
 		super();
 		//	TODO Auto-generated constructor stub
@@ -264,6 +267,23 @@ public class Invitations {
 	public void setIsValidByTime(Boolean isValidByTime) {
 		this.isValidByTime = isValidByTime;
 	}
+
+	/**
+     * @hibernate.property
+     *  column="baseUrl"
+     *  type="boolean"
+     */	
+	public String getBaseUrl() {
+		return baseUrl;
+	}
+
+
+	public void setBaseUrl(String baseUrl) {
+		this.baseUrl = baseUrl;
+	}
+	
+	
+	
 	
 
 }

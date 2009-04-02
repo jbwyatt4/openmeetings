@@ -80,7 +80,8 @@ public class MeetingMemberLogic {
 						1, // valid
 						point.getAppointmentStarttime(), // valid from
 						point.getAppointmentEndtime(), // valid to
-						new Long(1) // created by
+						meeting_organizer, // created by
+						baseUrl
 						);
 				
 			}
@@ -160,28 +161,6 @@ public class MeetingMemberLogic {
 	
 	
 	
-	/**
-	 * 
-	 */
-	//------------------------------------------------------------------------------------------------------------------------------
-	public void updateMeetingMemberNotificatio(MeetingMember member, Long user_id){
-		log.debug("updateMeetingMemberNotification");
-		
-		Appointment ment = AppointmentLogic.getInstance().getAppointMentById(member.getAppointment().getAppointmentId());
-		
-		Long reminderType = ment.getRemind().getTypId();
-		
-		if(reminderType == 1){
-			log.debug("ReminderType none : no notification requirered");
-			return;
-		}
-		else if(reminderType == 2){
-			// Simple mail
-			
-		}
-		
-	}
-	//------------------------------------------------------------------------------------------------------------------------------
 	
 	
 	/**
