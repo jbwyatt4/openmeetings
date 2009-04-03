@@ -2,6 +2,7 @@
 
   * Client !OpenLaszlo http://www.openlaszlo.org
   * Server (Remoting and Streaming) Red5 http://www.osflash.org/red5
+  * Xuggler http://www.xuggle.com
   * Persistent Layer: Hibernate http://www.hibernate.org
   * Database: !MySQL or Postgres, or any other with a Hibernate-Dialect ([http://www.hibernate.org/hib_docs/reference/en/html/session-configuration.html#configuration-optional-dialects   full-list])
   * !DocumentConverter: !OpenOffice http://www.openoffice.org and JOD (http://www.artofsolving.com/opensource/jodconverter), 
