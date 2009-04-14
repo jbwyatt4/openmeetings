@@ -187,6 +187,8 @@
 								canvas.getLabelName(479),canvas.getLabelName(480)]
 			//460
 			//454
+			
+			this.init();
 		]]>
 	</handler>	
 	
@@ -245,7 +247,7 @@
 	
 	<method name="hiliteDate" args="dateObj">
 		<![CDATA[
-		if(this.selected!=null) this.selected.setAttribute('bgcolor',white);
+		if(this.selected!=null) this.selected.setAttribute('bgcolor',"white");
 		var i=0;
 		while (i<this.content.content.content.subviews.length){
 			var k=0;
