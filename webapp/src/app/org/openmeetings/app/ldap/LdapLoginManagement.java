@@ -35,9 +35,8 @@ public class LdapLoginManagement {
 	
 	// ConfigConstants
 	public static final String CONFIGKEY_LDAP_URL = "ldap_conn_url";
-	public static final String CONFIGKEY_LDAP_ADMIN = "ldap_admin";
+	public static final String CONFIGKEY_LDAP_ADMIN_DN = "ldap_admin_dn";
 	public static final String CONFIGKEY_LDAP_ADMIN_PASSWD = "ldap_passwd";
-	public static final String CONFIGKEY_LDAP_LOGIN_SCOPE = "ldap_login_base";
 	public static final String CONFIGKEY_LDAP_SEARCH_SCOPE = "ldap_search_base";
 	
 	public static final String CONFIGKEY_LDAP_FIELDNAME_USER_PRINCIPAL = "field_user_principal";
@@ -169,14 +168,11 @@ public class LdapLoginManagement {
 		String ldap_url = configData.get(CONFIGKEY_LDAP_URL);
 		
 		// Username for LDAP SERVER himself
-		String ldap_admin = configData.get(CONFIGKEY_LDAP_ADMIN);
+		String ldap_admin_dn = configData.get(CONFIGKEY_LDAP_ADMIN_DN);
 		
 		// Password for LDAP SERVER himself
 		String ldap_passwd = configData.get(CONFIGKEY_LDAP_ADMIN_PASSWD);
-		
-		// LdapBASE for Login
-		String ldap_login_base = configData.get(CONFIGKEY_LDAP_LOGIN_SCOPE);
-		
+				
 		// SearchScope for retrievment of userdata
 		String ldap_search_scope = configData.get(CONFIGKEY_LDAP_SEARCH_SCOPE);
 		
@@ -190,11 +186,10 @@ public class LdapLoginManagement {
 		log.debug("Searching userdata with LDAP Search Filter :" + ldap_search_filter);
 		
 		// replace : -> in config = are replaced by : to be able to build valid key=value pairs
-		ldap_login_base = ldap_login_base.replaceAll(":", "=");
 		ldap_search_scope = ldap_search_scope.replaceAll(":", "=");
+		ldap_admin_dn = ldap_admin_dn.replaceAll(":", "=");
 		
-		
-		LdapAuthBase lAuth = new LdapAuthBase(ldap_url, ldap_admin, ldap_passwd, ldap_login_base, LdapAuthBase.LDAP_AUTH_TYPE_SIMPLE);
+		LdapAuthBase lAuth = new LdapAuthBase(ldap_url, ldap_admin_dn, ldap_passwd, LdapAuthBase.LDAP_AUTH_TYPE_SIMPLE);
 		
 		try{
 			if(!lAuth.authenticateUser(user, passwd))
