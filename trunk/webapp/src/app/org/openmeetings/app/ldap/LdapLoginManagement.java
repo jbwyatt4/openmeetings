@@ -21,7 +21,6 @@ import org.red5.logging.Red5LoggerFactory;
 
 
 
-
 /**
  * Management of optional LDAP Login
  * @author o.becherer
@@ -38,6 +37,7 @@ public class LdapLoginManagement {
 	public static final String CONFIGKEY_LDAP_ADMIN_DN = "ldap_admin_dn";
 	public static final String CONFIGKEY_LDAP_ADMIN_PASSWD = "ldap_passwd";
 	public static final String CONFIGKEY_LDAP_SEARCH_SCOPE = "ldap_search_base";
+	public static final String CONFIGKEY_LDAP_AUTH_TYPE = "ldap_auth_type";
 	
 	public static final String CONFIGKEY_LDAP_FIELDNAME_USER_PRINCIPAL = "field_user_principal";
 	
@@ -67,6 +67,28 @@ public class LdapLoginManagement {
 		return instance;
 	}
 	
+	/**
+	 * Determine if is a supported Auth Type
+	 * @param authType
+	 */
+	 //-------------------------------------------------------------------------------------------------------
+	 public static boolean isValidAuthType(String authType){
+	 		log.debug("isValidAuthType");
+	 		
+	 	    if (authType != null){
+	 			if (!authType.isEmpty() ){
+ 				if (authType.equalsIgnoreCase(LdapAuthBase.LDAP_AUTH_TYPE_SIMPLE))
+						return true;
+	 			if (authType.equalsIgnoreCase(LdapAuthBase.LDAP_AUTH_TYPE_NONE))
+	 				return true;
+	 		}
+	 	}
+	 	    
+	 	   return false;
+	 
+	 }
+	 //-------------------------------------------------------------------------------------------------------
+	 	
 	
 	/**
 	 * Ldap Login configured?
@@ -88,7 +110,6 @@ public class LdapLoginManagement {
 			log.error("ConfigVal ldap_config_path not describes a valid File : " + configVal);
 			return false;
 		}
-		
 		
 		return true;
 		
@@ -179,6 +200,16 @@ public class LdapLoginManagement {
 		// FieldName for Users's Prinicipal Name
 		String ldap_fieldname_user_principal = configData.get(CONFIGKEY_LDAP_FIELDNAME_USER_PRINCIPAL);
 		
+		// Auth Type
+		String ldap_auth_type = configData.get(CONFIGKEY_LDAP_AUTH_TYPE);
+		
+		if(ldap_auth_type == null)
+			ldap_auth_type = "";
+		
+		if ( ! isValidAuthType(ldap_auth_type) ){
+			log.error("ConfigKey in Ldap Config contains invalid auth type : '" + ldap_auth_type + "' -> Defaulting to " + LdapAuthBase.LDAP_AUTH_TYPE_SIMPLE);	
+			ldap_auth_type = LdapAuthBase.LDAP_AUTH_TYPE_SIMPLE;
+		}
 		
 		// Filter for Search of UserData
 		String ldap_search_filter = "(" + ldap_fieldname_user_principal + "=" + user + ")";
@@ -189,7 +220,7 @@ public class LdapLoginManagement {
 		ldap_search_scope = ldap_search_scope.replaceAll(":", "=");
 		ldap_admin_dn = ldap_admin_dn.replaceAll(":", "=");
 		
-		LdapAuthBase lAuth = new LdapAuthBase(ldap_url, ldap_admin_dn, ldap_passwd, LdapAuthBase.LDAP_AUTH_TYPE_SIMPLE);
+		LdapAuthBase lAuth = new LdapAuthBase(ldap_url, ldap_admin_dn, ldap_passwd, ldap_auth_type);
 		
 		try{
 			if(!lAuth.authenticateUser(user, passwd))
