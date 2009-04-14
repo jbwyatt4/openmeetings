@@ -111,9 +111,8 @@
     	</view> 
     	 
    <handler name="oninit">
-   	   
-   	   //this.init();
-  
+   	  
+
    	   this.dayNamesLabelIds = [459,453,454,455,456,457,458];
    	   this.dayLabelNamesLabelIds = [466,460,461,462,463,464,465];
 	   this.monthnames = [canvas.getLabelName(469),canvas.getLabelName(470),
@@ -127,6 +126,7 @@
    	   if ($debug) Debug.write("this month _startDate: ",parent.parent.parent._startDate);
    	   this.showingdate = parent.parent.parent._startDate;
    	   
+   	   this.init();
    	   
    </handler>
    
