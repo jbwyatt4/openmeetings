@@ -30,15 +30,12 @@ public class LdapAuthBase {
 	/** LdapConnectionUrl */
 	private String ldap_connection_url = "";
 	
-	/** LdapServer Loginname */
-	private String ldap_admin = "";
+	/** LdapServer Login distinguished name */
+	private String ldap_admin_dn = "";
 	
 	/** LdapServer Passwd */
 	private String ldap_passwd = "";
-	
-	/** LdapServer LoginBase */
-	private String ldap_login_base = "";
-	
+		
 	/** Security Authentification Type */
 	private String ldap_auth_type = "simple";
 	
@@ -63,13 +60,12 @@ public class LdapAuthBase {
 	 * @param authType
 	 */
 	//------------------------------------------------------------------------------------------------------
-	public LdapAuthBase(String connectionUrl, String admin, String passwd, String base, String authType){
+	public LdapAuthBase(String connectionUrl, String admin_dn, String passwd, String authType){
 		log.debug("LdapAuthBase");
 		
 		this.ldap_connection_url = connectionUrl;
-		this.ldap_admin = admin;
+		this.ldap_admin_dn = admin_dn;
 		this.ldap_passwd = passwd;
-		this.ldap_login_base = base;
 		this.ldap_auth_type = authType;
 	}
 	//------------------------------------------------------------------------------------------------------
@@ -93,7 +89,7 @@ public class LdapAuthBase {
 	    ldapAuthenticateProperties.put(Context.SECURITY_CREDENTIALS, passwd);
 	    ldapAuthenticateProperties.put("java.naming.ldap.referral.bind", "true");
 		
-	    if(!ldap_auth_type.equals(LDAP_AUTH_TYPE_NONE) && (ldap_admin !=null || ldap_admin.length() < 1)){
+	    if(!ldap_auth_type.equals(LDAP_AUTH_TYPE_NONE) && (ldap_admin_dn !=null || ldap_admin_dn.length() < 1)){
 	    	log.debug("Authentification to LDAP - Server start");
 	    	try {
 	    		loginToLdapServer();
@@ -130,13 +126,10 @@ public class LdapAuthBase {
 		
 		Hashtable<String, String> env = new Hashtable<String, String>();
 		
-		// Build Security Principal
-		String dn = "CN=" + ldap_admin + "," + ldap_login_base;
-		
 		env.put(Context.INITIAL_CONTEXT_FACTORY, CONTEXT_FACTORY);
 		env.put(Context.PROVIDER_URL, ldap_connection_url);
 		env.put(Context.SECURITY_AUTHENTICATION, ldap_auth_type);
-		env.put(Context.SECURITY_PRINCIPAL, dn);
+		env.put(Context.SECURITY_PRINCIPAL, ldap_admin_dn);
 		env.put(Context.SECURITY_CREDENTIALS, ldap_passwd);
 		
 		authContext = new InitialDirContext(env);
