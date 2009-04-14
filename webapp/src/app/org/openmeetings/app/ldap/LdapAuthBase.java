@@ -89,7 +89,11 @@ public class LdapAuthBase {
 	    ldapAuthenticateProperties.put(Context.SECURITY_CREDENTIALS, passwd);
 	    ldapAuthenticateProperties.put("java.naming.ldap.referral.bind", "true");
 		
-	    if(!ldap_auth_type.equals(LDAP_AUTH_TYPE_NONE) && (ldap_admin_dn !=null || ldap_admin_dn.length() < 1)){
+	    
+	    if(ldap_admin_dn == null)
+	    	ldap_admin_dn = "";
+	    
+	    if(!ldap_auth_type.equals(LDAP_AUTH_TYPE_NONE) && ldap_admin_dn.length() > 0){
 	    	log.debug("Authentification to LDAP - Server start");
 	    	try {
 	    		loginToLdapServer();
