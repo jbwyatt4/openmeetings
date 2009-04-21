@@ -549,17 +549,26 @@
 								parent.addMeetingMember.contact = contact;
 								parent.addMeetingMember.doCall();
 								}
-			     		if(parent._liste._innerlist.subviews.length<1){
+			     			
+								parent.parent.getAppointmentByRange.doCall()
 							
-							parent.parent.getAppointmentByRange.doCall()
-							
-							if(parent.parent._tabslider._week.getAttribute('selected') == true){
-				 				//parent._tabslider._week._weekView._monday._tagesansicht._list._outlist.clearContent();
-				 				parent.parent._tabslider._week._weekView.initWeekByDate(parent.parent._startDate); // new Date() _startDate selecteddate
-				 				parent.parent._tabslider._week._weekView.getAppointmentByRangeWeek.doCall();
+								if(parent.parent._tabslider._week.getAttribute('selected') == true){
+				 					//parent._tabslider._week._weekView._monday._tagesansicht._list._outlist.clearContent();
+				 					parent.parent._tabslider._week._weekView.initWeekByDate(parent.parent._startDate); // new Date() _startDate selecteddate
+				 					parent.parent._tabslider._week._weekView.getAppointmentByRangeWeek.doCall();
 	 							}
 							
-							}
+								else if(parent.parent._tabslider._month.getAttribute('selected') == true){
+				 				
+				 					parent.parent._tabslider._month._monthview.init();
+				 				
+	 							}
+
+						
+							
+							
+							
+
 			    		parent.defaulttermindetails();
 		    		 ]]>
 		    	</handler>

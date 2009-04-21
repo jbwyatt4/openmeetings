@@ -27,9 +27,11 @@
 		    	<handler name="onselect">
 			    	//if ($debug) Debug.write("setCalendarItem_method: ",this);
 			    	//if ($debug) Debug.write("setCalendarItem_method: ",this.height);
-			    	//if ($debug) Debug.write("setCalendarItem_method: ",this.width);
-			    	new lz.monthView(this,{name:"_monthView"});
+			    	if ($debug) Debug.write("tabslider : month select!");
+			    	//new lz.monthView(this,{name:"_monthView"});
+				this._monthview.init();
 		    	</handler>
+			<monthView name="_monthview" />
 		    	
 		    </tabelement>	
 		   
