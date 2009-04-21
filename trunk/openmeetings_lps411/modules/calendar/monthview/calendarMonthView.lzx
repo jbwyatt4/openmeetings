@@ -8,7 +8,20 @@
 		<view name="_head" bgcolor="green" width="132">
 			<text name="_date" text="${parent.parent.daydate}"> Mo 31. Dez</text>
 		</view>
-		<view name="_appointemtList" bgcolor="blue" height="45" width="132" clip="true">
+		<view name="_appointemtList" bgcolor="white" height="45" width="132" clip="true">
+			<handler name="onclick">
+					if ($debug) Debug.write("calendarMonthView.onClick");
+					if ($debug) Debug.write("calendarMonthView.daydate : " + parent.daydate);
+					if ($debug) Debug.write("calendarMonthView.fullDate: " + parent.fullDate);
+
+
+					parent.parent.parent.parent.parent.parent._termindetails.defaulttermindetails();
+					
+					parent.parent.parent.parent.parent.parent._termindetails._date._bdatum.setAttribute('text',parseDateToString(parent.fullDate));
+					parent.parent.parent.parent.parent.parent._termindetails._date.edatum.setAttribute('text',parseDateToString(parent.fullDate));  
+					parent.parent.parent.parent.parent.parent._termindetails.setAttribute('visible', true);
+					
+			</handler>	
 			<view name="_innerList" layout="axis:y;spacing:1" >
 				<handler name="onaddsubview">
 					//parent.parent.countsubwievs=parent.parent.countsubwievs+1
@@ -22,7 +35,8 @@
 					}
 					//parent.scroll.destroy()
 					//parent.parent.countsubwievs=0;
-				</method>	
+				</method>
+				
 			</view>
 			<vscrollbar></vscrollbar>
 		</view>
