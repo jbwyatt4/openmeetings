@@ -133,6 +133,8 @@
    <method name="init">
         <![CDATA[ 
 	        super.init();
+
+		  if ($debug) Debug.write("monthView init!");
 	        this.clearContent();
 	        if (this.showingdate==""){
 	        	this.showingdate = new Date();
