@@ -347,6 +347,12 @@ public class AppointmentDaoImpl {
 			"AND a.starttime BETWEEN :starttime AND :endtime";
 			*/
 			
+			
+			starttime.setHours(0);
+			
+			endtime.setHours(23);
+			endtime.setMinutes(59);
+			
 			String hql = "select a from Appointment a " +					
 			"WHERE a.deleted != :deleted  " +
 			"AND "+
