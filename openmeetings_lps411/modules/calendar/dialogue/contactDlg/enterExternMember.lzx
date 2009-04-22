@@ -6,19 +6,15 @@
 		
 		<view name="_mainView" x="10" y="10" layout="axis:y;spacing:2">
 			
-			<text>
-			Vorname			
-			</text>
+
+			<labelText labelid="630" />
+			
 			<edittext name="vorname" width="${parent._buttons.width -10}"></edittext>
 			
-			<text>
-			Nachname
-			</text>
+			<labelText labelid="631" />
 			<edittext name="nachname" width="${parent._buttons.width -10}"></edittext>
 			
-			<text>
-			E-mail
-			</text>
+			<labelText labelid="632" />
 			<edittext width="${parent._buttons.width - 10}" name="email"></edittext>
 			
 			<view name="_buttons" layout="axis:x;spacing:2" width="210">
