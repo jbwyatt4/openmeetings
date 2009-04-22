@@ -1908,4 +1908,7 @@ languagesディレクトリにコピーして、
   <string id="631" name="lbl_name">
     <value>name</value>
   </string>
+   <string id="632" name="lbl_email">
+    <value>E-mail</value>
+  </string>
 </language>
