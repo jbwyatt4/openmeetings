@@ -9,19 +9,19 @@
 			<text>
 			Vorname			
 			</text>
-			<edittext name="vorname" width="${parent._buttons.width}"></edittext>
+			<edittext name="vorname" width="${parent._buttons.width -10}"></edittext>
 			
 			<text>
 			Nachname
 			</text>
-			<edittext name="nachname" width="${parent._buttons.width}"></edittext>
+			<edittext name="nachname" width="${parent._buttons.width -10}"></edittext>
 			
 			<text>
 			E-mail
 			</text>
-			<edittext width="${parent._buttons.width}" name="email"></edittext>
+			<edittext width="${parent._buttons.width - 10}" name="email"></edittext>
 			
-			<view name="_buttons" layout="axis:x;spacing:2">
+			<view name="_buttons" layout="axis:x;spacing:2" width="210">
 				<button text="OK" width="${parent._cancel.width}">
 					<handler name="onclick">
 						new lz.searchContactInCalendar(parent.parent.parent.refObj.terminObjRef._liste._innerlist,{userId:0, 
@@ -36,7 +36,7 @@
 					</handler>
 				</button>
 				
-				<button name="_cancel" text="Abbrechen" >
+				<button name="_cancel" text="Abbrechen" width="100">
 					<handler name="onclick">
 						parent.parent.parent.close();
 					</handler>

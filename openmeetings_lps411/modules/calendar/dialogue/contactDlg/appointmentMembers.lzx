@@ -10,21 +10,21 @@
 			
 		</edittext>
 		
-		<button text="suchen intern">
+		<simpleLabelButton labelid="628" >
 			<handler name="onclick">			
 			//parent.parent.getUserContactsBySearchByList.doCall();
 			parent.parent.getAllUserBySearchRange.doCall();
 			
 			</handler>
-		</button>
+		</simpleLabelButton >
 		
-		<button text="Externe Teilnehmer engeben">
+		<simpleLabelButton labelid="629" >
 			<handler name="onclick">			
 			//parent.parent.getUserContactsBySearchByList.doCall();
 			//parent.parent.getAllUserBySearchRange.doCall();
 			new lz.enterExternMember(parent.parent.parent, {refObj:parent.parent, x:parent.parent.x, y:parent.parent.y});
 			</handler>
-		</button>
+		</simpleLabelButton >
 	</view>
 	     
 	     <netRemoteCallHib name="getAllUserBySearchRange" funcname="userservice.getAllUserBySearchRange" 
