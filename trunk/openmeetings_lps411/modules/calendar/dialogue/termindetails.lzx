@@ -145,6 +145,9 @@
 				<handler name="onvalue" args="v">						
 					parent.roomtype = Number(this.getValue());												
 					if ($debug) Debug.write("roomtype: ",parent.roomtype);
+				</handler>
+				<handler name="oninit">
+				this.selectItemAt(0);
 				</handler>	
 				
 		 	<!--textitmes-->
