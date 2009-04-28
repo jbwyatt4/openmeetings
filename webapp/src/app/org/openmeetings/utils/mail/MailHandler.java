@@ -55,66 +55,6 @@ public class MailHandler {
 		}
 	}
 
-//	/**
-//	 * Sending a mail with given values
-//	 * 
-//	 * @param smtpServer
-//	 * @param to
-//	 * @param from
-//	 * @param subject
-//	 * @param body
-//	 * @return
-//	 */
-//	public static String send(String smtpServer, String smtpPort, String to, String from,
-//			String subject, String body) {
-//		try {
-//
-//			log.debug("Message sending in progress");
-//
-//			Properties props = System.getProperties();
-//
-//			// -- Attaching to default Session, or we could start a new one --
-//			//smtpPort 25 or 587
-//			props.put("mail.smtp.host", smtpServer);
-//			props.put("mail.smtp.port", smtpPort);
-//			props.put("mail.smtp.auth", "true");
-//
-//			Session session = Session.getDefaultInstance(props,
-//					new SmtpAuthenticator());
-//
-//			// -- Create a new message --
-//			Message msg = new MimeMessage(session);
-//
-//			// -- Set the FROM and TO fields --
-//			msg.setFrom(new InternetAddress(from));
-//			msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(
-//					to, false));
-//
-//			// -- We could include CC recipients too --
-//			// if (cc != null)
-//			// msg.setRecipients(Message.RecipientType.CC
-//			// ,InternetAddress.parse(cc, false));
-//
-//			// -- Set the subject and body text --
-//			msg.setSubject(subject);
-//			msg.setDataHandler(new DataHandler(new ByteArrayDataSource(body
-//					.toString(), "text/html")));
-//			// msg.setContent(body, "text/html");
-//
-//			// -- Set some other header information --
-//			msg.setHeader("X-Mailer", "XML-Mail");
-//			msg.setSentDate(new Date());
-//
-//			// -- Send the message --
-//			Transport.send(msg);
-//
-//			return "success";
-//		} catch (Exception ex) {
-//			log.error("[mail send] " ,ex);
-//			return "Error" + ex;
-//		}
-//	}
-	
 	/**
 	 * Sending a mail with given values.<br>
 	 * If the parameter "emailUsername" and "emailUserpass" is exist, use SMTP Authentication.
@@ -133,6 +73,9 @@ public class MailHandler {
 		try {
 
 			log.debug("Message sending in progress");
+			log.debug("  From: " + from);
+			log.debug("  To: " + to);
+			log.debug("  Subject: " + subject);
 
 			Properties props = System.getProperties();
 
@@ -169,9 +112,8 @@ public class MailHandler {
 
 			// -- Set the subject and body text --
 			msg.setSubject(subject);
-			msg.setDataHandler(new DataHandler(new ByteArrayDataSource(body
-					.toString(), "text/html")));
-			// msg.setContent(body, "text/html");
+			msg.setDataHandler(new DataHandler(new ByteArrayDataSource(body,
+					"text/html; charset=\"utf-8\"")));
 
 			// -- Set some other header information --
 			msg.setHeader("X-Mailer", "XML-Mail");
@@ -235,13 +177,13 @@ public class MailHandler {
 		
 		// -- Create a new message --
 		BodyPart msg = new MimeBodyPart();
-		msg.setDataHandler(new DataHandler(new ByteArrayDataSource(htmlBody, "text/html")));
+		msg.setDataHandler(new DataHandler(new ByteArrayDataSource(htmlBody, "text/html; charset=\"utf-8\"")));
 		
 		Multipart multipart = new MimeMultipart();
 		
 		BodyPart iCalAttachment = new MimeBodyPart();
 		iCalAttachment.setDataHandler(new DataHandler(new javax.mail.util.ByteArrayDataSource(new ByteArrayInputStream(iCalMimeBody), "text/calendar;method=REQUEST;charset=\"UTF-8\"")));
-		
+
 		multipart.addBodyPart(iCalAttachment);
 		multipart.addBodyPart(msg);
 		

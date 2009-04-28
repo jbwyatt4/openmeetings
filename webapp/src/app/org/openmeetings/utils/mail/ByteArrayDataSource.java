@@ -35,7 +35,7 @@ public class ByteArrayDataSource implements DataSource {
 			// Assumption that the string contains only ASCII
 			// characters! Otherwise just pass a charset into this
 			// constructor and use it in getBytes()
-			this.data = data.getBytes("iso-8859-1");
+			this.data = data.getBytes("utf-8");
 		} catch (UnsupportedEncodingException uex) {
 		}
 		this.type = type;
