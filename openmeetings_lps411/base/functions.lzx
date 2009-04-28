@@ -113,23 +113,25 @@ function loadContent(obj,parentobj,preparentobj){
     
     tempActionForNavi = obj.action;
 
-    if (!clearStageContent(obj)) {
-        loadContentByTempActionForNavi();
-    }
+	if (obj.action!="logout")
+	{
+		if (!clearStageContent(obj)) 
+		{
+			loadContentByTempActionForNavi();
+		}
+	}
+	else
+	{
+		new lz.logoutConfirm(canvas,{objectsToClean: obj});
+	}
     
 }
     
 function loadContentByTempActionForNavi(){
     // if($debug) Debug.write("FUNC/loadContentByTempActionForNavi");
 
-    if (tempActionForNavi!="logout"){
-        // if($debug) Debug.write("FUNC/loadContentByString ",tempActionForNavi);
-        new lz[tempActionForNavi](canvas.main_content._content.inner);
-    } else {
-        canvas._mainbgcontentNavi.navi.destroy();
-        canvas._mainbgcontentNavi.help.destroy();
-        canvas.thishib.logoutUser.doCall();
-    }
+    // if($debug) Debug.write("FUNC/loadContentByString ",tempActionForNavi);
+    new lz[tempActionForNavi](canvas.main_content._content.inner);
 }    
 
 function clearStageContent(obj){
