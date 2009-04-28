@@ -257,7 +257,7 @@
 
 	<!-- 195:Public -->
     <labelText labelid="195" width="200" y="160" resize="false" x="2"/>  
-        <checkbox name="ispublic" width="270" y="160" x="120" fontsize="12" />
+        <labelCheckbox name="ispublic" width="270" y="160" x="120" fontsize="12" />
 	
 	<!-- 196:Comment -->
 	<labelText labelid="196" width="200" y="190" resize="false" x="2"/>
@@ -270,7 +270,7 @@
 	
 	<!-- Appointment -->
 	<labelText labelid="620" width="200" y="300" resize="false" x="2"/>  
-        <checkbox name="isappointment" width="270" y="300" x="120" fontsize="12" />
+        <labelCheckbox name="isappointment" width="270" y="300" x="120" fontsize="12" />
 	
 	<!-- 191:organisations -->
     <labelText labelid="191" width="200" y="320" resize="false" x="2"/>     
