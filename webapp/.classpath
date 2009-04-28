@@ -132,7 +132,6 @@
 	<classpathentry kind="lib" path="lib/batik_17/pdf-transcoder.jar"/>
 	<classpathentry kind="lib" path="lib/batik_17/xml-apis-ext.jar"/>
 	<classpathentry kind="lib" path="lib/database/mysql-connector-java-5.1.7-bin.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.launching.macosx.MacOSXType/JVM 1.6"/>
 	<classpathentry kind="lib" path="lib/red5_08rc3/quartz-1.6.1.jar"/>
 	<classpathentry kind="lib" path="lib/red5_08rc3/red5.jar"/>
 	<classpathentry kind="lib" path="lib/red5_08rc3/servlet-api-2.5.jar"/>
@@ -144,5 +143,6 @@
 	<classpathentry kind="lib" path="lib/red5_08rc3/spring-web-2.5.6.jar"/>
 	<classpathentry kind="lib" path="lib/java2swf/java2swf.jar"/>
 	<classpathentry kind="lib" path="lib/ical4j/ical4j-1.0-rc1.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
