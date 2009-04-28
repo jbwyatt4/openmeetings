@@ -48,6 +48,10 @@
 	    	for (var i=0;i<records.length;i++){
 	    		new lz.userAdminListItem(this._innerlist._inn._inn,{obj:records[i],user_id:records[i].user_id,login:records[i].login,firstname:records[i].firstname,lastname:records[i].lastname});
 	    	}
+			if (records.length>0)
+			{
+				parent._useradminvalueform.initValueFieldsByObject(records[0]);
+			}
 	    	]]>
 	    </method>
 
