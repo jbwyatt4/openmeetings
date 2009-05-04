@@ -147,7 +147,11 @@
 					var obj = new Array();
 					obj["user_id"] = val;
 					this.parent.initValueFieldsByObject(obj);
-					new lz.rpcErrorDialog(canvas.main_content._content.inner,{errorid:-23});
+					
+					if (this.parent._organisationslist.getAllItems().length < 1)
+					{
+						new lz.rpcErrorDialog(canvas.main_content._content.inner,{errorid:-23});
+					}
 				}
 				this.parent.parent._turnoverlist.oncallnext.sendEvent();
 			]]>
