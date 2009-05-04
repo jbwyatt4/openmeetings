@@ -73,7 +73,7 @@ public class CreateLibraryPresentation {
 			
 			String[] allfiles = dir.list(ff);			
 			if(allfiles!=null){
-				//Arrays.sort(allfiles);
+				Arrays.sort(allfiles);
 				for(int i=0; i<allfiles.length; i++){
 					File thumbfile = new File(targetDirectory+allfiles[i]);
 					if (allfiles[i].startsWith("_thumb_")){
