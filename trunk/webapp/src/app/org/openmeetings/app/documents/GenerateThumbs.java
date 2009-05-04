@@ -118,6 +118,7 @@ public class GenerateThumbs {
 			
 			String[] cmd;
 			String executable_fileName = "";
+			String imageWildcard = "";
 			String pathToIMagick = Configurationmanagement.getInstance().getConfKey(3,"imagemagick_path").getConf_value();
 			if(!pathToIMagick.equals("") && !pathToIMagick.endsWith(File.separator)){
 				pathToIMagick = pathToIMagick + File.separator;
@@ -131,6 +132,8 @@ public class GenerateThumbs {
 		
 				cmd = new String[1];
 				cmd[0] = executable_fileName;
+
+				imageWildcard = "-%04d";
 			} else {
 				String runtimeFile = "thumbnail.bat";
 				executable_fileName = ScopeApplicationAdapter.batchFileFir+"BATCHTHUMB_" 
@@ -141,6 +144,8 @@ public class GenerateThumbs {
 				cmd[1] = "/C";
 				cmd[2] = "start";
 				cmd[3] = executable_fileName;
+
+				imageWildcard = "-%%04d";
 			}
 			log.debug("executable_fileName: "+executable_fileName);
 			
@@ -148,7 +153,7 @@ public class GenerateThumbs {
 			//Create the Content of the Converter Script (.bat or .sh File)
 			String fileContent = pathToIMagick + "convert -thumbnail " + thumbSize +
 					" " + "\"" + inputfile +"\"" +
-					" " + "\"" + outputpath+ "_"+ pre +"_page.jpg\"" +
+					" " + "\"" + outputpath+ "_"+ pre +"_page" + imageWildcard + ".jpg\"" +
 					ScopeApplicationAdapter.lineSeperator + "exit";
 				
 			//execute the Script
