@@ -9,7 +9,7 @@ import org.dom4j.Document;
 import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
 import org.dom4j.io.XMLWriter;
-
+import java.util.Arrays;
 
 public class CreateLibraryPresentation {
 	
@@ -73,6 +73,7 @@ public class CreateLibraryPresentation {
 			
 			String[] allfiles = dir.list(ff);			
 			if(allfiles!=null){
+				//Arrays.sort(allfiles);
 				for(int i=0; i<allfiles.length; i++){
 					File thumbfile = new File(targetDirectory+allfiles[i]);
 					if (allfiles[i].startsWith("_thumb_")){
