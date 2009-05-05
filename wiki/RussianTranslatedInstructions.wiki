@@ -1,11 +1,15 @@
-#summary Links to the russian translated Instructions
+#summary Links to the Russian translated Instructions
 
-Some docs Contributed by Alexev and Evgeny.
+Some docs сontributed by Evgeny and others.
 
-  * http://docs.google.com/Doc?id=dc5r6r7b_1chp38sfh
-  * http://docs.google.com/Doc?id=dcbbhg8d_34d3xkczg8
-  * http://docs.google.com/Doc?id=dc5r6r7b_7gk97r3ct
-  * http://docs.google.com/Doc?id=dcbbhg8d_39crqwtgnq
-  * http://docs.google.com/Doc?id=dc5r6r7b_67cxcqg62
+== Пользователю ==
+  * [http://sites.google.com/site/pulsemeetings/instructions/ustanovka-po-dla-videosovesanij-na-komputere-polzovatela-1 Подготовка компьютера пользователя]
+  * [http://sites.google.com/site/pulsemeetings/instructions/prisoedinenie-k-sovesaniam Присоединение к совещаниям]
+  * [http://sites.google.com/site/pulsemeetings/instructions/rabocij-stol-polzovatela Рабочий стол пользователя]
+  * [http://sites.google.com/site/pulsemeetings/instructions/menu-komnaty-sovesanij Меню комнаты совещаний]
+  * [http://sites.google.com/site/pulsemeetings/instructions/rabota-s-dokumentami-1 Работа с документами]
+== Администратору ==
+  * [http://sites.google.com/site/pulsemeetings/instructions/ustanovka-servera-videosovesanij-1 Установка сервера]
+  * [http://sites.google.com/site/pulsemeetings/instructions/administrirovanie-videosovesanij Администрирование видеосовещаний]
 
 The comments are welcome.
