@@ -45,14 +45,13 @@ After aptitude we need  [http://www.debian.org/ Debian GNU/Linux], I use version
 aptitude install mysql-server
 }}}
 
-It's better to creat database with hand, if your mysql installation is fresh as like what I executed, you can use this way to create new MySQL database, I will use "openmeetings" as database name:
+Add/edit the following lines to /etc/mysql/my.conf to enable localization:
 
 {{{
-#mysql -u root
-> create database openmeetings
->\q
+[mysqld]
+default-character-set=utf8
+character-set-server=utf8
 }}}
-
 
 ==  Install xvfb and !OpenOffice ==
 
