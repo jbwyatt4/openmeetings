@@ -13,9 +13,9 @@ In this how-to I'm going to descript way to install !OpenMeetings on debian GNU/
  * Install !OpenMeetings
  * Installing must new version?
  * Configure !OpenMeetings and place files
- *Start every thing
- *!Troobleshooting
- *Author
+ * Start every thing
+ * !Troobleshooting
+ * Author
  
  
 == What We Need ==
@@ -250,6 +250,8 @@ Now time to start every thing we installed, I will start !OpenOffice.org at firs
 #/etc/init.d/red5 start
 }}}
 
+Instead of using a virtual frame buffer you may install and use a [http://www.mail-archive.com/openmeetings-dev@googlegroups.com/msg01203/daemons.tar.gz /etc/init.d/ooomeetings] service.
+
 
 The last part of instalation is web based, with your web browser (Firefox, Opera, IE, ...) and servers IP address and port 5080 (default):
 
@@ -257,7 +259,7 @@ http://$YOUR_IP:5080/openmeetings/Install
 
 For example:  [http://127.0.0.1:5080/openmeetings/Install http://127.0.0.1:5080/openmeetings/Install]
 
-after putting information in forms, !OpenMeetings will initial a DataBase (based on information that we gived to him) and now you can access !OpenMeetings first page at:
+after putting information in forms, !OpenMeetings will initialize a DataBase (based on information that we gived to him) and now you can access !OpenMeetings first page at:
 
 http://$YOUR_IP:8080/lps-4.0.6/videoconference/
 
@@ -282,7 +284,6 @@ If you would like to change rtmp host, you can use:
 {{{
 vim  /opt/lps-4.0.6/Server/lps-4.0.6/videoconference/config.xml 
 }}}
-
 
 
 
