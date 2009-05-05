@@ -10,7 +10,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Conferenza</value>
   </string>
   <string id="2" name="meeting">
-    <value>Conferenza</value>
+    <value>Incontro</value>
   </string>
   <string id="3" name="classroom">
     <value>Auditorium</value>
@@ -133,10 +133,10 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Vota!</value>
   </string>
   <string id="43" name="meeting">
-    <value>Conferenza (massimo 4 partecipanti)</value>
+    <value>Incontro (massimo 4 partecipanti)</value>
   </string>
   <string id="44" name="conference">
-    <value>Auditorium (massimo 100 partecipanti)</value>
+    <value>Conferenza (massimo 100 partecipanti)</value>
   </string>
   <string id="45" name="type">
     <value>Tipo</value>
@@ -151,7 +151,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>entra</value>
   </string>
   <string id="49" name="modleave">
-    <value>Il moderatore ha lasciato la conferenza.</value>
+    <value>Il moderatore ha lasciato l'incontro.</value>
   </string>
   <string id="50" name="systemmessage">
     <value>Informazioni di sistema</value>
@@ -1825,87 +1825,87 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>La tua sessione Ã¨ stata chiusa da un amministratore o moderatore</value>
   </string>
   <string id="607" name="useralterself_phone">
-    <value>Telefono</value>
+    <value>Phone</value>
   </string>  
   <string id="608" name="participents panel">
-    <value>L'utente è il moderatore di questa stanza</value>
+    <value>User is the Moderator of this Room</value>
   </string>
   <string id="609" name="participents panel">
-    <value>L'utente è abilitato a disegnare sulla lavagna</value>
+    <value>User is allowed to draw on the Whiteboard</value>
   </string>
   <string id="610" name="participents panel">
-    <value>(Ri) attiva Audio/Video o cambia le impostazioni</value>
+    <value>(Re) Start Audio/Video or change Device Settings</value>
   </string>
   <string id="611" name="participents panel">
-    <value>Abilita questo utente a disegnare sulla lavagna</value>
+    <value>Allow this User to draw on the Whiteboard</value>
   </string>
   <string id="612" name="participents panel">
-    <value>Rimuovi possibilità di disegnare sulla lavagna</value>
+    <value>Remove ability to draw on whiteboard</value>
   </string>
   <string id="613" name="conferencePanels">
-    <value>Utenti</value>
+    <value>Users</value>
   </string>
   <string id="614" name="conferencePanels">
     <value>Files</value>
   </string>
   <string id="615" name="conferencePanels">
-    <value>Lavagna</value>
+    <value>Whiteboard</value>
   </string>
   <string id="616" name="conferencePanels">
     <value>Chat</value>
   </string>  
   <string id="617" name="organization choose info">
-    <value>Il tuo account è assegnato a più organizzazioni. Per favore scegline una per questa sessione.</value>
+    <value>Your account is assigned to multiple Organizations. Please choose one for this Session.</value>
   </string>  
   <string id="618" name="error message room full">
-    <value>Questa stanza è piena al momento. Per favore riprova più tardi.</value>
+    <value>This room is full at the moment. Please try again later.</value>
   </string>
   <string id="619" name="roomtypes">
-    <value>Tipo stanza</value>
+    <value>Room Type</value>
   </string>
   <string id="620" name="appointed_room">
-    <value>Stanza appuntamenti</value>
+    <value>Appointment Room</value>
   </string>
   <string id="621" name="servertime">
-    <value>Ora del server</value>
+    <value>Server Time</value>
   </string>  
   <string id="622" name="inv_reminder_template_head">
-    <value>Agenda</value>
+    <value>OpenMeetings - Reminder</value>
   </string>
   <string id="623" name="inv_reminder_text_from">
-    <value>Messaggio dall'utente:</value>
+    <value>Message from User:</value>
   </string>
   <string id="624" name="inv_reminder_text_message">
-    <value>Messaggio:</value>
+    <value>Message:</value>
   </string>
   <string id="625" name="inv_reminder_text_click_text">
-    <value>Clicca questo link per partecipare al meeting:</value>
+    <value>Click this link to participate in the Meetings:</value>
   </string>
   <string id="626" name="inv_reminder_text_click_text_link">
-    <value>Clicca qui per entrare nella stanza</value>
+    <value>Click here to enter room</value>
   </string>
   <string id="627" name="inv_reminder_text_click_text_help">
-    <value>se hai problemi con il link, copia e incolla sul browser il seguente link:</value>
+    <value>if you have problems with the link, please copy and paste this to your browser:</value>
   </string>
   <string id="628" name="btn_search_intern">
-    <value>ricerca interna</value>
+    <value>search intern</value>
   </string>
   <string id="629" name="btn_search_extern">
-    <value>utente esterno</value>
+    <value>extern users</value>
   </string>
   <string id="630" name="lbl_prename">
     <value>pre name</value>
   </string>
   <string id="631" name="lbl_name">
-    <value>nome</value>
+    <value>name</value>
   </string>
    <string id="632" name="lbl_email">
     <value>E-mail</value>
   </string>
   <string id="633" name="logoutConfirm_title">
-    <value>Conferma uscita</value>
+    <value>Confirm logout</value>
   </string>
   <string id="634" name="logoutConfirm_sure_to_logout_question">
-    <value>Sei sicuro di voler uscire?</value>
+    <value>Are you sure you want to logout now?</value>
   </string>	
 </language>
