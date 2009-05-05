@@ -1,6 +1,6 @@
 #summary Links to the Russian translated Instructions
 
-Some docs сontributed by Evgeny and others.
+Some docs сontributed by Evgeny and others. The comments are welcome.
 
 == Пользователю ==
   * [http://sites.google.com/site/pulsemeetings/instructions/ustanovka-po-dla-videosovesanij-na-komputere-polzovatela-1 Подготовка компьютера пользователя]
@@ -11,5 +11,3 @@ Some docs сontributed by Evgeny and others.
 == Администратору ==
   * [http://sites.google.com/site/pulsemeetings/instructions/ustanovka-servera-videosovesanij-1 Установка сервера]
   * [http://sites.google.com/site/pulsemeetings/instructions/administrirovanie-videosovesanij Администрирование видеосовещаний]
-
-The comments are welcome.
