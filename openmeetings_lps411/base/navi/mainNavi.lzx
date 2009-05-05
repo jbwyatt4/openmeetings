@@ -183,9 +183,9 @@
 	                    action:value[i].action
                     });
                 if (i==0) t1.onclick.sendEvent();
-                Debug.write("t1: ",t1);
+                //Debug.write("t1: ",t1);
             }
-            Debug.write("this: ",this);
+            //Debug.write("this: ",this);
       ]]>
     </handler>
 
