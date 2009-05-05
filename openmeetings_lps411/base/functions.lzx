@@ -90,7 +90,11 @@ function getLabelTagByNo(no,labelid){
     for (var eg=0;eg<=l.length;eg++){
         if (l[eg].fieldvalues_id==labelid){
             // if($debug) Debug.write("FUNC/getLabelTagByNo",no,labelid,l[eg].value);
-            return l[eg].value;
+            if($debug) {
+            	return l[eg].value+" ["+labelid+"]";
+            } else {
+                return l[eg].value;
+            }
         }
     }
     return 'error';
