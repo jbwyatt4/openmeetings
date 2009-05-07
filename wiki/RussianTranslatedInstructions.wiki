@@ -2,12 +2,16 @@
 
 Some docs сontributed by Evgeny and others. The comments are welcome.
 
+== Поддержка ==
+Некоммерческая поддержка продукта осуществляется на английском языке в списке рассылки openmeetings-user@googlegroups.com. Доступна также коммерческая поддержка продукта.
+
 == Пользователю ==
   * [http://sites.google.com/site/pulsemeetings/instructions/ustanovka-po-dla-videosovesanij-na-komputere-polzovatela-1 Подготовка компьютера пользователя]
   * [http://sites.google.com/site/pulsemeetings/instructions/prisoedinenie-k-sovesaniam Присоединение к совещаниям]
   * [http://sites.google.com/site/pulsemeetings/instructions/rabocij-stol-polzovatela Рабочий стол пользователя]
   * [http://sites.google.com/site/pulsemeetings/instructions/menu-komnaty-sovesanij Меню комнаты совещаний]
   * [http://sites.google.com/site/pulsemeetings/instructions/rabota-s-dokumentami-1 Работа с документами]
+
 == Администратору ==
   * [http://sites.google.com/site/pulsemeetings/instructions/ustanovka-servera-videosovesanij-1 Установка сервера]
   * [http://sites.google.com/site/pulsemeetings/instructions/administrirovanie-videosovesanij Администрирование видеосовещаний]
