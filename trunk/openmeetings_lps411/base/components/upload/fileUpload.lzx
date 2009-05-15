@@ -48,10 +48,19 @@
 		<![CDATA[	
 			if (this.isOnlyImage){
 				var allTypes = new Array();
-				var imageTypes = new Object();
-				imageTypes.description = "Allowed Files (*.tga, *.xcf, *.wpg, *.txt, *.ico, *.ttf, *.pcd, *.pcds, *.ps, *.psd, *.tiff, *.bmp, *.svg, *.dpx, *.exr, *.jpg, *.jpeg, *.gif, *.png, *.ppt, *.odp, *.odt, *.sxw, *.wpd, *.doc, *.rtf, *.txt, *.ods, *.sxc, *.xls, *.sxi, *.pdf)";
-				imageTypes.extension = "*.tga; *.xcf; *.wpg; *.txt; *.ico; *.ttf; *.pcd; *.pcds; *.ps; *.psd; *.tiff; *.bmp; *.svg; *.dpx; *.exr; *.jpg; *.jpeg; *.gif; *.png; *.ppt; *.odp; *.odt; *.wpd; *.doc; *.rtf; *.txt; *.ods; *.sxc; *.xls; *.sxi; *.pdf";
-				allTypes.push(imageTypes); 				
+
+				imageTypes = new Object();
+				imageTypes.extension = "*.txt; *.ppt; *.odp; *.odt; *.wpd; *.doc; *.rtf; *.txt; *.ods; *.sxc; *.xls; *.sxi; *.pdf";
+				imageTypes.description = "Documents (" +
+					imageTypes.extension + ")";
+				allTypes.push(imageTypes);
+				
+				imageTypes = new Object();
+				imageTypes.extension = "*.tga; *.xcf; *.wpg; *.ico; *.ttf; *.pcd; *.pcds; *.ps; *.psd; *.tiff; *.bmp; *.svg; *.dpx; *.exr; *.jpg; *.jpeg; *.gif; *.png";				
+				imageTypes.description = "Pictures (" +
+					imageTypes.extension + ")";
+				allTypes.push(imageTypes);
+
 				fr.browse(allTypes);	
 			} else if(this.isOnlyPpt){	
 				var allTypes = new Array();
