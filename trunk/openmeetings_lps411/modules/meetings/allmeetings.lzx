@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library>
 	<class name="allmeetings" extends="baseContentView"  bgcolor="white">
+		<attribute name="finishedTabsQuantity" type="number" value="0"/>	
+		<attribute name="clickedButton" value="null"/>
+				
+		<method name="updateFinishedTabsQuantity">
+			this.finishedTabsQuantity = this.finishedTabsQuantity + 1;
+			
+			if ( this.finishedTabsQuantity == 3 )
+			{
+				if ( clickedButton != null )
+				{
+					lz.Cursor.unlock();
+					
+					clickedButton.onclick.sendEvent();
+				}
+			}
+		</method>
 		
 		<handler name="ontabcontentleave">
             canvas._chatcontentRPC = null;
@@ -57,6 +73,8 @@
 		                            								});
 		                    }
 		                }
+						
+						parent.parent.parent.parent.parent.updateFinishedTabsQuantity();
 		            ]]>	        	          				
 		            </handler>	
 			</netRemoteCallHib>
@@ -113,6 +131,8 @@
 									      	      					});
 				            }
 				        }
+						
+						parent.parent.parent.parent.parent.updateFinishedTabsQuantity();
 				    ]]>	        	          				
 				</handler>	
 		      </netRemoteCallHib> 
@@ -173,6 +193,8 @@
 		                            											roomname:value[eg].name
 		                            								});
 		                    }
+							
+							parent.parent.parent.parent.updateFinishedTabsQuantity();
 		                }
 		            ]]>		        	          				
 				</handler>	

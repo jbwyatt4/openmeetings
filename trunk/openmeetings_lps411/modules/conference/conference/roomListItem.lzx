@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library>
 
+<resource name="waitcursor" src="resources/lzwaitcursor_rsc.swf"/>
+
 <class name="roomListItem" extends="view" bgcolor="0xFFFFFF" height="50"
      onmouseover="" onmouseout="">
 
@@ -10,7 +12,6 @@
   <attribute name="roomid" value="0" type="number" />
   <attribute name="starttime" value="" type="string" />
   <attribute name="roomname" value="" type="string" />
-  
 
   <attribute name="roomClassName" value="conferenceView" type="string" />
   <attribute name="currentusers" value="null" />
@@ -109,9 +110,25 @@
       onclick="parent.getRoomClientsListByRoomId.doCall()" >
     <labelTooltip labelid="402" />
   </view>
+  
+  <method name="checkConditionsWhenButtonClicked" args="_clicked">
+	<![CDATA[
+		if ( parent.parent.parent.parent.parent.parent.parent.parent.finishedTabsQuantity < 3 )
+		{
+			parent.parent.parent.parent.parent.parent.parent.parent.clickedButton = _clicked;
+			
+			lz.Cursor.setCursorGlobal("waitcursor");
+		}
+		else
+		{
+			checkForMaxUsers=true;
+			getRoomClientsListByRoomId.doCall();
+		}
+	]]>
+  </method>
 
   <simpleLabelButton labelid="131" x="300" width="160" height="30" y="17"
-    onclick="parent.checkForMaxUsers=true;parent.getRoomClientsListByRoomId.doCall()">
+    onclick="parent.checkConditionsWhenButtonClicked(this)">
     <view resource="go_jump_rsc" x="$once{ parent.width-24 }" y="6" />
   </simpleLabelButton>
 
