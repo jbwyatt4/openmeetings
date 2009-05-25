@@ -15,6 +15,13 @@
     <command id="cmd_browser_open" onselect="canvas.doActionmenu('browser_open')" key="['ALT','Shift','B']"/>   
     <command id="cmd_browser_close" onselect="canvas.doActionmenu('browser_close')" key="['ALT','Shift','b']"/> 
     <command id="cmd_invitation" onselect="canvas.doAction('invitation')" /> 
+    
+    <command id="cmd_exportFilePNG" onselect="canvas.doWhiteboardActionmenu('exportFilePNG')" />
+    <command id="cmd_exportFileJPG" onselect="canvas.doWhiteboardActionmenu('exportFileJPG')" />
+    <command id="cmd_exportFilePDF" onselect="canvas.doWhiteboardActionmenu('exportFilePDF')" />
+    <command id="cmd_exportFileSVG" onselect="canvas.doWhiteboardActionmenu('exportFileSVG')" />
+    <command id="cmd_exportFileTIF" onselect="canvas.doWhiteboardActionmenu('exportFileTIF')" />
+    
 	    
 	<dataset type="http" name="languageData" request="false" 
 	    src="${ canvas.currentlanguage+'.xml' }" proxied="false">
@@ -146,6 +153,24 @@
 		//if($debug) Debug.write("main.lzx/getLabelName()",id);
 		return getLabelTag(id);
 	</method>
+    
+    <!--
+        exportFilePNG exportFileJPG exportFilePDF exportFileSVG exportFileTIF
+     -->
+     
+    <method name="doWhiteboardActionmenu" args="action">
+        if (action == "exportFilePNG") {
+            canvas._drawarea.confirmSaveAsImageTypeExport("image","png");
+        } else if (action == "exportFileJPG") {
+            canvas._drawarea.confirmSaveAsImageTypeExport("image","jpg");
+        } else if (action == "exportFilePDF") {
+            canvas._drawarea.confirmSaveAsImageTypeExport("image","pdf");
+        } else if (action == "exportFileSVG") {
+            canvas._drawarea.confirmSaveAsImageExport("image");
+        } else if (action == "exportFilePNG") {
+            canvas._drawarea.confirmSaveAsImageTypeExport("image","tif");
+        }
+    </method>
 
 	<!-- you can delete this comment. It was just memo.
 			Mar 24 2008 onokeiji@gmail.com

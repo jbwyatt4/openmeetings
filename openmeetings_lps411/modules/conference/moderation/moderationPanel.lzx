@@ -144,6 +144,7 @@
         <view y="1" x="2" resource="background_screenview_rsc" />
     </simpleLabelButton>
     
+    <!--
     <simpleLabelButton labelid="415" height="24" name="_doRecord" style="itemStyle"
                        width="180" y="2" enabled="${  canvas.ismoderator }">
         <handler name="onclick">
@@ -152,6 +153,7 @@
         </handler>
         <view resource="start_recording_conf" x="3" y="1" />
     </simpleLabelButton>
+     -->
     
 	<labelText name="_inner" fgcolor="0xFF3300" y="4" />
 	

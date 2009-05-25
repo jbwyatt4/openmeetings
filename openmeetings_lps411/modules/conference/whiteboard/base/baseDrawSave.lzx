@@ -145,7 +145,8 @@
 	<handler name="sendObject">
 		if ($debug) Debug.write("sendObject doSave: ",this.baseactionobjectList);
 		this.fileData = this.baseactionobjectList;
-		this.savefileDataWinRef = new lz.saveAsWmlWindow(canvas.main_content._content.inner,{refObj:this});
+		this.savefileDataWinRef = new lz.saveAsWmlWindow(canvas.main_content._content.inner,{
+                                                refObj:this});
 	</handler>
 	
 	<method name="confirmSaveAsObject" args="fileName" >
