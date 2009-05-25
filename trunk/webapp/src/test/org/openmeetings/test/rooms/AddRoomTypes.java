@@ -26,14 +26,14 @@ public class AddRoomTypes extends TestCase {
 				290, 280, 2, 2,
 				400,
 				true, 296, 2, 592, 660,
-				true, 2, 284, 310, 290, false);
+				true, 2, 284, 310, 290, false, false, null);
 		Roommanagement.getInstance().addRoomToOrganisation(3,room, 1);
 		
 		long room2 = Roommanagement.getInstance().addRoom(3,"private Audience Room", 2,"", new Long(4), true, null,
 				290, 280, 2, 2,
 				400,
 				true, 296, 2, 592, 660,
-				true, 2, 284, 310, 290, false);
+				true, 2, 284, 310, 290, false, false, null);
 		Roommanagement.getInstance().addRoomToOrganisation(3,room2, 1);
 		
 	}

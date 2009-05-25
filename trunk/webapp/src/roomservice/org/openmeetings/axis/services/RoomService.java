@@ -124,7 +124,7 @@ public class RoomService {
 							videoPodHeight, videoPodXPosition, videoPodYPosition, moderationPanelXPosition, 
 							showWhiteBoard, whiteBoardPanelXPosition, whiteBoardPanelYPosition, 
 							whiteBoardPanelHeight, whiteBoardPanelWidth, showFilesPanel, 
-							filesPanelXPosition, filesPanelYPosition, filesPanelHeight, filesPanelWidth, false);
+							filesPanelXPosition, filesPanelYPosition, filesPanelHeight, filesPanelWidth, false, false, null);
 		} catch (Exception err) {
 			log.error("[addRoom] ",err);
 		}
@@ -183,7 +183,7 @@ public class RoomService {
 					comment, numberOfPartizipants, null, videoPodWidth, videoPodHeight, 
 					videoPodXPosition, videoPodYPosition, moderationPanelXPosition, showWhiteBoard, 
 					whiteBoardPanelXPosition, whiteBoardPanelYPosition, whiteBoardPanelHeight, whiteBoardPanelWidth, showFilesPanel, 
-						filesPanelXPosition, filesPanelYPosition, filesPanelHeight, filesPanelWidth, appointment);
+						filesPanelXPosition, filesPanelYPosition, filesPanelHeight, filesPanelWidth, appointment, false, null);
 		} catch (Exception err) {
 			log.error("[addRoom] ",err);
 		}

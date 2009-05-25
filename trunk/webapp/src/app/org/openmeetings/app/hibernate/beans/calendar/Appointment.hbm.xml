@@ -14,7 +14,6 @@
     <property name="appointmentDescription" type="string" column="description"/>
     <many-to-one outer-join="true" not-null="false" column="category_id" lazy="false" cascade="none" name="appointmentCategory" class="org.openmeetings.app.hibernate.beans.calendar.AppointmentCategory"/>
     <many-to-one outer-join="true" not-null="false" column="remind_id" lazy="false" cascade="none" name="remind" class="org.openmeetings.app.hibernate.beans.calendar.AppointmentReminderTyps"/>
-    <many-to-one outer-join="true" not-null="true" column="room_id" lazy="false" cascade="none" name="room" class="org.openmeetings.app.hibernate.beans.rooms.Rooms"/>
     <property name="starttime" type="java.util.Date" column="starttime"/>
     <property name="updatetime" type="java.util.Date" column="updatetime"/>
     <property name="deleted" type="string" column="deleted"/>
@@ -23,6 +22,6 @@
     <property name="isMonthly" type="boolean" column="ismonthly"/>
     <property name="isYearly" type="boolean" column="isyearly"/>
     <property name="isDaily" type="boolean" column="isdaily"/>
-    <property name="icalId" type="string" column="icalId" />
+    <property name="icalId" type="string" column="icalId"/>
   </class>
 </hibernate-mapping>
