@@ -21,7 +21,7 @@
 	
 	
 	<view width="$once{ this.parent.width-2 }" height="$once{ this.parent.height-2 }" x="1" y="1" bgcolor="0xFFFFFF" />
-	<view x="1" y="1" height="$once{ this.parent.height-1 }" width="17" 
+	<view x="1" y="1" height="$once{ this.parent.height-2 }" width="17" 
 		  bgcolor="$once{ canvas.baseMousecolorizer }">
 		<handler name="oninit">
         	<![CDATA[

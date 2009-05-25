@@ -5,6 +5,12 @@
 <library>
 
 <!-- get values from config.xml -->
-<dataset type="http" name="myConfigSet" src="config.xml" request="true" ondata="canvas.myinit()" />
+<dataset type="http" name="myConfigSet" request="false" ondata="canvas.myinit()">
+    <handler name="oninit">
+        var d = new Date();
+        this.setAttribute("src","config.xml?random="+d.getTime());
+        this.doRequest();
+    </handler>
+</dataset>
 
 </library>
