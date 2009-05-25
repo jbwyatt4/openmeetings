@@ -448,7 +448,7 @@
         //Debug.write("click on whiteBoard ",obj);
     </handler>
 
-  	<method name="trackmouse" >
+  	<method name="trackmouse" args="item">
     	<![CDATA[
 
     	this.mx = currentlayer.getMouse('x');

@@ -15,5 +15,6 @@
     <include href="errorModeratorPopup.lzx" />
     <include href="changeDevice.lzx" />
     <include href="syncWin.lzx" />
+    <include href="meetingTimer.lzx" />
     
 </library>

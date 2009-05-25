@@ -54,18 +54,20 @@
 			this.roomname.setAttribute('text',obj.name);
 			this.comment.setAttribute('text',obj.comment);
 			this.ispublic.setValue(obj.ispublic);
+            this.demoTime.setAttribute("enabled",true);
 			if ($debug) Debug.write("Appointment: ",obj.appointment);
 			this.isappointment.setValue(obj.appointment);
+            
+            if (obj.demoTime != null) {
+                this.demoTime.setText(obj.demoTime);
+            } else {
+                this.demoTime.setText("");
+            }
             
             if (obj.isDemoRoom != null && obj.isDemoRoom){
                 this.isDemoRoom.setValue(true);
             } else {
                 this.isDemoRoom.setValue(false);
-            }
-            if (obj.demoTime != null) {
-                this.demoTime.setText(obj.demoTime);
-            } else {
-                this.demoTime.setText("");
             }
                 
 			this.numberOfParticipants.selectItem(String(obj.numberOfPartizipants));
@@ -310,11 +312,19 @@
     
     <!-- Is Demo Room -->
     <labelText labelid="636" width="200" y="490" resize="false" x="2"/>  
-        <labelCheckbox name="isDemoRoom" width="270" y="490" x="130" fontsize="12" />    
+        <labelCheckbox name="isDemoRoom" width="270" y="490" x="130" fontsize="12">
+            <handler name="onvalue" args="v">
+                if (v) {
+                    parent.demoTime.setAttribute("enabled",true);
+                } else {
+                    parent.demoTime.setAttribute("enabled",false);
+                }
+            </handler>
+        </labelCheckbox>   
 	
     <!-- Is Demo Room -->
     <labelText labelid="637" width="200" y="520" resize="false" x="2"/>  
-        <customEdittext name="demoTime" y="520" x="120" width="270" regexpType="number"
+        <customEdittext name="demoTime" y="516" x="120" width="270" regexpType="number"
                         text="" />        
     
     
