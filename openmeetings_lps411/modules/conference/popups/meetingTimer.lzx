@@ -2,7 +2,7 @@
 <library>
 
 <class name="meetingTimer" extends="labelExplorerBox" labelid="638"
-        docking="true" resizeable="false" closable="true" width="260"
+        docking="true" resizeable="false" closable="false" width="260"
         x="$once{ canvas.width - this.width - 10 }" y="10" height="160">
     
     <attribute name="roomobj" value="null" />
