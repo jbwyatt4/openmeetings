@@ -125,7 +125,9 @@ public class AppointmentLogic {
 				284,				// Files Y
 				310,				// Files height
 				270,				// Files width
-				true);				// Appointment
+				true,				// Appointment
+				false,				// Demo Room => Meeting Timer
+				null);				    // Meeting Timer time in seconds
 		
 		log.debug("Appointmentlogic.saveAppointment : Room - " + room_id);
 		log.debug("Appointmentlogic.saveAppointment : Reminder - " + remind);

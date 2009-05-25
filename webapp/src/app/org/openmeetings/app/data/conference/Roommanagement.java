@@ -421,7 +421,9 @@ public class Roommanagement {
 			Integer filesPanelYPosition,
 			Integer filesPanelHeight,
 			Integer filesPanelWidth,
-			Boolean appointment){
+			Boolean appointment,
+			Boolean isDemoRoom,
+			Integer demoTime){
 		
 		log.debug("addRoom");
 		
@@ -451,6 +453,9 @@ public class Roommanagement {
 				r.setFilesPanelXPosition(filesPanelXPosition);
 				r.setFilesPanelYPosition(filesPanelYPosition);
 				r.setAppointment(appointment);
+				
+				r.setIsDemoRoom(isDemoRoom);
+				r.setDemoTime(demoTime);
 				
 				r.setDeleted("false");
 				Object idf = HibernateUtil.createSession();
@@ -832,7 +837,10 @@ public class Roommanagement {
 			Integer filesPanelXPosition,
 			Integer filesPanelYPosition,
 			Integer filesPanelHeight,
-			Integer filesPanelWidth, Boolean appointment){
+			Integer filesPanelWidth, 
+			Boolean appointment,
+			Boolean isDemoRoom,
+			Integer demoTime){
 		try {
 			log.debug("*** updateRoom numberOfPartizipants: "+numberOfPartizipants);
 			if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)){
@@ -860,6 +868,10 @@ public class Roommanagement {
 				r.setName(name);
 				r.setRoomtype(this.getRoomTypesById(roomtypes_id));
 				r.setUpdatetime(new Date());
+				
+
+				r.setIsDemoRoom(isDemoRoom);
+				r.setDemoTime(demoTime);
 				
 				r.setAppointment(appointment);
 				

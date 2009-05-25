@@ -48,6 +48,9 @@ public class Rooms {
 	private Integer filesPanelWidth = new Integer(290);	
 	
 	private List<RoomClient> currentusers;
+	
+	private Boolean isDemoRoom;
+	private Integer demoTime; //In Seconds
     
     /**
      * @hibernate.property
@@ -362,8 +365,29 @@ public class Rooms {
 		this.appointment = appointment;
 	}
 	
+	/**
+     * @hibernate.property
+     *  column="isdemoroom"
+     *  type="boolean"
+     */	
+	public Boolean getIsDemoRoom() {
+		return isDemoRoom;
+	}
+	public void setIsDemoRoom(Boolean isDemoRoom) {
+		this.isDemoRoom = isDemoRoom;
+	}
 	
-	
+	/**
+     * @hibernate.property
+     *  column="demo_time"
+     *  type="integer"
+     */
+	public Integer getDemoTime() {
+		return demoTime;
+	}
+	public void setDemoTime(Integer demoTime) {
+		this.demoTime = demoTime;
+	}
 	
 	
 }
