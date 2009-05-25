@@ -237,7 +237,7 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 			this.roomLeaveByScope(currentClient, current.getScope());
 			
 		} catch (Exception err){
-			log.error("[roomDisconnect]",err);
+			log.error("[logicalRoomLeave]",err);
 		}		
 	}	
 
@@ -299,17 +299,21 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 								log.debug("sending roomDisconnect to " + cons);
 								RoomClient rcl = this.clientListManager.getClientByStreamId(cons.getClient().getId());
 								
-								if (!currentClient.getStreamid().equals(rcl.getStreamid())){
-									//Send to all connected users	
-									((IServiceCapableConnection) cons).invoke("roomDisconnect",new Object[] { currentClient }, this);
-									log.debug("sending roomDisconnect to " + cons);
-									//add Notification if another user is recording
-									log.debug("###########[roomLeave]");
-									if (rcl.getIsRecording()){
-										log.debug("*** roomLeave Any Client is Recording - stop that");
-										StreamService.addRoomClientEnterEventFunc(rcl, rcl.getRoomRecordingName(), rcl.getUserip(), false);
-										StreamService.stopRecordingShowForClient(cons, currentClient, rcl.getRoomRecordingName(), false);
+								if (rcl != null) {
+									if (!currentClient.getStreamid().equals(rcl.getStreamid())){
+										//Send to all connected users	
+										((IServiceCapableConnection) cons).invoke("roomDisconnect",new Object[] { currentClient }, this);
+										log.debug("sending roomDisconnect to " + cons);
+										//add Notification if another user is recording
+										log.debug("###########[roomLeave]");
+										if (rcl.getIsRecording()){
+											log.debug("*** roomLeave Any Client is Recording - stop that");
+											StreamService.addRoomClientEnterEventFunc(rcl, rcl.getRoomRecordingName(), rcl.getUserip(), false);
+											StreamService.stopRecordingShowForClient(cons, currentClient, rcl.getRoomRecordingName(), false);
+										}
 									}
+								} else {
+									log.debug("For this StreamId: "+cons.getClient().getId()+" There is no Client in the List anymore");
 								}
 							}
 						}		
