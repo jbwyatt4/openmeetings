@@ -102,7 +102,7 @@
 	        </handler>	
 	  	</netRemoteCallHib>     
     
-    <method name="buildPixelArray">
+    <method name="buildPixelArray" args="item">
         <![CDATA[
         
         for(var b=0; b<=this.h; b++){

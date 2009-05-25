@@ -262,7 +262,7 @@
 	</method>
 	
 	<!--- arranges the Box to be build into any border -->
-	<method name="checkStaticBorders">
+	<method name="checkStaticBorders" args="item">
 		<![CDATA[
 			if (!this.verticalClassActive){
 				//if ($debug) Debug.write("checkStaticBorders");

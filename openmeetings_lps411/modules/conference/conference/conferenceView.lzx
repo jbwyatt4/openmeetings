@@ -138,6 +138,8 @@
 <class name="conferenceView" extends="baseContentView" destroyByMethod="true" >
 	
 	<attribute name="roomobj" value="null" />
+    
+    <attribute name="meetingTimer" value="null" />
 
     <handler name="oninit">
     	
@@ -159,8 +161,12 @@
         	if ($debug) Debug.write("no appointed meeting");
         }
         
-        
-                    
+        if (this.roomobj.isDemoRoom) {
+            if (this.roomobj.demoTime != null) {
+                if ($debug) Debug.warn("THIS IS A DEMO ROOM THAT SHOULD CLOSE AFTER SEC: ",this.roomobj.demoTime);
+                this.meetingTimer = new lz.meetingTimer(canvas,{refObj:this,roomobj:this.roomobj});
+            }
+        }
         
     </handler>
     
@@ -208,6 +214,10 @@
         }
         if (canvas._mymod!=null){
         	canvas._mymod = null;
+        }
+        
+        if (this.meetingTimer != null) {
+            this.meetingTimer.close();
         }
         
         if (canvas._drawarea.letterObjectIsActive){
