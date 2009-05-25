@@ -65,13 +65,15 @@
     
 </class>
 
-<class name="winni" extends="window" bgcolor="white" textcolor="white">
+<class name="winni" extends="window" bgcolor="white" >
 	<attribute name="roomobj" value="null" />
+	<!--
+	textcolor="white"
+	 -->
 	
 	<handler name="oninit" >
 		this.getAppointmentData.doCall();
 		this.getServerTime.doCall();
-		
 	</handler>
 	
 	<labelText name="appstartlabel" y="10" labelid="570" width="50"/>

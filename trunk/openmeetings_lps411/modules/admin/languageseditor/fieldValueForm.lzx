@@ -66,7 +66,7 @@
     	<netparam><method name="getValue">return parent.parent.fieldvalues_id;</method></netparam>
     	<netparam><method name="getValue">return parent.parent.parent._turnoverlist.language_id;</method></netparam>
     	<handler name="ondata" args="value">
-    		if($debug) Debug.write("getFieldvalueById ",value);
+    		//if($debug) Debug.write("getFieldvalueById ",value);
     		if($debug) Debug.write(parent.fieldvalues_id);
     		if($debug) Debug.write(parent.parent._turnoverlist.language_id);
     		parent.initValueFieldsByObject(value);
@@ -78,7 +78,7 @@
 		<netparam><method name="getValue"> return canvas.sessionId; </method></netparam>
 		<netparam><method name="getValue"> return parent.parent.fieldlanguagesvalues_id; </method></netparam>
 		<handler name="ondata" args="value">
-			if($debug) Debug.write("deleteFieldlanguagesvaluesById ",value);
+			//if($debug) Debug.write("deleteFieldlanguagesvaluesById ",value);
 			this.parent.parent._turnoverlist.oncallnext.sendEvent();
 			this.parent.getFieldvalueById.doCall();
 		</handler>

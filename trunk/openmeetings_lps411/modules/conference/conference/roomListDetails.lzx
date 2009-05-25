@@ -16,11 +16,11 @@
 	        		+'&moduleName=chat&parentPath=&room_id='
 	        		+'&remoteUserid='+this.user_id
 	        		+'&sid='+canvas.sessionId;
-	        Debug.write("downloadurl "+downloadurl);
+	        		
+	        if ($debug) Debug.write("downloadurl "+downloadurl);
 	        this._userpic.setAttribute('src',downloadurl);	
 	        
-	        Debug.write("TIME: "+this.usertime);
-	        
+	        if ($debug) Debug.write("TIME: "+this.usertime);
 	        
         ]]>
 	</handler>
@@ -35,7 +35,7 @@
 
 </class>
 
-<class name="roomListDetails" extends="view"  >
+<class name="roomListDetails" extends="view" >
 
 	<attribute name="roomid" value="0" type="number" />
 	<attribute name="roomname" value="" type="string" />
@@ -44,7 +44,7 @@
 	
 	<method name="doinit" args="currentusers,roomid,roomname">
 		<![CDATA[
-			Debug.write("doinit",currentusers,roomid,roomname);
+			if ($debug) Debug.write("doinit",currentusers,roomid,roomname);
 			this.setAttribute('currentusers',currentusers);
 			this.setAttribute('roomid',roomid);
 			this.setAttribute('roomname',roomname);
@@ -68,7 +68,7 @@
 		<netparam><method name="getValue">return parent.parent.roomid;</method></netparam>
 		<handler name="ondata" args="value">	
 		    <![CDATA[
-		    	Debug.write("addClientToChatNotification: ",value);
+		    	if ($debug) Debug.write("addClientToChatNotification: ",value);
 		    ]]>	        	          				
 		</handler>	
 	</netRemoteCallHib>
@@ -76,13 +76,13 @@
 	<!-- Retrieving Appointmentdata for Meeting -->
 	<netRemoteCallHib name="getAppointmentData" remotecontext="$once{ canvas.thishib }" 
 		funcname="conferenceservice.getAppointMentDataForRoom" >   
-		<netparam><method name="getValue">return parent.parent.rooms_id;</method></netparam>
+		<netparam><method name="getValue">return parent.parent.roomid;</method></netparam>
 		<handler name="ondata" args="value">	
 		    <![CDATA[
-		    	Debug.write("getAppointmentData: ",value);
+		    	if ($debug) Debug.write("getAppointmentData: ",value);
 		    	
 		    	if(value!=null){
-		    		Debug.write("Appointment Name : " + value.appointmentName);
+		    		if ($debug) Debug.write("Appointment Name : " + value.appointmentName);
 		    		parent.bdatum.setAttribute('text',parseDateToString(value.appointmentStarttime));
 		    		parent.bzeit.setAttribute('text',parseDateToStringTimeOnly(value.appointmentStarttime));
 		    		parent.edatum.setAttribute('text',parseDateToString(value.appointmentEndtime));
@@ -96,8 +96,14 @@
 		    		parent.l_bdatum.setAttribute('visible', true);
 		    		parent.l_edatum.setAttribute('visible', true);
 		    		
-		    		Debug.write("Appointment Start : " + value.appointmentStarttime);
-		    		Debug.write("Appointment End : " + value.appointmentEndtime);
+		    		if ($debug) Debug.write("Appointment Start : " + value.appointmentStarttime);
+		    		if ($debug) Debug.write("Appointment End : " + value.appointmentEndtime);
+		    		
+		    		//Do change the y-Value of the Chat and users list so that there is no white space between
+                    parent.user_label.setAttribute("y",110);
+                    parent._users.setAttribute("y",130);
+                    parent.chat_label.setAttribute("y",230);
+                    parent._chat.setAttribute("y",250);
 		    	}
 		    	else{
 		    		parent.bdatum.setAttribute('text','');
@@ -109,6 +115,13 @@
 		    		parent.ezeit.setAttribute('visible', false);
 		    		parent.l_bdatum.setAttribute('visible', false);
 		    		parent.l_edatum.setAttribute('visible', false);
+		    		
+		    		//Do change the y-Value of the Chat and users list so that there is no white space between
+		    		parent.user_label.setAttribute("y",40);
+		    		parent._users.setAttribute("y",70);
+		    		parent.chat_label.setAttribute("y",170);
+		    		parent._chat.setAttribute("y",190);
+		    		
 		    	}
 		    	
 		    	
@@ -121,7 +134,7 @@
 		<netparam><method name="getValue">return parent.parent.roomid;</method></netparam>
 		<handler name="ondata" args="value">	
 		    <![CDATA[
-		    	Debug.write("getRoomClientsListByRoomId: ",value);
+		    	if ($debug) Debug.write("getRoomClientsListByRoomId: ",value);
 		    	parent.currentusers = value;
 		    	parent.doinit();
 		    ]]>	        	          				
@@ -132,8 +145,7 @@
 	
 	<labelText name="_roomname" labelid="406" y="20" width="200" />
 	
-	
-	<labelText name="l_bdatum" labelid="570" y="40" width="50" visible="false"/>
+	<labelText name="l_bdatum" labelid="570" y="40" width="50" visible="false" />
 	<customEdittext name="bdatum" y="40" x="75" width="100" text="" visible="false" /> 	            	
 	<customEdittext name="bzeit" x="200" y="40" width="50" regexpType="time" visible="false" />
 	
@@ -141,7 +153,7 @@
 	<customEdittext name="edatum" y="70" x="75" width="100" text="" visible="false" /> 	            	
 	<customEdittext name="ezeit" x="200" y="70" width="50" regexpType="time" visible="false" />
 	
-	<labelText labelid="407" y="110" width="200" />
+	<labelText name="user_label" labelid="407" y="110" width="200" />
 	<view name="_users" bgcolor="$once{ canvas.basebgcolorizer }" 
 		  width="300" height="100" y="130" >
 		<method name="clearList">
@@ -153,7 +165,7 @@
 			<vscrollbar />
 		</view>
 	</view>
-	<labelText y="240" labelid="405" />
+	<labelText name="chat_label" y="230" labelid="405" />
 	<view name="_chat" y="250" height="270" >
 		<view name="_chatoutputborder" height="${ parent.height-48 }"
 	        bgcolor="$once{ canvas.basebgcolorizer }" width="300">
