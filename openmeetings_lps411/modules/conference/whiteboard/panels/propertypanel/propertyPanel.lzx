@@ -2,7 +2,7 @@
 <library>
     
 <class name="propertyPanel" extends="basePropertyPanel" 
-	   width="${ parent.parent.width-1 }" height="100" title="Properties" >
+	   width="${ parent.parent.width-1 }" height="80" title="Properties" >
 	
 	<attribute name="ignoreUpdates" value="false" type="boolean" />
 	
@@ -17,10 +17,10 @@
 	<method name="onUpdateBoundByText">
 		if (canvas._drawarea.boundingref!=null){
 			if ($debug) Debug.write("onUpdateBoundByText boundingref: ",canvas._drawarea.boundingref);
-			canvas._drawarea.boundingref.setAttribute('x',Number(this._xvalue.getText()));
-			canvas._drawarea.boundingref.setAttribute('y',Number(this._yvalue.getText()));
-			canvas._drawarea.boundingref.setAttribute('width',Number(this._widthvalue.getText()));
-			canvas._drawarea.boundingref.setAttribute('height',Number(this._heightvalue.getText()));
+			canvas._drawarea.boundingref.setAttribute('x',Number(this._content._xvalue.getText()));
+			canvas._drawarea.boundingref.setAttribute('y',Number(this._content._yvalue.getText()));
+			canvas._drawarea.boundingref.setAttribute('width',Number(this._content._widthvalue.getText()));
+			canvas._drawarea.boundingref.setAttribute('height',Number(this._content._heightvalue.getText()));
 		}
 	</method>
 	
@@ -211,9 +211,9 @@
 			width="40" text="0" height="24"
 			onafterCheck="parent.parent.onUpdateBoundByText()" />
 		
-		<labelTextWidthTooltip name="_yvalueLabel" x="4" y="54"
+		<labelTextWidthTooltip name="_yvalueLabel" x="4" y="52"
 			labelid="547" labelLabelid="548"  /> 
-		<customEdittext name="_yvalue" x="24" y="54" regexpType="number"
+		<customEdittext name="_yvalue" x="24" y="52" regexpType="number"
 			width="40" text="0" height="24"
 			onafterCheck="parent.parent.onUpdateBoundByText()" />
 		
@@ -223,9 +223,9 @@
 			width="40" text="0" height="24"
 			onafterCheck="parent.parent.onUpdateBoundByText()" />
 		
-		<labelTextWidthTooltip name="_heightvalueLabel" x="68" y="54"
+		<labelTextWidthTooltip name="_heightvalueLabel" x="68" y="52"
 			labelid="551" labelLabelid="552" /> 
-		<customEdittext name="_heightvalue" x="88" y="54" regexpType="number"
+		<customEdittext name="_heightvalue" x="88" y="52" regexpType="number"
 			width="40" text="0" height="24"
 			onafterCheck="parent.parent.onUpdateBoundByText()" />
 			
@@ -237,7 +237,7 @@
 			</handler>
 		</lineColorChoose>
 		
-		<fillColorChoose x="132" y="54" name="fillColorChoose" boxPosition="up" >
+		<fillColorChoose x="132" y="52" name="fillColorChoose" boxPosition="up" >
 			<handler name="onselectedColor" args="sel">
 				if ($debug) Debug.write("fillColorChoose sel: ",sel);
 				parent.parent.updateProperties();	
@@ -253,7 +253,7 @@
 			</handler>
 		</changeWidthSlider> 
 		
-		<changeWidthSlider x="222" y="54" name="changeOpacitySlider" labelid="553" boxPosition="up"
+		<changeWidthSlider x="222" y="52" name="changeOpacitySlider" labelid="553" boxPosition="up"
 			initialNumber="100" >
 			<handler name="oninitialNumber" args="i">
 				//this.parent.parent.parent._drawareaMask._drawarea.setAttribute('currentlayersize',i);
