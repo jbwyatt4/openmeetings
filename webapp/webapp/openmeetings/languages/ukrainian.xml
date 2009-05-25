@@ -1909,4 +1909,19 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   <string id="634" name="logoutConfirm_sure_to_logout_question">
     <value>Are you sure you want to logout now?</value>
   </string>	
+  <string id="635" name="main menu">
+    <value>Actions</value>
+  </string>
+  <string id="636" name="room admin">
+    <value>Demo Room</value>
+  </string>
+  <string id="637" name="room admin">
+    <value>Demo Time</value>
+  </string>
+  <string id="638" name="meeting Timer">
+    <value>Meeting Timer</value>
+  </string>
+  <string id="639" name="meeting Timer">
+    <value>This Room is a Demo Room. To disable this warning you either should get a private meeting room for your personal usage or set up an own Server. You will be automatically logged off in:</value>
+  </string>  
 </language>
