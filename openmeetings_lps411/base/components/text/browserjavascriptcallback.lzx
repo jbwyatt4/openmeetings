@@ -21,7 +21,7 @@
 		lz.Timer.resetTimer( this.callDelegate, timer );
      </method>
 
-     <method name="callback">
+     <method name="callback" args="item">
 		if(unescape(_browserjavascriptcallback) == this.prevalue)
 		lz.Timer.resetTimer( this.callDelegate, timer );
 		else
