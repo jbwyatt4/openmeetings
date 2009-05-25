@@ -6,17 +6,25 @@
 		<handler name="oninit">
 			<![CDATA[
 				var tString = '';
-				//Debug.write("clientVars: ",parent.clientVars);
-				for (var eg in parent.clientVars){
-					if (eg!='userip'){
-						tString += eg+': <BR/>'+parent.clientVars[eg]+'<BR />';
-					} else {
-						tString += eg+': <BR/>'+parent.clientVars[eg]+'<BR />';
-						tString += 'WHOIS:<BR/>';
-						tString += '<A HREF="http://www.networksolutions.com/whois/results.jsp?whoistoken='+parent.clientVars[eg]+'" TARGET="_BLANK">'+parent.clientVars[eg]+'</A><BR/><BR/>';
-					}
+				if ( canvas.streamid == canvas.moderatorStreamID )
+				{
+					for (var eg in parent.clientVars){
+						if (eg!='userip'){
+							tString += eg+': <BR/>'+parent.clientVars[eg]+'<BR />';
+						} else {
+							tString += eg+': <BR/>'+parent.clientVars[eg]+'<BR />';
+							tString += 'WHOIS:<BR/>';
+							tString += '<A HREF="http://www.networksolutions.com/whois/results.jsp?whoistoken='+parent.clientVars[eg]+'" TARGET="_BLANK">'+parent.clientVars[eg]+'</A><BR/><BR/>';
+						}
+					}	
 				}
-				//Debug.write("tString: ",tString);
+				else
+				{
+					tString += getLabelTag(117) + ' ' + parent.clientVars['firstname'] + " <BR/>";
+					tString += getLabelTag(118) + ' ' + parent.clientVars['lastname'] + " <BR/>";
+					tString += getLabelTag(119) + ' ' + parent.clientVars['mail'] + " <BR/>";
+				}
+				
 				this.inner._usertext.setAttribute('text',tString);
 			]]>
 		</handler>
