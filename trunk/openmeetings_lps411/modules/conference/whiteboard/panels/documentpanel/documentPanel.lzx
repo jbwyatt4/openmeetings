@@ -85,7 +85,7 @@
 </class>
 	
 <class name="documentIconTopPanel" extends="baseTopPanel" 
-	   width="276" height="33" title="" docking="true"
+	   width="336" height="33" title="" docking="true"
 	   activationClassBounding="documentIconTopPanel"
 	   activationVClassBounding="documentIconTopPanel"
 	   leftClassPanel="documentIconTopPanel"
@@ -93,15 +93,15 @@
 	   bottomClassPanel="documentIconTopPanel"
 	   rightClassPanel="documentIconTopPanel"
 	   verticalClassActive="true"
-	   hWidth="276" hHeight="33" >
+	   hWidth="336" hHeight="33" >
 	<handler name="oninit">
-		if ($debug) Debug.write("oninit: ",this);
+		//if ($debug) Debug.write("oninit: ",this);
 		_inner._currentSlideNo.setAttribute('text',canvas.currentSlideNo);
 		_inner._totalSlideNo.setAttribute('text',canvas.currentSlideTotal);
 		_inner._zoom.setAttribute('text',canvas.currentSlideZoom);
 	</handler>
 	<handler name="preclose">
-		if ($debug) Debug.write("onclose: ",this);
+		//if ($debug) Debug.write("onclose: ",this);
 		canvas.currentSlideNo = Number(_inner._currentSlideNo.getText());
 		canvas.currentSlideTotal = Number(_inner._totalSlideNo.getText());
 		canvas.currentSlideZoom = Number(_inner._zoom.getText());
@@ -111,7 +111,7 @@
 	
 <!-- Not used for the Moment -->	
 <class name="documentIconLeftPanel" extends="baseLeftPanel" 
-	   width="33" height="306" title="" docking="true"
+	   width="33" height="336" title="" docking="true"
 	   activationClassBounding="documentIconLeftPanel"
 	   activationVClassBounding="documentIconTopPanel"
 	   topClassPanel="documentIconTopPanel"
@@ -119,7 +119,7 @@
 	   leftClassPanel="documentIconLeftPanel"
 	   rightClassPanel="documentIconLeftPanel"
 	   verticalClassActive="false"
-	   vWidth="306" vHeight="33">
+	   vWidth="336" vHeight="33">
 	
 	<verticalDocumentIconBar name="_inner" x="3" y="20" />
 </class>	     
