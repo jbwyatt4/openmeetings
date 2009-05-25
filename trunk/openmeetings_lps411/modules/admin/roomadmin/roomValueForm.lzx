@@ -56,6 +56,18 @@
 			this.ispublic.setValue(obj.ispublic);
 			if ($debug) Debug.write("Appointment: ",obj.appointment);
 			this.isappointment.setValue(obj.appointment);
+            
+            if (obj.isDemoRoom != null && obj.isDemoRoom){
+                this.isDemoRoom.setValue(true);
+            } else {
+                this.isDemoRoom.setValue(false);
+            }
+            if (obj.demoTime != null) {
+                this.demoTime.setText(obj.demoTime);
+            } else {
+                this.demoTime.setText("");
+            }
+                
 			this.numberOfParticipants.selectItem(String(obj.numberOfPartizipants));
 			this.roomtype.selectItem(String(obj.roomtype.roomtypes_id));
 			if (this._showAdvancedRoomSettings.getValue()){
@@ -125,6 +137,9 @@
 			this.sendObject["numberOfPartizipants"] = Number(this.parent.numberOfParticipants.getValue());
   			this.sendObject["organisations"] = this.parent._organisationslist.getAllItems();
   			this.sendObject["appointment"] = this.parent.isappointment.getValue();
+            
+            this.sendObject["isDemoRoom"] = parent.isDemoRoom.getValue();
+            this.sendObject["demoTime"] = parent.demoTime.getText();
 
   			if (parent._showAdvancedRoomSettings.getValue()){
   				
@@ -147,8 +162,7 @@
 				this.sendObject["filesPanelYPosition"] = Number(parent._advancedRoomSettings._filesPanelYPosition.getText());
 				this.sendObject["filesPanelWidth"] = Number(parent._advancedRoomSettings._filesPanelWidth.getText());
 				this.sendObject["filesPanelHeight"] = Number(parent._advancedRoomSettings._filesPanelHeight.getText());
-				
-				
+                
   			} else {
   				if (this.parent.rooms_id==0){
   					//default values
@@ -257,7 +271,7 @@
 
 	<!-- 195:Public -->
     <labelText labelid="195" width="200" y="160" resize="false" x="2"/>  
-        <labelCheckbox name="ispublic" width="270" y="160" x="120" fontsize="12" />
+        <labelCheckbox name="ispublic" width="270" y="160" x="130" fontsize="12" />
 	
 	<!-- 196:Comment -->
 	<labelText labelid="196" width="200" y="190" resize="false" x="2"/>
@@ -270,15 +284,13 @@
 	
 	<!-- Appointment -->
 	<labelText labelid="620" width="200" y="300" resize="false" x="2"/>  
-        <labelCheckbox name="isappointment" width="270" y="300" x="120" fontsize="12" />
+        <labelCheckbox name="isappointment" width="270" y="300" x="130" fontsize="12" />
 	
 	<!-- 191:organisations -->
     <labelText labelid="191" width="200" y="320" resize="false" x="2"/>     
     <simpleValueList name="_organisationslist" y="320" x="120" width="270" height="160" 
 		multiselect="true" />
 		
-	
-	
 	
 	<!-- 172:add organisation -->
 	<baseChooseIcon resourceN="edit_add_rsc" labelid="172" y="320" x="400"
@@ -295,22 +307,38 @@
 				for (var i in this.parent._organisationslist._selected)	this.parent._organisationslist.removeItem(this.parent._organisationslist._selected[i].value);
 		</method>
 	</baseChooseIcon>
+    
+    <!-- Is Demo Room -->
+    <labelText labelid="636" width="200" y="490" resize="false" x="2"/>  
+        <labelCheckbox name="isDemoRoom" width="270" y="490" x="130" fontsize="12" />    
 	
+    <!-- Is Demo Room -->
+    <labelText labelid="637" width="200" y="520" resize="false" x="2"/>  
+        <customEdittext name="demoTime" y="520" x="120" width="270" regexpType="number"
+                        text="" />        
+    
+    
 	<!-- 483:Show Layout Settings -->
-	<labelCheckbox x="0" y="490" fontsize="12"
+	<labelCheckbox x="0" y="550" fontsize="12"
         name="_showAdvancedRoomSettings" labelid="483" >
+        <attribute name="advancedRoomSettingsInited" value="false" type="boolean"/>
         <handler name="onvalue" args="v">
 			if (v) {
 				new lz.advancedRoomSettings(parent,{name:'_advancedRoomSettings'});
+                this.advancedRoomSettingsInited = true;
 			} else {
-				parent._advancedRoomSettings.destroy();
+                if (this.advancedRoomSettingsInited) {
+					parent._advancedRoomSettings.destroy();
+	                this.advancedRoomSettingsInited = false;
+                }
 			}
         </handler>
     </labelCheckbox>  
     
-    <!-- RoomClient List -->
+    
+    <!-- RoomClient List Right Side -->
     <labelText labelid="587" width="200" y="40" resize="false" 
-               x="400" fontstyle="bold" /> 
+               x="400" fontstyle="bold" />   
     
     <simpleTurnOverList name="_turnoverlist" width="300" height="200" y="40" x="400">
 

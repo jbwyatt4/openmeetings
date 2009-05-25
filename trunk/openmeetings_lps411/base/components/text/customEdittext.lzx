@@ -12,7 +12,7 @@
 	
 	<event name="onafterCheck" />
 
-	<handler name="onfocus">
+	<handler name="onfocus" args="f">
     	this.preText = this.getText();
     </handler>
 	
