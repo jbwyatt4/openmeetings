@@ -57,7 +57,7 @@
 		        <handler name="ondata" args="value">
 		        	<![CDATA[
 			            //The onResult-Handler will be called be the rtmpconnection
-			            if($debug) Debug.write("getLanguages: ",value);
+			            //if($debug) Debug.write("getLanguages: ",value);
 			            this.parent.reset();
 		            	for (var i=0;i<value.length;i++){
 		            		this.parent.addItem(value[i].name,value[i].language_id);
@@ -128,7 +128,7 @@
 			<netparam><method name="getValue"> return parent.parent.asc; </method></netparam>
             <netparam><method name="getValue"> return parent.parent.language_id; </method></netparam>
 	    	<handler name="ondata" args="value">
-	    		if($debug) Debug.write("getFieldsByLanguage ",value);
+	    		//if($debug) Debug.write("getFieldsByLanguage ",value);
 	    		//this.parent.destroy();
 	    		this.parent.initValues(value.records);
 	    		this.parent.renderContent(value.result);
