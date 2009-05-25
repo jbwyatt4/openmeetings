@@ -95,7 +95,7 @@
 		
 		<handler name="ondata" args="value">	
 		    <![CDATA[
-		    	Debug.write("getAppointmentData: ",value);
+		    	if ($debug) Debug.write("getAppointmentData: ",value);
 		    	
 		    	if(value!=null){
 		    		Debug.write("Appointment Name : " + value.appointmentName);
@@ -121,14 +121,12 @@
 		
 		<handler name="ondata" args="value">	
 		    <![CDATA[
-		    	Debug.write("getServerTime: ",value);
+		    	if ($debug) Debug.write("getServerTime: ",value);
 		    	
 		    	if(value!=null){
 		    		parent.sdatum.setAttribute('text',parseDateToString(value));
 		    		parent.szeit.setAttribute('text',parseDateToStringTimeOnly(value));
-		    		
 		    	}
-		    	
 		    	
 		    ]]>	        	          				
 		</handler>	
@@ -195,7 +193,7 @@
         -->
 
     <handler name="ontabcontentleave">
-        if ($debug) Debug.write("ontabcontentleave:",this);
+        if ($debug) Debug.write("################# ontabcontentleave:",this);
         
         //reset the right to draw on WHiteboard as the RoomClient Object will be destroyed also
         //on server-Side the canDraw status will be false again when you relogin the same room
@@ -216,12 +214,12 @@
           canvas._drawarea.currentletterObj.destroy();
         }
         this.logicalRoomLeave.doCall();
-        if ($debug) Debug.write("this.logicalRoomLeave ",this.logicalRoomLeave);
+        if ($debug) Debug.write("############ this.logicalRoomLeave ",this.logicalRoomLeave);
     </handler>
 
     <netRemoteCallHib name="logicalRoomLeave" funcname="logicalRoomLeave" remotecontext="$once{ canvas.thishib }" >
         <handler name="ondata" args="value">
-	        if ($debug) Debug.write("logicalRoomLeave: ",value);
+	        if ($debug) Debug.write("############# logicalRoomLeave: ",value);
 	        //this.parent.destroy();
             canvas.thishib.reconnectAfterRoomleft = true;
             canvas.thishib.reconnectedRoomInstance = this.parent;

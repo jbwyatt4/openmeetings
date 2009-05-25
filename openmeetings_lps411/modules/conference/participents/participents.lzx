@@ -183,7 +183,7 @@
     <method name="updateIcons">
         <![CDATA[
         
-            if ($debug) Debug.write("updateByMod,",m,this.isMod,canvas.streamid,canvas.moderatorStreamID);
+            if ($debug) Debug.write("updateByMod,",this.isMod,canvas.streamid,canvas.moderatorStreamID);
         
             //If this is the Mod he can also draw on the Whitboard
             if (this.isMod) {
@@ -377,6 +377,10 @@
 			
             if ($debug) Debug.write("+++++++++++++++++ getClientListScope : ",value);
             for (var i in value){
+            	if ( value[i].streamid == canvas.streamid ) {
+                    canvas.isAllowedToDraw = value[i].canDraw;
+                }
+
             	if ($debug) Debug.write("getClientListScope value: ",value[i]);
         		this.parent.addItem(value[i].connectedSince,value[i].isMod,value[i].streamid,value[i].username,'',value[i].formatedDate,value[i].userpos,value[i].usercolor,value[i]);
             }

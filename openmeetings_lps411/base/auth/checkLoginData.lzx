@@ -17,7 +17,7 @@
         lz.Focus.setFocus(this.username,true);
 	</handler>  
     
-    <method name="login">
+    <method name="login" args="item">
         if (this.b2.visible) {
             this.b2.onclick.sendEvent();
         } else {
