@@ -578,7 +578,7 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 			hsm.put("client", currentClient);
 			hsm.put("message", newMessage);			
 			
-			Collection<Set<IConnection>> conCollection = scope.getConnections();
+			Collection<Set<IConnection>> conCollection = current.getScope().getConnections();
 			for (Set<IConnection> conset : conCollection) {
 				for (IConnection conn : conset) {
 					if (conn != null) {
@@ -785,7 +785,7 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 			Long room_id = currentClient.getRoom_id();	
 						
 			//Notify all clients of the same scope (room)
-			Collection<Set<IConnection>> conCollection = scope.getConnections();
+			Collection<Set<IConnection>> conCollection = current.getScope().getConnections();
 			for (Set<IConnection> conset : conCollection) {
 				for (IConnection conn : conset) {
 					if (conn != null) {
@@ -1082,7 +1082,7 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 			hsm.put("message", newMessage);
 			
 			//broadcast Message to specific user with id inside the same Scope
-			Collection<Set<IConnection>> conCollection = scope.getConnections();
+			Collection<Set<IConnection>> conCollection = current.getScope().getConnections();
 			for (Set<IConnection> conset : conCollection) {
 				for (IConnection conn : conset) {
 					if (conn != null) {
