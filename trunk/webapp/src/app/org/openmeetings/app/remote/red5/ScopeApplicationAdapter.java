@@ -76,32 +76,32 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 	}
 	
 	//Beans, see red5-web.xml
-	public ClientListManager getClientListManager() {
+	public synchronized ClientListManager getClientListManager() {
 		return clientListManager;
 	}
-	public void setClientListManager(ClientListManager clientListManager) {
+	public synchronized void setClientListManager(ClientListManager clientListManager) {
 		this.clientListManager = clientListManager;
 	}
-	public EmoticonsManager getEmoticonsManager() {
+	public synchronized EmoticonsManager getEmoticonsManager() {
 		return emoticonsManager;
 	}
-	public void setEmoticonsManager(EmoticonsManager emoticonsManager) {
+	public synchronized void setEmoticonsManager(EmoticonsManager emoticonsManager) {
 		this.emoticonsManager = emoticonsManager;
 	}
-	public WhiteBoardService getWhiteBoardService() {
+	public synchronized WhiteBoardService getWhiteBoardService() {
 		return whiteBoardService;
 	}
-	public void setWhiteBoardService(WhiteBoardService whiteBoardService) {
+	public synchronized void setWhiteBoardService(WhiteBoardService whiteBoardService) {
 		this.whiteBoardService = whiteBoardService;
 	}
 
-	public void resultReceived(IPendingServiceCall arg0) {
+	public synchronized void resultReceived(IPendingServiceCall arg0) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public boolean appStart(IScope scope) {
+	public synchronized boolean appStart(IScope scope) {
 		try {
 			instance = this;
 			
@@ -136,7 +136,7 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 
 	
 	@Override
-	public boolean roomJoin(IClient client, IScope room) {
+	public synchronized boolean roomJoin(IClient client, IScope room) {
 		log.debug("roomJoin : ");
 		
 		try {
@@ -168,7 +168,7 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 	 * this function is invoked directly after initial connecting
 	 * @return
 	 */
-	public String getPublicSID() {
+	public synchronized String getPublicSID() {
 		IConnection current = Red5.getConnectionLocal();
 		RoomClient currentClient = this.clientListManager.getClientByStreamId(current.getClient().getId());
 		return currentClient.getPublicSID();
@@ -178,7 +178,7 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 	 * this function is invoked after a reconnect
 	 * @param newPublicSID
 	 */
-	public Boolean overwritePublicSID(String newPublicSID) {
+	public synchronized Boolean overwritePublicSID(String newPublicSID) {
 		try {
 			IConnection current = Red5.getConnectionLocal();
 			RoomClient currentClient = this.clientListManager.getClientByStreamId(current.getClient().getId());
@@ -199,7 +199,7 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 	 * 
 	 */
 	@Override
-	public void roomLeave(IClient client, IScope room) {
+	public synchronized void roomLeave(IClient client, IScope room) {
 		try {
 			
 			log.debug("roomLeave " + client.getId() + " "+ room.getClients().size() + " " + room.getContextPath() + " "+ room.getName());
@@ -227,11 +227,14 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 	 * Exit Room by Application
 	 * 
 	 */
-	public void logicalRoomLeave() {
+	public synchronized void logicalRoomLeave() {
 		log.debug("logicalRoomLeave ");
 		try {
 			IConnection current = Red5.getConnectionLocal();
 			String streamid = current.getClient().getId();
+			
+			log.debug(streamid + " is leaving");
+			
 			RoomClient currentClient = this.clientListManager.getClientByStreamId(streamid);
 			
 			this.roomLeaveByScope(currentClient, current.getScope());
@@ -248,7 +251,7 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 	 * @param currentClient
 	 * @param currentScope
 	 */
-	public void roomLeaveByScope(RoomClient currentClient, IScope currentScope) {
+	public synchronized void roomLeaveByScope(RoomClient currentClient, IScope currentScope) {
 		try {
 			
 			log.debug("currentClient "+currentClient);
@@ -286,7 +289,7 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 			
 			//Remove User AFTER cause otherwise the currentClient Object is NULL ?!
 			//OR before ?!?!
-			this.clientListManager.removeClient(currentClient.getStreamid());
+			
 			
 			if (currentScope != null && currentScope.getConnections() != null) {
 				//Notify Users of the current Scope
@@ -296,7 +299,8 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 						if (cons != null) {
 							if (cons instanceof IServiceCapableConnection) {
 						
-								log.debug("sending roomDisconnect to " + cons);
+								log.debug("sending roomDisconnect to " + cons + " client id " + cons.getClient().getId() );
+								
 								RoomClient rcl = this.clientListManager.getClientByStreamId(cons.getClient().getId());
 								
 								if (rcl != null) {
@@ -321,6 +325,7 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 				}	
 			}
 			
+			this.clientListManager.removeClient(currentClient.getStreamid());
 			
 			//If this Room is empty clear the Room Poll List
 			HashMap<String,RoomClient> rcpList = this.clientListManager.getClientListByRoom(room_id);
@@ -343,7 +348,7 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 	 * @return void
 	 * 
 	 */
-	public void streamPublishStart(IBroadcastStream stream) {
+	public synchronized void streamPublishStart(IBroadcastStream stream) {
 
 		IConnection current = Red5.getConnectionLocal();
 		String streamid = current.getClient().getId();
@@ -390,7 +395,7 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 	 * @return void
 	 * 
 	 */
-	public void streamBroadcastClose(IBroadcastStream stream) {
+	public synchronized void streamBroadcastClose(IBroadcastStream stream) {
 
 		// Notify all the clients that the stream had been started
 		log.debug("start streamBroadcastClose broadcast close: "+ stream.getPublishedName());
@@ -409,7 +414,7 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 	 * @return void
 	 * 
 	 */	
-	private void sendClientBroadcastNotifications(IBroadcastStream stream,String clientFunction, RoomClient rc){
+	private synchronized void sendClientBroadcastNotifications(IBroadcastStream stream,String clientFunction, RoomClient rc){
 		try {
 
 			// Store the local so that we do not send notification to ourself back
@@ -483,7 +488,7 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 	 * @return
 	 */
 
-	public String setModerator(String id) {
+	public synchronized String setModerator(String id) {
 		
 		String returnVal = "setModerator";
 		try {
@@ -537,7 +542,7 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 	 * this is the name this user will publish his stream
 	 * @return long broadCastId
 	 */
-	public long getBroadCastId(){
+	public synchronized long getBroadCastId(){
 		try {
 			IConnection current = Red5.getConnectionLocal();
 			String streamid = current.getClient().getId();
@@ -564,7 +569,7 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 	 * @param newMessage
 	 * @return
 	 */
-	public RoomClient setUserAVSettings(String avsettings, Object newMessage){
+	public synchronized RoomClient setUserAVSettings(String avsettings, Object newMessage){
 		try {
 
 			IConnection current = Red5.getConnectionLocal();
@@ -610,7 +615,7 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 	 * @param room_id
 	 * @return
 	 */
-	public HashMap<String,RoomClient> setRoomValues(Long room_id){
+	public synchronized HashMap<String,RoomClient> setRoomValues(Long room_id){
 		try {
 
 			IConnection current = Red5.getConnectionLocal();
@@ -714,7 +719,7 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 		return null;
 	}	
 	
-	public HashMap<String,RoomClient> getRoomClients(Long room_id) {
+	public synchronized HashMap<String,RoomClient> getRoomClients(Long room_id) {
 		try {
 
 			HashMap <String,RoomClient> roomClientList = new HashMap<String,RoomClient>();
@@ -746,7 +751,7 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 	 * @param orgdomain
 	 * @return
 	 */
-	public RoomClient setUsername(Long userId, String username, String firstname, String lastname){
+	public synchronized RoomClient setUsername(Long userId, String username, String firstname, String lastname){
 		try {
 			//log.debug("#*#*#*#*#*#*# setUsername userId: "+userId+" username: "+username+" firstname: "+firstname+" lastname: "+lastname);
 			IConnection current = Red5.getConnectionLocal();			
@@ -774,7 +779,7 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 	}
 	
 
-	public int setAudienceModus(String colorObj, int userPos){
+	public synchronized int setAudienceModus(String colorObj, int userPos){
 		try {
 			IConnection current = Red5.getConnectionLocal();
 			
@@ -823,7 +828,7 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 	 * @param message
 	 * @return
 	 */
-	public HashMap<String,RoomClient> sendMessageByRoomAndDomain(Long room_id, Object message){
+	public synchronized HashMap<String,RoomClient> sendMessageByRoomAndDomain(Long room_id, Object message){
 		HashMap <String,RoomClient> roomClientList = new HashMap<String,RoomClient>();
 		try {			
 			
@@ -866,7 +871,7 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 	 * 
 	 * @return
 	 */
-	public RoomClient getCurrentModerator(){
+	public synchronized RoomClient getCurrentModerator(){
 		try {
 			log.debug("*..*getCurrentModerator id: ");
 			
@@ -889,7 +894,7 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 	 * @param whiteboardObj
 	 * @return
 	 */
-	public int sendVars(ArrayList whiteboardObjParam) {
+	public synchronized int sendVars(ArrayList whiteboardObjParam) {
 		//
 		try {
 			
@@ -964,7 +969,7 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 	}
 	
 
-	public int sendVarsModeratorGeneral(Object vars) {
+	public synchronized int sendVarsModeratorGeneral(Object vars) {
 		log.debug("*..*sendVars: " + vars);
 		try {
 			IConnection current = Red5.getConnectionLocal();
@@ -1005,7 +1010,7 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 		return -1;
 	}
 
-	public int sendMessage(Object newMessage) {
+	public synchronized int sendMessage(Object newMessage) {
 		try {
 			IConnection current = Red5.getConnectionLocal();
 			RoomClient currentClient = this.clientListManager.getClientByStreamId(current.getClient().getId());
@@ -1032,7 +1037,7 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 	}
 
 
-	public int sendMessageWithClient(Object newMessage) {
+	public synchronized int sendMessageWithClient(Object newMessage) {
 		try {
 			IConnection current = Red5.getConnectionLocal();
 			RoomClient currentClient = this.clientListManager.getClientByStreamId(current.getClient().getId());
@@ -1072,7 +1077,7 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 	 * @param clientId
 	 * @return
 	 */
-	public int sendMessageById(Object newMessage, String clientId, IScope scope) {
+	public synchronized int sendMessageById(Object newMessage, String clientId, IScope scope) {
 		try {
 			IConnection current = Red5.getConnectionLocal();
 			
@@ -1104,7 +1109,7 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 		return 1;
 	}
 
-	public int sendMessageWithClientById(Object newMessage, String clientId) {
+	public synchronized int sendMessageWithClientById(Object newMessage, String clientId) {
 		try {
 			IConnection current = Red5.getConnectionLocal();
 			RoomClient currentClient = this.clientListManager.getClientByStreamId(current.getClient().getId());
@@ -1145,7 +1150,7 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 	 * 
 	 * @param users_id
 	 */
-	public void updateUserSessionObject(Long users_id, String pictureuri){
+	public synchronized void updateUserSessionObject(Long users_id, String pictureuri){
 		try {			
 //			Users us = UsersDaoImpl.getInstance().getUser(users_id);
 //			for (Iterator<String> itList = ClientList.keySet().iterator();itList.hasNext();) {
@@ -1245,7 +1250,7 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 	 * Used in lz.applyForModeration.lzx
 	 * @return
 	 */
-	public HashMap<String,RoomClient> getClientListScope(){
+	public synchronized HashMap<String,RoomClient> getClientListScope(){
 		HashMap <String,RoomClient> roomClientList = new HashMap<String,RoomClient>();
 		try {
 			IConnection current = Red5.getConnectionLocal();
