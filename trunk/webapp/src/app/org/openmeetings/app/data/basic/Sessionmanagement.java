@@ -13,6 +13,7 @@ import org.hibernate.criterion.Restrictions;
 import org.slf4j.Logger;
 import org.red5.logging.Red5LoggerFactory;
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -47,13 +48,14 @@ public class Sessionmanagement {
 	 */
 	public Sessiondata startsession() {
 		//log.error("startsession User: || ");
-		long thistime = new Date().getTime();
-		Sessiondata sessiondata = new Sessiondata();
-		sessiondata.setSession_id(ManageCryptStyle.getInstance().getInstanceOfCrypt().createPassPhrase(String.valueOf(thistime).toString()));
-		sessiondata.setRefresh_time(new Date());
-		sessiondata.setStarttermin_time(new Date());
-		sessiondata.setUser_id(null);
 		try {
+			long thistime = new Date().getTime();
+			Sessiondata sessiondata = new Sessiondata();
+			sessiondata.setSession_id(ManageCryptStyle.getInstance().getInstanceOfCrypt().createPassPhrase(String.valueOf(thistime).toString()));
+			sessiondata.setRefresh_time(new Date());
+			sessiondata.setStarttermin_time(new Date());
+			sessiondata.setUser_id(null);
+		
 			Object idf = HibernateUtil.createSession();
 			Session session = HibernateUtil.getSession();
 			Transaction tx = session.beginTransaction();
@@ -63,13 +65,15 @@ public class Sessionmanagement {
 			session.refresh(sessiondata);
 			tx.commit();
 			HibernateUtil.closeSession(idf);
+			
+			return sessiondata;
 		} catch (HibernateException ex) {
 			log.error("[startsession]: " ,ex);
 		} catch (Exception ex2) {
 			log.error("[startsession]: " ,ex2);
 		}
 
-		return sessiondata;
+		return null;
 	}
 	
 	public Sessiondata getSessionByHash(String SID) {
@@ -109,35 +113,82 @@ public class Sessionmanagement {
 	 * @param SID
 	 * @return the User_id or 0 if not logged in
 	 */
+//	public Long checkSession(String SID) {
+//		try {
+//			//log.debug("checkSession User: || "+SID);
+//			Object idf = HibernateUtil.createSession();
+//			Session session = HibernateUtil.getSession();
+//			Transaction tx = session.beginTransaction();
+//			
+//			//session.flush();
+//			Criteria crit = session.createCriteria(Sessiondata.class);
+//			crit.add(Restrictions.eq("session_id", SID));
+//
+//			List<Sessiondata> sessions = crit.list();
+//			Sessiondata sessiondata = null;
+//			if (sessions != null && sessions.size() > 0) {
+//				sessiondata = sessions.get(0);
+//			}
+//			
+//			if (sessiondata!=null) session.refresh(sessiondata);
+//			//session.flush();
+//			tx.commit();
+//			HibernateUtil.closeSession(idf);
+//			//if (sessiondata!=null) log.debug("checkSession USER_ID: "+sessiondata.getUser_id());
+//				
+//			if (sessiondata!=null) updatesession(SID);
+//			
+//			//Checks if wether the Session or the User Object of that Session is set yet
+//			if (sessiondata==null || sessions.size() >0 || sessiondata.equals(null) ||
+//					sessiondata.getUser_id()==null || sessiondata.getUser_id().equals(null) 
+//					|| sessiondata.getUser_id().equals(new Long(0)) ) {
+//				return new Long(0);
+//			} else {
+//				return sessiondata.getUser_id();
+//			}			
+//		} catch (HibernateException ex) {
+//			log.error("[checkSession]: " ,ex);
+//		} catch (Exception ex2) {
+//			log.error("[checkSession]: " ,ex2);
+//		}
+//		return null;
+//	}
+	
 	public Long checkSession(String SID) {
 		try {
+			
+			String hql = "select c from Sessiondata as c " +
+					"where c.session_id LIKE :session_id";
+			
 			//log.debug("checkSession User: || "+SID);
 			Object idf = HibernateUtil.createSession();
 			Session session = HibernateUtil.getSession();
 			Transaction tx = session.beginTransaction();
 			
 			//session.flush();
-			Criteria crit = session.createCriteria(Sessiondata.class);
-			crit.add(Restrictions.eq("session_id", SID));
-
-			List<Sessiondata> sessions = crit.list();
+			Query query = session.createQuery(hql);
+			query.setString("session_id", SID);
+			
+			List<Sessiondata> sessions = query.list();
+			tx.commit();
+			HibernateUtil.closeSession(idf);
+			
 			Sessiondata sessiondata = null;
 			if (sessions != null && sessions.size() > 0) {
 				sessiondata = sessions.get(0);
 			}
 			
-			if (sessiondata!=null) session.refresh(sessiondata);
-			//session.flush();
-			tx.commit();
-			HibernateUtil.closeSession(idf);
-			//if (sessiondata!=null) log.debug("checkSession USER_ID: "+sessiondata.getUser_id());
+			if (sessiondata!=null)  {
+				log.debug("checkSession USER_ID: "+sessiondata.getUser_id());
+			} else {
+				log.debug("Session IS NULL: ");
+			}
 				
+			//Update the Session Object
 			if (sessiondata!=null) updatesession(SID);
 			
 			//Checks if wether the Session or the User Object of that Session is set yet
-			if (sessiondata==null || sessions.size() >0 || sessiondata.equals(null) ||
-					sessiondata.getUser_id()==null || sessiondata.getUser_id().equals(null) 
-					|| sessiondata.getUser_id().equals(new Long(0)) ) {
+			if (sessiondata==null || sessiondata.getUser_id()==null || sessiondata.getUser_id().equals(new Long(0)) ) {
 				return new Long(0);
 			} else {
 				return sessiondata.getUser_id();
@@ -160,35 +211,42 @@ public class Sessionmanagement {
 		try {
 			log.debug("updateUser User: "+USER_ID+" || "+SID);
 			
+			String hql = "select c from Sessiondata as c " +
+							"where c.session_id LIKE :session_id";
+	
+			//log.debug("checkSession User: || "+SID);
 			Object idf = HibernateUtil.createSession();
 			Session session = HibernateUtil.getSession();
 			Transaction tx = session.beginTransaction();
-			session.flush();
-			Criteria crit = session.createCriteria(Sessiondata.class);
-			crit.add(Restrictions.eq("session_id", SID));
+			
+			//session.flush();
+			Query query = session.createQuery(hql);
+			query.setString("session_id", SID);
 
-			List fullList = crit.list();
-			if (fullList.size() == 0){
-				log.error("Could not find session to update: "+SID);
-				return false;
-			} else {
-				//log.error("Found session to update: "+SID);
-			}
+			List<Sessiondata> sessions = query.list();
 			tx.commit();
 			HibernateUtil.closeSession(idf);
 			
-			Sessiondata sd = (Sessiondata) fullList.get(0);
-			//log.debug("Found session to update: "+sd.getSession_id()+ " userId: "+USER_ID);
+			Sessiondata sessiondata = null;
+			if (sessions != null && sessions.size() > 0) {
+				sessiondata = sessions.get(0);
+			}
+			
+			if (sessiondata == null) {
+				log.error("Could not find session to Update");
+				return false;
+			}
+			log.debug("Found session to update: "+sessiondata.getSession_id()+ " userId: "+USER_ID);
 			
 			idf = HibernateUtil.createSession();
 			session = HibernateUtil.getSession();
 			tx = session.beginTransaction();
-			sd.setRefresh_time(new Date());
-			session.refresh(sd);
-			sd.setUser_id(USER_ID);
-			session.flush();
-			session.update(sd);
-			session.flush();
+			sessiondata.setRefresh_time(new Date());
+			//session.refresh(sd);
+			sessiondata.setUser_id(USER_ID);
+			//session.flush();
+			session.update(sessiondata);
+			//session.flush();
 			tx.commit();
 			HibernateUtil.closeSession(idf);
 			

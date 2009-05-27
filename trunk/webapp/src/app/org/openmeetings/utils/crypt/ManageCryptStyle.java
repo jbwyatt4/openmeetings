@@ -3,6 +3,7 @@ package org.openmeetings.utils.crypt;
 import org.slf4j.Logger;
 import org.red5.logging.Red5LoggerFactory;
 import org.openmeetings.app.data.basic.Configurationmanagement;
+import org.openmeetings.app.remote.red5.ScopeApplicationAdapter;
 
 public class ManageCryptStyle {
 	
@@ -27,7 +28,7 @@ public class ManageCryptStyle {
 			log.debug("getInstanceOfCrypt: "+Configurationmanagement.getInstance());
 			
 			//String configKeyCryptClassName = "org.openmeetings.utils.crypt.MD5Implementation";
-			String configKeyCryptClassName = Configurationmanagement.getInstance().getConfKey(3,"crypt_ClassName").getConf_value();
+			String configKeyCryptClassName = ScopeApplicationAdapter.configKeyCryptClassName;
 			
 			log.debug("configKeyCryptClassName: "+configKeyCryptClassName);
 			
