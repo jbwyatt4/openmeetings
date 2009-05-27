@@ -37,7 +37,7 @@
  
     <bean id="openmeetings.WhiteBoardObjectListManager"
         class="org.openmeetings.app.remote.red5.WhiteBoardObjectListManager">
-    </bean>        
+    </bean>      
         
     <!-- DATABASE Connection via hibernate
     <bean id="theSessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
@@ -65,6 +65,9 @@
     <import resource="red5-services/invitationservice.service.xml"/>  
     <import resource="red5-services/whiteboardservice.service.xml"/>  
     <import resource="red5-services/printservice.service.xml"/>  
+    <!--
+    <import resource="red5-services/schedulerJobs.service.xml"/>  
+     -->
 
            
 </beans>

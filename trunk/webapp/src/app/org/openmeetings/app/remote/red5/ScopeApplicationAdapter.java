@@ -113,6 +113,9 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 			//batchFileFir = webAppPath + File.separatorChar + "jod" + File.separatorChar;
 			
 			// init your handler here
+			
+			//The scheduled Jobs did go into the Spring-Managed Beans, see schedulerJobs.service.xml
+			
 			QuartzSessionClear quartzSessionClear = new QuartzSessionClear();
 			QuartzRecordingJob quartzRecordingJob = new QuartzRecordingJob();
 			QuartzMeetingReminderJob reminderJob = new QuartzMeetingReminderJob();
