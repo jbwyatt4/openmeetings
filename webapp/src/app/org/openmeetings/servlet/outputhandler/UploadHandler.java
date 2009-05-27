@@ -172,12 +172,12 @@ public class UploadHandler extends HttpServlet {
 					if (!moduleName.equals("nomodule")) {
 						//Check variable to see if this file is a presentation
 
-						ServletMultipartRequest upload = new ServletMultipartRequest(httpServletRequest, 104857600); // max 100 mb
-
+						ServletMultipartRequest upload = new ServletMultipartRequest(
+								httpServletRequest, 104857600, "utf-8"); // max 100 mb
 						InputStream is = upload.getFileContents("Filedata");
 
 						//trim whitespace
-						String fileSystemName = StringUtils.deleteWhitespace(upload.getFileSystemName("Filedata"));
+						String fileSystemName = upload.getBaseFilename("Filedata");
 
 						int dotidx=fileSystemName.lastIndexOf('.');
 						String newFileSystemName = StringComparer.getInstance()
@@ -188,9 +188,11 @@ public class UploadHandler extends HttpServlet {
 								dotidx,
 								fileSystemName.length()).toLowerCase();
 
-						//trim long names cause cannot output that
-						if (newFileSystemName.length() >= 17) {
-							newFileSystemName = newFileSystemName.substring(0,16);
+						// trim long names cause cannot output that
+						final int MAX_FILE_NAME_LENGTH = 30;
+						if (newFileSystemName.length() >= MAX_FILE_NAME_LENGTH) {
+							newFileSystemName = newFileSystemName.substring(0,
+									MAX_FILE_NAME_LENGTH);
 						}
 
 						//check if this is a a file that can be converted by openoffice-service
