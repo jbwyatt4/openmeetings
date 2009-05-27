@@ -207,7 +207,11 @@ public class ConferenceService {
 	 */
 	public List<RoomTypes> getRoomTypes(String SID){
         Long users_id = Sessionmanagement.getInstance().checkSession(SID);
+        
+        log.debug("users_id "+users_id);
+        
         Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
+        
         return Roommanagement.getInstance().getAllRoomTypes(user_level);
 	}
 	

@@ -11,6 +11,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.openmeetings.app.conference.whiteboard.WhiteboardManagement;
+import org.openmeetings.app.data.basic.Configurationmanagement;
 import org.openmeetings.app.data.calendar.daos.AppointmentDaoImpl;
 import org.openmeetings.app.data.calendar.daos.MeetingMemberDaoImpl;
 import org.openmeetings.app.data.calendar.management.AppointmentLogic;
@@ -67,6 +68,8 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 	public static String webAppRootKey = "openmeetings";
 	public static String configDirName = "conf";
 	
+	public static String configKeyCryptClassName = "";
+	
 	private static long broadCastCounter = 0;
 	
 	private static ScopeApplicationAdapter instance = null;
@@ -111,6 +114,9 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 			webAppPath = scope.getResource("/").getFile().getAbsolutePath();
 			log.debug("webAppPath : "+webAppPath);
 			//batchFileFir = webAppPath + File.separatorChar + "jod" + File.separatorChar;
+			
+			//Only load this Class one time
+			ScopeApplicationAdapter.configKeyCryptClassName = Configurationmanagement.getInstance().getConfKey(3,"crypt_ClassName").getConf_value();
 			
 			// init your handler here
 			
