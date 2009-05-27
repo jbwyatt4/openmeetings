@@ -107,7 +107,7 @@ public class Sessionmanagement {
 	/**
 	 * check if a given sessionID is loged in
 	 * @param SID
-	 * @return
+	 * @return the User_id or 0 if not logged in
 	 */
 	public Long checkSession(String SID) {
 		try {
@@ -116,25 +116,28 @@ public class Sessionmanagement {
 			Session session = HibernateUtil.getSession();
 			Transaction tx = session.beginTransaction();
 			
-			session.flush();
+			//session.flush();
 			Criteria crit = session.createCriteria(Sessiondata.class);
 			crit.add(Restrictions.eq("session_id", SID));
 
-			int count = crit.list().size();
+			List<Sessiondata> sessions = crit.list();
 			Sessiondata sessiondata = null;
-			for (Iterator it2 = crit.list().iterator(); it2.hasNext();) {
-				sessiondata = (Sessiondata) it2.next();
+			if (sessions != null && sessions.size() > 0) {
+				sessiondata = sessions.get(0);
 			}
 			
 			if (sessiondata!=null) session.refresh(sessiondata);
-			session.flush();
+			//session.flush();
 			tx.commit();
 			HibernateUtil.closeSession(idf);
 			//if (sessiondata!=null) log.debug("checkSession USER_ID: "+sessiondata.getUser_id());
 				
 			if (sessiondata!=null) updatesession(SID);
-			if (sessiondata==null || count == 0 || sessiondata.equals(null) ||
-					sessiondata.getUser_id()==null || sessiondata.getUser_id().equals(null) || sessiondata.getUser_id().equals(new Long(0)) ) {
+			
+			//Checks if wether the Session or the User Object of that Session is set yet
+			if (sessiondata==null || sessions.size() >0 || sessiondata.equals(null) ||
+					sessiondata.getUser_id()==null || sessiondata.getUser_id().equals(null) 
+					|| sessiondata.getUser_id().equals(new Long(0)) ) {
 				return new Long(0);
 			} else {
 				return sessiondata.getUser_id();

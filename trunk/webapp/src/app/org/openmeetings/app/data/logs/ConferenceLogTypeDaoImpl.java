@@ -1,6 +1,7 @@
 package org.openmeetings.app.data.logs;
 
 import java.util.Date;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.red5.logging.Red5LoggerFactory;
@@ -66,8 +67,14 @@ public class ConferenceLogTypeDaoImpl {
 			Query query = session.createQuery(hql);
 			query.setString("eventType",eventType);
 			
+			//Seems like this does throw an error sometimes cause it does not return a unique Result
+			//ConferenceLogType confLogType = (ConferenceLogType) query.uniqueResult();
+			List<ConferenceLogType> confLogTypes = query.list();
 			
-			ConferenceLogType confLogType = (ConferenceLogType) query.uniqueResult();
+			ConferenceLogType confLogType = null;
+			if (confLogTypes != null && confLogTypes.size() > 0) {
+				confLogType = confLogTypes.get(0);
+			}
 			tx.commit();
 			HibernateUtil.closeSession(idf);
 			

@@ -52,9 +52,13 @@ public class Configurationmanagement {
 				Query query = session.createQuery("select c from Configuration as c where c.conf_key = :conf_key and c.deleted = :deleted");
 				query.setString("conf_key", CONF_KEY);
 				query.setString("deleted", "false");
-				for (Iterator it = query.iterate(); it.hasNext();) {
-					configuration = (Configuration) it.next();
+				
+				List<Configuration> configs = query.list();
+				
+				if (configs != null && configs.size() > 0) {
+					configuration = (Configuration) configs.get(0);
 				}
+				
 				tx.commit();
 				HibernateUtil.closeSession(idf);
 				return configuration;
