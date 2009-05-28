@@ -22,6 +22,6 @@
     <property name="canBeUsedOnlyOneTime" type="boolean" column="canBeUsedOnlyOneTime"/>
     <property name="invitationWasUsed" type="boolean" column="invitationWasUsed"/>
     <property name="isValidByTime" type="boolean" column="isValidByTime"/>
-    <property name="baseUrl" type="boolean" column="baseUrl"/>
+    <property name="baseUrl" type="string" column="baseUrl"/>
   </class>
 </hibernate-mapping>

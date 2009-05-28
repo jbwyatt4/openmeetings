@@ -57,23 +57,32 @@ public class ConferenceService {
 	 * @return
 	 */
 	public List<Rooms_Organisation> getRoomsByOrganisationAndType(String SID, long organisation_id, long roomtypes_id){
-		log.debug("getRoomsByOrganisationAndType");
-		
-		Long users_id = Sessionmanagement.getInstance().checkSession(SID);
-        Long User_level = Usermanagement.getInstance().getUserLevelByID(users_id);
-        List<Rooms_Organisation> roomOrgsList = Roommanagement.getInstance().getRoomsOrganisationByOrganisationIdAndRoomType(User_level, organisation_id, roomtypes_id);
-        
-        List<Rooms_Organisation> filtered = new ArrayList<Rooms_Organisation>();
-        
-        for (Iterator<Rooms_Organisation> iter = roomOrgsList.iterator();iter.hasNext();) {
-        	Rooms_Organisation orgRoom = iter.next();
-        	
-        	if(!orgRoom.getRoom().getAppointment()){
-        		orgRoom.getRoom().setCurrentusers(this.getRoomClientsListByRoomId(orgRoom.getRoom().getRooms_id()));
-        		filtered.add(orgRoom);
-        	}
-        }
-        return filtered;        
+		try {
+			Long users_id = Sessionmanagement.getInstance().checkSession(SID);
+	        Long User_level = Usermanagement.getInstance().getUserLevelByID(users_id);
+	        
+	        log.debug("getRoomsByOrganisationAndType");
+	        
+	        if (User_level == null) {
+	        	return null;
+	        }
+	        List<Rooms_Organisation> roomOrgsList = Roommanagement.getInstance().getRoomsOrganisationByOrganisationIdAndRoomType(User_level, organisation_id, roomtypes_id);
+	        
+	        List<Rooms_Organisation> filtered = new ArrayList<Rooms_Organisation>();
+	        
+	        for (Iterator<Rooms_Organisation> iter = roomOrgsList.iterator();iter.hasNext();) {
+	        	Rooms_Organisation orgRoom = iter.next();
+	        	
+	        	if(!orgRoom.getRoom().getAppointment()){
+	        		orgRoom.getRoom().setCurrentusers(this.getRoomClientsListByRoomId(orgRoom.getRoom().getRooms_id()));
+	        		filtered.add(orgRoom);
+	        	}
+	        }
+	        return filtered;     
+		} catch (Exception err) {
+			log.error("[getRoomsByOrganisationAndType]",err);
+		}
+		return null;
 	}
 	
 	/**
@@ -99,27 +108,34 @@ public class ConferenceService {
 	 * @return
 	 */
 	public List<Rooms> getRoomsPublic(String SID, Long roomtypes_id){
-		log.debug("getRoomsPublic");
-		
-        Long users_id = Sessionmanagement.getInstance().checkSession(SID);
-        Long User_level = Usermanagement.getInstance().getUserLevelByID(users_id);
-        log.error("getRoomsPublic user_level: "+User_level);
-        List<Rooms> roomList = Roommanagement.getInstance().getPublicRooms(User_level, roomtypes_id);
-       
-        // Filter : no appointed meetings
-        List<Rooms> filtered = new ArrayList<Rooms>();
-        
-        for (Iterator<Rooms> iter = roomList.iterator();iter.hasNext();) {
-        	Rooms rooms = iter.next();
-        	
-        	if(!rooms.getAppointment()){
-        		rooms.setCurrentusers(this.getRoomClientsListByRoomId(rooms.getRooms_id()));
-        		filtered.add(rooms);
-        	}
-        }
-        
-        
-        return filtered;
+		try {
+			log.debug("getRoomsPublic");
+			
+	        Long users_id = Sessionmanagement.getInstance().checkSession(SID);
+	        Long User_level = Usermanagement.getInstance().getUserLevelByID(users_id);
+	        log.error("getRoomsPublic user_level: "+User_level);
+	        
+	        
+	        List<Rooms> roomList = Roommanagement.getInstance().getPublicRooms(User_level, roomtypes_id);
+	       
+	        // Filter : no appointed meetings
+	        List<Rooms> filtered = new ArrayList<Rooms>();
+	        
+	        for (Iterator<Rooms> iter = roomList.iterator();iter.hasNext();) {
+	        	Rooms rooms = iter.next();
+	        	
+	        	if(!rooms.getAppointment()){
+	        		rooms.setCurrentusers(this.getRoomClientsListByRoomId(rooms.getRooms_id()));
+	        		filtered.add(rooms);
+	        	}
+	        }
+	        
+	        
+	        return filtered;
+		} catch (Exception err) {
+			log.error("[getRoomsByOrganisationAndType]",err);
+		}
+		return null;
 	}
 	
 	
