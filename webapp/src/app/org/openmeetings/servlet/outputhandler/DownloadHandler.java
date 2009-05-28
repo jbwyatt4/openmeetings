@@ -40,6 +40,10 @@ public class DownloadHandler extends HttpServlet {
 			IOException {
 
 		try {
+			log.debug("\nquery = " + httpServletRequest.getQueryString());
+			log.debug("\n\nfileName = " + httpServletRequest.getParameter("fileName"));
+			log.debug("\n\nparentPath = " + httpServletRequest.getParameter("parentPath"));
+			
 			String sid = httpServletRequest.getParameter("sid");
 			if (sid == null) {
 				sid = "default";

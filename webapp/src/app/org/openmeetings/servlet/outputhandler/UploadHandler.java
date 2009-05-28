@@ -2,8 +2,10 @@ package org.openmeetings.servlet.outputhandler;
 
 import http.utils.multipartrequest.ServletMultipartRequest;
 
-import java.io.*;
-
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -13,19 +15,18 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.slf4j.Logger;
-import org.red5.logging.Red5LoggerFactory;
-
 import org.apache.commons.lang.StringUtils;
 import org.openmeetings.app.data.basic.Sessionmanagement;
 import org.openmeetings.app.data.user.Usermanagement;
 import org.openmeetings.app.data.user.dao.UsersDaoImpl;
-import org.openmeetings.utils.stringhandlers.StringComparer;
-import org.openmeetings.app.documents.GenerateThumbs;
-import org.openmeetings.app.documents.GeneratePDF;
 import org.openmeetings.app.documents.GenerateImage;
-import org.openmeetings.app.remote.red5.ScopeApplicationAdapter;
+import org.openmeetings.app.documents.GeneratePDF;
+import org.openmeetings.app.documents.GenerateThumbs;
 import org.openmeetings.app.hibernate.beans.user.Users;
+import org.openmeetings.app.remote.red5.ScopeApplicationAdapter;
+import org.openmeetings.utils.stringhandlers.StringComparer;
+import org.red5.logging.Red5LoggerFactory;
+import org.slf4j.Logger;
 
 public class UploadHandler extends HttpServlet {
 
@@ -93,7 +94,7 @@ public class UploadHandler extends HttpServlet {
 				
 				log.debug("uploading........ ");
 				
-				HashMap<String,HashMap> returnError = new HashMap<String,HashMap>();
+				HashMap<String, HashMap<String, Object>> returnError = new HashMap<String, HashMap<String, Object>>();
 
 				String sid = httpServletRequest.getParameter("sid");
 				if (sid == null) {

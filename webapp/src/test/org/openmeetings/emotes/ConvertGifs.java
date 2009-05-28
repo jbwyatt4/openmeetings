@@ -89,7 +89,7 @@ public class ConvertGifs extends TestCase {
 			XStream xStream = new XStream(new XppDriver());
 			xStream.setMode(XStream.NO_REFERENCES);
 			String xmlString = xStream.toXML(filesList);
-			
+
 			log.error(xmlString);
 			
 			PrintWriter pw = new PrintWriter(new FileWriter(basePath+batfilePath));
