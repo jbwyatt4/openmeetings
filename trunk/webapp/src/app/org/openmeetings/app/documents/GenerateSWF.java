@@ -1,26 +1,21 @@
 package org.openmeetings.app.documents;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
 
-import org.slf4j.Logger;
-import org.red5.logging.Red5LoggerFactory;
 import org.openmeetings.app.data.basic.Configurationmanagement;
-import org.openmeetings.app.remote.red5.ScopeApplicationAdapter;
-import org.openmeetings.utils.math.CalendarPatterns;
+import org.red5.logging.Red5LoggerFactory;
+import org.slf4j.Logger;
 
 public class GenerateSWF {
 	
-	private static final Logger log = Red5LoggerFactory.getLogger(GenerateSWF.class, "openmeetings");
-
+	private static final Logger log = Red5LoggerFactory.getLogger(GeneratePDF.class, "openmeetings");
+	
 	private static GenerateSWF instance;
 
 	private GenerateSWF() {}
@@ -31,359 +26,100 @@ public class GenerateSWF {
 		}
 		return instance;
 	}
-	
-	public HashMap<String,Object> generateSWF(String current_dir, String originalFolder, String destinationFolder, String fileNamePure) {
-		HashMap<String,Object> returnMap = new HashMap<String,Object>();
-		returnMap.put("process", "generateSWF");		
-		try {
-			
-			//Init variables
-			String[] cmd;
-			String executable_fileName = "";	
-			String pathToSWFTools = Configurationmanagement.getInstance().getConfKey(3,"swftools_path").getConf_value();
-			//If SWFTools Path is not blank a File.seperator at the end of the path is needed
-			if(!pathToSWFTools.equals("") && !pathToSWFTools.endsWith(File.separator)){
-				pathToSWFTools = pathToSWFTools + File.separator;
-			}
-			
 
-			//If no Windows Platform
-			if (System.getProperty("os.name").toUpperCase().indexOf("WINDOWS") == -1) {
-				String runtimeFile = "swfconverter.sh";
-				executable_fileName = ScopeApplicationAdapter.batchFileFir+"SWFCONVERT_" 
-						+ CalendarPatterns.getTimeForStreamId(new Date()) +"_"+ runtimeFile;
-		
-				cmd = new String[1];
-				cmd[0] = executable_fileName;
-			} else {
-				String runtimeFile = "swfconverter.bat";
-				executable_fileName = ScopeApplicationAdapter.batchFileFir+"SWFCONVERT_" 
-						+ CalendarPatterns.getTimeForStreamId(new Date()) +"_"+ runtimeFile;
-				
-				cmd = new String[4];
-				cmd[0] = "cmd.exe";
-				cmd[1] = "/C";
-				cmd[2] = "start";
-				cmd[3] = executable_fileName;
-			}
-			log.debug("executable_fileName: "+executable_fileName);
-			
-			//Create the Content of the Converter Script (.bat or .sh File)
-			String fileContent = pathToSWFTools + "pdf2swf"
-					+ " " + "\"" + originalFolder + fileNamePure + ".pdf\""
-					+ " " + "\"" + destinationFolder + fileNamePure+".swf\""
-					+ ScopeApplicationAdapter.lineSeperator + "exit";
-				
-			//execute the Script
-			FileOutputStream fos = new FileOutputStream(executable_fileName);
-			fos.write(fileContent.getBytes());
-			fos.close();
-			
-			//make new shell script executable
-			//in JAVA6 this can be done directly through the api
-			if (System.getProperty("os.name").toUpperCase().indexOf("WINDOWS") == -1) {
-				MakeExectuable.getInstance().setExecutable(executable_fileName);
-			}
-			
-			Runtime rt = Runtime.getRuntime();			
-			
-			for (int i=0;i<cmd.length;i++){
-				log.debug("cmd: "+cmd[i]);
-			}
-			
-			returnMap.put("command", cmd.toString());
-			Process proc = rt.exec(cmd);
+	final static boolean isPosix = System.getProperty("os.name").toUpperCase()
+			.indexOf("WINDOWS") == -1;
+	
+	final static String execExt = isPosix ? "" : ".exe"; 
+
+	static HashMap<String, Object> executeScript(String process, String[] argv) {
+		HashMap<String, Object> returnMap = new HashMap<String, Object>();
+		returnMap.put("process", process);
+		log.debug("process: " + process);
+		try {
+			Runtime rt = Runtime.getRuntime();
+			returnMap.put("command", Arrays.toString(argv));
+			Process proc = rt.exec(argv);
+
 			InputStream stderr = proc.getErrorStream();
-			InputStreamReader isr = new InputStreamReader(stderr);
+			InputStreamReader isr = new InputStreamReader(stderr, "IBM866");//FIXME
 			BufferedReader br = new BufferedReader(isr);
 			String line = null;
 			String error = "";
-			while ((line = br.readLine()) != null)
+			while ((line = br.readLine()) != null) {
 				error += line;
+				log.debug("line: " + line);
+			}
 			returnMap.put("error", error);
 			int exitVal = proc.waitFor();
+			log.debug("exitVal: " + exitVal);
 			returnMap.put("exitValue", exitVal);
-			return returnMap;
 		} catch (Throwable t) {
 			t.printStackTrace();
 			returnMap.put("error", t.getMessage());
 			returnMap.put("exitValue", -1);
-			return returnMap;
 		}
+		return returnMap;
+	}
+	
+	private String getPathToSwfTools() {
+		String pathToSWFTools = Configurationmanagement.getInstance()
+				.getConfKey(3, "swftools_path").getConf_value();
+		// If SWFTools Path is not blank a File.separator at the end of the path
+		// is needed
+		if (!pathToSWFTools.equals("")
+				&& !pathToSWFTools.endsWith(File.separator)) {
+			pathToSWFTools = pathToSWFTools + File.separator;
+		}
+		return pathToSWFTools;
+	}
+	
+	public HashMap<String, Object> generateSwf(String current_dir,
+			String originalFolder, String destinationFolder, String fileNamePure) {
+		// Create the Content of the Converter Script (.bat or .sh File)
+		String[] argv = new String[] { getPathToSwfTools() + "pdf2swf" + execExt,
+				originalFolder + fileNamePure + ".pdf",
+				destinationFolder + fileNamePure + ".swf" };
+
+		return executeScript("generateSwf", argv);
 	}
 	
 	/**
-	 * This Function generate a SWF
-	 * @param images
-	 * @param outputfile
-	 * @param fps
-	 * @return
+	 * Generates an SWF from the list of files.
 	 */
-	public HashMap<String,Object> generateSWFByImages(List<String> images, String outputfile, int fps) {
-		HashMap<String,Object> returnMap = new HashMap<String,Object>();
-		returnMap.put("process", "generateSWFByImages");		
-		try {
-			
-			//Init variables
-			String[] cmd;
-			String executable_fileName = "";	
-			String pathToSWFTools = Configurationmanagement.getInstance().getConfKey(3,"swftools_path").getConf_value();
-			//If SWFTools Path is not blank a File.seperator at the end of the path is needed
-			if(!pathToSWFTools.equals("") && !pathToSWFTools.endsWith(File.separator)){
-				pathToSWFTools = pathToSWFTools + File.separator;
-			}
-			
-
-			//If no Windows Platform
-			if (System.getProperty("os.name").toUpperCase().indexOf("WINDOWS") == -1) {
-				String runtimeFile = "swfconverter.sh";
-				executable_fileName = ScopeApplicationAdapter.batchFileFir+"SWFIMAGECONVERT_" 
-						+ CalendarPatterns.getTimeForStreamId(new Date()) +"_"+ runtimeFile;
+	public HashMap<String, Object> generateSwfByImages(List<String> images,
+			String outputfile, int fps) {
+		List<String> argvList = Arrays.asList(new String[] {
+				getPathToSwfTools() + "png2swf" + execExt, "-o", outputfile,
+				"-r", Integer.toString(fps), "-z" });
 		
-				cmd = new String[1];
-				cmd[0] = executable_fileName;
-			} else {
-				String runtimeFile = "swfconverter.bat";
-				executable_fileName = ScopeApplicationAdapter.batchFileFir+"SWFIMAGECONVERT_" 
-						+ CalendarPatterns.getTimeForStreamId(new Date()) +"_"+ runtimeFile;
-				
-				cmd = new String[4];
-				cmd[0] = "cmd.exe";
-				cmd[1] = "/C";
-				cmd[2] = "start";
-				cmd[3] = executable_fileName;
-			}
-			log.debug("executable_fileName: "+executable_fileName);
-			
-			//Create the Content of the Converter Script (.bat or .sh File)
-			String fileContent = pathToSWFTools + "png2swf"
-					+ " -o " + "\"" + outputfile + "\""
-					+ " -r " + fps
-					+ " -z ";
-			
-			for (Iterator<String> iter = images.iterator();iter.hasNext();) {
-				String fileName = iter.next();
-				fileContent += " " + "\"" + fileName +"\"";
-			}
-			
-			fileContent += ScopeApplicationAdapter.lineSeperator + "exit";
-				
-			//execute the Script
-			FileOutputStream fos = new FileOutputStream(executable_fileName);
-			fos.write(fileContent.getBytes());
-			fos.close();
-			
-			//make new shell script executable
-			//in JAVA6 this can be done directly through the api
-			if (System.getProperty("os.name").toUpperCase().indexOf("WINDOWS") == -1) {
-				MakeExectuable.getInstance().setExecutable(executable_fileName);
-			}
-			
-			Runtime rt = Runtime.getRuntime();			
-			
-			for (int i=0;i<cmd.length;i++){
-				log.debug("cmd: "+cmd[i]);
-			}
-			
-			returnMap.put("command", cmd.toString());
-			Process proc = rt.exec(cmd);
-			InputStream stderr = proc.getErrorStream();
-			InputStreamReader isr = new InputStreamReader(stderr);
-			BufferedReader br = new BufferedReader(isr);
-			String line = null;
-			String error = "";
-			while ((line = br.readLine()) != null)
-				error += line;
-			returnMap.put("error", error);
-			int exitVal = proc.waitFor();
-			returnMap.put("exitValue", exitVal);
-			return returnMap;
-		} catch (Throwable t) {
-			t.printStackTrace();
-			returnMap.put("error", t.getMessage());
-			returnMap.put("exitValue", -1);
-			return returnMap;
-		}
+		argvList.addAll(images);
+		return executeScript("generateSwfByImages", (String[]) argvList.toArray());
 	}
 	
 	/**
-	 * Combines a bunch of SWFs to one swf by concatenate
-	 * @param swfs
-	 * @param outputswf
-	 * @param fps
-	 * @return
+	 * Combines a bunch of SWFs into one SWF by concatenate.
 	 */
-	public HashMap<String,Object> generateSWFByCombine(List<String> swfs, String outputswf, int fps) {
-		HashMap<String,Object> returnMap = new HashMap<String,Object>();
-		returnMap.put("process", "generateSWFByImages");		
-		try {
-			
-			//Init variables
-			String[] cmd;
-			String executable_fileName = "";	
-			String pathToSWFTools = Configurationmanagement.getInstance().getConfKey(3,"swftools_path").getConf_value();
-			//If SWFTools Path is not blank a File.seperator at the end of the path is needed
-			if(!pathToSWFTools.equals("") && !pathToSWFTools.endsWith(File.separator)){
-				pathToSWFTools = pathToSWFTools + File.separator;
-			}
-			
+	public HashMap<String, Object> generateSWFByCombine(List<String> swfs,
+			String outputswf, int fps) {
+		List<String> argvList = Arrays.asList(new String[] {
+				getPathToSwfTools() + "swfcombine" + execExt, "-o", outputswf,
+				"-r", Integer.toString(fps), "-z", "-a" });
 
-			//If no Windows Platform
-			if (System.getProperty("os.name").toUpperCase().indexOf("WINDOWS") == -1) {
-				String runtimeFile = "swfconverter.sh";
-				executable_fileName = ScopeApplicationAdapter.batchFileFir+"SWFCOMBINE_" 
-						+ CalendarPatterns.getTimeForStreamId(new Date()) +"_"+ runtimeFile;
-		
-				cmd = new String[1];
-				cmd[0] = executable_fileName;
-			} else {
-				String runtimeFile = "swfconverter.bat";
-				executable_fileName = ScopeApplicationAdapter.batchFileFir+"SWFIMAGECONVERT_" 
-						+ CalendarPatterns.getTimeForStreamId(new Date()) +"_"+ runtimeFile;
-				
-				cmd = new String[4];
-				cmd[0] = "cmd.exe";
-				cmd[1] = "/C";
-				cmd[2] = "start";
-				cmd[3] = executable_fileName;
-			}
-			log.debug("executable_fileName: "+executable_fileName);
-			
-			//Create the Content of the Converter Script (.bat or .sh File)
-			String fileContent = pathToSWFTools + "swfcombine"
-					+ " -o " + "\"" + outputswf + "\""
-					+ " -r " + fps
-					+ " -z -a ";
-			
-			for (Iterator<String> iter = swfs.iterator();iter.hasNext();) {
-				String fileName = iter.next();
-				fileContent += " " + "\"" + fileName +"\"";
-			}
-			
-			fileContent += ScopeApplicationAdapter.lineSeperator + "exit";
-				
-			//execute the Script
-			FileOutputStream fos = new FileOutputStream(executable_fileName);
-			fos.write(fileContent.getBytes());
-			fos.close();
-			
-			//make new shell script executable
-			//in JAVA6 this can be done directly through the api
-			if (System.getProperty("os.name").toUpperCase().indexOf("WINDOWS") == -1) {
-				MakeExectuable.getInstance().setExecutable(executable_fileName);
-			}
-			
-			Runtime rt = Runtime.getRuntime();			
-			
-			for (int i=0;i<cmd.length;i++){
-				log.debug("cmd: "+cmd[i]);
-			}
-			
-			returnMap.put("command", cmd.toString());
-			Process proc = rt.exec(cmd);
-			InputStream stderr = proc.getErrorStream();
-			InputStreamReader isr = new InputStreamReader(stderr);
-			BufferedReader br = new BufferedReader(isr);
-			String line = null;
-			String error = "";
-			while ((line = br.readLine()) != null)
-				error += line;
-			returnMap.put("error", error);
-			int exitVal = proc.waitFor();
-			returnMap.put("exitValue", exitVal);
-			return returnMap;
-		} catch (Throwable t) {
-			t.printStackTrace();
-			returnMap.put("error", t.getMessage());
-			returnMap.put("exitValue", -1);
-			return returnMap;
-		}
+		argvList.addAll(swfs);
+		return executeScript("generateSwfByImages", (String[]) argvList.toArray());
 	}
 	
 	
-	public HashMap<String,Object> generateSWFByFFMpeg(String inputWildCard, String outputswf, int fps, int width, int height) {
-		HashMap<String,Object> returnMap = new HashMap<String,Object>();
-		returnMap.put("process", "generateSWFByFFMpeg");		
-		try {
-			
-			//Init variables
-			String[] cmd;
-			String executable_fileName = "";	
-			String pathToSWFTools = Configurationmanagement.getInstance().getConfKey(3,"swftools_path").getConf_value();
-			//If SWFTools Path is not blank a File.seperator at the end of the path is needed
-			if(!pathToSWFTools.equals("") && !pathToSWFTools.endsWith(File.separator)){
-				pathToSWFTools = pathToSWFTools + File.separator;
-			}
-			
+	public HashMap<String, Object> generateSWFByFFMpeg(String inputWildCard,
+			String outputswf, int fps, int width, int height) {
+		// FIXME: ffmpeg should be on the system path
+		String[] argv = new String[] { "ffmpeg" + execExt, "-r",
+				Integer.toString(fps), "-i", inputWildCard, "-s",
+				width + "x" + height, "-b", "750k", "-ar", "44100", "-y",
+				outputswf };
 
-			//If no Windows Platform
-			if (System.getProperty("os.name").toUpperCase().indexOf("WINDOWS") == -1) {
-				String runtimeFile = "swfconverter.sh";
-				executable_fileName = ScopeApplicationAdapter.batchFileFir+"FFMPEGSWF_" 
-						+ CalendarPatterns.getTimeForStreamId(new Date()) +"_"+ runtimeFile;
-		
-				cmd = new String[1];
-				cmd[0] = executable_fileName;
-			} else {
-				String runtimeFile = "swfconverter.bat";
-				executable_fileName = ScopeApplicationAdapter.batchFileFir+"FFMPEGSWF_" 
-						+ CalendarPatterns.getTimeForStreamId(new Date()) +"_"+ runtimeFile;
-				
-				cmd = new String[4];
-				cmd[0] = "cmd.exe";
-				cmd[1] = "/C";
-				cmd[2] = "start";
-				cmd[3] = executable_fileName;
-			}
-			log.debug("executable_fileName: "+executable_fileName);
-			
-			//Create the Content of the Converter Script (.bat or .sh File)
-			//FIXME: pathToSWFTools + MUST BE PATH_TO_FFMPEG!!
-			String fileContent = "ffmpeg"
-					+ " -r " + fps 
-					+ " -i " + "\"" + inputWildCard + "\""
-					+ "  -s " + width + "x" + height 
-					+ " -b 750k -ar 44100" 
-					+ " -y "+outputswf;
-			
-			fileContent += ScopeApplicationAdapter.lineSeperator + "exit";
-				
-			//execute the Script
-			FileOutputStream fos = new FileOutputStream(executable_fileName);
-			fos.write(fileContent.getBytes());
-			fos.close();
-			
-			//make new shell script executable
-			//in JAVA6 this can be done directly through the api
-			if (System.getProperty("os.name").toUpperCase().indexOf("WINDOWS") == -1) {
-				MakeExectuable.getInstance().setExecutable(executable_fileName);
-			}
-			
-			Runtime rt = Runtime.getRuntime();			
-			
-			for (int i=0;i<cmd.length;i++){
-				log.debug("cmd: "+cmd[i]);
-			}
-			
-			returnMap.put("command", cmd.toString());
-			Process proc = rt.exec(cmd);
-			InputStream stderr = proc.getErrorStream();
-			InputStreamReader isr = new InputStreamReader(stderr);
-			BufferedReader br = new BufferedReader(isr);
-			String line = null;
-			String error = "";
-			while ((line = br.readLine()) != null)
-				error += line;
-			returnMap.put("error", error);
-			int exitVal = proc.waitFor();
-			returnMap.put("exitValue", exitVal);
-			return returnMap;
-		} catch (Throwable t) {
-			t.printStackTrace();
-			returnMap.put("error", t.getMessage());
-			returnMap.put("exitValue", -1);
-			return returnMap;
-		}
+		return executeScript("generateSWFByFFMpeg", argv);
 	}
 
 }

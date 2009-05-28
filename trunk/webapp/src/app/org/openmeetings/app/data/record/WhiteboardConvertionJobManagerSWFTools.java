@@ -385,7 +385,7 @@ public class WhiteboardConvertionJobManagerSWFTools {
 							}
 						}
 						
-						GenerateSWF.getInstance().generateSWFByImages(imageForConvert, fileName, 30);
+						GenerateSWF.getInstance().generateSwfByImages(imageForConvert, fileName, 30);
 					}
 					
 					//Combine Resulting SWFs to one SWF
@@ -396,7 +396,7 @@ public class WhiteboardConvertionJobManagerSWFTools {
 				} else {
 					
 					//Directly write to SWF
-					GenerateSWF.getInstance().generateSWFByImages(images, output, 30);
+					GenerateSWF.getInstance().generateSwfByImages(images, output, 30);
 					
 					
 				}

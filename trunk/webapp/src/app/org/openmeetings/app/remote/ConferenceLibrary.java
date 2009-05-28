@@ -93,7 +93,8 @@ public class ConferenceLibrary {
 	        	
 				String roomName = room_id.toString();
 				
-				String current_dir = ScopeApplicationAdapter.webAppPath+"/upload";
+				String current_dir = ScopeApplicationAdapter.webAppPath
+						+ File.separatorChar + "upload";
 				String working_dir = current_dir + File.separatorChar + roomName + parentFolder;
 				log.debug("#############working_dir : "+working_dir);
 
@@ -140,7 +141,7 @@ public class ConferenceLibrary {
 					for(int i=0; i<allfiles.length; i++){
 						File file = new File(working_dir+File.separatorChar+allfiles[i]);
 						
-						System.out.println("working_dir+File.separatorChar+allfiles[i]: "+working_dir+File.separatorChar+allfiles[i]);
+						log.debug("working_dir+File.separatorChar+allfiles[i]: "+working_dir+File.separatorChar+allfiles[i]);
 						if (allfiles[i].startsWith("_thumb_")){
 							//log.error("Found Thumbs: "+allfiles[i]);
 						} else {
@@ -205,7 +206,8 @@ public class ConferenceLibrary {
 			String parentFolder, Long room_id) {
 		LiberaryObject returnMap = new LiberaryObject();
 		try {
-			String current_dir = ScopeApplicationAdapter.webAppPath+"/upload";
+			String current_dir = ScopeApplicationAdapter.webAppPath
+					+ File.separatorChar + "upload";
 			
 			LinkedHashMap<String,LinkedHashMap> presentationObject = null;
 						
@@ -272,7 +274,7 @@ public class ConferenceLibrary {
 					for(int i=0; i<allfiles.length; i++){
 						File file = new File(working_dir+File.separatorChar+allfiles[i]);
 						
-						System.out.println("working_dir+File.separatorChar+allfiles[i]: "+working_dir+File.separatorChar+allfiles[i]);
+						log.debug("working_dir+File.separatorChar+allfiles[i]: "+working_dir+File.separatorChar+allfiles[i]);
 						if (allfiles[i].startsWith("_thumb_")){
 							//log.error("Found Thumbs: "+allfiles[i]);
 						} else {
@@ -295,7 +297,7 @@ public class ConferenceLibrary {
 						for(int i=0; i<allfiles.length; i++){
 							File file = new File(working_dir+File.separatorChar+allfiles[i]);
 							
-							System.out.println("working_dir+File.separatorChar+allfiles[i]: "+working_dir+File.separatorChar+allfiles[i]);
+							log.debug("working_dir+File.separatorChar+allfiles[i]: "+working_dir+File.separatorChar+allfiles[i]);
 							if (allfiles[i].startsWith("_thumb_")){
 								//log.error("Found Thumbs: "+allfiles[i]);
 							} else {
@@ -352,7 +354,8 @@ public class ConferenceLibrary {
 	        Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);  
 	        if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)){		
 						
-				String current_dir = ScopeApplicationAdapter.webAppPath+"/upload";
+				String current_dir = ScopeApplicationAdapter.webAppPath
+						+ File.separatorChar + "upload";
 				String roomName = room_id.toString();
 				String working_dir = current_dir+File.separatorChar+roomName+parentFolder;
 				log.debug("working_dir+fileName: "+working_dir+File.separatorChar+fileName);
@@ -415,7 +418,9 @@ public class ConferenceLibrary {
 				log.debug("saveAsObject",tObject.size());
 				
 				String roomName = room_id.toString();				
-				String current_dir = ScopeApplicationAdapter.webAppPath+"/upload"+File.separatorChar+roomName+File.separatorChar;
+				String current_dir = ScopeApplicationAdapter.webAppPath
+						+ File.separatorChar + "upload" + File.separatorChar
+						+ roomName + File.separatorChar;
 
 				log.error("### this is my working directory: "+current_dir);
 				
@@ -433,7 +438,9 @@ public class ConferenceLibrary {
 	        Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);  
 	        if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)){		
 				String roomName = room_id.toString();
-				String current_dir = ScopeApplicationAdapter.webAppPath+"/upload"+File.separatorChar+roomName+File.separatorChar;
+				String current_dir = ScopeApplicationAdapter.webAppPath
+						+ File.separatorChar + "upload" + File.separatorChar
+						+ roomName + File.separatorChar;
 				log.debug("### this is my working directory: "+current_dir);
 				
 				return LibraryWmlLoader.getInstance().loadWmlFile(current_dir, fileName);
