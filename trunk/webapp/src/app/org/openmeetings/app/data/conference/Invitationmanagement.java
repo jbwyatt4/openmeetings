@@ -131,7 +131,7 @@ public class Invitationmanagement {
 				
 			}
 		} catch (HibernateException ex) {
-			log.error("[addInvitationLink] "+ex);
+			log.error("[addInvitationLink] ",ex);
 		} catch (Exception err){
 			log.error("addInvitationLink",err);
 		}

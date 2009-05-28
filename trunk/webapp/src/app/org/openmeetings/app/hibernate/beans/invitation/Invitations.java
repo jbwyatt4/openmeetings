@@ -271,19 +271,14 @@ public class Invitations {
 	/**
      * @hibernate.property
      *  column="baseUrl"
-     *  type="boolean"
+     *  type="string"
      */	
 	public String getBaseUrl() {
 		return baseUrl;
 	}
-
-
 	public void setBaseUrl(String baseUrl) {
 		this.baseUrl = baseUrl;
 	}
-	
-	
-	
 	
 
 }

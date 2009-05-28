@@ -181,7 +181,7 @@ public class Sessionmanagement {
 			if (sessiondata!=null)  {
 				log.debug("checkSession USER_ID: "+sessiondata.getUser_id());
 			} else {
-				log.debug("Session IS NULL: ");
+				log.debug("Session IS NULL SID: "+SID);
 			}
 				
 			//Update the Session Object

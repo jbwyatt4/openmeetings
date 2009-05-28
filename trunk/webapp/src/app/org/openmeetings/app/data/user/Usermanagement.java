@@ -626,6 +626,8 @@ public class Usermanagement {
 			
 			if (us!=null){
 				return us.getLevel_id();
+			} else {
+				return -1L;
 			}
 		} catch (HibernateException ex) {
 			log.error("[getUserLevelByID]" ,ex);
