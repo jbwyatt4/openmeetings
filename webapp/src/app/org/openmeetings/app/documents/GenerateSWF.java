@@ -42,7 +42,7 @@ public class GenerateSWF {
 			Process proc = rt.exec(argv);
 
 			InputStream stderr = proc.getErrorStream();
-			InputStreamReader isr = new InputStreamReader(stderr, "IBM866");//FIXME
+			InputStreamReader isr = new InputStreamReader(stderr);
 			BufferedReader br = new BufferedReader(isr);
 			String line = null;
 			String error = "";
