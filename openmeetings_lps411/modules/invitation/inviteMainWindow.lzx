@@ -45,7 +45,7 @@
 		<customEdittext name="_password" enabled="${ parent._ispasswordProtected.value }" width="340" x="120" y="218" />
 		
 		<!-- label: validity period -->
-		<labelText labelid="526" y="252" />
+		<labelText labelid="526" y="252" width="120" />
 	
 		<radiogroup name="_valid" x="120" y="256" layout="class:simplelayout; axis:x">
 			<!-- label: endless -->
