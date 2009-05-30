@@ -1770,7 +1770,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Crear usuarios, salas, organizaciones&lt;br/&gt; + cambios en la configuración</value>
   </string> 
   <string id="587" name="room Administration roomclients list">
-    <value>Usuarios en esta Sala ahora</value>
+    <value>Usuarios actuales en esta Sala</value>
   </string>
   <string id="588" name="room Administration roomclients list">
     <value>ID</value>
@@ -1863,13 +1863,13 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Su cuenta está asignada a varias organizaciones. Seleccione aquella con la que quiera entrar en esta sesión.</value>
   </string>  
   <string id="618" name="error message room full">
-    <value>This room is full at the moment. Please try again later.</value>
+    <value>Esta sala está completa. Inténtelo más tarde.</value>
   </string>    
   <string id="619" name="roomtypes">
-    <value>Room Type</value>
+    <value>Tipo de sala</value>
   </string>
   <string id="620" name="appointed_room">
-    <value>Appointment Room</value>
+    <value>Sala para citarse</value>
   </string>
   <string id="621" name="servertime">
     <value>Server Time</value>
@@ -1903,7 +1903,8 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   </string>
   <string id="631" name="lbl_name">
     <value>name</value>
-  </string> <string id="632" name="lbl_email">
+  </string>
+  <string id="632" name="lbl_email">
     <value>E-mail</value>
   </string>
   <string id="633" name="logoutConfirm_title">
@@ -1911,7 +1912,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   </string>
   <string id="634" name="logoutConfirm_sure_to_logout_question">
     <value>Are you sure you want to logout now?</value>
-  </string>	
+  </string>
   <string id="635" name="main menu">
     <value>Actions</value>
   </string>
