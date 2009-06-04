@@ -574,7 +574,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Имя</value>
   </string>
   <string id="190" name="roomadmin_header">
-    <value>публично</value>
+    <value>Публичная комната</value>
   </string>
   <string id="191" name="roomadmin_header">
     <value>Организации</value>
@@ -721,7 +721,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Запрещено делать ваш экран общим</value>
   </string>
   <string id="239" name="user_doStartScreenViewer">
-    <value>оооСделать ваш экран общим</value>
+    <value>iiiiiiСделать экран общим</value>
   </string>
   <string id="240" name="screen_warnBandwidth">
     <value>Неверная ширина канала: невозможно синхронизовать экран. Некоторые кадры будут пропущены. Если это сообщение появляется слишком часто, Вы можете попросить модератора ухудшить качество соединения.</value>
@@ -739,10 +739,10 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Чат</value>
   </string>
   <string id="245" name="tabbar_filesicon">
-    <value>Документы</value>
+    <value>Файл</value>
   </string>
   <string id="246" name="tabbar_participantsicon">
-    <value>Участники</value>
+    <value>Юзеры</value>
   </string>
   <string id="247" name="swfpresentation_listsaveorig">
     <value>Загрузить первоначальный документ</value>
@@ -922,16 +922,16 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Установки</value>
   </string>
   <string id="306" name="conferencebar">
-    <value>... камеры и микрофона</value>
+    <value>Установки камеры и мик</value>
   </string>
   <string id="307" name="conferencebar">
-    <value>... доски</value>
+    <value>Установки доски</value>
   </string>
   <string id="308" name="conferencebar">
     <value>Выход</value>
   </string>
   <string id="309" name="conferencebar">
-    <value>Назад к комнатам</value>
+    <value>Выход (к комнатам)</value>
   </string>
   <string id="310" name="conferencebar">
     <value>Выход</value>
@@ -1509,22 +1509,22 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Обратная связь OpenMeetings</value>
   </string>
   <string id="500" name="invitation_template_head">
-    <value>OpenMeetings - Приглашение</value>
+    <value>OpenMeetings: Приглашение</value>
   </string>
   <string id="501" name="invitation_text_from">
     <value>Сообщение от пользователя:</value>
   </string>
   <string id="502" name="invitation_text_message">
-    <value>Сообщение:</value>
+    <value>Текст сообщения:</value>
   </string>
   <string id="503" name="invitation_text_click_text">
-    <value>Кликните на это сообщение, чтобы принять участие в совещании:</value>
+    <value>Для того, чтобы принять участие в совещании, кликните на следующий линк:</value>
   </string>
   <string id="504" name="invitation_text_click_text_link">
-    <value>Кликните здесь, чтобы войти в комнату</value>
+    <value>Кликните здесь для того, чтобы войти в комнату совещаний</value>
   </string>
   <string id="505" name="invitation_text_click_text_help">
-    <value>если у Вы испытываете проблемы с ликом, скопируйте это в браузер:</value>
+    <value>Если Вы испытываете проблемы с линком, скопируйте этот URL в браузер:</value>
   </string>
   <string id="506" name="registering_mail_text_head">
     <value>OpenMeetings SignUp</value>
@@ -1545,10 +1545,10 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>OpenMeetings-Команда</value>
   </string>
   <string id="512" name="register_mail_subject">
-    <value>OpenMeetings Sign-Up</value>
+    <value>Регистрация в OpenMeetings</value>
   </string>
   <string id="513" name="reset_password_template_head">
-    <value>OpenMeetings - Переустановить пароль</value>
+    <value>OpenMeetings: Переустановить пароль</value>
   </string>
   <string id="514" name="reset_password_template_test_link">
     <value>Кликните на этот линк и введите новый пароль:</value>
@@ -1557,7 +1557,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Кликните здесь, и введите новый пароль</value>
   </string>
   <string id="516" name="reset_password_template_text3_link">
-    <value>если у Вы испытываете проблемы с ликом, скопируйте это в браузер:</value>
+    <value>Если Вы испытываете проблемы с линком, скопируйте этот URL в браузер:</value>
   </string>
   <string id="517" name="reset_password_mail_subject">
     <value>Переустановка пароля OpenMeetings</value>
@@ -1608,7 +1608,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Приглашение в OpenMeetings</value>
   </string>
   <string id="533" name="invitation_error">
-    <value>Not Invitation availible for this Invitation-Code</value>
+    <value>Для этого кода приглашения нет доступных приглашений</value>
   </string>
   <string id="534" name="invitation_error">
     <value>Это приглашение уже использовано. Приглашение этого типа не может быть переиспользовано.</value>
@@ -1641,7 +1641,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>У этой сессии нет connected Remoteuser-Data. Либо вы не вызвали SOAP-Gateway перед доступом к приложению, либо используете неверный ID сессии.</value>
   </string>
   <string id="544" name="debug_message_recording">
-    <value>У этого рекордера - Beta-версия!</value>
+    <value>У этого рекордера - Beta-версия</value>
   </string>	
   <string id="545" name="propertyPanelXValue">
     <value>x</value>
@@ -1689,19 +1689,19 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Синхронизация пользователей, подождите</value>
   </string>
   <string id="560" name="exportToSVG">
-    <value>&lt;u&gt;Загрузить как&lt;/u&gt;</value>
+    <value>&lt;u&gt;Загрузить рисунок как SVG&lt;/u&gt;</value>
   </string>
   <string id="561" name="exportToImage">
-    <value>&lt;u&gt;Загрузить как PNG&lt;/u&gt;</value>
+    <value>&lt;u&gt;Загрузить рисунок как PNG&lt;/u&gt;</value>
   </string>
   <string id="562" name="exportToImage">
-    <value>&lt;u&gt;Загрузить как JPG&lt;/u&gt;</value>
+    <value>&lt;u&gt;Загрузить рисунок как JPG&lt;/u&gt;</value>
   </string>
   <string id="563" name="exportToImage">
-    <value>&lt;u&gt;Загрузить как PDF&lt;/u&gt;</value>
+    <value>&lt;u&gt;Загрузить рисунок как PDF&lt;/u&gt;</value>
   </string>
   <string id="564" name="exportToImage">
-    <value>&lt;u&gt;Загрузить как TIF&lt;/u&gt;</value>
+    <value>&lt;u&gt;Загрузить рисунок как TIF&lt;/u&gt;</value>
   </string>
   <string id="565" name="calendarLabel">
     <value>Напоминатель:</value>
@@ -1761,7 +1761,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Посмотреть записанные совещания и лекции</value>
   </string>
   <string id="584" name="tooltip main-menu">
-    <value>Совещание - проведите конференцию с 4 участниками (число участником может доходить до 16)&lt;br/&gt;у каждого будет аудио/видео</value>
+    <value>Совещание - проведите конференцию с 4 участниками (число участников может доходить до 16)&lt;br/&gt;у каждого будет аудио/видео</value>
   </string>
   <string id="585" name="tooltip main-menu">
     <value>Лекция - проведите конференцию с участниками, число которых - до 200&lt;br/&gt;Аудио/видео будет только у модератора</value>
@@ -1785,7 +1785,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Загрузка документа. Подождите, пока клиент синхронизируется.</value>
   </string>  
   <string id="592" name="upload dialog">
-    <value>Загрузка завершена, конвертация документа ...</value>
+    <value>Загружено, конвертация документа</value>
   </string>
   <string id="593" name="upload dialog">
     <value>Начать </value>
@@ -1863,76 +1863,70 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Вашей учетной записи соответствует несколько организаций. Пожалуйста, выберите одну организацию для данной сессии.</value>
   </string>  
   <string id="618" name="error message room full">
-    <value>This room is full at the moment. Please try again later.</value>
+    <value>Эта комната заполнена. Попробуйте попозже.</value>
   </string>
   <string id="619" name="roomtypes">
-    <value>Room Type</value>
+    <value>Тип комнаты</value>
   </string>
   <string id="620" name="appointed_room">
     <value>Appointment Room</value>
   </string>
   <string id="621" name="servertime">
-    <value>Server Time</value>
+    <value>Время сервера</value>
   </string>
   <string id="622" name="inv_reminder_template_head">
-    <value>OpenMeetings - Reminder</value>
+    <value>OpenMeetings: Напоминание</value>
   </string>
   <string id="623" name="inv_reminder_text_from">
-    <value>Message from User:</value>
+    <value>Сообщение от пользователя:</value>
   </string>
   <string id="624" name="inv_reminder_text_message">
-    <value>Message:</value>
+    <value>Текст сообщения:</value>
   </string>
   <string id="625" name="inv_reminder_text_click_text">
-    <value>Click this link to participate in the Meetings:</value>
+    <value>Для того, чтобы принять участие в совещании, кликните на следующий линк:</value>
   </string>
   <string id="626" name="inv_reminder_text_click_text_link">
-    <value>Click here to enter room</value>
+    <value>Кликните здесь для того, чтобы войти в комнату совещаний</value>
   </string>
   <string id="627" name="inv_reminder_text_click_text_help">
-    <value>if you have problems with the link, please copy and paste this to your browser:</value>
+    <value>Если Вы испытываете проблемы с линком, скопируйте этот URL в браузер:</value>
   </string>  
   <string id="628" name="btn_search_intern">
-    <value>search intern</value>
+    <value>поиск внутренних</value>
   </string>
   <string id="629" name="btn_search_extern">
-    <value>extern users</value>
+    <value>поиск внешних</value>
   </string>
   <string id="630" name="lbl_prename">
     <value>pre name</value>
   </string>
   <string id="631" name="lbl_name">
-    <value>name</value>
+    <value>Имя</value>
   </string>
    <string id="632" name="lbl_email">
-    <value>E-mail</value>
+    <value>e-mail</value>
   </string>
   <string id="633" name="logoutConfirm_title">
-    <value>Confirm logout</value>
+    <value>Подтверждение выхода</value>
   </string>
   <string id="634" name="logoutConfirm_sure_to_logout_question">
-    <value>Are you sure you want to logout now?</value>
-  </string>	
+    <value>Вы уверены, что хотите выйти?</value>
+  </string>
   <string id="635" name="main menu">
-    <value>Actions</value>
+    <value>Действия</value>
   </string>
   <string id="636" name="room admin">
-    <value>Demo Room</value>
+    <value>Демонстрационная комната</value>
   </string>
   <string id="637" name="room admin">
-    <value>Demo Time</value>
+    <value>Время демонстрации</value>
   </string>
   <string id="638" name="meeting Timer">
-    <value>Meeting Timer</value>
+    <value>Таймер совещания</value>
   </string>
   <string id="639" name="meeting Timer">
-    <value>This Room is a Demo Room. To disable this warning you either should get a private meeting room for your personal usage or set up an own Server. You will be automatically logged off in:</value>
-  </string>  
+    <value>Это - демонстрационная комната. Чтобы отключить это сообщение, либо создайте личную комнату, либо установите собственный сервер. Вы автоматически будете отключены от комнаты через: </value>
+  </string>
 </language>
-
-
-
-
-
-
 
