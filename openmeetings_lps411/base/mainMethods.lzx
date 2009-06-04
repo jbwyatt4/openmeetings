@@ -167,7 +167,7 @@
             canvas._drawarea.confirmSaveAsImageTypeExport("image","pdf");
         } else if (action == "exportFileSVG") {
             canvas._drawarea.confirmSaveAsImageExport("image");
-        } else if (action == "exportFilePNG") {
+        } else if (action == "exportFileTIF") {
             canvas._drawarea.confirmSaveAsImageTypeExport("image","tif");
         }
     </method>
