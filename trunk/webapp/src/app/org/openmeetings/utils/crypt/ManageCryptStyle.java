@@ -28,7 +28,7 @@ public class ManageCryptStyle {
 			log.debug("getInstanceOfCrypt: "+Configurationmanagement.getInstance());
 			
 			//String configKeyCryptClassName = "org.openmeetings.utils.crypt.MD5Implementation";
-			String configKeyCryptClassName = ScopeApplicationAdapter.configKeyCryptClassName;
+			String configKeyCryptClassName = ScopeApplicationAdapter.getCryptKey();
 			
 			log.debug("configKeyCryptClassName: "+configKeyCryptClassName);
 			
