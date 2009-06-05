@@ -151,7 +151,7 @@
 			this.ascDate = obj.asc;
 		}
 		obj.asc = !obj.asc;
-		this.renderResult();
+		this.renderItems();
 	</method>      
     
     <imagesListdraw name="_imageslistdraw" x="0" y="40" height="${ parent.height-48 }" 
