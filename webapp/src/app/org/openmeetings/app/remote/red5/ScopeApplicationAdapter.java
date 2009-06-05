@@ -19,6 +19,7 @@ import org.openmeetings.app.data.calendar.management.MeetingMemberLogic;
 import org.openmeetings.app.data.conference.Roommanagement;
 import org.openmeetings.app.data.logs.ConferenceLogDaoImpl;
 import org.openmeetings.app.data.user.dao.UsersDaoImpl;
+import org.openmeetings.app.hibernate.beans.basic.Configuration;
 import org.openmeetings.app.hibernate.beans.calendar.Appointment;
 import org.openmeetings.app.hibernate.beans.calendar.MeetingMember;
 import org.openmeetings.app.hibernate.beans.recording.RoomClient;
@@ -68,7 +69,7 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 	public static String webAppRootKey = "openmeetings";
 	public static String configDirName = "conf";
 	
-	public static String configKeyCryptClassName = "";
+	public static String configKeyCryptClassName = null;
 	
 	private static long broadCastCounter = 0;
 	
@@ -116,7 +117,11 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 			//batchFileFir = webAppPath + File.separatorChar + "jod" + File.separatorChar;
 			
 			//Only load this Class one time
-			ScopeApplicationAdapter.configKeyCryptClassName = Configurationmanagement.getInstance().getConfKey(3,"crypt_ClassName").getConf_value();
+			//Initially this value might by empty, because the DB is empty yet
+			Configuration conf = Configurationmanagement.getInstance().getConfKey(3,"crypt_ClassName");
+			if (conf != null) {
+			    ScopeApplicationAdapter.configKeyCryptClassName = conf.getConf_value();
+			}
 			
 			// init your handler here
 			
@@ -1273,6 +1278,23 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 			log.debug("[getClientListScope]",err);
 		}
 		return roomClientList;
+	}
+	
+	public static synchronized String getCryptKey() {
+		try {
+			
+			if (ScopeApplicationAdapter.configKeyCryptClassName == null) {
+				Configuration conf = Configurationmanagement.getInstance().getConfKey(3,"crypt_ClassName");
+				if (conf != null) {
+				    ScopeApplicationAdapter.configKeyCryptClassName = conf.getConf_value();
+				}
+			}
+			
+			return ScopeApplicationAdapter.configKeyCryptClassName;
+		} catch (Exception err) {
+			log.error("[getCryptKey]",err);
+		}
+		return null;
 	}
 	
 	
