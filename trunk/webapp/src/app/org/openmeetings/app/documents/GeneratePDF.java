@@ -121,10 +121,8 @@ public class GeneratePDF {
 						+ jodClassPathFolder + "slf4j-jdk14-1.4.0.jar\":"
 						+ "\"" + jodClassPathFolder + "unoil-2.2.0.jar\":"
 						+ "\"" + jodClassPathFolder + "xstream-1.2.2.jar\"",
-				"-jar",
-				"\"" + jodClassPathFolder + "jodconverter-cli-2.2.0.jar\""
-						+ " " + "\"" + fileFullPath + "\"",
-				"\"" + destinationFolder + outputfile + ".pdf\"" };
+				"-jar", jodClassPathFolder + "jodconverter-cli-2.2.0.jar",
+                fileFullPath, destinationFolder + outputfile + ".pdf" };
 
 		return GenerateSWF.executeScript("doJodConvert", argv);
 
