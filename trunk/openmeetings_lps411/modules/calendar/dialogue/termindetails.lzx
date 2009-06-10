@@ -53,7 +53,7 @@
 				</handler>
 		 	</resetCombobox> 
 		 		
-		 	<labelText name="_repetition" y="${parent._kategory.height + parent._kategory.y + 40}" x="35" labelid="567" width="80"/>
+		 	<labelText name="_repetition" y="${parent._kategory.height + parent._kategory.y + 40}" x="35" labelid="567" width="120"/>
 		 	<resetCombobox name="_repetitionselect" x="${parent._kategory.width + parent._kategory.x +30}" 
 		 			  width="220" editable="false" shownitems="5" y="${parent._repetition.y}">
 				<handler name="onselect">
@@ -135,7 +135,7 @@
 	        	</customEdittext>   	
 		    </view> 
 		    
-		    <text name="_titel" y="${parent._date.height + parent._date.y + 30}" x="35">Titel:</text>
+		    <labelText name="_titel" labelid="572" y="${parent._date.height + parent._date.y + 30}" x="35" width="50"/>
 	    	<edittext name="_titeledit" x="${parent._kategory.width + parent._kategory.x + 30}" 
 	    		  y="${parent._titel.y}" width="${parent._date.width}">New title</edittext>
 	    		  
@@ -201,7 +201,7 @@
 				
 				<view resource="edit_add"></view>
 			<!--	<text>Teilnehmer einladen</text> -->
-			 <labelText labelid="574" width="100"/>
+			 <labelText labelid="574" width="150"/>
 			</view>
 			
 			<view name="_liste" y="${parent._komentar.y + parent._komentar.height + 60}" x="35" 

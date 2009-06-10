@@ -22,7 +22,7 @@
 					this._betreff.setAttribute('text', "")
 					
 					this.nxpr.count.setAttribute('text', parent.parent.refObj.numberOfStart+ 
-			 			"" +" - " + "" + parent.parent.refObj.numberOfRecords+ " von " + parent.parent.refObj.numberOfMessage);
+			 			"" +" - " + "" + parent.parent.refObj.numberOfRecords+ " "+getLabelTag(254)+" " + parent.parent.refObj.numberOfMessage);
 					if ($debug) Debug.write("refObj: ", parent.parent.refObj);
 					if ($debug) Debug.write("ordnerinhlatHead++: ", this);
 					if ( parent.parent.refObj.numberOfRecords < 21)
