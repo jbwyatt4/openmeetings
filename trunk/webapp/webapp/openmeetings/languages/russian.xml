@@ -1728,10 +1728,10 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Title:</value>
   </string>
   <string id="573" name="calendarLabel">
-    <value>Комментарий:</value>
+    <value>Комментарий</value>
   </string>
   <string id="574" name="calendarLabel">
-    <value>Пригласи людей</value>
+    <value>Пригласить людей</value>
   </string>
   <string id="575" name="calendarLabel">
     <value>Ежедневно</value>
