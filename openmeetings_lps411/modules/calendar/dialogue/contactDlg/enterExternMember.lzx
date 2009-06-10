@@ -7,14 +7,14 @@
 		<view name="_mainView" x="10" y="10" layout="axis:y;spacing:2">
 			
 
-			<labelText labelid="630" />
+			<labelText labelid="630" width="100"/>
 			
 			<edittext name="vorname" width="${parent._buttons.width -10}"></edittext>
 			
-			<labelText labelid="631" />
+			<labelText labelid="631" width="100"/>
 			<edittext name="nachname" width="${parent._buttons.width -10}"></edittext>
 			
-			<labelText labelid="632" />
+			<labelText labelid="632" width="100"/>
 			<edittext width="${parent._buttons.width - 10}" name="email"></edittext>
 			
 			<view name="_buttons" layout="axis:x;spacing:2" width="210">
