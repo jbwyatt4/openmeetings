@@ -222,7 +222,7 @@
 		        	</customEdittext>   	
 		    </view> 
 		    
-		    <text name="_titel" y="${parent._date.height + parent._date.y + 30}" x="35">Titel:</text>
+		    <labeltext name="_titel" labelid="572" y="${parent._date.height + parent._date.y + 30}" x="35"/>
 	    	<edittext name="_titeledit" x="${parent._kategory.width + parent._kategory.x + 30}" 
 	    		  y="${parent._titel.y}" width="${parent.width - this.x - 10}">Neuer Termin</edittext>
 	    		  
