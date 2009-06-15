@@ -194,4 +194,20 @@ public class RoomService {
 		return ConferenceService.getInstance().deleteRoom(SID, rooms_id);
 	}
 
+	 public Boolean kickUser(String SID_Admin, Long room_id) {
+		try {
+			Boolean salida = false;
+
+			salida = Usermanagement.getInstance().kickUserByStreamId(SID_Admin,
+					room_id);
+
+			if (salida == null)
+				salida = false;
+
+			return salida;
+		} catch (Exception err) {
+			log.error("[kickUser]", err);
+		}
+		return null;
+	}
 }

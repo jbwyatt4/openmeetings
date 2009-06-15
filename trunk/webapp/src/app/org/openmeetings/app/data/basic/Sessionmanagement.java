@@ -1,12 +1,15 @@
 package org.openmeetings.app.data.basic;
 
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Date;
 import java.util.Calendar;
 
 import org.openmeetings.app.hibernate.beans.basic.Sessiondata;
+import org.openmeetings.app.hibernate.beans.recording.RoomClient;
 import org.openmeetings.app.hibernate.utils.HibernateUtil;
+import org.openmeetings.app.remote.red5.ClientListManager;
 import org.openmeetings.utils.crypt.ManageCryptStyle;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
@@ -396,6 +399,45 @@ public class Sessionmanagement {
 			log.error("clearSessionTable",ex);
 		} catch (Exception err) {
 			log.error("clearSessionTable",err);
+		}
+	}
+
+	/**
+	 * @param room_id
+	 */
+	public void clearSessionByRoomId(Long room_id) {
+		try {
+
+			HashMap<String, RoomClient> MyUserList = ClientListManager
+					.getInstance().getClientListByRoom(room_id);
+
+			for (Iterator<String> iter = MyUserList.keySet().iterator(); iter
+					.hasNext();) {
+				String key = (String) iter.next();
+
+				RoomClient rcl = MyUserList.get(key);
+
+				String aux = rcl.getSwfurl();
+
+				int init_pos = aux.indexOf("sid=") + 4;
+				int end_pos = init_pos + 32;
+				if (end_pos > aux.length())
+					end_pos = aux.length();
+				String SID = aux.substring(init_pos, end_pos);
+				
+				Sessiondata sData = this.getSessionByHash(SID);
+
+				Object idf = HibernateUtil.createSession();
+				Session session = HibernateUtil.getSession();
+				Transaction tx = session.beginTransaction();
+				session.delete(sData);
+				HibernateUtil.closeSession(idf);
+			}
+
+		} catch (HibernateException ex) {
+			log.error("clearSessionByRoomId", ex);
+		} catch (Exception err) {
+			log.error("clearSessionByRoomId", err);
 		}
 	}
 }
