@@ -1,6 +1,7 @@
 package org.openmeetings.app.data.user;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
@@ -26,6 +27,8 @@ import org.openmeetings.app.hibernate.beans.user.Userdata;
 import org.openmeetings.app.hibernate.beans.user.Userlevel;
 import org.openmeetings.app.hibernate.beans.user.Users;
 import org.openmeetings.app.hibernate.utils.HibernateUtil;
+import org.openmeetings.app.remote.red5.ClientListManager;
+import org.openmeetings.app.remote.red5.ScopeApplicationAdapter;
 import org.openmeetings.app.templates.ResetPasswordTemplate;
 import org.openmeetings.utils.crypt.ManageCryptStyle;
 import org.openmeetings.utils.mail.MailHandler;
@@ -33,6 +36,7 @@ import org.openmeetings.utils.mappings.CastMapToObject;
 import org.red5.io.utils.ObjectMap;
 import org.slf4j.Logger;
 import org.red5.logging.Red5LoggerFactory;
+import org.red5.server.api.IScope;
 
 /**
  * 
@@ -1080,5 +1084,57 @@ public class Usermanagement {
 		
 	}
 	//-----------------------------------------------------------------------------------------------------
+
+	/**
+	 * @param admin
+	 * @param room_id
+	 * @return
+	 */
+	public Boolean kickUserByStreamId(String SID, Long room_id) {
+		try {
+			Long users_id = Sessionmanagement.getInstance().checkSession(SID);
+			Long user_level = Usermanagement.getInstance().getUserLevelByID(
+					users_id);
+			HashMap<String, RoomClient> MyUserList = ClientListManager
+					.getInstance().getClientListByRoom(room_id);
+
+			// admins only
+			if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)) {
+
+				Sessionmanagement.getInstance().clearSessionByRoomId(room_id);
+
+				for (Iterator<String> iter = MyUserList.keySet().iterator(); iter
+						.hasNext();) {
+					String key = (String) iter.next();
+
+					RoomClient rcl = MyUserList.get(key);
+
+					if (rcl == null) {
+						return true;
+					}
+					String scopeName = "hibernate";
+					if (rcl.getRoom_id() != null) {
+						scopeName = rcl.getRoom_id().toString();
+					}
+					IScope currentScope = ScopeApplicationAdapter.getInstance()
+							.getRoomScope(scopeName);
+					ScopeApplicationAdapter.getInstance().roomLeaveByScope(rcl,
+							currentScope);
+
+					HashMap<Integer, String> messageObj = new HashMap<Integer, String>();
+					messageObj.put(0, "kick");
+					ScopeApplicationAdapter.getInstance().sendMessageById(
+							messageObj, rcl.getStreamid(), currentScope);
+
+				}
+
+				return true;
+			}
+
+		} catch (Exception err) {
+			log.error("[kickUserByStreamId]", err);
+		}
+		return null;
+	}
 
 }
