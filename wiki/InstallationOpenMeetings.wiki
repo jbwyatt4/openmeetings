@@ -1,4 +1,4 @@
-#summary Installation of 0.7 RC2
+#summary Installation of 0.7 RC2 to 0.8 RC3
 #labels Featured
 
   * [ReleaseNotesOM07RC2 Release Notes]
