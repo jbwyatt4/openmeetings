@@ -106,7 +106,6 @@ class ImageSourceStream implements PushBufferStream, Runnable {
 	 * of video data.
 	 */
  	public void read(Buffer buffer) throws IOException {
- 		System.out.println("read");
  		
  		synchronized (this) {
  		    Object outdata = buffer.getData();

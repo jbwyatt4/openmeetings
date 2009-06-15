@@ -38,45 +38,53 @@ import de.medint.rtpsharer.datasource.*;
  */
 public class Streamer {
 	
-	 /** RTP Target Address */
-	 private String ipAddress = "10.136.110.255";
+	/** RTP Target Address */
+	private String ipAddress = "10.136.110.255";
 	 
-	 /** PortBase for RTP*/
-	 private int portBase = 22224;
+	/** PortBase for RTP*/
+	private int portBase = 22224;
 	 
-	 /** Processor*/
-	 private Processor processor = null;
+	/** SourcePort RTP */
+	private int sourcePort = 22226;
+	 
+	/** Processor*/
+	private Processor processor = null;
 	    
-	 /** RTP MANAGER */
-	 private RTPManager rtpMgrs[];
+	/** RTP MANAGER */
+	private RTPManager rtpMgrs[];
 	 
-	 /** DataSource from ImageDataSource via Processor*/
-	 private DataSource dataOutput = null;
+	/** DataSource from ImageDataSource via Processor*/
+	private DataSource dataOutput = null;
 	 
-	 /** targte Width for the Movie*/
-	private int videoWidth = 1024;
-		
-	/** targetHeight for the Video */
-	private int videoHeight = 768;
-		
-	/** FrameRate for Video */
-	private int frameRate = 20;
 	
 	/** Error Indicator (waitSync)*/
 	private boolean failed = false;
 	
 	private Integer stateLock = new Integer(0);
+	
+	
+	/**
+	 * 
+	 * @param address
+	 * @param destPort
+	 * @param sourcePort
+	 */
+	public Streamer(String address, int destPort, int sourcePort){
+		this.ipAddress = address;
+		this.portBase = destPort;
+		this.sourcePort = sourcePort;
+	}
 	 
 	 /**
 	  * Start Streaming Captured
 	  */
 	 //------------------------------------------------------------------------------------------
-	 public synchronized String start(){
+	 public synchronized String start(int frameRate, int videoWidth, int videoHeight, float quality){
 		 String result;
 
 		 // Create a processor for the specified media locator
 		 // and program it to output JPEG/RTP
-		result = createProcessor();
+		result = createProcessor(frameRate, videoWidth, videoHeight, quality);
 		if (result != null){
 			System.out.println(result);   
 			return result;
@@ -94,7 +102,7 @@ public class Streamer {
 
 		// Start the transmission
 		processor.start();
-		System.out.println("Processor started");
+		
 		return null;
 
 	 }
@@ -126,7 +134,7 @@ public class Streamer {
 			ipAddr = InetAddress.getByName(ipAddress);
 
 			localAddr = new SessionAddress( InetAddress.getLocalHost(),
-							22227);
+							sourcePort);
 			
 			destAddr = new SessionAddress( ipAddr, port);
 
@@ -168,7 +176,7 @@ public class Streamer {
 	  * Creating the Processor
 	  */
 	 //------------------------------------------------------------------------------------------
-	 private String createProcessor() {
+	 private String createProcessor(int frameRate, int videoWidth, int videoHeight, float quality) {
 			
 		 
 		// ImageDataSource reading ScreenCaptures
@@ -223,7 +231,7 @@ public class Streamer {
 					// For video formats, we should double check the
 					// sizes since not all formats work in all sizes.
 					chosen = checkForVideoSizes(format, 
-									supported[0]);
+									supported[0], videoWidth, videoHeight);
 				    } else
 					chosen = supported[0];
 				    tracks[i].setFormat(chosen);
@@ -248,7 +256,7 @@ public class Streamer {
 
 			
 			// Setting JPEG Quality
-			setJPEGQuality(processor, 1f);
+			setJPEGQuality(processor, quality);
 
 			// Get the output data source of the processor
 			dataOutput = processor.getDataOutput();
@@ -344,15 +352,12 @@ public class Streamer {
 	   * are of the right sizes.
 	  */
 	 //------------------------------------------------------------------------------------------
-	  private Format checkForVideoSizes(Format original, Format supported) {
+	  private Format checkForVideoSizes(Format original, Format supported, int videoWidth, int videoHeight) {
 
-		int width, height;
-		Dimension size = ((VideoFormat)original).getSize();
 			
 		Format jpegFmt = new Format(VideoFormat.JPEG_RTP);
 		
-		Format h263Fmt = new Format(VideoFormat.H263_RTP);
-		
+		//Format h263Fmt = new Format(VideoFormat.H263_RTP);
 		
 		// Setting our Dimensions within jpegFormat
 		Format myFormat =new VideoFormat(null, 
@@ -362,41 +367,9 @@ public class Streamer {
 				Format.NOT_SPECIFIED).intersects(jpegFmt);
 		
 			
-		if(true)
-			return myFormat;
 		
-		/*
-		if (supported.matches(jpegFmt)) {
-		    // For JPEG, make sure width and height are divisible by 8.
-		    width = (size.width % 8 == 0 ? size.width :
-					(int)(size.width / 8) * 8);
-		    height = (size.height % 8 == 0 ? size.height :
-					(int)(size.height / 8) * 8);
-		} else if (supported.matches(h263Fmt)) {
-		    // For H.263, we only support some specific sizes.
-		    if (size.width < 128) {
-			width = 128;
-			height = 96;
-		    } else if (size.width < 176) {
-			width = 176;
-			height = 144;
-		    } else {
-			width = 352;
-			height = 288;
-		    }
-		} else {
-		    // We don't know this particular format.  We'll just
-		    // leave it alone then.
-		    return supported;
-		}
-	*/
+		return myFormat;
 		
-		return (new VideoFormat(null, 
-					new Dimension(videoWidth, videoHeight), 
-					Format.NOT_SPECIFIED,
-					null,
-					Format.NOT_SPECIFIED)).intersects(h263Fmt);
-	    
 	    }
 
 	  //------------------------------------------------------------------------------------------
