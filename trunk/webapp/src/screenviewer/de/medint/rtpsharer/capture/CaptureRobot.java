@@ -159,7 +159,6 @@ public class CaptureRobot {
 	//----------------------------------------------------------------------------------------------------------------
 	private BufferedImage scaleImage(BufferedImage input, boolean higherQuality){
 		
-		System.out.println("scale");
 		
 		if(input ==  null)
 			throw new RuntimeException("Error on scaling : input null");

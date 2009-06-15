@@ -9,8 +9,8 @@ public class Main {
 	 */
 	public static void main(String[] args) {
 		
-		Streamer streamer = new Streamer();
-		streamer.start();
+		Streamer streamer = new Streamer("", 0, 0);
+		streamer.start(10, 1024, 768, 1);
 
 	}
 

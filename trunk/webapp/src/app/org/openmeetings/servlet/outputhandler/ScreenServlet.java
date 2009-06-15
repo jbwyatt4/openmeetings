@@ -69,9 +69,7 @@ public class ScreenServlet extends HttpServlet {
 		
 			
 			if (httpServletRequest.getContentLength() > 0) {
-				System.out.println("TIMEDEBUG : SERVLET START : "  + new java.sql.Timestamp(System.currentTimeMillis()));
-				System.out.println("service: " + httpServletRequest.getProtocol());
-	
+			
 				String sid = httpServletRequest.getParameter("sid");
 				if (sid == null) {
 					sid = "default";
