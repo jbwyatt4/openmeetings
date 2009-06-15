@@ -1,5 +1,4 @@
 #summary Installation of 05 Final Release, 051, 052
-#labels Featured
 
 *this installation is still valid for release 0.5.2*
 
