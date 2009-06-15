@@ -143,5 +143,6 @@
 	<classpathentry kind="lib" path="lib/ical4j/ical4j-1.0-rc1.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="lib/hibernate_331/antlr-2.7.5.jar"/>
+	<classpathentry kind="lib" path="lib/jmf/jmf.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
