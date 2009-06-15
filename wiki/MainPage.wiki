@@ -12,6 +12,7 @@ Tips for Installation:
   * [qosTips]
   * [VMWareImageDebian051]
   * [VMWareImageMoodlePackOM052]
+  * [VMImageRev2056]
 
 == Source Build ==
 
