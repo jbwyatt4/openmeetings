@@ -34,8 +34,10 @@ http://localhost:5080/openmeetings/axis2-web/
     * [http://code.google.com/p/openmeetings/wiki/SoapMethods#getRoomTypes getRoomTypes]  
     * [http://code.google.com/p/openmeetings/wiki/SoapMethods#getRoomById getRoomById]  
     * [http://code.google.com/p/openmeetings/wiki/SoapMethods#getRooms getRooms]  
-    * [http://code.google.com/p/openmeetings/wiki/SoapMethods#addRoom addRoom] 
-    * [http://code.google.com/p/openmeetings/wiki/SoapMethods#updateRoom updateRoom]
+    * [http://code.google.com/p/openmeetings/wiki/SoapMethods#addRoom addRoom] (deprecated use addRoomWithModeration)
+    * [http://code.google.com/p/openmeetings/wiki/SoapMethods#updateRoom updateRoom] (deprecated use updateRoomWithModeration)
+    * [http://code.google.com/p/openmeetings/wiki/SoapMethods#addRoomWithModeration addRoomWithModeration] 
+    * [http://code.google.com/p/openmeetings/wiki/SoapMethods#updateRoomWithModeration updateRoomWithModeration] 
     * [http://code.google.com/p/openmeetings/wiki/SoapMethods#deleteRoom deleteRoom]
     * [http://code.google.com/p/openmeetings/wiki/SoapMethods#kickUser kickUser]
  
@@ -235,6 +237,8 @@ Params:
 || Integer || filesPanelHeight || the filesPanelHeight ||
 || Integer || filesPanelWidth || the filesPanelWidth ||
 
+=== addRoomWithModeration ===
+
 
 ==== updateRoom ====
 
@@ -267,6 +271,9 @@ Params:
 || Integer || filesPanelYPosition || the filesPanelYPosition ||
 || Integer || filesPanelHeight || the filesPanelHeight ||
 || Integer || filesPanelWidth || the filesPanelWidth ||
+
+
+=== updateRoomWithModeration ===
 
 ==== deleteRoom ====
 
