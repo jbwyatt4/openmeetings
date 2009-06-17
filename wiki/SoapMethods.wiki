@@ -32,8 +32,10 @@ http://localhost:5080/openmeetings/axis2-web/
   Methods:
     * [http://code.google.com/p/openmeetings/wiki/SoapMethods#getRoomsPublic getRoomsPublic]  
     * [http://code.google.com/p/openmeetings/wiki/SoapMethods#getRoomTypes getRoomTypes]  
-    * [http://code.google.com/p/openmeetings/wiki/SoapMethods#getRoomById getRoomById]  
-    * [http://code.google.com/p/openmeetings/wiki/SoapMethods#getRooms getRooms]  
+    * [http://code.google.com/p/openmeetings/wiki/SoapMethods#getRoomById getRoomById] 
+    * [http://code.google.com/p/openmeetings/wiki/SoapMethods#getRoomWithCurrentUsersById getRoomWithCurrentUsersById]  
+    * [http://code.google.com/p/openmeetings/wiki/SoapMethods#getRooms getRooms] 
+    * [http://code.google.com/p/openmeetings/wiki/SoapMethods#getRooms getRoomsWithCurrentUsers]  
     * [http://code.google.com/p/openmeetings/wiki/SoapMethods#addRoom addRoom] (deprecated use addRoomWithModeration)
     * [http://code.google.com/p/openmeetings/wiki/SoapMethods#updateRoom updateRoom] (deprecated use updateRoomWithModeration)
     * [http://code.google.com/p/openmeetings/wiki/SoapMethods#addRoomWithModeration addRoomWithModeration] 
@@ -191,12 +193,39 @@ Params:
 || String || SID || The SID of the User. This SID must be marked as Loggedin ||
 || Long || rooms_id || The Roomid you want to get ||
 
+
+==== getRoomWithCurrentUsersById ====
+
+Method: _public Rooms getRoomWithCurrentUsersById(String SID, long rooms_id)_
+
+Description: Returns an Object of [http://openmeetings.googlecode.com/svn/trunk/webapp/src/app/org/openmeetings/app/hibernate/beans/rooms/Rooms.java Rooms] It also fills the attribute *currentUsers* in the Room-Object
+
+Params:
+|| *type* || *name* || *description* ||
+|| String || SID || The SID of the User. This SID must be marked as Loggedin ||
+|| Long || rooms_id || The Roomid you want to get ||
+
 ==== getRooms ====
 
 Method: _public SearchResult getRooms(String SID, int start, int max, String orderby, boolean asc)_
 
 Description: Returns a List of Objects of [http://openmeetings.googlecode.com/svn/trunk/webapp/src/app/org/openmeetings/app/hibernate/beans/rooms/Rooms.java Rooms]
 You can use "name" as value for orderby or rooms_id
+
+Params:
+|| *type* || *name* || *description* ||
+|| String || SID || The SID of the User. This SID must be marked as Loggedin ||
+|| int || start || The id you want to start ||
+|| int || max || The maximum you want to get ||
+|| String || orderby || The column it will be ordered ||
+|| Boolean || asc || Asc or Desc sort ordering ||
+
+=== getRoomsWithCurrentUsers ===
+
+Method: _public SearchResult getRoomsWithCurrentUsers(String SID, int start, int max, String orderby, boolean asc)_
+
+Description: Returns a List of Objects of [http://openmeetings.googlecode.com/svn/trunk/webapp/src/app/org/openmeetings/app/hibernate/beans/rooms/Rooms.java Rooms]
+You can use "name" as value for orderby or rooms_id. It also fills the attribute *currentUsers* in the Room-Object
 
 Params:
 || *type* || *name* || *description* ||
