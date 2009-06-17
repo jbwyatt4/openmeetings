@@ -243,6 +243,12 @@ public class ConferenceService {
         return Roommanagement.getInstance().getRoomById(user_level,rooms_id);
 	}
 	
+	public Rooms getRoomWithCurrentUsersById(String SID, long rooms_id){
+        Long users_id = Sessionmanagement.getInstance().checkSession(SID);
+        Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
+        return Roommanagement.getInstance().getRoomById(user_level,rooms_id);
+	}
+	
 	/**
 	 * gets a list of all availible rooms
 	 * @param SID
@@ -258,6 +264,14 @@ public class ConferenceService {
 		Long users_id = Sessionmanagement.getInstance().checkSession(SID);
         Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
         return Roommanagement.getInstance().getRooms(user_level, start, max, orderby, asc);
+	}
+	
+	public SearchResult getRoomsWithCurrentUsers(String SID, int start, int max, String orderby, boolean asc){
+		log.debug("getRooms");
+		
+		Long users_id = Sessionmanagement.getInstance().checkSession(SID);
+        Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
+        return Roommanagement.getInstance().getRoomsWithCurrentUsers(user_level, start, max, orderby, asc);
 	}
 	
 	/**

@@ -58,8 +58,16 @@ public class RoomService {
 		return ConferenceService.getInstance().getRoomById(SID, rooms_id);
 	}
 	
+	public Rooms getRoomWithCurrentUsersById(String SID, long rooms_id){
+		return ConferenceService.getInstance().getRoomWithCurrentUsersById(SID, rooms_id);
+	}
+	
 	public SearchResult getRooms(String SID, int start, int max, String orderby, boolean asc){
 		return ConferenceService.getInstance().getRooms(SID, start, max, orderby, asc);
+	}
+	
+	public SearchResult getRoomsWithCurrentUsers(String SID, int start, int max, String orderby, boolean asc){
+		return ConferenceService.getInstance().getRoomsWithCurrentUsers(SID, start, max, orderby, asc);
 	}
 	
 	//TODO: Add functions to get Users of a Room
