@@ -208,6 +208,8 @@ Params:
 
 ==== addRoom ====
 
+(deprecated use addRoomWithModeration)
+
 Method: _public Long addRoom(String SID, .... see list of Params)_
 
 Description: Create an Objects of [http://openmeetings.googlecode.com/svn/trunk/webapp/src/app/org/openmeetings/app/hibernate/beans/rooms/Rooms.java Rooms]
@@ -239,8 +241,15 @@ Params:
 
 === addRoomWithModeration ===
 
+Method: _public Long addRoomWithModeration(String SID, .... see list of Params)_
+
+
+... List if Params tbd ...
+
 
 ==== updateRoom ====
+
+(deprecated use updateRoomWithModeration)
 
 Method: _public Long updateRoom(String SID, .... see list of Params)_
 
@@ -274,6 +283,12 @@ Params:
 
 
 === updateRoomWithModeration ===
+
+Method: _public Long updateRoomWithModeration(String SID, .... see list of Params)_
+
+
+... List of Params tbd ...
+
 
 ==== deleteRoom ====
 
