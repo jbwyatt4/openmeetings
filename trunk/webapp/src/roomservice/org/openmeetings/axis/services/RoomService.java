@@ -74,6 +74,9 @@ public class RoomService {
 	
 	/**
 	 * TODO: Fix Organization Issue
+	 * 
+	 * @deprecated use addRoomWithModeration instead
+	 * 
 	 * @param SID
 	 * @param name
 	 * @param roomtypes_id
@@ -120,19 +123,40 @@ public class RoomService {
 			Long users_id = Sessionmanagement.getInstance().checkSession(SID);
 	        Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
 			return Roommanagement.getInstance().addRoom(user_level, name, roomtypes_id, comment, 
-							numberOfPartizipants, ispublic, null, videoPodWidth, 
-							videoPodHeight, videoPodXPosition, videoPodYPosition, moderationPanelXPosition, 
-							showWhiteBoard, whiteBoardPanelXPosition, whiteBoardPanelYPosition, 
-							whiteBoardPanelHeight, whiteBoardPanelWidth, showFilesPanel, 
-							filesPanelXPosition, filesPanelYPosition, filesPanelHeight, filesPanelWidth, false, false, null);
+							numberOfPartizipants, ispublic, null, 
+							false, false, null
+							, false);
 		} catch (Exception err) {
 			log.error("[addRoom] ",err);
+		}
+		return new Long (-1);
+	}
+	
+	public Long addRoomWithModeration(String SID, String name,
+			Long roomtypes_id ,
+			String comment, Long numberOfPartizipants,
+			Boolean ispublic,
+			Boolean appointment,
+			Boolean isDemoRoom,
+			Integer demoTime,
+			Boolean isModeratedRoom) {
+		try {
+			Long users_id = Sessionmanagement.getInstance().checkSession(SID);
+	        Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
+			return Roommanagement.getInstance().addRoom(user_level, name, roomtypes_id, comment, 
+							numberOfPartizipants, ispublic, null, 
+							appointment, isDemoRoom, demoTime, isModeratedRoom);
+		} catch (Exception err) {
+			log.error("[addRoomWithModeration] ",err);
 		}
 		return new Long (-1);
 	}
 
 	/**
 	 * TODO: Fix Organization Issue
+	 * 
+	 * @deprecated use updateRoomWithModeration
+	 * 
 	 * @param SID
 	 * @param rooms_id
 	 * @param name
@@ -180,12 +204,31 @@ public class RoomService {
 			Long users_id = Sessionmanagement.getInstance().checkSession(SID);
 	        Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
 			return Roommanagement.getInstance().updateRoom(user_level, rooms_id, roomtypes_id, name, ispublic, 
-					comment, numberOfPartizipants, null, videoPodWidth, videoPodHeight, 
-					videoPodXPosition, videoPodYPosition, moderationPanelXPosition, showWhiteBoard, 
-					whiteBoardPanelXPosition, whiteBoardPanelYPosition, whiteBoardPanelHeight, whiteBoardPanelWidth, showFilesPanel, 
-						filesPanelXPosition, filesPanelYPosition, filesPanelHeight, filesPanelWidth, appointment, false, null);
+					comment, numberOfPartizipants, null, appointment, false, null, false);
 		} catch (Exception err) {
 			log.error("[addRoom] ",err);
+		}
+		return new Long (-1);
+	}
+	
+	public Long updateRoomWithModeration(String SID, 
+			Long room_id,
+			String name,
+			Long roomtypes_id ,
+			String comment, Long numberOfPartizipants,
+			Boolean ispublic,
+			Boolean appointment,
+			Boolean isDemoRoom,
+			Integer demoTime,
+			Boolean isModeratedRoom) {
+		try {
+			Long users_id = Sessionmanagement.getInstance().checkSession(SID);
+	        Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
+			return Roommanagement.getInstance().updateRoom(user_level, room_id, roomtypes_id, 
+					name, ispublic, comment, numberOfPartizipants, null, 
+					appointment, isDemoRoom, demoTime, isModeratedRoom);
+		} catch (Exception err) {
+			log.error("[updateRoomWithModeration] ",err);
 		}
 		return new Long (-1);
 	}

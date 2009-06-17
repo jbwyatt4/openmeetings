@@ -189,31 +189,13 @@ public class MethodGateway  extends HttpServlet {
 					String comment = httpServletRequest.getParameter("comment");
 					Long numberOfPartizipants = Long.valueOf(httpServletRequest.getParameter("numberOfPartizipants")).longValue();
 					Boolean ispublic = Boolean.valueOf(httpServletRequest.getParameter("ispublic")).booleanValue();
-					Integer videoPodWidth = Integer.valueOf(httpServletRequest.getParameter("videoPodWidth")).intValue();
-					Integer videoPodHeight = Integer.valueOf(httpServletRequest.getParameter("videoPodHeight")).intValue();
-					Integer videoPodXPosition = Integer.valueOf(httpServletRequest.getParameter("videoPodXPosition")).intValue();
-					Integer videoPodYPosition = Integer.valueOf(httpServletRequest.getParameter("videoPodYPosition")).intValue();
-					Integer moderationPanelXPosition = Integer.valueOf(httpServletRequest.getParameter("moderationPanelXPosition")).intValue();
-					Boolean showWhiteBoard = Boolean.valueOf(httpServletRequest.getParameter("showWhiteBoard")).booleanValue();
-					Integer whiteBoardPanelXPosition = Integer.valueOf(httpServletRequest.getParameter("whiteBoardPanelXPosition")).intValue();
-					Integer whiteBoardPanelYPosition = Integer.valueOf(httpServletRequest.getParameter("whiteBoardPanelYPosition")).intValue();
-					Integer whiteBoardPanelHeight = Integer.valueOf(httpServletRequest.getParameter("whiteBoardPanelHeight")).intValue();
-					Integer whiteBoardPanelWidth = Integer.valueOf(httpServletRequest.getParameter("whiteBoardPanelWidth")).intValue();
-					Boolean showFilesPanel = Boolean.valueOf(httpServletRequest.getParameter("showFilesPanel")).booleanValue();
-					Integer filesPanelXPosition = Integer.valueOf(httpServletRequest.getParameter("filesPanelXPosition")).intValue();
-					Integer filesPanelYPosition = Integer.valueOf(httpServletRequest.getParameter("filesPanelYPosition")).intValue();
-					Integer filesPanelHeight = Integer.valueOf(httpServletRequest.getParameter("filesPanelHeight")).intValue();
-					Integer filesPanelWidth = Integer.valueOf(httpServletRequest.getParameter("filesPanelWidth")).intValue();
 					
 					Long users_id = Sessionmanagement.getInstance().checkSession(SID);
 			        Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
 			        
 			        Long returnVal =  Roommanagement.getInstance().addRoom(user_level, name, roomtypes_id, comment, 
-									numberOfPartizipants, ispublic, null, videoPodWidth, 
-									videoPodHeight, videoPodXPosition, videoPodYPosition, moderationPanelXPosition, 
-									showWhiteBoard, whiteBoardPanelXPosition, whiteBoardPanelYPosition, 
-									whiteBoardPanelHeight, whiteBoardPanelWidth, showFilesPanel, 
-									filesPanelXPosition, filesPanelYPosition, filesPanelHeight, filesPanelWidth, false, false, null);
+									numberOfPartizipants, ispublic, null, 
+									false, false, null, false);
 					
 					XStream xStream = new XStream(new XppDriver());
 					xStream.setMode(XStream.NO_REFERENCES);

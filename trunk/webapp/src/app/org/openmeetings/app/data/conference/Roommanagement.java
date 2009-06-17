@@ -406,24 +406,10 @@ public class Roommanagement {
 	 */
 	public Long addRoom(long user_level,String name, long roomtypes_id, String comment, Long numberOfPartizipants,
 			boolean ispublic, List organisations,
-			Integer videoPodWidth, 
-			Integer videoPodHeight,
-			Integer videoPodXPosition,
-			Integer videoPodYPosition,
-			Integer moderationPanelXPosition,
-			Boolean showWhiteBoard,
-			Integer whiteBoardPanelXPosition,
-			Integer whiteBoardPanelYPosition,
-			Integer whiteBoardPanelHeight,
-			Integer whiteBoardPanelWidth,
-			Boolean showFilesPanel,
-			Integer filesPanelXPosition,
-			Integer filesPanelYPosition,
-			Integer filesPanelHeight,
-			Integer filesPanelWidth,
 			Boolean appointment,
 			Boolean isDemoRoom,
-			Integer demoTime){
+			Integer demoTime,
+			Boolean isModeratedRoom){
 		
 		log.debug("addRoom");
 		
@@ -437,25 +423,12 @@ public class Roommanagement {
 				r.setRoomtype(this.getRoomTypesById(roomtypes_id));
 				r.setIspublic(ispublic);
 				
-				r.setVideoPodWidth(videoPodWidth);
-				r.setVideoPodHeight(videoPodHeight);
-				r.setVideoPodXPosition(videoPodXPosition);
-				r.setVideoPodYPosition(videoPodYPosition);
-				r.setModerationPanelXPosition(moderationPanelXPosition);
-				r.setShowWhiteBoard(showWhiteBoard);
-				r.setWhiteBoardPanelHeight(whiteBoardPanelHeight);
-				r.setWhiteBoardPanelWidth(whiteBoardPanelWidth);
-				r.setWhiteBoardPanelXPosition(whiteBoardPanelXPosition);
-				r.setWhiteBoardPanelYPosition(whiteBoardPanelYPosition);
-				r.setShowFilesPanel(showFilesPanel);
-				r.setFilesPanelWidth(filesPanelWidth);
-				r.setFilesPanelHeight(filesPanelHeight);
-				r.setFilesPanelXPosition(filesPanelXPosition);
-				r.setFilesPanelYPosition(filesPanelYPosition);
 				r.setAppointment(appointment);
 				
 				r.setIsDemoRoom(isDemoRoom);
 				r.setDemoTime(demoTime);
+				
+				r.setIsModeratedRoom(isModeratedRoom);
 				
 				r.setDeleted("false");
 				Object idf = HibernateUtil.createSession();
@@ -823,45 +796,15 @@ public class Roommanagement {
 	 */
 	public Long updateRoom(long user_level, long rooms_id, long roomtypes_id, String name,
 			boolean ispublic, String comment, Long numberOfPartizipants, List organisations,
-			Integer videoPodWidth, 
-			Integer videoPodHeight,
-			Integer videoPodXPosition,
-			Integer videoPodYPosition,
-			Integer moderationPanelXPosition,
-			Boolean showWhiteBoard,
-			Integer whiteBoardPanelXPosition,
-			Integer whiteBoardPanelYPosition,
-			Integer whiteBoardPanelHeight,
-			Integer whiteBoardPanelWidth,
-			Boolean showFilesPanel,
-			Integer filesPanelXPosition,
-			Integer filesPanelYPosition,
-			Integer filesPanelHeight,
-			Integer filesPanelWidth, 
 			Boolean appointment,
 			Boolean isDemoRoom,
-			Integer demoTime){
+			Integer demoTime,
+			Boolean isModeratedRoom){
 		try {
 			log.debug("*** updateRoom numberOfPartizipants: "+numberOfPartizipants);
 			if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)){
 				Rooms r = this.getRoomById(rooms_id);
 				r.setComment(comment);
-				
-				r.setVideoPodWidth(videoPodWidth);
-				r.setVideoPodHeight(videoPodHeight);
-				r.setVideoPodXPosition(videoPodXPosition);
-				r.setVideoPodYPosition(videoPodYPosition);
-				r.setModerationPanelXPosition(moderationPanelXPosition);
-				r.setShowWhiteBoard(showWhiteBoard);
-				r.setWhiteBoardPanelHeight(whiteBoardPanelHeight);
-				r.setWhiteBoardPanelWidth(whiteBoardPanelWidth);
-				r.setWhiteBoardPanelXPosition(whiteBoardPanelXPosition);
-				r.setWhiteBoardPanelYPosition(whiteBoardPanelYPosition);
-				r.setShowFilesPanel(showFilesPanel);
-				r.setFilesPanelWidth(filesPanelWidth);
-				r.setFilesPanelHeight(filesPanelHeight);
-				r.setFilesPanelXPosition(filesPanelXPosition);
-				r.setFilesPanelYPosition(filesPanelYPosition);
 				
 				r.setIspublic(ispublic);
 				r.setNumberOfPartizipants(numberOfPartizipants);
@@ -874,6 +817,8 @@ public class Roommanagement {
 				r.setDemoTime(demoTime);
 				
 				r.setAppointment(appointment);
+				
+				r.setIsModeratedRoom(isModeratedRoom);
 				
 				Object idf = HibernateUtil.createSession();
 				Session session = HibernateUtil.getSession();
