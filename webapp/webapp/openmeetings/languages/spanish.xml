@@ -1931,5 +1931,8 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   </string>
   <string id="639" name="meeting Timer">
     <value>Esta Sala es demo. Para desactivar este aviso, debería conseguir una sala privada para uso propio o bien configurar su propio Servidor. Será desconectado automáticamente en:</value>
+  </string>
+  <string id="640" name="meeting room administration">
+    <value>Moderated</value>
   </string>  
 </language>

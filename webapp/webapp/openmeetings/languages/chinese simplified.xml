@@ -1929,4 +1929,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   <string id="639" name="meeting Timer">
     <value>This Room is a Demo Room. To disable this warning you either should get a private meeting room for your personal usage or set up an own Server. You will be automatically logged off in:</value>
   </string>  
+  <string id="640" name="meeting room administration">
+    <value>Moderated</value>
+  </string>  
 </language>

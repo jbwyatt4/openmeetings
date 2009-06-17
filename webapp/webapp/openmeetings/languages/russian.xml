@@ -1928,6 +1928,9 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   <string id="639" name="meeting Timer">
     <value>Это - демонстрационная комната. Чтобы отключить это сообщение, либо создайте личную комнату, либо установите собственный сервер. Вы автоматически будете отключены от комнаты через: </value>
   </string>
+  <string id="640" name="meeting room administration">
+    <value>Moderated</value>
+  </string>  
 </language>
 
 
