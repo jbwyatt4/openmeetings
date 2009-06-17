@@ -14,39 +14,33 @@
         canvas._mainbgcontentNavi.setAttribute('height',0);
         canvas.setAttribute('naviHeightDelta',28);
         new lz.conferenceMenubar(canvas._conferencemenu);
-        new lz.moderationPanel(canvas._conferencemenu,{x:this.roomobj.moderationPanelXPosition});
+        new lz.moderationPanel(canvas._conferencemenu,{x:400});
         canvas._conferencemenu.setAttribute('visibility','visible');
 
         new lz.videoBoardAudience(this,{
             name:'_videoView',
-            x:this.roomobj.videoPodXPosition,
-        	y:this.roomobj.videoPodYPosition,
-        	width:this.roomobj.videoPodWidth,
-        	height:this.roomobj.videoPodHeight});
+            x:2,
+        	y:2,
+        	width:326,
+        	height:310});
         
-        
-        if (this.roomobj.showFilesPanel){
-        	new lz.filesPanel(this,{x:this.roomobj.filesPanelXPosition,
-        		y:this.roomobj.filesPanelYPosition,
-        		width:this.roomobj.filesPanelWidth,
-        		height:this.roomobj.filesPanelHeight});
-        }
+    	new lz.filesPanel(this,{x:2,
+    		y:314,
+    		width:270,
+    		height:310});
 		
-       	if (this.roomobj.showWhiteBoard){
        		if (canvas.showmodernWhiteBoard=="y"){
-	       		new lz.modernWhiteBoardPanel(this,{x:this.roomobj.whiteBoardPanelXPosition,
-	        		y:this.roomobj.whiteBoardPanelYPosition,
-	        		width:this.roomobj.whiteBoardPanelWidth,
-	        		height:this.roomobj.whiteBoardPanelHeight});
+	       		new lz.modernWhiteBoardPanel(this,{x:332,
+	        		y:2,
+	        		width:660,
+	        		height:622});
        		} else {
-	       		new lz.whiteBoardPanel(this,{x:this.roomobj.whiteBoardPanelXPosition,
-	        		y:this.roomobj.whiteBoardPanelYPosition,
-	        		width:this.roomobj.whiteBoardPanelWidth,
-	        		height:this.roomobj.whiteBoardPanelHeight});       			
+	       		new lz.whiteBoardPanel(this,{x:332,
+	        		y:2,
+	        		width:660,
+	        		height:622});       			
        		}
 
-        }
-        
         this._videoView.bringToFront();
     </handler>
 

@@ -147,7 +147,8 @@
         canvas._mainbgcontentNavi.setAttribute('height',0);
         canvas.setAttribute('naviHeightDelta',28);
         new lz.conferenceMenubar(canvas._conferencemenu);
-        new lz.moderationPanel(canvas._conferencemenu,{x:this.roomobj.moderationPanelXPosition});
+        //,{x:this.roomobj.moderationPanelXPosition}
+        new lz.moderationPanel(canvas._conferencemenu,{x:400});
         canvas._conferencemenu.setAttribute('visibility','visible');
 		
         this._videosView.bringToFront();
