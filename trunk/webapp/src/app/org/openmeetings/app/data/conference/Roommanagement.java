@@ -1,6 +1,7 @@
 package org.openmeetings.app.data.conference;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.LinkedHashMap;
@@ -17,6 +18,7 @@ import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.criterion.Order;
 
+import org.openmeetings.app.hibernate.beans.recording.RoomClient;
 import org.openmeetings.app.hibernate.beans.rooms.*;
 import org.openmeetings.app.hibernate.beans.user.*;
 import org.openmeetings.app.hibernate.utils.HibernateUtil;
@@ -26,6 +28,7 @@ import org.openmeetings.app.data.user.Organisationmanagement;
 import org.openmeetings.app.data.user.Usermanagement;
 import org.openmeetings.app.data.user.dao.UsersDaoImpl;
 import org.openmeetings.app.hibernate.beans.domain.Organisation_Users;
+import org.openmeetings.app.remote.red5.ClientListManager;
 
 /**
  * 
@@ -142,6 +145,29 @@ public class Roommanagement {
 		return null;
 	}
 	
+	public Rooms getRoomWithCurrentUsersById(long user_level, long rooms_id){
+		try {
+			if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)){
+				Rooms room = this.getRoomById(rooms_id);
+				
+				if (room != null) {
+					HashMap<String,RoomClient> map = ClientListManager.getInstance().getClientListByRoom(room.getRooms_id());
+					
+					room.setCurrentusers(new LinkedList<RoomClient>());
+					
+					for (Iterator<String> iter = map.keySet().iterator(); iter.hasNext(); ) {
+						room.getCurrentusers().add(map.get(iter.next()));
+					}
+					
+					return room;
+				}
+			}
+		} catch (Exception ex2) {
+			log.error("[getRoomWithCurrentUsersById] ", ex2);
+		}
+		return null;
+	}
+	
 	/**
 	 * Get a Rooms-Object or NULL
 	 * @param rooms_id
@@ -192,6 +218,38 @@ public class Roommanagement {
 		return null;
 	}
 	
+	public SearchResult getRoomsWithCurrentUsers(long user_level, int start, int max, String orderby, boolean asc){
+		try {
+			if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)){
+				SearchResult sResult = new SearchResult();
+				sResult.setRecords(this.selectMaxFromRooms());
+				sResult.setObjectName(Rooms.class.getName());
+				
+				List<Rooms> rooms = this.getRoomsInternatl(start, max, orderby, asc);
+				
+				for (Rooms room : rooms) {
+					
+					HashMap<String,RoomClient> map = ClientListManager.getInstance().getClientListByRoom(room.getRooms_id());
+					
+					room.setCurrentusers(new LinkedList<RoomClient>());
+					
+					for (Iterator<String> iter = map.keySet().iterator(); iter.hasNext(); ) {
+						room.getCurrentusers().add(map.get(iter.next()));
+					}
+					
+				}
+				
+				sResult.setResult(rooms);
+				return sResult;
+			}
+		} catch (HibernateException ex) {
+			log.error("[getRooms] ", ex);
+		} catch (Exception ex2) {
+			log.error("[getRooms] ", ex2);
+		}
+		return null;
+	}
+	
 	public Long selectMaxFromRooms(){
 		try {
 			String hql = "select count(c.rooms_id) from Rooms c " +
@@ -224,7 +282,7 @@ public class Roommanagement {
 	 * @param asc
 	 * @return
 	 */
-	public List getRoomsInternatl(int start, int max, String orderby, boolean asc){
+	public List<Rooms> getRoomsInternatl(int start, int max, String orderby, boolean asc){
 		try {
 			Object idf = HibernateUtil.createSession();
 			Session session = HibernateUtil.getSession();
@@ -235,7 +293,7 @@ public class Roommanagement {
 			crit.add(Restrictions.ne("deleted", "true"));
 			if (asc) crit.addOrder(Order.asc(orderby));
 			else crit.addOrder(Order.desc(orderby));
-			List ll = crit.list();
+			List<Rooms> ll = crit.list();
 			tx.commit();
 			HibernateUtil.closeSession(idf);
 			return ll;
