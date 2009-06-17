@@ -9,7 +9,7 @@ All Services here. You can see the recommended flow of embedding for example Roo
 DirectLoginSoapGeneralFlow
 
 See also for a complete Service Overview and Guide the Axis2-Service-Browser:
-http://demo.openmeetings.de:5080/openmeetings/axis2-web/
+http://openmeetings.de:5080/openmeetings/axis2-web/
 => this ships with every !OpenMeetings installation so goto:
 http://localhost:5080/openmeetings/axis2-web/
 
