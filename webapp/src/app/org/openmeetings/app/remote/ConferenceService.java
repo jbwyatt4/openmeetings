@@ -281,15 +281,15 @@ public class ConferenceService {
 	 * @deprecated
 	 * @return
 	 */
-	public Long addRoomPublic(String SID, String name, long roomtypes_id){
-        Long users_id = Sessionmanagement.getInstance().checkSession(SID);
-        Long User_level = Usermanagement.getInstance().getUserLevelByID(users_id);
-        return Roommanagement.getInstance().addRoom(User_level, name, roomtypes_id,"", new Long(4), true,null,
-				290, 280, 2, 2,
-				400,
-				true, 296, 2, 592, 660,
-				true, 2, 284, 310, 290, false, false, null);
-	}
+//	public Long addRoomPublic(String SID, String name, long roomtypes_id){
+//        Long users_id = Sessionmanagement.getInstance().checkSession(SID);
+//        Long User_level = Usermanagement.getInstance().getUserLevelByID(users_id);
+//        return Roommanagement.getInstance().addRoom(User_level, name, roomtypes_id,"", new Long(4), true,null,
+//				290, 280, 2, 2,
+//				400,
+//				true, 296, 2, 592, 660,
+//				true, 2, 284, 310, 290, false, false, null);
+//	}
 	
 	/**
 	 * 
@@ -301,16 +301,16 @@ public class ConferenceService {
 	 * @deprecated
 	 * @return
 	 */
-	public Long addRoomOrganisation(String SID, long organisation_id, String name, long roomtypes_id, boolean ispublic){
-        Long users_id = Sessionmanagement.getInstance().checkSession(SID);
-        long User_level = Usermanagement.getInstance().getUserLevelByID(users_id);
-        Long rooms_id = Roommanagement.getInstance().addRoom(User_level, name, roomtypes_id,"", new Long(4), ispublic, null,
-				290, 280, 2, 2,
-				400,
-				true, 296, 2, 592, 660,
-				true, 2, 284, 310, 290, false, false, null);
-        return Roommanagement.getInstance().addRoomToOrganisation(User_level, rooms_id, organisation_id);
-	}
+//	public Long addRoomOrganisation(String SID, long organisation_id, String name, long roomtypes_id, boolean ispublic){
+//        Long users_id = Sessionmanagement.getInstance().checkSession(SID);
+//        long User_level = Usermanagement.getInstance().getUserLevelByID(users_id);
+//        Long rooms_id = Roommanagement.getInstance().addRoom(User_level, name, roomtypes_id,"", new Long(4), ispublic, null,
+//				290, 280, 2, 2,
+//				400,
+//				true, 296, 2, 592, 660,
+//				true, 2, 284, 310, 290, false, false, null);
+//        return Roommanagement.getInstance().addRoomToOrganisation(User_level, rooms_id, organisation_id);
+//	}
 	
 	/**
 	 * 
@@ -329,55 +329,25 @@ public class ConferenceService {
 	        Long rooms_id = Long.valueOf(argObjectMap.get("rooms_id").toString()).longValue();
 	        log.debug("rooms_id "+rooms_id);
 	        
-	        
-	        
 	        if (rooms_id==0){
 	        	return Roommanagement.getInstance().addRoom(User_level, argObjectMap.get("name").toString(), 
 	        			Long.valueOf(argObjectMap.get("roomtypes_id").toString()).longValue(),
 	        			argObjectMap.get("comment").toString(), Long.valueOf(argObjectMap.get("numberOfPartizipants").toString()).longValue(),
 	        			Boolean.valueOf(argObjectMap.get("ispublic").toString()),organisations,
-	        			Integer.valueOf(argObjectMap.get("videoPodWidth").toString()).intValue(),
-	        			Integer.valueOf(argObjectMap.get("videoPodHeight").toString()).intValue(),
-	        			Integer.valueOf(argObjectMap.get("videoPodXPosition").toString()).intValue(),
-	        			Integer.valueOf(argObjectMap.get("videoPodYPosition").toString()).intValue(),
-	        			Integer.valueOf(argObjectMap.get("moderationPanelXPosition").toString()).intValue(),
-	        			Boolean.valueOf(argObjectMap.get("showWhiteBoard").toString()).booleanValue(),
-	        			Integer.valueOf(argObjectMap.get("whiteBoardPanelXPosition").toString()).intValue(),
-	        			Integer.valueOf(argObjectMap.get("whiteBoardPanelYPosition").toString()).intValue(),
-	        			Integer.valueOf(argObjectMap.get("whiteBoardPanelHeight").toString()).intValue(),
-	        			Integer.valueOf(argObjectMap.get("whiteBoardPanelWidth").toString()).intValue(),
-	        			Boolean.valueOf(argObjectMap.get("showFilesPanel").toString()).booleanValue(),
-	        			Integer.valueOf(argObjectMap.get("filesPanelXPosition").toString()).intValue(),
-	        			Integer.valueOf(argObjectMap.get("filesPanelYPosition").toString()).intValue(),
-	        			Integer.valueOf(argObjectMap.get("filesPanelHeight").toString()).intValue(),
-	        			Integer.valueOf(argObjectMap.get("filesPanelWidth").toString()).intValue(),
 	        			Boolean.valueOf(argObjectMap.get("appointment").toString()),
 	        			Boolean.valueOf(argObjectMap.get("isDemoRoom").toString()),
-	        			Integer.valueOf(argObjectMap.get("demoTime").toString()));
+	        			Integer.valueOf(argObjectMap.get("demoTime").toString()),
+	        			Boolean.valueOf(argObjectMap.get("isModeratedRoom").toString()));
 	        } else if (rooms_id>0){
 	        	return Roommanagement.getInstance().updateRoom(User_level, rooms_id, 
 	        			Long.valueOf(argObjectMap.get("roomtypes_id").toString()).longValue(), 
 	        			argObjectMap.get("name").toString(), Boolean.valueOf(argObjectMap.get("ispublic").toString()),
 	        			argObjectMap.get("comment").toString(),
 	        			Long.valueOf(argObjectMap.get("numberOfPartizipants").toString()).longValue(),organisations,
-	        			Integer.valueOf(argObjectMap.get("videoPodWidth").toString()).intValue(),
-	        			Integer.valueOf(argObjectMap.get("videoPodHeight").toString()).intValue(),
-	        			Integer.valueOf(argObjectMap.get("videoPodXPosition").toString()).intValue(),
-	        			Integer.valueOf(argObjectMap.get("videoPodYPosition").toString()).intValue(),
-	        			Integer.valueOf(argObjectMap.get("moderationPanelXPosition").toString()).intValue(),
-	        			Boolean.valueOf(argObjectMap.get("showWhiteBoard").toString()).booleanValue(),
-	        			Integer.valueOf(argObjectMap.get("whiteBoardPanelXPosition").toString()).intValue(),
-	        			Integer.valueOf(argObjectMap.get("whiteBoardPanelYPosition").toString()).intValue(),
-	        			Integer.valueOf(argObjectMap.get("whiteBoardPanelHeight").toString()).intValue(),
-	        			Integer.valueOf(argObjectMap.get("whiteBoardPanelWidth").toString()).intValue(),
-	        			Boolean.valueOf(argObjectMap.get("showFilesPanel").toString()).booleanValue(),
-	        			Integer.valueOf(argObjectMap.get("filesPanelXPosition").toString()).intValue(),
-	        			Integer.valueOf(argObjectMap.get("filesPanelYPosition").toString()).intValue(),
-	        			Integer.valueOf(argObjectMap.get("filesPanelHeight").toString()).intValue(),
-	        			Integer.valueOf(argObjectMap.get("filesPanelWidth").toString()).intValue(),
 	        			Boolean.valueOf(argObjectMap.get("appointment").toString()),
 	        			Boolean.valueOf(argObjectMap.get("isDemoRoom").toString()),
-	        			Integer.valueOf(argObjectMap.get("demoTime").toString()));
+	        			Integer.valueOf(argObjectMap.get("demoTime").toString()),
+	        			Boolean.valueOf(argObjectMap.get("isModeratedRoom").toString()));
 	        }
 		} catch (Exception e){
 			log.error("saveOrUpdateRoom",e);
