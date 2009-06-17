@@ -174,7 +174,7 @@ Params:
 
 ==== getRoomTypes ====
 
-Method: _public List<RoomTypes> getRoomTypes(String SID)_
+Method: _public List`*`<RoomTypes`*`> getRoomTypes(String SID)_
 
 Description: Returns a List of Objects of [http://openmeetings.googlecode.com/svn/trunk/webapp/src/app/org/openmeetings/app/hibernate/beans/rooms/RoomTypes.java RoomsType]
 
@@ -219,6 +219,7 @@ Params:
 || int || max || The maximum you want to get ||
 || String || orderby || The column it will be ordered ||
 || Boolean || asc || Asc or Desc sort ordering ||
+
 
 === getRoomsWithCurrentUsers ===
 
