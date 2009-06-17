@@ -23,12 +23,12 @@
         this.roomname.setAttribute('text','');
 		this.comment.setAttribute('text','');
 		this.ispublic.setValue(false);
+		this.isModeratedRoom.setValue(false);
+		this.isDemoRoom.setValue(false);
+		this.demoTime.setAttribute('text','');
 		this.isappointment.setValue(false);
 		this.numberOfParticipants.selectItem('4');
 		this._organisationslist.clearList();
-		if (this._showAdvancedRoomSettings.getValue()){
-			this._advancedRoomSettings.oninit.sendEvent();
-		}		
         this._turnoverlist.clearList();
 	</handler>
 	
@@ -57,11 +57,17 @@
             this.demoTime.setAttribute("enabled",true);
 			if ($debug) Debug.write("Appointment: ",obj.appointment);
 			this.isappointment.setValue(obj.appointment);
+			
+		    if (obj.isModeratedRoom != null && obj.isModeratedRoom){
+                this.isModeratedRoom.setValue(true);
+            } else {
+                this.isModeratedRoom.setValue(false);
+            }
             
             if (obj.demoTime != null) {
                 this.demoTime.setText(obj.demoTime);
             } else {
-                this.demoTime.setText("");
+                this.demoTime.setAttribute("text","");
             }
             
             if (obj.isDemoRoom != null && obj.isDemoRoom){
@@ -72,9 +78,6 @@
                 
 			this.numberOfParticipants.selectItem(String(obj.numberOfPartizipants));
 			this.roomtype.selectItem(String(obj.roomtype.roomtypes_id));
-			if (this._showAdvancedRoomSettings.getValue()){
-				this._advancedRoomSettings.oninit.sendEvent();
-			}
             this._turnoverlist.clearList();
             this._turnoverlist.getRoomClientsMapByRoomId.doCall();
         ]]>
@@ -139,77 +142,12 @@
 			this.sendObject["numberOfPartizipants"] = Number(this.parent.numberOfParticipants.getValue());
   			this.sendObject["organisations"] = this.parent._organisationslist.getAllItems();
   			this.sendObject["appointment"] = this.parent.isappointment.getValue();
+  			this.sendObject["isModeratedRoom"] = this.parent.isModeratedRoom.getValue();
             
             this.sendObject["isDemoRoom"] = parent.isDemoRoom.getValue();
             this.sendObject["demoTime"] = parent.demoTime.getText();
 
-  			if (parent._showAdvancedRoomSettings.getValue()){
-  				
-				this.sendObject["videoPodHeight"] = Number(parent._advancedRoomSettings._videoPodHeight.getText());
-				this.sendObject["videoPodWidth"] = Number(parent._advancedRoomSettings._videoPodWidth.getText());
-				this.sendObject["videoPodXPosition"] = Number(parent._advancedRoomSettings._videoPodXPosition.getText());
-				this.sendObject["videoPodYPosition"] = Number(parent._advancedRoomSettings._videoPodYPosition.getText());
-				
-				this.sendObject["moderationPanelXPosition"] = Number(parent._advancedRoomSettings._moderationPanelXPosition.getText());
-				this.sendObject["showWhiteBoard"] = parent._advancedRoomSettings._showWhiteBoard.getValue();
-				
-				this.sendObject["whiteBoardPanelXPosition"] = Number(parent._advancedRoomSettings._whiteBoardPanelXPosition.getText());
-				this.sendObject["whiteBoardPanelYPosition"] = Number(parent._advancedRoomSettings._whiteBoardPanelYPosition.getText());
-				this.sendObject["whiteBoardPanelWidth"] = Number(parent._advancedRoomSettings._whiteBoardPanelWidth.getText());
-				this.sendObject["whiteBoardPanelHeight"] = Number(parent._advancedRoomSettings._whiteBoardPanelHeight.getText());
-				
-				this.sendObject["showFilesPanel"] = parent._advancedRoomSettings._showFilesPanel.getValue();
-				
-				this.sendObject["filesPanelXPosition"] = Number(parent._advancedRoomSettings._filesPanelXPosition.getText());
-				this.sendObject["filesPanelYPosition"] = Number(parent._advancedRoomSettings._filesPanelYPosition.getText());
-				this.sendObject["filesPanelWidth"] = Number(parent._advancedRoomSettings._filesPanelWidth.getText());
-				this.sendObject["filesPanelHeight"] = Number(parent._advancedRoomSettings._filesPanelHeight.getText());
-                
-  			} else {
-  				if (this.parent.rooms_id==0){
-  					//default values
-	  				this.sendObject["videoPodHeight"] = 280;
-					this.sendObject["videoPodWidth"] = 270;
-					this.sendObject["videoPodXPosition"] = 2;
-					this.sendObject["videoPodYPosition"] = 2;
-					
-					this.sendObject["moderationPanelXPosition"] = 400;
-					this.sendObject["showWhiteBoard"] = true;
-					
-					this.sendObject["whiteBoardPanelXPosition"] = 276;
-					this.sendObject["whiteBoardPanelYPosition"] = 2;
-					this.sendObject["whiteBoardPanelWidth"] = 660;
-					this.sendObject["whiteBoardPanelHeight"] = 592;
-					
-					this.sendObject["showFilesPanel"] = true;
-					
-					this.sendObject["filesPanelXPosition"] = 2;
-					this.sendObject["filesPanelYPosition"] = 284;
-					this.sendObject["filesPanelWidth"] = 270;
-					this.sendObject["filesPanelHeight"] = 310;
-  				} else {
-	  				this.sendObject["videoPodHeight"] = parent.roomsObj.videoPodHeight;
-					this.sendObject["videoPodWidth"] = parent.roomsObj.videoPodWidth;
-					this.sendObject["videoPodXPosition"] = parent.roomsObj.videoPodXPosition;
-					this.sendObject["videoPodYPosition"] = parent.roomsObj.videoPodYPosition;
-					
-					this.sendObject["moderationPanelXPosition"] = parent.roomsObj.moderationPanelXPosition;
-					this.sendObject["showWhiteBoard"] = parent.roomsObj.showWhiteBoard;
-					
-					this.sendObject["whiteBoardPanelXPosition"] = parent.roomsObj.whiteBoardPanelXPosition;
-					this.sendObject["whiteBoardPanelYPosition"] = parent.roomsObj.whiteBoardPanelYPosition;
-					this.sendObject["whiteBoardPanelWidth"] = parent.roomsObj.whiteBoardPanelWidth;
-					this.sendObject["whiteBoardPanelHeight"] = parent.roomsObj.whiteBoardPanelHeight;
-					
-					this.sendObject["showFilesPanel"] = parent.roomsObj.showFilesPanel;
-					
-					this.sendObject["filesPanelXPosition"] = parent.roomsObj.filesPanelXPosition;
-					this.sendObject["filesPanelYPosition"] = parent.roomsObj.filesPanelYPosition;
-					this.sendObject["filesPanelWidth"] = parent.roomsObj.filesPanelWidth;
-					this.sendObject["filesPanelHeight"] = parent.roomsObj.filesPanelHeight;
-  				}
-  			}
-  			Debug.write("prepareCall: ",this.sendObject);
+  			if ($debug) Debug.write("prepareCall: ",this.sendObject);
   		</method>
   		<netparam><method name="getValue"> return canvas.sessionId; </method></netparam>
     	<netparam><method name="getValue">return parent.sendObject;</method></netparam>	  		
@@ -325,10 +263,13 @@
     <!-- Is Demo Room -->
     <labelText labelid="637" width="200" y="520" resize="false" x="2"/>  
         <customEdittext name="demoTime" y="516" x="120" width="270" regexpType="number"
-                        text="" />        
+                        text="" /> 
+                               
+    <!-- 640:Moderated -->
+    <labelText labelid="640" width="200" y="550" resize="false" x="2"/>  
+        <labelCheckbox name="isModeratedRoom" width="270" y="550" x="130" fontsize="12" />
     
-    
-	<!-- 483:Show Layout Settings -->
+	<!-- 483:Show Layout Settings
 	<labelCheckbox x="0" y="550" fontsize="12"
         name="_showAdvancedRoomSettings" labelid="483" >
         <attribute name="advancedRoomSettingsInited" value="false" type="boolean"/>
@@ -344,6 +285,7 @@
 			}
         </handler>
     </labelCheckbox>  
+     -->
     
     
     <!-- RoomClient List Right Side -->
