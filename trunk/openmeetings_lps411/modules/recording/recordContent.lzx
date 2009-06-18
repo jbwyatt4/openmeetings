@@ -41,10 +41,10 @@
         <!-- show delete icon -->
         <view resource="_recording_delete" y="1" x="720" >
             
-            <handler name="onclick">
-                var rec = Number(this.obj.recording_id);
-                classroot.deleteRecordedFile.recordedFileToDelete = rec;
-                classroot.deleteRecordedFile.doCall();
+	    <handler name="onclick">
+		var rec = Number(this.parent.obj.recording_id);
+                classroot.parent.parent.parent.parent.parent.deleteRecordedFile.recordedFileToDelete = rec;
+		classroot.parent.parent.parent.parent.parent.deleteRecordedFile.doCall();
             </handler>
 
             <labelTooltip labelid="432" />
@@ -77,11 +77,14 @@
 	  	</netRemoteCallHib>   
         
         <method name="parseResult" args="value">
-            <![CDATA[
+			<![CDATA[
+				this._content.inn.inn.inn.destroy();
+				new lz.view(this._content.inn.inn, { name:"inn", layout:"axis:y;spacing:2", width:this._content.inn.inn.width} );
+
                 for (var i=0;i<value.length;i++) {
                     new lz.recordListitem(this._content.inn.inn.inn,{
                             obj:value[i]
-                        })
+                        });
                 }
             ]]>
         </method>
@@ -94,9 +97,7 @@
 	
 		    <handler name="ondata" args="value">	
             	<![CDATA[
-            		if (value>0){
             			parent.getAllRecordingsForUser.doCall();
-	            	}
 	            ]]>	        	          				
         	</handler>	
 	  	</netRemoteCallHib>
