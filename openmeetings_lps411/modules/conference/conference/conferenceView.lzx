@@ -257,10 +257,11 @@
        height="200" x="${ parent._filesPanel.width+10 }"  
        y="${ canvas.height - (this.height+30) }" 
        width="${ canvas.width - 290 }">
+        <!--
         <handler name="onwidth" args="w">
             if ($debug) Debug.write("ON WIDTH",w);
         </handler>
-        
+         -->
         <chatTab name="content" y="40" height="${ parent.height-40 }" width="${ parent.width }" />
     </conferenceBox>
        

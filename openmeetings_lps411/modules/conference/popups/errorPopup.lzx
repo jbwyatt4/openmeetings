@@ -11,6 +11,10 @@
 		<text fontsize="10" fontstyle="bold" text="${ parent.parent.error }"
 			multiline="true" width="312" selectable="true" />
 	</view>
+    
+    <simpleLabelButton labelid="642" width="100" x="$once{ parent.width-105 }" 
+           y="$once{ parent.height-24 }" 
+           onclick="this.parent.close();" />
 
 </class>
 
