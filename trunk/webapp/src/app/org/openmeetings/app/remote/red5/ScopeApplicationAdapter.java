@@ -742,9 +742,14 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 								for (IConnection conn : conset) {
 									if (conn != null) {
 										RoomClient rcl = this.clientListManager.getClientByStreamId(conn.getClient().getId());
-										if (conn instanceof IServiceCapableConnection) {
-											((IServiceCapableConnection) conn).invoke("setNewModerator",new Object[] { currentClient }, this);
-											log.debug("sending setNewModerator to " + conn);
+										if( !streamid.equals(rcl.getStreamid())){
+											//It is not needed to send back that event to the actuall Moderator
+											//as it will be already triggered in the result of this Function 
+											//in the Client
+											if (conn instanceof IServiceCapableConnection) {
+												((IServiceCapableConnection) conn).invoke("setNewModerator",new Object[] { currentClient }, this);
+												log.debug("sending setNewModerator to " + conn);
+											}
 										}
 									}
 								}	
