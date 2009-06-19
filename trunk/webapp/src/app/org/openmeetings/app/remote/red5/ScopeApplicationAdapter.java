@@ -623,13 +623,67 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 		return null;
 	}	
 	
+	/*
+	 * checks if the user is allowed to apply for Moderation
+	 * 
+	 */
+	public synchronized Boolean checkRoomValues(Long room_id){
+		try {
+			
+			// appointed meeting or moderated Room?
+			Rooms room = Roommanagement.getInstance().getRoomById(room_id);
+			
+			// not really - default logic
+			if(room.getAppointment() == null || room.getAppointment() == false){
+				
+				if (room.getIsModeratedRoom()) {
+					
+					//if this is a Moderated Room then the Room can be only locked off by the Moderator Bit
+					HashMap<String,RoomClient> clientModeratorListRoom = this.getModeratorRoomClients(room_id);
+					
+					//If there is no Moderator yet and we are asking for it then deny it
+					//cause at this moment, the user should wait untill a Moderator enters the Room
+					if (clientModeratorListRoom.size() == 0) {
+						
+						return false;
+						
+					} else {
+						
+						return true;
+						
+					}
+					
+						
+				} else {
+					
+					return true;
+					
+				}
+				
+				
+			} else {
+				
+				//FIXME: TODO: For Rooms that are created as Appointment we have to check that too
+				//but I don't know yet the Logic behind it - swagner 19.06.2009
+				
+				return true;
+				
+			}
+			
+			
+		} catch (Exception err){
+			log.error("[checkRoomValues]",err);
+		}
+		return false;
+	}	
+	
 	/**
 	 * This function is called once a User enters a Room
 	 * 
 	 * @param room_id
 	 * @return
 	 */
-	public synchronized HashMap<String,RoomClient> setRoomValues(Long room_id){
+	public synchronized HashMap<String,RoomClient> setRoomValues(Long room_id, Boolean becomeModerator){
 		try {
 
 			IConnection current = Red5.getConnectionLocal();
@@ -649,23 +703,85 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 			HashMap<String,RoomClient> clientListRoom = this.getRoomClients(room_id);
 			
 			
-			// appointed meeting?
+			// appointed meeting or moderated Room?
 			Rooms room = Roommanagement.getInstance().getRoomById(room_id);
 			
+			
 			// not really - default logic
-			if(room.getAppointment() == false){
-				log.debug("setRoomValues : Room" + room_id + " not appointed! Moderator rules : first come, first draw ;-)" );
-				if (clientListRoom.size()==1){
-					log.debug("Room is empty so set this user to be moderation role");
-					currentClient.setIsMod(true);
-					this.clientListManager.updateClientByStreamId(streamid, currentClient);
+			if(room.getAppointment() == null || room.getAppointment() == false){
+				
+				if (room.getIsModeratedRoom()) {
+					
+					//if this is a Moderated Room then the Room can be only locked off by the Moderator Bit
+					HashMap<String,RoomClient> clientModeratorListRoom = this.getModeratorRoomClients(room_id);
+					
+					//If there is no Moderator yet we have to check if the current User has the Bit set to true to 
+					//become one, otherwise he won't get Moderation and has to wait
+					if (clientModeratorListRoom.size() == 0) {
+						if (becomeModerator) {
+							currentClient.setIsMod(true);
+							
+							//There is a need to send an extra Event here, cause at this moment there could be 
+							//already somebody in the Room waiting
+							
+							//Now set it false for all other clients of this room
+							for (Iterator<String> iter=clientListRoom.keySet().iterator();iter.hasNext();) {
+								String streamId = iter.next();
+								RoomClient rcl = clientListRoom.get(streamId);
+								//Check if it is not the same like we have just declared to be moderating this room
+								if( !streamid.equals(rcl.getStreamid())){
+									log.debug("set to false for client: "+rcl);
+									rcl.setIsMod(new Boolean(false));
+									this.clientListManager.updateClientByStreamId(streamId, rcl);
+								}				
+							}
+					
+							//Notify all clients of the same scope (room)
+							Collection<Set<IConnection>> conCollection = current.getScope().getConnections();
+							for (Set<IConnection> conset : conCollection) {
+								for (IConnection conn : conset) {
+									if (conn != null) {
+										RoomClient rcl = this.clientListManager.getClientByStreamId(conn.getClient().getId());
+										if (conn instanceof IServiceCapableConnection) {
+											((IServiceCapableConnection) conn).invoke("setNewModerator",new Object[] { currentClient }, this);
+											log.debug("sending setNewModerator to " + conn);
+										}
+									}
+								}	
+							}
+							
+						} else {
+							//The current User is not a Teacher/Admin or whatever Role that should get the 
+							//Moderation 
+							currentClient.setIsMod(false);
+						}
+					} else {
+						//There is already a Moderator so leave it
+						currentClient.setIsMod(false);
+					}
+					
+						
 				} else {
-					log.debug("Room is already somebody so set this user not to be moderation role");
-					currentClient.setIsMod(false);
-					this.clientListManager.updateClientByStreamId(streamid, currentClient);
-				}	
-			}
-			else{
+					
+					//If this is a normal Room Moderator rules : first come, first draw ;-)
+					log.debug("setRoomValues : Room" + room_id + " not appointed! Moderator rules : first come, first draw ;-)" );
+					if (clientListRoom.size()==1){
+						log.debug("Room is empty so set this user to be moderation role");
+						currentClient.setIsMod(true);
+					} else {
+						log.debug("Room is already somebody so set this user not to be moderation role");
+						currentClient.setIsMod(false);
+					}
+					
+				}
+				
+				//Update the Client List
+				this.clientListManager.updateClientByStreamId(streamid, currentClient);
+				
+			} else{
+				
+				//If this is an Appointment then the Moderator will be set to the Invitor
+				
 				Appointment ment = AppointmentLogic.getInstance().getAppointmentByRoom(room_id);
 				
 				List<MeetingMember> members = MeetingMemberDaoImpl.getInstance().getMeetingMemberByAppointmentId(ment.getAppointmentId());
@@ -750,7 +866,36 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 			
 			return roomClientList;
 		} catch (Exception err){
-			log.error("[setRoomValues]",err);
+			log.error("[getRoomClients]",err);
+		}
+		return null;
+	}
+	
+	/*
+	 * Returns only the Moderator (if there is one)
+	 * 
+	 */
+	public synchronized HashMap<String,RoomClient> getModeratorRoomClients(Long room_id) {
+		try {
+
+			HashMap <String,RoomClient> roomClientList = new HashMap<String,RoomClient>();
+
+			HashMap<String,RoomClient> clientListRoom = this.clientListManager.getClientListByRoom(room_id);
+			for (Iterator<String> iter=clientListRoom.keySet().iterator();iter.hasNext();) {
+				String key = (String) iter.next();
+				RoomClient rcl = this.clientListManager.getClientByStreamId(key);
+				
+				if (rcl.getIsMod()) {
+					log.debug("#+#+#+#+##+## logicalRoomEnter ClientList key: "+rcl.getRoom_id()+" "+room_id);
+					log.debug("set to ++ for client: "+rcl.getStreamid());
+					//Add user to List
+					roomClientList.put(key, rcl);
+				}
+			}
+			
+			return roomClientList;
+		} catch (Exception err){
+			log.error("[getModeratorRoomClients]",err);
 		}
 		return null;
 	}
