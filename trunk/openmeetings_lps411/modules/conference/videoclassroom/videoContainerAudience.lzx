@@ -31,8 +31,6 @@
         canvas.thishib.reconnectionAction = true;
         canvas.thishib.reconnectObjRef = this;
         canvas.thishib.disconnect();
-        
-		
 	</handler>
     
     <method name="reconnectSuccess">
@@ -90,7 +88,7 @@
             for (var i in value){
             	////Debug.write("getClientListScope value: ",value[i]);
             	if (value[i].username!=null){
-            		var m = this.parent.addItem(value[i].connectedSince,value[i].isMod,value[i].streamid,value[i].username,value[i].userroom,value[i].formatedDate,value[i].userpos,value[i].usercolor,value[i]);
+            		var m = this.parent.addItem(value[i].connectedSince,value[i].isMod,value[i].streamid,value[i].username,null,value[i].formatedDate,value[i].userpos,value[i].usercolor,value[i]);
             		if (m){
             			parent.modLoaded = true;
             		}
@@ -117,8 +115,8 @@
 	    			if ($debug) Debug.warn("start play");
 	    			myvideocontainer._chatvideoinner._videostream.playStream(object.broadCastID,-1);	
 	    		} else {
+                    if ($debug) Debug.warn("######### start play ?!");
 	    			myvideocontainer._chatvideoinner._videostream.playStream(object.broadCastID,-1);
-	    			if ($debug) Debug.warn("start play");
 	    		}	
 	    		myvideocontainer.updateAVSettingsSymbol(object);
 		  		return true;
@@ -191,6 +189,7 @@
 		return null;
 		]]>
 	</method>
+    
 	<method name="getNewVideoObjectByPos" args="publicSID">
 		<![CDATA[
 			//Get a Free VideoView Slot by Position
@@ -214,7 +213,7 @@
 		Remove the current VideoReference, cause the moderator has been changed
 	 -->
 	<method name="clearAllVideoRefernces">
-		//Debug.write("clearAllVideoRefernces");
+		if ($debug) Debug.write("clearAllVideoRefernces");
 		this._video1.setAttribute('isAssigned',false);
 		this._video1._chatvideoinner.setAttribute('frame',5);
 		this._video1.resetValues();
@@ -238,6 +237,7 @@
 		return null;
 		]]>
 	</method>
+    
 	<method name="disconnectclient" args="publicSID">
 		<![CDATA[
 			if ($debug) Debug.write("disconnectclient: ",publicSID);

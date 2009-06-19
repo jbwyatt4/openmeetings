@@ -171,6 +171,7 @@
 		<handler name="onclick">
             parent.resetValues();
 			if(!this.parent.isremote) {
+                if ($debug) Debug.write("editRecordStream ################# baseVideObject ");
 	            new lz.editRecordStream(canvas.main_content._content.inner,{isSyncUpdate:true});
 	        }
 		</handler>
