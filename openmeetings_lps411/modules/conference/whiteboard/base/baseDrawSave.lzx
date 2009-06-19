@@ -242,7 +242,7 @@
 		} else if (isInitLoader){
 			//check if this is conferenceView or audienceView modus
 			if (canvas.thishib.modus == "conference"){
-				if ($debug) Debug.write("############## editRecordStream 1");
+				if ($debug) Debug.write("############## editRecordStream 1 xyz");
 				new lz.editRecordStream(canvas.main_content._content.inner);	
 			} else if(canvas.thishib.modus == "audience"){
 				//check in audince modus if this user is the current moderator
@@ -482,7 +482,7 @@
 		if (this.isInitLoader){
 			//check if this is conferenceView or audienceView modus
 			if (canvas.thishib.modus == "conference"){
-				Debug.write("############## editRecordStream 2");
+				Debug.write("############## editRecordStream 2 xyz");
 				new lz.editRecordStream(canvas.main_content._content.inner);	
 			} else if(canvas.thishib.modus == "audience"){
 				//check in audince modus if this user is the current moderator

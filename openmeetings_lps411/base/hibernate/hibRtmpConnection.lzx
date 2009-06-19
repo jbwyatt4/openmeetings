@@ -473,7 +473,7 @@
             <handler name="ondata" args="value">
 				<![CDATA[
 					//The onResult-Handler will be called be the rtmpconnection
-					Debug.write("############   getCurrentModerator: ",value);
+					if ($debug) Debug.write("############ getCurrentModerator: ",value);
 					if (value!=null){
 						canvas.setAttribute('moderatorationObject',value);
 						canvas.setAttribute('moderatorStreamID',value.streamid);
@@ -502,6 +502,7 @@
 							// cause you are not able to register your stream
 							// as non moderator
 							if (!canvas._videocontainer.modLoaded){
+                                if ($debug) Debug.write("############## editRecordStream 5");
 				            	new lz.errorModeratorPopup(canvas,{error:canvas.getLabelName(498)});
 				            }							
 						}		
@@ -606,29 +607,31 @@
                 ]]>
             </handler>   
         </netRemoteCallHib>    
+        
         <netRemoteCallHib name="setNewModerator" funcname="setNewModerator">
             <netparam name="vars"><method name="getValue">return canvas.streamid;</method></netparam>
             <handler name="ondata" args="value">
 				<![CDATA[
-                //The onResult-Handler will be called be the rtmpconnection
-                //Debug.write("setNewModerator : ",value,value.firstname+' '+value.lastname);
-                canvas.setAttribute('moderatorationObject',value);
-                canvas.setAttribute('moderatorStreamID',value.streamid);
-                canvas.setAttribute('moderatorName',value.firstname+' '+value.lastname);
-				//in audienceView Modus this requires that the new user will be
-				//streamed
-				if (parent.modus == "audience"){
-					canvas._videocontainer.clearAllVideoRefernces();
-					if (canvas.ismoderator){
-						Debug.write("############## editRecordStream 5");
-						new lz.editRecordStream(canvas.main_content._content.inner);
-					} else {
-						//Debug.warn("canvas._videocontainer.getClientListScope.doCall");
+	                //The onResult-Handler will be called be the rtmpconnection
+	                //Debug.write("setNewModerator : ",value,value.firstname+' '+value.lastname);
+	                canvas.setAttribute('moderatorationObject',value);
+	                canvas.setAttribute('moderatorStreamID',value.streamid);
+	                canvas.setAttribute('moderatorName',value.firstname+' '+value.lastname);
+					//in audienceView Modus this requires that the new user will be
+					//streamed
+					if (parent.modus == "audience"){
+						canvas._videocontainer.clearAllVideoRefernces();
+						if (canvas.ismoderator){
+							if ($debug) Debug.write("############## editRecordStream 5 setNewModerator ");
+							new lz.editRecordStream(canvas.main_content._content.inner);
+						} else {
+							//Debug.warn("canvas._videocontainer.getClientListScope.doCall");
+						}
 					}
-				}
 				]]>
             </handler>   
-        </netRemoteCallHib>       
+        </netRemoteCallHib> 
+        
         <netRemoteCallHib name="sendMessage" funcname="sendMessage">
             <netparam name="vars"><method name="getValue">return canvas.objMessage;</method></netparam>
             <handler name="ondata" args="value">
