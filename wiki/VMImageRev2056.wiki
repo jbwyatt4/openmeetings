@@ -21,6 +21,9 @@ vadmin: openmeetings
 MySQL:
 root: openmeetings
 
+Application
+login: admin password: admin
+
 download URL  :  http://www.expressaas.com/distrib/release/openmeetings-vm-r01.7z
 SHA1:  f2a7773a47cdb2c8a1f9bbe25c3fd913fc800a7f
 
