@@ -132,6 +132,30 @@
 			canvas.resetHash = hash;		
 		}
         
+        var moodleRoom = lz.Browser.getInitArg('moodleRoom');
+        var becomemoderator = lz.Browser.getInitArg('becomemoderator');
+        if (moodleRoom != undefined && becomemoderator != undefined){
+            canvas.isMoodleRoom = true;
+            if (becomemoderator == "2"){
+                canvas.becomemoderator = true;
+            }
+            
+            var moodleWwwRoot = lz.Browser.getInitArg('wwwRoot');
+            var moodleUserId = lz.Browser.getInitArg('user_id');
+            var moodlePicture = lz.Browser.getInitArg('picture');
+            
+            if (moodleWwwRoot != undefined) {
+                canvas.moodleWwwRoot = moodleWwwRoot;
+            }
+            if (moodleUserId != undefined) {
+                canvas.moodleUserId = moodleUserId;
+            }
+            if (moodlePicture != undefined) {
+                canvas.moodlePicture = moodlePicture;
+            }
+        }
+        
+        
         hib.protocollPort = canvas.rtmpport;
         
         if (canvas.useSSL) {

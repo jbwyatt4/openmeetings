@@ -65,6 +65,12 @@
         
     <attribute name="showKickMessage" value="false" type="boolean"/>
          
+         
+     <!--
+        The onconnect Method is triggered several times:
+             - When you enter a room the NetConnection will close and reconnect to the Scope of the Room
+             - When you leave the room again it will be re-connected to the default scope again
+      -->
      <handler name="onconnect">
 		if($debug) Debug.write("hibRtmpConnection/onconnect");
         if (this.reconnectionAction){
@@ -476,6 +482,8 @@
 						canvas.setAttribute('moderatorationObject',null);
 						canvas.setAttribute('moderatorStreamID',"");
 						canvas.setAttribute('moderatorName',"");
+                        
+                        new lz.labelerrorPopup(canvas,{errorlabelid:641});
 					}
 					
 					if ($debug) Debug.write("throw event to drawarea: ",canvas.moderatorStreamID,canvas.ismoderator);

@@ -28,8 +28,26 @@
 		this.getClientListScope.doCall();
 		this.applymessage = new Array();
 		this.applymessage[0] = 'applyforMod';
-		this.sendMessageWithClient.doCall();
+		this.checkRoomValues.doCall();
 	</handler>
+    
+    <!--
+        This is necessary as in some cases the user should not be allowed 
+        to apply for Moderation at all, this Function checks this
+     -->
+    
+    <netRemoteCallHib name="checkRoomValues" funcname="checkRoomValues" 
+                      remotecontext="$once{ canvas.thishib }" >   
+        <netparam><method name="getValue">return hib.currentroomid;</method></netparam>
+        <handler name="ondata" args="value">
+            if (value) {
+                parent.sendMessageWithClient.doCall();
+            } else {
+                new lz.labelerrorPopup(canvas,{errorlabelid:641});
+                parent.close();
+            }
+        </handler>
+    </netRemoteCallHib>
 	
 	<method name="setUserAnswer" args="value">
 		<![CDATA[

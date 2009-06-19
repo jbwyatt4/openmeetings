@@ -258,4 +258,33 @@ and some more references to temp-objects
 
 <attribute name="currentUploadWindow" value="null" />
 
+<!--
+    ################################
+    Attributes for direct Moderator setup via Moodle
+ -->
+<attribute name="isMoodleRoom" value="false" type="boolean" /> 
+
+<attribute name="becomemoderator" value="false" type="boolean" />
+
+<attribute name="moodleWwwRoot" value="" type="string" />
+<attribute name="moodleUserId" value="0" type="number" />
+<attribute name="moodlePicture" value="0" type="number" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </library>
