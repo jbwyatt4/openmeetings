@@ -16,6 +16,8 @@
 //<loginUser xmlns="http://services.axis.openmeetings.org"><SID>93e7e34036e1b0a243a481c12bd4fb7d</SID><username>SebastianWagner</username><userpass>asdasd</userpass></loginUser>
 //addRoom xmlns="http://services.axis.openmeetings.org"><SID>e4477f29c7c99bca7768c06a75e35cdc</SID><name>MOODLE_COURSE_ID_6_NAME_asdasdasd</name><roomtypes_id>1</roomtypes_id><comment>Created by SOAP-Gateway for Moodle Platform</comment><numberOfPartizipants>4</numberOfPartizipants><ispublic>true</ispublic><videoPodWidth>270</videoPodWidth><videoPodHeight>280</videoPodHeight><videoPodXPosition>2</videoPodXPosition><videoPodYPosition>2</videoPodYPosition><moderationPanelXPosition>400</moderationPanelXPosition><showWhiteBoard>true</showWhiteBoard><whiteBoardPanelXPosition>276</whiteBoardPanelXPosition><whiteBoardPanelYPosition>2</whiteBoardPanelYPosition><whiteBoardPanelHeight>592</whiteBoardPanelHeight><whiteBoardPanelWidth>660</whiteBoardPanelWidth><showFilesPanel>true</showFilesPanel><filesPanelXPosition>2</filesPanelXPosition><filesPanelYPosition>284</filesPanelYPosition><filesPanelHeight>310</filesPanelHeight><filesPanelWidth>270</filesPanelWidth></addRoom>
 
+//echo "DIRROOT: ".$CFG->dirroot."<br/>";
+
 require_once($CFG->dirroot.'/mod/openmeetings/lib/nusoap.php');
 //require_once($CFG->dirroot.'/lib/soaplib.php');
 
@@ -35,7 +37,9 @@ class openmeetings_gateway {
 		//		echo "USER: ".$CFG->openmeetings_openmeetingsAdminUser."<br/>";
 		//		echo "Pass: ".$CFG->openmeetings_openmeetingsAdminUserPass."<br/>";
 		
-		$client_userService = new nusoap_client("http://".$CFG->openmeetings_red5host.":".$CFG->openmeetings_red5port."/openmeetings/services/UserService?wsdl", "wsdl");
+		//echo "DIRROOT: ".$CFG->dirroot."<br/>";
+		
+		$client_userService = new nusoap_client_om("http://".$CFG->openmeetings_red5host.":".$CFG->openmeetings_red5port."/openmeetings/services/UserService?wsdl", "wsdl");
 		$client_userService->setUseCurl(true);
 		//echo "Client inited"."<br/>";
 		$err = $client_userService->getError();
@@ -89,6 +93,9 @@ class openmeetings_gateway {
 
 	/**
 	 * TODO: Check Error handling
+	 * 
+	 * @deprecated this method is deprecated
+	 * 
 	 */
 	function openmeetings_createroom($openmeetings,$roomtypes_id) {
 		global $USER, $CFG;
@@ -103,7 +110,7 @@ class openmeetings_gateway {
 		
 		//echo $client_userService."<br/>";
 	    
-	 	$client_roomService = new nusoap_client("http://".$CFG->openmeetings_red5host.":".$CFG->openmeetings_red5port."/openmeetings/services/RoomService?wsdl", true);
+	 	$client_roomService = new nusoap_client_om("http://".$CFG->openmeetings_red5host.":".$CFG->openmeetings_red5port."/openmeetings/services/RoomService?wsdl", true);
 		
 		$err = $client_roomService->getError();
 		if ($err) {
@@ -149,10 +156,64 @@ class openmeetings_gateway {
 		return -1;
 	}
 	
+	function openmeetings_createroomwithmod($openmeetings) {
+		global $USER, $CFG;
+	
+		//		echo $CFG->openmeetings_red5host."<br/>";
+		//		echo $CFG->openmeetings_red5port."<br/>";	
+		//		foreach ($CFG as $key => $value){
+		//    		echo "KEY: ".$key." Value: ".$value."<br/>";
+		//    	}
+    	$course_name = 'MOODLE_COURSE_ID_'.$openmeetings->course.'_NAME_'.$openmeetings->name;
+    	//echo "CourseName: ".$course_name."<br/>";	
+		
+		//echo $client_userService."<br/>";
+	    
+	 	$client_roomService = new nusoap_client_om("http://".$CFG->openmeetings_red5host.":".$CFG->openmeetings_red5port."/openmeetings/services/RoomService?wsdl", true);
+		
+		$err = $client_roomService->getError();
+		if ($err) {
+			echo '<h2>Constructor error</h2><pre>' . $err . '</pre>';
+			echo '<h2>Debug</h2><pre>' . htmlspecialchars($client->getDebug(), ENT_QUOTES) . '</pre>';
+			exit();
+		}  
+		
+		$isModeratedRoom = false;
+		if ($openmeetings->is_moderated_room == 1) {
+			$isModeratedRoom = true;
+		}
+		
+		$params = array(
+			'SID' => $this->session_id,
+			'name' => $course_name,
+			'roomtypes_id' => $openmeetings->type,
+			'comment' => 'Created by SOAP-Gateway for Moodle Platform',
+			'numberOfPartizipants' => $openmeetings->max_user,
+			'ispublic' => true,
+			'appointment' => false, 
+			'isDemoRoom' => false, 
+			'demoTime' => 0, 
+			'isModeratedRoom' => $isModeratedRoom
+		);
+		$result = $client_roomService->call('addRoomWithModeration',$params);
+		if ($client_roomService->fault) {
+			echo '<h2>Fault (Expect - The request contains an invalid SOAP body)</h2><pre>'; print_r($result); echo '</pre>';
+		} else {
+			$err = $client_roomService->getError();
+			if ($err) {
+				echo '<h2>Error</h2><pre>' . $err . '</pre>';
+			} else {
+				//echo '<h2>Result</h2><pre>'; print_r($result["return"]); echo '</pre>';
+				return $result["return"];
+			}
+		}   
+		return -1;
+	}
+	
 	function openmeetings_setUserObject($username, $firstname, $lastname, 
 			$profilePictureUrl, $email) {
 	    global $USER, $CFG;
-	 	$client_userService = new nusoap_client("http://".$CFG->openmeetings_red5host.":".$CFG->openmeetings_red5port."/openmeetings/services/UserService?wsdl", true);
+	 	$client_userService = new nusoap_client_om("http://".$CFG->openmeetings_red5host.":".$CFG->openmeetings_red5port."/openmeetings/services/UserService?wsdl", true);
 		
 		$err = $client_userService->getError();
 		if ($err) {
