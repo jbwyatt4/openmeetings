@@ -19,7 +19,8 @@ $openmeetings_swfURL = "http://".$_GET["red5host"].":".$_GET["red5httpPort"]."/o
 		"&picture=".$_GET["picture"] .
 		"&user_id=".$_GET["user_id"] .
 		"&wwwroot=".$_GET["wwwroot"] .
-		"&moodleRoom=1";
+		"&moodleRoom=1" .
+		"&becomemoderator=".$_GET["becomemoderator"];
 
 /*
  * For Debugging
@@ -31,7 +32,8 @@ $openmeetings_swfURL = "http://192.168.0.31:8080/lps-4.3.0/openmeetings/maindebu
 		"&picture=".$_GET["picture"] .
 		"&user_id=".$_GET["user_id"] .
 		"&wwwroot=".$_GET["wwwroot"] .
-		"&moodleRoom=1";
+		"&moodleRoom=1" .
+		"&becomemoderator=".$_GET["becomemoderator"];
 				
 echo $openmeetings_swfURL;
 

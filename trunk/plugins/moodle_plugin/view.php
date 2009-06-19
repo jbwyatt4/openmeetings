@@ -107,24 +107,22 @@
     
     if ($show != "false") {
 
-    	echo $USER->id."<br/>";
-    	echo $USER->username."<br/>";
-    	echo $USER->firstname."<br/>";
-    	echo $USER->lastname."<br/>";
-    	echo $USER->email."<br/>";
-    	echo $USER->picture."<br/>";
-    	echo $CFG->wwwroot."<br/>";
+//    	echo $USER->id."<br/>";
+//    	echo $USER->username."<br/>";
+//    	echo $USER->firstname."<br/>";
+//    	echo $USER->lastname."<br/>";
+//    	echo $USER->email."<br/>";
+//    	echo $USER->picture."<br/>";
+//    	echo $CFG->wwwroot."<br/>";
     	
-    	echo $USER->access->rdef."<br/>";
+    	$context = get_context_instance(CONTEXT_MODULE, $cm->id);
     	
-    	foreach ($USER->access as $key => $value) {
-    		echo $key." => ".$value."<br/>";
-    	}
-    	
-    	foreach ($USER->access['rdef'] as $key => $value) {
-    		echo $key." => ".$value."<br/>";
-    	}
-    	
+    	$becomemoderator = 1;
+    	if (has_capability('mod/openmeetings:becomemoderator', $context)) {
+    		$becomemoderator = 2;
+    		//echo "BECOME MODERATOR IS TRUE<br/>";
+    	}   	
+		
 
 		$openmeetings_gateway = new openmeetings_gateway();
 		if ($openmeetings_gateway->openmeetings_loginuser()) {
@@ -140,7 +138,8 @@
 						"&red5httpPort=".$CFG->openmeetings_red5port .
 						"&picture=".$USER->picture .
 						"&user_id=".$USER->id .
-						"&wwwroot=".$CFG->wwwroot;
+						"&wwwroot=".$CFG->wwwroot .
+						"&becomemoderator=".$becomemoderator;
 
 				printf("<iframe src='%s' width='%s' height='%s' />",$iframe_d,
 						$CFG->openmeetings_openmeetingsiFrameWidth,
