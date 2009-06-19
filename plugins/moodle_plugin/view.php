@@ -107,11 +107,24 @@
     
     if ($show != "false") {
 
-//    	echo $USER->username."<br/>";
-//    	echo $USER->firstname."<br/>";
-//    	echo $USER->lastname."<br/>";
-//    	echo $USER->email."<br/>";
-//    	echo $USER->picture."<br/>";
+    	echo $USER->id."<br/>";
+    	echo $USER->username."<br/>";
+    	echo $USER->firstname."<br/>";
+    	echo $USER->lastname."<br/>";
+    	echo $USER->email."<br/>";
+    	echo $USER->picture."<br/>";
+    	echo $CFG->wwwroot."<br/>";
+    	
+    	echo $USER->access->rdef."<br/>";
+    	
+    	foreach ($USER->access as $key => $value) {
+    		echo $key." => ".$value."<br/>";
+    	}
+    	
+    	foreach ($USER->access['rdef'] as $key => $value) {
+    		echo $key." => ".$value."<br/>";
+    	}
+    	
 
 		$openmeetings_gateway = new openmeetings_gateway();
 		if ($openmeetings_gateway->openmeetings_loginuser()) {
@@ -122,9 +135,12 @@
 				$iframe_d = "videoconference.php?" .
 						"sid=".$openmeetings_gateway->session_id .
 						"&roomid=".$openmeetings->room_id .
-						"&language=".$CFG->openmeetings_openmeetingsLanguage .
+						"&language=".$openmeetings->language .
 						"&red5host=".$CFG->openmeetings_red5host .
-						"&red5httpPort=".$CFG->openmeetings_red5port;
+						"&red5httpPort=".$CFG->openmeetings_red5port .
+						"&picture=".$USER->picture .
+						"&user_id=".$USER->id .
+						"&wwwroot=".$CFG->wwwroot;
 
 				printf("<iframe src='%s' width='%s' height='%s' />",$iframe_d,
 						$CFG->openmeetings_openmeetingsiFrameWidth,

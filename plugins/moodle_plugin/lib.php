@@ -36,10 +36,10 @@ function myErrorHandler($errno, $errstr, $errfile, $errline)
 
 function openmeetings_add_instance($openmeetings) {
 	global $USER, $CFG;
-
+	
 	$openmeetings_gateway = new openmeetings_gateway();
 	if ($openmeetings_gateway->openmeetings_loginuser()) {
-		$openmeetings->room_id = $openmeetings_gateway->openmeetings_createroom($openmeetings,1);
+		$openmeetings->room_id = $openmeetings_gateway->openmeetings_createroomwithmod($openmeetings);
 	} else {
 		echo "Could not login User to OpenMeetings, check your OpenMeetings Module Configuration";
 		exit();
