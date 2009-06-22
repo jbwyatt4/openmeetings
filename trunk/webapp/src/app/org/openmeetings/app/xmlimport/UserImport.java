@@ -84,8 +84,17 @@ public class UserImport {
 			String street = itemUsers.element("street").getText();
 			String town = itemUsers.element("town").getText();
 			String zip = itemUsers.element("zip").getText();
-			String phone = itemUsers.element("phone").getText();
-			String email = itemUsers.element("mail").getText();
+			
+			String phone = "";
+			if (itemUsers.element("phone") != null) {
+				phone = itemUsers.element("phone").getText();
+			}
+			
+			String email = "";
+			if (itemUsers.element("mail") != null) {
+				email = itemUsers.element("mail").getText();
+			}
+			// = .getText();
 			
 			boolean mailCheck = true;
 			
@@ -93,6 +102,7 @@ public class UserImport {
 				Element itemElement = (Element) itMail.next();
 				for (Iterator mailIterator = itemElement.elementIterator("mail");mailIterator.hasNext(); ){
 					Element mailElement = (Element) mailIterator.next();
+					email = mailElement.getText();
 					if (!Emailmanagement.getInstance().checkUserEMail(mailElement.getText())) mailCheck=false;
 				}	
 			}  			
