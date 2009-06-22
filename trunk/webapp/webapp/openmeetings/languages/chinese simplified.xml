@@ -1932,4 +1932,10 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   <string id="640" name="meeting room administration">
     <value>Moderated</value>
   </string>  
+  <string id="641" name="moderated room waiting message">
+    <value>Please wait untill the Moderator has entered the Room. The Moderator can be either a Teacher, Admin or the creator of this Room.</value>
+  </string>
+  <string id="642" name="error popup">
+    <value>Ok</value>
+  </string>  
 </language>
