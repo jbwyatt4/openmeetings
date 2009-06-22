@@ -1909,27 +1909,27 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Sei sicuro di voler uscire?</value>
   </string>
   <string id="635" name="main menu">
-    <value>Actions</value>
+    <value>Azioni</value>
   </string>
   <string id="636" name="room admin">
-    <value>Demo Room</value>
+    <value>Stanza demo</value>
   </string>
   <string id="637" name="room admin">
-    <value>Demo Time</value>
+    <value>Orario demo</value>
   </string>
   <string id="638" name="meeting Timer">
-    <value>Meeting Timer</value>
+    <value>Orario meeting</value>
   </string>
   <string id="639" name="meeting Timer">
-    <value>This Room is a Demo Room. To disable this warning you either should get a private meeting room for your personal usage or set up an own Server. You will be automatically logged off in:</value>
-  </string>  
+    <value>Questa stanza è una stanza demo. Per disabilitare questo avviso è necessario attivare una conferenza privata per uso ristretto o attivare un server dedicato. Sarai automaticamente sconnesso in:</value>
+  </string>
   <string id="640" name="meeting room administration">
-    <value>Moderated</value>
-  </string>  
+    <value>moderata</value>
+  </string>
   <string id="641" name="moderated room waiting message">
-    <value>Please wait untill the Moderator has entered the Room. The Moderator can be either a Teacher, Admin or the creator of this Room.</value>
+    <value>Perfavore attendi finchè un moderatore si collega alla stanza. Il moderatore può essere un insegnante, un amministratore o il creatore della stanza.</value>
   </string>
   <string id="642" name="error popup">
     <value>Ok</value>
-  </string>  
+  </string>
 </language>
