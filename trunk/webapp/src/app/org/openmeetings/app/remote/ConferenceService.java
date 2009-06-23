@@ -343,6 +343,11 @@ public class ConferenceService {
 	        Long rooms_id = Long.valueOf(argObjectMap.get("rooms_id").toString()).longValue();
 	        log.debug("rooms_id "+rooms_id);
 	        
+	        Integer demoTime = null;
+	        if (argObjectMap.get("demoTime").toString() != null || argObjectMap.get("demoTime").toString().length() > 0) {
+	        	demoTime = Integer.valueOf(argObjectMap.get("demoTime").toString()).intValue();
+	        }
+	        
 	        if (rooms_id==0){
 	        	return Roommanagement.getInstance().addRoom(User_level, argObjectMap.get("name").toString(), 
 	        			Long.valueOf(argObjectMap.get("roomtypes_id").toString()).longValue(),
@@ -350,7 +355,7 @@ public class ConferenceService {
 	        			Boolean.valueOf(argObjectMap.get("ispublic").toString()),organisations,
 	        			Boolean.valueOf(argObjectMap.get("appointment").toString()),
 	        			Boolean.valueOf(argObjectMap.get("isDemoRoom").toString()),
-	        			Integer.valueOf(argObjectMap.get("demoTime").toString()),
+	        			demoTime,
 	        			Boolean.valueOf(argObjectMap.get("isModeratedRoom").toString()));
 	        } else if (rooms_id>0){
 	        	return Roommanagement.getInstance().updateRoom(User_level, rooms_id, 
@@ -360,9 +365,10 @@ public class ConferenceService {
 	        			Long.valueOf(argObjectMap.get("numberOfPartizipants").toString()).longValue(),organisations,
 	        			Boolean.valueOf(argObjectMap.get("appointment").toString()),
 	        			Boolean.valueOf(argObjectMap.get("isDemoRoom").toString()),
-	        			Integer.valueOf(argObjectMap.get("demoTime").toString()),
+	        			demoTime,
 	        			Boolean.valueOf(argObjectMap.get("isModeratedRoom").toString()));
 	        }
+	        
 		} catch (Exception e){
 			log.error("saveOrUpdateRoom",e);
 		}
