@@ -1,7 +1,7 @@
 #summary Installation of 0.7 RC2 to 0.8 RC3
 #labels Featured
 
-  * [ReleaseNotesOM07RC2 Release Notes]
+  * [OpenMeetings084 Release Notes 0.8.4]
   * [http://openmeetings.googlecode.com/files/openmeetings_0_7_rc2.zip OpenMeetings incl. Red5]
   * [http://openmeetings.googlecode.com/files/openmeetings_07_rc2_wo.zip OpenMeetings Webapp only]
   * [http://download.openmeetings.de/vmware_openmeetings_moodlepack_r1852.tgz VMWare Image (incl. Moodle Integration)] (it includes RC1 NOT RC2)
@@ -72,6 +72,7 @@ After Running the Installer all basics are installed. Now login and go to the Me
   * rtmps (using of SSL) => you find in the config.xml some value to enable the client to first try to connect to rtmps (useSSL param) .. NOTE: Flash Player only on Windows have the rtmps feature and you will need to clear your browser cache to force a reload of the updated config.xml
   * disable recording in config.xml => the recording feature is quite beta. You can disable it in the config.xml
   * if you resize your own video-pod in the conference much larger and then synchronize  the stream, all clients will get a better picture (it also needs more bandwidth, as it will take the actual new height / width numbers to publish your stream)
+  * there are some hidden emoticons (for example (activate)), you might want to add your own ones [http://openmeetings.googlecode.com/svn/trunk/webapp/webapp/openmeetings/public/emoticons/emotes.xml Full List]
 
 = using 3th Party Publishing Software, RTP-Streams or IP-Cams =
 
