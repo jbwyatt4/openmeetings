@@ -96,6 +96,7 @@ Mailing-Lists:
 
 Alphabetical:
 
+  * [OpenMeetings084 Release Notes 0.8.4]
   * [05Beta2Changes]  	----  	0.5 Beta2 Changes     	 
   * [05Beta3Changes] 	---- 	0.5 Beta3 Changes 	 	 
   * [05Beta4Changes] 	---- 	0.5 Beta4 Changes 	 	 
