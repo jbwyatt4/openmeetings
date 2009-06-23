@@ -2,7 +2,7 @@
 
 == Installation ==
 
-Current Version !OpenMeetings 0.7 RC1: InstallationOpenMeetings, changes: [OpenMeetings084 Release Notes 0.8.4], at 23.06.2009
+Current Version !OpenMeetings 0.7 RC1 to 0.8.4: InstallationOpenMeetings, changes: [OpenMeetings084 Release Notes 0.8.4], at 23.06.2009
 
 Tips for Installation:
 
