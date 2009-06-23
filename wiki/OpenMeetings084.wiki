@@ -8,3 +8,13 @@ The Moodle Plugin enables you now to use more feature of !OpenMeetings:
   * Set a Flag for a Room so that Students and Guests have to wait and will NOT become the Moderation Role in a Conference Room by default, they will have to wait untill a Moodle-Teacher, -Admin or -Creating-Teacher comes and enters a Room.
 
 We would like to thank all Contributors, User, Developers of !OpenMeetings and [http://www.openkvarken.fi/ Open Kvarken] for supporting us.
+
+
+== Note == 
+
+In the Administration I just encountered an Issue with 0.8.4: 
+In the Admin Panel of Rooms as => the Admin-Panel expects that there is at least a
+number in the Field *demo-Time* ... so when you try to add a new Room it says
+System Error. You can workaround that by enabling *Demo Room* (the ceckbox)
+enter a number in *demo Teim* .. you can then disable that again and save the
+Room. r2100 should fix this already.
