@@ -1,6 +1,6 @@
 #summary Release Notes of OpenMeetings 0.8.4 and Moodle Mod 0.5
 
-Release 0.8.4 basically adds some new SOAP Functions for directly entering and editing a Room. Some Room-Attributes have been removed that concern the Layout of a Room. However yu may still use the previous SOAP Calls but it is recommended to Update to use the latest API-Calls see [SoapMethods].
+Release 0.8.4 basically adds some new SOAP Functions for directly entering and editing a Room. Some Room-Attributes have been removed that concern the Layout of a Room. However you may still use the previous SOAP Calls but it is recommended to Update to use the latest API-Calls see [SoapMethods].
 
 The Moodle Plugin enables you now to use more feature of !OpenMeetings:
   * Create both Room Types Conference Room (Multiple Videos) and Event Room (Single Bigger Video)
