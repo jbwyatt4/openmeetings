@@ -53,4 +53,4 @@ Future Features:
 
 If you encounter problems with the Plugin try to:
   * Enable Debug in Moodle 
-  * Goto the File $MOODLE_HOME/mod/openmeetings/videoconfernce.php in Line 38 uncomment the echo, sothat the URL to the OpenMeetings Room will be printed in the Browser. Check that URL manually, it should work to also use that link and copy it directly into the Browsers bar.
+  * Goto the File $MOODLE_HOME/mod/openmeetings/videoconference.php in Line 38 uncomment the echo, sothat the URL to the OpenMeetings Room will be printed in the Browser. Check that URL manually, it should work to also use that link and copy it directly into the Browsers bar.
