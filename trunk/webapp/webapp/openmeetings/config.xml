@@ -5,6 +5,7 @@
     if this value is empty it will try to connect to the 
     domain-name the OpenMeetings-Client has been loading from  
     -->
+<!--<rtmphostlocal>192.168.254.182</rtmphostlocal>-->
 <rtmphostlocal></rtmphostlocal>
 
 <!--  
@@ -22,6 +23,16 @@ this should workaround 99% of all firewalls
  -->
 <rtmpTunnelport>8088</rtmpTunnelport>
 
+<rtmpsslport>443</rtmpsslport>
+<!--
+Wether it should try to connect to rtmps first or not
+Valid values: yes / no
+
+NOTE: The OSx and Linux Flash Player are NOT able to connect via rtmps
+The support for Windows is experimental
+ -->
+<useSSL>no</useSSL>
+
 <!-- 
 Port to use for the Server
 This port is used to connec to the http-servlet
@@ -32,7 +43,7 @@ of the red5-servlet
 <!--
 	These colors are the main colors and style the hole application
  -->
-<basebgcolorizer>0xB0C4DE</basebgcolorizer>
+<basebgcolorizer>0x3F5B9E</basebgcolorizer>
 <baseMousecolorizer>0xC4D5E6</baseMousecolorizer>
 <baseMouseOvercolorizer>0xC4D5E6</baseMouseOvercolorizer>
     
@@ -56,12 +67,15 @@ of the red5-servlet
         
 <!--
     Video-Settings
+    
+    Number that specifies the amount of sound required to activate the microphone 
+	Acceptable values from 0 to 100.	
     this value is used in Audio_Streaming, at which the *activity-meter* will
     send a notification for all connected hosts of a conference
     the result of this notification is that you see the green-light highlighted if
     a remote user is speaking
  -->
-<loudnessAcitviation>7</loudnessAcitviation>   
+<loudnessAcitviation>7</loudnessAcitviation>  
     
 <!--
     OpenMeetings-Webapp Name
@@ -81,10 +95,22 @@ of the red5-servlet
     showWindowEffectOpacity-values
     between 0 and 1
  -->
-<showWindowEffect>y</showWindowEffect> 
-	
-	
+<showWindowEffect>n</showWindowEffect> 
+
+<!--
+    Show the recorder buttons in the Conference Rooms
+    visible = yes
+    hidden = no
+ -->	
+<showRecording>hidden</showRecording>
+
+<!--
+    
+	To enable the modern whiteboard Panel you need to switch this to y
+    old menu bar is not active any more
+    
 <showmodernWhiteBoard>y</showmodernWhiteBoard>    
+ -->    
 	
 <!--
 	First day in the Week used by the Calendar
@@ -93,7 +119,6 @@ of the red5-servlet
 	this is the way how the Celendar inits a week
 -->
 <firstdayinweek>1</firstdayinweek>	
-    
     
     
 <!--
@@ -124,7 +149,7 @@ of the red5-servlet
     The Quality-Modus can be chosen in the Login-Box --> 
 <bandwidthNeededNormal>16384</bandwidthNeededNormal>    
 <!-- These are the settings for the Quality-Modus *best* -->    
-<bandwidthNeededBest>32768</bandwidthNeededBest>
+<bandwidthNeededBest>49152</bandwidthNeededBest>
     
     
 <!-- Camera Settings for the Quality
@@ -137,9 +162,9 @@ of the red5-servlet
     The default value is 0.
  --> 
 <!-- These are the settings for the Quality-Modus *normal* -->  
-<camQualityNormal>75</camQualityNormal>     
+<camQualityNormal>85</camQualityNormal>     
 <!-- These are the settings for the Quality-Modus *best* -->       
-<camQualityBest>75</camQualityBest> 
+<camQualityBest>90</camQualityBest> 
     
     
 <!-- Microphone Settings for the Rate:
