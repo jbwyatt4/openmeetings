@@ -16,5 +16,5 @@ In the Administration I just encountered an Issue with 0.8.4:
 In the Admin Panel of Rooms as => the Admin-Panel expects that there is at least a
 number in the Field *demo-Time* ... so when you try to add a new Room it says
 System Error. You can workaround that by enabling *Demo Room* (the checkbox)
-enter a number in *demo Teim* .. you can then disable that again and save the
+enter a number in *demo Time* .. you can then disable that again and save the
 Room. r2100 should fix this already.
