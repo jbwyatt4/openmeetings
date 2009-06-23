@@ -73,9 +73,9 @@ After Running the Installer all basics are installed. Now login and go to the Me
   * disable recording in config.xml => the recording feature is quite beta. You can disable it in the config.xml
   * if you resize your own video-pod in the conference much larger and then synchronize  the stream, all clients will get a better picture (it also needs more bandwidth, as it will take the actual new height / width numbers to publish your stream)
 
-== using 3th Party Publishing Software, RTP-Streams or IP-Cams ==
+= using 3th Party Publishing Software, RTP-Streams or IP-Cams =
 
-  * If you want to integrate 3th Party Software for publishing Live-Video you may have a look at [http://www.xuggle.com Xuggler]. There is no out of the Box solution but there are already people successfully publish their usual [RTP-LiveStream http://www.red5wiki.com/wiki/SteamStream] by using Xuggler
+  * If you want to integrate 3th Party Software for publishing Live-Video you may have a look at [http://www.xuggle.com Xuggler]. There is no out of the Box solution but there are already people successfully publish their usual [http://www.red5wiki.com/wiki/SteamStream RTP-LiveStream] by using Xuggler
 
 = Tips and Tricks =
 
