@@ -1,5 +1,6 @@
 package org.openmeetings.app.data.conference;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
@@ -50,6 +51,8 @@ public class Invitationmanagement {
 		return instance;
 	}
 	
+	private SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
+	
 	/**
 	 * Sending invitation within plain mail
 	 * @param user_level
@@ -74,6 +77,8 @@ public class Invitationmanagement {
 			Boolean isPasswordProtected, String invitationpass, Integer valid,
 			Date validFrom, Date validTo, Long createdBy, String baseUrl
 			){
+			String validFromString = "";
+			String validToString = "";
 		try {
 			if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)){
 				
@@ -84,6 +89,7 @@ public class Invitationmanagement {
 				}
 				
 				invitation.setInvitationWasUsed(false);
+				log.debug(baseUrl);
 				invitation.setBaseUrl(baseUrl);
 				
 				//valid period of Invitation
@@ -96,7 +102,9 @@ public class Invitationmanagement {
 					invitation.setIsValidByTime(true);
 					invitation.setCanBeUsedOnlyOneTime(false);
 					invitation.setValidFrom(validFrom);
-					invitation.setValidTo(validTo);					
+					invitation.setValidTo(validTo);		
+					validFromString = dateFormat.format(validFrom);
+					validToString = dateFormat.format(validTo);
 				} else {
 					//one-time
 					invitation.setIsValidByTime(false);
@@ -125,7 +133,7 @@ public class Invitationmanagement {
 				HibernateUtil.closeSession(idf);
 				
 				if (invitationId>0){
-					this.sendInvitionLink(username, message, baseurl, email, subject, invitation.getHash());
+					this.sendInvitionLink(username, message, baseurl, email, subject, invitation.getHash(), validFromString, validToString);
 					return invitationId;
 				}
 				
@@ -335,7 +343,7 @@ public class Invitationmanagement {
 	 * 
 	 */
 	private String sendInvitionLink(String username, String message, 
-			String baseurl, String email, String subject, String invitationsHash){
+			String baseurl, String email, String subject, String invitationsHash, String dStart, String dEnd){
 		try {
 				
 			String invitation_link = baseurl+"?lzr=swf8&lzt=swf&invitationHash="+invitationsHash;
@@ -343,7 +351,7 @@ public class Invitationmanagement {
 			Long default_lang_id = Long.valueOf(Configurationmanagement.getInstance().
 	        		getConfKey(3,"default_lang_id").getConf_value()).longValue();
 			
-			String template = InvitationTemplate.getInstance().getRegisterInvitationTemplate(username, message, invitation_link, default_lang_id);
+			String template = InvitationTemplate.getInstance().getRegisterInvitationTemplate(username, message, invitation_link, default_lang_id, dStart, dEnd);
 		
 			return MailHandler.sendMail(email, subject, template);
 
@@ -590,8 +598,7 @@ public class Invitationmanagement {
 			
 			Long default_lang_id = Long.valueOf(Configurationmanagement.getInstance().
 	        		getConfKey(3,"default_lang_id").getConf_value()).longValue();
-			
-			String template = InvitationTemplate.getInstance().getRegisterInvitationTemplate(username, message, invitation_link, default_lang_id);
+			String template = InvitationTemplate.getInstance().getRegisterInvitationTemplate(username, message, invitation_link, default_lang_id, "", "");
 		
 			IcalHandler handler = new IcalHandler(IcalHandler.ICAL_METHOD_REQUEST);
 			
@@ -661,7 +668,7 @@ public class Invitationmanagement {
 				Long default_lang_id = Long.valueOf(Configurationmanagement.getInstance().
 		        		getConfKey(3,"default_lang_id").getConf_value()).longValue();
 				
-				String template = InvitationTemplate.getInstance().getRegisterInvitationTemplate(username, message, invitation_link, default_lang_id);
+				String template = InvitationTemplate.getInstance().getRegisterInvitationTemplate(username, message, invitation_link, default_lang_id, "", "");
 			
 				return MailHandler.sendMail(email, subject, template);
 
