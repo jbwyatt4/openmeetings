@@ -1,13 +1,12 @@
 package de.medint.rtpsharer.main;
 
-import java.awt.event.KeyEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.awt.Event;
+import java.awt.Color;
+import java.awt.ComponentOrientation;
 import java.awt.BorderLayout;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
-import javax.swing.KeyStroke;
 import java.awt.Point;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -20,13 +19,13 @@ import javax.swing.JDialog;
 public class Main {
 	
 	/** Destination Address */
-	private static String destinationAddress = "0.0.0.0";
+	private static String destinationAddress = "10.136.103.255";
 	
 	/** Destination RTP Port */
-	private static String destinationPort = "0";
+	private static String destinationPort = "22224";  //  @jve:decl-index=0:
 	
 	/** Source RTP Port */
-	private static String sourcePort = "0";
+	private static String sourcePort = "22227";  //  @jve:decl-index=0:
 	
 	/** StreamingClass */
 	private static Streamer streamer = null;
@@ -43,8 +42,11 @@ public class Main {
 	/** Quality */
 	private static float quality = 1;
 	
+	/** Connected */
+	private static boolean connection = false;
+	
 	// Visual Components
-	private JFrame jFrame = null;  //  @jve:decl-index=0:visual-constraint="15,46"
+	private JFrame jFrame = null;  //  @jve:decl-index=0:visual-constraint="32,9"
 	private JPanel jContentPane = null;
 	private JMenuBar jJMenuBar = null;
 	private JMenu fileMenu = null;
@@ -53,9 +55,12 @@ public class Main {
 	private JMenuItem aboutMenuItem = null;
 	private JMenuItem startMenuItem = null;
 	private JMenuItem stopMenuItem = null;
-	private JDialog aboutDialog = null;
+	private JDialog aboutDialog = null;  //  @jve:decl-index=0:visual-constraint="364,11"
 	private JPanel aboutContentPane = null;
 	private JLabel aboutVersionLabel = null;
+	
+	
+	private JLabel connected = null;
 	
 	
 	/**
@@ -83,10 +88,36 @@ public class Main {
 	private JPanel getJContentPane() {
 		if (jContentPane == null) {
 			jContentPane = new JPanel();
-			jContentPane.setLayout(new BorderLayout());
+			
+			jContentPane.add(getConnectionLabel(), connected.getName());
+			
 		}
 		return jContentPane;
 	}
+	
+	/**
+	 * Shows the ConnectionLabel
+	 */
+	//-----------------------------------------------------------------------------------------------------
+	private JLabel getConnectionLabel(){
+		connected = new JLabel();
+		
+		if(!connection){
+				connected.setText("Not Streaming");
+				connected.setForeground(Color.RED);
+		}
+		else{
+				connected.setText("Streaming");
+				connected.setForeground(Color.GREEN);
+		}
+		connected.setForeground(Color.RED);
+		connected.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
+		connected.setLocation(0, 0);
+		connected.setBounds(0, 0, 10, 10);
+		
+		return connected;
+	}
+	//-----------------------------------------------------------------------------------------------------
 
 	/**
 	 * This method initializes jJMenuBar	
@@ -211,6 +242,7 @@ public class Main {
 	private JDialog getAboutDialog() {
 		if (aboutDialog == null) {
 			aboutDialog = new JDialog(getJFrame(), true);
+			aboutDialog.setContentPane(getAboutContentPane());
 			aboutDialog.setTitle("About");
 			aboutDialog.setContentPane(getAboutContentPane());
 		}
@@ -253,6 +285,8 @@ public class Main {
 		public void actionPerformed(ActionEvent e) {
 			if(streamer !=null){
 				streamer.start(frameRate, videoWidth, videoHeight, quality);
+				connected.setText("Streaming");
+				connected.setForeground(Color.GREEN);
 			}
 		}
 		
@@ -265,6 +299,8 @@ public class Main {
 		public void actionPerformed(ActionEvent e) {
 			if(streamer !=null){
 				streamer.stop();
+				connected.setText("Not Streaming");
+				connected.setForeground(Color.RED);
 			}
 		}
 		
