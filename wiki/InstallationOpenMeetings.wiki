@@ -74,6 +74,11 @@ After Running the Installer all basics are installed. Now login and go to the Me
   * if you resize your own video-pod in the conference much larger and then synchronize  the stream, all clients will get a better picture (it also needs more bandwidth, as it will take the actual new height / width numbers to publish your stream)
   * there are some hidden emoticons (for example (activate)), you might want to add your own ones [http://openmeetings.googlecode.com/svn/trunk/webapp/webapp/openmeetings/public/emoticons/emotes.xml Full List]
 
+= Integration, Single Sign On and LDAP =
+
+  * To Integrate !OpenMeetings it is recommended to use the [http://code.google.com/p/openmeetings/wiki/SoapMethods SOAP-Gateway]
+  * Regarding LDAP-Configuration see the Installer Script and sample Configuration 
+
 = using 3th Party Publishing Software, RTP-Streams or IP-Cams =
 
   * If you want to integrate 3th Party Software for publishing Live-Video you may have a look at [http://www.xuggle.com Xuggler]. There is no out of the Box solution but there are already people successfully publish their usual [http://www.red5wiki.com/wiki/SteamStream RTP-LiveStream] by using Xuggler
