@@ -19,6 +19,7 @@ import org.red5.logging.Red5LoggerFactory;
 import org.openmeetings.app.data.basic.Configurationmanagement;
 import org.openmeetings.app.data.basic.Sessionmanagement;
 import org.openmeetings.app.data.user.Usermanagement;
+import org.openmeetings.app.rtp.RTPStreamingHandler;
 import org.openmeetings.app.templates.ScreenCastTemplate;
 
 public class ScreenRequestHandler extends VelocityViewServlet {
@@ -159,15 +160,15 @@ public class ScreenRequestHandler extends VelocityViewServlet {
 				log.debug("Current_dir: "+current_dir);			
 				
 				//String jnlpString = ScreenCastTemplate.getInstance(current_dir).getScreenTemplate(rtmphostlocal, red5httpport, sid, room, domain);
-				
-		        ctx.put("rtmphostlocal", rtmphostlocal); //rtmphostlocal
-		        ctx.put("red5httpport", red5httpport); //red5httpport
-		        ctx.put("webAppRootKey", "openmeetings"); //TODO: Query webAppRootKey by Servlet
-		        ctx.put("SID", sid);
-		        ctx.put("ROOM", room);
-		        ctx.put("DOMAIN", domain);
-		        ctx.put("PUBLIC_SID", publicSID);
-		        ctx.put("RECORDER", record);
+				 ctx.put("rtmphostlocal", rtmphostlocal); //rtmphostlocal
+			     ctx.put("red5httpport", red5httpport); //red5httpport
+			     ctx.put("webAppRootKey", "openmeetings"); //TODO: Query webAppRootKey by Servlet
+			     ctx.put("SID", sid);
+			     ctx.put("ROOM", room);
+			     ctx.put("DOMAIN", domain);
+			     ctx.put("PUBLIC_SID", publicSID);
+			     ctx.put("RECORDER", record);
+		       
 		        
 		        String requestedFile = roomName+".jnlp";
 				httpServletResponse.setContentType("application/x-java-jnlp-file");
@@ -190,7 +191,12 @@ public class ScreenRequestHandler extends VelocityViewServlet {
 							log.debug("Creating JNLP Template for jrdesktop solution");
 						}
 						else if(conf_i == 2){
-							template = "screencasr_rtp.vm";
+							
+							// For the RTP Sharer, we need some additional information
+							ctx.put("HOST", rtmphostlocal);
+							int free_rtp_port = RTPStreamingHandler.getNextFreeRTPPort();
+							ctx.put("PORT", free_rtp_port);
+							template = "screencast_rtp.vm";
 							log.debug("Creating JNLP Template for RTP solution");
 						}
 						else
