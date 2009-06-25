@@ -87,8 +87,7 @@ public class MeetingMemberLogic {
 			}
 			else if(point.getRemind().getTypId() == 3){
 				log.debug("Reminder for Appointment : iCal mail");
-				
-				invitationId = Invitationmanagement.getInstance().addInvitationIcalLink(new Long(2), //userlevel
+						invitationId = Invitationmanagement.getInstance().addInvitationIcalLink(new Long(2), //userlevel
 						firstname + " " + lastname, //username
 						"Invitation to an openMeetings Event : " + point.getAppointmentName() + ", " + point.getAppointmentDescription() + ", Start : " + point.getAppointmentStarttime() + ", End : " + point.getAppointmentEndtime(), //message
 						baseUrl, // baseURl

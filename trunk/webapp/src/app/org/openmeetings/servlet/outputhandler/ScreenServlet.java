@@ -471,7 +471,7 @@ public class ScreenServlet extends HttpServlet {
 					
 					String swfNameComplete = completeName + ".swf";
 					log.debug("swfNameComplete: "+swfNameComplete);
-					writeSWFFile(fileNameComplete,swfNameComplete);
+					
 					
 					if (!record.equals("yes")) {
 						LinkedHashMap<String,Object> hs = new LinkedHashMap<String,Object>();
@@ -485,6 +485,8 @@ public class ScreenServlet extends HttpServlet {
 					
 						
 					}
+					else
+						writeSWFFile(fileNameComplete,swfNameComplete);
 				}
 
 		} else {
