@@ -185,9 +185,16 @@ public class ScreenRequestHandler extends VelocityViewServlet {
 					try{
 						int conf_i = Integer.parseInt(confVal);
 						
-						if(conf_i > 0)
+						if(conf_i == 1){
 							template = "screencast_jrdesktop.vm";
-					
+							log.debug("Creating JNLP Template for jrdesktop solution");
+						}
+						else if(conf_i == 2){
+							template = "screencasr_rtp.vm";
+							log.debug("Creating JNLP Template for RTP solution");
+						}
+						else
+							log.debug("Creating JNLP Template for default solution");
 					}
 					catch(Exception e){
 						log.error("invalid configuration value for key screen_viewer!");

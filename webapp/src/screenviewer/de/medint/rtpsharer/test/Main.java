@@ -1,6 +1,6 @@
 package de.medint.rtpsharer.test;
 
-import de.medint.rtpsharer.main.Streamer;
+import de.medint.rtpsharer.main.*;
 
 public class Main {
 
@@ -11,6 +11,7 @@ public class Main {
 		
 		Streamer streamer = new Streamer("", 0, 0);
 		streamer.start(10, 1024, 768, 1);
+		
 
 	}
 
