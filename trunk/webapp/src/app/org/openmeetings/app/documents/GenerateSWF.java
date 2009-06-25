@@ -36,6 +36,7 @@ public class GenerateSWF {
 		HashMap<String, Object> returnMap = new HashMap<String, Object>();
 		returnMap.put("process", process);
 		log.debug("process: " + process);
+		log.debug("args: " + Arrays.toString(argv));
 		try {
 			Runtime rt = Runtime.getRuntime();
 			returnMap.put("command", Arrays.toString(argv));
