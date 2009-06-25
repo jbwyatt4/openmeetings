@@ -109,19 +109,18 @@ public class GeneratePDF {
 		String[] argv = new String[] {
 				"java",
 				"-cp",
-				".:" + "\"" + jodClassPathFolder + "commons-cli-1.0.jar\":"
-						+ "\"" + jodClassPathFolder + "commons-io-1.3.1.jar\":"
-						+ "\"" + jodClassPathFolder
-						+ "jodconverter-2.2.0.jar\":" + "\""
-						+ jodClassPathFolder + "jodconverter-cli-2.2.0.jar\":"
-						+ "\"" + jodClassPathFolder + "juh-2.2.0.jar\":" + "\""
-						+ jodClassPathFolder + "jurt-2.2.0.jar\":" + "\""
-						+ jodClassPathFolder + "ridl-2.2.0.jar\":" + "\""
-						+ jodClassPathFolder + "slf4j-api-1.4.0.jar\":" + "\""
-						+ jodClassPathFolder + "slf4j-jdk14-1.4.0.jar\":"
-						+ "\"" + jodClassPathFolder + "unoil-2.2.0.jar\":"
-						+ "\"" + jodClassPathFolder + "xstream-1.2.2.jar\"",
-				"-jar", jodClassPathFolder + "jodconverter-cli-2.2.0.jar",
+				"\"" + jodClassPathFolder + "commons-cli-1.2.jar\" -cp \"" 
+						+ jodClassPathFolder + "commons-io-1.4.jar\" -cp \""
+						+ jodClassPathFolder + "jodconverter-2.2.2.jar\" -cp \""
+						+ jodClassPathFolder + "jodconverter-cli-2.2.2.jar\" -cp \"" 
+						+ jodClassPathFolder + "juh-3.0.1.jar\" -cp \""
+						+ jodClassPathFolder + "jurt-3.0.1.jar\" -cp \""
+						+ jodClassPathFolder + "ridl-3.0.1.jar\" -cp \""
+						+ jodClassPathFolder + "slf4j-api-1.5.6.jar\" -cp \""
+						+ jodClassPathFolder + "slf4j-jdk14-1.5.6.jar\" -cp \"" 
+						+ jodClassPathFolder + "unoil-3.0.1.jar\" -cp \"" 
+						+ jodClassPathFolder + "xstream-1.3.1.jar\"",
+				"-jar", jodClassPathFolder + "jodconverter-cli-2.2.2.jar",
                 fileFullPath, destinationFolder + outputfile + ".pdf" };
 
 		return GenerateSWF.executeScript("doJodConvert", argv);

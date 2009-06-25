@@ -1,10 +1,10 @@
 JODConverter
 ============
 
-This is JODConverter version 2.2.0, released on 2007-06-03.
+This is JODConverter version 2.2.2, released on 2009-04-11.
 
 JODConverter is a Java library for converting office documents into different
-formats, using OpenOffice.org 2.x.
+formats, using OpenOffice.org 2.x or 3.x.
 
 See http://www.artofsolving.com/opensource/jodconverter for the latest documentation.
 
@@ -18,7 +18,7 @@ As a quick start you can type from a command line
 JODConverter is both a Java library and a set of ready-to-use tools:
 
  * a web application that you can deploy into any servlet container (e.g. Apache Tomcat)
- * a command line tool (java -jar jodconverter-cli-2.2.0.jar <input-document> <output-document>)
+ * a command line tool (java -jar jodconverter-cli-2.2.2.jar <input-document> <output-document>)
 
 Requirements
 ============
@@ -26,7 +26,7 @@ Requirements
 The JAR library requires
 
  * Java 1.4 or higher
- * OpenOffice.org 2.x; recommended 2.0.3 or higher (do NOT use 2.0.2: PDF conversions are broken)
+ * OpenOffice.org 2.x or 3.x; the latest stable version (currenty 3.0.1) is generally recommended
 
 The webapp additionally requires
 
@@ -56,3 +56,15 @@ That may include software developed by
 
 --
 Mirko Nasato <mirko@artofsolving.com>
+
+        
+
+        Changes:
+        JODConverter 2.2.2
+------------------
+
+ * added docx, xlsx, and pptx (supported by OOo since v3.0) to default formats
+
+ * updated plain text format to use UTF8,CRLF as default options
+
+ * added switch to pass a custom xml document format registry file to the command line tool
