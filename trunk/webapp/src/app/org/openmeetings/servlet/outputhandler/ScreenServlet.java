@@ -67,7 +67,7 @@ public class ScreenServlet extends HttpServlet {
 			HttpServletResponse httpServletResponse) throws ServletException,
 			IOException {
 		
-			
+		
 			if (httpServletRequest.getContentLength() > 0) {
 			
 				String sid = httpServletRequest.getParameter("sid");
@@ -99,11 +99,11 @@ public class ScreenServlet extends HttpServlet {
 				if (record == null) {
 					record = "no";
 				}
+				
 				log.debug("record: " + record);
 				
 				ServletMultipartRequest upload = new ServletMultipartRequest(httpServletRequest, 104857600); // max 100 mb
 				
-				System.out.println("TIMEDEBUG : UPLOAD DONE : "  + new java.sql.Timestamp(System.currentTimeMillis()));
 				
 				Long users_id = Sessionmanagement.getInstance().checkSession(sid);
 				Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);

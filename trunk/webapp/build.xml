@@ -331,6 +331,17 @@
 				<attribute name="Built-On" value="${build.TODAY}"/>
 				<attribute name="Class-Path" value="conf/ ${jar.classpath}"/>
 			</manifest>
+		</jar>
+		<jar destfile="${dist.dir}/${project.distname}/screen/rtpviewer.jar">
+			<fileset dir="${classes.dir}">
+				<include name="**/de/**"/>
+				
+			</fileset>
+			<manifest>
+				<attribute name="Built-By" value="OpenMeetings - http://openmeetings.googlecode.com"/>
+				<attribute name="Built-On" value="${build.TODAY}"/>
+				<attribute name="Class-Path" value="conf/ ${jar.classpath}"/>
+			</manifest>
 		</jar>	
 		<jar destfile="${dist.dir}/${project.distname}/WEB-INF/services/FileService.aar">
 			<fileset dir="${fileservice.src.dir}/">
