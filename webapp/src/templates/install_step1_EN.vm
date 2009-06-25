@@ -269,6 +269,7 @@ form.cmxform fieldset fieldset label {
     		>
 	      	<option value="0" selected>Standard Viewer</option>
 	        <option value="1">JRDesktop</option>
+	        <option value="2">JMF RTP Sharer</option>
 	    </select><br />	
 		</li>
     	<p>
@@ -276,6 +277,8 @@ form.cmxform fieldset fieldset label {
 	    	altering the quality of the screencapture,ie.<BR/>
 	    	The jrDesktop alternative starts immediately without GUI, just stoppable via SysTray Icon, but offers<BR/>
 	    	a higher speed tranferring the screencaptures to the whiteboard<BR/>
+	    	The RTP Sharer transfers Desktop Data as RTP Stream to Server. Best performance and quality is reached using 1024x768 as Screen Resolution<BR/>
+	    	
     	</p>
         
     </fieldset>       
