@@ -58,8 +58,6 @@ public class Main {
 	private JDialog aboutDialog = null;  //  @jve:decl-index=0:visual-constraint="364,11"
 	private JPanel aboutContentPane = null;
 	private JLabel aboutVersionLabel = null;
-	
-	
 	private JLabel connected = null;
 	
 	
@@ -316,7 +314,16 @@ public class Main {
 		//Checking Params
 		destinationAddress = args[0];
 		destinationPort = args[1];
-		sourcePort = args[2];
+		
+		String SID = args[2];
+		String ROOM = args[3];
+		
+		
+		System.out.println("Received input values : ");
+		System.out.println("destinationaddress : " + destinationAddress);
+		System.out.println("destinationpoprt : " + destinationPort);
+		System.out.println("SID : " + SID);
+		System.out.println("ROOM : " + ROOM);
 		
 		streamer = new Streamer(destinationAddress, Integer.parseInt(destinationPort), Integer.parseInt(sourcePort));
 		
