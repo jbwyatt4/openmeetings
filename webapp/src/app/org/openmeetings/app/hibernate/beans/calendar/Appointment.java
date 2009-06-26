@@ -297,6 +297,16 @@ public class Appointment {
 	public void setMeetingMember(List<MeetingMember> meetingMember) {
 		this.meetingMember = meetingMember;
 	}
+	
+	/**
+     * @hibernate.many-to-one
+     *  cascade="none"
+     *  column="room_id"
+     *  lazy="false"
+     *  class="org.openmeetings.app.hibernate.beans.rooms.Rooms"
+     *  not-null="false"
+     *  outer-join="true"
+     */ 
 	public Rooms getRoom() {
 		return room;
 	}
