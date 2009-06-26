@@ -38,6 +38,7 @@ http://openmeetings.googlecode.com/svn/trunk/webapp/
   * Run: ant dist (JAVA_HOME must be set and point to a JDK = 1.6 and you need ant version = 1.7)
   * there is now a directory *dist*, inside of that directory there is a compiled openmeetings-webapp with the name *openmeetings*
   * use the compiled openmeetings-webapp and copy it to $RED5_HOME/webapps
+  * remove the jar: *antlr-3.1.2.jar* from the red5-lib directory to avoid Class Loader Problems
   * do the usual install process of openmeetings
 
 Additional Notes:
