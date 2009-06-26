@@ -160,14 +160,14 @@ public class ScreenRequestHandler extends VelocityViewServlet {
 				log.debug("Current_dir: "+current_dir);			
 				
 				//String jnlpString = ScreenCastTemplate.getInstance(current_dir).getScreenTemplate(rtmphostlocal, red5httpport, sid, room, domain);
-				 ctx.put("rtmphostlocal", rtmphostlocal); //rtmphostlocal
-			     ctx.put("red5httpport", red5httpport); //red5httpport
-			     ctx.put("webAppRootKey", "openmeetings"); //TODO: Query webAppRootKey by Servlet
-			     ctx.put("SID", sid);
-			     ctx.put("ROOM", room);
-			     ctx.put("DOMAIN", domain);
-			     ctx.put("PUBLIC_SID", publicSID);
-			     ctx.put("RECORDER", record);
+				ctx.put("rtmphostlocal", rtmphostlocal); //rtmphostlocal
+			    ctx.put("red5httpport", red5httpport); //red5httpport
+			    ctx.put("webAppRootKey", "openmeetings"); //TODO: Query webAppRootKey by Servlet
+			    ctx.put("SID", sid);
+			    ctx.put("ROOM", room);
+			    ctx.put("DOMAIN", domain);
+			    ctx.put("PUBLIC_SID", publicSID);
+			    ctx.put("RECORDER", record);
 		       
 		        
 		        String requestedFile = roomName+".jnlp";
