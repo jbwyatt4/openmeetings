@@ -18,18 +18,18 @@
     
     <method name="fadeText" args="item">
         <![CDATA[
-	        if (this.demoTime > 0) {
-	            var min = Math.floor(this.demoTime/60);
-	            var restSeconds = this.demoTime - (min * 60);
-	            if (restSeconds < 10) {
+            if (this.demoTime > 0) {
+                var min = Math.floor(this.demoTime/60);
+                var restSeconds = this.demoTime - (min * 60);
+                if (restSeconds < 10) {
                     restSeconds = "0"+restSeconds;
                 }
-	            var tString = this.dText + min + "min " + restSeconds + "sec";
+                var tString = this.dText + min + "min " + restSeconds + "sec";
                 
                 this._text._text.setAttribute("text",tString);
                 this.demoTime--;
                 lz.Timer.addTimer( new LzDelegate( this, "fadeText" ), 1000 );
-	        } else {
+            } else {
                 if ($debug) Debug.write("DEMO IS OVER ");
                 canvas.doActionmenu('quit');
             }

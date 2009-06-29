@@ -124,6 +124,15 @@
             ]]>
         </handler>   
     </netRemoteCallHib>   
+    
+    
+    <method name="startStreaming" args="messageObj">
+        new lz.incomingScreenSharing(canvas,{messageObj:messageObj});
+    </method>
+    
+    <method name="stopStreaming" args="messageObj">
+        
+    </method>
 	
 </class>
 
