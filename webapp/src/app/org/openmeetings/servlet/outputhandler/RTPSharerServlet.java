@@ -1,6 +1,7 @@
 package org.openmeetings.servlet.outputhandler;
 
 import java.io.IOException;
+import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -54,59 +55,21 @@ public class RTPSharerServlet extends VelocityViewServlet{
 				String room = httpServletRequest.getParameter("room");
 				if(room == null) room = "default";
 
-				String domain = httpServletRequest.getParameter("domain");
-				if(domain == null) {
-					log.error("domain is empty: "+domain);
-					return null;
-				}
 				
-				String rtmphostlocal = httpServletRequest.getParameter("rtmphostlocal");
-				if (rtmphostlocal == null) {
-					log.error("rtmphostlocal is empty: "+rtmphostlocal);
-					return null;
-				}
+		        //Generate Unique Name to prevent browser from caching file
+				Date t = new Date();
 				
-				String red5httpport = httpServletRequest.getParameter("red5httpport");
-				if (red5httpport == null) {
-					log.error("red5httpport is empty: "+red5httpport);
-					return null;
-				}
-				
-				String record = httpServletRequest.getParameter("record");
-				if (record == null) {
-					log.error("recorder is empty: ");
-					record = "no";
-				}
-				
-				//make a complete name out of domain(organisation) + roomname
-				String roomName = domain+"_"+room;
-				//trim whitespaces cause it is a directory name
-				roomName = StringUtils.deleteWhitespace(roomName);
-				
-				String current_dir = getServletContext().getRealPath("/");
-				log.debug("Current_dir: "+current_dir);			
-				
-				//String jnlpString = ScreenCastTemplate.getInstance(current_dir).getScreenTemplate(rtmphostlocal, red5httpport, sid, room, domain);
-				ctx.put("rtmphostlocal", rtmphostlocal); //rtmphostlocal
-			    ctx.put("red5httpport", red5httpport); //red5httpport
-			    ctx.put("webAppRootKey", "openmeetings"); //TODO: Query webAppRootKey by Servlet
-			    ctx.put("SID", sid);
-			    ctx.put("ROOM", room);
-			    ctx.put("DOMAIN", domain);
-			    ctx.put("PUBLIC_SID", publicSID);
-			    ctx.put("RECORDER", record);
-		        
-		        String requestedFile = roomName+".jnlp";
+		        String requestedFile = room+"_"+t.getTime()+".jnlp";
 				httpServletResponse.setContentType("application/x-java-jnlp-file");
 				httpServletResponse.setHeader("Content-Disposition","Inline; filename=\"" + requestedFile + "\"");
+		        
 		        
 				String template = "rtp_player_applet.vm";
 				
 				// Retrieve Data from RTPmanager
-				RTPScreenSharingSession rsss = RTPStreamingHandler.getSessionForRoom(roomName, publicSID);
+				RTPScreenSharingSession rsss = RTPStreamingHandler.getSessionForRoom(room, publicSID);
 				
-				
-				// TODO : send RTP Stream not directly from sharer, but from RTPPRoxy within
+				// TODO : send RTP Stream not directly from sharer, but from RTP-PRoxy within
 				// RED5 !!!!
 				ctx.put("HOST", rsss.getSharingIpAddress());
 				ctx.put("PORT", rsss.getIncomingRTPPort());

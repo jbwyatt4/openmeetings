@@ -1931,5 +1931,14 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   </string>
   <string id="642" name="error popup">
     <value>Ok</value>
-  </string>  
+  </string>
+  <string id="643" name="window screensharing">
+    <value>Incoming Screen Sharing</value>
+  </string>
+  <string id="644" name="window screen sharing">
+    <value>There is a new Screen Sharing incoming from the User:</value>
+  </string>
+  <string id="645" name="window screen sharing">
+    <value>Start Sharing</value>
+  </string>    
 </language>
