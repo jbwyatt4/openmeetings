@@ -95,6 +95,10 @@
         <servlet-class>org.openmeetings.servlet.outputhandler.ScreenServlet</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>RtpSharerServlet</servlet-name>
+        <servlet-class>org.openmeetings.servlet.outputhandler.RTPSharerServlet</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>ScreenViewHandler</servlet-name>
         <servlet-class>org.openmeetings.servlet.outputhandler.ScreenViewHandler</servlet-class>
     </servlet>
@@ -154,6 +158,10 @@
     <servlet-mapping>
         <servlet-name>ScreenServlet</servlet-name>
         <url-pattern>/ScreenServlet</url-pattern>
+    </servlet-mapping>
+     <servlet-mapping>
+        <servlet-name>RtpSharerServlet</servlet-name>
+        <url-pattern>/RtpSharerServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ScreenViewHandler</servlet-name>
