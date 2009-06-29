@@ -11,7 +11,7 @@ import org.openmeetings.app.hibernate.beans.user.Users;
 public class RTPScreenSharingSession {
 	
 	/** User sharing his Desktop */
-	private  Users sharingUser = null;
+	private Users sharingUser = null;
 	
 	/** Ip Address of sharing user */
 	private  String sharingIpAddress = "127.0.0.1";
@@ -29,7 +29,7 @@ public class RTPScreenSharingSession {
 	private  int streamHeight = 768;
 	
 	/** ConferenceRoom */
-	private  Rooms room = null;
+	private Rooms room = null;
 	
 	/** JpegQuality */
 	private  float jpegQuality = 1f;
