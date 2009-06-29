@@ -45,6 +45,15 @@ public class Main {
 	/** Connected */
 	private static boolean connection = false;
 	
+	/** Session ID OM*/
+	private static String SID = null;
+	
+	/** Room id OM */
+	private static String ROOM = null;
+	
+	/** Servlet URL for Function calls */
+	private static String servletUrl = null;
+	
 	// Visual Components
 	private JFrame jFrame = null;  //  @jve:decl-index=0:visual-constraint="32,9"
 	private JPanel jContentPane = null;
@@ -281,10 +290,20 @@ public class Main {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
+			
+			
+			// Start Streaming
 			if(streamer !=null){
 				streamer.start(frameRate, videoWidth, videoHeight, quality);
 				connected.setText("Streaming");
 				connected.setForeground(Color.GREEN);
+			}
+			
+			// Notify viewers
+			try{
+				ServletFunctions.sendStartSignal(servletUrl, quality, videoHeight, videoWidth, ROOM);
+			}catch(Exception ex){
+				System.out.println("Error on ServletCall : " + ex.getMessage());
 			}
 		}
 		
@@ -299,6 +318,13 @@ public class Main {
 				streamer.stop();
 				connected.setText("Not Streaming");
 				connected.setForeground(Color.RED);
+			}
+			
+			// Notify viewers
+			try{
+				ServletFunctions.sendStopSignal(servletUrl, ROOM);
+			}catch(Exception ex){
+				System.out.println("Error on ServletCall : " + ex.getMessage());
 			}
 		}
 		
@@ -315,16 +341,18 @@ public class Main {
 		destinationAddress = args[0];
 		destinationPort = args[1];
 		
-		String SID = args[2];
-		String ROOM = args[3];
-		
+		SID = args[2];
+		ROOM = args[3];
+		servletUrl = args[4];
 		
 		System.out.println("Received input values : ");
 		System.out.println("destinationaddress : " + destinationAddress);
 		System.out.println("destinationpoprt : " + destinationPort);
 		System.out.println("SID : " + SID);
 		System.out.println("ROOM : " + ROOM);
+		System.out.println("Servlet URL : " + servletUrl);
 		
+		// Streaming Object
 		streamer = new Streamer(destinationAddress, Integer.parseInt(destinationPort), Integer.parseInt(sourcePort));
 		
 		SwingUtilities.invokeLater(new Runnable() {
@@ -360,6 +388,4 @@ public class Main {
 		this.sourcePort = sourcePort;
 	}
 	
-	
-
 }
