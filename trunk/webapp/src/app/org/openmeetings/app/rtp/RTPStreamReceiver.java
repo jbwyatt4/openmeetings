@@ -11,6 +11,8 @@ import javax.media.rtp.event.ReceiveStreamEvent;
  * 
  * Receives the Stream and Adds a new RTPManager 
  * 
+ * acts as the Proxy to Re-Stream the RTP Stream
+ * 
  * it needs to be possible to have a method to addTarget and removeTarget from the RTPManager
  *
  */

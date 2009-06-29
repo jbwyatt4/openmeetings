@@ -198,6 +198,9 @@ public class ScreenRequestHandler extends VelocityViewServlet {
 							ctx.put("PORT", free_rtp_port);
 							template = "screencast_rtp.vm";
 							log.debug("Creating JNLP Template for RTP solution");
+							
+							//We need to start a new Thread of the RTPStreamReceiver at this Moment
+							//that is waiting for the RTP Stream to be received
 						}
 						else
 							log.debug("Creating JNLP Template for default solution");
