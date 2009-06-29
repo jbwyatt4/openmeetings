@@ -16,5 +16,6 @@
     <include href="changeDevice.lzx" />
     <include href="syncWin.lzx" />
     <include href="meetingTimer.lzx" />
+    <include href="incomingScreenSharing.lzx" />
     
 </library>
