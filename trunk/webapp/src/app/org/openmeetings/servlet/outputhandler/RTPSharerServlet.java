@@ -95,17 +95,16 @@ public class RTPSharerServlet extends VelocityViewServlet{
 			    ctx.put("DOMAIN", domain);
 			    ctx.put("PUBLIC_SID", publicSID);
 			    ctx.put("RECORDER", record);
-		       
 		        
 		        String requestedFile = roomName+".jnlp";
 				httpServletResponse.setContentType("application/x-java-jnlp-file");
 				httpServletResponse.setHeader("Content-Disposition","Inline; filename=\"" + requestedFile + "\"");
 		        
-		        
 				String template = "rtp_player_applet.vm";
 				
 				// Retrieve Data from RTPmanager
 				RTPScreenSharingSession rsss = RTPStreamingHandler.getSessionForRoom(roomName, publicSID);
+				
 				
 				// TODO : send RTP Stream not directly from sharer, but from RTPPRoxy within
 				// RED5 !!!!

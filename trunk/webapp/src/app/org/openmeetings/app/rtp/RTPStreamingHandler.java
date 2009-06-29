@@ -11,8 +11,12 @@ import org.openmeetings.servlet.outputhandler.ScreenRequestHandler;
 import org.red5.logging.Red5LoggerFactory;
 import org.slf4j.Logger;
 
+/**
+ * 
+ * @author o.becherer
+ *
+ */
 public class RTPStreamingHandler {
-	
 	
 		private static final Logger log = Red5LoggerFactory.getLogger(ScreenRequestHandler.class, "openmeetings");
 	
@@ -36,7 +40,9 @@ public class RTPStreamingHandler {
 			
 			if(rtpSessions.size() < 1)
 				return currentPort;
-			
+
+			// TODO also use maximum RTP Port to give admins a chance to administrate a range 
+			// of ports that should be open ;-)
 			
 			boolean portBlocked = true;
 			
@@ -61,9 +67,11 @@ public class RTPStreamingHandler {
 		}
 		//---------------------------------------------------------------------------------------------
 		
+		
 		/**
-		 * retrieving Session data for Room 
+		 * Retrieving Session data for Room 
 		 */
+		//---------------------------------------------------------------------------------------------
 		public static RTPScreenSharingSession getSessionForRoom(String room, String sid) throws Exception{
 			log.debug("getSessionForRoom");
 			
@@ -73,7 +81,6 @@ public class RTPStreamingHandler {
 			Long users_id = Sessionmanagement.getInstance().checkSession(sid);
 			Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
 
-		
 			Rooms myRoom= Roommanagement.getInstance().getRoomById(user_level, Long.parseLong(room));
 		
 			if(myRoom == null)
@@ -84,6 +91,8 @@ public class RTPStreamingHandler {
 		
 			return rtpSessions.get(myRoom);
 		}
+		//---------------------------------------------------------------------------------------------
+		
 		
 		
 }

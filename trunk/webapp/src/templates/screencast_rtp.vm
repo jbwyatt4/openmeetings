@@ -25,5 +25,6 @@
     	<argument>$PORT</argument>
     	<argument>$SID</argument>
     	<argument>$ROOM</argument>
+    	<argument>http://$rtmphostlocal:$red5httpport/$webAppRootKey/RTPMethodServlet</argument>
     </application-desc> 
 </jnlp> 
