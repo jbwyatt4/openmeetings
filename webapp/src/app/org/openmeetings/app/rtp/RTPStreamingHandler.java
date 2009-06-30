@@ -87,8 +87,7 @@ public class RTPStreamingHandler {
 		
 			if(myRoom == null)
 				throw new Exception("no room available for ID " + room);
-			
-			
+						
 			Iterator<Rooms> miter = rtpSessions.keySet().iterator();
 			
 			RTPScreenSharingSession session = null;
@@ -107,7 +106,6 @@ public class RTPStreamingHandler {
 				else
 					log.debug("not equal ");
 			}
-			
 			
 			if(session == null)
 				throw new Exception("no RTPSession for Room " + room);

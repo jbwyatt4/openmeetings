@@ -129,7 +129,7 @@ public class Roommanagement {
 	}	
 	
 	/**
-	 * get a room object if admin level
+	 * get a room object if user level
 	 * @param user_level
 	 * @param rooms_id
 	 * @return
@@ -139,6 +139,8 @@ public class Roommanagement {
 			if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)){
 				return this.getRoomById(rooms_id);
 			}
+			else
+				log.error("getRoombyId : Userlevel" +  user_level + " not allowed");
 		} catch (Exception ex2) {
 			log.error("[getRoomById] ", ex2);
 		}

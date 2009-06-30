@@ -26,7 +26,7 @@ import org.slf4j.Logger;
  */
 public class RTPSharerServlet extends VelocityViewServlet{
 	
-	private static final Logger log = Red5LoggerFactory.getLogger(ScreenRequestHandler.class, "openmeetings");
+	private static final Logger log = Red5LoggerFactory.getLogger(RTPSharerServlet.class, "openmeetings");
 	
 	@Override
 	public Template handleRequest(HttpServletRequest httpServletRequest,
@@ -39,6 +39,7 @@ public class RTPSharerServlet extends VelocityViewServlet{
 			if (sid == null) {
 				sid = "default";
 			}
+			
 			log.debug("sid: " + sid);
 
 			Long users_id = Sessionmanagement.getInstance().checkSession(sid);
@@ -52,9 +53,12 @@ public class RTPSharerServlet extends VelocityViewServlet{
 					return null;
 				}
 				
-				String room = httpServletRequest.getParameter("room");
-				if(room == null) room = "default";
-
+				String room = httpServletRequest.getParameter("room_id");
+				
+				if(room == null || room.length() < 1){
+					log.error("room_id is emtpy!");
+					return null;
+				}
 				
 		        //Generate Unique Name to prevent browser from caching file
 				Date t = new Date();
@@ -63,11 +67,10 @@ public class RTPSharerServlet extends VelocityViewServlet{
 				httpServletResponse.setContentType("text/html");
 				httpServletResponse.setHeader("Content-Disposition","Inline; filename=\"" + requestedFile + "\"");
 		        
-		        
 				String template = "rtp_player_applet.vm";
 				
 				// Retrieve Data from RTPmanager
-				RTPScreenSharingSession rsss = RTPStreamingHandler.getSessionForRoom(room, publicSID);
+				RTPScreenSharingSession rsss = RTPStreamingHandler.getSessionForRoom(room, sid);
 				
 				// TODO : send RTP Stream not directly from sharer, but from RTP-PRoxy within
 				// RED5 !!!!
