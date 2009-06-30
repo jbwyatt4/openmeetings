@@ -145,12 +145,22 @@
           height="${ parent.parent.height-33-parent._propertyPanel.height }" 
     	  y="0" name="_drawareaMask" clip="true" bgcolor="white" >
         <remoteWhiteboard name="_drawarea" isRemoteOID="true"
-        			  width="2400" height="1200" 
-                      x="$once{ (parent.width-this.width)/2 }"
-                      y="$once{ (parent.height-this.height)/2 }">
+        			  width="$once{ canvas.defaultWhiteboardWidth }" 
+        			  height="$once{ canvas.defaultWhiteboardHeight }">
             <attribute name="initH"/>
             <attribute name="initW"/>
             <handler name="oninit">
+            	
+            	//if ($debug) Debug.write("canvas.defaultWhiteboardWidth ",canvas.defaultWhiteboardWidth);
+            	//if ($debug) Debug.write("canvas.defaultWhiteboardHeight ",canvas.defaultWhiteboardHeight);
+            	
+            	this.setAttribute("x",(parent.width-this.width)/2);
+            	this.setAttribute("y",(parent.height-this.height)/2);
+            	 
+            	//Somehow this Constraints do not work in OpenLaszlo 4.3.0
+                // x="$once{ ( parent.width-this.width)/2 }"
+                // y="$once{ (parent.height-this.height)/2 }"
+                     
             	canvas._drawarea = this; 
             </handler>
             
