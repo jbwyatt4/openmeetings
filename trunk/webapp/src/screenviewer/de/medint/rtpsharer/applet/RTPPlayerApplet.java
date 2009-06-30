@@ -1,5 +1,5 @@
 
-package de.medint.rtpsharer.test.rtpapplet;
+package de.medint.rtpsharer.applet;
 
 import java.applet.Applet;
 import javax.media.rtp.*;
@@ -7,7 +7,6 @@ import javax.media.rtp.rtcp.*;
 import javax.media.rtp.event.*;
 import com.sun.media.rtp.RTPSessionMgr;
 import java.awt.*;
-import java.util.Vector;
 import java.net.*;
 import java.awt.event.*;
 import java.lang.String;
@@ -16,39 +15,47 @@ import javax.media.protocol.*;
 import java.io.IOException;
 
 
-
-
 public class RTPPlayerApplet  extends Applet implements ControllerListener, ReceiveStreamListener, ActionListener{
-  
+    
+	/** Destination Host */
     InetAddress destaddr;
+    
+    /** Address */
     String address;
+    
+    /** Connection Port */
     String portstr;
+    
+    /** Media Type */
     String media;
+    
+    /** Player Window*/
     Player videoplayer = null;
+    
+    /** SessionMgr*/
     SessionManager videomgr = null;
-    SessionManager audiomgr = null;
+    
     Component visualComponent = null;
+    
     Component controlComponent = null;
+    
     Panel panel = null;
-    Button audiobutton = null;
+    
     Button videobutton = null;
+    
     GridBagLayout gridbag = null;
+    
     GridBagConstraints c = null;
-        int width = 320;
+    
+    int width = 320;
     int height =0;
-    Vector playerlist = new Vector();
-   
+    
     
     public void init(){
-    	
         setLayout( new BorderLayout() );
-        
         Panel buttonPanel = new Panel();
-        
         buttonPanel.setLayout( new FlowLayout() );
-        
         add("North", buttonPanel);
-        
         media = getParameter("video");
         
         if (media.equals("On")){
@@ -57,35 +64,32 @@ public class RTPPlayerApplet  extends Applet implements ControllerListener, Rece
             StartSessionManager(address,
                                 StrToInt(portstr),
                                 "video");
-            
             if (videomgr == null){
                 System.err.println("null video manager ");
                 return;
             }
             
         }
-        
-    }
+       
+    }// end of constructor
 
-    /**
-     * Start
-     */
     public void start(){
-         if (videoplayer != null){
+        // The applet only controls the first video player by adding
+        // its visual and control component to the applet canvas. Thus
+        // only this player needs to be controlled when this applet is
+        // swiched in browser pages etc.
+    	
+        if (videoplayer != null){
             videoplayer.start();
         }
         
-        
     }
-   
-    /**
-     * Stop
-     */
+    // applet has been stopped, stop and deallocate all the RTP players.
     public void stop(){
         if (videoplayer != null){
             videoplayer.close();
         }
-      
+       
     }
 
     // applet has been destroyed by the browser. Close the Session
@@ -100,7 +104,7 @@ public class RTPPlayerApplet  extends Applet implements ControllerListener, Rece
             videomgr = null;
         }
         
-       
+        
         super.destroy();
     }
             
@@ -108,7 +112,6 @@ public class RTPPlayerApplet  extends Applet implements ControllerListener, Rece
     public void actionPerformed(ActionEvent event){
         Button button = (Button)event.getSource();
        
-            
     }
     
     public String getAddress(){
@@ -132,8 +135,11 @@ public class RTPPlayerApplet  extends Applet implements ControllerListener, Rece
     }
 
     public synchronized void controllerUpdate(ControllerEvent event) {
+    	System.out.println("ControllerUpdate");
         Player player = null;
+        
         Controller controller = (Controller)event.getSource();
+        
         if (controller instanceof Player)
             player  =(Player)event.getSource();
         
@@ -142,6 +148,7 @@ public class RTPPlayerApplet  extends Applet implements ControllerListener, Rece
         
         
         if (event instanceof RealizeCompleteEvent) {
+        	System.out.println("RealizeCompleteEvent");
             // add the video player's visual component to the applet
             if (( visualComponent =
                   player.getVisualComponent())!= null){
@@ -175,6 +182,7 @@ public class RTPPlayerApplet  extends Applet implements ControllerListener, Rece
         }
 
         if (event instanceof SizeChangeEvent) {
+        	System.out.println("SizeChangeEvent");
             if (panel != null){
                 SizeChangeEvent sce = (SizeChangeEvent) event;
                 int nooWidth = sce.getWidth();
@@ -204,21 +212,46 @@ public class RTPPlayerApplet  extends Applet implements ControllerListener, Rece
     }
 
     public void update( ReceiveStreamEvent event){
+    	System.out.println("Update");
         SessionManager source =(SessionManager)event.getSource();
-        
+        Player newplayer = null;
         // create a new player if a new recvstream is detected
         if (event instanceof NewReceiveStreamEvent){
             try{
+            	
                 ReceiveStream stream = ((NewReceiveStreamEvent)event).getReceiveStream();
                 DataSource dsource = stream.getDataSource();
-                videoplayer = Manager.createPlayer(dsource);
+                newplayer = Manager.createPlayer(dsource);
+                
             }catch (Exception e){
           System.err.println("RTPPlayerApplet Exception " + e.getMessage());
           e.printStackTrace();
             }
-            
-           
+            if (newplayer == null){
+                return;
+            }
+            // if this is the first video player, we need to listen to
+            // its events. Add me as a ControllerListener before
+            // starting the player
+            if (source == videomgr){
+                if (videoplayer == null){
+                    videoplayer = newplayer;
+                    newplayer.addControllerListener(this);
+                    newplayer.start();
+                }               
+                else{
+                	
+                	videoplayer.stop();
+                	
+                	 StartSessionManager(address,StrToInt(portstr),"video");
+                	videoplayer = newplayer;
+                    videoplayer.addControllerListener(this);
+                    videoplayer.start();
+                    
+                }
+            }
         }
+
         
         if (event instanceof RemotePayloadChangeEvent){
             // we received a payload change event. If a player was not
@@ -240,7 +273,7 @@ public class RTPPlayerApplet  extends Applet implements ControllerListener, Rece
         SessionManager mymgr = new RTPSessionMgr();
         if (media.equals("video"))
             videomgr = mymgr;
-      
+       
         if (mymgr == null)
             return null;
         mymgr.addReceiveStreamListener(this);
@@ -320,6 +353,7 @@ public class RTPPlayerApplet  extends Applet implements ControllerListener, Rece
            e.printStackTrace();
            return null;
         }
+        
         
         return mymgr;
     }       

@@ -305,7 +305,7 @@ public class Main {
 			try{
 				InetAddress address = InetAddress.getLocalHost();
 				
-				ServletFunctions.sendStartSignal(servletUrl, quality, videoHeight, videoWidth, ROOM, SID, address.getHostName());
+				ServletFunctions.sendStartSignal(servletUrl, quality, videoHeight, videoWidth, ROOM, SID, address.getHostAddress());
 			}catch(Exception ex){
 				System.out.println("Error on ServletCall : " + ex.getMessage());
 			}
