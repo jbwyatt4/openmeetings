@@ -168,12 +168,10 @@ public class ScreenRequestHandler extends VelocityViewServlet {
 			    ctx.put("DOMAIN", domain);
 			    ctx.put("PUBLIC_SID", publicSID);
 			    ctx.put("RECORDER", record);
-		       
 		        
 		        String requestedFile = roomName+".jnlp";
 				httpServletResponse.setContentType("application/x-java-jnlp-file");
 				httpServletResponse.setHeader("Content-Disposition","Inline; filename=\"" + requestedFile + "\"");
-		        
 		        
 				// Check , which screenviewer is to be used
 				org.openmeetings.app.hibernate.beans.basic.Configuration conf = Configurationmanagement.getInstance().getConfKey(user_level, "screen_viewer");
@@ -198,6 +196,10 @@ public class ScreenRequestHandler extends VelocityViewServlet {
 							ctx.put("PORT", free_rtp_port);
 							template = "screencast_rtp.vm";
 							log.debug("Creating JNLP Template for RTP solution");
+							
+							// Storing Session data
+							RTPStreamingHandler.storeSessionForRoom(room, users_id);
+							log.debug("Stored RTPSession Data for Room " + room);
 							
 							//We need to start a new Thread of the RTPStreamReceiver at this Moment
 							//that is waiting for the RTP Stream to be received

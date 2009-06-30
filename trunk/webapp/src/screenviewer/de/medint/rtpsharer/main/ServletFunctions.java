@@ -22,11 +22,11 @@ public class ServletFunctions {
 	 * @param width
 	 */
 	//---------------------------------------------------------------------------------------------------------
-	public static void sendStartSignal(String servletUrl, float jpegQuality, int height, int width, String room) throws Exception{
+	public static void sendStartSignal(String servletUrl, float jpegQuality, int height, int width, String room, String SID, String sharerIP) throws Exception{
 		
 		
 		//Building ServletUrl
-		String url = servletUrl + "?method=streamer_start&room=" + room + "&height=" + height + "&width=" + width + "&quality=" + jpegQuality;
+		String url = servletUrl + "?method=streamer_start&room=" + room + "&height=" + height + "&width=" + width + "&quality=" + jpegQuality + "&sid=" + SID + "&sharerIP=" + sharerIP;
 		
 		URLConnection c = getConnection(url);
 		

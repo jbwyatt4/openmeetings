@@ -36,7 +36,7 @@ public class RTPMethodServlet extends HttpServlet{
 			
 		
 			// define Method
-			String method = request.getParameter("service");
+			String method = request.getParameter("method");
 			
 			
 			// Streming Client says GO!
@@ -88,20 +88,33 @@ public class RTPMethodServlet extends HttpServlet{
 		
 		try{
 			
+			String width, height, jpegquality, sid = null, publicSID = null;
+			
 			String room = request.getParameter("room");
 			
 			if(room == null || room.length() < 1)
 				throw new ServletException("RTPMethodServlet.startStreaming : no parameter room!");
 			
+			sid = request.getParameter("sid");
+			
+			if(sid == null || sid.length() < 1)
+				throw new ServletException("RTPMethodServlet.startStreaming : no parameter SID!");
+			
+			
+			String sharerIP = request.getParameter("sharerIP");
+			
+			if(sharerIP == null || sharerIP.length() < 1)
+				throw new ServletException("RTPMethodServlet.startStreaming : no parameter sharerIP!");
+			
 			// TODO get Userdefinitions from ServletCall *width, height* => what for? they are already in the RTPScreenSharingSession
 			// -> Sharing Client has the possibility to alter Width/height/quality of the stream, so it should be notified at every Stream Start, i think
 			
-			String width, height, jpegquality, sid = null, publicSID = null;
-			
 			// TODO Change RTP - Session with these detailvalues
 			RTPScreenSharingSession session;
-		
+			
 			session = RTPStreamingHandler.getSessionForRoom(room, sid);
+			
+			session.setSharingIpAddress(sharerIP);
 			
 			//width, height should be also in the RTPScreenSharingSession Object 
 			
@@ -129,6 +142,7 @@ public class RTPMethodServlet extends HttpServlet{
 				}
 			}
 			
+			log.debug("startStreaming values : IPAddress Sharer : " + sharerIP + ", width=" + width + ", height=" + height + ",room=" + room);
 			
 			//we have to include the publicSID to get the RoomClient Object
 			//also the HOST, PORT must be set correctly in the RTPScreenSharingSession-Object

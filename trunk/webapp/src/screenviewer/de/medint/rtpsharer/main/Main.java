@@ -8,6 +8,8 @@ import java.awt.BorderLayout;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import java.awt.Point;
+import java.net.InetAddress;
+
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JMenuItem;
@@ -301,7 +303,9 @@ public class Main {
 			
 			// Notify viewers
 			try{
-				ServletFunctions.sendStartSignal(servletUrl, quality, videoHeight, videoWidth, ROOM);
+				InetAddress address = InetAddress.getLocalHost();
+				
+				ServletFunctions.sendStartSignal(servletUrl, quality, videoHeight, videoWidth, ROOM, SID, address.getHostName());
 			}catch(Exception ex){
 				System.out.println("Error on ServletCall : " + ex.getMessage());
 			}

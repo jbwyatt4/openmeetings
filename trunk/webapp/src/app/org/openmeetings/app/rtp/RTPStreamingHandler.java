@@ -7,6 +7,8 @@ import org.openmeetings.app.data.basic.Sessionmanagement;
 import org.openmeetings.app.data.conference.Roommanagement;
 import org.openmeetings.app.data.user.Usermanagement;
 import org.openmeetings.app.hibernate.beans.rooms.Rooms;
+import org.openmeetings.app.hibernate.beans.user.Users;
+import org.openmeetings.app.remote.red5.ScopeApplicationAdapter;
 import org.openmeetings.servlet.outputhandler.ScreenRequestHandler;
 import org.red5.logging.Red5LoggerFactory;
 import org.slf4j.Logger;
@@ -86,10 +88,69 @@ public class RTPStreamingHandler {
 			if(myRoom == null)
 				throw new Exception("no room available for ID " + room);
 			
-			if(!rtpSessions.containsKey(myRoom))
-				throw new Exception("no RTPSession available for Room " + room);
+			
+			Iterator<Rooms> miter = rtpSessions.keySet().iterator();
+			
+			RTPScreenSharingSession session = null;
+			
+			while(miter.hasNext()){
+				Rooms rooms = miter.next();
+				
+				System.out.println("Rooms id in Cache : " + rooms.getRooms_id());
+				
+				if(rooms.getRooms_id().intValue() == myRoom.getRooms_id().intValue()){
+					session = rtpSessions.get(rooms);
+					
+					if(session == null)
+						log.error("No Session for ID " + myRoom.getRooms_id());
+				}
+				else
+					log.debug("not equal ");
+			}
+			
+			
+			if(session == null)
+				throw new Exception("no RTPSession for Room " + room);
+			
+			return session;
+		}
+		//---------------------------------------------------------------------------------------------
 		
-			return rtpSessions.get(myRoom);
+		
+		/**
+		 * Store Session for Room
+		 */
+		//---------------------------------------------------------------------------------------------
+		public static RTPScreenSharingSession storeSessionForRoom(String room, Long sharing_user_id) throws Exception{
+			log.debug("storeSessionForRoom : " + room);
+			
+			RTPScreenSharingSession session = new RTPScreenSharingSession();
+			
+			if(room == null || room.length() <1)
+				throw new Exception("InputVal room not valid");
+			
+			Long user_level = Usermanagement.getInstance().getUserLevelByID(sharing_user_id);
+			Rooms myRoom= Roommanagement.getInstance().getRoomById(user_level, Long.parseLong(room));
+			
+			if(myRoom == null)
+				throw new Exception("no Room for ID " + room);
+			
+			// Define Room
+			session.setRoom(myRoom);
+			
+			Users user = Usermanagement.getInstance().getUserById(sharing_user_id);
+			
+			if(user == null)
+				throw new Exception("No User for id " + sharing_user_id);
+			
+			session.setSharingUser(user);
+			
+			// RTP Sharer IP + Port + Streamdata are defined on ServletCall (-> streamer start)
+			
+			rtpSessions.put(myRoom, session);
+			
+			return session;
+			
 		}
 		//---------------------------------------------------------------------------------------------
 		
