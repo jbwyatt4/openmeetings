@@ -44,6 +44,26 @@
     
 </class>
 
+<class name="multiWhiteBoardPanel" extends="conferenceBox" labelid="615">
+    
+    <multiWhiteBoard name="_whiteboard" y="34" x="1">
+        <handler name="onsharedMessage" args="obj">
+            //Debug.write("send: ",obj);
+            canvas.objWhiteboard = obj;
+            hib.sendVars.doCall();
+        </handler>
+        <handler name="isloadingImage" args="val" >
+            if ($debug) Debug.write("isloadingImage: ",val);
+        </handler>
+        <handler name="isloadedImage" args="val" >
+            if ($debug) Debug.write("isloadedImage: ",val);
+        </handler>
+    </multiWhiteBoard>
+    
+</class>
+
+
+
 <class name="modPanel" extends="guiPresenter" x="2" y="284"
     width="266" height="46" closable="false" labelid="316"
     resizeable="false">
@@ -98,7 +118,7 @@
 		    	if ($debug) Debug.write("getAppointmentData: ",value);
 		    	
 		    	if(value!=null){
-		    		Debug.write("Appointment Name : " + value.appointmentName);
+		    		if ($debug) Debug.write("Appointment Name : " + value.appointmentName);
 		    		
 		    		parent._appstart.setAttribute('text',parseDateToString(value.appointmentStarttime));
 		    		
@@ -168,6 +188,8 @@
                 this.meetingTimer = new lz.meetingTimer(canvas,{refObj:this,roomobj:this.roomobj});
             }
         }
+        
+        this._chatPanelStrict.toggleopen();
         
     </handler>
     
@@ -265,7 +287,7 @@
         <chatTab name="content" y="40" height="${ parent.height-40 }" width="${ parent.width }" />
     </conferenceBox>
        
-    <modernWhiteBoardPanel name="_whiteboard" labelid="615"
+    <multiWhiteBoardPanel name="_whiteboard" labelid="615"
         y="2" x="${ parent._filesPanel.width+10 }"
         width="${ canvas.width - 290 }"
         height="${ canvas.height - (parent._chatPanelStrict.height+36) }" />
