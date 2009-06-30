@@ -8,8 +8,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.openmeetings.app.data.basic.Sessionmanagement;
-import org.openmeetings.app.hibernate.beans.basic.Sessiondata;
 import org.openmeetings.app.hibernate.beans.recording.RoomClient;
 import org.openmeetings.app.remote.red5.ClientListManager;
 import org.openmeetings.app.remote.red5.ScopeApplicationAdapter;
@@ -96,14 +94,41 @@ public class RTPMethodServlet extends HttpServlet{
 				throw new ServletException("RTPMethodServlet.startStreaming : no parameter room!");
 			
 			// TODO get Userdefinitions from ServletCall *width, height* => what for? they are already in the RTPScreenSharingSession
+			// -> Sharing Client has the possibility to alter Width/height/quality of the stream, so it should be notified at every Stream Start, i think
+			
 			String width, height, jpegquality, sid = null, publicSID = null;
 			
 			// TODO Change RTP - Session with these detailvalues
 			RTPScreenSharingSession session;
 		
-			//width, height should be also in the RTPScreenSharingSession Object 
-		
 			session = RTPStreamingHandler.getSessionForRoom(room, sid);
+			
+			//width, height should be also in the RTPScreenSharingSession Object 
+			
+			width=request.getParameter("width");
+			
+			if(width!= null && width.length() > 0){
+				try{
+					int width_i = Integer.parseInt(width);
+					session.setStreamWidth(width_i);
+				}
+				catch(NumberFormatException nfe){
+					log.error("Invalid parameter width as Servletparameter - ignored!");
+				}
+			}
+			
+			height=request.getParameter("height");
+			
+			if(height!= null && height.length() > 0){
+				try{
+					int height_i = Integer.parseInt(height);
+					session.setStreamHeight(height_i);
+				}
+				catch(NumberFormatException nfe){
+					log.error("Invalid parameter height as Servletparameter - ignored!");
+				}
+			}
+			
 			
 			//we have to include the publicSID to get the RoomClient Object
 			//also the HOST, PORT must be set correctly in the RTPScreenSharingSession-Object
