@@ -60,7 +60,7 @@ public class RTPSharerServlet extends VelocityViewServlet{
 				Date t = new Date();
 				
 		        String requestedFile = room+"_"+t.getTime()+".jnlp";
-				httpServletResponse.setContentType("application/x-java-jnlp-file");
+				httpServletResponse.setContentType("text/html");
 				httpServletResponse.setHeader("Content-Disposition","Inline; filename=\"" + requestedFile + "\"");
 		        
 		        
@@ -83,7 +83,7 @@ public class RTPSharerServlet extends VelocityViewServlet{
 			return null;
 			
 		} catch (Exception er) {
-			log.error("[ScreenRequestHandler]",er);
+			log.error("[RTPSharerServlet]",er);
 			System.out.println("Error downloading: " + er);
 		}
 		return null;
