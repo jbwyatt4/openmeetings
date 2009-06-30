@@ -74,7 +74,11 @@
 		this.setAttribute('microphoneRateNormal',Number(canvas.myConfigSet.getPointer().xpathQuery('config/microphoneRateNormal/text()')));  
 		this.setAttribute('microphoneRateBest',Number(canvas.myConfigSet.getPointer().xpathQuery('config/microphoneRateBest/text()')));  
 		
+		this.setAttribute('defaultWhiteboardWidth',Number(canvas.myConfigSet.getPointer().xpathQuery('config/defaultWhiteboardWidth/text()')));  
+        this.setAttribute('defaultWhiteboardHeight',Number(canvas.myConfigSet.getPointer().xpathQuery('config/defaultWhiteboardHeight/text()')));  
 		
+        
+        
 		mainBaseText.setAttribute('text',canvas.currentappname);
 		mainBaseText.setShadow();
 		mainBaseTextLabel.setAttribute('text',canvas.currentappnameurl);  

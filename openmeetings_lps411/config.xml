@@ -181,6 +181,13 @@ of the red5-servlet
 <microphoneRateNormal>22</microphoneRateNormal>
 <!-- Microphone Settings Quality-Modus *best* -->    
 <microphoneRateBest>44</microphoneRateBest>  
+
+<!--
+    The Size of the Whiteboard
+    The Whiteboard has scrollbars so you may increase the size without problems
+ -->
+<defaultWhiteboardWidth>2400</defaultWhiteboardWidth>  
+<defaultWhiteboardHeight>1200</defaultWhiteboardHeight>  
     
         
 </config>

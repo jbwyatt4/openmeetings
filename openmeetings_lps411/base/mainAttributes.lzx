@@ -65,6 +65,9 @@ these properties will be overwritten by config.xml -->
 
 <attribute name="showRecording" value="visible" type="string" />
 
+<attribute name="defaultWhiteboardWidth" value="2400" type="number" />
+<attribute name="defaultWhiteboardHeight" value="1200" type="number" />
+
 <!-- END OF config.xml attributes
 ##########################################################
  -->
@@ -269,10 +272,6 @@ and some more references to temp-objects
 <attribute name="moodleWwwRoot" value="" type="string" />
 <attribute name="moodleUserId" value="0" type="number" />
 <attribute name="moodlePicture" value="0" type="number" />
-
-
-
-
 
 
 
