@@ -98,7 +98,4 @@ public class RTPScreenSharingSession {
 		this.jpegQuality = jpegQuality;
 	}
 	
-	
-	
-	
 }
