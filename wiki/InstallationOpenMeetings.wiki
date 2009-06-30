@@ -83,6 +83,13 @@ After Running the Installer all basics are installed. Now login and go to the Me
 
   * If you want to integrate 3th Party Software for publishing Live-Video you may have a look at [http://www.xuggle.com Xuggler]. There is no out of the Box solution but there are already people successfully publish their usual [http://www.red5wiki.com/wiki/SteamStream RTP-LiveStream] by using Xuggler
 
+= Ports, NAT Settings, Customize =
+
+  * Default Ports: 1935 (RTMP), 8088 (RTMP-Over HTTP), 5080 (HTTP) [,8443 (RTMP over SSL), for alternate Port settings have a look at red5/conf/red5.properties. Don't forget that you have also some port settings in the Client, see the red5/webapps/openmeetings/config.xml
+  * Custom Colors, Default Language, see red5/webapps/openmeetings/config.xml
+  * You may be able to run different red5 instances if you bind it to specific ports. 
+  * Single Sing On, Integration => Use the Remote Gateway with the SoapMethods
+
 = Tips and Tricks =
 
   * To run openmeetings behind a Apache Web-Server you can try with apache mod_jk and mod_proxy
