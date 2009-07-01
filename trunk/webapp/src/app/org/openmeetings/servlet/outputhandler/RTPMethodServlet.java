@@ -61,12 +61,13 @@ public class RTPMethodServlet extends HttpServlet{
 				throw new ServletException("RTPMethodServlet.startStreaming : no parameter room!");
 			
 			// TODO get Userdefinitions from ServletCall
-			String sid = null;
+			String sid = request.getParameter("sid");
 			
-			// TODO Change RTP - Session with these detailvalues
-			RTPScreenSharingSession session;
+			if(sid == null || sid.length() < 1)
+				throw new ServletException("RTPMethodServlet.startStreaming : no parameter sid!");
 		
-			session = RTPStreamingHandler.getSessionForRoom(room, sid);
+			
+			RTPScreenSharingSession session = RTPStreamingHandler.getSessionForRoom(room, sid);
 			
 			/** Notify Clients, that user started streaming -> showing users button for Appletstart */
 			LinkedHashMap<String,Object> hs = new LinkedHashMap<String,Object>();
@@ -74,6 +75,10 @@ public class RTPMethodServlet extends HttpServlet{
 			hs.put("session", session);
 			
 			ScopeApplicationAdapter.getInstance().sendMessageByRoomAndDomain(Long.valueOf(room).longValue(),hs);
+			
+			// Remove Session
+			RTPStreamingHandler.removeSessionForRoom(room, sid);
+			
 			
 		} catch(Exception err){
 			log.error("[startStreaming]",err);

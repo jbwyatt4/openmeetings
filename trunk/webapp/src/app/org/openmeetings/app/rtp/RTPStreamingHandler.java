@@ -95,16 +95,11 @@ public class RTPStreamingHandler {
 			while(miter.hasNext()){
 				Rooms rooms = miter.next();
 				
-				System.out.println("Rooms id in Cache : " + rooms.getRooms_id());
-				
 				if(rooms.getRooms_id().intValue() == myRoom.getRooms_id().intValue()){
 					session = rtpSessions.get(rooms);
 					
-					if(session == null)
-						log.error("No Session for ID " + myRoom.getRooms_id());
 				}
-				else
-					log.debug("not equal ");
+				
 			}
 			
 			if(session == null)
@@ -143,7 +138,9 @@ public class RTPStreamingHandler {
 			
 			session.setSharingUser(user);
 			
-			// RTP Sharer IP + Port + Streamdata are defined on ServletCall (-> streamer start)
+			// Define RTP Port
+			int port = getNextFreeRTPPort();
+			session.setIncomingRTPPort(port);
 			
 			rtpSessions.put(myRoom, session);
 			
@@ -153,5 +150,41 @@ public class RTPStreamingHandler {
 		//---------------------------------------------------------------------------------------------
 		
 		
+		
+		/**
+		 * Remove Session
+		 */
+		//---------------------------------------------------------------------------------------------
+		public static void removeSessionForRoom(String room, String sid) throws Exception{
+			log.debug("removeSessionForRoom : " + room);
+			
+		
+			if(room == null || room.length() <1)
+				throw new Exception("InputVal room not valid");
+			
+			Long users_id = Sessionmanagement.getInstance().checkSession(sid);
+			Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
+			Rooms myRoom= Roommanagement.getInstance().getRoomById(user_level, Long.parseLong(room));
+			
+			if(myRoom == null)
+				throw new Exception("no Room for ID " + room);
+			
+			
+			
+			Iterator<Rooms> miter = rtpSessions.keySet().iterator();
+			
+			
+			while(miter.hasNext()){
+				Rooms rooms = miter.next();
+				
+				if(rooms.getRooms_id().intValue() == myRoom.getRooms_id().intValue()){
+					rtpSessions.remove(rooms);
+					break;
+				}
+				
+			}
+			
+		}
+		//---------------------------------------------------------------------------------------------
 		
 }

@@ -52,6 +52,9 @@ public class RTPPlayerApplet  extends Applet implements ControllerListener, Rece
     
     
     public void init(){
+    	
+    	System.out.println("init");
+    	
         setLayout( new BorderLayout() );
         Panel buttonPanel = new Panel();
         buttonPanel.setLayout( new FlowLayout() );
@@ -61,6 +64,10 @@ public class RTPPlayerApplet  extends Applet implements ControllerListener, Rece
         if (media.equals("On")){
             address = getParameter("videosession");
             portstr = getParameter("videoport");
+            
+            System.out.println("address : " + address);
+            System.out.println("port : " + portstr);
+            
             StartSessionManager(address,
                                 StrToInt(portstr),
                                 "video");

@@ -19,6 +19,7 @@ import org.red5.logging.Red5LoggerFactory;
 import org.openmeetings.app.data.basic.Configurationmanagement;
 import org.openmeetings.app.data.basic.Sessionmanagement;
 import org.openmeetings.app.data.user.Usermanagement;
+import org.openmeetings.app.rtp.RTPScreenSharingSession;
 import org.openmeetings.app.rtp.RTPStreamingHandler;
 import org.openmeetings.app.templates.ScreenCastTemplate;
 
@@ -190,15 +191,16 @@ public class ScreenRequestHandler extends VelocityViewServlet {
 						}
 						else if(conf_i == 2){
 							
+							
+							// Storing Session data
+							RTPScreenSharingSession session = RTPStreamingHandler.storeSessionForRoom(room, users_id);
+							
 							// For the RTP Sharer, we need some additional information
 							ctx.put("HOST", rtmphostlocal);
-							int free_rtp_port = RTPStreamingHandler.getNextFreeRTPPort();
-							ctx.put("PORT", free_rtp_port);
+							ctx.put("PORT", session.getIncomingRTPPort());
 							template = "screencast_rtp.vm";
 							log.debug("Creating JNLP Template for RTP solution");
 							
-							// Storing Session data
-							RTPStreamingHandler.storeSessionForRoom(room, users_id);
 							log.debug("Stored RTPSession Data for Room " + room);
 							
 							//We need to start a new Thread of the RTPStreamReceiver at this Moment

@@ -62,11 +62,11 @@ public class ServletFunctions {
 	 * @param width
 	 */
 	//---------------------------------------------------------------------------------------------------------
-	public static void sendStopSignal(String servletUrl, String room) throws Exception{
+	public static void sendStopSignal(String servletUrl, String room, String SID) throws Exception{
 		
 		
 		//Building ServletUrl
-		String url = servletUrl + "?method=streamer_stop&room=" + room;
+		String url = servletUrl + "?method=streamer_stop&room=" + room + "&sid=" + SID;
 		
 		URLConnection c = getConnection(url);
 		

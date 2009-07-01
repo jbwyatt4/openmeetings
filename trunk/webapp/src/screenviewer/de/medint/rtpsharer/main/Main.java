@@ -21,7 +21,7 @@ import javax.swing.JDialog;
 public class Main {
 	
 	/** Destination Address */
-	private static String destinationAddress = "10.136.103.255";
+	private static String destinationAddress = "10.136.103.255";  //  @jve:decl-index=0:
 	
 	/** Destination RTP Port */
 	private static String destinationPort = "22224";  //  @jve:decl-index=0:
@@ -33,7 +33,7 @@ public class Main {
 	private static Streamer streamer = null;
 	
 	/** FrameRate */
-	private static int frameRate = 15;
+	private static int frameRate = 20;
 	
 	/** TargetVideoheight */
 	private static int videoHeight = 768;
@@ -326,7 +326,7 @@ public class Main {
 			
 			// Notify viewers
 			try{
-				ServletFunctions.sendStopSignal(servletUrl, ROOM);
+				ServletFunctions.sendStopSignal(servletUrl, ROOM, SID);
 			}catch(Exception ex){
 				System.out.println("Error on ServletCall : " + ex.getMessage());
 			}
