@@ -1,4 +1,5 @@
 #summary People who offer or who search Jobs around OpenMeetings
+#labels Featured
 
   * Sebastian Wagner<br/><br/>I offer core modification, Plugin development, Branding, Integration into your E-learning (Moodle or others) Platforms or Integration into your CMS/Portal/Intranet. I also offer Installation services as well as hosting for !OpenMeetings.<br/>
   My experience: 4++ years in Web-Application Development, !OpenLaszlo, Red5, Tomcat, Spring, Hibernate<br/>My Languages: AS1, AS2, AS3, LZX, JAVA, PHP<br/>
