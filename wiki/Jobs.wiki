@@ -3,7 +3,7 @@
   * Sebastian Wagner, 
    I offer core modification, plugin development, Branding, Integration into your E-learning (Moodle or others) Platform or Integration into your CMS/Portal/Intranet.
   I also offer Installation services as well as hosting for !OpenMeetings.
-  My experience: 4++ years in Web-Application Development, AS1, A2, AS3, LZX, JAVA, PHP
+  My experience: 4++ years in Web-Application Development, OpenLaszlo, Red5, Tomcat, Spring, Hibernate, Languages AS1, A2, AS3, LZX, JAVA, PHP
 
   Contact:
   Sebastian Wagner,
