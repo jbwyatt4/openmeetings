@@ -4,7 +4,7 @@
 
 Current Version !OpenMeetings 0.7 RC1 to 0.8.4: InstallationOpenMeetings, changes: [OpenMeetings084 Release Notes 0.8.4], at 23.06.2009
 
-Need for a developer or Consultant? [http://code.google.com/p/openmeetings/wiki/Jobs]
+Need for a developer or Consultant? [http://code.google.com/p/openmeetings/wiki/Jobs Hire a Developer]
 
 Tips for Installation:
 
