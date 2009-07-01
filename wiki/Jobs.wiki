@@ -2,8 +2,15 @@
 
   * Sebastian Wagner, 
    I offer core modification, plugin development, Integration into your E-learning (Moodle or others) Platform or Integration into your CMS/Portal/Intranet.
-  I offer also Installation services as well as hosting for !OpenMeetings.
+  I also offer Installation services as well as hosting for !OpenMeetings.
   My experience: 4++ years in Web-Application Development, AS1, A2, AS3, LZX, JAVA, PHP
+
+  Contact:
+  Sebastian Wagner
+  Haid-und-Neu-Straße 7
+  76131 Karlsruhe
+  ++49 (0) 721 255 1990
+  seba _dot_ wagner _at_ gmail _dot_ com
 
  
 
