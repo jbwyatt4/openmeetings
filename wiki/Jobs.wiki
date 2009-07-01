@@ -1,16 +1,17 @@
 #summary People who offer or who search Jobs around OpenMeetings
 
   * Sebastian Wagner, 
-   I offer core modification, plugin development, Integration into your E-learning (Moodle or others) Platform or Integration into your CMS/Portal/Intranet.
+   I offer core modification, plugin development, Branding, Integration into your E-learning (Moodle or others) Platform or Integration into your CMS/Portal/Intranet.
   I also offer Installation services as well as hosting for !OpenMeetings.
   My experience: 4++ years in Web-Application Development, AS1, A2, AS3, LZX, JAVA, PHP
 
   Contact:
-  Sebastian Wagner
-  Haid-und-Neu-Straße 7
-  76131 Karlsruhe
-  ++49 (0) 721 255 1990
-  seba _dot_ wagner _at_ gmail _dot_ com
+  Sebastian Wagner,
+  Haid-und-Neu-Straße 7,
+  76131 Karlsruhe,
+  ++49 (0) 721 255 1990,
+  seba _dot_ wagner _at_ gmail _dot_ com,
+  http://www.webbase-design.de
 
  
 
