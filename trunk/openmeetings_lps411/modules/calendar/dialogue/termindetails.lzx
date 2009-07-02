@@ -141,7 +141,7 @@
 	    	<edittext name="_titeledit" x="120" 
 	    		  y="202" width="220">New title</edittext>
 	    		  
-	    	<labelText name="_roomtype" y="232" x="35" labelid="619" width="80"/>
+	    	<labelText name="_roomtype" y="232" x="4" labelid="619" width="80"/>
 		 	<resetCombobox name="_roomtype_edit" x="120" 
 		 			  width="220" editable="false" shownitems="2" y="232">
 				<handler name="onvalue" args="v">						
