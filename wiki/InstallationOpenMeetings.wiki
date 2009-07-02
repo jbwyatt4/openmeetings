@@ -90,6 +90,10 @@ After Running the Installer all basics are installed. Now login and go to the Me
   * You may be able to run different red5 instances if you bind it to specific ports. 
   * Single Sing On, Integration => Use the Remote Gateway with the SoapMethods
 
+= Service for Customization / Installation =
+
+ * Need for a developer or Consultant? [http://code.google.com/p/openmeetings/wiki/Jobs Hire a Developer]
+
 = Tips and Tricks =
 
   * To run openmeetings behind a Apache Web-Server you can try with apache mod_jk and mod_proxy
