@@ -1,6 +1,6 @@
 <library>
 	
-	<class name="appointmentMembers"  extends="windowpanel" 
+<class name="appointmentMembers"  extends="windowpanel" 
 	 closeable="true" width="524" x="$once{ parent.width/2-this.width/2 + 10 }" y="110" height="330" >
 	<!-- resizeable="false" -->
 	<attribute name ="terminObjRef" value="null"/>

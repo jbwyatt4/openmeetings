@@ -57,7 +57,7 @@
         
         <resetCombobox name="languages" width="170" y="84" x="120" editable="false"
                        shownitems="7">
-            <textlistitem datapath="languagesSet:/item" text="$path{ 'name/text()' }" 
+            <labeldTextListItem datapath="languagesSet:/item" text="$path{ 'name/text()' }" 
                 value="$path{ 'language_id/text()' }" />
             <handler name="oninit">
                 var t = new lz.sharedObject();

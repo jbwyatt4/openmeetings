@@ -20,7 +20,7 @@
  			<view resource="balken_weekview" x="40" stretches="width" width="200">
  				<handler name="onclick">
  						<![CDATA[
- 					parent.parent.parent.parent.parent.parent._termindetails.setAttribute('visible', true);
+ 					parent.parent.parent.parent.parent.parent._termindetails.setAttribute("visibility","visible");;
  					parent.parent.parent.parent.parent.parent._termindetails.setAttribute('x', 400);
  					parent.parent.parent.parent.parent.parent._termindetails.setAttribute('y', 50);
  					parent.parent.parent.parent.parent.parent._termindetails.defaulttermindetails();
