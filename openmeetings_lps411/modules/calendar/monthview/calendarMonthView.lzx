@@ -19,7 +19,7 @@
 					
 					parent.parent.parent.parent.parent.parent._termindetails._date._bdatum.setAttribute('text',parseDateToString(parent.fullDate));
 					parent.parent.parent.parent.parent.parent._termindetails._date.edatum.setAttribute('text',parseDateToString(parent.fullDate));  
-					parent.parent.parent.parent.parent.parent._termindetails.setAttribute('visible', true);
+					parent.parent.parent.parent.parent.parent._termindetails.setAttribute("visibility","visible");;
 					
 			</handler>	
 			<view name="_innerList" layout="axis:y;spacing:1" >

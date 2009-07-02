@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library>
 
-<class name="calendarWindow" extends="view"  clickable="true" 
+<class name="calendarWindow" extends="view" clickable="true" 
 	   bgcolor="$once{ canvas.basebgcolorizer }">	
 
 	<attribute name="fieldRef" value="null" />

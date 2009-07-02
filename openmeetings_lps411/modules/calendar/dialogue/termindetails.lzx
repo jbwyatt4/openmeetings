@@ -1,6 +1,12 @@
 <library>
 	
-	<class name="termindetails" extends="windowpanel" bgcolor="white" width="400" x="10" visible="false" closeable="false">
+	<class name="termindetails" extends="labelExplorerBox" labelid="646" 
+		   width="420" x="10" visibility="hidden" closable="false">
+		
+		<handler name="onvisible" args="v">
+			if ($debug) Debug.write("##### onvisible termindetails ",v,this);
+		</handler>
+		
 			<attribute name ="terminObjRef" value="null"/>
 			<attribute name="_kategoryatr" value="0" type="number" />
 			<attribute name="_erinnerungatr" value="null"  />
@@ -14,9 +20,9 @@
 			<attribute name="baseUrl" value="null" />
 						
 			<!--<text name="_kategory" y="10" x="35">Kategorie: </text>-->
-			<labelText name="_kategory" y="10" x="35" labelid="566" width="80"/>
-		 	<resetCombobox name="_kategoryedit" x="${parent._kategory.width + parent._kategory.x + 30}" 
-		 			  width="220" editable="false" shownitems="5" y="${parent._kategory.y}">
+			<labelText name="_kategory" y="22" x="4" labelid="566" width="80"/>
+		 	<resetCombobox name="_kategoryedit" x="120" 
+		 			  width="220" editable="false" shownitems="5" y="22">
 				<handler name="onvalue" args="v">						
 					parent._kategoryatr = Number(this.getValue());												
 					if ($debug) Debug.write("_kategoryatr: ",parent._kategoryatr);
@@ -25,11 +31,11 @@
 		 	<!--textitmes-->
 		 	</resetCombobox> 
 		 	
-		 	<labelText name="_erinnerung" y="${parent._kategory.height + parent._kategory.y + 10}" 
-		 			   x="35" labelid="565" width="120" />
+		 	<labelText name="_erinnerung" y="52" 
+		 			   x="4" labelid="565" width="120" />
 		 	 	
-		 	<resetCombobox name="_erinnerungedit" x="${parent._kategory.width + parent._kategory.x +30}" 
-		 			  width="220" editable="false" shownitems="5" y="${parent._erinnerung.y}">
+		 	<resetCombobox name="_erinnerungedit" x="120" 
+		 			  width="220" editable="false" shownitems="5" y="52">
 				<handler name="onvalue" args="v">						
 					if ($debug) Debug.write("_erinnerungatr: ",parent._erinnerungatr);
 					if(this.getValue == 0 )
@@ -53,9 +59,9 @@
 				</handler>
 		 	</resetCombobox> 
 		 		
-		 	<labelText name="_repetition" y="${parent._kategory.height + parent._kategory.y + 40}" x="35" labelid="567" width="120"/>
-		 	<resetCombobox name="_repetitionselect" x="${parent._kategory.width + parent._kategory.x +30}" 
-		 			  width="220" editable="false" shownitems="5" y="${parent._repetition.y}">
+		 	<labelText name="_repetition" y="82" x="4" labelid="567" width="120"/>
+		 	<resetCombobox name="_repetitionselect" x="120" 
+		 			  width="220" editable="false" shownitems="5" y="82">
 				<handler name="onselect">
                         var repitechoice = this.getText();
                         //canvas[colorchoice+'colors'].setAttribute("isdefault", true);
@@ -109,53 +115,48 @@
 		 	<!--textitmes-->
 		 	</resetCombobox> 
 		 	
-		 	<labelText name="_location" labelid="569" width="120" y="${parent._kategory.height + parent._kategory.y + 70}" x="35"/>
+		 	<labelText name="_location" labelid="569" width="120" y="112" x="4"/>
 	    	
-	    	<edittext name="_locationedit" x="${parent._kategory.width + parent._kategory.x + 30}" 
-	    		  y="${parent._location.y}" width="${parent._date.width}"></edittext>
+	    	<edittext name="_locationedit" x="120" 
+	    		  y="112" width="220"></edittext>
 		 		 	
-		 	<view name="_date"  bgcolor="white" y="${parent._kategory.y + parent._kategory.height + 110}" 
-		    	  width="${this.ezeit.x + this.ezeit.width + 5}" height="${this.ezeit.y + this.ezeit.height + 5}"
-		    	   x="${parent._kategoryedit.x}">	            	
+		 	<view name="_date" y="142" x="0">	            	
 		    	<!--	<text x="${parent._beginn.width + parent._beginn.x + 5}">Datum:</text>
 		    		<text x="${parent._bdatum.width + parent._bdatum.x + 5}">Uhrzeit:</text>-->
 		      <!-- 	<text name="_beginn" y="20">Beginn:</text> -->
-		        <labelText name="_beginn" labelid="570" y="20" width="50"></labelText>
-		        	<dateField name="_bdatum" y="20" x="${parent._beginn.width + parent._beginn.x + 5}" width="100" text="" setDefaultToday="true"/>
-		        	<customEdittext name="_bzeit" x="${parent._bdatum.width + parent._bdatum.x + 5}" y="20" width="50" regexpType="time">
-		        					08:00
-		        	</customEdittext>	            	   		
+		        <labelText name="_beginn" labelid="570" x="4" width="50" />
+		        	<dateField name="_bdatum" y="0" x="120" 
+		        			   width="100" text="" setDefaultToday="true"/>
+		        	<customEdittext name="_bzeit" x="224" 
+		        					y="0" width="50" regexpType="time" text="08:00" />
 		       <!--	<text y="${parent.edatum.y}">Ende:</text> -->
-		        <labelText labelid="571" y="${parent.edatum.y}" width="50"/>
-	        	<dateField name="edatum" y="${parent._bdatum.y + parent._bdatum.height + 10}" 
-	        			   x="${parent._beginn.width + parent._beginn.x + 5}" width="100" text=""  setDefaultToday="true"/> 	            	
-	        	<customEdittext name="ezeit" x="${parent._bdatum.width + parent._bdatum.x + 5}" 
-	        					y="${parent._bzeit.y + parent._bzeit.height + 10}" width="50" regexpType="time" >
-	        					17:00
-	        	</customEdittext>   	
+		        <labelText labelid="571" y="30" x="4" width="50"/>
+    	        	<dateField name="edatum" y="30" 
+    	        			   x="120" width="100" text="" setDefaultToday="true"/> 	            	
+    	        	<customEdittext name="ezeit" x="224" text="17:00"
+	        					y="30" width="50" regexpType="time" />  	
 		    </view> 
 		    
-		    <labelText name="_titel" labelid="572" y="${parent._date.height + parent._date.y + 30}" x="35" width="50"/>
-	    	<edittext name="_titeledit" x="${parent._kategory.width + parent._kategory.x + 30}" 
-	    		  y="${parent._titel.y}" width="${parent._date.width}">New title</edittext>
+		    <labelText name="_titel" labelid="572" y="202" x="4" width="50"/>
+	    	<edittext name="_titeledit" x="120" 
+	    		  y="202" width="220">New title</edittext>
 	    		  
-	    	<labelText name="_roomtype" y="${parent._titeledit.height + parent._titeledit.y +30}" x="35" labelid="619" width="80"/>
-		 	<resetCombobox name="_roomtype_edit" x="${parent._roomtype.width + parent._roomtype.x + 30}" 
-		 			  width="220" editable="false" shownitems="2" y="${parent._roomtype.y}">
+	    	<labelText name="_roomtype" y="232" x="35" labelid="619" width="80"/>
+		 	<resetCombobox name="_roomtype_edit" x="120" 
+		 			  width="220" editable="false" shownitems="2" y="232">
 				<handler name="onvalue" args="v">						
 					parent.roomtype = Number(this.getValue());												
 					if ($debug) Debug.write("roomtype: ",parent.roomtype);
 				</handler>
 				<handler name="oninit">
-				this.selectItemAt(0);
+				    this.selectItemAt(0);
 				</handler>	
-				
-		 	<!--textitmes-->
-		 	<textlistitem text="Conference" value="1"/>
-			<textlistitem text="Auditorium" value="2"/>
+    		 	<!--textitmes-->
+    		 	<labeldTextListItem labelid="647" value="1"/>
+    			<labeldTextListItem labelid="648" value="2"/>
 		 	</resetCombobox> 
 	    	
-	    	<view y="${parent._roomtype_edit.height + parent._roomtype_edit.y + 20}" x="35">	
+	    	<view y="262" x="35">	
 	    		<simplelayout axis="x" spacing="2"/>
 	    		
 		    	<view resource="edit_add_remuve_rsc" >
@@ -163,26 +164,24 @@
 		    		<handler name="onclick">
 						//parent.parent._komentar["viseble", true];								
 						//this.setAttribute("frame", 2)
-						if(this.currentSelection == true)
-							{
+						if(this.currentSelection == true) {
 							this.setAttribute("frame", 1);
 							parent.parent._komentar.setAttribute('visible', false); //["visible", false];
 							parent.parent._komentar.setAttribute('height', 0);
 							this.currentSelection = false;
 							if ($debug) Debug.write("currentSelection true: ", this.currentSelection);
-							}
-						else
-							{
+						} else {
 							this.setAttribute("frame", 2)
-							parent.parent._komentar.setAttribute('visible', true);//["visible", true];
+							parent.parent._komentar.setAttribute("visibility","visible");;//["visible", true];
 							parent.parent._komentar.setAttribute('height', 100);
 							this.currentSelection = true;
 							if ($debug) Debug.write("currentSelection false: ", this.currentSelection);
-							}
+						}
 		    		</handler> 
 		    	</view>
-		    <!--	<text >Komentar:</text> -->
-		    <labelText labelid="573" width="100"/>
+		    	
+    		    <!--	<text >Komentar:</text> -->
+    		    <labelText labelid="573" width="100"/>
 		    
 	    	</view>	
 	    	
@@ -201,7 +200,7 @@
 				
 				<view resource="edit_add"></view>
 			<!--	<text>Teilnehmer einladen</text> -->
-			 <labelText labelid="574" width="150"/>
+			    <labelText labelid="574" width="150"/>
 			</view>
 			
 			<view name="_liste" y="${parent._komentar.y + parent._komentar.height + 60}" x="35" 
@@ -226,9 +225,9 @@
 			   			this.setAttribute('opacity', 0.7); //setOpacity(0.7)
 			   		</handler>
 			   		<handler name="onclick">
-			   		//parent.parent.parent.delTermin.doCall();
-			    	parent.parent.defaulttermindetails();
-			    	parent.parent.close();
+    			   		//parent.parent.parent.delTermin.doCall();
+    			    	parent.parent.defaulttermindetails();
+    			    	parent.parent.setAttribute("visibility","hidden");
 			    	</handler>
 			   </view>
 			   <view resource="filesave_rsc"  opacity="0.7">
@@ -285,7 +284,7 @@
 					    		if ($debug) Debug.write("##### updateAppointment ", parent.parent.terminObjRef);
 			        			}
 			        	}
-			        	parent.parent.setAttribute('visible', false);
+			        	parent.parent.setAttribute("visibility","hidden");
 			        	]]>
 			    	</handler>
 			   </view>
@@ -409,7 +408,7 @@
 				//this._erinnerungedit.selectItemAt(this.terminObjRef.remind.typId);
 				
 				if(this.terminObjRef.meetingMember.length>0){
-					this._liste.setAttribute('visible', true); //["visible", true]
+					this._liste.setAttribute("visibility","visible");; //["visible", true]
 					this._liste.setAttribute('height', 50);
 					this._liste._innerlist.clearContent();
 				

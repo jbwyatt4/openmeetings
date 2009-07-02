@@ -2,7 +2,6 @@
  <!DOCTYPE canvas PUBLIC "LZX" "http://www.laszlosystems.com/lps-3.3/tools/lzx.dtd">
 
 <library>
-	<include href="../conference/polls/resultPollWin.lzx" />
 	
 	<class name="calendar" extends="view" > 
 		<attribute name ="terminObjRef" value="null"/>
@@ -10,7 +9,9 @@
 		<attribute name ="_endDate" value="null"/>
 		<attribute name ="selecteddate" value="null"/>	
 		
+		<!--
 		<simplelayout axis="x" spacing="2"/>
+		 -->
 		
 		<handler name="oninit">	
 			var now = new Date();
@@ -39,7 +40,8 @@
 					{ 
 					var x = "0" + x.toString();					
 					}				
-				new lz.calenderlistitem(this._tagesansicht._list._innerlist,{text:x + ":00", width:parent.width , terminObjRef:parent});
+				new lz.calenderlistitem(this._tagesansicht._list._innerlist,{
+				            text:x + ":00", width:parent.width , terminObjRef:parent});
 			}
 			]]>
 		</method>
@@ -72,8 +74,13 @@
  			</handler> 
  		</dateSelector> 
 		
-	<calendarTabs name="_tabslider"></calendarTabs>	
-	<termindetails name="_termindetails"></termindetails>
+		
+	<calendarTabs name="_tabslider" x="160" />
+	
+	
+	<termindetails name="_termindetails" />
+	
+	
 	<!--	<view> 
 			<simplelayout axis="y" spacing="2"/>
 			
@@ -246,7 +253,7 @@
 						else
 							{
 							this.setAttribute("frame", 2)
-							parent.parent._komentar.setAttribute('visible', true);//["visible", true];
+							parent.parent._komentar.setAttribute("visibility","visible");;//["visible", true];
 							parent.parent._komentar.setAttribute('height', 100);
 							this.currentSelection = true;
 							if ($debug) Debug.write("currentSelection false: ", this.currentSelection);
@@ -462,7 +469,7 @@
 			this._termindetails._repetitionselect.selectItemAt(4);
 			}
 		
-			this._termindetails._liste.setAttribute('visible', true); //["visible", true]
+			this._termindetails._liste.setAttribute("visibility","visible");; //["visible", true]
 			this._termindetails._liste.setAttribute('height', 50);
 			this._termindetails._liste._innerlist.clearContent();
 			

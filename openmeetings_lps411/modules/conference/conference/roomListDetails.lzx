@@ -89,12 +89,12 @@
 		    		parent.ezeit.setAttribute('text',parseDateToStringTimeOnly(value.appointmentEndtime));
 		    		
 		    		
-		    		parent.bdatum.setAttribute('visible', true);
-		    		parent.bzeit.setAttribute('visible', true);
-		    		parent.edatum.setAttribute('visible', true);
-		    		parent.ezeit.setAttribute('visible', true);
-		    		parent.l_bdatum.setAttribute('visible', true);
-		    		parent.l_edatum.setAttribute('visible', true);
+		    		parent.bdatum.setAttribute("visibility","visible");;
+		    		parent.bzeit.setAttribute("visibility","visible");;
+		    		parent.edatum.setAttribute("visibility","visible");;
+		    		parent.ezeit.setAttribute("visibility","visible");;
+		    		parent.l_bdatum.setAttribute("visibility","visible");;
+		    		parent.l_edatum.setAttribute("visibility","visible");;
 		    		
 		    		if ($debug) Debug.write("Appointment Start : " + value.appointmentStarttime);
 		    		if ($debug) Debug.write("Appointment End : " + value.appointmentEndtime);
