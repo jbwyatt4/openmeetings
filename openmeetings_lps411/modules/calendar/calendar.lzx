@@ -75,7 +75,7 @@
  		</dateSelector> 
 		
 		
-	<calendarTabs name="_tabslider" x="160" />
+	<calendarTabs name="_tabslider" x="180" />
 	
 	
 	<termindetails name="_termindetails" />
