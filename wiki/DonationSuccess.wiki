@@ -1,0 +1,3 @@
+#summary Donation Thank you page
+
+Thank you for Donating to !OpenMeetings
