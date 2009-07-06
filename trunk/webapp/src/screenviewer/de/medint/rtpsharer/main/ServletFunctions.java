@@ -6,6 +6,8 @@ import java.io.DataOutputStream;
 import java.net.URL;
 import java.net.URLConnection;
 
+import de.medint.rtpsharer.util.ConfigUtil;
+
 
 /**
  * 
@@ -22,11 +24,22 @@ public class ServletFunctions {
 	 * @param width
 	 */
 	//---------------------------------------------------------------------------------------------------------
-	public static void sendStartSignal(String servletUrl, float jpegQuality, int height, int width, String room, String SID, String sharerIP) throws Exception{
+	public static void sendStartSignal() throws Exception{
 		
+		
+		String servletUrl = "http://"+ConfigUtil.rtmphostlocal
+								+":"+ConfigUtil.red5httpport
+								+"/"+ConfigUtil.webAppRootKey
+								+"/RTPMethodServlet";
 		
 		//Building ServletUrl
-		String url = servletUrl + "?method=streamer_start&room=" + room + "&height=" + height + "&width=" + width + "&quality=" + jpegQuality + "&sid=" + SID + "&sharerIP=" + sharerIP;
+		String url = servletUrl + "?method=streamer_start&room=" + ConfigUtil.ROOM 
+						+ "&height=" + ConfigUtil.videoHeight 
+						+ "&width=" + ConfigUtil.videoWidth 
+						+ "&quality=" + ConfigUtil.quality 
+						+ "&sid=" + ConfigUtil.SID 
+						+ "&sharerIP=" + ConfigUtil.sharerIP
+						+ "&publicSID=" + ConfigUtil.PUBLIC_SID;
 		
 		URLConnection c = getConnection(url);
 		
@@ -62,11 +75,18 @@ public class ServletFunctions {
 	 * @param width
 	 */
 	//---------------------------------------------------------------------------------------------------------
-	public static void sendStopSignal(String servletUrl, String room, String SID) throws Exception{
+	public static void sendStopSignal() throws Exception{
 		
+		String servletUrl = "http://"+ConfigUtil.rtmphostlocal
+								+":"+ConfigUtil.red5httpport
+								+"/"+ConfigUtil.webAppRootKey
+								+"/RTPMethodServlet";
 		
 		//Building ServletUrl
-		String url = servletUrl + "?method=streamer_stop&room=" + room + "&sid=" + SID;
+		String url = servletUrl + "?method=streamer_stop" +
+											"&room=" + ConfigUtil.ROOM + 
+											"&sid=" + ConfigUtil.SID +
+											"&publicSID=" + ConfigUtil.PUBLIC_SID;
 		
 		URLConnection c = getConnection(url);
 		

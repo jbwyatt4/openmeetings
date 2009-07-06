@@ -28,6 +28,7 @@ import javax.media.rtp.SessionAddress;
 import javax.media.rtp.rtcp.SourceDescription;
 
 import de.medint.rtpsharer.datasource.*;
+import de.medint.rtpsharer.util.ConfigUtil;
 
 
 
@@ -79,12 +80,12 @@ public class Streamer {
 	  * Start Streaming Captured
 	  */
 	 //------------------------------------------------------------------------------------------
-	 public synchronized String start(int frameRate, int videoWidth, int videoHeight, float quality){
+	 public synchronized String start(){
 		 String result;
 
 		 // Create a processor for the specified media locator
 		 // and program it to output JPEG/RTP
-		result = createProcessor(frameRate, videoWidth, videoHeight, quality);
+		result = createProcessor();
 		if (result != null){
 			System.out.println(result);   
 			return result;
@@ -176,11 +177,11 @@ public class Streamer {
 	  * Creating the Processor
 	  */
 	 //------------------------------------------------------------------------------------------
-	 private String createProcessor(int frameRate, int videoWidth, int videoHeight, float quality) {
+	 private String createProcessor() {
 			
 		 
 		// ImageDataSource reading ScreenCaptures
-		ImageDataSource ids = new ImageDataSource(videoWidth, videoHeight, frameRate);
+		ImageDataSource ids = new ImageDataSource(ConfigUtil.videoWidth, ConfigUtil.videoHeight, ConfigUtil.frameRate);
 		 	
 			
 		 // Try to create a processor to handle the input media locator
@@ -231,7 +232,7 @@ public class Streamer {
 					// For video formats, we should double check the
 					// sizes since not all formats work in all sizes.
 					chosen = checkForVideoSizes(format, 
-									supported[0], videoWidth, videoHeight);
+									supported[0], ConfigUtil.videoWidth, ConfigUtil.videoHeight);
 				    } else
 					chosen = supported[0];
 				    tracks[i].setFormat(chosen);
@@ -256,7 +257,7 @@ public class Streamer {
 
 			
 			// Setting JPEG Quality
-			setJPEGQuality(processor, quality);
+			setJPEGQuality(processor, ConfigUtil.quality);
 
 			// Get the output data source of the processor
 			dataOutput = processor.getDataOutput();
