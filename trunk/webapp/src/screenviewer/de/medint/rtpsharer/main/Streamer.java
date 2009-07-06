@@ -70,10 +70,10 @@ public class Streamer {
 	 * @param destPort
 	 * @param sourcePort
 	 */
-	public Streamer(String address, int destPort, int sourcePort){
-		this.ipAddress = address;
-		this.portBase = destPort;
-		this.sourcePort = sourcePort;
+	public Streamer(){
+		this.ipAddress = ConfigUtil.destinationAddress;
+		this.portBase = ConfigUtil.destinationPort;
+		this.sourcePort = ConfigUtil.sourcePort;
 	}
 	 
 	 /**
