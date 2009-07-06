@@ -313,7 +313,7 @@ public class Main {
 		
 		//Checking Params
 		ConfigUtil.destinationAddress = args[0];
-		ConfigUtil.destinationPort = args[1];
+		ConfigUtil.destinationPort = Integer.parseInt(args[1]);
 		
 		ConfigUtil.SID = args[2];
 		ConfigUtil.ROOM = args[3];
@@ -323,7 +323,7 @@ public class Main {
 		ConfigUtil.webAppRootKey = args[6];
 		
 		ConfigUtil.PUBLIC_SID = args[7];
-		ConfigUtil.RECORDER = args[7];
+		ConfigUtil.RECORDER = args[8];
 		
 		System.out.println("Received input values : ");
 		System.out.println("destinationaddress : " + ConfigUtil.destinationAddress);
@@ -332,9 +332,7 @@ public class Main {
 		System.out.println("ROOM : " + ConfigUtil.ROOM);
 		
 		// Streaming Object
-		streamer = new Streamer(ConfigUtil.destinationAddress, 
-				Integer.parseInt(ConfigUtil.destinationPort), 
-				Integer.parseInt(ConfigUtil.sourcePort));
+		streamer = new Streamer();
 		
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {

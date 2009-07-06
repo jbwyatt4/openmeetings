@@ -12,10 +12,10 @@ public class ConfigUtil {
 	public static String destinationAddress = "127.0.0.1";  //  @jve:decl-index=0:
 	
 	/** Destination RTP Port */
-	public static String destinationPort = "22224";  //  @jve:decl-index=0:
+	public static Integer destinationPort = 22224;  //  @jve:decl-index=0:
 	
 	/** Source RTP Port */
-	public static String sourcePort = "22227";  //  @jve:decl-index=0:
+	public static Integer sourcePort = 22227;  //  @jve:decl-index=0:
 	
 	/** This is the IP Adress of the Current User **/
 	public static String sharerIP = "127.0.0.1";
