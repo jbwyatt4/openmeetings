@@ -994,7 +994,9 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 	 */
 	public synchronized HashMap<String,RoomClient> sendMessageByRoomAndDomain(Long room_id, Object message){
 		HashMap <String,RoomClient> roomClientList = new HashMap<String,RoomClient>();
-		try {			
+		try {
+			
+			log.debug("sendMessageByRoomAndDomain "+room_id);
 			
 			IScope globalScope = getContext().getGlobalScope();
 			

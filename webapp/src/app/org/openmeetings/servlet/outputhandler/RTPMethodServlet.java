@@ -93,7 +93,7 @@ public class RTPMethodServlet extends HttpServlet{
 		
 		try{
 			
-			String width, height, jpegquality, sid = null, publicSID = null;
+			String width, height, jpegquality, sid = null;
 			
 			String room = request.getParameter("room");
 			
@@ -105,6 +105,10 @@ public class RTPMethodServlet extends HttpServlet{
 			if(sid == null || sid.length() < 1)
 				throw new ServletException("RTPMethodServlet.startStreaming : no parameter SID!");
 			
+			String publicSID = request.getParameter("publicSID");
+			
+			if (publicSID == null) 
+				throw new ServletException("RTPMethodServlet.startStreaming : no parameter publicSID!");
 			
 			String sharerIP = request.getParameter("sharerIP");
 			
@@ -147,7 +151,8 @@ public class RTPMethodServlet extends HttpServlet{
 				}
 			}
 			
-			log.debug("startStreaming values : IPAddress Sharer : " + sharerIP + ", width=" + width + ", height=" + height + ",room=" + room);
+			log.debug("startStreaming values : IPAddress Sharer : " + sharerIP + ", width=" + width 
+					+ ", height=" + height + ",room=" + room);
 			
 			//we have to include the publicSID to get the RoomClient Object
 			//also the HOST, PORT must be set correctly in the RTPScreenSharingSession-Object

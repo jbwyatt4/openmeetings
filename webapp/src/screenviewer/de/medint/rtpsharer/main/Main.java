@@ -18,43 +18,12 @@ import javax.swing.JMenu;
 import javax.swing.JFrame;
 import javax.swing.JDialog;
 
+import de.medint.rtpsharer.util.ConfigUtil;
+
 public class Main {
-	
-	/** Destination Address */
-	private static String destinationAddress = "10.136.103.255";  //  @jve:decl-index=0:
-	
-	/** Destination RTP Port */
-	private static String destinationPort = "22224";  //  @jve:decl-index=0:
-	
-	/** Source RTP Port */
-	private static String sourcePort = "22227";  //  @jve:decl-index=0:
 	
 	/** StreamingClass */
 	private static Streamer streamer = null;
-	
-	/** FrameRate */
-	private static int frameRate = 20;
-	
-	/** TargetVideoheight */
-	private static int videoHeight = 768;
-	
-	/** TargerVideoWidth*/
-	private static int videoWidth = 1024;
-	
-	/** Quality */
-	private static float quality = 1;
-	
-	/** Connected */
-	private static boolean connection = false;
-	
-	/** Session ID OM*/
-	private static String SID = null;
-	
-	/** Room id OM */
-	private static String ROOM = null;
-	
-	/** Servlet URL for Function calls */
-	private static String servletUrl = null;
 	
 	// Visual Components
 	private JFrame jFrame = null;  //  @jve:decl-index=0:visual-constraint="32,9"
@@ -111,7 +80,7 @@ public class Main {
 	private JLabel getConnectionLabel(){
 		connected = new JLabel();
 		
-		if(!connection){
+		if(!ConfigUtil.connection){
 				connected.setText("Not Streaming");
 				connected.setForeground(Color.RED);
 		}
@@ -290,22 +259,22 @@ public class Main {
 	/** Starting Streaming */
 	public class StartStreamingClass implements ActionListener{
 
-		@Override
+		//@Override
 		public void actionPerformed(ActionEvent e) {
 			
 			
 			// Start Streaming
 			if(streamer !=null){
-				streamer.start(frameRate, videoWidth, videoHeight, quality);
+				streamer.start();
 				connected.setText("Streaming");
 				connected.setForeground(Color.GREEN);
 			}
 			
 			// Notify viewers
 			try{
-				InetAddress address = InetAddress.getLocalHost();
+				//InetAddress address = InetAddress.getLocalHost();
 				
-				ServletFunctions.sendStartSignal(servletUrl, quality, videoHeight, videoWidth, ROOM, SID, address.getHostAddress());
+				ServletFunctions.sendStartSignal();
 			}catch(Exception ex){
 				System.out.println("Error on ServletCall : " + ex.getMessage());
 			}
@@ -316,17 +285,18 @@ public class Main {
 	/** Stopping Streaming*/
 	public class StopStreamingClass implements ActionListener{
 
-		@Override
+		//@Override
 		public void actionPerformed(ActionEvent e) {
-			if(streamer !=null){
-				streamer.stop();
-				connected.setText("Not Streaming");
-				connected.setForeground(Color.RED);
-			}
-			
-			// Notify viewers
 			try{
-				ServletFunctions.sendStopSignal(servletUrl, ROOM, SID);
+				
+				if(streamer !=null){
+					streamer.stop();
+					connected.setText("Not Streaming");
+					connected.setForeground(Color.RED);
+				}
+				
+				// Notify viewers
+				ServletFunctions.sendStopSignal();
 			}catch(Exception ex){
 				System.out.println("Error on ServletCall : " + ex.getMessage());
 			}
@@ -342,22 +312,29 @@ public class Main {
 	public static void main(String[] args) {
 		
 		//Checking Params
-		destinationAddress = args[0];
-		destinationPort = args[1];
+		ConfigUtil.destinationAddress = args[0];
+		ConfigUtil.destinationPort = args[1];
 		
-		SID = args[2];
-		ROOM = args[3];
-		servletUrl = args[4];
+		ConfigUtil.SID = args[2];
+		ConfigUtil.ROOM = args[3];
+		
+		ConfigUtil.rtmphostlocal = args[4];
+		ConfigUtil.red5httpport = args[5];
+		ConfigUtil.webAppRootKey = args[6];
+		
+		ConfigUtil.PUBLIC_SID = args[7];
+		ConfigUtil.RECORDER = args[7];
 		
 		System.out.println("Received input values : ");
-		System.out.println("destinationaddress : " + destinationAddress);
-		System.out.println("destinationpoprt : " + destinationPort);
-		System.out.println("SID : " + SID);
-		System.out.println("ROOM : " + ROOM);
-		System.out.println("Servlet URL : " + servletUrl);
+		System.out.println("destinationaddress : " + ConfigUtil.destinationAddress);
+		System.out.println("destinationpoprt : " + ConfigUtil.destinationPort);
+		System.out.println("SID : " + ConfigUtil.SID);
+		System.out.println("ROOM : " + ConfigUtil.ROOM);
 		
 		// Streaming Object
-		streamer = new Streamer(destinationAddress, Integer.parseInt(destinationPort), Integer.parseInt(sourcePort));
+		streamer = new Streamer(ConfigUtil.destinationAddress, 
+				Integer.parseInt(ConfigUtil.destinationPort), 
+				Integer.parseInt(ConfigUtil.sourcePort));
 		
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
@@ -367,29 +344,4 @@ public class Main {
 		});
 	}
 
-	public String getDestinationAddress() {
-		return destinationAddress;
-	}
-
-	public void setDestinationAddress(String destinationAddress) {
-		this.destinationAddress = destinationAddress;
-	}
-
-
-	public static String getDestinationPort() {
-		return destinationPort;
-	}
-
-	public static void setDestinationPort(String destinationPort) {
-		Main.destinationPort = destinationPort;
-	}
-
-	public String getSourcePort() {
-		return sourcePort;
-	}
-
-	public void setSourcePort(String sourcePort) {
-		this.sourcePort = sourcePort;
-	}
-	
 }
