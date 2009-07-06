@@ -14,7 +14,7 @@
         this._text.setAttribute("text",tString);
     </handler>
     
-    <labelText name="_text" text="" x="10"
+    <labelText name="_text" text="" x="10" y="22"
             width="$once{ parent.width - 20 }" multiline="true" resize="false"/>
     
     <simpleLabelButton labelid="645" width="100" 
@@ -30,7 +30,7 @@
                     '/'+canvas.webAppRootKey+'/RtpSharerServlet?publicSID='+this.messageObj.rcl.publicSID +
                     '&room='+this.messageObj.rcl.room_id +
                     '&room_id='+hib.currentroomid +
-                    '&sid='+canvas.sessionId;       
+                    '&sid='+canvas.sessionId;  
         ]]>
     </method>
 </class>
