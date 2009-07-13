@@ -25,8 +25,37 @@ public class Main {
 	/** StreamingClass */
 	private static Streamer streamer = null;
 	
+
+	/** FrameRate */
+	private static int frameRate = 20;
+	
+	/** TargetVideoheight */
+	private static int videoHeight = 768;
+	
+	/** TargerVideoWidth*/
+	private static int videoWidth = 1024;
+	
+	/** Quality */
+	private static float quality = 1;
+	
+	/** Connected */
+	private static boolean connection = false;
+	
+	/** Session ID OM*/
+	private static String SID = null;
+	
+	/** Room id OM */
+	private static String ROOM = null;
+	
+	/** Publilc SID */
+	private static String PUBLICSID = null;
+	
+	/** Servlet URL for Function calls */
+	private static String servletUrl = null;
+	
+
 	// Visual Components
-	private JFrame jFrame = null;  //  @jve:decl-index=0:visual-constraint="32,9"
+	private JFrame jFrame = null;  //  @jve:decl-index=0:visual-constraint="44,8"
 	private JPanel jContentPane = null;
 	private JMenuBar jJMenuBar = null;
 	private JMenu fileMenu = null;
@@ -272,9 +301,8 @@ public class Main {
 			
 			// Notify viewers
 			try{
-				//InetAddress address = InetAddress.getLocalHost();
-				
 				ServletFunctions.sendStartSignal();
+
 			}catch(Exception ex){
 				System.out.println("Error on ServletCall : " + ex.getMessage());
 			}
@@ -317,6 +345,7 @@ public class Main {
 		
 		ConfigUtil.SID = args[2];
 		ConfigUtil.ROOM = args[3];
+		PUBLICSID = args[5];
 		
 		ConfigUtil.rtmphostlocal = args[4];
 		ConfigUtil.red5httpport = args[5];
@@ -330,6 +359,7 @@ public class Main {
 		System.out.println("destinationpoprt : " + ConfigUtil.destinationPort);
 		System.out.println("SID : " + ConfigUtil.SID);
 		System.out.println("ROOM : " + ConfigUtil.ROOM);
+		System.out.println("PUBLICSID : " + PUBLICSID);
 		
 		// Streaming Object
 		streamer = new Streamer();

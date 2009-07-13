@@ -29,5 +29,6 @@
     	<argument>$webAppRootKey</argument>
     	<argument>$PUBLIC_SID</argument>
     	<argument>$RECORDER</argument>
+    	<argument>$PUBLIC_SID</argument>
     </application-desc> 
 </jnlp> 

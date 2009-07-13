@@ -23,8 +23,9 @@ public class ServletFunctions {
 	 * @param height
 	 * @param width
 	 */
-	//---------------------------------------------------------------------------------------------------------
+
 	public static void sendStartSignal() throws Exception{
+
 		
 		
 		String servletUrl = "http://"+ConfigUtil.rtmphostlocal
@@ -32,7 +33,7 @@ public class ServletFunctions {
 								+"/"+ConfigUtil.webAppRootKey
 								+"/RTPMethodServlet";
 		
-		//Building ServletUrl
+
 		String url = servletUrl + "?method=streamer_start&room=" + ConfigUtil.ROOM 
 						+ "&height=" + ConfigUtil.videoHeight 
 						+ "&width=" + ConfigUtil.videoWidth 
@@ -40,6 +41,7 @@ public class ServletFunctions {
 						+ "&sid=" + ConfigUtil.SID 
 						+ "&sharerIP=" + ConfigUtil.sharerIP
 						+ "&publicSID=" + ConfigUtil.PUBLIC_SID;
+
 		
 		URLConnection c = getConnection(url);
 		
