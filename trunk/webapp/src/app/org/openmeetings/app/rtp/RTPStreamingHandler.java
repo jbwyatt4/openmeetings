@@ -20,13 +20,13 @@ import org.slf4j.Logger;
  */
 public class RTPStreamingHandler {
 	
-		private static final Logger log = Red5LoggerFactory.getLogger(ScreenRequestHandler.class, "openmeetings");
+		private static final Logger log = Red5LoggerFactory.getLogger(RTPStreamingHandler.class, "openmeetings");
 	
 		/** Contains all RTPSessions*/
 		public static HashMap<Rooms, RTPScreenSharingSession> rtpSessions = new HashMap<Rooms, RTPScreenSharingSession>();
 
 		/** Minimal Limit for valid RTP Ports */
-		public static final int minimalRTPPort = 22220;
+		public static final int minimalRTPPort = 22224;
 		
 		/** Maximum for valid RTP Ports */
 		public static final int maximalRTPPort = 24000;
@@ -40,8 +40,10 @@ public class RTPStreamingHandler {
 			
 			int currentPort = minimalRTPPort;
 			
-			if(rtpSessions.size() < 1)
+			if(rtpSessions.size() < 1){
+				log.debug("getNextFreeRTPPort : " + currentPort);
 				return currentPort;
+			}
 
 			// TODO also use maximum RTP Port to give admins a chance to administrate a range 
 			// of ports that should be open ;-)
@@ -53,17 +55,23 @@ public class RTPStreamingHandler {
 				while(riter.hasNext()){
 					Rooms r = riter.next();
 					RTPScreenSharingSession session = rtpSessions.get(r);
-				
+					
+					log.debug("trying Port " + currentPort);
+					
 					if(session.getIncomingRTPPort() == currentPort){
 						portBlocked = true;
-						break;
+						currentPort ++;
 					}
+					else
+						portBlocked = false;
 				}
 				
-				if(portBlocked)
-					currentPort ++;
+				// Checked all
+				portBlocked = false;
+					
 			}
 			
+			log.debug("getNextFreeRTPPort : " + currentPort);
 			return currentPort;
 			
 		}
