@@ -120,7 +120,7 @@ public class Navimanagement {
 
 	public void addMainStructure(String action, int naviorder,
 			long fieldvalues_id, boolean isleaf, boolean isopen, long level_id,
-			String name, long global_id) {
+			String name, long global_id, String deleted) {
 		try {
 			Navimain ng = new Navimain();
 			ng.setAction(action);
@@ -132,7 +132,7 @@ public class Navimanagement {
 			ng.setIsopen(isopen);
 			ng.setLevel_id(level_id);
 			ng.setName(name);
-			ng.setDeleted("false");
+			ng.setDeleted(deleted);
 			ng.setGlobal_id(global_id);
 			ng.setStarttime(new Date());
 

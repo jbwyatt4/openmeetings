@@ -1944,4 +1944,22 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   <string id="645" name="window screen sharing">
     <value>Start Sharing</value>
   </string>  
+  <string id="646" name="calendar">
+    <value>Add new Meeting</value>
+  </string>
+  <string id="647" name="calendar">
+    <value>Meeting Room</value>
+  </string>
+  <string id="648" name="calendar">
+    <value>Event Room</value>
+  </string>
+  <string id="649" name="main menu moderation">
+    <value>Moderation</value>
+  </string>
+  <string id="650" name="menu moderation">
+    <value>Moderate Users</value>
+  </string>
+  <string id="651" name="menu moderation">
+    <value>Moderate Rooms</value>
+  </string>
 </language>
