@@ -14,7 +14,7 @@ public class RTPScreenSharingSession {
 	private Users sharingUser = null;
 	
 	/** Ip Address of sharing user */
-	private  String sharingIpAddress = "127.0.0.1";
+	private String sharingIpAddress = "127.0.0.1";
 	
 	/** RTP Port incoming(Port the Shareres Client sends on)*/
 	private  int incomingRTPPort = 0;
@@ -33,9 +33,28 @@ public class RTPScreenSharingSession {
 	
 	/** JpegQuality */
 	private  float jpegQuality = 1f;
-
+	
+	/** Thread running?*/
+	private boolean running = false;
+	
+	/** Thread */
+	private RTPStreamReceiver receiver;
+	
 	public Users getSharingUser() {
 		return sharingUser;
+	}
+	
+	public void startReceiver() throws Exception{
+		receiver = new RTPStreamReceiver(this);
+		
+	}
+	
+	
+	public void addNewViewer(String ipAddress, int port) throws Exception{
+		if(receiver == null)
+			throw new Exception("receiver thread is null");
+		
+		receiver.addNewViewer(ipAddress, port);
 	}
 
 	public void setSharingUser(Users sharingUser) {
