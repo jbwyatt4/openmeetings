@@ -134,8 +134,11 @@ function loadContent(obj,parentobj,preparentobj){
 function loadContentByTempActionForNavi(){
     // if($debug) Debug.write("FUNC/loadContentByTempActionForNavi");
 
-    // if($debug) Debug.write("FUNC/loadContentByString ",tempActionForNavi);
-    new lz[tempActionForNavi](canvas.main_content._content.inner);
+    if($debug) Debug.write("FUNC/loadContentByString -1- ",tempActionForNavi);
+    if($debug) Debug.write("FUNC/loadContentByString -2- ",canvas[tempActionForNavi]);
+    if($debug) Debug.write("FUNC/loadContentByString -3- ",lz[canvas[tempActionForNavi]]);
+    
+    new lz[canvas[tempActionForNavi]](canvas.main_content._content.inner);
 }    
 
 function clearStageContent(obj){

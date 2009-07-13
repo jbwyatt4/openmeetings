@@ -239,7 +239,9 @@
 	           	}
 	
 				if($debug) Debug.write( 'conferenceMenubar: doActionMenu(): ' , t);
-	                	loadContent(t);
+				
+	            loadContent(t);
+	            
 	         	} else if( stringSub == "browser_open" ){
 	         		var browserPanelWidth  = canvas.browserPanelWidth;
 	         		var browserPanelHeight = canvas.browserPanelHeight;
