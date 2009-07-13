@@ -105,27 +105,33 @@ public class RTPMethodServlet extends HttpServlet{
 			if(sid == null || sid.length() < 1)
 				throw new ServletException("RTPMethodServlet.startStreaming : no parameter SID!");
 			
-			String publicSID = request.getParameter("publicSID");
+
+			String publicSID = request.getParameter("publicSid");
+
 			
+
+			if(sid == null || sid.length() < 1)
+				throw new ServletException("RTPMethodServlet.startStreaming : no parameter publicSid!");
+			
+			
+
 			if (publicSID == null) 
 				throw new ServletException("RTPMethodServlet.startStreaming : no parameter publicSID!");
 			
+
 			String sharerIP = request.getParameter("sharerIP");
 			
 			if(sharerIP == null || sharerIP.length() < 1)
 				throw new ServletException("RTPMethodServlet.startStreaming : no parameter sharerIP!");
 			
-			// TODO get Userdefinitions from ServletCall *width, height* => what for? they are already in the RTPScreenSharingSession
-			// -> Sharing Client has the possibility to alter Width/height/quality of the stream, so it should be notified at every Stream Start, i think
 			
-			// TODO Change RTP - Session with these detailvalues
 			RTPScreenSharingSession session;
 			
 			session = RTPStreamingHandler.getSessionForRoom(room, sid);
 			
+			// TODO Retrieve IP from Red5 client list!!!!
 			session.setSharingIpAddress(sharerIP);
 			
-			//width, height should be also in the RTPScreenSharingSession Object 
 			
 			width=request.getParameter("width");
 			
@@ -151,8 +157,12 @@ public class RTPMethodServlet extends HttpServlet{
 				}
 			}
 			
-			log.debug("startStreaming values : IPAddress Sharer : " + sharerIP + ", width=" + width 
-					+ ", height=" + height + ",room=" + room);
+
+			// Starting ReceiverThread
+			session.startReceiver();
+			
+			log.debug("startStreaming values : IPAddress Sharer : " + sharerIP + ", width=" + width + ", height=" + height + ",room=" + room);
+
 			
 			//we have to include the publicSID to get the RoomClient Object
 			//also the HOST, PORT must be set correctly in the RTPScreenSharingSession-Object
@@ -168,12 +178,9 @@ public class RTPMethodServlet extends HttpServlet{
 			
 			ScopeApplicationAdapter.getInstance().sendMessageByRoomAndDomain(Long.valueOf(room).longValue(),hs);
 			
-			
 		} catch(Exception err){
 			log.error("[startStreaming]",err);
 		}
-		
-		
 		
 	}
 
