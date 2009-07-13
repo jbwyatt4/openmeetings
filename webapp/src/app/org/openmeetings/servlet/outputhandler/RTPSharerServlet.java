@@ -1,6 +1,7 @@
 package org.openmeetings.servlet.outputhandler;
 
 import java.io.IOException;
+import java.net.InetAddress;
 import java.util.Date;
 
 import javax.servlet.ServletException;
@@ -14,6 +15,9 @@ import org.apache.velocity.tools.view.servlet.VelocityViewServlet;
 import org.openmeetings.app.data.basic.Configurationmanagement;
 import org.openmeetings.app.data.basic.Sessionmanagement;
 import org.openmeetings.app.data.user.Usermanagement;
+import org.openmeetings.app.hibernate.beans.recording.RoomClient;
+import org.openmeetings.app.remote.red5.ClientListManager;
+import org.openmeetings.app.remote.red5.ScopeApplicationAdapter;
 import org.openmeetings.app.rtp.RTPScreenSharingSession;
 import org.openmeetings.app.rtp.RTPStreamingHandler;
 import org.red5.logging.Red5LoggerFactory;
@@ -72,12 +76,32 @@ public class RTPSharerServlet extends VelocityViewServlet{
 				// Retrieve Data from RTPmanager
 				RTPScreenSharingSession rsss = RTPStreamingHandler.getSessionForRoom(room, sid);
 				
-				// TODO : send RTP Stream not directly from sharer, but from RTP-PRoxy within
+				if(rsss == null){
+					log.error("no RTPSharingSession available");
+					return null;
+				}
+				
+				log.debug("Trying to connect on Stream (origin : " + rsss.getSharingIpAddress() + ")");
+				
+				// TODO : send RTP Stream not directly from sharer, but from RTP-Proxy within
 				// RED5 !!!!
-				ctx.put("HOST", rsss.getSharingIpAddress());
-				ctx.put("PORT", rsss.getIncomingRTPPort());
+				//ctx.put("HOST", rsss.getSharingIpAddress());
+				
+				int port = RTPStreamingHandler.getNextFreeRTPPort();
+				
+				ctx.put("HOST", InetAddress.getLocalHost().getHostAddress());
+				ctx.put("PORT", port);
 				ctx.put("HEIGHT", rsss.getStreamHeight());
 				ctx.put("WIDTH", rsss.getStreamWidth());
+				
+				log.debug("Put Variables to Velocity context : HOST=" + ctx.get("HOST") + ", PORT=" + ctx.get("PORT"));
+				
+				RoomClient rcl = ClientListManager.getInstance().getClientByPublicSID(publicSID);
+				String ip = rcl.getUserip();
+				
+				log.debug("publicSID : " + publicSID + ", ID : " + ip);
+				
+				rsss.addNewViewer(ip, port);
 				
 				return getVelocityEngine().getTemplate(template);
 			
