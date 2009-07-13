@@ -17,7 +17,8 @@
 
 <include href="resources/" /> 
 <include href="base/" /><!-- attributes,methods,datasets,are moved into /base -->
-<include href="modules/" /> 
+<include href="modules/" />
+<include href="plugins/" />  
 
 <silverstyle name="defaultstyle" isdefault="true" basecolor="${ canvas.basebgcolorizer }" canvascolor="white" />
 
