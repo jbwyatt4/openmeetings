@@ -54,87 +54,94 @@ public class ImportInitvalues {
 		Usermanagement.getInstance().addUserLevel("Moderator", 2);
 		Usermanagement.getInstance().addUserLevel("Admin", 3);
 
+		/* ########################
+		 * Dashboard Menu Points
+		 */
 		Navimanagement.getInstance().addGlobalStructure("home", 1, 124, false,
 				true, 1, "home", "false", 582L);
-		Navimanagement.getInstance().addMainStructure("mainDashboard", 1, 290,
-				true, true, 1, "mainDashboard", 1);
-		Navimanagement.getInstance().addMainStructure("myScheduledMeetings", 2,
-				291, true, true, 1, "myScheduledMeetings", 1);
-		
-		/*
-		Navimanagement.getInstance().addMainStructure("myScheduledEvents", 3,
-				292, true, true, 1, "myScheduledEvents", 1);
+		Navimanagement.getInstance().addMainStructure("dashboardModuleStartScreen", 1, 290,
+				true, false, 1, "Dashboard Module", 1, "false");
+		Navimanagement.getInstance().addMainStructure("dashboardModuleCalendar", 2,
+				291, true, false, 1, "Module Calendar", 1, "false");
+
+		/* ########################
+		 * Recording Menu Points - disabled by default
 		 */
-		Navimanagement.getInstance().addGlobalStructure("content", 2, 289,
-				false, true, 1, "content", "true", null);
-		Navimanagement.getInstance().addMainStructure("publicContent", 4, 297,
-				true, true, 1, "publicContent", 2);
-		Navimanagement.getInstance().addMainStructure("privateContent", 5, 298,
-				true, true, 1, "privateContent", 2);
-		Navimanagement.getInstance().addMainStructure("personalContent", 6,
-				299, true, true, 1, "personalContent", 2);
-
-		Navimanagement.getInstance().addGlobalStructure("record", 3, 395,
-				false, true, 1, "record", "false", 583L);
-		Navimanagement.getInstance().addMainStructure("recordContent", 7, 395,
-				true, true, 1, "recordContent", 3);
-		Navimanagement.getInstance().addMainStructure("recordingsViewer", 8,
-				396, true, true, 1, "recordingsViewer", 3);
-
-		Navimanagement.getInstance().addGlobalStructure("meetings", 4, 2,
-				false, true, 1, "meetings", "false", 584L);
 		
+		Navimanagement.getInstance().addGlobalStructure("record", 2, 395,
+				false, true, 1, "record", "true", 583L);
+		Navimanagement.getInstance().addMainStructure("recordModule", 1, 395,
+				true, false, 1, "Module Recording Player", 2, "false");
 		
-		/**
-		Navimanagement.getInstance().addMainStructure("publicMeetings", 9, 293,
-				true, true, 1, "publicMeetings", 4);
-		Navimanagement.getInstance().addMainStructure("privateMeetings", 10,
-				294, true, true, 1, "privateMeetings", 4);
-		*/
 		/*
 		String action, int naviorder,
 		long fieldvalues_id, boolean isleaf, boolean isopen, long level_id,
 		String name, long global_id
 		*/
-		Navimanagement.getInstance().addMainStructure("allmeetings", 13,
-				2, true, true, 1, "allmeetings", 4);
 		
+		/* ########################
+		 * Conference Menu Points
+		 */
+		
+		Navimanagement.getInstance().addGlobalStructure("meetings", 3, 2,
+				false, true, 1, "List of Conference Rooms Global Navi", "false", 584L);
+		
+		Navimanagement.getInstance().addMainStructure("conferenceModuleRoomList", 1,
+				2, true, false, 1, "List of Conference Rooms Main Navi", 3, "false");
+		
+		
+		/* ########################
+		 * Event Menu Points
+		 */
 
-		Navimanagement.getInstance().addGlobalStructure("events", 5, 3, false,
-				true, 1, "events", "false", 585L);
+		Navimanagement.getInstance().addGlobalStructure("events", 4, 3, false,
+				true, 1, "List of Event Rooms Global Navi", "false", 585L);
 		
-		/*
-		Navimanagement.getInstance().addMainStructure("publicEvents", 11, 295,
-				true, true, 1, "publicEvents", 5);
-		Navimanagement.getInstance().addMainStructure("privateEvents", 12, 296,
-				true, true, 1, "privateEvents", 5);
-		*/
-		Navimanagement.getInstance().addMainStructure("allEvents", 11, 3,
-				true, true, 1, "allEvents", 5);
+		Navimanagement.getInstance().addMainStructure("eventModuleRoomList", 1, 3,
+				true, false, 1, "List of Event Rooms Main Navi", 4, "false");
 		
 		
-
-		//Navimanagement.getInstance().addGlobalStructure("settings", 4, 4, false, true, 1, "setings");
-		//Navimanagement.getInstance().addMainStructure("userself", 1, 5, true, false, 1, "userself",3);
-		//Navimanagement.getInstance().addMainStructure("roomconfiguremod", 2, 192, true, false, 1, "roomconfiguremod",3);
+		
+		/* ########################
+		 * Moderation Menu Points - disabled by default
+		 */
+		Navimanagement.getInstance().addGlobalStructure("moderate", 5, 6, false,
+				true, 2, "Moderation Menu", "true", 586L);
+		
+		Navimanagement.getInstance().addMainStructure("userModerate", 1, 3,
+				true, false, 1, "Moderate Users", 5, "false");
+		
+		Navimanagement.getInstance().addMainStructure("roomModerate", 1, 3,
+				true, false, 1, "Moderate Rooms", 5, "false");
+		
+		
+		/* ########################
+		 * Administration Menu Points
+		 */
 
 		Navimanagement.getInstance().addGlobalStructure("admin", 6, 6, false,
-				true, 2, "admin", "false", 586L);
-		Navimanagement.getInstance().addMainStructure("userAdmin", 14, 125,
-				true, false, 2, "userAdmin", 6);
-		Navimanagement.getInstance().addMainStructure("roomClient", 15, 597,
-				true, false, 3, "roomClient", 6);
-		//Navimanagement.getInstance().addMainStructure("groupadmin", 2, 126, true, false, 2, "groupadmin",4);
-		Navimanagement.getInstance().addMainStructure("orgAdmin", 16, 127,
-				true, false, 3, "orgAdmin", 6);
-		Navimanagement.getInstance().addMainStructure("roomAdmin", 17, 186,
-				true, false, 3, "roomAdmin", 6);
-		Navimanagement.getInstance().addMainStructure("confAdmin", 18, 263,
-				true, false, 3, "confAdmin", 6);
-		Navimanagement.getInstance().addMainStructure("languagesEditor", 19,
-				348, true, false, 3, "languagesEditor", 6);
-		Navimanagement.getInstance().addMainStructure("backupContent", 20, 367,
-				true, false, 3, "backupContent", 6);
+				true, 2, "Administration Menu", "false", 586L);
+		
+		Navimanagement.getInstance().addMainStructure("adminModuleUser", 14, 125,
+				true, false, 2, "Administration of Users", 6, "false");
+		
+		Navimanagement.getInstance().addMainStructure("adminModuleRoom", 15, 597,
+				true, false, 3, "Aministration of Rooms", 6, "false");
+		
+		Navimanagement.getInstance().addMainStructure("adminModuleOrg", 16, 127,
+				true, false, 3, "Administration of Organizations", 6, "false");
+		
+		Navimanagement.getInstance().addMainStructure("adminModuleLanguages", 17, 186,
+				true, false, 3, "Administration of Languages", 6, "false");
+		
+		Navimanagement.getInstance().addMainStructure("adminModuleConnections", 18, 263,
+				true, false, 3, "Administration of Connections", 6, "false");
+		
+		Navimanagement.getInstance().addMainStructure("adminModuleConfiguration", 19,
+				348, true, false, 3, "Administration of Configurations", 6, "false");
+		
+		Navimanagement.getInstance().addMainStructure("adminModuleBackup", 20, 367,
+				true, false, 3, "Administration of Backups", 6, "false");
 
 		ErrorManagement.getInstance().addErrorType(new Long(1), new Long(322));
 		ErrorManagement.getInstance().addErrorType(new Long(2), new Long(323));
