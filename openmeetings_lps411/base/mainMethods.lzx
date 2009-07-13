@@ -78,6 +78,27 @@
         this.setAttribute('defaultWhiteboardHeight',Number(canvas.myConfigSet.getPointer().xpathQuery('config/defaultWhiteboardHeight/text()')));  
 		
         
+        this.setAttribute('adminModuleUser',canvas.myConfigSet.getPointer().xpathQuery('config/adminModuleUser/text()'));  
+        this.setAttribute('adminModuleRoom',canvas.myConfigSet.getPointer().xpathQuery('config/adminModuleRoom/text()'));  
+        this.setAttribute('adminModuleOrg',canvas.myConfigSet.getPointer().xpathQuery('config/adminModuleOrg/text()'));  
+        this.setAttribute('adminModuleLanguages',canvas.myConfigSet.getPointer().xpathQuery('config/adminModuleLanguages/text()'));  
+        this.setAttribute('adminModuleConnections',canvas.myConfigSet.getPointer().xpathQuery('config/adminModuleConnections/text()'));  
+        this.setAttribute('adminModuleConfiguration',canvas.myConfigSet.getPointer().xpathQuery('config/adminModuleConfiguration/text()'));  
+        this.setAttribute('adminModuleBackup',canvas.myConfigSet.getPointer().xpathQuery('config/adminModuleBackup/text()'));  
+        
+        this.setAttribute('moderatorModuleUser',canvas.myConfigSet.getPointer().xpathQuery('config/moderatorModuleUser/text()'));  
+        this.setAttribute('moderatorModuleRoom',canvas.myConfigSet.getPointer().xpathQuery('config/moderatorModuleRoom/text()'));  
+        
+        this.setAttribute('dashboardModuleStartScreen',canvas.myConfigSet.getPointer().xpathQuery('config/dashboardModuleStartScreen/text()'));  
+        this.setAttribute('dashboardModuleCalendar',canvas.myConfigSet.getPointer().xpathQuery('config/dashboardModuleCalendar/text()'));  
+        
+        this.setAttribute('conferenceModuleRoomList',canvas.myConfigSet.getPointer().xpathQuery('config/conferenceModuleRoomList/text()'));  
+        this.setAttribute('conferenceRoomModule',canvas.myConfigSet.getPointer().xpathQuery('config/conferenceRoomModule/text()'));  
+        
+        this.setAttribute('eventModuleRoomList',canvas.myConfigSet.getPointer().xpathQuery('config/eventModuleRoomList/text()'));  
+        this.setAttribute('eventRoomModule',canvas.myConfigSet.getPointer().xpathQuery('config/eventRoomModule/text()'));  
+        
+        
         
 		mainBaseText.setAttribute('text',canvas.currentappname);
 		mainBaseText.setShadow();
@@ -226,16 +247,16 @@
 	            	if($debug) Debug.write(canvas.thishib.modus,canvas.thishib.roomtype);
 	                	if (canvas.thishib.modus=='audience' && canvas.thishib.roomtype=='public'){
 	                  	var t = new Array();
-	                    	t.action = 'allEvents';
+	                    	t.action = 'eventModuleRoomList';
 	                	} else if (canvas.thishib.modus=='audience' && canvas.thishib.roomtype=='private'){
 	                    	var t = new Array();
-	                    	t.action = 'allEvents';
+	                    	t.action = 'eventModuleRoomList';
 	               	} else if (canvas.thishib.modus=='conference' && canvas.thishib.roomtype=='public'){
 	                  	var t = new Array();
-	                    	t.action = 'allmeetings';
+	                    	t.action = 'conferenceModuleRoomList';
 	                	} else if (canvas.thishib.modus=='conference' && canvas.thishib.roomtype=='private'){
 	                    	var t = new Array();
-	                    	t.action = 'allmeetings';
+	                    	t.action = 'conferenceModuleRoomList';
 	           	}
 	
 				if($debug) Debug.write( 'conferenceMenubar: doActionMenu(): ' , t);
