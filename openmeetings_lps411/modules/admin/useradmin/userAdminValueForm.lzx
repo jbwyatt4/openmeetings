@@ -30,7 +30,6 @@
         this.zip.setAttribute('text','');
         this.town.setAttribute('text','');
 		this.userpass1.setAttribute('text','');
-		this.userpass2.setAttribute('text','');        
         var defaultstate = canvas.getCountryRecord(1);
         this.state.addAndSelectItem(defaultstate.name,defaultstate.state_id);
         this.adress_comment.setAttribute('text','');

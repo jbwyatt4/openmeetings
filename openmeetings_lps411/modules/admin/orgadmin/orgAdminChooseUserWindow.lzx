@@ -54,27 +54,28 @@
     <simpleValueList name="_userlist" y="84" x="120" width="270" height="100" 
 		multiselect="false" />
 	
-	<simpleLabelButton labelid="174" x="180" y="260" width="100">
-		<handler name="onclick">
-			this.parent.close();
-		</handler>
-	</simpleLabelButton>
-	<simpleLabelButton labelid="175" x="290" y="260" width="100">
-		<handler name="onclick">
-			<![CDATA[
+    <simpleLabelButton labelid="175" x="180" y="260" width="100">
+        <handler name="onclick">
+            <![CDATA[
                 this.parent.usersId = this.parent._userlist._selected.value;
                 if ($debug) Debug.write(this.parent.usersId);
                 if ($debug) Debug.write(this.parent._userlist._selected.value);
                 if (parent.isOrgUserAddForm) {
-				    this.parent.addUserToOrganisation.doCall();
+                    this.parent.addUserToOrganisation.doCall();
                 } else {
-                	this.parent.refObjectDialog.addUserById(this.parent.usersId);
-                	parent.close();
+                    this.parent.refObjectDialog.addUserById(this.parent.usersId);
+                    parent.close();
                 }
-				//
-			]]>
-		</handler>
-	</simpleLabelButton>	
+                //
+            ]]>
+        </handler>
+    </simpleLabelButton>
+    
+    <simpleLabelButton labelid="174" x="290" y="260" width="100">
+        <handler name="onclick">
+            this.parent.close();
+        </handler>
+    </simpleLabelButton>    
     
         <netRemoteCallHib name="addUserToOrganisation" remotecontext="$once{ canvas.thishib }" 
             funcname="organisationservice.addUserToOrganisation" >      
@@ -83,7 +84,7 @@
             <netparam><method name="getValue"> return parent.parent.usersId; </method></netparam>
             <netparam><method name="getValue"> return ''; </method></netparam>
             <handler name="ondata" args="value">
-                Debug.write("addUserToOrganisation ",value);
+                if ($debug) Debug.write("addUserToOrganisation ",value);
                 if (value>0){
                     this.parent.refObj.onreload.sendEvent();
                     this.parent.close();

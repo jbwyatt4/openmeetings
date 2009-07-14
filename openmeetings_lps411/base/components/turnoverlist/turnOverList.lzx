@@ -93,19 +93,19 @@
     <labelText name="_records" x="2" resize="true" />
     
     <!-- 368:goto first -->
-	<simpleLabelButtonTooltip name="_pre1" x="$once{ parent.width-196 }" width="22" height="22" 
+	<simpleLabelButtonTooltip name="_pre1" x="$once{ parent.width-188 }" width="22" height="22" 
 		enabled="true" onclick="parent.callfirst()" tooltipId="368">
 		<view resource="step_back_two_arrow" valign="middle" align="center" />
 	</simpleLabelButtonTooltip>
 
     <!-- 369:goto previous -->
-	<simpleLabelButtonTooltip name="_pre2" x="$once{ parent.width-172 }" width="22" height="22" 
+	<simpleLabelButtonTooltip name="_pre2" x="$once{ parent.width-166 }" width="22" height="22" 
 		enabled="false" onclick="parent.callpre()" tooltipId="369" >
 		<view resource="step_back_arrow" valign="middle" align="center" />
 	</simpleLabelButtonTooltip>
 
     <!-- combobox to decide the step number -->
-    <resetCombobox name="languages" width="100" x="$once{ parent.width-149 }" 
+    <resetCombobox name="languages" width="100" x="$once{ parent.width-144 }" 
 			  editable="false" height="22" >
 		<attribute name="sendEventToReload" value="false" type="boolean" />
         <textlistitem value="10" text="10" />
@@ -126,13 +126,13 @@
 	</resetCombobox>
 	
 	<!-- 370:goto next -->
-	<simpleLabelButtonTooltip name="_next1" x="$once{ parent.width-48 }" width="22" height="22" 
+	<simpleLabelButtonTooltip name="_next1" x="$once{ parent.width-44 }" width="22" height="22" 
 		enabled="false" onclick="parent.callnext()" tooltipId="370">
 		<view resource="step_fwd_arrow" valign="middle" align="center" />
 	</simpleLabelButtonTooltip>
 
     <!-- 371:goto last -->
-	<simpleLabelButtonTooltip name="_next2" x="$once{ parent.width-24 }" width="22" height="22" 
+	<simpleLabelButtonTooltip name="_next2" x="$once{ parent.width-22 }" width="22" height="22" 
 		enabled="true" onclick="parent.calllast()" tooltipId="371">
 		<view resource="step_fwd_two_arrow" valign="middle" align="center" />
 	</simpleLabelButtonTooltip>
