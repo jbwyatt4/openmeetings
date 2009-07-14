@@ -236,8 +236,8 @@
         </resetCombobox> 
 	
     <labelText labelid="142" width="200" y="460" resize="false" x="2"/>
-        <customEdittext name="adress_comment" y="460" x="120" width="270" 
-            height="70" text="" multiline="true"/>
+        <customScrollEdittext name="adress_comment" y="460" x="120" width="270" 
+                        height="70" text="" />
        
     <labelText labelid="161" width="200" y="540" resize="false" x="2"/>     
     <simpleValueList name="_organisationslist" y="540" x="120" width="270" height="100" 
