@@ -125,20 +125,20 @@ public class ImportInitvalues {
 		Navimanagement.getInstance().addMainStructure("adminModuleUser", 14, 125,
 				true, false, 2, "Administration of Users", 6, "false");
 		
-		Navimanagement.getInstance().addMainStructure("adminModuleRoom", 15, 597,
-				true, false, 3, "Aministration of Rooms", 6, "false");
+		Navimanagement.getInstance().addMainStructure("adminModuleConnections", 15, 597,
+				true, false, 3, "Aministration of Connections", 6, "false");
 		
 		Navimanagement.getInstance().addMainStructure("adminModuleOrg", 16, 127,
 				true, false, 3, "Administration of Organizations", 6, "false");
 		
-		Navimanagement.getInstance().addMainStructure("adminModuleLanguages", 17, 186,
-				true, false, 3, "Administration of Languages", 6, "false");
+		Navimanagement.getInstance().addMainStructure("adminModuleRoom", 17, 186,
+				true, false, 3, "Administration of Rooms", 6, "false");
 		
-		Navimanagement.getInstance().addMainStructure("adminModuleConnections", 18, 263,
-				true, false, 3, "Administration of Connections", 6, "false");
+		Navimanagement.getInstance().addMainStructure("adminModuleConfiguration", 18, 263,
+				true, false, 3, "Administration of Configuration", 6, "false");
 		
-		Navimanagement.getInstance().addMainStructure("adminModuleConfiguration", 19,
-				348, true, false, 3, "Administration of Configurations", 6, "false");
+		Navimanagement.getInstance().addMainStructure("adminModuleLanguages", 19,
+				348, true, false, 3, "Administration of Languages", 6, "false");
 		
 		Navimanagement.getInstance().addMainStructure("adminModuleBackup", 20, 367,
 				true, false, 3, "Administration of Backups", 6, "false");
