@@ -105,13 +105,13 @@ public class ImportInitvalues {
 		/* ########################
 		 * Moderation Menu Points - disabled by default
 		 */
-		Navimanagement.getInstance().addGlobalStructure("moderate", 5, 6, false,
-				true, 2, "Moderation Menu", "true", 586L);
+		Navimanagement.getInstance().addGlobalStructure("moderate", 5, 649L, false,
+				true, 2, "Moderation Menu", "true", 660L);
 		
-		Navimanagement.getInstance().addMainStructure("userModerate", 1, 3,
+		Navimanagement.getInstance().addMainStructure("userModerate", 1, 650,
 				true, false, 1, "Moderate Users", 5, "false");
 		
-		Navimanagement.getInstance().addMainStructure("roomModerate", 1, 3,
+		Navimanagement.getInstance().addMainStructure("roomModerate", 1, 651,
 				true, false, 1, "Moderate Rooms", 5, "false");
 		
 		

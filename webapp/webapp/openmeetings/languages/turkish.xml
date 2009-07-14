@@ -1980,4 +1980,7 @@ Translated by Orcun Madran omadran@baskent.edu.tr
   <string id="659" name="error message moderation">
     <value>Do you want this User to be not a Moderator of this Organization?</value>
   </string>
+  <string id="660" name="moderation">
+    <value>Add or delete Users or Rooms within your Organization</value>
+  </string>
 </language>
