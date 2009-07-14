@@ -1965,4 +1965,28 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   <string id="651" name="menu moderation">
     <value>Moderate Rooms</value>
   </string>
+  <string id="652" name="moderator org">
+    <value>M</value>
+  </string>
+  <string id="653" name="confirm moderation">
+    <value>Do you want to change this User to become a Moderator of that Organization?</value>
+  </string>
+  <string id="654" name="error message">
+    <value>Please choose an Organization before you try to add a User to it!</value>
+  </string>
+  <string id="655" name="choose user window">
+    <value>Organization - Moderator</value>
+  </string>
+  <string id="656" name="moderator org users">
+    <value>Do you really want to delete this User from the Organization?</value>
+  </string>
+  <string id="657" name="org moderation">
+    <value>This User is Moderator</value>
+  </string>
+  <string id="658" name="org moderation">
+    <value>This User is No-Moderator</value>
+  </string>
+  <string id="659" name="error message moderation">
+    <value>Do you want this User to be not a Moderator of this Organization?</value>
+  </string>
 </language>

@@ -526,16 +526,16 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>add organisation</value>
   </string>
   <string id="174" name="orgvalue_userwin">
-    <value>cancel</value>
+    <value>Cancel</value>
   </string>
   <string id="175" name="orgvalue_userwin">
-    <value>add</value>
+    <value>Add</value>
   </string>
   <string id="176" name="orgvalue_userwin">
     <value>remove organisation</value>
   </string>
   <string id="177" name="orgvalue_userlist">
-    <value>user</value>
+    <value>User</value>
   </string>
   <string id="178" name="orgvalue_userlistadd">
     <value>add user</value>
@@ -544,22 +544,22 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>delete user</value>
   </string>
   <string id="180" name="orgvalue_userwinheader">
-    <value>add user</value>
+    <value>Add user to Organization</value>
   </string>
   <string id="181" name="orgvalue_userwinsearchfield">
-    <value>search user</value>
+    <value>Search user</value>
   </string>
   <string id="182" name="orgvalue_userwinsearchbtn">
-    <value>search</value>
+    <value>Search</value>
   </string>
   <string id="183" name="orgvalue_userwinsearchresult">
-    <value>user</value>
+    <value>User</value>
   </string>
   <string id="184" name="loginwin_chooseorganisation">
     <value>Organisation</value>
   </string>
   <string id="185" name="loginwin_chooseorganisationbtn">
-    <value>enter</value>
+    <value>Enter</value>
   </string>
   <string id="186" name="navi_roomadmin">
     <value>Conferencerooms</value>
@@ -829,7 +829,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>delete user from organisation</value>
   </string>
   <string id="275" name="organisation_usersdeletedhead">
-    <value>delete</value>
+    <value>D</value>
   </string>
   <string id="276" name="organisation_usersalreadadded">
     <value>This user is already member of this organisation.</value>
@@ -1958,5 +1958,29 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   </string>
   <string id="651" name="menu moderation">
     <value>Moderate Rooms</value>
+  </string>
+  <string id="652" name="moderator org">
+    <value>M</value>
+  </string>
+  <string id="653" name="confirm moderation">
+    <value>Do you want to change this User to become a Moderator of that Organization?</value>
+  </string>
+  <string id="654" name="error message">
+    <value>Please choose an Organization before you try to add a User to it!</value>
+  </string>
+  <string id="655" name="choose user window">
+    <value>Organization - Moderator</value>
+  </string>
+  <string id="656" name="moderator org users">
+    <value>Do you really want to delete this User from the Organization?</value>
+  </string>
+  <string id="657" name="org moderation">
+    <value>This User is Moderator</value>
+  </string>
+  <string id="658" name="org moderation">
+    <value>This User is No-Moderator</value>
+  </string>
+  <string id="659" name="error message moderation">
+    <value>Do you want this User to be not a Moderator of this Organization?</value>
   </string>
 </language>

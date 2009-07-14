@@ -121,7 +121,7 @@ public class UserImport {
 					for (Iterator orgIterator = itemElement.elementIterator("organisation_id");orgIterator.hasNext(); ){
 						Element orgElement = (Element) orgIterator.next();
 						Long organisation_id = Long.valueOf(orgElement.getText()).longValue();
-						Organisationmanagement.getInstance().addUserToOrganisation(new Long(3), us.getUser_id(), organisation_id, null, "");
+						Organisationmanagement.getInstance().addUserToOrganisation(us.getUser_id(), organisation_id, null, "");
 					}	
 				}    
 				

@@ -8,6 +8,8 @@ import org.openmeetings.app.data.basic.ErrorManagement;
 import org.openmeetings.app.data.basic.Fieldmanagment;
 import org.openmeetings.app.data.basic.Sessionmanagement;
 import org.openmeetings.app.data.beans.basic.ErrorResult;
+import org.openmeetings.app.data.beans.basic.SearchResult;
+import org.openmeetings.app.data.user.Organisationmanagement;
 import org.openmeetings.app.data.user.Usermanagement;
 import org.openmeetings.app.hibernate.beans.basic.ErrorValues;
 import org.openmeetings.app.hibernate.beans.basic.Sessiondata;
@@ -114,7 +116,7 @@ public class UserService {
 				
 				return new Long(1);
 			} else {
-				return new Long(-36);
+				return new Long(-26);
 			}
 		} catch (Exception err){
 			log.error("sendInvitationLink",err);
@@ -122,5 +124,40 @@ public class UserService {
 		return new Long(-1);			
 	}
 	
+	public Long addUserToOrganisation(String SID, Long user_id, Long organisation_id,
+			Long insertedby, String comment) {
+		try {
+	    	Long users_id = Sessionmanagement.getInstance().checkSession(SID);
+	    	Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);			
+			if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)){
+				
+				return Organisationmanagement.getInstance().addUserToOrganisation(user_id, organisation_id, users_id, comment);
+				
+			} else {
+				return new Long(-26);
+			}
+		} catch (Exception err){
+			log.error("addUserToOrganisation",err);
+		}
+		return new Long(-1);
+	}
+	
+	public SearchResult getUsersByOrganisation(String SID, long organisation_id, int start, int max, String orderby, boolean asc){
+		try {   
+	        Long users_id = Sessionmanagement.getInstance().checkSession(SID);
+	        Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
+	        if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)){
+	        	return Organisationmanagement.getInstance().getUsersSearchResultByOrganisationId(organisation_id, start, max, orderby, asc);
+	        } else {
+	        	log.error("Need Administration Account");
+	        	SearchResult sResult = new SearchResult();
+	        	sResult.setErrorId(-26L);
+	        	return sResult;
+	        }
+		} catch (Exception err) {
+			log.error("getUsersByOrganisation",err);
+		}
+		return null;
+	}
 	
 }

@@ -7,6 +7,7 @@ public class SearchResult {
 	private String objectName;
 	private Long records;
 	private List result;
+	private Long errorId;
 	
 	public String getObjectName() {
 		return objectName;
@@ -26,7 +27,11 @@ public class SearchResult {
 	public void setResult(List result) {
 		this.result = result;
 	}
-	
-	
+	public Long getErrorId() {
+		return errorId;
+	}
+	public void setErrorId(Long errorId) {
+		this.errorId = errorId;
+	}
 
 }
