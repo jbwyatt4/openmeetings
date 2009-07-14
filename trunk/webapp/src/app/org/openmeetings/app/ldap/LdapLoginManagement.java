@@ -475,7 +475,7 @@ public class LdapLoginManagement {
 			
 			// Set him to Default Organisation
 			long organisation_id = Long.valueOf(Configurationmanagement.getInstance().getConfKey(3,"default_domain_id").getConf_value()).longValue();
-			Organisationmanagement.getInstance().addUserToOrganisation(new Long(3), newUserId,organisation_id, newUserId, "");
+			Organisationmanagement.getInstance().addUserToOrganisation(newUserId,organisation_id, newUserId, "");
 		}
 		
 		return newUserId;

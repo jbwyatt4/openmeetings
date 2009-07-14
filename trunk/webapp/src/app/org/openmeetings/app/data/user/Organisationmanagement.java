@@ -2,6 +2,7 @@ package org.openmeetings.app.data.user;
 
 import java.util.Comparator;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.List;
 import java.util.Iterator;
@@ -294,7 +295,7 @@ public class Organisationmanagement {
 			
 			for (Iterator<Long> it = usersToAdd.iterator();it.hasNext();){
 				Long user_id = it.next();
-				this.addUserToOrganisation(new Long(3), user_id, org.getOrganisation_id(), insertedby, "");
+				this.addUserToOrganisation(user_id, org.getOrganisation_id(), insertedby, "");
 			}
 			
 			for (Iterator<Long> it = usersToDel.iterator();it.hasNext();){
@@ -406,32 +407,28 @@ public class Organisationmanagement {
 	 * @param insertedby
 	 * @return
 	 */
-	public Long addUserToOrganisation(Long user_level, Long user_id, Long organisation_id,
+	public Long addUserToOrganisation(Long user_id, Long organisation_id,
 			Long insertedby, String comment) {
 		try {
-			if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)){
-				if (this.getOrganisation_UserByUserAndOrganisation(user_id, organisation_id)==null) {
-					Organisation org = this.getOrganisationById(organisation_id);
-					log.error("org: " + org.getName());
-					Object idf = HibernateUtil.createSession();
-					Session session = HibernateUtil.getSession();
-					Transaction tx = session.beginTransaction();
-					Organisation_Users orgUser = new Organisation_Users();
-					orgUser.setOrganisation(org);
-					orgUser.setUser_id(user_id);
-					orgUser.setDeleted("false");
-					orgUser.setStarttime(new Date());
-					orgUser.setComment(comment);
-					long id = (Long) session.save(orgUser);
-					tx.commit();
-					HibernateUtil.closeSession(idf);
-					return id;
-				} else {
-					return new Long(-276);
-				}
+			if (this.getOrganisation_UserByUserAndOrganisation(user_id, organisation_id)==null) {
+				Organisation org = this.getOrganisationById(organisation_id);
+				log.error("org: " + org.getName());
+				Object idf = HibernateUtil.createSession();
+				Session session = HibernateUtil.getSession();
+				Transaction tx = session.beginTransaction();
+				Organisation_Users orgUser = new Organisation_Users();
+				orgUser.setOrganisation(org);
+				orgUser.setUser_id(user_id);
+				orgUser.setDeleted("false");
+				orgUser.setStarttime(new Date());
+				orgUser.setComment(comment);
+				long id = (Long) session.save(orgUser);
+				tx.commit();
+				HibernateUtil.closeSession(idf);
+				return id;
 			} else {
-				log.error("[deleteOrganisation] authorization required");
-			}			
+				return -35L;
+			}
 		} catch (HibernateException ex) {
 			log.error("[addUserToOrganisation]",ex);
 		} catch (Exception ex2) {
@@ -515,21 +512,19 @@ public class Organisationmanagement {
 		return false;
 	}
 	
-	public SearchResult getUsersByOrganisationId(long user_level, long organisation_id, int start, int max, String orderby, boolean asc){
+	public SearchResult getUsersSearchResultByOrganisationId(long organisation_id, int start, int max, String orderby, boolean asc){
 		try {
-			if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)){
-				SearchResult sResult = new SearchResult();
-				sResult.setObjectName(Organisation_Users.class.getName());
-				sResult.setRecords(this.selectMaxUsersByOrganisationId(organisation_id));
-				sResult.setResult(this.getUsersByOrganisationId(organisation_id, start, max, orderby, asc));
-				return sResult;
-			} else {
-				log.error("[getUsersByOrganisationId] authorization denied");
-			}
+			
+			SearchResult sResult = new SearchResult();
+			sResult.setObjectName(Users.class.getName());
+			sResult.setRecords(this.selectMaxUsersByOrganisationId(organisation_id));
+			sResult.setResult(this.getUsersByOrganisationId(organisation_id, start, max, orderby, asc));
+			return sResult;
+				
 		} catch (HibernateException ex) {
-			log.error("[getUsersByOrganisationId]",ex);
+			log.error("[getUsersSearchResultByOrganisationId]",ex);
 		} catch (Exception ex2) {
-			log.error("[getUsersByOrganisationId]",ex2);
+			log.error("[getUsersSearchResultByOrganisationId]",ex2);
 		}
 		return null;
 	}
@@ -585,7 +580,15 @@ public class Organisationmanagement {
 				List<Users> userL = new LinkedList<Users>();
 				for (Iterator it = userOrg.iterator();it.hasNext();){
 					Organisation_Users us = (Organisation_Users) it.next();
-					userL.add(UsersDaoImpl.getInstance().getUser(us.getUser_id()));
+					
+					//Only add this single Organization add this point cause
+					//cause all the other are not needed at this point
+					Users user = UsersDaoImpl.getInstance().getUser(us.getUser_id());
+					
+					user.setOrganisation_users(new HashSet());
+					user.getOrganisation_users().add(us);
+					
+					userL.add(user);
 				}
 				//Collections.sort(userL,new UsersFirstnameComperator());
 				return userL;
@@ -810,7 +813,7 @@ public class Organisationmanagement {
 //				log.error("updateUserOrganisationsByUser size ADD: "+orgIdsToAdd.size());
 				for (Iterator it = orgIdsToAdd.iterator();it.hasNext();){
 					Long orgToAdd = (Long) it.next();
-					this.addUserToOrganisation(new Long(3), us.getUser_id(), orgToAdd, us.getUser_id(), "");
+					this.addUserToOrganisation(us.getUser_id(), orgToAdd, us.getUser_id(), "");
 				}
 
 //				log.error("updateUserOrganisationsByUser size DELETE: "+orgIdsToDelete.size());
@@ -837,7 +840,7 @@ public class Organisationmanagement {
 				for (Iterator it = org.iterator();it.hasNext();){
 					Integer key = (Integer) it.next();
 					Long newOrgId = key.longValue();
-					this.addUserToOrganisation(new Long(3), us, newOrgId, new Long(1), "");
+					this.addUserToOrganisation(us, newOrgId, new Long(1), "");
 				}
 			}
 		} catch (Exception ex) {

@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.red5.logging.Red5LoggerFactory;
+import org.openmeetings.app.data.basic.AuthLevelmanagement;
 import org.openmeetings.app.data.basic.Sessionmanagement;
 import org.openmeetings.app.data.beans.basic.SearchResult;
 import org.openmeetings.app.data.user.Usermanagement;
@@ -110,7 +111,14 @@ public class OrganisationService {
 		try {   
 	        Long users_id = Sessionmanagement.getInstance().checkSession(SID);
 	        Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
-	        return Organisationmanagement.getInstance().getUsersByOrganisationId(user_level, organisation_id, start, max, orderby, asc);
+	        if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)){
+	        	return Organisationmanagement.getInstance().getUsersSearchResultByOrganisationId(organisation_id, start, max, orderby, asc);
+	        } else {
+	        	log.error("Need Administration Account");
+	        	SearchResult sResult = new SearchResult();
+	        	sResult.setErrorId(-26L);
+	        	return sResult;
+	        }
 		} catch (Exception err) {
 			log.error("getUsersByOrganisation",err);
 		}
@@ -121,7 +129,11 @@ public class OrganisationService {
 		try {
 	        Long users_id = Sessionmanagement.getInstance().checkSession(SID);
 	        Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
-	        return Organisationmanagement.getInstance().addUserToOrganisation(user_level, user_id, organisation_id, users_id, comment);
+	        if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)){
+	        	return Organisationmanagement.getInstance().addUserToOrganisation(user_id, organisation_id, users_id, comment);
+	        } else {
+	        	return -26L;
+	        }
 		} catch (Exception err) {
 			log.error("getUsersByOrganisation",err);
 		}
