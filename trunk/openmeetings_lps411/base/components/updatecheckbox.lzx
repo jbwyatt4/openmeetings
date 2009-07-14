@@ -9,7 +9,7 @@
     </handler>  
 </class>
 
-<class name="labelCheckbox" extends="checkbox" style="componentStyle">
+<class name="labelCheckbox" extends="checkbox" style="componentStyle" fontsize="12" >
 	<attribute name="labelid" type="number" setter="setLabelId(labelid)" />
 	<method name="setLabelId" args="_labelid" >
 		this.labelid = _labelid;

@@ -114,12 +114,17 @@
     <orgUsersRecordValueList name="_userlist" y="130" x="120" width="300" height="200" />  
 
 	<baseChooseIcon resourceN="edit_add_rsc" labelid="178" y="100" x="400"
-		onclick="this.parent.addOrganisationToUser()" />		
+		width="22" height="22" onclick="this.parent.addOrganisationToUser()" />		
 	<method name="addOrganisationToUser">
-		if (this.organisation_id!=0)
+		if (this.organisation_id!=0) {
 			new lz.orgAdminChooseUserWindow(canvas.main_content._content.inner,{
 			     refObj:this,organisation_id:this.organisation_id,
 			     isOrgUserAddForm:true});
+        } else {
+            new lz.labelerrorPopup(canvas.main_content._content.inner,{
+                     errorlabelid:654
+                    })
+        }
 	</method>	
     
     <!--

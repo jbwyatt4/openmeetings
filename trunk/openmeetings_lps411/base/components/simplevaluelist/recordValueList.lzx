@@ -14,7 +14,7 @@
             this.parent.parent.parent.parent.parent.itemToDelete=this;
 			this.parent.parent.parent.parent.parent.deleteItem.sendEvent(parent);
 		</method>
-		<view resource="button_cancel_rsc" align="middle" valign="center" />
+		<view resource="button_cancel_rsc" align="center" valign="middle" />
 		<labelTooltip labelid="274" />
 	</view>	
 </class>
