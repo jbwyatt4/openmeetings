@@ -1983,4 +1983,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   <string id="659" name="error message moderation">
     <value>Do you want this User to be not a Moderator of this Organization?</value>
   </string>
+  <string id="660" name="moderation">
+    <value>Add or delete Users or Rooms within your Organization</value>
+  </string>
 </language>
