@@ -8,6 +8,10 @@
     <attribute name="refObj" value="null" />
     <attribute name="usersId" value="0" type="number" />
     
+    <attribute name="isOrgUserAddForm" value="false" type="boolean"/>
+    
+    <attribute name="refObjectDialog" value="null"/>
+    
     <handler name="oninit">
         lz.ModeManager.makeModal(this);
     </handler>
@@ -59,9 +63,14 @@
 		<handler name="onclick">
 			<![CDATA[
                 this.parent.usersId = this.parent._userlist._selected.value;
-                Debug.write(this.parent.usersId);
-                Debug.write(this.parent._userlist._selected.value);
-				this.parent.addUserToOrganisation.doCall();
+                if ($debug) Debug.write(this.parent.usersId);
+                if ($debug) Debug.write(this.parent._userlist._selected.value);
+                if (parent.isOrgUserAddForm) {
+				    this.parent.addUserToOrganisation.doCall();
+                } else {
+                	this.parent.refObjectDialog.addUserById(this.parent.usersId);
+                	parent.close();
+                }
 				//
 			]]>
 		</handler>

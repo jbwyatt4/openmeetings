@@ -90,9 +90,9 @@
 	            ]]>
 	        </method>
 	    </view>
-    	   
-    <vscrollbar name="_scrollbar" />
-     -->
+    	    -->
+    <vscrollbar name="_scrollbar" id="_mainScrollBar" />
+    
 </view>  
   
 <!-- View for Navigation-bar and App-name -->
