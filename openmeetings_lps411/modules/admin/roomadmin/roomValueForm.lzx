@@ -215,12 +215,8 @@
 	
 	<!-- 196:Comment -->
 	<labelText labelid="196" width="200" y="190" resize="false" x="2"/>
-		<customEdittext name="comment" y="190" x="120" width="270" 
-            height="100" text="" multiline="true" />	
-		<!--
         <customScrollEdittext name="comment" y="190" x="120" width="270" 
             height="100" text="" />	
-         -->
 	
 	<!-- Appointment -->
 	<labelText labelid="620" width="200" y="300" resize="false" x="2"/>  
