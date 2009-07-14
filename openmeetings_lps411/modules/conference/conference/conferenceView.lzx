@@ -163,6 +163,8 @@
 
     <handler name="oninit">
     	
+    	_mainScrollBar.setAttribute("visibility","hidden");
+    	
 		if ($debug) Debug.write("roomobj: ",this.roomobj);
         canvas._mainbgcontentNavi.setAttribute('height',0);
         canvas.setAttribute('naviHeightDelta',28);
@@ -227,6 +229,8 @@
         //reset the right to draw on WHiteboard as the RoomClient Object will be destroyed also
         //on server-Side the canDraw status will be false again when you relogin the same room
         canvas.isAllowedToDraw = true;
+        
+        _mainScrollBar.setAttribute("visibility","visible");
         
         if (canvas._videocontainer!=null){
 	        canvas._videocontainer.resetAllValues();

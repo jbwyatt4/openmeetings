@@ -11,6 +11,9 @@
 <class name="audienceView" extends="baseContentView" destroyByMethod="true" >
 
     <handler name="oninit">
+    	
+    	_mainScrollBar.setAttribute("visibility","hidden");
+    	
         canvas._mainbgcontentNavi.setAttribute('height',0);
         canvas.setAttribute('naviHeightDelta',28);
         new lz.conferenceMenubar(canvas._conferencemenu);
@@ -48,7 +51,9 @@
             -->
 
     <handler name="ontabcontentleave">
-        Debug.write("ontabcontentleave:",this);
+        if ($debug) Debug.write("ontabcontentleave:",this);
+        
+        _mainScrollBar.setAttribute("visibility","visible");
 
         if (canvas._videocontainer!=null){
         	canvas._videocontainer._video1.resetValues();

@@ -8,13 +8,15 @@
     
 	<turnOverTextItem text="$once{ parent.valueName }" width="226" />    
     
-	<baseChooseIcon resourceN="button_cancel_rsc" labelid="274" width="60"
+	<view width="60"
 		onclick="new lz.confirmDeleteWindow(canvas.main_content._content.inner,{refObj:this});" >		
 		<method name="confirmDelete">
             this.parent.parent.parent.parent.parent.itemToDelete=this;
 			this.parent.parent.parent.parent.parent.deleteItem.sendEvent(parent);
 		</method>
-	</baseChooseIcon>	
+		<view resource="button_cancel_rsc" align="middle" valign="center" />
+		<labelTooltip labelid="274" />
+	</view>	
 </class>
 	
 	
