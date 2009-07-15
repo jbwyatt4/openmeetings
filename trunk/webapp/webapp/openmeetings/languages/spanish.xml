@@ -1932,67 +1932,68 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   <string id="639" name="meeting Timer">
     <value>Esta Sala es demo. Para desactivar este aviso, debería conseguir una sala privada para uso propio o bien configurar su propio Servidor. Será desconectado automáticamente en:</value>
   </string>
-  <string id="640" name="meeting room administration">
-    <value>Moderated</value>
+   <string id="640" name="meeting room administration">
+    <value>Con moderador</value>
   </string>  
   <string id="641" name="moderated room waiting message">
-    <value>Please wait untill the Moderator has entered the Room. The Moderator can be either a Teacher, Admin or the creator of this Room.</value>
+    <value>Por favor, espere hasta que el moderador entre en la sala. El moderador puede ser un profesor, el administrador o el creador de esta sala.</value>
   </string>
   <string id="642" name="error popup">
     <value>Ok</value>
   </string>  
   <string id="643" name="window screensharing">
-    <value>Incoming Screen Sharing</value>
+    <value>Escritorio compartido iniciándose</value>
   </string>
   <string id="644" name="window screen sharing">
-    <value>There is a new Screen Sharing incoming from the User:</value>
+    <value>Está iniciándose un escritorio compartido del usuario:</value>
   </string>
   <string id="645" name="window screen sharing">
-    <value>Start Sharing</value>
+    <value>Comenzar a compartir</value>
   </string>   
   <string id="646" name="calendar">
-    <value>Add new Meeting</value>
+    <value>Añadir un nuevo encuentro</value>
   </string>
   <string id="647" name="calendar">
-    <value>Meeting Room</value>
+    <value>Sala de encuentros</value>
   </string>
   <string id="648" name="calendar">
-    <value>Event Room</value>
+    <value>Sala de eventos</value>
   </string>
   <string id="649" name="main menu moderation">
-    <value>Moderation</value>
+    <value>Moderación</value>
   </string>
   <string id="650" name="menu moderation">
-    <value>Moderate Users</value>
+    <value>Moderar Usuarios</value>
   </string>
   <string id="651" name="menu moderation">
-    <value>Moderate Rooms</value>
+    <value>Moderar Salas</value>
   </string>
   <string id="652" name="moderator org">
     <value>M</value>
   </string>
   <string id="653" name="confirm moderation">
-    <value>Do you want to change this User to become a Moderator of that Organization?</value>
+    <value>¿Desea convertir a este usuario en Moderador de esa Organización?</value>
   </string>
   <string id="654" name="error message">
-    <value>Please choose an Organization before you try to add a User to it!</value>
+    <value>Por favor, seleccione una Organización antes de intentar incluir a un usuario en la misma.</value>
   </string>
   <string id="655" name="choose user window">
-    <value>Organization - Moderator</value>
+    <value>Organización - Moderador</value>
   </string>
   <string id="656" name="moderator org users">
-    <value>Do you really want to delete this User from the Organization?</value>
+    <value>¿Realmente desea borrar a este usuario de la Organización?</value>
   </string>
   <string id="657" name="org moderation">
-    <value>This User is Moderator</value>
+    <value>Este usuario es Moderador</value>
   </string>
   <string id="658" name="org moderation">
-    <value>This User is No-Moderator</value>
+    <value>Este usuario no es Moderador</value>
   </string>
   <string id="659" name="error message moderation">
-    <value>Do you want this User to be not a Moderator of this Organization?</value>
+    <value>¿Desea que este usuario deje de ser Moderador de esta Organización?</value>
   </string>
   <string id="660" name="moderation">
-    <value>Add or delete Users or Rooms within your Organization</value>
+    <value>Añadir o borrar Usuarios y/o Salas en su Organización</value>
   </string>
+
 </language>
