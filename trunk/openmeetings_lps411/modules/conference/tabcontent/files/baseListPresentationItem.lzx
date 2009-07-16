@@ -12,9 +12,9 @@
     <method name="formatURL" args="filename">
         <![CDATA[
             var downloadurl = 'http://' + canvas.rtmphostlocal + ':' + canvas.red5httpport + '/'+canvas.webAppRootKey+'/DownloadHandler?' +
-                'fileName=' + filename +
+                'fileName=' + lz.Browser.urlEscape(filename) +
                 '&moduleName=' + this.uploadmodul + 
-                '&parentPath=' + canvas.uploadmoduleimgfolder + '/' +
+                '&parentPath=' + lz.Browser.urlEscape(canvas.uploadmoduleimgfolder + '/' )+
                 '&room_id='+hib.currentroomid + 
                 '&sid='+canvas.sessionId;
             ////Debug.write("downloadurl: ",downloadurl);
