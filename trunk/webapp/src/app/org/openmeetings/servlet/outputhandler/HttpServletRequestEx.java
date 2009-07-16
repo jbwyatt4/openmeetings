@@ -21,18 +21,10 @@ public class HttpServletRequestEx extends HttpServletRequestWrapper {
 	private Map<String, String> requestParams_ = null;
 	private String uriEncoding;
 
-	private static final Logger log = Red5LoggerFactory.getLogger(DownloadHandler.class, "openmeetings"); // FIXME
-
 	public HttpServletRequestEx(HttpServletRequest req, String uriEncoding)	throws IOException {
 		super(req);
 
-		log.debug("CTOR"); // FIXME
 		this.uriEncoding = uriEncoding;
-
-		String requestEncoding = req.getCharacterEncoding(); 		// FIXME
-		if (requestEncoding == null)								// FIXME
-			requestEncoding = "<null>" ;							// FIXME
-		log.debug("req.getCharacterEncoding()" + requestEncoding);	// FIXME
 
 		request_ = req;
 		requestParams_ = new HashMap<String, String>();
