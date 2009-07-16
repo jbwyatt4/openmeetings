@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <web-app version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
     <display-name>Openmeetings</display-name>
@@ -20,12 +20,26 @@
         <filter-name>LoggerContextFilter</filter-name>
         <filter-class>org.red5.logging.LoggerContextFilter</filter-class>
     </filter>
-
+	
     <filter-mapping>
         <filter-name>LoggerContextFilter</filter-name>
         <url-pattern>/*</url-pattern>
+    </filter-mapping>	
+	
+    <filter>
+        <filter-name>ServletRequestExFilter</filter-name>
+		<filter-class>org.openmeetings.servlet.outputhandler.ServletRequestExFilter</filter-class>
+		<init-param>
+			<param-name>uriEncoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+    </filter>	
+ 
+    
+    <filter-mapping>
+        <filter-name>ServletRequestExFilter</filter-name>
+        <url-pattern>/*</url-pattern>
     </filter-mapping>
-
     
     <!--
     <filter>

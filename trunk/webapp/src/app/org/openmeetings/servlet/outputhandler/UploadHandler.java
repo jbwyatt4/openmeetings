@@ -178,7 +178,9 @@ public class UploadHandler extends HttpServlet {
 						InputStream is = upload.getFileContents("Filedata");
 
 						//trim whitespace
-						String fileSystemName = upload.getBaseFilename("Filedata");
+						String fileSystemName = upload.getFileSystemName("Filedata");
+						
+						StringUtils.deleteWhitespace(fileSystemName);
 
 						int dotidx=fileSystemName.lastIndexOf('.');
 						String newFileSystemName = StringComparer.getInstance()

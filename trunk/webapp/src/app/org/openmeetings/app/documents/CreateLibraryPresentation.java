@@ -2,8 +2,8 @@ package org.openmeetings.app.documents;
 
 import java.util.HashMap;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.FilenameFilter;
+import java.io.FileOutputStream;
 
 import org.dom4j.Document;
 import org.dom4j.DocumentHelper;
@@ -87,7 +87,7 @@ public class CreateLibraryPresentation {
 	        
 	        // lets write to a file
 	        XMLWriter writer = new XMLWriter(
-	            new FileWriter( targetDirectory+CreateLibraryPresentation.libraryFileName )
+	            new FileOutputStream( targetDirectory+CreateLibraryPresentation.libraryFileName )
 	        );
 	        writer.write( document );
 	        writer.close();

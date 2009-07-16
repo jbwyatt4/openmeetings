@@ -2,6 +2,7 @@ package org.openmeetings.app.documents;
 
 import java.util.Iterator;
 import java.util.LinkedHashMap;
+import java.io.FileInputStream;
 
 import org.slf4j.Logger;
 import org.red5.logging.Red5LoggerFactory;
@@ -29,14 +30,14 @@ public class LoadLibraryPresentation {
 			LinkedHashMap<String,LinkedHashMap> lMap = new LinkedHashMap<String,LinkedHashMap>();
 			
 	        SAXReader reader = new SAXReader();
-	        Document document = reader.read(filePath);
+	        Document document = reader.read( new FileInputStream(filePath) );
 	        
 	        Element root = document.getRootElement();
 	        Integer k = 0;
 	        
 	        for ( Iterator i = root.elementIterator(); i.hasNext(); ) {
 	            Element item = (Element) i.next();
-	            log.error(item.getName());
+	            log.debug(item.getName());
 	            
 	            String nodeVal = item.getName();
 	            
