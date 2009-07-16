@@ -17,6 +17,7 @@ import org.red5.logging.Red5LoggerFactory;
 import org.openmeetings.app.data.basic.Sessionmanagement;
 import org.openmeetings.app.data.user.Usermanagement;
 
+
 public class DownloadHandler extends HttpServlet {
 
 	private static final Logger log = Red5LoggerFactory.getLogger(DownloadHandler.class, "openmeetings");
@@ -44,7 +45,13 @@ public class DownloadHandler extends HttpServlet {
 			log.debug("\n\nfileName = " + httpServletRequest.getParameter("fileName"));
 			log.debug("\n\nparentPath = " + httpServletRequest.getParameter("parentPath"));
 			
+			String queryString = httpServletRequest.getQueryString();
+			if (queryString == null) {
+				queryString = "";
+			}
+			
 			String sid = httpServletRequest.getParameter("sid");
+			
 			if (sid == null) {
 				sid = "default";
 			}
@@ -62,14 +69,14 @@ public class DownloadHandler extends HttpServlet {
 				String moduleName = httpServletRequest.getParameter("moduleName");
 				if (moduleName == null) {
 					moduleName = "nomodule";
-				}				
+				}			
 				
 				String parentPath = httpServletRequest.getParameter("parentPath");
 				if (parentPath == null) {
 					parentPath = "nomodule";
 				}
 				
-				String requestedFile = httpServletRequest.getParameter("fileName");
+				String requestedFile = httpServletRequest.getParameter("fileName");				
 				if (requestedFile == null) {
 					requestedFile = "";
 				}
@@ -266,6 +273,18 @@ public class DownloadHandler extends HttpServlet {
 					//Get file and handle download
 					RandomAccessFile rf = new RandomAccessFile(full_path, "r");
 
+					//Default type - Explorer, Chrome and others
+					int browserType = 0;
+					
+					//Firefox and Opera browsers
+					if ((httpServletRequest.getHeader("User-Agent").contains("Firefox"))||
+						(httpServletRequest.getHeader("User-Agent").contains("Opera")))
+					{
+						browserType = 1;
+					}
+					
+					log.debug("Detected browser type:"+browserType);
+					
 					httpServletResponse.reset();
 					httpServletResponse.resetBuffer();
 					OutputStream out = httpServletResponse.getOutputStream();
@@ -277,7 +296,15 @@ public class DownloadHandler extends HttpServlet {
 						httpServletResponse.setHeader("Content-Length", ""+ rf.length());
 					} else {
 						httpServletResponse.setContentType("APPLICATION/OCTET-STREAM");
-						httpServletResponse.setHeader("Content-Disposition","attachment; filename=\"" + requestedFile + "\"");
+						if ( browserType == 0)
+						{
+							httpServletResponse.setHeader("Content-Disposition","attachment; filename=" + java.net.URLEncoder.encode(requestedFile,"UTF-8") );
+						}
+						else
+						{
+							httpServletResponse.setHeader("Content-Disposition","attachment; filename*=UTF-8'en'" + java.net.URLEncoder.encode(requestedFile,"UTF-8") );							
+						}
+						
 						httpServletResponse.setHeader("Content-Length", ""+ rf.length());
 					}
 
