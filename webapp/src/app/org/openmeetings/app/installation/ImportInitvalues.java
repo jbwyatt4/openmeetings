@@ -120,7 +120,7 @@ public class ImportInitvalues {
 		 */
 
 		Navimanagement.getInstance().addGlobalStructure("admin", 6, 6, false,
-				true, 2, "Administration Menu", "false", 586L);
+				true, 3, "Administration Menu", "false", 586L);
 		
 		Navimanagement.getInstance().addMainStructure("adminModuleUser", 14, 125,
 				true, false, 2, "Administration of Users", 6, "false");

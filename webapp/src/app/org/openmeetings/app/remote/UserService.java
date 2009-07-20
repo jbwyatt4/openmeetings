@@ -314,7 +314,7 @@ public class UserService {
      * @param user_idClient
      * @return
      */
-    public Long deleteUserAdmin(String SID, int user_idClient) {
+    public Long deleteUserAdmin(String SID, Long user_idClient) {
 		log.debug("deleteUserAdmin");
 		try {
 			Long users_id = Sessionmanagement.getInstance().checkSession(SID);
@@ -323,7 +323,7 @@ public class UserService {
 			// admins only
 			if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)) {
 				// no self destruction ;-)
-				if (users_id != user_idClient) {
+				if (!users_id.equals(user_idClient)) {
 
 					// Setting user deleted
 					Long userId = UsersDaoImpl.getInstance().deleteUserID(
@@ -346,7 +346,7 @@ public class UserService {
 
 					return userId;
 				} else {
-					return new Long(-10);
+					return new Long(-38);
 				}
 			} else {
 				return new Long(-11);

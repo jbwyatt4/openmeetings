@@ -16,6 +16,7 @@ public class Organisation_Users {
 	private Date starttime;
 	private Date updatetime;
 	private String deleted;
+	private Boolean isModerator;
 	private String comment;
 
 	public Organisation_Users() {
@@ -111,5 +112,12 @@ public class Organisation_Users {
 	}
 	public void setComment(String comment) {
 		this.comment = comment;
-	}	
+	}
+	
+	public Boolean getIsModerator() {
+		return isModerator;
+	}
+	public void setIsModerator(Boolean isModerator) {
+		this.isModerator = isModerator;
+	}
 }

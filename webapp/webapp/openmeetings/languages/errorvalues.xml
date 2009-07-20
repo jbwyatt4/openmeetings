@@ -279,5 +279,29 @@
       <field name="deleted">false</field>
       <field name="fieldvalues_id">276</field>
       <field name="errortype_id">1</field>
+    </row>
+    <row>
+      <field name="errorvalues_id">36</field>
+      <field name="starttime" />
+      <field name="updatetime" />
+      <field name="deleted">false</field>
+      <field name="fieldvalues_id">664</field>
+      <field name="errortype_id">1</field>
+    </row>
+    <row>
+      <field name="errorvalues_id">37</field>
+      <field name="starttime" />
+      <field name="updatetime" />
+      <field name="deleted">false</field>
+      <field name="fieldvalues_id">665</field>
+      <field name="errortype_id">1</field>
+    </row>
+    <row>
+      <field name="errorvalues_id">38</field>
+      <field name="starttime" />
+      <field name="updatetime" />
+      <field name="deleted">false</field>
+      <field name="fieldvalues_id">663</field>
+      <field name="errortype_id">1</field>
     </row>				
 </ROOT>
