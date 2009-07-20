@@ -79,13 +79,13 @@ public class MainService implements IPendingServiceCallback {
 	 * @param language_id
 	 * @return
 	 */
-	public List getNavi(String SID, long language_id){
+	public List getNavi(String SID, long language_id, Long organisation_id){
 		try {
-	        Long users_id = Sessionmanagement.getInstance().checkSession(SID);
+	        Long user_id = Sessionmanagement.getInstance().checkSession(SID);
 	        //log.error("getNavi 1: "+users_id);
-	        Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
+	        Long user_level = Usermanagement.getInstance().getUserLevelByIdAndOrg(user_id, organisation_id);
 	        //log.error("getNavi 2: "+user_level);
-			return Navimanagement.getInstance().getMainMenu(user_level,users_id, language_id);
+			return Navimanagement.getInstance().getMainMenu(user_level,user_id, language_id);
 		} catch (Exception err){
 			log.error("[getNavi] ", err);
 		}

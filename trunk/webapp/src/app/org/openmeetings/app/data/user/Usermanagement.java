@@ -21,6 +21,7 @@ import org.openmeetings.app.data.basic.Sessionmanagement;
 import org.openmeetings.app.data.beans.basic.SearchResult;
 import org.openmeetings.app.data.user.dao.UsersDaoImpl;
 import org.openmeetings.app.hibernate.beans.adresses.Adresses;
+import org.openmeetings.app.hibernate.beans.domain.Organisation_Users;
 import org.openmeetings.app.hibernate.beans.lang.Fieldlanguagesvalues;
 import org.openmeetings.app.hibernate.beans.recording.RoomClient;
 import org.openmeetings.app.hibernate.beans.user.Userdata;
@@ -174,7 +175,8 @@ public class Usermanagement {
 	 * @return
 	 */
 	public Users checkAdmingetUserById(long user_level, long user_id){
-		if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)) {
+		//FIXME: We have to check here for the User only cause the Org-Moderator otherwise cannot access it
+		if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
 			return UsersDaoImpl.getInstance().getUser(user_id);
 		}
 		return null;
@@ -630,6 +632,60 @@ public class Usermanagement {
 			
 			if (us!=null){
 				return us.getLevel_id();
+			} else {
+				return -1L;
+			}
+		} catch (HibernateException ex) {
+			log.error("[getUserLevelByID]" ,ex);
+		} catch (Exception ex2) {
+			log.error("[getUserLevelByID]" ,ex2);
+		}
+		return null;
+	}
+
+	public Long getUserLevelByIdAndOrg(Long user_id, Long organisation_id) {
+		
+		try {
+			if (user_id==null) return new Long(0);
+			//For direct access of linked users
+			if (user_id==-1){
+				return new Long(1);
+			}
+			
+			Object idf = HibernateUtil.createSession();
+			Session session = HibernateUtil.getSession();
+			Transaction tx = session.beginTransaction();
+			
+			Query query = session.createQuery("select c from Users as c where c.user_id = :user_id AND deleted <> 'true'");
+			query.setLong("user_id", user_id);
+			Users us = (Users) query.uniqueResult();
+			
+			tx.commit();
+			HibernateUtil.closeSession(idf);
+			
+			if (us!=null){
+				
+				if (us.getLevel_id() > 2) {
+					return us.getLevel_id();
+				} else {
+					
+					log.debug("user_id, organisation_id"+user_id+", "+organisation_id);
+				
+					Organisation_Users ou = Organisationmanagement.getInstance().getOrganisation_UserByUserAndOrganisation(user_id, organisation_id);
+					
+					log.debug("ou: "+ou);
+					
+					if (ou != null) {
+						if (ou.getIsModerator() != null && ou.getIsModerator()) {
+							return 2L;
+						} else {
+							return us.getLevel_id();
+						}
+					} else {
+						return us.getLevel_id();
+					}
+				}
+				
 			} else {
 				return -1L;
 			}
