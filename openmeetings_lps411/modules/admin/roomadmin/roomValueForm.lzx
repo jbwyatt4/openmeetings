@@ -33,7 +33,7 @@
 	</handler>
 	
     <handler name="ondelete" >
-		if (this.user_id!=0){
+		if (this.rooms_id!=0){
 			this.deleteRoom.doCall();
 		}
     </handler>
