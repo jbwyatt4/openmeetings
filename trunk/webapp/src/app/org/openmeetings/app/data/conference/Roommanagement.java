@@ -82,7 +82,7 @@ public class Roommanagement {
 	 */
 	public List<RoomTypes> getAllRoomTypes(Long user_level){
 		try {
-			if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)){
+			if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)){
 				Object idf = HibernateUtil.createSession();
 				Session session = HibernateUtil.getSession();
 				Transaction tx = session.beginTransaction();
@@ -309,7 +309,7 @@ public class Roommanagement {
 	
 	public List<Rooms_Organisation> getOrganisationsByRoom(long user_level, long rooms_id){
 		try {
-			if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)){
+			if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)){
 				Object idf = HibernateUtil.createSession();
 				Session session = HibernateUtil.getSession();
 				Transaction tx = session.beginTransaction();
