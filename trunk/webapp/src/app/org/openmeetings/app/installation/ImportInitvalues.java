@@ -108,10 +108,10 @@ public class ImportInitvalues {
 		Navimanagement.getInstance().addGlobalStructure("moderate", 5, 649L, false,
 				true, 2, "Moderation Menu", "true", 660L);
 		
-		Navimanagement.getInstance().addMainStructure("userModerate", 1, 650,
+		Navimanagement.getInstance().addMainStructure("moderatorModuleUser", 1, 650,
 				true, false, 1, "Moderate Users", 5, "false");
 		
-		Navimanagement.getInstance().addMainStructure("roomModerate", 1, 651,
+		Navimanagement.getInstance().addMainStructure("moderatorModuleRoom", 1, 651,
 				true, false, 1, "Moderate Rooms", 5, "false");
 		
 		

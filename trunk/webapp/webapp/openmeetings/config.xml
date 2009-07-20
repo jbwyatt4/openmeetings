@@ -102,7 +102,7 @@ of the red5-servlet
     visible = yes
     hidden = no
  -->	
-<showRecording>hidden</showRecording>
+<showRecording>visible</showRecording>
 
 <!--
     
@@ -181,6 +181,83 @@ of the red5-servlet
 <microphoneRateNormal>22</microphoneRateNormal>
 <!-- Microphone Settings Quality-Modus *best* -->    
 <microphoneRateBest>44</microphoneRateBest>  
+
+<!--
+    The Size of the Whiteboard
+    The Whiteboard has scrollbars so you may increase the size without problems
+ -->
+<defaultWhiteboardWidth>2400</defaultWhiteboardWidth>  
+<defaultWhiteboardHeight>1200</defaultWhiteboardHeight>  
     
+ 
+<!-- Module Configuration -->
+<!-- #############################################
+    Admin Modules
+  -->   
+    
+<adminModuleUser>userAdmin</adminModuleUser>
+
+<adminModuleRoom>roomAdmin</adminModuleRoom>
+
+<adminModuleOrg>orgAdmin</adminModuleOrg>
+
+<adminModuleLanguages>languagesEditor</adminModuleLanguages>
+
+<adminModuleConnections>roomClient</adminModuleConnections>
+
+<adminModuleConfiguration>confAdmin</adminModuleConfiguration>
+
+<adminModuleBackup>backupContent</adminModuleBackup>
+
+
+<!-- #############################################
+    Moderator Modules
+ -->
+
+<moderatorModuleUser>userModerate</moderatorModuleUser>
+
+<moderatorModuleRoom>roomModerate</moderatorModuleRoom>
+
+
+<!-- #############################################
+    Dashboard Modules
+ -->
+
+<dashboardModuleStartScreen>mainDashboard</dashboardModuleStartScreen>
+
+<dashboardModuleCalendar>myScheduledMeetings</dashboardModuleCalendar>
+
+
+<!-- Conference Room Modules -->
+
+<conferenceModuleRoomList>allmeetings</conferenceModuleRoomList>
+
+
+<!-- #############################################
+    Conference Room
+ -->
+
+<conferenceRoomModule>conferenceView</conferenceRoomModule>
+
+
+<!-- #############################################
+    Event Room Modules
+ -->
+
+<eventModuleRoomList>allEvents</eventModuleRoomList>
+
+
+<!-- #############################################
+    Event Room
+ -->
+
+<eventRoomModule>audienceView</eventRoomModule>
+
+
+<!-- #############################################
+    Event Room Modules
+ -->
+
+<recordModule>recordContent</recordModule>
         
 </config>
