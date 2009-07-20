@@ -1168,12 +1168,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>importar</value>
   </string>
   <string id="388" name="languageseditor">
-    <value>Exportar a XML - Estos arquivos poden ser usados para:
-		- Contribuir no proxecto
-		- Importalos a outro sistema
-		- Respaldo
-		- Personalización
-		- Colocalo no directorio de linguaxes para a próxima instalación.</value>
+    <value>Exportar a XML - Estos arquivos poden ser usados para: - Contribuir no proxecto - Importalos a outro sistema - Respaldo - Personalización - Colocalo no directorio de linguaxes para a próxima instalación.</value>
   </string>
   <string id="389" name="languageseditor">
     <value>Seleccione un arquivo de linguaxe a importar. Seleccione correctamente a lingua do selector (non importa o nome que teña, será importado a esta lingua de todolos xeitos).</value>
@@ -1234,7 +1229,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   </string>
   <string id="408" name="roomslist">
     <value>dende:</value>
-  </string>	
+  </string>
   <string id="409" name="record">
     <value>reproducir grabación</value>
   </string>
@@ -1261,7 +1256,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   </string>
   <string id="417" name="record">
     <value>Grabación:</value>
-  </string>	
+  </string>
   <string id="418" name="record_error_msg">
     <value>Actualmente alguén se atopa grabando:</value>
   </string>
@@ -1303,7 +1298,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   </string>
   <string id="431" name="paint_tool_letter">
     <value>cambiar tamaño de letra</value>
-  </string>	
+  </string>
   <string id="432" name="recordingslist_delete">
     <value>Eliminar grabación</value>
   </string>
@@ -1348,7 +1343,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   </string>
   <string id="446" name="chat_emot_win">
     <value>Emoticonos</value>
-  </string>	
+  </string>
   <string id="447" name="choose_video_settings">
     <value>Seleccione os dispositivos de transmisión</value>
   </string>
@@ -1366,7 +1361,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   </string>
   <string id="452" name="choose_video_settings_info_text">
     <value>Non se transmitirá Audio/Video dende o seu computador, no seu lugar mostrarase a imáxe do seu perfil. Seleccione esta configuración si vostede tén problemas co seu ancho de banda ou unha baixa conexión de internet.</value>
-  </string>	
+  </string>
   <string id="453" name="calendar_dayname_monday">
     <value>LU</value>
   </string>
@@ -1388,7 +1383,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   <string id="459" name="calendar_dayname_sunday">
     <value>DO</value>
   </string>
-  <string id="460" name="calendar_dayname_MondayLabel">
+  <string id="460" name="calendar_dayname_monday">
     <value>Lúns</value>
   </string>
   <string id="461" name="calendar_dayname_TuesdayLabel">
@@ -1453,10 +1448,10 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   </string>
   <string id="481" name="calendarwin_header">
     <value>Calendario</value>
-  </string>	
+  </string>
   <string id="482" name="roomadmin_labelNumberOfParticipants">
     <value>Participantes</value>
-  </string>	
+  </string>
   <string id="483" name="roomValue_advancedSettings">
     <value>Configuracións de deseño</value>
   </string>
@@ -1504,7 +1499,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   </string>
   <string id="498" name="moderator_message_event_no_mod">
     <value>Non hai moderador nesta sala, pero si participantes. Vostede pode esperar ou aplicar para moderar.</value>
-  </string>		
+  </string>
   <string id="499" name="feedback_template_subject">
     <value>Comentario de OpenMeetings</value>
   </string>
@@ -1561,7 +1556,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   </string>
   <string id="517" name="reset_password_mail_subject">
     <value>OpenMeetings - Nova contrasinal</value>
-  </string>	
+  </string>
   <string id="518" name="dateRegExpError">
     <value>Por favor ingrese unha data válida no formato dd.mm.yyyy Exemplo: 24.12.2001</value>
   </string>
@@ -1630,7 +1625,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   </string>
   <string id="540" name="audio_video">
     <value>Sincronizar Audio/Video</value>
-  </string>	
+  </string>
   <string id="541" name="errorCode_invalidSession">
     <value>O login é correcto, pero a sesión non está activa ou gardada no servidor.Vostede ten que conseguir un novo identificador de sesión e volverse loguear.</value>
   </string>
@@ -1642,7 +1637,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   </string>
   <string id="544" name="debug_message_recording">
     <value>A grabación é actualmente unha Beta!</value>
-  </string>	
+  </string>
   <string id="545" name="propertyPanelXValue">
     <value>x</value>
   </string>
@@ -1669,16 +1664,16 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   </string>
   <string id="553" name="propertyOpacitySlider">
     <value>Cambiar Transparencia</value>
-  </string>	
+  </string>
   <string id="554" name="browserOpen">
     <value>Abrir Explorador</value>
-  </string>	
+  </string>
   <string id="555" name="browserClose">
     <value>Pechar Explorador</value>
-  </string>	
+  </string>
   <string id="556" name="connectionLostMessage">
     <value>Perdeuse a conexión co servidor. Vostede precisa reiniciar a Aplicación ou/e comprobar a súa Rede.</value>
-  </string>  
+  </string>
   <string id="557" name="557">
     <value>Punteiro</value>
   </string>
@@ -1768,7 +1763,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   </string>
   <string id="586" name="tooltip main-menu">
     <value>Crear usuarios, salas, organizacións&lt;br/&gt; + cambiar configuración</value>
-  </string> 
+  </string>
   <string id="587" name="room Administration roomclients list">
     <value>Usuarios nesta Sala agora</value>
   </string>
@@ -1780,10 +1775,10 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   </string>
   <string id="590" name="room Administration roomclients list">
     <value>D</value>
-  </string>  
+  </string>
   <string id="591" name="swf sync message">
     <value>Procurando Documento. Por favor agarde ata que tódolos Clientes estean sincronizados.</value>
-  </string>  
+  </string>
   <string id="592" name="upload dialog">
     <value>Subida completa, convertindo Documento ...</value>
   </string>
@@ -1804,7 +1799,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   </string>
   <string id="598" name="confadmin value list">
     <value>Valor</value>
-  </string>  
+  </string>
   <string id="599" name="connection administration panel">
     <value>Identificador de stream</value>
   </string>
@@ -1831,7 +1826,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   </string>
   <string id="607" name="useralterself_phone">
     <value>Teléfono</value>
-  </string> 
+  </string>
   <string id="608" name="participents panel">
     <value>O usuario é moderador desta sala</value>
   </string>
@@ -1858,10 +1853,10 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   </string>
   <string id="616" name="conferencePanels">
     <value>Chat</value>
-  </string>  
+  </string>
   <string id="617" name="organization choose info">
     <value>A súa conta está asignada a multiples Organizacións. Por favor escolla unha para esta Sesión.</value>
-  </string>   
+  </string>
   <string id="618" name="error message room full">
     <value>This room is full at the moment. Please try again later.</value>
   </string>
@@ -1912,7 +1907,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   </string>
   <string id="634" name="logoutConfirm_sure_to_logout_question">
     <value>Are you sure you want to logout now?</value>
-  </string>   
+  </string>
   <string id="635" name="main menu">
     <value>Actions</value>
   </string>
@@ -1930,13 +1925,13 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   </string>
   <string id="640" name="meeting room administration">
     <value>Moderated</value>
-  </string>    
+  </string>
   <string id="641" name="moderated room waiting message">
     <value>Please wait untill the Moderator has entered the Room. The Moderator can be either a Teacher, Admin or the creator of this Room.</value>
   </string>
   <string id="642" name="error popup">
     <value>Ok</value>
-  </string>  
+  </string>
   <string id="643" name="window screensharing">
     <value>Incoming Screen Sharing</value>
   </string>
@@ -1987,8 +1982,26 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   </string>
   <string id="659" name="error message moderation">
     <value>Do you want this User to be not a Moderator of this Organization?</value>
-  </string>  
+  </string>
   <string id="660" name="moderation">
     <value>Add or delete Users or Rooms within your Organization</value>
+  </string>
+  <string id="661" name="delete confirm question">
+    <value>Do you really want to delete this record?</value>
+  </string>
+  <string id="662" name="delete confirm question user moderation">
+    <value>Do you really want to delete this user from your organization? You will only delete the connection between the user and your organization, to really delete the user itself you have to login into the Administration-Panel.</value>
+  </string>
+  <string id="663" name="error message self deleting">
+    <value>You cannot delete your own User!</value>
+  </string>
+  <string id="664" name="error message auth">
+    <value>This Method needs a Adminstration Account to be invoked!</value>
+  </string>
+  <string id="665" name="error message SOAP">
+    <value>There was no Session associated with this ID.</value>
+  </string>
+  <string id="666" name="error message moderation">
+    <value>This is an Administrator or Moderator account. You can only edit this account through the Administration Panel.</value>
   </string>
 </language>

@@ -1171,8 +1171,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Експортувати в XML</value>
   </string>
   <string id="389" name="languageseditor">
-    <value>Виберіть мовний файл для імпорту. Виберіть правильну мову зі списку! 
-		Незаважаючи, яку назву має файл, він буде імпортований в цю мову</value>
+    <value>Виберіть мовний файл для імпорту. Виберіть правильну мову зі списку! Незаважаючи, яку назву має файл, він буде імпортований в цю мову</value>
   </string>
   <string id="390" name="importwindow">
     <value>Імпорт - вибрати файл</value>
@@ -1230,7 +1229,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   </string>
   <string id="408" name="roomslist">
     <value>Після:</value>
-  </string>	
+  </string>
   <string id="409" name="record">
     <value>Програти запис</value>
   </string>
@@ -1257,7 +1256,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   </string>
   <string id="417" name="record">
     <value>Запис:</value>
-  </string>	
+  </string>
   <string id="418" name="record_error_msg">
     <value>На даний момент хтось уже виконує запис:</value>
   </string>
@@ -1299,7 +1298,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   </string>
   <string id="431" name="paint_tool_letter">
     <value>Змінити розмір шрифту</value>
-  </string>	
+  </string>
   <string id="432" name="recordingslist_delete">
     <value>Стерти запис</value>
   </string>
@@ -1344,7 +1343,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   </string>
   <string id="446" name="chat_emot_win">
     <value>Емоції</value>
-  </string>	
+  </string>
   <string id="447" name="choose_video_settings">
     <value>Виберіть публічні пристрої</value>
   </string>
@@ -1362,7 +1361,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   </string>
   <string id="452" name="choose_video_settings_info_text">
     <value>Без показу Аудіо/Відео від вашого ПК. Буде доступна лиша картинка вашого профілю. Виберіть ці параметри якщо у вас поганий канал Internet.</value>
-  </string>	
+  </string>
   <string id="453" name="calendar_dayname_monday">
     <value>ПН</value>
   </string>
@@ -1384,7 +1383,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   <string id="459" name="calendar_dayname_sunday">
     <value>НД</value>
   </string>
-  <string id="460" name="calendar_dayname_MondayLabel">
+  <string id="460" name="calendar_dayname_monday">
     <value>Понеділок</value>
   </string>
   <string id="461" name="calendar_dayname_TuesdayLabel">
@@ -1449,10 +1448,10 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   </string>
   <string id="481" name="calendarwin_header">
     <value>Календар</value>
-  </string>	
+  </string>
   <string id="482" name="roomadmin_labelNumberOfParticipants">
     <value>Учасники</value>
-  </string>	
+  </string>
   <string id="483" name="roomValue_advancedSettings">
     <value>Показати налаштування показу</value>
   </string>
@@ -1484,7 +1483,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Ширина | Висота</value>
   </string>
   <string id="493" name="roomAdmin_layout_files">
-    <value>Контейнер файлів,чату,учасників - </value>
+    <value>Контейнер файлів,чату,учасників -</value>
   </string>
   <string id="494" name="roomAdmin_layout_files_show">
     <value>Активізувати</value>
@@ -1494,13 +1493,13 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   </string>
   <string id="496" name="roomAdmin_layout_files">
     <value>Ширина | Висота</value>
-  </string>	
+  </string>
   <string id="497" name="moderator_gone_message">
     <value>Модератор покинув кімнату. Ви можете стати модератором або чекати.</value>
   </string>
   <string id="498" name="moderator_message_event_no_mod">
     <value>Немає модератора в даній кімнаті, але є учасники. Ви можете стати модератором або чекати</value>
-  </string>	
+  </string>
   <string id="499" name="feedback_template_subject">
     <value>Зворотній зв'язок OpenMeetings</value>
   </string>
@@ -1557,7 +1556,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   </string>
   <string id="517" name="reset_password_mail_subject">
     <value>Відновлення пароля OpenMeetings</value>
-  </string>	
+  </string>
   <string id="518" name="dateRegExpError">
     <value>Будь-ласка введіть правильну дату, наприклад 24.12.2007 (dd.mm.yyyy)</value>
   </string>
@@ -1624,9 +1623,9 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   <string id="539" name="Browser">
     <value>Бравзер</value>
   </string>
-  <string id="540" name="Browser">
+  <string id="540" name="audio_video">
     <value>Синхронізувати аудіо/відео</value>
-  </string>	
+  </string>
   <string id="541" name="errorCode_invalidSession">
     <value>Вхід виконано, але Ваша сесія, яку ви пробували не активна чи збережена на сервері. Ви повинні отримати новий SessionId і повторити вхід.</value>
   </string>
@@ -1638,7 +1637,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   </string>
   <string id="544" name="debug_message_recording">
     <value>На даний момент функція запису є в Beta-тестуванні!</value>
-  </string>	
+  </string>
   <string id="545" name="propertyPanelXValue">
     <value>x</value>
   </string>
@@ -1665,16 +1664,16 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   </string>
   <string id="553" name="propertyOpacitySlider">
     <value>Change Transparency</value>
-  </string> 
+  </string>
   <string id="554" name="browserOpen">
     <value>Browser Open</value>
-  </string> 
+  </string>
   <string id="555" name="browserClose">
     <value>Browser Close</value>
-  </string> 
+  </string>
   <string id="556" name="connectionLostMessage">
     <value>The Connection to the Server is lost. You need to reload the Application or/and check your Network.</value>
-  </string>  
+  </string>
   <string id="557" name="557">
     <value>Pointer</value>
   </string>
@@ -1764,7 +1763,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   </string>
   <string id="586" name="tooltip main-menu">
     <value>Create users, rooms, organizations&lt;br/&gt; + change configuration</value>
-  </string> 
+  </string>
   <string id="587" name="room Administration roomclients list">
     <value>Users in this Room now</value>
   </string>
@@ -1776,10 +1775,10 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   </string>
   <string id="590" name="room Administration roomclients list">
     <value>D</value>
-  </string>  
+  </string>
   <string id="591" name="swf sync message">
     <value>Loading Document. Please wait untill all Client have been synchronized.</value>
-  </string> 
+  </string>
   <string id="592" name="upload dialog">
     <value>Upload complete, converting Document ...</value>
   </string>
@@ -1800,7 +1799,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   </string>
   <string id="598" name="confadmin value list">
     <value>Value</value>
-  </string>   
+  </string>
   <string id="599" name="connection administration panel">
     <value>Streamid</value>
   </string>
@@ -1824,10 +1823,10 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   </string>
   <string id="606" name="kick user message dialog">
     <value>Your session has been closed by an Administrator or Moderator.</value>
-  </string> 
+  </string>
   <string id="607" name="useralterself_phone">
     <value>Phone</value>
-  </string> 
+  </string>
   <string id="608" name="participents panel">
     <value>User is the Moderator of this Room</value>
   </string>
@@ -1857,10 +1856,10 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   </string>
   <string id="617" name="organization choose info">
     <value>Your account is assigned to multiple Organizations. Please choose one for this Session.</value>
-  </string>    
+  </string>
   <string id="618" name="error message room full">
     <value>This room is full at the moment. Please try again later.</value>
-  </string>  
+  </string>
   <string id="619" name="roomtypes">
     <value>Room Type</value>
   </string>
@@ -1900,7 +1899,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   <string id="631" name="lbl_name">
     <value>name</value>
   </string>
-   <string id="632" name="lbl_email">
+  <string id="632" name="lbl_email">
     <value>E-mail</value>
   </string>
   <string id="633" name="logoutConfirm_title">
@@ -1908,7 +1907,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   </string>
   <string id="634" name="logoutConfirm_sure_to_logout_question">
     <value>Are you sure you want to logout now?</value>
-  </string>	
+  </string>
   <string id="635" name="main menu">
     <value>Actions</value>
   </string>
@@ -1923,7 +1922,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   </string>
   <string id="639" name="meeting Timer">
     <value>This Room is a Demo Room. To disable this warning you either should get a private meeting room for your personal usage or set up an own Server. You will be automatically logged off in:</value>
-  </string>  
+  </string>
   <string id="640" name="meeting room administration">
     <value>Moderated</value>
   </string>
@@ -1932,7 +1931,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   </string>
   <string id="642" name="error popup">
     <value>Ok</value>
-  </string> 
+  </string>
   <string id="643" name="window screensharing">
     <value>Incoming Screen Sharing</value>
   </string>
@@ -1941,7 +1940,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   </string>
   <string id="645" name="window screen sharing">
     <value>Start Sharing</value>
-  </string>      
+  </string>
   <string id="646" name="calendar">
     <value>Add new Meeting</value>
   </string>
@@ -1986,5 +1985,23 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   </string>
   <string id="660" name="moderation">
     <value>Add or delete Users or Rooms within your Organization</value>
+  </string>
+  <string id="661" name="delete confirm question">
+    <value>Do you really want to delete this record?</value>
+  </string>
+  <string id="662" name="delete confirm question user moderation">
+    <value>Do you really want to delete this user from your organization? You will only delete the connection between the user and your organization, to really delete the user itself you have to login into the Administration-Panel.</value>
+  </string>
+  <string id="663" name="error message self deleting">
+    <value>You cannot delete your own User!</value>
+  </string>
+  <string id="664" name="error message auth">
+    <value>This Method needs a Adminstration Account to be invoked!</value>
+  </string>
+  <string id="665" name="error message SOAP">
+    <value>There was no Session associated with this ID.</value>
+  </string>
+  <string id="666" name="error message moderation">
+    <value>This is an Administrator or Moderator account. You can only edit this account through the Administration Panel.</value>
   </string>
 </language>

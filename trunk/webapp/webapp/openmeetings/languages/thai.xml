@@ -626,7 +626,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   </string>
   <string id="207" name="loadwml_messsync">
     <value>กำลังซิงค์โครไนซ์ลูกค้าอยู่ ลูกค้าต้องรอ:</value>
-  </string> 
+  </string>
   <string id="208" name="loadimage_messload">
     <value>กำลังโหลดข้อมูลรูปภาพ</value>
   </string>
@@ -1498,7 +1498,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>ผู้ดำเนินรายการออกจากห้องไปแล้ว ไม่มีใครอยู่ในขณะนี้ คุณสามารถสมัครเพื่อทำหน้าที่ดำเนินรายการได้หรือรอ</value>
   </string>
   <string id="498" name="moderator_message_event_no_mod">
-    <value>ผู้ดำเนินรายการออกจากห้องไปแล้ว  แต่มีผู้เข้าร่วมบางรายอยู่ คุณต้องสมัครเพื่อทำหน้าที่ดำเนินรายการหรือรอ</value>
+    <value>ผู้ดำเนินรายการออกจากห้องไปแล้ว แต่มีผู้เข้าร่วมบางรายอยู่ คุณต้องสมัครเพื่อทำหน้าที่ดำเนินรายการหรือรอ</value>
   </string>
   <string id="499" name="feedback_template_subject">
     <value>ผลตอบรับการประชุมแบบเปิด</value>
@@ -1588,16 +1588,16 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>ไม่จำกัด</value>
   </string>
   <string id="528" name="invitation_window_valid">
-      <value>จำกัดระยะเวลา</value>
+    <value>จำกัดระยะเวลา</value>
   </string>
   <string id="529" name="invitation_window_valid">
-     <value>ใช้ครั้งเดียว</value>
+    <value>ใช้ครั้งเดียว</value>
   </string>
   <string id="530" name="invitation_window_validFromLabel">
-     <value>ใช้งานได้ตั้งแต่:</value>
+    <value>ใช้งานได้ตั้งแต่:</value>
   </string>
   <string id="531" name="invitation_window_validToLabel">
-     <value>ถึง:</value>
+    <value>ถึง:</value>
   </string>
   <string id="532" name="invitation_window_MailSubject">
     <value>คำเชิญเข้าสู่การประชุมแบบเปิด</value>
@@ -1763,7 +1763,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   </string>
   <string id="586" name="tooltip main-menu">
     <value>สร้างผู้ใช้ ห้อง องค์กร&lt;br/&gt; + เปลี่ยนการปรับแต่งค่า</value>
-  </string> 
+  </string>
   <string id="587" name="room Administration roomclients list">
     <value>Users in this Room now</value>
   </string>
@@ -1775,10 +1775,10 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   </string>
   <string id="590" name="room Administration roomclients list">
     <value>D</value>
-  </string>  
+  </string>
   <string id="591" name="swf sync message">
     <value>Loading Document. Please wait untill all Client have been synchronized.</value>
-  </string>  
+  </string>
   <string id="592" name="upload dialog">
     <value>Upload complete, converting Document ...</value>
   </string>
@@ -1823,10 +1823,10 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   </string>
   <string id="606" name="kick user message dialog">
     <value>Your session has been closed by an Administrator or Moderator.</value>
-  </string> 
+  </string>
   <string id="607" name="useralterself_phone">
     <value>Phone</value>
-  </string>   
+  </string>
   <string id="608" name="participents panel">
     <value>User is the Moderator of this Room</value>
   </string>
@@ -1853,13 +1853,13 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   </string>
   <string id="616" name="conferencePanels">
     <value>Chat</value>
-  </string> 
+  </string>
   <string id="617" name="organization choose info">
     <value>Your account is assigned to multiple Organizations. Please choose one for this Session.</value>
-  </string> 
+  </string>
   <string id="618" name="error message room full">
     <value>This room is full at the moment. Please try again later.</value>
-  </string>    
+  </string>
   <string id="619" name="roomtypes">
     <value>Room Type</value>
   </string>
@@ -1899,7 +1899,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   <string id="631" name="lbl_name">
     <value>name</value>
   </string>
-   <string id="632" name="lbl_email">
+  <string id="632" name="lbl_email">
     <value>E-mail</value>
   </string>
   <string id="633" name="logoutConfirm_title">
@@ -1907,7 +1907,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   </string>
   <string id="634" name="logoutConfirm_sure_to_logout_question">
     <value>Are you sure you want to logout now?</value>
-  </string>	
+  </string>
   <string id="635" name="main menu">
     <value>Actions</value>
   </string>
@@ -1922,10 +1922,10 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   </string>
   <string id="639" name="meeting Timer">
     <value>This Room is a Demo Room. To disable this warning you either should get a private meeting room for your personal usage or set up an own Server. You will be automatically logged off in:</value>
-  </string>  
+  </string>
   <string id="640" name="meeting room administration">
     <value>Moderated</value>
-  </string>  
+  </string>
   <string id="641" name="moderated room waiting message">
     <value>Please wait untill the Moderator has entered the Room. The Moderator can be either a Teacher, Admin or the creator of this Room.</value>
   </string>
@@ -1940,7 +1940,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   </string>
   <string id="645" name="window screen sharing">
     <value>Start Sharing</value>
-  </string>  
+  </string>
   <string id="646" name="calendar">
     <value>Add new Meeting</value>
   </string>
@@ -1958,7 +1958,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   </string>
   <string id="651" name="menu moderation">
     <value>Moderate Rooms</value>
-  </string>   
+  </string>
   <string id="652" name="moderator org">
     <value>M</value>
   </string>
@@ -1985,5 +1985,23 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   </string>
   <string id="660" name="moderation">
     <value>Add or delete Users or Rooms within your Organization</value>
+  </string>
+  <string id="661" name="delete confirm question">
+    <value>Do you really want to delete this record?</value>
+  </string>
+  <string id="662" name="delete confirm question user moderation">
+    <value>Do you really want to delete this user from your organization? You will only delete the connection between the user and your organization, to really delete the user itself you have to login into the Administration-Panel.</value>
+  </string>
+  <string id="663" name="error message self deleting">
+    <value>You cannot delete your own User!</value>
+  </string>
+  <string id="664" name="error message auth">
+    <value>This Method needs a Adminstration Account to be invoked!</value>
+  </string>
+  <string id="665" name="error message SOAP">
+    <value>There was no Session associated with this ID.</value>
+  </string>
+  <string id="666" name="error message moderation">
+    <value>This is an Administrator or Moderator account. You can only edit this account through the Administration Panel.</value>
   </string>
 </language>
