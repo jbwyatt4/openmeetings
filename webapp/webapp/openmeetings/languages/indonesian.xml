@@ -345,6 +345,39 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   <string id="113" name="regformhead">
     <value>Mendaftar</value>
   </string>
+  <string id="114" name="regformuser">
+    <value>User:</value>
+  </string>
+  <string id="115" name="regformpass">
+    <value>Pass:</value>
+  </string>
+  <string id="116" name="regformretype">
+    <value>Ulangi Pass:</value>
+  </string>
+  <string id="117" name="regformfirstname">
+    <value>Nama Depan:</value>
+  </string>
+  <string id="118" name="regformlastname">
+    <value>Nama Belakang:</value>
+  </string>
+  <string id="119" name="regformmail">
+    <value>Email:</value>
+  </string>
+  <string id="120" name="regformstate">
+    <value>Negara:</value>
+  </string>
+  <string id="121" name="regformbtn1">
+    <value>Daftar</value>
+  </string>
+  <string id="122" name="regformbtn2">
+    <value>Batal</value>
+  </string>
+  <string id="123" name="Authbtn2">
+    <value>Bukan anggota?</value>
+  </string>
+  <string id="124" name="dashboard">
+    <value>Halaman Utama</value>
+  </string>
   <string id="125" name="useradmin">
     <value>User</value>
   </string>
@@ -353,6 +386,12 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   </string>
   <string id="127" name="orgadmin">
     <value>Organisasi</value>
+  </string>
+  <string id="128" name="headconf">
+    <value>Ruang-Rapat</value>
+  </string>
+  <string id="129" name="conf_pub">
+    <value>publik</value>
   </string>
   <string id="130" name="head_org">
     <value>organisasi</value>
@@ -396,6 +435,9 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   <string id="143" name="useralterself_header">
     <value>Data User</value>
   </string>
+  <string id="144" name="savemenubar_savelabel">
+    <value>simpan</value>
+  </string>
   <string id="145" name="savemenubar_savelabel">
     <value>Simpan</value>
   </string>
@@ -407,6 +449,51 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   </string>
   <string id="148" name="admin_userlist_firstnam">
     <value>nama depan</value>
+  </string>
+  <string id="149" name="admin_userlist_lastname">
+    <value>nama belakang</value>
+  </string>
+  <string id="150" name="turnoverlist_next">
+    <value>selanjutnya</value>
+  </string>
+  <string id="151" name="turnoverlist_pre">
+    <value>sebelumnya</value>
+  </string>
+  <string id="152" name="savecontent_confirm">
+    <value>hapus rekot</value>
+  </string>
+  <string id="153" name="savecontent_confirm_cancel_btn">
+    <value>batal</value>
+  </string>
+  <string id="154" name="savecontent_confirm_confirm_btn">
+    <value>hapus</value>
+  </string>
+  <string id="155" name="savemenubar_addlabel">
+    <value>rekot baru</value>
+  </string>
+  <string id="156" name="savemenubar_reloadlabel">
+    <value>panggil ulang</value>
+  </string>
+  <string id="157" name="savemenubar_deletelabel">
+    <value>hapus rekot</value>
+  </string>
+  <string id="158" name="useralter_admin_status">
+    <value>status</value>
+  </string>
+  <string id="159" name="useralter_admin_statusItem">
+    <value>abaikan</value>
+  </string>
+  <string id="160" name="useralter_admin_statusItem">
+    <value>aktifkan</value>
+  </string>
+  <string id="161" name="useralter_admin_organisation">
+    <value>organisasi</value>
+  </string>
+  <string id="162" name="calendar_iconlabel">
+    <value>kalender</value>
+  </string>
+  <string id="163" name="savewindow_btn">
+    <value>tutup</value>
   </string>
   <string id="164" name="organisationtablelist_idrow">
     <value>ID Organisasi</value>
@@ -441,6 +528,15 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   <string id="174" name="orgvalue_userwin">
     <value>batal</value>
   </string>
+  <string id="175" name="orgvalue_userwin">
+    <value>tambah</value>
+  </string>
+  <string id="176" name="orgvalue_userwin">
+    <value>hapus organisasi</value>
+  </string>
+  <string id="177" name="orgvalue_userlist">
+    <value>user</value>
+  </string>
   <string id="178" name="orgvalue_userlistadd">
     <value>tambah user</value>
   </string>
@@ -449,6 +545,48 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   </string>
   <string id="180" name="orgvalue_userwinheader">
     <value>tambah user</value>
+  </string>
+  <string id="181" name="orgvalue_userwinsearchfield">
+    <value>cari user</value>
+  </string>
+  <string id="182" name="orgvalue_userwinsearchbtn">
+    <value>cari</value>
+  </string>
+  <string id="183" name="orgvalue_userwinsearchresult">
+    <value>user</value>
+  </string>
+  <string id="184" name="loginwin_chooseorganisation">
+    <value>organisasi</value>
+  </string>
+  <string id="185" name="loginwin_chooseorganisationbtn">
+    <value>masuk</value>
+  </string>
+  <string id="186" name="navi_roomadmin">
+    <value>ruang konferensi</value>
+  </string>
+  <string id="187" name="roomadmin_header">
+    <value>Ruang Konferensi</value>
+  </string>
+  <string id="188" name="roomadmin_header">
+    <value>id</value>
+  </string>
+  <string id="189" name="roomadmin_header">
+    <value>Nama</value>
+  </string>
+  <string id="190" name="roomadmin_header">
+    <value>publik</value>
+  </string>
+  <string id="191" name="roomadmin_header">
+    <value>organisasi</value>
+  </string>
+  <string id="192" name="roomadmin_header">
+    <value>Ruang Rapat</value>
+  </string>
+  <string id="193" name="roomvalue_name">
+    <value>nama</value>
+  </string>
+  <string id="194" name="roomvalue_type">
+    <value>tipe</value>
   </string>
   <string id="195" name="roomvalue_ispublic">
     <value>publik</value>
@@ -462,6 +600,54 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   <string id="198" name="whiteboard_openicon">
     <value>panggil</value>
   </string>
+  <string id="199" name="whiteboard_saveaswinheader">
+    <value>simpan sebagai</value>
+  </string>
+  <string id="200" name="whiteboard_saveaswintext">
+    <value>nama file</value>
+  </string>
+  <string id="201" name="files">
+    <value>nama file</value>
+  </string>
+  <string id="202" name="whiteboard_saveaswinbtn1">
+    <value>batal</value>
+  </string>
+  <string id="203" name="whiteboard_saveaswinbtn2">
+    <value>simpan</value>
+  </string>
+  <string id="204" name="rpcerrorwin_header">
+    <value>salah</value>
+  </string>
+  <string id="205" name="loadwml_header">
+    <value>panggil</value>
+  </string>
+  <string id="206" name="loadwml_messsload">
+    <value>objek terpanggil</value>
+  </string>
+  <string id="207" name="loadwml_messsync">
+    <value>sinkronasi klien, harap menunggu:</value>
+  </string>
+  <string id="208" name="loadimage_messload">
+    <value>Panggil data gambar</value>
+  </string>
+  <string id="209" name="loadimage_messsync">
+    <value>sinkronasi klien, harap menunggu:</value>
+  </string>
+  <string id="210" name="loadwml_confirmheader">
+    <value>bersihkan area gambar</value>
+  </string>
+  <string id="211" name="loadwml_confirmmess">
+    <value>area gambar di bersihkan, semua data akan hilang</value>
+  </string>
+  <string id="212" name="loadwml_confirmmess2">
+    <value>Konfirmasi sebelum panggil file</value>
+  </string>
+  <string id="213" name="send_invitation_btn">
+    <value>Kirim undangan</value>
+  </string>
+  <string id="214" name="send_invitationwin_header">
+    <value>Kirim undangan</value>
+  </string>
   <string id="215" name="send_invitationwin_subject">
     <value>Judul</value>
   </string>
@@ -473,6 +659,9 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   </string>
   <string id="218" name="send_invitationwin_btn_confirm">
     <value>Kirim</value>
+  </string>
+  <string id="219" name="send_invitationwin_btn_cancel">
+    <value>Batal</value>
   </string>
   <string id="220" name="send_chat_text_btn">
     <value>batal</value>
@@ -540,275 +729,14 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   <string id="241" name="screen_userlabel">
     <value>Layar dari:</value>
   </string>
-  <string id="244" name="tabbar_chaticon">
-    <value>Chat</value>
-  </string>
-  <string id="248" name="swfpresentation_listsavepdf">
-    <value>Ambil dokumen pdf</value>
-  </string>
-  <string id="256" name="whiteboard_documenttoolbar_preslide">
-    <value>Ke halaman sebelumnya</value>
-  </string>
-  <string id="277" name="dashboard_newsheader">
-    <value>Berita</value>
-  </string>
-  <string id="278" name="dashboard_quicklinksheader">
-    <value>Jalan singkat</value>
-  </string>
-  <string id="279" name="dashboard_quicklinkConf">
-    <value>ke Konferensi</value>
-  </string>
-  <string id="289" name="main_navi">
-    <value>Konten</value>
-  </string>
-  <string id="290" name="subnavi">
-    <value>Home Page saya</value>
-  </string>
-  <string id="294" name="subnavi">
-    <value>Rapat Tertutup</value>
-  </string>
-  <string id="295" name="subnavi">
-    <value>Acara Umum</value>
-  </string>
-  <string id="296" name="subnavi">
-    <value>Acara Khusus</value>
-  </string>
-  <string id="297" name="subnavi">
-    <value>Konten Publik</value>
-  </string>
-  <string id="301" name="conferencebar">
-    <value>Moderasi</value>
-  </string>
-  <string id="302" name="conferencebar">
-    <value>Tambahkan ke moderasi</value>
-  </string>
-  <string id="303" name="conferencebar">
-    <value>Poling</value>
-  </string>
-  <string id="304" name="conferencebar">
-    <value>Pilih file</value>
-  </string>
-  <string id="305" name="conferencebar">
-    <value>Seting</value>
-  </string>
-  <string id="306" name="conferencebar">
-    <value>Seting Kamera dan Mic</value>
-  </string>
-  <string id="307" name="conferencebar">
-    <value>Seting Whiteboard</value>
-  </string>
-  <string id="308" name="conferencebar">
-    <value>Keluar</value>
-  </string>
-  <string id="309" name="conferencebar">
-    <value>Kembali ke ruangan</value>
-  </string>
-  <string id="310" name="conferencebar">
-    <value>Keluar</value>
-  </string>
-  <string id="312" name="loginwindow">
-    <value>Ubah password</value>
-  </string>
-  <string id="313" name="loginwindow">
-    <value>Lewat Email</value>
-  </string>
-  <string id="314" name="loginwindow">
-    <value>Lewat Login</value>
-  </string>
-  <string id="315" name="loginwindow">
-    <value>Email Anda</value>
-  </string>
-  <string id="114" name="regformuser">
-    <value>User:</value>
-  </string>
-  <string id="115" name="regformpass">
-    <value>Pass:</value>
-  </string>
-  <string id="116" name="regformretype">
-    <value>Ulangi Pass:</value>
-  </string>
-  <string id="117" name="regformfirstname">
-    <value>Nama Depan:</value>
-  </string>
-  <string id="118" name="regformlastname">
-    <value>Nama Belakang:</value>
-  </string>
-  <string id="119" name="regformmail">
-    <value>Email:</value>
-  </string>
-  <string id="120" name="regformstate">
-    <value>Negara:</value>
-  </string>
-  <string id="121" name="regformbtn1">
-    <value>Daftar</value>
-  </string>
-  <string id="122" name="regformbtn2">
-    <value>Batal</value>
-  </string>
-  <string id="123" name="Authbtn2">
-    <value>Bukan anggota?</value>
-  </string>
-  <string id="124" name="dashboard">
-    <value>Halaman Utama</value>
-  </string>
-  <string id="128" name="headconf">
-    <value>Ruang-Rapat</value>
-  </string>
-  <string id="129" name="conf_pub">
-    <value>publik</value>
-  </string>
-  <string id="144" name="savemenubar_savelabel">
-    <value>simpan</value>
-  </string>
-  <string id="149" name="admin_userlist_lastname">
-    <value>nama belakang</value>
-  </string>
-  <string id="150" name="turnoverlist_next">
-    <value>selanjutnya</value>
-  </string>
-  <string id="151" name="turnoverlist_pre">
-    <value>sebelumnya</value>
-  </string>
-  <string id="152" name="savecontent_confirm">
-    <value>hapus rekot</value>
-  </string>
-  <string id="153" name="savecontent_confirm_cancel_btn">
-    <value>batal</value>
-  </string>
-  <string id="154" name="savecontent_confirm_confirm_btn">
-    <value>hapus</value>
-  </string>
-  <string id="155" name="savemenubar_addlabel">
-    <value>rekot baru</value>
-  </string>
-  <string id="156" name="savemenubar_reloadlabel">
-    <value>panggil ulang</value>
-  </string>
-  <string id="157" name="savemenubar_deletelabel">
-    <value>hapus rekot</value>
-  </string>
-  <string id="158" name="useralter_admin_status">
-    <value>status</value>
-  </string>
-  <string id="159" name="useralter_admin_statusItem">
-    <value>abaikan</value>
-  </string>
-  <string id="160" name="useralter_admin_statusItem">
-    <value>aktifkan</value>
-  </string>
-  <string id="161" name="useralter_admin_organisation">
-    <value>organisasi</value>
-  </string>
-  <string id="162" name="calendar_iconlabel">
-    <value>kalender</value>
-  </string>
-  <string id="163" name="savewindow_btn">
-    <value>tutup</value>
-  </string>
-  <string id="175" name="orgvalue_userwin">
-    <value>tambah</value>
-  </string>
-  <string id="176" name="orgvalue_userwin">
-    <value>hapus organisasi</value>
-  </string>
-  <string id="177" name="orgvalue_userlist">
-    <value>user</value>
-  </string>
-  <string id="181" name="orgvalue_userwinsearchfield">
-    <value>cari user</value>
-  </string>
-  <string id="182" name="orgvalue_userwinsearchbtn">
-    <value>cari</value>
-  </string>
-  <string id="183" name="orgvalue_userwinsearchresult">
-    <value>user</value>
-  </string>
-  <string id="184" name="loginwin_chooseorganisation">
-    <value>organisasi</value>
-  </string>
-  <string id="185" name="loginwin_chooseorganisationbtn">
-    <value>masuk</value>
-  </string>
-  <string id="186" name="navi_roomadmin">
-    <value>ruang konferensi</value>
-  </string>
-  <string id="187" name="roomadmin_header">
-    <value>Ruang Konferensi</value>
-  </string>
-  <string id="188" name="roomadmin_header">
-    <value>id</value>
-  </string>
-  <string id="189" name="roomadmin_header">
-    <value>Nama</value>
-  </string>
-  <string id="190" name="roomadmin_header">
-    <value>publik</value>
-  </string>
-  <string id="191" name="roomadmin_header">
-    <value>organisasi</value>
-  </string>
-  <string id="192" name="roomadmin_header">
-    <value>Ruang Rapat</value>
-  </string>
-  <string id="193" name="roomvalue_name">
-    <value>nama</value>
-  </string>
-  <string id="194" name="roomvalue_type">
-    <value>tipe</value>
-  </string>
-  <string id="199" name="whiteboard_saveaswinheader">
-    <value>simpan sebagai</value>
-  </string>
-  <string id="200" name="whiteboard_saveaswintext">
-    <value>nama file</value>
-  </string>
-  <string id="201" name="files">
-    <value>nama file</value>
-  </string>
-  <string id="202" name="whiteboard_saveaswinbtn1">
-    <value>batal</value>
-  </string>
-  <string id="203" name="whiteboard_saveaswinbtn2">
-    <value>simpan</value>
-  </string>
-  <string id="204" name="rpcerrorwin_header">
-    <value>salah</value>
-  </string>
-  <string id="205" name="loadwml_header">
-    <value>panggil</value>
-  </string>
-  <string id="206" name="loadwml_messsload">
-    <value>objek terpanggil</value>
-  </string>
-  <string id="207" name="loadwml_messsync">
-    <value>sinkronasi klien, harap menunggu:</value>
-  </string>
-  <string id="208" name="loadimage_messload">
-    <value>Panggil data gambar</value>
-  </string>
-  <string id="209" name="loadimage_messsync">
-    <value>sinkronasi klien, harap menunggu:</value>
-  </string>
-  <string id="210" name="loadwml_confirmheader">
-    <value>bersihkan area gambar</value>
-  </string>
-  <string id="211" name="loadwml_confirmmess">
-    <value>area gambar di bersihkan, semua data akan hilang</value>
-  </string>
-  <string id="212" name="loadwml_confirmmess2">
-    <value>Konfirmasi sebelum panggil file</value>
-  </string>
-  <string id="213" name="send_invitation_btn">
-    <value>Kirim undangan</value>
-  </string>
-  <string id="214" name="send_invitationwin_header">
-    <value>Kirim undangan</value>
-  </string>
   <string id="242" name="whiteboard_tab_paint">
     <value>Gambar</value>
   </string>
   <string id="243" name="whiteboard_tab_document">
     <value>Dokumen</value>
+  </string>
+  <string id="244" name="tabbar_chaticon">
+    <value>Chat</value>
   </string>
   <string id="245" name="tabbar_filesicon">
     <value>File</value>
@@ -818,6 +746,9 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   </string>
   <string id="247" name="swfpresentation_listsaveorig">
     <value>Ambil dokumen asli</value>
+  </string>
+  <string id="248" name="swfpresentation_listsavepdf">
+    <value>Ambil dokumen pdf</value>
   </string>
   <string id="249" name="swfpresentation_listloadswf">
     <value>Panggil presentasi ke dalam whiteboard</value>
@@ -839,6 +770,9 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   </string>
   <string id="255" name="whiteboard_documenttoolbar_firstslide">
     <value>Ke halaman utama</value>
+  </string>
+  <string id="256" name="whiteboard_documenttoolbar_preslide">
+    <value>Ke halaman sebelumnya</value>
   </string>
   <string id="257" name="whiteboard_documenttoolbar_nextslide">
     <value>Ke halaman selanjutnya</value>
@@ -900,6 +834,15 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   <string id="276" name="organisation_usersalreadadded">
     <value>User ini udah teregistrasi dalam organisasi ini.</value>
   </string>
+  <string id="277" name="dashboard_newsheader">
+    <value>Berita</value>
+  </string>
+  <string id="278" name="dashboard_quicklinksheader">
+    <value>Jalan singkat</value>
+  </string>
+  <string id="279" name="dashboard_quicklinkConf">
+    <value>ke Konferensi</value>
+  </string>
   <string id="280" name="dashboard_quicklinkAudit">
     <value>ke Auditorium</value>
   </string>
@@ -927,8 +870,32 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   <string id="288" name="login_rememberuser">
     <value>Ingat saya</value>
   </string>
+  <string id="289" name="main_navi">
+    <value>Konten</value>
+  </string>
+  <string id="290" name="subnavi">
+    <value>Home Page saya</value>
+  </string>
+  <string id="291" name="subnavi">
+    <value>Jadwal Rapat</value>
+  </string>
+  <string id="292" name="subnavi">
+    <value>Jadwal Acara</value>
+  </string>
   <string id="293" name="subnavi">
     <value>Rapat Umum</value>
+  </string>
+  <string id="294" name="subnavi">
+    <value>Rapat Tertutup</value>
+  </string>
+  <string id="295" name="subnavi">
+    <value>Acara Umum</value>
+  </string>
+  <string id="296" name="subnavi">
+    <value>Acara Khusus</value>
+  </string>
+  <string id="297" name="subnavi">
+    <value>Konten Publik</value>
   </string>
   <string id="298" name="subnavi">
     <value>Konten Khusus</value>
@@ -939,8 +906,53 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   <string id="300" name="subnavi">
     <value></value>
   </string>
+  <string id="301" name="conferencebar">
+    <value>Moderasi</value>
+  </string>
+  <string id="302" name="conferencebar">
+    <value>Tambahkan ke moderasi</value>
+  </string>
+  <string id="303" name="conferencebar">
+    <value>Poling</value>
+  </string>
+  <string id="304" name="conferencebar">
+    <value>Pilih file</value>
+  </string>
+  <string id="305" name="conferencebar">
+    <value>Seting</value>
+  </string>
+  <string id="306" name="conferencebar">
+    <value>Seting Kamera dan Mic</value>
+  </string>
+  <string id="307" name="conferencebar">
+    <value>Seting Whiteboard</value>
+  </string>
+  <string id="308" name="conferencebar">
+    <value>Keluar</value>
+  </string>
+  <string id="309" name="conferencebar">
+    <value>Kembali ke ruangan</value>
+  </string>
+  <string id="310" name="conferencebar">
+    <value>Keluar</value>
+  </string>
   <string id="311" name="loginwindow">
     <value>Lupa password?</value>
+  </string>
+  <string id="312" name="loginwindow">
+    <value>Ubah password</value>
+  </string>
+  <string id="313" name="loginwindow">
+    <value>Lewat Email</value>
+  </string>
+  <string id="314" name="loginwindow">
+    <value>Lewat Login</value>
+  </string>
+  <string id="315" name="loginwindow">
+    <value>Email Anda</value>
+  </string>
+  <string id="316" name="loginwindow">
+    <value>Login Anda</value>
   </string>
   <string id="317" name="loginwindow">
     <value>Kirim email dengan alamat ubah password</value>
@@ -960,173 +972,11 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   <string id="322" name="errortype">
     <value>Salah</value>
   </string>
-  <string id="324" name="resetpass">
-    <value>Hash tidak valid. User tidak ditemukan.</value>
-  </string>
-  <string id="342" name="filebrowser">
-    <value>Alamat tidak dapat disimpan</value>
-  </string>
-  <string id="343" name="useradmin">
-    <value>User telah ditambahkan tetapi anda harus memasukan kedalam salah satu organisasi, jika tidak akan mengakibatkan gagal login.</value>
-  </string>
-  <string id="344" name="adminforms">
-    <value>Rekot baru</value>
-  </string>
-  <string id="345" name="languageseditor">
-    <value>Tidak ditemukan Kolom dengan ID kolom ini.</value>
-  </string>
-  <string id="346" name="languageseditor">
-    <value>Tidak ditemukan Label untuk kolom tersebut.</value>
-  </string>
-  <string id="363" name="languageseditor">
-    <value>hapus pilihan bahasa</value>
-  </string>
-  <string id="364" name="languageseditor">
-    <value>Tambah pilihan bahasa</value>
-  </string>
-  <string id="365" name="languageseditor">
-    <value>Nama</value>
-  </string>
-  <string id="366" name="languageseditor">
-    <value>Tambah pilihan bahasa</value>
-  </string>
-  <string id="367" name="languageseditor">
-    <value>Buat Arsip</value>
-  </string>
-  <string id="368" name="turnoverlist">
-    <value>awal</value>
-  </string>
-  <string id="369" name="turnoverlist">
-    <value>sebelumnya</value>
-  </string>
-  <string id="370" name="turnoverlist">
-    <value>selanjutnya</value>
-  </string>
-  <string id="371" name="turnoverlist">
-    <value>akhir</value>
-  </string>
-  <string id="372" name="videobox">
-    <value>user yang berbicara</value>
-  </string>
-  <string id="373" name="videobox">
-    <value>mode suara nyala/mati</value>
-  </string>
-  <string id="374" name="dashboard">
-    <value>Sistem</value>
-  </string>
-  <string id="375" name="dashboard">
-    <value>Setingan Anda</value>
-  </string>
-  <string id="377" name="dashboard">
-    <value>Edit profil anda</value>
-  </string>
-  <string id="378" name="dashboard">
-    <value>Pesan baru:</value>
-  </string>
-  <string id="379" name="dashboard">
-    <value>Kirim Gambar baru</value>
-  </string>
-  <string id="380" name="backuppanel">
-    <value>Expor - Data User</value>
-  </string>
-  <string id="381" name="backuppanel">
-    <value>Semua organisasi harus sudah tersedia!</value>
-  </string>
-  <string id="382" name="backuppanel">
-    <value>mulai expor</value>
-  </string>
-  <string id="384" name="backuppanel">
-    <value>mulai expor</value>
-  </string>
-  <string id="385" name="backuppanel">
-    <value>Ambil - Data User</value>
-  </string>
-  <string id="386" name="backuppanel">
-    <value>Pilih users.xml</value>
-  </string>
-  <string id="387" name="languageseditor">
-    <value>ambil</value>
-  </string>
-  <string id="388" name="languageseditor">
-    <value>Expor dalam XML - File ini dapat di gunakan untuk : - Kontribusi kedalam project - Kirim ke sistem lain - Arsip - Opsi pilihan - Simpan ke dalam direktori bahasa - direktori untuk instalasi berikutnya</value>
-  </string>
-  <string id="389" name="languageseditor">
-    <value>Pilih file bahasa yang akan di ambil. Pilih bahasa yang benar dari form pilihan! Apapun nama filenya, yang dipilih yang akan diambil kedalam pilihan bahasa ini!</value>
-  </string>
-  <string id="390" name="importwindow">
-    <value>Ambil - pilih file</value>
-  </string>
-  <string id="391" name="recordingsavewin">
-    <value>Simpan sebagai</value>
-  </string>
-  <string id="392" name="recordingsavewin">
-    <value>Nama:</value>
-  </string>
-  <string id="393" name="recordingsavewin">
-    <value>komentar:</value>
-  </string>
-  <string id="401" name="roomslist">
-    <value>Users dalam ruangan ini:</value>
-  </string>
-  <string id="402" name="roomslist">
-    <value>panggil ulang</value>
-  </string>
-  <string id="403" name="roomslist">
-    <value>Ruangan ini penuh, silahkan mencoba lagi dalam beberapa menit.</value>
-  </string>
-  <string id="404" name="roomsList">
-    <value>Klik pada Judul ruangan untuk melihat detilnya</value>
-  </string>
-  <string id="405" name="roomslist">
-    <value>Chat dengan user dalam ruangan ini:</value>
-  </string>
-  <string id="406" name="roomslist">
-    <value>Ruangan:</value>
-  </string>
-  <string id="407" name="roomslist">
-    <value>Users dalam ruangan ini::</value>
-  </string>
-  <string id="408" name="roomslist">
-    <value>mulai sejak:</value>
-  </string>
-  <string id="414" name="record">
-    <value>Play / Pause</value>
-  </string>
-  <string id="446" name="chat_emot_win">
-    <value>Emoticons</value>
-  </string>
-  <string id="376" name="dashboard">
-    <value>Hola,</value>
-  </string>
-  <string id="409" name="record">
-    <value>Putar Rekaman</value>
-  </string>
-  <string id="410" name="record">
-    <value>Durasi:</value>
-  </string>
-  <string id="411" name="record">
-    <value>Tanggal:</value>
-  </string>
-  <string id="412" name="record">
-    <value>Modus Rekam! Anda tidak dapat melakukan perubahan. Ini adalah file hasil rekaman!</value>
-  </string>
-  <string id="413" name="record">
-    <value>Putar hasil rekam</value>
-  </string>
-  <string id="415" name="record">
-    <value>Mulai Rekam</value>
-  </string>
-  <string id="416" name="record">
-    <value>Stop Rekam</value>
-  </string>
-  <string id="417" name="record">
-    <value>Merekam:</value>
-  </string>
-  <string id="316" name="loginwindow">
-    <value>Login Anda</value>
-  </string>
   <string id="323" name="errortype">
     <value>Pesan</value>
+  </string>
+  <string id="324" name="resetpass">
+    <value>Hash tidak valid. User tidak ditemukan.</value>
   </string>
   <string id="325" name="resetpass">
     <value>Isi Ulang Password Anda</value>
@@ -1179,6 +1029,21 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   <string id="341" name="filebrowser">
     <value>nama file terlalu pendek</value>
   </string>
+  <string id="342" name="filebrowser">
+    <value>Alamat tidak dapat disimpan</value>
+  </string>
+  <string id="343" name="useradmin">
+    <value>User telah ditambahkan tetapi anda harus memasukan kedalam salah satu organisasi, jika tidak akan mengakibatkan gagal login.</value>
+  </string>
+  <string id="344" name="adminforms">
+    <value>Rekot baru</value>
+  </string>
+  <string id="345" name="languageseditor">
+    <value>Tidak ditemukan Kolom dengan ID kolom ini.</value>
+  </string>
+  <string id="346" name="languageseditor">
+    <value>Tidak ditemukan Label untuk kolom tersebut.</value>
+  </string>
   <string id="347" name="errormessage">
     <value>Dibutuhkan Autorisasi sebagai Admin</value>
   </string>
@@ -1227,8 +1092,98 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   <string id="362" name="languageseditor">
     <value>Tambah pilihan bahasa</value>
   </string>
+  <string id="363" name="languageseditor">
+    <value>hapus pilihan bahasa</value>
+  </string>
+  <string id="364" name="languageseditor">
+    <value>Tambah pilihan bahasa</value>
+  </string>
+  <string id="365" name="languageseditor">
+    <value>Nama</value>
+  </string>
+  <string id="366" name="languageseditor">
+    <value>Tambah pilihan bahasa</value>
+  </string>
+  <string id="367" name="languageseditor">
+    <value>Buat Arsip</value>
+  </string>
+  <string id="368" name="turnoverlist">
+    <value>awal</value>
+  </string>
+  <string id="369" name="turnoverlist">
+    <value>sebelumnya</value>
+  </string>
+  <string id="370" name="turnoverlist">
+    <value>selanjutnya</value>
+  </string>
+  <string id="371" name="turnoverlist">
+    <value>akhir</value>
+  </string>
+  <string id="372" name="videobox">
+    <value>user yang berbicara</value>
+  </string>
+  <string id="373" name="videobox">
+    <value>mode suara nyala/mati</value>
+  </string>
+  <string id="374" name="dashboard">
+    <value>Sistem</value>
+  </string>
+  <string id="375" name="dashboard">
+    <value>Setingan Anda</value>
+  </string>
+  <string id="376" name="dashboard">
+    <value>Hola,</value>
+  </string>
+  <string id="377" name="dashboard">
+    <value>Edit profil anda</value>
+  </string>
+  <string id="378" name="dashboard">
+    <value>Pesan baru:</value>
+  </string>
+  <string id="379" name="dashboard">
+    <value>Kirim Gambar baru</value>
+  </string>
+  <string id="380" name="backuppanel">
+    <value>Expor - Data User</value>
+  </string>
+  <string id="381" name="backuppanel">
+    <value>Semua organisasi harus sudah tersedia!</value>
+  </string>
+  <string id="382" name="backuppanel">
+    <value>mulai expor</value>
+  </string>
   <string id="383" name="backuppanel">
     <value>Berdasarkan organisasi</value>
+  </string>
+  <string id="384" name="backuppanel">
+    <value>mulai expor</value>
+  </string>
+  <string id="385" name="backuppanel">
+    <value>Ambil - Data User</value>
+  </string>
+  <string id="386" name="backuppanel">
+    <value>Pilih users.xml</value>
+  </string>
+  <string id="387" name="languageseditor">
+    <value>ambil</value>
+  </string>
+  <string id="388" name="languageseditor">
+    <value>Expor dalam XML - File ini dapat di gunakan untuk : - Kontribusi kedalam project - Kirim ke sistem lain - Arsip - Opsi pilihan - Simpan ke dalam direktori bahasa - direktori untuk instalasi berikutnya</value>
+  </string>
+  <string id="389" name="languageseditor">
+    <value>Pilih file bahasa yang akan di ambil. Pilih bahasa yang benar dari form pilihan! Apapun nama filenya, yang dipilih yang akan diambil kedalam pilihan bahasa ini!</value>
+  </string>
+  <string id="390" name="importwindow">
+    <value>Ambil - pilih file</value>
+  </string>
+  <string id="391" name="recordingsavewin">
+    <value>Simpan sebagai</value>
+  </string>
+  <string id="392" name="recordingsavewin">
+    <value>Nama:</value>
+  </string>
+  <string id="393" name="recordingsavewin">
+    <value>komentar:</value>
   </string>
   <string id="394" name="recordingsavewin">
     <value>simpan</value>
@@ -1251,56 +1206,56 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   <string id="400" name="roomslist">
     <value></value>
   </string>
-  <string id="443" name="chat_overall_header">
-    <value>Chat</value>
+  <string id="401" name="roomslist">
+    <value>Users dalam ruangan ini:</value>
   </string>
-  <string id="445" name="chat_emot_btn">
-    <value>Emoticons</value>
+  <string id="402" name="roomslist">
+    <value>panggil ulang</value>
   </string>
-  <string id="467" name="calendar_weeknumber_header">
-    <value>CW</value>
+  <string id="403" name="roomslist">
+    <value>Ruangan ini penuh, silahkan mencoba lagi dalam beberapa menit.</value>
   </string>
-  <string id="472" name="calendar_monthnames">
-    <value>April</value>
+  <string id="404" name="roomsList">
+    <value>Klik pada Judul ruangan untuk melihat detilnya</value>
   </string>
-  <string id="477" name="calendar_monthnames">
-    <value>September</value>
+  <string id="405" name="roomslist">
+    <value>Chat dengan user dalam ruangan ini:</value>
   </string>
-  <string id="479" name="calendar_monthnames">
-    <value>November</value>
+  <string id="406" name="roomslist">
+    <value>Ruangan:</value>
   </string>
-  <string id="484" name="roomAdmin_layout_videoX">
-    <value>X | Y</value>
+  <string id="407" name="roomslist">
+    <value>Users dalam ruangan ini::</value>
   </string>
-  <string id="488" name="roomAdmin_layout_mod_pos">
-    <value>X</value>
+  <string id="408" name="roomslist">
+    <value>mulai sejak:</value>
   </string>
-  <string id="491" name="roomAdmin_layout_whiteboard_pos">
-    <value>X | Y</value>
+  <string id="409" name="record">
+    <value>Putar Rekaman</value>
   </string>
-  <string id="495" name="roomAdmin_layout_files_pos">
-    <value>X |Y</value>
+  <string id="410" name="record">
+    <value>Durasi:</value>
   </string>
-  <string id="508" name="registering_mail_text_username">
-    <value>Login:</value>
+  <string id="411" name="record">
+    <value>Tanggal:</value>
   </string>
-  <string id="509" name="registering_mail_text_pass">
-    <value>Pass:</value>
+  <string id="412" name="record">
+    <value>Modus Rekam! Anda tidak dapat melakukan perubahan. Ini adalah file hasil rekaman!</value>
   </string>
-  <string id="525" name="invitation_window_passwordLabel">
-    <value>Password</value>
+  <string id="413" name="record">
+    <value>Putar hasil rekam</value>
   </string>
-  <string id="536" name="invitation_pass">
-    <value>Password:</value>
+  <string id="414" name="record">
+    <value>Play / Pause</value>
   </string>
-  <string id="219" name="send_invitationwin_btn_cancel">
-    <value>Batal</value>
+  <string id="415" name="record">
+    <value>Mulai Rekam</value>
   </string>
-  <string id="291" name="subnavi">
-    <value>Jadwal Rapat</value>
+  <string id="416" name="record">
+    <value>Stop Rekam</value>
   </string>
-  <string id="292" name="subnavi">
-    <value>Jadwal Acara</value>
+  <string id="417" name="record">
+    <value>Merekam:</value>
   </string>
   <string id="418" name="record_error_msg">
     <value>Seseorang sedang merekam sekarang :</value>
@@ -1320,20 +1275,20 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   <string id="423" name="cancel_dialog_resume_tooltip">
     <value>Tutup jendela ini dan lanjut rekam</value>
   </string>
+  <string id="424" name="painttools_ellipse_color">
+    <value>Ubah warnagaris</value>
+  </string>
   <string id="425" name="colorpicker_head">
     <value>Pilih Warna</value>
   </string>
   <string id="426" name="painttools_line_disable">
     <value>Aktipkan / Matikan warnagaris</value>
   </string>
-  <string id="424" name="painttools_ellipse_color">
-    <value>Ubah warnagaris</value>
+  <string id="427" name="painttools_fill_disable">
+    <value>Ubah isianwarna</value>
   </string>
   <string id="428" name="painttools_line_disable">
     <value>Aktipkan / Matikan isianwarna</value>
-  </string>
-  <string id="427" name="painttools_fill_disable">
-    <value>Ubah isianwarna</value>
   </string>
   <string id="429" name="change_width_arrow_down_slider">
     <value>Ubah besaran garis</value>
@@ -1377,8 +1332,17 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   <string id="442" name="chat_clear_history">
     <value>Hapus Log chat di Server</value>
   </string>
+  <string id="443" name="chat_overall_header">
+    <value>Chat</value>
+  </string>
   <string id="444" name="chat_send_btn">
     <value>kirim pesan</value>
+  </string>
+  <string id="445" name="chat_emot_btn">
+    <value>Emoticons</value>
+  </string>
+  <string id="446" name="chat_emot_win">
+    <value>Emoticons</value>
   </string>
   <string id="447" name="choose_video_settings">
     <value>Pilih Perangkat</value>
@@ -1425,14 +1389,38 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   <string id="461" name="calendar_dayname_TuesdayLabel">
     <value>Selasa</value>
   </string>
+  <string id="462" name="calendar_dayname_WednesdayLabel">
+    <value>Rabu</value>
+  </string>
   <string id="463" name="calendar_dayname_ThursdayLabel">
     <value>Kamis</value>
+  </string>
+  <string id="464" name="calendar_dayname_FridayLabel">
+    <value>Jumat</value>
+  </string>
+  <string id="465" name="calendar_dayname_SaturdayLabel">
+    <value>Sabtu</value>
+  </string>
+  <string id="466" name="calendar_dayname_SundayLabel">
+    <value>Minggu</value>
+  </string>
+  <string id="467" name="calendar_weeknumber_header">
+    <value>CW</value>
   </string>
   <string id="468" name="calendar_weeknumber_headerTooltip">
     <value>Kelendar mingguan</value>
   </string>
+  <string id="469" name="calendar_monthnames">
+    <value>Januari</value>
+  </string>
+  <string id="470" name="calendar_monthnames">
+    <value>Pebruari</value>
+  </string>
   <string id="471" name="calendar_monthnames">
     <value>Maret</value>
+  </string>
+  <string id="472" name="calendar_monthnames">
+    <value>April</value>
   </string>
   <string id="473" name="calendar_monthnames">
     <value>Mei</value>
@@ -1446,8 +1434,14 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   <string id="476" name="calendar_monthnames">
     <value>Agustus</value>
   </string>
+  <string id="477" name="calendar_monthnames">
+    <value>September</value>
+  </string>
   <string id="478" name="calendar_monthnames">
     <value>Oktober</value>
+  </string>
+  <string id="479" name="calendar_monthnames">
+    <value>November</value>
   </string>
   <string id="480" name="calendar_monthnames">
     <value>Desember</value>
@@ -1461,11 +1455,20 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   <string id="483" name="roomValue_advancedSettings">
     <value>Tampilkan Setingan Layout</value>
   </string>
+  <string id="484" name="roomAdmin_layout_videoX">
+    <value>X | Y</value>
+  </string>
   <string id="485" name="roomAdmin_layout_videoY">
     <value>Lebar | Tinggi</value>
   </string>
   <string id="486" name="roomAdmin_layout">
     <value>Jendela Video</value>
+  </string>
+  <string id="487" name="roomAdmin_layout_mod">
+    <value>Jendela Moderation</value>
+  </string>
+  <string id="488" name="roomAdmin_layout_mod_pos">
+    <value>X</value>
   </string>
   <string id="489" name="roomAdmin_layout_whiteboard">
     <value>Jendela Whiteboard</value>
@@ -1473,86 +1476,20 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   <string id="490" name="roomAdmin_layout_whiteboard_show">
     <value>Fungsikan</value>
   </string>
-  <string id="494" name="roomAdmin_layout_files_show">
-    <value>Fungsikan</value>
-  </string>
-  <string id="500" name="invitation_template_head">
-    <value>Undangan - OpenMeetings</value>
-  </string>
-  <string id="501" name="invitation_text_from">
-    <value>Pesan dari peserta:</value>
-  </string>
-  <string id="502" name="invitation_text_message">
-    <value>Pesan:</value>
-  </string>
-  <string id="503" name="invitation_text_click_text">
-    <value>Klik link berikut untuk bergabung dalam rapat :</value>
-  </string>
-  <string id="505" name="invitation_text_click_text_help">
-    <value>Jika anda mengalami kesulitan, silahkan copy dan paste link berikut ke browser :</value>
-  </string>
-  <string id="511" name="registering_mail_text_bye">
-    <value>Tim - OpenMeetings</value>
-  </string>
-  <string id="518" name="dateRegExpError">
-    <value>Silahkan isi tanggal dengan benar, contoh 24-12-2001 (dd-mm-yyyy)</value>
-  </string>
-  <string id="519" name="emailRegExpError">
-    <value>Silahkan isi alamat email dengan benar, contoh nama@alamat.com</value>
-  </string>
-  <string id="520" name="floatRegExpError">
-    <value>Silahkan masukan angka pecahan, contoh 1,05</value>
-  </string>
-  <string id="522" name="phoneRegExpError">
-    <value>Silahkan masukan nomor telepon, contoh +62 274 486883</value>
-  </string>
-  <string id="527" name="invitation_window_valid">
-    <value>Terakhir</value>
-  </string>
-  <string id="528" name="invitation_window_valid">
-    <value>Periode</value>
-  </string>
-  <string id="530" name="invitation_window_validFromLabel">
-    <value>Valid dari :</value>
-  </string>
-  <string id="531" name="invitation_window_validToLabel">
-    <value>Valid sampai dengan:</value>
-  </string>
-  <string id="533" name="invitation_error">
-    <value>Tidak ada Undangan untu Kode undangan ini!</value>
-  </string>
-  <string id="535" name="invitation_error">
-    <value>Kode - Undangan tidak valid.</value>
-  </string>
-  <string id="537" name="invitation_pass_btn">
-    <value>Periksa Password</value>
-  </string>
-  <string id="462" name="calendar_dayname_WednesdayLabel">
-    <value>Rabu</value>
-  </string>
-  <string id="464" name="calendar_dayname_FridayLabel">
-    <value>Jumat</value>
-  </string>
-  <string id="465" name="calendar_dayname_SaturdayLabel">
-    <value>Sabtu</value>
-  </string>
-  <string id="466" name="calendar_dayname_SundayLabel">
-    <value>Minggu</value>
-  </string>
-  <string id="469" name="calendar_monthnames">
-    <value>Januari</value>
-  </string>
-  <string id="470" name="calendar_monthnames">
-    <value>Pebruari</value>
-  </string>
-  <string id="487" name="roomAdmin_layout_mod">
-    <value>Jendela Moderation</value>
+  <string id="491" name="roomAdmin_layout_whiteboard_pos">
+    <value>X | Y</value>
   </string>
   <string id="492" name="roomAdmin_layout_whiteboard">
     <value>Lebar | Tinggi</value>
   </string>
   <string id="493" name="roomAdmin_layout_files">
     <value>Jendela Files,Chat,Partizipants</value>
+  </string>
+  <string id="494" name="roomAdmin_layout_files_show">
+    <value>Fungsikan</value>
+  </string>
+  <string id="495" name="roomAdmin_layout_files_pos">
+    <value>X |Y</value>
   </string>
   <string id="496" name="roomAdmin_layout_files">
     <value>Lebar | Tinggi</value>
@@ -1566,8 +1503,23 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   <string id="499" name="feedback_template_subject">
     <value>Komentar tentang OpenMeetings</value>
   </string>
+  <string id="500" name="invitation_template_head">
+    <value>Undangan - OpenMeetings</value>
+  </string>
+  <string id="501" name="invitation_text_from">
+    <value>Pesan dari peserta:</value>
+  </string>
+  <string id="502" name="invitation_text_message">
+    <value>Pesan:</value>
+  </string>
+  <string id="503" name="invitation_text_click_text">
+    <value>Klik link berikut untuk bergabung dalam rapat :</value>
+  </string>
   <string id="504" name="invitation_text_click_text_link">
     <value>Klik disini untuk masuk ke rapat</value>
+  </string>
+  <string id="505" name="invitation_text_click_text_help">
+    <value>Jika anda mengalami kesulitan, silahkan copy dan paste link berikut ke browser :</value>
   </string>
   <string id="506" name="registering_mail_text_head">
     <value>Daptar ke OpenMeetings</value>
@@ -1575,8 +1527,17 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   <string id="507" name="registering_mail_text_head2">
     <value>Data anda:</value>
   </string>
+  <string id="508" name="registering_mail_text_username">
+    <value>Login:</value>
+  </string>
+  <string id="509" name="registering_mail_text_pass">
+    <value>Pass:</value>
+  </string>
   <string id="510" name="registering_mail_text_mail">
     <value>Email:</value>
+  </string>
+  <string id="511" name="registering_mail_text_bye">
+    <value>Tim - OpenMeetings</value>
   </string>
   <string id="512" name="register_mail_subject">
     <value>Daftar ke OpenMeetings</value>
@@ -1596,8 +1557,20 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   <string id="517" name="reset_password_mail_subject">
     <value>Seting ulang password OpenMeetings</value>
   </string>
+  <string id="518" name="dateRegExpError">
+    <value>Silahkan isi tanggal dengan benar, contoh 24-12-2001 (dd-mm-yyyy)</value>
+  </string>
+  <string id="519" name="emailRegExpError">
+    <value>Silahkan isi alamat email dengan benar, contoh nama@alamat.com</value>
+  </string>
+  <string id="520" name="floatRegExpError">
+    <value>Silahkan masukan angka pecahan, contoh 1,05</value>
+  </string>
   <string id="521" name="numberRegExpError">
     <value>Silahkan masukan angka, contoh 100</value>
+  </string>
+  <string id="522" name="phoneRegExpError">
+    <value>Silahkan masukan nomor telepon, contoh +62 274 486883</value>
   </string>
   <string id="523" name="timeRegExpError">
     <value>Silahkan masukan format jam, contoh 12:24 (hh:mm)</value>
@@ -1605,17 +1578,44 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   <string id="524" name="invitation_window">
     <value>Terproteksi dengan Password</value>
   </string>
+  <string id="525" name="invitation_window_passwordLabel">
+    <value>Password</value>
+  </string>
   <string id="526" name="invitation_window_validLabel">
     <value>Periode Valid</value>
+  </string>
+  <string id="527" name="invitation_window_valid">
+    <value>Terakhir</value>
+  </string>
+  <string id="528" name="invitation_window_valid">
+    <value>Periode</value>
   </string>
   <string id="529" name="invitation_window_valid">
     <value>Sekali waktu</value>
   </string>
+  <string id="530" name="invitation_window_validFromLabel">
+    <value>Valid dari :</value>
+  </string>
+  <string id="531" name="invitation_window_validToLabel">
+    <value>Valid sampai dengan:</value>
+  </string>
   <string id="532" name="invitation_window_MailSubject">
     <value>Undangan ke OpenMeetings</value>
   </string>
+  <string id="533" name="invitation_error">
+    <value>Tidak ada Undangan untu Kode undangan ini!</value>
+  </string>
   <string id="534" name="invitation_error">
     <value>Undangan sudah terpakai, tidak bisa dipergunakan lagi.</value>
+  </string>
+  <string id="535" name="invitation_error">
+    <value>Kode - Undangan tidak valid.</value>
+  </string>
+  <string id="536" name="invitation_pass">
+    <value>Password:</value>
+  </string>
+  <string id="537" name="invitation_pass_btn">
+    <value>Periksa Password</value>
   </string>
   <string id="538" name="invitation_pass_error">
     <value>Password salah!</value>
@@ -1625,7 +1625,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   </string>
   <string id="540" name="audio_video">
     <value>Syncronize Audio/Video</value>
-  </string>	
+  </string>
   <string id="541" name="errorCode_invalidSession">
     <value>Login was correct, but the Session you tried is not active or stored on the Server. You have to get a new SessionId and retry login.</value>
   </string>
@@ -1637,7 +1637,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   </string>
   <string id="544" name="debug_message_recording">
     <value>The recorder is currently Beta!</value>
-  </string>	
+  </string>
   <string id="545" name="propertyPanelXValue">
     <value>x</value>
   </string>
@@ -1664,16 +1664,16 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   </string>
   <string id="553" name="propertyOpacitySlider">
     <value>Change Transparency</value>
-  </string>	
+  </string>
   <string id="554" name="browserOpen">
     <value>Browser Open</value>
-  </string>	
+  </string>
   <string id="555" name="browserClose">
     <value>Browser Close</value>
-  </string>	
-   <string id="556" name="connectionLostMessage">
+  </string>
+  <string id="556" name="connectionLostMessage">
     <value>The Connection to the Server is lost. You need to reload the Application or/and check your Network.</value>
-  </string> 
+  </string>
   <string id="557" name="557">
     <value>Pointer</value>
   </string>
@@ -1697,7 +1697,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   </string>
   <string id="564" name="exportToImage">
     <value>&lt;u&gt;Download as TIF&lt;/u&gt;</value>
-  </string> 
+  </string>
   <string id="565" name="calendarLabel">
     <value>Reminder:</value>
   </string>
@@ -1775,10 +1775,10 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   </string>
   <string id="590" name="room Administration roomclients list">
     <value>D</value>
-  </string>   
+  </string>
   <string id="591" name="swf sync message">
     <value>Loading Document. Please wait untill all Client have been synchronized.</value>
-  </string>  
+  </string>
   <string id="592" name="upload dialog">
     <value>Upload complete, converting Document ...</value>
   </string>
@@ -1799,7 +1799,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   </string>
   <string id="598" name="confadmin value list">
     <value>Value</value>
-  </string>  
+  </string>
   <string id="599" name="connection administration panel">
     <value>Streamid</value>
   </string>
@@ -1853,13 +1853,13 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   </string>
   <string id="616" name="conferencePanels">
     <value>Chat</value>
-  </string>    
+  </string>
   <string id="617" name="organization choose info">
     <value>Your account is assigned to multiple Organizations. Please choose one for this Session.</value>
-  </string> 
+  </string>
   <string id="618" name="error message room full">
     <value>This room is full at the moment. Please try again later.</value>
-  </string>   
+  </string>
   <string id="619" name="roomtypes">
     <value>Room Type</value>
   </string>
@@ -1899,7 +1899,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   <string id="631" name="lbl_name">
     <value>name</value>
   </string>
-   <string id="632" name="lbl_email">
+  <string id="632" name="lbl_email">
     <value>E-mail</value>
   </string>
   <string id="633" name="logoutConfirm_title">
@@ -1907,7 +1907,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   </string>
   <string id="634" name="logoutConfirm_sure_to_logout_question">
     <value>Are you sure you want to logout now?</value>
-  </string>	
+  </string>
   <string id="635" name="main menu">
     <value>Actions</value>
   </string>
@@ -1922,16 +1922,16 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   </string>
   <string id="639" name="meeting Timer">
     <value>This Room is a Demo Room. To disable this warning you either should get a private meeting room for your personal usage or set up an own Server. You will be automatically logged off in:</value>
-  </string>  
+  </string>
   <string id="640" name="meeting room administration">
     <value>Moderated</value>
-  </string> 
+  </string>
   <string id="641" name="moderated room waiting message">
     <value>Please wait untill the Moderator has entered the Room. The Moderator can be either a Teacher, Admin or the creator of this Room.</value>
   </string>
   <string id="642" name="error popup">
     <value>Ok</value>
-  </string>  
+  </string>
   <string id="643" name="window screensharing">
     <value>Incoming Screen Sharing</value>
   </string>
@@ -1940,7 +1940,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   </string>
   <string id="645" name="window screen sharing">
     <value>Start Sharing</value>
-  </string>   
+  </string>
   <string id="646" name="calendar">
     <value>Add new Meeting</value>
   </string>
@@ -1985,5 +1985,23 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   </string>
   <string id="660" name="moderation">
     <value>Add or delete Users or Rooms within your Organization</value>
+  </string>
+  <string id="661" name="delete confirm question">
+    <value>Do you really want to delete this record?</value>
+  </string>
+  <string id="662" name="delete confirm question user moderation">
+    <value>Do you really want to delete this user from your organization? You will only delete the connection between the user and your organization, to really delete the user itself you have to login into the Administration-Panel.</value>
+  </string>
+  <string id="663" name="error message self deleting">
+    <value>You cannot delete your own User!</value>
+  </string>
+  <string id="664" name="error message auth">
+    <value>This Method needs a Adminstration Account to be invoked!</value>
+  </string>
+  <string id="665" name="error message SOAP">
+    <value>There was no Session associated with this ID.</value>
+  </string>
+  <string id="666" name="error message moderation">
+    <value>This is an Administrator or Moderator account. You can only edit this account through the Administration Panel.</value>
   </string>
 </language>

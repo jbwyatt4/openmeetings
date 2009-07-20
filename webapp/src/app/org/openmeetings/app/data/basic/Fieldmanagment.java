@@ -93,15 +93,29 @@ public class Fieldmanagment {
 
 	public Fieldlanguagesvalues getFieldByIdAndLanguage(Long fieldvalues_id, Long language_id) {
 		try {
+			
+			String hql = "select f from Fieldlanguagesvalues f " +
+							"WHERE f.language_id = :language_id " +
+							"AND f.fieldvalues_id = :fieldvalues_id";
+			
+			Fieldlanguagesvalues flv = null;
+			
 			Object idf = HibernateUtil.createSession();
 			Session session = HibernateUtil.getSession();
 			Transaction tx = session.beginTransaction();
-			Query query = session.createQuery("select f from Fieldlanguagesvalues f WHERE f.language_id = :language_id AND f.fieldvalues_id = :fieldvalues_id");
+			
+			Query query = session.createQuery(hql);
+			
 			query.setLong("fieldvalues_id", fieldvalues_id);
 			query.setLong("language_id", language_id);
-			Fieldlanguagesvalues flv = (Fieldlanguagesvalues) query.uniqueResult();
+			List<Fieldlanguagesvalues> fList = query.list();
+			
 			tx.commit();
 			HibernateUtil.closeSession(idf);
+			
+			if (fList.size() > 0) {
+				flv = fList.get(0);
+			}
 			
 			return flv;
 		} catch (HibernateException ex) {
