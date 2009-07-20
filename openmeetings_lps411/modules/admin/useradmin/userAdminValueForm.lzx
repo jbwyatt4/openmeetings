@@ -19,6 +19,7 @@
 
 	<handler name="onnew">
 		this.user_id=0;
+		this.level.selectItemAt(0);
         this.username.setAttribute('text','');
         this.firstname.setAttribute('text','');
         this.lastname.setAttribute('text','');
@@ -90,7 +91,8 @@
     	</handler>
   	</netRemoteCallHib>
 	
-	<netRemoteCallHib name="deleteUserAdmin" funcname="userservice.deleteUserAdmin" remotecontext="$once{ canvas.thishib }" >      
+	<netRemoteCallHib name="deleteUserAdmin" funcname="userservice.deleteUserAdmin" 
+					  remotecontext="$once{ canvas.thishib }" activeErrorHandler="true">      
 		<netparam><method name="getValue"> return canvas.sessionId; </method></netparam>
 		<netparam><method name="getValue"> return parent.parent.user_id; </method></netparam>
 		<handler name="ondata" args="value">

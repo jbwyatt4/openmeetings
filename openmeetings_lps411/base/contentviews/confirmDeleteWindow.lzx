@@ -2,7 +2,7 @@
 <library>
 
 <class name="confirmDeleteWindow" extends="labelExplorerBox" labelid="152"
-    docking="true" width="264" x="200" y="0" height="200">
+    docking="true" width="264" x="450" y="20" height="200">
     
     <attribute name="refObj" value="null" />
     
