@@ -7,6 +7,7 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.LinkedList;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.red5.logging.Red5LoggerFactory;
@@ -96,9 +97,10 @@ public class ConferenceService {
         
 		log.debug("getRoomsByOrganisation");
 		
-		Long users_id = Sessionmanagement.getInstance().checkSession(SID);
-        Long User_level = Usermanagement.getInstance().getUserLevelByID(users_id);
-        return Roommanagement.getInstance().getRoomsOrganisationByOrganisationId(User_level, organisation_id, start, max, orderby, asc);
+		Long user_id = Sessionmanagement.getInstance().checkSession(SID);
+        Long user_level = Usermanagement.getInstance().getUserLevelByIdAndOrg(user_id, organisation_id);
+        
+        return Roommanagement.getInstance().getRoomsOrganisationByOrganisationId(user_level, organisation_id, start, max, orderby, asc);
 	}	
 	
 	/**
@@ -344,7 +346,7 @@ public class ConferenceService {
 	        log.debug("rooms_id "+rooms_id);
 	        
 	        Integer demoTime = null;
-	        if (argObjectMap.get("demoTime").toString() != null || argObjectMap.get("demoTime").toString().length() > 0) {
+	        if (argObjectMap.get("demoTime").toString() != null && argObjectMap.get("demoTime").toString().length() > 0) {
 	        	demoTime = Integer.valueOf(argObjectMap.get("demoTime").toString()).intValue();
 	        }
 	        
