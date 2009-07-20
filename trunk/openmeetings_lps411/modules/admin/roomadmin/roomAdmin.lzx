@@ -47,6 +47,11 @@
 	    	for (var i=0;i<records.length;i++){
 	    		new lz.roomAdminListItem(this._innerlist._inn._inn,{obj:records[i],rooms_id:records[i].rooms_id,roomname:records[i].name,ispublic:records[i].ispublic});
 	    	}
+	    	if (parent._roomvalueform.rooms_id == 0) {
+                if (records.length > 0) {
+                    parent._roomModerateValueForm.initValueFieldsByObject(records[0]);
+                }
+            }
 	    	]]>
 	    </method>
 
