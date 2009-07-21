@@ -80,10 +80,10 @@
         hib.currentroomid = this.obj.room.rooms_id;
         //Debug.write("non ispublic");
     }
-    Debug.write("hib.conferencedomain: ",hib.conferencedomain);
+    if ($debug) Debug.write("hib.conferencedomain: ",hib.conferencedomain);
     clearStageContent();
     
-    Debug.write("roomClassname : ", + this.roomClassName );
+    if ($debug) Debug.write("roomClassname : ", + this.roomClassName );
     
     new lz[this.roomClassName](canvas.main_content._content.inner,{roomobj:roomObj});
   </method>

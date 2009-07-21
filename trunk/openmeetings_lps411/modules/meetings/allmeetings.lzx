@@ -83,6 +83,7 @@
 											
 									new lz.roomListItem(parent.inn.inn.inn,
 											{
+												roomClassName:canvas.conferenceRoomModule,
 												currentusers : value[eg].currentusers,
 												obj : value[eg],
 												ispublic : true,
@@ -156,6 +157,7 @@
 								for (var eg = 0; eg < value.length; eg++) {
 									new lz.roomListItem(parent.inn.inn.inn,
 											{
+												roomClassName:canvas.conferenceRoomModule,
 												currentusers : value[eg].room.currentusers,
 												obj : value[eg],
 												ispublic : false,
@@ -236,7 +238,9 @@
 										+ (value[eg].starttime.getMonth() + 1)
 										+ '.'
 										+ value[eg].starttime.getFullYear();
-								new lz.roomListItem(parent.inn.inn.inn, {
+								new lz.roomListItem(parent.inn.inn.inn, 
+									   {
+									        roomClassName:canvas.conferenceRoomModule,
 											currentusers : value[eg].currentusers,
 											obj : value[eg],
 											ispublic : true,
