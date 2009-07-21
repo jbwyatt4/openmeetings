@@ -94,7 +94,14 @@
                     this.parent.regObject["zip"]='';
                     this.parent.regObject["states_id"]=Number(this.parent.state.getValue());
                     this.parent.regObject["town"]='';
-                    this.parent.regObject["language_id"]=0;   
+                    this.parent.regObject["language_id"]=0;
+                    
+                    this.parent.regObject["domain"]=canvas.rtmphostlocal; 
+                    this.parent.regObject["port"]=canvas.red5httpport; 
+                    this.parent.regObject["webapp"]=canvas.webAppRootKey; 
+                    
+                    if( $debug ) Debug.write("parent.regObject: ",parent.regObject);
+                    
                     this.parent.registerUserByObject.doCall();
                 }
             ]]>
