@@ -34,6 +34,7 @@ public class Users {
 	private Long language_id;
 	private Adresses adresses;
 	private String resethash;
+	private String activatehash;
 	
 	private Userlevel userlevel;
 
@@ -348,6 +349,18 @@ public class Users {
 	}
 	public void setResethash(String resethash) {
 		this.resethash = resethash;
+	}
+
+	/**
+     * @hibernate.property
+     *  column="activatehash"
+     *  type="string"
+     */
+	public String getActivatehash() {
+		return activatehash;
+	}
+	public void setActivatehash(String activatehash) {
+		this.activatehash = activatehash;
 	}
 	
 	

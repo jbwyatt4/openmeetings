@@ -34,6 +34,7 @@ import org.openmeetings.app.templates.ResetPasswordTemplate;
 import org.openmeetings.utils.crypt.ManageCryptStyle;
 import org.openmeetings.utils.mail.MailHandler;
 import org.openmeetings.utils.mappings.CastMapToObject;
+import org.openmeetings.utils.math.CalendarPatterns;
 import org.red5.io.utils.ObjectMap;
 import org.slf4j.Logger;
 import org.red5.logging.Red5LoggerFactory;
@@ -204,7 +205,7 @@ public class Usermanagement {
 			Criteria crit = session.createCriteria(Users.class);
 			crit.add(Restrictions.eq("login", username));
 			crit.add(Restrictions.eq("deleted", "false"));
-			crit.add(Restrictions.eq("status", 1));
+			//crit.add(Restrictions.eq("status", 1));
 			List ll = crit.list();
 			log.info("debug loginUser: " + username);
 			tx.commit();
@@ -226,6 +227,12 @@ public class Usermanagement {
 						//invalid Session-Object
 						return new Long(-35);
 					}
+					
+					//Check if activated
+					if (users.getStatus() != null && users.getStatus().equals(0)) {
+						return -41L;
+					}
+					
 					users.setUserlevel(getUserLevel(users.getLevel_id()));		
 					updateLastLogin(users);
 					//If invoked via SOAP this is NULL
@@ -725,19 +732,37 @@ public class Usermanagement {
 	public Long registerUser(String login, String Userpass, String lastname,
 			String firstname, String email, Date age, String street,
 			String additionalname, String fax, String zip, long states_id,
-			String town, long language_id, String phone) {
+			String town, long language_id, String phone, String baseURL) {
 		try {
 			// Checks if FrontEndUsers can register
 			if (Configurationmanagement.getInstance().getConfKey(3,"allow_frontend_register").getConf_value().equals("1")) {
-				// TODO: add availible params sothat users have to verify their
-				// login-data
-				// TODO: add status from Configuration items
-				Long user_id = this.registerUserInit(3, 1, 0, 1, login, Userpass,lastname, firstname, email, age, street, additionalname,fax, zip, states_id, town, language_id, true, new LinkedList(), phone);
+				
+				Boolean sendConfirmation = false;
+				Integer sendEmailWithVerficationCode = Integer.valueOf(Configurationmanagement.getInstance().
+						getConfKey(3,"sendEmailWithVerficationCode").getConf_value()).intValue();
+				
+				//Send Confirmation can only be true when the baseURL is set,
+				//when you add a new user through the Administration panel
+				//the baseURL is not set so sendConfirmation = false and there will be
+				//neither an Email nor will this method return a negative error id
+				if (baseURL.length() != 0 && sendEmailWithVerficationCode == 1) {
+					sendConfirmation = true;
+				}
+				
+				Long user_id = this.registerUserInit(3, 1, 0, 1, login, Userpass,lastname, firstname, email, age, 
+										street, additionalname,fax, zip, states_id, town, 
+										language_id, true, new LinkedList(), phone, baseURL, sendConfirmation);
+				
 				// Get the default organisation_id of registered users
 				if (user_id>0){
 					long organisation_id = Long.valueOf(Configurationmanagement.getInstance().getConfKey(3,"default_domain_id").getConf_value()).longValue();
 					Organisationmanagement.getInstance().addUserToOrganisation(user_id,organisation_id, user_id, "");
 				}
+				
+				if (sendConfirmation) {
+					return new Long(-40);
+				}
+				
 				return user_id;
 			}
 		} catch (Exception e) {
@@ -775,7 +800,8 @@ public class Usermanagement {
 			int status, String login, String Userpass, String lastname,
 			String firstname, String email, Date age, String street,
 			String additionalname, String fax, String zip, long states_id,
-			String town, long language_id, boolean sendWelcomeMessage, List organisations, String phone) throws Exception {
+			String town, long language_id, boolean sendWelcomeMessage, 
+			List organisations, String phone, String baseURL, Boolean sendConfirmation) throws Exception {
 		//TODO: make phone number persistent
 		// User Level must be at least Admin
 		// Moderators will get a temp update of there UserLevel to add Users to
@@ -788,15 +814,25 @@ public class Usermanagement {
 				boolean checkEmail = Emailmanagement.getInstance().checkUserEMail(email);
 				if (checkName && checkEmail) {
 					
+					String hash = ManageCryptStyle.getInstance().getInstanceOfCrypt().createPassPhrase(login + CalendarPatterns.getDateWithTimeByMiliSeconds(new Date()));
+					String link = baseURL+"activateUser?u="+hash;
+					
 					if (sendWelcomeMessage && email.length()!=0) {
-						String sendMail = Emailmanagement.getInstance().sendMail(login, Userpass, email);
+						//We need to pass the baseURL to check if this is really set to be send
+						String sendMail = Emailmanagement.getInstance().sendMail(login, Userpass, email, link, sendConfirmation);
 						if (!sendMail.equals("success")) return new Long(-19);
 					}						
 					Long address_id = Addressmanagement.getInstance().saveAddress(street, zip, town, states_id, additionalname, "",fax, phone, email);
 					if (address_id==null) {
 						return new Long(-22);
 					}
-					Long user_id = this.addUser(level_id, availible, status,firstname, login, lastname, language_id, Userpass,address_id, age);
+					
+					//If this user needs first to click his E-Mail verification code then set the status to 0
+					if (sendConfirmation) {
+						status = 0;
+					}
+					
+					Long user_id = this.addUser(level_id, availible, status,firstname, login, lastname, language_id, Userpass,address_id, age, hash);
 					if (user_id==null) {
 						return new Long(-111);
 					}
@@ -850,7 +886,7 @@ public class Usermanagement {
 	 */
 	public Long addUser(long level_id, int availible, int status,
 			String firstname, String login, String lastname, long language_id,
-			String userpass, long adress_id, Date age) {
+			String userpass, long adress_id, Date age, String hash) {
 		try {
 			Users users = new Users();
 			users.setFirstname(firstname);
@@ -865,6 +901,8 @@ public class Usermanagement {
 			users.setStatus(status);
 			users.setTitle_id(new Integer(1));
 			users.setStarttime(new Date());
+			users.setActivatehash(hash);
+			
 			// this is needed cause the language is not a needed data at
 			// registering
 			if (language_id != 0) {
@@ -892,7 +930,7 @@ public class Usermanagement {
 		}
 		return null;
 	}
-
+	
 	public Long addUser(Users usr) {
 		try {
 			Object idf = HibernateUtil.createSession();
@@ -1192,5 +1230,50 @@ public class Usermanagement {
 		}
 		return null;
 	}
+
+	/**
+	 * @param hash
+	 * @return
+	 */
+	public Users getUserByActivationHash(String hash) {
+        try {
+            String hql = "SELECT u FROM Users as u " +
+                            " where u.activatehash = :activatehash" +
+                            " AND deleted != :deleted";
+            Object idf = HibernateUtil.createSession();
+            Session session = HibernateUtil.getSession();
+            Transaction tx = session.beginTransaction();
+            Query query = session.createQuery(hql);
+            query.setString("activatehash", hash);
+            query.setString("deleted", "true");
+            Users us = (Users) query.uniqueResult();
+            tx.commit();
+            HibernateUtil.closeSession(idf);
+            return us;
+	    } catch (Exception e) {
+	            log.error("[getUserByActivationHash]",e);
+	    }
+	    return null;
+
+	}
+
+    public void updateUser(Users user) {
+        if (user.getUser_id() > 0) {
+            try {
+                Object idf = HibernateUtil.createSession();
+                Session session = HibernateUtil.getSession();
+                Transaction tx = session.beginTransaction();
+                session.update(user);
+                tx.commit();
+                HibernateUtil.closeSession(idf);
+            } catch (HibernateException ex) {
+                    log.error("[updateUser] ",ex);
+            } catch (Exception ex2) {
+                    log.error("[updateUser] ",ex2);
+            }
+        } else {
+                log.error("[updateUser] "+"Error: No USER_ID given");
+        }
+}
 
 }

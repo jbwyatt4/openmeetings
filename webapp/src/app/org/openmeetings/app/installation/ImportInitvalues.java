@@ -311,10 +311,12 @@ public class ImportInitvalues {
 			String email, String defaultOrganisationName) {
 		//Add user
 		try {
+			
+			//BaseUrl as param is empty as we do not send an EMAIL here
 			Long user_id = Usermanagement.getInstance().registerUserInit(
 					new Long(3), 3, 1, 1, username, userpass, "lastname",
 					"firstname", email, new java.util.Date(), "street", "no",
-					"fax", "zip", 1, "town", 0, false, null, "phone");
+					"fax", "zip", 1, "town", 0, false, null, "phone", "", false);
 
 			//Add default group
 			Long organisation_id = Organisationmanagement.getInstance()

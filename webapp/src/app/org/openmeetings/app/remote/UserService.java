@@ -285,7 +285,8 @@ public class UserService {
 	        			argObjectMap.get("fax").toString(), argObjectMap.get("zip").toString(), 
 	        			Long.valueOf(argObjectMap.get("states_id").toString()).longValue(), argObjectMap.get("town").toString(), 
 	        			0,
-	        			true,organisations, argObjectMap.get("phone").toString()); 	
+	        			true,
+	        			organisations, argObjectMap.get("phone").toString(),"",false); 	
     		} else {
 		        return Usermanagement.getInstance().updateUser(user_level,user_idClient, 
 		        		Long.valueOf(argObjectMap.get("level_id").toString()).longValue(), argObjectMap.get("login").toString(), 

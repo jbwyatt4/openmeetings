@@ -282,7 +282,8 @@ public class Emailmanagement {
 	 * @return
 	 * @throws Exception
 	 */
-	public String sendMail(String Username, String Userpass, String EMail) {
+	public String sendMail(String Username, String Userpass, String EMail, String link, 
+			Boolean sendEmailWithVerficationCode) {
 		String succ = "valid email";
 		
 		
@@ -294,10 +295,25 @@ public class Emailmanagement {
 			Long default_lang_id = Long.valueOf(Configurationmanagement.getInstance().
 	        		getConfKey(3,"default_lang_id").getConf_value()).longValue();
 			
-			String template = RegisterUserTemplate.getInstance().getRegisterUserTemplate(Username,Userpass,EMail,default_lang_id);
-			Fieldlanguagesvalues label = Fieldmanagment.getInstance().getFieldByIdAndLanguage(new Long(512), default_lang_id);
+			if (sendEmailWithVerficationCode) {
+				
+				String verification_url = link;
+				
+				String template = RegisterUserTemplate.getInstance().getRegisterUserWithVerificationTemplate(Username,Userpass,EMail,default_lang_id, verification_url);
+				Fieldlanguagesvalues label = Fieldmanagment.getInstance().getFieldByIdAndLanguage(new Long(512), default_lang_id);
 			
-			succ = MailHandler.sendMail(EMail, label.getValue(), template);
+				succ = MailHandler.sendMail(EMail, label.getValue(), template);
+				
+			} else {
+				
+				String template = RegisterUserTemplate.getInstance().getRegisterUserTemplate(Username,Userpass,EMail,default_lang_id);
+				Fieldlanguagesvalues label = Fieldmanagment.getInstance().getFieldByIdAndLanguage(new Long(512), default_lang_id);
+			
+				succ = MailHandler.sendMail(EMail, label.getValue(), template);
+			}
+			
+			
+			
 			return succ;
 		} else {
 			return "success";
