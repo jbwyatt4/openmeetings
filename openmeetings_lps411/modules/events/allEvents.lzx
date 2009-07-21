@@ -39,7 +39,7 @@
 			                    				     value[eg].starttime.getDate()+'.'+(value[eg].starttime.getMonth()+1)+'.'+value[eg].starttime.getFullYear();
 			                    		new lz.roomListItem(parent.inn.inn.inn,{currentusers:value[eg].currentusers,
 			                    											maxUsers:100,
-			                    											roomClassName:'audienceView',
+			                    											roomClassName:canvas.eventRoomModule,
 			                    											isaudience:true,
 			                    											obj:value[eg],
 			                    											ispublic:true,
@@ -95,7 +95,7 @@
 				                    				value[eg].room.starttime.getDate()+'.'+(value[eg].room.starttime.getMonth()+1)+'.'+value[eg].room.starttime.getFullYear();
 				                    	new lz.roomListItem(parent.inn.inn.inn,{currentusers:value[eg].room.currentusers,
 				                    										maxUsers:100,
-				                    										roomClassName:'audienceView',
+				                    										roomClassName:canvas.eventRoomModule,
 				                    										isaudience:true,obj:value[eg],
 				                    										ispublic:false,
 				                    										roomid:value[eg].room.rooms_id,
@@ -149,7 +149,7 @@
 			                    				     value[eg].starttime.getDate()+'.'+(value[eg].starttime.getMonth()+1)+'.'+value[eg].starttime.getFullYear();
 			                    		new lz.roomListItem(parent.inn.inn.inn,{currentusers:value[eg].currentusers,
 			                    											maxUsers:100,
-			                    											roomClassName:'audienceView',
+			                    											roomClassName:canvas.eventRoomModule,
 			                    											isaudience:true,
 			                    											obj:value[eg],
 			                    											ispublic:true,
