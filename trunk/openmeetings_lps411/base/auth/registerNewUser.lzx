@@ -21,7 +21,7 @@
     </handler>
     
 
-    <method name="register">
+    <method name="register" args="itemObj">
         this.registerB.onclick.sendEvent();
     </method>
     <labelText labelid="114" width="200" y="42" resize="false" x="2"/>

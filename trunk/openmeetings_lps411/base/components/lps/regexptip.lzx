@@ -14,7 +14,7 @@
         this.fadeDelegate = new LzDelegate( this, "fadeText" );
         lz.Timer.addTimer( this.fadeDelegate, 5000 );
     </handler>
-    <method name="fadeText">
+    <method name="fadeText" args="itemRef">
         this.destroy();
     </method>
     <view width="${parent.width}" layout="axis:x">
