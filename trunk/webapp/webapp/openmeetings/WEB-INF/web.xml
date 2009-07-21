@@ -140,6 +140,10 @@
         <servlet-name>ExportToImage</servlet-name>
         <servlet-class>org.openmeetings.servlet.outputhandler.ExportToImage</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ActivateUser</servlet-name>
+        <servlet-class>org.openmeetings.servlet.outputhandler.ActivateUser</servlet-class>
+    </servlet>
     <!-- Axis2 Settings -->
     <servlet>
         <servlet-name>AxisServlet</servlet-name>
@@ -208,6 +212,10 @@
     <servlet-mapping>
         <servlet-name>ExportToImage</servlet-name>
         <url-pattern>/ExportToImage</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ActivateUser</servlet-name>
+        <url-pattern>/activateUser</url-pattern>
     </servlet-mapping>
     <!-- Axis2 -->
     <servlet-mapping>

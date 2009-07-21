@@ -450,9 +450,11 @@ public class LdapLoginManagement {
 				state_id,
 				town,
 				0,
-				false,
+				false, //sendWelcomeMessage
 				null,
-				phone);
+				phone,
+				"",//BaseURL is empty as we do not send an Email here
+				false);//send verification code
 		}catch(Exception e){
 			log.error("Error creating user : " + e.getMessage());
 		}

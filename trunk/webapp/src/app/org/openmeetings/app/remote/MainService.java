@@ -384,12 +384,30 @@ public class MainService implements IPendingServiceCallback {
 // 			Long.valueOf(regObject.get("states_id").toString()).longValue();
 // 			regObject.get("town").toString();
 // 			Long.valueOf(regObject.get("language_id").toString()).longValue();
+    		
+    		String domain = regObject.get("domain").toString();
+    		String port = regObject.get("port").toString();
+    		String webapp = regObject.get("webapp").toString();
+    		
+    		String baseURL = "http://"+domain+":"+port+"/"+webapp+"/";
+            if (port.equals("80")) {
+            	    baseURL = "http://"+domain+"/"+webapp+"/";
+            } else if (port.equals("443")) {
+            		baseURL = "https://"+domain+"/"+webapp+"/";
+            }
+            
+//            else if (port.equals("8443")) {
+//            		baseURL = "https://"+domain+":"+port+"/"+webapp+"/";
+//            }
+
+    		
         	return Usermanagement.getInstance().registerUser(regObject.get("Username").toString(), regObject.get("Userpass").toString(), 
         			regObject.get("lastname").toString(), regObject.get("firstname").toString(), regObject.get("email").toString(), 
         			new Date(), regObject.get("street").toString(), regObject.get("additionalname").toString(), 
         			regObject.get("fax").toString(), regObject.get("zip").toString(), 
         			Long.valueOf(regObject.get("states_id").toString()).longValue(), regObject.get("town").toString(), 
-        			Long.valueOf(regObject.get("language_id").toString()).longValue(), "");
+        			Long.valueOf(regObject.get("language_id").toString()).longValue(), "",
+        			baseURL);
     	} catch (Exception ex) {
     		log.error("registerUserByObject",ex);
     	}
@@ -421,7 +439,7 @@ public class MainService implements IPendingServiceCallback {
 				String firstname, String email, Date age, String street, String additionalname, 
 				String fax, String zip, long states_id, String town, long language_id, String phone){
     	return Usermanagement.getInstance().registerUser(Username, Userpass, lastname, firstname, email, 
-    			age, street, additionalname, fax, zip, states_id, town, language_id, phone);
+    			age, street, additionalname, fax, zip, states_id, town, language_id, phone, "");
 	}	
 	
 	/**

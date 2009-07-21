@@ -1643,7 +1643,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   </string>
   <string id="544" name="debug_message_recording">
     <value>The recorder is currently Beta!</value>
-  </string>	
+  </string>
   <string id="545" name="propertyPanelXValue">
     <value>x</value>
   </string>
@@ -1670,16 +1670,16 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   </string>
   <string id="553" name="propertyOpacitySlider">
     <value>Change Transparency</value>
-  </string>	
+  </string>
   <string id="554" name="browserOpen">
     <value>Browser Open</value>
-  </string>	
+  </string>
   <string id="555" name="browserClose">
     <value>Browser Close</value>
-  </string>	
+  </string>
   <string id="556" name="connectionLostMessage">
     <value>The Connection to the Server is lost. You need to reload the Application or/and check your Network.</value>
-  </string>  
+  </string>
   <string id="557" name="557">
     <value>Pointer</value>
   </string>
@@ -1703,7 +1703,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   </string>
   <string id="564" name="exportToImage">
     <value>&lt;u&gt;Download as TIF&lt;/u&gt;</value>
-  </string>  
+  </string>
   <string id="565" name="calendarLabel">
     <value>Reminder:</value>
   </string>
@@ -1769,7 +1769,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   </string>
   <string id="586" name="tooltip main-menu">
     <value>Create users, rooms, organizations&lt;br/&gt; + change configuration</value>
-  </string>  
+  </string>
   <string id="587" name="room Administration roomclients list">
     <value>Users in this Room now</value>
   </string>
@@ -1781,10 +1781,10 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   </string>
   <string id="590" name="room Administration roomclients list">
     <value>D</value>
-  </string> 
+  </string>
   <string id="591" name="swf sync message">
     <value>Loading Document. Please wait untill all Client have been synchronized.</value>
-  </string>   
+  </string>
   <string id="592" name="upload dialog">
     <value>Upload complete, converting Document ...</value>
   </string>
@@ -1805,7 +1805,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   </string>
   <string id="598" name="confadmin value list">
     <value>Value</value>
-  </string> 
+  </string>
   <string id="599" name="connection administration panel">
     <value>Streamid</value>
   </string>
@@ -1829,10 +1829,10 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   </string>
   <string id="606" name="kick user message dialog">
     <value>Your session has been closed by an Administrator or Moderator.</value>
-  </string>  
+  </string>
   <string id="607" name="useralterself_phone">
     <value>Phone</value>
-  </string> 
+  </string>
   <string id="608" name="participents panel">
     <value>User is the Moderator of this Room</value>
   </string>
@@ -1859,15 +1859,18 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   </string>
   <string id="616" name="conferencePanels">
     <value>Chat</value>
-  </string>  
+  </string>
   <string id="617" name="organization choose info">
     <value>Your account is assigned to multiple Organizations. Please choose one for this Session.</value>
-  </string>  
+  </string>
   <string id="618" name="error message room full">
     <value>This room is full at the moment. Please try again later.</value>
-  </string>  
+  </string>
   <string id="619" name="roomtypes">
     <value>Room Type</value>
+  </string>
+  <string id="620" name="appointed_room">
+    <value>Appointment Room</value>
   </string>
   <string id="621" name="servertime">
     <value>Server Time</value>
@@ -1902,7 +1905,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   <string id="631" name="lbl_name">
     <value>name</value>
   </string>
-   <string id="632" name="lbl_email">
+  <string id="632" name="lbl_email">
     <value>E-mail</value>
   </string>
   <string id="633" name="logoutConfirm_title">
@@ -1925,16 +1928,16 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   </string>
   <string id="639" name="meeting Timer">
     <value>This Room is a Demo Room. To disable this warning you either should get a private meeting room for your personal usage or set up an own Server. You will be automatically logged off in:</value>
-  </string>  	
+  </string>
   <string id="640" name="meeting room administration">
     <value>Moderated</value>
-  </string>  
+  </string>
   <string id="641" name="moderated room waiting message">
     <value>Please wait untill the Moderator has entered the Room. The Moderator can be either a Teacher, Admin or the creator of this Room.</value>
   </string>
   <string id="642" name="error popup">
     <value>Ok</value>
-  </string> 
+  </string>
   <string id="643" name="window screensharing">
     <value>Incoming Screen Sharing</value>
   </string>
@@ -1943,7 +1946,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   </string>
   <string id="645" name="window screen sharing">
     <value>Start Sharing</value>
-  </string>  
+  </string>
   <string id="646" name="calendar">
     <value>Add new Meeting</value>
   </string>
@@ -1989,9 +1992,6 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   <string id="660" name="moderation">
     <value>Add or delete Users or Rooms within your Organization</value>
   </string>
-  <string id="660" name="moderation">
-    <value>Add or delete Users or Rooms within your Organization</value>
-  </string>
   <string id="661" name="delete confirm question">
     <value>Do you really want to delete this record?</value>
   </string>
@@ -2009,5 +2009,29 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   </string>
   <string id="666" name="error message moderation">
     <value>This is an Administrator or Moderator account. You can only edit this account through the Administration Panel.</value>
-  </string>  
+  </string>
+  <string id="667" name="email verification">
+    <value>To complete your registration please click on the following link. Or copy the URL to your browser bar.</value>
+  </string>
+  <string id="668" name="email verification">
+    <value>Click to verify your E-Mail</value>
+  </string>
+  <string id="669" name="errorMessage_UserActivationServlet [ActivateUser]">
+    <value>No user was found for this Hash.</value>
+  </string>
+  <string id="670" name="errorMessage_UserActivationServlet [ActivateUser]">
+    <value>This user is already activated!</value>
+  </string>
+  <string id="671" name="errorMessage_UserActivationServlet [ActivateUser]">
+    <value>You did successfully activate your account!</value>
+  </string>
+  <string id="672" name="errorMessage_UserActivationServlet [ActivateUser]">
+    <value>Login Now</value>
+  </string>
+  <string id="673" name="loginErrorMessage = user was not activated">
+    <value>Your account is not activated. First use the link in the Email you've received during registration.</value>
+  </string>
+  <string id="674" name="register verification message">
+    <value>You successfully signed up. We've send an EMail with a verification Code to your Mail. Please check your Inbox.</value>
+  </string>
 </language>

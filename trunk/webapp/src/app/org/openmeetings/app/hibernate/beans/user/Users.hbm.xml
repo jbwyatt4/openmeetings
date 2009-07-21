@@ -29,5 +29,6 @@
       <one-to-many class="org.openmeetings.app.hibernate.beans.domain.Organisation_Users"/>
     </set>
     <property name="resethash" type="string" column="resethash"/>
+    <property name="activatehash" type="string" column="activatehash"/>
   </class>
 </hibernate-mapping>
