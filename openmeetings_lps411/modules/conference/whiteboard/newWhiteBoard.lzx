@@ -141,7 +141,8 @@
     <!-- 
         The Content Area    
      -->
-    <view width="${ parent.parent.width-2 }" height="${ parent.parent.height-33 }" 
+    <view width="${ parent.parent.width-2 }" 
+    	  height="${ (canvas.ismoderator) ? (parent.parent.height-33-parent._propertyPanel.height) : ((canvas.isAllowedToDraw) ? (parent.parent.height-33-parent._propertyPanel.height) : (parent.parent.height-33)) }" 
     	  y="0" name="_drawareaMask" clip="true" bgcolor="white" >
         <remoteWhiteboard y="0" name="_drawarea" isRemoteOID="true"
         			  width="${parent.width}" height="${parent.height}" >

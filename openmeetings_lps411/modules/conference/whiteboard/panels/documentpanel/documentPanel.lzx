@@ -53,6 +53,24 @@
 </class>
 
 <class name="horizontalDocumentIconBar" extends="view" y="22" x="4">
+	
+	<method name="addCurrentObject" args="itemObj">
+		if ($debug) Debug.write("addCurrentObject ",itemObj.fileName,itemObj.name);
+		this.currentDocument.addItem(itemObj.fileName,itemObj.name);
+		this.currentDocument.sendSelection = false;
+		this.currentDocument.selectItem(itemObj.name);
+		this.currentDocument.sendSelection = true;
+	</method>
+	
+	<method name="removeDocument" args="refItemName">
+		this.currentDocument.removeItem(refItemName);
+		this.currentDocument.selectItemAt(0);
+	</method>
+	
+	<method name="clearDocumentsBar">
+		this.currentDocument.reset();
+	</method>
+	
 	<simplelayout axis="x" spacing="2" />
 
     <drawDocumentPanelItem name="b3" modi="doc_first" resoureceItem="doc_first" 
@@ -81,11 +99,22 @@
         labelid="260" />	
     
     <labelText y="6" name="_zoom" width="30" height="24" />
-    <labelText y="6" labelid="253" />	
+    <labelText y="6" labelid="253" />
+    
+    <resetCombobox name="currentDocument" width="170" height="24" fontsize="12"
+    			   editable="false" shownitems="7">
+    	<attribute name="sendSelection" value="true" type="boolean"/>
+    	<handler name="onselect" args="sel">
+    		if (this.sendSelection) {
+    		    parent.parent.parent.parent._drawareaMask._drawarea.setCurrentDocument(sel.value);
+    		}
+    	</handler>
+    </resetCombobox>
+    	
 </class>
 	
-<class name="documentIconTopPanel" extends="baseTopPanel" 
-	   width="336" height="33" title="" docking="true"
+<class name="documentIconTopPanel" extends="baseTopPanel" clickable="false" 
+	   width="506" height="33" title="" docking="true"
 	   activationClassBounding="documentIconTopPanel"
 	   activationVClassBounding="documentIconTopPanel"
 	   leftClassPanel="documentIconTopPanel"
@@ -93,7 +122,7 @@
 	   bottomClassPanel="documentIconTopPanel"
 	   rightClassPanel="documentIconTopPanel"
 	   verticalClassActive="true"
-	   hWidth="336" hHeight="33" >
+	   hWidth="506" hHeight="33" >
 	<handler name="oninit">
 		//if ($debug) Debug.write("oninit: ",this);
 		_inner._currentSlideNo.setAttribute('text',canvas.currentSlideNo);

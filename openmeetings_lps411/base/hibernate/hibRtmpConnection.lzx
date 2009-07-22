@@ -580,7 +580,7 @@
 	    	</handler>
 	    </netRemoteCallHib>             
   
-        <netRemoteCallHib name="sendVars" funcname="sendVars">
+        <netRemoteCallHib name="sendVars" funcname="sendVars" showLoading="false">
             <netparam name="vars"><method name="getValue">return canvas.objWhiteboard;</method></netparam>
             <handler name="ondata" args="value">
                 <![CDATA[
