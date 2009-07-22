@@ -9,7 +9,7 @@
                 var currentCount = this.cblist.getNumItems();
                 for (var i = 0; i < currentCount; i++)
                     this.removeItemAt(0);
-                this.resetItemsListNumber.sendEvent();
+                this.clearSelection();
             ]]>
         </method>
     

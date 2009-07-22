@@ -39,6 +39,9 @@
 	<attribute name="doHandlerUpdates" value="false" type="boolean" />	
     <attribute name="boundingDoUpdateOnInit" value="true" type="boolean" />	 
     
+    <attribute name="canBeDragged" value="true" type="boolean" />
+    <attribute name="canBeResized" value="true" type="boolean" />
+    
     <!--- Minimum width for the windowy, default: 60.
           @keywords final -->
     <attribute name="minwidth" value="2"/>
@@ -47,12 +50,17 @@
           @keywords final -->
     <attribute name="minheight" value="2"/>    
 	
-	<method name="__LZRemoveItem">
+	<method name="__LZRemoveItem" args="itemRef">
 		//Debug.write("__LZRemoveItem");
 	</method>
 	
 	<handler name="oninit">
 		<![CDATA[
+		    if (!this.boundingDoUpdateOnInit) {
+		    	if ($debug) Debug.write("DESTROY the clickable view");
+		    	this._innerDrag.destroy();
+		    }
+		
 			this.setAttribute('x',this.ex);
 			this.setAttribute('y',this.ey);
 			this.setAttribute('width',this.ewidth);
@@ -111,7 +119,9 @@
      -->
     <method name="doUpdateAction" >
     	this.setAttribute('doHandlerUpdates',true);
-    	if (this.boundingDoUpdateOnInit) this._innerDrag.onmousedown.sendEvent();
+    	if (this.boundingDoUpdateOnInit) {
+    	    this._innerDrag.onmousedown.sendEvent();
+    	}
     </method>
     
     <handler name="onheight">
@@ -146,12 +156,19 @@
 	</method>
 
     <method name="_applyResizestateFromThis">
+    	if ($debug) Debug.write("Apply resize State");
+    	if (!this.canBeResized) {
+            return;
+        }
 		this.setStartValues();		
 		this.rs.apply()
 	</method>
     
     <method name="_removeResizestateFromThis">
 		<![CDATA[
+		if (!this.canBeResized) {
+            return;
+        }
     	this.rs.remove();
 		
 		if (this.startdragX != this.x || this.startdragY != this.y || this.startdragWidth != this.width || this.startdragHeight != this.height){
@@ -166,12 +183,18 @@
     </method>
 	
 	<method name="_applyDragstateFromThis">
+		if (!this.canBeDragged) {
+			return;
+		}
 		this.setStartValues();
 		this.dragger.apply()
 	</method>	
     
     <method name="_removeDragstateFromThis">
 		<![CDATA[
+		if (!this.canBeDragged) {
+            return;
+        }
     	////Debug.write("onmouseup invoke");
     	this.dragger.remove();
 		
@@ -212,8 +235,8 @@
    	</dragstate>
 	
 	<view name="_innerDrag" width="${ parent.width }" height="${ parent.height }"
-	onmousedown="parent.dragger.apply()" onmouseup="parent._removeDragstateFromThis()"
-    onmouseover="this.parent.applyScrollbarToObject()" onmouseout="this.parent.removeScrollbarToObject()">
+    	onmousedown="parent._applyDragstateFromThis()" onmouseup="parent._removeDragstateFromThis()"
+        onmouseover="this.parent.applyScrollbarToObject()" onmouseout="this.parent.removeScrollbarToObject()">
 		<handler name="oninit">
 	        var newMenu = new LzContextMenu();
 	        newMenu.hideBuiltInItems();
@@ -255,6 +278,7 @@
 		</handler>
 	</baseChooseIcon>	    
     
+    <!--
     <view name="_inner" y="22" width="${ parent.width }"
         height="${ parent.height-22 }" visible="false">    
         <view name="_inner">
@@ -290,7 +314,7 @@
                 }
             </handler>        
             
-            <method name="sendObject">
+            <method name="sendObject" args="itemRef">
                 //Debug.write("sendObject");
                 this.parent.parent.whiteboardRef.sendCurrentSWFObject(this.parent.parent.objRef);
                 this.timeisInited=false;
@@ -300,6 +324,7 @@
         <vscrollbar name="_scrollstv" /> 
         <hscrollbar name="_scrollsth" />     
     </view>
+     -->
     
 	<view resource="_boundingBoxPointerTL" x="0" y="0" />
 	<view resource="_boundingBoxPointerTR" x="${ parent.width-this.width }" y="0" />

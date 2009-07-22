@@ -50,7 +50,7 @@
 	 -->
   	<method name="addPresentationToLayer" args="obj,urlName,nameing,posx,posy,width,height,alterModus,baseurl,fileName,moduleName,parentPath,room,domain,slideNumber,currentzoom,innerwidth,innerheight,innerx,innery,uniqueObjectSyncName">
         <![CDATA[
-            //Debug.write("addPresentationToLayer",obj,nameing,posx,posy,width,height,alterModus,baseurl,fileName,moduleName,parentPath,room,domain,slideNumber);
+            //if ($debug) Debug.write("addPresentationToLayer",obj,nameing,posx,posy,width,height,alterModus,baseurl,fileName,moduleName,parentPath,room,domain,slideNumber);
             //only show if it is not part of wml-file-object
             //if (!this.isWmlLoaderImage) {
             //    this.loadimageDataWinRef = new lz.loadWhiteboardWindow(canvas.main_content._content.inner,{refObj:this});
@@ -64,15 +64,17 @@
                     '&parentPath=' + parentPath +
                     '&room_id='+room + 
                     '&sid='+canvas.sessionId;
-            var width= this.width;
-            var height = this.height;
+            
+            //var width= this.width;
+            //var height = this.height-200;
             ////Debug.write("width:height: ",width,height);
             
             this.currentlayer = new lz.swfResourceView(obj,{refObj:this,name:nameing,
             	x:posx,y:posy,alterModus:alterModus,
             	baseurl:baseurl,fileName:fileName,moduleName:moduleName,parentPath:parentPath,
             	room:room,domain:domain,slideNumber:slideNumber,
-            	width:width,height:height,currentzoom:currentzoom,
+            	//width:width,height:height,
+            	currentzoom:currentzoom,
             	innerwidth:innerwidth,innerheight:innerheight,
             	innerx:innerx,innery:innery,
             	uniqueObjectSyncName:uniqueObjectSyncName});
@@ -80,7 +82,9 @@
             //this.parent.parent.isloadingImage.sendEvent(this.currentlayer);
             ////Debug.write("downloadurl. ",downloadurl);
             this.currentlayer._swfView.setSource(downloadurl);
-    
+            
+            this.addItemToDocumentToolBar();
+            this.doUpdateDocumentToolBar();
 		]]>
   	</method>
   	
@@ -115,7 +119,7 @@
 
             this.parent.parent.isloadingImage.sendEvent(this.currentlayer);
             this.currentlayer._swfView.setSource(downloadurl);
-
+            
             //Add Layer to global Layer  	
             return this.currentlayer;
 		]]>
@@ -410,17 +414,49 @@
         ]]>
     </method>
     
+    <method name="addItemToDocumentToolBar">
+    	var docToolbar = this.getDocumentToolBar();
+    	docToolbar.addCurrentObject(this.currentlayer);
+    </method>
+    
+    <method name="setCurrentDocument" args="itemRefName">
+        this.ObjectByName = this.getObjectByName(itemRefName);
+        this.doUpdateDocumentToolBar();
+        //FIXME: This should also bringt to front the object for all participants
+        this.ObjectByName.bringtToFront();
+    </method>
+    
     <method name="doUpdateDocumentToolBar">
-    	if (this.modernToolbar) {
-	        this.parent.parent._documentmenu._currentSlideNo.setAttribute('text',this.ObjectByName._swfView.frame);
-	        this.parent.parent._documentmenu._totalSlideNo.setAttribute('text',this.ObjectByName._swfView.totalframes);
-	        this.parent.parent._documentmenu._zoom.setAttribute('text',this.ObjectByName.currentzoomFactor);
-    	} else {
-    		var docToolbar = this.getDocumentToolBar();
-	        docToolbar._currentSlideNo.setAttribute('text',this.ObjectByName._swfView.frame);
-	        docToolbar._totalSlideNo.setAttribute('text',this.ObjectByName._swfView.totalframes);
-	        docToolbar._zoom.setAttribute('text',this.ObjectByName.currentzoomFactor);
-    	}
+    	<![CDATA[
+        	if (this.modernToolbar) {
+    	        this.parent.parent._documentmenu._currentSlideNo.setAttribute('text',this.ObjectByName._swfView.frame);
+    	        this.parent.parent._documentmenu._totalSlideNo.setAttribute('text',this.ObjectByName._swfView.totalframes);
+    	        this.parent.parent._documentmenu._zoom.setAttribute('text',this.ObjectByName.currentzoomFactor);
+        	} else {
+        		var docToolbar = this.getDocumentToolBar();
+        		
+        		if (this.ObjectByName && this.ObjectByName._swfView) {
+        			docToolbar._currentSlideNo.setAttribute('text',this.ObjectByName._swfView.frame);
+                    docToolbar._totalSlideNo.setAttribute('text',this.ObjectByName._swfView.totalframes);
+                    docToolbar._zoom.setAttribute('text',this.ObjectByName.currentzoomFactor);
+        		} else {
+        			docToolbar._currentSlideNo.setAttribute('text',"0");
+                    docToolbar._totalSlideNo.setAttribute('text',"0");
+                    docToolbar._zoom.setAttribute('text',"100");
+        		}
+    	        
+        	}
+    	]]>
+    </method>
+    
+    <method name="doDeleteFromDocumentsBar" args="itemRefName">
+    	var docToolbar = this.getDocumentToolBar();
+    	docToolbar.removeDocument(itemRefName);
+    </method>
+    
+    <method name="clearDocumentsBar">
+    	var docToolbar = this.getDocumentToolBar();
+    	docToolbar.clearDocumentsBar();
     </method>
     
     <method name="sendCurrentSWFObject" args="objRef">
@@ -450,6 +486,7 @@
         <![CDATA[
             var obj = this.getObjectByName(lastactionObject[lastactionObject.length-1]);
             ////Debug.write("remoteObjectUpdate: ",this,lastactionObject,obj);
+            obj._swfView.doSendChangeValue = false;
 			obj.slideNumber = lastactionObject[8];
 			obj._swfView.setAttribute('x',lastactionObject[9]);
 			obj._swfView.setAttribute('y',lastactionObject[10]);
@@ -458,6 +495,7 @@
             obj.zoomlevel = lastactionObject[13];
             obj.currentzoomFactor = lastactionObject[16];
             obj._swfView.setAttribute('frame',obj.slideNumber);
+            obj._swfView.doSendChangeValue = true;
             //obj. 
             this.remoteUpdateBaseObjectList(lastactionObject);
         ]]>
