@@ -2,11 +2,13 @@ package org.openmeetings.app.documents;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.TimeoutException;
 
 import org.openmeetings.app.data.basic.Configurationmanagement;
 import org.red5.logging.Red5LoggerFactory;
@@ -37,30 +39,153 @@ public class GenerateSWF {
 		returnMap.put("process", process);
 		log.debug("process: " + process);
 		log.debug("args: " + Arrays.toString(argv));
+		
 		try {
 			Runtime rt = Runtime.getRuntime();
 			returnMap.put("command", Arrays.toString(argv));
 			Process proc = rt.exec(argv);
-
-			InputStream stderr = proc.getErrorStream();
-			InputStreamReader isr = new InputStreamReader(stderr);
-			BufferedReader br = new BufferedReader(isr);
-			String line = null;
-			String error = "";
-			while ((line = br.readLine()) != null) {
-				error += line;
-				log.debug("line: " + line);
-			}
-			returnMap.put("error", error);
-			int exitVal = proc.waitFor();
-			log.debug("exitVal: " + exitVal);
-			returnMap.put("exitValue", exitVal);
-		} catch (Throwable t) {
+			//1-minute timeout for command execution
+			long timeout = 60000;
+			
+			ErrorStreamWatcher errorWatcher = new ErrorStreamWatcher(proc);
+			Worker worker = new Worker(proc);
+			InputStreamWatcher inputWatcher = new InputStreamWatcher(proc);
+			errorWatcher.start();
+			worker.start();
+			inputWatcher.start();
+			try 
+			{
+				worker.join(timeout);
+				if (worker.exit != null)
+				{
+					returnMap.put("exitValue", worker.exit);
+					log.debug("exitVal: " + worker.exit);
+					returnMap.put("error", errorWatcher.error);
+				}
+				else
+				{
+					returnMap.put("exception", "timeOut");
+					returnMap.put("error", errorWatcher.error);
+					returnMap.put("exitValue", -1);
+				
+					throw new TimeoutException();
+				}
+			} 
+			catch(InterruptedException ex) 
+			{				
+			    worker.interrupt();
+			    errorWatcher.interrupt();
+			    inputWatcher.interrupt();
+			    Thread.currentThread().interrupt();
+			    throw ex;
+			} 
+			finally 
+			{
+			    proc.destroy();
+			}			
+		} 
+		catch ( TimeoutException e)
+		{			
+			//Timeout exception is processed above
+		}
+		catch (Throwable t) 
+		{
+			//Any other exception is shown in debug window
 			t.printStackTrace();
 			returnMap.put("error", t.getMessage());
 			returnMap.put("exitValue", -1);
 		}
 		return returnMap;
+	}
+	
+	private static class Worker extends Thread 
+	{
+	  private final Process process;
+	  private Integer exit;
+	  
+	  private Worker(Process process) 
+	  {
+		  this.process = process;
+	  }
+	
+	  public void run() 
+	  {
+		  try 
+		  { 
+		      exit = process.waitFor();
+		  } 
+		  catch (InterruptedException ignore) 
+		  {
+		      return;
+		  }
+	  }  
+	}
+	
+	//This one collects errors coming from script execution
+	private static class ErrorStreamWatcher extends Thread 
+	{
+	  private String error;
+	  private InputStream stderr;
+	  private InputStreamReader isr;
+	  private BufferedReader br;
+	  
+	  private ErrorStreamWatcher(Process process) 
+	  {
+		  error = "";
+		  stderr = process.getErrorStream();
+		  isr = new InputStreamReader(stderr);
+		  br = new BufferedReader(isr);
+	  }
+	
+	  public void run() 
+	  {
+		  try 
+		  { 
+			  String line = br.readLine();	
+			  while (line != null) 
+			  {
+				  error += line;
+				  log.debug("line: " + line);
+				  line = br.readLine();
+			  }
+		  }
+		  catch (IOException ioexception)
+		  {
+			  return;
+		  }
+	  }
+	}
+	
+	//This one just reads script's output stream so it can 
+	//finish normally, see issue 801
+	private static class InputStreamWatcher extends Thread 
+	{
+	  private InputStream stderr;
+	  private InputStreamReader isr;
+	  private BufferedReader br;
+	  
+	  private InputStreamWatcher(Process process) 
+	  {
+		  stderr = process.getInputStream();
+		  isr = new InputStreamReader(stderr);
+		  br = new BufferedReader(isr);
+	  }
+	
+	  public void run() 
+	  {
+		  try 
+		  { 
+			  String line = br.readLine();	
+			  while (line != null) 
+			  {
+				  line = br.readLine();
+			  }
+		  }
+		  catch (IOException ioexception)
+		  {
+			  return;
+		  }
+	  }
 	}
 	
 	private String getPathToSwfTools() {
