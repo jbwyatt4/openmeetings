@@ -155,6 +155,7 @@ public class MailHandler {
 
 		props.put("mail.smtp.host", smtpServer);
 		props.put("mail.smtp.port", smtpPort);
+		props.put("mail.smtp.starttls.enable","true");
 		
 		// Check for Authentification
 		Session session = null;
