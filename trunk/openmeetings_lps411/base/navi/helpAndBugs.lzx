@@ -25,7 +25,7 @@
         </handler>
         <labelText labelid="5" x="10" y="6" fontsize="14" width="150" />
         <handler name="onclick">
-            quicklinkAct("userSettings");
+            quicklinkAct("userSettingsModule");
         </handler>
 
     </view>

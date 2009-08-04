@@ -259,5 +259,11 @@ of the red5-servlet
  -->
 
 <recordModule>recordContent</recordModule>
+
+<!-- #############################################
+    Profiles Panel Modules
+ -->
+
+<userSettingsModule>userSettings</userSettingsModule>
         
 </config>
