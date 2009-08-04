@@ -75,6 +75,10 @@ these properties can be overwritten by config.xml -->
 
 <attribute name="recordModule" value="recordContent" type="string" />
 
+<!-- #############################################
+    Profiles Panel Modules
+ -->
 
+<attribute name="userSettingsModule" value="userSettings" type="string" />
 
 </library>

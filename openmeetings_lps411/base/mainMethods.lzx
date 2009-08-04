@@ -97,6 +97,8 @@
         
         this.setAttribute('eventModuleRoomList',canvas.myConfigSet.getPointer().xpathQuery('config/eventModuleRoomList/text()'));  
         this.setAttribute('eventRoomModule',canvas.myConfigSet.getPointer().xpathQuery('config/eventRoomModule/text()'));  
+		
+		this.setAttribute('userSettingsModule',canvas.myConfigSet.getPointer().xpathQuery('config/userSettingsModule/text()'));  
         
         
         
