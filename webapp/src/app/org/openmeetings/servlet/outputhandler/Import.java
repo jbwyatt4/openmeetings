@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -22,6 +23,8 @@ import org.openmeetings.app.data.user.Addressmanagement;
 import org.openmeetings.app.data.user.Emailmanagement;
 import org.openmeetings.app.data.user.Organisationmanagement;
 import org.openmeetings.app.data.user.Usermanagement;
+import org.openmeetings.app.data.user.dao.UsersDaoImpl;
+import org.openmeetings.app.remote.red5.ScopeApplicationAdapter;
 import org.openmeetings.app.xmlimport.LanguageImport;
 import org.openmeetings.app.xmlimport.UserImport;
 import org.openmeetings.app.hibernate.beans.user.*;
@@ -52,13 +55,20 @@ public class Import extends HttpServlet {
 			if (moduleName == null) {
 				moduleName = "moduleName";
 			}
-			System.out.println("moduleName: " + sid);
+			System.out.println("moduleName: " + moduleName);
 			Long users_id = Sessionmanagement.getInstance().checkSession(sid);
 			Long user_level = Usermanagement.getInstance().getUserLevelByID(
 					users_id);
+			
+			String publicSID = httpServletRequest.getParameter("publicSID");
+			if (publicSID == null) {
+				//Always ask for Public SID
+				return;
+			}
 
-			System.out.println("users_id: " + users_id);
-			System.out.println("user_level: " + user_level);
+			log.debug("users_id: " + users_id);
+			log.debug("user_level: " + user_level);
+			log.debug("moduleName: " + moduleName);
 
 			// if (user_level!=null && user_level > 0) {
 			if (true) {
@@ -69,7 +79,7 @@ public class Import extends HttpServlet {
 						organisation = "0";
 					}
 					Long organisation_id = Long.valueOf(organisation).longValue();
-					System.out.println("organisation_id: " + organisation_id);
+					log.debug("organisation_id: " + organisation_id);
 
 					ServletMultipartRequest upload = new ServletMultipartRequest(httpServletRequest, 104857600); // max100 mb
 					InputStream is = upload.getFileContents("Filedata");
@@ -94,6 +104,22 @@ public class Import extends HttpServlet {
 			} else {
 				System.out.println("ERROR LangExport: not authorized FileDownload "+ (new Date()));
 			}	
+			
+			log.debug("Return And Close");
+			
+			LinkedHashMap<String,Object> hs = new LinkedHashMap<String,Object>();
+			hs.put("user", UsersDaoImpl.getInstance().getUser(users_id));
+			hs.put("message", "library");
+			hs.put("action", "import");
+			
+			log.debug("moduleName.equals(userprofile) ? "+moduleName);
+			
+			//if (!moduleName.equals("userprofile")) {
+				log.debug("moduleName.equals(userprofile) ! ");
+				
+			ScopeApplicationAdapter.getInstance().sendMessageWithClientByPublicSID(hs,publicSID);
+			
+			return;
 	
 		} catch (Exception er) {
 			log.error("ERROR ", er);
