@@ -1135,13 +1135,13 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>привет,</value>
   </string>
   <string id="377" name="dashboard">
-    <value>Редактировать ваши профиль</value>
+    <value>Редактировать ваш профиль</value>
   </string>
   <string id="378" name="dashboard">
     <value>Новые сообщения:</value>
   </string>
   <string id="379" name="dashboard">
-    <value>Загрузить новое изображение:</value>
+    <value>Загрузить новое изображение</value>
   </string>
   <string id="380" name="backuppanel">
     <value>Экспорт пользовательских данных</value>
@@ -1725,10 +1725,10 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Конец</value>
   </string>
   <string id="572" name="calendarLabel">
-    <value>Название:</value>
+    <value>Название</value>
   </string>
   <string id="573" name="calendarLabel">
-    <value>Комментарий:</value>
+    <value>Комментарий</value>
   </string>
   <string id="574" name="calendarLabel">
     <value>Приглашения</value>
@@ -1899,10 +1899,10 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>пригласить других</value>
   </string>
   <string id="630" name="lbl_prename">
-    <value>Фамилия</value>
+    <value>Имя</value>
   </string>
   <string id="631" name="lbl_name">
-    <value>Имя</value>
+    <value>Фамилия</value>
   </string>
    <string id="632" name="lbl_email">
     <value>e-mail</value>
@@ -1936,7 +1936,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   </string>
   <string id="642" name="error popup">
     <value>Ok</value>
-  </string>
+  </string>   
   <string id="643" name="window screensharing">
     <value>Incoming Screen Sharing</value>
   </string>
@@ -1945,7 +1945,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   </string>
   <string id="645" name="window screen sharing">
     <value>Start Sharing</value>
-  </string>
+  </string> 
   <string id="646" name="calendar">
     <value>Add new Meeting</value>
   </string>
