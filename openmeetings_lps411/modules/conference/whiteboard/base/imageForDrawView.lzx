@@ -55,24 +55,29 @@
 				this.setAttribute('width',this.remotewidth);
 				this.setAttribute('height',this.remoteheight);
 			} else {
+				
 				if (this.width>this.refObj.width){
 					var height = this.height/(this.width/this.refObj.width)
 					this.setAttribute('width',this.refObj.width);
 					this.setAttribute('height',height);
 					this.setAttribute('x',0);
 				}
+				
 				if (this.height>this.refObj.height){
 					var width = this.width/(this.height/this.refObj.height)
 					this.setAttribute('height',this.refObj.height);
 					this.setAttribute('width',width);
 					this.setAttribute('y',0);
 				}
+				
 				if(this.y+this.height>this.refObj.height){
 					this.setAttribute('y',0);
 				}
+				
 				if(this.x+this.width>this.refObj.width){
 					this.setAttribute('x',0);
-				}	
+				}
+				
 			}
 	
 			//only send syncCommand if alterModus is true (meaning that this is the Moderator)
