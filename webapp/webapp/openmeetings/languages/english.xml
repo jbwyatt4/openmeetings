@@ -271,7 +271,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>WAITING</value>
   </string>
   <string id="89" name="applyMessage">
-    <value>A User wants to apply for moderation:</value>
+    <value>A User wants to apply for moderation, you can either grant him only access to the whiteboard or completely switch the moderation role. User:</value>
   </string>
   <string id="90" name="accept">
     <value>accept</value>
