@@ -100,7 +100,8 @@
     
     <labelText x="10" width="250" y="24" multiline="true" name="txtFileDescr" labelid="594" />
 	
-	<labelText x="10" fontsize="12" y="60" width="250" name="txtFile" resize="false" fgcolor="0x666666" />
+	<labelText x="10" fontsize="12" y="60" width="250" name="txtFile" multiline="true" 
+			   resize="false" fgcolor="0x666666" />
 
 	<simpleLabelButton fontsize="12" name="browse" x="10" y="80" labelid="596" width="250" height="20">
 		<handler name="onclick">
@@ -123,7 +124,9 @@
 		</handler>
 	</simpleLabelButton>
     
-    <labelText labelid="592" name="progress2" visible="false" x="10" y="140" width="250"/>
+    <labelText labelid="592" name="progress2" visible="false" x="10" y="140" 
+    		   width="250" multiline="true" />
+    		   
 	<view name="progressBar" x="10" y="126" width="250" visible="false" height="10" bgcolor="#C6CEDF">
 		<view x="1" y="1" width="248" height="8" bgcolor="#FFFFFF"/>
 		<view name="status" x="1" y="1" height="8" bgcolor="#D6DEEF"/>
@@ -135,7 +138,7 @@
 			]]>
 		</method>
 		<text name="percent" align="center" resize="true" y="-18" fontstyle="bold" 
-			fontsize="10" fgcolor="#555555"/>
+			fontsize="10" fgcolor="#555555" />
 	</view>
 	
 	<simpleLabelButton name="_close" x="100" y="172" labelid="595" width="160" height="20">
