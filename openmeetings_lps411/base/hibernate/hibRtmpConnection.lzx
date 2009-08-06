@@ -747,6 +747,11 @@
                     if (value.message=='desktop'){
                         canvas._drawarea.incomingScreenSharing(value);
                     } else if (value.message=='library'){
+                    	
+                    	if (value.action == 'import') {
+                    		canvas.currentUploadWindow.myFileUpload.onComplete("byRemote");
+                    	}
+                    	
                         var error = false;
                         for (var eg in value.error){
                             //Debug.write("eg ",eg," value ",value.error[eg]);
