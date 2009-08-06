@@ -193,13 +193,14 @@
         id="_imageslistdraw"
          -->
 <!--  -->
-
+    <!--
 	<view name="currentmainobjectisMod" visible="${ !canvas.ismoderator }"
 		x="0" y="20" height="${ parent.height-28 }" width="${ parent.width }" >
 		<handler name="onclick">
 			new lz.errorModeratorPopup(canvas,{error:canvas.getLabelName(97)});
 		</handler>
 	</view>	
+	 -->
 	
 </class>
 

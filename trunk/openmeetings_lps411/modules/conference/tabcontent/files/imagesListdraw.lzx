@@ -44,6 +44,7 @@
     <method name="resetList">
     	this._table.destroy();
     	new lz.imageListInnerTable(this,{name:'_table'});
+    	this._hideForNonMods.bringToFront();
     </method>
     
     <method name="highlightItem" args="obj">
@@ -58,8 +59,25 @@
     	]]>
     </method>
     
+    <view x="1" y="1"  name="_hideForNonMods" width="${ parent.width-2 }" height="${ parent.height-2 }" 
+           showhandcursor="false" clickable="true"
+           visible="${ ((canvas.ismoderator) ? false : ((canvas.isAllowedToDraw) ? false : true )) }">
+    	<!--
+    	 ((canvas.isAllowedToDraw) ? false : true )
+    	 -->
+    	 
+        <handler name="oninit">
+            if ($debug) Debug.write("#### _hideForNonMods ",this.height,this.width,parent.height,parent.width,this);
+        </handler>
+        <handler name="onclick">
+            new lz.errorModeratorPopup(canvas,{error:canvas.getLabelName(97)});
+        </handler>
+    </view>
+    
 	<imageListInnerTable name="_table" />
-
+	
+	
+    
 </class>
 
 </library>
