@@ -6,6 +6,7 @@
     
     <handler name="oninit">
     	lz.ModeManager.makeModal(this);
+    	canvas.currentUploadWindow = this;
     </handler>
     
     <handler name="onclose">
@@ -20,7 +21,7 @@
     
  	<fileUpload name="myFileUpload" isOnlyXml="true" >
 		<method name="onComplete" args="fr">
-			Debug.write("oncomplete ",fr);
+			if ($debug) Debug.write("oncomplete ",fr);
 			this.parent.progressBar.setValue(100);
 			this.parent.upload.setAttribute('enabled', false);
 			this.parent.upload.setAttribute("visible",false);
@@ -69,6 +70,7 @@
 			var uploadurl = 'http://'+canvas.rtmphostlocal+':'+canvas.red5httpport
 				+'/'+canvas.webAppRootKey+'/Import?moduleName='+this.parent.uploadmodule
 				+'&secondid='+parent.secondid
+				+'&publicSID='+canvas.publicSID
 				+'&sid='+canvas.sessionId;
             Debug.write("uploadurl: ",uploadurl);
 			parent.myFileUpload.upload(uploadurl);
