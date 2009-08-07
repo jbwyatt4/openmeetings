@@ -1,7 +1,7 @@
 package org.openmeetings.app.conference.videobeans;
 
 public class UserSecurity {
-	 
+	  
 	public String username;
 	public String userpass;
 	public String userrole;

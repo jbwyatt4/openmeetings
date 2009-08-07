@@ -41,7 +41,7 @@ public class Configurationmanagement {
 
 		return instance;
 	}
-
+ 
 	public Configuration getConfKey(long user_level, String CONF_KEY) {
 		try {
 			if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)) {

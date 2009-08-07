@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.red5.logging.Red5LoggerFactory;
@@ -153,7 +154,9 @@ public class ClientListManager {
 	 * @param roomname
 	 * @return
 	 */
-	public synchronized RoomClient getCurrentModeratorByRoom(Long room_id) throws Exception{
+	public synchronized List<RoomClient> getCurrentModeratorByRoom(Long room_id) throws Exception{
+		
+		List<RoomClient> rclList = new LinkedList<RoomClient>();
 		
 		for (Iterator<String> iter=clientList.keySet().iterator();iter.hasNext();) {
 			String key = (String) iter.next();
@@ -164,11 +167,11 @@ public class ClientListManager {
 			//Check if the Client is in the same room
 			if(room_id!=null && room_id.equals(rcl.getRoom_id()) && rcl.getIsMod()){
 				log.debug("found client who is the Moderator: "+rcl);
-				return rcl;
+				rclList.add(rcl);
 			}				
 		}
 		
-		return null;
+		return rclList;
 	}
 
 	public synchronized SearchResult getListByStartAndMax(int start, int max, String orderby, boolean asc) throws Exception {

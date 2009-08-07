@@ -27,7 +27,7 @@ public class ErrorManagement {
 		}
 		return instance;
 	}
-	
+	 
 	public Long addErrorType(Long errortype_id, Long fieldvalues_id) {
 		try {
 			ErrorType eType = new ErrorType();

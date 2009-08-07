@@ -19,7 +19,7 @@ public class UserConfigFactory {
 	protected static Logger log = Red5LoggerFactory.getLogger(UserConfigFactory.class, "openmeetings");
 
 	protected static String userconfigFileName = "WEB-INF/configbandwidth.xml";
-	
+	 
 	private HashMap<String,UserSecurity> userConfig = new HashMap<String,UserSecurity>();
 
 	public UserConfigFactory() { }

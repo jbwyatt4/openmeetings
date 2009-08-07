@@ -22,7 +22,7 @@ public class Fieldlanguagesvalues {
 	}
 	
     /**
-     * 
+     *  
      * @hibernate.id
      *  column="fieldlanguagesvalues_id"
      *  generator-class="increment"

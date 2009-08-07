@@ -10,7 +10,7 @@ import org.openmeetings.app.hibernate.beans.lang.Fieldvalues;
  *
  */
 public class ErrorType {
-	
+	 
 	private Long errortype_id;
 	private Long fieldvalues_id;
 	private Fieldvalues fieldvalues;

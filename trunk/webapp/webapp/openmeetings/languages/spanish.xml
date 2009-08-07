@@ -2037,4 +2037,10 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   <string id="674" name="register verification message">
     <value>You successfully signed up. We've send an EMail with a verification Code to your Mail. Please check your Inbox.</value>
   </string>  
+  <string id="675" name="participants panel">
+    <value>Remove Moderation Role from this User</value>
+  </string>
+  <string id="676" name="participants panel">
+    <value>Grant Moderation Rights to this User</value>
+  </string>  
 </language>

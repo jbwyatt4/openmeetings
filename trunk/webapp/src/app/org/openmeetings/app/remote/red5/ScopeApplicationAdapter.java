@@ -63,7 +63,7 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 									+"openmeetings"+File.separatorChar
 									+"jod" + File.separatorChar;
 	public static String lineSeperator = System.getProperty("line.separator");
-	
+	   
 	//The Global WebApp Path
 	public static String webAppPath = "";
 	public static String webAppRootKey = "openmeetings";
@@ -495,61 +495,147 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 	 * Functions to handle the moderation
 	 */
 	
-	/**
-	 * This Method will be invoked by each client if he applies for the moderation
-	 * 
-	 * @param id the StreamId of the Client which should become the Moderator
-	 * @return
-	 */
-
-	public synchronized String setModerator(String id) {
-		
-		String returnVal = "setModerator";
+//	/**
+//	 * This Method will be invoked by each client if he applies for the moderation
+//	 * 
+//	 * @deprecated
+//	 * 
+//	 * @param id the StreamId of the Client which should become the Moderator
+//	 * @return
+//	 */
+//
+//	public synchronized String setModerator(String id) {
+//		
+//		String returnVal = "setModerator";
+//		try {
+//			log.debug("*..*setModerator id: " + id);
+//			
+//			IConnection current = Red5.getConnectionLocal();
+//			//String streamid = current.getClient().getId();
+//			
+//			RoomClient currentClient = this.clientListManager.getClientByStreamId(id);
+//			Long room_id = currentClient.getRoom_id();
+//			
+//			currentClient.setIsMod(new Boolean(true));
+//			//Put the mod-flag to true for this client
+//			this.clientListManager.updateClientByStreamId(id, currentClient);
+//			
+//			//Now set it false for all other clients of this room
+//			HashMap<String,RoomClient> clientListRoom = this.clientListManager.getClientListByRoom(room_id);
+//			for (Iterator<String> iter=clientListRoom.keySet().iterator();iter.hasNext();) {
+//				String streamId = iter.next();
+//				RoomClient rcl = clientListRoom.get(streamId);
+//				//Check if it is not the same like we have just declared to be moderating this room
+//				if( !id.equals(rcl.getStreamid())){
+//					log.debug("set to false for client: "+rcl);
+//					rcl.setIsMod(new Boolean(false));
+//					this.clientListManager.updateClientByStreamId(streamId, rcl);
+//				}				
+//			}
+//	
+//			//Notify all clients of the same scope (room)
+//			Collection<Set<IConnection>> conCollection = current.getScope().getConnections();
+//			for (Set<IConnection> conset : conCollection) {
+//				for (IConnection conn : conset) {
+//					if (conn != null) {
+//						RoomClient rcl = this.clientListManager.getClientByStreamId(conn.getClient().getId());
+//						if (conn instanceof IServiceCapableConnection) {
+//							((IServiceCapableConnection) conn).invoke("setNewModerator",new Object[] { currentClient }, this);
+//							log.debug("sending setNewModerator to " + conn);
+//						}
+//					}
+//				}	
+//			}
+//		} catch (Exception err){
+//			log.error("[setModerator]",err);
+//			returnVal = err.toString();
+//		}
+//		return returnVal;
+//	}  
+	
+	public synchronized Long addModerator(String publicSID) {
 		try {
-			log.debug("*..*setModerator id: " + id);
+			
+			log.debug("*..*addModerator publicSID: " + publicSID);
 			
 			IConnection current = Red5.getConnectionLocal();
 			//String streamid = current.getClient().getId();
 			
-			RoomClient currentClient = this.clientListManager.getClientByStreamId(id);
+			RoomClient currentClient = this.clientListManager.getClientByPublicSID(publicSID);
+			
+			if (currentClient == null) {
+				return -1L;
+			}
 			Long room_id = currentClient.getRoom_id();
 			
-			currentClient.setIsMod(new Boolean(true));
+			currentClient.setIsMod(true);
 			//Put the mod-flag to true for this client
-			this.clientListManager.updateClientByStreamId(id, currentClient);
+			this.clientListManager.updateClientByStreamId(currentClient.getStreamid(), currentClient);
 			
-			//Now set it false for all other clients of this room
-			HashMap<String,RoomClient> clientListRoom = this.clientListManager.getClientListByRoom(room_id);
-			for (Iterator<String> iter=clientListRoom.keySet().iterator();iter.hasNext();) {
-				String streamId = iter.next();
-				RoomClient rcl = clientListRoom.get(streamId);
-				//Check if it is not the same like we have just declared to be moderating this room
-				if( !id.equals(rcl.getStreamid())){
-					log.debug("set to false for client: "+rcl);
-					rcl.setIsMod(new Boolean(false));
-					this.clientListManager.updateClientByStreamId(streamId, rcl);
-				}				
-			}
-	
+			List<RoomClient> currentMods = this.clientListManager.getCurrentModeratorByRoom(room_id);
+			
 			//Notify all clients of the same scope (room)
 			Collection<Set<IConnection>> conCollection = current.getScope().getConnections();
 			for (Set<IConnection> conset : conCollection) {
 				for (IConnection conn : conset) {
 					if (conn != null) {
 						RoomClient rcl = this.clientListManager.getClientByStreamId(conn.getClient().getId());
+						log.debug("Send Flag to Client: "+rcl.getUsername());
 						if (conn instanceof IServiceCapableConnection) {
-							((IServiceCapableConnection) conn).invoke("setNewModerator",new Object[] { currentClient }, this);
-							log.debug("sending setNewModerator to " + conn);
+							((IServiceCapableConnection) conn).invoke("setNewModeratorByList",new Object[] { currentMods }, this);
+							log.debug("sending setNewModeratorByList to " + conn);
 						}
 					}
 				}	
 			}
-		} catch (Exception err){
-			log.error("[setModerator]",err);
-			returnVal = err.toString();
+			
+		} catch (Exception err) {
+			log.error("[addModerator]",err);
 		}
-		return returnVal;
-	}  
+		return -1L;
+	}
+	
+	public synchronized Long removeModerator(String publicSID) {
+		try {
+			
+			log.debug("*..*addModerator publicSID: " + publicSID);
+			
+			IConnection current = Red5.getConnectionLocal();
+			//String streamid = current.getClient().getId();
+			
+			RoomClient currentClient = this.clientListManager.getClientByPublicSID(publicSID);
+			
+			if (currentClient == null) {
+				return -1L;
+			}
+			Long room_id = currentClient.getRoom_id();
+			
+			currentClient.setIsMod(false);
+			//Put the mod-flag to true for this client
+			this.clientListManager.updateClientByStreamId(currentClient.getStreamid(), currentClient);
+			
+			List<RoomClient> currentMods = this.clientListManager.getCurrentModeratorByRoom(room_id);
+			
+			//Notify all clients of the same scope (room)
+			Collection<Set<IConnection>> conCollection = current.getScope().getConnections();
+			for (Set<IConnection> conset : conCollection) {
+				for (IConnection conn : conset) {
+					if (conn != null) {
+						RoomClient rcl = this.clientListManager.getClientByStreamId(conn.getClient().getId());
+						log.debug("Send Flag to Client: "+rcl.getUsername());
+						if (conn instanceof IServiceCapableConnection) {
+							((IServiceCapableConnection) conn).invoke("setNewModeratorByList",new Object[] { currentMods }, this);
+							log.debug("sending setNewModeratorByList to " + conn);
+						}
+					}
+				}	
+			}
+			
+		} catch (Exception err) {
+			log.error("[addModerator]",err);
+		}
+		return -1L;
+	}
 	
 	/**
 	 * there will be set an attribute called "broadCastCounter"
@@ -569,6 +655,11 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 		}
 		return -1;
 	}
+	
+	
+	
+	
+	
 	
 	/**
 	 * this must be set _after_ the Video/Audio-Settings have been chosen (see editrecordstream.lzx)
@@ -639,7 +730,7 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 				if (room.getIsModeratedRoom()) {
 					
 					//if this is a Moderated Room then the Room can be only locked off by the Moderator Bit
-					HashMap<String,RoomClient> clientModeratorListRoom = this.getModeratorRoomClients(room_id);
+					List<RoomClient> clientModeratorListRoom = this.clientListManager.getCurrentModeratorByRoom(room_id);
 					
 					//If there is no Moderator yet and we are asking for it then deny it
 					//cause at this moment, the user should wait untill a Moderator enters the Room
@@ -713,7 +804,7 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 				if (room.getIsModeratedRoom()) {
 					
 					//if this is a Moderated Room then the Room can be only locked off by the Moderator Bit
-					HashMap<String,RoomClient> clientModeratorListRoom = this.getModeratorRoomClients(room_id);
+					List<RoomClient> clientModeratorListRoom = this.clientListManager.getCurrentModeratorByRoom(room_id);
 					
 					//If there is no Moderator yet we have to check if the current User has the Bit set to true to 
 					//become one, otherwise he won't get Moderation and has to wait
@@ -877,33 +968,35 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 	}
 	
 	/*
-	 * Returns only the Moderator (if there is one)
+	 * Returns only the Moderators (if there are some)
+	 * 
+	 * @deprecated I don't see this Function used anywhere
 	 * 
 	 */
-	public synchronized HashMap<String,RoomClient> getModeratorRoomClients(Long room_id) {
-		try {
-
-			HashMap <String,RoomClient> roomClientList = new HashMap<String,RoomClient>();
-
-			HashMap<String,RoomClient> clientListRoom = this.clientListManager.getClientListByRoom(room_id);
-			for (Iterator<String> iter=clientListRoom.keySet().iterator();iter.hasNext();) {
-				String key = (String) iter.next();
-				RoomClient rcl = this.clientListManager.getClientByStreamId(key);
-				
-				if (rcl.getIsMod()) {
-					log.debug("#+#+#+#+##+## logicalRoomEnter ClientList key: "+rcl.getRoom_id()+" "+room_id);
-					log.debug("set to ++ for client: "+rcl.getStreamid());
-					//Add user to List
-					roomClientList.put(key, rcl);
-				}
-			}
-			
-			return roomClientList;
-		} catch (Exception err){
-			log.error("[getModeratorRoomClients]",err);
-		}
-		return null;
-	}
+//	public synchronized HashMap<String,RoomClient> getModeratorRoomClients(Long room_id) {
+//		try {
+//
+//			HashMap <String,RoomClient> roomClientList = new HashMap<String,RoomClient>();
+//
+//			HashMap<String,RoomClient> clientListRoom = this.clientListManager.getClientListByRoom(room_id);
+//			for (Iterator<String> iter=clientListRoom.keySet().iterator();iter.hasNext();) {
+//				String key = (String) iter.next();
+//				RoomClient rcl = this.clientListManager.getClientByStreamId(key);
+//				
+//				if (rcl.getIsMod()) {
+//					log.debug("#+#+#+#+##+## logicalRoomEnter ClientList key: "+rcl.getRoom_id()+" "+room_id);
+//					log.debug("set to ++ for client: "+rcl.getStreamid());
+//					//Add user to List
+//					roomClientList.put(key, rcl);
+//				}
+//			}
+//			
+//			return roomClientList;
+//		} catch (Exception err){
+//			log.error("[getModeratorRoomClients]",err);
+//		}
+//		return null;
+//	}
 	
 
 	/**
@@ -1033,11 +1126,29 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 		return roomClientList;
 	}	
 	
-	/**
-	 * 
-	 * @return
-	 */
-	public synchronized RoomClient getCurrentModerator(){
+//	/**
+//	 * @deprecated
+//	 * 
+//	 * @return
+//	 */
+//	public synchronized RoomClient getCurrentModerator(){
+//		try {
+//			log.debug("*..*getCurrentModerator id: ");
+//			
+//			IConnection current = Red5.getConnectionLocal();
+//			RoomClient currentClient = this.clientListManager.getClientByStreamId(current.getClient().getId());
+//			Long room_id = currentClient.getRoom_id();		
+//			
+//			//log.debug("Who is this moderator? "+currentMod);
+//			
+//			return this.clientListManager.getCurrentModeratorByRoom(room_id);
+//		} catch (Exception err){
+//			log.error("[getCurrentModerator]",err);
+//		}
+//		return null;
+//	}
+
+	public synchronized List<RoomClient> getCurrentModeratorList(){
 		try {
 			log.debug("*..*getCurrentModerator id: ");
 			
