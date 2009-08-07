@@ -83,6 +83,8 @@
     if ($debug) Debug.write("hib.conferencedomain: ",hib.conferencedomain);
     clearStageContent();
     
+    canvas.currentRoomObj = roomObj;
+    
     if ($debug) Debug.write("roomClassname : ", + this.roomClassName );
     
     new lz[this.roomClassName](canvas.main_content._content.inner,{roomobj:roomObj});

@@ -27,7 +27,7 @@
 		]]>
 	</handler>
 
-    <method name="autoResponse">
+    <method name="autoResponse" args="itemObj">
         this.userautoTimerCounter--;
         if (this.userautoTimerCounter!=0){
             this._applyBtn.setAttribute('text',canvas.getLabelName(this._applyBtn.labelid)+" "+this.userautoTimerCounter);

@@ -445,7 +445,7 @@
 </method>
   
 
-
+<!--
 <method name="setModeratorName" args="mod">
     <![CDATA[
 	    this.moderatorName = mod;
@@ -460,6 +460,55 @@
 	    }
     ]]>
 </method>
+ -->
+ 
+<method name="updateModerationFlag">
+	<![CDATA[
+        if ($debug) Debug.write("updateModerationFlag",canvas.currentModeratorList);
+        
+        var isCurrentModerator = false;
+        
+        canvas._mymod.currentModerators.reset();
+        
+        for (var i=0;i<canvas.currentModeratorList.length;i++) {
+        	
+        	var item = canvas.currentModeratorList[i];
+        	
+        	var cItem = canvas._mymod.currentModerators.getItem(item.publicSID);
+        	
+        	if (cItem == null) {
+        	    canvas._mymod.currentModerators.addItem(item.firstname + ' ' + item.lastname,item.publicSID);
+        	} else {
+        		if ($debug) Debug.warn("Already Moderator in Combobox List");
+        	}
+        	
+        	if (canvas.publicSID == item.publicSID) {
+        		isCurrentModerator = true;
+        	}
+        	
+        }
+        
+        this.setAttribute('ismoderator',isCurrentModerator);
+        
+        canvas._mymod.currentModerators.selectItemAt(0);
+	]]>
+</method> 
+
+<method name="getIsModeratorByPublicSID" args="publicSID">
+	<![CDATA[
+	    for (var i=0;i<canvas.currentModeratorList.length;i++) {
+            
+            var item = canvas.currentModeratorList[i];
+            
+            if (publicSID == item.publicSID) {
+                return true;
+            }
+	    }
+	    
+	    return false;
+	]]>
+</method>
+ 
 
 <method name="doAction" args="action">
     if (action == "invitation") {
