@@ -118,9 +118,12 @@ these properties will be overwritten by config.xml -->
 	
 <attribute name="vaquality" value="best" type="string" />
 	
+<!--
 <attribute name="moderatorStreamID" value="" type="string" />
 <attribute name="moderatorationObject" value="" type="string" />
 <attribute name="moderatorName" type="string" setter="this.setModeratorName(moderatorName)" />
+ -->
+<attribute name="currentModeratorList" value="null" />
 
 <attribute name="ismoderator" value="false" type="boolean" />
 
@@ -274,7 +277,7 @@ and some more references to temp-objects
 <attribute name="moodlePicture" value="0" type="number" />
 
 
-
+<attribute name="currentRoomObj" value="null" />
 
 
 

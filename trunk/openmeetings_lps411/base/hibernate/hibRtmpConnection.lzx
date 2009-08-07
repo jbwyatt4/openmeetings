@@ -464,12 +464,65 @@
         <netRemoteCallHib name="setAudienceModusClient" funcname="setAudienceModusClient">
             <handler name="ondata" args="value">
                 //The onResult-Handler will be called be the rtmpconnection
-                Debug.write("setAudienceModusClient: ",value);    
-                canvas._videocontainer.addClientItem(value.connectedSince,value.isMod,value.streamid,value.room_id,value.userroom,value.formatedDate,value.userpos,value.usercolor,value); 
+                if ($debug) Debug.write("setAudienceModusClient: ",value);    
+                canvas._videocontainer.addClientItem(value.connectedSince,value.isMod,value.streamid,value.room_id,'',value.formatedDate,value.userpos,value.usercolor,value); 
                 canvas.setAttribute('numberofpartners',canvas.getAttribute('numberofpartners')+1);                              
             </handler>  
         </netRemoteCallHib>      
-          
+        
+        <netRemoteCallHib name="getCurrentModeratorList" funcname="getCurrentModeratorList">
+            <handler name="ondata" args="value">
+            	<![CDATA[
+                	if ($debug) Debug.write("############ getCurrentModeratorList: ",value);
+                	canvas.currentModeratorList = value;
+                	//Update Moderation Flag
+                	canvas.updateModerationFlag();
+                	
+                	var messageAlreadyThrown = false;
+                	
+                	if ($debug) Debug.write("throw event to drawarea: ",canvas.moderatorStreamID,canvas.ismoderator);
+                    if (canvas.ismoderator){
+                        if ($debug) Debug.write("############## editRecordStream 3");
+                        new lz.editRecordStream(canvas.main_content._content.inner);
+                    } else if (value==null){
+                        if ($debug) Debug.write("############   value IS NULL: ",this.parent.modus);
+                        //no moderator availible
+                        //check if this is conferenceViewmodus
+                        if (this.parent.modus == "conference"){
+                            if ($debug) Debug.write("############## editRecordStream 4");
+                            new lz.editRecordStream(canvas.main_content._content.inner);
+                        } else {
+                            // in audienceView modus you get no notification
+                            // cause you are not able to register your stream
+                            // as non moderator
+                            if (!canvas._videocontainer.modLoaded){
+                                if ($debug) Debug.write("############## editRecordStream 5");
+                                messageAlreadyThrown = true;
+                                new lz.errorModeratorPopup(canvas,{error:canvas.getLabelName(498)});
+                            }                           
+                        }       
+                    } else {
+                        if (this.parent.modus == "conference"){
+                            if ($debug) Debug.write("############## editRecordStream 1a");
+                            new lz.editRecordStream(canvas.main_content._content.inner);
+                        }
+                    }
+                    canvas._drawarea.onopenWhiteBoard.sendEvent();
+                       
+                    if (canvas.currentRoomObj.isModeratedRoom) {
+                    	if (value.length == 0 && !messageAlreadyThrown){
+                            new lz.labelerrorPopup(canvas,{errorlabelid:641});
+                        }
+                    } else {
+                    	if (value.length == 0 && !messageAlreadyThrown){
+                            new lz.errorModeratorPopup(canvas,{error:canvas.getLabelName(498)});
+                        }
+                    }
+                ]]>
+            </handler>
+        </netRemoteCallHib>
+        
+        <!-- 
         <netRemoteCallHib name="getCurrentModerator" funcname="getCurrentModerator">
             <handler name="ondata" args="value">
 				<![CDATA[
@@ -516,7 +569,9 @@
 					canvas._drawarea.onopenWhiteBoard.sendEvent();
 				]]>
             </handler>  
-        </netRemoteCallHib>        
+        </netRemoteCallHib> 
+         -->
+               
         <netRemoteCallHib name="newStream" funcname="newStream">
             <handler name="ondata" args="value">
                 //The onResult-Handler will be called be the rtmpconnection
@@ -569,7 +624,7 @@
              
 		<netRemoteCallHib name="logicalRoomLeaveDis" funcname="logicalRoomLeaveDis" >      
 	    	<handler name="ondata" args="value">
-	    		Debug.write("logicalRoomLeaveDis: ",value);
+	    		if ($debug) Debug.write("logicalRoomLeaveDis: ",value);
 	    		canvas._videocontainer.disconnectclient(value.broadCastID); 
 				//remove that client from sync list of wmlFileLoader/image if present
 	    		if (canvas.currentModApply!=null) canvas.currentModApply.rejectUser(value);
@@ -598,7 +653,36 @@
 	                canvas._drawarea.sendWatchObject(value[2],value[3],false);
                 ]]>
             </handler>   
-        </netRemoteCallHib>   
+        </netRemoteCallHib>  
+        
+        <!--
+            Adds this User to the List of current Moderators
+         -->
+        <netRemoteCallHib name="addModerator" funcname="addModerator">
+        	<attribute name="publicSIDOfNewModerator" value="0" type="string" />
+            <netparam name="vars"><method name="getValue">return parent.publicSIDOfNewModerator;</method></netparam>
+            <handler name="ondata" args="value">
+                <![CDATA[
+                //The onResult-Handler will be called be the rtmpconnection
+                //Debug.write(" onResult setModerator : ",value);                   
+                ]]>
+            </handler>   
+        </netRemoteCallHib>
+        
+        <netRemoteCallHib name="removeModerator" funcname="removeModerator">
+            <attribute name="publicSIDOfNewModerator" value="0" type="string" />
+            <netparam name="vars"><method name="getValue">return parent.publicSIDOfNewModerator;</method></netparam>
+            <handler name="ondata" args="value">
+                <![CDATA[
+                //The onResult-Handler will be called be the rtmpconnection
+                //Debug.write(" onResult setModerator : ",value);                   
+                ]]>
+            </handler>   
+        </netRemoteCallHib>
+        
+        <!--
+            @deprecated It is not used anymore
+        
         <netRemoteCallHib name="setModerator" funcname="setModerator">
             <netparam name="vars"><method name="getValue">return canvas.streamid;</method></netparam>
             <handler name="ondata" args="value">
@@ -608,6 +692,10 @@
                 ]]>
             </handler>   
         </netRemoteCallHib>    
+         --> 
+         
+        <!--
+            @deprecated It is not used anymore
         
         <netRemoteCallHib name="setNewModerator" funcname="setNewModerator">
             <netparam name="vars"><method name="getValue">return canvas.streamid;</method></netparam>
@@ -630,6 +718,19 @@
 						}
 					}
 				]]>
+            </handler>   
+        </netRemoteCallHib> 
+         -->
+         
+        <netRemoteCallHib name="setNewModeratorByList" funcname="setNewModeratorByList">
+            <handler name="ondata" args="value">
+                <![CDATA[
+                    if ($debug) Debug.write("setNewModeratorByList ",value);
+                    //The onResult-Handler will be called be the rtmpconnection
+                    canvas.currentModeratorList = value;
+                    //Update Moderation Flag
+                    canvas.updateModerationFlag();
+                ]]>
             </handler>   
         </netRemoteCallHib> 
         

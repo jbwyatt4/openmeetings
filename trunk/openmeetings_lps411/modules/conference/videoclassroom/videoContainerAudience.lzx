@@ -263,7 +263,8 @@
         <handler name="ondata" args="value">
 			<![CDATA[
 				//The onResult-Handler will be called be the rtmpconnection
-				Debug.write("############   getCurrentModerator: ",value);
+				if ($debug) Debug.write("############   getCurrentModerator: ",value);
+				
 				if (value!=null){
 					canvas.setAttribute('moderatorationObject',value);
 					canvas.setAttribute('moderatorStreamID',value.streamid);

@@ -71,7 +71,10 @@
             ]]>        
     </method> 	
 	
-	<labelText name="mymodText" resize="true" fgcolor="0xFFFFFF" y="4" />
+	<labelText name="mymodText" resize="true" fgcolor="0xFFFFFF" y="4" labelid="98" />
+	
+	<resetCombobox name="currentModerators" width="170" y="4" editable="false"
+                       shownitems="7" />
   	
   	<simpleLabelButton name="mod_btn" width="30" height="24" y="2" style="itemStyle">
 		<handler name="onclick">

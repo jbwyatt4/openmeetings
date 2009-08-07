@@ -127,7 +127,9 @@
 	
     <simpleLabelButton name="applyButton" labelid="88" width="200" x="80" y="218" enabled="false">
     	<handler name="onclick">
-    		hib.setModerator.doCall();
+    		//hib.setModerator.doCall();
+    		hib.addModerator.publicSIDOfNewModerator = canvas.publicSID;
+    		hib.addModerator.doCall();
     		this.parent.close();
     	</handler>
     </simpleLabelButton>
