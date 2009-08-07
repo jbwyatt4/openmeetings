@@ -110,6 +110,22 @@ form.cmxform fieldset fieldset label {
 </style>
 </head>
 <body>
+
+<script language="JavaScript"> 
+ 
+function checkEmail() 
+{
+	if	(/^[_a-zA-Z0-9-]+(.[_a-zA-Z0-9-]+)*@([a-zA-Z0-9-]+.)+([a-zA-Z]{1,3})$/.test(useremail.value))
+	{
+		document.forms[0].submit();
+	}
+	else
+	{
+		alert("Please enter a valid EMail, for example name@mail.com");
+	}
+}
+</script>
+
 <h1>Openmeetings - Installation</h1>
 
 <form name="cmxform" id="form1" class="cmxform" method="post" action="?command=step2">
@@ -287,7 +303,7 @@ form.cmxform fieldset fieldset label {
     <fieldset>
         <legend>Submit</legend> 
         <input name="Submit" value="INSTALL" 
-    		title="Submit" type="submit" />
+    		title="Submit" type="button"  onclick="checkEmail();"/>
     </fieldset>	
 	
 </form>
