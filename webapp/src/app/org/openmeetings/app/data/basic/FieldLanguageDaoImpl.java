@@ -26,7 +26,7 @@ public class FieldLanguageDaoImpl {
 	}
 
 	private static FieldLanguageDaoImpl instance = null;
-
+ 
 	public static synchronized FieldLanguageDaoImpl getInstance() {
 		if (instance == null) {
 			instance = new FieldLanguageDaoImpl();
