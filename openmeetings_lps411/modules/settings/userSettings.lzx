@@ -144,7 +144,7 @@
 
     <!-- 137:Mail -->
     <labelText labelid="137" width="200" y="190" resize="false" x="2"/>
-        <customEdittext name="email" y="190" x="120" width="270" text="" />
+        <customEdittext name="email" y="190" x="120" width="270" text="" regexpType="email"/>
     
     <!-- 607:Phone -->
     <labelText labelid="607" width="200" y="220" resize="false" x="2"/>
