@@ -1,12 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library>
 
+<!--
 <class name="videoBoardAudience" id="myVideoBoardAudience" extends="view" x="2" y="2"
     width="266" height="280" >
     
     <videoContainerAudience name="_videocontainer" x="2" y="22" />
 
 </class>
+ -->
+ 
+<class name="videoBoardAudience" id="myVideoBoardAudience" extends="conferenceBox" >
+    
+    <eventUserList name="_videocontainer" y="34" />
+
+</class>
+
 
 <class name="audienceView" extends="baseContentView" destroyByMethod="true" >
 
@@ -21,6 +30,22 @@
         canvas._conferencemenu.setAttribute('visibility','visible');
 
         this._videoView.bringToFront();
+       
+        if(roomobj.appointment){
+            new lz.winni(canvas.conferenceView,{ name:'appDetail',
+                    width:350, height:160, resizable:true, closeable:true, x:300,y:200, roomobj:this.roomobj });    
+        } else{
+            if ($debug) Debug.write("no appointed meeting");
+        }
+        
+        if (this.roomobj.isDemoRoom) {
+            if (this.roomobj.demoTime != null) {
+                if ($debug) Debug.warn("THIS IS A DEMO ROOM THAT SHOULD CLOSE AFTER SEC: ",this.roomobj.demoTime);
+                this.meetingTimer = new lz.meetingTimer(canvas,{refObj:this,roomobj:this.roomobj});
+            }
+        }
+        
+        this._chatPanelStrict.toggleopen();
     </handler>
     
     <!--
@@ -91,13 +116,16 @@
         </handler>
     </netRemoteCallHib>
   
+    <!--
     <videoBoardAudience name="_videoView" x="2" y="2" 
-                    width="326" height="310" />
+                    width="326" height="310" /> -->
+    <videoBoardAudience height="300" name="_videoView" y="2" x="2" 
+                labelid="613" width="274"/>
   
     <filesPanelStrict name="_filesPanel" width="274" x="2" 
                       labelid="614" y="304" height="${ canvas.height - 340 }" />
-  
-   <conferenceBox name="_chatPanelStrict" labelid="616" textInset="30" closeable="true" 
+                      
+    <conferenceBox name="_chatPanelStrict" labelid="616" textInset="30" closeable="true" 
        height="200" x="${ parent._filesPanel.width+10 }"  
        y="${ canvas.height - (this.height+30) }" 
        width="${ canvas.width - 290 }">

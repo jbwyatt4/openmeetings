@@ -76,7 +76,7 @@
     		   y="150" resize="true" x="2" />
     		   
     <labelText labelid="490" width="200" y="180" resize="false" x="2"/>
-    <checkbox name="_showWhiteBoard" width="100" y="180" x="120" fontsize="12" />
+    <checkbox name="_showWhiteBoard" width="100" y="180" x="120" fontsize="11" />
     
     <labelText labelid="491" width="200" y="210" resize="false" x="2"/>
     <customEdittext name="_whiteBoardPanelXPosition" y="210" x="120" width="100"  
@@ -94,7 +94,7 @@
     		   y="270" resize="true" x="2" />
     		   
     <labelText labelid="494" width="200" y="300" resize="false" x="2"/>
-    <checkbox name="_showFilesPanel" width="100" y="300" x="120" fontsize="12" />
+    <checkbox name="_showFilesPanel" width="100" y="300" x="120" fontsize="11" />
     
     <labelText labelid="495" width="200" y="330" resize="false" x="2"/>
     <customEdittext name="_filesPanelXPosition" y="330" x="120" width="100"  

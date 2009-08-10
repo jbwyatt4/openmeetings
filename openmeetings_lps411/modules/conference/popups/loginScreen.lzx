@@ -53,17 +53,17 @@ There is no login any more
 	
 	
 	<view visible="false" name="part2" >
-		<text y="30" x="10" resize="true" fontsize="12" fontstyle="bold" text="${ 'Course: '+canvas.currentcourseNameLong }" />
+		<text y="30" x="10" resize="true" fontsize="11" fontstyle="bold" text="${ 'Course: '+canvas.currentcourseNameLong }" />
 	
 		<labelText y="60" x="10" labelid="13" />
-			<text fontsize="12" name="_login" y="60" x="150" width="200" text="${ canvas.currentuser }" />
+			<text fontsize="11" name="_login" y="60" x="150" width="200" text="${ canvas.currentuser }" />
 	    <!-- 
-		<text y="88" x="10" fontsize="12" text="choose" />
-			<text fontsize="12" text="one2four" x="120" width="200" y="88" />
+		<text y="88" x="10" fontsize="11" text="choose" />
+			<text fontsize="11" text="one2four" x="120" width="200" y="88" />
 		 -->	
 			
 		<labelText y="82" x="10" labelid="11" />
-			<text fontsize="12" name="_current" y="82" x="150" width="200" text="${ canvas.numberofpartners }" >
+			<text fontsize="11" name="_current" y="82" x="150" width="200" text="${ canvas.numberofpartners }" >
 				<handler name="ontext">
 					//Debug.write("canvas.numberofpartners: ",canvas.numberofpartners);
 					<![CDATA[

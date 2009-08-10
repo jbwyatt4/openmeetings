@@ -126,7 +126,7 @@
     
     <!-- 135:Firstname -->
     <labelText labelid="135" width="200" y="130" resize="false" x="2"/>
-        <resetCombobox name="salutation" width="100" y="130" x="120" editable="false" fontsize="12">
+        <resetCombobox name="salutation" width="100" y="130" x="120" editable="false" fontsize="11">
 	        <handler name="oninit" >
 	            <![CDATA[
 	            for (var i=0;i<canvas.salutationsInitValues.length;i++){
@@ -166,7 +166,7 @@
          
     <!-- 141:Country -->
     <labelText labelid="141" width="200" y="340" resize="false" x="2"/>  
-		<validText name="state" width="270" y="340" x="120" fontsize="12" 
+		<validText name="state" width="270" y="340" x="120" fontsize="11" 
             shownitems="7" validate_method="$once{ canvas.validateCountry }" 
             resultId="state_id" resultName="name" />
 			

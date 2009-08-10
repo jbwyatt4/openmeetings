@@ -55,9 +55,9 @@
 		</method>
 	</fileUpload>
 	
-	<borderedInputtext x="10" fontsize="12" y="60" width="200" name="txtFile" editable="false" />
+	<borderedInputtext x="10" fontsize="11" y="60" width="200" name="txtFile" editable="false" />
 
-	<button fontsize="12" name="browse" x="10" y="80" text="browse" width="200" height="20">
+	<button fontsize="11" name="browse" x="10" y="80" text="browse" width="200" height="20">
 		<handler name="onclick">
 			parent.myFileUpload.browse();
 		</handler>

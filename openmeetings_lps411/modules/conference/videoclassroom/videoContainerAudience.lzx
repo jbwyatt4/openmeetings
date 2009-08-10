@@ -3,6 +3,9 @@
 
 <!-- #################
 	Class videocontainer
+	
+	@deprecated - look at modules/conference/eventuserlist/eventUserList.lzx
+	
  -->
  
 <class name="videoContainerAudience" width="${parent.width}" height="${parent.height}" extends="view" >

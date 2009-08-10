@@ -176,7 +176,7 @@
     
     <!-- 482:Participants -->
     <labelText labelid="482" width="200" y="100" resize="false" x="2"/>
-        <resetCombobox name="numberOfParticipants" width="270" y="100" x="120" editable="false" fontsize="12">
+        <resetCombobox name="numberOfParticipants" width="270" y="100" x="120" editable="false" fontsize="11">
 	        <handler name="oninit" >
 	            <![CDATA[
 	            	this.addItem(2,2);
@@ -198,7 +198,7 @@
 
 	<!-- 194:Type -->
     <labelText labelid="194" width="200" y="130" resize="false" x="2"/>  
-        <resetCombobox name="roomtype" width="270" y="130" x="120" editable="false" fontsize="12">
+        <resetCombobox name="roomtype" width="270" y="130" x="120" editable="false" fontsize="11">
 	        <handler name="oninit" >
 	            <![CDATA[
 	            for (var i=0;i<canvas.roomTypesInitValues.length;i++){
@@ -211,7 +211,7 @@
 
 	<!-- 195:Public -->
     <labelText labelid="195" width="200" y="160" resize="false" x="2"/>  
-        <labelCheckbox name="ispublic" width="270" y="160" x="130" fontsize="12" />
+        <labelCheckbox name="ispublic" width="270" y="160" x="130" fontsize="11" />
 	
 	<!-- 196:Comment -->
 	<labelText labelid="196" width="200" y="190" resize="false" x="2"/>
@@ -220,7 +220,7 @@
 	
 	<!-- Appointment -->
 	<labelText labelid="620" width="200" y="300" resize="false" x="2"/>  
-        <labelCheckbox name="isappointment" width="270" y="300" x="130" fontsize="12" />
+        <labelCheckbox name="isappointment" width="270" y="300" x="130" fontsize="11" />
 	
 	<!-- 191:organisations -->
     <labelText labelid="191" width="200" y="320" resize="false" x="2"/>     
@@ -246,7 +246,7 @@
     
     <!-- Is Demo Room -->
     <labelText labelid="636" width="200" y="490" resize="false" x="2"/>  
-        <labelCheckbox name="isDemoRoom" width="270" y="490" x="130" fontsize="12">
+        <labelCheckbox name="isDemoRoom" width="270" y="490" x="130" fontsize="11">
             <handler name="onvalue" args="v">
                 if (v) {
                     parent.demoTime.setAttribute("enabled",true);
@@ -263,10 +263,10 @@
                                
     <!-- 640:Moderated -->
     <labelText labelid="640" width="200" y="550" resize="false" x="2"/>  
-        <labelCheckbox name="isModeratedRoom" width="270" y="550" x="130" fontsize="12" />
+        <labelCheckbox name="isModeratedRoom" width="270" y="550" x="130" fontsize="11" />
     
 	<!-- 483:Show Layout Settings
-	<labelCheckbox x="0" y="550" fontsize="12"
+	<labelCheckbox x="0" y="550" fontsize="11"
         name="_showAdvancedRoomSettings" labelid="483" >
         <attribute name="advancedRoomSettingsInited" value="false" type="boolean"/>
         <handler name="onvalue" args="v">

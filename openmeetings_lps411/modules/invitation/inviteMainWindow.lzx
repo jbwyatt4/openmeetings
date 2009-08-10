@@ -38,7 +38,7 @@
 		
 							  
 		<!-- label: password protected -->
-		<labelCheckbox name="_ispasswordProtected" y="192" fontsize="12" x="4" labelid="524"  />
+		<labelCheckbox name="_ispasswordProtected" y="192" fontsize="11" x="4" labelid="524"  />
 			
 		<!-- label: password -->
 		<labelText labelid="525" y="220" x="4" fgcolor="${ ((!parent._ispasswordProtected.value) ? 0xCCCCCC : 0x000000 ) }" />
@@ -49,11 +49,11 @@
 	
 		<radiogroup name="_valid" x="120" y="256" layout="class:simplelayout; axis:x">
 			<!-- label: endless -->
-	            <labelRadioButton value="1" labelid="527" fontsize="12" />
+	            <labelRadioButton value="1" labelid="527" fontsize="11" />
 			<!-- label: period -->
-	            <labelRadioButton value="2" labelid="528" fontsize="12" />
+	            <labelRadioButton value="2" labelid="528" fontsize="11" />
 			<!-- label: one-time -->
-	        	<labelRadioButton value="3" labelid="529" fontsize="12" />
+	        	<labelRadioButton value="3" labelid="529" fontsize="11" />
 		</radiogroup>
 
 		<!-- label: valid from -->		

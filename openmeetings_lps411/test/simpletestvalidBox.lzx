@@ -701,7 +701,7 @@ String.prototype.startsWith = function(prefix) {
 
     </class>		
  <!--
-		<edittext name="state" width="270" y="20" x="120" fontsize="12">
+		<edittext name="state" width="270" y="20" x="120" fontsize="11">
 			
 			<attribute name="timerDelegate" value="null"/>
 			<attribute name="typetime" type="number" value="500"/>

@@ -101,7 +101,7 @@
     <labelText y="6" name="_zoom" width="30" height="24" />
     <labelText y="6" labelid="253" />
     
-    <resetCombobox name="currentDocument" width="170" height="24" fontsize="12"
+    <resetCombobox name="currentDocument" width="170" height="24" fontsize="11"
     			   editable="false" shownitems="7">
     	<attribute name="sendSelection" value="true" type="boolean"/>
     	<handler name="onselect" args="sel">

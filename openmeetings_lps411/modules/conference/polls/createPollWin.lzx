@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library>
 
-<class name="bigTextListItem" extends="textlistitem" fontsize="12" />
+<class name="bigTextListItem" extends="textlistitem" fontsize="11" />
 
  <class name="createPollWin" extends="labelExplorerBox" labelid="18"
     docking="true" resizeable="false" closable="true" width="500" x="100" height="240">

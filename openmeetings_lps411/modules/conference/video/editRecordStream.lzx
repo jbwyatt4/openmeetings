@@ -23,6 +23,8 @@
     <attribute name="chosenSetting" value="null" />
     <attribute name="currentClient" value="null" />
     
+    <attribute name="remoteMessage" value="null" />
+    
     <attribute name="isSyncUpdate" value="false" type="boolean" />
 	<handler name="oninit">
 		<![CDATA[
@@ -83,6 +85,10 @@
         	<![CDATA[
         		if ($debug) Debug.write("getBroadCastId",value,canvas.publicSID);
         		parent.myvideocontainer = canvas._videocontainer.getNewVideoObject(canvas.publicSID);
+        		
+        		if ($debug) Debug.write("parent.setUserAVSettings -1- ",parent.chosenSetting);
+        		if ($debug) Debug.write("parent.setUserAVSettings -2- ",parent.remoteMessage);
+        		
         		parent.setUserAVSettings.doCall();
             ]]>
         </handler>   
@@ -162,9 +168,9 @@
         ]]>
     </method>    
 
-    <labelText labelid="447" fontsize="12" x="10" y="20" width="$once{ parent.width-20 }" />
+    <labelText labelid="447" fontsize="11" x="10" y="20" width="$once{ parent.width-20 }" />
     
-    <resetCombobox fontsize="12" name="availibleSettings" x="10" y="40" width="280" editable="false">
+    <resetCombobox fontsize="11" name="availibleSettings" x="10" y="40" width="280" editable="false">
         <handler name="oninit">
             <![CDATA[
 				this.addItem(canvas.getLabelName(448),"av");
@@ -219,9 +225,9 @@
         </handler>
     </resetCombobox>    
      
-    <labelText name="availibleCamsLabel" labelid="52" fontsize="12" x="10" y="80" width="$once{ parent.width-20 }" />
+    <labelText name="availibleCamsLabel" labelid="52" fontsize="11" x="10" y="80" width="$once{ parent.width-20 }" />
 
-    <resetCombobox fontsize="12" name="availibleCams" x="10" y="100" width="280" editable="false">
+    <resetCombobox fontsize="11" name="availibleCams" x="10" y="100" width="280" editable="false">
         <handler name="oninit">
             <![CDATA[
 				//Get all availible Cam's
@@ -248,7 +254,7 @@
     
     
 
-    <resetCombobox fontsize="12" name="availibleMics"  x="10" y="140" width="280" editable="false">
+    <resetCombobox fontsize="11" name="availibleMics"  x="10" y="140" width="280" editable="false">
         <handler name="oninit">
             <![CDATA[
 	            //Get all availible Mic's
@@ -274,9 +280,9 @@
     </resetCombobox>
     
     <labelText name="infoTextNoAV" labelid="452" multiline="true" width="280" 
-    		   fontsize="12" x="10" y="80" visibility="hidden" />
+    		   fontsize="11" x="10" y="80" visibility="hidden" />
                
-    <labelText name="availibleMicsLabel" labelid="53" fontsize="12" x="10" y="120" width="$once{ parent.width-20 }" />
+    <labelText name="availibleMicsLabel" labelid="53" fontsize="11" x="10" y="120" width="$once{ parent.width-20 }" />
     
     <!-- Remember Me -->    
     <checkbox name="holddatainSO" text="Do not ask again" x="10" y="210">
@@ -290,7 +296,7 @@
         </handler>         
     </checkbox>
     
-    <simpleLabelButton fontsize="12" labelid="54" x="190" y="180" width="100">
+    <simpleLabelButton fontsize="11" labelid="54" x="190" y="180" width="100">
         <handler name="onclick">
         	this.parent.storelocaldata();
         	this.parent.chosenCam = parent.availibleCams.getValue();

@@ -137,7 +137,7 @@
 	
 	<!-- 194:Type -->
     <labelText labelid="194" width="200" y="100" resize="false" x="2"/>  
-        <resetCombobox name="roomtype" width="270" y="100" x="120" editable="false" fontsize="12">
+        <resetCombobox name="roomtype" width="270" y="100" x="120" editable="false" fontsize="11">
 	        <handler name="oninit" >
 	            <![CDATA[
 	            for (var i=0;i<canvas.roomTypesInitValues.length;i++){
@@ -150,7 +150,7 @@
 
 	<!-- 195:Public -->
     <labelText labelid="195" width="200" y="130" resize="false" x="2"/>  
-        <checkbox name="ispublic" width="270" y="130" x="120" fontsize="12" />
+        <checkbox name="ispublic" width="270" y="130" x="120" fontsize="11" />
 	
 	<!-- 196:Comment -->
 	<labelText labelid="196" width="200" y="160" resize="false" x="2"/> 
