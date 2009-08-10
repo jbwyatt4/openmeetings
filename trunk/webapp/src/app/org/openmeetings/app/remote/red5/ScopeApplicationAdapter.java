@@ -356,49 +356,54 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 	
 
 	/**
-	 * This method handles the Event after a stream has been added all conencted
-	 * Clients in the same room will gat a notification
+	 * This method handles the Event after a stream has been added all connected
+	 * Clients in the same room will get a notification
 	 * 
 	 * @return void
 	 * 
 	 */
 	public synchronized void streamPublishStart(IBroadcastStream stream) {
+		try {
 
-		IConnection current = Red5.getConnectionLocal();
-		String streamid = current.getClient().getId();
-		RoomClient currentClient = this.clientListManager.getClientByStreamId(streamid);
-		Long room_id = currentClient.getRoom_id();	
-					
-		// Notify all the clients that the stream had been started
-		log.debug("start streamPublishStart broadcast start: "+ stream.getPublishedName() + "CONN " + current);
-		
-		//Notify all users of the same Scope
-		Collection<Set<IConnection>> conCollection = current.getScope().getConnections();
-		for (Set<IConnection> conset : conCollection) {
-			for (IConnection conn : conset) {
-				if (conn != null) {
-					if (conn instanceof IServiceCapableConnection) {
-						if (conn.equals(current)){
-							RoomClient rcl = this.clientListManager.getClientByStreamId(conn.getClient().getId());
-							if (rcl.getIsRecording()){
-								StreamService.addRecordingByStreamId(current, streamid, currentClient, rcl.getRoomRecordingName());
-							}
-							continue;
-						} else {
-							RoomClient rcl = this.clientListManager.getClientByStreamId(conn.getClient().getId());
-							//log.debug("is this users still alive? :"+rcl);
-							//Check if the Client is in the same room and same domain 
-							IServiceCapableConnection iStream = (IServiceCapableConnection) conn;
-							//log.info("IServiceCapableConnection ID " + iStream.getClient().getId());
-							iStream.invoke("newStream",new Object[] { currentClient }, this);
-							if (rcl.getIsRecording()){
-								StreamService.addRecordingByStreamId(current, streamid, currentClient, rcl.getRoomRecordingName());
+			IConnection current = Red5.getConnectionLocal();
+			String streamid = current.getClient().getId();
+			RoomClient currentClient = this.clientListManager.getClientByStreamId(streamid);
+			Long room_id = currentClient.getRoom_id();	
+						
+			// Notify all the clients that the stream had been started
+			log.debug("start streamPublishStart broadcast start: "+ stream.getPublishedName() + "CONN " + current);
+			
+			//Notify all users of the same Scope
+			Collection<Set<IConnection>> conCollection = current.getScope().getConnections();
+			for (Set<IConnection> conset : conCollection) {
+				for (IConnection conn : conset) {
+					if (conn != null) {
+						if (conn instanceof IServiceCapableConnection) {
+							if (conn.equals(current)){
+								RoomClient rcl = this.clientListManager.getClientByStreamId(conn.getClient().getId());
+								if (rcl.getIsRecording()){
+									StreamService.addRecordingByStreamId(current, streamid, currentClient, rcl.getRoomRecordingName());
+								}
+								continue;
+							} else {
+								RoomClient rcl = this.clientListManager.getClientByStreamId(conn.getClient().getId());
+								//log.debug("is this users still alive? :"+rcl);
+								//Check if the Client is in the same room and same domain 
+								IServiceCapableConnection iStream = (IServiceCapableConnection) conn;
+								//log.info("IServiceCapableConnection ID " + iStream.getClient().getId());
+								iStream.invoke("newStream",new Object[] { currentClient }, this);
+								if (rcl.getIsRecording()){
+									StreamService.addRecordingByStreamId(current, streamid, currentClient, rcl.getRoomRecordingName());
+								}
 							}
 						}
 					}
 				}
 			}
-		}		
+			
+		} catch (Exception err) {
+			log.error("[streamPublishStart]",err);
+		}
 	}
 
 	
@@ -626,6 +631,44 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 						if (conn instanceof IServiceCapableConnection) {
 							((IServiceCapableConnection) conn).invoke("setNewModeratorByList",new Object[] { currentMods }, this);
 							log.debug("sending setNewModeratorByList to " + conn);
+						}
+					}
+				}	
+			}
+			
+		} catch (Exception err) {
+			log.error("[addModerator]",err);
+		}
+		return -1L;
+	}
+
+	public synchronized Long setBroadCastingFlag(String publicSID, boolean value) {
+		try {
+			
+			log.debug("*..*addModerator publicSID: " + publicSID);
+			
+			IConnection current = Red5.getConnectionLocal();
+			//String streamid = current.getClient().getId();
+			
+			RoomClient currentClient = this.clientListManager.getClientByPublicSID(publicSID);
+			
+			if (currentClient == null) {
+				return -1L;
+			}
+			currentClient.setIsBroadcasting(value);
+			//Put the mod-flag to true for this client
+			this.clientListManager.updateClientByStreamId(currentClient.getStreamid(), currentClient);
+			
+			//Notify all clients of the same scope (room)
+			Collection<Set<IConnection>> conCollection = current.getScope().getConnections();
+			for (Set<IConnection> conset : conCollection) {
+				for (IConnection conn : conset) {
+					if (conn != null) {
+						RoomClient rcl = this.clientListManager.getClientByStreamId(conn.getClient().getId());
+						log.debug("Send Flag to Client: "+rcl.getUsername());
+						if (conn instanceof IServiceCapableConnection) {
+							((IServiceCapableConnection) conn).invoke("setNewBroadCastingFlag",new Object[] { currentClient }, this);
+							log.debug("sending setNewBroadCastingFlag to " + conn);
 						}
 					}
 				}	

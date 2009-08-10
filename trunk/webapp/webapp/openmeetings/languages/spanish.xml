@@ -2043,4 +2043,28 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   <string id="676" name="participants panel">
     <value>Grant Moderation Rights to this User</value>
   </string>  
+  <string id="677" name="event user list">
+    <value>User</value>
+  </string>
+  <string id="678" name="event user list">
+    <value>Access to whiteboard</value>
+  </string>
+  <string id="679" name="event user list">
+    <value>Moderator</value>
+  </string>
+  <string id="680" name="event user list">
+    <value>Moderation: Please choose any User on the List to grant him access to the Whiteboard, Moderation or Video.</value>
+  </string>
+  <string id="681" name="event user list">
+    <value>This User is already Moderator, so he has automatically the right to draw.</value>
+  </string>
+  <string id="682" name="event user list error">
+    <value>This is you! You cannot remove the Moderation rights from yourself.</value>
+  </string>
+  <string id="683" name="event user list">
+    <value>Allow this User to Publish his Audio / Video</value>
+  </string>
+  <string id="684" name="event user list">
+    <value>Remove Audio/Video of this User</value>
+  </string>
 </language>

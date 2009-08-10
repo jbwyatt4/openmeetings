@@ -116,6 +116,12 @@ public class RoomClient {
 	private String roomRecordingName;
 	
 	/*
+	 * Indicates if this User is broadcasting his stream at all
+	 * Only interesting in the Event Modus
+	 */
+	private Boolean isBroadcasting = false;
+	
+	/*
 	 * Zombie Flag
 	 */
 	private Boolean zombieCheckFlag = false;
@@ -508,6 +514,18 @@ public class RoomClient {
 	}
 	public void setCanDraw(Boolean canDraw) {
 		this.canDraw = canDraw;
+	}
+
+	/**
+     * @hibernate.property
+     *  column="isBroadcasting"
+     *  type="boolean"
+     */
+	public Boolean getIsBroadcasting() {
+		return isBroadcasting;
+	}
+	public void setIsBroadcasting(Boolean isBroadcasting) {
+		this.isBroadcasting = isBroadcasting;
 	}
 	
 
