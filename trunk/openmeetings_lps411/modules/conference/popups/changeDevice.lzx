@@ -37,9 +37,9 @@
         this.close();
     </method>    
      
-    <labelText labelid="52" fontsize="12" x="10" y="30" />
+    <labelText labelid="52" fontsize="11" x="10" y="30" />
 
-    <resetCombobox fontsize="12" id="availibleCams3" x="10" y="50" width="280" editable="false">
+    <resetCombobox fontsize="11" id="availibleCams3" x="10" y="50" width="280" editable="false">
         <handler name="oninit">
             <![CDATA[
             //Get all availible Cam's
@@ -64,9 +64,9 @@
         </handler>
     </resetCombobox>
     
-    <labelText text="LABEL53" labelid="53" fontsize="12" x="10" y="80" />
+    <labelText text="LABEL53" labelid="53" fontsize="11" x="10" y="80" />
 
-    <resetCombobox fontsize="12" id="availibleMics3"  x="10" y="100" width="280" editable="false">
+    <resetCombobox fontsize="11" id="availibleMics3"  x="10" y="100" width="280" editable="false">
         <handler name="oninit">
             <![CDATA[
             //Get all availible Mic's
@@ -103,7 +103,7 @@
         </handler>         
     </checkbox>
     
-    <simpleLabelButton fontsize="12" labelid="54" x="190" y="190" width="100">
+    <simpleLabelButton fontsize="11" labelid="54" x="190" y="190" width="100">
         <handler name="onclick">
             this.parent.doninitalize(availibleCams.getValue(),availibleMics.getValue());
         </handler>

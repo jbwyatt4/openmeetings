@@ -100,10 +100,10 @@
     
     <labelText x="10" width="250" y="24" multiline="true" name="txtFileDescr" labelid="594" />
 	
-	<labelText x="10" fontsize="12" y="60" width="250" name="txtFile" multiline="true" 
+	<labelText x="10" fontsize="11" y="60" width="250" name="txtFile" multiline="true" 
 			   resize="false" fgcolor="0x666666" />
 
-	<simpleLabelButton fontsize="12" name="browse" x="10" y="80" labelid="596" width="250" height="20">
+	<simpleLabelButton fontsize="11" name="browse" x="10" y="80" labelid="596" width="250" height="20">
 		<handler name="onclick">
 			parent.myFileUpload.browse();
 		</handler>

@@ -18,7 +18,7 @@
     </method>
     
     <scrolledittext name="_cbtext" width="$once{ parent.width-2 }" x="1" y="1" bgcolor="0xFFFFFF" 
-		height="$once{ parent.height-2 }" text="${ parent.text }" multiline="true" />
+		height="$once{ parent.height-2 }" text="${ parent.text }" multiline="true" fontsize="11" />
     
 </class>
 

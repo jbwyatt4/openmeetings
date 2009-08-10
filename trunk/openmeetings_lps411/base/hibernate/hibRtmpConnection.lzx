@@ -86,7 +86,8 @@
             loadContentByTempActionForNavi();
         } else {
             this.refreshDelegate = new LzDelegate( this, "refreshSessionMeth" );
-            lz.Timer.addTimer( this.refreshDelegate, 60000 );
+            //lz.Timer.addTimer( this.refreshDelegate, 60000 );
+            lz.Timer.addTimer( this.refreshDelegate, canvas.refreshSession );
 			canvas.thishib.loaderVar.setProgress();
             this.getsessiondata.callRPC();    
         }    
@@ -133,8 +134,8 @@
     <netRemoteCallHib name="refreshSession" funcname="userservice.refreshSession" showLoading="false" >    
         <netparam><method name="getValue">return canvas.sessionId;</method></netparam>   
         <handler name="ondata" args="value">
-            //if ($debug) Debug.write("hibRtmpConnection/refreshSession [",value,"]");
-            lz.Timer.addTimer( parent.refreshDelegate, 60000 );
+            if ($debug) Debug.write("hibRtmpConnection/refreshSession [",value,"]");
+            lz.Timer.addTimer( parent.refreshDelegate, canvas.refreshSession );
         </handler>
     </netRemoteCallHib>
       
@@ -448,15 +449,17 @@
         </netRemoteCallHib>
 
 		<!--- 
-			this remotecall is qute important as only at this point you can decide which
-			position a newly connected user has
+			this remotecall is quite important as only at this point you can decide which
+			position a newly connected user has => this comment is deprecated! swagner 10.08.2009
+			
+			currentuserpos => is no more important
 		 -->
         <netRemoteCallHib name="setAudienceModus" funcname="setAudienceModus">
             <netparam><method name="getValue">return canvas.currentusercolor;</method></netparam>        
             <netparam><method name="getValue">return canvas.currentuserpos;</method></netparam>      
             <handler name="ondata" args="value">
                 //The onResult-Handler will be called be the rtmpconnection
-                Debug.write("setAudienceModus: ",value);                   
+                if ($debug) Debug.write("setAudienceModus: ",value);                   
             </handler>  
         </netRemoteCallHib>
         
@@ -482,9 +485,12 @@
                 	
                 	if ($debug) Debug.write("throw event to drawarea: ",canvas.moderatorStreamID,canvas.ismoderator);
                     if (canvas.ismoderator){
+                    	if (this.parent.modus == "conference"){
                         if ($debug) Debug.write("############## editRecordStream 3");
-                        new lz.editRecordStream(canvas.main_content._content.inner);
+                            new lz.editRecordStream(canvas.main_content._content.inner);
+                    	}
                     } else if (value==null){
+                    	//I think we never can run into this! value is always != null, this is from a previous implementation
                         if ($debug) Debug.write("############   value IS NULL: ",this.parent.modus);
                         //no moderator availible
                         //check if this is conferenceViewmodus
@@ -495,11 +501,14 @@
                             // in audienceView modus you get no notification
                             // cause you are not able to register your stream
                             // as non moderator
-                            if (!canvas._videocontainer.modLoaded){
-                                if ($debug) Debug.write("############## editRecordStream 5");
-                                messageAlreadyThrown = true;
-                                new lz.errorModeratorPopup(canvas,{error:canvas.getLabelName(498)});
-                            }                           
+                            
+                        	//FIXME: If there is no Moderator at this point there 
+                        	//should be a message to apply for it
+                            //if (!canvas._videocontainer.modLoaded){
+                            //    if ($debug) Debug.write("############## editRecordStream 5");
+                            //    messageAlreadyThrown = true;
+                            //    new lz.errorModeratorPopup(canvas,{error:canvas.getLabelName(498)});
+                            //}                           
                         }       
                     } else {
                         if (this.parent.modus == "conference"){
@@ -645,6 +654,7 @@
                 ]]>
             </handler>   
         </netRemoteCallHib>    
+        
         <netRemoteCallHib name="sendVarsToWhiteboard" funcname="sendVarsToWhiteboard">
             <handler name="ondata" args="value">
                 <![CDATA[
@@ -676,6 +686,48 @@
                 <![CDATA[
                 //The onResult-Handler will be called be the rtmpconnection
                 //Debug.write(" onResult setModerator : ",value);                   
+                ]]>
+            </handler>   
+        </netRemoteCallHib>
+        
+        <!--
+        public synchronized Long setBroadCastingFlag(String publicSID, boolean value) 
+         -->
+        <netRemoteCallHib name="setBroadCastingFlag" funcname="setBroadCastingFlag">
+            <attribute name="publicSIDOfNewModerator" value="0" type="string" />
+            <attribute name="isAllowedToBroadCastAV" value="false" type="boolean" />
+            <netparam><method name="getValue">return parent.publicSIDOfNewModerator;</method></netparam>
+            <netparam><method name="getValue">return parent.isAllowedToBroadCastAV;</method></netparam>
+            <handler name="ondata" args="value">
+                <![CDATA[
+                //The onResult-Handler will be called be the rtmpconnection
+                //Debug.write(" onResult setModerator : ",value);                   
+                ]]>
+            </handler>   
+        </netRemoteCallHib>
+        
+        <netRemoteCallHib name="setNewBroadCastingFlag" funcname="setNewBroadCastingFlag">
+        	<netparam><method name="getValue">return null;</method></netparam>
+            <handler name="ondata" args="value">
+                <![CDATA[
+                    //The onResult-Handler will be called be the rtmpconnection
+                    if ($debug) Debug.write(" onResult setNewBroadCastingFlag : ",value);    
+                    canvas.setAttribute("lastBroadCastingUser",value);
+                ]]>
+            </handler>   
+        </netRemoteCallHib>
+        
+        <netRemoteCallHib name="setCanDraw" funcname="whiteboardservice.setCanDraw"
+                       remotecontext="$once{ canvas.thishib }">
+        	<attribute name="publicSID" value="" type="string" />
+        	<attribute name="canDraw" value="true" type="boolean" />
+            <netparam><method name="getValue">return canvas.sessionId;</method></netparam>
+            <netparam><method name="getValue">return parent.publicSID;</method></netparam>
+            <netparam><method name="getValue">return parent.canDraw;</method></netparam>
+            <handler name="ondata" args="value">
+                <![CDATA[
+                    //The onResult-Handler will be called be the rtmpconnection
+                    if ($debug) Debug.write("sendVarsModeratorGeneral : ",value);
                 ]]>
             </handler>   
         </netRemoteCallHib>

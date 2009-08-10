@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <canvas debug="true" width="100%" height="100%" title="Geo Map Portal">
     
-    <debug fontsize="12" oninit="Debug.showInternalProperties = true" />
+    <debug fontsize="11" oninit="Debug.showInternalProperties = true" />
 
 <handler name="oninit">
     <![CDATA[

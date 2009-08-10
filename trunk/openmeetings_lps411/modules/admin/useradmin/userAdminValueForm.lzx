@@ -173,7 +173,7 @@
         <customEdittext name="userpass2" y="130" password="true" x="120" width="270" text="" />   
      -->
     <labelText labelid="135" width="200" y="130" resize="false" x="2"/>
-        <resetCombobox name="salutation" width="100" y="130" x="120" editable="false" fontsize="12">
+        <resetCombobox name="salutation" width="100" y="130" x="120" editable="false" fontsize="11">
 	        <handler name="oninit" >
 	            <![CDATA[
 	            for (var i=0;i<canvas.salutationsInitValues.length;i++){
@@ -208,12 +208,12 @@
         <customEdittext name="town" y="310" x="200" width="190" text="" />                        
          
     <labelText labelid="141" width="200" y="370" resize="false" x="2"/>  
-		<validText name="state" width="270" y="370" x="120" fontsize="12" 
+		<validText name="state" width="270" y="370" x="120" fontsize="11" 
             shownitems="7" validate_method="$once{ canvas.validateCountry }" 
             resultId="state_id" resultName="name" />    
 
     <labelText labelid="158" width="200" y="400" resize="false" x="2"/>  
-        <resetCombobox name="status" width="200" y="400" x="120" editable="false" fontsize="12">
+        <resetCombobox name="status" width="200" y="400" x="120" editable="false" fontsize="11">
 	        <handler name="oninit" >
 	            <![CDATA[
 	            this.addItem(canvas.getLabelName(159),'0');
@@ -225,7 +225,7 @@
 
 
     <labelText labelid="169" width="200" y="430" resize="false" x="2"/>  
-        <resetCombobox name="level" width="200" y="430" x="120" editable="false" fontsize="12">
+        <resetCombobox name="level" width="200" y="430" x="120" editable="false" fontsize="11">
 	        <handler name="oninit" >
 	            <![CDATA[
 	            this.addItem(canvas.getLabelName(166),'1');

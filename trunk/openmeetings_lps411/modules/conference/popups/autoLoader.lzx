@@ -24,9 +24,9 @@
 		this.loadingbar.setAttribute('frame',w);
 	</method>
     
-    <text fontsize="12" >Autoconnect</text>
-    <text fontsize="12" name="error" />
-    <text fontsize="12" name="_src" />
+    <text fontsize="11" >Autoconnect</text>
+    <text fontsize="11" name="error" />
+    <text fontsize="11" name="_src" />
     
     <view name="loadingbar" resource="currentsplash" 
           x="-5" y="60" width="$once{ parent.maxwidth }" visibility="hidden" />

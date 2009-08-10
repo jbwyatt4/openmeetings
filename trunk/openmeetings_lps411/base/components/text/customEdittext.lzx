@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library>
 
-<class name="customEdittext" extends="edittext" fontsize="12" >
+<class name="customEdittext" extends="edittext" fontsize="11" >
 	
 	<attribute name="labelid" type="number" setter="setLabelId(labelid)" />
 	

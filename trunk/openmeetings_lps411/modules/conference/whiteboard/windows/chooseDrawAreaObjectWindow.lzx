@@ -15,8 +15,8 @@
     	lz.ModeManager.release(this);
     </handler>
     
-    <text fontsize="12" text="There are several Object in this selection" y="22" />
-    <text fontsize="12" text="Objects:" y="42" />
+    <text fontsize="11" text="There are several Object in this selection" y="22" />
+    <text fontsize="11" text="Objects:" y="42" />
     
     <chooseDrawAreaObjectCombobox x="100" refObj="${ parent.refObj }" y="42" />
 	

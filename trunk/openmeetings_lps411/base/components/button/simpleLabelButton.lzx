@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library>
 
-<class name="simpleLabelButton" extends="button" fontsize="12" height="20" style="componentStyle">
+<class name="simpleLabelButton" extends="button" fontsize="11" height="20" style="componentStyle">
 
 	<attribute name="labelid" type="number" setter="setLabelId(labelid)" />
 	<method name="setLabelId" args="_labelid" >
@@ -11,7 +11,7 @@
 	
 </class>
 
-<class name="simpleLabelButtonTooltip" extends="button" fontsize="12" height="20" style="componentStyle">
+<class name="simpleLabelButtonTooltip" extends="button" fontsize="11" height="20" style="componentStyle">
 	
 	<attribute name="tooltipId" type="number" value="0" />
 

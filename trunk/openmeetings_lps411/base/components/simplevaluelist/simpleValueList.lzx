@@ -18,7 +18,7 @@
 	<attribute name="selected" value="false" type="boolean"/>
 	<attribute name="value" value="null" />
 	<attribute name="text" value="" type="string" />
-	<text text="$once{ parent.text }" resize="true" fontsize="12" />
+	<text text="$once{ parent.text }" resize="true" fontsize="11" />
 </class>
 	
 	

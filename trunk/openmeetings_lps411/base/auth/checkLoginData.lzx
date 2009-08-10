@@ -196,7 +196,7 @@
     	</handler>
     </simpleLabelButton> 	
     
-    <text name="errormess" resize="true" y="168" x="2" fgcolor="red" fontsize="12"/>
+    <text name="errormess" resize="true" y="168" x="2" fgcolor="red" fontsize="11"/>
 
     <netRemoteCallHib name="loginUser" funcname="xmlcrm.loginUser" 
 		remotecontext="$once{ canvas.thishib }" activeErrorHandler="true" >      
@@ -300,7 +300,7 @@
         </handler>  
     </netRemoteCallHib>    
     
-    <labelCheckbox x="100" y="$once{ parent.height-66 }" fontsize="12"
+    <labelCheckbox x="100" y="$once{ parent.height-66 }" fontsize="11"
         name="_savelogindata" labelid="288" >
         <handler name="oninit">
             var t = new lz.sharedObject();

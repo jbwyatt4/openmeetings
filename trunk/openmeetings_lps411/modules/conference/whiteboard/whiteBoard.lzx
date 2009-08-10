@@ -117,7 +117,7 @@
     <event name="isloadingImage" />
     <event name="isloadedImage" />
     
-    <text fontsize="12" x="10" y="2" 
+    <text fontsize="11" x="10" y="2" 
         name="_sharingClientName" fontstyle="bold" />    
     
     <simpleLabelButton labelid="239" height="24" name="_doShare" width="200" 
@@ -311,7 +311,7 @@
     </view>
     
      
-    <text x="14" y="540" text="${ 'Modus: '+this.parent.canvas._drawarea.drawmodus }" resize="true" fontsize="12" />
+    <text x="14" y="540" text="${ 'Modus: '+this.parent.canvas._drawarea.drawmodus }" resize="true" fontsize="11" />
      -->
 
 </library>

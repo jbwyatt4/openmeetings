@@ -119,7 +119,7 @@
     <event name="isloadedImage" />
     
     
-    <text fontsize="12" x="10" y="2" 
+    <text fontsize="11" x="10" y="2" 
         name="_sharingClientName" fontstyle="bold" />    
     
     

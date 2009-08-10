@@ -25,7 +25,7 @@
     
     <view resource="regexptip_rsc_point" y="-7" x="12" />
 
-    <text fontsize="12" text="${ parent.regexptext}" resize="true" />
+    <text fontsize="11" text="${ parent.regexptext}" resize="true" />
 </class>
 
 </library>

@@ -46,7 +46,7 @@
          
     <labelText labelid="120" width="200" y="222" resize="false" x="2"/>  
 
-		<validText name="state" width="270" y="222" x="120" fontsize="12" 
+		<validText name="state" width="270" y="222" x="120" fontsize="11" 
             shownitems="7" validate_method="$once{ canvas.validateCountry }" 
             resultId="state_id" resultName="name" />        
 <!--

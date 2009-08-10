@@ -51,7 +51,7 @@
 	
 	<method name="setUserAnswer" args="value">
 		<![CDATA[
-		//Debug.write("*** setUserAnswer: ",value);
+		if ($debug) Debug.write("*** setUserAnswer: ",value,this.userslist);
 
 		var t = this.userslist.userslist.userslist[value.client.streamid];
 		//Debug.write(" t: ",t);

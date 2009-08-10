@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<library>
+	
+	<resource name="userstatus_multiframe_rsc">
+		<frame src="resources/bullet_ball_glass_green.png"/> <!-- user -->
+		<frame src="resources/bullet_ball_glass_yellow.png"/> <!-- mod -->
+		<frame src="resources/bullet_ball_glass_red.png"/> <!-- whiteboard allow -->
+	</resource>
+    
+    <include href="eventUserList.lzx" />
+    
+</library>
