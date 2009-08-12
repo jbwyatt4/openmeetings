@@ -681,6 +681,42 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 	}
 	
 	/**
+	 * Invoked by a User whenever he want to become moderator
+	 * this is needed, cause if the room has no moderator yet there is
+	 * no-one he can ask to get the moderation, in case its a Non-Moderated 
+	 * Room he should then get the Moderation without any confirmation needed
+	 * @return Long 1 => means get Moderation, 2 => ask Moderator for Moderation, 3 => wait for Moderator
+	 */
+	public synchronized Long applyForModeration(String publicSID) {
+		try {
+			
+			IConnection current = Red5.getConnectionLocal();
+			//String streamid = current.getClient().getId();
+			
+			RoomClient currentClient = this.clientListManager.getClientByPublicSID(publicSID);
+			
+			List<RoomClient> currentModList = this.clientListManager.getCurrentModeratorByRoom(currentClient.getRoom_id());
+			
+			if (currentModList.size() > 0) {
+				return 2L;
+			} else {
+				//No moderator in this room at the moment
+				Rooms room = Roommanagement.getInstance().getRoomById(currentClient.getRoom_id());
+				
+				if (room.getIsModeratedRoom()) {
+					return 3L;
+				} else {
+					return 1L;
+				}
+			}
+			
+		} catch (Exception err) {
+			log.error("[applyForModeration]",err);
+		}
+		return -1L;
+	}
+	
+	/**
 	 * there will be set an attribute called "broadCastCounter"
 	 * this is the name this user will publish his stream
 	 * @return long broadCastId
