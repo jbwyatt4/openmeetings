@@ -711,10 +711,43 @@
             <handler name="ondata" args="value">
                 <![CDATA[
                     //The onResult-Handler will be called be the rtmpconnection
-                    if ($debug) Debug.write(" onResult setNewBroadCastingFlag : ",value);    
+                    //if ($debug) Debug.write(" onResult setNewBroadCastingFlag : ",value);   
+                    if (canvas.publicSID == value.publicSID) {
+                        if ($debug) Debug.write("Its about You ",value);
+                        if (value.isBroadcasting) {
+                            new lz.editRecordStream(canvas.main_content._content.inner);
+                            canvas.setAttribute("isBroadCasting",true);
+                        } else {
+                        	canvas.setAttribute("isBroadCasting",false);
+                        }
+                    } 
                     canvas.setAttribute("lastBroadCastingUser",value);
                 ]]>
             </handler>   
+        </netRemoteCallHib>
+        
+        <!--
+        public synchronized Long applyForModeration(String publicSID)
+         -->
+        <netRemoteCallHib name="applyForModeration" funcname="applyForModeration"
+                       remotecontext="$once{ canvas.thishib }">
+        	<netparam><method name="getValue">return canvas.publicSID;</method></netparam>
+        	<handler name="ondata" args="value">
+                <![CDATA[
+                    //The onResult-Handler will be called be the rtmpconnection
+                    if ($debug) Debug.write("applyForModeration : ",value);
+                    if (value == 1) {
+                    	//Do add direct
+                    	parent.addModerator.publicSIDOfNewModerator = canvas.publicSID;
+                    	parent.addModerator.doCall();
+                    } else if (value == 2) {
+                    	//Ask the Moderator
+                    	canvas.thishib.sendMessageWithClient.sendMessage("applyForModeration",null);
+                    } else if (value == 3) {
+                    	new lz.labelerrorPopup(canvas,{errorlabelid:696});
+                    }
+                ]]>
+            </handler>
         </netRemoteCallHib>
         
         <netRemoteCallHib name="setCanDraw" funcname="whiteboardservice.setCanDraw"
@@ -824,14 +857,33 @@
                 
                 ]]>
             </handler>   
-        </netRemoteCallHib>    
+        </netRemoteCallHib>  
+        
+        <netRemoteCallHib name="sendMessageWithClient" funcname="sendMessageWithClient" 
+                          remotecontext="$once{ canvas.thishib }" >  
+            
+            <attribute name="messageObj" value="null" />
+            <method name="sendMessage" args="typeName,messageObject">
+            	this.messageObj = new Object();
+            	this.messageObj[0] = typeName;
+            	this.messageObj[1] = messageObject;
+            	this.doCall();
+            </method>
+            
+            <netparam name="vars"><method name="getValue">return parent.messageObj;</method></netparam>
+            <handler name="ondata" args="value">
+            	//The onResult-Handler will be called be the rtmpconnection
+                //Debug.write("sendMessageWithClient : ",value);
+            </handler>
+        </netRemoteCallHib>
+          
         <netRemoteCallHib name="sendVarsToMessageWithClient" funcname="sendVarsToMessageWithClient" 
                           remotecontext="$once{ canvas.thishib }" >  
             <netparam name="vars"><method name="getValue">return parent.parent.applymessage;</method></netparam>
             <handler name="ondata" args="value">
                 <![CDATA[
                 //The onResult-Handler will be called be the rtmpconnection
-                if ($debug) Debug.write("sendVarsToMessageWithClient : ",value,value.message,value.message[0],value);
+                if ($debug) Debug.write("sendVarsToMessageWithClient : ",value,value.message,value.message[0]);
                 if (value.message[0]=='kick'){
                     //canvas.currentModApply
                     parent.showKickMessage = true;
@@ -885,8 +937,45 @@
 					}
                 } else if (value.message[0]=='updateDrawStatus'){
                     canvas.setAttribute("drawAllowStatus",value.message[1]);
+                } else if (value.message[0]=='applyForModeration'){
+                    if (canvas.ismoderator) {
+                    	if ($debug) Debug.write("Somebody wants the Moderation ",value.client);
+                    	
+                    	var txt = canvas.getLabelName(692) + " " + 
+                	               value.client.firstname + " " + value.client.lastname + " " +
+                	               "[" + value.client.username + "] " +
+                	               canvas.getLabelName(693);
+                    	
+                    	new lz.errorPopup(canvas,{
+                            	   labelid:691,error:txt
+                            	});
+                    }
+                } else if (value.message[0]=='applyForWhiteboard'){
+                    if (canvas.ismoderator) {
+                        if ($debug) Debug.write("Somebody wants to draw on Whiteboard ",value.client);
+                        var txt = canvas.getLabelName(692) + " " + 
+                                   value.client.firstname + " " + value.client.lastname + " " +
+                                   "[" + value.client.username + "] " +
+                                   canvas.getLabelName(694);
+                        
+                        new lz.errorPopup(canvas,{
+                                   labelid:691,error:txt
+                                });
+                    }
+                } else if (value.message[0]=='applyForAV'){
+                    if (canvas.ismoderator) {
+                        if ($debug) Debug.write("Somebody wants to share AV ",value.client);
+                        var txt = canvas.getLabelName(692) + " " + 
+                                   value.client.firstname + " " + value.client.lastname + " " +
+                                   "[" + value.client.username + "] " +
+                                   canvas.getLabelName(695);
+                        
+                        new lz.errorPopup(canvas,{
+                                   labelid:691,error:txt
+                                });
+                    }
                 } else {
-                    if ($debug) Debug.write("sendVarsToMessageWithClient unkown message ",value);
+                    if ($debug) Debug.warn("sendVarsToMessageWithClient unkown message ",value);
                 }
                 ]]>
             </handler>   

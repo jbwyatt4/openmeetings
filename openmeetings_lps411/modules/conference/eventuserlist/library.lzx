@@ -7,6 +7,10 @@
 		<frame src="resources/bullet_ball_glass_red.png"/> <!-- whiteboard allow -->
 	</resource>
     
+    <include href="moderationMiniIconsEventUserList.lzx" />
+    <include href="moderationMiniIcons.lzx" />
+    <include href="eventUserListInner.lzx" />
+    <include href="eventUserListItem.lzx" />
     <include href="eventUserList.lzx" />
     
 </library>

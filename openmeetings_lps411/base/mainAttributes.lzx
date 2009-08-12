@@ -285,4 +285,6 @@ and some more references to temp-objects
 
 <attribute name="lastBroadCastingUser" value="null" />
 
+<attribute name="isBroadCasting" value="false" type="boolean" />
+
 </library>

@@ -78,7 +78,9 @@
   	
   	<simpleLabelButton name="mod_btn" width="30" height="24" y="2" style="itemStyle">
 		<handler name="onclick">
-			new lz.applyForModeration(canvas.main_content._content.inner);
+			//We do only ask the Moderator(s) to change Moderation
+			//new lz.applyForModeration(canvas.main_content._content.inner);
+			canvas.thishib.applyForModeration.doCall();
 		</handler>	
 		<view x="7" y="4" name="infoview" resource="applyformodicon" />
 		<labelTooltip inittwice="true" labelid="84" />  	
