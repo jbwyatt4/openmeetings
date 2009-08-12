@@ -15,7 +15,8 @@
     
     <simpleLabelButton x="20" labelid="84" y="200" width="200">
 		<handler name="onclick">
-			new lz.applyForModeration(canvas.main_content._content.inner);
+			//new lz.applyForModeration(canvas.main_content._content.inner);
+			canvas.thishib.applyForModeration.doCall();
             this.parent.close();
 		</handler>
     </simpleLabelButton>

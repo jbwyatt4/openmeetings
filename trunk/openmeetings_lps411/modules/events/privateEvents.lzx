@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library>
 	<!---
+	
+	    @deprecated Is not used anymore, see allEvents
+	
 		This class shows usable private Event(seminar) room list.
 		( *similar with privateMeetings.lzx )
 		The list would created from roomListItem object that was declared in modules/conference/conference/roomListItem.lzx.

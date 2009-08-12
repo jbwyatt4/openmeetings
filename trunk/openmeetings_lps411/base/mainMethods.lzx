@@ -240,7 +240,9 @@
 	            } else if (stringSub=='importFile') {
 	                new lz.uploadWindow(canvas.main_content._content.inner,{x:60,uploadmodule:canvas.uploadmoduleimg,isOnlyImage:true});
 	            } else if (stringSub=='applyForMod') {
-	                new lz.applyForModeration(canvas.main_content._content.inner);
+	            	if ($debug) Debug.info("Apply For Mod through doActionmenu");
+	                //new lz.applyForModeration(canvas.main_content._content.inner);
+	                canvas.thishib.applyForModeration.doCall();
 	            } else if (stringSub=='editCamMicSettings') {
 	                new lz.changeDevice(canvas.main_content._content.inner);
 	            } else if (stringSub=='editBoardSettings') {

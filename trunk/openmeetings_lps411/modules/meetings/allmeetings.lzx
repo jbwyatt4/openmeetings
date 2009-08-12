@@ -31,21 +31,11 @@
 	<tabs>
 		<tabpane text="Public Meetings" >
 			<view>
-		
-				<!-- duplicated ?
-					<handler name="ontabcontentleave">
-						canvas._chatcontentRPC = null;
-						canvas.thishib.removeClientFromChatNotification.doCall();
-					</handler>
-						 -->
 		    
 				<netRemoteCallHib name="removeClientFromChatNotification" funcname="chatservice.removeClientFromChatNotification"	
 					remotecontext="$once{ canvas.thishib }" >      
 					<handler name="ondata" args="value">
-						if ($debug)
-							Debug.write(
-									"removeClientFromChatNotification: ",
-									value);
+						if ($debug) Debug.write("removeClientFromChatNotification: ",value);
 						this.parent.destroy();
 					</handler>
 				</netRemoteCallHib>
@@ -71,8 +61,7 @@
 						</netparam>  
 						<handler name="ondata" args="value">	
 						<![CDATA[
-							if ($debug)
-								Debug.write("getRoomsPublic: ", value);
+							if ($debug) Debug.write("getRoomsPublic: ", value);
 							if (value != null) {
 								for (var eg = 0; eg < value.length; eg++) {
 									var time = value[eg].starttime.getHours()
@@ -119,13 +108,6 @@
 		<!-- private Meetings -->	
 		<tabpane text="Private Meetings" >
 			<view>
-  				
-				<!-- when/who should this event be activated/thrown?
-						<handler name="ontabcontentleave">
-							canvas._chatcontentRPC = null;
-							canvas.thishib.removeClientFromChatNotification.doCall();
-						</handler>
-					 -->
 	
 				<!-- Declared conference rooms list -->
 				<view y="4" x="4">
@@ -195,14 +177,6 @@
 		<!-- Appointed Meetings -->
 		<tabpane text="My Meetings" >
 			
-			<!-- when/who should this event be activated/thrown?
-				<handler name="ontabcontentleave">
-					canvas._chatcontentRPC = null;
-					canvas.thishib.removeClientFromChatNotification.doCall();
-				</handler>
-				 -->
-	
-   
 			<!-- Declared conference rooms list -->
 			<view y="4" x="4">
 				<handler name="oninit">
@@ -225,8 +199,7 @@
 			
 					<handler name="ondata" args="value">	
 					<![CDATA[
-						if ($debug)
-							Debug.write("getRoomsPublic: ", value);
+						if ($debug) Debug.write("getRoomsPublic: ", value);
 						if (value != null) {
 							for (var eg = 0; eg < value.length; eg++) {
 								var time = value[eg].starttime.getHours()

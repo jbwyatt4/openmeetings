@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library>
 
-    <include href="privateMeetings.lzx" />
-    <include href="publicMeetings.lzx" />
     <include href="allmeetings.lzx" />
 
 </library>
