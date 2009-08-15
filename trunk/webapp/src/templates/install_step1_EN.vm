@@ -115,7 +115,9 @@ form.cmxform fieldset fieldset label {
  
 function checkEmail() 
 {
-	if	(/^[_a-zA-Z0-9-]+(.[_a-zA-Z0-9-]+)*@([a-zA-Z0-9-]+.)+([a-zA-Z]{1,3})$/.test(useremail.value))
+    //alert(document.getElementById("useremail").value);
+    
+	if	(/^[_a-zA-Z0-9-]+(.[_a-zA-Z0-9-]+)*@([a-zA-Z0-9-]+.)+([a-zA-Z]{1,3})$/.test(document.getElementById("useremail").value))
 	{
 		document.forms[0].submit();
 	}
