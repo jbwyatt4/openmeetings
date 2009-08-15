@@ -155,6 +155,9 @@
 		        	t=0;
 	        	}
 	        	var datecount = new Date(firstdayDate.getTime() +86400000*i);
+	        	
+	        	if ($debug) Debug.write("datecount ",datecount);
+	        	
 	        	//this["week"+ j].subviews[t].setAttribute('daydate',  this.weekdaynames[datecount.getDay()]+" "
 	        	//+datecount.getDate().toString()+". "+this.monthnames[datecount.getMonth()] ); 
 	        	
@@ -180,44 +183,51 @@
 	  
    <method name="getDateFirstDayInMonth">
 		<![CDATA[
-		//First calc the date by the given first day in week
-		var newDateTemp = new Date(this.showingdate.getFullYear(), this.showingdate.getMonth(), 1);
-		////Debug.write(newDateTemp);
-		var factor = 0;
-		if (newDateTemp.getDay()>this.firstdayinweek)	
-			factor = -((newDateTemp.getDay()-this.firstdayinweek));
-		else if (newDateTemp.getDay()<this.firstdayinweek)
-			factor = (this.firstdayinweek-newDateTemp.getDay());
-		////Debug.write("factor: ",factor);
 		
-		//calc first day
-		var newDate = new Date( (newDateTemp.getTime()+(86400000*factor)) );
-
-		//if the first day is after the first day of the selected month then we have to add 7 Days
-		if (newDate.getDate()>1 && newDate.getMonth()==newDateTemp.getMonth()){
-			newDate = new Date( (newDate.getTime()-(86400000*7)));
-		}
-		////Debug.write("getDateFirstDayInMonth ",newDate);
-		if ($debug) Debug.write("newDate: ",newDate);
-		return newDate;
+		    if ($debug) Debug.write("getDateFirstDayInMonth ",this.showingdate);
+		    
+		    //if (this.showingdate == null) {
+		    //	return;
+		    //}
+		
+    		//First calc the date by the given first day in week
+    		var newDateTemp = new Date(this.showingdate.getFullYear(), this.showingdate.getMonth(), 1);
+    		////Debug.write(newDateTemp);
+    		var factor = 0;
+    		if (newDateTemp.getDay()>this.firstdayinweek)	
+    			factor = -((newDateTemp.getDay()-this.firstdayinweek));
+    		else if (newDateTemp.getDay()<this.firstdayinweek)
+    			factor = (this.firstdayinweek-newDateTemp.getDay());
+    		////Debug.write("factor: ",factor);
+    		
+    		//calc first day
+    		var newDate = new Date( (newDateTemp.getTime()+(86400000*factor)) );
+    
+    		//if the first day is after the first day of the selected month then we have to add 7 Days
+    		if (newDate.getDate()>1 && newDate.getMonth()==newDateTemp.getMonth()){
+    			newDate = new Date( (newDate.getTime()-(86400000*7)));
+    		}
+    		////Debug.write("getDateFirstDayInMonth ",newDate);
+    		if ($debug) Debug.write("newDate: ",newDate);
+    		return newDate;
 		
 		]]>
 	</method>
 	
 	<method name="clearContent">
 		<![CDATA[
-		var j=0;
-	    var t=0;
-		for(var i=0;i<42;i++){
-				        	
-        	if(i==7||i==14||i==21||i==28||i==35){
-	        	j++
-	        	t=0;
+    		var j=0;
+    	    var t=0;
+    		for(var i=0;i<42;i++){
+    				        	
+            	if(i==7||i==14||i==21||i==28||i==35){
+    	        	j++
+    	        	t=0;
+        		}
+            	this["week"+ j].subviews[t]._appointemtList._innerList.clearContent();
+            	t++
     		}
-        	this["week"+ j].subviews[t]._appointemtList._innerList.clearContent();
-        	t++
-		}
-        	]]>
+    	]]>
 	</method>
 	
 	<netRemoteCallHib name="getAppointmentByRangeMonth" funcname="calendarservice.getAppointmentByRange" 
@@ -258,13 +268,13 @@
 									        	m++
 									        	t=0;
 							        		}
-							        		new lz.appiontmentMonth(parent["week"+ (j+m)].subviews[(t+n)]._appointemtList._innerList, {	
+							        		new lz.appointmentMonth(parent["week"+ (j+m)].subviews[(t+n)]._appointemtList._innerList, {	
 				    							terminObj:value[k]
 											});
 						        		}
 						    		}else{
 						    			
-						    			new lz.appiontmentMonth(parent["week"+ j].subviews[t]._appointemtList._innerList, {	
+						    			new lz.appointmentMonth(parent["week"+ j].subviews[t]._appointemtList._innerList, {	
 				    							terminObj:value[k]
 											});
 						    		}

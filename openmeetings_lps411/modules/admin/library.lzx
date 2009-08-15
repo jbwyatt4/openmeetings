@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library>
 
-
-	<include href="useradmin/" /><!-- admin module-->
-	<include href="orgadmin/" /><!-- admin module-->
-	<include href="roomadmin/" /><!-- admin module-->
-	<include href="confadmin/" /><!-- admin module-->
-	<include href="languageseditor/" /><!-- admin module-->
-	<include href="backup/" /><!-- admin module-->
-    <include href="connections/" /><!-- admin module-->
+<!-- admin modules -->
+<!-- -->
+	<include href="useradmin/" />
+	<include href="orgadmin/" />
+	<include href="roomadmin/" />
+	<include href="confadmin/" />
+	<include href="languageseditor/" />
+	<!-- -->
+	<include href="backup/" />
+    <include href="connections/" />
 
 </library>

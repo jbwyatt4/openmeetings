@@ -7,12 +7,14 @@
 				
 		<handler name="onclick">
 			
-			var termindetails = parent.parent.parent.parent.parent.parent.parent._termindetails;
-			if ($debug) Debug.write("calenderlistitem: ",termindetails);
+			var tRootCalendarView = parent.parent.parent.parent.parent.parent.parent;
 			
-			termindetails.setAttribute("visibility","visible");
+			tRootCalendarView.initDetails();
+			//if ($debug) Debug.write("calenderlistitem: ",termindetails);
+			
+			tRootCalendarView._termindetails.setAttribute("visibility","visible");
             ///this.terminObjRef.defaulttermindetails({terminObjRef:this});
-            termindetails._date._bzeit.setAttribute('text',this.textAttr); //getAttribute('text')
+            tRootCalendarView._termindetails._date._bzeit.setAttribute('text',this.textAttr); //getAttribute('text')
             //this.terminObjRef._terminButton.onclick.sendEvent();
 		</handler>
 		

@@ -37,6 +37,7 @@
 	<method name="myinit">
 		<![CDATA[
 		if($debug) Debug.write("main.lzx/config.xml ondata",this);
+		
 		//Set Config-values by config.xml, see comments on config.xml
 		this.setAttribute('rtmphostlocal',canvas.myConfigSet.getPointer().xpathQuery('config/rtmphostlocal/text()'));   
 		this.setAttribute('rtmpport',Number(canvas.myConfigSet.getPointer().xpathQuery('config/rtmpport/text()')));  
