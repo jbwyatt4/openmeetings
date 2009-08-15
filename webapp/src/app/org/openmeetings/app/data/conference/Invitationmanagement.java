@@ -346,7 +346,7 @@ public class Invitationmanagement {
 			String baseurl, String email, String subject, String invitationsHash, String dStart, String dEnd){
 		try {
 				
-			String invitation_link = baseurl+"?lzr=swf8&lzt=swf&invitationHash="+invitationsHash;
+			String invitation_link = baseurl+"?invitationHash="+invitationsHash;
 			
 			Long default_lang_id = Long.valueOf(Configurationmanagement.getInstance().
 	        		getConfKey(3,"default_lang_id").getConf_value()).longValue();
