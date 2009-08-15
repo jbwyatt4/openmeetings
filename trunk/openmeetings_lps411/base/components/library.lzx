@@ -7,6 +7,7 @@
     <include href="tableCombobox.lzx" />
     <include href="tableListItem.lzx" />
     <include href="labelRadioButton.lzx" />
+    <include href="labeltabelement.lzx" />
     
     <include href="text/" />
     <include href="button/" />

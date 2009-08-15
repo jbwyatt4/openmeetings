@@ -1,26 +1,208 @@
 <library>
 	
-	<class name="termindetails" extends="labelExplorerBox" labelid="646" 
-		   width="420" x="10" visibility="hidden" closable="false">
+	<class name="termindetails" extends="labelExplorerBox" labelid="646" height="400"
+		   width="720" x="10" visibility="hidden" closable="false">
 		
-		<handler name="onvisible" args="v">
-			if ($debug) Debug.write("##### onvisible termindetails ",v,this);
-		</handler>
+		<attribute name ="terminObjRef" value="null"/>
+		<attribute name="_kategoryatr" value="0" type="number" />
+		<attribute name="_erinnerungatr" value="null"  />
+		<attribute name="roomtype" value="1" />
 		
-			<attribute name ="terminObjRef" value="null"/>
-			<attribute name="_kategoryatr" value="0" type="number" />
-			<attribute name="_erinnerungatr" value="null"  />
-			<attribute name="roomtype" value="1" />
+		<attribute name="_isDaily" value="false" type="boolean" />
+		<attribute name="_isWeekly" value="false" type="boolean" />  
+		<attribute name="_isMonthly" value="false" type="boolean" />
+		<attribute name="_isYearly" value="false" type="boolean" />   
+		
+		<attribute name="baseUrl" value="null" />
 			
-			<attribute name="_isDaily" value="false" type="boolean" />
-			<attribute name="_isWeekly" value="false" type="boolean" />  
-			<attribute name="_isMonthly" value="false" type="boolean" />
-			<attribute name="_isYearly" value="false" type="boolean" />   
-			
-			<attribute name="baseUrl" value="null" />
+        <handler name="onvisible" args="v">
+            if ($debug) Debug.write("##### onvisible termindetails ",v,this);
+        </handler>
+        
+        <handler name="oninit">
+            this._date.bringToFront();
+            this._erinnerungedit.selectItemAt(2);
+            this._repetitionselect.selectItemAt(0);
+            
+            //Point URL to actual File
+            var urlObject =  lz.Browser.getBaseURL();
+            this.baseUrl = urlObject.protocol+"://"+urlObject.host+":"+urlObject.port+urlObject.path+urlObject.file;
+            
+            if ($debug) Debug.write("parent.baseUrl ",this.baseUrl);
+            
+            this.getAppointmentCategoryList.doCall();
+            this.getAppointmentReminderTypList.doCall();
+        </handler>
+        	
+		<method name="defaulttermindetails">
+            this.terminObjRef = null;
+            
+            this._isDaily = false;
+            this._isMonthly = false;
+            this._isWeekly = false;
+            this._isYearly = false;
+            this._roomtype_edit.selectItemAt(0);
+            this._kategoryedit.selectItemAt(0); 
+            this._erinnerungedit.selectItemAt(2); 
+            this._erinnerungedit.setAttribute('enabled', 'true');
+            this._locationedit.setAttribute('text', "");
+            this._repetitionselect.selectItemAt(1);
+            //this._guestedit.setAttribute('text',"");
+            this._titeledit.setAttribute('text', "Neuer Termin");
+            this._komentar.setAttribute('text', "");
+            this._date._bdatum.setAttribute('text', parseDateToString(new Date()));
+            this._date._bzeit.setAttribute('text', "08:00");
+            this._date.edatum.setAttribute('text', parseDateToString(new Date()));
+            this._date.ezeit.setAttribute('text', "17:00");
+            
+            this._liste._innerlist.clearContent();
+            this._liste["visible", false];
+            this._liste._vscrol["visible", false];
+            this._liste.setAttribute('height', 0);
+        </method> 
+        
+        <method name="showtermindetails">
+            <![CDATA[
+                if ($debug) Debug.write("terminObjRef:", this.terminObjRef);
+                this._kategoryedit.selectItem(this.terminObjRef.appointmentCategory.categoryId); //setAttribute('value',this.terminObjRef.kategorie.id);
+                this._erinnerungedit.selectItem(this.terminObjRef.remind.typId);
+                this._erinnerungedit.setAttribute('enabled', 'false');
+                this._roomtype_edit.selectItem(this.terminObjRef.room.roomtype.roomtypes_id);
+                
+                if(this.terminObjRef.isDaily){
+                    this._repetitionselect.selectItemAt(1);
+                }else if(this.terminObjRef.isWeekly){
+                    this._repetitionselect.selectItemAt(3);
+                }else if(this.terminObjRef.isMonthly){
+                    this._repetitionselect.selectItemAt(2);
+                }else if(this.terminObjRef.isYearly){
+                    this._repetitionselect.selectItemAt(4);
+                }else{
+                    this._repetitionselect.selectItemAt(0);
+                }
+                
+                this._locationedit.setAttribute('text', this.terminObjRef.appointmentLocation);
+                //if(this.terminObjRef.guest != null)
+                    //{
+                    //this._guestedit.setAttribute('text', this.terminObjRef.guest.vorname+" "+ this.terminObjRef.guest.nachname);
+                    //}
+                //else{
+                    //this._guestedit.setAttribute('text',"");
+                //} 
+                this._titeledit.setAttribute('text', this.terminObjRef.appointmentName);
+                this._komentar.setAttribute('text', this.terminObjRef.appointmentDescription);
+                this._date._bdatum.setAttribute('text', parseDateToString(this.terminObjRef.appointmentStarttime));
+                this._date._bzeit.setAttribute('text', parseDateToStringTimeOnly(this.terminObjRef.appointmentStarttime));
+                this._date.edatum.setAttribute('text', parseDateToString(this.terminObjRef.appointmentEndtime));
+                this._date.ezeit.setAttribute('text', parseDateToStringTimeOnly(this.terminObjRef.appointmentEndtime));
+                
+                //if ($debug) Debug.write("remind typId: ",this.terminObjRef.remind.typId);
+                //this._erinnerungedit.selectItemAt(this.terminObjRef.remind.typId);
+                
+                if(this.terminObjRef.meetingMember.length>0){
+                    this._liste.setAttribute("visibility","visible");; //["visible", true]
+                    this._liste.setAttribute('height', 50);
+                    this._liste._innerlist.clearContent();
+                
+                    for (var i=0;i<this.terminObjRef.meetingMember.length;i++) {
+                        var meetingMembers = this.terminObjRef.meetingMember;
+                        if ($debug) Debug.write("meetingMembers",meetingMembers[i]);
+                        var id = meetingMembers[i].userid.user_id;
+                        var vorname = meetingMembers[i].firstname;
+                        var nachname = meetingMembers[i].lastname;
+                        //var email = meetingMembers[i].adresses.email;
+                        var email = meetingMembers[i].email;
+                        if ($debug) Debug.write("id",id);
+                        //if ($debug) Debug.write("Vorname: ",vorname);
+                        new lz.searchContactInCalendar(this._liste._innerlist, {
+                                        meetingMemberId:meetingMembers[i].meetingMemberId,
+                                        refObj:parent,
+                                        userId: id,
+                                        vorname:vorname,                                    
+                                        nachname:nachname,
+                                        email:email
+                                    });
+                    }
+                }
+            ]]>
+        </method> 
+            
+            <netRemoteCallHib name="getAppointmentCategoryList" funcname="appointmentcategoryservice.getAppointmentCategoryList" 
+                              remotecontext="$once{ canvas.thishib }" >
+                <netparam><method name="getValue">return canvas.sessionId;</method></netparam>
+                <handler name="ondata" args="valueList">
+                    <![CDATA[
+                    if ($debug) Debug.write("valueList: ", valueList);
+                    if ($debug) Debug.write("userId: ", canvas.thishib.UserID);
+                    
+                    if (valueList.length == 0){
+                        //if ($debug) Debug.write("if valueList: ", valueList);
+                    //  new lz.userNotFound(parent,{
+                        //  x:parent.width/2-this.width/2,
+                            //y:parent.height-this.height-100});
+                        
+                        //new lz.alert(parent); 
+                    
+                    }
+                    else{
+                        //new combobox(parent.parent{name:_kategory,x:20})
+                        for (var i=0;i<valueList.length;i++) {
+                            //if ($debug) Debug.write("UserList",valueList[i]);
+                            var id = valueList[i].categoryId;
+                            var titel = valueList[i].name;              
+                            //if ($debug) Debug.write("id",id);
+                            //if ($debug) Debug.write("Vorname: ",titel);                   
+                            new lz.textlistitem(parent._kategoryedit, {
+                                            value : id,                                                                                     
+                                            text:titel
+                                
+                                    });     
+                            parent._kategoryedit.selectItemAt(0);
+                        }
+                    }
+                    ]]>
+                </handler>
+            </netRemoteCallHib> 
+            
+            <netRemoteCallHib name="getAppointmentReminderTypList" funcname="appointmentreminderservice.getAppointmentReminderTypList" 
+                              remotecontext="$once{ canvas.thishib }" >
+                <netparam><method name="getValue">return canvas.sessionId;</method></netparam>
+                <handler name="ondata" args="valueList">
+                    <![CDATA[
+                    if ($debug) Debug.write("getAppointmentReminderTypList-valueList: ", valueList);
+                    if ($debug) Debug.write("userId: ", canvas.thishib.UserID);
+                    
+                    if (valueList.length == 0){
+                        //if ($debug) Debug.write("if valueList: ", valueList);
+                    //  new lz.userNotFound(parent,{
+                        //  x:parent.width/2-this.width/2,
+                            //y:parent.height-this.height-100});
+                        
+                        //new lz.alert(parent); 
+                    
+                    }
+                    else{
+                        //new combobox(parent.parent{name:_kategory,x:20})
+                        for (var i=0;i<valueList.length;i++) {
+                            //if ($debug) Debug.write("UserList",valueList[i]);
+                            var id = valueList[i].typId;
+                            var titel = valueList[i].name;              
+                            if ($debug) Debug.write("typID",id);
+                            if ($debug) Debug.write("titel: ",titel);                   
+                            new lz.textlistitem(parent._erinnerungedit, {
+                                            value : id,                                                                                     
+                                            text:titel
+                                
+                                    });     
+                            parent._erinnerungedit.selectItemAt(2);
+                        }
+                    }
+                    ]]>
+                </handler>
+            </netRemoteCallHib>
 						
 			<!--<text name="_kategory" y="10" x="35">Kategorie: </text>-->
-			<labelText name="_kategory" y="22" x="4" labelid="566" width="80"/>
+			<labelText name="_kategory" y="22" x="2" labelid="566" width="80"/>
 		 	<resetCombobox name="_kategoryedit" x="120" 
 		 			  width="220" editable="false" shownitems="5" y="22">
 				<handler name="onvalue" args="v">						
@@ -115,7 +297,7 @@
 		 	<!--textitmes-->
 		 	</resetCombobox> 
 		 	
-		 	<labelText name="_location" labelid="569" width="120" y="112" x="4"/>
+		 	<labelText name="_location" labelid="569" width="120" y="112" x="2"/>
 	    	
 	    	<edittext name="_locationedit" x="120" 
 	    		  y="112" width="220"></edittext>
@@ -124,24 +306,24 @@
 		    	<!--	<text x="${parent._beginn.width + parent._beginn.x + 5}">Datum:</text>
 		    		<text x="${parent._bdatum.width + parent._bdatum.x + 5}">Uhrzeit:</text>-->
 		      <!-- 	<text name="_beginn" y="20">Beginn:</text> -->
-		        <labelText name="_beginn" labelid="570" x="4" width="50" />
+		        <labelText name="_beginn" labelid="570" x="2" width="50" />
 		        	<dateField name="_bdatum" y="0" x="120" 
 		        			   width="100" text="" setDefaultToday="true"/>
 		        	<customEdittext name="_bzeit" x="224" 
 		        					y="0" width="50" regexpType="time" text="08:00" />
 		       <!--	<text y="${parent.edatum.y}">Ende:</text> -->
-		        <labelText labelid="571" y="30" x="4" width="50"/>
+		        <labelText labelid="571" y="30" x="2" width="50"/>
     	        	<dateField name="edatum" y="30" 
     	        			   x="120" width="100" text="" setDefaultToday="true"/> 	            	
     	        	<customEdittext name="ezeit" x="224" text="17:00"
 	        					y="30" width="50" regexpType="time" />  	
 		    </view> 
 		    
-		    <labelText name="_titel" labelid="572" y="202" x="4" width="50"/>
+		    <labelText name="_titel" labelid="572" y="202" x="2" width="50"/>
 	    	<edittext name="_titeledit" x="120" 
 	    		  y="202" width="220">New title</edittext>
 	    		  
-	    	<labelText name="_roomtype" y="232" x="4" labelid="619" width="80"/>
+	    	<labelText name="_roomtype" y="232" x="2" labelid="619" width="80"/>
 		 	<resetCombobox name="_roomtype_edit" x="120" 
 		 			  width="220" editable="false" shownitems="2" y="232">
 				<handler name="onvalue" args="v">						
@@ -339,182 +521,8 @@
 			    	</handler>
 			    	<view resource="icon_small_termin" x="5" y="${parent.height / 6}" />
 			    </button>-->
-			    </view>
-			    
-	    		<method name="defaulttermindetails">
-	
-				this.terminObjRef = null;
 				
-				this._isDaily = false;
-				this._isMonthly = false;
-				this._isWeekly = false;
-				this._isYearly = false;
-				this._roomtype_edit.selectItemAt(0);
-				this._kategoryedit.selectItemAt(0); 
-				this._erinnerungedit.selectItemAt(2); 
-				this._erinnerungedit.setAttribute('enabled', 'true');
-				this._locationedit.setAttribute('text', "");
-				this._repetitionselect.selectItemAt(1);
-				//this._guestedit.setAttribute('text',"");
-				this._titeledit.setAttribute('text', "Neuer Termin");
-				this._komentar.setAttribute('text', "");
-				this._date._bdatum.setAttribute('text', parseDateToString(new Date()));
-				this._date._bzeit.setAttribute('text', "08:00");
-				this._date.edatum.setAttribute('text', parseDateToString(new Date()));
-				this._date.ezeit.setAttribute('text', "17:00");
-				
-				this._liste._innerlist.clearContent();
-				this._liste["visible", false];
-				this._liste._vscrol["visible", false];
-				this._liste.setAttribute('height', 0);
-				</method> 
-				
-				<method name="showtermindetails">
-					<![CDATA[
-				if ($debug) Debug.write("terminObjRef:", this.terminObjRef);
-				this._kategoryedit.selectItem(this.terminObjRef.appointmentCategory.categoryId); //setAttribute('value',this.terminObjRef.kategorie.id);
-				this._erinnerungedit.selectItem(this.terminObjRef.remind.typId);
-				this._erinnerungedit.setAttribute('enabled', 'false');
-				this._roomtype_edit.selectItem(this.terminObjRef.room.roomtype.roomtypes_id);
-				
-				if(this.terminObjRef.isDaily){
-					this._repetitionselect.selectItemAt(1);
-				}else if(this.terminObjRef.isWeekly){
-					this._repetitionselect.selectItemAt(3);
-				}else if(this.terminObjRef.isMonthly){
-					this._repetitionselect.selectItemAt(2);
-				}else if(this.terminObjRef.isYearly){
-					this._repetitionselect.selectItemAt(4);
-				}else{
-					this._repetitionselect.selectItemAt(0);
-				}
-				
-				this._locationedit.setAttribute('text', this.terminObjRef.appointmentLocation);
-				//if(this.terminObjRef.guest != null)
-					//{
-					//this._guestedit.setAttribute('text', this.terminObjRef.guest.vorname+" "+ this.terminObjRef.guest.nachname);
-					//}
-				//else{
-					//this._guestedit.setAttribute('text',"");
-				//}	
-				this._titeledit.setAttribute('text', this.terminObjRef.appointmentName);
-				this._komentar.setAttribute('text', this.terminObjRef.appointmentDescription);
-				this._date._bdatum.setAttribute('text', parseDateToString(this.terminObjRef.appointmentStarttime));
-				this._date._bzeit.setAttribute('text', parseDateToStringTimeOnly(this.terminObjRef.appointmentStarttime));
-				this._date.edatum.setAttribute('text', parseDateToString(this.terminObjRef.appointmentEndtime));
-				this._date.ezeit.setAttribute('text', parseDateToStringTimeOnly(this.terminObjRef.appointmentEndtime));
-				
-				//if ($debug) Debug.write("remind typId: ",this.terminObjRef.remind.typId);
-				//this._erinnerungedit.selectItemAt(this.terminObjRef.remind.typId);
-				
-				if(this.terminObjRef.meetingMember.length>0){
-					this._liste.setAttribute("visibility","visible");; //["visible", true]
-					this._liste.setAttribute('height', 50);
-					this._liste._innerlist.clearContent();
-				
-					for (var i=0;i<this.terminObjRef.meetingMember.length;i++) {
-								var meetingMembers = this.terminObjRef.meetingMember;
-								
-								if ($debug) Debug.write("meetingMembers",meetingMembers[i]);
-								
-								
-								var id = meetingMembers[i].userid.user_id;
-								var vorname = meetingMembers[i].firstname;
-								var nachname = meetingMembers[i].lastname;
-								//var email = meetingMembers[i].adresses.email;
-								var email = meetingMembers[i].email;
-														
-								if ($debug) Debug.write("id",id);
-								//if ($debug) Debug.write("Vorname: ",vorname);
-								
-									
-									new lz.searchContactInCalendar(this._liste._innerlist, {
-												meetingMemberId:meetingMembers[i].meetingMemberId,
-												refObj:parent,
-						    					userId: id,
-						    					vorname:vorname,				    				
-						    					nachname:nachname,
-						    					email:email
-						    					});
-					}
-					}
-						]]>
-				</method> 
-				
-				
-				
-				<netRemoteCallHib name="getAppointmentCategoryList" funcname="appointmentcategoryservice.getAppointmentCategoryList" 
-							  remotecontext="$once{ canvas.thishib }" >
-		    	    
-				<netparam><method name="getValue">return canvas.sessionId;</method></netparam>
-				<handler name="ondata" args="valueList">
-		    		<![CDATA[
-		    		if ($debug) Debug.write("valueList: ", valueList);
-		    		if ($debug) Debug.write("userId: ", canvas.thishib.UserID);
-		    		
-		    		if (valueList.length == 0){
-		    			//if ($debug) Debug.write("if valueList: ", valueList);
-		    		//	new lz.userNotFound(parent,{
-			     		//	x:parent.width/2-this.width/2,
-			     			//y:parent.height-this.height-100});
-			     		
-			     		//new lz.alert(parent);	
-		    		
-		    		}
-		    		else{
-		    			//new combobox(parent.parent{name:_kategory,x:20})
-					    for (var i=0;i<valueList.length;i++) {
-							//if ($debug) Debug.write("UserList",valueList[i]);
-							var id = valueList[i].categoryId;
-							var titel = valueList[i].name;				
-							if ($debug) Debug.write("id",id);
-							if ($debug) Debug.write("Vorname: ",titel);					
-							new lz.textlistitem(parent._termindetails._kategoryedit, {
-					    					value : id,			    							    						    			
-					    					text:titel
-								
-				    				});		
-				    	    parent._termindetails._kategoryedit.selectItemAt(0);
-					}}
-		    		]]>
-		    	</handler>
-		    </netRemoteCallHib>	
-		    
-		    <netRemoteCallHib name="getAppointmentReminderTypList" funcname="appointmentreminderservice.getAppointmentReminderTypList" 
-							  remotecontext="$once{ canvas.thishib }" >
-		    	    
-				<netparam><method name="getValue">return canvas.sessionId;</method></netparam>
-				
-		    	<handler name="ondata" args="valueList">
-		    		<![CDATA[
-		    		if ($debug) Debug.write("getAppointmentReminderTypList-valueList: ", valueList);
-		    		
-		    		
-		    		if (valueList.length == 0){
-		    			if ($debug) Debug.write("empty reminderlist");
-		    		
-		    		}
-		    		else{
-		    			//new combobox(parent.parent{name:_kategory,x:20})
-					    for (var i=0;i<valueList.length;i++) {
-							//if ($debug) Debug.write("UserList",valueList[i]);
-							var id = valueList[i].typId;
-							var titel = valueList[i].name;				
-							if ($debug) Debug.write("typID",id);
-							if ($debug) Debug.write("titel: ",titel);					
-							new lz.textlistitem(parent._termindetails._erinnerungedit, {
-					    					value : id,			    							    						    			
-					    					text:titel
-								
-				    				});		
-				    	    parent._termindetails._erinnerungedit.selectItemAt(2);
-					}}
-		    		]]>
-		    	</handler>
-		    </netRemoteCallHib>
-				
-				
-				<netRemoteCallHib name="saveAppointment" funcname="calendarservice.saveAppointment" 
+			<netRemoteCallHib name="saveAppointment" funcname="calendarservice.saveAppointment" 
 							  remotecontext="$once{ canvas.thishib }" >     
 				<netparam><method name="getValue">return canvas.sessionId; </method></netparam>
 				<netparam><method name="getValue">return parent.parent._titeledit['text'];</method></netparam>	
@@ -533,43 +541,31 @@
 				
 		    	<handler name="ondata" args="value">
 		    		<![CDATA[
-		    		
-		    		parent.addMeetingMember.appointmentId = value;	
-		    		//parent.getUserAlleTermineByRange.doCall();
-		    		
-		    			
-		    		
+    		    		parent.addMeetingMember.appointmentId = value;	
+    		    		//parent.getUserAlleTermineByRange.doCall();
+			    		
 			    		if ($debug) Debug.write("addUserTermine: ",value);
 			    		
-								for (var i=0; i<parent._liste._innerlist.subviews.length; i++) {
-								 var contact = parent._liste._innerlist.subviews[i];
-								 //if ($debug) Debug.write("contact: ",contact);
-								  //if ($debug) Debug.write("userId: ",contact.userId);
-								  //if ($debug) Debug.write("vorname: ",contact.vorname);
-								  //if ($debug) Debug.write("nachname: ",contact.nachname);
-								  //if ($debug) Debug.write("email: ",contact.email);
-								parent.addMeetingMember.contact = contact;
-								parent.addMeetingMember.doCall();
-								}
+						for (var i=0; i<parent._liste._innerlist.subviews.length; i++) {
+						    var contact = parent._liste._innerlist.subviews[i];
+						  //if ($debug) Debug.write("contact: ",contact);
+						  //if ($debug) Debug.write("userId: ",contact.userId);
+						  //if ($debug) Debug.write("vorname: ",contact.vorname);
+						  //if ($debug) Debug.write("nachname: ",contact.nachname);
+						  //if ($debug) Debug.write("email: ",contact.email);
+    						parent.addMeetingMember.contact = contact;
+    						parent.addMeetingMember.doCall();
+						}
 			     			
-								parent.parent.getAppointmentByRange.doCall()
-							
-								if(parent.parent._tabslider._week.getAttribute('selected') == true){
-				 					//parent._tabslider._week._weekView._monday._tagesansicht._list._outlist.clearContent();
-				 					parent.parent._tabslider._week._weekView.initWeekByDate(parent.parent._startDate); // new Date() _startDate selecteddate
-				 					parent.parent._tabslider._week._weekView.getAppointmentByRangeWeek.doCall();
-	 							}
-							
-								else if(parent.parent._tabslider._month.getAttribute('selected') == true){
-				 				
-				 					parent.parent._tabslider._month._monthview.init();
-				 				
-	 							}
-
-						
-							
-							
-							
+    					parent.parent.getAppointmentByRange.doCall()
+    				
+    					if(parent.parent._tabslider._week.getAttribute('selected') == true){
+    	 					//parent._tabslider._week._weekView._monday._tagesansicht._list._outlist.clearContent();
+    	 					parent.parent._tabslider._week._weekView.initWeekByDate(parent.parent._startDate); // new Date() _startDate selecteddate
+    	 					parent.parent._tabslider._week._weekView.getAppointmentByRangeWeek.doCall();
+    					} else if(parent.parent._tabslider._month.getAttribute('selected') == true){
+    	 					parent.parent._tabslider._month._monthview.init();
+    					}
 
 			    		parent.defaulttermindetails();
 		    		 ]]>
@@ -593,17 +589,14 @@
 				<netparam><method name="getValue">return parent.appointmentId;</method></netparam>
 				<netparam><method name="getValue">return parent.contact.userId;</method></netparam>
 				<netparam><method name="getValue">return parent.contact.email;</method></netparam>
-				<netparam><method name="getValue">return parent.parent.parent.baseUrl;</method></netparam>
+				<netparam><method name="getValue">return parent.parent.baseUrl;</method></netparam>
 				
 		    	<handler name="ondata" args="value">
 		    		<![CDATA[
-		    		//parent._termindetails._liste._innerlist.clearContent();
-		    		//parent._termindetails._liste["viseble", false];
-		    		//parent._termindetails._liste._vscrol["viseble", false];
-		    		
-		    		
+    		    		//parent._termindetails._liste._innerlist.clearContent();
+    		    		//parent._termindetails._liste["viseble", false];
+    		    		//parent._termindetails._liste._vscrol["viseble", false];
 			    		if ($debug) Debug.write("addMeetingMember: ",value);
-			    		
 			    		parent.parent.getAppointmentByRange.doCall()
 		    		 ]]>
 		    	</handler>
@@ -611,18 +604,13 @@
 		    
 		    <netRemoteCallHib name="deleteMeetingMember" funcname="meetingmemberservice.deleteMeetingMember" 
 							  remotecontext="$once{ canvas.thishib }" >  
-				
 				<attribute name="contact" value="null" />
 				<attribute name="appointmentId" value="null" />
-							     	
 				<netparam><method name="getValue">return canvas.sessionId; </method></netparam>
 				<netparam><method name="getValue">return canvas.meetingMemberId; </method></netparam>
-				
 		    	<handler name="ondata" args="value">
 		    		<![CDATA[
-		    		
 			    		if ($debug) Debug.write("deleteMeetingMember: ",value);
-			    		
 			    		//parent.parent.getAppointmentByRange.doCall()
 		    		 ]]>
 		    	</handler>
@@ -630,28 +618,28 @@
 		    
 		    <method name="prepareUpdateCall">
 		    	<![CDATA[
-		    	var MeetingMember = new Array();
-		    	
-		    	for(var i=0;i<this._liste._innerlist.subviews.length;i++){
-		    		MeetingMember[i] = new Object();
-		    		MeetingMember[i] ["meetingMemberId"]= this._liste._innerlist.subviews[i].meetingMemberId;
-			    	MeetingMember[i] ["userId"]=this._liste._innerlist.subviews[i].userId;
-			    	MeetingMember[i] ["firstname"]=this._liste._innerlist.subviews[i].vorname;
-			    	MeetingMember[i] ["lastname"]=this._liste._innerlist.subviews[i].nachname;
-			    	MeetingMember[i] ["email"]=this._liste._innerlist.subviews[i].email;   	
-		    	}
-		    	
-		    	if ($debug) Debug.write("MeetingMember+++++: ",MeetingMember);
-		    	this.updateAppointment.arrayMeetingMember = MeetingMember;
-		    	this.updateAppointment.doCall();
-		    	 ]]>
+    		    	var MeetingMember = new Array();
+    		    	
+    		    	for(var i=0;i<this._liste._innerlist.subviews.length;i++){
+    		    		MeetingMember[i] = new Object();
+    		    		MeetingMember[i] ["meetingMemberId"]= this._liste._innerlist.subviews[i].meetingMemberId;
+    			    	MeetingMember[i] ["userId"]=this._liste._innerlist.subviews[i].userId;
+    			    	MeetingMember[i] ["firstname"]=this._liste._innerlist.subviews[i].vorname;
+    			    	MeetingMember[i] ["lastname"]=this._liste._innerlist.subviews[i].nachname;
+    			    	MeetingMember[i] ["email"]=this._liste._innerlist.subviews[i].email;   	
+    		    	}
+    		    	
+    		    	if ($debug) Debug.write("MeetingMember+++++: ",MeetingMember);
+    		    	this.updateAppointment.arrayMeetingMember = MeetingMember;
+    		    	this.updateAppointment.doCall();
+		        ]]>
 		    </method>
 		    
 		 <!--   Long updateAppointment(String SID,Long appointmentId ,String appointmentName, Long userId, String appointmentLocation,String appointmentDescription, 
 			Date appointmentstart, Date appointmentend, 
 			Boolean isDaily, Boolean isWeekly, Boolean isMonthly, Boolean isYearly, Long categoryId, Long remind) -->
 		    
-		    	<netRemoteCallHib name="updateAppointment" funcname="calendarservice.updateAppointment" 
+	    	<netRemoteCallHib name="updateAppointment" funcname="calendarservice.updateAppointment" 
 							  remotecontext="$once{ canvas.thishib }" >  
 				
 				<attribute name="arrayMeetingMember" value="null"/>	
@@ -679,36 +667,36 @@
 		    			parent.parent._tabslider._daytab._dayview._tagesansicht._list._outlist.clearContent();
 		    			parent.parent.getAppointmentByRange.doCall();
 		    			
-		    		//for (var i=0; i<parent._liste._innerlist.subviews.length; i++) {
-								//var contact = parent._liste._innerlist.subviews[i];
-								//if ($debug) Debug.write("terminObjRef: ",parent.terminObjRef);
-								//if ($debug) Debug.write("contact+++++: ",contact);
-								
-								//if(parent.terminObjRef.meetingMember.equals(contact)){
-								//if ($debug) Debug.write("contains : ",contact);
-								
-							//	}
-								
-								//for(var j=0;j<parent.terminObjRef.meetingMember.length;j++){
-								
-								//	if (parent.terminObjRef.meetingMember[j].userid.user_id==contact.userId) 
-										// 	{
-										 	//	if ($debug) Debug.write("contact if: ",contact);
-										 		
-										 //	}else{
-											//	 if ($debug) Debug.write("contact+++++: ",contact);
-											//	 if ($debug) Debug.write("user_id else: ",parent.terminObjRef.meetingMember[j].userid.user_id);
-												
-												 //if ($debug) Debug.write("userId: ",contact.userId);
-												  //if ($debug) Debug.write("vorname: ",contact.vorname);
-												  //if ($debug) Debug.write("nachname: ",contact.nachname);
-												  //if ($debug) Debug.write("email: ",contact.email);
-												//parent.addMeetingMember.appointmentId = parent.terminObjRef.appointmentId;
-												//parent.addMeetingMember.contact = contact;
-												//parent.addMeetingMember.doCall();
-									 //	}
-								 	
-								//}
+	    		        //for (var i=0; i<parent._liste._innerlist.subviews.length; i++) {
+							//var contact = parent._liste._innerlist.subviews[i];
+							//if ($debug) Debug.write("terminObjRef: ",parent.terminObjRef);
+							//if ($debug) Debug.write("contact+++++: ",contact);
+							
+							//if(parent.terminObjRef.meetingMember.equals(contact)){
+							//if ($debug) Debug.write("contains : ",contact);
+							
+						//	}
+							
+						//for(var j=0;j<parent.terminObjRef.meetingMember.length;j++){
+						
+						//	if (parent.terminObjRef.meetingMember[j].userid.user_id==contact.userId) 
+								// 	{
+								 	//	if ($debug) Debug.write("contact if: ",contact);
+								 		
+								 //	}else{
+									//	 if ($debug) Debug.write("contact+++++: ",contact);
+									//	 if ($debug) Debug.write("user_id else: ",parent.terminObjRef.meetingMember[j].userid.user_id);
+										
+										 //if ($debug) Debug.write("userId: ",contact.userId);
+										  //if ($debug) Debug.write("vorname: ",contact.vorname);
+										  //if ($debug) Debug.write("nachname: ",contact.nachname);
+										  //if ($debug) Debug.write("email: ",contact.email);
+										//parent.addMeetingMember.appointmentId = parent.terminObjRef.appointmentId;
+										//parent.addMeetingMember.contact = contact;
+										//parent.addMeetingMember.doCall();
+							 //	}
+						 	
+						//}
 				    	if ($debug) Debug.write("SessionID: ",canvas.sessionId);
 						
 						if ($debug) Debug.write("AppointMentID: ", parent.terminObjRef.appointmentId);
@@ -729,7 +717,6 @@
 		    				if ($debug) Debug.write("member:",member);   	
 		    			}
 					    
-					    
 					    if ($debug) Debug.write("updateUserTermin: ",value);
 			    		
 			    		parent.defaulttermindetails();
@@ -737,6 +724,7 @@
 		    	</handler>
 		    </netRemoteCallHib> 
 		    
+		    <!--
 		    <netRemoteCallHib name="deleteAppointment" funcname="calendarservice.deleteAppointment" 
 							  remotecontext="$once{ canvas.thishib }" >     
 				<attribute name ="terminObj" value="null"/>
@@ -747,21 +735,18 @@
 		    	<handler name="ondata" args="value">
 		    		<![CDATA[
 		    			//parent._tagesansicht._list._outlist.clearContent();
-		    			
 			    		if ($debug) Debug.write("deleteAppointment: ",value);
 			    		//if ($debug) Debug.write("Appointment_id: ",this.terminObj.appointmentId);
 			    		//if ($debug) Debug.write("terminObj: ",this.terminObj);
 			    		//parent.updateUserMessagesTerminIdToNull.doCall();
-			    		if(this.terminareaObjRef != null)
-			    			{
+			    		if(this.terminareaObjRef != null) {
 			    			this.terminareaObjRef.destroyThis();
-			    			}
-			    		
+		    			}
 			    		parent.parent.getAppointmentByRange.doCall();
-			    		
 		    		 ]]>
 		    	</handler>
 			</netRemoteCallHib>
+			 -->
 	</class>
 	
 </library>

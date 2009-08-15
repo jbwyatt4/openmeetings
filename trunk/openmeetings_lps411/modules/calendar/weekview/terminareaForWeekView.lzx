@@ -9,12 +9,15 @@
 	
 	<handler name="onclick">
 		if ($debug) Debug.write("this ",this);
+		var tRootCalendarView = parent.parent.parent.parent.parent.parent.parent; 
+                    
+        tRootCalendarView.initDetails();
 		//if ($debug) Debug.write("this termin: ",this.terminObj);
-		parent.parent.parent.parent.parent.parent.parent._termindetails.terminObjRef = this.terminObj;
-		if ($debug) Debug.write("terminObjRef ",parent.parent.parent.parent.parent.parent.parent._termindetails.terminObjRef);
+		tRootCalendarView._termindetails.terminObjRef = this.terminObj;
+		if ($debug) Debug.write("terminObjRef ",tRootCalendarView._termindetails.terminObjRef);
 		//if ($debug) Debug.write("terminObjRef: ",parent.parent.parent.parent.parent.parent.parent.parent.terminObjRef);
-		parent.parent.parent.parent.parent.parent.parent._termindetails.showtermindetails();
-		parent.parent.parent.parent.parent.parent.parent._termindetails.setAttribute("visibility","visible");;
+		tRootCalendarView._termindetails.showtermindetails();
+		tRootCalendarView._termindetails.setAttribute("visibility","visible");;
 		//parent.parent.parent.parent._terminButton.onclick.sendEvent();
 	</handler>
 	<handler name="oninit">

@@ -1,25 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!DOCTYPE canvas PUBLIC "LZX" "http://www.laszlosystems.com/lps-3.3/tools/lzx.dtd">
+
 <library>
-	
-	<class name="calenderlistitem" extends="textlistitem">
-		<attribute name ="terminObjRef" value="null"/>
-				
-		<handler name="onclick">
-			
-			this.terminObjRef.defaulttermindetails({terminObjRef:this});
-			this.terminObjRef._termin._date._bzeit.setAttribute('text',this.getAttribute('text'));
-			//this.terminObjRef._terminButton.onclick.sendEvent();
-		
-		</handler>
-	
-	</class>
-	
 	
 	<class name="calendar" extends="view" > 
 		<attribute name ="terminObjRef" value="null"/>
 		<attribute name ="_startDate" value="null"/>
-		<attribute name ="_endDate" value="null"/>	
+		<attribute name ="_endDate" value="null"/>
+		<attribute name ="selecteddate" value="null"/>	
 		
+		<!--
 		<simplelayout axis="x" spacing="2"/>
+		 -->
 		
 		<handler name="oninit">	
 			var now = new Date();
@@ -31,25 +23,62 @@
 			this._startDate = new Date(now.getFullYear(),now.getMonth(),now.getDate() ,0,0,0);
 			this._endDate = new Date(now.getFullYear(),now.getMonth(),now.getDate()+1,0,0,0);
 			
-			this.setCalendarItem(24);
+			//this.setCalendarItem(24);
 			this.getAppointmentCategoryList.doCall();
 			this.getAppointmentReminderTypList.doCall();
-			this.getAppointmentByRange.doCall();
-			this.getAppointmentByRangeWeek.doCall();
+			
+			this.getAppointmentByRange.doCall();		
 		</handler>
 		
 		<method name="setCalendarItem" args="stunden">
 			<![CDATA[
 			for(var x=0;x<stunden;x++){		
-				if (x < 10) { 
+				if (x < 10)
+					{ 
 					var x = "0" + x.toString();					
-				}				
-				new lz.calenderlistitem(this._tagesansicht._list._innerlist,{text:x + ":00", width:parent.width , terminObjRef:parent});
+					}				
+				new lz.calenderlistitem(this._tagesansicht._list._innerlist,{
+				            text:x + ":00", width:parent.width , terminObjRef:parent});
 			}
 			]]>
 		</method>
 		
+		<dateSelector name="_calendar" y="10">
+ 			<handler name="ondoubleselect">
+	 			//var selectDate = new Date();
+	 			//if ($debug) Debug.write("##### dateselect ", this.selecteddate);
+	 			parent._startDate = this.selecteddate;
+	 			//Date(now.getFullYear(),now.getMonth(),now.getDate()+1,0,0,0);
+	 			parent._endDate  = new Date(this.selecteddate.getFullYear(), this.selecteddate.getMonth(), this.selecteddate.getDate()+1,0,0,0);
+	 			//if ($debug) Debug.write("startDateValue",parent._startDate);
+	 			parent._tabslider._daytab._dayview._tagesansicht._list._outlist.clearContent();
+	 			
+	 			//weekcontroll
+	 			if(parent._tabslider._week['selected'] == true){
+	 				//parent._tabslider._week._weekView._monday._tagesansicht._list._outlist.clearContent();
+	 				parent._tabslider._week._weekView.initWeekByDate(this.selecteddate);
+	 				parent._tabslider._week._weekView.getAppointmentByRangeWeek.doCall();
+	 			}else if(parent._tabslider._month['selected'] == true){
+	 				parent._tabslider._month._monthView.showingdate = this.selecteddate;
+	 				//parent._tabslider._month._monthView.initMonthByDate(this.selecteddate);
+	 				parent._tabslider._month._monthview.init();
+	 				//parent._tabslider._month._monthView.getAppointmentByRangeMonth.doCall();
+	 			}else {
+		 			//parent._tagesansicht._list._innerlist.clearContent();
+		 			//parent._termin.setCalendarItem(24);
+		 			parent.getAppointmentByRange.doCall();
+	 			}
+ 			</handler> 
+ 		</dateSelector> 
 		
+		
+	<calendarTabs name="_tabslider" x="180" />
+	
+	<!--
+	<termindetails name="_termindetails" />
+	 -->
+	
+	
 	<!--	<view> 
 			<simplelayout axis="y" spacing="2"/>
 			
@@ -65,47 +94,9 @@
 			<simpleLabelButton labelid="577" width="100"> </simpleLabelButton>
 		</view> -->
 		
-		<tabslider  x="10" y="10" width="560" height="500" spacing="2" slideduration="300" name="_tabslider">
-		    	    
-		    <tabelement text="day">
-		    	
-		    </tabelement>
-		    
-		    <tabelement text="week" name="_week">
-		    	<view  name="_weekView">
-			    	<simplelayout axis="x" spacing="2"/>
-			    		
-			    	<calendarWeekView name="_monday" height="350"></calendarWeekView>
-			    	<calendarWeekView name="_tuesday" height="350"></calendarWeekView>
-			    	<calendarWeekView name="_wednesday" height="350"></calendarWeekView>
-			    	<calendarWeekView name="_thursday" height="350"></calendarWeekView>
-			    	<calendarWeekView name="_friday" height="350"></calendarWeekView>
-			    	<calendarWeekView name="_saturday" height="350"></calendarWeekView>
-			    	<calendarWeekView name="_sunday" height="350"></calendarWeekView>	
-		    	</view>
-		    	<hscrollbar />
-		    </tabelement>
-		    
-		    <tabelement text="month">
-		    	<view name="_monthView">
-			    	<simplelayout axis="x" spacing="2"/>
-			    	<calendarMonthView height="200"></calendarMonthView>
-			    	<calendarMonthView height="200"></calendarMonthView>
-			    	<calendarMonthView height="200"></calendarMonthView>
-		    	</view>	
-		    	<hscrollbar />	
-		    </tabelement>
-		</tabslider>
-		
 	<!--	<calendarMonthView height="200"></calendarMonthView>-->
-		<view name="_tagesansicht"  bgcolor="silver" clip="true" height="${ parent.height }" width="460">
- 			
- 		<!--	<method name="clearContent">
-				for (var eg in this.subviews) {
-					this.subviews[eg].destroy();
-				}
-			</method> -->
-			 
+	<!--	<view name="_tagesansicht"  bgcolor="silver" clip="true" height="${ parent.height }" width="460">
+ 			 
 	 		<view name="_list">
 		 		<view name="_innerlist" clip="true">
 		 			<simplelayout axis="y" spacing="2"/>	
@@ -126,8 +117,8 @@
 	 		<hscrollbar />
 	 		<vscrollbar/>
  		</view>
-		
-		<view name="_termindetails" bgcolor="blue" width="400">
+		-->
+	<!--	<view name="_termindetails" bgcolor="blue" width="400" x="10" visible="false">
 			<attribute name="_kategoryatr" value="0" type="number" />
 			<attribute name="_erinnerungatr" value="null"  />
 			
@@ -136,7 +127,7 @@
 			<attribute name="_isMonthly" value="false" type="boolean" />
 			<attribute name="_isYearly" value="false" type="boolean" />    
 				
-			<!--<text name="_kategory" y="10" x="35">Kategorie: </text>-->
+			
 			<labelText name="_kategory" y="10" x="35" labelid="566" width="80"/>
 		 	<resetCombobox name="_kategoryedit" x="${parent._kategory.width + parent._kategory.x + 30}" 
 		 			  width="220" editable="false" shownitems="5" y="${parent._kategory.y}">
@@ -145,13 +136,10 @@
 					if ($debug) Debug.write("_kategoryatr: ",parent._kategoryatr);
 				</handler>	
 				
-		 	<!--textitmes-->
+		 	
 		 	</resetCombobox> 
 		 	
-		 	<!--
-		 	<text name="_erinnerung" y="${parent._kategory.height + parent._kategory.y + 10}" 
-		 		x="35">Erinnernung: </text>
-		 	 -->
+		 	
 		 	
 		 	<labelText name="_erinnerung" y="${parent._kategory.height + parent._kategory.y + 10}" 
 		 			   x="35" labelid="565" width="120" />
@@ -159,6 +147,7 @@
 		 	<resetCombobox name="_erinnerungedit" x="${parent._kategory.width + parent._kategory.x +30}" 
 		 			  width="220" editable="false" shownitems="5" y="${parent._erinnerung.y}">
 				<handler name="onvalue" args="v">						
+					if ($debug) Debug.write("_erinnerungatr: ",parent._erinnerungatr);
 					if(this.getValue == 0 )
 						{
 						parent._erinnerungatr = null;
@@ -168,29 +157,15 @@
 					if ($debug) Debug.write("_erinnerungatr: ",parent._erinnerungatr);
 						}
 				</handler> 
-				
-			<!--	<textlistitem text="keine" value="0"/> -->
-				
-				<labelText name="_none"  labelid="568" value="0"/>
-			<!--	<textlistitem text="5 min. vorher" value="1"/>
-             	<textlistitem text="1 Stunde vorher" value="2"/>
-              	<textlistitem text="1 Tag vorher" value="3"/> 
-              	<textlistitem text="1 Woche vorher" value="4"/>
-              	<textlistitem text="1 Monat vorher" value="5"/>-->
-		 	<!--textitmes-->
+				<handler name="oninit">
+					this.addItem(canvas.getLabelName(568),"0");
+					this.selectItem("2");				
+				</handler>
 		 	</resetCombobox> 
-		 	
-		 	<!--<text name="_repetition" y="${parent._kategory.height + parent._kategory.y + 40}" 
-		 			   x="35" text="Wiederholung:" width="120" />-->
 		 		
 		 	<labelText name="_repetition" y="${parent._kategory.height + parent._kategory.y + 40}" x="35" labelid="567" width="80"/>
 		 	<resetCombobox name="_repetitionselect" x="${parent._kategory.width + parent._kategory.x +30}" 
 		 			  width="220" editable="false" shownitems="5" y="${parent._repetition.y}">
-			<!--	<handler name="onvalue" args="v">						
-					parent._erinnerung = Number(this.getValue());												
-					if ($debug) Debug.write("_erinnerung: ",parent._erinnerung);
-				</handler>	-->
-				
 				<handler name="onselect">
                         var repitechoice = this.getText();
                         //canvas[colorchoice+'colors'].setAttribute("isdefault", true);
@@ -224,7 +199,7 @@
              	<textlistitem text="Wochentlich" value="2"/>
               	<textlistitem text="Monatlich" value="3"/> 
               	<textlistitem text="Jährlich" value="4"/>            
-		 	<!--textitmes-->
+		 	
 		 	</resetCombobox> 
 		 	
 		 	<labelText name="_location" labelid="569" width="120" y="${parent._kategory.height + parent._kategory.y + 70}" x="35"/>
@@ -235,16 +210,15 @@
 		 	<view name="_date"  bgcolor="white" y="${parent._kategory.y + parent._kategory.height + 110}" 
 		    	  width="${this.ezeit.x + this.ezeit.width + 5}" height="${this.ezeit.y + this.ezeit.height + 5}"
 		    	   x="${parent._kategoryedit.x}">	            	
-		    	<!--	<text x="${parent._beginn.width + parent._beginn.x + 5}">Datum:</text>
-		    		<text x="${parent._bdatum.width + parent._bdatum.x + 5}">Uhrzeit:</text>-->
+		    	
 		       	<text name="_beginn" y="20">Beginn:</text> 
-		       <!-- <labelText labelid="570" y="20" ></labelText>-->
+		      
 		        	<dateField name="_bdatum" y="20" x="${parent._beginn.width + parent._beginn.x + 5}" width="100" text="" setDefaultToday="true"/>
 		        	<customEdittext name="_bzeit" x="${parent._bdatum.width + parent._bdatum.x + 5}" y="20" width="50" regexpType="time">
 		        					08:00
 		        	</customEdittext>	            	   		
 		       	<text y="${parent.edatum.y}">Ende:</text> 
-		         <!--	<labelText labelid="571" y="${parent.edatum.y}" width="50"/>-->
+		         
 		        	<dateField name="edatum" y="${parent._bdatum.y + parent._bdatum.height + 10}" 
 		        			   x="${parent._beginn.width + parent._beginn.x + 5}" width="100" text=""  setDefaultToday="true"/> 	            	
 		        	<customEdittext name="ezeit" x="${parent._bdatum.width + parent._bdatum.x + 5}" 
@@ -253,19 +227,18 @@
 		        	</customEdittext>   	
 		    </view> 
 		    
-		    <text name="_titel" y="${parent._date.height + parent._date.y + 30}" x="35">Titel:</text>
+		    <labeltext name="_titel" labelid="572" y="${parent._date.height + parent._date.y + 30}" x="35"/>
 	    	<edittext name="_titeledit" x="${parent._kategory.width + parent._kategory.x + 30}" 
 	    		  y="${parent._titel.y}" width="${parent.width - this.x - 10}">Neuer Termin</edittext>
 	    		  
 	    	<view y="${parent._titel.height + parent._titel.y + 20}" x="35">	
 	    		<simplelayout axis="x" spacing="2"/>
 	    		
-		    	<view resource="list_add_remuve_rsc" >
+		    	<view resource="edit_add_remuve_rsc" >
 		    		<attribute name="currentSelection" value="false" type="boolean"/>	
 		    		<handler name="onclick">
 		    
-						//parent.parent._komentar["viseble", true];
-												
+						//parent.parent._komentar["viseble", true];								
 						//this.setAttribute("frame", 2)
 						if(this.currentSelection == true)
 							{
@@ -285,15 +258,14 @@
 							}
 		    		</handler> 
 		    	</view>
-		    <!--	<text >Komentar:</text> -->
+		   
 		    <labelText labelid="573" width="100"/>
 		    
 	    	</view>	
 	    	
-		 	<!--scrolledittext-->
 		 	<scrolledittext name="_komentar" y="${parent._titel.height + parent._titel.y + 20}" visible="false" multiline="true"
 		    		  x="${parent._kategory.width + parent._kategory.x + 30}"  width="${parent._titeledit.width}" height="0">
-				<!--<vscrollbar/>-->
+				
 			</scrolledittext>	
 			
 			<view y="${parent._komentar.y + parent._komentar.height + 30}" x="35">
@@ -304,7 +276,7 @@
 				</handler>
 				
 				<view resource="edit_add"></view>
-			<!--	<text>Teilnehmer einladen</text> -->
+			
 			 <labelText labelid="574" width="100"/>
 			</view>
 			
@@ -343,6 +315,7 @@
 			   		</handler>
 			   		<handler name="onclick">
 			    		<![CDATA[
+			    		parent.parent.parent._termindetails.setAttribute('visible', false);
 			    		if(parseStringToDate(parent.parent._date._bdatum.getText()) > parseStringToDate(parent.parent._date.edatum.getText()) ||  
 			    		parseTimeStringToDate(parent.parent._date._bzeit.getText()) >  parseTimeStringToDate(parent.parent._date.ezeit.getText()) )
 			    	  		
@@ -363,14 +336,14 @@
 				    		else{
 					        	parent.parent.parent.updateAppointment.doCall();
 					    		//parent.parent.parent.defaulttermindetails();
-					    		if ($debug) Debug.write("##### updateAppointment terminObjRef? null ", parent.parent.parent.terminObjRef);
+					    		if ($debug) Debug.write("##### updateAppointment ", parent.parent.parent.terminObjRef);
 			        			}
 			        	}
 			        	]]>
 			    	</handler>
 			   </view>
 			   
-			 <!--   <button   width="$once{parent.width / 3}" enabled="true">
+			   <button   width="$once{parent.width / 3}" enabled="true">
 			    	Löschen
 			    	<handler name="onclick">
 			    	//parent.parent.parent._mitteilung._kategory = 0;
@@ -419,28 +392,13 @@
 			        	]]>
 			    	</handler>
 			    	<view resource="icon_small_termin" x="5" y="${parent.height / 6}" />
-			    </button>-->
+			    </button>
 			</view>
 		
 		
-		</view>
-		
-		<dateSelector name="_calendar"   y="10">
- 			<handler name="ondoubleselect">
-	 			var selectDate = new Date();
-	 			//if ($debug) Debug.write("##### dateselect ", this.selecteddate);
-	 			parent._startDate = this.selecteddate;
-	 			//Date(now.getFullYear(),now.getMonth(),now.getDate()+1,0,0,0);
-	 			parent._endDate  = new Date(this.selecteddate.getFullYear(), this.selecteddate.getMonth(), this.selecteddate.getDate()+1,0,0,0);
-	 			//if ($debug) Debug.write("startDateValue",parent._startDate);
-	 			parent._tagesansicht._list._outlist.clearContent();
-	 			//parent._tagesansicht._list._innerlist.clearContent();
-	 			//parent._termin.setCalendarItem(24);
-	 			parent.getAppointmentByRange.doCall();
- 			</handler> 
- 		</dateSelector> 
-		
-		<method name="defaulttermindetails">
+		</view> -->
+			
+	<!--	<method name="defaulttermindetails">
 			
 		this.terminObjRef = null;
 		
@@ -449,9 +407,9 @@
 		this._termindetails._isWeekly = false;
 		this._termindetails._isYearly = false;
 		
-		this._termindetails._roomtype_edit.selectItemAt(0);
 		this._termindetails._kategoryedit.selectItemAt(0); 
-		this._termindetails._erinnerungedit.selectItemAt(0); 
+		this._termindetails._erinnerungedit.selectItemAt(2); 
+		this._termindetails._erinnerungedit.setAttribute('enabled', 'true');
 		this._termindetails._locationedit.setAttribute('text', "");
 		this._termindetails._repetitionselect.selectItemAt(0);
 		//this._termindetails._guestedit.setAttribute('text',"");
@@ -481,7 +439,6 @@
 		//else{
 			//this._termindetails._guestedit.setAttribute('text',"");
 		//}	
-		this._termindetails._roomtype_edit.selectItemAt(this.terminObjRef.room.roomtype.roomtypes_id);
 		this._termindetails._titeledit.setAttribute('text', this.terminObjRef.appointmentName);
 		this._termindetails._komentar.setAttribute('text', this.terminObjRef.appointmentDescription);
 		this._termindetails._date._bdatum.setAttribute('text', parseDateToString(this.terminObjRef.appointmentStarttime));
@@ -489,8 +446,9 @@
 		this._termindetails._date.edatum.setAttribute('text', parseDateToString(this.terminObjRef.appointmentEndtime));
 		this._termindetails._date.ezeit.setAttribute('text', parseDateToStringTimeOnly(this.terminObjRef.appointmentEndtime));
 		
-		if ($debug) Debug.write("remind typId: ",this.terminObjRef.remind.typId);
-		this._termindetails._erinnerungedit.selectItemAt(this.terminObjRef.remind.typId);
+		//if ($debug) Debug.write("remind typId: ",this.terminObjRef.remind.typId);
+		//this._termindetails._erinnerungedit.selectItemAt(this.terminObjRef.remind.typId);
+		this._termindetails._erinnerungedit.setAttribute('enabled', 'false');
 		
 		if(this.terminObjRef.isDaily = true)
 			{
@@ -538,7 +496,7 @@
 				    					});
 			}
 				]]>
-		</method> 
+		</method> -->
 		
 	<!--	for (var i=0;i<this.terminObjRef.length;i++) {
 						if ($debug) Debug.write("UserList",result[i]);
@@ -571,8 +529,7 @@
 							  remotecontext="$once{ canvas.thishib }" >
 		    	    
 				<netparam><method name="getValue">return canvas.sessionId;</method></netparam>
-				
-		    	<handler name="ondata" args="valueList">
+				<handler name="ondata" args="valueList">
 		    		<![CDATA[
 		    		if ($debug) Debug.write("valueList: ", valueList);
 		    		if ($debug) Debug.write("userId: ", canvas.thishib.UserID);
@@ -605,7 +562,7 @@
 		    	</handler>
 		    </netRemoteCallHib>	
 		    
-		    <netRemoteCallHib name="getAppointmentReminderTypList" funcname="appoint.getAppointmentReminderTypList" 
+		    <netRemoteCallHib name="getAppointmentReminderTypList" funcname="appointmentreminderservice.getAppointmentReminderTypList" 
 							  remotecontext="$once{ canvas.thishib }" >
 		    	    
 				<netparam><method name="getValue">return canvas.sessionId;</method></netparam>
@@ -637,7 +594,7 @@
 					    					text:titel
 								
 				    				});		
-				    	    parent._termindetails._erinnerungedit.selectItemAt(0);
+				    	    parent._termindetails._erinnerungedit.selectItemAt(2);
 					}}
 		    		]]>
 		    	</handler>
@@ -646,7 +603,7 @@
 		 <!--  saveAppointment(String SID, String appointmentName, String appointmentLocation,String appointmentDescription, 
 			Date appointmentstart, Date appointmentend, 
 			Boolean isDaily, Boolean isWeekly, Boolean isMonthly, Boolean isYearly, Long categoryId, Long remind) -->
-		   
+		  <!-- 
 		    <netRemoteCallHib name="saveAppointment" funcname="calendarservice.saveAppointment" 
 							  remotecontext="$once{ canvas.thishib }" >     
 				<netparam><method name="getValue">return canvas.sessionId; </method></netparam>
@@ -661,6 +618,8 @@
 				<netparam><method name="getValue">return parent.parent._termindetails._isYearly;</method></netparam>
 				<netparam><method name="getValue">return parent.parent._termindetails._kategoryatr;</method></netparam>
 				<netparam><method name="getValue">return parent.parent._termindetails._erinnerungatr;</method></netparam>
+				<netparam><method name="getValue">return parent.parent._termindetails.roomtype;</method></netparam>
+				<netparam><method name="getValue">return parent.parent._termindetails.baseUrl;</method></netparam>
 				
 		    	<handler name="ondata" args="value">
 		    		<![CDATA[
@@ -680,26 +639,29 @@
 								parent.addMeetingMember.contact = contact;
 								parent.addMeetingMember.doCall();
 								}
-			     		if(parent._termindetails._liste._innerlist.subviews.length<1)
-			     			{
+			     		if(parent._termindetails._liste._innerlist.subviews.length<1){
+							
 							parent.getAppointmentByRange.doCall()
+							
+							if(parent._tabslider._week.getAttribute('selected') == true){
+				 				//parent._tabslider._week._weekView._monday._tagesansicht._list._outlist.clearContent();
+				 				parent._tabslider._week._weekView.initWeekByDate(parent._startDate); // new Date() _startDate selecteddate
+				 				parent._tabslider._week._weekView.getAppointmentByRangeWeek.doCall();
+	 							}
+							
 							}
-			    		parent.defaulttermindetails();
+			    		parent._termindetails.defaulttermindetails();
 		    		 ]]>
 		    	</handler>
 		    </netRemoteCallHib> 
 		    
 		   
-		  <!-- addMeetingMember(String SID, String firstname, String lastname, String memberStatus,
-			String appointmentStatus, Long appointmentId, Long userid, String email) -->
-		    <netRemoteCallHib name="addMeetingMember" funcname="meetingmemberservice.addMeetingMember" 
+		<netRemoteCallHib name="addMeetingMember" funcname="meetingmemberservice.addMeetingMember" 
 							  remotecontext="$once{ canvas.thishib }" >  
 				
 				<attribute name="contact" value="null" />
-			<!--	<attribute name="appointmentId" value="0" type="number" /> -->
 				<attribute name="appointmentId" value="null" />
-							     
-				
+							     		
 				<netparam><method name="getValue">return canvas.sessionId; </method></netparam>
 				<netparam><method name="getValue">return parent.contact.vorname;</method></netparam>	
 				<netparam><method name="getValue">return parent.contact.nachname;</method></netparam>
@@ -723,16 +685,12 @@
 		    	</handler>
 		    </netRemoteCallHib> 
 		    
-		 <!--   Long updateAppointment(String SID,Long appointmentId ,String appointmentName, Long userId, String appointmentLocation,String appointmentDescription, 
-			Date appointmentstart, Date appointmentend, 
-			Boolean isDaily, Boolean isWeekly, Boolean isMonthly, Boolean isYearly, Long categoryId, Long remind) -->
 		    
 		    <netRemoteCallHib name="updateAppointment" funcname="calendarservice.updateAppointment" 
 							  remotecontext="$once{ canvas.thishib }" >     
 				<netparam><method name="getValue">return canvas.sessionId; </method></netparam>
 				<netparam><method name="getValue">return parent.parent.terminObjRef.appointmentId;</method></netparam>
 				<netparam><method name="getValue">return parent.parent._termindetails._titeledit['text'];</method></netparam>
-				<netparam><method name="getValue">return canvas.thishib.UserID;</method></netparam>
 				<netparam><method name="getValue">return parent.parent._termindetails._locationedit['text'];</method></netparam>
 				<netparam><method name="getValue">return parent.parent._termindetails._komentar['text'];</method></netparam>
 				<netparam><method name="getValue">return parseStringToDateTime(parent.parent._termindetails._date._bdatum.getText() + parent.parent._termindetails._date._bzeit.getText());</method></netparam>
@@ -743,11 +701,9 @@
 				<netparam><method name="getValue">return parent.parent._termindetails._isYearly;</method></netparam>
 				<netparam><method name="getValue">return parent.parent._termindetails._kategoryatr;</method></netparam>
 				<netparam><method name="getValue">return parent.parent._termindetails._erinnerungatr;</method></netparam>
-				<netparam><method name="getValue">return parent.parent._termindetails.roomtype;</method></netparam>
-		    	
 		    	<handler name="ondata" args="value">
 		    		<![CDATA[
-		    			parent._tagesansicht._list._outlist.clearContent();
+		    			parent._tabslider._daytab._dayview._tagesansicht._list._outlist.clearContent();
 		    			parent.getAppointmentByRange.doCall();
 		    			
 		    		for (var i=0; i<parent._termindetails._liste._innerlist.subviews.length; i++) {
@@ -797,12 +753,12 @@
 		    		 ]]>
 		    	</handler>
 			</netRemoteCallHib>
+			-->
 		    
 		    <!--return Appointments and MeetingMember-->
 	     	<netRemoteCallHib name="getAppointmentByRange" funcname="calendarservice.getAppointmentByRange" 
 						  remotecontext="$once{ canvas.thishib }" >     
 			<netparam><method name="getValue">return canvas.sessionId; </method></netparam>
-		<!--	<netparam><method name="getValue">return canvas.thishib.macomUserID;</method></netparam> -->
 			<netparam><method name="getValue">return parent.parent._startDate;</method></netparam>
 			<netparam><method name="getValue">return parent.parent._endDate;</method></netparam>
 	    	<handler name="ondata" args="value">
@@ -811,22 +767,17 @@
 		    		if ($debug) Debug.write("_startdate: ",parent._startDate);
 		    		if ($debug) Debug.write("_enddate: ",parent._endDate);
 		    		if(value[0] != null){
-		    		var countX = 45;
-		    		for (var i=0;i<value.length;i++){
-		    			
-		    		if ($debug) Debug.write("value: ",value[i]);	
-		    		
-		    		//if ($debug) Debug.write("countX : ",countX);
-		    		new lz.terminarea(parent._tagesansicht._list._outlist, {name:"_terminarea"+i,
-		    							calenderObjRef:parent,
-		    							terminObj:value[i],
-		    							countX:countX
-		    							});
-		    		new lz.text(parent._tagesansicht._list._outlist["_terminarea"+i],{text:value[i].appointmentName +" Beschreibung: "+ value[i].appointmentDescription,
-		    										 multiline:true
-		    										 
-		    										});
-		    		countX = countX + 102;
+			    		parent._tabslider._daytab._dayview._tagesansicht._list._outlist.clearContent();	
+			    		for (var i=0;i<value.length;i++){	
+				    		if ($debug) Debug.write("value: ",value[i]);	
+				    		new lz.terminarea(parent._tabslider._daytab._dayview._tagesansicht._list._outlist, {name:"_terminarea"+i,
+				    							calenderObjRef:parent,
+				    							terminObj:value[i]
+			    							});
+			    		new lz.text(parent._tabslider._daytab._dayview._tagesansicht._list._outlist["_terminarea"+i],{text:value[i].appointmentName +" Beschreibung: "+ value[i].appointmentDescription,
+			    										 multiline:true
+			    										 
+			    										});
 		    		}
 		    		
 		    		}
@@ -834,40 +785,7 @@
 	    	</handler>
 	    </netRemoteCallHib> 	
 	    
-	    <netRemoteCallHib name="getAppointmentByRangeWeek" funcname="calendarservice.getAppointmentByRange" 
-						  remotecontext="$once{ canvas.thishib }" >     
-			<netparam><method name="getValue">return canvas.sessionId; </method></netparam>
-		<!--	<netparam><method name="getValue">return canvas.thishib.macomUserID;</method></netparam> -->
-			<netparam><method name="getValue">return parent.parent._startDate;</method></netparam>
-			<netparam><method name="getValue">return parent.parent._endDate;</method></netparam>
-	    	<handler name="ondata" args="value">
-	    		<![CDATA[
-	    			if ($debug) Debug.write("getAppointmentByRangeWeek: ",value);
-		    		if ($debug) Debug.write("_startdate: ",parent._startDate);
-		    		if ($debug) Debug.write("_enddate: ",parent._endDate);
-		    		if(value[0] != null){
-		    		var countX = 45;
-		    		for (var i=0;i<value.length;i++){
-		    			
-		    		if ($debug) Debug.write("value: ",value[i]);	
-		    		
-		    		//if ($debug) Debug.write("countX : ",countX);
-		    		new lz.terminareaWeekView(parent._tabslider._week._weekView._monday._tagesansicht._list._outlist, {name:"_terminarea"+i,
-		    							calenderObjRef:parent,
-		    							terminObj:value[i],
-		    							countX:countX
-		    							});
-		    		new lz.text(parent._tabslider._week._weekView._monday._tagesansicht._list._outlist["_terminarea"+i],{text:value[i].appointmentName +" Beschreibung: "+ value[i].appointmentDescription,
-		    										 multiline:true
-		    										 
-		    										});
-		    		countX = countX + 102;
-		    		}
-		    		
-		    		}
-	    		 ]]>
-	    	</handler>
-	    </netRemoteCallHib> 	
+	    
 	
 	
 	</class>

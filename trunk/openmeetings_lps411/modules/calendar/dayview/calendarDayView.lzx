@@ -11,26 +11,27 @@
 		</view>
 		<view name="_tagesansicht" clip="true" width="${parent.width}" height="${parent.height}">
 		 				 
-		 		<view name="_list">
-			 		<view name="_innerlist" clip="true">
-			 			<simplelayout axis="y" spacing="0"/>	
-			 			<method name="clearContent">
+	 		<view name="_list">
+		 		<view name="_innerlist" clip="true">
+		 			<simplelayout axis="y" spacing="0"/>	
+		 			<method name="clearContent">
 						for (var eg in this.subviews) {
 							this.subviews[eg].destroy();
 						}
-						</method>		
-			 		</view>
-			 		<view name="_outlist" clip="true" x="45">	
-			 		<simplelayout axis="x" spacing="2"/> 			
-			 			<method name="clearContent">
-						for (var eg in this.subviews) {
-							this.subviews[eg].destroy();
-						}
-						</method>
-			 		</view>				 			
+					</method>		
 		 		</view>
-			 	<hscrollbar />
-				<vscrollbar/> 
+		 		<view name="_outlist" clip="true" x="45">	
+		 		    <simplelayout axis="x" spacing="2"/> 			
+		 			<method name="clearContent">
+						for (var eg in this.subviews) {
+							this.subviews[eg].destroy();
+						}
+					</method>
+		 		</view>				 			
+	 		</view>
+	 		
+		 	<hscrollbar />
+			<vscrollbar name="_scrollbar" /> 
 					
 		 </view>
 		

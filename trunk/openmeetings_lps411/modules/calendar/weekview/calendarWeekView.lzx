@@ -19,41 +19,45 @@
 			<view resource="timetable_weekview" /> 
  			<view resource="balken_weekview" x="40" stretches="width" width="200">
  				<handler name="onclick">
- 						<![CDATA[
- 					parent.parent.parent.parent.parent.parent._termindetails.setAttribute("visibility","visible");;
- 					parent.parent.parent.parent.parent.parent._termindetails.setAttribute('x', 400);
- 					parent.parent.parent.parent.parent.parent._termindetails.setAttribute('y', 50);
- 					parent.parent.parent.parent.parent.parent._termindetails.defaulttermindetails();
- 					
- 					var i=0;
- 					var j=1;
- 					var preTime = "0";
- 					var time = ""+Math.round(this.getMouse('y')/17*10);
- 					
- 					if(this.getMouse('y')/17<1) std="00";
- 					if (time.length == 3) {
- 						j=2;
- 						preTime="";
- 					}
- 					//if ($debug) Debug.write("getMouse/17: ",this.getMouse('y')/17);
- 					//if ($debug) Debug.write("subview length: ",time.length);
- 					var std = Number(time.substring(i,j));
-					var min = "00"//Number(time.substring(1, 2));
+					<![CDATA[
+					    var tRootCalendarView = parent.parent.parent.parent.parent.parent; 
 					
-					if(this.getMouse('y')/17<1){ 
-						std="00";
-						preTime="";
-					};
+					    tRootCalendarView.initDetails();
 					
-					//if (min==0) min=59;
- 					//if ($debug) Debug.write("std:+++: ",std);
- 					//if ($debug) Debug.write("min:+++: ",min);
- 					//if ($debug) Debug.write("time: ",time);
- 					//if ($debug) Debug.write("y: ",this.getMouse('y'));
- 					
- 					parent.parent.parent.parent.parent.parent._termindetails._date._bzeit.setAttribute('text',preTime+std+":"+min); //Math.round(60/min
- 					parent.parent.parent.parent.parent.parent._termindetails._date._bdatum.setAttribute('text',parent.parent._date);
- 					parent.parent.parent.parent.parent.parent._termindetails._date.edatum.setAttribute('text',parent.parent._date);
+     					tRootCalendarView._termindetails.setAttribute("visibility","visible");;
+     					tRootCalendarView._termindetails.setAttribute('x', 400);
+     					tRootCalendarView._termindetails.setAttribute('y', 50);
+     					tRootCalendarView._termindetails.defaulttermindetails();
+     					
+     					var i=0;
+     					var j=1;
+     					var preTime = "0";
+     					var time = ""+Math.round(this.getMouse('y')/17*10);
+     					
+     					if(this.getMouse('y')/17<1) std="00";
+     					if (time.length == 3) {
+     						j=2;
+     						preTime="";
+     					}
+     					//if ($debug) Debug.write("getMouse/17: ",this.getMouse('y')/17);
+     					//if ($debug) Debug.write("subview length: ",time.length);
+     					var std = Number(time.substring(i,j));
+    					var min = "00"//Number(time.substring(1, 2));
+    					
+    					if(this.getMouse('y')/17<1){ 
+    						std="00";
+    						preTime="";
+    					};
+    					
+    					//if (min==0) min=59;
+     					//if ($debug) Debug.write("std:+++: ",std);
+     					//if ($debug) Debug.write("min:+++: ",min);
+     					//if ($debug) Debug.write("time: ",time);
+     					//if ($debug) Debug.write("y: ",this.getMouse('y'));
+     					
+     					tRootCalendarView._termindetails._date._bzeit.setAttribute('text',preTime+std+":"+min); //Math.round(60/min
+     					tRootCalendarView._termindetails._date._bdatum.setAttribute('text',parent.parent._date);
+     					tRootCalendarView._termindetails._date.edatum.setAttribute('text',parent.parent._date);
  					
  					]]>
  				</handler>

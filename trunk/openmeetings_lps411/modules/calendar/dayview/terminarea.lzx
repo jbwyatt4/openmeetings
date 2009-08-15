@@ -6,6 +6,45 @@
 	<attribute name ="calenderObjRef" value="null"/>
 	
 
+    <handler name="onclick">
+        if ($debug) Debug.write("this termin: ",this.terminObj);
+        var tRootCalendarView = parent.parent.parent.parent.parent.parent.parent;
+        
+        tRootCalendarView.initDetails();
+        tRootCalendarView._termindetails.terminObjRef = this.terminObj;
+        tRootCalendarView._termindetails.showtermindetails();
+        tRootCalendarView._termindetails.setAttribute("visibility","visible");;
+        //parent.parent.parent.parent._terminButton.onclick.sendEvent();
+    </handler>
+    <handler name="oninit">
+        <![CDATA[
+        this.setAttribute('height',  this.terminObj.appointmentEndtime.getHours()*22 + 1/3 * this.terminObj.appointmentEndtime.getMinutes() - 
+                (this.terminObj.appointmentStarttime.getHours()*22 + 1/3 * this.terminObj.appointmentStarttime.getMinutes()));    
+        this.setAttribute("width", 100); 
+        this.setAttribute("bgcolor", "white"); 
+        this.setAttribute("y",this.terminObj.appointmentStarttime.getHours()*22 + 1/3 * this.terminObj.appointmentStarttime.getMinutes());
+        
+        if ($debug) Debug.write("_startDate++++++", this);
+        
+        if (this.terminObj.appointmentStarttime < parent.parent.parent.parent.parent.parent.parent._startDate && 
+            this.terminObj.appointmentEndtime > parent.parent.parent.parent.parent.parent.parent._endDate){
+            this.setAttribute('y', 0);
+            this.setAttribute('height', 22*24-2);
+            if ($debug) Debug.write("1. if appointmentStarttime",this.terminObj.appointmentStarttime, "_appointmentStarttime", parent.parent.parent.parent.parent.parent.parent._startDate);
+            
+        }
+        else if(this.terminObj.appointmentEndtime > parent.parent.parent.parent.parent.parent.parent._endDate){
+            this.setAttribute('height', 22*24-2-this.terminObj.appointmentStarttime.getHours() * 22);
+            if ($debug) Debug.write("2. if",this.terminObj.appointmentStarttime, "_appointmentStarttime", parent.parent.parent.parent.parent.parent.parent._startDate);
+        }
+        else if(this.terminObj.appointmentStarttime < parent.parent.parent.parent.parent.parent.parent._startDate){
+            this.setAttribute('y', 0);
+            this.setAttribute('height', this.terminObj.appointmentEndtime.getHours() * 22);
+            if ($debug) Debug.write("3. if",this.terminObj.appointmentStarttime, "_appointmentStarttime", parent.parent.parent.parent.parent.parent.parent._startDate);
+        }
+        ]]>
+    </handler>
+    
 	<view name="resize_bottom" y="${parent.height-this.height}" height="20" width="${parent.width}" bgcolor="blue">
 		<attribute name="isActive" value="false" type="boolean" />
 		
@@ -65,50 +104,12 @@
 		<dragstate name="dragger" drag_axis="y" drag_min_y="-parent.y-22" drag_max_y="${parent.y+parent.height}"/> 
 	</view>
 	
-	<handler name="onclick">
-		if ($debug) Debug.write("this termin: ",this.terminObj);
-		parent.parent.parent.parent.parent.parent.parent._termindetails.terminObjRef = this.terminObj;
-		parent.parent.parent.parent.parent.parent.parent._termindetails.showtermindetails();
-		parent.parent.parent.parent.parent.parent.parent._termindetails.setAttribute("visibility","visible");;
-		//parent.parent.parent.parent._terminButton.onclick.sendEvent();
-	</handler>
-	<handler name="oninit">
-		<![CDATA[
-		this.setAttribute('height',  this.terminObj.appointmentEndtime.getHours()*22 + 1/3 * this.terminObj.appointmentEndtime.getMinutes() - 
-			    (this.terminObj.appointmentStarttime.getHours()*22 + 1/3 * this.terminObj.appointmentStarttime.getMinutes()));	  
-		this.setAttribute("width", 100); 
-		this.setAttribute("bgcolor", "white"); 
-		this.setAttribute("y",this.terminObj.appointmentStarttime.getHours()*22 + 1/3 * this.terminObj.appointmentStarttime.getMinutes());
-		
-		if ($debug) Debug.write("_startDate++++++", this);
-		
-		if (this.terminObj.appointmentStarttime < parent.parent.parent.parent.parent.parent.parent._startDate && 
-			this.terminObj.appointmentEndtime > parent.parent.parent.parent.parent.parent.parent._endDate){
-			this.setAttribute('y', 0);
-			this.setAttribute('height', 22*24-2);
-			if ($debug) Debug.write("1. if appointmentStarttime",this.terminObj.appointmentStarttime, "_appointmentStarttime", parent.parent.parent.parent.parent.parent.parent._startDate);
-			
-		}
-		else if(this.terminObj.appointmentEndtime > parent.parent.parent.parent.parent.parent.parent._endDate){
-			this.setAttribute('height', 22*24-2-this.terminObj.appointmentStarttime.getHours() * 22);
-			if ($debug) Debug.write("2. if",this.terminObj.appointmentStarttime, "_appointmentStarttime", parent.parent.parent.parent.parent.parent.parent._startDate);
-		}
-		else if(this.terminObj.appointmentStarttime < parent.parent.parent.parent.parent.parent.parent._startDate){
-			this.setAttribute('y', 0);
-			this.setAttribute('height', this.terminObj.appointmentEndtime.getHours() * 22);
-			if ($debug) Debug.write("3. if",this.terminObj.appointmentStarttime, "_appointmentStarttime", parent.parent.parent.parent.parent.parent.parent._startDate);
-		}
-		]]>
-	</handler>
 	<view resource="emblem_unreadable_rsc" x="${parent.width - this.width}">
 		<handler name="onclick">
-			parent.calenderObjRef._termindetails.deleteAppointment.terminObj = parent.terminObj;
-			parent.calenderObjRef._termindetails.deleteAppointment.terminareaObjRef = parent;
-			
-			parent.calenderObjRef._termindetails.deleteAppointment.doCall();
-			//parent.deleteAppointment.doCall();
+			parent.calenderObjRef.deleteAppointementByObject(parent.terminObj,parent);
 		</handler>
 	</view>
+	
 	<method name="destroyThis">
 		//parent.calenderObjRef.getAppointmentByRange.doCall();
 		this.destroy();

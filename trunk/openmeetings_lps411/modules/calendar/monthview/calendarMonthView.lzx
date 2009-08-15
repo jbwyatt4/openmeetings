@@ -14,12 +14,14 @@
 					if ($debug) Debug.write("calendarMonthView.daydate : " + parent.daydate);
 					if ($debug) Debug.write("calendarMonthView.fullDate: " + parent.fullDate);
 
-
-					parent.parent.parent.parent.parent.parent._termindetails.defaulttermindetails();
+                    var tRootCalendarView = parent.parent.parent.parent.parent.parent;
+                    
+                    tRootCalendarView.initDetails();
+					tRootCalendarView._termindetails.defaulttermindetails();
 					
-					parent.parent.parent.parent.parent.parent._termindetails._date._bdatum.setAttribute('text',parseDateToString(parent.fullDate));
-					parent.parent.parent.parent.parent.parent._termindetails._date.edatum.setAttribute('text',parseDateToString(parent.fullDate));  
-					parent.parent.parent.parent.parent.parent._termindetails.setAttribute("visibility","visible");;
+					tRootCalendarView._termindetails._date._bdatum.setAttribute('text',parseDateToString(parent.fullDate));
+					tRootCalendarView._termindetails._date.edatum.setAttribute('text',parseDateToString(parent.fullDate));  
+					tRootCalendarView._termindetails.setAttribute("visibility","visible");;
 					
 			</handler>	
 			<view name="_innerList" layout="axis:y;spacing:1" >
