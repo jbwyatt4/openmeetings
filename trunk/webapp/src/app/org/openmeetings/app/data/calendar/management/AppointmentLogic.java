@@ -97,7 +97,8 @@ public class AppointmentLogic {
 	
 	public Long saveAppointment(String appointmentName, Long userId, String appointmentLocation,String appointmentDescription, 
 			Date appointmentstart, Date appointmentend, 
-			Boolean isDaily, Boolean isWeekly, Boolean isMonthly, Boolean isYearly, Long categoryId, Long remind, Long roomType, String baseUrl){
+			Boolean isDaily, Boolean isWeekly, Boolean isMonthly, Boolean isYearly, Long categoryId, 
+			Long remind, Long roomType, String baseUrl){
 		
 		log.debug("Appointmentlogic.saveAppointment");
 		

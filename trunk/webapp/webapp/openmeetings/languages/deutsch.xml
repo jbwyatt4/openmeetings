@@ -2058,4 +2058,55 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   <string id="684" name="event user list">
     <value>Remove Audio/Video of this User</value>
   </string>
+  <string id="685" name="event user list">
+    <value>I would like to get the moderation of this room</value>
+  </string>
+  <string id="686" name="event user list">
+    <value>I would like to draw on whiteboard</value>
+  </string>
+  <string id="687" name="event user list">
+    <value>I would like to share my Audio/Video</value>
+  </string>
+  <string id="688" name="event user list">
+    <value>You are moderator of this room</value>
+  </string>
+  <string id="689" name="event user list">
+    <value>You are allowed to draw on whiteboard</value>
+  </string>
+  <string id="690" name="event user list">
+    <value>You are allowed to share your Audio/Video</value>
+  </string>
+  <string id="691" name="errortype">
+    <value>Message to Moderator</value>
+  </string>
+  <string id="692" name="apply for mod message">
+    <value>The User</value>
+  </string>
+  <string id="693" name="apply for mod message">
+    <value>would like to get the Moderation. Use the status Icons next to the user in the List of Users to add or remove the Moderation.</value>
+  </string>
+  <string id="694" name="apply for whiteboard">
+    <value>would like to draw on whiteboard. Use the status Icons next to the user in the List of Users to add or remove the right to draw anything on the whiteboard.</value>
+  </string>
+  <string id="695" name="695">
+    <value>would like to share his Audio/Video. Use the status Icons next to the user in the List of Users to add or remove the right to share Audio/Video for any User.</value>
+  </string>
+  <string id="696" name="moderation message">
+    <value>You have to wait untill a Moderator enters the room.</value>
+  </string>
+  <string id="697" name="calendar button">
+    <value>Cancel</value>
+  </string>
+  <string id="698" name="calendar button">
+    <value>Save</value>
+  </string>
+  <string id="699" name="calendar component">
+    <value>Day</value>
+  </string>
+  <string id="700" name="calendar component">
+    <value>Month</value>
+  </string>
+  <string id="701" name="calendar component">
+    <value>Year</value>
+  </string>
 </language>

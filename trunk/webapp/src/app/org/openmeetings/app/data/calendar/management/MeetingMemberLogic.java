@@ -63,8 +63,7 @@ public class MeetingMemberLogic {
 			
 			if(point.getRemind().getTypId() == 1){
 				log.debug("no reminder required");
-			}
-			else if(point.getRemind().getTypId() == 2){
+			} else if(point.getRemind().getTypId() == 2){
 				log.debug("Reminder for Appointment : simple email");
 				invitationId = Invitationmanagement.getInstance().addInvitationLink(
 						new Long(2), //userlevel
@@ -103,7 +102,6 @@ public class MeetingMemberLogic {
 						new Long(1), // created by
 						point.getAppointmentId(),
 						member.getInvitor()
-						
 					);
 			}
 			
