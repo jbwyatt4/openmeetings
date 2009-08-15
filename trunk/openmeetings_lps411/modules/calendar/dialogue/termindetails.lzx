@@ -214,78 +214,77 @@
 		 	</resetCombobox> 
 		 	
 		 	<labelText name="_erinnerung" y="52" 
-		 			   x="4" labelid="565" width="120" />
+		 			   x="2" labelid="565" width="120" />
 		 	 	
 		 	<resetCombobox name="_erinnerungedit" x="120" 
 		 			  width="220" editable="false" shownitems="5" y="52">
 				<handler name="onvalue" args="v">						
 					if ($debug) Debug.write("_erinnerungatr: ",parent._erinnerungatr);
-					if(this.getValue == 0 )
-						{
+					if(this.getValue == 0 ) {
 						parent._erinnerungatr = null;
-						}
-					else{
-					parent._erinnerungatr = this.getValue();												
-					if ($debug) Debug.write("_erinnerungatr: ",parent._erinnerungatr);
-						}
+					} else{
+    					parent._erinnerungatr = this.getValue();												
+    					if ($debug) Debug.write("_erinnerungatr: ",parent._erinnerungatr);
+					}
 				</handler> 
 				<handler name="oninit">
 					//this.addItem(canvas.getLabelName(568),"0");
-					this.selectItemAt(2);
-					this.getAppointmentCategoryList();	
-					this.getAppointmentReminderTypList();	
+					//this.selectItemAt(2);
+
+					//parent.getAppointmentCategoryList.doCall();	
+					//parent.getAppointmentReminderTypList();	
 					
-					var url = 'http://'+canvas.rtmphostlocal+':'+canvas.red5httpport+'/'+canvas.webAppRootKey + '/main.lzx.lzr=swf8.swf'; 
-			    	parent.baseUrl = url;			
-			    			
+					//var url = 'http://'+canvas.rtmphostlocal+':'+canvas.red5httpport+'/'+canvas.webAppRootKey; 
+					
+					
+			    	//parent.baseUrl = url;			
 				</handler>
 		 	</resetCombobox> 
 		 		
-		 	<labelText name="_repetition" y="82" x="4" labelid="567" width="120"/>
+		 	<labelText name="_repetition" y="82" x="2" labelid="567" width="120"/>
 		 	<resetCombobox name="_repetitionselect" x="120" 
 		 			  width="220" editable="false" shownitems="5" y="82">
 				<handler name="onselect">
-                        var repitechoice = this.getText();
-                        //canvas[colorchoice+'colors'].setAttribute("isdefault", true);
-                        
-                        switch (repitechoice) {
-							  case "Täglich":
-							  	parent._isDaily = true;
-							  	parent._isMonthly = false;
-							  	parent._isWeekly = false;
-							  	parent._isYearly = false;
-							  	if ($debug) Debug.write("_isDaily: ",parent._isDaily);						    
-							    break;
-							  case "Wochentlich":
-							    parent._isWeekly = true;
-							    parent._isDaily = false;
-							  	parent._isMonthly = false;
-							  	parent._isYearly = false;
-							    if ($debug) Debug.write("_isWeekly: ",parent._isWeekly);
-							    break;
-							  case "Monatlich":
-							    parent._isMonthly = true;
-							    parent._isDaily = false;
-							    parent._isWeekly = false;
-							  	parent._isYearly = false;
-							    if ($debug) Debug.write("_isMonthly: ",parent._isMonthly);
-							    break;
-							  case "Jährlich":
-							    parent._isYearly = true;
-							    parent._isMonthly = false;
-							    parent._isDaily = false;
-							    parent._isWeekly = false;
-							    if ($debug) Debug.write("_isYearly: ",parent._isYearly);
-							    break;
-							  default:
-							  	parent._isYearly = false;
-							    parent._isMonthly = false;
-							    parent._isDaily = false;
-							    parent._isWeekly = false;
-							   if ($debug) Debug.write("repetition: ","keine");
-							    break;
-							}
-
+                    var repitechoice = this.getText();
+                    //canvas[colorchoice+'colors'].setAttribute("isdefault", true);
+                    
+                    switch (repitechoice) {
+					  case "Täglich":
+					  	parent._isDaily = true;
+					  	parent._isMonthly = false;
+					  	parent._isWeekly = false;
+					  	parent._isYearly = false;
+					  	if ($debug) Debug.write("_isDaily: ",parent._isDaily);						    
+					    break;
+					  case "Wochentlich":
+					    parent._isWeekly = true;
+					    parent._isDaily = false;
+					  	parent._isMonthly = false;
+					  	parent._isYearly = false;
+					    if ($debug) Debug.write("_isWeekly: ",parent._isWeekly);
+					    break;
+					  case "Monatlich":
+					    parent._isMonthly = true;
+					    parent._isDaily = false;
+					    parent._isWeekly = false;
+					  	parent._isYearly = false;
+					    if ($debug) Debug.write("_isMonthly: ",parent._isMonthly);
+					    break;
+					  case "Jährlich":
+					    parent._isYearly = true;
+					    parent._isMonthly = false;
+					    parent._isDaily = false;
+					    parent._isWeekly = false;
+					    if ($debug) Debug.write("_isYearly: ",parent._isYearly);
+					    break;
+					  default:
+					  	parent._isYearly = false;
+					    parent._isMonthly = false;
+					    parent._isDaily = false;
+					    parent._isWeekly = false;
+					   if ($debug) Debug.write("repetition: ","keine");
+					    break;
+					}
                 </handler> 
                 
            	<!--  <labelText name="_location" labelid="569" value="5"/>	-->				
@@ -338,139 +337,100 @@
     			<labeldTextListItem labelid="648" value="2"/>
 		 	</resetCombobox> 
 	    	
-	    	<view y="262" x="35">	
-	    		<simplelayout axis="x" spacing="2"/>
-	    		
-		    	<view resource="edit_add_remuve_rsc" >
-		    		<attribute name="currentSelection" value="false" type="boolean"/>	
-		    		<handler name="onclick">
-						//parent.parent._komentar["viseble", true];								
-						//this.setAttribute("frame", 2)
-						if(this.currentSelection == true) {
-							this.setAttribute("frame", 1);
-							parent.parent._komentar.setAttribute('visible', false); //["visible", false];
-							parent.parent._komentar.setAttribute('height', 0);
-							this.currentSelection = false;
-							if ($debug) Debug.write("currentSelection true: ", this.currentSelection);
-						} else {
-							this.setAttribute("frame", 2)
-							parent.parent._komentar.setAttribute("visibility","visible");;//["visible", true];
-							parent.parent._komentar.setAttribute('height', 100);
-							this.currentSelection = true;
-							if ($debug) Debug.write("currentSelection false: ", this.currentSelection);
-						}
-		    		</handler> 
-		    	</view>
 		    	
-    		    <!--	<text >Komentar:</text> -->
-    		    <labelText labelid="573" width="100"/>
-		    
-	    	</view>	
+		    <!--	<text >Komentar:</text> -->
+		    <labelText labelid="573" y="262" width="100" x="2" />
 	    	
 		 	<!--scrolledittext-->
-		 	<scrolledittext name="_komentar" y="${parent._roomtype_edit.height + parent._roomtype_edit.y + 20}" visible="false" multiline="true"
-		    		  x="${parent._kategory.width + parent._kategory.x + 30}"  width="${parent._roomtype_edit.width}" height="0">
-				<!--<vscrollbar/>-->
-			</scrolledittext>	
+		 	<scrolledittext name="_komentar" y="262" x="120" width="220" height="100" />
 			
-			<view y="${parent._komentar.y + parent._komentar.height + 30}" x="35">
-				<simplelayout axis="x" spacing="2"/>
-				<handler name="onclick">
-					new lz.appointmentMembers(parent.parent, {terminObjRef:parent});
-					//parent._liste.setAttribute('height', 50);
-				</handler>
-				
-				<view resource="edit_add"></view>
-			<!--	<text>Teilnehmer einladen</text> -->
-			    <labelText labelid="574" width="150"/>
-			</view>
 			
-			<view name="_liste" y="${parent._komentar.y + parent._komentar.height + 60}" x="35" 
-				  clip="true"  visible="false" height="0">
+			<!--
+			 ##########################
+			 Invited Users
+			 -->
+			<labelText labelid="574" y="22" width="150" x="350" />
+			
+			<view name="_liste" y="46" x="350" width="340" clip="true" height="200">
 				<view name="_innerlist" layout="axis:y;spacing:2">
 					<method name="clearContent">
-					for (var eg in this.subviews) {
-						this.subviews[eg].destroy();
-					}
+    					for (var eg in this.subviews) {
+    						this.subviews[eg].destroy();
+    					}
 					</method>	
 				</view>
 				<vscrollbar name="_vscrol"/>
 			</view>
-			 
-			<view name="_buttons"   y="${parent._liste.y + parent._liste.height +10}" x="${parent.width/2 -this.width/2}">
-				<simplelayout axis="x" spacing="10"/>		
-			   <view resource="button_cancel_rsc"  opacity="0.7">
-			   		<handler name="onmouseover">
-			   			this.setAttribute('opacity', 1); //setOpacity(1)
-			   		</handler>
-			   		<handler name="onmouseout">
-			   			this.setAttribute('opacity', 0.7); //setOpacity(0.7)
-			   		</handler>
-			   		<handler name="onclick">
-    			   		//parent.parent.parent.delTermin.doCall();
-    			    	parent.parent.defaulttermindetails();
-    			    	parent.parent.setAttribute("visibility","hidden");
-			    	</handler>
-			   </view>
-			   <view resource="filesave_rsc"  opacity="0.7">
-			   		<handler name="onmouseover">
-			   			this.setAttribute('opacity', 1); //setOpacity(1)
-			   		</handler>
-			   		<handler name="onmouseout">
-			   			this.setAttribute('opacity', 0.7); //setOpacity(0.7)
-			   		</handler>
-			   		<handler name="onclick">
-			    		<![CDATA[
-			    		var startDate = parseStringToDate(parent.parent._date._bdatum.getText());
-			    		var startTime = parseTimeStringToDate(parent.parent._date._bzeit.getText());
-			    		var endDate = parseStringToDate(parent.parent._date.edatum.getText());
-			    		var endTime = parseTimeStringToDate(parent.parent._date.ezeit.getText());
-			    		
-			    		var startDateTime = new Date();
-			    		startDateTime.setDate(startDate.getDate());
-			    		startDateTime.setMonth(startDate.getMonth());
-			    		startDateTime.setFullYear(startDate.getFullYear());
-			    		startDateTime.setHours(startTime.getHours());
-			    		startDateTime.setMinutes(startTime.getMinutes)
-			    		
-			    		var endDateTime = new Date();
-			    		endDateTime.setDate(endDate.getDate());
-			    		endDateTime.setMonth(endDate.getMonth());
-			    		endDateTime.setFullYear(endDate.getFullYear());
-			    		endDateTime.setHours(endTime.getHours());
-			    		endDateTime.setMinutes(endTime.getMinutes);
-			    		
-			    		//if(parseStringToDate(parent.parent._date._bdatum.getText()) > parseStringToDate(parent.parent._date.edatum.getText()) ||  
-			    		//parseTimeStringToDate(parent.parent._date._bzeit.getText()) >  parseTimeStringToDate(parent.parent._date.ezeit.getText()) )
-			    	  	
-			    		if(startDateTime > endDateTime)
-			    		
-			        	{
-			    			if ($debug) Debug.write("Error: ", "Ende liegt vor Beginn!");
-							new lz.myalert(parent.parent.parent,{text:canvas.getLabelName(578)});//"Terminende liegt vor Terminanfang!"
-			        	}
-			        	else if(!parent.parent._titeledit.getAttribute('text')){
-			        		new lz.myalert(parent.parent.parent,{text:canvas.getLabelName(579)});
-			        	}
-			        	else{
-				        	if(parent.parent.terminObjRef == null)
-				       		 	{
-			    				parent.parent.saveAppointment.doCall();
-				    			//parent.parent.parent.defaulttermindetails();
-				    			if ($debug) Debug.write("##### saveAppointment ", parent.parent.terminObjRef);
-				    			}
-				    		else{
-					        	//parent.parent.updateAppointment.doCall();
-					        	parent.parent.prepareUpdateCall();
-					    		//parent.parent.parent.defaulttermindetails();
-					    		if ($debug) Debug.write("##### updateAppointment ", parent.parent.terminObjRef);
-			        			}
-			        	}
-			        	parent.parent.setAttribute("visibility","hidden");
-			        	]]>
-			    	</handler>
-			   </view>
-			   
+			
+			<baseChooseIcon y="46" resourceN="edit_add" labelid="574" x="692">
+                <handler name="onclick">
+                    new lz.appointmentMembers(parent.parent,{terminObjRef:parent});
+                </handler>
+            </baseChooseIcon>
+            
+            <!--
+             #################
+             Buttons
+             -->
+			<simpleLabelButton labelid="698" x="$once{ parent.width - 125*2 }"
+                               y="$once{ parent.height - 28 }" width="120">
+				<view resource="filesave_rsc" x="2" y="2" />
+				<handler name="onclick">
+                    <![CDATA[
+                        var startDate = parseStringToDate(parent._date._bdatum.getText());
+                        var startTime = parseTimeStringToDate(parent._date._bzeit.getText());
+                        var endDate = parseStringToDate(parent._date.edatum.getText());
+                        var endTime = parseTimeStringToDate(parent._date.ezeit.getText());
+                        
+                        var startDateTime = new Date();
+                        startDateTime.setDate(startDate.getDate());
+                        startDateTime.setMonth(startDate.getMonth());
+                        startDateTime.setFullYear(startDate.getFullYear());
+                        startDateTime.setHours(startTime.getHours());
+                        startDateTime.setMinutes(startTime.getMinutes)
+                        
+                        var endDateTime = new Date();
+                        endDateTime.setDate(endDate.getDate());
+                        endDateTime.setMonth(endDate.getMonth());
+                        endDateTime.setFullYear(endDate.getFullYear());
+                        endDateTime.setHours(endTime.getHours());
+                        endDateTime.setMinutes(endTime.getMinutes);
+                        
+                        //if(parseStringToDate(parent.parent._date._bdatum.getText()) > parseStringToDate(parent.parent._date.edatum.getText()) ||  
+                        //parseTimeStringToDate(parent.parent._date._bzeit.getText()) >  parseTimeStringToDate(parent.parent._date.ezeit.getText()) )
+                        
+                        if(startDateTime > endDateTime) {
+                            if ($debug) Debug.write("Error: ", "Ende liegt vor Beginn!");
+                            new lz.myalert(parent.parent,{text:canvas.getLabelName(578)});//"Terminende liegt vor Terminanfang!"
+                        } else if(!parent._titeledit.getAttribute('text')){
+                            new lz.myalert(parent.parent,{text:canvas.getLabelName(579)});
+                        } else {
+                            if(parent.terminObjRef == null) {
+                                parent.saveAppointment.doCall();
+                                //parent.parent.parent.defaulttermindetails();
+                                if ($debug) Debug.write("##### saveAppointment ", parent.terminObjRef);
+                            } else{
+                                //parent.parent.updateAppointment.doCall();
+                                parent.prepareUpdateCall();
+                                //parent.parent.parent.defaulttermindetails();
+                                if ($debug) Debug.write("##### updateAppointment ", parent.terminObjRef);
+                            }
+                        }
+                        parent.setAttribute("visibility","hidden");
+                    ]]>
+                </handler>
+			</simpleLabelButton>
+			
+			<simpleLabelButton labelid="697" x="$once{ parent.width - 125 }"
+							   y="$once{ parent.height - 28 }" width="120">
+				<view resource="button_cancel_rsc" x="2" y="2" />
+				<handler name="onclick">
+                    //parent.parent.parent.delTermin.doCall();
+                    parent.defaulttermindetails();
+                    parent.setAttribute("visibility","hidden");
+                </handler>	   
+			</simpleLabelButton>	
+						     		
 			 <!--   <button   width="$once{parent.width / 3}" enabled="true">
 			    	Löschen
 			    	<handler name="onclick">
