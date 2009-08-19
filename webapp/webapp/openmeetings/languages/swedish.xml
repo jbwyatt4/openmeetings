@@ -13,13 +13,13 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Möte</value>
   </string>
   <string id="3" name="classroom">
-    <value>Klassrum</value>
+    <value>Auditorium</value>
   </string>
   <string id="4" name="settings">
     <value>Inställningar</value>
   </string>
   <string id="5" name="benutzer">
-    <value>Användare</value>
+    <value>Profil</value>
   </string>
   <string id="6" name="admin">
     <value>Administration</value>
@@ -58,16 +58,16 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Till huvudfil</value>
   </string>
   <string id="18" name="newpoll">
-    <value>ny röstning</value>
+    <value>Ny omröstning</value>
   </string>
   <string id="19" name="newpollheader">
-    <value>En ny röstning för konferensen.</value>
+    <value>En ny omröstning för konferensen.</value>
   </string>
   <string id="20" name="question">
     <value>Fråga:</value>
   </string>
   <string id="21" name="polltype">
-    <value>Typ av röstning:</value>
+    <value>Typ av omröstning:</value>
   </string>
   <string id="22" name="create">
     <value>Skapa</value>
@@ -76,7 +76,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Info: Varje ansluten användare får ett meddelande med den nya röstningen.</value>
   </string>
   <string id="24" name="creatpoll">
-    <value>Skapa en röstning</value>
+    <value>Skapa en omröstning</value>
   </string>
   <string id="25" name="cancel">
     <value>Avbryt</value>
@@ -91,16 +91,16 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Röst</value>
   </string>
   <string id="29" name="moderation">
-    <value>Måste vara Moderator för att skapa en fråga</value>
+    <value>Du måste vara Moderator för att skapa en omröstning</value>
   </string>
   <string id="30" name="vote">
-    <value>Din röst är mottagen.</value>
+    <value>Din röst är accepterad</value>
   </string>
   <string id="31" name="alreadyvoted">
-    <value>Du har redan röstat i denna röstning.</value>
+    <value>Du har redan röstat i denna omröstning.</value>
   </string>
   <string id="32" name="voting">
-    <value>Rösta !</value>
+    <value>Rösta!</value>
   </string>
   <string id="33" name="answer">
     <value>Din respons:</value>
@@ -115,7 +115,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>vill veta:</value>
   </string>
   <string id="37" name="pollresults">
-    <value>Röstnings resultat</value>
+    <value>Röstningsresultat</value>
   </string>
   <string id="38" name="question">
     <value>Fråga:</value>
@@ -127,7 +127,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Svar:</value>
   </string>
   <string id="41" name="nopoll">
-    <value>Inga nya röstningar har startat.</value>
+    <value>Inga nya omröstningar har påbörjats.</value>
   </string>
   <string id="42" name="votings">
     <value>Rösta!</value>
@@ -208,7 +208,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Fråga innan skrivbordet töms?.</value>
   </string>
   <string id="68" name="userinfo">
-    <value>Användar Info</value>
+    <value>Användarinfo</value>
   </string>
   <string id="69" name="cleardrawarea">
     <value>Rensa ritområdet</value>
@@ -325,10 +325,10 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Denna epost är redan använd</value>
   </string>
   <string id="107" name="emailtaken">
-    <value>Systemfel kontakta systemadmin</value>
+    <value>Systemfel, kontakta systemadmin</value>
   </string>
   <string id="108" name="Authlogin">
-    <value>Logga in</value>
+    <value>Login</value>
   </string>
   <string id="109" name="Authuser">
     <value>Användare:</value>
@@ -361,7 +361,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Efternamn:</value>
   </string>
   <string id="119" name="regformmail">
-    <value>Epost:</value>
+    <value>E-post:</value>
   </string>
   <string id="120" name="regformstate">
     <value>Land:</value>
@@ -400,7 +400,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Stig in</value>
   </string>
   <string id="132" name="useralterself_login">
-    <value>Logga in</value>
+    <value>Login</value>
   </string>
   <string id="133" name="useralterself_pass">
     <value>Lösenord</value>
@@ -415,10 +415,10 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Efternamn</value>
   </string>
   <string id="137" name="useralterself_email">
-    <value>Epost</value>
+    <value>E-post</value>
   </string>
   <string id="138" name="useralterself_birth">
-    <value>Personnummer</value>
+    <value>Födelseår</value>
   </string>
   <string id="139" name="useralterself_streetno">
     <value>Gata/nr</value>
@@ -445,7 +445,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Användar-ID</value>
   </string>
   <string id="147" name="admin_userlist_login">
-    <value>Logga in</value>
+    <value>Login</value>
   </string>
   <string id="148" name="admin_userlist_firstnam">
     <value>Förnamn</value>
@@ -457,7 +457,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Visa nästa</value>
   </string>
   <string id="151" name="turnoverlist_pre">
-    <value>Visa före</value>
+    <value>Visa föregående</value>
   </string>
   <string id="152" name="savecontent_confirm">
     <value>Radera innehåll</value>
@@ -502,10 +502,10 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Namn</value>
   </string>
   <string id="166" name="uservalue_levelid1">
-    <value>användare</value>
+    <value>Användare</value>
   </string>
   <string id="167" name="uservalue_levelid2">
-    <value>mod</value>
+    <value>Moderator</value>
   </string>
   <string id="168" name="uservalue_levelid3">
     <value>Admin</value>
@@ -616,7 +616,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Spara</value>
   </string>
   <string id="204" name="rpcerrorwin_header">
-    <value>Fel</value>
+    <value>Bearbetar</value>
   </string>
   <string id="205" name="loadwml_header">
     <value>Laddar</value>
@@ -682,7 +682,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Efternamn</value>
   </string>
   <string id="226" name="invited_userwin_mail">
-    <value>Epost</value>
+    <value>E-post</value>
   </string>
   <string id="227" name="invited_userwin_lang">
     <value>Språk</value>
@@ -700,13 +700,13 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Fel lösenord</value>
   </string>
   <string id="232" name="user_registerFalsePWDHeader">
-    <value>2 identiska lösenord med minst 4 tecken tack</value>
+    <value>2 identiska lösenord med minst 4 tecken, tack!</value>
   </string>
   <string id="233" name="user_registerMailError">
-    <value>Fel epostadress</value>
+    <value>Fel e-postadress</value>
   </string>
   <string id="234" name="user_registerMailErrorHeader">
-    <value>Du har angett en ogiltig epostadress</value>
+    <value>Du har angett en ogiltig e-postadress</value>
   </string>
   <string id="235" name="user_registerSuccess">
     <value>Registrering klar</value>
@@ -715,7 +715,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Ditt konto är skapat. Du kan logga in.</value>
   </string>
   <string id="237" name="user_sharing_message">
-    <value>Du kan inte dela din skärm just nu. En annan delar sin skärm.</value>
+    <value>Du kan inte dela din skärm just nu. Någon annan delar sin skärm.</value>
   </string>
   <string id="238" name="user_sharing_messageHeader">
     <value>Delning förbjuden</value>
@@ -730,55 +730,55 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Skärm av:</value>
   </string>
   <string id="242" name="whiteboard_tab_paint">
-    <value>Paint</value>
+    <value>Måla</value>
   </string>
   <string id="243" name="whiteboard_tab_document">
-    <value>Document</value>
+    <value>Dokument</value>
   </string>
   <string id="244" name="tabbar_chaticon">
     <value>Chat</value>
   </string>
   <string id="245" name="tabbar_filesicon">
-    <value>Files</value>
+    <value>Filer</value>
   </string>
   <string id="246" name="tabbar_participantsicon">
-    <value>Members</value>
+    <value>Medlemmar</value>
   </string>
   <string id="247" name="swfpresentation_listsaveorig">
-    <value>Download original document</value>
+    <value>Ladda ner originaldokument</value>
   </string>
   <string id="248" name="swfpresentation_listsavepdf">
-    <value>Download pdf document</value>
+    <value>Ladda ner PDF-dokument</value>
   </string>
   <string id="249" name="swfpresentation_listloadswf">
-    <value>Load Presentation to whiteboard</value>
+    <value>Ladda presentationen till whiteboard</value>
   </string>
   <string id="250" name="navimain_config">
-    <value>Configuration</value>
+    <value>Konfiguration</value>
   </string>
   <string id="251" name="whiteboard_boundingbox_drag">
-    <value>Drag this Object</value>
+    <value>Dra det här objektet</value>
   </string>
   <string id="252" name="whiteboard_boundingbox_resize">
-    <value>Resize this Object</value>
+    <value>Ändra storleken på det här objektet</value>
   </string>
   <string id="253" name="whiteboard_documenttoolbar_zoom">
     <value>%</value>
   </string>
   <string id="254" name="whiteboard_documenttoolbar_slide">
-    <value>of</value>
+    <value>av</value>
   </string>
   <string id="255" name="whiteboard_documenttoolbar_firstslide">
-    <value>Go to first Page</value>
+    <value>Gå till första sidan</value>
   </string>
   <string id="256" name="whiteboard_documenttoolbar_preslide">
-    <value>Go to previous Page</value>
+    <value>Gå till föregående sida</value>
   </string>
   <string id="257" name="whiteboard_documenttoolbar_nextslide">
-    <value>Go to next Page</value>
+    <value>Gå till nästa sida</value>
   </string>
   <string id="258" name="whiteboard_documenttoolbar_lastslide">
-    <value>Go to last Page</value>
+    <value>Gå till sista sidan</value>
   </string>
   <string id="259" name="whiteboard_documenttoolbar_zoomminus">
     <value>Zoom --</value>
@@ -787,67 +787,67 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Zoom ++</value>
   </string>
   <string id="261" name="salutation_mr">
-    <value>Mr.</value>
+    <value>Herr</value>
   </string>
   <string id="262" name="salutation_miss">
-    <value>Ms.</value>
+    <value>Fröken</value>
   </string>
   <string id="263" name="navimain_confadmin">
-    <value>Configuration</value>
+    <value>Konfiguration</value>
   </string>
   <string id="264" name="conftable_headerId">
     <value>ID</value>
   </string>
   <string id="265" name="conftable_headerkey">
-    <value>Key</value>
+    <value>Nyckel</value>
   </string>
   <string id="266" name="confadminform_header">
-    <value>Configuration</value>
+    <value>Konfiguration</value>
   </string>
   <string id="267" name="confadminform_labelkey">
-    <value>Key</value>
+    <value>Nyckel</value>
   </string>
   <string id="268" name="confadminform_labelupdated">
-    <value>last update</value>
+    <value>senast uppdaterat</value>
   </string>
   <string id="269" name="confadminform_labelupdatedby">
-    <value>updatedby</value>
+    <value>uppdaterat av</value>
   </string>
   <string id="270" name="confadminform_labelcomment">
-    <value>comment</value>
+    <value>kommentar</value>
   </string>
   <string id="271" name="confadminform_labelkey">
-    <value>key</value>
+    <value>nyckel</value>
   </string>
   <string id="272" name="turnoverlist_maxresults">
-    <value>of</value>
+    <value>av</value>
   </string>
   <string id="273" name="organisation_usersheader">
-    <value>Users</value>
+    <value>Användare</value>
   </string>
   <string id="274" name="organisation_usersicondelete">
-    <value>delete user from organisation</value>
+    <value>radera användare från organisationen</value>
   </string>
   <string id="275" name="organisation_usersdeletedhead">
-    <value>delete</value>
+    <value>radera</value>
   </string>
   <string id="276" name="organisation_usersalreadadded">
-    <value>This user is already member of this organisation.</value>
+    <value>Den här användaren är redan medlem av den här organisationen.</value>
   </string>
   <string id="277" name="dashboard_newsheader">
-    <value>News</value>
+    <value>Nyheter</value>
   </string>
   <string id="278" name="dashboard_quicklinksheader">
-    <value>Quicklinks</value>
+    <value>Snabblänkar</value>
   </string>
   <string id="279" name="dashboard_quicklinkConf">
-    <value>Goto Conference</value>
+    <value>Gå till Konferens</value>
   </string>
   <string id="280" name="dashboard_quicklinkAudit">
-    <value>Goto Auditorium</value>
+    <value>Gå till Auditorium</value>
   </string>
   <string id="281" name="dashboard_quicklinksupport">
-    <value>Help and Support</value>
+    <value>Hjälp och Support</value>
   </string>
   <string id="282" name="dashboard_quickhomepageurl">
     <value>http://code.google.com/p/openmeetings/</value>
@@ -856,589 +856,589 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>http://groups.google.com/group/openmeetings-user</value>
   </string>
   <string id="284" name="dashboard_reportbugs">
-    <value>Report a bug!</value>
+    <value>Buggrapport</value>
   </string>
   <string id="285" name="dashboard_rsslistitemlinktext">
-    <value>more</value>
+    <value>mera</value>
   </string>
   <string id="286" name="dashboard_quicklinkhomepagelabel">
-    <value>Project Website (code.google.com/p/openmeetings/)</value>
+    <value>Projektets Webbsida (code.google.com/p/openmeetings/)</value>
   </string>
   <string id="287" name="dashboard_quicklinkmailinglistlabel">
-    <value>User Mailing List (groups.google.com/group/openmeetings-user)</value>
+    <value>Epostlista För Användare (groups.google.com/group/openmeetings-user)</value>
   </string>
   <string id="288" name="login_rememberuser">
-    <value>Remember Login</value>
+    <value>Kom Ihåg Inloggning</value>
   </string>
   <string id="289" name="main_navi">
-    <value>Content</value>
+    <value>Innehåll</value>
   </string>
   <string id="290" name="subnavi">
-    <value>My Home Page</value>
+    <value>Min Hemsida</value>
   </string>
   <string id="291" name="subnavi">
-    <value>My Scheduled Meetings</value>
+    <value>Mina Schemalagda Möten</value>
   </string>
   <string id="292" name="subnavi">
-    <value>My Scheduled Events</value>
+    <value>Mina Planerade Auditorier</value>
   </string>
   <string id="293" name="subnavi">
-    <value>Public Meetings</value>
+    <value>Allmänna Möten</value>
   </string>
   <string id="294" name="subnavi">
-    <value>Private Meetings</value>
+    <value>Privata Möten</value>
   </string>
   <string id="295" name="subnavi">
-    <value>Public Events</value>
+    <value>Allmänna Auditorier</value>
   </string>
   <string id="296" name="subnavi">
-    <value>Private Events</value>
+    <value>Privata Auditorier</value>
   </string>
   <string id="297" name="subnavi">
-    <value>Public Content</value>
+    <value>Allmänt Innehåll</value>
   </string>
   <string id="298" name="subnavi">
-    <value>Private Content</value>
+    <value>Privat Innehåll</value>
   </string>
   <string id="299" name="subnavi">
-    <value>Personal Content</value>
+    <value>Personligt Innehåll</value>
   </string>
   <string id="300" name="subnavi">
     <value></value>
   </string>
   <string id="301" name="conferencebar">
-    <value>Moderation</value>
+    <value>Moderering</value>
   </string>
   <string id="302" name="conferencebar">
-    <value>Apply for Moderation</value>
+    <value>Anhåll om Moderering</value>
   </string>
   <string id="303" name="conferencebar">
-    <value>Polls</value>
+    <value>Omröstningar</value>
   </string>
   <string id="304" name="conferencebar">
-    <value>Choose a file</value>
+    <value>Välj en fil</value>
   </string>
   <string id="305" name="conferencebar">
-    <value>Settings</value>
+    <value>Inställningar</value>
   </string>
   <string id="306" name="conferencebar">
-    <value>Cam and Mic Settings</value>
+    <value>Kam. &amp; Mik. Inställn.</value>
   </string>
   <string id="307" name="conferencebar">
-    <value>Whiteboard Settings</value>
+    <value>Whiteboard Inställningar</value>
   </string>
   <string id="308" name="conferencebar">
-    <value>Exit</value>
+    <value>Avsluta</value>
   </string>
   <string id="309" name="conferencebar">
-    <value>Back to Rooms</value>
+    <value>Lämna Rummet</value>
   </string>
   <string id="310" name="conferencebar">
-    <value>Logout</value>
+    <value>Logga ut</value>
   </string>
   <string id="311" name="loginwindow">
-    <value>Desktop Viewer</value>
+    <value>Glömt ditt lösenord?</value>
   </string>
   <string id="312" name="loginwindow">
-    <value>start Desktop Viewer</value>
+    <value>Återställ Lösenord</value>
   </string>
   <string id="313" name="loginwindow">
-    <value>Video and Audio</value>
+    <value>Via E-post</value>
   </string>
   <string id="314" name="loginwindow">
-    <value>Chat</value>
+    <value>Via Användarnamn</value>
   </string>
   <string id="315" name="loginwindow">
-    <value>Whiteboard</value>
+    <value>Din E-postadress</value>
   </string>
   <string id="316" name="loginwindow">
-    <value>Moderation</value>
+    <value>Ditt Användarnamn</value>
   </string>
   <string id="317" name="loginwindow">
-    <value>Files</value>
+    <value>OK</value>
   </string>
   <string id="318" name="loginwindow">
-    <value>Users</value>
+    <value>Användare</value>
   </string>
   <string id="319" name="loginwindow">
-    <value>Polls</value>
+    <value>Omröstningar</value>
   </string>
   <string id="320" name="loginwindow">
-    <value>There is no User connected to this Username</value>
+    <value>Det finns ingen Användare kopplad till detta Användarnamn</value>
   </string>
   <string id="321" name="loginwindow">
-    <value>The email containing a special link has been sent to your email address, please check your mailbox. If you still have not received a email, please adjust your email spam settings and resend confirmation email.</value>
+    <value>Ett e-postmeddelande innehållande en unik länk har skickats till din epostadress, var vänlig kolla din epost. Om du fortfarande inte fått något e-postmeddelande, var vänlig ändra spaminställningarna för din e-post och skicka bekräftelsemeddelandet på nytt.</value>
   </string>
   <string id="322" name="errortype">
-    <value>Error</value>
+    <value>Bearbetar</value>
   </string>
   <string id="323" name="errortype">
-    <value>Message</value>
+    <value>Meddelande</value>
   </string>
   <string id="324" name="resetpass">
-    <value>Invalid Hash. No User found.</value>
+    <value>Ogiltig Hash. Ingen Användare Funnen.</value>
   </string>
   <string id="325" name="resetpass">
-    <value>Reset Your Password</value>
+    <value>Återställ Ditt Lösenord</value>
   </string>
   <string id="326" name="resetpass">
     <value>Login</value>
   </string>
   <string id="327" name="resetpass">
-    <value>change Password</value>
+    <value>Ändra Lösenord</value>
   </string>
   <string id="328" name="resetpass">
-    <value>new Password</value>
+    <value>Nytt Lösenord</value>
   </string>
   <string id="329" name="resetpass">
-    <value>re-enter Password</value>
+    <value>Ange Lösenord på nytt</value>
   </string>
   <string id="330" name="resetpass">
-    <value>The Passwords you entered weren't identical.</value>
+    <value>Lösenorden du angett är inte identiska.</value>
   </string>
   <string id="331" name="resetpass">
-    <value>4 or more characters; capitalization matters!</value>
+    <value>4 eller mer tecken; versalisering inverkar!</value>
   </string>
   <string id="332" name="resetpass">
-    <value>Password set. You can login now.</value>
+    <value>Lösenord valt. Du kan logga in nu.</value>
   </string>
   <string id="333" name="rpccallback">
     <value>OK</value>
   </string>
   <string id="334" name="rpcgeneralerror">
-    <value>Unkown Error. Please report this to your Service-Team.</value>
+    <value>Okänt Fel. Var vänlig rapportera detta till ditt Service-Team.</value>
   </string>
   <string id="335" name="loginwindow">
-    <value>Username not found</value>
+    <value>Användarnamnet hittades inte.</value>
   </string>
   <string id="336" name="loginwindow">
-    <value>Invalid Password</value>
+    <value>Ogiltigt Lösenord.</value>
   </string>
   <string id="337" name="logout">
-    <value>Successfully Logged out</value>
+    <value>Utloggning Lyckades.</value>
   </string>
   <string id="338" name="registration">
-    <value>Frontend Registration disabled.</value>
+    <value>Registrering via gränssnittet är Inaktiverat.</value>
   </string>
   <string id="339" name="registration">
-    <value>Invalid EMail</value>
+    <value>Ogiltig Epostadress.</value>
   </string>
   <string id="340" name="registration">
-    <value>duplicate filename, please choose another filename</value>
+    <value>Duplikat filnamn, var vänlig välj ett annat filnamn.</value>
   </string>
   <string id="341" name="filebrowser">
-    <value>filename too short</value>
+    <value>Filnamnet är för kort.</value>
   </string>
   <string id="342" name="filebrowser">
-    <value>Could not save Address</value>
+    <value>Kunde inte spara Adressen.</value>
   </string>
   <string id="343" name="useradmin">
-    <value>User added but you need to assign this User to an Organisation, otherwise he won't be able to sign-in.</value>
+    <value>Användare tillagd, men du måste tilldela honom en Organisation för att kunna logga in.</value>
   </string>
   <string id="344" name="adminforms">
-    <value>New Record</value>
+    <value>Nytt Record</value>
   </string>
   <string id="345" name="languageseditor">
-    <value>No Field found with this FieldId.</value>
+    <value>Inget fält med detta FältId hittades.</value>
   </string>
   <string id="346" name="languageseditor">
-    <value>No Label found for that Field.</value>
+    <value>Ingen Etikett hittades för det Fältet.</value>
   </string>
   <string id="347" name="errormessage">
-    <value>Admin Authorization required</value>
+    <value>Admin Auktorisering krävs.</value>
   </string>
   <string id="348" name="mainnavi">
-    <value>Language-Editor</value>
+    <value>Språk-Editor</value>
   </string>
   <string id="349" name="languageseditor">
-    <value>Language</value>
+    <value>Språk</value>
   </string>
   <string id="350" name="languageseditor">
-    <value>Label-ID</value>
+    <value>Etikett-ID</value>
   </string>
   <string id="351" name="languageseditor">
-    <value>Label-Name</value>
+    <value>Etikett-Namn</value>
   </string>
   <string id="352" name="languageseditor">
-    <value>Value</value>
+    <value>Värde</value>
   </string>
   <string id="353" name="languageseditor">
-    <value>Fieldvalues</value>
+    <value>Fältvärden</value>
   </string>
   <string id="354" name="languageseditor">
-    <value>LabelName</value>
+    <value>EtikettNamn</value>
   </string>
   <string id="355" name="languageseditor">
-    <value>LabelValue</value>
+    <value>EtikettVärde</value>
   </string>
   <string id="356" name="languageseditor">
-    <value>Label-ID</value>
+    <value>Etikett-ID</value>
   </string>
   <string id="357" name="languageseditor">
-    <value>You did only delete the Label NOT the Field! You cannot delete the Field, it may has Labels in other Languages.</value>
+    <value>Du raderade endast Etiketten, INTE Fältet! Du kan inte radera Fältet, det innehåller kanske Etiketter på andra Språk.</value>
   </string>
   <string id="358" name="languageseditor">
-    <value>Invalid Labelid. The FieldLanguagesvalues_Id cannot be found in the database.</value>
+    <value>Ogiltig Etikett-ID. FieldLanguagesvalues_Id kan inte hittas i databasen.</value>
   </string>
   <string id="359" name="languageseditor">
-    <value>You cannot delete this Field. You can only delete Labels NOT Fields. There is no Label loaded at the moment, wether it is not selected any Field or there is no Label for this Language for that Field defined.</value>
+    <value>Du kan inte radera det här Fältet. Du kan endast radera Etiketter, INTE Fält. För tillfället är ingen Etikett laddad, detta kan bero på att ingen Etikett är vald eller för att inga Etiketter är definierade för det här fältet och språket.</value>
   </string>
   <string id="360" name="languageseditor">
-    <value>export</value>
+    <value>Exportera</value>
   </string>
   <string id="361" name="languageseditor">
-    <value>You need to logout to see any changes.</value>
+    <value>Du måste logga ut för att se ändringar.</value>
   </string>
   <string id="362" name="languageseditor">
-    <value>Add new language</value>
+    <value>Lägg till nytt språk</value>
   </string>
   <string id="363" name="languageseditor">
-    <value>delete language</value>
+    <value>Ta bort språk</value>
   </string>
   <string id="364" name="languageseditor">
-    <value>Add new language</value>
+    <value>Lägg till nytt språk</value>
   </string>
   <string id="365" name="languageseditor">
-    <value>Name</value>
+    <value>Namn</value>
   </string>
   <string id="366" name="languageseditor">
-    <value>add language</value>
+    <value>Lägg till språk</value>
   </string>
   <string id="367" name="languageseditor">
-    <value>Backup</value>
+    <value>Säkerhetskopia</value>
   </string>
   <string id="368" name="turnoverlist">
-    <value>goto first</value>
+    <value>Gå till första</value>
   </string>
   <string id="369" name="turnoverlist">
-    <value>goto previous</value>
+    <value>Gå till föregående</value>
   </string>
   <string id="370" name="turnoverlist">
-    <value>goto next</value>
+    <value>Gå till nästa</value>
   </string>
   <string id="371" name="turnoverlist">
-    <value>goto last</value>
+    <value>Gå till sista</value>
   </string>
   <string id="372" name="videobox">
-    <value>user speaks</value>
+    <value>Användare talar</value>
   </string>
   <string id="373" name="videobox">
-    <value>turn sound on/off</value>
+    <value>Sätt på/av ljudet</value>
   </string>
   <string id="374" name="dashboard">
     <value>System</value>
   </string>
   <string id="375" name="dashboard">
-    <value>Your Settings</value>
+    <value>Dina inställningar</value>
   </string>
   <string id="376" name="dashboard">
-    <value>hi,</value>
+    <value>Hej,</value>
   </string>
   <string id="377" name="dashboard">
-    <value>Edit your profile</value>
+    <value>Ändra din profil</value>
   </string>
   <string id="378" name="dashboard">
-    <value>New Messages:</value>
+    <value>Nya meddelanden:</value>
   </string>
   <string id="379" name="dashboard">
-    <value>Upload new Image</value>
+    <value>Ladda upp nya bilder</value>
   </string>
   <string id="380" name="backuppanel">
-    <value>Userdata - Export</value>
+    <value>Användardata - Exportera</value>
   </string>
   <string id="381" name="backuppanel">
-    <value>All organisations must be already existing!</value>
+    <value>Alla organisationer måste finnas från tidigare!</value>
   </string>
   <string id="382" name="backuppanel">
-    <value>start export</value>
+    <value>Påbörja exporteringen</value>
   </string>
   <string id="383" name="backuppanel">
-    <value>By organisation</value>
+    <value>Enligt organisation</value>
   </string>
   <string id="384" name="backuppanel">
-    <value>start export</value>
+    <value>Påbörja exporteringen</value>
   </string>
   <string id="385" name="backuppanel">
-    <value>Userdata - Import</value>
+    <value>Användardata - Importera</value>
   </string>
   <string id="386" name="backuppanel">
-    <value>choose users.xml</value>
+    <value>Välj users.xml</value>
   </string>
   <string id="387" name="languageseditor">
-    <value>import</value>
+    <value>Importera</value>
   </string>
   <string id="388" name="languageseditor">
-    <value>Export to XML - These files can be used to: - Contribute to the project - Import into another System - Backup - Customization - Put it into the language-directory for your next installation</value>
+    <value>Exportera till XML - Dessa filer kan användas för att: - Bidra till projektet - Importera till ett annat system - Göra säkerhetskopior - Skräddarsy programmet - Lägga i language-mappen för kommande installationer</value>
   </string>
   <string id="389" name="languageseditor">
-    <value>Choose a language file to import. Choose the right Langauge from the Combobox! No matter what the name of the file is, it will be imported into this language!</value>
+    <value>Välj en språkfil att importera. Välj rätt språk från Comboboxen! Språkfilen kommer att importeras till detta språk oberoende av namnet på filen!</value>
   </string>
   <string id="390" name="importwindow">
-    <value>import - choose file</value>
+    <value>Importera - välj fil</value>
   </string>
   <string id="391" name="recordingsavewin">
-    <value>Save as</value>
+    <value>Spara som</value>
   </string>
   <string id="392" name="recordingsavewin">
-    <value>Name:</value>
+    <value>Namn:</value>
   </string>
   <string id="393" name="recordingsavewin">
-    <value>Comment:</value>
+    <value>Kommentar:</value>
   </string>
   <string id="394" name="recordingsavewin">
-    <value>save</value>
+    <value>Spara</value>
   </string>
   <string id="395" name="record">
-    <value>Recordings</value>
+    <value>Inspelningar</value>
   </string>
   <string id="396" name="recorder">
-    <value>Recordings Viewer</value>
+    <value>Inspelningsförevisaren</value>
   </string>
   <string id="397" name="record">
-    <value>Recordings of public and private Rooms</value>
+    <value>Inspelningar från allmänna och privata rum</value>
   </string>
   <string id="398" name="roomslist">
-    <value>Users :</value>
+    <value>Användare:</value>
   </string>
   <string id="399" name="roomslist">
-    <value>Joined:</value>
+    <value>Anslöt sig:</value>
   </string>
   <string id="400" name="roomslist">
     <value></value>
   </string>
   <string id="401" name="roomslist">
-    <value>Users in this Room:</value>
+    <value>Användare i det här rummet:</value>
   </string>
   <string id="402" name="roomslist">
-    <value>refresh</value>
+    <value>Uppdatera</value>
   </string>
   <string id="403" name="roomslist">
-    <value>This Room is Full. Try again in a few minutes.</value>
+    <value>Det här rummet är fullt. Försök igenom om någon minut.</value>
   </string>
   <string id="404" name="roomsList">
-    <value>click on a room to get details</value>
+    <value>Klicka på ett rum för att få mera detaljer</value>
   </string>
   <string id="405" name="roomslist">
-    <value>Chat with the users in this Room:</value>
+    <value>Chatta med användarna i det här rummet:</value>
   </string>
   <string id="406" name="roomslist">
-    <value>Room:</value>
+    <value>Rum:</value>
   </string>
   <string id="407" name="roomslist">
-    <value>Users in this room:</value>
+    <value>Användare i det här rummet:</value>
   </string>
   <string id="408" name="roomslist">
-    <value>since:</value>
+    <value>Sedan:</value>
   </string>
   <string id="409" name="record">
-    <value>play recording</value>
+    <value>Spela upp inspelning</value>
   </string>
   <string id="410" name="record">
-    <value>Length:</value>
+    <value>Längd:</value>
   </string>
   <string id="411" name="record">
-    <value>Date:</value>
+    <value>Datum:</value>
   </string>
   <string id="412" name="record">
-    <value>Recorder Mode! You cannot change any values, this is a recorded File!</value>
+    <value>Inspelningsläge! Du kan inte ändra några värden, detta är en inspelad fil.</value>
   </string>
   <string id="413" name="record">
-    <value>Play this recording</value>
+    <value>Spela upp denna inspelning</value>
   </string>
   <string id="414" name="record">
-    <value>Play / Pause</value>
+    <value>Spela upp / Pausa</value>
   </string>
   <string id="415" name="record">
-    <value>Start recording</value>
+    <value>Påbörja inspelning</value>
   </string>
   <string id="416" name="record">
-    <value>stop recording</value>
+    <value>Stoppa inspelning</value>
   </string>
   <string id="417" name="record">
-    <value>Recording:</value>
+    <value>Inspelning:</value>
   </string>
   <string id="418" name="record_error_msg">
-    <value>There is already somebody recording at the moment:</value>
+    <value>Det är redan någon som spelar in:</value>
   </string>
   <string id="419" name="record_message">
-    <value>Recording! By User:</value>
+    <value>Inspelning! Av användare:</value>
   </string>
   <string id="420" name="record_cancel">
-    <value>cancel</value>
+    <value>Avbryt</value>
   </string>
   <string id="421" name="record_cancal_tooltip">
-    <value>Recording will be canceled and not saved.</value>
+    <value>Inspelningen kommer att avbryts och inte heller sparas.</value>
   </string>
   <string id="422" name="cancel_dialog_resume">
-    <value>resume</value>
+    <value>Återuppta</value>
   </string>
   <string id="423" name="cancel_dialog_resume_tooltip">
-    <value>Close this window and resume recording</value>
+    <value>Stäng det här fönstret och återuppta inspelningen</value>
   </string>
   <string id="424" name="painttools_ellipse_color">
-    <value>change Linecolor</value>
+    <value>Ändra Linjefärg</value>
   </string>
   <string id="425" name="colorpicker_head">
-    <value>Choose Color</value>
+    <value>Välj Färg</value>
   </string>
   <string id="426" name="painttools_line_disable">
-    <value>Disable / Enable Linecolor</value>
+    <value>Inaktivera / Aktivera Linjefärg</value>
   </string>
   <string id="427" name="painttools_fill_disable">
-    <value>change Fillcolor</value>
+    <value>Ändra Fyllfärg</value>
   </string>
   <string id="428" name="painttools_line_disable">
-    <value>Disable / Enable Fillcolor</value>
+    <value>Inaktivera / Aktivera Fyllfärg</value>
   </string>
   <string id="429" name="change_width_arrow_down_slider">
-    <value>Change Linewidth</value>
+    <value>Ändra Linjebredd</value>
   </string>
   <string id="430" name="close_small_popups">
-    <value>close</value>
+    <value>Stäng</value>
   </string>
   <string id="431" name="paint_tool_letter">
-    <value>change Fontsize</value>
+    <value>Ändra storlek på teckensnitt</value>
   </string>
   <string id="432" name="recordingslist_delete">
-    <value>Delete Recording</value>
+    <value>Ta bort Inspelning</value>
   </string>
   <string id="433" name="recordingslist_recordedByGuest">
-    <value>Guest</value>
+    <value>Gäst</value>
   </string>
   <string id="434" name="recordingslist_recordedby">
-    <value>By:</value>
+    <value>Av:</value>
   </string>
   <string id="435" name="recordings_table_head_name">
-    <value>Name</value>
+    <value>Namn</value>
   </string>
   <string id="436" name="recordings_table_head_room">
-    <value>Room</value>
+    <value>Rum</value>
   </string>
   <string id="437" name="recordings_table_head_date">
-    <value>Date</value>
+    <value>Datum</value>
   </string>
   <string id="438" name="record_start_cancel">
-    <value>cancel</value>
+    <value>Avbryt</value>
   </string>
   <string id="439" name="record_start_start">
-    <value>start</value>
+    <value>Starta</value>
   </string>
   <string id="440" name="filesbrowser_table_head_name">
-    <value>Name</value>
+    <value>Namn</value>
   </string>
   <string id="441" name="filesbrowser_table_head_date">
-    <value>Date</value>
+    <value>Datum</value>
   </string>
   <string id="442" name="chat_clear_history">
-    <value>Delete Server-Chatlog</value>
+    <value>Radera Serverns Chatlogg</value>
   </string>
   <string id="443" name="chat_overall_header">
     <value>Chat</value>
   </string>
   <string id="444" name="chat_send_btn">
-    <value>send message</value>
+    <value>Skicka meddelande</value>
   </string>
   <string id="445" name="chat_emot_btn">
-    <value>Emoticons</value>
+    <value>Emotikoner</value>
   </string>
   <string id="446" name="chat_emot_win">
-    <value>Emoticons</value>
+    <value></value>
   </string>
   <string id="447" name="choose_video_settings">
-    <value>Choose Published Devices</value>
+    <value>Välj Enheter</value>
   </string>
   <string id="448" name="choose_video_settings_combo">
-    <value>Audio and Video</value>
+    <value>Ljud och Video</value>
   </string>
   <string id="449" name="choose_video_settings_combo">
-    <value>Audio only</value>
+    <value>Endast Ljud</value>
   </string>
   <string id="450" name="choose_video_settings_combo">
-    <value>Video only</value>
+    <value>Endast Video</value>
   </string>
   <string id="451" name="choose_video_settings_combo">
-    <value>no Audio/Video (static Image)</value>
+    <value>Inget Ljud/Video (statisk bild)</value>
   </string>
   <string id="452" name="choose_video_settings_info_text">
-    <value>No Audio/Video from your PC will be published, instead of that a picture from your profile will be shown. Choose these settings if you have problems with your bandwidth or a very slow Internet connection.</value>
+    <value>Inget Ljud/Video kommer att publiceras, i stället kommer en bild från din profil att visas. Välj den här inställningen om du har dålig bandbredd.</value>
   </string>
   <string id="453" name="calendar_dayname_monday">
-    <value>MO</value>
+    <value>MÅ</value>
   </string>
   <string id="454" name="calendar_dayname_tuesday">
-    <value>TU</value>
+    <value>TI</value>
   </string>
   <string id="455" name="calendar_dayname_wednesday">
-    <value>WE</value>
+    <value>ON</value>
   </string>
   <string id="456" name="calendar_dayname_thursday">
-    <value>TH</value>
+    <value>TO</value>
   </string>
   <string id="457" name="calendar_dayname_friday">
     <value>FR</value>
   </string>
   <string id="458" name="calendar_dayname_saturday">
-    <value>SA</value>
+    <value>LÖ</value>
   </string>
   <string id="459" name="calendar_dayname_sunday">
-    <value>SU</value>
+    <value>SÖ</value>
   </string>
   <string id="460" name="calendar_dayname_monday">
-    <value>Monday</value>
+    <value>Måndag</value>
   </string>
   <string id="461" name="calendar_dayname_TuesdayLabel">
-    <value>Tuesday</value>
+    <value>Tisdag</value>
   </string>
   <string id="462" name="calendar_dayname_WednesdayLabel">
-    <value>Wednesday</value>
+    <value>Onsdag</value>
   </string>
   <string id="463" name="calendar_dayname_ThursdayLabel">
-    <value>Thursday</value>
+    <value>Torsdag</value>
   </string>
   <string id="464" name="calendar_dayname_FridayLabel">
-    <value>Friday</value>
+    <value>Fridag</value>
   </string>
   <string id="465" name="calendar_dayname_SaturdayLabel">
-    <value>Saturday</value>
+    <value>Lördag</value>
   </string>
   <string id="466" name="calendar_dayname_SundayLabel">
-    <value>Sunday</value>
+    <value>Söndag</value>
   </string>
   <string id="467" name="calendar_weeknumber_header">
-    <value>CW</value>
+    <value>KV</value>
   </string>
   <string id="468" name="calendar_weeknumber_headerTooltip">
-    <value>Calendar week</value>
+    <value>Kalender vecka</value>
   </string>
   <string id="469" name="calendar_monthnames">
-    <value>January</value>
+    <value>Januari</value>
   </string>
   <string id="470" name="calendar_monthnames">
-    <value>February</value>
+    <value>Februari</value>
   </string>
   <string id="471" name="calendar_monthnames">
-    <value>March</value>
+    <value>Mars</value>
   </string>
   <string id="472" name="calendar_monthnames">
     <value>April</value>
   </string>
   <string id="473" name="calendar_monthnames">
-    <value>May</value>
+    <value>Maj</value>
   </string>
   <string id="474" name="calendar_monthnames">
-    <value>June</value>
+    <value>Juni</value>
   </string>
   <string id="475" name="calendar_monthnames">
-    <value>July</value>
+    <value>Juli</value>
   </string>
   <string id="476" name="calendar_monthnames">
-    <value>August</value>
+    <value>Augusti</value>
   </string>
   <string id="477" name="calendar_monthnames">
     <value>September</value>
   </string>
   <string id="478" name="calendar_monthnames">
-    <value>October</value>
+    <value>Oktober</value>
   </string>
   <string id="479" name="calendar_monthnames">
     <value>November</value>
@@ -1447,325 +1447,325 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>December</value>
   </string>
   <string id="481" name="calendarwin_header">
-    <value>Calendar</value>
+    <value>Kalender</value>
   </string>
   <string id="482" name="roomadmin_labelNumberOfParticipants">
-    <value>Participants</value>
+    <value>Deltagare</value>
   </string>
   <string id="483" name="roomValue_advancedSettings">
-    <value>Show Layout Settings</value>
+    <value>Visa Layout inställningar</value>
   </string>
   <string id="484" name="roomAdmin_layout_videoX">
     <value>X | Y</value>
   </string>
   <string id="485" name="roomAdmin_layout_videoY">
-    <value>Width | Height</value>
+    <value>Bredd | Höjd</value>
   </string>
   <string id="486" name="roomAdmin_layout">
-    <value>Video-Container</value>
+    <value>Video-Platshållare</value>
   </string>
   <string id="487" name="roomAdmin_layout_mod">
-    <value>Moderation-Container</value>
+    <value>Modererings-Platshållare</value>
   </string>
   <string id="488" name="roomAdmin_layout_mod_pos">
     <value>X</value>
   </string>
   <string id="489" name="roomAdmin_layout_whiteboard">
-    <value>Whiteboard-Container</value>
+    <value>Whiteboard-Platshållare</value>
   </string>
   <string id="490" name="roomAdmin_layout_whiteboard_show">
-    <value>Enabled</value>
+    <value>Aktiverad</value>
   </string>
   <string id="491" name="roomAdmin_layout_whiteboard_pos">
     <value>X | Y</value>
   </string>
   <string id="492" name="roomAdmin_layout_whiteboard">
-    <value>Width | Height</value>
+    <value>Bredd | Höjd</value>
   </string>
   <string id="493" name="roomAdmin_layout_files">
-    <value>Files,Chat,Partizipants - Container</value>
+    <value>Filer, Chat, Deltagare - Platshållare</value>
   </string>
   <string id="494" name="roomAdmin_layout_files_show">
-    <value>Enabled</value>
+    <value>Aktiverad</value>
   </string>
   <string id="495" name="roomAdmin_layout_files_pos">
-    <value>X |Y</value>
+    <value>X | Y</value>
   </string>
   <string id="496" name="roomAdmin_layout_files">
-    <value>Width | Height</value>
+    <value>Bredd | Höjd</value>
   </string>
   <string id="497" name="moderator_gone_message">
-    <value>The Moderator has left the Room. No one is presenting at the Moment. You could apply for Moderation or wait.</value>
+    <value>Moderatorn har lämnat rummet. För tillfället finns det ingen presentatör. Du kan ansöka om att bli Moderator eller vänta.</value>
   </string>
   <string id="498" name="moderator_message_event_no_mod">
-    <value>There is no Moderator in this Room, but there are some Participants. You have to apply for Moderation or wait.</value>
+    <value>Det finns ingen Moderator i det här rummet, men det finns några deltagare. Du kan ansöka om att bli Moderator eller vänta.</value>
   </string>
   <string id="499" name="feedback_template_subject">
-    <value>Feedback OpenMeetings</value>
+    <value>Feedback för OpenMeetings</value>
   </string>
   <string id="500" name="invitation_template_head">
-    <value>OpenMeetings - Invitation</value>
+    <value>OpenMeetings - Inbjudan</value>
   </string>
   <string id="501" name="invitation_text_from">
-    <value>Message from User:</value>
+    <value>Meddelande från Användare:</value>
   </string>
   <string id="502" name="invitation_text_message">
-    <value>Message:</value>
+    <value>Meddelande:</value>
   </string>
   <string id="503" name="invitation_text_click_text">
-    <value>Click this link to participate in the Meetings:</value>
+    <value>Klicka på den här länken för att delta i Mötet:</value>
   </string>
   <string id="504" name="invitation_text_click_text_link">
-    <value>Click here to enter room</value>
+    <value>Klicka här för att gå in i Rummet.</value>
   </string>
   <string id="505" name="invitation_text_click_text_help">
-    <value>if you have problems with the link, please copy and paste this to your browser:</value>
+    <value>Om du har problem med den här länken, var vänlig kopiera och klistra in det här i din webbläsare:</value>
   </string>
   <string id="506" name="registering_mail_text_head">
-    <value>OpenMeetings SignUp</value>
+    <value>OpenMeetings Registrering</value>
   </string>
   <string id="507" name="registering_mail_text_head2">
-    <value>Your userdata:</value>
+    <value>Din användardata:</value>
   </string>
   <string id="508" name="registering_mail_text_username">
     <value>Login:</value>
   </string>
   <string id="509" name="registering_mail_text_pass">
-    <value>Pass:</value>
+    <value>Lösenord:</value>
   </string>
   <string id="510" name="registering_mail_text_mail">
-    <value>EMail:</value>
+    <value>Epost:</value>
   </string>
   <string id="511" name="registering_mail_text_bye">
-    <value>OpenMeetings-Team</value>
+    <value>OpenMeetings-Teamet</value>
   </string>
   <string id="512" name="register_mail_subject">
-    <value>OpenMeetings Sign-Up</value>
+    <value>OpenMeetings Registrering</value>
   </string>
   <string id="513" name="reset_password_template_head">
-    <value>OpenMeetings - Reset Password</value>
+    <value>OpenMeetings - Återställ Lösenord</value>
   </string>
   <string id="514" name="reset_password_template_test_link">
-    <value>Click on this link to enter a new password:</value>
+    <value>Klicka på den här länken för att ange ett nytt lösenord:</value>
   </string>
   <string id="515" name="reset_password_template_text2_link">
-    <value>Click here to enter a new Password</value>
+    <value>Klicka här för att ange ett nytt lösenord</value>
   </string>
   <string id="516" name="reset_password_template_text3_link">
-    <value>if you have problems with the link, please copy and paste this to your browser:</value>
+    <value>Om du har problem med länken, var vänlig kopiera och klistra in detta i din webbläsare:</value>
   </string>
   <string id="517" name="reset_password_mail_subject">
-    <value>OpenMeetings Password Reset</value>
+    <value>OpenMeetings lösenordsåterställning</value>
   </string>
   <string id="518" name="dateRegExpError">
-    <value>Please enter a valid Date, for example 24.12.2001 (dd.mm.yyyy)</value>
+    <value>Var vänlig ange ett giltigt Datum, till exempel 24.12.2001 (dd.mm.åååå)</value>
   </string>
   <string id="519" name="emailRegExpError">
-    <value>Please enter a valid EMail, for example name@mail.com</value>
+    <value>Var vänlig ange en giltig Epostadress, till exempel namn@mail.com</value>
   </string>
   <string id="520" name="floatRegExpError">
-    <value>Please enter a Float-Number, for example 1.00</value>
+    <value>Var vänlig ange ett Flytande-Nummer, till exempel 1.00</value>
   </string>
   <string id="521" name="numberRegExpError">
-    <value>Please enter a Number (Integer), for example 100</value>
+    <value>Var vänlig ange ett Nummer (Integer), till exempel 100</value>
   </string>
   <string id="522" name="phoneRegExpError">
-    <value>Please enter a valid Phone number, for example ++49 0123 123123</value>
+    <value>Var vänlig ange ett Telefonnummer, till exempel +358 40 352 3250</value>
   </string>
   <string id="523" name="timeRegExpError">
-    <value>Please enter a valid time, for example 12:23 (hh:mm)</value>
+    <value>Var vänlig ange en tid, till exempel 12:23 (tt:mm)</value>
   </string>
   <string id="524" name="invitation_window">
-    <value>Passwort protected</value>
+    <value>Lösenordsskyddad</value>
   </string>
   <string id="525" name="invitation_window_passwordLabel">
-    <value>Password</value>
+    <value>Lösenord</value>
   </string>
   <string id="526" name="invitation_window_validLabel">
-    <value>Validity period</value>
+    <value>Giltighetstid</value>
   </string>
   <string id="527" name="invitation_window_valid">
-    <value>Endless</value>
+    <value>Oändlig</value>
   </string>
   <string id="528" name="invitation_window_valid">
     <value>Period</value>
   </string>
   <string id="529" name="invitation_window_valid">
-    <value>One-Time</value>
+    <value>Engångs</value>
   </string>
   <string id="530" name="invitation_window_validFromLabel">
-    <value>Valid From:</value>
+    <value>Giltig från och med:</value>
   </string>
   <string id="531" name="invitation_window_validToLabel">
-    <value>Valid to:</value>
+    <value>Giltig till:</value>
   </string>
   <string id="532" name="invitation_window_MailSubject">
-    <value>Invitation To OpenMeetings</value>
+    <value>Inbjudan till OpenMeetings</value>
   </string>
   <string id="533" name="invitation_error">
-    <value>Not Invitation availible for this Invitation-Code</value>
+    <value>Ingen inbjudan tillgänglig med den här Inbjudningskoden.</value>
   </string>
   <string id="534" name="invitation_error">
-    <value>The Invitation was already used. This type of Invitation cannot be re-used.</value>
+    <value>Inbjudan användes redan. Den här typen av inbjudningar kan inte återanvändas.</value>
   </string>
   <string id="535" name="invitation_error">
-    <value>This Invitation-Code is not valid.</value>
+    <value>Inbjudningskoden är inte giltig.</value>
   </string>
   <string id="536" name="invitation_pass">
-    <value>Password:</value>
+    <value>Lösenord:</value>
   </string>
   <string id="537" name="invitation_pass_btn">
-    <value>Check Password</value>
+    <value>Kontrollera Lösenord</value>
   </string>
   <string id="538" name="invitation_pass_error">
-    <value>Invalid Password!</value>
+    <value>Ogiltigt Lösenord!</value>
   </string>
   <string id="539" name="Browser">
-    <value>Browser</value>
+    <value>Webbläsare</value>
   </string>
   <string id="540" name="audio_video">
-    <value>Syncronize Audio/Video</value>
+    <value>Synkronisera Ljud/Video</value>
   </string>
   <string id="541" name="errorCode_invalidSession">
-    <value>Login was correct, but the Session you tried is not active or stored on the Server. You have to get a new SessionId and retry login.</value>
+    <value>Inloggningen var korrekt, men sessionen är inte längre aktiv eller lagrad på servern. Försök att logga in igen efter att du fått ett nytt SessionId.</value>
   </string>
   <string id="542" name="errorcode_setUserObject">
-    <value>The SessionId is not loggedin or has no Admin rights. The SOAP Gateway needs an User with Admin-Rights to embed new Users.</value>
+    <value>SessionId är inte inloggat eller har inga Admin-rättigheter. SOAP Gateway kräver en användare med admin-rättigheter för att innesluta nya användare.</value>
   </string>
   <string id="543" name="errorcode_loginByRemoteUser">
-    <value>This Session has no Remoteuser-Data connected. Wether you did not call the SOAP-Gateway before accessing the Application or you are usnig a wrong Session-ID</value>
+    <value>Den här sessionen är inte kopplad till någon Remoteuser-Data. Antingen så kallades inte SOAP-Gateway före applikationen kördes eller så används ett felaktigt Session-ID.</value>
   </string>
   <string id="544" name="debug_message_recording">
-    <value>The recorder is currently Beta!</value>
+    <value>Inspelaren är fortfarande i Beta-stadie!</value>
   </string>
   <string id="545" name="propertyPanelXValue">
     <value>x</value>
   </string>
   <string id="546" name="propertyPanelXValueLabel">
-    <value>x-axis</value>
+    <value>x-axel</value>
   </string>
   <string id="547" name="propertyPanelYValue">
     <value>y</value>
   </string>
   <string id="548" name="propertyPanelYValueLabel">
-    <value>y-axis</value>
+    <value>y-axel</value>
   </string>
   <string id="549" name="propertyPanelWidthValue">
-    <value>w</value>
+    <value>b</value>
   </string>
   <string id="550" name="propertyPanelWidthValueLabel">
-    <value>width</value>
+    <value>bredd</value>
   </string>
   <string id="551" name="propertyPanelHeightValue">
     <value>h</value>
   </string>
   <string id="552" name="propertyPanelHeightValueLabel">
-    <value>height</value>
+    <value>höjd</value>
   </string>
   <string id="553" name="propertyOpacitySlider">
-    <value>Change Transparency</value>
+    <value>Ändra Genomskinlighet</value>
   </string>
   <string id="554" name="browserOpen">
-    <value>Browser Open</value>
+    <value>Öppna bläddraren</value>
   </string>
   <string id="555" name="browserClose">
-    <value>Browser Close</value>
+    <value>Stäng bläddraren</value>
   </string>
   <string id="556" name="connectionLostMessage">
-    <value>The Connection to the Server is lost. You need to reload the Application or/and check your Network.</value>
+    <value>Anslutningen till Servern är förlorad. Du måste ladda om Applikationen och/eller kolla din Nätverksanslutning.</value>
   </string>
   <string id="557" name="557">
-    <value>Pointer</value>
+    <value>Pekare</value>
   </string>
   <string id="558" name="sync message header">
-    <value>Synchronizing</value>
+    <value>Synkroniserar</value>
   </string>
   <string id="559" name="Synchronizing message">
-    <value>Synchronizing Users, please wait</value>
+    <value>Synkroniserar användare, var vänlig vänta</value>
   </string>
   <string id="560" name="exportToSVG">
-    <value>&lt;u&gt;Download as SVG&lt;/u&gt;</value>
+    <value>&lt;u&gt;Ladda ner som SVG&lt;/u&gt;</value>
   </string>
   <string id="561" name="exportToImage">
-    <value>&lt;u&gt;Download as PNG&lt;/u&gt;</value>
+    <value>&lt;u&gt;Ladda ner som PNG&lt;/u&gt;</value>
   </string>
   <string id="562" name="exportToImage">
-    <value>&lt;u&gt;Download as JPG&lt;/u&gt;</value>
+    <value>&lt;u&gt;Ladda ner som JPG&lt;/u&gt;</value>
   </string>
   <string id="563" name="exportToImage">
-    <value>&lt;u&gt;Download as PDF&lt;/u&gt;</value>
+    <value>&lt;u&gt;Ladda ner som PDF&lt;/u&gt;</value>
   </string>
   <string id="564" name="exportToImage">
-    <value>&lt;u&gt;Download as TIF&lt;/u&gt;</value>
+    <value>&lt;u&gt;Ladda ner som TIF&lt;/u&gt;</value>
   </string>
   <string id="565" name="calendarLabel">
-    <value>Reminder:</value>
+    <value>Påminnelse:</value>
   </string>
   <string id="566" name="calendarLabel">
-    <value>Category:</value>
+    <value>Kategori:</value>
   </string>
   <string id="567" name="calendarLabel">
     <value>Repetition:</value>
   </string>
   <string id="568" name="calendarLabel">
-    <value>none</value>
+    <value>ingen</value>
   </string>
   <string id="569" name="calendarLabel">
-    <value>Location:</value>
+    <value>Läge:</value>
   </string>
   <string id="570" name="calendarLabel">
-    <value>Start</value>
+    <value>Börjar</value>
   </string>
   <string id="571" name="calendarLabel">
-    <value>End</value>
+    <value>Slutar</value>
   </string>
   <string id="572" name="calendarLabel">
-    <value>Title:</value>
+    <value>Titel:</value>
   </string>
   <string id="573" name="calendarLabel">
-    <value>Comment:</value>
+    <value>Kommentar:</value>
   </string>
   <string id="574" name="calendarLabel">
-    <value>Invite People</value>
+    <value>Bjud in folk</value>
   </string>
   <string id="575" name="calendarLabel">
-    <value>Daily</value>
+    <value>Daglig</value>
   </string>
   <string id="576" name="calendarLabel">
-    <value>Monthly</value>
+    <value>Månatlig</value>
   </string>
   <string id="577" name="calendarLabel">
-    <value>Yearly</value>
+    <value>Årlig</value>
   </string>
   <string id="578" name="alert">
-    <value>Appointment-end is after of appointment-start!</value>
+    <value>Tidpunkten för mötets slut måste vara efter dess början!</value>
   </string>
   <string id="579" name="alert">
-    <value>Please insert a title!</value>
+    <value>Lägg till en Titel, tack!</value>
   </string>
   <string id="580" name="580">
     <value>RTL</value>
   </string>
   <string id="581" name="581">
-    <value>Activate this if you write in a right to left language (inverse word order)</value>
+    <value>Aktivera det här om du skriver på ett höger till vänster-språk (inverterad ordfölj)</value>
   </string>
   <string id="582" name="tooltip main-menu">
     <value>Dashboard</value>
   </string>
   <string id="583" name="tooltip main-menu">
-    <value>Watch recorded Meetings or Events</value>
+    <value>Se på inspelade Möten och Auditorier</value>
   </string>
   <string id="584" name="tooltip main-menu">
-    <value>Meeting - Make a conference with 4 (up to 16) Users&lt;br/&gt;everybody will have audio + video access</value>
+    <value>Möte - Skapa en konferens med 4 (upp till 16) Användare &lt;br&gt; alla kommer att ha tillgång till ljud + video.</value>
   </string>
   <string id="585" name="tooltip main-menu">
-    <value>Event - Make a conference with up to 200 participents&lt;br/&gt;Only the Moderator will have audio/video</value>
+    <value>Auditorium - Skapa en konferens med upp till 200 deltagare&lt;br/&gt;Endast Moderatorn kommer att ha tillgång till ljud + video</value>
   </string>
   <string id="586" name="tooltip main-menu">
-    <value>Create users, rooms, organizations&lt;br/&gt; + change configuration</value>
+    <value>Skapa användare, rum, organisationer&lt;br/&gt; + ändra konfigurationer</value>
   </string>
   <string id="587" name="room Administration roomclients list">
-    <value>Users in this Room now</value>
+    <value>Användare i det här Rummet nu</value>
   </string>
   <string id="588" name="room Administration roomclients list">
     <value>ID</value>
@@ -1777,28 +1777,28 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>D</value>
   </string>
   <string id="591" name="swf sync message">
-    <value>Loading Document. Please wait untill all Client have been synchronized.</value>
+    <value>Laddar Dokument. Vänligen vänta tills alla klienter är synkroniserade.</value>
   </string>
   <string id="592" name="upload dialog">
-    <value>Upload complete, converting Document ...</value>
+    <value>Uppladdning klar, konverterar Dokument ...</value>
   </string>
   <string id="593" name="upload dialog">
-    <value>Start Upload</value>
+    <value>Påbörja Uppladdning</value>
   </string>
   <string id="594" name="upload dialog">
-    <value>Upload and Import Dialog. Please select a File from your Disk.</value>
+    <value>Dialog för Uppladdning och Importering. Var vänlig välj en Fil från din Hårdskiva.</value>
   </string>
   <string id="595" name="upload Dialog">
-    <value>Cancel</value>
+    <value>Avbryt</value>
   </string>
   <string id="596" name="upload Dialog">
-    <value>Select File</value>
+    <value>Välj Fil</value>
   </string>
   <string id="597" name="administration navigation">
-    <value>Connections</value>
+    <value>Anslutningar</value>
   </string>
   <string id="598" name="confadmin value list">
-    <value>Value</value>
+    <value>Värde</value>
   </string>
   <string id="599" name="connection administration panel">
     <value>Streamid</value>
@@ -1807,46 +1807,46 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Login</value>
   </string>
   <string id="601" name="connection administration panel">
-    <value>Connected since</value>
+    <value>Ansluten sedan</value>
   </string>
   <string id="602" name="connection administration panel">
-    <value>Room / Scope</value>
+    <value>Rum</value>
   </string>
   <string id="603" name="connection administration panel">
-    <value>Kick User</value>
+    <value>Sparka Användare</value>
   </string>
   <string id="604" name="kick user confirmation dialog">
-    <value>Kick User</value>
+    <value>Sparka Användare</value>
   </string>
   <string id="605" name="kick user confirmation dialog">
-    <value>Do you really want to kick this Client from the Connection?&lt;br/&gt; This does only remove the Client from the current Room.The Client could re-login again.</value>
+    <value>Vill du verkligen sparka den här Klienten?&lt;br/&gt; Det här avlägsnar endast Klienten från det aktuella rummet och ger honom möjlighet att återansluta sig.</value>
   </string>
   <string id="606" name="kick user message dialog">
-    <value>Your session has been closed by an Administrator or Moderator.</value>
+    <value>Din session har stängts av en Administratör eller Moderator.</value>
   </string>
   <string id="607" name="useralterself_phone">
-    <value>Phone</value>
+    <value>Telefon</value>
   </string>
   <string id="608" name="participents panel">
-    <value>User is the Moderator of this Room</value>
+    <value>Användaren är Moderator i det här rummet</value>
   </string>
   <string id="609" name="participents panel">
-    <value>User is allowed to draw on the Whiteboard</value>
+    <value>Användaren har tillåtelse att rita på Whiteboarden</value>
   </string>
   <string id="610" name="participents panel">
-    <value>(Re) Start Audio/Video or change Device Settings</value>
+    <value>Starta (om) Ljud/Video eller ändra Anordningens Inställningar</value>
   </string>
   <string id="611" name="participents panel">
-    <value>Allow this User to draw on the Whiteboard</value>
+    <value>Tillåt den här Användaren att rita på Whiteboarden</value>
   </string>
   <string id="612" name="participents panel">
-    <value>Remove ability to draw on whiteboard</value>
+    <value>Ta bort möjligheten att rita på Whiteboarden</value>
   </string>
   <string id="613" name="conferencePanels">
-    <value>Users</value>
+    <value>Användare</value>
   </string>
   <string id="614" name="conferencePanels">
-    <value>Files</value>
+    <value>Filer</value>
   </string>
   <string id="615" name="conferencePanels">
     <value>Whiteboard</value>
@@ -1855,79 +1855,79 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Chat</value>
   </string>
   <string id="617" name="organization choose info">
-    <value>Your account is assigned to multiple Organizations. Please choose one for this Session.</value>
+    <value>Ditt konto är tilldelat flera Organisationer. Var vänlig välj en för den här Sessionen.</value>
   </string>
   <string id="618" name="error message room full">
-    <value>This room is full at the moment. Please try again later.</value>
+    <value>Det här rummet är fullt för tillfället. Var vänlig försök på nytt senare.</value>
   </string>
   <string id="619" name="roomtypes">
-    <value>Room Type</value>
+    <value>Typ av rum</value>
   </string>
   <string id="620" name="appointed_room">
-    <value>Appointment Room</value>
+    <value>Tidsbokat rum</value>
   </string>
   <string id="621" name="servertime">
-    <value>Server Time</value>
+    <value>Servertid</value>
   </string>
   <string id="622" name="inv_reminder_template_head">
-    <value>OpenMeetings - Reminder</value>
+    <value>OpenMeetings - Påminnelse</value>
   </string>
   <string id="623" name="inv_reminder_text_from">
-    <value>Message from User:</value>
+    <value>Meddelande från Användare:</value>
   </string>
   <string id="624" name="inv_reminder_text_message">
-    <value>Message:</value>
+    <value>Meddelande:</value>
   </string>
   <string id="625" name="inv_reminder_text_click_text">
-    <value>Click this link to participate in the Meetings:</value>
+    <value>Klicka på den här länken för att delta i Mötet:</value>
   </string>
   <string id="626" name="inv_reminder_text_click_text_link">
-    <value>Click here to enter room</value>
+    <value>Klicka här för att gå in i rummet</value>
   </string>
   <string id="627" name="inv_reminder_text_click_text_help">
-    <value>if you have problems with the link, please copy and paste this to your browser:</value>
+    <value>Om du har problem med länken, vänligen kopiera och klistra in det här i din webbläsare:</value>
   </string>
   <string id="628" name="btn_search_intern">
-    <value>search intern</value>
+    <value>Sök internt</value>
   </string>
   <string id="629" name="btn_search_extern">
-    <value>extern users</value>
+    <value>externa användare</value>
   </string>
   <string id="630" name="lbl_prename">
-    <value>pre name</value>
+    <value>förnamn</value>
   </string>
   <string id="631" name="lbl_name">
-    <value>name</value>
+    <value>namn</value>
   </string>
   <string id="632" name="lbl_email">
-    <value>E-mail</value>
+    <value>E-post</value>
   </string>
   <string id="633" name="logoutConfirm_title">
-    <value>Confirm logout</value>
+    <value>Bekräfta utloggning</value>
   </string>
   <string id="634" name="logoutConfirm_sure_to_logout_question">
-    <value>Are you sure you want to logout now?</value>
+    <value>Är du säker på att du vill logga ut?</value>
   </string>
   <string id="635" name="main menu">
-    <value>Actions</value>
+    <value>Åtgärder</value>
   </string>
   <string id="636" name="room admin">
-    <value>Demo Room</value>
+    <value>Demo Rum</value>
   </string>
   <string id="637" name="room admin">
-    <value>Demo Time</value>
+    <value>Demo Tid</value>
   </string>
   <string id="638" name="meeting Timer">
-    <value>Meeting Timer</value>
+    <value>Mötestimer</value>
   </string>
   <string id="639" name="meeting Timer">
-    <value>This Room is a Demo Room. To disable this warning you either should get a private meeting room for your personal usage or set up an own Server. You will be automatically logged off in:</value>
+    <value>Det här Rummet är ett Demo Rum. För att få bort den här varningen så måste du antingen skaffa ett privat mötesrum eller sätta upp en egen Server. Du kommer att loggas ut automatiskt om:</value>
   </string>
   <string id="640" name="meeting room administration">
-    <value>Moderated</value>
+    <value>Modererat</value>
   </string>
   <string id="641" name="moderated room waiting message">
-    <value>Please wait untill the Moderator has entered the Room. The Moderator can be either a Teacher, Admin or the creator of this Room.</value>
+    <value>Var vänlig vänta till Moderatorn har anslutigt sig till Rummet. Moderatorn kan antingen vara en Lärare, Admin eller skapare av det här Rummet.</value>
   </string>
   <string id="642" name="error popup">
     <value>Ok</value>
@@ -2033,7 +2033,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   </string>
   <string id="676" name="participants panel">
     <value>Grant Moderation Rights to this User</value>
-  </string>  
+  </string> 
   <string id="677" name="event user list">
     <value>User</value>
   </string>
@@ -2057,7 +2057,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   </string>
   <string id="684" name="event user list">
     <value>Remove Audio/Video of this User</value>
-  </string>
+  </string> 
   <string id="685" name="event user list">
     <value>I would like to get the moderation of this room</value>
   </string>
