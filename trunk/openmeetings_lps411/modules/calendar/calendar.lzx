@@ -138,7 +138,7 @@
 	</dateSelector> 
 		
 		
-	<calendarTabs name="_tabslider" x="180" />
+	<calendarTabs name="_tabslider" x="205" />
 	
 	<!--
 	<termindetails name="_termindetails" />
