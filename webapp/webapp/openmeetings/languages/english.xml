@@ -1990,13 +1990,13 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Do you really want to delete this record?</value>
   </string>
   <string id="662" name="delete confirm question user moderation">
-    <value>Do you really want to delete this user from your organization? You will only delete the connection between the user and your organization, to really delete the user itself you have to login into the Administration-Panel.</value>
+    <value>Do you really want to delete this user from your organization? You will only delete the connection between the user and your organization, to really delete the user himself you have to login into the Administration-Panel.</value>
   </string>
   <string id="663" name="error message self deleting">
     <value>You cannot delete your own User!</value>
   </string>
   <string id="664" name="error message auth">
-    <value>This Method needs a Adminstration Account to be invoked!</value>
+    <value>This Method needs an Adminstration Account to be invoked!</value>
   </string>
   <string id="665" name="error message SOAP">
     <value>There was no Session associated with this ID.</value>
@@ -2092,7 +2092,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>would like to share his Audio/Video. Use the status Icons next to the user in the List of Users to add or remove the right to share Audio/Video for any User.</value>
   </string>
   <string id="696" name="moderation message">
-    <value>You have to wait untill a Moderator enters the room.</value>
+    <value>You have to wait until a Moderator enters the room.</value>
   </string>
   <string id="697" name="calendar button">
     <value>Cancel</value>
