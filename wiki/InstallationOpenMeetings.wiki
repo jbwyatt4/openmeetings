@@ -6,6 +6,7 @@
   * [http://openmeetings.googlecode.com/files/openmeetings_07_rc2_wo.zip OpenMeetings Webapp only]
   * [http://download.openmeetings.de/vmware_openmeetings_moodlepack_r1852.tgz VMWare Image (incl. Moodle Integration)] (it includes RC1 NOT RC2)
   * [http://liberamemoria.blogspot.com/2009/02/instalando-openmeetings-07-rc-2-en.html Espanol Version for Debian Installation]
+  * [http://aitinet.com/blog/wp-content/uploads/2009/08/TUTORIAL-PARA-INSTALACAO-DO-RED5-E-OPENMEETINGS-NO-LINUX-DEBIAN-LENNY-51.pdf Portuguese Version for Debian Installation of 0.9 RC1] 
   * [VMImageRev2056] 
 
 = System Requirements (Server Side System Requirements!) =
