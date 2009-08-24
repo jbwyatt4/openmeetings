@@ -87,6 +87,8 @@
   	</simpleLabelButton>
   	
     <!-- --> 
+	<!-- Uncomment when the recording functionality is back
+	
 	<labelText labelid="417" y="6" width="100" fgcolor="0xFFFFFF"
                visibility="$once{ canvas.showRecording }" />
 	
@@ -103,7 +105,7 @@
 		<view resource="start_recording_conf" x="3" y="1" />
 		<labelTooltip labelid="415" />
 	</simpleLabelButton>
-	
+		
     <simpleLabelButton name="stp_btn" width="30" height="24" y="2" style="itemStyle"
                        visibility="hidden">
     	<handler name="onclick">
@@ -112,6 +114,8 @@
 		<view resource="stop_recording_conf" x="7" y="4" />
 		<labelTooltip labelid="416" />
 	</simpleLabelButton>   
+	
+	-->
     	
 	
   	<netRemoteCallHib name="stopRecordMeetingStream" remotecontext="$once{ canvas.thishib }"
