@@ -6,7 +6,7 @@
     domain-name the OpenMeetings-Client has been loading from  
     -->
 <!--<rtmphostlocal>192.168.254.182</rtmphostlocal>-->
-<rtmphostlocal></rtmphostlocal>
+<rtmphostlocal>192.168.0.26</rtmphostlocal>
 
 <!--  
 Port to use for the Server

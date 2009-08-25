@@ -1,10 +1,11 @@
 <library>
 	
-	<class name="enterExternMember" extends="windowpanel" closeable="true">
+	<class name="enterExternMember" extends="labelExplorerBox" width="216" height="190"
+		   closable="true" labelid="629" >
 		
 		<attribute name ="refObj" value="null"/>	
 		
-		<view name="_mainView" x="10" y="10" layout="axis:y;spacing:2">
+		<view name="_mainView" x="10" y="24" layout="axis:y;spacing:2">
 			
 
 			<labelText labelid="630" width="100"/>
@@ -18,17 +19,20 @@
 			<edittext width="${parent._buttons.width - 10}" name="email"></edittext>
 			
 			<view name="_buttons" layout="axis:x;spacing:2" width="210">
-				<simpleLabelButton labelid="333" width="${parent._cancel.width}">
+				<simpleLabelButton labelid="333" width="$once{parent._cancel.width}">
 					<handler name="onclick">
-						new lz.searchContactInCalendar(parent.parent.parent.refObj.terminObjRef._liste._innerlist,{userId:0, 
-						vorname:parent.parent.vorname["text"], nachname:parent.parent.nachname["text"], email:parent.parent.email["text"]});
+						new lz.searchContactInCalendar(parent.parent.parent.refObj.terminObjRef._liste._innerlist,{
+    						      userId:0, 
+    						      vorname:parent.parent.vorname["text"], 
+    						      nachname:parent.parent.nachname["text"], 
+    						      email:parent.parent.email["text"]
+						      });
 						//if ($debug) Debug.write("_innerlist: ", parent.parent.parent.refObj.terminObjRef._liste._innerlist);
-						parent.parent.parent.refObj.terminObjRef._liste.setAttribute("visible", true);
-						parent.parent.parent.refObj.terminObjRef._liste.setAttribute("height", 50);
 						parent.parent.vorname="";
 						parent.parent.nachname="";
 						parent.parent.email="";
 						parent.parent.parent.close();
+						parent.parent.parent.refObj.close();
 						//if ($debug) Debug.write("userId  search: ",parent.parent.parent.userId);
 					</handler>
 				</simpleLabelButton>
@@ -40,9 +44,7 @@
 				</simpleLabelButton>
 			</view>
 			
-			
 		</view>
-			
 		
 	</class>
 	
