@@ -83,7 +83,7 @@
     </miniIcons>
     
     <miniIcons name="_allowDevice" x="40" width="16" height="16" opacity="0.5" 
-               resource="resyncuser_rsc" showhandcursor="true">
+               resource="play_webcam_show_dialog_rsc" showhandcursor="true">
         <handler name="onclick">
             if ($debug) Debug.write("NOTHING: ",canvas.publicSID);
             if (canvas.ismoderator) {
@@ -101,7 +101,7 @@
     </miniIcons>
     
     <miniIcons name="_denyDevice" x="40" width="16" height="16" 
-               resource="resyncuser_rsc" showhandcursor="false">
+               resource="play_webcam_show_dialog_rsc" showhandcursor="false">
         <handler name="onclick">
             if ($debug) Debug.write("APPLY: ",parent.parent.refObj.publicSID);
             //Nothing happens here

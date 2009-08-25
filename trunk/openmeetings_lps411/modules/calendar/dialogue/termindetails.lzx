@@ -56,9 +56,6 @@
             this._date.ezeit.setAttribute('text', "17:00");
             
             this._liste._innerlist.clearContent();
-            this._liste["visible", false];
-            this._liste._vscrol["visible", false];
-            this._liste.setAttribute('height', 0);
         </method> 
         
         <method name="showtermindetails">
@@ -100,8 +97,6 @@
                 //this._erinnerungedit.selectItemAt(this.terminObjRef.remind.typId);
                 
                 if(this.terminObjRef.meetingMember.length>0){
-                    this._liste.setAttribute("visibility","visible");; //["visible", true]
-                    this._liste.setAttribute('height', 50);
                     this._liste._innerlist.clearContent();
                 
                     for (var i=0;i<this.terminObjRef.meetingMember.length;i++) {

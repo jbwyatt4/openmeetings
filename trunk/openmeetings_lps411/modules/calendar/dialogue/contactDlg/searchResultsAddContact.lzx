@@ -10,12 +10,12 @@
 
 <class name="searchResultsAddContact" extends="view" height="70"
 		   y="${parent.empfaenger.y+30}" x="2" >
-		<contactSearchHead name="_userSearchHead" />
-		<view name="_innerList" height="150" y="20" clip="true" >
-			<view name="_inner" layout="axis:y;spacing:2" clip="true" bgcolor="$once{ canvas.baseMacomBackground }" height="150"/>
-			<vscrollbar/>
-			<hscrollbar/>
-		</view>
+	<contactSearchHead name="_userSearchHead" />
+	<view name="_innerList" height="150" y="20" clip="true" >
+		<view name="_inner" layout="axis:y;spacing:2" clip="true" bgcolor="$once{ canvas.baseMacomBackground }" height="150"/>
+		<vscrollbar/>
+		<hscrollbar/>
+	</view>
 </class>
 	
 </library>

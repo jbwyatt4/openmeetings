@@ -1,30 +1,35 @@
 <library>
 
 <class name="searchContact" extends="view" bgcolor="silver">
-		<simplelayout axis="x" spacing="5" />
-		<attribute name ="userId" value="0" type="number" /> 
-		<attribute name ="vorname" value="" type="string" />
-		<attribute name ="nachname" value="" type="string" />
-		<attribute name ="email" value="null"/>		
-		
-		<attribute name ="refObj" value="null"/>		
-			 		
-		<view resource="list_add_rsc">
-			<handler name="onclick">
-				new lz.searchContactInCalendar(parent.refObj.terminObjRef._liste._innerlist,{userId:parent.userId, vorname:parent.vorname, nachname:parent.nachname, email:parent.email})
-				if ($debug) Debug.write("_innerlist: ", parent.refObj.terminObjRef._liste._innerlist);
-				parent.refObj.terminObjRef._liste.setAttribute("visible", true);
-				parent.refObj.terminObjRef._liste.setAttribute('height', 50);
-				if ($debug) Debug.write("Visible: ",parent.refObj.terminObjRef._liste['visible']);
-				//parent.refObj.terminObjRef._liste;
-				//new selectKategoryStatus(canvas,{_contactId:parent.userId});
-				if ($debug) Debug.write("userId  search: ",parent.userId);
-			</handler>
-		</view>	
-		<text  text="$once{parent.userId }" width="20"/>		
-		<text name="_item3"  text="$once{ parent.vorname}" width="60" />
-		<text name="_item4"  text="$once{ parent.nachname }" width="60" />
-		<text name="_item7"  text="$once{ parent.email}" width="350"/>  
+	
+	<simplelayout axis="x" spacing="5" />
+	<attribute name="userId" value="0" type="number" /> 
+	<attribute name="vorname" value="" type="string" />
+	<attribute name="nachname" value="" type="string" />
+	<attribute name="email" value="null"/>		
+	
+	<attribute name="refObj" value="null"/>	
+	
+	<handler name="onclick">
+		new lz.searchContactInCalendar(this.refObj.terminObjRef._liste._innerlist,{
+                userId:this.userId, 
+                vorname:this.vorname, 
+                nachname:this.nachname, 
+                email:this.email
+            });
+        //if ($debug) Debug.write("_innerlist: ", parent.refObj.terminObjRef._liste._innerlist);
+        //parent.refObj.terminObjRef._liste;
+        //new selectKategoryStatus(canvas,{_contactId:parent.userId});
+        //if ($debug) Debug.write("userId  search: ",parent.userId);
+        this.refObj.close();
+	</handler>	
+		 		
+	<view resource="list_add_rsc" />
+	
+	<text  text="$once{parent.userId }" width="20"/>		
+	<text name="_item3"  text="$once{ parent.vorname}" width="60" />
+	<text name="_item4"  text="$once{ parent.nachname }" width="60" />
+	<text name="_item7"  text="$once{ parent.email}" width="350"/>  
 					 	
  </class>
  

@@ -109,7 +109,7 @@
 		<simplelayout axis="x" spacing="2"/>
 		 -->
 		
-	<dateSelector name="_calendar" y="10">
+	<dateSelector name="_calendar" y="10" x="2">
 		<handler name="ondoubleselect">
  			//var selectDate = new Date();
  			//if ($debug) Debug.write("##### dateselect ", this.selecteddate);
@@ -136,6 +136,13 @@
  			}
 		</handler> 
 	</dateSelector> 
+	
+    <simpleLabelButton labelid="646" name="_addNewMeeting" x="2"
+    				   width="203" y="150" height="30">
+        <handler name="onclick">
+            parent.initDetails();
+        </handler>
+    </simpleLabelButton>
 		
 		
 	<calendarTabs name="_tabslider" x="205" />

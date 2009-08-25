@@ -22,8 +22,11 @@
     <frame src="edit_remove.png" />   
 </resource>
 
-<resource name="list_add_rsc" src="list-add.png" />
-<resource name="list_remove_rsc" src="list-remove.png" />
+
+<resource name="play_webcam_show_dialog_rsc" src="player_play.png" />
+
+<resource name="list_add_rsc" src="edit_add.png" />
+<resource name="list_remove_rsc" src="editdelete.png" />
 <!-- add for calendar -->
 
 <resource name="filesave_rsc" src="filesave.png" />
