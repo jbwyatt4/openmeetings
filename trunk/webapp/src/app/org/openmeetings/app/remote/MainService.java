@@ -39,6 +39,7 @@ import org.openmeetings.app.rss.LoadAtomRssFeed;
 
 
 import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.io.xml.DomDriver;
 import com.thoughtworks.xstream.io.xml.XppDriver;
 
 /**
@@ -299,11 +300,15 @@ public class MainService implements IPendingServiceCallback {
         			return new Long(-37);
         		} else {
         			
-        			XStream xStream = new XStream(new XppDriver());
+        			//XStream xStream = new XStream(new XppDriver());
+        			XStream xStream = new XStream(new DomDriver("UTF-8"));
         			xStream.setMode(XStream.NO_REFERENCES);
         			
         			String xmlString = sd.getSessionXml();
         			RemoteSessionObject userObject = (RemoteSessionObject) xStream.fromXML(xmlString);
+        			
+        			log.debug("userObject.getUsername(), userObject.getFirstname(), userObject.getLastname() "
+        						+userObject.getUsername()+", "+userObject.getFirstname()+", "+userObject.getLastname());
         			
         			IConnection current = Red5.getConnectionLocal();
         			String streamId = current.getClient().getId();
