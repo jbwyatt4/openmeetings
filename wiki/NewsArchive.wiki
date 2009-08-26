@@ -1,5 +1,20 @@
 #summary former news
 
+  * OpenMeetings 0.9 RC1 available for Testing
+  * New Packages for !OpenMeetings and Moodle Mod, [OpenMeetings084 Release Notes 0.8.4], at 23.06.2009
+  * contributed VM IMage from CTpaHHoe see [VMImageRev2056], at 15.06.2009
+  * !OpenMeetings 0.8.0 released, at 08.06.2009
+  * Demo Server & Moodle Integration is updated to r2032, at 25.05.2009
+  * !OpenMeetings on [http://www.heise.de/software/download/openmeetings/64061 heise.de], at 08.04.2009
+  * !OpenMeetings migrated and using [http://www.xuggle.com Xuggler], at 03.04.2009
+  * !OpenMeetings 0.8 RC2 Bugfix released
+  * !OpenMeetings 0.8 RC1 Dev Snapshot released
+  * Russian Translated Instructions and Docs RussianTranslatedInstructions, at 03.03.2009
+  * Spanish Instructions see [http://liberamemoria.blogspot.com/2009/02/instalando-openmeetings-07-rc-2-en.html Instalando Openmeetings]
+  * !OpenMeetings at Didacta, 10.02.-14.02.2009 Hannover, hall 14 booth G60
+  * !OpenMeetings 0.7 RC2 released InstallationOpenMeetings, changes: [ReleaseNotesOM07RC2], at 05.02.2009
+  * Demo Server updated (you need to re-register) at 05.02.2009
+  * Fixed Mail Issues with Registering on Demo Portal, 30.01.2009 
   * !OpenMeetings 0.7 RC1 released InstallationOpenMeetings, changes: [ReleaseNotesOM07RC1], at 27.01.2009
   * dev-news ReworkRoadMapApplicationAdapter, at 13.01.2009
   * new demo server, with new translation (Thai, Turkey, Ukranian) + better conversion performance, at 11.01.2008
