@@ -3,4 +3,6 @@
 
     <!-- Add the Folder and Entry for your Plugin here -->
 
+    <include href="sponsors/"/>
+
 </library>
