@@ -17,6 +17,7 @@ import org.openmeetings.app.hibernate.beans.lang.Fieldlanguagesvalues;
 import org.openmeetings.app.hibernate.beans.basic.RemoteSessionObject;
 
 import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.io.xml.DomDriver;
 import com.thoughtworks.xstream.io.xml.XppDriver;
 
 public class UserService {
@@ -108,9 +109,19 @@ public class UserService {
 				RemoteSessionObject remoteSessionObject = new RemoteSessionObject(username, firstname, lastname, 
 						profilePictureUrl, email);
 				
-				XStream xStream = new XStream(new XppDriver());
+				
+				log.debug("username "+username);
+				log.debug("firstname "+firstname);
+				log.debug("lastname "+lastname);
+				log.debug("profilePictureUrl "+profilePictureUrl);
+				log.debug("email "+email);
+				
+				//XStream xStream = new XStream(new XppDriver());
+				XStream xStream = new XStream(new DomDriver("UTF-8"));
 				xStream.setMode(XStream.NO_REFERENCES);
 				String xmlString = xStream.toXML(remoteSessionObject);
+				
+				log.debug("xmlString "+xmlString);
 				
 				Sessionmanagement.getInstance().updateUserRemoteSession(SID, xmlString);
 				
