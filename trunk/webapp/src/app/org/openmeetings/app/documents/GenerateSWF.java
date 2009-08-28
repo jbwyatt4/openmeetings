@@ -204,6 +204,7 @@ public class GenerateSWF {
 			String originalFolder, String destinationFolder, String fileNamePure) {
 		// Create the Content of the Converter Script (.bat or .sh File)
 		String[] argv = new String[] { getPathToSwfTools() + "pdf2swf" + execExt,
+				"-s","insertstop", //Insert Stop command into every frame
 				originalFolder + fileNamePure + ".pdf",
 				destinationFolder + fileNamePure + ".swf" };
 
@@ -216,7 +217,9 @@ public class GenerateSWF {
 	public HashMap<String, Object> generateSwfByImages(List<String> images,
 			String outputfile, int fps) {
 		List<String> argvList = Arrays.asList(new String[] {
-				getPathToSwfTools() + "png2swf" + execExt, "-o", outputfile,
+				getPathToSwfTools() + "png2swf" + execExt, 
+				"-s","insertstop", //Insert Stop command into every frame
+				"-o", outputfile,
 				"-r", Integer.toString(fps), "-z" });
 		
 		argvList.addAll(images);
@@ -229,7 +232,9 @@ public class GenerateSWF {
 	public HashMap<String, Object> generateSWFByCombine(List<String> swfs,
 			String outputswf, int fps) {
 		List<String> argvList = Arrays.asList(new String[] {
-				getPathToSwfTools() + "swfcombine" + execExt, "-o", outputswf,
+				getPathToSwfTools() + "swfcombine" + execExt,
+				"-s","insertstop", //Insert Stop command into every frame
+				"-o", outputswf,
 				"-r", Integer.toString(fps), "-z", "-a" });
 
 		argvList.addAll(swfs);
