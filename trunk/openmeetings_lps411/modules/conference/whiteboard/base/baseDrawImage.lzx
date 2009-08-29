@@ -66,7 +66,7 @@
   	
   	<!-- standard add Function -->
   	<method name="addNewImage" args="urlname,posx,posy,baseurl,fileName,moduleName,parentPath,room,domain,uniqueObjectSyncName,isLocalSync">
-  		//if ($debug) Debug.write("urlname posx: ",urlname,posx);
+  		if ($debug) Debug.write("urlname posx: ",urlname,posx);
   		this.addImageToLayer(this,'image'+this.getCounter(),urlname,
   			posx,posy,0,0,
   			true,
@@ -86,6 +86,7 @@
 			//	this.loadimageDataWinRef.setMessage(canvas.getLabelName(this.imageLoadMessageId));
 			//}
 			
+            if ($debug) Debug.write("addImageToLayer ",urlname);
         	//if ($debug) Debug.write("addImageToLayer ",obj,nameing,urlname,posx,posy,width,height,alterModus,baseurl,fileName,moduleName,parentPath,room,domain);
 			//if ($debug) Debug.write("addImageToLayer posx ",posx);
         	
@@ -95,6 +96,8 @@
 				'&room_id=' + room + 
 				'&sid=' + canvas.sessionId;
 	
+	        if ($debug) Debug.write("addImageToLayer -src- ",src);
+		      
 			if ($debug) Debug.write("alterModus: ",alterModus);
 			
 	  		this.currentlayer = new lz.imageForDrawView(obj,{

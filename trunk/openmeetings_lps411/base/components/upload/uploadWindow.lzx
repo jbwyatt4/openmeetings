@@ -17,6 +17,9 @@
 	<attribute name="sessionid" value="" type="string" />
 	<attribute name="usersid" value="" type="string" />
 	<attribute name="singleslidesmodule_id" type="string" value="" />
+	
+	<attribute name="servletName" value="UploadHandler" type="string" />
+	<attribute name="parentFolderId" value="0" type="number" />
     
     <attribute name="uploadmodule" value="videoconf1" type="string" />
     
@@ -113,9 +116,11 @@
 	<simpleLabelButton name="upload" x="10" y="100" labelid="593" width="250" enabled="false" height="20">
 		<handler name="onclick">
 			<![CDATA[
-			var uploadurl = 'http://'+canvas.rtmphostlocal+':'+canvas.red5httpport+'/'+canvas.webAppRootKey+'/UploadHandler?' +
+			var uploadurl = 'http://'+canvas.rtmphostlocal+':'+canvas.red5httpport+'/'+canvas.webAppRootKey+'/'+ parent.servletName +'?' +
 					'moduleName='+this.parent.uploadmodule +
                     '&publicSID='+canvas.publicSID +
+                    '&filename='+encodeURIComponent(parent.txtFile.text) +
+                    '&parentFolderId='+parent.parentFolderId +
 					'&room_id='+hib.currentroomid +
 					'&sid='+canvas.sessionId;
             if ($debug) Debug.write("uploadurl: ",uploadurl);

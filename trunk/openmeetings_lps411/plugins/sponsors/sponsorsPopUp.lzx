@@ -6,7 +6,7 @@
     width="203" x="830" height="510" y="10">
 
     <handler name="onclick">
-    	lz.Browser.loadURL("http://www.i4change.com","_blank");
+    	lz.Browser.loadURL("http://www.i4prod.com","_blank");
     </handler>
     
     <view y="21" x="1">
