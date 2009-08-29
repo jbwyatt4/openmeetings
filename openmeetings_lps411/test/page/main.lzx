@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<canvas debug="true" width="100%" height="100%" 
+		fontsize="14" title="OpenMeetings - Computer testing">
+
+    <image name="_image" src="Добрыйдень.jpg" />
+    
+    <button text="loadImage2">
+    	<handler name="onclick">
+    		<![CDATA[
+    		   parent._image.setAttribute("src","http://localhost:5080/openmeetings/DownloadHandler?fileName=Добрыйдень.jpg&moduleName=videoconf1&parentPath=/&room_id=1&sid=8b5507992c8ee9172ba192850defdc67");
+    	    ]]>
+    	</handler>
+    </button>
+    
+
+</canvas>

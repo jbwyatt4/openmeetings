@@ -101,7 +101,7 @@
 		<netparam><method name="getValue">return canvas.uploadmoduleimgfolder;</method></netparam>
 		<netparam><method name="getValue">return hib.currentroomid;</method></netparam>        	
         <handler name="ondata" args="value">	
-			//if ($debug) Debug.write("getListOfFiles: ",value);
+			if ($debug) Debug.write("getListOfFiles: ",value);
 			//if ($debug) Debug.write("getListOfFiles: ",canvas.sessionId);
 			//if ($debug) Debug.write("getListOfFiles: ",canvas.uploadmoduleimg);
 			//if ($debug) Debug.write("getListOfFiles: ",canvas.uploadmoduleimgfolder);
@@ -181,7 +181,10 @@
 	<simpleLabelButton width="190" labelid="15" y="0" x="0" >
         <view resource="add_file_icon_rsc" y="2" x="4" />
 	    <handler name="onclick">
-	        new lz.uploadWindow(canvas.main_content._content.inner,{x:60,uploadmodule:canvas.uploadmoduleimg,isOnlyImage:true});
+	        new lz.uploadWindow(canvas.main_content._content.inner,{
+    	                       x:60,uploadmodule:canvas.uploadmoduleimg,
+    	                       isOnlyImage:true
+	                       });
 	    </handler>
 	</simpleLabelButton>
 
