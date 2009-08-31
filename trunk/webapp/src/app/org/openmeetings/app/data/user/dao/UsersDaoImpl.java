@@ -346,4 +346,38 @@ public class UsersDaoImpl {
 		return new Long(-1);
 	}
 
+	/**
+	 * @param search
+	 * @return
+	 */
+	public Long selectMaxFromUsersWithSearch(String search){
+		try {
+			
+			String hql = "select count(c.user_id) from Users c " +
+					"where c.deleted = 'false' " +
+					"AND (" +
+					"lower(c.login) LIKE lower(:search) " +
+					"OR lower(c.firstname) LIKE lower(:search) " +
+					"OR lower(c.lastname) LIKE lower(:search) " +
+					")";
+			
+			//get all users
+			Object idf = HibernateUtil.createSession();
+			Session session = HibernateUtil.getSession();
+			Transaction tx = session.beginTransaction();
+			Query query = session.createQuery(hql); 
+			query.setString("search", search);
+			List ll = query.list();
+			tx.commit();
+			HibernateUtil.closeSession(idf);
+			log.info("selectMaxFromUsers",(Long)ll.get(0));
+			return (Long)ll.get(0);				
+		} catch (HibernateException ex) {
+			log.error("[selectMaxFromUsers] "+ex);
+		} catch (Exception ex2) {
+			log.error("[selectMaxFromUsers] "+ex2);
+		}
+		return null;
+	}
+
 }

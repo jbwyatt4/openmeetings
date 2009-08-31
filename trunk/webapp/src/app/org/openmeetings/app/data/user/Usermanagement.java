@@ -1276,4 +1276,75 @@ public class Usermanagement {
         }
 }
 
+	/**
+	 * @param user_level
+	 * @param start
+	 * @param max
+	 * @param orderby
+	 * @param asc
+	 * @param search
+	 * @return
+	 */
+	public SearchResult getUsersListWithSearch(Long user_level, int start,
+			int max, String orderby, boolean asc, String search) {
+		try {
+			if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)){
+				
+				String hql = "select c from Users c " +
+							"where c.deleted = 'false' " +
+							"AND (" +
+							"lower(c.login) LIKE lower(:search) " +
+							"OR lower(c.firstname) LIKE lower(:search) " +
+							"OR lower(c.lastname) LIKE lower(:search) " +
+							")";
+							
+				hql += " ORDER BY " + orderby;
+				
+				if (asc) {
+					hql += " ASC";
+				} else {
+					hql += " DESC";
+				}
+				
+				if (search.length() == 0) {
+					search = "%";
+				} else {
+					search = "%" + search + "%";
+				}
+				
+				SearchResult sresult = new SearchResult();
+				sresult.setObjectName(Users.class.getName());
+				sresult.setRecords(UsersDaoImpl.getInstance().selectMaxFromUsersWithSearch(search));
+				
+				//get all users
+				Object idf = HibernateUtil.createSession();
+				Session session = HibernateUtil.getSession();
+				Transaction tx = session.beginTransaction();
+				
+				Query query = session.createQuery(hql); 
+				query.setString("search", search);
+				query.setMaxResults(max);
+				query.setFirstResult(start);
+				
+//				Criteria crit = session.createCriteria(Users.class);
+//				crit.add(Restrictions.eq("deleted", "false"));
+//				if (asc) crit.addOrder(Order.asc(orderby));
+//				else crit.addOrder(Order.desc(orderby));
+//				crit.setMaxResults(max);
+//				crit.setFirstResult(start);
+				
+				sresult.setResult(query.list());
+				tx.commit();
+				HibernateUtil.closeSession(idf);
+				
+				return sresult;				
+			}
+		} catch (HibernateException ex) {
+			log.error("[getUsersList] "+ex);
+		} catch (Exception ex2) {
+			log.error("[getUsersList] "+ex2);
+		}
+		return null;
+	}
+
 }
