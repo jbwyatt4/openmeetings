@@ -199,6 +199,14 @@ public class UserService {
         return Usermanagement.getInstance().getUsersList(user_level, start, max, orderby, asc);
     }
     
+    
+    public SearchResult getUserListWithSearch(String SID, int start, int max, 
+    		String orderby, boolean asc, String search){
+        Long users_id = Sessionmanagement.getInstance().checkSession(SID);
+        Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
+        return Usermanagement.getInstance().getUsersListWithSearch(user_level, start, max, orderby, asc, search);
+    }
+    
     /**
      * gets a user-list by search criteria
      * @param SID
