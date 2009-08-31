@@ -8,10 +8,14 @@
     
     <attribute name="labeliderror" value="0" type="number" />
     
+    <attribute name="doAskAgain" value="true" type="boolean" />
+    
     <labelText labelid="$once{ parent.labeliderror }" width="400"
     	y="22" multiline="true" resize="false"/>
     
-    <labelCheckbox name="holddatainSO" labelid="64" x="10" y="220" />
+    <labelCheckbox name="holddatainSO" 
+    			   visibility="$once{ (parent.doAskAgain) ? 'visible' : 'hidden' }" 
+    			   labelid="64" x="10" y="220" />
     
     <simpleLabelButton labelid="61" width="100" x="70" y="196">
     	<handler name="onclick">
