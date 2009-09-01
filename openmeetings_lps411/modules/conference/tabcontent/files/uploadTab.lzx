@@ -101,10 +101,10 @@
 		<netparam><method name="getValue">return canvas.uploadmoduleimgfolder;</method></netparam>
 		<netparam><method name="getValue">return hib.currentroomid;</method></netparam>        	
         <handler name="ondata" args="value">	
-			if ($debug) Debug.write("getListOfFiles: ",value);
+			if ($debug) Debug.write("getListOfFiles -1-: ",value);
 			//if ($debug) Debug.write("getListOfFiles: ",canvas.sessionId);
-			//if ($debug) Debug.write("getListOfFiles: ",canvas.uploadmoduleimg);
-			//if ($debug) Debug.write("getListOfFiles: ",canvas.uploadmoduleimgfolder);
+			if ($debug) Debug.write("getListOfFiles -2-: ",canvas.uploadmoduleimg);
+			if ($debug) Debug.write("getListOfFiles -3-: ",canvas.uploadmoduleimgfolder);
 			//if ($debug) Debug.write("getListOfFiles: ",hib.currentroomid);
 			//if ($debug) Debug.write("getListOfFiles: ",hib.conferencedomain);
             parent.currentFilesValue = value;  

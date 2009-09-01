@@ -9,12 +9,14 @@
     <attribute name="isselected" value="false" type="boolean" />
     <attribute name="isoriginal" value="false" type="boolean" />
     
+    <attribute name="uploadmoduleimgfolder" value="$once{ canvas.uploadmoduleimgfolder }" type="string" />
+    
     <method name="formatURL" args="filename">
         <![CDATA[
             var downloadurl = 'http://' + canvas.rtmphostlocal + ':' + canvas.red5httpport + '/'+canvas.webAppRootKey+'/DownloadHandler?' +
-                'fileName=' + lz.Browser.urlEscape(filename) +
+                'fileName=' + encodeURIComponent(filename) +
                 '&moduleName=' + this.uploadmodul + 
-                '&parentPath=' + lz.Browser.urlEscape(canvas.uploadmoduleimgfolder + '/' )+
+                '&parentPath=' + encodeURIComponent(this.uploadmoduleimgfolder + '/' )+
                 '&room_id='+hib.currentroomid + 
                 '&sid='+canvas.sessionId;
             ////Debug.write("downloadurl: ",downloadurl);
