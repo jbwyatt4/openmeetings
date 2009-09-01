@@ -2108,4 +2108,58 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   <string id="701" name="calendar component">
     <value>Vuosi</value>
   </string>
+  <string id="702" name="file explorer">
+    <value>Upload File</value>
+  </string>
+  <string id="703" name="file explorer">
+    <value>Add Folder</value>
+  </string>
+  <string id="704" name="file explorer">
+    <value>Refresh</value>
+  </string>
+  <string id="705" name="file explorer">
+    <value>Trash</value>
+  </string>
+  <string id="706" name="file explorer">
+    <value>My Files (Home Drive)</value>
+  </string>
+  <string id="707" name="file explorer">
+    <value>Room Files (Public Drive)</value>
+  </string>
+  <string id="708" name="file explorer">
+    <value>Add File</value>
+  </string>
+  <string id="709" name="file explorer">
+    <value>Add Folder</value>
+  </string>
+  <string id="710" name="file explorer">
+    <value>Delete Folder</value>
+  </string>
+  <string id="711" name="file explorer">
+    <value>Edit Name</value>
+  </string>
+  <string id="712" name="file explorer">
+    <value>New Folder</value>
+  </string>
+  <string id="713" name="file explorer">
+    <value>Are you sure you want to delete this Item?</value>
+  </string>
+  <string id="714" name="user admin">
+    <value>Search</value>
+  </string>
+  <string id="715" name="user admin">
+    <value>Search</value>
+  </string>
+  <string id="716" name="file explorer">
+    <value>Open Document</value>
+  </string>
+  <string id="717" name="file explorer">
+    <value>Show all Files (Tree View)</value>
+  </string>
+  <string id="718" name="file explorer">
+    <value>Close Document</value>
+  </string>
+  <string id="719" name="file explorer">
+    <value>Delete File</value>
+  </string>
 </language>
