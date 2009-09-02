@@ -6,7 +6,21 @@ Current Version !OpenMeetings 0.7 RC1 to 0.8.4: InstallationOpenMeetings, change
 
 Need for a developer or Consultant? [http://code.google.com/p/openmeetings/wiki/Jobs Hire a Developer]
 
-Tips for Installation:
+== Manuals and Help ==
+
+  * [http://openmeetings.googlecode.com/svn/docs/manuals/OpenMeetings%20Manual%20for%20User%20level.pdf User Manual]
+  * [Internationalisation]
+  * BandwidthNetworkSettings
+  * SimpleSampleApps  	
+  * DatabaseScheme
+  * DocumentImporting
+  * TechnologyPortfolio
+  * TipsImprovePerformance
+  * [wml]
+  * AdminScreenshots
+  * QualityAssurance
+
+== Installation Tips ==
 
   * InstallationDebian
   * ConvertersInstallation
@@ -31,19 +45,6 @@ Tips for Installation:
   * BackupPanel
   * [SWFPresentationViewer]
   * ScreenViewer  
-
-== General Documentation ==
-
-  * [Internationalisation]
-  * BandwidthNetworkSettings
-  * SimpleSampleApps  	
-  * DatabaseScheme
-  * DocumentImporting
-  * TechnologyPortfolio
-  * TipsImprovePerformance
-  * [wml]
-  * AdminScreenshots
-  * QualityAssurance
   
 == Integration Guide ==
 
