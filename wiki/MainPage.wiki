@@ -8,7 +8,7 @@ Need for a developer or Consultant? [http://code.google.com/p/openmeetings/wiki/
 
 == Manuals and Help ==
 
-  * [http://openmeetings.googlecode.com/svn/docs/manuals/OpenMeetings%20Manual%20for%20User%20level.pdf User Manual]
+  * [http://openmeetings.googlecode.com/svn/docs/manuals/OpenMeetings%20Manual%20for%20User%20level.pdf User Manual] [http://openmeetings.googlecode.com/svn/docs/manuals/OpenMeetings%20Manual%20for%20User%20level.doc .doc]
   * [Internationalisation]
   * BandwidthNetworkSettings
   * SimpleSampleApps  	
