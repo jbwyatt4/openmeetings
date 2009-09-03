@@ -102,7 +102,7 @@ of the red5-servlet
     visible = yes
     hidden = no
  -->	
-<showRecording>visible</showRecording>
+<showRecording>hidden</showRecording>
 
 <!--
     
