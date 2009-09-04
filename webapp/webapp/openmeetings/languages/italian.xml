@@ -1933,234 +1933,180 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Ok</value>
   </string>
   <string id="643" name="window screensharing">
-    <value>Incoming Screen Sharing</value>
+    <value>Condivisione schermo in ingresso</value>
   </string>
   <string id="644" name="window screen sharing">
-    <value>There is a new Screen Sharing incoming from the User:</value>
+    <value>C'è una nuova condivisione di schermo in ingresso dall'utente:</value>
   </string>
   <string id="645" name="window screen sharing">
-    <value>Start Sharing</value>
+    <value>Inizia condivisione</value>
   </string>
   <string id="646" name="calendar">
-    <value>Add new Meeting</value>
+    <value>Aggiungi nuovo meeting</value>
   </string>
   <string id="647" name="calendar">
-    <value>Meeting Room</value>
+    <value>Stanza meeting</value>
   </string>
   <string id="648" name="calendar">
-    <value>Event Room</value>
+    <value>Stanza eventi</value>
   </string>
   <string id="649" name="main menu moderation">
-    <value>Moderation</value>
+    <value>Moderazione</value>
   </string>
   <string id="650" name="menu moderation">
-    <value>Moderate Users</value>
+    <value>Utenti moderatori</value>
   </string>
   <string id="651" name="menu moderation">
-    <value>Moderate Rooms</value>
+    <value>Stanze moderate</value>
   </string>
   <string id="652" name="moderator org">
     <value>M</value>
   </string>
   <string id="653" name="confirm moderation">
-    <value>Do you want to change this User to become a Moderator of that Organization?</value>
+    <value>Vuoi modificare questo utente a diventare moderatore dell'organizzazione?</value>
   </string>
   <string id="654" name="error message">
-    <value>Please choose an Organization before you try to add a User to it!</value>
+    <value>Perfavore scegli un organizzazione prima di aggiungere l'utente!</value>
   </string>
   <string id="655" name="choose user window">
-    <value>Organization - Moderator</value>
+    <value>Organizzazione - Moderatori</value>
   </string>
   <string id="656" name="moderator org users">
-    <value>Do you really want to delete this User from the Organization?</value>
+    <value>Sei sicuro di cancellare questo utente dall'organizzazione?</value>
   </string>
   <string id="657" name="org moderation">
-    <value>This User is Moderator</value>
+    <value>Questo utente è moderatore</value>
   </string>
   <string id="658" name="org moderation">
-    <value>This User is No-Moderator</value>
+    <value>Questo utente non è moderatore</value>
   </string>
   <string id="659" name="error message moderation">
-    <value>Do you want this User to be not a Moderator of this Organization?</value>
+    <value>Vuoi che questo utente non sia moderatore dell'organizzazione?</value>
   </string>
   <string id="660" name="moderation">
-    <value>Add or delete Users or Rooms within your Organization</value>
+    <value>Aggiungi o cancella utenti o stanze della tua organizzazione</value>
   </string>
   <string id="661" name="delete confirm question">
-    <value>Do you really want to delete this record?</value>
+    <value>Sei sicuro di cancellare questo record?</value>
   </string>
   <string id="662" name="delete confirm question user moderation">
-    <value>Do you really want to delete this user from your organization? You will only delete the connection between the user and your organization, to really delete the user itself you have to login into the Administration-Panel.</value>
+    <value>Sei sicuro di cancellare questo utente dall'organizzazione? Sarà cancellato il legame tra utente e organizzazione, per cancellare completamente l'utente devi collegarti al pannello di amministratore.</value>
   </string>
   <string id="663" name="error message self deleting">
-    <value>You cannot delete your own User!</value>
+    <value>Non puoi cancellare te stesso!</value>
   </string>
   <string id="664" name="error message auth">
-    <value>This Method needs a Adminstration Account to be invoked!</value>
+    <value>Questo metodo ha bisogno di un account da amministratore per essere chiamato!</value>
   </string>
   <string id="665" name="error message SOAP">
-    <value>There was no Session associated with this ID.</value>
+    <value>Non ci sono sessioni collegate a questo ID.</value>
   </string>
   <string id="666" name="error message moderation">
-    <value>This is an Administrator or Moderator account. You can only edit this account through the Administration Panel.</value>
+    <value>Questo utente è un amministratore o moderatore. Puoi editare questo account solo dal pannello di amministratore.</value>
   </string>
   <string id="667" name="email verification">
-    <value>To complete your registration please click on the following link. Or copy the URL to your browser bar.</value>
+    <value>Per completare la registrazione per favore clicca sul seguente link o copia l'url nel tuo browser.</value>
   </string>
   <string id="668" name="email verification">
-    <value>Click to verify your E-Mail</value>
+    <value>clicca per convalidare la tua e-mail</value>
   </string>
   <string id="669" name="errorMessage_UserActivationServlet [ActivateUser]">
-    <value>No user was found for this Hash.</value>
+    <value>Nessun utente è stato trovato per questo codice hash.</value>
   </string>
   <string id="670" name="errorMessage_UserActivationServlet [ActivateUser]">
-    <value>This user is already activated!</value>
+    <value>Questo utente è già stato attivato!</value>
   </string>
   <string id="671" name="errorMessage_UserActivationServlet [ActivateUser]">
-    <value>You did successfully activate your account!</value>
+    <value>Hai attivato correttamente il tuo utente!</value>
   </string>
   <string id="672" name="errorMessage_UserActivationServlet [ActivateUser]">
-    <value>Login Now</value>
+    <value>Collegati ora</value>
   </string>
   <string id="673" name="loginErrorMessage = user was not activated">
-    <value>Your account is not activated. First use the link in the Email you've received during registration.</value>
+    <value>Il tuo utente non è attivo. Per prima cosa clicca sul link presente nella mail ricevuta nel processo di registrazione</value>
   </string>
   <string id="674" name="register verification message">
-    <value>You successfully signed up. We've send an EMail with a verification Code to your Mail. Please check your Inbox.</value>
+    <value>Ti sei registrato correttamente. E' stata inviata una e-mail per la verifica dell'utente. Per favore controlla la tua posta in arrivo.</value>
   </string>
   <string id="675" name="participants panel">
-    <value>Remove Moderation Role from this User</value>
+    <value>Rimuovi il ruolo di moderatore da questo utente.</value>
   </string>
   <string id="676" name="participants panel">
-    <value>Grant Moderation Rights to this User</value>
+    <value>Assegna i diritti di moderatore a questo utente.</value>
   </string>
   <string id="677" name="event user list">
-    <value>User</value>
+    <value>Utente</value>
   </string>
   <string id="678" name="event user list">
-    <value>Access to whiteboard</value>
+    <value>Accesso alla lavagna virtuale</value>
   </string>
   <string id="679" name="event user list">
-    <value>Moderator</value>
+    <value>Moderatore</value>
   </string>
   <string id="680" name="event user list">
-    <value>Moderation: Please choose any User on the List to grant him access to the Whiteboard, Moderation or Video.</value>
+    <value>Moderazione: Per favore scegli dalla lista gli utenti a cui assegnare i diritti della lavagna virtuale, la moderazione o il video.</value>
   </string>
   <string id="681" name="event user list">
-    <value>This User is already Moderator, so he has automatically the right to draw.</value>
+    <value>Questo utente è già moderatore, ha automaticamente i diritti di disegno.</value>
   </string>
   <string id="682" name="event user list error">
-    <value>This is you! You cannot remove the Moderation rights from yourself.</value>
+    <value>Sei tu! Non puoi toglierti i diritti di amministratore.</value>
   </string>
   <string id="683" name="event user list">
-    <value>Allow this User to Publish his Audio / Video</value>
+    <value>Abilita questo utente a pubblicare Video e Audio</value>
   </string>
   <string id="684" name="event user list">
-    <value>Remove Audio/Video of this User</value>
+    <value>Rimuovi Audio e Video a questo utente</value>
   </string>
   <string id="685" name="event user list">
-    <value>I would like to get the moderation of this room</value>
+    <value>Vorrei ricevere la moderazione di questa stanza.</value>
   </string>
   <string id="686" name="event user list">
-    <value>I would like to draw on whiteboard</value>
+    <value>Vorrei disegnare sulla lavagna virtuale</value>
   </string>
   <string id="687" name="event user list">
-    <value>I would like to share my Audio/Video</value>
+    <value>Vorrei condividere il mio Audio e Video</value>
   </string>
   <string id="688" name="event user list">
-    <value>You are moderator of this room</value>
+    <value>Sei il moderatore della stanza</value>
   </string>
   <string id="689" name="event user list">
-    <value>You are allowed to draw on whiteboard</value>
+    <value>Hai i diritti di disegnare sulla lavagna virtuale</value>
   </string>
   <string id="690" name="event user list">
-    <value>You are allowed to share your Audio/Video</value>
+    <value>Sei abilitato a inviare il tuo Audio e Video</value>
   </string>
   <string id="691" name="errortype">
-    <value>Message to Moderator</value>
+    <value>Messaggio al moderatore</value>
   </string>
   <string id="692" name="apply for mod message">
-    <value>The User</value>
+    <value>L'utente</value>
   </string>
   <string id="693" name="apply for mod message">
-    <value>would like to get the Moderation. Use the status Icons next to the user in the List of Users to add or remove the Moderation.</value>
+    <value>vorrebbe diventare moderatore. Utilizza l'icona di stato vicino all'utente nella lista utenti per aggiungere e rimuovere i moderatori.</value>
   </string>
   <string id="694" name="apply for whiteboard">
-    <value>would like to draw on whiteboard. Use the status Icons next to the user in the List of Users to add or remove the right to draw anything on the whiteboard.</value>
+    <value>vorrebbe disegnare sulla lavagna virtuale. Utilizza l'icona di stato vicino all'utente nella lista utenti per aggiungere e rimuovere i diritti di uso della lavagna virtuale.</value>
   </string>
   <string id="695" name="695">
-    <value>would like to share his Audio/Video. Use the status Icons next to the user in the List of Users to add or remove the right to share Audio/Video for any User.</value>
+    <value>vorrebbe condividere i suoi Audio e Video. Utilizza l'icona di stato vicino all'utente nella lista utenti per aggiungere e rimuovere i diritti di condivisione Audio e Video.</value>
   </string>
   <string id="696" name="moderation message">
-    <value>You have to wait untill a Moderator enters the room.</value>
+    <value>Devi attendere fino a quando un moderatore entra nella stanza.</value>
   </string>
   <string id="697" name="calendar button">
-    <value>Cancel</value>
+    <value>Annulla</value>
   </string>
   <string id="698" name="calendar button">
-    <value>Save</value>
+    <value>Salva</value>
   </string>
   <string id="699" name="calendar component">
-    <value>Day</value>
+    <value>Giorno</value>
   </string>
   <string id="700" name="calendar component">
-    <value>Month</value>
+    <value>Mese</value>
   </string>
   <string id="701" name="calendar component">
-    <value>Year</value>
-  </string>
-  <string id="702" name="file explorer">
-    <value>Upload File</value>
-  </string>
-  <string id="703" name="file explorer">
-    <value>Add Folder</value>
-  </string>
-  <string id="704" name="file explorer">
-    <value>Refresh</value>
-  </string>
-  <string id="705" name="file explorer">
-    <value>Trash</value>
-  </string>
-  <string id="706" name="file explorer">
-    <value>My Files (Home Drive)</value>
-  </string>
-  <string id="707" name="file explorer">
-    <value>Room Files (Public Drive)</value>
-  </string>
-  <string id="708" name="file explorer">
-    <value>Add File</value>
-  </string>
-  <string id="709" name="file explorer">
-    <value>Add Folder</value>
-  </string>
-  <string id="710" name="file explorer">
-    <value>Delete Folder</value>
-  </string>
-  <string id="711" name="file explorer">
-    <value>Edit Name</value>
-  </string>
-  <string id="712" name="file explorer">
-    <value>New Folder</value>
-  </string>
-  <string id="713" name="file explorer">
-    <value>Are you sure you want to delete this Item?</value>
-  </string>
-  <string id="714" name="user admin">
-    <value>Search</value>
-  </string>
-  <string id="715" name="user admin">
-    <value>Search</value>
-  </string>
-  <string id="716" name="file explorer">
-    <value>Open Document</value>
-  </string>
-  <string id="717" name="file explorer">
-    <value>Show all Files (Tree View)</value>
-  </string>
-  <string id="718" name="file explorer">
-    <value>Close Document</value>
-  </string>
-  <string id="719" name="file explorer">
-    <value>Delete File</value>
+    <value>Anno</value>
   </string>
 </language>
