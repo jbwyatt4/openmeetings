@@ -9,47 +9,76 @@
 				2008 Apr 9 commented by onokeiji@gmail.com 
 	-->
 	<!--- TODO:
-			inprement of history feature
-			add resize feature to labelExplorerBox component
+		inprement of history feature
+		add resize feature to labelExplorerBox component
 	-->
+	<!--
 	<include href="extensions/html.lzx"/>
-
-	<class name="conferenceBrowser" extends="labelExplorerBox" labelid="539" closable="true">
-		<view name="browser" y="20">
+     -->
+     
+	<class name="conferenceBrowser" extends="labelExplorerBox" labelid="720" 
+		   x="$once{ parent.width/2 - this.width/2 }" closable="true" resizeable="true">
+		 
+		<handler name="oninit">
+            lz.Focus.setFocus(this.browser.navigation.url,true);
+        </handler>
+        
+        <handler name="onclose">
+        	if ($debug) Debug.write("Broadcast to all members");
+        </handler>
+        
+        <!--
+            Broadcast Message to all user
+         -->
+            
+		<view name="browser" y="22">
+			
 			<view name="navigation" layout="axis:x">
-		       	<edittext name="url" width="${classroot.width-parent.readStart.width}"> 
+				<edittext name="url" width="${classroot.width-parent.readStart.width}"> 
 					<handler name="onkeyup" args="key">
-						if ((key==27) || (key==13)) {
-                					this.parent.readStart.onclick.sendEvent();
-                		}
-	            		</handler>
+						if ((key == 27) || (key == 13)) {
+							this.parent.readStart.onclick.sendEvent();
+						}
+					</handler>
 				</edittext>
 				
-		        	<basebutton name="readStart" resource="./resources/read.png" width="25" height="25">
-		        		<handler name="onclick">
-		            		<![CDATA[
-		            		var url = parent.url.getText();
-		            		if((url.indexOf( "http://")<0)&&(url.indexOf( "https://" )<0)){
-		            			url = "http://" + url;
-		            	}
-		            	
-		            		if( $debug ) Debug.write( "url: ", url );
-		            		with( parent.parent.parent ){
-		                			htmlviewer.setSrc( url );
-		                			htmlviewer.visible = true;
-		            	}
-		            	
-		            		parent.url.setAttribute('text', url );
-		            	]]>
-	                		</handler>
-		        	</basebutton> 
+				<basebutton name="readStart" resource="./resources/read.png" width="25" height="25">
+					<handler name="onclick">
+    					<![CDATA[
+    						var url = parent.url.getText();
+    						if ((url.indexOf("http://") < 0)
+    								&& (url.indexOf("https://") < 0)) {
+    							url = "http://" + url;
+    						}
+    
+    						parent.parent.parent.htmlviewer.setAttribute("src",url);
+    						parent.parent.parent.htmlviewer.setAttribute("visible",true);
+    
+    						parent.url.setAttribute('text', url);
+    					]]>
+					</handler>
+				</basebutton> 
 			</view>
 		</view>
 
 		<handler name="onclose">
-			this.htmlviewer.setVisible( false );
+			this.htmlviewer.setVisible(false);
 		</handler>		
 		
-        	<html name="htmlviewer" xoffset="10" yoffset="${parent.browser.height+35}" widthoffset="${-this.xoffset}" heightoffset="${-this.yoffset}"/>
- 	</class>
+		<html name="htmlviewer" x="24" y="60" width="${ parent.width + 60 }" height="${parent.height - 30}" >
+			<handler name="onloading" args="loading">
+				this.loading = loading;
+				if ($debug) Debug.write("LOADING ",loading);
+			</handler>
+			<handler name="onsrc" args="src">
+				this.src = src;
+				if ($debug) Debug.write("SRC ",loading);
+			</handler>
+		</html>
+		
+        <simpleLabelButton labelid="61" width="100" x="${ parent.width-105 }" y="${ parent.height-24 }" 
+               onclick="this.parent.close();" />
+    		  
+	</class>
+ 	
 </library>

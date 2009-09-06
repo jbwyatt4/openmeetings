@@ -54,6 +54,8 @@
             <menuseparator/> 
             <_labelMenuItem labelid="306" command="cmd_editCamMicSettings" />
             <_labelMenuItem labelid="307" command="cmd_editBoardSettings" />
+            <menuseparator/>  
+            <_labelMenuItem labelid="720" command="cmd_coBrowser" />
             <menuseparator/>
             <_labelMenuItem width="250" labelid="24" command="cmd_createPoll" enabled="${ canvas.ismoderator }" />
             <_labelMenuItem width="250" labelid="37" command="cmd_pollResults" enabled="${ canvas.ismoderator }" />

@@ -12,9 +12,15 @@
     <command id="cmd_editCamMicSettings" onselect="canvas.doActionmenu('editCamMicSettings')" key="['ALT','Shift','1']"/> 
     <command id="cmd_editBoardSettings" onselect="canvas.doActionmenu('editBoardSettings')" key="['ALT','Shift','2']"/>   
     <command id="cmd_quit" onselect="canvas.doActionmenu('quit')" key="['ALT','Shift','E']"/> 
+    
+    <!--
     <command id="cmd_browser_open" onselect="canvas.doActionmenu('browser_open')" key="['ALT','Shift','B']"/>   
     <command id="cmd_browser_close" onselect="canvas.doActionmenu('browser_close')" key="['ALT','Shift','b']"/> 
+     -->
+     
     <command id="cmd_invitation" onselect="canvas.doAction('invitation')" /> 
+    
+    <command id="cmd_coBrowser" onselect="canvas.doActionmenu('browser_open')" key="['ALT','Shift','B']"/> 
     
     <command id="cmd_exportFilePNG" onselect="canvas.doWhiteboardActionmenu('exportFilePNG')" />
     <command id="cmd_exportFileJPG" onselect="canvas.doWhiteboardActionmenu('exportFileJPG')" />
@@ -270,20 +276,24 @@
 	            
 	         	} else if( stringSub == "browser_open" ){
 	         		var browserPanelWidth  = canvas.browserPanelWidth;
-	         		var browserPanelHeight = canvas.browserPanelHeight;
+                    var browserPanelHeight = canvas.browserPanelHeight;
 
-	         		Debug.write( "is browser[open] ? ", canvas.main_content._content.inner.conferenceBrowser );
+                    if ($debug) Debug.write( "is browser[open] ? ", canvas.main_content._content.inner.conferenceBrowser );
+                    if ($debug) Debug.write( "is browser[browserPanelWidth] ? ", browserPanelWidth );
+                    if ($debug) Debug.write( "is browser[browserPanelHeight] ? ", browserPanelHeight );
 
-	         	//ブラウザのインスタンスを確認して、あれば開く。なければ作成する
-	         		if( canvas.main_content._content.inner.conferenceBrowser == undefined ){Debug.write( "if this" );
-		        		new lz.conferenceBrowser( canvas.main_content._content.inner,
-		        								{name:'conferenceBrowser',x:canvas.main_content._content.inner.width/2,y:50,
-		        								 width:browserPanelWidth, height:browserPanelHeight} );
-         			}else{Debug.write( "else this" );
-					with( canvas.main_content._content.inner ){
-	        				conferenceBrowser.htmlviewer.setVisible( true );
-	        				conferenceBrowser.setVisible( true );
-					}
+                //ブラウザのインスタンスを確認して、あれば開く。なければ作成する
+                    if( canvas.main_content._content.inner.conferenceBrowser == undefined ){
+                        if ($debug) Debug.write( "if this" );
+                        new lz.conferenceBrowser( canvas.main_content._content.inner,
+                                                {name:'conferenceBrowser',y:50,
+                                                 width:browserPanelWidth, 
+                                                 height:browserPanelHeight} );
+                    } else{Debug.write( "else this" );
+                    with( canvas.main_content._content.inner ){
+                            conferenceBrowser.htmlviewer.setVisible( true );
+                            conferenceBrowser.setVisible( true );
+                    }
          		}
 			 } else if( stringSub == "browser_close" ){
 	         	// 開いているブラウザをアニメーションで移動する　hieght=0	
