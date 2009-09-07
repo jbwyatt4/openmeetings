@@ -19,6 +19,8 @@ import org.red5.logging.Red5LoggerFactory;
 import org.openmeetings.app.data.basic.Configurationmanagement;
 import org.openmeetings.app.data.basic.Sessionmanagement;
 import org.openmeetings.app.data.user.Usermanagement;
+import org.openmeetings.app.hibernate.beans.recording.RoomClient;
+import org.openmeetings.app.remote.red5.ClientListManager;
 import org.openmeetings.app.rtp.RTPScreenSharingSession;
 import org.openmeetings.app.rtp.RTPStreamingHandler;
 import org.openmeetings.app.templates.ScreenCastTemplate;
@@ -191,9 +193,8 @@ public class ScreenRequestHandler extends VelocityViewServlet {
 						}
 						else if(conf_i == 2){
 							
-							
 							// Storing Session data
-							RTPScreenSharingSession session = RTPStreamingHandler.storeSessionForRoom(room, users_id);
+							RTPScreenSharingSession session = RTPStreamingHandler.storeSessionForRoom(room, users_id, publicSID, rtmphostlocal);
 							
 							// For the RTP Sharer, we need some additional information
 							ctx.put("HOST", rtmphostlocal);

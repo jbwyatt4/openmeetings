@@ -6,8 +6,10 @@ import java.util.Iterator;
 import org.openmeetings.app.data.basic.Sessionmanagement;
 import org.openmeetings.app.data.conference.Roommanagement;
 import org.openmeetings.app.data.user.Usermanagement;
+import org.openmeetings.app.hibernate.beans.recording.RoomClient;
 import org.openmeetings.app.hibernate.beans.rooms.Rooms;
 import org.openmeetings.app.hibernate.beans.user.Users;
+import org.openmeetings.app.remote.red5.ClientListManager;
 import org.openmeetings.app.remote.red5.ScopeApplicationAdapter;
 import org.openmeetings.servlet.outputhandler.ScreenRequestHandler;
 import org.red5.logging.Red5LoggerFactory;
@@ -60,7 +62,7 @@ public class RTPStreamingHandler {
 					
 					if(session.getIncomingRTPPort() == currentPort){
 						portBlocked = true;
-						currentPort ++;
+						currentPort= currentPort +2;
 					}
 					else
 						portBlocked = false;
@@ -122,8 +124,18 @@ public class RTPStreamingHandler {
 		 * Store Session for Room
 		 */
 		//---------------------------------------------------------------------------------------------
-		public static RTPScreenSharingSession storeSessionForRoom(String room, Long sharing_user_id) throws Exception{
-			log.debug("storeSessionForRoom : " + room);
+		public static RTPScreenSharingSession storeSessionForRoom(String room, Long sharing_user_id, String publicSID, String hostIP) throws Exception{
+			log.debug("storeSessionForRoom : Room = " + room + ", publicSID : " + publicSID + ", hostIP" + hostIP);
+			
+			// Defining The IP of the Sharer (Moderator)
+			// Should be retrieved via Clientlist to receive the "extern" IP, seen by red5
+			RoomClient rcl = ClientListManager.getInstance().getClientByPublicSID(publicSID);
+			
+			
+			
+			if(rcl ==null)
+				throw new Exception("Could not retrieve RoomClient for publicSID");
+			
 			
 			RTPScreenSharingSession session = new RTPScreenSharingSession();
 			
@@ -136,21 +148,58 @@ public class RTPStreamingHandler {
 			if(myRoom == null)
 				throw new Exception("no Room for ID " + room);
 			
+			
 			// Define Room
 			session.setRoom(myRoom);
 			
+			// Define User
 			Users user = Usermanagement.getInstance().getUserById(sharing_user_id);
 			
 			if(user == null)
 				throw new Exception("No User for id " + sharing_user_id);
 			
+			log.debug("storeSessionForRoom : User = " + user.getLogin());
+			
 			session.setSharingUser(user);
 			
-			// Define RTP Port
+			// Define Sharers IP
+			session.setSharingIpAddress(rcl.getUserip());
+			log.debug("storeSessionForRoom : Sharers IP = " + rcl.getUserip());
+			
+			// Define RTP Port for Sharing User
 			int port = getNextFreeRTPPort();
+			
+			log.debug("storeSessionForRoom : Incoming RTP Port = " + port);
+			
 			session.setIncomingRTPPort(port);
 			
+			// Pre-Define Viewers
+			HashMap<String, RoomClient> clientsForRoom = ClientListManager.getInstance().getClientListByRoom(Long.parseLong(room));
+			
+			Iterator<String> siter = clientsForRoom.keySet().iterator();
+			
+			HashMap<RoomClient, Integer> viewers = new HashMap<RoomClient, Integer>();
+			
+			while(siter.hasNext()){
+				String key = siter.next();
+				RoomClient client = clientsForRoom.get(key);
+				
+				int viewerPort = getNextFreeRTPPort();
+				
+				viewers.put(client, viewerPort);
+				
+			}
+			
+			session.setViewers(viewers);
+			log.debug("storeSessionForRoom : Added " + viewers.size() + " Viewers to session");
+			
+			
+			// RED5Host IP
+			session.setRed5Host(hostIP);
+			
 			rtpSessions.put(myRoom, session);
+			
+			log.debug("storeSessionForRoom : sessionData stored");
 			
 			return session;
 			

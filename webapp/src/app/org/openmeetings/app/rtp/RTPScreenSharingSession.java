@@ -1,7 +1,14 @@
 package org.openmeetings.app.rtp;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+import org.openmeetings.app.hibernate.beans.recording.RoomClient;
 import org.openmeetings.app.hibernate.beans.rooms.Rooms;
 import org.openmeetings.app.hibernate.beans.user.Users;
+
+import com.sun.org.apache.bcel.internal.generic.NEW;
 
 /**
  * represents a ScreenSharingSession within Conference
@@ -15,6 +22,9 @@ public class RTPScreenSharingSession {
 	
 	/** Ip Address of sharing user */
 	private String sharingIpAddress = "127.0.0.1";
+	
+	/** IP of RED5 host */
+	private String red5Host = "127.0.0.1";
 	
 	/** RTP Port incoming(Port the Shareres Client sends on)*/
 	private  int incomingRTPPort = 0;
@@ -37,6 +47,9 @@ public class RTPScreenSharingSession {
 	/** Thread running?*/
 	private boolean running = false;
 	
+	/** Users, that are consuming the Sharing Stream */
+	private HashMap<RoomClient, Integer> viewers = new HashMap<RoomClient, Integer>();
+	
 	/** Thread */
 	private RTPStreamReceiver receiver;
 	
@@ -49,7 +62,12 @@ public class RTPScreenSharingSession {
 		
 	}
 	
-	
+	/**
+	 * Adding a new Viewer (coming late to conference...)
+	 * @param ipAddress
+	 * @param port
+	 * @throws Exception
+	 */
 	public void addNewViewer(String ipAddress, int port) throws Exception{
 		if(receiver == null)
 			throw new Exception("receiver thread is null");
@@ -116,5 +134,38 @@ public class RTPScreenSharingSession {
 	public void setJpegQuality(float jpegQuality) {
 		this.jpegQuality = jpegQuality;
 	}
+
+	public boolean isRunning() {
+		return running;
+	}
+
+	public void setRunning(boolean running) {
+		this.running = running;
+	}
+
+	public HashMap<RoomClient, Integer> getViewers() {
+		return viewers;
+	}
+
+	public void setViewers(HashMap<RoomClient, Integer> viewers) {
+		this.viewers = viewers;
+	}
+
+	public RTPStreamReceiver getReceiver() {
+		return receiver;
+	}
+
+	public void setReceiver(RTPStreamReceiver receiver) {
+		this.receiver = receiver;
+	}
+
+	public String getRed5Host() {
+		return red5Host;
+	}
+
+	public void setRed5Host(String red5Host) {
+		this.red5Host = red5Host;
+	}
+	
 	
 }

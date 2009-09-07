@@ -106,7 +106,7 @@ public class RTPMethodServlet extends HttpServlet{
 				throw new ServletException("RTPMethodServlet.startStreaming : no parameter SID!");
 			
 
-			String publicSID = request.getParameter("publicSid");
+			String publicSID = request.getParameter("publicSID");
 
 			
 
@@ -125,13 +125,7 @@ public class RTPMethodServlet extends HttpServlet{
 				throw new ServletException("RTPMethodServlet.startStreaming : no parameter sharerIP!");
 			
 			
-			RTPScreenSharingSession session;
-			
-			session = RTPStreamingHandler.getSessionForRoom(room, sid);
-			
-			// TODO Retrieve IP from Red5 client list!!!!
-			session.setSharingIpAddress(sharerIP);
-			
+			RTPScreenSharingSession session = RTPStreamingHandler.getSessionForRoom(room, sid);
 			
 			width=request.getParameter("width");
 			
@@ -157,12 +151,11 @@ public class RTPMethodServlet extends HttpServlet{
 				}
 			}
 			
-
 			// Starting ReceiverThread
 			session.startReceiver();
 			
 			log.debug("startStreaming values : IPAddress Sharer : " + sharerIP + ", width=" + width + ", height=" + height + ",room=" + room);
-
+			log.debug("startStreaming publicSID=" + publicSID);
 			
 			//we have to include the publicSID to get the RoomClient Object
 			//also the HOST, PORT must be set correctly in the RTPScreenSharingSession-Object
@@ -172,6 +165,11 @@ public class RTPMethodServlet extends HttpServlet{
 			LinkedHashMap<String,Object> hs = new LinkedHashMap<String,Object>();
 			hs.put("message", "startStreaming");
 			//Set the User Object
+			
+			// Check publicSID
+			String pSid = rcl.getPublicSID();
+			log.debug("RTPMethodServlet : publicSID = " + publicSID);
+			
 			hs.put("rcl", rcl);
 			//Set the Screen Sharing Object
 			hs.put("session", session);

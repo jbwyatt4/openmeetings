@@ -341,25 +341,25 @@ public class Main {
 		
 		//Checking Params
 		ConfigUtil.destinationAddress = args[0];
-		ConfigUtil.destinationPort = Integer.parseInt(args[1]);
+		ConfigUtil.destinationPort =Integer.parseInt(args[1]);
 		
 		ConfigUtil.SID = args[2];
 		ConfigUtil.ROOM = args[3];
-		PUBLICSID = args[5];
+		PUBLICSID =args[7];
 		
 		ConfigUtil.rtmphostlocal = args[4];
 		ConfigUtil.red5httpport = args[5];
 		ConfigUtil.webAppRootKey = args[6];
 		
-		ConfigUtil.PUBLIC_SID = args[7];
-		ConfigUtil.RECORDER = args[8];
+		ConfigUtil.PUBLIC_SID = PUBLICSID;
+		//ConfigUtil.RECORDER = args[8];
 		
 		System.out.println("Received input values : ");
 		System.out.println("destinationaddress : " + ConfigUtil.destinationAddress);
 		System.out.println("destinationpoprt : " + ConfigUtil.destinationPort);
-		System.out.println("SID : " + ConfigUtil.SID);
-		System.out.println("ROOM : " + ConfigUtil.ROOM);
-		System.out.println("PUBLICSID : " + PUBLICSID);
+		//System.out.println("SID : " + ConfigUtil.SID);
+		//System.out.println("ROOM : " + ConfigUtil.ROOM);
+		System.out.println("PUBLICSID : " + ConfigUtil.PUBLIC_SID);
 		
 		// Streaming Object
 		streamer = new Streamer();

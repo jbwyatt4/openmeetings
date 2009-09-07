@@ -1189,6 +1189,7 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 							if (conn instanceof IServiceCapableConnection) {
 								//RoomClient rcl = this.clientListManager.getClientByStreamId(conn.getClient().getId());
 								((IServiceCapableConnection) conn).invoke("newMessageByRoomAndDomain",new Object[] { message }, this);
+								
 								log.debug("sending newMessageByRoomAndDomain to " + conn);
 							}
 						}
