@@ -46,7 +46,7 @@ public class Streamer {
 	private int portBase = 22224;
 	 
 	/** SourcePort RTP */
-	private int sourcePort = 22226;
+	private int sourcePort = 22300;
 	 
 	/** Processor*/
 	private Processor processor = null;
@@ -73,7 +73,7 @@ public class Streamer {
 	public Streamer(){
 		this.ipAddress = ConfigUtil.destinationAddress;
 		this.portBase = ConfigUtil.destinationPort;
-		this.sourcePort = ConfigUtil.sourcePort;
+		this.sourcePort = 22300;//ConfigUtil.sourcePort; //TODO  :CHANGE TO NOT HARDCODED PORT!!
 	}
 	 
 	 /**
@@ -133,10 +133,14 @@ public class Streamer {
 			
 			port = portBase + 2*i;
 			ipAddr = InetAddress.getByName(ipAddress);
-
-			localAddr = new SessionAddress( InetAddress.getLocalHost(),
-							sourcePort);
 			
+			
+			System.out.println("createTransmitter  localAddress: " + InetAddress.getLocalHost() + "=" + sourcePort);
+
+			localAddr = new SessionAddress( InetAddress.getLocalHost(),sourcePort);
+			
+			System.out.println("createTransmitter  destAddress: " + ipAddress + "=" + port);
+
 			destAddr = new SessionAddress( ipAddr, port);
 
 			rtpMgrs[i].initialize( localAddr);

@@ -3,6 +3,8 @@ package org.openmeetings.servlet.outputhandler;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -77,17 +79,39 @@ public class RTPSharerServlet extends VelocityViewServlet{
 				RTPScreenSharingSession rsss = RTPStreamingHandler.getSessionForRoom(room, sid);
 				
 				if(rsss == null){
-					log.error("no RTPSharingSession available");
+					log.error("no RTPSharingSession available for room " + room);
 					return null;
 				}
 				
 				log.debug("Trying to connect on Stream (origin : " + rsss.getSharingIpAddress() + ")");
 				
-				// TODO : send RTP Stream not directly from sharer, but from RTP-Proxy within
-				// RED5 !!!!
-				//ctx.put("HOST", rsss.getSharingIpAddress());
+				// Defining Port for Viewer...
+				HashMap<RoomClient, Integer> preDefindedUsers = rsss.getViewers();
 				
-				int port = RTPStreamingHandler.getNextFreeRTPPort();
+				if(preDefindedUsers.size() < 1)
+					throw new Exception("No predefined viewers available in RTPSharingSession!!");
+				
+				Iterator<RoomClient> citer = preDefindedUsers.keySet().iterator();
+				
+				Integer myPort = null;
+				
+				while(citer.hasNext()){
+					RoomClient myClient = citer.next();
+					Integer port = preDefindedUsers.get(myClient);
+					
+					if(myClient.getPublicSID().equals(publicSID)){
+						myPort = port;
+					}
+				}
+				
+				
+				// TODO : this would be a valid entrypoint to add a new viewer, if he is part of
+				// the conference (check via ClientList per room) and came late ;-)
+				if(myPort == null)
+					throw new Exception("Predefindes Viewer List does not contain publicSID(" + publicSID +") !");
+				
+				
+				int port = myPort;
 				
 				ctx.put("HOST", InetAddress.getLocalHost().getHostAddress());
 				ctx.put("PORT", port);
@@ -96,12 +120,11 @@ public class RTPSharerServlet extends VelocityViewServlet{
 				
 				log.debug("Put Variables to Velocity context : HOST=" + ctx.get("HOST") + ", PORT=" + ctx.get("PORT"));
 				
+				log.debug("Received PubliSID : " + publicSID);
 				RoomClient rcl = ClientListManager.getInstance().getClientByPublicSID(publicSID);
 				String ip = rcl.getUserip();
-				
-				log.debug("publicSID : " + publicSID + ", ID : " + ip);
-				
-				rsss.addNewViewer(ip, port);
+					
+				//rsss.addNewViewer(ip, port);
 				
 				return getVelocityEngine().getTemplate(template);
 			

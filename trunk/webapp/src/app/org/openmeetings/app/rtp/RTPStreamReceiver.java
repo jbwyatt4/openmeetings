@@ -1,9 +1,10 @@
 package org.openmeetings.app.rtp;
 
 import java.net.InetAddress;
+import java.util.HashMap;
+import java.util.Iterator;
 
 import javax.media.ControllerEvent;
-import javax.media.ControllerListener;
 import javax.media.rtp.Participant;
 import javax.media.rtp.RTPManager;
 import javax.media.rtp.ReceiveStream;
@@ -17,10 +18,12 @@ import javax.media.rtp.event.RemotePayloadChangeEvent;
 import javax.media.rtp.event.SessionEvent;
 
 
+import org.openmeetings.app.hibernate.beans.recording.RoomClient;
 import org.openmeetings.servlet.outputhandler.ScreenRequestHandler;
 import org.red5.logging.Red5LoggerFactory;
 import org.slf4j.Logger;
 
+import com.sun.media.protocol.rtp.DataSource;
 
 /**
  * @author sebastianwagner
@@ -51,9 +54,9 @@ public class RTPStreamReceiver implements  ReceiveStreamListener,SessionListener
 	
 	boolean dataReceived = false;
     Object dataSync = new Object();
-
+    
 	
-	/**
+    /**
 	 * 
 	 * @param session
 	 */
@@ -67,11 +70,26 @@ public class RTPStreamReceiver implements  ReceiveStreamListener,SessionListener
 		basicManager.addReceiveStreamListener(this);
 		basicManager.addSessionListener(this);
 		
-		SessionAddress localAddr = new SessionAddress( InetAddress.getLocalHost(), sessionData.getIncomingRTPPort());
 		
+		log.debug("RTPStreamReceiver : Initializing SessionAddress =" + session.getRed5Host() + "/" + sessionData.getIncomingRTPPort());
+		SessionAddress localAddr = new SessionAddress( InetAddress.getByName(session.getRed5Host()), sessionData.getIncomingRTPPort());
+		
+		// Initializing base session between Sharer and this Thread
 		basicManager.initialize(localAddr);
-		basicManager.addTarget(new SessionAddress(InetAddress.getByName(session.getSharingIpAddress()), sessionData.getIncomingRTPPort()));
 		
+		// Defining Viewers
+		HashMap<RoomClient, Integer> viewers = session.getViewers();
+		
+		Iterator<RoomClient> iter = viewers.keySet().iterator();
+		
+		while(iter.hasNext()){
+			RoomClient client = iter.next();
+			
+			log.debug("Adding Viewer for room " + client.getRoom_id() + " : " + client.getUserip() + "/" + viewers.get(client));
+			
+			SessionAddress destAddr = new SessionAddress( InetAddress.getByName(client.getUserip()), viewers.get(client));
+			basicManager.addTarget(destAddr);
+		}
 		
 		long then = System.currentTimeMillis();
 		long waitingPeriod = 30000;  // wait for a maximum of 30 secs.
@@ -92,6 +110,10 @@ public class RTPStreamReceiver implements  ReceiveStreamListener,SessionListener
 		    basicManager.dispose();
 		    
 		}
+		else
+			// Creating forward Stream
+			basicManager.createSendStream(stream.getDataSource(), 0).start();
+		
 
 		log.debug("RTPStreamReceiver Konstruktor done");
 	}
@@ -113,14 +135,13 @@ public class RTPStreamReceiver implements  ReceiveStreamListener,SessionListener
 		log.debug("RTPStreamReceiver.update");
 		
 		Participant participant = evt.getParticipant();	// could be null.
-		ReceiveStream stream = evt.getReceiveStream();  // could be null.
+		stream = evt.getReceiveStream();  // could be null.
 
 		if (evt instanceof RemotePayloadChangeEvent) {
 	     
 		    System.err.println("  - Received an RTP PayloadChangeEvent.");
 		    System.err.println("Sorry, cannot handle payload change.");
 		    System.exit(0);
-
 		}
 	    
 		else if (evt instanceof NewReceiveStreamEvent) {
@@ -132,8 +153,7 @@ public class RTPStreamReceiver implements  ReceiveStreamListener,SessionListener
 				    dataReceived = true;
 				    dataSync.notifyAll();
 				}
-
-			
+	
 		    } catch (Exception e) {
 			System.err.println("NewReceiveStreamEvent exception " + e.getMessage());
 			return;
@@ -160,11 +180,19 @@ public class RTPStreamReceiver implements  ReceiveStreamListener,SessionListener
 	 */
 	//------------------------------------------------------------------------------------------
 	public void addNewViewer(String destinationAddress, int port) throws Exception{
-		log.debug("addNewViewer : destinationAddr = " + destinationAddress + ", port=" + port);
 		
+		//SessionAddress destAddr = new SessionAddress( InetAddress.getByName(destinationAddress), 22240);
+		//basicManager.addTarget(destAddr);
+		
+		/**
 		RTPManager manager = RTPManager.newInstance();
-		SessionAddress localAddr = new SessionAddress( InetAddress.getLocalHost(), sessionData.getOutgoingRTPPort());
-		SessionAddress destAddr = new SessionAddress( InetAddress.getByName(destinationAddress), port);
+		
+		
+		SessionAddress localAddr = new SessionAddress( InetAddress.getByName("10.136.110.53"), 22238);
+		SessionAddress destAddr = new SessionAddress( InetAddress.getByName(destinationAddress), 22240);
+		
+		log.debug("addNewViewer : destinationAddr = " + destAddr.getDataHostAddress() + ": " + destAddr.getDataPort());
+		log.debug("addNewViewer : localAddress = " + localAddr.getDataHostAddress() + ": " + localAddr.getDataPort());
 		
 		manager.initialize(localAddr);
 		
@@ -172,7 +200,7 @@ public class RTPStreamReceiver implements  ReceiveStreamListener,SessionListener
 
 			@Override
 			public void update(ReceiveStreamEvent arg0) {
-				// TODO Auto-generated method stub
+				log.debug("NewViewer.StresamListener : update");
 				
 			}
 			
@@ -186,8 +214,8 @@ public class RTPStreamReceiver implements  ReceiveStreamListener,SessionListener
 		if(stream == null)
 			throw new Exception("no origin stream available");
 		
-		manager.createSendStream(stream.getDataSource(), 0);
-		
+		manager.createSendStream(stream.getDataSource(), 0).start();
+		*/
 	}
 	//------------------------------------------------------------------------------------------
 
