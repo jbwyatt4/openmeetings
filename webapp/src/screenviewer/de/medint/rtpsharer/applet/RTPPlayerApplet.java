@@ -65,8 +65,8 @@ public class RTPPlayerApplet  extends Applet implements ControllerListener, Rece
             address = getParameter("videosession");
             portstr = getParameter("videoport");
             
-            System.out.println("address : " + address);
-            System.out.println("port : " + portstr);
+            System.out.println("destaddress : " + address);
+            System.out.println("destport : " + portstr);
             
             StartSessionManager(address,
                                 StrToInt(portstr),
@@ -224,6 +224,7 @@ public class RTPPlayerApplet  extends Applet implements ControllerListener, Rece
         Player newplayer = null;
         // create a new player if a new recvstream is detected
         if (event instanceof NewReceiveStreamEvent){
+        	System.out.print("Update.NewStreamEvent");
             try{
             	
                 ReceiveStream stream = ((NewReceiveStreamEvent)event).getReceiveStream();
@@ -231,8 +232,8 @@ public class RTPPlayerApplet  extends Applet implements ControllerListener, Rece
                 newplayer = Manager.createPlayer(dsource);
                 
             }catch (Exception e){
-          System.err.println("RTPPlayerApplet Exception " + e.getMessage());
-          e.printStackTrace();
+            	System.err.println("RTPPlayerApplet Exception " + e.getMessage());
+            	e.printStackTrace();
             }
             if (newplayer == null){
                 return;
@@ -275,6 +276,8 @@ public class RTPPlayerApplet  extends Applet implements ControllerListener, Rece
     private SessionManager StartSessionManager(String destaddrstr,
                                                   int port,
                                                   String media){
+    	
+    	System.out.println("StartSessionManager");
         // this method create a new RTPSessionMgr and adds this applet
         // as a SessionListener, before calling initSession() and startSession()
         SessionManager mymgr = new RTPSessionMgr();
@@ -283,7 +286,11 @@ public class RTPPlayerApplet  extends Applet implements ControllerListener, Rece
        
         if (mymgr == null)
             return null;
+        
         mymgr.addReceiveStreamListener(this);
+        
+        System.out.println("StartSessionManager.added receiveStreamListener");
+        
         //if (media.equals("audio"))
         //  EncodingUtil.Init((SessionManager)mymgr);
         
@@ -294,10 +301,11 @@ public class RTPPlayerApplet  extends Applet implements ControllerListener, Rece
 
         SessionAddress localaddr = new SessionAddress();
         
+        
         try{
             destaddr = InetAddress.getByName(destaddrstr);
         }catch (UnknownHostException e){
-            System.err.println("inetaddress " + e.getMessage());
+            System.err.println("Exception resolving destinationAddress :  " + e.getMessage());
             e.printStackTrace();
         }    
         SessionAddress sessaddr = new SessionAddress(destaddr,
@@ -351,6 +359,8 @@ public class RTPPlayerApplet  extends Applet implements ControllerListener, Rece
                               0.05,
                               0.25);
             mymgr.startSession(sessaddr,1,null);
+            
+           
         }catch (SessionManagerException e){
           System.err.println("RTPPlayerApplet: RTPSM Exception " + e.getMessage());
           e.printStackTrace();
