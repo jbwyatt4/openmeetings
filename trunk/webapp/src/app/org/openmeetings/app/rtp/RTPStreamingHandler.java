@@ -33,11 +33,16 @@ public class RTPStreamingHandler {
 		/** Maximum for valid RTP Ports */
 		public static final int maximalRTPPort = 24000;
 		
+		
+		/** Last Used Port */
+		public static int last_used_port = minimalRTPPort;
+		
 		/** Define The Port a Sharer should send his RTPStream on */
 		//---------------------------------------------------------------------------------------------
 		public static int getNextFreeRTPPort(){
 			log.debug("getNextFreeRTPPort");
 			
+			/*
 			Iterator<Rooms> riter = rtpSessions.keySet().iterator();
 			
 			int currentPort = minimalRTPPort;
@@ -72,9 +77,14 @@ public class RTPStreamingHandler {
 				portBlocked = false;
 					
 			}
+			*/
 			
-			log.debug("getNextFreeRTPPort : " + currentPort);
-			return currentPort;
+			last_used_port  = last_used_port +2;
+			
+			//TODO Check for Range and start from minimal again - checking openSession, if port is still in use...
+			
+			log.debug("getNextFreeRTPPort : " + last_used_port);
+			return last_used_port;
 			
 		}
 		//---------------------------------------------------------------------------------------------

@@ -71,7 +71,7 @@ public class RTPStreamReceiver implements  ReceiveStreamListener,SessionListener
 		basicManager.addSessionListener(this);
 		
 		
-		log.debug("RTPStreamReceiver : Initializing SessionAddress =" + session.getRed5Host() + "/" + sessionData.getIncomingRTPPort());
+		log.debug("RTPStreamReceiver : Initializing SessionAddress ='" + session.getRed5Host() + "'/" + sessionData.getIncomingRTPPort());
 		SessionAddress localAddr = new SessionAddress( InetAddress.getByName(session.getRed5Host()), sessionData.getIncomingRTPPort());
 		
 		// Initializing base session between Sharer and this Thread
