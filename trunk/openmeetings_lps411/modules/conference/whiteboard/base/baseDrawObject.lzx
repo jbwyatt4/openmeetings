@@ -59,9 +59,9 @@
         	if ($debug) Debug.write("addPresentationToLayer uniqueObjectSyncName:",uniqueObjectSyncName,innerwidth,innerheight);
             
             var downloadurl = 'http://'+canvas.rtmphostlocal+':'+canvas.red5httpport+'/'+canvas.webAppRootKey+'/DownloadHandler?' +
-                    'fileName=' + fileName +
+                    'fileName=' + encodeURIComponent(fileName) +
                     '&moduleName=' + moduleName + 
-                    '&parentPath=' + parentPath +
+                    '&parentPath=' + encodeURIComponent(parentPath + '/') +
                     '&room_id='+room + 
                     '&sid='+canvas.sessionId;
             
