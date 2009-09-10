@@ -168,13 +168,17 @@
         
         var moodleRoom = lz.Browser.getInitArg('moodleRoom');
         var becomemoderator = lz.Browser.getInitArg('becomemoderator');
-        if (moodleRoom != undefined && becomemoderator != undefined){
-            canvas.isMoodleRoom = true;
-            if (becomemoderator == "2"){
+        
+        if (becomemoderator != undefined) {
+        	if (becomemoderator == "2"){
                 canvas.becomemoderator = true;
             }
+        }
+        
+        if (moodleRoom != undefined){
+            canvas.isMoodleRoom = true;
             
-            var moodleWwwRoot = lz.Browser.getInitArg('wwwRoot');
+            var moodleWwwRoot = lz.Browser.getInitArg('wwwroot');
             var moodleUserId = lz.Browser.getInitArg('user_id');
             var moodlePicture = lz.Browser.getInitArg('picture');
             
@@ -182,7 +186,7 @@
                 canvas.moodleWwwRoot = moodleWwwRoot;
             }
             if (moodleUserId != undefined) {
-                canvas.moodleUserId = moodleUserId;
+                canvas.moodleUserId = Number(moodleUserId);
             }
             if (moodlePicture != undefined) {
                 canvas.moodlePicture = moodlePicture;
