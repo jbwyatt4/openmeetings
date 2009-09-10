@@ -39,7 +39,9 @@
 	<script type="text/javascript">
 		// <![CDATA[
 		
-		var so = new SWFObject("main.lzx.swf8.swf", "lzapp", "100%", "100%", "8", "#ffffff");
+		var d = new Date();
+		
+		var so = new SWFObject("main.lzx.swf8.swf?r="+d.getTime(), "lzapp", "100%", "100%", "8", "#ffffff");
 		so.addParam("quality", "high");
 		so.addParam("id", "lzapp");
 		so.addParam("allowScriptAccess", "always");
