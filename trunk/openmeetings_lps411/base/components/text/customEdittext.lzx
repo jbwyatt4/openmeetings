@@ -20,11 +20,13 @@
     <handler name="onvalue" args="txt">
     	<![CDATA[
             
-    	    //if ($debug) Debug.write("System.capabilities.os ",System.capabilities.os,txt);
+    	    //
     	   
     	    if (System.capabilities.os.indexOf('Linux')==-1) { 
                 return; 
 	        }
+	        
+	        if ($debug) Debug.write("System.capabilities.os -- START ",System.capabilities.os,txt);
 
 	        //UTF8 character remappings
             var cp1252 = new Object();
@@ -96,6 +98,8 @@
                 this.setAttribute("text",t.slice(0,i)+String.fromCharCode(u)+t.slice(d+1));
                 this.setAttribute("text",txt.split(String.fromCharCode(0x03)).join(''));
             }
+            
+            if ($debug) Debug.write("-- END ",this.text);
             
     	]]>
     </handler>
