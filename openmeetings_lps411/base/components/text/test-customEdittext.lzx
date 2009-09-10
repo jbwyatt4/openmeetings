@@ -106,7 +106,7 @@
                 
                 if ($debug) Debug.write("Replace String -2- ",txt,u);
                 
-                this.setAttribute("text",txt.split(String.fromCharCode(0x03)).join(''));
+                this.setAttribute("text",this.text.split(String.fromCharCode(0x03)).join(''));
             }
             
             if ($debug) Debug.write("-- END ",this.text);
