@@ -126,9 +126,16 @@
 
 		$openmeetings_gateway = new openmeetings_gateway();
 		if ($openmeetings_gateway->openmeetings_loginuser()) {
-			//set User-Object to Session
-			$returnVal = $openmeetings_gateway->openmeetings_setUserObject($USER->username,$USER->firstname,
-							$USER->lastname,$USER->picture,$USER->email);
+			
+			//set User-Object to Session ... is deprecated
+			//$returnVal = $openmeetings_gateway->openmeetings_setUserObject($USER->username,$USER->firstname,
+			//				$USER->lastname,$USER->picture,$USER->email);
+			
+			// Simulate the User automatically
+			//echo "openmeetings_setUserObjectWithExternalUser<br/>";
+			$returnVal = $openmeetings_gateway->openmeetings_setUserObjectWithExternalUser($USER->username,$USER->firstname,
+							$USER->lastname,$USER->picture,$USER->email,$USER->id,"moodle");
+							
 			if ($returnVal>0) {
 				$iframe_d = "videoconference.php?" .
 						"sid=".$openmeetings_gateway->session_id .
