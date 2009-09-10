@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<library>
+<canvas width="100%" height="100%" debug="true">
 
+    <debug fontsize="12" oninit="Debug.showInternalProperties = true" />
+    
 <class name="customEdittext" extends="edittext" fontsize="11" >
 	
 	<attribute name="labelid" type="number" setter="setLabelId(labelid)" />
@@ -166,26 +168,6 @@
 		]]>
 	</handler>
 	
-    <browserjavascriptcallback name="bumb_1">
-        <handler name="onvalue" args="val">
-            if(val=="true"){
-                //Debug.warn("FALSE: ",parent.parent,parent.parent.regexperror);
-              	disablesTooltips(new lz.regexptip(canvas,{x:this.getAttributeRelative('x',canvas)+12,
-              					y:this.getAttributeRelative('y',canvas)+26,
-              					regexptext:canvas.getLabelName(parent.regexpLabelid)}));
-              	parent.usePreContent();
-              	parent.setAttribute('isvalidInput',false);
-            } else {
-              	if(!this.parent.parent.getAttribute('isvalidInput')){
-                	disablesTooltips(null);
-              	}
-              	parent.setAttribute('isvalidInput',true);
-            }
-            parent.onafterCheck.sendEvent();
-        </handler>
-    </browserjavascriptcallback>    	
-
-    
     <method name="setLabelId" args="_labelid" >
         this.labelid = _labelid;
         this.setAttribute('text',canvas.getLabelName(this.labelid));
@@ -195,30 +177,9 @@
   		this.setAttribute('text',this.preText);
   	</method>    
   	
-    <!--
-    <browserjavascriptcallback name="bumb_1">
-        <handler name="onvalue" args="val">
-            if(val=="true"){
-            	if(parent.parent.isreport){
-                    Debug.write("TRUE: ",parent.parent,parent.parent.regexperror);
-              		disablesTooltips(new lz.regexptip(canvas,{x:this.getAttributeRelative('x',canvas)+12,y:this.getAttributeRelative('y',canvas)+12,regexptext:'Invalid Input'}));
-              	} else {
-                    Debug.write("FALSE: ",parent.parent,parent.parent.regexperror);
-              		disablesTooltips(new lz.regexptip(canvas,{x:this.getAttributeRelative('x',canvas)+12,y:this.getAttributeRelative('y',canvas)+12,regexptext:'Invalid Input'}));
-              	}
-              	parent.usePreContent();
-              	parent.setAttribute('isvalidInput',false);
-            } else {
-              	if(!this.parent.parent.getAttribute('isvalidInput')){
-                	disablesTooltips(null);
-              	}
-              	parent.setAttribute('isvalidInput',true);
-              	if (this.parent.parent.textblur) this.parent.parent.textblur.sendEvent(); 
-            }
-        </handler>
-    </browserjavascriptcallback> 
-    -->       
-    
 </class>
 
-</library>
+<customEdittext width="300" y="20" />
+
+
+</canvas>
