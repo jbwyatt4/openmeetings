@@ -8,25 +8,17 @@
     <handler name="onvalue" args="txt">
     	<![CDATA[
             
-    	    //
-    	   
     	    if (System.capabilities.os.indexOf('Linux')==-1) { 
-                //return; 
+                return; 
 	        }
 	        
-	        if ($debug) Debug.write("System.capabilities.os -- START ",System.capabilities.os,txt);
+	        //if ($debug) Debug.write("System.capabilities.os -- START ",System.capabilities.os,txt);
 	        
 	        if (txt == null || txt.length == 0) {
 	        	return;
 	        }
 	        
 	        
-	        //Get the Last CharCode entered:
-	        var lastChar = txt.substr(txt.length-2,1);
-	        if ($debug) Debug.write("lastChar ",lastChar);
-	        if ($debug) Debug.write("lastChar CharCode ",txt.charCodeAt(txt.length-1))
-	        
-
 	        //UTF8 character remappings
             var cp1252 = new Object();
             cp1252[0x20ac]=0x80;
@@ -63,23 +55,20 @@
                     
             var i=Selection.getCaretIndex()-1; 
             
-            if ($debug) Debug.write("i",i,Selection.getCaretIndex());
+            //if ($debug) Debug.write("i",i,Selection.getCaretIndex());
             
             var d=i;
             
-            if ($debug) Debug.write("DO WHILE -1- ",t.charCodeAt(i),cp1252[t.charCodeAt(i)],i,0x80,0xBF);
+            //if ($debug) Debug.write("DO WHILE -1- ",t.charCodeAt(i),cp1252[t.charCodeAt(i)],i,0x80,0xBF);
             
             while (((t.charCodeAt(i)>=0x80 && t.charCodeAt(i)<=0xBF) || (cp1252[t.charCodeAt(i)])) && i>0) {
-            	
-            	if ($debug) Debug.write("DO WHILE -2- ",t.charCodeAt(i),cp1252[t.charCodeAt(i)],i);
-            	
+            	//if ($debug) Debug.write("DO WHILE -2- ",t.charCodeAt(i),cp1252[t.charCodeAt(i)],i);
                 if (cp1252[t.charCodeAt(i)]) {
                     t=t.substr(0,i)+String.fromCharCode(cp1252[t.charCodeAt(i)])+t.substr(i+1);
                 }
                 i--;
             }
             if (i==d) { 
-            	if ($debug) Debug.write("i == d NOTHING TO REPLACE!");
                 return; 
             }
         
@@ -100,16 +89,9 @@
             }
         
             if (u!=0) {
-            	if ($debug) Debug.write("Replace String -1- ",txt,u,"Replace With ",String.fromCharCode(u));
-            	
                 this.setAttribute("text",t.slice(0,i)+String.fromCharCode(u)+t.slice(d+1));
-                
-                if ($debug) Debug.write("Replace String -2- ",txt,u);
-                
                 this.setAttribute("text",this.text.split(String.fromCharCode(0x03)).join(''));
             }
-            
-            if ($debug) Debug.write("-- END ",this.text);
             
     	]]>
     </handler>
