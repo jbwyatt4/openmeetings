@@ -135,6 +135,61 @@ public class UserService {
 		return new Long(-1);			
 	}
 	
+	/**
+	 * This is the advanced technique to set the User Object + simulate a User from 
+	 * the external system, this is needed cause you can that always simulate to same
+	 * user in openmeetings
+	 * 
+	 * @param SID
+	 * @param username
+	 * @param firstname
+	 * @param lastname
+	 * @param profilePictureUrl
+	 * @param email
+	 * @param externalUserId the User Id of the external System
+	 * @param externalUserType the Name of the external system, for example you can run several external system and one meeting server
+	 * @return
+	 */
+	public Long setUserObjectWithExternalUser(String SID, String username, String firstname, String lastname, 
+			String profilePictureUrl, String email, Long externalUserId, String externalUserType){
+		log.debug("UserService.setUserObject");
+	     
+		try {
+	    	Long users_id = Sessionmanagement.getInstance().checkSession(SID);
+	    	Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);			
+			if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)){
+				
+				RemoteSessionObject remoteSessionObject = new RemoteSessionObject(username, firstname, lastname, 
+						profilePictureUrl, email, externalUserId, externalUserType);
+				
+				
+				log.debug("username "+username);
+				log.debug("firstname "+firstname);
+				log.debug("lastname "+lastname);
+				log.debug("profilePictureUrl "+profilePictureUrl);
+				log.debug("email "+email);
+				log.debug("externalUserId "+externalUserId);
+				log.debug("externalUserType " +externalUserType);
+				
+				//XStream xStream = new XStream(new XppDriver());
+				XStream xStream = new XStream(new DomDriver("UTF-8"));
+				xStream.setMode(XStream.NO_REFERENCES);
+				String xmlString = xStream.toXML(remoteSessionObject);
+				
+				log.debug("xmlString "+xmlString);
+				
+				Sessionmanagement.getInstance().updateUserRemoteSession(SID, xmlString);
+				
+				return new Long(1);
+			} else {
+				return new Long(-26);
+			}
+		} catch (Exception err){
+			log.error("sendInvitationLink",err);
+		}
+		return new Long(-1);			
+	}
+	
 	public Long addUserToOrganisation(String SID, Long user_id, Long organisation_id,
 			Long insertedby, String comment) {
 		try {
@@ -170,5 +225,43 @@ public class UserService {
 		}
 		return null;
 	}
+	
+	public Long addUserToOrganisationWithMod(String SID, Long user_id, Long organisation_id,
+			Long insertedby, String comment, Boolean isModerator) {
+		try {
+	    	Long users_id = Sessionmanagement.getInstance().checkSession(SID);
+	    	Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);			
+			if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)){
+				
+				return Organisationmanagement.getInstance().addUserToOrganisationWithMod(user_id, organisation_id, 
+									users_id, comment, isModerator);
+				
+			} else {
+				return new Long(-26);
+			}
+		} catch (Exception err){
+			log.error("addUserToOrganisationWithMod",err);
+		}
+		return new Long(-1);
+	}
+	
+	public Long updateUserByOrganisation(String SID, Long organisation_id, Long user_id, String comment, Boolean isModerator) {
+		try {   
+	        Long users_id = Sessionmanagement.getInstance().checkSession(SID);
+	        Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
+	        if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)){
+	        	return Organisationmanagement.getInstance().updateUserToOrganisationWithMod(user_id, organisation_id, comment, isModerator);
+	        } else {
+	        	return -26L;
+	        }
+		} catch (Exception err) {
+			log.error("updateUserByOrganisation",err);
+		}
+		return new Long(-1);
+	}
+	
+	
+	
+	
 	
 }

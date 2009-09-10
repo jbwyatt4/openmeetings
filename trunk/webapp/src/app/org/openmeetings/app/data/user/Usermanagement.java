@@ -931,6 +931,94 @@ public class Usermanagement {
 		return null;
 	}
 	
+	public Users getUserByExternalIdAndType(Long externalUserId, String externalUserType) {
+		
+		try {
+			
+			String hql = "select c from Users as c " +
+					"where c.externalUserId = :externalUserId " +
+					"AND c.externalUserType LIKE :externalUserType " +
+					"AND deleted != :deleted";
+			
+			Object idf = HibernateUtil.createSession();
+			Session session = HibernateUtil.getSession();
+			Transaction tx = session.beginTransaction();
+			
+			Query query = session.createQuery(hql);
+			query.setLong("externalUserId", externalUserId);
+			query.setString("externalUserType", externalUserType);
+			query.setString("deleted","true");
+			
+			List<Users> users = query.list();
+			
+			tx.commit();
+			HibernateUtil.closeSession(idf);
+			
+			if (users.size() > 0) {
+				return users.get(0);
+			}
+			
+		} catch (HibernateException ex) {
+			log.error("[getUserByExternalIdAndType]" ,ex);
+		} catch (Exception ex2) {
+			log.error("[getUserByExternalIdAndType]" ,ex2);
+		}
+		return null;
+	}
+	
+	public Long addUserWithExternalKey(long level_id, int availible, int status,
+			String firstname, String login, String lastname, long language_id,
+			String userpass, Long adress_id, Date age, String hash, 
+			Long externalUserId, String externalUserType) {
+		try {
+			Users users = new Users();
+			users.setFirstname(firstname);
+			users.setLogin(login);
+			users.setLastname(lastname);
+			users.setAge(age);
+			if (adress_id != null && adress_id > 0) {
+			    users.setAdresses(Addressmanagement.getInstance().getAdressbyId(adress_id));
+			}
+			users.setAvailible(availible);
+			users.setLastlogin(new Date());
+			users.setLasttrans(new Long(0));
+			users.setLevel_id(level_id);
+			users.setStatus(status);
+			users.setTitle_id(new Integer(1));
+			users.setStarttime(new Date());
+			users.setActivatehash(hash);
+			
+			users.setExternalUserId(externalUserId);
+			users.setExternalUserType(externalUserType);
+			
+			// this is needed cause the language is not a needed data at
+			// registering
+			if (language_id != 0) {
+				users.setLanguage_id(new Long(language_id));
+			} else {
+				users.setLanguage_id(null);
+			}
+			users.setPassword(ManageCryptStyle.getInstance().getInstanceOfCrypt().createPassPhrase(userpass));
+			users.setRegdate(new Date());
+			users.setDeleted("false");
+
+			Object idf = HibernateUtil.createSession();
+			Session session = HibernateUtil.getSession();
+			Transaction tx = session.beginTransaction();
+			long user_id = (Long) session.save(users);
+			tx.commit();
+			HibernateUtil.closeSession(idf);
+
+			return user_id;
+
+		} catch (HibernateException ex) {
+			log.error("[registerUser]" ,ex);
+		} catch (Exception ex2) {
+			log.error("[registerUser]" ,ex2);
+		}
+		return null;
+	}
+	
 	public Long addUser(Users usr) {
 		try {
 			Object idf = HibernateUtil.createSession();

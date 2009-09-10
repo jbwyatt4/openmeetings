@@ -15,6 +15,9 @@ public class RemoteSessionObject {
 	private String pictureUrl;
 	private String email;
 	
+	private Long externalUserId;
+	private String externalUserType;
+	
 	public RemoteSessionObject(String username, String firstname, String lastname,
 			String pictureUrl, String email) {
 		super();
@@ -23,8 +26,38 @@ public class RemoteSessionObject {
 		this.lastname = lastname;
 		this.pictureUrl = pictureUrl;
 		this.email = email;
+		this.externalUserId = 0L;
+		this.externalUserType = "";
 	}
 	
+	
+	/**
+	 * @param username
+	 * @param firstname
+	 * @param lastname
+	 * @param pictureUrl
+	 * @param email
+	 * @param externalUserId
+	 * @param externalUserType
+	 *
+	 * 06.09.2009 17:05:48
+	 * sebastianwagner
+	 * 
+	 * 
+	 */
+	public RemoteSessionObject(String username, String firstname,
+			String lastname, String pictureUrl, String email,
+			Long externalUserId, String externalUserType) {
+		super();
+		this.username = username;
+		this.firstname = firstname;
+		this.lastname = lastname;
+		this.pictureUrl = pictureUrl;
+		this.email = email;
+		this.externalUserId = externalUserId;
+		this.externalUserType = externalUserType;
+	}
+
 	public String getUsername() {
 		return username;
 	}
@@ -55,6 +88,19 @@ public class RemoteSessionObject {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
+
+	public Long getExternalUserId() {
+		return externalUserId;
+	}
+	public void setExternalUserId(Long externalUserId) {
+		this.externalUserId = externalUserId;
+	}
+
+	public String getExternalUserType() {
+		return externalUserType;
+	}
+	public void setExternalUserType(String externalUserType) {
+		this.externalUserType = externalUserType;
+	}
 	
 }
