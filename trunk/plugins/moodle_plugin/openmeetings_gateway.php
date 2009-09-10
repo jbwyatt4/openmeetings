@@ -210,6 +210,13 @@ class openmeetings_gateway {
 		return -1;
 	}
 	
+	/*
+	 * Usage if this Method will work if you have no need to simulate always the same user in 
+	 * OpenMeetings, if you want to do this check the next method that also remembers the 
+	 * ID of the external User
+	 * 
+	 * 
+	 */
 	function openmeetings_setUserObject($username, $firstname, $lastname, 
 			$profilePictureUrl, $email) {
 	    global $USER, $CFG;
@@ -230,6 +237,53 @@ class openmeetings_gateway {
 			'email' => $email
 		);
 		$result = $client_userService->call('setUserObject',$params);
+		if ($client_roomService->fault) {
+			echo '<h2>Fault (Expect - The request contains an invalid SOAP body)</h2><pre>'; print_r($result); echo '</pre>';
+		} else {
+			$err = $client_userService->getError();
+			if ($err) {
+				echo '<h2>Error</h2><pre>' . $err . '</pre>';
+			} else {
+				//echo '<h2>Result</h2><pre>'; print_r($result["return"]); echo '</pre>';
+				return $result["return"];
+			}
+		}   
+		return -1;
+	}
+	
+	/**
+	 * Sets the User Id and remembers the User, 
+	 * the value for $systemType is any Flag but usually should always be the same, 
+	 * it only has a reason if you have more then one external Systems, so the $userId will not 
+	 * be unique, then you can use the $systemType to give each system its own scope
+	 * 
+	 * so a unique external user is always the pair of: $userId + $systemType
+	 * 
+	 * in this case the $systemType is 'moodle'
+	 * 
+	 */
+	function openmeetings_setUserObjectWithExternalUser($username, $firstname, $lastname, 
+			$profilePictureUrl, $email, $userId, $systemType) {
+	    global $USER, $CFG;
+	 	$client_userService = new nusoap_client_om("http://".$CFG->openmeetings_red5host.":".$CFG->openmeetings_red5port."/openmeetings/services/UserService?wsdl", true);
+		
+		$err = $client_userService->getError();
+		if ($err) {
+			echo '<h2>Constructor error</h2><pre>' . $err . '</pre>';
+			echo '<h2>Debug</h2><pre>' . htmlspecialchars($client->getDebug(), ENT_QUOTES) . '</pre>';
+			exit();
+		}  
+		$params = array(
+			'SID' => $this->session_id,
+			'username' => $username,
+			'firstname' => $firstname,
+			'lastname' => $lastname,
+			'profilePictureUrl' => $profilePictureUrl,
+			'email' => $email,
+			'externalUserId' => $userId,
+			'externalUserType' => $systemType
+		);
+		$result = $client_userService->call('setUserObjectWithExternalUser',$params);
 		if ($client_roomService->fault) {
 			echo '<h2>Fault (Expect - The request contains an invalid SOAP body)</h2><pre>'; print_r($result); echo '</pre>';
 		} else {

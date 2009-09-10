@@ -12,7 +12,7 @@
 //echo $_GET["red5host"]."<br/>";
 //echo $_GET["red5httpPort"]."<br/>";
 
-$openmeetings_swfURL = "http://".$_GET["red5host"].":".$_GET["red5httpPort"]."/openmeetings/main.lzx.swf8.swf?" .
+$openmeetings_swfURL = "http://".$_GET["red5host"].":".$_GET["red5httpPort"]."/openmeetings/maindebug.lzx.swf8.swf?" .
 		"roomid=".$_GET["roomid"] .
 		"&sid=".$_GET["sid"] .
 		"&language=".$_GET["language"] .
@@ -25,7 +25,7 @@ $openmeetings_swfURL = "http://".$_GET["red5host"].":".$_GET["red5httpPort"]."/o
 /*
  * For Debugging
 
-$openmeetings_swfURL = "http://192.168.0.31:8080/lps-4.3.0/openmeetings/maindebug.lzx?lzt=swf&lzr=swf8&lzproxied=solo" .
+$openmeetings_swfURL = "http://192.168.0.39:8080/lps-4.5.1/act2win/openmeetings/maindebug.lzx?lzt=swf&lzr=swf8&lzproxied=solo" .
 		"&roomid=".$_GET["roomid"] .
 		"&sid=".$_GET["sid"] .
 		"&language=".$_GET["language"] .
@@ -34,9 +34,9 @@ $openmeetings_swfURL = "http://192.168.0.31:8080/lps-4.3.0/openmeetings/maindebu
 		"&wwwroot=".$_GET["wwwroot"] .
 		"&moodleRoom=1" .
 		"&becomemoderator=".$_GET["becomemoderator"];
- */				
-//echo $openmeetings_swfURL;
-
+ 				
+echo $openmeetings_swfURL;
+*/
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
