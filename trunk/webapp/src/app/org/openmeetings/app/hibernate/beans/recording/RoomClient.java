@@ -121,6 +121,10 @@ public class RoomClient {
 	 */
 	private Boolean isBroadcasting = false;
 	
+	 //Vars to simulate external Users
+    private Long externalUserId;
+    private String externalUserType;
+	
 	/*
 	 * Zombie Flag
 	 */
@@ -527,6 +531,21 @@ public class RoomClient {
 	public void setIsBroadcasting(Boolean isBroadcasting) {
 		this.isBroadcasting = isBroadcasting;
 	}
-	
 
+	public Long getExternalUserId() {
+		return externalUserId;
+	}
+
+	public void setExternalUserId(Long externalUserId) {
+		this.externalUserId = externalUserId;
+	}
+
+	public String getExternalUserType() {
+		return externalUserType;
+	}
+
+	public void setExternalUserType(String externalUserType) {
+		this.externalUserType = externalUserType;
+	}
+	
 }
