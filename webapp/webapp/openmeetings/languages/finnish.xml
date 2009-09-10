@@ -2162,4 +2162,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   <string id="719" name="file explorer">
     <value>Delete File</value>
   </string>
+  <string id="720" name="file explorer">
+    <value>You are not allowed to draw anything on the Whiteboard. You have to become Moderator or at least get the Right to edit Whiteboard. You may ask a Moderator to give you that right.</value>
+  </string>
 </language>
