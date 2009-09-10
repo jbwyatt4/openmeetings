@@ -19,6 +19,7 @@ import org.openmeetings.app.data.calendar.management.AppointmentLogic;
 import org.openmeetings.app.data.calendar.management.MeetingMemberLogic;
 import org.openmeetings.app.data.conference.Roommanagement;
 import org.openmeetings.app.data.logs.ConferenceLogDaoImpl;
+import org.openmeetings.app.data.user.Usermanagement;
 import org.openmeetings.app.data.user.dao.UsersDaoImpl;
 import org.openmeetings.app.hibernate.beans.basic.Configuration;
 import org.openmeetings.app.hibernate.beans.calendar.Appointment;
@@ -1151,8 +1152,14 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 			
 			//Update Session Data
 			log.debug("UDPATE SESSION "+SID+", "+userId);
-			
 			Sessionmanagement.getInstance().updateUser(SID, userId);
+			
+			Users user = Usermanagement.getInstance().getUserById(userId);
+			
+			if (user != null) {
+				currentClient.setExternalUserId(user.getExternalUserId());
+				currentClient.setExternalUserType(user.getExternalUserType());
+			}
 			
 			//only fill this value from User-REcord
 			//cause invited users have non
