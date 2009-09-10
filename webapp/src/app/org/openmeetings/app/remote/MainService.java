@@ -117,6 +117,10 @@ public class MainService implements IPendingServiceCallback {
 		try {
 			IConnection current = Red5.getConnectionLocal();
 			String streamid = current.getClient().getId();
+			
+			log.debug("getCurrentRoomClient -1- "+SID);
+			log.debug("getCurrentRoomClient -2- "+streamid);
+			
 			RoomClient currentClient = this.clientListManager.getClientByStreamId(streamid);
 			return currentClient;
 		} catch (Exception err){
@@ -313,9 +317,35 @@ public class MainService implements IPendingServiceCallback {
         			IConnection current = Red5.getConnectionLocal();
         			String streamId = current.getClient().getId();
         			RoomClient currentClient = this.clientListManager.getClientByStreamId(streamId);	
+        			
+        			//Check if this User is simulated in the OpenMeetings Database 
+        			
+        			log.debug("userObject.getExternalUserId() -1- "+userObject.getExternalUserId());
+        			
+        			if (userObject.getExternalUserId() != null && userObject.getExternalUserId() > 0) {
+        				
+        				//If so we need to check that we create this user in OpenMeetings and update its record
+        				
+        				Users user = Usermanagement.getInstance().getUserByExternalIdAndType(userObject.getExternalUserId(), userObject.getExternalUserType());
+        				
+        				if (user == null) {
+	        				long userId = Usermanagement.getInstance().addUserWithExternalKey(1, 0, 0, userObject.getFirstname(), 
+				        						userObject.getUsername(), userObject.getLastname(), 1L, "", null, null, "", 
+				        						userObject.getExternalUserId(), userObject.getExternalUserType());
+	        				currentClient.setUser_id(userId);
+        				} else {
+        					currentClient.setUser_id(user.getUser_id());
+        				}
+        			}
+        			
+        			log.debug("userObject.getExternalUserId() -2- "+currentClient.getUser_id());
+        			
         			currentClient.setUserObject(userObject.getUsername(), userObject.getFirstname(), userObject.getLastname());
         			currentClient.setPicture_uri(userObject.getPictureUrl());
         			currentClient.setMail(userObject.getEmail());
+        			
+        			log.debug("UPDATE USER BY STREAMID "+streamId);
+        			
         			this.clientListManager.updateClientByStreamId(streamId, currentClient);
         			
         			return new Long(1);

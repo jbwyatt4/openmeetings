@@ -44,6 +44,10 @@ public class Users {
     
     private Set organisation_users;
     
+    //Vars to simulate external Users
+    private Long externalUserId;
+    private String externalUserType;
+    
     
     //TODO: Fehlende adressids für rechnung und lieferadresse
 
@@ -362,6 +366,29 @@ public class Users {
 	public void setActivatehash(String activatehash) {
 		this.activatehash = activatehash;
 	}
-	
+
+	/**
+     * @hibernate.property
+     *  column="externalUserId"
+     *  type="long"
+     */
+	public Long getExternalUserId() {
+		return externalUserId;
+	}
+	public void setExternalUserId(Long externalUserId) {
+		this.externalUserId = externalUserId;
+	}
+
+	/**
+     * @hibernate.property
+     *  column="externalUserType"
+     *  type="string"
+     */
+	public String getExternalUserType() {
+		return externalUserType;
+	}
+	public void setExternalUserType(String externalUserType) {
+		this.externalUserType = externalUserType;
+	}
 	
 }

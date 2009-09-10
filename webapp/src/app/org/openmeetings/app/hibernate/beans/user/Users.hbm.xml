@@ -30,5 +30,7 @@
     </set>
     <property name="resethash" type="string" column="resethash"/>
     <property name="activatehash" type="string" column="activatehash"/>
+    <property name="externalUserId" type="long" column="externalUserId"/>
+    <property name="externalUserType" type="string" column="externalUserType"/>
   </class>
 </hibernate-mapping>
