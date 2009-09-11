@@ -76,7 +76,7 @@ public class RTPSharerServlet extends VelocityViewServlet{
 				String template = "rtp_player_applet.vm";
 				
 				// Retrieve Data from RTPmanager
-				RTPScreenSharingSession rsss = RTPStreamingHandler.getSessionForRoom(room, sid);
+				RTPScreenSharingSession rsss = RTPStreamingHandler.getSessionForRoom(room, sid, publicSID);
 				
 				if(rsss == null){
 					log.error("no RTPSharingSession available for room " + room);

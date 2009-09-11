@@ -34,10 +34,10 @@ public class Main {
 	private static int frameRate = 20;
 	
 	/** TargetVideoheight */
-	private static int videoHeight = 768;
+	//private static int videoHeight = 768; //=> See ConfigUtil
 	
 	/** TargerVideoWidth*/
-	private static int videoWidth = 1024;
+	//private static int videoWidth = 1024; //=> See ConfigUtil
 	
 	/** Quality */
 	private static float quality = 1;

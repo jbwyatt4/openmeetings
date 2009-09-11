@@ -57,7 +57,7 @@ import java.lang.SecurityException;
 // Method RTPSessionUpdate() will process all the RTPEvents sent by
 // the SessionManager.
 public class RTPPlayerApplet  extends Applet implements
-ControllerListener, ReceiveStreamListener, ActionListener{
+			ControllerListener, ReceiveStreamListener, ActionListener{
   
     
     InetAddress destaddr;

@@ -80,6 +80,16 @@ public class Streamer {
 		this.portBase = ConfigUtil.destinationPort;
 		this.sourcePort = 22300; //ConfigUtil.sourcePort; //TODO  :CHANGE TO NOT HARDCODED PORT!!
 									//Why do we have to change that? swagner 11.09.2009
+		
+		
+		//Extend and capture different Screen Resolutions
+		Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
+		
+		ConfigUtil.videoWidth = Long.valueOf(Math.round(screenSize.getWidth())).intValue();
+		ConfigUtil.videoHeight = Long.valueOf(Math.round(screenSize.getHeight())).intValue();
+		
+		ConfigUtil.videoWidth = 640;
+		ConfigUtil.videoHeight = 480;
 	}
 	 
 	 /**
@@ -87,32 +97,42 @@ public class Streamer {
 	  */
 	 //------------------------------------------------------------------------------------------
 	 public synchronized String start(){
-		 
-		 log.debug("START IP:Port , Source-Port"+this.ipAddress+":"+this.portBase+" , "+this.sourcePort);
-		 
-		 
-		 String result;
+		 try {
+			log.debug("START IP:Port , Source-Port" + this.ipAddress + ":"
+					+ this.portBase + " , " + this.sourcePort);
 
-		 // Create a processor for the specified media locator
-		 // and program it to output JPEG/RTP
-		result = createProcessor();
-		if (result != null){
-			System.out.println(result);   
-			return result;
-		}
-		
-		// Create an RTP session to transmit the output of the
-		// processor to the specified IP address and port no.
-		result = createTransmitter();
-		if (result != null) {
-		    processor.close();
-		    processor = null;
-		    System.out.println(result);
-		    return result;
-		}
+			log.debug("Screen Width and Height "+ConfigUtil.videoWidth+" "+ConfigUtil.videoHeight);
+			 
+			String result;
 
-		// Start the transmission
-		processor.start();
+			// Create a processor for the specified media locator
+			// and program it to output JPEG/RTP
+			result = createProcessor();
+			
+			//If Result is NULL then everything is ok
+			if (result != null) {
+				System.out.println(result);
+				throw new Exception("ERROR IN CREATING PROCESSOR "+result);
+				//return result;
+			}
+
+			// Create an RTP session to transmit the output of the
+			// processor to the specified IP address and port no.
+			result = createTransmitter();
+			if (result != null) {
+				processor.close();
+				processor = null;
+				System.out.println(result);
+				throw new Exception("ERROR IN CREATING Transmitter "+result);
+				//return result;
+			}
+
+			// Start the transmission
+			processor.start();
+			
+		 } catch (Exception err) {
+			 log.error("[start]",err);
+		 }
 		
 		return null;
 
@@ -192,33 +212,35 @@ public class Streamer {
 	  */
 	 //------------------------------------------------------------------------------------------
 	 private String createProcessor() {
-			
+		try {	
 		 
-		// ImageDataSource reading ScreenCaptures
-		ImageDataSource ids = new ImageDataSource(ConfigUtil.videoWidth, ConfigUtil.videoHeight, ConfigUtil.frameRate);
-		 	
+			// ImageDataSource reading ScreenCaptures
+			ImageDataSource ids = new ImageDataSource(ConfigUtil.videoWidth, ConfigUtil.videoHeight, ConfigUtil.frameRate);
+			 	
+				
+			 // Try to create a processor to handle the input media locator
+			try {
+			    processor = javax.media.Manager.createProcessor(ids);
+			} catch (NoProcessorException npe) {
+			    return "Couldn't create processor : " + npe.getMessage();
+			} catch (IOException ioe) {
+			    return "IOException creating processor " + ioe.getMessage();
+			} 
+	
+			// Wait for it to configure
+			boolean result = waitForState(processor, Processor.Configured);
 			
-		 // Try to create a processor to handle the input media locator
-		try {
-		    processor = javax.media.Manager.createProcessor(ids);
-		} catch (NoProcessorException npe) {
-		    return "Couldn't create processor : " + npe.getMessage();
-		} catch (IOException ioe) {
-		    return "IOException creating processor " + ioe.getMessage();
-		} 
-
-		// Wait for it to configure
-		boolean result = waitForState(processor, Processor.Configured);
-		if (result == false)
-		    return "Couldn't configure processor";
+			if (result == false) {
+				return "Couldn't configure processor";
+			}
 
 			// Get the tracks from the processor
 			TrackControl [] tracks = processor.getTrackControls();
 
 			// Do we have atleast one track?
-			if (tracks == null || tracks.length < 1)
+			if (tracks == null || tracks.length < 1) {
 			    return "Couldn't find tracks in processor";
-
+			}
 			// Set the output content descriptor to RAW_RTP
 			// This will limit the supported formats reported from
 			// Track.getSupportedFormats to only valid RTP formats.
@@ -262,10 +284,13 @@ public class Streamer {
 			if (!atLeastOneTrack)
 			    return "Couldn't set any of the tracks to a valid RTP format";
 
+			log.debug("atLeastOneTrack IS Done ");
+			
 			// Realize the processor. This will internally create a flow
 			// graph and attempt to create an output datasource for JPEG/RTP
 			// audio frames.
 			result = waitForState(processor, Controller.Realized);
+			
 			if (result == false)
 			    return "Couldn't realize processor";
 
@@ -276,7 +301,10 @@ public class Streamer {
 			// Get the output data source of the processor
 			dataOutput = processor.getDataOutput();
 
-			return null;
+		} catch (Exception err) {
+			log.error("[createProcessor]",err);
+		}
+		return null;
 	 }
 	 //------------------------------------------------------------------------------------------
 	 
@@ -284,36 +312,43 @@ public class Streamer {
 	  * Waiting for ProcessorStates
 	  */
 	 //------------------------------------------------------------------------------------------
-	 private synchronized boolean waitForState(Processor p, int state) {
-		
-		p.addControllerListener(new StateListener());
-		failed = false;
-
-		 // Call the required method on the processor
-		if (state == Processor.Configured) {
-		    p.configure();
-		} else if (state == Processor.Realized) {
-		    p.realize();
-		}
+	private synchronized boolean waitForState(Processor p, int state) {
+		try {
 			
-		// Wait until we get an event that confirms the
-		// success of the method, or a failure event.
-		// See StateListener inner class
-		while (p.getState() < state && !failed) {
-		    synchronized (getStateLock()) {
-		    	try {
-		    		getStateLock().wait();
-		    	} catch (InterruptedException ie) {
-		    		return false;
-		    	}
-		    }
-		}
+			p.addControllerListener(new StateListener());
+			failed = false;
+	
+			// Call the required method on the processor
+			if (state == Processor.Configured) {
+				p.configure();
+			} else if (state == Processor.Realized) {
+				log.debug("DO Realize");
+				p.realize();
+			}
+	
+			// Wait until we get an event that confirms the
+			// success of the method, or a failure event.
+			// See StateListener inner class
+			while (p.getState() < state && !failed) {
+				synchronized (getStateLock()) {
+					try {
+						getStateLock().wait();
+					} catch (InterruptedException ie) {
+						return false;
+					}
+				}
+			}
+	
+			if (failed)
+				return false;
+			else
+				return true;
 		
-		if (failed)
-		    return false;
-		else
-		    return true;
-	 }
+		} catch (Exception err) {
+			log.error("[waitForState]",err);
+		}
+		return false;
+	}
 	 //------------------------------------------------------------------------------------------
 	 
 	 

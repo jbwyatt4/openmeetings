@@ -109,11 +109,11 @@ public class RTPStreamReceiver implements  ReceiveStreamListener,SessionListener
 		    System.err.println("No RTP data was received.");
 		    basicManager.dispose();
 		    
-		}
-		else
+		} else {
 			// Creating forward Stream
 			basicManager.createSendStream(stream.getDataSource(), 0).start();
-		
+			
+		}
 
 		log.debug("RTPStreamReceiver Konstruktor done");
 	}

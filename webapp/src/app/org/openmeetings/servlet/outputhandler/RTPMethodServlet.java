@@ -66,8 +66,11 @@ public class RTPMethodServlet extends HttpServlet{
 			if(sid == null || sid.length() < 1)
 				throw new ServletException("RTPMethodServlet.startStreaming : no parameter sid!");
 		
+			String publicSID = request.getParameter("publicSID");
+			if (publicSID == null) 
+				throw new ServletException("RTPMethodServlet.startStreaming : no parameter publicSID!");
 			
-			RTPScreenSharingSession session = RTPStreamingHandler.getSessionForRoom(room, sid);
+			RTPScreenSharingSession session = RTPStreamingHandler.getSessionForRoom(room, sid, publicSID);
 			
 			/** Notify Clients, that user started streaming -> showing users button for Appletstart */
 			LinkedHashMap<String,Object> hs = new LinkedHashMap<String,Object>();
@@ -125,7 +128,7 @@ public class RTPMethodServlet extends HttpServlet{
 				throw new ServletException("RTPMethodServlet.startStreaming : no parameter sharerIP!");
 			
 			
-			RTPScreenSharingSession session = RTPStreamingHandler.getSessionForRoom(room, sid);
+			RTPScreenSharingSession session = RTPStreamingHandler.getSessionForRoom(room, sid, publicSID);
 			
 			width=request.getParameter("width");
 			
