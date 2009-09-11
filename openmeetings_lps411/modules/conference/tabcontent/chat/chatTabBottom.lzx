@@ -12,7 +12,7 @@
 			<method name="setText" args="txt">
 				this._ctext.setAttribute('text',txt);
 			</method>
-			<inputtext name="_ctext" width="${ parent.width-2 }" height="$once{ parent.height-2 }"
+			<customInputtext name="_ctext" width="${ parent.width-2 }" height="$once{ parent.height-2 }"
 				x="1" y="1" bgcolor="white" >
 				<handler name="onkeyup" args="key">
 	                <![CDATA[
@@ -22,7 +22,7 @@
 	                }
 	                ]]>
 	            </handler>
-			</inputtext>		
+			</customInputtext>		
 		</view>
         
     <labelCheckbox name="_inverseWording" x="2" y="24" labelid="580">
