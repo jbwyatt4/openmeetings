@@ -20,6 +20,9 @@ public class RTPScreenSharingSession {
 	/** User sharing his Desktop */
 	private Users sharingUser = null;
 	
+	/** public SID of the User that streams **/
+	private String publicSID;
+	
 	/** Ip Address of sharing user */
 	private String sharingIpAddress = "127.0.0.1";
 	
@@ -166,6 +169,13 @@ public class RTPScreenSharingSession {
 	public void setRed5Host(String red5Host) {
 		this.red5Host = red5Host;
 	}
-	
+
+	public String getPublicSID() {
+		return publicSID;
+	}
+
+	public void setPublicSID(String publicSID) {
+		this.publicSID = publicSID;
+	}
 	
 }

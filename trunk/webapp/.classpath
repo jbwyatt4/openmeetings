@@ -144,5 +144,7 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="lib/hibernate_331/antlr-2.7.5.jar"/>
 	<classpathentry kind="lib" path="lib/jmf/jmf.jar"/>
+	<classpathentry kind="lib" path="webapp/openmeetings/screen/fmj-nojmf.jar"/>
+	<classpathentry kind="lib" path="webapp/openmeetings/screen/fmj.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

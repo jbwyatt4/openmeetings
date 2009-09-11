@@ -25,7 +25,7 @@ public class RTPStreamingHandler {
 		private static final Logger log = Red5LoggerFactory.getLogger(RTPStreamingHandler.class, "openmeetings");
 	
 		/** Contains all RTPSessions*/
-		public static HashMap<Rooms, RTPScreenSharingSession> rtpSessions = new HashMap<Rooms, RTPScreenSharingSession>();
+		private static HashMap<Rooms, RTPScreenSharingSession> rtpSessions = new HashMap<Rooms, RTPScreenSharingSession>();
 
 		/** Minimal Limit for valid RTP Ports */
 		public static final int minimalRTPPort = 22224;
@@ -94,7 +94,7 @@ public class RTPStreamingHandler {
 		 * Retrieving Session data for Room 
 		 */
 		//---------------------------------------------------------------------------------------------
-		public static RTPScreenSharingSession getSessionForRoom(String room, String sid) throws Exception{
+		public static RTPScreenSharingSession getSessionForRoom(String room, String sid, String publicSID) throws Exception{
 			log.debug("getSessionForRoom");
 			
 			if(room == null || room.length() <1)
@@ -108,29 +108,45 @@ public class RTPStreamingHandler {
 			if(myRoom == null)
 				throw new Exception("no room available for ID " + room);
 						
-			Iterator<Rooms> miter = rtpSessions.keySet().iterator();
+			//Iterator<Rooms> miter = ;
 			
-			RTPScreenSharingSession session = null;
+			log.debug("rtpSessions NUMBER OF OPEN SESSIONS: "+rtpSessions.size());
 			
-			while(miter.hasNext()){
-				Rooms rooms = miter.next();
+			if (rtpSessions.size() == 0) {
+				throw new Exception("no RTPSession - SIZE IS NULL " + publicSID);
+			}
+			
+			for(Iterator<Rooms> miter = rtpSessions.keySet().iterator();miter.hasNext();){
 				
-				if(rooms.getRooms_id().intValue() == myRoom.getRooms_id().intValue()){
-					session = rtpSessions.get(rooms);
+				RTPScreenSharingSession session = rtpSessions.get(miter.next());
+				
+				log.debug("session. publicSID :: "+session.getPublicSID() + " :: SEARCH " + publicSID);
+				
+				if(session.getPublicSID().equals(publicSID)){
 					
+					//session = rtpSessions.get(rooms);
+					
+					return session;
 				}
 				
 			}
 			
-			if(session == null)
-				throw new Exception("no RTPSession for Room " + room);
+			//if(session == null)
 			
-			return session;
+			//This should not happen at all
+			throw new Exception("no RTPSession for PublicSID " + publicSID);
+			
+			
 		}
 		//---------------------------------------------------------------------------------------------
 		
 		
 		/**
+		 * 
+		 * 4f9a1d5e554a719127577ad1c9ce7cda
+		 * 
+		 * 4f9a1d5e554a719127577ad1c9ce7cda
+		 * 
 		 * Store Session for Room
 		 */
 		//---------------------------------------------------------------------------------------------
@@ -203,6 +219,7 @@ public class RTPStreamingHandler {
 			session.setViewers(viewers);
 			log.debug("storeSessionForRoom : Added " + viewers.size() + " Viewers to session");
 			
+			session.setPublicSID(publicSID);
 			
 			// RED5Host IP
 			session.setRed5Host(hostIP);

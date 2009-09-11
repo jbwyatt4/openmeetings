@@ -17,6 +17,8 @@
 	<resources> 
 		<j2se version="1.4+"/> 
         <jar href="rtpviewer.jar"/> 
+        <jar href="fmj.jar"/>
+        <jar href="fmj-nojmf.jar"/>
         <jar href="jmf.jar"/>
         <jar href="log4j-1.2.6.jar"/>
     </resources> 
