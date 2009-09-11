@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library>
 
-<class name="styleableInput" extends="inputtext" x="1" y="1" bgcolor="white" multiline="true"
+<class name="styleableInput" extends="customInputtext" x="1" y="1" bgcolor="white" multiline="true"
 		width="${ parent.width-2 }" height="${ parent.height-2 }" >
 
 	<attribute name="startAdjustHight" value="false" type="boolean" />
