@@ -27,6 +27,8 @@ import javax.media.rtp.SendStream;
 import javax.media.rtp.SessionAddress;
 import javax.media.rtp.rtcp.SourceDescription;
 
+import org.apache.log4j.Logger;
+
 import de.medint.rtpsharer.datasource.*;
 import de.medint.rtpsharer.util.ConfigUtil;
 
@@ -38,6 +40,8 @@ import de.medint.rtpsharer.util.ConfigUtil;
  *
  */
 public class Streamer {
+	
+	private static Logger log = Logger.getLogger(Streamer.class);
 	
 	/** RTP Target Address */
 	private String ipAddress = "10.136.110.255";
@@ -71,9 +75,11 @@ public class Streamer {
 	 * @param sourcePort
 	 */
 	public Streamer(){
+		
 		this.ipAddress = ConfigUtil.destinationAddress;
 		this.portBase = ConfigUtil.destinationPort;
-		this.sourcePort = 22300;//ConfigUtil.sourcePort; //TODO  :CHANGE TO NOT HARDCODED PORT!!
+		this.sourcePort = 22300; //ConfigUtil.sourcePort; //TODO  :CHANGE TO NOT HARDCODED PORT!!
+									//Why do we have to change that? swagner 11.09.2009
 	}
 	 
 	 /**
@@ -81,6 +87,10 @@ public class Streamer {
 	  */
 	 //------------------------------------------------------------------------------------------
 	 public synchronized String start(){
+		 
+		 log.debug("START IP:Port , Source-Port"+this.ipAddress+":"+this.portBase+" , "+this.sourcePort);
+		 
+		 
 		 String result;
 
 		 // Create a processor for the specified media locator

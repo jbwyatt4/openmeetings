@@ -18,9 +18,13 @@ import javax.swing.JMenu;
 import javax.swing.JFrame;
 import javax.swing.JDialog;
 
+import org.apache.log4j.Logger;
+
 import de.medint.rtpsharer.util.ConfigUtil;
 
 public class Main {
+	
+	private static Logger log = Logger.getLogger(Main.class);
 	
 	/** StreamingClass */
 	private static Streamer streamer = null;
@@ -290,7 +294,8 @@ public class Main {
 
 		//@Override
 		public void actionPerformed(ActionEvent e) {
-			
+
+			log.debug("actionPerformed :: StartStreamingClass ");
 			
 			// Start Streaming
 			if(streamer !=null){
@@ -304,6 +309,7 @@ public class Main {
 				ServletFunctions.sendStartSignal();
 
 			}catch(Exception ex){
+				log.error("[actionPerformed]",ex);
 				System.out.println("Error on ServletCall : " + ex.getMessage());
 			}
 		}
@@ -316,6 +322,8 @@ public class Main {
 		//@Override
 		public void actionPerformed(ActionEvent e) {
 			try{
+				
+				log.debug("actionPerformed :: StopStreamingClass ");
 				
 				if(streamer !=null){
 					streamer.stop();
@@ -355,6 +363,9 @@ public class Main {
 		//ConfigUtil.RECORDER = args[8];
 		
 		System.out.println("Received input values : ");
+		
+		log.debug("### Received input values : ");
+		
 		System.out.println("destinationaddress : " + ConfigUtil.destinationAddress);
 		System.out.println("destinationpoprt : " + ConfigUtil.destinationPort);
 		//System.out.println("SID : " + ConfigUtil.SID);

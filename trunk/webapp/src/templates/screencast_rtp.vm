@@ -18,6 +18,7 @@
 		<j2se version="1.4+"/> 
         <jar href="rtpviewer.jar"/> 
         <jar href="jmf.jar"/>
+        <jar href="log4j-1.2.6.jar"/>
     </resources> 
     <application-desc main-class="de.medint.rtpsharer.main.Main">
     	<argument>$HOST</argument>
@@ -29,6 +30,5 @@
     	<argument>$webAppRootKey</argument>
     	<argument>$PUBLIC_SID</argument>
     	<argument>$RECORDER</argument>
-    	
     </application-desc> 
 </jnlp> 
