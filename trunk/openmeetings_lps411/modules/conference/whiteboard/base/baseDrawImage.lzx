@@ -90,9 +90,9 @@
         	//if ($debug) Debug.write("addImageToLayer ",obj,nameing,urlname,posx,posy,width,height,alterModus,baseurl,fileName,moduleName,parentPath,room,domain);
 			//if ($debug) Debug.write("addImageToLayer posx ",posx);
         	
-			var src = baseurl+'?fileName=' + fileName + 
+			var src = baseurl+'?fileName=' + encodeURIComponent(fileName) + 
 				'&moduleName=' + moduleName +
-				'&parentPath=' + parentPath +
+				'&parentPath=' + encodeURIComponent(parentPath) +
 				'&room_id=' + room + 
 				'&sid=' + canvas.sessionId;
 	
@@ -149,7 +149,7 @@
             if (!this.isScreenImageLoading){
                 this.isScreenImageLoading = true;
                 var downloadurl = 'http://'+canvas.rtmphostlocal+':'+canvas.red5httpport+'/'+canvas.webAppRootKey+'/ScreenViewHandler?'
-                    +'fileName='+value.fileName
+                    +'fileName='+encodeURIComponent(value.fileName)
                     +'&room='+hib.currentroomid
                     +'&domain='+hib.conferencedomain
                     +'&sid='+canvas.sessionId;
