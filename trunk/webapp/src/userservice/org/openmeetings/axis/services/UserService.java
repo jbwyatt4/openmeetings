@@ -226,42 +226,4 @@ public class UserService {
 		return null;
 	}
 	
-	public Long addUserToOrganisationWithMod(String SID, Long user_id, Long organisation_id,
-			Long insertedby, String comment, Boolean isModerator) {
-		try {
-	    	Long users_id = Sessionmanagement.getInstance().checkSession(SID);
-	    	Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);			
-			if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)){
-				
-				return Organisationmanagement.getInstance().addUserToOrganisationWithMod(user_id, organisation_id, 
-									users_id, comment, isModerator);
-				
-			} else {
-				return new Long(-26);
-			}
-		} catch (Exception err){
-			log.error("addUserToOrganisationWithMod",err);
-		}
-		return new Long(-1);
-	}
-	
-	public Long updateUserByOrganisation(String SID, Long organisation_id, Long user_id, String comment, Boolean isModerator) {
-		try {   
-	        Long users_id = Sessionmanagement.getInstance().checkSession(SID);
-	        Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
-	        if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)){
-	        	return Organisationmanagement.getInstance().updateUserToOrganisationWithMod(user_id, organisation_id, comment, isModerator);
-	        } else {
-	        	return -26L;
-	        }
-		} catch (Exception err) {
-			log.error("updateUserByOrganisation",err);
-		}
-		return new Long(-1);
-	}
-	
-	
-	
-	
-	
 }
