@@ -1929,246 +1929,246 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Это - демонстрационная комната. Чтобы отключить это сообщение, либо создайте личную комнату, либо установите собственный сервер. Вы автоматически будете отключены от комнаты через: </value>
   </string>
   <string id="640" name="meeting room administration">
-    <value>Moderated</value>
+    <value>Модерируется</value>
   </string>
   <string id="641" name="moderated room waiting message">
-    <value>Please wait untill the Moderator has entered the Room. The Moderator can be either a Teacher, Admin or the creator of this Room.</value>
+    <value>Подождите, пока модератор зайдёт в комнату. Модератором может быть лектор, администратор, либо создатель этой комнаты.</value>
   </string>
   <string id="642" name="error popup">
-    <value>Ok</value>
-  </string>   
+    <value>ОК</value>
+  </string>
   <string id="643" name="window screensharing">
-    <value>Incoming Screen Sharing</value>
+    <value>Другой пользователь делает экран общим</value>
   </string>
   <string id="644" name="window screen sharing">
-    <value>There is a new Screen Sharing incoming from the User:</value>
+    <value>Пользователь делает экран общим:</value>
   </string>
   <string id="645" name="window screen sharing">
-    <value>Start Sharing</value>
-  </string> 
+    <value>Сделать экран общим</value>
+  </string>
   <string id="646" name="calendar">
-    <value>Add new Meeting</value>
+    <value>Добавить новое совещание</value>
   </string>
   <string id="647" name="calendar">
-    <value>Meeting Room</value>
+    <value>Комната совещаний/value>
   </string>
   <string id="648" name="calendar">
-    <value>Event Room</value>
+    <value>Комната лекций</value>
   </string>
   <string id="649" name="main menu moderation">
-    <value>Moderation</value>
+    <value>Модерация</value>
   </string>
   <string id="650" name="menu moderation">
-    <value>Moderate Users</value>
+    <value>Модерировать пользователей</value>
   </string>
   <string id="651" name="menu moderation">
-    <value>Moderate Rooms</value>
+    <value>Модерировать комнаты</value>
   </string>
   <string id="652" name="moderator org">
     <value>M</value>
   </string>
   <string id="653" name="confirm moderation">
-    <value>Do you want to change this User to become a Moderator of that Organization?</value>
+    <value>Хотите сделать этого пользователя модератором этой организации?</value>
   </string>
   <string id="654" name="error message">
-    <value>Please choose an Organization before you try to add a User to it!</value>
+    <value>Выберите организации перед тем, как добавлять в нее пользователей</value>
   </string>
   <string id="655" name="choose user window">
-    <value>Organization - Moderator</value>
+    <value>Модератор организации</value>
   </string>
   <string id="656" name="moderator org users">
-    <value>Do you really want to delete this User from the Organization?</value>
+    <value>Вы действительно хотите удалить пользователя из этой организации</value>
   </string>
   <string id="657" name="org moderation">
-    <value>This User is Moderator</value>
+    <value>Этот пользователь - модератор</value>
   </string>
   <string id="658" name="org moderation">
-    <value>This User is No-Moderator</value>
+    <value>Этот пользователь - не модератор</value>
   </string>
   <string id="659" name="error message moderation">
-    <value>Do you want this User to be not a Moderator of this Organization?</value>
+    <value>Хотите, чтобы пользователь не был модератором в этой организации?</value>
   </string>
   <string id="660" name="moderation">
-    <value>Add or delete Users or Rooms within your Organization</value>
+    <value>Добавление или удаление пользователя/комнаты, относящихся к вашей организации</value>
   </string>
   <string id="661" name="delete confirm question">
-    <value>Do you really want to delete this record?</value>
+    <value>Вы действительно хотите удалить эту запись?</value>
   </string>
   <string id="662" name="delete confirm question user moderation">
-    <value>Do you really want to delete this user from your organization? You will only delete the connection between the user and your organization, to really delete the user itself you have to login into the Administration-Panel.</value>
+    <value>Вы действительно хотите удалить этого пользователя из вашей организации? В этом случае вы лишь удалите пользователем и организацией, а для полного удаления пользователя нужно будет зайти на панель администрирования.</value>
   </string>
   <string id="663" name="error message self deleting">
-    <value>You cannot delete your own User!</value>
+    <value>Вы не можете удалить себя</value>
   </string>
   <string id="664" name="error message auth">
-    <value>This Method needs a Adminstration Account to be invoked!</value>
+    <value>Этот метод можно вызвать, только используя аккаунт администратора.</value>
   </string>
   <string id="665" name="error message SOAP">
-    <value>There was no Session associated with this ID.</value>
+    <value>Не было сессии, ассоциирущийся с этим ID.</value>
   </string>
   <string id="666" name="error message moderation">
-    <value>This is an Administrator or Moderator account. You can only edit this account through the Administration Panel.</value>
+    <value>Это - аккаунт администратора или модератора. Вы можете редактировать его только через панель адмиинистрирования.</value>
   </string>
   <string id="667" name="email verification">
-    <value>To complete your registration please click on the following link. Or copy the URL to your browser bar.</value>
+    <value>Для завершения регистрации кликните на эту ссылку или скопируйте URL в окно браузера.</value>
   </string>
   <string id="668" name="email verification">
-    <value>Click to verify your E-Mail</value>
+    <value>Кликните для верификации вашего e-mail.</value>
   </string>
   <string id="669" name="errorMessage_UserActivationServlet [ActivateUser]">
-    <value>No user was found for this Hash.</value>
+    <value>Для этого Хеша не найдено пользоватей.</value>
   </string>
   <string id="670" name="errorMessage_UserActivationServlet [ActivateUser]">
-    <value>This user is already activated!</value>
+    <value>Этот пользователь уже активирован!</value>
   </string>
   <string id="671" name="errorMessage_UserActivationServlet [ActivateUser]">
-    <value>You did successfully activate your account!</value>
+    <value>Вы успешно кативировали ваш аккаунт</value>
   </string>
   <string id="672" name="errorMessage_UserActivationServlet [ActivateUser]">
-    <value>Login Now</value>
+    <value>Логиньтес сейчас</value>
   </string>
   <string id="673" name="loginErrorMessage = user was not activated">
-    <value>Your account is not activated. First use the link in the Email you've received during registration.</value>
+    <value>Ваш аккаунт не активирован. Сначала перейдите по ссылке, полученной в письме, которое вы получили при регистрации.</value>
   </string>
   <string id="674" name="register verification message">
-    <value>You successfully signed up. We've send an EMail with a verification Code to your Mail. Please check your Inbox.</value>
+    <value>Вы успешно зарегистрировались. Вам отпревлено письмо с кодом проверки. Проверьте вашу почту.</value>
   </string>
   <string id="675" name="participants panel">
-    <value>Remove Moderation Role from this User</value>
+    <value>Снять роль модератора у этого пользователя</value>
   </string>
   <string id="676" name="participants panel">
-    <value>Grant Moderation Rights to this User</value>
-  </string> 
+    <value>Дать пользователю права модерации</value>
+  </string>
   <string id="677" name="event user list">
-    <value>User</value>
+    <value>Пользователь</value>
   </string>
   <string id="678" name="event user list">
-    <value>Access to whiteboard</value>
+    <value>Доступ к доске</value>
   </string>
   <string id="679" name="event user list">
-    <value>Moderator</value>
+    <value>Модератор</value>
   </string>
   <string id="680" name="event user list">
-    <value>Moderation: Please choose any User on the List to grant him access to the Whiteboard, Moderation or Video.</value>
+    <value>Модерация: Выберите пользователя из списка для того, чтобы дать ему доступ к доске, модерации или к видео.</value>
   </string>
   <string id="681" name="event user list">
-    <value>This User is already Moderator, so he has automatically the right to draw.</value>
+    <value>Этот пользователь уже модератор, поэтому он автоматически имеет право рисовать.</value>
   </string>
   <string id="682" name="event user list error">
-    <value>This is you! You cannot remove the Moderation rights from yourself.</value>
+    <value>Это вы! Вы не можете удалить права модерации у себя.</value>
   </string>
   <string id="683" name="event user list">
-    <value>Allow this User to Publish his Audio / Video</value>
+    <value>Разрешить этому пользователю публиковать своё Аудио/Видео</value>
   </string>
   <string id="684" name="event user list">
-    <value>Remove Audio/Video of this User</value>
-  </string> 
+    <value>Удалить Аудио/Видео этого пользователя</value>
+  </string>
   <string id="685" name="event user list">
-    <value>I would like to get the moderation of this room</value>
+    <value>Я хочу получить права модерации в этой комнате</value>
   </string>
   <string id="686" name="event user list">
-    <value>I would like to draw on whiteboard</value>
+    <value>Я хочу рисовать на доске</value>
   </string>
   <string id="687" name="event user list">
-    <value>I would like to share my Audio/Video</value>
+    <value>Я хочу сделать моё Аудио/Видео общим</value>
   </string>
   <string id="688" name="event user list">
-    <value>You are moderator of this room</value>
+    <value>Вы - модератор в этой комнате</value>
   </string>
   <string id="689" name="event user list">
-    <value>You are allowed to draw on whiteboard</value>
+    <value>Вам разрешено рисовать на доске</value>
   </string>
   <string id="690" name="event user list">
-    <value>You are allowed to share your Audio/Video</value>
+    <value>Вам разрешено сделать ваше Аудио/Видео общим</value>
   </string>
   <string id="691" name="errortype">
-    <value>Message to Moderator</value>
+    <value>Сообщение модератору</value>
   </string>
   <string id="692" name="apply for mod message">
-    <value>The User</value>
+    <value>Пользователь</value>
   </string>
   <string id="693" name="apply for mod message">
-    <value>would like to get the Moderation. Use the status Icons next to the user in the List of Users to add or remove the Moderation.</value>
+    <value>желает стать модератором. Для того, чтобы разрешить или запретить функцию модерации, используйте иконки статуса рядом с именами пользователей в списке пользователей.</value>
   </string>
   <string id="694" name="apply for whiteboard">
-    <value>would like to draw on whiteboard. Use the status Icons next to the user in the List of Users to add or remove the right to draw anything on the whiteboard.</value>
+    <value>желает рисовать на доске. Для того, чтобы разрешить или запретить рисовать на доске, используйте иконки статуса рядом с именами пользователей в списке пользователей.</value>
   </string>
   <string id="695" name="695">
-    <value>would like to share his Audio/Video. Use the status Icons next to the user in the List of Users to add or remove the right to share Audio/Video for any User.</value>
+    <value>желает сделать своё Аудио/Видео общим. Для того, чтобы разрешить или запретить пользователям делать Аудио/Видео общим, используйте иконки статуса рядом с именами пользователей в списке пользователей.</value>
   </string>
   <string id="696" name="moderation message">
-    <value>You have to wait untill a Moderator enters the room.</value>
+    <value>Нужно подожать, пока модератор войдёт в комнату.</value>
   </string>
   <string id="697" name="calendar button">
-    <value>Cancel</value>
+    <value>Отменить</value>
   </string>
   <string id="698" name="calendar button">
-    <value>Save</value>
+    <value>Сохранить</value>
   </string>
   <string id="699" name="calendar component">
-    <value>Day</value>
+    <value>День</value>
   </string>
   <string id="700" name="calendar component">
-    <value>Month</value>
+    <value>Месяц</value>
   </string>
   <string id="701" name="calendar component">
-    <value>Year</value>
+    <value>Год</value>
   </string>
   <string id="702" name="file explorer">
-    <value>Upload File</value>
+    <value>Загрузить файл</value>
   </string>
   <string id="703" name="file explorer">
-    <value>Add Folder</value>
+    <value>Добавить папку</value>
   </string>
   <string id="704" name="file explorer">
-    <value>Refresh</value>
+    <value>Обновить</value>
   </string>
   <string id="705" name="file explorer">
-    <value>Trash</value>
+    <value>Мусорка</value>
   </string>
   <string id="706" name="file explorer">
-    <value>My Files (Home Drive)</value>
+    <value>Мои файлы (Локальное устройство)</value>
   </string>
   <string id="707" name="file explorer">
-    <value>Room Files (Public Drive)</value>
+    <value>Файлы из комнаты (Общее устройство)</value>
   </string>
   <string id="708" name="file explorer">
-    <value>Add File</value>
+    <value>Добавить файл</value>
   </string>
   <string id="709" name="file explorer">
-    <value>Add Folder</value>
+    <value>Добавить папку</value>
   </string>
   <string id="710" name="file explorer">
-    <value>Delete Folder</value>
+    <value>Удалить папку</value>
   </string>
   <string id="711" name="file explorer">
-    <value>Edit Name</value>
+    <value>Редактировать имя</value>
   </string>
   <string id="712" name="file explorer">
-    <value>New Folder</value>
+    <value>Новая папка</value>
   </string>
   <string id="713" name="file explorer">
-    <value>Are you sure you want to delete this Item?</value>
+    <value>Вы уверены, что хотите удалить этот пункт?</value>
   </string>
   <string id="714" name="user admin">
-    <value>Search</value>
+    <value>Поиск</value>
   </string>
   <string id="715" name="user admin">
-    <value>Search</value>
+    <value>Поиск</value>
   </string>
   <string id="716" name="file explorer">
-    <value>Open Document</value>
+    <value>Открыть документ</value>
   </string>
   <string id="717" name="file explorer">
-    <value>Show all Files (Tree View)</value>
+    <value>Показать все файлы (в виде дерева)</value>
   </string>
   <string id="718" name="file explorer">
-    <value>Close Document</value>
+    <value>Закрыть документ</value>
   </string>
   <string id="719" name="file explorer">
-    <value>Delete File</value>
+    <value>Удалить файл</value>
   </string>
   <string id="720" name="file explorer">
-    <value>You are not allowed to draw anything on the Whiteboard. You have to become Moderator or at least get the Right to edit Whiteboard. You may ask a Moderator to give you that right.</value>
+    <value>Вы не можете рисовать на доске. Вам нужно либо стать модератором, либо получить от модератора право рисовать на доске. Вы можете попросить модератора предоставить вам такое право.</value>
   </string>
 </language>
