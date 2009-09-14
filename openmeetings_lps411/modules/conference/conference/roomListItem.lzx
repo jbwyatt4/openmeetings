@@ -108,7 +108,7 @@
   <labelText text="$once{ parent.roomname }" />
 
   <labelText name="_users" y="26" />
-  <view name="_r" resource="reload_rsc" x="100" y="26"
+  <view name="_r" resource="reload_rsc" x="130" y="26"
       onclick="parent.getRoomClientsListByRoomId.doCall()" >
     <labelTooltip labelid="402" />
   </view>
