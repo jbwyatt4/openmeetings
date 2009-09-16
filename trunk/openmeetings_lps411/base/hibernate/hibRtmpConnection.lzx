@@ -1162,7 +1162,20 @@
             	}
             ]]>
         </handler>   
-    </netRemoteCallHib>     
+    </netRemoteCallHib>  
+    
+    <!-- ###########################
+    New Screen Sharing Methods 
+     -->
+    <netRemoteCallHib name="newScreenSharing" funcname="newScreenSharing">
+        <handler name="ondata" args="value">
+            <![CDATA[
+                //The onResult-Handler will be called be the rtmpconnection
+                if ($debug) Debug.write("newScreenSharing: ",value);
+                new lz.sharingSession(canvas,{sharingSessionObject:value});
+            ]]>
+        </handler>   
+    </netRemoteCallHib>  
      
 </class>
 

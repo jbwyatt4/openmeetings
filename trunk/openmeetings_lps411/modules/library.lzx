@@ -20,5 +20,7 @@
      
     <include href="admin/" />
     <include href="calendar/" />
+    
+    <include href="sharing/" />
 
 </library>

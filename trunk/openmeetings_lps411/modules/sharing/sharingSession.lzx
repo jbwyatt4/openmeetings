@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<library>
+	
+<class name="sharingScreenImage" extends="image">
+	<handler name="oninit">
+		if ($debug) Debug.write("sharingScreenImage oninit ",this);
+	</handler>
+	<handler name="onerror">
+        if ($debug) Debug.write("sharingScreenImage onerror ",this);
+    </handler>
+    <handler name="ontimeout">
+        if ($debug) Debug.write("sharingScreenImage ontimeout ",this);
+    </handler>
+</class>
+    
+<!---
+	View for recorded contents list.
+	When you select 'Recordings' on the top menu, this class shows the list.
+-->
+<class name="sharingSession" extends="view">	
+
+    <attribute name="sharingSessionObject" value="null" />
+    <attribute name="sharerPublicSID" value="" type="string" />
+    
+    <handler name="oninit">
+    	<![CDATA[
+    	
+    	   this.sharerPublicSID = this.sharingSessionObject.s;
+    	   
+    	   this.setNewScreen(0,0,0,0);
+    	   
+    	   for (var i=0;i<this.sharingSessionObject.l.length;i++) {
+    	   	  
+    	   }
+    	
+    	]]>
+    </handler>
+    
+    <method name="setNewScreen" args="x,y,w,h">
+    	<![CDATA[
+    	
+    	    var downloadurl = 'http://' + canvas.rtmphostlocal + ':' + canvas.red5httpport + '/'+canvas.webAppRootKey+'/serverUDP?' +
+    	                           'sid=' + canvas.sessionId +
+    	                           '&publicSID=' + this.sharerPublicSID + 
+    	                           '&mode=full';
+    	
+    	    new lz.sharingScreenImage(this,{src:downloadurl});
+    	    
+    	]]>
+    </method>
+
+</class>
+	
+</library>
