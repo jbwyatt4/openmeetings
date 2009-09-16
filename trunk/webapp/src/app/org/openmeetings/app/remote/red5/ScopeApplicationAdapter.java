@@ -969,33 +969,43 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 				boolean moderator_set = false;
 				
 				// Check if current user is set to moderator
-				for(int i = 0; i< members.size(); i++){
-					MeetingMember member = members.get(i);
-					
-					log.debug("checking user " + member.getFirstname() + " for moderator role - ID : " + member.getUserid().getUser_id());
+				for(int i = 0; i< members.size(); i++)
+				{
+					MeetingMember member = members.get(i);					
 					
 					// only persistent users can schedule a meeting
 					// userid is only set for registered users
-					if(member.getUserid() != null && member.getUserid().getUser_id().equals(userIdInRoomClient)){
+					if(member.getUserid() != null )
+					{
+						log.debug("checking user " + member.getFirstname() + " for moderator role - ID : " + member.getUserid().getUser_id());
 						
-						found = true;
-						
-						if(member.getInvitor()){
-							log.debug("User " + userIdInRoomClient + " is moderator due to flag in MeetingMember record");
-							currentClient.setIsMod(true);
-							moderator_set = true;
-							this.clientListManager.updateClientByStreamId(streamid, currentClient);
-							break;
-						}
-						else{
-							log.debug("User " + userIdInRoomClient + " is NOT moderator due to flag in MeetingMember record");
-							currentClient.setIsMod(false);
-							this.clientListManager.updateClientByStreamId(streamid, currentClient);
-							break;
-						}
+						if ( member.getUserid().getUser_id().equals(userIdInRoomClient) )
+						{					
+							found = true;
 							
+							if(member.getInvitor()){
+								log.debug("User " + userIdInRoomClient + " is moderator due to flag in MeetingMember record");
+								currentClient.setIsMod(true);
+								moderator_set = true;
+								this.clientListManager.updateClientByStreamId(streamid, currentClient);
+								break;
+							}
+							else
+							{
+								log.debug("User " + userIdInRoomClient + " is NOT moderator due to flag in MeetingMember record");
+								currentClient.setIsMod(false);
+								this.clientListManager.updateClientByStreamId(streamid, currentClient);
+								break;
+							}
+						}
+						else
+						{
+							if(member.getInvitor())
+								moderator_set = true;
+						}							
 					}
-					else{
+					else
+					{
 						if(member.getInvitor())
 							moderator_set = true;
 					}
