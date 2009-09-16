@@ -1,0 +1,235 @@
+#summary Release Notes
+
+== Major changes Version 0.9 RC3 ==
+
+  * Fix for special characters in Uploaded Images 
+  * Fix for special characters in Uploaded Documents
+  * Fix for UTF-8 Problem when using Linux Flash Player
+
+== Major changes in !MileStone 0.9 RC2 ==
+
+  * Multiple Moderators: A moderator can make other Users also Moderator (add or remove Moderation flag)
+  * No Confirmation from all users needed anymore to get Moderator (you just send a message to the Moderator)
+  * Completely refactored Event Modus with: Multiple Moderators, allow any User to draw to the whiteboard, Moderators can allow or deny any user to share his Cam or Microphone (Raise hand function)
+  * New Module Configuration XML-File to runtime configure Plugins and Modules
+  * New Language Translations: Swedish and Finnish contributed by www.openkvarken.fi
+  * Refactored parts of Calendar to fit into Layout and design
+  * Various Modifications and fixes
+
+A complete list of all Issue working and worked on !MileStone 0.9 can be seen at:
+
+http://code.google.com/p/openmeetings/issues/list?can=1&q=milestone%3DRelease0.9
+
+== Major changes in 0.8.4 ==
+
+Release 0.8.4 basically adds some new SOAP Functions for directly entering and editing a Room. Some Room-Attributes have been removed that concern the Layout of a Room. However you may still use the previous SOAP Calls but it is recommended to Update to use the latest API-Calls see [SoapMethods].
+
+The Moodle Plugin enables you now to use more feature of !OpenMeetings:
+  * Create both Room Types Conference Room (Multiple Videos) and Event Room (Single Bigger Video)
+  * Set an individual Room Language and Max Number of Participant per Room
+  * Set a Flag for a Room so that Students and Guests have to wait and will NOT become the Moderation Role in a Conference Room by default, they will have to wait untill a Moodle-Teacher, -Admin or -Creating-Teacher comes and enters a Room.
+
+We would like to thank all Contributors, User, Developers of !OpenMeetings and [http://www.openkvarken.fi/ Open Kvarken] for supporting us.
+
+
+Notes:
+
+In the Administration I just encountered an Issue with 0.8.4: 
+In the Admin Panel of Rooms as => the Admin-Panel expects that there is at least a
+number in the Field *demo-Time* ... so when you try to add a new Room it says
+System Error. You can workaround that by enabling *Demo Room* (the checkbox)
+enter a number in *demo Time* .. you can then disable that again and save the
+Room. r2100 should fix this already.
+
+
+== Major Changes in 0.7 RC2 ==
+
+  * Release RC2 has a new User Interface for the Conference Room and some new styling
+  * Fixes DB connection Issues with MySQL
+  * Adds possibility to draw simultaneously to the whiteboard (moderated) in Conference Room
+  * an new Participants Panel in the Conference Modus
+  * some Bug-Fixes like the Text-Tool in the Whiteboard is usable again, Clear Chat history, Scaling of Screen-Sharing Images to whiteboard Size.
+  * Updated Italian Lang-File
+  * Fixed Button to Invitation (moved to Menu Bar)
+
+== Major Changes in 0.7 RC1 ==
+
+Information:
+
+Starting with Release 0.7 !OpenMeetings uses a later version of Red5. We will work on updating to the very latest versions continuously to keep in track with the new features. Same for the Client side which is now build with !OpenLaszlo 4.2.0 (but still SWF8).
+
+!OpenMeetings will only run with the Red5 version recommended in our Instructions out of the box.
+
+Also still experimental recorder does now use FFMpeg to generate a whiteboard.swf for each recording.
+
+Major Changes:
+
+  * !OpenMeetings and red5 are together in one zip to prevent users from choosing wrong red5 version
+  * updated to Red5 Revision 3200 and !OpenLaszlo 4.2.0
+  * changed UI for Whiteboard and Whiteboard Tools
+  * improved Tools and replaced arrow-tool
+  * Property editor
+  * Reworked Recorder (still beta), will produce a whiteboard.swf using FFMpeg
+  * export whiteboard drawings (beta) does not include Presentation Files
+  * LDap auth configuration
+  * database changes to !MyISAM for performance
+  * changed video / audio settings
+  * max clients in room changed (4,8,16,... 1000)
+  * resize videos for Meeting and Event Modus
+  * database scheme updates (recording features and phone number)
+  * reworked Application Adapter to keep better control of Ghost-Connections and handle larger number of Users in each room
+  * Possibility to kick User (Administration Panel > Connections), List of connected Users
+  * experimental rtmps support
+  * fixes Bug to load Documents to Whiteboard with Flash Player 10
+  * updated and added language files (thai,ukranian, turkish new)
+  * right to left languages
+
+... and a lot more
+
+
+
+== Major Changes in 0.5.2 ==
+
+The Release 0.5.2 is a development snapshot 
+
+Fixed Issues/new Features:
+  * a Pointer Tool, also non Moderators can click on the Whiteboard and everybody will see that.
+  * removed the annoying bandwidth warning in the Screen-Sharing Client
+  * Screen Sharing Client does stop broadcasting screens to all users if the user leaves the room
+  * new Toolbars
+  * new translation (Hungarian)
+  * new Property Inspector
+  * some minor issues like removed browser feature, disabled recording button, changed window resizer 
+  * a new Servlet for Direct-Login/Invoking SOAP Methods without using SOAP see MethodGateway
+
+
+== Major Changes in 0.5.1 ==
+
+The Release 0.5.1 is a development snapshot to enable developers and Administrators to use the new SOAP-Gateway to embed !OpenMeetings into their existing environment.
+The SOAP-Gateway uses Axis2 to generate WSDL-Files and provide Methods, see: SoapMethods.
+Besides the SOAP-Gateway some Issue's have been fixed, including a reworked Video-API.
+
+The complete list of Methods can be seen here: SoapMethods
+
+Besides Issues connected to the SOAP-Gateway, additional fixed Issues:
+  * Issue 427 - Invitation Mail Link Problem When Set To Port 80  
+  * Issue 432: ODT/PPT documents not converted with OpenOffice 2.4 and JOD 2.0.1
+  * Issue 436: use room_id for file-system-logic
+  * Issue 439: rework messageing to use room_id everywhere
+  * Issue 407: buffer full - stream buffer empty messages repeatedly
+  * Issue 408: seems like the client(s) mute but doesn't un-mute
+  * Issue 419: make the Singleton Variant Thread-Save
+  * Issue 415: Document Converter Broken
+  * Issue 371: upload file: bug in conversion
+  * Issue 406: recorder does not show recorded video-views next to each other
+  * Issue 414: Multiple Videoview in Conference
+  * Issue 421: rename package-name from xmlcrm to openmeetings
+  * Issue 425: remove duplicated JARs and rewrite ANT-Script
+
+For installation see: InstallationOfRelease051
+
+== 0.5 Beta6 and Beta7 Changes ==
+
+Main Changes:
+
+  * new Layout (Container)
+  * new Chat Module see: [ChatModul]
+  * User Profile with Image
+  * advanced Language editing with import/export see: [LanguageEditor]
+  * Backup Module to import/export userdata see: [BackupPanel]
+  * Mute Button to turn sound off, if a somebody has bad audio/strong echo/bad bandwidth
+  * remote Activity (green Light if somebody is speaking in Video-Box)
+  * Japanese Language-File added (thx to H.Kuze from net8/Open-Laszlo.jp)
+
+
+Minor Changes:
+
+  * improved Local-Storage (Login-Box remembers)
+  * improved Dashboard
+  * Some Fixes for Administration Panels
+  * Better List-view (jump to first/last and change row-count)
+  * improved tooltips
+  * tests and fixes to run without problems on mysql and postgres
+
+== 0.5 Beta5 Changes ==
+
+Main Changes:
+
+  * improved audio / video quality settings
+  * choose a/v quality at login
+  * compability to red5-0.6.3
+  * reworked video/audio components (now independent from OpenLaszlo Components)
+  * Bugfixes
+  * fixes video-freeze bug from Issue178
+
+
+Minor Changes:
+
+  * repaired invitation-system
+  * choose language combobox for invited users
+
+== 0.5 Beta4 Changes ==
+
+Main Changes:
+
+  * SWF Presentation Viewer for Documents see [SWFPresentationViewer]
+  * Auto Cast for Objects (backend)
+  * Improved Configuration / Administration
+  * Solved Session-Problems
+  * Added Dashboard
+  * more languages (korean, chinese-simplefied, chinese-traditional, swedish)
+
+Minor Changes:
+
+  * Repaired ScreenViewer (Problems cause of changed JNLP-File)
+  * added mysql5 driver instead of mysql3
+  * changed splash
+  * linked Project Page and News
+  * fixings of various bugs
+
+== 0.5 Beta3 Changes ==
+
+Main Changes:
+
+  * Screen Viewer Application see ScreenViewer
+  * Installation for Postgres,MySQL and any database supported by hibernate
+  * no more database skeleton's (scheme will be created by hibernate)
+  * Fully Multi-Plattform compatible (Linux, MacOSX, Windows)
+  * Thumbnails in Library for all Uploaded Data
+
+
+Minor Changes:
+
+  * Removed unnecessary jboss-%.jars (crashes Application with Red5 JMX-Console)
+  * Improved docs for OpenOfficeConverter
+  * Improved config.xml to use right syntax
+  * Repaired Bug with JPG's (did not generate Thumbs)
+  * Added batch files for Windows convertion jobs
+  * Repaired Organisation Handling (Could not store new Organisation / or add Users to Organisations)
+  * Debug Version of the Application added
+
+== 0.5 Beta2 Changes ==
+
+Main Changes:
+
+  * Laszlo Application in solo modus, only one webapp
+  * Easier Installation (no openlaszlo seperated installation needed)
+  * Language Files added
+  * More Document-Types for importing
+  * better performance (non proxied)
+
+
+Details:
+
+  * all images loaded as JPG's
+  * Thumbnails in library
+  * error and timeout handlers for images (no more blockings if image could not be loaded)
+  * less cpu and server stress (cause no images proxing, no second openlaszlo server)
+  * rewritten invitation system
+  * better feedback in registration form
+  * offline installation and running
+  * lot of bug fixes
+
+== 0.4 and Previous versions ==
+
+those Versions have been part of the Dokeos E-Learning Platform
