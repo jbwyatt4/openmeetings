@@ -2,7 +2,8 @@
 <library>
 
  
-<class name="eventUserList" extends="view" width="$once{ parent.width }" height="$once{ parent.height-34 }">
+<class name="eventUserList" extends="view" width="$once{ parent.width }" 
+	   height="${ parent.height-34 }">
 
 	<!--- holds a references to the videoview which is broadcasting -->
 	<attribute name="broadCastViewRef" value="null" />

@@ -11,7 +11,7 @@
     <vscrollbar />
 </class>
 
-<class name="eventUserListInner" extends="view"  width="$once{ parent.width }" height="$once{ parent.height }" 
+<class name="eventUserListInner" extends="view"  width="$once{ parent.width }" height="${ parent.height }" 
        bgcolor="$once{ canvas.basebgcolorizer }" >
 	
 	<attribute name="selectedItem" value="null" />
@@ -40,7 +40,7 @@
 	
     <!-- clip="true" -->
     
-    <view width="$once{ parent.width-2 }" height="$once{ parent.height-2 }" 
+    <view width="$once{ parent.width-2 }" height="${ parent.height-2 }" 
         x="1" y="1" bgcolor="white" />
 
     <method name="addItem" args="object">
@@ -210,7 +210,7 @@
         	]]>
         </method>
         
-        <labelText labelid="680" width="276" x="0" multiline="true" y="0" />
+        <labelText labelid="680" width="270" x="0" multiline="true" y="0" />
     	
     	<animator name="showItem" attribute="height" 
     			  to="40" duration="1000" start="false" />

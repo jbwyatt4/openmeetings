@@ -87,7 +87,7 @@
         </handler>
     </netRemoteCallHib>
     
-    <conferenceRoomSidebar name="_sidePanel" />
+    <eventRoomSidebar name="_sidePanel" />
     
     <conferenceBox name="_chatPanelStrict" labelid="616" textInset="30" closeable="true" 
        height="200" x="${ parent._sidePanel.width }"  
