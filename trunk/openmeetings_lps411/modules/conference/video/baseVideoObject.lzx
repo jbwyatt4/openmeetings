@@ -79,7 +79,7 @@
     <method name="setItemContraints" args="w">
         <![CDATA[
             //if ($debug) Debug.write("setItemContraints",w)
-            var w=this.height * this.initW/this.initH;
+             var w=this.height * this.initW/this.initH;
              w=((w < this.initW ) ? initW : w);
              var h=this.width * this.initH/this.initW;
              h=((h < this.initH ) ? initH : h);
@@ -129,7 +129,7 @@
     </method>    
     <method name="deleteVideoConfProfilePic" args="value">
     	if ($debug) Debug.write("### deleteVideoConfProfilePic ",value);
-        Debug.write("delete ",this.showUserProfilePic);
+        if ($debug) Debug.write("delete ",this.showUserProfilePic);
     	if (this.showUserProfilePic){
     		this._chatvideoinner.userProfilePic.destroy();
     		this.showUserProfilePic = false;
