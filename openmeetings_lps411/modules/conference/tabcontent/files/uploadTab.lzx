@@ -190,7 +190,7 @@
 
 	<simpleLabelButton width="20" y="20" />
 	<turnOverListHeaderItemSimple x="20" width="200" labelid="440" y="20" pathOrder="file" />
-	<simpleLabelButton x="220" width="$once{ parent.width - 222 }" y="20" />
+	<simpleLabelButton x="220" width="$once{ parent.width - 220 }" y="20" />
 	
 		<!--
         id="_imageslistdraw"
