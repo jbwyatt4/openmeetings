@@ -41,10 +41,18 @@
     	this.initheight=this.height;
     </handler>
 	
-	<view width="${ this.parent.width-2 }" height="${ this.parent.height-2 }" x="1" y="1" bgcolor="0xFFFFFF" />
-	<view x="1" y="1" width="${ this.parent.width-2 }" height="20" >
-				<view width="${ this.parent.parent.width-2 }" y="0" stretches="width"
+	<view width="${ this.parent.width-2 }" height="${ this.parent.height-2 }" 
+		  x="1" y="1" bgcolor="0xFFFFFF" />
+		  
+	<view x="1" y="1" width="${ this.parent.width-2 }" height="20">
+		
+		<handler name="onclick">
+            this.parent.toggleopen();
+        </handler>
+            
+			<view width="${ this.parent.parent.width-2 }" y="0" stretches="width"
             resource="presenter_thumb_rsc" >
+			
             <handler name="oninit">
             	<![CDATA[
             		this.setTintRGB(canvas.basebgcolorizer,90);
@@ -78,33 +86,13 @@
 				this.parent.parent.close();
 			</handler>									
 		</button>
-		<view visible="${ !this.parent.parent.isopen }" x="2" y="3" resource="explorer_button_min_rsc">
-			<handler name="onmouseover">
-				this.setAttribute('frame',2);
-			</handler>
-			<handler name="onmouseout">
-				this.setAttribute('frame',1);
-			</handler>
-			<handler name="onmousedown">
-				this.setAttribute('frame',3);
-			</handler>	
+		<view visible="${ !this.parent.parent.isopen }" x="2" y="2" resource="conferenceBox_button_min_small_rsc">
 			<handler name="onmouseup">
-				this.setAttribute('frame',1);
 				this.parent.parent.toggleopen();
 			</handler>									
 		</view>
-		<view visible="${ this.parent.parent.isopen }" x="2" y="3" resource="explorer_button_max_rsc">
-			<handler name="onmouseover">
-				this.setAttribute('frame',2);
-			</handler>
-			<handler name="onmouseout">
-				this.setAttribute('frame',1);
-			</handler>
-			<handler name="onmousedown">
-				this.setAttribute('frame',3);
-			</handler>	
+		<view visible="${ this.parent.parent.isopen }" x="2" y="2" resource="conferenceBox_button_max_small_rsc">
 			<handler name="onmouseup">
-				this.setAttribute('frame',1);
 				this.parent.parent.toggleopen();
 			</handler>									
 		</view>
