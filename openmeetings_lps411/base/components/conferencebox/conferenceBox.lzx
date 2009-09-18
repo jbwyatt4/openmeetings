@@ -32,7 +32,14 @@
         }
     </method>
     
-    <view name="_head" x="0" y="0" width="${ parent.width }" height="34" >
+    <view name="_head" x="0" y="0" width="${ parent.width }" height="34" 
+    	  clickable="$once{ this.parent.closeable }" >
+        
+        <handler name="onclick">
+        	if (this.parent.closeable) {
+        		this.parent.toggleopen();
+        	}
+        </handler>
         
         <view width="${ parent.width }" height="$once{ parent.height }" 
               stretches="both" resource="presenter_thumb_rsc" >
@@ -59,35 +66,15 @@
             </method>            
         </view>
         
-        <view x="10" y="8" visible="${ this.parent.parent.closeable }">
+        <view x="8" y="4" visible="${ this.parent.parent.closeable }">
             
-	        <view visible="${ !this.parent.parent.parent.isopen }" x="2" y="3" resource="explorer_button_min_rsc">
-	            <handler name="onmouseover">
-	                this.setAttribute('frame',2);
-	            </handler>
-	            <handler name="onmouseout">
-	                this.setAttribute('frame',1);
-	            </handler>
-	            <handler name="onmousedown">
-	                this.setAttribute('frame',3);
-	            </handler>  
+	        <view visible="${ !this.parent.parent.parent.isopen }" x="2" y="3" resource="conferenceBox_button_min_rsc">
 	            <handler name="onmouseup">
-	                this.setAttribute('frame',1);
 	                this.parent.parent.parent.toggleopen();
 	            </handler>                                  
 	        </view>
-	        <view visible="${ this.parent.parent.parent.isopen }" x="2" y="3" resource="explorer_button_max_rsc">
-	            <handler name="onmouseover">
-	                this.setAttribute('frame',2);
-	            </handler>
-	            <handler name="onmouseout">
-	                this.setAttribute('frame',1);
-	            </handler>
-	            <handler name="onmousedown">
-	                this.setAttribute('frame',3);
-	            </handler>  
+	        <view visible="${ this.parent.parent.parent.isopen }" x="2" y="3" resource="conferenceBox_button_max_rsc">
 	            <handler name="onmouseup">
-	                this.setAttribute('frame',1);
 	                this.parent.parent.parent.toggleopen();
 	            </handler>                                  
 	        </view>
