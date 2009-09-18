@@ -6,7 +6,7 @@
     domain-name the OpenMeetings-Client has been loading from  
     -->
 <!--<rtmphostlocal>192.168.254.182</rtmphostlocal>-->
-<rtmphostlocal></rtmphostlocal>
+<rtmphostlocal>192.168.0.44</rtmphostlocal>
 
 <!--  
 Port to use for the Server
@@ -235,9 +235,11 @@ of the red5-servlet
 
 <!-- #############################################
     Conference Room
+    
+    Room Layout's: flexibleConferenceRoom,conferenceView
  -->
 
-<conferenceRoomModule>conferenceView</conferenceRoomModule>
+<conferenceRoomModule>flexibleConferenceRoom</conferenceRoomModule>
 
 
 <!-- #############################################
@@ -249,9 +251,11 @@ of the red5-servlet
 
 <!-- #############################################
     Event Room
+    
+    Room Layouts: flexibleEventRoom,audienceView
  -->
 
-<eventRoomModule>audienceView</eventRoomModule>
+<eventRoomModule>flexibleEventRoom</eventRoomModule>
 
 
 <!-- #############################################

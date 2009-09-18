@@ -16,4 +16,7 @@
     <include href="participents/" /> 
     <include href="eventuserlist/" />
     <include href="browser/" />
+    
+    <include href="flexibleConferenceRoom/" />
+    
 </library>

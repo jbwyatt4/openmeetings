@@ -7,6 +7,11 @@
 	<!--- holds a references to the videoview which is broadcasting -->
 	<attribute name="broadCastViewRef" value="null" />
 	
+	<!--
+       This is a variable to make it backwards compatible to the old room layout
+     -->
+	<attribute name="userNewVideoContainer" value="false" type="boolean"/>
+	
 	<!--- colors for each user -->
 	<attribute name="colorArray" value="null" />
 	
@@ -93,18 +98,23 @@
     	<![CDATA[
     		if ($debug) Debug.write("getVideoObjectByPublicSid SEARCH: ",publicSID);
     		
+    		var videoContainer = this._videoviewcontent;
+            if (this.userNewVideoContainer) {
+                videoContainer = parent.parent._videoviewcontent;
+            }
+            
     		//for (var i=0;i<this._videoviewcontent.subviews.length;i++){
     		//	if ($debug) Debug.write("getVideoObjectByBroadCastId6 broadcastId: ",this._videoviewcontent.subviews[i].broadcastId);
     		//	if ($debug) Debug.write("getVideoObjectByBroadCastId7 streamid,user_id: ",this._videoviewcontent.subviews[i].clientVars.streamid,this._videoviewcontent.subviews[i].clientVars.user_id);
     		//}
     		
-    		for (var i=0;i<this._videoviewcontent.subviews.length;i++){
-    			//if ($debug) Debug.write("getVideoObjectByBroadCastId2 broadcastId VIEW: ",this._videoviewcontent.subviews[i].broadcastId);
+    		for (var i=0;i<videoContainer.subviews.length;i++){
+    			//if ($debug) Debug.write("getVideoObjectByBroadCastId2 broadcastId VIEW: ",videoContainer.subviews[i].broadcastId);
     			//if ($debug) Debug.write("getVideoObjectByBroadCastId3 broadcastId SEARCH: ",broadcastId);
-    			//if ($debug) Debug.write("getVideoObjectByBroadCastId4 obj: ",this._videoviewcontent.subviews[i]);
-    			//if ($debug) Debug.write("getVideoObjectByBroadCastId5 streamid,user_id: ",this._videoviewcontent.subviews[i].clientVars.streamid,this._videoviewcontent.subviews[i].clientVars.user_id);
-    			if (this._videoviewcontent.subviews[i].publicSID==publicSID){
-    				return this._videoviewcontent.subviews[i];
+    			//if ($debug) Debug.write("getVideoObjectByBroadCastId4 obj: ",videoContainer.subviews[i]);
+    			//if ($debug) Debug.write("getVideoObjectByBroadCastId5 streamid,user_id: ",videoContainer.subviews[i].clientVars.streamid,videoContainer.subviews[i].clientVars.user_id);
+    			if (videoContainer.subviews[i].publicSID==publicSID){
+    				return videoContainer.subviews[i];
     			}
     		}
     		
@@ -217,14 +227,20 @@
 			if (obj!=null){
 				this.broadCastViewRef = obj;
 			} else {
-				//Get a Free VideoView Slot
-                var newx = this._videoviewcontent.subviews.length*136;
+                var videoContainer = this._videoviewcontent;
+                if (this.userNewVideoContainer) {
+                    videoContainer = parent.parent._videoviewcontent;
+                }
+                
+                //Get a Free VideoView Slot
+                var newx = videoContainer.subviews.length*20;
                 var newy = 0;
-                if (x>220) {
-                    newx = 0;
+                if ((newx+100)>=canvas.width) {
+                    newx = 20;
                     newy += 140;
                 }
-				this.broadCastViewRef = new lz.videoObjectBroadcast(this._videoviewcontent,{
+                
+				this.broadCastViewRef = new lz.videoObjectBroadcast(videoContainer,{
 	                    publicSID:publicSID,width:396,height:360,
 	                    x:newx,y:newy
                     });
@@ -247,13 +263,21 @@
 			if (obj!=null){
 				return obj;
 			}
-            var newx = this._videoviewcontent.subviews.length*136;
+			
+            var videoContainer = this._videoviewcontent;
+            if (this.userNewVideoContainer) {
+                videoContainer = parent.parent._videoviewcontent;
+            }
+            
+            //Get a Free VideoView Slot
+            var newx = videoContainer.subviews.length*20;
             var newy = 0;
-            if (x>220) {
-                newx = 0;
+            if ((newx+300)>=canvas.width) {
+                newx = 20;
                 newy += 140;
             }
-			return new lz.videoObjectPlayBroadcast(this._videoviewcontent,{
+            
+			return new lz.videoObjectPlayBroadcast(videoContainer,{
                     publicSID:publicSID,width:396,height:360,
                     x:newx,y:newy
                 });
@@ -328,8 +352,12 @@
 	</method>	
 	
 	<method name="resetAllValues">
-		for (var eg in this._videoviewcontent.subviews){
-			this._videoviewcontent.subviews[eg].resetValues();
+		var videoContainer = this._videoviewcontent;
+        if (this.userNewVideoContainer) {
+            videoContainer = parent.parent._videoviewcontent;
+        }
+		for (var eg in videoContainer.subviews){
+			videoContainer.subviews[eg].resetValues();
 		}
 	</method>
     
