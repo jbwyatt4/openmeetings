@@ -1,5 +1,11 @@
 #summary Release Notes
 
+
+== Major changes Version 0.9 RC4 ==
+
+  * Fix error in installation and startup
+  * Updated Red5 Server to red5 revision 3823
+
 == Major changes Version 0.9 RC3 ==
 
   * Fix for special characters in Uploaded Images 
