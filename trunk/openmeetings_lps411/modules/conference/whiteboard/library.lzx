@@ -68,6 +68,8 @@
 
 <include href="panels/" />
 <include href="newWhiteBoard.lzx" />
+<include href="fixedWhiteBoard.lzx" />
+
 <!--
 <include href="multiWhiteBoard.lzx" />
  -->
