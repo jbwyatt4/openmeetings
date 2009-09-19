@@ -79,13 +79,13 @@
 			this._content.changeOpacitySlider.setEnabled(false);
 		}
 		
-		if (drawArea.drawmodus == 'letter'){
-			this._content._italic.setAttribute('visibility','visible');
-			this._content._bold.setAttribute('visibility','visible');			
-		} else {
-			this._content._italic.setAttribute('visibility','hidden');
-			this._content._bold.setAttribute('visibility','hidden');
-		}
+		if (drawmodus == 'letter'){
+            this._content._italic.setAttribute('enabled',true);
+            this._content._bold.setAttribute('enabled',true);           
+        } else {
+            this._content._italic.setAttribute('enabled',false);
+            this._content._bold.setAttribute('enabled',false);
+        }
 		
 		this.ignoreUpdates = false;
 	</method>
@@ -146,11 +146,11 @@
 		}
 		
 		if (drawmodus == 'letter'){
-			this._content._italic.setAttribute('visibility','visible');
-			this._content._bold.setAttribute('visibility','visible');			
+			this._content._italic.setAttribute('enabled',true);
+			this._content._bold.setAttribute('enabled',true);			
 		} else {
-			this._content._italic.setAttribute('visibility','hidden');
-			this._content._bold.setAttribute('visibility','hidden');
+			this._content._italic.setAttribute('enabled',false);
+			this._content._bold.setAttribute('enabled',false);
 		}
 		
 		this.ignoreUpdates = false;
@@ -265,6 +265,83 @@
 	    <propertyPanelLetterButton name="_italic" x="286" y="24" itemResourceName="italic" />
 	    
 	    <propertyPanelLetterButton name="_bold" x="312" y="24" itemResourceName="bold" />
+		
+		<view name="_delemiter" width="2" bgcolor="$once{ canvas.baseMousecolorizer }" 
+			  height="$once{ parent.height - this.y - 4 }" y="20" x="338"/>
+		
+		<labelText labelid="721" y="26" x="344" />
+		
+		<resetCombobox name="currentDocument" width="300" height="24" fontsize="11"
+                           editable="false" shownitems="7" x="480" y="24">
+            <attribute name="sendSelection" value="true" type="boolean"/>
+            <handler name="onselect" args="sel">
+                if (this.sendSelection) {
+                    parent.parent.parent.parent._drawareaMask._drawarea.setCurrentDocument(sel.value);
+                }
+            </handler>
+        </resetCombobox>
+		
+		<view name="_documentsPanel" x="480" y="52" layout="axis:x;spacing:2">
+			
+			<handler name="oninit">
+                //if ($debug) Debug.write("oninit: ",this);
+                this._currentSlideNo.setAttribute('text',canvas.currentSlideNo);
+                this._totalSlideNo.setAttribute('text',canvas.currentSlideTotal);
+                this._zoom.setAttribute('text',canvas.currentSlideZoom);
+            </handler>
+            <handler name="preclose">
+                //if ($debug) Debug.write("onclose: ",this);
+                canvas.currentSlideNo = Number(this._currentSlideNo.getText());
+                canvas.currentSlideTotal = Number(this._totalSlideNo.getText());
+                canvas.currentSlideZoom = Number(this._zoom.getText());
+            </handler>
+			
+			<method name="addCurrentObject" args="itemObj">
+                if ($debug) Debug.write("addCurrentObject ",itemObj.fileName,itemObj.name);
+                parent.currentDocument.addItem(itemObj.fileName,itemObj.name);
+                parent.currentDocument.sendSelection = false;
+                parent.currentDocument.selectItem(itemObj.name);
+                parent.currentDocument.sendSelection = true;
+            </method>
+            
+            <method name="removeDocument" args="refItemName">
+                parent.currentDocument.removeItem(refItemName);
+                parent.currentDocument.selectItemAt(0);
+            </method>
+            
+            <method name="clearDocumentsBar">
+                parent.currentDocument.reset();
+            </method>
+            
+            <drawDocumentPanelItem name="b3" modi="doc_first" resoureceItem="doc_first" 
+                labelid="255" />        
+            <drawDocumentPanelItem name="b4" modi="doc_pre" resoureceItem="doc_pre" 
+                labelid="256" />            
+            <drawDocumentPanelItem name="b5" modi="doc_next" resoureceItem="doc_next" 
+                labelid="257" />        
+            <drawDocumentPanelItem name="b6" modi="doc_last" resoureceItem="doc_last" 
+                labelid="258" />        
+        
+            <customEdittext name="_currentSlideNo" width="40" height="24" regexpType="number" >
+                <handler name="onblur">
+                    parent.parent.parent.parent._drawareaMask._drawarea.newSlideNumber = Number(this.getText());
+                    parent.parent.parent.parent._drawareaMask._drawarea.doDocumentAction("setSlideNumber");         
+                </handler>
+            </customEdittext>    
+            <labelText y="6" labelid="254" />     
+            <labelText name="_totalSlideNo" y="6" width="40" />  
+            
+            <documentPanelHPanelSeperator />
+                
+            <drawDocumentPanelItem name="b7" modi="doc_zoom_minus" resoureceItem="doc_zoom_minus" 
+                labelid="259" />        
+            <drawDocumentPanelItem name="b8" modi="doc_zoom_plus" resoureceItem="doc_zoom_plus" 
+                labelid="260" />    
+            
+            <labelText y="6" name="_zoom" width="30" height="24" />
+            <labelText y="6" labelid="253" />
+            
+		</view>
 		
 	</view>
 

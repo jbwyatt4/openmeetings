@@ -350,6 +350,10 @@
 		</method>
 		
 		<method name="getDocumentsToolbar">
+			return parent._propertyPanel._content._documentsPanel;
+		</method>
+		<!--
+		<method name="getDocumentsToolbar">
 			<![CDATA[
 				for (var i=0;i<this.subviews.length;i++) {
 					if (this.subviews[i] instanceof lz.documentIconTopPanel
@@ -360,6 +364,7 @@
 				}
 			]]>
 		</method>
+		 -->
         
         <mainToolsTopPanel x="100" y="0" name="_mainToolsPanel" 
              visible="${ ((canvas.ismoderator) ? true : ((canvas.isAllowedToDraw) ? true : false )) }"/>
@@ -367,9 +372,11 @@
         <mainToolsLeftPanelPointer y="20" name="_mainToolsLeftPanelPointer" 
              visible="${ ((canvas.ismoderator) ? false : ((canvas.isAllowedToDraw) ? false : true )) }"/>
     	
+    	<!--
     	<documentIconTopPanel x="100" valign="bottom" name="_documentPanel"
 			 visible="${ ((canvas.ismoderator) ? true : ((canvas.isAllowedToDraw) ? true : false )) }" />
-   
+         -->
+         
     </view> 
     
     <propertyPanel name="_propertyPanel" x="0" y="${ parent.parent.height-this.height-33 }" 
