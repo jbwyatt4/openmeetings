@@ -101,7 +101,7 @@
         <chatTab name="content" y="40" height="${ parent.height-40 }" width="${ parent.width }" />
     </conferenceBox>
        
-    <modernWhiteBoardPanel name="_whiteboard" labelid="615"
+    <fixedWhiteboardPanel name="_whiteboard" labelid="615"
         y="0" x="${ parent._sidePanel.width }"
         width="${ canvas.width - parent._sidePanel.width }"
         height="${ canvas.height - (parent._chatPanelStrict.height+22) }" />
