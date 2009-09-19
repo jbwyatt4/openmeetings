@@ -147,7 +147,7 @@
     	
     	
         <remoteWhiteboard y="0" name="_drawarea" isRemoteOID="true"
-        			  width="1024" height="768" >
+        			  width="1600" height="1024" >
             <attribute name="initH"/>
             <attribute name="initW"/>
             <handler name="oninit">
