@@ -1171,12 +1171,31 @@
         <handler name="ondata" args="value">
             <![CDATA[
                 //The onResult-Handler will be called be the rtmpconnection
-                if ($debug) Debug.write("newScreenSharing: ",value);
-                new lz.sharingSession(canvas,{sharingSessionObject:value});
+                if ($debug) Debug.write("newScreenSharing: ",value,value.deleted);
+                if (!value.deleted) {
+                    new lz.sharingSession(canvas._screens,{name:'_screen',sharingSessionObject:value});
+                } else {
+                    var screenObj = canvas._screens.searchForSession(value.s);
+                    screenObj.close();
+                }
             ]]>
         </handler>   
     </netRemoteCallHib>  
-     
+    
+    <netRemoteCallHib name="newScreenFrame" funcname="newScreenFrame">
+        <handler name="ondata" args="value">
+            <![CDATA[
+                //The onResult-Handler will be called be the rtmpconnection
+                //if ($debug) Debug.write("newScreenFrame: ",value);
+                //canvas._screens._screen.sendNewFrame(value);
+                var screenObj = canvas._screens.searchForSession(value.s);
+                if (screenObj != null) {
+                    screenObj.sendNewFrame(value);
+                }
+            ]]>
+        </handler>   
+    </netRemoteCallHib>  
+    
 </class>
 
 <hibRtmpConnection name="thishib" id="hib" />
