@@ -2166,4 +2166,25 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   <string id="720" name="file explorer">
     <value>You are not allowed to draw anything on the Whiteboard. You have to become Moderator or at least get the Right to edit Whiteboard. You may ask a Moderator to give you that right.</value>
   </string>
+  <string id="721" name="property panel">
+    <value>Document Properties</value>
+  </string>
+  <string id="722" name="sharing session">
+    <value>Start Client (external)</value>
+  </string>
+  <string id="723" name="sharing session">
+    <value>Start Client (HTTP)</value>
+  </string>
+  <string id="724" name="sharing session">
+    <value>A user want to share his screen. Do you want to see it?</value>
+  </string>
+  <string id="725" name="sharing session">
+    <value>You are currently sharing your Desktop. For stopping the Sharing Session please hit the Stop button in the Sharing Client.</value>
+  </string>
+  <string id="726" name="sharing session">
+    <value>Sharing Session</value>
+  </string>
+  <string id="727" name="sharing session">
+    <value>You are already sharing your desktop!</value>
+  </string>
 </language>

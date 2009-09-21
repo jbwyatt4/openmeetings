@@ -2171,4 +2171,25 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   <string id="720" name="file explorer">
     <value>Вы не можете рисовать на доске. Вам нужно либо стать модератором, либо получить от модератора право рисовать на доске. Вы можете попросить модератора предоставить вам такое право.</value>
   </string>
+  <string id="721" name="property panel">
+    <value>Document Properties</value>
+  </string>
+  <string id="722" name="sharing session">
+    <value>Start Client (external)</value>
+  </string>
+  <string id="723" name="sharing session">
+    <value>Start Client (HTTP)</value>
+  </string>
+  <string id="724" name="sharing session">
+    <value>A user want to share his screen. Do you want to see it?</value>
+  </string>
+  <string id="725" name="sharing session">
+    <value>You are currently sharing your Desktop. For stopping the Sharing Session please hit the Stop button in the Sharing Client.</value>
+  </string>
+  <string id="726" name="sharing session">
+    <value>Sharing Session</value>
+  </string>
+  <string id="727" name="sharing session">
+    <value>You are already sharing your desktop!</value>
+  </string>  
 </language>
