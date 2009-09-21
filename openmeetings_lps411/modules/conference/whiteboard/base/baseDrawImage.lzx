@@ -166,7 +166,7 @@
             } else {
                 //Debug.write("frame dropped!");
                 Debug.warn("frame dropped!");
-                new lz.errorPopup(canvas,{error:canvas.getLabelName(240)});
+                (new lz.singletonErrorPopupHolder()).setError(canvas.getLabelName(240));
             }
 		]]>
   	</method>   

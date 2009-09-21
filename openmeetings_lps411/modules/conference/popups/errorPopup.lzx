@@ -30,4 +30,35 @@
 
 </class>
 
+<class name="singletonErrorPopup" extends="errorPopup">
+	<handler name="oninit">
+		lz.singletonErrorPopupHolder.dialogPresent = 1;
+		lz.singletonErrorPopupHolder.dialogObject = this;
+	</handler>
+	
+	<handler name="ondestroy">
+		lz.singletonErrorPopupHolder.dialogPresent = 0;
+		lz.singletonErrorPopupHolder.dialogObject = null;
+	</handler>
+</class>
+
+<class name="singletonErrorPopupHolder">
+	<attribute name="error" type="string" setter="setError(error)"/>
+	<attribute name="dialogPresent" allocation="class" value="0" />
+	<attribute name="dialogObject" allocation="class" />
+	
+	<method name="setError" args="error">
+	
+		if ( lz.singletonErrorPopupHolder.dialogPresent == 0 )
+		{
+			lz.singletonErrorPopupHolder.dialogPresent = 1;
+			lz.singletonErrorPopupHolder.dialogObject = new lz.singletonErrorPopup(canvas,{error:error});
+		}
+		else
+		{
+			lz.singletonErrorPopupHolder.dialogObject.error = error;
+		}
+	</method>
+</class>
+
 </library>
