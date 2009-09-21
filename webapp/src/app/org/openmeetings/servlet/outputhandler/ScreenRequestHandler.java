@@ -24,6 +24,7 @@ import org.openmeetings.app.remote.red5.ClientListManager;
 import org.openmeetings.app.rtp.RTPScreenSharingSession;
 import org.openmeetings.app.rtp.RTPStreamingHandler;
 import org.openmeetings.app.templates.ScreenCastTemplate;
+import org.openmeetings.server.socket.ServerSocketMinaProcess;
 
 public class ScreenRequestHandler extends VelocityViewServlet {
 	
@@ -154,6 +155,12 @@ public class ScreenRequestHandler extends VelocityViewServlet {
 					record = "no";
 				}
 				
+				String mode = httpServletRequest.getParameter("mode");
+				if (mode == null) {
+					log.error("mode is empty: ");
+					mode = "sharer";
+				}
+				
 				//make a complete name out of domain(organisation) + roomname
 				String roomName = domain+"_"+room;
 				//trim whitespaces cause it is a directory name
@@ -181,7 +188,7 @@ public class ScreenRequestHandler extends VelocityViewServlet {
 				
 				String template = "screencast_template.vm";
 				
-				if(conf != null){
+				if(mode.equals("sharer") && conf != null){
 					String confVal = conf.getConf_value();
 					
 					try{
@@ -207,12 +214,25 @@ public class ScreenRequestHandler extends VelocityViewServlet {
 							//We need to start a new Thread of the RTPStreamReceiver at this Moment
 							//that is waiting for the RTP Stream to be received
 						}
+						else if(conf_i == 3){
+							
+							// For the UDP Sharer, we need some additional information
+							
+							template = "screencast_odsp_sharertemplate.vm";
+							ctx.put("PORT", ServerSocketMinaProcess.port);
+							log.debug("Creating JNLP Template for TCP solution");
+							
+						}
 						else
 							log.debug("Creating JNLP Template for default solution");
 					}
 					catch(Exception e){
 						log.error("invalid configuration value for key screen_viewer!");
 					}
+				} else if (mode.equals("viewer")) {
+					template = "screencast_odsp_viewertemplate.vm";
+					ctx.put("PORT", ServerSocketMinaProcess.port);
+					log.debug("Creating JNLP Template for UDP solution");
 				}
 				
 				return getVelocityEngine().getTemplate(template);
