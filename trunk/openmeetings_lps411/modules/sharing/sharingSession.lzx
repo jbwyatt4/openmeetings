@@ -59,7 +59,7 @@ setNewSource
     View for recorded contents list.
     When you select 'Recordings' on the top menu, this class shows the list.
 -->
-<class name="sharingSession" extends="view" align="right" valign="top" bgcolor="0xFFFFFF">  
+<class name="sharingSession" extends="view" align="right" height="100" valign="top" >   
 
     <attribute name="sharingSessionObject" value="null" />
     <attribute name="sharerPublicSID" value="" type="string" />
@@ -73,15 +73,37 @@ setNewSource
             
             if ($debug) Debug.write("INITED sharingSession ",this.sharerPublicSID);
             
+            if (this.sharerPublicSID == canvas.publicSID) {
+                this._infoText.setAttribute("labelid",725);
+                this._starthttpButton1.setAttribute("visibility","hidden");
+                this._starthttpJNPL1.setAttribute("visibility","hidden");
+            }
+            
             //this.setAttribute("width",this.sharingSessionObject.w);
             //this.setAttribute("height",this.sharingSessionObject.h);
             
             //this.setNewScreen(0,0,0,0);
             
+            if (parent.subviews.length > 1) {
+                this.setAttribute("y",((parent.subviews.length-1)*100)+40);
+            } else {
+                this.setAttribute("y",40);
+            }
             
-        
+            //this.setShadow();
         ]]>
     </handler>
+    
+    <method name="setShadow">
+        <![CDATA[
+        if (this.isinited){
+            this.normalMC = this.getMCRef();
+            this.displacementMap = new flash.filters.DropShadowFilter();
+            this.normalMC.filters = [this.displacementMap];
+        }
+        ]]>              
+    </method>       
+
     
     <method name="startViewerSessionHTTP">
         <![CDATA[
@@ -90,7 +112,7 @@ setNewSource
             
             this._subcontent.setAttribute("visibility","visible");
         
-            this._showScreenSharing._height.setAttribute("to",canvas.height-30);
+            this._showScreenSharing._height.setAttribute("to",canvas.height);
             this._showScreenSharing._width.setAttribute("to",canvas.width);
         
             this._showScreenSharing.doStart();
@@ -108,12 +130,47 @@ setNewSource
                 this.setNewScreen(frame.x,frame.y,frame.w,frame.h);
                 
             }
-        
+            
+            this.registerViewerSession.doCall();
+            
         ]]>
     </method>
     
+    <method name="startViewerSessionJNPL">
+        <![CDATA[
+            var downloadurl = 'http://'+canvas.rtmphostlocal+':'+canvas.red5httpport
+                +'/'+canvas.webAppRootKey+'/ScreenRequestHandler?'
+                +'rtmphostlocal='+canvas.rtmphostlocal
+                +'&room='+hib.currentroomid
+                +'&domain='+hib.conferencedomain
+                +'&sid='+canvas.sessionId
+                +'&red5httpport='+canvas.red5httpport
+                +'&publicSID='+this.sharerPublicSID
+                +'&mode=viewer'
+                +'&record=no';
+
+            //Debug.write(downloadurl); 
+            lz.Browser.loadURL(downloadurl,'_blank');  
+            
+        ]]>        
+    </method>     
+    
+    <netRemoteCallHib name="registerViewerSession" funcname="registerViewerSession" 
+                      remotecontext="$once{ canvas.thishib }" >
+        <attribute name="registerToViewers" value="true" type="boolean"/>
+        <netparam><method name="getValue">return parent.registerToViewers;</method></netparam>
+        <handler name="ondata" args="value">
+            //The onResult-Handler will be called be the rtmpconnection
+            if ($debug) Debug.write("registerViewerSession: ",value);
+            if (!this.registerToViewers) {
+                parent.destroy();
+            }
+        </handler>   
+    </netRemoteCallHib> 
+    
     <method name="close">
-        this.destroy();
+        this.registerViewerSession.registerToViewers = false;
+        this.registerViewerSession.doCall();
     </method>
     
     <method name="setNewScreen" args="x,y,w,h">
@@ -167,7 +224,13 @@ setNewSource
         ]]>
     </method>
     
-    <view name="_head"  width="${ parent.width }" height="20" >
+    <view width="${ this.parent.width }" height="${ this.parent.height }" 
+        bgcolor="$once{ canvas.basebgcolorizer }" > 
+        <view width="${ this.parent.width-2 }" height="${ this.parent.height-2 }"
+             x="1" y="1" bgcolor="0xFFFFFF" />
+    </view>   
+    
+    <view x="1" y="1" width="${ this.parent.width-1 }" height="20" name="_titlebar" >
         
         <view width="${ this.parent.width }" y="0" stretches="both" height="20"
             resource="presenter_thumb_rsc" >
@@ -194,6 +257,9 @@ setNewSource
             </method>            
         </view>
         
+        <labelText fontsize="10" name="_title" height="17" x="6" y="1" labelid="726"
+            resize="true" fontstyle="bold" fgcolor="0xFFFFFF" />
+        
         <view name="_toolbar" x="${ parent.width-this.width-2 }" 
             layout="axis:x;spacing:2" y="2">     
             <view name="_close"
@@ -212,6 +278,7 @@ setNewSource
         
     </view>
     
+    
     <view name="_subcontent" width="${ parent.width }" visibility="hidden"
           y="20" height="${ parent.height - 20 }" clip="true">
         
@@ -224,13 +291,13 @@ setNewSource
     
     <labelText name="_infoText" labelid="724" width="230" x="10" y="26" multiline="true" />
     
-    <simpleLabelButton name="_starthttpButton1" labelid="722" x="10" width="120" y="100">
+    <simpleLabelButton name="_starthttpButton1" labelid="723" x="10" width="120" y="78">
         <handler name="onclick">
             parent.startViewerSessionHTTP();
         </handler>
     </simpleLabelButton>   
     
-    <simpleLabelButton name="_starthttpJNPL1" labelid="723" x="135" width="120" y="100">
+    <simpleLabelButton name="_starthttpJNPL1" labelid="722" x="135" width="120" y="78">
         <handler name="onclick">
             parent.startViewerSessionJNPL();
         </handler>
@@ -238,6 +305,7 @@ setNewSource
     
     <animatorgroup name="_showScreenSharing" start="false" 
                    process="simultaneous" duration="1000" >
+        <animator name="_x" attribute="y" to="0" />
         <animator name="_height" attribute="height" />
         <animator name="_width" attribute="width" />
     </animatorgroup>
