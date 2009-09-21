@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -35,6 +36,11 @@ import org.openmeetings.app.remote.MeetingMemberService;
 import org.openmeetings.app.remote.PollService;
 import org.openmeetings.app.remote.StreamService;
 import org.openmeetings.app.remote.WhiteBoardService;
+import org.openmeetings.server.beans.ServerFrameBean;
+import org.openmeetings.server.beans.ServerSharingSessionBean;
+import org.openmeetings.server.beans.messages.ScreenSharingMessage;
+import org.openmeetings.server.beans.messages.ScreenSharingNewFrame;
+import org.openmeetings.server.cache.ServerSharingSessionList;
 import org.red5.server.adapter.ApplicationAdapter;
 import org.red5.server.api.IClient;
 import org.red5.server.api.IConnection;
@@ -1621,6 +1627,240 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 			log.error("[getRoomScope]",err);
 		}
 		return null;
+	}
+	
+	
+
+	public synchronized void sendScreenSharingFrame(ServerFrameBean serverFrameBean) {
+		try {
+			
+			ScreenSharingNewFrame screenSharingNewFrame = new ScreenSharingNewFrame();
+			screenSharingNewFrame.setS(serverFrameBean.getPublicSID());
+			screenSharingNewFrame.setX(serverFrameBean.getXValue());
+			screenSharingNewFrame.setY(serverFrameBean.getYValue());
+			screenSharingNewFrame.setH(serverFrameBean.getHeight());
+			screenSharingNewFrame.setW(serverFrameBean.getWidth());
+				
+			String publicSID = serverFrameBean.getPublicSID();
+			
+			IScope globalScope = getContext().getGlobalScope();
+			IScope webAppKeyScope = globalScope.getScope(ScopeApplicationAdapter.webAppRootKey);
+			
+			//log.debug("webAppKeyScope "+webAppKeyScope);
+			
+			//Get Room Id to send it to the correct Scope
+			RoomClient currentClient = this.clientListManager.getClientByPublicSID(publicSID);
+			
+			if (currentClient == null) {
+				return;
+				//throw new Exception("Could not Find RoomClient on List "+publicSID);
+			}
+			//default Scope Name
+			String scopeName = "hibernate";
+			if (currentClient.getRoom_id() != null) {
+				scopeName = currentClient.getRoom_id().toString();
+			}
+			
+			IScope scopeHibernate = webAppKeyScope.getScope(scopeName);
+			
+			//log.debug("scopeHibernate "+scopeHibernate);
+			
+			if (scopeHibernate!=null){
+				//Notify the clients of the same scope (room) with user_id
+				
+				Collection<Set<IConnection>> conCollection = webAppKeyScope.getScope(scopeName).getConnections();
+				for (Set<IConnection> conset : conCollection) {
+					for (IConnection conn : conset) {
+						if (conn != null) {
+							
+							RoomClient rcl = this.clientListManager.getClientByStreamId(conn.getClient().getId());
+							//log.debug("rcl "+rcl+" rcl.getUser_id(): "+rcl.getPublicSID()+" publicSID: "+publicSID+ " IS EQUAL? "+rcl.getPublicSID().equals(publicSID));
+							
+							//Do not send to self and only to registered viewers
+							if (!rcl.getPublicSID().equals(publicSID) && rcl.isViewer()){
+								//log.debug("IS EQUAL ");
+								((IServiceCapableConnection) conn).invoke("newScreenFrame",new Object[] { screenSharingNewFrame }, this);
+								log.debug("sendMessageWithClientByPublicSID RPC:newMessageByRoomAndDomain"+screenSharingNewFrame);
+							}
+						}
+					}
+				}
+
+			} else {
+				//Scope not yet started
+				throw new Exception("ScreenSharing Message but no Scope to send");
+			}
+			
+		} catch (Exception err) {
+			log.error("[sendScreenSharingMessage] ",err);
+			err.printStackTrace();
+		}
+	}
+	
+	public List<ScreenSharingMessage> checkSharingSession() {
+		try {
+			IConnection current = Red5.getConnectionLocal();
+			RoomClient currentClient = this.clientListManager.getClientByStreamId(current.getClient().getId());
+			
+			HashMap<String,RoomClient> roomClientList = this.clientListManager.getClientListByRoom(currentClient.getRoom_id());
+			
+			List<ScreenSharingMessage> screenSharingMessageList = new LinkedList<ScreenSharingMessage>();
+			
+			for (Iterator<String> iter = roomClientList.keySet().iterator();iter.hasNext();) {
+				
+				RoomClient rcl = roomClientList.get(iter.next());
+				
+				ServerSharingSessionBean serverSharingSessionBean = ServerSharingSessionList.getServerSharingSessionBeanByPublicSID(rcl.getPublicSID());
+				
+				if (serverSharingSessionBean != null) {
+					ScreenSharingMessage screenSharingMessage = new ScreenSharingMessage();
+					screenSharingMessage.setS(serverSharingSessionBean.getPublicSID());
+					screenSharingMessage.setW(serverSharingSessionBean.getWidth());
+					
+					screenSharingMessage.setDeleted(serverSharingSessionBean.isDeleted());
+					
+					screenSharingMessage.setL(new LinkedList<ScreenSharingNewFrame>());
+					
+					for (ServerFrameBean serverFrameBean : serverSharingSessionBean.getServerFrameBeans()) {
+						
+						ScreenSharingNewFrame screenSharingNewFrame = new ScreenSharingNewFrame();
+						screenSharingNewFrame.setX(serverFrameBean.getXValue());
+						screenSharingNewFrame.setY(serverFrameBean.getYValue());
+						screenSharingNewFrame.setH(serverFrameBean.getHeight());
+						screenSharingNewFrame.setW(serverFrameBean.getWidth());
+						
+						screenSharingMessage.getL().add(screenSharingNewFrame);
+						
+					}
+					
+					screenSharingMessageList.add(screenSharingMessage);
+				}
+			}
+			
+			return screenSharingMessageList;
+			
+		} catch (Exception err) {
+			log.error("[checkSharingSession] ",err);
+		}
+		return null;
+	}
+	
+	public void registerViewerSession(boolean register) {
+		try {
+			IConnection current = Red5.getConnectionLocal();
+			RoomClient currentClient = this.clientListManager.getClientByStreamId(current.getClient().getId());
+			
+			currentClient.setViewer(register);
+			
+			this.clientListManager.updateClientByStreamId(current.getClient().getId(), currentClient);
+			
+		} catch (Exception err) {
+			log.error("[checkSharingSession] ",err);
+		}
+	}
+	
+
+	public boolean checkSharerSession() {
+		try {
+			IConnection current = Red5.getConnectionLocal();
+			RoomClient currentClient = this.clientListManager.getClientByStreamId(current.getClient().getId());
+			
+			ServerSharingSessionBean serverSharingSessionBean = ServerSharingSessionList.getServerSharingSessionBeanByPublicSID(currentClient.getPublicSID());
+			
+			if (serverSharingSessionBean == null) {
+				return true;
+			} else if (serverSharingSessionBean.isDeleted()) {
+				return true;
+			} else {
+				return false;
+			}
+			
+		} catch (Exception err) {
+			log.error("[checkSharingSession] ",err);
+		}
+		return true;
+	}
+	
+	public synchronized void sendScreenSharingMessage(ServerSharingSessionBean serverSharingSessionBean) {
+		try {
+			
+			log.debug("sendScreenSharingMessage ");
+			
+			ScreenSharingMessage screenSharingMessage = new ScreenSharingMessage();
+			screenSharingMessage.setS(serverSharingSessionBean.getPublicSID());
+			screenSharingMessage.setW(serverSharingSessionBean.getWidth());
+			
+			screenSharingMessage.setDeleted(serverSharingSessionBean.isDeleted());
+			
+			screenSharingMessage.setL(new LinkedList<ScreenSharingNewFrame>());
+			
+			for (ServerFrameBean serverFrameBean : serverSharingSessionBean.getServerFrameBeans()) {
+				
+				ScreenSharingNewFrame screenSharingNewFrame = new ScreenSharingNewFrame();
+				screenSharingNewFrame.setX(serverFrameBean.getXValue());
+				screenSharingNewFrame.setY(serverFrameBean.getYValue());
+				screenSharingNewFrame.setH(serverFrameBean.getHeight());
+				screenSharingNewFrame.setW(serverFrameBean.getWidth());
+				
+				screenSharingMessage.getL().add(screenSharingNewFrame);
+				
+			}
+			
+			
+			String publicSID = serverSharingSessionBean.getPublicSID();
+			
+			IScope globalScope = getContext().getGlobalScope();
+			IScope webAppKeyScope = globalScope.getScope(ScopeApplicationAdapter.webAppRootKey);
+			
+			//log.debug("webAppKeyScope "+webAppKeyScope);
+			
+			//Get Room Id to send it to the correct Scope
+			RoomClient currentClient = this.clientListManager.getClientByPublicSID(publicSID);
+			
+			if (currentClient == null) {
+				return;
+				//throw new Exception("Could not Find RoomClient on List");
+			}
+			//default Scope Name
+			String scopeName = "hibernate";
+			if (currentClient.getRoom_id() != null) {
+				scopeName = currentClient.getRoom_id().toString();
+			}
+			
+			IScope scopeHibernate = webAppKeyScope.getScope(scopeName);
+			
+			//log.debug("scopeHibernate "+scopeHibernate);
+			
+			if (scopeHibernate!=null){
+				//Notify the clients of the same scope (room) with user_id
+				
+				Collection<Set<IConnection>> conCollection = webAppKeyScope.getScope(scopeName).getConnections();
+				for (Set<IConnection> conset : conCollection) {
+					for (IConnection conn : conset) {
+						if (conn != null) {
+							
+							RoomClient rcl = this.clientListManager.getClientByStreamId(conn.getClient().getId());
+							//log.debug("rcl "+rcl+" rcl.getUser_id(): "+rcl.getPublicSID()+" publicSID: "+publicSID+ " IS EQUAL? "+rcl.getPublicSID().equals(publicSID));
+							
+							//Send to self for debugging
+							if (!rcl.getPublicSID().equals(publicSID) || true){
+								//log.debug("IS EQUAL ");
+								((IServiceCapableConnection) conn).invoke("newScreenSharing",new Object[] { screenSharingMessage }, this);
+								log.debug("sendMessageWithClientByPublicSID RPC:newMessageByRoomAndDomain"+screenSharingMessage);
+							}
+						}
+					}
+				}
+
+			} else {
+				//Scope not yet started
+				throw new Exception("ScreenSharing Message but no Scope to send");
+			}
+			
+		} catch (Exception err) {
+			log.error("[sendScreenSharingMessage] ",err);
+			err.printStackTrace();
+		}
 	}
 
 	public synchronized void sendMessageWithClientByPublicSID(Object message, String publicSID) {
