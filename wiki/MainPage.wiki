@@ -52,6 +52,10 @@ Need for a developer or Consultant? [http://code.google.com/p/openmeetings/wiki/
   * DirectLoginSoapGeneralFlow - Directly Login into a Room, General Flow of embedding !OpenMeetings
   * MethodGateway - a very simple way of passing variables to Methods without using SOAP
 
+== Desktop Sharing ==
+
+  * [ODSP OpenMeetings Desktop SHaring Protocol]
+
 == Plugins == 
 
   * MoodlePlugins
