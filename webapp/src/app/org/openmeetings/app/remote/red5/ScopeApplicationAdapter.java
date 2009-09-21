@@ -41,6 +41,7 @@ import org.openmeetings.server.beans.ServerSharingSessionBean;
 import org.openmeetings.server.beans.messages.ScreenSharingMessage;
 import org.openmeetings.server.beans.messages.ScreenSharingNewFrame;
 import org.openmeetings.server.cache.ServerSharingSessionList;
+import org.openmeetings.server.socket.ServerSocketMinaProcess;
 import org.red5.server.adapter.ApplicationAdapter;
 import org.red5.server.api.IClient;
 import org.red5.server.api.IConnection;
@@ -148,6 +149,10 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 			
 			//Spring Definition does not work here, its too early, Instance is not set yet
 			EmoticonsManager.getInstance().loadEmot(scope);
+			
+			ServerSocketMinaProcess serverSocketMinaProcess = new ServerSocketMinaProcess();
+			
+			serverSocketMinaProcess.doInitSocket();
 			
 		} catch (Exception err) {
 			log.error("[appStart]",err);
