@@ -5,6 +5,7 @@
     <property name="webstart.src.dir" value="${basedir}/src/screenviewer"/>
     <property name="templates.src.dir" value="${basedir}/src/templates"/>
     <property name="test.src.dir" value="${basedir}/src/test"/>
+	<property name="client.src.dir" value="${basedir}/src/client"/>
     <property name="main.out.dir" value="${basedir}/bin"/>
     
     <!-- Axis2 Services -->
@@ -55,6 +56,8 @@
     <!-- Apache Batik -->
     <property name="batik.lib" value="${project.lib}/batik_17" />
     <property name="java2swf.lib" value="${project.lib}/java2swf" />
+	<!-- Junit -->
+    <property name="junit.lib" value="${project.lib}/junit" />
     
     <!-- compile classpath -->
     <path id="compile.classpath">
@@ -74,6 +77,7 @@
         <fileset dir="${ical.lib}" includes="*.jar"/>
         <fileset dir="${java2swf.lib}" includes="*.jar"/>
         <fileset dir="${jmf.lib}" includes="*.jar"/>
+    	<fileset dir="${junit.lib}" includes="*.jar"/>
     </path>
 
     <!-- xDoclet classpath -->
@@ -286,6 +290,10 @@
                 <include name="**"/>
                 <exclude name="**/test/**"/>
                 <exclude name="**/webstart/**"/>
+            	<!-- For now we include this into the main JAR
+            	<exclude name="**/server/**"/>
+            	 -->
+            	<exclude name="**/client/**"/>
                 <exclude name="**/*.png"/>
                 <exclude name="**/*.vm"/>
                 <exclude name="hibernate.cfg.xml"/>
@@ -314,6 +322,18 @@
         <jar destfile="${dist.dir}/${project.distname}/screen/screenviewer.jar">
             <fileset dir="${classes.dir}">
                 <include name="**/webstart/**"/>
+                <include name="**/*png"/>
+            </fileset>
+            <manifest>
+                <attribute name="Built-By" value="OpenMeetings - http://openmeetings.googlecode.com"/>
+                <attribute name="Built-On" value="${build.TODAY}"/>
+                <attribute name="Class-Path" value="conf/ ${jar.classpath}"/>
+            </manifest>
+        </jar>
+    	<jar destfile="${dist.dir}/${project.distname}/screen/openmeetings-client.jar">
+            <fileset dir="${classes.dir}">
+            	<include name="log4j.properties" />
+                <include name="**/client/**"/>
                 <include name="**/*png"/>
             </fileset>
             <manifest>
@@ -414,13 +434,16 @@
     compiler="org.eclipse.jdt.core.JDTCompilerAdapter" -->
     <target name="compile" depends="prepare, resources">
         <echo message="${main.out.dir}"></echo>
-        <javac debug="on" debuglevel="lines,vars,source" srcdir="${main.src.dir}" destdir="${main.out.dir}" >
+    	<javac debug="on" debuglevel="lines,vars,source" srcdir="${main.src.dir}" destdir="${main.out.dir}" >
             <classpath refid="compile.classpath"/>
         </javac>
         <javac debug="on" debuglevel="lines,vars,source" srcdir="${webstart.src.dir}" destdir="${main.out.dir}" >
             <classpath refid="compile.classpath"/>
         </javac>
         <javac debug="on" debuglevel="lines,vars,source" srcdir="${templates.src.dir}" destdir="${main.out.dir}" >
+            <classpath refid="compile.classpath"/>
+        </javac>
+    	<javac debug="on" debuglevel="lines,vars,source" srcdir="${client.src.dir}" destdir="${main.out.dir}" >
             <classpath refid="compile.classpath"/>
         </javac>
         <javac debug="on" debuglevel="lines,vars,source" srcdir="${test.src.dir}" destdir="${main.out.dir}" >
@@ -436,6 +459,15 @@
             <classpath refid="compile.classpath"/>
         </javac>        
     </target>
+	
+	<target name="doStartServer" depends="compile">
+	    <junit>
+	    	<classpath refid="compile.classpath"/>
+	    	<formatter type="plain"/>
+
+	    	   <test name="org.openmeetings.server.TestSocket" />
+	    </junit>
+	</target>
 
     <!-- Build of junit tests
     compiler="org.eclipse.jdt.core.JDTCompilerAdapter"
