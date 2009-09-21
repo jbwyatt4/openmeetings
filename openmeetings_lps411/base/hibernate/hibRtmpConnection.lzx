@@ -1196,6 +1196,22 @@
         </handler>   
     </netRemoteCallHib>  
     
+    <netRemoteCallHib name="checkSharingSession" funcname="checkSharingSession">
+        <handler name="ondata" args="value">
+            <![CDATA[
+                //The onResult-Handler will be called be the rtmpconnection
+                if ($debug) Debug.write("checkSharingSession: ",value);
+                //canvas._screens._screen.sendNewFrame(value);
+                for (var i=0;i<value.length;i++) {
+                    if (!value[i].deleted) {
+                        new lz.sharingSession(canvas._screens,{name:'_screen',sharingSessionObject:value[i]});
+                    }
+                }
+            ]]>
+        </handler>   
+    </netRemoteCallHib>  
+     
+    
 </class>
 
 <hibRtmpConnection name="thishib" id="hib" />

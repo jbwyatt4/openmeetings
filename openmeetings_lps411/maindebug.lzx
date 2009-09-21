@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <canvas debug="true" width="100%" height="100%" >
-    <debug fontsize="12" oninit="Debug.showInternalProperties = true" />
+    <debug fontsize="11" oninit="Debug.showInternalProperties = true" />
     
 <!-- 
-	If you use maindebug.lzx, main.lzx with debug=true is loaded. 
-	h.kuze 2008.3.26
-	I re-arranged it back to the old setup,
-	I see that this information is duplicated here, but I would like to 
-	distribute two versions of OpenMeetings in a binary release: 
-	the normal Client and the Client Including the OpenLaszlo-Debug-Player
-	-swagner 2008.3.28
+    If you use maindebug.lzx, main.lzx with debug=true is loaded. 
+    h.kuze 2008.3.26
+    I re-arranged it back to the old setup,
+    I see that this information is duplicated here, but I would like to 
+    distribute two versions of OpenMeetings in a binary release: 
+    the normal Client and the Client Including the OpenLaszlo-Debug-Player
+    -swagner 2008.3.28
 -->
     
 <include href="incubator/lzcombobox.lzx" />
@@ -58,39 +58,39 @@
     <view x="0" name="_content" >
         <view name="inner" />
         <method name="clearAll">
-        	<![CDATA[
-	            if($debug) Debug.write("main.lzx/main_content._content.inner.clearAll(): ",this.inner,this.inner.subviews.length);
-	            var baseContent = this.inner.subviews[0].close();
-	            for (var eg in this.inner.subviews) {
-	                if($debug) Debug.write("main.lzx/main_content._content.inner.clearAll()-subviews: ",this.inner.subviews[eg]);
-	                if (eg!=0) this.inner.subviews[eg].close();               
-	            }
-	            return baseContent;
+            <![CDATA[
+                if($debug) Debug.write("main.lzx/main_content._content.inner.clearAll(): ",this.inner,this.inner.subviews.length);
+                var baseContent = this.inner.subviews[0].close();
+                for (var eg in this.inner.subviews) {
+                    if($debug) Debug.write("main.lzx/main_content._content.inner.clearAll()-subviews: ",this.inner.subviews[eg]);
+                    if (eg!=0) this.inner.subviews[eg].close();               
+                }
+                return baseContent;
             ]]>
         </method>
     </view>
-		<!-- Whats the reason for adding constraints here?
-		You cannot set the inner to strict height values, cause otherwise the scrollbar
-		won't be showing any difference, no matter if the content of *inner* is
-		bigger then the container view *main_content*
-		
-		-swagner 19.03.2008
-		
-	    <view name="_content" x="0" width="${parent.width}" height="${parent.height}" layout="axis:y;spacing:2">
-	        <view name="inner" width="${parent.width}" height="${parent.height}" />
-	        <method name="clearAll">
-	        	<![CDATA[
-		            if($debug) Debug.write("main.lzx/clearAll() this.inner: ",this.inner,this.inner.subviews.length);
-		            if (this.inner.subviews.length!=0) var baseContent = this.inner.subviews[0].close();
-		            for (var eg in this.inner.subviews) {
-		                if($debug) Debug.write("clearAll this.inner.subviews: ",this.inner.subviews[eg]);
-		                if (eg!=0) this.inner.subviews[eg].close();               
-		            }
-		            return baseContent;
-	            ]]>
-	        </method>
-	    </view>
-    	    -->
+        <!-- Whats the reason for adding constraints here?
+        You cannot set the inner to strict height values, cause otherwise the scrollbar
+        won't be showing any difference, no matter if the content of *inner* is
+        bigger then the container view *main_content*
+        
+        -swagner 19.03.2008
+        
+        <view name="_content" x="0" width="${parent.width}" height="${parent.height}" layout="axis:y;spacing:2">
+            <view name="inner" width="${parent.width}" height="${parent.height}" />
+            <method name="clearAll">
+                <![CDATA[
+                    if($debug) Debug.write("main.lzx/clearAll() this.inner: ",this.inner,this.inner.subviews.length);
+                    if (this.inner.subviews.length!=0) var baseContent = this.inner.subviews[0].close();
+                    for (var eg in this.inner.subviews) {
+                        if($debug) Debug.write("clearAll this.inner.subviews: ",this.inner.subviews[eg]);
+                        if (eg!=0) this.inner.subviews[eg].close();               
+                    }
+                    return baseContent;
+                ]]>
+            </method>
+        </view>
+            -->
     <vscrollbar name="_scrollbar" id="_mainScrollBar" />
     
 </view>  
@@ -125,12 +125,12 @@
 <view name="_conferencemenu" y="0" x="0" width="100%" height="20"
     bgcolor="$once{ canvas.baseMousecolorizer }" visibility="hidden" > 
     <method name="removeAll">
-		<![CDATA[
+        <![CDATA[
             if($debug) Debug.write("main.lzx/_coferencemenu.removeAll(): ");
-			while (this.subviews.length > 0) {
-				this.subviews[0].destroy();
-			}
-		]]>
+            while (this.subviews.length > 0) {
+                this.subviews[0].destroy();
+            }
+        ]]>
     </method>
 </view>   
     
@@ -141,6 +141,7 @@
     <text align="right" y="56" fontsize="14" fgcolor="red">Loading...</text>
 </view>
 
-<screenSharingContainer name="_screens" />    
+<screenSharingContainer name="_screens" />
+    
     
 </canvas>
