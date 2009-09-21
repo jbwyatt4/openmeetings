@@ -124,6 +124,8 @@ public class RoomClient {
 	 //Vars to simulate external Users
     private Long externalUserId;
     private String externalUserType;
+    
+    private boolean isViewer = false;
 	
 	/*
 	 * Zombie Flag
@@ -546,6 +548,13 @@ public class RoomClient {
 
 	public void setExternalUserType(String externalUserType) {
 		this.externalUserType = externalUserType;
+	}
+
+	public boolean isViewer() {
+		return isViewer;
+	}
+	public void setViewer(boolean isViewer) {
+		this.isViewer = isViewer;
 	}
 	
 }

@@ -169,7 +169,7 @@ public class RTPStreamReceiver implements  ReceiveStreamListener,SessionListener
 	}
 	
 	
-	@Override
+	/*@Override*/
 	public void update(SessionEvent arg0) {
 		log.debug("SessionListener.update");
 		
