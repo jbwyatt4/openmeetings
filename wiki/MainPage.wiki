@@ -54,7 +54,7 @@ Need for a developer or Consultant? [http://code.google.com/p/openmeetings/wiki/
 
 == Desktop Sharing ==
 
-  * [ODSP OpenMeetings Desktop SHaring Protocol]
+  * [ODSP OpenMeetings Desktop Sharing Protocol]
 
 == Plugins == 
 
