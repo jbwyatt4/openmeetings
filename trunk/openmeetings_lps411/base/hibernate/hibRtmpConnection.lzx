@@ -547,6 +547,8 @@
                             new lz.errorModeratorPopup(canvas,{error:canvas.getLabelName(498)});
                         }
                     }
+                    
+                    parent.checkSharingSession.doCall();
                 ]]>
             </handler>
         </netRemoteCallHib>

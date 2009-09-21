@@ -59,7 +59,7 @@ setNewSource
     View for recorded contents list.
     When you select 'Recordings' on the top menu, this class shows the list.
 -->
-<class name="sharingSession" extends="view" align="right" height="100" valign="top" >   
+<class name="sharingSession" extends="view" align="right" height="100" valign="top" width="280">   
 
     <attribute name="sharingSessionObject" value="null" />
     <attribute name="sharerPublicSID" value="" type="string" />
@@ -119,6 +119,7 @@ setNewSource
             
             this._infoText.destroy();
             this._starthttpButton1.destroy();
+            
             this._starthttpJNPL1.setAttribute("y",40);
             
             this.sharerPublicSID = this.sharingSessionObject.s;
@@ -291,17 +292,17 @@ setNewSource
     
     <labelText name="_infoText" labelid="724" width="230" x="10" y="26" multiline="true" />
     
-    <simpleLabelButton name="_starthttpButton1" labelid="723" x="10" width="120" y="78">
+    <simpleLabelButton name="_starthttpButton1" labelid="723" x="10" width="124" y="78">
         <handler name="onclick">
             parent.startViewerSessionHTTP();
         </handler>
-    </simpleLabelButton>   
-    
-    <simpleLabelButton name="_starthttpJNPL1" labelid="722" x="135" width="120" y="78">
+    </simpleLabelButton> 
+      
+    <simpleLabelButton name="_starthttpJNPL1" labelid="722" x="${ parent.width - 126 }" width="124" y="78">
         <handler name="onclick">
             parent.startViewerSessionJNPL();
         </handler>
-    </simpleLabelButton>  
+    </simpleLabelButton>   
     
     <animatorgroup name="_showScreenSharing" start="false" 
                    process="simultaneous" duration="1000" >
