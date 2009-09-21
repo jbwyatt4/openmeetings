@@ -1,6 +1,6 @@
 #summary OpenMeetings Desktop Sharing Protocol
 
-OpenMeetings Desktop Sharing Protocol ODSP is quite similar to RTP but it has a few extensions to transfer META-DATA and to do the Signaling.
+!OpenMeetings Desktop Sharing Protocol ODSP is quite similar to RTP but it has a few extensions to transfer META-DATA and to do the Signaling.
 
 More info on what the Packets look like will follow.
-OpenMeetings has Decoders and Encoders for this Protocol since r2320
+!OpenMeetings has Decoders and Encoders for this Protocol since r2320
