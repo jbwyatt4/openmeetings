@@ -102,7 +102,7 @@ of the red5-servlet
     visible = yes
     hidden = no
  -->	
-<showRecording>visible</showRecording>
+<showRecording>hidden</showRecording>
 
 <!--
     
@@ -223,7 +223,7 @@ of the red5-servlet
     Dashboard Modules
  -->
 
-<dashboardModuleStartScreen>mainDashboard</dashboardModuleStartScreen>
+<dashboardModuleStartScreen>mainDashboardSponsored</dashboardModuleStartScreen>
 
 <dashboardModuleCalendar>myScheduledMeetings</dashboardModuleCalendar>
 
@@ -235,9 +235,11 @@ of the red5-servlet
 
 <!-- #############################################
     Conference Room
+    
+    Room Layout's: flexibleConferenceRoom,conferenceView
  -->
 
-<conferenceRoomModule>conferenceView</conferenceRoomModule>
+<conferenceRoomModule>flexibleConferenceRoom</conferenceRoomModule>
 
 
 <!-- #############################################
@@ -249,9 +251,11 @@ of the red5-servlet
 
 <!-- #############################################
     Event Room
+    
+    Room Layouts: flexibleEventRoom,audienceView
  -->
 
-<eventRoomModule>audienceView</eventRoomModule>
+<eventRoomModule>flexibleEventRoom</eventRoomModule>
 
 
 <!-- #############################################
@@ -259,5 +263,11 @@ of the red5-servlet
  -->
 
 <recordModule>recordContent</recordModule>
+
+<!-- #############################################
+    Profiles Panel Modules
+ -->
+
+<userSettingsModule>userSettings</userSettingsModule>
         
 </config>
