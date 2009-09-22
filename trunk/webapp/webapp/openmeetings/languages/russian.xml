@@ -721,7 +721,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Запрещено делать ваш экран общим</value>
   </string>
   <string id="239" name="user_doStartScreenViewer">
-    <value>iiiiiiСделать экран общим</value>
+    <value>Сделать экран общим</value>
   </string>
   <string id="240" name="screen_warnBandwidth">
     <value>Неверная ширина канала: невозможно синхронизовать экран. Некоторые кадры будут пропущены. Если это сообщение появляется слишком часто, Вы можете попросить модератора ухудшить качество соединения.</value>
@@ -2169,27 +2169,27 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Удалить файл</value>
   </string>
   <string id="720" name="file explorer">
-    <value>Вы не можете рисовать на доске. Вам нужно либо стать модератором, либо получить от модератора право рисовать на доске. Вы можете попросить модератора предоставить вам такое право.</value>
+    <value>Вы не можете рисовать</value>
   </string>
   <string id="721" name="property panel">
-    <value>Document Properties</value>
+    <value>Свойства документа</value>
   </string>
   <string id="722" name="sharing session">
-    <value>Start Client (external)</value>
+    <value>Запустить клиент (внешний)</value>
   </string>
   <string id="723" name="sharing session">
-    <value>Start Client (HTTP)</value>
+    <value>Запустить клиент (HTTP)</value>
   </string>
   <string id="724" name="sharing session">
-    <value>A user want to share his screen. Do you want to see it?</value>
+    <value>Пользователь хочет сделать свой экран общим. Вы хотите видеть его экран?</value>
   </string>
   <string id="725" name="sharing session">
-    <value>You are currently sharing your Desktop. For stopping the Sharing Session please hit the Stop button in the Sharing Client.</value>
+    <value>Вы сделали ваш экран общим. Для прекращения сессии нажмите кнопку Стоп в окне клиента удалённого доступа экрана.</value>
   </string>
   <string id="726" name="sharing session">
-    <value>Sharing Session</value>
+    <value>Сессия общего экрана</value>
   </string>
   <string id="727" name="sharing session">
-    <value>You are already sharing your desktop!</value>
+    <value>Вы уже сделали ваш экран общим</value>
   </string>  
 </language>
