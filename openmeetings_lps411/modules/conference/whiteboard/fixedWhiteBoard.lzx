@@ -147,7 +147,7 @@
     	
     	
         <remoteWhiteboard y="0" name="_drawarea" isRemoteOID="true"
-        			  width="1600" height="1024" >
+        			  width="${parent.width}" height="${parent.height}" >
             <attribute name="initH"/>
             <attribute name="initW"/>
             <handler name="oninit">
@@ -254,9 +254,10 @@
     	    
         </remoteWhiteboard>  
         
+        <!--
         <vscrollbar />
         <hscrollbar />
-        
+         -->
     </view>
     
     
