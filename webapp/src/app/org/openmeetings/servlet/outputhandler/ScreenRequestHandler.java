@@ -187,6 +187,9 @@ public class ScreenRequestHandler extends VelocityViewServlet {
 				org.openmeetings.app.hibernate.beans.basic.Configuration conf = Configurationmanagement.getInstance().getConfKey(user_level, "screen_viewer");
 				
 				String template = "screencast_template.vm";
+				template = "screencast_odsp_sharertemplate.vm";
+				ctx.put("PORT", ServerSocketMinaProcess.port);
+				log.debug("Creating JNLP Template for TCP solution");
 				
 				if(mode.equals("sharer") && conf != null){
 					String confVal = conf.getConf_value();
@@ -194,11 +197,14 @@ public class ScreenRequestHandler extends VelocityViewServlet {
 					try{
 						int conf_i = Integer.parseInt(confVal);
 						
-						if(conf_i == 1){
+						if (conf_i == 0) {
+							
+							template = "screencast_template.vm";
+							
+						} else if(conf_i == 1){
 							template = "screencast_jrdesktop.vm";
 							log.debug("Creating JNLP Template for jrdesktop solution");
-						}
-						else if(conf_i == 2){
+						} else if(conf_i == 2){
 							
 							// Storing Session data
 							RTPScreenSharingSession session = RTPStreamingHandler.storeSessionForRoom(room, users_id, publicSID, rtmphostlocal);
