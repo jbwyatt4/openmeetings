@@ -331,7 +331,7 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 								RoomClient rcl = this.clientListManager.getClientByStreamId(cons.getClient().getId());
 								
 								if (rcl != null) {
-									if (!currentClient.getStreamid().equals(rcl.getStreamid())){
+									if (currentClient.getStreamid().equals(rcl.getStreamid())){
 										//Send to all connected users	
 										((IServiceCapableConnection) cons).invoke("roomDisconnect",new Object[] { currentClient }, this);
 										log.debug("sending roomDisconnect to " + cons);
@@ -1529,7 +1529,8 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 			hsm.put("message", newMessage);
 			
 			//broadcast Message to specific user with id inside the same Scope
-			Collection<Set<IConnection>> conCollection = current.getScope().getConnections();
+			Collection<Set<IConnection>> conCollection = scope.getConnections();			
+			
 			for (Set<IConnection> conset : conCollection) {
 				for (IConnection conn : conset) {
 					if (conn != null) {
