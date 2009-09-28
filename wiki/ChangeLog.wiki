@@ -1,5 +1,10 @@
 #summary Release Notes
 
+== Major changes in Version 0.9 RC5 ==
+
+  * New Screen Sharing Sharer and Clients using the [ODSP OpenMeetings Screen Sharing Protocol], see also the [http://groups.google.com/group/openmeetings-user/browse_thread/thread/ebc77e02368a0cfc Announcement at the Mailing List]
+  * New Flexible Room Layout and Full Size Whiteboard Option
+  * Various Bugfixes
 
 == Major changes Version 0.9 RC4 ==
 
