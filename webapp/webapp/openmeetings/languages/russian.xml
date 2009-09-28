@@ -721,7 +721,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Запрещено делать ваш экран общим</value>
   </string>
   <string id="239" name="user_doStartScreenViewer">
-    <value>Сделать экран общим</value>
+    <value>iiiiiiСделать экран общим</value>
   </string>
   <string id="240" name="screen_warnBandwidth">
     <value>Неверная ширина канала: невозможно синхронизовать экран. Некоторые кадры будут пропущены. Если это сообщение появляется слишком часто, Вы можете попросить модератора ухудшить качество соединения.</value>
@@ -2169,27 +2169,84 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Удалить файл</value>
   </string>
   <string id="720" name="file explorer">
-    <value>Вы не можете рисовать</value>
+    <value>Вы не можете рисовать на доске. Вам нужно либо стать модератором, либо получить от модератора право рисовать на доске. Вы можете попросить модератора предоставить вам такое право.</value>
   </string>
   <string id="721" name="property panel">
-    <value>Свойства документа</value>
+    <value>Document Properties</value>
   </string>
   <string id="722" name="sharing session">
-    <value>Запустить клиент (внешний)</value>
+    <value>Start Client (external)</value>
   </string>
   <string id="723" name="sharing session">
-    <value>Запустить клиент (HTTP)</value>
+    <value>Start Client (HTTP)</value>
   </string>
   <string id="724" name="sharing session">
-    <value>Пользователь хочет сделать свой экран общим. Вы хотите видеть его экран?</value>
+    <value>A user want to share his screen. Do you want to see it?</value>
   </string>
   <string id="725" name="sharing session">
-    <value>Вы сделали ваш экран общим. Для прекращения сессии нажмите кнопку Стоп в окне клиента удалённого доступа экрана.</value>
+    <value>You are currently sharing your Desktop. For stopping the Sharing Session please hit the Stop button in the Sharing Client.</value>
   </string>
   <string id="726" name="sharing session">
-    <value>Сессия общего экрана</value>
+    <value>Sharing Session</value>
   </string>
   <string id="727" name="sharing session">
-    <value>Вы уже сделали ваш экран общим</value>
-  </string>  
+    <value>You are already sharing your desktop!</value>
+  </string>
+  <string id="728" name="sharing client">
+    <value>Desktop Viewer</value>
+  </string>
+  <string id="729" name="sharing client">
+    <value>Exit</value>
+  </string>
+  <string id="730" name="sharing client">
+    <value>Desktop Sharer</value>
+  </string>
+  <string id="731" name="sharing client">
+    <value>Click Start to publish your screen</value>
+  </string>
+  <string id="732" name="sharing client">
+    <value>Start Sharing</value>
+  </string>
+  <string id="733" name="sharing client">
+    <value>Stop Sharing</value>
+  </string>
+  <string id="734" name="sharing client">
+    <value>Select your screen area:</value>
+  </string>
+  <string id="735" name="sharing client">
+    <value>Change width</value>
+  </string>
+  <string id="736" name="sharing client">
+    <value>The Sharer has finished this session!</value>
+  </string>
+  <string id="737" name="sharing client">
+    <value>Change height</value>
+  </string>
+  <string id="738" name="sharing client">
+    <value>X-Offset</value>
+  </string>
+  <string id="739" name="sharing client">
+    <value>Y-Offset</value>
+  </string>
+  <string id="740" name="sharing client">
+    <value>Width:</value>
+  </string>
+  <string id="741" name="sharing client">
+    <value>Height:</value>
+  </string>
+  <string id="742" name="sharing client">
+    <value>Connection was closed by Server</value>
+  </string> 
+  <string id="743" name="sharing viewer">
+    <value>Cancel</value>
+  </string>
+  <string id="744" name="sharing viewer">
+    <value>Start External</value>
+  </string>
+  <string id="745" name="sharing viewer">
+    <value>If you close this session completely you are not able to restart the viewer for this session.</value>
+  </string>
+  <string id="746" name="sharing viewer">
+    <value>Confirm Closing Viewer Session</value>
+  </string> 
 </language>
