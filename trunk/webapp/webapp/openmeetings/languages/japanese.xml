@@ -2186,5 +2186,62 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   </string>
   <string id="727" name="sharing session">
     <value>You are already sharing your desktop!</value>
-  </string>  
+  </string>
+  <string id="728" name="sharing client">
+    <value>Desktop Viewer</value>
+  </string>
+  <string id="729" name="sharing client">
+    <value>Exit</value>
+  </string>
+  <string id="730" name="sharing client">
+    <value>Desktop Sharer</value>
+  </string>
+  <string id="731" name="sharing client">
+    <value>Click Start to publish your screen</value>
+  </string>
+  <string id="732" name="sharing client">
+    <value>Start Sharing</value>
+  </string>
+  <string id="733" name="sharing client">
+    <value>Stop Sharing</value>
+  </string>
+  <string id="734" name="sharing client">
+    <value>Select your screen area:</value>
+  </string>
+  <string id="735" name="sharing client">
+    <value>Change width</value>
+  </string>
+  <string id="736" name="sharing client">
+    <value>The Sharer has finished this session!</value>
+  </string>
+  <string id="737" name="sharing client">
+    <value>Change height</value>
+  </string>
+  <string id="738" name="sharing client">
+    <value>X-Offset</value>
+  </string>
+  <string id="739" name="sharing client">
+    <value>Y-Offset</value>
+  </string>
+  <string id="740" name="sharing client">
+    <value>Width:</value>
+  </string>
+  <string id="741" name="sharing client">
+    <value>Height:</value>
+  </string>
+  <string id="742" name="sharing client">
+    <value>Connection was closed by Server</value>
+  </string> 
+  <string id="743" name="sharing viewer">
+    <value>Cancel</value>
+  </string>
+  <string id="744" name="sharing viewer">
+    <value>Start External</value>
+  </string>
+  <string id="745" name="sharing viewer">
+    <value>If you close this session completely you are not able to restart the viewer for this session.</value>
+  </string>
+  <string id="746" name="sharing viewer">
+    <value>Confirm Closing Viewer Session</value>
+  </string> 
 </language>

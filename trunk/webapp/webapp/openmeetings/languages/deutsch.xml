@@ -211,7 +211,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Profil</value>
   </string>
   <string id="69" name="cleardrawarea">
-    <value>zeichenbrett leeren</value>
+    <value>Zeichenbrett leeren</value>
   </string>
   <string id="70" name="undo">
     <value>Rückgängig</value>
@@ -511,7 +511,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Admin</value>
   </string>
   <string id="169" name="uservalue_levellabel">
-    <value>Benuterrolle</value>
+    <value>Benutzerrolle</value>
   </string>
   <string id="170" name="orgvalue_header">
     <value>Organisation</value>
@@ -1132,7 +1132,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Ihr Profil</value>
   </string>
   <string id="376" name="dashboard">
-    <value>hi,</value>
+    <value>Hallo, </value>
   </string>
   <string id="377" name="dashboard">
     <value>Profil bearbeiten</value>
@@ -1240,7 +1240,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Datum:</value>
   </string>
   <string id="412" name="record">
-    <value>Aufnahem! Sie können hier nichts mehr ändern</value>
+    <value>Aufnahme! Sie können hier nichts mehr ändern ...</value>
   </string>
   <string id="413" name="record">
     <value>Aufnahme abspielen</value>
@@ -1618,7 +1618,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Check Password</value>
   </string>
   <string id="538" name="invitation_pass_error">
-    <value>Invalid Password!</value>
+    <value>Falsches Password!</value>
   </string>
   <string id="539" name="Browser">
     <value>Browser</value>
@@ -1891,7 +1891,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>suche intern</value>
   </string>
   <string id="629" name="btn_search_extern">
-    <value>externe benutzer eingeben</value>
+    <value>Externe Benutzer eingeben</value>
   </string>
   <string id="630" name="lbl_prename">
     <value>Vorname</value>
@@ -2176,15 +2176,72 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Start Client (HTTP)</value>
   </string>
   <string id="724" name="sharing session">
-    <value>A user want to share his screen. Do you want to see it?</value>
+    <value>Ein Benutzer will seinen Desktop freigeben. Wollen Sie ihn sehen?</value>
   </string>
   <string id="725" name="sharing session">
-    <value>You are currently sharing your Desktop. For stopping the Sharing Session please hit the Stop button in the Sharing Client.</value>
+    <value>Sie haben ihren Desktop freigegeben. Wenn Sie die Freigabe beenden wollen drücken Sie die Anhalten-Schaltfläche im Desktop Sharer.</value>
   </string>
   <string id="726" name="sharing session">
     <value>Sharing Session</value>
   </string>
   <string id="727" name="sharing session">
-    <value>You are already sharing your desktop!</value>
-  </string>  
+    <value>Sie haben Ihren Desktop bereits freigegeben!</value>
+  </string> 
+  <string id="728" name="sharing client">
+    <value>Desktop Viewer</value>
+  </string>
+  <string id="729" name="sharing client">
+    <value>Beenden</value>
+  </string>
+  <string id="730" name="sharing client">
+    <value>Desktop Sharer</value>
+  </string>
+  <string id="731" name="sharing client">
+    <value>Drücken Sie Start um ihren Desktop freizugeben</value>
+  </string>
+  <string id="732" name="sharing client">
+    <value>Start</value>
+  </string>
+  <string id="733" name="sharing client">
+    <value>Anhalten</value>
+  </string>
+  <string id="734" name="sharing client">
+    <value>Wählen Sie einen Bildschirmbereich aus:</value>
+  </string>
+  <string id="735" name="sharing client">
+    <value>Breite ändern</value>
+  </string>
+  <string id="736" name="sharing client">
+    <value>Die Freigabe wurde beendet!</value>
+  </string>
+  <string id="737" name="sharing client">
+    <value>Höhe ändern</value>
+  </string>
+  <string id="738" name="sharing client">
+    <value>X-Abstand</value>
+  </string>
+  <string id="739" name="sharing client">
+    <value>Y-Abstand</value>
+  </string>
+  <string id="740" name="sharing client">
+    <value>Breite:</value>
+  </string>
+  <string id="741" name="sharing client">
+    <value>Höhe:</value>
+  </string>
+  <string id="742" name="sharing client">
+    <value>Die Verbindung wurde vom Server abgebrochen.</value>
+  </string> 
+  <string id="743" name="sharing viewer">
+    <value>Abbrechen</value>
+  </string>
+  <string id="744" name="sharing viewer">
+    <value>Extern Starten</value>
+  </string>
+  <string id="745" name="sharing viewer">
+    <value>Wenn Sie diese Session schließen, können Sie die Session nicht wieder starten.</value>
+  </string>
+  <string id="746" name="sharing viewer">
+    <value>Session wirklich schließen?</value>
+  </string>
 </language>
