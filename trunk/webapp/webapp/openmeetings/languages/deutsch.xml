@@ -211,7 +211,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Profil</value>
   </string>
   <string id="69" name="cleardrawarea">
-    <value>Zeichenbrett leeren</value>
+    <value>zeichenbrett leeren</value>
   </string>
   <string id="70" name="undo">
     <value>Rückgängig</value>
@@ -511,7 +511,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Admin</value>
   </string>
   <string id="169" name="uservalue_levellabel">
-    <value>Benutzerrolle</value>
+    <value>Benuterrolle</value>
   </string>
   <string id="170" name="orgvalue_header">
     <value>Organisation</value>
@@ -1132,7 +1132,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Ihr Profil</value>
   </string>
   <string id="376" name="dashboard">
-    <value>Hallo, </value>
+    <value>hi,</value>
   </string>
   <string id="377" name="dashboard">
     <value>Profil bearbeiten</value>
@@ -1240,7 +1240,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Datum:</value>
   </string>
   <string id="412" name="record">
-    <value>Aufnahme! Sie können hier nichts mehr ändern ...</value>
+    <value>Aufnahem! Sie können hier nichts mehr ändern</value>
   </string>
   <string id="413" name="record">
     <value>Aufnahme abspielen</value>
@@ -1618,7 +1618,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>Check Password</value>
   </string>
   <string id="538" name="invitation_pass_error">
-    <value>Falsches Password!</value>
+    <value>Invalid Password!</value>
   </string>
   <string id="539" name="Browser">
     <value>Browser</value>
@@ -1891,7 +1891,7 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
     <value>suche intern</value>
   </string>
   <string id="629" name="btn_search_extern">
-    <value>Externe Benutzer eingeben</value>
+    <value>externe benutzer eingeben</value>
   </string>
   <string id="630" name="lbl_prename">
     <value>Vorname</value>
