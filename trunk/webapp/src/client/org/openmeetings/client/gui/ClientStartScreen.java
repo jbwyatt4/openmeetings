@@ -12,6 +12,7 @@ import javax.swing.event.ChangeListener;
 
 import org.apache.log4j.Logger;
 import org.openmeetings.client.screen.ClientBlankArea;
+import org.openmeetings.client.screen.ClientCaptureScreen;
 import org.openmeetings.client.screen.ClientSentScreen;
 import org.openmeetings.client.beans.ClientConnectionBean;
 import org.openmeetings.client.beans.ClientStatusBean;
@@ -31,16 +32,16 @@ public class ClientStartScreen {
 	
 	private ClientSentScreen clientSentScreen = null;
 
-	java.awt.Container contentPane;
+	private java.awt.Container contentPane;
 	
 	JFrame t;
-	JLabel textArea;
-	JLabel textWarningArea;
-	JLabel textAreaQualy;
-	JButton startButton;
-	JButton stopButton;
-	JButton exitButton;
-	JSpinner jSpin;
+	private JLabel textArea;
+	private JLabel textWarningArea;
+	private JLabel textAreaQualy;
+	private JButton startButton;
+	private JButton stopButton;
+	private JButton exitButton;
+	private JSpinner jSpin;
 	JLabel tFieldScreenZoom;
 	JLabel blankArea;
 	ClientBlankArea virtualScreen;
@@ -58,7 +59,21 @@ public class ClientStartScreen {
 	JLabel vScreenIconUp;
 	JLabel vScreenIconDown;	
 	
-	JLabel myBandWidhtTestLabel;
+	private JLabel myBandWidhtTestLabel;
+	
+	private String label730 = "Desktop Publisher";
+	private String label731 = "This application will publish your screen";
+	private String label732 = "Start Sharing";
+	private String label733 = "Stop Sharing";
+	public String label734 = "Select your screen Area:";
+	public String label735 = "Change width";
+	public String label737 = "Change height";
+	public String label738 = "SharingScreen X:";
+	public String label739 = "SharingScreen Y:";
+	public String label740 = "SharingScreen Width:";
+	public String label741 = "SharingScreen Height:";
+	public String label742 = "Connection was closed by Server";
+	
 
 	public void initMainFrame() {
 		try {
@@ -71,17 +86,17 @@ public class ClientStartScreen {
 			UIManager.getLookAndFeelDefaults().put( "ClassLoader", getClass().getClassLoader()  );
 			
 			
-			t = new JFrame("Desktop Publisher");
+			t = new JFrame(this.label730);
 			contentPane = t.getContentPane();
 			contentPane.setBackground(Color.WHITE);
 			textArea = new JLabel();
 			textArea.setBackground(Color.WHITE);
 			contentPane.setLayout(null);
 			contentPane.add(textArea);
-			textArea.setText("This application will publish your screen");
+			textArea.setText(this.label731);
 			textArea.setBounds(10, 0, 400,24);
 			
-			startButton = new JButton( "start Sharing" );
+			startButton = new JButton( this.label732 );
 			startButton.addActionListener( new ActionListener(){
 				public void actionPerformed(ActionEvent arg0) {
 					// TODO Auto-generated method stub
@@ -92,7 +107,7 @@ public class ClientStartScreen {
 			t.add(startButton);
 			
 			
-			stopButton = new JButton( "stop Sharing" );
+			stopButton = new JButton( this.label733 );
 			stopButton.addActionListener( new ActionListener(){
 				public void actionPerformed(ActionEvent arg0) {
 					// TODO Auto-generated method stub
@@ -103,7 +118,7 @@ public class ClientStartScreen {
 			stopButton.setEnabled(false);
 			t.add(stopButton);	
 			
-			jSpin = new JSpinner(new SpinnerNumberModel(80, 10, 100, 5));
+			jSpin = new JSpinner(new SpinnerNumberModel(ClientConnectionBean.imgQuality*100, 10, 100, 5));
 			jSpin.setBounds(140, 80, 50, 24);
 			jSpin.addChangeListener( new ChangeListener(){
 				public void stateChanged(ChangeEvent arg0) {
@@ -170,12 +185,16 @@ public class ClientStartScreen {
 		}
 	}
 	
+	public void showWarningPopUp(String warning){
+		JOptionPane.showMessageDialog(t, warning);
+	}
+	
 	void setNewStepperValues(){
 		//System.out.println(jSpin.getValue());
 		ClientConnectionBean.imgQuality=new Float(Double.valueOf(jSpin.getValue().toString())/100);
 	}
 	
-	public void _showBandwidthWarning(String warning){
+	public void showBandwidthWarning(String warning){
 		textWarningArea.setText(warning);
 		//JOptionPane.showMessageDialog(t, warning);
 	}
@@ -183,6 +202,8 @@ public class ClientStartScreen {
 	void captureScreenStart(){
 		try {
 			
+			ClientConnectionBean.startDate = new Date();
+			ClientCaptureScreen.frameCalculated = 0;
 			log.debug("captureScreenStart");
 			
 //			ClientSendStatus clientStatus = new ClientSendStatus();
@@ -208,6 +229,7 @@ public class ClientStartScreen {
 			ClientRasterList.resetFrameHistory();
 			ClientSentScreen.threadRunning = false;
 			
+			clientSentScreen = null;
 			
 			clientSentScreen = new ClientSentScreen();
 			
@@ -256,6 +278,9 @@ public class ClientStartScreen {
 	void captureScreenStop(){
 		try {
 			
+			ClientConnectionBean.startDate = new Date();
+			ClientCaptureScreen.frameCalculated = 0;
+			
 			ClientStatusBean clientStatusBean = new ClientStatusBean();
 			clientStatusBean.setMode(4); //Mode 4 means stop
 			clientStatusBean.setPublicSID(ClientConnectionBean.publicSID);
@@ -291,7 +316,7 @@ public class ClientStartScreen {
 		}
 	}
 	
-	public ClientStartScreen(String host, String port, String SID, String room, String domain, String publicSID, String record){
+	public ClientStartScreen(String host, String port, String SID, String room, String domain, String publicSID, String record, String labelTexts){
 		log.debug("captureScreenStop START ");
 		
 		//JOptionPane.showMessageDialog(t, "publicSID: "+publicSID);
@@ -303,6 +328,24 @@ public class ClientStartScreen {
 		ClientConnectionBean.domain = domain;	
 		ClientConnectionBean.publicSID = publicSID;
 		ClientConnectionBean.record = record;
+		
+		if (labelTexts.length() > 0) {
+			String[] textArray = labelTexts.split(";");
+			
+			this.label730 = textArray[0];
+			this.label731 = textArray[1];
+			this.label732 = textArray[2];
+			this.label733 = textArray[3];
+			this.label734 = textArray[4];
+			this.label735 = textArray[5];
+			this.label737 = textArray[6];
+			this.label738 = textArray[7];
+			this.label739 = textArray[8];
+			this.label740 = textArray[9];
+			this.label741 = textArray[10];
+			this.label742 = textArray[11];
+			
+		}
 		
 		if (ClientConnectionBean.record == "yes") {
 			ClientConnectionBean.mode = 1;
@@ -322,7 +365,35 @@ public class ClientStartScreen {
 		String domain = args[4];
 		String publicSID = args[5];
 		String record = args[6];
-		new ClientStartScreen(host,port,SID,room,domain,publicSID,record);
+		
+		String labelTexts = args[7];
+		
+		new ClientStartScreen(host,port,SID,room,domain,publicSID,record,labelTexts);
+	}
+
+	/**
+	 * 
+	 */
+	public void updateScreen() {
+		try {
+			
+			if (ClientConnectionBean.startDate == null) {
+				throw new Exception("Start Date is Null");
+			}
+			
+			Date now = new Date();
+			
+			long deltaTime = now.getTime() - ClientConnectionBean.startDate.getTime();
+			
+			int seconds = Math.round(deltaTime/1000);
+			
+			if (seconds > 0) {
+				textWarningArea.setText("KBytes:"+(ClientCaptureScreen.frameCalculated/1000)+" sec: "+seconds+" rate: "+((ClientCaptureScreen.frameCalculated/1000)/seconds));
+			}
+			
+		} catch (Exception err) {
+			log.error("updateScreen",err);
+		}
 	}
 
 }

@@ -5,6 +5,7 @@ import java.net.InetSocketAddress;
 import java.net.SocketAddress;
 
 import org.apache.mina.core.buffer.IoBuffer;
+import org.apache.mina.core.future.CloseFuture;
 import org.apache.mina.core.future.ConnectFuture;
 import org.apache.mina.core.future.IoFutureListener;
 import org.apache.mina.core.service.IoHandlerAdapter;
@@ -57,7 +58,7 @@ public class ClientPacketMinaProcess extends IoHandlerAdapter {
 			
 			log.debug("Default Send Buffer Size "+connector.getSessionConfig().getSendBufferSize());
 			
-			connector.getSessionConfig().setSendBufferSize(8192*4);
+			connector.getSessionConfig().setSendBufferSize(8192*8);
 			
 			connector.getFilterChain().addLast("codec", new ProtocolCodecFilter(new ClientDesktopCodecSharingFactory()));
 			
@@ -142,9 +143,20 @@ public class ClientPacketMinaProcess extends IoHandlerAdapter {
 		
 		if (message instanceof ClientStatusBean) {
 			
+			ClientStatusBean cBean = (ClientStatusBean) message;
+			
 			SocketAddress remoteAddress = session.getRemoteAddress();
 			
-			log.debug("Recv Status Bean ");
+			log.debug("Recv Status Bean "+cBean.getMode());
+			
+			if (cBean.getMode() == 4) {
+				if (ClientViewerScreen.instance != null) {
+					ClientViewerScreen.instance.showWarningPopUp(ClientViewerScreen.instance.label736);
+					ClientViewerScreen.instance.alreadyClosedWarning = true;
+					ClientTransportMinaPool.closeSession();
+				}
+				
+			}
 			
 		}
 		
@@ -177,6 +189,13 @@ public class ClientPacketMinaProcess extends IoHandlerAdapter {
     @Override
     public void sessionClosed(IoSession session) throws Exception {
         log.debug("Session closed...");
+        if (ClientViewerScreen.instance != null) {
+	        if (!ClientViewerScreen.instance.alreadyClosedWarning){
+	        	ClientViewerScreen.instance.showWarningPopUp(ClientViewerScreen.instance.label742);
+	        }
+        } else if (ClientStartScreen.instance != null){
+        	ClientStartScreen.instance.showWarningPopUp(ClientViewerScreen.instance.label742);
+        }
     }
 
     @Override
@@ -193,5 +212,13 @@ public class ClientPacketMinaProcess extends IoHandlerAdapter {
     public void sessionOpened(IoSession session) throws Exception {
         log.debug("Session opened...");
     }
+
+	/**
+	 * 
+	 */
+	public void closeSession() throws Exception {
+		// TODO Auto-generated method stub
+		session.close(false);
+	}
 
 }

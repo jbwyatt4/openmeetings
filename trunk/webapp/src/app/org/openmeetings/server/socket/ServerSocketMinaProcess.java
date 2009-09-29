@@ -1,9 +1,22 @@
 package org.openmeetings.server.socket;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.net.InetSocketAddress;
 import java.net.SocketAddress;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
+import java.util.zip.GZIPInputStream;
+import java.util.zip.GZIPOutputStream;
+
+import javax.imageio.IIOImage;
+import javax.imageio.ImageIO;
+import javax.imageio.ImageWriteParam;
+import javax.imageio.ImageWriter;
+import javax.imageio.plugins.jpeg.JPEGImageWriteParam;
+import javax.imageio.stream.ImageOutputStream;
 
 import org.apache.mina.core.filterchain.DefaultIoFilterChainBuilder;
 import org.apache.mina.core.session.IoSession;
@@ -35,6 +48,28 @@ public class ServerSocketMinaProcess {
 	
 	public static final int port = 4445;
 	
+	public static void sendStatusToSession(ServerStatusBean serverStatusBean) {
+		try {
+			
+			List<ServerSharingViewerBean> viewersList = ServerSharingViewersList.getViewersByPublicSID(serverStatusBean.getPublicSID());
+			
+			if (viewersList == null) {
+				//No Viewers registered via ODSP-Connection
+				return;
+			}
+			
+			for (ServerSharingViewerBean serverSharingViewerBean : viewersList) {
+				
+				IoSession session = ServerSocketMinaProcess.getSessionById(serverSharingViewerBean.getSessionId());
+				
+				
+				session.write(serverStatusBean);
+			}
+			
+		} catch (Exception err) {
+			log.error("[sendMessageToSession]",err);
+		}
+	}
 	
 	public static void sendMessageToSession(ServerFrameBean serverFrameBean) {
 		try {
@@ -87,10 +122,10 @@ public class ServerSocketMinaProcess {
 			
 			acceptor.getFilterChain().addLast("protocol", new ProtocolCodecFilter(new ServerDesktopCodecSharingFactory()));
 			
-//				acceptor.getSessionConfig().setMinReadBufferSize(49152);
-//				acceptor.getSessionConfig().setMaxReadBufferSize(65535);
-//				acceptor.getSessionConfig().setReadBufferSize(49152);
-//				acceptor.getSessionConfig().setReceiveBufferSize(65535);
+			acceptor.getSessionConfig().setMinReadBufferSize(65535);
+			acceptor.getSessionConfig().setMaxReadBufferSize(65535);
+			acceptor.getSessionConfig().setReadBufferSize(65535);
+			acceptor.getSessionConfig().setReceiveBufferSize(65535);
 			
 			acceptor.setHandler(new ServerPacketMinaHandler(this));
 			
@@ -144,21 +179,74 @@ public class ServerSocketMinaProcess {
 	}
 
 	public void recvServerFrameBean(SocketAddress remoteAddress, ServerFrameBean serverFrameBean) {
-
+		try {
 		
-//		log.debug("mode "+serverFrameBean.getMode());
-		log.debug("recvServerFrameBean sequenceNumber "+serverFrameBean.getSequenceNumber());
-//		log.debug("lengthSecurityToken "+serverFrameBean.getLengthSecurityToken());
-//		log.debug("xValue "+serverFrameBean.getXValue());
-//		log.debug("yValue "+serverFrameBean.getYValue());
-//		log.debug("width "+serverFrameBean.getWidth());
-//		log.debug("height "+serverFrameBean.getHeight());
-//		log.debug("lengthPayload "+serverFrameBean.getLengthPayload());
-		
-		//log.debug("handleIncomingByte -- Frame Bean ");
-
-		ServerSharingSessionList.addFrameToSession(serverFrameBean);
-
+	//		log.debug("mode "+serverFrameBean.getMode());
+			log.debug("recvServerFrameBean sequenceNumber "+serverFrameBean.getSequenceNumber());
+	//		log.debug("lengthSecurityToken "+serverFrameBean.getLengthSecurityToken());
+	//		log.debug("xValue "+serverFrameBean.getXValue());
+	//		log.debug("yValue "+serverFrameBean.getYValue());
+	//		log.debug("width "+serverFrameBean.getWidth());
+	//		log.debug("height "+serverFrameBean.getHeight());
+	//		log.debug("lengthPayload "+serverFrameBean.getLengthPayload());
+			
+			//log.debug("handleIncomingByte -- Frame Bean ");
+			
+			//if (false) {
+//				ByteArrayInputStream byteGzipIn = new ByteArrayInputStream(serverFrameBean.getImageBytes());
+//	    		GZIPInputStream gZipIn = new GZIPInputStream(byteGzipIn);
+//	
+//	    		ByteArrayOutputStream bytesOut = new ByteArrayOutputStream();
+//	    		
+//	    		byte[] buffer = new byte[1024];
+//	    		int count = 0;
+//	    		while ((count = gZipIn.read(buffer)) > 0 ){
+//	    			bytesOut.write(buffer,0,count);
+//				}
+//				bytesOut.close();
+//				gZipIn.close();
+//				
+//				ByteArrayInputStream in = new ByteArrayInputStream(bytesOut.toByteArray());
+//				
+//				BufferedImage bufferedImage = ImageIO.read(in);
+//				
+//				ByteArrayOutputStream out = new ByteArrayOutputStream();
+//				ImageWriter writer = ImageIO.getImageWritersByFormatName( "jpg" ).next(); 
+//			    ImageOutputStream ios = ImageIO.createImageOutputStream( out ); 
+//			    writer.setOutput( ios ); 
+//			    
+//			    ImageWriteParam iwparam = new JPEGImageWriteParam( Locale.getDefault() ); 
+//			    iwparam.setCompressionMode( ImageWriteParam.MODE_EXPLICIT ) ; 
+//			    iwparam.setCompressionQuality( new Float(0.7) ); 
+//			    writer.write( null, new IIOImage(bufferedImage, null, null), null ); 
+//			    
+//			    //GZip
+//				ByteArrayOutputStream byteGzipOut = new ByteArrayOutputStream();
+//		    	GZIPOutputStream gZipOut = new GZIPOutputStream(byteGzipOut);
+//		    	
+//		    	gZipOut.write(out.toByteArray());
+//		    	gZipOut.close();
+//		    	
+//		    	//Flush
+//		    	ios.flush(); 
+//			    writer.dispose(); 
+//			    ios.close();
+//			    bufferedImage.flush();
+//			    out.flush();
+//		    
+//			    serverFrameBean.setImageBytesAsJPEG(byteGzipOut.toByteArray());
+//			    
+//			    byteGzipOut.flush();
+//			    
+//			} else {
+				serverFrameBean.setImageBytesAsJPEG(serverFrameBean.getImageBytes());
+//			}
+			
+			ServerSharingSessionList.addFrameToSession(serverFrameBean);
+			
+		} catch (Exception err) {
+			log.error("[recvServerFrameBean]",err);
+		}
 	}
 
 	/**

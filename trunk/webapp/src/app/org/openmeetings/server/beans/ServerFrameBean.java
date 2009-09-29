@@ -18,6 +18,8 @@ public class ServerFrameBean {
 	
 	private byte[] imageBytes = null;
 	
+	private byte[] imageBytesAsJPEG = null;
+	
 	/**
 	 * @param mode
 	 * @param sequenceNumber
@@ -111,6 +113,14 @@ public class ServerFrameBean {
 	}
 	public void setImageBytes(byte[] imageBytes) {
 		this.imageBytes = imageBytes;
+	}
+
+	public byte[] getImageBytesAsJPEG() {
+		return imageBytesAsJPEG;
+	}
+
+	public void setImageBytesAsJPEG(byte[] imageBytesAsJPEG) {
+		this.imageBytesAsJPEG = imageBytesAsJPEG;
 	}
 	
 }

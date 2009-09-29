@@ -77,7 +77,7 @@ public class ServerOutputHandler extends HttpServlet {
 				return;
 			}
 			
-			byte[] buffer = sBean.getImageBytes();
+			byte[] buffer = sBean.getImageBytesAsJPEG();
 			
 			String filename = "f_"+new Date().getTime()+".jpg";
 			//Image myImage = 

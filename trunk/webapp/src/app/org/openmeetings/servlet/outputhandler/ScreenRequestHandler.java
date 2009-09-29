@@ -17,8 +17,10 @@ import org.hibernate.cfg.Configuration;
 import org.slf4j.Logger;
 import org.red5.logging.Red5LoggerFactory;
 import org.openmeetings.app.data.basic.Configurationmanagement;
+import org.openmeetings.app.data.basic.Fieldmanagment;
 import org.openmeetings.app.data.basic.Sessionmanagement;
 import org.openmeetings.app.data.user.Usermanagement;
+import org.openmeetings.app.hibernate.beans.lang.Fieldlanguagesvalues;
 import org.openmeetings.app.hibernate.beans.recording.RoomClient;
 import org.openmeetings.app.remote.red5.ClientListManager;
 import org.openmeetings.app.rtp.RTPScreenSharingSession;
@@ -137,6 +139,13 @@ public class ScreenRequestHandler extends VelocityViewServlet {
 					return null;
 				}
 				
+				String languageAsString = httpServletRequest.getParameter("languageAsString");
+				if(languageAsString == null) {
+					log.error("languageAsString is empty: "+domain);
+					return null;
+				}
+				Long language_id = Long.parseLong(languageAsString);
+				
 				String rtmphostlocal = httpServletRequest.getParameter("rtmphostlocal");
 				if (rtmphostlocal == null) {
 					log.error("rtmphostlocal is empty: "+rtmphostlocal);
@@ -186,9 +195,49 @@ public class ScreenRequestHandler extends VelocityViewServlet {
 				// Check , which screenviewer is to be used
 				org.openmeetings.app.hibernate.beans.basic.Configuration conf = Configurationmanagement.getInstance().getConfKey(user_level, "screen_viewer");
 				
-				String template = "screencast_template.vm";
-				template = "screencast_odsp_sharertemplate.vm";
+				String template = "screencast_odsp_sharertemplate.vm";
+				//template = "screencast_odsp_sharertemplate.vm";
 				ctx.put("PORT", ServerSocketMinaProcess.port);
+				
+				Fieldlanguagesvalues fValue728 = Fieldmanagment.getInstance().getFieldByIdAndLanguage(728L, language_id);
+				Fieldlanguagesvalues fValue729 = Fieldmanagment.getInstance().getFieldByIdAndLanguage(729L, language_id);
+				Fieldlanguagesvalues fValue730 = Fieldmanagment.getInstance().getFieldByIdAndLanguage(730L, language_id);
+				Fieldlanguagesvalues fValue731 = Fieldmanagment.getInstance().getFieldByIdAndLanguage(731L, language_id);
+				Fieldlanguagesvalues fValue732 = Fieldmanagment.getInstance().getFieldByIdAndLanguage(732L, language_id);
+				Fieldlanguagesvalues fValue733 = Fieldmanagment.getInstance().getFieldByIdAndLanguage(733L, language_id);
+				Fieldlanguagesvalues fValue734 = Fieldmanagment.getInstance().getFieldByIdAndLanguage(734L, language_id);
+				Fieldlanguagesvalues fValue735 = Fieldmanagment.getInstance().getFieldByIdAndLanguage(735L, language_id);
+				Fieldlanguagesvalues fValue736 = Fieldmanagment.getInstance().getFieldByIdAndLanguage(736L, language_id);
+				Fieldlanguagesvalues fValue737 = Fieldmanagment.getInstance().getFieldByIdAndLanguage(737L, language_id);
+				Fieldlanguagesvalues fValue738 = Fieldmanagment.getInstance().getFieldByIdAndLanguage(738L, language_id);
+				Fieldlanguagesvalues fValue739 = Fieldmanagment.getInstance().getFieldByIdAndLanguage(739L, language_id);
+				Fieldlanguagesvalues fValue740 = Fieldmanagment.getInstance().getFieldByIdAndLanguage(740L, language_id);
+				Fieldlanguagesvalues fValue741 = Fieldmanagment.getInstance().getFieldByIdAndLanguage(741L, language_id);
+				Fieldlanguagesvalues fValue742 = Fieldmanagment.getInstance().getFieldByIdAndLanguage(742L, language_id);
+				
+				
+				String label_viewer = fValue728.getValue()+";"+
+										fValue729.getValue()+";"+
+										fValue736.getValue()+";"+
+										fValue742.getValue();
+				
+				String label_sharer = fValue730.getValue()+";"+ //0
+										fValue731.getValue()+";"+ //1
+										fValue732.getValue()+";"+ //2
+										fValue733.getValue()+";"+ //3
+										fValue734.getValue()+";"+ //4
+										fValue735.getValue()+";"+ //5
+										fValue737.getValue()+";"+ //6
+										fValue738.getValue()+";"+ //7
+										fValue739.getValue()+";"+ //8
+										fValue740.getValue()+";"+ //9
+										fValue741.getValue()+";"+ //10
+										fValue742.getValue()+";" //11
+										;
+				
+				ctx.put("LABELVIEWER", label_viewer);
+				ctx.put("LABELSHARER", label_sharer);
+				
 				log.debug("Creating JNLP Template for TCP solution");
 				
 				if(mode.equals("sharer") && conf != null){
@@ -199,7 +248,9 @@ public class ScreenRequestHandler extends VelocityViewServlet {
 						
 						if (conf_i == 0) {
 							
-							template = "screencast_template.vm";
+							//I've disabled the HTTP-Sharer Option for now as it makes
+							//trouble for external Users to use it
+							template = "screencast_odsp_sharertemplate.vm";
 							
 						} else if(conf_i == 1){
 							template = "screencast_jrdesktop.vm";
@@ -240,6 +291,8 @@ public class ScreenRequestHandler extends VelocityViewServlet {
 					ctx.put("PORT", ServerSocketMinaProcess.port);
 					log.debug("Creating JNLP Template for UDP solution");
 				}
+				
+				log.debug("template "+template);
 				
 				return getVelocityEngine().getTemplate(template);
 			

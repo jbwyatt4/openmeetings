@@ -11,6 +11,7 @@ import org.openmeetings.client.beans.ClientConnectionBean;
 import org.openmeetings.client.beans.ClientFrameBean;
 import org.openmeetings.client.beans.ClientStatusBean;
 import org.openmeetings.client.beans.ClientViewerRegisterBean;
+import org.openmeetings.client.gui.ClientStartScreen;
 import org.openmeetings.client.screen.ClientCaptureScreen;
 import org.openmeetings.client.util.ClientPacketizer;
 
@@ -80,6 +81,9 @@ public class ClientDesktopRequestEncoder implements ProtocolEncoder {
 			
 			//byte counter
 			ClientCaptureScreen.frameCalculated += frameSize;
+			if (ClientStartScreen.instance!=null) {
+				ClientStartScreen.instance.updateScreen();
+			}
 			
 			buffer.flip();
 			
@@ -112,6 +116,9 @@ public class ClientDesktopRequestEncoder implements ProtocolEncoder {
 			
     		//byte counter
 			ClientCaptureScreen.frameCalculated += frameSize;
+			if (ClientStartScreen.instance!=null) {
+				ClientStartScreen.instance.updateScreen();
+			}
 			
 			buffer.flip();
 			
@@ -143,6 +150,9 @@ public class ClientDesktopRequestEncoder implements ProtocolEncoder {
 			
 			//byte counter
 			ClientCaptureScreen.frameCalculated += frameSize;
+			if (ClientStartScreen.instance!=null) {
+				ClientStartScreen.instance.updateScreen();
+			}
 			
 			buffer.flip();
 			

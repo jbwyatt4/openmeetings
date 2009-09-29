@@ -1,7 +1,9 @@
 package org.openmeetings.client.gui;
 
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.image.BufferedImage;
 
 import javax.swing.JPanel;
 
@@ -19,6 +21,8 @@ public class ImagePanel extends JPanel {
 	private int xPosition = 0;
 	private int yPosition = 0;
 	private Image image;
+	
+	private int sequenceNumber = 0;
 	
 	/**
 	 * @param position
@@ -49,15 +53,16 @@ public class ImagePanel extends JPanel {
     public void paintComponent(Graphics g) {
 		try {
 	        super.paintComponent(g);
-	
+	        
 	        if (image != null) {
 	
 	        	log.debug("DRAW IMAGE "+this.xPosition+" "+this.yPosition);
 	        	
-	            boolean drawResult = g.drawImage(image, 0, 0, null);
+	            boolean drawResult = g.drawImage(image, 0, 0, this);
 	
 	            while(!drawResult) {
-	            	drawResult = g.drawImage(image, 0, 0, null);
+	            	log.debug("Could Not Draw "+this.getX()+" "+this.getY());
+	            	drawResult = g.drawImage(image, 0, 0, this);
 	            }
 	            
 	            if (!drawResult) {
@@ -69,11 +74,22 @@ public class ImagePanel extends JPanel {
 		}
     }
 	
-    public void setImages(Image image) {
+    public void setImages(Image image, int width, int height) {
 
         this.image = image;
-        
+        //log.debug("")
+        //setPreferredSize(new Dimension(width,height));
         repaint();
+        invalidate();
 
     }
+
+	public int getSequenceNumber() {
+		return sequenceNumber;
+	}
+
+	public void setSequenceNumber(int sequenceNumber) {
+		this.sequenceNumber = sequenceNumber;
+	}
+    
 }

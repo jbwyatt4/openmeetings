@@ -63,4 +63,17 @@ public class ClientTransportMinaPool {
 		
 	}
 	
+	public static void closeSession() throws Exception {
+		try {
+		
+			ClientPacketMinaProcess cProcess = socketConnections.get(0);
+			
+			cProcess.closeSession();
+		
+		} catch (Exception err) {
+			log.error("[closeSession]",err);
+		}
+		
+	}
+	
 }

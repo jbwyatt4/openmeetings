@@ -2,6 +2,7 @@ package org.openmeetings.app.hibernate.beans.recording;
 
 import java.util.Date;
 import java.util.LinkedList;
+import java.util.List;
 
 /**
  * 
@@ -10,7 +11,7 @@ import java.util.LinkedList;
  *
  */
 public class RoomClient {
-	
+	   
 	private Long roomClientId = null;
 	
 	/*
@@ -125,7 +126,7 @@ public class RoomClient {
     private Long externalUserId;
     private String externalUserType;
     
-    private boolean isViewer = false;
+    private List<String> sharerSIDs = new LinkedList<String>();
 	
 	/*
 	 * Zombie Flag
@@ -550,11 +551,12 @@ public class RoomClient {
 		this.externalUserType = externalUserType;
 	}
 
-	public boolean isViewer() {
-		return isViewer;
+	public List<String> getSharerSIDs() {
+		return sharerSIDs;
 	}
-	public void setViewer(boolean isViewer) {
-		this.isViewer = isViewer;
+	public void setSharerSIDs(List<String> sharerSIDs) {
+		this.sharerSIDs = sharerSIDs;
 	}
+	
 	
 }

@@ -21,7 +21,7 @@ public class ClientShowStatusMessage {
 				
 			} else {
 				
-				ClientStartScreen.instance._showBandwidthWarning(message);
+				ClientStartScreen.instance.showBandwidthWarning(message);
 				
 			}
 			
