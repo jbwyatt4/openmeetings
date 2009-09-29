@@ -1,4 +1,4 @@
-#summary Installation of 0.7 RC2 to 0.8.4
+#summary Installation of 0.7 RC2 to 0.9 RC5
 #labels Featured
 
   * [OpenMeetings084 Release Notes 0.8.4]
