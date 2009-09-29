@@ -4,7 +4,7 @@ This is the recommended scenario to update openmeetings from a previous installa
 
 == Introduction ==
 
-You do not need to alter any database-table for the update process, OpenMeetings will automatically check the database scheme every time you start it and alter it automatically.
+You do not need to alter any database-table for the update process, OpenMeetings will automatically check the database scheme every time you start it and alter it automatically based on the hibernate.cfg.xml.<br/>
 => There is no need to check the hibernate.cfg.xml in general, but it might be useful to check if all tables are still the same, sometime we add new tables to the scheme that need to be added.
 
 The converters and all 3th Party tools don't require update. However you should keep an eye on what versions of !OpenOffice, !ImageMagick, !GhostScript and !SWFTools you have. Especially !SWFTools latest version does fix some issues for the Presentation files.
