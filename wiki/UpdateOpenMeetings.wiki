@@ -17,7 +17,7 @@ The process of updating is in general as following:
 1) Install OpenMeetings on a clean DB to import all new labels and languages. Maybe on your localhost, no need to bother your target environment with it.<br/>
 2) Shutdown your Prod-Server (the target server you are going to update)<br/>
 3) Export the tables *fieldlanguage* *fieldlanguagesvalues* *fieldvalues*( for example with phpMyAdmin, add the controls *DROP TABLE* to the exported tables sothat you *overwrite* the existing table when you do import them again)<br/>
-4) Make a backup of the old table from your prod server<br/>
+4) Make a backup of the old tables from your prod server<br/>
 5) Import those tables from step 3) into your prod server<br/>
 ------
 6) Copy the dir: openmeetings/WEB-INF (actually you often only need to update openmeetings/WEB-INF/lib/openmeetings.jar and openmeetings/WEB-INF/lib/openmeetings-templates.jar) from your local  to the new openmeetings-version and overwrite the old ones<br/>
