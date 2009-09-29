@@ -4,6 +4,14 @@
 <class name="screenSharingContainer" extends="view" 
 	   width="${parent.width }" height="${ parent.height }">
 	
+	<method name="clearAllSessions">
+		<![CDATA[
+            for (var eg in this.subviews) {
+            	this.subviews[eg].destroy();
+            }
+		]]>
+	</method>
+	
 	<method name="searchForSession" args="publicSID">
 		<![CDATA[
 		
@@ -14,7 +22,7 @@
             }
             
             if ($debug) Debug.write("No HTTP Session "+publicSID);
-		
+		    return null;
 		]]>
 	</method>
 	
