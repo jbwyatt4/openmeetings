@@ -1178,7 +1178,9 @@
                     new lz.sharingSession(canvas._screens,{name:'_screen',sharingSessionObject:value});
                 } else {
                     var screenObj = canvas._screens.searchForSession(value.s);
-                    screenObj.close();
+                    if (screenObj != null) {
+                       screenObj.close();
+                    }
                 }
             ]]>
         </handler>   
