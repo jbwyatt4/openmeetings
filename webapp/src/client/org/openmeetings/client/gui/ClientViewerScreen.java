@@ -8,6 +8,7 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.util.LinkedList;
 import java.util.zip.GZIPInputStream;
 
@@ -17,6 +18,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -39,17 +41,27 @@ public class ClientViewerScreen {
 
 	public static ClientViewerScreen instance = null;
 	
-	java.awt.Container contentPane;
-	JFrame t;
+	private java.awt.Container contentPane;
+	private JFrame t;
 	
-	JButton exitButton;
-	JLabel textWarningArea;
-	JScrollPane scrollPane;
-	JPanel scrollContent;
+	private JButton exitButton;
+	private JLabel textWarningArea;
+	private JScrollPane scrollPane;
+	private JPanel scrollContent;
+	
+	private String label728 = "Desktop Viewer";
+	private String label729 = "exit";
+	public String label736 = "End of Session";
+	public String label742 = "Connection was closed by Server";
 	
 	private List<ImagePanel> imageScreens = new LinkedList<ImagePanel>();
 	
-	public ClientViewerScreen(String host, String port, String SID, String room, String domain, String publicSID, String record){
+	private int maxSizeX = 0;
+	private int maxSizeY = 0;
+	
+	public boolean alreadyClosedWarning = false;
+	
+	public ClientViewerScreen(String host, String port, String SID, String room, String domain, String publicSID, String record, String labelTexts){
 		log.debug("captureScreenStop START ");
 		
 		//JOptionPane.showMessageDialog(t, "publicSID: "+publicSID);
@@ -62,6 +74,16 @@ public class ClientViewerScreen {
 		ClientConnectionBean.domain = domain;	
 		ClientConnectionBean.publicSID = publicSID;
 		ClientConnectionBean.record = record;
+		
+		if (labelTexts.length() > 0) {
+			String[] textArray = labelTexts.split(";");
+			
+			this.label728 = textArray[0];
+			this.label729 = textArray[1];
+			this.label736 = textArray[2];
+			this.label742 = textArray[3];
+			
+		}
 		
 		if (ClientConnectionBean.record == "yes") {
 			ClientConnectionBean.mode = 1;
@@ -85,31 +107,36 @@ public class ClientViewerScreen {
 			
 			Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
 			
-			t = new JFrame("Desktop Publisher");
+			t = new JFrame(this.label728);
 			contentPane = t.getContentPane();
 			contentPane.setBackground(Color.WHITE);
 			contentPane.setLayout(null);
 			
 			textWarningArea = new JLabel();
 			contentPane.add(textWarningArea);
-			textWarningArea.setBounds(2, screenSize.height-150, 400, 30);
+			textWarningArea.setBounds(2, screenSize.height-250, 400, 30);
 			
-			exitButton = new JButton( "exit" );
+			exitButton = new JButton( this.label729 );
 			exitButton.addActionListener( new ActionListener(){
 				public void actionPerformed(ActionEvent arg0) {
-					// TODO Auto-generated method stub
-					t.setVisible(false);
-					System.exit(0);
+					try {
+						// TODO Auto-generated method stub
+						ClientTransportMinaPool.closeSession();
+						t.setVisible(false);
+						System.exit(0);
+					} catch (Exception e) {
+						log.error("[actionPerformed1]",e);
+					}
 				}
 			});
-			exitButton.setBounds(screenSize.width-300, screenSize.height-150, 190, 24);
+			exitButton.setBounds(screenSize.width-400, screenSize.height-250, 190, 24);
 			contentPane.add(exitButton);
 			
 			
 			
 			scrollContent = new JPanel();
 			
-			scrollContent.setPreferredSize(new Dimension(1600,1400));
+			scrollContent.setPreferredSize(new Dimension(1600,1200));
 			//scrollContent.setBounds(0, 0, 300, 1400);
 			
 			//, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
@@ -118,7 +145,8 @@ public class ClientViewerScreen {
 			scrollPane = new JScrollPane(scrollContent);
 			//scrollPane.setPreferredSize(new Dimension(300, 250));
 			
-			scrollPane.setBounds(0, 0, screenSize.width-100, screenSize.height-154);
+			//Recalc more then 100 because windows does not calculate the width correctly
+			scrollPane.setBounds(0, 0, screenSize.width-206, screenSize.height-254);
 			
 			scrollPane.setViewportView(scrollContent);
 			
@@ -143,15 +171,21 @@ public class ClientViewerScreen {
 			
 			t.addWindowListener(new WindowAdapter() {
 				public void windowClosing(WindowEvent e) {
-					t.setVisible(false);
-					System.exit(0);
+					try {
+						// TODO Auto-generated method stub
+						ClientTransportMinaPool.closeSession();
+						t.setVisible(false);
+						System.exit(0);
+					} catch (Exception e1) {
+						log.error("[actionPerformed2]",e1);
+					}
 				}
 	
 			});
 			
 			t.pack();
-			t.setLocation(50, 50);
-			t.setSize(screenSize.width-100, screenSize.height-100);
+			t.setLocation(100, 100);
+			t.setSize(screenSize.width-200, screenSize.height-200);
 			t.setVisible(true);
 			t.setResizable(false);
 			
@@ -169,6 +203,10 @@ public class ClientViewerScreen {
 			
 		}
 		
+	}
+	
+	public void showWarningPopUp(String warning){
+		JOptionPane.showMessageDialog(t, warning);
 	}
 	
 	public void showBandwidthWarning(String warning){
@@ -227,17 +265,35 @@ public class ClientViewerScreen {
 //			fos_2.write(bytesOut.toByteArray());
 //			fos_2.close();
 			
-			Image im_left = Toolkit.getDefaultToolkit().createImage(bytesOut.toByteArray());
+//			Image im_left = Toolkit.getDefaultToolkit().createImage(bytesOut.toByteArray());
+//			
+			
+			ByteArrayInputStream in = new ByteArrayInputStream(bytesOut.toByteArray());
+			
+			BufferedImage bufferedImage = ImageIO.read(in);
+			
+			log.debug("Image No: "+clientFrameBean.getSequenceNumber());
+			log.debug("Type of New Image: "+bufferedImage.getType());
 			
 			ImagePanel iPanel = this.getImagePanel(clientFrameBean.getXValue(), clientFrameBean.getYValue(), clientFrameBean.getWidth(), clientFrameBean.getHeight());
 			
+			if (iPanel == null) {
+				return;
+			}
+			
+			iPanel.setSequenceNumber(clientFrameBean.getSequenceNumber());
+			
 			log.debug("PANEL SET IMAGE "+bytesOut.toByteArray().length);
 			
-			iPanel.setImages(im_left);
+			//int s_width = Long.valueOf(Math.round(ClientConnectionBean.imgQuality * clientFrameBean.getWidth())).intValue();
+			//int s_height = Long.valueOf(Math.round(ClientConnectionBean.imgQuality * clientFrameBean.getHeight())).intValue();
+			
+			
+			iPanel.setImages(bufferedImage,clientFrameBean.getWidth(),clientFrameBean.getHeight());
 			
 			
 			
-			contentPane.repaint();
+			//contentPane.repaint();
 			//t.setVisible(true);
 			
 			
@@ -252,10 +308,17 @@ public class ClientViewerScreen {
 			for (ImagePanel iPanel : imageScreens) {
 				
 				if (iPanel.getXPosition() == x && iPanel.getYPosition() == y) {
+					//return null;
 					return iPanel;
 				}
 				
 			}
+			
+//			int s_x = Long.valueOf(Math.round(ClientConnectionBean.imgQuality * x)).intValue();
+//			int s_y = Long.valueOf(Math.round(ClientConnectionBean.imgQuality * y)).intValue();
+//			int s_width = Long.valueOf(Math.round(ClientConnectionBean.imgQuality * width)).intValue();
+//			int s_height = Long.valueOf(Math.round(ClientConnectionBean.imgQuality * height)).intValue();
+			
 			
 			ImagePanel iPanel = new ImagePanel(x,y);
 			iPanel.setBounds(x, y, width, height);
@@ -266,6 +329,33 @@ public class ClientViewerScreen {
 			scrollContent.add(iPanel);
 			
 			imageScreens.add(iPanel);
+			
+			if (y == 0) {
+				if (maxSizeX < (x + width)){
+					maxSizeX = (x + width);
+				}
+			}
+			
+
+			if (x == 0) {
+				if (maxSizeY < (y + height)){
+					maxSizeY = (y + height);
+				}
+			}
+			
+			log.debug("New Size "+maxSizeX+","+maxSizeY);
+			
+			//scrollContent.setPreferredSize(new Dimension(maxSizeX,maxSizeY));
+			//scrollContent.revalidate();
+			//scrollPane.repaint();
+			
+			//t.setSize(maxSizeX+30, maxSizeY+20);
+			
+			//scrollContent.repaint();
+			//scrollPane.updateUI();
+			//scrollPane.invalidate();
+			//scrollPane.repaint();
+			//t.repaint();
 			
 			return iPanel;
 			
@@ -283,7 +373,8 @@ public class ClientViewerScreen {
 		String domain = args[4];
 		String publicSID = args[5];
 		String record = args[6];
-		new ClientViewerScreen(host,port,SID,room,domain,publicSID,record);
+		String labelTexts = args[7];
+		new ClientViewerScreen(host,port,SID,room,domain,publicSID,record,labelTexts);
 	}
 
 	

@@ -1,5 +1,7 @@
 package org.openmeetings.client.beans;
 
+import java.util.Date;
+
 public class ClientConnectionBean {
 	
 	/**Connection Settings**/
@@ -26,13 +28,17 @@ public class ClientConnectionBean {
 	
 	public static int maxPayLoadSize = 952;
 	
+	public static Date startDate;
+	
 	/**Intervall Settings**/
 	
 	public static int intervallSeconds = 1;
 	
-	public static int tileWidth = (512*2) / 3;
-	public static int tileHeight = (512*2) / 3;
-
+	//public static int tileWidth = (512*2) / 3;
+	//public static int tileHeight = (512*2) / 3;
+	public static int tileWidth = 512;
+	public static int tileHeight = 512;
+	
 	
 	public static String quartzScreenJobName = "grabScreen";
 	
@@ -42,9 +48,9 @@ public class ClientConnectionBean {
      *           		0.25 low quality
 	 * **/
 	
-	public static Float imgQuality = new Float(0.80);
+	public static Float imgQuality = new Float(0.68);
 	
-	public static Float imgQualityDefault = new Float(0.70);
+	public static Float imgQualityDefault = new Float(0.6);
 	
 	/**
 	 * current loading to server

@@ -93,13 +93,46 @@ public class ServerSharingSessionList {
 			int tileNumberWidth = Double.valueOf(Math.floor(serverStatusBean.getWidth() / serverStatusBean.getTileWidth())).intValue();
 			int tileNumberHeight = Double.valueOf(Math.floor(serverStatusBean.getHeight() / serverStatusBean.getTileHeight())).intValue();
 			
+			int number = 0;
+			
+			for (int x=0;x<=tileNumberWidth;x++) {
+				
+				for (int y=0;y<=tileNumberHeight;y++) {
+					
+					int rect_x = ( x * serverStatusBean.getTileWidth() );
+					int rect_y = ( y * serverStatusBean.getTileHeight() );
+					
+					log.debug("rect_x,rect_y,tileWidth,tileHeight "+rect_x+","+rect_y+","+serverStatusBean.getTileWidth()+","+serverStatusBean.getTileHeight());
+					
+					int rectWidth = serverStatusBean.getTileWidth();
+					int rectHeight = serverStatusBean.getTileHeight();
+					
+					log.debug("-1- rectWidth,rectHeight"+rectWidth+","+rectHeight);
+					
+					if (rect_x + rectWidth > serverStatusBean.getWidth()) {
+						rectWidth = serverStatusBean.getWidth() - rect_x;
+					}
+					if (rect_y + rectHeight > serverStatusBean.getHeight()) {
+						rectHeight = serverStatusBean.getHeight() - rect_y;
+					}
+					
+					log.debug("-2- rectWidth,rectHeight"+rectWidth+","+rectHeight);
+					
+					if (rectWidth == 0 || rectHeight == 0) {
+						continue;
+					}
+					number++;
+					
+				}
+			}
+			
 			log.debug("tileNumberWidth :: tileNumberHeight "+tileNumberWidth+" :: "+tileNumberHeight);
 			
 			//Reset the Images List to make the Buffer get filled again
 			serverSharingSessionBean.setServerFrameBeans(new LinkedList<ServerFrameBean>());
 			
-			//Don't forget to count the leading 0
-			serverSharingSessionBean.setNumberOfImages((tileNumberWidth+1)*(tileNumberHeight+1));
+			//[[Don't forget to count the leading 0]] outdated comment
+			serverSharingSessionBean.setNumberOfImages(number);
 			serverSharingSessionBean.setSendCompleteFlag(false);
 			
 			sharingSessions.put(serverStatusBean.getPublicSID(), serverSharingSessionBean);
@@ -154,6 +187,7 @@ public class ServerSharingSessionList {
 								serverFrameBeanStored.getYValue().equals(serverFrameBean.getYValue())) {
 							//log.debug("Found Duplicate Before Buffer is NOT full "+serverFrameBeanStored.getXValue()+"||"+serverFrameBeanStored.getYValue());
 							foundDuplicate = true;
+							serverFrameBeanStored.setImageBytesAsJPEG(serverFrameBean.getImageBytesAsJPEG());
 							serverFrameBeanStored.setImageBytes(serverFrameBean.getImageBytes());
 							break;
 						}
@@ -239,6 +273,7 @@ public class ServerSharingSessionList {
 								serverFrameBeanStored.getYValue().equals(serverFrameBean.getYValue())) {
 							//log.debug("Found Duplicate Before Buffer is full");
 							foundDuplicate = true;
+							serverFrameBeanStored.setImageBytesAsJPEG(serverFrameBean.getImageBytesAsJPEG());
 							serverFrameBeanStored.setImageBytes(serverFrameBean.getImageBytes());
 							break;
 						}
@@ -411,7 +446,17 @@ public class ServerSharingSessionList {
 					 * Send Screen to ODSP-Connections
 					 * 
 					 */
-					//ServerSocketMinaProcess.sendCloseMessageToSession(serverFrameBean);
+					ServerStatusBean serverStatusBean = new ServerStatusBean();
+					serverStatusBean.setMode(4);
+					serverStatusBean.setHeight(0);
+					serverStatusBean.setWidth(0);
+					serverStatusBean.setPublicSID(publicSID);
+					serverStatusBean.setSequenceNumber(0);
+					serverStatusBean.setTileHeight(0);
+					serverStatusBean.setTileWidth(0);
+					serverStatusBean.setXValue(0);
+					serverStatusBean.setYValue(0);
+					ServerSocketMinaProcess.sendStatusToSession(serverStatusBean);
 					
 					/* #################################
 					 * Send Screen to trigger HTTP-Connections
@@ -453,7 +498,17 @@ public class ServerSharingSessionList {
 					 * Send Screen to ODSP-Connections
 					 * 
 					 */
-					//ServerSocketMinaProcess.sendCloseMessageToSession(serverFrameBean);
+					ServerStatusBean serverStatusBean = new ServerStatusBean();
+					serverStatusBean.setMode(4);
+					serverStatusBean.setHeight(0);
+					serverStatusBean.setWidth(0);
+					serverStatusBean.setPublicSID(publicSID);
+					serverStatusBean.setSequenceNumber(0);
+					serverStatusBean.setTileHeight(0);
+					serverStatusBean.setTileWidth(0);
+					serverStatusBean.setXValue(0);
+					serverStatusBean.setYValue(0);
+					ServerSocketMinaProcess.sendStatusToSession(serverStatusBean);
 					
 					/* #################################
 					 * Send Screen to trigger HTTP-Connections

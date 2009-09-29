@@ -1,18 +1,19 @@
 package org.openmeetings.client.screen;
 
 import org.apache.log4j.Logger;
-
+import org.openmeetings.screen.codec.CaptureScreenByMode;
+ 
 /**
  * @author sebastianwagner
  *
  */
 public class ClientSentScreen extends Thread {
 	
+	public static int mode = 1;
+	
 	public static boolean threadRunning = false;
 	
 	private static Logger log = Logger.getLogger(ClientSentScreen.class);
-
-	private int modeIndex = 0;
 	
 	@Override
 	public void run() {
@@ -22,16 +23,14 @@ public class ClientSentScreen extends Thread {
 			
 			while (threadRunning) {
 			
-				modeIndex++;
-				
-				new ClientCaptureScreen(modeIndex);
-				
-				if (modeIndex==4) {
-					modeIndex = 0;
+				if (mode == 1) {
+					new ClientCaptureScreen(1);
+				} else if (mode == 2) {
+					new CaptureScreenByMode();
 				}
-				
+
 				//Wait for half 200 milliseconds for the next run
-				ClientSentScreen.sleep(200);
+				ClientSentScreen.sleep(500);
 			
 			}
 			

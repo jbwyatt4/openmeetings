@@ -13,8 +13,8 @@ import java.util.zip.GZIPOutputStream;
 import junit.framework.TestCase;
 
 import org.apache.log4j.Logger;
-import org.apache.tools.bzip2.CBZip2InputStream;
-import org.apache.tools.bzip2.CBZip2OutputStream;
+//import org.apache.tools.bzip2.CBZip2InputStream;
+//import org.apache.tools.bzip2.CBZip2OutputStream;
 import org.openmeetings.client.beans.ClientConnectionBean;
 
 //import com.sun.imageio.plugins.png.
@@ -70,18 +70,18 @@ public class TestPNGZipPackage extends TestCase {
 	    	
 	    	
 	    	//BZip2
-			ByteArrayOutputStream bytebzip2Out = new ByteArrayOutputStream();
-	    	CBZip2OutputStream bZip2Out = new CBZip2OutputStream(bytebzip2Out);
-	    	
-	    	bZip2Out.write(payload);
-	    	bZip2Out.close();
+//			ByteArrayOutputStream bytebzip2Out = new ByteArrayOutputStream();
+//	    	CBZip2OutputStream bZip2Out = new CBZip2OutputStream(bytebzip2Out);
+//	    	
+//	    	bZip2Out.write(payload);
+//	    	bZip2Out.close();
 	    	
 	    	log.debug("byteGzipOut LENGTH "+byteGzipOut.toByteArray().length);
 			log.debug("payload LENGTH "+payload.length);
 			
 			log.debug("JPEG RAW: "+payload.length);
     		log.debug("JPEG GZIP: "+byteGzipOut.toByteArray().length);
-    		log.debug("JPEG BZIP2: "+bytebzip2Out.toByteArray().length);
+//    		log.debug("JPEG BZIP2: "+bytebzip2Out.toByteArray().length);
     		
 			String imagePath_1 = "pic_.jpg";
 			FileOutputStream fos_1 = new FileOutputStream(imagePath_1);

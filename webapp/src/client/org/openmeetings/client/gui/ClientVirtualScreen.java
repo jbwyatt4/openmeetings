@@ -32,7 +32,7 @@ public class ClientVirtualScreen {
 		
 		ClientStartScreen.instance.tFieldScreenZoom = new JLabel();
 		ClientStartScreen.instance.tFieldScreenZoom.setBounds(10, 120, 200, 20);
-		ClientStartScreen.instance.tFieldScreenZoom.setText("Select your screen Area:");
+		ClientStartScreen.instance.tFieldScreenZoom.setText(ClientStartScreen.instance.label734);
 		ClientStartScreen.instance.t.add(ClientStartScreen.instance.tFieldScreenZoom);
 		
 		Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
@@ -72,7 +72,7 @@ public class ClientVirtualScreen {
 		jLab2.setBounds(16, 0, 16, 16);	
 		ClientStartScreen.instance.vScreenIconLeft.add(jLab1);	
 		ClientStartScreen.instance.vScreenIconLeft.add(jLab2);
-		ClientStartScreen.instance.vScreenIconLeft.setToolTipText("Change width");
+		ClientStartScreen.instance.vScreenIconLeft.setToolTipText(ClientStartScreen.instance.label735);
 		ClientVirtualScreenXMouseListener xLeftMouseListener = new ClientVirtualScreenXMouseListener();
 		ClientStartScreen.instance.vScreenIconLeft.addMouseListener(xLeftMouseListener);
 		ClientStartScreen.instance.vScreenIconLeft.addMouseMotionListener(xLeftMouseListener);
@@ -84,7 +84,7 @@ public class ClientVirtualScreen {
 		jLab4.setBounds(16, 0, 16, 16);			
 		ClientStartScreen.instance.vScreenIconRight.add(jLab3);
 		ClientStartScreen.instance.vScreenIconRight.add(jLab4);
-		ClientStartScreen.instance.vScreenIconRight.setToolTipText("Change width");
+		ClientStartScreen.instance.vScreenIconRight.setToolTipText(ClientStartScreen.instance.label735);
 		ClientVirtualScreenWidthMouseListener widthMouseListener = new ClientVirtualScreenWidthMouseListener();
 		ClientStartScreen.instance.vScreenIconRight.addMouseListener(widthMouseListener);
 		ClientStartScreen.instance.vScreenIconRight.addMouseMotionListener(widthMouseListener);
@@ -96,7 +96,7 @@ public class ClientVirtualScreen {
 		jLab6.setBounds(0, 16, 16, 16);			
 		ClientStartScreen.instance.vScreenIconUp.add(jLab5);
 		ClientStartScreen.instance.vScreenIconUp.add(jLab6);
-		ClientStartScreen.instance.vScreenIconUp.setToolTipText("Change height");
+		ClientStartScreen.instance.vScreenIconUp.setToolTipText(ClientStartScreen.instance.label737);
 		ClientVirtualScreenYMouseListener yMouseListener = new ClientVirtualScreenYMouseListener();
 		ClientStartScreen.instance.vScreenIconUp.addMouseListener(yMouseListener);
 		ClientStartScreen.instance.vScreenIconUp.addMouseMotionListener(yMouseListener);
@@ -108,7 +108,7 @@ public class ClientVirtualScreen {
 		jLab8.setBounds(0, 16, 16, 16);			
 		ClientStartScreen.instance.vScreenIconDown.add(jLab7);
 		ClientStartScreen.instance.vScreenIconDown.add(jLab8);
-		ClientStartScreen.instance.vScreenIconDown.setToolTipText("Change height");
+		ClientStartScreen.instance.vScreenIconDown.setToolTipText(ClientStartScreen.instance.label737);
 		ClientVirtualScreenHeightMouseListener heightMouseListener = new ClientVirtualScreenHeightMouseListener();
 		ClientStartScreen.instance.vScreenIconDown.addMouseListener(heightMouseListener);
 		ClientStartScreen.instance.vScreenIconDown.addMouseMotionListener(heightMouseListener);
@@ -142,7 +142,7 @@ public class ClientVirtualScreen {
 		//Spinner X
 		ClientVirtualScreenBean.vScreenSpinnerX = 0;
 		ClientStartScreen.instance.vscreenXLabel = new JLabel();
-		ClientStartScreen.instance.vscreenXLabel.setText("SharingScreen X:");
+		ClientStartScreen.instance.vscreenXLabel.setText(ClientStartScreen.instance.label738);
 		ClientStartScreen.instance.vscreenXLabel.setBounds(250, 170, 150, 24);
 		ClientStartScreen.instance.t.add(ClientStartScreen.instance.vscreenXLabel);
 		
@@ -161,7 +161,7 @@ public class ClientVirtualScreen {
 		//Spinner Y
 		ClientVirtualScreenBean.vScreenSpinnerY = 0;
 		ClientStartScreen.instance.vscreenYLabel = new JLabel();
-		ClientStartScreen.instance.vscreenYLabel.setText("SharingScreen Y:");
+		ClientStartScreen.instance.vscreenYLabel.setText(ClientStartScreen.instance.label739);
 		ClientStartScreen.instance.vscreenYLabel.setBounds(250, 200, 150, 24);
 		ClientStartScreen.instance.t.add(ClientStartScreen.instance.vscreenYLabel);
 		
@@ -180,7 +180,7 @@ public class ClientVirtualScreen {
 		//Spinner Width
 		ClientVirtualScreenBean.vScreenSpinnerWidth = ClientVirtualScreenBean.screenWidthMax;
 		ClientStartScreen.instance.vscreenWidthLabel = new JLabel();
-		ClientStartScreen.instance.vscreenWidthLabel.setText("SharingScreen Width:");
+		ClientStartScreen.instance.vscreenWidthLabel.setText(ClientStartScreen.instance.label740);
 		ClientStartScreen.instance.vscreenWidthLabel.setBounds(250, 240, 150, 24);
 		ClientStartScreen.instance.t.add(ClientStartScreen.instance.vscreenWidthLabel);
 		
@@ -199,7 +199,7 @@ public class ClientVirtualScreen {
 		//Spinner Height
 		ClientVirtualScreenBean.vScreenSpinnerHeight = ClientVirtualScreenBean.screenHeightMax;
 		ClientStartScreen.instance.vscreenHeightLabel = new JLabel();
-		ClientStartScreen.instance.vscreenHeightLabel.setText("SharingScreen Height:");
+		ClientStartScreen.instance.vscreenHeightLabel.setText(ClientStartScreen.instance.label741);
 		ClientStartScreen.instance.vscreenHeightLabel.setBounds(250, 270, 150, 24);
 		ClientStartScreen.instance.t.add(ClientStartScreen.instance.vscreenHeightLabel);
 		

@@ -37,5 +37,6 @@
     	<argument>$DOMAIN</argument> 
     	<argument>$PUBLIC_SID</argument> 
     	<argument>$RECORDER</argument> 
+    	<argument>$LABELSHARER</argument> 
     </application-desc> 
 </jnlp> 

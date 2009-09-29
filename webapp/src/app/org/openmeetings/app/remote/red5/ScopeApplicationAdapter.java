@@ -1683,10 +1683,19 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 							//log.debug("rcl "+rcl+" rcl.getUser_id(): "+rcl.getPublicSID()+" publicSID: "+publicSID+ " IS EQUAL? "+rcl.getPublicSID().equals(publicSID));
 							
 							//Do not send to self and only to registered viewers
-							if (!rcl.getPublicSID().equals(publicSID) && rcl.isViewer()){
-								//log.debug("IS EQUAL ");
-								((IServiceCapableConnection) conn).invoke("newScreenFrame",new Object[] { screenSharingNewFrame }, this);
-								log.debug("sendMessageWithClientByPublicSID RPC:newMessageByRoomAndDomain"+screenSharingNewFrame);
+							if (!rcl.getPublicSID().equals(publicSID)){
+								
+								boolean sharerOnList = false;
+								for (int i=0;i<rcl.getSharerSIDs().size();i++) {
+									sharerOnList = true;
+									break;
+								}
+								
+								if (sharerOnList) {
+									//log.debug("IS EQUAL ");
+									((IServiceCapableConnection) conn).invoke("newScreenFrame",new Object[] { screenSharingNewFrame }, this);
+									log.debug("sendMessageWithClientByPublicSID RPC:newMessageByRoomAndDomain"+screenSharingNewFrame);
+								}
 							}
 						}
 					}
@@ -1751,12 +1760,21 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 		return null;
 	}
 	
-	public void registerViewerSession(boolean register) {
+	public void registerViewerSession(boolean register, String publicSID) {
 		try {
 			IConnection current = Red5.getConnectionLocal();
 			RoomClient currentClient = this.clientListManager.getClientByStreamId(current.getClient().getId());
 			
-			currentClient.setViewer(register);
+			if (register) {
+				//Add User to Session
+				currentClient.getSharerSIDs().add(publicSID);
+			} else {
+				//Remove User from Session
+				currentClient.getSharerSIDs().remove(publicSID);
+				
+			}
+			
+			//currentClient.setViewer(register);
 			
 			this.clientListManager.updateClientByStreamId(current.getClient().getId(), currentClient);
 			
