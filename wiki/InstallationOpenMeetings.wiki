@@ -87,7 +87,7 @@ After Running the Installer all basics are installed. Now login and go to the Me
 
 = Ports, NAT Settings, Customize =
 
-  * Default Ports: 1935 (RTMP), 8088 (RTMP-Over HTTP), 5080 (HTTP) [,8443 (RTMP over SSL), 4445 ([ODSP]) for alternate Port settings have a look at red5/conf/red5.properties. Don't forget that you have also some port settings in the Client, see the red5/webapps/openmeetings/config.xml
+  * Default Ports: 1935 (RTMP), 8088 (RTMP-Over HTTP), 5080 (HTTP), 4445 ([ODSP Desktop Sharing]), 8443 (RTMP over SSL)  for alternate Port settings have a look at red5/conf/red5.properties. Don't forget that you have also some port settings in the Client, see the red5/webapps/openmeetings/config.xml
   * Custom Colors, Default Language, see red5/webapps/openmeetings/config.xml
   * You may be able to run different red5 instances if you bind it to specific ports. 
   * Single Sing On, Integration => Use the Remote Gateway with the SoapMethods
