@@ -16,10 +16,13 @@ import javax.swing.SpinnerNumberModel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import org.apache.log4j.Logger;
 import org.openmeetings.client.beans.ClientVirtualScreenBean;
 import org.openmeetings.client.screen.ClientBlankArea;
 
 public class ClientVirtualScreen {
+	
+	private static Logger log = Logger.getLogger(ClientStartScreen.class);
 	
 	public static ClientVirtualScreen instance = null;
 	
@@ -31,7 +34,7 @@ public class ClientVirtualScreen {
 		instance = this;
 		
 		ClientStartScreen.instance.tFieldScreenZoom = new JLabel();
-		ClientStartScreen.instance.tFieldScreenZoom.setBounds(10, 120, 200, 20);
+		ClientStartScreen.instance.tFieldScreenZoom.setBounds(30, 120, 200, 20);
 		ClientStartScreen.instance.tFieldScreenZoom.setText(ClientStartScreen.instance.label734);
 		ClientStartScreen.instance.t.add(ClientStartScreen.instance.tFieldScreenZoom);
 		
@@ -132,7 +135,7 @@ public class ClientVirtualScreen {
 		
 		Image img = imageScreen.getScaledInstance(width, height ,Image.SCALE_SMOOTH);
 		//imageScreen.
-		System.out.println("img"+img);
+		log.debug("img"+img);
 		ImageIcon image = new ImageIcon(img);
 		
 		ClientStartScreen.instance.blankArea = new JLabel(image);
