@@ -61,7 +61,39 @@
         ]]>
     
     </handler>
+	
+	<handler name="ony">
+		<![CDATA[
+			var bounds = this.getBounds();
+			var parentBounds = canvas.getBounds();
+			if ( bounds.y < 0 )
+			{
+				this.setAttribute('y',0);
+			}
+			
+			if ( bounds.y > ( parentBounds.height - bounds.height ) )
+			{			
+				this.setAttribute('y', parentBounds.height - bounds.height );
+			}
+		]]>
+	</handler>
 
+	<handler name="onx">
+		<![CDATA[
+			var bounds = this.getBounds();
+			var parentBounds = canvas.getBounds();
+			if ( bounds.x < 0 )
+			{
+				this.setAttribute('x',0);
+			}
+			
+			if ( bounds.x > ( parentBounds.width - bounds.width ) )
+			{
+				this.setAttribute('x', parentBounds.width - bounds.width );
+			}
+		]]>
+	</handler>
+	
     <method name="setShadow" args="bool">
         <![CDATA[
         if (this.isinited){
