@@ -12,12 +12,12 @@
     </handler>
     
     <handler name="oninit">
-        this.pressEnter = new LzDelegate(this, "login");
-        lz.Keys.callOnKeyCombo(this.pressEnter, ["enter"]);
         lz.Focus.setFocus(this.username,true);
-	</handler>  
-    
+	</handler>
+
     <method name="login" args="item">
+		canvas.focusOnItem = this.username;
+		
         if (this.b2.visible) {
             this.b2.onclick.sendEvent();
         } else {
@@ -30,8 +30,6 @@
     
     <attribute name="labeliderror" value="0" type="number" />
     
-    <attribute name="pressEnter" value="null" />
-    
     <labelText name="n1" labelid="109" width="200" y="24" resize="false" x="2"/>
         <customEdittext name="username" y="24" x="120" width="170" >
             <handler name="oninit">
@@ -40,7 +38,13 @@
                 var g = t.getData('userdata');
                 if($debug) Debug.write("checkLoginData/g: ",g);
                 if(g!=null) if (g["username"]!=null) this.setAttribute('text',g["username"]);
-            </handler>             
+            </handler>      
+			<handler name="onkeyup" args="key">
+				if ( key == 13 )
+				{
+					parent.login();
+				}
+			</handler>
         </customEdittext>    
 
     <labelText name="n2" labelid="110" width="200" y="54" resize="false" x="2"/>
@@ -51,6 +55,12 @@
                 var g = t.getData('userdata');
                 if(g!=null) if (g["userpass"]!=null) this.setAttribute('text',g["userpass"]);
             </handler>                
+			<handler name="onkeyup" args="key">
+				if ( key == 13 )
+				{
+					parent.login();
+				}
+			</handler>
         </customEdittext>
     
     <labelText name="n3" labelid="111" width="200" y="84" resize="false" x="2"/>  
@@ -73,7 +83,13 @@
                 } else {
             		this.selectItem(String(canvas.thishib.userlang));
             	}
-            </handler>                 
+            </handler>
+			<handler name="onkeyup" args="key">
+				if ( key == 13 )
+				{
+					parent.login();
+				}
+			</handler>
         </resetCombobox>
 
     <labelText name="n5" text="Color-Style" width="200" y="114" resize="false" x="2"/>  
@@ -135,6 +151,12 @@
 					new lz.checkLoginData(canvas.main_content._content.inner);
 				}
 			</handler>
+			<handler name="onkeyup" args="key">
+				if ( key == 13 )
+				{
+					parent.login();
+				}
+			</handler>
         </resetCombobox>	
     
     <labelText name="nlabelquality" text="Quality" y="144" x="2" visible="true" width="140" />     
@@ -158,6 +180,12 @@
             </handler> 
 			<handler name="onselect">
 				canvas.vaquality = this.getValue();
+			</handler>
+			<handler name="onkeyup" args="key">
+				if ( key == 13 )
+				{
+					parent.login();
+				}
 			</handler>
 	    </resetCombobox>
 
@@ -256,6 +284,7 @@
 						hib.currentdomainObj = value.organisation_users[0].organisation;
 						hib.getLanguageByIdAndMax.start = 0;
 						hib.getLanguageByIdAndMax.doCall();
+						canvas.focusOnItem = null;
 						parent.close();
 					} else {
 						parent._savelogindata.setAttribute('visible',false);

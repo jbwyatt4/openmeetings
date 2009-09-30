@@ -100,6 +100,13 @@
 		this.close();
 	</method>
 	
+	<handler name="onclose">
+		if ( canvas.focusOnItem != null )
+		{
+			lz.Focus.setFocus( canvas.focusOnItem, true );
+		}
+	</handler>
+	
     <simpleLabelButton name="_btn" labelid="333" width="120" x="$once{ parent.width-130 }" 
 		y="$once{ parent.height-24 }" onclick="parent.doCallBack();" /> 
 	
@@ -114,6 +121,13 @@
 		this.callBackObject.sendCallBack.sendEvent();
 		this.close();
 	</method>
+	
+	<handler name="onclose">
+		if ( canvas.focusOnItem != null )
+		{
+			lz.Focus.setFocus( canvas.focusOnItem, true );
+		}
+	</handler>
 	
     <simpleLabelButton name="_btn" labelid="333" width="120" x="$once{ parent.width-130 }" 
 		y="$once{ parent.height-24 }" onclick="parent.doCallBack();" /> 

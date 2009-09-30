@@ -289,4 +289,7 @@ and some more references to temp-objects
 
 <attribute name="currentContentView" value="null" />
 
+<!-- item to focus on after rpcErrorDialog has been shown-->
+<attribute name="focusOnItem" value="null"/>
+
 </library>
