@@ -1,15 +1,11 @@
 package org.openmeetings.servlet.outputhandler;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.LinkedHashMap;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import org.openmeetings.app.hibernate.beans.recording.RoomClient;
 import org.openmeetings.app.remote.red5.ClientListManager;
 import org.openmeetings.app.remote.red5.ScopeApplicationAdapter;
@@ -166,31 +162,20 @@ public class RTPMethodServlet extends HttpServlet{
 			//also the HOST, PORT must be set correctly in the RTPScreenSharingSession-Object
 			RoomClient rcl = ClientListManager.getInstance().getClientByPublicSID(publicSID);
 			
-			HashMap<String, Integer> viewers = session.getViewers();
+			/** Notify Clients, that user started streaming -> showing users button for Appletstart */
+			LinkedHashMap<String,Object> hs = new LinkedHashMap<String,Object>();
+			hs.put("message", "startStreaming");
+			//Set the User Object
 			
-			Iterator<String> iter = viewers.keySet().iterator();
+			// Check publicSID
+			String pSid = rcl.getPublicSID();
+			log.debug("RTPMethodServlet : publicSID = " + publicSID);
 			
-			while(iter.hasNext()){
-				String publicSIDofViewer = iter.next();
-				
-				/** Notify Clients, that user started streaming -> showing users button for Appletstart */
-				LinkedHashMap<String,Object> hs = new LinkedHashMap<String,Object>();
-				hs.put("message", "startStreaming");
-				//Set the User Object
-				
-				hs.put("publicSID", publicSIDofViewer);
-				hs.put("room", rcl.getRoom_id());
-				
-				hs.put("rcl", rcl);
-				//Set the Screen Sharing Object
-				hs.put("session", session);
-				
-				ScopeApplicationAdapter.getInstance().sendMessageWithClientByPublicSID(hs, publicSIDofViewer);
-				
-			}
+			hs.put("rcl", rcl);
+			//Set the Screen Sharing Object
+			hs.put("session", session);
 			
-			
-			//ScopeApplicationAdapter.getInstance().sendMessageByRoomAndDomain(Long.valueOf(room).longValue(),hs);
+			ScopeApplicationAdapter.getInstance().sendMessageByRoomAndDomain(Long.valueOf(room).longValue(),hs);
 			
 		} catch(Exception err){
 			log.error("[startStreaming]",err);

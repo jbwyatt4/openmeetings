@@ -16,15 +16,10 @@ import javax.media.rtp.event.NewReceiveStreamEvent;
 import javax.media.rtp.event.ReceiveStreamEvent;
 import javax.media.rtp.event.RemotePayloadChangeEvent;
 import javax.media.rtp.event.SessionEvent;
-
-
 import org.openmeetings.app.hibernate.beans.recording.RoomClient;
-import org.openmeetings.app.remote.red5.ClientListManager;
-import org.openmeetings.servlet.outputhandler.ScreenRequestHandler;
 import org.red5.logging.Red5LoggerFactory;
 import org.slf4j.Logger;
 
-import com.sun.media.protocol.rtp.DataSource;
 
 /**
  * @author sebastianwagner
@@ -58,7 +53,7 @@ public class RTPStreamReceiver implements  ReceiveStreamListener,SessionListener
     
 	
     /**
-	 * 
+	 * @author o.becherer
 	 * @param session
 	 */
 	//----------------------------------------------------------------------
@@ -71,6 +66,7 @@ public class RTPStreamReceiver implements  ReceiveStreamListener,SessionListener
 		basicManager.addReceiveStreamListener(this);
 		basicManager.addSessionListener(this);
 		
+		
 		log.debug("RTPStreamReceiver : Initializing SessionAddress ='" + session.getRed5Host() + "'/" + sessionData.getIncomingRTPPort());
 		SessionAddress localAddr = new SessionAddress( InetAddress.getByName(session.getRed5Host()), sessionData.getIncomingRTPPort());
 		
@@ -78,19 +74,17 @@ public class RTPStreamReceiver implements  ReceiveStreamListener,SessionListener
 		basicManager.initialize(localAddr);
 		
 		// Defining Viewers
-		HashMap<String, Integer> viewers = session.getViewers();
+		HashMap<RoomClient, Integer> viewers = session.getViewers();
 		
-		Iterator<String> iter = viewers.keySet().iterator();
+		Iterator<RoomClient> iter = viewers.keySet().iterator();
 		
 		while(iter.hasNext()){
-			String clientSID = iter.next();
-			RoomClient client = ClientListManager.getInstance().getClientByPublicSID(clientSID);
+			RoomClient client = iter.next();
 			
-			log.debug("Adding Viewer for room " +session.getRoom().getRooms_id() + " : " + client.getUserip() + "/" + viewers.get(clientSID));
+			log.debug("Adding Viewer for room " + client.getRoom_id() + " : " + client.getUserip() + "/" + viewers.get(client));
 			
-			SessionAddress destAddr = new SessionAddress( InetAddress.getByName(client.getUserip()), viewers.get(clientSID));
+			SessionAddress destAddr = new SessionAddress( InetAddress.getByName(client.getUserip()), viewers.get(client));
 			basicManager.addTarget(destAddr);
-			
 		}
 		
 		long then = System.currentTimeMillis();
@@ -121,6 +115,7 @@ public class RTPStreamReceiver implements  ReceiveStreamListener,SessionListener
 	}
 	//----------------------------------------------------------------------
 
+	
 	/* (non-Javadoc)
 	 * @see javax.media.ControllerListener#controllerUpdate(javax.media.ControllerEvent)
 	 */
@@ -182,6 +177,8 @@ public class RTPStreamReceiver implements  ReceiveStreamListener,SessionListener
 	 */
 	//------------------------------------------------------------------------------------------
 	public void addNewViewer(String destinationAddress, int port) throws Exception{
+		
+		//TODO implement new viewers on running session
 		
 		//SessionAddress destAddr = new SessionAddress( InetAddress.getByName(destinationAddress), 22240);
 		//basicManager.addTarget(destAddr);
