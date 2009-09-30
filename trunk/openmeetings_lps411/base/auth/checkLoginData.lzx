@@ -17,6 +17,7 @@
 
     <method name="login" args="item">
 		canvas.focusOnItem = this.username;
+		this.enterPressed = false;
 		
         if (this.b2.visible) {
             this.b2.onclick.sendEvent();
@@ -29,6 +30,7 @@
     <attribute name="childObj" value="null" />
     
     <attribute name="labeliderror" value="0" type="number" />
+	<attribute name="enterPressed" type="boolean" value="false"/>
     
     <labelText name="n1" labelid="109" width="200" y="24" resize="false" x="2"/>
         <customEdittext name="username" y="24" x="120" width="170" >
@@ -40,9 +42,17 @@
                 if(g!=null) if (g["username"]!=null) this.setAttribute('text',g["username"]);
             </handler>      
 			<handler name="onkeyup" args="key">
-				if ( key == 13 )
+				<![CDATA[
+				if ( this.parent.enterPressed && ( key == 13 ) )
 				{
 					parent.login();
+				}
+				]]>
+			</handler>
+			<handler name="onkeydown" args="key">
+				if ( key == 13 )
+				{
+					this.parent.enterPressed = true;
 				}
 			</handler>
         </customEdittext>    
@@ -56,9 +66,17 @@
                 if(g!=null) if (g["userpass"]!=null) this.setAttribute('text',g["userpass"]);
             </handler>                
 			<handler name="onkeyup" args="key">
-				if ( key == 13 )
+				<![CDATA[
+				if ( this.parent.enterPressed && ( key == 13 ) )
 				{
 					parent.login();
+				}
+				]]>
+			</handler>
+			<handler name="onkeydown" args="key">
+				if ( key == 13 )
+				{
+					this.parent.enterPressed = true;
 				}
 			</handler>
         </customEdittext>
@@ -85,9 +103,17 @@
             	}
             </handler>
 			<handler name="onkeyup" args="key">
-				if ( key == 13 )
+				<![CDATA[
+				if ( this.parent.enterPressed && ( key == 13 ) )
 				{
 					parent.login();
+				}
+				]]>
+			</handler>
+			<handler name="onkeydown" args="key">
+				if ( key == 13 )
+				{
+					this.parent.enterPressed = true;
 				}
 			</handler>
         </resetCombobox>
@@ -152,9 +178,17 @@
 				}
 			</handler>
 			<handler name="onkeyup" args="key">
-				if ( key == 13 )
+				<![CDATA[
+				if ( this.parent.enterPressed && ( key == 13 ) )
 				{
 					parent.login();
+				}
+				]]>
+			</handler>
+			<handler name="onkeydown" args="key">
+				if ( key == 13 )
+				{
+					this.parent.enterPressed = true;
 				}
 			</handler>
         </resetCombobox>	
@@ -182,9 +216,17 @@
 				canvas.vaquality = this.getValue();
 			</handler>
 			<handler name="onkeyup" args="key">
-				if ( key == 13 )
+				<![CDATA[
+				if ( this.parent.enterPressed && ( key == 13 ) )
 				{
 					parent.login();
+				}
+				]]>
+			</handler>
+			<handler name="onkeydown" args="key">
+				if ( key == 13 )
+				{
+					this.parent.enterPressed = true;
 				}
 			</handler>
 	    </resetCombobox>
