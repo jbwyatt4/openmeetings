@@ -86,6 +86,9 @@ public class ClientStartScreen {
 			UIManager.getLookAndFeelDefaults().put( "ClassLoader", getClass().getClassLoader()  );
 			
 			
+			ImageIcon start_btn = createImageIcon("/webstart_play.png");
+			ImageIcon stop_btn = createImageIcon("/webstart_stop.png");
+
 			t = new JFrame(this.label730);
 			contentPane = t.getContentPane();
 			contentPane.setBackground(Color.WHITE);
@@ -96,25 +99,26 @@ public class ClientStartScreen {
 			textArea.setText(this.label731);
 			textArea.setBounds(10, 0, 400,24);
 			
-			startButton = new JButton( this.label732 );
+			startButton = new JButton( this.label732, start_btn );
 			startButton.addActionListener( new ActionListener(){
 				public void actionPerformed(ActionEvent arg0) {
 					// TODO Auto-generated method stub
 					captureScreenStart();
 				}
 			});
-			startButton.setBounds(10, 50, 200, 24);
+			startButton.setBounds(30, 34, 200, 32);
 			t.add(startButton);
 			
 			
-			stopButton = new JButton( this.label733 );
+			stopButton = new JButton( this.label733, stop_btn );
+			stopButton.setHorizontalTextPosition(AbstractButton.LEADING);
 			stopButton.addActionListener( new ActionListener(){
 				public void actionPerformed(ActionEvent arg0) {
 					// TODO Auto-generated method stub
 					captureScreenStop();
 				}
 			});
-			stopButton.setBounds(290, 50, 200, 24);
+			stopButton.setBounds(290, 34, 200, 32);
 			stopButton.setEnabled(false);
 			t.add(stopButton);	
 			
@@ -132,14 +136,14 @@ public class ClientStartScreen {
 			contentPane.add(textAreaQualy);
 			textAreaQualy.setText("Quality (%)");
 			textAreaQualy.setBackground(Color.LIGHT_GRAY);
-			textAreaQualy.setBounds(10, 80, 100, 24);	
+			textAreaQualy.setBounds(30, 80, 100, 24);	
 			
 			//add the small screen thumb to the JFrame
 			new ClientVirtualScreen();
 			
 			textWarningArea = new JLabel();
 			contentPane.add(textWarningArea);
-			textWarningArea.setBounds(10, 330, 400,54);
+			textWarningArea.setBounds(30, 330, 400,54);
 			//textWarningArea.setBackground(Color.WHITE);
 			
 			exitButton = new JButton( "exit" );
@@ -184,6 +188,12 @@ public class ClientStartScreen {
 			err.printStackTrace();
 		}
 	}
+	
+	protected static ImageIcon createImageIcon(String path) throws Exception {
+	    java.net.URL imgURL = ClientStartScreen.class.getResource(path);
+	    return new ImageIcon(imgURL);
+	}
+
 	
 	public void showWarningPopUp(String warning){
 		JOptionPane.showMessageDialog(t, warning);
