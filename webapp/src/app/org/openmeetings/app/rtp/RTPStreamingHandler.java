@@ -204,7 +204,7 @@ public class RTPStreamingHandler {
 			
 			Iterator<String> siter = clientsForRoom.keySet().iterator();
 			
-			HashMap<RoomClient, Integer> viewers = new HashMap<RoomClient, Integer>();
+			HashMap<String, Integer> viewers = new HashMap<String, Integer>();
 			
 			while(siter.hasNext()){
 				String key = siter.next();
@@ -212,7 +212,9 @@ public class RTPStreamingHandler {
 				
 				int viewerPort = getNextFreeRTPPort();
 				
-				viewers.put(client, viewerPort);
+				viewers.put(client.getPublicSID(), viewerPort);
+				
+				log.debug("storeSessionForRoom : Adding client with publicSID " + client.getPublicSID() + " and IP " +client.getUserip() +" to viewers with port " + viewerPort);
 				
 			}
 			

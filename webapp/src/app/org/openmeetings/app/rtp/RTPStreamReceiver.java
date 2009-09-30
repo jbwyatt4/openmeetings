@@ -19,6 +19,7 @@ import javax.media.rtp.event.SessionEvent;
 
 
 import org.openmeetings.app.hibernate.beans.recording.RoomClient;
+import org.openmeetings.app.remote.red5.ClientListManager;
 import org.openmeetings.servlet.outputhandler.ScreenRequestHandler;
 import org.red5.logging.Red5LoggerFactory;
 import org.slf4j.Logger;
@@ -70,7 +71,6 @@ public class RTPStreamReceiver implements  ReceiveStreamListener,SessionListener
 		basicManager.addReceiveStreamListener(this);
 		basicManager.addSessionListener(this);
 		
-		
 		log.debug("RTPStreamReceiver : Initializing SessionAddress ='" + session.getRed5Host() + "'/" + sessionData.getIncomingRTPPort());
 		SessionAddress localAddr = new SessionAddress( InetAddress.getByName(session.getRed5Host()), sessionData.getIncomingRTPPort());
 		
@@ -78,17 +78,19 @@ public class RTPStreamReceiver implements  ReceiveStreamListener,SessionListener
 		basicManager.initialize(localAddr);
 		
 		// Defining Viewers
-		HashMap<RoomClient, Integer> viewers = session.getViewers();
+		HashMap<String, Integer> viewers = session.getViewers();
 		
-		Iterator<RoomClient> iter = viewers.keySet().iterator();
+		Iterator<String> iter = viewers.keySet().iterator();
 		
 		while(iter.hasNext()){
-			RoomClient client = iter.next();
+			String clientSID = iter.next();
+			RoomClient client = ClientListManager.getInstance().getClientByPublicSID(clientSID);
 			
-			log.debug("Adding Viewer for room " + client.getRoom_id() + " : " + client.getUserip() + "/" + viewers.get(client));
+			log.debug("Adding Viewer for room " +session.getRoom().getRooms_id() + " : " + client.getUserip() + "/" + viewers.get(clientSID));
 			
-			SessionAddress destAddr = new SessionAddress( InetAddress.getByName(client.getUserip()), viewers.get(client));
+			SessionAddress destAddr = new SessionAddress( InetAddress.getByName(client.getUserip()), viewers.get(clientSID));
 			basicManager.addTarget(destAddr);
+			
 		}
 		
 		long then = System.currentTimeMillis();

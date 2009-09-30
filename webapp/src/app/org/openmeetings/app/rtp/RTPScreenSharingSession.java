@@ -51,7 +51,7 @@ public class RTPScreenSharingSession {
 	private boolean running = false;
 	
 	/** Users, that are consuming the Sharing Stream */
-	private HashMap<RoomClient, Integer> viewers = new HashMap<RoomClient, Integer>();
+	private HashMap<String, Integer> viewers = new HashMap<String, Integer>();
 	
 	/** Thread */
 	private RTPStreamReceiver receiver;
@@ -146,11 +146,11 @@ public class RTPScreenSharingSession {
 		this.running = running;
 	}
 
-	public HashMap<RoomClient, Integer> getViewers() {
+	public HashMap<String, Integer> getViewers() {
 		return viewers;
 	}
 
-	public void setViewers(HashMap<RoomClient, Integer> viewers) {
+	public void setViewers(HashMap<String, Integer> viewers) {
 		this.viewers = viewers;
 	}
 
