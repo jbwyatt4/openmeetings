@@ -143,9 +143,7 @@ public class RTPStreamingHandler {
 		
 		/**
 		 * 
-		 * 4f9a1d5e554a719127577ad1c9ce7cda
-		 * 
-		 * 4f9a1d5e554a719127577ad1c9ce7cda
+		 * @author o.becherer
 		 * 
 		 * Store Session for Room
 		 */
@@ -204,7 +202,7 @@ public class RTPStreamingHandler {
 			
 			Iterator<String> siter = clientsForRoom.keySet().iterator();
 			
-			HashMap<String, Integer> viewers = new HashMap<String, Integer>();
+			HashMap<RoomClient, Integer> viewers = new HashMap<RoomClient, Integer>();
 			
 			while(siter.hasNext()){
 				String key = siter.next();
@@ -212,9 +210,7 @@ public class RTPStreamingHandler {
 				
 				int viewerPort = getNextFreeRTPPort();
 				
-				viewers.put(client.getPublicSID(), viewerPort);
-				
-				log.debug("storeSessionForRoom : Adding client with publicSID " + client.getPublicSID() + " and IP " +client.getUserip() +" to viewers with port " + viewerPort);
+				viewers.put(client, viewerPort);
 				
 			}
 			
@@ -234,7 +230,7 @@ public class RTPStreamingHandler {
 			
 		}
 		//---------------------------------------------------------------------------------------------
-		
+			
 		
 		
 		/**

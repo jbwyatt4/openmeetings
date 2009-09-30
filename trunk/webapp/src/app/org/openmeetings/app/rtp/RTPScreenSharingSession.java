@@ -1,15 +1,9 @@
 package org.openmeetings.app.rtp;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-
 import org.openmeetings.app.hibernate.beans.recording.RoomClient;
 import org.openmeetings.app.hibernate.beans.rooms.Rooms;
 import org.openmeetings.app.hibernate.beans.user.Users;
-
-import com.sun.org.apache.bcel.internal.generic.NEW;
-
 /**
  * represents a ScreenSharingSession within Conference
  * @author o.becherer
@@ -51,7 +45,7 @@ public class RTPScreenSharingSession {
 	private boolean running = false;
 	
 	/** Users, that are consuming the Sharing Stream */
-	private HashMap<String, Integer> viewers = new HashMap<String, Integer>();
+	private HashMap<RoomClient, Integer> viewers = new HashMap<RoomClient, Integer>();
 	
 	/** Thread */
 	private RTPStreamReceiver receiver;
@@ -146,11 +140,11 @@ public class RTPScreenSharingSession {
 		this.running = running;
 	}
 
-	public HashMap<String, Integer> getViewers() {
+	public HashMap<RoomClient, Integer> getViewers() {
 		return viewers;
 	}
 
-	public void setViewers(HashMap<String, Integer> viewers) {
+	public void setViewers(HashMap<RoomClient, Integer> viewers) {
 		this.viewers = viewers;
 	}
 
