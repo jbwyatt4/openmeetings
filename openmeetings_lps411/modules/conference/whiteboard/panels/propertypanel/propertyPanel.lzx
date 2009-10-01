@@ -67,6 +67,7 @@
 		} else if (drawArea.drawmodus == 'letter') {
 			this._content.lineColorChoose.setSelectedColor(drawArea.currentlayerletter);
 			this._content.fillColorChoose.setEnabled(false);
+			if ($debug) Debug.write("drawArea.currentlayersize ",drawArea.currentlayersize);
 			this._content.changeWidthSlider.setSliderValue(drawArea.currentlayersize);
 			this._content.changeOpacitySlider.setEnabled(false);
 			this._content._italic.setValue(canvas._drawarea.italic);

@@ -25,7 +25,9 @@
     
     <method name="setSliderValue" args="v">
     	this.initialNumber = v;
+    	this.numericValue.setAttribute('tempValue',this.initialNumber);
     	this.numericValue.setAttribute('text',this.initialNumber);
+    	if ($debug) Debug.write("setSliderValue ",v);
     	this.setEnabled(true);
     </method>
 
