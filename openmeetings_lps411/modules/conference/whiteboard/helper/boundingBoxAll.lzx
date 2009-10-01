@@ -97,6 +97,23 @@
 		]]>
 	</handler>
 	
+	<!--
+	   Do update the Selection-Box, in case another Moderator or User has moved the Object
+	   while you have it in focus
+	 -->
+    <method name="sendRemoteUpdate" args="obj">
+        <![CDATA[
+           
+           if (this.objRef.name == obj.name) {
+           	   
+           	    this.resetValues();
+           	
+           }
+        
+        ]]>
+    </method>
+    
+	
 	<method name="resetValues">
 		this.ex = this.objRef.x;
 		this.ey = this.objRef.y;
