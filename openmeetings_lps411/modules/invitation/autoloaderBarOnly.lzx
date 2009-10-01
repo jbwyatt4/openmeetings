@@ -35,7 +35,7 @@
         <netparam><method name="getValue">return parent.step;</method></netparam> 
         <handler name="ondata" args="value">
         	<![CDATA[
-        		if ($debug) Debug.write("getLanguageByIdAndMax: ",value);
+        		//if ($debug) Debug.write("getLanguageByIdAndMax: ",value);
         		setLabelObjectByHundred(this.start,value);
 	            //The onResult-Handler will be called be the rtmpconnection
 	            if (this.start <= max){
@@ -98,9 +98,9 @@
             clearStageContent();		
             parent.close();
 			if (canvas.thishib.currentInvitation.room.roomtype.roomtypes_id==1){
-				new lz.conferenceView(canvas.main_content._content.inner,{roomobj:canvas.thishib.currentInvitation.room}); 
+				new lz[canvas.conferenceRoomModule](canvas.main_content._content.inner,{roomobj:canvas.thishib.currentInvitation.room}); 
 			} else {
-				new lz.audienceView(canvas.main_content._content.inner,{roomobj:canvas.thishib.currentInvitation.room}); 
+				new lz[canvas.eventRoomModule](canvas.main_content._content.inner,{roomobj:canvas.thishib.currentInvitation.room}); 
 			}                 
         </handler>  
     </netRemoteCallHib>     
