@@ -330,11 +330,22 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 								
 								RoomClient rcl = this.clientListManager.getClientByStreamId(cons.getClient().getId());
 								
+								/*
+								 * Check if the Client does still exist on the list
+								 */
 								if (rcl != null) {
-									if (currentClient.getStreamid().equals(rcl.getStreamid())){
+									
+									/*
+									 * Do not send back to sender, but actually all other clients should receive this message
+									 * swagner  01.10.2009
+									 */
+									if (!currentClient.getStreamid().equals(rcl.getStreamid())){
+										
+										
 										//Send to all connected users	
 										((IServiceCapableConnection) cons).invoke("roomDisconnect",new Object[] { currentClient }, this);
 										log.debug("sending roomDisconnect to " + cons);
+										
 										//add Notification if another user is recording
 										log.debug("###########[roomLeave]");
 										if (rcl.getIsRecording()){
@@ -342,6 +353,7 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 											StreamService.addRoomClientEnterEventFunc(rcl, rcl.getRoomRecordingName(), rcl.getUserip(), false);
 											StreamService.stopRecordingShowForClient(cons, currentClient, rcl.getRoomRecordingName(), false);
 										}
+										
 									}
 								} else {
 									log.debug("For this StreamId: "+cons.getClient().getId()+" There is no Client in the List anymore");
