@@ -31,7 +31,7 @@
 		</method>
 		
 		<method name="checkPWD">
-			parent.checkInvitationPass.doCall();
+			this.checkInvitationPass.doCall();
 		</method>
 		
 		<netRemoteCallHib name="getRoomClients" funcname="getRoomClients" 
