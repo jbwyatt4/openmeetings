@@ -630,7 +630,7 @@
         <netRemoteCallHib name="roomDisconnect" funcname="roomDisconnect">
             <handler name="ondata" args="value">
                 //The onResult-Handler will be called be the rtmpconnection
-                //Debug.write("roomDisconnect: ",value);
+                if ($debug) Debug.write("roomDisconnect: ",value);
                 if (canvas._overallchatcontent!=null){
                 	var parentObj = canvas._overallchatcontent.parent.parent.parent._chatparticipants;
                 	parentObj.removeItemById(value.user_id);

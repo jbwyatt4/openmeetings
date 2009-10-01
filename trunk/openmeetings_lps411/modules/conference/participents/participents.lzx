@@ -728,7 +728,7 @@
      -->
     <method name="disconnectclient" args="publicSID">
         <![CDATA[
-            //if ($debug) Debug.write("disconnectclient: ",publicSID);
+            if ($debug) Debug.write("disconnectclient: ",publicSID);
             
             canvas._mymod.currentModerators.removeItem(publicSID);
             canvas._mymod.currentModerators.clearSelection();
@@ -738,6 +738,9 @@
             var objList = this._participents.getVideoObjectByPublicSID(publicSID);
             
             //if ($debug) Debug.write("disconnectclient obj: ",obj);
+            if (obj == null) {
+            	if ($debug) Debug.warn("Could Not find CLient To disconnect",publicSID);
+            }
             
             if (obj != null){
                 obj.resetValues();
