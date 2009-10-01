@@ -5,6 +5,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<title>OpenMeetings</title>
+	<link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
 	<script type="text/javascript" src="swfobject.js"></script>
 	<style type="text/css">
 		
