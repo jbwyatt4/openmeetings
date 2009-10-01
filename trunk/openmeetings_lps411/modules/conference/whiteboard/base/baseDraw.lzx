@@ -680,13 +680,24 @@
 			var obj = this.getObjectByName(lastactionObject[lastactionObject.length-1]);
 			obj.destroy();
 		} else if(action=='size'){
+			
 			var lastactionObject = actionObject;	
 			var obj = this.getObjectByName(lastactionObject[lastactionObject.length-1]);
-			//if ($debug) Debug.write("Set Size for Object ",obj);
+			
+			if ($debug) Debug.write("Set Size for Object ",obj);
 			obj.setAttribute('x',lastactionObject[lastactionObject.length-5]);
 			obj.setAttribute('y',lastactionObject[lastactionObject.length-4]);
 			obj.setAttribute('width',lastactionObject[lastactionObject.length-3]);
 			obj.setAttribute('height',lastactionObject[lastactionObject.length-2]);
+			
+			this.updateBaseObjectByName(lastactionObject[lastactionObject.length-1],
+			                         lastactionObject[lastactionObject.length-5],
+			                         lastactionObject[lastactionObject.length-4],
+			                         lastactionObject[lastactionObject.length-3],
+			                         lastactionObject[lastactionObject.length-2]);
+			                         
+			//if ($debug) Debug.write("BaseObject List ?? ",this.baseactionobjectList);
+			
 		} else if (action=="loadwml"){
 			//Debug.write(actionObject,actionObject["wmlfileName"],actionObject["wmlroom"],actionObject["wmldomain"]);
 			this.remoteWmlLoader(actionObject["wmlfileName"],actionObject["wmlroom"],actionObject["wmldomain"]);
@@ -708,6 +719,28 @@
 		]]>
 	</method>
 	
+	
+	<method name="updateBaseObjectByName" args="tName,x,y,width,height">
+		<![CDATA[
+		
+		    
+		
+            for (var i=0;i<this.baseactionobjectList.length;i++) {
+            	
+            	if (this.baseactionobjectList[i][this.baseactionobjectList[i].length-1] == tName) {
+            		this.baseactionobjectList[i][this.baseactionobjectList[i].length-5] = x;
+            		this.baseactionobjectList[i][this.baseactionobjectList[i].length-4] = y;
+            		this.baseactionobjectList[i][this.baseactionobjectList[i].length-3] = width;
+            		this.baseactionobjectList[i][this.baseactionobjectList[i].length-2] = height;
+            		return;
+            	}
+            	
+            }
+		    
+            
+            if ($debug) Debug.warn("Could Not Find Item on List ",tName);
+		]]>
+	</method>
 	
 	<method name="sendRecordedObject" args="action,actionObject,isWmlLoader">
 		//Debug.write("sendWatchObject: ",action,actionObject);
