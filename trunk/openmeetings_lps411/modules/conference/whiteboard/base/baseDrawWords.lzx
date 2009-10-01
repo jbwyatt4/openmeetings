@@ -6,15 +6,19 @@
 
 	<attribute name="startAdjustHight" value="false" type="boolean" />
 	
+	<attribute name="setFocusOnInit" value="true" type="boolean" />
+	
 	<handler name="oninit">
-		lz.Focus.setFocus(this);	
+		if (this.setFocusOnInit) {
+		    lz.Focus.setFocus(this);	
+		}
 	</handler>
 	<handler name="ontext">
 	<![CDATA[
 		var gh = this.getTextHeight();
 		if (gh>20) {
 			if (gh+this.fontsize > this.height){
-				this.setHeight(gh+this.fontsize);
+				this.setAttribute("height",(gh+this.fontsize));
 			}
 		}
 	]]>
@@ -102,19 +106,25 @@
     </handler>
   
 	<method name="callNew" args="txxt">
-		//Debug.write("callNew height-2");
+		//if ($debug) Debug.write("callNew height-2 ");
+		
         var h = this.getHeight();
+        
+        //if ($debug) Debug.write("callNew height-3 ",this);
+        //if ($debug) Debug.write("callNew height-4 ",this.getHeight());
+        
 		this._textview._textview.destroy();
 		var t = new lz.styleableInput(this._textview,{
+			        setFocusOnInit:false,
                     name:'_textview',text:txxt,
                     fontstyle:this.refObj.currentlayerstyle,
                     fontsize:this.refObj.currentlayersize,
                     fgcolor:this.refObj.currentlayerletter
                 });
-        this.setHeight(h);
+        this.setAttribute("height",h);
 	</method>
 	<method name="adjustHeight">
-		////Debug.write("+++ adjustHeight +++");
+		if ($debug) Debug.write("+++ adjustHeight +++");
 		this.setAttribute('height',this._textview._textview.height+2);
 	</method>
     
