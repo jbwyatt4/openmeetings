@@ -698,6 +698,10 @@
 			                         
 			//if ($debug) Debug.write("BaseObject List ?? ",this.baseactionobjectList);
 			
+            if (this.boundingIsActive) {
+            	this.boundingref.sendRemoteUpdate(obj)
+            }
+			                         
 		} else if (action=="loadwml"){
 			//Debug.write(actionObject,actionObject["wmlfileName"],actionObject["wmlroom"],actionObject["wmldomain"]);
 			this.remoteWmlLoader(actionObject["wmlfileName"],actionObject["wmlroom"],actionObject["wmldomain"]);
