@@ -27,8 +27,6 @@
 		 
 		<handler name="oninit">
 			<![CDATA[
-                lz.Focus.setFocus(this.browser.navigation.url,true);
-            
                 var os = lz.Browser.getOS();
                 
                 //We have to detect Firefox, unfortunately it does not work for
@@ -60,6 +58,12 @@
                 
                 }
                 
+                if (canvas.ismoderator) {
+                	
+                    this._navigation._inner._showBar.doStart();
+                    
+                }
+                
             ]]>
         </handler>
         
@@ -80,67 +84,93 @@
         	if ($debug) Debug.write("Broadcast to all members");
         </handler>
         
+        <handler name="onismoderator" reference="canvas" args="m">
+            if ($debug) Debug.write("###### ismoderator ",m);
+            <![CDATA[
+                //this.isMod = canvas.getIsModeratorByPublicSID(this.refObj.publicSID);
+                if (m) {
+                    this._navigation._inner._showBar.doStart();
+                } else {
+                	this._navigation._inner.setAttribute("y",-40);
+                }
+                //throw a onx/y event to 
+                this.setAttribute("y",this.y);
+            ]]>
+        </handler>
+        
         <!--
             Broadcast Message to all user
          -->
+        <view name="_navigation" clip="true" y="22" height="38" width="${ parent.width }" >
+    		<view name="_inner" y="-40">
+    			
+    			<animator name="_showBar" attribute="y" to="0" duration="750" start="false">
+    				<handler name="onstop">
+    					lz.Focus.setFocus(parent.browser.navigation.url,true);
+    				</handler>
+    			</animator>
+    			
+        		<view name="browser" height="28" bgcolor="0xEEEEEE" x="1">
+        			
+        			<view name="navigation" layout="axis:x;spacing:1;inset:1">
+        				
+        				<browserButton resource="./resources/pre.png" y="2">
+        					
+        				</browserButton>
+        				
+        				<browserButton resource="./resources/next.png" y="2">
+                            
+                        </browserButton>
+                        
+                        <browserButton resource="./resources/refresh.png" y="2">
+                            
+                        </browserButton>
+                        
+                        <browserButton resource="./resources/home.png" y="2">
+                            
+                        </browserButton>
+                        
+        				<edittext name="url" width="${classroot.width- (5*22) - 8}"> 
+        					<handler name="onkeyup" args="key">
+        						if ((key == 27) || (key == 13)) {
+        							this.parent.readStart.onclick.sendEvent();
+        						}
+        					</handler>
+        				</edittext>
+        				
+        				<browserButton name="readStart" resource="./resources/run.png" 
+        							    y="2">
+        					<handler name="onclick">
+            					<![CDATA[
+            						var url = parent.url.getText();
+            						if ((url.indexOf("http://") < 0)
+            								&& (url.indexOf("https://") < 0)) {
+            							url = "http://" + url;
+            						}
             
-		<view name="browser" y="22" height="28" bgcolor="0xEEEEEE" x="1">
-			
-			<view name="navigation" layout="axis:x;spacing:1;inset:1">
-				
-				<browserButton resource="./resources/pre.png" y="2">
-					
-				</browserButton>
-				
-				<browserButton resource="./resources/next.png" y="2">
-                    
-                </browserButton>
-                
-                <browserButton resource="./resources/refresh.png" y="2">
-                    
-                </browserButton>
-                
-                <browserButton resource="./resources/home.png" y="2">
-                    
-                </browserButton>
-                
-				<edittext name="url" width="${classroot.width- (5*22) - 9}"> 
-					<handler name="onkeyup" args="key">
-						if ((key == 27) || (key == 13)) {
-							this.parent.readStart.onclick.sendEvent();
-						}
-					</handler>
-				</edittext>
-				
-				<browserButton name="readStart" resource="./resources/run.png" 
-							    y="2">
-					<handler name="onclick">
-    					<![CDATA[
-    						var url = parent.url.getText();
-    						if ((url.indexOf("http://") < 0)
-    								&& (url.indexOf("https://") < 0)) {
-    							url = "http://" + url;
-    						}
-    
-    						parent.parent.parent.htmlviewer.setAttribute("src",url);
-    						parent.parent.parent.htmlviewer.setAttribute("visible",true);
-    
-    						parent.url.setAttribute('text', url);
-    					]]>
-					</handler>
-				</browserButton> 
-				
-			</view>
-		</view>
-		
-		<view x="1" resource="./resources/browser_sub_cit.swf" width="${ parent.width-2 }" 
-			  stretches="width" y="50"></view>
-
+            						parent.parent.parent.parent.parent.htmlviewer.setAttribute("src",url);
+            						parent.parent.parent.parent.parent.htmlviewer.setAttribute("visible",true);
+            
+            						parent.url.setAttribute('text', url);
+            					]]>
+        					</handler>
+        				</browserButton> 
+        				
+        			</view>
+        			
+        			<view x="0" resource="./resources/browser_sub_cit.swf" 
+        				  width="${ parent.parent.parent.parent.width-2 }" stretches="width" y="28" />
+        			
+        		</view>
+        		
+            </view>
+        </view>
+        
 		<handler name="onclose">
 			this.htmlviewer.setVisible(false);
 		</handler>		
 		
-		<html name="htmlviewer" x="4" y="60" width="${ parent.width-8 }" height="${parent.height - 90 }" >
+		<html name="htmlviewer" x="4" y="${ (canvas.ismoderator) ? 60 : 22 }" width="${ parent.width-8 }" height="${ (canvas.ismoderator) ? (parent.height - 90) : (parent.height-52) }" >
 			<handler name="onloading" args="loading">
 				this.loading = loading;
 				if ($debug) Debug.write("LOADING ",loading);
