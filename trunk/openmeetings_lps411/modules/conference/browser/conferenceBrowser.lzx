@@ -26,8 +26,55 @@
 		   x="$once{ parent.width/2 - this.width/2 }" closable="true" resizeable="true">
 		 
 		<handler name="oninit">
-            lz.Focus.setFocus(this.browser.navigation.url,true);
+			<![CDATA[
+                lz.Focus.setFocus(this.browser.navigation.url,true);
+            
+                var os = lz.Browser.getOS();
+                
+                //We have to detect Firefox, unfortunately it does not work for
+                //Windows with Firefox see: http://jira.openlaszlo.org/jira/browse/LPP-8525
+                
+                if ($debug) Debug.write("os ::",os.indexOf('Win'),os);
+                
+                //To test this you have to run the application with the index.jsp wrapper that
+                //contains the browser-detection code
+                if (os.indexOf("Win") >= 0) {
+                
+                    if ($debug) Debug.write("os :: version isWindows check for Firefox Bug ",os,version);
+                    var t = this;
+                    
+                    function callback(returnValue) {
+                    	
+                    	if ($debug) Debug.write("callback ",returnValue);
+                    	
+                    	if (returnValue.indexOf("Firefox") >= 0) {
+                        	//We have to use parent in this context because it is called as
+                            //callback Object
+                            t.setAttribute("y",160);
+                            
+                            new lz.labelerrorPopup(canvas,{y:0,errorlabelid:750});
+                    	}
+                    }
+                    
+                    lz.Browser.callJS("getBrowserInfo",callback);
+                
+                }
+                
+            ]]>
         </handler>
+        
+        <method name="callback" args="t">
+        	<![CDATA[
+                if ($debug) Debug.write("callback ",t);
+        	   
+                if (t.indexOf("Firefox") >= 0) {
+        	   	
+                	
+                
+                }
+        	
+        	]]>
+        </method>
         
         <handler name="onclose">
         	if ($debug) Debug.write("Broadcast to all members");
