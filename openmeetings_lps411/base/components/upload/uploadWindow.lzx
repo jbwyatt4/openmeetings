@@ -132,7 +132,7 @@
     <labelText labelid="592" name="progress2" visible="false" x="10" y="140" 
     		   width="250" multiline="true" />
     		   
-	<view name="progressBar" x="10" y="126" width="250" visible="false" height="10" bgcolor="#C6CEDF">
+	<view name="progressBar" x="10" y="138" width="250" visible="false" height="10" bgcolor="#C6CEDF">
 		<view x="1" y="1" width="248" height="8" bgcolor="#FFFFFF"/>
 		<view name="status" x="1" y="1" height="8" bgcolor="#D6DEEF"/>
 		<method name="setValue" args="value">
