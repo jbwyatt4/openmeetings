@@ -25,6 +25,13 @@
 	<class name="conferenceBrowser" extends="labelExplorerBox" labelid="749" 
 		   x="$once{ parent.width/2 - this.width/2 }" closable="true" resizeable="true">
 		 
+		<!--
+		      this attribute is true if the user has opened the browser on its own
+		      if the browser is opened by a Remote-Call, the user will get the Web-Site 
+		      notifications from the Moderator(s)
+		 -->
+		<attribute name="initedByUser" value="true" type="boolean" /> 
+		 
 		<handler name="oninit">
 			<![CDATA[
                 var os = lz.Browser.getOS();
@@ -64,21 +71,13 @@
                     
                 }
                 
+                //see attribute definition for docs
+                if (this.initedByUser) {
+                	
+                }
+                
             ]]>
         </handler>
-        
-        <method name="callback" args="t">
-        	<![CDATA[
-                if ($debug) Debug.write("callback ",t);
-        	   
-                if (t.indexOf("Firefox") >= 0) {
-        	   	
-                	
-                
-                }
-        	
-        	]]>
-        </method>
         
         <handler name="onclose">
         	if ($debug) Debug.write("Broadcast to all members");
@@ -115,19 +114,31 @@
         			<view name="navigation" layout="axis:x;spacing:1;inset:1">
         				
         				<browserButton resource="./resources/pre.png" y="2">
-        					
+        					<handler name="onclick">
+        						if ($debug) Debug.write("PRE");
+        					</handler>
+        					<labelTooltip labelid="751" />
         				</browserButton>
         				
         				<browserButton resource="./resources/next.png" y="2">
-                            
+                            <handler name="onclick">
+                                if ($debug) Debug.write("NEXT");
+                            </handler>
+                            <labelTooltip labelid="752" />
                         </browserButton>
                         
                         <browserButton resource="./resources/refresh.png" y="2">
-                            
+                            <handler name="onclick">
+                                if ($debug) Debug.write("RELOAD");
+                            </handler>
+                            <labelTooltip labelid="753" />
                         </browserButton>
                         
                         <browserButton resource="./resources/home.png" y="2">
-                            
+                            <handler name="onclick">
+                                if ($debug) Debug.write("HOME");
+                            </handler>
+                            <labelTooltip labelid="754" />
                         </browserButton>
                         
         				<edittext name="url" width="${classroot.width- (5*22) - 8}"> 
