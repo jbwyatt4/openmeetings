@@ -16,7 +16,7 @@
 	<include href="extensions/html.lzx"/>
      -->
      
-	<class name="conferenceBrowser" extends="labelExplorerBox" labelid="720" 
+	<class name="conferenceBrowser" extends="labelExplorerBox" labelid="749" 
 		   x="$once{ parent.width/2 - this.width/2 }" closable="true" resizeable="true">
 		 
 		<handler name="oninit">
@@ -65,7 +65,7 @@
 			this.htmlviewer.setVisible(false);
 		</handler>		
 		
-		<html name="htmlviewer" x="24" y="60" width="${ parent.width + 60 }" height="${parent.height - 30}" >
+		<html name="htmlviewer" x="4" y="60" width="${ parent.width-8 }" height="${parent.height - 90 }" >
 			<handler name="onloading" args="loading">
 				this.loading = loading;
 				if ($debug) Debug.write("LOADING ",loading);
