@@ -113,16 +113,15 @@ public class RTPStreamingHandler {
 			log.debug("rtpSessions NUMBER OF OPEN SESSIONS: "+rtpSessions.size());
 			
 			if (rtpSessions.size() == 0) {
-				throw new Exception("no RTPSession - SIZE IS NULL " + publicSID);
+				throw new Exception("no RTPSession - SIZE IS NULL " );
 			}
 			
 			for(Iterator<Rooms> miter = rtpSessions.keySet().iterator();miter.hasNext();){
 				
 				RTPScreenSharingSession session = rtpSessions.get(miter.next());
 				
-				log.debug("session. publicSID :: "+session.getPublicSID() + " :: SEARCH " + publicSID);
-				
-				if(session.getPublicSID().equals(publicSID)){
+								
+				if(session.getRoom().getRooms_id().intValue() == myRoom.getRooms_id().intValue()){
 					
 					//session = rtpSessions.get(rooms);
 					
@@ -134,7 +133,7 @@ public class RTPStreamingHandler {
 			//if(session == null)
 			
 			//This should not happen at all
-			throw new Exception("no RTPSession for PublicSID " + publicSID);
+			throw new Exception("no RTPSession for Room " + room);
 			
 			
 		}
@@ -202,7 +201,7 @@ public class RTPStreamingHandler {
 			
 			Iterator<String> siter = clientsForRoom.keySet().iterator();
 			
-			HashMap<RoomClient, Integer> viewers = new HashMap<RoomClient, Integer>();
+			HashMap<String, Integer> viewers = new HashMap<String, Integer>();
 			
 			while(siter.hasNext()){
 				String key = siter.next();
@@ -210,7 +209,9 @@ public class RTPStreamingHandler {
 				
 				int viewerPort = getNextFreeRTPPort();
 				
-				viewers.put(client, viewerPort);
+				log.debug("Adding viewer : " + client.getPublicSID() + " - " + viewerPort);
+				
+				viewers.put(client.getPublicSID(), viewerPort);
 				
 			}
 			

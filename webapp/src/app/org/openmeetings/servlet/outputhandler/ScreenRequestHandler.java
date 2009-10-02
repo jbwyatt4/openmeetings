@@ -215,13 +215,16 @@ public class ScreenRequestHandler extends VelocityViewServlet {
 				Fieldlanguagesvalues fValue741 = Fieldmanagment.getInstance().getFieldByIdAndLanguage(741L, language_id);
 				Fieldlanguagesvalues fValue742 = Fieldmanagment.getInstance().getFieldByIdAndLanguage(742L, language_id);
 				
+				String label_viewer = "Viewer";
+				String label_sharer = "Sharer";
 				
-				String label_viewer = fValue728.getValue()+";"+
+				try{
+				 label_viewer = fValue728.getValue()+";"+
 										fValue729.getValue()+";"+
 										fValue736.getValue()+";"+
 										fValue742.getValue();
 				
-				String label_sharer = fValue730.getValue()+";"+ //0
+				 label_sharer = fValue730.getValue()+";"+ //0
 										fValue731.getValue()+";"+ //1
 										fValue732.getValue()+";"+ //2
 										fValue733.getValue()+";"+ //3
@@ -234,6 +237,10 @@ public class ScreenRequestHandler extends VelocityViewServlet {
 										fValue741.getValue()+";"+ //10
 										fValue742.getValue()+";" //11
 										;
+				
+				}catch(Exception e){
+					log.error("Error resolving Language labels : " + e.getMessage());
+				}
 				
 				ctx.put("LABELVIEWER", label_viewer);
 				ctx.put("LABELSHARER", label_sharer);

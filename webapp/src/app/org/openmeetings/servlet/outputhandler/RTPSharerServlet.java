@@ -29,6 +29,9 @@ import org.slf4j.Logger;
  * 
  * @author o.becherer
  *
+ * This servlet should be called from a conference participant who has been notified of an existing
+ * RTP Screensharing session
+ * The servlet should return a velocity template to start the RTPPlayer Applet
  */
 public class RTPSharerServlet extends VelocityViewServlet{
 	
@@ -86,21 +89,45 @@ public class RTPSharerServlet extends VelocityViewServlet{
 				log.debug("Trying to connect on Stream (origin : " + rsss.getSharingIpAddress() + ")");
 				
 				// Defining Port for Viewer...
-				HashMap<RoomClient, Integer> preDefindedUsers = rsss.getViewers();
+				HashMap<String, Integer> preDefindedUsers = rsss.getViewers();
 				
 				if(preDefindedUsers.size() < 1)
 					throw new Exception("No predefined viewers available in RTPSharingSession!!");
 				
-				Iterator<RoomClient> citer = preDefindedUsers.keySet().iterator();
+				Iterator<String> citer = preDefindedUsers.keySet().iterator();
+
 				
 				Integer myPort = null;
 				
-				while(citer.hasNext()){
-					RoomClient myClient = citer.next();
-					Integer port = preDefindedUsers.get(myClient);
+				
+				log.debug("Trying to resolve publicSID for sharerApplet : " + publicSID);
+				
+				log.debug("Dumping Viewers MAP : ");
+				log.debug("-------------------------------------");
+				
+				Iterator<String> testiter = preDefindedUsers.keySet().iterator();
+				
+				while(testiter.hasNext()){
+					String clientPublicSid = testiter.next();
+					Integer port = preDefindedUsers.get(clientPublicSid);
 					
-					if(myClient.getPublicSID().equals(publicSID)){
+					log.debug("Viewer : " + clientPublicSid + " : " + port);
+					
+				}
+				
+				log.debug("-------------------------------------");
+				
+				while(citer.hasNext()){
+					String myClientSID = citer.next();
+					Integer port = preDefindedUsers.get(myClientSID);
+					
+					log.debug("Trying Client with publicSID " + myClientSID);
+					
+					if(myClientSID.equals(publicSID)){
+						log.debug("HIT!!!");
 						myPort = port;
+						
+						break;
 					}
 				}
 				
@@ -111,22 +138,21 @@ public class RTPSharerServlet extends VelocityViewServlet{
 					throw new Exception("Predefindes Viewer List does not contain publicSID(" + publicSID +") !");
 				
 				
-				int port = myPort;
-				
 				ctx.put("HOST", InetAddress.getLocalHost().getHostAddress());
-				ctx.put("PORT", port);
+				ctx.put("PORT", myPort);
 				ctx.put("HEIGHT", rsss.getStreamHeight());
 				ctx.put("WIDTH", rsss.getStreamWidth());
 				
 				log.debug("Put Variables to Velocity context : HOST=" + ctx.get("HOST") + ", PORT=" + ctx.get("PORT"));
 				
-				log.debug("Received PubliSID : " + publicSID);
-				RoomClient rcl = ClientListManager.getInstance().getClientByPublicSID(publicSID);
-				String ip = rcl.getUserip();
+				log.debug("Received PubliSID : " + publicSID );
+				//RoomClient rcl = ClientListManager.getInstance().getClientByPublicSID(publicSID);
+				//String ip = rcl.getUserip();
 					
 				//rsss.addNewViewer(ip, port);
 				
 				return getVelocityEngine().getTemplate(template);
+			
 			
 			}
 			
