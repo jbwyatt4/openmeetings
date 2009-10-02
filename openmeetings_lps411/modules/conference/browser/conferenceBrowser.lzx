@@ -16,6 +16,12 @@
 	<include href="extensions/html.lzx"/>
      -->
      
+    <class name="browserButton" extends="view" width="22" height="22">
+    	
+    	
+    	
+    </class> 
+     
 	<class name="conferenceBrowser" extends="labelExplorerBox" labelid="749" 
 		   x="$once{ parent.width/2 - this.width/2 }" closable="true" resizeable="true">
 		 
@@ -31,10 +37,27 @@
             Broadcast Message to all user
          -->
             
-		<view name="browser" y="22">
+		<view name="browser" y="22" height="28" bgcolor="0xEEEEEE" x="1">
 			
-			<view name="navigation" layout="axis:x">
-				<edittext name="url" width="${classroot.width-parent.readStart.width}"> 
+			<view name="navigation" layout="axis:x;spacing:1;inset:1">
+				
+				<browserButton resource="./resources/pre.png" y="2">
+					
+				</browserButton>
+				
+				<browserButton resource="./resources/next.png" y="2">
+                    
+                </browserButton>
+                
+                <browserButton resource="./resources/refresh.png" y="2">
+                    
+                </browserButton>
+                
+                <browserButton resource="./resources/home.png" y="2">
+                    
+                </browserButton>
+                
+				<edittext name="url" width="${classroot.width- (5*22) - 9}"> 
 					<handler name="onkeyup" args="key">
 						if ((key == 27) || (key == 13)) {
 							this.parent.readStart.onclick.sendEvent();
@@ -42,7 +65,8 @@
 					</handler>
 				</edittext>
 				
-				<basebutton name="readStart" resource="./resources/read.png" width="25" height="25">
+				<browserButton name="readStart" resource="./resources/run.png" 
+							    y="2">
 					<handler name="onclick">
     					<![CDATA[
     						var url = parent.url.getText();
@@ -57,9 +81,13 @@
     						parent.url.setAttribute('text', url);
     					]]>
 					</handler>
-				</basebutton> 
+				</browserButton> 
+				
 			</view>
 		</view>
+		
+		<view x="1" resource="./resources/browser_sub_cit.swf" width="${ parent.width-2 }" 
+			  stretches="width" y="50"></view>
 
 		<handler name="onclose">
 			this.htmlviewer.setVisible(false);
