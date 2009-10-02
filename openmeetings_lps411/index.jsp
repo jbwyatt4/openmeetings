@@ -37,6 +37,15 @@
         </script>
 <script type="text/javascript"
 	src="embed-compressed.js"></script>
+<script type="text/javascript">
+
+function getBrowserInfo() {
+	//alert(navigator.userAgent);
+	return navigator.userAgent;
+}
+
+</script>
+	
 <style type="text/css">
 html,body { /* http://www.quirksmode.org/css/100percheight.html */
 	height: 100%;
@@ -58,7 +67,7 @@ img {
 </head>
 <body>
 <script type="text/javascript">
-    lz.embed.swf({url: 'main.lzx.swf8.swf', allowfullscreen: 'true', bgcolor: '#ffffff', width: '100%', height: '100%', id: 'lzapp', accessible: 'false'});
+    lz.embed.swf({url: 'maindebug.lzx?lzt=swf&lzr=swf8&lzproxied=solo', allowfullscreen: 'true', bgcolor: '#ffffff', width: '100%', height: '100%', id: 'lzapp', accessible: 'false'});
 
     lz.embed.lzapp.onloadstatus = function loadstatus(p) {
       // called with a percentage (0-100) indicating load progress
