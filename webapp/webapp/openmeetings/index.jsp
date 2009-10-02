@@ -37,6 +37,14 @@
         </script>
 <script type="text/javascript"
 	src="embed-compressed.js"></script>
+<script type="text/javascript">
+
+function getBrowserInfo() {
+    //alert(navigator.userAgent);
+    return navigator.userAgent;
+}
+
+</script>
 <style type="text/css">
 html,body { /* http://www.quirksmode.org/css/100percheight.html */
 	height: 100%;
