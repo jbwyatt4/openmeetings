@@ -1,6 +1,8 @@
 package org.openmeetings.servlet.outputhandler;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -162,20 +164,34 @@ public class RTPMethodServlet extends HttpServlet{
 			//also the HOST, PORT must be set correctly in the RTPScreenSharingSession-Object
 			RoomClient rcl = ClientListManager.getInstance().getClientByPublicSID(publicSID);
 			
-			/** Notify Clients, that user started streaming -> showing users button for Appletstart */
-			LinkedHashMap<String,Object> hs = new LinkedHashMap<String,Object>();
-			hs.put("message", "startStreaming");
-			//Set the User Object
+			HashMap<String, Integer> viewers = session.getViewers();
 			
-			// Check publicSID
-			String pSid = rcl.getPublicSID();
-			log.debug("RTPMethodServlet : publicSID = " + publicSID);
+			Iterator<String> iter = viewers.keySet().iterator();
 			
-			hs.put("rcl", rcl);
-			//Set the Screen Sharing Object
-			hs.put("session", session);
+			while(iter.hasNext()){
+				String publicSIDofViewer = iter.next();
+				
+				log.debug("Notifying Client with publicSid = " + publicSIDofViewer);
+				
+				/** Notify Clients, that user started streaming -> showing users button for Appletstart */
+				LinkedHashMap<String,Object> hs = new LinkedHashMap<String,Object>();
+				hs.put("message", "startStreaming");
+				//Set the User Object
+				
+				hs.put("publicSID", publicSIDofViewer);
+				hs.put("room", rcl.getRoom_id());
+				
+				hs.put("rcl", rcl);
+				//Set the Screen Sharing Object
+				hs.put("session", session);
+				
+				ScopeApplicationAdapter.getInstance().sendMessageWithClientByPublicSID(hs, publicSIDofViewer);
+				
+			}
 			
-			ScopeApplicationAdapter.getInstance().sendMessageByRoomAndDomain(Long.valueOf(room).longValue(),hs);
+			
+			//ScopeApplicationAdapter.getInstance().sendMessageByRoomAndDomain(Long.valueOf(room).longValue(),hs);
+			
 			
 		} catch(Exception err){
 			log.error("[startStreaming]",err);
