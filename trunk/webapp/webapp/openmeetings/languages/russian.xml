@@ -2258,4 +2258,25 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   <string id="749" name="co-browser">
     <value>Co-Browsing</value>
   </string>
+  <string id="750" name="co-browser">
+    <value>Ooops, ... Firefox on Windows does not show clear Co-Browsing. Please use another Browser for using the Co-Browsing feature.</value>
+  </string>
+  <string id="751" name="co-browser">
+    <value>Previous</value>
+  </string>
+  <string id="752" name="co-browser">
+    <value>Next</value>
+  </string>
+  <string id="753" name="co-browser">
+    <value>Reload</value>
+  </string>
+  <string id="754" name="co-browser">
+    <value>Home</value>
+  </string>
+  <string id="755" name="co-browser">
+    <value>Load</value>
+  </string>
+  <string id="756" name="co-browser">
+    <value>Add this website as Default website to your Profile.</value>
+  </string>
 </language>
