@@ -8,6 +8,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.openmeetings.app.data.basic.Sessionmanagement;
 import org.openmeetings.app.hibernate.beans.recording.RoomClient;
 import org.openmeetings.app.remote.red5.ClientListManager;
 import org.openmeetings.app.remote.red5.ScopeApplicationAdapter;
@@ -72,6 +74,8 @@ public class RTPMethodServlet extends HttpServlet{
 			
 			RTPScreenSharingSession session = RTPStreamingHandler.getSessionForRoom(room, sid, publicSID);
 			
+			session.getReceiver().stop();
+			
 			/** Notify Clients, that user started streaming -> showing users button for Appletstart */
 			LinkedHashMap<String,Object> hs = new LinkedHashMap<String,Object>();
 			hs.put("message", "stopStreaming");
@@ -111,11 +115,9 @@ public class RTPMethodServlet extends HttpServlet{
 
 			String publicSID = request.getParameter("publicSID");
 
-			
 
 			if(sid == null || sid.length() < 1)
 				throw new ServletException("RTPMethodServlet.startStreaming : no parameter publicSid!");
-			
 			
 
 			if (publicSID == null) 
@@ -127,8 +129,23 @@ public class RTPMethodServlet extends HttpServlet{
 			if(sharerIP == null || sharerIP.length() < 1)
 				throw new ServletException("RTPMethodServlet.startStreaming : no parameter sharerIP!");
 			
+			String hostIP = request.getParameter("host");
+			
+			if(hostIP == null || hostIP.length() < 1)
+				throw new ServletException("RTPMethodServlet.startStreaming : no parameter host!");
+			
+			
+			String sharersPort = request.getParameter("rtpport");
+			if(sharersPort == null || sharersPort.length() < 1)
+				throw new ServletException("RTPMethodServlet.startStreaming : no parameter rtpport!");
+			
 			
 			RTPScreenSharingSession session = RTPStreamingHandler.getSessionForRoom(room, sid, publicSID);
+			
+			if(session == null){
+				Long users_id = Sessionmanagement.getInstance().checkSession(sid);
+				session = RTPStreamingHandler.storeSessionForRoom(room, users_id, publicSID, hostIP, Integer.parseInt(sharersPort));
+			}
 			
 			width=request.getParameter("width");
 			
@@ -190,8 +207,7 @@ public class RTPMethodServlet extends HttpServlet{
 			}
 			
 			
-			//ScopeApplicationAdapter.getInstance().sendMessageByRoomAndDomain(Long.valueOf(room).longValue(),hs);
-			
+					
 			
 		} catch(Exception err){
 			log.error("[startStreaming]",err);
@@ -199,8 +215,4 @@ public class RTPMethodServlet extends HttpServlet{
 		
 	}
 
-
-
-	
-	
 }

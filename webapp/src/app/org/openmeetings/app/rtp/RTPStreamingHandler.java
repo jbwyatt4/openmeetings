@@ -110,11 +110,6 @@ public class RTPStreamingHandler {
 						
 			//Iterator<Rooms> miter = ;
 			
-			log.debug("rtpSessions NUMBER OF OPEN SESSIONS: "+rtpSessions.size());
-			
-			if (rtpSessions.size() == 0) {
-				throw new Exception("no RTPSession - SIZE IS NULL " );
-			}
 			
 			for(Iterator<Rooms> miter = rtpSessions.keySet().iterator();miter.hasNext();){
 				
@@ -133,8 +128,9 @@ public class RTPStreamingHandler {
 			//if(session == null)
 			
 			//This should not happen at all
-			throw new Exception("no RTPSession for Room " + room);
+			log.debug("no RTPSession for Room " + room);
 			
+			return null;
 			
 		}
 		//---------------------------------------------------------------------------------------------
@@ -147,13 +143,12 @@ public class RTPStreamingHandler {
 		 * Store Session for Room
 		 */
 		//---------------------------------------------------------------------------------------------
-		public static RTPScreenSharingSession storeSessionForRoom(String room, Long sharing_user_id, String publicSID, String hostIP) throws Exception{
+		public static RTPScreenSharingSession storeSessionForRoom(String room, Long sharing_user_id, String publicSID, String hostIP, int the_port) throws Exception{
 			log.debug("storeSessionForRoom : Room = " + room + ", publicSID : " + publicSID + ", hostIP" + hostIP);
 			
 			// Defining The IP of the Sharer (Moderator)
 			// Should be retrieved via Clientlist to receive the "extern" IP, seen by red5
 			RoomClient rcl = ClientListManager.getInstance().getClientByPublicSID(publicSID);
-			
 			
 			
 			if(rcl ==null)
@@ -190,7 +185,12 @@ public class RTPStreamingHandler {
 			log.debug("storeSessionForRoom : Sharers IP = " + rcl.getUserip());
 			
 			// Define RTP Port for Sharing User
-			int port = getNextFreeRTPPort();
+			int port;
+			
+			if(the_port < 0)
+				port = getNextFreeRTPPort();
+			else
+				port = the_port;
 			
 			log.debug("storeSessionForRoom : Incoming RTP Port = " + port);
 			

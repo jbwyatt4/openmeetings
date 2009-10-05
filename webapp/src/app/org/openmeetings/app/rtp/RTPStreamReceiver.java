@@ -219,5 +219,15 @@ public class RTPStreamReceiver implements  ReceiveStreamListener,SessionListener
 		*/
 	}
 	//------------------------------------------------------------------------------------------
+	
+	/**
+	 * Stopping Transmission on serverside
+	 */
+	//------------------------------------------------------------------------------------------
+	public void stop(){
+		basicManager.dispose();
+	}
+	//------------------------------------------------------------------------------------------
+	
 
 }
