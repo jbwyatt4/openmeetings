@@ -40,7 +40,10 @@ public class ServletFunctions {
 						+ "&quality=" + ConfigUtil.quality 
 						+ "&sid=" + ConfigUtil.SID 
 						+ "&sharerIP=" + ConfigUtil.sharerIP
-						+ "&publicSID=" + ConfigUtil.PUBLIC_SID;
+						+ "&publicSID=" + ConfigUtil.PUBLIC_SID
+						+ "&host=" + ConfigUtil.rtmphostlocal
+						+ "&rtpport=" + ConfigUtil.destinationPort;
+			
 
 		
 		URLConnection c = getConnection(url);

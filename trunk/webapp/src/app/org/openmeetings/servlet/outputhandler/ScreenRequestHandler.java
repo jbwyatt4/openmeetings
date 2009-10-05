@@ -265,7 +265,7 @@ public class ScreenRequestHandler extends VelocityViewServlet {
 						} else if(conf_i == 2){
 							
 							// Storing Session data
-							RTPScreenSharingSession session = RTPStreamingHandler.storeSessionForRoom(room, users_id, publicSID, rtmphostlocal);
+							RTPScreenSharingSession session = RTPStreamingHandler.storeSessionForRoom(room, users_id, publicSID, rtmphostlocal, -1);
 							
 							// For the RTP Sharer, we need some additional information
 							ctx.put("HOST", rtmphostlocal);
@@ -275,8 +275,7 @@ public class ScreenRequestHandler extends VelocityViewServlet {
 							
 							log.debug("Stored RTPSession Data for Room " + room);
 							
-							//We need to start a new Thread of the RTPStreamReceiver at this Moment
-							//that is waiting for the RTP Stream to be received
+							
 						}
 						else if(conf_i == 3){
 							
