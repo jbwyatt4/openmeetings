@@ -115,7 +115,7 @@ public class Invitationmanagement {
 				invitation.setDeleted("false");
 				
 				Users us = UsersDaoImpl.getInstance().getUser(createdBy);
-				String hashRaw = us.getLogin()+us.getUser_id()+(new Date());
+				String hashRaw = us.getLogin()+us.getUser_id()+(System.currentTimeMillis());
 				invitation.setHash(MD5.do_checksum(hashRaw));
 				
 				invitation.setInvitedBy(us);
@@ -306,7 +306,8 @@ public class Invitationmanagement {
 				invitation.setDeleted("false");
 				
 				Users us = UsersDaoImpl.getInstance().getUser(createdBy);
-				String hashRaw = us.getLogin()+us.getUser_id()+(new Date());
+				String hashRaw = us.getLogin()+us.getUser_id()+(System.currentTimeMillis());
+				log.debug("addInvitationIcalLink : rawHash = " + hashRaw);
 				invitation.setHash(MD5.do_checksum(hashRaw));
 				
 				invitation.setInvitedBy(us);
