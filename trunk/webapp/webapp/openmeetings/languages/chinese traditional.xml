@@ -2280,4 +2280,37 @@ see http://code.google.com/p/openmeetings/wiki/LanguageEditor for Details
   <string id="756" name="co-browser">
     <value>Add this website as Default website to your Profile.</value>
   </string>
+  <string id="757" name="test setup">
+    <value>Test Setup</value>
+  </string>
+  <string id="758" name="test setup">
+    <value>Check you Microphone and Camera setup before you enter a room by recording some seconds. You can then replay your recording to check your voice and picture.</value>
+  </string>
+  <string id="759" name="test setup">
+    <value>Don't show this test anymore</value>
+  </string>
+  <string id="760" name="test setup">
+    <value>Cancel</value>
+  </string>
+  <string id="761" name="test setup">
+    <value>Start Conference</value>
+  </string>
+  <string id="762" name="edit video settings">
+    <value>Do not ask again</value>
+  </string>
+  <string id="763" name="test setup">
+    <value>REC</value>
+  </string>
+  <string id="764" name="test setup">
+    <value>PLAY</value>
+  </string>
+  <string id="765" name="test setup">
+    <value>You may proceed without testing if you do not plan to publish your voice or picture. Participants without Audio or Video can still use the Whiteboard, share their Desktop or write Chat messages.</value>
+  </string>
+  <string id="766" name="test setup">
+    <value>STOP</value>
+  </string>
+  <string id="767" name="test setup">
+    <value>Level-Meter</value>
+  </string>
 </language>
