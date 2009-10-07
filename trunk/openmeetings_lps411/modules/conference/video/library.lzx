@@ -19,6 +19,7 @@
     <include href="baseVideoObject.lzx" />
     <include href="videoObjectBroadcast.lzx" />
     <include href="videoObjectPlayBroadcast.lzx" />
+    <include href="videoObjectTestBroadcast.lzx" />
     
     <!--
     <include href="videoContainer.lzx" />

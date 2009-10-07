@@ -116,6 +116,26 @@
 	    this._ns.publish(streamName,"live");
 	</method>
 	
+	<method name="record" args="streamName,camReference,micReference">
+        if (this._ns!=null){
+            this.stop();
+        }
+        this.mode = "record";
+        this.createStream();        
+        if (camReference!=null) {
+            this.setAttribute('camera',camReference);
+            this._ns.attachVideo(camReference);
+            //invokes Method in baseVideoView which shows the cam
+            this.attachVideo(camReference);
+        }
+        if (micReference!=null) {
+            this.setAttribute('micro',micReference);
+            this._ns.attachAudio(micReference);
+        }
+        
+        this._ns.publish(streamName,"record");
+    </method>
+	
 	<!--- 
 		Stops playing or broadcasting a Stream and clears the Video-Object
 	 -->
@@ -133,11 +153,16 @@
 			//remove NetStream from Video-Object
 			this.clear();
 		} else if (this.mode == "broadcast") {
-			this._ns.publish(false);
-			//remove NetStream from Video-Object
-			this.clear();
-			this._ns.close();
-		} else {
+            this._ns.publish(false);
+            //remove NetStream from Video-Object
+            this.clear();
+            this._ns.close();
+        } else if (this.mode == "record") {
+            this._ns.publish(false);
+            //remove NetStream from Video-Object
+            this.clear();
+            this._ns.close();
+        } else {
 			if ($debug) Debug.warn("Not known Mode: ",this.mode,this);
 		}
 	</method>
