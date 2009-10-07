@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library>
+	
+	<resource name="level_meter_rsc" src="resources/level_meter.png" />
     
     <resource name="test_setup_record_rsc" src="resources/record.png" />
     <resource name="test_setup_play_rsc" src="resources/run.png" />
