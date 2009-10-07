@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<library>
+
+<!-- 
+#########################################
+
+Test the setup values before you enter a room
+
+ -->
+ 
+<class name="testSetup" extends="labelExplorerBox" labelid="757" x="$once{ parent.height/2 - 250 }" 
+    y="100" docking="true" resizeable="false" closable="true" width="600" height="400">
+
+    <attribute name="roomClassName" type="string" value="" />
+    
+    <attribute name="roomObj" value="null"/>
+    
+    <handler name="oninit">
+    	<![CDATA[
+    	   
+            new lz.testingApplication(this,{name:'currentSharing'});
+
+            
+    	
+    	]]>
+    </handler>
+    
+    <method name="storeSettings">
+        <![CDATA[
+            //Debug.write("sharedobject store ");
+            var t = new lz.sharedObject();
+            t.getLocal('userdata');
+            var g = t.getData('userdata');
+            if (g==null) g = new Array();
+            g["cam"] = this.currentSharing.availibleCams.getValue();
+            g["mic"] = this.currentSharing.availibleMics.getValue();
+            g["showAudioVideoTest"] = this.holddatainSO.getValue();
+            t.setData('userdata',g);
+            t.flush();  
+            
+            this.startConference();
+        ]]>
+    </method>   
+    
+    <method name="startConference">
+    	<![CDATA[
+    	
+            clearStageContent();
+            
+            if ($debug) Debug.write("roomClassname : ", +this.roomClassName);
+            
+            canvas.currentRoomObj = this.roomObj;
+            
+            this.close();
+            
+            new lz[this.roomClassName](canvas.main_content._content.inner, {
+                        roomobj : this.roomObj
+                    });
+    	
+    	]]>
+    </method>
+    
+    <!-- Remember Me -->    
+    <labelCheckbox name="holddatainSO" labelid="759" x="10" y="$once{ parent.height-24 }" >
+        <handler name="oninit">
+            var t = new lz.sharedObject();
+            t.getLocal('userdata');
+            var g = t.getData('userdata');
+            var save = g["showAudioVideoTest"];
+            if ($debug) Debug.write("savecamdata save: ",save);
+            if(save) this.setValue(true);
+        </handler>         
+    </labelCheckbox>
+    
+    <simpleLabelButton labelid="761" width="160" x="$once{ parent.width-270 }" 
+           y="$once{ parent.height-24 }" 
+           onclick="this.parent.storeSettings();" />
+    
+    <simpleLabelButton labelid="760" width="100" x="$once{ parent.width-105 }" 
+           y="$once{ parent.height-24 }" 
+           onclick="this.parent.close();" />
+
+</class>
+
+<class name="testingApplication" extends="view" x="1" y="24">
+	
+	<attribute name="lastRecorded" value="" type="string" />
+	
+	<attribute name="isRunning" value="false" type="boolean" />
+	
+	<method name="doninitalize">
+        <![CDATA[
+        
+            this.isRunning = true;
+            
+            var valCam = this.availibleCams.getValue();
+            var valMic = this.availibleCams.getValue();
+            
+            var videoview = this._publisher._chatvideoinner._videostream;
+            if ($debug) Debug.write("videoview: ",videoview);
+            if ($debug) Debug.write(valCam,valMic,settings);
+            
+            var _micro = Microphone.get(valMic);
+            var _camera = Camera.get(valCam);
+            if ($debug) Debug.write("_camera.setMode: ",videoview.width,videoview.height,canvas.framesPerSecond,true);
+            _camera.setMode(videoview.width,videoview.height,canvas.framesPerSecond,true);
+            
+            //Microphone.set
+            if (canvas.vaquality=="best") {
+                _micro.setRate(canvas.microphoneRateBest);
+                if ($debug) Debug.write("_camera.setQuality BEST: ",canvas.bandwidthNeededBest,canvas.camQualityBest);
+                _camera.setQuality(canvas.bandwidthNeededBest,canvas.camQualityBest);
+            } else {
+                _micro.setRate(canvas.microphoneRateNormal);
+                _micro.setSilenceLevel(canvas.loudnessAcitviation);
+                if ($debug) Debug.write("_camera.setQuality NORMAL: ",canvas.bandwidthNeededNormal,canvas.camQualityNormal);
+                _camera.setQuality(canvas.bandwidthNeededNormal,canvas.camQualityNormal);
+            }
+            
+            //Microphone setUseEchoSupression(bool)
+            _micro.setUseEchoSuppression(true);
+
+            //start recording of client stream
+            
+            var t = new Date();
+            this.lastRecorded = "TEST_SETUP_"+t.getTime();
+            
+            videoview.record(this.lastRecorded,_camera,_micro);
+        ]]>
+    </method>
+    
+    <method name="doStop">
+    	if (this.isRunning) {
+    		this.isRunning = false;
+    		
+    		var videoview = this._publisher._chatvideoinner._videostream;
+    		
+    		videoview.stop();
+    	}
+    </method>
+	
+	<labelText fontstyle="bold" labelid="758"
+			   width="$once{ parent.parent.width-2 }" height="30" multiline="true" /> 
+	
+	<labelText name="availibleCamsLabel" labelid="52" fontsize="11" x="2" y="40" />
+
+    <resetCombobox fontsize="11" name="availibleCams" x="10" y="60" width="260" editable="false">
+        <handler name="oninit">
+            <![CDATA[
+                //Get all availible Cam's
+                var tw = Camera.names;
+                var r = "";
+                for (var eg=0;eg<tw.length;eg++){
+                    this.addItem(tw[eg],eg);
+                    r=eg;
+                }
+                var t = new lz.sharedObject();
+                t.getLocal('userdata');
+                var g = t.getData('userdata');
+                if (g!=null){
+                    var cam = g["cam"];
+                } else {
+                    var cam = r;
+                }
+                if (cam=='undefined' || cam =='' || cam == null) cam=r;
+                this.selectItem(String(cam));    
+
+            ]]>
+        </handler>
+    </resetCombobox>
+    
+    <labelText name="availibleMicsLabel" labelid="53" fontsize="11" x="2" y="84" />
+
+    <resetCombobox fontsize="11" name="availibleMics"  x="10" y="104" width="260" editable="false">
+        <handler name="oninit">
+            <![CDATA[
+                //Get all availible Mic's
+                var tw = Microphone.names;
+                var r = "";
+                for (var eg=0;eg<tw.length;eg++){
+                    r=eg;
+                    this.addItem(tw[eg],eg);
+                }
+                
+                var t = new lz.sharedObject();
+                t.getLocal('userdata');
+                var g = t.getData('userdata');
+                if (g!=null){
+                    var mic = g["mic"];
+                } else {
+                    var mic = r;
+                }
+                if (mic=='undefined' || mic =='' || mic ==null) mic=r;
+                this.selectItem(String(mic));  
+            ]]>
+        </handler>
+    </resetCombobox>
+	
+	<videoObjectTestBroadcast name="_publisher" x="340" y="40" width="240" height="180" />
+	
+	<simpleLabelRoundButton name="_start" y="190" x="350" width="105" labelid="763" height="24" fontstyle="bold" >
+		<view x="12" y="2" resource="test_setup_record_rsc" />
+		<handler name="onclick">
+			parent.doninitalize();
+		</handler>
+	</simpleLabelRoundButton>
+	
+	<simpleLabelRoundButton name="_stop" y="190" x="465" width="105" labelid="766" height="24" fontstyle="bold" >
+        <view x="12" y="2" resource="test_setup_stop_rsc" />
+        <handler name="onclick">
+            parent.doStop();
+        </handler>
+    </simpleLabelRoundButton>
+    
+	<simpleLabelRoundButton name="_play" y="190" x="465" width="105" labelid="764" visibility="hidden"
+							height="24" fontstyle="bold" >
+        <view x="12" y="2" resource="test_setup_play_rsc" />
+    </simpleLabelRoundButton>
+    
+    <view y="300" resource="test_setup_info_rsc" x="10" />
+    
+    <labelText fontstyle="bold" labelid="765" x="39" y="300"
+               width="$once{ parent.parent.width-50 }" multiline="true" /> 
+    
+</class>
+	
+</library>
+ 

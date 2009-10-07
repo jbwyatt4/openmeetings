@@ -282,10 +282,11 @@
     <labelText name="infoTextNoAV" labelid="452" multiline="true" width="280" 
     		   fontsize="11" x="10" y="80" visibility="hidden" />
                
-    <labelText name="availibleMicsLabel" labelid="53" fontsize="11" x="10" y="120" width="$once{ parent.width-20 }" />
+    <labelText name="availibleMicsLabel" labelid="53" fontsize="11" 
+    		   x="10" y="120" width="$once{ parent.width-20 }" />
     
     <!-- Remember Me -->    
-    <checkbox name="holddatainSO" text="Do not ask again" x="10" y="210">
+    <labelCheckbox name="holddatainSO" labelid="762" x="10" y="210">
         <handler name="oninit">
             var t = new lz.sharedObject();
             t.getLocal('userdata');
@@ -294,7 +295,7 @@
             Debug.write("savecamdata save: ",save);
             if(save) this.setValue(true);
         </handler>         
-    </checkbox>
+    </labelCheckbox>
     
     <simpleLabelButton fontsize="11" labelid="54" x="190" y="180" width="100">
         <handler name="onclick">

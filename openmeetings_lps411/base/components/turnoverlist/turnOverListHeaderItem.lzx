@@ -6,7 +6,7 @@
 <resource name="sort_asc_turnover_rsc" src="resources/sort_asc.png" />
 <resource name="sort_desc_turnover_rsc" src="resources/sort_desc.png" />
 
-<class name="turnOverListHeaderItem" extends="simpleLabelButton" clip="true">
+<class name="turnOverListHeaderItem" extends="simpleLabelButton" clip="true" fontstyle="plain">
 
 	<attribute name="subviewsid" value="0" type="number" />
 
@@ -20,7 +20,7 @@
 	<resizestate name="rs" height="20" />
 </class>
 
-<class name="turnOverListHeaderItemSimple" extends="simpleLabelButton" >
+<class name="turnOverListHeaderItemSimple" extends="simpleLabelButton" fontstyle="plain">
 	<attribute name="asc" value="false" type="boolean" />
 	<attribute name="pathOrder" value="" type="string" />
 	<handler name="onclick">
