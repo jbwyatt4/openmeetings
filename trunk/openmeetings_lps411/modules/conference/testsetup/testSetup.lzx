@@ -93,11 +93,13 @@ Test the setup values before you enter a room
     </labelCheckbox>
     
     <simpleLabelButton labelid="761" width="160" x="$once{ parent.width-270 }" 
-           y="$once{ parent.height-24 }" 
-           onclick="this.parent.storeSettings();" />
+           y="$once{ parent.height-30 }" height="28" 
+           onclick="this.parent.storeSettings();">
+    	<view resource="test_setup_start_conference_rsc" x="2" y="4" />
+    </simpleLabelButton>
     
     <simpleLabelButton labelid="760" width="100" x="$once{ parent.width-105 }" 
-           y="$once{ parent.height-24 }" 
+           y="$once{ parent.height-30 }" height="28"  
            onclick="this.parent.close();" />
 
 </class>
@@ -245,9 +247,9 @@ Test the setup values before you enter a room
         </handler>
     </simpleLabelRoundButtonIcon>
     
-    <labelText labelid="767" x="340" y="220" />
+    <labelText labelid="767" x="340" y="224" />
     
-    <view name="_level_meter" x="340" y="240" width="240" height="20" clip="true" bgcolor="0x000000">
+    <view name="_level_meter" x="340" y="244" width="240" height="20" clip="true" bgcolor="0x000000">
     	
     	 <!--- Level delegate, used to track level changes. 
               @keywords private -->
@@ -285,9 +287,9 @@ Test the setup values before you enter a room
     	<view name="_over" width="238" height="18" x="1" y="1" bgcolor="0xFFFFFF" />
     </view>
     
-    <view y="300" resource="test_setup_info_rsc" x="10" />
+    <view y="294" resource="test_setup_info_rsc" x="10" />
     
-    <labelText fontstyle="bold" labelid="765" x="39" y="300"
+    <labelText fontstyle="bold" labelid="765" x="39" y="290"
                width="$once{ parent.parent.width-50 }" multiline="true" /> 
     
 </class>

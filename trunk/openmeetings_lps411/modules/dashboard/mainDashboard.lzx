@@ -38,7 +38,7 @@
     
 	<infosPanel x="10" />
 	
-	<profilesPanel x="420" />
+	<profilesPanel x="520" />
 
 	<overAllChat name="_overallchat" />
 	
