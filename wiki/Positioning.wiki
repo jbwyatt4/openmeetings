@@ -16,43 +16,32 @@ There is no need to train engineers and system administrators in videoconferenci
 
 = Advantages for Enterprise =
 
-The system supports up to 100 users, collaborating simultaneously. It supports LDAP to integrate with popular enterprise domain controllers. The system is robust - each release is tested to 
+The system supports up to 100 users, collaborating simultaneously. It supports LDAP to integrate with popular enterprise domain controllers. The system is robust - each release is tested to work reliably for 48 hours.
 
+= Multiple Communication Channels=
 
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+The users of the system get all imaginable communication channels. The user can see a companion, listen to him, exchange text messages and documents.
 
+= Document-centered Collaboration =
 
+The users can put documents into common workspace and into the whiteboard. One can use the system for presentations, collaborative editing, and sketching with standard graphical tools. The system supports documents in popular formats, including Microsoft OpenOffice.org formats.
 
+= Additional Opportunities =
 
-
-ПРЕИМУЩЕСТВА ПРОМЫШЛЕННОЙ РАБОТЫ
-
-В Телесовещании может принять участие до 100 человек одновременно. Возможно использование адресной книги предприятия по протоколу LDAP. Система имеет высокую надёжность - срок наработки ПО-сервера на отказ составляет не менее 48 часов.
-
-ДОСТУПНОСТЬ МНОЖЕСТВА ФОРМ ОБЩЕНИЯ
-
-Участникам Телесовещаний доступны все возможные способы общения. Можно видеть изображение собеседника и слышать его, а также обмениваться текстовыми сообщениями.
-
-ВОЗМОЖНОСТЬ УСТРАИВАТЬ ПРЕЗЕНТАЦИИ И СОВМЕСТНО РЕДАКТИРОВАТЬ ДОКУМЕНТЫ
-
-Пользователи системы Телесовещания могут выводить любые документы на общую доску. Можно устраивать презентации, а также совместно редактировать документы – для этого предусмотрен набор инструментов. В Телесовещаниях поддерживается интеграция с продуктами Microsoft, поэтому список поддерживаемых форматов весьма широк.
-
-ДОПОЛНИТЕЛЬНЫЕ ВОЗМОЖНОСТИ
-
-Пользователю предоставляется множество дополнительных возможностей: записывать сеанс связи, рассылать приглашения потенциальным участникам  совещания. Реализовано разделение функций участников конференции – предусмотрены роли рядовых участников и модератора.
+The user can record the session including with video, sound and collaboration activities. It is possible to invite new participants via email, so they will join a common chat in few moments. Users in a moderator role can mute other participants, disable their ability to draw on the whiteboard, or allow them to speak and draw. A consensus voting system allows replacing a moderator.
 
 НАСТРАИВАЕМАЯ СИСТЕМА
 
 В зависимости от ваших потребностей и возможностей вашей сети можно настроить передачу изображения участников с различной разрешающей способностью. Предусмотрен режим лекции, нетребовательный к ширине канала -  в этом режиме передаётся изображение только от одного участника.
 
-ЛАКОНИЧНЫЙ, ПРИЯТНЫЙ ГЛАЗУ ИНТЕРФЕЙС
-
-Пользоваться системой Телесовещаний просто приятно.
 
 
+
+
+
+= Laconic, but Neat Interface =
+
+The usability of the system is simply clever.
  
 
 НА ЧЁМ ОСНОВАНО НАШЕ РЕШЕНИЕ?
