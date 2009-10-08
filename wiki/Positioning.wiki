@@ -24,7 +24,7 @@ The users of the system get all imaginable communication channels. The user can 
 
 === Document-centered Collaboration ===
 
-The users can put documents into common workspace and into the whiteboard. One can use the system for presentations, collaborative editing, and sketching with standard graphical tools. The system supports documents in popular formats, including Microsoft [OpenOffice.org] formats.
+The users can put documents into common workspace and into the whiteboard. One can use the system for presentations, collaborative editing, and sketching with standard graphical tools. The system supports documents in popular formats, including Microsoft formats.
 
 === Additional Opportunities ===
 
