@@ -18,3 +18,6 @@
 
   * Jai Gupta, contact: http://www.jaigupta.com,
   I also have 3 year experience in e-learning including 2 year experience on Moodle.
+
+  * Telecom Express, file a support ticket [http://expressaas.com:8080 here].
+  We provide installation and tuning of Openmeetings, integration with your CRM, CMS and domain controller. Мы предлагаем техническую поддержку на русском языке, включающую установку продукта и интеграцию с имеющимися службами коллективной работы.
