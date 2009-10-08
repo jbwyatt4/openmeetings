@@ -20,6 +20,7 @@
     <include href="videoObjectBroadcast.lzx" />
     <include href="videoObjectPlayBroadcast.lzx" />
     <include href="videoObjectTestBroadcast.lzx" />
+    <include href="videoObjectPlayTestBroadcast.lzx" />
     
     <!--
     <include href="videoContainer.lzx" />

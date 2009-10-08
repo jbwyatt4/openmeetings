@@ -78,9 +78,12 @@
 			this.attachVideo(this._ns);
 			//FIXME: Commented out, cause this leads to Buffer-Full/Buffer-Empty Events
 			//after re-syncing the stream
-			//this.setBuffer(0.1);		
-			this._ns.play(streamName,delay);
-			
+			//this.setBuffer(0.1);	
+			if (delay == 0) {
+			    this._ns.play(streamName);
+			} else {
+			    this._ns.play(streamName,delay);
+			}
 			//create Sound Reference
 			var t = _root.getNextHighestDepth();
 			_root.createEmptyMovieClip("vSound"+t,t);
@@ -89,6 +92,31 @@
 			this.soundRef = new Sound(this.soundRefMC);
 		]]>
 	</method>
+	
+	<method name="justPlayStream" args="streamName,delay">
+        <![CDATA[
+            this.streamName=streamName;
+            this.delay=delay;
+            if (this._ns!=null){
+                this.stop();
+            }
+            this.mode = "play";
+            this.createStream();
+            //invokes Method in baseVideoView which shows the stream
+            this.attachVideo(this._ns);
+            //FIXME: Commented out, cause this leads to Buffer-Full/Buffer-Empty Events
+            //after re-syncing the stream
+            //this.setBuffer(0.1);  
+            this._ns.play(streamName,delay);
+            
+            //create Sound Reference
+            var t = _root.getNextHighestDepth();
+            _root.createEmptyMovieClip("vSound"+t,t);
+            this.soundRefMC = _root["vSound"+t];
+            this.soundRefMC.attachAudio(this._ns);
+            this.soundRef = new Sound(this.soundRefMC);
+        ]]>
+    </method>
 	
 	<!---
 		BroadCasts a Stream
