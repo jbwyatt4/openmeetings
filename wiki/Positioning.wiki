@@ -2,7 +2,7 @@
 
 Videoconferencing solutions are known to be the most effective corporate teamwork means for distributed businesses and enterprises with multiple offices. The spreading of videoconferencing is somehow limited by the cost of the modern hardware system. We offer an affordable alternative known as Openmeetings - a unique web conferencing solution.
 
-= Differentiation  =
+=== Differentiation  ===
 
 The system is simple to install and use. By means of the system you can communicate with colleagues, see their faces and documents, use many additional options, provided by the system. Moreover, the licensing cost of the system is equal to Zero.
 
