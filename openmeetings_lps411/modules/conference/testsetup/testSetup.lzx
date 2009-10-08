@@ -147,8 +147,31 @@ Test the setup values before you enter a room
             var t = new Date();
             this.lastRecorded = "TEST_SETUP_"+t.getTime();
             
+            this._publisher.setAttribute("visibility","visible");
+            this._viewer.setAttribute("visibility","hidden");
+            
             videoview.record(this.lastRecorded,_camera,_micro);
         ]]>
+    </method>
+    
+    <method name="doPlay">
+    	<![CDATA[
+    	
+    	   if (this.lastRecorded == "") {
+    	   	   //Error - nothing recorded yet
+    	   	   if ($debug) Debug.warn("Nothing to Play");
+    	   } else {
+    	   	   
+    	   	   this._publisher.setAttribute("visibility","hidden");
+               this._viewer.setAttribute("visibility","visible");
+               
+               var videoview = this._viewer._chatvideoinner._videostream;
+               
+               videoview.playStream(this.lastRecorded,0);
+                
+    	   }
+    	
+    	]]>
     </method>
     
     <method name="doStop">
@@ -219,6 +242,9 @@ Test the setup values before you enter a room
     </resetCombobox>
 	
 	<videoObjectTestBroadcast name="_publisher" x="340" y="40" width="240" height="180" />
+	
+	<videoObjectPlayTestBroadcast name="_viewer" x="340" y="40" 
+								  width="240" height="180" visibility="hidden" />
 	
 	<simpleLabelRoundButtonIcon name="_start" y="190" x="350" 
 				ressourceIcon="test_setup_record_rsc"
