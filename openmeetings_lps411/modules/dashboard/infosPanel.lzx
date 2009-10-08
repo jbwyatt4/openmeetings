@@ -60,7 +60,7 @@
                onclick="this.parent.storeSettings();">
             <view resource="test_setup_start_conference_rsc" x="2" y="9" />
             <handler name="onclick">
-                quicklink('meetings');
+                quicklink('events');
             </handler>
         </simpleLabelButton>
         
