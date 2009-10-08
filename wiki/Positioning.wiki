@@ -6,57 +6,57 @@ Videoconferencing solutions are known to be the most effective corporate teamwor
 
 The system is simple to install and use. By means of the system you can communicate with colleagues, see their faces and documents, use many additional options, provided by the system. Moreover, the licensing cost of the system is equal to Zero.
 
-= Simplicity  of Installation =
+=== Simplicity  of Installation ===
 
 To use the system you need a browser with Adobe Flash and webcam. No additional user software is required.
 
-= Simplicity of Usage =
+=== Simplicity of Usage ===
 
 There is no need to train engineers and system administrators in videoconferencing solutions to a special knowledge of videoconferencing protocls. The interface of the system is traditional for a dynamic web applications, easily understandable and  intuitive.
 
-= Advantages for Enterprise =
+=== Advantages for Enterprise ===
 
 The system supports up to 100 users, collaborating simultaneously. It supports LDAP to integrate with popular enterprise domain controllers. The system is robust - each release is tested to work reliably for 48 hours.
 
-= Multiple Communication Channels=
+=== Multiple Communication Channels ===
 
 The users of the system get all imaginable communication channels. The user can see a companion, listen to him, exchange text messages and documents.
 
-= Document-centered Collaboration =
+=== Document-centered Collaboration ===
 
 The users can put documents into common workspace and into the whiteboard. One can use the system for presentations, collaborative editing, and sketching with standard graphical tools. The system supports documents in popular formats, including Microsoft OpenOffice.org formats.
 
-= Additional Opportunities =
+=== Additional Opportunities ===
 
 The user can record the session including with video, sound and collaboration activities. It is possible to invite new participants via email, so they will join a common chat in few moments. Users in a moderator role can mute other participants, disable their ability to draw on the whiteboard, or allow them to speak and draw. A consensus voting system allows replacing a moderator.
 
-= Fine Tuning =
+=== Fine Tuning ===
 
 Depending on your network bandwidth and performance it is possible to get picture in different quality from sound only mode to HD quality picture. The live stream lecturing mode featuring uni-directional video halves required bandwidth for a popular use case.
 
-= Laconic, Neat Interface =
+=== Laconic, Neat Interface ===
 
 The usability of the system is simply clever.
  
-= Architecture Basics =
+=== Architecture Basics ===
 
 The solution is built on the top of Adobe Flash. The platform extends abilities of a browser platform adding dynamics and graphics over traditional hypertext. Adobe actively develops Flash bringing it to new levels of dynamics and quality and the technology becomes more and more open these days, though it allows us to re-use a proprietary HD codec.
 
-= Bandwidth Requirements =
+=== Bandwidth Requirements ===
 
 Depending on bandwidth of your network, you can calculate. For a default 30 fps picture 270x280 the stream takes nearly 256 kbit/s. The server stream takes more: for a conference of three users one needs 1.3 mbit/s, for five users one needs 5 mbit/s. You may change the picture quality, adapting a picture for your bandwidth.
 
 There are two more requirements for your network to be met. The packet delay (ping) should not exceed 100 ms. Also, one needs an IP-address visible for all participants.
 
-= Why web conferencing is effective? =
+=== Why web conferencing is effective? ===
 
 You can communicate to other people, make presentations and create collaborative environment for the cost of minimalistic equipment and software. You get maximum outcome with minimal resources.
 
-= What for do you need web conferencing? =
+=== What for do you need web conferencing? ===
 
 According to psychological studies, 80-85% of information is perceived via visuals. That is why videoconferencing systems greatly improve communication quality in different application areas. This motivates wide applications of videoconferencing in management, medicine, distant education, security and many other spheres.  While web conferencing would not be an equal substitution to live communication, they advance distant communication to a new level, connecting people through thousands of kilometers. Even audio communication helps. By adding video, you add mimcs and gesticulation to the your perception and influence skills. 
 
-= Why you need web conferencing right now? =
+=== Why you need web conferencing right now? ===
 
 The system is not just convenient and practical. Managers of all levels, who use the system in their day to day life, say that the system saves them time, money and nerves. In particular, the system greatly improves efficiency of meetings, webinars, consultations and eliminates costly business trips. This is especially important now, when cost reduction becomes important for a health business.
 
