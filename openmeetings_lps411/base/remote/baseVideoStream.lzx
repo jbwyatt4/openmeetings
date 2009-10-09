@@ -108,7 +108,7 @@
             //FIXME: Commented out, cause this leads to Buffer-Full/Buffer-Empty Events
             //after re-syncing the stream
             
-            this.setBuffer(5);  
+            this.setBuffer(6);  
             
             if ($debug) Debug.write("Play Stream "+streamName);
             
@@ -156,7 +156,7 @@
         this.mode = "record";
         this.createStream();    
         
-        this.setBuffer(5);  
+        this.setBuffer(6);  
         
         if (camReference!=null) {
             this.setAttribute('camera',camReference);

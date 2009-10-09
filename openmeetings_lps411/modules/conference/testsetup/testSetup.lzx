@@ -9,14 +9,14 @@ Test the setup values before you enter a room
  -->
  
 <class name="simpleLabelRoundButtonIcon" extends="simpleLabelRoundButton" 
-	   height="24" fontstyle="bold" >
+	   height="26" fontstyle="bold" >
 	
 	<attribute name="ressourceIcon" value="" type="string" />
 	<attribute name="tlabelid" value="0" type="number" />
 	
-	<view name="_iconView" x="10" y="2" resource="$once{ parent.ressourceIcon }" />
+	<view name="_iconView" x="14" y="3" resource="$once{ parent.ressourceIcon }" />
 	
-	<labelText y="4" x="30" labelid="$once{ parent.tlabelid }" resize="true" />
+	<labelText y="4" x="36" labelid="$once{ parent.tlabelid }" resize="true" />
 	
 	<handler name="onmouseover">
 		this._iconView.setAttribute("opacity",0.5);
@@ -110,8 +110,52 @@ Test the setup values before you enter a room
 	
 	<attribute name="isRunning" value="false" type="boolean" />
 	
+	<attribute name="recordingsCounter" value="5" type="number" />
+	
+	<attribute name="timerIsRunning" value="false" type="boolean" />
+	
+	<attribute name="counterDelegate" value="null" />
+	
+	<handler name="oninit">
+		this.counterDelegate = new LzDelegate( this, "count" );
+	</handler>
+	
+	<method name="startTimer">
+		this.timerIsRunning = true;
+		this.timerWasUnmutedTheFirstTime = true;
+		lz.Timer.addTimer( this.counterDelegate, 1000 );
+	</method>
+	
+	<method name="count">
+		if (this.recordingsCounter != 0){
+			this.recordingsCounter -= 1;
+			lz.Timer.addTimer( this.counterDelegate, 1000 );
+			
+			this._text._info.setAttribute("text",""+this.recordingsCounter+" sec");
+			
+		} else {
+			this._text.setAttribute("visibility","hidden");
+			this.doStop();
+			this.timerIsRunning = false;
+			this.doPlay();
+		}
+	</method>
+	
+	<method name="startTimerToCount">
+		if (!this.timerIsRunning) {
+			this.startTimer();
+		}
+	</method>
+	
 	<method name="doninitalize">
         <![CDATA[
+        
+            this._btnStartRecording.setAttribute("enabled",false);
+            
+            this.recordingsCounter = 5;
+            
+            this._text.setAttribute("visibility","visible");
+            this._text._info.setAttribute("text","5 sec");
         
             this.isRunning = true;
             
@@ -126,6 +170,16 @@ Test the setup values before you enter a room
             var _camera = Camera.get(valCam);
             if ($debug) Debug.write("_camera.setMode: ",videoview.width,videoview.height,canvas.framesPerSecond,true);
             _camera.setMode(videoview.width,videoview.height,canvas.framesPerSecond,true);
+            
+            //The First start-timer message will come from the Flash Object
+            
+            if ($debug) Debug.warn("_camera.muted ",_camera.muted);
+            if ($debug) Debug.warn("_micro.muted ",_micro.muted);
+            
+            if (!_camera.muted) {
+                this.startTimer();
+            }
+            
             
             //Microphone.set
             if (canvas.vaquality=="best") {
@@ -162,6 +216,8 @@ Test the setup values before you enter a room
     	   	   if ($debug) Debug.warn("Nothing to Play");
     	   } else {
     	   	   
+    	   	   this._play.setAttribute("visibility","visible");
+    	   	
     	   	   this._publisher.setAttribute("visibility","hidden");
                this._viewer.setAttribute("visibility","visible");
                
@@ -180,9 +236,11 @@ Test the setup values before you enter a room
     		
     		var videoview = this._publisher._chatvideoinner._videostream;
     		
+    		this._btnStartRecording.setAttribute("enabled",true);
+    		
     		videoview.stop();
     		
-    		
+    		this.doPlay();
     	}
     	
     	var videoviewViewer = this._viewer._chatvideoinner._videostream;
@@ -245,12 +303,43 @@ Test the setup values before you enter a room
             ]]>
         </handler>
     </resetCombobox>
+    
+    
+    <simpleLabelButton name="_btnStartRecording" labelid="775" 
+    				   width="170" x="100" y="150" height="28">
+    	<handler name="onclick">
+            parent._level_meter.startLevel();
+            parent.doninitalize();
+        </handler>
+        <view resource="test_setup_record_rsc" x="2" y="4" />
+    </simpleLabelButton>
+    
 	
-	<videoObjectTestBroadcast name="_publisher" x="340" y="40" width="240" height="180" />
+	<videoObjectTestBroadcast name="_publisher" x="340" y="40" width="240" height="180">
+		<handler name="sendCameraStatus" args="camStatus">
+            if ($debug) Debug.write("sendCameraStatus -1- ",camStatus);
+            if (camStatus == "Camera.Unmuted") {
+            	parent.startTimerToCount();
+            }
+        </handler>
+        
+        <handler name="sendMicroStatus" args="micStatus">
+            if ($debug) Debug.write("sendMicroStatus -1- ",micStatus);
+            if (micStatus == "Microphone.Unmuted") {
+                parent.startTimerToCount();
+            }
+        </handler>
+	</videoObjectTestBroadcast>
 	
 	<videoObjectPlayTestBroadcast name="_viewer" x="340" y="40" 
 								  width="240" height="180" visibility="hidden" />
+								  
+	<view name="_text" x="340" y="40" width="240" height="180" visibility="hidden">
+		<text name="_info" resize="true" bgcolor="0xFFFFFF" align="right"
+			  fontsize="12" fontstyle="bold" />
+	</view>
 	
+	<!--
 	<simpleLabelRoundButtonIcon name="_start" y="190" x="350" 
 				ressourceIcon="test_setup_record_rsc"
 				width="70" tlabelid="763" >
@@ -277,7 +366,17 @@ Test the setup values before you enter a room
             parent.doPlay();
         </handler>
     </simpleLabelRoundButtonIcon>
-    
+     -->
+     
+    <simpleLabelRoundButtonIcon name="_play" y="190" x="490" visibility="hidden"
+                ressourceIcon="test_setup_play_rsc"
+                width="86" tlabelid="764" 
+                enabled="false">
+        <handler name="onclick">
+            parent.doPlay();
+        </handler>
+    </simpleLabelRoundButtonIcon>
+     
     <labelText labelid="767" x="340" y="224" />
     
     <view name="_level_meter" x="340" y="244" width="240" height="20" clip="true" bgcolor="0x000000">
