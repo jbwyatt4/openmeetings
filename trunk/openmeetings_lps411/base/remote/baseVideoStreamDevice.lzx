@@ -31,7 +31,9 @@
 		indicates if the message should be send, you can change the notification 
 		level by changing the loudnessAcitviation in the config.xml
 	 -->
-	<attribute name="isgreater" value="false" type="boolean" />     	
+	<attribute name="isgreater" value="false" type="boolean" />     
+	
+	<attribute name="doSendNotification" value="true" type="boolean" />	
 	
 	<handler name="oncamera" args="c">
 		//if ($debug) Debug.write("Cam: ",c);
@@ -90,6 +92,10 @@
      -->
 	<handler name="onlevel">
 		<![CDATA[
+		    if (!this.doSendNotification){
+		    	return;
+		    }
+		
     		//this.parent.parent.parent._loudness.loudness.setAttribute('text',this.level);
 			if (this.level>canvas.loudnessAcitviation) {
 				if (!this.isgreater) {

@@ -98,6 +98,7 @@
             this.streamName=streamName;
             this.delay=delay;
             if (this._ns!=null){
+            	if ($debug) Debug.write("STOP NS is NOT null ")
                 this.stop();
             }
             this.mode = "play";
@@ -106,7 +107,11 @@
             this.attachVideo(this._ns);
             //FIXME: Commented out, cause this leads to Buffer-Full/Buffer-Empty Events
             //after re-syncing the stream
-            //this.setBuffer(0.1);  
+            
+            this.setBuffer(5);  
+            
+            if ($debug) Debug.write("Play Stream "+streamName);
+            
             this._ns.play(streamName,delay);
             
             //create Sound Reference
@@ -149,7 +154,10 @@
             this.stop();
         }
         this.mode = "record";
-        this.createStream();        
+        this.createStream();    
+        
+        this.setBuffer(5);  
+        
         if (camReference!=null) {
             this.setAttribute('camera',camReference);
             this._ns.attachVideo(camReference);
