@@ -35,6 +35,10 @@
 	
 	<attribute name="doSendNotification" value="true" type="boolean" />	
 	
+	<event name="sendCameraStatus" />
+    
+    <event name="sendMicroStatus" />
+    
 	<handler name="oncamera" args="c">
 		//if ($debug) Debug.write("Cam: ",c);
 		var t = this;
@@ -43,6 +47,7 @@
 		}
 		c.onStatus = function(info) {
 			if ($debug) Debug.write("CamStatus: ",info);
+			t.sendCameraStatus.sendEvent(info.code);
 		}
 	</handler>
 	
@@ -54,6 +59,7 @@
 		}
 		m.onStatus = function(info) {
 			if ($debug) Debug.write("MicStatus: ",info);
+			t.sendMicroStatus.sendEvent(info.code);
 		}
 	</handler>
 	

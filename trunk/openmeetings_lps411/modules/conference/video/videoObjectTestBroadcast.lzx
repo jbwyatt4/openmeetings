@@ -10,10 +10,24 @@
  
 <class name="videoObjectTestBroadcast" extends="view" >
 
+    <event name="sendCameraStatus" />
+    
+    <event name="sendMicroStatus" />
+    
 	<view name="_chatvideoinner" x="0" y="0" height="$once{parent.height}" width="$once{parent.width}">
 		
 		<baseVideoStreamDevice name="_videostream" mode="broadcast"
-						 width="${parent.width}" height="${parent.height}" bgcolor="black" />
+						 width="${parent.width}" height="${parent.height}" bgcolor="black">
+			<handler name="sendCameraStatus" args="camStatus">
+                if ($debug) Debug.write("sendCameraStatus",camStatus);
+                parent.parent.sendCameraStatus.sendEvent(camStatus);
+            </handler>
+            
+            <handler name="sendMicroStatus" args="micStatus">
+                if ($debug) Debug.write("sendMicroStatus",micStatus);
+                parent.parent.sendMicroStatus.sendEvent(micStatus);
+            </handler>
+		</baseVideoStreamDevice>
 		
 	</view>	
 </class>
