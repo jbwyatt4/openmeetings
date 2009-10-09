@@ -167,7 +167,7 @@ Test the setup values before you enter a room
                
                var videoview = this._viewer._chatvideoinner._videostream;
                
-               videoview.playStream(this.lastRecorded,0);
+               videoview.justPlayStream(this.lastRecorded+".flv",0);
                 
     	   }
     	
@@ -181,7 +181,12 @@ Test the setup values before you enter a room
     		var videoview = this._publisher._chatvideoinner._videostream;
     		
     		videoview.stop();
+    		
+    		
     	}
+    	
+    	var videoviewViewer = this._viewer._chatvideoinner._videostream;
+        videoviewViewer.stop();
     </method>
 	
 	<labelText fontstyle="bold" labelid="758"
