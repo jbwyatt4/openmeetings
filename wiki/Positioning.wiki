@@ -32,7 +32,7 @@ The user can record the session including video, sound and collaboration activit
 
 === Fine Tuning ===
 
-Depending on your network bandwidth and performance it is possible to get picture in a different quality: from sound only mode to HD quality picture. The live stream lecturing mode featuring uni-directional video halves required bandwidth for a popular use case.
+Depending on your network bandwidth and performance it is possible to get picture in a different quality: from sound only mode to HD quality picture. The live stream mode for uni-directional video halves required bandwidth for lectures and public speeches.
 
 === Laconic, Neat Interface ===
 
@@ -62,4 +62,4 @@ According to psychological studies, 80-85% of information is perceived via visua
 
 The system is not just convenient and practical. Managers of all levels, who use the system in their day to day life, say that the system saves them time, money and nerves. In particular, the system greatly improves efficiency of meetings, webinars, consultations and eliminates costly business trips. This is especially important now, when cost reduction becomes crucial for effective business.
 
-Try the system now at <a href="http://www.telebridge.ru">www.telebridge.ru</a>.
+Try the system now at <a href="http://www.openmeetings.de/">www.openmeetings.de</a> or <a href="http://www.telebridge.ru/">www.telebridge.ru</a>.
