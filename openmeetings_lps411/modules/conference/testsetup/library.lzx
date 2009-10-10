@@ -10,5 +10,6 @@
     <resource name="test_setup_info_rsc" src="resources/messagebox_info.png" />
     
     <include href="testSetup.lzx" />
+    <include href="testingApplication.lzx" />
     
 </library>

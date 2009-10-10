@@ -91,10 +91,10 @@
 				//Debug.write("non ispublic");
 			}
 			
-			//this conferencedomain is no more interesting, swagner 07.10.2009
+			//the conferencedomain is no more interesting, swagner 07.10.2009
 			//if ($debug) Debug.write("hib.conferencedomain: ", hib.conferencedomain);
 
-			new lz.testSetup(canvas,{roomClassName:this.roomClassName});
+			new lz.testSetup(canvas,{roomClassName:this.roomClassName,roomObj:roomObj});
 			
 		</method>
 
@@ -107,7 +107,7 @@
 			</netparam>
 			<handler name="ondata" args="value">
 			<![CDATA[
-				Debug.write("getRoomClientsListByRoomId: ", value);
+				if ($debug) Debug.write("getRoomClientsListByRoomId: ", value);
 				parent.currentusers = value;
 				parent.oninit.sendEvent();
 				if (parent.checkForMaxUsers) {

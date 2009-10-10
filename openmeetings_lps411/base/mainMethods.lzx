@@ -359,9 +359,15 @@
     	hib.currentroomid = roomId;
     	if (roomObj!=null){
             if (roomTypeId==1){
-                new lz[canvas.conferenceRoomModule](canvas.main_content._content.inner,{roomobj:roomObj}); 
+            	
+            	new lz.testSetup(canvas,{isDirectLink:true,roomClassName:this.roomClassName,roomobj:roomObj});
+                //new lz[canvas.conferenceRoomModule](canvas.main_content._content.inner,{roomobj:roomObj});
+                 
             } else {
-                new lz[canvas.eventRoomModule](canvas.main_content._content.inner,{roomobj:roomObj}); 
+            	
+            	new lz.testSetup(canvas,{isDirectLink:true,roomClassName:canvas.eventRoomModule,roomobj:roomObj});
+                //new lz[canvas.eventRoomModule](canvas.main_content._content.inner,{roomobj:roomObj});
+                 
             }   
         }
 	</method>
