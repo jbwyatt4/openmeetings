@@ -366,7 +366,7 @@
             resource="presenter_thumb_rsc" >
             <handler name="oninit">
             	<![CDATA[
-            		this.setTintRGB(canvas.basebgcolorizer,90);
+            		this.setTintRGB(canvas.basebgcolorizer,80);
             	]]>
             </handler>
 			<method name="setTintRGB" args="color, brightness">
@@ -382,9 +382,9 @@
 			        this.setColorTransform( { ra : red, ga : green, ba : blue,
 			                            		rb : 0, gb : 0, bb : 0 } );
 			                            		
-			        Debug.write(this);
-			        Debug.write( { ra : red, ga : green, ba : blue,
-			                            		rb : 0, gb : 0, bb : 0 } );
+			        //Debug.write(this);
+			        //Debug.write( { ra : red, ga : green, ba : blue,
+			        //                    		rb : 0, gb : 0, bb : 0 } );
 			    }
 			    ]]>
 			</method>            

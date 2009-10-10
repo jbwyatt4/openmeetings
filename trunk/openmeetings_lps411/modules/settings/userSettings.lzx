@@ -101,13 +101,21 @@
             this.parent.userObj.age = this.parent.age.getDate();
 			this.parent.userObj.title_id = Number(this.parent.salutation.getValue());
             
-            Debug.write("this.parent.userObj: ",this.parent.userObj);
-            Debug.write("this.parent.userObj.adresses.states ",this.parent.userObj.adresses.states);
+			var t = new lz.sharedObject();
+            t.getLocal('userdata');
+            var g = t.getData('userdata');
+            if (g==null) g = new Array();
+            g["showAudioVideoTest"] = parent.doShowTestWizzard.getValue();
+            t.setData('userdata',g);
+            t.flush();
+			
+            if ($debug) Debug.write("this.parent.userObj: ",this.parent.userObj);
+            if ($debug) Debug.write("this.parent.userObj.adresses.states ",this.parent.userObj.adresses.states);
   		</method>
   		<netparam><method name="getValue"> return canvas.sessionId; </method></netparam>
     	<netparam><method name="getValue">return this.parent.parent.userObj;</method></netparam>	  		
         <handler name="ondata" args="value"> 
-            Debug.write("updateUserSelfSmall: ",value);
+            if ($debug) Debug.write("updateUserSelfSmall: ",value);
         </handler>
   	</netRemoteCallHib>
 	
@@ -188,7 +196,17 @@
     <simpleLabelButton y="50" labelid="379" x="550"
         onclick="new lz.uploadWindow(canvas.main_content._content.inner,{x:300,uploadmodule:'userprofile',isOnlyProfile:true,isdefaultreturn:false,returnObj:this.parent});" /> 		
      
-
+    <!-- Remember Me -->    
+    <labelCheckbox name="doShowTestWizzard" labelid="776" x="430" y="140" >
+        <handler name="oninit">
+            var t = new lz.sharedObject();
+            t.getLocal('userdata');
+            var g = t.getData('userdata');
+            var save = g["showAudioVideoTest"];
+            if ($debug) Debug.write("savecamdata save: ",save);
+            if(save) this.setValue(true);
+        </handler>         
+    </labelCheckbox>
         
 </class>
 
