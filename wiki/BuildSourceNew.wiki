@@ -15,7 +15,7 @@ To develop !OpenMeetings you need at least:
 
 == Step2 - Download the Source ==
 
-Check out the Code from the Repository.
+Check out the Code from the Repository as a Dynamic Web-Project into Eclipse.
 
 URL: http://openmeetings.googlecode.com/svn/trunk/singlewebapp/
 
