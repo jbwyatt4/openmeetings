@@ -4,17 +4,17 @@
   * [http://code.google.com/p/openmeetings/source/browse browse SVN source]
   * [http://code.google.com/p/openmeetings/source/list SVN change history]
 
----
+------------
 As result of improving and simplifying the development process
 we changed the Source Locations
 
 Please consider new Instructions and new Source Locations from BuildSourceNew
----
+---------
 
 
 
 <br/><br/><br/>
----
+---------
 Old Instructions
 <br/><br/><br/>
 
