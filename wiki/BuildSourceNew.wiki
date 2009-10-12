@@ -2,6 +2,23 @@
 
 = Run, Develop, Test, Debug all in Eclipse =
 
-To develop or build OpenMeetings you download the Project as regular Web-Project.
+To develop or build !OpenMeetings you download the Project as regular Web-Project.
 You need the Subclipse Plugin for Eclipse and a Tomcat Server installed on your system to test and debug the Code.
 
+== Step1 - Get required Software ==
+
+To develop !OpenMeetings you need at least:
+  * Eclipse in a up to date copy and Java6
+  * Subclipse Plugin (to download the Code from the Repository into Eclipse)
+  * MySQL (or Postgres, or other Databases supported by Hibernate)
+  * Tomcat 6 installed on your system to test and debug the code
+
+== Step2 - Download the Source ==
+
+Check out the Code from the Repository.
+
+ -- Sample Screen --
+
+== Step3 - Build and deploy the code in Eclipse ==
+
+ -- Sample Screens --
