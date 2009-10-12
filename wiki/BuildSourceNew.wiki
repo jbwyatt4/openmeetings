@@ -1,0 +1,7 @@
+#summary Building Source and develop
+
+= Run, Develop, Test, Debug all in Eclipse =
+
+To develop or build OpenMeetings you download the Project as regular Web-Project.
+You need the Subclipse Plugin for Eclipse and a Tomcat Server installed on your system to test and debug the Code.
+
