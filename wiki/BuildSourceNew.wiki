@@ -17,8 +17,25 @@ To develop !OpenMeetings you need at least:
 
 Check out the Code from the Repository.
 
+URL: http://openmeetings.googlecode.com/svn/trunk/singlewebapp/
+
  -- Sample Screen --
 
 == Step3 - Build and deploy the code in Eclipse ==
 
- -- Sample Screens --
+Add Tomcat Server in Eclipse
+ -- Sample Screen --
+
+Add Webapp to Server in Eclipse
+ -- Sample Screen --
+
+[Change Context Root of Webapp to "/" in Eclipse Configuration]
+
+Add Memory settings to Run Configuration (Run > Run Configurations ...)
+Click on Apache Tomcat > Your Server Name 
+Second Tab > Arguments 
+Add:  -Xms512m -Xmx1024M add the end
+=> Apply and store settings
+
+Publish and Run
+ -- Sample Screen --
