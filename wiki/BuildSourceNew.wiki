@@ -36,6 +36,12 @@ Click on Apache Tomcat > Your Server Name
 Second Tab > Arguments 
 Add:  -Xms512m -Xmx1024M add the end
 => Apply and store settings
-
-Publish and Run
  -- Sample Screen --
+
+Publish and Run from inside Eclipse
+ -- Sample Screen --
+
+== How to create .war ==
+
+  * Run the ant - task
+  * Export in Eclipse a .war file
