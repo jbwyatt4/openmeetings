@@ -15,7 +15,7 @@ Please consider new Instructions and new Source Locations from BuildSourceNew
 
 <br/><br/><br/>
 ---------
-Old Instructions
+Old Instructions - these are valid for versions prior and including 0.9 RC5
 <br/><br/><br/>
 
 
