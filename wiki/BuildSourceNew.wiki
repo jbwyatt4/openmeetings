@@ -29,7 +29,7 @@ Add Tomcat Server in Eclipse
 Add Webapp to Server in Eclipse
  -- Sample Screen --
 
-[Change Context Root of Webapp to "/" in Eclipse Configuration]
+[Change Context Root of Webapp to "/" in Eclipse Configuration ... Right click on Project in Eclipse > Properties => Web Project Settings (bottom of list) rename to "/" (... this step might be not needed if the SVN Source code does it automatically)
 
 Add Memory settings to Run Configuration (Run > Run Configurations ...)
 Click on Apache Tomcat > Your Server Name 
