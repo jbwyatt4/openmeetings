@@ -19,7 +19,36 @@ Check out the Code from the Repository as a Dynamic Web-Project into Eclipse.
 
 URL: http://openmeetings.googlecode.com/svn/trunk/singlewebapp/
 
- -- Sample Screen --
+Step-By-Step:
+
+1) Start Eclipse
+
+2) Change Perspective to SVN Repository Exploring:<br/>
+http://openmeetings.googlecode.com/svn/docs/buildFromSource/checkout_1.png
+
+3) Select SVN Repository Exploring and click ok.<br/>
+http://openmeetings.googlecode.com/svn/docs/buildFromSource/checkout_2.png
+
+4) A new Dialog in Eclipse opens *SVN Repositories*<br/>
+http://openmeetings.googlecode.com/svn/docs/buildFromSource/checkout_3.png
+
+5) Click on the icon with the plus in the top right corner in the SVN Repository Dialog<br/>
+http://openmeetings.googlecode.com/svn/docs/buildFromSource/checkout_4.png
+
+6) Add the URL http://openmeetings.googlecode.com/svn/trunk/singlewebapp/ and click Finish<br/>
+http://openmeetings.googlecode.com/svn/docs/buildFromSource/checkout_5.png
+
+7) After download is complete you see a new Source Repository in the Repository Explorer. Right click on it and choose *checkout*<br/>
+http://openmeetings.googlecode.com/svn/docs/buildFromSource/checkout_6.png
+
+8) In the Dialog the opens now just click next <br/>
+http://openmeetings.googlecode.com/svn/docs/buildFromSource/checkout_7.png
+
+9) In the next Dialog just click Finish, Eclipse will then download the sources <br/>
+http://openmeetings.googlecode.com/svn/docs/buildFromSource/checkout_8.png
+
+10) After the download is complete you will see a new Project in the Package Explorer Dialog of Eclipse<br/>
+http://openmeetings.googlecode.com/svn/docs/buildFromSource/checkout_9.png
 
 == Step3 - Build and deploy the code in Eclipse ==
 
