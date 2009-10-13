@@ -28,8 +28,8 @@
 = Install !OpenMeetings =
   # Download [http://openmeetings.googlecode.com/files/red5-openmeetings-rc5.zip OpenMeetings including Red5]
   # Unpack it (Please make sure that you use an up-to-date unzip-software) (and copy it somewhere in you system, do not start it from your Windows Desktop)
-  # you have now a folder openmeetings_Version_No_xx
-  # Prepare Database Settings - go to openmeetings_Version_No_xx/webapps/openmeetings/conf/hibernate.cfg.xml 
+  # you have now a folder !openmeetings_Version_No_xx
+  # Prepare Database Settings - go to !openmeetings_Version_No_xx/webapps/openmeetings/conf/hibernate.cfg.xml 
     * MySQL-Database-User: Rename `mysql_hibernate.cfg.xml` to `hibernate.cfg.xml` and alter following config values in (`mysql_`)`hibernate.cfg.xml`
      {{{
 		<property name="connection.username">root</property>
