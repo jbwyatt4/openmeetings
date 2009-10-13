@@ -1,6 +1,8 @@
 #summary Installation of 0.7 RC2 to 0.9 RC5
 #labels Featured
 
+#sidebar TableOfContents 
+
   * [ChangeLog ChangeLog]
   * [http://openmeetings.googlecode.com/files/red5-openmeetings-rc5.zip Version 0.9 RC5]
   * [http://download.openmeetings.de/vmware_openmeetings_moodlepack_r1852.tgz VMWare Image (incl. Moodle Integration)] (it includes RC1 NOT RC2)
