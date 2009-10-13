@@ -26,10 +26,10 @@
   * MAC OSx / Linux Users => Get Flash Player 10 Beta!! It fixes the CPU Problem for Streaming Video => http://labs.adobe.com/technologies/flashplayer10/
 
 = Install !OpenMeetings =
-  # Download [http://openmeetings.googlecode.com/files/openmeetings_0_7_rc2.zip OpenMeetings including Red5] (recommended) or download the two packages separated [http://openmeetings.googlecode.com/files/openmeetings_07_rc2_wo.zip OpenMeetings Webapp only] and [http://openmeetings.googlecode.com/files/red5_snapshot_r3200.zip Red5 Snapshot]. If you download the two packages you have to place the !OpenMeetings webapp into the webapp-folder of Red5.
+  # Download [http://openmeetings.googlecode.com/files/red5-openmeetings-rc5.zip OpenMeetings including Red5]
   # Unpack it (Please make sure that you use an up-to-date unzip-software) (and copy it somewhere in you system, do not start it from your Windows Desktop)
-  # you have now a folder openmeetings_0_7_rc1
-  # Prepare Database Settings - go to openmeetings_0_7_rc1/webapps/openmeetings/conf/hibernate.cfg.xml 
+  # you have now a folder openmeetings_Version_No_xx
+  # Prepare Database Settings - go to openmeetings_Version_No_xx/webapps/openmeetings/conf/hibernate.cfg.xml 
     * MySQL-Database-User: Rename `mysql_hibernate.cfg.xml` to `hibernate.cfg.xml` and alter following config values in (`mysql_`)`hibernate.cfg.xml`
      {{{
 		<property name="connection.username">root</property>
