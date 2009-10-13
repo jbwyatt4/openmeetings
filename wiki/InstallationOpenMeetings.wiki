@@ -37,7 +37,7 @@
 
 		<property name="connection.url">jdbc:mysql://YOUR_HOSTNAME/YOUR_DATABASE</property>	
      }}}
-    If you have problems in connecting your database, a common error is that the Database does not listen to TCP/IP Connection, or you properly need to replace the jdbc-driver with the one for your mysql-version, see http://www.mysql.com/products/connector/j/ for drivers and replace the mysql-connector-java-3.1.14-bin.jar in openmeetings/WEB-INF/lib with the one you have downloaded. If your mysql server is not located in localhost make sure the mysql-server is listening on that network-interface.
+    If you have problems in connecting your database, a common error is that the Database does not listen to TCP/IP Connection, or you properly need to replace the jdbc-driver with the one for your database-version.
     Of course you must alter `YOUR_HOSTNAME/YOUR_DATABASE` to fit your needs for example to:`jdbc:mysql://localhost/openmeetings`
     * Postgres-Database-Users: Rename `postgres_hibernate.cfg.xml` to `hibernate.cfg.xml` and alter following config values in (`postgres_`)`hibernate.cfg.xml`
     {{{
@@ -47,7 +47,6 @@
 		
 		<property name="connection.url">jdbc:postgresql://YOUR_HOSTNAME/YOUR_DATABASE</property>	
     }}}
-    If you go problems in connecting your database you properly need to replace the jdbc-driver with the one for your postgres-version, see http://jdbc.postgresql.org/download.html for drivers and replace the postgresql-8.2-504.jdbc2.jar in openmeetings/WEB-INF/lib with the one you have downloaded. Don't forget that the encoding of the database must be UTF8!
     Of course you must alter `YOUR_HOSTNAME/YOUR_DATABASE` to fit your needs for example to:`jdbc:postgresql://localhost/openmeetings`
     * Any-Database-Users: Rename `any_hibernate.cfg.xml` to hibernate.cfg.xml. 
     Alter the following config values to fit your needs:
@@ -62,7 +61,7 @@
 		<property name="connection.url">jdbc:postgresql://localhost/openmeetings</property>	
 		
     }}}
-    You can see a list of available _dialect_'s here [http://www.hibernate.org/hib_docs/reference/en/html/session-configuration.html#configuration-optional-dialects hibernate-SQL-dialects]. You must download the driver for your database and copy it to _$OPENMEETINGS-HOME/WEB-INF/lib_
+    You can see a list of available _dialect_'s here [http://docs.jboss.org/hibernate/core/3.3/reference/en/html/session-configuration.html#configuration-optional-dialects hibernate-SQL-dialects]. You must download the driver for your database and copy it to _$OPENMEETINGS-HOME/WEB-INF/lib_
   # (Re)start Red5 (The table's will be automatically created by hibernate if there is something wrong with your database values you will see errors in Red5 logfile 
   # go to the Installer by accessing it via browser: http://localhost:5080/openmeetings/install and follow the instructions 
 
