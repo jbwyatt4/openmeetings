@@ -67,6 +67,12 @@ http://openmeetings.googlecode.com/svn/docs/buildFromSource/checkout_9.png
 
 Add Tomcat Server in Eclipse and deploy !OpenMeetings webapp into it
 
+1) Make sure that you have the right default JVM Library in the classpath.<br/>
+Right click on the project ROOT and goto > Properties (bottom)<br/>
+In the dialog goto Build settings and remove if there is a red-marked Library and fix it like in the screen<br/>
+http://openmeetings.googlecode.com/svn/docs/buildFromSource/deploy_4_1.png
+
+
 1) Open the Dialog View *Server* in Eclipse and right click inside, choose ADD > New from the context menu<br/>
 http://openmeetings.googlecode.com/svn/docs/buildFromSource/deploy_1.png
 
