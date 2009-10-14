@@ -1,5 +1,9 @@
 #summary Building Source and develop
 
+  * [http://code.google.com/p/openmeetings/source/browse browse SVN source]
+  * [http://code.google.com/p/openmeetings/source/list SVN change history]
+  * [BuildSources old Instructions]
+
 = Run, Develop, Test, Debug all in Eclipse =
 
 To develop or build !OpenMeetings you download the Project as regular Web-Project.
