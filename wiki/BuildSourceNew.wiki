@@ -104,7 +104,7 @@ http://openmeetings.googlecode.com/svn/docs/buildFromSource/deploy_9.png
 http://openmeetings.googlecode.com/svn/docs/buildFromSource/deploy_10.png
 
 12) You can then navigate to the URL in the browser: <br/>
-The first thing you probably should to is installing / importing the default values so you run the Installer:<br/>
+The first thing you probably should do is installing / importing the default values so you run the Installer:<br/>
 http://localhost:8080/install<br/>
 http://openmeetings.googlecode.com/svn/docs/buildFromSource/deploy_11.png
 
