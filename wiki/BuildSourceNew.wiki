@@ -73,37 +73,37 @@ In the dialog goto Build settings and remove if there is a red-marked Library an
 http://openmeetings.googlecode.com/svn/docs/buildFromSource/deploy_4_1.png
 
 
-1) Open the Dialog View *Server* in Eclipse and right click inside, choose ADD > New from the context menu<br/>
+2) Open the Dialog View *Server* in Eclipse and right click inside, choose ADD > New from the context menu<br/>
 http://openmeetings.googlecode.com/svn/docs/buildFromSource/deploy_1.png
 
-2) In the upcoming Dialog choose Tomcat 6 as server <br/>
+3) In the upcoming Dialog choose Tomcat 6 as server <br/>
 http://openmeetings.googlecode.com/svn/docs/buildFromSource/deploy_2.png
 
-3) Click on the button next to *Choose Tomcat Install Directory* and point to your local Tomcat Installation dir<br/>
+4) Click on the button next to *Choose Tomcat Install Directory* and point to your local Tomcat Installation dir<br/>
 http://openmeetings.googlecode.com/svn/docs/buildFromSource/deploy_3.png
 
-4) Make sure that the Tomcat server does use Java6 as Runtime environment <br/>
+5) Make sure that the Tomcat server does use Java6 as Runtime environment <br/>
 http://openmeetings.googlecode.com/svn/docs/buildFromSource/deploy_4.png
 
-5) Add !OpenMeetings webapp which is called ROOT (select the webapp and click ADD)<br/>
+6) Add !OpenMeetings webapp which is called ROOT (select the webapp and click ADD)<br/>
 http://openmeetings.googlecode.com/svn/docs/buildFromSource/deploy_5.png
 
-6) Click Finish<br/>
+7) Click Finish<br/>
 http://openmeetings.googlecode.com/svn/docs/buildFromSource/deploy_6.png
 
-7) You will see a new Entry in the Server's Dialog of Eclipse including your webapp, right click on it and choose *Publish* <br/>
+8) You will see a new Entry in the Server's Dialog of Eclipse including your webapp, right click on it and choose *Publish* <br/>
 http://openmeetings.googlecode.com/svn/docs/buildFromSource/deploy_7.png
 
-8) Goto the Package Explorer, WebContent/conf/hibernate.cfg.xml and enter the correct values for user/auth/database <br/>
+9) Goto the Package Explorer, WebContent/conf/hibernate.cfg.xml and enter the correct values for user/auth/database <br/>
 http://openmeetings.googlecode.com/svn/docs/buildFromSource/deploy_8.png
 
-9) Right click on the Server and *start* <br/>
+10) Right click on the Server and *start* <br/>
 http://openmeetings.googlecode.com/svn/docs/buildFromSource/deploy_9.png
 
-10) Choose Run > Run Configurations ... from the Eclipse Main Menu and navigate in the Dialog to your new Tomcat Installation like in the Screen. Then goto the Tab Arguments and increase the allowed memory by adding  -Xms512m -Xmx1024M at the end of the arguments. Hit Apply and (re)start tomcat.<br/>
+11) Choose Run > Run Configurations ... from the Eclipse Main Menu and navigate in the Dialog to your new Tomcat Installation like in the Screen. Then goto the Tab Arguments and increase the allowed memory by adding  -Xms512m -Xmx1024M at the end of the arguments. Hit Apply and (re)start tomcat.<br/>
 http://openmeetings.googlecode.com/svn/docs/buildFromSource/deploy_10.png
 
-11) You can then navigate to the URL in the browser: <br/>
+12) You can then navigate to the URL in the browser: <br/>
 The first thing you probably should to is installing / importing the default values so you run the Installer:<br/>
 http://localhost:8080/install<br/>
 http://openmeetings.googlecode.com/svn/docs/buildFromSource/deploy_11.png
