@@ -93,7 +93,9 @@ http://openmeetings.googlecode.com/svn/docs/buildFromSource/deploy_9.png
 10) Choose Run > Run Configurations ... from the Eclipse Main Menu and navigate in the Dialog to your new Tomcat Installation like in the Screen. Then goto the Tab Arguments and increase the allowed memory by adding  -Xms512m -Xmx1024M at the end of the arguments. Hit Apply and (re)start tomcat.<br/>
 http://openmeetings.googlecode.com/svn/docs/buildFromSource/deploy_10.png
 
-11) You can then navigate to the URL in the browser:<br/>
+11) You can then navigate to the URL in the browser: <br/>
+The first thing you probably should to is installing / importing the default values so you run the Installer:<br/>
+http://localhost:8080/install<br/>
 http://openmeetings.googlecode.com/svn/docs/buildFromSource/deploy_11.png
 
 
