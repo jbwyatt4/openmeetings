@@ -1,10 +1,8 @@
 #summary Building Source and develop
 
-<wiki:toc max_depth="2" />
+= Overview =
 
-  * [http://code.google.com/p/openmeetings/source/browse browse SVN source]
-  * [http://code.google.com/p/openmeetings/source/list SVN change history]
-  * [BuildSources old Instructions]
+<wiki:toc max_depth="2" />
 
 = Run, Develop, Test, Debug all in Eclipse =
 
@@ -111,7 +109,7 @@ http://localhost:8080/install<br/>
 http://openmeetings.googlecode.com/svn/docs/buildFromSource/deploy_11.png
 
 
-== How to create .war ==
+= How to create .war =
 
   * Run the ant - task
   * Export in Eclipse a .war file
@@ -124,6 +122,12 @@ So the !OpenMeetings will automatically become your Context Root in Tomcat (or w
 Run the command: ant -f build_red5webapp.xml dist
 
 You will find a directory *dist* that contains the red5-webapp.
+
+== Links ==
+
+  * [http://code.google.com/p/openmeetings/source/browse browse SVN source]
+  * [http://code.google.com/p/openmeetings/source/list SVN change history]
+  * [BuildSources old Instructions]
 
 == Tipps and Gotchas ==
 
