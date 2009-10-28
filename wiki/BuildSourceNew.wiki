@@ -117,6 +117,12 @@ http://openmeetings.googlecode.com/svn/docs/buildFromSource/deploy_11.png
 Note: The Project is called ROOT. You can only have ONE Root project by Application Server. We need to to that as its required for supporting RTMPT in RED5.
 So the !OpenMeetings will automatically become your Context Root in Tomcat (or whatever Java Application Server)
 
+= How to create red5-webapp =
+
+Run the command: ant -f build_red5webapp.xml dist
+
+You will find a directory *dist* that contains the red5-webapp.
+
 == Tipps and Gotchas ==
 
   * When you run and test !OpenMeetings inside Eclipse, Eclipse may be not able to do conversion using *convert* or *pdf2swf*, cause it has another system_path variables set. You should goto the Administration>Configuration section of !OpenMeetings and set the absolute Path to Image-Magick and SWFTools and it will work again. Uploading of PDFs might fail because of the same reason => the path to Ghostscript cannot be read from the system_path. Unfortunately you cannot overwrite that in the Configuration as its an internal link of Ghostscript. However in production environment you will not run into this Issue, its a development problem.
