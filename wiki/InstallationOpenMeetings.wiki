@@ -3,16 +3,6 @@
 
 <wiki:toc max_depth="1" />
 
-= Further information =
-
-  * [ChangeLog ChangeLog]
-  * [http://openmeetings.googlecode.com/files/red5-openmeetings-rc5.zip Version 0.9 RC5 (r2320) Sep.28,2009]
-  * [http://download.openmeetings.de/vmware_openmeetings_moodlepack_r1852.tgz VMWare Image (incl. Moodle Integration)] (it includes RC1 NOT RC2)
-  * [http://liberamemoria.blogspot.com/2009/02/instalando-openmeetings-07-rc-2-en.html Espanol Version for Debian Installation]
-  * [http://aitinet.com/blog/wp-content/uploads/2009/08/TUTORIAL-PARA-INSTALACAO-DO-RED5-E-OPENMEETINGS-NO-LINUX-DEBIAN-LENNY-51.pdf Portuguese Version for Debian Installation of 0.9 RC1] 
-  * [VMImageRev2056] 
-  * [UpdateOpenMeetings Update from Previous Versions]
-
 = System Requirements (Server Side System Requirements!) =
 
   * Minimalistic requirement (without Document Converters, Recorder and Upload feature)  1GHz CPU 1 GB RAM
@@ -77,6 +67,16 @@ After Running the Installer all basics are installed. Now login and go to the Me
   * disable recording in config.xml => the recording feature is quite beta. You can disable it in the config.xml
   * if you resize your own video-pod in the conference much larger and then synchronize  the stream, all clients will get a better picture (it also needs more bandwidth, as it will take the actual new height / width numbers to publish your stream)
   * there are some hidden emoticons (for example (activate)), you might want to add your own ones [http://openmeetings.googlecode.com/svn/trunk/webapp/webapp/openmeetings/public/emoticons/emotes.xml Full List]
+
+= Links, Changelog, VMWare, Debian =
+
+  * [ChangeLog ChangeLog]
+  * [http://openmeetings.googlecode.com/files/red5-openmeetings-rc5.zip Version 0.9 RC5 (r2320) Sep.28,2009]
+  * [http://download.openmeetings.de/vmware_openmeetings_moodlepack_r1852.tgz VMWare Image (incl. Moodle Integration)] (it includes RC1 NOT RC2)
+  * [http://liberamemoria.blogspot.com/2009/02/instalando-openmeetings-07-rc-2-en.html Espanol Version for Debian Installation]
+  * [http://aitinet.com/blog/wp-content/uploads/2009/08/TUTORIAL-PARA-INSTALACAO-DO-RED5-E-OPENMEETINGS-NO-LINUX-DEBIAN-LENNY-51.pdf Portuguese Version for Debian Installation of 0.9 RC1] 
+  * [VMImageRev2056] 
+  * [UpdateOpenMeetings Update from Previous Versions]
 
 = Integration, Single Sign On and LDAP =
 
