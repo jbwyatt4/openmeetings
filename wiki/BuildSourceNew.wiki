@@ -1,5 +1,7 @@
 #summary Building Source and develop
 
+<wiki:toc max_depth="2" />
+
   * [http://code.google.com/p/openmeetings/source/browse browse SVN source]
   * [http://code.google.com/p/openmeetings/source/list SVN change history]
   * [BuildSources old Instructions]
