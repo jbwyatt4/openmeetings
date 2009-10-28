@@ -1,7 +1,5 @@
 #summary Building Source and develop
 
-= Overview =
-
 <wiki:toc max_depth="2" />
 
 = Run, Develop, Test, Debug all in Eclipse =
