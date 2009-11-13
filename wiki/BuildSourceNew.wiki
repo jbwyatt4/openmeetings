@@ -4,7 +4,7 @@
 
 = Nightly Builds =
 
-Nightly builds of the !OpenMeetings (already embed into Red5) are available at: <br/>
+Nightly builds of !OpenMeetings (already embed into Red5) are available at: <br/>
 http://i4demo.com/openmeetings/builds/<br/>
 
 = Run, Develop, Test, Debug all in Eclipse =
