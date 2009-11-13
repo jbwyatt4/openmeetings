@@ -2,6 +2,11 @@
 
 <wiki:toc max_depth="2" />
 
+= Nightly Builds =
+
+Nightly builds of the Red5-Webapp are available at: http://i4demo.com/openmeetings/builds/
+
+
 = Run, Develop, Test, Debug all in Eclipse =
 
 To develop or build !OpenMeetings you download the Project as regular Web-Project.
