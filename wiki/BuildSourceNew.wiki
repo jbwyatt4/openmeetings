@@ -4,7 +4,8 @@
 
 = Nightly Builds =
 
-Nightly builds of the Red5-Webapp are available at: http://i4demo.com/openmeetings/builds/
+Nightly builds of the OpenMeetings (already embed into Red5) are available at: 
+http://i4demo.com/openmeetings/builds/<br/>
 (Build statistics: http://i4demo.com/hudson/job/OpenMeetingsRed5Webapp/)
 
 = Run, Develop, Test, Debug all in Eclipse =
