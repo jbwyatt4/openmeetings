@@ -19,7 +19,8 @@ http://localhost:5080/openmeetings/axis2-web/
     * [http://code.google.com/p/openmeetings/wiki/SoapMethods#getSession getSession] 
     * [http://code.google.com/p/openmeetings/wiki/SoapMethods#loginUser loginUser] 
     * [http://code.google.com/p/openmeetings/wiki/SoapMethods#getErrorByCode getErrorByCode] 
-    * [http://code.google.com/p/openmeetings/wiki/SoapMethods#setUserObject setUserObject] 
+    * [http://code.google.com/p/openmeetings/wiki/SoapMethods#setUserObject setUserObject] deprecated use setUserObjectAndGenerateRoomHash
+    * [http://code.google.com/p/openmeetings/wiki/SoapMethods#setUserObjectAndGenerateRoomHash setUserObjectAndGenerateRoomHash] 
   
   * [http://code.google.com/p/openmeetings/wiki/SoapMethods#FileService FileService] - browse and edit Files of a Conference-Room
   Methods:
@@ -97,6 +98,8 @@ Params:
 
 Method: _public Long setUserObject(String SID, String username, String firstname, String lastname, String profilePictureUrl, String email)_
 
+_deprecated use setUserObjectAndGenerateRoomHash_
+
 Description: sets the !SessionObject for a certain SID, after setting this Session-Object you can use the 
 SID + a !RoomId to enter any Room.
 
@@ -108,6 +111,29 @@ Params:
 || String || lastname || any lastname ||
 || String || profilePictureUrl || any profilePictureUrl ||
 || String || email || any email ||
+
+
+==== setUserObjectAndGenerateRoomHash ====
+
+Method: _public Long setUserObjectAndGenerateRoomHash(String SID, String username, String firstname, String lastname,String profilePictureUrl, String email, Long externalUserId, String externalUserType, Long room_id, int becomeModeratorAsInt, int showAudioVideoTestAsInt)_
+
+Description: sets the !SessionObject for a certain SID, after setting this Session-Object you can use the 
+SID + a !RoomId to enter any Room.
+
+Params:
+|| *type* || *name* || *description* ||
+|| String || SID || The SID from getSession ||
+|| String || username || any username ||
+|| String || firstname || any firstname ||
+|| String || lastname || any lastname ||
+|| String || profilePictureUrl || any profilePictureUrl ||
+|| String || email || any email ||
+|| Number || externalUserId || if you have any external user Id you may set it here ||
+|| String || externalUserType || you can specify your system-name here, for example "moodle" ||
+|| Number || room_id || the room id the user should be logged in ||
+|| Number || becomeModeratorAsInt || 0 means no Moderator, 1 means Moderator ||
+|| Number || showAudioVideoTestAsInt || 0 means don't show Audio/Video Test, 1 means show Audio/Video Test Application before the user is logged into the room ||
+
 
 --------
 
@@ -267,13 +293,23 @@ Params:
 || Integer || filesPanelHeight || the filesPanelHeight ||
 || Integer || filesPanelWidth || the filesPanelWidth ||
 
+
 === addRoomWithModeration ===
 
 Method: _public Long addRoomWithModeration(String SID, .... see list of Params)_
 
-
-... List if Params tbd ...
-
+Params:
+|| *type* || *name* || *description* ||
+|| String || SID || The SID of the User. This SID must be marked as Loggedin ||
+|| String || name || Name of the Room ||
+|| Long || roomtypes_id || Type of that room (1 = Conference, 2 = Audience, 3 = Restricted) ||
+|| String || comment || any comment ||
+|| Long || numberOfPartizipants || the maximum users allowed in this room ||
+|| Boolean || ispublic || If this room is public (use true if you don't deal with different Organizations) ||
+|| Boolean || appointment || is it a Calendar Room (use false by default) ||
+|| Boolean || isDemoRoom || is it a Demo Room with limited time (use false by default) ||
+|| Boolean || demoTime || time in seconds after the user will be logged out (only enabled if isDemoRoom is true)||
+|| Boolean || isModeratedRoom || Users have to wait untill a Moderator arrives. Use the becomeModerator param in setUserObjectAndGenerateRoomHash to set a user as default Moderator ||
 
 ==== updateRoom ====
 
