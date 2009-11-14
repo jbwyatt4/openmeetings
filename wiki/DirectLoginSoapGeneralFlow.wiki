@@ -5,28 +5,31 @@ _This Feature will is available since Version 0.5.1_
 
 == Summary ==
 
-The trick about the !DirectLogin-Flow (SSO) is that you can go into a room directly without having any !OpenMeetings account. You always use the same (Admin!!) user to login via the Web-Service and then use the !setUserObject method to set custom user-value to a specific session.
+The trick about the !DirectLogin-Flow (SSO) is that you can go into a room directly without having any !OpenMeetings account. You always use the same (Admin!!) user to login via the Web-Service and then use the !setUserObjectAndGenerateRoomHash method to set custom user-value to a specific session. The Method !setUserObjectAndGenerateRoomHash returns a HASH, you add this HASH as param in the URL and thats it.
 
-== Description ==
+== Recommended Scenario ==
 
-The Application Logic of the environment holds an ID of the Room and manages the Room.
-If the ID is created the Room will be created into !OpenMeetings using the SOAP-Gateway.
+You would like that people can create a conference room via your Application and return to that room several times. You only need to store the room-Id in your application logic, and the authentication data if the !OpenMeetings admin user to manage the SOAP connection.
+
 If a user wants to directly login into that room he does that in two basic steps (Phase 2 and Phase 3 in the Graph):
-  # Sets the User session (getSession, loginUser, setUserObject)
-  # Login into the Room, by adding the !RoomId and the SID to the URL
-  
-If the Room needs Password Protection, then this must be implemented in the Application-Logic while 
-managing the Room (Application Logic of the environment). Also this environment has to take care that
-the room will be deleted if it is not needed anymore.
-Additional features on the RoadMap: Access-Log for each room and limit set an overall Room Limit. For example that
-the SOAP-Client is forced to delete old rooms cause he has expired his maximum. This could be used to control 
-the Maximum User per Server.
+  # Sets the User session (getSession, loginUser, setUserObjectAndGenerateRoomHash)
+  # Login into the Room, by adding the HASH from setUserObjectAndGenerateRoomHash to the URL
 
-URL for direct Room access: (sid=6c280410c96e91ea05d25e0b28b10a87 MUST be replaced with a valid SID you create using the SOAP Gateway)
-http://$YOUR_RED5_HOST:$YOUR_RED5_HTTP_PORT/openmeetings/main.lzx.lzr=swf8.swf?roomid=1&sid=6c280410c96e91ea05d25e0b28b10a87&language=4
+The HASH of setUserObjectAndGenerateRoomHash is only one time valid! For security reasons, otherwise people could take that link and send it by email and so flood the system with not-authorized access.
+  
+If the Room needs password protection, then this must be implemented in the Application-Logic while managing the Room (Application Logic of the environment). Also this environment has to take care that the room will be deleted if it is not needed anymore.
+
+URL for direct Room access: (secureHash=6c280410c96e91ea05d25e0b28b10a87 MUST be replaced with a valid HASH you create using the SOAP Gateway Method setUserObjectAndGenerateRoomHash)
+http://$YOUR_RED5_HOST:$YOUR_RED5_HTTP_PORT/openmeetings/main.swf8.swf?secureHash=6c280410c96e91ea05d25e0b28b10a87&language=4
 or
-http://$YOUR_RED5_HOST:$YOUR_RED5_HTTP_PORT/openmeetings/main.lzx.lzr=swf8.swf?roomid=1&sid=6c280410c96e91ea05d25e0b28b10a87
-(see the missing language_id, in this case it will use the default_language_id from the configuration section)
+
+(if the language_id is missing it will use the default_language_id from the configuration section)
+
+== How to set up a user as default Moderator in a Room ==
+
+You may want that the Role from your system is transfered to !OpenMeetings, so that for example in a ELearning application a teacher automatically is an Moderator.
+To force normal Users to wait in a room until the moderator has arrived you need to create the room via the method addRoomWithModeration and set the param *isModeratedRoom* to true.
+To generate a HASH for a User that then automatically is Moderator you set the param *becomeModeratorAsInt* to 1 in the Method setUserObjectAndGenerateRoomHash
 
 
 == General Flow Graph == 
