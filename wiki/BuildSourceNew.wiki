@@ -120,12 +120,11 @@ http://openmeetings.googlecode.com/svn/docs/buildFromSource/deploy_11.png
 Note: The Project is called ROOT. You can only have ONE Root project by Application Server. We need to to that as its required for supporting RTMPT in RED5.
 So the !OpenMeetings will automatically become your Context Root in Tomcat (or whatever Java Application Server)
 
-= How to create red5-webapp =
+= How to build a distribution =
 
 Run the command: ant -f build_red5webapp.xml dist
 
 You will find a directory *dist* that contains !OpenMeetings.
-
 
 == Links ==
 
