@@ -6,7 +6,7 @@ First of all, if this problem is regarding installation of !OpenMeetings, then p
 
 But if there is an Issue related to our software then please first search the database if there is already an open ticket: http://code.google.com/p/openmeetings/issues/list
 
-*If there is no yet you can add a new one: 
+*If there is no you can add a new one: 
 http://code.google.com/p/openmeetings/issues/entry*
 
 New Issues have to be verified by someone of the team and assigned then to a person.
