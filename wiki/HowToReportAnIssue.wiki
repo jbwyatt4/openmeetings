@@ -1,6 +1,6 @@
 #summary How To Report An Issue
 
-== How to report an Issue/Problem ==
+=== How to report an Issue/Problem ===
 
 First of all, if this problem is regarding installation of !OpenMeetings, then please visit and follow the Mailing list (see http://groups.google.com/group/openmeetings-user) ! An Installation problem is in 99% NO Issue.
 
