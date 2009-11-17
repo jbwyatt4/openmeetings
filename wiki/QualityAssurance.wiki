@@ -9,6 +9,7 @@ Basic Master Test (this should be tested every week):
 || . || Start a Screen Sharing Session|| . || . || . ||
 
 
+
 = Video/Audio Check List =
 || ** || ** || *Pass* || *Fail* || *Comments* ||
 || . || Enter conference room and get "Choose Device" popup window|| . || . || . ||
