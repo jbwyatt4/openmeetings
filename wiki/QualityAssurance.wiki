@@ -4,7 +4,6 @@ Basic Master Test (this should be tested every week):
 || ** || ** || *Pass* || *Fail* || *Comments* ||
 || . || Sing up a new User, activate and login|| . || . || . ||
 || . || Try out entering each of the conference rooms one time with the newly create user|| . || . || . ||
-|| . || Upload a PNG, a PDF and a PPT and add them to the whiteboard, click forward and back in the document tools|| . || . || . ||
 || . || Send an invitation to a user (== to your self) and click on the link in the mail|| . || . || . ||
 || . || Start a Screen Sharing Session|| . || . || . ||
 
@@ -25,6 +24,7 @@ Basic Master Test (this should be tested every week):
 
 =  White board / Documents =
 || ** || ** || *Pass* || *Fail* || *Comments* ||
+|| . || Upload a PNG, a PDF and a PPT and add them to the whiteboard, click forward and back in the document tools|| . || . || . ||
 || . || Clicking on the file updates the white board area|| . || . || . ||
 || . || Question: should the pop up asking to clear the white board area always appear when selecting a new image?|| . || . || . ||
 || . || Clicking on the file updates the whiteboard area|| . || . || . ||
