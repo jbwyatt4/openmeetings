@@ -72,7 +72,8 @@
     
     if ($coursedata->groupmode != 0 && empty($g)) {
         //print_r (groups_get_groups($cm->course));
-        $usergroups = groups_get_groups_for_user($USER->id, $cm->course);
+        //$usergroups = groups_get_groups_for_user($USER->id, $cm->course);
+        $usergroups = groups_get_user_groups($cm->course,$page->userid);
         if (count($usergroups) > 1) {
             $table->head  = array ("Your Groups");
             $table->align = array ("center");
