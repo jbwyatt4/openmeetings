@@ -2,7 +2,7 @@
 
 === How to report an Issue/Problem ===
 
-First of all, if this problem is regarding installation of !OpenMeetings, then please visit and follow the Mailing list (see http://groups.google.com/group/openmeetings-user) ! An Installation problem is in 99% NO Issue.
+First of all, if this problem is regarding installation of !OpenMeetings, then please [http://groups.google.com/group/openmeetings-user visit and follow the Mailing list] ! An Installation problem is in 99% NO Issue.
 
 But if there is an Issue related to our software then please first search the database if there is already an open ticket: <br/>
 http://code.google.com/p/openmeetings/issues/list
