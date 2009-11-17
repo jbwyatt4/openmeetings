@@ -8,6 +8,9 @@ Basic Master Test (this should be tested every week):
 || . || Send an invitation to a user (== to your self) and click on the link in the mail|| . || . || . ||
 || . || Start a Screen Sharing Session|| . || . || . ||
 
+= Communication =
+|| ** || ** || *Pass* || *Fail* || *Comments* ||
+|| . || send a message into the chat window|| . || . || . ||
 
 
 = Video/Audio Check List =
