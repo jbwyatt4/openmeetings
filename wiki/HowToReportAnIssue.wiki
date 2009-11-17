@@ -4,12 +4,13 @@
 
 First of all, if this problem is regarding installation of !OpenMeetings, then please visit and follow the Mailing list (see http://groups.google.com/group/openmeetings-user) ! An Installation problem is in 99% NO Issue.
 
-But if there is an Issue related to our software then please first search the database if there is already an open ticket: http://code.google.com/p/openmeetings/issues/list
+But if there is an Issue related to our software then please first search the database if there is already an open ticket: <br/>
+http://code.google.com/p/openmeetings/issues/list
 
 *If there is no Issue reported yet you can add a new one: 
 http://code.google.com/p/openmeetings/issues/entry *
 
-New Issues have to be verified by someone of the team and assigned then to a person.
+New Issues have to be verified by someone of the team and assigned then to a person who will actual do the work. Please respect that people have to pay their bills, so customers come first!
 
 If you wish certain items to be priorities or need help to solve your installation or customization project then please consider hiring someone from the [http://code.google.com/p/openmeetings/wiki/Jobs list of developers].
 
