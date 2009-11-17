@@ -10,7 +10,7 @@ Basic Master Test (this should be tested every week):
 
 = Communication =
 || ** || ** || *Pass* || *Fail* || *Comments* ||
-|| . || send a message into the chat window|| . || . || . ||
+|| . || send a message (chat window)|| . || . || . ||
 
 
 = Video/Audio Check List =
