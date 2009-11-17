@@ -2,7 +2,7 @@
 
 Basic Master Test (this should be tested every week):
 || ** || ** || *Pass* || *Fail* || *Comments* ||
-|| . || Sing up a new User, activate and login|| . || . || . ||
+|| . || Sing up a new user, activate and login|| . || . || . ||
 || . || Edit and save the profile of the new user|| . || . || . ||
 || . || Try out entering each of the conference rooms one time with the newly create user|| . || . || . ||
 || . || Send an invitation to a user (== to your self) and click on the link in the mail|| . || . || . ||
