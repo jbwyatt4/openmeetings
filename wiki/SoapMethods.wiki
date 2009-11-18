@@ -41,6 +41,7 @@ http://localhost:5080/openmeetings/axis2-web/
     * [http://code.google.com/p/openmeetings/wiki/SoapMethods#updateRoomWithModeration updateRoomWithModeration] 
     * [http://code.google.com/p/openmeetings/wiki/SoapMethods#deleteRoom deleteRoom]
     * [http://code.google.com/p/openmeetings/wiki/SoapMethods#kickUser kickUser]
+    * [http://code.google.com/p/openmeetings/wiki/SoapMethods#getRoomIdByExternalId getRoomIdByExternalId]
  
 
 URL for direct Room access: (sid=6c280410c96e91ea05d25e0b28b10a87 MUST be replaced with a valid SID you create using the SOAP Gateway) http://$YOUR_RED5_HOST:$YOUR_RED5_HTTP_PORT/openmeetings/main.lzx.swf8.swf?roomid=1&sid=6c280410c96e91ea05d25e0b28b10a87&language=4 or http://$YOUR_RED5_HOST:$YOUR_RED5_HTTP_PORT/openmeetings/main.lzx.swf8.swf?roomid=1&sid=6c280410c96e91ea05d25e0b28b10a87 (see the missing language_id, in this case it will use the default_language_id from the configuration section)
@@ -378,3 +379,23 @@ Params:
 || *type* || *name* || *description* ||
 || String || SID_Admin ||a admin user's SessionId ||
 || Long || rooms_id || the room's id of the room to get empty ||
+
+
+=== getRoomIdByExternalId ===
+
+Method: _public Long getRoomIdByExternalId(String SID, .... see list of Params)_
+
+Params:
+|| *type* || *name* || *description* ||
+|| String || SID || The SID of the User. This SID must be marked as Loggedin ||
+|| String || name || Name of the Room ||
+|| Long || roomtypes_id || Type of that room (1 = Conference, 2 = Audience, 3 = Restricted) ||
+|| String || comment || any comment ||
+|| Long || numberOfPartizipants || the maximum users allowed in this room ||
+|| Boolean || ispublic || If this room is public (use true if you don't deal with different Organizations) ||
+|| Boolean || appointment || is it a Calendar Room (use false by default) ||
+|| Boolean || isDemoRoom || is it a Demo Room with limited time (use false by default) ||
+|| Boolean || demoTime || time in seconds after the user will be logged out (only enabled if isDemoRoom is true)||
+|| Boolean || isModeratedRoom || Users have to wait untill a Moderator arrives. Use the becomeModerator param in setUserObjectAndGenerateRoomHash to set a user as default Moderator ||
+|| Long || externalRoomId || your external room id may set here ||
+|| String || externalRoomType || you can specify your system-name or type of room here, for example "moodle" ||
