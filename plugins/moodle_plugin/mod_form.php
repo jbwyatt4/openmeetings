@@ -63,10 +63,11 @@ class mod_openmeetings_mod_form extends moodleform_mod {
 
         $mform->addElement('format', 'introformat', get_string('format'));
 
-//-------------------------------------------------------------------------------
+	//-------------------------------------------------------------------------------
         // add standard elements, common to all modules
-        $this->standard_coursemodule_elements();
-//-------------------------------------------------------------------------------
+        $this->standard_coursemodule_elements(array('groups'=>true, 'groupings'=>true, 'groupmembersonly'=>true));
+        
+	//-------------------------------------------------------------------------------
         // add standard buttons, common to all modules
         $this->add_action_buttons();
 

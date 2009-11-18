@@ -70,43 +70,43 @@
     
     $coursedata = get_record ("course_modules", "course", $cm->course, "module", $moduleid->id, "instance", $cm->instance);
     
-    if ($coursedata->groupmode != 0 && empty($g)) {
-        //print_r (groups_get_groups($cm->course));
-        //$usergroups = groups_get_groups_for_user($USER->id, $cm->course);
-        $usergroups = groups_get_user_groups($cm->course,$page->userid);
-        if (count($usergroups) > 1) {
-            $table->head  = array ("Your Groups");
-            $table->align = array ("center");
-            
-            $groupstitles = "";
-            
-            foreach ($usergroups as $usergroup) {
-                $groupdata = get_record ("groups", "id", $usergroup);
-                $groupstitles .= '<a href="view.php?id='.$id.'&g='.$usergroup.'">'.$groupdata->name.'</a><br />';
-            }
-            $table->data[] = array ($groupstitles);
-            
-            print_table($table);
-            
-            $show = "false";
-        }
-        else
-        {
-            $thelink = $sitelink."/".$course->id."/".$cm->instance."/".$usergroups[0];
-        }
-    }
-    else
-    {
-        if (empty($g)) {
-            $thelink = $sitelink."/".$course->id."/".$cm->instance;
-        }
-        else
-        {
-            $thelink = $sitelink."/".$course->id."/".$cm->instance."/".$g;
-        }
-    }
+//    if ($coursedata->groupmode != 0 && empty($g)) {
+//        //print_r (groups_get_groups($cm->course));
+//        //$usergroups = groups_get_groups_for_user($USER->id, $cm->course);
+//        $usergroups = groups_get_user_groups($cm->course,$page->userid);
+//        if (count($usergroups) > 1) {
+//            $table->head  = array ("Your Groups");
+//            $table->align = array ("center");
+//            
+//            $groupstitles = "";
+//            
+//            foreach ($usergroups as $usergroup) {
+//                $groupdata = get_record ("groups", "id", $usergroup);
+//                $groupstitles .= '<a href="view.php?id='.$id.'&g='.$usergroup.'">'.$groupdata->name.'</a><br />';
+//            }
+//            $table->data[] = array ($groupstitles);
+//            
+//            print_table($table);
+//            
+//            $show = "false";
+//        }
+//        else
+//        {
+//            $thelink = $sitelink."/".$course->id."/".$cm->instance."/".$usergroups[0];
+//        }
+//    }
+//    else
+//    {
+//        if (empty($g)) {
+//            $thelink = $sitelink."/".$course->id."/".$cm->instance;
+//        }
+//        else
+//        {
+//            $thelink = $sitelink."/".$course->id."/".$cm->instance."/".$g;
+//        }
+//    }
     
-    if ($show != "false") {
+//    if ($show != "false") {
 
 //    	echo $USER->id."<br/>";
 //    	echo $USER->username."<br/>";
@@ -158,7 +158,7 @@
 			echo "Could not login User to OpenMeetings, check your OpenMeetings Module Configuration";
 			exit();
 		}
-    }
+//    }
 
 
     //print_simple_box_end();
