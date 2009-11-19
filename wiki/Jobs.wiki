@@ -23,3 +23,15 @@
   We provide installation and tuning of Openmeetings, integration with your CRM, CMS and domain controller. Мы предлагаем техническую поддержку на русском языке, включающую установку продукта и интеграцию с имеющимися службами коллективной работы.
   <br/>
  * Oliver Becherer<br/><br/> Installation, Integration, Modification and Customization of OpenMeetings<br/>mailto:ich@oliver-becherer.name<br/>skype:smoeker
+
+  * Roberto Torresani<br/><br/>My development's offer is about Plugin for Integration into E-learning, CMS Platforms, other systems. <br/>I also offer Installation services and hosting for !OpenMeetings.<br/>
+
+  Contact:<br/>
+  Roberto Torresani<br/>
+  Posit s.c. - c/o Polo Tecnologico
+  Via Solteri 38<br/>
+  38100 Trento (Italy)<br/>
+  ++39 (0) 461 1865842<br/>
+  Mail: erreti _ata_ gmail _dota_ com<br/>
+
+ 
