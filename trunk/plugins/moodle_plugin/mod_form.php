@@ -18,7 +18,7 @@ class mod_openmeetings_mod_form extends moodleform_mod {
         $mform->addRule('name', null, 'required', null, 'client');
         
     /// Adding the "Room Type" field
-    	$mform->addElement('select', 'type', get_string('Room Type', 'openmeetings'), array('1'=>'Conference Room', '2'=>'Audience Room'));
+    	$mform->addElement('select', 'type', get_string('Room Type', 'openmeetings'), array('1'=>'Conference Room', '2'=>'Audience Room', '3'=>'Restricted Room'));
         $mform->addRule('type', null, 'required', null, 'client');
         
     /// Adding the "Number of Participants" field
