@@ -50,7 +50,6 @@ Basic Master Test (this should be tested every week):
 == Connections ==
 || ** || ** || *Pass* || *Fail* || *Comments* ||
 || . || Connections list appears correctly || . || . || . ||
-|| . || . || . || . || . ||
 
 
 == Organsiations ==
