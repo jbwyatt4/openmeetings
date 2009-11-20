@@ -64,6 +64,7 @@ Basic Master Test (this should be tested every week):
 || ** || ** || *Pass* || *Fail* || *Comments* ||
 || . || Conference Rooms list appears correctly || . || . || . ||
 || . || Tool bar has the following buttons: save, new record, refresh record, and delete record|| . || . || . ||
+|| . || create a new room|| . || . || . ||
 
 == Configuration ==
 || ** || ** || *Pass* || *Fail* || *Comments* ||
