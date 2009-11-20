@@ -46,6 +46,13 @@ Basic Master Test (this should be tested every week):
 || . || User list appears correctly || . || . || . ||
 || . || Tool bar has the following buttons: save, new record, refresh record, and delete record|| . || . || . ||
 
+
+== Connections ==
+|| ** || ** || *Pass* || *Fail* || *Comments* ||
+|| . || Connections list appears correctly || . || . || . ||
+|| . || . || . || . || . ||
+
+
 == Organsiations ==
 || ** || ** || *Pass* || *Fail* || *Comments* ||
 || . || Organsation list appears correctly || . || . || . ||
