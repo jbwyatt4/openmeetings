@@ -12,7 +12,7 @@
 //echo $_GET["red5host"]."<br/>";
 //echo $_GET["red5httpPort"]."<br/>";
 
-$openmeetings_swfURL = "http://".$_GET["red5host"].":".$_GET["red5httpPort"]."/openmeetings/main.swf8.swf?" .
+$openmeetings_swfURL = "http://".$_GET["red5host"].":".$_GET["red5httpPort"]."/openmeetings/main.swf8.swf?lzproxied=solo&" .
 		"roomid=".$_GET["roomid"] .
 		"&sid=".$_GET["sid"] .
 		"&language=".$_GET["language"] .
