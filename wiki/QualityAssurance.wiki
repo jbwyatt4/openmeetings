@@ -93,6 +93,7 @@ Basic Master Test (this should be tested every week):
 
 ==  Calendar ==
 || ** || ** || *Pass* || *Fail* || *Comments* ||
+|| . || add an event || . || . || . ||
 
 ==  Contacts ==
 || ** || ** || *Pass* || *Fail* || *Comments* ||
