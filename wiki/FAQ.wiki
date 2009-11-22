@@ -2,5 +2,6 @@
 
 = Authorization =
 
-Q. Only admin can login into the system. How to enable other users?				 
+Q. Only admin can login into the system. How to enable other users?
+
 A. It's likely LDAP the path to LDAP config file is correct, but the file itself provide invalid configuration. Clear the path to the config file to resolve the problem.
