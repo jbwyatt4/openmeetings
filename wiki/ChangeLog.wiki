@@ -8,7 +8,7 @@
   * Super Moderators (cannot be removed)
   * Simplified and reworked UI, various bugfixes and help-texts
   * New Secure Method for generating HASH's for direct Login via SOAP
-  * !OpenMeetins as WAR-Version
+  * !OpenMeetings as WAR-Version
   * Various fixes and improvements
 
 == Major Changes in Moodle Mod 0.6 ==
