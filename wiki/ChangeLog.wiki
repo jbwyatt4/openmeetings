@@ -10,6 +10,7 @@
   * New Secure Method for generating HASH's for direct Login via SOAP
   * !OpenMeetings as WAR-Version
   * Various fixes and improvements
+  * Change to Eclipse Public License for !OpenMeetings
 
 == Major Changes in Moodle Mod 0.6 ==
 
