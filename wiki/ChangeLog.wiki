@@ -1,5 +1,15 @@
 #summary Release Notes
 
+== Major changes in Version 1.0 RC1 ==
+
+  * New third room-type: "Restricted"
+  * New Calendar Module to Plan Meetings
+  * New Room configuration with option to add Default Moderators and Super Moderator
+  * Super Moderators (cannot be removed)
+  * Simplified and reworked UI, various bugfixes and help-texts
+  * New Secure Method for generating HASH's for direct Login via SOAP
+  * OpenMeetins as WAR-Version
+
 == Major changes in Version 0.9 RC5 ==
 
   * New Screen Sharing Sharer and Clients using the [ODSP OpenMeetings Screen Sharing Protocol], see also the [http://groups.google.com/group/openmeetings-user/browse_thread/thread/ebc77e02368a0cfc Announcement at the Mailing List]
