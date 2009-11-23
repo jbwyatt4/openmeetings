@@ -9,6 +9,13 @@
   * Simplified and reworked UI, various bugfixes and help-texts
   * New Secure Method for generating HASH's for direct Login via SOAP
   * !OpenMeetins as WAR-Version
+  * Various fixes and improvements
+
+== Major Changes in Moodle Mod 0.6 ==
+
+  * Compatible with latest Nightly Builds and Version 1.0 RC1
+  * Grouping and Group Configuration
+  * New 3th Room-Type Restricted available via Module Form
 
 == Major changes in Version 0.9 RC5 ==
 
