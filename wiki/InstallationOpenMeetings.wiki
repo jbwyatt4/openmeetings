@@ -10,6 +10,7 @@
 
 = Requirements =
 
+  * Java Version greater or equal 6
   * Database available (MySQL,Postgres,... MSSQL,Oracle,DB2 see [http://docs.jboss.org/hibernate/core/3.3/reference/en/html/session-configuration.html#configuration-optional-dialects full-list]) It is recommended to make/use an empty database/scheme
   Database MUST listen and allow TCP/IP connections! And the default character-set/scheme must be UTF8! _For example_ a fresh MySQL does *not* listen on TCP/IP by default and has *not* utf8 as default-character-set defined. You have to change these settings and restart your database server so that changes take effect (mysql-config is in my.cnf). Postgres for example does also not listen by default on TCP/IP but uses by default UTF8 (since postgres 7 or 8). To change Postgres listening on TCP/IP check postgresql.conf and add your host to the pg_hba.conf. In Postgres you need to create a database using *template1* cause template1 create automatically a scheme called *public* which is needed (and since postgres 8 you can use several schemes inside one database public is the default one [http://www.postgresql.org/docs/8.2/interactive/ddl-schemas.html#DDL-SCHEMAS-PATH Postgres-Docs]).
   * *!OpenOffice-Service* started and listening on port 8100 (see OpenOfficeConverter, this is not necessary for installation but for running later on)
