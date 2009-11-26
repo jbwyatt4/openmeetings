@@ -69,7 +69,7 @@ After Running the Installer all basics are installed. Now login and go to the Me
   * if you resize your own video-pod in the conference much larger and then synchronize  the stream, all clients will get a better picture (it also needs more bandwidth, as it will take the actual new height / width numbers to publish your stream)
   * there are some hidden emoticons (for example (activate)), you might want to add your own ones [http://openmeetings.googlecode.com/svn/trunk/webapp/webapp/openmeetings/public/emoticons/emotes.xml Full List]
 
-= Links, Changelog, VMWare, Debian =
+= VMWare, Debian, Links, Changelog  =
 
   * [ChangeLog ChangeLog]
   * [http://i4demo.com/openmeetings/builds/vmware/openmeetings_1.0_RC1.zip VMWare Image Version 1.0 RC1]
