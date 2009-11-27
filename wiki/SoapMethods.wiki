@@ -1,6 +1,8 @@
 #summary Available SOAP-Services to login directly/embedding OpenMeetings
 #labels Phase-Design,Phase-Implementation
 
+<wiki:toc max_depth="4" />
+
 == Description ==
 
 All Services here. You can see the recommended flow of embedding for example Rooms and SIngle Sign on into your application at 
