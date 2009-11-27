@@ -1,10 +1,7 @@
 #summary Available SOAP-Services to login directly/embedding OpenMeetings
 #labels Phase-Design,Phase-Implementation
 
-<wiki:toc max_depth="4" />
-
-== Description ==
-
+*Description*
 All Services here. You can see the recommended flow of embedding for example Rooms and SIngle Sign on into your application at 
 DirectLoginSoapGeneralFlow
 
@@ -14,36 +11,9 @@ http://openmeetings.de:5080/openmeetings/axis2-web/
 http://localhost:5080/openmeetings/axis2-web/
 
 
-== Availible Services ==
+*Availible Services*
 
-  * [http://code.google.com/p/openmeetings/wiki/SoapMethods#UserService UserService] - manage Users, Session and Errors
-  Methods:
-    * [http://code.google.com/p/openmeetings/wiki/SoapMethods#getSession getSession] 
-    * [http://code.google.com/p/openmeetings/wiki/SoapMethods#loginUser loginUser] 
-    * [http://code.google.com/p/openmeetings/wiki/SoapMethods#getErrorByCode getErrorByCode] 
-    * [http://code.google.com/p/openmeetings/wiki/SoapMethods#setUserObject setUserObject] deprecated use setUserObjectAndGenerateRoomHash
-    * [http://code.google.com/p/openmeetings/wiki/SoapMethods#setUserObjectAndGenerateRoomHash setUserObjectAndGenerateRoomHash] 
-  
-  * [http://code.google.com/p/openmeetings/wiki/SoapMethods#FileService FileService] - browse and edit Files of a Conference-Room
-  Methods:
-    * [http://code.google.com/p/openmeetings/wiki/SoapMethods#getListOfFiles getListOfFiles] 
-    * [http://code.google.com/p/openmeetings/wiki/SoapMethods#deleteFile deleteFile]
-    
-  * [http://code.google.com/p/openmeetings/wiki/SoapMethods#RoomService RoomService] - manage Conference Rooms
-  Methods:
-    * [http://code.google.com/p/openmeetings/wiki/SoapMethods#getRoomsPublic getRoomsPublic]  
-    * [http://code.google.com/p/openmeetings/wiki/SoapMethods#getRoomTypes getRoomTypes]  
-    * [http://code.google.com/p/openmeetings/wiki/SoapMethods#getRoomById getRoomById] 
-    * [http://code.google.com/p/openmeetings/wiki/SoapMethods#getRoomWithCurrentUsersById getRoomWithCurrentUsersById]  
-    * [http://code.google.com/p/openmeetings/wiki/SoapMethods#getRooms getRooms] 
-    * [http://code.google.com/p/openmeetings/wiki/SoapMethods#getRooms getRoomsWithCurrentUsers]  
-    * [http://code.google.com/p/openmeetings/wiki/SoapMethods#addRoom addRoom] (deprecated use addRoomWithModeration)
-    * [http://code.google.com/p/openmeetings/wiki/SoapMethods#updateRoom updateRoom] (deprecated use updateRoomWithModeration)
-    * [http://code.google.com/p/openmeetings/wiki/SoapMethods#addRoomWithModeration addRoomWithModeration] 
-    * [http://code.google.com/p/openmeetings/wiki/SoapMethods#updateRoomWithModeration updateRoomWithModeration] 
-    * [http://code.google.com/p/openmeetings/wiki/SoapMethods#deleteRoom deleteRoom]
-    * [http://code.google.com/p/openmeetings/wiki/SoapMethods#kickUser kickUser]
-    * [http://code.google.com/p/openmeetings/wiki/SoapMethods#getRoomIdByExternalId getRoomIdByExternalId]
+  <wiki:toc max_depth="4" />
  
 
 URL for direct Room access: (sid=6c280410c96e91ea05d25e0b28b10a87 MUST be replaced with a valid SID you create using the SOAP Gateway) http://$YOUR_RED5_HOST:$YOUR_RED5_HTTP_PORT/openmeetings/main.lzx.swf8.swf?roomid=1&sid=6c280410c96e91ea05d25e0b28b10a87&language=4 or http://$YOUR_RED5_HOST:$YOUR_RED5_HTTP_PORT/openmeetings/main.lzx.swf8.swf?roomid=1&sid=6c280410c96e91ea05d25e0b28b10a87 (see the missing language_id, in this case it will use the default_language_id from the configuration section)
