@@ -119,7 +119,7 @@ Params:
 Method: _public Long setUserObjectAndGenerateRoomHash(String SID, String username, String firstname, String lastname,String profilePictureUrl, String email, Long externalUserId, String externalUserType, Long room_id, int becomeModeratorAsInt, int showAudioVideoTestAsInt)_
 
 Description: sets the !SessionObject for a certain SID, after setting this Session-Object you can use the 
-SID + a !RoomId to enter any Room.
+SID + a !RoomId to enter any Room. ... Session-Hashs are deleted 15 minutes after the creation if not used.
 
 Params:
 || *type* || *name* || *description* ||
@@ -135,6 +135,30 @@ Params:
 || Number || becomeModeratorAsInt || 0 means no Moderator, 1 means Moderator ||
 || Number || showAudioVideoTestAsInt || 0 means don't show Audio/Video Test, 1 means show Audio/Video Test Application before the user is logged into the room ||
 
+==== setUserObjectAndGenerateRoomHashByURL ====
+
+Method: _public Long setUserObjectAndGenerateRoomHashByURL(String SID, String username, String firstname, String lastname,String profilePictureUrl, String email, Long externalUserId, String externalUserType, Long room_id, int becomeModeratorAsInt, int showAudioVideoTestAsInt)_
+
+Description: sets the !SessionObject for a certain SID, after setting this Session-Object you can use the 
+SID + a !RoomId to enter any Room. 
+
+++ the user can press f5 to reload the page / use the link several times, the SOAP Gateway does remember the IP of the user and the will only the first user that enters the room allow to re-enter. ... Session-Hashs are deleted 15 minutes after the creation if not used.
+
+available since Issue 1016
+
+Params:
+|| *type* || *name* || *description* ||
+|| String || SID || The SID from getSession ||
+|| String || username || any username ||
+|| String || firstname || any firstname ||
+|| String || lastname || any lastname ||
+|| String || profilePictureUrl || any profilePictureUrl ||
+|| String || email || any email ||
+|| Number || externalUserId || if you have any external user Id you may set it here ||
+|| String || externalUserType || you can specify your system-name here, for example "moodle" ||
+|| Number || room_id || the room id the user should be logged in ||
+|| Number || becomeModeratorAsInt || 0 means no Moderator, 1 means Moderator ||
+|| Number || showAudioVideoTestAsInt || 0 means don't show Audio/Video Test, 1 means show Audio/Video Test Application before the user is logged into the room ||
 
 --------
 
