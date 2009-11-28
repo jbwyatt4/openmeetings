@@ -21,7 +21,7 @@ The process of updating is in general as following:<br/>
 5) Import those tables from step 3) into your prod server<br/>
 6) Copy the dir: openmeetings/WEB-INF (actually you often only need to update openmeetings/WEB-INF/lib/openmeetings.jar and openmeetings/WEB-INF/lib/openmeetings-templates.jar) from your local  to the new openmeetings-version and overwrite the old ones<br/>
 7) Copy the dir: openmeetings/screen from your local to the new openmeetings-version and overwrite the old ones<br/>
-8) Copy the openmeetings/maindebug.lzx.swf8.swf, openmeetings/main.lzx.swf8.swf and openmeetings/config.xml from your local to the new openmeetings-version and  <br/>
+8) Copy the openmeetings/maindebug.swf8.swf, openmeetings/main.swf8.swf, openmeetings/index.jsp and openmeetings/config.xml from your local to the new openmeetings-version and  <br/>
 9) Maybe clear growing and big log-files.<br/>
 => There is no need to check the hibernate.cfg.xml in general, but it might be useful to check if all tables are still the same, sometime we add new tables to the scheme that need to be added.<br/>
 10) restart prod and test (sometimes you need to clear your browser cache to see changes)<br/>
