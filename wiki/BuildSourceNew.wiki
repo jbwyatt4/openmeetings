@@ -124,7 +124,8 @@ So the !OpenMeetings will automatically become your Context Root in Tomcat (or w
 
 Run the command: ant -f build_red5webapp.xml dist
 
-You will find a directory *dist* that contains !OpenMeetings.
+Tthere is no need to compile the client additionally! the ant task does it all!
+You will find a directory *dist* that contains !OpenMeetings and a red5-server.
 
 == Links ==
 
