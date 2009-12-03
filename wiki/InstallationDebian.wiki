@@ -8,12 +8,12 @@ _this sample is rather outdated_
 
 the installation procedure (if you forget of all 3th party requirements) is as simple as the following:
 
-donwload openmeetings-package (you can download it into your home-directory)
-unzip it
-cd /openmeetings-package/webapps/openmeetings/conf and configure the hibernate.cfg.xml
+donwload openmeetings-package (you can download it into your home-directory)<br/>
+unzip it<br/>
+cd /openmeetings-package/webapps/openmeetings/conf and configure the hibernate.cfg.xml<br/>
 cd up again to  /openmeetings-package/
-run the red5.sh
-
+run the red5.sh<br/>
+<br/>
 that is all!
 
 no copy of any dirs, no /etc/init.d/, ^^
