@@ -1,6 +1,28 @@
 #labels Installation
 = Installing !Openmeetings on debian etch =
 
+
+--------
+
+_this sample is rather outdated_
+
+the installation procedure (if you forget of all 3th party requirements) is as simple as the following:
+
+donwload openmeetings-package (you can download it into your home-directory)
+unzip it
+cd /openmeetings-package/webapps/openmeetings/conf and configure the hibernate.cfg.xml
+cd up again to  /openmeetings-package/
+run the red5.sh
+
+that is all!
+
+no copy of any dirs, no /etc/init.d/, ^^
+In doubt see what is written down in here:http://code.google.com/p/openmeetings/wiki/InstallationOpenMeetings
+There is no mention of any init.d-script or other copy actions.
+
+
+--------
+
 In this how-to I'm going to descript way to install !OpenMeetings on debian GNU/Linux Etch (4.0), Steps are following way:
  
  * What we need!
