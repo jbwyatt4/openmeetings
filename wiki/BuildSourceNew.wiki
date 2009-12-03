@@ -114,7 +114,10 @@ http://openmeetings.googlecode.com/svn/docs/buildFromSource/deploy_11.png
 
 = How to create .war =
 
-  * Run the ant - task
+_It is recommended to deploy !OpenMeetings in the standalone version_
+
+  * Run the ant - dist
+  * (eventually you have to run "ant signWebStartJars" after that again)
   * Export in Eclipse a .war file
 
 Note: The Project is called ROOT. You can only have ONE Root project by Application Server. We need to to that as its required for supporting RTMPT in RED5.
