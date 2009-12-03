@@ -1,4 +1,4 @@
-#summary Installation of 0.7 RC2 to 0.9 RC5
+#summary Installation of 0.7 RC2 to 1.0 RC1
 #labels Featured
 
 <wiki:toc max_depth="1" />
