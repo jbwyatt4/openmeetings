@@ -50,7 +50,10 @@ class mod_openmeetings_mod_form extends moodleform_mod {
 							    '18' => 'thai', 
 							    '19' => 'persian', 
 							    '20' => 'czech', 
-							    '21' => 'galician');
+							    '21' => 'galician', 
+							    '22' => 'finnish', 
+							    '23' => 'polish', 
+							    '24' => 'greek');
     
     	$mform->addElement('select', 'language', get_string('Room Language', 'openmeetings'), $language_array);
         $mform->addRule('language', null, 'required', null, 'client');
