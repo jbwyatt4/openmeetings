@@ -8,7 +8,7 @@
   * Minimalistic requirement (without Document Converters, Recorder and Upload feature)  1GHz CPU 1 GB RAM
   * Recommended requirement 2x/4x 2GHz ++ CPU (32 or 64Bit) 4GB RAM. If you have a 64Bit Operating System check if there is a !OpenOffice 64Bit Version [http://download.openoffice.org/other.html#de available for your OS]
 
-  * Headset/Microphone recommendation: Logitech ClearChat PC, for example from [http://www.amazon.de/Logitech-ClearChat-kabelloser-Kopfh%C3%B6rer-Transmitter/dp/B00166WSN4 Amazon] or [http://shop.ebay.com/i.html?_nkw=Logitech+ClearChat+Wireless&_sacat=0&_trksid=p3286.m270.l1313&LH_BIN=1&LH_IncludeSIF=1&_odkw=Logitech+ClearChat+PC&_osacat=0 EBay Auctions]
+  * Headset/Microphone recommendation: Logitech !ClearChat PC Wireless, for example from [http://www.amazon.de/Logitech-ClearChat-kabelloser-Kopfh%C3%B6rer-Transmitter/dp/B00166WSN4 Amazon] or [http://shop.ebay.com/i.html?_nkw=Logitech+ClearChat+Wireless&_sacat=0&_trksid=p3286.m270.l1313&LH_BIN=1&LH_IncludeSIF=1&_odkw=Logitech+ClearChat+PC&_osacat=0 EBay Auctions]
 
 = Requirements =
 
