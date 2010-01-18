@@ -112,8 +112,8 @@ http://localhost:8080/install<br/>
 http://openmeetings.googlecode.com/svn/docs/buildFromSource/deploy_11.png
 
 13) If you have already imported the files into the database you can directly goto the application: <br/>
-Debug-Version: http://localhost:8080/openmeetings/maindebug.lzx?lzproxied=solo<br/>
-Normal-Version: http://localhost:8080/openmeetings/main.lzx?lzproxied=solo<br/>
+Debug-Version: http://localhost:8080/openmeetings/maindebug.lzx?lzproxied=solo&lzr=swf8<br/>
+Normal-Version: http://localhost:8080/openmeetings/main.lzx?lzproxied=solo&lzr=swf8<br/>
 <br/>
 
 = How to create .war =
