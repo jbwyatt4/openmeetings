@@ -1,0 +1,195 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+	<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=windows-1251">
+	<TITLE></TITLE>
+	<META NAME="GENERATOR" CONTENT="OpenOffice.org 3.0  (Win32)">
+	<META NAME="AUTHOR" CONTENT="Родион Волков">
+	<META NAME="CREATED" CONTENT="20091203;15104500">
+	<META NAME="CHANGEDBY" CONTENT="Родион Волков">
+	<META NAME="CHANGED" CONTENT="20100120;17232500">
+	<META NAME="Поле 1" CONTENT="">
+	<META NAME="Поле 2" CONTENT="">
+	<META NAME="Поле 3" CONTENT="">
+	<META NAME="Поле 4" CONTENT="">
+	<STYLE TYPE="text/css">
+	<!--
+		@page { size: 8.5in 11in; margin: 0.79in }
+		P { margin-bottom: 0.08in }
+		H1 { margin-bottom: 0.08in; page-break-after: avoid }
+		H1.western { font-family: "Arial", sans-serif; font-size: 16pt; font-weight: bold }
+		H1.cjk { font-family: "Lucida Sans Unicode"; font-size: 16pt; font-weight: bold }
+		H1.ctl { font-family: "Tahoma"; font-size: 16pt; font-weight: bold }
+		H2 { margin-bottom: 0.08in; page-break-after: avoid }
+		H2.western { font-family: "Arial", sans-serif; font-size: 14pt; font-style: italic; font-weight: bold }
+		H2.cjk { font-family: "Lucida Sans Unicode"; font-size: 14pt; font-style: italic; font-weight: bold }
+		H2.ctl { font-family: "Tahoma"; font-size: 14pt; font-style: italic; font-weight: bold }
+	-->
+	</STYLE>
+</HEAD>
+<BODY LANG="ru-RU" LINK="#000080" VLINK="#800000" DIR="LTR">
+<H1 LANG="en-US" CLASS="western" ALIGN=CENTER>Using OpenMeetings as
+instant communication server.</H1>
+<P LANG="en-US" ALIGN=CENTER><BR><BR>
+</P>
+<H2 LANG="en-US" CLASS="western">Introduction</H2>
+<P LANG="en-US" STYLE="margin-top: 0.17in"><FONT FACE="Arial, sans-serif">Have
+you ever thought about making a deep integration of OpenMeetings into
+your own site? Like making a registered user being able to conference
+with another one, if they are both reading the same site at the
+moment?</FONT></P>
+<P LANG="en-US" STYLE="margin-top: 0.17in"><FONT FACE="Arial, sans-serif">With
+the creation of instant communication server script pack you now can
+implement instant communication using OpenMeetings server on any of
+your CMS sites, or anywhere else. The technology is simple &ndash;
+you implement some of the JavaScript functions on the client side,
+such as client behavior in cases of being logged on and off,
+receiving a call(conference request), set some variables in scripts,
+such as server script location, OpenMeetings server location, set up
+a small database using our database creation script, and have fun.</FONT></P>
+<H2 LANG="en-US" CLASS="western">Instant communication server script
+pack contents</H2>
+<UL>
+	<P LANG="en-US" STYLE="margin-top: 0.17in"><FONT FACE="Arial, sans-serif">Our
+	script pack contains:</FONT></P>
+	<LI><P STYLE="margin-top: 0.17in"><SPAN LANG="en-US"><I><B>om_server.php</B></I></SPAN><SPAN LANG="en-US">
+	&ndash; </SPAN><FONT FACE="Arial, sans-serif"><SPAN LANG="en-US">a
+	php script that acts as instant communication server, processing
+	logging on and off of  your site's users, and establishing calls
+	between them. After the call has been arranged, it creates a room on
+	the OpenMeetings server scripted inside, and gives the unique links
+	to that room to the users. Uses MySQL as a database for storing
+	data.</SPAN></FONT></P>
+	<LI><P STYLE="margin-top: 0.17in"><SPAN LANG="en-US"><I><B>openMeetingsAjaxClientLibrary.js</B></I></SPAN><SPAN LANG="en-US">
+	&ndash; </SPAN><FONT FACE="Arial, sans-serif"><SPAN LANG="en-US">a
+	JavaScript program that is responsible for all the client
+	functionality with the above server, receives commands in the form
+	of  functions, and responds in callbacks.</SPAN></FONT></P>
+	<LI><P STYLE="margin-top: 0.17in"><SPAN LANG="en-US"><I><B>masterSlaveDeterminator.js</B></I></SPAN><SPAN LANG="en-US">
+	&ndash; </SPAN><FONT FACE="Arial, sans-serif"><SPAN LANG="en-US">a
+	traffic optimization JavaScript program, that wraps the above
+	JavaScript to decrease the traffic volume. Now, having several
+	windows with the same page opened only one of them will work as a
+	communication client, others will just pass commands and reaction
+	from one to another.</SPAN></FONT></P>
+	<LI><P STYLE="margin-top: 0.17in"><SPAN LANG="en-US"><I><B>jquery.cookies.2.1.0.js
+	</B></I></SPAN><SPAN LANG="en-US">&ndash; </SPAN><FONT FACE="Arial, sans-serif"><SPAN LANG="en-US">this
+	well-known cookies library was used to simplify the work of the
+	JavaScript programs </SPAN></FONT>
+	</P>
+	<LI><P STYLE="margin-top: 0.17in"><SPAN LANG="en-US"><I><B>uuid.js</B></I></SPAN><SPAN LANG="en-US">
+	&ndash; </SPAN><FONT FACE="Arial, sans-serif"><SPAN LANG="en-US">library to implement GUID-like string constants generation</SPAN></FONT></P>
+	<LI><P STYLE="margin-top: 0.17in"><SPAN LANG="en-US"><I><B>databaseCreationScript.sql</B></I></SPAN><SPAN LANG="en-US">
+	&ndash; </SPAN><FONT FACE="Arial, sans-serif"><SPAN LANG="en-US">SQL
+	database creation script for your MySQL database.</SPAN></FONT></P>	
+	<LI><P STYLE="margin-top: 0.17in"><SPAN LANG="en-US"><I><B>test_functionality.php</B></I></SPAN><SPAN LANG="en-US">,
+	</SPAN><SPAN LANG="en-US"><I><B>user.tmpl</B></I></SPAN><SPAN LANG="en-US">,
+	</SPAN><SPAN LANG="en-US"><I><B>invite.tmpl</B></I></SPAN><SPAN LANG="en-US">
+	&ndash; </SPAN><FONT FACE="Arial, sans-serif"><SPAN LANG="en-US">a
+	sample client code that uses the above </SPAN></FONT><FONT FACE="Arial, sans-serif"><SPAN LANG="en-US">functionality,
+	implementation of the similar code on your web site will give you
+	the instant communication functionality with OpenMeetings. Has two
+	HTML/JavaScript templates, for entering the required user data, and a
+	template for a user page with all the communication functionality.
+	Override the</SPAN></FONT><SPAN LANG="en-US"> </SPAN><SPAN LANG="en-US"><I><B>user.tmpl
+	 </B></I></SPAN><FONT FACE="Arial, sans-serif"><SPAN LANG="en-US">file
+	if you want to test your variant of interface code, then add the
+	code to your page.</SPAN></FONT></P>
+</UL>
+<P LANG="en-US"><BR><BR>
+</P>
+<H2 LANG="en-US" CLASS="western">Required steps to make everything
+work</H2>
+<P LANG="en-US" STYLE="margin-top: 0.17in"><FONT FACE="Arial, sans-serif">In
+order for everything to work, you need to have the following data
+scripted:</FONT></P>
+<P STYLE="margin-top: 0.17in"><FONT FACE="Arial, sans-serif"><SPAN LANG="en-US">in</SPAN></FONT>
+<I><B>om_server.php:</B></I></P>
+<P STYLE="margin-left: 0.17in; margin-bottom: 0in"><FONT FACE="Courier New, monospace"><FONT SIZE=2 STYLE="font-size: 9pt">define(&quot;OM_ADMIN_LOGIN&quot;,
+<FONT COLOR="#ff0000"><SPAN LANG="en-US">OpenMeetings Admin Login </SPAN></FONT>);</FONT></FONT></P>
+<P STYLE="margin-left: 0.17in; margin-bottom: 0in"><FONT FACE="Courier New, monospace"><FONT SIZE=2 STYLE="font-size: 9pt">define(&quot;OM_ADMIN_PASS&quot;,
+<FONT COLOR="#ff0000"><SPAN LANG="en-US">OpenMeetings Admin Password</SPAN></FONT><SPAN LANG="en-US">
+</SPAN>);</FONT></FONT></P>
+<P STYLE="margin-left: 0.17in; margin-bottom: 0in"><FONT FACE="Courier New, monospace"><FONT SIZE=2 STYLE="font-size: 9pt">define(&quot;OM_SERVER_ADDRESS&quot;,
+</FONT></FONT><FONT COLOR="#ff0000"><FONT FACE="Courier New, monospace"><FONT SIZE=2 STYLE="font-size: 9pt"><SPAN LANG="en-US">OpenMeetings
+Server Address</SPAN></FONT></FONT></FONT><FONT FACE="Courier New, monospace"><FONT SIZE=2 STYLE="font-size: 9pt"><SPAN LANG="en-US">
+</SPAN></FONT></FONT><FONT FACE="Courier New, monospace"><FONT SIZE=2 STYLE="font-size: 9pt">);</FONT></FONT></P>
+<P STYLE="margin-left: 0.17in; margin-bottom: 0in"><FONT FACE="Courier New, monospace"><FONT SIZE=2 STYLE="font-size: 9pt">$link
+= mysql_connect(<FONT COLOR="#ff0000">MySql
+server address - the one that has a database created with</FONT><SPAN LANG="en-US">
+</SPAN><SPAN LANG="en-US"><I><B>databaseCreationScript.sql</B></I></SPAN><SPAN LANG="en-US">
+, </SPAN><FONT COLOR="#ff0000"><SPAN LANG="en-US">username</SPAN></FONT>,
+<FONT COLOR="#ff0000"><SPAN LANG="en-US">password</SPAN></FONT><SPAN LANG="en-US">
+</SPAN>);</FONT></FONT></P>
+	<P STYLE="margin-top: 0.17in"><FONT FACE="Arial, sans-serif"><SPAN LANG="en-US">in</SPAN></FONT><SPAN LANG="en-US">
+	</SPAN><SPAN LANG="en-US"><I><B>openMeetingsAjaxClientLibrary.js:</B></I></SPAN></P>
+<P STYLE="margin-left: 0.17in"><FONT FACE="Courier New, monospace"><FONT SIZE=2 STYLE="font-size: 9pt"><SPAN LANG="ru-RU">	var
+server_address = </SPAN></FONT></FONT><FONT COLOR="#ff0000"><FONT FACE="Courier New, monospace"><FONT SIZE=2 STYLE="font-size: 9pt"><SPAN LANG="en-US">URL
+with location of</SPAN></FONT></FONT></FONT><FONT FACE="Courier New, monospace"><FONT SIZE=2 STYLE="font-size: 9pt"><SPAN LANG="en-US">
+</SPAN></FONT></FONT><FONT FACE="Courier New, monospace"><FONT SIZE=2 STYLE="font-size: 9pt"><SPAN LANG="ru-RU"><I><B>om_server.php</B></I></SPAN></FONT></FONT>
+</P>
+<P LANG="en-US" STYLE="margin-top: 0.17in"><FONT FACE="Arial, sans-serif"><FONT SIZE=3>in
+client code (sample:</FONT>
+<FONT SIZE=2 STYLE="font-size: 9pt"><I><B>user.tmpl</B></I></FONT>):</FONT></P>
+<P STYLE="margin-left: 0.17in"><FONT FACE="Courier New, monospace"><FONT SIZE=2 STYLE="font-size: 9pt"><SPAN LANG="ru-RU">	sv_setserveraddress(
+</SPAN></FONT></FONT><FONT COLOR="#ff0000"><FONT FACE="Courier New, monospace"><FONT SIZE=2 STYLE="font-size: 9pt"><SPAN LANG="en-US">URL
+with location of</SPAN></FONT></FONT></FONT><FONT FACE="Courier New, monospace"><FONT SIZE=2 STYLE="font-size: 9pt"><SPAN LANG="ru-RU"><I><B>om_server.php</B></I></SPAN></FONT></FONT><FONT FACE="Courier New, monospace">);</FONT></P>
+<P STYLE="margin-left: 0.17in"><FONT FACE="Courier New, monospace"><FONT SIZE=2 STYLE="font-size: 9pt">	sv_setuserinfo(
+<FONT COLOR="#ff0000"><SPAN LANG="en-US">User ID</SPAN></FONT>, <FONT COLOR="#ff0000"><SPAN LANG="en-US">User
+display name</SPAN></FONT><SPAN LANG="en-US"> </SPAN>);</FONT></FONT></P>
+	<P LANG="en-US"></P>
+	<P STYLE="margin-top: 0.17in"> <FONT FACE="Arial, sans-serif"><FONT SIZE=3><SPAN LANG="en-US">As you see, 
+	by the time the client JavaScript code is displayed you should know which user is being shown, so please 
+	include this code into the page only if you know the user display name and his ID (any key, unique for each user).
+	After everything has been scripted and you've made sure OpenMeetings
+	server is up and running, you should only implement the reaction of
+	the client code on different events, such as incoming call (
+	conferencing request ), reaction on your own call and such, all
+	those method samples already exist in</SPAN></FONT></FONT><FONT FACE="Courier New, monospace"><FONT SIZE=2 STYLE="font-size: 9pt"><SPAN LANG="en-US">
+	</SPAN></FONT></FONT><SPAN LANG="en-US"><I><SPAN STYLE="text-decoration: none"><B>user.tmpl</B></SPAN></I></SPAN>
+	<FONT FACE="Arial, sans-serif"><SPAN LANG="en-US">file, which you
+	can study.</SPAN></FONT></P>
+	<P STYLE="margin-top: 0.17in"><FONT FACE="Arial, sans-serif"><SPAN LANG="en-US">Here
+	is the short description of every method you will need to override:</SPAN></FONT></P>
+	<P STYLE="margin-left: 0.17in"><FONT FACE="Courier New CYR, monospace"><FONT SIZE=2 STYLE="font-size: 9pt"><SPAN LANG="ru-RU"><B>function
+	my_onstatuschange(</B></SPAN></FONT></FONT><FONT FACE="Courier New CYR, monospace"><FONT SIZE=2 STYLE="font-size: 9pt"><SPAN LANG="en-US"><B>status)
+	- </B></SPAN></FONT></FONT><FONT FACE="Courier New CYR, monospace"><FONT SIZE=2 STYLE="font-size: 9pt"><SPAN LANG="en-US">Your</SPAN></FONT></FONT><FONT FACE="Courier New CYR, monospace"><FONT SIZE=2 STYLE="font-size: 9pt"><SPAN LANG="ru-RU">
+	online status has changed</SPAN></FONT></FONT></P>
+<P STYLE="margin-left: 0.17in"><FONT FACE="Courier New CYR, monospace"><FONT SIZE=2 STYLE="font-size: 9pt"><B>function
+my_onmakecall( result )</B><SPAN STYLE="font-weight: normal"> </SPAN><SPAN LANG="en-US"><SPAN STYLE="font-weight: normal">-
+You have made a call, false result means user you called is offline</SPAN></SPAN></FONT></FONT></P>
+<P STYLE="margin-left: 0.17in"><FONT FACE="Courier New CYR, monospace"><FONT SIZE=2 STYLE="font-size: 9pt"><B>function
+my_onincomingcall( callerName, link )</B><SPAN STYLE="font-weight: normal">
+</SPAN><SPAN LANG="en-US"><SPAN STYLE="font-weight: normal">-
+Incoming call from callerName, if you want to start conferencing, go
+to the link</SPAN></SPAN></FONT></FONT></P>
+<P STYLE="margin-left: 0.17in"><FONT FACE="Courier New CYR, monospace"><FONT SIZE=2 STYLE="font-size: 9pt"><B>function
+my_oncallanswered( calleeName, link )</B><SPAN STYLE="font-weight: normal">
+</SPAN><SPAN LANG="en-US"><SPAN STYLE="font-weight: normal">- Your
+call to calleeName has been answered &ndash; you can go to the link</SPAN></SPAN></FONT></FONT></P>
+<P STYLE="margin-left: 0.17in"><FONT FACE="Courier New CYR, monospace"><FONT SIZE=2 STYLE="font-size: 9pt"><B>function
+my_oncallrejected( calleeName )</B><SPAN STYLE="font-weight: normal">
+</SPAN><SPAN LANG="en-US"><SPAN STYLE="font-weight: normal">- Your
+call to calleeName has been rejected</SPAN></SPAN></FONT></FONT></P>
+<P STYLE="margin-left: 0.17in"><FONT FACE="Courier New CYR, monospace"><FONT SIZE=2 STYLE="font-size: 9pt"><B>function
+my_onstatusmessage(message)</B><SPAN STYLE="font-weight: normal"> &ndash;</SPAN><SPAN LANG="en-US"><SPAN STYLE="font-weight: normal">
+You have a debug status message</SPAN></SPAN></FONT></FONT></P>
+<P STYLE="margin-left: 0.17in"><FONT FACE="Courier New CYR, monospace"><FONT SIZE=2 STYLE="font-size: 9pt"><B>function
+my_masterstatuschanged( masterStatus ) </B><SPAN STYLE="font-weight: normal">-
+</SPAN><SPAN LANG="en-US"><SPAN STYLE="font-weight: normal">Your page
+in browser has become a master. This means only code in this page
+works with the server, others reflect it(to save the traffic)</SPAN></SPAN></FONT></FONT></P>
+<P STYLE="margin-left: 0.17in"><FONT FACE="Courier New CYR, monospace"><FONT SIZE=2 STYLE="font-size: 9pt"><B>function
+my_clearincoming()</B><SPAN STYLE="font-weight: normal"> </SPAN><SPAN LANG="en-US"><SPAN STYLE="font-weight: normal">-
+Clear information about last incoming call</SPAN></SPAN></FONT></FONT></P>
+<P STYLE="margin-left: 0.17in"><FONT FACE="Courier New CYR, monospace"><FONT SIZE=2 STYLE="font-size: 9pt"><B>function
+my_clearanswered() </B><SPAN LANG="en-US"><SPAN STYLE="font-weight: normal">-
+Clear information about last answered call</SPAN></SPAN></FONT></FONT></P>
+<P STYLE="margin-left: 0.17in"><FONT FACE="Courier New CYR, monospace"><FONT SIZE=2 STYLE="font-size: 9pt"><B>function
+my_clearrejected() </B><SPAN LANG="en-US"><SPAN STYLE="font-weight: normal">-
+Clear information about last rejected call</SPAN></SPAN></FONT></FONT></P>
+<UL>
+	<P STYLE="margin-top: 0.17in"></P>
+</UL>
+</BODY>
+</HTML>
