@@ -1,5 +1,9 @@
 #summary OpenMeetings Wiki Main Page
 
+== Table of Contents == 
+
+<wiki:toc max_depth="2" />
+
 == Installation ==
 
 Current Version !OpenMeetings 0.7 RC1 to 1.0 RC1: InstallationOpenMeetings, changes: [ChangeLog  ChangeLog], at 16.09.2009
