@@ -55,7 +55,7 @@ server address - the one that has a database created with</FONT><SPAN LANG="en-U
 <P STYLE="margin-top: 0.17in"><FONT FACE="Arial, sans-serif"><SPAN LANG="en-US">in </SPAN></FONT><SPAN LANG="en-US"></SPAN><SPAN LANG="en-US"><I><B>openMeetingsAjaxClientLibrary.js:</B></I></SPAN></P>
 <P STYLE="margin-left: 0.17in"><FONT FACE="Courier New, monospace"><FONT SIZE=2 STYLE="font-size: 9pt"><SPAN LANG="ru-RU">	var
 server_address = </SPAN></FONT></FONT><FONT COLOR="#ff0000"><FONT FACE="Courier New, monospace"><FONT SIZE=2 STYLE="font-size: 9pt"><SPAN LANG="en-US">URL
-with location of</SPAN></FONT></FONT></FONT><FONT FACE="Courier New, monospace"><FONT SIZE=2 STYLE="font-size: 9pt"><SPAN LANG="en-US">
+with location of </SPAN></FONT></FONT></FONT><FONT FACE="Courier New, monospace"><FONT SIZE=2 STYLE="font-size: 9pt"><SPAN LANG="en-US">
 </SPAN></FONT></FONT><FONT FACE="Courier New, monospace"><FONT SIZE=2 STYLE="font-size: 9pt"><SPAN LANG="ru-RU"><I><B>om_server.php</B></I></SPAN></FONT></FONT>
 </P>
 <P LANG="en-US" STYLE="margin-top: 0.17in"><FONT FACE="Arial, sans-serif"><FONT SIZE=3>in
