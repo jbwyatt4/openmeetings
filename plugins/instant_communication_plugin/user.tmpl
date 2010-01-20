@@ -1,0 +1,162 @@
+<html>
+<head>
+<title>Тест сервера звонков</title>
+<script type="text/javascript" src="openMeetingsAjaxClientLibrary.js"></script>
+<script type="text/javascript" src="uuid.js"></script>
+<script type="text/javascript" src="jquery.cookies.2.1.0.js"></script>
+<script type="text/javascript" src="masterslavedeterminator.js"></script>
+<script type="text/javascript">
+<!--
+sv_setserveraddress('http://127.0.0.1:8888/om_server.php');
+sv_setuserinfo('%USERID%', '%USERNAME%');
+
+var onlineStatus;
+var calllink;
+
+////////////////////////////definition of maintenance functions
+
+function my_onstatuschange(status)
+{
+	onlineStatus = status;
+
+	if ( status )
+	{
+		document.getElementById('status_indicator').src = "online.gif";
+		document.getElementById('callButton').disabled=false;
+		document.getElementById('abortButton').disabled=true;
+		document.getElementById('answerButton').disabled=true;
+		document.getElementById('rejectButton').disabled=true;
+		document.getElementById('callee_name').disabled=false;
+	}
+	else
+	{
+		document.getElementById('status_indicator').src = "offline.gif";
+		document.getElementById('callButton').disabled=true;
+		document.getElementById('callee_name').disabled=true;
+		document.getElementById('answerButton').disabled=true;
+		document.getElementById('rejectButton').disabled=true;
+		document.getElementById('abortButton').disabled=true;
+	}
+}
+
+function my_onmakecall( result )
+{
+	if ( result )
+	{
+		document.getElementById('callButton').innerHTML='Call!';
+		document.getElementById('callee_name').disabled=false;
+	}
+	else
+	{
+		alert('User is offline!');
+		document.getElementById('callButton').innerHTML='Call!';
+		document.getElementById('callButton').disabled=false;
+		document.getElementById('abortButton').disabled=true;
+		document.getElementById('callee_name').disabled=false;
+	}
+}
+
+function my_onincomingcall( callerName, link )
+{
+	document.getElementById('answerButton').disabled=false;
+	document.getElementById('rejectButton').disabled=false;
+	document.getElementById('status_text').value = "Call from : "+callerName+", link - "+link;	
+
+	calllink = link;
+}
+
+function my_oncallanswered( calleeName, link )
+{
+	document.getElementById('callButton').disabled = false;
+	document.getElementById('abortButton').disabled=true;
+	document.getElementById('status_text').value = 'User '+calleeName+' answered our call, link -'+link;
+	sv_clearoutgoingcall();
+
+	window.open( link, "Call");
+}
+
+function my_oncallrejected( calleeName )
+{
+	document.getElementById('callButton').disabled = false;
+	document.getElementById('abortButton').disabled=true;
+	document.getElementById('status_text').value = 'User '+calleeName+' rejected our call';
+
+	sv_clearoutgoingcall();
+}
+
+function my_onstatusmessage(message)
+{
+	var prevLog = document.getElementById("log").innerHTML;
+	prevLog+='<BR>'+message;
+	
+	document.getElementById("log").innerHTML = prevLog;
+}
+
+function my_masterstatuschanged( masterStatus )
+{
+	if ( masterStatus )
+	{
+		document.getElementById("masterButton").innerHTML = 'Master';
+	}
+	else
+	{
+		document.getElementById("masterButton").innerHTML = 'Slave';
+	}
+}
+
+function my_clearincoming()
+{
+	document.getElementById('answerButton').disabled=true;
+	document.getElementById('rejectButton').disabled=true;
+	document.getElementById('status_text').value = "";	
+}
+
+function my_clearanswered()
+{
+	document.getElementById('status_text').value = "";	
+}
+
+function my_clearrejected()
+{
+	document.getElementById('status_text').value = "";	
+}
+
+///////////////////////////////
+function onMakeCallButtonClick()
+{
+	sv_makecall( document.getElementById('callee_name').value);
+
+	document.getElementById('callButton').disabled = true;
+	document.getElementById('abortButton').disabled = false;
+}
+
+function onAnswerButtonClick()
+{	
+	document.getElementById('answerButton').disabled=true;
+	document.getElementById('rejectButton').disabled=true;
+
+	sv_answercall();
+
+	window.open( calllink, "Answer");
+
+	sv_clearincomingcall();
+}
+
+function onAbortButtonClick()
+{
+	sv_clearoutgoingcall();
+	document.getElementById('callButton').disabled = false;
+	document.getElementById('abortButton').disabled = true;
+}
+
+//-->
+</script>
+</head>
+<body>
+<img id="status_indicator" src="offline.gif"/><button id="masterButton">Slave</button>
+<br><input id="callee_name" type="text" disabled="true"/><button onclick="onMakeCallButtonClick();" id="callButton" disabled="true">Call!</button><button onclick="onAbortButtonClick();" id="abortButton" disabled="true">Abort</button>
+<br><input id="status_text" type="text" disabled="true"/><button onclick="onAnswerButtonClick();" id="answerButton" disabled="true">Answer</button>
+<button onclick="sv_rejectcall();sv_clearincomingcall();" id="rejectButton" disabled="true">Reject</button>
+<font id="log" color="green"></font>
+</body>
+</html>
