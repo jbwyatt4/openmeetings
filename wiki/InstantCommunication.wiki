@@ -63,14 +63,14 @@ client code (sample:</FONT>
 <FONT SIZE=2 STYLE="font-size: 9pt"><I><B>user.tmpl</B></I></FONT>):</FONT></P>
 <P STYLE="margin-left: 0.17in"><FONT FACE="Courier New, monospace"><FONT SIZE=2 STYLE="font-size: 9pt"><SPAN LANG="ru-RU">	sv_setserveraddress(
 </SPAN></FONT></FONT><FONT COLOR="#ff0000"><FONT FACE="Courier New, monospace"><FONT SIZE=2 STYLE="font-size: 9pt"><SPAN LANG="en-US">URL
-with location of</SPAN></FONT></FONT></FONT><FONT FACE="Courier New, monospace"><FONT SIZE=2 STYLE="font-size: 9pt"><SPAN LANG="ru-RU"><I><B>om_server.php</B></I></SPAN></FONT></FONT><FONT FACE="Courier New, monospace">);</FONT></P>
+with location of </SPAN></FONT></FONT></FONT><FONT FACE="Courier New, monospace"><FONT SIZE=2 STYLE="font-size: 9pt"><SPAN LANG="ru-RU"><I><B>om_server.php</B></I></SPAN></FONT></FONT><FONT FACE="Courier New, monospace">);</FONT></P>
 <P STYLE="margin-left: 0.17in"><FONT FACE="Courier New, monospace"><FONT SIZE=2 STYLE="font-size: 9pt">	sv_setuserinfo(
 <FONT COLOR="#ff0000"><SPAN LANG="en-US">User ID</SPAN></FONT>, <FONT COLOR="#ff0000"><SPAN LANG="en-US">User
 display name</SPAN></FONT><SPAN LANG="en-US"> </SPAN>);</FONT></FONT></P>
 <P LANG="en-US"></P>
 <P STYLE="margin-top: 0.17in"> <FONT FACE="Arial, sans-serif"><FONT SIZE=3><SPAN LANG="en-US">As you see, by the time the client JavaScript code is displayed you should know which user is being shown, so please include this code into the page only if you know the user display name and his ID (any key, unique for each user). After everything has been scripted and you've made sure OpenMeetings server is up and running, you should only implement the reaction of the client code on different events, such as incoming call (	conferencing request ), reaction on your own call and such, all	those method samples already exist in </FONT></FONT><I><SPAN STYLE="text-decoration: none"><B>user.tmpl</B></SPAN></I><FONT FACE="Arial, sans-serif"><SPAN LANG="en-US"> file, which you can study.</SPAN></FONT></P>
 <P STYLE="margin-top: 0.17in"><FONT FACE="Arial, sans-serif"><SPAN LANG="en-US">Here is the short description of every method you will need to override:</SPAN></FONT></P>
-<P STYLE="margin-left: 0.17in"><FONT FACE="Courier New CYR, monospace"><FONT SIZE=2 STYLE="font-size: 9pt"><SPAN LANG="ru-RU"><B>function 	my_onstatuschange(</B></SPAN></FONT></FONT><FONT FACE="Courier New CYR, monospace"><FONT SIZE=2 STYLE="font-size: 9pt"><SPAN LANG="en-US"><B>status) - </B></SPAN></FONT></FONT><FONT FACE="Courier New CYR, monospace"><FONT SIZE=2 STYLE="font-size: 9pt"><SPAN LANG="en-US">Your</SPAN></FONT></FONT><FONT FACE="Courier New CYR, monospace"><FONT SIZE=2 STYLE="font-size: 9pt"><SPAN LANG="ru-RU"> online status has changed</SPAN></FONT></FONT></P>
+<P STYLE="margin-left: 0.17in"><FONT FACE="Courier New CYR, monospace"><FONT SIZE=2 STYLE="font-size: 9pt"><SPAN LANG="ru-RU"><B>function 	my_onstatuschange( </B></SPAN></FONT></FONT><FONT FACE="Courier New CYR, monospace"><FONT SIZE=2 STYLE="font-size: 9pt"><SPAN LANG="en-US"><B>status ) - </B></SPAN></FONT></FONT><FONT FACE="Courier New CYR, monospace"><FONT SIZE=2 STYLE="font-size: 9pt"><SPAN LANG="en-US">Your</SPAN></FONT></FONT><FONT FACE="Courier New CYR, monospace"><FONT SIZE=2 STYLE="font-size: 9pt"><SPAN LANG="ru-RU"> online status has changed</SPAN></FONT></FONT></P>
 <P STYLE="margin-left: 0.17in"><FONT FACE="Courier New CYR, monospace"><FONT SIZE=2 STYLE="font-size: 9pt"><B>function
 my_onmakecall( result )</B><SPAN STYLE="font-weight: normal"> </SPAN><SPAN LANG="en-US"><SPAN STYLE="font-weight: normal">-
 You have made a call, false result means user you called is offline</SPAN></SPAN></FONT></FONT></P>
@@ -88,7 +88,7 @@ my_oncallrejected( calleeName )</B><SPAN STYLE="font-weight: normal">
 </SPAN><SPAN LANG="en-US"><SPAN STYLE="font-weight: normal">- Your
 call to calleeName has been rejected</SPAN></SPAN></FONT></FONT></P>
 <P STYLE="margin-left: 0.17in"><FONT FACE="Courier New CYR, monospace"><FONT SIZE=2 STYLE="font-size: 9pt"><B>function
-my_onstatusmessage(message)</B><SPAN STYLE="font-weight: normal"> -</SPAN><SPAN LANG="en-US"><SPAN STYLE="font-weight: normal">
+my_onstatusmessage( message )</B><SPAN STYLE="font-weight: normal"> -</SPAN><SPAN LANG="en-US"><SPAN STYLE="font-weight: normal">
 You have a debug status message</SPAN></SPAN></FONT></FONT></P>
 <P STYLE="margin-left: 0.17in"><FONT FACE="Courier New CYR, monospace"><FONT SIZE=2 STYLE="font-size: 9pt"><B>function
 my_masterstatuschanged( masterStatus ) </B><SPAN STYLE="font-weight: normal">-
