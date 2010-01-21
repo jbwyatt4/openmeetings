@@ -11,12 +11,7 @@ moment?</FONT></P>
 <P LANG="en-US" STYLE="margin-top: 0.17in"><FONT FACE="Arial, sans-serif">With
 the creation of instant communication server script pack you now can
 implement instant communication using OpenMeetings server on any of
-your CMS sites, or anywhere else. The technology is simple -
-you implement some of the JavaScript functions on the client side,
-such as client behavior in cases of being logged on and off,
-receiving a call(conference request), set some variables in scripts,
-such as server script location, OpenMeetings server location, set up
-a small database using our database creation script, and have fun.</FONT></P>
+your CMS sites, or anywhere else. In order to achieve the goal you just have to include the client JavaScript code whenever you know the logged in user unique ID and display name(optional). After the page is loaded, the code contacts the server and becomes available for being conferenced. So, you implement some of the JavaScript functions on the client side, such as client behavior in cases of being logged on and off, receiving a call(conference request), set some variables in scripts, such as server script location, OpenMeetings server location, set up a small database using our database creation script, and have fun. What's best is that only one page out of all loaded from the same browser on the same site eats the traffic. Others use cookies to reflect the master page. If the master is closed, another page becomes the master, and so on.</FONT></P>
 <H2 LANG="en-US" CLASS="western">Instant communication server script
 pack contents</H2>
 <P LANG="en-US" STYLE="margin-top: 0.17in"><FONT FACE="Arial, sans-serif">Our script pack contains:</FONT></P>
@@ -104,3 +99,4 @@ Clear information about last answered call</SPAN></SPAN></FONT></FONT></P>
 <P STYLE="margin-left: 0.17in"><FONT FACE="Courier New CYR, monospace"><FONT SIZE=2 STYLE="font-size: 9pt"><B>function
 my_clearrejected() </B><SPAN LANG="en-US"><SPAN STYLE="font-weight: normal">-
 Clear information about last rejected call</SPAN></SPAN></FONT></FONT></P>
+<P LANG="en-US" STYLE="margin-top: 0.17in"><FONT FACE="Arial, sans-serif">The pack can be checked out of SVN with the following URL: <a href="http://openmeetings.googlecode.com/svn/trunk/plugins/instant_communication_plugin">http://openmeetings.googlecode.com/svn/trunk/plugins/instant_communication_plugin</a></FONT></P>
