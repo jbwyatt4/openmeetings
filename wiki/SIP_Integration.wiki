@@ -1,0 +1,5 @@
+#summary SIP Integration Documentation
+
+= Installation =
+
+== How to enable the SIP Applet ==
