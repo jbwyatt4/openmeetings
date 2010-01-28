@@ -16,7 +16,11 @@ http://localhost:5080/openmeetings/axis2-web/
   <wiki:toc max_depth="4" />
  
 
-URL for direct Room access: (sid=6c280410c96e91ea05d25e0b28b10a87 MUST be replaced with a valid SID you create using the SOAP Gateway) http://$YOUR_RED5_HOST:$YOUR_RED5_HTTP_PORT/openmeetings/main.lzx.swf8.swf?roomid=1&sid=6c280410c96e91ea05d25e0b28b10a87&language=4 or http://$YOUR_RED5_HOST:$YOUR_RED5_HTTP_PORT/openmeetings/main.lzx.swf8.swf?roomid=1&sid=6c280410c96e91ea05d25e0b28b10a87 (see the missing language_id, in this case it will use the default_language_id from the configuration section)
+URL for direct Room access: (secureHash=6c280410c96e91ea05d25e0b28b10a87 MUST be replaced with a valid HASH you create using the SOAP Gateway Method setUserObjectAndGenerateRoomHash) http://$YOUR_RED5_HOST:$YOUR_RED5_HTTP_PORT/openmeetings/main.swf8.swf?secureHash=6c280410c96e91ea05d25e0b28b10a87&language=4&lzproxied=solo or
+
+(if the language_id is missing it will use the default_language_id from the configuration section) 
+
+for a complete Guide how to use it read DirectLoginSoapGeneralFlow
 
 -----
 
