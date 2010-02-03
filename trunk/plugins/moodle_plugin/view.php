@@ -138,7 +138,8 @@
 							$USER->lastname,$USER->picture,$USER->email,$USER->id,"moodle");
 							
 			if ($returnVal>0) {
-				$iframe_d = "videoconference.php?" .
+				
+				/*$iframe_d = "videoconference.php?" .
 						"sid=".$openmeetings_gateway->session_id .
 						"&roomid=".$openmeetings->room_id .
 						"&language=".$openmeetings->language .
@@ -148,6 +149,28 @@
 						"&user_id=".$USER->id .
 						"&wwwroot=".$CFG->wwwroot .
 						"&becomemoderator=".$becomemoderator;
+						
+						
+					$openmeetings_swfURL = "http://".$_GET["red5host"].":".$_GET["red5httpPort"]."/wf?lzproxied=solo&" .                                                                                                                        
+					"roomid=".$_GET["roomid"] .                                                                                                                                                                                 
+					"&sid=".$_GET["sid"] .                                                                                                                                                                                      
+					"&language=".$_GET["language"] .                                                                                                                                                                            
+					"&picture=".$_GET["picture"] .                                                                                                                                                                              
+					"&user_id=".$_GET["user_id"] .                                                                                                                                                                              
+					"&wwwroot=".$_GET["wwwroot"] .                                                                                                                                                                              
+					"&moodleRoom=1" .                                                                                                                                                                                           
+					"&becomemoderator=".$_GET["becomemoderator"];*/
+
+				$iframe_d = "http://".$CFG->openmeetings_red5host . ":" . $CFG->openmeetings_red5port .
+							 	"/" . "openmeetings/?" .
+								"sid=" . $openmeetings_gateway->session_id . 
+								"&roomid=" . $openmeetings->room_id . 
+								"&language=" . $openmeetings->language . 
+								"&picture=" . $USER->picture . 
+								"&user_id=". $USER->id . 
+								"&moodleRoom=1" . 
+                                "&wwwroot=". $CFG->wwwroot .  
+                                "&becomemoderator=".$becomemoderator;                                                                                                      
 
 				printf("<iframe src='%s' width='%s' height='%s' />",$iframe_d,
 						$CFG->openmeetings_openmeetingsiFrameWidth,
