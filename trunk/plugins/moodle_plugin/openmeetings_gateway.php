@@ -297,6 +297,67 @@ class openmeetings_gateway {
 		}   
 		return -1;
 	}
+	
+	/*
+	
+	public String setUserObjectAndGenerateRoomHashByURL(String SID, String username, String firstname, String lastname, 
+			String profilePictureUrl, String email, Long externalUserId, String externalUserType,
+			Long room_id, int becomeModeratorAsInt, int showAudioVideoTestAsInt)
+			
+			Array ( 
+			[SID] => b46c5537c94f5bd0df4664edd3d471a1 
+			[username] => admin 
+			[firstname] => Sebastian 
+			[lastname] => Wagner 
+			[profilePictureUrl] => 1 
+			[email] => seba.wagner@gmail.com 
+			[externalUserId] => 2 
+			[externalUserType] => moodle 
+			[room_id] => 8 
+			[becomeModeratorAsInt] => 
+				[showAudioVideoTestAsInt] => 1 )
+	
+	*/
+	function openmeetings_setUserObjectAndGenerateRoomHashByURL($username, $firstname, $lastname, 
+			$profilePictureUrl, $email, $userId, $systemType, $room_id, $becomeModerator) {
+	    global $USER, $CFG;
+	 	$client_userService = new nusoap_client_om("http://".$CFG->openmeetings_red5host.":".$CFG->openmeetings_red5port."/openmeetings/services/UserService?wsdl", true);
+		
+		$err = $client_userService->getError();
+		if ($err) {
+			echo '<h2>Constructor error</h2><pre>' . $err . '</pre>';
+			echo '<h2>Debug</h2><pre>' . htmlspecialchars($client->getDebug(), ENT_QUOTES) . '</pre>';
+			exit();
+		}  
+		$params = array(
+			'SID' => $this->session_id,
+			'username' => $username,
+			'firstname' => $firstname,
+			'lastname' => $lastname,
+			'profilePictureUrl' => $profilePictureUrl,
+			'email' => $email,
+			'externalUserId' => $userId,
+			'externalUserType' => $systemType,
+			'room_id' => $room_id,
+			'becomeModeratorAsInt' => $becomeModerator,
+			'showAudioVideoTestAsInt' => 1
+		);
+		
+		$result = $client_userService->call('setUserObjectAndGenerateRoomHashByURL',$params);
+		if ($client_roomService->fault) {
+			echo '<h2>Fault (Expect - The request contains an invalid SOAP body)</h2><pre>'; print_r($result); echo '</pre>';
+		} else {
+			$err = $client_userService->getError();
+			if ($err) {
+				echo '<h2>Error</h2><pre>' . $err . '</pre>';
+			} else {
+				//echo '<h2>Result</h2><pre>'; print_r($result["return"]); echo '</pre>';
+				return $result["return"];
+			}
+		}   
+		return -1;
+	}
+	
 }
 
 ?>
