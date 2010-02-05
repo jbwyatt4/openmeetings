@@ -118,9 +118,9 @@
     	
     	$context = get_context_instance(CONTEXT_MODULE, $cm->id);
     	
-    	$becomemoderator = 1;
+    	$becomemoderator = 0;
     	if (has_capability('mod/openmeetings:becomemoderator', $context)) {
-    		$becomemoderator = 2;
+    		$becomemoderator = 1;
     		//echo "BECOME MODERATOR IS TRUE<br/>";
     	}   	
 		
@@ -134,43 +134,20 @@
 			
 			// Simulate the User automatically
 			//echo "openmeetings_setUserObjectWithExternalUser<br/>";
-			$returnVal = $openmeetings_gateway->openmeetings_setUserObjectWithExternalUser($USER->username,$USER->firstname,
-							$USER->lastname,$USER->picture,$USER->email,$USER->id,"moodle");
+			$returnVal = $openmeetings_gateway->openmeetings_setUserObjectAndGenerateRoomHashByURL($USER->username,$USER->firstname,
+							$USER->lastname,$USER->picture,$USER->email,$USER->id,"moodle",$openmeetings->room_id,$becomemoderator);
 							
-			if ($returnVal>0) {
+			if ($returnVal != "") {
 				
-				/*$iframe_d = "videoconference.php?" .
-						"sid=".$openmeetings_gateway->session_id .
-						"&roomid=".$openmeetings->room_id .
-						"&language=".$openmeetings->language .
-						"&red5host=".$CFG->openmeetings_red5host .
-						"&red5httpPort=".$CFG->openmeetings_red5port .
-						"&picture=".$USER->picture .
-						"&user_id=".$USER->id .
-						"&wwwroot=".$CFG->wwwroot .
-						"&becomemoderator=".$becomemoderator;
-						
-						
-					$openmeetings_swfURL = "http://".$_GET["red5host"].":".$_GET["red5httpPort"]."/wf?lzproxied=solo&" .                                                                                                                        
-					"roomid=".$_GET["roomid"] .                                                                                                                                                                                 
-					"&sid=".$_GET["sid"] .                                                                                                                                                                                      
-					"&language=".$_GET["language"] .                                                                                                                                                                            
-					"&picture=".$_GET["picture"] .                                                                                                                                                                              
-					"&user_id=".$_GET["user_id"] .                                                                                                                                                                              
-					"&wwwroot=".$_GET["wwwroot"] .                                                                                                                                                                              
-					"&moodleRoom=1" .                                                                                                                                                                                           
-					"&becomemoderator=".$_GET["becomemoderator"];*/
-
 				$iframe_d = "http://".$CFG->openmeetings_red5host . ":" . $CFG->openmeetings_red5port .
 							 	"/" . "openmeetings/?" .
-								"sid=" . $openmeetings_gateway->session_id . 
-								"&roomid=" . $openmeetings->room_id . 
+								"secureHash=" . $returnVal . 
+								//"&swf=maindebug.swf8.swf" .
 								"&language=" . $openmeetings->language . 
 								"&picture=" . $USER->picture . 
 								"&user_id=". $USER->id . 
 								"&moodleRoom=1" . 
-                                "&wwwroot=". $CFG->wwwroot .  
-                                "&becomemoderator=".$becomemoderator;                                                                                                      
+                                "&wwwroot=". $CFG->wwwroot;                                                                                                      
 
 				printf("<iframe src='%s' width='%s' height='%s' />",$iframe_d,
 						$CFG->openmeetings_openmeetingsiFrameWidth,
