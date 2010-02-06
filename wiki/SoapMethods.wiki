@@ -270,7 +270,7 @@ Params:
 || Boolean || asc || Asc or Desc sort ordering ||
 
 
-=== getRoomsWithCurrentUsers ===
+==== getRoomsWithCurrentUsers ====
 
 Method: _public SearchResult getRoomsWithCurrentUsers(String SID, int start, int max, String orderby, boolean asc)_
 
@@ -319,7 +319,7 @@ Params:
 || Integer || filesPanelWidth || the filesPanelWidth ||
 
 
-=== addRoomWithModeration ===
+==== addRoomWithModeration ====
 
 Method: _public Long addRoomWithModeration(String SID, .... see list of Params)_
 
