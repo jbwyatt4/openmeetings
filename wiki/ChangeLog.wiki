@@ -1,5 +1,32 @@
 #summary Release Notes
 
+== Major changes in Version 1.1 RC1 ==
+
+New ScreenSharing:
+  * Uses RTMP as protocol
+  * Automatic Switch to RTMPT
+  * In that way it uses the exact same ports as Audio/Video transmission, so if you can share your cam, you can share your screen + record
+
+New Recording Function:
+  * Platform independent
+  * Download recorded file as FLV or as AVI File (to watch offline, publish on your website or through Youtube)
+  * Private and Public Recordings via a Drag and Drop interface and Folders to organize Recording
+  * Recording Timeline gives additional information when who is speaking at what time
+  * Record hole screen + share screen at the the same time
+  * Seek in the Player to any point of the Recording
+
+New Translations:
+  * Greek, Dutch, Brazilian Portuguese
+
+39 major and minor Issues fixed in various areas of the Application, see:
+http://code.google.com/p/openmeetings/issues/list?can=1&q=milestone%3DRelease1.1
+
+New Moodle Plugin:
+  * Updated Moodle Plugin
+
+Integration Advise:
+  * You should change the URL to the OpenMeetings Application according to the Integration Guide
+
 == Major changes in Version 1.0 RC1 ==
 
   * New third room-type: "Restricted"
