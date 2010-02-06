@@ -371,7 +371,7 @@ Params:
 || Integer || filesPanelWidth || the filesPanelWidth ||
 
 
-=== updateRoomWithModeration ===
+==== updateRoomWithModeration ====
 
 Method: _public Long updateRoomWithModeration(String SID, .... see list of Params)_
 
@@ -405,7 +405,7 @@ Params:
 || Long || rooms_id || the room's id of the room to get empty ||
 
 
-=== getRoomIdByExternalId ===
+==== getRoomIdByExternalId ====
 
 Method: _public Long getRoomIdByExternalId(String SID, .... see list of Params)_
 
