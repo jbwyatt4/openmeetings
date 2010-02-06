@@ -423,3 +423,33 @@ Params:
 || Boolean || isModeratedRoom || Users have to wait untill a Moderator arrives. Use the becomeModerator param in setUserObjectAndGenerateRoomHash to set a user as default Moderator ||
 || Long || externalRoomId || your external room id may set here ||
 || String || externalRoomType || you can specify your system-name or type of room here, for example "moodle" ||
+
+==== addRoomWithModerationAndQuestions ====
+
+Method: _public Long addRoomWithModerationAndQuestions(String SID, String name,
+			Long roomtypes_id ,
+			String comment, Long numberOfPartizipants,
+			Boolean ispublic,
+			Boolean appointment,
+			Boolean isDemoRoom,
+			Integer demoTime,
+			Boolean isModeratedRoom,
+			Boolean allowUserQuestions)_
+
+this SOAP Method has an additional param to enable or disable the
+buttons to apply for moderation
+this does only work in combination with the room-type restricted
+
+Params:
+|| *type* || *name* || *description* ||
+|| String || SID || The SID of the User. This SID must be marked as Loggedin ||
+|| String || name || Name of the Room ||
+|| Long || roomtypes_id || Type of that room (1 = Conference, 2 = Audience, 3 = Restricted) ||
+|| String || comment || any comment ||
+|| Long || numberOfPartizipants || the maximum users allowed in this room ||
+|| Boolean || ispublic || If this room is public (use true if you don't deal with different Organizations) ||
+|| Boolean || appointment || is it a Calendar Room (use false by default) ||
+|| Boolean || isDemoRoom || is it a Demo Room with limited time (use false by default) ||
+|| Boolean || demoTime || time in seconds after the user will be logged out (only enabled if isDemoRoom is true)||
+|| Boolean || isModeratedRoom || Users have to wait untill a Moderator arrives. Use the becomeModerator param in setUserObjectAndGenerateRoomHash to set a user as default Moderator ||
+|| Boolean || allowUserQuestions || enable or disable the button to allow users to apply for moderation ||
