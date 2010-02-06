@@ -2,7 +2,7 @@
 
 == Major changes in Version 1.1 RC1 ==
 
-New ScreenSharing:
+New !ScreenSharing:
   * Uses RTMP as protocol
   * Automatic Switch to RTMPT
   * In that way it uses the exact same ports as Audio/Video transmission, so if you can share your cam, you can share your screen + record
