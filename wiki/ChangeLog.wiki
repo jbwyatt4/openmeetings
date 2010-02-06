@@ -4,16 +4,16 @@
 
 New !ScreenSharing:
   * Uses RTMP as protocol
-  * Automatic Switch to RTMPT
+  * Automatic switch to RTMPT
   * In that way it uses the exact same ports as Audio/Video transmission, so if you can share your cam, you can share your screen + record
 
 New Recording Function:
   * Platform independent
   * Download recorded file as FLV or as AVI File (to watch offline, publish on your website or through Youtube)
-  * Private and Public Recordings via a Drag and Drop interface and Folders to organize Recording
-  * Recording Timeline gives additional information when who is speaking at what time
+  * Private and Public Recordings via a Drag and Drop File-Browser like interface and folders to organize recordings
+  * Recording time line gives additional information who is speaking and at what time
   * Record hole screen + share screen at the the same time
-  * Seek in the Player to any point of the Recording
+  * Seek in the integrated player to any point of the recording
 
 New Translations:
   * Greek, Dutch, Brazilian Portuguese
