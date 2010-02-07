@@ -210,6 +210,93 @@ class openmeetings_gateway {
 		return -1;
 	}
 	
+	function openmeetings_createRoomWithModAndType($openmeetings) {
+		global $USER, $CFG;
+	
+		//		echo $CFG->openmeetings_red5host."<br/>";
+		//		echo $CFG->openmeetings_red5port."<br/>";	
+		//		foreach ($CFG as $key => $value){
+		//    		echo "KEY: ".$key." Value: ".$value."<br/>";
+		//    	}
+    	$course_name = 'MOODLE_COURSE_ID_'.$openmeetings->course.'_NAME_'.$openmeetings->name;
+    	//echo "CourseName: ".$course_name."<br/>";	
+		
+		//echo $client_userService."<br/>";
+	    
+	 	$client_roomService = new nusoap_client_om("http://".$CFG->openmeetings_red5host.":".$CFG->openmeetings_red5port."/openmeetings/services/RoomService?wsdl", true);
+		
+		$err = $client_roomService->getError();
+		if ($err) {
+			echo '<h2>Constructor error</h2><pre>' . $err . '</pre>';
+			echo '<h2>Debug</h2><pre>' . htmlspecialchars($client->getDebug(), ENT_QUOTES) . '</pre>';
+			exit();
+		}  
+		
+		$isModeratedRoom = false;
+		if ($openmeetings->is_moderated_room == 1) {
+			$isModeratedRoom = true;
+		}
+		
+		$params = array(
+			'SID' => $this->session_id,
+			'name' => $course_name,
+			'roomtypes_id' => $openmeetings->type,
+			'comment' => 'Created by SOAP-Gateway for Moodle Platform',
+			'numberOfPartizipants' => $openmeetings->max_user,
+			'ispublic' => true,
+			'appointment' => false, 
+			'isDemoRoom' => false, 
+			'demoTime' => 0, 
+			'isModeratedRoom' => $isModeratedRoom,
+			'externalRoomType' => 'moodle'
+		);
+		$result = $client_roomService->call('addRoomWithModerationAndExternalType',$params);
+		if ($client_roomService->fault) {
+			echo '<h2>Fault (Expect - The request contains an invalid SOAP body)</h2><pre>'; print_r($result); echo '</pre>';
+		} else {
+			$err = $client_roomService->getError();
+			if ($err) {
+				echo '<h2>Error</h2><pre>' . $err . '</pre>';
+			} else {
+				//echo '<h2>Result</h2><pre>'; print_r($result["return"]); echo '</pre>';
+				return $result["return"];
+			}
+		}   
+		return -1;
+	}
+	
+		
+	function openmeetings_getRecordingsByExternalRooms(){
+		global $USER, $CFG;
+		
+		$client_roomService = new nusoap_client_om("http://".$CFG->openmeetings_red5host.":".$CFG->openmeetings_red5port."/openmeetings/services/RoomService?wsdl", true);
+		
+		$err = $client_roomService->getError();
+		if ($err) {
+			echo '<h2>Constructor error</h2><pre>' . $err . '</pre>';
+			echo '<h2>Debug</h2><pre>' . htmlspecialchars($client->getDebug(), ENT_QUOTES) . '</pre>';
+			exit();
+		}  
+		$params = array(
+			'SID' => $this->session_id,
+			'externalRoomType' => 'moodle'
+			);
+		//We prefer the List ?!
+		$result = $client_roomService->call('getFlvRecordingByExternalRoomTypeByList',$params);
+		if ($client_roomService->fault) {
+			echo '<h2>Fault (Expect - The request contains an invalid SOAP body)</h2><pre>'; print_r($result); echo '</pre>';
+		} else {
+			$err = $client_roomService->getError();
+			if ($err) {
+				echo '<h2>Error</h2><pre>' . $err . '</pre>';
+			} else {
+				//echo '<h2>Result</h2><pre>'; print_r($result); echo '</pre>';
+				return $result["return"];
+			}
+		}   
+		return -1;
+	}
+	
 	/*
 	 * Usage if this Method will work if you have no need to simulate always the same user in 
 	 * OpenMeetings, if you want to do this check the next method that also remembers the 
@@ -344,6 +431,46 @@ class openmeetings_gateway {
 		);
 		
 		$result = $client_userService->call('setUserObjectAndGenerateRoomHashByURL',$params);
+		if ($client_roomService->fault) {
+			echo '<h2>Fault (Expect - The request contains an invalid SOAP body)</h2><pre>'; print_r($result); echo '</pre>';
+		} else {
+			$err = $client_userService->getError();
+			if ($err) {
+				echo '<h2>Error</h2><pre>' . $err . '</pre>';
+			} else {
+				//echo '<h2>Result</h2><pre>'; print_r($result["return"]); echo '</pre>';
+				return $result["return"];
+			}
+		}   
+		return -1;
+	}
+	
+	/*
+	 * public String setUserObjectAndGenerateRecordingHashByURL(String SID, String username, String firstname, String lastname,
+					Long externalUserId, String externalUserType, Long recording_id)
+	 */
+	 function openmeetings_setUserObjectAndGenerateRecordingHashByURL($username, $firstname, $lastname, 
+						$userId, $systemType, $recording_id) {
+	    global $USER, $CFG;
+	 	$client_userService = new nusoap_client_om("http://".$CFG->openmeetings_red5host.":".$CFG->openmeetings_red5port."/openmeetings/services/UserService?wsdl", true);
+		
+		$err = $client_userService->getError();
+		if ($err) {
+			echo '<h2>Constructor error</h2><pre>' . $err . '</pre>';
+			echo '<h2>Debug</h2><pre>' . htmlspecialchars($client->getDebug(), ENT_QUOTES) . '</pre>';
+			exit();
+		}  
+		$params = array(
+			'SID' => $this->session_id,
+			'username' => $username,
+			'firstname' => $firstname,
+			'lastname' => $lastname,
+			'externalUserId' => $userId,
+			'externalUserType' => $systemType,
+			'recording_id' => $recording_id
+		);
+		
+		$result = $client_userService->call('setUserObjectAndGenerateRecordingHashByURL',$params);
 		if ($client_roomService->fault) {
 			echo '<h2>Fault (Expect - The request contains an invalid SOAP body)</h2><pre>'; print_r($result); echo '</pre>';
 		} else {

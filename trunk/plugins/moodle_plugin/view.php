@@ -134,9 +134,14 @@
 			
 			// Simulate the User automatically
 			//echo "openmeetings_setUserObjectWithExternalUser<br/>";
-			$returnVal = $openmeetings_gateway->openmeetings_setUserObjectAndGenerateRoomHashByURL($USER->username,$USER->firstname,
-							$USER->lastname,$USER->picture,$USER->email,$USER->id,"moodle",$openmeetings->room_id,$becomemoderator);
-							
+			if ($openmeetings->type != 0){
+				$returnVal = $openmeetings_gateway->openmeetings_setUserObjectAndGenerateRoomHashByURL($USER->username,$USER->firstname,
+								$USER->lastname,$USER->picture,$USER->email,$USER->id,"moodle",$openmeetings->room_id,$becomemoderator);
+			} else {
+				$returnVal = $openmeetings_gateway->openmeetings_setUserObjectAndGenerateRecordingHashByURL($USER->username,$USER->firstname,
+								$USER->lastname,$USER->id,"moodle",$openmeetings->room_recording_id);
+			}		
+					
 			if ($returnVal != "") {
 				
 				$iframe_d = "http://".$CFG->openmeetings_red5host . ":" . $CFG->openmeetings_red5port .
