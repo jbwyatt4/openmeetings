@@ -30,7 +30,7 @@ New Moodle Plugin 0.7:
   * Updated Moodle Plugin to use new wrapper page and secure method + add Option to watch OpenMeetings Recordings directly in Moodle
 
 Integration Advise:
-  * You should change the URL to the OpenMeetings Application according to the Integration Guide to use the wrapper page
+  * You should change the URL to the !OpenMeetings Application according to the Integration Guide to use the wrapper page
 
 == Major changes in Version 1.0 RC1 ==
 
