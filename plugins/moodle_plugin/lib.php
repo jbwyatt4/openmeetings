@@ -39,7 +39,12 @@ function openmeetings_add_instance($openmeetings) {
 	
 	$openmeetings_gateway = new openmeetings_gateway();
 	if ($openmeetings_gateway->openmeetings_loginuser()) {
-		$openmeetings->room_id = $openmeetings_gateway->openmeetings_createroomwithmod($openmeetings);
+		
+		//Roomtype 0 means its and recording, we don't need to create a recording for that
+		if ($openmeetings->type != 0) {
+			$openmeetings->room_id = $openmeetings_gateway->openmeetings_createRoomWithModAndType($openmeetings);
+		}
+		
 	} else {
 		echo "Could not login User to OpenMeetings, check your OpenMeetings Module Configuration";
 		exit();

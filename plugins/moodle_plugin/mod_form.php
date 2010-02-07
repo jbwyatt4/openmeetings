@@ -18,8 +18,41 @@ class mod_openmeetings_mod_form extends moodleform_mod {
         $mform->addRule('name', null, 'required', null, 'client');
         
     /// Adding the "Room Type" field
-    	$mform->addElement('select', 'type', get_string('Room Type', 'openmeetings'), array('1'=>'Conference Room', '2'=>'Audience Room', '3'=>'Restricted Room'));
+    	$mform->addElement('select', 'type', get_string('Room Type', 'openmeetings'), array('1'=>'Conference Room', '2'=>'Audience Room', '3'=>'Restricted Room', '0'=>'Show Recording'));
         $mform->addRule('type', null, 'required', null, 'client');
+    
+    /// Some description
+    	 $mform->addElement('static', 'description_room_recording_id', get_string('The Recording Field is only used if Room Type is Recording', 'openmeetings'), null);
+        
+    /// Adding the "Available Recordings to Shows" field
+    
+    	//$recordings = array('1'=>'Recording 1', '2'=>'Recording 2');
+    	$recordings = array();
+    	
+    	$openmeetings_gateway = new openmeetings_gateway();
+		if ($openmeetings_gateway->openmeetings_loginuser()) {
+			
+			$recordingsArray = $openmeetings_gateway->openmeetings_getRecordingsByExternalRooms();
+			
+			
+			foreach ($recordingsArray as $key => $value) {
+				//there is a bug, if a List has the length of 1 the type is wrong
+				if (is_array($value)) {
+	    			//echo "Das Element " . $value["flvRecordingId"] . " enthält den Wert: " . $value["fileName"] . "<br>";
+	    			$recordings[$value["flvRecordingId"]] = $value["fileName"];
+				} else {
+					//echo "Das Element " . $recordingsArray["flvRecordingId"] . " enthält den Wert: " . $recordingsArray["fileName"] . "<br>";
+					$recordings[$recordingsArray["flvRecordingId"]] = $recordingsArray["fileName"];
+					break;
+				}
+  			}
+			
+			
+		}
+    	
+    
+    	$mform->addElement('select', 'room_recording_id', get_string('Available Recordings to Shows', 'openmeetings'), $recordings);
+        $mform->addRule('room_recording_id', null, 'required', null, 'client'); 
         
     /// Adding the "Number of Participants" field
     	$mform->addElement('select', 'max_user', get_string('Max User', 'openmeetings'), array('2'=>'2', '4'=>'4', '8'=>'8', '16'=>'16', '24'=>'24', '36'=>'36', '50'=>'50', '100'=>'100', '200'=>'200', '500'=>'500', '1000'=>'1000'));
@@ -35,25 +68,28 @@ class mod_openmeetings_mod_form extends moodleform_mod {
 								'3' => 'french', 
 								'4' => 'italian', 
 								'5' => 'portugues', 
-								'6' => 'spanish', 
-								'7' => 'russian', 
-								'8' => 'swedish', 
-								'9' => 'chinese simplified', 
-								'10' => 'chinese traditional', 
-								'11' => 'korean', 
-								'12' => 'arabic', 
-								'13' => 'japanese', 
-								'14' => 'indonesian', 
-								'15' => 'hungarian', 
-							    '16' => 'turkish', 
-							    '17' => 'ukrainian', 
-							    '18' => 'thai', 
-							    '19' => 'persian', 
-							    '20' => 'czech', 
-							    '21' => 'galician', 
-							    '22' => 'finnish', 
-							    '23' => 'polish', 
-							    '24' => 'greek');
+								'6' => 'portugues brazil',
+								'7' => 'spanish', 
+								'8' => 'russian', 
+								'9' => 'swedish', 
+								'10' => 'chinese simplified', 
+								'11' => 'chinese traditional', 
+								'12' => 'korean', 
+								'13' => 'arabic', 
+								'14' => 'japanese', 
+								'15' => 'indonesian', 
+								'16' => 'hungarian', 
+							    '17' => 'turkish', 
+							    '18' => 'ukrainian', 
+							    '19' => 'thai', 
+							    '20' => 'persian', 
+							    '21' => 'czech', 
+							    '22' => 'galician', 
+							    '23' => 'finnish', 
+							    '24' => 'polish', 
+							    '25' => 'greek',
+							    '26' => 'dutch',
+							    '27' => 'hebrew');
     
     	$mform->addElement('select', 'language', get_string('Room Language', 'openmeetings'), $language_array);
         $mform->addRule('language', null, 'required', null, 'client');
@@ -61,7 +97,7 @@ class mod_openmeetings_mod_form extends moodleform_mod {
     /// Adding the optional "intro" and "introformat" pair of fields
         $mform->addElement('htmleditor', 'intro', get_string('Comment', 'openmeetings'));
         $mform->setType('intro', PARAM_RAW);
-        $mform->addRule('intro', get_string('required'), 'required', null, 'client');
+        //$mform->addRule('intro', get_string('required'), 'required', null, 'client');
         $mform->setHelpButton('intro', array('writing', 'richtext'), false, 'editorhelpbutton');
 
         $mform->addElement('format', 'introformat', get_string('format'));
