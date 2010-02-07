@@ -19,7 +19,6 @@ class mod_openmeetings_mod_form extends moodleform_mod {
         
     /// Adding the "Room Type" field
     	$mform->addElement('select', 'type', get_string('Room Type', 'openmeetings'), array('1'=>'Conference Room', '2'=>'Audience Room', '3'=>'Restricted Room', '0'=>'Show Recording'));
-        $mform->addRule('type', null, 'required', null, 'client');
     
     /// Some description
     	 $mform->addElement('static', 'description_room_recording_id', get_string('The Recording Field is only used if Room Type is Recording', 'openmeetings'), null);
@@ -52,15 +51,12 @@ class mod_openmeetings_mod_form extends moodleform_mod {
     	
     
     	$mform->addElement('select', 'room_recording_id', get_string('Available Recordings to Shows', 'openmeetings'), $recordings);
-        $mform->addRule('room_recording_id', null, 'required', null, 'client'); 
         
     /// Adding the "Number of Participants" field
     	$mform->addElement('select', 'max_user', get_string('Max User', 'openmeetings'), array('2'=>'2', '4'=>'4', '8'=>'8', '16'=>'16', '24'=>'24', '36'=>'36', '50'=>'50', '100'=>'100', '200'=>'200', '500'=>'500', '1000'=>'1000'));
-        $mform->addRule('max_user', null, 'required', null, 'client');
         
     /// Adding the "Is Moderated Room" field
     	$mform->addElement('select', 'is_moderated_room', get_string('Wait for teacher', 'openmeetings'), array('1'=>'Participants need to wait till the teacher enters the room','2' => 'Participants can already start (first User in Room becomes Moderator)'));
-        $mform->addRule('is_moderated_room', null, 'required', null, 'client');
         
     /// Adding the "Room Language" field
     	$language_array = array ('1' => 'english',
@@ -92,7 +88,6 @@ class mod_openmeetings_mod_form extends moodleform_mod {
 							    '27' => 'hebrew');
     
     	$mform->addElement('select', 'language', get_string('Room Language', 'openmeetings'), $language_array);
-        $mform->addRule('language', null, 'required', null, 'client');
             
     /// Adding the optional "intro" and "introformat" pair of fields
         $mform->addElement('htmleditor', 'intro', get_string('Comment', 'openmeetings'));
