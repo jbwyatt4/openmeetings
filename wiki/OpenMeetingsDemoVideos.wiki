@@ -4,3 +4,8 @@
 == !OpenMeetings 1.1 Key Features Mini Demo ==
 
 <wiki:video url="http://www.youtube.com/watch?v=5a7-HFm8Ghs"/>
+
+
+== !OpenMeetings Moodle Sample Integration Video ==
+
+<wiki:video url="http://www.youtube.com/watch?v=pPgv7zkPXAk"/>
