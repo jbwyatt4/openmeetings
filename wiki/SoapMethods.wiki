@@ -20,7 +20,9 @@ URL for direct Room access: (secureHash=6c280410c96e91ea05d25e0b28b10a87 MUST be
 
 (if the language_id is missing it will use the default_language_id from the configuration section) 
 
-for a complete Guide how to use it read DirectLoginSoapGeneralFlow
+for a complete Guide how to realize a single sign on or generate a URL to access a Room (or Recording) Directly read DirectLoginSoapGeneralFlow
+
+To get a Recording instead of a Room use the method *setUserObjectAndGenerateRecordingHashByURL*
 
 -----
 
@@ -159,6 +161,25 @@ Params:
 || Number || room_id || the room id the user should be logged in ||
 || Number || becomeModeratorAsInt || 0 means no Moderator, 1 means Moderator ||
 || Number || showAudioVideoTestAsInt || 0 means don't show Audio/Video Test, 1 means show Audio/Video Test Application before the user is logged into the room ||
+
+
+==== setUserObjectAndGenerateRecordingHashByURL ====
+
+_public String setUserObjectAndGenerateRecordingHashByURL(String SID, String username, String firstname, String lastname, Long externalUserId, String externalUserType, Long recording_id)_
+
+Description: Use this method to access a Recording instead of Room
+
+available since OpenMeetings 1.1
+
+Params:
+|| *type* || *name* || *description* ||
+|| String || SID || The SID from getSession ||
+|| String || username || any username ||
+|| String || firstname || any firstname ||
+|| String || lastname || any lastname ||
+|| Number || externalUserId || if you have any external user Id you may set it here ||
+|| String || externalUserType || you can specify your system-name here, for example "moodle" ||
+|| Number || recording_id || the id of the recording, get a List of all Recordings with RoomService :: getFlvRecordingByExternalRoomType ||
 
 --------
 
@@ -453,3 +474,13 @@ Params:
 || Boolean || demoTime || time in seconds after the user will be logged out (only enabled if isDemoRoom is true)||
 || Boolean || isModeratedRoom || Users have to wait untill a Moderator arrives. Use the becomeModerator param in setUserObjectAndGenerateRoomHash to set a user as default Moderator ||
 || Boolean || allowUserQuestions || enable or disable the button to allow users to apply for moderation ||
+
+
+==== getFlvRecordingByExternalRoomType ====
+
+Method: _public FlvRecording[] getFlvRecordingByExternalRoomType(String SID, String externalRoomType)_
+
+Params:
+|| *type* || *name* || *description* ||
+|| String || SID || The SID of the User. This SID must be marked as Loggedin ||
+|| String || externalRoomType || External Type of Room ||
