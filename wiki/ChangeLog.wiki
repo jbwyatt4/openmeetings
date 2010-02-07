@@ -21,6 +21,11 @@ New Translations:
 Major and minor Issues fixed in various areas of the Application, see:<br/>
 http://code.google.com/p/openmeetings/issues/list?can=1&q=milestone%3DRelease1.1
 
+New integration features:
+  * New SOAP Methods
+  * New SOAP Methods + API to access Recordings directly
+  * New Method to use !OpenMeetings for InstantCommunication
+
 New Moodle Plugin 0.7:
   * Updated Moodle Plugin to use new wrapper page and secure method
 
