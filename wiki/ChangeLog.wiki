@@ -1,6 +1,6 @@
 #summary Release Notes
 
-== Major changes in Version 1.1 RC1 (release on Monday 06.02.2010) ==
+== Major changes in Version 1.1 RC1 (release on Monday 08.02.2010) ==
 
 New !ScreenSharing:
   * Uses RTMP as protocol
