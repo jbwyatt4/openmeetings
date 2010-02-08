@@ -1,7 +1,7 @@
 #summary People who offer or who search Jobs around OpenMeetings
 #labels Featured
 
-  * Webbase-Design <br/><br/>We offer core modification, Plugin development, Branding, Integration into your E-learning (Moodle or others) Platforms or Integration into your CMS/Portal/Intranet. I also offer Installation services as well as hosting for !OpenMeetings.<br/>
+  * [Webbase-Design.de Webbase-Design.de] <br/><br/>We offer core modification, Plugin development, Branding, Integration into your E-learning (Moodle or others) Platforms or Integration into your CMS/Portal/Intranet. I also offer Installation services as well as hosting for !OpenMeetings.<br/>
   My experience: 5++ years in Web-Application Development, !OpenLaszlo, Red5, Tomcat, Spring, Hibernate<br/>My Languages: AS1, AS2, AS3, LZX, JAVA, PHP<br/>
 
   Contact:<br/>
