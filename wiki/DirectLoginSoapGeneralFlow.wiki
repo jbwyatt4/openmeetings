@@ -20,6 +20,13 @@ The HASH of setUserObjectAndGenerateRoomHash is only one time valid! For securit
 If the Room needs password protection, then this must be implemented in the Application-Logic while managing the Room (Application Logic of the environment). Also this environment has to take care that the room will be deleted if it is not needed anymore.
 
 URL for direct Room access: (secureHash=6c280410c96e91ea05d25e0b28b10a87 MUST be replaced with a valid HASH you create using the SOAP Gateway Method setUserObjectAndGenerateRoomHash)
+
+Important Note:
+Starting with OpenMeetings 1.1 you should use the Link like this:
+http://$YOUR_RED5_HOST:$YOUR_RED5_HTTP_PORT/openmeetings/?secureHash=6c280410c96e91ea05d25e0b28b10a87
+(there is no typo here!! openmeetings/?param=value => that is the format of the URL!)
+
+Older Versions of !OpenMeetings:
 http://$YOUR_RED5_HOST:$YOUR_RED5_HTTP_PORT/openmeetings/main.swf8.swf?secureHash=6c280410c96e91ea05d25e0b28b10a87&language=4&lzproxied=solo
 or
 
