@@ -9,6 +9,9 @@ Add your content here.
 <wiki:video url="ftp://webbase-design.de/OpenMeetings_Intro_Final03022010.html"/>
 
 
+=== Try it at the Demo-Portal ===
+  *  http://www.openmeetings.de ... (_updated at 07.02.2010 to r2894 _)
+
 = Details =
 
 Add your content here.  Format your content with:
