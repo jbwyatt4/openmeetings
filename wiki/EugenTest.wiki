@@ -6,7 +6,7 @@
 
 Add your content here.
 
-<wiki:video url="ftp://webbase-design.de/OpenMeetings_Intro_Final03022010.swf"/>
+<wiki:video url="ftp://webbase-design.de/OpenMeetings_Intro_Final03022010.html"/>
 
 
 = Details =
