@@ -79,7 +79,7 @@ After Running the Installer all basics are installed. Now login and go to the Me
   * [http://aitinet.com/blog/wp-content/uploads/2009/08/TUTORIAL-PARA-INSTALACAO-DO-RED5-E-OPENMEETINGS-NO-LINUX-DEBIAN-LENNY-51.pdf Portuguese Version for Debian Installation of 0.9 RC1] 
   * [UpdateOpenMeetings Update from Previous Versions]
   * [http://marc-muehlfeld.de/openmeetings/ CentOS Installation Tutorial von Marc Mühlfeld]
-  * [Automatic script installation for Debian]
+  * [http://code.google.com/p/openmeetings/wiki/Automatic_script_installation_for_Debian Automatic script installation for Debian]
 
 = Integration, Single Sign On and LDAP =
 
