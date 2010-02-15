@@ -1,0 +1,54 @@
+#labels Installation,Configuration,Phase-Deploy
+*Automatic Script Installation for Debian 5*
+
+*What is?*
+
+It is a shell script, what resolve all dependencies, install init scripts, download the latest stable version of Openmeetings (1.1 r2905), and install every things "automagically"
+
+
+*How it works?*
+
+_First_, the script do a copy of /etc/sources.list and add new Debian Repositories... then adds a gpg key from debian-multimedia;
+
+_Second_, Download and install all things needed, like java-sdk, openoffice, mysql server. After this, the init scripts are downloaded and installed and database openmeetings are created on mysql server.
+
+_Third_, the OpenMeetings is downloaded, and copied to /opt/red5. Permissions and owners are defined. The file hibernate.cfg.xml will be created with the user defined by user.
+
+_Fourth_, the FFMpeg is compiled with lamemp3 support.
+
+_Fifth_, use the OpenMeetings :)
+
+
+*How I can run?*
+
+Download the script [http://victor.sartori.eti.br/openmeetings/install-om-2905 here]
+Set the execute permission: chmod +x install-om-2905
+
+I advise you, to edit the script and change the url of debian repository for your country, at variable REP_DEBIAN. If you don't set the repository for your country, the script is using the US repository.
+
+To run: ./install-om-2905
+
+And answer all questions and wait. This process takes approximately 20 minutes.
+
+
+*To Do*
+
+Add a way to install the new versions without changes on script;
+
+Full translations of the script to English
+
+Create return errors for all errors, today all errors return 1;
+
+Support for the main distribuitions (Centos, Ubuntu, SuSe)
+
+
+
+
+_*P.S. This script is designated by Debian 5 users, others systems this script will not work!*_
+
+
+
+Questions, suggestions, bugs.... anything, mail-me: victor@sartori.eti.br
+
+
+Thats all Folks!!!! enjoy
