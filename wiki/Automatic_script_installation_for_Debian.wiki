@@ -1,5 +1,5 @@
 #labels Installation,Configuration,Phase-Deploy
-*Automatic Script Installation for Debian 5*
+= Automatic Script Installation for Debian 5 =
 
 *What is?*
 
