@@ -21,7 +21,7 @@ _Fifth_, use the OpenMeetings :)
 
 *How I can run?*
 
-Download the script [http://victor.sartori.eti.br/openmeetings/install-om-2905 here]
+Download the script [http://openmeetings.googlecode.com/svn/docs/install-om-r2905 here]
 Set the execute permission: chmod +x install-om-2905
 
 I advise you, to edit the script and change the url of debian repository for your country, at variable REP_DEBIAN. If you don't set the repository for your country, the script is using the US repository.
