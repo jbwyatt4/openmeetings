@@ -4,10 +4,14 @@
 
   * Download see http://code.google.com/p/openmeetings/downloads/list
   * [http://code.google.com/p/openmeetings/wiki/MoodlePlugins#Technical-Review Technical-Review]
-  * Demo: http://www.openmeetings.de/moodle/course/view.php?id=2 (You can login as Guest)
+  * Demo: http://www.openmeetings.de:8090/moodle/course/view.php?id=2 (You can login as Guest)
   * [http://code.google.com/p/openmeetings/wiki/MoodlePlugins#Source-Locations Source-Locations]
 
-= Conference-Plugin =
+== Help And Support ==
+
+  * Mailing List: http://groups.google.com/group/openmeetings-user
+  * [http://www.webbase-design.de/side/OpenMeetings%20Hosting.pdf Installation and Services around OpenMeetings offerings frmo Webbase-Design, contact us if you have any questions]
+  * [Jobs More Developers and Freelancers]
 
 === Installation ===
 
