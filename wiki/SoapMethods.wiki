@@ -529,8 +529,8 @@ Method: _public String sendInvitationHash(String SID, String username, String me
 
 
 Create a Invitation hash  and optionally send it by mail
-the From to Date is as String as some SOAP libraries do not accept 
-Date Objects in SOAP Calls Date is parsed as dd.mm.yyyy, time as hh:mm (don't forget the leading zero's)
+the From- and To- Date's are Strings as some SOAP libraries do not accept 
+Date Objects in SOAP Calls. Those Dates are parsed as dd.mm.yyyy, time-strings as hh:mm (don't forget the leading zero's)
 
 Returns a HASH value that can be made into a URL with http://$OPENMEETINGS_HOST:$PORT/openmeetings/?invitationHash=$invitationsHash;
 
@@ -551,10 +551,40 @@ Params:
 || Integer || valid || the type of validation for the hash 1: endless, 2: from-to period, 3: one-time ||
 || String || validFromDate || Date in Format of dd.mm.yyyy only of interest if valid is type 2 ||
 || String || validFromTime || time in Format of hh:mm only of interest if valid is type 2 ||
-|| Date || validToDate || Date in Format of dd.mm.yyyy only of interest if valid is type 2 ||
+|| String || validToDate || Date in Format of dd.mm.yyyy only of interest if valid is type 2 ||
 || String || validToTime || time in Format of hh:mm only of interest if valid is type 2 ||
 || Long || language_id || the language id of the EMail that is send with the invitation if sendMail is true ||
 || Boolean || sendMail || if sendMail is true then the RPC-Call will send the invitation to the email ||
 
 
+
+==== sendInvitationHashWithDateObject ====
+
+Method: _public String sendInvitationHash(String SID, String username, String message,  String baseurl, String email, String subject, Long room_id, String conferencedomain, Boolean isPasswordProtected, String invitationpass, Integer valid, Date fromDate, Date toDate, Long language_id, Boolean sendMail)_
+
+
+Create a Invitation hash  and optionally send it by mail
+Date Objects in SOAP Calls Date are expected to be full Date object. So you can set Hours, Minutes and Seconds here directly in the Date Object.
+
+Returns a HASH value that can be made into a URL with http://$OPENMEETINGS_HOST:$PORT/openmeetings/?invitationHash=$invitationsHash;
+
+available since Issue 1154
+
+Params:
+|| *type* || *name* || *description* ||
+|| String || SID || The SID of the User. This SID must be marked as Loggedin ||
+|| String || username || the username of the User that he will get ||
+|| String || message || the Message in the Email Body send with the invitation if sendMail is true ||
+|| String || baseurl || the baseURL for the Infivations link in the Mail Body if sendMail is true ||
+|| String || email || the Email to send the invitation to if sendMail is true ||
+|| String || subject || the subject of the Email send with the invitation if sendMail is true ||
+|| Long || room_id || the username of the User that he will get ||
+|| String || conferencedomain || the domain of the room (keep empty not in use at the moment) ||
+|| Boolean || isPasswordProtected || if the invitation is password protected ||
+|| String || invitationpass || the password for accessing the conference room via the invitation hash ||
+|| Integer || valid || the type of validation for the hash 1: endless, 2: from-to period, 3: one-time ||
+|| Date || fromDate || Date in Format of dd.mm.yyyy only of interest if valid is type 2 ||
+|| Date || toDate || Date in Format of dd.mm.yyyy only of interest if valid is type 2 ||
+|| Long || language_id || the language id of the EMail that is send with the invitation if sendMail is true ||
+|| Boolean || sendMail || if sendMail is true then the RPC-Call will send the invitation to the email ||
 
