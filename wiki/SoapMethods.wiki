@@ -583,8 +583,7 @@ Params:
 || Boolean || isPasswordProtected || if the invitation is password protected ||
 || String || invitationpass || the password for accessing the conference room via the invitation hash ||
 || Integer || valid || the type of validation for the hash 1: endless, 2: from-to period, 3: one-time ||
-|| Date || fromDate || Date in Format of dd.mm.yyyy only of interest if valid is type 2 ||
-|| Date || toDate || Date in Format of dd.mm.yyyy only of interest if valid is type 2 ||
+|| Date || fromDate || Date Object ||
+|| Date || toDate || Date Object ||
 || Long || language_id || the language id of the EMail that is send with the invitation if sendMail is true ||
 || Boolean || sendMail || if sendMail is true then the RPC-Call will send the invitation to the email ||
-
