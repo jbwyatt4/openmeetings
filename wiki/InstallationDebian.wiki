@@ -5,7 +5,7 @@
 
 == First variant (works with lenny as well): ==
 
-Download the following debian package: <a href="http://www.expressaas.com/distrib/release/red5-openmeetings_1.0.2760.noarch.deb">http://www.expressaas.com/distrib/release/red5-openmeetings_1.0.2760.noarch.deb</a>
+Download the following debian package: <a href="http://openmeetings.googlecode.com/files/red5-openmeetings_1.0.2760.noarch.deb">http://openmeetings.googlecode.com/files/red5-openmeetings_1.0.2760.noarch.deb</a>
 
 And install it using <b>sudo dpkg -i red5-openmeetings_1.0.2760.noarch.deb</b> command.
 All additional utilities, such as Openoffice, Ghostscript, Imagemagick and Swftools should be installed as described below.
