@@ -3,7 +3,7 @@
 
 _This Feature will is available since Version 0.5.1_
 
-Content / Index
+*Content / Index*
 
   <wiki:toc max_depth="4" />
 
