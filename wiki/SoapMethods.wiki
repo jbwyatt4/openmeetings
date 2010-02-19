@@ -493,19 +493,10 @@ Params:
 || String || SID || The SID of the User. This SID must be marked as Loggedin ||
 || String || externalRoomType || External Type of Room ||
 
-=== getInvitationHash ===
+==== getInvitationHash ====
 
-Method: _public String getInvitationHash(
-			String SID,
-			String username, 
-			Long room_id, 
-    		Boolean isPasswordProtected, 
-    		String invitationpass, 
-    		Integer valid, 
-    		String validFromDate, 
-    		String validFromTime, 
-    		String validToDate, 
-    		String validToTime)_
+Method: _public String getInvitationHash(String SID, String username, Long room_id, Boolean isPasswordProtected, String invitationpass, Integer valid, String validFromDate, 
+String validFromTime, String validToDate, String validToTime)_
 
 
 Create a Invitation hash 
