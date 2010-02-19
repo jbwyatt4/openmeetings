@@ -492,3 +492,37 @@ Params:
 || *type* || *name* || *description* ||
 || String || SID || The SID of the User. This SID must be marked as Loggedin ||
 || String || externalRoomType || External Type of Room ||
+
+=== getInvitationHash ===
+
+Method: _public String getInvitationHash(
+			String SID,
+			String username, 
+			Long room_id, 
+    		Boolean isPasswordProtected, 
+    		String invitationpass, 
+    		Integer valid, 
+    		String validFromDate, 
+    		String validFromTime, 
+    		String validToDate, 
+    		String validToTime)_
+
+
+Create a Invitation hash 
+the From to Date is as String as some SOAP libraries do not accept 
+Date Objects in SOAP Calls Date is parsed as dd.mm.yyyy, time as hh:mm (don't forget the leading zero's)
+
+Returns a HASH value that can be made into a URL with http://$OPENMEETINGS_HOST:$PORT/openmeetings/?invitationHash="+invitationsHash;
+
+Params:
+|| *type* || *name* || *description* ||
+|| String || SID || The SID of the User. This SID must be marked as Loggedin ||
+|| String || username || the username of the User that he will get ||
+|| Long || room_id || the username of the User that he will get ||
+|| Boolean || isPasswordProtected || if the invitation is password protected ||
+|| String || invitationpass || the password for accessing the conference room via the invitation hash ||
+|| Integer || valid || the type of validation for the hash 1: endless, 2: from-to period, 3: one-time ||
+|| String || validFromDate || Date in Format of dd.mm.yyyy only of interest if valid is type 2 ||
+|| String || validFromTime || time in Format of hh:mm only of interest if valid is type 2 ||
+|| Date || validToDate || Date in Format of dd.mm.yyyy only of interest if valid is type 2 ||
+|| String || validToTime || time in Format of hh:mm only of interest if valid is type 2 ||
