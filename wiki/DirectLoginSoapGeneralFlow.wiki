@@ -52,4 +52,8 @@ http://openmeetings.googlecode.com/svn/docs/SOAPFlowDirectLogin.png
 
 Instead of creating room-hash that are intend for direct usage you might want to create some invitation hashs to send them to users via EMail.
 
-You can use the Method: [http://code.google.com/p/openmeetings/wiki/SoapMethods?ts=1266593733&updated=SoapMethods#getInvitationHash getInvitationHash] to either just create an hash with limited access or password protection or you can optionally also directly send the Hash also by Mail through OpenMeetings with [http://code.google.com/p/openmeetings/wiki/SoapMethods#sendInvitationHash sendInvitationHash].
+You can use the Method: [http://code.google.com/p/openmeetings/wiki/SoapMethods?ts=1266593733&updated=SoapMethods#getInvitationHash getInvitationHash] to either just create an hash with limited access or password protection or you can optionally also directly send the Hash also by Mail through !OpenMeetings with [http://code.google.com/p/openmeetings/wiki/SoapMethods#sendInvitationHash sendInvitationHash].
+
+
+
+
