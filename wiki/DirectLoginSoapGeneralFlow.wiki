@@ -3,9 +3,9 @@
 
 _This Feature will is available since Version 0.5.1_
 
-  <wiki:toc max_depth="4" />
-
 == Summary ==
+
+  <wiki:toc max_depth="4" />
 
 The trick about the !DirectLogin-Flow (SSO) is that you can go into a room directly without having any !OpenMeetings account. You always use the same (Admin!!) user to login via the Web-Service and then use the !setUserObjectAndGenerateRoomHash method to set custom user-value to a specific session. The Method !setUserObjectAndGenerateRoomHash returns a HASH, you add this HASH as param in the URL and thats it.
 
