@@ -23,9 +23,9 @@ First, please copy the following files into the Red5 Home / Root directory:
 
 {WRAPPER_HOME}\bin\wrapper.exe
 
-{WRAPPER_HOME}\src\bin\InstallApp-NT.bat.in
+{WRAPPER_HOME}\src\bin\Installapp-NT.bat.in
 
-{WRAPPER_HOME}\src\bin\UninstallApp-NT.bat.in
+{WRAPPER_HOME}\src\bin\Uninstallapp-NT.bat.in
 
 
 Rename the three batch files with refracting your application name as follows. 
