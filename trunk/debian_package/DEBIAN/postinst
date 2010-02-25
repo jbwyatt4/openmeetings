@@ -1,0 +1,66 @@
+#! /bin/bash -e
+
+#Source debconf library
+. /usr/share/debconf/confmodule
+
+#check if this is run because of abort
+
+#if [ "$1" != "abort-upgrade" ]&&[ "$1" != "abort-remove" ]&&[ "$1" != "abort-deconfigure" ]; then
+
+if [ "$1" = "configure" ]; then
+
+db_input critical red5-openmeetings/mysqlsvr || true
+
+db_input critical red5-openmeetings/mysqlusr || true
+
+db_input critical red5-openmeetings/mysqlpwd || true
+
+db_input critical red5-openmeetings/dbname || true
+
+db_input critical red5-openmeetings/userrun || true
+
+db_input critical red5-openmeetings/grouprun || true
+db_go
+
+db_get red5-openmeetings/mysqlsvr
+MYSQL_SERVER=$RET
+
+db_get red5-openmeetings/mysqlusr
+MYSQL_USER=$RET
+
+db_get red5-openmeetings/mysqlpwd
+MYSQL_PASS=$RET
+
+db_get red5-openmeetings/dbname
+MYSQL_DATABASE=$RET
+
+db_get red5-openmeetings/userrun
+RUN_USER=$RET
+
+db_get red5-openmeetings/grouprun
+RUN_GROUP=$RET
+
+sed -i 's|RUN_USER=.*$|RUN_USER='$RUN_USER'|' /etc/default/red5-openmeetings
+
+sed -i 's|RUN_GROUP=.*$|RUN_GROUP='$RUN_GROUP'|' /etc/default/red5-openmeetings
+chown -R $RUN_USER:$RUN_GROUP /usr/share/red5-openmeetings
+
+sed -i -r 's|jdbc:mysql:\/\/[^\/]*?\/|jdbc:mysql:\/\/'$MYSQL_SERVER'\/|' /usr/share/red5-openmeetings/webapps/openmeetings/conf/hibernate.cfg.xml
+
+sed -i -r 's|:\/\/'$MYSQL_SERVER'\/[^\?]*?\?|:\/\/'$MYSQL_SERVER'\/'$MYSQL_DATABASE'\?|' /usr/share/red5-openmeetings/webapps/openmeetings/conf/hibernate.cfg.xml
+
+sed -i -r 's|connection.username\">[^<]*?<|connection.username\">'$MYSQL_USER'<|' /usr/share/red5-openmeetings/webapps/openmeetings/conf/hibernate.cfg.xml
+
+sed -i -r 's|connection.password\">[^<]*?<|connection.password\">'$MYSQL_PASS'<|' /usr/share/red5-openmeetings/webapps/openmeetings/conf/hibernate.cfg.xml
+
+touch /usr/share/red5-openmeetings/postinst.done
+
+echo "Successfully configured Openmeetings for first start. Please start with \"/etc/init.d/red5-openmeetings start\" command and go to http://<host_ip>:5080/openmeetings/install to complete the installation process"
+
+else
+
+echo $1
+echo "Reconfiguration is not supported yet. Please reinstall the software."
+
+fi
+
