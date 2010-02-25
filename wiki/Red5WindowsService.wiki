@@ -1,6 +1,3 @@
-#Installing Red5 as a service on windows platform for openmeetings.
-
-= Introduction =
 
 Installing Red5 as a service on windows platform for openmeetings
 
