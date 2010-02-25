@@ -1,4 +1,4 @@
-#summary One-sentence summary of this page.
+#Installing Red5 as a service on windows platform for openmeetings.
 
 = Introduction =
 
