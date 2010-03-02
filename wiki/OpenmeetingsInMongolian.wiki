@@ -3,7 +3,7 @@
 
 = Introduction =
 
-Openmeetings devlopment in Mongolian language here.
+Openmeetings development in Mongolian language here.
 
 
 = Details =
