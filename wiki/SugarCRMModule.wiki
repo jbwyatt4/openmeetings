@@ -2,10 +2,10 @@
 
 <wiki:toc max_depth="2" />
 
-== Sugar CRM Demo Video ==
+= Sugar CRM Demo Video =
 
 
-== Sugar CRM Installation ==
+= Sugar CRM Installation =
 
 
-== Sugar CRM Usage ==
+= Sugar CRM Usage =
