@@ -63,9 +63,7 @@ insert following lines to in the
 if(isset($focus->custom_fields)){} body.
 
 || Line || Code ||
-|| 44 || if (is_null($xtpl)) { 
-    $xtpl = $sugar_smarty; 
-}  ||
+|| 44 || if (is_null($xtpl)) { $xtpl = $sugar_smarty; }||
 
 
 == Sugar CRM Module Usage ==
