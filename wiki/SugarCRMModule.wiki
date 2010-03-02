@@ -67,3 +67,26 @@ if(isset($focus->custom_fields)){} body.
 
 
 == Sugar CRM Module Usage ==
+
+After the Installation you have a Link to your personal Meeting Room in you activities section of sugarCRM
+
+http://openmeetings.googlecode.com/svn/docs/sugar/Docu_install_eng_7.png
+
+When you add a new Meeting you will have the possibility to add a OpenMeetings Conference Room for every Meeting. Every participant will receive a direct link to the Conference Room. The Link in the Mail for the invited users is only valid for the Time of the Meeting!
+
+In the Meetings-Details View of SugarCRM you can access the Room at any time.
+
+http://openmeetings.googlecode.com/svn/docs/sugar/Docu_install_eng_8.png
+
+Schedule Onlinemeeting
+
+http://openmeetings.googlecode.com/svn/docs/sugar/Docu_install_eng_9.png
+
+In the Schedule Meeting screen you can now select check-box (red arrow) for online-meeting with Openmeetings. After you add invitees (green arrow) you can send invites (blue arrow) and the invitee recive a E-mail with a link to a Openmeetings Room.
+
+Example Link in the invitations mail.
+Meeting URL: 
+http://localhost:5080/openmeetings/?invitationHash=d948f8977f33ccb31d77e9d08bf15403
+
+In the detail view you can access the openmeetings-room by the Link.
+http://openmeetings.googlecode.com/svn/docs/sugar/Docu_install_eng_10.png
