@@ -9,7 +9,7 @@
 Demo-Server:
 
 Documentation:
-
+[http://openmeetings.googlecode.com/svn/docs/sugar/Docu_install_eng.pdf Documentation as PDF]
 
 == Sugar CRM Module Installation ==
 
