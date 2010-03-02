@@ -2,10 +2,34 @@
 
 <wiki:toc max_depth="2" />
 
-== Sugar CRM Demo Video ==
+== Sugar CRM Demo ==
+
+-vid-
+
+Demo-Server:
+
+Documentation:
 
 
 == Sugar CRM Installation ==
 
+Requirements
+
+1.Openmeetings Admin Account
+2.SugarCRM installation (sugar minimum 5.1.0)
+3.Openmeetings-Connector modul installation in SugarCRM.
+
+Login as admin in SugarCRM.
+
+Go to Admin- Modul Loader  select Openmeetings_Connector.zip for Upload und upload the zip file.
+http://openmeetings.googlecode.com/svn/docs/sugar/Docu_install_eng_1.png
+
+http://openmeetings.googlecode.com/svn/docs/sugar/Docu_install_eng_2.png
+
+http://openmeetings.googlecode.com/svn/docs/sugar/Docu_install_eng_3.png
+
+After upload you can install the Openmeetings_Connector module.  
+
+http://openmeetings.googlecode.com/svn/docs/sugar/Docu_install_eng_4.png
 
 == Sugar CRM Usage ==
