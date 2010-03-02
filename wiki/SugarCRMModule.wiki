@@ -40,7 +40,7 @@ Configure the Openmeetings Account in the edit view.
 
 http://openmeetings.googlecode.com/svn/docs/sugar/Docu_install_eng_6.png
 
-*After installation and configuration you have to ad following Code manually.*
+*After installation and configuration you have to add following Code manually.*
 
 *Path:* include/language/en_us_notify_template.html
 Insert this two lines in the Meeting_Subject <!-- BEGIN: Meeting_Subject -->   to modifikate the invitations E-mail tamplate after „Description: {MEETING_DESCRIPTION}“
