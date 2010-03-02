@@ -32,4 +32,22 @@ After upload you can install the Openmeetings_Connector module.
 
 http://openmeetings.googlecode.com/svn/docs/sugar/Docu_install_eng_4.png
 
+After installation a shortcut “Openmeetings Account” in Admin View is available.
+
+http://openmeetings.googlecode.com/svn/docs/sugar/Docu_install_eng_5.png
+
+Configure the Openmeetings Account in the edit view.
+
+http://openmeetings.googlecode.com/svn/docs/sugar/Docu_install_eng_6.png
+
+After installation and configuration you have to ad following Code manually. 
+
+Path: include/language/en_us_notify_template.html
+Insert this two lines in the Meeting_Subject <!-- BEGIN: Meeting_Subject -->   to modifikate the invitations E-mail tamplate after „Description: {MEETING_DESCRIPTION}“
+
+|| Line || Code ||
+|| 119 || Meeting URL: <{MEETING_URl}>  ||
+
+
+
 == Sugar CRM Usage ==
