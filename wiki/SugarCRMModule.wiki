@@ -1,5 +1,7 @@
 #summary Sugar CRM Module
 
+<wiki:toc max_depth="2" />
+
 == Sugar CRM Demo Video ==
 
 
