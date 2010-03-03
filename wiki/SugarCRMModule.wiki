@@ -4,9 +4,11 @@
 
 == Sugar CRM Demo ==
 
--vid-
+<wiki:video url="http://www.youtube.com/watch?v=wBxG7w_rddQ"/>
 
-Demo-Server:
+Demo-Server: http://www.openmeetings.de:8090/sugar/crm/
+User: test
+Pass: test
 
 Documentation:
 [http://openmeetings.googlecode.com/svn/docs/sugar/Docu_install_eng.pdf Documentation as PDF]
