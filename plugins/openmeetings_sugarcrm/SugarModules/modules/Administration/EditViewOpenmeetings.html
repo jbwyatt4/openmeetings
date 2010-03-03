@@ -1,0 +1,154 @@
+
+<!-- BEGIN: main -->
+{ROLLOVER}
+<script type="text/javascript" lang="Javascript" src="modules/InboundEmail/InboundEmail.js"></script>
+{ERROR_STRING}
+<form name="EditView" id="EditView" method="POST" action="index.php">
+	<input type="hidden" name="display_tabs_def">
+	<input type="hidden" name="hide_tabs_def">
+	<input type="hidden" name="remove_tabs_def">
+	<input type="hidden" name="module" value="Administration">
+	<input type="hidden" name="record" value="{ID}">
+	<input type="hidden" name="action">
+	<input type="hidden" name="return_module" value="{RETURN_MODULE}">
+	<input type="hidden" name="return_id" value="{RETURN_ID}">
+	<input type="hidden" name="return_action" value="DetailViewOpenmeetings">
+	<input type="hidden" name="password_change" value="false">
+	<input type="hidden" name="old_password">
+   <input type="hidden" name="new_password">
+	<input type="hidden" name="user_name" value="{USER_NAME}">
+	<input type="hidden" name="type" value="{REDIRECT_EMAILS_TYPE}">
+
+
+    
+<table width="100%" cellpadding="0" cellspacing="0" border="0">
+	<tr>
+		<td style="padding-bottom: 2px;">
+			<input	title="{APP.LBL_SAVE_BUTTON_TITLE}" accessKey="{APP.LBL_SAVE_BUTTON_KEY}" 
+					class="button" onclick="this.form.action.value='SaveOpenmeetings'; {REASSIGN_JS} {CHOOSER_SCRIPT} return verify_data(EditView);"
+					type="submit" name="button" value="  {APP.LBL_SAVE_BUTTON_LABEL}  " >
+			<input	title="{APP.LBL_CANCEL_BUTTON_TITLE}" accessKey="{APP.LBL_CANCEL_BUTTON_KEY}" 
+					class="button" onclick="this.form.action.value='{RETURN_ACTION}'; this.form.module.value='{RETURN_MODULE}'; this.form.record.value='{RETURN_ID}'" 
+					type="submit" name="button" value="  {APP.LBL_CANCEL_BUTTON_LABEL}  ">
+			{CHANGE_PASSWORD_BUTTON111111}
+		</td>
+		<td align="right" nowrap><span class="required">{APP.LBL_REQUIRED_SYMBOL}</span> {APP.NTC_REQUIRED}</td>
+	</tr>
+</table>
+
+<div id="basic">
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="tabForm">
+	    <tr>
+		<td>
+			<table width="100%" border="0" cellspacing="0" cellpadding="0">
+
+                <tr>
+    <th colspan='4' align="left"  width="100%" valign="top"><h4 class="tabDetailViewDL"><slot>{MOD.Openmeetings_ACC_SETT}</slot></h4></th>
+    </tr>
+ 				
+ 				 <tr>
+                    <td width="25%" class="dataLabel"><slot>{MOD.OPENMEETINGS_URL}:</slot></td>
+                    <td colspan=2 width="35%" class="dataField"><slot><input id='openmeetings_url'  name='openmeetings_url' type="text" {OPENMEETINGS_URL_DISABLED} value='{OPENMEETINGS_URL}'  tabindex='2' size='35' maxlength='255' ></slot></td>             
+             </tr> 
+             <tr>
+    						<td width="25%" class="dataLabel"><slot>{MOD.OPENMEETINGS_HTTP_PORT}:</slot></td>
+    						<td width="85%" class="dataField"><slot><input name='openmeetings_http_port' id='openmeetings_http_port'  tabindex='1' size='25' maxlength='255' type="text" value="{OPENMEETINGS_HTTP_PORT}"></slot></td>
+   			 </tr>
+    			<tr>
+					<td width="25%" class="dataLabel"><slot>{MOD.OPENMEETINGS_USERNAME}:</slot></td>
+					<td width="35%" class="dataField"><slot><input name='openmeetings_username' id='openmeetings_username'  tabindex='1' size='25' maxlength='255' type="text" value="{OPENMEETINGS_USERNAME}"></slot></td>
+				</tr>
+				<tr>
+					<td width="25%" class="dataLabel"><slot>{MOD.LBL_OPENMEETINGS_PASS}:<span class="required">{APP.LBL_REQUIRED_SYMBOL}</span></slot></td>
+					<td width="35%" class="dataField"><slot><input name='openmeetings_password' type="password"  tabindex='2' size='25' maxlength='25' value='{OPENMEETINGS_PASSWORD}' /></slot></td>
+				</tr>
+				 <tr>
+    						<td width="25%" class="dataLabel"><slot>{MOD.OPENMEETINGS_LANGUAGE}:</slot></td>
+    						<td colspan=4 width="85%" class="dataField"><slot>
+
+
+							<select name="openmeetings_language" id="openmeetings_language" size="1">
+		
+								<option value="1" {IS_ENGLISH}>english</option>
+								<option value="2" {IS_GERMAN}>deutsch</option>
+								<option value="3" {IS_FRENCH}>french</option>
+
+								<option value="4"{IS_ITALIAN}>italian</option>
+								<option value="5"{IS_PORTUGUES}>portugues</option>
+								<option value="6"{IS_PORTUGUES_BRAZIL}>portugues brazil</option>
+								<option value="7"{IS_SPANISH}>spanish</option>
+								<option value="8"{IS_RUSSIAN}>russian</option>
+								<option value="9"{IS_SWEDISH}>swedish</option>
+								<option value="10"{IS_SHINESE_SIM}>chinese simplified</option>
+								<option value="11"{IS_SHINESE_TRAD}>chinese traditional</option>
+								<option value="12"{IS_KOREAN}>korean</option>
+								<option value="13"{IS_ARABIC}>arabic</option>
+								<option value="14"{IS_JAPANESE}>japanese</option>
+								<option value="15"{IS_INDONESIAN}>indonesian</option>
+								<option value="16"{IS_HUNGARIAN}>hungarian</option>
+								<option value="17"{IS_TRUKISH}>turkish</option>
+								<option value="18"{IS_UKRAINIAN}>ukrainian</option>
+								<option value="19"{IS_THAI}>thai</option>
+								<option value="20"{IS_PERSIAN}>persian</option>
+								<option value="21"{IS_CZECH}>czech</option>
+								<option value="22"{IS_GALICIAN}>galician</option>
+								<option value="23"{IS_FINNNISH}>finnish</option>
+								<option value="24"{IS_POLISH}>polish</option>
+								<option value="25"{IS_GREEK}>greek</option>
+								<option value="26"{IS_DUTCH}>dutch</option>
+								<option value="27"{IS_HEBREW}>hebrew</option>
+
+						    </select>
+
+
+<!--input name='openmeetings_language' id='openmeetings_language'  tabindex='1' size='25' maxlength='255' type="text" value="{LBL_OPENMEETINGS_LANGUAGE}">&nbsp;</slot></td-->
+    			</tr>
+                       
+   
+     </table>
+   </tr>
+   </table>
+   
+  
+  
+       
+ 
+    <script type="text/javascript">
+
+    </script>
+ 
+    </tr> 
+            
+			</table>
+		</td>
+	</tr>
+</table>
+<br />
+</div>
+
+
+           
+
+
+{JAVASCRIPT}
+<script type="text/javascript" language="Javascript">
+	// javascript moved to User.js
+	var old_load = window.onload;
+	window.onload = function() {
+		old_load();
+		enable_change_password_button();
+	}
+{getNameJs}
+{getNumberJs}
+{currencySymbolJs}
+	setSymbolValue(document.getElementById('currency_select').selectedIndex);
+	setSigDigits();
+
+{confirmReassignJs}
+
+
+</script>
+
+</form>
+
+<!-- END: main -->
