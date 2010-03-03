@@ -1,5 +1,12 @@
 #summary Release Notes
 
+== Major changes in Version 1.2 RC1 (release on Wednesday 03.03.2010) ==
+
+  * Performance Fixes
+  * New Integration Code and SOAP Methods
+  * Moodle Plugin Update with ferformance fix
+  * New Sugar CRM Plugin see [SugarCRMModule] in Version 1.0
+
 == Major changes in Version 1.1 RC1 (release on Monday 08.02.2010) ==
 
 New !ScreenSharing:
