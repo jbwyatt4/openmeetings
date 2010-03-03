@@ -6,10 +6,10 @@
 
 <wiki:video url="http://www.youtube.com/watch?v=wBxG7w_rddQ"/>
 
-Demo-Server: http://www.openmeetings.de:8090/sugar/crm/
-User: test
-Pass: test
-
+Demo-Server: http://www.openmeetings.de:8090/sugar/crm/<br/>
+User: test<br/>
+Pass: test<br/>
+<br/>
 Documentation:
 [http://openmeetings.googlecode.com/svn/docs/sugar/Docu_install_eng.pdf Documentation as PDF]
 
