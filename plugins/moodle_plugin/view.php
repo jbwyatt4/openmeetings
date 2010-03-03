@@ -148,7 +148,7 @@
 							 	"/" . "openmeetings/?" .
 								"secureHash=" . $returnVal . 
 								"&scopeRoomId=" . $openmeetings->room_id .
-								"&swf=maindebug.swf8.swf" .
+								//"&swf=maindebug.swf8.swf" .
 								"&language=" . $openmeetings->language . 
 								"&picture=" . $USER->picture . 
 								"&user_id=". $USER->id . 
