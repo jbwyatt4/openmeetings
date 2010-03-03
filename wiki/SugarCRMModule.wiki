@@ -15,13 +15,11 @@ Documentation:
 
 == Sugar CRM Module Installation ==
 
-Requirements
+*Requirements*
 
-1.Openmeetings Admin Account
-2.SugarCRM installation (sugar minimum 5.1.0)
-3.Openmeetings-Connector modul installation in SugarCRM.
+  * Openmeetings (>= Version 1.2) Openmeetings Admin Account
+  * SugarCRM installation (minimum 5.1.0)
 
-Login as admin in SugarCRM.
 
 Go to Admin- Modul Loader  select Openmeetings_Connector.zip for Upload und upload the zip file.
 http://openmeetings.googlecode.com/svn/docs/sugar/Docu_install_eng_1.png
