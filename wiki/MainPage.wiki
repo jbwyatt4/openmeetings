@@ -69,6 +69,7 @@ Need for a developer or Consultant? [http://code.google.com/p/openmeetings/wiki/
 == Plugins == 
 
   * MoodlePlugins
+  * SugarCRMModule
 
 == Developer-Documentation ==
 
