@@ -5,8 +5,8 @@
   * http://www.openmeetings.de:8090/moodle/course/view.php?id=2 (_updated at 07.02.2010 to r3087_)
   _you don't need to register to get into this Course_ - 
   for more Information regarding installation of Plugin see MoodlePlugins
-
-Demo [no Audio in this Video]
+<br/>
+Demo [no Audio in this Video]<br/>
 <wiki:video url="http://www.youtube.com/watch?v=pPgv7zkPXAk"/>
 
 = URLs =
