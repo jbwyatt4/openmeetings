@@ -13,7 +13,7 @@ Pass: test<br/>
 Documentation:
 [http://openmeetings.googlecode.com/svn/docs/sugar/Docu_install_eng.pdf Documentation as PDF]
 
-Page at SugarForge: http://www.sugarforge.org/projects/openmeetings/<br/>
+Page at !SugarForge: http://www.sugarforge.org/projects/openmeetings/<br/>
 
 == Sugar CRM Module Installation ==
 
