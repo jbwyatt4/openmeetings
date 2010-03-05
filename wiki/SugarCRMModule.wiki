@@ -23,7 +23,7 @@ Page at !SugarForge: http://www.sugarforge.org/projects/openmeetings/<br/>
   * SugarCRM installation (minimum 5.1.0)
 
 
-Go to Admin- Modul Loader  select Openmeetings_Connector.zip for Upload und upload the zip file.
+Go to Admin- Modul Loader  select !Openmeetings_Connector.zip for Upload und upload the zip file.
 http://openmeetings.googlecode.com/svn/docs/sugar/Docu_install_eng_1.png
 
 http://openmeetings.googlecode.com/svn/docs/sugar/Docu_install_eng_2.png
