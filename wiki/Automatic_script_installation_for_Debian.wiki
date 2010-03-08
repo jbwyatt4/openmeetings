@@ -9,10 +9,13 @@ It is a shell script, what resolve all dependencies, install init scripts, downl
 *How it works?*
 
 
-_First_, the script do a copy of /etc/sources.list and add new Debian Repositories... then adds a gpg key from debian-multimedia;
-_Second_, Download and install all things needed, like java-sdk, openoffice, mysql server. After this, the init scripts are downloaded and installed and database openmeetings are created on mysql server.
-_Third_, the OpenMeetings is downloaded, and copied to /opt/red5. Permissions and owners are defined. The file hibernate.cfg.xml will be created with the user defined by user.
-_Fifth_, use the OpenMeetings :)
+* _First_, the script do a copy of /etc/sources.list and add new Debian Repositories... then adds a gpg key from debian-multimedia;
+
+* _Second_, Download and install all things needed, like java-sdk, openoffice, mysql server. After this, the init scripts are downloaded and installed and database openmeetings are created on mysql server.
+
+* _Third_, the OpenMeetings is downloaded, and copied to /opt/red5. Permissions and owners are defined. The file hibernate.cfg.xml will be created with the user defined by user.
+
+*_Fifth_, use the OpenMeetings :)
 
 
 
