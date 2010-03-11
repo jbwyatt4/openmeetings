@@ -134,6 +134,11 @@ Run the command: ant -f build_red5webapp.xml dist
 Tthere is no need to compile the client additionally! the ant task does it all!
 You will find a directory *dist* that contains !OpenMeetings and a red5-server.
 
+to compile the client you can also use ant:
+ant -f build_red5webapp.xml dist (compiles a complete package into the folder dist)
+ant -f build_red5webapp.xml compile.laszlo.main (compiles the client into main.swf8.swf)
+ant -f build_red5webapp.xml compile.laszlo.main.debug (compiles the debug-client into maindebug.swf8.swf)
+
 == Links ==
 
   * [http://code.google.com/p/openmeetings/source/browse browse SVN source]
