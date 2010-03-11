@@ -139,12 +139,12 @@ ant -f build_red5webapp.xml dist (compiles a complete package into the folder di
 ant -f build_red5webapp.xml compile.laszlo.main (compiles the client into main.swf8.swf)
 ant -f build_red5webapp.xml compile.laszlo.main.debug (compiles the debug-client into maindebug.swf8.swf)
 
-== Links ==
+= Links =
 
   * [http://code.google.com/p/openmeetings/source/browse browse SVN source]
   * [http://code.google.com/p/openmeetings/source/list SVN change history]
   * [BuildSources old Instructions]
 
-== Tipps and Gotchas ==
+= Tipps and Gotchas =
 
   * When you run and test !OpenMeetings inside Eclipse, Eclipse may be not able to do conversion using *convert* or *pdf2swf*, cause it has another system_path variables set. You should goto the Administration>Configuration section of !OpenMeetings and set the absolute Path to Image-Magick and SWFTools and it will work again. Uploading of PDFs might fail because of the same reason => the path to Ghostscript cannot be read from the system_path. Unfortunately you cannot overwrite that in the Configuration as its an internal link of Ghostscript. However in production environment you will not run into this Issue, its a development problem.
