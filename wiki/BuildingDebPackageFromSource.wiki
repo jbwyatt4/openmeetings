@@ -6,13 +6,13 @@
 At first, you need to build your code distribution as described in the following [http://code.google.com/p/openmeetings/wiki/BuildSourceNew article]
 
 
-= Checking out the package directory structure =
+= Exporting the package directory structure =
 
-The package directory structure can be obtained from SVN into any empty folder using the following URL: https://openmeetings.googlecode.com/svn/trunk/debian_package
+The package directory structure can be obtained from SVN into any empty folder using the export command with the following URL: http://openmeetings.googlecode.com/svn/trunk/debian_package
 
 We will call this folder *<debian package folder>* from now on.
 
-After checkout, sources distribution should be placed into *<debian package folder>*/usr/share/red5-openmeetings folder
+After export, sources distribution should be placed into *<debian package folder>*/usr/share/red5-openmeetings folder
 
 Please, make sure root is the owner of *<debian package folder>* and all of its contents using the chmod command to avoid any possible errors.
 
