@@ -40,6 +40,16 @@ RUN_USER=$RET
 db_get red5-openmeetings/grouprun
 RUN_GROUP=$RET
 
+MYSQL_RESULT=`mysql -h $MYSQL_SERVER -u $MYSQL_USER -p$MYSQL_PASS -e status 2>/dev/null 1>/dev/null`$?||true
+
+if [ $MYSQL_RESULT -ne 0 ]; then 
+
+echo Server not found on the given address or the account data is incorrect.
+
+exit 1 
+
+fi
+
 sed -i 's|RUN_USER=.*$|RUN_USER='$RUN_USER'|' /etc/default/red5-openmeetings
 
 sed -i 's|RUN_GROUP=.*$|RUN_GROUP='$RUN_GROUP'|' /etc/default/red5-openmeetings
