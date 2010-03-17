@@ -1,4 +1,5 @@
 #summary About the Facebook Module for OpenMeetings
+#labels Featured
 
 You can use !OpenMeetings integrated into Facebook,<br/>
 visit http://apps.facebook.com/openmeetings/
