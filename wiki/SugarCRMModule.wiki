@@ -1,4 +1,5 @@
 #summary Sugar CRM Module
+#labels Featured
 
 <wiki:toc max_depth="2" />
 
