@@ -1,5 +1,5 @@
 #summary QoS tips to improve the network performances for OpenMeetings
-#labels Configuration,Featured
+#labels Configuration
 
 
 = Introduction =
