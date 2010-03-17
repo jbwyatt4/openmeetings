@@ -1,4 +1,5 @@
 #summary Building Source and develop
+#labels Featured
 
 <wiki:toc max_depth="2" />
 
