@@ -1,4 +1,4 @@
-#labels Installation,Configuration,Featured
+#labels Installation,Configuration
 Openmeetings development in Mongolian language here.
 
 = Introduction =
