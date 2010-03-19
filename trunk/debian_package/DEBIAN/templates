@@ -12,7 +12,7 @@ Description: MySql user you wish to use
 
 Template: red5-openmeetings/mysqlpwd
 Type: password
-Default:
+Default: 
 Description: MySql user's password
   Please enter the mysql user's password to be used with OpenMeetings.
 
