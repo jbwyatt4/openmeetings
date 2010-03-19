@@ -2,46 +2,51 @@
 
 # For RedHat and similar:
 # chkconfig: 2345 85 85
-# description: red5-openmeetings java server daemon
-# processname: red5-openmeetings
-# last modified:22.04.2009 CTpaHHoe
+# description: open office server daemon
+# processname: soffice
+# last modified:16.03.2010 Rodion Volkov
 
 ### BEGIN INIT INFO
-# Provides: red5-openmeetings
+# Provides : openoffice
 # Default-Start: 2 3 4 5
 # Default-Stop: 0 1 6
-# Short-Description: Start/stop OpenMeetings java server daemon
+# Short-Description: Start/stop openoffice server daemon for Openmeetings
 ### END INIT INFO
 
-NAME=red5-openmeetings
+NAME=ooomeetings
 
 # default configuration
 RUN_HOME=/usr/share/red5-openmeetings
 RUN_USER=root
 RUN_GROUP=root
-LOGFILE=/var/log/$NAME.log
 
 
+# Source function library
+
+# red hat specific
 # [ -r /etc/sysconfig/$NAME ] && . /etc/sysconfig/$NAME
 [ -r /etc/default/$NAME ] && . /etc/default/$NAME
 
 # local variables
+DAEMON=$RUN_HOME/$NAME-daemon.sh
 PIDFILE=/var/run/$NAME.pid
-DAEMON=$RUN_HOME/red5-daemon.sh
-SHUTDOWN=$RUN_HOME/red5-shutdown.sh
-POSTINSTDONE=$RUN_HOME/postinst.done
+LOGFILE=/var/log/$NAME.log
+
+[ -z "$SOFFICE_PORT" ] && SOFFICE_PORT=8100
+[ -z "$SOFFICE_ARGS" ] && SOFFICE_ARGS="-nologo -headless -nofirststartwizard -accept=socket,host=localhost,port=$SOFFICE_PORT;urp;StarOffice.ServiceManager"
+
+# check OpenOffice
+[ -z "$SOFFICE" ] &&  SOFFICE=`which soffice`
+if [ ! -x "$SOFFICE" ]; then
+  echo $"Open Office Org not found. Check Open Office Org installed"
+  exit 1
+fi
 
 # export variables for daemon script
 export PIDFILE
 export LOGFILE
-[ -n "$RUN_HOME" ] && export RUN_HOME
-
-[ -n "$RED5_HOME" ] || RED5_HOME=$RUN_HOME
-export RED5_HOME
-
-
-[ -n "$JAVA_HOME" ] && export JAVA_HOME 
-[ -n "$JAVA_OPTS" ] && export JAVA_OPTS
+export SOFFICE
+export SOFFICE_ARGS
 ##
 
 EXIT_CODE=0
@@ -49,7 +54,7 @@ EXIT_CODE=0
 
 check_files() {
   if [ ! -w $PIDFILE ]; then
-    touch "$PIDFILE"
+    touch "$PIDFILE" 
     chown "$RUN_USER" "$PIDFILE"
   fi
 
@@ -74,13 +79,8 @@ do_start() {
   su -c "$DAEMON" "$RUN_USER" 
   EXIT_CODE=$?
 
-  if [ ! -e $POSTINSTDONE ]; then
-    echo "Post install script not run; Please run "$RUN_HOME"/postinst.sh"
-    EXIT_CODE=221
-  fi
-
   if [ $EXIT_CODE -eq 0 ] ; then
-    touch "/var/lock/subsys/$NAME"
+    touch "/var/lock/subsys/$NAME" 2>/dev/null
     echo " SUCCESS"
   fi
   
@@ -96,9 +96,7 @@ do_stop() {
     return 0
   fi
 
-  # su -c "$SHUTDOWN" "$RUN_USER" 2>/dev/null
-
-  if ! kill -TERM $pid 2>/dev/null ; then
+  if ! kill -TERM $pid 2>/dev/null; then
     # TERM failed. wait and kill
     
     c=0

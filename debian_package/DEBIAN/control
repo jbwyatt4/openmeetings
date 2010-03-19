@@ -3,7 +3,9 @@ Version: 1.0.2760
 Architecture: all
 Maintainer: Rodion Volkov <volkov.rodion@gmail.com>
 Installed-Size: 102708
-Depends: sun-java6-jdk, debconf
+Depends: sun-java6-jdk, debconf, mysql-client
+Suggests: openoffice.org, imagemagick, swftools, ghostscript
+Recommends: mysql-server
 Conflicts: red5-server, tomcat6, tomcat5
 Section: utils
 Priority: optional

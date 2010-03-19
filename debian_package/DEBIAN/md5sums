@@ -1,3 +1,6 @@
+c889fe99443180789c011cfe9c1fc880  etc/init.d/red5-openmeetings
+30b55a162e84288649317131f854de4a  etc/init.d/ooomeetings
+d8a42c074a62143aa88debb2b4f2e77b  etc/default/red5-openmeetings
 b65e52d451e9d6cd485801a5aa3cb3ff  usr/share/red5-openmeetings/postinst.sh
 268bb0c6a714dd988643274b80f992c7  usr/share/red5-openmeetings/lib/jruby-engine-1.1.6.jar
 0864209dfc6957b4c7ae36e27e2fb9c1  usr/share/red5-openmeetings/lib/bcprov-jdk16-139.jar
@@ -600,6 +603,7 @@ e1b6c875f093a49357e70b4b438d7fcc  usr/share/red5-openmeetings/red5-debug.sh
 fedbbe05fcb8069c34b202d63708cc60  usr/share/red5-openmeetings/build.xml
 12b39cdd3da0ea5a11d188f7f26bba16  usr/share/red5-openmeetings/red5.jar
 df055c05cb0535a2649ab64aa66b4ed4  usr/share/red5-openmeetings/red5-debug.bat
+af1c5afe9dd33f992f85aa3e79081e2c  usr/share/red5-openmeetings/ooomeetings-daemon.sh
 ebbcfcfbc5689c74e993a0c330570808  usr/share/red5-openmeetings/build.properties
 70e19f216f47f8e59a69dc2c3476a593  usr/share/red5-openmeetings/conf/red5-common.xml
 542e8f3930d4effeec2ea6b6cba021b7  usr/share/red5-openmeetings/conf/red5.properties
