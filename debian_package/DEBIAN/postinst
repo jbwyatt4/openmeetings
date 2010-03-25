@@ -51,10 +51,10 @@ exit 1
 fi
 
 sed -i 's|RUN_USER=.*$|RUN_USER='$RUN_USER'|' /etc/default/red5-openmeetings
-sed -i 's|RUN_USER=.*$|RUN_USER='$RUN_USER'|' /etc/init.d/ooomeetings
+sed -i 's|RUN_USER=.*$|RUN_USER='$RUN_USER'|' /etc/default/ooomeetings
 
 sed -i 's|RUN_GROUP=.*$|RUN_GROUP='$RUN_GROUP'|' /etc/default/red5-openmeetings
-sed -i 's|RUN_GROUP=.*$|RUN_GROUP='$RUN_GROUP'|' /etc/init.d/ooomeetings
+sed -i 's|RUN_GROUP=.*$|RUN_GROUP='$RUN_GROUP'|' /etc/default/ooomeetings
 chown -R $RUN_USER:$RUN_GROUP /usr/share/red5-openmeetings
 
 sed -i -r 's|jdbc:mysql:\/\/[^\/]*?\/|jdbc:mysql:\/\/'$MYSQL_SERVER'\/|' /usr/share/red5-openmeetings/webapps/openmeetings/conf/hibernate.cfg.xml
