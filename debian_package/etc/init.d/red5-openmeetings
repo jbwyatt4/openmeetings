@@ -8,6 +8,8 @@
 
 ### BEGIN INIT INFO
 # Provides: red5-openmeetings
+# Required-Start: $local_fs $remote_fs $network
+# Required-Stop: $local_fs $remote_fs $network
 # Default-Start: 2 3 4 5
 # Default-Stop: 0 1 6
 # Short-Description: Start/stop OpenMeetings java server daemon
@@ -22,7 +24,11 @@ RUN_GROUP=root
 LOGFILE=/var/log/$NAME.log
 
 
-# [ -r /etc/sysconfig/$NAME ] && . /etc/sysconfig/$NAME
+# source datum
+
+# red hat specific
+[ -r /etc/sysconfig/$NAME ] && . /etc/sysconfig/$NAME
+# debian specific
 [ -r /etc/default/$NAME ] && . /etc/default/$NAME
 
 # local variables
