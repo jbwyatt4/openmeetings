@@ -144,16 +144,33 @@
 					
 			if ($returnVal != "") {
 				
+//				$iframe_d = "http://".$CFG->openmeetings_red5host . ":" . $CFG->openmeetings_red5port .
+//							 	"/" . "openmeetings/?" .
+//								"secureHash=" . $returnVal . 
+//								"&scopeRoomId=" . $openmeetings->room_id .
+//								//"&swf=maindebug.swf8.swf" .
+//								"&language=" . $openmeetings->language . 
+//								"&picture=" . $USER->picture . 
+//								"&user_id=". $USER->id . 
+//								"&moodleRoom=1" . 
+//                                "&wwwroot=". $CFG->wwwroot;     
+
+				$scope_room_id = $openmeetings->room_id;
+
+				if ($scope_room_id == 0) {
+					$scope_room_id = "hibernate";
+				}
+				
 				$iframe_d = "http://".$CFG->openmeetings_red5host . ":" . $CFG->openmeetings_red5port .
 							 	"/" . "openmeetings/?" .
 								"secureHash=" . $returnVal . 
-								"&scopeRoomId=" . $openmeetings->room_id .
+								"&scopeRoomId=" . $scope_room_id .
 								//"&swf=maindebug.swf8.swf" .
 								"&language=" . $openmeetings->language . 
 								"&picture=" . $USER->picture . 
 								"&user_id=". $USER->id . 
-								"&moodleRoom=1" . 
-                                "&wwwroot=". $CFG->wwwroot;                                                                                                      
+								"&moodleRoom=1" .   
+								"&wwwroot=". $CFG->wwwroot;                                                                                                
 
 				printf("<iframe src='%s' width='%s' height='%s' />",$iframe_d,
 						$CFG->openmeetings_openmeetingsiFrameWidth,
