@@ -30,6 +30,8 @@ The user will receive an Email as soon as the Payment is received on the Paypal 
 That usually takes only 30-60 seconds.
 The email to the buying user contains also the Invoice. There are different Invoices generated based on the country of the user.
 
+There is also a list of past and present transactions and the possibility to download invoices of past transactions in the user profile.
+
 == Where to get the Paypal Module ==
 
 Contact:
