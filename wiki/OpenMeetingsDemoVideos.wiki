@@ -9,3 +9,7 @@
 == !OpenMeetings Moodle Sample Integration Video ==
 
 <wiki:video url="http://www.youtube.com/watch?v=pPgv7zkPXAk"/>
+
+== !OpenMeetings Paypal Integration and Invoicing Sample Video Key Features ==
+
+<wiki:video url="http://www.youtube.com/watch?v=VUBwM4DRWG4"/>
