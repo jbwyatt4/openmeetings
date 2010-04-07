@@ -34,12 +34,15 @@ There is also a list of past and present transactions and the possibility to dow
 
 == Where to get the Paypal Module ==
 
-Contact:
-Sebastian Wagner
-Haid-und-Neu-Straße 7
-76131 Karlsruhe
-++49 (0) 721 255 1990
-Mail: seba dot wagner at gmail dot com
-Jabber: seba dot wagner at gmail dot com
-Web: http://www.webbase-design.de
-Skype: s.wagner1
+
+Contact:<br/>
+Sebastian Wagner<br/>
+Haid-und-Neu-Straße 7<br/>
+76131 Karlsruhe<br/>
+++49 (0) 721 255 1990<br/>
+Mail: seba dot wagner at gmail dot com<br/>
+Jabber: seba dot wagner at gmail dot com<br/>
+Web: http://www.webbase-design.de<br/>
+Skype: s.wagner1<br/>
+<br/>
+If you need a Demo on our system contact us and I will give you a account in our sandbox.
