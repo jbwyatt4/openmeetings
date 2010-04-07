@@ -19,3 +19,9 @@ The other option for user is to buy a Volume-Flatrate. Either 3 or 6 months unli
 As soon as the user clicks *Checkout with Paypal* he is processed to Paypal's Website. Depending on his country he has different payment options. All countries have the major Credit Cards. For example on openmeetings.de => Users from Germany can also pay by direct debit, as the Paypal account on openmeetings.de is in german.
 
 The hole payment process is multi-language.
+
+== Invoice and Transaction Status ==
+
+The user will receive an Email as soon as the Payment is received on the Paypal account.
+That usually takes only 30-60 seconds.
+The email to the buying user contains also the Invoice. There are different Invoices generated based on the country of the user.
