@@ -71,6 +71,7 @@ Need for a developer or Consultant? [http://code.google.com/p/openmeetings/wiki/
   * [MoodlePlugins Moodle Module Documentation and Installation]
   * [SugarCRMModule Sugar Module Documentation and Installation]
   * [FacebookModule Facebook Module Documentation and Installation]
+  * [OpenMeetingsPaypalIntegration Paypal integration and invoicing Module]
 
 == Developer-Documentation ==
 
