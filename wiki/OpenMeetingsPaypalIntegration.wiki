@@ -6,4 +6,7 @@
 
 
 
+== License Options (Pay-per-Minute or Volume Flatrate) ==
 
+The user can buy either minutes and every time he enters a conference room a counter will start and his profile will be updated.
+It is not possible to cheat by accessing a Room with the same account at the same time.
