@@ -1,5 +1,9 @@
 #summary One-sentence summary of this page.
 
+
+<wiki:toc max_depth="2" />
+
+
 == !OpenMeetings Paypal Integration and Invoicing Sample Video Key Features ==
 
 <wiki:video url="http://www.youtube.com/watch?v=VUBwM4DRWG4"/>
@@ -25,3 +29,15 @@ The hole payment process is multi-language.
 The user will receive an Email as soon as the Payment is received on the Paypal account.
 That usually takes only 30-60 seconds.
 The email to the buying user contains also the Invoice. There are different Invoices generated based on the country of the user.
+
+== Where to get the Paypal Module ==
+
+Contact:
+Sebastian Wagner
+Haid-und-Neu-Straße 7
+76131 Karlsruhe
+++49 (0) 721 255 1990
+Mail: seba dot wagner at gmail dot com
+Jabber: seba dot wagner at gmail dot com
+Web: http://www.webbase-design.de
+Skype: s.wagner1
