@@ -11,3 +11,5 @@ The user can buy either minutes and every time he enters a conference room a cou
 It is not possible to cheat by accessing a Room with the same account at the same time.
 
 Sending Invitations or creating Scheduled Meetings via the Calendar is not possible for Pay-per-Minute Users. Otherwise those Users could send themself a invitation and in that way get unlimited access to meeting rooms.
+
+The other option for user is to buy a Volume-Flatrate. Either 3 or 6 months unlimited access to the system. Users with Volume-Flatrate can also send Invitations and create meetings via the calendar.
