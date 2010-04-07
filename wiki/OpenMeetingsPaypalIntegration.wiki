@@ -1,12 +1,13 @@
 #summary One-sentence summary of this page.
 
-== OpenMeetings Paypal Integration and Invoicing Sample Video Key Features ==
+== !OpenMeetings Paypal Integration and Invoicing Sample Video Key Features ==
 
 <wiki:video url="http://www.youtube.com/watch?v=VUBwM4DRWG4"/>
-
 
 
 == License Options (Pay-per-Minute or Volume Flatrate) ==
 
 The user can buy either minutes and every time he enters a conference room a counter will start and his profile will be updated.
 It is not possible to cheat by accessing a Room with the same account at the same time.
+
+Sending Invitations or creating Scheduled Meetings via the Calendar is not possible for Pay-per-Minute Users. Otherwise those Users could send themself a invitation and in that way get unlimited access to meeting rooms.
