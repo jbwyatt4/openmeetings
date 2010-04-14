@@ -16,7 +16,7 @@ Docs сontributed by Evgeny and others. The comments are welcome.
 
 [http://www.dataved.ru/2010/02/ubuntu.html Установка сервера на ОС Ubuntu]
 
-[http://www.dataved.ru/2009/12/blog-post_6276.html Администрирование сервера Телесовещаний]
+[http://www.dataved.ru/2009/12/blog-post_3923.html Администрирование сервера Телесовещаний]
 
 [http://www.dataved.ru/2009/12/blog-post_2886.html Подготовка компьютера пользователя для участия в Телесовещаниях]
 
