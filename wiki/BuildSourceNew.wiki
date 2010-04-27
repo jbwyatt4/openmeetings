@@ -140,6 +140,9 @@ ant -f build_red5webapp.xml dist (compiles a complete package into the folder di
 ant -f build_red5webapp.xml compile.laszlo.main (compiles the client into main.swf8.swf)
 ant -f build_red5webapp.xml compile.laszlo.main.debug (compiles the debug-client into maindebug.swf8.swf)
 
+to compile just the openmeetings JAR file:
+ant -f build_openmeetings_jar.xml
+
 = Links =
 
   * [http://code.google.com/p/openmeetings/source/browse browse SVN source]
