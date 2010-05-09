@@ -4,7 +4,7 @@
 
   * Performance Fixes
   * New Integration Code and SOAP Methods
-  * Moodle Plugin Update with ferformance fix
+  * Moodle Plugin Update with performance fix
   * New Sugar CRM Plugin see [SugarCRMModule] in Version 1.0
 
 == Major changes in Version 1.1 RC1 (release on Monday 08.02.2010) ==
