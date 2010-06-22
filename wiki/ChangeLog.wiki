@@ -4,7 +4,7 @@
 == Major changes in Version 1.3 RC1 (release on Wednesday 22.06.2010) ==
 
   * Drawings stay on slide when you turn the page of a document on the whiteboard
-  * Restricted Room Type further optimization for 100++ participants. We have done some Stress test with the University of Umeå and Vasaa in Finalnd with about 120-130 participants in a Single Conference Room (Type Restricted). They went successfull.
+  * Restricted Room Type further optimization for 100++ participants. We have done some Stress test with the University of Umeå from Sweden and Vasaa in Finland with about 120-130 participants in a Single Conference Room (Type Restricted). They went successfull. Thanks to the Team of http://www.openkvarken.fi again
   * Quality Settings in Screen Sharing Clients, contributed by Giovanni Possemato / Bitflow (http://www.bitflow.it) + RTMP-Tunneling Version of !ScreenSharer fixed
   * New SOAP Calls to get User-Object List including Streamname to broadcast a Video Stream out of a Conference directly
   * Screen Sharing/Recording is now a separated right, therefore new layout for User-List in all room-types
