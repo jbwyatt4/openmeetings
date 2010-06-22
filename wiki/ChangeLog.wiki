@@ -3,6 +3,7 @@
 
 == Major changes in Version 1.3 RC1 (release on Wednesday 23.06.2010) ==
 
+New Features:
   * Drawings stay on slide when you turn the page of a document on the whiteboard
   * Restricted Room Type further optimization for 100++ participants. We have done some Stress test with the University of Umeå from Sweden and Vasaa in Finland with about 120-130 participants in a Single Conference Room (Type Restricted). They went successfull. Thanks to the Team of http://www.openkvarken.fi again
   * Quality Settings in Screen Sharing Clients, contributed by Giovanni Possemato / Bitflow (http://www.bitflow.it) + RTMP-Tunneling Version of !ScreenSharer fixed
@@ -13,7 +14,7 @@
   * Activity-Icon highlights when user speaks, now also in User-List (Room-Type Conference) instead of Video-Pod
   * System Backup and Import - You can export now completely Users + Rooms + Organizations + all associations + all uploaded Files into a single ZIP and re-import that ZIP in a freshly installed !OpenMeetings (of course you need a !OpenMeetings Version greater 1.3 to be able to import the ZIP again) see also UpdateOpenMeetings
 
-Major Bug fixes
+Major Bug fixes:
   * Invitations Password does not work
   * Reminder Email not beeing send before scheduled Meetings (now send 15 minutes upfront no matter if ICAL or simple Mail)
   * lots of small things
