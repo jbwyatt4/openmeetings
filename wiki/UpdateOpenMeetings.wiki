@@ -13,7 +13,7 @@ The Text in the Administration>Backup section actually just says it all.
 
 
 
----- 
+_______________________
 
 Prior Version 1.3
 
