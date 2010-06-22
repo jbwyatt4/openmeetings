@@ -1,4 +1,5 @@
 #summary Process of Updating OpenMeetings
+#labels Featured
 
 *Since Version 1.3 RC1* there is a System Backup and Import tool
 
@@ -7,6 +8,10 @@ Login as Administrator and Goto > Backup
 http://openmeetings.googlecode.com/svn/docs/system_backup.png
 
 The Text in the Administration>Backup section actually just says it all.
+The backup contains users, rooms, organizations and appointements (Invitations and Reminders are NOT included in the Backup and Reminders will not be send again!).
+The Backup contains also all uploaded Files and Documents and will re-import them again.
+
+Max Upload Size is 1000 MB.
 
 
 <br/><br/><br/><br/><br/>
