@@ -5,7 +5,7 @@
 
   * Drawings stay on slide when you turn the page of a document on the whiteboard
   * Restricted Room Type further optimization for 100++ participants. We have done some Stress test with the University of Umea and Vasaa in Finalnd with about 120-130 participants in a Single Conference Room (Type Restricted). They went successfull.
-  * Quality Settings in Screen Sharing Clients, contributed by Giovanni Possemato / Bitflow (http://www.bitflow.it) + RTMP-Tunneling Version of ScreenSharer fixed
+  * Quality Settings in Screen Sharing Clients, contributed by Giovanni Possemato / Bitflow (http://www.bitflow.it) + RTMP-Tunneling Version of !ScreenSharer fixed
   * New SOAP Calls to get User-Object List including Streamname to broadcast a Video Stream out of a Conference directly
   * Screen Sharing/Recording is now a separated right, therefore new layout for User-List in all room-types
   * Option in Room-Settings and Administration "Audio Only" so users can only do Voice Conference in those rooms
