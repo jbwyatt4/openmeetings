@@ -1,6 +1,6 @@
 #summary Process of Updating OpenMeetings
 
-Since Version 1.3 RC1 there is a System Backup and Import tool
+*Since Version 1.3 RC1* there is a System Backup and Import tool
 
 Login as Administrator and Goto > Backup
 
@@ -9,13 +9,13 @@ http://openmeetings.googlecode.com/svn/docs/system_backup.png
 The Text in the Administration>Backup section actually just says it all.
 
 
+<br/><br/><br/><br/><br/>
 
 
 
+---------------------------
 
-_______________________
-
-Prior Version 1.3
+*Prior Version 1.3*
 
 
 
