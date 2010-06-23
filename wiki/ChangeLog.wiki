@@ -12,7 +12,7 @@ New Features:
   * Option in Room-Settings and Administration "Audio Only" so users can only do Voice Conference in those rooms
   * Video Pod hidden (Conference-Roomtype) or minimized (Webinar/Restricted-Roomtype) if User selects only Audio as device to broadcast
   * Activity-Icon highlights when user speaks, now also in User-List (Room-Type Conference) instead of Video-Pod
-  * System Backup and Import - You can export now completely Users + Rooms + Organizations + all associations + all uploaded Files into a single ZIP and re-import that ZIP in a freshly installed !OpenMeetings (of course you need a !OpenMeetings Version greater 1.3 to be able to import the ZIP again) see also UpdateOpenMeetings
+  * System Backup and Import - You can export now completely Users + Rooms + Organizations + all associations + all uploaded Files into a single ZIP and re-import that ZIP in a freshly installed !OpenMeetings (of course you need an !OpenMeetings Version greater 1.3 to be able to import the ZIP again) see also UpdateOpenMeetings
 
 Major Bug fixes:
   * Invitations Password does not work
