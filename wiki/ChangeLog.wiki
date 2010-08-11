@@ -1,6 +1,10 @@
 #summary Release Notes
 #labels Featured
 
+== Major changes in Moodle Mod 0.9 (released on Wednesday 11.08.2010 ==
+
+  * Fix utf8 problem with names in SOAP Gateway
+
 == Major changes in Version 1.3 RC1 (release on Wednesday 23.06.2010) ==
 
 New Features:
