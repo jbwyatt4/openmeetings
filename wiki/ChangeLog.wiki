@@ -1,7 +1,7 @@
 #summary Release Notes
 #labels Featured
 
-== Major changes in Moodle Mod 0.9 (released on Wednesday 11.08.2010) ==
+== Major changes in Moodle Mod 0.9 and SugarCRM Mod 1.1 (released on Wednesday 11.08.2010) ==
 
   * Fix utf8 problem with names in SOAP Gateway
 
