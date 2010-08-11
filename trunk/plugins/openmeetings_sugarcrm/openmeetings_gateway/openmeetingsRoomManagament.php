@@ -62,7 +62,7 @@ class openmeetingsRoomManagament {
 						
 			} else {
 				echo "Could not login User to OpenMeetings, check your OpenMeetings Module Configuration";
-				exit();
+				//exit();
 			}
 		}
 	}
@@ -130,7 +130,7 @@ class openmeetingsRoomManagament {
 						
 		} else {
 			echo "Could not login User to OpenMeetings, check your OpenMeetings Module Configuration";
-			exit();
+			//exit();
 		}
 	}
 
@@ -259,7 +259,7 @@ echo '</pre>';
 			
 			} else {
 				echo "Could not login User to OpenMeetings, check your OpenMeetings Module Configuration";
-				exit();
+				//exit();
 			}
 		}
 	}
@@ -291,7 +291,7 @@ function sendInvitationHash(&$focus, $event) {
 			
 			} else {
 				echo "Could not login User to OpenMeetings, check your OpenMeetings Module Configuration";
-				exit();
+				//exit();
 			}
 		}
 	}
