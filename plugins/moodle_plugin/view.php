@@ -136,10 +136,10 @@
 			//echo "openmeetings_setUserObjectWithExternalUser<br/>";
 			if ($openmeetings->type != 0){
 				$returnVal = $openmeetings_gateway->openmeetings_setUserObjectAndGenerateRoomHashByURL($USER->username,$USER->firstname,
-								$USER->lastname,$USER->picture,$USER->email,$USER->id,"moodle",$openmeetings->room_id,$becomemoderator);
+								$USER->lastname,$USER->picture,$USER->email,$USER->id,$CFG->openmeetings_openmeetingsModuleKey,$openmeetings->room_id,$becomemoderator);
 			} else {
 				$returnVal = $openmeetings_gateway->openmeetings_setUserObjectAndGenerateRecordingHashByURL($USER->username,$USER->firstname,
-								$USER->lastname,$USER->id,"moodle",$openmeetings->room_recording_id);
+								$USER->lastname,$USER->id,$CFG->openmeetings_openmeetingsModuleKey,$openmeetings->room_recording_id);
 			}		
 					
 			if ($returnVal != "") {
