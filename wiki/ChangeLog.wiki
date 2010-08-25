@@ -1,6 +1,17 @@
 #summary Release Notes
 #labels Featured
 
+== Major changes in Version 1.4 RC1 (release on Wednesday 25.08.2010) ==
+
+New Features:
+  * Remote Desktop Control (RDC) in Screen Sharing and separated right for RDC in user list, Moderators are able by default to do RDC other users can apply for it using the right-buttons
+  * New separated right for allowing Screen Sharing and Recording
+  * Multi-Domain Support: Separated Admin interface for configuring multiple LDAP configurations with a single !OpenMeetings Instance, in the Login Box you are able to choose different domains now, each domain represents a LDAP config (you can still use the internal DB all the time, the internal DB is always in the list)
+  * New Room features: Close and open conference rooms. Additionally with a redirect-URL in case the room is closed and SOAP Methods to remotely open and close room. Moderators can also close a room from inside the conference room (Menubar: Actions > Close room). Users which are already loggedin will then be redirected to the redirect URL
+  * Fix missing attributes in Backup file and add Meeting-Members
+  * New Language: Danish, thx to ALO, update Spanish thx to Jesmargo  
+  * Various small Bugfixes
+
 == Major changes in Moodle Mod 0.9 and SugarCRM Mod 1.1 (released on Wednesday 11.08.2010) ==
 
   * Fix utf8 problem with names in SOAP Gateway
