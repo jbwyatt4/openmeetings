@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<library>
+
+<class name="moderationMiniIconsEventUserList" extends="view">
+	
+    <handler name="oninit">
+    	this.updateIcons();
+    </handler>	
+    
+    <method name="updateIcons">
+        if (canvas.ismoderator) {
+            this._isMod.setAttribute("visibility","visible");
+            this._isModAddbutton.setAttribute("visibility","hidden");
+        } else {
+            this._isMod.setAttribute("visibility","hidden");
+            this._isModAddbutton.setAttribute("visibility","visible");
+        }
+        
+        if (canvas.ismoderator) {
+            this._canDraw.setAttribute("visibility","visible");
+            this._canDraw.isActive = false;
+            //this._canDraw._text.setAttribute("text",canvas.getLabelName(681));
+            this._canDrawModerator.setAttribute("visibility","hidden");
+        } else {
+            if (canvas.isAllowedToDraw) {
+                this._canDraw.setAttribute("visibility","visible");
+                this._canDraw.isActive = true;
+                //this._canDraw._text.setAttribute("text",canvas.getLabelName(612));
+                this._canDrawModerator.setAttribute("visibility","hidden");
+            } else {
+                this._canDraw.setAttribute("visibility","hidden");
+                this._canDrawModerator.setAttribute("visibility","visible");
+            }
+        }
+        
+        if ($debug) Debug.write("canvas.isAllowedToScreenShare :: ",canvas.isAllowedToScreenShare);
+        
+        if (canvas.ismoderator) {
+            this._allowScreen.setAttribute("visibility","visible");
+            this._allowScreen.isActive = false;
+            
+            this._allowRemote.setAttribute("visibility","visible");
+            this._allowRemote.isActive = false;
+            
+            //this._canDraw._text.setAttribute("text",canvas.getLabelName(681));
+            this._denyScreen.setAttribute("visibility","hidden");
+            this._denyRemote.setAttribute("visibility","hidden");
+        } else {
+            if (canvas.isAllowedToScreenShare) {
+                this._allowScreen.setAttribute("visibility","visible");
+                this._allowScreen.isActive = true;
+                //this._canDraw._text.setAttribute("text",canvas.getLabelName(612));
+                this._denyScreen.setAttribute("visibility","hidden");
+            } else {
+                this._allowScreen.setAttribute("visibility","hidden");
+                this._denyScreen.setAttribute("visibility","visible");
+            }
+            
+            if (canvas.isAllowedToRemoteControl) {
+            	this._allowRemote.setAttribute("visibility","visible");
+            	this._allowRemote.isActive = true;
+            	this._denyRemote.setAttribute("visibility","hidden");
+            } else {
+            	this._allowRemote.setAttribute("visibility","hidden");
+            	this._denyRemote.setAttribute("visibility","visible");
+            }
+        }
+        
+        if (canvas.isBroadCasting) {
+            this._allowDevice.setAttribute("visibility","hidden");
+            this._denyDevice.setAttribute("visibility","visible");
+        } else {
+            this._allowDevice.setAttribute("visibility","visible");
+            this._denyDevice.setAttribute("visibility","hidden");
+        }
+    </method>
+	
+    <miniIcons name="_isMod" x="0" width="16" resource="participents_isMod_rsc" 
+    		   height="16" showhandcursor="false">
+        <handler name="onclick">
+            <![CDATA[
+                //Nothing happens here
+            ]]>
+        </handler>
+        <labelTooltip name="_text" labelid="688" />
+    </miniIcons>
+    
+    <miniIcons name="_isModAddbutton" opacity="0.5" x="0" width="16" resource="participents_isMod_rsc" height="16">
+        <handler name="onclick">
+            <![CDATA[
+                //Apply for Moderation
+                canvas.thishib.applyForModeration.doCall();
+            ]]>
+        </handler>
+        <labelTooltip name="_text" labelid="685" />
+    </miniIcons>
+        
+    <miniIcons name="_canDraw" x="20" width="16" resource="participents_isDrawing_rsc" 
+               height="16" showhandcursor="false" >
+        <attribute name="isActive" value="true" type="boolean" />
+        <handler name="onclick">
+            <![CDATA[
+                //Nothing happens here
+            ]]>
+        </handler>
+        <labelTooltip name="_text" labelid="689" />
+    </miniIcons>
+    
+    <miniIcons name="_canDrawModerator" x="20" width="16" opacity="0.5"
+               resource="participents_isDrawing_rsc" height="16" showhandcursor="true">
+        <handler name="onclick">
+            //Ask for Right to Draw on Whiteboard
+            canvas.thishib.sendMessageWithClient.sendMessage("applyForWhiteboard",null);
+        </handler>
+        <labelTooltip labelid="686" />
+    </miniIcons>
+    
+    <miniIcons name="_allowScreen" x="40" width="16" height="16" 
+               resource="screen_allow_rsc" showhandcursor="false">
+        <attribute name="isActive" value="true" type="boolean" />
+        <handler name="onclick">
+            <![CDATA[
+                if ($debug) Debug.write("Deny Screen: ",canvas.publicSID);
+            ]]>
+        </handler>
+        <labelTooltip name="_text" labelid="1071" />
+    </miniIcons>
+    
+    <miniIcons name="_denyScreen" x="40" width="16" height="16" opacity="0.5"
+               resource="screen_allow_rsc" showhandcursor="true">
+        <handler name="onclick">
+            if ($debug) Debug.write("Allow Screen: ",canvas.refObj.publicSID);
+        	canvas.thishib.sendMessageWithClient.sendMessage("applyForScreen",null);
+        </handler>
+        <labelTooltip labelid="1072" />
+    </miniIcons>    
+    
+ 	<miniIcons name="_allowRemote" x="60" width="16" height="16" 
+               resource="remote_allow_rsc" showhandcursor="true">
+    	<attribute name="isActive" value="true" type="boolean" />
+        <handler name="onclick">
+        	<![CDATA[
+                if ($debug) Debug.write("Deny Remote: ",canvas.publicSID);
+            ]]>
+        </handler>
+        <labelTooltip name="_text" labelid="1081" />
+    </miniIcons>
+    
+    <miniIcons name="_denyRemote" x="60" width="16" height="16" opacity="0.5"
+               resource="remote_allow_rsc" showhandcursor="true">
+        <handler name="onclick">
+            if ($debug) Debug.write("Allow Remote: ",parent.parent.parent.refObj.publicSID);
+            canvas.thishib.sendMessageWithClient.sendMessage("applyForRemote",null);
+        </handler>
+        <labelTooltip labelid="1080" />
+    </miniIcons>      
+          
+    
+    <miniIcons name="_allowDevice" x="80" width="40" height="16" opacity="0.5" 
+               resource="av_allow_rsc" showhandcursor="true">
+        <handler name="onclick">
+            if ($debug) Debug.write("NOTHING: ",canvas.publicSID);
+            if (canvas.ismoderator) {
+                //Do directly send confirmation to share Audio/Video to SELF! so that all users get
+                //the notification and the broadcasting Bit is set for this User
+                canvas.thishib.setBroadCastingFlag.publicSIDOfNewModerator = canvas.publicSID;
+                canvas.thishib.setBroadCastingFlag.isAllowedToBroadCastAV = true;
+                canvas.thishib.setBroadCastingFlag.doCall(); 
+            } else {
+                //Apply for Right to Share Audio/Video
+                canvas.thishib.sendMessageWithClient.sendMessage("applyForAV",null);
+            }
+        </handler>
+        <labelTooltip labelid="687" />
+    </miniIcons>
+    
+    <miniIcons name="_denyDevice" x="80" width="40" height="16" 
+               resource="av_allow_rsc" showhandcursor="false">
+        <handler name="onclick">
+            if ($debug) Debug.write("DENY: ",canvas.publicSID);
+            //Nothing happens here
+            canvas.thishib.setBroadCastingFlag.publicSIDOfNewModerator = canvas.publicSID;
+            canvas.thishib.setBroadCastingFlag.isAllowedToBroadCastAV = false;
+            canvas.thishib.setBroadCastingFlag.doCall(); 
+        </handler>
+        <labelTooltip name="_text" labelid="690" />
+    </miniIcons>
+	
+</class>
+
+</library>
