@@ -605,3 +605,21 @@ Params:
 || int || max || the number of objects in the list ||
 || String || orderby || the attribute it should be ordered by (for example rooms_id) ||
 || boolean || asc || the sort order ||
+
+
+==== getRoomsWithCurrentUsersByListAndType ====
+
+Method: _public List<RoomReturn> getRoomsWithCurrentUsersByListAndType(String SID, int start, int max, String orderby, boolean asc, String externalRoomType)_
+
+Returns a List of !RoomReturn Objects that contains all current users with their Session attributes. But only the ones of a certain externalRoomType
+
+available since version 1.4
+
+Params:
+|| *type* || *name* || *description* ||
+|| String || SID || The SID of the User. This SID must be marked as Loggedin ||
+|| int || start || the first id of the Rooms that should be returned ||
+|| int || max || the number of objects in the list ||
+|| String || orderby || the attribute it should be ordered by (for example rooms_id) ||
+|| boolean || asc || the sort order ||
+|| String || externalRoomType || the name of the external room type to return ||
