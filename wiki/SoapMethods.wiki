@@ -686,3 +686,24 @@ Params:
 || String || email || The email of the Meeting member ||
 || String || baseUrl || The baseUrl, this is important to send the correct link in the invitation to the meeting member ||
 || Long || language_id || The ID of the language, for the email that is send to the meeting member ||
+
+
+
+==== closeRoom ====
+
+Method: _public int closeRoom(String SID, Long room_id, Boolean status)_
+
+Method to remotely close or open rooms. If a room is closed all users inside the room and all users that try to enter it will be redirected to the *redirectURL* that is defined in the Room-Object.
+
+Returns positiv value if authentification was successful.
+
+available since version 1.4
+
+Params:
+|| *type* || *name* || *description* ||
+|| String || SID || The SID of the User. This SID must be marked as Loggedin ||
+|| Long || room_id || The Room Id to be closed or opened ||
+|| Boolean || status || false = close, true = open ||
+
+
+____
