@@ -623,3 +623,46 @@ Params:
 || String || orderby || the attribute it should be ordered by (for example rooms_id) ||
 || boolean || asc || the sort order ||
 || String || externalRoomType || the name of the external room type to return ||
+
+
+==== addRoomWithModerationAndExternalTypeAndStartEnd ====
+
+Method: _public Long addRoomWithModerationAndExternalTypeAndStartEnd(String SID, String name,
+            Long roomtypes_id, String comment, Long numberOfPartizipants,
+            Boolean ispublic, Boolean appointment, Boolean isDemoRoom,
+            Integer demoTime, Boolean isModeratedRoom, String externalRoomType,
+            String validFromDate, 
+            String validFromTime, 
+            String validToDate, 
+            String validToTime,
+            Boolean isPasswordProtected,
+            String password,
+            Long reminderTypeId,
+            String redirectURL
+            )_
+
+Add a Room and link it to the Calendar with a start and end date
+
+available since version 1.4
+
+Params:
+|| *type* || *name* || *description* ||
+|| String || SID || The SID of the User. This SID must be marked as Loggedin ||
+|| String || name || Name of the Room ||
+|| Long || roomtypes_id || Type of that room (1 = Conference, 2 = Audience, 3 = Restricted, 4 = Interview) ||
+|| String || comment || any comment ||
+|| Long || numberOfPartizipants || the maximum users allowed in this room ||
+|| Boolean || ispublic || If this room is public (use true if you don't deal with different Organizations) ||
+|| Boolean || appointment || is it a Calendar Room (use false by default) ||
+|| Boolean || isDemoRoom || is it a Demo Room with limited time (use false by default) ||
+|| Boolean || demoTime || time in seconds after the user will be logged out (only enabled if isDemoRoom is true)||
+|| Boolean || isModeratedRoom || Users have to wait untill a Moderator arrives. Use the becomeModerator param in setUserObjectAndGenerateRoomHash to set a user as default Moderator ||
+|| String || externalRoomType || name of the type of external room, for example "Moodle" ||
+|| String || validFromDate || Date, Format: dd.MM.yyyy ||
+|| String || validFromTime || Date, Format: mm:hh ||
+|| String || validToDate || Date, Format: dd.MM.yyyy ||
+|| String || validToTime || Date, Format: mm:hh ||
+|| Boolean || isPasswordProtected || If the links send via EMail to invited people is password protected ||
+|| String || password || Password for Invitations send via Mail ||
+|| Long || reminderTypeId || 1=none, 2=simple mail, 3=ICAL ||
+|| Long || redirectURL || URL Users will be lead to if the Conference Time is elapsed ||
