@@ -669,7 +669,7 @@ Params:
 
 
 
-=== addMeetingMemberRemindToRoom ===
+==== addMeetingMemberRemindToRoom ====
 
 Method: _public Long addMeetingMemberRemindToRoom(String SID, Long room_id, String firstname, String lastname, String email, String baseUrl, Long language_id)_
 
