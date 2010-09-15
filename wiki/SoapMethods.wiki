@@ -666,3 +666,23 @@ Params:
 || String || password || Password for Invitations send via Mail ||
 || Long || reminderTypeId || 1=none, 2=simple mail, 3=ICAL ||
 || Long || redirectURL || URL Users will be lead to if the Conference Time is elapsed ||
+
+
+
+=== addMeetingMemberRemindToRoom ===
+
+Method: _public Long addMeetingMemberRemindToRoom(String SID, Long room_id, String firstname, String lastname, String email, String baseUrl, Long language_id)_
+
+Add a meeting member to a certain room. This is the same as adding an external user to a event in the calendar.
+
+available since version 1.4
+
+Params:
+|| *type* || *name* || *description* ||
+|| String || SID || The SID of the User. This SID must be marked as Loggedin ||
+|| Long || room_id || The Room Id the meeting member is going to be added ||
+|| String || firstname || The firstname of the meeting member ||
+|| String || lastname || The lastname of the meeting member ||
+|| String || email || The email of the Meeting member ||
+|| String || baseUrl || The baseUrl, this is important to send the correct link in the invitation to the meeting member ||
+|| Long || language_id || The ID of the language, for the email that is send to the meeting member ||
