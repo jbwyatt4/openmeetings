@@ -1,0 +1,11 @@
+#summary OpenMeetings and timezone handling
+
+List of default Timezones:
+http://openmeetings.googlecode.com/svn/trunk/singlewebapp/WebContent/languages/timezones.xml
+
+To add a new Time Zone you have to lookup its represant in the Timezone registry.
+You can then add freely new time zones.
+
+The Servers default time zone is stored in the configuration table in the attribute *default.timezone*. The name in this value links to an attribute in the table om_timezone in the column *jname*.
+
+You can set a Flag for each user that gives him a Pop-Up notification to change his time zone. The Flag can be changed in the user administration of !OpenMeetings. This can be handy if you update from a previous version of !OpenMeetings to make sure users see the new feature and update their settings.
