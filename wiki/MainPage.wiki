@@ -1,7 +1,5 @@
 #summary OpenMeetings Wiki Main Page
 
-== Table of Contents == 
-
 <wiki:toc max_depth="2" />
 
 == Installation ==
@@ -27,6 +25,7 @@ Need for a developer or Consultant? [http://code.google.com/p/openmeetings/wiki/
   * [wml]
   * AdminScreenshots
   * QualityAssurance
+  * TimeZoneHandling
 
 == Installation Tips ==
 
