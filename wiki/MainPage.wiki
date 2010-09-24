@@ -10,7 +10,7 @@ Need for a developer or Consultant? [http://code.google.com/p/openmeetings/wiki/
 
 == !OpenMeetings Demo Videos ==
 
-  * Watch some sample Videos: OpenMeetingsDemoVideos
+  * Watch some Demo Videos on Youtube: http://www.youtube.com/user/sebastwagner
 
 == Manuals and Help ==
 
