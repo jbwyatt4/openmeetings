@@ -4,7 +4,7 @@ List of default Timezones:
 http://openmeetings.googlecode.com/svn/trunk/singlewebapp/WebContent/languages/timezones.xml
 
 To add a new Time Zone you have to lookup its represant in the Timezone registry.
-You can then add freely new time zones to the XML file. The XML entries are imported into the database into the table *om_timezone*. (Don't forget to stop the server before you change anything in the database).
+You can then add freely new time zones to the XML file. The XML entries are imported into the database into the table *om_timezone* during the installation of !OpenMeetings. (Don't forget to stop the server before you change anything in the database).
 
 The Servers default timezone is stored in the configuration table in the attribute *default.timezone*. The name in this value links to an attribute in the table om_timezone in the column *jname*.
 
