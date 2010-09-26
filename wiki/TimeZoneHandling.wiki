@@ -24,8 +24,8 @@ You can set a Flag *forceTimeZoneCheck* for each user that gives him a Pop-Up no
 				// + cal.get(Calendar.DST_OFFSET)
 				int offset = cal.get(Calendar.ZONE_OFFSET);
 		    	
-				int offsetInHours = offset/1000/60;
+				int offsetInMinutes = offset/1000/60;
 				
-				System.out.println("<name>" + id + "</name><offset>"+offsetInHours+"</offset>");
+				System.out.println("<name>" + id + "</name><offset>"+offsetInMinutes+"</offset>");
 		    }
 }}}
