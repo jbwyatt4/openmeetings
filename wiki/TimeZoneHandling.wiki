@@ -10,7 +10,7 @@ The Servers default timezone is stored in the configuration table in the attribu
 
 You can set a Flag *forceTimeZoneCheck* for each user that gives him a Pop-Up notification to change his time zone. The Flag can be changed in the user administration of !OpenMeetings. This can be handy if you update from a previous version of !OpenMeetings to make sure users see the new feature and update their settings.
 
-=== How to lookup a timezone ===
+=== How to lookup timezone's ===
 
 {{{
                     String[] ids = TimeZone.getAvailableIDs();
