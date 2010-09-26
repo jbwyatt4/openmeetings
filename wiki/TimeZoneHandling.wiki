@@ -13,7 +13,7 @@ You can set a Flag *forceTimeZoneCheck* for each user that gives him a Pop-Up no
 === How to lookup a timezone ===
 
 {{{
-            String[] ids = TimeZone.getAvailableIDs();
+                    String[] ids = TimeZone.getAvailableIDs();
 		    for (String id : ids) {
 		    	
 		    	TimeZone timeZone = TimeZone.getTimeZone(id);
