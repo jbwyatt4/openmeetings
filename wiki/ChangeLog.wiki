@@ -1,7 +1,14 @@
 #summary Release Notes
 #labels Featured
 
-== Major changes in Version 1.4 RC1 (release on Wednesday 25.08.2010) ==
+== Major changes in Version 1.5 RC1 (released on Sunday 26.09.2010) ==
+
+  * Timezone support in User Profile, Calendar and Invitations. Users can now organize Events with people from different timezones and the system will keep track on handling the event time correctly
+  * Re-Styling and fixing some layout aspects
+  * Quick-link button next to each user-name in dashboard user list and in every chat box to quickly guide people to a conference room
+  * small Bug fixes
+
+== Major changes in Version 1.4 RC1 (released on Wednesday 25.08.2010) ==
 
 New Features:
   * Remote Desktop Control (RDC) in Screen Sharing and separated right for RDC in user list, Moderators are able by default to do RDC other users can apply for it using the right-buttons
