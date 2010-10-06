@@ -5,6 +5,5 @@ There is a ready integration of !OpenMeetings for the Learning Environment !Stud
 It is already listed in the !StudIP marketplace:
 http://plugins.studip.de/index.php/Plugins/00067
 
-There is also a demo and downloads available. You can get more information by following contacts: <br/>
-bohnsack (at) data-quest (dot) de<br/>
-seba (dot) wagner (at) gmail (dot) com<br/>
+There is also a demo and downloads available. You can get more information at:<br/>
+Marco Bohnsack, Fon 0551-3819850, Mail bohnsack@data-quest.de
