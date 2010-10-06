@@ -6,4 +6,4 @@ It is already listed in the !StudIP marketplace:
 http://plugins.studip.de/index.php/Plugins/00067
 
 There is also a demo and downloads available. You can get more information at:<br/>
-Marco Bohnsack, Fon 0551-3819850, Mail bohnsack@data-quest.de
+Marco Bohnsack, Fon 0551-3819850, Mail mailto:bohnsack@data-quest.de
