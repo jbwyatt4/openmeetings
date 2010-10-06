@@ -1,0 +1,10 @@
+#summary About the integration into StudIP
+
+There is a ready integration of !OpenMeetings for the Learning Environment !StudIP (http://studip.de) available. It was developed at the Uni Trier and Data-Quest. 
+
+It is already listed in the !StudIP marketplace:
+http://plugins.studip.de/index.php/Plugins/00067
+
+There is also a demo and downloads available. You can get more information by following contacts: 
+bohnsack (at) data-quest (dot) de
+seba (dot) wagner (at) gmail (dot) com
