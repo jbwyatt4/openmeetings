@@ -16,30 +16,30 @@
 
   ==> [http://www.webbase-design.de/side/OpenMeetings%20Hosting.pdf Current Pricing for Installation and Services around OpenMeetings, contact us if you have any questions]
 
-*Installation Service*
-including Re-Branding (Logo change + color style in your CI) on your Harddware: 500 Euro
-Minimal requirements: 2GB RAM 2GHz CPU (equals 100-200 concurrent conference users)
-Recommeded: 4GB Ram Dual Core 2++ GHz CPU (equals 500-1000 concurrent conference users)
+  *Installation Service*
+  including Re-Branding (Logo change + color style in your CI) on your Harddware: 500 Euro
+  Minimal requirements: 2GB RAM 2GHz CPU (equals 100-200 concurrent conference users)
+  Recommeded: 4GB Ram Dual Core 2++ GHz CPU (equals 500-1000 concurrent conference users)
+  
+  *Prizing for Hosting and Maintaining your Servers*
 
-*Prizing for Hosting and Maintaining your Servers*
-
-*Mid-Size (500-1000 concurrent Users)*
-Including Re-Branding (Logo change + color style in your CI)
-Including Moodle and SugarCRM installation and OpenMeetings integration
-500 Euro Setup Fee
-Hosting costs 600 Euro for 6 months, minimum duration 12 months, to be payed when the contract starts.
-Total: 1700 Euro for 12 months including Setup Fee.
-The contract renews every 6 month for another 6 month.
-The Hosting includes continues upgrades to all new features and security patches of OpenMeetings and 3th Party applications used in OpenMeetings.
-
-*Small-Size (50 concurrent Users)*
-Including Re-Branding (Logo change + color style in your CI)
-Including Moodle and SugarCRM installation and OpenMeetings integration
-500 Euro Setup Fee
-Hosting costs 400 Euro for 6 months, minimum duration 12 months, to be payed when the contract starts.
-Total: 1300 Euro for 12 months including Setup Fee.
-The contract renews every 6 month for another 6 month.
-The Hosting includes continues upgrades to all new features and security patches of OpenMeetings and 3th Party applications used in OpenMeetings.
+  *Mid-Size (500-1000 concurrent Users)*
+  Including Re-Branding (Logo change + color style in your CI)
+  Including Moodle and SugarCRM installation and OpenMeetings integration
+  500 Euro Setup Fee
+  Hosting costs 600 Euro for 6 months, minimum duration 12 months, to be payed when the   contract starts.
+  Total: 1700 Euro for 12 months including Setup Fee.
+  The contract renews every 6 month for another 6 month.
+  The Hosting includes continues upgrades to all new features and security patches of   OpenMeetings and 3th Party applications used in OpenMeetings.
+  
+  *Small-Size (50 concurrent Users)*
+  Including Re-Branding (Logo change + color style in your CI)
+  Including Moodle and SugarCRM installation and OpenMeetings integration
+  500 Euro Setup Fee
+  Hosting costs 400 Euro for 6 months, minimum duration 12 months, to be payed when the   contract starts.
+  Total: 1300 Euro for 12 months including Setup Fee.
+  The contract renews every 6 month for another 6 month.
+  The Hosting includes continues upgrades to all new features and security patches of OpenMeetings and 3th Party applications used in OpenMeetings.
 
   * Jai Gupta, contact: http://www.jaigupta.com,
   I also have 3 year experience in e-learning including 2 year experience on Moodle.
