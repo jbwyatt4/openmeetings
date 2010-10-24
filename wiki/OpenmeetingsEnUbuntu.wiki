@@ -14,8 +14,23 @@ libx11-dev libxfixes-dev libxvidcore-dev zlib1g-dev libogg-dev sox
 libvorbis0a libvorbis-dev libgsm1 libgsm1-dev libfaad2 flvtool2 lame
 }}}
 
-Proximamente -> Configurar ffmpeg personalizado para Openmeetings.
+Ahora vamos a configurar ffmpeg para que podamos grabar y codificar las grabaciones.
 
+Vamos a la pagina oficial http://www.ffmpeg.org y nos bajamos la ultima versión.
+
+Descomprimimos el .tar.gz y compilamos ffmpeg.
+
+{{{
+$ tar -zxvf
+
+$ cd ffmpeg-0.6.1
+
+$ ./configure --enable-libmp3lame --enable-libxvid --enable-libvorbis --enable-libgsm --enable-libfaad --enable-libfaac --enable-gpl --enable-nonfree
+
+$ make
+
+sudo checkinstall
+}}}
 == Descomprimir y configurar el directorio de Openmeetings ==
 
 Cuando tengamos el software instalado, descomprimiremos Openmeetings y lo moveremos al directorio /opt , como sabréis en Linux no hace falta 
