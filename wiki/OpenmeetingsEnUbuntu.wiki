@@ -11,7 +11,7 @@ $ sudo apt-get install -y java-package sun-java6-bin sun-java6-jdk sun-java6-jre
 openoffice.org-impress openoffice.org-draw openoffice.org-math imagemagick gs-gpl libart-2.0-2 libt1-5 zip unzip bzip2 subversion git-core checkinstall 
 yasm texi2html libfaac-dev libfaad-dev libmp3lame-dev libsdl1.2-dev 
 libx11-dev libxfixes-dev libxvidcore-dev zlib1g-dev libogg-dev sox 
-libvorbis0a libvorbis-dev libgsm1 libgsm1-dev libfaad2 flvtool2 lame
+libvorbis0a libvorbis-dev libgsm1 libgsm1-dev libfaad2 flvtool2 lame swftools
 }}}
 
 Ahora vamos a configurar ffmpeg para que podamos grabar y codificar las grabaciones.
