@@ -2,7 +2,7 @@
 #labels Featured
 
 To Update future Version or migrate see UpdateOpenMeetings
-
+ * [OpenmeetingsEnUbuntu Instalar Openmeetings en Ubuntu 10.04 (Spanish)]
 <wiki:toc max_depth="1" />
 
 = System Requirements (Server Side System Requirements!) =
