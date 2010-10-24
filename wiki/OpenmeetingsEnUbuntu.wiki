@@ -25,11 +25,11 @@ $ tar -zxvf
 
 $ cd ffmpeg-0.6.1
 
-$ ./configure --enable-libmp3lame --enable-libxvid --enable-libvorbis --enable-libgsm --enable-libfaad --enable-libfaac --enable-gpl --enable-nonfree
+$ ./configure --enable-libmp3lame --enable-libxvid --enable-libvorbis --enable-libgsm --enable-libfaad --enable-libfaac --enable-gpl --enable-nonfree  (Configuramos)
 
-$ make
+$ make (Compilamos)
 
-sudo checkinstall
+$ sudo checkinstall  (Crea un paquete e instala un .deb y asi nos facilitara la desintalacion)
 }}}
 == Descomprimir y configurar el directorio de Openmeetings ==
 
