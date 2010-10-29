@@ -171,6 +171,34 @@ Params:
 || Number || showAudioVideoTestAsInt || 0 means don't show Audio/Video Test, 1 means show Audio/Video Test Application before the user is logged into the room ||
 
 
+==== setUserAndNickName ====
+
+Method: _public String setUserAndNickName(String SID, String username, String firstname, String lastname, String profilePictureUrl, String email, Long externalUserId, String externalUserType, Long room_id, int becomeModeratorAsInt, int showAudioVideoTestAsInt, int showNickNameDialogAsInt)_
+
+Description: sets the !SessionObject for a certain SID, after setting this Session-Object you can use the 
+SID + a !RoomId to enter any Room. 
+
+++ the user can press f5 to reload the page / use the link several times, the SOAP Gateway does remember the IP of the user and the will only the first user that enters the room allow to re-enter. ... Session-Hashs are deleted 15 minutes after the creation if not used.
+
+++ Additionally you can set a param *showNickNameDialogAsInt*, the effect if that param is 1 is, that the user gets a popup where he can enter his nickname right before he enters the conference room. All nicknames and emails users enter are logged in the conferencelog table.
+
+available since r3520
+
+Params:
+|| *type* || *name* || *description* ||
+|| String || SID || The SID from getSession ||
+|| String || username || any username ||
+|| String || firstname || any firstname ||
+|| String || lastname || any lastname ||
+|| String || profilePictureUrl || any profilePictureUrl ||
+|| String || email || any email ||
+|| Number || externalUserId || if you have any external user Id you may set it here ||
+|| String || externalUserType || you can specify your system-name here, for example "moodle" ||
+|| Number || room_id || the room id the user should be logged in ||
+|| Number || becomeModeratorAsInt || 0 means no Moderator, 1 means Moderator ||
+|| Number || showAudioVideoTestAsInt || 0 means don't show Audio/Video Test, 1 means show Audio/Video Test Application before the user is logged into the room ||
+|| Number || showNickNameDialogAsInt || 0 means do not show the popup to enter a nichname, 1 means that there is a popup to enter the nickname for the conference ||
+
 ==== setUserObjectAndGenerateRecordingHashByURL ====
 
 _public String setUserObjectAndGenerateRecordingHashByURL(String SID, String username, String firstname, String lastname, Long externalUserId, String externalUserType, Long recording_id)_
