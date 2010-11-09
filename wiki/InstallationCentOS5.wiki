@@ -180,11 +180,9 @@ make install
 `openmeetings`
 {{{
 wget http://i4demo.com/openmeetings/builds/368/openmeetings_r3537.zip
-mkdir /usr/src/om
-cd /usr/src/om
-unzip /usr/src/openmeetings_r3537.zip
+unzip /usr/src/openmeetings_r3537.zip -d om
 
-cd webapps/openmeetings/conf
+cd /usr/src/om/webapps/openmeetings/conf
 cp mysql_hibernate.cfg.xml hibernate.cfg.xml
 cd /usr/src/om
 sh ./red5.sh
