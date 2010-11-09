@@ -1,4 +1,5 @@
 #summary Documentation of getting OM working With CentOS 5
+#labels Installation,Configuration
 = Installation for openmeetings on CentOS 5 =
 
 When installing CentOS 5 set the default installation to Server and select Customise now.  Ensure the following are selected:
