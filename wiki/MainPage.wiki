@@ -1,6 +1,6 @@
 #summary OpenMeetings Wiki Main Page
 
-#sidebar TableOfContents
+#sidebar SideBarMainIndex
 
 <wiki:toc max_depth="2" />
 
