@@ -22,17 +22,17 @@
     * [SessionVariables Documentation how Session-Variables are handled]
     * [AudioVideoTestingApplication - Test Application to test and see all settings of Audio/Video/Streaming]
     * [ChangingAudioVideoSettings how to change the Audio/Video Settings]
-    * CustomCryptMechanism - how to write Custom Encryption Styles
-    * CustomAuthentication - how to write a Custom Authentication for Single Sign-On
-    * ModuleDevelopersGuideline  	- Module Developer's Guideline (alpha)
-    * DebugServer - Debugging the server-side code of !OpenMeetings.
-    * TestingBusinessLogic
-    * ContributingPlayRules - Some info regarding the Contribution of code
-    * [UML] - ServerSide
+    * [CustomCryptMechanism How to write Custom Encryption Styles]
+    * [CustomAuthentication Hw to write a Custom Authentication for Single Sign-On]
+    * [ModuleDevelopersGuideline Module Developer's Guideline (alpha)]
+    * [DebugServer - Debugging the server-side code of !OpenMeetings]
+    * [TestingBusinessLogic]
+    * [ContributingPlayRules - Some info regarding the Contribution of code]
+    * [UML ServerSide]
     * [CRUD]
-    * ClientSideDiagrams - Some Graphs about the Client side Logic
-    * ClassDiagram
-    * ReworkRoadMapApplicationAdapter
+    * [ClientSideDiagrams Some Graphs about the Client side Logic]
+    * [ClassDiagram]
+    * [ReworkRoadMapApplicationAdapter]
     
     
 
