@@ -12,7 +12,7 @@
       * [FacebookModule Facebook Integration]
       * [OpenMeetingsPaypalIntegration Paypal and Invocing Integration]
       * [JoomlaIntegration Joomla Integration]
-    * Documentation
+    * Integration API
       * [DirectLoginSoapGeneralFlow Graph showing how to Single Sign On]
       * [SoapMethods Index of SOAP API Methods]
       * [InstantCommunication Using OpenMeetings as instant communication server.]
