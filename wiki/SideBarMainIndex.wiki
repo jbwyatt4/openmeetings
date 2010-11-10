@@ -3,7 +3,7 @@
     * *[InstallationOpenMeetings OpenMeetings Installation]*
     * [UpdateOpenMeetings OpenMeetings Update]
     * [BuildSourceNew Get Source, build yourself, Nightly Builds]
-  * [MainPage#Manuals_and_Help Manuals and Help]
+    * [MainPage#Manuals_and_Help Manuals and Help]
   * Integration
     * Ready Modules and Plugins
       * [MoodlePlugins Moodle Module]
