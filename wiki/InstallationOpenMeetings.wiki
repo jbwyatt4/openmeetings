@@ -3,7 +3,7 @@
 
 To Update future Version or migrate see UpdateOpenMeetings
 
-= VMWare, Debian, Links, Changelog  =
+== VMWare, Debian, Links, Changelog  ==
 
   * [ChangeLog ChangeLog]
   * [InstallationCentOS5 Installation on CentOS 5]
@@ -22,7 +22,7 @@ To Update future Version or migrate see UpdateOpenMeetings
 
   * Headset/Microphone recommendation: Logitech !ClearChat PC Wireless, for example from [http://www.amazon.de/Logitech-ClearChat-kabelloser-Kopfh%C3%B6rer-Transmitter/dp/B00166WSN4 Amazon] or [http://shop.ebay.com/i.html?_nkw=Logitech+ClearChat+Wireless&_sacat=0&_trksid=p3286.m270.l1313&LH_BIN=1&LH_IncludeSIF=1&_odkw=Logitech+ClearChat+PC&_osacat=0 EBay Auctions]
 
-= Software Requirements / Dependencies =
+== Software Requirements / Dependencies ==
 
   * Java Version greater or equal 6
   * Database available (MySQL,Postgres,... MSSQL,Oracle,DB2 see [http://docs.jboss.org/hibernate/core/3.3/reference/en/html/session-configuration.html#configuration-optional-dialects full-list]) It is recommended to make/use an empty database/scheme
@@ -35,7 +35,8 @@ To Update future Version or migrate see UpdateOpenMeetings
   * Install *SoX* (this is not necessary for installation but if you want to test the recording you have to install it). You should install SoX in a up to date copy! SoX 12.xx will NOT work!
   * MAC OSx / Linux Users => Get Flash Player 10 Beta!! It fixes the CPU Problem for Streaming Video => http://labs.adobe.com/technologies/flashplayer10/
 
-= Install !OpenMeetings =
+== Install !OpenMeetings ==
+
   # Download [http://openmeetings.googlecode.com/files/openmeetings_1_5_rc1_r3393.zip OpenMeetings including Red5]
   # Unpack it (Please make sure that you use an up-to-date unzip-software) (and copy it somewhere in you system, do not start it from your Windows Desktop)
   # you have now a folder openmeetings_version_no_xx
@@ -77,13 +78,13 @@ To Update future Version or migrate see UpdateOpenMeetings
 
 After Running the Installer all basics are installed. Now login and go to the Meeting-Rooms and check all features. You possibly will have some difficulties uploading files. Check if !OpenOffice is really running, swftool, !ImageMagick (including !GhostScript, FFMpeg) is available on  your System-Path (or your customize the path in the Configuration).
 
-= Hidden and experimental features =
+== Hidden and experimental features ==
 
   * rtmps (using of SSL) => you find in the config.xml some value to enable the client to first try to connect to rtmps (useSSL param) .. NOTE: Flash Player only on Windows have the rtmps feature and you will need to clear your browser cache to force a reload of the updated config.xml
   * if you resize your own video-pod in the conference much larger and then synchronize  the stream, all clients will get a better picture (it also needs more bandwidth, as it will take the actual new height / width numbers to publish your stream)
   * there are some hidden emoticons (for example (activate)), you might want to add your own ones [http://openmeetings.googlecode.com/svn/trunk/webapp/webapp/openmeetings/public/emoticons/emotes.xml Full List]
 
-= Integration, Single Sign On and LDAP =
+== Integration, Single Sign On and LDAP ==
 
   * To Integrate !OpenMeetings it is recommended to use the [http://code.google.com/p/openmeetings/wiki/SoapMethods SOAP-Gateway]
   * Regarding LDAP-Configuration see the Installer Script and sample Configuration 
@@ -92,7 +93,7 @@ After Running the Installer all basics are installed. Now login and go to the Me
 
   * If you want to integrate 3th Party Software for publishing Live-Video you may have a look at [http://www.xuggle.com Xuggler]. There is no out of the Box solution but there are already people successfully publish their usual [http://www.red5wiki.com/wiki/SteamStream RTP-LiveStream] by using Xuggler
 
-= Ports, NAT Settings, Customize =
+== Ports, NAT Settings, Customize ==
 
   * Default Ports: 1935 (RTMP), 8088 (RTMP-Over HTTP), 5080 (HTTP), 4445 ([ODSP Desktop Sharing]), 8443 (RTMP over SSL)  for alternate Port settings have a look at red5/conf/red5.properties. Don't forget that you have also some port settings in the Client, see the red5/webapps/openmeetings/config.xml
   * Custom Colors, Default Language, see red5/webapps/openmeetings/config.xml
@@ -103,7 +104,7 @@ After Running the Installer all basics are installed. Now login and go to the Me
 
  * Need for a developer or Consultant? [http://code.google.com/p/openmeetings/wiki/Jobs Hire a Developer]
 
-= Tips and Tricks =
+== Tips and Tricks ==
 
   * To run openmeetings behind a Apache Web-Server you can try with apache mod_jk and mod_proxy
   * Watch the ScreenCast of 0.5.2/SVN-Version Basic Installation http://blip.tv/file/836696?filename=Kunthar-OpenmeetingsBasicInstallation696.flv 
