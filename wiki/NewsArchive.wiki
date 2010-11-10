@@ -1,5 +1,33 @@
 #summary former news
 
+  * Demo Server updated to r3334, at 28.08.2010
+  * !OpenMeetings 1.4 RC1 released, [ChangeLog], at 25.08.2010
+  * You can find some more Demo Videos at [http://www.youtube.com/user/sebastwagner#p/u Sebastian's Youtube Channel], at 19.08.2010
+  * !OpenMeetings Moodle Mod Version 0.9 and SugarCRM Mod 1.1 (fix utf8 problem), at 11.08.2010
+  * Released Version 1.3, ChangeLog, at 23.06.2010
+  * Demo Server updated to r3264, at 22.06.2010
+  * Interested in Presentation of !OpenMeetings as Web-Conferencing solution? Visit [http://www.andrena.de/Entwicklertag/2010/ Karlsruhe Entwicklertag 2010] or  [http://www.moodlemoot.it/ MoodleMoot Italy 2010] at 18.06.2010
+  * !OpenMeetings running on Amazon AWS EC2, see [http://wagner-sebastian.com/wordpress/2010/04/30/openmeetings-running-on-amazon-aws-ec2/ Blog Post] at 30.05.2010
+  * Paypal Integration Plugin, see OpenMeetingsPaypalIntegration, at 07.04.2010
+  * !OpenMeetings 1.2 RC1 released, new [SugarCRMModule Sugar CRM Module], at 03.03.2010
+  * Interested in watching a !OpenMeetings Presentation at the !MoodleMoot 2010? [http://wagner-sebastian.com/wordpress/2010/02/16/openmeetings-at-moodlemoot-2010/ Should hurry up!], at 16.02.2010
+  * Started a new Wiki Page to summarize some Demo Videos see OpenMeetingsDemoVideos [http://opensourcewebconferencing.blogspot.com/2010/02/openmeetings-11-key-features-mini-demo.html or Blog], at 04.02.2010
+  * !OpenMeetings [http://wagner-sebastian.com/wordpress/2010/01/31/openmeetings-nightly-builds-statistics-012010/ Nightly Build Statistics], at 31.01.2010
+  * Demo Server updated to r2851, at 31.01.2010
+  * !OpenMeetings Recording Feature, at 29.12.2009 [http://wagner-sebastian.com/wordpress/2009/12/30/openmeetings-recording-feature/ Blog Article]
+  * !OpenMeetings 1.0 RC1, released at 23.11.2009, ChangeLog, [http://wagner-sebastian.com/wordpress/2009/11/23/openmeetings-10-rc1-and-moodle-mod-06/ Blog Post]
+  * Security Advice - [http://groups.google.com/group/openmeetings-user/browse_thread/thread/2198c8e33587e9be Update your Integration Code], at 14.11.2009
+  * Help us testing, with the [http://code.google.com/p/openmeetings/wiki/BuildSourceNew#Nightly_Builds Nightly Builds] available, at 14.11.2009
+  * Demo-Portal Updated with new Calendar Module, at 03.11.2009
+  * !OpenMeetings check out new Build Instructions [BuildSourceNew]
+  * !OpenMeetings [http://wagner-sebastian.com/wordpress/2009/10/12/openmeetings-becomes-even-more-liberal-with-epl-license/ becomes even more liberal with EPL], at 12.10.2009
+  * !OpenMeetings 0.9 RC5 ready for testing see [ChangeLog ChangeLog], at 28.09.2009
+  * !OpenMeetings 0.9 RC4 ready for testing see [ChangeLog ChangeLog], at 18.09.2009
+  * !OpenMeetings 0.9 RC3 ready for testing see [ChangeLog ChangeLog], at 15.09.2009
+  * [http://wagner-sebastian.com/wordpress/2009/09/04/integrate-collaboration-features-into-your-portal-or-website-with-openmeetings/ How to integrate OpenMeetings into your Website], at 04.09.2009
+  * Also check out the new Rooms in Moodle: http://www.openmeetings.de/moodle/course/view.php?id=2, at 26.08.2009
+  * !OpenMeetings 0.9 RC2 released with a lot of updates, [ReleaseNotes09RC2], at 26.08.2009
+  * Demo Server updated to r2219 including new Moderation Function and Event Room at 15.08.2009
   * OpenMeetings 0.9 RC1 available for Testing
   * New Packages for !OpenMeetings and Moodle Mod, [OpenMeetings084 Release Notes 0.8.4], at 23.06.2009
   * contributed VM IMage from CTpaHHoe see [VMImageRev2056], at 15.06.2009
