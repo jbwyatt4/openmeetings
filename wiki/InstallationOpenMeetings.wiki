@@ -2,8 +2,18 @@
 #sidebar InstallationSidebar
 
 To Update future Version or migrate see UpdateOpenMeetings
- * [OpenmeetingsEnUbuntu Instalar Openmeetings en Ubuntu 10.04 (Spanish)]
-<wiki:toc max_depth="1" />
+
+= VMWare, Debian, Links, Changelog  =
+
+  * [ChangeLog ChangeLog]
+  * [InstallationCentOS5 Installation on CentOS 5]
+  * [OpenmeetingsEnUbuntu Instalar Openmeetings en Ubuntu 10.04 (Spanish)]
+  * [http://i4demo.com/openmeetings/builds/vmware/openmeetings_1.0_RC1.zip VMWare Image Version 1.0 RC1]
+  * [http://liberamemoria.blogspot.com/2009/02/instalando-openmeetings-07-rc-2-en.html Espanol Version for Debian Installation]
+  * [http://aitinet.com/blog/wp-content/uploads/2009/08/TUTORIAL-PARA-INSTALACAO-DO-RED5-E-OPENMEETINGS-NO-LINUX-DEBIAN-LENNY-51.pdf Portuguese Version for Debian Installation of 0.9 RC1] 
+  * [UpdateOpenMeetings Update from Previous Versions]
+  * [http://marc-muehlfeld.de/openmeetings/ CentOS Installation Tutorial von Marc Mühlfeld]
+  * [http://code.google.com/p/openmeetings/wiki/Automatic_script_installation_for_Debian Automatic script installation for Debian]
 
 = Hardware Requirements =
 
@@ -72,16 +82,6 @@ After Running the Installer all basics are installed. Now login and go to the Me
   * rtmps (using of SSL) => you find in the config.xml some value to enable the client to first try to connect to rtmps (useSSL param) .. NOTE: Flash Player only on Windows have the rtmps feature and you will need to clear your browser cache to force a reload of the updated config.xml
   * if you resize your own video-pod in the conference much larger and then synchronize  the stream, all clients will get a better picture (it also needs more bandwidth, as it will take the actual new height / width numbers to publish your stream)
   * there are some hidden emoticons (for example (activate)), you might want to add your own ones [http://openmeetings.googlecode.com/svn/trunk/webapp/webapp/openmeetings/public/emoticons/emotes.xml Full List]
-
-= VMWare, Debian, Links, Changelog  =
-
-  * [ChangeLog ChangeLog]
-  * [http://i4demo.com/openmeetings/builds/vmware/openmeetings_1.0_RC1.zip VMWare Image Version 1.0 RC1]
-  * [http://liberamemoria.blogspot.com/2009/02/instalando-openmeetings-07-rc-2-en.html Espanol Version for Debian Installation]
-  * [http://aitinet.com/blog/wp-content/uploads/2009/08/TUTORIAL-PARA-INSTALACAO-DO-RED5-E-OPENMEETINGS-NO-LINUX-DEBIAN-LENNY-51.pdf Portuguese Version for Debian Installation of 0.9 RC1] 
-  * [UpdateOpenMeetings Update from Previous Versions]
-  * [http://marc-muehlfeld.de/openmeetings/ CentOS Installation Tutorial von Marc Mühlfeld]
-  * [http://code.google.com/p/openmeetings/wiki/Automatic_script_installation_for_Debian Automatic script installation for Debian]
 
 = Integration, Single Sign On and LDAP =
 
