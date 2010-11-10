@@ -1,8 +1,6 @@
-#summary OpenMeetings Wiki Main Page
-
 #sidebar SideBarMainIndex
 
-
+<wiki:toc max_depth="2" />
 
 == Installation ==
 
