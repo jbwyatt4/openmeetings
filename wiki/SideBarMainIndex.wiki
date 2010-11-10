@@ -1,7 +1,6 @@
   * [MainPage ↑ Wiki Index]
-  * [MainPage#Installation Installation]
+  * Installation
     * [InstallationOpenMeetings OpenMeetings Installation]
-      * 
     * [MainPage#Installation_Tips Tipps for various Platforms]
     * [UpdateOpenMeetings OpenMeetings Update]
     * [BuildSourceNew Get Source, build yourself, Nightly Builds]
@@ -18,6 +17,8 @@
       * [SoapMethods Index of SOAP API Methods]
       * [InstantCommunication Using OpenMeetings as instant communication server.]
       * [MethodGateway Method Gateway (deprecated)]
+  * Developer-Documentation
+    
     
 
   
