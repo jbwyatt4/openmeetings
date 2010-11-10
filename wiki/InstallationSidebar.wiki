@@ -1,1 +1,4 @@
   * [MainPage ↑ Wiki Index]
+  * [InstallationOpenMeetings Installation Index]
+    * [InstallationOpenMeetings#Hardware_Requirements Hardware Requirements]
+    * [InstallationOpenMeetings#Software_Requirements_/_Dependencies Software_Requirements / Dependencies]
