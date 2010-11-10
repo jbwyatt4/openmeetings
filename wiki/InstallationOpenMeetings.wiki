@@ -1,4 +1,5 @@
 #labels Featured
+#sidebar InstallationSidebar
 
 To Update future Version or migrate see UpdateOpenMeetings
  * [OpenmeetingsEnUbuntu Instalar Openmeetings en Ubuntu 10.04 (Spanish)]
