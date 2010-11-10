@@ -1,6 +1,4 @@
-#summary Building Source and develop
 #labels Featured
-
 #sideBar SideBarBuildSource
 
 = Nightly Builds =
