@@ -1,4 +1,4 @@
-  * [MainPage ↑ Wiki Index]
+  * [MainPage Wiki Index]
   * Installation
     * *[InstallationOpenMeetings OpenMeetings Installation]*
     * [UpdateOpenMeetings OpenMeetings Update]
