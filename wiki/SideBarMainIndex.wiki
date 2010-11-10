@@ -1,7 +1,6 @@
   * [MainPage ↑ Wiki Index]
   * Installation
-    * [InstallationOpenMeetings OpenMeetings Installation]
-    * [MainPage#Installation_Tips Tipps for various Platforms]
+    * [InstallationOpenMeetings *OpenMeetings Installation*]
     * [UpdateOpenMeetings OpenMeetings Update]
     * [BuildSourceNew Get Source, build yourself, Nightly Builds]
   * [MainPage#Manuals_and_Help Manuals and Help]
