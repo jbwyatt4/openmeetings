@@ -15,7 +15,7 @@
       * [OpenMeetingsPaypalIntegration Paypal and Invocing Integration]
       * [JoomlaIntegration Joomla Integration]
     * Integration API
-      * [DirectLoginSoapGeneralFlow Graph showing how to Single Sign On]
+      * [DirectLoginSoapGeneralFlow Single Sign On Flow/Graph]
       * [SoapMethods Index of SOAP API Methods]
       * [InstantCommunication Using OpenMeetings as instant communication server.]
       * [MethodGateway Method Gateway (deprecated)]
