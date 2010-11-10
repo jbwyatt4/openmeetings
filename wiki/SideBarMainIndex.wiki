@@ -1,5 +1,5 @@
   * [MainPage ↑ MainPage]
   * [MainPage#Installation Installation]
-    * [InstallationOpenMeetings OpenMeetings Installation
+    * [InstallationOpenMeetings OpenMeetings Installation]
     * [UpdateOpenMeetings OpenMeetings Update]
   
