@@ -4,7 +4,10 @@
     * [UpdateOpenMeetings OpenMeetings Update]
     * [BuildSourceNew Get Source, build yourself, Nightly Builds]
   * Manuals and Help
-    * [MainPage#Manuals_and_Help Manual and Help]
+    * [http://openmeetings.googlecode.com/svn/docs/manuals/OpenMeetings%20Manual%20for%20User%20level.pdf User Manual For New Users ] [http://openmeetings.googlecode.com/svn/docs/manuals/OpenMeetings%20Manual%20for%20User%20level.pdf PDF (English)] [http://openmeetings.googlecode.com/svn/docs/manuals/OpenMeetings%20Manual%20for%20User%20level.doc DOC]<br/>Other Languages: [http://openmeetings.googlecode.com/svn/docs/manuals/OpenMeetings_ManuaL_for_new_Users_Swedish.pdf Swedish] [http://openmeetings.googlecode.com/svn/docs/manuals/OpenMeetings_ManuaL_for_new_Users_Finnish.pdf Finnish] [http://openmeetings.googlecode.com/svn/docs/manuals/Benutzer-Anleitung%20OpenMeetings.pdf Deutsch] [http://openmeetings.googlecode.com/svn/docs/manuals/OpenMeetings_ManuaL_for_new_Users_Russian.pdf Russian]
+    * [Internationalisation]
+    * TimeZoneHandling
+
   * Integration
     * Ready Modules and Plugins
       * [MoodlePlugins Moodle Module]
