@@ -1,7 +1,7 @@
 #labels Featured
 #sidebar InstallationSidebar
 
-To update to future versions or migrate see UpdateOpenMeetings, for Payed Services see [http://code.google.com/p/openmeetings/wiki/Jobs Hire a Developer]
+To update to future versions or migrate see UpdateOpenMeetings, for payed services see [http://code.google.com/p/openmeetings/wiki/Jobs Hire a Developer]
 
 == VMWare, Debian, Links, Changelog  ==
 
