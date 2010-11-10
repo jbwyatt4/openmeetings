@@ -8,7 +8,7 @@
     * [Internationalisation]
     * TimeZoneHandling
   * Integration
-    * Ready Modules and Plugins
+    * Modules and Plugins
       * [MoodlePlugins Moodle Module]
       * [SugarCRMModule SugarCRM Plugin]
       * [FacebookModule Facebook Integration]
