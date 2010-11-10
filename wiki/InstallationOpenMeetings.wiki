@@ -12,7 +12,7 @@ To Update future Version or migrate see UpdateOpenMeetings
 
   * Headset/Microphone recommendation: Logitech !ClearChat PC Wireless, for example from [http://www.amazon.de/Logitech-ClearChat-kabelloser-Kopfh%C3%B6rer-Transmitter/dp/B00166WSN4 Amazon] or [http://shop.ebay.com/i.html?_nkw=Logitech+ClearChat+Wireless&_sacat=0&_trksid=p3286.m270.l1313&LH_BIN=1&LH_IncludeSIF=1&_odkw=Logitech+ClearChat+PC&_osacat=0 EBay Auctions]
 
-= Software Requirements =
+= Software Requirements / Dependencies =
 
   * Java Version greater or equal 6
   * Database available (MySQL,Postgres,... MSSQL,Oracle,DB2 see [http://docs.jboss.org/hibernate/core/3.3/reference/en/html/session-configuration.html#configuration-optional-dialects full-list]) It is recommended to make/use an empty database/scheme
