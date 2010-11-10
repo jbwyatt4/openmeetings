@@ -3,7 +3,7 @@
     * [InstallationOpenMeetings#VMWare,_Debian,_Links,_Changelog VMWare Debian CentOS]
     * [InstallationOpenMeetings#Hardware_Requirements Hardware Requirements]
     * [InstallationOpenMeetings#Software_Requirements_/_Dependencies Software_Requirements / Dependencies]
-    * [InstallationOpenMeetings#Install_OpenMeetings Install OpenMeetings]
+    * *[InstallationOpenMeetings#Install_OpenMeetings Install OpenMeetings]*
     * [InstallationOpenMeetings#Hidden_and_experimental_features Hidden and experimental features]
     * [InstallationOpenMeetings#Integration,_Single_Sign_On_and_LDAP Integration, Single Sign On and LDAP]
     * [InstallationOpenMeetings#using_3th_Party_Publishing_Software,_RTP-Streams_or_IP-Cams using 3th Party Publishing Software, RTP-Streams or IP-Cams]
