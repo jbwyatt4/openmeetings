@@ -4,7 +4,7 @@
     * [UpdateOpenMeetings OpenMeetings Update]
     * [BuildSourceNew Get Source, build yourself, Nightly Builds]
   * Manuals and Help
-    * [[MainPage#Manuals_and_Help Manual and Help]
+    * [MainPage#Manuals_and_Help Manual and Help]
   * Integration
     * Ready Modules and Plugins
       * [MoodlePlugins Moodle Module]
