@@ -1,7 +1,7 @@
 #labels Featured
 #sidebar InstallationSidebar
 
-To Update future Version or migrate see UpdateOpenMeetings
+To Update future Version or migrate see UpdateOpenMeetings for Installation Service see [http://code.google.com/p/openmeetings/wiki/Jobs Hire a Developer]
 
 == VMWare, Debian, Links, Changelog  ==
 
@@ -14,7 +14,7 @@ To Update future Version or migrate see UpdateOpenMeetings
   * [http://marc-muehlfeld.de/openmeetings/ CentOS Installation Tutorial von Marc Mühlfeld]
   * [http://code.google.com/p/openmeetings/wiki/Automatic_script_installation_for_Debian Automatic script installation for Debian]
 
-= Hardware Requirements =
+== Hardware Requirements ==
 
   * Minimalistic requirement (without Document Converters, Recorder and Upload feature)  1GHz CPU 1 GB RAM
   * Recommended requirement 2x/4x 2GHz ++ CPU (32 or 64Bit) 4GB RAM. If you have a 64Bit Operating System check if there is a !OpenOffice 64Bit Version [http://download.openoffice.org/other.html#de available for your OS]
@@ -98,10 +98,6 @@ After Running the Installer all basics are installed. Now login and go to the Me
   * Custom Colors, Default Language, see red5/webapps/openmeetings/config.xml
   * You may be able to run different red5 instances if you bind it to specific ports. 
   * Single Sing On, Integration => Use the Remote Gateway with the SoapMethods
-
-= Service for Customization / Installation =
-
- * Need for a developer or Consultant? [http://code.google.com/p/openmeetings/wiki/Jobs Hire a Developer]
 
 == Tips and Tricks ==
 
