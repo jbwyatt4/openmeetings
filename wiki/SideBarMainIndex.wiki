@@ -1,5 +1,7 @@
   * [MainPage ↑ MainPage]
   * [MainPage#Installation Installation]
     * [InstallationOpenMeetings OpenMeetings Installation]
+    * [MainPage#Installation_Tips Tipps for various Platforms]
     * [UpdateOpenMeetings OpenMeetings Update]
+  * [MainPage#Manuals_and_Help Manuals and Help]
   
