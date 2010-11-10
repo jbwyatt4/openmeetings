@@ -1,0 +1,11 @@
+  * [MainPage ↑ Wiki Index]
+  * Build Source Instructions
+    * [BuildSourceNew#Nightly_Builds Nightly Builds]
+    * [BuildSourceNew#Run,_Develop,_Test,_Debug_all_in_Eclipse Run, Develop, Test, Debug all in Eclipse]
+      * [BuildSourceNew#Step1_-_Get_required_Software Step1 - Get required Software]
+      * [BuildSourceNew#Step2_-_Download_the_Source Step2 - Download the Source]
+      * [BuildSourceNew#Step3_-_Build_and_deploy_the_code_in_Eclipse Step3 - Build and deploy the code in Eclipse]
+    * [http://code.google.com/p/openmeetings/wiki/BuildSourceNew#How_to_create_.war How to create .war]
+    * [http://code.google.com/p/openmeetings/wiki/BuildSourceNew#How_to_build_a_distribution How to build a distribution]
+    * [http://code.google.com/p/openmeetings/wiki/BuildSourceNew#Links Links]
+    * [http://code.google.com/p/openmeetings/wiki/BuildSourceNew#Tipps_and_Gotchas Tipps and Gotchas]
