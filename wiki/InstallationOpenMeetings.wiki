@@ -11,7 +11,6 @@ To Update future Version or migrate see UpdateOpenMeetings
   * [http://i4demo.com/openmeetings/builds/vmware/openmeetings_1.0_RC1.zip VMWare Image Version 1.0 RC1]
   * [http://liberamemoria.blogspot.com/2009/02/instalando-openmeetings-07-rc-2-en.html Espanol Version for Debian Installation]
   * [http://aitinet.com/blog/wp-content/uploads/2009/08/TUTORIAL-PARA-INSTALACAO-DO-RED5-E-OPENMEETINGS-NO-LINUX-DEBIAN-LENNY-51.pdf Portuguese Version for Debian Installation of 0.9 RC1] 
-  * [UpdateOpenMeetings Update from Previous Versions]
   * [http://marc-muehlfeld.de/openmeetings/ CentOS Installation Tutorial von Marc Mühlfeld]
   * [http://code.google.com/p/openmeetings/wiki/Automatic_script_installation_for_Debian Automatic script installation for Debian]
 
