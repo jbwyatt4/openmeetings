@@ -1,7 +1,23 @@
-  * [MainPage ↑ MainPage]
+  * [MainPage ↑ Wiki Index]
   * [MainPage#Installation Installation]
     * [InstallationOpenMeetings OpenMeetings Installation]
+      * 
     * [MainPage#Installation_Tips Tipps for various Platforms]
     * [UpdateOpenMeetings OpenMeetings Update]
+    * [BuildSourceNew Get Source, build yourself, Nightly Builds]
   * [MainPage#Manuals_and_Help Manuals and Help]
+  * Integration
+    * Ready Modules and Plugins
+      * [MoodlePlugins Moodle Module]
+      * [SugarCRMModule SugarCRM Plugin]
+      * [FacebookModule Facebook Integration]
+      * [OpenMeetingsPaypalIntegration Paypal and Invocing Integration]
+      * [JoomlaIntegration Joomla Integration]
+    * Documentation
+      * [DirectLoginSoapGeneralFlow Graph showing how to Single Sign On]
+      * [SoapMethods Index of SOAP API Methods]
+      * [InstantCommunication Using OpenMeetings as instant communication server.]
+      * [MethodGateway Method Gateway (deprecated)]
+    
+
   
