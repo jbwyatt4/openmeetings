@@ -1,12 +1,12 @@
 #labels Featured
 #sidebar SideBarBuildSource
 
-= Nightly Builds =
+== Nightly Builds ==
 
 Nightly builds of !OpenMeetings (already embed into Red5) are available at: <br/>
 http://i4demo.com/openmeetings/builds/<br/>
 
-= Run, Develop, Test, Debug all in Eclipse =
+== Run, Develop, Test, Debug all in Eclipse ==
 
 To develop or build !OpenMeetings you download the Project as regular Web-Project.
 You need the Subclipse Plugin for Eclipse, a database and a Tomcat Server installed on your system to test and debug the Code.
