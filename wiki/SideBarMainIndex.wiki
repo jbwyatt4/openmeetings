@@ -17,6 +17,7 @@
     * Integration API
       * [DirectLoginSoapGeneralFlow Single Sign On Flow/Graph]
       * [SoapMethods Index of SOAP API Methods]
+      * [SoapSamples Some example implemenations and classes]
       * [InstantCommunication Using OpenMeetings as instant communication server.]
       * [MethodGateway Method Gateway (deprecated)]
   * Developer-Documentation
