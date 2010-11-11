@@ -4,6 +4,7 @@
 == Major changes in Version 1.6 RC1 (released on Thursday 11.11.2010) == 
 
   * Watch the small demo about new features: http://www.youtube.com/user/sebastwagner#p/u/0/EriKb0zY0lM
+  * You can login using your Facebook account now
   * Private message center, send users messages, organize them in folders, you can book conference rooms by sending private messages, the booked event is automatically in your and the participants calendar, changes to that event will be populated to all users booked to the event.
   * User contacts, you can search users, add them to your contacts
   * Share your calendar with your contacts
