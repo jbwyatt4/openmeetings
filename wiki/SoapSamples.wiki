@@ -1,5 +1,10 @@
 #summary Some sample implementations
 
+== PHP ==
+
+see the sample class with almost all important methods implemented:
+http://code.google.com/p/openmeetings/source/browse/trunk/plugins/moodle_plugin/openmeetings_gateway.php
+
 == Classic ASP ==
 
 followed up by this discussion:
