@@ -5,6 +5,13 @@ Lo primero que haremos es descargar el programa, vamos a la sección de descarga
 
 == Instalar software necesario ==
 
+Requiere descomentar los paquetes de partner en /etc/apt/sources.lst
+
+{{{
+$ sudo nano /etc/apt/source.list
+$ sudo apt-get update
+}}}
+
 Una vez descargado podremos comenzar a instalar el software necesario. Aquí dejo la lista de programa a instalar.
 {{{
 $ sudo apt-get install -y java-package sun-java6-bin sun-java6-jdk sun-java6-jre mysql-server openoffice.org-writer openoffice.org-calc 
