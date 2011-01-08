@@ -39,7 +39,7 @@ class openmeetings_gateway {
 		
 		//echo "DIRROOT: ".$CFG->dirroot."<br/>";
 		
-		$client_userService = new nusoap_client_om("http://".$CFG->openmeetings_red5host.":".$CFG->openmeetings_red5port."/openmeetings/services/UserService?wsdl", "wsdl");
+		$client_userService = new nusoap_client("http://".$CFG->openmeetings_red5host.":".$CFG->openmeetings_red5port."/openmeetings/services/UserService?wsdl", "wsdl");
 		$client_userService->setUseCurl(true);
 		//echo "Client inited"."<br/>";
 		$err = $client_userService->getError();
@@ -110,7 +110,7 @@ class openmeetings_gateway {
 		
 		//echo $client_userService."<br/>";
 	    
-	 	$client_roomService = new nusoap_client_om("http://".$CFG->openmeetings_red5host.":".$CFG->openmeetings_red5port."/openmeetings/services/RoomService?wsdl", true);
+	 	$client_roomService = new nusoap_client("http://".$CFG->openmeetings_red5host.":".$CFG->openmeetings_red5port."/openmeetings/services/RoomService?wsdl", true);
 		
 		$err = $client_roomService->getError();
 		if ($err) {
@@ -169,7 +169,7 @@ class openmeetings_gateway {
 		
 		//echo $client_userService."<br/>";
 	    
-	 	$client_roomService = new nusoap_client_om("http://".$CFG->openmeetings_red5host.":".$CFG->openmeetings_red5port."/openmeetings/services/RoomService?wsdl", true);
+	 	$client_roomService = new nusoap_client("http://".$CFG->openmeetings_red5host.":".$CFG->openmeetings_red5port."/openmeetings/services/RoomService?wsdl", true);
 		
 		$err = $client_roomService->getError();
 		if ($err) {
@@ -223,7 +223,7 @@ class openmeetings_gateway {
 		
 		//echo $client_userService."<br/>";
 	    
-	 	$client_roomService = new nusoap_client_om("http://".$CFG->openmeetings_red5host.":".$CFG->openmeetings_red5port."/openmeetings/services/RoomService?wsdl", true);
+	 	$client_roomService = new nusoap_client("http://".$CFG->openmeetings_red5host.":".$CFG->openmeetings_red5port."/openmeetings/services/RoomService?wsdl", true);
 		
 		$err = $client_roomService->getError();
 		if ($err) {
@@ -269,7 +269,7 @@ class openmeetings_gateway {
 	function openmeetings_getRecordingsByExternalRooms(){
 		global $USER, $CFG;
 		
-		$client_roomService = new nusoap_client_om("http://".$CFG->openmeetings_red5host.":".$CFG->openmeetings_red5port."/openmeetings/services/RoomService?wsdl", true);
+		$client_roomService = new nusoap_client("http://".$CFG->openmeetings_red5host.":".$CFG->openmeetings_red5port."/openmeetings/services/RoomService?wsdl", true);
 		
 		$err = $client_roomService->getError();
 		if ($err) {
@@ -307,7 +307,7 @@ class openmeetings_gateway {
 	function openmeetings_setUserObject($username, $firstname, $lastname, 
 			$profilePictureUrl, $email) {
 	    global $USER, $CFG;
-	 	$client_userService = new nusoap_client_om("http://".$CFG->openmeetings_red5host.":".$CFG->openmeetings_red5port."/openmeetings/services/UserService?wsdl", true);
+	 	$client_userService = new nusoap_client("http://".$CFG->openmeetings_red5host.":".$CFG->openmeetings_red5port."/openmeetings/services/UserService?wsdl", true);
 		
 		$err = $client_userService->getError();
 		if ($err) {
@@ -352,7 +352,7 @@ class openmeetings_gateway {
 	function openmeetings_setUserObjectWithExternalUser($username, $firstname, $lastname, 
 			$profilePictureUrl, $email, $userId, $systemType) {
 	    global $USER, $CFG;
-	 	$client_userService = new nusoap_client_om("http://".$CFG->openmeetings_red5host.":".$CFG->openmeetings_red5port."/openmeetings/services/UserService?wsdl", true);
+	 	$client_userService = new nusoap_client("http://".$CFG->openmeetings_red5host.":".$CFG->openmeetings_red5port."/openmeetings/services/UserService?wsdl", true);
 		
 		$err = $client_userService->getError();
 		if ($err) {
@@ -408,7 +408,7 @@ class openmeetings_gateway {
 	function openmeetings_setUserObjectAndGenerateRoomHashByURL($username, $firstname, $lastname, 
 			$profilePictureUrl, $email, $userId, $systemType, $room_id, $becomeModerator) {
 	    global $USER, $CFG;
-	 	$client_userService = new nusoap_client_om("http://".$CFG->openmeetings_red5host.":".$CFG->openmeetings_red5port."/openmeetings/services/UserService?wsdl", true);
+	 	$client_userService = new nusoap_client("http://".$CFG->openmeetings_red5host.":".$CFG->openmeetings_red5port."/openmeetings/services/UserService?wsdl", true);
 		
 		$err = $client_userService->getError();
 		if ($err) {
@@ -452,7 +452,7 @@ class openmeetings_gateway {
 	 function openmeetings_setUserObjectAndGenerateRecordingHashByURL($username, $firstname, $lastname, 
 						$userId, $systemType, $recording_id) {
 	    global $USER, $CFG;
-	 	$client_userService = new nusoap_client_om("http://".$CFG->openmeetings_red5host.":".$CFG->openmeetings_red5port."/openmeetings/services/UserService?wsdl", true);
+	 	$client_userService = new nusoap_client("http://".$CFG->openmeetings_red5host.":".$CFG->openmeetings_red5port."/openmeetings/services/UserService?wsdl", true);
 		
 		$err = $client_userService->getError();
 		if ($err) {
