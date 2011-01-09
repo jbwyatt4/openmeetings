@@ -1,6 +1,10 @@
-<?php //$Id,v 1.0 2007/10/24 12:00:00 Serafim Panov Exp $ 
+<?php 
 
-require_once ('moodleform_mod.php');
+if (!defined('MOODLE_INTERNAL')) {
+    die('Direct access to this script is forbidden.');    ///  It must be included from a Moodle page
+}
+
+require_once ($CFG->dirroot.'/course/moodleform_mod.php');
 
 class mod_openmeetings_mod_form extends moodleform_mod {
 
@@ -93,13 +97,17 @@ class mod_openmeetings_mod_form extends moodleform_mod {
         $mform->addElement('htmleditor', 'intro', get_string('Comment', 'openmeetings'));
         $mform->setType('intro', PARAM_RAW);
         //$mform->addRule('intro', get_string('required'), 'required', null, 'client');
-        $mform->setHelpButton('intro', array('writing', 'richtext'), false, 'editorhelpbutton');
+        //$mform->setHelpButton('intro', array('writing', 'richtext'), false, 'editorhelpbutton');
 
-        $mform->addElement('format', 'introformat', get_string('format'));
+        //$mform->addElement('format', 'introformat', get_string('format', 'openmeetings'));
+        //$this->add_intro_editor(true, get_string('description', 'mplayer'));
+
+		$this->add_intro_editor(true);
 
 	//-------------------------------------------------------------------------------
         // add standard elements, common to all modules
-        $this->standard_coursemodule_elements(array('groups'=>true, 'groupings'=>true, 'groupmembersonly'=>true));
+        //$this->standard_coursemodule_elements(array('groups'=>true, 'groupings'=>true, 'groupmembersonly'=>true));
+        $this->standard_coursemodule_elements();
         
 	//-------------------------------------------------------------------------------
         // add standard buttons, common to all modules
