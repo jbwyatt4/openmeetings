@@ -31,7 +31,7 @@
 // For the core capabilities, the variable is $moodle_capabilities.
 
 
-$mod_openmeetings_capabilities = array(
+$capabilities = array(
 
     'mod/openmeetings:becomemoderator' => array(
 
@@ -40,7 +40,7 @@ $mod_openmeetings_capabilities = array(
         'legacy' => array(
             'teacher' => CAP_ALLOW,
             'editingteacher' => CAP_ALLOW,
-            'admin' => CAP_ALLOW
+            'manager' => CAP_ALLOW
         )
     )
     
