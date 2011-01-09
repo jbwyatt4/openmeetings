@@ -35,7 +35,7 @@ function myErrorHandler($errno, $errstr, $errfile, $errline)
 }
 
 function openmeetings_add_instance($openmeetings) {
-	global $USER, $CFG;
+	global $USER, $CFG, $DB;
 	
 	$openmeetings_gateway = new openmeetings_gateway();
 	if ($openmeetings_gateway->openmeetings_loginuser()) {
@@ -51,24 +51,25 @@ function openmeetings_add_instance($openmeetings) {
 	}
 
     # May have to add extra stuff in here #
-    return insert_record("openmeetings", $openmeetings);
+    return $DB->insert_record("openmeetings", $openmeetings);
 }
 
 
 function openmeetings_update_instance($openmeetings) {
-
+	global $DB;
     $openmeetings->timemodified = time();
     $openmeetings->id = $openmeetings->instance;
 
     # May have to add extra stuff in here #
 
-    return update_record("openmeetings", $openmeetings);
+    return $DB->update_record("openmeetings", $openmeetings);
 }
 
 
 function openmeetings_delete_instance($id) {
-
-    if (! $openmeetings = get_record("openmeetings", "id", "$id")) {
+	global $DB;
+	
+    if (! $openmeetings = $DB->get_record("openmeetings", "id", "$id")) {
         return false;
     }
 
@@ -76,7 +77,7 @@ function openmeetings_delete_instance($id) {
 
     # Delete any dependent records here #
 
-    if (! delete_records("openmeetings", "id", "$openmeetings->id")) {
+    if (! $DB->delete_records("openmeetings", "id", "$openmeetings->id")) {
         $result = false;
     }
 

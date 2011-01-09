@@ -1,4 +1,4 @@
-<?php  // $Id: view.php,v 1.0 2007/10/24 12:00:00 Serafim Panov Exp $ 
+<?php  
 
 
     require_once("../../config.php");
@@ -7,33 +7,34 @@
 
 
     $id = optional_param('id', 0, PARAM_INT); // Course Module ID, or
-    $a  = optional_param('a', 0, PARAM_INT);  // whiteboard ID
-    $g  = optional_param('g');
-
-    if ($id) {
-        if (! $cm = get_record("course_modules", "id", $id)) {
-            error("Course Module ID was incorrect");
-        }
+    $g  = optional_param('g', 0, PARAM_INT);
     
-        if (! $course = get_record("course", "id", $cm->course)) {
-            error("Course is misconfigured");
-        }
-    
-        if (! $openmeetings = get_record("openmeetings", "id", $cm->instance)) {
-            error("Course module is incorrect");
-        }
+    if (!empty($id)) {
+	    if (! $cm = get_coursemodule_from_id('openmeetings', $id)) {
+	        print_error('invalidcoursemodule');
+	    }
+	    if (! $course = $DB->get_record("course", array("id"=>$cm->course))) {
+	        print_error('coursemisconf');
+	    }
+	    if (! $openmeetings = $DB->get_record("openmeetings", array("id"=>$cm->instance))) {
+	        print_error('invalidid', 'openmeetings');
+	    }
+	
+	} else if (!empty($g)) {
+	    if (! $openmeetings = $DB->get_record("openmeetings", array("id"=>$g))) {
+	        print_error('invalidid', 'openmeetings');
+	    }
+	    if (! $course = $DB->get_record("course", array("id"=>$openmeetings->course))) {
+	        print_error('invalidcourseid');
+	    }
+	    if (!$cm = get_coursemodule_from_instance("openmeetings", $openmeetings->id, $course->id)) {
+	        print_error('invalidcoursemodule');
+	    }
+	    $id = $cm->id;
+	} else {
+	    print_error('invalidid', 'openmeetings');
+	}
 
-    } else {
-        if (! $openmeetings = get_record("openmeetings", "id", $a)) {
-            error("Course module is incorrect");
-        }
-        if (! $course = get_record("course", "id", $openmeetings->course)) {
-            error("Course is misconfigured");
-        }
-        if (! $cm = get_coursemodule_from_instance("openmeetings", $openmeetings->id, $course->id)) {
-            error("Course Module ID was incorrect");
-        }
-    }
 
     require_login($course->id);
 
@@ -65,11 +66,10 @@
     
     $sitelink = str_replace("http://", "", $CFG->wwwroot);
     
-    
-    $moduleid = get_record ("modules", "name", "openmeetings");
-    
-    $coursedata = get_record ("course_modules", "course", $cm->course, "module", $moduleid->id, "instance", $cm->instance);
-    
+//    $moduleid = $DB->get_record ("modules", "name", "openmeetings");
+//    
+//    $coursedata = $DB->get_record ("course_modules", "course", $cm->course, "module", $moduleid->id, "instance", $cm->instance);
+//    
 //    if ($coursedata->groupmode != 0 && empty($g)) {
 //        //print_r (groups_get_groups($cm->course));
 //        //$usergroups = groups_get_groups_for_user($USER->id, $cm->course);
