@@ -15,11 +15,15 @@ $string['openmeetingsAdminUser'] = 'OpenMeetings Admin User';
 $string['openmeetingsAdminUserPass'] = 'OpenMeetings Admin User Password';
 $string['openmeetingsModuleKey'] = 'OpenMeetings Module key (vary for multiple instances using same OpenMeetings Server)';
 
-$string['Room Name'] = 'Nom R&eacute;union';
-$string['Room Type'] = 'Type R&eacute;union';
-$string['Room Language'] = 'Langue R&eacute;union';
-$string['Max User'] = 'Nb max utilisateurs';
-$string['Wait for teacher'] = 'Attendre enseignant';
+$string['Room_Name'] = 'Nom R&eacute;union';
+$string['Room_Type'] = 'Type R&eacute;union';
+$string['Room_Language'] = 'Langue R&eacute;union';
+$string['Max_User'] = 'Nb max utilisateurs';
+$string['Wait_for_teacher'] = 'Attendre enseignant';
+
+$string['recordings_label'] = 'The Recording Field is only used if Room Type is Recording';
+$string['recordings_show'] = 'Available Recordings to Shows';
+$string['Comment'] = 'Comment';
 
 $string['Conference'] = 'R&eacute;union';
 $string['Audience'] = 'Conf&eacute;rence';

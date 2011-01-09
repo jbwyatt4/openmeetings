@@ -13,15 +13,15 @@ class mod_openmeetings_mod_form extends moodleform_mod {
     /// Adding the "general" fieldset, where all the common settings are showed
         $mform->addElement('header', 'general', get_string('general', 'form'));
     /// Adding the standard "name" field
-        $mform->addElement('text', 'name', get_string('Room Name', 'openmeetings'), array('size'=>'64'));
+        $mform->addElement('text', 'name', get_string('Room_Name', 'openmeetings'), array('size'=>'64'));
         $mform->setType('name', PARAM_TEXT);
         $mform->addRule('name', null, 'required', null, 'client');
         
     /// Adding the "Room Type" field
-    	$mform->addElement('select', 'type', get_string('Room Type', 'openmeetings'), array('1'=>'Conference Room', '2'=>'Audience Room', '3'=>'Restricted Room', '0'=>'Show Recording'));
+    	$mform->addElement('select', 'type', get_string('Room_Type', 'openmeetings'), array('1'=>'Conference Room', '2'=>'Audience Room', '3'=>'Restricted Room', '0'=>'Show Recording'));
     
     /// Some description
-    	 $mform->addElement('static', 'description_room_recording_id', get_string('The Recording Field is only used if Room Type is Recording', 'openmeetings'), null);
+    	 $mform->addElement('static', 'description_room_recording_id', get_string('recordings_label', 'openmeetings'), null);
         
     /// Adding the "Available Recordings to Shows" field
     
@@ -50,13 +50,13 @@ class mod_openmeetings_mod_form extends moodleform_mod {
 		}
     	
     
-    	$mform->addElement('select', 'room_recording_id', get_string('Available Recordings to Shows', 'openmeetings'), $recordings);
+    	$mform->addElement('select', 'room_recording_id', get_string('recordings_show', 'openmeetings'), $recordings);
         
     /// Adding the "Number of Participants" field
-    	$mform->addElement('select', 'max_user', get_string('Max User', 'openmeetings'), array('2'=>'2', '4'=>'4', '8'=>'8', '16'=>'16', '24'=>'24', '36'=>'36', '50'=>'50', '100'=>'100', '200'=>'200', '500'=>'500', '1000'=>'1000'));
+    	$mform->addElement('select', 'max_user', get_string('Max_User', 'openmeetings'), array('2'=>'2', '4'=>'4', '8'=>'8', '16'=>'16', '24'=>'24', '36'=>'36', '50'=>'50', '100'=>'100', '200'=>'200', '500'=>'500', '1000'=>'1000'));
         
     /// Adding the "Is Moderated Room" field
-    	$mform->addElement('select', 'is_moderated_room', get_string('Wait for teacher', 'openmeetings'), array('1'=>'Participants need to wait till the teacher enters the room','2' => 'Participants can already start (first User in Room becomes Moderator)'));
+    	$mform->addElement('select', 'is_moderated_room', get_string('Wait_for_teacher', 'openmeetings'), array('1'=>'Participants need to wait till the teacher enters the room','2' => 'Participants can already start (first User in Room becomes Moderator)'));
         
     /// Adding the "Room Language" field
     	$language_array = array ('1' => 'english',
@@ -87,7 +87,7 @@ class mod_openmeetings_mod_form extends moodleform_mod {
 							    '26' => 'dutch',
 							    '27' => 'hebrew');
     
-    	$mform->addElement('select', 'language', get_string('Room Language', 'openmeetings'), $language_array);
+    	$mform->addElement('select', 'language', get_string('Room_Language', 'openmeetings'), $language_array);
             
     /// Adding the optional "intro" and "introformat" pair of fields
         $mform->addElement('htmleditor', 'intro', get_string('Comment', 'openmeetings'));
