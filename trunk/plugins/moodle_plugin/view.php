@@ -172,9 +172,7 @@
 								"&moodleRoom=1" .   
 								"&wwwroot=". $CFG->wwwroot;                                                                                                
 
-				printf("<iframe src='%s' width='%s' height='%s' />",$iframe_d,
-						$CFG->openmeetings_openmeetingsiFrameWidth,
-						$CFG->openmeetings_openmeetingsiFrameHeight);					
+				printf("<iframe src='%s' width='%s' height='%s' />",$iframe_d,"100%",640);					
 				
 			}
 		} else {
