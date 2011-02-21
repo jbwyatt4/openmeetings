@@ -1,4 +1,4 @@
-#summary Documentation of getting OM working With CentOS 5
+#summary Documentation for getting OM working With CentOS 5
 #labels Installation,Configuration
 = Installation for openmeetings on CentOS 5 =
 
