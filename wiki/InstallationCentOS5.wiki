@@ -108,7 +108,7 @@ Remove the CentOS RPM versions of ghostscript and ghostscript-devel:
 rpm -e --nodeps ghostscript ghostscript-devel
 }}}
 
-Now we need to download the latest version of certain programs and manually build and install:
+Now we need to download the latest versions of certain programs and manually build and install:
 
 `Ghostscript`
 {{{
