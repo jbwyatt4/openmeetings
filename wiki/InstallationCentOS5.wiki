@@ -94,7 +94,7 @@ Next all of the various dependancies need to be installed:
 yum install freetype freetype-devel fontconfig fontconfig-devel java-1.6.0-openjdk-devel libtiff libtiff-devel libjpeg-devel libjpeg giflib giflib-devel libpaper libpaper-devel xml-commons-apis
 }}}
 {{{
-libpng libpng-devel libxml2 libxml2-devel fftw3 fftw3-devel cairo cairo-devel flac flac-devel wavpack wavpack-devel libsndfile libsndfile-devel libmad libmad-devel yasm-devel yasm
+libpng libpng-devel libxml2 libxml2-devel fftw3 fftw3-devel cairo cairo-devel flac flac-devel wavpack wavpack-devel libsndfile libsndfile-devel libmad libmad-devel yasm-devel yasm gcc gcc-c++
 }}}
 
 Install the required OpenOffice products:
