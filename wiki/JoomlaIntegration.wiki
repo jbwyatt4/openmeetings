@@ -12,7 +12,7 @@
 <wiki:video url="http://www.youtube.com/watch?v=CZIoUOfsnoY"/>
 
 
-== Where to get the Paypal Module ==
+== Where to get the Joomla Module ==
 
 
 Contact:<br/>
