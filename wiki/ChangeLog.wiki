@@ -1,6 +1,12 @@
 #summary Release Notes
 #labels Featured
 
+== Major changes in Version 1.6.1 (released on Sunday 27.02.2010) ==
+
+  * Fix no selection bug in invitations
+  * Recordings are now in the private folder of the recordings creator
+  * Processed recordings have now by default the original dimension of the recording
+
 == Major changes in !OpenMeetings Moodle Mod 1.0 (released on Sunday 09.01.2011) ==
 
   * Compliant to Moodle 2.0
