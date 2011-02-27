@@ -19,7 +19,6 @@ Demo (no Audio in this Video)<br/>
 == Help And Support ==
 
   * Mailing List: http://groups.google.com/group/openmeetings-user
-  * [http://www.webbase-design.de/side/OpenMeetings%20Hosting.pdf Installation and Services around OpenMeetings offerings frmo Webbase-Design, contact us if you have any questions]
   * [Jobs More Developers and Freelancers]
 
 === Installation ===
