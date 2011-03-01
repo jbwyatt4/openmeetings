@@ -2,6 +2,15 @@
 
 = Introduction =
 
+<h2>Zend Integration</h2>
+<p>
+ Zend Framework compatible set of Classes and methods that Implements the SOAP API of openmeetings platform, If you want to interact with your openmeetings server from inside your PHP application you can use this library. 
+</p>
+
+<p>
+ZI still in the Beta stage, please if you face any problem or found anu bug report it here and I will fix it. 
+</p>
+
 = Details =
 
 Add your content here.  Format your content with:
