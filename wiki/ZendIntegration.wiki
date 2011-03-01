@@ -1,4 +1,5 @@
 #summary ZendIntegration
+#labels Phase-Documentation
 
 = Introduction =
 
@@ -7,13 +8,11 @@
  Zend Framework compatible set of Classes and methods that Implements the SOAP API of openmeetings platform, If you want to interact with your openmeetings server from inside your PHP application you can use this library. 
 </p>
 
-<p>
-ZI still in the Beta stage, please if you face any problem or found anu bug report it here and I will fix it. 
-</p>
-
 = Details =
 
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+PHP API for openmeetings platforms 
+
+
+to use this library in your Zend Framework application  drop the Zend folder in your include path. 
+this package depends on Zend_Soap_Client package. if you want to use it without Zend Framework copy Zend_Soap_Client package from any Zend Frame work Library folder and drop it inside your library folder - I'll explain that in more details later. 
+download on GitHub : https://github.com/mjebrini/openmeetingsapi
