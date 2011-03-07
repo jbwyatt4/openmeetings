@@ -1,6 +1,13 @@
 #summary Release Notes
 #labels Featured
 
+== Major changes in Version 1.6.2 (released on Monday 07.03.2010) ==
+
+  * Fix for Mysql 5.5
+  * Update of persistance Library to Hibernate 3.6.1
+  * Update Mysql JDBC Driver to MySQL JConnector 1.5.15
+  * Rename field *comment* as it seems to be a reserved word in Oracle
+
 == Major changes in Version 1.6.1 (released on Sunday 27.02.2010) ==
 
   * Fix no timezone default selection bug in invitations
