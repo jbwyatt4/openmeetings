@@ -1,0 +1,3 @@
+#summary Integration into Sakai
+
+For further information please visit:https://groups.google.com/forum/#!topic/openmeetings-user/QhlFmB9QaHc
