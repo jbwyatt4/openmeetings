@@ -8,6 +8,7 @@ http://i4demo.com/openmeetings/builds/<br/>
 
 == Run, Develop, Test, Debug all in Eclipse ==
 
+If you need just to change 3 lines of code then your probably better switch to [http://code.google.com/p/openmeetings/wiki/BuildSourceNew#How_to_build_a_distribution How to build a distribution] instead of the hole process to edit the code in Eclipse.
 To develop or build !OpenMeetings you download the Project as regular Web-Project.
 You need the Subclipse Plugin for Eclipse, a database and a Tomcat Server installed on your system to test and debug the Code.
 
