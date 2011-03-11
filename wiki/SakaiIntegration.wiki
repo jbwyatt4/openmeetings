@@ -1,3 +1,49 @@
 #summary Integration into Sakai
 
-For further information please visit:https://groups.google.com/forum/#!topic/openmeetings-user/QhlFmB9QaHc
+In 2010, [http://www.samoo.es Samoo company] has developed a plugin that integrates Sakai LMS and OpenMeetings.
+
+The plugin was developed for some Spanish Universities that use Sakai and belongs to [https://confluence.sakaiproject.org/display/SPANISH/S2G+-+Spanish+Sakai+Group "Spanish Sakai Universities"] group:
+
+   * [http://www.udl.es/ Universitat de Lleida ]
+   * [http://www.upv.es/ Universidad Politécnica de Valencia ]
+   * [http://www.um.es/ Universidad de Murcia]
+   * [http://www.unavarra.es/ Universidad Pública de Navarra]
+   * [http://www.ucam.edu/ Universidad Católica San Antonio de Murcia]
+
+The plugin contains the following features:
+   * Create videoconference rooms through Sakai:
+      # Integrated with calendar
+      # Integrated with announcements
+      # Sends an email to all site participants
+      # Rooms restricted to site groups
+      # Configurable room type
+
+   * Future requirements
+      # Publish room recordings to students
+      # Room reservation
+
+We need the authorization of Spanish Universities to release the code but you can test the integration in Samoo demo [server http://demo.samoo.es] 
+
+We understand that the demo is in Spanish so i made a little tutorial to enter with a demo account:
+
+1-Click in the square to log in as Diego:
+
+http://demo.samoo.es/access/content/public/Imagenes%20publicas/Enter.jpg
+
+2-Click in the square to select the course:
+
+http://demo.samoo.es/access/content/public/Imagenes%20publicas/SelectCourse.jpg
+
+3-Click in the square to select the videoconference tool:
+
+http://demo.samoo.es/access/content/public/Imagenes%20publicas/SelectTool.jpg
+
+4-Test the integration:
+
+http://demo.samoo.es/access/content/public/Imagenes%20publicas/TestIntegration.jpg
+
+
+
+You can also change the language to English in Sakai's preferences.
+
+More info at miguel"dot"carro"at"samoo"dot"es, you know substitute the chars:D
