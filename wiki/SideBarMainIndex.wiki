@@ -15,6 +15,7 @@
       * [OpenMeetingsPaypalIntegration Paypal and Invocing Integration]
       * [JoomlaIntegration Joomla Integration]
       * [StudIPIntegration StudIP Integration]
+      * [SakaiIntegration Sakai Integration]
     * Integration API
       * [DirectLoginSoapGeneralFlow Single Sign On Flow/Graph]
       * [SoapMethods Index of SOAP API Methods]
