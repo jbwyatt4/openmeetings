@@ -23,6 +23,7 @@
       * [SoapSamples Some example implemenations and classes]
       * [InstantCommunication Using OpenMeetings as instant communication server.]
       * [MethodGateway Method Gateway (deprecated)]
+    * [LdapADSINTegration LDAP and ADS]
   * Developer-Documentation
     * [CodingGuidelines Client-Side Coding Guidelines]
     * [SessionVariables Documentation how Session-Variables are handled]
