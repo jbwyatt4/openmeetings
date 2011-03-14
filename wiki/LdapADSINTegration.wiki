@@ -1,4 +1,4 @@
-#summary About the OpenMeetings LdapIntegration
+#summary About the OpenMeetings Ldap and Active Directory Integration
 
 In $RED5_HOME/webapps/openmeetings/conf
 
