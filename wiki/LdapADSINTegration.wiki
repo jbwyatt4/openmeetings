@@ -11,5 +11,5 @@ To activate any of those configurations you have to login into !OpenMeetings, go
 
 You can configure multiple domains or different user-paths in the Administration of !OpenMeetings.
 
-You may find a lot of discussions about that topic in the mailing list:
+You may find a lot of discussions about that topic in the mailing list:<br/>
 [https://groups.google.com/forum/#!searchin/openmeetings-user/LDAP https://groups.google.com/forum/#!searchin/openmeetings-user/LDAP]
