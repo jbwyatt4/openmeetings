@@ -20,7 +20,7 @@
       * [DirectLoginSoapGeneralFlow Single Sign On Flow/Graph]
       * [SoapMethods Index of SOAP API Methods]
       * [ZendIntegration Zend Integration]
-      * [SoapSamples Some example implemenations and classes]
+      * [SoapSamples ASP SOAP Sample]
       * [InstantCommunication Using OpenMeetings as instant communication server.]
       * [MethodGateway Method Gateway (deprecated)]
     * [LdapADSINTegration LDAP and ADS]
