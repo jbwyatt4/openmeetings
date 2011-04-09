@@ -6,6 +6,7 @@ To update to future versions or migrate see UpdateOpenMeetings, for payed servic
 == VMWare, Debian, Links, Changelog  ==
 
   * [ChangeLog ChangeLog]
+  * [http://meetingslive.sourceforge.net/ Ubuntu Live DVD] http://meetingslive.sourceforge.net/
   * [InstallationCentOS5 Installation on CentOS 5]
   * [OpenmeetingsEnUbuntu Instalar Openmeetings en Ubuntu 10.04 (Spanish)]
   * [http://i4demo.com/openmeetings/builds/vmware/openmeetings_1.0_RC1.zip VMWare Image Version 1.0 RC1]
