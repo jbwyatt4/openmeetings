@@ -7,7 +7,7 @@ The nature of those Directory Servers are that they are individual for every org
 
 To activate any of those configurations you have to login into !OpenMeetings, goto Administration > Ldap.
 
-<<Screen>>
+http://openmeetings.googlecode.com/svn/docs/ldap_screen.png
 
 You can configure multiple domains or different user-paths in the Administration of !OpenMeetings.
 
