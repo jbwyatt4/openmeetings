@@ -75,6 +75,7 @@ Right click on the project ROOT and goto > Properties (bottom)<br/>
 In the dialog goto Build settings and remove if there is a red-marked Library and fix it like in the screen<br/>
 http://openmeetings.googlecode.com/svn/docs/buildFromSource/deploy_4_1.png
 
+You may not be able to build the whole project at once because of some jar conflicts. By adding apache-mina.jar it is possible to have only two errors in the screen sharing implmentation. This is sufficient to deploy the application.
 
 2) Open the Dialog View *Server* in Eclipse and right click inside, choose ADD > New from the context menu<br/>
 http://openmeetings.googlecode.com/svn/docs/buildFromSource/deploy_1.png
