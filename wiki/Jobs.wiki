@@ -19,8 +19,8 @@
   * Jai Gupta, contact: http://www.jaigupta.com,
   I also have 3 year experience in e-learning including 2 year experience on Moodle.
 
-  * [http://www.dataved.ru/2009/12/blog-post_11.html dataved.ru], feel free to leave a comment, and we call you back. We provide installation and tuning of Openmeetings, integration with your CRM, CMS and domain controller.<br/>
-Мы предлагаем техническую поддержку на русском языке, включающую установку продукта и интеграцию с имеющимися службами коллективной работы. Оставьте Ваш адрес на [http://www.dataved.ru/2009/12/blog-post_11.html нашем сайте], и мы Вам перезвоним.
+  * [http://www.dataved.ru/2009/12/blog-post_11.html dataved.ru], feel free to leave a comment, and we call you back. We provide installation and tuning of Openmeetings, integration with your CRM, CMS and domain controller.
+  Мы предлагаем техническую поддержку на русском языке, включающую   установку продукта и интеграцию с имеющимися службами коллективной работы. Оставьте Ваш адрес на [http://www.dataved.ru/2009/12/blog-post_11.html нашем сайте], и мы Вам перезвоним.
   
  * Oliver Becherer<br/><br/> Installation, Integration, Modification and Customization of OpenMeetings<br/>mailto:ich@oliver-becherer.name<br/>skype:smoeker
 
