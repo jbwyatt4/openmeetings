@@ -77,6 +77,8 @@ http://openmeetings.googlecode.com/svn/docs/buildFromSource/deploy_4_1.png
 
 You may not be able to build the whole project at once because of some jar conflicts. By adding apache-mina.jar it is possible to have only two errors in the screen sharing implmentation. This is sufficient to deploy the application.
 
+http://lh5.googleusercontent.com/_aUeHSbJneFc/TatU8jL7tGI/AAAAAAAADOk/j1bTBg83bxk/s800/mina.png
+
 2) Open the Dialog View *Server* in Eclipse and right click inside, choose ADD > New from the context menu<br/>
 http://openmeetings.googlecode.com/svn/docs/buildFromSource/deploy_1.png
 
