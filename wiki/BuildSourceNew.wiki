@@ -1,12 +1,29 @@
 #labels Featured
 #sidebar SideBarBuildSource
 
-== Nightly Builds ==
+= How to build a distribution =
 
-Nightly builds of !OpenMeetings (already embed into Red5) are available at: <br/>
-http://i4demo.com/openmeetings/builds/<br/>
+Run the command:
+{{{
+ant -f build_red5webapp.xml dist
+}}}
 
-== Run, Develop, Test, Debug all in Eclipse ==
+There is no need to compile the client additionally! The ant task does it all! You will find a directory *dist* that contains !OpenMeetings and a red5-server.
+
+To compile the client you can also use ant:
+{{{
+ant -f build_red5webapp.xml dist                      # compiles a complete package into the folder dist
+ant -f build_red5webapp.xml compile.laszlo.main       # compiles the client into main.swf8.swf 
+ant -f build_red5webapp.xml compile.laszlo.main.debug # compiles the debug-client into maindebug.swf8.swf
+}}}
+
+To compile just the openmeetings JAR file:
+{{{
+ant -f build_openmeetings_jar.xml
+}}}
+
+
+= Run, Develop, Test, Debug all in Eclipse =
 
 To develop or build !OpenMeetings you download the Project as regular Web-Project.
 You need the Subclipse Plugin for Eclipse, a database and a Tomcat Server installed on your system to test and debug the Code.
@@ -130,25 +147,9 @@ _It is recommended to deploy !OpenMeetings in the standalone version_
 Note: The Project is called ROOT. You can only have ONE Root project by Application Server. We need to to that as its required for supporting RTMPT in RED5.
 So the !OpenMeetings will automatically become your Context Root in Tomcat (or whatever Java Application Server)
 
-= How to build a distribution =
-
-Run the command: ant -f build_red5webapp.xml dist
-
-There is no need to compile the client additionally! the ant task does it all!
-You will find a directory *dist* that contains !OpenMeetings and a red5-server.
-
-to compile the client you can also use ant:<br/>
-ant -f build_red5webapp.xml dist (compiles a complete package into the folder dist)<br/>
-ant -f build_red5webapp.xml compile.laszlo.main (compiles the client into main.swf8.swf)<br/>
-ant -f build_red5webapp.xml compile.laszlo.main.debug (compiles the debug-client into maindebug.swf8.swf)<br/>
-<br/>
-to compile just the openmeetings JAR file:<br/>
-ant -f build_openmeetings_jar.xml<br/>
-
 = Links =
 
   * Getting Started with !OpenLaszlo?, checkout [http://www.openlaszlo.org/lps4.2/laszlo-explorer/index.jsp?lzr=swf8 Laszlo-in-10-Minutes] and the [http://www.openlaszlo.org/lps4.2/docs/ Application Developer's Guide] or try the  [http://www.openlaszlo.org/getstarted ScreenCast]
-
   * [http://code.google.com/p/openmeetings/source/browse browse SVN source]
   * [http://code.google.com/p/openmeetings/source/list SVN change history]
   * [BuildSources old Instructions]
