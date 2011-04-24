@@ -3,6 +3,11 @@
 
 = How to Build a Distribution =
 
+Get the source:
+{{{
+svn checkout http://openmeetings.googlecode.com/svn/trunk/singlewebapp/
+}}}
+
 Run the command:
 {{{
 ant -f build_red5webapp.xml dist
