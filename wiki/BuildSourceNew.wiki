@@ -1,7 +1,7 @@
 #labels Featured
 #sidebar SideBarBuildSource
 
-= How to build a distribution =
+= How to Build a Distribution =
 
 Run the command:
 {{{
@@ -136,7 +136,7 @@ Debug-Version: http://localhost:8080/openmeetings/maindebug.lzx?lzproxied=solo&l
 Normal-Version: http://localhost:8080/openmeetings/main.lzx?lzproxied=solo&lzr=swf8<br/>
 <br/>
 
-= How to create .war =
+= How to Create .war =
 
 _It is recommended to deploy !OpenMeetings in the standalone version_
 
