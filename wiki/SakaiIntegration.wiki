@@ -1,5 +1,5 @@
 #summary Integration into Sakai
-
+==Introduction==
 In 2010, [http://www.samoo.es Samoo company] has developed a plugin that integrates Sakai LMS and OpenMeetings.
 
 The plugin was developed for some Spanish Universities that use Sakai and belongs to [https://confluence.sakaiproject.org/display/SPANISH/S2G+-+Spanish+Sakai+Group "Spanish Sakai Universities"] group:
@@ -10,6 +10,7 @@ The plugin was developed for some Spanish Universities that use Sakai and belong
    * [http://www.unavarra.es/ Universidad Pública de Navarra]
    * [http://www.ucam.edu/ Universidad Católica San Antonio de Murcia]
 
+==Features==
 The plugin contains the following features:
    * Create videoconference rooms through Sakai:
       # Integrated with calendar
@@ -22,12 +23,15 @@ The plugin contains the following features:
       # Publish room recordings to students
       # Room reservation
 
+==Source==
 You can download and build the source code [https://source.sakaiproject.org/contrib/samoo/adobeconnectpro-openmeetings-integration/trunk/ here]
 
+==Installation and documentation==
 The documentation resides in the [https://confluence.sakaiproject.org/display/OPENMTG/Home Sakai confluence space]
 
 More info at miguel "dot" carro "at" samoo "dot" es :D
 
+==Test the integration==
 We understand that the demo is in Spanish so i made a little tutorial to enter with a demo account:
 
 1-Click in the square to log in as Diego:
