@@ -1,7 +1,9 @@
 #summary Moodle Plugin Description
 #labels Featured
 
-= Demo =
+<wiki:toc max_depth="1" />
+
+== Demo ==
 
   * http://www.openmeetings.de:8090/moodle/ (_updated at 07.02.2010 to r3087_)
   _you don't need to register to get into this Course_ 
@@ -9,7 +11,7 @@
 Demo (no Audio in this Video)<br/>
 <wiki:video url="http://www.youtube.com/watch?v=pPgv7zkPXAk"/>
 
-= URLs =
+== URLs ==
 
   * Download see http://code.google.com/p/openmeetings/downloads/list
   * [http://code.google.com/p/openmeetings/wiki/MoodlePlugins#Technical-Review Technical-Review]
@@ -50,19 +52,22 @@ Future Features:
   * Advanced Error Handlers
   * Add Recordings of Meetings to Course-Page
 
-= Technical-Review =
+== Technical-Review ==
 
   * The Plugins are build using the SoapMethods.
   * You can also use these rooms directly from inside !OpenMeetings.
   * The nusoap-php-library is NOT the original one. It is modified in the the Serialization of Param (The SOAP Body is for some reason I don't understand empty if you connect to a Axis2-Method on a Linux Host)
 
-= Source-Locations =
+== Source-Locations ==
 
   * The Sources of the the Conference-Plugin can be found [http://openmeetings.googlecode.com/svn/trunk/plugins/openmeetings_moodleplugin/openmeetings/ here]
   * The Sources of the Audience-Plugin can be found [http://openmeetings.googlecode.com/svn/trunk/plugins/openmeetings_moodleplugin/openmeetingsaudience/ here]
 
-= Debug, Problems and Some Tipps =
+== Debug, Problems and Some Tipps ==
 
 If you encounter problems with the Plugin try to:
   * Enable Debug in Moodle 
   * Goto the File $MOODLE_HOME/mod/openmeetings/videoconference.php in Line 38 uncomment the echo, sothat the URL to the OpenMeetings Room will be printed in the Browser. Check that URL manually, it should work to also use that link and copy it directly into the Browsers bar.
+
+If you have this error *wsdl error: Getting http://<public-ip>:5080/openmeetings/services/UserService?wsdl - HTTP ERROR: cURL ERROR: 7: couldn't connect to host
+url: http://<public-ip>:5080/openmeetings/services/UserService?wsdl* then it means that your moodle server is not able to connect to the openmeetings server. Try to login via ssh to the moodle server and ping the openmeetings host.
