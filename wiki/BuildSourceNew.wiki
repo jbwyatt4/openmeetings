@@ -10,14 +10,14 @@ svn checkout http://openmeetings.googlecode.com/svn/trunk/singlewebapp/
 
 Run the command:
 {{{
-ant dist
+ant
 }}}
 
 There is no need to compile the client additionally! The ant task does it all! You will find a directory *dist* that contains !OpenMeetings and a red5-server.
 
 To compile the client you can also use ant:
 {{{
-ant dist                      # compiles a complete package into the folder dist
+ant                           # compiles a complete package into the folder dist
 ant compile.laszlo.main       # compiles the client into main.swf8.swf 
 ant compile.laszlo.main.debug # compiles the debug-client into maindebug.swf8.swf
 }}}
