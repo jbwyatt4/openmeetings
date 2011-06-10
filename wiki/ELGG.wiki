@@ -1,0 +1,5 @@
+#summary About the ELGG Plugin for OpenMeetings
+
+see: http://community.elgg.org/pg/plugins/release/715070/developer/krasi/openmeetings
+
+Contact: krasi.zlatev@activesolutions.bg
