@@ -1,6 +1,12 @@
 #labels Featured
 #sidebar SideBarBuildSource
 
+= Nightly Builds = 
+
+You can find Nightly Builds of the software at: http://i4demo.com/openmeetings/builds/
+
+The current status of the Nightly Builds can be seen here: http://i4demo.com/hudson/job/openmeetings-trunk/
+
 = How to Build a Distribution =
 
 Get the source:
