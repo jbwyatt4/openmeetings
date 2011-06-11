@@ -17,6 +17,7 @@
       * [SakaiIntegration Sakai Integration]
       * [StudIPIntegration StudIP Integration]
       * [WordpressIntegration Wordpress Integration]
+      * [ELGG ELGG Plugin]
     * Integration API
       * [DirectLoginSoapGeneralFlow Single Sign On Flow/Graph]
       * [SoapMethods Index of SOAP API Methods]
