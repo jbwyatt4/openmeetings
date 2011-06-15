@@ -8,7 +8,7 @@
   * Private and Public Drive in File-Explorer. The File-Explorer has two different views, one is the *Private Drive* and the other the *Public Drive*. The Private Drive always contains the same files. Those files are only visible to the user currently loggedin. The Public Drive is bound not to the user, but to the conference room. All users in the conference room have access to the Public Drive.
   * Save whiteboards. You can save each whiteboard instance as a file. The file is located in the File-Explorer and can be drag and drop'ed and organized like any other document, image or folder.
   * New User-Level: SOAP/Web-Service only. For security reasons there is a new user-level. You can now create user-accounts that have only the ability to access via SOAP. In former versions you always need an admin account.
-  * MyRooms section. Each user has now by default 2 personal rooms that are always accessible exclusive for that user. There are buttons to enter those rooms from the dashboard
+  * *!MyRooms* section. Each user has now by default 2 personal rooms that are always accessible exclusive for that user. There are buttons to enter those rooms from the dashboard
   * VoIP-Integration. Together with our Finish partner and the Open Source Department of Kvarken region we have done a VoIP integration by using an applet for the audio part. For further information see VoIPAndSIP
 
 == Major changes in Version 1.6.2 (released on Monday 07.03.2011) ==
