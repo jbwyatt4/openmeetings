@@ -1,6 +1,11 @@
 #summary Release Notes
 #labels Featured
 
+== Major changes in Moodle Mod 1.2 (released on Sunday 19.06.2011) ==
+
+  * Fix languages 
+  * Update the record in Moodle does update the record in !OpenMeetings
+
 == Major changes in Version 1.7 (released on Wednesday 15.06.2011) ==
 
   * Multi-Whiteboard, you can add new whiteboard instances, each whiteboard can have the full range of tools and documents inside.
