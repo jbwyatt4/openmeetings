@@ -299,12 +299,16 @@ class openmeetings_gateway {
 			'roomtypes_id' => $openmeetings->type,
 			'comment' => 'Created by SOAP-Gateway for Moodle Platform',
 			'numberOfPartizipants' => $openmeetings->max_user,
-			'ispublic' => false,
-			'appointment' => false, 
-			'isDemoRoom' => false, 
+			'ispublic' => 0,
+			'appointment' => 0, 
+			'isDemoRoom' => 0, 
 			'demoTime' => 0, 
 			'isModeratedRoom' => $isModeratedRoom
 		);
+		
+		//print_r($params);
+		//exit();
+		
 		$result = $client_roomService->call('updateRoomWithModeration',$params);
 		if ($client_roomService->fault) {
 			echo '<h2>Fault (Expect - The request contains an invalid SOAP body)</h2><pre>'; print_r($result); echo '</pre>';
