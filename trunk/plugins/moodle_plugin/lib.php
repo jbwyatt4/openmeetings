@@ -40,7 +40,7 @@ function openmeetings_add_instance($openmeetings) {
 	$openmeetings_gateway = new openmeetings_gateway();
 	if ($openmeetings_gateway->openmeetings_loginuser()) {
 		
-		//Roomtype 0 means its and recording, we don't need to create a recording for that
+		//Roomtype 0 means its and recording, we don't need to create a room for that
 		if ($openmeetings->type != 0) {
 			$openmeetings->room_id = $openmeetings_gateway->openmeetings_createRoomWithModAndType($openmeetings);
 		}
@@ -60,8 +60,20 @@ function openmeetings_update_instance($openmeetings) {
     $openmeetings->timemodified = time();
     $openmeetings->id = $openmeetings->instance;
 
-    # May have to add extra stuff in here #
+	$openmeetings_gateway = new openmeetings_gateway();
+	if ($openmeetings_gateway->openmeetings_loginuser()) {
+		
+		//Roomtype 0 means its and recording, we don't need to update a room for that
+		if ($openmeetings->type != 0) {
+			$openmeetings->room_id = $openmeetings_gateway->openmeetings_updateRoomWithModeration($openmeetings);
+		}
+		
+	} else {
+		echo "Could not login User to OpenMeetings, check your OpenMeetings Module Configuration";
+		exit();
+	}
 
+    # May have to add extra stuff in here #
     return $DB->update_record("openmeetings", $openmeetings);
 }
 
@@ -74,6 +86,20 @@ function openmeetings_delete_instance($id) {
     }
 
     $result = true;
+    
+    $openmeetings_gateway = new openmeetings_gateway();
+	if ($openmeetings_gateway->openmeetings_loginuser()) {
+		
+		//Roomtype 0 means its and recording, we don't need to update a room for that
+		if ($openmeetings->type != 0) {
+			$openmeetings->room_id = $openmeetings_gateway->openmeetings_deleteRoom($openmeetings);
+		}
+		
+	} else {
+		echo "Could not login User to OpenMeetings, check your OpenMeetings Module Configuration";
+		exit();
+	}
+    
 
     # Delete any dependent records here #
 
