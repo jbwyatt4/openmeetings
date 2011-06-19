@@ -243,7 +243,7 @@ class openmeetings_gateway {
 			'roomtypes_id' => $openmeetings->type,
 			'comment' => 'Created by SOAP-Gateway for Moodle Platform',
 			'numberOfPartizipants' => $openmeetings->max_user,
-			'ispublic' => true,
+			'ispublic' => false,
 			'appointment' => false, 
 			'isDemoRoom' => false, 
 			'demoTime' => 0, 
@@ -251,6 +251,107 @@ class openmeetings_gateway {
 			'externalRoomType' => 'moodle'
 		);
 		$result = $client_roomService->call('addRoomWithModerationAndExternalType',$params);
+		if ($client_roomService->fault) {
+			echo '<h2>Fault (Expect - The request contains an invalid SOAP body)</h2><pre>'; print_r($result); echo '</pre>';
+		} else {
+			$err = $client_roomService->getError();
+			if ($err) {
+				echo '<h2>Error</h2><pre>' . $err . '</pre>';
+			} else {
+				//echo '<h2>Result</h2><pre>'; print_r($result["return"]); echo '</pre>';
+				return $result["return"];
+			}
+		}   
+		return -1;
+	}
+	
+	function openmeetings_updateRoomWithModeration($openmeetings) {
+		global $USER, $CFG;
+	
+		//		echo $CFG->openmeetings_red5host."<br/>";
+		//		echo $CFG->openmeetings_red5port."<br/>";	
+		//		foreach ($CFG as $key => $value){
+		//    		echo "KEY: ".$key." Value: ".$value."<br/>";
+		//    	}
+    	$course_name = 'MOODLE_COURSE_ID_'.$openmeetings->course.'_NAME_'.$openmeetings->name;
+    	//echo "CourseName: ".$course_name."<br/>";	
+		
+		//echo $client_userService."<br/>";
+	    
+	 	$client_roomService = new nusoap_client("http://".$CFG->openmeetings_red5host.":".$CFG->openmeetings_red5port."/openmeetings/services/RoomService?wsdl", true);
+		
+		$err = $client_roomService->getError();
+		if ($err) {
+			echo '<h2>Constructor error</h2><pre>' . $err . '</pre>';
+			echo '<h2>Debug</h2><pre>' . htmlspecialchars($client->getDebug(), ENT_QUOTES) . '</pre>';
+			exit();
+		}  
+		
+		$isModeratedRoom = false;
+		if ($openmeetings->is_moderated_room == 1) {
+			$isModeratedRoom = true;
+		}
+		
+		$params = array(
+			'SID' => $this->session_id,
+			'room_id' => $openmeetings->room_id,
+			'name' => $course_name,
+			'roomtypes_id' => $openmeetings->type,
+			'comment' => 'Created by SOAP-Gateway for Moodle Platform',
+			'numberOfPartizipants' => $openmeetings->max_user,
+			'ispublic' => false,
+			'appointment' => false, 
+			'isDemoRoom' => false, 
+			'demoTime' => 0, 
+			'isModeratedRoom' => $isModeratedRoom
+		);
+		$result = $client_roomService->call('updateRoomWithModeration',$params);
+		if ($client_roomService->fault) {
+			echo '<h2>Fault (Expect - The request contains an invalid SOAP body)</h2><pre>'; print_r($result); echo '</pre>';
+		} else {
+			$err = $client_roomService->getError();
+			if ($err) {
+				echo '<h2>Error</h2><pre>' . $err . '</pre>';
+			} else {
+				//echo '<h2>Result</h2><pre>'; print_r($result["return"]); echo '</pre>';
+				return $result["return"];
+			}
+		}   
+		return -1;
+	}
+	
+	
+	function openmeetings_deleteRoom($openmeetings) {
+		global $USER, $CFG;
+	
+		//		echo $CFG->openmeetings_red5host."<br/>";
+		//		echo $CFG->openmeetings_red5port."<br/>";	
+		//		foreach ($CFG as $key => $value){
+		//    		echo "KEY: ".$key." Value: ".$value."<br/>";
+		//    	}
+    	//echo "CourseName: ".$course_name."<br/>";	
+		
+		//echo $client_userService."<br/>";
+	    
+	 	$client_roomService = new nusoap_client("http://".$CFG->openmeetings_red5host.":".$CFG->openmeetings_red5port."/openmeetings/services/RoomService?wsdl", true);
+		
+		$err = $client_roomService->getError();
+		if ($err) {
+			echo '<h2>Constructor error</h2><pre>' . $err . '</pre>';
+			echo '<h2>Debug</h2><pre>' . htmlspecialchars($client->getDebug(), ENT_QUOTES) . '</pre>';
+			exit();
+		}  
+		
+		$isModeratedRoom = false;
+		if ($openmeetings->is_moderated_room == 1) {
+			$isModeratedRoom = true;
+		}
+		
+		$params = array(
+			'SID' => $this->session_id,
+			'room_id' => $openmeetings->room_id
+		);
+		$result = $client_roomService->call('deleteRoom',$params);
 		if ($client_roomService->fault) {
 			echo '<h2>Fault (Expect - The request contains an invalid SOAP body)</h2><pre>'; print_r($result); echo '</pre>';
 		} else {
