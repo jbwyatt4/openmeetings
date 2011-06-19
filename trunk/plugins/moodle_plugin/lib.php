@@ -57,6 +57,7 @@ function openmeetings_add_instance($openmeetings) {
 
 function openmeetings_update_instance($openmeetings) {
 	global $DB;
+	
     $openmeetings->timemodified = time();
     $openmeetings->id = $openmeetings->instance;
 
