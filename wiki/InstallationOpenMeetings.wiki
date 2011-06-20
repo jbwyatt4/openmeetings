@@ -74,8 +74,9 @@ To update to future versions or migrate see UpdateOpenMeetings, for payed servic
 
 After Running the Installer all basics are installed. Now login and go to the Meeting-Rooms and check all features. You possibly will have some difficulties uploading files. Check if !OpenOffice is really running, swftool, !ImageMagick (including !GhostScript, FFMpeg) is available on  your System-Path (or your customize the path in the Configuration).
 
-== Debian, Links, Changelog  ==
+== Debian, Links, Changelog, VoIP  ==
 
+  * see also VoipAndSIP
   * [ChangeLog ChangeLog]
   * [MeetingsLive Ubuntu Live DVD] MeetingsLive http://meetingslive.sourceforge.net/
   * [InstallationCentOS5 Installation on CentOS 5]
