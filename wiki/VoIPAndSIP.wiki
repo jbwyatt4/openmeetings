@@ -1,4 +1,5 @@
 #summary about the VoIP and SIP Integration
+#labels Featured
 
 Together with our Finish partner and the Open Source Department of Kvarken region we have done a VoIP integration by using an applet for the audio part.
 
