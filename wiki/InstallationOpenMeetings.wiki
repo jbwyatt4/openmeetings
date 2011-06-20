@@ -3,19 +3,9 @@
 
 To update to future versions or migrate see UpdateOpenMeetings, for payed services see [http://code.google.com/p/openmeetings/wiki/Jobs Hire a Developer]
 
-== VMWare, Debian, Links, Changelog  ==
+== VMWare ==
 
-  * [ChangeLog ChangeLog]
-  * [MeetingsLive Ubuntu Live DVD] MeetingsLive http://meetingslive.sourceforge.net/
-  * [InstallationCentOS5 Installation on CentOS 5]
-  * [OpenmeetingsEnUbuntu Instalar Openmeetings en Ubuntu 10.04 (Spanish)]
-  * [http://i4demo.com/openmeetings/builds/vmware/openmeetings_1.0_RC1.zip VMWare Image Version 1.0 RC1]
-  * [http://liberamemoria.blogspot.com/2009/02/instalando-openmeetings-07-rc-2-en.html Espanol Version for Debian Installation]
-  * [http://aitinet.com/blog/wp-content/uploads/2009/08/TUTORIAL-PARA-INSTALACAO-DO-RED5-E-OPENMEETINGS-NO-LINUX-DEBIAN-LENNY-51.pdf Portuguese Version for Debian Installation of 0.9 RC1] 
-  * [http://marc-muehlfeld.de/openmeetings/ CentOS Installation Tutorial von Marc Mühlfeld]
-  * [http://code.google.com/p/openmeetings/wiki/Automatic_script_installation_for_Debian Automatic script installation for Debian]
-  * InstallationDebian
-  * [qosTips]
+  * See http://i4demo.com/openmeetings/builds/vmware/
   * [VMWareImageDebian051]
   * [VMWareImageMoodlePackOM052]
   * [VMImageRev2056]
@@ -83,6 +73,19 @@ To update to future versions or migrate see UpdateOpenMeetings, for payed servic
   # go to the Installer by accessing it via browser: http://localhost:5080/openmeetings/install and follow the instructions 
 
 After Running the Installer all basics are installed. Now login and go to the Meeting-Rooms and check all features. You possibly will have some difficulties uploading files. Check if !OpenOffice is really running, swftool, !ImageMagick (including !GhostScript, FFMpeg) is available on  your System-Path (or your customize the path in the Configuration).
+
+== Debian, Links, Changelog  ==
+
+  * [ChangeLog ChangeLog]
+  * [MeetingsLive Ubuntu Live DVD] MeetingsLive http://meetingslive.sourceforge.net/
+  * [InstallationCentOS5 Installation on CentOS 5]
+  * [OpenmeetingsEnUbuntu Instalar Openmeetings en Ubuntu 10.04 (Spanish)]
+  * [http://liberamemoria.blogspot.com/2009/02/instalando-openmeetings-07-rc-2-en.html Espanol Version for Debian Installation]
+  * [http://aitinet.com/blog/wp-content/uploads/2009/08/TUTORIAL-PARA-INSTALACAO-DO-RED5-E-OPENMEETINGS-NO-LINUX-DEBIAN-LENNY-51.pdf Portuguese Version for Debian Installation of 0.9 RC1] 
+  * [http://marc-muehlfeld.de/openmeetings/ CentOS Installation Tutorial von Marc Mühlfeld]
+  * [http://code.google.com/p/openmeetings/wiki/Automatic_script_installation_for_Debian Automatic script installation for Debian]
+  * InstallationDebian
+  * [qosTips]
 
 == Hidden and experimental features ==
 
