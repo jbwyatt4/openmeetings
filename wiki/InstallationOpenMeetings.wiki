@@ -6,6 +6,7 @@ To update to future versions or migrate see UpdateOpenMeetings, for payed servic
 == VMWare ==
 
   * See http://i4demo.com/openmeetings/builds/vmware/
+  * VMWare 1.6.1 [http://openstudio.no-ip.info/2011/01/openmeetings-1-6-rc1-vmware-appliance-using-ubuntu-server-10-04-lts/ blog-entry]
   * [VMWareImageDebian051]
   * [VMWareImageMoodlePackOM052]
   * [VMImageRev2056]
