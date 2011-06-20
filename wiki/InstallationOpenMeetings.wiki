@@ -76,7 +76,7 @@ After Running the Installer all basics are installed. Now login and go to the Me
 
 == Debian, Links, Changelog, VoIP  ==
 
-  * see also VoipAndSIP
+  * for VoIP and SIP Integration see also [VoipAndSIP]
   * [ChangeLog ChangeLog]
   * [MeetingsLive Ubuntu Live DVD] MeetingsLive http://meetingslive.sourceforge.net/
   * [InstallationCentOS5 Installation on CentOS 5]
