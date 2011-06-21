@@ -6,6 +6,8 @@ Current Version !OpenMeetings 0.7 RC1 to 1.7 : InstallationOpenMeetings, UpdateO
 
 Need for a developer or Consultant? [http://code.google.com/p/openmeetings/wiki/Jobs Hire a Developer]
 
+If you would like to request a new feature please use the [http://groups.google.com/d/forum/openmeetings-user mailing list/forums]
+
 == !OpenMeetings Demo Videos ==
 
   * Watch some [http://www.youtube.com/user/sebastwagner Demo Videos on Youtube] 
