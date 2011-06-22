@@ -27,6 +27,7 @@
       * [InstantCommunication Using OpenMeetings as instant communication server.]
       * [MethodGateway Method Gateway (deprecated)]
     * [LdapADSINTegration LDAP and ADS]
+    * [VoIPAndSIP VoIP and SIP Intgration]
   * Developer-Documentation
     * [CodingGuidelines Client-Side Coding Guidelines]
     * [SessionVariables Documentation how Session-Variables are handled]
