@@ -352,6 +352,32 @@ Params:
 || *type* || *name* || *description* ||
 || String || SID || The SID of the User. This SID must be marked as Loggedin ||
 
+--------
+
+==== getRoomCounters ====
+
+
+Method: _public RoomCountBean[] getRoomCounters(String SID, Integer roomId1, Integer roomId2, Integer roomId3, Integer roomId4
+                        , Integer roomId5, Integer roomId6, Integer roomId7, Integer roomId8, Integer roomId9, Integer roomId10)_
+
+Description: Returns the number of users in for the given roomIds
+
+Params:
+|| *type* || *name* || *description* ||
+|| String || SID || The SID of the User. This SID must be marked as Loggedin ||
+|| Integer || roomId1 || roomId 1 ||
+|| Integer || roomId2 || roomId 2 ||
+|| Integer || roomId3 || roomId 3 ||
+|| Integer || roomId4 || roomId 4 ||
+|| Integer || roomId5 || roomId 5 ||
+|| Integer || roomId6 || roomId 6 ||
+|| Integer || roomId7 || roomId 7 ||
+|| Integer || roomId8 || roomId 8 ||
+|| Integer || roomId9 || roomId 9 ||
+|| Integer || roomId10 || roomId 10 ||
+
+--------
+
 ==== getRoomById ====
 
 Method: _public Rooms getRoomById(String SID, long rooms_id)_
