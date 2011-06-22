@@ -300,6 +300,34 @@ Params:
 
 --------
 
+
+==== getFlvRecordingByExternalUserId ====
+
+Method: _public FLVRecordingReturn[] getFlvRecordingByExternalUserId(String SID, String externalUserId)_
+
+Description: Gets a list of flv recordings
+
+Params:
+|| *type* || *name* || *description* ||
+|| String || SID || The SID of the User. This SID must be marked as Loggedin ||
+|| Long || externalUserId || the externalUserId  ||
+
+--------
+
+==== getFlvRecordingByExternalRoomTypeAndCreator ====
+
+Method: _public FLVRecordingReturn[] getFlvRecordingByExternalRoomTypeAndCreator(String SID, String externalRoomType, Long insertedBy)_
+
+Description: Gets a list of flv recordings
+
+Params:
+|| *type* || *name* || *description* ||
+|| String || SID || The SID of the User. This SID must be marked as Loggedin ||
+|| String || externalRoomType || externalRoomType param  ||
+|| Long || insertedBy || the userId that created the recording ||
+
+--------
+
 ==== getRoomsPublic ====
 
 Method: _public RoomsList getRoomsPublic(String SID, Long roomtypes_id)_
