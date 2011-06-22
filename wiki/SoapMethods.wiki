@@ -247,7 +247,7 @@ http://localhost:5080/openmeetings/services/FileService?wsdl
 (http://$RED5_HOST:$RED5_HTTP_HOST/openmeetings/services/FileService?wsdl)
 
 
-==== getListOfFiles ====
+==== getListOfFiles [deprecated] ====
 
 Method: _public !LiberaryObject getListOfFiles(String SID, String moduleName,String parentFolder, Long room_id )_
 
@@ -263,7 +263,7 @@ Params:
 || Long || room_id || the room_id you would like to get the Files ||
 
 
-==== deleteFile ====
+==== deleteFile [deprecated] ====
 
 Method: _public Boolean deleteFile(String SID, String fileName, String moduleName, String parentFolder, Long room_id)_
 
