@@ -285,6 +285,21 @@ Service-Endpoint:
 http://localhost:5080/openmeetings/services/RoomService?wsdl
 (http://$RED5_HOST:$RED5_HTTP_HOST/openmeetings/services/RoomService?wsdl)
 
+
+
+==== deleteFlvRecording ====
+
+Method: _public void deleteFlvRecording(String SID, Long flvRecordingId)_
+
+Description: Deletes a flv recording
+
+Params:
+|| *type* || *name* || *description* ||
+|| String || SID || The SID of the User. This SID must be marked as Loggedin ||
+|| Long || flvRecordingId || the id of the recording  ||
+
+--------
+
 ==== getRoomsPublic ====
 
 Method: _public RoomsList getRoomsPublic(String SID, Long roomtypes_id)_
