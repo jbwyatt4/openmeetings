@@ -272,7 +272,7 @@ Params:
 || String || externalType || the name of the external system ||
 || Long || room_id || the room Id, if the file goes to the private folder of an user, you can set a random number here ||
 || Boolean || isOwner || specify a 1/true AND parentFolderId==-2 to make the file goto the private section ||
-|| String || path || http-path where we can grab the file from, the file has to be accessible from the OpenMeetings server ||
+|| String || path || http-path where we can grab the file from, the file has to be accessible from the !OpenMeetings server ||
 || Long || parentFolderId || specify a parentFolderId==-2 AND isOwner == 1/true AND to make the file goto the private section ||
 || String || fileSystemName || the filename => Important WITH file extension! ||
 
@@ -303,7 +303,7 @@ Params:
 || String || externalType || the name of the external system ||
 || Long || room_id || the room Id, if the file goes to the private folder of an user, you can set a random number here ||
 || Boolean || isOwner || specify a 1/true AND parentFolderId==-2 to make the file goto the private section ||
-|| String || path || http-path where we can grab the file from, the file has to be accessible from the OpenMeetings server ||
+|| String || path || http-path where we can grab the file from, the file has to be accessible from the !OpenMeetings server ||
 || Long || parentFolderId || specify a parentFolderId==-2 AND isOwner == 1/true AND to make the file goto the private section ||
 || String || fileSystemName || the filename => Important WITH file extension! ||
 
