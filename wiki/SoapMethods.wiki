@@ -290,7 +290,7 @@ to upload a file to a room-drive you specify:
   * parentFolderId = 0
 
 to upload a file to a private-drive you specify:
-  * externalUserId, user if of openmeetings user for which we upload the file
+  * internalUserId, user if of openmeetings user for which we upload the file
   * room_id = openmeetings room id
   * isOwner = 1
   * parentFolderId = -2
