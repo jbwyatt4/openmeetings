@@ -249,7 +249,7 @@ http://localhost:5080/openmeetings/services/FileService?wsdl
 
 ==== importFile ====
 
-Method: _public FileImportError[] importFile(String SID, Long externalUserId, Long externalFileId, String externalType, Long room_id, boolean isOwner, String path, Long parentFolderId, String fileSystemName)_
+Method: _public !FileImportError[] importFile(String SID, Long externalUserId, Long externalFileId, String externalType, Long room_id, boolean isOwner, String path, Long parentFolderId, String fileSystemName)_
 
 Description: Import file from external source
 to upload a file to a room-drive you specify:
