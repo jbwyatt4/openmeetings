@@ -276,6 +276,38 @@ Params:
 || Long || parentFolderId || specify a parentFolderId==-2 AND isOwner == 1/true AND to make the file goto the private section ||
 || String || fileSystemName || the filename => Important WITH file extension! ||
 
+
+
+==== importFileByInternalUserId ====
+
+Method: _public !FileImportError[] importFileByInternalUserId(String SID, Long internalUserId, Long externalFileId, String externalType, Long room_id, boolean isOwner, String path, Long parentFolderId, String fileSystemName)_
+
+Description: Import file from external source
+to upload a file to a room-drive you specify:
+  * internalUserId, user if of openmeetings user for which we upload the file
+  * room_id = openmeetings room id
+  * isOwner = 0
+  * parentFolderId = 0
+
+to upload a file to a private-drive you specify:
+  * externalUserId, user if of openmeetings user for which we upload the file
+  * room_id = openmeetings room id
+  * isOwner = 1
+  * parentFolderId = -2
+
+Params:
+|| *type* || *name* || *description* ||
+|| String || SID || The SID of the User. This SID must be marked as Loggedin ||
+|| String || internalUserId || the openmeetings user id => If the file should goto a private section of any user, this number needs to be set ||
+|| Long || externalFileId || the external file-type to identify the file later ||
+|| String || externalType || the name of the external system ||
+|| Long || room_id || the room Id, if the file goes to the private folder of an user, you can set a random number here ||
+|| Boolean || isOwner || specify a 1/true AND parentFolderId==-2 to make the file goto the private section ||
+|| String || path || http-path where we can grab the file from, the file has to be accessible from the OpenMeetings server ||
+|| Long || parentFolderId || specify a parentFolderId==-2 AND isOwner == 1/true AND to make the file goto the private section ||
+|| String || fileSystemName || the filename => Important WITH file extension! ||
+
+
 ==== getListOfFiles (deprecated) ====
 
 Method: _public !LiberaryObject getListOfFiles(String SID, String moduleName,String parentFolder, Long room_id )_
