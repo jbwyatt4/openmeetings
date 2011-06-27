@@ -158,6 +158,25 @@ Params:
 || Long || externalUserId || externalUserId ||
 || String || externalUserType || externalUserType ||
 
+==== deleteUserById ====
+
+Method: _public Long deleteUserById(String SID, Long userId)_
+
+Params:
+|| *type* || *name* || *description* ||
+|| String || SID || The SID from getSession ||
+|| Long || userId || userId ||
+
+==== deleteUserByExternalUserIdAndType ====
+
+Method: _public Long deleteUserByExternalUserIdAndType(String SID, Long externalUserId, String externalUserType)_
+
+Params:
+|| *type* || *name* || *description* ||
+|| String || SID || The SID from getSession ||
+|| Long || externalUserId || externalUserId ||
+|| String || externalUserType || externalUserType ||
+
 ==== setUserObject ====
 
 Method: _public Long setUserObject(String SID, String username, String firstname, String lastname, String profilePictureUrl, String email)_
