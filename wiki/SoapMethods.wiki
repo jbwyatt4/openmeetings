@@ -153,7 +153,6 @@ Params:
 || String || states_id || a valid states_id ||
 || String || town || any town ||
 || String || language_id || the language_id ||
-|| String || baseURL || the baseURL is needed to send the Initial Email correctly to that User, otherwise the Link in the EMail that the new User will reveive is not valid ||
 || String || jNameTimeZone || the name of the timezone for the user ||
 || Long || externalUserId || externalUserId ||
 || String || externalUserType || externalUserType ||
