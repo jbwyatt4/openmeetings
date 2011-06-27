@@ -132,6 +132,32 @@ Params:
 || String || jNameTimeZone || the name of the timezone for the user ||
 
 
+==== addNewUserWithExternalType ====
+
+Method: _public Long addNewUserWithExternalType(String SID, String username, String userpass, String lastname, String firstname, String email, String additionalname, String street, String zip, String fax, long states_id, String town, long language_id, String baseURL, String jNameTimeZone, Long externalUserId, String externalUserType)_
+
+Description: Adds a new Usre like through the Frontend, but also does activates the Account, sends NO email (no matter what you configured) and sets the users external user id and type
+
+Params:
+|| *type* || *name* || *description* ||
+|| String || SID || The SID from getSession ||
+|| String || username || any username ||
+|| String || userpass || any userpass ||
+|| String || lastname || any lastname ||
+|| String || firstname || any firstname ||
+|| String || email || any email ||
+|| String || additionalname || any additionalname ||
+|| String || street || any street ||
+|| String || zip || any zip ||
+|| String || fax || any fax ||
+|| String || states_id || a valid states_id ||
+|| String || town || any town ||
+|| String || language_id || the language_id ||
+|| String || baseURL || the baseURL is needed to send the Initial Email correctly to that User, otherwise the Link in the EMail that the new User will reveive is not valid ||
+|| String || jNameTimeZone || the name of the timezone for the user ||
+|| Long || externalUserId || externalUserId ||
+|| String || externalUserType || externalUserType ||
+
 ==== setUserObject ====
 
 Method: _public Long setUserObject(String SID, String username, String firstname, String lastname, String profilePictureUrl, String email)_
