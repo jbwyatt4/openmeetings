@@ -343,14 +343,13 @@ Method: _public Long addFolderByExternalUserIdAndType(String SID, Long externalU
 Params:
 || *type* || *name* || *description* ||
 || String || SID || The SID of the User. This SID must be marked as Loggedin ||
-|| String || SID || The SID of the User. ||
-|| String || externalUserId || externalUserId ||
+|| Long || externalUserId || externalUserId ||
 || String || externalUserType || externalUserType ||
-|| String || parentFileExplorerItemId || Id of parent folder ||
+|| Long || parentFileExplorerItemId || Id of parent folder ||
 || String || fileName || file or fodler name ||
-|| String || room_id || Room id ||
-|| String || isOwner || isOwner ||
-|| String || externalFilesid || externalFilesid ||
+|| Long || room_id || Room id ||
+|| Boolean || isOwner || isOwner ||
+|| Long || externalFilesid || externalFilesid ||
 || String || externalType || externalType  ||
 
 
@@ -363,15 +362,37 @@ Method: _public Long addFolderByUserId(String SID, Long userId, Long parentFileE
 Params:
 || *type* || *name* || *description* ||
 || String || SID || The SID of the User. This SID must be marked as Loggedin ||
-|| String || SID || The SID of the User. ||
-|| String || userId || userId ||
-|| String || parentFileExplorerItemId || Id of parent folder ||
+|| Long || userId || userId ||
+|| Long || parentFileExplorerItemId || Id of parent folder ||
 || String || fileName || file or fodler name ||
-|| String || room_id || Room id ||
-|| String || isOwner || isOwner ||
-|| String || externalFilesid || externalFilesid ||
+|| Long || room_id || Room id ||
+|| Boolean || isOwner || isOwner ||
+|| Long || externalFilesid || externalFilesid ||
 || String || externalType || externalType  ||
 
+--------------------------
+
+==== deleteFileOrFolderByExternalIdAndType ====
+
+Method: _public Long deleteFileOrFolderByExternalIdAndType(String SID, Long externalFilesid, String externalType)_
+
+Params:
+|| *type* || *name* || *description* ||
+|| String || SID || The SID of the User. This SID must be marked as Loggedin ||
+|| Long || externalFilesid || external files id ||
+|| String || externalType || externalType  ||
+
+
+--------------------------
+
+==== deleteFileOrFolder ====
+
+Method: _public Long deleteFileOrFolder(String SID, Long fileExplorerItemId)_
+
+Params:
+|| *type* || *name* || *description* ||
+|| String || SID || The SID of the User. This SID must be marked as Loggedin ||
+|| Long || fileExplorerItemId || files id ||
 
 --------------------------
 
