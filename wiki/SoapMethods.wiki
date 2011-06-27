@@ -334,6 +334,46 @@ Params:
 || Long || parentFolderId || specify a parentFolderId==-2 AND isOwner == 1/true AND to make the file goto the private section ||
 || String || fileSystemName || the filename => Important WITH file extension! ||
 
+------------------
+
+==== addFolderByExternalUserIdAndType ====
+
+Method: _public Long addFolderByExternalUserIdAndType(String SID, Long externalUserId, String externalUserType, Long parentFileExplorerItemId, String fileName, Long room_id, Boolean isOwner, Long externalFilesid, String externalType)_
+
+Params:
+|| *type* || *name* || *description* ||
+|| String || SID || The SID of the User. This SID must be marked as Loggedin ||
+|| String || SID || The SID of the User. ||
+|| String || externalUserId || externalUserId ||
+|| String || externalUserType || externalUserType ||
+|| String || parentFileExplorerItemId || Id of parent folder ||
+|| String || fileName || file or fodler name ||
+|| String || room_id || Room id ||
+|| String || isOwner || isOwner ||
+|| String || externalFilesid || externalFilesid ||
+|| String || externalType || externalType  ||
+
+
+------------------
+
+==== addFolderByUserId ====
+
+Method: _public Long addFolderByUserId(String SID, Long userId, Long parentFileExplorerItemId, String fileName, Long room_id, Boolean isOwner, Long externalFilesid, String externalType)_
+
+Params:
+|| *type* || *name* || *description* ||
+|| String || SID || The SID of the User. This SID must be marked as Loggedin ||
+|| String || SID || The SID of the User. ||
+|| String || userId || userId ||
+|| String || parentFileExplorerItemId || Id of parent folder ||
+|| String || fileName || file or fodler name ||
+|| String || room_id || Room id ||
+|| String || isOwner || isOwner ||
+|| String || externalFilesid || externalFilesid ||
+|| String || externalType || externalType  ||
+
+
+--------------------------
 
 ==== getListOfFiles (deprecated) ====
 
