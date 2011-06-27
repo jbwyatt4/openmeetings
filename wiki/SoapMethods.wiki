@@ -388,7 +388,6 @@ Params:
 || *type* || *name* || *description* ||
 || String || SID || The SID of the User. This SID must be marked as Loggedin ||
 || Long || externalUserId || externalUserId ||
-|| String || externalUserType || externalUserType ||
 || Long || parentFileExplorerItemId || Id of parent folder ||
 || String || fileName || file or fodler name ||
 || Long || room_id || Room id ||
