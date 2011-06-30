@@ -36,3 +36,35 @@ tar -xzvf swftools-0.9.1.tar.gz
 make
 make install
 }}}
+
+== 3. INSTALL SOX ==
+
+First we must uninstall Sox 12.xx and get the correct one;
+
+{{{
+
+         yum remove sox
+                 
+wget http://sourceforge.net/projects/sox/files/sox/14.3.2/sox-14.3.2.tar.gz/download
+
+         tar -xzvf sox-14.3.2.tar.gz
+
+         ./configure
+
+         make -s
+
+         make install
+
+}}}
+
+
+
+
+
+
+
+
+
+
+
+
