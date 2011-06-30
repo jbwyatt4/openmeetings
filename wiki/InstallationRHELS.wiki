@@ -1,14 +1,13 @@
 #labels Installation
-#INSTALLATION OFOPENMEETINGSON RHELS 5.6 x64 (Tikanga)
+#INSTALLATION OF OPENMEETINGS ON RHELS 5.6 x64 (Tikanga)
 
-= INSTALLATION OFOPENMEETINGSON RHELS 5.6 x64 (Tikanga) =
+= INSTALLATION OF OPENMEETINGS ON RHELS 5.6 x64 (Tikanga) =
 
-Add your content here.
+We start from a fresh installation with a MySQL database configured and 
+running.
 
+== 1.INSTALL IMAGEMAGICK ==
 
-= Details =
+{{ yum install imagemagick }}
 
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+hostscript-8.70-6.el5.x86_64 was already installed in my case
