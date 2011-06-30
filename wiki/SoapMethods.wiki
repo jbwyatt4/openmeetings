@@ -325,12 +325,14 @@ Method: _public !FileImportError[] importFile(String SID, Long externalUserId, L
 Description: Import file from external source
 to upload a file to a room-drive you specify:
   * externalUserId, user if of openmeetings user for which we upload the file
+  * externalType random string (should be the same for users from the same external system for example "moodle" or "sugar" cause there could be the same user-id used in both systems)
   * room_id = openmeetings room id
   * isOwner = false
   * parentFolderId = 0
 
 to upload a file to a private-drive you specify:
   * externalUserId, user if of openmeetings user for which we upload the file
+  * externalType random string (should be the same for users from the same external system for example "moodle" or "sugar" cause there could be the same user-id used in both systems)
   * room_id = openmeetings room id
   * isOwner = true
   * parentFolderId = -2
@@ -387,6 +389,7 @@ Method: _public Long addFolderByExternalUserIdAndType(String SID, Long externalU
 Description: Import file from external source
 to upload a file to a room-drive you specify:
   * externalUserId, user if of openmeetings user for which we upload the file
+  * externalType random string (should be the same for users from the same external system for example "moodle" or "sugar" cause there could be the same user-id used in both systems)
   * room_id = openmeetings room id
   * isOwner = false
   * parentFolderId = 0
