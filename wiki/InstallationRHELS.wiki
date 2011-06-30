@@ -21,3 +21,18 @@ It's not in the RHEL repos, so we  have to download it;
 {{{
 wget http://www.swftools.org/swftools-0.9.1.tar.gz
 }}}
+
+Before compiling we must install some dependenies;
+
+{{{
+yum install zlib-devel libjpeg-devel.x86_64 freetype-devel giflib-devel
+}}}
+
+We compile swftools as always;
+
+{{{
+tar -xzvf swftools-0.9.1.tar.gz
+./configure
+make
+make install
+}}}
