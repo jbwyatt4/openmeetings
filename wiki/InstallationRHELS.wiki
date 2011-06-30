@@ -42,20 +42,35 @@ make install
 First we must uninstall Sox 12.xx and get the correct one;
 
 {{{
-
          yum remove sox
-                 
-wget http://sourceforge.net/projects/sox/files/sox/14.3.2/sox-14.3.2.tar.gz/download
-
+         wget http://sourceforge.net/projects/sox/files/sox/14.3.2/sox-14.3.2.tar.gz/download
          tar -xzvf sox-14.3.2.tar.gz
-
          ./configure
-
          make -s
-
          make install
-
 }}}
+
+== 4. INSTALL FFMPEG ==
+
+We must remove previous version of Ffmpeg,if we have already installed. 
+That was my case.
+
+{{{
+yum remove ffmpeg
+wget http://www.ffmpeg.org/releases/ffmpeg-snapshot.tar.bz2
+bzip2 -d ffmpeg-snapshot.tar.bz2
+tar -xvfcd ffffmpeg-snapshot.tar
+}}}
+
+
+
+
+
+
+
+
+
+
 
 
 
