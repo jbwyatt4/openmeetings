@@ -89,15 +89,59 @@ cd OOO330_m20_native_packed-1_es.9567/
 ./setup
 }}}
 
-After installin OO I create a init script and I move it to the necesary runlevel.
+After installing OO I create a init script and I move it to the necesary runlevel.
 
 
 {{{
   Vi /etc/init.d/openoffice 
 }}}
 
+{{{
+ #!/bin/bash 
+        # chkconfig: 345 20 80 
+        # description: init.d script for headless openoffice.org (3.3+ 
+for RHEL5 64bit) 
+        # 
+        # processname: soffice 
+        # 
+        # source function library 
+        . /etc/rc.d/init.d/functions 
+        RETVAL=0 
+        SOFFICE_PATH='/usr/bin/openoffice.org3' 
+        SOFFICE_ARGS='- 
+accept=socket,host=localhost,port=8100;urp;StarOffice.ServiceManager - 
+headless -nofirststartwizard -nologo' 
+        SOFFICE_PIDFILE=/var/run/soffice.bin.pid 
+        start_soffice() { 
+       echo -n $"Starting OpenOffice.org" 
+       $SOFFICE_PATH $SOFFICE_ARGS >/dev/null 2>&1 & 
+       [ $? -eq 0 ] && echo_success || echo_failure 
+       pidof soffice.bin > $SOFFICE_PIDFILE 
+       echo 
+    } 
+    start() { 
+       start_soffice 
+    } 
+    stop() { 
+           echo -n $"Stopping OpenOffice" 
+           killproc soffice 
+           echo 
+    } 
+    case "$1" in 
+           start) 
+                   start 
+                   ;; 
+           stop) 
+                   stop 
+                   ;; 
+           restart) 
+                   stop 
+                   start 
+                   ;; 
+           *) 
+                   echo $"Usage: $0 {start|stop|restart}" 
+    esac 
 
-
-
+}}}
 
 
