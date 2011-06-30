@@ -150,7 +150,7 @@ for RHEL5 64bit)
 
 Now we proceed with the standard Openmeetings installation.[InstallationOpenMeetings#Install_OpenMeetings Install OpenMeetings]
 
-I only had one problem during the installation process, I had to set my database default chracter set to utf8, so I add the following line in /etc/my.cnf
+I only had one problem during the installation process, I had to set my database default character set to utf8, so I add the following line in /etc/my.cnf
 
 {{{
                 vi /etc/my.cnf 
