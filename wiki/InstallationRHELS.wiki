@@ -79,9 +79,9 @@ make install
 yum install java
 }}}
 
-== 6. INSTALL OPENOFFICE
+== 6. INSTALL OPENOFFICE ==
 
-You shuld download OO from openoffice.org.
+You shuld download OO from openoffice.org and choose the correct language.  
 
 {{{
 tar -xzvf OOo_3.3.0_Linux_x86-64_install-rpm-wJRE_es.tar.gz
@@ -89,8 +89,12 @@ cd OOO330_m20_native_packed-1_es.9567/
 ./setup
 }}}
 
+After installin OO I create a init script and I move it to the necesary runlevel.
 
 
+{{{
+  Vi /etc/init.d/openoffice 
+}}}
 
 
 
