@@ -141,3 +141,21 @@ for RHEL5 64bit)
     esac 
 
 }}}
+
+{{{
+/etc/init.d/oppenofice start
+}}}
+
+== 7. END ==
+
+Now we proceed with the standard Openmeetings installation.
+
+I only had one problem during the installation process, I had to set my database default chracter set to utf8, so I add the following line in /etc/my.cnf
+
+{{{
+                vi /etc/my.cnf 
+                default-character-set=utf8 
+                /etc/init.d/mysqld restart 
+
+}}}
+
