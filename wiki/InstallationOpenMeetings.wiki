@@ -81,6 +81,7 @@ After Running the Installer all basics are installed. Now login and go to the Me
   * [ChangeLog ChangeLog]
   * [MeetingsLive Ubuntu Live DVD] MeetingsLive http://meetingslive.sourceforge.net/
   * [InstallationCentOS5 Installation on CentOS 5]
+  * [InstallationRHELS Installation on RHELS 5.6]
   * [OpenmeetingsEnUbuntu Instalar Openmeetings en Ubuntu 10.04 (Spanish)]
   * [http://liberamemoria.blogspot.com/2009/02/instalando-openmeetings-07-rc-2-en.html Espanol Version for Debian Installation]
   * [http://aitinet.com/blog/wp-content/uploads/2009/08/TUTORIAL-PARA-INSTALACAO-DO-RED5-E-OPENMEETINGS-NO-LINUX-DEBIAN-LENNY-51.pdf Portuguese Version for Debian Installation of 0.9 RC1] 
