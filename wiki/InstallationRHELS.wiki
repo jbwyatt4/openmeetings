@@ -8,6 +8,6 @@ running.
 
 == 1.INSTALL IMAGEMAGICK ==
 
-{{ yum install imagemagick }}
+{{{ yum install imagemagick }}}
 
 hostscript-8.70-6.el5.x86_64 was already installed in my case
