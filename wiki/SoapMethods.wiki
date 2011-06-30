@@ -326,13 +326,13 @@ Description: Import file from external source
 to upload a file to a room-drive you specify:
   * externalUserId, user if of openmeetings user for which we upload the file
   * room_id = openmeetings room id
-  * isOwner = 0
+  * isOwner = false
   * parentFolderId = 0
 
 to upload a file to a private-drive you specify:
   * externalUserId, user if of openmeetings user for which we upload the file
   * room_id = openmeetings room id
-  * isOwner = 1
+  * isOwner = true
   * parentFolderId = -2
 
 Params:
@@ -357,13 +357,13 @@ Description: Import file from external source
 to upload a file to a room-drive you specify:
   * internalUserId, user if of openmeetings user for which we upload the file
   * room_id = openmeetings room id
-  * isOwner = 0
+  * isOwner = false
   * parentFolderId = 0
 
 to upload a file to a private-drive you specify:
   * internalUserId, user if of openmeetings user for which we upload the file
   * room_id = openmeetings room id
-  * isOwner = 1
+  * isOwner = true
   * parentFolderId = -2
 
 Params:
@@ -382,14 +382,27 @@ Params:
 
 ==== addFolderByExternalUserIdAndType ====
 
-Method: _public Long addFolderByExternalUserIdAndType(String SID, Long externalUserId, String externalUserType, Long parentFileExplorerItemId, String fileName, Long room_id, Boolean isOwner, Long externalFilesid, String externalType)_
+Method: _public Long addFolderByExternalUserIdAndType(String SID, Long externalUserId, String externalUserType, Long parentFileExplorerItemId, String folderName, Long room_id, Boolean isOwner, Long externalFilesid, String externalType)_
+
+Description: Import file from external source
+to upload a file to a room-drive you specify:
+  * externalUserId, user if of openmeetings user for which we upload the file
+  * room_id = openmeetings room id
+  * isOwner = false
+  * parentFolderId = 0
+
+to upload a file to a private-drive you specify:
+  * externalUserId, user if of openmeetings user for which we upload the file
+  * room_id = openmeetings room id
+  * isOwner = true
+  * parentFolderId = -2
 
 Params:
 || *type* || *name* || *description* ||
 || String || SID || The SID of the User. This SID must be marked as Loggedin ||
 || Long || externalUserId || externalUserId ||
 || Long || parentFileExplorerItemId || Id of parent folder ||
-|| String || fileName || file or fodler name ||
+|| String || folderName || folder name ||
 || Long || room_id || Room id ||
 || Boolean || isOwner || isOwner ||
 || Long || externalFilesid || externalFilesid ||
@@ -400,7 +413,20 @@ Params:
 
 ==== addFolderByUserId ====
 
-Method: _public Long addFolderByUserId(String SID, Long userId, Long parentFileExplorerItemId, String fileName, Long room_id, Boolean isOwner, Long externalFilesid, String externalType)_
+Method: _public Long addFolderByUserId(String SID, Long userId, Long parentFileExplorerItemId, String folderName, Long room_id, Boolean isOwner, Long externalFilesid, String externalType)_
+
+Description: Import file from external source
+to upload a file to a room-drive you specify:
+  * userId, openmeetings user for which we upload the file
+  * room_id = openmeetings room id
+  * isOwner = false
+  * parentFolderId = 0
+
+to upload a file to a private-drive you specify:
+  * userId, openmeetings user for which we upload the file
+  * room_id = openmeetings room id
+  * isOwner = true
+  * parentFolderId = -2
 
 Params:
 || *type* || *name* || *description* ||
