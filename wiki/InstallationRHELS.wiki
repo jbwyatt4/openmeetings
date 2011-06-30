@@ -12,4 +12,12 @@ running.
 yum install imagemagick
 }}}
 
-hostscript-8.70-6.el5.x86_64 was already installed in my case
+Ghostscript-8.70-6.el5.x86_64 was already installed in my case
+
+== 2. INSTALL SWFTOOLS ==
+
+It's not in the RHEL repos, so we  have to download it;
+
+{{{
+wget http://www.swftools.org/swftools-0.9.1.tar.gz
+}}}
