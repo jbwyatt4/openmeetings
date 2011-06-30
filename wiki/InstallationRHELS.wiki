@@ -108,9 +108,7 @@ for RHEL5 64bit)
         . /etc/rc.d/init.d/functions 
         RETVAL=0 
         SOFFICE_PATH='/usr/bin/openoffice.org3' 
-        SOFFICE_ARGS='- 
-accept=socket,host=localhost,port=8100;urp;StarOffice.ServiceManager - 
-headless -nofirststartwizard -nologo' 
+                   SOFFICE_ARGS='accept=socket,host=localhost,port=8100;urp;StarOffice.ServiceManager -headless -nofirststartwizard -nologo' 
         SOFFICE_PIDFILE=/var/run/soffice.bin.pid 
         start_soffice() { 
        echo -n $"Starting OpenOffice.org" 
@@ -143,5 +141,3 @@ headless -nofirststartwizard -nologo'
     esac 
 
 }}}
-
-
