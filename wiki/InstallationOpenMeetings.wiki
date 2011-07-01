@@ -84,7 +84,6 @@ After Running the Installer all basics are installed. Now login and go to the Me
   * [InstallationRHELS Installation on RHELS 5.6]
   * [OpenmeetingsEnUbuntu Instalar Openmeetings en Ubuntu 10.04 (Spanish)]
   * [UbuntuLucidLTS Install openmeetings on Ubuntu 10.04 LTS]
-  * [ActiveDirectoryLDAP  Configure LDAP Authentication with Active Directory]
   * [http://liberamemoria.blogspot.com/2009/02/instalando-openmeetings-07-rc-2-en.html Espanol Version for Debian Installation]
   * [http://aitinet.com/blog/wp-content/uploads/2009/08/TUTORIAL-PARA-INSTALACAO-DO-RED5-E-OPENMEETINGS-NO-LINUX-DEBIAN-LENNY-51.pdf Portuguese Version for Debian Installation of 0.9 RC1] 
   * [http://marc-muehlfeld.de/openmeetings/ CentOS Installation Tutorial von Marc Mühlfeld]
@@ -102,6 +101,7 @@ After Running the Installer all basics are installed. Now login and go to the Me
 
   * To Integrate !OpenMeetings it is recommended to use the [http://code.google.com/p/openmeetings/wiki/SoapMethods SOAP-Gateway]
   * Regarding LDAP-Configuration see the Installer Script and sample Configuration 
+  * [ActiveDirectoryLDAP  Configure LDAP Authentication with Active Directory]
 
 = using 3th Party Publishing Software, RTP-Streams or IP-Cams =
 
