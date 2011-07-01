@@ -457,6 +457,17 @@ Params:
 
 --------------------------
 
+==== getImportFileExtensions ====
+
+Method: _public String[] getImportFileExtensions()_
+
+Returns list of valid file extensions to import.
+
+Params:
+|| *type* || *name* || *description* ||
+
+--------------------------
+
 ==== deleteFileOrFolder ====
 
 Method: _public Long deleteFileOrFolder(String SID, Long fileExplorerItemId)_
@@ -465,38 +476,6 @@ Params:
 || *type* || *name* || *description* ||
 || String || SID || The SID of the User. This SID must be marked as Loggedin ||
 || Long || fileExplorerItemId || files id ||
-
---------------------------
-
-==== getListOfFiles (deprecated) ====
-
-Method: _public !LiberaryObject getListOfFiles(String SID, String moduleName,String parentFolder, Long room_id )_
-
-Description: Returns a Library Object. The Library-Object contains a Folders and a Fileslist OR
-it contains a !PresentationObject. A !PresentationObject is a List of thumbnails + the reference to the
-converted SWF, PDF and the Original Document (The original Document is only included if it is not also a PDF)
-
-Params:
-|| *type* || *name* || *description* ||
-|| String || SID || The SID of the User. This SID must be marked as Loggedin ||
-|| String || moduleName || Modulename, the Value is 'videoconf1' ||
-|| String ||parentFolder || Parent Folder, for the Root of every Room it is blank not '/' ||
-|| Long || room_id || the room_id you would like to get the Files ||
-
-
-==== deleteFile (deprecated) ====
-
-Method: _public Boolean deleteFile(String SID, String fileName, String moduleName, String parentFolder, Long room_id)_
-
-Description: Deletes a file or folder
-
-Params:
-|| *type* || *name* || *description* ||
-|| String || SID || The SID of the User. This SID must be marked as Loggedin ||
-|| String || fileName || The File or Folder you would like to delete ||
-|| String || moduleName || Modulename, the Value is 'videoconf1' for a conference room ||
-|| String || parentFolder || Parent Folder, for the Root of every Room it is blank not '/' ||
-|| Long || room_id || the room_id of the file  ||
 
 --------
 
