@@ -455,6 +455,18 @@ Params:
 || Long || externalFilesid || external files id ||
 || String || externalType || externalType  ||
 
+--------------------------
+
+==== getImportFileExtensions ====
+
+Method: _public LibraryPresentation getPresentationPreviewFileExplorer(String SID, String parentFolder)_
+
+Returns an object that contains a description about the document and the list of the path to the available thumbnails for each page.
+
+Params:
+|| *type* || *name* || *description* ||
+|| String || SID || The SID of the User. This SID must be marked as Loggedin ||
+|| String  || parentFolder || name of the folder/hash-name ||
 
 --------------------------
 
