@@ -6,7 +6,7 @@ For a detailed instruction which services, methods and params are available see 
 
 = How to invoke Services via REST =
 
-For example for the method getSession in the !UserService, you would use this URL via Rest:<br/>
+For example for the method getSession in the !UserService, you would use this URL via REST:<br/>
 http://demo.openmeetings.de/openmeetings/services/UserService/getSession
 
 Result:
