@@ -26,7 +26,7 @@ Result:
 }}}
 
 To login a user the call to auth would be:<br/>
-http://demo.openmeetings.de/openmeetings/services/UserService/loginUser?SID=2b84d98ced30a584041505de8b2f1932&username=hans&userpass=test
+http://demo.openmeetings.de/openmeetings/services/UserService/loginUser?SID=26584705202d7c1de6cc8e7e28890e3d&username=hans&userpass=test
 
 Result:
 {{{
@@ -37,7 +37,7 @@ Result:
 
 => It does return -10, which is the error id cause we will not write down a SOAP login to our public server in this wiki.
 However the correct way to check this error would be to invoke the call to get the localized error message. So we invoke the method to get the error via REST:<br/>
-http://demo.openmeetings.de/openmeetings/services/UserService/getErrorByCode?SID=2b84d98ced30a584041505de8b2f1932&errorid=-10&language_id=1
+http://demo.openmeetings.de/openmeetings/services/UserService/getErrorByCode?SID=26584705202d7c1de6cc8e7e28890e3d&errorid=-10&language_id=1
 
 Result:
 {{{
