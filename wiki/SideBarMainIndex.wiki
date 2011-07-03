@@ -22,6 +22,7 @@
     * Integration API
       * [DirectLoginSoapGeneralFlow Single Sign On Flow/Graph]
       * [SoapMethods Index of SOAP API Methods]
+      * [RestMethods REST API]
       * [ZendIntegration Zend Integration]
       * [SoapSamples Classic ASP SOAP Sample]
       * [InstantCommunication Using OpenMeetings as instant communication server.]
