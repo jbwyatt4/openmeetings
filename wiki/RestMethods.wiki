@@ -11,7 +11,15 @@ http://demo.openmeetings.de/openmeetings/services/UserService/getSession
 
 Returns:
 {{{
-<ns:getSessionResponse><ns:return type="org.openmeetings.app.hibernate.beans.basic.Sessiondata"><ax219:id>156971</ax219:id><ax219:language_id xsi:nil="true"/><ax219:organization_id xsi:nil="true"/><ax219:refresh_time>2011-07-03T14:40:44.000Z</ax219:refresh_time><ax219:sessionXml xsi:nil="true"/><ax219:session_id>26584705202d7c1de6cc8e7e28890e3d</ax219:session_id><ax219:starttermin_time>2011-07-03T14:40:44.000Z</ax219:starttermin_time><ax219:storePermanent xsi:nil="true"/><ax219:user_id xsi:nil="true"/></ns:return></ns:getSessionResponse>
+<ns:getSessionResponse><ns:return type="org.openmeetings.app.hibernate.beans.basic.Sessiondata">
+<ax219:id>156971</ax219:id><ax219:language_id xsi:nil="true"/>
+<ax219:organization_id xsi:nil="true"/>
+<ax219:refresh_time>2011-07-03T14:40:44.000Z</ax219:refresh_time>
+<ax219:sessionXml xsi:nil="true"/>
+<ax219:session_id>26584705202d7c1de6cc8e7e28890e3d</ax219:session_id>
+<ax219:starttermin_time>2011-07-03T14:40:44.000Z</ax219:starttermin_time>
+<ax219:storePermanent xsi:nil="true"/><ax219:user_id xsi:nil="true"/>
+</ns:return></ns:getSessionResponse>
 }}}
 
 To login a user the call to auth would be:<br/>
