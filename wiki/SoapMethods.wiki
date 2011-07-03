@@ -10,6 +10,7 @@ http://openmeetings.de:5080/openmeetings/axis2-web/
 => this ships with every !OpenMeetings installation so goto:
 http://localhost:5080/openmeetings/axis2-web/
 
+<font color="#FF3300">All SOAP API Calls are also [RestMethods available as REST-Service]!</font>
 
 *Availible Services*<br/>
 
