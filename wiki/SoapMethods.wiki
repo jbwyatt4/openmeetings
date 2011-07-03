@@ -882,8 +882,7 @@ Params:
 || Boolean || isDemoRoom || is it a Demo Room with limited time (use false by default) ||
 || Boolean || demoTime || time in seconds after the user will be logged out (only enabled if isDemoRoom is true)||
 || Boolean || isModeratedRoom || Users have to wait untill a Moderator arrives. Use the becomeModerator param in setUserObjectAndGenerateRoomHash to set a user as default Moderator ||
-|| Boolean || allowUserQuestions || enable or disable the button to 
-allow users to apply for moderation ||
+|| Boolean || allowUserQuestions || enable or disable the button to allow users to apply for moderation ||
 || Boolean || isAudioOnly || enable or disable the video/audio-only ||
 
 --------------------
@@ -934,8 +933,7 @@ Params:
 || Boolean || demoTime || time in seconds after the user will be logged out (only enabled if isDemoRoom is true)||
 || Boolean || isModeratedRoom || Users have to wait untill a Moderator arrives. Use the becomeModerator param in setUserObjectAndGenerateRoomHash to set a user as default Moderator ||
 || String || externalRoomType || externalRoomType ||
-|| Boolean || allowUserQuestions || enable or disable the button to 
-allow users to apply for moderation ||
+|| Boolean || allowUserQuestions || enable or disable the button to allow users to apply for moderation ||
 || Boolean || isAudioOnly || enable or disable the video/audio-only ||
 
 -----------------
