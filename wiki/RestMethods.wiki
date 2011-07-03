@@ -1,0 +1,10 @@
+#summary About the Rest API of OpenMeetings
+
+= Introduction =
+
+For a detailed instruction which params and method can be used see [SoapMethods]
+
+= How to invoke Services via REST =
+
+For example for the method getSession in the UserService, you would use this URL via Rest:
+http://demo.openmeetings.de/openmeetings/services/UserService/getSession
