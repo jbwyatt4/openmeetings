@@ -457,11 +457,12 @@ Params:
 
 --------------------------
 
-==== getImportFileExtensions ====
+==== getPresentationPreviewFileExplorer ====
 
-Method: _public LibraryPresentation getPresentationPreviewFileExplorer(String SID, String parentFolder)_
+Method: _public !LibraryPresentation getPresentationPreviewFileExplorer(String SID, String parentFolder)_
 
 Returns an object that contains a description about the document and the list of the path to the available thumbnails for each page.
+See also: [http://code.google.com/p/openmeetings/source/browse/trunk/singlewebapp/src/app/org/openmeetings/app/data/file/dto/LibraryPresentation.java LibraryPresentation-Object]
 
 Params:
 || *type* || *name* || *description* ||
