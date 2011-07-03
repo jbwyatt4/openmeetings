@@ -9,7 +9,7 @@ For a detailed instruction which services, methods and params are available see 
 For example for the method getSession in the !UserService, you would use this URL via Rest:<br/>
 http://demo.openmeetings.de/openmeetings/services/UserService/getSession
 
-Returns:
+Result:
 {{{
 <ns:getSessionResponse>
 <ns:return type="org.openmeetings.app.hibernate.beans.basic.Sessiondata">
@@ -28,6 +28,24 @@ Returns:
 To login a user the call to auth would be:<br/>
 http://demo.openmeetings.de/openmeetings/services/UserService/loginUser?SID=2b84d98ced30a584041505de8b2f1932&username=hans&userpass=test
 
+Result:
+{{{
+<ns:loginUserResponse>
+  <ns:return>-10</ns:return>
+</ns:loginUserResponse>
+}}}
+
 => It does return -10, which is the error id cause we will not write down a SOAP login to our public server in this wiki.
 However the correct way to check this error would be to invoke the call to get the localized error message. So we invoke the method to get the error via REST:<br/>
 http://demo.openmeetings.de/openmeetings/services/UserService/getErrorByCode?SID=2b84d98ced30a584041505de8b2f1932&errorid=-10&language_id=1
+
+Result:
+{{{
+<ns:getErrorByCodeResponse>
+<ns:return type="org.openmeetings.app.data.beans.basic.ErrorResult">
+  <ax218:errmessage>Username not found</ax218:errmessage>
+  <ax218:errorId>-10</ax218:errorId>
+  <ax218:errortype>Error</ax218:errortype>
+</ns:return>
+</ns:getErrorByCodeResponse>
+}}}
