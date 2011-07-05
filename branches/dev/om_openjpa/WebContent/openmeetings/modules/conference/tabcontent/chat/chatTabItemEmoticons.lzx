@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<library>
+
+
+<class name="chatTabItemEmoticons" extends="view" width="$once{ parent.width - 14 }" >
+
+	<attribute name="user_id" value="0" type="number" />
+	<attribute name="username" value="" type="string" />
+	<attribute name="usertime" value="" type="string" />
+	<attribute name="usercolor" value="0" type="string" />
+	<attribute name="publicSID" value="" type="string" />
+	<attribute name="messageObj" value="null" />
+	<attribute name="isDirectLink" value="false" type="boolean" />
+	<attribute name="message" value="" type="string" />
+	<attribute name="picture_uri" value="" type="string"/>
+	
+	<handler name="oninit">
+		<![CDATA[
+		
+		    if (this.picture_uri.startsWith("http")) {
+                
+                var downloadurl = this.picture_uri;  
+                
+            } else {
+            	if($debug) Debug.write("chatTabItemEmoticons/WIDTH: "+this.width);
+                var downloadurl = 'http://'+canvas.rtmphostlocal+':'+canvas.red5httpport
+                        +canvas.httpRootKey+'DownloadHandler?fileName=CHAT'
+                        +'&moduleName=chat&parentPath=&room_id='
+                        +'&remoteUserid='+this.user_id
+                        +'&sid='+canvas.sessionId;
+            }
+			
+	        //Debug.write("downloadurl "+downloadurl);
+	        this._userpic.setAttribute('src',downloadurl);	
+	        
+	        if(canvas.isrtl == 'true'){
+	         	if($debug) Debug.write("chatTabItemEmoticons RTL is set");
+	       
+	        	this.header_user.setAttribute('textalign', 'right');
+	        	this.header_time.setAttribute('align', 'left');
+	        	this.header_time.setAttribute('x', '40');
+	        	this.multi.setAttribute('textalign', 'right');
+	        	this.multi.setAttribute('align', 'right');
+	        }
+	        
+	        //Debug.write("TIME: "+this.usertime);
+        ]]>
+	</handler>
+	
+	<image name="_userpic" stretches="both">
+		<handler name="onload">
+            <![CDATA[
+                if (this.height > 38) {
+                    //If bigger then containter then scale it
+                    var width = this.width/(this.height/38);
+                    this.setAttribute('height',38);
+                    this.setAttribute('width',width);
+                }
+            ]]>
+        </handler>
+	</image>
+	
+	
+	<text text="$once{ parent.username }" x="40" resize="false" fontsize="10"
+		  width="$once{ parent.width - 40 }" bgcolor="$once{ parent.usercolor }"
+		  name="header_user" />
+		  
+    <miniIcons name="add" resource="edit_add_rsc" width="16" height="16" 
+                   y="0" x="$once{ parent.width - 114 }" showhandcursor="true">
+        <handler name="onclick">
+            if ($debug) Debug.write("Start Conference");
+            if (hib.userobject.user_id == parent.user_id) {
+                new lz.labelerrorPopup(canvas,{errorlabelid:1225});
+                return;
+            }
+            parent.requestUserToContactList.doCall();
+        </handler>
+        <labelTooltip labelid="1186" />
+    </miniIcons>
+    
+    <!--
+    public Long requestUserToContactList(String SID, Long userToAdd_id, 
+                String domain, String port, String webapp)
+     -->
+    <netRemoteCallHib name="requestUserToContactList" funcname="userservice.requestUserToContactList" 
+                  remotecontext="$once{ canvas.thishib }" activeErrorHandler="true" >      
+        <netparam><method name="getValue"> return canvas.sessionId; </method></netparam>
+        <netparam><method name="getValue"> return parent.parent.user_id; </method></netparam>
+        <netparam><method name="getValue"> return canvas.rtmphostlocal; </method></netparam>
+        <netparam><method name="getValue"> return canvas.red5httpport; </method></netparam>
+        <netparam><method name="getValue"> return canvas.httpRootKey; </method></netparam>
+        <handler name="ondata" args="value">
+            <![CDATA[
+                if ($debug) Debug.write("requestUserToContactList: ",value);
+                if (value > 0) {
+                    new lz.labelerrorPopup(canvas,{labelid:1267,errorlabelid:1266});
+                }
+            ]]>
+        </handler>
+    </netRemoteCallHib>
+    
+    <miniIcons name="private_message_add" resource="private_message_add_rsc" width="16" height="16" 
+                   y="0" x="$once{ parent.width - 94 }" showhandcursor="true">
+        <handler name="onclick">
+            if ($debug) Debug.write("Start Conference");
+            new lz.newPrivateMessage(canvas,{
+                                x:200,y:120,
+                                refObj:null,
+                                minimizable:true,
+                                maximizable:true,
+                                userObject:null,
+                                isdragable:true,
+                                user_id:parent.user_id,
+                                width:canvas.width-300,
+                                height:canvas.height-130
+                            });
+        </handler>
+        <labelTooltip labelid="1253" />
+    </miniIcons>
+    
+    <miniIcons resource="user_profile_rsc" width="16" height="16" 
+               y="0" x="$once{ parent.width - 74 }" showhandcursor="true">
+        <handler name="onclick">
+            if ($debug) Debug.write("Start Conference");
+            new lz.viewUserProfileWindow(canvas,{
+                                userId:parent.user_id
+                            });
+        </handler>
+        <labelTooltip labelid="1236" />
+    </miniIcons>    		  
+		  
+    <miniIcons visible="$once{ !parent.isDirectLink }" y="0" x="$once{ parent.width - 54 }"
+    		   resource="start_conference2_rsc" width="16" height="16" 
+               showhandcursor="true">
+        <handler name="onclick">
+            if ($debug) Debug.write("Start Conference");
+            new lz.chatParticipantsInviteConference(canvas,{
+                            publicSID:parent.publicSID,
+                            user_id:parent.user_id
+                        });
+        </handler>
+        <labelTooltip labelid="1131" />
+    </miniIcons>  		  
+	<text text="$once{ parent.usertime }" align="right" 
+		  fontsize="10" name="header_time" />
+	
+	<!-- space between each line of text -->
+	<attribute name="leading" value="5" type="number" />
+	
+	<text multiline="true" x="40" y="20" width="$once{ parent.width - 40 }" fontsize="11" selectable="true" name="multi" >
+		<handler name="oninit">
+			<![CDATA[
+				
+				if(canvas.isrtl!='true'){
+					this.sprite.__LZtextclip.wordWrap = false;
+					if($debug) Debug.write("New Text");
+					//Debug.write(this.sprite.getTextFormat());
+					tFormat = this.sprite.__LZtextclip.getTextFormat();
+					//Debug.write(this.sprite.__LZtextclip.getTextFormat());
+					tFormat.leading = 4;
+					this.sprite.__LZtextclip.setTextFormat(tFormat);
+					var items = parent.messageObj;
+					var t = "";
+					//items[0] = ["text","hello your are the hero lets check accomodation today i need some input"];
+					for (var i=0;i<items.length;i++) {
+						
+						//if ($debug) Debug.write("Item :0: ",items[i][0]);
+						
+						if (items[i][0]=="text"){
+							//if ($debug) Debug.write("Text :1: ",items[i][1]);
+							
+							t += items[i][1];
+						} else {
+							if (t.length!=0){
+								var tempString = calcLineWidthByTextField(this.width, t,this.fontsize,this.fontname);
+								var x = tempString[tempString.length-1]["lineWidth"];
+								var y = (tempString.length-1)*(getLineHeight()+parent.leading-1);
+							}else {
+								var x = 0;
+								var y = 0;
+							}
+							t += items[i][2];
+							
+							var swfurl = 'http://'+canvas.rtmphostlocal+':'+canvas.red5httpport+
+											canvas.httpRootKey + 'public/emoticons/'+items[i][1];
+							var m = new lz.chatInnerSmily(parent,{x:x+this.x,y:y+this.y,iconlabel:items[i][3]});
+							
+							//if ($debug) Debug.write("Smily :2: ",swfurl);
+							
+							m.setSource(swfurl);
+						}
+					}
+					//Debug.write("TTTT: ",t);"Verdana"
+					var tString = calcLineWidthByTextField(this.width, t,this.fontsize,this.fontname);
+					
+					for (var k = 0;k<tString.length;k++){
+						this.setAttribute('text',this.getText()+textObject[k]["text"]+"\r");
+						//if ($debug) Debug.write("text: ",k,textObject[k]["lineWidth"],textObject[k]["text"]);
+					}	
+					
+					//if ($debug) Debug.write("text: ",this.getText());
+					
+					//Debug.write(this.sprite.__LZtextclip.getTextFormat());
+					tFormat.leading = parent.leading;
+					this.sprite.__LZtextclip.setTextFormat(tFormat);
+					//Debug.write(this.sprite.__LZtextclip.textHeight);
+					//Debug.write(getLineHeight());
+					//Debug.write(this.sprite.__LZtextclip.textHeight+12);
+					this.setAttribute('height',this.sprite.__LZtextclip.textHeight+12);
+				}
+				else{
+				
+					var t = "";
+					var items = parent.messageObj;
+					
+					for (var i=0;i<items.length;i++) {
+						if (items[i][0]=="text"){
+							t += items[i][1];
+						} 
+					}
+					
+					this.setAttribute('text',this.getText()+ t);
+					
+					
+				}
+				
+				
+			]]>
+		</handler>	
+		
+		<method name="link" args="str">
+			<![CDATA[
+			
+				
+			
+			]]>
+		</method>	
+
+	</text>
+
+</class>						
+
+<class name="chatInnerTextBox" extends="text" resize="true" bgcolor="red" />
+
+<class name="chatInnerSmily" extends="view" onmouseover="" onmouseout="">
+	<attribute name="iconlabel" value="" type="string" />
+	<labelTooltip text="$once{ parent.iconlabel }" />
+</class>
+
+</library>

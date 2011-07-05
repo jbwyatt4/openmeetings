@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<library>
+    
+    <include href="roomAdmin.lzx" />
+	<include href="roomAdminListItem.lzx" />
+    <!--
+	<include href="advancedRoomSettings.lzx" />
+     -->
+	<include href="roomValueForm.lzx" />
+
+</library>
