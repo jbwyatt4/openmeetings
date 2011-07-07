@@ -19,6 +19,7 @@
       * [StudIPIntegration StudIP Integration]
       * [WordpressIntegration Wordpress Integration]
       * [ELGG ELGG Plugin]
+      * [IliasPlugin ILIAS Plugin]
     * Integration API
       * [DirectLoginSoapGeneralFlow Single Sign On Flow/Graph]
       * [SoapMethods Index of SOAP API Methods]
