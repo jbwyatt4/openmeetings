@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.Table;
 
 @Entity
@@ -28,7 +29,8 @@ public class Sessiondata implements Serializable {
 	private Date starttermin_time;
 	@Column(name="refresh_time")
 	private Date refresh_time;
-	@Column(name="sessionXml", columnDefinition="longtext")
+	@Lob
+	@Column(name="sessionXml")
 	private String sessionXml;
 	@Column(name="storePermanent")
 	private Boolean storePermanent;

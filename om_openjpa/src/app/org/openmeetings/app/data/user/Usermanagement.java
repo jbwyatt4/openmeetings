@@ -385,7 +385,7 @@ public class Usermanagement {
 				Path<String> path = c.get(searchcriteria);
 				Predicate predicate = cb.like(path, literal);
 				Predicate condition = cb.notEqual(c.get("deleted"), "true");
-				cq.where(condition).having(predicate);
+				cq.where(condition, predicate);
 				cq.distinct(asc);
 				if (asc){
 					cq.orderBy(cb.asc(c.get(orderby)));

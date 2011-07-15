@@ -12,6 +12,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.JoinColumn;
 import javax.persistence.Table;
@@ -28,7 +29,8 @@ public class PrivateMessages implements Serializable {
 	private long privateMessageId;
 	@Column(name="subject")
 	private String subject;
-	@Column(name="message", columnDefinition="longtext")
+	@Lob
+	@Column(name="message")
 	private String message;
 	
 	@Column(name="inserted")

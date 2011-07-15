@@ -12,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 /**
@@ -40,7 +41,8 @@ public class FlvRecordingLog implements Serializable {
 	private Date inserted;
 	@Column(name="msg_type")
 	private String msgType;
-	@Column(name="ful_message", columnDefinition="longtext")
+	@Lob
+	@Column(name="ful_message")
 	private String fullMessage;
 	@Column(name="exit_value")
 	private String exitValue;

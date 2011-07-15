@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -35,7 +36,8 @@ public class Recording implements Serializable {
 	private String name;
 	@Column(name="duration")
 	private Long duration;	
-	@Column(name="xmlString", columnDefinition="longtext")
+	@Lob
+	@Column(name="xmlString")
 	private String xmlString;
 	@Column(name="comment_field")
 	private String comment;

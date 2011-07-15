@@ -13,6 +13,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.JoinColumn;
 import javax.persistence.Table;
@@ -30,7 +31,8 @@ public class Rooms implements Serializable {
 	private Long rooms_id;
 	@Column(name="name")
 	private String name;
-	@Column(name="comment_field", columnDefinition="longtext")
+	@Lob //@Basic(fetch=FetchType.LAZY)
+	@Column(name="comment_field")
 	private String comment;
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn (name="roomtypes_id")

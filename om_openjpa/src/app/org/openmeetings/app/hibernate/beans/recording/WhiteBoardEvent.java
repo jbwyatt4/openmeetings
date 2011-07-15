@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -32,7 +33,8 @@ public class WhiteBoardEvent implements Serializable {
 	//flexibility, otherwise a change in the Whiteboard 
 	//Object (for example a new Font-Color) will need a change in the 
 	//database scheme and or course big effort in maintaining the Recording
-	@Column(name="action", columnDefinition="longtext")
+	@Lob
+	@Column(name="action")
 	private String action;
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="roomrecording_id", insertable=true, updatable=true)
