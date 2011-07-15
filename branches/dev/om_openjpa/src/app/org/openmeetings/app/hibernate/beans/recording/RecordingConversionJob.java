@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -38,7 +39,8 @@ public class RecordingConversionJob implements Serializable {
 	//this is only the end Date for the SVG Conversion
 	@Column(name="ended")
 	private Date ended;
-	@Column(name="currentwhiteboardasxml", columnDefinition="longtext")
+	@Lob
+	@Column(name="currentwhiteboardasxml")
 	private String currentWhiteBoardAsXml;
 	@Column(name="endtimeinmilliseconds")
 	private Long endTimeInMilliSeconds;

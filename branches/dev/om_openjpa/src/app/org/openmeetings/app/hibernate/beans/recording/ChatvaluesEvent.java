@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -31,7 +32,8 @@ public class ChatvaluesEvent implements Serializable {
 	private Long chatvaluesEventId;
 	@Column(name="starttime")
 	private Long starttime;
-	@Column(name="action", columnDefinition="longtext")
+	@Lob
+	@Column(name="action")
 	private String action;
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="roomrecording_id", updatable=true, insertable=true)
