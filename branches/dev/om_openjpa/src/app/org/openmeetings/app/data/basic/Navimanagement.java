@@ -43,7 +43,7 @@ public class Navimanagement {
 			Naviglobal navigl = (Naviglobal) it2.next();
 			navigl.setLabel(Fieldmanagment.getInstance().getFieldByIdAndLanguageByNavi(navigl.getFieldvalues_id(),language_id));
 			navigl.setTooltip(Fieldmanagment.getInstance().getFieldByIdAndLanguageByNavi(navigl.getTooltip_fieldvalues_id(),language_id));
-			Set<Navimain> s = navigl.getMainnavi();
+			List<Navimain> s = navigl.getMainnavi();
 			for (Iterator<Navimain> it3 = s.iterator(); it3.hasNext();) {
 				Navimain navim = (Navimain) it3.next();
 				navim.setLabel(Fieldmanagment.getInstance().getFieldByIdAndLanguageByNavi(navim.getFieldvalues_id(),language_id));
@@ -71,7 +71,7 @@ public class Navimanagement {
 			// CriteriaBuilder crit = session.getCriteriaBuilder();
 			Query query = session.createQuery("select c from Naviglobal as c " +
 					"where c.level_id <= :level_id AND " +
-					"c.deleted='false' " +
+					"c.deleted LIKE 'false' " +
 					"order by c.naviorder");
 			query.setParameter("level_id", user_level);
 			List<Naviglobal> navi = query.getResultList();
@@ -80,25 +80,6 @@ public class Navimanagement {
 			
 			log.debug("getMainMenu "+navi.size());
 			
-			// load navimain
-			if(navi.size()!=0){
-				Iterator<Naviglobal> flIterator=navi.iterator();
-				while(flIterator.hasNext()){
-					Naviglobal ng = flIterator.next();
-					tx.begin();
-					
-					query = session.createQuery("select c from Navimain as c " +
-							"where c.global_id = :global_id AND " +
-							"c.deleted='false' ");
-					query.setParameter("global_id", ng.getGlobal_id());
-					List<Navimain> nm = query.getResultList();
-					Set<Navimain> set = new HashSet<Navimain>(nm);
-					ng.setMainnavi(set);
-
-					tx.commit();
-				}
-			}
-
 			HibernateUtil.closeSession(idf);
 			
 			return navi;

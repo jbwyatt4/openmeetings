@@ -1,20 +1,21 @@
 package org.openmeetings.app.hibernate.beans.basic;
 
 import java.io.Serializable;
-import java.util.Set;
+import java.util.List;
 import java.util.Date;
 import org.openmeetings.app.hibernate.beans.lang.Fieldlanguagesvalues;
 
 
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
+import javax.persistence.Entity; 
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -58,7 +59,8 @@ public class Navimain implements Serializable {
 	private Fieldlanguagesvalues label;
 	@OneToMany(fetch = FetchType.EAGER)
 	@JoinColumn(name="main_id")
-	private Set<Navisub> subnavi;
+	@OrderBy("naviorder")
+	private List<Navisub> subnavi;
 	@Transient
 	private Fieldlanguagesvalues tooltip;
 	@Column(name="tooltip_fieldvalues_id")
@@ -150,11 +152,11 @@ public class Navimain implements Serializable {
 		this.deleted = deleted;
 	}
     
-    public Set<Navisub> getSubnavi() {
+    public List<Navisub> getSubnavi() {
         return subnavi;
     }
 
-    public void setSubnavi(Set<Navisub> subnavi) {
+    public void setSubnavi(List<Navisub> subnavi) {
         this.subnavi = subnavi;
     }
     
