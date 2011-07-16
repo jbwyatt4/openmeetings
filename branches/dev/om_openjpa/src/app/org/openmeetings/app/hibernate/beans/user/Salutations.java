@@ -19,7 +19,7 @@ public class Salutations implements Serializable {
 	
 	private static final long serialVersionUID = -5806449519074435223L;
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="salutations_id")
 	private Long salutations_id;
 	@Column(name="name")
