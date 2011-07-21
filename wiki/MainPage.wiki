@@ -14,7 +14,7 @@ If you would like to request a new feature please use the [http://groups.google.
 
 == Community == 
 
-  <wiki:gadget url="http://markmail.org/gadgets/markmailmini.xqy?l=com.googlegroups.openmeetings-user%2C%20com.googlegroups.openmeetings-dev&r=90" height="260" width="300" border="0" /> 
+  <wiki:gadget url="http://markmail.org/gadgets/markmailmini.xqy?l=com.googlegroups.openmeetings-user%20com.googlegroups.openmeetings-dev%20com.googlegroups.openmeetings-en-espanol&r=90" height="260" width="500" border="0" /> 
 
   * FeatureRequest
   * RoadMap
