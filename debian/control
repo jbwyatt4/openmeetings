@@ -1,0 +1,25 @@
+Source: red5-openmeetings
+Section: java
+Priority: optional	
+Maintainer: johnny strom <johnny@osp.fi>
+Build-Depends: debhelper (>= 7),sun-java6-jdk,ant,cdbs
+Standards-Version: 3.7.3
+Homepage: http://code.google.com/p/openmeetings/
+
+Package: red5-openmeetings
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, sun-java6-jre, imagemagick, gs-gpl, libart-2.0-2, libt1-5, libungif4g, swftools (>= 0.9.0), red5-openmeetings-oo, ffmpeg, sox, mysql-server, mysql-client, sed
+Conflicts: red5-server, tomcat6, tomcat5
+Description: OpenMeetings Red5 server package
+ red5-openmeetings is an combined package for Red5 and Openmeetings,
+ together do they work as en webmeeting service. 
+ After package is installed, please go to 
+ http://127.0.0.1:5080/openmeetings/install and finish the
+ installation process. Please, visit http://code.google.com/p/openmeetings
+ for more information.
+
+Package: red5-openmeetings-oo
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, openoffice.org-headless, openoffice.org-writer, openoffice.org-calc, openoffice.org-impress, openoffice.org-draw
+Description: red5-openmeetings OpenOffice headless demon.
+ This package provides the openoffice headless demon for Openmeetings.
