@@ -1,0 +1,194 @@
+#!/bin/sh
+
+# For RedHat and similar:
+# chkconfig: 2345 85 85
+# description: red5-openmeetings java server daemon
+# processname: red5-openmeetings
+# last modified:22.04.2009 CTpaHHoe
+
+### BEGIN INIT INFO
+# Provides: red5-openmeetings
+# Required-Start: $local_fs $remote_fs $network
+# Required-Stop: $local_fs $remote_fs $network
+# Default-Start: 2 3 4 5
+# Default-Stop: 0 1 6
+# Short-Description: Start/stop OpenMeetings java server daemon
+### END INIT INFO
+
+NAMECONFIG=red5-openmeetings.conf
+NAME=red5-openmeetings
+
+# default configuration
+RUN_HOME=/usr/share/red5-openmeetings
+RUN_USER=root
+RUN_GROUP=root
+LOGFILE=/var/log/$NAME.log
+
+
+# source datum
+
+# red hat specific
+[ -r /etc/sysconfig/$NAMECONFIG ] && . /etc/sysconfig/$NAMECONFIG
+# debian specific
+[ -r /etc/red5-openmeetings/$NAMECONFIG ] && . /etc/red5-openmeetings/$NAMECONFIG
+
+# local variables
+PIDFILE=/var/run/$NAME.pid
+DAEMON=$RUN_HOME/red5-daemon.sh
+SHUTDOWN=$RUN_HOME/red5-shutdown.sh
+POSTINSTDONE=$RUN_HOME/postinst.done
+
+# export variables for daemon script
+export PIDFILE
+export LOGFILE
+[ -n "$RUN_HOME" ] && export RUN_HOME
+
+[ -n "$RED5_HOME" ] || RED5_HOME=$RUN_HOME
+export RED5_HOME
+
+
+[ -n "$JAVA_HOME" ] && export JAVA_HOME 
+[ -n "$JAVA_OPTS" ] && export JAVA_OPTS
+##
+
+EXIT_CODE=0
+
+
+check_files() {
+  if [ ! -w $PIDFILE ]; then
+    touch "$PIDFILE"
+    chown "$RUN_USER" "$PIDFILE"
+  fi
+
+  if [ ! -w $LOGFILE ]; then
+    touch "$LOGFILE"
+    chown "$RUN_USER" "$LOGFILE"
+  fi
+}
+
+do_start() {
+  echo -n $"Starting $NAME: "
+  pid=`cat "$PIDFILE" 2>/dev/null`
+  if [  -f "$PIDFILE" -a -n "$pid" ]; then
+    if kill -0 $pid 2>/dev/null ; then
+      echo $"already running"
+      return 0
+    fi      
+  fi 
+
+  check_files    
+
+  su -c "$DAEMON" "$RUN_USER" 
+  EXIT_CODE=$?
+
+  if [ ! -e $POSTINSTDONE ]; then
+    echo "Post install script not run; Please run "$RUN_HOME"/postinst.sh"
+    EXIT_CODE=221
+  fi
+
+  if [ $EXIT_CODE -eq 0 ] ; then
+    touch "/var/lock/subsys/$NAME"
+    echo " SUCCESS"
+  fi
+  
+  return $EXIT_CODE
+}	
+
+do_stop() {
+  echo -n "Shutting down $NAME: "
+
+  pid=`cat "$PIDFILE" 2>/dev/null` || true
+  if [ ! -f $PIDFILE -o -z "$pid" ]; then
+    echo $"not running (there is no $PIDFILE)"
+    return 0
+  fi
+
+  # su -c "$SHUTDOWN" "$RUN_USER" 2>/dev/null
+
+  if ! kill -TERM $pid 2>/dev/null ; then
+    # TERM failed. wait and kill
+    
+    c=0
+    while kill -0 $pid 2>/dev/null 
+    do
+      cnt=`expr $cnt + 1`
+      if [ $cnt -gt 30 ]; then
+        break
+      fi
+      sleep 1
+      echo -n "."
+    done
+
+    # kill daemon
+    if ! kill -KILL $pid 2>/dev/null ; then
+      # not killed? check reason
+      if kill -0 $pid 2>/dev/null ; then
+        echo "FAILED: $pid is not $DAEMON or not running as $RUN_USER"
+      else
+        echo "FAILED: $DAEMON died, process $pid not running or access denied"
+      fi
+    fi
+  fi
+  
+  # delete pidfile  
+  rm -r "$PIDFILE" 2>/dev/null
+  # delete lockfile
+  rm -r "/var/lock/subsys/$NAME" 2>/dev/nul
+
+  echo $"SUCCESS"
+  return 0
+}
+
+do_status() {
+  pid=`cat "$PIDFILE" 2>/dev/null`
+  if [ ! -f $PIDFILE  -o -z "$pid" ]; then
+    echo "$NAME is stopped"
+    return 3
+  fi
+
+  if kill -0 $pid 2>/dev/null ; then
+    echo "$NAME is running"
+    return 0
+  fi
+
+  if [ -f $PIDFILE ]; then
+    echo "$NAME is dead but pidfile exists"
+    return 1
+  fi
+
+  if [-f /var/lock/subsys/$NAME ]; then
+    echo "$NAME is dead but subsys locked"
+    return 2
+  fi
+
+  echo "$NAME is stopped"
+  return 3
+} 
+
+case "$1" in
+    start)
+        do_start
+    ;;
+        
+    stop)
+        do_stop
+    ;;
+    
+    restart)
+        do_stop
+        do_start
+    ;;
+    
+    status)
+       do_status
+       EXIT_CODE=$?
+    ;;
+    
+    *)
+        echo "Usage: <servicename> {start|stop|status|restart}"
+        exit 1
+    ;;
+esac
+
+exit $EXIT_CODE
+
