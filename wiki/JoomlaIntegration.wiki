@@ -16,13 +16,13 @@
 
 
 Contact:<br/>
-Sebastian Wagner<br/>
-Haid-und-Neu-Straße 7<br/>
-76131 Karlsruhe<br/>
-++49 (0) 721 255 1990<br/>
-Mail: seba dot wagner at gmail dot com<br/>
-Jabber: seba dot wagner at gmail dot com<br/>
-Web: http://www.webbase-design.de<br/>
-Skype: s.wagner1<br/>
+Sebastian Wagner
+Kaiserstraße 66
+76133 Karlsruhe
+
+Telefon: ++49 (0) 721 467 27327
+Telefax: ++49 (0) 721 467 27327
+e-Mail: service@openmeetings.de
+Website: www.webbase-design.de
 <br/>
 If you need a Demo on our system contact us and I will give you an account in our sandbox.
