@@ -33,7 +33,7 @@ import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class CalendarServlet extends HttpServlet {
-
+	private static final long serialVersionUID = 2192254610711799347L;
 	private static final Logger log = Red5LoggerFactory.getLogger(Calendar.class, ScopeApplicationAdapter.webAppRootKey);
 	@Autowired
 	private AppointmentLogic appointmentLogic;
@@ -41,6 +41,8 @@ public class CalendarServlet extends HttpServlet {
 	private Sessionmanagement sessionManagement;
 	@Autowired
 	private Configurationmanagement cfgManagement;
+    @Autowired
+    private Usermanagement userManagement;
 	
 	@Override
 	protected void service(HttpServletRequest httpServletRequest,
@@ -57,7 +59,7 @@ public class CalendarServlet extends HttpServlet {
 			log.debug("sid: " + sid);
 
 			Long users_id = sessionManagement.checkSession(sid);
-			Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
+			Long user_level = userManagement.getUserLevelByID(users_id);
 
 			if (user_level!=null && user_level > 0) {
 				

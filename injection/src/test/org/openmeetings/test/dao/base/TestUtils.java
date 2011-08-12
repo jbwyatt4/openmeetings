@@ -22,6 +22,8 @@ public class TestUtils extends Assert {
 	static private Configurationmanagement cfgManagement;
 	@Autowired //FIXME
 	static private AppointmentDaoImpl appointmentDao;
+    @Autowired //FIXME
+    static private Usermanagement userManagement;
 	
 	public static Appointment createAppointment() throws Exception
 	{
@@ -63,9 +65,9 @@ public class TestUtils extends Assert {
 		users.setLogin("login");
 		users.setPassword("pass" + rnd);
 		users.setLanguage_id(1L);
-		Long user_id = Usermanagement.getInstance().addUser(users);
+		Long user_id = userManagement.addUser(users);
 		assertTrue("Cann't add user", user_id > 0);
-		users = Usermanagement.getInstance().getUserByIdAndDeleted(user_id);
+		users = userManagement.getUserByIdAndDeleted(user_id);
 		assertNotNull("User should not be null", users);
 		return users;
 	}
@@ -128,10 +130,10 @@ public class TestUtils extends Assert {
 	
 	public static void loadMainMenu() {
 
-		Usermanagement.getInstance().addUserLevel("User", 1);
-		Usermanagement.getInstance().addUserLevel("Moderator", 2);
-		Usermanagement.getInstance().addUserLevel("Admin", 3);
-		Usermanagement.getInstance().addUserLevel("Web-Service (only access via SOAP)", 4);
+		userManagement.addUserLevel("User", 1);
+		userManagement.addUserLevel("Moderator", 2);
+		userManagement.addUserLevel("Admin", 3);
+		userManagement.addUserLevel("Web-Service (only access via SOAP)", 4);
 
 		/* ########################
 		 * Dashboard Menu Points

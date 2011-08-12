@@ -3,8 +3,11 @@ package org.openmeetings.test.init;
 import junit.framework.TestCase;
 
 import org.openmeetings.app.data.user.Usermanagement;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class AddUserLevels extends TestCase {
+    @Autowired
+    private Usermanagement userManagement;
 	
 	public AddUserLevels(String testname){
 		super(testname);
@@ -12,10 +15,10 @@ public class AddUserLevels extends TestCase {
 
 	public void testAddUserlevels(){
 		
-		Usermanagement.getInstance().addUserLevel("User", 1);
+		userManagement.addUserLevel("User", 1);
 		
-		Usermanagement.getInstance().addUserLevel("Moderator", 2);
+		userManagement.addUserLevel("Moderator", 2);
 		
-		Usermanagement.getInstance().addUserLevel("Admin", 3);
+		userManagement.addUserLevel("Admin", 3);
 	}
 }

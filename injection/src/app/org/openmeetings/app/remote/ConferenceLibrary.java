@@ -49,6 +49,8 @@ public class ConferenceLibrary implements IPendingServiceCallback {
     private ClientListManager clientListManager = null;
     @Autowired
     private Sessionmanagement sessionManagement;
+    @Autowired
+    private Usermanagement userManagement;
 
     public ClientListManager getClientListManager() {
         return clientListManager;
@@ -78,7 +80,7 @@ public class ConferenceLibrary implements IPendingServiceCallback {
         try {
 
             Long users_id = sessionManagement.checkSession(SID);
-            Long user_level = Usermanagement.getInstance().getUserLevelByID(
+            Long user_level = userManagement.getUserLevelByID(
                     users_id);
 
             log.debug("#############users_id : " + users_id);
@@ -127,7 +129,7 @@ public class ConferenceLibrary implements IPendingServiceCallback {
             Object tObjectRef) {
         try {
             Long users_id = sessionManagement.checkSession(SID);
-            Long user_level = Usermanagement.getInstance().getUserLevelByID(
+            Long user_level = userManagement.getUserLevelByID(
                     users_id);
             if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
                 // LinkedHashMap tObject = (LinkedHashMap)t;
@@ -182,7 +184,7 @@ public class ConferenceLibrary implements IPendingServiceCallback {
     public void loadWmlObject(String SID, Long room_id, Long fileExplorerItemId, Long whiteboardId) {
         try {
             Long users_id = sessionManagement.checkSession(SID);
-            Long user_level = Usermanagement.getInstance().getUserLevelByID(
+            Long user_level = userManagement.getUserLevelByID(
                     users_id);
             
             if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
@@ -266,7 +268,7 @@ public class ConferenceLibrary implements IPendingServiceCallback {
     public ArrayList loadChartObject(String SID, Long room_id, String fileName) {
         try {
             Long users_id = sessionManagement.checkSession(SID);
-            Long user_level = Usermanagement.getInstance().getUserLevelByID(
+            Long user_level = userManagement.getUserLevelByID(
                     users_id);
             if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
                 String roomName = room_id.toString();
@@ -295,7 +297,7 @@ public class ConferenceLibrary implements IPendingServiceCallback {
     public FileExplorerObject getFileExplorerByRoom(String SID, Long room_id) {
         try {
             Long users_id = Sessionmanagement.getInstance().checkSession(SID);
-            Long user_level = Usermanagement.getInstance().getUserLevelByID(
+            Long user_level = userManagement.getUserLevelByID(
                     users_id);
             if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
 
@@ -349,7 +351,7 @@ public class ConferenceLibrary implements IPendingServiceCallback {
             Long parentFileExplorerItemId, Long room_id, Boolean isOwner) {
         try {
             Long users_id = Sessionmanagement.getInstance().checkSession(SID);
-            Long user_level = Usermanagement.getInstance().getUserLevelByID(
+            Long user_level = userManagement.getUserLevelByID(
                     users_id);
             if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
 
@@ -383,7 +385,7 @@ public class ConferenceLibrary implements IPendingServiceCallback {
             String fileName, Long room_id, Boolean isOwner) {
         try {
             Long users_id = Sessionmanagement.getInstance().checkSession(SID);
-            Long user_level = Usermanagement.getInstance().getUserLevelByID(
+            Long user_level = userManagement.getUserLevelByID(
                     users_id);
             if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
 
@@ -425,7 +427,7 @@ public class ConferenceLibrary implements IPendingServiceCallback {
     public Long deleteFileOrFolder(String SID, Long fileExplorerItemId) {
         try {
             Long users_id = Sessionmanagement.getInstance().checkSession(SID);
-            Long user_level = Usermanagement.getInstance().getUserLevelByID(
+            Long user_level = userManagement.getUserLevelByID(
                     users_id);
             if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
 
@@ -445,7 +447,7 @@ public class ConferenceLibrary implements IPendingServiceCallback {
             String fileName) {
         try {
             Long users_id = Sessionmanagement.getInstance().checkSession(SID);
-            Long user_level = Usermanagement.getInstance().getUserLevelByID(
+            Long user_level = userManagement.getUserLevelByID(
                     users_id);
             if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
 
@@ -466,7 +468,7 @@ public class ConferenceLibrary implements IPendingServiceCallback {
             Boolean moveToHome) {
         try {
             Long users_id = Sessionmanagement.getInstance().checkSession(SID);
-            Long user_level = Usermanagement.getInstance().getUserLevelByID(
+            Long user_level = userManagement.getUserLevelByID(
                     users_id);
             if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
 
@@ -505,7 +507,7 @@ public class ConferenceLibrary implements IPendingServiceCallback {
         try {
 
             Long users_id = sessionManagement.checkSession(SID);
-            Long user_level = Usermanagement.getInstance().getUserLevelByID(
+            Long user_level = userManagement.getUserLevelByID(
                     users_id);
 
             if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {

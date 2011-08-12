@@ -43,10 +43,10 @@ public class ImportInitvalues {
 	private static final String nameOfErrorFile = "errorvalues.xml";
 
 	private static ImportInitvalues instance;
-	private static String APP_NAME_PLACEHOLDER = "\\$APPLICATION_NAME";
-	private static String LMS_NAME = "\\$LMS_NAME";
 	@Autowired
 	private Configurationmanagement cfgManagement;
+    @Autowired
+    private Usermanagement userManagement;
 	
 	private ImportInitvalues() {
 	}
@@ -60,10 +60,10 @@ public class ImportInitvalues {
 
 	public void loadMainMenu() {
 
-		Usermanagement.getInstance().addUserLevel("User", 1);
-		Usermanagement.getInstance().addUserLevel("Moderator", 2);
-		Usermanagement.getInstance().addUserLevel("Admin", 3);
-		Usermanagement.getInstance().addUserLevel("Web-Service (only access via SOAP)", 4);
+		userManagement.addUserLevel("User", 1);
+		userManagement.addUserLevel("Moderator", 2);
+		userManagement.addUserLevel("Admin", 3);
+		userManagement.addUserLevel("Web-Service (only access via SOAP)", 4);
 
 		/* ########################
 		 * Dashboard Menu Points
@@ -520,7 +520,7 @@ public class ImportInitvalues {
 		try {
 			
 			//BaseUrl as param is empty as we do not send an EMAIL here
-			Long user_id = Usermanagement.getInstance().registerUserInit(
+			Long user_id = userManagement.registerUserInit(
 					new Long(3), 3, 1, 1, username, userpass, "lastname",
 					"firstname", email, new java.util.Date(), "street", "no",
 					"fax", "zip", 1, "town", 0, false, null, "phone", "", false,

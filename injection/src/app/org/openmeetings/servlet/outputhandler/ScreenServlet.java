@@ -53,6 +53,8 @@ public class ScreenServlet extends HttpServlet {
 	private Sessionmanagement sessionManagement;
 	@Autowired
 	private Configurationmanagement cfgManagement;
+    @Autowired
+    private Usermanagement userManagement;
 	
 	/**
 	 * 
@@ -105,7 +107,7 @@ public class ScreenServlet extends HttpServlet {
 				
 				
 				Long users_id = sessionManagement.checkSession(sid);
-				Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
+				Long user_level = userManagement.getUserLevelByID(users_id);
 			
 				// Switch between scharers
 				Configuration c = cfgManagement.getConfKey(user_level, "screen_viewer");
@@ -127,7 +129,7 @@ public class ScreenServlet extends HttpServlet {
 		try {
 			System.out.println("ScreenServlet Call");
 			Long users_id = sessionManagement.checkSession(sid);
-				Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
+				Long user_level = userManagement.getUserLevelByID(users_id);
 				
 				if (user_level > 0) {
 					
@@ -340,7 +342,7 @@ public class ScreenServlet extends HttpServlet {
 		try{
 			
 			Long users_id = sessionManagement.checkSession(sid);
-			Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
+			Long user_level = userManagement.getUserLevelByID(users_id);
 		
 			if (user_level > 0) {
 			

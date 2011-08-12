@@ -64,6 +64,8 @@ public class StreamService implements IPendingServiceCallback {
 	private RecordingDaoImpl recordingDao;
 	@Autowired
 	private Sessionmanagement sessionManagement;
+    @Autowired
+    private Usermanagement userManagement;
 	
 	private static final Logger log = Red5LoggerFactory.getLogger(StreamService.class, ScopeApplicationAdapter.webAppRootKey);
 	
@@ -485,7 +487,7 @@ public class StreamService implements IPendingServiceCallback {
 	public List<Recording> getAllRecordingsForUser(String SID){
 		try {
 	        Long users_id = sessionManagement.checkSession(SID);
-	        Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);  
+	        Long user_level = userManagement.getUserLevelByID(users_id);  
 
 	        if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)){
 	        	
@@ -540,7 +542,7 @@ public class StreamService implements IPendingServiceCallback {
 		try {
 			
 	        Long users_id = sessionManagement.checkSession(SID);
-	        Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);  
+	        Long user_level = userManagement.getUserLevelByID(users_id);  
 
 	        if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)){
 	        	Recording rec = recordingDao.getRecordingById(recording_id);
@@ -812,7 +814,7 @@ public class StreamService implements IPendingServiceCallback {
 	public Long deleteRecordedFile(String SID, Long recording_id){
 		try {
 	    	Long users_id = sessionManagement.checkSession(SID);
-	    	Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
+	    	Long user_level = userManagement.getUserLevelByID(users_id);
 	    	if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)){
 	    		Recording rec = recordingDao.getRecordingById(recording_id);
 	    		if (rec!=null) {

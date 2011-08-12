@@ -4,8 +4,11 @@ import org.openmeetings.app.data.user.Usermanagement;
 import org.openmeetings.app.data.user.dao.UsersDaoImpl;
 import org.openmeetings.app.persistence.beans.user.Users;
 import org.openmeetings.test.dao.base.AbstractTestCase;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class UsersDaoImplTest extends AbstractTestCase {
+    @Autowired
+    private Usermanagement userManagement;
 	
 	public UsersDaoImplTest(String name){
 		super(name);
@@ -22,9 +25,9 @@ public class UsersDaoImplTest extends AbstractTestCase {
 		users.setLastname("lastname");
 		users.setLogin("login");
 		users.setPassword("password");
-		Long user_id = Usermanagement.getInstance().addUser(users);
+		Long user_id = userManagement.addUser(users);
 		assertTrue("Cann't add user", user_id > 0);
-		users = Usermanagement.getInstance().getUserByIdAndDeleted(user_id);
+		users = userManagement.getUserByIdAndDeleted(user_id);
 		assertNotNull("User should not be null", users);
 		
 	}

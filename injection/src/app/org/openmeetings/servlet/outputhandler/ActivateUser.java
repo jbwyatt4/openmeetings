@@ -2,14 +2,11 @@ package org.openmeetings.servlet.outputhandler;
 import java.io.IOException;
 import java.util.Date;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.ServletContext;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.velocity.Template;
 import org.apache.velocity.context.Context;
 import org.apache.velocity.tools.view.servlet.VelocityViewServlet;
@@ -32,6 +29,8 @@ public class ActivateUser extends VelocityViewServlet {
         private static Logger log = Red5LoggerFactory.getLogger(ActivateUser.class, ScopeApplicationAdapter.webAppRootKey);
         @Autowired
         private Configurationmanagement cfgManagement;
+        @Autowired
+        private Usermanagement userManagement;
         
         @Override
         public Template handleRequest(HttpServletRequest httpServletRequest,
@@ -56,7 +55,7 @@ public class ActivateUser extends VelocityViewServlet {
                                 return getVelocityEngine().getTemplate("activation_template.vm");
                         }
                         //
-                        Users user = Usermanagement.getInstance().getUserByActivationHash(hash);
+                        Users user = userManagement.getUserByActivationHash(hash);
                         
                         if (user == null) {
                                 //No User Found with this Hash
@@ -88,7 +87,7 @@ public class ActivateUser extends VelocityViewServlet {
                                 user.setStatus(1);
                                 user.setUpdatetime(new Date());
 
-                                Usermanagement.getInstance().updateUser(user);
+                                userManagement.updateUser(user);
                                 
                                 Long default_lang_id = Long.valueOf(cfgManagement.
                                         getConfKey(3,"default_lang_id").getConf_value()).longValue();

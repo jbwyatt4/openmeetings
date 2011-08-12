@@ -25,11 +25,13 @@ import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.XppDriver;
 
 public class MethodGateway extends HttpServlet {
-
+	private static final long serialVersionUID = -2954875038645746731L;
 	private static final Logger log = Red5LoggerFactory.getLogger(
 			MethodGateway.class, ScopeApplicationAdapter.webAppRootKey);
 	@Autowired
 	private Sessionmanagement sessionManagement;
+    @Autowired
+    private Usermanagement userManagement;
 	
 	/*
 	 * (non-Javadoc)
@@ -106,7 +108,7 @@ public class MethodGateway extends HttpServlet {
 
 					Long returnVal = new Long(-1);
 
-					Object obj = Usermanagement.getInstance().loginUser(SID,
+					Object obj = userManagement.loginUser(SID,
 							username, userpass, null, false);
 					if (obj == null) {
 						returnVal = new Long(-1);
@@ -143,7 +145,7 @@ public class MethodGateway extends HttpServlet {
 					Long returnVal = new Long(-1);
 
 					Long users_id = sessionManagement.checkSession(SID);
-					Long user_level = Usermanagement.getInstance()
+					Long user_level = userManagement
 							.getUserLevelByID(users_id);
 					if (AuthLevelmanagement.getInstance().checkAdminLevel(
 							user_level)) {
@@ -213,7 +215,7 @@ public class MethodGateway extends HttpServlet {
 							.booleanValue();
 
 					Long users_id = sessionManagement.checkSession(SID);
-					Long user_level = Usermanagement.getInstance()
+					Long user_level = userManagement
 							.getUserLevelByID(users_id);
 
 					Long returnVal = Roommanagement.getInstance().addRoom(

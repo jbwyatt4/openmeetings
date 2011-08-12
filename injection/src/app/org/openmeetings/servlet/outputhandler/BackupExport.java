@@ -20,11 +20,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.openmeetings.app.data.user.dao.PrivateMessageFolderDaoImpl;
-import org.openmeetings.app.data.user.dao.PrivateMessagesDaoImpl;
-import org.openmeetings.app.data.user.dao.UserContactsDaoImpl;
-import org.openmeetings.app.data.user.dao.UsersDaoImpl;
-
 import org.dom4j.Document;
 import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
@@ -42,6 +37,10 @@ import org.openmeetings.app.data.flvrecord.FlvRecordingDaoImpl;
 import org.openmeetings.app.data.flvrecord.FlvRecordingMetaDataDaoImpl;
 import org.openmeetings.app.data.user.Organisationmanagement;
 import org.openmeetings.app.data.user.Usermanagement;
+import org.openmeetings.app.data.user.dao.PrivateMessageFolderDaoImpl;
+import org.openmeetings.app.data.user.dao.PrivateMessagesDaoImpl;
+import org.openmeetings.app.data.user.dao.UserContactsDaoImpl;
+import org.openmeetings.app.data.user.dao.UsersDaoImpl;
 import org.openmeetings.app.persistence.beans.basic.LdapConfig;
 import org.openmeetings.app.persistence.beans.calendar.Appointment;
 import org.openmeetings.app.persistence.beans.calendar.MeetingMember;
@@ -59,9 +58,9 @@ import org.openmeetings.app.persistence.beans.user.UserContacts;
 import org.openmeetings.app.persistence.beans.user.Users;
 import org.openmeetings.app.remote.red5.ScopeApplicationAdapter;
 import org.openmeetings.utils.math.CalendarPatterns;
+import org.red5.logging.Red5LoggerFactory;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.red5.logging.Red5LoggerFactory;
 
 /**
  * 
@@ -75,6 +74,9 @@ public class BackupExport extends HttpServlet {
 	private AppointmentDaoImpl appointmentDao;
 	@Autowired
 	private Sessionmanagement sessionManagement;
+    @Autowired
+    private Usermanagement userManagement;
+    
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -94,7 +96,7 @@ public class BackupExport extends HttpServlet {
 			log.debug("sid: " + sid);
 			
 			Long users_id = sessionManagement.checkSession(sid);
-			Long user_level = Usermanagement.getInstance().getUserLevelByID(
+			Long user_level = userManagement.getUserLevelByID(
 					users_id);
 
 			log.debug("users_id: " + users_id);

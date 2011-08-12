@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.openmeetings.app.data.basic.AuthLevelmanagement;
 import org.openmeetings.app.data.basic.Sessionmanagement;
-import org.openmeetings.app.data.calendar.management.AppointmentLogic;
 import org.openmeetings.app.data.calendar.management.AppointmentRemindertypeLogic;
 import org.openmeetings.app.data.user.Usermanagement;
 import org.openmeetings.app.persistence.beans.calendar.AppointmentReminderTyps;
@@ -24,6 +23,8 @@ private static final Logger log = Red5LoggerFactory.getLogger(Appointmentreminde
 	private static AppointmentremindertypeService instance = null;
 	@Autowired
 	private Sessionmanagement sessionManagement;
+    @Autowired
+    private Usermanagement userManagement;
 	
 	public static synchronized AppointmentremindertypeService getInstance() {
 		if (instance == null) {
@@ -44,7 +45,7 @@ private static final Logger log = Red5LoggerFactory.getLogger(Appointmentreminde
 		
 		try {
 			Long users_id = sessionManagement.checkSession(SID);
-	        Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
+	        Long user_level = userManagement.getUserLevelByID(users_id);
 	        if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
 					        	
 	        	List<AppointmentReminderTyps> res =  AppointmentRemindertypeLogic.getInstance().getAppointmentReminderTypList();

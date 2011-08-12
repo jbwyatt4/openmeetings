@@ -30,6 +30,8 @@ public class LanguageService {
 	private Sessionmanagement sessionManagement;
 	@Autowired
 	private Configurationmanagement cfgManagement;
+    @Autowired
+    private Usermanagement userManagement;
 	
 	/**
 	 * get a List of all availible Languages
@@ -66,7 +68,7 @@ public class LanguageService {
 	
 	public Fieldvalues getFieldvalueById(String SID, Long fieldvalues_id, Long language_id) {
         Long users_id = sessionManagement.checkSession(SID);
-        Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
+        Long user_level = userManagement.getUserLevelByID(users_id);
         if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)) {
         	return Fieldmanagment.getInstance().getFieldvaluesById(fieldvalues_id, language_id);
         }
@@ -75,7 +77,7 @@ public class LanguageService {
 	
 	public Long addLanguage(String SID, String langName) {
         Long users_id = sessionManagement.checkSession(SID);
-        Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
+        Long user_level = userManagement.getUserLevelByID(users_id);
         if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)) {
         	if (langName.length()==0) return new Long(-30);
         	return FieldLanguageDaoImpl.getInstance().addLanguage(langName,false);
@@ -85,7 +87,7 @@ public class LanguageService {
 	
 	public Long updateLanguage(String SID, Long language_id, String langName) {
         Long users_id = sessionManagement.checkSession(SID);
-        Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
+        Long user_level = userManagement.getUserLevelByID(users_id);
         if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)) {
         	if (langName.length()==0) return new Long(-30);
         	return FieldLanguageDaoImpl.getInstance().updateFieldLanguage(language_id, langName, "false");
@@ -95,7 +97,7 @@ public class LanguageService {
 	
 	public Long deleteLanguage(String SID, Long language_id) {
         Long users_id = sessionManagement.checkSession(SID);
-        Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
+        Long user_level = userManagement.getUserLevelByID(users_id);
         if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)) {
         	return FieldLanguageDaoImpl.getInstance().updateFieldLanguage(language_id, "", "true");
         }
@@ -104,7 +106,7 @@ public class LanguageService {
 	
 	public Long deleteFieldlanguagesvaluesById(String SID, Long fieldlanguagesvalues_id) {
         Long users_id = sessionManagement.checkSession(SID);
-        Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
+        Long user_level = userManagement.getUserLevelByID(users_id);
         if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)){
         	return Fieldmanagment.getInstance().deleteFieldlanguagesvaluesById(fieldlanguagesvalues_id);
         }
@@ -123,7 +125,7 @@ public class LanguageService {
 	 */
 	public SearchResult getFieldsByLanguage(String SID, int start, int max, String orderby, boolean asc, Long language_id){
         Long users_id = sessionManagement.checkSession(SID);
-        Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
+        Long user_level = userManagement.getUserLevelByID(users_id);
         if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)){
         	return Fieldmanagment.getInstance().getFieldsByLanguage(start, max, orderby, asc, language_id);
         }
@@ -139,7 +141,7 @@ public class LanguageService {
 	public Long saveOrUpdateLabel(String SID, LinkedHashMap<Object,Object> values)  {
 		try {
 			Long users_id = sessionManagement.checkSession(SID);
-			Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
+			Long user_level = userManagement.getUserLevelByID(users_id);
 			Long fieldvalues_id = Long.valueOf(values.get("fieldvalues_id").toString()).longValue();
 			String name = values.get("name").toString(); 
 			Long fieldlanguagesvalues_id = Long.valueOf(values.get("fieldlanguagesvalues_id").toString()).longValue();

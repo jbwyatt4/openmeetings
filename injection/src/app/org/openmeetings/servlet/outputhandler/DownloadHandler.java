@@ -21,6 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 
 public class DownloadHandler extends HttpServlet {
+	private static final long serialVersionUID = 7243653203578587544L;
 
 	private static final Logger log = Red5LoggerFactory.getLogger(DownloadHandler.class);
 	
@@ -33,6 +34,8 @@ public class DownloadHandler extends HttpServlet {
 
 	@Autowired
 	private Sessionmanagement sessionManagement;
+    @Autowired
+    private Usermanagement userManagement;
 	
 //	public void doFilter(ServletRequest servletRequest,
 //            ServletResponse servletResponse,
@@ -78,7 +81,7 @@ public class DownloadHandler extends HttpServlet {
 			log.debug("sid: " + sid);
 
 			Long users_id = sessionManagement.checkSession(sid);
-			Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
+			Long user_level = userManagement.getUserLevelByID(users_id);
 
 			if (user_level!=null && user_level > 0) {
 				String room_id = httpServletRequest.getParameter("room_id");

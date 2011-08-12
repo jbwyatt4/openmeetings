@@ -36,10 +36,12 @@ import org.openmeetings.app.data.basic.Fieldmanagment;
  *
  */
 public class LangExport extends HttpServlet {
-
+	private static final long serialVersionUID = 243294279856160463L;
 	private static final Logger log = Red5LoggerFactory.getLogger(LangExport.class, ScopeApplicationAdapter.webAppRootKey);
 	@Autowired
 	private Sessionmanagement sessionManagement;
+    @Autowired
+    private Usermanagement userManagement;
 	
 	/*
 	 * (non-Javadoc)
@@ -67,7 +69,7 @@ public class LangExport extends HttpServlet {
 			log.debug("language_id: " + language_id);
 
 			Long users_id = sessionManagement.checkSession(sid);
-			Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
+			Long user_level = userManagement.getUserLevelByID(users_id);
 
 			log.debug("users_id: "+users_id);
 			log.debug("user_level: "+user_level);

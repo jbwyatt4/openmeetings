@@ -4,6 +4,7 @@ import java.io.InputStream;
 import java.util.Iterator;
 
 import org.slf4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.red5.logging.Red5LoggerFactory;
 import org.dom4j.Document;
 import org.dom4j.Element;
@@ -20,6 +21,8 @@ import org.openmeetings.utils.math.CalendarPatterns;
 public class UserImport {
 	
 	private static final Logger log = Red5LoggerFactory.getLogger(UserImport.class, ScopeApplicationAdapter.webAppRootKey);
+    @Autowired
+    private Usermanagement userManagement;
 	
 	public UserImport() {	}
 
@@ -115,7 +118,7 @@ public class UserImport {
 				
 				us.setAdresses(Addressmanagement.getInstance().getAdressbyId(address_id));
 				
-				Long user_id = Usermanagement.getInstance().addUser(us);
+				Long user_id = userManagement.addUser(us);
 				
 				for (Iterator itOrga = itemUsers.elementIterator("organisations");itOrga.hasNext(); ){
 					Element itemElement = (Element) itOrga.next();

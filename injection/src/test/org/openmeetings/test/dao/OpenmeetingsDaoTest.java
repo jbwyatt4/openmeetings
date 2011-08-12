@@ -21,6 +21,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class OpenmeetingsDaoTest extends AbstractTestCase {
 	@Autowired //FIXME
 	private Configurationmanagement cfgManagement;
+    @Autowired
+    private Usermanagement userManagement;
 	
 	public OpenmeetingsDaoTest(String name){
 		super(name);
@@ -37,7 +39,7 @@ public class OpenmeetingsDaoTest extends AbstractTestCase {
 			jNameTimeZone = conf.getConf_value();
 		}
 
-		Long user_id = Usermanagement.getInstance().registerUser(
+		Long user_id = userManagement.registerUser(
     			"username", user.getPassword(), 
     			user.getLastname(), user.getLastname(), user.getLastname() + "@mail.com",
     			new Date(), "", "", 
@@ -52,14 +54,14 @@ public class OpenmeetingsDaoTest extends AbstractTestCase {
 
 		assertTrue("New user cann't registred", user_id > 0);
 
-		user = Usermanagement.getInstance().getUserById(user_id);
+		user = userManagement.getUserById(user_id);
 		assertNotNull("Can get user by ID", user);
 
 		// activate the User
 		user.setStatus(1);
 		user.setUpdatetime(new Date());
 
-		Usermanagement.getInstance().updateUser(user);
+		userManagement.updateUser(user);
 			
 	}
 	
@@ -74,7 +76,7 @@ public class OpenmeetingsDaoTest extends AbstractTestCase {
 		if (conf != null) {
 			jNameTimeZone = conf.getConf_value();
 		}
-		Long user_id = Usermanagement.getInstance().registerUserInit(
+		Long user_id = userManagement.registerUserInit(
 				new Long(3), 3, 1, 1, userlogin, userpass, "lastname",
 				"firstname", email, new java.util.Date(), "street", "no",
 				"fax", "zip", 1, "town", 0, false, null, "phone", "", false,
@@ -101,7 +103,7 @@ public class OpenmeetingsDaoTest extends AbstractTestCase {
 	final public void testRoomModeratorsDaoImpl() throws Exception {
 
 		Long userId = 1L;
-		Users user = Usermanagement.getInstance().getUserById(userId);
+		Users user = userManagement.getUserById(userId);
 		assertNotNull("Cann't get default user", user);
 		
 		List<Rooms> rooms = Roommanagement.getInstance().getPublicRooms(user.getLevel_id());

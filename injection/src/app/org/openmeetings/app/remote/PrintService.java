@@ -23,6 +23,8 @@ public class PrintService {
 	private static HashMap<String,PrintBean> currentExportList = new HashMap<String,PrintBean>();
 	@Autowired
 	private Sessionmanagement sessionManagement;
+    @Autowired
+    private Usermanagement userManagement;
 	
 	/*
 	 * Export List
@@ -32,7 +34,7 @@ public class PrintService {
 	public String addPrintList(String SID, List map, int width, int height) {
 		try {
 			Long users_id = sessionManagement.checkSession(SID);
-	        Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
+	        Long user_level = userManagement.getUserLevelByID(users_id);
 	        if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
 	        	String hashRaw = ""+new Date();
 	        	String hash = MD5.do_checksum(hashRaw);

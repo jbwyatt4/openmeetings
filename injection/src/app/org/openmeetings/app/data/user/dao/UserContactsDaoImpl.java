@@ -13,10 +13,13 @@ import org.openmeetings.app.persistence.utils.PersistenceSessionUtil;
 import org.openmeetings.app.remote.red5.ScopeApplicationAdapter;
 import org.red5.logging.Red5LoggerFactory;
 import org.slf4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class UserContactsDaoImpl {
 	
 	private static final Logger log = Red5LoggerFactory.getLogger(UserContactsDaoImpl.class, ScopeApplicationAdapter.webAppRootKey);
+    @Autowired
+    private Usermanagement userManagement;
 
 	private static UserContactsDaoImpl instance = null;
 
@@ -35,8 +38,8 @@ public class UserContactsDaoImpl {
 			
 			UserContacts userContact = new UserContacts();
 			userContact.setInserted(new Date());
-			userContact.setOwner(Usermanagement.getInstance().getUserById(ownerId));
-			userContact.setContact(Usermanagement.getInstance().getUserById(user_id));
+			userContact.setOwner(userManagement.getUserById(ownerId));
+			userContact.setContact(userManagement.getUserById(user_id));
 			userContact.setPending(pending);
 			userContact.setHash(hash);
 			

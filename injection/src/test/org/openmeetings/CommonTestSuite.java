@@ -46,11 +46,13 @@ import org.openmeetings.utils.DefaultSchemeCreator;
 import org.openmeetings.utils.TestReflectionApi;
 import org.red5.logging.Red5LoggerFactory;
 import org.slf4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 
 
 public class CommonTestSuite {
-
-        private static final Logger log = Red5LoggerFactory.getLogger(CommonTestSuite.class);
+	private static final Logger log = Red5LoggerFactory.getLogger(CommonTestSuite.class);
+    @Autowired //FIXME
+    static private Usermanagement userManagement;
 
     private static void setUp() {
         if (ScopeApplicationAdapter.webAppPath.length() == 0){
@@ -58,7 +60,7 @@ public class CommonTestSuite {
 			ScopeApplicationAdapter.webAppPath = webAppPath;
 		}
         try {
-            if (Usermanagement.getInstance().getUserById(1L) == null) {
+            if (userManagement.getUserById(1L) == null) {
                 DefaultSchemeCreator.makeDefaultScheme();
                 log.info("Default scheme created successfully");
             } else {
