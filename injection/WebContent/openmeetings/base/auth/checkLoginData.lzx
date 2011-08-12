@@ -1,0 +1,542 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<library>
+
+<!--- LOGIN panel window -->
+<class name="checkLoginData" extends="labelExplorerBox" labelid="108"
+    docking="true" resizeable="false" closable="false" 
+    width="460" height="230"
+     x="$once{ canvas.width/2 - this.width/2 }"  y="60">
+    
+    <handler name="onclose">
+        if (this.childObj!=null) this.childObj.close();
+    </handler>
+    
+    <handler name="oninit">
+    	_mainScrollBar.setAttribute("visibility","hidden");
+        lz.Focus.setFocus(this.username,true);
+    </handler>
+
+    <method name="login" args="item">
+        canvas.focusOnItem = this.username;
+        this.enterPressed = false;
+        
+        if (this.b2.visible) {
+            this.b2.onclick.sendEvent();
+        } else {
+            this.b3.onclick.sendEvent();
+        }
+    </method>   
+    
+    <attribute name="refObj" value="null" />
+    <attribute name="childObj" value="null" />
+    
+    <attribute name="labeliderror" value="0" type="number" />
+    <attribute name="enterPressed" type="boolean" value="false"/>
+    
+    <labelText name="n1" labelid="109" width="300" y="26" resize="false" x="2"/>
+        <customEdittext name="username" y="24" x="120" width="330" >
+            <handler name="oninit">
+                var t = new lz.sharedObject();
+                t.getLocal('userdata');
+                var g = t.getData('userdata');
+                if($debug) Debug.write("checkLoginData/g: ",g);
+                if(g!=null) if (g["username"]!=null) this.setAttribute('text',g["username"]);
+            </handler>      
+            <handler name="onkeyup" args="key">
+                <![CDATA[
+                if ( this.parent.enterPressed && ( key == 13 ) )
+                {
+                    parent.login();
+                }
+                ]]>
+            </handler>
+            <handler name="onkeydown" args="key">
+                if ( key == 13 )
+                {
+                    this.parent.enterPressed = true;
+                }
+            </handler>
+        </customEdittext>    
+
+    <labelText name="n2" labelid="110" width="300" y="56" resize="false" x="2"/>
+        <customEdittext name="userpass" y="54" password="true" x="120" width="330" >
+            <handler name="oninit">
+                var t = new lz.sharedObject();
+                t.getLocal('userdata');
+                var g = t.getData('userdata');
+                if(g!=null) if (g["userpass"]!=null) this.setAttribute('text',g["userpass"]);
+            </handler>                
+            <handler name="onkeyup" args="key">
+                <![CDATA[
+                if ( this.parent.enterPressed && ( key == 13 ) )
+                {
+                    parent.login();
+                }
+                ]]>
+            </handler>
+            <handler name="onkeydown" args="key">
+                if ( key == 13 )
+                {
+                    this.parent.enterPressed = true;
+                }
+            </handler>
+        </customEdittext>
+    
+    <labelText name="n5" text="Color-Style" width="300" y="86" resize="false" x="2"/>  
+        
+        <resetCombobox name="colors" width="330" y="84" x="120">
+            <attribute name="initselect" value="true" type="boolean" />
+            <handler name="oninit">
+                this.addItem('redorange','redorange');
+                this.addItem('mediumseagreen','mediumseagreen');
+                this.addItem('steelblue','steelblue');
+                this.addItem('lightsteelblue','lightsteelblue');
+                this.addItem('goldenrod','goldenrod');
+                this.addItem('silvergray','silvergray'); 
+                var t = new lz.sharedObject();
+                t.getLocal('userdata');
+                var g = t.getData('userdata');
+                if($debug) Debug.write("checkLoginData/g: ",g);
+                if(g!=null) {
+                    if (g["userlang"]!=null) {
+                        this.selectItem(g["usercolor"]);
+                    } else {
+                        this.selectItem('lightsteelblue');
+                    }
+                } else {
+                    this.selectItem('lightsteelblue');
+                }
+            </handler> 
+            <handler name="onselect" args="v">
+                //Debug.write("onselect: ",v.value);
+                if (this.initselect){
+                    this.initselect=false;
+                } else {
+                    if (v.value=="mediumseagreen"){
+                        canvas.setAttribute('basebgcolorizer',"0x3CB371");
+                        canvas.setAttribute('baseMousecolorizer',"0x66CC8E");
+                        canvas.setAttribute('baseMouseOvercolorizer',"0x66CC8E");
+                    } else if (v.value=="steelblue"){
+                        canvas.setAttribute('basebgcolorizer',"0x4682B4");
+                        canvas.setAttribute('baseMousecolorizer',"0x80AECC");
+                        canvas.setAttribute('baseMouseOvercolorizer',"0x80AECC");
+                    } else if (v.value=="redorange"){
+                        canvas.setAttribute('basebgcolorizer',"0xFC8558");
+                        canvas.setAttribute('baseMousecolorizer',"0xFDC4A6");
+                        canvas.setAttribute('baseMouseOvercolorizer',"0xFDC4A6");
+                    } else if (v.value=="lightsteelblue"){
+                        canvas.setAttribute('basebgcolorizer',"0xB0C4DE");
+                        canvas.setAttribute('baseMousecolorizer',"0xC4D5E6");
+                        canvas.setAttribute('baseMouseOvercolorizer',"0xC4D5E6");
+                    } else if (v.value=="goldenrod"){
+                        canvas.setAttribute('basebgcolorizer',"0xDAA520");
+                        canvas.setAttribute('baseMousecolorizer',"0xE8C064");
+                        canvas.setAttribute('baseMouseOvercolorizer',"0xE8C064");
+                    } else if (v.value=="silvergray"){
+                        canvas.setAttribute('basebgcolorizer',"0xC4C8CC");
+                        canvas.setAttribute('baseMousecolorizer',"0xC2C8CD");
+                        canvas.setAttribute('baseMouseOvercolorizer',"0xC2C8CD");
+                    }
+                    this.parent.close();
+                    new lz.checkLoginData(canvas.main_content._content.inner);
+                }
+            </handler>
+            <handler name="onkeyup" args="key">
+                <![CDATA[
+                if ( this.parent.enterPressed && ( key == 13 ) )
+                {
+                    parent.login();
+                }
+                ]]>
+            </handler>
+            <handler name="onkeydown" args="key">
+                if ( key == 13 )
+                {
+                    this.parent.enterPressed = true;
+                }
+            </handler>
+        </resetCombobox>    
+    
+    <labelText name="nlabelquality" text="Quality" y="116" x="2" visible="true" width="140" />     
+        <resetCombobox name="ncomboquality" width="330" y="114" x="120" editable="false" >
+            <handler name="oninit">
+                this.addItem("best ~ 16KB upload","best");
+                this.addItem("medium ~ 10KB upload ","medium");
+                var t = new lz.sharedObject();
+                t.getLocal('userdata');
+                var g = t.getData('userdata');
+                if($debug) Debug.write("checkLoginData/g: ",g);
+                if(g!=null) {
+                    if (g["userlang"]!=null) {
+                        this.selectItem(g["userquality"]);
+                    } else {
+                        this.selectItem("best");
+                    }
+                } else {
+                    this.selectItem("best");
+                }
+            </handler> 
+            <handler name="onselect">
+                canvas.vaquality = this.getValue();
+            </handler>
+            <handler name="onkeyup" args="key">
+                <![CDATA[
+                if ( this.parent.enterPressed && ( key == 13 ) )
+                {
+                    parent.login();
+                }
+                ]]>
+            </handler>
+            <handler name="onkeydown" args="key">
+                if ( key == 13 )
+                {
+                    this.parent.enterPressed = true;
+                }
+            </handler>
+        </resetCombobox>
+        
+	<labelText name="domain_label" text="Domain" width="300" y="144" resize="false" x="2" />     
+        <resetCombobox name="domain" width="330" y="144" x="120" editable="false">
+        	<handler name="oninit">
+        		//this.addItem("localhost","localhost");
+        		//this.addItem("eu.p-f.biz","SA-MeetingEU");
+        		//this.addItem("am.p-f.biz","SA-MeetingAM");
+        		//this.addItem("ap.p-f.biz","SA-MeetingAP");
+        		//this.selectItemAt(0);
+        		this.getActiveLdapConfigs.doCall();
+        	</handler>
+        	
+        	<!--
+        	public List<LdapConfig> getActiveLdapConfigs() 
+        	 -->
+            <netRemoteCallHib name="getActiveLdapConfigs" funcname="ldapconfigservice.getActiveLdapConfigs" 
+        				        remotecontext="$once{ canvas.thishib }" >      
+                <handler name="ondata" args="value">
+                    //The onResult-Handler will be called be the rtmpconnection
+                    <![CDATA[
+                        if ($debug) Debug.write("getActiveLdapConfigs: ",value);
+                        for (var i=0;i<value.length;i++) {
+                            parent.addItem(value[i].name,value[i].ldapConfigId);
+                        }
+                        
+                        var t = new lz.sharedObject();
+                        t.getLocal('userdata');
+                        var g = t.getData('userdata');
+                        if(g!=null) {
+                            if (g["userdomain"]!=null) {
+                            	
+                            	var tItem = this.getItem(g["userdomain"]);
+                            	if (tItem != null) {
+                                    parent.selectItem(g["userdomain"]);
+                            	} else {
+                            		parent.selectItemAt(0);
+                            	}
+                            	
+                            } else {
+                                parent.selectItemAt(0);
+                            }
+                        } else {
+                            parent.selectItemAt(0);
+                        }
+                        
+                    ]]>
+                </handler>  
+            </netRemoteCallHib>         	 
+        	
+        </resetCombobox>        
+
+    <labelText name="organisation_label_info" labelid="617" width="350" 
+               multiline="true" y="22" resize="false" x="2" visible="false" />     
+    
+    <labelText name="organisation_label" labelid="184" width="300" y="86" resize="false" x="2" visible="false" />     
+        <resetCombobox name="organisation" width="330" y="84" x="120" editable="false" visible="false" />
+        
+    <simpleLabelButton labelid="123" name="_register" width="120" y="$once{ parent.height-40 }" 
+        visible="false" x="10" height="22">
+        <handler name="onclick">
+            this.parent._register.setAttribute('visible',false);
+            this.parent.childObj = new lz.registerNewUser(canvas,{refObj:this.parent});     
+            lz.Keys.removeKeyComboCall(this.parent.pressEnter, ["enter"]);
+            //parent.showRegForm.doStart();
+        </handler>
+    </simpleLabelButton>     
+    
+    <simpleLabelButton labelid="1294" name="_facebook" width="120" y="$once{ parent.height-40 }" 
+            visible="false" x="200" height="22">
+    	<view resource="icon_facebook_rsc_png" x="2" y="1"></view>
+        <handler name="onclick">
+            lz.Browser.loadURL("http://apps.facebook.com/openmeetings/","_parent");
+        </handler>
+        <labelTooltip labelid="1295" />
+    </simpleLabelButton>       
+        
+    <simpleLabelButton name="b2" labelid="112" width="120" x="330" 
+    				   y="$once{ parent.height-40 }" height="22">
+        <handler name="onclick" >
+            this.parent.errormess.setAttribute('text','');
+            
+            if (this.parent.userpass.getText().length == 0) {
+            	new lz.rpcErrorDialog(canvas.main_content._content.inner,{errorid:51});
+            	return;
+            }
+            
+            this.parent.loginUser.doCall();
+            
+            //Recheck the Applet Status 
+            getAppletStatus();
+            
+        </handler>
+    </simpleLabelButton>   
+        
+    <simpleLabelButton name="b3" labelid="185" width="120" x="330" y="$once{ parent.height-40 }"
+            visible="false" height="22">
+        <handler name="onclick">
+            var orgIndexId = Number(parent.organisation.getValue());
+            hib.currentdomain = hib.userobject.organisation_users[orgIndexId].organisation.name;
+            hib.currentdomainObj = hib.userobject.organisation_users[orgIndexId].organisation;
+            hib.setCurrentUserOrganization.doCall();
+            hib.getLanguageByIdAndMax.start = 0;
+            hib.getLanguageByIdAndMax.doCall();
+            parent.close();
+        </handler>
+    </simpleLabelButton>    
+    
+    <text name="errormess" resize="true" y="168" x="2" fgcolor="red" fontsize="11"/>
+
+    <netRemoteCallHib name="loginUser" funcname="xmlcrm.loginUser" 
+        remotecontext="$once{ canvas.thishib }" activeErrorHandler="true" >   
+        <attribute name="sipLoader" value="null"/>   
+        <netparam><method name="getValue"> return canvas.sessionId; </method></netparam>  
+        <netparam><method name="getValue"> return parent.parent.username.getText(); </method></netparam>  
+        <netparam><method name="getValue"> return parent.parent.userpass.getText(); </method></netparam>
+        <netparam><method name="getValue"> return parent.parent._savelogindata.getValue(); </method></netparam> 
+        <netparam><method name="getValue"> return null; </method></netparam> 
+        <netparam><method name="getValue"> return Number(parent.parent.domain.getValue()); </method></netparam> 
+        <handler name="ondata" args="value">
+            <![CDATA[
+            //The onResult-Handler will be called be the rtmpconnection
+            	if ($debug) {
+                    Debug.write("user.lang: ",value.language_id);
+                    Debug.write("loginUser: ",value);
+                }
+            	
+                if (!(value<0)){
+                    hib.userlang = isNaN(value.language_id) ? 1 :  Number(value.language_id);
+                    
+                    if (this.parent._savelogindata.getValue()) {
+                        var t = new lz.sharedObject();
+                        t.getLocal('userdata');
+                        var g = t.getData('userdata');
+                        if (g==null) g = new Array();
+                        g["username"] = parent.username.getText();
+                        g["userpass"] = parent.userpass.getText();
+                        g["userquality"] = parent.ncomboquality.getValue();
+                        g["usercolor"] = parent.colors.getValue();
+                        g["userlang"] = hib.userlang;
+                        g["userdomain"] = parent.domain.getValue();
+                        g["saveuserdata"]=true;
+                        g["storedSession"] = canvas.sessionId;
+                        t.setData('userdata',g);
+                        t.flush(); 
+                    } else {
+                        var t = new lz.sharedObject();
+                        t.getLocal('userdata');
+                        var g = t.getData('userdata');
+                        if (g==null) g = new Array();
+                        g["username"] = '';
+                        g["userpass"] = '';
+                        g["userquality"] = null;
+                        g["usercolor"] = null;
+                        g["userlang"] = null;
+                        g["userdomain"] = null;
+                        g["saveuserdata"]=false;
+                        g["storedSession"] = "";
+                        t.setData('userdata',g);
+                        t.flush();                 
+                    }
+                
+                    canvas.setAttribute('user_id',value.user_id);
+                    canvas.setAttribute('firstName',value.firstname);
+                    canvas.setAttribute('lastName',value.lastname);
+                    canvas.setAttribute('mail','');
+                    canvas.setAttribute('lastLogin','');
+                    canvas.setAttribute('official_code','');
+                    canvas.setAttribute('picture_uri','');
+                    canvas.setAttribute('userlang', hib.userlang);
+                    canvas.setAttribute('language_id', hib.userlang);
+                    canvas.setAttribute('language','');
+                    canvas.setAttribute('currentuser',value.login);
+                    if (value.omTimeZone != null) {
+                        canvas.setAttribute('jNameTimeZone',value.omTimeZone.jname);
+                        canvas.timeZoneId = value.omTimeZone.omtimezoneId;
+                    }
+                    
+                    if (value.forceTimeZoneCheck) {
+                    	new lz.labelerrorPopup(canvas,{errorlabelid:1150});
+                    }
+                    
+                    if (value.level_id >= 2) {
+                    	canvas.becomemoderator = true;
+                    } else {
+                        canvas.becomemoderator = false;
+                    }
+                    
+                    if ($debug) Debug.write("value.organisation_users ",value.organisation_users);
+                    
+                    hib.userobject = value;
+                    if (value.organisation_users.length==0){
+                        if ($debug) Debug.warn("this user has no Organisation ");
+                    } else if (value.organisation_users.length==1){
+                        hib.currentdomain = value.organisation_users[0].organisation.name;
+                        hib.currentdomainObj = value.organisation_users[0].organisation;
+                        hib.setCurrentUserOrganization.doCall();
+                        hib.getLanguageByIdAndMax.start = 0;
+                        
+                        if (canvas.thishib.sip_enabled) {
+                            //Perform the Login to the SIP Applet
+                            if (sipIsEnabled()) {
+                                if ($debug) Debug.write(" -- sipIsEnabled -- ");
+                                
+                                parent.setAttribute("visibility","hidden");
+                                this.sipLoader = new lz.sipLoader(canvas);
+                                
+                                loginSipUser(hib.userobject.userSipData,this);
+                            } else {
+                            	
+                            	new lz.labelerrorPopup(canvas,{error:'SIP Applet is not ready!'});
+                            	
+                            	hib.getLanguageByIdAndMax.doCall();
+                                canvas.focusOnItem = null;
+                                parent.close();
+                            
+                            }
+                        } else {
+                        	
+                        	hib.getLanguageByIdAndMax.doCall();
+                        	canvas.focusOnItem = null;
+                            parent.close();
+                            
+                        }
+                        
+                    } else {
+                        parent._savelogindata.setAttribute('visible',false);
+                        parent.n1.setAttribute('visible',false);
+                        parent.username.setAttribute('visible',false);
+                        parent.n2.setAttribute('visible',false);
+                        parent.userpass.setAttribute('visible',false);
+                        parent.n5.setAttribute('visible',false);
+                        parent.colors.setAttribute('visible',false);
+                        parent._register.setAttribute('visible',false);
+                        parent.b2.setAttribute('visible',false);
+                        parent.organisation_label_info.setAttribute('visible',true);
+                        parent.organisation_label.setAttribute('visible',true);
+                        parent.organisation.setAttribute('visible',true);
+                        parent.b3.setAttribute('visible',true);
+                        parent.nlabelquality.setAttribute('visible',false);
+                        parent.ncomboquality.setAttribute('visible',false);
+                        parent.domain_label.setAttribute('visible',false);
+                        parent.domain.setAttribute('visible',false);
+                
+                        for (var i=0;i<value.organisation_users.length;i++){
+                            parent.organisation.addItem(value.organisation_users[i].organisation.name,String(i));
+                        }
+                        parent.organisation.selectItem(String(i-1));
+                        //Debug.write("multiple organisations Issue 31 http://code.google.com/p/openmeetings/issues/detail?id=31");
+                    }
+                    
+                }
+            ]]>
+        </handler>  
+        <handler name="onSipSuccess">
+        	this.sipLoader.destroy();
+        	hib.getLanguageByIdAndMax.doCall();
+            canvas.focusOnItem = null;
+            parent.close();
+        </handler>
+    </netRemoteCallHib>
+    
+    <netRemoteCallHib name="getLoginOptions" funcname="xmlcrm.getLoginOptions" remotecontext="$once{ canvas.thishib }" >      
+        <handler name="oninit">
+            this.doCall();
+        </handler> 
+        <handler name="ondata" args="value">
+            //The onResult-Handler will be called be the rtmpconnection
+            //Debug.write("allowFrontendRegister: ",value);
+            if (value[0].conf_value==1){
+                parent._register.setAttribute('visible',true);
+            }
+            if (value[1].conf_value==1){
+                parent._facebook.setAttribute('visible',true);
+            }
+        </handler>  
+    </netRemoteCallHib>    
+    
+    <labelCheckbox x="120" y="$once{ parent.height-62 }" fontsize="11"
+        name="_savelogindata" labelid="288" >
+        <handler name="oninit">
+            var t = new lz.sharedObject();
+            if($debug) Debug.write("checkLoginData/t: ",t);
+            t.getLocal('userdata');
+            var g = t.getData('userdata');
+            if($debug) Debug.write("checkLoginData/g: ",g);
+            var save = g["saveuserdata"];
+            if($debug) Debug.write("checkLoginData/save: ",save);
+            if(save) this.setValue(true);
+        </handler>
+    </labelCheckbox>        
+
+    <labelText align="right" resize="true" valign="bottom" >
+        <handler name="oninit">
+            <![CDATA[
+                this.setAttribute('text',"<u><FONT color='#0000CC'>visit "+ canvas.currentappname +"</FONT></u>");
+            ]]>
+        </handler>
+        <handler name="onclick">
+            lz.Browser.loadURL(canvas.currentappnameurl,"_blank");
+        </handler>        
+    </labelText>
+    
+    <labelText align="left" resize="true" valign="bottom">
+        <handler name="oninit">
+            <![CDATA[
+                this.setAttribute('text',"<u><FONT color='#0000CC'>"+ canvas.getLabelName(311) +"</FONT></u>");
+            ]]>
+        </handler>
+        <attribute name="showResetBox" value="false" type="boolean" />
+        <handler name="onclick">
+            if (!this.showResetBox){
+                this.parent.showResetForm.doStart();
+                this.showResetBox = true;
+            } else {
+                this.parent.disableResetForm.doStart();
+                this.showResetBox = false;
+            }
+        </handler>       
+    </labelText>        
+    
+    <method name="createReset" args="value">
+       var resetF=new lz.resetForm(value,{name:'_resetForm'});
+       lz.Keys.removeKeyComboCall(this.pressEnter, ["enter"]);
+       this.pressEnter = new LzDelegate(resetF, "reset");
+       lz.Keys.callOnKeyCombo(this.pressEnter, ["enter"]);
+    </method>
+    <method name="destroyReset" args="value">
+       value._resetForm.destroy();
+       lz.Keys.removeKeyComboCall(this.pressEnter, ["enter"]);
+       this.pressEnter = new LzDelegate(value, "login");
+       lz.Keys.callOnKeyCombo(this.pressEnter, ["enter"]);
+    </method>
+
+    <animator name="showRegForm" attribute="x" to="20" duration="1000" start="false" />
+    <animator name="doreset" attribute="x" to="$once{ canvas.width/2 - parent.width/2 }" 
+              duration="1000" start="false" />
+    
+    <animator name="showResetForm" attribute="height" to="370" duration="1000" 
+        onstop="parent.createReset(parent)" start="false" />
+    <animator name="disableResetForm" attribute="height" to="230" duration="1000" 
+        onstart="parent.destroyReset(parent);" start="false" />    
+
+</class>
+    
+
+</library>

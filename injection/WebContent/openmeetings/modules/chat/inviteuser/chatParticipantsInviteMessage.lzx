@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<library>
+	
+<class name="chatParticipantsInviteMessage" extends="guiPresenter" labelid="1138"
+    docking="true" resizeable="false" closable="true" y="260"
+    width="400" x="300" height="240">
+	
+	<attribute name="refObj" value="null" />
+	
+	<attribute name="publicSID" value="" type="string" />
+	<attribute name="user_id" value="0" type="number" />
+	<attribute name="conferenceRoomName" value="" type="string" />
+	<attribute name="roomId" value="0" type="number" />
+	
+	<handler name="oninit">
+		<![CDATA[
+		  
+		  var tString = canvas.firstName + ' ' + canvas.lastName + ' ' 
+		                  + canvas.getLabelName(1137) + ' ' 
+		                  + this.conferenceRoomName;
+		                  
+		  this.message.setAttribute("text",tString);
+		
+		]]>
+	</handler>
+	
+	<method name="send">
+		
+		this.sendMessageWithClientByPublicSIDOrUser.messageObject = new Object
+		this.sendMessageWithClientByPublicSIDOrUser.messageObject["message"] = "inviteToRoom";
+		this.sendMessageWithClientByPublicSIDOrUser.messageObject["action"] = "inviteToRoom";
+		this.sendMessageWithClientByPublicSIDOrUser.messageObject["roomId"] = this.roomId;
+		this.sendMessageWithClientByPublicSIDOrUser.messageObject["usermessage"] = this.message.getText();
+		this.sendMessageWithClientByPublicSIDOrUser.messageObject["publicSID"] = canvas.publicSID;
+		
+		if ($debug) Debug.write("Send to _ ",this.publicSID);
+		if ($debug) Debug.write("Send to _ ",this.user_id);
+		
+		this.sendMessageWithClientByPublicSIDOrUser.doCall();
+		
+	</method>
+	
+    <netRemoteCallHib name="sendMessageWithClientByPublicSIDOrUser" funcname="sendMessageWithClientByPublicSIDOrUser" 
+                      remotecontext="$once{ canvas.thishib }" >  
+        <attribute name="messageObject" value="null" />
+        <netparam><method name="getValue">return parent.messageObject;</method></netparam>
+        <netparam><method name="getValue">return parent.parent.publicSID;</method></netparam>
+        <netparam><method name="getValue">return parent.parent.user_id;</method></netparam>
+        <handler name="ondata" args="value">
+            <![CDATA[
+                if ($debug) Debug.write("+sendMessageWithClientByPublicSIDOrUser : ",value);
+                
+                if (parent._switch.getValue()) {
+            
+                    parent.refObj.checkConditionsWhenButtonClicked(null);
+                    
+                } else {
+                	
+                	parent.refObj.doCloseWindow();
+                	
+                }
+                
+                parent.close();
+            ]]>
+        </handler>  
+    </netRemoteCallHib>	
+    
+    <labelText labelid="1136" x="2" y="22" fontstyle="bold" />
+    
+    <customScrollEdittext name="message" y="42" x="2" width="$once{ parent.width - 4 }" 
+            height="100" text="" />
+            
+    <labelCheckbox x="2" y="$once{ parent.height-48 }" fontsize="11"
+        name="_switch" labelid="1134" >
+    </labelCheckbox>  
+    
+    <simpleLabelButton labelid="1139" width="200" x="88" y="$once{ parent.height-22 }" 
+        onclick="this.parent.send();" />
+        
+    <simpleLabelButton labelid="25" width="100" x="290" y="$once{ parent.height-22 }" 
+        onclick="this.parent.close();" />
+
+</class>
+
+</library>

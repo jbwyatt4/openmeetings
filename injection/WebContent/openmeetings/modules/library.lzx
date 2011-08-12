@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<library>
+	
+	<!-- -->
+	<include href="conference/" />
+	 
+	 
+	<include href="chat/" />
+	<include href="settings/" />
+
+	<include href="invitation/" />
+    <include href="lzrecordcontent/" />
+
+	<include href="dashboard/" />
+
+    <!-- --> 
+	<include href="meetings/" />
+	<include href="recording/" />
+     
+    <include href="admin/" />
+    <!--
+    <include href="calendar/" />
+     -->
+    
+    <include href="sharing/" />
+    <include href="screenSharer2/" />
+    
+    <include href="sipintegration/" />
+    
+    <!-- -->
+    <include href="lzcalendar/" />
+    
+
+</library>
