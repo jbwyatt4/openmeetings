@@ -1,14 +1,16 @@
 package org.openmeetings.calendar;
 
 import junit.framework.TestCase;
-import org.apache.log4j.Logger;
-import org.slf4j.LoggerFactory;
 
+import org.apache.log4j.Logger;
 import org.openmeetings.app.data.beans.basic.SearchResult;
 import org.openmeetings.app.data.user.Usermanagement;
+import org.springframework.beans.factory.annotation.Autowired;
 
 
 public class TestDatabaseStructureUsersSearch extends TestCase {
+    @Autowired
+    private Usermanagement userManagement;
 
 	private static final Logger log = Logger.getLogger(TestDatabaseStructureUsersSearch.class);
 
@@ -20,7 +22,7 @@ public class TestDatabaseStructureUsersSearch extends TestCase {
 
 		try {
 			
-			 SearchResult users = Usermanagement.getInstance().getAllUserByRange("first", 0, 10, "orderby", true);
+			 SearchResult users = userManagement.getAllUserByRange("first", 0, 10, "orderby", true);
 			 log.debug("[result]" + users.getResult().size());
 			 log.debug("[records]"+ users.getRecords());
 			 

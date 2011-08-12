@@ -42,6 +42,8 @@ public class UploadHandler extends HttpServlet {
 	private String filesString[] = null;
 	@Autowired
 	private Sessionmanagement sessionManagement;
+    @Autowired
+    private Usermanagement userManagement;
 
 	public UploadHandler() {
 	}
@@ -65,8 +67,7 @@ public class UploadHandler extends HttpServlet {
 			log.debug("sid: " + sid);
 
 			Long userId = sessionManagement.checkSession(sid);
-			Long userLevel = Usermanagement.getInstance().getUserLevelByID(
-					userId);
+			Long userLevel = userManagement.getUserLevelByID(userId);
 			log.debug("userId = " + userId + ", userLevel = " + userLevel);
 
 			if (userLevel <= 0) {

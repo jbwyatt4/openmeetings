@@ -19,31 +19,33 @@ public class ConfigurationService {
 	private Sessionmanagement sessionManagement;
 	@Autowired
 	private Configurationmanagement cfgManagement;
+    @Autowired
+    private Usermanagement userManagement;
 	
 	/*
 	 * Configuration Handlers
 	 */    
     public SearchResult getAllConf(String SID, int start ,int max, String orderby, boolean asc){
         Long users_id = sessionManagement.checkSession(SID);
-        Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);     	
+        Long user_level = userManagement.getUserLevelByID(users_id);     	
         return cfgManagement.getAllConf(user_level, start, max, orderby, asc);
     }
     
     public Configuration getConfByConfigurationId(String SID,long configuration_id){
         Long users_id = sessionManagement.checkSession(SID);
-        Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);     	
+        Long user_level = userManagement.getUserLevelByID(users_id);     	
         return cfgManagement.getConfByConfigurationId(user_level,configuration_id);
     }
     
     public Long saveOrUpdateConfiguration(String SID,LinkedHashMap values){
         Long users_id = sessionManagement.checkSession(SID);
-        Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);     	
+        Long user_level = userManagement.getUserLevelByID(users_id);     	
         return cfgManagement.saveOrUpdateConfiguration(user_level,values, users_id);
     }
     
     public Long deleteConfiguration(String SID,LinkedHashMap values){
         Long users_id = sessionManagement.checkSession(SID);
-        Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);     	
+        Long user_level = userManagement.getUserLevelByID(users_id);     	
         return cfgManagement.deleteConfByConfiguration(user_level, values, users_id);
     }
 	    

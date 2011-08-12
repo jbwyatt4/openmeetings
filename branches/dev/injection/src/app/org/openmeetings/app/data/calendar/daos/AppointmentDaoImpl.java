@@ -33,6 +33,7 @@ import org.openmeetings.app.persistence.beans.user.Users;
 import org.openmeetings.app.remote.red5.ScopeApplicationAdapter;
 import org.red5.logging.Red5LoggerFactory;
 import org.slf4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 @Transactional
@@ -41,6 +42,8 @@ public class AppointmentDaoImpl {
 	private static final Logger log = Red5LoggerFactory.getLogger(AppointmentDaoImpl.class, ScopeApplicationAdapter.webAppRootKey);
 	@PersistenceContext
 	private EntityManager em;
+    @Autowired
+    private Usermanagement userManagement;
 	
 	/*
 	 * insert, update, delete, select
@@ -463,7 +466,7 @@ public class AppointmentDaoImpl {
 			}
 		    
 		    // Adding Invitor as Meetingmember
-			Users user = Usermanagement.getInstance().getUserById(users_id); 
+			Users user = userManagement.getUserById(users_id); 
 			
 			String invitorName = user.getFirstname() + " " + user.getLastname() + " [" + user.getAdresses().getEmail() + "]";
 			
@@ -601,7 +604,7 @@ public class AppointmentDaoImpl {
 		    List<MeetingMember> meetingsRemoteMembers = MeetingMemberDaoImpl.getInstance().getMeetingMemberByAppointmentId(ap.getAppointmentId());
 		    
 		    // Adding Invitor Name
-			Users user = Usermanagement.getInstance().getUserById(users_id); 
+			Users user = userManagement.getUserById(users_id); 
 		    String invitorName = user.getFirstname() + " " + user.getLastname() + " [" + user.getAdresses().getEmail() + "]";
 		    
 		    //Send notification of updated Event

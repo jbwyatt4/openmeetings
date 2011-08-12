@@ -16,10 +16,13 @@ import org.openmeetings.app.persistence.beans.user.Users;
 import org.openmeetings.app.persistence.utils.PersistenceSessionUtil;
 import org.red5.logging.Red5LoggerFactory;
 import org.slf4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class RoomModeratorsDaoImpl {
 	
 	private static final Logger log = Red5LoggerFactory.getLogger(RoomModeratorsDaoImpl.class);
+    @Autowired
+    private Usermanagement userManagement;
 
 	private static RoomModeratorsDaoImpl instance;
 
@@ -248,7 +251,7 @@ public class RoomModeratorsDaoImpl {
 				Long userId = Long.parseLong(roomModeratorObj.get("userId").toString());
 				Boolean isSuperModerator = Boolean.parseBoolean(roomModeratorObj.get("isSuperModerator").toString());
 				
-				this.addRoomModeratorByUserId(Usermanagement.getInstance().getUserById(userId), isSuperModerator, roomId);
+				this.addRoomModeratorByUserId(userManagement.getUserById(userId), isSuperModerator, roomId);
 				
 			}
 			
@@ -273,7 +276,7 @@ public class RoomModeratorsDaoImpl {
 				Boolean isSuperModerator = Boolean.parseBoolean(roomModeratorObj.get("isSuperModerator").toString());
 				
 				if (roomModeratorsId == null || roomModeratorsId == 0) {
-					Long newRoomModeratorId = this.addRoomModeratorByUserId(Usermanagement.getInstance().getUserById(userId), isSuperModerator, roomId);
+					Long newRoomModeratorId = this.addRoomModeratorByUserId(userManagement.getUserById(userId), isSuperModerator, roomId);
 					
 					roomModeratorObj.put("roomModeratorsId", newRoomModeratorId);
 					

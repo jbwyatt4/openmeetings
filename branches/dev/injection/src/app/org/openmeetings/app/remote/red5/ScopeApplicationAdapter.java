@@ -72,6 +72,8 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 	private AppointmentLogic appointmentLogic;
 	@Autowired
 	private Sessionmanagement sessionManagement;
+    @Autowired
+    private Usermanagement userManagement;
 
 	//This is the Folder where all executables are written
 	//for windows platform
@@ -1833,7 +1835,7 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 			log.debug("UDPATE SESSION "+SID+", "+userId);
 			sessionManagement.updateUserWithoutSession(SID, userId);
 			
-			Users user = Usermanagement.getInstance().getUserById(userId);
+			Users user = userManagement.getUserById(userId);
 			
 			if (user != null) {
 				currentClient.setExternalUserId(user.getExternalUserId());
@@ -1885,7 +1887,7 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 			log.debug("UDPATE SESSION "+SID+", "+userId);
 			sessionManagement.updateUserWithoutSession(SID, userId);
 			
-			Users user = Usermanagement.getInstance().getUserById(userId);
+			Users user = userManagement.getUserById(userId);
 			
 			if (user != null) {
 				currentClient.setExternalUserId(user.getExternalUserId());

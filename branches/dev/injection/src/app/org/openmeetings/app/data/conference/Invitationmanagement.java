@@ -54,6 +54,8 @@ public class Invitationmanagement {
 	private AppointmentLogic appointmentLogic;
 	@Autowired
 	private Configurationmanagement cfgManagement;
+    @Autowired
+    private Usermanagement userManagement;
 	
 	private Invitationmanagement() {}
 
@@ -187,7 +189,7 @@ public class Invitationmanagement {
 		Users user;
 		
 		try{
-			user= Usermanagement.getInstance().getUserById(canceling_user_id);
+			user= userManagement.getUserById(canceling_user_id);
 		}catch(Exception e){
 			log.error("Cancelling user cant be retrieved");
 			return;
@@ -307,7 +309,7 @@ public class Invitationmanagement {
 		Users user;
 		
 		try{
-			user= Usermanagement.getInstance().getUserById(canceling_user_id);
+			user= userManagement.getUserById(canceling_user_id);
 		}catch(Exception e){
 			log.error("Cancelling user cant be retrieved");
 			return;
@@ -629,7 +631,7 @@ public class Invitationmanagement {
 		
 		
 		// Defining Organizer
-		Users user = Usermanagement.getInstance().getUserById(organizer_userId);
+		Users user = userManagement.getUserById(organizer_userId);
 		
 		OmTimeZone omTimeZone = OmTimeZoneDaoImpl.getInstance().getOmTimeZone(jNameTimeZone);
 		
@@ -684,7 +686,7 @@ public class Invitationmanagement {
 		
 		
 		// Defining Organizer
-		Users user = Usermanagement.getInstance().getUserById(organizer_userId);
+		Users user = userManagement.getUserById(organizer_userId);
 		
 		IcalHandler handler = new IcalHandler(IcalHandler.ICAL_METHOD_REQUEST);
 		
@@ -753,7 +755,7 @@ public class Invitationmanagement {
 			atts.add(attendeeList);
 			
 			// Defining Organizer
-			Users user = Usermanagement.getInstance().getUserById(organizer_userId);
+			Users user = userManagement.getUserById(organizer_userId);
 			
 			HashMap<String, String> organizerAttendee = handler.getAttendeeData(email, username, invitor);
 			if (user != null) {

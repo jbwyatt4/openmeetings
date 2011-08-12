@@ -38,7 +38,9 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 public class WhiteBoardService implements IPendingServiceCallback {
 	
-private static final Logger log = Red5LoggerFactory.getLogger(WhiteBoardService.class, "openmeetings");
+	private static final Logger log = Red5LoggerFactory.getLogger(WhiteBoardService.class, "openmeetings");
+    @Autowired
+    private Usermanagement userManagement;
 	
 	private WhiteBoardService() {}
 	
@@ -251,7 +253,7 @@ private static final Logger log = Red5LoggerFactory.getLogger(WhiteBoardService.
 			RoomClient currentClient = this.clientListManager.getClientByStreamId(streamid);
 			
 			Long users_id = sessionManagement.checkSession(SID);
-	        Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
+	        Long user_level = userManagement.getUserLevelByID(users_id);
 	        
 	        if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
 	        	
@@ -289,7 +291,7 @@ private static final Logger log = Red5LoggerFactory.getLogger(WhiteBoardService.
 			RoomClient currentClient = this.clientListManager.getClientByStreamId(streamid);
 			
 			Long users_id = sessionManagement.checkSession(SID);
-	        Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
+	        Long user_level = userManagement.getUserLevelByID(users_id);
 	        
 	        if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
 	        	
@@ -327,7 +329,7 @@ private static final Logger log = Red5LoggerFactory.getLogger(WhiteBoardService.
 			RoomClient currentClient = this.clientListManager.getClientByStreamId(streamid);
 			
 			Long users_id = sessionManagement.checkSession(SID);
-	        Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
+	        Long user_level = userManagement.getUserLevelByID(users_id);
 	        
 	        if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
 	        	

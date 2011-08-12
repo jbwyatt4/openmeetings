@@ -39,6 +39,8 @@ public class LdapLoginManagement {
 	private Sessionmanagement sessionManagement;
 	@Autowired
 	private Configurationmanagement cfgManagement;
+    @Autowired
+    private Usermanagement userManagement;
 	
 	// External User Types
 	public static final String EXTERNAL_USER_TYPE_LDAP = "LDAP";
@@ -372,7 +374,7 @@ public class LdapLoginManagement {
 		Users u = null;
 		
 		try{
-			u= Usermanagement.getInstance().getUserByLogin(user);
+			u= userManagement.getUserByLogin(user);
 			
 		}catch(Exception e){
 			log.error("Error retrieving Userdata : " + e.getMessage());
@@ -456,7 +458,7 @@ public class LdapLoginManagement {
 				}
 				
 				// Return UserObject
-				Users u2 =  Usermanagement.getInstance().getUserById(userid);
+				Users u2 =  userManagement.getUserById(userid);
 				
 				if(u2 == null)
 					return new Long(-1);
@@ -464,7 +466,7 @@ public class LdapLoginManagement {
 				u2.setExternalUserType(EXTERNAL_USER_TYPE_LDAP); //TIBO
 				
 				//initialize lazy collection
-				Usermanagement.getInstance().refreshUserObject(u2);
+				userManagement.refreshUserObject(u2);
 				
 				
 				
@@ -504,7 +506,7 @@ public class LdapLoginManagement {
 				u.setPassword(passwd);
 			}
 			try{
-				Usermanagement.getInstance().updateUserObject(u,true );
+				userManagement.updateUserObject(u,true );
 			}catch(Exception e){
 				log.error("Error updating user : " + e.getMessage());
 				return new Long(-1);
@@ -609,7 +611,7 @@ public class LdapLoginManagement {
 			
 			//CHeck if LDAP Users get a SIP Account Issue 1099
 			
-			newUserId= Usermanagement.getInstance().registerUserInit(
+			newUserId= userManagement.registerUserInit(
 									2,//user_level
 									1,//level_id
 									1,//available

@@ -34,10 +34,12 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 public class ExportToImage extends HttpServlet {
-	 
+	private static final long serialVersionUID = -3535998254746084297L;
 	private static final Logger log = Red5LoggerFactory.getLogger(ExportToImage.class, ScopeApplicationAdapter.webAppRootKey);
 	@Autowired
 	private Sessionmanagement sessionManagement;
+    @Autowired
+    private Usermanagement userManagement;
 	
 	/*
 	 * (non-Javadoc)
@@ -76,7 +78,7 @@ public class ExportToImage extends HttpServlet {
 			}
 
 			Long users_id = sessionManagement.checkSession(sid);
-			Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
+			Long user_level = userManagement.getUserLevelByID(users_id);
 
 			log.debug("users_id: "+users_id);
 			log.debug("user_level: "+user_level);

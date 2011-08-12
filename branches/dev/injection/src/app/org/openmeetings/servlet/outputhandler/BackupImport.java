@@ -92,6 +92,8 @@ public class BackupImport extends HttpServlet {
 	private Sessionmanagement sessionManagement;
 	@Autowired
 	private Configurationmanagement cfgManagement;
+    @Autowired
+    private Usermanagement userManagement;
 	
 	private HashMap<Long, Long> usersMap = new HashMap <Long, Long>();
 	private HashMap<Long, Long> organisationsMap = new HashMap <Long, Long>();
@@ -131,7 +133,7 @@ public class BackupImport extends HttpServlet {
 				log.debug("uploading........ sid: "+sid);
 				
 				Long users_id = sessionManagement.checkSession(sid);
-				Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
+				Long user_level = userManagement.getUserLevelByID(users_id);
 				
 				if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)) {
 					
@@ -737,7 +739,7 @@ public class BackupImport extends HttpServlet {
         				log.debug("Import User ID "+userId);
         				us.setUser_id(null);
         				us.setStarttime(new Date());
-        				Long actualNewUserId = Usermanagement.getInstance().addUserBackup(us);
+        				Long actualNewUserId = userManagement.addUserBackup(us);
 	        			usersMap.put(userId, actualNewUserId);
         				
         				for (Iterator<Organisation_Users> orgUserIterator = orgUsers.iterator();orgUserIterator.hasNext();) {
@@ -1023,13 +1025,13 @@ public class BackupImport extends HttpServlet {
 	        			Long userContactId = getNewId(importLongType(unformatString(pmObject.element("userContactId").getText())), Maps.USERCONTACTS);
 	        			Long parentMessage = importLongType(unformatString(pmObject.element("parentMessage").getText()));
 	        			Boolean bookedRoom = importBooleanType(unformatString(pmObject.element("bookedRoom").getText()));
-	        			Users from = Usermanagement.getInstance().getUserById(getNewId(importLongType(unformatString(pmObject.element("from").getText())), Maps.USERS));
-	        			Users to = Usermanagement.getInstance().getUserById(getNewId(importLongType(unformatString(pmObject.element("to").getText())), Maps.USERS));
+	        			Users from = userManagement.getUserById(getNewId(importLongType(unformatString(pmObject.element("from").getText())), Maps.USERS));
+	        			Users to = userManagement.getUserById(getNewId(importLongType(unformatString(pmObject.element("to").getText())), Maps.USERS));
 	        			Date inserted = CalendarPatterns.parseDateWithHour(unformatString(pmObject.element("inserted").getText()));
 	        			Boolean isContactRequest = importBooleanType(unformatString(pmObject.element("isContactRequest").getText()));
 	        			Boolean isRead = importBooleanType(unformatString(pmObject.element("isRead").getText()));
 	        			Boolean isTrash = importBooleanType(unformatString(pmObject.element("isTrash").getText()));
-	        			Users owner = Usermanagement.getInstance().getUserById(getNewId(importLongType(unformatString(pmObject.element("owner").getText())), Maps.USERS));
+	        			Users owner = userManagement.getUserById(getNewId(importLongType(unformatString(pmObject.element("owner").getText())), Maps.USERS));
 	        			Rooms room = Roommanagement.getInstance().getRoomById(getNewId(importLongType(unformatString(pmObject.element("room").getText())), Maps.ROOMS));
 	        			
 	        			PrivateMessages pm = new PrivateMessages();
@@ -1100,8 +1102,8 @@ public class BackupImport extends HttpServlet {
 	        			Element usercontact = innerIter.next();
 	        			
 	        			String hash = unformatString(usercontact.element("hash").getText());
-	        			Users contact = Usermanagement.getInstance().getUserById(getNewId(importLongType(unformatString(usercontact.element("contact").getText())), Maps.USERS));
-	        			Users owner = Usermanagement.getInstance().getUserById(getNewId(importLongType(unformatString(usercontact.element("owner").getText())), Maps.USERS));
+	        			Users contact = userManagement.getUserById(getNewId(importLongType(unformatString(usercontact.element("contact").getText())), Maps.USERS));
+	        			Users owner = userManagement.getUserById(getNewId(importLongType(unformatString(usercontact.element("owner").getText())), Maps.USERS));
 	        			Boolean pending = importBooleanType(unformatString(usercontact.element("pending").getText()));
 	        			Boolean shareCalendar = importBooleanType(unformatString(usercontact.element("shareCalendar").getText()));
 	        			Long userContactId = importLongType(unformatString(usercontact.element("userContactId").getText()));
@@ -1409,7 +1411,7 @@ public class BackupImport extends HttpServlet {
 	        			app.setLanguage_id(language_id);
 	        			app.setIsPasswordProtected(isPasswordProtected);
 	        			app.setPassword(password);
-	        			app.setUserId(Usermanagement.getInstance().getUserById(users_id));
+	        			app.setUserId(userManagement.getUserById(users_id));
 	        			
 	        			appointmentList.add(app);
 	        			
@@ -1613,7 +1615,7 @@ public class BackupImport extends HttpServlet {
 	        					
 	        					roomModerators.setDeleted("false");
 	        					roomModerators.setRoomId(getNewId(rooms_id, Maps.ROOMS));
-	        					roomModerators.setUser(Usermanagement.getInstance().getUserById(user_id));
+	        					roomModerators.setUser(userManagement.getUserById(user_id));
 	        					roomModerators.setIsSuperModerator(is_supermoderator);
 	        					
         						RoomModeratorsDaoImpl.getInstance().addRoomModeratorByObj(roomModerators);

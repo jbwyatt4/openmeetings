@@ -3,20 +3,18 @@ package org.openmeetings.test.dao;
 import java.util.Iterator;
 import java.util.List;
 
-import org.openmeetings.app.data.basic.Sessionmanagement;
 import org.openmeetings.app.data.conference.Roommanagement;
 import org.openmeetings.app.data.conference.dao.RoomModeratorsDaoImpl;
 import org.openmeetings.app.data.user.Usermanagement;
-import org.openmeetings.app.persistence.beans.calendar.Appointment;
-import org.openmeetings.app.persistence.beans.domain.Organisation;
 import org.openmeetings.app.persistence.beans.rooms.RoomModerators;
 import org.openmeetings.app.persistence.beans.rooms.Rooms;
 import org.openmeetings.app.persistence.beans.user.Users;
 import org.openmeetings.test.dao.base.AbstractTestCase;
-import org.openmeetings.test.dao.base.TestUtils;
-import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class RoomModeratorsDaoImplTest extends AbstractTestCase {
+    @Autowired
+    private Usermanagement userManagement;
 
 	public RoomModeratorsDaoImplTest(String name){
 		super(name);
@@ -25,7 +23,7 @@ public class RoomModeratorsDaoImplTest extends AbstractTestCase {
 	final public void testRoomModeratorsDaoImpl() throws Exception {
 
 		Long userId = 1L;
-		Users user = Usermanagement.getInstance().getUserById(userId);
+		Users user = userManagement.getUserById(userId);
 		assertNotNull("Cann't get default user", user);
 		
 		List<Rooms> rooms = Roommanagement.getInstance().getPublicRooms(user.getLevel_id());

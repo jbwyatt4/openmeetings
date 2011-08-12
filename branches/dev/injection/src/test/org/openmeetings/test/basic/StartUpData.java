@@ -8,10 +8,13 @@ import org.openmeetings.app.data.user.Organisationmanagement;
 import org.openmeetings.app.data.user.Statemanagement;
 import org.openmeetings.app.data.user.Salutationmanagement;
 import org.openmeetings.app.data.user.Usermanagement;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import junit.framework.TestCase;
 
 public class StartUpData extends TestCase {
+    @Autowired
+    private Usermanagement userManagement;
 	
 	public StartUpData (String testname){
 		super(testname);
@@ -19,9 +22,9 @@ public class StartUpData extends TestCase {
 	
 	public void testGenerateBasicNavi() throws Exception{
 		
-		Usermanagement.getInstance().addUserLevel("User", 1);
-		Usermanagement.getInstance().addUserLevel("Moderator", 2);
-		Usermanagement.getInstance().addUserLevel("Admin", 3);	
+		userManagement.addUserLevel("User", 1);
+		userManagement.addUserLevel("Moderator", 2);
+		userManagement.addUserLevel("Admin", 3);	
 		
 		Navimanagement.getInstance().addGlobalStructure("home", 1, 124, true, true, 1, "home","false", 586L);
 		
@@ -53,7 +56,7 @@ public class StartUpData extends TestCase {
 		Statemanagement.getInstance().addState("Danemark");
 		
 		//Add user
-		Long user_id = Usermanagement.getInstance().registerUserInit(new Long(3),3, 1, 1, 
+		Long user_id = userManagement.registerUserInit(new Long(3),3, 1, 1, 
 				"swagner", "test", "lastname", "firstname", 
 				"seba.wagner@gmail.com", new java.util.Date(), "street", "no", "fax", 
 				"zip", 1, "town", 0, false, null, "phone", "", false,

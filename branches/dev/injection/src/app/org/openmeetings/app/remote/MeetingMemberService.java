@@ -14,6 +14,8 @@ public class MeetingMemberService {
 	private static final Logger log = Red5LoggerFactory.getLogger(MeetingMemberService.class, ScopeApplicationAdapter.webAppRootKey);
 	@Autowired
 	private Sessionmanagement sessionManagement;
+    @Autowired
+    private Usermanagement userManagement;
 	
 	private static MeetingMemberService instance = null;
 
@@ -36,7 +38,7 @@ public class MeetingMemberService {
 //		try{
 //			
 //			Long users_id = Sessionmanagement.getInstance().checkSession(SID);
-//	        Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
+//	        Long user_level = userManagement.getUserLevelByID(users_id);
 //	        if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
 //					        	
 //	        Long id = MeetingMemberLogic.getInstance().addMeetingMember( firstname,  lastname,  memberStatus,
@@ -59,7 +61,7 @@ public class MeetingMemberService {
 		try{
 			
 			Long users_id = sessionManagement.checkSession(SID);
-	        Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
+	        Long user_level = userManagement.getUserLevelByID(users_id);
 	        if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
 					        	
 	        return	 MeetingMemberLogic.getInstance().updateMeetingMember(meetingMemberId, 
@@ -78,7 +80,7 @@ public class MeetingMemberService {
 		try{
 			
 			Long users_id = sessionManagement.checkSession(SID);
-	        Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
+	        Long user_level = userManagement.getUserLevelByID(users_id);
 	        if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
 					        	
 	        return	 MeetingMemberLogic.getInstance().deleteMeetingMember(meetingMemberId, users_id, language_id);

@@ -1,19 +1,20 @@
 package org.openmeetings.test.dao;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 import org.openmeetings.app.data.conference.Roommanagement;
 import org.openmeetings.app.data.file.dao.FileExplorerItemDaoImpl;
 import org.openmeetings.app.data.user.Usermanagement;
-import org.openmeetings.app.data.user.dao.PrivateMessagesDaoImpl;
 import org.openmeetings.app.persistence.beans.files.FileExplorerItem;
 import org.openmeetings.app.persistence.beans.rooms.Rooms;
 import org.openmeetings.app.persistence.beans.user.Users;
 import org.openmeetings.test.dao.base.AbstractTestCase;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class FileExplorerItemDaoImplTest extends AbstractTestCase {
+    @Autowired
+    private Usermanagement userManagement;
 
 	public FileExplorerItemDaoImplTest(String name) {
 		super(name);
@@ -22,7 +23,7 @@ public class FileExplorerItemDaoImplTest extends AbstractTestCase {
 	final public void testFileExplorerItemDaoImpl() throws Exception {
 		
 		Long userId = 1L;
-		Users user = Usermanagement.getInstance().getUserById(userId);
+		Users user = userManagement.getUserById(userId);
 		assertNotNull("Cann't get default user", user);
 		
 		List<Rooms> rooms = Roommanagement.getInstance().getPublicRooms(user.getLevel_id());

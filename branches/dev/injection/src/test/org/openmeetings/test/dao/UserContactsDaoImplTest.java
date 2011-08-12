@@ -3,8 +3,11 @@ import org.openmeetings.app.data.user.Usermanagement;
 import org.openmeetings.app.data.user.dao.UserContactsDaoImpl;
 import org.openmeetings.app.persistence.beans.user.UserContacts;
 import org.openmeetings.test.dao.base.AbstractTestCase;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class UserContactsDaoImplTest extends AbstractTestCase {
+    @Autowired
+    private Usermanagement userManagement;
 
 	public UserContactsDaoImplTest(String name){
 		super(name);
@@ -20,7 +23,7 @@ public class UserContactsDaoImplTest extends AbstractTestCase {
 		assertTrue("New contact cann't added", id > 0);
 		UserContacts userContact = contactDaoImpl.getUserContacts(id);
 
-		assertTrue("Contact should be the same with user", userContact.getContact().equals(Usermanagement.getInstance().getUserById(id)));
+		assertTrue("Contact should be the same with user", userContact.getContact().equals(userManagement.getUserById(id)));
 		
 	}
 	

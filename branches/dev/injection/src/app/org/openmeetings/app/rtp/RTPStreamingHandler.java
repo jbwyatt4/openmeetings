@@ -26,6 +26,8 @@ public class RTPStreamingHandler {
 		private static final Logger log = Red5LoggerFactory.getLogger(RTPStreamingHandler.class, ScopeApplicationAdapter.webAppRootKey);
 	@Autowired //FIXME
 	private static Sessionmanagement sessionManagement;
+    @Autowired //FIXME
+    static private Usermanagement userManagement;
 		
 		/** Contains all RTPSessions*/
 		private static HashMap<Rooms, RTPScreenSharingSession> rtpSessions = new HashMap<Rooms, RTPScreenSharingSession>();
@@ -104,7 +106,7 @@ public class RTPStreamingHandler {
 				throw new Exception("InputVal room not valid");
 			
 			Long users_id = sessionManagement.checkSession(sid);
-			Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
+			Long user_level = userManagement.getUserLevelByID(users_id);
 
 			Rooms myRoom= Roommanagement.getInstance().getRoomById(user_level, Long.parseLong(room));
 		
@@ -163,7 +165,7 @@ public class RTPStreamingHandler {
 			if(room == null || room.length() <1)
 				throw new Exception("InputVal room not valid");
 			
-			Long user_level = Usermanagement.getInstance().getUserLevelByID(sharing_user_id);
+			Long user_level = userManagement.getUserLevelByID(sharing_user_id);
 			Rooms myRoom= Roommanagement.getInstance().getRoomById(user_level, Long.parseLong(room));
 			
 			if(myRoom == null)
@@ -174,7 +176,7 @@ public class RTPStreamingHandler {
 			session.setRoom(myRoom);
 			
 			// Define User
-			Users user = Usermanagement.getInstance().getUserById(sharing_user_id);
+			Users user = userManagement.getUserById(sharing_user_id);
 			
 			if(user == null)
 				throw new Exception("No User for id " + sharing_user_id);
@@ -249,7 +251,7 @@ public class RTPStreamingHandler {
 				throw new Exception("InputVal room not valid");
 			
 			Long users_id = sessionManagement.checkSession(sid);
-			Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
+			Long user_level = userManagement.getUserLevelByID(users_id);
 			Rooms myRoom= Roommanagement.getInstance().getRoomById(user_level, Long.parseLong(room));
 			
 			if(myRoom == null)

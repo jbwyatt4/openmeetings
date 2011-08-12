@@ -15,6 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class MeetingMemberDaoImplTest extends AbstractTestCase {
 	@Autowired
 	private AppointmentDaoImpl appointmentDao;
+    @Autowired
+    private Usermanagement userManagement;
 	
 	public MeetingMemberDaoImplTest(String name) {
 		super(name);
@@ -23,7 +25,7 @@ public class MeetingMemberDaoImplTest extends AbstractTestCase {
 	final public void testMeetingMemberDaoImpl() throws Exception {
 		
 		Long userId = 1L;
-		Users user = Usermanagement.getInstance().getUserById(userId);
+		Users user = userManagement.getUserById(userId);
 		assertNotNull("Cann't get default user", user);
 		
 		// add new appointment

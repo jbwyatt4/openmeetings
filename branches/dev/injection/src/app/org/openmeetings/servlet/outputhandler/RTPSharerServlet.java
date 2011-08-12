@@ -35,10 +35,12 @@ import org.springframework.beans.factory.annotation.Autowired;
  * The servlet should return a velocity template to start the RTPPlayer Applet
  */
 public class RTPSharerServlet extends VelocityViewServlet{
-	
+	private static final long serialVersionUID = -3803050458625713769L;
 	private static final Logger log = Red5LoggerFactory.getLogger(RTPSharerServlet.class, ScopeApplicationAdapter.webAppRootKey);
 	@Autowired
 	private Sessionmanagement sessionManagement;
+    @Autowired
+    private Usermanagement userManagement;
 	
 	@Override
 	public Template handleRequest(HttpServletRequest httpServletRequest,
@@ -55,7 +57,7 @@ public class RTPSharerServlet extends VelocityViewServlet{
 			log.debug("sid: " + sid);
 
 			Long users_id = sessionManagement.checkSession(sid);
-			Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
+			Long user_level = userManagement.getUserLevelByID(users_id);
 
 			if (user_level > 0) {
 				

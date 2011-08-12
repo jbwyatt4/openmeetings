@@ -24,6 +24,8 @@ public class OrganisationService {
 	private static final Logger log = Red5LoggerFactory.getLogger(OrganisationService.class, ScopeApplicationAdapter.webAppRootKey);
 	@Autowired
 	private Sessionmanagement sessionManagement;
+    @Autowired
+    private Usermanagement userManagement;
 	
 	/**
 	 * Loads a List of all availible Organisations (ADmin-role only)
@@ -33,7 +35,7 @@ public class OrganisationService {
 	public SearchResult getOrganisations(String SID, int start ,int max, String orderby, boolean asc){
 		try {
 	        Long users_id = sessionManagement.checkSession(SID);
-	        long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
+	        long user_level = userManagement.getUserLevelByID(users_id);
 	        return Organisationmanagement.getInstance().getOrganisations(user_level,start,max,orderby,asc);
 		} catch (Exception e){
 			log.error("getOrganisations",e);
@@ -44,7 +46,7 @@ public class OrganisationService {
 	public List<Organisation> getAllOrganisations(String SID){
 		try {
 	        Long users_id = sessionManagement.checkSession(SID);
-	        Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
+	        Long user_level = userManagement.getUserLevelByID(users_id);
 	        return Organisationmanagement.getInstance().getOrganisations(user_level);
 		} catch (Exception e){
 			log.error("getAllOrganisations",e);
@@ -60,7 +62,7 @@ public class OrganisationService {
 	 */
 	public Organisation getOrganisationById(String SID, long organisation_id){
         Long users_id = sessionManagement.checkSession(SID);
-        long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
+        long user_level = userManagement.getUserLevelByID(users_id);
         return Organisationmanagement.getInstance().getOrganisationById(user_level, organisation_id);
 	}
 	
@@ -72,7 +74,7 @@ public class OrganisationService {
 	 */
 	public Long deleteOrganisation(String SID, long organisation_id){
         Long users_id = sessionManagement.checkSession(SID);
-        long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
+        long user_level = userManagement.getUserLevelByID(users_id);
         return Organisationmanagement.getInstance().deleteOrganisation(user_level, organisation_id, users_id);
 	}
 	
@@ -86,7 +88,7 @@ public class OrganisationService {
 	public Long saveOrUpdateOrganisation(String SID, Object regObjectObj){
 		try {
 	        Long users_id = sessionManagement.checkSession(SID);
-	        long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
+	        long user_level = userManagement.getUserLevelByID(users_id);
 	        LinkedHashMap argObjectMap = (LinkedHashMap) regObjectObj;
 	        long organisation_id = Long.valueOf(argObjectMap.get("organisation_id").toString()).longValue();
 	        if (organisation_id==0){
@@ -114,7 +116,7 @@ public class OrganisationService {
 	public SearchResult getUsersByOrganisation(String SID, long organisation_id, int start, int max, String orderby, boolean asc){
 		try {   
 	        Long users_id = sessionManagement.checkSession(SID);
-	        Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
+	        Long user_level = userManagement.getUserLevelByID(users_id);
 	        if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)){
 	        	return Organisationmanagement.getInstance().getUsersSearchResultByOrganisationId(organisation_id, start, max, orderby, asc);
 	        } else {
@@ -132,7 +134,7 @@ public class OrganisationService {
 	public Long addUserToOrganisation(String SID, Long organisation_id, Long user_id, String comment) {
 		try {
 	        Long users_id = sessionManagement.checkSession(SID);
-	        Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
+	        Long user_level = userManagement.getUserLevelByID(users_id);
 	        if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)){
 	        	return Organisationmanagement.getInstance().addUserToOrganisation(user_id, organisation_id, users_id, comment);
 	        } else {
@@ -147,7 +149,7 @@ public class OrganisationService {
 	public Long deleteUserFromOrganisation(String SID, Long organisation_id, Long user_id, String comment) {
 		try {
 	        Long users_id = sessionManagement.checkSession(SID);
-	        Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
+	        Long user_level = userManagement.getUserLevelByID(users_id);
 	        return Organisationmanagement.getInstance().deleteUserFromOrganisation(user_level, user_id, organisation_id);
 		} catch (Exception err) {
 			log.error("getUsersByOrganisation",err);

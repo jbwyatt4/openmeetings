@@ -5,7 +5,6 @@ import http.utils.multipartrequest.ServletMultipartRequest;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.LinkedHashMap;
 
 import javax.servlet.ServletException;
@@ -13,30 +12,24 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.slf4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.red5.logging.Red5LoggerFactory;
-import org.dom4j.Document;
-import org.dom4j.Element;
-import org.dom4j.io.SAXReader;
 import org.openmeetings.app.data.basic.AuthLevelmanagement;
 import org.openmeetings.app.data.basic.Sessionmanagement;
-import org.openmeetings.app.data.user.Addressmanagement;
-import org.openmeetings.app.data.user.Emailmanagement;
-import org.openmeetings.app.data.user.Organisationmanagement;
 import org.openmeetings.app.data.user.Usermanagement;
 import org.openmeetings.app.data.user.dao.UsersDaoImpl;
-import org.openmeetings.app.persistence.beans.user.*;
 import org.openmeetings.app.remote.red5.ScopeApplicationAdapter;
 import org.openmeetings.app.xmlimport.LanguageImport;
 import org.openmeetings.app.xmlimport.UserImport;
-import org.openmeetings.utils.math.CalendarPatterns;
+import org.red5.logging.Red5LoggerFactory;
+import org.slf4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class Import extends HttpServlet {
-
+	private static final long serialVersionUID = 582610358088411294L;
 	private static final Logger log = Red5LoggerFactory.getLogger(Import.class, ScopeApplicationAdapter.webAppRootKey);
 	@Autowired
 	private Sessionmanagement sessionManagement;
+    @Autowired
+    private Usermanagement userManagement;
 	
 	/*
 	 * (non-Javadoc)
@@ -62,7 +55,7 @@ public class Import extends HttpServlet {
 			}
 			System.out.println("moduleName: " + moduleName);
 			Long users_id = sessionManagement.checkSession(sid);
-			Long user_level = Usermanagement.getInstance().getUserLevelByID(
+			Long user_level = userManagement.getUserLevelByID(
 					users_id);
 			
 			String publicSID = httpServletRequest.getParameter("publicSID");

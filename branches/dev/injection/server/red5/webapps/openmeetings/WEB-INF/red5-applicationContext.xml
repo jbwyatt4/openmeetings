@@ -36,6 +36,7 @@
 	<bean id="appointmentDaoImpl" class="org.openmeetings.app.data.calendar.daos.AppointmentDaoImpl"/>
 	<bean id="appointmentLogic" class="org.openmeetings.app.data.calendar.management.AppointmentLogic"/>
 	<bean id="sessionManagement" class="org.openmeetings.app.data.basic.Sessionmanagement"/>
+	<bean id="userManagement" class="org.openmeetings.app.data.user.Usermanagement"/>
 
 	<tx:annotation-driven transaction-manager="jpaTransactionManager"/>
 	<context:annotation-config/>

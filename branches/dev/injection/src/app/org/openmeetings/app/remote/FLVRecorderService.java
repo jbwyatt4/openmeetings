@@ -59,6 +59,8 @@ public class FLVRecorderService implements IPendingServiceCallback {
 	private ScopeApplicationAdapter scopeApplicationAdapter = null;
 	@Autowired
 	private Sessionmanagement sessionManagement;
+    @Autowired
+    private Usermanagement userManagement;
 	
 	public void resultReceived(IPendingServiceCall arg0) {
 		// TODO Auto-generated method stub
@@ -660,7 +662,7 @@ public class FLVRecorderService implements IPendingServiceCallback {
 	public FlvRecording getFlvRecordingWithMetaData(String SID, Long flvRecordingId) {
 		try {
 			Long users_id = sessionManagement.checkSession(SID);
-	        Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);  
+	        Long user_level = userManagement.getUserLevelByID(users_id);  
 	        if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)){	
 	        	
 	        	FlvRecording flvRecording = this.flvRecordingDaoImpl.getFlvRecordingById(flvRecordingId);
@@ -690,7 +692,7 @@ public class FLVRecorderService implements IPendingServiceCallback {
 	public List<FlvRecordingLog> getFlvRecordingLog(String SID, Long flvRecordingId) {
 		try {
 			Long users_id = sessionManagement.checkSession(SID);
-	        Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);  
+	        Long user_level = userManagement.getUserLevelByID(users_id);  
 	        if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)){	
 	        	
 	        	return this.flvRecordingLogDaoImpl.getFLVRecordingLogByRecordingId(flvRecordingId);
@@ -706,7 +708,7 @@ public class FLVRecorderService implements IPendingServiceCallback {
 	public Long deleteFLVOrFolder(String SID, Long flvRecordingId) {
 		try {
 			Long users_id = sessionManagement.checkSession(SID);
-	        Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);  
+	        Long user_level = userManagement.getUserLevelByID(users_id);  
 	        
 	        System.out.println("deleteFLVOrFolder "+flvRecordingId);
 	        
@@ -728,7 +730,7 @@ public class FLVRecorderService implements IPendingServiceCallback {
 	public List<FlvRecording> getFLVExplorerByParent(String SID, Long parentFileExplorerItemId, Boolean isOwner) {
 		try {
 			Long users_id = sessionManagement.checkSession(SID);
-	        Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);  
+	        Long user_level = userManagement.getUserLevelByID(users_id);  
 	        if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)){	
 	        	
 	        	log.debug("parentFileExplorerItemId "+parentFileExplorerItemId);
@@ -760,7 +762,7 @@ public class FLVRecorderService implements IPendingServiceCallback {
 							Boolean isOwner, Long organization_id) {
 		try {
 			Long users_id = sessionManagement.checkSession(SID);
-	        Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);  
+	        Long user_level = userManagement.getUserLevelByID(users_id);  
 	        if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)){	
 	        	
 	        	log.debug("addFolder "+parentFileExplorerItemId);
@@ -800,7 +802,7 @@ public class FLVRecorderService implements IPendingServiceCallback {
 			Boolean isOwner, Boolean moveToHome) {
 		try {
 			Long users_id = sessionManagement.checkSession(SID);
-	        Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);  
+	        Long user_level = userManagement.getUserLevelByID(users_id);  
 	        
 	        if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)){	
 	        	
@@ -848,7 +850,7 @@ public class FLVRecorderService implements IPendingServiceCallback {
 	public Long updateFileOrFolderName(String SID, Long flvRecordingId, String fileName) {
 		try {
 			Long users_id = sessionManagement.checkSession(SID);
-	        Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);  
+	        Long user_level = userManagement.getUserLevelByID(users_id);  
 	        if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)){	
 	        	
 	        	log.debug("updateFileOrFolderName "+flvRecordingId);
@@ -866,7 +868,7 @@ public class FLVRecorderService implements IPendingServiceCallback {
 	public FLVRecorderObject getFLVExplorerByRoom(String SID, Long organization_id) {
 		try {
 			Long users_id = sessionManagement.checkSession(SID);
-	        Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);  
+	        Long user_level = userManagement.getUserLevelByID(users_id);  
 	        if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)){	
 	        	
 	        	FLVRecorderObject fileExplorerObject = new FLVRecorderObject();
@@ -946,7 +948,7 @@ public class FLVRecorderService implements IPendingServiceCallback {
 			Integer leftSideTime, Integer rightSideTime) {
 		try {
 			Long users_id = sessionManagement.checkSession(SID);
-	        Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);  
+	        Long user_level = userManagement.getUserLevelByID(users_id);  
 	        if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)){	
 	        	
 	        	log.debug("updateFileOrFolderName "+flvRecordingId);

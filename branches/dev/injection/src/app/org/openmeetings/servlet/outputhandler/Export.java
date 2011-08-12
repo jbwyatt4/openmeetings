@@ -37,10 +37,12 @@ import org.red5.logging.Red5LoggerFactory;
  *
  */
 public class Export extends HttpServlet {
-
+	private static final long serialVersionUID = 8527093674786692472L;
 	private static final Logger log = Red5LoggerFactory.getLogger(Export.class, ScopeApplicationAdapter.webAppRootKey);
 	@Autowired
 	private Sessionmanagement sessionManagement;
+    @Autowired
+    private Usermanagement userManagement;
 	
 	/*
 	 * (non-Javadoc)
@@ -61,7 +63,7 @@ public class Export extends HttpServlet {
 			System.out.println("sid: " + sid);
 			
 			Long users_id = sessionManagement.checkSession(sid);
-			Long user_level = Usermanagement.getInstance().getUserLevelByID(
+			Long user_level = userManagement.getUserLevelByID(
 					users_id);
 
 			System.out.println("users_id: " + users_id);

@@ -33,6 +33,8 @@ public class MeetingMemberLogic {
 	private AppointmentLogic appointmentLogic;
 	@Autowired
 	private Configurationmanagement cfgManagement;
+    @Autowired
+    private Usermanagement userManagement;
 	
 	public static synchronized MeetingMemberLogic getInstance() {
 		if (instance == null) {
@@ -82,7 +84,7 @@ public class MeetingMemberLogic {
 			
 			log.debug(":::: addMeetingMember ..... "+point.getRemind().getTypId());
 			
-			Users us = Usermanagement.getInstance().getUserById(userid);
+			Users us = userManagement.getUserById(userid);
 			OmTimeZone omTimeZone = null;
 			
 			String jNameTimeZone = null;
@@ -322,7 +324,7 @@ public class MeetingMemberLogic {
 				return null;
 			}
 			
-			Users user = Usermanagement.getInstance().getUserById(users_id);
+			Users user = userManagement.getUserById(users_id);
 			
 			if(user == null){
 				log.error("could not retrieve user!");

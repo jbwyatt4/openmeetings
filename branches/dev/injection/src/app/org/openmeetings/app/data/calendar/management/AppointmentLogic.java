@@ -36,6 +36,8 @@ public class AppointmentLogic {
 	private AppointmentDaoImpl appointmentDao;
 	@Autowired
 	private Configurationmanagement cfgManagement;
+    @Autowired
+    private Usermanagement userManagement;
 	
 	public List<Appointment> getAppointmentByRange(Long userId ,Date starttime, Date endtime){
 		try {	
@@ -176,7 +178,7 @@ public class AppointmentLogic {
 		try{
 			
 			// Adding Invitor as Meetingmember
-			Users user = Usermanagement.getInstance().getUserById(userId);
+			Users user = userManagement.getUserById(userId);
 			
 			Long id =  appointmentDao.addAppointment(
 								appointmentName, userId, appointmentLocation, appointmentDescription,

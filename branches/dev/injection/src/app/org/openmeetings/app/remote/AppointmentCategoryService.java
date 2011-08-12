@@ -17,6 +17,8 @@ public class AppointmentCategoryService {
 	private static final Logger log = Red5LoggerFactory.getLogger(AppointmentCategoryService.class, ScopeApplicationAdapter.webAppRootKey);
 	@Autowired
 	private Sessionmanagement sessionManagement;
+    @Autowired
+    private Usermanagement userManagement;
 	
 	private static AppointmentCategoryService instance = null;
 
@@ -34,7 +36,7 @@ public class AppointmentCategoryService {
 		try{
 			
 			Long users_id = sessionManagement.checkSession(SID);
-	        Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
+	        Long user_level = userManagement.getUserLevelByID(users_id);
 	        
 	        if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
 					

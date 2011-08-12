@@ -27,6 +27,8 @@ public class InvitationService implements IPendingServiceCallback {
 	private Sessionmanagement sessionManagement;
 	@Autowired
 	private Configurationmanagement cfgManagement;
+    @Autowired
+    private Usermanagement userManagement;
 	
 	public void resultReceived(IPendingServiceCall arg0) {
 		// TODO Auto-generated method stub
@@ -91,7 +93,7 @@ public class InvitationService implements IPendingServiceCallback {
 	    	log.info("validToDate: "+CalendarPatterns.getDateWithTimeByMiliSeconds(validToDate));
 	    	
 	    	Long users_id = sessionManagement.checkSession(SID);
-	    	Long user_level = Usermanagement.getInstance().getUserLevelByID(users_id);
+	    	Long user_level = userManagement.getUserLevelByID(users_id);
 	    	
 	    	OmTimeZone omTimeZone = OmTimeZoneDaoImpl.getInstance().getOmTimeZone(jNameTimeZone);
 			

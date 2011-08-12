@@ -7,9 +7,9 @@ import java.util.LinkedList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
 import javax.persistence.NoResultException;
 import javax.persistence.NonUniqueResultException;
+import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -37,7 +37,6 @@ import org.openmeetings.app.persistence.beans.user.UserSipData;
 import org.openmeetings.app.persistence.beans.user.Userdata;
 import org.openmeetings.app.persistence.beans.user.Userlevel;
 import org.openmeetings.app.persistence.beans.user.Users;
-import org.openmeetings.app.persistence.utils.PersistenceSessionUtil;
 import org.openmeetings.app.remote.red5.ClientListManager;
 import org.openmeetings.app.remote.red5.ScopeApplicationAdapter;
 import org.openmeetings.app.sip.xmlrpc.OpenXGHttpClient;
@@ -50,34 +49,26 @@ import org.red5.logging.Red5LoggerFactory;
 import org.red5.server.api.IScope;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * 
  * @author swagner
  * 
  */
+@Transactional
 public class Usermanagement {
 
 	private static final Logger log = Red5LoggerFactory.getLogger(
 			Usermanagement.class, ScopeApplicationAdapter.webAppRootKey);
 
+	@PersistenceContext
+	private EntityManager em;
 	@Autowired
 	private Sessionmanagement sessionManagement;
 	@Autowired
 	private Configurationmanagement cfgManagement;
 	
-	private static Usermanagement instance = null;
-
-	private Usermanagement() {
-	}
-
-	public static synchronized Usermanagement getInstance() {
-		if (instance == null) {
-			instance = new Usermanagement();
-		}
-		return instance;
-	}
-
 	/**
 	 * query for a list of users
 	 * 
@@ -98,11 +89,7 @@ public class Usermanagement {
 						.selectMaxFromUsers());
 
 				// get all users
-				Object idf = PersistenceSessionUtil.createSession();
-				EntityManager session = PersistenceSessionUtil.getSession();
-				EntityTransaction tx = session.getTransaction();
-				tx.begin();
-				CriteriaBuilder cb = session.getCriteriaBuilder();
+				CriteriaBuilder cb = em.getCriteriaBuilder();
 				CriteriaQuery<Users> cq = cb.createQuery(Users.class);
 				Root<Users> c = cq.from(Users.class);
 				Predicate condition = cb.equal(c.get("deleted"), "false");
@@ -113,12 +100,10 @@ public class Usermanagement {
 				} else {
 					cq.orderBy(cb.desc(c.get(orderby)));
 				}
-				TypedQuery<Users> q = session.createQuery(cq);
+				TypedQuery<Users> q = em.createQuery(cq);
 				q.setFirstResult(start);
 				q.setMaxResults(max);
 				List<Users> ll = q.getResultList();
-				tx.commit();
-				PersistenceSessionUtil.closeSession(idf);
 				return sresult;
 			}
 		} catch (Exception ex2) {
@@ -172,11 +157,7 @@ public class Usermanagement {
 
 			log.debug("Show HQL: " + hql);
 
-			Object idf = PersistenceSessionUtil.createSession();
-			EntityManager session = PersistenceSessionUtil.getSession();
-			EntityTransaction tx = session.getTransaction();
-			tx.begin();
-			Query query = session.createQuery(hql);
+			Query query = em.createQuery(hql);
 			// query.setParameter("macomUserId", userId);
 
 			// query
@@ -185,8 +166,6 @@ public class Usermanagement {
 			query.setFirstResult(start);
 			query.setMaxResults(max);
 			List<Users> ll = query.getResultList();
-			tx.commit();
-			PersistenceSessionUtil.closeSession(idf);
 
 			sresult.setResult(ll);
 
@@ -236,19 +215,11 @@ public class Usermanagement {
 					+ "(c.login LIKE :userOrEmail OR c.adresses.email LIKE :userOrEmail  ) "
 					+ "AND c.deleted <> :deleted";
 
-			Object idf = PersistenceSessionUtil.createSession();
-			EntityManager session = PersistenceSessionUtil.getSession();
-			EntityTransaction tx = session.getTransaction();
-			tx.begin();
-
-			Query query = session.createQuery(hql);
+			Query query = em.createQuery(hql);
 			query.setParameter("userOrEmail", userOrEmail);
 			query.setParameter("deleted", "true");
 
 			List<Users> ll = query.getResultList();
-
-			tx.commit();
-			PersistenceSessionUtil.closeSession(idf);
 
 			log.debug("debug SIZE: " + ll.size());
 
@@ -308,17 +279,7 @@ public class Usermanagement {
 	public Users refreshUserObject(Users us) {
 		try {
 
-			Object idf = PersistenceSessionUtil.createSession();
-			EntityManager session = PersistenceSessionUtil.getSession();
-			EntityTransaction tx = session.getTransaction();
-			tx.begin();
-
-			us = session.merge(us);
-			session.refresh(us);
-
-			tx.commit();
-			PersistenceSessionUtil.closeSession(idf);
-
+			us = em.merge(us);
 			return us;
 		} catch (Exception ex2) {
 			log.error("[loginUser]: ", ex2);
@@ -329,16 +290,13 @@ public class Usermanagement {
 	public Users loginUserByRemoteHash(String SID, String remoteHash) {
 		try {
 
-			Sessiondata sessionData = sessionManagement
-					.getSessionByHash(remoteHash);
+			Sessiondata sessionData = sessionManagement.getSessionByHash(remoteHash);
 
 			if (sessionData != null) {
 
-				Users u = Usermanagement.getInstance().getUserById(
-						sessionData.getUser_id());
+				Users u = getUserById(sessionData.getUser_id());
 
-				sessionManagement.updateUserWithoutSession(SID,
-						u.getUser_id());
+				sessionManagement.updateUserWithoutSession(SID, u.getUser_id());
 
 				return u;
 
@@ -362,19 +320,13 @@ public class Usermanagement {
 	private void updateLastLogin(Users us) {
 		try {
 			us.setLastlogin(new Date());
-			Object idf = PersistenceSessionUtil.createSession();
-			EntityManager session = PersistenceSessionUtil.getSession();
-			EntityTransaction tx = session.getTransaction();
-			tx.begin();
 			if (us.getUser_id() == null) {
-				session.persist(us);
+				em.persist(us);
 			} else {
-				if (!session.contains(us)) {
-					session.merge(us);
+				if (!em.contains(us)) {
+					em.merge(us);
 				}
 			}
-			tx.commit();
-			PersistenceSessionUtil.closeSession(idf);
 		} catch (Exception ex2) {
 			log.error("updateLastLogin", ex2);
 		}
@@ -393,11 +345,7 @@ public class Usermanagement {
 			String searchstring, int max, int start, String orderby, boolean asc) {
 		if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)) {
 			try {
-				Object idf = PersistenceSessionUtil.createSession();
-				EntityManager session = PersistenceSessionUtil.getSession();
-				EntityTransaction tx = session.getTransaction();
-				tx.begin();
-				CriteriaBuilder cb = session.getCriteriaBuilder();
+				CriteriaBuilder cb = em.getCriteriaBuilder();
 				CriteriaQuery<Users> cq = cb.createQuery(Users.class);
 				Root<Users> c = cq.from(Users.class);
 				Expression<String> literal = cb.literal((String) "%"
@@ -414,12 +362,10 @@ public class Usermanagement {
 				} else {
 					cq.orderBy(cb.desc(c.get(orderby)));
 				}
-				TypedQuery<Users> q = session.createQuery(cq);
+				TypedQuery<Users> q = em.createQuery(cq);
 				q.setFirstResult(start);
 				q.setMaxResults(max);
 				List<Users> contactsZ = q.getResultList();
-				tx.commit();
-				PersistenceSessionUtil.closeSession(idf);
 				return contactsZ;
 			} catch (Exception ex2) {
 				log.error("searchUser", ex2);
@@ -431,17 +377,11 @@ public class Usermanagement {
 	public List getUserdataDashBoard(Long user_id) {
 		if (user_id.longValue() > 0) {
 			try {
-				Object idf = PersistenceSessionUtil.createSession();
-				EntityManager session = PersistenceSessionUtil.getSession();
-				EntityTransaction tx = session.getTransaction();
-				tx.begin();
-				Query query = session
+				Query query = em
 						.createQuery("select c from Userdata as c where c.user_id = :user_id AND c.deleted <> :deleted");
 				query.setParameter("user_id", user_id.longValue());
 				query.setParameter("deleted", "true");
 				List ll = query.getResultList();
-				tx.commit();
-				PersistenceSessionUtil.closeSession(idf);
 				return ll;
 			} catch (Exception ex2) {
 				log.error("getUserdataDashBoard", ex2);
@@ -454,18 +394,12 @@ public class Usermanagement {
 		int userdata = 0;
 		if (USER_ID.longValue() > 0) {
 			try {
-				Object idf = PersistenceSessionUtil.createSession();
-				EntityManager session = PersistenceSessionUtil.getSession();
-				EntityTransaction tx = session.getTransaction();
-				tx.begin();
-				Query query = session
+				Query query = em
 						.createQuery("select c from Userdata as c where c.user_id = :user_id AND c.data_key = :data_key AND c.deleted <> :deleted");
 				query.setParameter("user_id", USER_ID.longValue());
 				query.setParameter("data_key", DATA_KEY);
 				query.setParameter("deleted", "true");
 				userdata = query.getResultList().size();
-				tx.commit();
-				PersistenceSessionUtil.closeSession(idf);
 			} catch (Exception ex2) {
 				log.error("getUserdataNoByKey", ex2);
 			}
@@ -479,11 +413,7 @@ public class Usermanagement {
 		Userdata userdata = new Userdata();
 		if (user_id.longValue() > 0) {
 			try {
-				Object idf = PersistenceSessionUtil.createSession();
-				EntityManager session = PersistenceSessionUtil.getSession();
-				EntityTransaction tx = session.getTransaction();
-				tx.begin();
-				Query query = session
+				Query query = em
 						.createQuery("select c from Userdata as c where c.user_id = :user_id AND c.data_key = :data_key AND c.deleted <> :deleted");
 				query.setParameter("user_id", user_id.longValue());
 				query.setParameter("data_key", DATA_KEY);
@@ -492,8 +422,6 @@ public class Usermanagement {
 						.hasNext();) {
 					userdata = (Userdata) it2.next();
 				}
-				tx.commit();
-				PersistenceSessionUtil.closeSession(idf);
 			} catch (Exception ex2) {
 				log.error("getUserdataByKey", ex2);
 			}
@@ -650,21 +578,13 @@ public class Usermanagement {
 					}
 
 					// log.info("USER " + us.getLastname());
-					Object idf = PersistenceSessionUtil.createSession();
-					EntityManager session = PersistenceSessionUtil.getSession();
-					EntityTransaction tx = session.getTransaction();
-					tx.begin();
-
 					if (us.getUser_id() == null) {
-						session.persist(us);
+						em.persist(us);
 					} else {
-						if (!session.contains(us)) {
-							session.merge(us);
+						if (!em.contains(us)) {
+							em.merge(us);
 						}
 					}
-
-					tx.commit();
-					PersistenceSessionUtil.closeSession(idf);
 
 					return us.getUser_id();
 
@@ -689,12 +609,8 @@ public class Usermanagement {
 			String DATA, String Comment) {
 		String res = "Fehler beim Update";
 		try {
-			Object idf = PersistenceSessionUtil.createSession();
-			EntityManager session = PersistenceSessionUtil.getSession();
-			EntityTransaction tx = session.getTransaction();
-			tx.begin();
 			String hqlUpdate = "update userdata set DATA_KEY= :DATA_KEY, USER_ID = :USER_ID, DATA = :DATA, updatetime = :updatetime, comment = :Comment where DATA_ID= :DATA_ID";
-			int updatedEntities = session.createQuery(hqlUpdate)
+			int updatedEntities = em.createQuery(hqlUpdate)
 					.setParameter("DATA_KEY", DATA_KEY)
 					.setParameter("USER_ID", USER_ID)
 					.setParameter("DATA", DATA)
@@ -702,8 +618,6 @@ public class Usermanagement {
 					.setParameter("Comment", Comment)
 					.setParameter("DATA_ID", DATA_ID).executeUpdate();
 			res = "Success" + updatedEntities;
-			tx.commit();
-			PersistenceSessionUtil.closeSession(idf);
 		} catch (Exception ex2) {
 			log.error("updateUserdata", ex2);
 		}
@@ -714,21 +628,15 @@ public class Usermanagement {
 			String DATA, String Comment) {
 		String res = "Fehler beim Update";
 		try {
-			Object idf = PersistenceSessionUtil.createSession();
-			EntityManager session = PersistenceSessionUtil.getSession();
-			EntityTransaction tx = session.getTransaction();
-			tx.begin();
 			String hqlUpdate = "update Userdata set data = :data, updatetime = :updatetime, "
 					+ "comment = :comment where user_id= :user_id AND data_key = :data_key";
-			int updatedEntities = session.createQuery(hqlUpdate)
+			int updatedEntities = em.createQuery(hqlUpdate)
 					.setParameter("data", DATA)
 					.setParameter("updatetime", new Long(-1))
 					.setParameter("comment", Comment)
 					.setParameter("user_id", USER_ID.longValue())
 					.setParameter("data_key", DATA_KEY).executeUpdate();
 			res = "Success" + updatedEntities;
-			tx.commit();
-			PersistenceSessionUtil.closeSession(idf);
 		} catch (Exception ex2) {
 			log.error("updateUserdataByKey", ex2);
 		}
@@ -738,16 +646,10 @@ public class Usermanagement {
 	public String deleteUserdata(int DATA_ID) {
 		String res = "Fehler beim deleteUserdata";
 		try {
-			Object idf = PersistenceSessionUtil.createSession();
-			EntityManager session = PersistenceSessionUtil.getSession();
-			EntityTransaction tx = session.getTransaction();
-			tx.begin();
 			String hqlUpdate = "delete userdata where DATA_ID= :DATA_ID";
-			int updatedEntities = session.createQuery(hqlUpdate)
+			int updatedEntities = em.createQuery(hqlUpdate)
 					.setParameter("DATA_ID", DATA_ID).executeUpdate();
 			res = "Success" + updatedEntities;
-			tx.commit();
-			PersistenceSessionUtil.closeSession(idf);
 		} catch (Exception ex2) {
 			log.error("deleteUserdata", ex2);
 		}
@@ -757,17 +659,11 @@ public class Usermanagement {
 	public String deleteUserdataByUserAndKey(int users_id, String DATA_KEY) {
 		String res = "Fehler beim deleteUserdataByUserAndKey";
 		try {
-			Object idf = PersistenceSessionUtil.createSession();
-			EntityManager session = PersistenceSessionUtil.getSession();
-			EntityTransaction tx = session.getTransaction();
-			tx.begin();
 			String hqlUpdate = "delete userdata where users_id= :users_id AND DATA_KEY = :DATA_KEY";
-			int updatedEntities = session.createQuery(hqlUpdate)
+			int updatedEntities = em.createQuery(hqlUpdate)
 					.setParameter("users_id", users_id)
 					.setParameter("DATA_KEY", DATA_KEY).executeUpdate();
 			res = "Success" + updatedEntities;
-			tx.commit();
-			PersistenceSessionUtil.closeSession(idf);
 		} catch (Exception ex2) {
 			log.error("deleteUserdataByUserAndKey", ex2);
 		}
@@ -786,15 +682,7 @@ public class Usermanagement {
 		userdata.setUser_id(new Long(USER_ID));
 		userdata.setDeleted("false");
 		try {
-			Object idf = PersistenceSessionUtil.createSession();
-			EntityManager session = PersistenceSessionUtil.getSession();
-			EntityTransaction tx = session.getTransaction();
-			tx.begin();
-			userdata = session.merge(userdata);
-			session.flush();
-			session.refresh(userdata);
-			tx.commit();
-			PersistenceSessionUtil.closeSession(idf);
+			userdata = em.merge(userdata);
 			ret = "success";
 		} catch (Exception ex2) {
 			log.error("addUserdata", ex2);
@@ -805,19 +693,13 @@ public class Usermanagement {
 	private Userlevel getUserLevel(Long level_id) {
 		Userlevel userlevel = new Userlevel();
 		try {
-			Object idf = PersistenceSessionUtil.createSession();
-			EntityManager session = PersistenceSessionUtil.getSession();
-			EntityTransaction tx = session.getTransaction();
-			tx.begin();
-			Query query = session
+			Query query = em
 					.createQuery("select c from Userlevel as c where c.level_id = :level_id AND c.deleted <> :deleted");
 			query.setParameter("level_id", level_id.longValue());
 			query.setParameter("deleted", "true");
 			for (Iterator it2 = query.getResultList().iterator(); it2.hasNext();) {
 				userlevel = (Userlevel) it2.next();
 			}
-			tx.commit();
-			PersistenceSessionUtil.closeSession(idf);
 		} catch (Exception ex2) {
 			log.error("[getUserLevel]", ex2);
 		}
@@ -840,12 +722,7 @@ public class Usermanagement {
 				return new Long(1);
 			}
 
-			Object idf = PersistenceSessionUtil.createSession();
-			EntityManager session = PersistenceSessionUtil.getSession();
-			EntityTransaction tx = session.getTransaction();
-			tx.begin();
-
-			Query query = session
+			Query query = em
 					.createQuery("select c from Users as c where c.user_id = :user_id AND c.deleted <> 'true'");
 			query.setParameter("user_id", user_id);
 			Users us = null;
@@ -854,9 +731,6 @@ public class Usermanagement {
 			} catch (NoResultException e) {
 				// u=null}
 			}
-
-			tx.commit();
-			PersistenceSessionUtil.closeSession(idf);
 
 			if (us != null) {
 				return us.getLevel_id();
@@ -879,12 +753,7 @@ public class Usermanagement {
 				return new Long(1);
 			}
 
-			Object idf = PersistenceSessionUtil.createSession();
-			EntityManager session = PersistenceSessionUtil.getSession();
-			EntityTransaction tx = session.getTransaction();
-			tx.begin();
-
-			Query query = session
+			Query query = em
 					.createQuery("select c from Users as c where c.user_id = :user_id AND c.deleted <> 'true'");
 			query.setParameter("user_id", user_id);
 			Users us = null;
@@ -893,9 +762,6 @@ public class Usermanagement {
 			} catch (NoResultException e) {
 				// u=null}
 			}
-
-			tx.commit();
-			PersistenceSessionUtil.closeSession(idf);
 
 			if (us != null) {
 
@@ -1275,15 +1141,8 @@ public class Usermanagement {
 			users.setRegdate(new Date());
 			users.setDeleted("false");
 
-			Object idf = PersistenceSessionUtil.createSession();
-			EntityManager session = PersistenceSessionUtil.getSession();
-			EntityTransaction tx = session.getTransaction();
-			tx.begin();
-			users = session.merge(users);
-			session.flush();
+			users = em.merge(users);
 			Long user_id = users.getUser_id();
-			tx.commit();
-			PersistenceSessionUtil.closeSession(idf);
 
 			return user_id;
 
@@ -1303,20 +1162,12 @@ public class Usermanagement {
 					+ "AND c.externalUserType LIKE :externalUserType "
 					+ "AND c.deleted <> :deleted";
 
-			Object idf = PersistenceSessionUtil.createSession();
-			EntityManager session = PersistenceSessionUtil.getSession();
-			EntityTransaction tx = session.getTransaction();
-			tx.begin();
-
-			Query query = session.createQuery(hql);
+			Query query = em.createQuery(hql);
 			query.setParameter("externalUserId", externalUserId);
 			query.setParameter("externalUserType", externalUserType);
 			query.setParameter("deleted", "true");
 
 			List<Users> users = query.getResultList();
-
-			tx.commit();
-			PersistenceSessionUtil.closeSession(idf);
 
 			if (users.size() > 0) {
 				return users.get(0);
@@ -1405,14 +1256,8 @@ public class Usermanagement {
 			users.setRegdate(new Date());
 			users.setDeleted("false");
 
-			Object idf = PersistenceSessionUtil.createSession();
-			EntityManager session = PersistenceSessionUtil.getSession();
-			EntityTransaction tx = session.getTransaction();
-			tx.begin();
-			session.merge(users);
+			em.merge(users);
 			long user_id = users.getUser_id();
-			tx.commit();
-			PersistenceSessionUtil.closeSession(idf);
 
 			return user_id;
 
@@ -1424,14 +1269,8 @@ public class Usermanagement {
 
 	public Long addUser(Users usr) {
 		try {
-			Object idf = PersistenceSessionUtil.createSession();
-			EntityManager session = PersistenceSessionUtil.getSession();
-			EntityTransaction tx = session.getTransaction();
-			tx.begin();
-			usr = session.merge(usr);
+			usr = em.merge(usr);
 			Long user_id = usr.getUser_id();
-			tx.commit();
-			PersistenceSessionUtil.closeSession(idf);
 			return user_id;
 		} catch (Exception ex2) {
 			log.error("[addUser]", ex2);
@@ -1455,14 +1294,8 @@ public class Usermanagement {
 						.getUserSipDataById(userSipDataId));
 			}
 
-			Object idf = PersistenceSessionUtil.createSession();
-			EntityManager session = PersistenceSessionUtil.getSession();
-			EntityTransaction tx = session.getTransaction();
-			tx.begin();
-			usr = session.merge(usr);
+			usr = em.merge(usr);
 			Long user_id = usr.getUser_id();
-			tx.commit();
-			PersistenceSessionUtil.closeSession(idf);
 
 			return user_id;
 
@@ -1474,18 +1307,12 @@ public class Usermanagement {
 
 	public void addUserLevel(String description, int myStatus) {
 		try {
-			Object idf = PersistenceSessionUtil.createSession();
-			EntityManager session = PersistenceSessionUtil.getSession();
-			EntityTransaction tx = session.getTransaction();
-			tx.begin();
 			Userlevel uslevel = new Userlevel();
 			uslevel.setStarttime(new Date());
 			uslevel.setDescription(description);
 			uslevel.setStatuscode(new Integer(myStatus));
 			uslevel.setDeleted("false");
-			session.merge(uslevel);
-			tx.commit();
-			PersistenceSessionUtil.closeSession(idf);
+			em.merge(uslevel);
 		} catch (Exception ex2) {
 			log.error("[addUserLevel]", ex2);
 		}
@@ -1576,22 +1403,13 @@ public class Usermanagement {
 
 					// savedUser.setAdresses(Addressmanagement.getInstance().getAdressbyId(user.getAdresses().getAdresses_id()));
 
-					Object idf = PersistenceSessionUtil.createSession();
-					EntityManager session = PersistenceSessionUtil.getSession();
-					EntityTransaction tx = session.getTransaction();
-					tx.begin();
-
 					if (savedUser.getUser_id() == null) {
-						session.persist(savedUser);
+						em.persist(savedUser);
 					} else {
-						if (!session.contains(savedUser)) {
-							session.merge(savedUser);
+						if (!em.contains(savedUser)) {
+							em.merge(savedUser);
 						}
 					}
-					session.flush();
-
-					tx.commit();
-					PersistenceSessionUtil.closeSession(idf);
 
 					return returnLong;
 				}
@@ -1693,30 +1511,20 @@ public class Usermanagement {
 			return null;
 		}
 
-		Object idf = PersistenceSessionUtil.createSession();
-		EntityManager session = PersistenceSessionUtil.getSession();
-		EntityTransaction tx = session.getTransaction();
-		tx.begin();
-
-		CriteriaBuilder cb = session.getCriteriaBuilder();
+		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<Users> cq = cb.createQuery(Users.class);
 		Root<Users> c = cq.from(Users.class);
 		Predicate condition = cb.equal(c.get("deleted"), "false");
 		Predicate subCondition = cb.equal(c.get("user_id"), id);
 		cq.where(condition, subCondition);
-		TypedQuery<Users> q = session.createQuery(cq);
+		TypedQuery<Users> q = em.createQuery(cq);
 		Users u = null;
 		try {
 			u = (Users) q.getSingleResult();
-			tx.commit();
 		} catch (NoResultException e) {
-			tx.rollback();
 			// u=null}
 		} catch (NonUniqueResultException ex) {
-			tx.rollback();
 		}
-
-		PersistenceSessionUtil.closeSession(idf);
 
 		return u;
 
@@ -1725,26 +1533,18 @@ public class Usermanagement {
 	public Users getUserByIdAndDeleted(Long id) throws Exception {
 		log.debug("Usermanagement.getUserById");
 
-		Object idf = PersistenceSessionUtil.createSession();
-		EntityManager session = PersistenceSessionUtil.getSession();
-		EntityTransaction tx = session.getTransaction();
-		tx.begin();
-
-		CriteriaBuilder cb = session.getCriteriaBuilder();
+		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<Users> cq = cb.createQuery(Users.class);
 		Root<Users> c = cq.from(Users.class);
 		Predicate condition = cb.equal(c.get("user_id"), id);
 		cq.where(condition);
-		TypedQuery<Users> q = session.createQuery(cq);
+		TypedQuery<Users> q = em.createQuery(cq);
 		Users u = null;
 		try {
 			u = (Users) q.getSingleResult();
 		} catch (NoResultException e) {
 			// u=null}
 		}
-
-		tx.commit();
-		PersistenceSessionUtil.closeSession(idf);
 
 		return u;
 
@@ -1760,27 +1560,19 @@ public class Usermanagement {
 	public Users getUserByLogin(String login) throws Exception {
 		log.debug("Usermanagement.getUserByLogin : " + login);
 
-		Object idf = PersistenceSessionUtil.createSession();
-		EntityManager session = PersistenceSessionUtil.getSession();
-		EntityTransaction tx = session.getTransaction();
-		tx.begin();
-
-		CriteriaBuilder cb = session.getCriteriaBuilder();
+		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<Users> cq = cb.createQuery(Users.class);
 		Root<Users> c = cq.from(Users.class);
 		Predicate condition = cb.equal(c.get("deleted"), "false");
 		Predicate subCondition = cb.equal(c.get("login"), login);
 		cq.where(condition, subCondition);
-		TypedQuery<Users> q = session.createQuery(cq);
+		TypedQuery<Users> q = em.createQuery(cq);
 		Users u = null;
 		try {
 			u = (Users) q.getSingleResult();
 		} catch (NoResultException e) {
 			// u=null}
 		}
-
-		tx.commit();
-		PersistenceSessionUtil.closeSession(idf);
 
 		return u;
 
@@ -1801,20 +1593,11 @@ public class Usermanagement {
 				+ "(c.login LIKE :userOrEmail OR c.adresses.email LIKE :userOrEmail  ) "
 				+ "AND c.externalUserId IS NULL " + "AND c.deleted <> :deleted";
 
-		Object idf = PersistenceSessionUtil.createSession();
-		EntityManager session = PersistenceSessionUtil.getSession();
-		EntityTransaction tx = session.getTransaction();
-		tx.begin();
-
-		session.flush();
-
-		Query query = session.createQuery(hql);
+		Query query = em.createQuery(hql);
 		query.setParameter("userOrEmail", userOrEmail);
 		query.setParameter("deleted", "true");
 
 		List<Users> ll = query.getResultList();
-		tx.commit();
-		PersistenceSessionUtil.closeSession(idf);
 
 		if (ll.size() > 1) {
 			log.error("ALERT :: There are two users in the database that have either same login or Email ");
@@ -1835,19 +1618,10 @@ public class Usermanagement {
 		String hql = "SELECT c from Users AS c " + "WHERE "
 				+ "c.adresses.email LIKE :userOrEmail";
 
-		Object idf = PersistenceSessionUtil.createSession();
-		EntityManager session = PersistenceSessionUtil.getSession();
-		EntityTransaction tx = session.getTransaction();
-		tx.begin();
-
-		session.flush();
-
-		Query query = session.createQuery(hql);
+		Query query = em.createQuery(hql);
 		query.setParameter("userOrEmail", userOrEmail);
 
 		List<Users> ll = query.getResultList();
-		tx.commit();
-		PersistenceSessionUtil.closeSession(idf);
 
 		if (ll.size() > 1) {
 			log.error("ALERT :: There are two users in the database that have same Email ");
@@ -1890,8 +1664,7 @@ public class Usermanagement {
 	public Boolean kickUserByStreamId(String SID, Long room_id) {
 		try {
 			Long users_id = sessionManagement.checkSession(SID);
-			Long user_level = Usermanagement.getInstance().getUserLevelByID(
-					users_id);
+			Long user_level = getUserLevelByID(users_id);
 			HashMap<String, RoomClient> MyUserList = ClientListManager
 					.getInstance().getClientListByRoom(room_id);
 
@@ -1937,8 +1710,7 @@ public class Usermanagement {
 	public Boolean kickUserByPublicSID(String SID, String publicSID) {
 		try {
 			Long users_id = sessionManagement.checkSession(SID);
-			Long user_level = Usermanagement.getInstance().getUserLevelByID(
-					users_id);
+			Long user_level = getUserLevelByID(users_id);
 
 			// admins only
 			if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)) {
@@ -1982,11 +1754,7 @@ public class Usermanagement {
 			String hql = "SELECT u FROM Users as u "
 					+ " where u.activatehash = :activatehash"
 					+ " AND u.deleted <> :deleted";
-			Object idf = PersistenceSessionUtil.createSession();
-			EntityManager session = PersistenceSessionUtil.getSession();
-			EntityTransaction tx = session.getTransaction();
-			tx.begin();
-			Query query = session.createQuery(hql);
+			Query query = em.createQuery(hql);
 			query.setParameter("activatehash", hash);
 			query.setParameter("deleted", "true");
 			Users u = null;
@@ -1995,8 +1763,6 @@ public class Usermanagement {
 			} catch (NoResultException e) {
 				// u=null}
 			}
-			tx.commit();
-			PersistenceSessionUtil.closeSession(idf);
 			return u;
 		} catch (Exception e) {
 			log.error("[getUserByActivationHash]", e);
@@ -2009,19 +1775,13 @@ public class Usermanagement {
 		try {
 			if (user.getUser_id() > 0) {
 				try {
-					Object idf = PersistenceSessionUtil.createSession();
-					EntityManager session = PersistenceSessionUtil.getSession();
-					EntityTransaction tx = session.getTransaction();
-					tx.begin();
 					if (user.getUser_id() == null) {
-						session.persist(user);
+						em.persist(user);
 					} else {
-						if (!session.contains(user)) {
-							session.merge(user);
+						if (!em.contains(user)) {
+							em.merge(user);
 						}
 					}
-					tx.commit();
-					PersistenceSessionUtil.closeSession(idf);
 				} catch (Exception ex2) {
 					log.error("[updateUser] ", ex2);
 				}
@@ -2078,20 +1838,12 @@ public class Usermanagement {
 						.selectMaxFromUsersWithSearch(search));
 
 				// get all users
-				Object idf = PersistenceSessionUtil.createSession();
-				EntityManager session = PersistenceSessionUtil.getSession();
-				EntityTransaction tx = session.getTransaction();
-				tx.begin();
-				session.flush();
-
-				Query query = session.createQuery(hql);
+				Query query = em.createQuery(hql);
 				query.setParameter("search", StringUtils.lowerCase(search));
 				query.setMaxResults(max);
 				query.setFirstResult(start);
 
 				sresult.setResult(query.getResultList());
-				tx.commit();
-				PersistenceSessionUtil.closeSession(idf);
 
 				return sresult;
 			}
@@ -2190,12 +1942,7 @@ public class Usermanagement {
 			log.debug("hql :: " + hql);
 
 			// get all users
-			Object idf = PersistenceSessionUtil.createSession();
-			EntityManager session = PersistenceSessionUtil.getSession();
-			EntityTransaction tx = session.getTransaction();
-			tx.begin();
-
-			Query query = session.createQuery(hql);
+			Query query = em.createQuery(hql);
 
 			if (searchTxt.length() != 0 && userOffers.length() != 0
 					&& userSearchs.length() != 0) {
@@ -2245,9 +1992,6 @@ public class Usermanagement {
 			query.setFirstResult(start);
 
 			List<Users> userList = query.getResultList();
-
-			tx.commit();
-			PersistenceSessionUtil.closeSession(idf);
 
 			return userList;
 
@@ -2339,12 +2083,7 @@ public class Usermanagement {
 			log.debug("hql :: " + hql);
 
 			// get all users
-			Object idf = PersistenceSessionUtil.createSession();
-			EntityManager session = PersistenceSessionUtil.getSession();
-			EntityTransaction tx = session.getTransaction();
-			tx.begin();
-
-			Query query = session.createQuery(hql);
+			Query query = em.createQuery(hql);
 
 			if (searchTxt.length() != 0 && userOffers.length() != 0
 					&& userSearchs.length() != 0) {
@@ -2392,9 +2131,6 @@ public class Usermanagement {
 
 			List userList = query.getResultList();
 
-			tx.commit();
-			PersistenceSessionUtil.closeSession(idf);
-
 			return (Long) userList.get(0);
 
 		} catch (Exception ex2) {
@@ -2438,20 +2174,13 @@ public class Usermanagement {
 			}
 
 			// get all users
-			Object idf = PersistenceSessionUtil.createSession();
-			EntityManager session = PersistenceSessionUtil.getSession();
-			EntityTransaction tx = session.getTransaction();
-			tx.begin();
-
-			Query query = session.createQuery(hql);
+			Query query = em.createQuery(hql);
 			query.setParameter("search", StringUtils.lowerCase(searchTxt));
 			query.setParameter("userOffers", StringUtils.lowerCase(userOffers));
 			query.setParameter("userSearchs",
 					StringUtils.lowerCase(userSearchs));
 
 			List ll = query.getResultList();
-			tx.commit();
-			PersistenceSessionUtil.closeSession(idf);
 
 			return (Long) ll.get(0);
 
