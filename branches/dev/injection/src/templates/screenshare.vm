@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='utf-8'?>
+<jnlp spec='1.0+' codebase='$codebase'> 
+	<information> 
+		<title>Screen Sharing Application</title> 
+		<vendor>Openmeetings</vendor> 
+		<homepage>http://code.google.com/p/openmeetings/</homepage>
+		<icon href="icon.jpg" />
+		<icon kind="splash" href="splashicon.jpg" />
+		<description>ScreenViewer Client Application</description> 
+		<description kind="short">A File to grab a screen and send it to a Server</description> 
+		<offline-allowed/> 
+	</information>
+	<security>
+	    <all-permissions/>
+	</security>	
+	<resources> 
+		<j2se version='1.4+'/> 
+        <jar href='red5-screenshare.jar'/> 
+        <jar href="apache-commons.jar"/> 
+        <jar href="commons-httpclient-3.1.jar"/> 
+        <jar href="commons-codec-1.4.jar"/> 
+        <jar href="apache-mina.jar"/> 
+        <jar href="bouncycastle.jar"/> 
+        <jar href="kunststoff.jar"/> 
+        <jar href="logback.jar"/>
+        <jar href="red5.jar"/>
+        <jar href="slf4j.jar"/>
+        <jar href="spring.jar"/> 
+    </resources> 
+    <application-desc main-class='$startUpClass'>
+    	<argument>$red5-host</argument> 
+    	<argument>$red5-app</argument> 
+    	<argument>$port</argument> 
+    	<argument>$PUBLIC_SID</argument>   
+    	<argument>$LABELSHARER</argument> 
+    	<argument>$organization_id</argument> 
+    	<argument>$default_quality_screensharing</argument>
+    	<argument>$user_id</argument>   
+    	<argument>$allowRecording</argument>   
+    </application-desc> 
+</jnlp> 

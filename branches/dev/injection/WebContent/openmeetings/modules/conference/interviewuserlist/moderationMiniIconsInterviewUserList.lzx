@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<library>
+
+<class name="moderationMiniIconsInterviewUserList" extends="view">
+	
+    <handler name="oninit">
+    	this.updateIcons();
+    </handler>	
+    
+    <method name="updateIcons">
+        if (canvas.ismoderator) {
+            this._isMod.setAttribute("visibility","visible");
+            this._isModAddbutton.setAttribute("visibility","hidden");
+        } else {
+            this._isMod.setAttribute("visibility","hidden");
+            this._isModAddbutton.setAttribute("visibility","visible");
+        }
+    </method>
+	
+    <miniIcons name="_isMod" x="0" width="16" resource="participents_isMod_rsc" 
+    		   height="16" showhandcursor="false">
+        <handler name="onclick">
+            <![CDATA[
+                //Nothing happens here
+            ]]>
+        </handler>
+        <labelTooltip name="_text" labelid="688" />
+    </miniIcons>
+    
+    <miniIcons name="_isModAddbutton" opacity="0.5" x="0" width="16" resource="participents_isMod_rsc" height="16">
+        <handler name="onclick">
+            <![CDATA[
+                //Apply for Moderation
+                canvas.thishib.applyForModeration.doCall();
+            ]]>
+        </handler>
+        <labelTooltip name="_text" labelid="685" />
+    </miniIcons>
+        
+</class>
+
+</library>
