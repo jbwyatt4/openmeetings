@@ -25,14 +25,18 @@ import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.XppDriver;
 
 public class MethodGateway extends HttpServlet {
+
 	private static final long serialVersionUID = -2954875038645746731L;
 	private static final Logger log = Red5LoggerFactory.getLogger(
 			MethodGateway.class, ScopeApplicationAdapter.webAppRootKey);
+
 	@Autowired
 	private Sessionmanagement sessionManagement;
-    @Autowired
-    private Usermanagement userManagement;
-	
+	@Autowired
+	private Usermanagement userManagement;
+	@Autowired
+	private Roommanagement roommanagement;
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -108,8 +112,8 @@ public class MethodGateway extends HttpServlet {
 
 					Long returnVal = new Long(-1);
 
-					Object obj = userManagement.loginUser(SID,
-							username, userpass, null, false);
+					Object obj = userManagement.loginUser(SID, username,
+							userpass, null, false);
 					if (obj == null) {
 						returnVal = new Long(-1);
 					}
@@ -145,8 +149,7 @@ public class MethodGateway extends HttpServlet {
 					Long returnVal = new Long(-1);
 
 					Long users_id = sessionManagement.checkSession(SID);
-					Long user_level = userManagement
-							.getUserLevelByID(users_id);
+					Long user_level = userManagement.getUserLevelByID(users_id);
 					if (AuthLevelmanagement.getInstance().checkAdminLevel(
 							user_level)) {
 
@@ -158,7 +161,8 @@ public class MethodGateway extends HttpServlet {
 						xStream.setMode(XStream.NO_REFERENCES);
 						String xmlString = xStream.toXML(remoteSessionObject);
 
-						sessionManagement.updateUserRemoteSession(SID, xmlString);
+						sessionManagement.updateUserRemoteSession(SID,
+								xmlString);
 
 						returnVal = new Long(1);
 					} else {
@@ -215,14 +219,13 @@ public class MethodGateway extends HttpServlet {
 							.booleanValue();
 
 					Long users_id = sessionManagement.checkSession(SID);
-					Long user_level = userManagement
-							.getUserLevelByID(users_id);
+					Long user_level = userManagement.getUserLevelByID(users_id);
 
-					Long returnVal = Roommanagement.getInstance().addRoom(
-							user_level, name, roomtypes_id, comment,
-							numberOfPartizipants, ispublic, null, false, false,
-							null, false, null, true, false, false, "", "", "",
-							null, null, null, false);
+					Long returnVal = roommanagement.addRoom(user_level, name,
+							roomtypes_id, comment, numberOfPartizipants,
+							ispublic, null, false, false, null, false, null,
+							true, false, false, "", "", "", null, null, null,
+							false);
 
 					XStream xStream = new XStream(new XppDriver());
 					xStream.setMode(XStream.NO_REFERENCES);

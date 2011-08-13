@@ -13,29 +13,32 @@ import org.openmeetings.test.dao.base.AbstractTestCase;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class FileExplorerItemDaoImplTest extends AbstractTestCase {
-    @Autowired
-    private Usermanagement userManagement;
+
+	@Autowired
+	private Usermanagement userManagement;
+	@Autowired
+	private Roommanagement roommanagement;
 
 	public FileExplorerItemDaoImplTest(String name) {
 		super(name);
 	}
-	
+
 	final public void testFileExplorerItemDaoImpl() throws Exception {
-		
+
 		Long userId = 1L;
 		Users user = userManagement.getUserById(userId);
 		assertNotNull("Cann't get default user", user);
-		
-		List<Rooms> rooms = Roommanagement.getInstance().getPublicRooms(user.getLevel_id());
+
+		List<Rooms> rooms = roommanagement.getPublicRooms(user.getLevel_id());
 		assertNotNull("Cann't get public rooms fo default user", rooms);
 
 		Rooms room = null;
-		for (Iterator<Rooms> iter = rooms.iterator(); iter.hasNext();){
-    		room = iter.next();
-    		break;
-    	}
+		for (Iterator<Rooms> iter = rooms.iterator(); iter.hasNext();) {
+			room = iter.next();
+			break;
+		}
 		assertNotNull("Cann't get room for default user", room);
-		
+
 		FileExplorerItem fileExplorerItem = new FileExplorerItem();
 		fileExplorerItem.setFileName("FileExplorerTest");
 		fileExplorerItem.setFileHash("");
@@ -43,13 +46,16 @@ public class FileExplorerItemDaoImplTest extends AbstractTestCase {
 		fileExplorerItem.setOwnerId(userId);
 		fileExplorerItem.setWmlFilePath("");
 		fileExplorerItem.setIsFolder(true);
-		Long fileExplorerItemId = FileExplorerItemDaoImpl.getInstance().addFileExplorerItem(fileExplorerItem);
+		Long fileExplorerItemId = FileExplorerItemDaoImpl.getInstance()
+				.addFileExplorerItem(fileExplorerItem);
 		assertNotNull("Cann't add file explorer item", fileExplorerItemId);
-		
-		fileExplorerItem = FileExplorerItemDaoImpl.getInstance().getFileExplorerItemsById(fileExplorerItemId);
+
+		fileExplorerItem = FileExplorerItemDaoImpl.getInstance()
+				.getFileExplorerItemsById(fileExplorerItemId);
 		assertNotNull("Cann't get file explorer item", fileExplorerItem);
-		
-		FileExplorerItemDaoImpl.getInstance().deleteFileExplorerItem(fileExplorerItemId);
-		
+
+		FileExplorerItemDaoImpl.getInstance().deleteFileExplorerItem(
+				fileExplorerItemId);
+
 	}
 }

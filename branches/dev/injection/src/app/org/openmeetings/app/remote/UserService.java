@@ -79,6 +79,8 @@ public class UserService {
 	private ManageCryptStyle manageCryptStyle;
 	@Autowired
 	private Addressmanagement addressmanagement;
+	@Autowired
+	private Roommanagement roommanagement;
 
 	public ClientListManager getClientListManager() {
 		return clientListManager;
@@ -970,7 +972,7 @@ public class UserService {
 				Rooms room = null;
 
 				if (bookedRoom) {
-					Long room_id = Roommanagement.getInstance().addRoom(3, // Userlevel
+					Long room_id = roommanagement.addRoom(3, // Userlevel
 							subject, // name
 							roomtype_id, // RoomType
 							"", // Comment
@@ -991,7 +993,7 @@ public class UserService {
 							null, // ownerId
 							null, null, false);
 
-					room = Roommanagement.getInstance().getRoomById(room_id);
+					room = roommanagement.getRoomById(room_id);
 
 				}
 

@@ -63,6 +63,8 @@ public class ImportInitvalues {
 	private Salutationmanagement salutationmanagement;
 	@Autowired
 	private Organisationmanagement organisationmanagement;
+	@Autowired
+	private Roommanagement roommanagement;
 
 	public void loadMainMenu() {
 
@@ -462,66 +464,58 @@ public class ImportInitvalues {
 
 	public void loadDefaultRooms() {
 
-		long conference_Id = Roommanagement.getInstance().addRoomType(
-				"conference");
+		long conference_Id = roommanagement.addRoomType("conference");
 		log.debug("conference_Id: " + conference_Id);
-		long audience_Id = Roommanagement.getInstance().addRoomType("audience");
+		long audience_Id = roommanagement.addRoomType("audience");
 		log.debug("audience_Id: " + audience_Id);
 
-		long restricted_Id = Roommanagement.getInstance().addRoomType(
-				"restricted");
+		long restricted_Id = roommanagement.addRoomType("restricted");
 		log.debug("restricted_Id: " + restricted_Id);
 
-		long interview_Id = Roommanagement.getInstance().addRoomType(
-				"interview");
+		long interview_Id = roommanagement.addRoomType("interview");
 		log.debug("interview_Id: " + interview_Id);
 
-		long custom_Id = Roommanagement.getInstance().addRoomType("custom");
+		long custom_Id = roommanagement.addRoomType("custom");
 		log.debug("custom_Id: " + custom_Id);
 
-		Roommanagement.getInstance().addRoom(3, "public Interview Room",
-				interview_Id, "", new Long(16), true, null, false, false, null,
-				false, null, true, false, false, "", "", "", null, null, null,
-				false);
+		roommanagement.addRoom(3, "public Interview Room", interview_Id, "",
+				new Long(16), true, null, false, false, null, false, null,
+				true, false, false, "", "", "", null, null, null, false);
 
-		Roommanagement.getInstance().addRoom(3, "public Conference Room",
-				conference_Id, "", new Long(32), true, null, false, false,
-				null, false, null, true, false, false, "", "", "", null, null,
-				null, false);
-
-		Roommanagement.getInstance().addRoom(3, "public Video Only Room",
-				conference_Id, "", new Long(32), true, null, false, false,
-				null, false, null, true, false, false, "", "", "", null, null,
-				null, false);
-
-		Roommanagement.getInstance().addRoom(3,
-				"public Video And Whiteboard Room", conference_Id, "",
+		roommanagement.addRoom(3, "public Conference Room", conference_Id, "",
 				new Long(32), true, null, false, false, null, false, null,
 				true, false, false, "", "", "", null, null, null, false);
 
-		Roommanagement.getInstance().addRoom(3, "public Restricted Room",
-				restricted_Id, "", new Long(100), true, null, false, false,
+		roommanagement.addRoom(3, "public Video Only Room", conference_Id, "",
+				new Long(32), true, null, false, false, null, false, null,
+				true, false, false, "", "", "", null, null, null, false);
+
+		roommanagement.addRoom(3, "public Video And Whiteboard Room",
+				conference_Id, "", new Long(32), true, null, false, false,
 				null, false, null, true, false, false, "", "", "", null, null,
 				null, false);
 
-		long room2 = Roommanagement.getInstance().addRoom(3,
-				"private Conference Room", conference_Id, "", new Long(32),
-				false, null, false, false, null, false, null, true, false,
-				false, "", "", "", null, null, null, false);
+		roommanagement.addRoom(3, "public Restricted Room", restricted_Id, "",
+				new Long(100), true, null, false, false, null, false, null,
+				true, false, false, "", "", "", null, null, null, false);
 
-		Roommanagement.getInstance().addRoomToOrganisation(3, room2, 1);
+		long room2 = roommanagement.addRoom(3, "private Conference Room",
+				conference_Id, "", new Long(32), false, null, false, false,
+				null, false, null, true, false, false, "", "", "", null, null,
+				null, false);
 
-		Roommanagement.getInstance().addRoom(3, "public Audience Room",
-				audience_Id, "", new Long(32), true, null, false, false, null,
+		roommanagement.addRoomToOrganisation(3, room2, 1);
+
+		roommanagement.addRoom(3, "public Audience Room", audience_Id, "",
+				new Long(32), true, null, false, false, null, false, null,
+				true, false, false, "", "", "", null, null, null, false);
+
+		long room4 = roommanagement.addRoom(3, "private Audience Room",
+				audience_Id, "", new Long(32), false, null, false, false, null,
 				false, null, true, false, false, "", "", "", null, null, null,
 				false);
 
-		long room4 = Roommanagement.getInstance().addRoom(3,
-				"private Audience Room", audience_Id, "", new Long(32), false,
-				null, false, false, null, false, null, true, false, false, "",
-				"", "", null, null, null, false);
-
-		Roommanagement.getInstance().addRoomToOrganisation(3, room4, 1);
+		roommanagement.addRoomToOrganisation(3, room4, 1);
 
 	}
 
@@ -546,12 +540,12 @@ public class ImportInitvalues {
 			}
 
 			// Add default group
-			Long organisation_id = organisationmanagement
-					.addOrganisation(defaultOrganisationName, user_id);
+			Long organisation_id = organisationmanagement.addOrganisation(
+					defaultOrganisationName, user_id);
 
 			// Add user to default group
-			organisationmanagement.addUserToOrganisation(
-					new Long(1), organisation_id, null, "");
+			organisationmanagement.addUserToOrganisation(new Long(1),
+					organisation_id, null, "");
 		} catch (Exception e) {
 			log.error("[loadInitUserAndOrganisation] ", e);
 		}

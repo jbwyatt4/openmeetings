@@ -346,10 +346,10 @@ public class Install extends VelocityViewServlet {
 					importInitvalues.loadInitUserAndOrganisation(username,
 							userpass, useremail, orgname, timeZone);
 
+					importInitvalues.loadDefaultRooms();
+
 					if (true)
 						return null;
-
-					importInitvalues.loadDefaultRooms();
 
 					// AppointMent Categories
 					importInitvalues.loadInitAppointmentCategories();
