@@ -31,7 +31,7 @@
 		</property>
 	</bean>
 	
-	
+	<bean id="fieldmanagment" class="org.openmeetings.app.data.basic.Fieldmanagment"/>
 	<bean id="importInitvalues" class=" org.openmeetings.app.installation.ImportInitvalues"/>
 	<bean id="cfgManagement" class="org.openmeetings.app.data.basic.Configurationmanagement"/>
 	<bean id="recordingDao" class="org.openmeetings.app.data.record.dao.RecordingDaoImpl"/>

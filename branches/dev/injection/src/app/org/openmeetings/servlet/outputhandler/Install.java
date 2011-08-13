@@ -321,6 +321,10 @@ public class Install extends VelocityViewServlet {
 					String url_feed2 = getServletContext().getInitParameter(
 							"url_feed2");
 					importInitvalues.loadInitLanguages(filePath);
+
+					if (true)
+						return null;
+
 					importInitvalues.loadMainMenu();
 					importInitvalues.loadErrorMappingsFromXML(filePath);
 					importInitvalues.loadSalutations();

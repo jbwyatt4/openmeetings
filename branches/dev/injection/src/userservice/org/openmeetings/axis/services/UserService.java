@@ -40,9 +40,11 @@ public class UserService {
 	private Sessionmanagement sessionManagement;
 	@Autowired
 	private Configurationmanagement cfgManagement;
-    @Autowired
-    private Usermanagement userManagement;
-	
+	@Autowired
+	private Usermanagement userManagement;
+	@Autowired
+	private Fieldmanagment fieldmanagment;
+
 	/**
 	 * load this session id before doing anything else
 	 * 
@@ -65,8 +67,8 @@ public class UserService {
 	public Long loginUser(String SID, String username, String userpass) {
 		log.debug("UserService.loginuser");
 		try {
-			Object obj = userManagement.loginUser(SID, username,
-					userpass, null, false);
+			Object obj = userManagement.loginUser(SID, username, userpass,
+					null, false);
 			if (obj == null) {
 				return new Long(-1);
 			}
@@ -98,14 +100,13 @@ public class UserService {
 				ErrorValues eValues = ErrorManagement.getInstance()
 						.getErrorValuesById(errorid * (-1));
 				if (eValues != null) {
-					Fieldlanguagesvalues errorValue = Fieldmanagment
-							.getInstance().getFieldByIdAndLanguage(
-									eValues.getFieldvalues()
-											.getFieldvalues_id(), language_id);
-					Fieldlanguagesvalues typeValue = Fieldmanagment
-							.getInstance().getFieldByIdAndLanguage(
-									eValues.getErrorType().getFieldvalues()
-											.getFieldvalues_id(), language_id);
+					Fieldlanguagesvalues errorValue = fieldmanagment
+							.getFieldByIdAndLanguage(eValues.getFieldvalues()
+									.getFieldvalues_id(), language_id);
+					Fieldlanguagesvalues typeValue = fieldmanagment
+							.getFieldByIdAndLanguage(eValues.getErrorType()
+									.getFieldvalues().getFieldvalues_id(),
+									language_id);
 					if (errorValue != null) {
 						return new ErrorResult(errorid, errorValue.getValue(),
 								typeValue.getValue());
@@ -128,30 +129,30 @@ public class UserService {
 			throws AxisFault {
 		try {
 			Long users_id = sessionManagement.checkSession(SID);
-			Long user_level = userManagement.getUserLevelByID(
-					users_id);
+			Long user_level = userManagement.getUserLevelByID(users_id);
 
 			if (AuthLevelmanagement.getInstance().checkWebServiceLevel(
 					user_level)) {
 
-				Configuration conf = cfgManagement.getConfKey(3L, "default.timezone");
+				Configuration conf = cfgManagement.getConfKey(3L,
+						"default.timezone");
 				String jName_timeZone = "";
 
 				if (conf != null) {
 					jName_timeZone = conf.getConf_value();
 				}
 
-				Long user_id = userManagement.registerUser(
-						username, userpass, lastname, firstname, email,
-						new Date(), street, additionalname, fax, zip,
-						states_id, town, language_id, "", baseURL, true, // generate
-																			// SIP
-																			// Data
-																			// if
-																			// the
-																			// config
-																			// is
-																			// enabled
+				Long user_id = userManagement.registerUser(username, userpass,
+						lastname, firstname, email, new Date(), street,
+						additionalname, fax, zip, states_id, town, language_id,
+						"", baseURL, true, // generate
+											// SIP
+											// Data
+											// if
+											// the
+											// config
+											// is
+											// enabled
 						jName_timeZone);
 
 				if (user_id < 0) {
@@ -184,23 +185,22 @@ public class UserService {
 			String jNameTimeZone) throws AxisFault {
 		try {
 			Long users_id = sessionManagement.checkSession(SID);
-			Long user_level = userManagement.getUserLevelByID(
-					users_id);
+			Long user_level = userManagement.getUserLevelByID(users_id);
 
 			if (AuthLevelmanagement.getInstance().checkWebServiceLevel(
 					user_level)) {
 
-				Long user_id = userManagement.registerUser(
-						username, userpass, lastname, firstname, email,
-						new Date(), street, additionalname, fax, zip,
-						states_id, town, language_id, "", baseURL, true, // generate
-																			// SIP
-																			// Data
-																			// if
-																			// the
-																			// config
-																			// is
-																			// enabled
+				Long user_id = userManagement.registerUser(username, userpass,
+						lastname, firstname, email, new Date(), street,
+						additionalname, fax, zip, states_id, town, language_id,
+						"", baseURL, true, // generate
+											// SIP
+											// Data
+											// if
+											// the
+											// config
+											// is
+											// enabled
 						jNameTimeZone);
 
 				if (user_id < 0) {
@@ -258,27 +258,24 @@ public class UserService {
 			throws AxisFault {
 		try {
 			Long users_id = sessionManagement.checkSession(SID);
-			Long user_level = userManagement.getUserLevelByID(
-					users_id);
+			Long user_level = userManagement.getUserLevelByID(users_id);
 
 			if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)) {
 
-				Users testUser = userManagement
-						.getUserByExternalIdAndType(externalUserId,
-								externalUserType);
+				Users testUser = userManagement.getUserByExternalIdAndType(
+						externalUserId, externalUserType);
 
 				if (testUser != null) {
 					throw new Exception("User does already exist!");
 				}
 
 				// This will send no email to the users
-				Long user_id = userManagement
-						.registerUserNoEmail(username, userpass, lastname,
-								firstname, email, new Date(), street,
-								additionalname, fax, zip, states_id, town,
-								language_id, "", true, // generate SIP Data if
-														// the config is enabled
-								jNameTimeZone);
+				Long user_id = userManagement.registerUserNoEmail(username,
+						userpass, lastname, firstname, email, new Date(),
+						street, additionalname, fax, zip, states_id, town,
+						language_id, "", true, // generate SIP Data if
+												// the config is enabled
+						jNameTimeZone);
 
 				if (user_id < 0) {
 					return user_id;
@@ -318,16 +315,15 @@ public class UserService {
 	public Long deleteUserById(String SID, Long userId) throws AxisFault {
 		try {
 			Long users_id = sessionManagement.checkSession(SID);
-			Long user_level = userManagement.getUserLevelByID(
-					users_id);
+			Long user_level = userManagement.getUserLevelByID(users_id);
 
 			if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)) {
 
 				// Setting user deleted
 				UsersDaoImpl.getInstance().deleteUserID(userId);
 
-				Users user = userManagement
-						.checkAdmingetUserById(user_level, userId);
+				Users user = userManagement.checkAdmingetUserById(user_level,
+						userId);
 
 				// Updating address
 				Adresses ad = user.getAdresses();
@@ -366,22 +362,20 @@ public class UserService {
 			Long externalUserId, String externalUserType) throws AxisFault {
 		try {
 			Long users_id = sessionManagement.checkSession(SID);
-			Long user_level = userManagement.getUserLevelByID(
-					users_id);
+			Long user_level = userManagement.getUserLevelByID(users_id);
 
 			if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)) {
 
-				Users userExternal = userManagement
-						.getUserByExternalIdAndType(externalUserId,
-								externalUserType);
+				Users userExternal = userManagement.getUserByExternalIdAndType(
+						externalUserId, externalUserType);
 
 				Long userId = userExternal.getUser_id();
 
 				// Setting user deleted
 				UsersDaoImpl.getInstance().deleteUserID(userId);
 
-				Users user = userManagement
-						.checkAdmingetUserById(user_level, userId);
+				Users user = userManagement.checkAdmingetUserById(user_level,
+						userId);
 
 				// Updating address
 				Adresses ad = user.getAdresses();
@@ -423,8 +417,7 @@ public class UserService {
 
 		try {
 			Long users_id = sessionManagement.checkSession(SID);
-			Long user_level = userManagement.getUserLevelByID(
-					users_id);
+			Long user_level = userManagement.getUserLevelByID(users_id);
 			if (AuthLevelmanagement.getInstance().checkWebServiceLevel(
 					user_level)) {
 
@@ -444,8 +437,7 @@ public class UserService {
 
 				log.debug("xmlString " + xmlString);
 
-				sessionManagement.updateUserRemoteSession(SID,
-						xmlString);
+				sessionManagement.updateUserRemoteSession(SID, xmlString);
 
 				return new Long(1);
 			} else {
@@ -485,8 +477,7 @@ public class UserService {
 
 		try {
 			Long users_id = sessionManagement.checkSession(SID);
-			Long user_level = userManagement.getUserLevelByID(
-					users_id);
+			Long user_level = userManagement.getUserLevelByID(users_id);
 			if (AuthLevelmanagement.getInstance().checkWebServiceLevel(
 					user_level)) {
 
@@ -509,8 +500,7 @@ public class UserService {
 
 				log.debug("xmlString " + xmlString);
 
-				sessionManagement.updateUserRemoteSession(SID,
-						xmlString);
+				sessionManagement.updateUserRemoteSession(SID, xmlString);
 
 				return new Long(1);
 			} else {
@@ -531,8 +521,7 @@ public class UserService {
 
 		try {
 			Long users_id = sessionManagement.checkSession(SID);
-			Long user_level = userManagement.getUserLevelByID(
-					users_id);
+			Long user_level = userManagement.getUserLevelByID(users_id);
 			if (AuthLevelmanagement.getInstance().checkWebServiceLevel(
 					user_level)) {
 
@@ -555,8 +544,7 @@ public class UserService {
 
 				log.debug("xmlString " + xmlString);
 
-				sessionManagement.updateUserRemoteSession(SID,
-						xmlString);
+				sessionManagement.updateUserRemoteSession(SID, xmlString);
 
 				boolean becomeModerator = false;
 				if (becomeModeratorAsInt != 0) {
@@ -599,8 +587,7 @@ public class UserService {
 
 		try {
 			Long users_id = sessionManagement.checkSession(SID);
-			Long user_level = userManagement.getUserLevelByID(
-					users_id);
+			Long user_level = userManagement.getUserLevelByID(users_id);
 			if (AuthLevelmanagement.getInstance().checkWebServiceLevel(
 					user_level)) {
 
@@ -623,8 +610,7 @@ public class UserService {
 
 				log.debug("xmlString " + xmlString);
 
-				sessionManagement.updateUserRemoteSession(SID,
-						xmlString);
+				sessionManagement.updateUserRemoteSession(SID, xmlString);
 
 				boolean becomeModerator = false;
 				if (becomeModeratorAsInt != 0) {
@@ -666,8 +652,7 @@ public class UserService {
 
 		try {
 			Long users_id = sessionManagement.checkSession(SID);
-			Long user_level = userManagement.getUserLevelByID(
-					users_id);
+			Long user_level = userManagement.getUserLevelByID(users_id);
 			if (AuthLevelmanagement.getInstance().checkWebServiceLevel(
 					user_level)) {
 
@@ -691,8 +676,7 @@ public class UserService {
 
 				log.debug("xmlString " + xmlString);
 
-				sessionManagement.updateUserRemoteSession(SID,
-						xmlString);
+				sessionManagement.updateUserRemoteSession(SID, xmlString);
 
 				boolean becomeModerator = false;
 				if (becomeModeratorAsInt != 0) {
@@ -737,8 +721,7 @@ public class UserService {
 
 		try {
 			Long users_id = sessionManagement.checkSession(SID);
-			Long user_level = userManagement.getUserLevelByID(
-					users_id);
+			Long user_level = userManagement.getUserLevelByID(users_id);
 			if (AuthLevelmanagement.getInstance().checkWebServiceLevel(
 					user_level)) {
 
@@ -761,8 +744,7 @@ public class UserService {
 
 				log.debug("xmlString " + xmlString);
 
-				sessionManagement.updateUserRemoteSession(SID,
-						xmlString);
+				sessionManagement.updateUserRemoteSession(SID, xmlString);
 
 				String hash = SOAPLoginDaoImpl.getInstance().addSOAPLogin(SID,
 						null, false, true, true, // allowSameURLMultipleTimes
@@ -799,8 +781,7 @@ public class UserService {
 			log.debug("UserService.setUserObjectAndGenerateRoomHashByURLAndNick");
 
 			Long users_id = sessionManagement.checkSession(SID);
-			Long user_level = userManagement.getUserLevelByID(
-					users_id);
+			Long user_level = userManagement.getUserLevelByID(users_id);
 			if (AuthLevelmanagement.getInstance().checkWebServiceLevel(
 					user_level)) {
 
@@ -824,8 +805,7 @@ public class UserService {
 
 				log.debug("xmlString " + xmlString);
 
-				sessionManagement.updateUserRemoteSession(SID,
-						xmlString);
+				sessionManagement.updateUserRemoteSession(SID, xmlString);
 
 				boolean becomeModerator = false;
 				if (becomeModeratorAsInt != 0) {
@@ -868,8 +848,7 @@ public class UserService {
 
 		try {
 			Long users_id = sessionManagement.checkSession(SID);
-			Long user_level = userManagement.getUserLevelByID(
-					users_id);
+			Long user_level = userManagement.getUserLevelByID(users_id);
 			if (AuthLevelmanagement.getInstance().checkWebServiceLevel(
 					user_level)) {
 
@@ -892,8 +871,7 @@ public class UserService {
 
 				log.debug("xmlString " + xmlString);
 
-				sessionManagement.updateUserRemoteSession(SID,
-						xmlString);
+				sessionManagement.updateUserRemoteSession(SID, xmlString);
 
 				String hash = SOAPLoginDaoImpl.getInstance().addSOAPLogin(SID,
 						null, false, false, true, // allowSameURLMultipleTimes
@@ -920,8 +898,7 @@ public class UserService {
 			Long organisation_id, Long insertedby, String comment) {
 		try {
 			Long users_id = sessionManagement.checkSession(SID);
-			Long user_level = userManagement.getUserLevelByID(
-					users_id);
+			Long user_level = userManagement.getUserLevelByID(users_id);
 			if (AuthLevelmanagement.getInstance().checkWebServiceLevel(
 					user_level)) {
 
@@ -943,8 +920,7 @@ public class UserService {
 			boolean asc) {
 		try {
 			Long users_id = sessionManagement.checkSession(SID);
-			Long user_level = userManagement.getUserLevelByID(
-					users_id);
+			Long user_level = userManagement.getUserLevelByID(users_id);
 			if (AuthLevelmanagement.getInstance().checkWebServiceLevel(
 					user_level)) {
 				return Organisationmanagement.getInstance()
@@ -966,8 +942,7 @@ public class UserService {
 		try {
 			Boolean salida = false;
 
-			salida = userManagement.kickUserByPublicSID(SID,
-					publicSID);
+			salida = userManagement.kickUserByPublicSID(SID, publicSID);
 
 			if (salida == null)
 				salida = false;

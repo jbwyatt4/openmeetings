@@ -68,7 +68,9 @@ public class Usermanagement {
 	private Sessionmanagement sessionManagement;
 	@Autowired
 	private Configurationmanagement cfgManagement;
-	
+	@Autowired
+	private Fieldmanagment fieldmanagment;
+
 	/**
 	 * query for a list of users
 	 * 
@@ -226,7 +228,7 @@ public class Usermanagement {
 			if (ll.size() == 0) {
 				return new Long(-10);
 			} else {
-				Users users = (Users) ll.get(0);
+				Users users = ll.get(0);
 
 				// Refresh User Object
 				users = this.refreshUserObject(users);
@@ -235,8 +237,8 @@ public class Usermanagement {
 						.verifyPassword(userpass, users.getPassword())) {
 					log.info("chsum OK: " + users.getUser_id());
 
-					Boolean bool = sessionManagement.updateUser(
-							SID, users.getUser_id(), storePermanent,
+					Boolean bool = sessionManagement.updateUser(SID,
+							users.getUser_id(), storePermanent,
 							users.getLanguage_id());
 					if (bool == null) {
 						// Exception
@@ -290,7 +292,8 @@ public class Usermanagement {
 	public Users loginUserByRemoteHash(String SID, String remoteHash) {
 		try {
 
-			Sessiondata sessionData = sessionManagement.getSessionByHash(remoteHash);
+			Sessiondata sessionData = sessionManagement
+					.getSessionByHash(remoteHash);
 
 			if (sessionData != null) {
 
@@ -348,8 +351,8 @@ public class Usermanagement {
 				CriteriaBuilder cb = em.getCriteriaBuilder();
 				CriteriaQuery<Users> cq = cb.createQuery(Users.class);
 				Root<Users> c = cq.from(Users.class);
-				Expression<String> literal = cb.literal((String) "%"
-						+ searchstring + "%");
+				Expression<String> literal = cb.literal("%" + searchstring
+						+ "%");
 				// crit.add(Restrictions.ilike(searchcriteria, "%" +
 				// searchstring + "%"));
 				Path<String> path = c.get(searchcriteria);
@@ -831,15 +834,15 @@ public class Usermanagement {
 			boolean generateSipUserData, String jNameTimeZone) {
 		try {
 			// Checks if FrontEndUsers can register
-			if (cfgManagement
-					.getConfKey(3, "allow_frontend_register").getConf_value()
-					.equals("1")) {
+			if (cfgManagement.getConfKey(3, "allow_frontend_register")
+					.getConf_value().equals("1")) {
 
 				Boolean sendConfirmation = false;
-				Integer sendEmailWithVerficationCode = Integer.valueOf(
-						cfgManagement
-								.getConfKey(3, "sendEmailWithVerficationCode")
-								.getConf_value()).intValue();
+				Integer sendEmailWithVerficationCode = Integer
+						.valueOf(
+								cfgManagement.getConfKey(3,
+										"sendEmailWithVerficationCode")
+										.getConf_value()).intValue();
 
 				// Send Confirmation can only be true when the baseURL is set,
 				// when you add a new user through the Administration panel
@@ -863,8 +866,7 @@ public class Usermanagement {
 				// Get the default organisation_id of registered users
 				if (user_id > 0) {
 					long organisation_id = Long.valueOf(
-							cfgManagement
-									.getConfKey(3, "default_domain_id")
+							cfgManagement.getConfKey(3, "default_domain_id")
 									.getConf_value()).longValue();
 					Organisationmanagement.getInstance().addUserToOrganisation(
 							user_id, organisation_id, user_id, "");
@@ -889,9 +891,8 @@ public class Usermanagement {
 			boolean generateSipUserData, String jNameTimeZone) {
 		try {
 			// Checks if FrontEndUsers can register
-			if (cfgManagement
-					.getConfKey(3, "allow_frontend_register").getConf_value()
-					.equals("1")) {
+			if (cfgManagement.getConfKey(3, "allow_frontend_register")
+					.getConf_value().equals("1")) {
 
 				Boolean sendConfirmation = false;
 				Boolean sendWelcomeMessage = false;
@@ -909,8 +910,7 @@ public class Usermanagement {
 				// Get the default organisation_id of registered users
 				if (user_id > 0) {
 					long organisation_id = Long.valueOf(
-							cfgManagement
-									.getConfKey(3, "default_domain_id")
+							cfgManagement.getConfKey(3, "default_domain_id")
 									.getConf_value()).longValue();
 					Organisationmanagement.getInstance().addUserToOrganisation(
 							user_id, organisation_id, user_id, "");
@@ -1486,14 +1486,13 @@ public class Usermanagement {
 		String email = us.getAdresses().getEmail();
 
 		Long default_lang_id = Long.valueOf(
-				cfgManagement
-						.getConfKey(3, "default_lang_id").getConf_value())
+				cfgManagement.getConfKey(3, "default_lang_id").getConf_value())
 				.longValue();
 
 		String template = ResetPasswordTemplate.getInstance()
 				.getResetPasswordTemplate(reset_link, default_lang_id);
 
-		Fieldlanguagesvalues labelid517 = Fieldmanagment.getInstance()
+		Fieldlanguagesvalues labelid517 = fieldmanagment
 				.getFieldByIdAndLanguage(new Long(517), default_lang_id);
 
 		MailHandler.sendMail(email, labelid517.getValue(), template);
@@ -1520,7 +1519,7 @@ public class Usermanagement {
 		TypedQuery<Users> q = em.createQuery(cq);
 		Users u = null;
 		try {
-			u = (Users) q.getSingleResult();
+			u = q.getSingleResult();
 		} catch (NoResultException e) {
 			// u=null}
 		} catch (NonUniqueResultException ex) {
@@ -1541,7 +1540,7 @@ public class Usermanagement {
 		TypedQuery<Users> q = em.createQuery(cq);
 		Users u = null;
 		try {
-			u = (Users) q.getSingleResult();
+			u = q.getSingleResult();
 		} catch (NoResultException e) {
 			// u=null}
 		}
@@ -1569,7 +1568,7 @@ public class Usermanagement {
 		TypedQuery<Users> q = em.createQuery(cq);
 		Users u = null;
 		try {
-			u = (Users) q.getSingleResult();
+			u = q.getSingleResult();
 		} catch (NoResultException e) {
 			// u=null}
 		}
@@ -1675,7 +1674,7 @@ public class Usermanagement {
 
 				for (Iterator<String> iter = MyUserList.keySet().iterator(); iter
 						.hasNext();) {
-					String key = (String) iter.next();
+					String key = iter.next();
 
 					RoomClient rcl = MyUserList.get(key);
 

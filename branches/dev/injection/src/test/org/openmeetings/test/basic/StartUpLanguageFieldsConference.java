@@ -56,11 +56,11 @@ public class StartUpLanguageFieldsConference extends TestCase {
 		 * swagner 15.05.2007*/
 //		for (int item_id = 0; item_id < nodeListLanguages[0].getLength(); item_id++)
 //		{
-//			Fieldmanagment.getInstance().addField(nodeListLanguages[0].item(item_id).getAttributes().getNamedItem("name").getNodeValue());
+//			fieldmanagment.addField(nodeListLanguages[0].item(item_id).getAttributes().getNamedItem("name").getNodeValue());
 //		
 //			for (int language_id = 0; language_id < listLanguages.length; language_id ++)
 //			{
-//				Fieldmanagment.getInstance().addFieldValueByFieldAndLanguage(Long.valueOf(nodeListLanguages[language_id].item(item_id).getAttributes().getNamedItem("id").getNodeValue()), (long) (language_id + 1), nodeListLanguages[language_id].item(item_id).getTextContent());
+//				fieldmanagment.addFieldValueByFieldAndLanguage(Long.valueOf(nodeListLanguages[language_id].item(item_id).getAttributes().getNamedItem("id").getNodeValue()), (long) (language_id + 1), nodeListLanguages[language_id].item(item_id).getTextContent());
 //			}	
 //		}
 	}
