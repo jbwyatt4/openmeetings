@@ -68,6 +68,8 @@ public class UserService {
 	private Usermanagement userManagement;
 	@Autowired
 	private Fieldmanagment fieldmanagment;
+	@Autowired
+	private OmTimeZoneDaoImpl omTimeZoneDaoImpl;
 
 	public ClientListManager getClientListManager() {
 		return clientListManager;
@@ -548,8 +550,7 @@ public class UserService {
 
 				Users us = userManagement.getUserById(users_id);
 
-				us.setOmTimeZone(OmTimeZoneDaoImpl.getInstance().getOmTimeZone(
-						jname));
+				us.setOmTimeZone(omTimeZoneDaoImpl.getOmTimeZone(jname));
 				us.setForceTimeZoneCheck(false);
 				us.setUpdatetime(new Date());
 

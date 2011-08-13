@@ -67,8 +67,12 @@ public class MainService implements IPendingServiceCallback {
 	private Sessionmanagement sessionManagement;
 	@Autowired
 	private Configurationmanagement cfgManagement;
-    @Autowired
-    private Usermanagement userManagement;
+	@Autowired
+	private Usermanagement userManagement;
+	@Autowired
+	private Statemanagement statemanagement;
+	@Autowired
+	private OmTimeZoneDaoImpl omTimeZoneDaoImpl;
 
 	// External User Types
 	public static final String EXTERNAL_USER_TYPE_LDAP = "LDAP";
@@ -110,8 +114,8 @@ public class MainService implements IPendingServiceCallback {
 		try {
 			Long user_id = sessionManagement.checkSession(SID);
 			// log.error("getNavi 1: "+users_id);
-			Long user_level = userManagement
-					.getUserLevelByIdAndOrg(user_id, organisation_id);
+			Long user_level = userManagement.getUserLevelByIdAndOrg(user_id,
+					organisation_id);
 			// log.error("getNavi 2: "+user_level);
 			return Navimanagement.getInstance().getMainMenu(user_level,
 					user_id, language_id);
@@ -131,8 +135,7 @@ public class MainService implements IPendingServiceCallback {
 	public Users getUser(String SID, int USER_ID) {
 		Users users = new Users();
 		Long users_id = sessionManagement.checkSession(SID);
-		long user_level = userManagement.getUserLevelByID(
-				users_id);
+		long user_level = userManagement.getUserLevelByID(users_id);
 		if (user_level > 2) {
 			users = UsersDaoImpl.getInstance().getUser(new Long(USER_ID));
 		} else {
@@ -214,8 +217,7 @@ public class MainService implements IPendingServiceCallback {
 			currentClient = this.clientListManager.getClientByStreamId(current
 					.getClient().getId());
 
-			o = userManagement.loginUserByRemoteHash(SID,
-					remoteHashId);
+			o = userManagement.loginUserByRemoteHash(SID, remoteHashId);
 
 			if (o == null)
 				return null;
@@ -350,9 +352,8 @@ public class MainService implements IPendingServiceCallback {
 				currentClient = this.clientListManager
 						.getClientByStreamId(current.getClient().getId());
 
-				o = userManagement.loginUser(SID,
-						usernameOrEmail, Userpass, currentClient,
-						storePermanent);
+				o = userManagement.loginUser(SID, usernameOrEmail, Userpass,
+						currentClient, storePermanent);
 			}
 
 			if (o == null)
@@ -413,8 +414,7 @@ public class MainService implements IPendingServiceCallback {
 		 * try { log.debug("loginUser 111: "+SID+" "+Username); IConnection
 		 * current = Red5.getConnectionLocal(); RoomClient currentClient =
 		 * Application.getClientList().get(current.getClient().getId()); Object
-		 * obj = userManagement.loginUser(SID,Username,Userpass,
-		 * currentClient);
+		 * obj = userManagement.loginUser(SID,Username,Userpass, currentClient);
 		 * 
 		 * if (currentClient.getUser_id()!=null && currentClient.getUser_id()>0)
 		 * { Users us = (Users) obj;
@@ -578,8 +578,7 @@ public class MainService implements IPendingServiceCallback {
 	public Long loginUserByRemote(String SID) {
 		try {
 			Long users_id = sessionManagement.checkSession(SID);
-			Long user_level = userManagement.getUserLevelByID(
-					users_id);
+			Long user_level = userManagement.getUserLevelByID(users_id);
 			if (AuthLevelmanagement.getInstance().checkWebServiceLevel(
 					user_level)) {
 
@@ -620,15 +619,14 @@ public class MainService implements IPendingServiceCallback {
 						// If so we need to check that we create this user in
 						// OpenMeetings and update its record
 
-						Users user = userManagement
-								.getUserByExternalIdAndType(
-										userObject.getExternalUserId(),
-										userObject.getExternalUserType());
+						Users user = userManagement.getUserByExternalIdAndType(
+								userObject.getExternalUserId(),
+								userObject.getExternalUserType());
 
 						if (user == null) {
 
 							Configuration conf = cfgManagement.getConfKey(3L,
-											"default.timezone");
+									"default.timezone");
 							String jName_timeZone = "";
 
 							if (conf != null) {
@@ -671,7 +669,8 @@ public class MainService implements IPendingServiceCallback {
 					log.debug("UPDATE USER BY STREAMID " + streamId);
 
 					if (currentClient.getUser_id() != null) {
-						sessionManagement.updateUser(SID, currentClient.getUser_id());
+						sessionManagement.updateUser(SID,
+								currentClient.getUser_id());
 					}
 
 					this.clientListManager.updateClientByStreamId(streamId,
@@ -694,10 +693,10 @@ public class MainService implements IPendingServiceCallback {
 	public Users markSessionAsLogedIn(String SID) {
 		try {
 			sessionManagement.updateUserWithoutSession(SID, -1L);
-			Configuration conf = cfgManagement
-					.getConfKey(3L, "default.rpc.userid");
-			return userManagement.getUserById(
-					Long.parseLong(conf.getConf_value()));
+			Configuration conf = cfgManagement.getConfKey(3L,
+					"default.rpc.userid");
+			return userManagement.getUserById(Long.parseLong(conf
+					.getConf_value()));
 		} catch (Exception err) {
 			log.error("[markSessionAsLogedIn]", err);
 		}
@@ -725,11 +724,11 @@ public class MainService implements IPendingServiceCallback {
 	 * @return List of State-Objects or null
 	 */
 	public List<States> getStates() {
-		return Statemanagement.getInstance().getStates();
+		return statemanagement.getStates();
 	}
 
 	public List<OmTimeZone> getTimeZones() {
-		return OmTimeZoneDaoImpl.getInstance().getOmTimeZones();
+		return omTimeZoneDaoImpl.getOmTimeZones();
 	}
 
 	/**
@@ -740,18 +739,15 @@ public class MainService implements IPendingServiceCallback {
 	 * @return
 	 */
 	public Configuration allowFrontendRegister(String SID) {
-		return cfgManagement.getConfKey(3,
-				"allow_frontend_register");
+		return cfgManagement.getConfKey(3, "allow_frontend_register");
 	}
 
 	public List<Configuration> getLoginOptions(String SID) {
 		try {
 
 			List<Configuration> cList = new LinkedList<Configuration>();
-			cList.add(cfgManagement.getConfKey(3,
-					"allow_frontend_register"));
-			cList.add(cfgManagement.getConfKey(3,
-					"show.facebook.login"));
+			cList.add(cfgManagement.getConfKey(3, "allow_frontend_register"));
+			cList.add(cfgManagement.getConfKey(3, "show.facebook.login"));
 
 			return cList;
 		} catch (Exception err) {
@@ -802,20 +798,17 @@ public class MainService implements IPendingServiceCallback {
 			// baseURL = "https://"+domain+":"+port+"/"+webapp+"/";
 			// }
 
-			return userManagement.registerUser(
-					regObject.get("Username").toString(),
-					regObject.get("Userpass").toString(),
+			return userManagement.registerUser(regObject.get("Username")
+					.toString(), regObject.get("Userpass").toString(),
 					regObject.get("lastname").toString(),
 					regObject.get("firstname").toString(),
-					regObject.get("email").toString(),
-					new Date(),
-					regObject.get("street").toString(),
+					regObject.get("email").toString(), new Date(), regObject
+							.get("street").toString(),
 					regObject.get("additionalname").toString(),
-					regObject.get("fax").toString(),
-					regObject.get("zip").toString(),
+					regObject.get("fax").toString(), regObject.get("zip")
+							.toString(),
 					Long.valueOf(regObject.get("states_id").toString())
-							.longValue(),
-					regObject.get("town").toString(),
+							.longValue(), regObject.get("town").toString(),
 					Long.valueOf(regObject.get("language_id").toString())
 							.longValue(), "", baseURL, true,
 					regObject.get("jNameTimeZone").toString());
@@ -849,13 +842,14 @@ public class MainService implements IPendingServiceCallback {
 	 *         already taken, -5 if username already taken, -3 if login or pass
 	 *         or mail is empty
 	 */
+	@Deprecated
 	public Long registerUser(String SID, String Username, String Userpass,
 			String lastname, String firstname, String email, Date age,
 			String street, String additionalname, String fax, String zip,
 			long states_id, String town, long language_id, String phone) {
-		return userManagement.registerUser(Username, Userpass,
-				lastname, firstname, email, age, street, additionalname, fax,
-				zip, states_id, town, language_id, phone, "", true, "");
+		return userManagement.registerUser(Username, Userpass, lastname,
+				firstname, email, age, street, additionalname, fax, zip,
+				states_id, town, language_id, phone, "", true, "");
 	}
 
 	/**
@@ -866,8 +860,7 @@ public class MainService implements IPendingServiceCallback {
 	 */
 	public Long deleteUserIDSelf(String SID) {
 		Long users_id = sessionManagement.checkSession(SID);
-		long user_level = userManagement.getUserLevelByID(
-				users_id);
+		long user_level = userManagement.getUserLevelByID(users_id);
 		if (user_level >= 1) {
 			userManagement.logout(SID, users_id);
 			return UsersDaoImpl.getInstance().deleteUserID(users_id);
@@ -892,12 +885,12 @@ public class MainService implements IPendingServiceCallback {
 	 * @param room_id
 	 * @return
 	 */
+	@Deprecated
 	public String sendInvitation(String SID, String username, String message,
 			String domain, String room, String roomtype, String baseurl,
 			String email, String subject, Long room_id) {
 		Long users_id = sessionManagement.checkSession(SID);
-		Long user_level = userManagement.getUserLevelByID(
-				users_id);
+		Long user_level = userManagement.getUserLevelByID(users_id);
 		return Invitationmanagement.getInstance().sendInvitionLink(user_level,
 				username, message, domain, room, roomtype, baseurl, email,
 				subject, room_id, null, null);
@@ -920,8 +913,7 @@ public class MainService implements IPendingServiceCallback {
 
 	public List<Userdata> getUserdata(String SID) {
 		Long users_id = sessionManagement.checkSession(SID);
-		Long user_level = userManagement.getUserLevelByID(
-				users_id);
+		Long user_level = userManagement.getUserLevelByID(users_id);
 		if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
 			return userManagement.getUserdataDashBoard(users_id);
 		}
@@ -933,11 +925,11 @@ public class MainService implements IPendingServiceCallback {
 	 * @param SID
 	 * @return
 	 */
+	@Deprecated
 	public LinkedHashMap<String, LinkedHashMap<String, LinkedHashMap<String, LinkedHashMap<String, Object>>>> getRssFeeds(
 			String SID) {
 		Long users_id = sessionManagement.checkSession(SID);
-		Long user_level = userManagement.getUserLevelByID(
-				users_id);
+		Long user_level = userManagement.getUserLevelByID(users_id);
 		return LoadAtomRssFeed.getInstance().getRssFeeds(user_level);
 	}
 
@@ -950,8 +942,7 @@ public class MainService implements IPendingServiceCallback {
 	public LinkedHashMap<String, LinkedHashMap<String, LinkedHashMap<String, Object>>> getRssFeedByURL(
 			String SID, String urlEndPoint) {
 		Long users_id = sessionManagement.checkSession(SID);
-		Long user_level = userManagement.getUserLevelByID(
-				users_id);
+		Long user_level = userManagement.getUserLevelByID(users_id);
 		if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
 			return LoadAtomRssFeed.getInstance().parseRssFeed(urlEndPoint);
 		} else {
@@ -967,11 +958,11 @@ public class MainService implements IPendingServiceCallback {
 	 * @param domain
 	 * @return
 	 */
+	@Deprecated
 	public LinkedHashMap<Integer, RoomClient> getUsersByDomain(String SID,
 			String domain) {
 		Long users_id = sessionManagement.checkSession(SID);
-		Long user_level = userManagement.getUserLevelByID(
-				users_id);
+		Long user_level = userManagement.getUserLevelByID(users_id);
 		if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
 			LinkedHashMap<Integer, RoomClient> lMap = new LinkedHashMap<Integer, RoomClient>();
 			Integer counter = 0;
@@ -992,8 +983,7 @@ public class MainService implements IPendingServiceCallback {
 	public Boolean getSIPModuleStatus() {
 		try {
 
-			Configuration conf = cfgManagement
-					.getConfKey(3L, "sip.enable");
+			Configuration conf = cfgManagement.getConfKey(3L, "sip.enable");
 
 			if (conf == null) {
 				return false;
@@ -1014,8 +1004,7 @@ public class MainService implements IPendingServiceCallback {
 	public int closeRoom(String SID, Long room_id, Boolean status) {
 		try {
 			Long users_id = sessionManagement.checkSession(SID);
-			Long user_level = userManagement.getUserLevelByID(
-					users_id);
+			Long user_level = userManagement.getUserLevelByID(users_id);
 			if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
 
 				Roommanagement.getInstance().closeRoom(room_id, status);
@@ -1046,20 +1035,19 @@ public class MainService implements IPendingServiceCallback {
 	public List<Configuration> getDashboardConfiguration(String SID) {
 		try {
 			Long users_id = sessionManagement.checkSession(SID);
-			Long user_level = userManagement.getUserLevelByID(
-					users_id);
+			Long user_level = userManagement.getUserLevelByID(users_id);
 			if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
 
 				List<Configuration> cfManagementList = new LinkedList<Configuration>();
 
-				cfManagementList.add(cfgManagement
-						.getConfKey(3L, "dashboard.show.chat"));
-				cfManagementList.add(cfgManagement
-						.getConfKey(3L, "dashboard.show.myrooms"));
-				cfManagementList.add(cfgManagement
-						.getConfKey(3L, "dashboard.show.rssfeed"));
-				cfManagementList.add(cfgManagement
-						.getConfKey(3L, "default.dashboard.tab"));
+				cfManagementList.add(cfgManagement.getConfKey(3L,
+						"dashboard.show.chat"));
+				cfManagementList.add(cfgManagement.getConfKey(3L,
+						"dashboard.show.myrooms"));
+				cfManagementList.add(cfgManagement.getConfKey(3L,
+						"dashboard.show.rssfeed"));
+				cfManagementList.add(cfgManagement.getConfKey(3L,
+						"default.dashboard.tab"));
 
 				return cfManagementList;
 			}
@@ -1105,8 +1093,8 @@ public class MainService implements IPendingServiceCallback {
 	 * start, int max){ Long users_id =
 	 * Sessionmanagement.getInstance().checkSession(SID); long user_level =
 	 * userManagement.getUserLevelByID(users_id); return
-	 * userManagement.getusersAdmin(user_level,start,max); }
-	 * public Users_Usergroups getSingleGroup(String SID,int GROUP_ID){ return
+	 * userManagement.getusersAdmin(user_level,start,max); } public
+	 * Users_Usergroups getSingleGroup(String SID,int GROUP_ID){ return
 	 * ResHandler.getSingleGroup(SID, GROUP_ID); } public Users_Usergroups
 	 * getGroupUsers(String SID,int GROUP_ID){ return
 	 * ResHandler.getGroupUsers(SID,GROUP_ID); } public String

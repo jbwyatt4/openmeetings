@@ -59,6 +59,8 @@ public class Invitationmanagement {
 	private Usermanagement userManagement;
 	@Autowired
 	private Fieldmanagment fieldmanagment;
+	@Autowired
+	private OmTimeZoneDaoImpl omTimeZoneDaoImpl;
 
 	private Invitationmanagement() {
 	}
@@ -227,8 +229,7 @@ public class Invitationmanagement {
 			}
 		}
 
-		OmTimeZone omTimeZone = OmTimeZoneDaoImpl.getInstance().getOmTimeZone(
-				jNameTimeZone);
+		OmTimeZone omTimeZone = omTimeZoneDaoImpl.getOmTimeZone(jNameTimeZone);
 
 		String timeZoneName = omTimeZone.getIcal();
 
@@ -363,8 +364,7 @@ public class Invitationmanagement {
 			}
 		}
 
-		OmTimeZone omTimeZone = OmTimeZoneDaoImpl.getInstance().getOmTimeZone(
-				jNameTimeZone);
+		OmTimeZone omTimeZone = omTimeZoneDaoImpl.getOmTimeZone(jNameTimeZone);
 
 		String timeZoneName = omTimeZone.getIcal();
 
@@ -694,8 +694,7 @@ public class Invitationmanagement {
 		// Defining Organizer
 		Users user = userManagement.getUserById(organizer_userId);
 
-		OmTimeZone omTimeZone = OmTimeZoneDaoImpl.getInstance().getOmTimeZone(
-				jNameTimeZone);
+		OmTimeZone omTimeZone = omTimeZoneDaoImpl.getOmTimeZone(jNameTimeZone);
 
 		IcalHandler handler = new IcalHandler(IcalHandler.ICAL_METHOD_CANCEL);
 

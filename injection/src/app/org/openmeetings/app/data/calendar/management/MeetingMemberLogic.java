@@ -36,6 +36,8 @@ public class MeetingMemberLogic {
 	private Usermanagement userManagement;
 	@Autowired
 	private Fieldmanagment fieldmanagment;
+	@Autowired
+	private OmTimeZoneDaoImpl omTimeZoneDaoImpl;
 
 	public static synchronized MeetingMemberLogic getInstance() {
 		if (instance == null) {
@@ -95,15 +97,13 @@ public class MeetingMemberLogic {
 				System.out.println("Internal User ");
 				// Internal User
 				jNameTimeZone = us.getOmTimeZone().getJname();
-				omTimeZone = OmTimeZoneDaoImpl.getInstance().getOmTimeZone(
-						jNameTimeZone);
+				omTimeZone = omTimeZoneDaoImpl.getOmTimeZone(jNameTimeZone);
 			} else {
 
 				System.out.println("External User ");
 				// External User
 				jNameTimeZone = jNameMemberTimeZone;
-				omTimeZone = OmTimeZoneDaoImpl.getInstance().getOmTimeZone(
-						jNameTimeZone);
+				omTimeZone = omTimeZoneDaoImpl.getOmTimeZone(jNameTimeZone);
 
 			}
 
@@ -114,8 +114,7 @@ public class MeetingMemberLogic {
 				if (conf != null) {
 					jNameTimeZone = conf.getConf_value();
 				}
-				omTimeZone = OmTimeZoneDaoImpl.getInstance().getOmTimeZone(
-						jNameTimeZone);
+				omTimeZone = omTimeZoneDaoImpl.getOmTimeZone(jNameTimeZone);
 			}
 
 			String timeZoneName = omTimeZone.getIcal();
