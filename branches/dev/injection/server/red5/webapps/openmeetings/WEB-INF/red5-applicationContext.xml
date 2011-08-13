@@ -31,7 +31,10 @@
 		</property>
 	</bean>
 	
+	
 	<!-- Interface Transactional -->
+	<bean id="appointmentReminderTypDaoImpl" class="org.openmeetings.app.data.calendar.daos.AppointmentReminderTypDaoImpl" />
+	<bean id="appointmentCategoryDaoImpl" class="org.openmeetings.app.data.calendar.daos.AppointmentCategoryDaoImpl" />
 	<bean id="roommanagement" class="org.openmeetings.app.data.conference.Roommanagement" />
 	<bean id="addressmanagement" class="org.openmeetings.app.data.user.Addressmanagement" />
 	<bean id="organisationmanagement" class="org.openmeetings.app.data.user.Organisationmanagement" />
@@ -53,6 +56,7 @@
 	<!-- No Interface -->
 	<bean id="manageCryptStyle" class="org.openmeetings.utils.crypt.ManageCryptStyle" />
 	<bean id="openXGHttpClient" class="org.openmeetings.app.sip.xmlrpc.OpenXGHttpClient" />
+	<bean id="appointmentCategoryLogic" class="org.openmeetings.app.data.calendar.management.AppointmentCategoryLogic" />
 
 	<tx:annotation-driven transaction-manager="jpaTransactionManager"/>
 	<context:annotation-config/>

@@ -69,7 +69,7 @@ public class TestDatabaseStructureAppointment extends TestCase {
 			
 			//AppointmentDaoImpl.getInstance().updateAppointment(1L,"neu", "erster Test",Calendar.getInstance().getTime() , 
 					//Calendar.getInstance().getTime(), true, false, false, false, new Long(1));
-			//log.debug("AppointmentReminderTypDaoImpl: "+AppointmentReminderTypDaoImpl.getInstance().getAppointmentReminderTypById(1L));
+			//log.debug("AppointmentReminderTypDaoImpl: "+appointmentReminderTypDaoImpl.getAppointmentReminderTypById(1L));
 		} catch (Exception err) {
 
 			log.error("[testAddingGroup]",err);
