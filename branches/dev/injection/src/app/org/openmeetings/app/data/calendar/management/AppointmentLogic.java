@@ -39,6 +39,8 @@ public class AppointmentLogic {
 	private Usermanagement userManagement;
 	@Autowired
 	private Fieldmanagment fieldmanagment;
+	@Autowired
+	private OmTimeZoneDaoImpl omTimeZoneDaoImpl;
 
 	public List<Appointment> getAppointmentByRange(Long userId, Date starttime,
 			Date endtime) {
@@ -452,8 +454,8 @@ public class AppointmentLogic {
 								}
 							}
 
-							OmTimeZone omTimeZone = OmTimeZoneDaoImpl
-									.getInstance().getOmTimeZone(jNameTimeZone);
+							OmTimeZone omTimeZone = omTimeZoneDaoImpl
+									.getOmTimeZone(jNameTimeZone);
 
 							String timeZoneName = omTimeZone.getIcal();
 

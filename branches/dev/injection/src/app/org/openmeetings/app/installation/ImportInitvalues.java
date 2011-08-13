@@ -51,6 +51,10 @@ public class ImportInitvalues {
 	private Fieldmanagment fieldmanagment;
 	@Autowired
 	private FieldLanguageDaoImpl fieldLanguageDaoImpl;
+	@Autowired
+	private Statemanagement statemanagement;
+	@Autowired
+	private OmTimeZoneDaoImpl omTimeZoneDaoImpl;
 
 	public void loadMainMenu() {
 
@@ -572,7 +576,7 @@ public class ImportInitvalues {
 			Element item = (Element) it.next();
 			String country = item.attributeValue("name");
 
-			Statemanagement.getInstance().addState(country);
+			statemanagement.addState(country);
 
 		}
 	}
@@ -593,8 +597,8 @@ public class ImportInitvalues {
 			String iCal = item.attributeValue("iCal");
 			Integer orderId = Integer.valueOf(item.attributeValue("orderId"));
 
-			OmTimeZoneDaoImpl.getInstance().addOmTimeZone(timeZoneName,
-					timeZoneLabel, iCal, orderId);
+			omTimeZoneDaoImpl.addOmTimeZone(timeZoneName, timeZoneLabel, iCal,
+					orderId);
 
 		}
 	}

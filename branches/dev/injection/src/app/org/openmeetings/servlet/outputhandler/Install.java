@@ -322,10 +322,11 @@ public class Install extends VelocityViewServlet {
 							"url_feed2");
 					importInitvalues.loadInitLanguages(filePath);
 
+					importInitvalues.loadMainMenu();
+
 					if (true)
 						return null;
 
-					importInitvalues.loadMainMenu();
 					importInitvalues.loadErrorMappingsFromXML(filePath);
 					importInitvalues.loadSalutations();
 

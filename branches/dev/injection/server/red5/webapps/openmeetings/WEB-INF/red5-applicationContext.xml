@@ -31,6 +31,8 @@
 		</property>
 	</bean>
 	
+	<bean id="omTimeZoneDaoImpl" class="org.openmeetings.app.data.basic.dao.OmTimeZoneDaoImpl" />
+	<bean id="statemanagement" class="org.openmeetings.app.data.user.Statemanagement" />
 	<bean id="fieldLanguageDaoImpl" class="org.openmeetings.app.data.basic.FieldLanguageDaoImpl"/>
 	<bean id="fieldmanagment" class="org.openmeetings.app.data.basic.Fieldmanagment"/>
 	<bean id="importInitvalues" class=" org.openmeetings.app.installation.ImportInitvalues"/>

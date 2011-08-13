@@ -70,6 +70,10 @@ public class Usermanagement {
 	private Configurationmanagement cfgManagement;
 	@Autowired
 	private Fieldmanagment fieldmanagment;
+	@Autowired
+	private Statemanagement statemanagement;
+	@Autowired
+	private OmTimeZoneDaoImpl omTimeZoneDaoImpl;
 
 	/**
 	 * query for a list of users
@@ -488,7 +492,7 @@ public class Usermanagement {
 					us.setAvailible(availible);
 					us.setStatus(status);
 					us.setTitle_id(title_id);
-					us.setOmTimeZone(OmTimeZoneDaoImpl.getInstance()
+					us.setOmTimeZone(omTimeZoneDaoImpl
 							.getOmTimeZone(jNameTimeZone));
 					us.setForceTimeZoneCheck(forceTimeZoneCheck);
 
@@ -1093,8 +1097,7 @@ public class Usermanagement {
 			users.setTitle_id(new Integer(1));
 			users.setStarttime(new Date());
 			users.setActivatehash(hash);
-			users.setOmTimeZone(OmTimeZoneDaoImpl.getInstance().getOmTimeZone(
-					jName_timezone));
+			users.setOmTimeZone(omTimeZoneDaoImpl.getOmTimeZone(jName_timezone));
 			users.setForceTimeZoneCheck(forceTimeZoneCheck);
 
 			users.setUserOffers(userOffers);
@@ -1211,8 +1214,7 @@ public class Usermanagement {
 			users.setStarttime(new Date());
 			users.setActivatehash(hash);
 			users.setPictureuri(pictureuri);
-			users.setOmTimeZone(OmTimeZoneDaoImpl.getInstance().getOmTimeZone(
-					jNameTimeZone));
+			users.setOmTimeZone(omTimeZoneDaoImpl.getOmTimeZone(jNameTimeZone));
 
 			if (generateSipUserData) {
 
@@ -1346,9 +1348,9 @@ public class Usermanagement {
 					savedUser.setTitle_id(Integer.parseInt(values.get(
 							"title_id").toString()));
 
-					savedUser.setOmTimeZone(OmTimeZoneDaoImpl.getInstance()
-							.getOmTimeZone(
-									(values.get("jnameTimeZone").toString())));
+					savedUser.setOmTimeZone(omTimeZoneDaoImpl
+							.getOmTimeZone((values.get("jnameTimeZone")
+									.toString())));
 
 					String password = values.get("password").toString();
 
@@ -1385,9 +1387,8 @@ public class Usermanagement {
 							.setZip(values.get("zip").toString());
 					savedUser.setForceTimeZoneCheck(false);
 					savedUser.getAdresses().setStates(
-							Statemanagement.getInstance().getStateById(
-									Long.parseLong(values.get("state_id")
-											.toString())));
+							statemanagement.getStateById(Long.parseLong(values
+									.get("state_id").toString())));
 
 					Addressmanagement.getInstance().updateAdress(
 							savedUser.getAdresses());
