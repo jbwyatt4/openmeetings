@@ -5,37 +5,29 @@ import java.util.Iterator;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
+import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import org.openmeetings.app.persistence.beans.basic.Naviglobal;
 import org.openmeetings.app.persistence.beans.basic.Navimain;
 import org.openmeetings.app.persistence.beans.basic.Navisub;
-import org.openmeetings.app.persistence.utils.PersistenceSessionUtil;
 import org.openmeetings.app.remote.red5.ScopeApplicationAdapter;
 import org.red5.logging.Red5LoggerFactory;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
+@Transactional
 public class Navimanagement {
 
 	private static final Logger log = Red5LoggerFactory.getLogger(
 			Navimanagement.class, ScopeApplicationAdapter.webAppRootKey);
 
+	@PersistenceContext
+	private EntityManager em;
+
 	@Autowired
 	private Fieldmanagment fieldmanagment;
-
-	private static Navimanagement instance;
-
-	private Navimanagement() {
-	};
-
-	public static synchronized Navimanagement getInstance() {
-		if (instance == null) {
-			instance = new Navimanagement();
-		}
-		return instance;
-	}
 
 	public List getMainMenu(long user_level, long USER_ID, long language_id) {
 		List<Naviglobal> ll = this.getMainMenu(user_level, USER_ID);
@@ -74,22 +66,12 @@ public class Navimanagement {
 	public List<Naviglobal> getMainMenu(long user_level, long USER_ID) {
 		try {
 
-			Object idf = PersistenceSessionUtil.createSession();
-			EntityManager session = PersistenceSessionUtil.getSession();
-			EntityTransaction tx = session.getTransaction();
-			tx.begin();
-			// CriteriaBuilder crit = session.getCriteriaBuilder();
-			Query query = session.createQuery("select c from Naviglobal as c "
+			// CriteriaBuilder crit = em.getCriteriaBuilder();
+			Query query = em.createQuery("select c from Naviglobal as c "
 					+ "where c.level_id <= :level_id AND "
 					+ "c.deleted LIKE 'false' " + "order by c.naviorder");
 			query.setParameter("level_id", user_level);
 			List<Naviglobal> navi = query.getResultList();
-
-			tx.commit();
-
-			log.debug("getMainMenu " + navi.size());
-
-			PersistenceSessionUtil.closeSession(idf);
 
 			return navi;
 		} catch (Exception ex2) {
@@ -116,16 +98,9 @@ public class Navimanagement {
 			ng.setStarttime(new Date());
 			ng.setTooltip_fieldvalues_id(tooltip_fieldvalues_id);
 
-			Object idf = PersistenceSessionUtil.createSession();
-			EntityManager session = PersistenceSessionUtil.getSession();
-			EntityTransaction tx = session.getTransaction();
-			tx.begin();
-			// CriteriaBuilder crit = session.getCriteriaBuilder();
+			// CriteriaBuilder crit = em.getCriteriaBuilder();
 
-			session.merge(ng);
-
-			tx.commit();
-			PersistenceSessionUtil.closeSession(idf);
+			em.merge(ng);
 
 		} catch (Exception ex2) {
 			log.error("addGlobalStructure", ex2);
@@ -150,16 +125,7 @@ public class Navimanagement {
 			ng.setGlobal_id(global_id);
 			ng.setStarttime(new Date());
 
-			Object idf = PersistenceSessionUtil.createSession();
-			EntityManager session = PersistenceSessionUtil.getSession();
-			EntityTransaction tx = session.getTransaction();
-			tx.begin();
-			// CriteriaBuilder crit = session.getCriteriaBuilder();
-
-			session.merge(ng);
-
-			tx.commit();
-			PersistenceSessionUtil.closeSession(idf);
+			em.merge(ng);
 
 		} catch (Exception ex2) {
 			log.error("addMainStructure", ex2);
@@ -184,16 +150,7 @@ public class Navimanagement {
 			ng.setMain_id(main_id);
 			ng.setStarttime(new Date());
 
-			Object idf = PersistenceSessionUtil.createSession();
-			EntityManager session = PersistenceSessionUtil.getSession();
-			EntityTransaction tx = session.getTransaction();
-			tx.begin();
-			// CriteriaBuilder crit = session.getCriteriaBuilder();
-
-			session.merge(ng);
-
-			tx.commit();
-			PersistenceSessionUtil.closeSession(idf);
+			em.merge(ng);
 
 		} catch (Exception ex2) {
 			log.error("addSubStructure", ex2);

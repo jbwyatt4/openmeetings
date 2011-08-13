@@ -73,6 +73,8 @@ public class MainService implements IPendingServiceCallback {
 	private Statemanagement statemanagement;
 	@Autowired
 	private OmTimeZoneDaoImpl omTimeZoneDaoImpl;
+	@Autowired
+	private Navimanagement navimanagement;
 
 	// External User Types
 	public static final String EXTERNAL_USER_TYPE_LDAP = "LDAP";
@@ -117,8 +119,7 @@ public class MainService implements IPendingServiceCallback {
 			Long user_level = userManagement.getUserLevelByIdAndOrg(user_id,
 					organisation_id);
 			// log.error("getNavi 2: "+user_level);
-			return Navimanagement.getInstance().getMainMenu(user_level,
-					user_id, language_id);
+			return navimanagement.getMainMenu(user_level, user_id, language_id);
 		} catch (Exception err) {
 			log.error("[getNavi] ", err);
 		}
