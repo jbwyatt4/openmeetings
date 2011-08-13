@@ -24,6 +24,7 @@ import org.openmeetings.app.persistence.beans.lang.Fieldvalues;
 import org.openmeetings.app.remote.red5.ScopeApplicationAdapter;
 import org.red5.logging.Red5LoggerFactory;
 import org.slf4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -39,6 +40,9 @@ public class Fieldmanagment {
 
 	@PersistenceContext
 	private EntityManager em;
+
+	@Autowired
+	private FieldLanguageDaoImpl fieldLanguageDaoImpl;
 
 	// Reflect the Reverse Order!!
 	public Fieldlanguagesvalues getFieldByIdAndLanguageByNavi(
@@ -58,7 +62,7 @@ public class Fieldmanagment {
 			} catch (NoResultException ex) {
 			}
 
-			FieldLanguage fieldLanguage = FieldLanguageDaoImpl.getInstance()
+			FieldLanguage fieldLanguage = fieldLanguageDaoImpl
 					.getFieldLanguageById(language_id);
 
 			log.debug("Getting FieldById for Language "
@@ -182,7 +186,7 @@ public class Fieldmanagment {
 					returnList.add(map);
 				}
 			}
-			FieldLanguage fieldLanguage = FieldLanguageDaoImpl.getInstance()
+			FieldLanguage fieldLanguage = fieldLanguageDaoImpl
 					.getFieldLanguageById(language_id);
 
 			log.debug("Getting Labels for Language " + fieldLanguage.getName());
@@ -256,7 +260,7 @@ public class Fieldmanagment {
 			//
 			// }
 
-			FieldLanguage fieldLanguage = FieldLanguageDaoImpl.getInstance()
+			FieldLanguage fieldLanguage = fieldLanguageDaoImpl
 					.getFieldLanguageById(language_id);
 
 			log.debug("GEtting all fields by language : "

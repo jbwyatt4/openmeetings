@@ -21,6 +21,8 @@ public class LanguageImport {
 
 	@Autowired
 	private Fieldmanagment fieldmanagment;
+	@Autowired
+	private FieldLanguageDaoImpl fieldLanguageDaoImpl;
 
 	public LanguageImport() {
 	}
@@ -38,8 +40,7 @@ public class LanguageImport {
 			throws Exception {
 
 		// return null if no language availible
-		if (FieldLanguageDaoImpl.getInstance()
-				.getFieldLanguageById(language_id) == null) {
+		if (fieldLanguageDaoImpl.getFieldLanguageById(language_id) == null) {
 			return null;
 		}
 

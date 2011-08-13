@@ -35,6 +35,8 @@ public class LanguageService {
 	private Usermanagement userManagement;
 	@Autowired
 	private Fieldmanagment fieldmanagment;
+	@Autowired
+	private FieldLanguageDaoImpl fieldLanguageDaoImpl;
 
 	/**
 	 * get a List of all availible Languages
@@ -42,7 +44,7 @@ public class LanguageService {
 	 * @return
 	 */
 	public List getLanguages() {
-		return FieldLanguageDaoImpl.getInstance().getLanguages();
+		return fieldLanguageDaoImpl.getLanguages();
 	}
 
 	/**
@@ -90,8 +92,7 @@ public class LanguageService {
 		if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)) {
 			if (langName.length() == 0)
 				return new Long(-30);
-			return FieldLanguageDaoImpl.getInstance().addLanguage(langName,
-					false);
+			return fieldLanguageDaoImpl.addLanguage(langName, false);
 		}
 		return null;
 	}
@@ -102,8 +103,8 @@ public class LanguageService {
 		if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)) {
 			if (langName.length() == 0)
 				return new Long(-30);
-			return FieldLanguageDaoImpl.getInstance().updateFieldLanguage(
-					language_id, langName, "false");
+			return fieldLanguageDaoImpl.updateFieldLanguage(language_id,
+					langName, "false");
 		}
 		return null;
 	}
@@ -112,8 +113,8 @@ public class LanguageService {
 		Long users_id = sessionManagement.checkSession(SID);
 		Long user_level = userManagement.getUserLevelByID(users_id);
 		if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)) {
-			return FieldLanguageDaoImpl.getInstance().updateFieldLanguage(
-					language_id, "", "true");
+			return fieldLanguageDaoImpl.updateFieldLanguage(language_id, "",
+					"true");
 		}
 		return null;
 	}

@@ -43,6 +43,8 @@ public class LangExport extends HttpServlet {
 	private Usermanagement userManagement;
 	@Autowired
 	private Fieldmanagment fieldmanagment;
+	@Autowired
+	private FieldLanguageDaoImpl fieldLanguageDaoImpl;
 
 	/*
 	 * (non-Javadoc)
@@ -77,7 +79,7 @@ public class LangExport extends HttpServlet {
 			log.debug("user_level: " + user_level);
 
 			if (user_level != null && user_level > 0) {
-				FieldLanguage fl = FieldLanguageDaoImpl.getInstance()
+				FieldLanguage fl = fieldLanguageDaoImpl
 						.getFieldLanguageById(language_id);
 
 				List<Fieldvalues> fvList = fieldmanagment
