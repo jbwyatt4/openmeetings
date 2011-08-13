@@ -19,19 +19,22 @@ import org.openmeetings.test.dao.base.TestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class OpenmeetingsDaoTest extends AbstractTestCase {
-	@Autowired //FIXME
+	@Autowired
+	// FIXME
 	private Configurationmanagement cfgManagement;
-    @Autowired
-    private Usermanagement userManagement;
-	
-	public OpenmeetingsDaoTest(String name){
+	@Autowired
+	private Usermanagement userManagement;
+	@Autowired
+	private Organisationmanagement organisationmanagement;
+
+	public OpenmeetingsDaoTest(String name) {
 		super(name);
 	}
-	
+
 	final public void testRegistrationUser() throws Exception {
-	
-	Random rd = new Random();
-	Users user = TestUtils.createUser(rd.nextInt());
+
+		Random rd = new Random();
+		Users user = TestUtils.createUser(rd.nextInt());
 
 		Configuration conf = cfgManagement.getConfKey(3L, "default.timezone");
 		String jNameTimeZone = "";
@@ -39,18 +42,12 @@ public class OpenmeetingsDaoTest extends AbstractTestCase {
 			jNameTimeZone = conf.getConf_value();
 		}
 
-		Long user_id = userManagement.registerUser(
-    			"username", user.getPassword(), 
-    			user.getLastname(), user.getLastname(), user.getLastname() + "@mail.com",
-    			new Date(), "", "", 
-    			"", "", 
-    			0, 
-    			"Novosibirsk", 
-    			user.getLanguage_id(),	//language_id 
-    			"",
-    			"",
-    			true, //generate SIP Data if the config is enabled
-    			jNameTimeZone);
+		Long user_id = userManagement.registerUser("username",
+				user.getPassword(), user.getLastname(), user.getLastname(),
+				user.getLastname() + "@mail.com", new Date(), "", "", "", "",
+				0, "Novosibirsk", user.getLanguage_id(), // language_id
+				"", "", true, // generate SIP Data if the config is enabled
+				jNameTimeZone);
 
 		assertTrue("New user cann't registred", user_id > 0);
 
@@ -62,12 +59,12 @@ public class OpenmeetingsDaoTest extends AbstractTestCase {
 		user.setUpdatetime(new Date());
 
 		userManagement.updateUser(user);
-			
+
 	}
-	
+
 	final public void testInitRegistrstionUser() throws Exception {
 		Random rnd = new java.util.Random();
-		int key = rnd.nextInt(); 
+		int key = rnd.nextInt();
 		String userpass = "pass" + key;
 		String userlogin = "login" + key;
 		String email = "email" + key;
@@ -76,28 +73,22 @@ public class OpenmeetingsDaoTest extends AbstractTestCase {
 		if (conf != null) {
 			jNameTimeZone = conf.getConf_value();
 		}
-		Long user_id = userManagement.registerUserInit(
-				new Long(3), 3, 1, 1, userlogin, userpass, "lastname",
-				"firstname", email, new java.util.Date(), "street", "no",
-				"fax", "zip", 1, "town", 0, false, null, "phone", "", false,
-				"","","", false, jNameTimeZone, false,
-				"",
-				"",
-				false,
-				true);
+		Long user_id = userManagement.registerUserInit(new Long(3), 3, 1, 1,
+				userlogin, userpass, "lastname", "firstname", email,
+				new java.util.Date(), "street", "no", "fax", "zip", 1, "town",
+				0, false, null, "phone", "", false, "", "", "", false,
+				jNameTimeZone, false, "", "", false, true);
 
-		
 		assertTrue("cann't register new user", user_id > 0);
-		
-		//Add default group
-		Long organisation_id = Organisationmanagement.getInstance()
-				.addOrganisation("", user_id);
 
-		//Add user to default group
-		Organisationmanagement.getInstance().addUserToOrganisation(
-				user_id, organisation_id, null, "");
-		
-		
+		// Add default group
+		Long organisation_id = organisationmanagement.addOrganisation("",
+				user_id);
+
+		// Add user to default group
+		organisationmanagement.addUserToOrganisation(user_id, organisation_id,
+				null, "");
+
 	}
 
 	final public void testRoomModeratorsDaoImpl() throws Exception {
@@ -105,35 +96,34 @@ public class OpenmeetingsDaoTest extends AbstractTestCase {
 		Long userId = 1L;
 		Users user = userManagement.getUserById(userId);
 		assertNotNull("Cann't get default user", user);
-		
-		List<Rooms> rooms = Roommanagement.getInstance().getPublicRooms(user.getLevel_id());
+
+		List<Rooms> rooms = Roommanagement.getInstance().getPublicRooms(
+				user.getLevel_id());
 		assertNotNull("Cann't get public rooms fo default user", rooms);
 
 		Rooms room = null;
-		for (Iterator<Rooms> iter = rooms.iterator(); iter.hasNext();){
-    		room = iter.next();
-    		break;
-    	}
+		for (Iterator<Rooms> iter = rooms.iterator(); iter.hasNext();) {
+			room = iter.next();
+			break;
+		}
 		assertNotNull("Cann't get room for default user", room);
-		
-		Long rmId = RoomModeratorsDaoImpl.getInstance().addRoomModeratorByUserId(user, true, room.getRooms_id());
+
+		Long rmId = RoomModeratorsDaoImpl.getInstance()
+				.addRoomModeratorByUserId(user, true, room.getRooms_id());
 		assertNotNull("Cann't add room moderator", rmId);
 
-    	Long rooms_id =  Roommanagement.getInstance().addExternalRoom(
-    			"ExternalRoom",
-    			room.getRooms_id(), "comment", 10L, true,
-				null, false, false, 0, false,
-				null, null, null, 
-				false, //allowUserQuestions
-				false, //isAudioOnly
-				false, //isClosed
-				room.getRedirectURL(),
-				false, true, false);
+		Long rooms_id = Roommanagement.getInstance().addExternalRoom(
+				"ExternalRoom", room.getRooms_id(), "comment", 10L, true, null,
+				false, false, 0, false, null, null, null, false, // allowUserQuestions
+				false, // isAudioOnly
+				false, // isClosed
+				room.getRedirectURL(), false, true, false);
 		assertNotNull("Cann't add external room ", rooms_id);
-		
-		RoomModerators rm = RoomModeratorsDaoImpl.getInstance().getRoomModeratorById(rmId); 
+
+		RoomModerators rm = RoomModeratorsDaoImpl.getInstance()
+				.getRoomModeratorById(rmId);
 		assertNotNull("Cann't get room moderator", rm);
-		
+
 		RoomModeratorsDaoImpl.getInstance().removeRoomModeratorByUserId(rmId);
 	}
 }

@@ -22,6 +22,7 @@ import org.openmeetings.app.remote.red5.ScopeApplicationAdapter;
 import org.openmeetings.utils.crypt.ManageCryptStyle;
 import org.red5.logging.Red5LoggerFactory;
 import org.slf4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -34,9 +35,13 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class Sessionmanagement {
 
-	private static final Logger log = Red5LoggerFactory.getLogger(Sessionmanagement.class, ScopeApplicationAdapter.webAppRootKey);
+	private static final Logger log = Red5LoggerFactory.getLogger(
+			Sessionmanagement.class, ScopeApplicationAdapter.webAppRootKey);
 	@PersistenceContext
 	private EntityManager em;
+
+	@Autowired
+	private ManageCryptStyle manageCryptStyle;
 
 	/**
 	 * creates a new session-object in the database
@@ -47,13 +52,11 @@ public class Sessionmanagement {
 		// log.error("startsession User: || ");
 		try {
 
-			System.out.println("startsession :: startsession");
 			log.debug("startsession :: startsession");
 
 			long thistime = new Date().getTime();
 			Sessiondata sessiondata = new Sessiondata();
-			sessiondata.setSession_id(ManageCryptStyle.getInstance()
-					.getInstanceOfCrypt()
+			sessiondata.setSession_id(manageCryptStyle.getInstanceOfCrypt()
 					.createPassPhrase(String.valueOf(thistime).toString()));
 			sessiondata.setRefresh_time(new Date());
 			sessiondata.setStarttermin_time(new Date());
@@ -89,7 +92,7 @@ public class Sessionmanagement {
 				// log.error("Found session to update: "+SID);
 			}
 
-			Sessiondata sd = (Sessiondata) fullList.get(0);
+			Sessiondata sd = fullList.get(0);
 
 			return sd;
 		} catch (Exception ex2) {
@@ -396,7 +399,7 @@ public class Sessionmanagement {
 			} else {
 				// log.error("Found session to update: "+SID);
 			}
-			Sessiondata sd = (Sessiondata) fullList.get(0);
+			Sessiondata sd = fullList.get(0);
 			// log.debug("Found session to update: "+sd.getSession_id()+
 			// " userId: "+USER_ID);
 
@@ -440,7 +443,7 @@ public class Sessionmanagement {
 
 			} else {
 				// log.debug("Found session to updateSession: ");
-				Sessiondata sd = (Sessiondata) fullList.iterator().next();
+				Sessiondata sd = fullList.iterator().next();
 				// log.debug("Found session to updateSession sd "+sd.getUser_id()+" "+sd.getSession_id());
 				sd.setRefresh_time(new Date());
 
@@ -517,7 +520,7 @@ public class Sessionmanagement {
 
 			for (Iterator<String> iter = MyUserList.keySet().iterator(); iter
 					.hasNext();) {
-				String key = (String) iter.next();
+				String key = iter.next();
 
 				RoomClient rcl = MyUserList.get(key);
 

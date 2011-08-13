@@ -59,6 +59,10 @@ public class ImportInitvalues {
 	private Navimanagement navimanagement;
 	@Autowired
 	private ErrorManagement errorManagement;
+	@Autowired
+	private Salutationmanagement salutationmanagement;
+	@Autowired
+	private Organisationmanagement organisationmanagement;
 
 	public void loadMainMenu() {
 
@@ -191,18 +195,18 @@ public class ImportInitvalues {
 					errortype_id = Long.valueOf(text).longValue();
 			}
 
-			errorManagement.addErrorValues(errorvalues_id,
-					errortype_id, fieldvalues_id);
+			errorManagement.addErrorValues(errorvalues_id, errortype_id,
+					fieldvalues_id);
 		}
 		log.error("ErrorMappings ADDED");
 	}
 
 	public void loadSalutations() {
 
-		Salutationmanagement.getInstance().addUserSalutation("Mr", 261);
-		Salutationmanagement.getInstance().addUserSalutation("Ms", 262);
-		Salutationmanagement.getInstance().addUserSalutation("Mrs", 841);
-		Salutationmanagement.getInstance().addUserSalutation("Dr", 842);
+		salutationmanagement.addUserSalutation("Mr", 261);
+		salutationmanagement.addUserSalutation("Ms", 262);
+		salutationmanagement.addUserSalutation("Mrs", 841);
+		salutationmanagement.addUserSalutation("Dr", 842);
 
 	}
 
@@ -542,11 +546,11 @@ public class ImportInitvalues {
 			}
 
 			// Add default group
-			Long organisation_id = Organisationmanagement.getInstance()
+			Long organisation_id = organisationmanagement
 					.addOrganisation(defaultOrganisationName, user_id);
 
 			// Add user to default group
-			Organisationmanagement.getInstance().addUserToOrganisation(
+			organisationmanagement.addUserToOrganisation(
 					new Long(1), organisation_id, null, "");
 		} catch (Exception e) {
 			log.error("[loadInitUserAndOrganisation] ", e);

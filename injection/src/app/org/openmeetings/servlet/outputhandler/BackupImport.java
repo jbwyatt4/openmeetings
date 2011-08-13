@@ -98,6 +98,8 @@ public class BackupImport extends HttpServlet {
 	private Statemanagement statemanagement;
 	@Autowired
 	private OmTimeZoneDaoImpl omTimeZoneDaoImpl;
+	@Autowired
+	private Organisationmanagement organisationmanagement;
 
 	private final HashMap<Long, Long> usersMap = new HashMap<Long, Long>();
 	private final HashMap<Long, Long> organisationsMap = new HashMap<Long, Long>();
@@ -779,10 +781,8 @@ public class BackupImport extends HttpServlet {
 										.element("deleted").getText());
 
 								Organisation_Users orgUser = new Organisation_Users();
-								orgUser.setOrganisation(Organisationmanagement
-										.getInstance()
-										.getOrganisationByIdBackup(
-												organisation_id));
+								orgUser.setOrganisation(organisationmanagement
+										.getOrganisationByIdBackup(organisation_id));
 								orgUser.setUser_id(user_id);
 								orgUser.setIsModerator(isModerator);
 								orgUser.setComment(commentOrg);
@@ -839,7 +839,7 @@ public class BackupImport extends HttpServlet {
 
 							organisationUsers.setUser_id(actualNewUserId);
 
-							Organisationmanagement.getInstance()
+							organisationmanagement
 									.addOrganisationUserObj(organisationUsers);
 
 						}
@@ -1357,8 +1357,7 @@ public class BackupImport extends HttpServlet {
 			Long orgId = org.getOrganisation_id();
 
 			org.setOrganisation_id(null);
-			Long newOrgID = Organisationmanagement.getInstance()
-					.addOrganisationObj(org);
+			Long newOrgID = organisationmanagement.addOrganisationObj(org);
 			organisationsMap.put(orgId, newOrgID);
 
 		}
@@ -1766,9 +1765,8 @@ public class BackupImport extends HttpServlet {
 						rooms_Organisation
 								.setRooms_organisation_id(rooms_organisation_id);
 						rooms_Organisation
-								.setOrganisation(Organisationmanagement
-										.getInstance().getOrganisationById(
-												organisation_id));
+								.setOrganisation(organisationmanagement
+										.getOrganisationById(organisation_id));
 						rooms_Organisation.setRoom(Roommanagement.getInstance()
 								.getRoomById(rooms_id));
 						rooms_Organisation.setDeleted(deleted);

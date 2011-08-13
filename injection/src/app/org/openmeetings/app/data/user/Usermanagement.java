@@ -64,6 +64,7 @@ public class Usermanagement {
 
 	@PersistenceContext
 	private EntityManager em;
+
 	@Autowired
 	private Sessionmanagement sessionManagement;
 	@Autowired
@@ -74,6 +75,12 @@ public class Usermanagement {
 	private Statemanagement statemanagement;
 	@Autowired
 	private OmTimeZoneDaoImpl omTimeZoneDaoImpl;
+	@Autowired
+	private Organisationmanagement organisationmanagement;
+	@Autowired
+	private ManageCryptStyle manageCryptStyle;
+	@Autowired
+	private Addressmanagement addressmanagement;
 
 	/**
 	 * query for a list of users
@@ -237,8 +244,8 @@ public class Usermanagement {
 				// Refresh User Object
 				users = this.refreshUserObject(users);
 
-				if (ManageCryptStyle.getInstance().getInstanceOfCrypt()
-						.verifyPassword(userpass, users.getPassword())) {
+				if (manageCryptStyle.getInstanceOfCrypt().verifyPassword(
+						userpass, users.getPassword())) {
 					log.info("chsum OK: " + users.getUser_id());
 
 					Boolean bool = sessionManagement.updateUser(SID,
@@ -505,26 +512,24 @@ public class Usermanagement {
 						us.setLevel_id(new Long(level_id));
 					if (password.length() != 0) {
 						if (password.length() >= 6) {
-							us.setPassword(ManageCryptStyle.getInstance()
-									.getInstanceOfCrypt()
-									.createPassPhrase(password));
+							us.setPassword(manageCryptStyle
+									.getInstanceOfCrypt().createPassPhrase(
+											password));
 						} else {
 							return new Long(-7);
 						}
 					}
 
-					Addressmanagement.getInstance().updateAdress(
-							us.getAdresses().getAdresses_id(), street, zip,
-							town, states_id, additionalname, comment, fax,
-							email, phone);
+					addressmanagement.updateAdress(us.getAdresses()
+							.getAdresses_id(), street, zip, town, states_id,
+							additionalname, comment, fax, email, phone);
 					// Emailmanagement.getInstance().updateUserEmail(mail.getMail().getMail_id(),user_id,
 					// email);
 
 					// add or delete organisations from this user
 					if (organisations != null) {
-						Organisationmanagement.getInstance()
-								.updateUserOrganisationsByUser(us,
-										organisations);
+						organisationmanagement.updateUserOrganisationsByUser(
+								us, organisations);
 					}
 
 					if (generateSipUserData) {
@@ -779,8 +784,7 @@ public class Usermanagement {
 					log.debug("user_id, organisation_id" + user_id + ", "
 							+ organisation_id);
 
-					Organisation_Users ou = Organisationmanagement
-							.getInstance()
+					Organisation_Users ou = organisationmanagement
 							.getOrganisation_UserByUserAndOrganisation(user_id,
 									organisation_id);
 
@@ -872,8 +876,8 @@ public class Usermanagement {
 					long organisation_id = Long.valueOf(
 							cfgManagement.getConfKey(3, "default_domain_id")
 									.getConf_value()).longValue();
-					Organisationmanagement.getInstance().addUserToOrganisation(
-							user_id, organisation_id, user_id, "");
+					organisationmanagement.addUserToOrganisation(user_id,
+							organisation_id, user_id, "");
 				}
 
 				if (sendConfirmation) {
@@ -916,8 +920,8 @@ public class Usermanagement {
 					long organisation_id = Long.valueOf(
 							cfgManagement.getConfKey(3, "default_domain_id")
 									.getConf_value()).longValue();
-					Organisationmanagement.getInstance().addUserToOrganisation(
-							user_id, organisation_id, user_id, "");
+					organisationmanagement.addUserToOrganisation(user_id,
+							organisation_id, user_id, "");
 				}
 
 				if (sendConfirmation) {
@@ -982,8 +986,7 @@ public class Usermanagement {
 						.checkUserEMail(email);
 				if (checkName && checkEmail) {
 
-					String hash = ManageCryptStyle
-							.getInstance()
+					String hash = manageCryptStyle
 							.getInstanceOfCrypt()
 							.createPassPhrase(
 									login
@@ -1000,9 +1003,9 @@ public class Usermanagement {
 						if (!sendMail.equals("success"))
 							return new Long(-19);
 					}
-					Long address_id = Addressmanagement.getInstance()
-							.saveAddress(street, zip, town, states_id,
-									additionalname, "", fax, phone, email);
+					Long address_id = addressmanagement.saveAddress(street,
+							zip, town, states_id, additionalname, "", fax,
+							phone, email);
 					if (address_id == null) {
 						return new Long(-22);
 					}
@@ -1031,9 +1034,8 @@ public class Usermanagement {
 					 * Long(-112); }
 					 */
 
-					Organisationmanagement.getInstance()
-							.addUserOrganisationsByHashMap(user_id,
-									organisations);
+					organisationmanagement.addUserOrganisationsByHashMap(
+							user_id, organisations);
 
 					if (address_id > 0 && user_id > 0) {
 						return user_id;
@@ -1087,8 +1089,7 @@ public class Usermanagement {
 			users.setLogin(login);
 			users.setLastname(lastname);
 			users.setAge(age);
-			users.setAdresses(Addressmanagement.getInstance().getAdressbyId(
-					adress_id));
+			users.setAdresses(addressmanagement.getAdressbyId(adress_id));
 			users.setAvailible(availible);
 			users.setLastlogin(new Date());
 			users.setLasttrans(new Long(0));
@@ -1139,8 +1140,8 @@ public class Usermanagement {
 			} else {
 				users.setLanguage_id(null);
 			}
-			users.setPassword(ManageCryptStyle.getInstance()
-					.getInstanceOfCrypt().createPassPhrase(userpass));
+			users.setPassword(manageCryptStyle.getInstanceOfCrypt()
+					.createPassPhrase(userpass));
 			users.setRegdate(new Date());
 			users.setDeleted("false");
 
@@ -1196,13 +1197,11 @@ public class Usermanagement {
 			users.setAge(age);
 
 			if (adress_id != null && adress_id > 0) {
-				users.setAdresses(Addressmanagement.getInstance()
-						.getAdressbyId(adress_id));
+				users.setAdresses(addressmanagement.getAdressbyId(adress_id));
 			} else {
-				adress_id = Addressmanagement.getInstance().saveAddress("", "",
-						"", 1L, "", "", "", "", email);
-				users.setAdresses(Addressmanagement.getInstance()
-						.getAdressbyId(adress_id));
+				adress_id = addressmanagement.saveAddress("", "", "", 1L, "",
+						"", "", "", email);
+				users.setAdresses(addressmanagement.getAdressbyId(adress_id));
 			}
 
 			users.setAvailible(availible);
@@ -1253,8 +1252,8 @@ public class Usermanagement {
 			} else {
 				users.setLanguage_id(null);
 			}
-			users.setPassword(ManageCryptStyle.getInstance()
-					.getInstanceOfCrypt().createPassPhrase(userpass));
+			users.setPassword(manageCryptStyle.getInstanceOfCrypt()
+					.createPassPhrase(userpass));
 			users.setRegdate(new Date());
 			users.setDeleted("false");
 
@@ -1283,11 +1282,10 @@ public class Usermanagement {
 	public Long addUserBackup(Users usr) {
 		try {
 
-			Long adresses_id = Addressmanagement.getInstance().saveAddressObj(
-					usr.getAdresses());
+			Long adresses_id = addressmanagement.saveAddressObj(usr
+					.getAdresses());
 
-			usr.setAdresses(Addressmanagement.getInstance().getAdressbyId(
-					adresses_id));
+			usr.setAdresses(addressmanagement.getAdressbyId(adresses_id));
 
 			Long userSipDataId = UserSipDataDaoImpl.getInstance()
 					.addUserSipData(usr.getUserSipData());
@@ -1355,7 +1353,7 @@ public class Usermanagement {
 					String password = values.get("password").toString();
 
 					if (password.length() > 3) {
-						savedUser.setPassword(ManageCryptStyle.getInstance()
+						savedUser.setPassword(manageCryptStyle
 								.getInstanceOfCrypt()
 								.createPassPhrase(password));
 					}
@@ -1390,8 +1388,7 @@ public class Usermanagement {
 							statemanagement.getStateById(Long.parseLong(values
 									.get("state_id").toString())));
 
-					Addressmanagement.getInstance().updateAdress(
-							savedUser.getAdresses());
+					addressmanagement.updateAdress(savedUser.getAdresses());
 					savedUser.setShowContactData(Boolean.valueOf(values.get(
 							"showContactData").toString()));
 					savedUser.setShowContactDataToContacts(Boolean
@@ -1402,7 +1399,7 @@ public class Usermanagement {
 					savedUser.setUserSearchs(values.get("userSearchs")
 							.toString());
 
-					// savedUser.setAdresses(Addressmanagement.getInstance().getAdressbyId(user.getAdresses().getAdresses_id()));
+					// savedUser.setAdresses(addressmanagement.getAdressbyId(user.getAdresses().getAdresses_id()));
 
 					if (savedUser.getUser_id() == null) {
 						em.persist(savedUser);
@@ -1442,8 +1439,7 @@ public class Usermanagement {
 
 			// check if Mail given
 			if (email.length() > 0) {
-				Adresses addr = Addressmanagement.getInstance()
-						.retrieveAddressByEmail(email);
+				Adresses addr = addressmanagement.retrieveAddressByEmail(email);
 				// log.debug("addr_e "+addr_e);
 				if (addr != null) {
 					// log.debug("getAdresses_id "+addr_e.getAdresses_id());
@@ -1478,8 +1474,8 @@ public class Usermanagement {
 	private void sendHashByUser(Users us, String appLink) throws Exception {
 		String loginData = us.getLogin() + new Date();
 		log.debug("User: " + us.getLogin());
-		us.setResethash(ManageCryptStyle.getInstance().getInstanceOfCrypt()
-				.createPassPhrase(loginData));
+		us.setResethash(manageCryptStyle.getInstanceOfCrypt().createPassPhrase(
+				loginData));
 		UsersDaoImpl.getInstance().updateUser(us);
 		String reset_link = appLink + "?lzproxied=solo&hash="
 				+ us.getResethash();
@@ -1645,8 +1641,8 @@ public class Usermanagement {
 		log.debug("Usermanagement.getUserByLogin");
 
 		if (encryptPasswd) {
-			String encrypted = ManageCryptStyle.getInstance()
-					.getInstanceOfCrypt().createPassPhrase(user.getPassword());
+			String encrypted = manageCryptStyle.getInstanceOfCrypt()
+					.createPassPhrase(user.getPassword());
 			user.setPassword(encrypted);
 		}
 

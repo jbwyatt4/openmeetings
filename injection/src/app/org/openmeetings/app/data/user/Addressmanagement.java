@@ -4,34 +4,29 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
 import javax.persistence.NoResultException;
+import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import org.openmeetings.app.persistence.beans.adresses.Adresses;
 import org.openmeetings.app.persistence.beans.adresses.States;
-import org.openmeetings.app.persistence.utils.PersistenceSessionUtil;
 import org.openmeetings.app.remote.red5.ScopeApplicationAdapter;
 import org.red5.logging.Red5LoggerFactory;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
+@Transactional
 public class Addressmanagement {
 
 	private static final Logger log = Red5LoggerFactory.getLogger(
 			Addressmanagement.class, ScopeApplicationAdapter.webAppRootKey);
 
+	@PersistenceContext
+	private EntityManager em;
+
 	@Autowired
 	private Statemanagement statemanagement;
-
-	private static Addressmanagement instance = null;
-
-	public static synchronized Addressmanagement getInstance() {
-		if (instance == null) {
-			instance = new Addressmanagement();
-		}
-		return instance;
-	}
 
 	/**
 	 * adds a new record to the adress table
@@ -53,11 +48,6 @@ public class Addressmanagement {
 		try {
 			States st = statemanagement.getStateById(states_id);
 
-			Object idf = PersistenceSessionUtil.createSession();
-			EntityManager session = PersistenceSessionUtil.getSession();
-			EntityTransaction tx = session.getTransaction();
-			tx.begin();
-
 			Adresses adr = new Adresses();
 			adr.setAdditionalname(additionalname);
 			adr.setComment(comment);
@@ -70,13 +60,8 @@ public class Addressmanagement {
 			adr.setPhone(phone);
 			adr.setEmail(email);
 
-			adr = session.merge(adr);
+			adr = em.merge(adr);
 			Long id = adr.getAdresses_id();
-
-			tx.commit();
-			PersistenceSessionUtil.closeSession(idf);
-
-			log.debug("added id " + id);
 
 			return id;
 		} catch (Exception ex2) {
@@ -88,17 +73,8 @@ public class Addressmanagement {
 	public Long saveAddressObj(Adresses adr) {
 		try {
 
-			Object idf = PersistenceSessionUtil.createSession();
-			EntityManager session = PersistenceSessionUtil.getSession();
-			EntityTransaction tx = session.getTransaction();
-			tx.begin();
-
-			adr = session.merge(adr);
+			adr = em.merge(adr);
 			Long id = adr.getAdresses_id();
-
-			tx.commit();
-			PersistenceSessionUtil.closeSession(idf);
-
 			log.debug("added id " + id);
 
 			return id;
@@ -117,19 +93,13 @@ public class Addressmanagement {
 	public Adresses getAdressbyId(long adresses_id) {
 		try {
 			String hql = "select c from Adresses as c where c.adresses_id = :adresses_id";
-			Object idf = PersistenceSessionUtil.createSession();
-			EntityManager session = PersistenceSessionUtil.getSession();
-			EntityTransaction tx = session.getTransaction();
-			tx.begin();
-			Query query = session.createQuery(hql);
+			Query query = em.createQuery(hql);
 			query.setParameter("adresses_id", new Long(adresses_id));
 			Adresses addr = null;
 			try {
 				addr = (Adresses) query.getSingleResult();
 			} catch (NoResultException ex) {
 			}
-			tx.commit();
-			PersistenceSessionUtil.closeSession(idf);
 			return addr;
 		} catch (Exception ex2) {
 			log.error("getAdressbyId", ex2);
@@ -148,18 +118,11 @@ public class Addressmanagement {
 		String hql = "select c from Adresses as c "
 				+ "where c.email LIKE :email";
 		// "and c.deleted <> :deleted";
-		Object idf = PersistenceSessionUtil.createSession();
-		EntityManager session = PersistenceSessionUtil.getSession();
-		EntityTransaction tx = session.getTransaction();
-		tx.begin();
-		Query query = session.createQuery(hql);
+		Query query = em.createQuery(hql);
 		query.setParameter("email", email);
 		// query.setParameter("deleted", "true");
 
 		List<Adresses> addr = query.getResultList();
-
-		tx.commit();
-		PersistenceSessionUtil.closeSession(idf);
 
 		log.debug("retrieveAddressByEmail " + addr.size());
 
@@ -191,11 +154,6 @@ public class Addressmanagement {
 
 			Adresses adr = this.getAdressbyId(adresses_id);
 
-			Object idf = PersistenceSessionUtil.createSession();
-			EntityManager session = PersistenceSessionUtil.getSession();
-			EntityTransaction tx = session.getTransaction();
-			tx.begin();
-
 			adr.setAdditionalname(additionalname);
 			adr.setComment(comment);
 			adr.setUpdatetime(new Date());
@@ -208,15 +166,12 @@ public class Addressmanagement {
 			adr.setEmail(email);
 
 			if (adr.getAdresses_id() == null) {
-				session.persist(adr);
+				em.persist(adr);
 			} else {
-				if (!session.contains(adr)) {
-					session.merge(adr);
+				if (!em.contains(adr)) {
+					em.merge(adr);
 				}
 			}
-
-			tx.commit();
-			PersistenceSessionUtil.closeSession(idf);
 
 			return adr;
 		} catch (Exception ex2) {
@@ -235,22 +190,13 @@ public class Addressmanagement {
 
 		try {
 
-			Object idf = PersistenceSessionUtil.createSession();
-			EntityManager session = PersistenceSessionUtil.getSession();
-			EntityTransaction tx = session.getTransaction();
-			tx.begin();
-
 			if (addr.getAdresses_id() == null) {
-				session.persist(addr);
+				em.persist(addr);
 			} else {
-				if (!session.contains(addr)) {
-					session.merge(addr);
+				if (!em.contains(addr)) {
+					em.merge(addr);
 				}
 			}
-
-			tx.commit();
-
-			PersistenceSessionUtil.closeSession(idf);
 
 			return addr;
 		} catch (Exception ex2) {

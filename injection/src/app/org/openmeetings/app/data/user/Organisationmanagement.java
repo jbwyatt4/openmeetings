@@ -9,8 +9,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
 import javax.persistence.NoResultException;
+import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -24,30 +24,25 @@ import org.openmeetings.app.data.user.dao.UsersDaoImpl;
 import org.openmeetings.app.persistence.beans.domain.Organisation;
 import org.openmeetings.app.persistence.beans.domain.Organisation_Users;
 import org.openmeetings.app.persistence.beans.user.Users;
-import org.openmeetings.app.persistence.utils.PersistenceSessionUtil;
 import org.openmeetings.app.remote.red5.ScopeApplicationAdapter;
 import org.red5.logging.Red5LoggerFactory;
 import org.slf4j.Logger;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * 
  * @author swagner
  * 
  */
+@Transactional
 public class Organisationmanagement {
 
 	private static Logger log = Red5LoggerFactory
 			.getLogger(Organisationmanagement.class,
 					ScopeApplicationAdapter.webAppRootKey);
 
-	private static Organisationmanagement instance = null;
-
-	public static synchronized Organisationmanagement getInstance() {
-		if (instance == null) {
-			instance = new Organisationmanagement();
-		}
-		return instance;
-	}
+	@PersistenceContext
+	private EntityManager em;
 
 	/**
 	 * adds a new organisation if userlevel is admin
@@ -77,20 +72,14 @@ public class Organisationmanagement {
 	 */
 	public Long addOrganisation(String orgname, long user_id) {
 		try {
-			Object idf = PersistenceSessionUtil.createSession();
-			EntityManager session = PersistenceSessionUtil.getSession();
-			EntityTransaction tx = session.getTransaction();
-			tx.begin();
 			Organisation org = new Organisation();
 			org.setName(orgname);
 			org.setInsertedby(new Long(user_id));
 			org.setDeleted("false");
 			org.setStarttime(new Date());
-			org = session.merge(org);
-			session.flush();
+			org = em.merge(org);
+			em.flush();
 			long id = org.getOrganisation_id();
-			tx.commit();
-			PersistenceSessionUtil.closeSession(idf);
 			return id;
 		} catch (Exception ex2) {
 			log.error("[addOrganisation]", ex2);
@@ -100,16 +89,9 @@ public class Organisationmanagement {
 
 	public Long addOrganisationObj(Organisation org) {
 		try {
-			Object idf = PersistenceSessionUtil.createSession();
-			EntityManager session = PersistenceSessionUtil.getSession();
-			EntityTransaction tx = session.getTransaction();
-			tx.begin();
 			org.setStarttime(new Date());
-			org = session.merge(org);
-			session.flush();
+			org = em.merge(org);
 			long id = org.getOrganisation_id();
-			tx.commit();
-			PersistenceSessionUtil.closeSession(idf);
 			return id;
 		} catch (Exception ex2) {
 			log.error("[addOrganisationObj]", ex2);
@@ -152,11 +134,7 @@ public class Organisationmanagement {
 	public List<Organisation> getOrganisations(int start, int max,
 			String orderby, boolean asc) {
 		try {
-			Object idf = PersistenceSessionUtil.createSession();
-			EntityManager session = PersistenceSessionUtil.getSession();
-			EntityTransaction tx = session.getTransaction();
-			tx.begin();
-			CriteriaBuilder cb = session.getCriteriaBuilder();
+			CriteriaBuilder cb = em.getCriteriaBuilder();
 			CriteriaQuery<Organisation> cq = cb.createQuery(Organisation.class);
 			Root<Organisation> c = cq.from(Organisation.class);
 			Predicate condition = cb.equal(c.get("deleted"), "false");
@@ -167,12 +145,10 @@ public class Organisationmanagement {
 			} else {
 				cq.orderBy(cb.desc(c.get(orderby)));
 			}
-			TypedQuery<Organisation> q = session.createQuery(cq);
+			TypedQuery<Organisation> q = em.createQuery(cq);
 			q.setFirstResult(start);
 			q.setMaxResults(max);
 			List<Organisation> ll = q.getResultList();
-			tx.commit();
-			PersistenceSessionUtil.closeSession(idf);
 			return ll;
 		} catch (Exception ex2) {
 			log.error("[getOrganisations]", ex2);
@@ -183,20 +159,14 @@ public class Organisationmanagement {
 	public List<Organisation> getOrganisations(Long user_level) {
 		try {
 			if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)) {
-				Object idf = PersistenceSessionUtil.createSession();
-				EntityManager session = PersistenceSessionUtil.getSession();
-				EntityTransaction tx = session.getTransaction();
-				tx.begin();
-				CriteriaBuilder cb = session.getCriteriaBuilder();
+				CriteriaBuilder cb = em.getCriteriaBuilder();
 				CriteriaQuery<Organisation> cq = cb
 						.createQuery(Organisation.class);
 				Root<Organisation> c = cq.from(Organisation.class);
 				Predicate condition = cb.equal(c.get("deleted"), "false");
 				cq.where(condition);
-				TypedQuery<Organisation> q = session.createQuery(cq);
+				TypedQuery<Organisation> q = em.createQuery(cq);
 				List<Organisation> ll = q.getResultList();
-				tx.commit();
-				PersistenceSessionUtil.closeSession(idf);
 				return ll;
 			} else {
 				log.error("[getOrganisations] noPremission");
@@ -214,16 +184,10 @@ public class Organisationmanagement {
 	private Long selectMaxFromOrganisations() {
 		try {
 			// get all users
-			Object idf = PersistenceSessionUtil.createSession();
-			EntityManager session = PersistenceSessionUtil.getSession();
-			EntityTransaction tx = session.getTransaction();
-			tx.begin();
-			Query query = session
+			Query query = em
 					.createQuery("select max(c.organisation_id) from Organisation c where c.deleted = 'false'");
 			List ll = query.getResultList();
-			tx.commit();
-			PersistenceSessionUtil.closeSession(idf);
-			log.debug("selectMaxFromOrganisations" + (Long) ll.get(0));
+			log.debug("selectMaxFromOrganisations" + ll.get(0));
 			return (Long) ll.get(0);
 		} catch (Exception ex2) {
 			log.error("[selectMaxFromUsers] ", ex2);
@@ -248,20 +212,14 @@ public class Organisationmanagement {
 			org.setName(orgname);
 			org.setUpdatedby(users_id);
 			org.setUpdatetime(new Date());
-			Object idf = PersistenceSessionUtil.createSession();
-			EntityManager session = PersistenceSessionUtil.getSession();
-			EntityTransaction tx = session.getTransaction();
-			tx.begin();
 			if (org.getOrganisation_id() == null) {
-				session.persist(org);
+				em.persist(org);
 			} else {
-				if (!session.contains(org)) {
-					session.merge(org);
+				if (!em.contains(org)) {
+					em.merge(org);
 				}
 			}
-			session.flush();
-			tx.commit();
-			PersistenceSessionUtil.closeSession(idf);
+			em.flush();
 
 			return org.getOrganisation_id();
 		} catch (Exception err) {
@@ -394,11 +352,7 @@ public class Organisationmanagement {
 	 */
 	public Organisation getOrganisationById(long organisation_id) {
 		try {
-			Object idf = PersistenceSessionUtil.createSession();
-			EntityManager session = PersistenceSessionUtil.getSession();
-			EntityTransaction tx = session.getTransaction();
-			tx.begin();
-			Query query = session
+			Query query = em
 					.createQuery("select c from Organisation as c where c.organisation_id = :organisation_id AND c.deleted <> :deleted");
 			query.setParameter("organisation_id", organisation_id);
 			query.setParameter("deleted", "true");
@@ -408,8 +362,6 @@ public class Organisationmanagement {
 			} catch (NoResultException e) {
 				// o = null;
 			}
-			tx.commit();
-			PersistenceSessionUtil.closeSession(idf);
 			return o;
 		} catch (Exception ex2) {
 			log.error("[getOrganisationById]", ex2);
@@ -419,11 +371,7 @@ public class Organisationmanagement {
 
 	public Organisation getOrganisationByIdBackup(long organisation_id) {
 		try {
-			Object idf = PersistenceSessionUtil.createSession();
-			EntityManager session = PersistenceSessionUtil.getSession();
-			EntityTransaction tx = session.getTransaction();
-			tx.begin();
-			Query query = session
+			Query query = em
 					.createQuery("select c from Organisation as c where c.organisation_id = :organisation_id");
 			query.setParameter("organisation_id", organisation_id);
 			Organisation o = null;
@@ -432,8 +380,6 @@ public class Organisationmanagement {
 			} catch (NoResultException e) {
 				// o = null;
 			}
-			tx.commit();
-			PersistenceSessionUtil.closeSession(idf);
 			return o;
 		} catch (Exception ex2) {
 			log.error("[getOrganisationById]", ex2);
@@ -443,11 +389,7 @@ public class Organisationmanagement {
 
 	public Organisation getOrganisationByIdAndDeleted(long organisation_id) {
 		try {
-			Object idf = PersistenceSessionUtil.createSession();
-			EntityManager session = PersistenceSessionUtil.getSession();
-			EntityTransaction tx = session.getTransaction();
-			tx.begin();
-			Query query = session
+			Query query = em
 					.createQuery("select c from Organisation as c where c.organisation_id = :organisation_id");
 			query.setParameter("organisation_id", organisation_id);
 			Organisation o = null;
@@ -456,8 +398,6 @@ public class Organisationmanagement {
 			} catch (NoResultException e) {
 				// o = null;
 			}
-			tx.commit();
-			PersistenceSessionUtil.closeSession(idf);
 			return o;
 		} catch (Exception ex2) {
 			log.error("[getOrganisationByIdAndDeleted]", ex2);
@@ -490,19 +430,13 @@ public class Organisationmanagement {
 			org.setDeleted("true");
 			org.setUpdatedby(updatedby);
 
-			Object idf = PersistenceSessionUtil.createSession();
-			EntityManager session = PersistenceSessionUtil.getSession();
-			EntityTransaction tx = session.getTransaction();
-			tx.begin();
 			if (org.getOrganisation_id() == null) {
-				session.persist(org);
+				em.persist(org);
 			} else {
-				if (!session.contains(org)) {
-					session.merge(org);
+				if (!em.contains(org)) {
+					em.merge(org);
 				}
 			}
-			tx.commit();
-			PersistenceSessionUtil.closeSession(idf);
 
 			return org.getOrganisation_id();
 
@@ -528,23 +462,17 @@ public class Organisationmanagement {
 				Organisation org = this.getOrganisationById(organisation_id);
 				log.debug("org: " + org.getName());
 
-				Object idf = PersistenceSessionUtil.createSession();
-				EntityManager session = PersistenceSessionUtil.getSession();
-				EntityTransaction tx = session.getTransaction();
-				tx.begin();
 				Organisation_Users orgUser = new Organisation_Users();
 				orgUser.setOrganisation(org);
 				orgUser.setUser_id(user_id);
 				orgUser.setDeleted("false");
 				orgUser.setStarttime(new Date());
 				orgUser.setComment(comment);
-				orgUser = session.merge(orgUser);
+				orgUser = em.merge(orgUser);
 				// We need this flush
-				session.flush();
+				em.flush();
 				long id = orgUser.getOrganisation_users_id();
 
-				tx.commit();
-				PersistenceSessionUtil.closeSession(idf);
 				return id;
 			} else {
 				return -35L;
@@ -557,18 +485,12 @@ public class Organisationmanagement {
 
 	public Long addOrganisationUserObj(Organisation_Users orgUser) {
 		try {
-			Object idf = PersistenceSessionUtil.createSession();
-			EntityManager session = PersistenceSessionUtil.getSession();
-			EntityTransaction tx = session.getTransaction();
-			tx.begin();
 			orgUser.setStarttime(new Date());
-			orgUser = session.merge(orgUser);
+			orgUser = em.merge(orgUser);
 			// We need this flush
-			session.flush();
+			em.flush();
 			long id = orgUser.getOrganisation_users_id();
 
-			tx.commit();
-			PersistenceSessionUtil.closeSession(idf);
 			return id;
 		} catch (Exception ex2) {
 			log.error("[addUserToOrganisation]", ex2);
@@ -583,20 +505,14 @@ public class Organisationmanagement {
 			log.debug("getOrganisation_UserByUserAndOrganisation " + user_id
 					+ "  " + organisation_id);
 
-			Object idf = PersistenceSessionUtil.createSession();
-			EntityManager session = PersistenceSessionUtil.getSession();
-			EntityTransaction tx = session.getTransaction();
-			tx.begin();
-			Query q = session
+			Query q = em
 					.createQuery("select c from Organisation_Users c where c.deleted = 'false' AND c.organisation.organisation_id = :organisation_id AND c.user_id = :user_id");
 			q.setParameter("organisation_id", organisation_id);
 			q.setParameter("user_id", user_id);
 			List<Organisation_Users> ll = q.getResultList();
-			tx.commit();
-			PersistenceSessionUtil.closeSession(idf);
 			log.debug("getOrganisation_UserByUserAndOrganisation: " + ll.size());
 			if (ll.size() > 0) {
-				return (Organisation_Users) ll.get(0);
+				return ll.get(0);
 			}
 
 		} catch (Exception ex2) {
@@ -620,19 +536,13 @@ public class Organisationmanagement {
 				orgUser.setDeleted("true");
 				orgUser.setUpdatetime(new Date());
 
-				Object idf = PersistenceSessionUtil.createSession();
-				EntityManager session = PersistenceSessionUtil.getSession();
-				EntityTransaction tx = session.getTransaction();
-				tx.begin();
 				if (orgUser.getOrganisation_users_id() == null) {
-					session.persist(orgUser);
+					em.persist(orgUser);
 				} else {
-					if (!session.contains(orgUser)) {
-						session.merge(orgUser);
+					if (!em.contains(orgUser)) {
+						em.merge(orgUser);
 					}
 				}
-				tx.commit();
-				PersistenceSessionUtil.closeSession(idf);
 				return orgUser.getOrganisation_users_id();
 			} else {
 				log.error("[deleteUserFromOrganisation] authorization required");
@@ -680,18 +590,11 @@ public class Organisationmanagement {
 
 	private Long selectMaxUsersByOrganisationId(long organisation_id) {
 		try {
-			Object idf = PersistenceSessionUtil.createSession();
-			EntityManager session = PersistenceSessionUtil.getSession();
-			EntityTransaction tx = session.getTransaction();
-			tx.begin();
-
-			Query query = session
+			Query query = em
 					.createQuery("select c.organisation_users_id from Organisation_Users c where c.deleted = 'false' AND c.organisation.organisation_id = :organisation_id");
 			query.setParameter("organisation_id", organisation_id);
 
 			List ll = query.getResultList();
-			tx.commit();
-			PersistenceSessionUtil.closeSession(idf);
 			log.debug("selectMaxUsersByOrganisationId" + ll.size());
 			return new Long(ll.size());
 
@@ -716,10 +619,6 @@ public class Organisationmanagement {
 			int max, String orderby, boolean asc) {
 		try {
 			// get all users
-			Object idf = PersistenceSessionUtil.createSession();
-			EntityManager session = PersistenceSessionUtil.getSession();
-			EntityTransaction tx = session.getTransaction();
-			tx.begin();
 			String hql = "select c from Organisation_Users c "
 					+ "where c.deleted = 'false' "
 					+ "AND c.organisation.organisation_id = :organisation_id ";
@@ -734,17 +633,15 @@ public class Organisationmanagement {
 				hql += " DESC";
 			}
 
-			Query q = session.createQuery(hql);
+			Query q = em.createQuery(hql);
 			q.setParameter("organisation_id", organisation_id);
 			q.setFirstResult(start);
 			q.setMaxResults(max);
 			List<Organisation_Users> userOrg = q.getResultList();
-			tx.commit();
-			PersistenceSessionUtil.closeSession(idf);
 			List<Users> userL = new LinkedList<Users>();
 			for (Iterator<Organisation_Users> it = userOrg.iterator(); it
 					.hasNext();) {
-				Organisation_Users us = (Organisation_Users) it.next();
+				Organisation_Users us = it.next();
 
 				// Only add this single Organization add this point cause
 				// cause all the other are not needed at this point
@@ -773,16 +670,10 @@ public class Organisationmanagement {
 		try {
 
 			// get all users
-			Object idf = PersistenceSessionUtil.createSession();
-			EntityManager session = PersistenceSessionUtil.getSession();
-			EntityTransaction tx = session.getTransaction();
-			tx.begin();
-			Query q = session
+			Query q = em
 					.createQuery("select c from Organisation_Users c where c.deleted = 'false' AND c.organisation.organisation_id = :organisation_id");
 			q.setParameter("organisation_id", organisation_id);
 			List<Organisation_Users> userOrg = q.getResultList();
-			tx.commit();
-			PersistenceSessionUtil.closeSession(idf);
 			List<Users> userL = new LinkedList<Users>();
 			for (Iterator<Organisation_Users> it = userOrg.iterator(); it
 					.hasNext();) {
@@ -821,27 +712,21 @@ public class Organisationmanagement {
 			int start, int max, String orderby, boolean asc) {
 		try {
 			if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)) {
-				Object idf = PersistenceSessionUtil.createSession();
-				EntityManager session = PersistenceSessionUtil.getSession();
-				EntityTransaction tx = session.getTransaction();
-				tx.begin();
 				String hql = "select c from Organisation_Users c "
 						+ "where c.deleted = 'false' "
 						+ "AND c.user_id = :user_id "
 						+ "GROUP BY c.organisation.organisation_id";
-				Query q = session.createQuery(hql);
+				Query q = em.createQuery(hql);
 				q.setParameter("user_id", user_id);
 				q.setFirstResult(start);
 				q.setMaxResults(max);
 				List<Organisation_Users> userOrgIds = q.getResultList();
-				tx.commit();
-				PersistenceSessionUtil.closeSession(idf);
 
 				LinkedList<Organisation> userOrg = new LinkedList<Organisation>();
 
 				for (Iterator<Organisation_Users> it = userOrgIds.iterator(); it
 						.hasNext();) {
-					Long org_id = (Long) it.next().getOrganisation()
+					Long org_id = it.next().getOrganisation()
 							.getOrganisation_id();
 					userOrg.add(this.getOrganisationById(org_id));
 				}

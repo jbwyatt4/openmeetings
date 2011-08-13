@@ -61,6 +61,8 @@ public class Invitationmanagement {
 	private Fieldmanagment fieldmanagment;
 	@Autowired
 	private OmTimeZoneDaoImpl omTimeZoneDaoImpl;
+	@Autowired
+	private ManageCryptStyle manageCryptStyle;
 
 	private Invitationmanagement() {
 	}
@@ -107,9 +109,9 @@ public class Invitationmanagement {
 				Invitations invitation = new Invitations();
 				invitation.setIsPasswordProtected(isPasswordProtected);
 				if (isPasswordProtected) {
-					invitation.setInvitationpass(ManageCryptStyle.getInstance()
-							.getInstanceOfCrypt()
-							.createPassPhrase(invitationpass));
+					invitation.setInvitationpass(manageCryptStyle
+							.getInstanceOfCrypt().createPassPhrase(
+									invitationpass));
 				}
 
 				invitation.setInvitationWasUsed(false);
@@ -476,9 +478,9 @@ public class Invitationmanagement {
 				Invitations invitation = new Invitations();
 				invitation.setIsPasswordProtected(isPasswordProtected);
 				if (isPasswordProtected) {
-					invitation.setInvitationpass(ManageCryptStyle.getInstance()
-							.getInstanceOfCrypt()
-							.createPassPhrase(invitationpass));
+					invitation.setInvitationpass(manageCryptStyle
+							.getInstanceOfCrypt().createPassPhrase(
+									invitationpass));
 				}
 
 				invitation.setInvitationWasUsed(false);
@@ -1115,8 +1117,8 @@ public class Invitationmanagement {
 				// log.debug("pass "+pass);
 				// log.debug("getInvitationpass "+invitation.getInvitationpass());
 
-				if (ManageCryptStyle.getInstance().getInstanceOfCrypt()
-						.verifyPassword(pass, invitation.getInvitationpass())) {
+				if (manageCryptStyle.getInstanceOfCrypt().verifyPassword(pass,
+						invitation.getInvitationpass())) {
 					return new Long(1);
 				} else {
 					return new Long(-34);

@@ -26,9 +26,11 @@ public class TestUtils extends Assert {
 	@Autowired
 	static private Usermanagement userManagement;
 	@Autowired
-	private static Navimanagement navimanagement;
+	static private Navimanagement navimanagement;
 	@Autowired
-	private static ErrorManagement errorManagement;
+	static private ErrorManagement errorManagement;
+	@Autowired
+	static private Salutationmanagement salutationmanagement;
 
 	public static Appointment createAppointment() throws Exception {
 		assertNotNull("Cann't access to appointment dao implimentation",
@@ -79,10 +81,10 @@ public class TestUtils extends Assert {
 
 	public static void loadSalutations() {
 
-		Salutationmanagement.getInstance().addUserSalutation("Mr", 261);
-		Salutationmanagement.getInstance().addUserSalutation("Ms", 262);
-		Salutationmanagement.getInstance().addUserSalutation("Mrs", 841);
-		Salutationmanagement.getInstance().addUserSalutation("Dr", 842);
+		salutationmanagement.addUserSalutation("Mr", 261);
+		salutationmanagement.addUserSalutation("Ms", 262);
+		salutationmanagement.addUserSalutation("Mrs", 841);
+		salutationmanagement.addUserSalutation("Dr", 842);
 
 	}
 

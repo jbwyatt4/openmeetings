@@ -58,6 +58,7 @@ public class UserService {
 	// Spring Beans
 	private ClientListManager clientListManager = null;
 	private ScopeApplicationAdapter scopeApplicationAdapter = null;
+
 	@Autowired
 	private AppointmentDaoImpl appointmentDao;
 	@Autowired
@@ -70,6 +71,14 @@ public class UserService {
 	private Fieldmanagment fieldmanagment;
 	@Autowired
 	private OmTimeZoneDaoImpl omTimeZoneDaoImpl;
+	@Autowired
+	private Salutationmanagement salutationmanagement;
+	@Autowired
+	private Organisationmanagement organisationmanagement;
+	@Autowired
+	private ManageCryptStyle manageCryptStyle;
+	@Autowired
+	private Addressmanagement addressmanagement;
 
 	public ClientListManager getClientListManager() {
 		return clientListManager;
@@ -152,8 +161,7 @@ public class UserService {
 	 * @return
 	 */
 	public List getUserSalutations(String SID, long language_id) {
-		return Salutationmanagement.getInstance().getUserSalutations(
-				language_id);
+		return salutationmanagement.getUserSalutations(language_id);
 	}
 
 	/**
@@ -192,8 +200,8 @@ public class UserService {
 			int max, String orderby, boolean asc) {
 		Long users_id = sessionManagement.checkSession(SID);
 		Long user_level = userManagement.getUserLevelByID(users_id);
-		return Organisationmanagement.getInstance().getUsersByOrganisationId(
-				organisation_id, start, max, orderby, asc);
+		return organisationmanagement.getUsersByOrganisationId(organisation_id,
+				start, max, orderby, asc);
 	}
 
 	public List getUserListByModForm(String SID) {
@@ -217,8 +225,8 @@ public class UserService {
 			int start, int max, String orderby, boolean asc) {
 		Long users_id = sessionManagement.checkSession(SID);
 		long user_level = userManagement.getUserLevelByID(users_id);
-		return Organisationmanagement.getInstance().getOrganisationsByUserId(
-				user_level, client_user, start, max, orderby, asc);
+		return organisationmanagement.getOrganisationsByUserId(user_level,
+				client_user, start, max, orderby, asc);
 	}
 
 	/**
@@ -236,9 +244,8 @@ public class UserService {
 			int start, int max, String orderby, boolean asc) {
 		Long users_id = sessionManagement.checkSession(SID);
 		Long user_level = userManagement.getUserLevelByID(users_id);
-		return Organisationmanagement.getInstance()
-				.getRestOrganisationsByUserId(user_level, client_user, start,
-						max, orderby, asc);
+		return organisationmanagement.getRestOrganisationsByUserId(user_level,
+				client_user, start, max, orderby, asc);
 	}
 
 	/**
@@ -488,7 +495,7 @@ public class UserService {
 					if (ad != null) {
 						ad.setDeleted("true");
 
-						Addressmanagement.getInstance().updateAdress(ad);
+						addressmanagement.updateAdress(ad);
 						log.debug("deleteUserId : Address updated");
 
 					}
@@ -607,8 +614,7 @@ public class UserService {
 					return -45L;
 				}
 
-				String hash = ManageCryptStyle
-						.getInstance()
+				String hash = manageCryptStyle
 						.getInstanceOfCrypt()
 						.createPassPhrase(
 								CalendarPatterns

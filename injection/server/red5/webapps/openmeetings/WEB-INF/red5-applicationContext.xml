@@ -31,6 +31,10 @@
 		</property>
 	</bean>
 	
+	<!-- Interface "Transactional" -->
+	<bean id="addressmanagement" class="org.openmeetings.app.data.user.Addressmanagement" />
+	<bean id="organisationmanagement" class="org.openmeetings.app.data.user.Organisationmanagement" />
+	<bean id="salutationmanagement" class="org.openmeetings.app.data.user.Salutationmanagement" />
 	<bean id="errorManagement" class="org.openmeetings.app.data.basic.ErrorManagement" />
 	<bean id="navimanagement" class="org.openmeetings.app.data.basic.Navimanagement" />
 	<bean id="omTimeZoneDaoImpl" class="org.openmeetings.app.data.basic.dao.OmTimeZoneDaoImpl" />
@@ -44,6 +48,9 @@
 	<bean id="appointmentLogic" class="org.openmeetings.app.data.calendar.management.AppointmentLogic"/>
 	<bean id="sessionManagement" class="org.openmeetings.app.data.basic.Sessionmanagement"/>
 	<bean id="userManagement" class="org.openmeetings.app.data.user.Usermanagement"/>
+	
+	<!-- No Interface -->
+	<bean id="manageCryptStyle" class="org.openmeetings.utils.crypt.ManageCryptStyle" />
 
 	<tx:annotation-driven transaction-manager="jpaTransactionManager"/>
 	<context:annotation-config/>
