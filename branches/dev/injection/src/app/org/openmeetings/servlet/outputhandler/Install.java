@@ -324,10 +324,10 @@ public class Install extends VelocityViewServlet {
 
 					importInitvalues.loadMainMenu();
 
+					importInitvalues.loadErrorMappingsFromXML(filePath);
+
 					if (true)
 						return null;
-
-					importInitvalues.loadErrorMappingsFromXML(filePath);
 					importInitvalues.loadSalutations();
 
 					importInitvalues.loadConfiguration(crypt_ClassName,

@@ -14,6 +14,8 @@ public class StartUpData extends TestCase {
 	private Usermanagement userManagement;
 	@Autowired
 	private Statemanagement statemanagement;
+	@Autowired
+	private Navimanagement navimanagement;
 
 	public StartUpData(String testname) {
 		super(testname);
@@ -25,33 +27,33 @@ public class StartUpData extends TestCase {
 		userManagement.addUserLevel("Moderator", 2);
 		userManagement.addUserLevel("Admin", 3);
 
-		Navimanagement.getInstance().addGlobalStructure("home", 1, 124, true,
-				true, 1, "home", "false", 586L);
+		navimanagement.addGlobalStructure("home", 1, 124, true, true, 1,
+				"home", "false", 586L);
 
-		Navimanagement.getInstance().addGlobalStructure("conf", 2, 1, false,
-				true, 1, "conference", "false", 586L);
-		Navimanagement.getInstance().addMainStructure("conf1", 1, 2, true,
-				true, 1, "meeting", 2, "false");
-		Navimanagement.getInstance().addMainStructure("conf2", 2, 3, true,
-				true, 1, "classroom", 2, "false");
+		navimanagement.addGlobalStructure("conf", 2, 1, false, true, 1,
+				"conference", "false", 586L);
+		navimanagement.addMainStructure("conf1", 1, 2, true, true, 1,
+				"meeting", 2, "false");
+		navimanagement.addMainStructure("conf2", 2, 3, true, true, 1,
+				"classroom", 2, "false");
 
-		Navimanagement.getInstance().addGlobalStructure("settings", 3, 4,
-				false, true, 1, "setings", "false", 586L);
-		Navimanagement.getInstance().addMainStructure("userself", 1, 5, true,
-				false, 1, "userself", 3, "false");
-		Navimanagement.getInstance().addMainStructure("roomconfiguremod", 2,
-				192, true, false, 1, "roomconfiguremod", 3, "false");
+		navimanagement.addGlobalStructure("settings", 3, 4, false, true, 1,
+				"setings", "false", 586L);
+		navimanagement.addMainStructure("userself", 1, 5, true, false, 1,
+				"userself", 3, "false");
+		navimanagement.addMainStructure("roomconfiguremod", 2, 192, true,
+				false, 1, "roomconfiguremod", 3, "false");
 
-		Navimanagement.getInstance().addGlobalStructure("admin", 4, 6, false,
-				true, 2, "admin", "false", 586L);
-		Navimanagement.getInstance().addMainStructure("useradmin", 1, 125,
-				true, false, 2, "useradmin", 4, "false");
-		Navimanagement.getInstance().addMainStructure("groupadmin", 1, 126,
-				true, false, 2, "groupadmin", 4, "false");
-		Navimanagement.getInstance().addMainStructure("orgadmin", 1, 127, true,
-				false, 3, "orgadmin", 4, "false");
-		Navimanagement.getInstance().addMainStructure("roomadmin", 1, 186,
-				true, false, 3, "roomadmin", 4, "false");
+		navimanagement.addGlobalStructure("admin", 4, 6, false, true, 2,
+				"admin", "false", 586L);
+		navimanagement.addMainStructure("useradmin", 1, 125, true, false, 2,
+				"useradmin", 4, "false");
+		navimanagement.addMainStructure("groupadmin", 1, 126, true, false, 2,
+				"groupadmin", 4, "false");
+		navimanagement.addMainStructure("orgadmin", 1, 127, true, false, 3,
+				"orgadmin", 4, "false");
+		navimanagement.addMainStructure("roomadmin", 1, 186, true, false, 3,
+				"roomadmin", 4, "false");
 
 		Salutationmanagement.getInstance().addUserSalutation("Herr", 261);
 		Salutationmanagement.getInstance().addUserSalutation("Frau", 262);

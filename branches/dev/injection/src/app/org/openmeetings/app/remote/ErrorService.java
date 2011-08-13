@@ -22,6 +22,8 @@ public class ErrorService {
 
 	@Autowired
 	private Fieldmanagment fieldmanagment;
+	@Autowired
+	private ErrorManagement errorManagement;
 
 	/**
 	 * Gets an Error-Object by its id TODO: add error-code-handlers -20
@@ -39,8 +41,8 @@ public class ErrorService {
 
 		if (errorid < 0) {
 			// log.debug("errorid,language_id: "+errorid+"|"+language_id);
-			ErrorValues eValues = ErrorManagement.getInstance()
-					.getErrorValuesById(errorid * (-1));
+			ErrorValues eValues = errorManagement.getErrorValuesById(errorid
+					* (-1));
 			if (eValues != null) {
 				// log.debug(eValues.getFieldvalues());
 				// log.debug(eValues.getFieldvalues().getFieldvalues_id());

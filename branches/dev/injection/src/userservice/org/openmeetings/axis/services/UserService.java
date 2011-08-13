@@ -44,6 +44,8 @@ public class UserService {
 	private Usermanagement userManagement;
 	@Autowired
 	private Fieldmanagment fieldmanagment;
+	@Autowired
+	private ErrorManagement errorManagement;
 
 	/**
 	 * load this session id before doing anything else
@@ -97,7 +99,7 @@ public class UserService {
 		log.debug("UserService.getErrorbyCode");
 		try {
 			if (errorid < 0) {
-				ErrorValues eValues = ErrorManagement.getInstance()
+				ErrorValues eValues = errorManagement
 						.getErrorValuesById(errorid * (-1));
 				if (eValues != null) {
 					Fieldlanguagesvalues errorValue = fieldmanagment
