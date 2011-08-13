@@ -31,6 +31,8 @@
 		</property>
 	</bean>
 	
+	
+	<bean id="importInitvalues" class=" org.openmeetings.app.installation.ImportInitvalues"/>
 	<bean id="cfgManagement" class="org.openmeetings.app.data.basic.Configurationmanagement"/>
 	<bean id="recordingDao" class="org.openmeetings.app.data.record.dao.RecordingDaoImpl"/>
 	<bean id="appointmentDaoImpl" class="org.openmeetings.app.data.calendar.daos.AppointmentDaoImpl"/>
@@ -40,4 +42,5 @@
 
 	<tx:annotation-driven transaction-manager="jpaTransactionManager"/>
 	<context:annotation-config/>
+	
 </beans>
