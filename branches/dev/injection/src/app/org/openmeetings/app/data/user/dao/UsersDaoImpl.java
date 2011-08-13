@@ -3,32 +3,35 @@ package org.openmeetings.app.data.user.dao;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
+import javax.persistence.NoResultException;
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
-
-import javax.persistence.NoResultException;
-import javax.persistence.Query;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
-import javax.persistence.TypedQuery;
 
 import org.apache.commons.lang.StringUtils;
 import org.openmeetings.app.persistence.beans.user.Users;
 import org.openmeetings.app.persistence.utils.PersistenceSessionUtil;
 import org.openmeetings.app.remote.red5.ScopeApplicationAdapter;
 import org.openmeetings.utils.crypt.ManageCryptStyle;
-import org.slf4j.Logger;
 import org.red5.logging.Red5LoggerFactory;
+import org.slf4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class UsersDaoImpl {
 
-	private static final Logger log = Red5LoggerFactory.getLogger(UsersDaoImpl.class, ScopeApplicationAdapter.webAppRootKey);
+	private static final Logger log = Red5LoggerFactory.getLogger(
+			UsersDaoImpl.class, ScopeApplicationAdapter.webAppRootKey);
+
+	@Autowired
+	private ManageCryptStyle manageCryptStyle;
 
 	private static UsersDaoImpl instance = null;
 
-	
 	private UsersDaoImpl() {
 	}
 
@@ -38,7 +41,7 @@ public class UsersDaoImpl {
 		}
 		return instance;
 	}
-	
+
 	/**
 	 * 
 	 * @param user_id
@@ -50,37 +53,37 @@ public class UsersDaoImpl {
 				Object idf = PersistenceSessionUtil.createSession();
 				EntityManager session = PersistenceSessionUtil.getSession();
 				EntityTransaction tx = session.getTransaction();
-			tx.begin();
-				Query query = session.createQuery("select c from Users as c where c.user_id = :user_id");
+				tx.begin();
+				Query query = session
+						.createQuery("select c from Users as c where c.user_id = :user_id");
 				query.setParameter("user_id", user_id);
-				
+
 				session.flush();
-				
+
 				Users users = null;
 				try {
 					users = (Users) query.getSingleResult();
-			    } catch (NoResultException ex) {
-			    }
+				} catch (NoResultException ex) {
+				}
 				session.refresh(users);
-				
+
 				tx.commit();
 				PersistenceSessionUtil.closeSession(idf);
-				
-				//Somehow the Organizations are missing here o
-				
-				
+
+				// Somehow the Organizations are missing here o
+
 				return users;
 				// TODO: Add Usergroups to user
 				// users.setUsergroups(ResHandler.getGroupmanagement().getUserGroups(user_id));
 			} catch (Exception ex2) {
-				log.error("getUser",ex2);
+				log.error("getUser", ex2);
 			}
 		} else {
-			log.info("[getUser] "+"Info: No USER_ID given");
+			log.info("[getUser] " + "Info: No USER_ID given");
 		}
 		return null;
 	}
-	
+
 	public void updateUser(Users user) {
 		if (user.getUser_id() > 0) {
 			try {
@@ -91,21 +94,20 @@ public class UsersDaoImpl {
 				session.flush();
 				if (user.getUser_id() == null) {
 					session.persist(user);
-				    } else {
-				    	if (!session.contains(user)) {
-				    		session.merge(user);
-				    }
+				} else {
+					if (!session.contains(user)) {
+						session.merge(user);
+					}
 				}
 				tx.commit();
 				PersistenceSessionUtil.closeSession(idf);
 			} catch (Exception ex2) {
-				log.error("[updateUser] ",ex2);
+				log.error("[updateUser] ", ex2);
 			}
 		} else {
-			log.info("[updateUser] "+"Error: No USER_ID given");
+			log.info("[updateUser] " + "Error: No USER_ID given");
 		}
 	}
-	
 
 	public Long deleteUserID(long USER_ID) {
 		try {
@@ -123,13 +125,13 @@ public class UsersDaoImpl {
 				tx.begin();
 				if (us.getUser_id() == null) {
 					session.persist(us);
-				    } else {
-				    	if (!session.contains(us)) {
-				    		session.merge(us);
-				    }
+				} else {
+					if (!session.contains(us)) {
+						session.merge(us);
+					}
 				}
 				tx.commit();
-				
+
 				PersistenceSessionUtil.closeSession(idf);
 				return us.getUser_id();
 				// result +=
@@ -143,39 +145,40 @@ public class UsersDaoImpl {
 
 			}
 		} catch (Exception ex2) {
-			log.error("[deleteUserID]" ,ex2);
+			log.error("[deleteUserID]", ex2);
 		}
 		return null;
 	}
-	
 
 	/**
 	 * returns the maximum
+	 * 
 	 * @return
 	 */
-	public Long selectMaxFromUsers(){
+	public Long selectMaxFromUsers() {
 		try {
-			//get all users
+			// get all users
 			Object idf = PersistenceSessionUtil.createSession();
 			EntityManager session = PersistenceSessionUtil.getSession();
 			EntityTransaction tx = session.getTransaction();
 			tx.begin();
-			Query query = session.createQuery("select count(c.user_id) from Users c where c.deleted = 'false'"); 
+			Query query = session
+					.createQuery("select count(c.user_id) from Users c where c.deleted = 'false'");
 			List ll = query.getResultList();
 			tx.commit();
 			PersistenceSessionUtil.closeSession(idf);
-			log.info("selectMaxFromUsers"+(Long)ll.get(0));
-			return (Long)ll.get(0);				
+			log.info("selectMaxFromUsers" + ll.get(0));
+			return (Long) ll.get(0);
 		} catch (Exception ex2) {
 			log.error("[selectMaxFromUsers] ", ex2);
 		}
 		return null;
 	}
-	
-	public List<Users> getAllUsers(){
+
+	public List<Users> getAllUsers() {
 		try {
-			
-			//get all users
+
+			// get all users
 			Object idf = PersistenceSessionUtil.createSession();
 			EntityManager session = PersistenceSessionUtil.getSession();
 			EntityTransaction tx = session.getTransaction();
@@ -189,19 +192,19 @@ public class UsersDaoImpl {
 			List<Users> ll = q.getResultList();
 			tx.commit();
 			PersistenceSessionUtil.closeSession(idf);
-			
-			return ll;				
+
+			return ll;
 
 		} catch (Exception ex2) {
 			log.error("[getAllUsers] ", ex2);
 		}
 		return null;
-	}	
-	
-	public List<Users> getAllUsersDeleted(){
+	}
+
+	public List<Users> getAllUsersDeleted() {
 		try {
-			
-			//get all users
+
+			// get all users
 			Object idf = PersistenceSessionUtil.createSession();
 			EntityManager session = PersistenceSessionUtil.getSession();
 			EntityTransaction tx = session.getTransaction();
@@ -215,74 +218,75 @@ public class UsersDaoImpl {
 			List<Users> ll = q.getResultList();
 			tx.commit();
 			PersistenceSessionUtil.closeSession(idf);
-			
-			return ll;				
+
+			return ll;
 
 		} catch (Exception ex2) {
 			log.error("[getAllUsers] ", ex2);
 		}
 		return null;
-	}	
+	}
 
 	public Long getAllUserMax(String search) {
 		try {
-			
+
 			String[] searchItems = search.split(" ");
-			
-			
-			log.debug("getUserContactsBySearch: "+ search);
-			//log.debug("getUserContactsBySearch: "+ userId);
-			
-			String hql = 	"select count(u.user_id) from  Users u "+					
-							"WHERE u.deleted = 'false' ";
-							
-			
-			hql +=		"AND ( ";
-			for(int i=0;i<searchItems.length; i++){
+
+			log.debug("getUserContactsBySearch: " + search);
+			// log.debug("getUserContactsBySearch: "+ userId);
+
+			String hql = "select count(u.user_id) from  Users u "
+					+ "WHERE u.deleted = 'false' ";
+
+			hql += "AND ( ";
+			for (int i = 0; i < searchItems.length; i++) {
 				if (i != 0) {
-					hql +=	" OR ";
+					hql += " OR ";
 				}
-				hql +=	"( " +
-							"lower(u.lastname) LIKE '" + StringUtils.lowerCase("%"+searchItems[i]+"%") + "' " +
-							"OR lower(u.firstname) LIKE '" + StringUtils.lowerCase("%"+searchItems[i]+"%") + "' " +
-							"OR lower(u.login) LIKE '" + StringUtils.lowerCase("%"+searchItems[i]+"%") + "' " +
-							"OR lower(u.adresses.email) LIKE '" + StringUtils.lowerCase("%"+searchItems[i]+"%") + "' " +
-						") ";
-								
+				hql += "( " + "lower(u.lastname) LIKE '"
+						+ StringUtils.lowerCase("%" + searchItems[i] + "%")
+						+ "' " + "OR lower(u.firstname) LIKE '"
+						+ StringUtils.lowerCase("%" + searchItems[i] + "%")
+						+ "' " + "OR lower(u.login) LIKE '"
+						+ StringUtils.lowerCase("%" + searchItems[i] + "%")
+						+ "' " + "OR lower(u.adresses.email) LIKE '"
+						+ StringUtils.lowerCase("%" + searchItems[i] + "%")
+						+ "' " + ") ";
+
 			}
-			hql += " )" ;
-			
-			log.debug("Show HQL: "+hql);						
-			
+			hql += " )";
+
+			log.debug("Show HQL: " + hql);
+
 			Object idf = PersistenceSessionUtil.createSession();
 			EntityManager session = PersistenceSessionUtil.getSession();
 			EntityTransaction tx = session.getTransaction();
 			tx.begin();
 			Query query = session.createQuery(hql);
-			
-			//log.debug("id: "+folderId);
-			
-			//query.setParameter("macomUserId", userId);
-			//query.setParameter("messageFolder", folderId);
-			//query
-						
+
+			// log.debug("id: "+folderId);
+
+			// query.setParameter("macomUserId", userId);
+			// query.setParameter("messageFolder", folderId);
+			// query
+
 			List ll = query.getResultList();
 			tx.commit();
 			PersistenceSessionUtil.closeSession(idf);
-			
-			
-			//log.error((Long)ll.get(0));
-			Long i = (Long)ll.get(0);
-			
+
+			// log.error((Long)ll.get(0));
+			Long i = (Long) ll.get(0);
+
 			return new Long(i);
 		} catch (Exception ex2) {
-			log.error("[getAllUserMax]: " , ex2);
+			log.error("[getAllUserMax]: ", ex2);
 		}
 		return null;
 	}
-	
+
 	/**
 	 * check for duplicates
+	 * 
 	 * @param DataValue
 	 * @return
 	 */
@@ -292,7 +296,8 @@ public class UsersDaoImpl {
 			EntityManager session = PersistenceSessionUtil.getSession();
 			EntityTransaction tx = session.getTransaction();
 			tx.begin();
-			Query query = session.createQuery("select c from Users as c where c.login = :DataValue AND c.deleted <> :deleted");
+			Query query = session
+					.createQuery("select c from Users as c where c.login = :DataValue AND c.deleted <> :deleted");
 			query.setParameter("DataValue", DataValue);
 			query.setParameter("deleted", "true");
 			int count = query.getResultList().size();
@@ -301,19 +306,17 @@ public class UsersDaoImpl {
 			PersistenceSessionUtil.closeSession(idf);
 			if (count != 0) {
 				return false;
-			}			
+			}
 		} catch (Exception ex2) {
-			log.error("[checkUserData]" ,ex2);
+			log.error("[checkUserData]", ex2);
 		}
 		return true;
 	}
 
-
 	public Users getUserByName(String login) {
 		try {
-			String hql = "SELECT u FROM Users as u " +
-					" where u.login = :login" +
-					" AND u.deleted <> :deleted";
+			String hql = "SELECT u FROM Users as u "
+					+ " where u.login = :login" + " AND u.deleted <> :deleted";
 			Object idf = PersistenceSessionUtil.createSession();
 			EntityManager session = PersistenceSessionUtil.getSession();
 			EntityTransaction tx = session.getTransaction();
@@ -324,22 +327,22 @@ public class UsersDaoImpl {
 			Users us = null;
 			try {
 				us = (Users) query.getSingleResult();
-		    } catch (NoResultException ex) {
-		    }
+			} catch (NoResultException ex) {
+			}
 			tx.commit();
 			PersistenceSessionUtil.closeSession(idf);
-			return us;			
+			return us;
 		} catch (Exception e) {
-			log.error("[getUserByAdressesId]",e);
+			log.error("[getUserByAdressesId]", e);
 		}
 		return null;
 	}
-	
+
 	public Users getUserByAdressesId(Long adresses_id) {
 		try {
-			String hql = "SELECT u FROM Users as u " +
-					" where u.adresses.adresses_id = :adresses_id" +
-					" AND u.deleted <> :deleted";
+			String hql = "SELECT u FROM Users as u "
+					+ " where u.adresses.adresses_id = :adresses_id"
+					+ " AND u.deleted <> :deleted";
 			Object idf = PersistenceSessionUtil.createSession();
 			EntityManager session = PersistenceSessionUtil.getSession();
 			EntityTransaction tx = session.getTransaction();
@@ -350,23 +353,24 @@ public class UsersDaoImpl {
 			Users us = null;
 			try {
 				us = (Users) query.getSingleResult();
-		    } catch (NoResultException ex) {
-		    }
+			} catch (NoResultException ex) {
+			}
 			tx.commit();
 			PersistenceSessionUtil.closeSession(idf);
-			return us;			
+			return us;
 		} catch (Exception e) {
-			log.error("[getUserByAdressesId]",e);
+			log.error("[getUserByAdressesId]", e);
 		}
 		return null;
 	}
-	
-	public Object getUserByHash (String hash) {
+
+	public Object getUserByHash(String hash) {
 		try {
-			if (hash.length()==0) return new Long(-5);
-			String hql = "SELECT u FROM Users as u " +
-					" where u.resethash = :resethash" +
-					" AND u.deleted <> :deleted";
+			if (hash.length() == 0)
+				return new Long(-5);
+			String hql = "SELECT u FROM Users as u "
+					+ " where u.resethash = :resethash"
+					+ " AND u.deleted <> :deleted";
 			Object idf = PersistenceSessionUtil.createSession();
 			EntityManager session = PersistenceSessionUtil.getSession();
 			EntityTransaction tx = session.getTransaction();
@@ -377,27 +381,28 @@ public class UsersDaoImpl {
 			Users us = null;
 			try {
 				us = (Users) query.getSingleResult();
-		    } catch (NoResultException ex) {
-		    }
+			} catch (NoResultException ex) {
+			}
 			tx.commit();
 			PersistenceSessionUtil.closeSession(idf);
-			if (us!=null) {
-				return us;		
+			if (us != null) {
+				return us;
 			} else {
 				return new Long(-5);
 			}
 		} catch (Exception e) {
-			log.error("[getUserByAdressesId]",e);
+			log.error("[getUserByAdressesId]", e);
 		}
 		return new Long(-1);
 	}
-	
-	public Object resetPassByHash (String hash, String pass) {
+
+	public Object resetPassByHash(String hash, String pass) {
 		try {
 			Object u = this.getUserByHash(hash);
 			if (u instanceof Users) {
 				Users us = (Users) u;
-				us.setPassword(ManageCryptStyle.getInstance().getInstanceOfCrypt().createPassPhrase(pass));
+				us.setPassword(manageCryptStyle.getInstanceOfCrypt()
+						.createPassPhrase(pass));
 				us.setResethash("");
 				UsersDaoImpl.getInstance().updateUser(us);
 				return new Long(-8);
@@ -405,7 +410,7 @@ public class UsersDaoImpl {
 				return u;
 			}
 		} catch (Exception e) {
-			log.error("[getUserByAdressesId]",e);
+			log.error("[getUserByAdressesId]", e);
 		}
 		return new Long(-1);
 	}
@@ -414,31 +419,29 @@ public class UsersDaoImpl {
 	 * @param search
 	 * @return
 	 */
-	public Long selectMaxFromUsersWithSearch(String search){
+	public Long selectMaxFromUsersWithSearch(String search) {
 		try {
-			
-			String hql = "select count(c.user_id) from Users c " +
-					"where c.deleted = 'false' " +
-					"AND (" +
-					"lower(c.login) LIKE :search " +
-					"OR lower(c.firstname) LIKE :search " +
-					"OR lower(c.lastname) LIKE :search " +
-					")";
-			
-			//get all users
+
+			String hql = "select count(c.user_id) from Users c "
+					+ "where c.deleted = 'false' " + "AND ("
+					+ "lower(c.login) LIKE :search "
+					+ "OR lower(c.firstname) LIKE :search "
+					+ "OR lower(c.lastname) LIKE :search " + ")";
+
+			// get all users
 			Object idf = PersistenceSessionUtil.createSession();
 			EntityManager session = PersistenceSessionUtil.getSession();
 			EntityTransaction tx = session.getTransaction();
 			tx.begin();
-			Query query = session.createQuery(hql); 
+			Query query = session.createQuery(hql);
 			query.setParameter("search", StringUtils.lowerCase(search));
 			List ll = query.getResultList();
 			tx.commit();
 			PersistenceSessionUtil.closeSession(idf);
-			log.info("selectMaxFromUsers"+(Long)ll.get(0));
-			return (Long)ll.get(0);				
+			log.info("selectMaxFromUsers" + ll.get(0));
+			return (Long) ll.get(0);
 		} catch (Exception ex2) {
-			log.error("[selectMaxFromUsers] ",ex2);
+			log.error("[selectMaxFromUsers] ", ex2);
 		}
 		return null;
 	}

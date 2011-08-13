@@ -44,6 +44,8 @@ public class LdapLoginManagement {
 	private Usermanagement userManagement;
 	@Autowired
 	private Statemanagement statemanagement;
+	@Autowired
+	private Organisationmanagement organisationmanagement;
 
 	// External User Types
 	public static final String EXTERNAL_USER_TYPE_LDAP = "LDAP";
@@ -693,8 +695,8 @@ public class LdapLoginManagement {
 							.getConf_value()).longValue();
 			log.debug("Adding user '" + newUserId + "' to organization '"
 					+ organisation_id + "'");
-			Organisationmanagement.getInstance().addUserToOrganisation(
-					newUserId, organisation_id, newUserId, "");
+			organisationmanagement.addUserToOrganisation(newUserId,
+					organisation_id, newUserId, "");
 		}
 
 		return newUserId;

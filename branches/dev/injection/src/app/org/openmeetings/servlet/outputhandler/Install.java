@@ -326,8 +326,6 @@ public class Install extends VelocityViewServlet {
 
 					importInitvalues.loadErrorMappingsFromXML(filePath);
 
-					if (true)
-						return null;
 					importInitvalues.loadSalutations();
 
 					importInitvalues.loadConfiguration(crypt_ClassName,
@@ -347,6 +345,10 @@ public class Install extends VelocityViewServlet {
 
 					importInitvalues.loadInitUserAndOrganisation(username,
 							userpass, useremail, orgname, timeZone);
+
+					if (true)
+						return null;
+
 					importInitvalues.loadDefaultRooms();
 
 					// AppointMent Categories

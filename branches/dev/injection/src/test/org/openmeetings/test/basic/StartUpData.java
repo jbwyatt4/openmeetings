@@ -16,6 +16,10 @@ public class StartUpData extends TestCase {
 	private Statemanagement statemanagement;
 	@Autowired
 	private Navimanagement navimanagement;
+	@Autowired
+	private Salutationmanagement salutationmanagement;
+	@Autowired
+	private Organisationmanagement organisationmanagement;
 
 	public StartUpData(String testname) {
 		super(testname);
@@ -55,8 +59,8 @@ public class StartUpData extends TestCase {
 		navimanagement.addMainStructure("roomadmin", 1, 186, true, false, 3,
 				"roomadmin", 4, "false");
 
-		Salutationmanagement.getInstance().addUserSalutation("Herr", 261);
-		Salutationmanagement.getInstance().addUserSalutation("Frau", 262);
+		salutationmanagement.addUserSalutation("Herr", 261);
+		salutationmanagement.addUserSalutation("Frau", 262);
 
 		// TODO: Load States from seperate XML-File
 		statemanagement.addState("Deutschland");
@@ -76,11 +80,11 @@ public class StartUpData extends TestCase {
 				"", "", "", false, "", false, "", "", false, true);
 
 		// Add default group
-		Long organisation_id = Organisationmanagement.getInstance()
-				.addOrganisation("default", user_id);
+		Long organisation_id = organisationmanagement.addOrganisation(
+				"default", user_id);
 
 		// Add user to default group
-		Long organisation_usersid = Organisationmanagement.getInstance()
+		Long organisation_usersid = organisationmanagement
 				.addUserToOrganisation(new Long(1), organisation_id,
 						new Long(1), "");
 

@@ -11,6 +11,8 @@ public class TestAdresses extends TestCase {
 
 	@Autowired
 	private Statemanagement statemanagement;
+	@Autowired
+	private Addressmanagement addressmanagement;
 
 	private static final Logger log = Logger.getLogger(TestAdresses.class);
 
@@ -25,9 +27,9 @@ public class TestAdresses extends TestCase {
 		System.out.println("states_id " + states_id);
 		log.error("states_id: " + states_id);
 
-		long adress_id = Addressmanagement.getInstance().saveAddress("street",
-				"zip", "town", states_id, "additionalname", "comment", "fax",
-				"phone", "email");
+		long adress_id = addressmanagement
+				.saveAddress("street", "zip", "town", states_id,
+						"additionalname", "comment", "fax", "phone", "email");
 
 		System.out.println("adress_id " + adress_id);
 		log.error("adress_id: " + adress_id);

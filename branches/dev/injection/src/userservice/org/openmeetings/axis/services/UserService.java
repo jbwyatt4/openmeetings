@@ -46,6 +46,10 @@ public class UserService {
 	private Fieldmanagment fieldmanagment;
 	@Autowired
 	private ErrorManagement errorManagement;
+	@Autowired
+	private Organisationmanagement organisationmanagement;
+	@Autowired
+	private Addressmanagement addressmanagement;
 
 	/**
 	 * load this session id before doing anything else
@@ -333,7 +337,7 @@ public class UserService {
 				if (ad != null) {
 					ad.setDeleted("true");
 
-					Addressmanagement.getInstance().updateAdress(ad);
+					addressmanagement.updateAdress(ad);
 					log.debug("deleteUserId : Address updated");
 
 				}
@@ -385,7 +389,7 @@ public class UserService {
 				if (ad != null) {
 					ad.setDeleted("true");
 
-					Addressmanagement.getInstance().updateAdress(ad);
+					addressmanagement.updateAdress(ad);
 					log.debug("deleteUserId : Address updated");
 
 				}
@@ -904,9 +908,8 @@ public class UserService {
 			if (AuthLevelmanagement.getInstance().checkWebServiceLevel(
 					user_level)) {
 
-				return Organisationmanagement.getInstance()
-						.addUserToOrganisation(user_id, organisation_id,
-								users_id, comment);
+				return organisationmanagement.addUserToOrganisation(user_id,
+						organisation_id, users_id, comment);
 
 			} else {
 				return new Long(-26);
@@ -925,7 +928,7 @@ public class UserService {
 			Long user_level = userManagement.getUserLevelByID(users_id);
 			if (AuthLevelmanagement.getInstance().checkWebServiceLevel(
 					user_level)) {
-				return Organisationmanagement.getInstance()
+				return organisationmanagement
 						.getUsersSearchResultByOrganisationId(organisation_id,
 								start, max, orderby, asc);
 			} else {
