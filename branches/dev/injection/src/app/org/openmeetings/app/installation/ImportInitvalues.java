@@ -27,7 +27,9 @@ import org.openmeetings.app.remote.red5.ScopeApplicationAdapter;
 import org.red5.logging.Red5LoggerFactory;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class ImportInitvalues {
 
 	private static final Logger log = Red5LoggerFactory.getLogger(
@@ -43,21 +45,10 @@ public class ImportInitvalues {
 
 	private static final String nameOfErrorFile = "errorvalues.xml";
 
-	private static ImportInitvalues instance;
 	@Autowired
 	private Configurationmanagement cfgManagement;
 	@Autowired
 	private Usermanagement userManagement;
-
-	private ImportInitvalues() {
-	}
-
-	public static synchronized ImportInitvalues getInstance() {
-		if (instance == null) {
-			instance = new ImportInitvalues();
-		}
-		return instance;
-	}
 
 	public void loadMainMenu() {
 

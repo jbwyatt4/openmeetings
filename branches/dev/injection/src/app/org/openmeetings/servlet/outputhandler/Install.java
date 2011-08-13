@@ -20,8 +20,12 @@ import org.openmeetings.app.persistence.beans.basic.OmTimeZone;
 import org.openmeetings.app.remote.red5.ScopeApplicationAdapter;
 import org.red5.logging.Red5LoggerFactory;
 import org.slf4j.Logger;
+import org.springframework.context.ApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
 
 public class Install extends VelocityViewServlet {
+
+	private ImportInitvalues importInitvalues;
 
 	private static final Logger log = Red5LoggerFactory.getLogger(
 			Install.class, ScopeApplicationAdapter.webAppRootKey);
@@ -39,6 +43,12 @@ public class Install extends VelocityViewServlet {
 			throws ServletException, IOException {
 
 		try {
+
+			ApplicationContext context = WebApplicationContextUtils
+					.getWebApplicationContext(getServletContext());
+			importInitvalues = (ImportInitvalues) context
+					.getBean("importInitvalues");
+
 			ctx.put("APPLICATION_NAME", getServletContext()
 					.getServletContextName());
 			ctx.put("APPLICATION_ROOT",
@@ -95,8 +105,8 @@ public class Install extends VelocityViewServlet {
 					if (i == 0) {
 						String filePath = getServletContext().getRealPath("/")
 								+ ImportInitvalues.languageFolderName;
-						LinkedHashMap<Integer, LinkedHashMap<String, Object>> allLanguagesAll = ImportInitvalues
-								.getInstance().getLanguageFiles(filePath);
+						LinkedHashMap<Integer, LinkedHashMap<String, Object>> allLanguagesAll = importInitvalues
+								.getLanguageFiles(filePath);
 						LinkedHashMap<Integer, String> allLanguages = new LinkedHashMap<Integer, String>();
 						for (Iterator<Integer> iter = allLanguagesAll.keySet()
 								.iterator(); iter.hasNext();) {
@@ -112,8 +122,8 @@ public class Install extends VelocityViewServlet {
 						allFonts.put("Arial", "Arial");
 
 						LinkedHashMap<String, String> allTimeZones = new LinkedHashMap<String, String>();
-						List<OmTimeZone> omTimeZoneList = ImportInitvalues
-								.getInstance().getTimeZones(filePath);
+						List<OmTimeZone> omTimeZoneList = importInitvalues
+								.getTimeZones(filePath);
 						log.debug("omTimeZoneList :: " + omTimeZoneList.size());
 						for (OmTimeZone omTimeZone : omTimeZoneList) {
 							String labelName = omTimeZone.getJname() + " ("
@@ -150,8 +160,8 @@ public class Install extends VelocityViewServlet {
 
 					String filePath = getServletContext().getRealPath("/")
 							+ ImportInitvalues.languageFolderName;
-					LinkedHashMap<Integer, LinkedHashMap<String, Object>> allLanguagesAll = ImportInitvalues
-							.getInstance().getLanguageFiles(filePath);
+					LinkedHashMap<Integer, LinkedHashMap<String, Object>> allLanguagesAll = importInitvalues
+							.getLanguageFiles(filePath);
 					LinkedHashMap<Integer, String> allLanguages = new LinkedHashMap<Integer, String>();
 					for (Iterator<Integer> iter = allLanguagesAll.keySet()
 							.iterator(); iter.hasNext();) {
@@ -167,8 +177,8 @@ public class Install extends VelocityViewServlet {
 					allFonts.put("Arial", "Arial");
 
 					LinkedHashMap<String, String> allTimeZones = new LinkedHashMap<String, String>();
-					List<OmTimeZone> omTimeZoneList = ImportInitvalues
-							.getInstance().getTimeZones(filePath);
+					List<OmTimeZone> omTimeZoneList = importInitvalues
+							.getTimeZones(filePath);
 					log.debug("omTimeZoneList :: " + omTimeZoneList.size());
 					for (OmTimeZone omTimeZone : omTimeZoneList) {
 						String labelName = omTimeZone.getJname() + " ("
@@ -310,39 +320,35 @@ public class Install extends VelocityViewServlet {
 							"url_feed");
 					String url_feed2 = getServletContext().getInitParameter(
 							"url_feed2");
-					ImportInitvalues.getInstance().loadInitLanguages(filePath);
-					ImportInitvalues.getInstance().loadMainMenu();
-					ImportInitvalues.getInstance().loadErrorMappingsFromXML(
-							filePath);
-					ImportInitvalues.getInstance().loadSalutations();
+					importInitvalues.loadInitLanguages(filePath);
+					importInitvalues.loadMainMenu();
+					importInitvalues.loadErrorMappingsFromXML(filePath);
+					importInitvalues.loadSalutations();
 
-					ImportInitvalues.getInstance().loadConfiguration(
-							crypt_ClassName, configdefault, configsmtp,
-							configsmtpport, configreferer, configmailuser,
-							configmailpass, mailusetls, configdefaultLang,
-							swf_path, im_path, url_feed, url_feed2,
-							sendEmailAtRegister, sendEmailWithVerficationCode,
-							default_export_font, screen_viewer, ffmpeg_path,
-							sox_path, sip_enable, sip_realm, sip_port,
-							sip_proxyname, sip_tunnel, sip_codebase,
-							sip_forcetunnel, sip_openxg_enable,
+					importInitvalues.loadConfiguration(crypt_ClassName,
+							configdefault, configsmtp, configsmtpport,
+							configreferer, configmailuser, configmailpass,
+							mailusetls, configdefaultLang, swf_path, im_path,
+							url_feed, url_feed2, sendEmailAtRegister,
+							sendEmailWithVerficationCode, default_export_font,
+							screen_viewer, ffmpeg_path, sox_path, sip_enable,
+							sip_realm, sip_port, sip_proxyname, sip_tunnel,
+							sip_codebase, sip_forcetunnel, sip_openxg_enable,
 							openxg_wrapper_url, openxg_client_id,
 							openxg_client_secret, openxg_client_domain,
 							openxg_community_code, openxg_language_code,
 							openxg_adminid, sip_language_phonecode,
 							sip_phonerange_start, sip_phonerange);
 
-					ImportInitvalues.getInstance().loadInitUserAndOrganisation(
-							username, userpass, useremail, orgname, timeZone);
-					ImportInitvalues.getInstance().loadDefaultRooms();
+					importInitvalues.loadInitUserAndOrganisation(username,
+							userpass, useremail, orgname, timeZone);
+					importInitvalues.loadDefaultRooms();
 
 					// AppointMent Categories
-					ImportInitvalues.getInstance()
-							.loadInitAppointmentCategories();
+					importInitvalues.loadInitAppointmentCategories();
 
 					// Appointment Remindertypes
-					ImportInitvalues.getInstance()
-							.loadInitAppointmentReminderTypes();
+					importInitvalues.loadInitAppointmentReminderTypes();
 
 					// update to next step
 					log.error("add level to install file");
