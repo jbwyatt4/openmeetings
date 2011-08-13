@@ -25,6 +25,11 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 
 public class Install extends VelocityViewServlet {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3684381243236013771L;
+
 	private ImportInitvalues importInitvalues;
 
 	private static final Logger log = Red5LoggerFactory.getLogger(
@@ -353,9 +358,6 @@ public class Install extends VelocityViewServlet {
 
 					// Appointment Remindertypes
 					importInitvalues.loadInitAppointmentReminderTypes();
-
-					if (true)
-						return null;
 
 					// update to next step
 					log.error("add level to install file");

@@ -734,13 +734,8 @@ public class ImportInitvalues {
 
 		this.loadTimeZoneFiles(filePath);
 
-		// String listLanguages[] = {"deutsch", "english", "french", "spanish"};
-
 		LinkedHashMap<Integer, LinkedHashMap<String, Object>> listlanguages = this
 				.getLanguageFiles(filePath);
-
-		// TODO empty tables before launch
-		// Languagemanagement.getInstance().emptyFieldLanguage();
 
 		boolean langFieldIdIsInited = false;
 
