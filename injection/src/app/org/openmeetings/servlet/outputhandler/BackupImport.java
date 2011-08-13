@@ -102,6 +102,10 @@ public class BackupImport extends HttpServlet {
 	private Organisationmanagement organisationmanagement;
 	@Autowired
 	private Roommanagement roommanagement;
+	@Autowired
+	private AppointmentCategoryDaoImpl appointmentCategoryDaoImpl;
+	@Autowired
+	private AppointmentReminderTypDaoImpl appointmentReminderTypDaoImpl;
 
 	private final HashMap<Long, Long> usersMap = new HashMap<Long, Long>();
 	private final HashMap<Long, Long> organisationsMap = new HashMap<Long, Long>();
@@ -1674,16 +1678,14 @@ public class BackupImport extends HttpServlet {
 						app.setAppointmentLocation(appointmentLocation);
 						app.setAppointmentName(appointmentName);
 						app.setAppointmentDescription(appointmentDescription);
-						app.setAppointmentCategory(AppointmentCategoryDaoImpl
-								.getInstance().getAppointmentCategoryById(
-										categoryId));
+						app.setAppointmentCategory(appointmentCategoryDaoImpl
+								.getAppointmentCategoryById(categoryId));
 						app.setAppointmentStarttime(appointmentStarttime);
 						app.setAppointmentEndtime(appointmentEndtime);
 						app.setDeleted(deleted);
 						app.setComment(comment);
-						app.setRemind(AppointmentReminderTypDaoImpl
-								.getInstance().getAppointmentReminderTypById(
-										typId));
+						app.setRemind(appointmentReminderTypDaoImpl
+								.getAppointmentReminderTypById(typId));
 						app.setIsDaily(isDaily);
 						app.setIsWeekly(isWeekly);
 						app.setIsMonthly(isMonthly);

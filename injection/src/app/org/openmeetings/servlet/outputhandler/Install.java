@@ -348,14 +348,14 @@ public class Install extends VelocityViewServlet {
 
 					importInitvalues.loadDefaultRooms();
 
-					if (true)
-						return null;
-
 					// AppointMent Categories
 					importInitvalues.loadInitAppointmentCategories();
 
 					// Appointment Remindertypes
 					importInitvalues.loadInitAppointmentReminderTypes();
+
+					if (true)
+						return null;
 
 					// update to next step
 					log.error("add level to install file");

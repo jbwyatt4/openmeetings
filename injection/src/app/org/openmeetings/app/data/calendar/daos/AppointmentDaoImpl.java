@@ -47,6 +47,10 @@ public class AppointmentDaoImpl {
 	private Usermanagement userManagement;
 	@Autowired
 	private OmTimeZoneDaoImpl omTimeZoneDaoImpl;
+	@Autowired
+	private AppointmentCategoryDaoImpl appointmentCategoryDaoImpl;
+	@Autowired
+	private AppointmentReminderTypDaoImpl appointmentReminderTypDaoImpl;
 
 	/*
 	 * insert, update, delete, select
@@ -206,7 +210,7 @@ public class AppointmentDaoImpl {
 			ap.setAppointmentStarttime(appointmentstart);
 			ap.setAppointmentEndtime(appointmentend);
 			ap.setAppointmentDescription(appointmentDescription);
-			ap.setRemind(AppointmentReminderTypDaoImpl.getInstance()
+			ap.setRemind(appointmentReminderTypDaoImpl
 					.getAppointmentReminderTypById(remind));
 			ap.setStarttime(new Date());
 			ap.setDeleted("false");
@@ -218,7 +222,7 @@ public class AppointmentDaoImpl {
 			ap.setIsPasswordProtected(isPasswordProtected);
 			ap.setPassword(password);
 			ap.setUserId(UsersDaoImpl.getInstance().getUser(userId));
-			ap.setAppointmentCategory(AppointmentCategoryDaoImpl.getInstance()
+			ap.setAppointmentCategory(appointmentCategoryDaoImpl
 					.getAppointmentCategoryById(categoryId));
 			ap.setRoom(room);
 			ap.setIsConnectedEvent(isConnectedEvent);
@@ -427,10 +431,10 @@ public class AppointmentDaoImpl {
 
 			Appointment ap = this.getAppointmentById(appointmentId);
 
-			AppointmentReminderTyps appointmentReminderTyps = AppointmentReminderTypDaoImpl
-					.getInstance().getAppointmentReminderTypById(remind);
-			AppointmentCategory appointmentCategory = AppointmentCategoryDaoImpl
-					.getInstance().getAppointmentCategoryById(categoryId);
+			AppointmentReminderTyps appointmentReminderTyps = appointmentReminderTypDaoImpl
+					.getAppointmentReminderTypById(remind);
+			AppointmentCategory appointmentCategory = appointmentCategoryDaoImpl
+					.getAppointmentCategoryById(categoryId);
 
 			Calendar cal = Calendar.getInstance();
 			cal.setTimeZone(TimeZone.getTimeZone(iCalTimeZone));

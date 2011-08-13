@@ -15,8 +15,8 @@ import org.openmeetings.app.data.basic.FieldLanguageDaoImpl;
 import org.openmeetings.app.data.basic.Fieldmanagment;
 import org.openmeetings.app.data.basic.Navimanagement;
 import org.openmeetings.app.data.basic.dao.OmTimeZoneDaoImpl;
-import org.openmeetings.app.data.calendar.management.AppointmentCategoryLogic;
-import org.openmeetings.app.data.calendar.management.AppointmentRemindertypeLogic;
+import org.openmeetings.app.data.calendar.daos.AppointmentCategoryDaoImpl;
+import org.openmeetings.app.data.calendar.daos.AppointmentReminderTypDaoImpl;
 import org.openmeetings.app.data.conference.Roommanagement;
 import org.openmeetings.app.data.user.Organisationmanagement;
 import org.openmeetings.app.data.user.Salutationmanagement;
@@ -65,6 +65,10 @@ public class ImportInitvalues {
 	private Organisationmanagement organisationmanagement;
 	@Autowired
 	private Roommanagement roommanagement;
+	@Autowired
+	private AppointmentCategoryDaoImpl appointmentCategoryDaoImpl;
+	@Autowired
+	private AppointmentReminderTypDaoImpl appointmentReminderTypDaoImpl;
 
 	public void loadMainMenu() {
 
@@ -174,17 +178,20 @@ public class ImportInitvalues {
 
 		Element root = document.getRootElement();
 
-		for (Iterator it = root.elementIterator("row"); it.hasNext();) {
+		for (@SuppressWarnings("unchecked")
+		Iterator<Element> it = root.elementIterator("row"); it.hasNext();) {
 
-			Element row = (Element) it.next();
+			Element row = it.next();
 
 			Long errorvalues_id = null;
 			Long fieldvalues_id = null;
 			Long errortype_id = null;
 
-			for (Iterator itSub = row.elementIterator("field"); itSub.hasNext();) {
+			for (@SuppressWarnings("unchecked")
+			Iterator<Element> itSub = row.elementIterator("field"); itSub
+					.hasNext();) {
 
-				Element field = (Element) itSub.next();
+				Element field = itSub.next();
 
 				String name = field.attributeValue("name");
 				String text = field.getText();
@@ -565,7 +572,8 @@ public class ImportInitvalues {
 
 		Element root = document.getRootElement();
 
-		for (Iterator it = root.elementIterator("country"); it.hasNext();) {
+		for (@SuppressWarnings("rawtypes")
+		Iterator it = root.elementIterator("country"); it.hasNext();) {
 
 			Element item = (Element) it.next();
 			String country = item.attributeValue("name");
@@ -583,7 +591,8 @@ public class ImportInitvalues {
 
 		Element root = document.getRootElement();
 
-		for (Iterator it = root.elementIterator("timezone"); it.hasNext();) {
+		for (@SuppressWarnings("rawtypes")
+		Iterator it = root.elementIterator("timezone"); it.hasNext();) {
 
 			Element item = (Element) it.next();
 			String timeZoneName = item.attributeValue("name");
@@ -609,7 +618,8 @@ public class ImportInitvalues {
 
 		Element root = document.getRootElement();
 
-		for (Iterator it = root.elementIterator("timezone"); it.hasNext();) {
+		for (@SuppressWarnings("rawtypes")
+		Iterator it = root.elementIterator("timezone"); it.hasNext();) {
 
 			Element item = (Element) it.next();
 			String timeZoneName = item.attributeValue("name");
@@ -648,7 +658,8 @@ public class ImportInitvalues {
 
 		Element root = document.getRootElement();
 
-		for (Iterator<Element> it = root.elementIterator("lang"); it.hasNext();) {
+		for (@SuppressWarnings("unchecked")
+		Iterator<Element> it = root.elementIterator("lang"); it.hasNext();) {
 
 			Element item = it.next();
 			String country = item.getText();
@@ -678,8 +689,8 @@ public class ImportInitvalues {
 		log.debug("ImportInitValues.loadInitAppointmentCategories");
 
 		try {
-			AppointmentCategoryLogic.getInstance().createAppointmentCategory(
-					"default", "default", new Long(-1));
+			appointmentCategoryDaoImpl.addAppointmentCategory(new Long(-1),
+					"default", "default");
 		} catch (Exception e) {
 			log.error("Could not create AppointMentcategories");
 			return;
@@ -698,14 +709,12 @@ public class ImportInitvalues {
 		log.debug("ImportInitValues.loadInitAppointmentReminderTypes");
 
 		try {
-			AppointmentRemindertypeLogic.getInstance()
-					.createAppointMentReminderType(-1L, "none", "no reminder");
-			AppointmentRemindertypeLogic.getInstance()
-					.createAppointMentReminderType(-1L, "simple email",
-							"simple email notification");
-			AppointmentRemindertypeLogic.getInstance()
-					.createAppointMentReminderType(-1L, "iCal email",
-							"Ical notification");
+			appointmentReminderTypDaoImpl.addAppointmentReminderTyps(-1L,
+					"none", "no reminder");
+			appointmentReminderTypDaoImpl.addAppointmentReminderTyps(-1L,
+					"simple email", "simple email notification");
+			appointmentReminderTypDaoImpl.addAppointmentReminderTyps(-1L,
+					"iCal email", "Ical notification");
 
 		} catch (Exception e) {
 			log.error("Could not create ReminderType");
@@ -760,7 +769,8 @@ public class ImportInitvalues {
 
 			Element root = document.getRootElement();
 
-			for (Iterator it = root.elementIterator("string"); it.hasNext();) {
+			for (@SuppressWarnings("rawtypes")
+			Iterator it = root.elementIterator("string"); it.hasNext();) {
 				Element item = (Element) it.next();
 				// log.error(item.getName());
 
@@ -768,7 +778,8 @@ public class ImportInitvalues {
 				String name = item.attributeValue("name");
 				String value = "";
 
-				for (Iterator t2 = item.elementIterator("value"); t2.hasNext();) {
+				for (@SuppressWarnings("rawtypes")
+				Iterator t2 = item.elementIterator("value"); t2.hasNext();) {
 					Element val = (Element) t2.next();
 					value = val.getText();
 				}
