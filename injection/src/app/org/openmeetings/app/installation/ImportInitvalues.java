@@ -47,6 +47,8 @@ public class ImportInitvalues {
 	private Configurationmanagement cfgManagement;
 	@Autowired
 	private Usermanagement userManagement;
+	@Autowired
+	private Fieldmanagment fieldmanagment;
 
 	public void loadMainMenu() {
 
@@ -775,11 +777,11 @@ public class ImportInitvalues {
 
 				// Only do that for the first field-set
 				if (!langFieldIdIsInited) {
-					Fieldmanagment.getInstance().addField(name);
+					fieldmanagment.addField(name);
 				}
 
-				Fieldmanagment.getInstance().addFieldValueByFieldAndLanguage(
-						id, languages_id, value);
+				fieldmanagment.addFieldValueByFieldAndLanguage(id,
+						languages_id, value);
 
 			}
 			log.debug("Lang ADDED: " + lang);

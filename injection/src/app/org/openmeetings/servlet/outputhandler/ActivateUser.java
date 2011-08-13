@@ -1,4 +1,5 @@
 package org.openmeetings.servlet.outputhandler;
+
 import java.io.IOException;
 import java.util.Date;
 
@@ -22,102 +23,132 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 public class ActivateUser extends VelocityViewServlet {
 
-        /**
+	/**
          * 
          */
-        private static final long serialVersionUID = -8892729047921796170L;
-        private static Logger log = Red5LoggerFactory.getLogger(ActivateUser.class, ScopeApplicationAdapter.webAppRootKey);
-        @Autowired
-        private Configurationmanagement cfgManagement;
-        @Autowired
-        private Usermanagement userManagement;
-        
-        @Override
-        public Template handleRequest(HttpServletRequest httpServletRequest,
-                        HttpServletResponse httpServletResponse, Context ctx) throws ServletException,
-                        IOException {
-                
-                try {
-                        String hash = httpServletRequest.getParameter("u");
-                        ServletContext context = getServletContext();
-                        String loginURL = context.getInitParameter("webAppRootKey");
-                        
-                        ctx.put("APPLICATION_NAME", context.getServletContextName());
-                        if (hash == null) {
-                                //No hash
-                                Long default_lang_id = Long.valueOf(cfgManagement.
-                                        getConfKey(3,"default_lang_id").getConf_value()).longValue();
-                                Fieldlanguagesvalues labelid669 = Fieldmanagment.getInstance().getFieldByIdAndLanguage(new Long(669), default_lang_id);
-                                Fieldlanguagesvalues labelid672 = Fieldmanagment.getInstance().getFieldByIdAndLanguage(new Long(672), default_lang_id);
-                                
-                                ctx.put("message", labelid669.getValue());
-                                ctx.put("link", "<a href='"+loginURL+"'>"+ labelid672.getValue() + "</a>");
-                                return getVelocityEngine().getTemplate("activation_template.vm");
-                        }
-                        //
-                        Users user = userManagement.getUserByActivationHash(hash);
-                        
-                        if (user == null) {
-                                //No User Found with this Hash
-                                Long default_lang_id = Long.valueOf(cfgManagement.
-                                        getConfKey(3,"default_lang_id").getConf_value()).longValue();
-                                
-                                Fieldlanguagesvalues labelid669 = Fieldmanagment.getInstance().getFieldByIdAndLanguage(new Long(669), default_lang_id);
-                                Fieldlanguagesvalues labelid672 = Fieldmanagment.getInstance().getFieldByIdAndLanguage(new Long(672), default_lang_id);
-                                
-                                
-                                ctx.put("message", labelid669.getValue());
-                                ctx.put("link", "<a href='"+loginURL+"'>"+ labelid672.getValue() + "</a>");
-                                return getVelocityEngine().getTemplate("activation_template.vm");
-                                
-                        } else if (user.getStatus() == 1) {
-                                //already activated
-                                Long default_lang_id = Long.valueOf(cfgManagement.
-                                        getConfKey(3,"default_lang_id").getConf_value()).longValue();
-                                
-                                Fieldlanguagesvalues labelid670 = Fieldmanagment.getInstance().getFieldByIdAndLanguage(new Long(670), default_lang_id);
-                                Fieldlanguagesvalues labelid672 = Fieldmanagment.getInstance().getFieldByIdAndLanguage(new Long(672), default_lang_id);
-                                
-                                ctx.put("message", labelid670.getValue());
-                                ctx.put("link", "<a href='"+loginURL+"'>"+ labelid672.getValue() + "</a>");
-                                return getVelocityEngine().getTemplate("activation_template.vm");
-                                
-                        } else if (user.getStatus() == 0) {
-                                //activate
-                                user.setStatus(1);
-                                user.setUpdatetime(new Date());
+	private static final long serialVersionUID = -8892729047921796170L;
+	private static Logger log = Red5LoggerFactory.getLogger(ActivateUser.class,
+			ScopeApplicationAdapter.webAppRootKey);
+	@Autowired
+	private Configurationmanagement cfgManagement;
+	@Autowired
+	private Usermanagement userManagement;
+	@Autowired
+	private Fieldmanagment fieldmanagment;
 
-                                userManagement.updateUser(user);
-                                
-                                Long default_lang_id = Long.valueOf(cfgManagement.
-                                        getConfKey(3,"default_lang_id").getConf_value()).longValue();
-                                
-                                Fieldlanguagesvalues labelid671 = Fieldmanagment.getInstance().getFieldByIdAndLanguage(new Long(671), default_lang_id);
-                                Fieldlanguagesvalues labelid672 = Fieldmanagment.getInstance().getFieldByIdAndLanguage(new Long(672), default_lang_id);
-                                
-                                ctx.put("message", labelid671.getValue());
-                                ctx.put("link", "<a href='"+loginURL+"'>"+ labelid672.getValue() + "</a>");
-                                return getVelocityEngine().getTemplate("activation_template.vm");
-                                
-                        } else {
-                                //unkown Status
-                                Long default_lang_id = Long.valueOf(cfgManagement.
-                                        getConfKey(3,"default_lang_id").getConf_value()).longValue();
-                                
-                                Fieldlanguagesvalues labelid672 = Fieldmanagment.getInstance().getFieldByIdAndLanguage(new Long(672), default_lang_id);
-                                
-                                ctx.put("message", "Unkown Status");
-                                ctx.put("link", "<a href='"+loginURL+"'>"+ labelid672.getValue() + "</a>");
-                                return getVelocityEngine().getTemplate("activation_template.vm");
-                                
-                        }
-                        
-                } catch (Exception err) {
-                        log.error("[ActivateUser]",err);
-                        err.printStackTrace();
-                }
-                return null;
-        }
+	@Override
+	public Template handleRequest(HttpServletRequest httpServletRequest,
+			HttpServletResponse httpServletResponse, Context ctx)
+			throws ServletException, IOException {
+
+		try {
+			String hash = httpServletRequest.getParameter("u");
+			ServletContext context = getServletContext();
+			String loginURL = context.getInitParameter("webAppRootKey");
+
+			ctx.put("APPLICATION_NAME", context.getServletContextName());
+			if (hash == null) {
+				// No hash
+				Long default_lang_id = Long.valueOf(
+						cfgManagement.getConfKey(3, "default_lang_id")
+								.getConf_value()).longValue();
+				Fieldlanguagesvalues labelid669 = fieldmanagment
+						.getFieldByIdAndLanguage(new Long(669), default_lang_id);
+				Fieldlanguagesvalues labelid672 = fieldmanagment
+						.getFieldByIdAndLanguage(new Long(672), default_lang_id);
+
+				ctx.put("message", labelid669.getValue());
+				ctx.put("link",
+						"<a href='" + loginURL + "'>" + labelid672.getValue()
+								+ "</a>");
+				return getVelocityEngine()
+						.getTemplate("activation_template.vm");
+			}
+			//
+			Users user = userManagement.getUserByActivationHash(hash);
+
+			if (user == null) {
+				// No User Found with this Hash
+				Long default_lang_id = Long.valueOf(
+						cfgManagement.getConfKey(3, "default_lang_id")
+								.getConf_value()).longValue();
+
+				Fieldlanguagesvalues labelid669 = fieldmanagment
+						.getFieldByIdAndLanguage(new Long(669), default_lang_id);
+				Fieldlanguagesvalues labelid672 = fieldmanagment
+						.getFieldByIdAndLanguage(new Long(672), default_lang_id);
+
+				ctx.put("message", labelid669.getValue());
+				ctx.put("link",
+						"<a href='" + loginURL + "'>" + labelid672.getValue()
+								+ "</a>");
+				return getVelocityEngine()
+						.getTemplate("activation_template.vm");
+
+			} else if (user.getStatus() == 1) {
+				// already activated
+				Long default_lang_id = Long.valueOf(
+						cfgManagement.getConfKey(3, "default_lang_id")
+								.getConf_value()).longValue();
+
+				Fieldlanguagesvalues labelid670 = fieldmanagment
+						.getFieldByIdAndLanguage(new Long(670), default_lang_id);
+				Fieldlanguagesvalues labelid672 = fieldmanagment
+						.getFieldByIdAndLanguage(new Long(672), default_lang_id);
+
+				ctx.put("message", labelid670.getValue());
+				ctx.put("link",
+						"<a href='" + loginURL + "'>" + labelid672.getValue()
+								+ "</a>");
+				return getVelocityEngine()
+						.getTemplate("activation_template.vm");
+
+			} else if (user.getStatus() == 0) {
+				// activate
+				user.setStatus(1);
+				user.setUpdatetime(new Date());
+
+				userManagement.updateUser(user);
+
+				Long default_lang_id = Long.valueOf(
+						cfgManagement.getConfKey(3, "default_lang_id")
+								.getConf_value()).longValue();
+
+				Fieldlanguagesvalues labelid671 = fieldmanagment
+						.getFieldByIdAndLanguage(new Long(671), default_lang_id);
+				Fieldlanguagesvalues labelid672 = fieldmanagment
+						.getFieldByIdAndLanguage(new Long(672), default_lang_id);
+
+				ctx.put("message", labelid671.getValue());
+				ctx.put("link",
+						"<a href='" + loginURL + "'>" + labelid672.getValue()
+								+ "</a>");
+				return getVelocityEngine()
+						.getTemplate("activation_template.vm");
+
+			} else {
+				// unkown Status
+				Long default_lang_id = Long.valueOf(
+						cfgManagement.getConfKey(3, "default_lang_id")
+								.getConf_value()).longValue();
+
+				Fieldlanguagesvalues labelid672 = fieldmanagment
+						.getFieldByIdAndLanguage(new Long(672), default_lang_id);
+
+				ctx.put("message", "Unkown Status");
+				ctx.put("link",
+						"<a href='" + loginURL + "'>" + labelid672.getValue()
+								+ "</a>");
+				return getVelocityEngine()
+						.getTemplate("activation_template.vm");
+
+			}
+
+		} catch (Exception err) {
+			log.error("[ActivateUser]", err);
+			err.printStackTrace();
+		}
+		return null;
+	}
 
 }
-

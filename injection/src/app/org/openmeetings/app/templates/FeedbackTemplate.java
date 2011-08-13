@@ -34,7 +34,7 @@ public class FeedbackTemplate extends VelocityLoader{
         try {
         	
         	//TODO: Finish Feedback - Template
-        	//Fieldlanguagesvalues fValue = Fieldmanagment.getInstance().getFieldByIdAndLanguage(new Long(499), new Long(default_lang_id));
+        	//Fieldlanguagesvalues fValue = fieldmanagment.getFieldByIdAndLanguage(new Long(499), new Long(default_lang_id));
         	
 	        /* lets make a Context and put data into it */
 	
