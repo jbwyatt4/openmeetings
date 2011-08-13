@@ -49,6 +49,8 @@ public class ImportInitvalues {
 	private Usermanagement userManagement;
 	@Autowired
 	private Fieldmanagment fieldmanagment;
+	@Autowired
+	private FieldLanguageDaoImpl fieldLanguageDaoImpl;
 
 	public void loadMainMenu() {
 
@@ -752,8 +754,8 @@ public class ImportInitvalues {
 			if (rtl != null && rtl.equals("true"))
 				langRtl = true;
 
-			Long languages_id = FieldLanguageDaoImpl.getInstance().addLanguage(
-					langName, langRtl);
+			Long languages_id = fieldLanguageDaoImpl.addLanguage(langName,
+					langRtl);
 
 			SAXReader reader = new SAXReader();
 			Document document = reader.read(filePath + langName + ".xml");

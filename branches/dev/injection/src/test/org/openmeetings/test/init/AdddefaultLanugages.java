@@ -3,18 +3,22 @@ package org.openmeetings.test.init;
 import junit.framework.TestCase;
 
 import org.openmeetings.app.data.basic.FieldLanguageDaoImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class AdddefaultLanugages extends TestCase {
 
-	public AdddefaultLanugages(String testname){
+	@Autowired
+	private FieldLanguageDaoImpl fieldLanguageDaoImpl;
+
+	public AdddefaultLanugages(String testname) {
 		super(testname);
 	}
-	
-	public void testAdddefaultLanugages(){
-		
-		FieldLanguageDaoImpl.getInstance().addLanguage("deutsch",false);
-		FieldLanguageDaoImpl.getInstance().addLanguage("english",false);
-		FieldLanguageDaoImpl.getInstance().addLanguage("french",false);
-		
+
+	public void testAdddefaultLanugages() {
+
+		fieldLanguageDaoImpl.addLanguage("deutsch", false);
+		fieldLanguageDaoImpl.addLanguage("english", false);
+		fieldLanguageDaoImpl.addLanguage("french", false);
+
 	}
 }
