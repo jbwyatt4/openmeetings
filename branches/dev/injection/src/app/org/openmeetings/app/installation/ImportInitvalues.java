@@ -27,9 +27,7 @@ import org.openmeetings.app.remote.red5.ScopeApplicationAdapter;
 import org.red5.logging.Red5LoggerFactory;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
-@Component
 public class ImportInitvalues {
 
 	private static final Logger log = Red5LoggerFactory.getLogger(
