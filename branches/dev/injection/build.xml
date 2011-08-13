@@ -218,6 +218,8 @@
         </copy>
 		<copy file="${openjpa.lib}/openjpa-all-2.1.0.jar" todir="${dist.dir}/red5/lib"/>
     	
+    	<copy file="${openjpa.lib}/dom4j-1.6.1.jar" todir="${dist.dir}/red5/webapps/${project.distname}/WEB-INF/lib"/>
+    	
     	
         <chmod dir="${dist.dir}/red5" perm="755" includes="**/*.sh"/>
         <chmod dir="${dist.dir}/red5/webapps/${project.distname}/screen" perm="755" includes="**/*.sh"/>
