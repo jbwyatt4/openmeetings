@@ -100,6 +100,8 @@ public class BackupImport extends HttpServlet {
 	private OmTimeZoneDaoImpl omTimeZoneDaoImpl;
 	@Autowired
 	private Organisationmanagement organisationmanagement;
+	@Autowired
+	private Roommanagement roommanagement;
 
 	private final HashMap<Long, Long> usersMap = new HashMap<Long, Long>();
 	private final HashMap<Long, Long> organisationsMap = new HashMap<Long, Long>();
@@ -1234,10 +1236,9 @@ public class BackupImport extends HttpServlet {
 						Users owner = userManagement.getUserById(getNewId(
 								importLongType(unformatString(pmObject.element(
 										"owner").getText())), Maps.USERS));
-						Rooms room = Roommanagement.getInstance().getRoomById(
-								getNewId(importLongType(unformatString(pmObject
-										.element("room").getText())),
-										Maps.ROOMS));
+						Rooms room = roommanagement.getRoomById(getNewId(
+								importLongType(unformatString(pmObject.element(
+										"room").getText())), Maps.ROOMS));
 
 						PrivateMessages pm = new PrivateMessages();
 						pm.setMessage(message);
@@ -1687,8 +1688,7 @@ public class BackupImport extends HttpServlet {
 						app.setIsWeekly(isWeekly);
 						app.setIsMonthly(isMonthly);
 						app.setIsYearly(isYearly);
-						app.setRoom(Roommanagement.getInstance().getRoomById(
-								room_id));
+						app.setRoom(roommanagement.getRoomById(room_id));
 						app.setIcalId(icalId);
 						app.setLanguage_id(language_id);
 						app.setIsPasswordProtected(isPasswordProtected);
@@ -1720,8 +1720,7 @@ public class BackupImport extends HttpServlet {
 			// We need to reset this as openJPA reject to store them otherwise
 			rooms_Organisation.setRooms_organisation_id(null);
 
-			Roommanagement.getInstance()
-					.addRoomOrganisation(rooms_Organisation);
+			roommanagement.addRoomOrganisation(rooms_Organisation);
 
 		}
 
@@ -1767,7 +1766,7 @@ public class BackupImport extends HttpServlet {
 						rooms_Organisation
 								.setOrganisation(organisationmanagement
 										.getOrganisationById(organisation_id));
-						rooms_Organisation.setRoom(Roommanagement.getInstance()
+						rooms_Organisation.setRoom(roommanagement
 								.getRoomById(rooms_id));
 						rooms_Organisation.setDeleted(deleted);
 
@@ -1902,7 +1901,7 @@ public class BackupImport extends HttpServlet {
 						room.setAppointment(appointment);
 						room.setExternalRoomId(externalRoomId);
 						room.setExternalRoomType(externalRoomType);
-						room.setRoomtype(Roommanagement.getInstance()
+						room.setRoomtype(roommanagement
 								.getRoomTypesById(roomtypes_id));
 						room.setIsDemoRoom(isDemoRoom);
 						room.setDemoTime(demoTime);
@@ -1924,8 +1923,7 @@ public class BackupImport extends HttpServlet {
 						// otherwise
 						room.setRooms_id(null);
 
-						Long newRoomId = Roommanagement.getInstance().addRoom(
-								room);
+						Long newRoomId = roommanagement.addRoom(room);
 						roomsMap.put(roomId, newRoomId);
 
 						for (Iterator<Element> iterMods = roomObject

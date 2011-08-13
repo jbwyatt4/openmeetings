@@ -81,6 +81,8 @@ public class Usermanagement {
 	private ManageCryptStyle manageCryptStyle;
 	@Autowired
 	private Addressmanagement addressmanagement;
+	@Autowired
+	private OpenXGHttpClient openXGHttpClient;
 
 	/**
 	 * query for a list of users
@@ -534,11 +536,10 @@ public class Usermanagement {
 
 					if (generateSipUserData) {
 
-						UserSipData userSipData = OpenXGHttpClient
-								.getInstance().openSIPgUserCreateUser(
-										firstname, "", lastname,
-										us.getAdresses().getEmail(), password,
-										login);
+						UserSipData userSipData = openXGHttpClient
+								.openSIPgUserCreateUser(firstname, "",
+										lastname, us.getAdresses().getEmail(),
+										password, login);
 
 						if (us.getUserSipData() == null) {
 							Long userSipDataId = UserSipDataDaoImpl
@@ -1108,10 +1109,9 @@ public class Usermanagement {
 
 			if (generateSipUserData) {
 
-				UserSipData userSipData = OpenXGHttpClient
-						.getInstance()
-						.openSIPgUserCreateUser(firstname, "", lastname,
-								users.getAdresses().getEmail(), userpass, login);
+				UserSipData userSipData = openXGHttpClient
+						.openSIPgUserCreateUser(firstname, "", lastname, users
+								.getAdresses().getEmail(), userpass, login);
 
 				Long userSipDataId = UserSipDataDaoImpl.getInstance()
 						.addUserSipData(userSipData);
@@ -1217,10 +1217,9 @@ public class Usermanagement {
 
 			if (generateSipUserData) {
 
-				UserSipData userSipData = OpenXGHttpClient
-						.getInstance()
-						.openSIPgUserCreateUser(firstname, "", lastname,
-								users.getAdresses().getEmail(), userpass, login);
+				UserSipData userSipData = openXGHttpClient
+						.openSIPgUserCreateUser(firstname, "", lastname, users
+								.getAdresses().getEmail(), userpass, login);
 
 				Long userSipDataId = UserSipDataDaoImpl.getInstance()
 						.addUserSipData(userSipData);

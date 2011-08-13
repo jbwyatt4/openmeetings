@@ -31,6 +31,7 @@ public class AppointmentLogic {
 
 	private static final Logger log = Red5LoggerFactory.getLogger(
 			AppointmentLogic.class, "openmeetings");
+
 	@Autowired
 	private AppointmentDaoImpl appointmentDao;
 	@Autowired
@@ -41,6 +42,8 @@ public class AppointmentLogic {
 	private Fieldmanagment fieldmanagment;
 	@Autowired
 	private OmTimeZoneDaoImpl omTimeZoneDaoImpl;
+	@Autowired
+	private Roommanagement roommanagement;
 
 	public List<Appointment> getAppointmentByRange(Long userId, Date starttime,
 			Date endtime) {
@@ -74,7 +77,7 @@ public class AppointmentLogic {
 	public Appointment getAppointmentByRoom(Long room_id) throws Exception {
 		log.debug("getAppointmentByRoom");
 
-		Rooms room = Roommanagement.getInstance().getRoomById(room_id);
+		Rooms room = roommanagement.getRoomById(room_id);
 
 		if (room == null)
 			throw new Exception("Room does not exist in database!");
@@ -117,7 +120,7 @@ public class AppointmentLogic {
 		log.debug("Appointmentlogic.saveAppointment");
 
 		// create a Room
-		// Long room_id = Roommanagement.getInstance().addRoom(
+		// Long room_id = roommanagement.addRoom(
 		// 3, // Userlevel
 		// appointmentName, // name
 		// roomType, // RoomType
@@ -146,7 +149,7 @@ public class AppointmentLogic {
 
 		// TODO:Add this user as the default Moderator of the Room
 
-		Long room_id = Roommanagement.getInstance().addRoom(3, // Userlevel
+		Long room_id = roommanagement.addRoom(3, // Userlevel
 				appointmentName, // name
 				roomType, // RoomType
 				"", // Comment
@@ -171,7 +174,7 @@ public class AppointmentLogic {
 		log.debug("Appointmentlogic.saveAppointment : Room - " + room_id);
 		log.debug("Appointmentlogic.saveAppointment : Reminder - " + remind);
 
-		Rooms room = Roommanagement.getInstance().getRoomById(room_id);
+		Rooms room = roommanagement.getRoomById(room_id);
 
 		if (room == null)
 			log.error("Room " + room_id + " could not be found!");
@@ -306,7 +309,7 @@ public class AppointmentLogic {
 			appointmentDao.deleteAppointement(appointmentId);
 
 			// Deleting Room
-			Roommanagement.getInstance().deleteRoom(room);
+			roommanagement.deleteRoom(room);
 
 			return appointmentId;
 

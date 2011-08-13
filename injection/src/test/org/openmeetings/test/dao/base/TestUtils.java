@@ -31,6 +31,8 @@ public class TestUtils extends Assert {
 	static private ErrorManagement errorManagement;
 	@Autowired
 	static private Salutationmanagement salutationmanagement;
+	@Autowired
+	static private Roommanagement roommanagement;
 
 	public static Appointment createAppointment() throws Exception {
 		assertNotNull("Cann't access to appointment dao implimentation",
@@ -232,61 +234,53 @@ public class TestUtils extends Assert {
 
 	public static void loadDefaultRooms() {
 
-		long conference_Id = Roommanagement.getInstance().addRoomType(
-				"conference");
-		long audience_Id = Roommanagement.getInstance().addRoomType("audience");
+		long conference_Id = roommanagement.addRoomType("conference");
+		long audience_Id = roommanagement.addRoomType("audience");
 
-		long restricted_Id = Roommanagement.getInstance().addRoomType(
-				"restricted");
+		long restricted_Id = roommanagement.addRoomType("restricted");
 
-		long interview_Id = Roommanagement.getInstance().addRoomType(
-				"interview");
+		long interview_Id = roommanagement.addRoomType("interview");
 
-		long custom_Id = Roommanagement.getInstance().addRoomType("custom");
+		long custom_Id = roommanagement.addRoomType("custom");
 
-		Roommanagement.getInstance().addRoom(3, "public Interview Room",
-				interview_Id, "", new Long(16), true, null, false, false, null,
-				false, null, true, false, false, "", "", "", null, null, null,
-				false);
+		roommanagement.addRoom(3, "public Interview Room", interview_Id, "",
+				new Long(16), true, null, false, false, null, false, null,
+				true, false, false, "", "", "", null, null, null, false);
 
-		Roommanagement.getInstance().addRoom(3, "public Conference Room",
-				conference_Id, "", new Long(32), true, null, false, false,
-				null, false, null, true, false, false, "", "", "", null, null,
-				null, false);
-
-		Roommanagement.getInstance().addRoom(3, "public Video Only Room",
-				conference_Id, "", new Long(32), true, null, false, false,
-				null, false, null, true, false, false, "", "", "", null, null,
-				null, false);
-
-		Roommanagement.getInstance().addRoom(3,
-				"public Video And Whiteboard Room", conference_Id, "",
+		roommanagement.addRoom(3, "public Conference Room", conference_Id, "",
 				new Long(32), true, null, false, false, null, false, null,
 				true, false, false, "", "", "", null, null, null, false);
 
-		Roommanagement.getInstance().addRoom(3, "public Restricted Room",
-				restricted_Id, "", new Long(100), true, null, false, false,
+		roommanagement.addRoom(3, "public Video Only Room", conference_Id, "",
+				new Long(32), true, null, false, false, null, false, null,
+				true, false, false, "", "", "", null, null, null, false);
+
+		roommanagement.addRoom(3, "public Video And Whiteboard Room",
+				conference_Id, "", new Long(32), true, null, false, false,
 				null, false, null, true, false, false, "", "", "", null, null,
 				null, false);
 
-		long room2 = Roommanagement.getInstance().addRoom(3,
-				"private Conference Room", conference_Id, "", new Long(32),
-				false, null, false, false, null, false, null, true, false,
-				false, "", "", "", null, null, null, false);
+		roommanagement.addRoom(3, "public Restricted Room", restricted_Id, "",
+				new Long(100), true, null, false, false, null, false, null,
+				true, false, false, "", "", "", null, null, null, false);
 
-		Roommanagement.getInstance().addRoomToOrganisation(3, room2, 1);
+		long room2 = roommanagement.addRoom(3, "private Conference Room",
+				conference_Id, "", new Long(32), false, null, false, false,
+				null, false, null, true, false, false, "", "", "", null, null,
+				null, false);
 
-		Roommanagement.getInstance().addRoom(3, "public Audience Room",
-				audience_Id, "", new Long(32), true, null, false, false, null,
+		roommanagement.addRoomToOrganisation(3, room2, 1);
+
+		roommanagement.addRoom(3, "public Audience Room", audience_Id, "",
+				new Long(32), true, null, false, false, null, false, null,
+				true, false, false, "", "", "", null, null, null, false);
+
+		long room4 = roommanagement.addRoom(3, "private Audience Room",
+				audience_Id, "", new Long(32), false, null, false, false, null,
 				false, null, true, false, false, "", "", "", null, null, null,
 				false);
 
-		long room4 = Roommanagement.getInstance().addRoom(3,
-				"private Audience Room", audience_Id, "", new Long(32), false,
-				null, false, false, null, false, null, true, false, false, "",
-				"", "", null, null, null, false);
-
-		Roommanagement.getInstance().addRoomToOrganisation(3, room4, 1);
+		roommanagement.addRoomToOrganisation(3, room4, 1);
 
 	}
 

@@ -63,6 +63,7 @@ public class MainService implements IPendingServiceCallback {
 	// Spring Beans
 	private ClientListManager clientListManager = null;
 	private ScopeApplicationAdapter scopeApplicationAdapter = null;
+
 	@Autowired
 	private Sessionmanagement sessionManagement;
 	@Autowired
@@ -75,6 +76,8 @@ public class MainService implements IPendingServiceCallback {
 	private OmTimeZoneDaoImpl omTimeZoneDaoImpl;
 	@Autowired
 	private Navimanagement navimanagement;
+	@Autowired
+	private Roommanagement roommanagement;
 
 	// External User Types
 	public static final String EXTERNAL_USER_TYPE_LDAP = "LDAP";
@@ -1008,7 +1011,7 @@ public class MainService implements IPendingServiceCallback {
 			Long user_level = userManagement.getUserLevelByID(users_id);
 			if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
 
-				Roommanagement.getInstance().closeRoom(room_id, status);
+				roommanagement.closeRoom(room_id, status);
 
 				if (status) {
 					Map<String, String> message = new HashMap<String, String>();

@@ -31,7 +31,8 @@
 		</property>
 	</bean>
 	
-	<!-- Interface "Transactional" -->
+	<!-- Interface Transactional -->
+	<bean id="roommanagement" class="org.openmeetings.app.data.conference.Roommanagement" />
 	<bean id="addressmanagement" class="org.openmeetings.app.data.user.Addressmanagement" />
 	<bean id="organisationmanagement" class="org.openmeetings.app.data.user.Organisationmanagement" />
 	<bean id="salutationmanagement" class="org.openmeetings.app.data.user.Salutationmanagement" />
@@ -51,6 +52,7 @@
 	
 	<!-- No Interface -->
 	<bean id="manageCryptStyle" class="org.openmeetings.utils.crypt.ManageCryptStyle" />
+	<bean id="openXGHttpClient" class="org.openmeetings.app.sip.xmlrpc.OpenXGHttpClient" />
 
 	<tx:annotation-driven transaction-manager="jpaTransactionManager"/>
 	<context:annotation-config/>

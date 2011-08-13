@@ -19,6 +19,7 @@ import org.openmeetings.test.dao.base.TestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class OpenmeetingsDaoTest extends AbstractTestCase {
+
 	@Autowired
 	// FIXME
 	private Configurationmanagement cfgManagement;
@@ -26,6 +27,8 @@ public class OpenmeetingsDaoTest extends AbstractTestCase {
 	private Usermanagement userManagement;
 	@Autowired
 	private Organisationmanagement organisationmanagement;
+	@Autowired
+	private Roommanagement roommanagement;
 
 	public OpenmeetingsDaoTest(String name) {
 		super(name);
@@ -97,8 +100,7 @@ public class OpenmeetingsDaoTest extends AbstractTestCase {
 		Users user = userManagement.getUserById(userId);
 		assertNotNull("Cann't get default user", user);
 
-		List<Rooms> rooms = Roommanagement.getInstance().getPublicRooms(
-				user.getLevel_id());
+		List<Rooms> rooms = roommanagement.getPublicRooms(user.getLevel_id());
 		assertNotNull("Cann't get public rooms fo default user", rooms);
 
 		Rooms room = null;
@@ -112,9 +114,9 @@ public class OpenmeetingsDaoTest extends AbstractTestCase {
 				.addRoomModeratorByUserId(user, true, room.getRooms_id());
 		assertNotNull("Cann't add room moderator", rmId);
 
-		Long rooms_id = Roommanagement.getInstance().addExternalRoom(
-				"ExternalRoom", room.getRooms_id(), "comment", 10L, true, null,
-				false, false, 0, false, null, null, null, false, // allowUserQuestions
+		Long rooms_id = roommanagement.addExternalRoom("ExternalRoom",
+				room.getRooms_id(), "comment", 10L, true, null, false, false,
+				0, false, null, null, null, false, // allowUserQuestions
 				false, // isAudioOnly
 				false, // isClosed
 				room.getRedirectURL(), false, true, false);

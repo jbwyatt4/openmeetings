@@ -79,6 +79,8 @@ public class BackupExport extends HttpServlet {
 	private Usermanagement userManagement;
 	@Autowired
 	private Organisationmanagement organisationmanagement;
+	@Autowired
+	private Roommanagement roommanagement;
 
 	/*
 	 * (non-Javadoc)
@@ -193,8 +195,7 @@ public class BackupExport extends HttpServlet {
 					/*
 					 * ##################### Backup Room
 					 */
-					List<Rooms> roomList = Roommanagement.getInstance()
-							.getBackupRooms();
+					List<Rooms> roomList = roommanagement.getBackupRooms();
 
 					if (roomList != null) {
 						Document doc = this.createRoomsDocument(roomList);
@@ -210,8 +211,8 @@ public class BackupExport extends HttpServlet {
 					/*
 					 * ##################### Backup Room Organizations
 					 */
-					List<Rooms_Organisation> roomOrgList = Roommanagement
-							.getInstance().getRoomsOrganisations();
+					List<Rooms_Organisation> roomOrgList = roommanagement
+							.getRoomsOrganisations();
 
 					if (roomOrgList != null) {
 						Document doc = this.createOrgRoomsDocument(roomOrgList);

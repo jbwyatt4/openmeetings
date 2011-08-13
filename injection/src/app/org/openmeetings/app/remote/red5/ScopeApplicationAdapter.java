@@ -68,6 +68,7 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 	private EmoticonsManager emoticonsManager = null;
 	private WhiteBoardService whiteBoardService = null;
 	private FLVRecorderService flvRecorderService = null;
+
 	@Autowired
 	private Configurationmanagement cfgManagement;
 	@Autowired
@@ -76,6 +77,8 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 	private Sessionmanagement sessionManagement;
 	@Autowired
 	private Usermanagement userManagement;
+	@Autowired
+	private Roommanagement roommanagement;
 
 	// This is the Folder where all executables are written
 	// for windows platform
@@ -1416,8 +1419,8 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 				return 2L;
 			} else {
 				// No moderator in this room at the moment
-				Rooms room = Roommanagement.getInstance().getRoomById(
-						currentClient.getRoom_id());
+				Rooms room = roommanagement.getRoomById(currentClient
+						.getRoom_id());
 
 				if (room.getIsModeratedRoom()) {
 					return 3L;
@@ -1530,7 +1533,7 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 		try {
 
 			// appointed meeting or moderated Room?
-			Rooms room = Roommanagement.getInstance().getRoomById(room_id);
+			Rooms room = roommanagement.getRoomById(room_id);
 
 			// not really - default logic
 			if (room.getAppointment() == null || room.getAppointment() == false) {
@@ -1585,7 +1588,7 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 	 * clientListRoom = this.getRoomClients(room_id);
 	 * 
 	 * // appointed meeting or moderated Room? Rooms room =
-	 * Roommanagement.getInstance().getRoomById(room_id);
+	 * roommanagement.getRoomById(room_id);
 	 * 
 	 * //Check Max Users first if (room.getNumberOfPartizipants() != null &&
 	 * clientListRoom.size() >= room.getNumberOfPartizipants()) {
@@ -1652,7 +1655,7 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 					.getRoomClients(room_id);
 
 			// appointed meeting or moderated Room?
-			Rooms room = Roommanagement.getInstance().getRoomById(room_id);
+			Rooms room = roommanagement.getRoomById(room_id);
 
 			// Check Max Users first
 			if (room.getNumberOfPartizipants() != null

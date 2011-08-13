@@ -51,6 +51,7 @@ public class Invitationmanagement {
 			Invitationmanagement.class, ScopeApplicationAdapter.webAppRootKey);
 
 	private static Invitationmanagement instance;
+
 	@Autowired
 	private AppointmentLogic appointmentLogic;
 	@Autowired
@@ -63,6 +64,8 @@ public class Invitationmanagement {
 	private OmTimeZoneDaoImpl omTimeZoneDaoImpl;
 	@Autowired
 	private ManageCryptStyle manageCryptStyle;
+	@Autowired
+	private Roommanagement roommanagement;
 
 	private Invitationmanagement() {
 	}
@@ -152,8 +155,7 @@ public class Invitationmanagement {
 				invitation.setInvitedBy(us);
 				invitation.setInvitedname(username);
 				invitation.setInvitedEMail(email);
-				invitation.setRoom(Roommanagement.getInstance().getRoomById(
-						rooms_id));
+				invitation.setRoom(roommanagement.getRoomById(rooms_id));
 				invitation.setConferencedomain(conferencedomain);
 				invitation.setStarttime(new Date());
 				invitation.setAppointmentId(appointmentId);
@@ -539,8 +541,7 @@ public class Invitationmanagement {
 				invitation.setBaseUrl(baseurl);
 				invitation.setInvitedname(username);
 				invitation.setInvitedEMail(email);
-				invitation.setRoom(Roommanagement.getInstance().getRoomById(
-						rooms_id));
+				invitation.setRoom(roommanagement.getRoomById(rooms_id));
 				invitation.setConferencedomain(conferencedomain);
 				invitation.setStarttime(new Date());
 				invitation.setAppointmentId(appointmentId);
