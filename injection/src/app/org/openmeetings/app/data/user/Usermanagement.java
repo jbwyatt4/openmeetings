@@ -89,6 +89,8 @@ public class Usermanagement {
 	private Emailmanagement emailManagement;
 	@Autowired
 	private UserSipDataDaoImpl userSipDataDao;
+	@Autowired
+	private ScopeApplicationAdapter scopeApplicationAdapter;
 
 	/**
 	 * query for a list of users
@@ -1677,14 +1679,14 @@ public class Usermanagement {
 					if (rcl.getRoom_id() != null) {
 						scopeName = rcl.getRoom_id().toString();
 					}
-					IScope currentScope = ScopeApplicationAdapter.getInstance()
+					IScope currentScope = scopeApplicationAdapter
 							.getRoomScope(scopeName);
-					ScopeApplicationAdapter.getInstance().roomLeaveByScope(rcl,
+					scopeApplicationAdapter.roomLeaveByScope(rcl,
 							currentScope);
 
 					HashMap<Integer, String> messageObj = new HashMap<Integer, String>();
 					messageObj.put(0, "kick");
-					ScopeApplicationAdapter.getInstance().sendMessageById(
+					scopeApplicationAdapter.sendMessageById(
 							messageObj, rcl.getStreamid(), currentScope);
 
 				}
@@ -1717,14 +1719,14 @@ public class Usermanagement {
 				if (rcl.getRoom_id() != null) {
 					scopeName = rcl.getRoom_id().toString();
 				}
-				IScope currentScope = ScopeApplicationAdapter.getInstance()
+				IScope currentScope = scopeApplicationAdapter
 						.getRoomScope(scopeName);
-				ScopeApplicationAdapter.getInstance().roomLeaveByScope(rcl,
+				scopeApplicationAdapter.roomLeaveByScope(rcl,
 						currentScope);
 
 				HashMap<Integer, String> messageObj = new HashMap<Integer, String>();
 				messageObj.put(0, "kick");
-				ScopeApplicationAdapter.getInstance().sendMessageById(
+				scopeApplicationAdapter.sendMessageById(
 						messageObj, rcl.getStreamid(), currentScope);
 
 				return true;

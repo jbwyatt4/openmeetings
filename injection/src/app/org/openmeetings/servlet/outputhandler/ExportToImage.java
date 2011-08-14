@@ -20,34 +20,15 @@ import org.apache.batik.dom.GenericDOMImplementation;
 import org.apache.batik.dom.svg.SVGDOMImplementation;
 import org.apache.batik.svggen.SVGGraphics2D;
 import org.openmeetings.app.batik.beans.PrintBean;
-import org.openmeetings.app.data.basic.Configurationmanagement;
 import org.openmeetings.app.data.basic.Sessionmanagement;
-import org.openmeetings.app.data.basic.dao.LdapConfigDaoImpl;
-import org.openmeetings.app.data.basic.dao.OmTimeZoneDaoImpl;
-import org.openmeetings.app.data.calendar.daos.AppointmentCategoryDaoImpl;
-import org.openmeetings.app.data.calendar.daos.AppointmentDaoImpl;
-import org.openmeetings.app.data.calendar.daos.AppointmentReminderTypDaoImpl;
-import org.openmeetings.app.data.calendar.daos.MeetingMemberDaoImpl;
-import org.openmeetings.app.data.conference.Roommanagement;
-import org.openmeetings.app.data.conference.dao.RoomModeratorsDaoImpl;
-import org.openmeetings.app.data.file.dao.FileExplorerItemDaoImpl;
-import org.openmeetings.app.data.flvrecord.FlvRecordingDaoImpl;
-import org.openmeetings.app.data.flvrecord.FlvRecordingMetaDataDaoImpl;
 import org.openmeetings.app.data.record.WhiteboardMapToSVG;
-import org.openmeetings.app.data.user.Organisationmanagement;
-import org.openmeetings.app.data.user.Statemanagement;
 import org.openmeetings.app.data.user.Usermanagement;
-import org.openmeetings.app.data.user.dao.PrivateMessageFolderDaoImpl;
-import org.openmeetings.app.data.user.dao.PrivateMessagesDaoImpl;
-import org.openmeetings.app.data.user.dao.UserContactsDaoImpl;
-import org.openmeetings.app.data.user.dao.UsersDaoImpl;
 import org.openmeetings.app.documents.GenerateImage;
 import org.openmeetings.app.remote.PrintService;
 import org.openmeetings.app.remote.red5.ScopeApplicationAdapter;
 import org.openmeetings.utils.math.CalendarPatterns;
 import org.red5.logging.Red5LoggerFactory;
 import org.slf4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.w3c.dom.DOMImplementation;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -58,12 +39,14 @@ public class ExportToImage extends HttpServlet {
 	
 	private Sessionmanagement sessionManagement;
     private Usermanagement userManagement;
+	private GenerateImage generateImage;
 	
 	@Override
 	public void init(ServletConfig config) throws ServletException {
 		super.init(config);
 		sessionManagement = (Sessionmanagement)config.getServletContext().getAttribute("sessionManagement");
 		userManagement = (Usermanagement)config.getServletContext().getAttribute("userManagement");
+		generateImage = (GenerateImage)config.getServletContext().getAttribute("generateImage");
 	}
 	
 	/*
@@ -185,7 +168,7 @@ public class ExportToImage extends HttpServlet {
 		        	FileWriter out = new FileWriter(svgFile);
 		        	svgGenerator.stream(out, useCSS);
 		        	
-		        	HashMap<String,Object> returnError = GenerateImage.getInstance().convertImageByTypeAndSize(
+		        	HashMap<String,Object> returnError = generateImage.convertImageByTypeAndSize(
 		        			svgFile.getAbsolutePath(), resultFile.getAbsolutePath(), 
 		        			pBean.getWidth(), pBean.getHeight());
 		        	

@@ -56,14 +56,12 @@ import com.thoughtworks.xstream.io.xml.DomDriver;
  */
 public class MainService implements IPendingServiceCallback {
 
-	private static final Logger log = Red5LoggerFactory.getLogger(
-			MainService.class, ScopeApplicationAdapter.webAppRootKey);
-	private static MainService instance;
+	private static final Logger log = Red5LoggerFactory.getLogger(MainService.class, ScopeApplicationAdapter.webAppRootKey);
 
-	// Spring Beans
+	@Autowired
 	private ClientListManager clientListManager = null;
+	@Autowired
 	private ScopeApplicationAdapter scopeApplicationAdapter = null;
-
 	@Autowired
 	private Sessionmanagement sessionManagement;
 	@Autowired
@@ -91,32 +89,6 @@ public class MainService implements IPendingServiceCallback {
 
 	// External User Types
 	public static final String EXTERNAL_USER_TYPE_LDAP = "LDAP";
-
-	public static synchronized MainService getInstance() {
-		if (instance == null) {
-			instance = new MainService();
-		}
-		return instance;
-	}
-
-	public ClientListManager getClientListManager() {
-		if (clientListManager == null)
-			clientListManager = ClientListManager.getInstance();
-		return clientListManager;
-	}
-
-	public void setClientListManager(ClientListManager clientListManager) {
-		this.clientListManager = clientListManager;
-	}
-
-	public ScopeApplicationAdapter getScopeApplicationAdapter() {
-		return scopeApplicationAdapter;
-	}
-
-	public void setScopeApplicationAdapter(
-			ScopeApplicationAdapter scopeApplicationAdapter) {
-		this.scopeApplicationAdapter = scopeApplicationAdapter;
-	}
 
 	/**
 	 * get Navigation

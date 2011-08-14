@@ -23,6 +23,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class LdapConfigService {
 	
 	//Spring loaded Bean
+	@Autowired
 	private LdapConfigDaoImpl ldapConfigDaoImpl;
 	@Autowired
 	private Sessionmanagement sessionManagement;
@@ -31,13 +32,6 @@ public class LdapConfigService {
 	
 	private static final Logger log = Red5LoggerFactory.getLogger(LdapConfigService.class, ScopeApplicationAdapter.webAppRootKey);
 	
-	public LdapConfigDaoImpl getLdapConfigDaoImpl() {
-		return ldapConfigDaoImpl;
-	}
-	public void setLdapConfigDaoImpl(LdapConfigDaoImpl ldapConfigDaoImpl) {
-		this.ldapConfigDaoImpl = ldapConfigDaoImpl;
-	}
-
 	public Long deleteLdapConfigById(String SID, Long ldapConfigId) {
         Long users_id = sessionManagement.checkSession(SID);
         Long user_level = userManagement.getUserLevelByID(users_id);

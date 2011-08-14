@@ -30,6 +30,7 @@ public class Import extends HttpServlet {
 	private Sessionmanagement sessionManagement;
     private Usermanagement userManagement;
 	private UsersDaoImpl usersDao;
+	private ScopeApplicationAdapter scopeApplicationAdapter;
 	
 	@Override
 	public void init(ServletConfig config) throws ServletException {
@@ -37,6 +38,7 @@ public class Import extends HttpServlet {
 		sessionManagement = (Sessionmanagement)config.getServletContext().getAttribute("sessionManagement");
 		userManagement = (Usermanagement)config.getServletContext().getAttribute("userManagement");
 		usersDao = (UsersDaoImpl)config.getServletContext().getAttribute("usersDao");
+		scopeApplicationAdapter = (ScopeApplicationAdapter)config.getServletContext().getAttribute("scopeApplicationAdapter");
 	}
 	
 	/*
@@ -123,7 +125,7 @@ public class Import extends HttpServlet {
 			//if (!moduleName.equals("userprofile")) {
 				log.debug("moduleName.equals(userprofile) ! ");
 				
-			ScopeApplicationAdapter.getInstance().sendMessageWithClientByPublicSID(hs,publicSID);
+			scopeApplicationAdapter.sendMessageWithClientByPublicSID(hs,publicSID);
 			
 			return;
 	

@@ -55,10 +55,10 @@ public class UserService {
 	private static final Logger log = Red5LoggerFactory.getLogger(
 			UserService.class, ScopeApplicationAdapter.webAppRootKey);
 
-	// Spring Beans
+	@Autowired
 	private ClientListManager clientListManager = null;
+	@Autowired
 	private ScopeApplicationAdapter scopeApplicationAdapter = null;
-
 	@Autowired
 	private AppointmentDaoImpl appointmentDao;
 	@Autowired
@@ -91,23 +91,6 @@ public class UserService {
 	private UsersDaoImpl usersDao;
 	@Autowired
 	private UserContactsDaoImpl userContactsDao;
-
-	public ClientListManager getClientListManager() {
-		return clientListManager;
-	}
-
-	public void setClientListManager(ClientListManager clientListManager) {
-		this.clientListManager = clientListManager;
-	}
-
-	public ScopeApplicationAdapter getScopeApplicationAdapter() {
-		return scopeApplicationAdapter;
-	}
-
-	public void setScopeApplicationAdapter(
-			ScopeApplicationAdapter scopeApplicationAdapter) {
-		this.scopeApplicationAdapter = scopeApplicationAdapter;
-	}
 
 	/**
 	 * get your own user-object

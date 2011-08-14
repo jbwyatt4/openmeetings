@@ -29,7 +29,6 @@ import org.openmeetings.utils.StoredFile;
 import org.openmeetings.utils.stringhandlers.StringComparer;
 import org.red5.logging.Red5LoggerFactory;
 import org.slf4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import com.itextpdf.text.pdf.PdfReader;
 
@@ -44,6 +43,10 @@ public class UploadHandler extends HttpServlet {
 	private Sessionmanagement sessionManagement;
     private Usermanagement userManagement;
 	private UsersDaoImpl usersDao;
+	private ScopeApplicationAdapter scopeApplicationAdapter;
+	private GenerateImage generateImage;
+	private GenerateThumbs generateThumbs;
+	private GeneratePDF generatePDF;
 
 	@Override
 	public void init(ServletConfig config) throws ServletException {
@@ -51,6 +54,10 @@ public class UploadHandler extends HttpServlet {
 		sessionManagement = (Sessionmanagement)config.getServletContext().getAttribute("sessionManagement");
 		userManagement = (Usermanagement)config.getServletContext().getAttribute("userManagement");
 		usersDao = (UsersDaoImpl)config.getServletContext().getAttribute("usersDao");
+		scopeApplicationAdapter = (ScopeApplicationAdapter)config.getServletContext().getAttribute("scopeApplicationAdapter");
+		generateImage = (GenerateImage)config.getServletContext().getAttribute("generateImage");
+		generateThumbs = (GenerateThumbs)config.getServletContext().getAttribute("generateThumbs");
+		generatePDF = (GeneratePDF)config.getServletContext().getAttribute("generatePDF");
 	}
 	
 	protected void service(HttpServletRequest httpServletRequest,
@@ -90,7 +97,7 @@ public class UploadHandler extends HttpServlet {
 			hs.put("user", usersDao.getUser(userId));
 			
 			fileService(httpServletRequest, sid, userId, hs);
-			ScopeApplicationAdapter.getInstance()
+			scopeApplicationAdapter
 					.sendMessageWithClientByPublicSID(hs, publicSID);
 		} catch (Exception e) {
 			System.out.println("Exception during upload: " + e);
@@ -256,7 +263,7 @@ public class UploadHandler extends HttpServlet {
 		log.debug("canBeConverted: " + canBeConverted);
 		if (canBeConverted) {
 			// convert to pdf, thumbs, swf and xml-description
-			returnError = GeneratePDF.getInstance().convertPDF(currentDir,
+			returnError = generatePDF.convertPDF(currentDir,
 					newFileName, newFileExtDot, roomName, true, completeName);
 		} else if (isPdf) {
 			boolean isEncrypted = false;
@@ -295,7 +302,7 @@ public class UploadHandler extends HttpServlet {
 
 				String outputfile = completeName + newFileExtDot;
 
-				returnError2 = GenerateThumbs.getInstance().decodePDF(
+				returnError2 = generateThumbs.decodePDF(
 						inputfile, outputfile);
 
 				File f_old = new File(inputfile);
@@ -306,7 +313,7 @@ public class UploadHandler extends HttpServlet {
 			}
 
 			// convert to thumbs, swf and xml-description
-			returnError = GeneratePDF.getInstance().convertPDF(currentDir,
+			returnError = generatePDF.convertPDF(currentDir,
 					newFileName, newFileExtDot, roomName, false, completeName);
 
 			// returnError.put("decodePDF", returnError2);
@@ -319,13 +326,13 @@ public class UploadHandler extends HttpServlet {
 				// User Profile Update
 				this.deleteUserProfileFiles(currentDir, userId);
 				// convert it to JPG
-				returnError = GenerateImage.getInstance()
+				returnError = generateImage
 						.convertImageUserProfile(currentDir, newFileName,
 								newFileExtDot, userId, newFileName, false);
 			} else {
 				// convert it to JPG
 				log.debug("##### convert it to JPG: " + userProfile);
-				returnError = GenerateImage.getInstance().convertImage(
+				returnError = generateImage.convertImage(
 						currentDir, newFileName, newFileExtDot, roomName,
 						newFileName, false);
 			}
@@ -334,14 +341,11 @@ public class UploadHandler extends HttpServlet {
 				// User Profile Update
 				this.deleteUserProfileFiles(currentDir, userId);
 				// is UserProfile Picture
-				HashMap<String, Object> processThumb1 = GenerateThumbs
-						.getInstance().generateThumb("_chat_", currentDir,
+				HashMap<String, Object> processThumb1 = generateThumbs.generateThumb("_chat_", currentDir,
 								completeName, 40);
-				HashMap<String, Object> processThumb2 = GenerateThumbs
-						.getInstance().generateThumb("_profile_", currentDir,
+				HashMap<String, Object> processThumb2 = generateThumbs.generateThumb("_profile_", currentDir,
 								completeName, 126);
-				HashMap<String, Object> processThumb3 = GenerateThumbs
-						.getInstance().generateThumb("_big_", currentDir,
+				HashMap<String, Object> processThumb3 = generateThumbs.generateThumb("_big_", currentDir,
 								completeName, 240);
 				returnError.put("processThumb1", processThumb1);
 				returnError.put("processThumb2", processThumb2);
@@ -354,11 +358,10 @@ public class UploadHandler extends HttpServlet {
 				us.setPictureuri(pictureuri);
 				usersDao.updateUser(us);
 
-				ScopeApplicationAdapter.getInstance().updateUserSessionObject(
+				scopeApplicationAdapter.updateUserSessionObject(
 						userId, pictureuri);
 			} else {
-				HashMap<String, Object> processThumb = GenerateThumbs
-						.getInstance().generateThumb("_thumb_", currentDir,
+				HashMap<String, Object> processThumb = generateThumbs.generateThumb("_thumb_", currentDir,
 								completeName, 50);
 				returnError.put("processThumb", processThumb);
 			}

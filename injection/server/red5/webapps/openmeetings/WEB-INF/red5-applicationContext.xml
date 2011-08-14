@@ -93,6 +93,21 @@
 				<entry key="fieldLanguageDaoImpl">
 					<ref bean="fieldLanguageDaoImpl"/>
 				</entry>
+				<entry key="scopeApplicationAdapter">
+					<ref bean="web.handler"/>
+				</entry>
+				<entry key="mainService">
+					<ref bean="xmlcrm.service"/>
+				</entry>
+				<entry key="generateImage">
+					<ref bean="generateImage"/>
+				</entry>
+				<entry key="generateThumbs">
+					<ref bean="generateThumbs"/>
+				</entry>
+				<entry key="generatePDF">
+					<ref bean="generatePDF"/>
+				</entry>
 			</map>
 		</property>
 	</bean>
@@ -151,6 +166,12 @@
 	<bean id="openXGHttpClient" class="org.openmeetings.app.sip.xmlrpc.OpenXGHttpClient" />
 	<bean id="appointmentCategoryLogic" class="org.openmeetings.app.data.calendar.management.AppointmentCategoryLogic" />
 	<bean id="whiteboardConvertionJobManager" class="org.openmeetings.app.data.record.WhiteboardConvertionJobManager" />
+	<bean id="generateImage" class="org.openmeetings.app.documents.GenerateImage" />
+	<bean id="generateThumbs" class="org.openmeetings.app.documents.GenerateThumbs" />
+	<bean id="generatePDF" class="org.openmeetings.app.documents.GeneratePDF" />
+	<bean id="serverSharingSessionList" class="org.openmeetings.server.cache.ServerSharingSessionList" />
+	<bean id="serverSocketMinaProcess" class="org.openmeetings.server.socket.ServerSocketMinaProcess" />
+	<bean id="whiteboardConvertionJobManagerSWFTools" class="org.openmeetings.app.data.record.WhiteboardConvertionJobManagerSWFTools" />
 
 	<tx:annotation-driven transaction-manager="jpaTransactionManager"/>
 	<context:annotation-config/>
