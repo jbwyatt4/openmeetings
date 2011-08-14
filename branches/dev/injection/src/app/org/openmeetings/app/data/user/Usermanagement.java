@@ -83,6 +83,12 @@ public class Usermanagement {
 	private Addressmanagement addressmanagement;
 	@Autowired
 	private OpenXGHttpClient openXGHttpClient;
+	@Autowired
+	private UsersDaoImpl usersDao;
+	@Autowired
+	private Emailmanagement emailManagement;
+	@Autowired
+	private UserSipDataDaoImpl userSipDataDao;
 
 	/**
 	 * query for a list of users
@@ -100,7 +106,7 @@ public class Usermanagement {
 			if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)) {
 				SearchResult sresult = new SearchResult();
 				sresult.setObjectName(Users.class.getName());
-				sresult.setRecords(UsersDaoImpl.getInstance()
+				sresult.setRecords(usersDao
 						.selectMaxFromUsers());
 
 				// get all users
@@ -132,7 +138,7 @@ public class Usermanagement {
 		try {
 			SearchResult sresult = new SearchResult();
 			sresult.setObjectName(Users.class.getName());
-			sresult.setRecords(UsersDaoImpl.getInstance().getAllUserMax(search));
+			sresult.setRecords(usersDao.getAllUserMax(search));
 
 			String[] searchItems = search.split(" ");
 
@@ -203,7 +209,7 @@ public class Usermanagement {
 		// FIXME: We have to check here for the User only cause the
 		// Org-Moderator otherwise cannot access it
 		if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
-			return UsersDaoImpl.getInstance().getUser(user_id);
+			return usersDao.getUser(user_id);
 		}
 		return null;
 	}
@@ -461,13 +467,13 @@ public class Usermanagement {
 		if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)
 				&& user_id != 0) {
 			try {
-				Users us = UsersDaoImpl.getInstance().getUser(user_id);
+				Users us = usersDao.getUser(user_id);
 
 				// Check for duplicates
 				boolean checkName = true;
 
 				if (!login.equals(us.getLogin())) {
-					checkName = UsersDaoImpl.getInstance()
+					checkName = usersDao
 							.checkUserLogin(login);
 				}
 				boolean checkEmail = true;
@@ -477,8 +483,7 @@ public class Usermanagement {
 
 					// Its a new one - check, whether another user already uses
 					// that one...
-					checkEmail = Emailmanagement.getInstance().checkUserEMail(
-							email);
+					checkEmail = emailManagement.checkUserEMail(email);
 				}
 
 				if (generateSipUserData) {
@@ -525,7 +530,7 @@ public class Usermanagement {
 					addressmanagement.updateAdress(us.getAdresses()
 							.getAdresses_id(), street, zip, town, states_id,
 							additionalname, comment, fax, email, phone);
-					// Emailmanagement.getInstance().updateUserEmail(mail.getMail().getMail_id(),user_id,
+					// emailManagement.updateUserEmail(mail.getMail().getMail_id(),user_id,
 					// email);
 
 					// add or delete organisations from this user
@@ -542,11 +547,9 @@ public class Usermanagement {
 										password, login);
 
 						if (us.getUserSipData() == null) {
-							Long userSipDataId = UserSipDataDaoImpl
-									.getInstance().addUserSipData(userSipData);
+							Long userSipDataId = userSipDataDao.addUserSipData(userSipData);
 
-							us.setUserSipData(UserSipDataDaoImpl.getInstance()
-									.getUserSipDataById(userSipDataId));
+							us.setUserSipData(userSipDataDao.getUserSipDataById(userSipDataId));
 						} else {
 
 							us.getUserSipData().setUsername(
@@ -556,8 +559,7 @@ public class Usermanagement {
 							us.getUserSipData().setAuthId(
 									userSipData.getAuthId());
 
-							UserSipDataDaoImpl.getInstance().updateUserSipData(
-									us.getUserSipData());
+							userSipDataDao.updateUserSipData(us.getUserSipData());
 						}
 
 					} else if (us.getUserSipData() == null) {
@@ -567,23 +569,19 @@ public class Usermanagement {
 						userSipData.setUserpass(sip_pass);
 						userSipData.setAuthId(sip_auth);
 
-						Long userSipDataId = UserSipDataDaoImpl.getInstance()
-								.addUserSipData(userSipData);
+						Long userSipDataId = userSipDataDao.addUserSipData(userSipData);
 
-						us.setUserSipData(UserSipDataDaoImpl.getInstance()
-								.getUserSipDataById(userSipDataId));
+						us.setUserSipData(userSipDataDao.getUserSipDataById(userSipDataId));
 
 					} else {
 
-						UserSipData userSipData = UserSipDataDaoImpl
-								.getInstance().getUserSipDataById(
-										us.getUserSipData().getUserSipDataId());
+						UserSipData userSipData = userSipDataDao.getUserSipDataById(us.getUserSipData().getUserSipDataId());
 
 						userSipData.setUsername(sip_user);
 						userSipData.setUserpass(sip_pass);
 						userSipData.setAuthId(sip_auth);
 
-						UserSipDataDaoImpl.getInstance().updateUserSipData(
+						userSipDataDao.updateUserSipData(
 								userSipData);
 
 						us.setUserSipData(userSipData);
@@ -981,9 +979,9 @@ public class Usermanagement {
 			// Check for required data
 			if (login.length() >= 4 && Userpass.length() >= 4) {
 				// Check for duplicates
-				boolean checkName = UsersDaoImpl.getInstance().checkUserLogin(
+				boolean checkName = usersDao.checkUserLogin(
 						login);
-				boolean checkEmail = Emailmanagement.getInstance()
+				boolean checkEmail = emailManagement
 						.checkUserEMail(email);
 				if (checkName && checkEmail) {
 
@@ -998,7 +996,7 @@ public class Usermanagement {
 					if (sendWelcomeMessage && email.length() != 0) {
 						// We need to pass the baseURL to check if this is
 						// really set to be send
-						String sendMail = Emailmanagement.getInstance()
+						String sendMail = emailManagement
 								.sendMail(login, Userpass, email, link,
 										sendConfirmation);
 						if (!sendMail.equals("success"))
@@ -1030,7 +1028,7 @@ public class Usermanagement {
 
 					/*
 					 * Long adress_emails_id =
-					 * Emailmanagement.getInstance().registerEmail(email,
+					 * emailManagement.registerEmail(email,
 					 * address_id,""); if (adress_emails_id==null) { return new
 					 * Long(-112); }
 					 */
@@ -1113,10 +1111,10 @@ public class Usermanagement {
 						.openSIPgUserCreateUser(firstname, "", lastname, users
 								.getAdresses().getEmail(), userpass, login);
 
-				Long userSipDataId = UserSipDataDaoImpl.getInstance()
+				Long userSipDataId = userSipDataDao
 						.addUserSipData(userSipData);
 
-				users.setUserSipData(UserSipDataDaoImpl.getInstance()
+				users.setUserSipData(userSipDataDao
 						.getUserSipDataById(userSipDataId));
 
 			} else {
@@ -1126,10 +1124,10 @@ public class Usermanagement {
 				userSipData.setUserpass(sip_pass);
 				userSipData.setAuthId(sip_auth);
 
-				Long userSipDataId = UserSipDataDaoImpl.getInstance()
+				Long userSipDataId = userSipDataDao
 						.addUserSipData(userSipData);
 
-				users.setUserSipData(UserSipDataDaoImpl.getInstance()
+				users.setUserSipData(userSipDataDao
 						.getUserSipDataById(userSipDataId));
 			}
 
@@ -1221,10 +1219,10 @@ public class Usermanagement {
 						.openSIPgUserCreateUser(firstname, "", lastname, users
 								.getAdresses().getEmail(), userpass, login);
 
-				Long userSipDataId = UserSipDataDaoImpl.getInstance()
+				Long userSipDataId = userSipDataDao
 						.addUserSipData(userSipData);
 
-				users.setUserSipData(UserSipDataDaoImpl.getInstance()
+				users.setUserSipData(userSipDataDao
 						.getUserSipDataById(userSipDataId));
 
 			} else {
@@ -1234,10 +1232,10 @@ public class Usermanagement {
 				userSipData.setUserpass("");
 				userSipData.setAuthId("");
 
-				Long userSipDataId = UserSipDataDaoImpl.getInstance()
+				Long userSipDataId = userSipDataDao
 						.addUserSipData(userSipData);
 
-				users.setUserSipData(UserSipDataDaoImpl.getInstance()
+				users.setUserSipData(userSipDataDao
 						.getUserSipDataById(userSipDataId));
 			}
 
@@ -1286,11 +1284,10 @@ public class Usermanagement {
 
 			usr.setAdresses(addressmanagement.getAdressbyId(adresses_id));
 
-			Long userSipDataId = UserSipDataDaoImpl.getInstance()
+			Long userSipDataId = userSipDataDao
 					.addUserSipData(usr.getUserSipData());
 			if (userSipDataId != null) {
-				usr.setUserSipData(UserSipDataDaoImpl.getInstance()
-						.getUserSipDataById(userSipDataId));
+				usr.setUserSipData(userSipDataDao.getUserSipDataById(userSipDataId));
 			}
 
 			usr = em.merge(usr);
@@ -1337,7 +1334,7 @@ public class Usermanagement {
 				if (user_id != null && user_id > 0) {
 
 					returnLong = user_id;
-					Users savedUser = UsersDaoImpl.getInstance().getUser(
+					Users savedUser = usersDao.getUser(
 							user_id);
 					savedUser.setAge((Date) values.get("age"));
 					savedUser.setFirstname(values.get("firstname").toString());
@@ -1360,8 +1357,7 @@ public class Usermanagement {
 					String email = values.get("email").toString();
 
 					if (!email.equals(savedUser.getAdresses().getEmail())) {
-						boolean checkEmail = Emailmanagement.getInstance()
-								.checkUserEMail(email);
+						boolean checkEmail = emailManagement.checkUserEMail(email);
 						if (!checkEmail) {
 							// mail already used by another user!
 							returnLong = new Long(-11);
@@ -1442,7 +1438,7 @@ public class Usermanagement {
 				// log.debug("addr_e "+addr_e);
 				if (addr != null) {
 					// log.debug("getAdresses_id "+addr_e.getAdresses_id());
-					Users us = UsersDaoImpl.getInstance().getUserByAdressesId(
+					Users us = usersDao.getUserByAdressesId(
 							addr.getAdresses_id());
 					if (us != null) {
 						this.sendHashByUser(us, appLink);
@@ -1455,7 +1451,7 @@ public class Usermanagement {
 				}
 				// check if username given
 			} else if (username.length() > 0) {
-				Users us = UsersDaoImpl.getInstance().getUserByName(username);
+				Users us = usersDao.getUserByName(username);
 				if (us != null) {
 					this.sendHashByUser(us, appLink);
 					return new Long(-4);
@@ -1475,7 +1471,7 @@ public class Usermanagement {
 		log.debug("User: " + us.getLogin());
 		us.setResethash(manageCryptStyle.getInstanceOfCrypt().createPassPhrase(
 				loginData));
-		UsersDaoImpl.getInstance().updateUser(us);
+		usersDao.updateUser(us);
 		String reset_link = appLink + "?lzproxied=solo&hash="
 				+ us.getResethash();
 
@@ -1645,7 +1641,7 @@ public class Usermanagement {
 			user.setPassword(encrypted);
 		}
 
-		UsersDaoImpl.getInstance().updateUser(user);
+		usersDao.updateUser(user);
 
 	}
 
@@ -1829,8 +1825,7 @@ public class Usermanagement {
 
 				SearchResult sresult = new SearchResult();
 				sresult.setObjectName(Users.class.getName());
-				sresult.setRecords(UsersDaoImpl.getInstance()
-						.selectMaxFromUsersWithSearch(search));
+				sresult.setRecords(usersDao.selectMaxFromUsersWithSearch(search));
 
 				// get all users
 				Query query = em.createQuery(hql);

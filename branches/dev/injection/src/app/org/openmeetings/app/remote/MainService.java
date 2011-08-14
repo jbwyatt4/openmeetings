@@ -78,6 +78,16 @@ public class MainService implements IPendingServiceCallback {
 	private Navimanagement navimanagement;
 	@Autowired
 	private Roommanagement roommanagement;
+	@Autowired
+	private ConferenceLogDaoImpl conferenceLogDao;
+	@Autowired
+	private UsersDaoImpl usersDao;
+	@Autowired
+	private LdapConfigDaoImpl ldapConfigDao;
+	@Autowired
+	private SOAPLoginDaoImpl soapLoginDao;
+	@Autowired
+	private Invitationmanagement invitationManagement;
 
 	// External User Types
 	public static final String EXTERNAL_USER_TYPE_LDAP = "LDAP";
@@ -141,7 +151,7 @@ public class MainService implements IPendingServiceCallback {
 		Long users_id = sessionManagement.checkSession(SID);
 		long user_level = userManagement.getUserLevelByID(users_id);
 		if (user_level > 2) {
-			users = UsersDaoImpl.getInstance().getUser(new Long(USER_ID));
+			users = usersDao.getUser(new Long(USER_ID));
 		} else {
 			users.setFirstname("No rights to do this");
 		}
@@ -339,8 +349,7 @@ public class MainService implements IPendingServiceCallback {
 
 				// LDAP Loggedin Users cannot use the permanent Login Flag
 
-				LdapConfig ldapConfig = LdapConfigDaoImpl.getInstance()
-						.getLdapConfigById(ldapConfigId);
+				LdapConfig ldapConfig = ldapConfigDao.getLdapConfigById(ldapConfigId);
 
 				String ldapLogin = usernameOrEmail;
 				if (ldapConfig.getAddDomainToUserName() != null
@@ -450,8 +459,7 @@ public class MainService implements IPendingServiceCallback {
 
 			log.debug("swfURL " + clientURL);
 
-			SOAPLogin soapLogin = SOAPLoginDaoImpl.getInstance()
-					.getSOAPLoginByHash(secureHash);
+			SOAPLogin soapLogin = soapLoginDao.getSOAPLoginByHash(secureHash);
 
 			if (soapLogin.getUsed()) {
 
@@ -503,7 +511,7 @@ public class MainService implements IPendingServiceCallback {
 
 				soapLogin.setClientURL(clientURL);
 
-				SOAPLoginDaoImpl.getInstance().updateSOAPLogin(soapLogin);
+				soapLoginDao.updateSOAPLogin(soapLogin);
 
 				// Create Return Object and hide the validated
 				// sessionHash that is stored server side
@@ -553,7 +561,7 @@ public class MainService implements IPendingServiceCallback {
 			currentClient.setMail(email);
 
 			// Log the User
-			ConferenceLogDaoImpl.getInstance().addConferenceLog(
+			conferenceLogDao.addConferenceLog(
 					"nicknameEnter", currentClient.getUser_id(), streamId,
 					null, currentClient.getUserip(), currentClient.getScope(),
 					currentClient.getExternalUserId(),
@@ -867,7 +875,7 @@ public class MainService implements IPendingServiceCallback {
 		long user_level = userManagement.getUserLevelByID(users_id);
 		if (user_level >= 1) {
 			userManagement.logout(SID, users_id);
-			return UsersDaoImpl.getInstance().deleteUserID(users_id);
+			return usersDao.deleteUserID(users_id);
 		} else {
 			return new Long(-10);
 		}
@@ -895,7 +903,7 @@ public class MainService implements IPendingServiceCallback {
 			String email, String subject, Long room_id) {
 		Long users_id = sessionManagement.checkSession(SID);
 		Long user_level = userManagement.getUserLevelByID(users_id);
-		return Invitationmanagement.getInstance().sendInvitionLink(user_level,
+		return invitationManagement.sendInvitionLink(user_level,
 				username, message, domain, room, roomtype, baseurl, email,
 				subject, room_id, null, null);
 	}

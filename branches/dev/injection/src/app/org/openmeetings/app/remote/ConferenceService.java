@@ -62,6 +62,8 @@ public class ConferenceService {
 	private OmTimeZoneDaoImpl omTimeZoneDaoImpl;
 	@Autowired
 	private Roommanagement roommanagement;
+	@Autowired
+	private RoomModeratorsDaoImpl roomModeratorsDao;
 
 	// beans, see chaservice.service.xml
 	private ClientListManager clientListManager = null;
@@ -688,8 +690,7 @@ public class ConferenceService {
 
 			if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
 
-				return RoomModeratorsDaoImpl.getInstance()
-						.getRoomModeratorByRoomId(roomId);
+				return roomModeratorsDao.getRoomModeratorByRoomId(roomId);
 
 			}
 

@@ -1,20 +1,21 @@
 package org.openmeetings.app.data.user;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
+import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import org.openmeetings.app.data.basic.Configurationmanagement;
 import org.openmeetings.app.data.basic.Fieldmanagment;
 import org.openmeetings.app.persistence.beans.lang.Fieldlanguagesvalues;
-import org.openmeetings.app.persistence.utils.PersistenceSessionUtil;
 import org.openmeetings.app.remote.red5.ScopeApplicationAdapter;
 import org.openmeetings.app.templates.RegisterUserTemplate;
 import org.openmeetings.utils.mail.MailHandler;
 import org.red5.logging.Red5LoggerFactory;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
+@Transactional
 public class Emailmanagement {
 
 	private static final Logger log = Red5LoggerFactory.getLogger(
@@ -23,18 +24,8 @@ public class Emailmanagement {
 	private Configurationmanagement cfgManagement;
 	@Autowired
 	private Fieldmanagment fieldmanagment;
-
-	public Emailmanagement() {
-	}
-
-	private static Emailmanagement instance = null;
-
-	public static synchronized Emailmanagement getInstance() {
-		if (instance == null) {
-			instance = new Emailmanagement();
-		}
-		return instance;
-	}
+	@PersistenceContext
+	private EntityManager em;
 
 	private boolean checkUserLevel(int user_level) {
 		if (user_level > 1) {
@@ -340,18 +331,11 @@ public class Emailmanagement {
 			if (email.length() == 0)
 				return true;
 			log.debug("checkUserMail: " + email);
-			Object idf = PersistenceSessionUtil.createSession();
-			EntityManager session = PersistenceSessionUtil.getSession();
-			EntityTransaction tx = session.getTransaction();
-			tx.begin();
-			Query query = session
-					.createQuery("select c from Adresses as c where c.email LIKE :email AND c.deleted <> :deleted");
+			Query query = em.createQuery("select c from Adresses as c where c.email LIKE :email AND c.deleted <> :deleted");
 			query.setParameter("email", email);
 			query.setParameter("deleted", "true");
 			int count = query.getResultList().size();
 			log.debug("size: " + count);
-			tx.commit();
-			PersistenceSessionUtil.closeSession(idf);
 
 			if (count > 0) {
 				return false;

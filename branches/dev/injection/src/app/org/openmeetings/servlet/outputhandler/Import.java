@@ -30,6 +30,8 @@ public class Import extends HttpServlet {
 	private Sessionmanagement sessionManagement;
     @Autowired
     private Usermanagement userManagement;
+	@Autowired
+	private UsersDaoImpl usersDao;
 	
 	/*
 	 * (non-Javadoc)
@@ -106,7 +108,7 @@ public class Import extends HttpServlet {
 			log.debug("Return And Close");
 			
 			LinkedHashMap<String,Object> hs = new LinkedHashMap<String,Object>();
-			hs.put("user", UsersDaoImpl.getInstance().getUser(users_id));
+			hs.put("user", usersDao.getUser(users_id));
 			hs.put("message", "library");
 			hs.put("action", "import");
 			

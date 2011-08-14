@@ -4,8 +4,8 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
 import javax.persistence.NoResultException;
+import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -15,32 +15,21 @@ import javax.persistence.criteria.Root;
 
 import org.apache.commons.lang.StringUtils;
 import org.openmeetings.app.persistence.beans.user.Users;
-import org.openmeetings.app.persistence.utils.PersistenceSessionUtil;
 import org.openmeetings.app.remote.red5.ScopeApplicationAdapter;
 import org.openmeetings.utils.crypt.ManageCryptStyle;
 import org.red5.logging.Red5LoggerFactory;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
+@Transactional
 public class UsersDaoImpl {
 
-	private static final Logger log = Red5LoggerFactory.getLogger(
-			UsersDaoImpl.class, ScopeApplicationAdapter.webAppRootKey);
-
+	private static final Logger log = Red5LoggerFactory.getLogger(UsersDaoImpl.class, ScopeApplicationAdapter.webAppRootKey);
+	@PersistenceContext
+	private EntityManager em;
 	@Autowired
 	private ManageCryptStyle manageCryptStyle;
-
-	private static UsersDaoImpl instance = null;
-
-	private UsersDaoImpl() {
-	}
-
-	public static synchronized UsersDaoImpl getInstance() {
-		if (instance == null) {
-			instance = new UsersDaoImpl();
-		}
-		return instance;
-	}
 
 	/**
 	 * 
@@ -50,25 +39,14 @@ public class UsersDaoImpl {
 	public Users getUser(Long user_id) {
 		if (user_id != null && user_id > 0) {
 			try {
-				Object idf = PersistenceSessionUtil.createSession();
-				EntityManager session = PersistenceSessionUtil.getSession();
-				EntityTransaction tx = session.getTransaction();
-				tx.begin();
-				Query query = session
-						.createQuery("select c from Users as c where c.user_id = :user_id");
+				Query query = em.createQuery("select c from Users as c where c.user_id = :user_id");
 				query.setParameter("user_id", user_id);
-
-				session.flush();
 
 				Users users = null;
 				try {
 					users = (Users) query.getSingleResult();
 				} catch (NoResultException ex) {
 				}
-				session.refresh(users);
-
-				tx.commit();
-				PersistenceSessionUtil.closeSession(idf);
 
 				// Somehow the Organizations are missing here o
 
@@ -87,20 +65,13 @@ public class UsersDaoImpl {
 	public void updateUser(Users user) {
 		if (user.getUser_id() > 0) {
 			try {
-				Object idf = PersistenceSessionUtil.createSession();
-				EntityManager session = PersistenceSessionUtil.getSession();
-				EntityTransaction tx = session.getTransaction();
-				tx.begin();
-				session.flush();
 				if (user.getUser_id() == null) {
-					session.persist(user);
+					em.persist(user);
 				} else {
-					if (!session.contains(user)) {
-						session.merge(user);
+					if (!em.contains(user)) {
+						em.merge(user);
 					}
 				}
-				tx.commit();
-				PersistenceSessionUtil.closeSession(idf);
 			} catch (Exception ex2) {
 				log.error("[updateUser] ", ex2);
 			}
@@ -112,37 +83,21 @@ public class UsersDaoImpl {
 	public Long deleteUserID(long USER_ID) {
 		try {
 			if (USER_ID != 0) {
-				Users us = UsersDaoImpl.getInstance().getUser(USER_ID);
+				Users us = getUser(USER_ID);
 				us.setDeleted("true");
 				us.setUpdatetime(new Date());
 				// result +=
 				// Groupmanagement.getInstance().deleteUserFromAllGroups(new
 				// Long(USER_ID));
 
-				Object idf = PersistenceSessionUtil.createSession();
-				EntityManager session = PersistenceSessionUtil.getSession();
-				EntityTransaction tx = session.getTransaction();
-				tx.begin();
 				if (us.getUser_id() == null) {
-					session.persist(us);
+					em.persist(us);
 				} else {
-					if (!session.contains(us)) {
-						session.merge(us);
+					if (!em.contains(us)) {
+						em.merge(us);
 					}
 				}
-				tx.commit();
-
-				PersistenceSessionUtil.closeSession(idf);
 				return us.getUser_id();
-				// result +=
-				// ResHandler.getBestellmanagement().deleteWarenkorbByUserID(USER_ID);
-				// result +=
-				// ResHandler.getEmailmanagement().deleteEMailByUserID(USER_ID);
-				// result +=
-				// ResHandler.getContactmanagement().deleteContactUsergroups(USER_ID);
-				// result +=
-				// ResHandler.getContactmanagement().deleteUserContact(USER_ID);
-
 			}
 		} catch (Exception ex2) {
 			log.error("[deleteUserID]", ex2);
@@ -158,15 +113,8 @@ public class UsersDaoImpl {
 	public Long selectMaxFromUsers() {
 		try {
 			// get all users
-			Object idf = PersistenceSessionUtil.createSession();
-			EntityManager session = PersistenceSessionUtil.getSession();
-			EntityTransaction tx = session.getTransaction();
-			tx.begin();
-			Query query = session
-					.createQuery("select count(c.user_id) from Users c where c.deleted = 'false'");
+			Query query = em.createQuery("select count(c.user_id) from Users c where c.deleted = 'false'");
 			List ll = query.getResultList();
-			tx.commit();
-			PersistenceSessionUtil.closeSession(idf);
 			log.info("selectMaxFromUsers" + ll.get(0));
 			return (Long) ll.get(0);
 		} catch (Exception ex2) {
@@ -179,19 +127,13 @@ public class UsersDaoImpl {
 		try {
 
 			// get all users
-			Object idf = PersistenceSessionUtil.createSession();
-			EntityManager session = PersistenceSessionUtil.getSession();
-			EntityTransaction tx = session.getTransaction();
-			tx.begin();
-			CriteriaBuilder cb = session.getCriteriaBuilder();
+			CriteriaBuilder cb = em.getCriteriaBuilder();
 			CriteriaQuery<Users> cq = cb.createQuery(Users.class);
 			Root<Users> c = cq.from(Users.class);
 			Predicate condition = cb.equal(c.get("deleted"), "false");
 			cq.where(condition);
-			TypedQuery<Users> q = session.createQuery(cq);
+			TypedQuery<Users> q = em.createQuery(cq);
 			List<Users> ll = q.getResultList();
-			tx.commit();
-			PersistenceSessionUtil.closeSession(idf);
 
 			return ll;
 
@@ -205,19 +147,13 @@ public class UsersDaoImpl {
 		try {
 
 			// get all users
-			Object idf = PersistenceSessionUtil.createSession();
-			EntityManager session = PersistenceSessionUtil.getSession();
-			EntityTransaction tx = session.getTransaction();
-			tx.begin();
-			CriteriaBuilder cb = session.getCriteriaBuilder();
+			CriteriaBuilder cb = em.getCriteriaBuilder();
 			CriteriaQuery<Users> cq = cb.createQuery(Users.class);
 			Root<Users> c = cq.from(Users.class);
 			Predicate condition = cb.equal(c.get("deleted"), "false");
 			cq.where(condition);
-			TypedQuery<Users> q = session.createQuery(cq);
+			TypedQuery<Users> q = em.createQuery(cq);
 			List<Users> ll = q.getResultList();
-			tx.commit();
-			PersistenceSessionUtil.closeSession(idf);
 
 			return ll;
 
@@ -258,21 +194,10 @@ public class UsersDaoImpl {
 
 			log.debug("Show HQL: " + hql);
 
-			Object idf = PersistenceSessionUtil.createSession();
-			EntityManager session = PersistenceSessionUtil.getSession();
-			EntityTransaction tx = session.getTransaction();
-			tx.begin();
-			Query query = session.createQuery(hql);
+			Query query = em.createQuery(hql);
 
 			// log.debug("id: "+folderId);
-
-			// query.setParameter("macomUserId", userId);
-			// query.setParameter("messageFolder", folderId);
-			// query
-
 			List ll = query.getResultList();
-			tx.commit();
-			PersistenceSessionUtil.closeSession(idf);
 
 			// log.error((Long)ll.get(0));
 			Long i = (Long) ll.get(0);
@@ -292,18 +217,11 @@ public class UsersDaoImpl {
 	 */
 	public boolean checkUserLogin(String DataValue) {
 		try {
-			Object idf = PersistenceSessionUtil.createSession();
-			EntityManager session = PersistenceSessionUtil.getSession();
-			EntityTransaction tx = session.getTransaction();
-			tx.begin();
-			Query query = session
-					.createQuery("select c from Users as c where c.login = :DataValue AND c.deleted <> :deleted");
+			Query query = em.createQuery("select c from Users as c where c.login = :DataValue AND c.deleted <> :deleted");
 			query.setParameter("DataValue", DataValue);
 			query.setParameter("deleted", "true");
 			int count = query.getResultList().size();
 
-			tx.commit();
-			PersistenceSessionUtil.closeSession(idf);
 			if (count != 0) {
 				return false;
 			}
@@ -317,11 +235,7 @@ public class UsersDaoImpl {
 		try {
 			String hql = "SELECT u FROM Users as u "
 					+ " where u.login = :login" + " AND u.deleted <> :deleted";
-			Object idf = PersistenceSessionUtil.createSession();
-			EntityManager session = PersistenceSessionUtil.getSession();
-			EntityTransaction tx = session.getTransaction();
-			tx.begin();
-			Query query = session.createQuery(hql);
+			Query query = em.createQuery(hql);
 			query.setParameter("login", login);
 			query.setParameter("deleted", "true");
 			Users us = null;
@@ -329,8 +243,6 @@ public class UsersDaoImpl {
 				us = (Users) query.getSingleResult();
 			} catch (NoResultException ex) {
 			}
-			tx.commit();
-			PersistenceSessionUtil.closeSession(idf);
 			return us;
 		} catch (Exception e) {
 			log.error("[getUserByAdressesId]", e);
@@ -343,11 +255,7 @@ public class UsersDaoImpl {
 			String hql = "SELECT u FROM Users as u "
 					+ " where u.adresses.adresses_id = :adresses_id"
 					+ " AND u.deleted <> :deleted";
-			Object idf = PersistenceSessionUtil.createSession();
-			EntityManager session = PersistenceSessionUtil.getSession();
-			EntityTransaction tx = session.getTransaction();
-			tx.begin();
-			Query query = session.createQuery(hql);
+			Query query = em.createQuery(hql);
 			query.setParameter("adresses_id", adresses_id);
 			query.setParameter("deleted", "true");
 			Users us = null;
@@ -355,8 +263,6 @@ public class UsersDaoImpl {
 				us = (Users) query.getSingleResult();
 			} catch (NoResultException ex) {
 			}
-			tx.commit();
-			PersistenceSessionUtil.closeSession(idf);
 			return us;
 		} catch (Exception e) {
 			log.error("[getUserByAdressesId]", e);
@@ -371,11 +277,7 @@ public class UsersDaoImpl {
 			String hql = "SELECT u FROM Users as u "
 					+ " where u.resethash = :resethash"
 					+ " AND u.deleted <> :deleted";
-			Object idf = PersistenceSessionUtil.createSession();
-			EntityManager session = PersistenceSessionUtil.getSession();
-			EntityTransaction tx = session.getTransaction();
-			tx.begin();
-			Query query = session.createQuery(hql);
+			Query query = em.createQuery(hql);
 			query.setParameter("resethash", hash);
 			query.setParameter("deleted", "true");
 			Users us = null;
@@ -383,8 +285,6 @@ public class UsersDaoImpl {
 				us = (Users) query.getSingleResult();
 			} catch (NoResultException ex) {
 			}
-			tx.commit();
-			PersistenceSessionUtil.closeSession(idf);
 			if (us != null) {
 				return us;
 			} else {
@@ -404,7 +304,7 @@ public class UsersDaoImpl {
 				us.setPassword(manageCryptStyle.getInstanceOfCrypt()
 						.createPassPhrase(pass));
 				us.setResethash("");
-				UsersDaoImpl.getInstance().updateUser(us);
+				updateUser(us);
 				return new Long(-8);
 			} else {
 				return u;
@@ -429,15 +329,9 @@ public class UsersDaoImpl {
 					+ "OR lower(c.lastname) LIKE :search " + ")";
 
 			// get all users
-			Object idf = PersistenceSessionUtil.createSession();
-			EntityManager session = PersistenceSessionUtil.getSession();
-			EntityTransaction tx = session.getTransaction();
-			tx.begin();
-			Query query = session.createQuery(hql);
+			Query query = em.createQuery(hql);
 			query.setParameter("search", StringUtils.lowerCase(search));
 			List ll = query.getResultList();
-			tx.commit();
-			PersistenceSessionUtil.closeSession(idf);
 			log.info("selectMaxFromUsers" + ll.get(0));
 			return (Long) ll.get(0);
 		} catch (Exception ex2) {

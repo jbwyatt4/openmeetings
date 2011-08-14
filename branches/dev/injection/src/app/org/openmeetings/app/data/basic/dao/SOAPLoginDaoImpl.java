@@ -4,36 +4,27 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
+import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import org.openmeetings.app.persistence.beans.basic.SOAPLogin;
-import org.openmeetings.app.persistence.utils.PersistenceSessionUtil;
 import org.openmeetings.app.remote.red5.ScopeApplicationAdapter;
 import org.openmeetings.utils.crypt.ManageCryptStyle;
 import org.red5.logging.Red5LoggerFactory;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
+@Transactional
 public class SOAPLoginDaoImpl {
 
 	private static final Logger log = Red5LoggerFactory.getLogger(
 			SOAPLoginDaoImpl.class, ScopeApplicationAdapter.webAppRootKey);
 
+	@PersistenceContext
+	private EntityManager em;
 	@Autowired
 	private ManageCryptStyle manageCryptStyle;
-
-	private SOAPLoginDaoImpl() {
-	}
-
-	private static SOAPLoginDaoImpl instance = null;
-
-	public static synchronized SOAPLoginDaoImpl getInstance() {
-		if (instance == null) {
-			instance = new SOAPLoginDaoImpl();
-		}
-		return instance;
-	}
 
 	public String addSOAPLogin(String sessionHash, Long room_id,
 			boolean becomemoderator, boolean showAudioVideoTest,
@@ -46,11 +37,6 @@ public class SOAPLoginDaoImpl {
 
 			String hash = manageCryptStyle.getInstanceOfCrypt()
 					.createPassPhrase(thistime);
-
-			Object idf = PersistenceSessionUtil.createSession();
-			EntityManager session = PersistenceSessionUtil.getSession();
-			EntityTransaction tx = session.getTransaction();
-			tx.begin();
 
 			SOAPLogin soapLogin = new SOAPLogin();
 			soapLogin.setCreated(new Date());
@@ -66,11 +52,8 @@ public class SOAPLoginDaoImpl {
 			soapLogin.setLandingZone(landingZone);
 			soapLogin.setAllowRecording(allowRecording);
 
-			soapLogin = session.merge(soapLogin);
+			soapLogin = em.merge(soapLogin);
 			Long soapLoginId = soapLogin.getSoapLoginId();
-
-			tx.commit();
-			PersistenceSessionUtil.closeSession(idf);
 
 			if (soapLoginId > 0) {
 				return hash;
@@ -88,15 +71,9 @@ public class SOAPLoginDaoImpl {
 		try {
 			String hql = "select sl from SOAPLogin as sl "
 					+ "WHERE sl.hash LIKE :hash";
-			Object idf = PersistenceSessionUtil.createSession();
-			EntityManager session = PersistenceSessionUtil.getSession();
-			EntityTransaction tx = session.getTransaction();
-			tx.begin();
-			Query query = session.createQuery(hql);
+			Query query = em.createQuery(hql);
 			query.setParameter("hash", hash);
 			List<SOAPLogin> sList = query.getResultList();
-			tx.commit();
-			PersistenceSessionUtil.closeSession(idf);
 
 			if (sList.size() > 1) {
 				throw new Exception(
@@ -116,23 +93,13 @@ public class SOAPLoginDaoImpl {
 
 	public void updateSOAPLogin(SOAPLogin soapLogin) {
 		try {
-
-			Object idf = PersistenceSessionUtil.createSession();
-			EntityManager session = PersistenceSessionUtil.getSession();
-			EntityTransaction tx = session.getTransaction();
-			tx.begin();
-
 			if (soapLogin.getSoapLoginId() == 0) {
-				session.persist(soapLogin);
+				em.persist(soapLogin);
 			} else {
-				if (!session.contains(soapLogin)) {
-					session.merge(soapLogin);
+				if (!em.contains(soapLogin)) {
+					em.merge(soapLogin);
 				}
 			}
-
-			tx.commit();
-			PersistenceSessionUtil.closeSession(idf);
-
 		} catch (Exception ex2) {
 			log.error("[updateSOAPLogin]: ", ex2);
 		}

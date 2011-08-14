@@ -9,13 +9,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class UsersDaoImplTest extends AbstractTestCase {
     @Autowired
     private Usermanagement userManagement;
+	@Autowired
+	private UsersDaoImpl usersDao;
 	
 	public UsersDaoImplTest(String name){
 		super(name);
 	}
 	
 	final public void testUsersDaoImpl() throws Exception {
-		UsersDaoImpl usersDao = UsersDaoImpl.getInstance(); 
 		assertNotNull("Cann't access to user dao implimentation", usersDao);
 		
 		// 

@@ -27,6 +27,7 @@ import org.openmeetings.app.persistence.beans.user.Users;
 import org.openmeetings.app.remote.red5.ScopeApplicationAdapter;
 import org.red5.logging.Red5LoggerFactory;
 import org.slf4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -43,6 +44,8 @@ public class Organisationmanagement {
 
 	@PersistenceContext
 	private EntityManager em;
+	@Autowired
+	private UsersDaoImpl usersDao;
 
 	/**
 	 * adds a new organisation if userlevel is admin
@@ -556,7 +559,7 @@ public class Organisationmanagement {
 	private boolean checkUserContainsOrganisation(long users_id,
 			long organisation_id) {
 		try {
-			Users us = UsersDaoImpl.getInstance().getUser(users_id);
+			Users us = usersDao.getUser(users_id);
 			for (Iterator it = us.getOrganisation_users().iterator(); it
 					.hasNext();) {
 				Organisation_Users orguser = (Organisation_Users) it.next();
@@ -645,7 +648,7 @@ public class Organisationmanagement {
 
 				// Only add this single Organization add this point cause
 				// cause all the other are not needed at this point
-				Users user = UsersDaoImpl.getInstance()
+				Users user = usersDao
 						.getUser(us.getUser_id());
 
 				user.setOrganisation_users(new LinkedList<Organisation_Users>());
@@ -678,7 +681,7 @@ public class Organisationmanagement {
 			for (Iterator<Organisation_Users> it = userOrg.iterator(); it
 					.hasNext();) {
 				Organisation_Users us = it.next();
-				userL.add(UsersDaoImpl.getInstance().getUser(us.getUser_id()));
+				userL.add(usersDao.getUser(us.getUser_id()));
 			}
 			Collections.sort(userL, new UsersLoginComperator());
 			return userL;

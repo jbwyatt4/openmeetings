@@ -25,6 +25,8 @@ public class GetRecordings extends TestCase {
 	private RecordingDaoImpl recordingDao;
 	@Autowired
 	private Roommanagement roommanagement;
+	@Autowired
+	private UsersDaoImpl usersDao;
 
 	public GetRecordings(String testname) {
 		super(testname);
@@ -50,7 +52,7 @@ public class GetRecordings extends TestCase {
 				i++;
 			}
 
-			Users us = UsersDaoImpl.getInstance().getUser(users_id);
+			Users us = usersDao.getUser(users_id);
 
 			for (Iterator<Organisation_Users> iter = us.getOrganisation_users()
 					.iterator(); iter.hasNext();) {

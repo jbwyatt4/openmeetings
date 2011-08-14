@@ -18,6 +18,7 @@ import org.openmeetings.utils.StoredFile;
 import org.openmeetings.utils.crypt.MD5;
 import org.red5.logging.Red5LoggerFactory;
 import org.slf4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class FileProcessor {
 
@@ -32,6 +33,9 @@ public class FileProcessor {
 	public void setFlvExplorerConverter(FlvExplorerConverter flvExplorerConverter) {
 		this.flvExplorerConverter = flvExplorerConverter;
 	}
+	@Autowired
+	private FileExplorerItemDaoImpl fileExplorerItemDao;
+
 
 	private static FileProcessor instance;
 	
@@ -167,8 +171,7 @@ public class FileProcessor {
             fileHashName = newFileSystemName + ".flv";
         }
 
-        FileExplorerItem fileExplorerItem = FileExplorerItemDaoImpl
-                .getInstance().getFileExplorerItemsById(parentFolderId);
+        FileExplorerItem fileExplorerItem = fileExplorerItemDao.getFileExplorerItemsById(parentFolderId);
 
         if (fileExplorerItem != null) {
             if (fileExplorerItem.getIsFolder() == null
@@ -177,7 +180,7 @@ public class FileProcessor {
             }
         }
 
-        Long fileExplorerItemId = FileExplorerItemDaoImpl.getInstance().add(
+        Long fileExplorerItemId = fileExplorerItemDao.add(
                 fileSystemName, fileHashName, // The Hashname of the file
                 parentFolderId, ownerId, room_id, userId, false, // isFolder
                 isImage, isPresentation, "", false, isChart, 

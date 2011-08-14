@@ -51,6 +51,12 @@ public class AppointmentDaoImpl {
 	private AppointmentCategoryDaoImpl appointmentCategoryDaoImpl;
 	@Autowired
 	private AppointmentReminderTypDaoImpl appointmentReminderTypDaoImpl;
+	@Autowired
+	private MeetingMemberDaoImpl meetingMemberDao;
+	@Autowired
+	private UsersDaoImpl usersDao;
+	@Autowired
+	private Invitationmanagement invitationManagement;
 
 	/*
 	 * insert, update, delete, select
@@ -140,7 +146,7 @@ public class AppointmentDaoImpl {
 
 			for (Appointment appointment : appointList) {
 
-				appointment.setMeetingMember(MeetingMemberDaoImpl.getInstance()
+				appointment.setMeetingMember(meetingMemberDao
 						.getMeetingMemberByAppointmentId(
 								appointment.getAppointmentId()));
 
@@ -221,7 +227,7 @@ public class AppointmentDaoImpl {
 			ap.setLanguage_id(language_id);
 			ap.setIsPasswordProtected(isPasswordProtected);
 			ap.setPassword(password);
-			ap.setUserId(UsersDaoImpl.getInstance().getUser(userId));
+			ap.setUserId(usersDao.getUser(userId));
 			ap.setAppointmentCategory(appointmentCategoryDaoImpl
 					.getAppointmentCategoryById(categoryId));
 			ap.setRoom(room);
@@ -381,7 +387,7 @@ public class AppointmentDaoImpl {
 					appointment.setLanguage_id(language_id);
 					appointment.setIsPasswordProtected(isPasswordProtected);
 					appointment.setPassword(password);
-					// ap.setUserId(UsersDaoImpl.getInstance().getUser(userId));
+					// ap.setUserId(usersDao.getUser(userId));
 					appointment.setAppointmentCategory(appointmentCategory);
 
 					if (appointment.getAppointmentId() == null) {
@@ -457,7 +463,7 @@ public class AppointmentDaoImpl {
 			}
 
 			// Update Invitation hash to new time
-			Invitationmanagement.getInstance().updateInvitationByAppointment(
+			invitationManagement.updateInvitationByAppointment(
 					appointmentId, appointmentstart, appointmentend);
 
 			ap.setAppointmentName(appointmentName);
@@ -473,7 +479,7 @@ public class AppointmentDaoImpl {
 			ap.setLanguage_id(language_id);
 			ap.setIsPasswordProtected(isPasswordProtected);
 			ap.setPassword(password);
-			// ap.setUserId(UsersDaoImpl.getInstance().getUser(userId));
+			// ap.setUserId(usersDao.getUser(userId));
 			ap.setAppointmentCategory(appointmentCategory);
 
 			if (ap.getAppointmentId() == null) {
@@ -490,9 +496,7 @@ public class AppointmentDaoImpl {
 			String invitorName = user.getFirstname() + " " + user.getLastname()
 					+ " [" + user.getAdresses().getEmail() + "]";
 
-			List<MeetingMember> meetingsRemoteMembers = MeetingMemberDaoImpl
-					.getInstance().getMeetingMemberByAppointmentId(
-							ap.getAppointmentId());
+			List<MeetingMember> meetingsRemoteMembers = meetingMemberDao.getMeetingMemberByAppointmentId(ap.getAppointmentId());
 
 			// to remove
 			for (MeetingMember memberRemote : meetingsRemoteMembers) {
@@ -524,10 +528,10 @@ public class AppointmentDaoImpl {
 					MeetingMemberLogic.getInstance().deleteMeetingMember(
 							memberRemote.getMeetingMemberId(), users_id,
 							language_id);
-					// MeetingMemberDaoImpl.getInstance().deleteMeetingMember(memberRemote.getMeetingMemberId());
+					// meetingMemberDao.deleteMeetingMember(memberRemote.getMeetingMemberId());
 				} else {
 					// Notify member of changes
-					Invitationmanagement.getInstance().updateInvitation(ap,
+					invitationManagement.updateInvitation(ap,
 							memberRemote, users_id, language_id, invitorName);
 
 				}
@@ -623,7 +627,7 @@ public class AppointmentDaoImpl {
 			}
 
 			// Update Invitation hash to new time
-			Invitationmanagement.getInstance().updateInvitationByAppointment(
+			invitationManagement.updateInvitationByAppointment(
 					appointmentId, appointmentstart, appointmentend);
 
 			ap.setAppointmentStarttime(appointmentstart);
@@ -638,9 +642,7 @@ public class AppointmentDaoImpl {
 				}
 			}
 
-			List<MeetingMember> meetingsRemoteMembers = MeetingMemberDaoImpl
-					.getInstance().getMeetingMemberByAppointmentId(
-							ap.getAppointmentId());
+			List<MeetingMember> meetingsRemoteMembers = meetingMemberDao.getMeetingMemberByAppointmentId(ap.getAppointmentId());
 
 			// Adding Invitor Name
 			Users user = userManagement.getUserById(users_id);
@@ -651,7 +653,7 @@ public class AppointmentDaoImpl {
 			for (MeetingMember memberRemote : meetingsRemoteMembers) {
 
 				// Notify member of changes
-				Invitationmanagement.getInstance().updateInvitation(ap,
+				invitationManagement.updateInvitation(ap,
 						memberRemote, users_id, language_id, invitorName);
 
 			}
@@ -728,7 +730,7 @@ public class AppointmentDaoImpl {
 			for (Appointment appointment : listAppoints) {
 				log.debug("" + appointment);
 
-				appointment.setMeetingMember(MeetingMemberDaoImpl.getInstance()
+				appointment.setMeetingMember(meetingMemberDao
 						.getMeetingMemberByAppointmentId(
 								appointment.getAppointmentId()));
 

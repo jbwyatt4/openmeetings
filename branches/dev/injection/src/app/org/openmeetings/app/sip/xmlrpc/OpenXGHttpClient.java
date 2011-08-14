@@ -36,6 +36,8 @@ public class OpenXGHttpClient {
 			OpenXGHttpClient.class, ScopeApplicationAdapter.webAppRootKey);
 	@Autowired
 	private Configurationmanagement cfgManagement;
+	@Autowired
+	private OpenXGReturnObjectDaoImpl openXGReturnObjectDao;
 
 	public String digest_calculate(Object[] params) throws Exception {
 		String stringToMd5 = "";
@@ -214,7 +216,7 @@ public class OpenXGHttpClient {
 
 			openXGReturnObject.setMethodName("OpenSIPg.UserCreate");
 
-			OpenXGReturnObjectDaoImpl.getInstance().addOpenXGReturnObject(
+			openXGReturnObjectDao.addOpenXGReturnObject(
 					openXGReturnObject);
 
 			log.debug(" Status_code " + openXGReturnObject.getStatus_code());
@@ -236,7 +238,7 @@ public class OpenXGHttpClient {
 
 				openXGReturnObjectURI.setMethodName("OpenSIPg.URIUserIDAdd");
 
-				OpenXGReturnObjectDaoImpl.getInstance().addOpenXGReturnObject(
+				openXGReturnObjectDao.addOpenXGReturnObject(
 						openXGReturnObjectURI);
 
 				log.debug(" openXGReturnObjectURI Status Code "
@@ -365,7 +367,7 @@ public class OpenXGHttpClient {
 
 			openXGReturnObject.setMethodName("OpenSIPg.UserConferenceAdd");
 
-			OpenXGReturnObjectDaoImpl.getInstance().addOpenXGReturnObject(
+			openXGReturnObjectDao.addOpenXGReturnObject(
 					openXGReturnObject);
 
 			return openXGReturnObject;

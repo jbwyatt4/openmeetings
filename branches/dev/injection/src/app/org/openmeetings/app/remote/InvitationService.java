@@ -32,6 +32,8 @@ public class InvitationService implements IPendingServiceCallback {
 	private Usermanagement userManagement;
 	@Autowired
 	private OmTimeZoneDaoImpl omTimeZoneDaoImpl;
+	@Autowired
+	private Invitationmanagement invitationManagement;
 
 	public void resultReceived(IPendingServiceCall arg0) {
 		// TODO Auto-generated method stub
@@ -131,7 +133,7 @@ public class InvitationService implements IPendingServiceCallback {
 			Date gmtTimeStart = new Date(dFrom.getTime() - offset);
 			Date gmtTimeEnd = new Date(dTo.getTime() - offset);
 
-			Invitations invitation = Invitationmanagement.getInstance()
+			Invitations invitation = invitationManagement
 					.addInvitationLink(user_level, username, message, baseurl,
 							email, subject, room_id, conferencedomain,
 							isPasswordProtected, invitationpass, valid, dFrom,
@@ -150,18 +152,18 @@ public class InvitationService implements IPendingServiceCallback {
 		return null;
 
 		// return
-		// Invitationmanagement.getInstance().sendInvitionLink(user_level,
+		// invitationManagement.sendInvitionLink(user_level,
 		// username, message, domain, room, roomtype, baseurl, email, subject,
 		// room_id);
 	}
 
 	public Object getInvitationByHash(String hashCode) {
-		return Invitationmanagement.getInstance().getInvitationByHashCode(
+		return invitationManagement.getInvitationByHashCode(
 				hashCode, true);
 	}
 
 	public Object checkInvitationPass(String hashCode, String pass) {
-		return Invitationmanagement.getInstance().checkInvitationPass(hashCode,
+		return invitationManagement.checkInvitationPass(hashCode,
 				pass);
 	}
 }

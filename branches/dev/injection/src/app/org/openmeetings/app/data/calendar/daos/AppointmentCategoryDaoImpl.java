@@ -14,6 +14,7 @@ import org.openmeetings.app.persistence.beans.calendar.AppointmentCategory;
 import org.openmeetings.app.remote.red5.ScopeApplicationAdapter;
 import org.red5.logging.Red5LoggerFactory;
 import org.slf4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 @Transactional
@@ -25,6 +26,8 @@ public class AppointmentCategoryDaoImpl {
 
 	@PersistenceContext
 	private EntityManager em;
+	@Autowired
+	private UsersDaoImpl usersDao;
 
 	public AppointmentCategory getAppointmentCategoryById(Long categoryId) {
 		try {
@@ -83,7 +86,7 @@ public class AppointmentCategoryDaoImpl {
 			ac.setName(name);
 			ac.setStarttime(new Date());
 			ac.setDeleted("false");
-			ac.setUser(UsersDaoImpl.getInstance().getUser(user_id));
+			ac.setUser(usersDao.getUser(user_id));
 			ac.setComment(comment);
 
 			ac = em.merge(ac);

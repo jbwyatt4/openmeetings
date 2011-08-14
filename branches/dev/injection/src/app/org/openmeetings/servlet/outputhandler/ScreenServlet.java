@@ -47,6 +47,7 @@ import com.anotherbigidea.flash.readers.SWFReader;
 import com.anotherbigidea.flash.readers.TagParser;
 
 public class ScreenServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
 	
 	private static final Logger log = Red5LoggerFactory.getLogger(ScreenServlet.class, ScopeApplicationAdapter.webAppRootKey);
 	@Autowired
@@ -55,12 +56,9 @@ public class ScreenServlet extends HttpServlet {
 	private Configurationmanagement cfgManagement;
     @Autowired
     private Usermanagement userManagement;
+	@Autowired
+	private UsersDaoImpl usersDao;
 	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-
 	/* (non-Javadoc)
 	 * @see javax.servlet.http.HttpServlet#doPost(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
 	 */ 
@@ -230,7 +228,7 @@ public class ScreenServlet extends HttpServlet {
 						
 						
 						LinkedHashMap<String,Object> hs = new LinkedHashMap<String,Object>();
-						hs.put("user", UsersDaoImpl.getInstance().getUser(users_id));
+						hs.put("user", usersDao.getUser(users_id));
 						hs.put("message", "desktop");
 						hs.put("action", "newSlide");
 						hs.put("fileName", newFileSystemName+"_"+sid+newFileSystemExtName);
@@ -476,7 +474,7 @@ public class ScreenServlet extends HttpServlet {
 					
 					if (!record.equals("yes")) {
 						LinkedHashMap<String,Object> hs = new LinkedHashMap<String,Object>();
-						hs.put("user", UsersDaoImpl.getInstance().getUser(users_id));
+						hs.put("user", usersDao.getUser(users_id));
 						hs.put("message", "desktop");
 						hs.put("action", "newSlide");
 						hs.put("fileName", newFileSystemName+"_"+sid+newFileSystemExtName);

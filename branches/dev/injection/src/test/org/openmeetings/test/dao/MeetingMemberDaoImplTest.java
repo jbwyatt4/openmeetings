@@ -17,6 +17,10 @@ public class MeetingMemberDaoImplTest extends AbstractTestCase {
 	private AppointmentDaoImpl appointmentDao;
     @Autowired
     private Usermanagement userManagement;
+	@Autowired
+	private MeetingMemberDaoImpl meetingMemberDao;
+	@Autowired
+	private UsersDaoImpl usersDao;
 	
 	public MeetingMemberDaoImplTest(String name) {
 		super(name);
@@ -49,7 +53,7 @@ public class MeetingMemberDaoImplTest extends AbstractTestCase {
 		ap.setIsYearly(false);
 		ap.setIsPasswordProtected(false);
 
-		ap.setUserId(UsersDaoImpl.getInstance().getUser(userId));
+		ap.setUserId(usersDao.getUser(userId));
 		ap.setIsConnectedEvent(false);
 		Long appointmentId = appointmentDao.addAppointmentObj(ap);
 		assertNotNull("Cann't add appointment", appointmentId);
@@ -59,13 +63,13 @@ public class MeetingMemberDaoImplTest extends AbstractTestCase {
 			jNameMemberTimeZone = user.getOmTimeZone().getJname();
 		}
 		
-		Long mmId = MeetingMemberDaoImpl.getInstance().addMeetingMember(user.getFirstname(), user.getLastname(), "", "", appointmentId, userId, user.getAdresses().getEmail(), false, jNameMemberTimeZone, false);
+		Long mmId = meetingMemberDao.addMeetingMember(user.getFirstname(), user.getLastname(), "", "", appointmentId, userId, user.getAdresses().getEmail(), false, jNameMemberTimeZone, false);
 		assertNotNull("Cann't add MeetingMember", mmId);
 		
-		MeetingMember mm = MeetingMemberDaoImpl.getInstance().getMeetingMemberById(mmId);
+		MeetingMember mm = meetingMemberDao.getMeetingMemberById(mmId);
 		assertNotNull("Cann't get MeetingMember", mm);
 		
-		mmId = MeetingMemberDaoImpl.getInstance().deleteMeetingMember(mmId);
+		mmId = meetingMemberDao.deleteMeetingMember(mmId);
 		assertNotNull("Cann't delete MeetingMember", mmId);
 		
 		appointmentId = appointmentDao.deleteAppointement(appointmentId);

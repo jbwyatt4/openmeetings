@@ -66,6 +66,10 @@ public class WhiteboardConvertionJobManager {
 	private static final Logger log = Red5LoggerFactory.getLogger(WhiteboardConvertionJobManager.class, ScopeApplicationAdapter.webAppRootKey);
 	@Autowired
 	private RecordingDaoImpl recordingDao;
+	@Autowired
+	private RecordingConversionJobDaoImpl recordingConversionJobDao;
+	@Autowired
+	private WhiteBoardEventDaoImpl whiteBoardEventDao;
 	
 	private WhiteboardConvertionJobManager() {
 	}
@@ -102,7 +106,7 @@ public class WhiteboardConvertionJobManager {
 					recordingConversionJob.setImageNumber(0L);
 					recordingConversionJob.setCurrentWhiteBoardAsXml("");
 					
-					RecordingConversionJobDaoImpl.getInstance().addRecordingConversionJob(recordingConversionJob);
+					recordingConversionJobDao.addRecordingConversionJob(recordingConversionJob);
 					
 				}
 				
@@ -133,7 +137,7 @@ public class WhiteboardConvertionJobManager {
 	public synchronized boolean processJobs() {
 		try {
 			
-			List<RecordingConversionJob> listOfConversionJobs = RecordingConversionJobDaoImpl.getInstance().getRecordingConversionJobs();
+			List<RecordingConversionJob> listOfConversionJobs = recordingConversionJobDao.getRecordingConversionJobs();
 			
 			//log.debug("processJobs: "+listOfConversionJobs.size());
 			
@@ -160,7 +164,7 @@ public class WhiteboardConvertionJobManager {
 					
 					if (recordingConversionJob.getRecording().getDuration() >= recordingConversionJob.getEndTimeInMilliSeconds()) {
 					
-						List<WhiteBoardEvent> whiteBoardEventList = WhiteBoardEventDaoImpl.getInstance().
+						List<WhiteBoardEvent> whiteBoardEventList = whiteBoardEventDao.
 								getWhiteboardEventsInRange(
 										recordingConversionJob.getEndTimeInMilliSeconds(), 
 										recordingConversionJob.getEndTimeInMilliSeconds()+(numberOfMilliseconds-1), 
@@ -237,7 +241,7 @@ public class WhiteboardConvertionJobManager {
 						recordingConversionJob.setEnded(new Date());
 						recordingConversionJob.setStartedPngConverted(new Date());
 						recordingConversionJob.setBatchProcessCounter(0L);
-						RecordingConversionJobDaoImpl.getInstance().updateRecordingConversionJobs(recordingConversionJob);
+						recordingConversionJobDao.updateRecordingConversionJobs(recordingConversionJob);
 						
 						return false;
 					}
@@ -255,7 +259,7 @@ public class WhiteboardConvertionJobManager {
 	public synchronized void processConvertionJobs() {
 		try {
 			
-			List<RecordingConversionJob> listOfConversionJobs = RecordingConversionJobDaoImpl.getInstance().getRecordingConversionBatchConversionJobs();
+			List<RecordingConversionJob> listOfConversionJobs = recordingConversionJobDao.getRecordingConversionBatchConversionJobs();
 			
 			//log.debug("processBatchJobs SIZE: "+listOfConversionJobs.size());
 			
@@ -284,21 +288,21 @@ public class WhiteboardConvertionJobManager {
 							defaultWidth, 580, depth);
 					
 					//Add Count For next Round
-					RecordingConversionJob recordingConversionJobUpdate = RecordingConversionJobDaoImpl.getInstance().
+					RecordingConversionJob recordingConversionJobUpdate = recordingConversionJobDao.
 						getRecordingConversionJobsByRecordingConversionJobsId(recordingConversionJob.getRecordingConversionJobId());
 				
 					recordingConversionJobUpdate.setBatchProcessCounter(recordingConversionJob.getBatchProcessCounter()+1);
-					RecordingConversionJobDaoImpl.getInstance().updateRecordingConversionJobs(recordingConversionJobUpdate);
+					recordingConversionJobDao.updateRecordingConversionJobs(recordingConversionJobUpdate);
 					
 				} else {
 					
 					log.debug("Batch Processing Done");
-					RecordingConversionJob recordingConversionJobUpdate = RecordingConversionJobDaoImpl.getInstance().
+					RecordingConversionJob recordingConversionJobUpdate = recordingConversionJobDao.
 						getRecordingConversionJobsByRecordingConversionJobsId(recordingConversionJob.getRecordingConversionJobId());
 					
 					recordingConversionJobUpdate.setEndPngConverted(new Date());
 					recordingConversionJobUpdate.setStartedSWFConverted(new Date());
-					RecordingConversionJobDaoImpl.getInstance().updateRecordingConversionJobs(recordingConversionJobUpdate);
+					recordingConversionJobDao.updateRecordingConversionJobs(recordingConversionJobUpdate);
 					
 				}
 				
@@ -313,7 +317,7 @@ public class WhiteboardConvertionJobManager {
 	private synchronized void processFFmpegJob() {
 		try {
 			
-			List<RecordingConversionJob> listOfSWFConversionJobs = RecordingConversionJobDaoImpl.getInstance().getRecordingConversionSWFConversionJobs();
+			List<RecordingConversionJob> listOfSWFConversionJobs = recordingConversionJobDao.getRecordingConversionSWFConversionJobs();
 			
 			//log.debug("processSWFJobs SIZE: "+listOfSWFConversionJobs.size());
 			
@@ -405,11 +409,11 @@ public class WhiteboardConvertionJobManager {
 				
 				GenerateSWF.getInstance().generateSWFByFFMpeg(pngOutputFolderWildCard, output, 30,defaultWidth,defaultHeight);
 				
-				RecordingConversionJob recordingConversionJobUpdate = RecordingConversionJobDaoImpl.getInstance().
+				RecordingConversionJob recordingConversionJobUpdate = recordingConversionJobDao.
 					getRecordingConversionJobsByRecordingConversionJobsId(recordingConversionJob.getRecordingConversionJobId());
 		
 				recordingConversionJobUpdate.setEndSWFConverted(new Date());
-				RecordingConversionJobDaoImpl.getInstance().updateRecordingConversionJobs(recordingConversionJobUpdate);
+				recordingConversionJobDao.updateRecordingConversionJobs(recordingConversionJobUpdate);
 				
 			}
 			
@@ -482,7 +486,7 @@ public class WhiteboardConvertionJobManager {
 		FileWriter fileWriter = new FileWriter(firstImageName);
 		svgGenerator.stream(fileWriter, useCSS);
 		
-		RecordingConversionJob recordingConversionJobToStore = RecordingConversionJobDaoImpl.getInstance().getRecordingConversionJobsByRecordingConversionJobsId(
+		RecordingConversionJob recordingConversionJobToStore = recordingConversionJobDao.getRecordingConversionJobsByRecordingConversionJobsId(
 				recordingConversionJob.getRecordingConversionJobId());
 
 		recordingConversionJobToStore.setEndTimeInMilliSeconds(recordingConversionJob.getEndTimeInMilliSeconds() + numberOfMilliseconds);
@@ -490,7 +494,7 @@ public class WhiteboardConvertionJobManager {
 		recordingConversionJobToStore.setImageNumber(recordingConversionJob.getImageNumber()+1);
 		
 		log.debug("updateRecordingConversionJobs: generateFileAsSVG: "+recordingConversionJobToStore.getEnded());
-		RecordingConversionJobDaoImpl.getInstance().updateRecordingConversionJobs(recordingConversionJobToStore);
+		recordingConversionJobDao.updateRecordingConversionJobs(recordingConversionJobToStore);
        
 	}
 	

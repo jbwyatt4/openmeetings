@@ -81,6 +81,14 @@ public class UserService {
 	private Addressmanagement addressmanagement;
 	@Autowired
 	private Roommanagement roommanagement;
+	@Autowired
+	private MeetingMemberDaoImpl meetingMemberDao;
+	@Autowired
+	private PrivateMessagesDaoImpl privateMessagesDao;
+	@Autowired
+	private PrivateMessageFolderDaoImpl privateMessageFolderDao;
+	@Autowired
+	private UsersDaoImpl usersDao;
 
 	public ClientListManager getClientListManager() {
 		return clientListManager;
@@ -108,7 +116,7 @@ public class UserService {
 	 */
 	public Users getUserSelf(String SID) {
 		Long users_id = sessionManagement.checkSession(SID);
-		return UsersDaoImpl.getInstance().getUser(users_id);
+		return usersDao.getUser(users_id);
 	}
 
 	public Long resetUserPwd(String SID, String email, String login,
@@ -119,12 +127,12 @@ public class UserService {
 
 	public Object getUserByHash(String SID, String hash) {
 		sessionManagement.checkSession(SID);
-		return UsersDaoImpl.getInstance().getUserByHash(hash);
+		return usersDao.getUserByHash(hash);
 	}
 
 	public Object resetPassByHash(String SID, String hash, String pass) {
 		sessionManagement.checkSession(SID);
-		return UsersDaoImpl.getInstance().resetPassByHash(hash, pass);
+		return usersDao.resetPassByHash(hash, pass);
 	}
 
 	/**
@@ -485,7 +493,7 @@ public class UserService {
 				if (!users_id.equals(user_idClient)) {
 
 					// Setting user deleted
-					Long userId = UsersDaoImpl.getInstance().deleteUserID(
+					Long userId = usersDao.deleteUserID(
 							user_idClient);
 
 					Users user = userManagement.checkAdmingetUserById(
@@ -665,7 +673,7 @@ public class UserService {
 					baseURL = "https://" + domain + webapp;
 				}
 
-				PrivateMessagesDaoImpl.getInstance().addPrivateMessage(
+				privateMessagesDao.addPrivateMessage(
 						user.getFirstname() + " " + user.getLastname() + " "
 								+ fValue1193.getValue(), message, 0L, user,
 						userToAdd, userToAdd, false, null, true, userContactId);
@@ -886,7 +894,7 @@ public class UserService {
 								.getInstance().getRequestContactTemplate(
 										message);
 
-						PrivateMessagesDaoImpl.getInstance().addPrivateMessage(
+						privateMessagesDao.addPrivateMessage(
 								user.getFirstname() + " " + user.getLastname()
 										+ " " + fValue1198.getValue(), message,
 								0L, userContacts.getContact(), user, user,
@@ -1028,12 +1036,12 @@ public class UserService {
 					} else {
 
 						// One message to the Send
-						PrivateMessagesDaoImpl.getInstance().addPrivateMessage(
+						privateMessagesDao.addPrivateMessage(
 								subject, message, parentMessageId, from, to,
 								from, bookedRoom, room, false, 0L);
 
 						// One message to the Inbox
-						PrivateMessagesDaoImpl.getInstance().addPrivateMessage(
+						privateMessagesDao.addPrivateMessage(
 								subject, message, parentMessageId, from, to,
 								to, bookedRoom, room, false, 0L);
 
@@ -1104,7 +1112,7 @@ public class UserService {
 			String firstname = meetingMember.getFirstname();
 			String lastname = meetingMember.getLastname();
 
-			MeetingMemberDaoImpl.getInstance().addMeetingMember(firstname,
+			meetingMemberDao.addMeetingMember(firstname,
 					lastname, "0", "0", appointmentId,
 					meetingMember.getUser_id(), email, invitor,
 					meetingMember.getOmTimeZone().getJname(), isConnectedEvent);
@@ -1124,13 +1132,12 @@ public class UserService {
 
 				SearchResult searchResult = new SearchResult();
 				searchResult.setObjectName(Users.class.getName());
-				List<PrivateMessages> userList = PrivateMessagesDaoImpl
-						.getInstance().getPrivateMessagesByUser(users_id,
+				List<PrivateMessages> userList = privateMessagesDao.getPrivateMessagesByUser(users_id,
 								search, orderBy, start, asc, 0L, max);
 
 				searchResult.setResult(userList);
 
-				Long resultInt = PrivateMessagesDaoImpl.getInstance()
+				Long resultInt = privateMessagesDao
 						.countPrivateMessagesByUser(users_id, search, 0L);
 
 				searchResult.setRecords(resultInt);
@@ -1156,14 +1163,12 @@ public class UserService {
 
 				SearchResult searchResult = new SearchResult();
 				searchResult.setObjectName(Users.class.getName());
-				List<PrivateMessages> userList = PrivateMessagesDaoImpl
-						.getInstance().getSendPrivateMessagesByUser(users_id,
+				List<PrivateMessages> userList = privateMessagesDao.getSendPrivateMessagesByUser(users_id,
 								search, orderBy, start, asc, 0L, max);
 
 				searchResult.setResult(userList);
 
-				Long resultInt = PrivateMessagesDaoImpl.getInstance()
-						.countSendPrivateMessagesByUser(users_id, search, 0L);
+				Long resultInt = privateMessagesDao.countSendPrivateMessagesByUser(users_id, search, 0L);
 
 				searchResult.setRecords(resultInt);
 
@@ -1188,13 +1193,12 @@ public class UserService {
 
 				SearchResult searchResult = new SearchResult();
 				searchResult.setObjectName(Users.class.getName());
-				List<PrivateMessages> userList = PrivateMessagesDaoImpl
-						.getInstance().getTrashPrivateMessagesByUser(users_id,
+				List<PrivateMessages> userList = privateMessagesDao.getTrashPrivateMessagesByUser(users_id,
 								search, orderBy, start, asc, max);
 
 				searchResult.setResult(userList);
 
-				Long resultInt = PrivateMessagesDaoImpl.getInstance()
+				Long resultInt = privateMessagesDao
 						.countTrashPrivateMessagesByUser(users_id, search);
 
 				searchResult.setRecords(resultInt);
@@ -1221,14 +1225,13 @@ public class UserService {
 
 				SearchResult searchResult = new SearchResult();
 				searchResult.setObjectName(Users.class.getName());
-				List<PrivateMessages> userList = PrivateMessagesDaoImpl
-						.getInstance().getFolderPrivateMessagesByUser(users_id,
+				List<PrivateMessages> userList = privateMessagesDao.getFolderPrivateMessagesByUser(users_id,
 								search, orderBy, start, asc,
 								privateMessageFolderId, max);
 
 				searchResult.setResult(userList);
 
-				Long resultInt = PrivateMessagesDaoImpl.getInstance()
+				Long resultInt = privateMessagesDao
 						.countFolderPrivateMessagesByUser(users_id,
 								privateMessageFolderId, search);
 
@@ -1252,7 +1255,7 @@ public class UserService {
 			// users only
 			if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
 
-				return PrivateMessagesDaoImpl.getInstance()
+				return privateMessagesDao
 						.countFolderPrivateMessagesByUser(users_id,
 								privateMessageFolderId, "");
 
@@ -1279,7 +1282,7 @@ public class UserService {
 							.longValue());
 				}
 
-				return PrivateMessagesDaoImpl.getInstance().moveMailsToFolder(
+				return privateMessagesDao.moveMailsToFolder(
 						privateMessageIds, newFolderId);
 
 			}
@@ -1306,7 +1309,7 @@ public class UserService {
 
 				log.debug("moveMailsToTrash :: " + isTrash);
 
-				return PrivateMessagesDaoImpl.getInstance()
+				return privateMessagesDao
 						.updatePrivateMessagesToTrash(privateMessageIds,
 								isTrash, 0L);
 
@@ -1331,7 +1334,7 @@ public class UserService {
 							.longValue());
 				}
 
-				return PrivateMessagesDaoImpl.getInstance()
+				return privateMessagesDao
 						.deletePrivateMessages(privateMessageIds);
 
 			}
@@ -1358,7 +1361,7 @@ public class UserService {
 
 				log.debug("markReadStatusMails :: " + isRead);
 
-				return PrivateMessagesDaoImpl.getInstance()
+				return privateMessagesDao
 						.updatePrivateMessagesReadStatus(privateMessageIds,
 								isRead);
 
@@ -1380,16 +1383,16 @@ public class UserService {
 				List<Long> privateMessageIds = new LinkedList<Long>();
 				privateMessageIds.add(privateMessageId);
 
-				return PrivateMessagesDaoImpl.getInstance()
+				return privateMessagesDao
 						.updatePrivateMessagesReadStatus(privateMessageIds,
 								isRead);
 
 				// PrivateMessages privateMessage =
-				// PrivateMessagesDaoImpl.getInstance().getPrivateMessagesById(privateMessageId);
+				// privateMessagesDao.getPrivateMessagesById(privateMessageId);
 				//
 				// privateMessage.setIsRead(isRead);
 				//
-				// PrivateMessagesDaoImpl.getInstance().updatePrivateMessages(privateMessage);
+				// privateMessagesDao.updatePrivateMessages(privateMessage);
 
 			}
 		} catch (Exception err) {
@@ -1405,7 +1408,7 @@ public class UserService {
 			// users only
 			if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
 
-				return PrivateMessageFolderDaoImpl.getInstance()
+				return privateMessageFolderDao
 						.getPrivateMessageFolderByUserId(users_id);
 
 			}
@@ -1423,7 +1426,7 @@ public class UserService {
 			// users only
 			if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
 
-				PrivateMessageFolderDaoImpl.getInstance()
+				privateMessageFolderDao
 						.addPrivateMessageFolder(folderName, users_id);
 
 			}
@@ -1493,14 +1496,13 @@ public class UserService {
 			// users only
 			if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
 
-				PrivateMessageFolder privateMessageFolder = PrivateMessageFolderDaoImpl
-						.getInstance().getPrivateMessageFolderById(
+				PrivateMessageFolder privateMessageFolder = privateMessageFolderDao.getPrivateMessageFolderById(
 								privateMessageFolderId);
 
 				privateMessageFolder.setFolderName(folderName);
 				privateMessageFolder.setUpdated(new Date());
 
-				PrivateMessageFolderDaoImpl.getInstance()
+				privateMessageFolderDao
 						.updatePrivateMessages(privateMessageFolder);
 
 				return privateMessageFolderId;
@@ -1521,12 +1523,10 @@ public class UserService {
 			// users only
 			if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
 
-				PrivateMessageFolder privateMessageFolder = PrivateMessageFolderDaoImpl
-						.getInstance().getPrivateMessageFolderById(
+				PrivateMessageFolder privateMessageFolder = privateMessageFolderDao.getPrivateMessageFolderById(
 								privateMessageFolderId);
 
-				PrivateMessageFolderDaoImpl.getInstance()
-						.deletePrivateMessages(privateMessageFolder);
+				privateMessageFolderDao.deletePrivateMessages(privateMessageFolder);
 
 			}
 

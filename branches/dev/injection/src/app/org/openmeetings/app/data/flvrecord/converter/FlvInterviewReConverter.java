@@ -855,7 +855,7 @@ public class FlvInterviewReConverter {
 				log.debug("completeLengthInSeconds|currentTimeInMilliSeconds " + 
 						completeLengthInSeconds + "|" + currentTimeInMilliSeconds + "|" + progress + "|" + cLength);
 				
-				FlvRecordingDaoImpl.getInstance().updateFlvRecordingProgress(flvRecording.getFlvRecordingId(), progress);
+				flvRecordingDaoImpl.updateFlvRecordingProgress(flvRecording.getFlvRecordingId(), progress);
 				
 				if (currentTimeInMilliSeconds >= completeLengthInSeconds) {
 				

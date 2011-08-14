@@ -12,6 +12,8 @@ public class TestAddGroup extends TestCase {
 
 	@Autowired
 	private Organisationmanagement organisationmanagement;
+	@Autowired
+	private UsersDaoImpl usersDao;
 
 	private static final Logger log = Logger.getLogger(TestAddGroup.class);
 
@@ -32,7 +34,7 @@ public class TestAddGroup extends TestCase {
 
 		log.error("new organisation_user: " + organisation_usersid);
 
-		Users us = UsersDaoImpl.getInstance().getUser(new Long(1));
+		Users us = usersDao.getUser(new Long(1));
 
 		log.error(us.getLastname());
 		log.error(us.getAdresses().getTown());

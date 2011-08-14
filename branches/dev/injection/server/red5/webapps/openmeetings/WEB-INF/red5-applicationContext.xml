@@ -52,6 +52,33 @@
 	<bean id="appointmentLogic" class="org.openmeetings.app.data.calendar.management.AppointmentLogic"/>
 	<bean id="sessionManagement" class="org.openmeetings.app.data.basic.Sessionmanagement"/>
 	<bean id="userManagement" class="org.openmeetings.app.data.user.Usermanagement"/>
+	<bean id="roomModeratorsDao" class="org.openmeetings.app.data.conference.dao.RoomModeratorsDaoImpl"/>
+	<bean id="chatValuesEventDao" class="org.openmeetings.app.data.record.dao.ChatvaluesEventDaoImpl"/>
+	<bean id="conferenceLogDao" class="org.openmeetings.app.data.logs.ConferenceLogDaoImpl"/>
+	<bean id="conferenceLogTypeDao" class="org.openmeetings.app.data.logs.ConferenceLogTypeDaoImpl"/>
+	<bean id="emailManagement" class="org.openmeetings.app.data.user.Emailmanagement"/>
+	<bean id="fileExplorerItemDao" class="org.openmeetings.app.data.file.dao.FileExplorerItemDaoImpl"/>
+	<bean id="flvRecordingDao" class="org.openmeetings.app.data.flvrecord.FlvRecordingDaoImpl"/>
+	<bean id="flvRecordingLogDao" class="org.openmeetings.app.data.flvrecord.FlvRecordingLogDaoImpl"/>
+	<bean id="flvRecordingMetaData" class="org.openmeetings.app.data.flvrecord.FlvRecordingMetaDataDaoImpl"/>
+	<bean id="flvRecordingMetaDeltaDao" class="org.openmeetings.app.data.flvrecord.FlvRecordingMetaDeltaDaoImpl"/>
+	<bean id="groupManagement" class="org.openmeetings.app.data.user.Groupmanagement"/>
+	<bean id="ldapConfigDao" class="org.openmeetings.app.data.basic.dao.LdapConfigDaoImpl"/>
+	<bean id="invitationManagement" class="org.openmeetings.app.data.conference.Invitationmanagement"/>
+	<bean id="meetingMemberDao" class="org.openmeetings.app.data.calendar.daos.MeetingMemberDaoImpl"/>
+	<bean id="openXGReturnObjectDao" class="org.openmeetings.app.sip.xmlrpc.custom.dao.OpenXGReturnObjectDaoImpl"/>
+	<bean id="privateMessageFolderDao" class="org.openmeetings.app.data.user.dao.PrivateMessageFolderDaoImpl"/>
+	<bean id="privateMessagesDao" class="org.openmeetings.app.data.user.dao.PrivateMessagesDaoImpl"/>
+	<bean id="recordingClientDao" class="org.openmeetings.app.data.record.dao.RecordingClientDaoImpl"/>
+	<bean id="recordingConversionJobDao" class="org.openmeetings.app.data.record.dao.RecordingConversionJobDaoImpl"/>
+	<bean id="roomClientDao" class="org.openmeetings.app.data.record.dao.RoomClientDaoImpl"/>
+	<bean id="roomRecordingDao" class="org.openmeetings.app.data.record.dao.RoomRecordingDaoImpl"/>
+	<bean id="roomStreamDao" class="org.openmeetings.app.data.record.dao.RoomStreamDaoImpl"/>
+	<bean id="soapLoginDao" class="org.openmeetings.app.data.basic.dao.SOAPLoginDaoImpl"/>
+	<bean id="userContactsDao" class="org.openmeetings.app.data.user.dao.UserContactsDaoImpl"/>
+	<bean id="userSipDataDao" class="org.openmeetings.app.data.user.dao.UserSipDataDaoImpl"/>
+	<bean id="usersDao" class="org.openmeetings.app.data.user.dao.UsersDaoImpl"/>
+	<bean id="whiteBoardEventDao" class="org.openmeetings.app.data.record.dao.WhiteBoardEventDaoImpl"/>
 	
 	<!-- No Interface -->
 	<bean id="manageCryptStyle" class="org.openmeetings.utils.crypt.ManageCryptStyle" />

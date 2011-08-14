@@ -17,6 +17,8 @@ public class GenerateImage {
 			GenerateImage.class, ScopeApplicationAdapter.webAppRootKey);
 	@Autowired //FIXME
 	static private Configurationmanagement cfgManagement;
+	@Autowired
+	private UsersDaoImpl usersDao;
 	
 	private static GenerateImage instance;
 
@@ -134,10 +136,10 @@ public class GenerateImage {
 
 		File fileNameToStore = new File(destinationFile + ".jpg");
 		String pictureuri = fileNameToStore.getName();
-		Users us = UsersDaoImpl.getInstance().getUser(users_id);
+		Users us = usersDao.getUser(users_id);
 		us.setUpdatetime(new java.util.Date());
 		us.setPictureuri(pictureuri);
-		UsersDaoImpl.getInstance().updateUser(us);
+		usersDao.updateUser(us);
 
 		ScopeApplicationAdapter.getInstance().updateUserSessionObject(users_id,
 				pictureuri);

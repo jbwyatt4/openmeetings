@@ -46,6 +46,8 @@ public class LdapLoginManagement {
 	private Statemanagement statemanagement;
 	@Autowired
 	private Organisationmanagement organisationmanagement;
+	@Autowired
+	private LdapConfigDaoImpl ldapConfigDao;
 
 	// External User Types
 	public static final String EXTERNAL_USER_TYPE_LDAP = "LDAP";
@@ -147,8 +149,7 @@ public class LdapLoginManagement {
 		// Retrieve Configuration Data
 		HashMap<String, String> configData;
 
-		LdapConfig ldapConfig = LdapConfigDaoImpl.getInstance()
-				.getLdapConfigById(ldapConfigId);
+		LdapConfig ldapConfig = ldapConfigDao.getLdapConfigById(ldapConfigId);
 
 		try {
 			configData = getLdapConfigData(ldapConfig.getConfigFileName());
