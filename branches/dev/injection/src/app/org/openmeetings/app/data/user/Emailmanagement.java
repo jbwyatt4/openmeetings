@@ -18,17 +18,20 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class Emailmanagement {
 
-	private static final Logger log = Red5LoggerFactory.getLogger(Emailmanagement.class, ScopeApplicationAdapter.webAppRootKey);
-	
+	private static final Logger log = Red5LoggerFactory.getLogger(
+			Emailmanagement.class, ScopeApplicationAdapter.webAppRootKey);
+
 	@PersistenceContext
 	private EntityManager em;
-	
+
 	@Autowired
 	private Configurationmanagement cfgManagement;
 	@Autowired
 	private Fieldmanagment fieldmanagment;
 	@Autowired
 	private MailHandler mailHandler;
+	@Autowired
+	private RegisterUserTemplate registerUserTemplate;
 
 	private boolean checkUserLevel(int user_level) {
 		if (user_level > 1) {
@@ -237,7 +240,7 @@ public class Emailmanagement {
 
 				String verification_url = link;
 
-				String template = RegisterUserTemplate.getInstance()
+				String template = registerUserTemplate
 						.getRegisterUserWithVerificationTemplate(Username,
 								Userpass, EMail, default_lang_id,
 								verification_url);
@@ -248,7 +251,7 @@ public class Emailmanagement {
 
 			} else {
 
-				String template = RegisterUserTemplate.getInstance()
+				String template = registerUserTemplate
 						.getRegisterUserTemplate(Username, Userpass, EMail,
 								default_lang_id);
 				Fieldlanguagesvalues label = fieldmanagment
@@ -334,7 +337,8 @@ public class Emailmanagement {
 			if (email.length() == 0)
 				return true;
 			log.debug("checkUserMail: " + email);
-			Query query = em.createQuery("select c from Adresses as c where c.email LIKE :email AND c.deleted <> :deleted");
+			Query query = em
+					.createQuery("select c from Adresses as c where c.email LIKE :email AND c.deleted <> :deleted");
 			query.setParameter("email", email);
 			query.setParameter("deleted", "true");
 			int count = query.getResultList().size();

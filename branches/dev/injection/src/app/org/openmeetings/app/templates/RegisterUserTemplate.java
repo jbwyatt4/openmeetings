@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class RegisterUserTemplate extends VelocityLoader {
+
 	@Autowired
 	private Fieldmanagment fieldmanagment;
 
@@ -21,19 +22,6 @@ public class RegisterUserTemplate extends VelocityLoader {
 
 	private static final Logger log = Red5LoggerFactory.getLogger(
 			RegisterUserTemplate.class, ScopeApplicationAdapter.webAppRootKey);
-
-	private RegisterUserTemplate() {
-		super();
-	}
-
-	private static RegisterUserTemplate instance = null;
-
-	public static synchronized RegisterUserTemplate getInstance() {
-		if (instance == null) {
-			instance = new RegisterUserTemplate();
-		}
-		return instance;
-	}
 
 	public String getRegisterUserWithVerificationTemplate(String username,
 			String userpass, String email, Long default_lang_id,
