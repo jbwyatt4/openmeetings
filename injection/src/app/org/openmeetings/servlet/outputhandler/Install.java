@@ -7,6 +7,7 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,8 +21,6 @@ import org.openmeetings.app.persistence.beans.basic.OmTimeZone;
 import org.openmeetings.app.remote.red5.ScopeApplicationAdapter;
 import org.red5.logging.Red5LoggerFactory;
 import org.slf4j.Logger;
-import org.springframework.context.ApplicationContext;
-import org.springframework.web.context.support.WebApplicationContextUtils;
 
 public class Install extends VelocityViewServlet {
 
@@ -31,6 +30,15 @@ public class Install extends VelocityViewServlet {
 	private static final long serialVersionUID = 3684381243236013771L;
 
 	private ImportInitvalues importInitvalues;
+
+	@Override
+	public void init(ServletConfig config) throws ServletException {
+		super.init(config);
+		importInitvalues = (ImportInitvalues) config.getServletContext()
+				.getAttribute("importInitvalues");
+		log.debug("in init: cfgManagement is null ? "
+				+ (null == importInitvalues) + " ; " + importInitvalues);
+	}
 
 	private static final Logger log = Red5LoggerFactory.getLogger(
 			Install.class, ScopeApplicationAdapter.webAppRootKey);
@@ -49,11 +57,6 @@ public class Install extends VelocityViewServlet {
 
 		try {
 
-			ApplicationContext context = WebApplicationContextUtils
-					.getWebApplicationContext(getServletContext());
-			importInitvalues = (ImportInitvalues) context
-					.getBean("importInitvalues");
-
 			ctx.put("APPLICATION_NAME", getServletContext()
 					.getServletContextName());
 			ctx.put("APPLICATION_ROOT",
@@ -69,7 +72,7 @@ public class Install extends VelocityViewServlet {
 					+ File.separatorChar;
 
 			if (command == null) {
-				log.error("command equals null");
+				log.debug("command equals null");
 
 				File installerFile = new File(working_dir
 						+ InstallationDocumentHandler.installFileName);
@@ -78,8 +81,8 @@ public class Install extends VelocityViewServlet {
 
 					File installerdir = new File(working_dir);
 
-					log.error("bb " + installerFile);
-					log.error("bb " + working_dir
+					log.debug("bb " + installerFile);
+					log.debug("bb " + working_dir
 							+ InstallationDocumentHandler.installFileName);
 
 					boolean b = installerdir.canWrite();
@@ -158,7 +161,7 @@ public class Install extends VelocityViewServlet {
 						.getCurrentStepNumber(working_dir);
 				if (i == 0) {
 
-					log.error("do init installation");
+					log.debug("do init installation");
 
 					// update to next step
 					// InstallationDocumentHandler.getInstance().createDocument(working_dir+InstallationDocumentHandler.installFileName,1);
@@ -311,7 +314,7 @@ public class Install extends VelocityViewServlet {
 					String timeZone = httpServletRequest
 							.getParameter("timeZone");
 
-					log.error("step 0+ start init with values. " + username
+					log.debug("step 0+ start init with values. " + username
 							+ " ***** " + useremail + " " + orgname + " "
 							+ configdefault + " " + configreferer + " "
 							+ configsmtp + " " + configmailuser + " "
@@ -360,7 +363,7 @@ public class Install extends VelocityViewServlet {
 					importInitvalues.loadInitAppointmentReminderTypes();
 
 					// update to next step
-					log.error("add level to install file");
+					log.debug("add level to install file");
 					InstallationDocumentHandler
 							.getInstance()
 							.createDocument(

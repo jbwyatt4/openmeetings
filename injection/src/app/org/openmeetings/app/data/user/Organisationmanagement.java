@@ -81,7 +81,7 @@ public class Organisationmanagement {
 			org.setDeleted("false");
 			org.setStarttime(new Date());
 			org = em.merge(org);
-			em.flush();
+
 			long id = org.getOrganisation_id();
 			return id;
 		} catch (Exception ex2) {
@@ -222,7 +222,6 @@ public class Organisationmanagement {
 					em.merge(org);
 				}
 			}
-			em.flush();
 
 			return org.getOrganisation_id();
 		} catch (Exception err) {
@@ -471,9 +470,9 @@ public class Organisationmanagement {
 				orgUser.setDeleted("false");
 				orgUser.setStarttime(new Date());
 				orgUser.setComment(comment);
+
 				orgUser = em.merge(orgUser);
-				// We need this flush
-				em.flush();
+
 				long id = orgUser.getOrganisation_users_id();
 
 				return id;
@@ -490,8 +489,6 @@ public class Organisationmanagement {
 		try {
 			orgUser.setStarttime(new Date());
 			orgUser = em.merge(orgUser);
-			// We need this flush
-			em.flush();
 			long id = orgUser.getOrganisation_users_id();
 
 			return id;
@@ -648,8 +645,7 @@ public class Organisationmanagement {
 
 				// Only add this single Organization add this point cause
 				// cause all the other are not needed at this point
-				Users user = usersDao
-						.getUser(us.getUser_id());
+				Users user = usersDao.getUser(us.getUser_id());
 
 				user.setOrganisation_users(new LinkedList<Organisation_Users>());
 				user.getOrganisation_users().add(us);

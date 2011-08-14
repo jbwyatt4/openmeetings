@@ -108,6 +108,9 @@
 				<entry key="generatePDF">
 					<ref bean="generatePDF"/>
 				</entry>
+				<entry key="importInitvalues">
+                    <ref bean="importInitvalues"/>
+                </entry>
 			</map>
 		</property>
 	</bean>
@@ -126,7 +129,6 @@
 	<bean id="statemanagement" class="org.openmeetings.app.data.user.Statemanagement" />
 	<bean id="fieldLanguageDaoImpl" class="org.openmeetings.app.data.basic.FieldLanguageDaoImpl"/>
 	<bean id="fieldmanagment" class="org.openmeetings.app.data.basic.Fieldmanagment"/>
-	<bean id="importInitvalues" class=" org.openmeetings.app.installation.ImportInitvalues"/>
 	<bean id="cfgManagement" class="org.openmeetings.app.data.basic.Configurationmanagement"/>
 	<bean id="recordingDao" class="org.openmeetings.app.data.record.dao.RecordingDaoImpl"/>
 	<bean id="appointmentDao" class="org.openmeetings.app.data.calendar.daos.AppointmentDaoImpl"/>
@@ -174,6 +176,11 @@
 	<bean id="whiteboardConvertionJobManagerSWFTools" class="org.openmeetings.app.data.record.WhiteboardConvertionJobManagerSWFTools" />
 	<bean id="mailHandler" class="org.openmeetings.utils.mail.MailHandler" />
 	<bean id="feedbackManagement" class="org.openmeetings.app.data.conference.Feedbackmanagement" />
+	<bean id="importInitvalues" class="org.openmeetings.app.installation.ImportInitvalues" />
+	
+	<!--  Templates -->
+	<bean id="registerUserTemplate" class="org.openmeetings.app.templates.RegisterUserTemplate" />
+	
 
 	<tx:annotation-driven transaction-manager="jpaTransactionManager"/>
 	<context:annotation-config/>
