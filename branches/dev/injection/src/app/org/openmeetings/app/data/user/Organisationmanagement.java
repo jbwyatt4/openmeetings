@@ -188,7 +188,7 @@ public class Organisationmanagement {
 		try {
 			// get all users
 			Query query = em
-					.createQuery("select max(c.organisation_id) from Organisation c where c.deleted = 'false'");
+					.createQuery("select max(c.organisation_id) from Organisation c where c.deleted LIKE 'false'");
 			List<?> ll = query.getResultList();
 			log.debug("selectMaxFromOrganisations" + ll.get(0));
 			return (Long) ll.get(0);
@@ -211,17 +211,13 @@ public class Organisationmanagement {
 	public Long updateOrganisation(Long user_level, long organisation_id,
 			String orgname, long users_id) {
 		try {
+
 			Organisation org = this.getOrganisationById(organisation_id);
 			org.setName(orgname);
 			org.setUpdatedby(users_id);
 			org.setUpdatetime(new Date());
-			if (org.getOrganisation_id() == null) {
-				em.persist(org);
-			} else {
-				if (!em.contains(org)) {
-					em.merge(org);
-				}
-			}
+
+			em.merge(org);
 
 			return org.getOrganisation_id();
 		} catch (Exception err) {

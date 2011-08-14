@@ -608,13 +608,18 @@ public class Usermanagement {
 					}
 
 					// log.info("USER " + us.getLastname());
-					if (us.getUser_id() == null) {
-						em.persist(us);
-					} else {
-						if (!em.contains(us)) {
-							em.merge(us);
-						}
-					}
+					// What is this code good for? The Id is already check in
+					// the initial
+					// if clause otherwise an update is not possible
+					// if (us.getUser_id() == null) {
+					// em.persist(us);
+					// } else {
+					// if (!em.contains(us)) {
+					em.merge(us);
+
+					em.refresh(us);
+					// }
+					// }
 
 					return us.getUser_id();
 
