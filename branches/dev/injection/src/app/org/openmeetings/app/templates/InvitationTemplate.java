@@ -22,22 +22,11 @@ public class InvitationTemplate extends VelocityLoader {
 	private static final Logger log = Red5LoggerFactory.getLogger(
 			InvitationTemplate.class, ScopeApplicationAdapter.webAppRootKey);
 
-	private InvitationTemplate() {
-		super();
-	}
-
-	private static InvitationTemplate instance = null;
-
-	public static synchronized InvitationTemplate getInstance() {
-		if (instance == null) {
-			instance = new InvitationTemplate();
-		}
-		return instance;
-	}
-
 	public String getRegisterInvitationTemplate(String user, String message,
 			String invitation_link, Long default_lang_id, Date dStart, Date dEnd) {
 		try {
+
+			super.init();
 
 			Fieldlanguagesvalues labelid500 = fieldmanagment
 					.getFieldByIdAndLanguage(new Long(500), default_lang_id);
@@ -97,9 +86,9 @@ public class InvitationTemplate extends VelocityLoader {
 	public String getReminderInvitationTemplate(String user, String message,
 			String invitation_link, Long default_lang_id) {
 
-		log.debug("getReminderInvitationTemplate");
-
 		try {
+
+			super.init();
 
 			Fieldlanguagesvalues labelid622 = fieldmanagment
 					.getFieldByIdAndLanguage(new Long(622), default_lang_id);

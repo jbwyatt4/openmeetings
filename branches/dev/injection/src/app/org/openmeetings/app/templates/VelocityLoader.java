@@ -19,7 +19,7 @@ public abstract class VelocityLoader {
 			VelocityLoader.class, ScopeApplicationAdapter.webAppRootKey);
 
 	public VelocityLoader() {
-		this.init();
+
 	}
 
 	/**
@@ -31,12 +31,10 @@ public abstract class VelocityLoader {
 			String current_dir = ScopeApplicationAdapter.webAppPath
 					+ File.separatorChar;
 
-			log.debug("current_dir :: " + current_dir);
-
 			Velocity.init(current_dir + "WEB-INF" + File.separatorChar
 					+ "velocity.properties");
 		} catch (Exception e) {
-			log.error("Problem initializing Velocity : " + e);
+			log.error("Problem initializing Velocity : ", e);
 			System.out.println("Problem initializing Velocity : " + e);
 		}
 	}

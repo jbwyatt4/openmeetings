@@ -93,6 +93,8 @@ public class Usermanagement {
 	private ScopeApplicationAdapter scopeApplicationAdapter;
 	@Autowired
 	private MailHandler mailHandler;
+	@Autowired
+	private ResetPasswordTemplate resetPasswordTemplate;
 
 	/**
 	 * query for a list of users
@@ -1495,8 +1497,8 @@ public class Usermanagement {
 				cfgManagement.getConfKey(3, "default_lang_id").getConf_value())
 				.longValue();
 
-		String template = ResetPasswordTemplate.getInstance()
-				.getResetPasswordTemplate(reset_link, default_lang_id);
+		String template = resetPasswordTemplate.getResetPasswordTemplate(
+				reset_link, default_lang_id);
 
 		Fieldlanguagesvalues labelid517 = fieldmanagment
 				.getFieldByIdAndLanguage(new Long(517), default_lang_id);
