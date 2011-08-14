@@ -282,6 +282,7 @@
             <src path="${server.src.dir}" />
             <src path="${main.src.dir}" />
             <classpath refid="compile.classpath"/>
+        	<compilerarg value="-Aopenjpa.metamodel=true"/>
         </javac>
         <javac debug="on" debuglevel="lines,vars,source" srcdir="${webstart.src.dir}" destdir="${main.out.dir}" >
             <classpath refid="compile.classpath"/>
@@ -313,12 +314,12 @@
     
 
     <path id="jpa.enhancement.classpath">
-        <pathelement location="${classes.dir}"/>
+        <pathelement path="${classes.dir}"/>
         <!-- lib contains all of the jars that came with the OpenJPA binary download -->
         <fileset dir="${openjpa.lib}" includes="*.jar" />
     </path>
-	
-    <!-- define the openjpac task -->
+    
+	<!-- define the openjpac task -->
     <taskdef name="openjpac" classname="org.apache.openjpa.ant.PCEnhancerTask">
         <classpath refid="jpa.enhancement.classpath"/>
     </taskdef>
@@ -326,17 +327,8 @@
     <target name="enhance" depends="compile">
         <!-- invoke the enhancer -->
         <openjpac>
-        	<config propertiesFile="src/META-INF/persistence.xml"/>
-        	<classpath refid="jpa.enhancement.classpath"/>
-        	<fileset dir=".">
-    	         <include name="**/persistence/*.java" />
-    	    </fileset>
-        	
-        	<!--
             <classpath refid="jpa.enhancement.classpath"/>
             <config propertiesFile="src/META-INF/persistence.xml"/>
-        	<includesfile />
-        	 -->
         </openjpac> 
         <echo message="Enhancing complete."/>
     </target>
