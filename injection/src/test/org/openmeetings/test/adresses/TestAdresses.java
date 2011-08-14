@@ -1,13 +1,20 @@
 package org.openmeetings.test.adresses;
 
-import junit.framework.TestCase;
-
 import org.apache.log4j.Logger;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.openmeetings.app.data.user.Addressmanagement;
 import org.openmeetings.app.data.user.Statemanagement;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestExecutionListeners;
+import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-public class TestAdresses extends TestCase {
+@RunWith(SpringJUnit4ClassRunner.class)
+@TestExecutionListeners({})
+@ContextConfiguration(locations={"/red5-applicationContext.xml"})
+public class TestAdresses extends AbstractJUnit4SpringContextTests {
 
 	@Autowired
 	private Statemanagement statemanagement;
@@ -16,10 +23,7 @@ public class TestAdresses extends TestCase {
 
 	private static final Logger log = Logger.getLogger(TestAdresses.class);
 
-	public TestAdresses(String testname) {
-		super(testname);
-	}
-
+	@Test
 	public void testAddAdress() {
 
 		Long states_id = statemanagement.addState("Deutschland");

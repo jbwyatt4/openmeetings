@@ -21,7 +21,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class OpenmeetingsDaoTest extends AbstractTestCase {
 
 	@Autowired
-	// FIXME
 	private Configurationmanagement cfgManagement;
 	@Autowired
 	private Usermanagement userManagement;
@@ -39,7 +38,7 @@ public class OpenmeetingsDaoTest extends AbstractTestCase {
 	final public void testRegistrationUser() throws Exception {
 
 		Random rd = new Random();
-		Users user = TestUtils.createUser(rd.nextInt());
+		Users user = new TestUtils().createUser(rd.nextInt());
 
 		Configuration conf = cfgManagement.getConfKey(3L, "default.timezone");
 		String jNameTimeZone = "";

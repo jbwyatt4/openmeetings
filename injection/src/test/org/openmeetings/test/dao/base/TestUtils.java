@@ -20,25 +20,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class TestUtils extends Assert {
 
 	@Autowired
-	static private Configurationmanagement cfgManagement;
+	private Configurationmanagement cfgManagement;
 	@Autowired
-	static private AppointmentDaoImpl appointmentDao;
+	private AppointmentDaoImpl appointmentDao;
 	@Autowired
-	static private Usermanagement userManagement;
+	private Usermanagement userManagement;
 	@Autowired
-	static private Navimanagement navimanagement;
+	private Navimanagement navimanagement;
 	@Autowired
-	static private ErrorManagement errorManagement;
+	private ErrorManagement errorManagement;
 	@Autowired
-	static private Salutationmanagement salutationmanagement;
+	private Salutationmanagement salutationmanagement;
 	@Autowired
-	static private Roommanagement roommanagement;
-	@Autowired //FIXME
-	static private UsersDaoImpl usersDao;
+	private Roommanagement roommanagement;
+	@Autowired
+	private UsersDaoImpl usersDao;
 
-	public static Appointment createAppointment() throws Exception {
-		assertNotNull("Cann't access to appointment dao implimentation",
-				appointmentDao);
+	public Appointment createAppointment() throws Exception {
+		assertNotNull("Cann't access to appointment dao implimentation", appointmentDao);
 
 		// add new appointment
 		Appointment ap = new Appointment();
@@ -68,7 +67,7 @@ public class TestUtils extends Assert {
 		return ap;
 	}
 
-	public static Users createUser(int rnd) throws Exception {
+	public Users createUser(int rnd) throws Exception {
 		Users users = new Users();
 		// add user
 		users.setFirstname("firstname" + rnd);
@@ -83,16 +82,14 @@ public class TestUtils extends Assert {
 		return users;
 	}
 
-	public static void loadSalutations() {
-
+	public void loadSalutations() {
 		salutationmanagement.addUserSalutation("Mr", 261);
 		salutationmanagement.addUserSalutation("Ms", 262);
 		salutationmanagement.addUserSalutation("Mrs", 841);
 		salutationmanagement.addUserSalutation("Dr", 842);
-
 	}
 
-	public static void loadConfigurations() {
+	public void loadConfigurations() {
 
 		// ***************************************
 		// ***************************************
@@ -139,7 +136,7 @@ public class TestUtils extends Assert {
 
 	}
 
-	public static void loadMainMenu() {
+	public void loadMainMenu() {
 
 		userManagement.addUserLevel("User", 1);
 		userManagement.addUserLevel("Moderator", 2);
@@ -234,7 +231,7 @@ public class TestUtils extends Assert {
 
 	}
 
-	public static void loadDefaultRooms() {
+	public void loadDefaultRooms() {
 
 		long conference_Id = roommanagement.addRoomType("conference");
 		long audience_Id = roommanagement.addRoomType("audience");

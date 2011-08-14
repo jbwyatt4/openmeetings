@@ -2,7 +2,7 @@
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
 <beans>
     
-    <bean id="placeholderConfig" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+    <bean id="red5WebPlaceholderConfig" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="location" value="/WEB-INF/red5-web.properties" />
     </bean>
     
@@ -30,7 +30,8 @@
             value="conf/hibernate.cfg.xml"/>
     </bean>
       -->
-  
+
+	<import resource="openmeetings-applicationContext.xml" />
     <import resource="red5-services/appointmentcategoryservice.service.xml"/> 
     <import resource="red5-services/appointmentreminderservice.service.xml"/>
     <import resource="red5-services/calendarservice.service.xml"/> 

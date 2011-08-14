@@ -1,26 +1,23 @@
 package org.openmeetings.test.adresses;
 
 import org.apache.log4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.openmeetings.app.data.user.Emailmanagement;
-import org.openmeetings.app.persistence.beans.adresses.Adresses;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestExecutionListeners;
+import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import junit.framework.TestCase;
-
-public class TestAddEmailToAdress extends TestCase {
+@RunWith(SpringJUnit4ClassRunner.class)
+@TestExecutionListeners({})
+@ContextConfiguration(locations={"classpath:/red5-common.xml", "classpath:/red5-web.xml"})
+public class TestAddEmailToAdress extends AbstractJUnit4SpringContextTests {
 	
 	private static final Logger log = Logger.getLogger(TestAddEmailToAdress.class);
-	
-	public TestAddEmailToAdress(String testname){
-		super(testname);
-	}
-	
-	public void testGetAdress(){
-		
-		//long adresses_id = Emailmanagement.getInstance().registerEmail("seba.wagner@gmail.com", 1,"");
-		
-		//log.error("new adress: "+adresses_id);
 
-		
+	@Test
+	public void testGetAdress(){
+		//long adresses_id = Emailmanagement.getInstance().registerEmail("seba.wagner@gmail.com", 1,"");
+		//log.error("new adress: "+adresses_id);
 	}
 }
