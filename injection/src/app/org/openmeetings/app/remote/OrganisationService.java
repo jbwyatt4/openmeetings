@@ -100,7 +100,8 @@ public class OrganisationService {
 		try {
 			Long users_id = sessionManagement.checkSession(SID);
 			long user_level = userManagement.getUserLevelByID(users_id);
-			LinkedHashMap argObjectMap = (LinkedHashMap) regObjectObj;
+			@SuppressWarnings("rawtypes")
+			LinkedHashMap<?, ?> argObjectMap = (LinkedHashMap) regObjectObj;
 			long organisation_id = Long.valueOf(
 					argObjectMap.get("organisation_id").toString()).longValue();
 			if (organisation_id == 0) {
