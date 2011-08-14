@@ -86,6 +86,8 @@ public class MainService implements IPendingServiceCallback {
 	private SOAPLoginDaoImpl soapLoginDao;
 	@Autowired
 	private Invitationmanagement invitationManagement;
+	@Autowired
+	private Feedbackmanagement feedbackManagement;
 
 	// External User Types
 	public static final String EXTERNAL_USER_TYPE_LDAP = "LDAP";
@@ -891,7 +893,7 @@ public class MainService implements IPendingServiceCallback {
 	 */
 	public String sendFeedback(String SID, String username, String message,
 			String email) {
-		return Feedbackmanagement.getInstance().sendFeedback(username, email,
+		return feedbackManagement.sendFeedback(username, email,
 				message);
 	}
 

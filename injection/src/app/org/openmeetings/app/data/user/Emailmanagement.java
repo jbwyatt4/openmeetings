@@ -18,14 +18,17 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class Emailmanagement {
 
-	private static final Logger log = Red5LoggerFactory.getLogger(
-			Emailmanagement.class, ScopeApplicationAdapter.webAppRootKey);
+	private static final Logger log = Red5LoggerFactory.getLogger(Emailmanagement.class, ScopeApplicationAdapter.webAppRootKey);
+	
+	@PersistenceContext
+	private EntityManager em;
+	
 	@Autowired
 	private Configurationmanagement cfgManagement;
 	@Autowired
 	private Fieldmanagment fieldmanagment;
-	@PersistenceContext
-	private EntityManager em;
+	@Autowired
+	private MailHandler mailHandler;
 
 	private boolean checkUserLevel(int user_level) {
 		if (user_level > 1) {
@@ -241,7 +244,7 @@ public class Emailmanagement {
 				Fieldlanguagesvalues label = fieldmanagment
 						.getFieldByIdAndLanguage(new Long(512), default_lang_id);
 
-				succ = MailHandler.sendMail(EMail, label.getValue(), template);
+				succ = mailHandler.sendMail(EMail, label.getValue(), template);
 
 			} else {
 
@@ -251,7 +254,7 @@ public class Emailmanagement {
 				Fieldlanguagesvalues label = fieldmanagment
 						.getFieldByIdAndLanguage(new Long(512), default_lang_id);
 
-				succ = MailHandler.sendMail(EMail, label.getValue(), template);
+				succ = mailHandler.sendMail(EMail, label.getValue(), template);
 			}
 
 			return succ;

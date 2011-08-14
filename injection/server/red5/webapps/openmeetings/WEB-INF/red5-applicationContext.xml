@@ -172,6 +172,8 @@
 	<bean id="serverSharingSessionList" class="org.openmeetings.server.cache.ServerSharingSessionList" />
 	<bean id="serverSocketMinaProcess" class="org.openmeetings.server.socket.ServerSocketMinaProcess" />
 	<bean id="whiteboardConvertionJobManagerSWFTools" class="org.openmeetings.app.data.record.WhiteboardConvertionJobManagerSWFTools" />
+	<bean id="mailHandler" class="org.openmeetings.utils.mail.MailHandler" />
+	<bean id="feedbackManagement" class="org.openmeetings.app.data.conference.Feedbackmanagement" />
 
 	<tx:annotation-driven transaction-manager="jpaTransactionManager"/>
 	<context:annotation-config/>

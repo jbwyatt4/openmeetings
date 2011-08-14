@@ -91,6 +91,8 @@ public class UserService {
 	private UsersDaoImpl usersDao;
 	@Autowired
 	private UserContactsDaoImpl userContactsDao;
+	@Autowired
+	private MailHandler mailHandler;
 
 	/**
 	 * get your own user-object
@@ -680,7 +682,7 @@ public class UserService {
 								denyLinkHTML, profileLinkHTML);
 
 				if (userToAdd.getAdresses() != null) {
-					MailHandler.sendMail(userToAdd.getAdresses().getEmail(),
+					mailHandler.sendMail(userToAdd.getAdresses().getEmail(),
 							user.getFirstname() + " " + user.getLastname()
 									+ " " + fValue1193.getValue(), template);
 				}
@@ -885,7 +887,7 @@ public class UserService {
 								0L, userContacts.getContact(), user, user,
 								false, null, false, 0L);
 
-						MailHandler.sendMail(user.getAdresses().getEmail(),
+						mailHandler.sendMail(user.getAdresses().getEmail(),
 								userContacts.getContact().getFirstname()
 										+ " "
 										+ userContacts.getContact()
@@ -1047,7 +1049,7 @@ public class UserService {
 						String aLinkHTML = "<br/><br/><a href='" + profile_link
 								+ "'>" + fValue1302.getValue() + "</a><br/>";
 
-						MailHandler.sendMail(email, fValue1301.getValue() + " "
+						mailHandler.sendMail(email, fValue1301.getValue() + " "
 								+ subject, message.replaceAll("\\<.*?>", "")
 								+ aLinkHTML);
 
