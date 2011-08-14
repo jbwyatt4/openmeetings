@@ -21,6 +21,7 @@ import org.slf4j.Logger;
 public class DefaultIndex extends VelocityViewServlet {
 	private static final long serialVersionUID = 3043617619650666432L;
 	private static final Logger log = Red5LoggerFactory.getLogger(DefaultIndex.class, ScopeApplicationAdapter.webAppRootKey);
+	
 	private Configurationmanagement cfgManagement;
 	
 	@Override

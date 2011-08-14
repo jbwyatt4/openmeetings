@@ -6,12 +6,14 @@ import java.io.OutputStream;
 import java.io.RandomAccessFile;
 import java.util.Date;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
+import org.openmeetings.app.data.basic.Configurationmanagement;
 import org.openmeetings.app.data.basic.Sessionmanagement;
 import org.openmeetings.app.data.user.Usermanagement;
 import org.openmeetings.app.remote.red5.ScopeApplicationAdapter;
@@ -32,24 +34,16 @@ public class DownloadHandler extends HttpServlet {
 	private static final String defaultSWFName = "deleted.swf";
 	private static final String defaultPDFName = "deleted.pdf";
 
-	@Autowired
 	private Sessionmanagement sessionManagement;
-    @Autowired
     private Usermanagement userManagement;
 	
-//	public void doFilter(ServletRequest servletRequest,
-//            ServletResponse servletResponse,
-//            FilterChain filterChain) {
-//		
-//		HttpServletRequest req = (HttpServletRequest)servletRequest;
-//	
-//		try {
-//			req.setCharacterEncoding("UTF-8");
-//		} catch (UnsupportedEncodingException e) {
-//			log.error("doFilter",e);
-//		}
-//	}
-
+	@Override
+	public void init(ServletConfig config) throws ServletException {
+		super.init(config);
+		sessionManagement = (Sessionmanagement)config.getServletContext().getAttribute("sessionManagement");
+		userManagement = (Usermanagement)config.getServletContext().getAttribute("userManagement");
+	}
+	
 	/*
 	 * (non-Javadoc)
 	 * 

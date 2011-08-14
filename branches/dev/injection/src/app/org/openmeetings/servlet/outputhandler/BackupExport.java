@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -70,37 +71,43 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class BackupExport extends HttpServlet {
 	private static final long serialVersionUID = -928315730609302260L;
 	private static final Logger log = Red5LoggerFactory.getLogger(BackupExport.class, ScopeApplicationAdapter.webAppRootKey);
-	@Autowired
+	
 	private AppointmentDaoImpl appointmentDao;
-	@Autowired
 	private Sessionmanagement sessionManagement;
-	@Autowired
 	private Usermanagement userManagement;
-	@Autowired
 	private Organisationmanagement organisationmanagement;
-	@Autowired
 	private Roommanagement roommanagement;
-	@Autowired
 	private FileExplorerItemDaoImpl fileExplorerItemDao;
-	@Autowired
 	private FlvRecordingDaoImpl flvRecordingDao;
-	@Autowired
 	private FlvRecordingMetaDataDaoImpl flvRecordingMetaDataDao;
-	@Autowired
 	private RoomModeratorsDaoImpl roomModeratorsDao;
-	@Autowired
 	private UsersDaoImpl usersDao;
-	@Autowired
 	private MeetingMemberDaoImpl meetingMemberDao;
-	@Autowired
 	private LdapConfigDaoImpl ldapConfigDao;
-	@Autowired
 	private PrivateMessagesDaoImpl privateMessagesDao;
-	@Autowired
 	private PrivateMessageFolderDaoImpl privateMessageFolderDao;
-	@Autowired
 	private UserContactsDaoImpl userContactsDao;
 
+	@Override
+	public void init(ServletConfig config) throws ServletException {
+		super.init(config);
+		appointmentDao = (AppointmentDaoImpl)config.getServletContext().getAttribute("appointmentDao");
+		sessionManagement = (Sessionmanagement)config.getServletContext().getAttribute("sessionManagement");
+		userManagement = (Usermanagement)config.getServletContext().getAttribute("userManagement");
+		organisationmanagement = (Organisationmanagement)config.getServletContext().getAttribute("organisationmanagement");
+		roommanagement = (Roommanagement)config.getServletContext().getAttribute("roommanagement");
+		fileExplorerItemDao = (FileExplorerItemDaoImpl)config.getServletContext().getAttribute("fileExplorerItemDao");
+		flvRecordingDao = (FlvRecordingDaoImpl)config.getServletContext().getAttribute("flvRecordingDao");
+		flvRecordingMetaDataDao = (FlvRecordingMetaDataDaoImpl)config.getServletContext().getAttribute("flvRecordingMetaDataDao");
+		roomModeratorsDao = (RoomModeratorsDaoImpl)config.getServletContext().getAttribute("roomModeratorsDao");
+		usersDao = (UsersDaoImpl)config.getServletContext().getAttribute("usersDao");
+		meetingMemberDao = (MeetingMemberDaoImpl)config.getServletContext().getAttribute("meetingMemberDao");
+		ldapConfigDao = (LdapConfigDaoImpl)config.getServletContext().getAttribute("ldapConfigDao");
+		privateMessagesDao = (PrivateMessagesDaoImpl)config.getServletContext().getAttribute("privateMessagesDao");
+		privateMessageFolderDao = (PrivateMessageFolderDaoImpl)config.getServletContext().getAttribute("privateMessageFolderDao");
+		userContactsDao = (UserContactsDaoImpl)config.getServletContext().getAttribute("userContactsDao");
+	}
+	
 	/*
 	 * (non-Javadoc)
 	 * 

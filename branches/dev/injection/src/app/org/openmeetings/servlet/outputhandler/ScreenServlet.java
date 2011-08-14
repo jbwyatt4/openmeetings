@@ -18,6 +18,7 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 
 import javax.imageio.ImageIO;
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -48,16 +49,21 @@ import com.anotherbigidea.flash.readers.TagParser;
 
 public class ScreenServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
 	private static final Logger log = Red5LoggerFactory.getLogger(ScreenServlet.class, ScopeApplicationAdapter.webAppRootKey);
-	@Autowired
+	
 	private Sessionmanagement sessionManagement;
-	@Autowired
 	private Configurationmanagement cfgManagement;
-    @Autowired
     private Usermanagement userManagement;
-	@Autowired
 	private UsersDaoImpl usersDao;
+	
+	@Override
+	public void init(ServletConfig config) throws ServletException {
+		super.init(config);
+		sessionManagement = (Sessionmanagement)config.getServletContext().getAttribute("sessionManagement");
+		cfgManagement = (Configurationmanagement)config.getServletContext().getAttribute("cfgManagement");
+		userManagement = (Usermanagement)config.getServletContext().getAttribute("userManagement");
+		usersDao = (UsersDaoImpl)config.getServletContext().getAttribute("usersDao");
+	}
 	
 	/* (non-Javadoc)
 	 * @see javax.servlet.http.HttpServlet#doPost(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)

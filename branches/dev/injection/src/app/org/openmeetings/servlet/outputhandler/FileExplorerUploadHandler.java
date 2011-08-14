@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 
@@ -14,7 +15,6 @@ import org.openmeetings.app.data.file.dao.FileExplorerItemDaoImpl;
 import org.openmeetings.app.remote.red5.ScopeApplicationAdapter;
 import org.red5.logging.Red5LoggerFactory;
 import org.slf4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
@@ -22,9 +22,14 @@ public class FileExplorerUploadHandler extends UploadHandler {
     private static final long serialVersionUID = 2848421357849982426L;
     private static final Logger log = Red5LoggerFactory.getLogger(FileExplorerUploadHandler.class, ScopeApplicationAdapter.webAppRootKey);
 
-	@Autowired
 	private FileExplorerItemDaoImpl fileExplorerItemDao;
 
+	@Override
+	public void init(ServletConfig config) throws ServletException {
+		super.init(config);
+		fileExplorerItemDao = (FileExplorerItemDaoImpl)config.getServletContext().getAttribute("fileExplorerItemDao");
+	}
+	
     @Override
     protected void fileService(HttpServletRequest httpServletRequest,
             String sid, Long userId, Map<String, Object> hs)

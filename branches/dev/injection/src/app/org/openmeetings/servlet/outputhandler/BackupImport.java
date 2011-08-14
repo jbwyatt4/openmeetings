@@ -19,6 +19,7 @@ import java.util.regex.Pattern;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -81,45 +82,25 @@ public class BackupImport extends HttpServlet {
 
 	private static final Logger log = Red5LoggerFactory.getLogger(BackupImport.class, ScopeApplicationAdapter.webAppRootKey);
 
-	@Autowired
 	private AppointmentDaoImpl appointmentDao;
-	@Autowired
 	private Sessionmanagement sessionManagement;
-	@Autowired
 	private Configurationmanagement cfgManagement;
-	@Autowired
 	private Usermanagement userManagement;
-	@Autowired
 	private Statemanagement statemanagement;
-	@Autowired
 	private OmTimeZoneDaoImpl omTimeZoneDaoImpl;
-	@Autowired
 	private Organisationmanagement organisationmanagement;
-	@Autowired
 	private Roommanagement roommanagement;
-	@Autowired
 	private AppointmentCategoryDaoImpl appointmentCategoryDaoImpl;
-	@Autowired
 	private AppointmentReminderTypDaoImpl appointmentReminderTypDaoImpl;
-	@Autowired
 	private UsersDaoImpl usersDao;
-	@Autowired
 	private FlvRecordingDaoImpl flvRecordingDao;
-	@Autowired
 	private FlvRecordingMetaDataDaoImpl flvRecordingMetaDataDao;
-	@Autowired
 	private PrivateMessageFolderDaoImpl privateMessageFolderDao;
-	@Autowired
 	private PrivateMessagesDaoImpl privateMessagesDao;
-	@Autowired
 	private MeetingMemberDaoImpl meetingMemberDao;
-	@Autowired
 	private LdapConfigDaoImpl ldapConfigDao;
-	@Autowired
 	private RoomModeratorsDaoImpl roomModeratorsDao;
-	@Autowired
 	private FileExplorerItemDaoImpl fileExplorerItemDao;
-	@Autowired
 	private UserContactsDaoImpl userContactsDao;
 
 	private final HashMap<Long, Long> usersMap = new HashMap<Long, Long>();
@@ -134,6 +115,31 @@ public class BackupImport extends HttpServlet {
 		USERS, ORGANISATIONS, APPOINTMENTS, ROOMS, MESSAGEFOLDERS, USERCONTACTS, FILEEXPLORERITEMS
 	};
 
+	@Override
+	public void init(ServletConfig config) throws ServletException {
+		super.init(config);
+		appointmentDao = (AppointmentDaoImpl)config.getServletContext().getAttribute("appointmentDao");
+		sessionManagement = (Sessionmanagement)config.getServletContext().getAttribute("sessionManagement");
+		cfgManagement = (Configurationmanagement)config.getServletContext().getAttribute("cfgManagement");
+		userManagement = (Usermanagement)config.getServletContext().getAttribute("userManagement");
+		statemanagement = (Statemanagement)config.getServletContext().getAttribute("statemanagement");
+		omTimeZoneDaoImpl = (OmTimeZoneDaoImpl)config.getServletContext().getAttribute("omTimeZoneDaoImpl");
+		organisationmanagement = (Organisationmanagement)config.getServletContext().getAttribute("organisationmanagement");
+		roommanagement = (Roommanagement)config.getServletContext().getAttribute("roommanagement");
+		appointmentCategoryDaoImpl = (AppointmentCategoryDaoImpl)config.getServletContext().getAttribute("appointmentCategoryDaoImpl");
+		appointmentReminderTypDaoImpl = (AppointmentReminderTypDaoImpl)config.getServletContext().getAttribute("appointmentReminderTypDaoImpl");
+		usersDao = (UsersDaoImpl)config.getServletContext().getAttribute("usersDao");
+		flvRecordingDao = (FlvRecordingDaoImpl)config.getServletContext().getAttribute("flvRecordingDao");
+		flvRecordingMetaDataDao = (FlvRecordingMetaDataDaoImpl)config.getServletContext().getAttribute("flvRecordingMetaDataDao");
+		privateMessageFolderDao = (PrivateMessageFolderDaoImpl)config.getServletContext().getAttribute("privateMessageFolderDao");
+		privateMessagesDao = (PrivateMessagesDaoImpl)config.getServletContext().getAttribute("privateMessagesDao");
+		meetingMemberDao = (MeetingMemberDaoImpl)config.getServletContext().getAttribute("meetingMemberDao");
+		ldapConfigDao = (LdapConfigDaoImpl)config.getServletContext().getAttribute("ldapConfigDao");
+		roomModeratorsDao = (RoomModeratorsDaoImpl)config.getServletContext().getAttribute("roomModeratorsDao");
+		fileExplorerItemDao = (FileExplorerItemDaoImpl)config.getServletContext().getAttribute("fileExplorerItemDao");
+		userContactsDao = (UserContactsDaoImpl)config.getServletContext().getAttribute("userContactsDao");
+	}
+	
 	/*
 	 * (non-Javadoc)
 	 * 

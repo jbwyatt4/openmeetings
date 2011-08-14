@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -36,20 +37,22 @@ public class UploadHandler extends HttpServlet {
 
 	private static final long serialVersionUID = 8955335681521483484L;
 
-	private static final Logger log = Red5LoggerFactory.getLogger(
-			UploadHandler.class, ScopeApplicationAdapter.webAppRootKey);
+	private static final Logger log = Red5LoggerFactory.getLogger(UploadHandler.class, ScopeApplicationAdapter.webAppRootKey);
 
 	private String filesString[] = null;
-	@Autowired
+	
 	private Sessionmanagement sessionManagement;
-    @Autowired
     private Usermanagement userManagement;
-	@Autowired
 	private UsersDaoImpl usersDao;
 
-	public UploadHandler() {
+	@Override
+	public void init(ServletConfig config) throws ServletException {
+		super.init(config);
+		sessionManagement = (Sessionmanagement)config.getServletContext().getAttribute("sessionManagement");
+		userManagement = (Usermanagement)config.getServletContext().getAttribute("userManagement");
+		usersDao = (UsersDaoImpl)config.getServletContext().getAttribute("usersDao");
 	}
-
+	
 	protected void service(HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) throws ServletException,
 			IOException {
