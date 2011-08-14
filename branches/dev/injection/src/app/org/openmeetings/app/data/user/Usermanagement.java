@@ -127,6 +127,7 @@ public class Usermanagement {
 				TypedQuery<Users> q = em.createQuery(cq);
 				q.setFirstResult(start);
 				q.setMaxResults(max);
+				@SuppressWarnings("unused")
 				List<Users> ll = q.getResultList();
 				return sresult;
 			}
@@ -189,6 +190,7 @@ public class Usermanagement {
 			// else ((Criteria) query).addOrder(Order.desc(orderby));
 			query.setFirstResult(start);
 			query.setMaxResults(max);
+			@SuppressWarnings("unchecked")
 			List<Users> ll = query.getResultList();
 
 			sresult.setResult(ll);
@@ -217,6 +219,7 @@ public class Usermanagement {
 		return null;
 	}
 
+	@SuppressWarnings("rawtypes")
 	public List getUserByMod(Long user_level, long user_id) {
 		return null;
 	}
@@ -243,6 +246,7 @@ public class Usermanagement {
 			query.setParameter("userOrEmail", userOrEmail);
 			query.setParameter("deleted", "true");
 
+			@SuppressWarnings("unchecked")
 			List<Users> ll = query.getResultList();
 
 			log.debug("debug SIZE: " + ll.size());
@@ -369,7 +373,7 @@ public class Usermanagement {
 	 * @param start
 	 * @return
 	 */
-	public List searchUser(long user_level, String searchcriteria,
+	public List<Users> searchUser(long user_level, String searchcriteria,
 			String searchstring, int max, int start, String orderby, boolean asc) {
 		if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)) {
 			try {
@@ -402,14 +406,15 @@ public class Usermanagement {
 		return null;
 	}
 
-	public List getUserdataDashBoard(Long user_id) {
+	public List<Userdata> getUserdataDashBoard(Long user_id) {
 		if (user_id.longValue() > 0) {
 			try {
 				Query query = em
 						.createQuery("select c from Userdata as c where c.user_id = :user_id AND c.deleted <> :deleted");
 				query.setParameter("user_id", user_id.longValue());
 				query.setParameter("deleted", "true");
-				List ll = query.getResultList();
+				@SuppressWarnings("unchecked")
+				List<Userdata> ll = query.getResultList();
 				return ll;
 			} catch (Exception ex2) {
 				log.error("getUserdataDashBoard", ex2);
@@ -432,7 +437,7 @@ public class Usermanagement {
 				log.error("getUserdataNoByKey", ex2);
 			}
 		} else {
-			System.out.println("Error: No USER_ID given");
+			log.error("Error: No USER_ID given");
 		}
 		return userdata;
 	}
@@ -446,9 +451,10 @@ public class Usermanagement {
 				query.setParameter("user_id", user_id.longValue());
 				query.setParameter("data_key", DATA_KEY);
 				query.setParameter("deleted", "true");
-				for (Iterator it2 = query.getResultList().iterator(); it2
+				for (@SuppressWarnings("unchecked")
+				Iterator<Userdata> it2 = query.getResultList().iterator(); it2
 						.hasNext();) {
-					userdata = (Userdata) it2.next();
+					userdata = it2.next();
 				}
 			} catch (Exception ex2) {
 				log.error("getUserdataByKey", ex2);
@@ -464,7 +470,7 @@ public class Usermanagement {
 			Date age, String street, String additionalname, String zip,
 			long states_id, String town, int availible, String telefon,
 			String fax, String mobil, String email, String comment, int status,
-			List organisations, int title_id, String phone, String sip_user,
+			List<?> organisations, int title_id, String phone, String sip_user,
 			String sip_pass, String sip_auth, Boolean generateSipUserData,
 			String jNameTimeZone, Boolean forceTimeZoneCheck,
 			String userOffers, String userSearchs, Boolean showContactData,
@@ -719,8 +725,10 @@ public class Usermanagement {
 					.createQuery("select c from Userlevel as c where c.level_id = :level_id AND c.deleted <> :deleted");
 			query.setParameter("level_id", level_id.longValue());
 			query.setParameter("deleted", "true");
-			for (Iterator it2 = query.getResultList().iterator(); it2.hasNext();) {
-				userlevel = (Userlevel) it2.next();
+			for (@SuppressWarnings("unchecked")
+			Iterator<Userlevel> it2 = query.getResultList().iterator(); it2
+					.hasNext();) {
+				userlevel = it2.next();
 			}
 		} catch (Exception ex2) {
 			log.error("[getUserLevel]", ex2);
@@ -877,7 +885,7 @@ public class Usermanagement {
 				Long user_id = this.registerUserInit(3, 1, 0, 1, login,
 						Userpass, lastname, firstname, email, age, street,
 						additionalname, fax, zip, states_id, town, language_id,
-						true, new LinkedList(), phone, baseURL,
+						true, new LinkedList<Object>(), phone, baseURL,
 						sendConfirmation, "", "", "", generateSipUserData,
 						jNameTimeZone, false, "", "", false, true);
 
@@ -921,9 +929,10 @@ public class Usermanagement {
 				Long user_id = this.registerUserInit(3, 1, 0, 1, login,
 						Userpass, lastname, firstname, email, age, street,
 						additionalname, fax, zip, states_id, town, language_id,
-						sendWelcomeMessage, new LinkedList(), phone, baseURL,
-						sendConfirmation, "", "", "", generateSipUserData,
-						jNameTimeZone, false, "", "", false, true);
+						sendWelcomeMessage, new LinkedList<Object>(), phone,
+						baseURL, sendConfirmation, "", "", "",
+						generateSipUserData, jNameTimeZone, false, "", "",
+						false, true);
 
 				// Get the default organisation_id of registered users
 				if (user_id > 0) {
@@ -976,7 +985,7 @@ public class Usermanagement {
 			String firstname, String email, Date age, String street,
 			String additionalname, String fax, String zip, long states_id,
 			String town, long language_id, boolean sendWelcomeMessage,
-			List organisations, String phone, String baseURL,
+			List<Object> organisations, String phone, String baseURL,
 			Boolean sendConfirmation, String sip_user, String sip_pass,
 			String sip_auth, boolean generateSipUserData,
 			String jName_timezone, Boolean forceTimeZoneCheck,
@@ -1174,6 +1183,7 @@ public class Usermanagement {
 			query.setParameter("externalUserType", externalUserType);
 			query.setParameter("deleted", "true");
 
+			@SuppressWarnings("unchecked")
 			List<Users> users = query.getResultList();
 
 			if (users.size() > 0) {
@@ -1327,7 +1337,7 @@ public class Usermanagement {
 	 * @return
 	 */
 
-	public Long saveOrUpdateUser(Long user_level, ObjectMap values,
+	public Long saveOrUpdateUser(Long user_level, ObjectMap<?, ?> values,
 			Long users_id) {
 		try {
 			if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)) {
@@ -1592,6 +1602,7 @@ public class Usermanagement {
 		query.setParameter("userOrEmail", userOrEmail);
 		query.setParameter("deleted", "true");
 
+		@SuppressWarnings("unchecked")
 		List<Users> ll = query.getResultList();
 
 		if (ll.size() > 1) {
@@ -1616,6 +1627,7 @@ public class Usermanagement {
 		Query query = em.createQuery(hql);
 		query.setParameter("userOrEmail", userOrEmail);
 
+		@SuppressWarnings("unchecked")
 		List<Users> ll = query.getResultList();
 
 		if (ll.size() > 1) {
@@ -1683,13 +1695,12 @@ public class Usermanagement {
 					}
 					IScope currentScope = scopeApplicationAdapter
 							.getRoomScope(scopeName);
-					scopeApplicationAdapter.roomLeaveByScope(rcl,
-							currentScope);
+					scopeApplicationAdapter.roomLeaveByScope(rcl, currentScope);
 
 					HashMap<Integer, String> messageObj = new HashMap<Integer, String>();
 					messageObj.put(0, "kick");
-					scopeApplicationAdapter.sendMessageById(
-							messageObj, rcl.getStreamid(), currentScope);
+					scopeApplicationAdapter.sendMessageById(messageObj,
+							rcl.getStreamid(), currentScope);
 
 				}
 
@@ -1723,13 +1734,12 @@ public class Usermanagement {
 				}
 				IScope currentScope = scopeApplicationAdapter
 						.getRoomScope(scopeName);
-				scopeApplicationAdapter.roomLeaveByScope(rcl,
-						currentScope);
+				scopeApplicationAdapter.roomLeaveByScope(rcl, currentScope);
 
 				HashMap<Integer, String> messageObj = new HashMap<Integer, String>();
 				messageObj.put(0, "kick");
-				scopeApplicationAdapter.sendMessageById(
-						messageObj, rcl.getStreamid(), currentScope);
+				scopeApplicationAdapter.sendMessageById(messageObj,
+						rcl.getStreamid(), currentScope);
 
 				return true;
 			}
@@ -1986,6 +1996,7 @@ public class Usermanagement {
 			query.setMaxResults(max);
 			query.setFirstResult(start);
 
+			@SuppressWarnings("unchecked")
 			List<Users> userList = query.getResultList();
 
 			return userList;
@@ -2124,6 +2135,7 @@ public class Usermanagement {
 
 			}
 
+			@SuppressWarnings("rawtypes")
 			List userList = query.getResultList();
 
 			return (Long) userList.get(0);
@@ -2175,6 +2187,7 @@ public class Usermanagement {
 			query.setParameter("userSearchs",
 					StringUtils.lowerCase(userSearchs));
 
+			@SuppressWarnings("rawtypes")
 			List ll = query.getResultList();
 
 			return (Long) ll.get(0);
