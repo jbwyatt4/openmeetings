@@ -43,7 +43,8 @@
 	<!-- LPS Properties -->
 	<property name="out.dir.swf" value = "${basedir}/${dist.dir}/red5/webapps/${project.distname}/" />
 	<property name="laszlo.home" value="${basedir}/openlaszlo"/>
-	<property name="laszlo.src.dir" value="${basedir}/WebContent/${project.distname}"/>
+	<property name="webcontent.src.dir" value="${basedir}/WebContent"/>
+	<property name="laszlo.src.dir" value="${webcontent.src.dir}/${project.distname}"/>
 	<property name="laszlo.debug" value="false"/>
 	<property name="laszlo.proxied" value = "solo"/>
 
@@ -219,7 +220,9 @@
 		<copy file="${openjpa.lib}/openjpa-all-2.1.0.jar" todir="${dist.dir}/red5/lib"/>
     	
     	<copy file="${openjpa.lib}/dom4j-1.6.1.jar" todir="${dist.dir}/red5/webapps/${project.distname}/WEB-INF/lib"/>
-    	
+        <copy todir="${dist.dir}/red5/webapps/${project.distname}/WEB-INF/red5-services">
+            <fileset dir="${webcontent.src.dir}/WEB-INF/red5-services" includes="*.xml"/>
+        </copy>
     	
         <chmod dir="${dist.dir}/red5" perm="755" includes="**/*.sh"/>
         <chmod dir="${dist.dir}/red5/webapps/${project.distname}/screen" perm="755" includes="**/*.sh"/>

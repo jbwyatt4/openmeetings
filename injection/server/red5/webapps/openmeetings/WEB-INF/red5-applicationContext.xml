@@ -150,6 +150,7 @@
 	<bean id="manageCryptStyle" class="org.openmeetings.utils.crypt.ManageCryptStyle" />
 	<bean id="openXGHttpClient" class="org.openmeetings.app.sip.xmlrpc.OpenXGHttpClient" />
 	<bean id="appointmentCategoryLogic" class="org.openmeetings.app.data.calendar.management.AppointmentCategoryLogic" />
+	<bean id="whiteboardConvertionJobManager" class="org.openmeetings.app.data.record.WhiteboardConvertionJobManager" />
 
 	<tx:annotation-driven transaction-manager="jpaTransactionManager"/>
 	<context:annotation-config/>

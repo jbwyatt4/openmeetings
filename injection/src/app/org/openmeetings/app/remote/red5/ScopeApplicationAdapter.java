@@ -28,9 +28,6 @@ import org.openmeetings.app.persistence.beans.calendar.MeetingMember;
 import org.openmeetings.app.persistence.beans.recording.RoomClient;
 import org.openmeetings.app.persistence.beans.rooms.Rooms;
 import org.openmeetings.app.persistence.beans.user.Users;
-import org.openmeetings.app.quartz.scheduler.QuartzMeetingReminderJob;
-import org.openmeetings.app.quartz.scheduler.QuartzRecordingJob;
-import org.openmeetings.app.quartz.scheduler.QuartzSessionClear;
 import org.openmeetings.app.remote.FLVRecorderService;
 import org.openmeetings.app.remote.PollService;
 import org.openmeetings.app.remote.WhiteBoardService;
@@ -177,19 +174,7 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 
 			// init your handler here
 
-			// The scheduled Jobs did go into the Spring-Managed Beans, see
-			// schedulerJobs.service.xml
-
-			QuartzSessionClear quartzSessionClear = new QuartzSessionClear();
-			QuartzRecordingJob quartzRecordingJob = new QuartzRecordingJob();
-			QuartzMeetingReminderJob reminderJob = new QuartzMeetingReminderJob();
-
-			// QuartzZombieJob quartzZombieJob = new QuartzZombieJob();
-			addScheduledJob(300000, quartzSessionClear);
-			addScheduledJob(3000, quartzRecordingJob);
-			addScheduledJob(100000, reminderJob);
-
-			// addScheduledJob(2000,quartzZombieJob);
+			// The scheduled Jobs did go into the Spring-Managed Beans, see schedulerJobs.service.xml
 
 			// Spring Definition does not work here, its too early, Instance is
 			// not set yet
