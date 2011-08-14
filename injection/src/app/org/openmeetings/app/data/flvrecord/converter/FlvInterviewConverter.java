@@ -11,6 +11,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.openmeetings.app.data.basic.Configurationmanagement;
+import org.openmeetings.app.data.file.dao.FileExplorerItemDaoImpl;
 import org.openmeetings.app.data.flvrecord.FlvRecordingDaoImpl;
 import org.openmeetings.app.data.flvrecord.FlvRecordingLogDaoImpl;
 import org.openmeetings.app.data.flvrecord.FlvRecordingMetaDataDaoImpl;
@@ -23,6 +24,7 @@ import org.openmeetings.app.remote.red5.ScopeApplicationAdapter;
 import org.openmeetings.utils.math.CalendarPatterns;
 import org.red5.logging.Red5LoggerFactory;
 import org.slf4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class FlvInterviewConverter {
 	
@@ -764,7 +766,7 @@ public class FlvInterviewConverter {
 				log.debug("completeLengthInSeconds|currentTimeInMilliSeconds " + 
 						completeLengthInSeconds + "|" + currentTimeInMilliSeconds + "|" + progress + "|" + cLength);
 				
-				FlvRecordingDaoImpl.getInstance().updateFlvRecordingProgress(flvRecording.getFlvRecordingId(), progress);
+				flvRecordingDaoImpl.updateFlvRecordingProgress(flvRecording.getFlvRecordingId(), progress);
 				
 				if (currentTimeInMilliSeconds >= completeLengthInSeconds) {
 				

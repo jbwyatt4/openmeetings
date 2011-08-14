@@ -44,7 +44,9 @@ public class FileService {
 	private Sessionmanagement sessionManagement;
     @Autowired
     private Usermanagement userManagement;
-	
+	@Autowired
+	private FileExplorerItemDaoImpl fileExplorerItemDao;
+
 	public ServletContext getServletContext()
 	{
 		MessageContext mc = MessageContext.getCurrentMessageContext();
@@ -111,8 +113,7 @@ public class FileService {
 		        // httpServletResponse.getWriter().print(returnError);
 		        hs.put("message", "library");
 		        hs.put("action", "newFile");
-		        hs.put("fileExplorerItem", FileExplorerItemDaoImpl.getInstance()
-		                .getFileExplorerItemsById(Long.parseLong(returnAttributes.get("fileExplorerItemId").toString())));
+		        hs.put("fileExplorerItem", fileExplorerItemDao.getFileExplorerItemsById(Long.parseLong(returnAttributes.get("fileExplorerItemId").toString())));
 		        hs.put("error", returnError);
 		        hs.put("fileName", returnAttributes.get("completeName"));
 				
@@ -202,7 +203,7 @@ public class FileService {
 		        // httpServletResponse.getWriter().print(returnError);
 		        hs.put("message", "library");
 		        hs.put("action", "newFile");
-		        hs.put("fileExplorerItem", FileExplorerItemDaoImpl.getInstance()
+		        hs.put("fileExplorerItem", fileExplorerItemDao
 		                .getFileExplorerItemsById(Long.parseLong(returnAttributes.get("fileExplorerItemId").toString())));
 		        hs.put("error", returnError);
 		        hs.put("fileName", returnAttributes.get("completeName"));
@@ -272,7 +273,7 @@ public class FileService {
                     // other Folders and Files maybe are also in a Home
                     // directory
                     // but just because their parent is
-                    return FileExplorerItemDaoImpl.getInstance().add(folderName,
+                    return fileExplorerItemDao.add(folderName,
                             "", 0L, userId, room_id,
                             userId, true, // isFolder
                             false, // isImage
@@ -282,7 +283,7 @@ public class FileService {
                             false, // isXmlFile
                             externalFilesid, externalType);
                 } else {
-                    return FileExplorerItemDaoImpl.getInstance().add(folderName,
+                    return fileExplorerItemDao.add(folderName,
                             "", parentFileExplorerItemId, null, room_id,
                             userId, true, // isFolder
                             false, // isImage
@@ -334,7 +335,7 @@ public class FileService {
                     // other Folders and Files maybe are also in a Home
                     // directory
                     // but just because their parent is
-                    return FileExplorerItemDaoImpl.getInstance().add(folderName,
+                    return fileExplorerItemDao.add(folderName,
                             "", 0L, userId, room_id,
                             userId, true, // isFolder
                             false, // isImage
@@ -344,7 +345,7 @@ public class FileService {
                             false, // isXmlFile
                             externalFilesid, externalType);
                 } else {
-                    return FileExplorerItemDaoImpl.getInstance().add(folderName,
+                    return fileExplorerItemDao.add(folderName,
                             "", parentFileExplorerItemId, null, room_id,
                             userId, true, // isFolder
                             false, // isImage
@@ -389,7 +390,7 @@ public class FileService {
                     // other Folders and Files maybe are also in a Home
                     // directory
                     // but just because their parent is
-                    return FileExplorerItemDaoImpl.getInstance().add(fileName,
+                    return fileExplorerItemDao.add(fileName,
                             "", parentFileExplorerItemId, users_id, room_id,
                             users_id, true, // isFolder
                             false, // isImage
@@ -399,7 +400,7 @@ public class FileService {
                             false // isXmlFile
                             , 0L, "");
                 } else {
-                    return FileExplorerItemDaoImpl.getInstance().add(fileName,
+                    return fileExplorerItemDao.add(fileName,
                             "", parentFileExplorerItemId, null, room_id,
                             users_id, true, // isFolder
                             false, // isImage
@@ -434,7 +435,7 @@ public class FileService {
 			
 	        if (AuthLevelmanagement.getInstance().checkWebServiceLevel(User_level)){
 	        	
-	        	FileExplorerItemDaoImpl.getInstance().deleteFileExplorerItemByExternalIdAndType(
+	        	fileExplorerItemDao.deleteFileExplorerItemByExternalIdAndType(
 	        			externalFilesid, externalType);
 	        	
 	        }
@@ -462,7 +463,7 @@ public class FileService {
 			
 	        if (AuthLevelmanagement.getInstance().checkWebServiceLevel(User_level)){
 	        	
-	        	FileExplorerItemDaoImpl.getInstance().deleteFileExplorerItem(
+	        	fileExplorerItemDao.deleteFileExplorerItem(
                         fileExplorerItemId);
 	        	
 	        }
@@ -492,7 +493,7 @@ public class FileService {
 	        	
 	        	//TODO: Check if user has access or not to the file
 	        	
-	        	FileExplorerItemDaoImpl.getInstance().deleteFileExplorerItem(
+	        	fileExplorerItemDao.deleteFileExplorerItem(
                         fileExplorerItemId);
 	        	
 	        }
@@ -569,9 +570,7 @@ public class FileService {
                 FileExplorerObject fileExplorerObject = new FileExplorerObject();
 
                 // Home File List
-                FileExplorerItem[] fList = FileExplorerItemDaoImpl
-                        .getInstance()
-                        .getFileExplorerItemsByOwner(owner_id, 0L);
+                FileExplorerItem[] fList = fileExplorerItemDao.getFileExplorerItemsByOwner(owner_id, 0L);
 
                 long homeFileSize = 0;
 
@@ -586,8 +585,7 @@ public class FileService {
                 fileExplorerObject.setUserHomeSize(homeFileSize);
 
                 // Public File List
-                FileExplorerItem[] rList = FileExplorerItemDaoImpl
-                        .getInstance().getFileExplorerItemsByRoom(room_id, 0L);
+                FileExplorerItem[] rList = fileExplorerItemDao.getFileExplorerItemsByRoom(room_id, 0L);
 
                 long roomFileSize = 0;
 
@@ -630,9 +628,7 @@ public class FileService {
                 FileExplorerObject fileExplorerObject = new FileExplorerObject();
 
                 // Home File List
-                FileExplorerItem[] fList = FileExplorerItemDaoImpl
-                        .getInstance()
-                        .getFileExplorerItemsByOwner(users_id, 0L);
+                FileExplorerItem[] fList = fileExplorerItemDao.getFileExplorerItemsByOwner(users_id, 0L);
 
                 long homeFileSize = 0;
 
@@ -647,8 +643,7 @@ public class FileService {
                 fileExplorerObject.setUserHomeSize(homeFileSize);
 
                 // Public File List
-                FileExplorerItem[] rList = FileExplorerItemDaoImpl
-                        .getInstance().getFileExplorerItemsByRoom(room_id, 0L);
+                FileExplorerItem[] rList = fileExplorerItemDao.getFileExplorerItemsByRoom(room_id, 0L);
 
                 long roomFileSize = 0;
 
@@ -692,16 +687,16 @@ public class FileService {
 
                 if (parentFileExplorerItemId == 0) {
                     if (isOwner) {
-                        return FileExplorerItemDaoImpl.getInstance()
+                        return fileExplorerItemDao
                                 .getFileExplorerItemsByOwner(owner_id,
                                         parentFileExplorerItemId);
                     } else {
-                        return FileExplorerItemDaoImpl.getInstance()
+                        return fileExplorerItemDao
                                 .getFileExplorerItemsByRoom(room_id,
                                         parentFileExplorerItemId);
                     }
                 } else {
-                    return FileExplorerItemDaoImpl.getInstance()
+                    return fileExplorerItemDao
                             .getFileExplorerItemsByParent(
                                     parentFileExplorerItemId);
                 }
@@ -729,16 +724,16 @@ public class FileService {
 
                 if (parentFileExplorerItemId == 0) {
                     if (isOwner) {
-                        return FileExplorerItemDaoImpl.getInstance()
+                        return fileExplorerItemDao
                                 .getFileExplorerItemsByOwner(users_id,
                                         parentFileExplorerItemId);
                     } else {
-                        return FileExplorerItemDaoImpl.getInstance()
+                        return fileExplorerItemDao
                                 .getFileExplorerItemsByRoom(room_id,
                                         parentFileExplorerItemId);
                     }
                 } else {
-                    return FileExplorerItemDaoImpl.getInstance()
+                    return fileExplorerItemDao
                             .getFileExplorerItemsByParent(
                                     parentFileExplorerItemId);
                 }
@@ -763,7 +758,7 @@ public class FileService {
 
                 log.debug("deleteFileOrFolder " + fileExplorerItemId);
 
-                FileExplorerItemDaoImpl.getInstance().updateFileOrFolderName(
+                fileExplorerItemDao.updateFileOrFolderName(
                         fileExplorerItemId, fileName);
 
             }
@@ -786,7 +781,7 @@ public class FileService {
 
 	        	//TODO: check if this user is allowed to change this file
 	        	/*
-	        	FileExplorerItem fileExItem = FileExplorerItemDaoImpl.getInstance().getFileExplorerItemsById(fileExplorerItemId);
+	        	FileExplorerItem fileExItem = fileExplorerItemDao.getFileExplorerItemsById(fileExplorerItemId);
 	        	
 	        	if (fileExItem.getOwnerId() != null && !fileExItem.getOwnerId().equals(users_id)) {
 	        		throw new Exception("This user is not the owner of the file and not allowed to edit its name");
@@ -795,7 +790,7 @@ public class FileService {
 	        	
                 log.debug("deleteFileOrFolder " + fileExplorerItemId);
 
-                FileExplorerItemDaoImpl.getInstance().updateFileOrFolderName(
+                fileExplorerItemDao.updateFileOrFolderName(
                         fileExplorerItemId, fileName);
 
             }
@@ -819,13 +814,11 @@ public class FileService {
 
                 log.debug("deleteFileOrFolder " + fileExplorerItemId);
 
-                FileExplorerItemDaoImpl.getInstance().moveFile(
+                fileExplorerItemDao.moveFile(
                         fileExplorerItemId, newParentFileExplorerItemId,
                         room_id, isOwner, owner_id);
 
-                FileExplorerItem fileExplorerItem = FileExplorerItemDaoImpl
-                        .getInstance().getFileExplorerItemsById(
-                                fileExplorerItemId);
+                FileExplorerItem fileExplorerItem = fileExplorerItemDao.getFileExplorerItemsById(fileExplorerItemId);
 
                 if (moveToHome) {
                     // set this file and all subfiles and folders the ownerId
@@ -860,12 +853,11 @@ public class FileService {
 
                 log.debug("deleteFileOrFolder " + fileExplorerItemId);
 
-                FileExplorerItemDaoImpl.getInstance().moveFile(
+                fileExplorerItemDao.moveFile(
                         fileExplorerItemId, newParentFileExplorerItemId,
                         room_id, isOwner, users_id);
 
-                FileExplorerItem fileExplorerItem = FileExplorerItemDaoImpl
-                        .getInstance().getFileExplorerItemsById(
+                FileExplorerItem fileExplorerItem = fileExplorerItemDao.getFileExplorerItemsById(
                                 fileExplorerItemId);
 
                 if (moveToHome) {

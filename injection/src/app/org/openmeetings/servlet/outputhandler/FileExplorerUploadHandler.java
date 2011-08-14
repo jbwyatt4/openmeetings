@@ -2,10 +2,7 @@ package org.openmeetings.servlet.outputhandler;
 
 import http.utils.multipartrequest.ServletMultipartRequest;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.InputStream;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -14,25 +11,19 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.openmeetings.app.data.file.FileProcessor;
 import org.openmeetings.app.data.file.dao.FileExplorerItemDaoImpl;
-import org.openmeetings.app.documents.GenerateImage;
-import org.openmeetings.app.documents.GeneratePDF;
-import org.openmeetings.app.documents.GenerateThumbs;
-import org.openmeetings.app.persistence.beans.files.FileExplorerItem;
 import org.openmeetings.app.remote.red5.ScopeApplicationAdapter;
-import org.openmeetings.utils.StoredFile;
-import org.openmeetings.utils.crypt.MD5;
 import org.red5.logging.Red5LoggerFactory;
 import org.slf4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
 public class FileExplorerUploadHandler extends UploadHandler {
-
-    private static final Logger log = Red5LoggerFactory.getLogger(
-            FileExplorerUploadHandler.class,
-            ScopeApplicationAdapter.webAppRootKey);
-
     private static final long serialVersionUID = 2848421357849982426L;
+    private static final Logger log = Red5LoggerFactory.getLogger(FileExplorerUploadHandler.class, ScopeApplicationAdapter.webAppRootKey);
+
+	@Autowired
+	private FileExplorerItemDaoImpl fileExplorerItemDao;
 
     @Override
     protected void fileService(HttpServletRequest httpServletRequest,
@@ -85,8 +76,7 @@ public class FileExplorerUploadHandler extends UploadHandler {
         // httpServletResponse.getWriter().print(returnError);
         hs.put("message", "library");
         hs.put("action", "newFile");
-        hs.put("fileExplorerItem", FileExplorerItemDaoImpl.getInstance()
-                .getFileExplorerItemsById(Long.parseLong(returnAttributes.get("fileExplorerItemId").toString())));
+        hs.put("fileExplorerItem", fileExplorerItemDao.getFileExplorerItemsById(Long.parseLong(returnAttributes.get("fileExplorerItemId").toString())));
         hs.put("error", returnError);
         hs.put("fileName", returnAttributes.get("completeName"));
 

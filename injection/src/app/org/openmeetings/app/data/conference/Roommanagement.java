@@ -52,6 +52,10 @@ public class Roommanagement {
 	private Organisationmanagement organisationmanagement;
 	@Autowired
 	private OpenXGHttpClient openXGHttpClient;
+	@Autowired
+	private RoomModeratorsDaoImpl roomModeratorsDao;
+	@Autowired
+	private UsersDaoImpl usersDao;
 
 	/**
 	 * add a new Record to the table roomtypes
@@ -773,7 +777,7 @@ public class Roommanagement {
 				}
 
 				if (roomModerators != null) {
-					RoomModeratorsDaoImpl.getInstance()
+					roomModeratorsDao
 							.addRoomModeratorByUserList(roomModerators,
 									r.getRooms_id());
 				}
@@ -819,7 +823,7 @@ public class Roommanagement {
 				this.addRoomToOrganisation(3, returnId, organisation_id);
 
 				if (roomModerators != null) {
-					RoomModeratorsDaoImpl.getInstance()
+					roomModeratorsDao
 							.addRoomModeratorByUserList(roomModerators,
 									r.getRooms_id());
 				}
@@ -894,7 +898,7 @@ public class Roommanagement {
 			}
 
 			if (roomModerators != null) {
-				RoomModeratorsDaoImpl.getInstance().addRoomModeratorByUserList(
+				roomModeratorsDao.addRoomModeratorByUserList(
 						roomModerators, r.getRooms_id());
 			}
 
@@ -1200,7 +1204,7 @@ public class Roommanagement {
 	private boolean checkUserOrgRoom(long user_id, long rooms_id) {
 		try {
 
-			Users us = UsersDaoImpl.getInstance().getUser(user_id);
+			Users us = usersDao.getUser(user_id);
 			List<Organisation_Users> s = us.getOrganisation_users();
 
 			for (Iterator<Organisation_Users> it = s.iterator(); it.hasNext();) {
@@ -1360,7 +1364,7 @@ public class Roommanagement {
 					return null;
 			}
 			if (roomModerators != null) {
-				RoomModeratorsDaoImpl.getInstance()
+				roomModeratorsDao
 						.updateRoomModeratorByUserList(roomModerators,
 								r.getRooms_id());
 			}
@@ -1410,7 +1414,7 @@ public class Roommanagement {
 				// update as Moderator
 
 				if (roomModerators != null) {
-					RoomModeratorsDaoImpl.getInstance()
+					roomModeratorsDao
 							.updateRoomModeratorByUserList(roomModerators,
 									r.getRooms_id());
 				}

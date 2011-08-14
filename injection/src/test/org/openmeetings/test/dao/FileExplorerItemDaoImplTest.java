@@ -18,6 +18,8 @@ public class FileExplorerItemDaoImplTest extends AbstractTestCase {
 	private Usermanagement userManagement;
 	@Autowired
 	private Roommanagement roommanagement;
+	@Autowired
+	private FileExplorerItemDaoImpl fileExplorerItemDao;
 
 	public FileExplorerItemDaoImplTest(String name) {
 		super(name);
@@ -46,16 +48,13 @@ public class FileExplorerItemDaoImplTest extends AbstractTestCase {
 		fileExplorerItem.setOwnerId(userId);
 		fileExplorerItem.setWmlFilePath("");
 		fileExplorerItem.setIsFolder(true);
-		Long fileExplorerItemId = FileExplorerItemDaoImpl.getInstance()
-				.addFileExplorerItem(fileExplorerItem);
+		Long fileExplorerItemId = fileExplorerItemDao.addFileExplorerItem(fileExplorerItem);
 		assertNotNull("Cann't add file explorer item", fileExplorerItemId);
 
-		fileExplorerItem = FileExplorerItemDaoImpl.getInstance()
-				.getFileExplorerItemsById(fileExplorerItemId);
+		fileExplorerItem = fileExplorerItemDao.getFileExplorerItemsById(fileExplorerItemId);
 		assertNotNull("Cann't get file explorer item", fileExplorerItem);
 
-		FileExplorerItemDaoImpl.getInstance().deleteFileExplorerItem(
-				fileExplorerItemId);
+		fileExplorerItemDao.deleteFileExplorerItem(fileExplorerItemId);
 
 	}
 }

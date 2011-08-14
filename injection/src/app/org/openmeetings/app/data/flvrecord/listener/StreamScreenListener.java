@@ -6,9 +6,7 @@ import java.util.Date;
 
 import org.apache.mina.core.buffer.IoBuffer;
 import org.openmeetings.app.data.flvrecord.FlvRecordingMetaDataDaoImpl;
-import org.openmeetings.app.data.flvrecord.FlvRecordingMetaDeltaDaoImpl;
 import org.openmeetings.app.persistence.beans.flvrecord.FlvRecordingMetaData;
-import org.openmeetings.app.persistence.beans.flvrecord.FlvRecordingMetaDelta;
 import org.openmeetings.app.remote.red5.ScopeApplicationAdapter;
 import org.red5.io.ITag;
 import org.red5.io.flv.impl.Tag;
@@ -17,6 +15,7 @@ import org.red5.server.api.IScope;
 import org.red5.server.api.stream.IBroadcastStream;
 import org.red5.server.api.stream.IStreamPacket;
 import org.slf4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class StreamScreenListener extends ListenerAdapter {
 	
@@ -29,6 +28,8 @@ public class StreamScreenListener extends ListenerAdapter {
 	private long initialDelta = 0;
 	
 	private static final Logger log = Red5LoggerFactory.getLogger(StreamScreenListener.class, ScopeApplicationAdapter.webAppRootKey);
+	@Autowired
+	private FlvRecordingMetaDataDaoImpl flvRecordingMetaDataDao;
 
 	public StreamScreenListener(String streamName, IScope scope,
 			Long flvRecordingMetaDataId, boolean isScreenData,boolean isInterview) {
@@ -54,7 +55,7 @@ public class StreamScreenListener extends ListenerAdapter {
 				//This is important for the Interview Post Processing to get
 				//the time between starting the stream and the actual Access to the 
 				//webcam by the Flash Security Dialog
-				FlvRecordingMetaDataDaoImpl.getInstance().updateFlvRecordingMetaDataInitialGap(flvRecordingMetaDataId, this.initialDelta);
+				flvRecordingMetaDataDao.updateFlvRecordingMetaDataInitialGap(flvRecordingMetaDataId, this.initialDelta);
 				
 			}
 			
@@ -140,11 +141,11 @@ public class StreamScreenListener extends ListenerAdapter {
 				
 				//Add Delta in the beginning, this Delta is the Gap between the
 				//device chosen and when the User hits the button in the Flash Security Warning
-				FlvRecordingMetaData flvRecordingMetaData = FlvRecordingMetaDataDaoImpl.getInstance().getFlvRecordingMetaDataById(this.flvRecordingMetaDataId);
+				FlvRecordingMetaData flvRecordingMetaData = flvRecordingMetaDataDao.getFlvRecordingMetaDataById(this.flvRecordingMetaDataId);
 				
 				flvRecordingMetaData.setRecordStart(new Date(flvRecordingMetaData.getRecordStart().getTime() + this.initialDelta));
 				
-				FlvRecordingMetaDataDaoImpl.getInstance().updateFlvRecordingMetaData(flvRecordingMetaData);
+				flvRecordingMetaDataDao.updateFlvRecordingMetaData(flvRecordingMetaData);
 				
 				writer.close();
 				

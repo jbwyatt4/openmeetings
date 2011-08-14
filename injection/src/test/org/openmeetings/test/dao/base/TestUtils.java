@@ -33,6 +33,8 @@ public class TestUtils extends Assert {
 	static private Salutationmanagement salutationmanagement;
 	@Autowired
 	static private Roommanagement roommanagement;
+	@Autowired //FIXME
+	static private UsersDaoImpl usersDao;
 
 	public static Appointment createAppointment() throws Exception {
 		assertNotNull("Cann't access to appointment dao implimentation",
@@ -59,7 +61,7 @@ public class TestUtils extends Assert {
 		ap.setIsYearly(false);
 		ap.setIsPasswordProtected(false);
 
-		ap.setUserId(UsersDaoImpl.getInstance().getUser(1L));
+		ap.setUserId(usersDao.getUser(1L));
 		ap.setIsConnectedEvent(false);
 		Long id = appointmentDao.addAppointmentObj(ap);
 		assertNotNull("Cann't add appointment", id);

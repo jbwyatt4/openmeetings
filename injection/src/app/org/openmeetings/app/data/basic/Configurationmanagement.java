@@ -21,6 +21,7 @@ import org.openmeetings.app.remote.red5.ScopeApplicationAdapter;
 import org.openmeetings.utils.mappings.CastMapToObject;
 import org.red5.logging.Red5LoggerFactory;
 import org.slf4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 @Transactional
@@ -32,6 +33,8 @@ public class Configurationmanagement {
 
 	@PersistenceContext
 	private EntityManager em;
+	@Autowired
+	private UsersDaoImpl usersDao;
 
 	public Configuration getConfKey(long user_level, String CONF_KEY) {
 		try {
@@ -74,7 +77,7 @@ public class Configurationmanagement {
 				log.debug("getConfByConfigurationId4: " + configuration);
 
 				if (configuration != null && configuration.getUser_id() != null) {
-					configuration.setUsers(UsersDaoImpl.getInstance().getUser(
+					configuration.setUsers(usersDao.getUser(
 							configuration.getUser_id()));
 				}
 				return configuration;
@@ -247,7 +250,7 @@ public class Configurationmanagement {
 				Configuration conf = (Configuration) CastMapToObject
 						.getInstance().castByGivenObject(values,
 								Configuration.class);
-				conf.setUsers(UsersDaoImpl.getInstance().getUser(users_id));
+				conf.setUsers(usersDao.getUser(users_id));
 				conf.setUpdatetime(new Date());
 				conf.setDeleted("true");
 

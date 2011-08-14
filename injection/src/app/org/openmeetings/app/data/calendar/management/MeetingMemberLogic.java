@@ -38,6 +38,10 @@ public class MeetingMemberLogic {
 	private Fieldmanagment fieldmanagment;
 	@Autowired
 	private OmTimeZoneDaoImpl omTimeZoneDaoImpl;
+	@Autowired
+	private Invitationmanagement invitationManagement;
+	@Autowired
+	private MeetingMemberDaoImpl meetingMemberDao;
 
 	public static synchronized MeetingMemberLogic getInstance() {
 		if (instance == null) {
@@ -68,7 +72,7 @@ public class MeetingMemberLogic {
 			String password, String jNameMemberTimeZone, String invitorName) {
 
 		try {
-			Long memberId = MeetingMemberDaoImpl.getInstance()
+			Long memberId = meetingMemberDao
 					.addMeetingMember(firstname, lastname, memberStatus,
 							appointmentStatus, appointmentId, userid, email,
 							invitor, jNameMemberTimeZone, false);
@@ -176,7 +180,7 @@ public class MeetingMemberLogic {
 			} else if (point.getRemind().getTypId() == 2) {
 				log.debug("Reminder for Appointment : simple email");
 
-				Invitations invitation = Invitationmanagement.getInstance()
+				Invitations invitation = invitationManagement
 						.addInvitationLink(
 								new Long(2), // userlevel
 								firstname + " " + lastname, // username
@@ -208,7 +212,7 @@ public class MeetingMemberLogic {
 				System.out.println("5" + starttime);
 				System.out.println("6" + endtime);
 
-				invitationId = Invitationmanagement.getInstance()
+				invitationId = invitationManagement
 						.addInvitationIcalLink(
 								new Long(2), // userlevel
 								firstname + " " + lastname, // username
@@ -236,7 +240,7 @@ public class MeetingMemberLogic {
 			// Setting InvitationId within MeetingMember
 
 			if (invitationId != null) {
-				Invitations invi = Invitationmanagement.getInstance()
+				Invitations invi = invitationManagement
 						.getInvitationbyId(invitationId);
 
 				member.setInvitation(invi);
@@ -265,7 +269,7 @@ public class MeetingMemberLogic {
 
 		log.debug("MeetingMemberLogic.updateMeetingMember");
 
-		MeetingMember member = MeetingMemberDaoImpl.getInstance()
+		MeetingMember member = meetingMemberDao
 				.getMeetingMemberById(meetingMemberId);
 
 		if (member == null) {
@@ -274,7 +278,7 @@ public class MeetingMemberLogic {
 		}
 
 		try {
-			return MeetingMemberDaoImpl.getInstance().updateMeetingMember(
+			return meetingMemberDao.updateMeetingMember(
 					meetingMemberId, firstname, lastname, memberStatus,
 					appointmentStatus, appointmentId, userid, email);
 		} catch (Exception err) {
@@ -294,7 +298,7 @@ public class MeetingMemberLogic {
 	public Long updateMeetingMember(MeetingMember member) {
 		log.debug("updateMeetingMember");
 
-		return MeetingMemberDaoImpl.getInstance().updateMeetingMember(member)
+		return meetingMemberDao.updateMeetingMember(member)
 				.getMeetingMemberId();
 	}
 
@@ -308,7 +312,7 @@ public class MeetingMemberLogic {
 	public MeetingMember getMemberById(Long memberId) {
 		log.debug("getMemberById");
 
-		return MeetingMemberDaoImpl.getInstance()
+		return meetingMemberDao
 				.getMeetingMemberById(memberId);
 	}
 
@@ -327,7 +331,7 @@ public class MeetingMemberLogic {
 
 		try {
 
-			MeetingMember member = MeetingMemberDaoImpl.getInstance()
+			MeetingMember member = meetingMemberDao
 					.getMeetingMemberById(meetingMemberId);
 
 			if (member == null) {
@@ -354,12 +358,12 @@ public class MeetingMemberLogic {
 			log.debug("before sending cancelMail");
 
 			// cancel invitation
-			Invitationmanagement.getInstance().cancelInvitation(point, member,
+			invitationManagement.cancelInvitation(point, member,
 					users_id, language_id);
 
 			log.debug("after sending cancelmail");
 
-			Long returnValue = MeetingMemberDaoImpl.getInstance()
+			Long returnValue = meetingMemberDao
 					.deleteMeetingMember(meetingMemberId);
 
 			return returnValue;

@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class AppointmentDaoImplTest extends AbstractTestCase {
 	@Autowired
 	private AppointmentDaoImpl appointmentDao;
+	@Autowired
+	private UsersDaoImpl usersDao;
 	
 	public AppointmentDaoImplTest(String name){
 		super(name);
@@ -42,7 +44,7 @@ public class AppointmentDaoImplTest extends AbstractTestCase {
 		ap.setIsYearly(false);
 		ap.setIsPasswordProtected(false);
 
-		ap.setUserId(UsersDaoImpl.getInstance().getUser(1L));
+		ap.setUserId(usersDao.getUser(1L));
 		ap.setIsConnectedEvent(false);
 		Long id = appointmentDao.addAppointmentObj(ap);
 		assertNotNull("Cann't add appointment", id);

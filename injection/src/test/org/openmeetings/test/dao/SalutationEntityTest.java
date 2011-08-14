@@ -9,10 +9,12 @@ import org.openmeetings.app.data.user.dao.PrivateMessagesDaoImpl;
 import org.openmeetings.app.persistence.beans.lang.Fieldvalues;
 import org.openmeetings.app.persistence.beans.user.Salutations;
 import org.openmeetings.test.dao.base.AbstractTestCase;
+import org.springframework.beans.factory.annotation.Autowired;
 
 
 public class SalutationEntityTest extends AbstractTestCase {
-	
+	@Autowired
+	private PrivateMessagesDaoImpl privateMessagesDao;
 	
 	public SalutationEntityTest(String testName) {
         super(testName);
@@ -21,7 +23,7 @@ public class SalutationEntityTest extends AbstractTestCase {
 	final public void testAddSalutation() throws Exception {
 		ArrayList<Long> Ids = new ArrayList<Long>();
 		Ids.add(11L);
-		PrivateMessagesDaoImpl.getInstance().updatePrivateMessagesToTrash(Ids, true, 0L);
+		privateMessagesDao.updatePrivateMessagesToTrash(Ids, true, 0L);
 
 		EntityTransaction tx = getEntityManager().getTransaction();
 		Salutations sl = new Salutations();

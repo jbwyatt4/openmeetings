@@ -28,6 +28,10 @@ public class UserImport {
 	private Organisationmanagement organisationmanagement;
 	@Autowired
 	private Addressmanagement addressmanagement;
+	@Autowired
+	private Emailmanagement emailManagement;
+	@Autowired
+	private UsersDaoImpl usersDao;
 
 	public UserImport() {
 	}
@@ -124,16 +128,13 @@ public class UserImport {
 						.elementIterator("mail"); mailIterator.hasNext();) {
 					Element mailElement = (Element) mailIterator.next();
 					email = mailElement.getText();
-					if (!Emailmanagement.getInstance().checkUserEMail(
-							mailElement.getText()))
+					if (!emailManagement.checkUserEMail(mailElement.getText()))
 						mailCheck = false;
 				}
 			}
 
 			// check for duplicate Login or mail:
-			if (UsersDaoImpl.getInstance().checkUserLogin(us.getLogin())
-					&& mailCheck) {
-
+			if (usersDao.checkUserLogin(us.getLogin()) && mailCheck) {
 				Long address_id = addressmanagement.saveAddress(street, zip,
 						town, state_id, additionalname, "", fax, phone, email);
 

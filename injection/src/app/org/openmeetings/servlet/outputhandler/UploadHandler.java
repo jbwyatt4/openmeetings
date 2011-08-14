@@ -44,6 +44,8 @@ public class UploadHandler extends HttpServlet {
 	private Sessionmanagement sessionManagement;
     @Autowired
     private Usermanagement userManagement;
+	@Autowired
+	private UsersDaoImpl usersDao;
 
 	public UploadHandler() {
 	}
@@ -82,7 +84,7 @@ public class UploadHandler extends HttpServlet {
 			}
 
 			LinkedHashMap<String, Object> hs = new LinkedHashMap<String, Object>();
-			hs.put("user", UsersDaoImpl.getInstance().getUser(userId));
+			hs.put("user", usersDao.getUser(userId));
 			
 			fileService(httpServletRequest, sid, userId, hs);
 			ScopeApplicationAdapter.getInstance()
@@ -344,10 +346,10 @@ public class UploadHandler extends HttpServlet {
 
 				File fileNameToStore = new File(completeName + ".jpg");
 				String pictureuri = fileNameToStore.getName();
-				Users us = UsersDaoImpl.getInstance().getUser(userId);
+				Users us = usersDao.getUser(userId);
 				us.setUpdatetime(new java.util.Date());
 				us.setPictureuri(pictureuri);
-				UsersDaoImpl.getInstance().updateUser(us);
+				usersDao.updateUser(us);
 
 				ScopeApplicationAdapter.getInstance().updateUserSessionObject(
 						userId, pictureuri);

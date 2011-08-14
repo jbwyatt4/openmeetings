@@ -46,6 +46,10 @@ public class RoomService {
 	private Usermanagement userManagement;
 	@Autowired
 	private Roommanagement roommanagement;
+	@Autowired
+	private FlvRecordingDaoImpl flvRecordingDao;
+	@Autowired
+	private Invitationmanagement invitationManagement;
 
 	// TODO: Not implemented yet
 	// public List<Rooms_Organisation> getRoomsByOrganisationAndType(String SID,
@@ -100,7 +104,7 @@ public class RoomService {
 
 			if (AuthLevelmanagement.getInstance().checkWebServiceLevel(
 					user_level)) {
-				FlvRecordingDaoImpl.getInstance().deleteFlvRecording(
+				flvRecordingDao.deleteFlvRecording(
 						flvRecordingId);
 
 			}
@@ -120,8 +124,7 @@ public class RoomService {
 
 			if (AuthLevelmanagement.getInstance().checkWebServiceLevel(
 					user_level)) {
-				List<FlvRecording> recordingList = FlvRecordingDaoImpl
-						.getInstance().getFlvRecordingByExternalUserId(
+				List<FlvRecording> recordingList = flvRecordingDao.getFlvRecordingByExternalUserId(
 								Long.parseLong(externalUserId));
 
 				// We need to re-marshal the Rooms object cause Axis2 cannot use
@@ -162,8 +165,7 @@ public class RoomService {
 
 			if (AuthLevelmanagement.getInstance().checkWebServiceLevel(
 					user_level)) {
-				List<FlvRecording> recordingList = FlvRecordingDaoImpl
-						.getInstance()
+				List<FlvRecording> recordingList = flvRecordingDao
 						.getFlvRecordingByExternalRoomTypeAndCreator(
 								externalRoomType, insertedBy);
 
@@ -204,8 +206,7 @@ public class RoomService {
 
 			if (AuthLevelmanagement.getInstance().checkWebServiceLevel(
 					user_level)) {
-				return FlvRecordingDaoImpl.getInstance()
-						.getFlvRecordingByExternalRoomType(externalRoomType);
+				return flvRecordingDao.getFlvRecordingByExternalRoomType(externalRoomType);
 
 			}
 
@@ -225,8 +226,7 @@ public class RoomService {
 
 			if (AuthLevelmanagement.getInstance().checkWebServiceLevel(
 					user_level)) {
-				List<FlvRecording> recordingList = FlvRecordingDaoImpl
-						.getInstance().getFlvRecordingByExternalRoomType(
+				List<FlvRecording> recordingList = flvRecordingDao.getFlvRecordingByExternalRoomType(
 								externalRoomType);
 
 				// We need to re-marshal the Rooms object cause Axis2 cannot use
@@ -266,8 +266,7 @@ public class RoomService {
 			if (AuthLevelmanagement.getInstance().checkWebServiceLevel(
 					user_level)) {
 
-				List<FlvRecording> recordingList = FlvRecordingDaoImpl
-						.getInstance().getFlvRecordingByRoomId(roomId);
+				List<FlvRecording> recordingList = flvRecordingDao.getFlvRecordingByRoomId(roomId);
 
 				// We need to re-marshal the Rooms object cause Axis2 cannot use
 				// our objects
@@ -1010,7 +1009,7 @@ public class RoomService {
 							+ CalendarPatterns
 									.getDateWithTimeByMiliSeconds(dTo));
 				}
-				Invitations invitation = Invitationmanagement.getInstance()
+				Invitations invitation = invitationManagement
 						.addInvitationLink(user_level, username, username,
 								username, username, username, room_id, "",
 								isPasswordProtected, invitationpass, valid,
@@ -1149,7 +1148,7 @@ public class RoomService {
 									.getDateWithTimeByMiliSeconds(dTo));
 				}
 
-				Invitations invitation = Invitationmanagement.getInstance()
+				Invitations invitation = invitationManagement
 						.addInvitationLink(user_level, username, message,
 								baseurl, email, subject, room_id, "",
 								isPasswordProtected, invitationpass, valid,
@@ -1250,7 +1249,7 @@ public class RoomService {
 				log.info("validToDate: "
 						+ CalendarPatterns.getDateWithTimeByMiliSeconds(dTo));
 
-				Invitations invitation = Invitationmanagement.getInstance()
+				Invitations invitation = invitationManagement
 						.addInvitationLink(user_level, username, message,
 								baseurl, email, subject, room_id, "",
 								isPasswordProtected, invitationpass, valid,

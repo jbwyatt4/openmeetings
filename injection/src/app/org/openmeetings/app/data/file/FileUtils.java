@@ -14,10 +14,13 @@ import org.openmeetings.app.persistence.beans.files.FileExplorerItem;
 import org.openmeetings.app.remote.red5.ScopeApplicationAdapter;
 import org.red5.logging.Red5LoggerFactory;
 import org.slf4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class FileUtils {
 
 	private static final Logger log = Red5LoggerFactory.getLogger(FileProcessor.class, ScopeApplicationAdapter.webAppRootKey);
+	@Autowired
+	private FileExplorerItemDaoImpl fileExplorerItemDao;
 
 	private static FileUtils instance;
 	
@@ -69,11 +72,10 @@ public class FileUtils {
             }
 
             log.debug("calling [1] FileExplorerItemDaoImpl.updateFileOrFolder()");
-            FileExplorerItemDaoImpl.getInstance().updateFileOrFolder(
+            fileExplorerItemDao.updateFileOrFolder(
                     fileExplorerItem);
 
-            FileExplorerItem[] childElements = FileExplorerItemDaoImpl
-                    .getInstance().getFileExplorerItemsByParent(
+            FileExplorerItem[] childElements = fileExplorerItemDao.getFileExplorerItemsByParent(
                             fileExplorerItem.getFileExplorerItemId());
 
             for (FileExplorerItem childExplorerItem : childElements) {
@@ -118,11 +120,10 @@ public class FileUtils {
             fileExplorerItem.setRoom_id(room_id);
 
             log.debug("calling [2] FileExplorerItemDaoImpl.updateFileOrFolder()");
-            FileExplorerItemDaoImpl.getInstance().updateFileOrFolder(
+            fileExplorerItemDao.updateFileOrFolder(
                     fileExplorerItem);
 
-            FileExplorerItem[] childElements = FileExplorerItemDaoImpl
-                    .getInstance().getFileExplorerItemsByParent(
+            FileExplorerItem[] childElements = fileExplorerItemDao.getFileExplorerItemsByParent(
                             fileExplorerItem.getFileExplorerItemId());
 
             for (FileExplorerItem childExplorerItem : childElements) {

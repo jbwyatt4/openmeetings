@@ -29,6 +29,8 @@ public class OpenmeetingsDaoTest extends AbstractTestCase {
 	private Organisationmanagement organisationmanagement;
 	@Autowired
 	private Roommanagement roommanagement;
+	@Autowired
+	private RoomModeratorsDaoImpl roomModeratorsDao;
 
 	public OpenmeetingsDaoTest(String name) {
 		super(name);
@@ -110,7 +112,7 @@ public class OpenmeetingsDaoTest extends AbstractTestCase {
 		}
 		assertNotNull("Cann't get room for default user", room);
 
-		Long rmId = RoomModeratorsDaoImpl.getInstance()
+		Long rmId = roomModeratorsDao
 				.addRoomModeratorByUserId(user, true, room.getRooms_id());
 		assertNotNull("Cann't add room moderator", rmId);
 
@@ -122,10 +124,10 @@ public class OpenmeetingsDaoTest extends AbstractTestCase {
 				room.getRedirectURL(), false, true, false);
 		assertNotNull("Cann't add external room ", rooms_id);
 
-		RoomModerators rm = RoomModeratorsDaoImpl.getInstance()
+		RoomModerators rm = roomModeratorsDao
 				.getRoomModeratorById(rmId);
 		assertNotNull("Cann't get room moderator", rm);
 
-		RoomModeratorsDaoImpl.getInstance().removeRoomModeratorByUserId(rmId);
+		roomModeratorsDao.removeRoomModeratorByUserId(rmId);
 	}
 }

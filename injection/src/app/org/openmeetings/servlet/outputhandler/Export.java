@@ -45,6 +45,8 @@ public class Export extends HttpServlet {
 	private Usermanagement userManagement;
 	@Autowired
 	private Organisationmanagement organisationmanagement;
+	@Autowired
+	private UsersDaoImpl usersDao;
 
 	/*
 	 * (non-Javadoc)
@@ -101,7 +103,7 @@ public class Export extends HttpServlet {
 						uList = organisationmanagement
 								.getUsersByOrganisationId(organisation_id);
 					} else {
-						uList = UsersDaoImpl.getInstance().getAllUsers();
+						uList = usersDao.getAllUsers();
 					}
 
 					if (uList != null) {

@@ -77,14 +77,9 @@ import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class BackupImport extends HttpServlet {
-
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 2786696080712127872L;
 
-	private static final Logger log = Red5LoggerFactory.getLogger(
-			BackupImport.class, ScopeApplicationAdapter.webAppRootKey);
+	private static final Logger log = Red5LoggerFactory.getLogger(BackupImport.class, ScopeApplicationAdapter.webAppRootKey);
 
 	@Autowired
 	private AppointmentDaoImpl appointmentDao;
@@ -106,6 +101,24 @@ public class BackupImport extends HttpServlet {
 	private AppointmentCategoryDaoImpl appointmentCategoryDaoImpl;
 	@Autowired
 	private AppointmentReminderTypDaoImpl appointmentReminderTypDaoImpl;
+	@Autowired
+	private UsersDaoImpl usersDao;
+	@Autowired
+	private FlvRecordingDaoImpl flvRecordingDao;
+	@Autowired
+	private FlvRecordingMetaDataDaoImpl flvRecordingMetaDataDao;
+	@Autowired
+	private PrivateMessageFolderDaoImpl privateMessageFolderDao;
+	@Autowired
+	private PrivateMessagesDaoImpl privateMessagesDao;
+	@Autowired
+	private MeetingMemberDaoImpl meetingMemberDao;
+	@Autowired
+	private LdapConfigDaoImpl ldapConfigDao;
+	@Autowired
+	private RoomModeratorsDaoImpl roomModeratorsDao;
+	@Autowired
+	private FileExplorerItemDaoImpl fileExplorerItemDao;
 
 	private final HashMap<Long, Long> usersMap = new HashMap<Long, Long>();
 	private final HashMap<Long, Long> organisationsMap = new HashMap<Long, Long>();
@@ -460,7 +473,7 @@ public class BackupImport extends HttpServlet {
 					this.deleteDirectory(f);
 
 					LinkedHashMap<String, Object> hs = new LinkedHashMap<String, Object>();
-					hs.put("user", UsersDaoImpl.getInstance().getUser(users_id));
+					hs.put("user", usersDao.getUser(users_id));
 					hs.put("message", "library");
 					hs.put("action", "import");
 					hs.put("error", "");
@@ -868,19 +881,16 @@ public class BackupImport extends HttpServlet {
 
 		for (FlvRecording flvRecording : flvRecordings) {
 
-			Long flvRecordingId = FlvRecordingDaoImpl.getInstance()
-					.addFlvRecordingObj(flvRecording);
+			Long flvRecordingId = flvRecordingDao.addFlvRecordingObj(flvRecording);
 
 			for (FlvRecordingMetaData flvRecordingMetaData : flvRecording
 					.getFlvRecordingMetaData()) {
 
-				FlvRecording flvRecordingSaved = FlvRecordingDaoImpl
-						.getInstance().getFlvRecordingById(flvRecordingId);
+				FlvRecording flvRecordingSaved = flvRecordingDao.getFlvRecordingById(flvRecordingId);
 
 				flvRecordingMetaData.setFlvRecording(flvRecordingSaved);
 
-				FlvRecordingMetaDataDaoImpl.getInstance()
-						.addFlvRecordingMetaDataObj(flvRecordingMetaData);
+				flvRecordingMetaDataDao.addFlvRecordingMetaDataObj(flvRecordingMetaData);
 
 			}
 
@@ -1106,12 +1116,10 @@ public class BackupImport extends HttpServlet {
 		for (PrivateMessageFolder privateMessageFolder : privateMessageFolders) {
 
 			Long folderId = privateMessageFolder.getPrivateMessageFolderId();
-			PrivateMessageFolder storedFolder = PrivateMessageFolderDaoImpl
-					.getInstance().getPrivateMessageFolderById(folderId);
+			PrivateMessageFolder storedFolder = privateMessageFolderDao.getPrivateMessageFolderById(folderId);
 			if (storedFolder == null) {
 				privateMessageFolder.setPrivateMessageFolderId(0);
-				Long newFolderId = PrivateMessageFolderDaoImpl.getInstance()
-						.addPrivateMessageFolderObj(privateMessageFolder);
+				Long newFolderId = privateMessageFolderDao.addPrivateMessageFolderObj(privateMessageFolder);
 				messageFoldersMap.put(folderId, newFolderId);
 			}
 		}
@@ -1177,9 +1185,7 @@ public class BackupImport extends HttpServlet {
 				.getPrivateMessagesByXML(privateMessagesFile);
 
 		for (PrivateMessages pm : pmList) {
-
-			PrivateMessagesDaoImpl.getInstance().addPrivateMessageObj(pm);
-
+			privateMessagesDao.addPrivateMessageObj(pm);
 		}
 
 	}
@@ -1434,7 +1440,7 @@ public class BackupImport extends HttpServlet {
 			// We need to reset this as openJPA reject to store them otherwise
 			ma.setMeetingMemberId(null);
 
-			MeetingMemberDaoImpl.getInstance().addMeetingMemberByObject(ma);
+			meetingMemberDao.addMeetingMemberByObject(ma);
 		}
 
 	}
@@ -1490,8 +1496,7 @@ public class BackupImport extends HttpServlet {
 
 						MeetingMember meetingMember = new MeetingMember();
 						meetingMember.setMeetingMemberId(meetingMemberId);
-						meetingMember.setUserid(UsersDaoImpl.getInstance()
-								.getUser(userid));
+						meetingMember.setUserid(usersDao.getUser(userid));
 						meetingMember.setAppointment(appointmentDao
 								.getAppointmentByIdBackup(appointment));
 						meetingMember.setFirstname(firstname);
@@ -1524,9 +1529,7 @@ public class BackupImport extends HttpServlet {
 				.getLdapConfigListByXML(ldapConfigListFile);
 
 		for (LdapConfig ldapConfig : ldapConfigList) {
-
-			LdapConfigDaoImpl.getInstance().addLdapConfigByObject(ldapConfig);
-
+			ldapConfigDao.addLdapConfigByObject(ldapConfig);
 		}
 
 	}
@@ -1957,8 +1960,7 @@ public class BackupImport extends HttpServlet {
 								roomModerators
 										.setIsSuperModerator(is_supermoderator);
 
-								RoomModeratorsDaoImpl.getInstance()
-										.addRoomModeratorByObj(roomModerators);
+								roomModeratorsDao.addRoomModeratorByObj(roomModerators);
 
 							}
 
@@ -1986,8 +1988,7 @@ public class BackupImport extends HttpServlet {
 			long itemId = fileExplorerItem.getFileExplorerItemId();
 
 			fileExplorerItem.setFileExplorerItemId(0);
-			long newItemId = FileExplorerItemDaoImpl.getInstance()
-					.addFileExplorerItem(fileExplorerItem);
+			long newItemId = fileExplorerItemDao.addFileExplorerItem(fileExplorerItem);
 			fileExplorerItemsMap.put(itemId, newItemId);
 
 		}

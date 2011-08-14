@@ -68,9 +68,8 @@ import org.springframework.beans.factory.annotation.Autowired;
  * 
  */
 public class BackupExport extends HttpServlet {
-
-	private static final Logger log = Red5LoggerFactory.getLogger(
-			BackupExport.class, ScopeApplicationAdapter.webAppRootKey);
+	private static final long serialVersionUID = -928315730609302260L;
+	private static final Logger log = Red5LoggerFactory.getLogger(BackupExport.class, ScopeApplicationAdapter.webAppRootKey);
 	@Autowired
 	private AppointmentDaoImpl appointmentDao;
 	@Autowired
@@ -81,6 +80,24 @@ public class BackupExport extends HttpServlet {
 	private Organisationmanagement organisationmanagement;
 	@Autowired
 	private Roommanagement roommanagement;
+	@Autowired
+	private FileExplorerItemDaoImpl fileExplorerItemDao;
+	@Autowired
+	private FlvRecordingDaoImpl flvRecordingDao;
+	@Autowired
+	private FlvRecordingMetaDataDaoImpl flvRecordingMetaDataDao;
+	@Autowired
+	private RoomModeratorsDaoImpl roomModeratorsDao;
+	@Autowired
+	private UsersDaoImpl usersDao;
+	@Autowired
+	private MeetingMemberDaoImpl meetingMemberDao;
+	@Autowired
+	private LdapConfigDaoImpl ldapConfigDao;
+	@Autowired
+	private PrivateMessagesDaoImpl privateMessagesDao;
+	@Autowired
+	private PrivateMessageFolderDaoImpl privateMessageFolderDao;
 
 	/*
 	 * (non-Javadoc)
@@ -174,8 +191,7 @@ public class BackupExport extends HttpServlet {
 					 * ##################### Backup Users
 					 */
 
-					List<Users> uList = UsersDaoImpl.getInstance()
-							.getAllUsersDeleted();
+					List<Users> uList = usersDao.getAllUsersDeleted();
 
 					if (uList != null) {
 
@@ -245,8 +261,7 @@ public class BackupExport extends HttpServlet {
 					/*
 					 * ##################### Backup Meeting Members
 					 */
-					List<MeetingMember> membersList = MeetingMemberDaoImpl
-							.getInstance().getMeetingMembers();
+					List<MeetingMember> membersList = meetingMemberDao.getMeetingMembers();
 
 					if (membersList != null) {
 						Document doc = this
@@ -263,8 +278,7 @@ public class BackupExport extends HttpServlet {
 					/*
 					 * ##################### LDAP Configs
 					 */
-					List<LdapConfig> ldapConfigList = LdapConfigDaoImpl
-							.getInstance().getLdapConfigs();
+					List<LdapConfig> ldapConfigList = ldapConfigDao.getLdapConfigs();
 
 					if (ldapConfigList != null) {
 						Document doc = this
@@ -281,8 +295,7 @@ public class BackupExport extends HttpServlet {
 					/*
 					 * ##################### Private Messages
 					 */
-					List<PrivateMessages> privateMessages = PrivateMessagesDaoImpl
-							.getInstance().getPrivateMessages();
+					List<PrivateMessages> privateMessages = privateMessagesDao.getPrivateMessages();
 
 					if (privateMessages != null) {
 						Document doc = this
@@ -298,8 +311,7 @@ public class BackupExport extends HttpServlet {
 					/*
 					 * ##################### Private Message Folders
 					 */
-					List<PrivateMessageFolder> privateMessageFolders = PrivateMessageFolderDaoImpl
-							.getInstance().getPrivateMessageFolders();
+					List<PrivateMessageFolder> privateMessageFolders = privateMessageFolderDao.getPrivateMessageFolders();
 
 					if (privateMessageFolders != null) {
 						Document doc = this
@@ -333,13 +345,11 @@ public class BackupExport extends HttpServlet {
 					/*
 					 * ##################### File-Explorer
 					 */
-					List<FileExplorerItem> fileExplorerList = FileExplorerItemDaoImpl
-							.getInstance().getFileExplorerItems();
+					List<FileExplorerItem> fileExplorerList = fileExplorerItemDao.getFileExplorerItems();
 
 					if (fileExplorerList != null) {
 
-						Document doc = this
-								.createFileExplorerItemDocument(fileExplorerList);
+						Document doc = this.createFileExplorerItemDocument(fileExplorerList);
 
 						String aListXML = backup_dir + "fileExplorerItems.xml";
 
@@ -352,14 +362,11 @@ public class BackupExport extends HttpServlet {
 					/*
 					 * ##################### Recordings
 					 */
-					List<FlvRecording> flvRecordings = FlvRecordingDaoImpl
-							.getInstance().getAllFlvRecordings();
+					List<FlvRecording> flvRecordings = flvRecordingDao.getAllFlvRecordings();
 
 					for (FlvRecording flvRecording : flvRecordings) {
 						flvRecording
-								.setFlvRecordingMetaData(FlvRecordingMetaDataDaoImpl
-										.getInstance()
-										.getFlvRecordingMetaDataByRecording(
+							.setFlvRecordingMetaData(flvRecordingMetaDataDao.getFlvRecordingMetaDataByRecording(
 												flvRecording
 														.getFlvRecordingId()));
 					}
@@ -833,8 +840,7 @@ public class BackupExport extends HttpServlet {
 			room.addElement("isClosed").addCDATA("" + r.getIsClosed());
 			room.addElement("redirectURL").addCDATA("" + r.getRedirectURL());
 
-			List<RoomModerators> roomModeratorsList = RoomModeratorsDaoImpl
-					.getInstance().getRoomModeratorByRoomId(r.getRooms_id());
+			List<RoomModerators> roomModeratorsList = roomModeratorsDao.getRoomModeratorByRoomId(r.getRooms_id());
 
 			Element room_moderators = room.addElement("room_moderators");
 

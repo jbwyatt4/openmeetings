@@ -51,6 +51,8 @@ public class ConferenceLibrary implements IPendingServiceCallback {
     private Sessionmanagement sessionManagement;
     @Autowired
     private Usermanagement userManagement;
+    @Autowired
+    private FileExplorerItemDaoImpl fileExplorerItemDao;
 
     public ClientListManager getClientListManager() {
         return clientListManager;
@@ -156,7 +158,7 @@ public class ConferenceLibrary implements IPendingServiceCallback {
                 // String wmlPath = current_dir + File.separatorChar+fileName
                 // +".xml";
                 // OwnerID == null
-                Long fileExplorerId = FileExplorerItemDaoImpl.getInstance()
+                Long fileExplorerId = fileExplorerItemDao
                         .add(fileName, "", 0L, null, room_id, users_id, false, // isFolder
                                 false, // isImage
                                 false, // isPresentation
@@ -201,7 +203,7 @@ public class ConferenceLibrary implements IPendingServiceCallback {
                         + File.separatorChar + "upload" + File.separatorChar;
                 log.debug("### this is my working directory: " + current_dir);
                 
-                FileExplorerItem fileExplorerItem = FileExplorerItemDaoImpl.getInstance().getFileExplorerItemsById(fileExplorerItemId);
+                FileExplorerItem fileExplorerItem = fileExplorerItemDao.getFileExplorerItemsById(fileExplorerItemId);
 
                 ArrayList roomItems = LibraryWmlLoader.getInstance().loadWmlFile(current_dir,
                 										fileExplorerItem.getWmlFilePath());

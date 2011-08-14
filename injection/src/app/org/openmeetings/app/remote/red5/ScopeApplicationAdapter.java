@@ -79,6 +79,12 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 	private Usermanagement userManagement;
 	@Autowired
 	private Roommanagement roommanagement;
+	@Autowired
+	private ConferenceLogDaoImpl conferenceLogDao;
+	@Autowired
+	private UsersDaoImpl usersDao;
+	@Autowired
+	private MeetingMemberDaoImpl meetingMemberDao;
 
 	// This is the Folder where all executables are written
 	// for windows platform
@@ -238,7 +244,7 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 					conn.getRemoteAddress(), swfURL);
 
 			// Log the User
-			ConferenceLogDaoImpl.getInstance().addConferenceLog(
+			conferenceLogDao.addConferenceLog(
 					"ClientConnect", rcm.getUser_id(), streamId, null,
 					rcm.getUserip(), rcm.getScope(), rcm.getExternalUserId(),
 					rcm.getExternalUserType(), rcm.getMail(),
@@ -722,7 +728,7 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 			Long room_id = currentClient.getRoom_id();
 
 			// Log the User
-			ConferenceLogDaoImpl.getInstance().addConferenceLog("roomLeave",
+			conferenceLogDao.addConferenceLog("roomLeave",
 					currentClient.getUser_id(), currentClient.getStreamid(),
 					room_id, currentClient.getUserip(), "",
 					currentClient.getExternalUserId(),
@@ -1622,8 +1628,7 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 
 			// Inject externalUserId if nothing is set yet
 			if (currentClient.getExternalUserId() == null) {
-				Users us = UsersDaoImpl.getInstance().getUser(
-						currentClient.getUser_id());
+				Users us = usersDao.getUser(currentClient.getUser_id());
 				if (us != null) {
 					currentClient.setExternalUserId(us.getExternalUserId());
 					currentClient.setExternalUserType(us.getExternalUserType());
@@ -1637,7 +1642,7 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 					currentClient);
 
 			// Log the User
-			ConferenceLogDaoImpl.getInstance().addConferenceLog("roomEnter",
+			conferenceLogDao.addConferenceLog("roomEnter",
 					currentClient.getUser_id(), streamid, room_id,
 					currentClient.getUserip(), "",
 					currentClient.getExternalUserId(),
@@ -1825,9 +1830,7 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 				Appointment ment = appointmentLogic
 						.getAppointmentByRoom(room_id);
 
-				List<MeetingMember> members = MeetingMemberDaoImpl
-						.getInstance().getMeetingMemberByAppointmentId(
-								ment.getAppointmentId());
+				List<MeetingMember> members = meetingMemberDao.getMeetingMemberByAppointmentId(ment.getAppointmentId());
 
 				Long userIdInRoomClient = currentClient.getUser_id();
 
@@ -2158,7 +2161,7 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 			// only fill this value from User-REcord
 			// cause invited users have non
 			// you cannot set the firstname,lastname from the UserRecord
-			Users us = UsersDaoImpl.getInstance().getUser(userId);
+			Users us = usersDao.getUser(userId);
 			if (us != null && us.getPictureuri() != null) {
 				// set Picture-URI
 				log.debug("###### SET PICTURE URI");
@@ -2206,7 +2209,7 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 			// only fill this value from User-Record
 			// cause invited users have non
 			// you cannot set the firstname,lastname from the UserRecord
-			Users us = UsersDaoImpl.getInstance().getUser(userId);
+			Users us = usersDao.getUser(userId);
 			if (us != null && us.getPictureuri() != null) {
 				// set Picture-URI
 				log.debug("###### SET PICTURE URI");
@@ -2262,7 +2265,7 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 			// only fill this value from User-Record
 			// cause invited users have non
 			// you cannot set the firstname,lastname from the UserRecord
-			Users us = UsersDaoImpl.getInstance().getUser(userId);
+			Users us = usersDao.getUser(userId);
 			if (us != null && us.getPictureuri() != null) {
 				// set Picture-URI
 				log.debug("###### SET PICTURE URI");

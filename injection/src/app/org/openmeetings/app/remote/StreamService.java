@@ -69,6 +69,20 @@ public class StreamService implements IPendingServiceCallback {
 	private Usermanagement userManagement;
 	@Autowired
 	private Roommanagement roommanagement;
+	@Autowired
+	private RoomRecordingDaoImpl roomRecordingDao;
+	@Autowired
+	private UsersDaoImpl usersDao;
+	@Autowired
+	private RecordingClientDaoImpl recordingClientDao;
+	@Autowired
+	private WhiteBoardEventDaoImpl whiteBoardEventDao;
+	@Autowired
+	private ChatvaluesEventDaoImpl chatvaluesEventDao;
+	@Autowired
+	private RoomStreamDaoImpl roomStreamDao;
+	@Autowired
+	private RecordingConversionJobDaoImpl recordingConversionJobDao;
 
 	private static final Logger log = Red5LoggerFactory.getLogger(
 			StreamService.class, ScopeApplicationAdapter.webAppRootKey);
@@ -358,7 +372,7 @@ public class StreamService implements IPendingServiceCallback {
 			Long recordedby = startedClient.getUser_id();
 			Users us = null;
 			if (recordedby != null && recordedby > 0) {
-				us = UsersDaoImpl.getInstance().getUser(recordedby);
+				us = usersDao.getUser(recordedby);
 			}
 
 			// //TODO: Replace Persistence Logic with Database-DAO
@@ -415,40 +429,32 @@ public class StreamService implements IPendingServiceCallback {
 			// Store to database
 
 			// First Store the RoomRecording
-			Long roomRecordingId = RoomRecordingDaoImpl.getInstance()
-					.addRoomRecording(roomRecording);
-			RoomRecording roomRecordingRemote = RoomRecordingDaoImpl
-					.getInstance().getRoomRecordingById(roomRecordingId);
+			Long roomRecordingId = roomRecordingDao.addRoomRecording(roomRecording);
+			RoomRecording roomRecordingRemote = roomRecordingDao.getRoomRecordingById(roomRecordingId);
 
 			// Store all RoomRecordingClients
-			for (Iterator<RecordingClient> iter = roomRecording
-					.getRoomClients().iterator(); iter.hasNext();) {
+			for (Iterator<RecordingClient> iter = roomRecording.getRoomClients().iterator(); iter.hasNext();) {
 				RecordingClient recordingClient = iter.next();
 				recordingClient.setRoomRecordingId(roomRecordingId);
-				RecordingClientDaoImpl.getInstance().addRecordingClient(
-						recordingClient);
+				recordingClientDao.addRecordingClient(recordingClient);
 			}
 
 			// Store all Whiteboard Events
-			for (WhiteBoardEvent whiteBoardEvent : roomRecording
-					.getWhiteboard()) {
+			for (WhiteBoardEvent whiteBoardEvent : roomRecording.getWhiteboard()) {
 				whiteBoardEvent.setRoomRecording(roomRecordingRemote);
-				WhiteBoardEventDaoImpl.getInstance().addWhiteBoardEvent(
-						whiteBoardEvent);
+				whiteBoardEventDao.addWhiteBoardEvent(whiteBoardEvent);
 			}
 
 			// Store all Chatbox Events
-			for (ChatvaluesEvent chatvaluesEvent : roomRecording
-					.getChatvalues()) {
+			for (ChatvaluesEvent chatvaluesEvent : roomRecording.getChatvalues()) {
 				chatvaluesEvent.setRoomRecording(roomRecordingRemote);
-				ChatvaluesEventDaoImpl.getInstance().addChatvaluesEvent(
-						chatvaluesEvent);
+				chatvaluesEventDao.addChatvaluesEvent(chatvaluesEvent);
 			}
 
 			// Store all Stream Events
 			for (RoomStream roomStream : roomRecording.getRoomStreams()) {
 				roomStream.setRoomRecording(roomRecordingRemote);
-				RoomStreamDaoImpl.getInstance().addRoomStream(roomStream);
+				roomStreamDao.addRoomStream(roomStream);
 			}
 
 			// roomRecording.getRoomStreams()
@@ -585,7 +591,7 @@ public class StreamService implements IPendingServiceCallback {
 					i++;
 				}
 
-				Users us = UsersDaoImpl.getInstance().getUser(users_id);
+				Users us = usersDao.getUser(users_id);
 
 				for (Iterator<Organisation_Users> iter = us
 						.getOrganisation_users().iterator(); iter.hasNext();) {
@@ -640,27 +646,16 @@ public class StreamService implements IPendingServiceCallback {
 				Recording rec = recordingDao.getRecordingById(recording_id);
 
 				rec.getRoomRecording().setRoomClients(
-						RecordingClientDaoImpl.getInstance()
-								.getRecordingClientByroomRecordingId(
-										rec.getRoomRecording()
-												.getRoomrecordingId()));
+					recordingClientDao.getRecordingClientByroomRecordingId(rec.getRoomRecording().getRoomrecordingId()));
 
 				rec.getRoomRecording().setChatvalues(
-						ChatvaluesEventDaoImpl.getInstance()
-								.getChatvaluesEventByRoomRecordingId(
-										rec.getRoomRecording()
-												.getRoomrecordingId()));
+					chatvaluesEventDao.getChatvaluesEventByRoomRecordingId(rec.getRoomRecording().getRoomrecordingId()));
 
 				rec.getRoomRecording().setRoomStreams(
-						RoomStreamDaoImpl.getInstance()
-								.getRoomStreamsByRoomRecordingId(
-										rec.getRoomRecording()
-												.getRoomrecordingId()));
+					roomStreamDao.getRoomStreamsByRoomRecordingId(rec.getRoomRecording().getRoomrecordingId()));
 
 				// Set Conversion Job Record
-				rec.setRecordingConversionJob(RecordingConversionJobDaoImpl
-						.getInstance().getRecordingConversionJobsByRecording(
-								rec.getRecording_id()));
+				rec.setRecordingConversionJob(recordingConversionJobDao.getRecordingConversionJobsByRecording(rec.getRecording_id()));
 
 				return rec;
 			}

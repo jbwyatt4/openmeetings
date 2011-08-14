@@ -10,8 +10,8 @@ import java.util.TimeZone;
 import java.util.Vector;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
 import javax.persistence.NoResultException;
+import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import org.openmeetings.app.data.basic.AuthLevelmanagement;
@@ -28,7 +28,6 @@ import org.openmeetings.app.persistence.beans.calendar.MeetingMember;
 import org.openmeetings.app.persistence.beans.invitation.Invitations;
 import org.openmeetings.app.persistence.beans.lang.Fieldlanguagesvalues;
 import org.openmeetings.app.persistence.beans.user.Users;
-import org.openmeetings.app.persistence.utils.PersistenceSessionUtil;
 import org.openmeetings.app.remote.red5.ScopeApplicationAdapter;
 import org.openmeetings.app.templates.InvitationTemplate;
 import org.openmeetings.utils.crypt.MD5;
@@ -39,19 +38,21 @@ import org.openmeetings.utils.math.CalendarPatterns;
 import org.red5.logging.Red5LoggerFactory;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * 
  * @author swagner
  * 
  */
+@Transactional
 public class Invitationmanagement {
 
 	private static final Logger log = Red5LoggerFactory.getLogger(
 			Invitationmanagement.class, ScopeApplicationAdapter.webAppRootKey);
 
-	private static Invitationmanagement instance;
-
+	@PersistenceContext
+	private EntityManager em;
 	@Autowired
 	private AppointmentLogic appointmentLogic;
 	@Autowired
@@ -66,16 +67,8 @@ public class Invitationmanagement {
 	private ManageCryptStyle manageCryptStyle;
 	@Autowired
 	private Roommanagement roommanagement;
-
-	private Invitationmanagement() {
-	}
-
-	public static synchronized Invitationmanagement getInstance() {
-		if (instance == null) {
-			instance = new Invitationmanagement();
-		}
-		return instance;
-	}
+	@Autowired
+	private UsersDaoImpl usersDao;
 
 	private final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
 
@@ -148,7 +141,7 @@ public class Invitationmanagement {
 
 				invitation.setDeleted("false");
 
-				Users us = UsersDaoImpl.getInstance().getUser(createdBy);
+				Users us = usersDao.getUser(createdBy);
 				String hashRaw = "HASH" + (System.currentTimeMillis());
 				invitation.setHash(MD5.do_checksum(hashRaw));
 
@@ -160,15 +153,8 @@ public class Invitationmanagement {
 				invitation.setStarttime(new Date());
 				invitation.setAppointmentId(appointmentId);
 
-				Object idf = PersistenceSessionUtil.createSession();
-				EntityManager session = PersistenceSessionUtil.getSession();
-				EntityTransaction tx = session.getTransaction();
-				tx.begin();
-				invitation = session.merge(invitation);
-				session.flush();
+				invitation = em.merge(invitation);
 				long invitationId = invitation.getInvitations_id();
-				tx.commit();
-				PersistenceSessionUtil.closeSession(idf);
 
 				invitation.setInvitations_id(invitationId);
 
@@ -531,7 +517,7 @@ public class Invitationmanagement {
 
 				invitation.setDeleted("false");
 
-				Users us = UsersDaoImpl.getInstance().getUser(createdBy);
+				Users us = usersDao.getUser(createdBy);
 				String hashRaw = "InvitationHash"
 						+ (System.currentTimeMillis());
 				log.debug("addInvitationIcalLink : rawHash = " + hashRaw);
@@ -546,15 +532,8 @@ public class Invitationmanagement {
 				invitation.setStarttime(new Date());
 				invitation.setAppointmentId(appointmentId);
 
-				Object idf = PersistenceSessionUtil.createSession();
-				EntityManager session = PersistenceSessionUtil.getSession();
-				EntityTransaction tx = session.getTransaction();
-				tx.begin();
-				invitation = session.merge(invitation);
-				session.flush();
+				invitation = em.merge(invitation);
 				long invitationId = invitation.getInvitations_id();
-				tx.commit();
-				PersistenceSessionUtil.closeSession(idf);
 
 				if (invitationId > 0) {
 					this.sendInvitionIcalLink(username, message, baseurl,
@@ -930,11 +909,7 @@ public class Invitationmanagement {
 					+ "WHERE invi.deleted <> :deleted "
 					+ "AND invi.invitations_id = :invid";
 
-			Object idf = PersistenceSessionUtil.createSession();
-			EntityManager session = PersistenceSessionUtil.getSession();
-			EntityTransaction tx = session.getTransaction();
-			tx.begin();
-			Query query = session.createQuery(hql);
+			Query query = em.createQuery(hql);
 			query.setParameter("deleted", "true");
 			query.setParameter("invid", invId);
 
@@ -943,9 +918,6 @@ public class Invitationmanagement {
 				inv = (Invitations) query.getSingleResult();
 			} catch (NoResultException ex) {
 			}
-			session.flush();
-			tx.commit();
-			PersistenceSessionUtil.closeSession(idf);
 
 			return inv;
 		} catch (Exception e) {
@@ -962,11 +934,7 @@ public class Invitationmanagement {
 					+ "WHERE invi.deleted <> :deleted "
 					+ "AND invi.invitations_id = :invid";
 
-			Object idf = PersistenceSessionUtil.createSession();
-			EntityManager session = PersistenceSessionUtil.getSession();
-			EntityTransaction tx = session.getTransaction();
-			tx.begin();
-			Query query = session.createQuery(hql);
+			Query query = em.createQuery(hql);
 			query.setParameter("deleted", "true");
 			query.setParameter("invid", invId);
 
@@ -975,9 +943,6 @@ public class Invitationmanagement {
 				inv = (Invitations) query.getSingleResult();
 			} catch (NoResultException ex) {
 			}
-			session.flush();
-			tx.commit();
-			PersistenceSessionUtil.closeSession(idf);
 
 			return inv;
 		} catch (Exception e) {
@@ -997,11 +962,7 @@ public class Invitationmanagement {
 			String hql = "select c from Invitations as c "
 					+ "where c.hash LIKE :hashCode "
 					+ "AND c.deleted = :deleted";
-			Object idf = PersistenceSessionUtil.createSession();
-			EntityManager session = PersistenceSessionUtil.getSession();
-			EntityTransaction tx = session.getTransaction();
-			tx.begin();
-			Query query = session.createQuery(hql);
+			Query query = em.createQuery(hql);
 			query.setParameter("hashCode", hashCode);
 			query.setParameter("deleted", "false");
 			Invitations invitation = null;
@@ -1009,8 +970,6 @@ public class Invitationmanagement {
 				invitation = (Invitations) query.getSingleResult();
 			} catch (NoResultException ex) {
 			}
-			tx.commit();
-			PersistenceSessionUtil.closeSession(idf);
 
 			if (invitation == null) {
 				// already deleted or does not exist
@@ -1083,19 +1042,13 @@ public class Invitationmanagement {
 	public void updateInvitation(Invitations invitation) {
 		try {
 			invitation.setUpdatetime(new Date());
-			Object idf = PersistenceSessionUtil.createSession();
-			EntityManager session = PersistenceSessionUtil.getSession();
-			EntityTransaction tx = session.getTransaction();
-			tx.begin();
 			if (invitation.getInvitations_id() == null) {
-				session.persist(invitation);
+				em.persist(invitation);
 			} else {
-				if (!session.contains(invitation)) {
-					session.merge(invitation);
+				if (!em.contains(invitation)) {
+					em.merge(invitation);
 				}
 			}
-			tx.commit();
-			PersistenceSessionUtil.closeSession(idf);
 		} catch (Exception ex2) {
 			log.error("[selectMaxFromUsers] ", ex2);
 		}
@@ -1143,11 +1096,7 @@ public class Invitationmanagement {
 			String hql = "select a from Invitations a "
 					+ "WHERE a.appointmentId = :appointmentId  ";
 
-			Object idf = PersistenceSessionUtil.createSession();
-			EntityManager session = PersistenceSessionUtil.getSession();
-			EntityTransaction tx = session.getTransaction();
-			tx.begin();
-			Query query = session.createQuery(hql);
+			Query query = em.createQuery(hql);
 			query.setParameter("appointmentId", appointmentId);
 
 			List<Invitations> listInvitations = query.getResultList();
@@ -1156,16 +1105,13 @@ public class Invitationmanagement {
 				inv.setValidFrom(gmtTimeStartShifted);
 				inv.setValidTo(appointmentend);
 				if (inv.getInvitations_id() == null) {
-					session.persist(inv);
+					em.persist(inv);
 				} else {
-					if (!session.contains(inv)) {
-						session.merge(inv);
+					if (!em.contains(inv)) {
+						em.merge(inv);
 					}
 				}
 			}
-
-			tx.commit();
-			PersistenceSessionUtil.closeSession(idf);
 
 		} catch (Exception err) {
 

@@ -50,6 +50,10 @@ public class UserService {
 	private Organisationmanagement organisationmanagement;
 	@Autowired
 	private Addressmanagement addressmanagement;
+	@Autowired
+	private SOAPLoginDaoImpl soapLoginDao;
+	@Autowired
+	private UsersDaoImpl usersDao;
 
 	/**
 	 * load this session id before doing anything else
@@ -326,7 +330,7 @@ public class UserService {
 			if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)) {
 
 				// Setting user deleted
-				UsersDaoImpl.getInstance().deleteUserID(userId);
+				usersDao.deleteUserID(userId);
 
 				Users user = userManagement.checkAdmingetUserById(user_level,
 						userId);
@@ -378,7 +382,7 @@ public class UserService {
 				Long userId = userExternal.getUser_id();
 
 				// Setting user deleted
-				UsersDaoImpl.getInstance().deleteUserID(userId);
+				usersDao.deleteUserID(userId);
 
 				Users user = userManagement.checkAdmingetUserById(user_level,
 						userId);
@@ -562,7 +566,7 @@ public class UserService {
 					showAudioVideoTest = true;
 				}
 
-				String hash = SOAPLoginDaoImpl.getInstance().addSOAPLogin(SID,
+				String hash = soapLoginDao.addSOAPLogin(SID,
 						room_id, becomeModerator, showAudioVideoTest, false, // allowSameURLMultipleTimes
 						null, // recording_id
 						false, // showNickNameDialogAsInt
@@ -628,7 +632,7 @@ public class UserService {
 					showAudioVideoTest = true;
 				}
 
-				String hash = SOAPLoginDaoImpl.getInstance().addSOAPLogin(SID,
+				String hash = soapLoginDao.addSOAPLogin(SID,
 						room_id, becomeModerator, showAudioVideoTest, true, // allowSameURLMultipleTimes
 						null, // recording_id
 						false, // showNickNameDialogAsInt
@@ -699,7 +703,7 @@ public class UserService {
 					allowRecordingBool = true;
 				}
 
-				String hash = SOAPLoginDaoImpl.getInstance().addSOAPLogin(SID,
+				String hash = soapLoginDao.addSOAPLogin(SID,
 						room_id, becomeModerator, showAudioVideoTest, true, // allowSameURLMultipleTimes
 						null, // recording_id
 						false, // showNickNameDialogAsInt
@@ -752,7 +756,7 @@ public class UserService {
 
 				sessionManagement.updateUserRemoteSession(SID, xmlString);
 
-				String hash = SOAPLoginDaoImpl.getInstance().addSOAPLogin(SID,
+				String hash = soapLoginDao.addSOAPLogin(SID,
 						null, false, true, true, // allowSameURLMultipleTimes
 						null, // recording_id
 						false, // showNickNameDialogAsInt
@@ -828,7 +832,7 @@ public class UserService {
 					showNickNameDialog = true;
 				}
 
-				String hash = SOAPLoginDaoImpl.getInstance().addSOAPLogin(SID,
+				String hash = soapLoginDao.addSOAPLogin(SID,
 						room_id, becomeModerator, showAudioVideoTest, true,
 						null, showNickNameDialog, "room", // LandingZone,
 						true // allowRecording
@@ -879,7 +883,7 @@ public class UserService {
 
 				sessionManagement.updateUserRemoteSession(SID, xmlString);
 
-				String hash = SOAPLoginDaoImpl.getInstance().addSOAPLogin(SID,
+				String hash = soapLoginDao.addSOAPLogin(SID,
 						null, false, false, true, // allowSameURLMultipleTimes
 						recording_id, // recording_id
 						false, // showNickNameDialogAsInt

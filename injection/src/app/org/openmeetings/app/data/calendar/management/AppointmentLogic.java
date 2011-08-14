@@ -44,6 +44,10 @@ public class AppointmentLogic {
 	private OmTimeZoneDaoImpl omTimeZoneDaoImpl;
 	@Autowired
 	private Roommanagement roommanagement;
+	@Autowired
+	private Invitationmanagement invitationManagement;
+	@Autowired
+	private MeetingMemberDaoImpl meetingMemberDao;
 
 	public List<Appointment> getAppointmentByRange(Long userId, Date starttime,
 			Date endtime) {
@@ -289,8 +293,7 @@ public class AppointmentLogic {
 			Rooms room = point.getRoom();
 
 			// Deleting/Notifing Meetingmembers
-			List<MeetingMember> members = MeetingMemberDaoImpl.getInstance()
-					.getMeetingMemberByAppointmentId(appointmentId);
+			List<MeetingMember> members = meetingMemberDao.getMeetingMemberByAppointmentId(appointmentId);
 
 			if (members == null)
 				log.debug("Appointment " + point.getAppointmentName()
@@ -404,9 +407,7 @@ public class AppointmentLogic {
 					log.debug("Meeting " + ment.getAppointmentName()
 							+ " is in reminder range...");
 
-					List<MeetingMember> members = MeetingMemberDaoImpl
-							.getInstance().getMeetingMemberByAppointmentId(
-									ment.getAppointmentId());
+					List<MeetingMember> members = meetingMemberDao.getMeetingMemberByAppointmentId(ment.getAppointmentId());
 
 					if (members == null || members.size() < 1) {
 						log.debug("doScheduledMeetingReminder : no members in meeting!");
@@ -516,9 +517,7 @@ public class AppointmentLogic {
 							// message = labelid1156.getValue() + invitorName +
 							// "<br/>";
 
-							Invitationmanagement
-									.getInstance()
-									.sendInvitationReminderLink(
+							invitationManagement.sendInvitationReminderLink(
 											message,
 											inv.getBaseUrl(),
 											mm.getEmail(),
@@ -527,8 +526,7 @@ public class AppointmentLogic {
 											inv.getHash());
 
 							inv.setUpdatetime(now);
-							Invitationmanagement.getInstance()
-									.updateInvitation(inv);
+							invitationManagement.updateInvitation(inv);
 						}
 
 					}

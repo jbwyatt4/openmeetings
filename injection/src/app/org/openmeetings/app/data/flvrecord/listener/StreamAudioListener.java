@@ -8,18 +8,14 @@ import org.apache.mina.core.buffer.IoBuffer;
 import org.openmeetings.app.data.flvrecord.FlvRecordingMetaDeltaDaoImpl;
 import org.openmeetings.app.persistence.beans.flvrecord.FlvRecordingMetaDelta;
 import org.openmeetings.app.remote.red5.ScopeApplicationAdapter;
-import org.red5.io.IStreamableFile;
-import org.red5.io.IStreamableFileFactory;
-import org.red5.io.IStreamableFileService;
 import org.red5.io.ITag;
-import org.red5.io.StreamableFileFactory;
 import org.red5.io.flv.impl.Tag;
 import org.red5.logging.Red5LoggerFactory;
 import org.red5.server.api.IScope;
-import org.red5.server.api.ScopeUtils;
 import org.red5.server.api.stream.IBroadcastStream;
 import org.red5.server.api.stream.IStreamPacket;
 import org.slf4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class StreamAudioListener extends ListenerAdapter {
 	
@@ -38,7 +34,9 @@ public class StreamAudioListener extends ListenerAdapter {
 	private int purePacketLastTimeStamp = 0;
 	
 	private static final Logger log = Red5LoggerFactory.getLogger(StreamAudioListener.class, ScopeApplicationAdapter.webAppRootKey);
-
+	@Autowired
+	private FlvRecordingMetaDeltaDaoImpl flvRecordingMetaDeltaDao;
+	
 	public StreamAudioListener(String streamName, IScope scope,
 			Long flvRecordingMetaDataId, boolean isScreenData, boolean isInterview) {
 		// Auto-generated method stub
@@ -82,7 +80,7 @@ public class StreamAudioListener extends ListenerAdapter {
 			
 			this.flvRecordingMetaDeltas.add(flvRecordingMetaDelta);
 			
-			FlvRecordingMetaDeltaDaoImpl.getInstance().addFlvRecordingMetaDelta(flvRecordingMetaDelta);
+			flvRecordingMetaDeltaDao.addFlvRecordingMetaDelta(flvRecordingMetaDelta);
 			
 			this.offset += lastTimeStamp;
 			
@@ -201,7 +199,7 @@ public class StreamAudioListener extends ListenerAdapter {
 					
 					this.flvRecordingMetaDeltas.add(flvRecordingMetaDelta);
 					
-					FlvRecordingMetaDeltaDaoImpl.getInstance().addFlvRecordingMetaDelta(flvRecordingMetaDelta);
+					flvRecordingMetaDeltaDao.addFlvRecordingMetaDelta(flvRecordingMetaDelta);
 					
 					//That will be not bigger then long value
 					this.startTimeStamp = (int) (streampacket.getTimestamp());
@@ -285,7 +283,7 @@ public class StreamAudioListener extends ListenerAdapter {
 					
 					this.flvRecordingMetaDeltas.add(flvRecordingMetaDelta);
 					
-					FlvRecordingMetaDeltaDaoImpl.getInstance().addFlvRecordingMetaDelta(flvRecordingMetaDelta);
+					flvRecordingMetaDeltaDao.addFlvRecordingMetaDelta(flvRecordingMetaDelta);
 					
 				}
 				
@@ -348,11 +346,11 @@ public class StreamAudioListener extends ListenerAdapter {
 				
 				this.flvRecordingMetaDeltas.add(flvRecordingMetaDelta);
 					
-				FlvRecordingMetaDeltaDaoImpl.getInstance().addFlvRecordingMetaDelta(flvRecordingMetaDelta);
+				flvRecordingMetaDeltaDao.addFlvRecordingMetaDelta(flvRecordingMetaDelta);
 				
 //				for (FlvRecordingMetaDelta flvRecordingMetaDeltaLoop : this.flvRecordingMetaDeltas) {
 //					
-//					FlvRecordingMetaDeltaDaoImpl.getInstance().addFlvRecordingMetaDelta(flvRecordingMetaDeltaLoop);
+//					flvRecordingMetaDeltaDao.addFlvRecordingMetaDelta(flvRecordingMetaDeltaLoop);
 //					
 //				}
 				
