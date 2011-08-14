@@ -75,7 +75,6 @@ import org.openmeetings.utils.math.CalendarPatterns;
 import org.openmeetings.utils.stringhandlers.StringComparer;
 import org.red5.logging.Red5LoggerFactory;
 import org.slf4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 
 public class BackupImport extends HttpServlet {
 	private static final long serialVersionUID = 2786696080712127872L;
@@ -102,6 +101,7 @@ public class BackupImport extends HttpServlet {
 	private RoomModeratorsDaoImpl roomModeratorsDao;
 	private FileExplorerItemDaoImpl fileExplorerItemDao;
 	private UserContactsDaoImpl userContactsDao;
+	private ScopeApplicationAdapter scopeApplicationAdapter;
 
 	private final HashMap<Long, Long> usersMap = new HashMap<Long, Long>();
 	private final HashMap<Long, Long> organisationsMap = new HashMap<Long, Long>();
@@ -138,6 +138,7 @@ public class BackupImport extends HttpServlet {
 		roomModeratorsDao = (RoomModeratorsDaoImpl)config.getServletContext().getAttribute("roomModeratorsDao");
 		fileExplorerItemDao = (FileExplorerItemDaoImpl)config.getServletContext().getAttribute("fileExplorerItemDao");
 		userContactsDao = (UserContactsDaoImpl)config.getServletContext().getAttribute("userContactsDao");
+		scopeApplicationAdapter = (ScopeApplicationAdapter)config.getServletContext().getAttribute("scopeApplicationAdapter");
 	}
 	
 	/*
@@ -487,8 +488,7 @@ public class BackupImport extends HttpServlet {
 					hs.put("error", "");
 					hs.put("fileName", completeName);
 
-					ScopeApplicationAdapter.getInstance()
-							.sendMessageWithClientByPublicSID(hs, publicSID);
+					scopeApplicationAdapter.sendMessageWithClientByPublicSID(hs, publicSID);
 
 				}
 

@@ -18,17 +18,8 @@ public class GenerateThumbs {
 	private static final Logger log = Red5LoggerFactory.getLogger(GenerateThumbs.class);
 	@Autowired
 	private Configurationmanagement cfgManagement;
-	
-	private static GenerateThumbs instance;
-
-	private GenerateThumbs() {}
-
-	public static synchronized GenerateThumbs getInstance() {
-		if (instance == null) {
-			instance = new GenerateThumbs();
-		}
-		return instance;
-	}
+	@Autowired
+	private GenerateImage generateImage;
 	
 	private String getPathToImageMagick() {
 		String pathToImageMagick = cfgManagement.getConfKey(3, "imagemagick_path").getConf_value();
@@ -48,7 +39,7 @@ public class GenerateThumbs {
 				+ File.separatorChar;
 
 		String[] argv = new String[] {
-				GenerateImage.getPathToImageMagic(), 
+				generateImage.getPathToImageMagic(), 
 				"-thumbnail",
 				Integer.toString(thumbSize) + "x" + Integer.toString(thumbSize), 
 				filepath + ".jpg",
@@ -70,7 +61,7 @@ public class GenerateThumbs {
 	public HashMap<String, Object> decodePDF(String inputfile, String outputfile) {
 
 		String[] argv = new String[] {
-				GenerateImage.getPathToImageMagic(), //FIXME
+				generateImage.getPathToImageMagic(), //FIXME
 				inputfile,
 				outputfile };
 		
@@ -87,7 +78,7 @@ public class GenerateThumbs {
 
 		if (System.getProperty("os.name").toUpperCase().indexOf("WINDOWS") == -1) {
 			String[] argv = new String[] {
-					GenerateImage.getPathToImageMagic(), "-thumbnail", //FIXME
+					generateImage.getPathToImageMagic(), "-thumbnail", //FIXME
 					Integer.toString(thumbSize), inputfile,
 					outputpath + "_" + pre + "_page-%04d.jpg" };
 		
@@ -95,7 +86,7 @@ public class GenerateThumbs {
 		} else {
 			
 			String[] argv = new String[] {
-					GenerateImage.getPathToImageMagic(), "-thumbnail", //FIXME
+					generateImage.getPathToImageMagic(), "-thumbnail", //FIXME
 					Integer.toString(thumbSize), inputfile,
 					outputpath + "_" + pre + "_page-%%04d.jpg" };
 			
@@ -109,7 +100,7 @@ public class GenerateThumbs {
 			Integer thumbWidth, String pre) {
 
 		String[] argv = new String[] {
-				GenerateImage.getPathToImageMagic(), "-resize",
+				generateImage.getPathToImageMagic(), "-resize",
 				Integer.toString(thumbWidth), inputfile,
 				outputpath + "_" + pre + "_page.png" };
 

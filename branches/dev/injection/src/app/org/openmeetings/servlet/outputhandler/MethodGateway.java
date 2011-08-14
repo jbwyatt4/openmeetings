@@ -32,6 +32,7 @@ public class MethodGateway extends HttpServlet {
 	private Sessionmanagement sessionManagement;
 	private Usermanagement userManagement;
 	private Roommanagement roommanagement;
+	private MainService mainService;
 
 	@Override
 	public void init(ServletConfig config) throws ServletException {
@@ -39,6 +40,7 @@ public class MethodGateway extends HttpServlet {
 		sessionManagement = (Sessionmanagement)config.getServletContext().getAttribute("sessionManagement");
 		userManagement = (Usermanagement)config.getServletContext().getAttribute("userManagement");
 		roommanagement = (Roommanagement)config.getServletContext().getAttribute("roommanagement");
+		mainService = (MainService)config.getServletContext().getAttribute("mainService");
 	}
 	
 	/*
@@ -95,8 +97,7 @@ public class MethodGateway extends HttpServlet {
 
 				if (method.equals("getSession")) {
 
-					Sessiondata sessionData = MainService.getInstance()
-							.getsessiondata();
+					Sessiondata sessionData = mainService.getsessiondata();
 
 					XStream xStream = new XStream(new XppDriver());
 					xStream.setMode(XStream.NO_REFERENCES);

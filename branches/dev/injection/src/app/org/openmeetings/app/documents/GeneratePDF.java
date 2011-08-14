@@ -7,21 +7,13 @@ import org.apache.commons.transaction.util.FileHelper;
 import org.openmeetings.app.remote.red5.ScopeApplicationAdapter;
 import org.red5.logging.Red5LoggerFactory;
 import org.slf4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class GeneratePDF {
 	
 	private static final Logger log = Red5LoggerFactory.getLogger(GeneratePDF.class, ScopeApplicationAdapter.webAppRootKey);
-	
-	private static GeneratePDF instance;
-
-	private GeneratePDF() {}
-
-	public static synchronized GeneratePDF getInstance() {
-		if (instance == null) {
-			instance = new GeneratePDF();
-		}
-		return instance;
-	}
+	@Autowired
+	private GenerateThumbs generateThumbs;
 	
 	public HashMap<String, HashMap<String, Object>> convertPDF(
 			String current_dir, String fileName, String fileExt,
@@ -70,7 +62,7 @@ public class GeneratePDF {
 		if (fullProcessing) {
 			HashMap<String,Object> processOpenOffice = this.doJodConvert(current_dir, fileFullPath, destinationFolder,fileName);
 			returnError.put("processOpenOffice", processOpenOffice);
-			HashMap<String,Object> processThumb = GenerateThumbs.getInstance().generateBatchThumb(current_dir, destinationFolder + fileName + ".pdf", destinationFolder, 80, "thumb");
+			HashMap<String,Object> processThumb = generateThumbs.generateBatchThumb(current_dir, destinationFolder + fileName + ".pdf", destinationFolder, 80, "thumb");
 			returnError.put("processThumb", processThumb);		
 			HashMap<String,Object> processSWF = GenerateSWF.getInstance().generateSwf(current_dir, destinationFolder, destinationFolder, fileName);
 			returnError.put("processSWF", processSWF);	
@@ -78,7 +70,7 @@ public class GeneratePDF {
 			
 			log.debug("-- generateBatchThumb --");
 			
-			HashMap<String,Object> processThumb = GenerateThumbs.getInstance().generateBatchThumb(current_dir, fileFullPath, destinationFolder, 80, "thumb");
+			HashMap<String,Object> processThumb = generateThumbs.generateBatchThumb(current_dir, fileFullPath, destinationFolder, 80, "thumb");
 			returnError.put("processThumb", processThumb);
 			
 			

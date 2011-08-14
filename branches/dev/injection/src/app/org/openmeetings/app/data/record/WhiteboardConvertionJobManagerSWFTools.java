@@ -65,19 +65,8 @@ public class WhiteboardConvertionJobManagerSWFTools {
 	private RecordingConversionJobDaoImpl recordingConversionJobDao;
 	@Autowired
 	private WhiteBoardEventDaoImpl whiteBoardEventDao;
-	
-	private WhiteboardConvertionJobManagerSWFTools() {
-	}
-
-	private static WhiteboardConvertionJobManagerSWFTools instance = null;
-
-	public static synchronized WhiteboardConvertionJobManagerSWFTools getInstance() {
-		if (instance == null) {
-			instance = new WhiteboardConvertionJobManagerSWFTools();
-		}
-
-		return instance;
-	}
+	@Autowired
+	private GenerateImage generateImage;
 	
 	public synchronized void initJobs() {
 		try {
@@ -272,7 +261,7 @@ public class WhiteboardConvertionJobManagerSWFTools {
 					
 					
 					
-					GenerateImage.getInstance().convertImageByTypeAndSizeAndDepth(
+					generateImage.convertImageByTypeAndSizeAndDepth(
 							outputFileNames.get("input"), 
 							outputFileNames.get("output"), 
 							660, 580, depth);

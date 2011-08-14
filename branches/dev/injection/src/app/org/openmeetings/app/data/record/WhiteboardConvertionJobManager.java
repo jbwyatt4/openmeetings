@@ -70,6 +70,8 @@ public class WhiteboardConvertionJobManager {
 	private RecordingConversionJobDaoImpl recordingConversionJobDao;
 	@Autowired
 	private WhiteBoardEventDaoImpl whiteBoardEventDao;
+	@Autowired
+	private GenerateImage generateImage;
 	
 	private WhiteboardConvertionJobManager() {
 	}
@@ -282,7 +284,7 @@ public class WhiteboardConvertionJobManager {
 					
 					
 					
-					GenerateImage.getInstance().convertImageByTypeAndSizeAndDepth(
+					generateImage.convertImageByTypeAndSizeAndDepth(
 							outputFileNames.get("input"), 
 							outputFileNames.get("output"), 
 							defaultWidth, 580, depth);

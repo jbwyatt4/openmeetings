@@ -38,7 +38,6 @@ import org.openmeetings.utils.image.ZipUtility;
 import org.openmeetings.utils.stringhandlers.StringComparer;
 import org.red5.logging.Red5LoggerFactory;
 import org.slf4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import com.anotherbigidea.flash.movie.ImageUtil;
 import com.anotherbigidea.flash.movie.Movie;
@@ -55,6 +54,7 @@ public class ScreenServlet extends HttpServlet {
 	private Configurationmanagement cfgManagement;
     private Usermanagement userManagement;
 	private UsersDaoImpl usersDao;
+	private ScopeApplicationAdapter scopeApplicationAdapter;
 	
 	@Override
 	public void init(ServletConfig config) throws ServletException {
@@ -63,6 +63,7 @@ public class ScreenServlet extends HttpServlet {
 		cfgManagement = (Configurationmanagement)config.getServletContext().getAttribute("cfgManagement");
 		userManagement = (Usermanagement)config.getServletContext().getAttribute("userManagement");
 		usersDao = (UsersDaoImpl)config.getServletContext().getAttribute("usersDao");
+		scopeApplicationAdapter = (ScopeApplicationAdapter)config.getServletContext().getAttribute("scopeApplicationAdapter");
 	}
 	
 	/* (non-Javadoc)
@@ -241,7 +242,7 @@ public class ScreenServlet extends HttpServlet {
 						
 						
 						
-						ScopeApplicationAdapter.getInstance().sendMessageByRoomAndDomain(Long.valueOf(room).longValue(),hs);
+						scopeApplicationAdapter.sendMessageByRoomAndDomain(Long.valueOf(room).longValue(),hs);
 					
 					}
 	
@@ -486,7 +487,7 @@ public class ScreenServlet extends HttpServlet {
 						hs.put("fileName", newFileSystemName+"_"+sid+newFileSystemExtName);
 						hs.put("swffileName", newFileSystemName+"_"+sid+".swf");
 						
-						ScopeApplicationAdapter.getInstance().sendMessageByRoomAndDomain(Long.valueOf(room).longValue(),hs);
+						scopeApplicationAdapter.sendMessageByRoomAndDomain(Long.valueOf(room).longValue(),hs);
 					
 						
 					}

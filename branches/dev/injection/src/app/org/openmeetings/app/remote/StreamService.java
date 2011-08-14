@@ -58,9 +58,8 @@ public class StreamService implements IPendingServiceCallback {
 	public static String fileNameXML = "recording_";
 	public static String folderForRecordings = "recorded";
 
-	// Beans, see red5-web.xml
+	@Autowired
 	private ClientListManager clientListManager = null;
-
 	@Autowired
 	private RecordingDaoImpl recordingDao;
 	@Autowired
@@ -83,19 +82,13 @@ public class StreamService implements IPendingServiceCallback {
 	private RoomStreamDaoImpl roomStreamDao;
 	@Autowired
 	private RecordingConversionJobDaoImpl recordingConversionJobDao;
+	@Autowired
+	private ScopeApplicationAdapter scopeApplicationAdapter;
 
 	private static final Logger log = Red5LoggerFactory.getLogger(
 			StreamService.class, ScopeApplicationAdapter.webAppRootKey);
 
 	private static LinkedHashMap<String, RoomRecording> roomRecordingList = new LinkedHashMap<String, RoomRecording>();
-
-	public ClientListManager getClientListManager() {
-		return clientListManager;
-	}
-
-	public void setClientListManager(ClientListManager clientListManager) {
-		this.clientListManager = clientListManager;
-	}
 
 	/**
 	 * this function starts recording a Conference (Meeting or Event)
@@ -477,7 +470,7 @@ public class StreamService implements IPendingServiceCallback {
 	 * 
 	 * @param conn
 	 */
-	private static void recordShow(IConnection conn, long broadcastid,
+	private void recordShow(IConnection conn, long broadcastid,
 			String streamName) throws Exception {
 		log.debug("Recording show for: " + conn.getScope().getContextPath());
 		log.debug("Name of CLient and Stream to be recorded: " + broadcastid);
@@ -485,8 +478,8 @@ public class StreamService implements IPendingServiceCallback {
 		log.debug("Scope " + conn);
 		log.debug("Scope " + conn.getScope());
 		// Get a reference to the current broadcast stream.
-		ClientBroadcastStream stream = (ClientBroadcastStream) ScopeApplicationAdapter
-				.getInstance().getBroadcastStream(conn.getScope(),
+		ClientBroadcastStream stream = (ClientBroadcastStream) scopeApplicationAdapter
+				.getBroadcastStream(conn.getScope(),
 						Long.valueOf(broadcastid).toString());
 		try {
 			// Save the stream to disk.
@@ -505,7 +498,7 @@ public class StreamService implements IPendingServiceCallback {
 	 * @param roomrecordingName
 	 * @param doStopStream
 	 */
-	public static void _stopRecordingShowForClient(IConnection conn,
+	public void _stopRecordingShowForClient(IConnection conn,
 			RoomClient rcl, String roomrecordingName, boolean doStopStream) {
 		try {
 			// this cannot be handled here, as to stop a stream and to leave a
@@ -550,13 +543,13 @@ public class StreamService implements IPendingServiceCallback {
 	 * 
 	 * @param conn
 	 */
-	public static void stopRecordingShow(IConnection conn, long broadcastId)
+	public void stopRecordingShow(IConnection conn, long broadcastId)
 			throws Exception {
 		log.debug("** stopRecordingShow: " + conn);
 		log.debug("### Stop recording show for broadcastId: " + broadcastId
 				+ " || " + conn.getScope().getContextPath());
-		ClientBroadcastStream stream = (ClientBroadcastStream) ScopeApplicationAdapter
-				.getInstance().getBroadcastStream(conn.getScope(),
+		ClientBroadcastStream stream = (ClientBroadcastStream) scopeApplicationAdapter
+				.getBroadcastStream(conn.getScope(),
 						Long.valueOf(broadcastId).toString());
 		// Stop recording.
 		stream.stopRecording();
@@ -666,7 +659,7 @@ public class StreamService implements IPendingServiceCallback {
 		return null;
 	}
 
-	public static void _addRecordingByStreamId(IConnection conn,
+	public void _addRecordingByStreamId(IConnection conn,
 			String streamId, RoomClient rcl, String roomrecordingName) {
 		try {
 			RoomRecording roomRecording = roomRecordingList

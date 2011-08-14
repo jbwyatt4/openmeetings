@@ -54,6 +54,8 @@ public class UserService {
 	private SOAPLoginDaoImpl soapLoginDao;
 	@Autowired
 	private UsersDaoImpl usersDao;
+	@Autowired
+	private MainService mainService;
 
 	/**
 	 * load this session id before doing anything else
@@ -61,7 +63,7 @@ public class UserService {
 	 * @return Sessiondata-Object
 	 */
 	public Sessiondata getSession() {
-		return MainService.getInstance().getsessiondata();
+		return mainService.getsessiondata();
 	}
 
 	/**

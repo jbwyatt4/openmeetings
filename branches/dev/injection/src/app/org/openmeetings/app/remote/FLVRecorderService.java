@@ -47,100 +47,33 @@ public class FLVRecorderService implements IPendingServiceCallback {
 	private static final Logger log = Red5LoggerFactory.getLogger(FLVRecorderService.class, ScopeApplicationAdapter.webAppRootKey);
 
 	//Spring Beans
-	private ClientListManager clientListManager = null;
-	private FlvRecordingDaoImpl flvRecordingDaoImpl = null;
-	private FlvRecordingMetaDataDaoImpl flvRecordingMetaDataDaoImpl = null;
+	@Autowired
+	private ClientListManager clientListManager;
+	@Autowired
+	private FlvRecordingDaoImpl flvRecordingDaoImpl;
+	@Autowired
+	private FlvRecordingMetaDataDaoImpl flvRecordingMetaDataDaoImpl;
+	@Autowired
 	private UsersDaoImpl usersDaoImpl;
+	@Autowired
 	private Roommanagement roommanagement;
+	@Autowired
 	private FlvRecorderConverterTask flvRecorderConverterTask;
+	@Autowired
 	private FlvInterviewConverterTask flvInterviewConverterTask;
+	@Autowired
 	private FlvInterviewReConverterTask flvInterviewReConverterTask;
+	@Autowired
 	private FlvRecordingLogDaoImpl flvRecordingLogDaoImpl;
-	private ScopeApplicationAdapter scopeApplicationAdapter = null;
 	@Autowired
 	private Sessionmanagement sessionManagement;
     @Autowired
     private Usermanagement userManagement;
+    @Autowired
+    private ScopeApplicationAdapter scopeApplicationAdapter;
 	
 	public void resultReceived(IPendingServiceCall arg0) {
 		// TODO Auto-generated method stub
-		
-	}
-
-	public ClientListManager getClientListManager() {
-		return this.clientListManager;
-	}
-	public void setClientListManager(ClientListManager clientListManager) {
-		this.clientListManager = clientListManager;
-	}
-	
-	public FlvRecordingDaoImpl getFlvRecordingDaoImpl() {
-		return flvRecordingDaoImpl;
-	}
-	public void setFlvRecordingDaoImpl(FlvRecordingDaoImpl flvRecordingDaoImpl) {
-		this.flvRecordingDaoImpl = flvRecordingDaoImpl;
-	}
-
-	public FlvRecordingMetaDataDaoImpl getFlvRecordingMetaDataDaoImpl() {
-		return flvRecordingMetaDataDaoImpl;
-	}
-	public void setFlvRecordingMetaDataDaoImpl(
-			FlvRecordingMetaDataDaoImpl flvRecordingMetaDataDaoImpl) {
-		this.flvRecordingMetaDataDaoImpl = flvRecordingMetaDataDaoImpl;
-	}
-	
-	public UsersDaoImpl getUsersDaoImpl() {
-		return usersDaoImpl;
-	}
-	public void setUsersDaoImpl(UsersDaoImpl usersDaoImpl) {
-		this.usersDaoImpl = usersDaoImpl;
-	}
-	
-	public Roommanagement getRoommanagement() {
-		return roommanagement;
-	}
-	public void setRoommanagement(Roommanagement roommanagement) {
-		this.roommanagement = roommanagement;
-	}
-	
-	public FlvRecorderConverterTask getFlvRecorderConverterTask() {
-		return flvRecorderConverterTask;
-	}
-	public void setFlvRecorderConverterTask(
-			FlvRecorderConverterTask flvRecorderConverterTask) {
-		this.flvRecorderConverterTask = flvRecorderConverterTask;
-	}
-	
-	public FlvInterviewConverterTask getFlvInterviewConverterTask() {
-		return flvInterviewConverterTask;
-	}
-	public void setFlvInterviewConverterTask(
-			FlvInterviewConverterTask flvInterviewConverterTask) {
-		this.flvInterviewConverterTask = flvInterviewConverterTask;
-	}
-	
-	public FlvInterviewReConverterTask getFlvInterviewReConverterTask() {
-		return flvInterviewReConverterTask;
-	}
-	public void setFlvInterviewReConverterTask(
-			FlvInterviewReConverterTask flvInterviewReConverterTask) {
-		this.flvInterviewReConverterTask = flvInterviewReConverterTask;
-	}
-
-	public FlvRecordingLogDaoImpl getFlvRecordingLogDaoImpl() {
-		return flvRecordingLogDaoImpl;
-	}
-	public void setFlvRecordingLogDaoImpl(
-			FlvRecordingLogDaoImpl flvRecordingLogDaoImpl) {
-		this.flvRecordingLogDaoImpl = flvRecordingLogDaoImpl;
-	}
-	
-	public ScopeApplicationAdapter getScopeApplicationAdapter() {
-		return scopeApplicationAdapter;
-	}
-	public void setScopeApplicationAdapter(
-			ScopeApplicationAdapter scopeApplicationAdapter) {
-		this.scopeApplicationAdapter = scopeApplicationAdapter;
 	}
 
 	public RoomClient checkForRecording(){
@@ -286,30 +219,6 @@ public class FLVRecorderService implements IPendingServiceCallback {
 	}
 	
 	/**
-	 * @deprecated
-	 * @param conn
-	 * @param broadcastid
-	 * @param streamName
-	 * @throws Exception
-	 */
-	private static void _recordShow(IConnection conn, String broadcastid, String streamName) throws Exception {
-		log.debug("Recording show for: " + conn.getScope().getContextPath());
-		log.debug("Name of CLient and Stream to be recorded: "+broadcastid);		
-		//log.debug("Application.getInstance()"+Application.getInstance());
-		log.debug("Scope "+conn);
-		log.debug("Scope "+conn.getScope());
-		// Get a reference to the current broadcast stream.
-		ClientBroadcastStream stream = (ClientBroadcastStream) ScopeApplicationAdapter.getInstance()
-				.getBroadcastStream(conn.getScope(), broadcastid);
-		try {
-			// Save the stream to disk.
-			stream.saveAs(streamName, false);
-		} catch (Exception e) {
-			log.error("Error while saving stream: " + streamName, e);
-		}
-	}
-	
-	/**
 	 * Start recording the published stream for the specified broadcast-Id
 	 * @param conn
 	 * @param broadcastid
@@ -317,7 +226,7 @@ public class FLVRecorderService implements IPendingServiceCallback {
 	 * @param flvRecordingMetaDataId
 	 * @throws Exception
 	 */
-	private static void recordShow(IConnection conn, String broadcastid, 
+	private void recordShow(IConnection conn, String broadcastid, 
 			String streamName, Long flvRecordingMetaDataId, boolean isScreenData, Boolean isInterview) throws Exception {
 		try {
 			log.debug("Recording show for: " + conn.getScope().getContextPath());
@@ -326,8 +235,7 @@ public class FLVRecorderService implements IPendingServiceCallback {
 			log.debug("Scope "+conn);
 			log.debug("Scope "+conn.getScope());
 			// Get a reference to the current broadcast stream.
-			ClientBroadcastStream stream = (ClientBroadcastStream) ScopeApplicationAdapter.getInstance()
-					.getBroadcastStream(conn.getScope(), broadcastid);
+			ClientBroadcastStream stream = (ClientBroadcastStream) scopeApplicationAdapter.getBroadcastStream(conn.getScope(), broadcastid);
 		
 			
 			// Save the stream to disk.
@@ -368,8 +276,7 @@ public class FLVRecorderService implements IPendingServiceCallback {
 			log.debug("** stopRecordingShow: "+conn);
 			log.debug("### Stop recording show for broadcastId: "+ broadcastId + " || " + conn.getScope().getContextPath());
 			
-			Object streamToClose = ScopeApplicationAdapter.getInstance().
-											getBroadcastStream(conn.getScope(), broadcastId);
+			Object streamToClose = scopeApplicationAdapter.getBroadcastStream(conn.getScope(), broadcastId);
 			
 			if (streamToClose == null) {
 				log.debug("Could not aquire Stream, maybe already closed");
@@ -396,8 +303,7 @@ public class FLVRecorderService implements IPendingServiceCallback {
 			log.debug("** stopRecordingShow: "+conn);
 			log.debug("### Stop recording show for broadcastId: "+ broadcastId + " || " + conn.getScope().getContextPath());
 			
-			Object streamToClose = ScopeApplicationAdapter.getInstance().
-											getBroadcastStream(conn.getScope(), broadcastId);
+			Object streamToClose = scopeApplicationAdapter.getBroadcastStream(conn.getScope(), broadcastId);
 			
 			if (streamToClose == null) {
 				log.debug("Could not aquire Stream, maybe already closed");

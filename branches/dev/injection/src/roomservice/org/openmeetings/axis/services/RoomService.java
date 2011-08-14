@@ -50,6 +50,8 @@ public class RoomService {
 	private FlvRecordingDaoImpl flvRecordingDao;
 	@Autowired
 	private Invitationmanagement invitationManagement;
+	@Autowired
+	private ScopeApplicationAdapter scopeApplicationAdapter;
 
 	// TODO: Not implemented yet
 	// public List<Rooms_Organisation> getRoomsByOrganisationAndType(String SID,
@@ -1557,8 +1559,7 @@ public class RoomService {
 				if (status) {
 					Map<String, String> message = new HashMap<String, String>();
 					message.put("message", "roomClosed");
-					ScopeApplicationAdapter.getInstance()
-							.sendMessageByRoomAndDomain(room_id, message);
+					scopeApplicationAdapter.sendMessageByRoomAndDomain(room_id, message);
 				}
 				return 1;
 

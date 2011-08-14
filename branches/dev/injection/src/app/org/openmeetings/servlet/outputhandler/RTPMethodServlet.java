@@ -33,11 +33,13 @@ public class RTPMethodServlet extends HttpServlet{
 	public static final String METHOD_STOP = "streamer_stop";
 	
 	private Sessionmanagement sessionManagement;
+	private ScopeApplicationAdapter scopeApplicationAdapter;
 	
 	@Override
 	public void init(ServletConfig config) throws ServletException {
 		super.init(config);
 		sessionManagement = (Sessionmanagement)config.getServletContext().getAttribute("sessionManagement");
+		scopeApplicationAdapter = (ScopeApplicationAdapter)config.getServletContext().getAttribute("scopeApplicationAdapter");
 	}
 	
 	@Override
@@ -89,7 +91,7 @@ public class RTPMethodServlet extends HttpServlet{
 			hs.put("message", "stopStreaming");
 			hs.put("session", session);
 			
-			ScopeApplicationAdapter.getInstance().sendMessageByRoomAndDomain(Long.valueOf(room).longValue(),hs);
+			scopeApplicationAdapter.sendMessageByRoomAndDomain(Long.valueOf(room).longValue(),hs);
 			
 			// Remove Session
 			RTPStreamingHandler.removeSessionForRoom(room, sid);
@@ -210,7 +212,7 @@ public class RTPMethodServlet extends HttpServlet{
 				//Set the Screen Sharing Object
 				hs.put("session", session);
 				
-				ScopeApplicationAdapter.getInstance().sendMessageWithClientByPublicSID(hs, publicSIDofViewer);
+				scopeApplicationAdapter.sendMessageWithClientByPublicSID(hs, publicSIDofViewer);
 				
 			}
 			

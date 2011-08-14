@@ -60,12 +60,14 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 			ScopeApplicationAdapter.class,
 			ScopeApplicationAdapter.webAppRootKey);
 
-	// Beans, see red5-web.xml
-	private ClientListManager clientListManager = null;
-	private EmoticonsManager emoticonsManager = null;
-	private WhiteBoardService whiteBoardService = null;
-	private FLVRecorderService flvRecorderService = null;
-
+	@Autowired
+	private ClientListManager clientListManager;
+	@Autowired
+	private EmoticonsManager emoticonsManager;
+	@Autowired
+	private WhiteBoardService whiteBoardService;
+	@Autowired
+	private FLVRecorderService flvRecorderService;
 	@Autowired
 	private Configurationmanagement cfgManagement;
 	@Autowired
@@ -99,58 +101,13 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 
 	private static long broadCastCounter = 0;
 
-	private static ScopeApplicationAdapter instance = null;
-
-	public static synchronized ScopeApplicationAdapter getInstance() {
-		return instance;
-	}
-
-	// Beans, see red5-web.xml
-	public synchronized ClientListManager getClientListManager() {
-		return clientListManager;
-	}
-
-	public synchronized void setClientListManager(
-			ClientListManager clientListManager) {
-		this.clientListManager = clientListManager;
-	}
-
-	public synchronized EmoticonsManager getEmoticonsManager() {
-		return emoticonsManager;
-	}
-
-	public synchronized void setEmoticonsManager(
-			EmoticonsManager emoticonsManager) {
-		this.emoticonsManager = emoticonsManager;
-	}
-
-	public synchronized WhiteBoardService getWhiteBoardService() {
-		return whiteBoardService;
-	}
-
-	public synchronized void setWhiteBoardService(
-			WhiteBoardService whiteBoardService) {
-		this.whiteBoardService = whiteBoardService;
-	}
-
-	public FLVRecorderService getFlvRecorderService() {
-		return flvRecorderService;
-	}
-
-	public void setFlvRecorderService(FLVRecorderService flvRecorderService) {
-		this.flvRecorderService = flvRecorderService;
-	}
-
 	public synchronized void resultReceived(IPendingServiceCall arg0) {
 		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public synchronized boolean appStart(IScope scope) {
 		try {
-			instance = this;
-
 			// This System out is for testing SLF4J / LOG4J and custom logging n
 			// Red5
 			// System.out.println("Custom Webapp start UP "+new Date());
@@ -178,7 +135,7 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 
 			// Spring Definition does not work here, its too early, Instance is
 			// not set yet
-			EmoticonsManager.getInstance().loadEmot(scope);
+			emoticonsManager.loadEmot(scope);
 
 			for (Iterator<String> subIterate = scope.getScopeNames(); subIterate
 					.hasNext();) {
