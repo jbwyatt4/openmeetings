@@ -28,6 +28,8 @@ public class RegisterUserTemplate extends VelocityLoader {
 			String verification_url) {
 		try {
 
+			super.init();
+
 			Fieldlanguagesvalues labelid506 = fieldmanagment
 					.getFieldByIdAndLanguage(new Long(506), default_lang_id);
 			Fieldlanguagesvalues labelid507 = fieldmanagment
