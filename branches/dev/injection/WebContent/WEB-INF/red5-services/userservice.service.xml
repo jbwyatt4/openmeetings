@@ -11,7 +11,7 @@
     <bean id="userservice.service" 
         class="org.openmeetings.app.remote.UserService">
         <property name="clientListManager" ref="openmeetings.ClientListManager" />
-        <property name="scopeApplicationAdapter" ref="web.handler.openmeetings" />
+        <property name="scopeApplicationAdapter" ref="web.handler" />
     </bean>     
              
     <bean id="openmeetings.UsersDaoImpl"

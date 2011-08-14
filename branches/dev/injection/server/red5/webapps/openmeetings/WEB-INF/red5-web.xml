@@ -6,11 +6,9 @@
         <property name="location" value="/WEB-INF/red5-web.properties" />
     </bean>
     
-    <bean id="web.context" class="org.red5.server.Context" 
-        autowire="byType" />
+    <bean id="web.context" class="org.red5.server.Context" autowire="byType" />
     
-    <bean id="web.scope" class="org.red5.server.WebScope"
-         init-method="register">
+    <bean id="web.scope" class="org.red5.server.WebScope" init-method="register">
         <property name="server" ref="red5.server" />
         <property name="parent" ref="global.scope" />
         <property name="context" ref="web.context" />
@@ -20,8 +18,7 @@
     </bean>
     
     <!-- New Class for the Streaming Handlers -->
-    <bean id="web.handler" 
-        class="org.openmeetings.app.remote.red5.ScopeApplicationAdapter">
+    <bean id="web.handler" class="org.openmeetings.app.remote.red5.ScopeApplicationAdapter">
         <property name="clientListManager" ref="openmeetings.ClientListManager" />
         <property name="emoticonsManager" ref="openmeetings.EmoticonsManager" />
         <property name="whiteBoardService" ref="whiteboardservice.service" />
@@ -71,9 +68,7 @@
     <import resource="red5-services/printservice.service.xml"/>  
     <import resource="red5-services/flvrecorderservice.service.xml"/> 
     <import resource="red5-services/ldapconfigservice.service.xml"/> 
-    <!--
+    
     <import resource="red5-services/schedulerJobs.service.xml"/>  
-     -->
-
            
 </beans>

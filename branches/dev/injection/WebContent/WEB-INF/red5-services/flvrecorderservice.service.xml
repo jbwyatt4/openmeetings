@@ -19,7 +19,7 @@
         <property name="flvInterviewConverterTask" ref="openmeetings.FlvInterviewConverterTask" />
         <property name="flvInterviewReConverterTask" ref="openmeetings.FlvInterviewReConverterTask" />
         <property name="flvRecordingLogDaoImpl" ref="openmeetings.FlvRecordingLogDaoImpl" />
-        <property name="scopeApplicationAdapter" ref="web.handler.openmeetings" />
+        <property name="scopeApplicationAdapter" ref="web.handler" />
     </bean> 
     
     <bean id="openmeetings.FlvRecordingDaoImpl"

@@ -8,20 +8,16 @@ import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class MeetingReminderJob {
-
 	private static Logger log = Red5LoggerFactory.getLogger(MeetingReminderJob.class, ScopeApplicationAdapter.webAppRootKey);
 	@Autowired
 	private AppointmentLogic appointmentLogic;
 	
 	public void doIt() {
-		log.debug("QuartzMeetingReminderJob.execute");
+		log.debug("MeetingReminderJob.execute");
 		try {
 			appointmentLogic.doScheduledMeetingReminder();
-		
 		} catch (Exception err){
 			log.error("execute",err);
 		}
 	}
-	
-
 }
