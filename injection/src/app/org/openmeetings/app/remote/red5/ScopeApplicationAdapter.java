@@ -131,7 +131,8 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 
 			// init your handler here
 
-			// The scheduled Jobs did go into the Spring-Managed Beans, see schedulerJobs.service.xml
+			// The scheduled Jobs did go into the Spring-Managed Beans, see
+			// schedulerJobs.service.xml
 
 			// Spring Definition does not work here, its too early, Instance is
 			// not set yet
@@ -186,9 +187,9 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 					conn.getRemoteAddress(), swfURL);
 
 			// Log the User
-			conferenceLogDao.addConferenceLog(
-					"ClientConnect", rcm.getUser_id(), streamId, null,
-					rcm.getUserip(), rcm.getScope(), rcm.getExternalUserId(),
+			conferenceLogDao.addConferenceLog("ClientConnect",
+					rcm.getUser_id(), streamId, null, rcm.getUserip(),
+					rcm.getScope(), rcm.getExternalUserId(),
 					rcm.getExternalUserType(), rcm.getMail(),
 					rcm.getFirstname(), rcm.getLastname());
 
@@ -1772,7 +1773,9 @@ public class ScopeApplicationAdapter extends ApplicationAdapter implements
 				Appointment ment = appointmentLogic
 						.getAppointmentByRoom(room_id);
 
-				List<MeetingMember> members = meetingMemberDao.getMeetingMemberByAppointmentId(ment.getAppointmentId());
+				List<MeetingMember> members = meetingMemberDao
+						.getMeetingMemberByAppointmentId(ment
+								.getAppointmentId());
 
 				Long userIdInRoomClient = currentClient.getUser_id();
 

@@ -21,22 +21,11 @@ public class ResetPasswordTemplate extends VelocityLoader {
 	private static final Logger log = Red5LoggerFactory.getLogger(
 			FeedbackTemplate.class, ScopeApplicationAdapter.webAppRootKey);
 
-	private ResetPasswordTemplate() {
-		super();
-	}
-
-	private static ResetPasswordTemplate instance = null;
-
-	public static synchronized ResetPasswordTemplate getInstance() {
-		if (instance == null) {
-			instance = new ResetPasswordTemplate();
-		}
-		return instance;
-	}
-
 	public String getResetPasswordTemplate(String reset_link,
 			Long default_lang_id) {
 		try {
+
+			super.init();
 
 			Fieldlanguagesvalues labelid513 = fieldmanagment
 					.getFieldByIdAndLanguage(new Long(513), default_lang_id);

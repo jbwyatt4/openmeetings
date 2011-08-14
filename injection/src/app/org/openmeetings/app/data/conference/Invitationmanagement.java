@@ -73,6 +73,8 @@ public class Invitationmanagement {
 	private MailHandler mailHandler;
 	@Autowired
 	private MailiCalThread mailiCalThread;
+	@Autowired
+	private InvitationTemplate invitationTemplate;
 
 	/**
 	 * Sending invitation within plain mail
@@ -567,9 +569,9 @@ public class Invitationmanagement {
 			// Long default_lang_id = Long.valueOf(cfgManagement.
 			// getConfKey(3,"default_lang_id").getConf_value()).longValue();
 
-			String template = InvitationTemplate.getInstance()
-					.getRegisterInvitationTemplate(username, message,
-							invitation_link, language_id, dStart, dEnd);
+			String template = invitationTemplate.getRegisterInvitationTemplate(
+					username, message, invitation_link, language_id, dStart,
+					dEnd);
 
 			System.out.println(dStart);
 			System.out.println(dEnd);
@@ -792,9 +794,9 @@ public class Invitationmanagement {
 
 			// Long default_lang_id = Long.valueOf(cfgManagement.
 			// getConfKey(3,"default_lang_id").getConf_value()).longValue();
-			String template = InvitationTemplate.getInstance()
-					.getRegisterInvitationTemplate(username, message,
-							invitation_link, language_id, starttime, endtime);
+			String template = invitationTemplate.getRegisterInvitationTemplate(
+					username, message, invitation_link, language_id, starttime,
+					endtime);
 
 			IcalHandler handler = new IcalHandler(
 					IcalHandler.ICAL_METHOD_REQUEST);
@@ -884,7 +886,7 @@ public class Invitationmanagement {
 						cfgManagement.getConfKey(3, "default_lang_id")
 								.getConf_value()).longValue();
 
-				String template = InvitationTemplate.getInstance()
+				String template = invitationTemplate
 						.getRegisterInvitationTemplate(username, message,
 								invitation_link, default_lang_id, starttime,
 								endtime);
