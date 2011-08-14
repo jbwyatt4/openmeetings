@@ -28,9 +28,10 @@
     <property name="userservice.src.dir" value="${basedir}/src/userservice"/>
     
     <property name="classes.dir" value="${basedir}/bin"/>
-    
     <property name="dist.dir" value="dist"/>
-    
+	<property name="red5.root" value="${dist.dir}/red5"/>
+	<property name="report.dir" value="junitreport"/>
+	
     <!-- Conf dirs -->
     <property name="conf.dir" value="${basedir}/conf"/>
     
@@ -71,7 +72,6 @@
     <property name="spring.lib" value="${project.lib}/spring" />
     <property name="upload.lib" value="${project.lib}/upload" />
     <property name="xstream.lib" value="${project.lib}/xstream" />
-    <property name="junit.lib" value="${project.lib}/junit" />
     <property name="web.lib" value="${project.lib}" />
     <property name="ical.lib" value="${project.lib}/ical4j" />
     <!-- Apache Axis2 -->
@@ -101,7 +101,7 @@
         <fileset dir="${red5.lib}" includes="*.jar"/>
         <fileset dir="${upload.lib}" includes="*.jar"/>
         <fileset dir="${xstream.lib}" includes="*.jar"/>
-        <fileset dir="${junit.lib}" includes="*.jar"/>
+        <fileset dir="${junit.lib}" includes="*.jar" excludes="red5.jar"/>
         <fileset dir="${web.lib}" includes="*.jar"/>
         <fileset dir="${slf4j.lib}" includes="*.jar"/>
         <fileset dir="${axis2.lib}" includes="*.jar"/>
@@ -223,6 +223,13 @@
         <copy todir="${dist.dir}/red5/webapps/${project.distname}/WEB-INF/red5-services">
             <fileset dir="${webcontent.src.dir}/WEB-INF/red5-services" includes="*.xml"/>
         </copy>
+        <copy todir="${dist.dir}/red5/webapps/${project.distname}/WEB-INF">
+            <fileset dir="${webcontent.src.dir}/WEB-INF">
+            	<include name="*.xml"/>
+            	<include name="*.properties"/>
+            	<exclude name="root-*.xml"/>
+            </fileset>
+        </copy>
     	
         <chmod dir="${dist.dir}/red5" perm="755" includes="**/*.sh"/>
         <chmod dir="${dist.dir}/red5/webapps/${project.distname}/screen" perm="755" includes="**/*.sh"/>
@@ -330,9 +337,6 @@
                 <exclude name="**/test/**"/>
             	<exclude name="**/axis/**"/>
                 <exclude name="**/webstart/**"/>
-            	<!-- For now we include this into the main JAR
-            	<exclude name="**/server/**"/>
-            	 -->
             	<exclude name="**/client/**"/>
                 <exclude name="**/*.png"/>
                 <exclude name="**/*.vm"/>
@@ -566,27 +570,18 @@
 		       basedir="${dist.dir}/red5" />
 	</target>
 
-    <!-- Build of junit tests
-    compiler="org.eclipse.jdt.core.JDTCompilerAdapter"
-     -->
-    <target name="compileTest" depends="compile">
-        <javac debug="on" srcdir="${test.src.dir}" destdir="${main.out.dir}" >
-            <classpath refid="compile.classpath"/>
-        </javac>
-    </target>
-
     <!-- Remove classes directory for clean build -->
     <target name="clean" depends="cleanForBinary" 
         description="Prepare for clean build">
     	<delete dir="${main.out.dir}"/>
     	<delete dir="${dist.dir}"/>
-        <!--mkdir dir="${main.out.dir}"/-->
     </target>
     
     <target name="cleanForBinary" description="Clean For Binary">
         <delete dir="${dist.dir}"/>
     	<delete dir="${screen.out.dir}"/>
         <delete dir="${main.out.dir}"/>
+    	<delete dir="${report.dir}"/>
         <delete file="filetest.keystore" />
     </target>
 
@@ -613,6 +608,35 @@
     <!-- Build entire project -->
     <target name="build project" depends="clean, prepare, compile"/>
 
-    
-
+	<!-- Unit Tests -->    
+	<property name="om.dist.webapp" value="${red5.root}/webapps/${project.distname}"/>
+	
+    <path id="junit.classpath">
+        <fileset dir="${red5.root}" includes="*.jar" />
+    	<path refid="compile.classpath" />
+	    <pathelement path="${classes.dir}" />
+    	<pathelement path="src/META-INF" />
+        <fileset dir="${red5.root}/lib" includes="*.jar" />
+    	<pathelement path="${red5.root}/conf" />
+    	<pathelement path="${om.dist.webapp}" />
+    	<pathelement path="${om.dist.webapp}/WEB-INF" />
+    </path>
+	<target name="test" depends="enhance">
+<!--	<target name="test"> -->
+	    <mkdir dir="${report.dir}"/>
+    	<property name="myclsp" refid="junit.classpath" />
+<!--		<echo message="${myclsp}" /> -->
+	    <junit printsummary="yes">
+	        <classpath refid="junit.classpath"/>
+	    	<jvmarg value="-Dred5.root=${red5.root}"/>
+	    	<jvmarg value="-Dred5.config_root=${red5.root}/conf"/>
+	        <formatter type="plain"/>
+	        <batchtest fork="yes" todir="${report.dir}">
+	            <fileset dir="${main.out.dir}">
+<!--	                <include name="org/openmeetings/test/**/*Test*"/> -->
+	            	<include name="**/TestAddEmailToAdress*"/>
+	            </fileset>
+	        </batchtest>
+	    </junit> 
+	</target>
 </project>
