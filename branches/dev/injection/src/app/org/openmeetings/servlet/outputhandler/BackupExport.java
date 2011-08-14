@@ -98,6 +98,8 @@ public class BackupExport extends HttpServlet {
 	private PrivateMessagesDaoImpl privateMessagesDao;
 	@Autowired
 	private PrivateMessageFolderDaoImpl privateMessageFolderDao;
+	@Autowired
+	private UserContactsDaoImpl userContactsDao;
 
 	/*
 	 * (non-Javadoc)
@@ -328,8 +330,7 @@ public class BackupExport extends HttpServlet {
 					/*
 					 * ##################### User Contacts
 					 */
-					List<UserContacts> userContacts = UserContactsDaoImpl
-							.getInstance().getUserContacts();
+					List<UserContacts> userContacts = userContactsDao.getUserContacts();
 
 					if (privateMessageFolders != null) {
 						Document doc = this

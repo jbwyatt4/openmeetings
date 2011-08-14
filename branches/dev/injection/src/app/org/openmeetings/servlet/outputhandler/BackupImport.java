@@ -119,6 +119,8 @@ public class BackupImport extends HttpServlet {
 	private RoomModeratorsDaoImpl roomModeratorsDao;
 	@Autowired
 	private FileExplorerItemDaoImpl fileExplorerItemDao;
+	@Autowired
+	private UserContactsDaoImpl userContactsDao;
 
 	private final HashMap<Long, Long> usersMap = new HashMap<Long, Long>();
 	private final HashMap<Long, Long> organisationsMap = new HashMap<Long, Long>();
@@ -1287,13 +1289,11 @@ public class BackupImport extends HttpServlet {
 
 		for (UserContacts uc : ucList) {
 			Long userContactId = uc.getUserContactId();
-			UserContacts storedUC = UserContactsDaoImpl.getInstance()
-					.getUserContacts(userContactId);
+			UserContacts storedUC = userContactsDao.getUserContacts(userContactId);
 
 			if (storedUC == null) {
 				uc.setUserContactId(0);
-				Long newId = UserContactsDaoImpl.getInstance()
-						.addUserContactObj(uc);
+				Long newId = userContactsDao.addUserContactObj(uc);
 				this.userContactsMap.put(userContactId, newId);
 			}
 		}

@@ -8,20 +8,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class UserContactsDaoImplTest extends AbstractTestCase {
     @Autowired
     private Usermanagement userManagement;
+	@Autowired
+	private UserContactsDaoImpl userContactsDao;
 
 	public UserContactsDaoImplTest(String name){
 		super(name);
 	}
 	
 	final public void testUserContactsDaoImpl() throws Exception	{
-		
-		// Get instance
-		UserContactsDaoImpl  contactDaoImpl = UserContactsDaoImpl.getInstance();
-		
-		assertNotNull("Cann't access to contacts dao implimentation", contactDaoImpl);
-		Long id = contactDaoImpl.addUserContact(1L, 1L, false, "");
+		assertNotNull("Cann't access to contacts dao implimentation", userContactsDao);
+		Long id = userContactsDao.addUserContact(1L, 1L, false, "");
 		assertTrue("New contact cann't added", id > 0);
-		UserContacts userContact = contactDaoImpl.getUserContacts(id);
+		UserContacts userContact = userContactsDao.getUserContacts(id);
 
 		assertTrue("Contact should be the same with user", userContact.getContact().equals(userManagement.getUserById(id)));
 		

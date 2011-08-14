@@ -89,6 +89,8 @@ public class UserService {
 	private PrivateMessageFolderDaoImpl privateMessageFolderDao;
 	@Autowired
 	private UsersDaoImpl usersDao;
+	@Autowired
+	private UserContactsDaoImpl userContactsDao;
 
 	public ClientListManager getClientListManager() {
 		return clientListManager;
@@ -617,7 +619,7 @@ public class UserService {
 			// users only
 			if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
 
-				Long countContacts = UserContactsDaoImpl.getInstance()
+				Long countContacts = userContactsDao
 						.checkUserContacts(userToAdd_id, users_id);
 
 				if (countContacts != null && countContacts > 0) {
@@ -630,7 +632,7 @@ public class UserService {
 								CalendarPatterns
 										.getDateWithTimeByMiliSeconds(new Date()));
 
-				Long userContactId = UserContactsDaoImpl.getInstance()
+				Long userContactId = userContactsDao
 						.addUserContact(userToAdd_id, users_id, true, hash);
 
 				Users user = userManagement.getUserById(users_id);
@@ -715,7 +717,7 @@ public class UserService {
 			// users only
 			if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
 
-				List<UserContacts> uList = UserContactsDaoImpl.getInstance()
+				List<UserContacts> uList = userContactsDao
 						.getContactRequestsByUserAndStatus(users_id, true);
 
 				return uList;
@@ -735,7 +737,7 @@ public class UserService {
 			// users only
 			if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
 
-				UserContacts userContact = UserContactsDaoImpl.getInstance()
+				UserContacts userContact = userContactsDao
 						.getContactsByHash(hash);
 
 				if (userContact == null) {
@@ -769,7 +771,7 @@ public class UserService {
 			// users only
 			if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
 
-				List<UserContacts> uList = UserContactsDaoImpl.getInstance()
+				List<UserContacts> uList = userContactsDao
 						.getContactsByUserAndStatus(users_id, false);
 
 				return uList;
@@ -788,7 +790,7 @@ public class UserService {
 			// users only
 			if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
 
-				UserContacts userContacts = UserContactsDaoImpl.getInstance()
+				UserContacts userContacts = userContactsDao
 						.getUserContacts(userContactId);
 
 				if (userContacts == null) {
@@ -815,14 +817,14 @@ public class UserService {
 			// users only
 			if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
 
-				UserContacts userContacts = UserContactsDaoImpl.getInstance()
+				UserContacts userContacts = userContactsDao
 						.getUserContacts(userContactId);
 
 				if (userContacts == null) {
 					return -49;
 				}
 
-				return UserContactsDaoImpl.getInstance().deleteUserContact(
+				return userContactsDao.deleteUserContact(
 						userContactId);
 
 			}
@@ -840,7 +842,7 @@ public class UserService {
 			// users only
 			if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
 
-				UserContacts userContacts = UserContactsDaoImpl.getInstance()
+				UserContacts userContacts = userContactsDao
 						.getUserContacts(userContactId);
 
 				if (userContacts == null) {
@@ -854,13 +856,13 @@ public class UserService {
 
 				if (pending) {
 
-					UserContactsDaoImpl.getInstance().updateContactStatus(
+					userContactsDao.updateContactStatus(
 							userContactId, false);
 
-					userContacts = UserContactsDaoImpl.getInstance()
+					userContacts = userContactsDao
 							.getUserContacts(userContactId);
 
-					UserContactsDaoImpl.getInstance().addUserContact(
+					userContactsDao.addUserContact(
 							userContacts.getOwner().getUser_id(), users_id,
 							false, "");
 
@@ -911,7 +913,7 @@ public class UserService {
 
 				} else {
 
-					UserContactsDaoImpl.getInstance().deleteUserContact(
+					userContactsDao.deleteUserContact(
 							userContactId);
 
 				}
@@ -1444,7 +1446,7 @@ public class UserService {
 			// users only
 			if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
 
-				List<UserContacts> uList = UserContactsDaoImpl.getInstance()
+				List<UserContacts> uList = userContactsDao
 						.getContactsByUserAndStatus(users_id, false);
 
 				for (UserContacts userContact : uList) {
@@ -1474,12 +1476,12 @@ public class UserService {
 			// users only
 			if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
 
-				UserContacts userContacts = UserContactsDaoImpl.getInstance()
+				UserContacts userContacts = userContactsDao
 						.getUserContacts(userContactId);
 
 				userContacts.setShareCalendar(shareCalendar);
 
-				UserContactsDaoImpl.getInstance().updateContact(userContacts);
+				userContactsDao.updateContact(userContacts);
 
 			}
 
@@ -1543,8 +1545,7 @@ public class UserService {
 			// users only
 			if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
 
-				return UserContactsDaoImpl.getInstance()
-						.getContactsByShareCalendar(users_id, true);
+				return userContactsDao.getContactsByShareCalendar(users_id, true);
 
 			}
 
