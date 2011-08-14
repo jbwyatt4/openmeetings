@@ -189,7 +189,7 @@ public class Organisationmanagement {
 			// get all users
 			Query query = em
 					.createQuery("select max(c.organisation_id) from Organisation c where c.deleted = 'false'");
-			List ll = query.getResultList();
+			List<?> ll = query.getResultList();
 			log.debug("selectMaxFromOrganisations" + ll.get(0));
 			return (Long) ll.get(0);
 		} catch (Exception ex2) {
@@ -238,12 +238,12 @@ public class Organisationmanagement {
 	 * @return
 	 * @throws Exception
 	 */
-	private boolean checkUserAlreadyStored(Long userIdToAdd, List usersStored)
+	private boolean checkUserAlreadyStored(Long userIdToAdd, List<?> usersStored)
 			throws Exception {
-		for (Iterator it2 = usersStored.iterator(); it2.hasNext();) {
+		for (Iterator<?> it2 = usersStored.iterator(); it2.hasNext();) {
 			Users us = (Users) it2.next();
 			if (us.getUser_id().equals(userIdToAdd)) {
-				log.error("userIdToAdd found: " + userIdToAdd);
+				log.debug("userIdToAdd found: " + userIdToAdd);
 				return true;
 			}
 		}
@@ -258,12 +258,13 @@ public class Organisationmanagement {
 	 * @throws Exception
 	 */
 	private boolean checkUserShouldBeStored(Long user_id,
-			LinkedHashMap usersToStore) throws Exception {
-		for (Iterator it2 = usersToStore.keySet().iterator(); it2.hasNext();) {
+			@SuppressWarnings("rawtypes") LinkedHashMap usersToStore)
+			throws Exception {
+		for (Iterator<?> it2 = usersToStore.keySet().iterator(); it2.hasNext();) {
 			Integer key = (Integer) it2.next();
 			Long usersIdToCheck = Long
 					.valueOf(usersToStore.get(key).toString()).longValue();
-			log.error("usersIdToCheck: " + usersIdToCheck);
+			log.debug("usersIdToCheck: " + usersIdToCheck);
 			if (user_id.equals(usersIdToCheck)) {
 				return true;
 			}
@@ -278,6 +279,7 @@ public class Organisationmanagement {
 	 * @param users
 	 * @return
 	 */
+	@SuppressWarnings({ "unused", "rawtypes" })
 	private Long updateOrganisationUsersByHashMap(Organisation org,
 			LinkedHashMap users, long insertedby) {
 		try {
@@ -304,8 +306,8 @@ public class Organisationmanagement {
 					usersToDel.add(userIdStored);
 			}
 
-			log.error("usersToAdd.size " + usersToAdd.size());
-			log.error("usersToDel.size " + usersToDel.size());
+			log.debug("usersToAdd.size " + usersToAdd.size());
+			log.debug("usersToDel.size " + usersToDel.size());
 
 			for (Iterator<Long> it = usersToAdd.iterator(); it.hasNext();) {
 				Long user_id = it.next();
@@ -475,6 +477,8 @@ public class Organisationmanagement {
 
 				long id = orgUser.getOrganisation_users_id();
 
+				em.refresh(usersDao.getUser(user_id));
+
 				return id;
 			} else {
 				return -35L;
@@ -490,6 +494,8 @@ public class Organisationmanagement {
 			orgUser.setStarttime(new Date());
 			orgUser = em.merge(orgUser);
 			long id = orgUser.getOrganisation_users_id();
+
+			em.refresh(usersDao.getUser(orgUser.getUser_id()));
 
 			return id;
 		} catch (Exception ex2) {
@@ -509,6 +515,7 @@ public class Organisationmanagement {
 					.createQuery("select c from Organisation_Users c where c.deleted = 'false' AND c.organisation.organisation_id = :organisation_id AND c.user_id = :user_id");
 			q.setParameter("organisation_id", organisation_id);
 			q.setParameter("user_id", user_id);
+			@SuppressWarnings("unchecked")
 			List<Organisation_Users> ll = q.getResultList();
 			log.debug("getOrganisation_UserByUserAndOrganisation: " + ll.size());
 			if (ll.size() > 0) {
@@ -543,6 +550,9 @@ public class Organisationmanagement {
 						em.merge(orgUser);
 					}
 				}
+
+				em.refresh(usersDao.getUser(user_id));
+
 				return orgUser.getOrganisation_users_id();
 			} else {
 				log.error("[deleteUserFromOrganisation] authorization required");
@@ -553,12 +563,13 @@ public class Organisationmanagement {
 		return null;
 	}
 
+	@SuppressWarnings("unused")
 	private boolean checkUserContainsOrganisation(long users_id,
 			long organisation_id) {
 		try {
 			Users us = usersDao.getUser(users_id);
-			for (Iterator it = us.getOrganisation_users().iterator(); it
-					.hasNext();) {
+			for (@SuppressWarnings("rawtypes")
+			Iterator it = us.getOrganisation_users().iterator(); it.hasNext();) {
 				Organisation_Users orguser = (Organisation_Users) it.next();
 				if (orguser.getOrganisation().getOrganisation_id() == organisation_id)
 					return true;
@@ -594,6 +605,7 @@ public class Organisationmanagement {
 					.createQuery("select c.organisation_users_id from Organisation_Users c where c.deleted = 'false' AND c.organisation.organisation_id = :organisation_id");
 			query.setParameter("organisation_id", organisation_id);
 
+			@SuppressWarnings("rawtypes")
 			List ll = query.getResultList();
 			log.debug("selectMaxUsersByOrganisationId" + ll.size());
 			return new Long(ll.size());
@@ -615,6 +627,7 @@ public class Organisationmanagement {
 	 * @param asc
 	 * @return
 	 */
+	@SuppressWarnings("rawtypes")
 	public List getUsersByOrganisationId(long organisation_id, int start,
 			int max, String orderby, boolean asc) {
 		try {
@@ -637,6 +650,7 @@ public class Organisationmanagement {
 			q.setParameter("organisation_id", organisation_id);
 			q.setFirstResult(start);
 			q.setMaxResults(max);
+			@SuppressWarnings("unchecked")
 			List<Organisation_Users> userOrg = q.getResultList();
 			List<Users> userL = new LinkedList<Users>();
 			for (Iterator<Organisation_Users> it = userOrg.iterator(); it
@@ -672,6 +686,7 @@ public class Organisationmanagement {
 			Query q = em
 					.createQuery("select c from Organisation_Users c where c.deleted = 'false' AND c.organisation.organisation_id = :organisation_id");
 			q.setParameter("organisation_id", organisation_id);
+			@SuppressWarnings("unchecked")
 			List<Organisation_Users> userOrg = q.getResultList();
 			List<Users> userL = new LinkedList<Users>();
 			for (Iterator<Organisation_Users> it = userOrg.iterator(); it
@@ -689,6 +704,7 @@ public class Organisationmanagement {
 	}
 
 	class UsersLoginComperator implements Comparator<Users> {
+		@SuppressWarnings("null")
 		public int compare(Users o1, Users o2) {
 			if (o1 != null || o2 != null)
 				return 0;
@@ -707,8 +723,8 @@ public class Organisationmanagement {
 	 * @param orderby
 	 * @return
 	 */
-	public List getOrganisationsByUserId(long user_level, long user_id,
-			int start, int max, String orderby, boolean asc) {
+	public List<Organisation> getOrganisationsByUserId(long user_level,
+			long user_id, int start, int max, String orderby, boolean asc) {
 		try {
 			if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)) {
 				String hql = "select c from Organisation_Users c "
@@ -719,6 +735,7 @@ public class Organisationmanagement {
 				q.setParameter("user_id", user_id);
 				q.setFirstResult(start);
 				q.setMaxResults(max);
+				@SuppressWarnings("unchecked")
 				List<Organisation_Users> userOrgIds = q.getResultList();
 
 				LinkedList<Organisation> userOrg = new LinkedList<Organisation>();
@@ -748,23 +765,26 @@ public class Organisationmanagement {
 	 * @param asc
 	 * @return
 	 */
-	public List getRestOrganisationsByUserId(long user_level, long user_id,
-			int start, int max, String orderby, boolean asc) {
+	public List<Organisation> getRestOrganisationsByUserId(long user_level,
+			long user_id, int start, int max, String orderby, boolean asc) {
 		try {
 			if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)) {
 				// get all organisations
-				List allOrgs = this.getOrganisations(0, 1000000, orderby, asc);
-				List orgUser = this.getOrganisationsByUserId(user_level,
-						user_id, start, max, orderby, asc);
+				List<Organisation> allOrgs = this.getOrganisations(0, 1000000,
+						orderby, asc);
+				List<Organisation> orgUser = this.getOrganisationsByUserId(
+						user_level, user_id, start, max, orderby, asc);
 
 				List<Organisation> returnList = new LinkedList<Organisation>();
 				boolean notInList = true;
 
-				for (Iterator it = allOrgs.iterator(); it.hasNext();) {
-					Organisation org = (Organisation) it.next();
+				for (Iterator<Organisation> it = allOrgs.iterator(); it
+						.hasNext();) {
+					Organisation org = it.next();
 					notInList = true;
-					for (Iterator it2 = orgUser.iterator(); it2.hasNext();) {
-						Organisation orgObj = (Organisation) it2.next();
+					for (Iterator<Organisation> it2 = orgUser.iterator(); it2
+							.hasNext();) {
+						Organisation orgObj = it2.next();
 						// log.error("orgObj ID: "+orgObj.getOrganisation_id());
 						// log.error("orgUser ID: "+org.getOrganisation_id());
 						if (orgObj.getOrganisation_id().equals(
@@ -796,6 +816,7 @@ public class Organisationmanagement {
 	 * @return
 	 * @throws Exception
 	 */
+	@SuppressWarnings("rawtypes")
 	private boolean checkOrgInList(Long orgId, List org) throws Exception {
 		// log.error("checkOrgInList "+orgId);
 		for (Iterator it = org.iterator(); it.hasNext();) {
@@ -819,6 +840,7 @@ public class Organisationmanagement {
 	 * @return
 	 * @throws Exception
 	 */
+	@SuppressWarnings("rawtypes")
 	private boolean checkOrgInStoredList(long orgId, List org) throws Exception {
 		// log.debug("checkOrgInStoredList "+orgId);
 		for (Iterator it = org.iterator(); it.hasNext();) {
@@ -839,6 +861,7 @@ public class Organisationmanagement {
 	 * @param organisations
 	 * @return
 	 */
+	@SuppressWarnings("rawtypes")
 	public Long updateUserOrganisationsByUser(Users us, List organisations) {
 		try {
 			LinkedList<Long> orgIdsToAdd = new LinkedList<Long>();
@@ -896,6 +919,7 @@ public class Organisationmanagement {
 	 * @param org
 	 * @return
 	 */
+	@SuppressWarnings("rawtypes")
 	public Long addUserOrganisationsByHashMap(long us, List org) {
 		try {
 			if (org != null) {
