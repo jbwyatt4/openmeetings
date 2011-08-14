@@ -25,18 +25,6 @@ public class UserContactsDaoImpl {
     @Autowired
     private Usermanagement userManagement;
 
-	private static UserContactsDaoImpl instance = null;
-
-	private UserContactsDaoImpl() {
-	}
-
-	public static synchronized UserContactsDaoImpl getInstance() {
-		if (instance == null) {
-			instance = new UserContactsDaoImpl();
-		}
-		return instance;
-	}
-	
 	public Long addUserContact(Long user_id, Long ownerId, Boolean pending, String hash) {
 		try {
 			
