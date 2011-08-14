@@ -7,6 +7,7 @@ import java.io.InputStream;
 import java.util.Date;
 import java.util.LinkedHashMap;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -21,17 +22,22 @@ import org.openmeetings.app.xmlimport.LanguageImport;
 import org.openmeetings.app.xmlimport.UserImport;
 import org.red5.logging.Red5LoggerFactory;
 import org.slf4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 
 public class Import extends HttpServlet {
 	private static final long serialVersionUID = 582610358088411294L;
 	private static final Logger log = Red5LoggerFactory.getLogger(Import.class, ScopeApplicationAdapter.webAppRootKey);
-	@Autowired
+
 	private Sessionmanagement sessionManagement;
-    @Autowired
     private Usermanagement userManagement;
-	@Autowired
 	private UsersDaoImpl usersDao;
+	
+	@Override
+	public void init(ServletConfig config) throws ServletException {
+		super.init(config);
+		sessionManagement = (Sessionmanagement)config.getServletContext().getAttribute("sessionManagement");
+		userManagement = (Usermanagement)config.getServletContext().getAttribute("userManagement");
+		usersDao = (UsersDaoImpl)config.getServletContext().getAttribute("usersDao");
+	}
 	
 	/*
 	 * (non-Javadoc)

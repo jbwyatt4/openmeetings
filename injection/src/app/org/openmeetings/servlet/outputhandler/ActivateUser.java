@@ -3,6 +3,7 @@ package org.openmeetings.servlet.outputhandler;
 import java.io.IOException;
 import java.util.Date;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -22,20 +23,21 @@ import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class ActivateUser extends VelocityViewServlet {
-
-	/**
-         * 
-         */
 	private static final long serialVersionUID = -8892729047921796170L;
-	private static Logger log = Red5LoggerFactory.getLogger(ActivateUser.class,
-			ScopeApplicationAdapter.webAppRootKey);
-	@Autowired
+	private static Logger log = Red5LoggerFactory.getLogger(ActivateUser.class, ScopeApplicationAdapter.webAppRootKey);
+
 	private Configurationmanagement cfgManagement;
-	@Autowired
 	private Usermanagement userManagement;
-	@Autowired
 	private Fieldmanagment fieldmanagment;
 
+	@Override
+	public void init(ServletConfig config) throws ServletException {
+		super.init(config);
+		cfgManagement = (Configurationmanagement)config.getServletContext().getAttribute("cfgManagement");
+		userManagement = (Usermanagement)config.getServletContext().getAttribute("userManagement");
+		fieldmanagment = (Fieldmanagment)config.getServletContext().getAttribute("fieldmanagment");
+	}
+	
 	@Override
 	public Template handleRequest(HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse, Context ctx)

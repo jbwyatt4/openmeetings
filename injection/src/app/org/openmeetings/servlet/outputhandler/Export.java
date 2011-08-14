@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -28,7 +29,6 @@ import org.openmeetings.app.remote.red5.ScopeApplicationAdapter;
 import org.openmeetings.utils.math.CalendarPatterns;
 import org.red5.logging.Red5LoggerFactory;
 import org.slf4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * 
@@ -37,17 +37,22 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 public class Export extends HttpServlet {
 	private static final long serialVersionUID = 8527093674786692472L;
-	private static final Logger log = Red5LoggerFactory.getLogger(Export.class,
-			ScopeApplicationAdapter.webAppRootKey);
-	@Autowired
+	private static final Logger log = Red5LoggerFactory.getLogger(Export.class, ScopeApplicationAdapter.webAppRootKey);
+	
 	private Sessionmanagement sessionManagement;
-	@Autowired
 	private Usermanagement userManagement;
-	@Autowired
 	private Organisationmanagement organisationmanagement;
-	@Autowired
 	private UsersDaoImpl usersDao;
 
+	@Override
+	public void init(ServletConfig config) throws ServletException {
+		super.init(config);
+		sessionManagement = (Sessionmanagement)config.getServletContext().getAttribute("sessionManagement");
+		userManagement = (Usermanagement)config.getServletContext().getAttribute("userManagement");
+		organisationmanagement = (Organisationmanagement)config.getServletContext().getAttribute("organisationmanagement");
+		usersDao = (UsersDaoImpl)config.getServletContext().getAttribute("usersDao");
+	}
+	
 	/*
 	 * (non-Javadoc)
 	 * 

@@ -6,25 +6,21 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.lang.StringUtils;
 import org.apache.velocity.Template;
 import org.apache.velocity.context.Context;
 import org.apache.velocity.tools.view.servlet.VelocityViewServlet;
-import org.openmeetings.app.data.basic.Configurationmanagement;
 import org.openmeetings.app.data.basic.Sessionmanagement;
 import org.openmeetings.app.data.user.Usermanagement;
-import org.openmeetings.app.persistence.beans.recording.RoomClient;
-import org.openmeetings.app.remote.red5.ClientListManager;
 import org.openmeetings.app.remote.red5.ScopeApplicationAdapter;
 import org.openmeetings.app.rtp.RTPScreenSharingSession;
 import org.openmeetings.app.rtp.RTPStreamingHandler;
 import org.red5.logging.Red5LoggerFactory;
 import org.slf4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * 
@@ -37,10 +33,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class RTPSharerServlet extends VelocityViewServlet{
 	private static final long serialVersionUID = -3803050458625713769L;
 	private static final Logger log = Red5LoggerFactory.getLogger(RTPSharerServlet.class, ScopeApplicationAdapter.webAppRootKey);
-	@Autowired
+	
 	private Sessionmanagement sessionManagement;
-    @Autowired
     private Usermanagement userManagement;
+	
+	@Override
+	public void init(ServletConfig config) throws ServletException {
+		super.init(config);
+		sessionManagement = (Sessionmanagement)config.getServletContext().getAttribute("sessionManagement");
+		userManagement = (Usermanagement)config.getServletContext().getAttribute("userManagement");
+	}
 	
 	@Override
 	public Template handleRequest(HttpServletRequest httpServletRequest,

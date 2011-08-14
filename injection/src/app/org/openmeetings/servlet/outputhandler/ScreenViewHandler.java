@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.RandomAccessFile;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -21,10 +22,16 @@ import org.openmeetings.app.remote.red5.ScopeApplicationAdapter;
 public class ScreenViewHandler extends HttpServlet {
 	private static final long serialVersionUID = -2221780306064491855L;
 	private static final Logger log = Red5LoggerFactory.getLogger(ScreenViewHandler.class, ScopeApplicationAdapter.webAppRootKey);
-	@Autowired
+
 	private Sessionmanagement sessionManagement;
-    @Autowired
     private Usermanagement userManagement;
+	
+	@Override
+	public void init(ServletConfig config) throws ServletException {
+		super.init(config);
+		sessionManagement = (Sessionmanagement)config.getServletContext().getAttribute("sessionManagement");
+		userManagement = (Usermanagement)config.getServletContext().getAttribute("userManagement");
+	}
 	
 	/*
 	 * (non-Javadoc)

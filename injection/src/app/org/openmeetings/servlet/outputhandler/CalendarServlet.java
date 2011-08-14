@@ -8,6 +8,7 @@ import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.TimeZone;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -20,9 +21,25 @@ import org.dom4j.io.OutputFormat;
 import org.dom4j.io.XMLWriter;
 import org.openmeetings.app.data.basic.Configurationmanagement;
 import org.openmeetings.app.data.basic.Sessionmanagement;
+import org.openmeetings.app.data.basic.dao.LdapConfigDaoImpl;
 import org.openmeetings.app.data.basic.dao.OmTimeZoneDaoImpl;
+import org.openmeetings.app.data.calendar.daos.AppointmentCategoryDaoImpl;
+import org.openmeetings.app.data.calendar.daos.AppointmentDaoImpl;
+import org.openmeetings.app.data.calendar.daos.AppointmentReminderTypDaoImpl;
+import org.openmeetings.app.data.calendar.daos.MeetingMemberDaoImpl;
 import org.openmeetings.app.data.calendar.management.AppointmentLogic;
+import org.openmeetings.app.data.conference.Roommanagement;
+import org.openmeetings.app.data.conference.dao.RoomModeratorsDaoImpl;
+import org.openmeetings.app.data.file.dao.FileExplorerItemDaoImpl;
+import org.openmeetings.app.data.flvrecord.FlvRecordingDaoImpl;
+import org.openmeetings.app.data.flvrecord.FlvRecordingMetaDataDaoImpl;
+import org.openmeetings.app.data.user.Organisationmanagement;
+import org.openmeetings.app.data.user.Statemanagement;
 import org.openmeetings.app.data.user.Usermanagement;
+import org.openmeetings.app.data.user.dao.PrivateMessageFolderDaoImpl;
+import org.openmeetings.app.data.user.dao.PrivateMessagesDaoImpl;
+import org.openmeetings.app.data.user.dao.UserContactsDaoImpl;
+import org.openmeetings.app.data.user.dao.UsersDaoImpl;
 import org.openmeetings.app.persistence.beans.basic.Configuration;
 import org.openmeetings.app.persistence.beans.basic.OmTimeZone;
 import org.openmeetings.app.persistence.beans.calendar.Appointment;
@@ -34,19 +51,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 public class CalendarServlet extends HttpServlet {
 	private static final long serialVersionUID = 2192254610711799347L;
-	private static final Logger log = Red5LoggerFactory.getLogger(
-			Calendar.class, ScopeApplicationAdapter.webAppRootKey);
-	@Autowired
+	private static final Logger log = Red5LoggerFactory.getLogger(Calendar.class, ScopeApplicationAdapter.webAppRootKey);
+	
 	private AppointmentLogic appointmentLogic;
-	@Autowired
 	private Sessionmanagement sessionManagement;
-	@Autowired
 	private Configurationmanagement cfgManagement;
-	@Autowired
 	private Usermanagement userManagement;
-	@Autowired
 	private OmTimeZoneDaoImpl omTimeZoneDaoImpl;
 
+	@Override
+	public void init(ServletConfig config) throws ServletException {
+		super.init(config);
+		appointmentLogic = (AppointmentLogic)config.getServletContext().getAttribute("appointmentLogic");
+		sessionManagement = (Sessionmanagement)config.getServletContext().getAttribute("sessionManagement");
+		cfgManagement = (Configurationmanagement)config.getServletContext().getAttribute("cfgManagement");
+		userManagement = (Usermanagement)config.getServletContext().getAttribute("userManagement");
+		omTimeZoneDaoImpl = (OmTimeZoneDaoImpl)config.getServletContext().getAttribute("omTimeZoneDaoImpl");
+	}
+	
 	@Override
 	protected void service(HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) throws ServletException,

@@ -2,6 +2,7 @@ package org.openmeetings.servlet.outputhandler;
 
 import java.io.IOException;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,21 +23,25 @@ import org.openmeetings.app.rtp.RTPStreamingHandler;
 import org.openmeetings.server.socket.ServerSocketMinaProcess;
 import org.red5.logging.Red5LoggerFactory;
 import org.slf4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 
 public class ScreenRequestHandler extends VelocityViewServlet {
 	private static final long serialVersionUID = 2381722235536488913L;
-	private static final Logger log = Red5LoggerFactory.getLogger(
-			ScreenRequestHandler.class, ScopeApplicationAdapter.webAppRootKey);
-	@Autowired
+	private static final Logger log = Red5LoggerFactory.getLogger(ScreenRequestHandler.class, ScopeApplicationAdapter.webAppRootKey);
+	
 	private Sessionmanagement sessionManagement;
-	@Autowired
 	private Configurationmanagement cfgManagement;
-	@Autowired
 	private Usermanagement userManagement;
-	@Autowired
 	private Fieldmanagment fieldmanagment;
 
+	@Override
+	public void init(ServletConfig config) throws ServletException {
+		super.init(config);
+		sessionManagement = (Sessionmanagement)config.getServletContext().getAttribute("sessionManagement");
+		cfgManagement = (Configurationmanagement)config.getServletContext().getAttribute("cfgManagement");
+		userManagement = (Usermanagement)config.getServletContext().getAttribute("userManagement");
+		fieldmanagment = (Fieldmanagment)config.getServletContext().getAttribute("fieldmanagment");
+	}
+	
 	@Override
 	public Template handleRequest(HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse, Context ctx)

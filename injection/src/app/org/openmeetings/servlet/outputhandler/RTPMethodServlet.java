@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
+
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -15,10 +17,8 @@ import org.openmeetings.app.remote.red5.ClientListManager;
 import org.openmeetings.app.remote.red5.ScopeApplicationAdapter;
 import org.openmeetings.app.rtp.RTPScreenSharingSession;
 import org.openmeetings.app.rtp.RTPStreamingHandler;
-import org.openmeetings.servlet.outputhandler.ScreenRequestHandler;
 import org.red5.logging.Red5LoggerFactory;
 import org.slf4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * 
@@ -26,14 +26,19 @@ import org.springframework.beans.factory.annotation.Autowired;
  *
  */
 public class RTPMethodServlet extends HttpServlet{
-	
+	private static final long serialVersionUID = 6781441755140201613L;
+
 	private static final Logger log = Red5LoggerFactory.getLogger(ScreenRequestHandler.class, ScopeApplicationAdapter.webAppRootKey);
-	
 	public static final String METHOD_START = "streamer_start";
-	
 	public static final String METHOD_STOP = "streamer_stop";
-	@Autowired
+	
 	private Sessionmanagement sessionManagement;
+	
+	@Override
+	public void init(ServletConfig config) throws ServletException {
+		super.init(config);
+		sessionManagement = (Sessionmanagement)config.getServletContext().getAttribute("sessionManagement");
+	}
 	
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response)

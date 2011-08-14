@@ -27,6 +27,72 @@
 				<entry key="cfgManagement">
 					<ref bean="cfgManagement"/>
 				</entry>
+				<entry key="sessionManagement">
+					<ref bean="sessionManagement"/>
+				</entry>
+				<entry key="userManagement">
+					<ref bean="userManagement"/>
+				</entry>
+				<entry key="fieldmanagment">
+					<ref bean="fieldmanagment"/>
+				</entry>
+				<entry key="appointmentDao">
+					<ref bean="appointmentDao"/>
+				</entry>
+				<entry key="organisationmanagement">
+					<ref bean="organisationmanagement"/>
+				</entry>
+				<entry key="roommanagement">
+					<ref bean="roommanagement"/>
+				</entry>
+				<entry key="fileExplorerItemDao">
+					<ref bean="fileExplorerItemDao"/>
+				</entry>
+				<entry key="flvRecordingDao">
+					<ref bean="flvRecordingDao"/>
+				</entry>
+				<entry key="flvRecordingMetaDataDao">
+					<ref bean="flvRecordingMetaDataDao"/>
+				</entry>
+				<entry key="roomModeratorsDao">
+					<ref bean="roomModeratorsDao"/>
+				</entry>
+				<entry key="usersDao">
+					<ref bean="usersDao"/>
+				</entry>
+				<entry key="meetingMemberDao">
+					<ref bean="meetingMemberDao"/>
+				</entry>
+				<entry key="ldapConfigDao">
+					<ref bean="ldapConfigDao"/>
+				</entry>
+				<entry key="privateMessagesDao">
+					<ref bean="privateMessagesDao"/>
+				</entry>
+				<entry key="privateMessageFolderDao">
+					<ref bean="privateMessageFolderDao"/>
+				</entry>
+				<entry key="userContactsDao">
+					<ref bean="userContactsDao"/>
+				</entry>
+				<entry key="statemanagement">
+					<ref bean="statemanagement"/>
+				</entry>
+				<entry key="omTimeZoneDaoImpl">
+					<ref bean="omTimeZoneDaoImpl"/>
+				</entry>
+				<entry key="appointmentCategoryDaoImpl">
+					<ref bean="appointmentCategoryDaoImpl"/>
+				</entry>
+				<entry key="appointmentReminderTypDaoImpl">
+					<ref bean="appointmentReminderTypDaoImpl"/>
+				</entry>
+				<entry key="appointmentLogic">
+					<ref bean="appointmentLogic"/>
+				</entry>
+				<entry key="fieldLanguageDaoImpl">
+					<ref bean="fieldLanguageDaoImpl"/>
+				</entry>
 			</map>
 		</property>
 	</bean>

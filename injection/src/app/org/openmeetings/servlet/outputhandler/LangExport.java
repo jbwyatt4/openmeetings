@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -26,7 +27,6 @@ import org.openmeetings.app.persistence.beans.lang.Fieldvalues;
 import org.openmeetings.app.remote.red5.ScopeApplicationAdapter;
 import org.red5.logging.Red5LoggerFactory;
 import org.slf4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * 
@@ -35,17 +35,22 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 public class LangExport extends HttpServlet {
 	private static final long serialVersionUID = 243294279856160463L;
-	private static final Logger log = Red5LoggerFactory.getLogger(
-			LangExport.class, ScopeApplicationAdapter.webAppRootKey);
-	@Autowired
+	private static final Logger log = Red5LoggerFactory.getLogger(LangExport.class, ScopeApplicationAdapter.webAppRootKey);
+
 	private Sessionmanagement sessionManagement;
-	@Autowired
 	private Usermanagement userManagement;
-	@Autowired
 	private Fieldmanagment fieldmanagment;
-	@Autowired
 	private FieldLanguageDaoImpl fieldLanguageDaoImpl;
 
+	@Override
+	public void init(ServletConfig config) throws ServletException {
+		super.init(config);
+		sessionManagement = (Sessionmanagement)config.getServletContext().getAttribute("sessionManagement");
+		userManagement = (Usermanagement)config.getServletContext().getAttribute("userManagement");
+		fieldmanagment = (Fieldmanagment)config.getServletContext().getAttribute("fieldmanagment");
+		fieldLanguageDaoImpl = (FieldLanguageDaoImpl)config.getServletContext().getAttribute("fieldLanguageDaoImpl");
+	}
+	
 	/*
 	 * (non-Javadoc)
 	 * 
