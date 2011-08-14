@@ -1,6 +1,5 @@
 package org.openmeetings.app.data.conference;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -34,6 +33,7 @@ import org.openmeetings.utils.crypt.MD5;
 import org.openmeetings.utils.crypt.ManageCryptStyle;
 import org.openmeetings.utils.mail.IcalHandler;
 import org.openmeetings.utils.mail.MailHandler;
+import org.openmeetings.utils.mail.MailiCalThread;
 import org.openmeetings.utils.math.CalendarPatterns;
 import org.red5.logging.Red5LoggerFactory;
 import org.slf4j.Logger;
@@ -71,8 +71,8 @@ public class Invitationmanagement {
 	private UsersDaoImpl usersDao;
 	@Autowired
 	private MailHandler mailHandler;
-
-	private final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
+	@Autowired
+	private MailiCalThread mailiCalThread;
 
 	/**
 	 * Sending invitation within plain mail
@@ -678,7 +678,9 @@ public class Invitationmanagement {
 		// Defining Organizer
 		Users user = userManagement.getUserById(organizer_userId);
 
-		OmTimeZone omTimeZone = omTimeZoneDaoImpl.getOmTimeZone(jNameTimeZone);
+		// TODO: Check time zone handling in iCal Mail
+		// OmTimeZone omTimeZone =
+		// omTimeZoneDaoImpl.getOmTimeZone(jNameTimeZone);
 
 		IcalHandler handler = new IcalHandler(IcalHandler.ICAL_METHOD_CANCEL);
 
@@ -702,14 +704,13 @@ public class Invitationmanagement {
 		GregorianCalendar end = new GregorianCalendar();
 		end.setTime(enddate);
 
-		String meetingId = handler.addNewMeeting(start, end,
-				point.getAppointmentName(), atts, subject, attendeeList,
-				point.getIcalId(), jNameTimeZone);
+		handler.addNewMeeting(start, end, point.getAppointmentName(), atts,
+				subject, attendeeList, point.getIcalId(), jNameTimeZone);
 
 		log.debug(handler.getICalDataAsString());
 
-		MailHandler.sendIcalMessage(email, subject,
-				handler.getIcalAsByteArray(), message);
+		mailiCalThread.doSend(email, subject, handler.getIcalAsByteArray(),
+				message);
 
 		return null;
 	}
@@ -756,14 +757,13 @@ public class Invitationmanagement {
 		GregorianCalendar end = new GregorianCalendar();
 		end.setTime(endtime);
 
-		String meetingId = handler.addNewMeeting(start, end,
-				point.getAppointmentName(), atts, subject, attendeeList,
-				point.getIcalId(), jNameTimeZone);
+		handler.addNewMeeting(start, end, point.getAppointmentName(), atts,
+				subject, attendeeList, point.getIcalId(), jNameTimeZone);
 
 		log.debug(handler.getICalDataAsString());
 
-		MailHandler.sendIcalMessage(email, subject,
-				handler.getIcalAsByteArray(), message);
+		mailiCalThread.doSend(email, subject, handler.getIcalAsByteArray(),
+				message);
 
 		return null;
 	}
@@ -842,8 +842,8 @@ public class Invitationmanagement {
 
 			log.debug(handler.getICalDataAsString());
 
-			MailHandler.sendIcalMessage(email, subject,
-					handler.getIcalAsByteArray(), template);
+			mailiCalThread.doSend(email, subject, handler.getIcalAsByteArray(),
+					template);
 
 			return "success";
 			// return MailHandler.sendMail(email, subject, template);

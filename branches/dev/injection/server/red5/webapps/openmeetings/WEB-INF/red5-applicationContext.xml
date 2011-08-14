@@ -181,8 +181,25 @@
 	<!--  Templates -->
 	<bean id="registerUserTemplate" class="org.openmeetings.app.templates.RegisterUserTemplate" />
 	
+	<!-- Thread Executor -->
+	<bean id="mailTaskExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+	  <property name="corePoolSize" value="5" />
+	  <property name="maxPoolSize" value="10" />
+	  <property name="queueCapacity" value="25" />
+	</bean>
+
+	<bean id="mailThread" class="org.openmeetings.utils.mail.MailThread">
+	   <constructor-arg ref="mailTaskExecutor" />
+	</bean>
+	
+	<bean id="mailiCalThread" class="org.openmeetings.utils.mail.MailiCalThread">
+       <constructor-arg ref="mailTaskExecutor" />
+    </bean>
+	
+	
 
 	<tx:annotation-driven transaction-manager="jpaTransactionManager"/>
+	
 	<context:annotation-config/>
 	
 </beans>
