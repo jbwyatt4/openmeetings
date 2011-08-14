@@ -14,12 +14,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class MailHandler {
 
 	private static final Logger log = Red5LoggerFactory.getLogger(MailHandler.class, ScopeApplicationAdapter.webAppRootKey);
-	@Autowired //FIXME
-	static private Configurationmanagement cfgManagement;
+	@Autowired
+	private Configurationmanagement cfgManagement;
 	
-	public MailHandler() {
-	}
-
 	/**
 	 * send mail to address
 	 * 
@@ -28,7 +25,7 @@ public class MailHandler {
 	 * @param message
 	 * @return
 	 */
-	public static String sendMail(String toEmail, String subj, String message) {
+	public String sendMail(String toEmail, String subj, String message) {
 		try {
 
 			// String smtpServer="smtp.xmlcrm.org";

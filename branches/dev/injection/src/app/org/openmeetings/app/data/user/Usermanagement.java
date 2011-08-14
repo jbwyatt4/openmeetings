@@ -91,6 +91,8 @@ public class Usermanagement {
 	private UserSipDataDaoImpl userSipDataDao;
 	@Autowired
 	private ScopeApplicationAdapter scopeApplicationAdapter;
+	@Autowired
+	private MailHandler mailHandler;
 
 	/**
 	 * query for a list of users
@@ -1489,7 +1491,7 @@ public class Usermanagement {
 		Fieldlanguagesvalues labelid517 = fieldmanagment
 				.getFieldByIdAndLanguage(new Long(517), default_lang_id);
 
-		MailHandler.sendMail(email, labelid517.getValue(), template);
+		mailHandler.sendMail(email, labelid517.getValue(), template);
 	}
 
 	/**

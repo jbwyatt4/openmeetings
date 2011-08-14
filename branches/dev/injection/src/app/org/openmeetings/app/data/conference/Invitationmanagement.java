@@ -69,6 +69,8 @@ public class Invitationmanagement {
 	private Roommanagement roommanagement;
 	@Autowired
 	private UsersDaoImpl usersDao;
+	@Autowired
+	private MailHandler mailHandler;
 
 	private final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
 
@@ -574,7 +576,7 @@ public class Invitationmanagement {
 
 			System.out.println(template);
 
-			return MailHandler.sendMail(email, subject, template);
+			return mailHandler.sendMail(email, subject, template);
 
 		} catch (Exception err) {
 			log.error("sendInvitationLink", err);
@@ -605,7 +607,7 @@ public class Invitationmanagement {
 			message += "<a href='" + invitation_link
 					+ "'>Click here to enter room</a>";
 
-			return MailHandler.sendMail(email, subject, message);
+			return mailHandler.sendMail(email, subject, message);
 		} catch (Exception e) {
 			log.error("sendInvitationReminderLink", e);
 		}
@@ -627,7 +629,7 @@ public class Invitationmanagement {
 			String cancelling_person, String subject, String message) {
 		log.debug("sendInvitationCancelmail");
 		try {
-			return MailHandler.sendMail(email, subject, message);
+			return mailHandler.sendMail(email, subject, message);
 		} catch (Exception e) {
 			log.error("sendInvitationCancelmail : " + e.getMessage());
 		}
@@ -649,7 +651,7 @@ public class Invitationmanagement {
 			String cancelling_person, String subject, String message) {
 		log.debug("sendInvitationUpdateMail");
 		try {
-			return MailHandler.sendMail(email, subject, message);
+			return mailHandler.sendMail(email, subject, message);
 		} catch (Exception e) {
 			log.error("sendInvitationUpdateMail : " + e.getMessage());
 		}
@@ -887,7 +889,7 @@ public class Invitationmanagement {
 								invitation_link, default_lang_id, starttime,
 								endtime);
 
-				return MailHandler.sendMail(email, subject, template);
+				return mailHandler.sendMail(email, subject, template);
 
 			}
 		} catch (Exception err) {
