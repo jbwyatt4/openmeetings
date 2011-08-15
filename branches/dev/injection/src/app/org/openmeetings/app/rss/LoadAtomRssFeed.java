@@ -21,21 +21,12 @@ public class LoadAtomRssFeed {
 	private static final Logger log = Red5LoggerFactory.getLogger(LoadAtomRssFeed.class, ScopeApplicationAdapter.webAppRootKey);
 	@Autowired
 	private Configurationmanagement cfgManagement;
-	
-	private static LoadAtomRssFeed instance;
-
-	private LoadAtomRssFeed() {}
-
-	public static synchronized LoadAtomRssFeed getInstance() {
-		if (instance == null) {
-			instance = new LoadAtomRssFeed();
-		}
-		return instance;
-	}
+	@Autowired
+	private AuthLevelmanagement authLevelmanagement;
 	
 	public LinkedHashMap<String,LinkedHashMap<String,LinkedHashMap<String,LinkedHashMap<String,Object>>>> getRssFeeds(Long user_level){
 		try {
-			if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)){
+			if (authLevelmanagement.checkUserLevel(user_level)){
 				LinkedHashMap<String,LinkedHashMap<String,LinkedHashMap<String,LinkedHashMap<String,Object>>>> returnMap = new LinkedHashMap<String,LinkedHashMap<String,LinkedHashMap<String,LinkedHashMap<String,Object>>>>();
 				
 				String url1 = cfgManagement.getConfKey(3,"rss_feed1").getConf_value();

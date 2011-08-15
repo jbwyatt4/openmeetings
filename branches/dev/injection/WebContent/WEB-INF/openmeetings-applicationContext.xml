@@ -111,6 +111,9 @@
 				<entry key="importInitvalues">
                     <ref bean="importInitvalues"/>
                 </entry>
+				<entry key="authLevelManagement">
+                    <ref bean="authLevelManagement"/>
+                </entry>
 			</map>
 		</property>
 	</bean>
@@ -208,6 +211,9 @@
 	<bean id="mailHandler" class="org.openmeetings.utils.mail.MailHandler" />
 	<bean id="feedbackManagement" class="org.openmeetings.app.data.conference.Feedbackmanagement" />
 	<bean id="importInitvalues" class="org.openmeetings.app.installation.ImportInitvalues" />
+	<bean id="libraryWmlLoader" class="org.openmeetings.app.documents.LibraryWmlLoader" />
+	<bean id="loadAtomRssFeed" class="org.openmeetings.app.rss.LoadAtomRssFeed" />
+	<bean id="authLevelManagement" class="org.openmeetings.app.data.basic.AuthLevelmanagement" />
 	
 	<!--  Templates -->
 	<bean id="registerUserTemplate" class="org.openmeetings.app.templates.RegisterUserTemplate" />

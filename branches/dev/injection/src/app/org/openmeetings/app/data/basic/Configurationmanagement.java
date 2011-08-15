@@ -35,10 +35,12 @@ public class Configurationmanagement {
 	private EntityManager em;
 	@Autowired
 	private UsersDaoImpl usersDao;
+	@Autowired
+	private AuthLevelmanagement authLevelManagement;
 
 	public Configuration getConfKey(long user_level, String CONF_KEY) {
 		try {
-			if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
+			if (authLevelManagement.checkUserLevel(user_level)) {
 				Configuration configuration = null;
 				Query query = em
 						.createQuery("select c from Configuration as c where c.conf_key = :conf_key and c.deleted = :deleted");
@@ -64,7 +66,7 @@ public class Configurationmanagement {
 			long configuration_id) {
 		try {
 			log.debug("getConfByConfigurationId1: user_level " + user_level);
-			if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)) {
+			if (authLevelManagement.checkAdminLevel(user_level)) {
 				Configuration configuration = null;
 				Query query = em
 						.createQuery("select c from Configuration as c where c.configuration_id = :configuration_id");
@@ -94,7 +96,7 @@ public class Configurationmanagement {
 	public SearchResult getAllConf(long user_level, int start, int max,
 			String orderby, boolean asc) {
 		try {
-			if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)) {
+			if (authLevelManagement.checkAdminLevel(user_level)) {
 				SearchResult sresult = new SearchResult();
 				sresult.setRecords(this.selectMaxFromConfigurations());
 				sresult.setResult(this.getConfigurations(start, max, orderby,
@@ -158,7 +160,7 @@ public class Configurationmanagement {
 	public String addConfByKey(long user_level, String CONF_KEY,
 			String CONF_VALUE, Long USER_ID, String comment) {
 		String ret = "Add Configuration";
-		if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)) {
+		if (authLevelManagement.checkAdminLevel(user_level)) {
 			Configuration configuration = new Configuration();
 			configuration.setConf_key(CONF_KEY);
 			configuration.setConf_value(CONF_VALUE);
@@ -182,7 +184,7 @@ public class Configurationmanagement {
 	public Long saveOrUpdateConfiguration(long user_level,
 			LinkedHashMap values, Long users_id) {
 		try {
-			if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)) {
+			if (authLevelManagement.checkAdminLevel(user_level)) {
 				Configuration conf = (Configuration) CastMapToObject
 						.getInstance().castByGivenObject(values,
 								Configuration.class);
@@ -246,7 +248,7 @@ public class Configurationmanagement {
 	public Long deleteConfByConfiguration(long user_level,
 			LinkedHashMap values, Long users_id) {
 		try {
-			if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)) {
+			if (authLevelManagement.checkAdminLevel(user_level)) {
 				Configuration conf = (Configuration) CastMapToObject
 						.getInstance().castByGivenObject(values,
 								Configuration.class);

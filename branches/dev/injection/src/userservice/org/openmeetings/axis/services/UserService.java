@@ -56,6 +56,8 @@ public class UserService {
 	private UsersDaoImpl usersDao;
 	@Autowired
 	private MainService mainService;
+	@Autowired
+	private AuthLevelmanagement authLevelManagement;
 
 	/**
 	 * load this session id before doing anything else
@@ -143,7 +145,7 @@ public class UserService {
 			Long users_id = sessionManagement.checkSession(SID);
 			Long user_level = userManagement.getUserLevelByID(users_id);
 
-			if (AuthLevelmanagement.getInstance().checkWebServiceLevel(
+			if (authLevelManagement.checkWebServiceLevel(
 					user_level)) {
 
 				Configuration conf = cfgManagement.getConfKey(3L,
@@ -199,7 +201,7 @@ public class UserService {
 			Long users_id = sessionManagement.checkSession(SID);
 			Long user_level = userManagement.getUserLevelByID(users_id);
 
-			if (AuthLevelmanagement.getInstance().checkWebServiceLevel(
+			if (authLevelManagement.checkWebServiceLevel(
 					user_level)) {
 
 				Long user_id = userManagement.registerUser(username, userpass,
@@ -272,7 +274,7 @@ public class UserService {
 			Long users_id = sessionManagement.checkSession(SID);
 			Long user_level = userManagement.getUserLevelByID(users_id);
 
-			if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)) {
+			if (authLevelManagement.checkAdminLevel(user_level)) {
 
 				Users testUser = userManagement.getUserByExternalIdAndType(
 						externalUserId, externalUserType);
@@ -329,7 +331,7 @@ public class UserService {
 			Long users_id = sessionManagement.checkSession(SID);
 			Long user_level = userManagement.getUserLevelByID(users_id);
 
-			if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)) {
+			if (authLevelManagement.checkAdminLevel(user_level)) {
 
 				// Setting user deleted
 				usersDao.deleteUserID(userId);
@@ -376,7 +378,7 @@ public class UserService {
 			Long users_id = sessionManagement.checkSession(SID);
 			Long user_level = userManagement.getUserLevelByID(users_id);
 
-			if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)) {
+			if (authLevelManagement.checkAdminLevel(user_level)) {
 
 				Users userExternal = userManagement.getUserByExternalIdAndType(
 						externalUserId, externalUserType);
@@ -430,7 +432,7 @@ public class UserService {
 		try {
 			Long users_id = sessionManagement.checkSession(SID);
 			Long user_level = userManagement.getUserLevelByID(users_id);
-			if (AuthLevelmanagement.getInstance().checkWebServiceLevel(
+			if (authLevelManagement.checkWebServiceLevel(
 					user_level)) {
 
 				RemoteSessionObject remoteSessionObject = new RemoteSessionObject(
@@ -490,7 +492,7 @@ public class UserService {
 		try {
 			Long users_id = sessionManagement.checkSession(SID);
 			Long user_level = userManagement.getUserLevelByID(users_id);
-			if (AuthLevelmanagement.getInstance().checkWebServiceLevel(
+			if (authLevelManagement.checkWebServiceLevel(
 					user_level)) {
 
 				RemoteSessionObject remoteSessionObject = new RemoteSessionObject(
@@ -534,7 +536,7 @@ public class UserService {
 		try {
 			Long users_id = sessionManagement.checkSession(SID);
 			Long user_level = userManagement.getUserLevelByID(users_id);
-			if (AuthLevelmanagement.getInstance().checkWebServiceLevel(
+			if (authLevelManagement.checkWebServiceLevel(
 					user_level)) {
 
 				RemoteSessionObject remoteSessionObject = new RemoteSessionObject(
@@ -600,7 +602,7 @@ public class UserService {
 		try {
 			Long users_id = sessionManagement.checkSession(SID);
 			Long user_level = userManagement.getUserLevelByID(users_id);
-			if (AuthLevelmanagement.getInstance().checkWebServiceLevel(
+			if (authLevelManagement.checkWebServiceLevel(
 					user_level)) {
 
 				RemoteSessionObject remoteSessionObject = new RemoteSessionObject(
@@ -665,7 +667,7 @@ public class UserService {
 		try {
 			Long users_id = sessionManagement.checkSession(SID);
 			Long user_level = userManagement.getUserLevelByID(users_id);
-			if (AuthLevelmanagement.getInstance().checkWebServiceLevel(
+			if (authLevelManagement.checkWebServiceLevel(
 					user_level)) {
 
 				RemoteSessionObject remoteSessionObject = new RemoteSessionObject(
@@ -734,7 +736,7 @@ public class UserService {
 		try {
 			Long users_id = sessionManagement.checkSession(SID);
 			Long user_level = userManagement.getUserLevelByID(users_id);
-			if (AuthLevelmanagement.getInstance().checkWebServiceLevel(
+			if (authLevelManagement.checkWebServiceLevel(
 					user_level)) {
 
 				RemoteSessionObject remoteSessionObject = new RemoteSessionObject(
@@ -794,7 +796,7 @@ public class UserService {
 
 			Long users_id = sessionManagement.checkSession(SID);
 			Long user_level = userManagement.getUserLevelByID(users_id);
-			if (AuthLevelmanagement.getInstance().checkWebServiceLevel(
+			if (authLevelManagement.checkWebServiceLevel(
 					user_level)) {
 
 				RemoteSessionObject remoteSessionObject = new RemoteSessionObject(
@@ -861,7 +863,7 @@ public class UserService {
 		try {
 			Long users_id = sessionManagement.checkSession(SID);
 			Long user_level = userManagement.getUserLevelByID(users_id);
-			if (AuthLevelmanagement.getInstance().checkWebServiceLevel(
+			if (authLevelManagement.checkWebServiceLevel(
 					user_level)) {
 
 				RemoteSessionObject remoteSessionObject = new RemoteSessionObject(
@@ -911,7 +913,7 @@ public class UserService {
 		try {
 			Long users_id = sessionManagement.checkSession(SID);
 			Long user_level = userManagement.getUserLevelByID(users_id);
-			if (AuthLevelmanagement.getInstance().checkWebServiceLevel(
+			if (authLevelManagement.checkWebServiceLevel(
 					user_level)) {
 
 				return organisationmanagement.addUserToOrganisation(user_id,
@@ -932,7 +934,7 @@ public class UserService {
 		try {
 			Long users_id = sessionManagement.checkSession(SID);
 			Long user_level = userManagement.getUserLevelByID(users_id);
-			if (AuthLevelmanagement.getInstance().checkWebServiceLevel(
+			if (authLevelManagement.checkWebServiceLevel(
 					user_level)) {
 				return organisationmanagement
 						.getUsersSearchResultByOrganisationId(organisation_id,

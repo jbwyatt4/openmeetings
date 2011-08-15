@@ -43,6 +43,7 @@ public class Export extends HttpServlet {
 	private Usermanagement userManagement;
 	private Organisationmanagement organisationmanagement;
 	private UsersDaoImpl usersDao;
+	private AuthLevelmanagement authLevelManagement;
 
 	@Override
 	public void init(ServletConfig config) throws ServletException {
@@ -51,6 +52,7 @@ public class Export extends HttpServlet {
 		userManagement = (Usermanagement)config.getServletContext().getAttribute("userManagement");
 		organisationmanagement = (Organisationmanagement)config.getServletContext().getAttribute("organisationmanagement");
 		usersDao = (UsersDaoImpl)config.getServletContext().getAttribute("usersDao");
+		authLevelManagement = (AuthLevelmanagement)config.getServletContext().getAttribute("authLevelManagement");
 	}
 	
 	/*
@@ -79,7 +81,7 @@ public class Export extends HttpServlet {
 			System.out.println("user_level: " + user_level);
 
 			// if (user_level!=null && user_level > 0) {
-			if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
+			if (authLevelManagement.checkUserLevel(user_level)) {
 
 				String moduleName = httpServletRequest
 						.getParameter("moduleName");

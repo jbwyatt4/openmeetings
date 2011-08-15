@@ -3,14 +3,14 @@ package org.openmeetings.test.domain;
 import java.util.Iterator;
 import java.util.List;
 
-import junit.framework.TestCase;
-
 import org.apache.log4j.Logger;
+import org.junit.Test;
 import org.openmeetings.app.data.user.Organisationmanagement;
 import org.openmeetings.app.persistence.beans.domain.Organisation;
+import org.openmeetings.test.AbstractOpenmeetingsSpringTest;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class TestUserGroupAggregation extends TestCase {
+public class TestUserGroupAggregation extends AbstractOpenmeetingsSpringTest {
 
 	@Autowired
 	private Organisationmanagement organisationmanagement;
@@ -18,10 +18,7 @@ public class TestUserGroupAggregation extends TestCase {
 	private static final Logger log = Logger
 			.getLogger(TestUserGroupAggregation.class);
 
-	public TestUserGroupAggregation(String testname) {
-		super(testname);
-	}
-
+	@Test
 	public void testitNow() {
 
 		List orgUser = organisationmanagement.getOrganisationsByUserId(3, 1, 0,

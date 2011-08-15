@@ -75,6 +75,8 @@ public class Invitationmanagement {
 	private MailiCalThread mailiCalThread;
 	@Autowired
 	private InvitationTemplate invitationTemplate;
+	@Autowired
+	private AuthLevelmanagement authLevelManagement;
 
 	/**
 	 * Sending invitation within plain mail
@@ -104,7 +106,7 @@ public class Invitationmanagement {
 			Long language_id, Boolean sendMail, Date gmtTimeStart,
 			Date gmtTimeEnd, Long appointmentId) {
 		try {
-			if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
+			if (authLevelManagement.checkUserLevel(user_level)) {
 
 				Invitations invitation = new Invitations();
 				invitation.setIsPasswordProtected(isPasswordProtected);
@@ -465,7 +467,7 @@ public class Invitationmanagement {
 		log.debug("addInvitationIcalLink");
 
 		try {
-			if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
+			if (authLevelManagement.checkUserLevel(user_level)) {
 
 				Invitations invitation = new Invitations();
 				invitation.setIsPasswordProtected(isPasswordProtected);
@@ -875,7 +877,7 @@ public class Invitationmanagement {
 			String baseurl, String email, String subject, Long room_id,
 			Date starttime, Date endtime) {
 		try {
-			if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
+			if (authLevelManagement.checkUserLevel(user_level)) {
 
 				String invitation_link = baseurl
 						+ "?lzproxied=solo&lzr=swf8&lzt=swf&domain=" + domain

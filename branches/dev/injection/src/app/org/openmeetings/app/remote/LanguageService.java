@@ -37,6 +37,8 @@ public class LanguageService {
 	private Fieldmanagment fieldmanagment;
 	@Autowired
 	private FieldLanguageDaoImpl fieldLanguageDaoImpl;
+	@Autowired
+	private AuthLevelmanagement authLevelManagement;
 
 	/**
 	 * get a List of all availible Languages
@@ -79,7 +81,7 @@ public class LanguageService {
 			Long language_id) {
 		Long users_id = sessionManagement.checkSession(SID);
 		Long user_level = userManagement.getUserLevelByID(users_id);
-		if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)) {
+		if (authLevelManagement.checkAdminLevel(user_level)) {
 			return fieldmanagment.getFieldvaluesById(fieldvalues_id,
 					language_id);
 		}
@@ -89,7 +91,7 @@ public class LanguageService {
 	public Long addLanguage(String SID, String langName) {
 		Long users_id = sessionManagement.checkSession(SID);
 		Long user_level = userManagement.getUserLevelByID(users_id);
-		if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)) {
+		if (authLevelManagement.checkAdminLevel(user_level)) {
 			if (langName.length() == 0)
 				return new Long(-30);
 			return fieldLanguageDaoImpl.addLanguage(langName, false);
@@ -100,7 +102,7 @@ public class LanguageService {
 	public Long updateLanguage(String SID, Long language_id, String langName) {
 		Long users_id = sessionManagement.checkSession(SID);
 		Long user_level = userManagement.getUserLevelByID(users_id);
-		if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)) {
+		if (authLevelManagement.checkAdminLevel(user_level)) {
 			if (langName.length() == 0)
 				return new Long(-30);
 			return fieldLanguageDaoImpl.updateFieldLanguage(language_id,
@@ -112,7 +114,7 @@ public class LanguageService {
 	public Long deleteLanguage(String SID, Long language_id) {
 		Long users_id = sessionManagement.checkSession(SID);
 		Long user_level = userManagement.getUserLevelByID(users_id);
-		if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)) {
+		if (authLevelManagement.checkAdminLevel(user_level)) {
 			return fieldLanguageDaoImpl.updateFieldLanguage(language_id, "",
 					"true");
 		}
@@ -123,7 +125,7 @@ public class LanguageService {
 			Long fieldlanguagesvalues_id) {
 		Long users_id = sessionManagement.checkSession(SID);
 		Long user_level = userManagement.getUserLevelByID(users_id);
-		if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)) {
+		if (authLevelManagement.checkAdminLevel(user_level)) {
 			return fieldmanagment
 					.deleteFieldlanguagesvaluesById(fieldlanguagesvalues_id);
 		}
@@ -144,7 +146,7 @@ public class LanguageService {
 			String orderby, boolean asc, Long language_id) {
 		Long users_id = sessionManagement.checkSession(SID);
 		Long user_level = userManagement.getUserLevelByID(users_id);
-		if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)) {
+		if (authLevelManagement.checkAdminLevel(user_level)) {
 			return fieldmanagment.getFieldsByLanguage(start, max, orderby, asc,
 					language_id);
 		}
@@ -171,7 +173,7 @@ public class LanguageService {
 			Long language_id = Long.valueOf(
 					values.get("language_id").toString()).longValue();
 			String value = values.get("value").toString();
-			if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)) {
+			if (authLevelManagement.checkAdminLevel(user_level)) {
 				if (fieldvalues_id > 0 && fieldlanguagesvalues_id > 0) {
 					log.error("UPDATE LABEL");
 					return fieldmanagment.updateLabel(fieldvalues_id, name,

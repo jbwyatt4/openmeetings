@@ -84,6 +84,8 @@ public class StreamService implements IPendingServiceCallback {
 	private RecordingConversionJobDaoImpl recordingConversionJobDao;
 	@Autowired
 	private ScopeApplicationAdapter scopeApplicationAdapter;
+	@Autowired
+	private AuthLevelmanagement authLevelManagement;
 
 	private static final Logger log = Red5LoggerFactory.getLogger(
 			StreamService.class, ScopeApplicationAdapter.webAppRootKey);
@@ -567,7 +569,7 @@ public class StreamService implements IPendingServiceCallback {
 			Long users_id = sessionManagement.checkSession(SID);
 			Long user_level = userManagement.getUserLevelByID(users_id);
 
-			if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
+			if (authLevelManagement.checkUserLevel(user_level)) {
 
 				String whereClause = "";
 
@@ -635,7 +637,7 @@ public class StreamService implements IPendingServiceCallback {
 			Long users_id = sessionManagement.checkSession(SID);
 			Long user_level = userManagement.getUserLevelByID(users_id);
 
-			if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
+			if (authLevelManagement.checkUserLevel(user_level)) {
 				Recording rec = recordingDao.getRecordingById(recording_id);
 
 				rec.getRoomRecording().setRoomClients(
@@ -930,7 +932,7 @@ public class StreamService implements IPendingServiceCallback {
 		try {
 			Long users_id = sessionManagement.checkSession(SID);
 			Long user_level = userManagement.getUserLevelByID(users_id);
-			if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
+			if (authLevelManagement.checkUserLevel(user_level)) {
 				Recording rec = recordingDao.getRecordingById(recording_id);
 				if (rec != null) {
 					rec.setDeleted("true");

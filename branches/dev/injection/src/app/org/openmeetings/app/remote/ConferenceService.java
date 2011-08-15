@@ -64,6 +64,8 @@ public class ConferenceService {
 	private Roommanagement roommanagement;
 	@Autowired
 	private RoomModeratorsDaoImpl roomModeratorsDao;
+	@Autowired
+	private AuthLevelmanagement authLevelManagement;
 
 	// beans, see chaservice.service.xml
 	private ClientListManager clientListManager = null;
@@ -406,7 +408,7 @@ public class ConferenceService {
 			Long users_id = sessionManagement.checkSession(SID);
 			Long user_level = userManagement.getUserLevelByID(users_id);
 
-			if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
+			if (authLevelManagement.checkUserLevel(user_level)) {
 				List<Appointment> appointments = appointmentLogic
 						.getTodaysAppointmentsForUser(users_id);
 				List<Rooms> result = new ArrayList<Rooms>();
@@ -688,7 +690,7 @@ public class ConferenceService {
 			Long users_id = sessionManagement.checkSession(SID);
 			long user_level = userManagement.getUserLevelByID(users_id);
 
-			if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
+			if (authLevelManagement.checkUserLevel(user_level)) {
 
 				return roomModeratorsDao.getRoomModeratorByRoomId(roomId);
 
@@ -755,7 +757,7 @@ public class ConferenceService {
 		try {
 			Long users_id = sessionManagement.checkSession(SID);
 			Long user_level = userManagement.getUserLevelByID(users_id);
-			if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)) {
+			if (authLevelManagement.checkAdminLevel(user_level)) {
 				return this.clientListManager.getListByStartAndMax(start, max,
 						orderby, asc);
 			}
@@ -790,7 +792,7 @@ public class ConferenceService {
 			String roomName) {
 		Long users_id = sessionManagement.checkSession(SID);
 		Long user_level = userManagement.getUserLevelByID(users_id);
-		if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
+		if (authLevelManagement.checkUserLevel(user_level)) {
 			return roommanagement.getRoomByOwnerAndTypeId(users_id,
 					roomtypesId, roomName);
 		}

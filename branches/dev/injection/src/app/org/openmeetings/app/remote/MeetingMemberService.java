@@ -16,6 +16,8 @@ public class MeetingMemberService {
 	private Sessionmanagement sessionManagement;
     @Autowired
     private Usermanagement userManagement;
+	@Autowired
+	private AuthLevelmanagement authLevelManagement;
 	
 	private static MeetingMemberService instance = null;
 
@@ -39,7 +41,7 @@ public class MeetingMemberService {
 //			
 //			Long users_id = Sessionmanagement.getInstance().checkSession(SID);
 //	        Long user_level = userManagement.getUserLevelByID(users_id);
-//	        if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
+//	        if (authLevelManagement.checkUserLevel(user_level)) {
 //					        	
 //	        Long id = MeetingMemberLogic.getInstance().addMeetingMember( firstname,  lastname,  memberStatus,
 //	    			 appointmentStatus,  appointmentId,  userid,  email, baseUrl, users_id, false, 
@@ -62,7 +64,7 @@ public class MeetingMemberService {
 			
 			Long users_id = sessionManagement.checkSession(SID);
 	        Long user_level = userManagement.getUserLevelByID(users_id);
-	        if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
+	        if (authLevelManagement.checkUserLevel(user_level)) {
 					        	
 	        return	 MeetingMemberLogic.getInstance().updateMeetingMember(meetingMemberId, 
 	        		firstname, lastname, memberStatus, appointmentStatus, appointmentId, userid, email);
@@ -81,7 +83,7 @@ public class MeetingMemberService {
 			
 			Long users_id = sessionManagement.checkSession(SID);
 	        Long user_level = userManagement.getUserLevelByID(users_id);
-	        if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
+	        if (authLevelManagement.checkUserLevel(user_level)) {
 					        	
 	        return	 MeetingMemberLogic.getInstance().deleteMeetingMember(meetingMemberId, users_id, language_id);
 	        }

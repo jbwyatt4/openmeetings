@@ -46,6 +46,8 @@ public class FileService {
     private Usermanagement userManagement;
 	@Autowired
 	private FileExplorerItemDaoImpl fileExplorerItemDao;
+	@Autowired
+	private AuthLevelmanagement authLevelManagement;
 
 	public ServletContext getServletContext()
 	{
@@ -89,7 +91,7 @@ public class FileService {
 			Long users_id = sessionManagement.checkSession(SID);
 	        Long User_level = userManagement.getUserLevelByID(users_id);
 			
-	        if (AuthLevelmanagement.getInstance().checkWebServiceLevel(User_level)){
+	        if (authLevelManagement.checkWebServiceLevel(User_level)){
 	        	
 				String current_dir = getServletContext().getRealPath("/");
 				
@@ -179,7 +181,7 @@ public class FileService {
 			Long users_id = sessionManagement.checkSession(SID);
 	        Long User_level = userManagement.getUserLevelByID(users_id);
 			
-	        if (AuthLevelmanagement.getInstance().checkWebServiceLevel(User_level)){
+	        if (authLevelManagement.checkWebServiceLevel(User_level)){
 	        	
 				String current_dir = getServletContext().getRealPath("/");
 				
@@ -259,7 +261,7 @@ public class FileService {
 			Long users_id = sessionManagement.checkSession(SID);
 	        Long User_level = userManagement.getUserLevelByID(users_id);
 			
-	        if (AuthLevelmanagement.getInstance().checkWebServiceLevel(User_level)){
+	        if (authLevelManagement.checkWebServiceLevel(User_level)){
 	        	
 	        	Users userExternal = userManagement.getUserByExternalIdAndType(externalUserId, externalType);
 				
@@ -325,7 +327,7 @@ public class FileService {
 			Long users_id = sessionManagement.checkSession(SID);
 	        Long User_level = userManagement.getUserLevelByID(users_id);
 			
-	        if (AuthLevelmanagement.getInstance().checkWebServiceLevel(User_level)){
+	        if (authLevelManagement.checkWebServiceLevel(User_level)){
 	        	
 	        	log.debug("addFolder " + parentFileExplorerItemId);
 
@@ -380,7 +382,7 @@ public class FileService {
             Long users_id = sessionManagement.checkSession(SID);
             Long user_level = userManagement.getUserLevelByID(
                     users_id);
-            if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
+            if (authLevelManagement.checkUserLevel(user_level)) {
 
                 log.debug("addFolder " + parentFileExplorerItemId);
 
@@ -433,7 +435,7 @@ public class FileService {
 			Long users_id = sessionManagement.checkSession(SID);
 	        Long User_level = userManagement.getUserLevelByID(users_id);
 			
-	        if (AuthLevelmanagement.getInstance().checkWebServiceLevel(User_level)){
+	        if (authLevelManagement.checkWebServiceLevel(User_level)){
 	        	
 	        	fileExplorerItemDao.deleteFileExplorerItemByExternalIdAndType(
 	        			externalFilesid, externalType);
@@ -461,7 +463,7 @@ public class FileService {
 			Long users_id = sessionManagement.checkSession(SID);
 	        Long User_level = userManagement.getUserLevelByID(users_id);
 			
-	        if (AuthLevelmanagement.getInstance().checkWebServiceLevel(User_level)){
+	        if (authLevelManagement.checkWebServiceLevel(User_level)){
 	        	
 	        	fileExplorerItemDao.deleteFileExplorerItem(
                         fileExplorerItemId);
@@ -489,7 +491,7 @@ public class FileService {
 			Long users_id = sessionManagement.checkSession(SID);
 	        Long User_level = userManagement.getUserLevelByID(users_id);
 			
-	        if (AuthLevelmanagement.getInstance().checkUserLevel(User_level)){
+	        if (authLevelManagement.checkUserLevel(User_level)){
 	        	
 	        	//TODO: Check if user has access or not to the file
 	        	
@@ -524,7 +526,7 @@ public class FileService {
 	        Long user_level = userManagement.getUserLevelByID(
 	                users_id);
 	
-	        if (AuthLevelmanagement.getInstance().checkWebServiceLevel(user_level)) {
+	        if (authLevelManagement.checkWebServiceLevel(user_level)) {
 	
 	            String current_dir = ScopeApplicationAdapter.webAppPath
 	                    + File.separatorChar + "upload";
@@ -563,7 +565,7 @@ public class FileService {
 	        Long user_level = userManagement.getUserLevelByID(
 	        		webservice_users_id);
 	
-	        if (AuthLevelmanagement.getInstance().checkWebServiceLevel(user_level)) {
+	        if (authLevelManagement.checkWebServiceLevel(user_level)) {
 	        	
 	        	log.debug("room_id " + room_id);
 
@@ -621,7 +623,7 @@ public class FileService {
 	        Long user_level = userManagement.getUserLevelByID(
 	        		users_id);
 	
-	        if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
+	        if (authLevelManagement.checkUserLevel(user_level)) {
 	        	
 	        	log.debug("room_id " + room_id);
 
@@ -680,7 +682,7 @@ public class FileService {
 	        Long user_level = userManagement.getUserLevelByID(
 	        		webservice_users_id);
 	
-	        if (AuthLevelmanagement.getInstance().checkWebServiceLevel(user_level)) {
+	        if (authLevelManagement.checkWebServiceLevel(user_level)) {
 
                 log.debug("parentFileExplorerItemId "
                         + parentFileExplorerItemId);
@@ -717,7 +719,7 @@ public class FileService {
 	        Long user_level = userManagement.getUserLevelByID(
 	        		users_id);
 	
-	        if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
+	        if (authLevelManagement.checkUserLevel(user_level)) {
 
                 log.debug("parentFileExplorerItemId "
                         + parentFileExplorerItemId);
@@ -754,7 +756,7 @@ public class FileService {
 	        Long user_level = userManagement.getUserLevelByID(
 	        		webservice_users_id);
 	
-	        if (AuthLevelmanagement.getInstance().checkWebServiceLevel(user_level)) {
+	        if (authLevelManagement.checkWebServiceLevel(user_level)) {
 
                 log.debug("deleteFileOrFolder " + fileExplorerItemId);
 
@@ -777,7 +779,7 @@ public class FileService {
 	        Long user_level = userManagement.getUserLevelByID(
 	        		users_id);
 	
-	        if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
+	        if (authLevelManagement.checkUserLevel(user_level)) {
 
 	        	//TODO: check if this user is allowed to change this file
 	        	/*
@@ -810,7 +812,7 @@ public class FileService {
 	        Long user_level = userManagement.getUserLevelByID(
 	        		webservice_users_id);
 	
-	        if (AuthLevelmanagement.getInstance().checkWebServiceLevel(user_level)) {
+	        if (authLevelManagement.checkWebServiceLevel(user_level)) {
 
                 log.debug("deleteFileOrFolder " + fileExplorerItemId);
 
@@ -849,7 +851,7 @@ public class FileService {
 	        Long user_level = userManagement.getUserLevelByID(
 	        		users_id);
 	
-	        if (AuthLevelmanagement.getInstance().checkWebServiceLevel(user_level)) {
+	        if (authLevelManagement.checkWebServiceLevel(user_level)) {
 
                 log.debug("deleteFileOrFolder " + fileExplorerItemId);
 

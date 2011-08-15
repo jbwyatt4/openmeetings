@@ -29,6 +29,8 @@ public class AppointmentremindertypeService {
 	private Usermanagement userManagement;
 	@Autowired
 	private AppointmentReminderTypDaoImpl appointmentReminderTypDaoImpl;
+	@Autowired
+	private AuthLevelmanagement authLevelmanagement;
 
 	public static synchronized AppointmentremindertypeService getInstance() {
 		if (instance == null) {
@@ -51,7 +53,7 @@ public class AppointmentremindertypeService {
 		try {
 			Long users_id = sessionManagement.checkSession(SID);
 			Long user_level = userManagement.getUserLevelByID(users_id);
-			if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
+			if (authLevelmanagement.checkUserLevel(user_level)) {
 
 				List<AppointmentReminderTyps> res = appointmentReminderTypDaoImpl
 						.getAppointmentReminderTypList();

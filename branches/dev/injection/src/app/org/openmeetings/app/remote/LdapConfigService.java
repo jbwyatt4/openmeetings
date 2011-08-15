@@ -29,13 +29,15 @@ public class LdapConfigService {
 	private Sessionmanagement sessionManagement;
     @Autowired
     private Usermanagement userManagement;
+	@Autowired
+	private AuthLevelmanagement authLevelManagement;
 	
 	private static final Logger log = Red5LoggerFactory.getLogger(LdapConfigService.class, ScopeApplicationAdapter.webAppRootKey);
 	
 	public Long deleteLdapConfigById(String SID, Long ldapConfigId) {
         Long users_id = sessionManagement.checkSession(SID);
         Long user_level = userManagement.getUserLevelByID(users_id);
-        if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)){
+        if (authLevelManagement.checkAdminLevel(user_level)){
         	return this.ldapConfigDaoImpl.deleteLdapConfigById(ldapConfigId);
         }
         return null;
@@ -44,7 +46,7 @@ public class LdapConfigService {
 	public LdapConfig getLdapConfigById(String SID, Long ldapConfigId) {
         Long users_id = sessionManagement.checkSession(SID);
         Long user_level = userManagement.getUserLevelByID(users_id);
-        if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)){
+        if (authLevelManagement.checkAdminLevel(user_level)){
         	return this.ldapConfigDaoImpl.getLdapConfigById(ldapConfigId);
         }
         return null;
@@ -88,7 +90,7 @@ public class LdapConfigService {
 	public SearchResult getLdapConfigs(String SID, int start, int max, String orderby, boolean asc){
         Long users_id = sessionManagement.checkSession(SID);
         Long user_level = userManagement.getUserLevelByID(users_id);
-        if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)){
+        if (authLevelManagement.checkAdminLevel(user_level)){
         	
         	SearchResult searchResult = new SearchResult();
         	searchResult.setObjectName(LdapConfig.class.getName());
@@ -110,7 +112,7 @@ public class LdapConfigService {
 		try {
 			Long users_id = sessionManagement.checkSession(SID);
 			Long user_level = userManagement.getUserLevelByID(users_id);
-			if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)){
+			if (authLevelManagement.checkAdminLevel(user_level)){
 			
 				Long ldapConfigId = Long.valueOf(values.get("ldapConfigId").toString()).longValue();
 				Boolean addDomainToUserName = Boolean.valueOf(values.get("addDomainToUserName").toString()).booleanValue();

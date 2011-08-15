@@ -6,14 +6,10 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 
-import org.slf4j.Logger;
+import org.dom4j.Element;
 import org.openmeetings.app.remote.red5.ScopeApplicationAdapter;
 import org.red5.logging.Red5LoggerFactory;
-
-import org.dom4j.Document;
-import org.dom4j.DocumentException;
-import org.dom4j.io.SAXReader;
-import org.dom4j.Element;
+import org.slf4j.Logger;
 
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.XppDriver;
@@ -26,17 +22,6 @@ public class LibraryWmlLoader {
 	
 	private static final String wmlFolderName = "stored/";
 	
-	private static LibraryWmlLoader instance;
-
-	private LibraryWmlLoader() {}
-
-	public static synchronized LibraryWmlLoader getInstance() {
-		if (instance == null) {
-			instance = new LibraryWmlLoader();
-		}
-		return instance;
-	}
-
 	public ArrayList loadWmlFile(String filePath, String fileName){
 		try {
 			LinkedHashMap lMap = new LinkedHashMap();
