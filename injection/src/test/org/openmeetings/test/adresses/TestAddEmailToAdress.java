@@ -10,7 +10,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @TestExecutionListeners({})
-@ContextConfiguration(locations={"classpath:/red5-common.xml", "classpath:/red5-web.xml"})
+@ContextConfiguration(locations={"classpath:/openmeetings-applicationContext.xml"})
 public class TestAddEmailToAdress extends AbstractJUnit4SpringContextTests {
 	
 	private static final Logger log = Logger.getLogger(TestAddEmailToAdress.class);
