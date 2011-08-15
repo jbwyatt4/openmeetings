@@ -102,6 +102,7 @@ public class BackupImport extends HttpServlet {
 	private FileExplorerItemDaoImpl fileExplorerItemDao;
 	private UserContactsDaoImpl userContactsDao;
 	private ScopeApplicationAdapter scopeApplicationAdapter;
+	private AuthLevelmanagement authLevelManagement;
 
 	private final HashMap<Long, Long> usersMap = new HashMap<Long, Long>();
 	private final HashMap<Long, Long> organisationsMap = new HashMap<Long, Long>();
@@ -139,6 +140,7 @@ public class BackupImport extends HttpServlet {
 		fileExplorerItemDao = (FileExplorerItemDaoImpl)config.getServletContext().getAttribute("fileExplorerItemDao");
 		userContactsDao = (UserContactsDaoImpl)config.getServletContext().getAttribute("userContactsDao");
 		scopeApplicationAdapter = (ScopeApplicationAdapter)config.getServletContext().getAttribute("scopeApplicationAdapter");
+		authLevelManagement = (AuthLevelmanagement)config.getServletContext().getAttribute("authLevelManagement");
 	}
 	
 	/*
@@ -174,7 +176,7 @@ public class BackupImport extends HttpServlet {
 				Long users_id = sessionManagement.checkSession(sid);
 				Long user_level = userManagement.getUserLevelByID(users_id);
 
-				if (AuthLevelmanagement.getInstance().checkAdminLevel(
+				if (authLevelManagement.checkAdminLevel(
 						user_level)) {
 
 					String current_dir = getServletContext().getRealPath("/");

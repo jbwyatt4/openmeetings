@@ -23,6 +23,8 @@ public class AppointmentCategoryService {
 	private Usermanagement userManagement;
 	@Autowired
 	private AppointmentCategoryDaoImpl appointmentCategoryDaoImpl;
+	@Autowired
+	private AuthLevelmanagement authLevelmanagement;
 
 	private static AppointmentCategoryService instance = null;
 
@@ -43,7 +45,7 @@ public class AppointmentCategoryService {
 			Long users_id = sessionManagement.checkSession(SID);
 			Long user_level = userManagement.getUserLevelByID(users_id);
 
-			if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
+			if (authLevelmanagement.checkUserLevel(user_level)) {
 
 				List<AppointmentCategory> res = appointmentCategoryDaoImpl
 						.getAppointmentCategoryList();

@@ -1,14 +1,14 @@
 package org.openmeetings.test.domain;
 
-import junit.framework.TestCase;
-
 import org.apache.log4j.Logger;
+import org.junit.Test;
 import org.openmeetings.app.data.user.Organisationmanagement;
 import org.openmeetings.app.data.user.dao.UsersDaoImpl;
 import org.openmeetings.app.persistence.beans.user.Users;
+import org.openmeetings.test.AbstractOpenmeetingsSpringTest;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class TestAddGroup extends TestCase {
+public class TestAddGroup extends AbstractOpenmeetingsSpringTest {
 
 	@Autowired
 	private Organisationmanagement organisationmanagement;
@@ -17,10 +17,7 @@ public class TestAddGroup extends TestCase {
 
 	private static final Logger log = Logger.getLogger(TestAddGroup.class);
 
-	public TestAddGroup(String testname) {
-		super(testname);
-	}
-
+	@Test
 	public void testAddingGroup() {
 
 		long organisation_id = organisationmanagement.addOrganisation(

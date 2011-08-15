@@ -97,6 +97,8 @@ public class UserService {
 	private RequestContactTemplate requestContactTemplate;
 	@Autowired
 	private RequestContactConfirmTemplate requestContactConfirmTemplate;
+	@Autowired
+	private AuthLevelmanagement authLevelManagement;
 
 	/**
 	 * get your own user-object
@@ -479,7 +481,7 @@ public class UserService {
 			Long user_level = userManagement.getUserLevelByID(users_id);
 
 			// admins only
-			if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)) {
+			if (authLevelManagement.checkAdminLevel(user_level)) {
 				// no self destruction ;-)
 				if (!users_id.equals(user_idClient)) {
 
@@ -518,7 +520,7 @@ public class UserService {
 			Long users_id = sessionManagement.checkSession(SID);
 			Long user_level = userManagement.getUserLevelByID(users_id);
 			// admins only
-			if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)) {
+			if (authLevelManagement.checkAdminLevel(user_level)) {
 				RoomClient rcl = this.clientListManager
 						.getClientByStreamId(streamid);
 
@@ -553,7 +555,7 @@ public class UserService {
 			Long users_id = sessionManagement.checkSession(SID);
 			Long user_level = userManagement.getUserLevelByID(users_id);
 			// users only
-			if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
+			if (authLevelManagement.checkUserLevel(user_level)) {
 
 				Users us = userManagement.getUserById(users_id);
 
@@ -579,7 +581,7 @@ public class UserService {
 			Long users_id = sessionManagement.checkSession(SID);
 			Long user_level = userManagement.getUserLevelByID(users_id);
 			// users only
-			if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
+			if (authLevelManagement.checkUserLevel(user_level)) {
 
 				SearchResult searchResult = new SearchResult();
 				searchResult.setObjectName(Users.class.getName());
@@ -605,7 +607,7 @@ public class UserService {
 			Long users_id = sessionManagement.checkSession(SID);
 			Long user_level = userManagement.getUserLevelByID(users_id);
 			// users only
-			if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
+			if (authLevelManagement.checkUserLevel(user_level)) {
 
 				Long countContacts = userContactsDao.checkUserContacts(
 						userToAdd_id, users_id);
@@ -703,7 +705,7 @@ public class UserService {
 			Long users_id = sessionManagement.checkSession(SID);
 			Long user_level = userManagement.getUserLevelByID(users_id);
 			// users only
-			if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
+			if (authLevelManagement.checkUserLevel(user_level)) {
 
 				List<UserContacts> uList = userContactsDao
 						.getContactRequestsByUserAndStatus(users_id, true);
@@ -723,7 +725,7 @@ public class UserService {
 			Long users_id = sessionManagement.checkSession(SID);
 			Long user_level = userManagement.getUserLevelByID(users_id);
 			// users only
-			if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
+			if (authLevelManagement.checkUserLevel(user_level)) {
 
 				UserContacts userContact = userContactsDao
 						.getContactsByHash(hash);
@@ -757,7 +759,7 @@ public class UserService {
 			Long users_id = sessionManagement.checkSession(SID);
 			Long user_level = userManagement.getUserLevelByID(users_id);
 			// users only
-			if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
+			if (authLevelManagement.checkUserLevel(user_level)) {
 
 				List<UserContacts> uList = userContactsDao
 						.getContactsByUserAndStatus(users_id, false);
@@ -776,7 +778,7 @@ public class UserService {
 			Long users_id = sessionManagement.checkSession(SID);
 			Long user_level = userManagement.getUserLevelByID(users_id);
 			// users only
-			if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
+			if (authLevelManagement.checkUserLevel(user_level)) {
 
 				UserContacts userContacts = userContactsDao
 						.getUserContacts(userContactId);
@@ -803,7 +805,7 @@ public class UserService {
 			Long users_id = sessionManagement.checkSession(SID);
 			Long user_level = userManagement.getUserLevelByID(users_id);
 			// users only
-			if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
+			if (authLevelManagement.checkUserLevel(user_level)) {
 
 				UserContacts userContacts = userContactsDao
 						.getUserContacts(userContactId);
@@ -827,7 +829,7 @@ public class UserService {
 			Long users_id = sessionManagement.checkSession(SID);
 			Long user_level = userManagement.getUserLevelByID(users_id);
 			// users only
-			if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
+			if (authLevelManagement.checkUserLevel(user_level)) {
 
 				UserContacts userContacts = userContactsDao
 						.getUserContacts(userContactId);
@@ -920,7 +922,7 @@ public class UserService {
 			Long users_id = sessionManagement.checkSession(SID);
 			Long user_level = userManagement.getUserLevelByID(users_id);
 			// users only
-			if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
+			if (authLevelManagement.checkUserLevel(user_level)) {
 
 				Integer validFromHour = Integer.valueOf(
 						validFromTime.substring(0, 2)).intValue();
@@ -1112,7 +1114,7 @@ public class UserService {
 			Long users_id = sessionManagement.checkSession(SID);
 			Long user_level = userManagement.getUserLevelByID(users_id);
 			// users only
-			if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
+			if (authLevelManagement.checkUserLevel(user_level)) {
 
 				SearchResult searchResult = new SearchResult();
 				searchResult.setObjectName(Users.class.getName());
@@ -1144,7 +1146,7 @@ public class UserService {
 			Long users_id = sessionManagement.checkSession(SID);
 			Long user_level = userManagement.getUserLevelByID(users_id);
 			// users only
-			if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
+			if (authLevelManagement.checkUserLevel(user_level)) {
 
 				SearchResult searchResult = new SearchResult();
 				searchResult.setObjectName(Users.class.getName());
@@ -1176,7 +1178,7 @@ public class UserService {
 			Long users_id = sessionManagement.checkSession(SID);
 			Long user_level = userManagement.getUserLevelByID(users_id);
 			// users only
-			if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
+			if (authLevelManagement.checkUserLevel(user_level)) {
 
 				SearchResult searchResult = new SearchResult();
 				searchResult.setObjectName(Users.class.getName());
@@ -1209,7 +1211,7 @@ public class UserService {
 			Long users_id = sessionManagement.checkSession(SID);
 			Long user_level = userManagement.getUserLevelByID(users_id);
 			// users only
-			if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
+			if (authLevelManagement.checkUserLevel(user_level)) {
 
 				SearchResult searchResult = new SearchResult();
 				searchResult.setObjectName(Users.class.getName());
@@ -1242,7 +1244,7 @@ public class UserService {
 			Long users_id = sessionManagement.checkSession(SID);
 			Long user_level = userManagement.getUserLevelByID(users_id);
 			// users only
-			if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
+			if (authLevelManagement.checkUserLevel(user_level)) {
 
 				return privateMessagesDao.countFolderPrivateMessagesByUser(
 						users_id, privateMessageFolderId, "");
@@ -1261,7 +1263,7 @@ public class UserService {
 			Long users_id = sessionManagement.checkSession(SID);
 			Long user_level = userManagement.getUserLevelByID(users_id);
 			// users only
-			if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
+			if (authLevelManagement.checkUserLevel(user_level)) {
 
 				List<Long> privateMessageIds = new LinkedList<Long>();
 
@@ -1286,7 +1288,7 @@ public class UserService {
 			Long users_id = sessionManagement.checkSession(SID);
 			Long user_level = userManagement.getUserLevelByID(users_id);
 			// users only
-			if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
+			if (authLevelManagement.checkUserLevel(user_level)) {
 
 				List<Long> privateMessageIds = new LinkedList<Long>();
 
@@ -1312,7 +1314,7 @@ public class UserService {
 			Long users_id = sessionManagement.checkSession(SID);
 			Long user_level = userManagement.getUserLevelByID(users_id);
 			// users only
-			if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
+			if (authLevelManagement.checkUserLevel(user_level)) {
 
 				List<Long> privateMessageIds = new LinkedList<Long>();
 
@@ -1337,7 +1339,7 @@ public class UserService {
 			Long users_id = sessionManagement.checkSession(SID);
 			Long user_level = userManagement.getUserLevelByID(users_id);
 			// users only
-			if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
+			if (authLevelManagement.checkUserLevel(user_level)) {
 
 				List<Long> privateMessageIds = new LinkedList<Long>();
 
@@ -1364,7 +1366,7 @@ public class UserService {
 			Long users_id = sessionManagement.checkSession(SID);
 			Long user_level = userManagement.getUserLevelByID(users_id);
 			// users only
-			if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
+			if (authLevelManagement.checkUserLevel(user_level)) {
 
 				List<Long> privateMessageIds = new LinkedList<Long>();
 				privateMessageIds.add(privateMessageId);
@@ -1391,7 +1393,7 @@ public class UserService {
 			Long users_id = sessionManagement.checkSession(SID);
 			Long user_level = userManagement.getUserLevelByID(users_id);
 			// users only
-			if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
+			if (authLevelManagement.checkUserLevel(user_level)) {
 
 				return privateMessageFolderDao
 						.getPrivateMessageFolderByUserId(users_id);
@@ -1409,7 +1411,7 @@ public class UserService {
 			Long users_id = sessionManagement.checkSession(SID);
 			Long user_level = userManagement.getUserLevelByID(users_id);
 			// users only
-			if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
+			if (authLevelManagement.checkUserLevel(user_level)) {
 
 				privateMessageFolderDao.addPrivateMessageFolder(folderName,
 						users_id);
@@ -1427,7 +1429,7 @@ public class UserService {
 			Long users_id = sessionManagement.checkSession(SID);
 			Long user_level = userManagement.getUserLevelByID(users_id);
 			// users only
-			if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
+			if (authLevelManagement.checkUserLevel(user_level)) {
 
 				List<UserContacts> uList = userContactsDao
 						.getContactsByUserAndStatus(users_id, false);
@@ -1457,7 +1459,7 @@ public class UserService {
 			Long user_level = userManagement.getUserLevelByID(users_id);
 
 			// users only
-			if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
+			if (authLevelManagement.checkUserLevel(user_level)) {
 
 				UserContacts userContacts = userContactsDao
 						.getUserContacts(userContactId);
@@ -1479,7 +1481,7 @@ public class UserService {
 			Long users_id = sessionManagement.checkSession(SID);
 			Long user_level = userManagement.getUserLevelByID(users_id);
 			// users only
-			if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
+			if (authLevelManagement.checkUserLevel(user_level)) {
 
 				PrivateMessageFolder privateMessageFolder = privateMessageFolderDao
 						.getPrivateMessageFolderById(privateMessageFolderId);
@@ -1506,7 +1508,7 @@ public class UserService {
 			Long users_id = sessionManagement.checkSession(SID);
 			Long user_level = userManagement.getUserLevelByID(users_id);
 			// users only
-			if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
+			if (authLevelManagement.checkUserLevel(user_level)) {
 
 				PrivateMessageFolder privateMessageFolder = privateMessageFolderDao
 						.getPrivateMessageFolderById(privateMessageFolderId);
@@ -1527,7 +1529,7 @@ public class UserService {
 			Long users_id = sessionManagement.checkSession(SID);
 			Long user_level = userManagement.getUserLevelByID(users_id);
 			// users only
-			if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
+			if (authLevelManagement.checkUserLevel(user_level)) {
 
 				return userContactsDao.getContactsByShareCalendar(users_id,
 						true);
@@ -1545,7 +1547,7 @@ public class UserService {
 			Long users_id = sessionManagement.checkSession(SID);
 			Long user_level = userManagement.getUserLevelByID(users_id);
 			// users only
-			if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
+			if (authLevelManagement.checkUserLevel(user_level)) {
 
 				RoomClient rcl = this.clientListManager
 						.getClientByPublicSID(publicSID);

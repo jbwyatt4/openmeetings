@@ -61,7 +61,6 @@ import org.openmeetings.app.remote.red5.ScopeApplicationAdapter;
 import org.openmeetings.utils.math.CalendarPatterns;
 import org.red5.logging.Red5LoggerFactory;
 import org.slf4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * 
@@ -87,7 +86,8 @@ public class BackupExport extends HttpServlet {
 	private PrivateMessagesDaoImpl privateMessagesDao;
 	private PrivateMessageFolderDaoImpl privateMessageFolderDao;
 	private UserContactsDaoImpl userContactsDao;
-
+	private AuthLevelmanagement authLevelManagement;
+	
 	@Override
 	public void init(ServletConfig config) throws ServletException {
 		super.init(config);
@@ -106,6 +106,7 @@ public class BackupExport extends HttpServlet {
 		privateMessagesDao = (PrivateMessagesDaoImpl)config.getServletContext().getAttribute("privateMessagesDao");
 		privateMessageFolderDao = (PrivateMessageFolderDaoImpl)config.getServletContext().getAttribute("privateMessageFolderDao");
 		userContactsDao = (UserContactsDaoImpl)config.getServletContext().getAttribute("userContactsDao");
+		authLevelManagement = (AuthLevelmanagement)config.getServletContext().getAttribute("authLevelManagement");
 	}
 	
 	/*
@@ -133,7 +134,7 @@ public class BackupExport extends HttpServlet {
 			log.debug("users_id: " + users_id);
 			log.debug("user_level: " + user_level);
 
-			if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)) {
+			if (authLevelManagement.checkAdminLevel(user_level)) {
 				// if (true) {
 
 				String includeFileOption = httpServletRequest

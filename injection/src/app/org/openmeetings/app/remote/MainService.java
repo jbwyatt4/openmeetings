@@ -88,6 +88,10 @@ public class MainService implements IPendingServiceCallback {
 	private Invitationmanagement invitationManagement;
 	@Autowired
 	private Feedbackmanagement feedbackManagement;
+	@Autowired
+	private AuthLevelmanagement authLevelManagement;
+	@Autowired
+	private LoadAtomRssFeed loadAtomRssFeed;
 
 	// External User Types
 	public static final String EXTERNAL_USER_TYPE_LDAP = "LDAP";
@@ -276,7 +280,7 @@ public class MainService implements IPendingServiceCallback {
 			return returnValue;
 		} else if (returnValue instanceof Users) {
 			Users us = (Users) returnValue;
-			if (AuthLevelmanagement.getInstance().checkUserLevel(
+			if (authLevelManagement.checkUserLevel(
 					us.getLevel_id())) {
 				return us;
 			} else {
@@ -565,7 +569,7 @@ public class MainService implements IPendingServiceCallback {
 		try {
 			Long users_id = sessionManagement.checkSession(SID);
 			Long user_level = userManagement.getUserLevelByID(users_id);
-			if (AuthLevelmanagement.getInstance().checkWebServiceLevel(
+			if (authLevelManagement.checkWebServiceLevel(
 					user_level)) {
 
 				Sessiondata sd = sessionManagement.getSessionByHash(SID);
@@ -900,7 +904,7 @@ public class MainService implements IPendingServiceCallback {
 	public List<Userdata> getUserdata(String SID) {
 		Long users_id = sessionManagement.checkSession(SID);
 		Long user_level = userManagement.getUserLevelByID(users_id);
-		if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
+		if (authLevelManagement.checkUserLevel(user_level)) {
 			return userManagement.getUserdataDashBoard(users_id);
 		}
 		return null;
@@ -916,7 +920,7 @@ public class MainService implements IPendingServiceCallback {
 			String SID) {
 		Long users_id = sessionManagement.checkSession(SID);
 		Long user_level = userManagement.getUserLevelByID(users_id);
-		return LoadAtomRssFeed.getInstance().getRssFeeds(user_level);
+		return loadAtomRssFeed.getRssFeeds(user_level);
 	}
 
 	/**
@@ -929,8 +933,8 @@ public class MainService implements IPendingServiceCallback {
 			String SID, String urlEndPoint) {
 		Long users_id = sessionManagement.checkSession(SID);
 		Long user_level = userManagement.getUserLevelByID(users_id);
-		if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
-			return LoadAtomRssFeed.getInstance().parseRssFeed(urlEndPoint);
+		if (authLevelManagement.checkUserLevel(user_level)) {
+			return loadAtomRssFeed.parseRssFeed(urlEndPoint);
 		} else {
 			return null;
 		}
@@ -949,7 +953,7 @@ public class MainService implements IPendingServiceCallback {
 			String domain) {
 		Long users_id = sessionManagement.checkSession(SID);
 		Long user_level = userManagement.getUserLevelByID(users_id);
-		if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
+		if (authLevelManagement.checkUserLevel(user_level)) {
 			LinkedHashMap<Integer, RoomClient> lMap = new LinkedHashMap<Integer, RoomClient>();
 			Integer counter = 0;
 			// for (Iterator<String> it =
@@ -991,7 +995,7 @@ public class MainService implements IPendingServiceCallback {
 		try {
 			Long users_id = sessionManagement.checkSession(SID);
 			Long user_level = userManagement.getUserLevelByID(users_id);
-			if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
+			if (authLevelManagement.checkUserLevel(user_level)) {
 
 				roommanagement.closeRoom(room_id, status);
 
@@ -1022,7 +1026,7 @@ public class MainService implements IPendingServiceCallback {
 		try {
 			Long users_id = sessionManagement.checkSession(SID);
 			Long user_level = userManagement.getUserLevelByID(users_id);
-			if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
+			if (authLevelManagement.checkUserLevel(user_level)) {
 
 				List<Configuration> cfManagementList = new LinkedList<Configuration>();
 

@@ -46,6 +46,8 @@ public class Organisationmanagement {
 	private EntityManager em;
 	@Autowired
 	private UsersDaoImpl usersDao;
+	@Autowired
+	private AuthLevelmanagement authLevelManagement;
 
 	/**
 	 * adds a new organisation if userlevel is admin
@@ -57,7 +59,7 @@ public class Organisationmanagement {
 	 */
 	public Long addOrganisation(Long user_level, String orgname, long user_id) {
 		try {
-			if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)) {
+			if (authLevelManagement.checkAdminLevel(user_level)) {
 				Long orgId = this.addOrganisation(orgname, user_id);
 				return orgId;
 			}
@@ -113,7 +115,7 @@ public class Organisationmanagement {
 	public SearchResult getOrganisations(long user_level, int start, int max,
 			String orderby, boolean asc) {
 		try {
-			if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)) {
+			if (authLevelManagement.checkAdminLevel(user_level)) {
 				SearchResult sresult = new SearchResult();
 				sresult.setObjectName(Organisation.class.getName());
 				sresult.setRecords(this.selectMaxFromOrganisations());
@@ -161,7 +163,7 @@ public class Organisationmanagement {
 
 	public List<Organisation> getOrganisations(Long user_level) {
 		try {
-			if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)) {
+			if (authLevelManagement.checkAdminLevel(user_level)) {
 				CriteriaBuilder cb = em.getCriteriaBuilder();
 				CriteriaQuery<Organisation> cq = cb
 						.createQuery(Organisation.class);
@@ -333,7 +335,7 @@ public class Organisationmanagement {
 	public Organisation getOrganisationById(long user_level,
 			long organisation_id) {
 		try {
-			if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)) {
+			if (authLevelManagement.checkAdminLevel(user_level)) {
 				return this.getOrganisationById(organisation_id);
 			} else {
 				log.error("[getOrganisationById] authorization required");
@@ -408,7 +410,7 @@ public class Organisationmanagement {
 	public Long deleteOrganisation(long user_level, long organisation_id,
 			long updatedby) {
 		try {
-			if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)) {
+			if (authLevelManagement.checkAdminLevel(user_level)) {
 				return this.deleteOrganisation(organisation_id, updatedby);
 			}
 		} catch (Exception ex2) {
@@ -527,7 +529,7 @@ public class Organisationmanagement {
 	public Long deleteUserFromOrganisation(Long user_level, long user_id,
 			long organisation_id) {
 		try {
-			if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)) {
+			if (authLevelManagement.checkAdminLevel(user_level)) {
 
 				log.error("deleteUserFromOrganisation " + user_id + "  "
 						+ organisation_id);
@@ -722,7 +724,7 @@ public class Organisationmanagement {
 	public List<Organisation> getOrganisationsByUserId(long user_level,
 			long user_id, int start, int max, String orderby, boolean asc) {
 		try {
-			if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)) {
+			if (authLevelManagement.checkAdminLevel(user_level)) {
 				String hql = "select c from Organisation_Users c "
 						+ "where c.deleted = 'false' "
 						+ "AND c.user_id = :user_id "
@@ -764,7 +766,7 @@ public class Organisationmanagement {
 	public List<Organisation> getRestOrganisationsByUserId(long user_level,
 			long user_id, int start, int max, String orderby, boolean asc) {
 		try {
-			if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)) {
+			if (authLevelManagement.checkAdminLevel(user_level)) {
 				// get all organisations
 				List<Organisation> allOrgs = this.getOrganisations(0, 1000000,
 						orderby, asc);

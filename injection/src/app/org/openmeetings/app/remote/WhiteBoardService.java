@@ -51,6 +51,8 @@ public class WhiteBoardService implements IPendingServiceCallback {
 	private WhiteBoardObjectListManagerById whiteBoardObjectListManagerById = null;
 	@Autowired
 	private Sessionmanagement sessionManagement;
+	@Autowired
+	private AuthLevelmanagement authLevelManagement;
 	 
 	/**
 	 * Loading the List of Objects on the whiteboard
@@ -218,7 +220,7 @@ public class WhiteBoardService implements IPendingServiceCallback {
 			Long users_id = sessionManagement.checkSession(SID);
 	        Long user_level = userManagement.getUserLevelByID(users_id);
 	        
-	        if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
+	        if (authLevelManagement.checkUserLevel(user_level)) {
 	        	
 	        	if (currentClient.getIsMod()) {
 	        		RoomClient rcl = this.clientListManager.getClientByPublicSID(publicSID);
@@ -256,7 +258,7 @@ public class WhiteBoardService implements IPendingServiceCallback {
 			Long users_id = sessionManagement.checkSession(SID);
 	        Long user_level = userManagement.getUserLevelByID(users_id);
 	        
-	        if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
+	        if (authLevelManagement.checkUserLevel(user_level)) {
 	        	
 	        	if (currentClient.getIsMod()) {
 	        		RoomClient rcl = this.clientListManager.getClientByPublicSID(publicSID);
@@ -294,7 +296,7 @@ public class WhiteBoardService implements IPendingServiceCallback {
 			Long users_id = sessionManagement.checkSession(SID);
 	        Long user_level = userManagement.getUserLevelByID(users_id);
 	        
-	        if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
+	        if (authLevelManagement.checkUserLevel(user_level)) {
 	        	
 	        	if (currentClient.getIsMod()) {
 	        		RoomClient rcl = this.clientListManager.getClientByPublicSID(publicSID);

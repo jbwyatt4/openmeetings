@@ -73,19 +73,6 @@ public class WhiteboardConvertionJobManager {
 	@Autowired
 	private GenerateImage generateImage;
 	
-	private WhiteboardConvertionJobManager() {
-	}
-
-	private static WhiteboardConvertionJobManager instance = null;
-
-	public static synchronized WhiteboardConvertionJobManager getInstance() {
-		if (instance == null) {
-			instance = new WhiteboardConvertionJobManager();
-		}
-
-		return instance;
-	}
-	
 	public synchronized void initJobs() {
 		try {
 			if (!isRunning) {

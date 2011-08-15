@@ -52,6 +52,8 @@ public class RoomService {
 	private Invitationmanagement invitationManagement;
 	@Autowired
 	private ScopeApplicationAdapter scopeApplicationAdapter;
+	@Autowired
+	private AuthLevelmanagement authLevelManagement;
 
 	// TODO: Not implemented yet
 	// public List<Rooms_Organisation> getRoomsByOrganisationAndType(String SID,
@@ -67,7 +69,7 @@ public class RoomService {
 			Long users_id = sessionManagement.checkSession(SID);
 			Long User_level = userManagement.getUserLevelByID(users_id);
 
-			if (AuthLevelmanagement.getInstance().checkWebServiceLevel(
+			if (authLevelManagement.checkWebServiceLevel(
 					User_level)) {
 
 				List<Rooms> roomList = roommanagement.getPublicRooms(
@@ -104,7 +106,7 @@ public class RoomService {
 			Long users_id = sessionManagement.checkSession(SID);
 			Long user_level = userManagement.getUserLevelByID(users_id);
 
-			if (AuthLevelmanagement.getInstance().checkWebServiceLevel(
+			if (authLevelManagement.checkWebServiceLevel(
 					user_level)) {
 				flvRecordingDao.deleteFlvRecording(
 						flvRecordingId);
@@ -124,7 +126,7 @@ public class RoomService {
 			Long users_id = sessionManagement.checkSession(SID);
 			Long user_level = userManagement.getUserLevelByID(users_id);
 
-			if (AuthLevelmanagement.getInstance().checkWebServiceLevel(
+			if (authLevelManagement.checkWebServiceLevel(
 					user_level)) {
 				List<FlvRecording> recordingList = flvRecordingDao.getFlvRecordingByExternalUserId(
 								Long.parseLong(externalUserId));
@@ -165,7 +167,7 @@ public class RoomService {
 			Long users_id = sessionManagement.checkSession(SID);
 			Long user_level = userManagement.getUserLevelByID(users_id);
 
-			if (AuthLevelmanagement.getInstance().checkWebServiceLevel(
+			if (authLevelManagement.checkWebServiceLevel(
 					user_level)) {
 				List<FlvRecording> recordingList = flvRecordingDao
 						.getFlvRecordingByExternalRoomTypeAndCreator(
@@ -206,7 +208,7 @@ public class RoomService {
 			Long users_id = sessionManagement.checkSession(SID);
 			Long user_level = userManagement.getUserLevelByID(users_id);
 
-			if (AuthLevelmanagement.getInstance().checkWebServiceLevel(
+			if (authLevelManagement.checkWebServiceLevel(
 					user_level)) {
 				return flvRecordingDao.getFlvRecordingByExternalRoomType(externalRoomType);
 
@@ -226,7 +228,7 @@ public class RoomService {
 			Long users_id = sessionManagement.checkSession(SID);
 			Long user_level = userManagement.getUserLevelByID(users_id);
 
-			if (AuthLevelmanagement.getInstance().checkWebServiceLevel(
+			if (authLevelManagement.checkWebServiceLevel(
 					user_level)) {
 				List<FlvRecording> recordingList = flvRecordingDao.getFlvRecordingByExternalRoomType(
 								externalRoomType);
@@ -265,7 +267,7 @@ public class RoomService {
 			Long users_id = sessionManagement.checkSession(SID);
 			Long user_level = userManagement.getUserLevelByID(users_id);
 
-			if (AuthLevelmanagement.getInstance().checkWebServiceLevel(
+			if (authLevelManagement.checkWebServiceLevel(
 					user_level)) {
 
 				List<FlvRecording> recordingList = flvRecordingDao.getFlvRecordingByRoomId(roomId);
@@ -357,7 +359,7 @@ public class RoomService {
 			Long users_id = sessionManagement.checkSession(SID);
 			Long user_level = userManagement.getUserLevelByID(users_id);
 
-			if (AuthLevelmanagement.getInstance().checkWebServiceLevel(
+			if (authLevelManagement.checkWebServiceLevel(
 					user_level)) {
 
 				LinkedList<Integer> roomIds = new LinkedList<Integer>();
@@ -455,7 +457,7 @@ public class RoomService {
 			Long users_id = sessionManagement.checkSession(SID);
 			Long user_level = userManagement.getUserLevelByID(users_id);
 
-			if (AuthLevelmanagement.getInstance().checkWebServiceLevel(
+			if (authLevelManagement.checkWebServiceLevel(
 					user_level)) {
 
 				Rooms room = roommanagement.getRoomById(user_level, rooms_id);
@@ -679,7 +681,7 @@ public class RoomService {
 		try {
 			Long users_id = sessionManagement.checkSession(SID);
 			Long user_level = userManagement.getUserLevelByID(users_id);
-			if (AuthLevelmanagement.getInstance().checkWebServiceLevel(
+			if (authLevelManagement.checkWebServiceLevel(
 					user_level)) {
 				Rooms room = ConferenceService.getInstance()
 						.getRoomByExternalId(SID, externalRoomId,
@@ -748,7 +750,7 @@ public class RoomService {
 		try {
 			Long users_id = sessionManagement.checkSession(SID);
 			Long user_level = userManagement.getUserLevelByID(users_id);
-			if (AuthLevelmanagement.getInstance().checkWebServiceLevel(
+			if (authLevelManagement.checkWebServiceLevel(
 					user_level)) {
 				return roommanagement.updateRoomInternal(rooms_id,
 						roomtypes_id, name, ispublic, comment,
@@ -769,7 +771,7 @@ public class RoomService {
 		try {
 			Long users_id = sessionManagement.checkSession(SID);
 			Long user_level = userManagement.getUserLevelByID(users_id);
-			if (AuthLevelmanagement.getInstance().checkWebServiceLevel(
+			if (authLevelManagement.checkWebServiceLevel(
 					user_level)) {
 				return roommanagement.updateRoomInternal(room_id, roomtypes_id,
 						name, ispublic, comment, numberOfPartizipants, null,
@@ -791,7 +793,7 @@ public class RoomService {
 		try {
 			Long users_id = sessionManagement.checkSession(SID);
 			Long user_level = userManagement.getUserLevelByID(users_id);
-			if (AuthLevelmanagement.getInstance().checkWebServiceLevel(
+			if (authLevelManagement.checkWebServiceLevel(
 					user_level)) {
 				return roommanagement.updateRoomInternal(room_id, roomtypes_id,
 						name, ispublic, comment, numberOfPartizipants, null,
@@ -832,7 +834,7 @@ public class RoomService {
 		try {
 			Long users_id = sessionManagement.checkSession(SID);
 			Long user_level = userManagement.getUserLevelByID(users_id);
-			if (AuthLevelmanagement.getInstance().checkWebServiceLevel(
+			if (authLevelManagement.checkWebServiceLevel(
 					user_level)) {
 				return roommanagement.addExternalRoom(name, roomtypes_id,
 						comment, numberOfPartizipants, ispublic, null,
@@ -855,7 +857,7 @@ public class RoomService {
 		try {
 			Long users_id = sessionManagement.checkSession(SID);
 			Long user_level = userManagement.getUserLevelByID(users_id);
-			if (AuthLevelmanagement.getInstance().checkWebServiceLevel(
+			if (authLevelManagement.checkWebServiceLevel(
 					user_level)) {
 				return roommanagement.addExternalRoom(name, roomtypes_id,
 						comment, numberOfPartizipants, ispublic, null,
@@ -878,7 +880,7 @@ public class RoomService {
 		try {
 			Long users_id = sessionManagement.checkSession(SID);
 			Long user_level = userManagement.getUserLevelByID(users_id);
-			if (AuthLevelmanagement.getInstance().checkWebServiceLevel(
+			if (authLevelManagement.checkWebServiceLevel(
 					user_level)) {
 				return roommanagement.addExternalRoom(name, roomtypes_id,
 						comment, numberOfPartizipants, ispublic, null,
@@ -905,7 +907,7 @@ public class RoomService {
 		try {
 			Long users_id = sessionManagement.checkSession(SID);
 			Long user_level = userManagement.getUserLevelByID(users_id);
-			if (AuthLevelmanagement.getInstance().checkWebServiceLevel(
+			if (authLevelManagement.checkWebServiceLevel(
 					user_level)) {
 				return roommanagement.addExternalRoom(name, roomtypes_id,
 						comment, numberOfPartizipants, ispublic, null,
@@ -964,7 +966,7 @@ public class RoomService {
 			Long users_id = sessionManagement.checkSession(SID);
 			Long user_level = userManagement.getUserLevelByID(users_id);
 
-			if (AuthLevelmanagement.getInstance().checkWebServiceLevel(
+			if (authLevelManagement.checkWebServiceLevel(
 					user_level)) {
 
 				Date dFrom = null;
@@ -1102,7 +1104,7 @@ public class RoomService {
 			Long users_id = sessionManagement.checkSession(SID);
 			Long user_level = userManagement.getUserLevelByID(users_id);
 
-			if (AuthLevelmanagement.getInstance().checkWebServiceLevel(
+			if (authLevelManagement.checkWebServiceLevel(
 					user_level)) {
 
 				Date dFrom = null;
@@ -1234,7 +1236,7 @@ public class RoomService {
 			Long users_id = sessionManagement.checkSession(SID);
 			Long user_level = userManagement.getUserLevelByID(users_id);
 
-			if (AuthLevelmanagement.getInstance().checkWebServiceLevel(
+			if (authLevelManagement.checkWebServiceLevel(
 					user_level)) {
 
 				Calendar calFrom = Calendar.getInstance();
@@ -1383,7 +1385,7 @@ public class RoomService {
 			Long users_id = sessionManagement.checkSession(SID);
 			Long user_level = userManagement.getUserLevelByID(users_id);
 
-			if (AuthLevelmanagement.getInstance().checkWebServiceLevel(
+			if (authLevelManagement.checkWebServiceLevel(
 					user_level)) {
 
 				Date dFrom = null;
@@ -1474,7 +1476,7 @@ public class RoomService {
 			Long users_id = sessionManagement.checkSession(SID);
 			Long user_level = userManagement.getUserLevelByID(users_id);
 
-			if (AuthLevelmanagement.getInstance().checkWebServiceLevel(
+			if (authLevelManagement.checkWebServiceLevel(
 					user_level)) {
 
 				Appointment appointment = appointmentDao
@@ -1511,7 +1513,7 @@ public class RoomService {
 			Long users_id = sessionManagement.checkSession(SID);
 			Long user_level = userManagement.getUserLevelByID(users_id);
 
-			if (AuthLevelmanagement.getInstance().checkWebServiceLevel(
+			if (authLevelManagement.checkWebServiceLevel(
 					user_level)) {
 
 				Appointment appointment = appointmentDao
@@ -1549,7 +1551,7 @@ public class RoomService {
 
 			log.debug("closeRoom 1 " + room_id);
 
-			if (AuthLevelmanagement.getInstance().checkWebServiceLevel(
+			if (authLevelManagement.checkWebServiceLevel(
 					user_level)) {
 
 				log.debug("closeRoom 2 " + status);

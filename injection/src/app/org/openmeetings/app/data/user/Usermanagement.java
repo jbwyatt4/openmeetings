@@ -95,6 +95,8 @@ public class Usermanagement {
 	private MailHandler mailHandler;
 	@Autowired
 	private ResetPasswordTemplate resetPasswordTemplate;
+	@Autowired
+	private AuthLevelmanagement authLevelManagement;
 
 	/**
 	 * query for a list of users
@@ -109,7 +111,7 @@ public class Usermanagement {
 	public SearchResult getUsersList(long user_level, int start, int max,
 			String orderby, boolean asc) {
 		try {
-			if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)) {
+			if (authLevelManagement.checkAdminLevel(user_level)) {
 				SearchResult sresult = new SearchResult();
 				sresult.setObjectName(Users.class.getName());
 				sresult.setRecords(usersDao.selectMaxFromUsers());
@@ -215,7 +217,7 @@ public class Usermanagement {
 	public Users checkAdmingetUserById(long user_level, long user_id) {
 		// FIXME: We have to check here for the User only cause the
 		// Org-Moderator otherwise cannot access it
-		if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
+		if (authLevelManagement.checkUserLevel(user_level)) {
 			return usersDao.getUser(user_id);
 		}
 		return null;
@@ -377,7 +379,7 @@ public class Usermanagement {
 	 */
 	public List<Users> searchUser(long user_level, String searchcriteria,
 			String searchstring, int max, int start, String orderby, boolean asc) {
-		if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)) {
+		if (authLevelManagement.checkAdminLevel(user_level)) {
 			try {
 				CriteriaBuilder cb = em.getCriteriaBuilder();
 				CriteriaQuery<Users> cq = cb.createQuery(Users.class);
@@ -478,7 +480,7 @@ public class Usermanagement {
 			String userOffers, String userSearchs, Boolean showContactData,
 			Boolean showContactDataToContacts) {
 
-		if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)
+		if (authLevelManagement.checkUserLevel(user_level)
 				&& user_id != 0) {
 			try {
 				Users us = usersDao.getUser(user_id);
@@ -1002,7 +1004,7 @@ public class Usermanagement {
 		// User Level must be at least Admin
 		// Moderators will get a temp update of there UserLevel to add Users to
 		// their Group
-		if (AuthLevelmanagement.getInstance().checkModLevel(user_level)) {
+		if (authLevelManagement.checkModLevel(user_level)) {
 			// Check for required data
 			if (login.length() >= 4 && Userpass.length() >= 4) {
 				// Check for duplicates
@@ -1347,7 +1349,7 @@ public class Usermanagement {
 	public Long saveOrUpdateUser(Long user_level, ObjectMap<?, ?> values,
 			Long users_id) {
 		try {
-			if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)) {
+			if (authLevelManagement.checkAdminLevel(user_level)) {
 				Long returnLong = null;
 
 				Long user_id = Long.parseLong(values.get("user_id").toString());
@@ -1683,7 +1685,7 @@ public class Usermanagement {
 					.getInstance().getClientListByRoom(room_id);
 
 			// admins only
-			if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)) {
+			if (authLevelManagement.checkAdminLevel(user_level)) {
 
 				sessionManagement.clearSessionByRoomId(room_id);
 
@@ -1726,7 +1728,7 @@ public class Usermanagement {
 			Long user_level = getUserLevelByID(users_id);
 
 			// admins only
-			if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)) {
+			if (authLevelManagement.checkAdminLevel(user_level)) {
 
 				RoomClient rcl = ClientListManager.getInstance()
 						.getClientByPublicSID(publicSID);
@@ -1817,7 +1819,7 @@ public class Usermanagement {
 	public SearchResult getUsersListWithSearch(Long user_level, int start,
 			int max, String orderby, boolean asc, String search) {
 		try {
-			if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)) {
+			if (authLevelManagement.checkAdminLevel(user_level)) {
 
 				String hql = "select c from Users c "
 						+ "where c.deleted = 'false' " + "AND ("

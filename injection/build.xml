@@ -633,8 +633,7 @@
 	        <formatter type="plain"/>
 	        <batchtest fork="yes" todir="${report.dir}">
 	            <fileset dir="${main.out.dir}">
-<!--	                <include name="org/openmeetings/test/**/*Test*"/> -->
-	            	<include name="**/TestAddEmailToAdress*"/>
+	                <include name="org/openmeetings/test/**/Test*"/>
 	            </fileset>
 	        </batchtest>
 	    </junit> 

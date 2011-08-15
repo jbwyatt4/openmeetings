@@ -53,6 +53,10 @@ public class ConferenceLibrary implements IPendingServiceCallback {
     private Usermanagement userManagement;
     @Autowired
     private FileExplorerItemDaoImpl fileExplorerItemDao;
+	@Autowired
+	private AuthLevelmanagement authLevelManagement;
+	@Autowired
+	private LibraryWmlLoader libraryWmlLoader;
 
     public ClientListManager getClientListManager() {
         return clientListManager;
@@ -88,7 +92,7 @@ public class ConferenceLibrary implements IPendingServiceCallback {
             log.debug("#############users_id : " + users_id);
             log.debug("#############user_level : " + user_level);
 
-            if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
+            if (authLevelManagement.checkUserLevel(user_level)) {
 
                 String current_dir = ScopeApplicationAdapter.webAppPath
                         + File.separatorChar + "upload";
@@ -133,7 +137,7 @@ public class ConferenceLibrary implements IPendingServiceCallback {
             Long users_id = sessionManagement.checkSession(SID);
             Long user_level = userManagement.getUserLevelByID(
                     users_id);
-            if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
+            if (authLevelManagement.checkUserLevel(user_level)) {
                 // LinkedHashMap tObject = (LinkedHashMap)t;
                 // ArrayList tObject = (ArrayList)t;
 
@@ -189,7 +193,7 @@ public class ConferenceLibrary implements IPendingServiceCallback {
             Long user_level = userManagement.getUserLevelByID(
                     users_id);
             
-            if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
+            if (authLevelManagement.checkUserLevel(user_level)) {
             	
             	IConnection current = Red5.getConnectionLocal();
     			RoomClient currentClient = this.clientListManager.getClientByStreamId(current.getClient().getId());
@@ -205,7 +209,7 @@ public class ConferenceLibrary implements IPendingServiceCallback {
                 
                 FileExplorerItem fileExplorerItem = fileExplorerItemDao.getFileExplorerItemsById(fileExplorerItemId);
 
-                ArrayList roomItems = LibraryWmlLoader.getInstance().loadWmlFile(current_dir,
+                ArrayList roomItems = libraryWmlLoader.loadWmlFile(current_dir,
                 										fileExplorerItem.getWmlFilePath());
                 
                 Map whiteboardObjClear = new HashMap();
@@ -272,7 +276,7 @@ public class ConferenceLibrary implements IPendingServiceCallback {
             Long users_id = sessionManagement.checkSession(SID);
             Long user_level = userManagement.getUserLevelByID(
                     users_id);
-            if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
+            if (authLevelManagement.checkUserLevel(user_level)) {
                 String roomName = room_id.toString();
                 String current_dir = ScopeApplicationAdapter.webAppPath
                         + File.separatorChar + "upload" + File.separatorChar
@@ -301,7 +305,7 @@ public class ConferenceLibrary implements IPendingServiceCallback {
             Long users_id = Sessionmanagement.getInstance().checkSession(SID);
             Long user_level = userManagement.getUserLevelByID(
                     users_id);
-            if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
+            if (authLevelManagement.checkUserLevel(user_level)) {
 
                 log.debug("room_id " + room_id);
 
@@ -355,7 +359,7 @@ public class ConferenceLibrary implements IPendingServiceCallback {
             Long users_id = Sessionmanagement.getInstance().checkSession(SID);
             Long user_level = userManagement.getUserLevelByID(
                     users_id);
-            if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
+            if (authLevelManagement.checkUserLevel(user_level)) {
 
                 log.debug("parentFileExplorerItemId "
                         + parentFileExplorerItemId);
@@ -389,7 +393,7 @@ public class ConferenceLibrary implements IPendingServiceCallback {
             Long users_id = Sessionmanagement.getInstance().checkSession(SID);
             Long user_level = userManagement.getUserLevelByID(
                     users_id);
-            if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
+            if (authLevelManagement.checkUserLevel(user_level)) {
 
                 log.debug("addFolder " + parentFileExplorerItemId);
 
@@ -431,7 +435,7 @@ public class ConferenceLibrary implements IPendingServiceCallback {
             Long users_id = Sessionmanagement.getInstance().checkSession(SID);
             Long user_level = userManagement.getUserLevelByID(
                     users_id);
-            if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
+            if (authLevelManagement.checkUserLevel(user_level)) {
 
                 log.debug("deleteFileOrFolder " + fileExplorerItemId);
 
@@ -451,7 +455,7 @@ public class ConferenceLibrary implements IPendingServiceCallback {
             Long users_id = Sessionmanagement.getInstance().checkSession(SID);
             Long user_level = userManagement.getUserLevelByID(
                     users_id);
-            if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
+            if (authLevelManagement.checkUserLevel(user_level)) {
 
                 log.debug("deleteFileOrFolder " + fileExplorerItemId);
 
@@ -472,7 +476,7 @@ public class ConferenceLibrary implements IPendingServiceCallback {
             Long users_id = Sessionmanagement.getInstance().checkSession(SID);
             Long user_level = userManagement.getUserLevelByID(
                     users_id);
-            if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
+            if (authLevelManagement.checkUserLevel(user_level)) {
 
                 log.debug("deleteFileOrFolder " + fileExplorerItemId);
 
@@ -512,7 +516,7 @@ public class ConferenceLibrary implements IPendingServiceCallback {
             Long user_level = userManagement.getUserLevelByID(
                     users_id);
 
-            if (AuthLevelmanagement.getInstance().checkUserLevel(user_level)) {
+            if (authLevelManagement.checkUserLevel(user_level)) {
 
                 IConnection current = Red5.getConnectionLocal();
                 String streamid = current.getClient().getId();

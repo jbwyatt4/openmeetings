@@ -1,25 +1,20 @@
 package org.openmeetings.test.userdata;
 
-import junit.framework.TestCase;
-
+import org.junit.Test;
 import org.openmeetings.app.persistence.beans.basic.Sessiondata;
 import org.openmeetings.app.remote.MainService;
+import org.openmeetings.test.AbstractOpenmeetingsSpringTest;
 import org.openmeetings.utils.crypt.ManageCryptStyle;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class TestAuth extends TestCase {
-
+public class TestAuth extends AbstractOpenmeetingsSpringTest {
 	@Autowired
 	private ManageCryptStyle manageCryptStyle;
+	@Autowired
+	private MainService mService;
 
-	public TestAuth(String testname) {
-		super(testname);
-		// TODO Auto-generated constructor stub
-	}
-
+	@Test
 	public void testTestAuth() {
-
-		MainService mService = new MainService();
 		Sessiondata sessionData = mService.getsessiondata();
 
 		System.out.println("sessionData: " + sessionData.getSession_id());

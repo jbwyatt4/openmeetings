@@ -29,6 +29,8 @@ public class OrganisationService {
 	private Usermanagement userManagement;
 	@Autowired
 	private Organisationmanagement organisationmanagement;
+	@Autowired
+	private AuthLevelmanagement authLevelManagement;
 
 	/**
 	 * Loads a List of all availible Organisations (ADmin-role only)
@@ -136,7 +138,7 @@ public class OrganisationService {
 		try {
 			Long users_id = sessionManagement.checkSession(SID);
 			Long user_level = userManagement.getUserLevelByID(users_id);
-			if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)) {
+			if (authLevelManagement.checkAdminLevel(user_level)) {
 				return organisationmanagement
 						.getUsersSearchResultByOrganisationId(organisation_id,
 								start, max, orderby, asc);
@@ -157,7 +159,7 @@ public class OrganisationService {
 		try {
 			Long users_id = sessionManagement.checkSession(SID);
 			Long user_level = userManagement.getUserLevelByID(users_id);
-			if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)) {
+			if (authLevelManagement.checkAdminLevel(user_level)) {
 				return organisationmanagement.addUserToOrganisation(user_id,
 						organisation_id, users_id, comment);
 			} else {

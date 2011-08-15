@@ -33,6 +33,7 @@ public class MethodGateway extends HttpServlet {
 	private Usermanagement userManagement;
 	private Roommanagement roommanagement;
 	private MainService mainService;
+	private AuthLevelmanagement authLevelManagement;
 
 	@Override
 	public void init(ServletConfig config) throws ServletException {
@@ -41,6 +42,7 @@ public class MethodGateway extends HttpServlet {
 		userManagement = (Usermanagement)config.getServletContext().getAttribute("userManagement");
 		roommanagement = (Roommanagement)config.getServletContext().getAttribute("roommanagement");
 		mainService = (MainService)config.getServletContext().getAttribute("mainService");
+		authLevelManagement = (AuthLevelmanagement)config.getServletContext().getAttribute("authLevelManagement");
 	}
 	
 	/*
@@ -155,7 +157,7 @@ public class MethodGateway extends HttpServlet {
 
 					Long users_id = sessionManagement.checkSession(SID);
 					Long user_level = userManagement.getUserLevelByID(users_id);
-					if (AuthLevelmanagement.getInstance().checkAdminLevel(
+					if (authLevelManagement.checkAdminLevel(
 							user_level)) {
 
 						RemoteSessionObject remoteSessionObject = new RemoteSessionObject(

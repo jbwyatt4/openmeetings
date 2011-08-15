@@ -31,6 +31,7 @@ public class Import extends HttpServlet {
     private Usermanagement userManagement;
 	private UsersDaoImpl usersDao;
 	private ScopeApplicationAdapter scopeApplicationAdapter;
+	private AuthLevelmanagement authLevelManagement;
 	
 	@Override
 	public void init(ServletConfig config) throws ServletException {
@@ -39,6 +40,7 @@ public class Import extends HttpServlet {
 		userManagement = (Usermanagement)config.getServletContext().getAttribute("userManagement");
 		usersDao = (UsersDaoImpl)config.getServletContext().getAttribute("usersDao");
 		scopeApplicationAdapter = (ScopeApplicationAdapter)config.getServletContext().getAttribute("scopeApplicationAdapter");
+		authLevelManagement = (AuthLevelmanagement)config.getServletContext().getAttribute("authLevelManagement");
 	}
 	
 	/*
@@ -79,7 +81,7 @@ public class Import extends HttpServlet {
 			log.debug("moduleName: " + moduleName);
 
 			// if (user_level!=null && user_level > 0) {
-			if (AuthLevelmanagement.getInstance().checkAdminLevel(user_level)) {
+			if (authLevelManagement.checkAdminLevel(user_level)) {
 				if (moduleName.equals("users")) {
 					log.error("Import Users");
 					String organisation = httpServletRequest.getParameter("secondid");
