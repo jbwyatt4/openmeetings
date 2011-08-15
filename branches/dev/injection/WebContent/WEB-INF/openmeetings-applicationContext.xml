@@ -115,7 +115,38 @@
 		</property>
 	</bean>
 	
-	
+    <!-- New Class for the Streaming Handlers -->
+    <bean id="web.handler" class="org.openmeetings.app.remote.red5.ScopeApplicationAdapter"/>
+    <bean id="openmeetings.ClientListManager" class="org.openmeetings.app.remote.red5.ClientListManager" />
+    <bean id="openmeetings.EmoticonsManager" class="org.openmeetings.app.remote.red5.EmoticonsManager" />
+    <bean id="openmeetings.WhiteBoardObjectListManager" class="org.openmeetings.app.remote.red5.WhiteBoardObjectListManager" />
+    <bean id="openmeetings.WhiteBoardObjectListManagerById" class="org.openmeetings.app.remote.red5.WhiteBoardObjectListManagerById" />
+
+	<!-- Services -->
+    <import resource="red5-services/appointmentcategoryservice.service.xml"/> 
+    <import resource="red5-services/appointmentreminderservice.service.xml"/>
+    <import resource="red5-services/calendarservice.service.xml"/> 
+    <import resource="red5-services/meetingmemberservice.service.xml"/>  
+    <import resource="red5-services/fileservice.service.xml"/>  
+    <import resource="red5-services/conferenceservice.service.xml"/>  
+    <import resource="red5-services/userservice.service.xml"/>  
+    <import resource="red5-services/organisationservice.service.xml"/>  
+    <import resource="red5-services/configservice.service.xml"/>  
+    <import resource="red5-services/errorservice.service.xml"/>  
+    <import resource="red5-services/pollservice.service.xml"/>  
+    <import resource="red5-services/xmlcrm.service.xml"/>  
+    <import resource="red5-services/languageservice.service.xml"/>  
+    <import resource="red5-services/chatservice.service.xml"/>  
+    <import resource="red5-services/streamservice.service.xml"/>  
+    <import resource="red5-services/invitationservice.service.xml"/>  
+    <import resource="red5-services/whiteboardservice.service.xml"/>  
+    <import resource="red5-services/printservice.service.xml"/>  
+    <import resource="red5-services/flvrecorderservice.service.xml"/> 
+    <import resource="red5-services/ldapconfigservice.service.xml"/>
+    
+    <!-- Scheduled tasks --> 
+    <import resource="red5-services/schedulerJobs.service.xml"/>  
+
 	<!-- Interface Transactional -->
 	<bean id="appointmentReminderTypDaoImpl" class="org.openmeetings.app.data.calendar.daos.AppointmentReminderTypDaoImpl" />
 	<bean id="appointmentCategoryDaoImpl" class="org.openmeetings.app.data.calendar.daos.AppointmentCategoryDaoImpl" />
