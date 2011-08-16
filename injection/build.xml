@@ -615,14 +615,14 @@
         <fileset dir="${red5.root}" includes="*.jar" />
     	<path refid="compile.classpath" />
 	    <pathelement path="${classes.dir}" />
-    	<pathelement path="src/META-INF" />
+    	<pathelement path="src" />
         <fileset dir="${red5.root}/lib" includes="*.jar" />
+    	<fileset dir="${database.lib}" includes="*.jar" />
     	<pathelement path="${red5.root}/conf" />
     	<pathelement path="${om.dist.webapp}" />
     	<pathelement path="${om.dist.webapp}/WEB-INF" />
     </path>
 	<target name="test" depends="enhance">
-<!--	<target name="test"> -->
 	    <mkdir dir="${report.dir}"/>
     	<property name="myclsp" refid="junit.classpath" />
 <!--		<echo message="${myclsp}" /> -->
