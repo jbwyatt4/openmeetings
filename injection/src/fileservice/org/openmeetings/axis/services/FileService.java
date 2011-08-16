@@ -34,8 +34,6 @@ import org.openmeetings.utils.StoredFile;
 import org.red5.logging.Red5LoggerFactory;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.web.context.support.WebApplicationContextUtils;
 
 public class FileService {
 	
@@ -48,6 +46,8 @@ public class FileService {
 	private FileExplorerItemDaoImpl fileExplorerItemDao;
 	@Autowired
 	private AuthLevelmanagement authLevelManagement;
+	@Autowired
+	private FileProcessor fileProcessor;
 
 	public ServletContext getServletContext()
 	{
@@ -94,9 +94,6 @@ public class FileService {
 	        if (authLevelManagement.checkWebServiceLevel(User_level)){
 	        	
 				String current_dir = getServletContext().getRealPath("/");
-				
-				ApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(getServletContext());
-		        FileProcessor fileProcessor = (FileProcessor) context.getBean("openmeetings.FileProcessor");
 				
 		        URL url = new URL(path);
 		        URLConnection uc = url.openConnection();
@@ -184,9 +181,6 @@ public class FileService {
 	        if (authLevelManagement.checkWebServiceLevel(User_level)){
 	        	
 				String current_dir = getServletContext().getRealPath("/");
-				
-				ApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(getServletContext());
-		        FileProcessor fileProcessor = (FileProcessor) context.getBean("openmeetings.FileProcessor");
 				
 		        URL url = new URL(path);
 		        URLConnection uc = url.openConnection();

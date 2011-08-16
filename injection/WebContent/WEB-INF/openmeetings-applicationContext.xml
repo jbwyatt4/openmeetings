@@ -114,6 +114,9 @@
 				<entry key="authLevelManagement">
                     <ref bean="authLevelManagement"/>
                 </entry>
+				<entry key="fileProcessor">
+                    <ref bean="openmeetings.FileProcessor"/>
+                </entry>
 			</map>
 		</property>
 	</bean>
