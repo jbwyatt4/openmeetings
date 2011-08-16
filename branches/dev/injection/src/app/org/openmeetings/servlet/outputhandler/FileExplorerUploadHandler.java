@@ -15,19 +15,19 @@ import org.openmeetings.app.data.file.dao.FileExplorerItemDaoImpl;
 import org.openmeetings.app.remote.red5.ScopeApplicationAdapter;
 import org.red5.logging.Red5LoggerFactory;
 import org.slf4j.Logger;
-import org.springframework.context.ApplicationContext;
-import org.springframework.web.context.support.WebApplicationContextUtils;
 
 public class FileExplorerUploadHandler extends UploadHandler {
     private static final long serialVersionUID = 2848421357849982426L;
     private static final Logger log = Red5LoggerFactory.getLogger(FileExplorerUploadHandler.class, ScopeApplicationAdapter.webAppRootKey);
 
 	private FileExplorerItemDaoImpl fileExplorerItemDao;
+	private FileProcessor fileProcessor;
 
 	@Override
 	public void init(ServletConfig config) throws ServletException {
 		super.init(config);
 		fileExplorerItemDao = (FileExplorerItemDaoImpl)config.getServletContext().getAttribute("fileExplorerItemDao");
+		fileProcessor = (FileProcessor)config.getServletContext().getAttribute("fileProcessor");
 	}
 	
     @Override
@@ -67,10 +67,6 @@ public class FileExplorerUploadHandler extends UploadHandler {
         String fileSystemName = upload.getBaseFilename("Filedata");
         log.debug("fileSystemName: " + fileSystemName);
 
-        ApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(getServletContext());
-        
-        FileProcessor fileProcessor = (FileProcessor) context.getBean("openmeetings.FileProcessor");
-        
         HashMap<String, HashMap<String, Object>> returnError = fileProcessor.processFile(userId, room_id_to_Store, 
         		isOwner, is, parentFolderId, fileSystemName, current_dir, hs,
         		0L, ""); //externalFilesId, externalType
