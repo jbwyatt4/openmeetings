@@ -11,6 +11,7 @@ import org.openmeetings.app.data.basic.Fieldmanagment;
 import org.openmeetings.app.data.basic.Sessionmanagement;
 import org.openmeetings.app.data.beans.basic.SearchResult;
 import org.openmeetings.app.data.user.Usermanagement;
+import org.openmeetings.app.persistence.beans.lang.FieldLanguage;
 import org.openmeetings.app.persistence.beans.lang.Fieldlanguagesvalues;
 import org.openmeetings.app.persistence.beans.lang.Fieldvalues;
 import org.openmeetings.app.remote.red5.ScopeApplicationAdapter;
@@ -45,7 +46,7 @@ public class LanguageService {
 	 * 
 	 * @return
 	 */
-	public List getLanguages() {
+	public List<FieldLanguage> getLanguages() {
 		return fieldLanguageDaoImpl.getLanguages();
 	}
 

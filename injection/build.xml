@@ -28,9 +28,9 @@
     <property name="userservice.src.dir" value="${basedir}/src/userservice"/>
     
     <property name="classes.dir" value="${basedir}/bin"/>
-    <property name="dist.dir" value="dist"/>
+    <property name="dist.dir" value="${basedir}/dist"/>
 	<property name="red5.root" value="${dist.dir}/red5"/>
-	<property name="report.dir" value="junitreport"/>
+	<property name="report.dir" value="${basedir}/junitreport"/>
 	
     <!-- Conf dirs -->
     <property name="conf.dir" value="${basedir}/conf"/>
@@ -39,7 +39,7 @@
     <property name="project.distname" value="openmeetings"/>
 
     <!-- libraries -->
-    <property name="project.lib" value="./lib"/>
+    <property name="project.lib" value="${basedir}/lib"/>
 	
 	<!-- LPS Properties -->
 	<property name="out.dir.swf" value = "${basedir}/${dist.dir}/red5/webapps/${project.distname}/" />
@@ -611,7 +611,11 @@
 	<!-- Unit Tests -->    
 	<property name="om.dist.webapp" value="${red5.root}/webapps/${project.distname}"/>
 	
-    <path id="junit.classpath">
+	<condition property="junit.test.pattern" value="${testcases}" else="Test*">
+		<isset property="testcases" />
+	</condition>
+	
+	<path id="junit.classpath">
         <fileset dir="${red5.root}" includes="*.jar" />
     	<path refid="compile.classpath" />
 	    <pathelement path="${classes.dir}" />
@@ -622,7 +626,7 @@
     	<pathelement path="${om.dist.webapp}" />
     	<pathelement path="${om.dist.webapp}/WEB-INF" />
     </path>
-	<target name="test" depends="enhance">
+	<target name="test" depends="enhance" description="Will run all tests unless -Dtestcases=_file_name_pattern_ will be passed">
 	    <mkdir dir="${report.dir}"/>
     	<property name="myclsp" refid="junit.classpath" />
 <!--		<echo message="${myclsp}" /> -->
@@ -633,7 +637,7 @@
 	        <formatter type="plain"/>
 	        <batchtest fork="yes" todir="${report.dir}">
 	            <fileset dir="${main.out.dir}">
-	                <include name="org/openmeetings/test/**/Test*"/>
+	                <include name="org/openmeetings/test/**/${junit.test.pattern}"/>
 	            </fileset>
 	        </batchtest>
 	    </junit> 
