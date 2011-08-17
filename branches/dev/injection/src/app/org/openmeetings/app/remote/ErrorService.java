@@ -16,7 +16,6 @@ import org.springframework.beans.factory.annotation.Autowired;
  * 
  */
 public class ErrorService {
-
 	private static final Logger log = Red5LoggerFactory.getLogger(
 			MainService.class, ScopeApplicationAdapter.webAppRootKey);
 
@@ -40,7 +39,7 @@ public class ErrorService {
 		// Usermanagement.getInstance().getUserLevelByID(users_id);
 
 		if (errorid < 0) {
-			// log.debug("errorid,language_id: "+errorid+"|"+language_id);
+			log.debug("errorid, language_id: " + errorid + "|" + language_id);
 			ErrorValues eValues = errorManagement.getErrorValuesById(errorid
 					* (-1));
 			if (eValues != null) {
