@@ -28,7 +28,7 @@
     <property name="userservice.src.dir" value="${basedir}/src/userservice"/>
     
     <property name="classes.dir" value="${basedir}/bin"/>
-    <property name="dist.dir" value="${basedir}/dist"/>
+    <property name="dist.dir" value="dist"/>
 	<property name="red5.root" value="${dist.dir}/red5"/>
 	<property name="report.dir" value="${basedir}/junitreport"/>
 	
