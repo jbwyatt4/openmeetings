@@ -1,4 +1,4 @@
-package org.openmeetings.test.service;
+package org.openmeetings.test.error;
 
 import org.junit.Test;
 import org.openmeetings.app.persistence.beans.lang.FieldLanguage;
