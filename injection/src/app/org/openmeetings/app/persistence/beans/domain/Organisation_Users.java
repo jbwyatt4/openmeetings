@@ -24,7 +24,7 @@ public class Organisation_Users implements Serializable {
 	private Long organisation_users_id;
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "organisation_id")
+	@JoinColumn(name = "organisation_id", insertable = true, updatable = true)
 	private Organisation organisation;
 
 	@Column(name = "user_id")

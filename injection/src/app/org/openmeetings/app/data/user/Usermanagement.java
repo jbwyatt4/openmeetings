@@ -480,8 +480,7 @@ public class Usermanagement {
 			String userOffers, String userSearchs, Boolean showContactData,
 			Boolean showContactDataToContacts) {
 
-		if (authLevelManagement.checkUserLevel(user_level)
-				&& user_id != 0) {
+		if (authLevelManagement.checkUserLevel(user_level) && user_id != 0) {
 			try {
 				Users us = usersDao.getUser(user_id);
 
@@ -512,6 +511,14 @@ public class Usermanagement {
 
 				if (checkName && checkEmail) {
 					// log.info("user_id " + user_id);
+
+					// add or delete organisations from this user
+					if (organisations != null) {
+						organisationmanagement.updateUserOrganisationsByUser(
+								us, organisations);
+					}
+
+					em.refresh(us);
 
 					us.setLastname(lastname);
 					us.setFirstname(firstname);
@@ -547,12 +554,6 @@ public class Usermanagement {
 							additionalname, comment, fax, email, phone);
 					// emailManagement.updateUserEmail(mail.getMail().getMail_id(),user_id,
 					// email);
-
-					// add or delete organisations from this user
-					if (organisations != null) {
-						organisationmanagement.updateUserOrganisationsByUser(
-								us, organisations);
-					}
 
 					if (generateSipUserData) {
 
@@ -619,7 +620,6 @@ public class Usermanagement {
 					// if (!em.contains(us)) {
 					em.merge(us);
 
-					em.refresh(us);
 					// }
 					// }
 
@@ -1167,6 +1167,9 @@ public class Usermanagement {
 			users.setDeleted("false");
 
 			users = em.merge(users);
+
+			em.flush();
+
 			Long user_id = users.getUser_id();
 
 			return user_id;

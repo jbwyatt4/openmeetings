@@ -475,7 +475,7 @@ public class Organisationmanagement {
 
 				long id = orgUser.getOrganisation_users_id();
 
-				em.refresh(usersDao.getUser(user_id));
+				em.flush();
 
 				return id;
 			} else {

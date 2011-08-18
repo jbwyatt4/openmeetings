@@ -119,8 +119,7 @@ public class UserService {
 									.getFieldvalues_id(), language_id);
 					Fieldlanguagesvalues typeValue = fieldmanagment
 							.getFieldByIdAndLanguage(eValues.getErrorType()
-									.getFieldvalues().getFieldvalues_id(),
-									language_id);
+									.getFieldvalues_id(), language_id);
 					if (errorValue != null) {
 						return new ErrorResult(errorid, errorValue.getValue(),
 								typeValue.getValue());
@@ -145,8 +144,7 @@ public class UserService {
 			Long users_id = sessionManagement.checkSession(SID);
 			Long user_level = userManagement.getUserLevelByID(users_id);
 
-			if (authLevelManagement.checkWebServiceLevel(
-					user_level)) {
+			if (authLevelManagement.checkWebServiceLevel(user_level)) {
 
 				Configuration conf = cfgManagement.getConfKey(3L,
 						"default.timezone");
@@ -201,8 +199,7 @@ public class UserService {
 			Long users_id = sessionManagement.checkSession(SID);
 			Long user_level = userManagement.getUserLevelByID(users_id);
 
-			if (authLevelManagement.checkWebServiceLevel(
-					user_level)) {
+			if (authLevelManagement.checkWebServiceLevel(user_level)) {
 
 				Long user_id = userManagement.registerUser(username, userpass,
 						lastname, firstname, email, new Date(), street,
@@ -432,8 +429,7 @@ public class UserService {
 		try {
 			Long users_id = sessionManagement.checkSession(SID);
 			Long user_level = userManagement.getUserLevelByID(users_id);
-			if (authLevelManagement.checkWebServiceLevel(
-					user_level)) {
+			if (authLevelManagement.checkWebServiceLevel(user_level)) {
 
 				RemoteSessionObject remoteSessionObject = new RemoteSessionObject(
 						username, firstname, lastname, profilePictureUrl, email);
@@ -492,8 +488,7 @@ public class UserService {
 		try {
 			Long users_id = sessionManagement.checkSession(SID);
 			Long user_level = userManagement.getUserLevelByID(users_id);
-			if (authLevelManagement.checkWebServiceLevel(
-					user_level)) {
+			if (authLevelManagement.checkWebServiceLevel(user_level)) {
 
 				RemoteSessionObject remoteSessionObject = new RemoteSessionObject(
 						username, firstname, lastname, profilePictureUrl,
@@ -536,8 +531,7 @@ public class UserService {
 		try {
 			Long users_id = sessionManagement.checkSession(SID);
 			Long user_level = userManagement.getUserLevelByID(users_id);
-			if (authLevelManagement.checkWebServiceLevel(
-					user_level)) {
+			if (authLevelManagement.checkWebServiceLevel(user_level)) {
 
 				RemoteSessionObject remoteSessionObject = new RemoteSessionObject(
 						username, firstname, lastname, profilePictureUrl,
@@ -570,8 +564,8 @@ public class UserService {
 					showAudioVideoTest = true;
 				}
 
-				String hash = soapLoginDao.addSOAPLogin(SID,
-						room_id, becomeModerator, showAudioVideoTest, false, // allowSameURLMultipleTimes
+				String hash = soapLoginDao.addSOAPLogin(SID, room_id,
+						becomeModerator, showAudioVideoTest, false, // allowSameURLMultipleTimes
 						null, // recording_id
 						false, // showNickNameDialogAsInt
 						"room", // LandingZone,
@@ -602,8 +596,7 @@ public class UserService {
 		try {
 			Long users_id = sessionManagement.checkSession(SID);
 			Long user_level = userManagement.getUserLevelByID(users_id);
-			if (authLevelManagement.checkWebServiceLevel(
-					user_level)) {
+			if (authLevelManagement.checkWebServiceLevel(user_level)) {
 
 				RemoteSessionObject remoteSessionObject = new RemoteSessionObject(
 						username, firstname, lastname, profilePictureUrl,
@@ -636,8 +629,8 @@ public class UserService {
 					showAudioVideoTest = true;
 				}
 
-				String hash = soapLoginDao.addSOAPLogin(SID,
-						room_id, becomeModerator, showAudioVideoTest, true, // allowSameURLMultipleTimes
+				String hash = soapLoginDao.addSOAPLogin(SID, room_id,
+						becomeModerator, showAudioVideoTest, true, // allowSameURLMultipleTimes
 						null, // recording_id
 						false, // showNickNameDialogAsInt
 						"room", // LandingZone,
@@ -667,8 +660,7 @@ public class UserService {
 		try {
 			Long users_id = sessionManagement.checkSession(SID);
 			Long user_level = userManagement.getUserLevelByID(users_id);
-			if (authLevelManagement.checkWebServiceLevel(
-					user_level)) {
+			if (authLevelManagement.checkWebServiceLevel(user_level)) {
 
 				RemoteSessionObject remoteSessionObject = new RemoteSessionObject(
 						username, firstname, lastname, profilePictureUrl,
@@ -707,8 +699,8 @@ public class UserService {
 					allowRecordingBool = true;
 				}
 
-				String hash = soapLoginDao.addSOAPLogin(SID,
-						room_id, becomeModerator, showAudioVideoTest, true, // allowSameURLMultipleTimes
+				String hash = soapLoginDao.addSOAPLogin(SID, room_id,
+						becomeModerator, showAudioVideoTest, true, // allowSameURLMultipleTimes
 						null, // recording_id
 						false, // showNickNameDialogAsInt
 						"room", // LandingZone,
@@ -736,8 +728,7 @@ public class UserService {
 		try {
 			Long users_id = sessionManagement.checkSession(SID);
 			Long user_level = userManagement.getUserLevelByID(users_id);
-			if (authLevelManagement.checkWebServiceLevel(
-					user_level)) {
+			if (authLevelManagement.checkWebServiceLevel(user_level)) {
 
 				RemoteSessionObject remoteSessionObject = new RemoteSessionObject(
 						username, firstname, lastname, profilePictureUrl,
@@ -760,8 +751,8 @@ public class UserService {
 
 				sessionManagement.updateUserRemoteSession(SID, xmlString);
 
-				String hash = soapLoginDao.addSOAPLogin(SID,
-						null, false, true, true, // allowSameURLMultipleTimes
+				String hash = soapLoginDao.addSOAPLogin(SID, null, false, true,
+						true, // allowSameURLMultipleTimes
 						null, // recording_id
 						false, // showNickNameDialogAsInt
 						"dashboard", // LandingZone,
@@ -796,8 +787,7 @@ public class UserService {
 
 			Long users_id = sessionManagement.checkSession(SID);
 			Long user_level = userManagement.getUserLevelByID(users_id);
-			if (authLevelManagement.checkWebServiceLevel(
-					user_level)) {
+			if (authLevelManagement.checkWebServiceLevel(user_level)) {
 
 				RemoteSessionObject remoteSessionObject = new RemoteSessionObject(
 						username, firstname, lastname, profilePictureUrl,
@@ -836,9 +826,9 @@ public class UserService {
 					showNickNameDialog = true;
 				}
 
-				String hash = soapLoginDao.addSOAPLogin(SID,
-						room_id, becomeModerator, showAudioVideoTest, true,
-						null, showNickNameDialog, "room", // LandingZone,
+				String hash = soapLoginDao.addSOAPLogin(SID, room_id,
+						becomeModerator, showAudioVideoTest, true, null,
+						showNickNameDialog, "room", // LandingZone,
 						true // allowRecording
 						);
 
@@ -863,8 +853,7 @@ public class UserService {
 		try {
 			Long users_id = sessionManagement.checkSession(SID);
 			Long user_level = userManagement.getUserLevelByID(users_id);
-			if (authLevelManagement.checkWebServiceLevel(
-					user_level)) {
+			if (authLevelManagement.checkWebServiceLevel(user_level)) {
 
 				RemoteSessionObject remoteSessionObject = new RemoteSessionObject(
 						username, firstname, "", "", "", externalUserId,
@@ -887,8 +876,8 @@ public class UserService {
 
 				sessionManagement.updateUserRemoteSession(SID, xmlString);
 
-				String hash = soapLoginDao.addSOAPLogin(SID,
-						null, false, false, true, // allowSameURLMultipleTimes
+				String hash = soapLoginDao.addSOAPLogin(SID, null, false,
+						false, true, // allowSameURLMultipleTimes
 						recording_id, // recording_id
 						false, // showNickNameDialogAsInt
 						"room", // LandingZone,
@@ -913,8 +902,7 @@ public class UserService {
 		try {
 			Long users_id = sessionManagement.checkSession(SID);
 			Long user_level = userManagement.getUserLevelByID(users_id);
-			if (authLevelManagement.checkWebServiceLevel(
-					user_level)) {
+			if (authLevelManagement.checkWebServiceLevel(user_level)) {
 
 				return organisationmanagement.addUserToOrganisation(user_id,
 						organisation_id, users_id, comment);
@@ -934,8 +922,7 @@ public class UserService {
 		try {
 			Long users_id = sessionManagement.checkSession(SID);
 			Long user_level = userManagement.getUserLevelByID(users_id);
-			if (authLevelManagement.checkWebServiceLevel(
-					user_level)) {
+			if (authLevelManagement.checkWebServiceLevel(user_level)) {
 				return organisationmanagement
 						.getUsersSearchResultByOrganisationId(organisation_id,
 								start, max, orderby, asc);
