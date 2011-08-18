@@ -18,7 +18,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Transactional
 public class ErrorManagement {
-	private static final Logger log = Red5LoggerFactory.getLogger(ErrorManagement.class, ScopeApplicationAdapter.webAppRootKey);
+	private static final Logger log = Red5LoggerFactory.getLogger(
+			ErrorManagement.class, ScopeApplicationAdapter.webAppRootKey);
 
 	@PersistenceContext
 	private EntityManager em;
@@ -36,7 +37,7 @@ public class ErrorManagement {
 			Long newerrortype_id = eType.getErrortype_id();
 			return newerrortype_id;
 		} catch (Exception ex2) {
-			log.error("[addErrorType]: " + ex2);
+			log.error("[addErrorType]: ", ex2);
 		}
 		return null;
 	}
@@ -51,7 +52,7 @@ public class ErrorManagement {
 			List<ErrorType> ll = query.getResultList();
 			return ll;
 		} catch (Exception ex2) {
-			log.error("[getErrorTypes]: " + ex2);
+			log.error("[getErrorTypes]: ", ex2);
 		}
 		return null;
 	}
@@ -59,25 +60,27 @@ public class ErrorManagement {
 	public ErrorType getErrorType(Long errortype_id) {
 		try {
 			String hql = "select c from ErrorType as c "
-				+ "WHERE c.deleted <> :deleted AND c.errortype_id = :errortype_id";
+					+ "WHERE c.deleted <> :deleted AND c.errortype_id = :errortype_id";
 			Query query = em.createQuery(hql);
 			query.setParameter("deleted", "true");
 			query.setParameter("errortype_id", errortype_id);
-			return (ErrorType)query.getSingleResult();
+			return (ErrorType) query.getSingleResult();
 		} catch (Exception ex2) {
 			log.error("[getErrorType]", ex2);
 		}
 		return null;
 	}
-	
-	public Long addErrorValues(Long errorvalues_id, Long errortype_id, Long fieldvalues_id) {
+
+	public Long addErrorValues(Long errorvalues_id, Long errortype_id,
+			Long fieldvalues_id) {
 		try {
 			ErrorValues eValue = new ErrorValues();
 			eValue.setErrorvalues_id(errorvalues_id);
 			eValue.setErrorType(getErrorType(errortype_id));
 			eValue.setDeleted("false");
 			eValue.setStarttime(new Date());
-			eValue.setFieldvalues(fieldmanagment.getFieldvaluesById(fieldvalues_id));
+			eValue.setFieldvalues(fieldmanagment
+					.getFieldvaluesById(fieldvalues_id));
 			eValue = em.merge(eValue);
 			return eValue.getErrorvalues_id();
 		} catch (Exception ex2) {
@@ -91,7 +94,8 @@ public class ErrorManagement {
 			ErrorValues eValue = new ErrorValues();
 			eValue.setErrortype_id(errortype_id);
 			eValue.setStarttime(new Date());
-			eValue.setFieldvalues(fieldmanagment.getFieldvaluesById(fieldvalues_id));
+			eValue.setFieldvalues(fieldmanagment
+					.getFieldvaluesById(fieldvalues_id));
 			eValue = em.merge(eValue);
 			Long newerrorvalues_id = eValue.getErrorvalues_id();
 			return newerrorvalues_id;
@@ -111,7 +115,7 @@ public class ErrorManagement {
 			Long newerrorvalues_id = eValue.getErrorvalues_id();
 			return newerrorvalues_id;
 		} catch (Exception ex2) {
-			log.error("[addErrorType]: " + ex2);
+			log.error("[addErrorType]: ", ex2);
 		}
 		return null;
 	}
