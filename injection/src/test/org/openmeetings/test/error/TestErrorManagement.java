@@ -24,10 +24,14 @@ public class TestErrorManagement extends AbstractOpenmeetingsSpringTest {
 	
 	private Long getAvailableErrorValuesId() {
 		ErrorValues ev = null;
-		Long result = START_ERRORVALUES_ID;
-		{
+		long result = START_ERRORVALUES_ID;
+		while(true) {
 			ev = errorManagement.getErrorValuesById(++result);
-		} while(ev != null);
+			System.err.println("result = " + result + "; ev == null ? " + (ev == null));
+			if (ev == null) {
+				break;
+			}
+		}
 		return result;
 	}
 	
@@ -35,10 +39,10 @@ public class TestErrorManagement extends AbstractOpenmeetingsSpringTest {
 	public void createErrorValueAndTest() {
 		List<ErrorType> types = errorManagement.getErrorTypes();
 		List<Fieldlanguagesvalues> flv = fieldmanagment.getAllFieldsByLanguage(languageService.getDefaultLanguage().longValue());
-		Long errorValuesId = getAvailableErrorValuesId();
 		Long errorTypeId = types.get(0).getErrortype_id();
 		Long fieldValuesId = flv.get(0).getFieldvalues_id();
-		assertEquals("Errorvalues Id should persists", errorValuesId, errorManagement.addErrorValues(errorValuesId, errorTypeId, fieldValuesId));
+		Long errorValuesId = errorManagement.addErrorValues(getAvailableErrorValuesId(), errorTypeId, fieldValuesId);
+		assertNotNull("Errorvalues Id should persists", errorValuesId);
 		
 		ErrorValues ev = errorManagement.getErrorValuesById(errorValuesId);
 		assertNotNull("Error type should not be null", ev.getErrorType());
