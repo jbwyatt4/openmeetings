@@ -17,12 +17,9 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "errorvalues")
 public class ErrorValues implements Serializable {
-	
-
-	private static final long serialVersionUID = 5450434899598058182L;
+	private static final long serialVersionUID = -1892810463706968018L;
 
 	@Id
-	
 	@Column(name="errorvalues_id")
 	private Long errorvalues_id;
 
@@ -41,11 +38,6 @@ public class ErrorValues implements Serializable {
 	@Column(name="deleted")
 	private String deleted;
 
-    @Column(name="errortype_id")
-	private Long errortype_id;
-
-	@Column(name="fieldvalues_id")
-	private Long fieldvalues_id;
 	public Long getErrorvalues_id() {
 		return errorvalues_id;
 	}
@@ -88,17 +80,19 @@ public class ErrorValues implements Serializable {
 		this.errorType = errorType;
 	}
 	
-	
 	public Long getFieldvalues_id() {
-		return fieldvalues_id;
+		return fieldvalues.getFieldvalues_id();
 	}
+	
 	public void setFieldvalues_id(Long fieldvalues_id) {
-		this.fieldvalues_id = fieldvalues_id;
+		fieldvalues.setFieldvalues_id(fieldvalues_id);
 	}
+	
 	public Long getErrortype_id() {
-		return errortype_id;
+		return errorType.getErrortype_id();
 	}
+	
 	public void setErrortype_id(Long errortype_id) {
-		this.errortype_id = errortype_id;
+		errorType.setErrortype_id(errortype_id);
 	}
 }

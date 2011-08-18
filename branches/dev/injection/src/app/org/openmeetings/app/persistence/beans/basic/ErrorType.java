@@ -3,9 +3,6 @@ package org.openmeetings.app.persistence.beans.basic;
 import java.io.Serializable;
 import java.util.Date;
 
-import org.openmeetings.app.persistence.beans.lang.Fieldvalues;
-
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -14,14 +11,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.openmeetings.app.persistence.beans.lang.Fieldvalues;
+
 @Entity
 @Table(name = "errortypes")
 public class ErrorType implements Serializable {
-	 
-	private static final long serialVersionUID = 8014699369591094542L;
+	private static final long serialVersionUID = 1519570470483604258L;
 
 	@Id
-	
 	@Column(name="errortype_id")
 	private Long errortype_id;
 
@@ -36,9 +33,6 @@ public class ErrorType implements Serializable {
 	@Column(name="deleted")
 	private String deleted;
 
-	@Column(name="fieldvalues_id")
-	private Long fieldvalues_id;
-	
 	public Long getErrortype_id() {
 		return errortype_id;
 	}
@@ -75,11 +69,10 @@ public class ErrorType implements Serializable {
 	}
 	
 	public Long getFieldvalues_id() {
-		return fieldvalues_id;
+		return fieldvalues.getFieldvalues_id();
 	}
+	
 	public void setFieldvalues_id(Long fieldvalues_id) {
-		this.fieldvalues_id = fieldvalues_id;
+		fieldvalues.setFieldvalues_id(fieldvalues_id);
 	}
-
-
 }

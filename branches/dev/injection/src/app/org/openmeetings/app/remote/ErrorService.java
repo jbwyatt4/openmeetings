@@ -16,8 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  * 
  */
 public class ErrorService {
-	private static final Logger log = Red5LoggerFactory.getLogger(
-			MainService.class, ScopeApplicationAdapter.webAppRootKey);
+	private static final Logger log = Red5LoggerFactory.getLogger(ErrorService.class, ScopeApplicationAdapter.webAppRootKey);
 
 	@Autowired
 	private Fieldmanagment fieldmanagment;
@@ -40,30 +39,24 @@ public class ErrorService {
 
 		if (errorid < 0) {
 			log.debug("errorid, language_id: " + errorid + "|" + language_id);
-			ErrorValues eValues = errorManagement.getErrorValuesById(errorid
-					* (-1));
+			ErrorValues eValues = errorManagement.getErrorValuesById(-1 * errorid);
 			if (eValues != null) {
-				// log.debug(eValues.getFieldvalues());
+				log.debug("" + eValues.getFieldvalues());
 				// log.debug(eValues.getFieldvalues().getFieldvalues_id());
 				// log.debug(eValues.getErrorType());
 				// log.debug(eValues.getErrorType().getErrortype_id());
 				// log.debug(eValues.getErrorType().getFieldvalues());
 				// log.debug(eValues.getErrorType().getFieldvalues().getFieldvalues_id());
-				Fieldlanguagesvalues errorValue = fieldmanagment
-						.getFieldByIdAndLanguage(eValues.getFieldvalues()
-								.getFieldvalues_id(), language_id);
-				Fieldlanguagesvalues typeValue = fieldmanagment
-						.getFieldByIdAndLanguage(eValues.getErrorType()
-								.getFieldvalues().getFieldvalues_id(),
-								language_id);
+				Fieldlanguagesvalues errorValue = 
+					fieldmanagment.getFieldByIdAndLanguage(eValues.getFieldvalues().getFieldvalues_id(), language_id);
+				Fieldlanguagesvalues typeValue = 
+					fieldmanagment.getFieldByIdAndLanguage(eValues.getErrorType().getFieldvalues().getFieldvalues_id(), language_id);
 				if (errorValue != null) {
-					return new ErrorResult(errorid, errorValue.getValue(),
-							typeValue.getValue());
+					return new ErrorResult(errorid, errorValue.getValue(), typeValue.getValue());
 				}
 			}
 		} else {
-			return new ErrorResult(errorid,
-					"Error ... please check your input", "Error");
+			return new ErrorResult(errorid, "Error ... please check your input", "Error");
 		}
 
 		return null;
