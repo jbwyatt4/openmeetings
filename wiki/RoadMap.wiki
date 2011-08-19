@@ -10,7 +10,7 @@ Upcoming versions:
   * Refactoring of migration from hibernate to openJPA
   * Integration into Spring for openJPA
   * Improvements on Test and Build Process
-  * Possibility and Guide howto change OpenMeetings webapp name and multiple instances of OpenMeetings
+  * Possibility and Guide howto change !OpenMeetings webapp name and run multiple instances of !OpenMeetings
   * Possibility to show videos on the whiteboard
   * Activity window for better moderation and feedback
 
