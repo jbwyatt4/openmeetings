@@ -59,7 +59,7 @@
 	</path>
 
     <!-- Open JPA -->
-    <property name="openjpa.lib" value="${project.lib}/openjpa"/>
+    <property name="openjpa.lib" value="${project.lib}/openjpa2"/>
     <!-- Log4j -->
     <property name="log4j.lib" value="${project.lib}/log4j" />
     <!-- xDoclet -->
@@ -68,7 +68,8 @@
     <property name="jakarta.common.lib" value="${project.lib}/jakarta-commons" />
     <!--JDBC Drivers-->
     <property name="database.lib" value="${project.lib}/database" />
-    <property name="red5.lib" value="${project.lib}/red5_08rc3" />
+    <property name="red5.lib" value="${basedir}/server/red5" />
+	<property name="red5.server.lib" value="${basedir}/server/red5/lib" />
     <property name="spring.lib" value="${project.lib}/spring" />
     <property name="upload.lib" value="${project.lib}/upload" />
     <property name="xstream.lib" value="${project.lib}/xstream" />
@@ -99,6 +100,7 @@
         <fileset dir="${project.lib}" includes="*.jar"/>
         <fileset dir="${jakarta.common.lib}" includes="*.jar"/>
         <fileset dir="${red5.lib}" includes="*.jar"/>
+    	<fileset dir="${red5.server.lib}" includes="*.jar"/>
         <fileset dir="${upload.lib}" includes="*.jar"/>
         <fileset dir="${xstream.lib}" includes="*.jar"/>
         <fileset dir="${junit.lib}" includes="*.jar" excludes="red5.jar"/>
@@ -217,9 +219,22 @@
         <copy todir="${dist.dir}/red5/lib">
             <fileset dir="${spring.lib}"/>
         </copy>
-		<copy file="${openjpa.lib}/openjpa-all-2.1.0.jar" todir="${dist.dir}/red5/lib"/>
     	
+    	<copy file="${openjpa.lib}/geronimo-jpa_2.0_spec-1.1.jar" todir="${dist.dir}/red5/lib"/>
+    	
+    	<copy todir="${dist.dir}/red5/webapps/${project.distname}/WEB-INF/lib">
+            <fileset dir="${openjpa.lib}">
+                <include name="*.jar"/>
+            	<exclude name="commons-collections-3.2.1.jar"/> <!-- this jar is already in the servers-lib -->
+                <exclude name="geronimo-jpa_2.0_spec-1.1.jar"/>
+            </fileset>
+        </copy>
+    	
+    	<!--
+		<copy file="${openjpa.lib}/openjpa-all-2.1.0.jar" todir="${dist.dir}/red5/lib"/>
     	<copy file="${openjpa.lib}/dom4j-1.6.1.jar" todir="${dist.dir}/red5/webapps/${project.distname}/WEB-INF/lib"/>
+         -->
+        
         <copy todir="${dist.dir}/red5/webapps/${project.distname}/WEB-INF/red5-services">
             <fileset dir="${webcontent.src.dir}/WEB-INF/red5-services" includes="*.xml"/>
         </copy>
@@ -236,7 +251,10 @@
         <chmod dir="${dist.dir}/red5/webapps/${project.distname}/jod" perm="755" includes="**/*.sh"/>
         
         <copy todir="${dist.dir}/red5/webapps/${project.distname}/WEB-INF/lib">
-            <fileset dir="${axis2.lib}"/>
+            <fileset dir="${axis2.lib}">
+            	<include name="*.jar"/>
+                <exclude name="commons-codec-1.3.jar"/>
+            </fileset>
             <fileset dir="${velocity.lib}"/>
             <fileset dir="${batik.lib}"/>
             <fileset dir="${upload.lib}"/>
@@ -589,6 +607,7 @@
 	    <pathelement path="${classes.dir}"/>
 	    <!-- lib contains all of the jars that came with the OpenJPA binary download -->
 	    <fileset dir="${openjpa.lib}" includes="*.jar" />
+		<fileset dir="${openjpa.lib}" includes="*.jar" />
 	</path>
 	
     <!-- define the openjpac task -->
