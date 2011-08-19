@@ -1,4 +1,4 @@
-#summary Roadmap of openmeeting
+#summary Roadmap of openmeetings
 #labels Phase-Requirements
 
 please see our ChangeLog for past releases.
