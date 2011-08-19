@@ -7,7 +7,7 @@ Upcoming versions:
 
 == Release 1.8 ==
 
-  * Refactoring of migration from hibernate to openJPA
+  * Refactoring and migration from hibernate to openJPA
   * Integration into Spring for openJPA
   * Improvements on Test and Build Process
   * Possibility and Guide howto change !OpenMeetings webapp name and run multiple instances of !OpenMeetings
