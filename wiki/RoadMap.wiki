@@ -1,54 +1,28 @@
 #summary Roadmap of openmeeting
 #labels Phase-Requirements
 
-_Open-Meetings is an active project so things may change here_
+please see our ChangeLog for past releases.
 
-=Milestone pre 0.5=
-_released at 03.04.2007_
-  * initial package, basic functionality, one webapp only
-  + developer release
+Upcoming versions:
 
-=Milestone 0.5=
+== Release 1.8 ==
 
-  # _Beta1 released at 24.05.2007_ 
-  # _Beta2 released at 18.06.2007_ [05Beta2Changes] 
-  # _Beta3 released at 06.07.2007_ [05Beta3Changes] 
-  # _Beta4 released at 21.08.2007_ [05Beta4Changes] 
-  # _Beta5 released at 07.10.2007_ [05Beta5Changes] 
-  # _Beta7 released at 06.12.2007_ [05Beta6Changes] 
-  # _Final released at 31.03.2007_
+  * Refactoring of migration from hibernate to openJPA
+  * Integration into Spring for openJPA
+  * Improvements on Test and Build Process
+  * Possibility and Guide howto change OpenMeetings webapp name and multiple instances of OpenMeetings
+  * Possibility to show videos on the whiteboard
+  * Activity window for better moderation and feedback
 
-  * Reworked Conference and Audience Application with Panels (done)
-  * Initial Support for users authentification and administration of users in their organisations
-  * System invitation (done)
-  * Installation guide for this resource to be deployed
-  * Announcement of project to wider audience
-  * Rework Images and Document Converter (done)
-  * Offline Installation (done)
-  * Rework Forms feedback (done)
-  * include [ScreenViewer]
-  * include [SWFPresentationViewer]
-  * include [BackupPanel]
-  * include [LanguageEditor]
-  * improved Chat [ChatModul]
-  * Recording of a meeting/event
-  * reset Password (done)
-  * add Mute Button (done)
-  * improve BuildFromSource
+== Release 1.9 ==
 
-=Milestone 0.6=
+  * TBA
 
-  * Calender for planing a meeting and notifications
-  * openID integration
-  * reworked file-browser
-  * contact management
+== Release 2.0 ==
 
-=Milestone 1.0=
+  * Brainstorming Tools 
+  * Mindmapping Tools
 
-  * More beautiful UI
-  * Wider range of document convertings, uploadings which can be used in whiteboard
-  * Audience-Modus complete
-  * Installation Instructions
+== Release 2.1 == 
 
-=Milestone 1.1=
-  * Module loader available for custom Modules
+  * TBA
