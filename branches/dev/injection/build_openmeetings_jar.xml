@@ -62,8 +62,6 @@
     <property name="openjpa.lib" value="${project.lib}/openjpa2"/>
     <!-- Log4j -->
     <property name="log4j.lib" value="${project.lib}/log4j" />
-    <!-- xDoclet -->
-    <property name="xdoclet.lib" value="${project.lib}/xdoclet" />
     <!-- Jakarta commons -->
     <property name="jakarta.common.lib" value="${project.lib}/jakarta-commons" />
     <!--JDBC Drivers-->
@@ -113,6 +111,7 @@
         <fileset dir="${java2swf.lib}" includes="*.jar"/>
         <fileset dir="${jmf.lib}" includes="*.jar"/>
     	<fileset dir="${junit.lib}" includes="*.jar"/>
+    	<fileset dir="${screenshare.lib}" includes="*kunststoff.jar"/>
     </path>
 	
 	<!-- screenshare classpath -->
