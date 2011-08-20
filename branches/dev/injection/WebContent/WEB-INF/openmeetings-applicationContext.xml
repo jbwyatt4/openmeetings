@@ -117,6 +117,11 @@
 				<entry key="fileProcessor">
                     <ref bean="openmeetings.FileProcessor"/>
                 </entry>
+                <!-- 
+                <entry key="mainService">
+                    <ref bean="xmlcrm.service"/>
+                </entry>
+                 -->
 			</map>
 		</property>
 	</bean>
@@ -241,7 +246,13 @@
        <constructor-arg ref="mailTaskExecutor" />
     </bean>
 	
+	<!-- Axis2 Spring Services Entry -->
+	<bean id="applicationContext" class="org.apache.axis2.extensions.spring.receivers.ApplicationContextHolder" />
 	
+	<!-- Axis2 Services -->
+  	<bean id="userServiceSoap" class="org.openmeetings.axis.services.UserService" />
+  	<bean id="roomServiceSoap" class="org.openmeetings.axis.services.RoomService" />
+  	<bean id="fileServiceSoap" class="org.openmeetings.axis.services.FileService" />
 
 	<tx:annotation-driven transaction-manager="jpaTransactionManager"/>
 	

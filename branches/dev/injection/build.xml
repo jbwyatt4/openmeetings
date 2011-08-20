@@ -76,7 +76,7 @@
     <property name="web.lib" value="${project.lib}" />
     <property name="ical.lib" value="${project.lib}/ical4j" />
     <!-- Apache Axis2 -->
-    <property name="axis2.lib" value="${project.lib}/axis2-1.3" />
+    <property name="axis2.lib" value="${project.lib}/axis2-1.6" />
     <!-- JMF Libe -->
     <property name="jmf.lib" value="${project.lib}/jmf" />
     <!-- SLF4J -->
@@ -412,41 +412,19 @@
                 <attribute name="Class-Path" value="conf/ ${jar.classpath}"/>
             </manifest>
         </jar>  
-        <jar destfile="${dist.dir}/red5/webapps/${project.distname}/WEB-INF/services/FileService.aar">
-            <fileset dir="${fileservice.src.dir}/">
-                <include name="META-INF/**"/>
-            </fileset>
-            <fileset dir="${classes.dir}">
-            	<include name="org/openmeetings/app/data/file/dto/LibraryPresentation.class"/>
-            	<include name="org/openmeetings/app/data/file/dto/LibraryPresenationThumbs.class"/>
-            	<include name="org/openmeetings/app/data/file/dto/LibraryPresentationFile.class"/>
-            	<include name="org/openmeetings/app/data/file/dto/LibraryPresentationThumb.class"/>
-                <include name="org/openmeetings/axis/services/FileService.class"/>
-            	<include name="org/openmeetings/app/data/file/dto/FileExplorerObject.class" />
-            	<include name="org/openmeetings/app/hibernate/beans/files/FileExplorerItem.class" />
-            	<include name="org/openmeetings/axis/services/FileImportError.class"/>
-            </fileset>
-        </jar>  
-        <jar destfile="${dist.dir}/red5/webapps/${project.distname}/WEB-INF/services/RoomService.aar">
-            <fileset dir="${roomservice.src.dir}/">
-                <include name="META-INF/**"/>
-            </fileset>
-            <fileset dir="${classes.dir}">
-            	<include name="org/openmeetings/axis/services/RoomUser.class"/>
-            	<include name="org/openmeetings/axis/services/RoomReturn.class"/>
-                <include name="org/openmeetings/axis/services/RoomService.class"/>
-            	<include name="org/openmeetings/axis/services/RoomCountBean.class"/>
-            	<include name="org/openmeetings/axis/services/FLVRecordingReturn.class"/>
-            </fileset>
-        </jar>  
-        <jar destfile="${dist.dir}/red5/webapps/${project.distname}/WEB-INF/services/UserService.aar">
+    	
+    	<jar destfile="${dist.dir}/red5/webapps/${project.distname}/WEB-INF/services/OpenMeetingsService.aar">
             <fileset dir="${userservice.src.dir}/">
                 <include name="META-INF/**"/>
             </fileset>
+        </jar>
+    	
+    	<jar destfile="${dist.dir}/red5/webapps/${project.distname}/WEB-INF/lib/openmeetings-WebService.jar">
             <fileset dir="${classes.dir}">
-                <include name="org/openmeetings/axis/services/UserService.class"/>
+            	<include name="**/openmeetings/axis/**"/>
             </fileset>
         </jar>
+    	
         <jar destfile="${dist.dir}/red5/webapps/${project.distname}/screen/rtpapplet.jar">
             <fileset dir="${classes.dir}">
                 <include name="**/applet/**"/>

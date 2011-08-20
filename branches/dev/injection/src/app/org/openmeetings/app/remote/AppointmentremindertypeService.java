@@ -22,7 +22,6 @@ public class AppointmentremindertypeService {
 			AppointmentremindertypeService.class,
 			ScopeApplicationAdapter.webAppRootKey);
 
-	private static AppointmentremindertypeService instance = null;
 	@Autowired
 	private Sessionmanagement sessionManagement;
 	@Autowired
@@ -31,14 +30,6 @@ public class AppointmentremindertypeService {
 	private AppointmentReminderTypDaoImpl appointmentReminderTypDaoImpl;
 	@Autowired
 	private AuthLevelmanagement authLevelmanagement;
-
-	public static synchronized AppointmentremindertypeService getInstance() {
-		if (instance == null) {
-			instance = new AppointmentremindertypeService();
-		}
-
-		return instance;
-	}
 
 	/**
 	 * 

@@ -26,16 +26,6 @@ public class AppointmentCategoryService {
 	@Autowired
 	private AuthLevelmanagement authLevelmanagement;
 
-	private static AppointmentCategoryService instance = null;
-
-	public static synchronized AppointmentCategoryService getInstance() {
-		if (instance == null) {
-			instance = new AppointmentCategoryService();
-		}
-
-		return instance;
-	}
-
 	public List<AppointmentCategory> getAppointmentCategoryList(String SID) {
 		log.debug("AppointmenetCategoryService.getAppointmentCategoryList SID : "
 				+ SID);
