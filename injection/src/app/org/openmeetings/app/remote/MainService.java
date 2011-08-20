@@ -162,6 +162,7 @@ public class MainService implements IPendingServiceCallback {
 	 */
 	public int testObject(Object myObject2) {
 		try {
+			@SuppressWarnings("rawtypes")
 			LinkedHashMap myObject = (LinkedHashMap) myObject2;
 			log.debug("testObject " + myObject.size());
 			log.debug("testObject " + myObject.get(1));
@@ -759,6 +760,7 @@ public class MainService implements IPendingServiceCallback {
 	 */
 	public Long registerUserByObject(Object regObjectObj) {
 		try {
+			@SuppressWarnings("rawtypes")
 			Map regObject = (Map) regObjectObj;
 			// regObject.get("Username").toString();
 			// regObject.get("Userpass").toString();
@@ -955,7 +957,7 @@ public class MainService implements IPendingServiceCallback {
 		Long user_level = userManagement.getUserLevelByID(users_id);
 		if (authLevelManagement.checkUserLevel(user_level)) {
 			LinkedHashMap<Integer, RoomClient> lMap = new LinkedHashMap<Integer, RoomClient>();
-			Integer counter = 0;
+			// Integer counter = 0;
 			// for (Iterator<String> it =
 			// Application.getClientList().keySet().iterator();it.hasNext();) {
 			// RoomClient rc = Application.getClientList().get(it.next());
@@ -1018,7 +1020,6 @@ public class MainService implements IPendingServiceCallback {
 	}
 
 	public void resultReceived(IPendingServiceCall arg0) {
-		// TODO Auto-generated method stub
 		log.debug("[resultReceived]" + arg0);
 	}
 

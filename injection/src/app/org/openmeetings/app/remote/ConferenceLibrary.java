@@ -144,11 +144,11 @@ public class ConferenceLibrary implements IPendingServiceCallback {
                 log.debug("saveAsObject :1: " + tObjectRef);
                 log.debug("saveAsObject :2: " + tObjectRef.getClass().getName());
 
-                ArrayList tObject = (ArrayList) tObjectRef;
+                @SuppressWarnings("rawtypes")
+				ArrayList tObject = (ArrayList) tObjectRef;
 
                 log.debug("saveAsObject" + tObject.size());
 
-                String roomName = room_id.toString();
                 String current_dir = ScopeApplicationAdapter.webAppPath
                         + File.separatorChar + "upload" + File.separatorChar;
 
@@ -156,7 +156,7 @@ public class ConferenceLibrary implements IPendingServiceCallback {
                 
                 String localFileName = MD5.do_checksum(new Date().toString())+".wml";
 
-                String wmlPath = LibraryDocumentConverter.getInstance()
+                LibraryDocumentConverter.getInstance()
                         .writeToLocalFolder(current_dir, localFileName, tObject);
 
                 // String wmlPath = current_dir + File.separatorChar+fileName
@@ -187,7 +187,8 @@ public class ConferenceLibrary implements IPendingServiceCallback {
      * @param fileExplorerItemId
      * @param whiteboardId
      */
-    public void loadWmlObject(String SID, Long room_id, Long fileExplorerItemId, Long whiteboardId) {
+    @SuppressWarnings({ "rawtypes", "unchecked" })
+	public void loadWmlObject(String SID, Long room_id, Long fileExplorerItemId, Long whiteboardId) {
         try {
             Long users_id = sessionManagement.checkSession(SID);
             Long user_level = userManagement.getUserLevelByID(
@@ -202,7 +203,6 @@ public class ConferenceLibrary implements IPendingServiceCallback {
     				return;
     			}
             	
-                String roomName = room_id.toString();
                 String current_dir = ScopeApplicationAdapter.webAppPath
                         + File.separatorChar + "upload" + File.separatorChar;
                 log.debug("### this is my working directory: " + current_dir);
@@ -271,7 +271,8 @@ public class ConferenceLibrary implements IPendingServiceCallback {
      * @param fileName
      * @return
      */
-    public ArrayList loadChartObject(String SID, Long room_id, String fileName) {
+    @SuppressWarnings("rawtypes")
+	public ArrayList loadChartObject(String SID, Long room_id, String fileName) {
         try {
             Long users_id = sessionManagement.checkSession(SID);
             Long user_level = userManagement.getUserLevelByID(

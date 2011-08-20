@@ -74,7 +74,8 @@ public class LanguageService {
 	 * @param language_id
 	 * @return
 	 */
-	public List<Map> getLanguageByIdAndMax(Long language_id, int start, int max) {
+	public List<Map<String, Object>> getLanguageByIdAndMax(Long language_id,
+			int start, int max) {
 		return fieldmanagment.getLabelsByLanguage(language_id, start, max);
 	}
 

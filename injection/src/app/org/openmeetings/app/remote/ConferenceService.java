@@ -298,7 +298,7 @@ public class ConferenceService {
 
 	// --------------------------------------------------------------------------------------------
 
-	public Map getAppointMentAndTimeZones(Long room_id) {
+	public Map<String, Object> getAppointMentAndTimeZones(Long room_id) {
 		log.debug("getAppointMentDataForRoom");
 
 		IConnection current = Red5.getConnectionLocal();
@@ -318,7 +318,7 @@ public class ConferenceService {
 			Appointment appointment = appointmentLogic
 					.getAppointmentByRoom(room_id);
 
-			Map returnMap = new HashMap();
+			Map<String, Object> returnMap = new HashMap<String, Object>();
 
 			returnMap.put("appointment", appointment);
 
@@ -374,29 +374,35 @@ public class ConferenceService {
 		Long users_id = sessionManagement.checkSession(SID);
 		Long user_level = userManagement.getUserLevelByID(users_id);
 
-		List<Appointment> points = appointmentLogic
-				.getTodaysAppointmentsForUser(users_id);
-		List<Rooms> result = new ArrayList<Rooms>();
+		if (authLevelManagement.checkUserLevel(user_level)) {
 
-		if (points != null) {
-			for (int i = 0; i < points.size(); i++) {
-				Appointment ment = points.get(i);
+			List<Appointment> points = appointmentLogic
+					.getTodaysAppointmentsForUser(users_id);
+			List<Rooms> result = new ArrayList<Rooms>();
 
-				Long rooms_id = ment.getRoom().getRooms_id();
-				Rooms rooom = roommanagement.getRoomById(rooms_id);
+			if (points != null) {
+				for (int i = 0; i < points.size(); i++) {
+					Appointment ment = points.get(i);
 
-				if (!rooom.getRoomtype().getRoomtypes_id()
-						.equals(room_types_id))
-					continue;
+					Long rooms_id = ment.getRoom().getRooms_id();
+					Rooms rooom = roommanagement.getRoomById(rooms_id);
 
-				rooom.setCurrentusers(this.getRoomClientsListByRoomId(rooom
-						.getRooms_id()));
-				result.add(rooom);
+					if (!rooom.getRoomtype().getRoomtypes_id()
+							.equals(room_types_id))
+						continue;
+
+					rooom.setCurrentusers(this.getRoomClientsListByRoomId(rooom
+							.getRooms_id()));
+					result.add(rooom);
+				}
 			}
-		}
 
-		log.debug("Found " + result.size() + " rooms");
-		return result;
+			log.debug("Found " + result.size() + " rooms");
+			return result;
+
+		} else {
+			return null;
+		}
 
 	}
 
@@ -575,6 +581,7 @@ public class ConferenceService {
 	 * @param argObject
 	 * @return
 	 */
+	@SuppressWarnings({ "rawtypes" })
 	public Long saveOrUpdateRoom(String SID, Object argObject) {
 		try {
 			Long users_id = sessionManagement.checkSession(SID);
