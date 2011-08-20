@@ -36,12 +36,13 @@ public class UploadHandler extends HttpServlet {
 
 	private static final long serialVersionUID = 8955335681521483484L;
 
-	private static final Logger log = Red5LoggerFactory.getLogger(UploadHandler.class, ScopeApplicationAdapter.webAppRootKey);
+	private static final Logger log = Red5LoggerFactory.getLogger(
+			UploadHandler.class, ScopeApplicationAdapter.webAppRootKey);
 
 	private String filesString[] = null;
-	
+
 	private Sessionmanagement sessionManagement;
-    private Usermanagement userManagement;
+	private Usermanagement userManagement;
 	private UsersDaoImpl usersDao;
 	private ScopeApplicationAdapter scopeApplicationAdapter;
 	private GenerateImage generateImage;
@@ -51,15 +52,23 @@ public class UploadHandler extends HttpServlet {
 	@Override
 	public void init(ServletConfig config) throws ServletException {
 		super.init(config);
-		sessionManagement = (Sessionmanagement)config.getServletContext().getAttribute("sessionManagement");
-		userManagement = (Usermanagement)config.getServletContext().getAttribute("userManagement");
-		usersDao = (UsersDaoImpl)config.getServletContext().getAttribute("usersDao");
-		scopeApplicationAdapter = (ScopeApplicationAdapter)config.getServletContext().getAttribute("scopeApplicationAdapter");
-		generateImage = (GenerateImage)config.getServletContext().getAttribute("generateImage");
-		generateThumbs = (GenerateThumbs)config.getServletContext().getAttribute("generateThumbs");
-		generatePDF = (GeneratePDF)config.getServletContext().getAttribute("generatePDF");
+		sessionManagement = (Sessionmanagement) config.getServletContext()
+				.getAttribute("sessionManagement");
+		userManagement = (Usermanagement) config.getServletContext()
+				.getAttribute("userManagement");
+		usersDao = (UsersDaoImpl) config.getServletContext().getAttribute(
+				"usersDao");
+		scopeApplicationAdapter = (ScopeApplicationAdapter) config
+				.getServletContext().getAttribute("scopeApplicationAdapter");
+		generateImage = (GenerateImage) config.getServletContext()
+				.getAttribute("generateImage");
+		generateThumbs = (GenerateThumbs) config.getServletContext()
+				.getAttribute("generateThumbs");
+		generatePDF = (GeneratePDF) config.getServletContext().getAttribute(
+				"generatePDF");
 	}
-	
+
+	@Override
 	protected void service(HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse) throws ServletException,
 			IOException {
@@ -95,10 +104,10 @@ public class UploadHandler extends HttpServlet {
 
 			LinkedHashMap<String, Object> hs = new LinkedHashMap<String, Object>();
 			hs.put("user", usersDao.getUser(userId));
-			
+
 			fileService(httpServletRequest, sid, userId, hs);
-			scopeApplicationAdapter
-					.sendMessageWithClientByPublicSID(hs, publicSID);
+			scopeApplicationAdapter.sendMessageWithClientByPublicSID(hs,
+					publicSID);
 		} catch (Exception e) {
 			System.out.println("Exception during upload: " + e);
 			e.printStackTrace();
@@ -107,8 +116,8 @@ public class UploadHandler extends HttpServlet {
 	}
 
 	protected void fileService(HttpServletRequest httpServletRequest,
-			String sid, Long userId, Map<String, Object> hs) throws ServletException,
-			Exception {
+			String sid, Long userId, Map<String, Object> hs)
+			throws ServletException, Exception {
 
 		String room_id = httpServletRequest.getParameter("room_id");
 		if (room_id == null) {
@@ -131,6 +140,7 @@ public class UploadHandler extends HttpServlet {
 		InputStream is = upload.getFileContents("Filedata");
 
 		// trim whitespace
+		@SuppressWarnings("deprecation")
 		String fileSystemName = upload.getFileSystemName("Filedata");
 		fileSystemName = StringUtils.deleteWhitespace(fileSystemName);
 
@@ -155,20 +165,20 @@ public class UploadHandler extends HttpServlet {
 			localFolder.mkdirs();
 		}
 
-        // Check variable to see if this file is a presentation
-        int dotidx = fileSystemName.lastIndexOf('.');
-        String newFileName = StringComparer.getInstance().compareForRealPaths(
-                fileSystemName.substring(0, dotidx));
-        String newFileExtDot = fileSystemName.substring(dotidx,
-                fileSystemName.length()).toLowerCase();
-        String newFileExt = newFileExtDot.substring(1);
+		// Check variable to see if this file is a presentation
+		int dotidx = fileSystemName.lastIndexOf('.');
+		String newFileName = StringComparer.getInstance().compareForRealPaths(
+				fileSystemName.substring(0, dotidx));
+		String newFileExtDot = fileSystemName.substring(dotidx,
+				fileSystemName.length()).toLowerCase();
+		String newFileExt = newFileExtDot.substring(1);
 
 		// trim long names cause cannot output that
 		final int MAX_FILE_NAME_LENGTH = 30;
 		if (newFileName.length() >= MAX_FILE_NAME_LENGTH) {
 			newFileName = newFileName.substring(0, MAX_FILE_NAME_LENGTH);
 		}
-        StoredFile storedFile = new StoredFile(newFileName, newFileExt);
+		StoredFile storedFile = new StoredFile(newFileName, newFileExt);
 
 		// check if this is a a file that can be converted by
 		// openoffice-service
@@ -194,7 +204,8 @@ public class UploadHandler extends HttpServlet {
 					// System.out.println("cannot write to directory");
 				}
 			}
-			completeName += ScopeApplicationAdapter.profilesPrefix + userId + File.separatorChar;
+			completeName += ScopeApplicationAdapter.profilesPrefix + userId
+					+ File.separatorChar;
 			File f2 = new File(completeName);
 			if (!f2.exists()) {
 				boolean c = f2.mkdir();
@@ -220,8 +231,8 @@ public class UploadHandler extends HttpServlet {
 					+ "uploadtemp"
 					+ File.separatorChar
 					+ ((userProfile) ? "profiles" + File.separatorChar
-							+ ScopeApplicationAdapter.profilesPrefix + userId : roomName)
-					+ File.separatorChar;
+							+ ScopeApplicationAdapter.profilesPrefix + userId
+							: roomName) + File.separatorChar;
 			localFolder = new File(workingDirPpt);
 			if (!localFolder.exists()) {
 				localFolder.mkdirs();
@@ -263,8 +274,8 @@ public class UploadHandler extends HttpServlet {
 		log.debug("canBeConverted: " + canBeConverted);
 		if (canBeConverted) {
 			// convert to pdf, thumbs, swf and xml-description
-			returnError = generatePDF.convertPDF(currentDir,
-					newFileName, newFileExtDot, roomName, true, completeName);
+			returnError = generatePDF.convertPDF(currentDir, newFileName,
+					newFileExtDot, roomName, true, completeName);
 		} else if (isPdf) {
 			boolean isEncrypted = false;
 			try {
@@ -291,6 +302,7 @@ public class UploadHandler extends HttpServlet {
 
 			log.debug("isEncrypted :: " + isEncrypted);
 
+			@SuppressWarnings("unused")
 			HashMap<String, Object> returnError2 = new HashMap<String, Object>();
 
 			if (isEncrypted) {
@@ -302,8 +314,7 @@ public class UploadHandler extends HttpServlet {
 
 				String outputfile = completeName + newFileExtDot;
 
-				returnError2 = generateThumbs.decodePDF(
-						inputfile, outputfile);
+				returnError2 = generateThumbs.decodePDF(inputfile, outputfile);
 
 				File f_old = new File(inputfile);
 				if (f_old.exists()) {
@@ -313,8 +324,8 @@ public class UploadHandler extends HttpServlet {
 			}
 
 			// convert to thumbs, swf and xml-description
-			returnError = generatePDF.convertPDF(currentDir,
-					newFileName, newFileExtDot, roomName, false, completeName);
+			returnError = generatePDF.convertPDF(currentDir, newFileName,
+					newFileExtDot, roomName, false, completeName);
 
 			// returnError.put("decodePDF", returnError2);
 
@@ -326,27 +337,27 @@ public class UploadHandler extends HttpServlet {
 				// User Profile Update
 				this.deleteUserProfileFiles(currentDir, userId);
 				// convert it to JPG
-				returnError = generateImage
-						.convertImageUserProfile(currentDir, newFileName,
-								newFileExtDot, userId, newFileName, false);
+				returnError = generateImage.convertImageUserProfile(currentDir,
+						newFileName, newFileExtDot, userId, newFileName, false);
 			} else {
 				// convert it to JPG
 				log.debug("##### convert it to JPG: " + userProfile);
-				returnError = generateImage.convertImage(
-						currentDir, newFileName, newFileExtDot, roomName,
-						newFileName, false);
+				returnError = generateImage.convertImage(currentDir,
+						newFileName, newFileExtDot, roomName, newFileName,
+						false);
 			}
 		} else if (isAsIs) {
 			if (userProfile) {
 				// User Profile Update
 				this.deleteUserProfileFiles(currentDir, userId);
 				// is UserProfile Picture
-				HashMap<String, Object> processThumb1 = generateThumbs.generateThumb("_chat_", currentDir,
-								completeName, 40);
-				HashMap<String, Object> processThumb2 = generateThumbs.generateThumb("_profile_", currentDir,
-								completeName, 126);
-				HashMap<String, Object> processThumb3 = generateThumbs.generateThumb("_big_", currentDir,
-								completeName, 240);
+				HashMap<String, Object> processThumb1 = generateThumbs
+						.generateThumb("_chat_", currentDir, completeName, 40);
+				HashMap<String, Object> processThumb2 = generateThumbs
+						.generateThumb("_profile_", currentDir, completeName,
+								126);
+				HashMap<String, Object> processThumb3 = generateThumbs
+						.generateThumb("_big_", currentDir, completeName, 240);
 				returnError.put("processThumb1", processThumb1);
 				returnError.put("processThumb2", processThumb2);
 				returnError.put("processThumb3", processThumb3);
@@ -358,11 +369,11 @@ public class UploadHandler extends HttpServlet {
 				us.setPictureuri(pictureuri);
 				usersDao.updateUser(us);
 
-				scopeApplicationAdapter.updateUserSessionObject(
-						userId, pictureuri);
+				scopeApplicationAdapter.updateUserSessionObject(userId,
+						pictureuri);
 			} else {
-				HashMap<String, Object> processThumb = generateThumbs.generateThumb("_thumb_", currentDir,
-								completeName, 50);
+				HashMap<String, Object> processThumb = generateThumbs
+						.generateThumb("_thumb_", currentDir, completeName, 50);
 				returnError.put("processThumb", processThumb);
 			}
 		}
@@ -377,7 +388,8 @@ public class UploadHandler extends HttpServlet {
 			Long users_id) throws Exception {
 
 		String working_imgdir = current_dir + "upload" + File.separatorChar
-				+ "profiles" + File.separatorChar + ScopeApplicationAdapter.profilesPrefix + users_id
+				+ "profiles" + File.separatorChar
+				+ ScopeApplicationAdapter.profilesPrefix + users_id
 				+ File.separatorChar;
 		File f = new File(working_imgdir);
 		if (f.exists() && f.isDirectory()) {
@@ -389,7 +401,8 @@ public class UploadHandler extends HttpServlet {
 			throws Exception {
 
 		String working_imgdir = current_dir + "upload" + File.separatorChar
-				+ "profiles" + File.separatorChar + ScopeApplicationAdapter.profilesPrefix + users_id
+				+ "profiles" + File.separatorChar
+				+ ScopeApplicationAdapter.profilesPrefix + users_id
 				+ File.separatorChar;
 
 		for (int i = 0; i < this.filesString.length; i++) {
