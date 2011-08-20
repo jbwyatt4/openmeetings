@@ -62,8 +62,6 @@
     <property name="openjpa.lib" value="${project.lib}/openjpa2"/>
     <!-- Log4j -->
     <property name="log4j.lib" value="${project.lib}/log4j" />
-    <!-- xDoclet -->
-    <property name="xdoclet.lib" value="${project.lib}/xdoclet" />
     <!-- Jakarta commons -->
     <property name="jakarta.common.lib" value="${project.lib}/jakarta-commons" />
     <!--JDBC Drivers-->
@@ -113,79 +111,13 @@
         <fileset dir="${java2swf.lib}" includes="*.jar"/>
         <fileset dir="${jmf.lib}" includes="*.jar"/>
     	<fileset dir="${junit.lib}" includes="*.jar"/>
+    	<fileset dir="${screenshare.lib}" includes="*kunststoff.jar"/>
     </path>
 	
 	<!-- screenshare classpath -->
 	<path id="screenshare.classpath">
         <fileset dir="${screenshare.lib}" includes="*.jar"/>
     </path>
-
-    <!-- xDoclet classpath -->
-    <path id="xdoclet.classpath">
-        <fileset dir="${xdoclet.lib}" includes="*.jar"/>
-        <fileset dir="${openjpa.lib}" includes="*.jar"/>
-        <fileset dir="${database.lib}" includes="*.jar" />
-        <fileset dir="${jakarta.common.lib}" includes="*.jar"/>
-        <fileset dir="${log4j.lib}" includes="*.jar"/>
-    </path>
-
-    <!-- Schema export classpath -->
-    <path id="schema.export.classpath">
-        <fileset dir="${log4j.lib}" includes="*.jar" />
-        <fileset dir="${openjpa.lib}" includes="*.jar"/>
-        <fileset dir="${jakarta.common.lib}" includes="*.jar" />
-        <fileset dir="${database.lib}" includes="*.jar" />
-        <fileset dir="${project.lib}" includes="*.jar" />
-        <pathelement path="${main.out.dir}"/>
-    </path>
-
-    <!-- start of xdoclet2 -->
-    <property name="xdoclet2.lib.dir" value="${basedir}/lib/xdoclet2/"/>
-
-    <target name="xdoclet2">
-        <path id="xdoclet2.task.classpath">
-            <!-- xdoclet2 -->
-            <pathelement location="${xdoclet2.lib.dir}/lib/xdoclet-2.0.6.jar"/>
-            <!-- Add the xdoclet2 plugins jar here -->
-            
-            <pathelement location="${xdoclet2.lib.dir}/plugins/xdoclet-plugin-hibernate-1.0.4-SNAPSHOT.jar"/>
-            <!-- xdoclet2 runtime dependencies -->
-            <pathelement location="${xdoclet2.lib.dir}/lib/commons-beanutils-1.7.0.jar"/>
-            <pathelement location="${xdoclet2.lib.dir}/lib/commons-logging-1.0.4.jar"/>
-            <pathelement location="${xdoclet2.lib.dir}/lib/qdox-20051211.114207.jar"/>
-            <pathelement location="${xdoclet2.lib.dir}/lib/commons-collections-3.1.jar"/>
-            <pathelement location="${xdoclet2.lib.dir}/lib/dom4j-1.6.jar"/>
-            <pathelement location="${xdoclet2.lib.dir}/lib/saxpath-1.0-FCS.jar"/>
-            <pathelement location="${xdoclet2.lib.dir}/lib/commons-jelly-20050813.225330.jar"/>
-            <pathelement location="${xdoclet2.lib.dir}/lib/generama-1.2.1.jar"/>
-            <pathelement location="${xdoclet2.lib.dir}/lib/velocity-1.4.jar"/>
-            <pathelement location="${xdoclet2.lib.dir}/lib/commons-jelly-tags-define-1.0.jar"/>
-            <pathelement location="${xdoclet2.lib.dir}/lib/jaxen-1.1-beta-4.jar"/>
-            <pathelement location="${xdoclet2.lib.dir}/lib/xdoclet-2.0.4.jar"/>
-            <pathelement location="${xdoclet2.lib.dir}/lib/commons-jelly-tags-jsl-1.0.jar"/>
-            <pathelement location="${xdoclet2.lib.dir}/lib/nanocontainer-1.0-beta-3.jar"/>
-            <pathelement location="${xdoclet2.lib.dir}/lib/xerces-2.4.0.jar"/>
-            <pathelement location="${xdoclet2.lib.dir}/lib/commons-jelly-tags-xml-20050823.222913.jar"/>
-            <pathelement location="${xdoclet2.lib.dir}/lib/nanocontainer-ant-1.0-beta-3.jar"/>
-            <pathelement location="${xdoclet2.lib.dir}/lib/commons-jexl-1.0.jar"/>
-            <pathelement location="${xdoclet2.lib.dir}/lib/picocontainer-1.0.jar"/>
-        </path>
-        <taskdef
-            name="xdoclet2"
-            classname="org.xdoclet.ant.XDocletTask"
-            classpathref="xdoclet2.task.classpath"
-            />
-    </target>
-
-    <target name="remove" depends="xdoclet2" >
-        <delete>
-            <fileset dir="${basedir}/src/app">
-                <include name="**/*.hbm.xml"/>
-            </fileset>
-        </delete>
-    </target>
-    
-    <!-- end of xdoclet 2 -->
 
     <!-- build webapp -->
 
