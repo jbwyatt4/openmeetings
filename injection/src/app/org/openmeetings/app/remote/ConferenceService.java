@@ -48,8 +48,6 @@ public class ConferenceService {
 	private static final Logger log = Red5LoggerFactory.getLogger(
 			ConferenceService.class, ScopeApplicationAdapter.webAppRootKey);
 
-	private static ConferenceService instance;
-
 	@Autowired
 	private AppointmentLogic appointmentLogic;
 	@Autowired
@@ -69,13 +67,6 @@ public class ConferenceService {
 
 	// beans, see chaservice.service.xml
 	private ClientListManager clientListManager = null;
-
-	public static synchronized ConferenceService getInstance() {
-		if (instance == null) {
-			instance = new ConferenceService();
-		}
-		return instance;
-	}
 
 	public ClientListManager getClientListManager() {
 		return clientListManager;

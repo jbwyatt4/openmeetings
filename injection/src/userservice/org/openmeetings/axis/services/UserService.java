@@ -65,6 +65,7 @@ public class UserService {
 	 * @return Sessiondata-Object
 	 */
 	public Sessiondata getSession() {
+		log.debug("SPRING LOADED getSession -- ");
 		return mainService.getsessiondata();
 	}
 
