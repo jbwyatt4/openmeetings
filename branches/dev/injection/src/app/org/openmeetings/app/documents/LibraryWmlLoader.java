@@ -18,10 +18,12 @@ public class LibraryWmlLoader {
 	
 	private static final Logger log = Red5LoggerFactory.getLogger(LibraryWmlLoader.class, ScopeApplicationAdapter.webAppRootKey);
 	
+	@SuppressWarnings("unused")
 	private static final String fileExt = ".wml";
 	
 	private static final String wmlFolderName = "stored/";
 	
+	@SuppressWarnings({ "rawtypes", "unused" })
 	public ArrayList loadWmlFile(String filePath, String fileName){
 		try {
 			LinkedHashMap lMap = new LinkedHashMap();
@@ -55,6 +57,7 @@ public class LibraryWmlLoader {
 	 * @param paintElement
 	 * @param subMap
 	 */
+	@SuppressWarnings({ "unused", "rawtypes" })
 	private void createListObjectPaintByNode(Element paintElement, LinkedHashMap<Integer,Object> subMap){
 		try {
 			

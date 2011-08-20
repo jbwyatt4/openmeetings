@@ -117,6 +117,7 @@ public class Fieldmanagment {
 
 			query.setParameter("fieldvalues_id", fieldvalues_id);
 			query.setParameter("language_id", language_id);
+			@SuppressWarnings("unchecked")
 			List<Fieldlanguagesvalues> fList = query.getResultList();
 
 			if (fList.size() > 0) {
@@ -153,6 +154,7 @@ public class Fieldmanagment {
 			Query query = em
 					.createQuery("select f from Fieldlanguagesvalues f WHERE f.language_id = :language_id ");
 			query.setParameter("language_id", language_id);
+			@SuppressWarnings("unchecked")
 			List<Fieldlanguagesvalues> returnList = query.getResultList();
 
 			return returnList;
@@ -162,7 +164,8 @@ public class Fieldmanagment {
 		return null;
 	}
 
-	public List<Map> getLabelsByLanguage(Long language_id, int start, int max) {
+	public List<Map<String, Object>> getLabelsByLanguage(Long language_id,
+			int start, int max) {
 		try {
 
 			String sql = "select f from Fieldlanguagesvalues as f "
@@ -174,13 +177,14 @@ public class Fieldmanagment {
 			query.setParameter("start", new Long(start));
 			query.setParameter("max", new Long(start + max));
 
-			List results = query.getResultList();
-			List<Map> returnList = new LinkedList<Map>();
+			@SuppressWarnings("unchecked")
+			List<Fieldlanguagesvalues> results = query.getResultList();
+			List<Map<String, Object>> returnList = new LinkedList<Map<String, Object>>();
 			if (results.size() != 0) {
 				Iterator<Fieldlanguagesvalues> flIterator = results.iterator();
 				while (flIterator.hasNext()) {
 					Fieldlanguagesvalues fl = flIterator.next();
-					Map map = new HashMap();
+					Map<String, Object> map = new HashMap<String, Object>();
 					map.put("id", fl.getFieldvalues_id());
 					map.put("value", fl.getValue());
 					returnList.add(map);
@@ -195,14 +199,15 @@ public class Fieldmanagment {
 			if (fieldLanguage.getRtl()) {
 				log.debug("Language requieres RTL!");
 
-				List<Map> returnRtlList = new LinkedList<Map>();
+				List<Map<String, Object>> returnRtlList = new LinkedList<Map<String, Object>>();
 				// List<Fieldlanguagesvalues> returnRtlList = new
 				// LinkedList<Fieldlanguagesvalues>();
 
-				for (Iterator<Map> iter = returnList.iterator(); iter.hasNext();) {
-					Map remote = iter.next();
+				for (Iterator<Map<String, Object>> iter = returnList.iterator(); iter
+						.hasNext();) {
+					Map<String, Object> remote = iter.next();
 
-					Map toAdd = new HashMap();
+					Map<String, Object> toAdd = new HashMap<String, Object>();
 					toAdd.put("id", remote.get("id"));
 
 					String value = remote.get("value").toString();
@@ -215,6 +220,7 @@ public class Fieldmanagment {
 							reverseOrder += " ";
 						}
 					}
+					log.debug("reverseOrder " + reverseOrder);
 					toAdd.put("value", value);
 
 					returnRtlList.add(toAdd);
@@ -251,6 +257,7 @@ public class Fieldmanagment {
 			query.setParameter("start", start);
 			query.setParameter("max", start + max);
 
+			@SuppressWarnings("unchecked")
 			List<Fieldlanguagesvalues> returnList = query.getResultList();
 			//
 			// for (Iterator<Fieldlanguagesvalues> iter =
@@ -499,7 +506,7 @@ public class Fieldmanagment {
 	private Long selectMaxFromFieldsValues() throws Exception {
 		Query query = em
 				.createQuery("select max(c.fieldvalues_id) from Fieldvalues c where c.deleted = 'false'");
-		List ll = query.getResultList();
+		List<?> ll = query.getResultList();
 		// log.error((Long)ll.get(0));
 		return (Long) ll.get(0);
 	}

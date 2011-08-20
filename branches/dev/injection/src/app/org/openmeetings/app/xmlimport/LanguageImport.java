@@ -49,8 +49,9 @@ public class LanguageImport {
 
 		Element root = document.getRootElement();
 
-		for (Iterator i = root.elementIterator(); i.hasNext();) {
-			Element itemObject = (Element) i.next();
+		for (@SuppressWarnings("unchecked")
+		Iterator<Element> i = root.elementIterator(); i.hasNext();) {
+			Element itemObject = i.next();
 			Long fieldvalues_id = Long.valueOf(
 					itemObject.attribute("id").getText()).longValue();
 			String fieldName = itemObject.attribute("name").getText();

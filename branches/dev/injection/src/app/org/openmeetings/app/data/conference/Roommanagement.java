@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -721,7 +722,8 @@ public class Roommanagement {
 	public Long addRoom(long user_level, String name, long roomtypes_id,
 			String comment, Long numberOfPartizipants, boolean ispublic,
 			List<?> organisations, Boolean appointment, Boolean isDemoRoom,
-			Integer demoTime, Boolean isModeratedRoom, List<?> roomModerators,
+			Integer demoTime, Boolean isModeratedRoom,
+			List<Map<String, Object>> roomModerators,
 			Boolean allowUserQuestions, Boolean isAudioOnly, Boolean isClosed,
 			String redirectURL, String sipNumber, String conferencePin,
 			Long ownerId, Boolean waitForRecording, Boolean allowRecording,
@@ -779,9 +781,8 @@ public class Roommanagement {
 				}
 
 				if (roomModerators != null) {
-					roomModeratorsDao
-							.addRoomModeratorByUserList(roomModerators,
-									r.getRooms_id());
+					roomModeratorsDao.addRoomModeratorByUserList(
+							roomModerators, r.getRooms_id());
 				}
 
 				return returnId;
@@ -795,8 +796,8 @@ public class Roommanagement {
 	public Long addRoomByMod(long user_level, String name, long roomtypes_id,
 			String comment, Long numberOfPartizipants, boolean ispublic,
 			Long organisation_id, Boolean appointment, Boolean isDemoRoom,
-			Integer demoTime, Boolean isModeratedRoom, List<?> roomModerators,
-			Boolean allowUserQuestions) {
+			Integer demoTime, Boolean isModeratedRoom,
+			List<Map<String, Object>> roomModerators, Boolean allowUserQuestions) {
 
 		log.debug("addRoom");
 
@@ -825,9 +826,8 @@ public class Roommanagement {
 				this.addRoomToOrganisation(3, returnId, organisation_id);
 
 				if (roomModerators != null) {
-					roomModeratorsDao
-							.addRoomModeratorByUserList(roomModerators,
-									r.getRooms_id());
+					roomModeratorsDao.addRoomModeratorByUserList(
+							roomModerators, r.getRooms_id());
 				}
 
 				return returnId;
@@ -849,7 +849,7 @@ public class Roommanagement {
 	public Long addExternalRoom(String name, long roomtypes_id, String comment,
 			Long numberOfPartizipants, boolean ispublic, List<?> organisations,
 			Boolean appointment, Boolean isDemoRoom, Integer demoTime,
-			Boolean isModeratedRoom, List<?> roomModerators,
+			Boolean isModeratedRoom, List<Map<String, Object>> roomModerators,
 			Long externalRoomId, String externalRoomType,
 			Boolean allowUserQuestions, Boolean isAudioOnly, Boolean isClosed,
 			String redirectURL, Boolean waitForRecording,
@@ -900,8 +900,8 @@ public class Roommanagement {
 			}
 
 			if (roomModerators != null) {
-				roomModeratorsDao.addRoomModeratorByUserList(
-						roomModerators, r.getRooms_id());
+				roomModeratorsDao.addRoomModeratorByUserList(roomModerators,
+						r.getRooms_id());
 			}
 
 			return returnId;
@@ -1285,7 +1285,7 @@ public class Roommanagement {
 			String name, boolean ispublic, String comment,
 			Long numberOfPartizipants, List<?> organisations,
 			Boolean appointment, Boolean isDemoRoom, Integer demoTime,
-			Boolean isModeratedRoom, List<?> roomModerators,
+			Boolean isModeratedRoom, List<Map<String, Object>> roomModerators,
 			Boolean allowUserQuestions, Boolean isAudioOnly, Boolean isClosed,
 			String redirectURL, String sipNumber, String conferencePin,
 			Long ownerId, Boolean waitForRecording, Boolean allowRecording,
@@ -1315,7 +1315,7 @@ public class Roommanagement {
 			String name, boolean ispublic, String comment,
 			Long numberOfPartizipants, List<?> organisations,
 			Boolean appointment, Boolean isDemoRoom, Integer demoTime,
-			Boolean isModeratedRoom, List<?> roomModerators,
+			Boolean isModeratedRoom, List<Map<String, Object>> roomModerators,
 			Boolean allowUserQuestions, Boolean isAudioOnly, Boolean isClosed,
 			String redirectURL, String sipNumber, String conferencePin,
 			Long ownerId, Boolean waitForRecording, Boolean allowRecording,
@@ -1366,9 +1366,8 @@ public class Roommanagement {
 					return null;
 			}
 			if (roomModerators != null) {
-				roomModeratorsDao
-						.updateRoomModeratorByUserList(roomModerators,
-								r.getRooms_id());
+				roomModeratorsDao.updateRoomModeratorByUserList(roomModerators,
+						r.getRooms_id());
 			}
 
 			return r.getRooms_id();
@@ -1382,7 +1381,7 @@ public class Roommanagement {
 			long roomtypes_id, String name, boolean ispublic, String comment,
 			Long numberOfPartizipants, Long organisations, Boolean appointment,
 			Boolean isDemoRoom, Integer demoTime, Boolean isModeratedRoom,
-			List<?> roomModerators, Boolean allowUserQuestions) {
+			List<Map<String, Object>> roomModerators, Boolean allowUserQuestions) {
 		try {
 			log.debug("*** updateRoom numberOfPartizipants: "
 					+ numberOfPartizipants);
@@ -1416,9 +1415,8 @@ public class Roommanagement {
 				// update as Moderator
 
 				if (roomModerators != null) {
-					roomModeratorsDao
-							.updateRoomModeratorByUserList(roomModerators,
-									r.getRooms_id());
+					roomModeratorsDao.updateRoomModeratorByUserList(
+							roomModerators, r.getRooms_id());
 				}
 
 				return r.getRooms_id();

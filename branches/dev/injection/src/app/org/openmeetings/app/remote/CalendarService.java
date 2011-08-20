@@ -96,7 +96,7 @@ public class CalendarService {
 			String appointmentLocation, String appointmentDescription,
 			Date appointmentstart, Date appointmentend, Boolean isDaily,
 			Boolean isWeekly, Boolean isMonthly, Boolean isYearly,
-			Long categoryId, Long remind, List mmClient, Long roomType,
+			Long categoryId, Long remind, List<?> mmClient, Long roomType,
 			String baseUrl, Long language_id) {
 
 		log.debug("saveAppointMent SID:" + SID + ", baseUrl : " + baseUrl);
@@ -139,7 +139,7 @@ public class CalendarService {
 
 				log.debug("appointmentId " + appointmentId);
 
-				Appointment app = appointmentLogic
+				appointmentLogic
 						.getAppointMentById(appointmentId);
 
 				Users user = userManagement.getUserById(users_id);
@@ -161,7 +161,7 @@ public class CalendarService {
 			String appointmentDescription, Date appointmentstart,
 			Date appointmentend, Boolean isDaily, Boolean isWeekly,
 			Boolean isMonthly, Boolean isYearly, Long categoryId, Long remind,
-			List mmClient, Long roomType, String baseurl, Long language_id) {
+			List<?> mmClient, Long roomType, String baseurl, Long language_id) {
 		try {
 
 			Long users_id = sessionManagement.checkSession(SID);
