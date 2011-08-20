@@ -1,0 +1,51 @@
+<serviceGroup>
+<!--  -->
+  <service name="SpringInit" class="org.openmeetings.axis.services.SpringInit">
+	<description>Init Spring Framework</description>
+	<parameter name="ServiceClass">org.openmeetings.axis.services.SpringInit</parameter>
+	<parameter name="ServiceTCCL">composite</parameter>
+	<parameter name="load-on-startup">true</parameter>
+	<operation name="springInit">
+      <messageReceiver class="org.apache.axis2.receivers.RawXMLINOutMessageReceiver"/>
+	</operation>
+  </service>
+  <service name="UserService">
+	<description>User Service</description>
+	<parameter name="ServiceObjectSupplier">org.apache.axis2.extensions.spring.receivers.SpringAppContextAwareObjectSupplier</parameter>
+	<parameter name="SpringBeanName" locked="false">userServiceSoap</parameter>
+	<messageReceivers>
+        <messageReceiver 
+            mep="http://www.w3.org/2004/08/wsdl/in-only"
+			class="org.apache.axis2.rpc.receivers.RPCInOnlyMessageReceiver"/>
+        <messageReceiver
+            mep="http://www.w3.org/2004/08/wsdl/in-out"
+			class="org.apache.axis2.rpc.receivers.RPCMessageReceiver"/>
+    </messageReceivers>
+  </service>
+  <service name="RoomService">
+	<description>Room Service</description>
+	<parameter name="ServiceObjectSupplier">org.apache.axis2.extensions.spring.receivers.SpringAppContextAwareObjectSupplier</parameter>
+	<parameter name="SpringBeanName" locked="false">roomServiceSoap</parameter>
+	<messageReceivers>
+        <messageReceiver 
+            mep="http://www.w3.org/2004/08/wsdl/in-only"
+			class="org.apache.axis2.rpc.receivers.RPCInOnlyMessageReceiver"/>
+        <messageReceiver
+            mep="http://www.w3.org/2004/08/wsdl/in-out"
+			class="org.apache.axis2.rpc.receivers.RPCMessageReceiver"/>
+    </messageReceivers>
+  </service>
+  <service name="FileService">
+	<description>File Service</description>
+	<parameter name="ServiceObjectSupplier">org.apache.axis2.extensions.spring.receivers.SpringAppContextAwareObjectSupplier</parameter>
+	<parameter name="SpringBeanName" locked="false">fileServiceSoap</parameter>
+	<messageReceivers>
+        <messageReceiver 
+            mep="http://www.w3.org/2004/08/wsdl/in-only"
+			class="org.apache.axis2.rpc.receivers.RPCInOnlyMessageReceiver"/>
+        <messageReceiver
+            mep="http://www.w3.org/2004/08/wsdl/in-out"
+			class="org.apache.axis2.rpc.receivers.RPCMessageReceiver"/>
+    </messageReceivers>
+  </service>
+</serviceGroup>
