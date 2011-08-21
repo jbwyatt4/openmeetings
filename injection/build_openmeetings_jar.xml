@@ -117,7 +117,7 @@
 	<!-- build webapp -->
 
 	<target name="dist" description="jar distribution of OpenMeetings"
-        depends="jar">
+        depends="jar"><!-- , signWebStartJars -->
 
 	</target>
 
@@ -212,29 +212,6 @@
 			</fileset>
 		</jar>
 
-		<jar destfile="${dist.dir}/red5/webapps/${project.distname}/screen/rtpapplet.jar">
-			<fileset dir="${classes.dir}">
-				<include name="**/applet/**"/>
-
-			</fileset>
-			<manifest>
-				<attribute name="Built-By" value="OpenMeetings - http://openmeetings.googlecode.com"/>
-				<attribute name="Built-On" value="${build.TODAY}"/>
-				<attribute name="Class-Path" value="conf/ ${jar.classpath}"/>
-			</manifest>
-		</jar>
-		<!-- Screen Share -->
-		<jar destfile="${dist.dir}/red5/webapps/${project.distname}/red5-screenshare/red5-screenshare.jar">
-			<fileset dir="${screen.out.dir}">
-				<include name="**/**"/>
-			</fileset>
-			<manifest>
-				<attribute name="Built-By" value="OpenMeetings - http://openmeetings.googlecode.com"/>
-				<attribute name="Built-On" value="${build.TODAY}"/>
-				<attribute name="Class-Path" value="conf/ ${jar2.classpath}"/>
-			</manifest>
-		</jar>
-
 	</target>
 
 	<!-- Normal build of application
@@ -275,6 +252,37 @@
 		<javac debug="on" debuglevel="lines,vars,source" srcdir="${screen.src.dir}" destdir="${screen.out.dir}" >
 			<classpath refid="screenshare.classpath"/>
 		</javac>
+	</target>
+	
+	<target name="signWebStartJars">
+		<delete file="filetest.keystore" />
+		<genkey alias="filetest"
+          storepass="secret"
+          keystore="filetest.keystore"
+          verbose="true">
+			<dname>
+				<param name="CN" value="Sebastian Wagner"/>
+				<param name="OU" value="technology"/>
+				<param name="O"  value="openmeetings.googlecode.com"/>
+				<param name="C"  value="DE"/>
+			</dname>
+		</genkey>
+		<signjar
+            alias="filetest" keystore="filetest.keystore"
+            storepass="secret"
+            lazy="false"
+            >
+			<path>
+				<fileset dir="${dist.dir}/red5/webapps/${project.distname}/screen" >
+					<include name="**/*.jar" />
+
+				</fileset>
+				<fileset dir="${dist.dir}/red5/webapps/${project.distname}/red5-screenshare" >
+					<include name="**/*.jar" />
+
+				</fileset>
+			</path>
+		</signjar>
 	</target>
 
 
