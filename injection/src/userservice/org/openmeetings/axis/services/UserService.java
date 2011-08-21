@@ -3,6 +3,8 @@ package org.openmeetings.axis.services;
 import java.util.Date;
 
 import org.apache.axis2.AxisFault;
+import org.apache.axis2.context.ConfigurationContext;
+import org.apache.axis2.description.AxisService;
 import org.openmeetings.app.data.basic.AuthLevelmanagement;
 import org.openmeetings.app.data.basic.Configurationmanagement;
 import org.openmeetings.app.data.basic.ErrorManagement;
@@ -31,7 +33,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 
-public class UserService {
+public class UserService implements org.apache.axis2.engine.ServiceLifeCycle {
+
+	public void shutDown(ConfigurationContext arg0, AxisService arg1) {
+		// TODO Auto-generated method stub
+
+	}
+
+	public void startUp(ConfigurationContext arg0, AxisService arg1) {
+		// TODO Auto-generated method stub
+
+	}
 
 	private static final Logger log = Red5LoggerFactory.getLogger(
 			UserService.class, ScopeApplicationAdapter.webAppRootKey);
