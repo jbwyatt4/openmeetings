@@ -12,13 +12,10 @@
    -->
   <service name="UserService" >
 	<description>User Service</description>
-	<!-- class="org.openmeetings.axis.services.UserService" -->
 	<!-- 
-	<parameter name="ServiceObjectSupplier" locked="false">org.apache.axis2.extensions.spring.receivers.SpringAppContextAwareObjectSupplier</parameter>
+	<parameter name="ServiceObjectSupplier" locked="xsd:false">org.apache.axis2.extensions.spring.receivers.SpringAppContextAwareObjectSupplier</parameter>
+	<parameter name="SpringBeanName" locked="xsd:false">userServiceSoap</parameter>
 	 -->
-	
-	<parameter name="SpringBeanName" locked="false">userServiceSoap</parameter>
-	
 	<messageReceivers>
         <messageReceiver 
             mep="http://www.w3.org/2004/08/wsdl/in-only"
@@ -27,21 +24,10 @@
             mep="http://www.w3.org/2004/08/wsdl/in-out"
 			class="org.apache.axis2.rpc.receivers.RPCMessageReceiver"/>
     </messageReceivers>
-    
     <parameter name="ServiceClass" locked="xsd:false">org.openmeetings.axis.services.UserService</parameter>
-    
-    <!-- 
-    <operation name="getSession">
-        <messageReceiver class="org.apache.axis2.receivers.RawXMLINOutMessageReceiver"/>
-    </operation>
-     -->
-     
   </service>
-  <!-- 
   <service name="RoomService">
 	<description>Room Service</description>
-	<parameter name="ServiceObjectSupplier" locked="false">org.apache.axis2.extensions.spring.receivers.SpringAppContextAwareObjectSupplier</parameter>
-	<parameter name="SpringBeanName" locked="false">roomServiceSoap</parameter>
 	<messageReceivers>
         <messageReceiver 
             mep="http://www.w3.org/2004/08/wsdl/in-only"
@@ -50,11 +36,10 @@
             mep="http://www.w3.org/2004/08/wsdl/in-out"
 			class="org.apache.axis2.rpc.receivers.RPCMessageReceiver"/>
     </messageReceivers>
+    <parameter name="ServiceClass" locked="xsd:false">org.openmeetings.axis.services.RoomService</parameter>
   </service>
   <service name="FileService">
 	<description>File Service</description>
-	<parameter name="ServiceObjectSupplier" locked="false">org.apache.axis2.extensions.spring.receivers.SpringAppContextAwareObjectSupplier</parameter>
-	<parameter name="SpringBeanName" locked="false">fileServiceSoap</parameter>
 	<messageReceivers>
         <messageReceiver 
             mep="http://www.w3.org/2004/08/wsdl/in-only"
@@ -63,6 +48,6 @@
             mep="http://www.w3.org/2004/08/wsdl/in-out"
 			class="org.apache.axis2.rpc.receivers.RPCMessageReceiver"/>
     </messageReceivers>
+    <parameter name="ServiceClass" locked="xsd:false">org.openmeetings.axis.services.FileService</parameter>
   </service>
-   -->
 </serviceGroup>
