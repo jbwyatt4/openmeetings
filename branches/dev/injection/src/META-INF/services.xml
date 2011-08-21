@@ -1,5 +1,5 @@
 <serviceGroup>
-<!--  -->
+	<!-- 
   <service name="SpringInit" class="org.openmeetings.axis.services.SpringInit">
 	<description>Init Spring Framework</description>
 	<parameter name="ServiceClass">org.openmeetings.axis.services.SpringInit</parameter>
@@ -9,10 +9,16 @@
       <messageReceiver class="org.apache.axis2.receivers.RawXMLINOutMessageReceiver"/>
 	</operation>
   </service>
-  <service name="UserService">
+   -->
+  <service name="UserService" >
 	<description>User Service</description>
-	<parameter name="ServiceObjectSupplier">org.apache.axis2.extensions.spring.receivers.SpringAppContextAwareObjectSupplier</parameter>
+	<!-- class="org.openmeetings.axis.services.UserService" -->
+	<!-- 
+	<parameter name="ServiceObjectSupplier" locked="false">org.apache.axis2.extensions.spring.receivers.SpringAppContextAwareObjectSupplier</parameter>
+	 -->
+	
 	<parameter name="SpringBeanName" locked="false">userServiceSoap</parameter>
+	
 	<messageReceivers>
         <messageReceiver 
             mep="http://www.w3.org/2004/08/wsdl/in-only"
@@ -21,10 +27,20 @@
             mep="http://www.w3.org/2004/08/wsdl/in-out"
 			class="org.apache.axis2.rpc.receivers.RPCMessageReceiver"/>
     </messageReceivers>
+    
+    <parameter name="ServiceClass" locked="xsd:false">org.openmeetings.axis.services.UserService</parameter>
+    
+    <!-- 
+    <operation name="getSession">
+        <messageReceiver class="org.apache.axis2.receivers.RawXMLINOutMessageReceiver"/>
+    </operation>
+     -->
+     
   </service>
+  <!-- 
   <service name="RoomService">
 	<description>Room Service</description>
-	<parameter name="ServiceObjectSupplier">org.apache.axis2.extensions.spring.receivers.SpringAppContextAwareObjectSupplier</parameter>
+	<parameter name="ServiceObjectSupplier" locked="false">org.apache.axis2.extensions.spring.receivers.SpringAppContextAwareObjectSupplier</parameter>
 	<parameter name="SpringBeanName" locked="false">roomServiceSoap</parameter>
 	<messageReceivers>
         <messageReceiver 
@@ -37,7 +53,7 @@
   </service>
   <service name="FileService">
 	<description>File Service</description>
-	<parameter name="ServiceObjectSupplier">org.apache.axis2.extensions.spring.receivers.SpringAppContextAwareObjectSupplier</parameter>
+	<parameter name="ServiceObjectSupplier" locked="false">org.apache.axis2.extensions.spring.receivers.SpringAppContextAwareObjectSupplier</parameter>
 	<parameter name="SpringBeanName" locked="false">fileServiceSoap</parameter>
 	<messageReceivers>
         <messageReceiver 
@@ -48,4 +64,5 @@
 			class="org.apache.axis2.rpc.receivers.RPCMessageReceiver"/>
     </messageReceivers>
   </service>
+   -->
 </serviceGroup>

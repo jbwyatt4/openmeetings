@@ -60,10 +60,6 @@
 
 	<!-- Open JPA -->
 	<property name="openjpa.lib" value="${project.lib}/openjpa2"/>
-	<!-- Log4j -->
-	<property name="log4j.lib" value="${project.lib}/log4j" />
-	<!-- Jakarta commons -->
-	<property name="jakarta.common.lib" value="${project.lib}/jakarta-commons" />
 	<!--JDBC Drivers-->
 	<property name="database.lib" value="${project.lib}/database" />
 	<property name="red5.lib" value="${basedir}/server/red5" />
@@ -92,11 +88,9 @@
 
 	<!-- compile classpath -->
 	<path id="compile.classpath">
-		<fileset dir="${log4j.lib}" includes="*.jar"/>
 		<fileset dir="${openjpa.lib}" includes="*.jar"/>
 		<fileset dir="${spring.lib}" includes="*.jar"/>
 		<fileset dir="${project.lib}" includes="*.jar"/>
-		<fileset dir="${jakarta.common.lib}" includes="*.jar"/>
 		<fileset dir="${red5.lib}" includes="*.jar"/>
 		<fileset dir="${red5.server.lib}" includes="*.jar"/>
 		<fileset dir="${upload.lib}" includes="*.jar"/>
