@@ -222,6 +222,8 @@
 	<bean id="libraryWmlLoader" class="org.openmeetings.app.documents.LibraryWmlLoader" />
 	<bean id="loadAtomRssFeed" class="org.openmeetings.app.rss.LoadAtomRssFeed" />
 	<bean id="authLevelManagement" class="org.openmeetings.app.data.basic.AuthLevelmanagement" />
+	<bean id="generateSWF" class="org.openmeetings.app.documents.GenerateSWF" />
+	<bean id="fileUtils" class="org.openmeetings.app.data.file.FileUtils" />
 	
 	<!--  Templates -->
 	<bean id="registerUserTemplate" class="org.openmeetings.app.templates.RegisterUserTemplate" />
