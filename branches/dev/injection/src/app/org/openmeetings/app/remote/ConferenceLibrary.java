@@ -55,6 +55,8 @@ public class ConferenceLibrary implements IPendingServiceCallback {
 	private AuthLevelmanagement authLevelManagement;
 	@Autowired
 	private LibraryWmlLoader libraryWmlLoader;
+	@Autowired
+	private FileUtils fileUtils;
 
 	public ClientListManager getClientListManager() {
 		return clientListManager;
@@ -497,8 +499,7 @@ public class ConferenceLibrary implements IPendingServiceCallback {
 					if (outputFullFlvFile.exists()) {
 
 						if (!targetFullFlvFile.exists()) {
-							FileUtils.getInstance().copyFile(outputFullFlv,
-									targetFullFlv);
+							fileUtils.copyFile(outputFullFlv, targetFullFlv);
 						}
 
 					}

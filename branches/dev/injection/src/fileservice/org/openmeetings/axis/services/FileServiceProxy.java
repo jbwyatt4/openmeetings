@@ -49,6 +49,8 @@ public class FileServiceProxy {
 	private AuthLevelmanagement authLevelManagement;
 	@Autowired
 	private FileProcessor fileProcessor;
+	@Autowired
+	private FileUtils fileUtils;
 
 	private ServletContext getServletContext() {
 		MessageContext mc = MessageContext.getCurrentMessageContext();
@@ -639,7 +641,7 @@ public class FileServiceProxy {
 				for (FileExplorerItem homeChildExplorerItem : fList) {
 					log.debug("FileExplorerItem fList "
 							+ homeChildExplorerItem.getFileName());
-					homeFileSize += FileUtils.getInstance()
+					homeFileSize += fileUtils
 							.getSizeOfDirectoryAndSubs(homeChildExplorerItem);
 				}
 
@@ -655,7 +657,7 @@ public class FileServiceProxy {
 				for (FileExplorerItem homeChildExplorerItem : rList) {
 					log.debug("FileExplorerItem rList "
 							+ homeChildExplorerItem.getFileName());
-					roomFileSize += FileUtils.getInstance()
+					roomFileSize += fileUtils
 							.getSizeOfDirectoryAndSubs(homeChildExplorerItem);
 				}
 
@@ -699,7 +701,7 @@ public class FileServiceProxy {
 				for (FileExplorerItem homeChildExplorerItem : fList) {
 					log.debug("FileExplorerItem fList "
 							+ homeChildExplorerItem.getFileName());
-					homeFileSize += FileUtils.getInstance()
+					homeFileSize += fileUtils
 							.getSizeOfDirectoryAndSubs(homeChildExplorerItem);
 				}
 
@@ -715,7 +717,7 @@ public class FileServiceProxy {
 				for (FileExplorerItem homeChildExplorerItem : rList) {
 					log.debug("FileExplorerItem rList "
 							+ homeChildExplorerItem.getFileName());
-					roomFileSize += FileUtils.getInstance()
+					roomFileSize += fileUtils
 							.getSizeOfDirectoryAndSubs(homeChildExplorerItem);
 				}
 
@@ -887,13 +889,13 @@ public class FileServiceProxy {
 
 				if (moveToHome) {
 					// set this file and all subfiles and folders the ownerId
-					FileUtils.getInstance().setFileToOwnerOrRoomByParent(
-							fileExplorerItem, owner_id, null);
+					fileUtils.setFileToOwnerOrRoomByParent(fileExplorerItem,
+							owner_id, null);
 
 				} else {
 					// set this file and all subfiles and folders the room_id
-					FileUtils.getInstance().setFileToOwnerOrRoomByParent(
-							fileExplorerItem, null, room_id);
+					fileUtils.setFileToOwnerOrRoomByParent(fileExplorerItem,
+							null, room_id);
 
 				}
 
@@ -927,13 +929,13 @@ public class FileServiceProxy {
 
 				if (moveToHome) {
 					// set this file and all subfiles and folders the ownerId
-					FileUtils.getInstance().setFileToOwnerOrRoomByParent(
-							fileExplorerItem, users_id, null);
+					fileUtils.setFileToOwnerOrRoomByParent(fileExplorerItem,
+							users_id, null);
 
 				} else {
 					// set this file and all subfiles and folders the room_id
-					FileUtils.getInstance().setFileToOwnerOrRoomByParent(
-							fileExplorerItem, null, room_id);
+					fileUtils.setFileToOwnerOrRoomByParent(fileExplorerItem,
+							null, room_id);
 
 				}
 
