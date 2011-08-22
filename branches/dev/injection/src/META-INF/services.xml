@@ -13,7 +13,7 @@
    
   <service name="UserService" >
 	<description>User Service</description>
-	<parameter name="ServiceObjectSupplier" locked="xsd:false">org.apache.axis2.extensions.spring.receivers.SpringAppContextAwareObjectSupplier</parameter>
+	<parameter name="ServiceObjectSupplier" locked="xsd:false">org.apache.axis2.extensions.spring.receivers.SpringServletContextObjectSupplier</parameter>
 	<parameter name="SpringBeanName" locked="xsd:false">userServiceSoapProxy</parameter>
     <operation name="getSession">
         <messageReceiver class="org.apache.axis2.receivers.RawXMLINOutMessageReceiver"/>
