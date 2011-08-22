@@ -253,7 +253,7 @@
 	 -->
 	 
 	<!-- Axis2 Service Proxy's -->
-  	<bean id="userServiceSoapProxy" class="org.openmeetings.axis.services.UserServiceProxy" />
+  	<bean id="userWebService" class="org.openmeetings.axis.services.UserWebService" />
   	<bean id="roomServiceSoapProxy" class="org.openmeetings.axis.services.RoomServiceProxy" />
   	<bean id="fileServiceSoapProxy" class="org.openmeetings.axis.services.FileServiceProxy" />
 
