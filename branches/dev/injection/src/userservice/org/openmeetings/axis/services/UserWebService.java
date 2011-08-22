@@ -31,10 +31,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 
-public class UserServiceProxy {
+public class UserWebService implements IUserWebService {
 
 	private static final Logger log = Red5LoggerFactory.getLogger(
-			UserServiceProxy.class, ScopeApplicationAdapter.webAppRootKey);
+			UserWebService.class, ScopeApplicationAdapter.webAppRootKey);
 
 	@Autowired
 	private Sessionmanagement sessionManagement;
@@ -59,25 +59,16 @@ public class UserServiceProxy {
 	@Autowired
 	private AuthLevelmanagement authLevelManagement;
 
-	/**
-	 * load this session id before doing anything else
-	 * 
-	 * @return Sessiondata-Object
+	/* (non-Javadoc)
+	 * @see org.openmeetings.axis.services.IUserWebService#getSession()
 	 */
 	public Sessiondata getSession() {
 		log.debug("SPRING LOADED getSession -- ");
 		return mainService.getsessiondata();
 	}
 
-	/**
-	 * auth function, use the SID you get by getSession
-	 * 
-	 * @param SID
-	 * @param Username
-	 * @param Userpass
-	 * @return positive means Loggedin, if negativ its an ErrorCode, you have to
-	 *         invoke the Method getErrorByCode to get the Text-Description of
-	 *         that ErrorCode
+	/* (non-Javadoc)
+	 * @see org.openmeetings.axis.services.IUserWebService#loginUser(java.lang.String, java.lang.String, java.lang.String)
 	 */
 	public Long loginUser(String SID, String username, String userpass) {
 		log.debug("UserService.loginuser");
@@ -100,13 +91,8 @@ public class UserServiceProxy {
 		return new Long(-1);
 	}
 
-	/**
-	 * Gets the Error-Object
-	 * 
-	 * @param SID
-	 * @param errorid
-	 * @param language_id
-	 * @return
+	/* (non-Javadoc)
+	 * @see org.openmeetings.axis.services.IUserWebService#getErrorByCode(java.lang.String, java.lang.Long, java.lang.Long)
 	 */
 	public ErrorResult getErrorByCode(String SID, Long errorid, Long language_id) {
 		log.debug("UserService.getErrorbyCode");
@@ -136,6 +122,9 @@ public class UserServiceProxy {
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.openmeetings.axis.services.IUserWebService#addNewUser(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, long, java.lang.String, long, java.lang.String)
+	 */
 	public Long addNewUser(String SID, String username, String userpass,
 			String lastname, String firstname, String email,
 			String additionalname, String street, String zip, String fax,
@@ -191,6 +180,9 @@ public class UserServiceProxy {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.openmeetings.axis.services.IUserWebService#addNewUserWithTimeZone(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, long, java.lang.String, long, java.lang.String, java.lang.String)
+	 */
 	public Long addNewUserWithTimeZone(String SID, String username,
 			String userpass, String lastname, String firstname, String email,
 			String additionalname, String street, String zip, String fax,
@@ -238,29 +230,8 @@ public class UserServiceProxy {
 		}
 	}
 
-	/**
-	 * 
-	 * Adds a user with an externalUserId and type, but checks if the user/type
-	 * does already exist
-	 * 
-	 * @param SID
-	 * @param username
-	 * @param userpass
-	 * @param lastname
-	 * @param firstname
-	 * @param email
-	 * @param additionalname
-	 * @param street
-	 * @param zip
-	 * @param fax
-	 * @param states_id
-	 * @param town
-	 * @param language_id
-	 * @param jNameTimeZone
-	 * @param externalUserId
-	 * @param externalUserType
-	 * @return
-	 * @throws AxisFault
+	/* (non-Javadoc)
+	 * @see org.openmeetings.axis.services.IUserWebService#addNewUserWithExternalType(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, long, java.lang.String, long, java.lang.String, java.lang.Long, java.lang.String)
 	 */
 	public Long addNewUserWithExternalType(String SID, String username,
 			String userpass, String lastname, String firstname, String email,
@@ -315,14 +286,8 @@ public class UserServiceProxy {
 		}
 	}
 
-	/**
-	 * 
-	 * delete a user by its id
-	 * 
-	 * @param SID
-	 * @param userId
-	 * @return
-	 * @throws AxisFault
+	/* (non-Javadoc)
+	 * @see org.openmeetings.axis.services.IUserWebService#deleteUserById(java.lang.String, java.lang.Long)
 	 */
 	public Long deleteUserById(String SID, Long userId) throws AxisFault {
 		try {
@@ -360,15 +325,8 @@ public class UserServiceProxy {
 		}
 	}
 
-	/**
-	 * 
-	 * delete a user by its external user id and type
-	 * 
-	 * @param SID
-	 * @param externalUserId
-	 * @param externalUserType
-	 * @return
-	 * @throws AxisFault
+	/* (non-Javadoc)
+	 * @see org.openmeetings.axis.services.IUserWebService#deleteUserByExternalUserIdAndType(java.lang.String, java.lang.Long, java.lang.String)
 	 */
 	public Long deleteUserByExternalUserIdAndType(String SID,
 			Long externalUserId, String externalUserType) throws AxisFault {
@@ -412,15 +370,8 @@ public class UserServiceProxy {
 		}
 	}
 
-	/**
-	 * 
-	 * @param SID
-	 * @param firstname
-	 * @param lastname
-	 * @param profilePictureUrl
-	 * @param email
-	 * @return
-	 * @throws AxisFault
+	/* (non-Javadoc)
+	 * @see org.openmeetings.axis.services.IUserWebService#setUserObject(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)
 	 */
 	public Long setUserObject(String SID, String username, String firstname,
 			String lastname, String profilePictureUrl, String email)
@@ -461,24 +412,8 @@ public class UserServiceProxy {
 		// return new Long(-1);
 	}
 
-	/**
-	 * This is the advanced technique to set the User Object + simulate a User
-	 * from the external system, this is needed cause you can that always
-	 * simulate to same user in openmeetings
-	 * 
-	 * @param SID
-	 * @param username
-	 * @param firstname
-	 * @param lastname
-	 * @param profilePictureUrl
-	 * @param email
-	 * @param externalUserId
-	 *            the User Id of the external System
-	 * @param externalUserType
-	 *            the Name of the external system, for example you can run
-	 *            several external system and one meeting server
-	 * @return
-	 * @throws AxisFault
+	/* (non-Javadoc)
+	 * @see org.openmeetings.axis.services.IUserWebService#setUserObjectWithExternalUser(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.Long, java.lang.String)
 	 */
 	public Long setUserObjectWithExternalUser(String SID, String username,
 			String firstname, String lastname, String profilePictureUrl,
@@ -522,6 +457,9 @@ public class UserServiceProxy {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.openmeetings.axis.services.IUserWebService#setUserObjectAndGenerateRoomHash(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.Long, java.lang.String, java.lang.Long, int, int)
+	 */
 	public String setUserObjectAndGenerateRoomHash(String SID, String username,
 			String firstname, String lastname, String profilePictureUrl,
 			String email, Long externalUserId, String externalUserType,
@@ -587,6 +525,9 @@ public class UserServiceProxy {
 		return "" + new Long(-1);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.openmeetings.axis.services.IUserWebService#setUserObjectAndGenerateRoomHashByURL(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.Long, java.lang.String, java.lang.Long, int, int)
+	 */
 	public String setUserObjectAndGenerateRoomHashByURL(String SID,
 			String username, String firstname, String lastname,
 			String profilePictureUrl, String email, Long externalUserId,
@@ -651,6 +592,9 @@ public class UserServiceProxy {
 		return "" + new Long(-1);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.openmeetings.axis.services.IUserWebService#setUserObjectAndGenerateRoomHashByURLAndRecFlag(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.Long, java.lang.String, java.lang.Long, int, int, int)
+	 */
 	public String setUserObjectAndGenerateRoomHashByURLAndRecFlag(String SID,
 			String username, String firstname, String lastname,
 			String profilePictureUrl, String email, Long externalUserId,
@@ -721,6 +665,9 @@ public class UserServiceProxy {
 		return "" + new Long(-1);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.openmeetings.axis.services.IUserWebService#setUserObjectMainLandingZone(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.Long, java.lang.String)
+	 */
 	public String setUserObjectMainLandingZone(String SID, String username,
 			String firstname, String lastname, String profilePictureUrl,
 			String email, Long externalUserId, String externalUserType) {
@@ -777,6 +724,9 @@ public class UserServiceProxy {
 		return "" + new Long(-1);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.openmeetings.axis.services.IUserWebService#setUserAndNickName(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.Long, java.lang.String, java.lang.Long, int, int, int)
+	 */
 	public String setUserAndNickName(String SID, String username,
 			String firstname, String lastname, String profilePictureUrl,
 			String email, Long externalUserId, String externalUserType,
@@ -846,6 +796,9 @@ public class UserServiceProxy {
 		return "" + new Long(-1);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.openmeetings.axis.services.IUserWebService#setUserObjectAndGenerateRecordingHashByURL(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.Long, java.lang.String, java.lang.Long)
+	 */
 	public String setUserObjectAndGenerateRecordingHashByURL(String SID,
 			String username, String firstname, String lastname,
 			Long externalUserId, String externalUserType, Long recording_id) {
@@ -898,6 +851,9 @@ public class UserServiceProxy {
 		return "" + new Long(-1);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.openmeetings.axis.services.IUserWebService#addUserToOrganisation(java.lang.String, java.lang.Long, java.lang.Long, java.lang.Long, java.lang.String)
+	 */
 	public Long addUserToOrganisation(String SID, Long user_id,
 			Long organisation_id, Long insertedby, String comment) {
 		try {
@@ -917,6 +873,9 @@ public class UserServiceProxy {
 		return new Long(-1);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.openmeetings.axis.services.IUserWebService#getUsersByOrganisation(java.lang.String, long, int, int, java.lang.String, boolean)
+	 */
 	public SearchResult getUsersByOrganisation(String SID,
 			long organisation_id, int start, int max, String orderby,
 			boolean asc) {
@@ -939,6 +898,9 @@ public class UserServiceProxy {
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.openmeetings.axis.services.IUserWebService#kickUserByPublicSID(java.lang.String, java.lang.String)
+	 */
 	public Boolean kickUserByPublicSID(String SID, String publicSID) {
 		try {
 			Boolean salida = false;

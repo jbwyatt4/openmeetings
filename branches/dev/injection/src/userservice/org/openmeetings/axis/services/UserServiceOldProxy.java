@@ -11,7 +11,7 @@ import org.openmeetings.app.persistence.beans.basic.Sessiondata;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
-public class UserService {
+public class UserServiceOldProxy {
 
 	// private static final String SPRING_CONTEXT_XML =
 	// "openmeetings-applicationContext.xml";
@@ -39,10 +39,10 @@ public class UserService {
 				.getProperty(HTTPConstants.MC_HTTP_SERVLETCONTEXT);
 	}
 
-	private UserServiceProxy getUserServiceProxy() {
+	private IUserWebService getUserServiceProxy() {
 		ApplicationContext context = WebApplicationContextUtils
 				.getWebApplicationContext(getServletContext());
-		return (UserServiceProxy) context.getBean("userServiceSoapProxy");
+		return (IUserWebService) context.getBean("userServiceSoapProxy");
 	}
 
 	/**
