@@ -29,6 +29,7 @@ public class Organisation_Users implements Serializable {
 
 	@Column(name = "user_id")
 	private Long user_id;
+	
 	@Column(name = "starttime")
 	private Date starttime;
 	@Column(name = "updatetime")

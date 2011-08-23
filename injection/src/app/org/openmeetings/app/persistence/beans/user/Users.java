@@ -113,11 +113,6 @@ public class Users implements Serializable {
 	@Column(name = "show_contact_data_to_contacts")
 	private Boolean showContactDataToContacts;
 
-	public Users() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
 	public Long getUser_id() {
 		return user_id;
 	}
