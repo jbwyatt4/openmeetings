@@ -59,9 +59,9 @@ public class MainService implements IPendingServiceCallback {
 	private static final Logger log = Red5LoggerFactory.getLogger(MainService.class, ScopeApplicationAdapter.webAppRootKey);
 
 	@Autowired
-	private ClientListManager clientListManager = null;
+	private ClientListManager clientListManager;
 	@Autowired
-	private ScopeApplicationAdapter scopeApplicationAdapter = null;
+	private ScopeApplicationAdapter scopeApplicationAdapter;
 	@Autowired
 	private Sessionmanagement sessionManagement;
 	@Autowired
@@ -318,12 +318,15 @@ public class MainService implements IPendingServiceCallback {
 			RoomClient currentClient;
 			IConnection current = Red5.getConnectionLocal();
 
+			if (current == null)
+				return null;
+			
 			Object o;
 
 			if (withLdap) {
 				log.debug("Ldap Login");
 
-				currentClient = this.clientListManager
+				currentClient = clientListManager
 						.getClientByStreamId(current.getClient().getId());
 
 				// LDAP Loggedin Users cannot use the permanent Login Flag
@@ -341,8 +344,7 @@ public class MainService implements IPendingServiceCallback {
 						ldapConfig.getConfigFileName());
 			} else {
 
-				currentClient = this.clientListManager
-						.getClientByStreamId(current.getClient().getId());
+				currentClient = clientListManager.getClientByStreamId(current.getClient().getId());
 
 				o = userManagement.loginUser(SID, usernameOrEmail, Userpass,
 						currentClient, storePermanent);

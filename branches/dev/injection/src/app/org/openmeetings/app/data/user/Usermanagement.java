@@ -427,25 +427,6 @@ public class Usermanagement {
 		return null;
 	}
 
-	private int getUserdataNoByKey(Long USER_ID, String DATA_KEY) {
-		int userdata = 0;
-		if (USER_ID.longValue() > 0) {
-			try {
-				Query query = em
-						.createQuery("select c from Userdata as c where c.user_id = :user_id AND c.data_key = :data_key AND c.deleted <> :deleted");
-				query.setParameter("user_id", USER_ID.longValue());
-				query.setParameter("data_key", DATA_KEY);
-				query.setParameter("deleted", "true");
-				userdata = query.getResultList().size();
-			} catch (Exception ex2) {
-				log.error("getUserdataNoByKey", ex2);
-			}
-		} else {
-			log.error("Error: No USER_ID given");
-		}
-		return userdata;
-	}
-
 	public Userdata getUserdataByKey(Long user_id, String DATA_KEY) {
 		Userdata userdata = new Userdata();
 		if (user_id.longValue() > 0) {
